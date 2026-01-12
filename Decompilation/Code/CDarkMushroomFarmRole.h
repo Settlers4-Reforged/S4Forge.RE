@@ -1,0 +1,98 @@
+#ifndef CDARKMUSHROOMFARMROLE_H
+#define CDARKMUSHROOMFARMROLE_H
+
+class CDarkMushroomFarmRole : public IBuildingRole {
+public:
+    // address=[0x1400220]
+    static class CPersistence * __cdecl New(std::istream &);
+
+    // address=[0x141da00]
+    int  NumberOfAssociatedServants(void)const;
+
+    // address=[0x14fc940]
+     CDarkMushroomFarmRole(void);
+
+    // address=[0x14fcbd0]
+    virtual  ~CDarkMushroomFarmRole(void);
+
+    // address=[0x14fd080]
+    virtual unsigned long  ClassID(void)const;
+
+    // address=[0x14fd320]
+    virtual int  GetBuildingNeed(int)const;
+
+    // address=[0x14fd460]
+    virtual int  GetBuildingRole(void);
+
+    // address=[0x14fd5c0]
+    virtual int  GetPileIdWithGood(int)const;
+
+    // address=[0x14fd6e0]
+    virtual void  GoodArrive(int);
+
+    // address=[0x14fd930]
+    static class CDarkMushroomFarmRole * __cdecl Load(std::istream &);
+
+    // address=[0x1506a60]
+    virtual void  LogicUpdate(class CBuilding *);
+
+    // address=[0x1506f00]
+    virtual void  FillGfxInfo(class CBuilding *,struct SGfxObjectInfo &);
+
+    // address=[0x1506fe0]
+    virtual void  Init(class CBuilding *);
+
+    // address=[0x15070d0]
+    virtual void  PostLoadInit(class CBuilding *);
+
+    // address=[0x1507130]
+    virtual bool  SettlerEnter(class CBuilding *,int);
+
+    // address=[0x1507180]
+    virtual void  FillDialog(class CBuilding *,bool);
+
+    // address=[0x1507190]
+    bool  HarvestMushroom(class CBuilding *);
+
+    // address=[0x15073a0]
+    bool  PlantMushroom(class CBuilding *);
+
+    // address=[0x1507740]
+    void  AttachServant(class CBuilding *,int);
+
+    // address=[0x15077c0]
+    void  DetachServant(class CBuilding *,int);
+
+    // address=[0x1507870]
+    void  TellServantsToWork(class CBuilding *);
+
+    // address=[0x1507a20]
+     CDarkMushroomFarmRole(std::istream &);
+
+    // address=[0x1507b70]
+    virtual void  Store(std::ostream &);
+
+    // address=[0x158e490]
+    struct CBuildingInfoMgr::SBuildingInfos const *  GetBuildingInfo(void);
+
+    // address=[0x3d8b124]
+    static unsigned long m_iClassID;
+
+protected:
+    // address=[0x1507930]
+    bool  IsDoorNeighborAndEnsignPosGreen(class CBuilding *);
+
+private:
+    // address=[0x14fd1e0]
+    virtual void  ConvertEventIntoGoal(class CBuilding *,class CEntityEvent *);
+
+    // address=[0x14fde10]
+    virtual bool  TryCrushBuilding(void);
+
+    // address=[0x1507c40]
+    virtual bool  CrushBuilding(void);
+
+};
+
+
+#endif // CDARKMUSHROOMFARMROLE_H

@@ -1,0 +1,12 @@
+#ifndef ICARGOCOUNTER_H
+#define ICARGOCOUNTER_H
+
+class ICargoCounter {
+public:
+    // address=[0x160d960]
+     ICargoCounter(void);
+
+};
+
+
+#endif // ICARGOCOUNTER_H

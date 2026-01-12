@@ -1,0 +1,67 @@
+#ifndef CSHIP_H
+#define CSHIP_H
+
+class CShip : public CVehicle {
+public:
+    // address=[0x159d4e0]
+    virtual void  VehicleLogicUpdate(void);
+
+    // address=[0x159d5c0]
+    virtual struct SGfxObjectInfo *  GetGfxInfos(void);
+
+    // address=[0x159d7c0]
+    static int __cdecl FindBoardingLocation(class std::vector<unsigned short,class std::allocator<unsigned short> > const &,int,struct SBoardingInfo &);
+
+    // address=[0x159d950]
+    static int __cdecl FindBoardingLocation(int,int,struct SBoardingInfo &);
+
+    // address=[0x159e8f0]
+    virtual void  FillDialog(bool);
+
+    // address=[0x159e940]
+    virtual void  Unload(void);
+
+protected:
+    // address=[0x159dbb0]
+     CShip(int,int,int,int,int,int,bool);
+
+    // address=[0x159dc80]
+    virtual  ~CShip(void);
+
+    // address=[0x159dca0]
+     CShip(std::istream &);
+
+    // address=[0x159dd60]
+    virtual void  Store(std::ostream &);
+
+    // address=[0x159ddb0]
+    virtual void  TakeJob(void);
+
+    // address=[0x159df50]
+    virtual void  WalkDir(int);
+
+    // address=[0x159e070]
+    virtual void  PlaceVehicle(int);
+
+    // address=[0x159e150]
+    virtual void  RemoveVehicle(int);
+
+    // address=[0x159e260]
+    int  RepairBuildingInRange(void);
+
+    // address=[0x159e340]
+    void  RepairAt(int);
+
+    // address=[0x159e3e0]
+    int  GetHealthDisplayID(void);
+
+    // address=[0x37bd380]
+    static int const SHIPYARD_SCAN_RANGE;
+
+    // address=[0x37bd384]
+    static int const FULL_UPDATE_DELAY;
+
+};
+
+
+#endif // CSHIP_H

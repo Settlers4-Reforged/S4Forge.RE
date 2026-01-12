@@ -1,0 +1,85 @@
+#ifndef CANIMAL_H
+#define CANIMAL_H
+
+class CAnimal : public IMovingEntity {
+public:
+    // address=[0x14d60e0]
+     CAnimal(std::istream &);
+
+    // address=[0x14d6260]
+    virtual void  Store(std::ostream &);
+
+    // address=[0x14d6350]
+    virtual void  LogicUpdate(void);
+
+    // address=[0x14d6420]
+    virtual struct SGfxObjectInfo *  GetGfxInfos(void);
+
+    // address=[0x14d64a0]
+    void  AddTask(class CEntityTask &);
+
+    // address=[0x14d8660]
+    virtual void  Decrease(int);
+
+    // address=[0x14d8890]
+    virtual void  Take(int);
+
+protected:
+    // address=[0x14d64c0]
+     CAnimal(int,int,int,int);
+
+    // address=[0x14d65a0]
+    virtual void  Delete(void);
+
+    // address=[0x14d6690]
+    virtual void  Update(void);
+
+    // address=[0x14d6890]
+    void  NewToDoList(class std::list<class CEntityTask,class std::allocator<class CEntityTask> > *);
+
+    // address=[0x14d6980]
+    void  NewDestination(int,int,int);
+
+    // address=[0x14d6990]
+    virtual void  ConvertEventIntoGoal(class CEntityEvent *);
+
+    // address=[0x14d69b0]
+    void  TakeWaitJob(bool);
+
+    // address=[0x14d6a70]
+    void  TakeEatJob(bool);
+
+    // address=[0x14d6b60]
+    void  TakeWalkJob(bool);
+
+    // address=[0x14d6c50]
+    void  TakeFleeJob(bool);
+
+    // address=[0x14d6d40]
+    void  TakeDieJob(void);
+
+    // address=[0x14d6e10]
+    void  TakeDeadJob(void);
+
+    // address=[0x14d6e70]
+    void  TakeWaitJobAndDoNothing(int);
+
+    // address=[0x14d6ea0]
+    void  TakeWalkJobAndWalkDir(int);
+
+    // address=[0x14d6ed0]
+    virtual void  TakeJob(bool);
+
+    // address=[0x14d7040]
+    void  WalkDir(int);
+
+    // address=[0x14d7150]
+    void  WalkDirAndRegister(int);
+
+    // address=[0x14d8150]
+    virtual  ~CAnimal(void);
+
+};
+
+
+#endif // CANIMAL_H

@@ -1,0 +1,12 @@
+#ifndef SAIDTOCCUPIEDELEMENT_H
+#define SAIDTOCCUPIEDELEMENT_H
+
+class SAIDTOCCUPIEDELEMENT {
+public:
+    // address=[0x1334f20]
+     SAIDTOCCUPIEDELEMENT(int,short);
+
+};
+
+
+#endif // SAIDTOCCUPIEDELEMENT_H
