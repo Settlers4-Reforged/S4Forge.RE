@@ -9,20 +9,20 @@ void  CGroupMgr::Clear(void) {
   int j; // [esp+4h] [ebp-8h]
   int i; // [esp+8h] [ebp-4h]
 
-  j__memset((char *)this + 4, 0, 0x63u);
+  memset(this->groupFlags, 0, 99u);
   for ( i = 0; i < 9; ++i )
   {
     for ( j = 0; j < 11; ++j )
-      TStaticArray<unsigned short,100>::Init((CGroupMgr *)((char *)this + 2244 * i + 204 * j + 104));
+      TStaticArray<unsigned short,100>::Init(&this->entries[0xB * i + j]);
   }
 }
 
 
 // address=[0x1550af0]
-// Decompiled from int __thiscall CGroupMgr::GetGroupSize(CGroupMgr *this, int a2, int a3)
+// Decompiled from int __thiscall CGroupMgr::GetGroupSize(CGroupMgr *this, int playerId, int groupId)
 int  CGroupMgr::GetGroupSize(int,int)const {
   
-  if ( (a2 < 1 || a2 > 8)
+  if ( (playerId < 1 || playerId > 8)
     && BBSupportDbgReport(
          2,
          "MapObjects\\GroupMgr.cpp",
@@ -31,20 +31,20 @@ int  CGroupMgr::GetGroupSize(int,int)const {
   {
     __debugbreak();
   }
-  if ( (a3 < 1 || a3 > 10)
+  if ( (groupId < 1 || groupId > 10)
     && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 221, "(_iGroupId >= GROUP_FIRST) && (_iGroupId <= GROUP_LAST)") == 1 )
   {
     __debugbreak();
   }
-  return TStaticArray<unsigned short,100>::Size((char *)this + 2244 * a2 + 204 * a3 + 104);
+  return TStaticArray<unsigned short,100>::Size(&this->entries[11 * playerId + groupId]);
 }
 
 
 // address=[0x1550b80]
-// Decompiled from int __thiscall CGroupMgr::GetGroupEntityIds(CGroupMgr *this, int a2, int a3)
+// Decompiled from WORD *__thiscall CGroupMgr::GetGroupEntityIds(CGroupMgr *this, int playerId, int groupId)
 unsigned short const *  CGroupMgr::GetGroupEntityIds(int,int)const {
   
-  if ( (a2 < 1 || a2 > 8)
+  if ( (playerId < 1 || playerId > 8)
     && BBSupportDbgReport(
          2,
          "MapObjects\\GroupMgr.cpp",
@@ -53,33 +53,33 @@ unsigned short const *  CGroupMgr::GetGroupEntityIds(int,int)const {
   {
     __debugbreak();
   }
-  if ( (a3 < 1 || a3 > 10)
+  if ( (groupId < 1 || groupId > 10)
     && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 234, "(_iGroupId >= GROUP_FIRST) && (_iGroupId <= GROUP_LAST)") == 1 )
   {
     __debugbreak();
   }
-  return TStaticArray<unsigned short,100>::operator[](0);
+  return TStaticArray<unsigned short,100>::operator[](&this->entries[11 * playerId + groupId], 0);
 }
 
 
 // address=[0x1550c10]
-// Decompiled from char __thiscall CGroupMgr::AttachEntity(CGroupMgr *this, int a2, int a3, int a4)
+// Decompiled from char __thiscall CGroupMgr::AttachEntity(CGroupMgr *this, int playerId, int groupId, int entityIdToAttach)
 bool  CGroupMgr::AttachEntity(int,int,int) {
   
   int v5; // [esp+0h] [ebp-34h]
-  int v6; // [esp+4h] [ebp-30h]
-  int v7; // [esp+Ch] [ebp-28h]
-  int v8; // [esp+10h] [ebp-24h]
+  int currentSize; // [esp+4h] [ebp-30h]
+  int ownerId; // [esp+Ch] [ebp-28h]
+  IEntity *v8; // [esp+10h] [ebp-24h]
   int i; // [esp+18h] [ebp-1Ch]
-  int v11; // [esp+1Ch] [ebp-18h]
-  char *v12; // [esp+20h] [ebp-14h]
+  int groupFlagBits; // [esp+1Ch] [ebp-18h]
+  struct CGroupMgr::TStaticArray100short *groupList; // [esp+20h] [ebp-14h]
   int v13; // [esp+24h] [ebp-10h]
-  unsigned __int8 *v14; // [esp+28h] [ebp-Ch]
+  IEntity *entityToAttach; // [esp+28h] [ebp-Ch]
   __int16 v15; // [esp+2Ch] [ebp-8h] BYREF
   __int16 v16; // [esp+2Eh] [ebp-6h] BYREF
-  __int16 v17; // [esp+30h] [ebp-4h] BYREF
+  unsigned __int16 a1; // [esp+30h] [ebp-4h] BYREF
 
-  if ( (a2 < 1 || a2 > 8)
+  if ( (playerId < 1 || playerId > 8)
     && BBSupportDbgReport(
          2,
          "MapObjects\\GroupMgr.cpp",
@@ -88,80 +88,81 @@ bool  CGroupMgr::AttachEntity(int,int,int) {
   {
     __debugbreak();
   }
-  if ( (a3 < 1 || a3 > 10)
+  if ( (groupId < 1 || groupId > 10)
     && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 247, "(_iGroupId >= GROUP_FIRST) && (_iGroupId <= GROUP_LAST)") == 1 )
   {
     __debugbreak();
   }
-  v14 = (unsigned __int8 *)CMapObjectMgr::EntityPtr(a4);
-  if ( !v14 && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 251, "pEntity != 0") == 1 )
+  entityToAttach = CMapObjectMgr::EntityPtr(entityIdToAttach);
+  if ( !entityToAttach && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 251, "pEntity != 0") == 1 )
     __debugbreak();
-  if ( !v14 )
+  if ( !entityToAttach )
     return 0;
-  v7 = IEntity::OwnerId(v14);
-  if ( v7 != a2 )
+  ownerId = IEntity::OwnerId(entityToAttach);
+  if ( ownerId != playerId )
     return 0;
-  v11 = 1 << a3;
-  v13 = (*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)v14 + 84))(v14);
-  if ( ((1 << a3) & v13) != 0 )
+  groupFlagBits = 1 << groupId;
+  v13 = entityToAttach->GetGroupFlags(entityToAttach);
+  if ( ((1 << groupId) & v13) != 0 )
     return 0;
-  v12 = (char *)this + 2244 * v7 + 204 * a3 + 104;
-  v17 = a4;
-  if ( (int)TStaticArray<unsigned short,100>::FindEntry(&v17) >= 0
+  groupList = &this->entries[11 * ownerId + groupId];
+  a1 = entityIdToAttach;
+  if ( TStaticArray<unsigned short,100>::FindEntry(groupList, &a1) >= 0
     && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 267, "rGroupArray.FindEntry(_iEntityId) < 0") == 1 )
   {
     __debugbreak();
   }
-  if ( TStaticArray<unsigned short,100>::Size(v12) >= 100 )
+  if ( TStaticArray<unsigned short,100>::Size(groupList) >= 100 )
     return 0;
-  if ( !IEntity::CheckType((IEntity *)v14, 1, 44) )
+  if ( !IEntity::CheckType(entityToAttach, 1, 44) )
   {
-    if ( (v11 & (*(int (__thiscall **)(unsigned __int8 *, int))(*(_DWORD *)v14 + 92))(v14, v11)) == 0 )
+    if ( (groupFlagBits & (int)entityToAttach->SetGroupFlagBits(entityToAttach, groupFlagBits)) == 0 )
       return 0;
-    v16 = a4;
-    TStaticArray<unsigned short,100>::PushBack(&v16);
+    v16 = entityIdToAttach;
+    TStaticArray<unsigned short,100>::PushBack(groupList, &v16);
     return 1;
   }
-  if ( (*((_BYTE *)this + 11 * a2 + a3 + 4) & 1) != 0 )
+  if ( (this->groupFlags[11 * playerId + groupId] & 1) != 0 )
     return 0;
   if ( v13 )
     return 0;
-  if ( (*(int (__thiscall **)(unsigned __int8 *, int))(*(_DWORD *)v14 + 88))(v14, v11 | (a3 << 12)) != (v11 | (a3 << 12))
+  if ( entityToAttach->SetGroupFlags(entityToAttach, groupFlagBits | (groupId << 12)) != (void *)(groupFlagBits | (groupId << 12))
     && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 300, "iGroupFlags == iNewGroupFlags") == 1 )
   {
     __debugbreak();
   }
-  v6 = TStaticArray<unsigned short,100>::Size(v12);
-  for ( i = 0; i < v6; ++i )
+  currentSize = TStaticArray<unsigned short,100>::Size(groupList);
+  for ( i = 0; i < currentSize; ++i )
   {
-    v5 = *(unsigned __int16 *)TStaticArray<unsigned short,100>::operator[](i);
+    v5 = *TStaticArray<unsigned short,100>::operator[](groupList, i);
     v8 = CMapObjectMgr::EntityPtr(v5);
     if ( v8 )
-      (*(void (__thiscall **)(int, int))(*(_DWORD *)v8 + 92))(v8, 2048);
+      v8->SetGroupFlagBits(v8, 0x800);
   }
-  *((_BYTE *)this + 11 * a2 + a3 + 4) |= 1u;
-  v15 = a4;
-  TStaticArray<unsigned short,100>::PushBack(&v15);
+  this->groupFlags[11 * playerId + groupId] |= 1u;
+  v15 = entityIdToAttach;
+  TStaticArray<unsigned short,100>::PushBack(groupList, &v15);
   return 1;
 }
 
 
 // address=[0x1550ec0]
-// Decompiled from char __thiscall CGroupMgr::DetachEntity(CGroupMgr *this, int a2, int a3, int a4)
+// Decompiled from char __thiscall CGroupMgr::DetachEntity(CGroupMgr *this, int playerId, int groupId, int entityId)
 bool  CGroupMgr::DetachEntity(int,int,int) {
   
   int v5; // [esp+0h] [ebp-30h]
   int v6; // [esp+4h] [ebp-2Ch]
-  int v7; // [esp+Ch] [ebp-24h]
-  int v8; // [esp+10h] [ebp-20h]
-  int v9; // [esp+14h] [ebp-1Ch]
+  int owner; // [esp+Ch] [ebp-24h]
+  IEntity *v8; // [esp+10h] [ebp-20h]
+  int groupFlags; // [esp+14h] [ebp-1Ch]
+  struct CGroupMgr::TStaticArray100short *v10; // [esp+18h] [ebp-18h]
   int i; // [esp+1Ch] [ebp-14h]
-  unsigned __int8 *v12; // [esp+24h] [ebp-Ch]
-  __int16 v13; // [esp+2Ah] [ebp-6h] BYREF
-  __int16 v14; // [esp+2Ch] [ebp-4h] BYREF
-  char v16; // [esp+2Fh] [ebp-1h]
+  IEntity *entity; // [esp+24h] [ebp-Ch]
+  unsigned __int16 a1; // [esp+2Ah] [ebp-6h] BYREF
+  __int16 _entityId; // [esp+2Ch] [ebp-4h] BYREF
+  char entityFound; // [esp+2Fh] [ebp-1h]
 
-  if ( (a2 < 1 || a2 > 8)
+  if ( (playerId < 1 || playerId > 8)
     && BBSupportDbgReport(
          2,
          "MapObjects\\GroupMgr.cpp",
@@ -170,38 +171,39 @@ bool  CGroupMgr::DetachEntity(int,int,int) {
   {
     __debugbreak();
   }
-  if ( (a3 < 1 || a3 > 10)
+  if ( (groupId < 1 || groupId > 10)
     && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 340, "(_iGroupId >= GROUP_FIRST) && (_iGroupId <= GROUP_LAST)") == 1 )
   {
     __debugbreak();
   }
-  v12 = (unsigned __int8 *)CMapObjectMgr::EntityPtr(a4);
-  if ( !v12 && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 344, "pEntity != 0") == 1 )
+  entity = CMapObjectMgr::EntityPtr(entityId);
+  if ( !entity && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 344, "pEntity != 0") == 1 )
     __debugbreak();
-  if ( !v12 )
+  if ( !entity )
     return 0;
-  v7 = IEntity::OwnerId(v12);
-  if ( v7 != a2 )
+  owner = IEntity::OwnerId(entity);
+  if ( owner != playerId )
     return 0;
-  v9 = 1 << a3;
-  if ( ((1 << a3) & (*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)v12 + 84))(v12)) == 0 )
+  v10 = &this->entries[11 * owner + groupId];
+  groupFlags = 1 << groupId;
+  if ( ((1 << groupId) & entity->GetGroupFlags(entity)) == 0 )
   {
-    v13 = a4;
-    if ( (int)TStaticArray<unsigned short,100>::FindEntry(&v13) >= 0
+    a1 = entityId;
+    if ( TStaticArray<unsigned short,100>::FindEntry(v10, &a1) >= 0
       && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 402, "rGroupArray.FindEntry(_iEntityId) < 0") == 1 )
     {
       __debugbreak();
     }
     return 0;
   }
-  v14 = a4;
-  v16 = TStaticArray<unsigned short,100>::RemoveEntry(&v14);
-  if ( !v16 && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 362, "bEntityFound") == 1 )
+  _entityId = entityId;
+  entityFound = TStaticArray<unsigned short,100>::RemoveEntry(&_entityId);
+  if ( !entityFound && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 362, "bEntityFound") == 1 )
     __debugbreak();
-  if ( IEntity::CheckType((IEntity *)v12, 1, 44) )
+  if ( IEntity::CheckType(entity, 1, 44) )
   {
-    (*(void (__thiscall **)(unsigned __int8 *, _DWORD))(*(_DWORD *)v12 + 88))(v12, 0);
-    if ( (*((_BYTE *)this + 11 * a2 + a3 + 4) & 1) == 0
+    entity->SetGroupFlags(entity, 0);
+    if ( (this->groupFlags[11 * playerId + groupId] & 1) == 0
       && BBSupportDbgReport(
            2,
            "MapObjects\\GroupMgr.cpp",
@@ -210,20 +212,20 @@ bool  CGroupMgr::DetachEntity(int,int,int) {
     {
       __debugbreak();
     }
-    *((_BYTE *)this + 11 * a2 + a3 + 4) &= ~1u;
-    v6 = TStaticArray<unsigned short,100>::Size((char *)this + 2244 * v7 + 204 * a3 + 104);
+    this->groupFlags[11 * playerId + groupId] &= ~1u;
+    v6 = TStaticArray<unsigned short,100>::Size(v10);
     for ( i = 0; i < v6; ++i )
     {
-      v5 = *(unsigned __int16 *)TStaticArray<unsigned short,100>::operator[](i);
+      v5 = *TStaticArray<unsigned short,100>::operator[](v10, i);
       v8 = CMapObjectMgr::EntityPtr(v5);
       if ( v8 )
-        (*(void (__thiscall **)(int, int))(*(_DWORD *)v8 + 96))(v8, 2048);
+        v8->ClearGroupFlagBits(v8, 2048);
     }
   }
   else
   {
-    (*(void (__thiscall **)(unsigned __int8 *, int))(*(_DWORD *)v12 + 96))(v12, v9);
-    if ( (v9 & (*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)v12 + 84))(v12)) != 0
+    entity->ClearGroupFlagBits(entity, groupFlags);
+    if ( (groupFlags & entity->GetGroupFlags(entity)) != 0
       && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 370, "(pEntity->GetGroupFlags() & iGroupBit) == 0") == 1 )
     {
       __debugbreak();
@@ -234,55 +236,50 @@ bool  CGroupMgr::DetachEntity(int,int,int) {
 
 
 // address=[0x1551170]
-// Decompiled from int __thiscall CGroupMgr::DetachEntityFromAllGroups(CGroupMgr *this, int a2)
+// Decompiled from void __thiscall CGroupMgr::DetachEntityFromAllGroups(CGroupMgr *this, int entityId)
 void  CGroupMgr::DetachEntityFromAllGroups(int) {
   
-  int result; // eax
-  int v3; // [esp+0h] [ebp-18h]
-  int v4; // [esp+8h] [ebp-10h]
+  int owner; // [esp+0h] [ebp-18h]
+  int groupFlags; // [esp+8h] [ebp-10h]
   int i; // [esp+10h] [ebp-8h]
-  unsigned __int8 *v7; // [esp+14h] [ebp-4h]
+  IEntity *v6; // [esp+14h] [ebp-4h]
 
-  result = CMapObjectMgr::EntityPtr(a2);
-  v7 = (unsigned __int8 *)result;
-  if ( !result )
-  {
-    result = BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 419, "pEntity != 0");
-    if ( result == 1 )
-      __debugbreak();
-  }
-  if ( !v7 )
-    return result;
-  v3 = IEntity::OwnerId(v7);
-  v4 = (*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)v7 + 84))(v7);
-  for ( i = 1; i <= 10; ++i )
-  {
-    if ( ((1 << i) & v4) != 0 )
-      (*(void (__thiscall **)(CGroupMgr *, int, int, int))(*(_DWORD *)this + 24))(this, v3, i, a2);
-  }
-  if ( ((*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)v7 + 84))(v7) & 0xFFFFF7FF) != 0
-    && BBSupportDbgReport(
-         2,
-         "MapObjects\\GroupMgr.cpp",
-         436,
-         "(pEntity->GetGroupFlags() & ~GROUP_FLAG_IN_GROUP_WITH_SQUAD_LEADER) == 0") == 1 )
-  {
+  v6 = CMapObjectMgr::EntityPtr(entityId);
+  if ( !v6 && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 419, "pEntity != 0") == 1 )
     __debugbreak();
+  if ( v6 )
+  {
+    owner = IEntity::OwnerId(v6);
+    groupFlags = v6->GetGroupFlags(v6);
+    for ( i = 1; i <= 10; ++i )
+    {
+      if ( ((1 << i) & groupFlags) != 0 )
+        this->DetachEntity(this, owner, i, entityId);
+    }
+    if ( (v6->GetGroupFlags(v6) & 0xFFFFF7FF) != 0
+      && BBSupportDbgReport(
+           2,
+           "MapObjects\\GroupMgr.cpp",
+           436,
+           "(pEntity->GetGroupFlags() & ~GROUP_FLAG_IN_GROUP_WITH_SQUAD_LEADER) == 0") == 1 )
+    {
+      __debugbreak();
+    }
+    v6->SetGroupFlags(v6, 0);
   }
-  return (*(int (__thiscall **)(unsigned __int8 *, _DWORD))(*(_DWORD *)v7 + 88))(v7, 0);
 }
 
 
 // address=[0x1551270]
-// Decompiled from int __thiscall CGroupMgr::DetachAllEntitiesFromGroup(CGroupMgr *this, int a2, int a3)
+// Decompiled from int __thiscall CGroupMgr::DetachAllEntitiesFromGroup(CGroupMgr *this, int playerId, int groupId)
 void  CGroupMgr::DetachAllEntitiesFromGroup(int,int) {
   
   int result; // eax
   int v4; // [esp+0h] [ebp-10h]
   int v6; // [esp+8h] [ebp-8h]
-  char *v7; // [esp+Ch] [ebp-4h]
+  struct CGroupMgr::TStaticArray100short *v7; // [esp+Ch] [ebp-4h]
 
-  if ( (a2 < 1 || a2 > 8)
+  if ( (playerId < 1 || playerId > 8)
     && BBSupportDbgReport(
          2,
          "MapObjects\\GroupMgr.cpp",
@@ -291,20 +288,20 @@ void  CGroupMgr::DetachAllEntitiesFromGroup(int,int) {
   {
     __debugbreak();
   }
-  if ( (a3 < 1 || a3 > 10)
+  if ( (groupId < 1 || groupId > 10)
     && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 450, "(_iGroupId >= GROUP_FIRST) && (_iGroupId <= GROUP_LAST)") == 1 )
   {
     __debugbreak();
   }
-  v7 = (char *)this + 2244 * a2 + 204 * a3 + 104;
+  v7 = &this->entries[11 * playerId + groupId];
   while ( 1 )
   {
     result = TStaticArray<unsigned short,100>::Size(v7);
     if ( result <= 0 )
       break;
     v6 = TStaticArray<unsigned short,100>::Size(v7);
-    v4 = *(unsigned __int16 *)TStaticArray<unsigned short,100>::operator[](v6 - 1);
-    (*(void (__thiscall **)(CGroupMgr *, int, int, int))(*(_DWORD *)this + 24))(this, a2, a3, v4);
+    v4 = *TStaticArray<unsigned short,100>::operator[](v7, v6 - 1);
+    this->DetachEntity(this, playerId, groupId, v4);
     if ( TStaticArray<unsigned short,100>::Size(v7) != v6 - 1
       && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 461, "rGroupArray.Size() == (iOldSize - 1)") == 1 )
     {
@@ -312,7 +309,7 @@ void  CGroupMgr::DetachAllEntitiesFromGroup(int,int) {
     }
     if ( TStaticArray<unsigned short,100>::Size(v7) >= v6 )
     {
-      if ( *(unsigned __int16 *)TStaticArray<unsigned short,100>::operator[](v6 - 1) != v4
+      if ( *TStaticArray<unsigned short,100>::operator[](v7, v6 - 1) != v4
         && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 465, "rGroupArray[iOldSize - 1] == iEntityId") == 1 )
       {
         __debugbreak();
@@ -347,120 +344,108 @@ bool  CGroupMgr::HasSquadLeader(int,int) {
   {
     __debugbreak();
   }
-  return (*((_BYTE *)this + 11 * a2 + a3 + 4) & 1) != 0;
+  return (this->groupFlags[11 * a2 + a3] & 1) != 0;
 }
 
 
 // address=[0x1551490]
-// Decompiled from void __thiscall CGroupMgr::SendGroupCommand(  CGroupMgr *this,  int a2,  const unsigned __int16 *a3,  int a4,  int a5,  int a6)
+// Decompiled from void __thiscall CGroupMgr::SendGroupCommand(  CGroupMgr *this,  int groupSize,  const unsigned __int16 *group,  int x,  int y,  int sendFlags)
 void  CGroupMgr::SendGroupCommand(int,unsigned short const *,int,int,int) {
   
-  int v6; // eax
+  int firstGroupMemberPackedXY; // [esp-4h] [ebp-234h]
   _BYTE v7[24]; // [esp+4h] [ebp-22Ch] BYREF
   _BYTE v8[24]; // [esp+1Ch] [ebp-214h] BYREF
-  int v9; // [esp+34h] [ebp-1FCh]
-  int v10; // [esp+38h] [ebp-1F8h]
-  CGroupMgr *v11; // [esp+3Ch] [ebp-1F4h]
   CEntityEvent *v12; // [esp+40h] [ebp-1F0h]
   CEntityEvent *v13; // [esp+44h] [ebp-1ECh]
-  int v14; // [esp+48h] [ebp-1E8h]
-  int v15; // [esp+4Ch] [ebp-1E4h]
-  int v16; // [esp+50h] [ebp-1E0h]
-  int v17; // [esp+54h] [ebp-1DCh]
+  int packedXY; // [esp+48h] [ebp-1E8h]
+  int groupMemberId; // [esp+4Ch] [ebp-1E4h]
+  int firstGroupMemberId; // [esp+54h] [ebp-1DCh]
   CEntityEvent *v18; // [esp+58h] [ebp-1D8h]
   CEntityEvent *v19; // [esp+5Ch] [ebp-1D4h]
   int v20; // [esp+60h] [ebp-1D0h]
   int v21; // [esp+64h] [ebp-1CCh]
   int NextDestination; // [esp+68h] [ebp-1C8h]
-  int v23; // [esp+6Ch] [ebp-1C4h]
-  _DWORD *v24; // [esp+70h] [ebp-1C0h]
-  unsigned __int8 *v25; // [esp+74h] [ebp-1BCh]
-  _DWORD *v26; // [esp+78h] [ebp-1B8h]
-  _DWORD *v27; // [esp+7Ch] [ebp-1B4h]
-  int v28; // [esp+80h] [ebp-1B0h]
-  int v29; // [esp+84h] [ebp-1ACh]
+  int v23; // [esp+6Ch] [ebp-1C4h] MAPDST
+  IEntity *v24; // [esp+70h] [ebp-1C0h]
+  IEntity *firstGroupMember; // [esp+74h] [ebp-1BCh]
+  IEntity *groupMember; // [esp+78h] [ebp-1B8h]
+  IEntity *v27; // [esp+7Ch] [ebp-1B4h]
+  int i; // [esp+80h] [ebp-1B0h] MAPDST
   _BYTE v30[408]; // [esp+88h] [ebp-1A8h] BYREF
   int v31; // [esp+22Ch] [ebp-4h]
 
-  v11 = this;
-  if ( a2 > 0 && a3 )
+  if ( groupSize > 0 && group )
   {
-    v29 = -1;
-    v28 = 0;
-    while ( 1 )
+    i = -1;
+    for ( i = 0; i < groupSize; ++i )
     {
-      v21 = a3[v28];
-      v24 = (_DWORD *)CMapObjectMgr::EntityPtr(v21);
-      if ( v24 )
-      {
-        if ( (_UNKNOWN *)IEntity::FlagBits(v24, (EntityFlag)&loc_2008000) == (_UNKNOWN *)((char *)&loc_1FFFFFF + 1) )
-          break;
-      }
-      if ( ++v28 >= a2 )
-        goto LABEL_8;
+      v21 = group[i];
+      v24 = CMapObjectMgr::EntityPtr(v21);
+      if ( v24 && IEntity::FlagBits(v24, Ready|OnBoard) == 0x2000000 )
+        break;
     }
-    v29 = v28;
-LABEL_8:
-    if ( v29 >= 0 )
+    if ( i >= 0 )
     {
-      if ( (a6 & 8) != 0 )
+      if ( (sendFlags & 8) != 0 )
       {
-        while ( v29 < a2 )
+        while ( i < groupSize )
         {
-          v20 = a3[v29];
-          v27 = (_DWORD *)CMapObjectMgr::EntityPtr(v20);
+          v20 = group[i];
+          v27 = CMapObjectMgr::EntityPtr(v20);
           if ( v27 )
           {
-            if ( (_UNKNOWN *)IEntity::FlagBits(v27, (EntityFlag)&loc_2008000) == (_UNKNOWN *)((char *)&loc_1FFFFFF + 1) )
+            if ( IEntity::FlagBits(v27, Ready|OnBoard) == Ready )
             {
-              v19 = CEntityEvent::CEntityEvent((CEntityEvent *)v8, 0x11u, 13, a6, 0, 0);
+              v19 = CEntityEvent::CEntityEvent((CEntityEvent *)v8, 0x11u, 13, sendFlags, 0, 0);
               v18 = v19;
               v31 = 0;
-              (*(void (__thiscall **)(_DWORD *, CEntityEvent *))(*v27 + 80))(v27, v19);
+              v27->SetEvent(v27, v19);
               v31 = -1;
               CEntityEvent::~CEntityEvent(v8);
             }
           }
-          ++v29;
+          ++i;
         }
       }
       else
       {
-        v14 = Y16X16::PackXYFast(a4, a5);
-        v10 = a4;
-        v9 = a5;
-        v17 = a3[v29];
-        v25 = (unsigned __int8 *)CMapObjectMgr::EntityPtr(v17);
-        if ( !v25 && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 697, "pFirstEntity != 0") == 1 )
+        packedXY = Y16X16::PackXYFast(x, y);
+        firstGroupMemberId = group[i];
+        firstGroupMember = CMapObjectMgr::EntityPtr(firstGroupMemberId);
+        if ( !firstGroupMember && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 697, "pFirstEntity != 0") == 1 )
           __debugbreak();
-        if ( IEntity::ObjType(v25) == 4 )
+        if ( IEntity::ObjType(firstGroupMember) == 4 )
           v23 = 3;
         else
           v23 = 1;
-        v16 = v23;
-        v6 = IEntity::PackedXY(v25);
-        CGroupDestinations::CGroupDestinations((CGroupDestinations *)v30, a4, a5, a2, v23, v6);
-        while ( v29 < a2 )
+        firstGroupMemberPackedXY = IEntity::PackedXY(firstGroupMember);
+        CGroupDestinations::CGroupDestinations(
+          (CGroupDestinations *)v30,
+          x,
+          y,
+          groupSize,
+          v23,
+          firstGroupMemberPackedXY);
+        while ( i < groupSize )
         {
-          v15 = a3[v29];
-          v26 = (_DWORD *)CMapObjectMgr::EntityPtr(v15);
-          if ( v26
-            && (_UNKNOWN *)IEntity::FlagBits(v26, (EntityFlag)&loc_2008000) == (_UNKNOWN *)((char *)&loc_1FFFFFF + 1) )
+          groupMemberId = group[i];
+          groupMember = CMapObjectMgr::EntityPtr(groupMemberId);
+          if ( groupMember && IEntity::FlagBits(groupMember, Ready|OnBoard) == Ready )
           {
-            NextDestination = CGroupDestinations::GetNextDestination(v30);
+            NextDestination = CGroupDestinations::GetNextDestination((CGroupDestinations *)v30);
             if ( !(unsigned __int8)CWorldManager::InWorldPackedXY(NextDestination)
               && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 713, "g_cWorld.InWorldPackedXY(iDestXY)") == 1 )
             {
               __debugbreak();
             }
-            v13 = CEntityEvent::CEntityEvent((CEntityEvent *)v7, 0x11u, 13, a6, NextDestination, v14);
+            v13 = CEntityEvent::CEntityEvent((CEntityEvent *)v7, 0x11u, 13, sendFlags, NextDestination, packedXY);
             v12 = v13;
             v31 = 1;
-            (*(void (__thiscall **)(_DWORD *, CEntityEvent *))(*v26 + 80))(v26, v13);
+            groupMember->SetEvent(groupMember, v13);
             v31 = -1;
             CEntityEvent::~CEntityEvent(v7);
           }
-          ++v29;
+          ++i;
         }
       }
     }
@@ -469,7 +454,7 @@ LABEL_8:
 
 
 // address=[0x1551850]
-// Decompiled from int __thiscall CGroupMgr::Load(CGroupMgr *this, struct IS4Chunk *a2)
+// Decompiled from int __thiscall CGroupMgr::Load(CGroupMgr::TStaticArray100short *this, struct IS4Chunk *a2)
 void  CGroupMgr::Load(class IS4Chunk &) {
   
   int v3; // [esp+8h] [ebp-18h]
@@ -478,7 +463,7 @@ void  CGroupMgr::Load(class IS4Chunk &) {
   int i; // [esp+18h] [ebp-8h]
   __int16 v8; // [esp+1Eh] [ebp-2h] BYREF
 
-  (*(void (__thiscall **)(CGroupMgr *))(*(_DWORD *)this + 8))(this);
+  (*(void (__thiscall **)(CGroupMgr::TStaticArray100short *))(*(_DWORD *)this + 8))(this);
   (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 12))(a2, 844624217);
   (*(void (__thiscall **)(struct IS4Chunk *, int, int))(*(_DWORD *)a2 + 4))(a2, 1, 1);
   (*(void (__thiscall **)(struct IS4Chunk *, int, int))(*(_DWORD *)a2 + 4))(a2, 10, 10);
@@ -504,7 +489,7 @@ void  CGroupMgr::Load(class IS4Chunk &) {
 
 
 // address=[0x15519a0]
-// Decompiled from int __thiscall CGroupMgr::Save(CGroupMgr *this, struct IS4Chunk *a2)
+// Decompiled from int __thiscall CGroupMgr::Save(CGroupMgr::TStaticArray100short *this, struct IS4Chunk *a2)
 void  CGroupMgr::Save(class IS4Chunk &) {
   
   unsigned __int16 *v2; // eax
@@ -523,8 +508,8 @@ void  CGroupMgr::Save(class IS4Chunk &) {
     {
       (*(void (__thiscall **)(struct IS4Chunk *, _DWORD))(*(_DWORD *)a2 + 20))(
         a2,
-        *((unsigned __int8 *)this + 11 * i + j + 4));
-      v4 = TStaticArray<unsigned short,100>::Size((char *)this + 2244 * i + 204 * j + 104);
+        *((unsigned __int8 *)&this[1].size + 11 * i + j));
+      v4 = TStaticArray<unsigned short,100>::Size(&this[561 * i + 26 + 51 * j]);
       (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 20))(a2, v4);
       for ( k = 0; k < v4; ++k )
       {
@@ -698,12 +683,12 @@ void  CGroupMgr::FillMagicSideBarEx(class CInfoExchange *,bool,int) {
  CGroupMgr::CGroupMgr(void) {
   
   IGroupMgr::IGroupMgr(this);
-  *(_DWORD *)this = CGroupMgr::_vftable_;
+  this->__vftable = (CGroupMgr_vtbl *)CGroupMgr::_vftable_;
   `vector constructor iterator'(
-    (char *)this + 104,
-    0xCCu,
-    0x63u,
-    (void *(__thiscall *)(void *))TStaticArray<unsigned short,100>::TStaticArray<unsigned short,100>);
+    this->entries,
+    204u,
+    99u,
+    TStaticArray<unsigned short,100>::TStaticArray<unsigned short,100>);
   return this;
 }
 
