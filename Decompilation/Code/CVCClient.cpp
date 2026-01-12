@@ -4,7 +4,6 @@
 
 // address=[0x2fd8220]
 // Decompiled from CVCClient *__thiscall CVCClient::CVCClient(CVCClient *this)
-
  CVCClient::CVCClient(void) {
   
   *(_DWORD *)this = &CVCClient::_vftable_;
@@ -31,7 +30,6 @@
 
 // address=[0x2fd8300]
 // Decompiled from void __thiscall CVCClient::~CVCClient(void **this)
-
  CVCClient::~CVCClient(void) {
   
   int i; // [esp+20h] [ebp-14h]
@@ -99,7 +97,6 @@
 
 // address=[0x2fd8530]
 // Decompiled from char __thiscall CVCClient::Start(CVCClient *this, char a2, struct _DIG_DRIVER *a3, int a4, char *a5)
-
 bool  CVCClient::Start(int,struct _DIG_DRIVER *,int,char *) {
   
   *((_DWORD *)this + 22) = 0;
@@ -125,7 +122,6 @@ bool  CVCClient::Start(int,struct _DIG_DRIVER *,int,char *) {
 
 // address=[0x2fd8650]
 // Decompiled from CVCClient *__thiscall CVCClient::Shutdown(CVCClient *this)
-
 void  CVCClient::Shutdown(void) {
   
   CVCClient *result; // eax
@@ -141,7 +137,6 @@ void  CVCClient::Shutdown(void) {
 
 // address=[0x2fd8680]
 // Decompiled from char __thiscall CVCClient::ReceivePackage(_DWORD *this, void *Src)
-
 bool  CVCClient::ReceivePackage(signed char *) {
   
   if ( *(_BYTE *)(this[15] + this[21]) )
@@ -160,7 +155,6 @@ bool  CVCClient::ReceivePackage(signed char *) {
 
 // address=[0x2fd8720]
 // Decompiled from CVCClient *__fastcall CVCClient::PlayStream(size_t *this)
-
 void  CVCClient::PlayStream(void) {
   
   CVCClient *result; // eax
@@ -192,7 +186,6 @@ void  CVCClient::PlayStream(void) {
 
 // address=[0x2fd8820]
 // Decompiled from int __stdcall CVCClient::DecodeDataCB(int a1, void *a2, int a3, int a4)
-
 static long __stdcall CVCClient::DecodeDataCB(unsigned long,void *,long,long) {
   
   return CVCClient::CopyDataToDecoder(a2, a3, a4);
@@ -201,7 +194,6 @@ static long __stdcall CVCClient::DecodeDataCB(unsigned long,void *,long,long) {
 
 // address=[0x2fd8850]
 // Decompiled from size_t __thiscall CVCClient::CopyDataToDecoder(_DWORD *this, char *a2, int a3, int a4)
-
 long  CVCClient::CopyDataToDecoder(void *,long,long) {
   
   size_t v5; // [esp+0h] [ebp-Ch]
@@ -235,7 +227,6 @@ long  CVCClient::CopyDataToDecoder(void *,long,long) {
 
 // address=[0x2fd8970]
 // Decompiled from CVCClient *__thiscall CVCClient::Run(CVCClient *this)
-
 void  CVCClient::Run(void) {
   
   CVCClient::DecodeData(this);
@@ -245,7 +236,6 @@ void  CVCClient::Run(void) {
 
 // address=[0x2fd8990]
 // Decompiled from int __thiscall CVCClient::SetVolume(CVCClient *this, int a2)
-
 void  CVCClient::SetVolume(int) {
   
   return AIL_set_sample_volume(*((_DWORD *)this + 28), a2);
@@ -254,7 +244,6 @@ void  CVCClient::SetVolume(int) {
 
 // address=[0x2fd7d50]
 // Decompiled from CVCClient *__thiscall CVCClient::DecodeData(CVCClient *this)
-
 void  CVCClient::DecodeData(void) {
   
   CVCClient *result; // eax
@@ -292,7 +281,6 @@ void  CVCClient::DecodeData(void) {
 
 // address=[0x2fd7e40]
 // Decompiled from char __thiscall CVCClient::InitDecoder(CVCClient *this, char a2, char *a3)
-
 bool  CVCClient::InitDecoder(int,char *) {
   
   int i; // [esp+18h] [ebp-ACh]

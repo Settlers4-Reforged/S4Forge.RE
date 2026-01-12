@@ -4,7 +4,6 @@
 
 // address=[0x14dacb0]
 // Decompiled from CAnimalMgr *__thiscall CAnimalMgr::CAnimalMgr(CAnimalMgr *this)
-
  CAnimalMgr::CAnimalMgr(void) {
   
   int i; // [esp+4h] [ebp-14h]
@@ -30,7 +29,6 @@
 
 // address=[0x14dade0]
 // Decompiled from void __thiscall CAnimalMgr::~CAnimalMgr(CAnimalMgr *this)
-
  CAnimalMgr::~CAnimalMgr(void) {
   
   CAnimalMgr::ShutDown(this);
@@ -45,7 +43,6 @@
 
 // address=[0x14dae70]
 // Decompiled from int __thiscall CAnimalMgr::Init(CAnimalEffect **this)
-
 void  CAnimalMgr::Init(void) {
   
   Squares *v1; // eax
@@ -205,7 +202,6 @@ void  CAnimalMgr::Init(void) {
 
 // address=[0x14db3b0]
 // Decompiled from CAnimalMgr *__thiscall CAnimalMgr::ShutDown(CAnimalMgr **this)
-
 void  CAnimalMgr::ShutDown(void) {
   
   CAnimalMgr *result; // eax
@@ -240,7 +236,6 @@ void  CAnimalMgr::ShutDown(void) {
 
 // address=[0x14db4d0]
 // Decompiled from void *__thiscall CAnimalMgr::Clear(CAnimalMgr *this)
-
 void  CAnimalMgr::Clear(void) {
   
   j__memset((char *)this + 24, 0, 0x24u);
@@ -250,7 +245,6 @@ void  CAnimalMgr::Clear(void) {
 
 // address=[0x14db510]
 // Decompiled from int __thiscall CAnimalMgr::AddAnimal(CAnimalMgr *this, int a2, int a3, int a4)
-
 int  CAnimalMgr::AddAnimal(int,int,int) {
   
   int v5; // [esp+0h] [ebp-Ch]
@@ -282,7 +276,6 @@ int  CAnimalMgr::AddAnimal(int,int,int) {
 
 // address=[0x14db630]
 // Decompiled from int __thiscall CAnimalMgr::AddAnimalAsEffect(CAnimalMgr *this, int a2, int a3, int a4, signed int a5)
-
 int  CAnimalMgr::AddAnimalAsEffect(int,int,int,int) {
   
   unsigned int AnimalFirstJob; // [esp+4h] [ebp-8h]
@@ -310,7 +303,6 @@ int  CAnimalMgr::AddAnimalAsEffect(int,int,int,int) {
 
 // address=[0x14db6d0]
 // Decompiled from int __thiscall CAnimalMgr::DeleteAnimal(CAnimalMgr *this, int a2)
-
 void  CAnimalMgr::DeleteAnimal(int) {
   
   int result; // eax
@@ -343,7 +335,6 @@ void  CAnimalMgr::DeleteAnimal(int) {
 
 // address=[0x14db7b0]
 // Decompiled from char __thiscall CAnimalMgr::SpawnAnimalBehindTree(CAnimalMgr *this, int a2, int a3, int a4)
-
 void  CAnimalMgr::SpawnAnimalBehindTree(int,int,int) {
   
   unsigned int v4; // eax
@@ -410,7 +401,6 @@ void  CAnimalMgr::SpawnAnimalBehindTree(int,int,int) {
 
 // address=[0x14db940]
 // Decompiled from char __thiscall CAnimalMgr::SpawnAnimalInTown(CAnimalMgr *this, int a2, int a3, int a4)
-
 void  CAnimalMgr::SpawnAnimalInTown(int,int,int) {
   
   int v4; // eax
@@ -475,7 +465,6 @@ void  CAnimalMgr::SpawnAnimalInTown(int,int,int) {
 
 // address=[0x14dbae0]
 // Decompiled from int __thiscall CAnimalMgr::SpawnAnimalOnGround(CAnimalMgr *this, int a2, int a3, int a4, int a5)
-
 void  CAnimalMgr::SpawnAnimalOnGround(int,int,int,int) {
   
   int result; // eax
@@ -508,7 +497,6 @@ void  CAnimalMgr::SpawnAnimalOnGround(int,int,int,int) {
 
 // address=[0x14dbbc0]
 // Decompiled from int __thiscall CAnimalMgr::SpawnAnimalOnDarkLand(CAnimalMgr *this, int a2, int a3, int a4)
-
 void  CAnimalMgr::SpawnAnimalOnDarkLand(int,int,int) {
   
   int result; // eax
@@ -541,7 +529,6 @@ void  CAnimalMgr::SpawnAnimalOnDarkLand(int,int,int) {
 
 // address=[0x14dbca0]
 // Decompiled from void __thiscall CAnimalMgr::Update(CAnimalMgr *this)
-
 void  CAnimalMgr::Update(void) {
   
   unsigned int v1; // eax
@@ -596,13 +583,7 @@ void  CAnimalMgr::Update(void) {
 
 
 // address=[0x14dbe60]
-// Decompiled from char __thiscall CAnimalMgr::UpdateMovingEffect(
-        CAnimalEffect **this,
-        unsigned int a2,
-        unsigned int a3,
-        unsigned int a4,
-        unsigned int a5)
-
+// Decompiled from char __thiscall CAnimalMgr::UpdateMovingEffect(  CAnimalEffect **this,  unsigned int a2,  unsigned int a3,  unsigned int a4,  unsigned int a5)
 void  CAnimalMgr::UpdateMovingEffect(unsigned int,unsigned int,unsigned int,unsigned int) {
   
   return CAnimalEffect::Update(this[97], a2, a3, a4, a5);
@@ -611,7 +592,6 @@ void  CAnimalMgr::UpdateMovingEffect(unsigned int,unsigned int,unsigned int,unsi
 
 // address=[0x14dbe90]
 // Decompiled from CAnimalMgr *__thiscall CAnimalMgr::AddButterfly(CRandom16 ***this, unsigned int a2, unsigned int a3)
-
 void  CAnimalMgr::AddButterfly(int,int) {
   
   CAnimalMgr *result; // eax
@@ -628,9 +608,7 @@ void  CAnimalMgr::AddButterfly(int,int) {
 
 
 // address=[0x14dbef0]
-// Decompiled from // public: bool __thiscall CAnimalMgr::IsButterflyLand(int,int)
-char __thiscall CAnimalMgr::IsButterflyLand(char *this, int a2, int a3)
-
+// Decompiled from char __thiscall CAnimalMgr::IsButterflyLand(char *this, int a2, int a3)
 bool  CAnimalMgr::IsButterflyLand(int,int) {
   
   int v4; // [esp+0h] [ebp-Ch]
@@ -648,7 +626,6 @@ bool  CAnimalMgr::IsButterflyLand(int,int) {
 
 // address=[0x14dbf60]
 // Decompiled from char __thiscall CAnimalMgr::CheckButterflyUnderground(CAnimalMgr *this, int a2, int a3)
-
 bool  CAnimalMgr::CheckButterflyUnderground(int,int) {
   
   int v4; // [esp+0h] [ebp-10h]
@@ -675,7 +652,6 @@ bool  CAnimalMgr::CheckButterflyUnderground(int,int) {
 
 // address=[0x14dc030]
 // Decompiled from bool __thiscall CAnimalMgr::CheckButterflyUndergroundFast(CAnimalMgr *this, int a2, int a3)
-
 bool  CAnimalMgr::CheckButterflyUndergroundFast(int,int) {
   
   if ( !(unsigned __int8)CWorldManager::InWorld(a2, a3)
@@ -688,9 +664,7 @@ bool  CAnimalMgr::CheckButterflyUndergroundFast(int,int) {
 
 
 // address=[0x14dc0a0]
-// Decompiled from // public: bool __thiscall CAnimalMgr::IsBirdLand(int,int)
-char __thiscall CAnimalMgr::IsBirdLand(char *this, int a2, int a3)
-
+// Decompiled from char __thiscall CAnimalMgr::IsBirdLand(char *this, int a2, int a3)
 bool  CAnimalMgr::IsBirdLand(int,int) {
   
   int v4; // [esp+0h] [ebp-Ch]
@@ -708,7 +682,6 @@ bool  CAnimalMgr::IsBirdLand(int,int) {
 
 // address=[0x14dc110]
 // Decompiled from char __thiscall CAnimalMgr::CheckBirdUnderground(CAnimalMgr *this, int a2, int a3)
-
 bool  CAnimalMgr::CheckBirdUnderground(int,int) {
   
   int v4; // [esp+4h] [ebp-10h]
@@ -748,7 +721,6 @@ bool  CAnimalMgr::CheckBirdUnderground(int,int) {
 
 // address=[0x14dc290]
 // Decompiled from char __thiscall CAnimalMgr::IsSeagullLand(CAnimalMgr *this, int a2, int a3)
-
 bool  CAnimalMgr::IsSeagullLand(int,int) {
   
   unsigned int i; // eax
@@ -772,9 +744,7 @@ bool  CAnimalMgr::IsSeagullLand(int,int) {
 
 
 // address=[0x14dc300]
-// Decompiled from // public: bool __thiscall CAnimalMgr::CheckSeagullUnderground(int,int)
-char __stdcall CAnimalMgr::CheckSeagullUnderground(int a1, int a2)
-
+// Decompiled from char __stdcall CAnimalMgr::CheckSeagullUnderground(int a1, int a2)
 bool  CAnimalMgr::CheckSeagullUnderground(int,int) {
   
   int v3; // [esp+4h] [ebp-14h]
@@ -813,7 +783,6 @@ bool  CAnimalMgr::CheckSeagullUnderground(int,int) {
 
 // address=[0x14dc460]
 // Decompiled from char __thiscall CAnimalMgr::CheckSeagullUndergroundAddPosition(CAnimalMgr *this, int a2, int a3)
-
 bool  CAnimalMgr::CheckSeagullUndergroundAddPosition(int,int) {
   
   int v4; // [esp+4h] [ebp-14h]
@@ -850,7 +819,6 @@ bool  CAnimalMgr::CheckSeagullUndergroundAddPosition(int,int) {
 
 // address=[0x14dc590]
 // Decompiled from void __thiscall CAnimalMgr::Store(CAnimalMgr *this, struct S4::CMapFile *a2)
-
 void  CAnimalMgr::Store(class S4::CMapFile &) {
   
   std::strstreambuf *v2; // eax
@@ -923,7 +891,6 @@ void  CAnimalMgr::Store(class S4::CMapFile &) {
 
 // address=[0x14dc840]
 // Decompiled from void __thiscall CAnimalMgr::Load(CAnimalMgr *this, struct S4::CMapFile *a2)
-
 void  CAnimalMgr::Load(class S4::CMapFile &) {
   
   int v2; // [esp+0h] [ebp-FCh]
@@ -976,7 +943,6 @@ void  CAnimalMgr::Load(class S4::CMapFile &) {
 
 // address=[0x14dc9f0]
 // Decompiled from char __thiscall CAnimalMgr::IsHuntable(CAnimalMgr *this, int a2)
-
 bool  CAnimalMgr::IsHuntable(int) {
   
   struct SAnimalData *AnimalDataPtr; // [esp+4h] [ebp-4h]
@@ -991,7 +957,6 @@ bool  CAnimalMgr::IsHuntable(int) {
 
 // address=[0x14dca20]
 // Decompiled from int *__thiscall CAnimalMgr::GetAnimalDataPtr(CAnimalMgr *this, unsigned int a2)
-
 struct SAnimalData *  CAnimalMgr::GetAnimalDataPtr(int) {
   
   if ( a2 < 0x12 )
@@ -1003,7 +968,6 @@ struct SAnimalData *  CAnimalMgr::GetAnimalDataPtr(int) {
 
 // address=[0x14dca50]
 // Decompiled from int *__thiscall CAnimalMgr::GetAnimalEffectDataPtr(CAnimalMgr *this, unsigned int a2)
-
 struct SAnimalData *  CAnimalMgr::GetAnimalEffectDataPtr(int) {
   
   if ( a2 < 8 )
@@ -1015,7 +979,6 @@ struct SAnimalData *  CAnimalMgr::GetAnimalEffectDataPtr(int) {
 
 // address=[0x14dfeb0]
 // Decompiled from int __cdecl CAnimalMgr::Animal(int a1)
-
 static class CAnimal & __cdecl CAnimalMgr::Animal(int) {
   
   return CMapObjectMgr::EntityPtr(a1);
@@ -1024,7 +987,6 @@ static class CAnimal & __cdecl CAnimalMgr::Animal(int) {
 
 // address=[0x15787b0]
 // Decompiled from int __cdecl CAnimalMgr::GetAnimalPtr(int a1)
-
 static class CAnimal * __cdecl CAnimalMgr::GetAnimalPtr(int) {
   
   return CMapObjectMgr::EntityPtr(a1);
@@ -1033,7 +995,6 @@ static class CAnimal * __cdecl CAnimalMgr::GetAnimalPtr(int) {
 
 // address=[0x14dca80]
 // Decompiled from int __thiscall CAnimalMgr::LoadAnimalData(CAnimalMgr *this)
-
 void  CAnimalMgr::LoadAnimalData(void) {
   
   int result; // eax
@@ -1362,7 +1323,6 @@ LABEL_44:
 
 // address=[0x14dd3d0]
 // Decompiled from int __cdecl CAnimalMgr::InitAnimalJobs(struct CAnimal *a1, int a2)
-
 static void __cdecl CAnimalMgr::InitAnimalJobs(class CAnimal *,int) {
   
   struct CEntityTask *v2; // eax
@@ -1492,7 +1452,6 @@ static void __cdecl CAnimalMgr::InitAnimalJobs(class CAnimal *,int) {
 
 // address=[0x14dd710]
 // Decompiled from char __thiscall CAnimalMgr::SpawnAnimal(CAnimalMgr *this, int a2, int a3)
-
 void  CAnimalMgr::SpawnAnimal(int,int) {
   
   int v3; // edx
@@ -1596,7 +1555,6 @@ void  CAnimalMgr::SpawnAnimal(int,int) {
 
 // address=[0x14dd980]
 // Decompiled from int __cdecl CAnimalMgr::Create(int a1, int a2, int a3)
-
 static int __cdecl CAnimalMgr::Create(int,int,int) {
   
   int FreeSlot; // [esp+8h] [ebp-1Ch]
@@ -1627,7 +1585,6 @@ static int __cdecl CAnimalMgr::Create(int,int,int) {
 
 // address=[0x14ddaa0]
 // Decompiled from void __thiscall CAnimalMgr::ShowEffect(CAnimalMgr *this)
-
 void  CAnimalMgr::ShowEffect(void) {
   
   int OutputWidth; // eax
@@ -1663,7 +1620,6 @@ void  CAnimalMgr::ShowEffect(void) {
 
 // address=[0x14ddba0]
 // Decompiled from char __thiscall CAnimalMgr::ShowWaterEffect(CAnimalMgr *this, int a2, int a3)
-
 void  CAnimalMgr::ShowWaterEffect(int,int) {
   
   unsigned int v3; // esi
@@ -1726,7 +1682,6 @@ void  CAnimalMgr::ShowWaterEffect(int,int) {
 
 // address=[0x14ddd50]
 // Decompiled from int __thiscall CAnimalMgr::ShowFishResources(CAnimalMgr *this)
-
 void  CAnimalMgr::ShowFishResources(void) {
   
   int OutputWidth; // eax
@@ -1789,7 +1744,6 @@ void  CAnimalMgr::ShowFishResources(void) {
 
 // address=[0x14ddf20]
 // Decompiled from int __thiscall CAnimalMgr::CountBuildingSquares(CAnimalMgr *this, int a2, int a3)
-
 int  CAnimalMgr::CountBuildingSquares(int,int) {
   
   int i; // [esp+4h] [ebp-8h]
@@ -1811,7 +1765,6 @@ int  CAnimalMgr::CountBuildingSquares(int,int) {
 
 // address=[0x14ddfc0]
 // Decompiled from bool __thiscall CAnimalMgr::IsTileFree(CAnimalMgr *this, int a2)
-
 bool  CAnimalMgr::IsTileFree(int) {
   
   return !(unsigned __int8)CWorldManager::IsBlockedLand(a2)
@@ -1822,7 +1775,6 @@ bool  CAnimalMgr::IsTileFree(int) {
 
 // address=[0x14de020]
 // Decompiled from char __thiscall CAnimalMgr::IsLandscapeAround(_DWORD *this, int a2, int a3, int a4)
-
 bool  CAnimalMgr::IsLandscapeAround(enum T_RESOURCE_LANDTYPE,int,int) {
   
   Squares *v6; // [esp+4h] [ebp-Ch]
@@ -1848,7 +1800,6 @@ bool  CAnimalMgr::IsLandscapeAround(enum T_RESOURCE_LANDTYPE,int,int) {
 
 // address=[0x14de0b0]
 // Decompiled from int __thiscall CAnimalMgr::AddButterflies(CAnimalMgr *this)
-
 void  CAnimalMgr::AddButterflies(void) {
   
   int result; // eax
@@ -1899,7 +1850,6 @@ void  CAnimalMgr::AddButterflies(void) {
 
 // address=[0x14de1d0]
 // Decompiled from int __thiscall CAnimalMgr::AddBirds(CAnimalEffect **this)
-
 void  CAnimalMgr::AddBirds(void) {
   
   int result; // eax
@@ -1972,7 +1922,6 @@ LABEL_5:
 
 // address=[0x14de350]
 // Decompiled from int __thiscall CAnimalMgr::AddSeagulls(CAnimalEffect **this)
-
 void  CAnimalMgr::AddSeagulls(void) {
   
   int result; // eax
@@ -2045,7 +1994,6 @@ LABEL_5:
 
 // address=[0x14de4d0]
 // Decompiled from int __thiscall CAnimalMgr::AddDucks(CAnimalEffect **this)
-
 void  CAnimalMgr::AddDucks(void) {
   
   int result; // eax
@@ -2103,7 +2051,6 @@ void  CAnimalMgr::AddDucks(void) {
 
 // address=[0x14dfed0]
 // Decompiled from unsigned int __thiscall CAnimalMgr::EffectRandomNumber(CAnimalMgr *this)
-
 unsigned int  CAnimalMgr::EffectRandomNumber(void) {
   
   return CRandom16::Rand((CAnimalMgr *)((char *)this + 380));
@@ -2112,7 +2059,6 @@ unsigned int  CAnimalMgr::EffectRandomNumber(void) {
 
 // address=[0x14e2f70]
 // Decompiled from unsigned int __thiscall CAnimalMgr::Alloc(CAnimalMgr *this, unsigned int a2)
-
 void *  CAnimalMgr::Alloc(unsigned int) {
   
   return MemoryAllocator::allocate((unsigned int *)this, a2);
@@ -2121,7 +2067,6 @@ void *  CAnimalMgr::Alloc(unsigned int) {
 
 // address=[0x14e2fb0]
 // Decompiled from void __thiscall CAnimalMgr::Dealloc(CAnimalMgr *this, void *a2)
-
 void  CAnimalMgr::Dealloc(void *) {
   
   MemoryAllocator::deallocate(this, a2);

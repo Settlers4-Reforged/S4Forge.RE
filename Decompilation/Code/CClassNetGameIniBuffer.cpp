@@ -4,7 +4,6 @@
 
 // address=[0x15bf230]
 // Decompiled from int __thiscall CClassNetGameIniBuffer::GetIntValue(char *this, char *SubStr, int a3)
-
 int  CClassNetGameIniBuffer::GetIntValue(char const *,int) {
   
   char *EndPtr[2]; // [esp+0h] [ebp-10h] BYREF
@@ -22,7 +21,6 @@ int  CClassNetGameIniBuffer::GetIntValue(char const *,int) {
 
 // address=[0x15bf280]
 // Decompiled from const char *__thiscall CClassNetGameIniBuffer::GetStartOfEntry(const char **this, char *SubStr)
-
 char const *  CClassNetGameIniBuffer::GetStartOfEntry(char const *) {
   
   const char *Str; // [esp+4h] [ebp-4h]
@@ -40,13 +38,7 @@ char const *  CClassNetGameIniBuffer::GetStartOfEntry(char const *) {
 
 
 // address=[0x15c3880]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-CClassNetGameIniBuffer *__thiscall CClassNetGameIniBuffer::CClassNetGameIniBuffer(
-        CClassNetGameIniBuffer *this,
-        const char *a2,
-        unsigned int a3)
-
+// Decompiled from CClassNetGameIniBuffer *__thiscall CClassNetGameIniBuffer::CClassNetGameIniBuffer(  CClassNetGameIniBuffer *this,  const char *a2,  unsigned int a3)
  CClassNetGameIniBuffer::CClassNetGameIniBuffer(char const *,unsigned int) {
   
   *(_DWORD *)this = a2;

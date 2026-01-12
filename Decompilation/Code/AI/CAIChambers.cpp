@@ -4,7 +4,6 @@
 
 // address=[0x1314700]
 // Decompiled from CAIChambers *__thiscall CAIChambers::CAIChambers(CAIChambers *this, int a2)
-
  CAIChambers::CAIChambers(int) {
   
   *(_DWORD *)this = IAIEnvironment::UnpackXFast(a2);
@@ -17,7 +16,6 @@
 
 // address=[0x1314770]
 // Decompiled from CAIChambers *__thiscall CAIChambers::Push(CAIChambers *this, int a2, int a3)
-
 void  CAIChambers::Push(int,int) {
   
   int v3; // eax
@@ -54,7 +52,6 @@ void  CAIChambers::Push(int,int) {
 
 // address=[0x1314880]
 // Decompiled from int __thiscall CAIChambers::PushTaskForce(CAIChambers *this, struct CAITaskForce *a2)
-
 void  CAIChambers::PushTaskForce(class CAITaskForce &) {
   
   int result; // eax
@@ -76,7 +73,6 @@ void  CAIChambers::PushTaskForce(class CAITaskForce &) {
 
 // address=[0x13148e0]
 // Decompiled from int __thiscall CAIChambers::PushTaskForceEx(CAIChambers *this, struct CAITaskForce *a2, int a3)
-
 void  CAIChambers::PushTaskForceEx(class CAITaskForce &,int) {
   
   int result; // eax
@@ -99,7 +95,6 @@ void  CAIChambers::PushTaskForceEx(class CAITaskForce &,int) {
 
 // address=[0x1314960]
 // Decompiled from int __thiscall CAIChambers::Next(CAIChambers *this)
-
 int  CAIChambers::Next(void) {
   
   int v2; // eax
@@ -125,7 +120,6 @@ int  CAIChambers::Next(void) {
 
 // address=[0x1321b60]
 // Decompiled from void *__thiscall CAIChambers::Clear(CAIChambers *this)
-
 void  CAIChambers::Clear(void) {
   
   return j__memset((char *)this + 8, 0, 0x140u);
@@ -134,7 +128,6 @@ void  CAIChambers::Clear(void) {
 
 // address=[0x1321b90]
 // Decompiled from int __thiscall CAIChambers::Current(CAIChambers *this)
-
 int  CAIChambers::Current(void) {
   
   return *((_DWORD *)this + 40 * *((_DWORD *)this + 3282) + *((_DWORD *)this + 3283) + 82);
@@ -143,7 +136,6 @@ int  CAIChambers::Current(void) {
 
 // address=[0x1321bd0]
 // Decompiled from int __thiscall CAIChambers::First(CAIChambers *this)
-
 int  CAIChambers::First(void) {
   
   *((_DWORD *)this + 3282) = 0;

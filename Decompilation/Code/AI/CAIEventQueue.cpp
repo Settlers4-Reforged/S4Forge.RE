@@ -4,7 +4,6 @@
 
 // address=[0x130a0d0]
 // Decompiled from void __thiscall CAIEventQueue::~CAIEventQueue(CDHtmlElementEventSink *this)
-
  CAIEventQueue::~CAIEventQueue(void) {
   
   std::vector<CAIEvent>::~vector<CAIEvent>(this);
@@ -13,7 +12,6 @@
 
 // address=[0x130a240]
 // Decompiled from int __thiscall CAIEventQueue::Clear(CAIEventQueue *this)
-
 void  CAIEventQueue::Clear(void) {
   
   int result; // eax
@@ -28,7 +26,6 @@ void  CAIEventQueue::Clear(void) {
 
 // address=[0x130f720]
 // Decompiled from CAIEventQueue *__thiscall CAIEventQueue::CAIEventQueue(CAIEventQueue *this)
-
  CAIEventQueue::CAIEventQueue(void) {
   
   IAIEventQueue::IAIEventQueue(this);
@@ -42,7 +39,6 @@ void  CAIEventQueue::Clear(void) {
 
 // address=[0x130f7a0]
 // Decompiled from char __thiscall CAIEventQueue::PeekAIEvent(CAIEventQueue *this, struct CAIEvent *a2, bool a3)
-
 bool  CAIEventQueue::PeekAIEvent(class CAIEvent &,bool) {
   
   _DWORD *v3; // eax
@@ -64,7 +60,6 @@ bool  CAIEventQueue::PeekAIEvent(class CAIEvent &,bool) {
 
 // address=[0x130f830]
 // Decompiled from int __thiscall CAIEventQueue::PeekAIEvent(CAIEventQueue *this, bool a2)
-
 class CAIEvent const *  CAIEventQueue::PeekAIEvent(bool) {
   
   int v3; // [esp+0h] [ebp-Ch]
@@ -87,7 +82,6 @@ class CAIEvent const *  CAIEventQueue::PeekAIEvent(bool) {
 
 // address=[0x130f8a0]
 // Decompiled from int __thiscall CAIEventQueue::Load(CAIEventQueue *this, struct IS4Chunk *a2)
-
 void  CAIEventQueue::Load(class IS4Chunk &) {
   
   int v2; // eax
@@ -120,7 +114,6 @@ void  CAIEventQueue::Load(class IS4Chunk &) {
 
 // address=[0x130f9a0]
 // Decompiled from int __thiscall CAIEventQueue::Save(CAIEventQueue *this, struct IS4Chunk *a2)
-
 void  CAIEventQueue::Save(class IS4Chunk &) {
   
   int v2; // eax
@@ -143,7 +136,6 @@ void  CAIEventQueue::Save(class IS4Chunk &) {
 
 // address=[0x1319880]
 // Decompiled from int __thiscall CAIEventQueue::PostAIEvent(CAIEventQueue *this, int a2, int a3, int a4, int a5)
-
 void  CAIEventQueue::PostAIEvent(int,int,int,int) {
   
   CAIEvent *v5; // eax

@@ -4,7 +4,6 @@
 
 // address=[0x2f41e40]
 // Decompiled from CSchedule *__thiscall CSchedule::CSchedule(CSchedule *this, struct CEcoSectorAI *a2, int a3, int a4)
-
  CSchedule::CSchedule(class CEcoSectorAI *,int,int) {
   
   CDebitLevelManager *v5; // [esp+8h] [ebp-18h]
@@ -32,7 +31,6 @@
 
 // address=[0x2f41f40]
 // Decompiled from CDynList **__thiscall CSchedule::~CSchedule(CDynList **this)
-
  CSchedule::~CSchedule(void) {
   
   CDynList **result; // eax
@@ -48,7 +46,6 @@
 
 // address=[0x2f41fb0]
 // Decompiled from int __thiscall CSchedule::InitSchedule(CSchedule *this)
-
 void  CSchedule::InitSchedule(void) {
   
   struct IScheduleEntry *v2; // [esp+70h] [ebp-E8h]
@@ -287,7 +284,6 @@ void  CSchedule::InitSchedule(void) {
 
 // address=[0x2f42970]
 // Decompiled from int __thiscall CSchedule::InitLevelManager(CSchedule *this)
-
 void  CSchedule::InitLevelManager(void) {
   
   if ( *((_DWORD *)this + 6) == 1 )
@@ -338,7 +334,6 @@ void  CSchedule::InitLevelManager(void) {
 
 // address=[0x2f42ce0]
 // Decompiled from int __thiscall CSchedule::Settings(CSchedule *this)
-
 int  CSchedule::Settings(void) {
   
   unsigned int v1; // eax
@@ -473,7 +468,6 @@ int  CSchedule::Settings(void) {
 
 // address=[0x2f43000]
 // Decompiled from char __thiscall CSchedule::trigger(CSchedule *this)
-
 bool  CSchedule::trigger(void) {
   
   int v2; // esi
@@ -545,7 +539,6 @@ bool  CSchedule::trigger(void) {
 
 // address=[0x2f43220]
 // Decompiled from int __thiscall CSchedule::GenerateSchedKey(CSchedule *this)
-
 int  CSchedule::GenerateSchedKey(void) {
   
   int v2; // [esp+0h] [ebp-8h]
@@ -558,7 +551,6 @@ int  CSchedule::GenerateSchedKey(void) {
 
 // address=[0x2f43260]
 // Decompiled from int __thiscall CSchedule::NewSchedEntry(CDynList **this, struct IScheduleEntry *a2)
-
 int  CSchedule::NewSchedEntry(class IScheduleEntry *) {
   
   *((_DWORD *)a2 + 3) = CSchedule::GenerateSchedKey((CSchedule *)this);
@@ -570,7 +562,6 @@ int  CSchedule::NewSchedEntry(class IScheduleEntry *) {
 
 // address=[0x2f432a0]
 // Decompiled from int __thiscall CSchedule::NewSchedEntry(CSchedule *this, struct IScheduleEntry *a2, int a3)
-
 int  CSchedule::NewSchedEntry(class IScheduleEntry *,int) {
   
   *((_DWORD *)a2 + 8) = a3;
@@ -580,7 +571,6 @@ int  CSchedule::NewSchedEntry(class IScheduleEntry *,int) {
 
 // address=[0x2f432d0]
 // Decompiled from struct CDynListEntry *__thiscall CSchedule::GetSchedEntry(CDynList **this, int a2)
-
 class IScheduleEntry *  CSchedule::GetSchedEntry(int) {
   
   struct CDynListEntry *i; // [esp+Ch] [ebp-4h]
@@ -596,7 +586,6 @@ class IScheduleEntry *  CSchedule::GetSchedEntry(int) {
 
 // address=[0x2f43330]
 // Decompiled from struct CDynListEntry *__thiscall CSchedule::GetSpecialTask(CDynList **this, int a2)
-
 class IScheduleEntry *  CSchedule::GetSpecialTask(int) {
   
   struct CDynListEntry *i; // [esp+8h] [ebp-4h]
@@ -611,9 +600,7 @@ class IScheduleEntry *  CSchedule::GetSpecialTask(int) {
 
 
 // address=[0x2f43380]
-// Decompiled from // public: class CMaterialManagerTask * __thiscall CSchedule::GetMaterialManager(enum PILE_TYPES)
-struct CDynListEntry *__thiscall CSchedule::GetMaterialManager(CDynList **this, int a2)
-
+// Decompiled from struct CDynListEntry *__thiscall CSchedule::GetMaterialManager(CDynList **this, int a2)
 class CMaterialManagerTask *  CSchedule::GetMaterialManager(enum PILE_TYPES) {
   
   struct CDynListEntry *i; // [esp+10h] [ebp-4h]
@@ -629,7 +616,6 @@ class CMaterialManagerTask *  CSchedule::GetMaterialManager(enum PILE_TYPES) {
 
 // address=[0x2f433f0]
 // Decompiled from struct CDynListEntry *__thiscall CSchedule::GetResourceManager(CDynList **this, int a2)
-
 class CResourceManagerTask *  CSchedule::GetResourceManager(int) {
   
   struct CDynListEntry *i; // [esp+10h] [ebp-4h]
@@ -645,7 +631,6 @@ class CResourceManagerTask *  CSchedule::GetResourceManager(int) {
 
 // address=[0x2f43460]
 // Decompiled from struct CDynListEntry *__thiscall CSchedule::GetProductivityControll(CDynList **this, int a2, int a3)
-
 class CProductivityControll *  CSchedule::GetProductivityControll(struct SBuildId) {
   
   struct CDynListEntry *i; // [esp+Ch] [ebp-4h]
@@ -661,7 +646,6 @@ class CProductivityControll *  CSchedule::GetProductivityControll(struct SBuildI
 
 // address=[0x2f434e0]
 // Decompiled from struct CDynListEntry *__thiscall CSchedule::GetExpandationEvent(CDynList **this, int a2)
-
 class CExpandationEvent *  CSchedule::GetExpandationEvent(int) {
   
   struct CDynListEntry *i; // [esp+Ch] [ebp-4h]
@@ -677,7 +661,6 @@ class CExpandationEvent *  CSchedule::GetExpandationEvent(int) {
 
 // address=[0x2f43550]
 // Decompiled from bool __thiscall CSchedule::IsBorderElement(CSchedule *this, int a2, int a3)
-
 bool  CSchedule::IsBorderElement(int,int) {
   
   CExpandationManagerTask *SpecialTask; // eax
@@ -689,7 +672,6 @@ bool  CSchedule::IsBorderElement(int,int) {
 
 // address=[0x2f43580]
 // Decompiled from struct CDynListEntry *__thiscall CSchedule::GetBuildingEvent(CDynList **this, int a2, int a3)
-
 class CBuildingEvent *  CSchedule::GetBuildingEvent(int,enum T_BUILD_LEVEL) {
   
   struct CDynListEntry *i; // [esp+Ch] [ebp-4h]
@@ -705,7 +687,6 @@ class CBuildingEvent *  CSchedule::GetBuildingEvent(int,enum T_BUILD_LEVEL) {
 
 // address=[0x2f43600]
 // Decompiled from char __thiscall CSchedule::GetBuildingInPlannedStatus(CDynList **this, struct CReserveEntry *a2)
-
 bool  CSchedule::GetBuildingInPlannedStatus(class CReserveEntry *) {
   
   struct CDynListEntry *i; // [esp+8h] [ebp-10h]
@@ -735,7 +716,6 @@ bool  CSchedule::GetBuildingInPlannedStatus(class CReserveEntry *) {
 
 // address=[0x2f43700]
 // Decompiled from CDynListEntry *__thiscall CSchedule::GetBuildingAtPosition(CDynList **this, int a2, int a3)
-
 class CBuildingEvent *  CSchedule::GetBuildingAtPosition(int,int) {
   
   int v4; // [esp+0h] [ebp-18h] BYREF
@@ -764,7 +744,6 @@ class CBuildingEvent *  CSchedule::GetBuildingAtPosition(int,int) {
 
 // address=[0x2f43790]
 // Decompiled from int __thiscall CSchedule::GetTmpMaxNumberOfBuildingType(int this, int a2)
-
 int  CSchedule::GetTmpMaxNumberOfBuildingType(enum BUILDING_TYPES) {
   
   int NumberOfBuildingType; // esi
@@ -826,7 +805,6 @@ int  CSchedule::GetTmpMaxNumberOfBuildingType(enum BUILDING_TYPES) {
 
 // address=[0x2f43930]
 // Decompiled from bool __thiscall CSchedule::EnoughNumberOfBuildingType(void *this, int a2)
-
 bool  CSchedule::EnoughNumberOfBuildingType(enum BUILDING_TYPES) {
   
   int TmpMaxNumberOfBuildingType; // esi
@@ -838,7 +816,6 @@ bool  CSchedule::EnoughNumberOfBuildingType(enum BUILDING_TYPES) {
 
 // address=[0x2f43970]
 // Decompiled from int __thiscall CSchedule::GetSumResourceAmount(int this, int a2, int a3, int a4, int a5)
-
 int  CSchedule::GetSumResourceAmount(enum BUILDING_TYPES,int,int,int) {
   
   int v5; // eax
@@ -981,7 +958,6 @@ int  CSchedule::GetSumResourceAmount(enum BUILDING_TYPES,int,int,int) {
 
 // address=[0x2f43d20]
 // Decompiled from int __thiscall CSchedule::AreaHasOtherResource(CDynList **this, int a2, int a3, int a4)
-
 int  CSchedule::AreaHasOtherResource(enum BUILDING_TYPES,int,int) {
   
   struct IAIEcoManager *v4; // eax
@@ -1063,7 +1039,6 @@ int  CSchedule::AreaHasOtherResource(enum BUILDING_TYPES,int,int) {
 
 // address=[0x2f44030]
 // Decompiled from int __thiscall CSchedule::GetNearExpandationPositionOutside(CSchedule *this, int a2, int a3, int a4)
-
 int  CSchedule::GetNearExpandationPositionOutside(int,int,class std::vector<int,class std::allocator<int> > &) {
   
   unsigned int v4; // eax
@@ -1176,7 +1151,6 @@ int  CSchedule::GetNearExpandationPositionOutside(int,int,class std::vector<int,
 
 // address=[0x2f443a0]
 // Decompiled from int __thiscall CSchedule::PreSelect16Grid(CReserveDatabase **this, int a2, int a3, int a4, int a5, int a6, int a7)
-
 int  CSchedule::PreSelect16Grid(enum BUILDING_TYPES,struct SBUILDINFODATA *,class CReserveEntry *,class std::vector<struct SBUILDINFODATA,class std::allocator<struct SBUILDINFODATA> > &,int,int) {
   
   int v8; // [esp+4h] [ebp-78h]
@@ -1221,7 +1195,6 @@ int  CSchedule::PreSelect16Grid(enum BUILDING_TYPES,struct SBUILDINFODATA *,clas
 
 // address=[0x2f444e0]
 // Decompiled from int __thiscall CSchedule::GetMainProblemSolve(CSchedule *this, int a2)
-
 int  CSchedule::GetMainProblemSolve(int) {
   
   struct IScheduleEntry *SchedEntry; // [esp+4h] [ebp-4h]
@@ -1242,7 +1215,6 @@ int  CSchedule::GetMainProblemSolve(int) {
 
 // address=[0x2f44540]
 // Decompiled from struct IScheduleEntry *__thiscall CSchedule::UpdateExpandationEvents(CDynList **this, int a2)
-
 void  CSchedule::UpdateExpandationEvents(int) {
   
   int v2; // eax
@@ -1287,7 +1259,6 @@ void  CSchedule::UpdateExpandationEvents(int) {
 
 // address=[0x2f44600]
 // Decompiled from char __thiscall CSchedule::IsAnyExpandation(CDynList **this)
-
 bool  CSchedule::IsAnyExpandation(void) {
   
   struct CDynListEntry *i; // [esp+10h] [ebp-4h]
@@ -1303,7 +1274,6 @@ bool  CSchedule::IsAnyExpandation(void) {
 
 // address=[0x2f44660]
 // Decompiled from char __thiscall CSchedule::SetPositionOfTower(CSchedule *this, int a2, int a3, int a4, int a5)
-
 bool  CSchedule::SetPositionOfTower(int,int,int,int) {
   
   struct IScheduleEntry *SchedEntry; // [esp+14h] [ebp-8h]
@@ -1325,7 +1295,6 @@ bool  CSchedule::SetPositionOfTower(int,int,int,int) {
 
 // address=[0x2f446f0]
 // Decompiled from char __thiscall CSchedule::ProduceWeapons(CSchedule *this, int a2, int a3)
-
 bool  CSchedule::ProduceWeapons(int,int) {
   
   int v3; // eax
@@ -1488,7 +1457,6 @@ bool  CSchedule::ProduceWeapons(int,int) {
 
 // address=[0x2f44bb0]
 // Decompiled from char __thiscall CSchedule::AllSubProblemsSolved(CDynList **this, int a2)
-
 bool  CSchedule::AllSubProblemsSolved(int) {
   
   _DWORD *v4; // [esp+8h] [ebp-8h]
@@ -1506,7 +1474,6 @@ bool  CSchedule::AllSubProblemsSolved(int) {
 
 // address=[0x2f44c40]
 // Decompiled from int __thiscall CSchedule::GetTargetPosition(CSchedule *this, int a2)
-
 int  CSchedule::GetTargetPosition(int) {
   
   _BYTE v3[16]; // [esp+4h] [ebp-F4h] BYREF
@@ -1594,9 +1561,7 @@ int  CSchedule::GetTargetPosition(int) {
 
 
 // address=[0x2f44f30]
-// Decompiled from // public: int __thiscall CSchedule::isDepSchedSolved(int)
-int __thiscall CSchedule::isDepSchedSolved(CSchedule *this, int a2)
-
+// Decompiled from int __thiscall CSchedule::isDepSchedSolved(CSchedule *this, int a2)
 int  CSchedule::isDepSchedSolved(int) {
   
   struct IScheduleEntry *SchedEntry; // [esp+Ch] [ebp-4h]
@@ -1621,7 +1586,6 @@ int  CSchedule::isDepSchedSolved(int) {
 
 // address=[0x2f44fe0]
 // Decompiled from char __thiscall CSchedule::TerminateSubProblems(CDynList **this, int a2)
-
 bool  CSchedule::TerminateSubProblems(int) {
   
   _DWORD *v4; // [esp+8h] [ebp-8h]
@@ -1639,7 +1603,6 @@ bool  CSchedule::TerminateSubProblems(int) {
 
 // address=[0x2f45070]
 // Decompiled from char __thiscall CSchedule::MarkSolvedProblem(CSchedule *this, int a2, bool a3)
-
 bool  CSchedule::MarkSolvedProblem(int,bool) {
   
   char result; // al
@@ -1713,7 +1676,6 @@ bool  CSchedule::MarkSolvedProblem(int,bool) {
 
 // address=[0x2f45250]
 // Decompiled from int __thiscall CSchedule::SearchExternSolution(CDynList **this, int a2, int a3, int a4, int a5, int a6, int a7)
-
 int  CSchedule::SearchExternSolution(int,int,int,int,int,int) {
   
   int i; // [esp+4h] [ebp-Ch]
@@ -1744,7 +1706,6 @@ int  CSchedule::SearchExternSolution(int,int,int,int,int,int) {
 
 // address=[0x2f45310]
 // Decompiled from int __thiscall CSchedule::GetSolution(CSchedule *this, int a2)
-
 class CSolutionTree *  CSchedule::GetSolution(int) {
   
   struct IScheduleEntry *SchedEntry; // [esp+Ch] [ebp-4h]
@@ -1766,7 +1727,6 @@ class CSolutionTree *  CSchedule::GetSolution(int) {
 
 // address=[0x2f45390]
 // Decompiled from char __thiscall CSchedule::InvokeNeeded(CDynList **this, int a2)
-
 bool  CSchedule::InvokeNeeded(enum BUILDING_TYPES) {
   
   int k; // [esp+Ch] [ebp-10h]
@@ -1800,7 +1760,6 @@ bool  CSchedule::InvokeNeeded(enum BUILDING_TYPES) {
 
 // address=[0x2f45480]
 // Decompiled from int __thiscall CSchedule::GetInvokeEvent(CDynList **this, int a2)
-
 class CInvokeEvent *  CSchedule::GetInvokeEvent(enum BUILDING_TYPES) {
   
   int v4; // [esp+8h] [ebp-8h]
@@ -1818,7 +1777,6 @@ class CInvokeEvent *  CSchedule::GetInvokeEvent(enum BUILDING_TYPES) {
 
 // address=[0x2f45500]
 // Decompiled from int __thiscall CSchedule::GetContentOfWorkingArea(CSchedule *this, int a2, int a3)
-
 int  CSchedule::GetContentOfWorkingArea(int,enum BUILDING_TYPES) {
   
   int v4; // [esp+4h] [ebp-2Ch] BYREF
@@ -1881,7 +1839,6 @@ int  CSchedule::GetContentOfWorkingArea(int,enum BUILDING_TYPES) {
 
 // address=[0x2f456a0]
 // Decompiled from int __thiscall CSchedule::GetContentOfWorkingArea(CSchedule *this, int a2, int a3, int a4)
-
 int  CSchedule::GetContentOfWorkingArea(enum BUILDING_TYPES,int,int) {
   
   struct IAIEcoManager *v5; // [esp+8h] [ebp-48h]
@@ -1969,7 +1926,6 @@ int  CSchedule::GetContentOfWorkingArea(enum BUILDING_TYPES,int,int) {
 
 // address=[0x2f458f0]
 // Decompiled from char __thiscall CSchedule::SetBestWorkingAreaPosition(CSchedule *this, int a2, int a3, int a4, int a5)
-
 bool  CSchedule::SetBestWorkingAreaPosition(int,enum BUILDING_TYPES,int &,int &) {
   
   int v5; // eax
@@ -2129,7 +2085,6 @@ bool  CSchedule::SetBestWorkingAreaPosition(int,enum BUILDING_TYPES,int &,int &)
 
 // address=[0x2f45dc0]
 // Decompiled from char __thiscall CSchedule::SetSpecialWorkingAreaPosition(CSchedule *this, int a2, int a3, int a4, int a5, int a6)
-
 bool  CSchedule::SetSpecialWorkingAreaPosition(int,enum BUILDING_TYPES,int &,int &,int) {
   
   int ResourceForBuilding; // [esp+Ch] [ebp-58h]
@@ -2221,7 +2176,6 @@ bool  CSchedule::SetSpecialWorkingAreaPosition(int,enum BUILDING_TYPES,int &,int
 
 // address=[0x2f46010]
 // Decompiled from int __thiscall CSchedule::UnmarkBuildings(CSchedule *this)
-
 void  CSchedule::UnmarkBuildings(void) {
   
   _BYTE v2[16]; // [esp+4h] [ebp-34h] BYREF
@@ -2256,7 +2210,6 @@ void  CSchedule::UnmarkBuildings(void) {
 
 // address=[0x2f460d0]
 // Decompiled from CDynListEntry *__thiscall CSchedule::GetUnmarkBuildings(CDynList **this, int a2)
-
 class CProductivityControll *  CSchedule::GetUnmarkBuildings(enum BUILDING_TYPES) {
   
   char v3[16]; // [esp+4h] [ebp-3Ch] BYREF
@@ -2300,9 +2253,7 @@ class CProductivityControll *  CSchedule::GetUnmarkBuildings(enum BUILDING_TYPES
 
 
 // address=[0x2f461c0]
-// Decompiled from // public: bool __thiscall CSchedule::VerifyAllBuildingIds(void)
-char __thiscall CSchedule::VerifyAllBuildingIds(CDynList **this)
-
+// Decompiled from char __thiscall CSchedule::VerifyAllBuildingIds(CDynList **this)
 bool  CSchedule::VerifyAllBuildingIds(void) {
   
   int v1; // eax
@@ -2380,7 +2331,6 @@ bool  CSchedule::VerifyAllBuildingIds(void) {
 
 // address=[0x2f46320]
 // Decompiled from int __thiscall CSchedule::GetBuildingTypeInGroup(CSchedule *this, int a2, int a3, int a4, int a5)
-
 int  CSchedule::GetBuildingTypeInGroup(enum BUILDING_TYPES,int,int,class std::vector<struct SBuildId,class std::allocator<struct SBuildId> > &) {
   
   _BYTE v6[16]; // [esp+4h] [ebp-38h] BYREF
@@ -2426,7 +2376,6 @@ int  CSchedule::GetBuildingTypeInGroup(enum BUILDING_TYPES,int,int,class std::ve
 
 // address=[0x2f46450]
 // Decompiled from int __thiscall CSchedule::GetNearestInputBuildings(CDynList **this, int a2, int a3, int a4, int a5)
-
 int  CSchedule::GetNearestInputBuildings(struct SBuildId,int,struct SBuildId *) {
   
   int InputTypePile; // eax
@@ -2530,7 +2479,6 @@ int  CSchedule::GetNearestInputBuildings(struct SBuildId,int,struct SBuildId *) 
 
 // address=[0x2f46870]
 // Decompiled from bool __thiscall CSchedule::GetNearestBuildingType(CSchedule *this, int a2, int a3, int a4, _DWORD *a5)
-
 bool  CSchedule::GetNearestBuildingType(enum BUILDING_TYPES,int,int,int &) {
   
   int v5; // eax
@@ -2591,7 +2539,6 @@ bool  CSchedule::GetNearestBuildingType(enum BUILDING_TYPES,int,int,int &) {
 
 // address=[0x2f469f0]
 // Decompiled from int __thiscall CSchedule::CollectWorkingArea(CReserveDatabase **this, int a2, int a3)
-
 int  CSchedule::CollectWorkingArea(int,class std::vector<int,class std::allocator<int> > &) {
   
   int v3; // eax
@@ -2652,7 +2599,6 @@ int  CSchedule::CollectWorkingArea(int,class std::vector<int,class std::allocato
 
 // address=[0x2f46b80]
 // Decompiled from int __stdcall CSchedule::GetResourceConsumption(int a1, int a2, int a3, int a4, int a5, int a6)
-
 int  CSchedule::GetResourceConsumption(int,int,class std::vector<int,class std::allocator<int> >) {
   
   int v7; // [esp+10h] [ebp-18h]
@@ -2681,7 +2627,6 @@ int  CSchedule::GetResourceConsumption(int,int,class std::vector<int,class std::
 
 // address=[0x2f46c50]
 // Decompiled from bool __thiscall CSchedule::ResourceNearAtWork(CSchedule *this, int a2, int a3, int a4, int a5, int a6)
-
 bool  CSchedule::ResourceNearAtWork(enum BUILDING_TYPES,enum BUILDING_TYPES,int,int,int) {
   
   struct IScheduleEntry *SpecialTask; // eax
@@ -2698,9 +2643,7 @@ bool  CSchedule::ResourceNearAtWork(enum BUILDING_TYPES,enum BUILDING_TYPES,int,
 
 
 // address=[0x2f46cd0]
-// Decompiled from // public: int __thiscall CSchedule::GetBuildingTypeAroundAt(enum BUILDING_TYPES,int,int,int,class std::vector<struct SBuildId,class std::allocator<struct SBuildId> > &)
-int __thiscall CSchedule::GetBuildingTypeAroundAt(CDynList **this, int a2, int a3, int a4, int a5, int a6)
-
+// Decompiled from int __thiscall CSchedule::GetBuildingTypeAroundAt(CDynList **this, int a2, int a3, int a4, int a5, int a6)
 int  CSchedule::GetBuildingTypeAroundAt(enum BUILDING_TYPES,int,int,int,class std::vector<struct SBuildId,class std::allocator<struct SBuildId> > &) {
   
   int v7; // [esp+0h] [ebp-BCh] BYREF
@@ -2737,7 +2680,6 @@ int  CSchedule::GetBuildingTypeAroundAt(enum BUILDING_TYPES,int,int,int,class st
 
 // address=[0x2f46e10]
 // Decompiled from int __thiscall CSchedule::ChangeBuildingLevel(CDynList **this, int a2, int a3, int a4)
-
 void  CSchedule::ChangeBuildingLevel(int,int,enum T_BUILD_LEVEL) {
   
   int result; // eax
@@ -2762,7 +2704,6 @@ void  CSchedule::ChangeBuildingLevel(int,int,enum T_BUILD_LEVEL) {
 
 // address=[0x2f46eb0]
 // Decompiled from bool __thiscall CSchedule::GetWeakBuilding(CSchedule *this, int a2, int a3, int a4, _DWORD *a5)
-
 bool  CSchedule::GetWeakBuilding(enum BUILDING_TYPES,class std::vector<struct SMakroEntry,class std::allocator<struct SMakroEntry> > &,enum PILE_TYPES,int &) {
   
   int InputTypePile; // eax
@@ -3041,7 +2982,6 @@ bool  CSchedule::GetWeakBuilding(enum BUILDING_TYPES,class std::vector<struct SM
 
 // address=[0x2f47a20]
 // Decompiled from int __stdcall CSchedule::GetMakroIndex(int a1, int a2)
-
 int  CSchedule::GetMakroIndex(class CProductionMakroData *,enum BUILDING_TYPES) {
   
   int i; // [esp+4h] [ebp-4h]
@@ -3057,7 +2997,6 @@ int  CSchedule::GetMakroIndex(class CProductionMakroData *,enum BUILDING_TYPES) 
 
 // address=[0x2f47a70]
 // Decompiled from int __thiscall CSchedule::GetWeakIndex(int this, int a2, int a3, int a4, _DWORD *a5)
-
 int  CSchedule::GetWeakIndex(class CProductionMakroData *,int,enum PILE_TYPES,int &) {
   
   int v8; // [esp+18h] [ebp-1Ch]
@@ -3126,7 +3065,6 @@ int  CSchedule::GetWeakIndex(class CProductionMakroData *,int,enum PILE_TYPES,in
 
 // address=[0x2f47d70]
 // Decompiled from int __thiscall CSchedule::GetPotentialGoodCapacity(_DWORD *this, int a2)
-
 int  CSchedule::GetPotentialGoodCapacity(enum PILE_TYPES) {
   
   char v3[16]; // [esp+4h] [ebp-2Ch] BYREF
@@ -3151,7 +3089,6 @@ int  CSchedule::GetPotentialGoodCapacity(enum PILE_TYPES) {
 
 // address=[0x2f47e10]
 // Decompiled from int __stdcall CSchedule::CopyMakroBuildings(void *a1, int a2, int a3)
-
 void  CSchedule::CopyMakroBuildings(struct SBuildId *,struct SBuildId *,int) {
   
   int result; // eax
@@ -3173,9 +3110,7 @@ void  CSchedule::CopyMakroBuildings(struct SBuildId *,struct SBuildId *,int) {
 
 
 // address=[0x2f47e90]
-// Decompiled from // public: bool __thiscall CSchedule::BuildingInWeakArray(struct SBuildId *,struct SBuildId *)
-char __stdcall CSchedule::BuildingInWeakArray(int a1, _DWORD *a2)
-
+// Decompiled from char __stdcall CSchedule::BuildingInWeakArray(int a1, _DWORD *a2)
 bool  CSchedule::BuildingInWeakArray(struct SBuildId *,struct SBuildId *) {
   
   int i; // [esp+4h] [ebp-4h]
@@ -3190,9 +3125,7 @@ bool  CSchedule::BuildingInWeakArray(struct SBuildId *,struct SBuildId *) {
 
 
 // address=[0x2f47ef0]
-// Decompiled from // public: bool __thiscall CSchedule::CalcOptPositionForNewBuilding(struct SBuildId *,int &,int &)
-char __stdcall CSchedule::CalcOptPositionForNewBuilding(int a1, _DWORD *a2, _DWORD *a3)
-
+// Decompiled from char __stdcall CSchedule::CalcOptPositionForNewBuilding(int a1, _DWORD *a2, _DWORD *a3)
 bool  CSchedule::CalcOptPositionForNewBuilding(struct SBuildId *,int &,int &) {
   
   *a2 = 500;
@@ -3203,7 +3136,6 @@ bool  CSchedule::CalcOptPositionForNewBuilding(struct SBuildId *,int &,int &) {
 
 // address=[0x2f47f20]
 // Decompiled from int __thiscall CSchedule::GetGoodPositionForBuilding(CSchedule *this, int a2)
-
 int  CSchedule::GetGoodPositionForBuilding(enum BUILDING_TYPES) {
   
   _DWORD *v2; // eax
@@ -3318,7 +3250,6 @@ int  CSchedule::GetGoodPositionForBuilding(enum BUILDING_TYPES) {
 
 // address=[0x2f48370]
 // Decompiled from int __thiscall CSchedule::GetResidenceBuildingLevel(CSchedule *this)
-
 enum BUILDING_TYPES  CSchedule::GetResidenceBuildingLevel(void) {
   
   struct IAIEcoManager *EcoSector; // [esp+0h] [ebp-8h]
@@ -3334,7 +3265,6 @@ enum BUILDING_TYPES  CSchedule::GetResidenceBuildingLevel(void) {
 
 // address=[0x2f483d0]
 // Decompiled from char __thiscall CSchedule::DestroySeveralBuildings(CSchedule *this)
-
 bool  CSchedule::DestroySeveralBuildings(void) {
   
   _DWORD *v1; // eax
@@ -3441,7 +3371,6 @@ LABEL_10:
 
 // address=[0x2f48640]
 // Decompiled from char __stdcall CSchedule::SharedPileType(int a1)
-
 bool  CSchedule::SharedPileType(enum PILE_TYPES) {
   
   char result; // al
@@ -3468,7 +3397,6 @@ bool  CSchedule::SharedPileType(enum PILE_TYPES) {
 
 // address=[0x2f486b0]
 // Decompiled from int __thiscall CSchedule::GetAllBuildingOfType(CSchedule *this, int a2, _DWORD *a3)
-
 int  CSchedule::GetAllBuildingOfType(enum BUILDING_TYPES,struct SBuildId *) {
   
   unsigned int v3; // eax
@@ -3529,7 +3457,6 @@ int  CSchedule::GetAllBuildingOfType(enum BUILDING_TYPES,struct SBuildId *) {
 
 // address=[0x2f48850]
 // Decompiled from int __thiscall CSchedule::GetAllBuildingOfTypeInProdControl(CDynList **this, int a2, int a3)
-
 int  CSchedule::GetAllBuildingOfTypeInProdControl(enum BUILDING_TYPES,struct SBuildId *) {
   
   char v4[16]; // [esp+4h] [ebp-34h] BYREF
@@ -3573,9 +3500,7 @@ int  CSchedule::GetAllBuildingOfTypeInProdControl(enum BUILDING_TYPES,struct SBu
 
 
 // address=[0x2f48970]
-// Decompiled from // public: int __thiscall CSchedule::GetPlannedBuildingId(int,int)
-int __thiscall CSchedule::GetPlannedBuildingId(CReserveDatabase **this, int a2, int a3)
-
+// Decompiled from int __thiscall CSchedule::GetPlannedBuildingId(CReserveDatabase **this, int a2, int a3)
 int  CSchedule::GetPlannedBuildingId(int,int) {
   
   int v3; // eax
@@ -3608,7 +3533,6 @@ int  CSchedule::GetPlannedBuildingId(int,int) {
 
 // address=[0x2f48a10]
 // Decompiled from int __thiscall CSchedule::GetNumberOfBuildingType(CDynList **this, int a2)
-
 int  CSchedule::GetNumberOfBuildingType(enum BUILDING_TYPES) {
   
   int v3; // [esp+8h] [ebp-Ch]
@@ -3626,7 +3550,6 @@ int  CSchedule::GetNumberOfBuildingType(enum BUILDING_TYPES) {
 
 // address=[0x2f48a90]
 // Decompiled from int __thiscall CSchedule::GetNumberOfBuildingTypeAtBuilding(CDynList **this, int a2, int a3, int a4)
-
 int  CSchedule::GetNumberOfBuildingTypeAtBuilding(enum BUILDING_TYPES,int,int) {
   
   struct IAIEcoManager *EcoSector; // eax
@@ -3653,7 +3576,6 @@ int  CSchedule::GetNumberOfBuildingTypeAtBuilding(enum BUILDING_TYPES,int,int) {
 
 // address=[0x2f48b70]
 // Decompiled from int __thiscall CSchedule::GetNumberOfBuildingTypeAtWork(CDynList **this, int a2)
-
 int  CSchedule::GetNumberOfBuildingTypeAtWork(enum BUILDING_TYPES) {
   
   int v3; // [esp+4h] [ebp-10h]
@@ -3671,7 +3593,6 @@ int  CSchedule::GetNumberOfBuildingTypeAtWork(enum BUILDING_TYPES) {
 
 // address=[0x2f48c00]
 // Decompiled from void __thiscall CSchedule::GetPlannedBuildingPosition(CDynList **this, int a2, int *a3, int *a4)
-
 void  CSchedule::GetPlannedBuildingPosition(int,int &,int &) {
   
   _DWORD *v5; // [esp+8h] [ebp-8h]
@@ -3690,9 +3611,7 @@ void  CSchedule::GetPlannedBuildingPosition(int,int &,int &) {
 
 
 // address=[0x2f48c90]
-// Decompiled from // public: int __thiscall CSchedule::CollectPlannedBuildingPlaces(class CReserveEntry *)
-int __thiscall CSchedule::CollectPlannedBuildingPlaces(CDynList **this, struct CReserveEntry *a2)
-
+// Decompiled from int __thiscall CSchedule::CollectPlannedBuildingPlaces(CDynList **this, struct CReserveEntry *a2)
 int  CSchedule::CollectPlannedBuildingPlaces(class CReserveEntry *) {
   
   int v4; // [esp+8h] [ebp-14h]
@@ -3721,7 +3640,6 @@ int  CSchedule::CollectPlannedBuildingPlaces(class CReserveEntry *) {
 
 // address=[0x2f48da0]
 // Decompiled from int __thiscall CSchedule::GetNextPositionInside(CSchedule *this, int a2, int a3)
-
 int  CSchedule::GetNextPositionInside(int,int) {
   
   unsigned int v3; // eax
@@ -3769,17 +3687,7 @@ int  CSchedule::GetNextPositionInside(int,int) {
 
 
 // address=[0x2f48ec0]
-// Decompiled from char __thiscall CSchedule::BestAndPossiblePlaceOf8Grid(
-        CSchedule *this,
-        int a2,
-        _DWORD *a3,
-        int a4,
-        int *a5,
-        int *a6,
-        int a7,
-        int a8,
-        unsigned __int8 a9)
-
+// Decompiled from char __thiscall CSchedule::BestAndPossiblePlaceOf8Grid(  CSchedule *this,  int a2,  _DWORD *a3,  int a4,  int *a5,  int *a6,  int a7,  int a8,  unsigned __int8 a9)
 bool  CSchedule::BestAndPossiblePlaceOf8Grid(enum BUILDING_TYPES,struct SBUILDINFODATA *,class CReserveEntry *,int &,int &,int,int,bool) {
   
   struct IAIEcoManager *v9; // eax
@@ -3847,7 +3755,6 @@ bool  CSchedule::BestAndPossiblePlaceOf8Grid(enum BUILDING_TYPES,struct SBUILDIN
 
 // address=[0x2f49070]
 // Decompiled from int __thiscall CSchedule::GeneralValuation(CDynList **this, int a2, int a3, int a4, int a5, int a6, char a7, int a8)
-
 int  CSchedule::GeneralValuation(enum BUILDING_TYPES,int,int,int,int,bool,int) {
   
   int SumResourceAmount; // eax
@@ -4033,9 +3940,7 @@ int  CSchedule::GeneralValuation(enum BUILDING_TYPES,int,int,int,int,bool,int) {
 
 
 // address=[0x2f495f0]
-// Decompiled from // public: int __thiscall CSchedule::PreferBuildingPlaces(enum BUILDING_TYPES,class CReserveEntry *)
-int __stdcall CSchedule::PreferBuildingPlaces(int a1, int a2)
-
+// Decompiled from int __stdcall CSchedule::PreferBuildingPlaces(int a1, int a2)
 int  CSchedule::PreferBuildingPlaces(enum BUILDING_TYPES,class CReserveEntry *) {
   
   return 0;
@@ -4044,7 +3949,6 @@ int  CSchedule::PreferBuildingPlaces(enum BUILDING_TYPES,class CReserveEntry *) 
 
 // address=[0x2f49610]
 // Decompiled from char __thiscall CSchedule::ReadMessages(CDynList **this)
-
 bool  CSchedule::ReadMessages(void) {
   
   int v2; // eax
@@ -4285,7 +4189,6 @@ bool  CSchedule::ReadMessages(void) {
 
 // address=[0x2f4c780]
 // Decompiled from int __thiscall CSchedule::CalcDistance(CReserveDatabase **this, int a2, int a3)
-
 int  CSchedule::CalcDistance(int,int) {
   
   int v4; // [esp+0h] [ebp-28h]
@@ -4316,7 +4219,6 @@ int  CSchedule::CalcDistance(int,int) {
 
 // address=[0x2f4c850]
 // Decompiled from int __thiscall CSchedule::CalcDistance(CSchedule *this, int a2, int a3, int a4, int a5)
-
 int  CSchedule::CalcDistance(int,int,int,int) {
   
   int v8; // [esp+10h] [ebp-8h]
@@ -4335,7 +4237,6 @@ int  CSchedule::CalcDistance(int,int,int,int) {
 
 // address=[0x2f4c8f0]
 // Decompiled from int __thiscall CSchedule::GetEcoSector(CSchedule *this)
-
 class IAIEcoManager *  CSchedule::GetEcoSector(void) {
   
   return *(_DWORD *)(*((_DWORD *)this + 9) + 24);

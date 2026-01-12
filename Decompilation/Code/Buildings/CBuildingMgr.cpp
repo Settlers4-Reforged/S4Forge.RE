@@ -4,7 +4,6 @@
 
 // address=[0x12fcb90]
 // Decompiled from unsigned __int8 *__stdcall CBuildingMgr::operator[](int a1)
-
 class CBuilding &  CBuildingMgr::operator[](int) {
   
   unsigned __int8 *v2; // [esp+4h] [ebp-4h]
@@ -34,7 +33,6 @@ class CBuilding &  CBuildingMgr::operator[](int) {
 
 // address=[0x130e930]
 // Decompiled from unsigned __int8 *__thiscall CBuildingMgr::Building(CBuildingMgr *this, int a2)
-
 class CBuilding &  CBuildingMgr::Building(int) {
   
   unsigned __int8 *v3; // [esp+4h] [ebp-4h]
@@ -64,7 +62,6 @@ class CBuilding &  CBuildingMgr::Building(int) {
 
 // address=[0x130eba0]
 // Decompiled from unsigned __int8 *__thiscall CBuildingMgr::GetBuildingPtr(CBuildingMgr *this, int a2)
-
 class CBuilding *  CBuildingMgr::GetBuildingPtr(int) {
   
   unsigned __int8 *v4; // [esp+Ch] [ebp-4h]
@@ -79,7 +76,6 @@ class CBuilding *  CBuildingMgr::GetBuildingPtr(int) {
 
 // address=[0x13361b0]
 // Decompiled from unsigned int __thiscall CBuildingMgr::GetTimeSinceHallDestruction(CBuildingMgr *this, int a2)
-
 int  CBuildingMgr::GetTimeSinceHallDestruction(int) {
   
   return (CStateGame::GetTickCounter(g_pGame) - *((_DWORD *)this + a2 + 72884)) / 0xEu;
@@ -88,7 +84,6 @@ int  CBuildingMgr::GetTimeSinceHallDestruction(int) {
 
 // address=[0x1336400]
 // Decompiled from bool __thiscall CBuildingMgr::PlayerUsesManakopterHalls(CBuildingMgr *this, int a2)
-
 bool  CBuildingMgr::PlayerUsesManakopterHalls(int) {
   
   return *((_DWORD *)this + a2 + 72875) > 0;
@@ -97,7 +92,6 @@ bool  CBuildingMgr::PlayerUsesManakopterHalls(int) {
 
 // address=[0x14eb500]
 // Decompiled from bool __cdecl CBuildingMgr::IsMilitaryBuildingEx(int a1)
-
 static bool __cdecl CBuildingMgr::IsMilitaryBuildingEx(int) {
   
   return a1 == 46 || a1 == 47 || a1 == 48 || a1 == 50 || a1 == 51;
@@ -106,7 +100,6 @@ static bool __cdecl CBuildingMgr::IsMilitaryBuildingEx(int) {
 
 // address=[0x14f42d0]
 // Decompiled from CBuildingMgr *__thiscall CBuildingMgr::CBuildingMgr(CBuildingMgr *this)
-
  CBuildingMgr::CBuildingMgr(void) {
   
   MemoryAllocator::MemoryAllocator(this, 0x64u, 0x20u, 0);
@@ -119,7 +112,6 @@ static bool __cdecl CBuildingMgr::IsMilitaryBuildingEx(int) {
 
 // address=[0x14f4340]
 // Decompiled from void __thiscall CBuildingMgr::~CBuildingMgr(CBuildingMgr *this)
-
  CBuildingMgr::~CBuildingMgr(void) {
   
   MemoryAllocator::~MemoryAllocator(this);
@@ -128,7 +120,6 @@ static bool __cdecl CBuildingMgr::IsMilitaryBuildingEx(int) {
 
 // address=[0x14f4360]
 // Decompiled from void *__thiscall CBuildingMgr::Clear(CBuildingMgr *this)
-
 void  CBuildingMgr::Clear(void) {
   
   *((_DWORD *)this + 6) = 0;
@@ -146,7 +137,6 @@ void  CBuildingMgr::Clear(void) {
 
 // address=[0x14f4450]
 // Decompiled from void __thiscall CBuildingMgr::LoadInfo(CBuildingMgr *this)
-
 void  CBuildingMgr::LoadInfo(void) {
   
   CBuildingInfoMgr::LoadInfo((CBuildingInfoMgr *)&g_cBuildingInfoMgr, 0);
@@ -155,7 +145,6 @@ void  CBuildingMgr::LoadInfo(void) {
 
 // address=[0x14f4470]
 // Decompiled from int __thiscall CBuildingMgr::LoadBuildingData(CBuildingMgr *this, struct S4::CMapFile *a2, unsigned __int16 a3)
-
 void  CBuildingMgr::LoadBuildingData(class S4::CMapFile &,int) {
   
   int v3; // eax
@@ -225,7 +214,6 @@ void  CBuildingMgr::LoadBuildingData(class S4::CMapFile &,int) {
 
 // address=[0x14f4630]
 // Decompiled from int __thiscall CBuildingMgr::AddBuilding(CBuildingMgr *this, int a2, int a3, int a4, int a5, bool a6)
-
 int  CBuildingMgr::AddBuilding(int,int,int,int,bool) {
   
   int v6; // eax
@@ -361,15 +349,7 @@ int  CBuildingMgr::AddBuilding(int,int,int,int,bool) {
 
 
 // address=[0x14f4990]
-// Decompiled from int __thiscall CBuildingMgr::SearchSpaceForBuilding(
-        CBuildingMgr *this,
-        int a2,
-        int a3,
-        int a4,
-        int a5,
-        bool a6,
-        int a7)
-
+// Decompiled from int __thiscall CBuildingMgr::SearchSpaceForBuilding(  CBuildingMgr *this,  int a2,  int a3,  int a4,  int a5,  bool a6,  int a7)
 int  CBuildingMgr::SearchSpaceForBuilding(int,int,int,int,bool,int) {
   
   int v8; // [esp+4h] [ebp-20h]
@@ -435,7 +415,6 @@ int  CBuildingMgr::SearchSpaceForBuilding(int,int,int,int,bool,int) {
 
 // address=[0x14f4b50]
 // Decompiled from void __thiscall CBuildingMgr::DestroyBuilding(CBuildingMgr *this, int a2, int a3, int a4)
-
 void  CBuildingMgr::DestroyBuilding(int,int,int) {
   
   int TickCounter; // esi
@@ -606,7 +585,6 @@ void  CBuildingMgr::DestroyBuilding(int,int,int) {
 
 // address=[0x14f4f60]
 // Decompiled from int __thiscall CBuildingMgr::GetFirstBuildingId(CBuildingMgr *this, int a2, int a3)
-
 int  CBuildingMgr::GetFirstBuildingId(int,int)const {
   
   if ( (a2 <= 0 || a2 >= 9)
@@ -629,7 +607,6 @@ int  CBuildingMgr::GetFirstBuildingId(int,int)const {
 
 // address=[0x14f4fe0]
 // Decompiled from int __thiscall CBuildingMgr::GetNextBuilding(CBuildingMgr *this, int a2, int a3)
-
 class CBuilding *  CBuildingMgr::GetNextBuilding(int,int)const {
   
   int v5; // [esp+4h] [ebp-Ch]
@@ -668,7 +645,6 @@ class CBuilding *  CBuildingMgr::GetNextBuilding(int,int)const {
 
 // address=[0x14f50e0]
 // Decompiled from int __thiscall CBuildingMgr::GetBuilding(CBuildingMgr *this, int a2, int a3)
-
 class CBuilding *  CBuildingMgr::GetBuilding(int,int)const {
   
   _DWORD *v5; // [esp+4h] [ebp-4h]
@@ -699,7 +675,6 @@ class CBuilding *  CBuildingMgr::GetBuilding(int,int)const {
 
 // address=[0x14f51a0]
 // Decompiled from int __thiscall CBuildingMgr::GetNumberOfBuildings(CBuildingMgr *this, int a2, int a3, unsigned int a4)
-
 int  CBuildingMgr::GetNumberOfBuildings(int,int,int)const {
   
   if ( (a2 <= 0 || a2 >= 9)
@@ -740,7 +715,6 @@ int  CBuildingMgr::GetNumberOfBuildings(int,int,int)const {
 
 // address=[0x14f52f0]
 // Decompiled from int __thiscall CBuildingMgr::ChangeNumberOfBuildings(CBuildingMgr *this, int a2, int a3, unsigned int a4, int a5)
-
 void  CBuildingMgr::ChangeNumberOfBuildings(int,int,int,int) {
   
   int result; // eax
@@ -793,7 +767,6 @@ void  CBuildingMgr::ChangeNumberOfBuildings(int,int,int,int) {
 
 // address=[0x14f5460]
 // Decompiled from char __thiscall CBuildingMgr::CheckNumberOfOccupiedMilitaryBuildings(CBuildingMgr *this, int a2, int a3)
-
 bool  CBuildingMgr::CheckNumberOfOccupiedMilitaryBuildings(int,int) {
   
   unsigned __int8 *v4; // [esp+4h] [ebp-18h]
@@ -835,7 +808,6 @@ bool  CBuildingMgr::CheckNumberOfOccupiedMilitaryBuildings(int,int) {
 
 // address=[0x14f5580]
 // Decompiled from bool __cdecl CBuildingMgr::IsMine(int a1)
-
 static bool __cdecl CBuildingMgr::IsMine(int) {
   
   if ( (a1 <= 0 || a1 >= 83)
@@ -853,7 +825,6 @@ static bool __cdecl CBuildingMgr::IsMine(int) {
 
 // address=[0x14f55e0]
 // Decompiled from bool __cdecl CBuildingMgr::IsMilitary(int a1)
-
 static bool __cdecl CBuildingMgr::IsMilitary(int) {
   
   int BuildingInfo; // [esp+4h] [ebp-4h]
@@ -874,7 +845,6 @@ static bool __cdecl CBuildingMgr::IsMilitary(int) {
 
 // address=[0x14f5660]
 // Decompiled from bool __cdecl CBuildingMgr::IsPortEx(int a1)
-
 static bool __cdecl CBuildingMgr::IsPortEx(int) {
   
   return a1 >= 52 && a1 <= 57 || a1 >= 78 && a1 <= 79;
@@ -883,7 +853,6 @@ static bool __cdecl CBuildingMgr::IsPortEx(int) {
 
 // address=[0x14f56a0]
 // Decompiled from bool __cdecl CBuildingMgr::IsShipyardEx(int a1)
-
 static bool __cdecl CBuildingMgr::IsShipyardEx(int) {
   
   return a1 >= 58 && a1 <= 63 || a1 >= 76 && a1 <= 77;
@@ -892,7 +861,6 @@ static bool __cdecl CBuildingMgr::IsShipyardEx(int) {
 
 // address=[0x14f56e0]
 // Decompiled from int __thiscall CBuildingMgr::CheckForBuild(CBuildingMgr *this, int a2, int a3, int a4, int a5, int a6)
-
 int  CBuildingMgr::CheckForBuild(int,int,int,int,int) {
   
   int result; // eax
@@ -1253,7 +1221,6 @@ LABEL_71:
 
 // address=[0x14f6050]
 // Decompiled from int __thiscall CBuildingMgr::CheckForBuildInWater(CBuildingMgr *this, int a2, int a3, int a4, int a5)
-
 int  CBuildingMgr::CheckForBuildInWater(int,int,int,int) {
   
   dword_40E3DD4 = 0;
@@ -1271,7 +1238,6 @@ int  CBuildingMgr::CheckForBuildInWater(int,int,int,int) {
 
 // address=[0x14f60b0]
 // Decompiled from BOOL __thiscall CBuildingMgr::CheckForBuildDarkTribe(CBuildingMgr *this, int a2, int a3, int a4, int a5, int a6)
-
 int  CBuildingMgr::CheckForBuildDarkTribe(int,int,int,int,int) {
   
   int v6; // ecx
@@ -1527,7 +1493,6 @@ int  CBuildingMgr::CheckForBuildDarkTribe(int,int,int,int,int) {
 
 // address=[0x14f67f0]
 // Decompiled from _DWORD *__thiscall CBuildingMgr::ShowWorkingArea(CBuildingMgr *this, int a2)
-
 void  CBuildingMgr::ShowWorkingArea(int)const {
   
   int v2; // eax
@@ -1603,7 +1568,6 @@ void  CBuildingMgr::ShowWorkingArea(int)const {
 
 // address=[0x14f69b0]
 // Decompiled from char __thiscall CBuildingMgr::IsGoodWorkingAreaCenter(CBuildingMgr *this, int a2, int *a3, int *a4)
-
 bool  CBuildingMgr::IsGoodWorkingAreaCenter(int,int &,int &)const {
   
   int v4; // eax
@@ -1646,7 +1610,6 @@ bool  CBuildingMgr::IsGoodWorkingAreaCenter(int,int &,int &)const {
 
 // address=[0x14f6ad0]
 // Decompiled from _DWORD *__cdecl CBuildingMgr::FillBuildingAmount(void **a1, char a2, char a3)
-
 static void __cdecl CBuildingMgr::FillBuildingAmount(class CInfoExchange *,bool,bool) {
   
   int v4; // [esp+8h] [ebp-5Ch]
@@ -1750,7 +1713,6 @@ static void __cdecl CBuildingMgr::FillBuildingAmount(class CInfoExchange *,bool,
 
 // address=[0x14f6d90]
 // Decompiled from void __cdecl CBuildingMgr::FillAddSoldierSideBar(struct CInfoExchange *a1, bool a2, int a3)
-
 static void __cdecl CBuildingMgr::FillAddSoldierSideBar(class CInfoExchange *,bool,int) {
   
   CBarrackRole *v3; // [esp+0h] [ebp-Ch]
@@ -1768,7 +1730,6 @@ static void __cdecl CBuildingMgr::FillAddSoldierSideBar(class CInfoExchange *,bo
 
 // address=[0x14f6e20]
 // Decompiled from void __cdecl CBuildingMgr::FillToolSideBar(struct CInfoExchange *a1, bool a2, int a3)
-
 static void __cdecl CBuildingMgr::FillToolSideBar(class CInfoExchange *,bool,int) {
   
   CProductionBuildingRole *v3; // [esp+0h] [ebp-Ch]
@@ -1786,7 +1747,6 @@ static void __cdecl CBuildingMgr::FillToolSideBar(class CInfoExchange *,bool,int
 
 // address=[0x14f6eb0]
 // Decompiled from int __cdecl CBuildingMgr::FillWeaponSideBar(int a1, char a2, int a3)
-
 static void __cdecl CBuildingMgr::FillWeaponSideBar(class CInfoExchange *,bool,int) {
   
   _DWORD *v4; // [esp+8h] [ebp-4h]
@@ -1803,7 +1763,6 @@ static void __cdecl CBuildingMgr::FillWeaponSideBar(class CInfoExchange *,bool,i
 
 // address=[0x14f6f40]
 // Decompiled from void __cdecl CBuildingMgr::FillGoodsOutSideBar(struct CInfoExchange *a1, bool a2, int a3)
-
 static void __cdecl CBuildingMgr::FillGoodsOutSideBar(class CInfoExchange *,bool,int) {
   
   CTradingBuildingRole *v3; // [esp+0h] [ebp-Ch]
@@ -1821,7 +1780,6 @@ static void __cdecl CBuildingMgr::FillGoodsOutSideBar(class CInfoExchange *,bool
 
 // address=[0x14f6fd0]
 // Decompiled from void __cdecl CBuildingMgr::FillTradeSideBar(struct CInfoExchange *a1, bool a2, int a3)
-
 static void __cdecl CBuildingMgr::FillTradeSideBar(class CInfoExchange *,bool,int) {
   
   CTradingBuildingRole *v3; // [esp+0h] [ebp-Ch]
@@ -1839,7 +1797,6 @@ static void __cdecl CBuildingMgr::FillTradeSideBar(class CInfoExchange *,bool,in
 
 // address=[0x14f7060]
 // Decompiled from void __cdecl CBuildingMgr::FillStorageSideBar(struct CInfoExchange *a1, bool a2, int a3)
-
 static void __cdecl CBuildingMgr::FillStorageSideBar(class CInfoExchange *,bool,int) {
   
   CStorageBuildingRole *v3; // [esp+0h] [ebp-Ch]
@@ -1857,7 +1814,6 @@ static void __cdecl CBuildingMgr::FillStorageSideBar(class CInfoExchange *,bool,
 
 // address=[0x14f70f0]
 // Decompiled from _DWORD *__cdecl CBuildingMgr::FillEyeCatcherSideBar(struct CInfoExchange *a1, bool a2)
-
 static void __cdecl CBuildingMgr::FillEyeCatcherSideBar(class CInfoExchange *,bool,int) {
   
   int LocalPlayerId; // eax
@@ -1914,7 +1870,6 @@ static void __cdecl CBuildingMgr::FillEyeCatcherSideBar(class CInfoExchange *,bo
 
 // address=[0x14f72c0]
 // Decompiled from void __cdecl CBuildingMgr::FillAddVehicleSideBar(struct CInfoExchange *a1, bool a2, int a3)
-
 static void __cdecl CBuildingMgr::FillAddVehicleSideBar(class CInfoExchange *,bool,int) {
   
   CWorkshopBuildingRole *v3; // [esp+4h] [ebp-8h]
@@ -1932,7 +1887,6 @@ static void __cdecl CBuildingMgr::FillAddVehicleSideBar(class CInfoExchange *,bo
 
 // address=[0x14f7350]
 // Decompiled from void __thiscall CBuildingMgr::Store(CBuildingMgr *this, struct S4::CMapFile *a2)
-
 void  CBuildingMgr::Store(class S4::CMapFile &) {
   
   std::strstreambuf *v2; // eax
@@ -2055,7 +2009,6 @@ void  CBuildingMgr::Store(class S4::CMapFile &) {
 
 // address=[0x14f7890]
 // Decompiled from void __thiscall CBuildingMgr::Load(CBuildingMgr *this, struct S4::CMapFile *a2)
-
 void  CBuildingMgr::Load(class S4::CMapFile &) {
   
   int v2; // [esp+0h] [ebp-118h]
@@ -2171,7 +2124,6 @@ void  CBuildingMgr::Load(class S4::CMapFile &) {
 
 // address=[0x14f7d90]
 // Decompiled from void __thiscall CBuildingMgr::ChangeOwnerIdOfBuilding(CBuildingMgr *this, int a2, int a3)
-
 void  CBuildingMgr::ChangeOwnerIdOfBuilding(int,int) {
   
   int v3; // [esp+0h] [ebp-10h]
@@ -2210,14 +2162,7 @@ void  CBuildingMgr::ChangeOwnerIdOfBuilding(int,int) {
 
 
 // address=[0x14f7f00]
-// Decompiled from unsigned __int8 *__thiscall CBuildingMgr::CalculateNumberOfBuildingsInEcoSector(
-        CBuildingMgr *this,
-        int a2,
-        int a3,
-        int a4,
-        int *a5,
-        int *a6)
-
+// Decompiled from unsigned __int8 *__thiscall CBuildingMgr::CalculateNumberOfBuildingsInEcoSector(  CBuildingMgr *this,  int a2,  int a3,  int a4,  int *a5,  int *a6)
 void  CBuildingMgr::CalculateNumberOfBuildingsInEcoSector(int,int,int,int &,int &) {
   
   unsigned __int8 *result; // eax
@@ -2280,7 +2225,6 @@ void  CBuildingMgr::CalculateNumberOfBuildingsInEcoSector(int,int,int,int &,int 
 
 // address=[0x14fab40]
 // Decompiled from int __thiscall CBuildingMgr::GetValidManakopterHallPosition(CBuildingMgr *this, int a2)
-
 int  CBuildingMgr::GetValidManakopterHallPosition(int) {
   
   int i; // [esp+0h] [ebp-8h]
@@ -2299,7 +2243,6 @@ int  CBuildingMgr::GetValidManakopterHallPosition(int) {
 
 // address=[0x14fabe0]
 // Decompiled from char __thiscall CBuildingMgr::IsPositionNearMKHPosition(CBuildingMgr *this, int a2, int a3)
-
 bool  CBuildingMgr::IsPositionNearMKHPosition(int,int) {
   
   Grid *v4; // [esp+0h] [ebp-18h]
@@ -2325,7 +2268,6 @@ bool  CBuildingMgr::IsPositionNearMKHPosition(int,int) {
 
 // address=[0x15139f0]
 // Decompiled from char __thiscall CBuildingMgr::InLoadBuildingData(CBuildingMgr *this)
-
 bool  CBuildingMgr::InLoadBuildingData(void)const {
   
   return *((_BYTE *)this + 11980);
@@ -2334,7 +2276,6 @@ bool  CBuildingMgr::InLoadBuildingData(void)const {
 
 // address=[0x151fa20]
 // Decompiled from int __thiscall CBuildingMgr::EcoSectorId(CBuildingMgr *this, int a2)
-
 int  CBuildingMgr::EcoSectorId(int)const {
   
   unsigned __int8 *BuildingPtr; // eax
@@ -2346,7 +2287,6 @@ int  CBuildingMgr::EcoSectorId(int)const {
 
 // address=[0x14eb280]
 // Decompiled from unsigned int __thiscall CBuildingMgr::Alloc(unsigned int *this, unsigned int a2)
-
 void *  CBuildingMgr::Alloc(unsigned int) {
   
   return MemoryAllocator::allocate(this, a2);
@@ -2355,7 +2295,6 @@ void *  CBuildingMgr::Alloc(unsigned int) {
 
 // address=[0x14eb3c0]
 // Decompiled from void __thiscall CBuildingMgr::Dealloc(CBuildingMgr *this, void *a2)
-
 void  CBuildingMgr::Dealloc(void *) {
   
   MemoryAllocator::deallocate(this, a2);
@@ -2364,7 +2303,6 @@ void  CBuildingMgr::Dealloc(void *) {
 
 // address=[0x14f8030]
 // Decompiled from int __thiscall CBuildingMgr::CheckForBuildWater(CBuildingMgr *this, int a2, int a3, int a4, int a5, int a6)
-
 int  CBuildingMgr::CheckForBuildWater(int,int,int,int,int) {
   
   int v7; // ecx
@@ -2676,7 +2614,6 @@ LABEL_50:
 
 // address=[0x14f8850]
 // Decompiled from CBuildingSiteRole *__cdecl CBuildingMgr::CreateBuildingRole(int a1, int a2, bool a3)
-
 static class IBuildingRole * __cdecl CBuildingMgr::CreateBuildingRole(int,int,bool) {
   
   CBuildingSiteRole *result; // eax
@@ -2941,7 +2878,6 @@ static class IBuildingRole * __cdecl CBuildingMgr::CreateBuildingRole(int,int,bo
 
 // address=[0x14f9170]
 // Decompiled from int __cdecl CBuildingMgr::LoadBuildingRole(int a1, int a2)
-
 static class IBuildingRole * __cdecl CBuildingMgr::LoadBuildingRole(std::istream &,int) {
   
   int result; // eax
@@ -3032,15 +2968,7 @@ static class IBuildingRole * __cdecl CBuildingMgr::LoadBuildingRole(std::istream
 
 
 // address=[0x14f9410]
-// Decompiled from int __thiscall CBuildingMgr::CheckForBuildCalc(
-        CBuildingMgr *this,
-        int a2,
-        int a3,
-        int a4,
-        int a5,
-        int a6,
-        unsigned int a7)
-
+// Decompiled from int __thiscall CBuildingMgr::CheckForBuildCalc(  CBuildingMgr *this,  int a2,  int a3,  int a4,  int a5,  int a6,  unsigned int a7)
 int  CBuildingMgr::CheckForBuildCalc(int,int,int,int,int,int) {
   
   int v7; // ecx
@@ -3460,7 +3388,6 @@ CBuildingMgr__CheckForBuildCalc___def_18F9EDB:
 
 // address=[0x14fa560]
 // Decompiled from void __thiscall CBuildingMgr::AddSoldierToStartTower(void *this, int a2, int a3)
-
 void  CBuildingMgr::AddSoldierToStartTower(int,int) {
   
   int v3; // eax
@@ -3554,7 +3481,6 @@ void  CBuildingMgr::AddSoldierToStartTower(int,int) {
 
 // address=[0x14fa7b0]
 // Decompiled from CBuildingMgr *__thiscall CBuildingMgr::CheckOutBuilding(CBuildingMgr *this, int a2)
-
 void  CBuildingMgr::CheckOutBuilding(int) {
   
   int v2; // eax
@@ -3596,7 +3522,6 @@ void  CBuildingMgr::CheckOutBuilding(int) {
 
 // address=[0x14fa900]
 // Decompiled from int __thiscall CBuildingMgr::AttachBuilding(CBuildingMgr *this, int a2, int a3, int a4)
-
 void  CBuildingMgr::AttachBuilding(int,int,int) {
   
   IAnimatedEntity *v4; // eax
@@ -3637,7 +3562,6 @@ void  CBuildingMgr::AttachBuilding(int,int,int) {
 
 // address=[0x14fa9f0]
 // Decompiled from void __thiscall CBuildingMgr::DetachBuilding(CBuildingMgr *this, int a2, int a3, int a4)
-
 void  CBuildingMgr::DetachBuilding(int,int,int) {
   
   int v4; // eax
@@ -3697,7 +3621,6 @@ void  CBuildingMgr::DetachBuilding(int,int,int) {
 
 // address=[0x14facb0]
 // Decompiled from bool __thiscall CBuildingMgr::IsValidManakopterHallPosition(CBuildingMgr *this, int a2, int a3)
-
 bool  CBuildingMgr::IsValidManakopterHallPosition(int,int) {
   
   int v3; // eax
@@ -3711,7 +3634,6 @@ bool  CBuildingMgr::IsValidManakopterHallPosition(int,int) {
 
 // address=[0x14fad00]
 // Decompiled from char __thiscall CBuildingMgr::AddPositionToList(CBuildingMgr *this, int a2, int a3)
-
 bool  CBuildingMgr::AddPositionToList(int,int) {
   
   if ( *((int *)this + a3 + 72875) < 0

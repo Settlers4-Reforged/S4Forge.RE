@@ -4,7 +4,6 @@
 
 // address=[0x15f91a0]
 // Decompiled from CWalkingCatapult *__thiscall CWalkingCatapult::CWalkingCatapult(CWalkingCatapult *this)
-
  CWalkingCatapult::CWalkingCatapult(void) {
   
   CWalkingBase::CWalkingBase(this, 3, 0);
@@ -16,7 +15,6 @@
 
 // address=[0x15faf70]
 // Decompiled from CWalking *__thiscall CWalkingCatapult::~CWalkingCatapult(CWalkingCatapult *this)
-
  CWalkingCatapult::~CWalkingCatapult(void) {
   
   return CWalkingBase::~CWalkingBase(this);
@@ -24,9 +22,7 @@
 
 
 // address=[0x15fb240]
-// Decompiled from // MFC 3.1-14.0 32bit
-int CWalkingCatapult::GetWalkingType()
-
+// Decompiled from int CWalkingCatapult::GetWalkingType()
 enum T_WALKING_TYPE const  CWalkingCatapult::GetWalkingType(void) {
   
   return 3;
@@ -35,7 +31,6 @@ enum T_WALKING_TYPE const  CWalkingCatapult::GetWalkingType(void) {
 
 // address=[0x15f91e0]
 // Decompiled from bool __thiscall CWalkingCatapult::IsNotBlocked(CWalkingCatapult *this, int a2)
-
 bool  CWalkingCatapult::IsNotBlocked(int) {
   
   return (unsigned int)(CWorldManager::CatapultTileId(a2) - 1) < 0xBFFF;
@@ -44,7 +39,6 @@ bool  CWalkingCatapult::IsNotBlocked(int) {
 
 // address=[0x15f9220]
 // Decompiled from bool __thiscall CWalkingCatapult::IsNotOccupied(CWalkingCatapult *this, int a2)
-
 bool  CWalkingCatapult::IsNotOccupied(int) {
   
   int v3; // [esp+4h] [ebp-4h]
@@ -68,7 +62,6 @@ bool  CWalkingCatapult::IsNotOccupied(int) {
 
 // address=[0x15f9300]
 // Decompiled from char __thiscall CWalkingCatapult::FindPathAStar64(CWalkingCatapult *this, int a2, int a3, struct CDirCache *a4)
-
 bool  CWalkingCatapult::FindPathAStar64(int,int,class CDirCache &) {
   
   int v5; // [esp+4h] [ebp-2Ch]
@@ -110,7 +103,6 @@ bool  CWalkingCatapult::FindPathAStar64(int,int,class CDirCache &) {
 
 // address=[0x15f9420]
 // Decompiled from int __thiscall CWalkingCatapult::IdleWalk(_DWORD *this, Y16X16 *a2, int a3)
-
 int  CWalkingCatapult::IdleWalk(int,int) {
   
   int v4; // [esp+0h] [ebp-64h]
@@ -232,7 +224,6 @@ int  CWalkingCatapult::IdleWalk(int,int) {
 
 // address=[0x15f9810]
 // Decompiled from int __thiscall CWalkingCatapult::SectorId(CWalkingCatapult *this, int a2)
-
 int  CWalkingCatapult::SectorId(int) {
   
   return ITiling::CatapultSectorId(a2);
@@ -241,7 +232,6 @@ int  CWalkingCatapult::SectorId(int) {
 
 // address=[0x15f9830]
 // Decompiled from int __thiscall CWalkingCatapult::TileId(CWalkingCatapult *this, int a2)
-
 int  CWalkingCatapult::TileId(int) {
   
   return ITiling::CatapultTileId(a2);

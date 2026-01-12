@@ -4,7 +4,6 @@
 
 // address=[0x13192f0]
 // Decompiled from void __thiscall CAITaskForceSquad::~CAITaskForceSquad(CAITaskForceSquad *this)
-
  CAITaskForceSquad::~CAITaskForceSquad(void) {
   
   *(_DWORD *)this = CAITaskForceSquad::_vftable_;
@@ -14,7 +13,6 @@
 
 // address=[0x132bfc0]
 // Decompiled from _DWORD *__thiscall CAITaskForceSquad::CAITaskForceSquad(_DWORD *this, int a2, int a3, int a4)
-
  CAITaskForceSquad::CAITaskForceSquad(int,enum T_AI_TASK_FORCE_TYPE,int) {
   
   CAITaskForceEx::CAITaskForceEx(this, a2, 2, a3, a4);
@@ -29,7 +27,6 @@
 
 // address=[0x132c020]
 // Decompiled from char __thiscall CAITaskForceSquad::Execute(CAITaskForceSquad *this)
-
 void  CAITaskForceSquad::Execute(void) {
   
   int Entity; // eax
@@ -160,7 +157,6 @@ LABEL_21:
 
 // address=[0x132c3c0]
 // Decompiled from char __thiscall CAITaskForceSquad::NewCommand(CAITaskForceSquad *this, unsigned int a2, int a3, int a4)
-
 bool  CAITaskForceSquad::NewCommand(int,int,int) {
   
   char result; // al
@@ -233,7 +229,6 @@ bool  CAITaskForceSquad::NewCommand(int,int,int) {
 
 // address=[0x132c580]
 // Decompiled from int __thiscall CAITaskForceSquad::AddEntity(_DWORD *this, CAIEntityInfo *a2, int a3)
-
 enum CAITaskForce::T_RESULT  CAITaskForceSquad::AddEntity(class CAIEntityInfo *,enum CAITaskForce::T_POSITION) {
   
   int v4; // [esp+4h] [ebp-10h]
@@ -268,7 +263,6 @@ enum CAITaskForce::T_RESULT  CAITaskForceSquad::AddEntity(class CAIEntityInfo *,
 
 // address=[0x132c660]
 // Decompiled from int __thiscall CAITaskForceSquad::RemoveEntity(int *this, _DWORD *a2)
-
 enum CAITaskForce::T_RESULT  CAITaskForceSquad::RemoveEntity(class CAIEntityInfo *) {
   
   int v3; // [esp+4h] [ebp-10h]
@@ -310,7 +304,6 @@ enum CAITaskForce::T_RESULT  CAITaskForceSquad::RemoveEntity(class CAIEntityInfo
 
 // address=[0x132c7f0]
 // Decompiled from CAITaskForceSquad *__thiscall CAITaskForceSquad::RemoveAllEntities(CAITaskForceSquad *this)
-
 void  CAITaskForceSquad::RemoveAllEntities(void) {
   
   CAITaskForceSquad *result; // eax
@@ -327,7 +320,6 @@ void  CAITaskForceSquad::RemoveAllEntities(void) {
 
 // address=[0x132c830]
 // Decompiled from int __thiscall CAITaskForceSquad::NumberOfEntities(int *this, int a2)
-
 int  CAITaskForceSquad::NumberOfEntities(enum T_AI_WARRIOR_TYPE)const {
   
   int result; // eax

@@ -4,7 +4,6 @@
 
 // address=[0x14d31b0]
 // Decompiled from void *__cdecl CTimeInfo::GetDateTimeString(void *a1, int a2)
-
 static std::string __cdecl CTimeInfo::GetDateTimeString(int) {
   
   __time64_t Time; // [esp+0h] [ebp-11Ch] BYREF

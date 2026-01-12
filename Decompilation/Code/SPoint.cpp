@@ -4,7 +4,6 @@
 
 // address=[0x15ddb00]
 // Decompiled from _DWORD *__thiscall SPoint::operator=(_DWORD *this, char *a2)
-
 struct SPoint &  SPoint::operator=(struct SPoint8 const &) {
   
   *this = *a2;
@@ -15,7 +14,6 @@ struct SPoint &  SPoint::operator=(struct SPoint8 const &) {
 
 // address=[0x15ddb40]
 // Decompiled from BOOL __thiscall SPoint::operator==(_DWORD *this, _DWORD *a2)
-
 bool  SPoint::operator==(struct SPoint const &)const {
   
   return this[1] == a2[1] && *this == *a2;
@@ -24,7 +22,6 @@ bool  SPoint::operator==(struct SPoint const &)const {
 
 // address=[0x15ddbb0]
 // Decompiled from int __thiscall SPoint::operator*(_DWORD *this, _DWORD *a2)
-
 int  SPoint::operator*(struct SPoint const &)const {
   
   return a2[1] * this[1] + *a2 * *this;
@@ -32,10 +29,7 @@ int  SPoint::operator*(struct SPoint const &)const {
 
 
 // address=[0x15ddce0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall SPoint::X(SPoint *this)
-
+// Decompiled from int __thiscall SPoint::X(SPoint *this)
 int  SPoint::X(void)const {
   
   return *(_DWORD *)this;
@@ -43,10 +37,7 @@ int  SPoint::X(void)const {
 
 
 // address=[0x15ddd00]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall SPoint::Y(SPoint *this)
-
+// Decompiled from int __thiscall SPoint::Y(SPoint *this)
 int  SPoint::Y(void)const {
   
   return *((_DWORD *)this + 1);
@@ -55,7 +46,6 @@ int  SPoint::Y(void)const {
 
 // address=[0x15ddd20]
 // Decompiled from _Stl_critical_section *__thiscall SPoint::Zero(_Stl_critical_section *this)
-
 struct SPoint &  SPoint::Zero(void) {
   
   *(_DWORD *)this = 0;

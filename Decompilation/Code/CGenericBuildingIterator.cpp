@@ -4,7 +4,6 @@
 
 // address=[0x1315ce0]
 // Decompiled from char __thiscall CGenericBuildingIterator::Init(CGenericBuildingIterator *this, int a2, int a3, int a4)
-
 bool  CGenericBuildingIterator::Init(int,int,int) {
   
   CBuildingIteratorBase::Init((CGenericBuildingIterator *)((char *)this + 20), 0);
@@ -27,7 +26,6 @@ bool  CGenericBuildingIterator::Init(int,int,int) {
 
 // address=[0x1315d50]
 // Decompiled from int __thiscall CGenericBuildingIterator::FirstBuilding(CGenericBuildingIterator *this)
-
 int  CGenericBuildingIterator::FirstBuilding(void) {
   
   int v2; // eax
@@ -55,7 +53,6 @@ int  CGenericBuildingIterator::FirstBuilding(void) {
 
 // address=[0x1315dd0]
 // Decompiled from int __thiscall CGenericBuildingIterator::NextBuilding(CGenericBuildingIterator *this)
-
 int  CGenericBuildingIterator::NextBuilding(void) {
   
   int v1; // eax
@@ -90,9 +87,7 @@ int  CGenericBuildingIterator::NextBuilding(void) {
 
 
 // address=[0x1315ea0]
-// Decompiled from // public: int __thiscall CGenericBuildingIterator::NextBuildingIfCurrentIsNotValid(void)
-int __thiscall CGenericBuildingIterator::NextBuildingIfCurrentIsNotValid(_DWORD *this)
-
+// Decompiled from int __thiscall CGenericBuildingIterator::NextBuildingIfCurrentIsNotValid(_DWORD *this)
 int  CGenericBuildingIterator::NextBuildingIfCurrentIsNotValid(void) {
   
   if ( CBuildingIteratorBase::BuildingValid((CBuildingIteratorBase *)(this + 5), this[6]) )
@@ -103,9 +98,7 @@ int  CGenericBuildingIterator::NextBuildingIfCurrentIsNotValid(void) {
 
 
 // address=[0x1315ee0]
-// Decompiled from // public: int __thiscall CGenericBuildingIterator::NextBuildingOrFirstIfCurrentIsEndOfList(void)
-int __thiscall CGenericBuildingIterator::NextBuildingOrFirstIfCurrentIsEndOfList(CGenericBuildingIterator *this)
-
+// Decompiled from int __thiscall CGenericBuildingIterator::NextBuildingOrFirstIfCurrentIsEndOfList(CGenericBuildingIterator *this)
 int  CGenericBuildingIterator::NextBuildingOrFirstIfCurrentIsEndOfList(void) {
   
   if ( *((_DWORD *)this + 6) )
@@ -117,7 +110,6 @@ int  CGenericBuildingIterator::NextBuildingOrFirstIfCurrentIsEndOfList(void) {
 
 // address=[0x1317190]
 // Decompiled from CGenericBuildingIterator *__thiscall CGenericBuildingIterator::CGenericBuildingIterator(CGenericBuildingIterator *this)
-
  CGenericBuildingIterator::CGenericBuildingIterator(void) {
   
   CPlayerIterator::CPlayerIterator(this);

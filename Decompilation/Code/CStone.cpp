@@ -4,7 +4,6 @@
 
 // address=[0x14020c0]
 // Decompiled from int __cdecl CStone::New(int a1)
-
 static class CPersistence * __cdecl CStone::New(std::istream &) {
   
   if ( CStone::operator new(0x48u) )
@@ -16,7 +15,6 @@ static class CPersistence * __cdecl CStone::New(std::istream &) {
 
 // address=[0x15a2750]
 // Decompiled from CStone *__thiscall CStone::CStone(CStone *this, int a2, int a3, int a4, char a5, int a6)
-
  CStone::CStone(int,int,int,int,int) {
   
   IDecoObject::IDecoObject(this, a2, a3, a4, a6, 1);
@@ -39,7 +37,6 @@ static class CPersistence * __cdecl CStone::New(std::istream &) {
 
 // address=[0x15a2810]
 // Decompiled from CStone *__thiscall CStone::CStone(CStone *this, const struct CStone *a2, int a3, int a4, int a5)
-
  CStone::CStone(class CStone const &,int,int,int) {
   
   IDecoObject::IDecoObject(this, a2, a3, a4, a5);
@@ -52,7 +49,6 @@ static class CPersistence * __cdecl CStone::New(std::istream &) {
 
 // address=[0x15a28a0]
 // Decompiled from void __thiscall CStone::~CStone(CHandleMap *this)
-
  CStone::~CStone(void) {
   
   int v1; // eax
@@ -68,9 +64,7 @@ static class CPersistence * __cdecl CStone::New(std::istream &) {
 
 
 // address=[0x15a2910]
-// Decompiled from // Microsoft VisualC 14/net runtime
-void CStone::LogicUpdate()
-
+// Decompiled from void CStone::LogicUpdate()
 void  CStone::LogicUpdate(void) {
   
   ;
@@ -79,7 +73,6 @@ void  CStone::LogicUpdate(void) {
 
 // address=[0x15a2920]
 // Decompiled from void *__thiscall sub_19A2920(int this)
-
 struct SGfxObjectInfo *  CStone::GetGfxInfos(void) {
   
   if ( !*(_BYTE *)(this + 33) )
@@ -98,7 +91,6 @@ struct SGfxObjectInfo *  CStone::GetGfxInfos(void) {
 
 // address=[0x15a2980]
 // Decompiled from int __thiscall CStone::GetGoodType(CStone *this)
-
 int  CStone::GetGoodType(void)const {
   
   return 32;
@@ -107,7 +99,6 @@ int  CStone::GetGoodType(void)const {
 
 // address=[0x15a2990]
 // Decompiled from void __thiscall CStone::Take(CStone *this, int a2)
-
 void  CStone::Take(int) {
   
   int v2; // eax
@@ -157,7 +148,6 @@ void  CStone::Take(int) {
 
 // address=[0x15a2ad0]
 // Decompiled from int __thiscall CStone::ConvertToDarkOrGreen(CStone *this, bool a2)
-
 int  CStone::ConvertToDarkOrGreen(bool) {
   
   return IEntity::Type((unsigned __int16 *)this);
@@ -166,7 +156,6 @@ int  CStone::ConvertToDarkOrGreen(bool) {
 
 // address=[0x15a2af0]
 // Decompiled from unsigned int __cdecl CStone::operator new(unsigned int a1)
-
 static void * __cdecl CStone::operator new(unsigned int) {
   
   return CDecoObjMgr::Alloc((CDecoObjMgr *)&g_cDecoObjMgr, a1);
@@ -175,7 +164,6 @@ static void * __cdecl CStone::operator new(unsigned int) {
 
 // address=[0x15a2b10]
 // Decompiled from void __cdecl CStone::operator delete(void *a1)
-
 static void __cdecl CStone::operator delete(void *) {
   
   CDecoObjMgr::Dealloc((CDecoObjMgr *)&g_cDecoObjMgr, a1);
@@ -184,7 +172,6 @@ static void __cdecl CStone::operator delete(void *) {
 
 // address=[0x15a2b50]
 // Decompiled from _DWORD *__thiscall CStone::CStone(_DWORD *this, int a2)
-
  CStone::CStone(std::istream &) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
@@ -211,7 +198,6 @@ static void __cdecl CStone::operator delete(void *) {
 
 // address=[0x15a2c00]
 // Decompiled from int __thiscall CStone::Store(void *this, struct std::ostream *a2)
-
 void  CStone::Store(std::ostream &) {
   
   int v3[2]; // [esp+0h] [ebp-8h] BYREF
@@ -225,7 +211,6 @@ void  CStone::Store(std::ostream &) {
 
 // address=[0x15a2dd0]
 // Decompiled from int __thiscall CStone::ClassID(CStone *this)
-
 unsigned long  CStone::ClassID(void)const {
   
   return CStone::m_iClassID;
@@ -233,10 +218,7 @@ unsigned long  CStone::ClassID(void)const {
 
 
 // address=[0x15a2df0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __stdcall CStone::Decrease(int a1)
-
+// Decompiled from void __stdcall CStone::Decrease(int a1)
 void  CStone::Decrease(int) {
   
   ;
@@ -244,10 +226,7 @@ void  CStone::Decrease(int) {
 
 
 // address=[0x15a2e00]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void CStone::Update()
-
+// Decompiled from void CStone::Update()
 void  CStone::Update(void) {
   
   ;

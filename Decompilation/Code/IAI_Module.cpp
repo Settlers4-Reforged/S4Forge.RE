@@ -4,7 +4,6 @@
 
 // address=[0x2f3ced0]
 // Decompiled from IAI_Module *__thiscall IAI_Module::IAI_Module(IAI_Module *this)
-
  IAI_Module::IAI_Module(void) {
   
   CDynList *v2; // [esp+Ch] [ebp-20h]
@@ -34,7 +33,6 @@
 
 // address=[0x2f3cfc0]
 // Decompiled from CDynList *__thiscall IAI_Module::~IAI_Module(CDynList **this)
-
  IAI_Module::~IAI_Module(void) {
   
   CDynList *result; // eax
@@ -53,7 +51,6 @@
 
 // address=[0x2f3d040]
 // Decompiled from int __thiscall IAI_Module::NewSolutionEdge(CDynList **this, int a2, int a3)
-
 void  IAI_Module::NewSolutionEdge(int,int) {
   
   struct CDynListEntry *v5; // [esp+10h] [ebp-14h]
@@ -70,7 +67,6 @@ void  IAI_Module::NewSolutionEdge(int,int) {
 
 // address=[0x2f3d0e0]
 // Decompiled from struct CSolutionTree *__thiscall IAI_Module::Problem(IAI_Module *this, int a2, int a3, int a4, int a5, int a6)
-
 class CSolutionTree *  IAI_Module::Problem(int,int,int,int,int) {
   
   struct CSolutionTree *v7; // [esp+1Ch] [ebp-34h]
@@ -101,7 +97,6 @@ class CSolutionTree *  IAI_Module::Problem(int,int,int,int,int) {
 
 // address=[0x2f3d230]
 // Decompiled from void __thiscall IAI_Module::Execute(IAI_Module *this, struct CSolutionTree *a2)
-
 void  IAI_Module::Execute(class CSolutionTree *) {
   
   if ( a2 )
@@ -111,7 +106,6 @@ void  IAI_Module::Execute(class CSolutionTree *) {
 
 // address=[0x2f3d250]
 // Decompiled from char __thiscall IAI_Module::checkSolutionForRepeating(CDynList **this, int a2)
-
 bool  IAI_Module::checkSolutionForRepeating(int) {
   
   int i; // [esp+8h] [ebp-4h]
@@ -126,9 +120,7 @@ bool  IAI_Module::checkSolutionForRepeating(int) {
 
 
 // address=[0x2f3d2b0]
-// Decompiled from // public: bool __thiscall IAI_Module::checkSolutionForExactRepeating(int,class CParam *)
-char __thiscall IAI_Module::checkSolutionForExactRepeating(CDynList **this, int a2, CParam *a3)
-
+// Decompiled from char __thiscall IAI_Module::checkSolutionForExactRepeating(CDynList **this, int a2, CParam *a3)
 bool  IAI_Module::checkSolutionForExactRepeating(int,class CParam *) {
   
   int v4; // [esp+0h] [ebp-Ch]
@@ -145,16 +137,7 @@ bool  IAI_Module::checkSolutionForExactRepeating(int,class CParam *) {
 
 
 // address=[0x2f3d320]
-// Decompiled from // public: bool __thiscall IAI_Module::checkSolutionForSpecialRepeating(int,class CParam *,int,int,int,int)
-char __thiscall IAI_Module::checkSolutionForSpecialRepeating(
-        CDynList **this,
-        int a2,
-        _DWORD *a3,
-        int a4,
-        int a5,
-        int a6,
-        int a7)
-
+// Decompiled from char __thiscall IAI_Module::checkSolutionForSpecialRepeating(  CDynList **this,  int a2,  _DWORD *a3,  int a4,  int a5,  int a6,  int a7)
 bool  IAI_Module::checkSolutionForSpecialRepeating(int,class CParam *,int,int,int,int) {
   
   int i; // [esp+4h] [ebp-8h]
@@ -177,9 +160,7 @@ bool  IAI_Module::checkSolutionForSpecialRepeating(int,class CParam *,int,int,in
 
 
 // address=[0x2f3d3e0]
-// Decompiled from // public: void __thiscall IAI_Module::SetOptimierung(class COptimizeOptions *,int,int)
-int __stdcall IAI_Module::SetOptimierung(int a1, int a2, int a3)
-
+// Decompiled from int __stdcall IAI_Module::SetOptimierung(int a1, int a2, int a3)
 void  IAI_Module::SetOptimierung(class COptimizeOptions *,int,int) {
   
   int result; // eax
@@ -192,9 +173,7 @@ void  IAI_Module::SetOptimierung(class COptimizeOptions *,int,int) {
 
 
 // address=[0x2f3d400]
-// Decompiled from // public: void __thiscall IAI_Module::SetHorizont(class COptimizeOptions *,int)
-_DWORD *__thiscall IAI_Module::SetHorizont(_DWORD *this, int a2, int a3)
-
+// Decompiled from _DWORD *__thiscall IAI_Module::SetHorizont(_DWORD *this, int a2, int a3)
 void  IAI_Module::SetHorizont(class COptimizeOptions *,int) {
   
   _DWORD *result; // eax
@@ -206,9 +185,7 @@ void  IAI_Module::SetHorizont(class COptimizeOptions *,int) {
 
 
 // address=[0x2f3d420]
-// Decompiled from // public: void __thiscall IAI_Module::SetPrioritaet(class COptimizeOptions *,int)
-_DWORD *__stdcall IAI_Module::SetPrioritaet(_DWORD *a1, int a2)
-
+// Decompiled from _DWORD *__stdcall IAI_Module::SetPrioritaet(_DWORD *a1, int a2)
 void  IAI_Module::SetPrioritaet(class COptimizeOptions *,int) {
   
   _DWORD *result; // eax
@@ -221,7 +198,6 @@ void  IAI_Module::SetPrioritaet(class COptimizeOptions *,int) {
 
 // address=[0x2f3d440]
 // Decompiled from struct COptimizeOptions *__thiscall IAI_Module::SetMaxSolution(IAI_Module *this, struct COptimizeOptions *a2, int a3)
-
 void  IAI_Module::SetMaxSolution(class COptimizeOptions *,int) {
   
   struct COptimizeOptions *result; // eax
@@ -233,12 +209,7 @@ void  IAI_Module::SetMaxSolution(class COptimizeOptions *,int) {
 
 
 // address=[0x2f3d460]
-// Decompiled from struct CSolutionTree *__thiscall IAI_Module::ProblemSolve(
-        IAI_Module *this,
-        int a2,
-        struct CParam *a3,
-        struct COptimizeOptions *a4)
-
+// Decompiled from struct CSolutionTree *__thiscall IAI_Module::ProblemSolve(  IAI_Module *this,  int a2,  struct CParam *a3,  struct COptimizeOptions *a4)
 class CSolutionTree *  IAI_Module::ProblemSolve(int,class CParam *,class COptimizeOptions *) {
   
   struct CParam *v5; // [esp+64h] [ebp-80h]
@@ -406,11 +377,7 @@ LABEL_63:
 
 
 // address=[0x2f3db10]
-// Decompiled from struct CSolutionTree *__thiscall IAI_Module::GetBestSolution(
-        CDynList **this,
-        CDynList **a2,
-        struct COptimizeOptions *a3)
-
+// Decompiled from struct CSolutionTree *__thiscall IAI_Module::GetBestSolution(  CDynList **this,  CDynList **a2,  struct COptimizeOptions *a3)
 class CSolutionTree *  IAI_Module::GetBestSolution(class CSolutionSet *,class COptimizeOptions *) {
   
   double v4; // [esp+3Ch] [ebp-74h]
@@ -541,7 +508,6 @@ class CSolutionTree *  IAI_Module::GetBestSolution(class CSolutionSet *,class CO
 
 // address=[0x2f3dfd0]
 // Decompiled from int __thiscall IAI_Module::TryImportSolution(IAI_Module *this, int a2, struct CParam *a3)
-
 class CSolutionTree *  IAI_Module::TryImportSolution(int,class CParam *) {
   
   int v4; // [esp+0h] [ebp-Ch]
@@ -561,7 +527,6 @@ class CSolutionTree *  IAI_Module::TryImportSolution(int,class CParam *) {
 
 // address=[0x2f3e050]
 // Decompiled from CDynList *__thiscall IAI_Module::DeleteHistory(CDynList **this)
-
 void  IAI_Module::DeleteHistory(void) {
   
   CDynList *result; // eax
@@ -583,7 +548,6 @@ void  IAI_Module::DeleteHistory(void) {
 
 // address=[0x2f3e100]
 // Decompiled from int __thiscall IAI_Module::NewSolutionInHistory(CDynList **this, int a2, struct CParam *a3)
-
 void  IAI_Module::NewSolutionInHistory(int,class CParam *) {
   
   struct CDynListEntry *v5; // [esp+Ch] [ebp-14h]
@@ -600,7 +564,6 @@ void  IAI_Module::NewSolutionInHistory(int,class CParam *) {
 
 // address=[0x2f3e190]
 // Decompiled from int __thiscall IAI_Module::NewSolutionInHistory(CDynList **this, struct CSolutionTree *a2)
-
 void  IAI_Module::NewSolutionInHistory(class CSolutionTree *) {
   
   struct CSolutionTree *v3; // [esp+8h] [ebp-2Ch]
@@ -638,7 +601,6 @@ void  IAI_Module::NewSolutionInHistory(class CSolutionTree *) {
 
 // address=[0x2f3e2d0]
 // Decompiled from CDynList *__thiscall IAI_Module::CloneHistorie(IAI_Module *this, struct CDynList *a2)
-
 class CDynList *  IAI_Module::CloneHistorie(class CDynList *) {
   
   struct CDynListEntry *v3; // [esp+14h] [ebp-24h]
@@ -669,7 +631,6 @@ class CDynList *  IAI_Module::CloneHistorie(class CDynList *) {
 
 // address=[0x2f3e3e0]
 // Decompiled from double __thiscall IAI_Module::ValuationSubSolution(IAI_Module *this, struct CSolutionTree *a2, int a3, int a4)
-
 double  IAI_Module::ValuationSubSolution(class CSolutionTree *,int,int) {
   
   double v5; // [esp+20h] [ebp-14h]
@@ -715,9 +676,7 @@ double  IAI_Module::ValuationSubSolution(class CSolutionTree *,int,int) {
 
 
 // address=[0x2f3e550]
-// Decompiled from // private: void __thiscall IAI_Module::Netzplan_ausgeben(void)
-int __thiscall IAI_Module::Netzplan_ausgeben(CDynList **this)
-
+// Decompiled from int __thiscall IAI_Module::Netzplan_ausgeben(CDynList **this)
 void  IAI_Module::Netzplan_ausgeben(void) {
   
   int result; // eax
@@ -735,9 +694,7 @@ void  IAI_Module::Netzplan_ausgeben(void) {
 
 
 // address=[0x2f3e5a0]
-// Decompiled from // private: class CHistorySolution * __thiscall IAI_Module::gleiche_loesung_suchen(int,class CParam *)
-int __thiscall IAI_Module::gleiche_loesung_suchen(CDynList **this, int a2, int a3)
-
+// Decompiled from int __thiscall IAI_Module::gleiche_loesung_suchen(CDynList **this, int a2, int a3)
 class CHistorySolution *  IAI_Module::gleiche_loesung_suchen(int,class CParam *) {
   
   int v4; // [esp+0h] [ebp-Ch]
@@ -755,7 +712,6 @@ class CHistorySolution *  IAI_Module::gleiche_loesung_suchen(int,class CParam *)
 
 // address=[0x2f3e600]
 // Decompiled from int __thiscall IAI_Module::PreExecuteSolution(IAI_Module *this, CDynList **a2)
-
 void  IAI_Module::PreExecuteSolution(class CSolutionTree *) {
   
   struct CSolutionTree *v3; // [esp+0h] [ebp-Ch]
@@ -777,7 +733,6 @@ void  IAI_Module::PreExecuteSolution(class CSolutionTree *) {
 
 // address=[0x2f3e6c0]
 // Decompiled from int __thiscall IAI_Module::ExecuteSolution(IAI_Module *this, CDynList **a2)
-
 void  IAI_Module::ExecuteSolution(class CSolutionTree *) {
   
   struct CSolutionTree *v3; // [esp+0h] [ebp-Ch]
@@ -799,7 +754,6 @@ void  IAI_Module::ExecuteSolution(class CSolutionTree *) {
 
 // address=[0x2f3e780]
 // Decompiled from int __thiscall IAI_Module::t(IAI_Module *this, int a2)
-
 void  IAI_Module::t(int) {
   
   int result; // eax
@@ -815,9 +769,7 @@ void  IAI_Module::t(int) {
 
 
 // address=[0x2f3e7c0]
-// Decompiled from // private: void __thiscall IAI_Module::t(void)
-int __thiscall IAI_Module::t_0(int *this)
-
+// Decompiled from int __thiscall IAI_Module::t_0(int *this)
 void  IAI_Module::t(void) {
   
   return IAI_Module::t((IAI_Module *)this, this[3]);

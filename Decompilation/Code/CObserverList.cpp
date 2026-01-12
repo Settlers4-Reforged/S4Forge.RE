@@ -4,7 +4,6 @@
 
 // address=[0x14eafe0]
 // Decompiled from CObserverList *__thiscall CObserverList::CObserverList(CObserverList *this)
-
  CObserverList::CObserverList(void) {
   
   std::list<unsigned short>::list<unsigned short>(this);
@@ -14,7 +13,6 @@
 
 // address=[0x14eb0e0]
 // Decompiled from int __thiscall CObserverList::~CObserverList(CObserverList *this)
-
  CObserverList::~CObserverList(void) {
   
   return std::list<unsigned short>::~list<unsigned short>(this);
@@ -23,7 +21,6 @@
 
 // address=[0x14eb6c0]
 // Decompiled from void __thiscall CObserverList::NotifyAndDetachAllObservers(CObserverList *this, const struct CEntityEvent *a2)
-
 void  CObserverList::NotifyAndDetachAllObservers(class CEntityEvent const &) {
   
   CObserverList::NotifyAllObservers(this, (int)a2);
@@ -33,7 +30,6 @@ void  CObserverList::NotifyAndDetachAllObservers(class CEntityEvent const &) {
 
 // address=[0x1559aa0]
 // Decompiled from int __thiscall CObserverList::Attach(CObserverList *this, int a2, int a3)
-
 void  CObserverList::Attach(int,int) {
   
   int result; // eax
@@ -88,7 +84,6 @@ void  CObserverList::Attach(int,int) {
 
 // address=[0x1559c20]
 // Decompiled from int __thiscall CObserverList::Detach(CObserverList *this, int a2)
-
 void  CObserverList::Detach(int) {
   
   int result; // eax
@@ -137,7 +132,6 @@ void  CObserverList::Detach(int) {
 
 // address=[0x1559d80]
 // Decompiled from int __thiscall CObserverList::NotifyAllObservers(void *this, int a2)
-
 void  CObserverList::NotifyAllObservers(class CEntityEvent const &)const {
   
   _BYTE v3[12]; // [esp+4h] [ebp-3Ch] BYREF
@@ -174,11 +168,7 @@ void  CObserverList::NotifyAllObservers(class CEntityEvent const &)const {
 
 
 // address=[0x1559e90]
-// Decompiled from int __thiscall CObserverList::NotifyAllObservers(
-        CObserverList *this,
-        const struct CEntityEvent *a2,
-        struct INotifyFilter *a3)
-
+// Decompiled from int __thiscall CObserverList::NotifyAllObservers(  CObserverList *this,  const struct CEntityEvent *a2,  struct INotifyFilter *a3)
 void  CObserverList::NotifyAllObservers(class CEntityEvent const &,class INotifyFilter &)const {
   
   _BYTE v4[12]; // [esp+4h] [ebp-3Ch] BYREF
@@ -217,7 +207,6 @@ void  CObserverList::NotifyAllObservers(class CEntityEvent const &,class INotify
 
 // address=[0x1559fb0]
 // Decompiled from int __thiscall CObserverList::DetachAllObservers(CObserverList *this)
-
 void  CObserverList::DetachAllObservers(void) {
   
   _BYTE v2[12]; // [esp+4h] [ebp-68h] BYREF
@@ -313,7 +302,6 @@ void  CObserverList::DetachAllObservers(void) {
 
 // address=[0x155a1e0]
 // Decompiled from int __thiscall CObserverList::DetachAllNonePileObservers(CObserverList *this)
-
 void  CObserverList::DetachAllNonePileObservers(void) {
   
   char v2; // [esp-Ch] [ebp-6Ch] BYREF
@@ -420,7 +408,6 @@ void  CObserverList::DetachAllNonePileObservers(void) {
 
 // address=[0x155a420]
 // Decompiled from char __thiscall CObserverList::IsInList(CObserverList *this, int a2)
-
 bool  CObserverList::IsInList(int)const {
   
   _BYTE v3[12]; // [esp+4h] [ebp-3Ch] BYREF
@@ -472,7 +459,6 @@ bool  CObserverList::IsInList(int)const {
 
 // address=[0x155a6b0]
 // Decompiled from void *__thiscall CObserverList::CObserverList(void *this, int a2)
-
  CObserverList::CObserverList(std::istream &) {
   
   _DWORD v3[2]; // [esp+4h] [ebp-28h] BYREF
@@ -509,7 +495,6 @@ bool  CObserverList::IsInList(int)const {
 
 // address=[0x155a7a0]
 // Decompiled from int __thiscall CObserverList::Store(void *this, struct std::ostream *a2)
-
 void  CObserverList::Store(std::ostream &) {
   
   _BYTE v3[12]; // [esp+4h] [ebp-64h] BYREF
@@ -561,7 +546,6 @@ void  CObserverList::Store(std::ostream &) {
 
 // address=[0x155a570]
 // Decompiled from char __thiscall CObserverList::Remove(CObserverList *this, int a2)
-
 bool  CObserverList::Remove(int) {
   
   int v2; // edx

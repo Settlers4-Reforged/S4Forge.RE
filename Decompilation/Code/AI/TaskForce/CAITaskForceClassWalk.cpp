@@ -3,10 +3,7 @@
 // Definitions for class CAITaskForceClassWalk
 
 // address=[0x12fcfb0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CAITaskForceClassWalk::CurrentTaskForce(CAITaskForceClassWalk *this)
-
+// Decompiled from int __thiscall CAITaskForceClassWalk::CurrentTaskForce(CAITaskForceClassWalk *this)
 class CAITaskForce *  CAITaskForceClassWalk::CurrentTaskForce(void)const {
   
   return *(_DWORD *)this;
@@ -15,7 +12,6 @@ class CAITaskForce *  CAITaskForceClassWalk::CurrentTaskForce(void)const {
 
 // address=[0x12fd3a0]
 // Decompiled from char __thiscall CAITaskForceClassWalk::NextTaskForce(CAITaskForceClassWalk *this, int a2)
-
 bool  CAITaskForceClassWalk::NextTaskForce(enum T_AI_TASK_FORCE_CMD) {
   
   while ( CAITaskForceClassWalk::NextTaskForce(this) )
@@ -29,7 +25,6 @@ bool  CAITaskForceClassWalk::NextTaskForce(enum T_AI_TASK_FORCE_CMD) {
 
 // address=[0x12fd3e0]
 // Decompiled from char __thiscall CAITaskForceClassWalk::NextTaskForce(CAITaskForceClassWalk *this, int a2)
-
 bool  CAITaskForceClassWalk::NextTaskForce(enum T_AI_TASK_FORCE_TYPE) {
   
   while ( CAITaskForceClassWalk::NextTaskForce(this) )
@@ -43,7 +38,6 @@ bool  CAITaskForceClassWalk::NextTaskForce(enum T_AI_TASK_FORCE_TYPE) {
 
 // address=[0x1328da0]
 // Decompiled from _DWORD *__thiscall CAITaskForceClassWalk::CAITaskForceClassWalk(_DWORD *this, int a2, int a3)
-
  CAITaskForceClassWalk::CAITaskForceClassWalk(class CAITaskForceGroup &,enum T_AI_TASK_FORCE_CLASS) {
   
   *this = 0;
@@ -54,7 +48,6 @@ bool  CAITaskForceClassWalk::NextTaskForce(enum T_AI_TASK_FORCE_TYPE) {
 
 // address=[0x1328dd0]
 // Decompiled from char __thiscall CAITaskForceClassWalk::NextTaskForce(CAITaskForceClassWalk *this)
-
 bool  CAITaskForceClassWalk::NextTaskForce(void) {
   
   pairNode *i; // [esp+4h] [ebp-4h]

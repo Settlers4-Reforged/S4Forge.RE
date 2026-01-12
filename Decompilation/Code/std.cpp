@@ -4,7 +4,6 @@
 
 // address=[0x1548320]
 // Decompiled from int TArgv<unsigned int,std::vector<unsigned int>>::~TArgv<unsigned int,std::vector<unsigned int>>()
-
  TArgv<unsigned int,class std::vector<unsigned int,class std::allocator<unsigned int> > >::~TArgv<unsigned int,class std::vector<unsigned int,class std::allocator<unsigned int> > >(void) {
   
   return std::vector<unsigned int>::~vector<unsigned int>();
@@ -12,11 +11,7 @@
 
 
 // address=[0x2d73a20]
-// Decompiled from // MFC 3.1-14.0 32bit
-void *__thiscall SIMPL_NS::EalStdAllocator<std::_Container_proxy,1111490559>::EalStdAllocator<std::_Container_proxy,1111490559>(
-        void *this,
-        int a2)
-
+// Decompiled from void *__thiscall SIMPL_NS::EalStdAllocator<std::_Container_proxy,1111490559>::EalStdAllocator<std::_Container_proxy,1111490559>(  void *this,  int a2)
  SIMPL_NS::EalStdAllocator<struct std::_Container_proxy,1111490559>::EalStdAllocator<struct std::_Container_proxy,1111490559><struct std::_Tree_node<struct std::pair<int const ,unsigned __int64>,void *> >(class SIMPL_NS::EalStdAllocator<struct std::_Tree_node<struct std::pair<int const ,unsigned __int64>,void *>,1111490559> const &) {
   
   return this;
@@ -24,10 +19,7 @@ void *__thiscall SIMPL_NS::EalStdAllocator<std::_Container_proxy,1111490559>::Ea
 
 
 // address=[0x2db17c0]
-// Decompiled from // MFC 3.1-14.0 32bit
-void *__thiscall SIMPL_NS::EalStdAllocator<std::_Tree_node<std::pair<int const,unsigned __int64>,void *>,1111490559>::EalStdAllocator<std::_Tree_node<std::pair<int const,unsigned __int64>,void *>,1111490559>(
-        void *this)
-
+// Decompiled from void *__thiscall SIMPL_NS::EalStdAllocator<std::_Tree_node<std::pair<int const,unsigned __int64>,void *>,1111490559>::EalStdAllocator<std::_Tree_node<std::pair<int const,unsigned __int64>,void *>,1111490559>(  void *this)
  SIMPL_NS::EalStdAllocator<struct std::_Tree_node<struct std::pair<int const ,unsigned __int64>,void *>,1111490559>::EalStdAllocator<struct std::_Tree_node<struct std::pair<int const ,unsigned __int64>,void *>,1111490559>(void) {
   
   return this;
@@ -36,7 +28,6 @@ void *__thiscall SIMPL_NS::EalStdAllocator<std::_Tree_node<std::pair<int const,u
 
 // address=[0x2e03b80]
 // Decompiled from _DWORD *__stdcall SIMPL_NS::EalStdAllocator<std::_Container_proxy,1111490559>::construct(void *a1, _DWORD *a2)
-
 void  SIMPL_NS::EalStdAllocator<struct std::_Container_proxy,1111490559>::construct(struct std::_Container_proxy *,struct std::_Container_proxy const &) {
   
   _DWORD *result; // eax
@@ -54,10 +45,7 @@ void  SIMPL_NS::EalStdAllocator<struct std::_Container_proxy,1111490559>::constr
 
 
 // address=[0x2e03c40]
-// Decompiled from void __stdcall SIMPL_NS::EalStdAllocator<std::_Tree_node<std::pair<int const,unsigned __int64>,void *>,1111490559>::deallocate(
-        void *a1,
-        int a2)
-
+// Decompiled from void __stdcall SIMPL_NS::EalStdAllocator<std::_Tree_node<std::pair<int const,unsigned __int64>,void *>,1111490559>::deallocate(  void *a1,  int a2)
 void  SIMPL_NS::EalStdAllocator<struct std::_Tree_node<struct std::pair<int const ,unsigned __int64>,void *>,1111490559>::deallocate(struct std::_Tree_node<struct std::pair<int const ,unsigned __int64>,void *> *,unsigned int) {
   
   if ( a1 )
@@ -67,7 +55,6 @@ void  SIMPL_NS::EalStdAllocator<struct std::_Tree_node<struct std::pair<int cons
 
 // address=[0x2e03c80]
 // Decompiled from void __stdcall SIMPL_NS::EalStdAllocator<std::_Container_proxy,1111490559>::deallocate(void *a1, int a2)
-
 void  SIMPL_NS::EalStdAllocator<struct std::_Container_proxy,1111490559>::deallocate(struct std::_Container_proxy *,unsigned int) {
   
   if ( a1 )
@@ -76,9 +63,7 @@ void  SIMPL_NS::EalStdAllocator<struct std::_Container_proxy,1111490559>::deallo
 
 
 // address=[0x2e05280]
-// Decompiled from // MFC 3.1-14.0 32bit
-void __stdcall SIMPL_NS::EalStdAllocator<std::_Container_proxy,1111490559>::destroy(int a1)
-
+// Decompiled from void __stdcall SIMPL_NS::EalStdAllocator<std::_Container_proxy,1111490559>::destroy(int a1)
 void  SIMPL_NS::EalStdAllocator<struct std::_Container_proxy,1111490559>::destroy(struct std::_Container_proxy *) {
   
   ;

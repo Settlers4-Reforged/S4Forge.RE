@@ -4,7 +4,6 @@
 
 // address=[0x1345840]
 // Decompiled from _DWORD *__thiscall SBUILDINFODATA::SBUILDINFODATA(_DWORD *this, _DWORD *a2)
-
  SBUILDINFODATA::SBUILDINFODATA(struct SBUILDINFODATA &&) {
   
   *this = *a2;
@@ -19,7 +18,6 @@
 
 // address=[0x13458f0]
 // Decompiled from SBUILDINFODATA *__thiscall SBUILDINFODATA::SBUILDINFODATA(SBUILDINFODATA *this, const struct SBUILDINFODATA *a2)
-
  SBUILDINFODATA::SBUILDINFODATA(struct SBUILDINFODATA const &) {
   
   *(_DWORD *)this = *(_DWORD *)a2;
@@ -34,7 +32,6 @@
 
 // address=[0x13459a0]
 // Decompiled from SBUILDINFODATA *__thiscall SBUILDINFODATA::SBUILDINFODATA(SBUILDINFODATA *this)
-
  SBUILDINFODATA::SBUILDINFODATA(void) {
   
   std::vector<SPOSS_BUILD_PLACE>::vector<SPOSS_BUILD_PLACE>((char *)this + 60);
@@ -44,7 +41,6 @@
 
 // address=[0x1345e70]
 // Decompiled from void __thiscall SBUILDINFODATA::~SBUILDINFODATA(SBUILDINFODATA *this)
-
  SBUILDINFODATA::~SBUILDINFODATA(void) {
   
   std::vector<SPOSS_BUILD_PLACE>::~vector<SPOSS_BUILD_PLACE>((char *)this + 60);
@@ -53,7 +49,6 @@
 
 // address=[0x13461d0]
 // Decompiled from _DWORD *__thiscall SBUILDINFODATA::operator=(_DWORD *this, _DWORD *a2)
-
 struct SBUILDINFODATA &  SBUILDINFODATA::operator=(struct SBUILDINFODATA const &) {
   
   unsigned int j; // [esp+4h] [ebp-Ch]

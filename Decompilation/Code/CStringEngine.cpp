@@ -4,7 +4,6 @@
 
 // address=[0x14ce700]
 // Decompiled from void *__cdecl CStringEngine::CreateStringEngine(int a1)
-
 static class CStringEngine * __cdecl CStringEngine::CreateStringEngine(int) {
   
   CStringEngineEx *C; // [esp+Ch] [ebp-10h]
@@ -19,7 +18,6 @@ static class CStringEngine * __cdecl CStringEngine::CreateStringEngine(int) {
 
 // address=[0x14cf320]
 // Decompiled from _DWORD *__thiscall CStringEngine::CStringEngine(_DWORD *this)
-
  CStringEngine::CStringEngine(void) {
   
   *this = &CStringEngine::_vftable_;
@@ -29,7 +27,6 @@ static class CStringEngine * __cdecl CStringEngine::CreateStringEngine(int) {
 
 // address=[0x14cf340]
 // Decompiled from CStringEngine *__thiscall CStringEngine::~CStringEngine(CStringEngine *this)
-
  CStringEngine::~CStringEngine(void) {
   
   CStringEngine *result; // eax

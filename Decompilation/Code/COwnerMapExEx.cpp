@@ -4,7 +4,6 @@
 
 // address=[0x15de510]
 // Decompiled from int __cdecl COwnerMapExEx::CalculateOwnerBits1(int a1, int a2)
-
 static int __cdecl COwnerMapExEx::CalculateOwnerBits1(int,int) {
   
   int v2; // eax
@@ -25,7 +24,6 @@ static int __cdecl COwnerMapExEx::CalculateOwnerBits1(int,int) {
 
 // address=[0x15de570]
 // Decompiled from int __cdecl COwnerMapExEx::CalculateOwnerBits9(int a1, int a2)
-
 static int __cdecl COwnerMapExEx::CalculateOwnerBits9(int,int) {
   
   int v2; // esi

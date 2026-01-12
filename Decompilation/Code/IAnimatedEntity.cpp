@@ -4,7 +4,6 @@
 
 // address=[0x1307150]
 // Decompiled from int __thiscall IAnimatedEntity::Next(IAnimatedEntity *this)
-
 int  IAnimatedEntity::Next(void)const {
   
   return *((unsigned __int16 *)this + 21);
@@ -13,7 +12,6 @@ int  IAnimatedEntity::Next(void)const {
 
 // address=[0x1351b10]
 // Decompiled from int __thiscall IAnimatedEntity::Frame(IAnimatedEntity *this)
-
 int  IAnimatedEntity::Frame(void)const {
   
   return *((unsigned __int8 *)this + 36);
@@ -22,7 +20,6 @@ int  IAnimatedEntity::Frame(void)const {
 
 // address=[0x1351b30]
 // Decompiled from int __thiscall IAnimatedEntity::GetLastLogicUpdateTick(CPaneContainer *this)
-
 int  IAnimatedEntity::GetLastLogicUpdateTick(void)const {
   
   return *((_DWORD *)this + 12);
@@ -31,7 +28,6 @@ int  IAnimatedEntity::GetLastLogicUpdateTick(void)const {
 
 // address=[0x1439c70]
 // Decompiled from int __thiscall IAnimatedEntity::Previous(unsigned __int16 *this)
-
 int  IAnimatedEntity::Previous(void)const {
   
   return this[20];
@@ -40,7 +36,6 @@ int  IAnimatedEntity::Previous(void)const {
 
 // address=[0x1439e10]
 // Decompiled from int __thiscall IAnimatedEntity::SetNext(_WORD *this, int a2)
-
 void  IAnimatedEntity::SetNext(int) {
   
   int result; // eax
@@ -62,7 +57,6 @@ void  IAnimatedEntity::SetNext(int) {
 
 // address=[0x1439eb0]
 // Decompiled from IAnimatedEntity *__thiscall IAnimatedEntity::SetPrevious(IAnimatedEntity *this, __int16 a2)
-
 void  IAnimatedEntity::SetPrevious(int) {
   
   IAnimatedEntity *result; // eax
@@ -75,7 +69,6 @@ void  IAnimatedEntity::SetPrevious(int) {
 
 // address=[0x14d87d0]
 // Decompiled from void __thiscall IAnimatedEntity::SetLastUpdateTick(CMFCCaptionButton *this, int a2)
-
 void  IAnimatedEntity::SetLastUpdateTick(unsigned int) {
   
   *((_DWORD *)this + 11) = a2;
@@ -84,7 +77,6 @@ void  IAnimatedEntity::SetLastUpdateTick(unsigned int) {
 
 // address=[0x14e31a0]
 // Decompiled from int __stdcall IAnimatedEntity::RegisterForLogicUpdate(int a1)
-
 int  IAnimatedEntity::RegisterForLogicUpdate(int) {
   
   int v1; // eax
@@ -98,7 +90,6 @@ int  IAnimatedEntity::RegisterForLogicUpdate(int) {
 
 // address=[0x14e31d0]
 // Decompiled from int __thiscall IAnimatedEntity::UnRegisterFromLogicUpdate(IAnimatedEntity *this)
-
 void  IAnimatedEntity::UnRegisterFromLogicUpdate(void) {
   
   int LastLogicUpdateTick; // eax
@@ -113,7 +104,6 @@ void  IAnimatedEntity::UnRegisterFromLogicUpdate(void) {
 
 // address=[0x14e3210]
 // Decompiled from int __thiscall IAnimatedEntity::SetEvent(unsigned __int16 *this, int a2)
-
 void  IAnimatedEntity::SetEvent(class CEntityEvent const &) {
   
   int v2; // eax
@@ -132,7 +122,6 @@ void  IAnimatedEntity::SetEvent(class CEntityEvent const &) {
 
 // address=[0x14e3270]
 // Decompiled from void __thiscall IAnimatedEntity::ClearAllQueuedEvents(COleCmdUI *this)
-
 void  IAnimatedEntity::ClearAllQueuedEvents(void) {
   
   std::vector<CEntityEvent>::clear((char *)this + 52);
@@ -141,7 +130,6 @@ void  IAnimatedEntity::ClearAllQueuedEvents(void) {
 
 // address=[0x14e3290]
 // Decompiled from void __thiscall IAnimatedEntity::BoxSelection(struct IEntity *this)
-
 void  IAnimatedEntity::BoxSelection(void) {
   
   int v1; // eax
@@ -213,7 +201,6 @@ void  IAnimatedEntity::BoxSelection(void) {
 
 // address=[0x14e46c0]
 // Decompiled from int __thiscall IAnimatedEntity::~IAnimatedEntity(IAnimatedEntity *this)
-
  IAnimatedEntity::~IAnimatedEntity(void) {
   
   _DWORD *v2; // [esp+0h] [ebp-4h]
@@ -226,7 +213,6 @@ void  IAnimatedEntity::BoxSelection(void) {
 
 // address=[0x14eb000]
 // Decompiled from IAnimatedEntity *__thiscall IAnimatedEntity::IAnimatedEntity(IAnimatedEntity *this, int a2)
-
  IAnimatedEntity::IAnimatedEntity(int) {
   
   std::bad_function_call *v4; // [esp+0h] [ebp-4h]
@@ -247,7 +233,6 @@ void  IAnimatedEntity::BoxSelection(void) {
 
 // address=[0x14eb2a0]
 // Decompiled from int __thiscall IAnimatedEntity::AttackerPlayerId(unsigned __int8 *this)
-
 int  IAnimatedEntity::AttackerPlayerId(void)const {
   
   return this[37];
@@ -255,9 +240,7 @@ int  IAnimatedEntity::AttackerPlayerId(void)const {
 
 
 // address=[0x1501170]
-// Decompiled from // MFC 3.1-14.0 32bit
-int __thiscall IAnimatedEntity::LastUpdateTick(_DWORD *this)
-
+// Decompiled from int __thiscall IAnimatedEntity::LastUpdateTick(_DWORD *this)
 unsigned int  IAnimatedEntity::LastUpdateTick(void)const {
   
   return this[11];
@@ -266,7 +249,6 @@ unsigned int  IAnimatedEntity::LastUpdateTick(void)const {
 
 // address=[0x1548370]
 // Decompiled from int __thiscall IAnimatedEntity::JobPart(unsigned __int16 *this)
-
 int  IAnimatedEntity::JobPart(void)const {
   
   return this[19];
@@ -275,7 +257,6 @@ int  IAnimatedEntity::JobPart(void)const {
 
 // address=[0x15639c0]
 // Decompiled from _BYTE *__thiscall IAnimatedEntity::SetFrame(_BYTE *this, char a2)
-
 void  IAnimatedEntity::SetFrame(int) {
   
   _BYTE *result; // eax
@@ -288,7 +269,6 @@ void  IAnimatedEntity::SetFrame(int) {
 
 // address=[0x15670a0]
 // Decompiled from void __thiscall IAnimatedEntity::EventQueueEmpty(COleCmdUI *this)
-
 bool  IAnimatedEntity::EventQueueEmpty(void)const {
   
   std::vector<CEntityEvent>::empty((char *)this + 52);
@@ -297,7 +277,6 @@ bool  IAnimatedEntity::EventQueueEmpty(void)const {
 
 // address=[0x1567140]
 // Decompiled from _WORD *__thiscall IAnimatedEntity::SetJobPart(_WORD *this, __int16 a2)
-
 void  IAnimatedEntity::SetJobPart(int) {
   
   _WORD *result; // eax
@@ -310,7 +289,6 @@ void  IAnimatedEntity::SetJobPart(int) {
 
 // address=[0x14e3460]
 // Decompiled from struct IEntity *__thiscall IAnimatedEntity::IAnimatedEntity(struct IEntity *this, struct std::istream *a2)
-
  IAnimatedEntity::IAnimatedEntity(std::istream &) {
   
   int v2; // eax
@@ -357,7 +335,6 @@ void  IAnimatedEntity::SetJobPart(int) {
 
 // address=[0x14e35f0]
 // Decompiled from int __thiscall IAnimatedEntity::Store(char *this, struct std::ostream *a2)
-
 void  IAnimatedEntity::Store(std::ostream &) {
   
   _BYTE v3[12]; // [esp+4h] [ebp-40h] BYREF
@@ -407,7 +384,6 @@ void  IAnimatedEntity::Store(std::ostream &) {
 
 // address=[0x14e3780]
 // Decompiled from bool __thiscall IAnimatedEntity::ProcessAllEvents(_DWORD *this)
-
 bool  IAnimatedEntity::ProcessAllEvents(void) {
   
   struct boost::exception_detail::clone_base *v1; // eax
@@ -459,10 +435,7 @@ bool  IAnimatedEntity::ProcessAllEvents(void) {
 
 
 // address=[0x14e4ae0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __stdcall IAnimatedEntity::ConvertEventIntoGoal(int a1)
-
+// Decompiled from void __stdcall IAnimatedEntity::ConvertEventIntoGoal(int a1)
 void  IAnimatedEntity::ConvertEventIntoGoal(class CEntityEvent *) {
   
   ;
@@ -471,7 +444,6 @@ void  IAnimatedEntity::ConvertEventIntoGoal(class CEntityEvent *) {
 
 // address=[0x14e4b90]
 // Decompiled from int __thiscall IAnimatedEntity::SetLastLogicUpdate(_DWORD *this, int a2)
-
 int  IAnimatedEntity::SetLastLogicUpdate(int) {
   
   this[12] = a2;

@@ -4,7 +4,6 @@
 
 // address=[0x2f3f250]
 // Decompiled from CSolutionSet *__thiscall CSolutionSet::CSolutionSet(CSolutionSet *this)
-
  CSolutionSet::CSolutionSet(void) {
   
   CDynList *v2; // [esp+8h] [ebp-18h]
@@ -24,7 +23,6 @@
 
 // address=[0x2f3f2f0]
 // Decompiled from void __thiscall CSolutionSet::~CSolutionSet(CDynList **this)
-
  CSolutionSet::~CSolutionSet(void) {
   
   *this = (CDynList *)&CSolutionSet::_vftable_;
@@ -36,7 +34,6 @@
 
 // address=[0x2f3f340]
 // Decompiled from int __thiscall CSolutionSet::size(CDynList **this)
-
 int  CSolutionSet::size(void) {
   
   return CDynList::size(this[3]);
@@ -45,7 +42,6 @@ int  CSolutionSet::size(void) {
 
 // address=[0x2f3f360]
 // Decompiled from int __thiscall CSolutionSet::NewSolution(CDynList **this, int a2, struct CParam *a3)
-
 void  CSolutionSet::NewSolution(int,class CParam *) {
   
   struct CDynListEntry *v5; // [esp+Ch] [ebp-14h]

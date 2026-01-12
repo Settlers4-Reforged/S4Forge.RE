@@ -4,7 +4,6 @@
 
 // address=[0x130e530]
 // Decompiled from int __stdcall CVehicleMgr::operator[](int a1)
-
 class CVehicle &  CVehicleMgr::operator[](int) {
   
   return CMapObjectMgr::EntityPtr(a1);
@@ -13,7 +12,6 @@ class CVehicle &  CVehicleMgr::operator[](int) {
 
 // address=[0x130ec90]
 // Decompiled from int __thiscall CVehicleMgr::GetFirstVehicleId(CVehicleMgr *this, int a2, int a3)
-
 int  CVehicleMgr::GetFirstVehicleId(int,int) {
   
   return *((unsigned __int16 *)this + 6 * a2 + a3 + 176);
@@ -22,7 +20,6 @@ int  CVehicleMgr::GetFirstVehicleId(int,int) {
 
 // address=[0x130ed60]
 // Decompiled from int __thiscall CVehicleMgr::GetNumberOfVehicles(CVehicleMgr *this, int a2, int a3, int a4)
-
 int  CVehicleMgr::GetNumberOfVehicles(int,int,int) {
   
   if ( a4 )
@@ -34,7 +31,6 @@ int  CVehicleMgr::GetNumberOfVehicles(int,int,int) {
 
 // address=[0x130eef0]
 // Decompiled from unsigned __int8 *__cdecl CVehicleMgr::GetVehiclePtr(int a1)
-
 static class CVehicle * __cdecl CVehicleMgr::GetVehiclePtr(int) {
   
   __int64 v2; // [esp+0h] [ebp-Ch]
@@ -62,7 +58,6 @@ static class CVehicle * __cdecl CVehicleMgr::GetVehiclePtr(int) {
 
 // address=[0x153a3f0]
 // Decompiled from unsigned int __thiscall CVehicleMgr::Alloc(CVehicleMgr *this, unsigned int a2)
-
 void *  CVehicleMgr::Alloc(unsigned int) {
   
   return MemoryAllocator::allocate((unsigned int *)this, a2);
@@ -71,7 +66,6 @@ void *  CVehicleMgr::Alloc(unsigned int) {
 
 // address=[0x153a440]
 // Decompiled from void __thiscall CVehicleMgr::Dealloc(CVehicleMgr *this, void *a2)
-
 void  CVehicleMgr::Dealloc(void *) {
   
   MemoryAllocator::deallocate(this, a2);
@@ -80,7 +74,6 @@ void  CVehicleMgr::Dealloc(void *) {
 
 // address=[0x15a8b20]
 // Decompiled from CVehicleMgr *__thiscall CVehicleMgr::CVehicleMgr(CVehicleMgr *this)
-
  CVehicleMgr::CVehicleMgr(void) {
   
   int v1; // eax
@@ -135,7 +128,6 @@ void  CVehicleMgr::Dealloc(void *) {
 
 // address=[0x15a8c60]
 // Decompiled from void __thiscall CVehicleMgr::~CVehicleMgr(CVehicleMgr *this)
-
  CVehicleMgr::~CVehicleMgr(void) {
   
   MemoryAllocator::~MemoryAllocator(this);
@@ -144,7 +136,6 @@ void  CVehicleMgr::Dealloc(void *) {
 
 // address=[0x15a8c80]
 // Decompiled from void *__thiscall CVehicleMgr::Clear(CVehicleMgr *this)
-
 void  CVehicleMgr::Clear(void) {
   
   *((_DWORD *)this + 6) = 0;
@@ -155,7 +146,6 @@ void  CVehicleMgr::Clear(void) {
 
 // address=[0x15a8cd0]
 // Decompiled from int __thiscall CVehicleMgr::AddVehicle(CVehicleMgr *this, int a2, int a3, int a4, int a5, int a6, bool a7)
-
 int  CVehicleMgr::AddVehicle(int,int,int,int,int,bool) {
   
   int v8; // [esp+8h] [ebp-14h]
@@ -201,9 +191,7 @@ int  CVehicleMgr::AddVehicle(int,int,int,int,int,bool) {
 
 
 // address=[0x15a8e50]
-// Decompiled from // public: int __thiscall CVehicleMgr::AddFoundationCart(int,int,int,int)
-int __thiscall CVehicleMgr::AddFoundationCart(CVehicleMgr *this, int a2, int a3, int a4, int a5)
-
+// Decompiled from int __thiscall CVehicleMgr::AddFoundationCart(CVehicleMgr *this, int a2, int a3, int a4, int a5)
 int  CVehicleMgr::AddFoundationCart(int,int,int,int) {
   
   return CVehicleMgr::AddVehicle(this, a2, a3, a4, 1030, a5, 0);
@@ -212,7 +200,6 @@ int  CVehicleMgr::AddFoundationCart(int,int,int,int) {
 
 // address=[0x15a8e90]
 // Decompiled from struct CVehicle *__thiscall CVehicleMgr::DeleteVehicle(CVehicleMgr *this, int a2)
-
 void  CVehicleMgr::DeleteVehicle(int) {
   
   unsigned __int8 *v2; // eax
@@ -265,7 +252,6 @@ void  CVehicleMgr::DeleteVehicle(int) {
 
 // address=[0x15a8fa0]
 // Decompiled from bool __thiscall CVehicleMgr::IsPositionFreeForVehicle(CVehicleMgr *this, int a2, int a3, int a4)
-
 bool  CVehicleMgr::IsPositionFreeForVehicle(int,int,int) {
   
   int v5; // [esp+4h] [ebp-20h]
@@ -319,9 +305,7 @@ bool  CVehicleMgr::IsPositionFreeForVehicle(int,int,int) {
 
 
 // address=[0x15a9100]
-// Decompiled from // public: int __thiscall CVehicleMgr::GetNearestVehicle(int,int,int,int)
-int __thiscall CVehicleMgr::GetNearestVehicle(CVehicleMgr *this, int a2, int a3, int a4, int a5)
-
+// Decompiled from int __thiscall CVehicleMgr::GetNearestVehicle(CVehicleMgr *this, int a2, int a3, int a4, int a5)
 int  CVehicleMgr::GetNearestVehicle(int,int,int,int) {
   
   int v5; // eax
@@ -371,7 +355,6 @@ int  CVehicleMgr::GetNearestVehicle(int,int,int,int) {
 
 // address=[0x15a9230]
 // Decompiled from int __cdecl CVehicleMgr::GetFerryShipAt(int a1, int a2)
-
 static class CFerryShip * __cdecl CVehicleMgr::GetFerryShipAt(int,int) {
   
   void **v2; // eax
@@ -407,7 +390,6 @@ static class CFerryShip * __cdecl CVehicleMgr::GetFerryShipAt(int,int) {
 
 // address=[0x15a9330]
 // Decompiled from int __cdecl CVehicleMgr::FillVehicleGroupMenu(struct CInfoExchange *a1, bool a2)
-
 static void __cdecl CVehicleMgr::FillVehicleGroupMenu(class CInfoExchange *,bool,bool) {
   
   unsigned __int16 *v2; // eax
@@ -480,7 +462,6 @@ static void __cdecl CVehicleMgr::FillVehicleGroupMenu(class CInfoExchange *,bool
 
 // address=[0x15a9580]
 // Decompiled from void __thiscall CVehicleMgr::Store(CVehicleMgr *this, struct S4::CMapFile *a2)
-
 void  CVehicleMgr::Store(class S4::CMapFile &) {
   
   std::strstreambuf *v2; // eax
@@ -558,7 +539,6 @@ void  CVehicleMgr::Store(class S4::CMapFile &) {
 
 // address=[0x15a97e0]
 // Decompiled from void __thiscall CVehicleMgr::Load(CVehicleMgr *this, struct S4::CMapFile *a2)
-
 void  CVehicleMgr::Load(class S4::CMapFile &) {
   
   int v2; // [esp+0h] [ebp-154h] BYREF
@@ -671,7 +651,6 @@ void  CVehicleMgr::Load(class S4::CMapFile &) {
 
 // address=[0x15a9b60]
 // Decompiled from int __thiscall CVehicleMgr::LoadInfo(CVehicleMgr *this)
-
 void  CVehicleMgr::LoadInfo(void) {
   
   return (**(int (__thiscall ***)(void *, _DWORD, _DWORD))g_pVehicleInfoMgr)(g_pVehicleInfoMgr, 0, 0);
@@ -680,7 +659,6 @@ void  CVehicleMgr::LoadInfo(void) {
 
 // address=[0x15a9b80]
 // Decompiled from int __cdecl CVehicleMgr::Create(int a1, int a2, int a3, int a4, int a5, bool a6)
-
 static int __cdecl CVehicleMgr::Create(int,int,int,int,int,bool) {
   
   void *v6; // eax
@@ -816,7 +794,6 @@ static int __cdecl CVehicleMgr::Create(int,int,int,int,int,bool) {
 
 // address=[0x15aa1b0]
 // Decompiled from int __thiscall CVehicleMgr::AttachVehicle(CVehicleMgr *this, int a2, int a3, int a4)
-
 void  CVehicleMgr::AttachVehicle(int,int,int) {
   
   IAnimatedEntity *v4; // eax
@@ -853,7 +830,6 @@ void  CVehicleMgr::AttachVehicle(int,int,int) {
 
 // address=[0x15aa2a0]
 // Decompiled from void __thiscall CVehicleMgr::DetachVehicle(CVehicleMgr *this, int a2, int a3, int a4)
-
 void  CVehicleMgr::DetachVehicle(int,int,int) {
   
   int v4; // eax
@@ -909,7 +885,6 @@ void  CVehicleMgr::DetachVehicle(int,int,int) {
 
 // address=[0x15aa3f0]
 // Decompiled from void __thiscall CVehicleMgr::CheckOutVehicle(CVehicleMgr *this, int a2)
-
 void  CVehicleMgr::CheckOutVehicle(int) {
   
   int v2; // [esp+4h] [ebp-14h]

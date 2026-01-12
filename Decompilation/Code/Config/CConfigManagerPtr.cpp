@@ -4,7 +4,6 @@
 
 // address=[0x2eef110]
 // Decompiled from CConfigManager *CConfigManagerPtr::GetInstance()
-
 static class IConfigManager * __cdecl CConfigManagerPtr::GetInstance(void) {
   
   CConfigManager *v1; // [esp+8h] [ebp-14h]
@@ -28,9 +27,7 @@ static class IConfigManager * __cdecl CConfigManagerPtr::GetInstance(void) {
 
 
 // address=[0x2eef1e0]
-// Decompiled from // public: static void __cdecl CConfigManagerPtr::DeleteConfigManager(void)
-void CConfigManagerPtr::DeleteConfigManager()
-
+// Decompiled from void CConfigManagerPtr::DeleteConfigManager()
 static void __cdecl CConfigManagerPtr::DeleteConfigManager(void) {
   
   if ( CConfigManagerPtr::m_pConfigManager )

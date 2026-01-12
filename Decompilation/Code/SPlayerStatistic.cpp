@@ -3,14 +3,7 @@
 // Definitions for class SPlayerStatistic
 
 // address=[0x1478cc0]
-// Decompiled from void __thiscall CStatistic::SPlayerStatistic::UpdateFightingStrength(
-        CStatistic::SPlayerStatistic *this,
-        int a2,
-        int a3,
-        int a4,
-        int a5,
-        bool a6)
-
+// Decompiled from void __thiscall CStatistic::SPlayerStatistic::UpdateFightingStrength(  CStatistic::SPlayerStatistic *this,  int a2,  int a3,  int a4,  int a5,  bool a6)
 void  CStatistic::SPlayerStatistic::UpdateFightingStrength(int,int,int,int,bool) {
   
   *((_DWORD *)this + 753) += a3;
@@ -31,7 +24,6 @@ void  CStatistic::SPlayerStatistic::UpdateFightingStrength(int,int,int,int,bool)
 
 // address=[0x1478da0]
 // Decompiled from _DWORD *__thiscall CStatistic::SPlayerStatistic::CalculateFightingStrength(CStatistic::SPlayerStatistic *this, int a2)
-
 void  CStatistic::SPlayerStatistic::CalculateFightingStrength(int) {
   
   _DWORD *result; // eax

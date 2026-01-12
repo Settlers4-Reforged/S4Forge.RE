@@ -4,7 +4,6 @@
 
 // address=[0x2616610]
 // Decompiled from ISampleGrabberCB *__thiscall ISampleGrabberCB::ISampleGrabberCB(ISampleGrabberCB *this)
-
  ISampleGrabberCB::ISampleGrabberCB(void) {
   
   IUnknown::IUnknown((IUnknown *)this);

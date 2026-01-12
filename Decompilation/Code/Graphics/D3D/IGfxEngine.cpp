@@ -4,7 +4,6 @@
 
 // address=[0x2f5a390]
 // Decompiled from IGfxEngine *__thiscall IGfxEngine::IGfxEngine(IGfxEngine *this)
-
  IGfxEngine::IGfxEngine(void) {
   
   *((_BYTE *)this + 33) = 0;
@@ -28,7 +27,6 @@
 
 // address=[0x2f5a460]
 // Decompiled from int __thiscall IGfxEngine::~IGfxEngine(IGfxEngine *this)
-
  IGfxEngine::~IGfxEngine(void) {
   
   DeleteEngine();
@@ -45,7 +43,6 @@
 
 // address=[0x2f5a500]
 // Decompiled from int __thiscall IGfxEngine::SetWindowPosition(IGfxEngine *this, int a2, int a3)
-
 void  IGfxEngine::SetWindowPosition(int,int) {
   
   int result; // eax
@@ -59,7 +56,6 @@ void  IGfxEngine::SetWindowPosition(int,int) {
 
 // address=[0x2f5a520]
 // Decompiled from unsigned int *__thiscall IGfxEngine::SetTickCounterAdress(IGfxEngine *this, unsigned int *a2)
-
 void  IGfxEngine::SetTickCounterAdress(unsigned int *) {
   
   unsigned int *result; // eax
@@ -71,9 +67,7 @@ void  IGfxEngine::SetTickCounterAdress(unsigned int *) {
 
 
 // address=[0x2f5a540]
-// Decompiled from // public: bool __thiscall IGfxEngine::SetTemporaryText(char *,int,int,int,int,int)
-char __stdcall IGfxEngine::SetTemporaryText(char *Str, int a2, int a3, int a4, int a5, COLORREF a6)
-
+// Decompiled from char __stdcall IGfxEngine::SetTemporaryText(char *Str, int a2, int a3, int a4, int a5, COLORREF a6)
 bool  IGfxEngine::SetTemporaryText(char *,int,int,int,int,int) {
   
   if ( Str )
@@ -97,7 +91,6 @@ bool  IGfxEngine::SetTemporaryText(char *,int,int,int,int,int) {
 
 // address=[0x2f5a5e0]
 // Decompiled from void __thiscall IGfxEngine::SetTriangleSize(IGfxEngine *this, int a2)
-
 void  IGfxEngine::SetTriangleSize(int) {
   
   if ( *(_DWORD *)this != a2 && a2 >= 0x20000 && a2 <= (int)&dword_B0F0F0[213956] )
@@ -126,7 +119,6 @@ void  IGfxEngine::SetTriangleSize(int) {
 
 // address=[0x2f5a6d0]
 // Decompiled from char __thiscall IGfxEngine::SetScrollOffsets(IGfxEngine *this, int a2, int a3)
-
 void  IGfxEngine::SetScrollOffsets(int,int) {
   
   dword_3E2E2A8 = (a2 << 15) / (dword_3E2E28C / 2);
@@ -141,7 +133,6 @@ void  IGfxEngine::SetScrollOffsets(int,int) {
 
 // address=[0x2f5a770]
 // Decompiled from int __thiscall IGfxEngine::SetCameraMode(IGfxEngine *this, int a2)
-
 void  IGfxEngine::SetCameraMode(int) {
   
   int result; // eax
@@ -168,7 +159,6 @@ void  IGfxEngine::SetCameraMode(int) {
 
 // address=[0x2f5a7d0]
 // Decompiled from unsigned int __thiscall IGfxEngine::SetGfxLayerAccess(IGfxEngine *this, size_t a2, struct T_GFX_MAP_ELEMENT *a3)
-
 void  IGfxEngine::SetGfxLayerAccess(int,struct T_GFX_MAP_ELEMENT *) {
   
   unsigned int NewValue; // [esp+4h] [ebp-4h]
@@ -187,9 +177,7 @@ void  IGfxEngine::SetGfxLayerAccess(int,struct T_GFX_MAP_ELEMENT *) {
 
 
 // address=[0x2f5a860]
-// Decompiled from // public: bool __thiscall IGfxEngine::SetPlayerColor(int,struct SGfxColor &)
-char __stdcall IGfxEngine::SetPlayerColor(unsigned int a1, int *a2)
-
+// Decompiled from char __stdcall IGfxEngine::SetPlayerColor(unsigned int a1, int *a2)
 bool  IGfxEngine::SetPlayerColor(int,struct SGfxColor &) {
   
   int *v3; // ecx
@@ -211,7 +199,6 @@ bool  IGfxEngine::SetPlayerColor(int,struct SGfxColor &) {
 
 // address=[0x2f5a8e0]
 // Decompiled from char __thiscall IGfxEngine::GetPlayerColor(IGfxEngine *this, unsigned int a2, struct SGfxColor *a3)
-
 bool  IGfxEngine::GetPlayerColor(int,struct SGfxColor &) {
   
   int *v4; // ecx
@@ -227,12 +214,7 @@ bool  IGfxEngine::GetPlayerColor(int,struct SGfxColor &) {
 
 
 // address=[0x2f5a930]
-// Decompiled from unsigned __int16 *__thiscall IGfxEngine::SetObjectLayerAccess(
-        IGfxEngine *this,
-        struct SGfxObjectInfo *(__cdecl *a2)(unsigned int, int),
-        unsigned __int16 *a3,
-        unsigned __int16 *a4)
-
+// Decompiled from unsigned __int16 *__thiscall IGfxEngine::SetObjectLayerAccess(  IGfxEngine *this,  struct SGfxObjectInfo *(__cdecl *a2)(unsigned int, int),  unsigned __int16 *a3,  unsigned __int16 *a4)
 void  IGfxEngine::SetObjectLayerAccess(struct SGfxObjectInfo * (__cdecl*)(unsigned int,int),unsigned short *,unsigned short *) {
   
   unsigned __int16 *result; // eax
@@ -247,7 +229,6 @@ void  IGfxEngine::SetObjectLayerAccess(struct SGfxObjectInfo * (__cdecl*)(unsign
 
 // address=[0x2f5a960]
 // Decompiled from int (__cdecl *__thiscall IGfxEngine::SetOwnerIDCallback(IGfxEngine *this, int (__cdecl *a2)(int)))(int)
-
 void  IGfxEngine::SetOwnerIDCallback(int (__cdecl*)(int)) {
   
   int (__cdecl *result)(int); // eax
@@ -260,7 +241,6 @@ void  IGfxEngine::SetOwnerIDCallback(int (__cdecl*)(int)) {
 
 // address=[0x2f5a980]
 // Decompiled from char __thiscall IGfxEngine::PutLandscapeObject(IGfxEngine *this, int a2, int a3, int a4)
-
 bool  IGfxEngine::PutLandscapeObject(int,void *,void *) {
   
   if ( *((_DWORD *)this + 3) == -1 )
@@ -383,10 +363,7 @@ bool  IGfxEngine::PutLandscapeObject(int,void *,void *) {
 
 
 // address=[0x2f5ae60]
-// Decompiled from void *(__cdecl *__thiscall IGfxEngine::SetReloadCallback(
-        IGfxEngine *this,
-        void *(__cdecl *a2)(int, bool, bool)))(int, bool, bool)
-
+// Decompiled from void *(__cdecl *__thiscall IGfxEngine::SetReloadCallback(  IGfxEngine *this,  void *(__cdecl *a2)(int, bool, bool)))(int, bool, bool)
 void  IGfxEngine::SetReloadCallback(void * (__cdecl*)(int,bool,bool)) {
   
   void *(__cdecl *result)(int, bool, bool); // eax
@@ -399,7 +376,6 @@ void  IGfxEngine::SetReloadCallback(void * (__cdecl*)(int,bool,bool)) {
 
 // address=[0x2f5ae80]
 // Decompiled from void *__stdcall IGfxEngine::SetGfxObject(void *Src)
-
 void  IGfxEngine::SetGfxObject(struct SGfxObject *) {
   
   void *result; // eax
@@ -413,7 +389,6 @@ void  IGfxEngine::SetGfxObject(struct SGfxObject *) {
 
 // address=[0x2f5aec0]
 // Decompiled from int __thiscall IGfxEngine::SetIndexWave1(IGfxEngine *this, int a2, char a3)
-
 void  IGfxEngine::SetIndexWave1(int,int) {
   
   int result; // eax
@@ -427,7 +402,6 @@ void  IGfxEngine::SetIndexWave1(int,int) {
 
 // address=[0x2f5aef0]
 // Decompiled from int __thiscall IGfxEngine::SetIndexWave2(IGfxEngine *this, int a2, char a3)
-
 void  IGfxEngine::SetIndexWave2(int,int) {
   
   int result; // eax
@@ -441,7 +415,6 @@ void  IGfxEngine::SetIndexWave2(int,int) {
 
 // address=[0x2f5af20]
 // Decompiled from int __thiscall IGfxEngine::SetIndexWave3(IGfxEngine *this, int a2, char a3)
-
 void  IGfxEngine::SetIndexWave3(int,int) {
   
   int result; // eax
@@ -455,7 +428,6 @@ void  IGfxEngine::SetIndexWave3(int,int) {
 
 // address=[0x2f5af50]
 // Decompiled from int __thiscall IGfxEngine::SetIndexWave4(IGfxEngine *this, int a2, char a3)
-
 void  IGfxEngine::SetIndexWave4(int,int) {
   
   int result; // eax
@@ -469,7 +441,6 @@ void  IGfxEngine::SetIndexWave4(int,int) {
 
 // address=[0x2f5af80]
 // Decompiled from int __thiscall IGfxEngine::SetIndexWave5(IGfxEngine *this, int a2, char a3)
-
 void  IGfxEngine::SetIndexWave5(int,int) {
   
   int result; // eax
@@ -483,7 +454,6 @@ void  IGfxEngine::SetIndexWave5(int,int) {
 
 // address=[0x2f5afb0]
 // Decompiled from int __thiscall IGfxEngine::SetIndexWave6(IGfxEngine *this, int a2, char a3)
-
 void  IGfxEngine::SetIndexWave6(int,int) {
   
   int result; // eax
@@ -497,7 +467,6 @@ void  IGfxEngine::SetIndexWave6(int,int) {
 
 // address=[0x2f5afe0]
 // Decompiled from int __thiscall IGfxEngine::SetIndexWave7(IGfxEngine *this, int a2, char a3)
-
 void  IGfxEngine::SetIndexWave7(int,int) {
   
   int result; // eax
@@ -511,7 +480,6 @@ void  IGfxEngine::SetIndexWave7(int,int) {
 
 // address=[0x2f5b010]
 // Decompiled from int __thiscall IGfxEngine::SetIndexWave8(IGfxEngine *this, int a2, char a3)
-
 void  IGfxEngine::SetIndexWave8(int,int) {
   
   int result; // eax
@@ -525,7 +493,6 @@ void  IGfxEngine::SetIndexWave8(int,int) {
 
 // address=[0x2f5b040]
 // Decompiled from int __thiscall IGfxEngine::SetIndexWave9(IGfxEngine *this, int a2, char a3)
-
 void  IGfxEngine::SetIndexWave9(int,int) {
   
   int result; // eax
@@ -539,7 +506,6 @@ void  IGfxEngine::SetIndexWave9(int,int) {
 
 // address=[0x2f5b070]
 // Decompiled from int __thiscall IGfxEngine::SetIndexWave10(IGfxEngine *this, int a2, char a3)
-
 void  IGfxEngine::SetIndexWave10(int,int) {
   
   int result; // eax
@@ -553,7 +519,6 @@ void  IGfxEngine::SetIndexWave10(int,int) {
 
 // address=[0x2f5b0a0]
 // Decompiled from int __thiscall IGfxEngine::SetIndexWave11(IGfxEngine *this, int a2, char a3)
-
 void  IGfxEngine::SetIndexWave11(int,int) {
   
   int result; // eax
@@ -567,7 +532,6 @@ void  IGfxEngine::SetIndexWave11(int,int) {
 
 // address=[0x2f5b0d0]
 // Decompiled from int __thiscall IGfxEngine::SetIndexWave12(IGfxEngine *this, int a2, char a3)
-
 void  IGfxEngine::SetIndexWave12(int,int) {
   
   int result; // eax
@@ -581,7 +545,6 @@ void  IGfxEngine::SetIndexWave12(int,int) {
 
 // address=[0x2f5b100]
 // Decompiled from int __thiscall IGfxEngine::SetIndexWave13(IGfxEngine *this, int a2, char a3)
-
 void  IGfxEngine::SetIndexWave13(int,int) {
   
   int result; // eax
@@ -595,7 +558,6 @@ void  IGfxEngine::SetIndexWave13(int,int) {
 
 // address=[0x2f5b130]
 // Decompiled from int __thiscall IGfxEngine::SetIndexWave14(IGfxEngine *this, int a2, char a3)
-
 void  IGfxEngine::SetIndexWave14(int,int) {
   
   int result; // eax
@@ -609,7 +571,6 @@ void  IGfxEngine::SetIndexWave14(int,int) {
 
 // address=[0x2f5b160]
 // Decompiled from int __thiscall IGfxEngine::SetIndexWave15(IGfxEngine *this, int a2, char a3)
-
 void  IGfxEngine::SetIndexWave15(int,int) {
   
   int result; // eax
@@ -623,7 +584,6 @@ void  IGfxEngine::SetIndexWave15(int,int) {
 
 // address=[0x2f5b190]
 // Decompiled from int __thiscall IGfxEngine::SetIndexWave16(IGfxEngine *this, int a2, char a3)
-
 void  IGfxEngine::SetIndexWave16(int,int) {
   
   int result; // eax
@@ -636,9 +596,7 @@ void  IGfxEngine::SetIndexWave16(int,int) {
 
 
 // address=[0x2f5b1c0]
-// Decompiled from // public: void __thiscall IGfxEngine::SetIndexWave17(int,int)
-int __stdcall IGfxEngine::SetIndexWave17(int a1, char a2)
-
+// Decompiled from int __stdcall IGfxEngine::SetIndexWave17(int a1, char a2)
 void  IGfxEngine::SetIndexWave17(int,int) {
   
   int result; // eax
@@ -651,9 +609,7 @@ void  IGfxEngine::SetIndexWave17(int,int) {
 
 
 // address=[0x2f5b1f0]
-// Decompiled from // public: void __thiscall IGfxEngine::SetIndexWave18(int,int)
-int __stdcall IGfxEngine::SetIndexWave18(int a1, char a2)
-
+// Decompiled from int __stdcall IGfxEngine::SetIndexWave18(int a1, char a2)
 void  IGfxEngine::SetIndexWave18(int,int) {
   
   int result; // eax
@@ -667,7 +623,6 @@ void  IGfxEngine::SetIndexWave18(int,int) {
 
 // address=[0x2f5b220]
 // Decompiled from char __thiscall IGfxEngine::SetIndexBorderstone(IGfxEngine *this, int a2, char a3)
-
 void  IGfxEngine::SetIndexBorderstone(int,int) {
   
   char result; // al
@@ -681,7 +636,6 @@ void  IGfxEngine::SetIndexBorderstone(int,int) {
 
 // address=[0x2f5b240]
 // Decompiled from char __thiscall IGfxEngine::EnableMiniMap(IGfxEngine *this, char a2, int a3, int a4, HWND a5)
-
 bool  IGfxEngine::EnableMiniMap(bool,int,int,struct HWND__ *) {
   
   int v6; // [esp+4h] [ebp-4h]
@@ -709,10 +663,7 @@ bool  IGfxEngine::EnableMiniMap(bool,int,int,struct HWND__ *) {
 
 
 // address=[0x2f5b2f0]
-// Decompiled from struct SGfxColor *(__cdecl *__thiscall IGfxEngine::SetMiniMapColorCallback(
-        IGfxEngine *this,
-        struct SGfxColor *(__cdecl *a2)(unsigned int)))(unsigned int)
-
+// Decompiled from struct SGfxColor *(__cdecl *__thiscall IGfxEngine::SetMiniMapColorCallback(  IGfxEngine *this,  struct SGfxColor *(__cdecl *a2)(unsigned int)))(unsigned int)
 void  IGfxEngine::SetMiniMapColorCallback(struct SGfxColor * (__cdecl*)(unsigned int)) {
   
   struct SGfxColor *(__cdecl *result)(unsigned int); // eax
@@ -725,7 +676,6 @@ void  IGfxEngine::SetMiniMapColorCallback(struct SGfxColor * (__cdecl*)(unsigned
 
 // address=[0x2f5b310]
 // Decompiled from char __thiscall IGfxEngine::EnableCameraWindow(IGfxEngine *this, char a2, int a3, int a4, int a5, int a6)
-
 bool  IGfxEngine::EnableCameraWindow(bool,int,int,int,int) {
   
   CInterfaceD3D::DestroyCameraWindowSurface(D3DObjectPtr);
@@ -743,7 +693,6 @@ bool  IGfxEngine::EnableCameraWindow(bool,int,int,int,int) {
 
 // address=[0x2f5b390]
 // Decompiled from int __thiscall IGfxEngine::SetCameraViewPosition(IGfxEngine *this, int a2, int a3)
-
 void  IGfxEngine::SetCameraViewPosition(int,int) {
   
   int result; // eax
@@ -760,7 +709,6 @@ void  IGfxEngine::SetCameraViewPosition(int,int) {
 
 // address=[0x2f5b420]
 // Decompiled from void __thiscall IGfxEngine::SetCameraTriangleSize(IGfxEngine *this, int a2)
-
 void  IGfxEngine::SetCameraTriangleSize(int) {
   
   if ( *((_DWORD *)this + 1) != a2 && a2 >= 0x20000 && a2 <= (int)&dword_B0F0F0[213956] )
@@ -783,7 +731,6 @@ void  IGfxEngine::SetCameraTriangleSize(int) {
 
 // address=[0x2f5b4e0]
 // Decompiled from int __thiscall IGfxEngine::GetRenderHeight(IGfxEngine *this, int a2)
-
 int  IGfxEngine::GetRenderHeight(int) {
   
   return (int)(float)((float)((float)a2 * 0.051562499) * *(float *)&g_fCamVertexSize) >> 16;
@@ -791,11 +738,7 @@ int  IGfxEngine::GetRenderHeight(int) {
 
 
 // address=[0x2f5b510]
-// Decompiled from void (__cdecl *__thiscall IGfxEngine::SetIconCallbacks(
-        IGfxEngine *this,
-        void (__cdecl *a2)(int),
-        unsigned __int8 (__cdecl *a3)(int)))(int)
-
+// Decompiled from void (__cdecl *__thiscall IGfxEngine::SetIconCallbacks(  IGfxEngine *this,  void (__cdecl *a2)(int),  unsigned __int8 (__cdecl *a3)(int)))(int)
 void  IGfxEngine::SetIconCallbacks(void (__cdecl*)(int),unsigned char (__cdecl*)(int)) {
   
   void (__cdecl *result)(int); // eax
@@ -809,7 +752,6 @@ void  IGfxEngine::SetIconCallbacks(void (__cdecl*)(int),unsigned char (__cdecl*)
 
 // address=[0x2f5b530]
 // Decompiled from char __thiscall IGfxEngine::PutAccessoryIcon(IGfxEngine *this, unsigned int a2, int a3, int a4)
-
 bool  IGfxEngine::PutAccessoryIcon(int,void *,void *) {
   
   if ( a2 >= 0x100 )
@@ -821,22 +763,7 @@ bool  IGfxEngine::PutAccessoryIcon(int,void *,void *) {
 
 
 // address=[0x2f5b570]
-// Decompiled from char __thiscall IGfxEngine::InitEngine(
-        int this,
-        int a2,
-        int a3,
-        int a4,
-        int a5,
-        int a6,
-        int a7,
-        int a8,
-        int a9,
-        int a10,
-        char a11,
-        _DWORD *a12,
-        _DWORD *a13,
-        _DWORD *a14)
-
+// Decompiled from char __thiscall IGfxEngine::InitEngine(  int this,  int a2,  int a3,  int a4,  int a5,  int a6,  int a7,  int a8,  int a9,  int a10,  char a11,  _DWORD *a12,  _DWORD *a13,  _DWORD *a14)
 bool  IGfxEngine::InitEngine(struct SGfxRenderConfiguration,bool,int &,int &,int &) {
   
   *(_BYTE *)(this + 21) = a11;
@@ -926,18 +853,7 @@ bool  IGfxEngine::InitEngine(struct SGfxRenderConfiguration,bool,int &,int &,int
 
 
 // address=[0x2f5b7c0]
-// Decompiled from char __thiscall IGfxEngine::RebuildRenderEnvironment(
-        IGfxEngine *this,
-        __int16 a2,
-        int a3,
-        int a4,
-        int a5,
-        int a6,
-        int a7,
-        int a8,
-        int a9,
-        int a10)
-
+// Decompiled from char __thiscall IGfxEngine::RebuildRenderEnvironment(  IGfxEngine *this,  __int16 a2,  int a3,  int a4,  int a5,  int a6,  int a7,  int a8,  int a9,  int a10)
 bool  IGfxEngine::RebuildRenderEnvironment(struct SGfxRenderConfiguration) {
   
   if ( !*((_BYTE *)this + 20) )
@@ -979,7 +895,6 @@ bool  IGfxEngine::RebuildRenderEnvironment(struct SGfxRenderConfiguration) {
 
 // address=[0x2f5b8e0]
 // Decompiled from void *__thiscall IGfxEngine::GetCurrentRenderConfiguration(IGfxEngine *this)
-
 struct SGfxRenderConfiguration const &  IGfxEngine::GetCurrentRenderConfiguration(void)const {
   
   return &GfxEngineSetup;
@@ -988,7 +903,6 @@ struct SGfxRenderConfiguration const &  IGfxEngine::GetCurrentRenderConfiguratio
 
 // address=[0x2f5b8f0]
 // Decompiled from bool __thiscall IGfxEngine::RenderFrame(IGfxEngine *this, bool a2, char a3)
-
 bool  IGfxEngine::RenderFrame(bool,bool) {
   
   struct SurfaceClipper *v4; // eax
@@ -1346,9 +1260,7 @@ LABEL_106:
 
 
 // address=[0x2f5c400]
-// Decompiled from // public: bool __thiscall IGfxEngine::BlitFrameToDIB(struct HBITMAP__ *)
-int __stdcall IGfxEngine::BlitFrameToDIB(HGDIOBJ h)
-
+// Decompiled from int __stdcall IGfxEngine::BlitFrameToDIB(HGDIOBJ h)
 bool  IGfxEngine::BlitFrameToDIB(struct HBITMAP__ *) {
   
   return BlitRenderedSurfaceToDIB(hWnd, h);
@@ -1356,9 +1268,7 @@ bool  IGfxEngine::BlitFrameToDIB(struct HBITMAP__ *) {
 
 
 // address=[0x2f5c420]
-// Decompiled from // public: void __thiscall IGfxEngine::ForceMiniMapRefresh(void)
-void IGfxEngine::ForceMiniMapRefresh()
-
+// Decompiled from void IGfxEngine::ForceMiniMapRefresh()
 void  IGfxEngine::ForceMiniMapRefresh(void) {
   
   byte_3E2E30C = 1;
@@ -1367,7 +1277,6 @@ void  IGfxEngine::ForceMiniMapRefresh(void) {
 
 // address=[0x2f5c440]
 // Decompiled from struct tagRECT *__thiscall IGfxEngine::DrawRectangle(IGfxEngine *this, struct tagRECT *a2, __int16 a3)
-
 void  IGfxEngine::DrawRectangle(struct tagRECT *,unsigned short) {
   
   struct tagRECT *result; // eax
@@ -1381,7 +1290,6 @@ void  IGfxEngine::DrawRectangle(struct tagRECT *,unsigned short) {
 
 // address=[0x2f5c460]
 // Decompiled from char __thiscall IGfxEngine::EnableIconLayer(IGfxEngine *this, char a2)
-
 void  IGfxEngine::EnableIconLayer(bool) {
   
   char result; // al
@@ -1394,7 +1302,6 @@ void  IGfxEngine::EnableIconLayer(bool) {
 
 // address=[0x2f5c480]
 // Decompiled from int __thiscall IGfxEngine::UpdateWorldPosition(IGfxEngine *this, __int64 a2)
-
 void  IGfxEngine::UpdateWorldPosition(int,int) {
   
   int result; // eax
@@ -1424,7 +1331,6 @@ void  IGfxEngine::UpdateWorldPosition(int,int) {
 
 // address=[0x2f5c540]
 // Decompiled from size_t __thiscall IGfxEngine::UpdateWorldPosition(IGfxEngine *this, int a2)
-
 void  IGfxEngine::UpdateWorldPosition(int) {
   
   size_t result; // eax
@@ -1455,9 +1361,7 @@ void  IGfxEngine::UpdateWorldPosition(int) {
 
 
 // address=[0x2f5c5f0]
-// Decompiled from // public: void __thiscall IGfxEngine::RenderCursor(void)
-void IGfxEngine::RenderCursor()
-
+// Decompiled from void IGfxEngine::RenderCursor()
 void  IGfxEngine::RenderCursor(void) {
   
   if ( D3DObjectPtr )
@@ -1466,12 +1370,7 @@ void  IGfxEngine::RenderCursor(void) {
 
 
 // address=[0x2f5c610]
-// Decompiled from float *__thiscall IGfxEngine::ConvertMapPositionToWorldScreenOffsets(
-        IGfxEngine *this,
-        __int64 a2,
-        float *a3,
-        float *a4)
-
+// Decompiled from float *__thiscall IGfxEngine::ConvertMapPositionToWorldScreenOffsets(  IGfxEngine *this,  __int64 a2,  float *a3,  float *a4)
 void  IGfxEngine::ConvertMapPositionToWorldScreenOffsets(int,int,float &,float &) {
   
   float *result; // eax
@@ -1488,9 +1387,7 @@ void  IGfxEngine::ConvertMapPositionToWorldScreenOffsets(int,int,float &,float &
 
 
 // address=[0x2f5c6d0]
-// Decompiled from // public: void __thiscall IGfxEngine::ConvertMapPositionToWorldScreenOffsets(int,int,int &,int &)
-int __stdcall IGfxEngine::ConvertMapPositionToWorldScreenOffsets_0(__int64 a1, _DWORD *a2, _DWORD *a3)
-
+// Decompiled from int __stdcall IGfxEngine::ConvertMapPositionToWorldScreenOffsets_0(__int64 a1, _DWORD *a2, _DWORD *a3)
 void  IGfxEngine::ConvertMapPositionToWorldScreenOffsets(int,int,int &,int &) {
   
   int result; // eax
@@ -1508,7 +1405,6 @@ void  IGfxEngine::ConvertMapPositionToWorldScreenOffsets(int,int,int &,int &) {
 
 // address=[0x2f5c760]
 // Decompiled from bool __thiscall IGfxEngine::CanChangeGround(IGfxEngine *this, int a2, int a3, int a4)
-
 bool  IGfxEngine::CanChangeGround(int,int,int) {
   
   return dword_3E2E2A0 && CheckField(a2, a3, a2 + Size * a3, a4);
@@ -1517,7 +1413,6 @@ bool  IGfxEngine::CanChangeGround(int,int,int) {
 
 // address=[0x2f5c7a0]
 // Decompiled from void __thiscall IGfxEngine::SetDarkLand(IGfxEngine *this, int a2, int a3, bool a4)
-
 void  IGfxEngine::SetDarkLand(int,int,bool) {
   
   int v4; // [esp+4h] [ebp-8h] BYREF
@@ -1537,7 +1432,6 @@ void  IGfxEngine::SetDarkLand(int,int,bool) {
 
 // address=[0x2f5c810]
 // Decompiled from int __thiscall IGfxEngine::SetFoggingFadingStep(IGfxEngine *this, int a2)
-
 void  IGfxEngine::SetFoggingFadingStep(int) {
   
   int result; // eax
@@ -1568,7 +1462,6 @@ void  IGfxEngine::SetFoggingFadingStep(int) {
 
 // address=[0x2f5c8a0]
 // Decompiled from int __thiscall IGfxEngine::SetFoggingUpdateMode(IGfxEngine *this, int a2)
-
 void  IGfxEngine::SetFoggingUpdateMode(int) {
   
   int result; // eax
@@ -1582,7 +1475,6 @@ void  IGfxEngine::SetFoggingUpdateMode(int) {
 
 // address=[0x2f5c8c0]
 // Decompiled from int __thiscall IGfxEngine::SetFoggingRange(IGfxEngine *this, int a2, int a3)
-
 void  IGfxEngine::SetFoggingRange(int,int) {
   
   int result; // eax
@@ -1617,7 +1509,6 @@ void  IGfxEngine::SetFoggingRange(int,int) {
 
 // address=[0x2f5c950]
 // Decompiled from bool __thiscall IGfxEngine::IsInitialized(IGfxEngine *this)
-
 bool  IGfxEngine::IsInitialized(void) {
   
   if ( SGfxRenderConfiguration::IsHardwareLandscapeEngine((SGfxRenderConfiguration *)&GfxEngineSetup) )
@@ -1628,9 +1519,7 @@ bool  IGfxEngine::IsInitialized(void) {
 
 
 // address=[0x2f5c980]
-// Decompiled from // public: bool __thiscall IGfxEngine::IsHardwareEngine(void)
-char __thiscall IGfxEngine::IsHardwareEngine(_BYTE *this)
-
+// Decompiled from char __thiscall IGfxEngine::IsHardwareEngine(_BYTE *this)
 bool  IGfxEngine::IsHardwareEngine(void) {
   
   if ( this[20] )
@@ -1642,7 +1531,6 @@ bool  IGfxEngine::IsHardwareEngine(void) {
 
 // address=[0x2f5c9b0]
 // Decompiled from char __thiscall IGfxEngine::Use4444Palettes(IGfxEngine *this)
-
 bool  IGfxEngine::Use4444Palettes(void) {
   
   if ( SGfxRenderConfiguration::IsHardwareLandscapeEngine((SGfxRenderConfiguration *)&GfxEngineSetup) )
@@ -1654,7 +1542,6 @@ bool  IGfxEngine::Use4444Palettes(void) {
 
 // address=[0x2f5c9e0]
 // Decompiled from char __thiscall IGfxEngine::IsGuiMode(IGfxEngine *this)
-
 bool  IGfxEngine::IsGuiMode(void) {
   
   return byte_3E2E261;
@@ -1663,7 +1550,6 @@ bool  IGfxEngine::IsGuiMode(void) {
 
 // address=[0x2f5c9f0]
 // Decompiled from char __thiscall IGfxEngine::IsGfxEngineRebuilded(IGfxEngine *this)
-
 bool  IGfxEngine::IsGfxEngineRebuilded(void) {
   
   if ( !D3DObjectPtr )
@@ -1677,7 +1563,6 @@ bool  IGfxEngine::IsGfxEngineRebuilded(void) {
 
 // address=[0x2f5ca30]
 // Decompiled from int __thiscall IGfxEngine::GetGfxMode(IGfxEngine *this)
-
 int  IGfxEngine::GetGfxMode(void) {
   
   return dword_3E2E2B8;
@@ -1686,7 +1571,6 @@ int  IGfxEngine::GetGfxMode(void) {
 
 // address=[0x2f5ca40]
 // Decompiled from int __cdecl IGfxEngine::ConvertRgbToHicol(int a1, int a2, int a3)
-
 static unsigned short __cdecl IGfxEngine::ConvertRgbToHicol(int,int,int) {
   
   int v3; // eax
@@ -1703,7 +1587,6 @@ static unsigned short __cdecl IGfxEngine::ConvertRgbToHicol(int,int,int) {
 
 // address=[0x2f5cae0]
 // Decompiled from int __thiscall IGfxEngine::GetOutputWidth(IGfxEngine *this)
-
 int  IGfxEngine::GetOutputWidth(void) {
   
   return OutputWidth;
@@ -1712,7 +1595,6 @@ int  IGfxEngine::GetOutputWidth(void) {
 
 // address=[0x2f5caf0]
 // Decompiled from int __thiscall IGfxEngine::GetOutputHeight(IGfxEngine *this)
-
 int  IGfxEngine::GetOutputHeight(void) {
   
   return OutputHeight;
@@ -1720,9 +1602,7 @@ int  IGfxEngine::GetOutputHeight(void) {
 
 
 // address=[0x2f5cb00]
-// Decompiled from // public: int __thiscall IGfxEngine::GetClosestMapPoint(int,int)
-int __thiscall IGfxEngine::GetClosestMapPoint(void *this, int a2, int a3)
-
+// Decompiled from int __thiscall IGfxEngine::GetClosestMapPoint(void *this, int a2, int a3)
 int  IGfxEngine::GetClosestMapPoint(int,int) {
   
   int v4; // [esp+0h] [ebp-Ch] BYREF
@@ -1735,7 +1615,6 @@ int  IGfxEngine::GetClosestMapPoint(int,int) {
 
 // address=[0x2f5cb30]
 // Decompiled from int __thiscall IGfxEngine::GetClosestMapPoint(IGfxEngine *this, int a2, int a3, int *a4, int *a5)
-
 int  IGfxEngine::GetClosestMapPoint(int,int,int &,int &) {
   
   return SearchMapPoint(a2, a3, a4, a5, 0);
@@ -1743,9 +1622,7 @@ int  IGfxEngine::GetClosestMapPoint(int,int,int &,int &) {
 
 
 // address=[0x2f5cb60]
-// Decompiled from // public: int __thiscall IGfxEngine::GetClosestMapPointOutsideMap(int,int,int &,int &)
-int __stdcall IGfxEngine::GetClosestMapPointOutsideMap(int a1, int a2, int *a3, int *a4)
-
+// Decompiled from int __stdcall IGfxEngine::GetClosestMapPointOutsideMap(int a1, int a2, int *a3, int *a4)
 int  IGfxEngine::GetClosestMapPointOutsideMap(int,int,int &,int &) {
   
   return SearchMapPoint(a1, a2, a3, a4, 1);
@@ -1754,7 +1631,6 @@ int  IGfxEngine::GetClosestMapPointOutsideMap(int,int,int &,int &) {
 
 // address=[0x2f5cb90]
 // Decompiled from int __cdecl IGfxEngine::GetScreenOffsetsByMapIndices(__int64 a1, int *a2, int *a3)
-
 static int __cdecl IGfxEngine::GetScreenOffsetsByMapIndices(int,int,int &,int &) {
   
   if ( (int)(HIDWORD(a1) | a1) < 0 || (int)a1 >= (int)Size || SHIDWORD(a1) >= (int)Size )
@@ -1768,9 +1644,7 @@ static int __cdecl IGfxEngine::GetScreenOffsetsByMapIndices(int,int,int &,int &)
 
 
 // address=[0x2f5cc10]
-// Decompiled from // public: static int __cdecl IGfxEngine::GetScreenOffsetsByMapIndices(int,int &,int &)
-int __cdecl IGfxEngine::GetScreenOffsetsByMapIndices_0(int a1, int *a2, int *a3)
-
+// Decompiled from int __cdecl IGfxEngine::GetScreenOffsetsByMapIndices_0(int a1, int *a2, int *a3)
 static int __cdecl IGfxEngine::GetScreenOffsetsByMapIndices(int,int &,int &) {
   
   if ( a1 < 0 || a1 >= (int)(Size * Size) )
@@ -1785,7 +1659,6 @@ static int __cdecl IGfxEngine::GetScreenOffsetsByMapIndices(int,int &,int &) {
 
 // address=[0x2f5cca0]
 // Decompiled from double __thiscall IGfxEngine::GetCurrentZoomFactor(IGfxEngine *this)
-
 float  IGfxEngine::GetCurrentZoomFactor(void) {
   
   return *(float *)&dword_3E2E2F4;
@@ -1794,7 +1667,6 @@ float  IGfxEngine::GetCurrentZoomFactor(void) {
 
 // address=[0x2f5ccc0]
 // Decompiled from int __thiscall IGfxEngine::ShowCachePage(IGfxEngine *this, int a2, char a3)
-
 void  IGfxEngine::ShowCachePage(int,int) {
   
   int result; // eax
@@ -1809,7 +1681,6 @@ void  IGfxEngine::ShowCachePage(int,int) {
 
 // address=[0x2f5cd20]
 // Decompiled from int __thiscall IGfxEngine::SetWidthOfLeftGuiBorder(IGfxEngine *this, int a2)
-
 void  IGfxEngine::SetWidthOfLeftGuiBorder(int) {
   
   int result; // eax
@@ -1822,7 +1693,6 @@ void  IGfxEngine::SetWidthOfLeftGuiBorder(int) {
 
 // address=[0x2f5f850]
 // Decompiled from IGfxEngine *__thiscall IGfxEngine::LockCursorShape(IGfxEngine *this, bool a2)
-
 void  IGfxEngine::LockCursorShape(bool) {
   
   IGfxEngine *result; // eax
@@ -1835,7 +1705,6 @@ void  IGfxEngine::LockCursorShape(bool) {
 
 // address=[0x2f5f870]
 // Decompiled from IGfxEngine *__thiscall IGfxEngine::SetCursorShape(IGfxEngine *this, bool a2, unsigned int a3)
-
 void  IGfxEngine::SetCursorShape(bool,int) {
   
   IGfxEngine *result; // eax
@@ -1869,7 +1738,6 @@ void  IGfxEngine::SetCursorShape(bool,int) {
 
 // address=[0x2f5f950]
 // Decompiled from void __thiscall IGfxEngine::FixCursor(IGfxEngine *this, bool a2, bool a3)
-
 void  IGfxEngine::FixCursor(bool,bool) {
   
   int CursorShape; // eax
@@ -1905,7 +1773,6 @@ void  IGfxEngine::FixCursor(bool,bool) {
 
 // address=[0x2f5fa70]
 // Decompiled from int __thiscall IGfxEngine::GetCursorShape(IGfxEngine *this)
-
 int  IGfxEngine::GetCursorShape(void) {
   
   if ( s_iCurrentCursor == -1 )
@@ -1915,9 +1782,7 @@ int  IGfxEngine::GetCursorShape(void) {
 
 
 // address=[0x2f5faa0]
-// Decompiled from // public: bool __thiscall IGfxEngine::IsCursorVisible(void)
-char IGfxEngine::IsCursorVisible()
-
+// Decompiled from char IGfxEngine::IsCursorVisible()
 bool  IGfxEngine::IsCursorVisible(void) {
   
   return s_bCursorIsVisible;
@@ -1925,9 +1790,7 @@ bool  IGfxEngine::IsCursorVisible(void) {
 
 
 // address=[0x2f5fab0]
-// Decompiled from // public: bool __thiscall IGfxEngine::IsCursorFixed(void)
-char IGfxEngine::IsCursorFixed()
-
+// Decompiled from char IGfxEngine::IsCursorFixed()
 bool  IGfxEngine::IsCursorFixed(void) {
   
   return s_bCursorIsFixed;
@@ -1936,7 +1799,6 @@ bool  IGfxEngine::IsCursorFixed(void) {
 
 // address=[0x2f5fac0]
 // Decompiled from char __thiscall IGfxEngine::IsResolutionPossible(IGfxEngine *this, unsigned int a2)
-
 bool  IGfxEngine::IsResolutionPossible(int) {
   
   int v2; // eax
@@ -2070,18 +1932,7 @@ bool  IGfxEngine::IsResolutionPossible(int) {
 
 
 // address=[0x2f5fe60]
-// Decompiled from char __thiscall IGfxEngine::CheckRenderConfiguration(
-        _BYTE *this,
-        char a2,
-        int a3,
-        int a4,
-        int a5,
-        int a6,
-        int a7,
-        int a8,
-        int a9,
-        int a10)
-
+// Decompiled from char __thiscall IGfxEngine::CheckRenderConfiguration(  _BYTE *this,  char a2,  int a3,  int a4,  int a5,  int a6,  int a7,  int a8,  int a9,  int a10)
 bool  IGfxEngine::CheckRenderConfiguration(struct SGfxRenderConfiguration) {
   
   int v11; // [esp+4h] [ebp-19Ch] BYREF
@@ -2199,7 +2050,6 @@ bool  IGfxEngine::CheckRenderConfiguration(struct SGfxRenderConfiguration) {
 
 // address=[0x2f601f0]
 // Decompiled from bool __thiscall IGfxEngine::ShowFrame(IGfxEngine *this)
-
 bool  IGfxEngine::ShowFrame(void) {
   
   if ( IsIconic(hWnd) )
@@ -2219,13 +2069,7 @@ bool  IGfxEngine::ShowFrame(void) {
 
 
 // address=[0x2f60260]
-// Decompiled from char __thiscall IGfxEngine::SolidColorFillGuiSurface(
-        IGfxEngine *this,
-        unsigned int a2,
-        unsigned __int8 a3,
-        unsigned __int8 a4,
-        unsigned __int8 a5)
-
+// Decompiled from char __thiscall IGfxEngine::SolidColorFillGuiSurface(  IGfxEngine *this,  unsigned int a2,  unsigned __int8 a3,  unsigned __int8 a4,  unsigned __int8 a5)
 bool  IGfxEngine::SolidColorFillGuiSurface(int,unsigned char,unsigned char,unsigned char) {
   
   int v6; // [esp+8h] [ebp-14h]
@@ -2255,14 +2099,7 @@ bool  IGfxEngine::SolidColorFillGuiSurface(int,unsigned char,unsigned char,unsig
 
 
 // address=[0x2f603b0]
-// Decompiled from char __thiscall IGfxEngine::SolidColorFillGuiSurface(
-        IGfxEngine *this,
-        unsigned int a2,
-        unsigned __int8 a3,
-        unsigned __int8 a4,
-        unsigned __int8 a5,
-        struct tagRECT a6)
-
+// Decompiled from char __thiscall IGfxEngine::SolidColorFillGuiSurface(  IGfxEngine *this,  unsigned int a2,  unsigned __int8 a3,  unsigned __int8 a4,  unsigned __int8 a5,  struct tagRECT a6)
 bool  IGfxEngine::SolidColorFillGuiSurface(int,unsigned char,unsigned char,unsigned char,struct tagRECT) {
   
   int v7; // [esp+8h] [ebp-14h]
@@ -2296,9 +2133,7 @@ bool  IGfxEngine::SolidColorFillGuiSurface(int,unsigned char,unsigned char,unsig
 
 
 // address=[0x2f699c0]
-// Decompiled from // public: bool __thiscall IGfxEngine::RenderObject(int,int,struct SGfxObjectInfo *,int,int)
-char __thiscall IGfxEngine::RenderObject(void *this, int a2, int a3, int a4, int a5, int a6)
-
+// Decompiled from char __thiscall IGfxEngine::RenderObject(void *this, int a2, int a3, int a4, int a5, int a6)
 bool  IGfxEngine::RenderObject(int,int,struct SGfxObjectInfo *,int,int) {
   
   int v7; // [esp+4h] [ebp-14h]
@@ -2396,9 +2231,7 @@ bool  IGfxEngine::RenderObject(int,int,struct SGfxObjectInfo *,int,int) {
 
 
 // address=[0x2f69c10]
-// Decompiled from // public: bool __thiscall IGfxEngine::RenderResource(int,int,void *,void *,void *,int)
-char __thiscall IGfxEngine::RenderResource(void *this, int a2, int a3, int a4, int a5, int a6, int a7)
-
+// Decompiled from char __thiscall IGfxEngine::RenderResource(void *this, int a2, int a3, int a4, int a5, int a6, int a7)
 bool  IGfxEngine::RenderResource(int,int,void *,void *,void *,int) {
   
   int v8; // [esp+4h] [ebp-2E8h]
@@ -2497,7 +2330,6 @@ bool  IGfxEngine::RenderResource(int,int,void *,void *,void *,int) {
 
 // address=[0x2f69ec0]
 // Decompiled from struct IGfxEffects *__thiscall IGfxEngine::SetEffectSystemInterfacePtr(IGfxEngine *this, struct IGfxEffects *a2)
-
 void  IGfxEngine::SetEffectSystemInterfacePtr(class IGfxEffects *) {
   
   struct IGfxEffects *result; // eax
@@ -2510,7 +2342,6 @@ void  IGfxEngine::SetEffectSystemInterfacePtr(class IGfxEffects *) {
 
 // address=[0x2f72f10]
 // Decompiled from int (__cdecl *__thiscall IGfxEngine::EnableDebugValueCallback(IGfxEngine *this, int (__cdecl *a2)(int, int)))(int, int)
-
 void  IGfxEngine::EnableDebugValueCallback(int (__cdecl*)(int,int)) {
   
   int (__cdecl *result)(int, int); // eax
@@ -2523,7 +2354,6 @@ void  IGfxEngine::EnableDebugValueCallback(int (__cdecl*)(int,int)) {
 
 // address=[0x2f72f30]
 // Decompiled from char *(__cdecl *__thiscall IGfxEngine::EnableDebugStringCallback(IGfxEngine *this, char *(__cdecl *a2)()))()
-
 void  IGfxEngine::EnableDebugStringCallback(char * (__cdecl*)(void)) {
   
   char *(__cdecl *result)(); // eax
@@ -2535,11 +2365,7 @@ void  IGfxEngine::EnableDebugStringCallback(char * (__cdecl*)(void)) {
 
 
 // address=[0x2f72f50]
-// Decompiled from int __thiscall IGfxEngine::CreateGuiSurface(
-        IGfxEngine *this,
-        unsigned int a2,
-        struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION *a3)
-
+// Decompiled from int __thiscall IGfxEngine::CreateGuiSurface(  IGfxEngine *this,  unsigned int a2,  struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION *a3)
 int  IGfxEngine::CreateGuiSurface(int,struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION *) {
   
   int v4; // eax
@@ -2625,7 +2451,6 @@ int  IGfxEngine::CreateGuiSurface(int,struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION 
 
 // address=[0x2f73220]
 // Decompiled from int __thiscall IGfxEngine::CreateGuiSurface(IGfxEngine *this, struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION *a2)
-
 int  IGfxEngine::CreateGuiSurface(struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION *) {
   
   int v3; // [esp+4h] [ebp-8h]
@@ -2651,7 +2476,6 @@ int  IGfxEngine::CreateGuiSurface(struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION *) {
 
 // address=[0x2f732a0]
 // Decompiled from char __thiscall IGfxEngine::DestroyGuiSurface(IGfxEngine *this, unsigned int a2)
-
 bool  IGfxEngine::DestroyGuiSurface(int) {
   
   if ( !D3DObjectPtr || a2 >= 0xE )
@@ -2673,7 +2497,6 @@ bool  IGfxEngine::DestroyGuiSurface(int) {
 
 // address=[0x2f73390]
 // Decompiled from char __thiscall IGfxEngine::SetVisibilityOfGuiSurface(IGfxEngine *this, unsigned int a2, char a3)
-
 bool  IGfxEngine::SetVisibilityOfGuiSurface(int,bool) {
   
   if ( !D3DObjectPtr || a2 >= 0xE )
@@ -2689,7 +2512,6 @@ bool  IGfxEngine::SetVisibilityOfGuiSurface(int,bool) {
 
 // address=[0x2f733f0]
 // Decompiled from char __thiscall IGfxEngine::SetGuiSurfaceDestinationPosition(IGfxEngine *this, unsigned int a2, int a3, int a4)
-
 bool  IGfxEngine::SetGuiSurfaceDestinationPosition(int,int,int) {
   
   if ( !D3DObjectPtr || a2 >= 0xE )
@@ -2704,7 +2526,6 @@ bool  IGfxEngine::SetGuiSurfaceDestinationPosition(int,int,int) {
 
 // address=[0x2f73480]
 // Decompiled from char __thiscall IGfxEngine::SetGuiSurfaceDestinationRect(IGfxEngine *this, unsigned int a2, const struct tagRECT *a3)
-
 bool  IGfxEngine::SetGuiSurfaceDestinationRect(int,struct tagRECT const &) {
   
   if ( !D3DObjectPtr || a2 >= 0xE )
@@ -2718,9 +2539,7 @@ bool  IGfxEngine::SetGuiSurfaceDestinationRect(int,struct tagRECT const &) {
 
 
 // address=[0x2f734f0]
-// Decompiled from // public: bool __thiscall IGfxEngine::GetGuiSurfaceDestinationRect(int,struct tagRECT &)
-char __stdcall IGfxEngine::GetGuiSurfaceDestinationRect(unsigned int a1, _DWORD *a2)
-
+// Decompiled from char __stdcall IGfxEngine::GetGuiSurfaceDestinationRect(unsigned int a1, _DWORD *a2)
 bool  IGfxEngine::GetGuiSurfaceDestinationRect(int,struct tagRECT &) {
   
   _DWORD *v3; // ecx
@@ -2741,11 +2560,7 @@ bool  IGfxEngine::GetGuiSurfaceDestinationRect(int,struct tagRECT &) {
 
 
 // address=[0x2f73570]
-// Decompiled from char __thiscall IGfxEngine::GetGuiSurfaceDescription(
-        IGfxEngine *this,
-        unsigned int a2,
-        struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION *a3)
-
+// Decompiled from char __thiscall IGfxEngine::GetGuiSurfaceDescription(  IGfxEngine *this,  unsigned int a2,  struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION *a3)
 bool  IGfxEngine::GetGuiSurfaceDescription(int,struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION &) {
   
   if ( a2 >= 0xE )
@@ -2759,7 +2574,6 @@ bool  IGfxEngine::GetGuiSurfaceDescription(int,struct GFX_ENGINE_GUI_SURFACE_DES
 
 // address=[0x2f735c0]
 // Decompiled from int __thiscall IGfxEngine::BeginWriteToSurface(IGfxEngine *this, unsigned int a2, unsigned int *a3)
-
 unsigned short *  IGfxEngine::BeginWriteToSurface(int,unsigned int &) {
   
   int v4; // [esp+8h] [ebp-Ch] BYREF
@@ -2807,7 +2621,6 @@ unsigned short *  IGfxEngine::BeginWriteToSurface(int,unsigned int &) {
 
 // address=[0x2f73770]
 // Decompiled from char __thiscall IGfxEngine::EndWriteToSurface(IGfxEngine *this, unsigned int a2)
-
 bool  IGfxEngine::EndWriteToSurface(int) {
   
   if ( !D3DObjectPtr || a2 >= 0xE )
@@ -2825,7 +2638,6 @@ bool  IGfxEngine::EndWriteToSurface(int) {
 
 // address=[0x2f737f0]
 // Decompiled from char __thiscall IGfxEngine::GetGuiSurfaceDC(IGfxEngine *this, unsigned int a2, HDC *a3)
-
 bool  IGfxEngine::GetGuiSurfaceDC(int,struct HDC__ * *) {
   
   int v4; // [esp+4h] [ebp-8h]
@@ -2867,7 +2679,6 @@ bool  IGfxEngine::GetGuiSurfaceDC(int,struct HDC__ * *) {
 
 // address=[0x2f73980]
 // Decompiled from bool __thiscall IGfxEngine::ReleaseGuiSurfaceDC(IGfxEngine *this, unsigned int a2, HDC a3)
-
 bool  IGfxEngine::ReleaseGuiSurfaceDC(int,struct HDC__ *) {
   
   if ( !D3DObjectPtr || a2 >= 0xE )
@@ -2884,7 +2695,6 @@ bool  IGfxEngine::ReleaseGuiSurfaceDC(int,struct HDC__ *) {
 
 // address=[0x2f73a10]
 // Decompiled from char __thiscall IGfxEngine::SetGuiSurfaceClipRect(char *this, void *Src)
-
 bool  IGfxEngine::SetGuiSurfaceClipRect(struct tagRECT const &) {
   
   SurfaceClipper *v3; // eax
@@ -2933,7 +2743,6 @@ bool  IGfxEngine::SetGuiSurfaceClipRect(struct tagRECT const &) {
 
 // address=[0x2f73b20]
 // Decompiled from int __thiscall IGfxEngine::ClearGuiSurfaceClipRect(IGfxEngine *this)
-
 void  IGfxEngine::ClearGuiSurfaceClipRect(void) {
   
   return std::unique_ptr<SurfaceClipper>::reset(0);
@@ -2942,7 +2751,6 @@ void  IGfxEngine::ClearGuiSurfaceClipRect(void) {
 
 // address=[0x2f5cd40]
 // Decompiled from bool __thiscall IGfxEngine::IsHardwareRenderingAvailable(IGfxEngine *this)
-
 bool  IGfxEngine::IsHardwareRenderingAvailable(void) {
   
   int IsInterface7Available; // eax
@@ -2998,7 +2806,6 @@ bool  IGfxEngine::IsHardwareRenderingAvailable(void) {
 
 // address=[0x2f5cf10]
 // Decompiled from bool __thiscall IGfxEngine::IsSoftwareRenderingAvailable(IGfxEngine *this)
-
 bool  IGfxEngine::IsSoftwareRenderingAvailable(void) {
   
   int IsInterface3Available; // eax
@@ -3061,7 +2868,6 @@ bool  IGfxEngine::IsSoftwareRenderingAvailable(void) {
 
 // address=[0x2f60510]
 // Decompiled from char __thiscall IGfxEngine::SetRenderEnvironment(IGfxEngine *this)
-
 bool  IGfxEngine::SetRenderEnvironment(void) {
   
   CInterfaceD3D *v3; // [esp+14h] [ebp-1Ch]

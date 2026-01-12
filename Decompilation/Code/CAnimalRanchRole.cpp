@@ -4,7 +4,6 @@
 
 // address=[0x13ffa00]
 // Decompiled from int __cdecl CAnimalRanchRole::New(int a1)
-
 static class CPersistence * __cdecl CAnimalRanchRole::New(std::istream &) {
   
   if ( operator new(0x194u) )
@@ -16,7 +15,6 @@ static class CPersistence * __cdecl CAnimalRanchRole::New(std::istream &) {
 
 // address=[0x14e5d70]
 // Decompiled from char __thiscall CAnimalRanchRole::LogicUpdate(CAnimalRanchRole *this, struct CBuilding *a2)
-
 void  CAnimalRanchRole::LogicUpdate(class CBuilding *) {
   
   unsigned int v2; // eax
@@ -210,7 +208,6 @@ LABEL_35:
 
 // address=[0x14e62d0]
 // Decompiled from unsigned int __thiscall CAnimalRanchRole::Init(CAnimalRanchRole *this, struct CBuilding *a2)
-
 void  CAnimalRanchRole::Init(class CBuilding *) {
   
   unsigned int v2; // eax
@@ -237,7 +234,6 @@ void  CAnimalRanchRole::Init(class CBuilding *) {
 
 // address=[0x14e6390]
 // Decompiled from void __thiscall CAnimalRanchRole::PostLoadInit(CAnimalRanchRole *this, struct CBuilding *a2)
-
 void  CAnimalRanchRole::PostLoadInit(class CBuilding *) {
   
   CWorkUpBuildingRole::PostLoadInit(this, a2);
@@ -246,7 +242,6 @@ void  CAnimalRanchRole::PostLoadInit(class CBuilding *) {
 
 // address=[0x14e63b0]
 // Decompiled from _DWORD *__thiscall CAnimalRanchRole::CAnimalRanchRole(_DWORD *this, int a2)
-
  CAnimalRanchRole::CAnimalRanchRole(std::istream &) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
@@ -274,7 +269,6 @@ void  CAnimalRanchRole::PostLoadInit(class CBuilding *) {
 
 // address=[0x14e6470]
 // Decompiled from int __thiscall CAnimalRanchRole::Store(void *this, struct std::ostream *a2)
-
 void  CAnimalRanchRole::Store(std::ostream &) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
@@ -290,7 +284,6 @@ void  CAnimalRanchRole::Store(std::ostream &) {
 
 // address=[0x14e6690]
 // Decompiled from void __thiscall CAnimalRanchRole::~CAnimalRanchRole(CAnimalRanchRole *this)
-
  CAnimalRanchRole::~CAnimalRanchRole(void) {
   
   CWorkUpBuildingRole::~CWorkUpBuildingRole(this);
@@ -299,7 +292,6 @@ void  CAnimalRanchRole::Store(std::ostream &) {
 
 // address=[0x14e6780]
 // Decompiled from int __thiscall CAnimalRanchRole::ClassID(CAnimalRanchRole *this)
-
 unsigned long  CAnimalRanchRole::ClassID(void)const {
   
   return CAnimalRanchRole::m_iClassID;
@@ -307,9 +299,7 @@ unsigned long  CAnimalRanchRole::ClassID(void)const {
 
 
 // address=[0x14e67b0]
-// Decompiled from // MFC 3.1-14.0 32bit
-int __thiscall CAnimalRanchRole::GetBuildingRole(CAnimalRanchRole *this)
-
+// Decompiled from int __thiscall CAnimalRanchRole::GetBuildingRole(CAnimalRanchRole *this)
 int  CAnimalRanchRole::GetBuildingRole(void) {
   
   return 3;
@@ -318,7 +308,6 @@ int  CAnimalRanchRole::GetBuildingRole(void) {
 
 // address=[0x14fc8a0]
 // Decompiled from CAnimalRanchRole *__thiscall CAnimalRanchRole::CAnimalRanchRole(CAnimalRanchRole *this)
-
  CAnimalRanchRole::CAnimalRanchRole(void) {
   
   CWorkUpBuildingRole::CWorkUpBuildingRole(this);
@@ -329,7 +318,6 @@ int  CAnimalRanchRole::GetBuildingRole(void) {
 
 // address=[0x14fd7f0]
 // Decompiled from int __cdecl CAnimalRanchRole::Load(int a1)
-
 static class CAnimalRanchRole * __cdecl CAnimalRanchRole::Load(std::istream &) {
   
   void **v1; // eax

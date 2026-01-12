@@ -4,7 +4,6 @@
 
 // address=[0x164db60]
 // Decompiled from int StormManager::CreateInstance()
-
 static void __cdecl StormManager::CreateInstance(void) {
   
   int result; // eax
@@ -30,7 +29,6 @@ static void __cdecl StormManager::CreateInstance(void) {
 
 // address=[0x164dc00]
 // Decompiled from void StormManager::DestroyInstance()
-
 static void __cdecl StormManager::DestroyInstance(void) {
   
   if ( StormManager::m_instance )
@@ -40,7 +38,6 @@ static void __cdecl StormManager::DestroyInstance(void) {
 
 // address=[0x164dc40]
 // Decompiled from int StormManager::GetInstance()
-
 static class StormManager * __cdecl StormManager::GetInstance(void) {
   
   return StormManager::m_instance;
@@ -49,7 +46,6 @@ static class StormManager * __cdecl StormManager::GetInstance(void) {
 
 // address=[0x164dc50]
 // Decompiled from int __thiscall StormManager::Initialize(_DWORD *this)
-
 void  StormManager::Initialize(void) {
   
   int v2; // [esp+4h] [ebp-54h]
@@ -92,7 +88,6 @@ void  StormManager::Initialize(void) {
 
 // address=[0x164ddb0]
 // Decompiled from void __thiscall StormManager::UpdateGlobalController(StormManager *this)
-
 void  StormManager::UpdateGlobalController(void) {
   
   _BYTE v2[44]; // [esp+4h] [ebp-5Ch] BYREF
@@ -114,7 +109,6 @@ void  StormManager::UpdateGlobalController(void) {
 
 // address=[0x164de30]
 // Decompiled from void __thiscall StormManager::Update(storm::SimpleConnectivityFacade **this)
-
 void  StormManager::Update(void) {
   
   storm::SimpleController *SessionController; // eax
@@ -131,7 +125,6 @@ void  StormManager::Update(void) {
 
 // address=[0x164dea0]
 // Decompiled from void __thiscall StormManager::Shutdown(StormManager *this)
-
 void  StormManager::Shutdown(void) {
   
   struct storm::SimpleSessionController *SessionController; // eax
@@ -217,7 +210,6 @@ void  StormManager::Shutdown(void) {
 
 // address=[0x164e3d0]
 // Decompiled from void __thiscall StormManager::CloseSession(StormManager *this)
-
 void  StormManager::CloseSession(void) {
   
   _DWORD *v1; // eax
@@ -283,7 +275,6 @@ void  StormManager::CloseSession(void) {
 
 // address=[0x164e530]
 // Decompiled from void __thiscall StormManager::SearchForSessions(StormManager *this)
-
 void  StormManager::SearchForSessions(void) {
   
   _DWORD *v1; // eax
@@ -355,7 +346,6 @@ void  StormManager::SearchForSessions(void) {
 
 // address=[0x164ea30]
 // Decompiled from void __thiscall StormManager::LeaveSession(StormManager *this)
-
 void  StormManager::LeaveSession(void) {
   
   storm::GUID *SessionGUID; // eax
@@ -484,7 +474,6 @@ void  StormManager::LeaveSession(void) {
 
 // address=[0x164ef80]
 // Decompiled from void __thiscall StormManager::SetJoinAndDiscoveryOverride(StormManager *this, int a2)
-
 void  StormManager::SetJoinAndDiscoveryOverride(bool) {
   
   _DWORD *v2; // eax
@@ -593,7 +582,6 @@ void  StormManager::SetJoinAndDiscoveryOverride(bool) {
 
 // address=[0x164f240]
 // Decompiled from void __thiscall StormManager::DeleteSessionHandler(StormManager *this)
-
 void  StormManager::DeleteSessionHandler(void) {
   
   CMFCRibbonPanel *SessionController; // eax
@@ -620,7 +608,6 @@ void  StormManager::DeleteSessionHandler(void) {
 
 // address=[0x164fc90]
 // Decompiled from void __thiscall StormManager::SetFreeSlotCount(StormManager *this, unsigned int a2)
-
 void  StormManager::SetFreeSlotCount(int) {
   
   const struct storm::echo::SessionDescriptor *SessionDescriptor; // eax
@@ -654,7 +641,6 @@ void  StormManager::SetFreeSlotCount(int) {
 
 // address=[0x164fd90]
 // Decompiled from unsigned int __thiscall StormManager::GetLocalPeerId(storm::SimpleSessionHandler **this)
-
 int  StormManager::GetLocalPeerId(void)const {
   
   return storm::SimpleSessionHandler::GetLocalSessionPeerId(this[677]);
@@ -663,7 +649,6 @@ int  StormManager::GetLocalPeerId(void)const {
 
 // address=[0x164fdb0]
 // Decompiled from int __thiscall StormManager::GetHostPeerId(storm::SimpleSessionHandler **this)
-
 int  StormManager::GetHostPeerId(void)const {
   
   return storm::SimpleSessionHandler::GetHostSessionPeerId(this[677]);
@@ -671,9 +656,7 @@ int  StormManager::GetHostPeerId(void)const {
 
 
 // address=[0x164fdd0]
-// Decompiled from // public: bool __thiscall StormManager::IsLocalPeerId(int)const 
-bool __thiscall StormManager::IsLocalPeerId(void *this, int a2)
-
+// Decompiled from bool __thiscall StormManager::IsLocalPeerId(void *this, int a2)
 bool  StormManager::IsLocalPeerId(int)const {
   
   return StormManager::GetLocalPeerId(this) == a2;
@@ -682,7 +665,6 @@ bool  StormManager::IsLocalPeerId(int)const {
 
 // address=[0x164fe00]
 // Decompiled from char __thiscall StormManager::IsLoggedIn(StormManager *this)
-
 bool  StormManager::IsLoggedIn(void)const {
   
   if ( *((_DWORD *)this + 678) )
@@ -694,7 +676,6 @@ bool  StormManager::IsLoggedIn(void)const {
 
 // address=[0x164fe40]
 // Decompiled from bool __thiscall StormManager::IsNATReady(storm::SimpleConnectivityFacade **this)
-
 bool  StormManager::IsNATReady(void)const {
   
   return storm::SimpleConnectivityFacade::IsStormReadyForMatchmaking(this[663]);
@@ -703,7 +684,6 @@ bool  StormManager::IsNATReady(void)const {
 
 // address=[0x164fe60]
 // Decompiled from int __thiscall StormManager::GetSessionState(storm::SimpleSessionHandler **this)
-
 enum StormManager::SESSION_STATE  StormManager::GetSessionState(void)const {
   
   unsigned int HostSessionPeerId; // esi
@@ -717,7 +697,6 @@ enum StormManager::SESSION_STATE  StormManager::GetSessionState(void)const {
 
 // address=[0x1682f40]
 // Decompiled from StormManager *__thiscall StormManager::StormManager(StormManager *this)
-
  StormManager::StormManager(void) {
   
   _DWORD *v1; // eax
@@ -754,7 +733,6 @@ enum StormManager::SESSION_STATE  StormManager::GetSessionState(void)const {
 
 // address=[0x1684f90]
 // Decompiled from void __thiscall StormManager::~StormManager(StormManager *this)
-
  StormManager::~StormManager(void) {
   
   storm::punch::ClientParams::~ClientParams((StormManager *)((char *)this + 2656));
@@ -769,7 +747,6 @@ enum StormManager::SESSION_STATE  StormManager::GetSessionState(void)const {
 
 // address=[0x164ff50]
 // Decompiled from int __thiscall StormManager::InitControllers(StormManager *this)
-
 void  StormManager::InitControllers(void) {
   
   WSAData WSAData; // [esp+8h] [ebp-194h] BYREF
@@ -780,7 +757,6 @@ void  StormManager::InitControllers(void) {
 
 // address=[0x164ffa0]
 // Decompiled from void __thiscall StormManager::SetupStormLogs(StormManager *this)
-
 void  StormManager::SetupStormLogs(void) {
   
   *((_DWORD *)this + 3) = storm::LogDeviceContainer::CreateAndAcquireInstance();
@@ -800,7 +776,6 @@ void  StormManager::SetupStormLogs(void) {
 
 // address=[0x1650020]
 // Decompiled from int __thiscall StormManager::ShutdownStormLogs(storm::RefCountedObject **this)
-
 void  StormManager::ShutdownStormLogs(void) {
   
   int result; // eax
@@ -817,7 +792,6 @@ void  StormManager::ShutdownStormLogs(void) {
 
 // address=[0x1650070]
 // Decompiled from void __thiscall StormManager::StartupStormCore(StormManager *this)
-
 void  StormManager::StartupStormCore(void) {
   
   _DWORD *v1; // eax
@@ -872,7 +846,6 @@ void  StormManager::StartupStormCore(void) {
 
 // address=[0x16501d0]
 // Decompiled from int __thiscall StormManager::StopStormCore(StormManager *this)
-
 void  StormManager::StopStormCore(void) {
   
   const char *v1; // eax
@@ -915,7 +888,6 @@ void  StormManager::StopStormCore(void) {
 
 // address=[0x1650390]
 // Decompiled from void __thiscall StormManager::CreateStormControllers(StormManager *this)
-
 void  StormManager::CreateStormControllers(void) {
   
   const struct storm::ApplicationId *v1; // eax
@@ -1240,7 +1212,6 @@ void  StormManager::CreateStormControllers(void) {
 
 // address=[0x1650c50]
 // Decompiled from void __thiscall StormManager::DestroyStormControllers(StormManager *this)
-
 void  StormManager::DestroyStormControllers(void) {
   
   int v1; // eax
@@ -1269,7 +1240,6 @@ void  StormManager::DestroyStormControllers(void) {
 
 // address=[0x1650cf0]
 // Decompiled from void __thiscall StormManager::RegisterStormControllers(struct storm::SimpleController **this)
-
 void  StormManager::RegisterStormControllers(void) {
   
   storm::SimpleGlobalController::AddEchoController((storm::SimpleGlobalController *)(this + 17), this[663]);
@@ -1279,7 +1249,6 @@ void  StormManager::RegisterStormControllers(void) {
 
 // address=[0x1650d30]
 // Decompiled from void __thiscall StormManager::UnregisterStormControllers(struct storm::SimpleController **this)
-
 void  StormManager::UnregisterStormControllers(void) {
   
   storm::SimpleGlobalController::RemoveEchoController((storm::SimpleGlobalController *)(this + 17), this[663]);
@@ -1289,7 +1258,6 @@ void  StormManager::UnregisterStormControllers(void) {
 
 // address=[0x1650d70]
 // Decompiled from void __thiscall StormManager::InitAndStartupEcho(StormManager *this)
-
 void  StormManager::InitAndStartupEcho(void) {
   
   int ClassTypeId; // eax
@@ -1578,10 +1546,7 @@ void  StormManager::InitAndStartupEcho(void) {
 
 
 // address=[0x16513d0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall StormManager::OnStartEchoFinished(StormManager *this)
-
+// Decompiled from void __thiscall StormManager::OnStartEchoFinished(StormManager *this)
 void  StormManager::OnStartEchoFinished(void) {
   
   ;
@@ -1590,7 +1555,6 @@ void  StormManager::OnStartEchoFinished(void) {
 
 // address=[0x16513e0]
 // Decompiled from void __thiscall StormManager::ShutdownEcho(StormManager *this)
-
 void  StormManager::ShutdownEcho(void) {
   
   const struct storm::StringId *ClassTypeId; // eax

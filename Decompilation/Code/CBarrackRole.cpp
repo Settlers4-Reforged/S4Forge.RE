@@ -4,7 +4,6 @@
 
 // address=[0x13ffb40]
 // Decompiled from int __cdecl CBarrackRole::New(int a1)
-
 static class CPersistence * __cdecl CBarrackRole::New(std::istream &) {
   
   if ( operator new(0x190u) )
@@ -16,7 +15,6 @@ static class CPersistence * __cdecl CBarrackRole::New(std::istream &) {
 
 // address=[0x14e6900]
 // Decompiled from CBarrackRole *__thiscall CBarrackRole::CBarrackRole(CBarrackRole *this)
-
  CBarrackRole::CBarrackRole(void) {
   
   IBuildingRole::IBuildingRole(this);
@@ -29,7 +27,6 @@ static class CPersistence * __cdecl CBarrackRole::New(std::istream &) {
 
 // address=[0x14e6940]
 // Decompiled from int __thiscall CBarrackRole::LogicUpdate(CBarrackRole *this, struct CBuilding *a2)
-
 void  CBarrackRole::LogicUpdate(class CBuilding *) {
   
   int v2; // eax
@@ -237,7 +234,6 @@ void  CBarrackRole::LogicUpdate(class CBuilding *) {
 
 // address=[0x14e6f50]
 // Decompiled from unsigned int __thiscall CBarrackRole::FillGfxInfo(CBarrackRole *this, struct CBuilding *a2, struct SGfxObjectInfo *a3)
-
 void  CBarrackRole::FillGfxInfo(class CBuilding *,struct SGfxObjectInfo &) {
   
   int v3; // eax
@@ -275,7 +271,6 @@ void  CBarrackRole::FillGfxInfo(class CBuilding *,struct SGfxObjectInfo &) {
 
 // address=[0x14e7040]
 // Decompiled from int __thiscall CBarrackRole::Init(CBarrackRole *this, struct CBuilding *a2)
-
 void  CBarrackRole::Init(class CBuilding *) {
   
   unsigned __int8 *v2; // eax
@@ -346,7 +341,6 @@ void  CBarrackRole::Init(class CBuilding *) {
 
 // address=[0x14e72e0]
 // Decompiled from int __thiscall CBarrackRole::PostLoadInit(CBarrackRole *this, struct CBuilding *a2)
-
 void  CBarrackRole::PostLoadInit(class CBuilding *) {
   
   int v2; // eax
@@ -363,7 +357,6 @@ void  CBarrackRole::PostLoadInit(class CBuilding *) {
 
 // address=[0x14e7310]
 // Decompiled from char __thiscall CBarrackRole::SettlerEnter(CBarrackRole *this, struct CBuilding *a2, int a3)
-
 bool  CBarrackRole::SettlerEnter(class CBuilding *,int) {
   
   return 1;
@@ -372,7 +365,6 @@ bool  CBarrackRole::SettlerEnter(class CBuilding *,int) {
 
 // address=[0x14e7320]
 // Decompiled from int __thiscall CBarrackRole::GetBuildingNeed(CBarrackRole *this, int a2)
-
 int  CBarrackRole::GetBuildingNeed(int)const {
   
   unsigned __int16 *v2; // eax
@@ -393,7 +385,6 @@ int  CBarrackRole::GetBuildingNeed(int)const {
 
 // address=[0x14e73c0]
 // Decompiled from int __thiscall CBarrackRole::GetPileIdWithGood(CBarrackRole *this, int a2)
-
 int  CBarrackRole::GetPileIdWithGood(int)const {
   
   unsigned __int16 *v2; // eax
@@ -412,10 +403,7 @@ int  CBarrackRole::GetPileIdWithGood(int)const {
 
 
 // address=[0x14e7450]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CBarrackRole::InhabitantFlee(CBarrackRole *this, int a2)
-
+// Decompiled from void __thiscall CBarrackRole::InhabitantFlee(CBarrackRole *this, int a2)
 void  CBarrackRole::InhabitantFlee(int) {
   
   ;
@@ -424,7 +412,6 @@ void  CBarrackRole::InhabitantFlee(int) {
 
 // address=[0x14e7460]
 // Decompiled from _DWORD *__thiscall CBarrackRole::FillAddSoldierSideBar(CBarrackRole *this, struct CAddSoldierSideBarInfo *a2, bool a3)
-
 void  CBarrackRole::FillAddSoldierSideBar(class CAddSoldierSideBarInfo *,bool) {
   
   int v3; // eax
@@ -488,7 +475,6 @@ void  CBarrackRole::FillAddSoldierSideBar(class CAddSoldierSideBarInfo *,bool) {
 
 // address=[0x14e76c0]
 // Decompiled from char *__thiscall CBarrackRole::CBarrackRole(char *this, int a2)
-
  CBarrackRole::CBarrackRole(std::istream &) {
   
   int v3; // [esp+8h] [ebp-24h] BYREF
@@ -529,7 +515,6 @@ void  CBarrackRole::FillAddSoldierSideBar(class CAddSoldierSideBarInfo *,bool) {
 
 // address=[0x14e77f0]
 // Decompiled from int __thiscall CBarrackRole::Store(struct IBuildingRole *this, struct std::ostream *a2)
-
 void  CBarrackRole::Store(std::ostream &) {
   
   int result; // eax
@@ -557,7 +542,6 @@ void  CBarrackRole::Store(std::ostream &) {
 
 // address=[0x14e8030]
 // Decompiled from int __thiscall CBarrackRole::~CBarrackRole(CBarrackRole *this)
-
  CBarrackRole::~CBarrackRole(void) {
   
   std::vector<unsigned short>::~vector<unsigned short>((char *)this + 384);
@@ -567,7 +551,6 @@ void  CBarrackRole::Store(std::ostream &) {
 
 // address=[0x14e80a0]
 // Decompiled from int __thiscall CBarrackRole::ClassID(CBarrackRole *this)
-
 unsigned long  CBarrackRole::ClassID(void)const {
   
   return CBarrackRole::m_iClassID;
@@ -576,7 +559,6 @@ unsigned long  CBarrackRole::ClassID(void)const {
 
 // address=[0x14e8120]
 // Decompiled from int __thiscall CBarrackRole::GetBuildingRole(CBarrackRole *this)
-
 int  CBarrackRole::GetBuildingRole(void) {
   
   return 11;
@@ -584,10 +566,7 @@ int  CBarrackRole::GetBuildingRole(void) {
 
 
 // address=[0x14e8140]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CBarrackRole::GoodArrive(CBarrackRole *this, int a2)
-
+// Decompiled from void __thiscall CBarrackRole::GoodArrive(CBarrackRole *this, int a2)
 void  CBarrackRole::GoodArrive(int) {
   
   ;
@@ -596,7 +575,6 @@ void  CBarrackRole::GoodArrive(int) {
 
 // address=[0x14fd830]
 // Decompiled from int __cdecl CBarrackRole::Load(int a1)
-
 static class CBarrackRole * __cdecl CBarrackRole::Load(std::istream &) {
   
   void **v1; // eax
@@ -612,7 +590,6 @@ static class CBarrackRole * __cdecl CBarrackRole::Load(std::istream &) {
 
 // address=[0x14e78a0]
 // Decompiled from _DWORD *__thiscall CBarrackRole::FillDialog(CBarrackRole *this, struct CBuilding *a2, bool a3)
-
 void  CBarrackRole::FillDialog(class CBuilding *,bool) {
   
   int v3; // eax
@@ -665,7 +642,6 @@ void  CBarrackRole::FillDialog(class CBuilding *,bool) {
 
 // address=[0x14e80c0]
 // Decompiled from void __thiscall CBarrackRole::ConvertEventIntoGoal(CBarrackRole *this, struct CBuilding *a2, struct CEntityEvent *a3)
-
 void  CBarrackRole::ConvertEventIntoGoal(class CBuilding *,class CEntityEvent *) {
   
   ;
@@ -674,7 +650,6 @@ void  CBarrackRole::ConvertEventIntoGoal(class CBuilding *,class CEntityEvent *)
 
 // address=[0x14e80d0]
 // Decompiled from char __thiscall CBarrackRole::CrushBuilding(CBarrackRole *this)
-
 bool  CBarrackRole::CrushBuilding(void) {
   
   return 1;
@@ -683,7 +658,6 @@ bool  CBarrackRole::CrushBuilding(void) {
 
 // address=[0x14e81f0]
 // Decompiled from char __thiscall CBarrackRole::TryCrushBuilding(CBarrackRole *this)
-
 bool  CBarrackRole::TryCrushBuilding(void) {
   
   return 1;

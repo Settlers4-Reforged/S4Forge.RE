@@ -4,7 +4,6 @@
 
 // address=[0x14d8690]
 // Decompiled from char __thiscall CWalking::IsFree(CWalking *this, int a2)
-
 bool  CWalking::IsFree(int) {
   
   if ( (*(unsigned __int8 (__thiscall **)(CWalking *, int))(*(_DWORD *)this + 20))(this, a2) )
@@ -16,7 +15,6 @@ bool  CWalking::IsFree(int) {
 
 // address=[0x15f6110]
 // Decompiled from CWalkingNormal *__cdecl CWalking::Create(int a1, int a2)
-
 static class CWalking * __cdecl CWalking::Create(enum T_WALKING_TYPE,int) {
   
   CWalkingNormal *result; // eax
@@ -75,7 +73,6 @@ static class CWalking * __cdecl CWalking::Create(enum T_WALKING_TYPE,int) {
 
 // address=[0x15f62c0]
 // Decompiled from CWalkingBase *__cdecl CWalking::Create(int a1)
-
 static class CWalking * __cdecl CWalking::Create(std::istream &) {
   
   struct CWalkingBase::SData *Data; // eax
@@ -164,7 +161,6 @@ static class CWalking * __cdecl CWalking::Create(std::istream &) {
 
 // address=[0x15faec0]
 // Decompiled from CWalking *__thiscall CWalking::CWalking(CWalking *this)
-
  CWalking::CWalking(void) {
   
   *(_DWORD *)this = CWalking::_vftable_;
@@ -174,7 +170,6 @@ static class CWalking * __cdecl CWalking::Create(std::istream &) {
 
 // address=[0x15faf50]
 // Decompiled from CWalking *__thiscall CWalking::~CWalking(CWalking *this)
-
  CWalking::~CWalking(void) {
   
   CWalking *result; // eax

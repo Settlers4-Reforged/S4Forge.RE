@@ -3,12 +3,7 @@
 // Definitions for class CAIEnemySettlerInSectorIterator
 
 // address=[0x130d470]
-// Decompiled from CAIEnemySettlerInSectorIterator *__thiscall CAIEnemySettlerInSectorIterator::CAIEnemySettlerInSectorIterator(
-        CAIEnemySettlerInSectorIterator *this,
-        int a2,
-        int a3,
-        int a4)
-
+// Decompiled from CAIEnemySettlerInSectorIterator *__thiscall CAIEnemySettlerInSectorIterator::CAIEnemySettlerInSectorIterator(  CAIEnemySettlerInSectorIterator *this,  int a2,  int a3,  int a4)
  CAIEnemySettlerInSectorIterator::CAIEnemySettlerInSectorIterator(int,int,int) {
   
   int v5; // [esp+0h] [ebp-Ch]
@@ -59,7 +54,6 @@
 
 // address=[0x130d5e0]
 // Decompiled from char __thiscall CAIEnemySettlerInSectorIterator::NextEnemySettler(_DWORD *this, int *a2)
-
 bool  CAIEnemySettlerInSectorIterator::NextEnemySettler(int &) {
   
   int v3; // [esp+4h] [ebp-28h]

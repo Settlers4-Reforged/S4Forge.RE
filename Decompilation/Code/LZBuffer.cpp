@@ -4,7 +4,6 @@
 
 // address=[0x2f2a330]
 // Decompiled from LZBuffer *__thiscall LZBuffer::LZBuffer(LZBuffer *this)
-
  LZBuffer::LZBuffer(void) {
   
   *(_DWORD *)this = operator new[](0x10000u);
@@ -16,7 +15,6 @@
 
 // address=[0x2f2a400]
 // Decompiled from int __thiscall LZBuffer::~LZBuffer(void **this)
-
  LZBuffer::~LZBuffer(void) {
   
   return operator delete[](*this);
@@ -25,7 +23,6 @@
 
 // address=[0x2f2a4a0]
 // Decompiled from int __cdecl LZBuffer::_distance(unsigned __int16 a1)
-
 static int __cdecl LZBuffer::_distance(int) {
   
   return a1;
@@ -34,7 +31,6 @@ static int __cdecl LZBuffer::_distance(int) {
 
 // address=[0x2f2a4b0]
 // Decompiled from int __thiscall LZBuffer::_nMatch(LZBuffer *this, int a2, const unsigned __int8 *a3, int a4)
-
 int  LZBuffer::_nMatch(int,unsigned char const *,int) {
   
   int v5; // [esp+4h] [ebp-14h]
@@ -73,7 +69,6 @@ int  LZBuffer::_nMatch(int,unsigned char const *,int) {
 
 // address=[0x2f2a640]
 // Decompiled from int __thiscall LZBuffer::_toBuf(LZBuffer *this, unsigned __int8 a2)
-
 void  LZBuffer::_toBuf(unsigned char) {
   
   int result; // eax
@@ -89,7 +84,6 @@ void  LZBuffer::_toBuf(unsigned char) {
 
 // address=[0x2f2a690]
 // Decompiled from int __thiscall LZBuffer::_toBuf(int this, char *Src, size_t a3)
-
 void  LZBuffer::_toBuf(unsigned char const *,unsigned int) {
   
   int result; // eax
@@ -122,7 +116,6 @@ void  LZBuffer::_toBuf(unsigned char const *,unsigned int) {
 
 // address=[0x2f2a920]
 // Decompiled from int __cdecl LZBuffer::_wrap(unsigned __int16 a1)
-
 static int __cdecl LZBuffer::_wrap(unsigned long) {
   
   return a1;
@@ -131,7 +124,6 @@ static int __cdecl LZBuffer::_wrap(unsigned long) {
 
 // address=[0x2f2c400]
 // Decompiled from void *__thiscall LZBuffer::_bufCpy(const void **this, char *a2, unsigned int a3, size_t a4)
-
 void  LZBuffer::_bufCpy(unsigned char *,int,unsigned int) {
   
   int v6; // [esp+Ch] [ebp-4h]

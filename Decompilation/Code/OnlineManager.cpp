@@ -4,7 +4,6 @@
 
 // address=[0x16160f0]
 // Decompiled from void OnlineManager::Create()
-
 static void __cdecl OnlineManager::Create(void) {
   
   int v0; // [esp+8h] [ebp-14h]
@@ -22,7 +21,6 @@ static void __cdecl OnlineManager::Create(void) {
 
 // address=[0x1616180]
 // Decompiled from void OnlineManager::Destroy()
-
 static void __cdecl OnlineManager::Destroy(void) {
   
   if ( OnlineManager::m_instance )
@@ -35,7 +33,6 @@ static void __cdecl OnlineManager::Destroy(void) {
 
 // address=[0x16161d0]
 // Decompiled from int OnlineManager::GetInstance()
-
 static class OnlineManager * __cdecl OnlineManager::GetInstance(void) {
   
   return OnlineManager::m_instance;
@@ -44,7 +41,6 @@ static class OnlineManager * __cdecl OnlineManager::GetInstance(void) {
 
 // address=[0x16161e0]
 // Decompiled from int __thiscall OnlineManager::Update(OnlineManager *this)
-
 void  OnlineManager::Update(void) {
   
   bool IsNATReady; // al
@@ -58,7 +54,6 @@ void  OnlineManager::Update(void) {
 
 // address=[0x1616210]
 // Decompiled from int __thiscall OnlineManager::CreateSession(OnlineManager *this, struct CGameType *a2)
-
 void  OnlineManager::CreateSession(class CGameType *) {
   
   wchar_t *v2; // eax
@@ -239,7 +234,6 @@ void  OnlineManager::CreateSession(class CGameType *) {
 
 // address=[0x1616430]
 // Decompiled from int __thiscall OnlineManager::QuickMatch(OnlineManager *this, struct CGameType *a2)
-
 void  OnlineManager::QuickMatch(class CGameType *) {
   
   wchar_t *v2; // eax
@@ -269,9 +263,7 @@ void  OnlineManager::QuickMatch(class CGameType *) {
 
 
 // address=[0x1616500]
-// Decompiled from // public: void __thiscall OnlineManager::CloseSession(void)
-void OnlineManager::CloseSession()
-
+// Decompiled from void OnlineManager::CloseSession()
 void  OnlineManager::CloseSession(void) {
   
   StormManager *Instance; // eax
@@ -283,7 +275,6 @@ void  OnlineManager::CloseSession(void) {
 
 // address=[0x1616520]
 // Decompiled from void __thiscall OnlineManager::SetFreeSlotCount(OnlineManager *this, int a2)
-
 void  OnlineManager::SetFreeSlotCount(int) {
   
   StormManager *Instance; // eax
@@ -295,7 +286,6 @@ void  OnlineManager::SetFreeSlotCount(int) {
 
 // address=[0x1616540]
 // Decompiled from void __thiscall OnlineManager::JoinSession(OnlineManager *this, unsigned __int64 *a2)
-
 void  OnlineManager::JoinSession(unsigned __int64 &) {
   
   StormManager *Instance; // eax
@@ -315,7 +305,6 @@ void  OnlineManager::JoinSession(unsigned __int64 &) {
 
 // address=[0x16165c0]
 // Decompiled from void __thiscall OnlineManager::LeaveSession(OnlineManager *this)
-
 void  OnlineManager::LeaveSession(void) {
   
   StormManager *Instance; // eax
@@ -327,7 +316,6 @@ void  OnlineManager::LeaveSession(void) {
 
 // address=[0x16165e0]
 // Decompiled from void __thiscall OnlineManager::JoinSessionSucceeded(OnlineManager *this)
-
 void  OnlineManager::JoinSessionSucceeded(void) {
   
   if ( (unsigned __int8)OnlineManager::IsInviteFlow(this) )
@@ -339,7 +327,6 @@ void  OnlineManager::JoinSessionSucceeded(void) {
 
 // address=[0x1616620]
 // Decompiled from void __thiscall OnlineManager::SetJoinAndDiscoveryOverride(OnlineManager *this, bool a2)
-
 void  OnlineManager::SetJoinAndDiscoveryOverride(bool) {
   
   StormManager *Instance; // eax
@@ -351,7 +338,6 @@ void  OnlineManager::SetJoinAndDiscoveryOverride(bool) {
 
 // address=[0x1616640]
 // Decompiled from void __thiscall OnlineManager::SearchForSessions(OnlineManager *this)
-
 void  OnlineManager::SearchForSessions(void) {
   
   StormManager *Instance; // eax
@@ -363,7 +349,6 @@ void  OnlineManager::SearchForSessions(void) {
 
 // address=[0x1616660]
 // Decompiled from int __thiscall OnlineManager::UpdateDiscoveredSessions(void *this, int a2)
-
 void  OnlineManager::UpdateDiscoveredSessions(class std::list<struct SGameInfo,class std::allocator<struct SGameInfo> > &) {
   
   int v2; // eax
@@ -534,10 +519,7 @@ void  OnlineManager::UpdateDiscoveredSessions(class std::list<struct SGameInfo,c
 
 
 // address=[0x1616c30]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall OnlineManager::OnPeerJoined(OnlineManager *this)
-
+// Decompiled from void __thiscall OnlineManager::OnPeerJoined(OnlineManager *this)
 void  OnlineManager::OnPeerJoined(void) {
   
   ;
@@ -546,7 +528,6 @@ void  OnlineManager::OnPeerJoined(void) {
 
 // address=[0x1616c40]
 // Decompiled from void __thiscall OnlineManager::OnPeerGone(OnlineManager *this, unsigned int a2)
-
 void  OnlineManager::OnPeerGone(int) {
   
   INetworkEngine::StormOnPeerGone((CGameHost **)g_pNetworkEngine, a2);
@@ -555,7 +536,6 @@ void  OnlineManager::OnPeerGone(int) {
 
 // address=[0x1616c60]
 // Decompiled from void __thiscall OnlineManager::OnHost(OnlineManager *this)
-
 void  OnlineManager::OnHost(void) {
   
   _DWORD *v1; // eax
@@ -577,7 +557,6 @@ void  OnlineManager::OnHost(void) {
 
 // address=[0x1616d00]
 // Decompiled from INetworkEngine *__thiscall OnlineManager::OnSessionEnter(OnlineManager *this)
-
 void  OnlineManager::OnSessionEnter(void) {
   
   int Instance; // eax
@@ -598,7 +577,6 @@ void  OnlineManager::OnSessionEnter(void) {
 
 // address=[0x1616d70]
 // Decompiled from int __thiscall OnlineManager::OnSessionLost(OnlineManager *this)
-
 void  OnlineManager::OnSessionLost(void) {
   
   _BYTE v2[20]; // [esp+0h] [ebp-1Ch] BYREF
@@ -614,9 +592,7 @@ void  OnlineManager::OnSessionLost(void) {
 
 
 // address=[0x1616db0]
-// Decompiled from // public: void __thiscall OnlineManager::OnGameSetup(void)
-_BYTE *__thiscall OnlineManager::OnGameSetup(_BYTE *this)
-
+// Decompiled from _BYTE *__thiscall OnlineManager::OnGameSetup(_BYTE *this)
 void  OnlineManager::OnGameSetup(void) {
   
   _BYTE *result; // eax
@@ -628,18 +604,7 @@ void  OnlineManager::OnGameSetup(void) {
 
 
 // address=[0x1616dd0]
-// Decompiled from void __thiscall OnlineManager::GetPlayerData(
-        OnlineManager *this,
-        int a2,
-        bool *a3,
-        int *a4,
-        int *a5,
-        int *a6,
-        int *a7,
-        int *a8,
-        int *a9,
-        struct String *a10)
-
+// Decompiled from void __thiscall OnlineManager::GetPlayerData(  OnlineManager *this,  int a2,  bool *a3,  int *a4,  int *a5,  int *a6,  int *a7,  int *a8,  int *a9,  struct String *a10)
 void  OnlineManager::GetPlayerData(int,bool &,int &,int &,int &,int &,int &,int &,class String &) {
   
   char *v10; // eax
@@ -670,7 +635,6 @@ void  OnlineManager::GetPlayerData(int,bool &,int &,int &,int &,int &,int &,int 
 
 // address=[0x1616ec0]
 // Decompiled from int __thiscall OnlineManager::SendUnicastGameSetup(OnlineManager *this, int a2, void *Src, size_t Size)
-
 void  OnlineManager::SendUnicastGameSetup(int,void *,unsigned long) {
   
   int Instance; // eax
@@ -796,12 +760,7 @@ void  OnlineManager::SendUnicastGameSetup(int,void *,unsigned long) {
 
 
 // address=[0x1617140]
-// Decompiled from void __thiscall OnlineManager::SendUnicastPlayerMessage(
-        void *this,
-        int a2,
-        char *Str,
-        const struct storm::StormPlayerMessage *a4)
-
+// Decompiled from void __thiscall OnlineManager::SendUnicastPlayerMessage(  void *this,  int a2,  char *Str,  const struct storm::StormPlayerMessage *a4)
 void  OnlineManager::SendUnicastPlayerMessage(int,char const *,int) {
   
   StormManager *Instance; // eax
@@ -837,7 +796,6 @@ void  OnlineManager::SendUnicastPlayerMessage(int,char const *,int) {
 
 // address=[0x16171e0]
 // Decompiled from unsigned int __thiscall OnlineManager::GetMessageCount(OnlineManager *this, unsigned int *a2)
-
 void  OnlineManager::GetMessageCount(unsigned long &) {
   
   unsigned int result; // eax
@@ -850,7 +808,6 @@ void  OnlineManager::GetMessageCount(unsigned long &) {
 
 // address=[0x1617200]
 // Decompiled from char __thiscall OnlineManager::Receive(char *this, void *a2, size_t *a3, _DWORD *a4)
-
 bool  OnlineManager::Receive(void *,int &,unsigned int &) {
   
   int v5; // [esp+0h] [ebp-2Ch]
@@ -879,7 +836,6 @@ bool  OnlineManager::Receive(void *,int &,unsigned int &) {
 
 // address=[0x16172f0]
 // Decompiled from void __thiscall OnlineManager::Send(OnlineManager *this, unsigned int a2, void *Src, size_t Size)
-
 void  OnlineManager::Send(unsigned long,void *,unsigned long) {
   
   StormManager *Instance; // eax
@@ -900,7 +856,6 @@ void  OnlineManager::Send(unsigned long,void *,unsigned long) {
 
 // address=[0x1617370]
 // Decompiled from void __thiscall OnlineManager::Send(OnlineManager *this, void *Src, size_t Size)
-
 void  OnlineManager::Send(void *,unsigned long) {
   
   StormManager *Instance; // eax
@@ -920,9 +875,7 @@ void  OnlineManager::Send(void *,unsigned long) {
 
 
 // address=[0x16173f0]
-// Decompiled from // public: bool __thiscall OnlineManager::PendingSessionLost(void)const 
-char __thiscall OnlineManager::PendingSessionLost(_BYTE *this)
-
+// Decompiled from char __thiscall OnlineManager::PendingSessionLost(_BYTE *this)
 bool  OnlineManager::PendingSessionLost(void)const {
   
   return this[83];
@@ -930,9 +883,7 @@ bool  OnlineManager::PendingSessionLost(void)const {
 
 
 // address=[0x1617410]
-// Decompiled from // public: void __thiscall OnlineManager::ProcessPendingSessionLost(void)
-_BYTE *__thiscall OnlineManager::ProcessPendingSessionLost(_BYTE *this)
-
+// Decompiled from _BYTE *__thiscall OnlineManager::ProcessPendingSessionLost(_BYTE *this)
 void  OnlineManager::ProcessPendingSessionLost(void) {
   
   _BYTE *result; // eax
@@ -944,9 +895,7 @@ void  OnlineManager::ProcessPendingSessionLost(void) {
 
 
 // address=[0x1617430]
-// Decompiled from // public: bool __thiscall OnlineManager::PendingOnHost(void)const 
-char __thiscall OnlineManager::PendingOnHost(_BYTE *this)
-
+// Decompiled from char __thiscall OnlineManager::PendingOnHost(_BYTE *this)
 bool  OnlineManager::PendingOnHost(void)const {
   
   return this[82];
@@ -954,9 +903,7 @@ bool  OnlineManager::PendingOnHost(void)const {
 
 
 // address=[0x1617450]
-// Decompiled from // public: void __thiscall OnlineManager::ProcessPendingOnHost(void)
-_BYTE *__thiscall OnlineManager::ProcessPendingOnHost(_BYTE *this)
-
+// Decompiled from _BYTE *__thiscall OnlineManager::ProcessPendingOnHost(_BYTE *this)
 void  OnlineManager::ProcessPendingOnHost(void) {
   
   _BYTE *result; // eax
@@ -969,7 +916,6 @@ void  OnlineManager::ProcessPendingOnHost(void) {
 
 // address=[0x1617470]
 // Decompiled from int __thiscall OnlineManager::GetLocalPeerId(OnlineManager *this)
-
 int  OnlineManager::GetLocalPeerId(void)const {
   
   int Instance; // eax
@@ -983,7 +929,6 @@ int  OnlineManager::GetLocalPeerId(void)const {
 
 // address=[0x16174a0]
 // Decompiled from bool __thiscall OnlineManager::IsLocalPeerId(OnlineManager *this, int a2)
-
 bool  OnlineManager::IsLocalPeerId(int)const {
   
   return a2 == OnlineManager::GetLocalPeerId(this);
@@ -992,7 +937,6 @@ bool  OnlineManager::IsLocalPeerId(int)const {
 
 // address=[0x16174d0]
 // Decompiled from bool __thiscall OnlineManager::IsLoggedIn(OnlineManager *this)
-
 bool  OnlineManager::IsLoggedIn(void)const {
   
   StormManager *Instance; // eax
@@ -1004,7 +948,6 @@ bool  OnlineManager::IsLoggedIn(void)const {
 
 // address=[0x16174f0]
 // Decompiled from bool __thiscall OnlineManager::IsNATReady(OnlineManager *this)
-
 bool  OnlineManager::IsNATReady(void)const {
   
   StormManager *Instance; // eax
@@ -1016,7 +959,6 @@ bool  OnlineManager::IsNATReady(void)const {
 
 // address=[0x1617510]
 // Decompiled from bool __thiscall OnlineManager::IsInSession(OnlineManager *this)
-
 bool  OnlineManager::IsInSession(void)const {
   
   int Instance; // eax
@@ -1027,9 +969,7 @@ bool  OnlineManager::IsInSession(void)const {
 
 
 // address=[0x1617550]
-// Decompiled from // public: bool __thiscall OnlineManager::IsHost(void)const 
-bool __thiscall OnlineManager::IsHost(void *this)
-
+// Decompiled from bool __thiscall OnlineManager::IsHost(void *this)
 bool  OnlineManager::IsHost(void)const {
   
   int Instance; // eax
@@ -1041,7 +981,6 @@ bool  OnlineManager::IsHost(void)const {
 
 // address=[0x1617590]
 // Decompiled from char __thiscall OnlineManager::IsQuickMatchFlow(OnlineManager *this)
-
 bool  OnlineManager::IsQuickMatchFlow(void)const {
   
   return *((_BYTE *)this + 85);
@@ -1050,7 +989,6 @@ bool  OnlineManager::IsQuickMatchFlow(void)const {
 
 // address=[0x16175b0]
 // Decompiled from OnlineManager *__thiscall OnlineManager::SetQuickMatchFlow(OnlineManager *this, bool a2)
-
 void  OnlineManager::SetQuickMatchFlow(bool) {
   
   OnlineManager *result; // eax
@@ -1063,7 +1001,6 @@ void  OnlineManager::SetQuickMatchFlow(bool) {
 
 // address=[0x16175d0]
 // Decompiled from OnlineManager *__thiscall OnlineManager::SetPrivate(OnlineManager *this, bool a2)
-
 void  OnlineManager::SetPrivate(bool) {
   
   OnlineManager *result; // eax
@@ -1076,7 +1013,6 @@ void  OnlineManager::SetPrivate(bool) {
 
 // address=[0x16175f0]
 // Decompiled from char __thiscall OnlineManager::IsPrivate(OnlineManager *this)
-
 bool  OnlineManager::IsPrivate(void)const {
   
   return *((_BYTE *)this + 87);
@@ -1085,7 +1021,6 @@ bool  OnlineManager::IsPrivate(void)const {
 
 // address=[0x1617610]
 // Decompiled from char __thiscall OnlineManager::IsInviteFlow(OnlineManager *this)
-
 bool  OnlineManager::IsInviteFlow(void)const {
   
   return *((_BYTE *)this + 86);
@@ -1094,7 +1029,6 @@ bool  OnlineManager::IsInviteFlow(void)const {
 
 // address=[0x1617630]
 // Decompiled from OnlineManager *__thiscall OnlineManager::SetInviteFlow(OnlineManager *this, bool a2)
-
 void  OnlineManager::SetInviteFlow(bool) {
   
   OnlineManager *result; // eax
@@ -1107,7 +1041,6 @@ void  OnlineManager::SetInviteFlow(bool) {
 
 // address=[0x1617650]
 // Decompiled from OnlineManager *__thiscall OnlineManager::OnOnlineError(OnlineManager *this)
-
 void  OnlineManager::OnOnlineError(void) {
   
   OnlineManager *result; // eax
@@ -1120,7 +1053,6 @@ void  OnlineManager::OnOnlineError(void) {
 
 // address=[0x1617670]
 // Decompiled from char __thiscall OnlineManager::GetAndClearOnlineError(OnlineManager *this)
-
 bool  OnlineManager::GetAndClearOnlineError(void) {
   
   if ( !*((_BYTE *)this + 84) )
@@ -1132,7 +1064,6 @@ bool  OnlineManager::GetAndClearOnlineError(void) {
 
 // address=[0x16176a0]
 // Decompiled from int __thiscall OnlineManager::OnAcceptInvite(OnlineManager *this)
-
 void  OnlineManager::OnAcceptInvite(void) {
   
   int result; // eax
@@ -1146,7 +1077,6 @@ void  OnlineManager::OnAcceptInvite(void) {
 
 // address=[0x161d910]
 // Decompiled from int __thiscall OnlineManager::~OnlineManager(OnlineManager *this)
-
  OnlineManager::~OnlineManager(void) {
   
   std::mutex::~mutex((OnlineManager *)((char *)this + 32));
@@ -1156,18 +1086,7 @@ void  OnlineManager::OnAcceptInvite(void) {
 
 
 // address=[0x16176d0]
-// Decompiled from void __thiscall OnlineManager::UpdatePlayerData(
-        OnlineManager *this,
-        int a2,
-        bool a3,
-        int a4,
-        int a5,
-        int a6,
-        int a7,
-        int a8,
-        char *Str,
-        char *a10)
-
+// Decompiled from void __thiscall OnlineManager::UpdatePlayerData(  OnlineManager *this,  int a2,  bool a3,  int a4,  int a5,  int a6,  int a7,  int a8,  char *Str,  char *a10)
 void  OnlineManager::UpdatePlayerData(int,bool,int,int,int,int,int,char const *,char const *) {
   
   int v10; // [esp+8h] [ebp-64h] BYREF
@@ -1199,7 +1118,6 @@ void  OnlineManager::UpdatePlayerData(int,bool,int,int,int,int,int,char const *,
 
 // address=[0x1617790]
 // Decompiled from OnlineManager *__thiscall OnlineManager::OnlineManager(OnlineManager *this)
-
  OnlineManager::OnlineManager(void) {
   
   std::map<unsigned long,OnlineManager::PlayerMessage,std::less<unsigned long>,storm::Allocator<std::pair<unsigned long const,OnlineManager::PlayerMessage>,1092657155>>::map<unsigned long,OnlineManager::PlayerMessage,std::less<unsigned long>,storm::Allocator<std::pair<unsigned long const,OnlineManager::PlayerMessage>,1092657155>>(this);

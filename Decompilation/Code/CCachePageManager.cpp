@@ -4,7 +4,6 @@
 
 // address=[0x2f5f420]
 // Decompiled from void __thiscall CCachePageManager::SetCurrentZoomFactor(CCachePageManager *this, int a2)
-
 void  CCachePageManager::SetCurrentZoomFactor(float) {
   
   CCachePageManager::sm_fZoomFactor = a2;
@@ -13,7 +12,6 @@ void  CCachePageManager::SetCurrentZoomFactor(float) {
 
 // address=[0x2f69960]
 // Decompiled from char __thiscall CCachePageManager::IsSourceSurfaceLocked(CCachePageManager *this)
-
 bool  CCachePageManager::IsSourceSurfaceLocked(void) {
   
   return *((_BYTE *)this + 2072);
@@ -22,7 +20,6 @@ bool  CCachePageManager::IsSourceSurfaceLocked(void) {
 
 // address=[0x2f69980]
 // Decompiled from char __thiscall CCachePageManager::IsVideoSurfaceLocked(CCachePageManager *this)
-
 bool  CCachePageManager::IsVideoSurfaceLocked(void) {
   
   return *((_BYTE *)this + 2073);
@@ -30,12 +27,7 @@ bool  CCachePageManager::IsVideoSurfaceLocked(void) {
 
 
 // address=[0x2f87760]
-// Decompiled from CCachePageManager *__thiscall CCachePageManager::CCachePageManager(
-        CCachePageManager *this,
-        struct IDirectDrawSurface7 *a2,
-        struct IDirectDrawSurface7 *a3,
-        struct IDirect3DDevice7 *a4)
-
+// Decompiled from CCachePageManager *__thiscall CCachePageManager::CCachePageManager(  CCachePageManager *this,  struct IDirectDrawSurface7 *a2,  struct IDirectDrawSurface7 *a3,  struct IDirect3DDevice7 *a4)
  CCachePageManager::CCachePageManager(struct IDirectDrawSurface7 *,struct IDirectDrawSurface7 *,struct IDirect3DDevice7 *) {
   
   int i; // [esp+4h] [ebp-8h]
@@ -73,7 +65,6 @@ bool  CCachePageManager::IsVideoSurfaceLocked(void) {
 
 // address=[0x2f878f0]
 // Decompiled from CCachePageManager *__thiscall CCachePageManager::~CCachePageManager(CCachePageManager *this)
-
  CCachePageManager::~CCachePageManager(void) {
   
   CCachePageManager *result; // eax
@@ -86,17 +77,7 @@ bool  CCachePageManager::IsVideoSurfaceLocked(void) {
 
 
 // address=[0x2f87940]
-// Decompiled from char __thiscall CCachePageManager::GetPictureArea(
-        CCachePageManager *this,
-        float a2,
-        float a3,
-        int a4,
-        int a5,
-        int a6,
-        char a7,
-        int *a8,
-        int *a9)
-
+// Decompiled from char __thiscall CCachePageManager::GetPictureArea(  CCachePageManager *this,  float a2,  float a3,  int a4,  int a5,  int a6,  char a7,  int *a8,  int *a9)
 bool  CCachePageManager::GetPictureArea(float,float,int,int,int,int,int &,int &) {
   
   int v10; // [esp+0h] [ebp-Ch]
@@ -141,15 +122,7 @@ LABEL_10:
 
 
 // address=[0x2f87b30]
-// Decompiled from int __thiscall CCachePageManager::EraseExtensionAreas(
-        CCachePageManager *this,
-        int a2,
-        int a3,
-        int a4,
-        int a5,
-        int a6,
-        bool a7)
-
+// Decompiled from int __thiscall CCachePageManager::EraseExtensionAreas(  CCachePageManager *this,  int a2,  int a3,  int a4,  int a5,  int a6,  bool a7)
 long  CCachePageManager::EraseExtensionAreas(int,int,int,int,int,bool) {
   
   CBlitFX *BlitStructPtr; // [esp+0h] [ebp-20h]
@@ -254,7 +227,6 @@ long  CCachePageManager::EraseExtensionAreas(int,int,int,int,int,bool) {
 
 // address=[0x2f87db0]
 // Decompiled from bool __thiscall CCachePageManager::UploadData(CCachePageManager *this, int *a2)
-
 bool  CCachePageManager::UploadData(long &) {
   
   if ( CCachePageManager::IsData(this) )
@@ -295,9 +267,7 @@ bool  CCachePageManager::UploadData(long &) {
 
 
 // address=[0x2f87ea0]
-// Decompiled from // public: bool __thiscall CCachePageManager::UploadDataAndRender(long &)
-char __thiscall CCachePageManager::UploadDataAndRender(int this, _DWORD *a2)
-
+// Decompiled from char __thiscall CCachePageManager::UploadDataAndRender(int this, _DWORD *a2)
 bool  CCachePageManager::UploadDataAndRender(long &) {
   
   int v3; // [esp+0h] [ebp-2Ch]
@@ -421,7 +391,6 @@ bool  CCachePageManager::UploadDataAndRender(long &) {
 
 // address=[0x2f88440]
 // Decompiled from bool __thiscall CCachePageManager::ShowPageContent(CCachePageManager *this, int *a2)
-
 bool  CCachePageManager::ShowPageContent(long &) {
   
   CBlitFX *BlitStructPtr; // eax
@@ -521,7 +490,6 @@ LABEL_11:
 
 // address=[0x2f888b0]
 // Decompiled from CCachePageManager *__thiscall CCachePageManager::ReleaseData(CCachePageManager *this)
-
 void  CCachePageManager::ReleaseData(void) {
   
   CCachePageManager *result; // eax
@@ -537,16 +505,7 @@ void  CCachePageManager::ReleaseData(void) {
 
 
 // address=[0x2f888f0]
-// Decompiled from int __thiscall CCachePageManager::RenderCacheObject(
-        CCachePageManager *this,
-        int a2,
-        float a3,
-        float a4,
-        int a5,
-        char a6,
-        int a7,
-        bool a8)
-
+// Decompiled from int __thiscall CCachePageManager::RenderCacheObject(  CCachePageManager *this,  int a2,  float a3,  float a4,  int a5,  char a6,  int a7,  bool a8)
 long  CCachePageManager::RenderCacheObject(int,float,float,int,int,int,bool) {
   
   float v9; // [esp+30h] [ebp-48h]
@@ -746,7 +705,6 @@ long  CCachePageManager::RenderCacheObject(int,float,float,int,int,int,bool) {
 
 // address=[0x2f89350]
 // Decompiled from int __thiscall CCachePageManager::LockSourceSurface(CCachePageManager *this, int *a2, unsigned __int16 **a3)
-
 long  CCachePageManager::LockSourceSurface(int &,unsigned short * &) {
   
   int v4; // [esp+0h] [ebp-8h]
@@ -779,7 +737,6 @@ long  CCachePageManager::LockSourceSurface(int &,unsigned short * &) {
 
 // address=[0x2f89400]
 // Decompiled from int __thiscall CCachePageManager::LockVideoSurface(CCachePageManager *this, int *a2, unsigned __int16 **a3)
-
 long  CCachePageManager::LockVideoSurface(int &,unsigned short * &) {
   
   int v4; // [esp+0h] [ebp-8h]
@@ -812,7 +769,6 @@ long  CCachePageManager::LockVideoSurface(int &,unsigned short * &) {
 
 // address=[0x2f894b0]
 // Decompiled from int __thiscall CCachePageManager::UnlockSourceSurface(CCachePageManager *this)
-
 long  CCachePageManager::UnlockSourceSurface(void) {
   
   int result; // eax
@@ -827,7 +783,6 @@ long  CCachePageManager::UnlockSourceSurface(void) {
 
 // address=[0x2f89500]
 // Decompiled from int __thiscall CCachePageManager::UnlockVideoSurface(CCachePageManager *this)
-
 long  CCachePageManager::UnlockVideoSurface(void) {
   
   int result; // eax
@@ -842,7 +797,6 @@ long  CCachePageManager::UnlockVideoSurface(void) {
 
 // address=[0x2f8a420]
 // Decompiled from bool __thiscall CCachePageManager::IsData(CCachePageManager *this)
-
 bool  CCachePageManager::IsData(void) {
   
   return *((_DWORD *)this + 511) > 0;
@@ -851,7 +805,6 @@ bool  CCachePageManager::IsData(void) {
 
 // address=[0x2f99770]
 // Decompiled from int __thiscall CCachePageManager::GetLastCacheObjectNr(CCachePageManager *this)
-
 int  CCachePageManager::GetLastCacheObjectNr(void) {
   
   return *((_DWORD *)this + 511) - 1;

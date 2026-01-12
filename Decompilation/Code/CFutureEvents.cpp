@@ -4,7 +4,6 @@
 
 // address=[0x144fff0]
 // Decompiled from CFutureEvents *__thiscall CFutureEvents::CFutureEvents(CFutureEvents *this)
-
  CFutureEvents::CFutureEvents(void) {
   
   IFutureEvents::IFutureEvents(this);
@@ -18,7 +17,6 @@
 
 // address=[0x1450070]
 // Decompiled from CFutureEvents *__thiscall CFutureEvents::Release(CFutureEvents *this)
-
 void  CFutureEvents::Release(void) {
   
   CFutureEvents *result; // eax
@@ -32,7 +30,6 @@ void  CFutureEvents::Release(void) {
 
 // address=[0x14500b0]
 // Decompiled from char __thiscall CFutureEvents::AddFutureEvent32(int this, int a2, int a3, int a4, int a5, int a6)
-
 bool  CFutureEvents::AddFutureEvent32(enum T_FUTURE_EVENT,unsigned int,unsigned int,unsigned int,unsigned int) {
   
   unsigned int v7; // [esp+Ch] [ebp-18h]
@@ -101,7 +98,6 @@ bool  CFutureEvents::AddFutureEvent32(enum T_FUTURE_EVENT,unsigned int,unsigned 
 
 // address=[0x14502b0]
 // Decompiled from CFutureEvents *__thiscall CFutureEvents::Execute(CFutureEvents *this)
-
 void  CFutureEvents::Execute(void) {
   
   CFutureEvents *result; // eax
@@ -159,7 +155,6 @@ void  CFutureEvents::Execute(void) {
 
 // address=[0x1450410]
 // Decompiled from int __thiscall CFutureEvents::Load(CFutureEvents *this, struct IS4Chunk *a2)
-
 void  CFutureEvents::Load(class IS4Chunk &) {
   
   int result; // eax
@@ -212,7 +207,6 @@ void  CFutureEvents::Load(class IS4Chunk &) {
 
 // address=[0x1450590]
 // Decompiled from int __thiscall CFutureEvents::Save(CFutureEvents *this, struct IS4Chunk *a2)
-
 void  CFutureEvents::Save(class IS4Chunk &) {
   
   (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 24))(a2, 1729263890);
@@ -225,7 +219,6 @@ void  CFutureEvents::Save(class IS4Chunk &) {
 
 // address=[0x1450610]
 // Decompiled from int __thiscall CFutureEvents::DbgCheckData(CFutureEvents *this, int a2)
-
 unsigned int  CFutureEvents::DbgCheckData(int) {
   
   unsigned int jj; // [esp+10h] [ebp-4030h]
@@ -396,7 +389,6 @@ unsigned int  CFutureEvents::DbgCheckData(int) {
 
 // address=[0x14529e0]
 // Decompiled from void __thiscall CFutureEvents::~CFutureEvents(CDaoIndexFieldInfo *this)
-
  CFutureEvents::~CFutureEvents(void) {
   
   CBBObject::~CBBObject((CDaoIndexFieldInfo *)((char *)this + 4));
@@ -405,7 +397,6 @@ unsigned int  CFutureEvents::DbgCheckData(int) {
 
 // address=[0x1450d00]
 // Decompiled from int __thiscall CFutureEvents::Init(CFutureEvents *this)
-
 void  CFutureEvents::Init(void) {
   
   int result; // eax
@@ -435,7 +426,6 @@ void  CFutureEvents::Init(void) {
 
 // address=[0x1450e10]
 // Decompiled from unsigned int __thiscall CFutureEvents::AddFutureEventToList(CFutureEvents *this, unsigned int a2, unsigned int a3)
-
 void  CFutureEvents::AddFutureEventToList(unsigned int,unsigned int) {
   
   unsigned int result; // eax
@@ -473,7 +463,6 @@ void  CFutureEvents::AddFutureEventToList(unsigned int,unsigned int) {
 
 // address=[0x1450f70]
 // Decompiled from int __thiscall CFutureEvents::RemoveFutureEventFromList(CFutureEvents *this, unsigned int a2)
-
 void  CFutureEvents::RemoveFutureEventFromList(unsigned int) {
   
   int result; // eax
@@ -516,9 +505,7 @@ void  CFutureEvents::RemoveFutureEventFromList(unsigned int) {
 
 
 // address=[0x14510b0]
-// Decompiled from // private: unsigned int __thiscall CFutureEvents::Compactify(void)
-int __thiscall CFutureEvents::Compactify(CFutureEvents *this)
-
+// Decompiled from int __thiscall CFutureEvents::Compactify(CFutureEvents *this)
 unsigned int  CFutureEvents::Compactify(void) {
   
   _DWORD *v2; // edx
@@ -631,7 +618,6 @@ unsigned int  CFutureEvents::Compactify(void) {
 
 // address=[0x1451430]
 // Decompiled from void CFutureEvents::ExecuteNone()
-
 static void __cdecl CFutureEvents::ExecuteNone(struct CFutureEvents::SFutureEvent &) {
   
   ;
@@ -640,7 +626,6 @@ static void __cdecl CFutureEvents::ExecuteNone(struct CFutureEvents::SFutureEven
 
 // address=[0x1451440]
 // Decompiled from int __cdecl CFutureEvents::ExecuteChangeEntityFlags(int a1)
-
 static void __cdecl CFutureEvents::ExecuteChangeEntityFlags(struct CFutureEvents::SFutureEvent &) {
   
   int result; // eax
@@ -660,7 +645,6 @@ static void __cdecl CFutureEvents::ExecuteChangeEntityFlags(struct CFutureEvents
 
 // address=[0x14514a0]
 // Decompiled from _DWORD *__cdecl CFutureEvents::ExecuteDamageEntity(struct CFutureEvents::SFutureEvent *a1)
-
 static void __cdecl CFutureEvents::ExecuteDamageEntity(struct CFutureEvents::SFutureEvent &) {
   
   _DWORD *result; // eax
@@ -688,7 +672,6 @@ static void __cdecl CFutureEvents::ExecuteDamageEntity(struct CFutureEvents::SFu
 
 // address=[0x1451510]
 // Decompiled from void __cdecl CFutureEvents::ExecuteCastSpell(struct CFutureEvents::SFutureEvent *a1)
-
 static void __cdecl CFutureEvents::ExecuteCastSpell(struct CFutureEvents::SFutureEvent &) {
   
   CMagic::ExecuteCastSpell(*((unsigned __int16 *)a1 + 1), *((_DWORD *)a1 + 3), *((_DWORD *)a1 + 4));
@@ -697,7 +680,6 @@ static void __cdecl CFutureEvents::ExecuteCastSpell(struct CFutureEvents::SFutur
 
 // address=[0x1451540]
 // Decompiled from int __cdecl CFutureEvents::ExecuteSpellTerrainConversion(struct CFutureEvents::SFutureEvent *a1)
-
 static void __cdecl CFutureEvents::ExecuteSpellTerrainConversion(struct CFutureEvents::SFutureEvent &) {
   
   int v1; // ecx
@@ -751,7 +733,6 @@ static void __cdecl CFutureEvents::ExecuteSpellTerrainConversion(struct CFutureE
 
 // address=[0x14516a0]
 // Decompiled from CBuilding *__cdecl CFutureEvents::ExecuteCrushBuilding(struct CFutureEvents::SFutureEvent *a1)
-
 static void __cdecl CFutureEvents::ExecuteCrushBuilding(struct CFutureEvents::SFutureEvent &) {
   
   CBuilding *result; // eax
@@ -768,7 +749,6 @@ static void __cdecl CFutureEvents::ExecuteCrushBuilding(struct CFutureEvents::SF
 
 // address=[0x14516e0]
 // Decompiled from struct CVehicle *__cdecl CFutureEvents::ExecuteVehicleFire(struct CFutureEvents::SFutureEvent *a1)
-
 static void __cdecl CFutureEvents::ExecuteVehicleFire(struct CFutureEvents::SFutureEvent &) {
   
   struct CVehicle *result; // eax
@@ -787,7 +767,6 @@ static void __cdecl CFutureEvents::ExecuteVehicleFire(struct CFutureEvents::SFut
 
 // address=[0x1451740]
 // Decompiled from void __cdecl CFutureEvents::ExecuteMovingAnimalUpdate(struct CFutureEvents::SFutureEvent *a1)
-
 static void __cdecl CFutureEvents::ExecuteMovingAnimalUpdate(struct CFutureEvents::SFutureEvent &) {
   
   CAnimalMgr::UpdateMovingEffect(
@@ -801,7 +780,6 @@ static void __cdecl CFutureEvents::ExecuteMovingAnimalUpdate(struct CFutureEvent
 
 // address=[0x14517a0]
 // Decompiled from char __cdecl CFutureEvents::ExecuteEnslaveSettler(struct CFutureEvents::SFutureEvent *a1)
-
 static void __cdecl CFutureEvents::ExecuteEnslaveSettler(struct CFutureEvents::SFutureEvent &) {
   
   unsigned __int8 *SettlerPtr; // eax
@@ -881,7 +859,6 @@ static void __cdecl CFutureEvents::ExecuteEnslaveSettler(struct CFutureEvents::S
 
 // address=[0x14519c0]
 // Decompiled from int __cdecl CFutureEvents::ExecuteFreeServant(struct CFutureEvents::SFutureEvent *a1)
-
 static void __cdecl CFutureEvents::ExecuteFreeServant(struct CFutureEvents::SFutureEvent &) {
   
   int result; // eax
@@ -948,7 +925,6 @@ static void __cdecl CFutureEvents::ExecuteFreeServant(struct CFutureEvents::SFut
 
 // address=[0x1452a50]
 // Decompiled from unsigned int __cdecl CFutureEvents::HiWord(unsigned int a1)
-
 static unsigned int __cdecl CFutureEvents::HiWord(unsigned int) {
   
   return HIWORD(a1);
@@ -957,7 +933,6 @@ static unsigned int __cdecl CFutureEvents::HiWord(unsigned int) {
 
 // address=[0x1452a60]
 // Decompiled from int __cdecl CFutureEvents::LoWord(unsigned __int16 a1)
-
 static unsigned int __cdecl CFutureEvents::LoWord(unsigned int) {
   
   return a1;

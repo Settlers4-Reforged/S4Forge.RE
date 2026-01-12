@@ -4,7 +4,6 @@
 
 // address=[0x13b8320]
 // Decompiled from CGuiMsgList *__thiscall CGuiMsgList::CGuiMsgList(CGuiMsgList *this)
-
  CGuiMsgList::CGuiMsgList(void) {
   
   *((_DWORD *)this + 25216) = -1;
@@ -17,7 +16,6 @@
 
 // address=[0x13b8370]
 // Decompiled from char __thiscall CGuiMsgList::AddListItem(int *this, int a2, char *Str)
-
 bool  CGuiMsgList::AddListItem(int,char const *) {
   
   if ( this[25217] >= 200 )
@@ -31,9 +29,7 @@ bool  CGuiMsgList::AddListItem(int,char const *) {
 
 
 // address=[0x13b8400]
-// Decompiled from // public: bool __thiscall CGuiMsgList::SetListindex(int)
-char __thiscall CGuiMsgList::SetListindex(_DWORD *this, int a2)
-
+// Decompiled from char __thiscall CGuiMsgList::SetListindex(_DWORD *this, int a2)
 bool  CGuiMsgList::SetListindex(int) {
   
   if ( a2 >= this[25217] )
@@ -46,7 +42,6 @@ bool  CGuiMsgList::SetListindex(int) {
 
 // address=[0x13b8440]
 // Decompiled from char __thiscall CGuiMsgList::SetTopindex(CGuiMsgList *this, int a2)
-
 bool  CGuiMsgList::SetTopindex(int) {
   
   int j; // [esp+0h] [ebp-10h]
@@ -79,7 +74,6 @@ bool  CGuiMsgList::SetTopindex(int) {
 
 // address=[0x13b8560]
 // Decompiled from char __thiscall CGuiMsgList::ShowLastMessage(CGuiMsgList *this)
-
 bool  CGuiMsgList::ShowLastMessage(void) {
   
   return 1;
@@ -88,7 +82,6 @@ bool  CGuiMsgList::ShowLastMessage(void) {
 
 // address=[0x13b8570]
 // Decompiled from char __thiscall CGuiMsgList::RemoveListItem(CGuiMsgList *this, int a2)
-
 bool  CGuiMsgList::RemoveListItem(int) {
   
   int v3; // [esp+4h] [ebp-Ch]
@@ -116,7 +109,6 @@ bool  CGuiMsgList::RemoveListItem(int) {
 
 // address=[0x13b8670]
 // Decompiled from char __thiscall CGuiMsgList::Clear(CGuiMsgList *this)
-
 bool  CGuiMsgList::Clear(void) {
   
   *((_DWORD *)this + 25217) = 0;
@@ -127,7 +119,6 @@ bool  CGuiMsgList::Clear(void) {
 
 // address=[0x13b86a0]
 // Decompiled from char __thiscall CGuiMsgList::SetOutputControls(CGuiMsgList *this, int a2, struct CGuiMsgList::SControl *a3)
-
 bool  CGuiMsgList::SetOutputControls(int,struct CGuiMsgList::SControl *) {
   
   _DWORD *v3; // edx
@@ -156,7 +147,6 @@ bool  CGuiMsgList::SetOutputControls(int,struct CGuiMsgList::SControl *) {
 
 // address=[0x13b8780]
 // Decompiled from int __thiscall CGuiMsgList::SetListentry(CGuiMsgList *this, int a2, int a3)
-
 int  CGuiMsgList::SetListentry(int,int) {
   
   int i; // [esp+4h] [ebp-9E4h]
@@ -245,10 +235,7 @@ int  CGuiMsgList::SetListentry(int,int) {
 
 
 // address=[0x13b9e80]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CGuiMsgList::~CGuiMsgList(CGuiMsgList *this)
-
+// Decompiled from void __thiscall CGuiMsgList::~CGuiMsgList(CGuiMsgList *this)
  CGuiMsgList::~CGuiMsgList(void) {
   
   ;
@@ -257,7 +244,6 @@ void __thiscall CGuiMsgList::~CGuiMsgList(CGuiMsgList *this)
 
 // address=[0x13b9ed0]
 // Decompiled from int __thiscall CGuiMsgList::GetListindexFromControlindex(CGuiMsgList *this, int a2)
-
 int  CGuiMsgList::GetListindexFromControlindex(int) {
   
   return *((_DWORD *)this + 4 * a2 + 3);
@@ -266,7 +252,6 @@ int  CGuiMsgList::GetListindexFromControlindex(int) {
 
 // address=[0x13b9ef0]
 // Decompiled from int __thiscall CGuiMsgList::GetTopindex(CGuiMsgList *this)
-
 int  CGuiMsgList::GetTopindex(void) {
   
   return *((_DWORD *)this + 25219);
@@ -275,7 +260,6 @@ int  CGuiMsgList::GetTopindex(void) {
 
 // address=[0x13b9f10]
 // Decompiled from int __thiscall CGuiMsgList::Listcount(CGuiMsgList *this)
-
 int  CGuiMsgList::Listcount(void) {
   
   return *((_DWORD *)this + 25217);

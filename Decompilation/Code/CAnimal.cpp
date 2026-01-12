@@ -4,7 +4,6 @@
 
 // address=[0x14d60e0]
 // Decompiled from _DWORD *__thiscall CAnimal::CAnimal(_DWORD *this, int a2)
-
  CAnimal::CAnimal(std::istream &) {
   
   int pExceptionObject; // [esp+4h] [ebp-1Ch] BYREF
@@ -47,7 +46,6 @@
 
 // address=[0x14d6260]
 // Decompiled from int __thiscall sub_18D6260(char *this, int a2)
-
 void  CAnimal::Store(std::ostream &) {
   
   int v3; // [esp+0h] [ebp-Ch] BYREF
@@ -73,7 +71,6 @@ void  CAnimal::Store(std::ostream &) {
 
 // address=[0x14d6350]
 // Decompiled from void __thiscall CAnimal::LogicUpdate(CAnimal *this)
-
 void  CAnimal::LogicUpdate(void) {
   
   int v1; // eax
@@ -116,7 +113,6 @@ void  CAnimal::LogicUpdate(void) {
 
 // address=[0x14d6420]
 // Decompiled from void *__thiscall CAnimal::GetGfxInfos(_BYTE *this)
-
 struct SGfxObjectInfo *  CAnimal::GetGfxInfos(void) {
   
   (*(void (__thiscall **)(_BYTE *))(*(_DWORD *)this + 120))(this);
@@ -135,7 +131,6 @@ struct SGfxObjectInfo *  CAnimal::GetGfxInfos(void) {
 
 // address=[0x14d64a0]
 // Decompiled from int __thiscall CAnimal::AddTask(CAnimal *this, struct CEntityTask *a2)
-
 void  CAnimal::AddTask(class CEntityTask &) {
   
   return std::list<CEntityTask>::push_back(a2);
@@ -143,10 +138,7 @@ void  CAnimal::AddTask(class CEntityTask &) {
 
 
 // address=[0x14d8660]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CAnimal::Decrease(CAnimal *this, int a2)
-
+// Decompiled from void __thiscall CAnimal::Decrease(CAnimal *this, int a2)
 void  CAnimal::Decrease(int) {
   
   ;
@@ -154,10 +146,7 @@ void  CAnimal::Decrease(int) {
 
 
 // address=[0x14d8890]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CAnimal::Take(CAnimal *this, int a2)
-
+// Decompiled from void __thiscall CAnimal::Take(CAnimal *this, int a2)
 void  CAnimal::Take(int) {
   
   ;
@@ -166,7 +155,6 @@ void  CAnimal::Take(int) {
 
 // address=[0x14d64c0]
 // Decompiled from CAnimal *__thiscall CAnimal::CAnimal(CAnimal *this, int a2, int a3, unsigned int a4, int a5)
-
  CAnimal::CAnimal(int,int,int,int) {
   
   IMovingEntity::IMovingEntity(this, a5);
@@ -187,7 +175,6 @@ void  CAnimal::Take(int) {
 
 // address=[0x14d65a0]
 // Decompiled from int __thiscall CAnimal::Delete(CPropertySet *this)
-
 void  CAnimal::Delete(void) {
   
   int v1; // eax
@@ -233,7 +220,6 @@ void  CAnimal::Delete(void) {
 
 // address=[0x14d6690]
 // Decompiled from int __thiscall CAnimal::Update(CAnimal *this)
-
 void  CAnimal::Update(void) {
   
   int result; // eax
@@ -315,7 +301,6 @@ void  CAnimal::Update(void) {
 
 // address=[0x14d6890]
 // Decompiled from int __thiscall CAnimal::NewToDoList(_DWORD *this, int a2)
-
 void  CAnimal::NewToDoList(class std::list<class CEntityTask,class std::allocator<class CEntityTask> > *) {
   
   _BYTE v3[12]; // [esp+4h] [ebp-24h] BYREF
@@ -345,7 +330,6 @@ void  CAnimal::NewToDoList(class std::list<class CEntityTask,class std::allocato
 
 // address=[0x14d6980]
 // Decompiled from void __thiscall CAnimal::NewDestination(CAnimal *this, int a2, int a3, int a4)
-
 void  CAnimal::NewDestination(int,int,int) {
   
   ;
@@ -354,7 +338,6 @@ void  CAnimal::NewDestination(int,int,int) {
 
 // address=[0x14d6990]
 // Decompiled from CAnimal *__thiscall CAnimal::ConvertEventIntoGoal(CAnimal *this, struct CEntityEvent *a2)
-
 void  CAnimal::ConvertEventIntoGoal(class CEntityEvent *) {
   
   CAnimal *result; // eax
@@ -367,7 +350,6 @@ void  CAnimal::ConvertEventIntoGoal(class CEntityEvent *) {
 
 // address=[0x14d69b0]
 // Decompiled from int __thiscall CAnimal::TakeWaitJob(CAnimal *this, bool a2)
-
 void  CAnimal::TakeWaitJob(bool) {
   
   _BYTE v3[12]; // [esp+4h] [ebp-1Ch] BYREF
@@ -394,7 +376,6 @@ void  CAnimal::TakeWaitJob(bool) {
 
 // address=[0x14d6a70]
 // Decompiled from int __thiscall CAnimal::TakeEatJob(CAnimal *this, bool a2)
-
 void  CAnimal::TakeEatJob(bool) {
   
   int v2; // eax
@@ -430,7 +411,6 @@ void  CAnimal::TakeEatJob(bool) {
 
 // address=[0x14d6b60]
 // Decompiled from int __thiscall CAnimal::TakeWalkJob(CAnimal *this, bool a2)
-
 void  CAnimal::TakeWalkJob(bool) {
   
   int v2; // eax
@@ -461,7 +441,6 @@ void  CAnimal::TakeWalkJob(bool) {
 
 // address=[0x14d6c50]
 // Decompiled from int __thiscall CAnimal::TakeFleeJob(CAnimal *this, bool a2)
-
 void  CAnimal::TakeFleeJob(bool) {
   
   int v2; // eax
@@ -493,7 +472,6 @@ void  CAnimal::TakeFleeJob(bool) {
 
 // address=[0x14d6d40]
 // Decompiled from int __thiscall CAnimal::TakeDieJob(CAnimal *this)
-
 void  CAnimal::TakeDieJob(void) {
   
   int v1; // eax
@@ -526,7 +504,6 @@ void  CAnimal::TakeDieJob(void) {
 
 // address=[0x14d6e10]
 // Decompiled from int __thiscall CAnimal::TakeDeadJob(CAnimal *this)
-
 void  CAnimal::TakeDeadJob(void) {
   
   char v2; // [esp+0h] [ebp-8h]
@@ -544,7 +521,6 @@ void  CAnimal::TakeDeadJob(void) {
 
 // address=[0x14d6e70]
 // Decompiled from int __thiscall CAnimal::TakeWaitJobAndDoNothing(CAnimal *this, int a2)
-
 void  CAnimal::TakeWaitJobAndDoNothing(int) {
   
   CAnimal::TakeWaitJob(this, 0);
@@ -554,7 +530,6 @@ void  CAnimal::TakeWaitJobAndDoNothing(int) {
 
 // address=[0x14d6ea0]
 // Decompiled from void __thiscall CAnimal::TakeWalkJobAndWalkDir(CAnimal *this, int a2)
-
 void  CAnimal::TakeWalkJobAndWalkDir(int) {
   
   CAnimal::TakeWalkJob(this, 0);
@@ -564,7 +539,6 @@ void  CAnimal::TakeWalkJobAndWalkDir(int) {
 
 // address=[0x14d6ed0]
 // Decompiled from int __thiscall CAnimal::TakeJob(int this, char a2)
-
 void  CAnimal::TakeJob(bool) {
   
   int result; // eax
@@ -613,7 +587,6 @@ void  CAnimal::TakeJob(bool) {
 
 // address=[0x14d7040]
 // Decompiled from char __thiscall CAnimal::WalkDir(CAnimal *this, char a2)
-
 void  CAnimal::WalkDir(int) {
   
   int v2; // esi
@@ -667,7 +640,6 @@ void  CAnimal::WalkDir(int) {
 
 // address=[0x14d7150]
 // Decompiled from int __thiscall CAnimal::WalkDirAndRegister(CAnimal *this, char a2)
-
 void  CAnimal::WalkDirAndRegister(int) {
   
   CAnimal::WalkDir(this, a2);
@@ -680,7 +652,6 @@ void  CAnimal::WalkDirAndRegister(int) {
 
 // address=[0x14d8150]
 // Decompiled from void __thiscall CAnimal::~CAnimal(CAnimal *this)
-
  CAnimal::~CAnimal(void) {
   
   *(_DWORD *)this = &CAnimal::_vftable_;

@@ -4,7 +4,6 @@
 
 // address=[0x147d690]
 // Decompiled from CTutorial *__thiscall CTutorial::Init(CTutorial *this)
-
 void  CTutorial::Init(void) {
   
   CTutorial *result; // eax
@@ -26,7 +25,6 @@ void  CTutorial::Init(void) {
 
 // address=[0x147d720]
 // Decompiled from bool __thiscall CTutorial::Kill(CTutorial *this)
-
 void  CTutorial::Kill(void) {
   
   *((_DWORD *)this + 1) = 0;
@@ -40,7 +38,6 @@ void  CTutorial::Kill(void) {
 
 // address=[0x147d780]
 // Decompiled from int __thiscall CTutorial::RefreshGUIControlStatus(CTutorial *this)
-
 void  CTutorial::RefreshGUIControlStatus(void) {
   
   return IGuiEngine::RefreshAllSurfaces(g_pGUIEngine);
@@ -49,7 +46,6 @@ void  CTutorial::RefreshGUIControlStatus(void) {
 
 // address=[0x147d7a0]
 // Decompiled from int __thiscall CTutorial::EnableGUIControl(CTutorial *this, int a2)
-
 void  CTutorial::EnableGUIControl(int) {
   
   return sub_147E0A0(a2);
@@ -58,7 +54,6 @@ void  CTutorial::EnableGUIControl(int) {
 
 // address=[0x147d7c0]
 // Decompiled from int __thiscall CTutorial::DisableGUIControl(CTutorial *this, int a2)
-
 void  CTutorial::DisableGUIControl(int) {
   
   return sub_147E0A0(a2);
@@ -67,7 +62,6 @@ void  CTutorial::DisableGUIControl(int) {
 
 // address=[0x147d7e0]
 // Decompiled from int __thiscall CTutorial::EnableAllGUIControls(CTutorial *this)
-
 void  CTutorial::EnableAllGUIControls(void) {
   
   sub_147DFE0(this);
@@ -78,7 +72,6 @@ void  CTutorial::EnableAllGUIControls(void) {
 
 // address=[0x147d800]
 // Decompiled from int __thiscall CTutorial::DisableAllGUIControls(CTutorial *this)
-
 void  CTutorial::DisableAllGUIControls(void) {
   
   sub_147DFE0(this);
@@ -109,7 +102,6 @@ void  CTutorial::DisableAllGUIControls(void) {
 
 // address=[0x147d910]
 // Decompiled from int __thiscall CTutorial::SetWorldTutorialCursor(CTutorial *this, int a2, int a3)
-
 void  CTutorial::SetWorldTutorialCursor(int,int) {
   
   IEffects *v3; // eax
@@ -132,7 +124,6 @@ void  CTutorial::SetWorldTutorialCursor(int,int) {
 
 // address=[0x147d970]
 // Decompiled from CTutorial *__thiscall CTutorial::DeleteWorldTutorialCursor(CTutorial *this)
-
 void  CTutorial::DeleteWorldTutorialCursor(void) {
   
   CTutorial *result; // eax
@@ -153,7 +144,6 @@ void  CTutorial::DeleteWorldTutorialCursor(void) {
 
 // address=[0x147e520]
 // Decompiled from CTutorial *__thiscall CTutorial::CTutorial(CTutorial *this)
-
  CTutorial::CTutorial(void) {
   
   IEvn_Handle::IEvn_Handle(this);
@@ -163,10 +153,7 @@ void  CTutorial::DeleteWorldTutorialCursor(void) {
 
 
 // address=[0x160d980]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CTutorial::CurrentZoomFactor(CTutorial *this)
-
+// Decompiled from int __thiscall CTutorial::CurrentZoomFactor(CTutorial *this)
 int  CTutorial::CurrentZoomFactor(void)const {
   
   return *((_DWORD *)this + 1);
@@ -175,7 +162,6 @@ int  CTutorial::CurrentZoomFactor(void)const {
 
 // address=[0x147d9b0]
 // Decompiled from char __thiscall CTutorial::OnEvent(CTutorial *this, struct CEvn_Event *a2)
-
 bool  CTutorial::OnEvent(class CEvn_Event &) {
   
   char result; // al
@@ -321,7 +307,6 @@ LABEL_35:
 
 // address=[0x147de30]
 // Decompiled from char __thiscall CTutorial::IsWarriorSelected(CTutorial *this)
-
 bool  CTutorial::IsWarriorSelected(void) {
   
   int v1; // eax
@@ -364,7 +349,6 @@ bool  CTutorial::IsWarriorSelected(void) {
 
 // address=[0x147df00]
 // Decompiled from int __thiscall CTutorial::GetSelectedBuilding(CTutorial *this)
-
 int  CTutorial::GetSelectedBuilding(void) {
   
   int v1; // eax

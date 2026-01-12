@@ -4,7 +4,6 @@
 
 // address=[0x130f340]
 // Decompiled from int __thiscall CSettler::Role(CSettler *this)
-
 class ISettlerRole &  CSettler::Role(void) {
   
   return std::auto_ptr<ISettlerRole>::operator*(this);
@@ -13,7 +12,6 @@ class ISettlerRole &  CSettler::Role(void) {
 
 // address=[0x1401bc0]
 // Decompiled from int __cdecl CSettler::New(int a1)
-
 static class CPersistence * __cdecl CSettler::New(std::istream &) {
   
   if ( CSettler::operator new(0x68u) )
@@ -25,7 +23,6 @@ static class CPersistence * __cdecl CSettler::New(std::istream &) {
 
 // address=[0x1439aa0]
 // Decompiled from int __thiscall CSettler::GetNextSettlerType(CSettler *this)
-
 int  CSettler::GetNextSettlerType(void) {
   
   int v1; // eax
@@ -37,7 +34,6 @@ int  CSettler::GetNextSettlerType(void) {
 
 // address=[0x1439e70]
 // Decompiled from int __thiscall CSettler::SetNextSettlerType(CSettler *this, int a2)
-
 bool  CSettler::SetNextSettlerType(int) {
   
   int v3; // [esp+4h] [ebp-4h]
@@ -49,7 +45,6 @@ bool  CSettler::SetNextSettlerType(int) {
 
 // address=[0x1439f80]
 // Decompiled from bool __thiscall CSettler::Strike(CSettler *this)
-
 bool  CSettler::Strike(void)const {
   
   return IEntity::FlagBits(this, (EntityFlag)0x1000u) == 0;
@@ -58,7 +53,6 @@ bool  CSettler::Strike(void)const {
 
 // address=[0x15081e0]
 // Decompiled from int __thiscall CSettler::SetFree(CSettler *this)
-
 void  CSettler::SetFree(void) {
   
   int v2; // [esp+0h] [ebp-8h]
@@ -70,7 +64,6 @@ void  CSettler::SetFree(void) {
 
 // address=[0x1513ad0]
 // Decompiled from int __thiscall CSettler::SetBuilding(CSettler *this, int a2)
-
 void  CSettler::SetBuilding(int) {
   
   int v3; // [esp+4h] [ebp-4h]
@@ -82,7 +75,6 @@ void  CSettler::SetBuilding(int) {
 
 // address=[0x1513b30]
 // Decompiled from int __thiscall CSettler::SetOffset(CSettler *this, float a2, float a3)
-
 void  CSettler::SetOffset(float,float) {
   
   int result; // eax
@@ -96,7 +88,6 @@ void  CSettler::SetOffset(float,float) {
 
 // address=[0x157d1f0]
 // Decompiled from int __thiscall CSettler::Delete(int this)
-
 void  CSettler::Delete(void) {
   
   _anonymous_namespace_::_GetFileInfoByHandleEx *v1; // eax
@@ -174,7 +165,6 @@ void  CSettler::Delete(void) {
 
 // address=[0x157d3f0]
 // Decompiled from int __thiscall CSettler::LogicUpdate(CSettler *this)
-
 void  CSettler::LogicUpdate(void) {
   
   int result; // eax
@@ -202,7 +192,6 @@ void  CSettler::LogicUpdate(void) {
 
 // address=[0x157d4b0]
 // Decompiled from void *__thiscall CSettler::GetGfxInfos(int this)
-
 struct SGfxObjectInfo *  CSettler::GetGfxInfos(void) {
   
   int v2; // eax
@@ -447,7 +436,6 @@ struct SGfxObjectInfo *  CSettler::GetGfxInfos(void) {
 
 // address=[0x157dae0]
 // Decompiled from int __thiscall CSettler::GetPatchGfx(CSettler *this, struct SGfxPatchObject *a2)
-
 void  CSettler::GetPatchGfx(struct SGfxPatchObject &) {
   
   int result; // eax
@@ -475,7 +463,6 @@ void  CSettler::GetPatchGfx(struct SGfxPatchObject &) {
 
 // address=[0x157db70]
 // Decompiled from int __thiscall CSettler::NewRole(_DWORD *this, char a2)
-
 void  CSettler::NewRole(class std::auto_ptr<class ISettlerRole>) {
   
   int v3; // eax
@@ -517,7 +504,6 @@ void  CSettler::NewRole(class std::auto_ptr<class ISettlerRole>) {
 
 // address=[0x157dca0]
 // Decompiled from int __thiscall CSettler::NewToDoList(_BYTE *this, int a2, __int16 a3)
-
 void  CSettler::NewToDoList(class std::list<class CEntityTask,class std::allocator<class CEntityTask> > *,int) {
   
   int result; // eax
@@ -560,7 +546,6 @@ void  CSettler::NewToDoList(class std::list<class CEntityTask,class std::allocat
 
 // address=[0x157dda0]
 // Decompiled from int __thiscall CSettler::TakeWaitList(CSettler *this)
-
 void  CSettler::TakeWaitList(void) {
   
   int v1; // eax
@@ -578,7 +563,6 @@ void  CSettler::TakeWaitList(void) {
 
 // address=[0x157dde0]
 // Decompiled from int __thiscall CSettler::TakeAnimList(CSettler *this, int a2)
-
 void  CSettler::TakeAnimList(int) {
   
   int v2; // eax
@@ -625,7 +609,6 @@ void  CSettler::TakeAnimList(int) {
 
 // address=[0x157ded0]
 // Decompiled from int __thiscall CSettler::AttachToBuilding(CSettler *this, int a2)
-
 void  CSettler::AttachToBuilding(int) {
   
   int v2; // eax
@@ -652,7 +635,6 @@ void  CSettler::AttachToBuilding(int) {
 
 // address=[0x157df70]
 // Decompiled from int __thiscall CSettler::CheckFlee(CSettler *this, int a2)
-
 void  CSettler::CheckFlee(int) {
   
   return IEntity::WarriorType();
@@ -661,7 +643,6 @@ void  CSettler::CheckFlee(int) {
 
 // address=[0x157df90]
 // Decompiled from int __thiscall CSettler::ChangeType(CPropertySet *this, unsigned int a2, char a3, char a4)
-
 void  CSettler::ChangeType(int,bool,bool) {
   
   int result; // eax
@@ -846,7 +827,6 @@ void  CSettler::ChangeType(int,bool,bool) {
 
 // address=[0x157e450]
 // Decompiled from int __thiscall CSettler::ChangeTypeComeToBuilding(CSettler *this, int a2, int a3)
-
 void  CSettler::ChangeTypeComeToBuilding(int,int) {
   
   int result; // eax
@@ -873,7 +853,6 @@ void  CSettler::ChangeTypeComeToBuilding(int,int) {
 
 // address=[0x157e500]
 // Decompiled from unsigned int __cdecl CSettler::operator new(unsigned int a1)
-
 static void * __cdecl CSettler::operator new(unsigned int) {
   
   return CSettlerMgr::Alloc((CSettlerMgr *)g_cSettlerMgr, a1);
@@ -882,7 +861,6 @@ static void * __cdecl CSettler::operator new(unsigned int) {
 
 // address=[0x157e520]
 // Decompiled from void __cdecl CSettler::operator delete(void *a1)
-
 static void __cdecl CSettler::operator delete(void *) {
   
   CSettlerMgr::Dealloc((CSettlerMgr *)g_cSettlerMgr, a1);
@@ -891,7 +869,6 @@ static void __cdecl CSettler::operator delete(void *) {
 
 // address=[0x157e560]
 // Decompiled from int __thiscall CSettler::SetObserverTarget(_DWORD *this, int a2, int a3)
-
 void  CSettler::SetObserverTarget(enum T_OBSERVER_TARGET,int) {
   
   int v3; // eax
@@ -914,7 +891,6 @@ void  CSettler::SetObserverTarget(enum T_OBSERVER_TARGET,int) {
 
 // address=[0x157e5c0]
 // Decompiled from int __thiscall CSettler::GetObserverTarget(_DWORD *this, int a2)
-
 int  CSettler::GetObserverTarget(enum T_OBSERVER_TARGET) {
   
   int v3; // [esp+4h] [ebp-4h]
@@ -926,7 +902,6 @@ int  CSettler::GetObserverTarget(enum T_OBSERVER_TARGET) {
 
 // address=[0x157e5f0]
 // Decompiled from int __thiscall CSettler::Increase(unsigned __int16 *this, int a2)
-
 int  CSettler::Increase(int) {
   
   int v3; // [esp+8h] [ebp-14h]
@@ -955,7 +930,6 @@ int  CSettler::Increase(int) {
 
 // address=[0x157e680]
 // Decompiled from int __thiscall CSettler::MarkSourcePile2AsUnused(CSettler *this)
-
 void  CSettler::MarkSourcePile2AsUnused(void) {
   
   int v1; // eax
@@ -967,7 +941,6 @@ void  CSettler::MarkSourcePile2AsUnused(void) {
 
 // address=[0x157e6a0]
 // Decompiled from int __thiscall CSettler::MarkSourcePile3AsUnused(CSettler *this)
-
 void  CSettler::MarkSourcePile3AsUnused(void) {
   
   int v1; // eax
@@ -979,7 +952,6 @@ void  CSettler::MarkSourcePile3AsUnused(void) {
 
 // address=[0x157e6c0]
 // Decompiled from int __thiscall CSettler::MaxHitpoints(unsigned __int16 *this)
-
 int  CSettler::MaxHitpoints(void)const {
   
   int v2; // [esp+4h] [ebp-Ch]
@@ -993,7 +965,6 @@ int  CSettler::MaxHitpoints(void)const {
 
 // address=[0x157e700]
 // Decompiled from _DWORD *__thiscall CSettler::CSettler(_DWORD *this, int a2)
-
  CSettler::CSettler(std::istream &) {
   
   int v2; // eax
@@ -1141,7 +1112,6 @@ int  CSettler::MaxHitpoints(void)const {
 
 // address=[0x157ea60]
 // Decompiled from int __thiscall CSettler::Store(char *this, struct std::ostream *a2)
-
 void  CSettler::Store(std::ostream &) {
   
   _BYTE v3[12]; // [esp+4h] [ebp-44h] BYREF
@@ -1204,7 +1174,6 @@ void  CSettler::Store(std::ostream &) {
 
 // address=[0x157ff80]
 // Decompiled from int __thiscall CSettler::ClassID(CSettler *this)
-
 unsigned long  CSettler::ClassID(void)const {
   
   return CSettler::m_iClassID;
@@ -1213,7 +1182,6 @@ unsigned long  CSettler::ClassID(void)const {
 
 // address=[0x157ffa0]
 // Decompiled from int __thiscall CSettler::ClearGroupFlagBits(CSettler *this, int a2)
-
 int  CSettler::ClearGroupFlagBits(int) {
   
   int v3; // [esp+4h] [ebp-4h]
@@ -1225,7 +1193,6 @@ int  CSettler::ClearGroupFlagBits(int) {
 
 // address=[0x1580040]
 // Decompiled from int __thiscall CSettler::GetGroupFlags(CSettler *this)
-
 int  CSettler::GetGroupFlags(void)const {
   
   int v1; // eax
@@ -1237,7 +1204,6 @@ int  CSettler::GetGroupFlags(void)const {
 
 // address=[0x1580080]
 // Decompiled from int __thiscall CSettler::GetWarriorBehavior(void *this)
-
 class CWarriorBehavior *  CSettler::GetWarriorBehavior(void)const {
   
   int v2; // [esp+4h] [ebp-4h]
@@ -1249,7 +1215,6 @@ class CWarriorBehavior *  CSettler::GetWarriorBehavior(void)const {
 
 // address=[0x15800c0]
 // Decompiled from int __thiscall CSettler::IsUnEmployed(CSettler *this)
-
 bool  CSettler::IsUnEmployed(void)const {
   
   int v1; // eax
@@ -1261,7 +1226,6 @@ bool  CSettler::IsUnEmployed(void)const {
 
 // address=[0x1580130]
 // Decompiled from int __thiscall CSettler::SetGroupFlagBits(CSettler *this, int a2)
-
 int  CSettler::SetGroupFlagBits(int) {
   
   int v3; // [esp+4h] [ebp-4h]
@@ -1273,7 +1237,6 @@ int  CSettler::SetGroupFlagBits(int) {
 
 // address=[0x1580170]
 // Decompiled from int __thiscall CSettler::SetGroupFlags(CSettler *this, int a2)
-
 int  CSettler::SetGroupFlags(int) {
   
   int v3; // [esp+4h] [ebp-4h]
@@ -1288,7 +1251,6 @@ int  CSettler::SetGroupFlags(int) {
 
 // address=[0x157ec10]
 // Decompiled from IEntity *__thiscall CSettler::CSettler(IEntity *this, int posX, int posY, int settlerType, int player, int a6, int id)
-
  CSettler::CSettler(int,int,int,int,class std::auto_ptr<class ISettlerRole>,int) {
   
   void *v7; // eax
@@ -1370,7 +1332,6 @@ int  CSettler::SetGroupFlags(int) {
 
 // address=[0x157eec0]
 // Decompiled from CSettler *__thiscall CSettler::CSettler(CSettler *this, __int16 a2, int a3)
-
  CSettler::CSettler(int,int) {
   
   IMovingEntity::IMovingEntity(this, a3);
@@ -1388,7 +1349,6 @@ int  CSettler::SetGroupFlags(int) {
 
 // address=[0x157ef70]
 // Decompiled from int __thiscall CSettler::CSettler(int this, int a2, int a3, int a4, char a5, int a6)
-
  CSettler::CSettler(int,int,int,class std::auto_ptr<class ISettlerRole>,int) {
   
   void *v6; // eax
@@ -1426,7 +1386,6 @@ int  CSettler::SetGroupFlags(int) {
 
 // address=[0x157f0e0]
 // Decompiled from void __thiscall CSettler::~CSettler(CSettler *this)
-
  CSettler::~CSettler(void) {
   
   *(_DWORD *)this = &CSettler::_vftable_;
@@ -1437,7 +1396,6 @@ int  CSettler::SetGroupFlags(int) {
 
 // address=[0x157f110]
 // Decompiled from int __thiscall CSettler::Walk(CSettler *this)
-
 int  CSettler::Walk(void) {
   
   int v2; // eax
@@ -1466,7 +1424,6 @@ int  CSettler::Walk(void) {
 
 // address=[0x157f190]
 // Decompiled from unsigned int __thiscall CSettler::WalkDir(CSettler *this, int a2)
-
 int  CSettler::WalkDir(int) {
   
   int v3; // esi
@@ -1589,7 +1546,6 @@ int  CSettler::WalkDir(int) {
 
 // address=[0x157f570]
 // Decompiled from int __thiscall sub_197F570(void *this, int a2)
-
 void  CSettler::Decrease(int) {
   
   int v2; // eax
@@ -1604,7 +1560,6 @@ void  CSettler::Decrease(int) {
 
 // address=[0x157ffe0]
 // Decompiled from int __thiscall CSettler::ConvertEventIntoGoal(CSettler *this, struct CEntityEvent *a2)
-
 void  CSettler::ConvertEventIntoGoal(class CEntityEvent *) {
   
   int v2; // eax

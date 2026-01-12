@@ -4,7 +4,6 @@
 
 // address=[0x12fd540]
 // Decompiled from int __thiscall CRandom16::Rand(CRandom16 *this)
-
 unsigned int  CRandom16::Rand(void) {
   
   ++*((_DWORD *)this + 1);
@@ -15,7 +14,6 @@ unsigned int  CRandom16::Rand(void) {
 
 // address=[0x1301600]
 // Decompiled from unsigned int __cdecl CRandom16::PercentValue(unsigned int a1)
-
 static unsigned int __cdecl CRandom16::PercentValue(unsigned int) {
   
   return (a1 << 16) / 0x64;
@@ -23,10 +21,7 @@ static unsigned int __cdecl CRandom16::PercentValue(unsigned int) {
 
 
 // address=[0x130a490]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CRandom16::GetNumberOfRandCalls(CRandom16 *this)
-
+// Decompiled from int __thiscall CRandom16::GetNumberOfRandCalls(CRandom16 *this)
 unsigned int  CRandom16::GetNumberOfRandCalls(void)const {
   
   return *((_DWORD *)this + 1);
@@ -34,10 +29,7 @@ unsigned int  CRandom16::GetNumberOfRandCalls(void)const {
 
 
 // address=[0x1311d70]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CRandom16::GetSeed(CRandom16 *this)
-
+// Decompiled from int __thiscall CRandom16::GetSeed(CRandom16 *this)
 unsigned int  CRandom16::GetSeed(void)const {
   
   return *(_DWORD *)this;
@@ -46,7 +38,6 @@ unsigned int  CRandom16::GetSeed(void)const {
 
 // address=[0x13613b0]
 // Decompiled from CRandom16 *__thiscall CRandom16::CRandom16(CRandom16 *this, unsigned int a2)
-
  CRandom16::CRandom16(unsigned int) {
   
   *(_DWORD *)this = a2;

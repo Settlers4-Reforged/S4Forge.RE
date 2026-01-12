@@ -4,7 +4,6 @@
 
 // address=[0x133ac00]
 // Decompiled from char *__cdecl CBuildingInfoMgr::GetBuildingInfo(int a1, int a2)
-
 static struct CBuildingInfoMgr::SBuildingInfos const & __cdecl CBuildingInfoMgr::GetBuildingInfo(int,int) {
   
   if ( CBuildingInfoMgr::m_bInit != 1
@@ -21,10 +20,7 @@ static struct CBuildingInfoMgr::SBuildingInfos const & __cdecl CBuildingInfoMgr:
 
 
 // address=[0x1486f70]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CBuildingInfoMgr::GetXMLVersion(CBuildingInfoMgr *this)
-
+// Decompiled from int __thiscall CBuildingInfoMgr::GetXMLVersion(CBuildingInfoMgr *this)
 int  CBuildingInfoMgr::GetXMLVersion(void)const {
   
   return *(_DWORD *)this;
@@ -33,7 +29,6 @@ int  CBuildingInfoMgr::GetXMLVersion(void)const {
 
 // address=[0x14eb8f0]
 // Decompiled from CBuildingInfoMgr *__thiscall CBuildingInfoMgr::CBuildingInfoMgr(CBuildingInfoMgr *this)
-
  CBuildingInfoMgr::CBuildingInfoMgr(void) {
   
   CBuildingInfoMgr::ClearInfo(this);
@@ -43,7 +38,6 @@ int  CBuildingInfoMgr::GetXMLVersion(void)const {
 
 // address=[0x14eb910]
 // Decompiled from void __thiscall CBuildingInfoMgr::~CBuildingInfoMgr(CBuildingInfoMgr *this)
-
  CBuildingInfoMgr::~CBuildingInfoMgr(void) {
   
   CBuildingInfoMgr::m_bInit = 0;
@@ -52,7 +46,6 @@ int  CBuildingInfoMgr::GetXMLVersion(void)const {
 
 // address=[0x14eb930]
 // Decompiled from void __thiscall CBuildingInfoMgr::LoadInfo(CBuildingInfoMgr *this, bool a2)
-
 void  CBuildingInfoMgr::LoadInfo(bool) {
   
   if ( a2 )
@@ -67,7 +60,6 @@ void  CBuildingInfoMgr::LoadInfo(bool) {
 
 // address=[0x14eb970]
 // Decompiled from char __thiscall CBuildingInfoMgr::DbgCheckBuildingBits(CBuildingInfoMgr *this, int a2, int a3)
-
 bool  CBuildingInfoMgr::DbgCheckBuildingBits(int,int) {
   
   int v3; // eax
@@ -387,7 +379,6 @@ bool  CBuildingInfoMgr::DbgCheckBuildingBits(int,int) {
 
 // address=[0x14ec5d0]
 // Decompiled from int __thiscall CBuildingInfoMgr::DbgTraceProductionDelays(CBuildingInfoMgr *this)
-
 void  CBuildingInfoMgr::DbgTraceProductionDelays(void) {
   
   int result; // eax
@@ -419,7 +410,6 @@ void  CBuildingInfoMgr::DbgTraceProductionDelays(void) {
 
 // address=[0x14f3cc0]
 // Decompiled from bool __cdecl CBuildingInfoMgr::BuildingTypeExIsPort(int a1)
-
 static bool __cdecl CBuildingInfoMgr::BuildingTypeExIsPort(int) {
   
   return a1 >= 52 && a1 <= 57 || a1 >= 78 && a1 <= 79;
@@ -428,7 +418,6 @@ static bool __cdecl CBuildingInfoMgr::BuildingTypeExIsPort(int) {
 
 // address=[0x14f3d00]
 // Decompiled from bool __cdecl CBuildingInfoMgr::BuildingTypeExIsShipyard(int a1)
-
 static bool __cdecl CBuildingInfoMgr::BuildingTypeExIsShipyard(int) {
   
   return a1 >= 58 && a1 <= 63 || a1 >= 76 && a1 <= 77;
@@ -437,7 +426,6 @@ static bool __cdecl CBuildingInfoMgr::BuildingTypeExIsShipyard(int) {
 
 // address=[0x1501110]
 // Decompiled from char *__cdecl CBuildingInfoMgr::GetTriggerInfo(int a1, int a2)
-
 static struct CBuildingInfoMgr::STriggerInfos const & __cdecl CBuildingInfoMgr::GetTriggerInfo(int,int) {
   
   if ( CBuildingInfoMgr::m_bInit != 1
@@ -455,7 +443,6 @@ static struct CBuildingInfoMgr::STriggerInfos const & __cdecl CBuildingInfoMgr::
 
 // address=[0x14ec6c0]
 // Decompiled from void *__thiscall CBuildingInfoMgr::ClearInfo(CBuildingInfoMgr *this)
-
 void  CBuildingInfoMgr::ClearInfo(void) {
   
   void *result; // eax
@@ -507,7 +494,6 @@ void  CBuildingInfoMgr::ClearInfo(void) {
 
 // address=[0x14ec810]
 // Decompiled from char *__thiscall CBuildingInfoMgr::ReadBuildingInfo(CBuildingInfoMgr *this)
-
 void  CBuildingInfoMgr::ReadBuildingInfo(void) {
   
   char *result; // eax

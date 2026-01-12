@@ -3,11 +3,7 @@
 // Definitions for class CAITaskForcePriestsTrojan
 
 // address=[0x132be00]
-// Decompiled from int __thiscall CAITaskForcePriestsTrojan::ChooseMilitarySpell(
-        CAITaskForcePriestsTrojan *this,
-        const struct SCountFightersResult *a2,
-        int a3)
-
+// Decompiled from int __thiscall CAITaskForcePriestsTrojan::ChooseMilitarySpell(  CAITaskForcePriestsTrojan *this,  const struct SCountFightersResult *a2,  int a3)
 int  CAITaskForcePriestsTrojan::ChooseMilitarySpell(struct SCountFightersResult const &,int) {
   
   unsigned int v4; // esi
@@ -48,13 +44,7 @@ int  CAITaskForcePriestsTrojan::ChooseMilitarySpell(struct SCountFightersResult 
 
 
 // address=[0x132bf10]
-// Decompiled from int __thiscall CAITaskForcePriestsTrojan::ChooseMilitarySpellDestination(
-        CAITaskForcePriestsTrojan *this,
-        int a2,
-        int a3,
-        int a4,
-        int a5)
-
+// Decompiled from int __thiscall CAITaskForcePriestsTrojan::ChooseMilitarySpellDestination(  CAITaskForcePriestsTrojan *this,  int a2,  int a3,  int a4,  int a5)
 int  CAITaskForcePriestsTrojan::ChooseMilitarySpellDestination(int,int,int,int) {
   
   int v5; // eax
@@ -93,7 +83,6 @@ int  CAITaskForcePriestsTrojan::ChooseMilitarySpellDestination(int,int,int,int) 
 
 // address=[0x132e560]
 // Decompiled from _DWORD *__thiscall CAITaskForcePriestsTrojan::CAITaskForcePriestsTrojan(_DWORD *this, int a2, int a3, int a4)
-
  CAITaskForcePriestsTrojan::CAITaskForcePriestsTrojan(int,enum T_AI_TASK_FORCE_TYPE,int) {
   
   CAITaskForcePriests::CAITaskForcePriests(this, a2, a3, a4);
@@ -104,7 +93,6 @@ int  CAITaskForcePriestsTrojan::ChooseMilitarySpellDestination(int,int,int,int) 
 
 // address=[0x132e670]
 // Decompiled from void __thiscall CAITaskForcePriestsTrojan::~CAITaskForcePriestsTrojan(CAITaskForcePriestsTrojan *this)
-
  CAITaskForcePriestsTrojan::~CAITaskForcePriestsTrojan(void) {
   
   CAITaskForcePriests::~CAITaskForcePriests(this);

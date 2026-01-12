@@ -4,7 +4,6 @@
 
 // address=[0x15de0a0]
 // Decompiled from int COwnerMapEx::CalculateOwnerBits()
-
 static void __cdecl COwnerMapEx::CalculateOwnerBits(void) {
   
   int v0; // ecx
@@ -52,7 +51,6 @@ static void __cdecl COwnerMapEx::CalculateOwnerBits(void) {
 
 // address=[0x15de190]
 // Decompiled from void __cdecl COwnerMapEx::NotifyCreateTile(int a1, int a2)
-
 static void __cdecl COwnerMapEx::NotifyCreateTile(int,int) {
   
   Squares *v2; // eax
@@ -113,7 +111,6 @@ static void __cdecl COwnerMapEx::NotifyCreateTile(int,int) {
 
 // address=[0x15de380]
 // Decompiled from void __cdecl COwnerMapEx::NotifyDeleteTile(int a1, int a2)
-
 static void __cdecl COwnerMapEx::NotifyDeleteTile(int,int) {
   
   Squares *v2; // eax

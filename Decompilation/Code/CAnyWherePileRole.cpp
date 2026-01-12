@@ -4,7 +4,6 @@
 
 // address=[0x13ffaa0]
 // Decompiled from void __cdecl CAnyWherePileRole::New(struct std::_Facet_base *a1)
-
 static class CPersistence * __cdecl CAnyWherePileRole::New(std::istream &) {
   
   if ( operator new(8u) )
@@ -14,7 +13,6 @@ static class CPersistence * __cdecl CAnyWherePileRole::New(std::istream &) {
 
 // address=[0x155af40]
 // Decompiled from void __thiscall CAnyWherePileRole::Init(CAnyWherePileRole *this, struct CPile *a2)
-
 void  CAnyWherePileRole::Init(class CPile *) {
   
   IPileRole::Init(this, a2);
@@ -36,7 +34,6 @@ void  CAnyWherePileRole::Init(class CPile *) {
 
 // address=[0x155afc0]
 // Decompiled from int __thiscall CAnyWherePileRole::LogicUpdate(CAnyWherePileRole *this, struct CPile *a2)
-
 void  CAnyWherePileRole::LogicUpdate(class CPile *) {
   
   CPile::RequestSpaceIfPossible(a2);
@@ -46,7 +43,6 @@ void  CAnyWherePileRole::LogicUpdate(class CPile *) {
 
 // address=[0x155afe0]
 // Decompiled from void __thiscall CAnyWherePileRole::Empty(CAnyWherePileRole *this, struct CPile *a2)
-
 void  CAnyWherePileRole::Empty(class CPile *) {
   
   int v2; // eax
@@ -58,7 +54,6 @@ void  CAnyWherePileRole::Empty(class CPile *) {
 
 // address=[0x155b000]
 // Decompiled from bool __thiscall CAnyWherePileRole::ChangeGoodTypeUnforseen(CAnyWherePileRole *this, struct CPile *a2, int a3)
-
 bool  CAnyWherePileRole::ChangeGoodTypeUnforseen(class CPile *,int) {
   
   return IPileRole::ExecuteChangeGoodTypeUnforseen(this, a2, a3);
@@ -67,7 +62,6 @@ bool  CAnyWherePileRole::ChangeGoodTypeUnforseen(class CPile *,int) {
 
 // address=[0x155b020]
 // Decompiled from void __thiscall CAnyWherePileRole::Occupied(CAnyWherePileRole *this, struct CPile *a2, int a3)
-
 void  CAnyWherePileRole::Occupied(class CPile *,int) {
   
   CPile::OfferCompletePileIfPossible(a2, a3);
@@ -76,7 +70,6 @@ void  CAnyWherePileRole::Occupied(class CPile *,int) {
 
 // address=[0x155b040]
 // Decompiled from char __thiscall CAnyWherePileRole::SetFree(CAnyWherePileRole *this, struct CPile *a2, int a3)
-
 bool  CAnyWherePileRole::SetFree(class CPile *,int) {
   
   CPile::CancelCompleteOfferIfInOfferList(a2, a3);
@@ -86,7 +79,6 @@ bool  CAnyWherePileRole::SetFree(class CPile *,int) {
 
 // address=[0x155b060]
 // Decompiled from _DWORD *__thiscall CAnyWherePileRole::CAnyWherePileRole(_DWORD *this, int a2)
-
  CAnyWherePileRole::CAnyWherePileRole(std::istream &) {
   
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
@@ -111,7 +103,6 @@ bool  CAnyWherePileRole::SetFree(class CPile *,int) {
 
 // address=[0x155b110]
 // Decompiled from int __stdcall CAnyWherePileRole::Store(struct std::ostream *a1)
-
 void  CAnyWherePileRole::Store(std::ostream &) {
   
   IPileRole::Store(a1);
@@ -121,7 +112,6 @@ void  CAnyWherePileRole::Store(std::ostream &) {
 
 // address=[0x155b1c0]
 // Decompiled from void __thiscall CAnyWherePileRole::~CAnyWherePileRole(CAnyWherePileRole *this)
-
  CAnyWherePileRole::~CAnyWherePileRole(void) {
   
   IPileRole::~IPileRole(this);
@@ -130,7 +120,6 @@ void  CAnyWherePileRole::Store(std::ostream &) {
 
 // address=[0x155b2a0]
 // Decompiled from int __thiscall CAnyWherePileRole::ClassID(CAnyWherePileRole *this)
-
 unsigned long  CAnyWherePileRole::ClassID(void)const {
   
   return CAnyWherePileRole::m_iClassID;
@@ -139,7 +128,6 @@ unsigned long  CAnyWherePileRole::ClassID(void)const {
 
 // address=[0x155b380]
 // Decompiled from void __thiscall CAnyWherePileRole::SubjectDie(CAnyWherePileRole *this, struct CPile *a2, int a3)
-
 void  CAnyWherePileRole::SubjectDie(class CPile *,int) {
   
   ;
@@ -147,10 +135,7 @@ void  CAnyWherePileRole::SubjectDie(class CPile *,int) {
 
 
 // address=[0x155b390]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CAnyWherePileRole::SubjectStarted(CAnyWherePileRole *this, struct CPile *a2)
-
+// Decompiled from void __thiscall CAnyWherePileRole::SubjectStarted(CAnyWherePileRole *this, struct CPile *a2)
 void  CAnyWherePileRole::SubjectStarted(class CPile *) {
   
   ;
@@ -158,10 +143,7 @@ void  CAnyWherePileRole::SubjectStarted(class CPile *) {
 
 
 // address=[0x155b3a0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CAnyWherePileRole::SubjectStopped(CAnyWherePileRole *this, struct CPile *a2)
-
+// Decompiled from void __thiscall CAnyWherePileRole::SubjectStopped(CAnyWherePileRole *this, struct CPile *a2)
 void  CAnyWherePileRole::SubjectStopped(class CPile *) {
   
   ;
@@ -170,7 +152,6 @@ void  CAnyWherePileRole::SubjectStopped(class CPile *) {
 
 // address=[0x1560340]
 // Decompiled from int __cdecl CAnyWherePileRole::Load(int a1)
-
 static class CAnyWherePileRole * __cdecl CAnyWherePileRole::Load(std::istream &) {
   
   void **v1; // eax
@@ -186,7 +167,6 @@ static class CAnyWherePileRole * __cdecl CAnyWherePileRole::Load(std::istream &)
 
 // address=[0x1560110]
 // Decompiled from CAnyWherePileRole *__thiscall CAnyWherePileRole::CAnyWherePileRole(CAnyWherePileRole *this)
-
  CAnyWherePileRole::CAnyWherePileRole(void) {
   
   IPileRole::IPileRole(this);

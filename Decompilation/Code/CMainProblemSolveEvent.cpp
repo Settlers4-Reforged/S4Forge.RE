@@ -3,15 +3,7 @@
 // Definitions for class CMainProblemSolveEvent
 
 // address=[0x2f4dcc0]
-// Decompiled from CMainProblemSolveEvent *__thiscall CMainProblemSolveEvent::CMainProblemSolveEvent(
-        CMainProblemSolveEvent *this,
-        int a2,
-        int a3,
-        int a4,
-        int a5,
-        int a6,
-        int a7)
-
+// Decompiled from CMainProblemSolveEvent *__thiscall CMainProblemSolveEvent::CMainProblemSolveEvent(  CMainProblemSolveEvent *this,  int a2,  int a3,  int a4,  int a5,  int a6,  int a7)
  CMainProblemSolveEvent::CMainProblemSolveEvent(int,int,int,int,int,int) {
   
   int i; // [esp+0h] [ebp-8h]
@@ -40,7 +32,6 @@
 
 // address=[0x2f4dd90]
 // Decompiled from void __thiscall CMainProblemSolveEvent::~CMainProblemSolveEvent(CMainProblemSolveEvent *this)
-
  CMainProblemSolveEvent::~CMainProblemSolveEvent(void) {
   
   *(_DWORD *)this = &CMainProblemSolveEvent::_vftable_;
@@ -54,7 +45,6 @@
 
 // address=[0x2f4de10]
 // Decompiled from char __thiscall CMainProblemSolveEvent::IsShooting(CMainProblemSolveEvent *this)
-
 bool  CMainProblemSolveEvent::IsShooting(void) {
   
   int LockedSchedNr; // [esp+0h] [ebp-8h]
@@ -91,7 +81,6 @@ bool  CMainProblemSolveEvent::IsShooting(void) {
 
 // address=[0x2f4deb0]
 // Decompiled from char __thiscall CMainProblemSolveEvent::action(CMainProblemSolveEvent *this)
-
 bool  CMainProblemSolveEvent::action(void) {
   
   struct IScheduleEntry *SpecialTask; // [esp+4h] [ebp-38h]
@@ -211,7 +200,6 @@ bool  CMainProblemSolveEvent::action(void) {
 
 // address=[0x2f4e2a0]
 // Decompiled from char __thiscall CMainProblemSolveEvent::IsAlive(CMainProblemSolveEvent *this)
-
 bool  CMainProblemSolveEvent::IsAlive(void) {
   
   if ( *((_DWORD *)this + 16) == 1 )
@@ -237,7 +225,6 @@ bool  CMainProblemSolveEvent::IsAlive(void) {
 
 // address=[0x2f4e330]
 // Decompiled from bool __thiscall CMainProblemSolveEvent::WaitFor(CMainProblemSolveEvent *this)
-
 bool  CMainProblemSolveEvent::WaitFor(void) {
   
   return CSchedule::AllSubProblemsSolved(*((CDynList ***)this + 10), *((_DWORD *)this + 3)) != 0;

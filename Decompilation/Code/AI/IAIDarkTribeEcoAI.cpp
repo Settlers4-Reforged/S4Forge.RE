@@ -4,7 +4,6 @@
 
 // address=[0x132fa50]
 // Decompiled from int IAIDarkTribeEcoAI::CreateEcoAI()
-
 static class IAIDarkTribeEcoAI * __cdecl IAIDarkTribeEcoAI::CreateEcoAI(struct SAIDarkTribeEcoAIParams const &) {
   
   std::bad_function_call *v2; // [esp+Ch] [ebp-10h]
@@ -19,7 +18,6 @@ static class IAIDarkTribeEcoAI * __cdecl IAIDarkTribeEcoAI::CreateEcoAI(struct S
 
 // address=[0x1334ef0]
 // Decompiled from IAIDarkTribeEcoAI *__thiscall IAIDarkTribeEcoAI::IAIDarkTribeEcoAI(IAIDarkTribeEcoAI *this)
-
  IAIDarkTribeEcoAI::IAIDarkTribeEcoAI(void) {
   
   IAIUnknown::IAIUnknown(this);

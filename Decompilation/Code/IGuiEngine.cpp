@@ -3,10 +3,7 @@
 // Definitions for class IGuiEngine
 
 // address=[0x13d8b60]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall IGuiEngine::GetDialogsRenderOffsetX(IGuiEngine *this)
-
+// Decompiled from int __thiscall IGuiEngine::GetDialogsRenderOffsetX(IGuiEngine *this)
 int  IGuiEngine::GetDialogsRenderOffsetX(void)const {
   
   return *(_DWORD *)this;
@@ -14,10 +11,7 @@ int  IGuiEngine::GetDialogsRenderOffsetX(void)const {
 
 
 // address=[0x13d8b80]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall IGuiEngine::GetDialogsRenderOffsetY(IGuiEngine *this)
-
+// Decompiled from int __thiscall IGuiEngine::GetDialogsRenderOffsetY(IGuiEngine *this)
 int  IGuiEngine::GetDialogsRenderOffsetY(void)const {
   
   return *((_DWORD *)this + 1);
@@ -26,7 +20,6 @@ int  IGuiEngine::GetDialogsRenderOffsetY(void)const {
 
 // address=[0x13d8ba0]
 // Decompiled from double __thiscall IGuiEngine::GetDialogsRenderScaleX(IGuiEngine *this)
-
 float  IGuiEngine::GetDialogsRenderScaleX(void)const {
   
   return *((float *)this + 2);
@@ -35,7 +28,6 @@ float  IGuiEngine::GetDialogsRenderScaleX(void)const {
 
 // address=[0x13d8bc0]
 // Decompiled from double __thiscall IGuiEngine::GetDialogsRenderScaleY(IGuiEngine *this)
-
 float  IGuiEngine::GetDialogsRenderScaleY(void)const {
   
   return *((float *)this + 3);
@@ -44,7 +36,6 @@ float  IGuiEngine::GetDialogsRenderScaleY(void)const {
 
 // address=[0x2f9b380]
 // Decompiled from char __thiscall IGuiEngine::OpenDialog(IGuiEngine *this, int a2, bool (__cdecl *a3)(int, int, int))
-
 bool  IGuiEngine::OpenDialog(int,bool (__cdecl*)(int,int,int)) {
   
   int v4; // [esp+4h] [ebp-58h]
@@ -133,7 +124,6 @@ bool  IGuiEngine::OpenDialog(int,bool (__cdecl*)(int,int,int)) {
 
 // address=[0x2f9fea0]
 // Decompiled from IGuiEngine *__thiscall IGuiEngine::IGuiEngine(IGuiEngine *this)
-
  IGuiEngine::IGuiEngine(void) {
   
   int i; // [esp+0h] [ebp-8h]
@@ -158,7 +148,6 @@ bool  IGuiEngine::OpenDialog(int,bool (__cdecl*)(int,int,int)) {
 
 // address=[0x2f9ff60]
 // Decompiled from int __thiscall IGuiEngine::~IGuiEngine(IGuiEngine *this)
-
  IGuiEngine::~IGuiEngine(void) {
   
   int result; // eax
@@ -181,15 +170,7 @@ bool  IGuiEngine::OpenDialog(int,bool (__cdecl*)(int,int,int)) {
 
 
 // address=[0x2f9fff0]
-// Decompiled from char __thiscall IGuiEngine::Init(
-        IGuiEngine *this,
-        struct IGfxEngine *a2,
-        struct CGfxManager *a3,
-        int a4,
-        int a5,
-        bool (__cdecl *a6)(int, int, int),
-        int a7)
-
+// Decompiled from char __thiscall IGuiEngine::Init(  IGuiEngine *this,  struct IGfxEngine *a2,  struct CGfxManager *a3,  int a4,  int a5,  bool (__cdecl *a6)(int, int, int),  int a7)
 bool  IGuiEngine::Init(class IGfxEngine *,class CGfxManager *,void *,int,bool (__cdecl*)(int,int,int),int) {
   
   int DeviceCaps; // eax
@@ -327,7 +308,6 @@ bool  IGuiEngine::Init(class IGfxEngine *,class CGfxManager *,void *,int,bool (_
 
 // address=[0x2fa0320]
 // Decompiled from void __thiscall IGuiEngine::RefreshAllSurfaces(IGuiEngine *this)
-
 void  IGuiEngine::RefreshAllSurfaces(void) {
   
   struct tagRECT v1; // [esp+8h] [ebp-B0h] BYREF
@@ -422,7 +402,6 @@ void  IGuiEngine::RefreshAllSurfaces(void) {
 
 // address=[0x2fa0670]
 // Decompiled from char __thiscall IGuiEngine::CloseDialog(IGuiEngine *this, int a2)
-
 bool  IGuiEngine::CloseDialog(int) {
   
   unsigned int v3; // [esp+4h] [ebp-14h]
@@ -485,7 +464,6 @@ bool  IGuiEngine::CloseDialog(int) {
 
 // address=[0x2fa08c0]
 // Decompiled from char __thiscall IGuiEngine::RenderGui(IGuiEngine *this)
-
 bool  IGuiEngine::RenderGui(void) {
   
   UpdateGui(-1);
@@ -495,7 +473,6 @@ bool  IGuiEngine::RenderGui(void) {
 
 // address=[0x2fa08e0]
 // Decompiled from BOOL __thiscall IGuiEngine::EnableEventInput(IGuiEngine *this, bool a2)
-
 void  IGuiEngine::EnableEventInput(bool) {
   
   BOOL result; // eax
@@ -507,10 +484,7 @@ void  IGuiEngine::EnableEventInput(bool) {
 
 
 // address=[0x2fa0910]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall IGuiEngine::EnableShortcuts(IGuiEngine *this, bool a2)
-
+// Decompiled from void __thiscall IGuiEngine::EnableShortcuts(IGuiEngine *this, bool a2)
 void  IGuiEngine::EnableShortcuts(bool) {
   
   ;
@@ -518,10 +492,7 @@ void  IGuiEngine::EnableShortcuts(bool) {
 
 
 // address=[0x2fa0920]
-// Decompiled from bool (__cdecl *__thiscall IGuiEngine::SetCtrlStatusCallback(
-        IGuiEngine *this,
-        bool (__cdecl *a2)(int, int, int, bool, int)))(int, int, int, bool, int)
-
+// Decompiled from bool (__cdecl *__thiscall IGuiEngine::SetCtrlStatusCallback(  IGuiEngine *this,  bool (__cdecl *a2)(int, int, int, bool, int)))(int, int, int, bool, int)
 void  IGuiEngine::SetCtrlStatusCallback(bool (__cdecl*)(int,int,int,bool,int)) {
   
   bool (__cdecl *result)(int, int, int, bool, int); // eax
@@ -534,7 +505,6 @@ void  IGuiEngine::SetCtrlStatusCallback(bool (__cdecl*)(int,int,int,bool,int)) {
 
 // address=[0x2fa0fc0]
 // Decompiled from int __thiscall IGuiEngine::SetDialogsRenderOffset(IGuiEngine *this, int a2, int a3, float a4, float a5)
-
 void  IGuiEngine::SetDialogsRenderOffset(int,int,float,float) {
   
   *(_DWORD *)this = a2;
@@ -547,7 +517,6 @@ void  IGuiEngine::SetDialogsRenderOffset(int,int,float,float) {
 
 // address=[0x2fa1000]
 // Decompiled from char __thiscall IGuiEngine::GetDialogRect(IGuiEngine *this, int a2, struct SGuiRect *a3)
-
 bool  IGuiEngine::GetDialogRect(int,struct SGuiRect &) {
   
   unsigned __int16 *v4; // eax
@@ -566,9 +535,7 @@ bool  IGuiEngine::GetDialogRect(int,struct SGuiRect &) {
 
 
 // address=[0x2fa1090]
-// Decompiled from // public: bool __thiscall IGuiEngine::SetDialogRect(int,struct SGuiRect)
-char __thiscall IGuiEngine::SetDialogRect(_DWORD *this, int a2, int a3, int a4, __int16 a5, __int16 a6)
-
+// Decompiled from char __thiscall IGuiEngine::SetDialogRect(_DWORD *this, int a2, int a3, int a4, __int16 a5, __int16 a6)
 bool  IGuiEngine::SetDialogRect(int,struct SGuiRect) {
   
   unsigned __int16 *v8; // [esp+4h] [ebp-4h]
@@ -589,7 +556,6 @@ bool  IGuiEngine::SetDialogRect(int,struct SGuiRect) {
 
 // address=[0x2fa1140]
 // Decompiled from bool __thiscall IGuiEngine::MoveDialogTo(IGuiEngine *this, int a2, int a3, int a4)
-
 bool  IGuiEngine::MoveDialogTo(int,int,int) {
   
   unsigned __int16 *v6; // [esp+4h] [ebp-4h]
@@ -611,7 +577,6 @@ bool  IGuiEngine::MoveDialogTo(int,int,int) {
 
 // address=[0x2fa11c0]
 // Decompiled from char __thiscall IGuiEngine::GetDialogRenderRect(IGuiEngine *this, int a2, struct SGuiRect *a3)
-
 bool  IGuiEngine::GetDialogRenderRect(int,struct SGuiRect &) {
   
   struct tagRECT v4; // [esp+8h] [ebp-3Ch] BYREF
@@ -646,7 +611,6 @@ bool  IGuiEngine::GetDialogRenderRect(int,struct SGuiRect &) {
 
 // address=[0x2fa12b0]
 // Decompiled from bool __thiscall IGuiEngine::SetDialogRenderPos(IGuiEngine *this, int a2, int a3, int a4)
-
 bool  IGuiEngine::SetDialogRenderPos(int,int,int) {
   
   return IGuiEngine::MoveDialogTo(this, a2, a3 - *(_DWORD *)this, a4 - *((_DWORD *)this + 1));
@@ -655,7 +619,6 @@ bool  IGuiEngine::SetDialogRenderPos(int,int,int) {
 
 // address=[0x2fa12e0]
 // Decompiled from char __thiscall IGuiEngine::EnableTooltipsExt(IGuiEngine *this, bool a2)
-
 void  IGuiEngine::EnableTooltipsExt(bool) {
   
   char result; // al
@@ -688,7 +651,6 @@ void  IGuiEngine::EnableTooltipsExt(bool) {
 
 // address=[0x2fa13a0]
 // Decompiled from int __thiscall IGuiEngine::SetDlgToIgnore(IGuiEngine *this, int a2, bool a3)
-
 void  IGuiEngine::SetDlgToIgnore(int,bool) {
   
   int result; // eax
@@ -709,7 +671,6 @@ void  IGuiEngine::SetDlgToIgnore(int,bool) {
 
 // address=[0x2fa13f0]
 // Decompiled from char __stdcall IGuiEngine::SetTooltip(char *Str)
-
 bool  IGuiEngine::SetTooltip(char const *) {
   
   if ( !sub_2FA28C0() || !Str )
@@ -721,7 +682,6 @@ bool  IGuiEngine::SetTooltip(char const *) {
 
 // address=[0x2fa1430]
 // Decompiled from char __stdcall IGuiEngine::SetTooltipExt(char *Str)
-
 bool  IGuiEngine::SetTooltipExt(char const *) {
   
   if ( !sub_2FA28C0() || !Str )
@@ -733,7 +693,6 @@ bool  IGuiEngine::SetTooltipExt(char const *) {
 
 // address=[0x2fa1470]
 // Decompiled from char __thiscall IGuiEngine::SetTooltipID(IGuiEngine *this, int a2, int a3, int a4, int a5)
-
 bool  IGuiEngine::SetTooltipID(int,int,int,int) {
   
   struct SGuiControl *ControlPtr; // [esp+4h] [ebp-4h]
@@ -753,7 +712,6 @@ bool  IGuiEngine::SetTooltipID(int,int,int,int) {
 
 // address=[0x2fa14d0]
 // Decompiled from char __thiscall IGuiEngine::DisableDialogControls(IGuiEngine *this, int a2)
-
 bool  IGuiEngine::DisableDialogControls(int) {
   
   char result; // al
@@ -772,7 +730,6 @@ bool  IGuiEngine::DisableDialogControls(int) {
 
 // address=[0x2fa1520]
 // Decompiled from char __thiscall IGuiEngine::SetText(void *this, int a2, int a3, char *Str)
-
 bool  IGuiEngine::SetText(int,int,char const *) {
   
   unsigned int v5; // [esp+4h] [ebp-14h]
@@ -876,7 +833,6 @@ LABEL_41:
 
 // address=[0x2fa17e0]
 // Decompiled from char __thiscall IGuiEngine::SetEditProperties(IGuiEngine *this, int a2, int a3, unsigned __int8 a4, unsigned __int8 a5)
-
 bool  IGuiEngine::SetEditProperties(int,int,unsigned char,unsigned char) {
   
   unsigned __int8 v6; // [esp+4h] [ebp-8h]
@@ -901,7 +857,6 @@ bool  IGuiEngine::SetEditProperties(int,int,unsigned char,unsigned char) {
 
 // address=[0x2fa1870]
 // Decompiled from char __thiscall IGuiEngine::SetTypeAsButton(IGuiEngine *this, int a2, int a3)
-
 bool  IGuiEngine::SetTypeAsButton(int,int) {
   
   struct SGuiControl *ControlPtr; // [esp+4h] [ebp-4h]
@@ -927,7 +882,6 @@ bool  IGuiEngine::SetTypeAsButton(int,int) {
 
 // address=[0x2fa1920]
 // Decompiled from char __thiscall IGuiEngine::SetTypeAsText(IGuiEngine *this, int a2, int a3)
-
 bool  IGuiEngine::SetTypeAsText(int,int) {
   
   struct SGuiControl *ControlPtr; // [esp+4h] [ebp-4h]
@@ -944,7 +898,6 @@ bool  IGuiEngine::SetTypeAsText(int,int) {
 
 // address=[0x2fa1970]
 // Decompiled from char __thiscall IGuiEngine::SetTypeAsRadio(IGuiEngine *this, int a2, int a3, WORD a4, WORD a5)
-
 bool  IGuiEngine::SetTypeAsRadio(int,int,int,int) {
   
   struct SGuiControl *ControlPtr; // [esp+4h] [ebp-4h]
@@ -967,7 +920,6 @@ bool  IGuiEngine::SetTypeAsRadio(int,int,int,int) {
 
 // address=[0x2fa1a00]
 // Decompiled from bool __thiscall IGuiEngine::SetRadioCheckPressedState(IGuiEngine *this, int a2, int a3, bool a4)
-
 bool  IGuiEngine::SetRadioCheckPressedState(int,int,bool) {
   
   struct SGuiControl *ControlPtr; // [esp+4h] [ebp-4h]
@@ -981,7 +933,6 @@ bool  IGuiEngine::SetRadioCheckPressedState(int,int,bool) {
 
 // address=[0x2fa1a50]
 // Decompiled from char *__thiscall IGuiEngine::GetText(IGuiEngine *this, int container, int valueLink)
-
 char const *  IGuiEngine::GetText(int,int) {
   
   struct SGuiControl *ControlPtr; // [esp+4h] [ebp-4h]
@@ -999,7 +950,6 @@ char const *  IGuiEngine::GetText(int,int) {
 
 // address=[0x2fa1ac0]
 // Decompiled from int __thiscall IGuiEngine::GetWrapPosition(IGuiEngine *this, int a2, int a3)
-
 int  IGuiEngine::GetWrapPosition(int,int) {
   
   struct tagSIZE psizl; // [esp+0h] [ebp-1Ch] BYREF
@@ -1055,7 +1005,6 @@ int  IGuiEngine::GetWrapPosition(int,int) {
 
 // address=[0x2fa1c60]
 // Decompiled from char __thiscall IGuiEngine::SetFontTemplate(IGuiEngine *this, int a2, int a3, int a4)
-
 bool  IGuiEngine::SetFontTemplate(int,int,int) {
   
   struct SGuiControl *ControlPtr; // [esp+4h] [ebp-4h]
@@ -1078,7 +1027,6 @@ bool  IGuiEngine::SetFontTemplate(int,int,int) {
 
 // address=[0x2fa1ce0]
 // Decompiled from bool __thiscall IGuiEngine::EnableControl(IGuiEngine *this, int a2, int a3, bool a4)
-
 bool  IGuiEngine::EnableControl(int,int,bool) {
   
   struct SGuiControl *ControlPtr; // [esp+4h] [ebp-8h]
@@ -1098,7 +1046,6 @@ bool  IGuiEngine::EnableControl(int,int,bool) {
 
 // address=[0x2fa1da0]
 // Decompiled from char __thiscall IGuiEngine::SetControlVisibility(void *this, int a2, int a3, char a4)
-
 bool  IGuiEngine::SetControlVisibility(int,int,bool) {
   
   int ControlPtr; // [esp+4h] [ebp-8h]
@@ -1115,7 +1062,6 @@ bool  IGuiEngine::SetControlVisibility(int,int,bool) {
 
 // address=[0x2fa1e10]
 // Decompiled from char __thiscall IGuiEngine::SetImages(void *this, int a2, int a3, int a4, int a5)
-
 bool  IGuiEngine::SetImages(int,int,int,int) {
   
   int ControlPtr; // [esp+4h] [ebp-4h]
@@ -1137,7 +1083,6 @@ bool  IGuiEngine::SetImages(int,int,int,int) {
 
 // address=[0x2fa1ea0]
 // Decompiled from char __thiscall IGuiEngine::SetUserLogoImage(IGuiEngine *this, int a2, int a3, WORD a4)
-
 bool  IGuiEngine::SetUserLogoImage(int,int,int) {
   
   struct SGuiControl *ControlPtr; // [esp+4h] [ebp-4h]
@@ -1156,14 +1101,7 @@ bool  IGuiEngine::SetUserLogoImage(int,int,int) {
 
 
 // address=[0x2fa1f10]
-// Decompiled from char __thiscall IGuiEngine::LockOwnerImage(
-        IGuiEngine *this,
-        int a2,
-        int a3,
-        struct SGuiRect *a4,
-        unsigned __int16 **a5,
-        unsigned int *a6)
-
+// Decompiled from char __thiscall IGuiEngine::LockOwnerImage(  IGuiEngine *this,  int a2,  int a3,  struct SGuiRect *a4,  unsigned __int16 **a5,  unsigned int *a6)
 bool  IGuiEngine::LockOwnerImage(int,int,struct SGuiRect &,unsigned short * &,unsigned int &) {
   
   unsigned __int16 *v7; // [esp+4h] [ebp-2DCh]
@@ -1227,7 +1165,6 @@ bool  IGuiEngine::LockOwnerImage(int,int,struct SGuiRect &,unsigned short * &,un
 
 // address=[0x2fa2130]
 // Decompiled from bool __thiscall IGuiEngine::UnlockOwnerImage(IGuiEngine *this, int a2, int a3)
-
 bool  IGuiEngine::UnlockOwnerImage(int,int) {
   
   unsigned __int16 *v4; // [esp+4h] [ebp-8h]
@@ -1252,7 +1189,6 @@ bool  IGuiEngine::UnlockOwnerImage(int,int) {
 
 // address=[0x2fa21d0]
 // Decompiled from bool __thiscall IGuiEngine::EraseOwnerImage(IGuiEngine *this, int a2, int a3)
-
 bool  IGuiEngine::EraseOwnerImage(int,int) {
   
   unsigned int v4; // [esp+4h] [ebp-2E4h] BYREF
@@ -1309,7 +1245,6 @@ bool  IGuiEngine::EraseOwnerImage(int,int) {
 
 // address=[0x2fa2390]
 // Decompiled from char __thiscall IGuiEngine::SetSliderPosition(IGuiEngine *this, int a2, int a3, unsigned int a4)
-
 bool  IGuiEngine::SetSliderPosition(int,int,int) {
   
   WORD *p_width; // [esp+4h] [ebp-8h]
@@ -1361,7 +1296,6 @@ bool  IGuiEngine::SetSliderPosition(int,int,int) {
 
 // address=[0x2fa2510]
 // Decompiled from int __thiscall IGuiEngine::GetSliderPosition(IGuiEngine *this, int a2, int a3)
-
 int  IGuiEngine::GetSliderPosition(int,int) {
   
   struct SGuiControl *ControlPtr; // [esp+4h] [ebp-4h]
@@ -1379,7 +1313,6 @@ int  IGuiEngine::GetSliderPosition(int,int) {
 
 // address=[0x2fa2580]
 // Decompiled from char __thiscall IGuiEngine::SelectControl(IGuiEngine *this, int a2, int a3, bool a4)
-
 bool  IGuiEngine::SelectControl(int,int,bool) {
   
   int SurfaceID; // eax
@@ -1421,7 +1354,6 @@ bool  IGuiEngine::SelectControl(int,int,bool) {
 
 // address=[0x2fa2700]
 // Decompiled from char __thiscall IGuiEngine::ResetRadioGroup(IGuiEngine *this, int a2, int a3)
-
 bool  IGuiEngine::ResetRadioGroup(int,int) {
   
   int unknown4_low; // [esp+4h] [ebp-10h]
@@ -1450,7 +1382,6 @@ bool  IGuiEngine::ResetRadioGroup(int,int) {
 
 // address=[0x2fa27d0]
 // Decompiled from char __thiscall IGuiEngine::SetWidth(IGuiEngine *this, int a2, int a3, WORD a4)
-
 bool  IGuiEngine::SetWidth(int,int,int) {
   
   struct SGuiControl *ControlPtr; // [esp+4h] [ebp-4h]
@@ -1467,7 +1398,6 @@ bool  IGuiEngine::SetWidth(int,int,int) {
 
 // address=[0x2fa2820]
 // Decompiled from char __thiscall IGuiEngine::SetPosition(IGuiEngine *this, int a2, int a3, WORD a4, WORD a5)
-
 bool  IGuiEngine::SetPosition(int,int,int,int) {
   
   struct SGuiControl *ControlPtr; // [esp+4h] [ebp-4h]
@@ -1485,7 +1415,6 @@ bool  IGuiEngine::SetPosition(int,int,int,int) {
 
 // address=[0x2fa0940]
 // Decompiled from unsigned __int16 __thiscall IGuiEngine::InitShadeTables(IGuiEngine *this)
-
 void  IGuiEngine::InitShadeTables(void) {
   
   unsigned __int16 result; // ax
@@ -1539,14 +1468,7 @@ void  IGuiEngine::InitShadeTables(void) {
 
 
 // address=[0x2fa0b80]
-// Decompiled from struct tagRECT *__cdecl IGuiEngine::GetDialogDestinationRect(
-        struct tagRECT *retstr,
-        const struct GUI_MENU_DIALOG_HEADER *a2,
-        int a3,
-        int a4,
-        float a5,
-        float a6)
-
+// Decompiled from struct tagRECT *__cdecl IGuiEngine::GetDialogDestinationRect(  struct tagRECT *retstr,  const struct GUI_MENU_DIALOG_HEADER *a2,  int a3,  int a4,  float a5,  float a6)
 static struct tagRECT __cdecl IGuiEngine::GetDialogDestinationRect(struct GUI_MENU_DIALOG_HEADER const &,int,int,float,float) {
   
   LONG v7; // [esp+4h] [ebp-10h]

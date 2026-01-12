@@ -4,7 +4,6 @@
 
 // address=[0x14f1a80]
 // Decompiled from int __thiscall CBuildingBits::PrintToTraceFile(CBuildingBits *this, int a2)
-
 void  CBuildingBits::PrintToTraceFile(unsigned int) {
   
   int result; // eax
@@ -32,7 +31,6 @@ void  CBuildingBits::PrintToTraceFile(unsigned int) {
 
 // address=[0x14f3590]
 // Decompiled from CBuildingBits *__thiscall CBuildingBits::CBuildingBits(CBuildingBits *this)
-
  CBuildingBits::CBuildingBits(void) {
   
   j__memset(this, 0, 0x1900u);

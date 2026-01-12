@@ -3,9 +3,7 @@
 // Definitions for class CSolutionTree
 
 // address=[0x2f3eac0]
-// Decompiled from // public: __thiscall CSolutionTree::CSolutionTree(void)
-CDynListEntry *__thiscall CSolutionTree::CSolutionTree(CDynListEntry *this)
-
+// Decompiled from CDynListEntry *__thiscall CSolutionTree::CSolutionTree(CDynListEntry *this)
  CSolutionTree::CSolutionTree(void) {
   
   CDynListEntry::CDynListEntry(this);
@@ -16,7 +14,6 @@ CDynListEntry *__thiscall CSolutionTree::CSolutionTree(CDynListEntry *this)
 
 // address=[0x2f3eae0]
 // Decompiled from void __thiscall CSolutionTree::~CSolutionTree(CDynList **this)
-
  CSolutionTree::~CSolutionTree(void) {
   
   *this = (CDynList *)&CSolutionTree::_vftable_;
@@ -30,7 +27,6 @@ CDynListEntry *__thiscall CSolutionTree::CSolutionTree(CDynListEntry *this)
 
 // address=[0x2f3eb60]
 // Decompiled from CSolutionTree *__thiscall CSolutionTree::CSolutionTree(CSolutionTree *this, int a2, struct CParam *a3)
-
  CSolutionTree::CSolutionTree(int,class CParam *) {
   
   CDynList *v4; // [esp+Ch] [ebp-20h]
@@ -59,7 +55,6 @@ CDynListEntry *__thiscall CSolutionTree::CSolutionTree(CDynListEntry *this)
 
 // address=[0x2f3ec50]
 // Decompiled from int __thiscall CSolutionTree::NewSubSolution(CDynList **this, int a2, struct CParam *a3)
-
 void  CSolutionTree::NewSubSolution(int,class CParam *) {
   
   struct CDynListEntry *v5; // [esp+Ch] [ebp-14h]
@@ -76,7 +71,6 @@ void  CSolutionTree::NewSubSolution(int,class CParam *) {
 
 // address=[0x2f3ece0]
 // Decompiled from int __thiscall CSolutionTree::NewSubSolution(CDynList **this, struct CSolutionTree *a2)
-
 void  CSolutionTree::NewSubSolution(class CSolutionTree *) {
   
   return CDynList::addElement(this[5], a2);

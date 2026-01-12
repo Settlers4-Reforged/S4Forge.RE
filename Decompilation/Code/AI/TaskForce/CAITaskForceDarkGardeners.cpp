@@ -3,11 +3,7 @@
 // Definitions for class CAITaskForceDarkGardeners
 
 // address=[0x132a100]
-// Decompiled from CAITaskForceDarkGardeners *__thiscall CAITaskForceDarkGardeners::CAITaskForceDarkGardeners(
-        CAITaskForceDarkGardeners *this,
-        int a2,
-        int a3)
-
+// Decompiled from CAITaskForceDarkGardeners *__thiscall CAITaskForceDarkGardeners::CAITaskForceDarkGardeners(  CAITaskForceDarkGardeners *this,  int a2,  int a3)
  CAITaskForceDarkGardeners::CAITaskForceDarkGardeners(int,int) {
   
   CAITaskForceEx::CAITaskForceEx(this, a2, 6, 11, a3);
@@ -18,7 +14,6 @@
 
 // address=[0x132a280]
 // Decompiled from void __thiscall CAITaskForceDarkGardeners::~CAITaskForceDarkGardeners(CAITaskForceDarkGardeners *this)
-
  CAITaskForceDarkGardeners::~CAITaskForceDarkGardeners(void) {
   
   CAITaskForceEx::~CAITaskForceEx(this);
@@ -27,7 +22,6 @@
 
 // address=[0x132ce70]
 // Decompiled from char __thiscall CAITaskForceDarkGardeners::Execute(CAITaskForceDarkGardeners *this)
-
 void  CAITaskForceDarkGardeners::Execute(void) {
   
   int v1; // eax
@@ -53,7 +47,6 @@ void  CAITaskForceDarkGardeners::Execute(void) {
 
 // address=[0x132cee0]
 // Decompiled from char __thiscall CAITaskForceDarkGardeners::NewCommand(CAITaskForceDarkGardeners *this, unsigned int a2, int a3, int a4)
-
 bool  CAITaskForceDarkGardeners::NewCommand(int,int,int) {
   
   CAITaskForceEx::SetCommandAndClearStuff(this, a2, a3, a4);

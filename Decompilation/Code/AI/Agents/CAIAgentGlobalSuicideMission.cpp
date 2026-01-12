@@ -3,11 +3,7 @@
 // Definitions for class CAIAgentGlobalSuicideMission
 
 // address=[0x1306b70]
-// Decompiled from unsigned int __thiscall CAIAgentGlobalSuicideMission::Execute(
-        CAIAgentGlobalSuicideMission *this,
-        unsigned int a2,
-        unsigned int a3)
-
+// Decompiled from unsigned int __thiscall CAIAgentGlobalSuicideMission::Execute(  CAIAgentGlobalSuicideMission *this,  unsigned int a2,  unsigned int a3)
 unsigned int  CAIAgentGlobalSuicideMission::Execute(unsigned int,unsigned int) {
   
   unsigned int v3; // eax
@@ -124,7 +120,6 @@ unsigned int  CAIAgentGlobalSuicideMission::Execute(unsigned int,unsigned int) {
 
 // address=[0x1306e40]
 // Decompiled from int __thiscall CAIAgentGlobalSuicideMission::Load(CAIAgentGlobalSuicideMission *this, struct IS4Chunk *a2)
-
 void  CAIAgentGlobalSuicideMission::Load(class IS4Chunk &) {
   
   (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 12))(a2, -1516273664);
@@ -137,7 +132,6 @@ void  CAIAgentGlobalSuicideMission::Load(class IS4Chunk &) {
 
 // address=[0x1306ea0]
 // Decompiled from int __thiscall CAIAgentGlobalSuicideMission::Save(CAIAgentGlobalSuicideMission *this, struct IS4Chunk *a2)
-
 void  CAIAgentGlobalSuicideMission::Save(class IS4Chunk &) {
   
   (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 24))(a2, -1516273664);
@@ -149,10 +143,7 @@ void  CAIAgentGlobalSuicideMission::Save(class IS4Chunk &) {
 
 
 // address=[0x1319160]
-// Decompiled from CAIAgentGlobalSuicideMission *__thiscall CAIAgentGlobalSuicideMission::CAIAgentGlobalSuicideMission(
-        CAIAgentGlobalSuicideMission *this,
-        const char *a2)
-
+// Decompiled from CAIAgentGlobalSuicideMission *__thiscall CAIAgentGlobalSuicideMission::CAIAgentGlobalSuicideMission(  CAIAgentGlobalSuicideMission *this,  const char *a2)
  CAIAgentGlobalSuicideMission::CAIAgentGlobalSuicideMission(char const *) {
   
   CAIAgentPlayerBase::CAIAgentPlayerBase(this, a2);
@@ -163,7 +154,6 @@ void  CAIAgentGlobalSuicideMission::Save(class IS4Chunk &) {
 
 // address=[0x1319260]
 // Decompiled from void __thiscall CAIAgentGlobalSuicideMission::~CAIAgentGlobalSuicideMission(CAIAgentGlobalSuicideMission *this)
-
  CAIAgentGlobalSuicideMission::~CAIAgentGlobalSuicideMission(void) {
   
   CAIAgentPlayerBase::~CAIAgentPlayerBase(this);
@@ -171,12 +161,7 @@ void  CAIAgentGlobalSuicideMission::Save(class IS4Chunk &) {
 
 
 // address=[0x1306f00]
-// Decompiled from int __cdecl CAIAgentGlobalSuicideMission::FindNearestBuildingInSector(
-        int a1,
-        int a2,
-        struct _Cnd_internal_imp_t *a3,
-        struct _Mtx_internal_imp_t *a4)
-
+// Decompiled from int __cdecl CAIAgentGlobalSuicideMission::FindNearestBuildingInSector(  int a1,  int a2,  struct _Cnd_internal_imp_t *a3,  struct _Mtx_internal_imp_t *a4)
 static int __cdecl CAIAgentGlobalSuicideMission::FindNearestBuildingInSector(int,int,int,int) {
   
   int v5; // [esp+0h] [ebp-24h]

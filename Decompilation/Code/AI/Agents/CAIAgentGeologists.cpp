@@ -4,7 +4,6 @@
 
 // address=[0x1304250]
 // Decompiled from unsigned int __thiscall CAIAgentGeologists::Execute(CAIAgentGeologists *this, unsigned int a2, unsigned int a3)
-
 unsigned int  CAIAgentGeologists::Execute(unsigned int,unsigned int) {
   
   struct CAINormalSectorAI *v3; // eax
@@ -147,7 +146,6 @@ LABEL_15:
 
 // address=[0x1325aa0]
 // Decompiled from CAIAgentGeologists *__thiscall CAIAgentGeologists::CAIAgentGeologists(CAIAgentGeologists *this)
-
  CAIAgentGeologists::CAIAgentGeologists(void) {
   
   CAINormalSectorAgent::CAINormalSectorAgent(this, "geologists");
@@ -158,7 +156,6 @@ LABEL_15:
 
 // address=[0x1325c70]
 // Decompiled from void __thiscall CAIAgentGeologists::~CAIAgentGeologists(CAIAgentGeologists *this)
-
  CAIAgentGeologists::~CAIAgentGeologists(void) {
   
   CAINormalSectorAgent::~CAINormalSectorAgent(this);

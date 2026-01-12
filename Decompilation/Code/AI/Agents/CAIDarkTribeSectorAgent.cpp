@@ -3,10 +3,7 @@
 // Definitions for class CAIDarkTribeSectorAgent
 
 // address=[0x12fc7f0]
-// Decompiled from CAIDarkTribeSectorAgent *__thiscall CAIDarkTribeSectorAgent::CAIDarkTribeSectorAgent(
-        CAIDarkTribeSectorAgent *this,
-        const char *a2)
-
+// Decompiled from CAIDarkTribeSectorAgent *__thiscall CAIDarkTribeSectorAgent::CAIDarkTribeSectorAgent(  CAIDarkTribeSectorAgent *this,  const char *a2)
  CAIDarkTribeSectorAgent::CAIDarkTribeSectorAgent(char const *) {
   
   CAIAgent::CAIAgent(this, a2);
@@ -18,7 +15,6 @@
 
 // address=[0x12fca00]
 // Decompiled from void __thiscall CAIDarkTribeSectorAgent::~CAIDarkTribeSectorAgent(CAIDarkTribeSectorAgent *this)
-
  CAIDarkTribeSectorAgent::~CAIDarkTribeSectorAgent(void) {
   
   CAIAgent::~CAIAgent(this);
@@ -26,9 +22,7 @@
 
 
 // address=[0x12fd5c0]
-// Decompiled from // MFC 3.1-14.0 32bit
-int __thiscall CAIDarkTribeSectorAgent::SectorAI(CAIDarkTribeSectorAgent *this)
-
+// Decompiled from int __thiscall CAIDarkTribeSectorAgent::SectorAI(CAIDarkTribeSectorAgent *this)
 class CAIDarkTribeSectorAI *  CAIDarkTribeSectorAgent::SectorAI(void)const {
   
   return *((_DWORD *)this + 9);
@@ -36,10 +30,7 @@ class CAIDarkTribeSectorAI *  CAIDarkTribeSectorAgent::SectorAI(void)const {
 
 
 // address=[0x1301910]
-// Decompiled from CAIDarkTribeSectorAgent *__thiscall CAIDarkTribeSectorAgent::AttachSectorAI(
-        CAIDarkTribeSectorAgent *this,
-        struct CAIDarkTribeSectorAI *a2)
-
+// Decompiled from CAIDarkTribeSectorAgent *__thiscall CAIDarkTribeSectorAgent::AttachSectorAI(  CAIDarkTribeSectorAgent *this,  struct CAIDarkTribeSectorAI *a2)
 void  CAIDarkTribeSectorAgent::AttachSectorAI(class CAIDarkTribeSectorAI *) {
   
   CAIDarkTribeSectorAgent *result; // eax

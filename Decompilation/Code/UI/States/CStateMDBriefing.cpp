@@ -4,7 +4,6 @@
 
 // address=[0x14c4dc0]
 // Decompiled from CStateMDBriefing *__cdecl CStateMDBriefing::DynamicCreateFunc(void *a1)
-
 static class CGameState * __cdecl CStateMDBriefing::DynamicCreateFunc(void *) {
   
   CStateMDBriefing *C; // [esp+Ch] [ebp-10h]
@@ -19,7 +18,6 @@ static class CGameState * __cdecl CStateMDBriefing::DynamicCreateFunc(void *) {
 
 // address=[0x14c4e40]
 // Decompiled from CStateMDBriefing *__thiscall CStateMDBriefing::CStateMDBriefing(CStateMDBriefing *this, void *a2)
-
  CStateMDBriefing::CStateMDBriefing(void *) {
   
   CGuiGameState::CGuiGameState(this);
@@ -88,7 +86,6 @@ static class CGameState * __cdecl CStateMDBriefing::DynamicCreateFunc(void *) {
 
 // address=[0x14c5090]
 // Decompiled from void __thiscall CStateMDBriefing::~CStateMDBriefing(CStateMDBriefing *this)
-
  CStateMDBriefing::~CStateMDBriefing(void) {
   
   *(_DWORD *)this = &CStateMDBriefing::_vftable_;
@@ -99,7 +96,6 @@ static class CGameState * __cdecl CStateMDBriefing::DynamicCreateFunc(void *) {
 
 // address=[0x14c50f0]
 // Decompiled from char __thiscall CStateMDBriefing::Perform(CStateMDBriefing *this)
-
 bool  CStateMDBriefing::Perform(void) {
   
   DWORD v2; // esi
@@ -168,7 +164,6 @@ bool  CStateMDBriefing::Perform(void) {
 
 // address=[0x14c52d0]
 // Decompiled from char __thiscall CStateMDBriefing::OnEvent(CStateMDBriefing *this, struct CEvn_Event *a2)
-
 bool  CStateMDBriefing::OnEvent(class CEvn_Event &) {
   
   CGUIWrapper *Instance; // eax
@@ -438,7 +433,6 @@ bool  CStateMDBriefing::OnEvent(class CEvn_Event &) {
 
 // address=[0x14c5b70]
 // Decompiled from void *__cdecl CStateMDBriefing::InitBriefingTexts(int a1, int a2)
-
 static void __cdecl CStateMDBriefing::InitBriefingTexts(int,int) {
   
   char *v2; // eax
@@ -584,9 +578,7 @@ static void __cdecl CStateMDBriefing::InitBriefingTexts(int,int) {
 
 
 // address=[0x14c65e0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-char __thiscall CStateMDBriefing::CanProcessInvites(CStateMDBriefing *this)
-
+// Decompiled from char __thiscall CStateMDBriefing::CanProcessInvites(CStateMDBriefing *this)
 bool  CStateMDBriefing::CanProcessInvites(void) {
   
   return 0;

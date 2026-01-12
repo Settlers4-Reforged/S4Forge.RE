@@ -4,7 +4,6 @@
 
 // address=[0x1310260]
 // Decompiled from IAIEventQueue *__thiscall IAIEventQueue::IAIEventQueue(IAIEventQueue *this)
-
  IAIEventQueue::IAIEventQueue(void) {
   
   IS4ChunkObject::IS4ChunkObject(this);

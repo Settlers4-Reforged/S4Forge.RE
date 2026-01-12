@@ -4,7 +4,6 @@
 
 // address=[0x14544a0]
 // Decompiled from CBuildingInfo *__thiscall CBuildingInfo::CBuildingInfo(CBuildingInfo *this)
-
  CBuildingInfo::CBuildingInfo(void) {
   
   CInfoExchange::CInfoExchange(this);

@@ -4,7 +4,6 @@
 
 // address=[0x2fd4650]
 // Decompiled from CVoiceChat *__thiscall CVoiceChat::CVoiceChat(CVoiceChat *this, int a2, int a3, struct IEventEngine *a4)
-
  CVoiceChat::CVoiceChat(int,int,class IEventEngine *) {
   
   int i; // [esp+8h] [ebp-14h]
@@ -32,7 +31,6 @@
 
 // address=[0x2fd47a0]
 // Decompiled from void __thiscall CVoiceChat::~CVoiceChat(void **this)
-
  CVoiceChat::~CVoiceChat(void) {
   
   void (__thiscall ***v1)(_DWORD, int); // [esp+18h] [ebp-18h]
@@ -74,7 +72,6 @@
 
 // address=[0x2fd4920]
 // Decompiled from char __thiscall CVoiceChat::Init(int *this, int a2, int a3, char *Str)
-
 bool  CVoiceChat::Init(int,unsigned int,char *) {
   
   size_t v4; // eax
@@ -122,9 +119,7 @@ bool  CVoiceChat::Init(int,unsigned int,char *) {
 
 
 // address=[0x2fd4af0]
-// Decompiled from // public: void __thiscall CVoiceChat::Stop(void)
-_DWORD *__thiscall CVoiceChat::Stop(_DWORD *this)
-
+// Decompiled from _DWORD *__thiscall CVoiceChat::Stop(_DWORD *this)
 void  CVoiceChat::Stop(void) {
   
   _DWORD *result; // eax
@@ -159,7 +154,6 @@ void  CVoiceChat::Stop(void) {
 
 // address=[0x2fd4bb0]
 // Decompiled from char __thiscall sub_33D4BB0(int this, void *Src, int a3)
-
 bool  CVoiceChat::ReceivePacket(signed char *,int) {
   
   int v4; // [esp+0h] [ebp-8h]
@@ -184,7 +178,6 @@ bool  CVoiceChat::ReceivePacket(signed char *,int) {
 
 // address=[0x2fd4c50]
 // Decompiled from int __thiscall CVoiceChat::GetInputSamplingRate(CVoiceChat *this)
-
 int  CVoiceChat::GetInputSamplingRate(void) {
   
   return CVCRecorder::GetInputRate((CVoiceChat *)((char *)this + 24));
@@ -193,7 +186,6 @@ int  CVoiceChat::GetInputSamplingRate(void) {
 
 // address=[0x2fd4c70]
 // Decompiled from void __thiscall CVoiceChat::ToggleRecording(CVoiceChat *this, bool a2)
-
 void  CVoiceChat::ToggleRecording(bool) {
   
   if ( !CVCRecorder::UsesFullDuplex((CVoiceChat *)((char *)this + 24)) )
@@ -204,7 +196,6 @@ void  CVoiceChat::ToggleRecording(bool) {
 
 // address=[0x2fd4cb0]
 // Decompiled from bool __thiscall CVoiceChat::IsRecording(CVoiceChat *this)
-
 bool  CVoiceChat::IsRecording(void) {
   
   return CVCRecorder::IsRecording((CVoiceChat *)((char *)this + 24));
@@ -213,7 +204,6 @@ bool  CVoiceChat::IsRecording(void) {
 
 // address=[0x2fd4cd0]
 // Decompiled from int __thiscall CVoiceChat::Run(CVoiceChat *this)
-
 void  CVoiceChat::Run(void) {
   
   int result; // eax
@@ -232,7 +222,6 @@ void  CVoiceChat::Run(void) {
 
 // address=[0x2fd4d30]
 // Decompiled from bool __thiscall CVoiceChat::UsesFullDuplex(CVoiceChat *this)
-
 bool  CVoiceChat::UsesFullDuplex(void) {
   
   return CVCRecorder::UsesFullDuplex((CVoiceChat *)((char *)this + 24));
@@ -241,7 +230,6 @@ bool  CVoiceChat::UsesFullDuplex(void) {
 
 // address=[0x2fd4d50]
 // Decompiled from void __thiscall CVoiceChat::CalcBaseNoise(CVoiceChat *this)
-
 void  CVoiceChat::CalcBaseNoise(void) {
   
   CVCRecorder::CalcNoiseVol((CVoiceChat *)((char *)this + 24));
@@ -249,9 +237,7 @@ void  CVoiceChat::CalcBaseNoise(void) {
 
 
 // address=[0x2fd4d70]
-// Decompiled from // public: void __thiscall CVoiceChat::SetOperationMode(bool)
-CVCRecorder *__thiscall CVoiceChat::SetOperationMode(int this, bool a2)
-
+// Decompiled from CVCRecorder *__thiscall CVoiceChat::SetOperationMode(int this, bool a2)
 void  CVoiceChat::SetOperationMode(bool) {
   
   return CVCRecorder::SetOperationMode((CVCRecorder *)(this + 24), a2);
@@ -260,7 +246,6 @@ void  CVoiceChat::SetOperationMode(bool) {
 
 // address=[0x2fd4d90]
 // Decompiled from CVoiceChat *__thiscall CVoiceChat::SetTestMode(CVoiceChat *this, bool a2)
-
 void  CVoiceChat::SetTestMode(bool) {
   
   CVoiceChat *result; // eax
@@ -273,7 +258,6 @@ void  CVoiceChat::SetTestMode(bool) {
 
 // address=[0x2fd4db0]
 // Decompiled from char __thiscall CVoiceChat::OnEvent(CVoiceChat *this, struct CEvn_Event *a2)
-
 bool  CVoiceChat::OnEvent(class CEvn_Event &) {
   
   int event; // [esp+8h] [ebp-8h]
@@ -298,7 +282,6 @@ bool  CVoiceChat::OnEvent(class CEvn_Event &) {
 
 // address=[0x2fd4e30]
 // Decompiled from CVoiceChat *__thiscall CVoiceChat::SetVolume(CVoiceChat *this, int a2)
-
 void  CVoiceChat::SetVolume(int) {
   
   CVoiceChat *result; // eax
@@ -329,7 +312,6 @@ void  CVoiceChat::SetVolume(int) {
 
 // address=[0x2fd4ec0]
 // Decompiled from char __thiscall CVoiceChat::SetMicVolume(CVoiceChat *this, unsigned int a2)
-
 void  CVoiceChat::SetMicVolume(int) {
   
   char result; // al
@@ -347,7 +329,6 @@ void  CVoiceChat::SetMicVolume(int) {
 
 // address=[0x2fd4f60]
 // Decompiled from int __thiscall CVoiceChat::GetMicVolume(CVoiceChat *this)
-
 int  CVoiceChat::GetMicVolume(void) {
   
   int v2; // [esp+0h] [ebp-8h] BYREF
@@ -363,7 +344,6 @@ int  CVoiceChat::GetMicVolume(void) {
 
 // address=[0x2fd3d50]
 // Decompiled from void __thiscall CVoiceChat::SendPacket(CVoiceChat *this)
-
 void  CVoiceChat::SendPacket(void) {
   
   CEvn_Logic *v1; // [esp+4h] [ebp-3Ch]
@@ -398,7 +378,6 @@ void  CVoiceChat::SendPacket(void) {
 
 // address=[0x2fd3ea0]
 // Decompiled from char __thiscall CVoiceChat::SetWindowsMicVolume(CVoiceChat *this, int a2)
-
 bool  CVoiceChat::SetWindowsMicVolume(int) {
   
   tagMIXERLINECONTROLSA pmxlc; // [esp+4h] [ebp-1C0h] BYREF
@@ -539,7 +518,6 @@ bool  CVoiceChat::SetWindowsMicVolume(int) {
 
 // address=[0x2fd4290]
 // Decompiled from char __thiscall CVoiceChat::GetWindowsMicVolume(CVoiceChat *this, int *a2)
-
 bool  CVoiceChat::GetWindowsMicVolume(int *) {
   
   struct tagMIXERLINECONTROLSA pmxlc; // [esp+0h] [ebp-1C4h] BYREF

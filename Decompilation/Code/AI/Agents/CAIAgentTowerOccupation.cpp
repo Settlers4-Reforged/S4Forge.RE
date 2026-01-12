@@ -3,11 +3,7 @@
 // Definitions for class CAIAgentTowerOccupation
 
 // address=[0x1303df0]
-// Decompiled from unsigned int __thiscall CAIAgentTowerOccupation::Execute(
-        CAIAgentTowerOccupation *this,
-        unsigned int a2,
-        unsigned int a3)
-
+// Decompiled from unsigned int __thiscall CAIAgentTowerOccupation::Execute(  CAIAgentTowerOccupation *this,  unsigned int a2,  unsigned int a3)
 unsigned int  CAIAgentTowerOccupation::Execute(unsigned int,unsigned int) {
   
   struct CAINormalSectorAI *v3; // eax
@@ -50,7 +46,6 @@ unsigned int  CAIAgentTowerOccupation::Execute(unsigned int,unsigned int) {
 
 // address=[0x1325b60]
 // Decompiled from CAIAgentTowerOccupation *__thiscall CAIAgentTowerOccupation::CAIAgentTowerOccupation(CAIAgentTowerOccupation *this)
-
  CAIAgentTowerOccupation::CAIAgentTowerOccupation(void) {
   
   CAINormalSectorAgent::CAINormalSectorAgent(this, string__25);
@@ -61,7 +56,6 @@ unsigned int  CAIAgentTowerOccupation::Execute(unsigned int,unsigned int) {
 
 // address=[0x1325cf0]
 // Decompiled from void __thiscall CAIAgentTowerOccupation::~CAIAgentTowerOccupation(CAIAgentTowerOccupation *this)
-
  CAIAgentTowerOccupation::~CAIAgentTowerOccupation(void) {
   
   CAINormalSectorAgent::~CAINormalSectorAgent(this);

@@ -4,7 +4,6 @@
 
 // address=[0x1401760]
 // Decompiled from int __cdecl CPriestRole::New(int a1)
-
 static class CPersistence * __cdecl CPriestRole::New(std::istream &) {
   
   if ( operator new(0x40u) )
@@ -16,7 +15,6 @@ static class CPersistence * __cdecl CPriestRole::New(std::istream &) {
 
 // address=[0x157b260]
 // Decompiled from int __thiscall CPriestRole::InitWalking(CPriestRole *this, struct CSettler *a2)
-
 class CWalking *  CPriestRole::InitWalking(class CSettler *) {
   
   int v2; // eax
@@ -31,7 +29,6 @@ class CWalking *  CPriestRole::InitWalking(class CSettler *) {
 
 // address=[0x157b2a0]
 // Decompiled from int __thiscall CPriestRole::LogicUpdateJob(CPriestRole *this, struct CSettler *a2)
-
 void  CPriestRole::LogicUpdateJob(class CSettler *) {
   
   int v2; // eax
@@ -85,7 +82,6 @@ void  CPriestRole::LogicUpdateJob(class CSettler *) {
 
 // address=[0x157b3c0]
 // Decompiled from int __stdcall CPriestRole::PostLoadInit(CPropertySet *a1)
-
 void  CPriestRole::PostLoadInit(class CSettler *) {
   
   return CWarMap::AddEntity(a1);
@@ -94,7 +90,6 @@ void  CPriestRole::PostLoadInit(class CSettler *) {
 
 // address=[0x157b3e0]
 // Decompiled from _DWORD *__thiscall CPriestRole::CPriestRole(_DWORD *this, int a2)
-
  CPriestRole::CPriestRole(std::istream &) {
   
   int v2; // eax
@@ -139,7 +134,6 @@ void  CPriestRole::PostLoadInit(class CSettler *) {
 
 // address=[0x157b500]
 // Decompiled from int __thiscall CPriestRole::Store(int *this, struct std::ostream *a2)
-
 void  CPriestRole::Store(std::ostream &) {
   
   int v3; // [esp+0h] [ebp-44h]
@@ -184,7 +178,6 @@ void  CPriestRole::Store(std::ostream &) {
 
 // address=[0x157c450]
 // Decompiled from int __thiscall CPriestRole::ClassID(CPriestRole *this)
-
 unsigned long  CPriestRole::ClassID(void)const {
   
   return CPriestRole::m_iClassID;
@@ -193,7 +186,6 @@ unsigned long  CPriestRole::ClassID(void)const {
 
 // address=[0x157c470]
 // Decompiled from int __thiscall CPriestRole::GetSettlerRole(CPriestRole *this)
-
 int  CPriestRole::GetSettlerRole(void)const {
   
   return 9;
@@ -202,7 +194,6 @@ int  CPriestRole::GetSettlerRole(void)const {
 
 // address=[0x1588800]
 // Decompiled from int __cdecl CPriestRole::Load(int a1)
-
 static class CPriestRole * __cdecl CPriestRole::Load(std::istream &) {
   
   void **v1; // eax
@@ -218,7 +209,6 @@ static class CPriestRole * __cdecl CPriestRole::Load(std::istream &) {
 
 // address=[0x157b620]
 // Decompiled from int __thiscall CPriestRole::GetKindOfSelection(CPriestRole *this, struct CSettler *a2)
-
 int  CPriestRole::GetKindOfSelection(class CSettler *)const {
   
   return 94;
@@ -227,7 +217,6 @@ int  CPriestRole::GetKindOfSelection(class CSettler *)const {
 
 // address=[0x157b640]
 // Decompiled from void __thiscall CPriestRole::~CPriestRole(CPriestRole *this)
-
  CPriestRole::~CPriestRole(void) {
   
   int v1; // eax
@@ -256,7 +245,6 @@ int  CPriestRole::GetKindOfSelection(class CSettler *)const {
 
 // address=[0x157b730]
 // Decompiled from int __thiscall CPriestRole::GetNextJob(CPriestRole *this, struct CSettler *a2)
-
 void  CPriestRole::GetNextJob(class CSettler *) {
   
   CPriestRole *v3; // [esp+0h] [ebp-4h]
@@ -276,7 +264,6 @@ void  CPriestRole::GetNextJob(class CSettler *) {
 
 // address=[0x157b7a0]
 // Decompiled from void __thiscall CPriestRole::TakeJob(int this, COleCmdUI *a2)
-
 void  CPriestRole::TakeJob(class CSettler *) {
   
   const struct CEntityTask *ActualTask; // eax
@@ -416,7 +403,6 @@ void  CPriestRole::TakeJob(class CSettler *) {
 
 // address=[0x157bbc0]
 // Decompiled from int __thiscall CPriestRole::Init(int this, CPropertySet *a2)
-
 void  CPriestRole::Init(class CSettler *) {
   
   int result; // eax
@@ -432,7 +418,6 @@ void  CPriestRole::Init(class CSettler *) {
 
 // address=[0x157bc00]
 // Decompiled from int __thiscall CPriestRole::ConvertEventIntoGoal(int this, CPropertySet *a2, const struct CEntityEvent *a3)
-
 void  CPriestRole::ConvertEventIntoGoal(class CSettler *,class CEntityEvent *) {
   
   int result; // eax
@@ -599,7 +584,6 @@ LABEL_19:
 
 // address=[0x1587b00]
 // Decompiled from CPriestRole *__thiscall CPriestRole::CPriestRole(CPriestRole *this)
-
  CPriestRole::CPriestRole(void) {
   
   ISelectableSettlerRole::ISelectableSettlerRole(this);

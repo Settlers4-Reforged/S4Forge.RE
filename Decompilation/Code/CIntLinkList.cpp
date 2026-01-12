@@ -4,7 +4,6 @@
 
 // address=[0x15e2e50]
 // Decompiled from CIntLinkList *__thiscall CIntLinkList::Init(CIntLinkList *this, int a2)
-
 void  CIntLinkList::Init(int) {
   
   CIntLinkList *result; // eax
@@ -18,7 +17,6 @@ void  CIntLinkList::Init(int) {
 
 // address=[0x15e2e70]
 // Decompiled from char __thiscall CIntLinkList::SearchBackwards(CIntLinkList *this, int a2)
-
 bool  CIntLinkList::SearchBackwards(int) {
   
   int i; // [esp+8h] [ebp-4h]
@@ -34,7 +32,6 @@ bool  CIntLinkList::SearchBackwards(int) {
 
 // address=[0x15e6f60]
 // Decompiled from int __thiscall CIntLinkList::operator[](void *this, int a2)
-
 int const &  CIntLinkList::operator[](int)const {
   
   return (int)this + 4 * a2 + 8;
@@ -42,10 +39,7 @@ int const &  CIntLinkList::operator[](int)const {
 
 
 // address=[0x15e72c0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CIntLinkList::OwnerTileId(CIntLinkList *this)
-
+// Decompiled from int __thiscall CIntLinkList::OwnerTileId(CIntLinkList *this)
 int  CIntLinkList::OwnerTileId(void)const {
   
   return *((_DWORD *)this + 1);
@@ -53,10 +47,7 @@ int  CIntLinkList::OwnerTileId(void)const {
 
 
 // address=[0x15e7430]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CIntLinkList::Size(CIntLinkList *this)
-
+// Decompiled from int __thiscall CIntLinkList::Size(CIntLinkList *this)
 int  CIntLinkList::Size(void)const {
   
   return *(_DWORD *)this;
@@ -65,7 +56,6 @@ int  CIntLinkList::Size(void)const {
 
 // address=[0x15f3ea0]
 // Decompiled from CIntLinkList *__thiscall CIntLinkList::CIntLinkList(CIntLinkList *this, int a2)
-
  CIntLinkList::CIntLinkList(int) {
   
   CIntLinkList::Init(this, a2);
@@ -75,7 +65,6 @@ int  CIntLinkList::Size(void)const {
 
 // address=[0x15f4010]
 // Decompiled from int __thiscall CIntLinkList::operator[](void *this, int a2)
-
 int &  CIntLinkList::operator[](int) {
   
   return (int)this + 4 * a2 + 8;
@@ -84,7 +73,6 @@ int &  CIntLinkList::operator[](int) {
 
 // address=[0x15f40e0]
 // Decompiled from CIntLinkList *__thiscall CIntLinkList::`default constructor closure'(CIntLinkList *this)
-
 void  CIntLinkList::`default constructor closure'(void) {
   
   return CIntLinkList::CIntLinkList(this, 0);
@@ -93,7 +81,6 @@ void  CIntLinkList::`default constructor closure'(void) {
 
 // address=[0x15f5620]
 // Decompiled from CIntLinkList *__thiscall CIntLinkList::PushBack(CIntLinkList *this, int a2)
-
 void  CIntLinkList::PushBack(int) {
   
   CIntLinkList *result; // eax
@@ -106,9 +93,7 @@ void  CIntLinkList::PushBack(int) {
 
 
 // address=[0x15f5820]
-// Decompiled from // MFC 3.1-14.0 32bit
-CIntLinkList *__thiscall CIntLinkList::SetOwnerTileId(CIntLinkList *this, int a2)
-
+// Decompiled from CIntLinkList *__thiscall CIntLinkList::SetOwnerTileId(CIntLinkList *this, int a2)
 void  CIntLinkList::SetOwnerTileId(int) {
   
   CIntLinkList *result; // eax

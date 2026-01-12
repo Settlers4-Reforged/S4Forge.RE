@@ -4,7 +4,6 @@
 
 // address=[0x15daae0]
 // Decompiled from IFogging *__thiscall IFogging::IFogging(IFogging *this)
-
  IFogging::IFogging(void) {
   
   IS4ChunkObject::IS4ChunkObject(this);

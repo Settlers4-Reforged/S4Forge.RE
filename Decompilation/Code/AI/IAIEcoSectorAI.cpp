@@ -3,9 +3,7 @@
 // Definitions for class IAIEcoSectorAI
 
 // address=[0x2f346f0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-int IAIEcoSectorAI::InterfaceVersion()
-
+// Decompiled from int IAIEcoSectorAI::InterfaceVersion()
 static int __cdecl IAIEcoSectorAI::InterfaceVersion(void) {
   
   return 2;
@@ -14,7 +12,6 @@ static int __cdecl IAIEcoSectorAI::InterfaceVersion(void) {
 
 // address=[0x2f34700]
 // Decompiled from CEcoSectorAI *__cdecl IAIEcoSectorAI::CreateEcoSectorAI(struct IAIEcoManager *a1)
-
 static class IAIEcoSectorAI * __cdecl IAIEcoSectorAI::CreateEcoSectorAI(class IAIEcoManager *) {
   
   int v2; // [esp+8h] [ebp-20h]
@@ -50,7 +47,6 @@ static class IAIEcoSectorAI * __cdecl IAIEcoSectorAI::CreateEcoSectorAI(class IA
 
 // address=[0x2f3b2e0]
 // Decompiled from IAIEcoSectorAI *__thiscall IAIEcoSectorAI::IAIEcoSectorAI(IAIEcoSectorAI *this)
-
  IAIEcoSectorAI::IAIEcoSectorAI(void) {
   
   IAIUnknown::IAIUnknown(this);

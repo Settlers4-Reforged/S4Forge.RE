@@ -4,7 +4,6 @@
 
 // address=[0x15d6690]
 // Decompiled from CDirCache *__thiscall CDirCache::Init(CDirCache *this)
-
 void  CDirCache::Init(void) {
   
   CDirCache *result; // eax
@@ -18,7 +17,6 @@ void  CDirCache::Init(void) {
 
 // address=[0x15d69a0]
 // Decompiled from int __thiscall CDirCache::PushBack(CDirCache *this, char a2)
-
 void  CDirCache::PushBack(int) {
   
   int result; // eax
@@ -33,7 +31,6 @@ void  CDirCache::PushBack(int) {
 
 // address=[0x15faff0]
 // Decompiled from int __thiscall CDirCache::operator[](_BYTE *this, char a2)
-
 int  CDirCache::operator[](int) {
   
   return (unsigned __int8)this[((this[1] - a2) & 0xF) + 2];
@@ -42,7 +39,6 @@ int  CDirCache::operator[](int) {
 
 // address=[0x15fb1a0]
 // Decompiled from int __thiscall CDirCache::Back(CDirCache *this)
-
 int  CDirCache::Back(void)const {
   
   return *((unsigned __int8 *)this + *((unsigned __int8 *)this + 1) + 2);
@@ -51,7 +47,6 @@ int  CDirCache::Back(void)const {
 
 // address=[0x15fb1c0]
 // Decompiled from int __thiscall CDirCache::Count(CDirCache *this)
-
 int  CDirCache::Count(void)const {
   
   return *(unsigned __int8 *)this;
@@ -60,7 +55,6 @@ int  CDirCache::Count(void)const {
 
 // address=[0x15fb520]
 // Decompiled from int __thiscall CDirCache::PopBack(CDirCache *this)
-
 void  CDirCache::PopBack(void) {
   
   int result; // eax
@@ -79,7 +73,6 @@ void  CDirCache::PopBack(void) {
 
 // address=[0x15d6600]
 // Decompiled from int __cdecl CDirCache::IncWrap(char a1)
-
 static unsigned char __cdecl CDirCache::IncWrap(unsigned char) {
   
   return (a1 + 1) & 0xF;
@@ -88,7 +81,6 @@ static unsigned char __cdecl CDirCache::IncWrap(unsigned char) {
 
 // address=[0x15fb1e0]
 // Decompiled from int __cdecl CDirCache::DecWrap(char a1)
-
 static unsigned char __cdecl CDirCache::DecWrap(unsigned char) {
   
   return (a1 - 1) & 0xF;

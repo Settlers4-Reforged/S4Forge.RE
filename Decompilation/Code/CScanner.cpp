@@ -4,7 +4,6 @@
 
 // address=[0x1301390]
 // Decompiled from bool __cdecl CScanner::FindNearestEnemyTowerInSector(struct SFindNearestResult *a1, int a2, int a3, int a4, int a5)
-
 static bool __cdecl CScanner::FindNearestEnemyTowerInSector(struct SFindNearestResult &,int,int,int,int) {
   
   int v6; // [esp+0h] [ebp-4h]
@@ -25,7 +24,6 @@ static bool __cdecl CScanner::FindNearestEnemyTowerInSector(struct SFindNearestR
 
 // address=[0x13065f0]
 // Decompiled from int __cdecl CScanner::FindNearestOwnTowerInSector(int a1, int a2, int a3, int a4)
-
 static int __cdecl CScanner::FindNearestOwnTowerInSector(int,int,int,int) {
   
   int v5; // [esp+0h] [ebp-Ch] BYREF
@@ -48,7 +46,6 @@ static int __cdecl CScanner::FindNearestOwnTowerInSector(int,int,int,int) {
 
 // address=[0x15df090]
 // Decompiled from char __cdecl CScanner::CheckIfAEnemyUnitMayBeInRange(int a1, int a2, int a3, int a4)
-
 static bool __cdecl CScanner::CheckIfAEnemyUnitMayBeInRange(int,int,int,int) {
   
   int v4; // eax
@@ -84,7 +81,6 @@ static bool __cdecl CScanner::CheckIfAEnemyUnitMayBeInRange(int,int,int,int) {
 
 // address=[0x15df200]
 // Decompiled from int __cdecl CScanner::CountCiviliansAndFindNearestInSector(int a1, int a2, int a3, int a4, int *a5)
-
 static int __cdecl CScanner::CountCiviliansAndFindNearestInSector(int,int,int,int,int *) {
   
   int v5; // eax
@@ -162,7 +158,6 @@ static int __cdecl CScanner::CountCiviliansAndFindNearestInSector(int,int,int,in
 
 // address=[0x15df4f0]
 // Decompiled from int __cdecl CScanner::CountFighters(struct SCountFightersResult *a1, int a2, int a3, int a4, int a5)
-
 static void __cdecl CScanner::CountFighters(struct SCountFightersResult &,int,int,int,int) {
   
   int v5; // eax
@@ -253,13 +248,7 @@ static void __cdecl CScanner::CountFighters(struct SCountFightersResult &,int,in
 
 
 // address=[0x15df900]
-// Decompiled from struct SEvalFightersResult *__cdecl CScanner::EvaluateFighters(
-        struct SEvalFightersResult *a1,
-        int a2,
-        int a3,
-        int a4,
-        int a5)
-
+// Decompiled from struct SEvalFightersResult *__cdecl CScanner::EvaluateFighters(  struct SEvalFightersResult *a1,  int a2,  int a3,  int a4,  int a5)
 static void __cdecl CScanner::EvaluateFighters(struct SEvalFightersResult &,int,int,int,int) {
   
   int v5; // eax
@@ -365,7 +354,6 @@ static void __cdecl CScanner::EvaluateFighters(struct SEvalFightersResult &,int,
 
 // address=[0x15dfdc0]
 // Decompiled from int __cdecl CScanner::EvaluateTowers(struct SEvalTowersResult *a1, int a2, int a3, int a4, int a5)
-
 static void __cdecl CScanner::EvaluateTowers(struct SEvalTowersResult &,int,int,int,int) {
   
   int v5; // eax
@@ -565,7 +553,6 @@ static void __cdecl CScanner::EvaluateTowers(struct SEvalTowersResult &,int,int,
 
 // address=[0x15e0530]
 // Decompiled from bool __cdecl CScanner::FindNearestTowerInSector(struct SFindNearestResult *a1, int a2, int a3, int a4, int a5)
-
 static bool __cdecl CScanner::FindNearestTowerInSector(struct SFindNearestResult &,int,int,int,int) {
   
   int v5; // eax
@@ -638,7 +625,6 @@ static bool __cdecl CScanner::FindNearestTowerInSector(struct SFindNearestResult
 
 // address=[0x15e08a0]
 // Decompiled from int __cdecl CScanner::FindNearestFighter(int a1, int a2, int a3, int a4, int a5)
-
 static int __cdecl CScanner::FindNearestFighter(int,int,int,int,int) {
   
   int v5; // eax
@@ -700,7 +686,6 @@ static int __cdecl CScanner::FindNearestFighter(int,int,int,int,int) {
 
 // address=[0x15e0af0]
 // Decompiled from int __cdecl CScanner::FindNearestAnimal(int a1, int a2, int a3, bool a4, int a5)
-
 static int __cdecl CScanner::FindNearestAnimal(int,int,int,bool,int) {
   
   int v5; // eax
@@ -765,7 +750,6 @@ static int __cdecl CScanner::FindNearestAnimal(int,int,int,bool,int) {
 
 // address=[0x15e0d40]
 // Decompiled from int __cdecl CScanner::FindNearestEnemyBowman(int a1, int a2, int a3, int a4)
-
 static int __cdecl CScanner::FindNearestEnemyBowman(int,int,int,int) {
   
   int v4; // eax
@@ -776,9 +760,7 @@ static int __cdecl CScanner::FindNearestEnemyBowman(int,int,int,int) {
 
 
 // address=[0x15e0d70]
-// Decompiled from // public: static int __cdecl CScanner::FindNearestEnemySwordsman(int,int,int,int)
-int __cdecl CScanner::FindNearestEnemySwordsman(int a1, int a2, int a3, int a4)
-
+// Decompiled from int __cdecl CScanner::FindNearestEnemySwordsman(int a1, int a2, int a3, int a4)
 static int __cdecl CScanner::FindNearestEnemySwordsman(int,int,int,int) {
   
   int v4; // eax
@@ -790,7 +772,6 @@ static int __cdecl CScanner::FindNearestEnemySwordsman(int,int,int,int) {
 
 // address=[0x15e0da0]
 // Decompiled from int __cdecl CScanner::FindNearestEnemyFighter(int a1, int a2, int a3, int a4)
-
 static int __cdecl CScanner::FindNearestEnemyFighter(int,int,int,int) {
   
   int v4; // eax
@@ -802,7 +783,6 @@ static int __cdecl CScanner::FindNearestEnemyFighter(int,int,int,int) {
 
 // address=[0x15e0dd0]
 // Decompiled from int __cdecl CScanner::FindNearestOwnFighter(int a1, int a2, int a3, int a4)
-
 static int __cdecl CScanner::FindNearestOwnFighter(int,int,int,int) {
   
   int v4; // eax
@@ -813,9 +793,7 @@ static int __cdecl CScanner::FindNearestOwnFighter(int,int,int,int) {
 
 
 // address=[0x15e0e00]
-// Decompiled from // public: static int __cdecl CScanner::FindNearestAllyFighter(int,int,int,int)
-int __cdecl CScanner::FindNearestAllyFighter(int a1, int a2, int a3, int a4)
-
+// Decompiled from int __cdecl CScanner::FindNearestAllyFighter(int a1, int a2, int a3, int a4)
 static int __cdecl CScanner::FindNearestAllyFighter(int,int,int,int) {
   
   int v4; // eax
@@ -826,9 +804,7 @@ static int __cdecl CScanner::FindNearestAllyFighter(int,int,int,int) {
 
 
 // address=[0x15e0e30]
-// Decompiled from // public: static int __cdecl CScanner::CountSettlers(int,int,int,int const *,int const *,int,int)
-int __cdecl CScanner::CountSettlers(int a1, int a2, int a3, _DWORD *a4, _DWORD *a5, int a6, int a7)
-
+// Decompiled from int __cdecl CScanner::CountSettlers(int a1, int a2, int a3, _DWORD *a4, _DWORD *a5, int a6, int a7)
 static int __cdecl CScanner::CountSettlers(int,int,int,int const *,int const *,int,int) {
   
   struct IEntity *v7; // eax
@@ -888,7 +864,6 @@ static int __cdecl CScanner::CountSettlers(int,int,int,int const *,int const *,i
 
 // address=[0x15e1070]
 // Decompiled from int __cdecl CScanner::IsNearMyLand(int a1, int a2, int a3)
-
 static int __cdecl CScanner::IsNearMyLand(int,int,int) {
   
   int v3; // ecx
@@ -977,7 +952,6 @@ static int __cdecl CScanner::IsNearMyLand(int,int,int) {
 
 // address=[0x15e13a0]
 // Decompiled from char __cdecl CScanner::FindNearestPlayerLand(int a1, int *a2, int *a3)
-
 static bool __cdecl CScanner::FindNearestPlayerLand(int,int &,int &) {
   
   _DWORD v4[4]; // [esp+0h] [ebp-2Ch] BYREF
@@ -1012,7 +986,6 @@ static bool __cdecl CScanner::FindNearestPlayerLand(int,int &,int &) {
 
 // address=[0x15e1460]
 // Decompiled from char __cdecl CScanner::FindAnyEnemyFighter(int a1, int a2, int a3, int a4, int a5)
-
 static bool __cdecl CScanner::FindAnyEnemyFighter(int,int,int,int,int) {
   
   int v6; // eax
@@ -1074,7 +1047,6 @@ static bool __cdecl CScanner::FindAnyEnemyFighter(int,int,int,int,int) {
 
 // address=[0x15e1710]
 // Decompiled from char __cdecl CScanner::FindAnySettlerOrVehicle(int a1, int a2, int a3, int a4)
-
 static bool __cdecl CScanner::FindAnySettlerOrVehicle(int,int,int,int) {
   
   int v4; // eax
@@ -1144,7 +1116,6 @@ static bool __cdecl CScanner::FindAnySettlerOrVehicle(int,int,int,int) {
 
 // address=[0x15e19d0]
 // Decompiled from char __cdecl CScanner::IsAreaCompletelyOwned(int a1, int a2, int a3, int a4)
-
 static bool __cdecl CScanner::IsAreaCompletelyOwned(int,int,int,int) {
   
   _DWORD v5[4]; // [esp+0h] [ebp-34h] BYREF
@@ -1192,7 +1163,6 @@ static bool __cdecl CScanner::IsAreaCompletelyOwned(int,int,int,int) {
 
 // address=[0x15e1b40]
 // Decompiled from char __cdecl CScanner::IsAreaCompletelyGreen(int a1, int a2, int a3)
-
 static bool __cdecl CScanner::IsAreaCompletelyGreen(int,int,int) {
   
   _DWORD v4[4]; // [esp+0h] [ebp-24h] BYREF
@@ -1227,7 +1197,6 @@ static bool __cdecl CScanner::IsAreaCompletelyGreen(int,int,int) {
 
 // address=[0x15e1c30]
 // Decompiled from char __cdecl CScanner::IsAreaCompletelyDarkLand(int a1, int a2, int a3)
-
 static bool __cdecl CScanner::IsAreaCompletelyDarkLand(int,int,int) {
   
   _DWORD v4[4]; // [esp+0h] [ebp-24h] BYREF

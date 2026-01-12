@@ -3,10 +3,7 @@
 // Definitions for class CScriptEventRequests
 
 // address=[0x1439f30]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CScriptEventRequests::Size(CScriptEventRequests *this)
-
+// Decompiled from int __thiscall CScriptEventRequests::Size(CScriptEventRequests *this)
 int  CScriptEventRequests::Size(void)const {
   
   return *(_DWORD *)this;
@@ -15,7 +12,6 @@ int  CScriptEventRequests::Size(void)const {
 
 // address=[0x15febd0]
 // Decompiled from int __thiscall CScriptEventRequests::FindFunction(CScriptEventRequests *this, unsigned int a2)
-
 int  CScriptEventRequests::FindFunction(int) {
   
   int v3; // [esp+4h] [ebp-Ch]
@@ -42,7 +38,6 @@ int  CScriptEventRequests::FindFunction(int) {
 
 // address=[0x15fec50]
 // Decompiled from char *__thiscall CScriptEventRequests::AddFunction(CScriptEventRequests *this, unsigned int a2)
-
 void  CScriptEventRequests::AddFunction(int) {
   
   char *result; // eax
@@ -101,7 +96,6 @@ LABEL_10:
 
 // address=[0x15fed50]
 // Decompiled from CScriptEventRequests *__thiscall CScriptEventRequests::RemoveFunction(CScriptEventRequests *this, unsigned int a2)
-
 void  CScriptEventRequests::RemoveFunction(int) {
   
   CScriptEventRequests *result; // eax
@@ -130,7 +124,6 @@ void  CScriptEventRequests::RemoveFunction(int) {
 
 // address=[0x15fede0]
 // Decompiled from int __thiscall CScriptEventRequests::Load(CScriptEventRequests *this, struct IS4Chunk *a2)
-
 void  CScriptEventRequests::Load(class IS4Chunk &) {
   
   (*(void (__thiscall **)(struct IS4Chunk *, void *))(*(_DWORD *)a2 + 12))(a2, &unk_4587050);
@@ -142,7 +135,6 @@ void  CScriptEventRequests::Load(class IS4Chunk &) {
 
 // address=[0x15fee40]
 // Decompiled from int __thiscall CScriptEventRequests::Save(CScriptEventRequests *this, struct IS4Chunk *a2)
-
 void  CScriptEventRequests::Save(class IS4Chunk &) {
   
   (*(void (__thiscall **)(struct IS4Chunk *, void *))(*(_DWORD *)a2 + 24))(a2, &unk_4587050);
@@ -154,7 +146,6 @@ void  CScriptEventRequests::Save(class IS4Chunk &) {
 
 // address=[0x1601cf0]
 // Decompiled from CScriptEventRequests *__thiscall CScriptEventRequests::CScriptEventRequests(CScriptEventRequests *this)
-
  CScriptEventRequests::CScriptEventRequests(void) {
   
   CScriptEventRequests::Clear(this);
@@ -164,7 +155,6 @@ void  CScriptEventRequests::Save(class IS4Chunk &) {
 
 // address=[0x1601d30]
 // Decompiled from int __thiscall CScriptEventRequests::operator[](unsigned int *this, unsigned int a2)
-
 int  CScriptEventRequests::operator[](int)const {
   
   if ( a2 >= *this
@@ -182,7 +172,6 @@ int  CScriptEventRequests::operator[](int)const {
 
 // address=[0x16022d0]
 // Decompiled from void *__thiscall CScriptEventRequests::Clear(CScriptEventRequests *this)
-
 void  CScriptEventRequests::Clear(void) {
   
   *(_DWORD *)this = 0;

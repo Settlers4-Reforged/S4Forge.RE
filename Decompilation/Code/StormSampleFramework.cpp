@@ -3,11 +3,7 @@
 // Definitions for class StormSampleFramework
 
 // address=[0x1683070]
-// Decompiled from StormSampleFramework *__thiscall StormSampleFramework::StormSampleFramework(
-        StormSampleFramework *this,
-        struct StormManager *a2,
-        bool a3)
-
+// Decompiled from StormSampleFramework *__thiscall StormSampleFramework::StormSampleFramework(  StormSampleFramework *this,  struct StormManager *a2,  bool a3)
  StormSampleFramework::StormSampleFramework(class StormManager &,bool) {
   
   SampleFrameworkApplication::SampleFrameworkApplication(this);
@@ -19,7 +15,6 @@
 
 // address=[0x1685010]
 // Decompiled from StormSampleFramework *__thiscall StormSampleFramework::~StormSampleFramework(StormSampleFramework *this)
-
  StormSampleFramework::~StormSampleFramework(void) {
   
   StormSampleFramework *result; // eax

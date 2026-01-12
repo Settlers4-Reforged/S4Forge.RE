@@ -4,7 +4,6 @@
 
 // address=[0x1550a80]
 // Decompiled from void __thiscall CGroupMgr::Clear(CGroupMgr *this)
-
 void  CGroupMgr::Clear(void) {
   
   int j; // [esp+4h] [ebp-8h]
@@ -21,7 +20,6 @@ void  CGroupMgr::Clear(void) {
 
 // address=[0x1550af0]
 // Decompiled from int __thiscall CGroupMgr::GetGroupSize(CGroupMgr *this, int a2, int a3)
-
 int  CGroupMgr::GetGroupSize(int,int)const {
   
   if ( (a2 < 1 || a2 > 8)
@@ -44,7 +42,6 @@ int  CGroupMgr::GetGroupSize(int,int)const {
 
 // address=[0x1550b80]
 // Decompiled from int __thiscall CGroupMgr::GetGroupEntityIds(CGroupMgr *this, int a2, int a3)
-
 unsigned short const *  CGroupMgr::GetGroupEntityIds(int,int)const {
   
   if ( (a2 < 1 || a2 > 8)
@@ -67,7 +64,6 @@ unsigned short const *  CGroupMgr::GetGroupEntityIds(int,int)const {
 
 // address=[0x1550c10]
 // Decompiled from char __thiscall CGroupMgr::AttachEntity(CGroupMgr *this, int a2, int a3, int a4)
-
 bool  CGroupMgr::AttachEntity(int,int,int) {
   
   int v5; // [esp+0h] [ebp-34h]
@@ -152,7 +148,6 @@ bool  CGroupMgr::AttachEntity(int,int,int) {
 
 // address=[0x1550ec0]
 // Decompiled from char __thiscall CGroupMgr::DetachEntity(CGroupMgr *this, int a2, int a3, int a4)
-
 bool  CGroupMgr::DetachEntity(int,int,int) {
   
   int v5; // [esp+0h] [ebp-30h]
@@ -240,7 +235,6 @@ bool  CGroupMgr::DetachEntity(int,int,int) {
 
 // address=[0x1551170]
 // Decompiled from int __thiscall CGroupMgr::DetachEntityFromAllGroups(CGroupMgr *this, int a2)
-
 void  CGroupMgr::DetachEntityFromAllGroups(int) {
   
   int result; // eax
@@ -281,7 +275,6 @@ void  CGroupMgr::DetachEntityFromAllGroups(int) {
 
 // address=[0x1551270]
 // Decompiled from int __thiscall CGroupMgr::DetachAllEntitiesFromGroup(CGroupMgr *this, int a2, int a3)
-
 void  CGroupMgr::DetachAllEntitiesFromGroup(int,int) {
   
   int result; // eax
@@ -338,7 +331,6 @@ void  CGroupMgr::DetachAllEntitiesFromGroup(int,int) {
 
 // address=[0x15513f0]
 // Decompiled from bool __thiscall CGroupMgr::HasSquadLeader(CGroupMgr *this, int a2, int a3)
-
 bool  CGroupMgr::HasSquadLeader(int,int) {
   
   if ( (a2 < 1 || a2 > 8)
@@ -360,14 +352,7 @@ bool  CGroupMgr::HasSquadLeader(int,int) {
 
 
 // address=[0x1551490]
-// Decompiled from void __thiscall CGroupMgr::SendGroupCommand(
-        CGroupMgr *this,
-        int a2,
-        const unsigned __int16 *a3,
-        int a4,
-        int a5,
-        int a6)
-
+// Decompiled from void __thiscall CGroupMgr::SendGroupCommand(  CGroupMgr *this,  int a2,  const unsigned __int16 *a3,  int a4,  int a5,  int a6)
 void  CGroupMgr::SendGroupCommand(int,unsigned short const *,int,int,int) {
   
   int v6; // eax
@@ -485,7 +470,6 @@ LABEL_8:
 
 // address=[0x1551850]
 // Decompiled from int __thiscall CGroupMgr::Load(CGroupMgr *this, struct IS4Chunk *a2)
-
 void  CGroupMgr::Load(class IS4Chunk &) {
   
   int v3; // [esp+8h] [ebp-18h]
@@ -521,7 +505,6 @@ void  CGroupMgr::Load(class IS4Chunk &) {
 
 // address=[0x15519a0]
 // Decompiled from int __thiscall CGroupMgr::Save(CGroupMgr *this, struct IS4Chunk *a2)
-
 void  CGroupMgr::Save(class IS4Chunk &) {
   
   unsigned __int16 *v2; // eax
@@ -556,7 +539,6 @@ void  CGroupMgr::Save(class IS4Chunk &) {
 
 // address=[0x1551ae0]
 // Decompiled from _DWORD *__thiscall CGroupMgr::FillGroupSideBarEx(char *this, void **a2, char a3, int a4)
-
 void  CGroupMgr::FillGroupSideBarEx(class CInfoExchange *,bool,int) {
   
   _DWORD *result; // eax
@@ -640,7 +622,6 @@ void  CGroupMgr::FillGroupSideBarEx(class CInfoExchange *,bool,int) {
 
 // address=[0x1551d50]
 // Decompiled from unsigned int __stdcall CGroupMgr::FillMagicSideBarEx(void **a1, unsigned __int8 a2, int a3)
-
 void  CGroupMgr::FillMagicSideBarEx(class CInfoExchange *,bool,int) {
   
   unsigned int result; // eax
@@ -714,7 +695,6 @@ void  CGroupMgr::FillMagicSideBarEx(class CInfoExchange *,bool,int) {
 
 // address=[0x1552590]
 // Decompiled from CGroupMgr *__thiscall CGroupMgr::CGroupMgr(CGroupMgr *this)
-
  CGroupMgr::CGroupMgr(void) {
   
   IGroupMgr::IGroupMgr(this);

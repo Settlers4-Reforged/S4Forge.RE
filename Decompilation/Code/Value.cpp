@@ -4,7 +4,6 @@
 
 // address=[0x2f2d7c0]
 // Decompiled from void __thiscall AdvXMLParser::Value::Add(AdvXMLParser::NodeContainer **this, char *Str)
-
 void  AdvXMLParser::Value::Add(char const *) {
   
   _BYTE v3[28]; // [esp+8h] [ebp-2Ch] BYREF

@@ -4,7 +4,6 @@
 
 // address=[0x1334f50]
 // Decompiled from CAIDarkTribe::SAIDTUD *__thiscall CAIDarkTribe::SAIDTUD::SAIDTUD(CAIDarkTribe::SAIDTUD *this)
-
  CAIDarkTribe::SAIDTUD::SAIDTUD(void) {
   
   std::vector<SAIDTOCCUPIEDELEMENT>::vector<SAIDTOCCUPIEDELEMENT>();
@@ -19,7 +18,6 @@
 
 // address=[0x1335470]
 // Decompiled from int __thiscall CAIDarkTribe::SAIDTUD::~SAIDTUD(CAIDarkTribe::SAIDTUD *this)
-
  CAIDarkTribe::SAIDTUD::~SAIDTUD(void) {
   
   int v3; // [esp+0h] [ebp-4h]

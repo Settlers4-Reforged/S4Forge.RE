@@ -4,7 +4,6 @@
 
 // address=[0x14bcd00]
 // Decompiled from CLanLobbyGameSettings *__thiscall CLanLobbyGameSettings::CLanLobbyGameSettings(CLanLobbyGameSettings *this)
-
  CLanLobbyGameSettings::CLanLobbyGameSettings(void) {
   
   std::wstring::wstring((char *)this + 4);
@@ -17,7 +16,6 @@
 
 // address=[0x14bcd50]
 // Decompiled from void __thiscall CLanLobbyGameSettings::~CLanLobbyGameSettings(CLanLobbyGameSettings *this)
-
  CLanLobbyGameSettings::~CLanLobbyGameSettings(void) {
   
   std::string::~string((char *)this + 88);

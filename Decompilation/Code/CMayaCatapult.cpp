@@ -4,7 +4,6 @@
 
 // address=[0x1401260]
 // Decompiled from int __cdecl CMayaCatapult::New(int a1)
-
 static class CPersistence * __cdecl CMayaCatapult::New(std::istream &) {
   
   if ( CMayaCatapult::operator new(0xD8u) )
@@ -16,7 +15,6 @@ static class CPersistence * __cdecl CMayaCatapult::New(std::istream &) {
 
 // address=[0x153ed00]
 // Decompiled from unsigned int __cdecl CMayaCatapult::operator new(unsigned int a1)
-
 static void * __cdecl CMayaCatapult::operator new(unsigned int) {
   
   return CVehicleMgr::Alloc((CVehicleMgr *)&g_cVehicleMgr, a1);
@@ -25,7 +23,6 @@ static void * __cdecl CMayaCatapult::operator new(unsigned int) {
 
 // address=[0x153ed20]
 // Decompiled from void __cdecl CMayaCatapult::operator delete(void *a1)
-
 static void __cdecl CMayaCatapult::operator delete(void *) {
   
   CVehicleMgr::Dealloc((CVehicleMgr *)&g_cVehicleMgr, a1);
@@ -34,7 +31,6 @@ static void __cdecl CMayaCatapult::operator delete(void *) {
 
 // address=[0x153ed60]
 // Decompiled from _DWORD *__thiscall CMayaCatapult::CMayaCatapult(_DWORD *this, int a2)
-
  CMayaCatapult::CMayaCatapult(std::istream &) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
@@ -62,7 +58,6 @@ static void __cdecl CMayaCatapult::operator delete(void *) {
 
 // address=[0x153ee20]
 // Decompiled from int __thiscall CMayaCatapult::Store(void *this, struct std::ostream *a2)
-
 void  CMayaCatapult::Store(std::ostream &) {
   
   int v3[2]; // [esp+0h] [ebp-8h] BYREF
@@ -76,7 +71,6 @@ void  CMayaCatapult::Store(std::ostream &) {
 
 // address=[0x153faa0]
 // Decompiled from void __thiscall CMayaCatapult::~CMayaCatapult(CMayaCatapult *this)
-
  CMayaCatapult::~CMayaCatapult(void) {
   
   CCatapult::~CCatapult(this);
@@ -85,7 +79,6 @@ void  CMayaCatapult::Store(std::ostream &) {
 
 // address=[0x153fd20]
 // Decompiled from int __thiscall CMayaCatapult::ClassID(CMayaCatapult *this)
-
 unsigned long  CMayaCatapult::ClassID(void)const {
   
   return CMayaCatapult::m_iClassID;
@@ -96,16 +89,7 @@ unsigned long  CMayaCatapult::ClassID(void)const {
 // [Decompilation failed for static unsigned long CMayaCatapult::m_iClassID]
 
 // address=[0x153ee60]
-// Decompiled from CMayaCatapult *__thiscall CMayaCatapult::CMayaCatapult(
-        CMayaCatapult *this,
-        int a2,
-        int a3,
-        int a4,
-        int a5,
-        int a6,
-        int a7,
-        bool a8)
-
+// Decompiled from CMayaCatapult *__thiscall CMayaCatapult::CMayaCatapult(  CMayaCatapult *this,  int a2,  int a3,  int a4,  int a5,  int a6,  int a7,  bool a8)
  CMayaCatapult::CMayaCatapult(int,int,int,int,int,int,bool) {
   
   CCatapult::CCatapult(this, a2, a3, a4, a5, a6, a7, a8);
@@ -117,7 +101,6 @@ unsigned long  CMayaCatapult::ClassID(void)const {
 
 // address=[0x153fd00]
 // Decompiled from int __thiscall CMayaCatapult::AmmoPerPile(CMayaCatapult *this)
-
 int const  CMayaCatapult::AmmoPerPile(void) {
   
   return 8;

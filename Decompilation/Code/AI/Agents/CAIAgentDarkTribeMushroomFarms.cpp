@@ -3,11 +3,7 @@
 // Definitions for class CAIAgentDarkTribeMushroomFarms
 
 // address=[0x1301d60]
-// Decompiled from unsigned int __thiscall CAIAgentDarkTribeMushroomFarms::Execute(
-        CAIAgentDarkTribeMushroomFarms *this,
-        unsigned int a2,
-        unsigned int a3)
-
+// Decompiled from unsigned int __thiscall CAIAgentDarkTribeMushroomFarms::Execute(  CAIAgentDarkTribeMushroomFarms *this,  unsigned int a2,  unsigned int a3)
 unsigned int  CAIAgentDarkTribeMushroomFarms::Execute(unsigned int,unsigned int) {
   
   CAISectorAI *v3; // eax
@@ -63,9 +59,7 @@ unsigned int  CAIAgentDarkTribeMushroomFarms::Execute(unsigned int,unsigned int)
 
 
 // address=[0x1322e10]
-// Decompiled from CAIAgentDarkTribeMushroomFarms *__thiscall CAIAgentDarkTribeMushroomFarms::CAIAgentDarkTribeMushroomFarms(
-        CAIAgentDarkTribeMushroomFarms *this)
-
+// Decompiled from CAIAgentDarkTribeMushroomFarms *__thiscall CAIAgentDarkTribeMushroomFarms::CAIAgentDarkTribeMushroomFarms(  CAIAgentDarkTribeMushroomFarms *this)
  CAIAgentDarkTribeMushroomFarms::CAIAgentDarkTribeMushroomFarms(void) {
   
   CAIDarkTribeSectorAgent::CAIDarkTribeSectorAgent(this, "mushroom farms");
@@ -76,7 +70,6 @@ unsigned int  CAIAgentDarkTribeMushroomFarms::Execute(unsigned int,unsigned int)
 
 // address=[0x1322f40]
 // Decompiled from void __thiscall CAIAgentDarkTribeMushroomFarms::~CAIAgentDarkTribeMushroomFarms(CAIAgentDarkTribeMushroomFarms *this)
-
  CAIAgentDarkTribeMushroomFarms::~CAIAgentDarkTribeMushroomFarms(void) {
   
   CAIDarkTribeSectorAgent::~CAIDarkTribeSectorAgent(this);

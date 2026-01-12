@@ -3,10 +3,7 @@
 // Definitions for class SurfaceClipper
 
 // address=[0x2f5f370]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall SurfaceClipper::GetClipper(SurfaceClipper *this)
-
+// Decompiled from int __thiscall SurfaceClipper::GetClipper(SurfaceClipper *this)
 struct IDirectDrawClipper *  SurfaceClipper::GetClipper(void) {
   
   return *(_DWORD *)this;
@@ -15,7 +12,6 @@ struct IDirectDrawClipper *  SurfaceClipper::GetClipper(void) {
 
 // address=[0x2f8a460]
 // Decompiled from SurfaceClipper *__thiscall SurfaceClipper::SurfaceClipper(SurfaceClipper *this)
-
  SurfaceClipper::SurfaceClipper(void) {
   
   SurfaceClipper *v2; // [esp+0h] [ebp-4h]
@@ -29,7 +25,6 @@ struct IDirectDrawClipper *  SurfaceClipper::GetClipper(void) {
 
 // address=[0x2f8a490]
 // Decompiled from int __thiscall SurfaceClipper::~SurfaceClipper(SurfaceClipper *this)
-
  SurfaceClipper::~SurfaceClipper(void) {
   
   SurfaceClipper::ReleaseClipper(this);
@@ -39,7 +34,6 @@ struct IDirectDrawClipper *  SurfaceClipper::GetClipper(void) {
 
 // address=[0x2f8a4e0]
 // Decompiled from HRESULT __thiscall SurfaceClipper::InitClipper(SurfaceClipper *this, struct IDirectDraw7 *a2)
-
 long  SurfaceClipper::InitClipper(struct IDirectDraw7 *) {
   
   SurfaceClipper::ReleaseClipper(this);
@@ -48,9 +42,7 @@ long  SurfaceClipper::InitClipper(struct IDirectDraw7 *) {
 
 
 // address=[0x2f8a510]
-// Decompiled from // public: long __thiscall SurfaceClipper::InitClipper(struct IDirectDraw *)
-int __thiscall SurfaceClipper::InitClipper_0(SurfaceClipper *this, int a2)
-
+// Decompiled from int __thiscall SurfaceClipper::InitClipper_0(SurfaceClipper *this, int a2)
 long  SurfaceClipper::InitClipper(struct IDirectDraw *) {
   
   SurfaceClipper::ReleaseClipper(this);
@@ -60,7 +52,6 @@ long  SurfaceClipper::InitClipper(struct IDirectDraw *) {
 
 // address=[0x2f8a540]
 // Decompiled from SurfaceClipper *__thiscall SurfaceClipper::ReleaseClipper(SurfaceClipper *this)
-
 void  SurfaceClipper::ReleaseClipper(void) {
   
   SurfaceClipper *result; // eax
@@ -76,7 +67,6 @@ void  SurfaceClipper::ReleaseClipper(void) {
 
 // address=[0x2f8a570]
 // Decompiled from int __thiscall SurfaceClipper::SetClipRect(_DWORD *this, _DWORD *Src)
-
 long  SurfaceClipper::SetClipRect(struct tagRECT const &) {
   
   _DWORD *v4; // [esp+8h] [ebp-4h]
@@ -98,7 +88,6 @@ long  SurfaceClipper::SetClipRect(struct tagRECT const &) {
 
 // address=[0x2f8a620]
 // Decompiled from int __thiscall SurfaceClipper::SetClipWindow(SurfaceClipper *this, HWND a2)
-
 long  SurfaceClipper::SetClipWindow(struct HWND__ *) {
   
   return (*(int (__thiscall **)(_DWORD, _DWORD, _DWORD, HWND))(**(_DWORD **)this + 32))(

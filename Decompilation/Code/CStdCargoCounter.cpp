@@ -4,7 +4,6 @@
 
 // address=[0x15a3ad0]
 // Decompiled from void *__thiscall CStdCargoCounter::Clear(CStdCargoCounter *this)
-
 void  CStdCargoCounter::Clear(void) {
   
   return j__memset((char *)this + 4, 0, 0x28u);
@@ -13,7 +12,6 @@ void  CStdCargoCounter::Clear(void) {
 
 // address=[0x15a3af0]
 // Decompiled from CStdCargoCounter *__thiscall CStdCargoCounter::CountEntity(CStdCargoCounter *this, int a2, int a3)
-
 void  CStdCargoCounter::CountEntity(int,int) {
   
   CStdCargoCounter *result; // eax
@@ -86,7 +84,6 @@ void  CStdCargoCounter::CountEntity(int,int) {
 
 // address=[0x160d8f0]
 // Decompiled from CStdCargoCounter *__thiscall CStdCargoCounter::CStdCargoCounter(CStdCargoCounter *this)
-
  CStdCargoCounter::CStdCargoCounter(void) {
   
   ICargoCounter::ICargoCounter(this);

@@ -4,7 +4,6 @@
 
 // address=[0x1454680]
 // Decompiled from CInfoExchangeEx *__thiscall CInfoExchangeEx::CInfoExchangeEx(CInfoExchangeEx *this)
-
  CInfoExchangeEx::CInfoExchangeEx(void) {
   
   CInfoExchange::CInfoExchange(this);
@@ -15,7 +14,6 @@
 
 // address=[0x1454c50]
 // Decompiled from int __thiscall CInfoExchangeEx::Size(CInfoExchangeEx *this)
-
 unsigned int  CInfoExchangeEx::Size(void)const {
   
   return 8;

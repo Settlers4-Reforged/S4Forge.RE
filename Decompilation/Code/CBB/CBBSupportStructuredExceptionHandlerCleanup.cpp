@@ -3,9 +3,7 @@
 // Definitions for class CBBSupportStructuredExceptionHandlerCleanup
 
 // address=[0x2f33240]
-// Decompiled from int __thiscall CBBSupportStructuredExceptionHandlerCleanup::~CBBSupportStructuredExceptionHandlerCleanup(
-        CBBSupportStructuredExceptionHandlerCleanup *this)
-
+// Decompiled from int __thiscall CBBSupportStructuredExceptionHandlerCleanup::~CBBSupportStructuredExceptionHandlerCleanup(  CBBSupportStructuredExceptionHandlerCleanup *this)
  CBBSupportStructuredExceptionHandlerCleanup::~CBBSupportStructuredExceptionHandlerCleanup(void) {
   
   SetUnhandledExceptionFilter(0);

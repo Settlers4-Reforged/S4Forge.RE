@@ -4,7 +4,6 @@
 
 // address=[0x12f9ea0]
 // Decompiled from CAIAgentDarkTribeAttack *__thiscall CAIAgentDarkTribeAttack::CAIAgentDarkTribeAttack(CAIAgentDarkTribeAttack *this)
-
  CAIAgentDarkTribeAttack::CAIAgentDarkTribeAttack(void) {
   
   CAIDarkTribeSectorAgent::CAIDarkTribeSectorAgent(this, aDarkAtt);
@@ -15,11 +14,7 @@
 
 
 // address=[0x12f9f10]
-// Decompiled from unsigned int __thiscall CAIAgentDarkTribeAttack::Execute(
-        CAIAgentDarkTribeAttack *this,
-        unsigned int a2,
-        unsigned int a3)
-
+// Decompiled from unsigned int __thiscall CAIAgentDarkTribeAttack::Execute(  CAIAgentDarkTribeAttack *this,  unsigned int a2,  unsigned int a3)
 unsigned int  CAIAgentDarkTribeAttack::Execute(unsigned int,unsigned int) {
   
   struct CAIDarkTribeSectorAI *v3; // eax
@@ -236,7 +231,6 @@ unsigned int  CAIAgentDarkTribeAttack::Execute(unsigned int,unsigned int) {
 
 // address=[0x12fa500]
 // Decompiled from int __thiscall CAIAgentDarkTribeAttack::Load(CAIAgentDarkTribeAttack *this, struct IS4Chunk *a2)
-
 void  CAIAgentDarkTribeAttack::Load(class IS4Chunk &) {
   
   unsigned int v3; // [esp+0h] [ebp-8h]
@@ -262,7 +256,6 @@ void  CAIAgentDarkTribeAttack::Load(class IS4Chunk &) {
 
 // address=[0x12fa610]
 // Decompiled from int __thiscall CAIAgentDarkTribeAttack::Save(CAIAgentDarkTribeAttack *this, struct IS4Chunk *a2)
-
 void  CAIAgentDarkTribeAttack::Save(class IS4Chunk &) {
   
   (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 24))(a2, -1516302336);
@@ -282,7 +275,6 @@ void  CAIAgentDarkTribeAttack::Save(class IS4Chunk &) {
 
 // address=[0x12fa700]
 // Decompiled from void __thiscall CAIAgentDarkTribeAttack::AttackWithShamans(CAIAgentDarkTribeAttack *this, int a2, int a3, bool a4)
-
 void  CAIAgentDarkTribeAttack::AttackWithShamans(int,int,bool) {
   
   if ( a3 >= 0 )
@@ -326,7 +318,6 @@ void  CAIAgentDarkTribeAttack::AttackWithShamans(int,int,bool) {
 
 // address=[0x12fc9c0]
 // Decompiled from void __thiscall CAIAgentDarkTribeAttack::~CAIAgentDarkTribeAttack(CAIAgentDarkTribeAttack *this)
-
  CAIAgentDarkTribeAttack::~CAIAgentDarkTribeAttack(void) {
   
   CAIDarkTribeSectorAgent::~CAIDarkTribeSectorAgent(this);
@@ -335,7 +326,6 @@ void  CAIAgentDarkTribeAttack::AttackWithShamans(int,int,bool) {
 
 // address=[0x12fa7e0]
 // Decompiled from CAIAgentDarkTribeAttack *__thiscall CAIAgentDarkTribeAttack::ResetAttackState(CAIAgentDarkTribeAttack *this)
-
 void  CAIAgentDarkTribeAttack::ResetAttackState(void) {
   
   CAIAgentDarkTribeAttack *result; // eax
@@ -373,7 +363,6 @@ void  CAIAgentDarkTribeAttack::ResetAttackState(void) {
 
 // address=[0x12fa890]
 // Decompiled from char __thiscall CAIAgentDarkTribeAttack::ShamanAttackTaskForceAvailable(CAIAgentDarkTribeAttack *this)
-
 bool  CAIAgentDarkTribeAttack::ShamanAttackTaskForceAvailable(void)const {
   
   struct CAIDarkTribeSectorAI *v1; // eax
@@ -395,7 +384,6 @@ bool  CAIAgentDarkTribeAttack::ShamanAttackTaskForceAvailable(void)const {
 
 // address=[0x12fa900]
 // Decompiled from char __thiscall CAIAgentDarkTribeAttack::ManakopterTaskForceAvailable(CAIAgentDarkTribeAttack *this, bool a2)
-
 bool  CAIAgentDarkTribeAttack::ManakopterTaskForceAvailable(bool)const {
   
   struct CAIDarkTribeSectorAI *v2; // eax
@@ -422,7 +410,6 @@ bool  CAIAgentDarkTribeAttack::ManakopterTaskForceAvailable(bool)const {
 
 // address=[0x12fa980]
 // Decompiled from bool __thiscall CAIAgentDarkTribeAttack::CheckShamanAttackPosition(CAIAgentDarkTribeAttack *this)
-
 bool  CAIAgentDarkTribeAttack::CheckShamanAttackPosition(void) {
   
   struct CAIDarkTribeSectorAI *v1; // eax
@@ -436,7 +423,6 @@ bool  CAIAgentDarkTribeAttack::CheckShamanAttackPosition(void) {
 
 // address=[0x12fa9c0]
 // Decompiled from int __thiscall CAIAgentDarkTribeAttack::OrderShamanTaskForcesHome(CAIDarkTribeSectorAgent *this, int a2)
-
 void  CAIAgentDarkTribeAttack::OrderShamanTaskForcesHome(enum T_AI_TASK_FORCE_CMD) {
   
   struct CAIDarkTribeSectorAI *v2; // eax
@@ -467,11 +453,7 @@ void  CAIAgentDarkTribeAttack::OrderShamanTaskForcesHome(enum T_AI_TASK_FORCE_CM
 
 
 // address=[0x12faa30]
-// Decompiled from int __thiscall CAIAgentDarkTribeAttack::OrderShamanTaskForcesToManakopter(
-        CAIDarkTribeSectorAgent *this,
-        bool a2,
-        char a3)
-
+// Decompiled from int __thiscall CAIAgentDarkTribeAttack::OrderShamanTaskForcesToManakopter(  CAIDarkTribeSectorAgent *this,  bool a2,  char a3)
 int  CAIAgentDarkTribeAttack::OrderShamanTaskForcesToManakopter(bool,bool) {
   
   struct CAIDarkTribeSectorAI *v3; // eax
@@ -611,7 +593,6 @@ int  CAIAgentDarkTribeAttack::OrderShamanTaskForcesToManakopter(bool,bool) {
 
 // address=[0x12facf0]
 // Decompiled from int __thiscall CAIAgentDarkTribeAttack::OrderShamanTaskForcesToSneakUpPosition(CAIAgentDarkTribeAttack *this)
-
 int  CAIAgentDarkTribeAttack::OrderShamanTaskForcesToSneakUpPosition(void) {
   
   struct CAIDarkTribeSectorAI *v2; // eax
@@ -646,7 +627,6 @@ int  CAIAgentDarkTribeAttack::OrderShamanTaskForcesToSneakUpPosition(void) {
 
 // address=[0x12fadb0]
 // Decompiled from int __thiscall CAIAgentDarkTribeAttack::OrderShamanTaskForcesToAttackPosition(CAIAgentDarkTribeAttack *this)
-
 int  CAIAgentDarkTribeAttack::OrderShamanTaskForcesToAttackPosition(void) {
   
   struct CAIDarkTribeSectorAI *v2; // eax
@@ -683,7 +663,6 @@ int  CAIAgentDarkTribeAttack::OrderShamanTaskForcesToAttackPosition(void) {
 
 // address=[0x12fae60]
 // Decompiled from int __thiscall CAIAgentDarkTribeAttack::OrderManakopterToPosition(CAIAgentDarkTribeAttack *this, bool a2)
-
 int  CAIAgentDarkTribeAttack::OrderManakopterToPosition(bool) {
   
   struct CAIDarkTribeSectorAI *v2; // eax
@@ -807,7 +786,6 @@ int  CAIAgentDarkTribeAttack::OrderManakopterToPosition(bool) {
 
 // address=[0x12fb1c0]
 // Decompiled from int __thiscall CAIAgentDarkTribeAttack::OrderManakopterUnload(CAIAgentDarkTribeAttack *this, bool a2)
-
 int  CAIAgentDarkTribeAttack::OrderManakopterUnload(bool) {
   
   struct CAIDarkTribeSectorAI *v2; // eax
@@ -837,7 +815,6 @@ int  CAIAgentDarkTribeAttack::OrderManakopterUnload(bool) {
 
 // address=[0x12fb250]
 // Decompiled from int __thiscall CAIAgentDarkTribeAttack::OrderShamansToImmediateAttack(CAIAgentDarkTribeAttack *this)
-
 int  CAIAgentDarkTribeAttack::OrderShamansToImmediateAttack(void) {
   
   struct CAIDarkTribeSectorAI *v1; // eax
@@ -877,7 +854,6 @@ int  CAIAgentDarkTribeAttack::OrderShamansToImmediateAttack(void) {
 
 // address=[0x12fb320]
 // Decompiled from int __thiscall CAIAgentDarkTribeAttack::CheckIfPositionIsReached(CAIAgentDarkTribeAttack *this)
-
 int  CAIAgentDarkTribeAttack::CheckIfPositionIsReached(void) {
   
   struct CAIDarkTribeSectorAI *v1; // eax
@@ -910,7 +886,6 @@ int  CAIAgentDarkTribeAttack::CheckIfPositionIsReached(void) {
 
 // address=[0x12fb3a0]
 // Decompiled from char __thiscall CAIAgentDarkTribeAttack::CheckIfManakopterReachedPosition(CAIAgentDarkTribeAttack *this)
-
 bool  CAIAgentDarkTribeAttack::CheckIfManakopterReachedPosition(void) {
   
   struct CAIDarkTribeSectorAI *v1; // eax
@@ -935,7 +910,6 @@ bool  CAIAgentDarkTribeAttack::CheckIfManakopterReachedPosition(void) {
 
 // address=[0x12fb400]
 // Decompiled from char __thiscall CAIAgentDarkTribeAttack::CheckIfShamansAreOnBoard(CAIAgentDarkTribeAttack *this)
-
 bool  CAIAgentDarkTribeAttack::CheckIfShamansAreOnBoard(void) {
   
   struct CAIDarkTribeSectorAI *v1; // eax
@@ -983,7 +957,6 @@ bool  CAIAgentDarkTribeAttack::CheckIfShamansAreOnBoard(void) {
 
 // address=[0x12fb4e0]
 // Decompiled from int __thiscall CAIAgentDarkTribeAttack::CheckShamanTaskForcesTargets(void *this)
-
 int  CAIAgentDarkTribeAttack::CheckShamanTaskForcesTargets(void) {
   
   struct CAIDarkTribeSectorAI *v1; // eax
@@ -1192,7 +1165,6 @@ LABEL_12:
 
 // address=[0x12fb990]
 // Decompiled from char __thiscall CAIAgentDarkTribeAttack::CheckIfReadyForReturn(CAIAgentDarkTribeAttack *this)
-
 bool  CAIAgentDarkTribeAttack::CheckIfReadyForReturn(void) {
   
   struct CAIDarkTribeSectorAI *v1; // eax
@@ -1222,7 +1194,6 @@ bool  CAIAgentDarkTribeAttack::CheckIfReadyForReturn(void) {
 
 // address=[0x12fba00]
 // Decompiled from int __thiscall CAIAgentDarkTribeAttack::SetMissionBit(CAIDarkTribeSectorAgent *this, int a2)
-
 void  CAIAgentDarkTribeAttack::SetMissionBit(enum T_AI_TASK_FORCE_CMD) {
   
   struct CAIDarkTribeSectorAI *v2; // eax
@@ -1254,7 +1225,6 @@ void  CAIAgentDarkTribeAttack::SetMissionBit(enum T_AI_TASK_FORCE_CMD) {
 
 // address=[0x12fba70]
 // Decompiled from BOOL __thiscall CAIAgentDarkTribeAttack::RemoveMissionBit(CAIAgentDarkTribeAttack *this)
-
 void  CAIAgentDarkTribeAttack::RemoveMissionBit(void) {
   
   struct CAIDarkTribeSectorAI *v1; // eax

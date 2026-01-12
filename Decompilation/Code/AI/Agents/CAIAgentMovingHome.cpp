@@ -4,7 +4,6 @@
 
 // address=[0x1304050]
 // Decompiled from unsigned int __thiscall CAIAgentMovingHome::Execute(CAIAgentMovingHome *this, unsigned int a2, unsigned int a3)
-
 unsigned int  CAIAgentMovingHome::Execute(unsigned int,unsigned int) {
   
   struct CAINormalSectorAI *v3; // eax
@@ -88,7 +87,6 @@ unsigned int  CAIAgentMovingHome::Execute(unsigned int,unsigned int) {
 
 // address=[0x1325ad0]
 // Decompiled from CAIAgentMovingHome *__thiscall CAIAgentMovingHome::CAIAgentMovingHome(CAIAgentMovingHome *this)
-
  CAIAgentMovingHome::CAIAgentMovingHome(void) {
   
   CAINormalSectorAgent::CAINormalSectorAgent(this, "moving home");
@@ -99,7 +97,6 @@ unsigned int  CAIAgentMovingHome::Execute(unsigned int,unsigned int) {
 
 // address=[0x1325c90]
 // Decompiled from void __thiscall CAIAgentMovingHome::~CAIAgentMovingHome(CAIAgentMovingHome *this)
-
  CAIAgentMovingHome::~CAIAgentMovingHome(void) {
   
   CAINormalSectorAgent::~CAINormalSectorAgent(this);

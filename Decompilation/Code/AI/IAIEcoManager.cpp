@@ -4,7 +4,6 @@
 
 // address=[0x133ae70]
 // Decompiled from CEcoManager *__cdecl IAIEcoManager::CreateEcoManager(int a1, struct IAISectorAI *a2, struct IAIEventQueue *a3)
-
 static class IAIEcoManager * __cdecl IAIEcoManager::CreateEcoManager(int,class IAISectorAI *,class IAIEventQueue *) {
   
   CEcoManager *C; // [esp+Ch] [ebp-10h]
@@ -19,7 +18,6 @@ static class IAIEcoManager * __cdecl IAIEcoManager::CreateEcoManager(int,class I
 
 // address=[0x1345700]
 // Decompiled from IAIEcoManager *__thiscall IAIEcoManager::IAIEcoManager(IAIEcoManager *this)
-
  IAIEcoManager::IAIEcoManager(void) {
   
   *(_DWORD *)this = &IAIEcoManager::_vftable_;
@@ -29,7 +27,6 @@ static class IAIEcoManager * __cdecl IAIEcoManager::CreateEcoManager(int,class I
 
 // address=[0x1345e20]
 // Decompiled from IAIEcoManager *__thiscall IAIEcoManager::~IAIEcoManager(IAIEcoManager *this)
-
  IAIEcoManager::~IAIEcoManager(void) {
   
   IAIEcoManager *result; // eax

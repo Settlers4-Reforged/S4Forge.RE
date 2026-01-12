@@ -4,7 +4,6 @@
 
 // address=[0x14a47b0]
 // Decompiled from CStateEcoStatistic *__cdecl CStateEcoStatistic::DynamicCreateFunc(void *a1)
-
 static class CGameState * __cdecl CStateEcoStatistic::DynamicCreateFunc(void *) {
   
   CStateEcoStatistic *C; // [esp+Ch] [ebp-10h]
@@ -19,7 +18,6 @@ static class CGameState * __cdecl CStateEcoStatistic::DynamicCreateFunc(void *) 
 
 // address=[0x14a4830]
 // Decompiled from CStateEcoStatistic *__thiscall CStateEcoStatistic::CStateEcoStatistic(CStateEcoStatistic *this, void *a2)
-
  CStateEcoStatistic::CStateEcoStatistic(void *) {
   
   CGuiGameState::CGuiGameState(this);
@@ -33,7 +31,6 @@ static class CGameState * __cdecl CStateEcoStatistic::DynamicCreateFunc(void *) 
 
 // address=[0x14a48c0]
 // Decompiled from void __thiscall CStateEcoStatistic::~CStateEcoStatistic(CStateEcoStatistic *this)
-
  CStateEcoStatistic::~CStateEcoStatistic(void) {
   
   *(_DWORD *)this = &CStateEcoStatistic::_vftable_;
@@ -48,7 +45,6 @@ static class CGameState * __cdecl CStateEcoStatistic::DynamicCreateFunc(void *) 
 
 // address=[0x14a4940]
 // Decompiled from char __thiscall CStateEcoStatistic::Perform(CStateEcoStatistic *this)
-
 bool  CStateEcoStatistic::Perform(void) {
   
   DWORD v1; // esi
@@ -75,7 +71,6 @@ bool  CStateEcoStatistic::Perform(void) {
 
 // address=[0x14a49e0]
 // Decompiled from char __thiscall CStateEcoStatistic::OnEvent(CStateEcoStatistic *this, struct CEvn_Event *a2)
-
 bool  CStateEcoStatistic::OnEvent(class CEvn_Event &) {
   
   CEvn_Event *v3; // [esp+8h] [ebp-5Ch]

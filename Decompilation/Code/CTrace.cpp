@@ -4,7 +4,6 @@
 
 // address=[0x14d3520]
 // Decompiled from CTrace *__thiscall CTrace::CTrace(CTrace *this, const struct boost::exception_detail::clone_base *a2)
-
  CTrace::CTrace(char const *) {
   
   *(_DWORD *)this = &CTrace::_vftable_;
@@ -14,7 +13,6 @@
 
 // address=[0x14d3540]
 // Decompiled from CTrace *__thiscall CTrace::CTrace(CTrace *this, const struct boost::exception_detail::clone_base *a2)
-
  CTrace::CTrace(class CTrace const &) {
   
   *(_DWORD *)this = &CTrace::_vftable_;
@@ -24,7 +22,6 @@
 
 // address=[0x14d3560]
 // Decompiled from CTrace *__thiscall CTrace::~CTrace(CTrace *this)
-
  CTrace::~CTrace(void) {
   
   CTrace *result; // eax
@@ -36,9 +33,7 @@
 
 
 // address=[0x14d3580]
-// Decompiled from // public: class CTrace & __thiscall CTrace::operator=(class CTrace const &)
-_DWORD *__thiscall CTrace::operator_(_DWORD *this, int a2)
-
+// Decompiled from _DWORD *__thiscall CTrace::operator_(_DWORD *this, int a2)
 class CTrace &  CTrace::operator=(class CTrace const &) {
   
   this[2] = *(_DWORD *)(a2 + 8);
@@ -48,7 +43,6 @@ class CTrace &  CTrace::operator=(class CTrace const &) {
 
 // address=[0x14d35a0]
 // Decompiled from void CTrace::Print(char *Format, ...)
-
 static void __cdecl CTrace::Print(char const *,...) {
   
   char Source[2048]; // [esp+4h] [ebp-804h] BYREF
@@ -62,9 +56,7 @@ static void __cdecl CTrace::Print(char const *,...) {
 
 
 // address=[0x14d3610]
-// Decompiled from // public: static void __cdecl CTrace::TextEinfuegen(char const *,...)
-void CTrace::TextEinfuegen(char *Format, ...)
-
+// Decompiled from void CTrace::TextEinfuegen(char *Format, ...)
 static void __cdecl CTrace::TextEinfuegen(char const *,...) {
   
   char Buffer[2048]; // [esp+4h] [ebp-804h] BYREF
@@ -78,9 +70,7 @@ static void __cdecl CTrace::TextEinfuegen(char const *,...) {
 
 
 // address=[0x14d3680]
-// Decompiled from // private: void __thiscall CTrace::TraceInitObject(char const *)
-_DWORD *__thiscall CTrace::TraceInitObject(_DWORD *this, int a2)
-
+// Decompiled from _DWORD *__thiscall CTrace::TraceInitObject(_DWORD *this, int a2)
 void  CTrace::TraceInitObject(char const *) {
   
   _DWORD *result; // eax
@@ -96,9 +86,7 @@ void  CTrace::TraceInitObject(char const *) {
 
 
 // address=[0x14d36e0]
-// Decompiled from // private: void __thiscall CTrace::TracePrintHeader(void)
-int __thiscall CTrace::TracePrintHeader(void *this)
-
+// Decompiled from int __thiscall CTrace::TracePrintHeader(void *this)
 void  CTrace::TracePrintHeader(void) {
   
   int v1; // eax

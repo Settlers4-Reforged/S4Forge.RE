@@ -4,7 +4,6 @@
 
 // address=[0x1303c50]
 // Decompiled from void __thiscall CAIPlayerEvaluations::EvaluatePlayer(CAIPlayerEvaluations *this, int a2)
-
 void  CAIPlayerEvaluations::EvaluatePlayer(int) {
   
   CAIPlayerEvaluation::EvaluatePlayer((CAIPlayerEvaluations *)((char *)this + 88 * a2), a2);
@@ -13,7 +12,6 @@ void  CAIPlayerEvaluations::EvaluatePlayer(int) {
 
 // address=[0x1311500]
 // Decompiled from int __thiscall CAIPlayerEvaluations::Clear(CAIPlayerEvaluations *this)
-
 void  CAIPlayerEvaluations::Clear(void) {
   
   int result; // eax
@@ -30,7 +28,6 @@ void  CAIPlayerEvaluations::Clear(void) {
 
 // address=[0x1311540]
 // Decompiled from int __thiscall CAIPlayerEvaluations::EvaluateAllPlayers(CAIPlayerEvaluations *this)
-
 void  CAIPlayerEvaluations::EvaluateAllPlayers(void) {
   
   int result; // eax
@@ -50,9 +47,7 @@ void  CAIPlayerEvaluations::EvaluateAllPlayers(void) {
 
 
 // address=[0x1311590]
-// Decompiled from // public: void __thiscall CAIPlayerEvaluations::DbgPrint(void)
-int __thiscall CAIPlayerEvaluations::DbgPrint(char *this)
-
+// Decompiled from int __thiscall CAIPlayerEvaluations::DbgPrint(char *this)
 void  CAIPlayerEvaluations::DbgPrint(void) {
   
   int result; // eax

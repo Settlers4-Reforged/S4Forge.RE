@@ -4,7 +4,6 @@
 
 // address=[0x15d61d0]
 // Decompiled from int __thiscall CG24Closed1Parent7::Closed(CG24Closed1Parent7 *this)
-
 int  CG24Closed1Parent7::Closed(void)const {
   
   return *(_DWORD *)this & 0x80;
@@ -13,7 +12,6 @@ int  CG24Closed1Parent7::Closed(void)const {
 
 // address=[0x15d6580]
 // Decompiled from int __thiscall CG24Closed1Parent7::G(CG24Closed1Parent7 *this)
-
 int  CG24Closed1Parent7::G(void)const {
   
   return *(_DWORD *)this >> 8;
@@ -22,7 +20,6 @@ int  CG24Closed1Parent7::G(void)const {
 
 // address=[0x15d6800]
 // Decompiled from int __thiscall CG24Closed1Parent7::Parent(CG24Closed1Parent7 *this)
-
 int  CG24Closed1Parent7::Parent(void)const {
   
   return *(_DWORD *)this & 0x7F;
@@ -31,7 +28,6 @@ int  CG24Closed1Parent7::Parent(void)const {
 
 // address=[0x15d6cf0]
 // Decompiled from int __thiscall CG24Closed1Parent7::Set(CG24Closed1Parent7 *this, int a2, bool a3, int a4)
-
 void  CG24Closed1Parent7::Set(int,bool,int) {
   
   int result; // eax
@@ -44,7 +40,6 @@ void  CG24Closed1Parent7::Set(int,bool,int) {
 
 // address=[0x15d6db0]
 // Decompiled from CG24Closed1Parent7 *__thiscall CG24Closed1Parent7::SetClosedFlag(CG24Closed1Parent7 *this)
-
 void  CG24Closed1Parent7::SetClosedFlag(void) {
   
   CG24Closed1Parent7 *result; // eax

@@ -3,10 +3,7 @@
 // Definitions for class CAIAgentEvaluation
 
 // address=[0x1303a40]
-// Decompiled from CAIAgentEvaluation *__thiscall CAIAgentEvaluation::CAIAgentEvaluation(
-        CAIAgentEvaluation *this,
-        struct CAIPlayerEvaluations *a2)
-
+// Decompiled from CAIAgentEvaluation *__thiscall CAIAgentEvaluation::CAIAgentEvaluation(  CAIAgentEvaluation *this,  struct CAIPlayerEvaluations *a2)
  CAIAgentEvaluation::CAIAgentEvaluation(class CAIPlayerEvaluations &) {
   
   CAIAgent::CAIAgent(this, "player evaluation");
@@ -19,7 +16,6 @@
 
 // address=[0x1303a80]
 // Decompiled from unsigned int __thiscall CAIAgentEvaluation::Execute(CAIAgentEvaluation *this, unsigned int a2, unsigned int a3)
-
 unsigned int  CAIAgentEvaluation::Execute(unsigned int,unsigned int) {
   
   if ( *((int *)this + 9) < 1
@@ -53,7 +49,6 @@ unsigned int  CAIAgentEvaluation::Execute(unsigned int,unsigned int) {
 
 // address=[0x1303be0]
 // Decompiled from void __thiscall CAIAgentEvaluation::~CAIAgentEvaluation(CAIAgentEvaluation *this)
-
  CAIAgentEvaluation::~CAIAgentEvaluation(void) {
   
   CAIAgent::~CAIAgent(this);
@@ -62,7 +57,6 @@ unsigned int  CAIAgentEvaluation::Execute(unsigned int,unsigned int) {
 
 // address=[0x1314030]
 // Decompiled from CAIAgentEvaluation *__thiscall CAIAgentEvaluation::Init(CAIAgentEvaluation *this)
-
 void  CAIAgentEvaluation::Init(void) {
   
   CAIAgentEvaluation *result; // eax

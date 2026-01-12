@@ -4,7 +4,6 @@
 
 // address=[0x14a1980]
 // Decompiled from CStateAOSplash *__cdecl CStateAOSplash::DynamicCreateFunc(void *a1)
-
 static class CGameState * __cdecl CStateAOSplash::DynamicCreateFunc(void *) {
   
   CStateAOSplash *C; // [esp+Ch] [ebp-10h]
@@ -19,7 +18,6 @@ static class CGameState * __cdecl CStateAOSplash::DynamicCreateFunc(void *) {
 
 // address=[0x14a1a00]
 // Decompiled from CStateAOSplash *__thiscall CStateAOSplash::CStateAOSplash(CStateAOSplash *this, int a2)
-
  CStateAOSplash::CStateAOSplash(void *) {
   
   CGuiGameState::CGuiGameState(this);
@@ -39,7 +37,6 @@ static class CGameState * __cdecl CStateAOSplash::DynamicCreateFunc(void *) {
 
 // address=[0x14a1aa0]
 // Decompiled from void __thiscall CStateAOSplash::~CStateAOSplash(CStateAOSplash *this)
-
  CStateAOSplash::~CStateAOSplash(void) {
   
   *(_DWORD *)this = &CStateAOSplash::_vftable_;
@@ -55,7 +52,6 @@ static class CGameState * __cdecl CStateAOSplash::DynamicCreateFunc(void *) {
 
 // address=[0x14a1b30]
 // Decompiled from char __thiscall CStateAOSplash::Perform(CStateAOSplash *this)
-
 bool  CStateAOSplash::Perform(void) {
   
   DWORD v1; // esi
@@ -82,7 +78,6 @@ bool  CStateAOSplash::Perform(void) {
 
 // address=[0x14a1bd0]
 // Decompiled from char __thiscall CStateAOSplash::OnEvent(CStateAOSplash *this, struct CEvn_Event *a2)
-
 bool  CStateAOSplash::OnEvent(class CEvn_Event &) {
   
   int event; // [esp+8h] [ebp-4h]

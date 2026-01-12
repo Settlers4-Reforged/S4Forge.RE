@@ -4,7 +4,6 @@
 
 // address=[0x12fcb40]
 // Decompiled from char *__thiscall CAIPlayersScriptVars::operator[](char *this, unsigned int a2)
-
 class CAIPlayerScriptVars const &  CAIPlayersScriptVars::operator[](int) {
   
   if ( a2 >= 9
@@ -22,7 +21,6 @@ class CAIPlayerScriptVars const &  CAIPlayersScriptVars::operator[](int) {
 
 // address=[0x13038b0]
 // Decompiled from int __thiscall CAIPlayersScriptVars::GetValue(_DWORD *this, int a2, int a3)
-
 int  CAIPlayersScriptVars::GetValue(int,enum T_AI_PLAYER_SCRIPT_VAR_INDEX) {
   
   if ( (a2 >= 9 || a2 < 0)
@@ -40,7 +38,6 @@ int  CAIPlayersScriptVars::GetValue(int,enum T_AI_PLAYER_SCRIPT_VAR_INDEX) {
 
 // address=[0x1309870]
 // Decompiled from unsigned int *__thiscall CAIPlayersScriptVars::SetDifficultyLevel(unsigned int *this, int a2, unsigned int a3)
-
 void  CAIPlayersScriptVars::SetDifficultyLevel(int,enum T_AI_DIFFICULTY_LEVEL) {
   
   unsigned int *result; // eax
@@ -54,7 +51,6 @@ void  CAIPlayersScriptVars::SetDifficultyLevel(int,enum T_AI_DIFFICULTY_LEVEL) {
 
 // address=[0x131cce0]
 // Decompiled from int __thiscall CAIPlayersScriptVars::Init(CAIPlayersScriptVars *this)
-
 void  CAIPlayersScriptVars::Init(void) {
   
   int result; // eax
@@ -71,7 +67,6 @@ void  CAIPlayersScriptVars::Init(void) {
 
 // address=[0x131cd20]
 // Decompiled from CAIPlayerScriptVars *__thiscall CAIPlayersScriptVars::Load(CAIPlayersScriptVars *this, struct IS4Chunk *a2)
-
 void  CAIPlayersScriptVars::Load(class IS4Chunk &) {
   
   CAIPlayerScriptVars *result; // eax
@@ -91,7 +86,6 @@ void  CAIPlayersScriptVars::Load(class IS4Chunk &) {
 
 // address=[0x131cdb0]
 // Decompiled from int __thiscall CAIPlayersScriptVars::Save(CAIPlayersScriptVars *this, struct IS4Chunk *a2)
-
 void  CAIPlayersScriptVars::Save(class IS4Chunk &) {
   
   int result; // eax
@@ -106,12 +100,7 @@ void  CAIPlayersScriptVars::Save(class IS4Chunk &) {
 
 
 // address=[0x131ebc0]
-// Decompiled from CAIPlayersScriptVars *__fastcall CAIPlayersScriptVars::ClearFlagBits(
-        CAIPlayersScriptVars *this,
-        int a2,
-        int a3,
-        int a4)
-
+// Decompiled from CAIPlayersScriptVars *__fastcall CAIPlayersScriptVars::ClearFlagBits(  CAIPlayersScriptVars *this,  int a2,  int a3,  int a4)
 void  CAIPlayersScriptVars::ClearFlagBits(int,int) {
   
   CAIPlayersScriptVars *result; // eax
@@ -127,7 +116,6 @@ void  CAIPlayersScriptVars::ClearFlagBits(int,int) {
 
 // address=[0x131ecf0]
 // Decompiled from int __thiscall CAIPlayersScriptVars::SetFlagBits(CAIPlayersScriptVars *this, int a2, int a3)
-
 void  CAIPlayersScriptVars::SetFlagBits(int,int) {
   
   int result; // eax
@@ -142,13 +130,7 @@ void  CAIPlayersScriptVars::SetFlagBits(int,int) {
 
 
 // address=[0x131ed90]
-// Decompiled from CAIPlayersScriptVars *__fastcall CAIPlayersScriptVars::SetOrClearFlagBits(
-        CAIPlayersScriptVars *this,
-        int a2,
-        int a3,
-        int a4,
-        bool a5)
-
+// Decompiled from CAIPlayersScriptVars *__fastcall CAIPlayersScriptVars::SetOrClearFlagBits(  CAIPlayersScriptVars *this,  int a2,  int a3,  int a4,  bool a5)
 void  CAIPlayersScriptVars::SetOrClearFlagBits(int,int,bool) {
   
   CAIPlayersScriptVars *result; // eax
@@ -167,7 +149,6 @@ void  CAIPlayersScriptVars::SetOrClearFlagBits(int,int,bool) {
 
 // address=[0x131eef0]
 // Decompiled from BOOL __thiscall CAIPlayersScriptVars::SetValue(_DWORD *this, int a2, BOOL a3, int a4, int a5, int a6)
-
 void  CAIPlayersScriptVars::SetValue(int,enum T_AI_PLAYER_SCRIPT_VAR_INDEX,int,int,int) {
   
   BOOL result; // eax

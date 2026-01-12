@@ -4,7 +4,6 @@
 
 // address=[0x2f337e0]
 // Decompiled from CBBObject *__thiscall CBBObject::CBBObject(CBBObject *this, int a2, char a3)
-
  CBBObject::CBBObject(char const *,bool) {
   
   *(_DWORD *)this = &CBBObject::_vftable_;
@@ -34,9 +33,7 @@
 
 
 // address=[0x2f33860]
-// Decompiled from // public: __thiscall CBBObject::CBBObject(class CBBObject const &)
-_DWORD *__thiscall CBBObject::CBBObject_0(_DWORD *this, int a2)
-
+// Decompiled from _DWORD *__thiscall CBBObject::CBBObject_0(_DWORD *this, int a2)
  CBBObject::CBBObject(class CBBObject const &) {
   
   int v2; // ecx
@@ -73,7 +70,6 @@ _DWORD *__thiscall CBBObject::CBBObject_0(_DWORD *this, int a2)
 
 // address=[0x2f33900]
 // Decompiled from CBBObject *__thiscall CBBObject::~CBBObject(CBBObject *this)
-
  CBBObject::~CBBObject(void) {
   
   CBBObject *result; // eax

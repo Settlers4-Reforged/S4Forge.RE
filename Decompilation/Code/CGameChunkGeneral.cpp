@@ -4,7 +4,6 @@
 
 // address=[0x13eb8a0]
 // Decompiled from CGameChunkGeneral *__thiscall CGameChunkGeneral::CGameChunkGeneral(CGameChunkGeneral *this)
-
  CGameChunkGeneral::CGameChunkGeneral(void) {
   
   IS4ChunkObject::IS4ChunkObject(this);
@@ -41,7 +40,6 @@
 
 // address=[0x13eb9f0]
 // Decompiled from int __thiscall CGameChunkGeneral::Load(CGameChunkGeneral *this, struct IS4Chunk *a2)
-
 void  CGameChunkGeneral::Load(class IS4Chunk &) {
   
   int result; // eax
@@ -180,7 +178,6 @@ void  CGameChunkGeneral::Load(class IS4Chunk &) {
 
 // address=[0x13ec060]
 // Decompiled from int __thiscall CGameChunkGeneral::Save(CGameChunkGeneral *this, struct IS4Chunk *a2)
-
 void  CGameChunkGeneral::Save(class IS4Chunk &) {
   
   int i; // [esp+0h] [ebp-Ch]
@@ -244,7 +241,6 @@ void  CGameChunkGeneral::Save(class IS4Chunk &) {
 
 // address=[0x13ec470]
 // Decompiled from CGameChunkGeneral *__thiscall CGameChunkGeneral::GenerateCRC(CGameChunkGeneral *this)
-
 void  CGameChunkGeneral::GenerateCRC(void) {
   
   CGameChunkGeneral *result; // eax

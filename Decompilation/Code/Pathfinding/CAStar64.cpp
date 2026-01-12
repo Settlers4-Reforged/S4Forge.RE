@@ -4,7 +4,6 @@
 
 // address=[0x15d3820]
 // Decompiled from char __thiscall CAStar64::FindPath(CAStar64 *this, int a2, int a3, struct CDirCache *a4)
-
 bool  CAStar64::FindPath(int,int,class CDirCache &) {
   
   _DWORD *v5; // eax
@@ -165,7 +164,6 @@ bool  CAStar64::FindPath(int,int,class CDirCache &) {
 
 // address=[0x15d5ea0]
 // Decompiled from CAStar64 *__thiscall CAStar64::CAStar64(CAStar64 *this)
-
  CAStar64::CAStar64(void) {
   
   *(_DWORD *)this = &CAStar64::_vftable_;
@@ -175,7 +173,6 @@ bool  CAStar64::FindPath(int,int,class CDirCache &) {
 
 // address=[0x15d6de0]
 // Decompiled from int __cdecl CAStar64::SettlerDisplacementCosts(int a1, int a2)
-
 static int __cdecl CAStar64::SettlerDisplacementCosts(int,int) {
   
   int v2; // eax
@@ -194,7 +191,6 @@ static int __cdecl CAStar64::SettlerDisplacementCosts(int,int) {
 
 // address=[0x15d7130]
 // Decompiled from int __cdecl CAStar64::WorldMoveCosts(int a1)
-
 static int __cdecl CAStar64::WorldMoveCosts(int) {
   
   return 4 * CWorldManager::MoveCostsBits(a1) + 8;
@@ -203,7 +199,6 @@ static int __cdecl CAStar64::WorldMoveCosts(int) {
 
 // address=[0x15d7150]
 // Decompiled from int __cdecl CAStar64::WorldMoveCostsNoRoad(int a1)
-
 static int __cdecl CAStar64::WorldMoveCostsNoRoad(int) {
   
   return 4 * (CWorldManager::MoveCostsBits(a1) | 2) + 8;

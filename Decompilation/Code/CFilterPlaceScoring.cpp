@@ -3,9 +3,7 @@
 // Definitions for class CFilterPlaceScoring
 
 // address=[0x2f39700]
-// Decompiled from // public: __thiscall CFilterPlaceScoring::CFilterPlaceScoring(void)
-IFilterEntry *__thiscall CFilterPlaceScoring::CFilterPlaceScoring(IFilterEntry *this)
-
+// Decompiled from IFilterEntry *__thiscall CFilterPlaceScoring::CFilterPlaceScoring(IFilterEntry *this)
  CFilterPlaceScoring::CFilterPlaceScoring(void) {
   
   IFilterEntry::IFilterEntry(this);
@@ -15,14 +13,7 @@ IFilterEntry *__thiscall CFilterPlaceScoring::CFilterPlaceScoring(IFilterEntry *
 
 
 // address=[0x2f39720]
-// Decompiled from CFilterPlaceScoring *__thiscall CFilterPlaceScoring::CFilterPlaceScoring(
-        CFilterPlaceScoring *this,
-        struct CSchedule *a2,
-        struct SBUILDINFODATA *a3,
-        int a4,
-        int a5,
-        int a6)
-
+// Decompiled from CFilterPlaceScoring *__thiscall CFilterPlaceScoring::CFilterPlaceScoring(  CFilterPlaceScoring *this,  struct CSchedule *a2,  struct SBUILDINFODATA *a3,  int a4,  int a5,  int a6)
  CFilterPlaceScoring::CFilterPlaceScoring(class CSchedule *,struct SBUILDINFODATA *,int,int,int) {
   
   IFilterEntry::IFilterEntry(this);
@@ -43,7 +34,6 @@ IFilterEntry *__thiscall CFilterPlaceScoring::CFilterPlaceScoring(IFilterEntry *
 
 // address=[0x2f39800]
 // Decompiled from void __thiscall CFilterPlaceScoring::~CFilterPlaceScoring(CFilterPlaceScoring *this)
-
  CFilterPlaceScoring::~CFilterPlaceScoring(void) {
   
   *(_DWORD *)this = &CFilterPlaceScoring::_vftable_;
@@ -53,7 +43,6 @@ IFilterEntry *__thiscall CFilterPlaceScoring::CFilterPlaceScoring(IFilterEntry *
 
 // address=[0x2f39820]
 // Decompiled from double __thiscall CFilterPlaceScoring::GetFilterValue(CFilterPlaceScoring *this)
-
 float  CFilterPlaceScoring::GetFilterValue(void) {
   
   return (float)*((double *)this + 4);

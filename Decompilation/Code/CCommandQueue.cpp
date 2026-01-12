@@ -3,9 +3,7 @@
 // Definitions for class CCommandQueue
 
 // address=[0x153fec0]
-// Decompiled from // public: void __thiscall CCommandQueue::CheckCommand(class CEntityEvent *)
-struct CEntityEvent *__thiscall CCommandQueue::CheckCommand(CCommandQueue *this, struct CEntityEvent *a2)
-
+// Decompiled from struct CEntityEvent *__thiscall CCommandQueue::CheckCommand(CCommandQueue *this, struct CEntityEvent *a2)
 void  CCommandQueue::CheckCommand(class CEntityEvent *) {
   
   struct CEntityEvent *result; // eax
@@ -26,7 +24,6 @@ void  CCommandQueue::CheckCommand(class CEntityEvent *) {
 
 // address=[0x153ff10]
 // Decompiled from unsigned int __thiscall CCommandQueue::Push(CCommandQueue *this, struct CEntityEvent *a2)
-
 void  CCommandQueue::Push(class CEntityEvent *) {
   
   unsigned int result; // eax
@@ -40,7 +37,6 @@ void  CCommandQueue::Push(class CEntityEvent *) {
 
 // address=[0x153ff40]
 // Decompiled from CEntityEvent *__thiscall CCommandQueue::Pop(void *this, CEntityEvent *a2)
-
 class CEntityEvent  CCommandQueue::Pop(void) {
   
   _BYTE v3[24]; // [esp+4h] [ebp-30h] BYREF

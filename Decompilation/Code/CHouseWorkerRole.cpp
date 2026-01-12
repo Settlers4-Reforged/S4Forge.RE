@@ -4,7 +4,6 @@
 
 // address=[0x1400ea0]
 // Decompiled from int __cdecl CHouseWorkerRole::New(int a1)
-
 static class CPersistence * __cdecl CHouseWorkerRole::New(std::istream &) {
   
   if ( operator new(0x34u) )
@@ -16,7 +15,6 @@ static class CPersistence * __cdecl CHouseWorkerRole::New(std::istream &) {
 
 // address=[0x1575c50]
 // Decompiled from int __thiscall CHouseWorkerRole::InitWalking(CHouseWorkerRole *this, struct CSettler *a2)
-
 class CWalking *  CHouseWorkerRole::InitWalking(class CSettler *) {
   
   int v2; // eax
@@ -31,7 +29,6 @@ class CWalking *  CHouseWorkerRole::InitWalking(class CSettler *) {
 
 // address=[0x1575c90]
 // Decompiled from _BYTE *__thiscall CHouseWorkerRole::LogicUpdateJob(_BYTE *this, CMFCCaptionButton *a2)
-
 void  CHouseWorkerRole::LogicUpdateJob(class CSettler *) {
   
   _BYTE *result; // eax
@@ -234,7 +231,6 @@ LABEL_62:
 
 // address=[0x15762a0]
 // Decompiled from CHouseWorkerRole *__thiscall CHouseWorkerRole::UpdateJob(CHouseWorkerRole *this, struct CSettler *a2)
-
 void  CHouseWorkerRole::UpdateJob(class CSettler *) {
   
   CHouseWorkerRole *result; // eax
@@ -288,7 +284,6 @@ void  CHouseWorkerRole::UpdateJob(class CSettler *) {
 
 // address=[0x1576430]
 // Decompiled from int __stdcall CHouseWorkerRole::PostLoadInit(CPropertySet *a1)
-
 void  CHouseWorkerRole::PostLoadInit(class CSettler *) {
   
   return CWarMap::AddEntity(a1);
@@ -297,7 +292,6 @@ void  CHouseWorkerRole::PostLoadInit(class CSettler *) {
 
 // address=[0x1576450]
 // Decompiled from char *__thiscall CHouseWorkerRole::CHouseWorkerRole(char *this, int a2)
-
  CHouseWorkerRole::CHouseWorkerRole(std::istream &) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
@@ -326,7 +320,6 @@ void  CHouseWorkerRole::PostLoadInit(class CSettler *) {
 
 // address=[0x1576520]
 // Decompiled from int __thiscall CHouseWorkerRole::Store(struct CPersistence *this, struct std::ostream *a2)
-
 void  CHouseWorkerRole::Store(std::ostream &) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
@@ -343,7 +336,6 @@ void  CHouseWorkerRole::Store(std::ostream &) {
 
 // address=[0x1577220]
 // Decompiled from int __thiscall CHouseWorkerRole::ClassID(CHouseWorkerRole *this)
-
 unsigned long  CHouseWorkerRole::ClassID(void)const {
   
   return CHouseWorkerRole::m_iClassID;
@@ -351,9 +343,7 @@ unsigned long  CHouseWorkerRole::ClassID(void)const {
 
 
 // address=[0x1577260]
-// Decompiled from // MFC 3.1-14.0 32bit
-int __thiscall CHouseWorkerRole::GetSettlerRole(CHouseWorkerRole *this)
-
+// Decompiled from int __thiscall CHouseWorkerRole::GetSettlerRole(CHouseWorkerRole *this)
 int  CHouseWorkerRole::GetSettlerRole(void)const {
   
   return 4;
@@ -362,7 +352,6 @@ int  CHouseWorkerRole::GetSettlerRole(void)const {
 
 // address=[0x1588700]
 // Decompiled from int __cdecl CHouseWorkerRole::Load(int a1)
-
 static class CHouseWorkerRole * __cdecl CHouseWorkerRole::Load(std::istream &) {
   
   void **v1; // eax
@@ -378,7 +367,6 @@ static class CHouseWorkerRole * __cdecl CHouseWorkerRole::Load(std::istream &) {
 
 // address=[0x1576580]
 // Decompiled from ISettlerRole *__thiscall CHouseWorkerRole::~CHouseWorkerRole(CHouseWorkerRole *this)
-
  CHouseWorkerRole::~CHouseWorkerRole(void) {
   
   *(_DWORD *)this = &CHouseWorkerRole::_vftable_;
@@ -388,7 +376,6 @@ static class CHouseWorkerRole * __cdecl CHouseWorkerRole::Load(std::istream &) {
 
 // address=[0x15765a0]
 // Decompiled from int __thiscall CHouseWorkerRole::GetNextJob(CHouseWorkerRole *this, struct CSettler *a2)
-
 void  CHouseWorkerRole::GetNextJob(class CSettler *) {
   
   int result; // eax
@@ -404,7 +391,6 @@ void  CHouseWorkerRole::GetNextJob(class CSettler *) {
 
 // address=[0x15765e0]
 // Decompiled from void __thiscall CHouseWorkerRole::TakeJob(ISettlerRole *this, CMFCCaptionButton *a2)
-
 void  CHouseWorkerRole::TakeJob(class CSettler *) {
   
   int TickCounter; // eax
@@ -541,7 +527,6 @@ LABEL_14:
 
 // address=[0x1576b00]
 // Decompiled from int __thiscall CHouseWorkerRole::Init(_DWORD *this, CPropertySet *a2)
-
 void  CHouseWorkerRole::Init(class CSettler *) {
   
   int result; // eax
@@ -555,7 +540,6 @@ void  CHouseWorkerRole::Init(class CSettler *) {
 
 // address=[0x1576b30]
 // Decompiled from int __thiscall CHouseWorkerRole::ConvertEventIntoGoal(ISettlerRole *this, unsigned __int16 *a2, _DWORD *a3)
-
 void  CHouseWorkerRole::ConvertEventIntoGoal(class CSettler *,class CEntityEvent *) {
   
   int result; // eax
@@ -646,7 +630,6 @@ void  CHouseWorkerRole::ConvertEventIntoGoal(class CSettler *,class CEntityEvent
 
 // address=[0x1587a80]
 // Decompiled from CHouseWorkerRole *__thiscall CHouseWorkerRole::CHouseWorkerRole(CHouseWorkerRole *this)
-
  CHouseWorkerRole::CHouseWorkerRole(void) {
   
   ISettlerRole::ISettlerRole(this);

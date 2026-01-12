@@ -4,7 +4,6 @@
 
 // address=[0x134e750]
 // Decompiled from void __thiscall FilePaths::PathSplitResult::~PathSplitResult(FilePaths::PathSplitResult *this)
-
  FilePaths::PathSplitResult::~PathSplitResult(void) {
   
   void *v2; // [esp+0h] [ebp-4h]
@@ -17,7 +16,6 @@
 
 // address=[0x2eff700]
 // Decompiled from _BYTE *__thiscall FilePaths::PathSplitResult::PathSplitResult(_BYTE *this, _BYTE *a2)
-
  FilePaths::PathSplitResult::PathSplitResult(struct FilePaths::PathSplitResult &&) {
   
   std::wstring::wstring(this, a2);
@@ -30,7 +28,6 @@
 
 // address=[0x2eff760]
 // Decompiled from char *__thiscall FilePaths::PathSplitResult::PathSplitResult(FilePaths::PathSplitResult *this)
-
  FilePaths::PathSplitResult::PathSplitResult(void) {
   
   char *v3; // [esp+0h] [ebp-4h]

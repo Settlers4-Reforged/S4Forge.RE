@@ -4,7 +4,6 @@
 
 // address=[0x132eec0]
 // Decompiled from void __thiscall CAIWatchTower::Init(CAIWatchTower *this, int a2, int a3, int a4)
-
 void  CAIWatchTower::Init(int,int,int) {
   
   if ( !IAIEnvironment::WorldInWorld(a2, a3)
@@ -19,7 +18,6 @@ void  CAIWatchTower::Init(int,int,int) {
 
 // address=[0x132ef30]
 // Decompiled from CAIWatchTower *__thiscall CAIWatchTower::Done(CAIWatchTower *this)
-
 void  CAIWatchTower::Done(void) {
   
   CAIWatchTower *result; // eax
@@ -32,7 +30,6 @@ void  CAIWatchTower::Done(void) {
 
 // address=[0x132f820]
 // Decompiled from int __thiscall CAIWatchTower::AllianceId(CAIWatchTower *this)
-
 int  CAIWatchTower::AllianceId(void)const {
   
   return HIBYTE(*((_DWORD *)this + 1));
@@ -40,10 +37,7 @@ int  CAIWatchTower::AllianceId(void)const {
 
 
 // address=[0x132f8a0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CAIWatchTower::PackedXY(CAIWatchTower *this)
-
+// Decompiled from int __thiscall CAIWatchTower::PackedXY(CAIWatchTower *this)
 int  CAIWatchTower::PackedXY(void)const {
   
   return *(_DWORD *)this;
@@ -52,7 +46,6 @@ int  CAIWatchTower::PackedXY(void)const {
 
 // address=[0x132f940]
 // Decompiled from bool __thiscall CAIWatchTower::Used(CAIWatchTower *this)
-
 bool  CAIWatchTower::Used(void)const {
   
   return *(_DWORD *)this != -1;
@@ -61,7 +54,6 @@ bool  CAIWatchTower::Used(void)const {
 
 // address=[0x132f9f0]
 // Decompiled from unsigned int __thiscall CAIWatchTower::Value(CAIWatchTower *this)
-
 int  CAIWatchTower::Value(void)const {
   
   return ((unsigned int)&dword_F29144[220078] + 3) & *((_DWORD *)this + 1);
@@ -70,7 +62,6 @@ int  CAIWatchTower::Value(void)const {
 
 // address=[0x132ef50]
 // Decompiled from unsigned int __thiscall CAIWatchTower::SetValue(CAIWatchTower *this, int a2)
-
 void  CAIWatchTower::SetValue(int) {
   
   unsigned int result; // eax
@@ -85,7 +76,6 @@ void  CAIWatchTower::SetValue(int) {
 
 // address=[0x132f8c0]
 // Decompiled from CAIWatchTower *__thiscall CAIWatchTower::SetAllianceIdAndClearValue(CAIWatchTower *this, int a2)
-
 void  CAIWatchTower::SetAllianceIdAndClearValue(int) {
   
   CAIWatchTower *result; // eax

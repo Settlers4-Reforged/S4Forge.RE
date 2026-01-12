@@ -4,7 +4,6 @@
 
 // address=[0x14016c0]
 // Decompiled from int __cdecl CPlant::New(int a1)
-
 static class CPersistence * __cdecl CPlant::New(std::istream &) {
   
   if ( CPlant::operator new(0x50u) )
@@ -16,7 +15,6 @@ static class CPersistence * __cdecl CPlant::New(std::istream &) {
 
 // address=[0x154a040]
 // Decompiled from CPlant *__thiscall CPlant::CPlant(CPlant *this, int a2, int a3, int a4, int a5, char a6, int a7)
-
  CPlant::CPlant(int,int,int,int,int,int) {
   
   IDecoObject::IDecoObject(this, a2, a3, a4, a5, a7 != 0);
@@ -49,7 +47,6 @@ static class CPersistence * __cdecl CPlant::New(std::istream &) {
 
 // address=[0x154a1a0]
 // Decompiled from CPlant *__thiscall CPlant::CPlant(CPlant *this, const struct CPlant *a2, int a3, int a4, int a5)
-
  CPlant::CPlant(class CPlant const &,int,int,int) {
   
   IDecoObject::IDecoObject(this, a2, a3, a4, a5);
@@ -73,7 +70,6 @@ static class CPersistence * __cdecl CPlant::New(std::istream &) {
 
 // address=[0x154a2a0]
 // Decompiled from void __thiscall CPlant::~CPlant(CPlant *this)
-
  CPlant::~CPlant(void) {
   
   *(_DWORD *)this = &CPlant::_vftable_;
@@ -83,7 +79,6 @@ static class CPersistence * __cdecl CPlant::New(std::istream &) {
 
 // address=[0x154a2c0]
 // Decompiled from void __thiscall CPlant::LogicUpdate(CPlant *this)
-
 void  CPlant::LogicUpdate(void) {
   
   int v1; // eax
@@ -148,7 +143,6 @@ LABEL_14:
 
 // address=[0x154a490]
 // Decompiled from void *__thiscall CPlant::GetGfxInfos(int this)
-
 struct SGfxObjectInfo *  CPlant::GetGfxInfos(void) {
   
   int TickCounter; // esi
@@ -175,7 +169,6 @@ struct SGfxObjectInfo *  CPlant::GetGfxInfos(void) {
 
 // address=[0x154a540]
 // Decompiled from int __thiscall CPlant::Take(CPlant *this, int a2)
-
 void  CPlant::Take(int) {
   
   if ( IDecoObject::IsStaticInstance(this)
@@ -219,10 +212,7 @@ void  CPlant::Take(int) {
 
 
 // address=[0x154a6c0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CPlant::Decrease(CPlant *this, int a2)
-
+// Decompiled from void __thiscall CPlant::Decrease(CPlant *this, int a2)
 void  CPlant::Decrease(int) {
   
   ;
@@ -230,9 +220,7 @@ void  CPlant::Decrease(int) {
 
 
 // address=[0x154a6d0]
-// Decompiled from // MFC 3.1-14.0 32bit
-int __thiscall CPlant::Increase(CPlant *this, int a2)
-
+// Decompiled from int __thiscall CPlant::Increase(CPlant *this, int a2)
 int  CPlant::Increase(int) {
   
   return 1;
@@ -241,7 +229,6 @@ int  CPlant::Increase(int) {
 
 // address=[0x154a6f0]
 // Decompiled from unsigned int __cdecl CPlant::operator new(unsigned int a1)
-
 static void * __cdecl CPlant::operator new(unsigned int) {
   
   return CDecoObjMgr::Alloc((CDecoObjMgr *)&g_cDecoObjMgr, a1);
@@ -250,7 +237,6 @@ static void * __cdecl CPlant::operator new(unsigned int) {
 
 // address=[0x154a710]
 // Decompiled from void __cdecl CPlant::operator delete(void *a1)
-
 static void __cdecl CPlant::operator delete(void *) {
   
   CDecoObjMgr::Dealloc((CDecoObjMgr *)&g_cDecoObjMgr, a1);
@@ -259,7 +245,6 @@ static void __cdecl CPlant::operator delete(void *) {
 
 // address=[0x154a750]
 // Decompiled from char *__thiscall CPlant::CPlant(char *this, int a2)
-
  CPlant::CPlant(std::istream &) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
@@ -291,7 +276,6 @@ static void __cdecl CPlant::operator delete(void *) {
 
 // address=[0x154a860]
 // Decompiled from int __thiscall CPlant::Store(int *this, struct std::ostream *a2)
-
 void  CPlant::Store(std::ostream &) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
@@ -311,7 +295,6 @@ void  CPlant::Store(std::ostream &) {
 
 // address=[0x154ab80]
 // Decompiled from int __thiscall CPlant::ClassID(CPlant *this)
-
 unsigned long  CPlant::ClassID(void)const {
   
   return CPlant::m_iClassID;
@@ -320,7 +303,6 @@ unsigned long  CPlant::ClassID(void)const {
 
 // address=[0x154aba0]
 // Decompiled from int __thiscall CPlant::GetGoodType(CPlant *this)
-
 int  CPlant::GetGoodType(void)const {
   
   return *((unsigned __int8 *)this + 75);

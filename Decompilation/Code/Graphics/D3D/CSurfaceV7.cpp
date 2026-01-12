@@ -4,7 +4,6 @@
 
 // address=[0x2f86620]
 // Decompiled from CSurfaceV7 *__thiscall CSurfaceV7::CSurfaceV7(CSurfaceV7 *this)
-
  CSurfaceV7::CSurfaceV7(void) {
   
   CSurface::CSurface((CSurface *)this);
@@ -18,7 +17,6 @@
 
 // address=[0x2f86660]
 // Decompiled from CSurfaceV7 *__thiscall CSurfaceV7::Release(CSurfaceV7 *this)
-
 void  CSurfaceV7::Release(void) {
   
   CSurfaceV7 *result; // eax
@@ -32,7 +30,6 @@ void  CSurfaceV7::Release(void) {
 
 // address=[0x2f86690]
 // Decompiled from HRESULT __thiscall CSurfaceV7::Restore(CSurfaceV7 *this)
-
 long  CSurfaceV7::Restore(void) {
   
   return this->innerSurface->lpVtbl->Restore(this->innerSurface);
@@ -41,7 +38,6 @@ long  CSurfaceV7::Restore(void) {
 
 // address=[0x2f866b0]
 // Decompiled from HRESULT __thiscall CSurfaceV7::IsLost(CSurfaceV7 *this)
-
 long  CSurfaceV7::IsLost(void) {
   
   return this->innerSurface->lpVtbl->IsLost(this->innerSurface);
@@ -50,7 +46,6 @@ long  CSurfaceV7::IsLost(void) {
 
 // address=[0x2f866d0]
 // Decompiled from HRESULT __thiscall CSurfaceV7::ClearSurface(CSurfaceV7 *this, struct CBlitFX *a2)
-
 long  CSurfaceV7::ClearSurface(class CBlitFX *) {
   
   DDBLTFX *BlitStructPtr; // eax
@@ -89,7 +84,6 @@ long  CSurfaceV7::ClearSurface(class CBlitFX *) {
 
 // address=[0x2f86770]
 // Decompiled from HRESULT __thiscall CSurfaceV7::ClearSurface(CSurfaceV7 *this, struct tagRECT a2, struct CBlitFX *a3)
-
 long  CSurfaceV7::ClearSurface(struct tagRECT,class CBlitFX *) {
   
   DDBLTFX *BlitStructPtr; // eax
@@ -127,14 +121,7 @@ long  CSurfaceV7::ClearSurface(struct tagRECT,class CBlitFX *) {
 
 
 // address=[0x2f86810]
-// Decompiled from HRESULT __thiscall CSurfaceV7::Blt(
-        CSurfaceV7 *this,
-        struct tagRECT *a2,
-        CSurfaceV7 *a3,
-        struct tagRECT *a4,
-        DWORD a5,
-        struct _DDBLTFX *a6)
-
+// Decompiled from HRESULT __thiscall CSurfaceV7::Blt(  CSurfaceV7 *this,  struct tagRECT *a2,  CSurfaceV7 *a3,  struct tagRECT *a4,  DWORD a5,  struct _DDBLTFX *a6)
 long  CSurfaceV7::Blt(struct tagRECT *,class CSurface *,struct tagRECT *,unsigned long,struct _DDBLTFX *) {
   
   HRESULT v8; // [esp+4h] [ebp-4h]
@@ -152,7 +139,6 @@ long  CSurfaceV7::Blt(struct tagRECT *,class CSurface *,struct tagRECT *,unsigne
 
 // address=[0x2f86870]
 // Decompiled from HRESULT __thiscall CSurfaceV7::Flip(CSurfaceV7 *this)
-
 long  CSurfaceV7::Flip(void) {
   
   return this->innerSurface->lpVtbl->Flip(this->innerSurface, 0, 1);
@@ -161,7 +147,6 @@ long  CSurfaceV7::Flip(void) {
 
 // address=[0x2f868a0]
 // Decompiled from HRESULT __thiscall CSurfaceV7::Lock(CSurfaceV7 *this, unsigned int *a2, void **a3, bool a4)
-
 long  CSurfaceV7::Lock(unsigned int &,void * &,bool) {
   
   HRESULT v6; // [esp+4h] [ebp-8h]
@@ -185,7 +170,6 @@ long  CSurfaceV7::Lock(unsigned int &,void * &,bool) {
 
 // address=[0x2f86920]
 // Decompiled from HRESULT __thiscall CSurfaceV7::Unlock(CSurfaceV7 *this)
-
 long  CSurfaceV7::Unlock(void) {
   
   return this->innerSurface->lpVtbl->Unlock(this->innerSurface, 0);
@@ -194,7 +178,6 @@ long  CSurfaceV7::Unlock(void) {
 
 // address=[0x2f86950]
 // Decompiled from HRESULT __thiscall CSurfaceV7::GetDC(CSurfaceV7 *this, HDC *a2)
-
 long  CSurfaceV7::GetDC(struct HDC__ * *) {
   
   HRESULT v4; // [esp+4h] [ebp-4h]
@@ -212,7 +195,6 @@ long  CSurfaceV7::GetDC(struct HDC__ * *) {
 
 // address=[0x2f86990]
 // Decompiled from int __thiscall CSurfaceV7::ReleaseDC(CSurfaceV7 *this, HDC a2)
-
 long  CSurfaceV7::ReleaseDC(struct HDC__ *) {
   
   return ((int (__thiscall *)(LPDIRECTDRAWSURFACE7, LPDIRECTDRAWSURFACE7, HDC))this->innerSurface->lpVtbl->ReleaseDC)(
@@ -223,19 +205,7 @@ long  CSurfaceV7::ReleaseDC(struct HDC__ *) {
 
 
 // address=[0x2f869c0]
-// Decompiled from int __thiscall CSurfaceV7::CreateSurface(
-        CSurfaceV7 *this,
-        void *a2,
-        int a3,
-        int a4,
-        bool a5,
-        bool a6,
-        bool a7,
-        int a8,
-        bool a9,
-        bool a10,
-        bool a11)
-
+// Decompiled from int __thiscall CSurfaceV7::CreateSurface(  CSurfaceV7 *this,  void *a2,  int a3,  int a4,  bool a5,  bool a6,  bool a7,  int a8,  bool a9,  bool a10,  bool a11)
 long  CSurfaceV7::CreateSurface(void *,int,int,bool,bool,bool,int,bool,bool,bool) {
   
   MEMORY[0x46C6714] = 1;
@@ -312,7 +282,6 @@ long  CSurfaceV7::CreateSurface(void *,int,int,bool,bool,bool,int,bool,bool,bool
 
 // address=[0x2f86bf0]
 // Decompiled from HRESULT __thiscall CSurfaceV7::SetColorKey(CSurfaceV7 *this, DWORD a2, struct _DDCOLORKEY *a3)
-
 long  CSurfaceV7::SetColorKey(unsigned long,struct _DDCOLORKEY *) {
   
   return this->innerSurface->lpVtbl->SetColorKey(this->innerSurface, a2, a3);
@@ -321,7 +290,6 @@ long  CSurfaceV7::SetColorKey(unsigned long,struct _DDCOLORKEY *) {
 
 // address=[0x2f86c20]
 // Decompiled from HRESULT __thiscall CSurfaceV7::GetPixelFormat(CSurfaceV7 *this, bool *a2)
-
 long  CSurfaceV7::GetPixelFormat(bool &) {
   
   HRESULT v3; // [esp+0h] [ebp-2Ch]
@@ -340,7 +308,6 @@ long  CSurfaceV7::GetPixelFormat(bool &) {
 
 // address=[0x2f86cc0]
 // Decompiled from HRESULT __thiscall CSurfaceV7::GetBitDepth(CSurfaceV7 *this, int *a2)
-
 long  CSurfaceV7::GetBitDepth(int &) {
   
   HRESULT result; // eax
@@ -356,7 +323,6 @@ long  CSurfaceV7::GetBitDepth(int &) {
 
 // address=[0x2f86d20]
 // Decompiled from HRESULT __thiscall CSurfaceV7::GetSurfaceSize(CSurfaceV7 *this, DWORD *a2, DWORD *a3)
-
 long  CSurfaceV7::GetSurfaceSize(int &,int &) {
   
   HRESULT result; // eax
@@ -370,7 +336,6 @@ long  CSurfaceV7::GetSurfaceSize(int &,int &) {
 
 // address=[0x2f86d70]
 // Decompiled from int __thiscall CSurfaceV7::SetClipper(CSurfaceV7 *this, struct IDirectDrawClipper *a2)
-
 long  CSurfaceV7::SetClipper(struct IDirectDrawClipper *) {
   
   return ((int (__thiscall *)(LPDIRECTDRAWSURFACE7, LPDIRECTDRAWSURFACE7, struct IDirectDrawClipper *))this->innerSurface->lpVtbl->SetClipper)(
@@ -381,10 +346,7 @@ long  CSurfaceV7::SetClipper(struct IDirectDrawClipper *) {
 
 
 // address=[0x2f86da0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-LPDIRECTDRAWSURFACE7 __thiscall CSurfaceV7::GetSurfacePtr(CSurfaceV7 *this)
-
+// Decompiled from LPDIRECTDRAWSURFACE7 __thiscall CSurfaceV7::GetSurfacePtr(CSurfaceV7 *this)
 void *  CSurfaceV7::GetSurfacePtr(void) {
   
   return this->innerSurface;
@@ -393,7 +355,6 @@ void *  CSurfaceV7::GetSurfacePtr(void) {
 
 // address=[0x2f86dc0]
 // Decompiled from CSurfaceV7 *__thiscall CSurfaceV7::SetSurfacePtr(CSurfaceV7 *this, struct IDirectDrawSurface7 *a2)
-
 void  CSurfaceV7::SetSurfacePtr(void *) {
   
   CSurfaceV7 *result; // eax
@@ -407,7 +368,6 @@ void  CSurfaceV7::SetSurfacePtr(void *) {
 
 // address=[0x2f86de0]
 // Decompiled from int __thiscall CSurfaceV7::GetAttachedSurfacePtr(CSurfaceV7 *this)
-
 void *  CSurfaceV7::GetAttachedSurfacePtr(void) {
   
   int v2; // [esp+0h] [ebp-20h] BYREF
@@ -433,9 +393,7 @@ void *  CSurfaceV7::GetAttachedSurfacePtr(void) {
 
 
 // address=[0x2f86e50]
-// Decompiled from // Microsoft VisualC 14/net runtime
-char __thiscall CSurfaceV7::IsBackBufferReference(CSurfaceV7 *this)
-
+// Decompiled from char __thiscall CSurfaceV7::IsBackBufferReference(CSurfaceV7 *this)
 bool  CSurfaceV7::IsBackBufferReference(void) {
   
   return this->field_C;
@@ -444,7 +402,6 @@ bool  CSurfaceV7::IsBackBufferReference(void) {
 
 // address=[0x2f86e70]
 // Decompiled from int __thiscall CSurfaceV7::SetAsRenderTarget(CSurfaceV7 *this, struct IDirect3DDevice7 *a2)
-
 long  CSurfaceV7::SetAsRenderTarget(struct IDirect3DDevice7 *) {
   
   if ( !this->innerSurface )
@@ -458,7 +415,6 @@ long  CSurfaceV7::SetAsRenderTarget(struct IDirect3DDevice7 *) {
 
 // address=[0x2f8a340]
 // Decompiled from void __thiscall CSurfaceV7::~CSurfaceV7(CSurfaceV7 *this)
-
  CSurfaceV7::~CSurfaceV7(void) {
   
   CSurface::~CSurface((CSurface *)this);

@@ -4,7 +4,6 @@
 
 // address=[0x14549c0]
 // Decompiled from CVehicleInfo *__thiscall CVehicleInfo::CVehicleInfo(CVehicleInfo *this)
-
  CVehicleInfo::CVehicleInfo(void) {
   
   CInfoExchange::CInfoExchange(this);
@@ -15,7 +14,6 @@
 
 // address=[0x1454e70]
 // Decompiled from int __thiscall CVehicleInfo::Size(CVehicleInfo *this)
-
 unsigned int  CVehicleInfo::Size(void)const {
   
   return 32;

@@ -4,7 +4,6 @@
 
 // address=[0x2f4f710]
 // Decompiled from CBuildingManagerTask *__thiscall CBuildingManagerTask::CBuildingManagerTask(CBuildingManagerTask *this)
-
  CBuildingManagerTask::CBuildingManagerTask(void) {
   
   _DWORD *v1; // eax
@@ -165,7 +164,6 @@
 
 // address=[0x2f4fb00]
 // Decompiled from void __thiscall CBuildingManagerTask::~CBuildingManagerTask(CBuildingManagerTask *this)
-
  CBuildingManagerTask::~CBuildingManagerTask(void) {
   
   *(_DWORD *)this = &CBuildingManagerTask::_vftable_;
@@ -176,7 +174,6 @@
 
 // address=[0x2f4fb60]
 // Decompiled from char __thiscall CBuildingManagerTask::IsShooting(CSchedule **this)
-
 bool  CBuildingManagerTask::IsShooting(void) {
   
   _DWORD *v2; // eax
@@ -273,7 +270,6 @@ LABEL_15:
 
 // address=[0x2f4fe10]
 // Decompiled from char __thiscall CBuildingManagerTask::action(CSchedule **this)
-
 bool  CBuildingManagerTask::action(void) {
   
   int GoodPositionForBuilding; // [esp+8h] [ebp-1Ch]
@@ -294,7 +290,6 @@ bool  CBuildingManagerTask::action(void) {
 
 // address=[0x2f4fed0]
 // Decompiled from char __thiscall CBuildingManagerTask::IsAlive(CBuildingManagerTask *this)
-
 bool  CBuildingManagerTask::IsAlive(void) {
   
   return 1;
@@ -303,7 +298,6 @@ bool  CBuildingManagerTask::IsAlive(void) {
 
 // address=[0x2f4fee0]
 // Decompiled from bool __thiscall CBuildingManagerTask::WaitFor(CBuildingManagerTask *this)
-
 bool  CBuildingManagerTask::WaitFor(void) {
   
   CBuildingManagerTask::UpdateRequireGoods(this, 0);
@@ -313,7 +307,6 @@ bool  CBuildingManagerTask::WaitFor(void) {
 
 // address=[0x2f4ff10]
 // Decompiled from char __thiscall CBuildingManagerTask::UpdateRequireGoods(CBuildingManagerTask *this, bool a2)
-
 void  CBuildingManagerTask::UpdateRequireGoods(bool) {
   
   int v2; // eax
@@ -619,7 +612,6 @@ LABEL_68:
 
 // address=[0x2f50810]
 // Decompiled from int __thiscall CBuildingManagerTask::GetToolRequireIndex(_DWORD *this, int a2)
-
 int  CBuildingManagerTask::GetToolRequireIndex(enum PILE_TYPES) {
   
   int i; // [esp+4h] [ebp-4h]
@@ -635,7 +627,6 @@ int  CBuildingManagerTask::GetToolRequireIndex(enum PILE_TYPES) {
 
 // address=[0x2f50860]
 // Decompiled from char __thiscall CBuildingManagerTask::GetBuildingPermission(CSchedule **this, struct CBuildingEvent *a2)
-
 bool  CBuildingManagerTask::GetBuildingPermission(class CBuildingEvent *) {
   
   int v3; // esi
@@ -713,10 +704,7 @@ LABEL_14:
 
 
 // address=[0x2f50b50]
-// Decompiled from char __thiscall CBuildingManagerTask::GetSeperateBuildingPermission(
-        CBuildingManagerTask *this,
-        struct CBuildingEvent *a2)
-
+// Decompiled from char __thiscall CBuildingManagerTask::GetSeperateBuildingPermission(  CBuildingManagerTask *this,  struct CBuildingEvent *a2)
 bool  CBuildingManagerTask::GetSeperateBuildingPermission(class CBuildingEvent *) {
   
   char result; // al
@@ -815,7 +803,6 @@ CBuildingManagerTask__GetSeperateBuildingPermission___def_3350B7F:
 
 // address=[0x2f50db0]
 // Decompiled from int __thiscall CBuildingManagerTask::SetRejectedBuilding(_DWORD *this, int a2)
-
 void  CBuildingManagerTask::SetRejectedBuilding(enum BUILDING_TYPES) {
   
   int result; // eax
@@ -837,7 +824,6 @@ void  CBuildingManagerTask::SetRejectedBuilding(enum BUILDING_TYPES) {
 
 // address=[0x2f50e00]
 // Decompiled from char __thiscall CBuildingManagerTask::IsRejectedBuilding(_DWORD *this, int a2, char a3)
-
 bool  CBuildingManagerTask::IsRejectedBuilding(enum BUILDING_TYPES,bool) {
   
   int i; // [esp+4h] [ebp-4h]
@@ -857,7 +843,6 @@ bool  CBuildingManagerTask::IsRejectedBuilding(enum BUILDING_TYPES,bool) {
 
 // address=[0x2f50e60]
 // Decompiled from char __thiscall CBuildingManagerTask::SetBuildingAtPlanning(_DWORD *this, int a2)
-
 bool  CBuildingManagerTask::SetBuildingAtPlanning(enum BUILDING_TYPES) {
   
   int i; // [esp+4h] [ebp-4h]
@@ -876,7 +861,6 @@ bool  CBuildingManagerTask::SetBuildingAtPlanning(enum BUILDING_TYPES) {
 
 // address=[0x2f50eb0]
 // Decompiled from char __thiscall CBuildingManagerTask::IsBuildingAtPlanning(_DWORD *this, int a2)
-
 bool  CBuildingManagerTask::IsBuildingAtPlanning(enum BUILDING_TYPES) {
   
   int i; // [esp+4h] [ebp-4h]
@@ -892,7 +876,6 @@ bool  CBuildingManagerTask::IsBuildingAtPlanning(enum BUILDING_TYPES) {
 
 // address=[0x2f50f00]
 // Decompiled from char __thiscall CBuildingManagerTask::RemoveBuildingAtPlanning(_DWORD *this, int a2)
-
 bool  CBuildingManagerTask::RemoveBuildingAtPlanning(enum BUILDING_TYPES) {
   
   int i; // [esp+4h] [ebp-4h]
@@ -911,7 +894,6 @@ bool  CBuildingManagerTask::RemoveBuildingAtPlanning(enum BUILDING_TYPES) {
 
 // address=[0x2f50f60]
 // Decompiled from char __thiscall CBuildingManagerTask::AlertLevelZero(CBuildingManagerTask *this)
-
 bool  CBuildingManagerTask::AlertLevelZero(void) {
   
   struct IAIEcoManager *v2; // [esp+10h] [ebp-30h]
@@ -1007,7 +989,6 @@ LABEL_21:
 
 // address=[0x2f511f0]
 // Decompiled from char __thiscall CBuildingManagerTask::AlertLevelOne(CBuildingManagerTask *this)
-
 bool  CBuildingManagerTask::AlertLevelOne(void) {
   
   return 0;

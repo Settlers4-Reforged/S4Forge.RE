@@ -4,7 +4,6 @@
 
 // address=[0x3080430]
 // Decompiled from DName *__thiscall DName::DName(DName *this, char **a2, char a3)
-
  DName::DName(char const * &,char) {
   
   int v4; // [esp+4h] [ebp-10h]
@@ -75,9 +74,7 @@
 
 
 // address=[0x30807a0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-DName *__thiscall DName::DName(DName *this, const struct DName *a2)
-
+// Decompiled from DName *__thiscall DName::DName(DName *this, const struct DName *a2)
  DName::DName(class DName const &) {
   
   *(_DWORD *)this = *(_DWORD *)a2;
@@ -88,7 +85,6 @@ DName *__thiscall DName::DName(DName *this, const struct DName *a2)
 
 // address=[0x30807d0]
 // Decompiled from DName *__thiscall DName::DName(DName *this, char a2)
-
  DName::DName(char) {
   
   *((_DWORD *)this + 1) &= 0xFFFFFF00;
@@ -109,7 +105,6 @@ DName *__thiscall DName::DName(DName *this, const struct DName *a2)
 
 // address=[0x30808e0]
 // Decompiled from DName *__thiscall DName::DName(DName *this, struct DName *a2)
-
  DName::DName(class DName *) {
   
   unsigned __int8 v3; // [esp+0h] [ebp-10h]
@@ -149,7 +144,6 @@ DName *__thiscall DName::DName(DName *this, const struct DName *a2)
 
 // address=[0x3080a60]
 // Decompiled from DName *__thiscall DName::DName(DName *this, char *a2)
-
  DName::DName(char const *) {
   
   unsigned int v3; // [esp+0h] [ebp-8h]
@@ -175,7 +169,6 @@ DName *__thiscall DName::DName(DName *this, const struct DName *a2)
 
 // address=[0x3080b90]
 // Decompiled from _DWORD *__thiscall DName::DName(_DWORD *this, int a2)
-
  DName::DName(enum DNameStatus) {
   
   unsigned __int8 v3; // [esp+0h] [ebp-8h]
@@ -205,7 +198,6 @@ DName *__thiscall DName::DName(DName *this, const struct DName *a2)
 
 // address=[0x3080cf0]
 // Decompiled from DName *__thiscall DName::DName(DName *this)
-
  DName::DName(void) {
   
   *(_DWORD *)this = 0;
@@ -224,7 +216,6 @@ DName *__thiscall DName::DName(DName *this, const struct DName *a2)
 
 // address=[0x3080de0]
 // Decompiled from DName *__thiscall DName::DName(DName *this, unsigned __int64 a2)
-
  DName::DName(__int64) {
   
   char *v3; // [esp+0h] [ebp-28h]
@@ -265,7 +256,6 @@ DName *__thiscall DName::DName(DName *this, const struct DName *a2)
 
 // address=[0x3080fc0]
 // Decompiled from DName *__thiscall DName::DName(DName *this, unsigned __int64 a2)
-
  DName::DName(unsigned __int64) {
   
   char *v3; // [esp+0h] [ebp-24h]
@@ -296,9 +286,7 @@ DName *__thiscall DName::DName(DName *this, const struct DName *a2)
 
 
 // address=[0x30814b0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-_DWORD *__thiscall DName::operator=(_DWORD *this, _DWORD *a2)
-
+// Decompiled from _DWORD *__thiscall DName::operator=(_DWORD *this, _DWORD *a2)
 class DName &  DName::operator=(class DName const &) {
   
   *this = *a2;
@@ -309,7 +297,6 @@ class DName &  DName::operator=(class DName const &) {
 
 // address=[0x30814e0]
 // Decompiled from DName *__thiscall DName::operator=(DName *this, char a2)
-
 class DName &  DName::operator=(char) {
   
   *((_DWORD *)this + 1) &= 0xFFFFFF00;
@@ -330,7 +317,6 @@ class DName &  DName::operator=(char) {
 
 // address=[0x30815f0]
 // Decompiled from pDNameNode **__thiscall DName::operator=(pDNameNode **this, struct DName *a2)
-
 class DName &  DName::operator=(class DName *) {
   
   pDNameNode *v3; // [esp+0h] [ebp-Ch]
@@ -367,7 +353,6 @@ class DName &  DName::operator=(class DName *) {
 
 // address=[0x3081770]
 // Decompiled from DName *__thiscall DName::operator=(DName *this, char *a2)
-
 class DName &  DName::operator=(char const *) {
   
   int v2; // eax
@@ -390,7 +375,6 @@ class DName &  DName::operator=(char const *) {
 
 // address=[0x3081880]
 // Decompiled from _DWORD *__thiscall DName::operator=(_DWORD *this, int a2)
-
 class DName &  DName::operator=(enum DNameStatus) {
   
   this[1] &= ~0x100u;
@@ -418,7 +402,6 @@ class DName &  DName::operator=(enum DNameStatus) {
 
 // address=[0x3081e50]
 // Decompiled from DName *__thiscall DName::operator+(const struct DName *this, DName *a2, DName *a3)
-
 class DName  DName::operator+(class DName const &)const {
   
   _BYTE v4[8]; // [esp+0h] [ebp-Ch] BYREF
@@ -434,7 +417,6 @@ class DName  DName::operator+(class DName const &)const {
 
 // address=[0x3081ea0]
 // Decompiled from DName *__thiscall DName::operator+(const struct DName *this, DName *a2, char a3)
-
 class DName  DName::operator+(char)const {
   
   _BYTE v4[8]; // [esp+0h] [ebp-Ch] BYREF
@@ -450,7 +432,6 @@ class DName  DName::operator+(char)const {
 
 // address=[0x3081ef0]
 // Decompiled from DName *__thiscall DName::operator+(const struct DName *this, DName *a2, struct DName *a3)
-
 class DName  DName::operator+(class DName *)const {
   
   _BYTE v4[8]; // [esp+0h] [ebp-Ch] BYREF
@@ -466,7 +447,6 @@ class DName  DName::operator+(class DName *)const {
 
 // address=[0x3081f40]
 // Decompiled from DName *__thiscall DName::operator+(const struct DName *this, DName *a2, char *a3)
-
 class DName  DName::operator+(char const *)const {
   
   _BYTE v4[8]; // [esp+0h] [ebp-Ch] BYREF
@@ -482,7 +462,6 @@ class DName  DName::operator+(char const *)const {
 
 // address=[0x3081f90]
 // Decompiled from DName *__thiscall DName::operator+(const struct DName *this, DName *a2, int a3)
-
 class DName  DName::operator+(enum DNameStatus)const {
   
   _BYTE v4[8]; // [esp+0h] [ebp-Ch] BYREF
@@ -498,7 +477,6 @@ class DName  DName::operator+(enum DNameStatus)const {
 
 // address=[0x3081fe0]
 // Decompiled from DName *__thiscall DName::operator+=(DName *this, struct DNameNode **a2)
-
 class DName &  DName::operator+=(class DName const &) {
   
   int v2; // eax
@@ -524,7 +502,6 @@ class DName &  DName::operator+=(class DName const &) {
 
 // address=[0x3082060]
 // Decompiled from DName *__thiscall DName::operator+=(DName *this, char a2)
-
 class DName &  DName::operator+=(char) {
   
   struct DNameNode *v3; // [esp+0h] [ebp-Ch]
@@ -555,7 +532,6 @@ class DName &  DName::operator+=(char) {
 
 // address=[0x3082100]
 // Decompiled from DName *__thiscall DName::operator+=(DName *this, struct DName *a2)
-
 class DName &  DName::operator+=(class DName *) {
   
   int v2; // eax
@@ -592,7 +568,6 @@ class DName &  DName::operator+=(class DName *) {
 
 // address=[0x30821e0]
 // Decompiled from DName *__thiscall DName::operator+=(DName *this, char *a2)
-
 class DName &  DName::operator+=(char const *) {
   
   int v2; // eax
@@ -625,7 +600,6 @@ class DName &  DName::operator+=(char const *) {
 
 // address=[0x30822a0]
 // Decompiled from DName *__thiscall DName::operator+=(DName *this, int a2)
-
 class DName &  DName::operator+=(enum DNameStatus) {
   
   struct DNameNode *v2; // eax
@@ -647,7 +621,6 @@ class DName &  DName::operator+=(enum DNameStatus) {
 
 // address=[0x30823d0]
 // Decompiled from _DWORD *__thiscall DName::operator|=(_DWORD *this, DName *a2)
-
 class DName &  DName::operator|=(class DName const &) {
   
   if ( DName::status(this) != 3 && !DName::isValid(a2) )
@@ -658,7 +631,6 @@ class DName &  DName::operator|=(class DName const &) {
 
 // address=[0x30849a0]
 // Decompiled from char *__thiscall DName::dbGetString(DName *this)
-
 char *  DName::dbGetString(void)const {
   
   DName::getString(this, byte_4731EB8, 80);
@@ -668,7 +640,6 @@ char *  DName::dbGetString(void)const {
 
 // address=[0x3087fb0]
 // Decompiled from char __thiscall DName::getLastChar(DName *this)
-
 char  DName::getLastChar(void)const {
   
   if ( DName::isEmpty(this) )
@@ -680,7 +651,6 @@ char  DName::getLastChar(void)const {
 
 // address=[0x308a4d0]
 // Decompiled from char *__thiscall DName::getString(DName *this, char *a2, char *a3)
-
 char *  DName::getString(char *,char *)const {
   
   if ( DName::isEmpty(this) )
@@ -692,7 +662,6 @@ char *  DName::getString(char *,char *)const {
 
 // address=[0x308a530]
 // Decompiled from char *__thiscall DName::getString(DName *this, char *a2, int a3)
-
 char *  DName::getString(char *,int)const {
   
   if ( DName::isEmpty(this) )
@@ -716,7 +685,6 @@ char *  DName::getString(char *,int)const {
 
 // address=[0x308cd00]
 // Decompiled from int __thiscall DName::isArray(DName *this)
-
 int  DName::isArray(void)const {
   
   return (*((_DWORD *)this + 1) >> 11) & 1;
@@ -725,7 +693,6 @@ int  DName::isArray(void)const {
 
 // address=[0x308cd20]
 // Decompiled from int __thiscall DName::isComArray(DName *this)
-
 int  DName::isComArray(void)const {
   
   return (*((_DWORD *)this + 1) >> 14) & 1;
@@ -734,7 +701,6 @@ int  DName::isComArray(void)const {
 
 // address=[0x308cd40]
 // Decompiled from BOOL __thiscall DName::isEmpty(DName *this)
-
 int  DName::isEmpty(void)const {
   
   return *(_DWORD *)this == 0;
@@ -743,7 +709,6 @@ int  DName::isEmpty(void)const {
 
 // address=[0x308cdc0]
 // Decompiled from int __thiscall DName::isNoTE(DName *this)
-
 int  DName::isNoTE(void)const {
   
   return (*((_DWORD *)this + 1) >> 12) & 1;
@@ -752,7 +717,6 @@ int  DName::isNoTE(void)const {
 
 // address=[0x308cde0]
 // Decompiled from int __thiscall DName::isPinPtr(DName *this)
-
 int  DName::isPinPtr(void)const {
   
   return (*((_DWORD *)this + 1) >> 13) & 1;
@@ -761,7 +725,6 @@ int  DName::isPinPtr(void)const {
 
 // address=[0x308ce00]
 // Decompiled from int __thiscall DName::isPtrRef(DName *this)
-
 int  DName::isPtrRef(void)const {
   
   return (*((_DWORD *)this + 1) >> 8) & 1;
@@ -770,7 +733,6 @@ int  DName::isPtrRef(void)const {
 
 // address=[0x308ce20]
 // Decompiled from BOOL __thiscall DName::isUDC(DName *this)
-
 int  DName::isUDC(void)const {
   
   return !DName::isEmpty(this) && ((*((_DWORD *)this + 1) >> 9) & 1) != 0;
@@ -779,7 +741,6 @@ int  DName::isUDC(void)const {
 
 // address=[0x308ce70]
 // Decompiled from BOOL __thiscall DName::isUDTThunk(DName *this)
-
 int  DName::isUDTThunk(void)const {
   
   return !DName::isEmpty(this) && ((*((_DWORD *)this + 1) >> 10) & 1) != 0;
@@ -788,7 +749,6 @@ int  DName::isUDTThunk(void)const {
 
 // address=[0x308cec0]
 // Decompiled from int __thiscall DName::isVCallThunk(DName *this)
-
 int  DName::isVCallThunk(void)const {
   
   return (*((_DWORD *)this + 1) >> 15) & 1;
@@ -797,7 +757,6 @@ int  DName::isVCallThunk(void)const {
 
 // address=[0x308cee0]
 // Decompiled from BOOL __thiscall DName::isValid(DName *this)
-
 int  DName::isValid(void)const {
   
   return (char)*((_DWORD *)this + 1) <= 1;
@@ -806,7 +765,6 @@ int  DName::isValid(void)const {
 
 // address=[0x308cf20]
 // Decompiled from int __thiscall DName::length(DName *this)
-
 int  DName::length(void)const {
   
   if ( DName::isEmpty(this) )
@@ -818,7 +776,6 @@ int  DName::length(void)const {
 
 // address=[0x308d130]
 // Decompiled from void __thiscall DName::setIsArray(DName *this)
-
 void  DName::setIsArray(void) {
   
   *((_DWORD *)this + 1) |= 0x800u;
@@ -827,7 +784,6 @@ void  DName::setIsArray(void) {
 
 // address=[0x308d160]
 // Decompiled from void __thiscall DName::setIsComArray(DName *this)
-
 void  DName::setIsComArray(void) {
   
   *((_DWORD *)this + 1) |= 0x4000u;
@@ -836,7 +792,6 @@ void  DName::setIsComArray(void) {
 
 // address=[0x308d190]
 // Decompiled from void __thiscall DName::setIsNoTE(DName *this)
-
 void  DName::setIsNoTE(void) {
   
   *((_DWORD *)this + 1) |= 0x1000u;
@@ -845,7 +800,6 @@ void  DName::setIsNoTE(void) {
 
 // address=[0x308d1c0]
 // Decompiled from void __thiscall DName::setIsPinPtr(DName *this)
-
 void  DName::setIsPinPtr(void) {
   
   *((_DWORD *)this + 1) |= 0x2000u;
@@ -854,7 +808,6 @@ void  DName::setIsPinPtr(void) {
 
 // address=[0x308d1f0]
 // Decompiled from void __thiscall DName::setIsUDC(DName *this)
-
 void  DName::setIsUDC(void) {
   
   if ( !DName::isEmpty(this) )
@@ -864,7 +817,6 @@ void  DName::setIsUDC(void) {
 
 // address=[0x308d230]
 // Decompiled from void __thiscall DName::setIsVCallThunk(DName *this)
-
 void  DName::setIsVCallThunk(void) {
   
   *((_DWORD *)this + 1) |= 0x8000u;
@@ -873,7 +825,6 @@ void  DName::setIsVCallThunk(void) {
 
 // address=[0x308d260]
 // Decompiled from struct DName *__thiscall DName::setPtrRef(DName *this)
-
 class DName &  DName::setPtrRef(void) {
   
   *((_DWORD *)this + 1) |= 0x100u;
@@ -883,7 +834,6 @@ class DName &  DName::setPtrRef(void) {
 
 // address=[0x308d290]
 // Decompiled from int __thiscall DName::status(_DWORD *this)
-
 enum DNameStatus  DName::status(void)const {
   
   return (char)this[1];
@@ -892,7 +842,6 @@ enum DNameStatus  DName::status(void)const {
 
 // address=[0x3082540]
 // Decompiled from struct DNameNode **__thiscall DName::append(struct DNameNode **this, struct DNameNode *a2)
-
 void  DName::append(class DNameNode *) {
   
   struct DNameNode **result; // eax
@@ -925,7 +874,6 @@ void  DName::append(class DNameNode *) {
 
 // address=[0x3084b90]
 // Decompiled from void __thiscall DName::doPchar(DName *this, char *a2, int a3)
-
 void  DName::doPchar(char const *,int) {
   
   pcharNode *v3; // eax

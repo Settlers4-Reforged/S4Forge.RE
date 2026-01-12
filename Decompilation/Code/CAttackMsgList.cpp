@@ -4,7 +4,6 @@
 
 // address=[0x140a800]
 // Decompiled from char __thiscall CAttackMsgList::SendAttackMessage(CAttackMsgList *this, int a2, int a3)
-
 void  CAttackMsgList::SendAttackMessage(int,int) {
   
   char result; // al
@@ -68,7 +67,6 @@ void  CAttackMsgList::SendAttackMessage(int,int) {
 
 // address=[0x140a9c0]
 // Decompiled from CAttackMsgList *__thiscall CAttackMsgList::CAttackMsgList(CAttackMsgList *this)
-
  CAttackMsgList::CAttackMsgList(void) {
   
   `eh vector constructor iterator'(
@@ -83,7 +81,6 @@ void  CAttackMsgList::SendAttackMessage(int,int) {
 
 // address=[0x140aa00]
 // Decompiled from void __thiscall CAttackMsgList::~CAttackMsgList(CAttackMsgList *this)
-
  CAttackMsgList::~CAttackMsgList(void) {
   
   `eh vector destructor iterator'(this, 0x10u, 0xFu, CAttackMsgFilter::~CAttackMsgFilter);

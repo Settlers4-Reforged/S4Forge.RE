@@ -4,7 +4,6 @@
 
 // address=[0x14bce60]
 // Decompiled from CStateLobbyLoadMP *__cdecl CStateLobbyLoadMP::DynamicCreateFunc(void *a1)
-
 static class CGameState * __cdecl CStateLobbyLoadMP::DynamicCreateFunc(void *) {
   
   CStateLobbyLoadMP *C; // [esp+Ch] [ebp-10h]
@@ -19,7 +18,6 @@ static class CGameState * __cdecl CStateLobbyLoadMP::DynamicCreateFunc(void *) {
 
 // address=[0x14bcee0]
 // Decompiled from CStateLobbyLoadMP *__thiscall CStateLobbyLoadMP::CStateLobbyLoadMP(CStateLobbyLoadMP *this, int a2)
-
  CStateLobbyLoadMP::CStateLobbyLoadMP(void *) {
   
   int v3; // [esp+4h] [ebp-38h]
@@ -42,7 +40,6 @@ static class CGameState * __cdecl CStateLobbyLoadMP::DynamicCreateFunc(void *) {
 
 // address=[0x14bcfa0]
 // Decompiled from void __thiscall CStateLobbyLoadMP::~CStateLobbyLoadMP(CStateLobbyLoadMP *this)
-
  CStateLobbyLoadMP::~CStateLobbyLoadMP(void) {
   
   *(_DWORD *)this = &CStateLobbyLoadMP::_vftable_;
@@ -52,7 +49,6 @@ static class CGameState * __cdecl CStateLobbyLoadMP::DynamicCreateFunc(void *) {
 
 // address=[0x14bcfc0]
 // Decompiled from char __thiscall CStateLobbyLoadMP::Perform(CStateLobbyLoadMP *this)
-
 bool  CStateLobbyLoadMP::Perform(void) {
   
   DWORD v1; // esi
@@ -88,7 +84,6 @@ bool  CStateLobbyLoadMP::Perform(void) {
 
 // address=[0x14bd0b0]
 // Decompiled from char __thiscall CStateLobbyLoadMP::OnEvent(CStateLobbyLoadMP *this, struct CEvn_Event *a2)
-
 bool  CStateLobbyLoadMP::OnEvent(class CEvn_Event &) {
   
   return CStateLobbyGameSettings::OnEvent(this, a2);
@@ -97,7 +92,6 @@ bool  CStateLobbyLoadMP::OnEvent(class CEvn_Event &) {
 
 // address=[0x14bd0d0]
 // Decompiled from void __thiscall CStateLobbyLoadMP::CreateLobbyGameInfo(_BYTE *this, int a2, int a3)
-
 void  CStateLobbyLoadMP::CreateLobbyGameInfo(class CLanLobbyGameSettings &,std::wstring &) {
   
   void *v3; // [esp+0h] [ebp-2Ch]
@@ -125,7 +119,6 @@ void  CStateLobbyLoadMP::CreateLobbyGameInfo(class CLanLobbyGameSettings &,std::
 
 // address=[0x14bd200]
 // Decompiled from int __thiscall CStateLobbyLoadMP::UpdateGameTypeData(CStateLobbyLoadMP *this)
-
 void  CStateLobbyLoadMP::UpdateGameTypeData(void) {
   
   OnlineManager *Instance; // eax

@@ -4,7 +4,6 @@
 
 // address=[0x12fd600]
 // Decompiled from int __thiscall CTile::SectorId(CTile *this)
-
 int  CTile::SectorId(void)const {
   
   return (unsigned __int16)*((_DWORD *)this + 1);
@@ -13,7 +12,6 @@ int  CTile::SectorId(void)const {
 
 // address=[0x13064a0]
 // Decompiled from int __thiscall CTile::CenterX(CTile *this)
-
 int  CTile::CenterX(void)const {
   
   return (unsigned __int16)this->center;
@@ -22,7 +20,6 @@ int  CTile::CenterX(void)const {
 
 // address=[0x13064c0]
 // Decompiled from int __thiscall CTile::CenterY(CTile *this)
-
 int  CTile::CenterY(void)const {
   
   return (int)this->center >> 16;
@@ -30,9 +27,7 @@ int  CTile::CenterY(void)const {
 
 
 // address=[0x1306770]
-// Decompiled from // Microsoft VisualC 14/net runtime
-int __thiscall CTile::NextSquareTile(CTile *this)
-
+// Decompiled from int __thiscall CTile::NextSquareTile(CTile *this)
 int  CTile::NextSquareTile(void)const {
   
   return this->nextSquareTile;
@@ -41,7 +36,6 @@ int  CTile::NextSquareTile(void)const {
 
 // address=[0x13068f0]
 // Decompiled from DWORD __thiscall CTile::OwnerId(CTile *this)
-
 int  CTile::OwnerId(void)const {
   
   return this->type & 0xF;
@@ -50,7 +44,6 @@ int  CTile::OwnerId(void)const {
 
 // address=[0x130eaf0]
 // Decompiled from DWORD __thiscall CTile::EcoSectorId(CTile *this)
-
 int  CTile::EcoSectorId(void)const {
   
   return HIWORD(this->ecoSectorId);
@@ -59,7 +52,6 @@ int  CTile::EcoSectorId(void)const {
 
 // address=[0x133a160]
 // Decompiled from BOOL __thiscall CTile::TilingType(CTile *this)
-
 enum T_TILING_TYPE  CTile::TilingType(void)const {
   
   return (this->type & 0x8000000) != 0;
@@ -67,10 +59,7 @@ enum T_TILING_TYPE  CTile::TilingType(void)const {
 
 
 // address=[0x1346870]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-DWORD __thiscall CTile::LinkList(CTile *this)
-
+// Decompiled from DWORD __thiscall CTile::LinkList(CTile *this)
 class CLinkList &  CTile::LinkList(void)const {
   
   return this->LinkList;
@@ -78,10 +67,7 @@ class CLinkList &  CTile::LinkList(void)const {
 
 
 // address=[0x13469c0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-DWORD __thiscall CTile::Type(CTile *this)
-
+// Decompiled from DWORD __thiscall CTile::Type(CTile *this)
 int  CTile::Type(void)const {
   
   return this->type;
@@ -89,10 +75,7 @@ int  CTile::Type(void)const {
 
 
 // address=[0x1351a90]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-DWORD __thiscall CTile::CenterXY(CTile *this)
-
+// Decompiled from DWORD __thiscall CTile::CenterXY(CTile *this)
 int  CTile::CenterXY(void)const {
   
   return this->center;
@@ -101,7 +84,6 @@ int  CTile::CenterXY(void)const {
 
 // address=[0x15d6e90]
 // Decompiled from int __cdecl CTile::TileTypeOwnerCheckMask(char a1, int a2)
-
 static int __cdecl CTile::TileTypeOwnerCheckMask(int,int) {
   
   int v3; // [esp+0h] [ebp-4h]
@@ -115,7 +97,6 @@ static int __cdecl CTile::TileTypeOwnerCheckMask(int,int) {
 
 // address=[0x15d6ed0]
 // Decompiled from int __cdecl CTile::TileTypeOwnerCheckMaskFromPlayerBits(int a1)
-
 static int __cdecl CTile::TileTypeOwnerCheckMaskFromPlayerBits(int) {
   
   if ( ((32 * a1) & 0xFFFFE00F) != 0
@@ -132,9 +113,7 @@ static int __cdecl CTile::TileTypeOwnerCheckMaskFromPlayerBits(int) {
 
 
 // address=[0x15e7360]
-// Decompiled from // MFC 3.1-14.0 32bit
-CTile *__thiscall CTile::SetLinkList(CTile *this, struct CLinkList *a2)
-
+// Decompiled from CTile *__thiscall CTile::SetLinkList(CTile *this, struct CLinkList *a2)
 void  CTile::SetLinkList(class CLinkList &) {
   
   CTile *result; // eax
@@ -147,7 +126,6 @@ void  CTile::SetLinkList(class CLinkList &) {
 
 // address=[0x15e7380]
 // Decompiled from DWORD __thiscall CTile::SetSize(CTile *this, int a2)
-
 void  CTile::SetSize(int) {
   
   DWORD result; // eax
@@ -177,9 +155,7 @@ void  CTile::SetSize(int) {
 
 
 // address=[0x15e7410]
-// Decompiled from // MFC 3.1-14.0 32bit
-CTile *__thiscall CTile::SetType(CTile *this, DWORD a2)
-
+// Decompiled from CTile *__thiscall CTile::SetType(CTile *this, DWORD a2)
 void  CTile::SetType(int) {
   
   CTile *result; // eax
@@ -192,7 +168,6 @@ void  CTile::SetType(int) {
 
 // address=[0x15e74b0]
 // Decompiled from int __cdecl CTile::TileType(int a1)
-
 static int __cdecl CTile::TileType(int) {
   
   return a1 | (16 << a1);
@@ -201,7 +176,6 @@ static int __cdecl CTile::TileType(int) {
 
 // address=[0x15e7510]
 // Decompiled from bool __thiscall CTile::Unused(CTile *this)
-
 bool  CTile::Unused(void)const {
   
   return this->type == -1;
@@ -210,7 +184,6 @@ bool  CTile::Unused(void)const {
 
 // address=[0x15e7590]
 // Decompiled from bool __thiscall CTile::Used(CTile *this)
-
 bool  CTile::Used(void)const {
   
   return this->type < 0xFFFFFFFD;
@@ -219,7 +192,6 @@ bool  CTile::Used(void)const {
 
 // address=[0x15f4220]
 // Decompiled from void __thiscall CTile::ChangeSize(CTile *this, int a2)
-
 void  CTile::ChangeSize(int) {
   
   int v2; // eax
@@ -230,10 +202,7 @@ void  CTile::ChangeSize(int) {
 
 
 // address=[0x15f4a70]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-DWORD __thiscall CTile::NextFree(CTile *this)
-
+// Decompiled from DWORD __thiscall CTile::NextFree(CTile *this)
 int  CTile::NextFree(void)const {
   
   return this->center;
@@ -241,10 +210,7 @@ int  CTile::NextFree(void)const {
 
 
 // address=[0x15f5340]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-DWORD __thiscall CTile::PrevFree(CTile *this)
-
+// Decompiled from DWORD __thiscall CTile::PrevFree(CTile *this)
 int  CTile::PrevFree(void)const {
   
   return this->ecoSectorId;
@@ -252,9 +218,7 @@ int  CTile::PrevFree(void)const {
 
 
 // address=[0x15f56f0]
-// Decompiled from // MFC 3.1-14.0 32bit
-CTile *__thiscall CTile::SetCenterXY(CTile *this, DWORD a2)
-
+// Decompiled from CTile *__thiscall CTile::SetCenterXY(CTile *this, DWORD a2)
 void  CTile::SetCenterXY(int) {
   
   CTile *result; // eax
@@ -267,7 +231,6 @@ void  CTile::SetCenterXY(int) {
 
 // address=[0x15f5710]
 // Decompiled from CTile *__thiscall CTile::SetEcoSectorId(CTile *this, __int16 a2)
-
 void  CTile::SetEcoSectorId(int) {
   
   CTile *result; // eax
@@ -280,7 +243,6 @@ void  CTile::SetEcoSectorId(int) {
 
 // address=[0x15f5840]
 // Decompiled from CTile *__thiscall CTile::SetSectorId(CTile *this, __int16 a2)
-
 void  CTile::SetSectorId(int) {
   
   CTile *result; // eax
@@ -293,7 +255,6 @@ void  CTile::SetSectorId(int) {
 
 // address=[0x15f5900]
 // Decompiled from DWORD __thiscall CTile::Size(CTile *this)
-
 int  CTile::Size(void)const {
   
   return (this->type & 0x3FE000) >> 13;
@@ -302,7 +263,6 @@ int  CTile::Size(void)const {
 
 // address=[0x15f59d0]
 // Decompiled from int __cdecl CTile::TileTypeToOwnerId(char a1)
-
 static int __cdecl CTile::TileTypeToOwnerId(int) {
   
   return a1 & 0xF;
@@ -311,7 +271,6 @@ static int __cdecl CTile::TileTypeToOwnerId(int) {
 
 // address=[0x15e6f80]
 // Decompiled from CTile *__thiscall CTile::Init(CTile *this, DWORD a2, DWORD a3, struct CLinkList *a4)
-
 void  CTile::Init(int,int,class CLinkList &) {
   
   CTile *result; // eax
@@ -327,7 +286,6 @@ void  CTile::Init(int,int,class CLinkList &) {
 
 // address=[0x15e6fc0]
 // Decompiled from CTile *__thiscall CTile::InitPseudoTile(CTile *this, int a2, struct CLinkList *a3)
-
 void  CTile::InitPseudoTile(int,class CLinkList &) {
   
   CTile *result; // eax

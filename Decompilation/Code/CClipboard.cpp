@@ -4,7 +4,6 @@
 
 // address=[0x147f5e0]
 // Decompiled from int __stdcall CClipboard::CopyTextToClipboard(char *Str)
-
 void  CClipboard::CopyTextToClipboard(char const *) {
   
   int result; // eax
@@ -33,7 +32,6 @@ void  CClipboard::CopyTextToClipboard(char const *) {
 
 // address=[0x147f690]
 // Decompiled from int __thiscall CClipboard::CopyTextToClipboard(void *this, void *a2)
-
 void  CClipboard::CopyTextToClipboard(std::string const &) {
   
   int result; // eax
@@ -49,7 +47,6 @@ void  CClipboard::CopyTextToClipboard(std::string const &) {
 
 // address=[0x147f6c0]
 // Decompiled from BOOL __stdcall CClipboard::GetTextFromClipboard(void *a1, int a2)
-
 void  CClipboard::GetTextFromClipboard(std::string &,int) {
   
   BOOL result; // eax
@@ -78,7 +75,6 @@ void  CClipboard::GetTextFromClipboard(std::string &,int) {
 
 // address=[0x147f7f0]
 // Decompiled from CClipboard *__thiscall CClipboard::CClipboard(CClipboard *this)
-
  CClipboard::CClipboard(void) {
   
   IClipboard::IClipboard(this);

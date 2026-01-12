@@ -4,7 +4,6 @@
 
 // address=[0x1508170]
 // Decompiled from CPlayerStatisticData *__thiscall CPlayerStatisticData::IncreaseMushroomFarmsDestroyed(CPlayerStatisticData *this)
-
 void  CPlayerStatisticData::IncreaseMushroomFarmsDestroyed(void) {
   
   CPlayerStatisticData *result; // eax
@@ -16,10 +15,7 @@ void  CPlayerStatisticData::IncreaseMushroomFarmsDestroyed(void) {
 
 
 // address=[0x160daa0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CPlayerStatisticData::MushroomFarmsDestroyed(CPlayerStatisticData *this)
-
+// Decompiled from int __thiscall CPlayerStatisticData::MushroomFarmsDestroyed(CPlayerStatisticData *this)
 int  CPlayerStatisticData::MushroomFarmsDestroyed(void)const {
   
   return *(_DWORD *)this;
@@ -27,10 +23,7 @@ int  CPlayerStatisticData::MushroomFarmsDestroyed(void)const {
 
 
 // address=[0x160db50]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CPlayerStatisticData::ServantsFreed(CPlayerStatisticData *this)
-
+// Decompiled from int __thiscall CPlayerStatisticData::ServantsFreed(CPlayerStatisticData *this)
 int  CPlayerStatisticData::ServantsFreed(void)const {
   
   return *((_DWORD *)this + 1);
@@ -39,7 +32,6 @@ int  CPlayerStatisticData::ServantsFreed(void)const {
 
 // address=[0x1474c70]
 // Decompiled from void *__thiscall CPlayerStatisticData::Clear(CPlayerStatisticData *this)
-
 void  CPlayerStatisticData::Clear(void) {
   
   return j__memset(this, 0, 8u);

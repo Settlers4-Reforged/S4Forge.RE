@@ -4,7 +4,6 @@
 
 // address=[0x1315590]
 // Decompiled from int __thiscall COneVehicleTypeIterator::Init(COneVehicleTypeIterator *this, int a2, int a3)
-
 void  COneVehicleTypeIterator::Init(int,int) {
   
   int result; // eax
@@ -17,7 +16,6 @@ void  COneVehicleTypeIterator::Init(int,int) {
 
 // address=[0x13155c0]
 // Decompiled from int __thiscall COneVehicleTypeIterator::FirstVehicle(COneVehicleTypeIterator *this)
-
 int  COneVehicleTypeIterator::FirstVehicle(void) {
   
   *((_DWORD *)this + 1) = CVehicleMgr::GetFirstVehicleId(
@@ -30,7 +28,6 @@ int  COneVehicleTypeIterator::FirstVehicle(void) {
 
 // address=[0x13155f0]
 // Decompiled from int __thiscall COneVehicleTypeIterator::NextVehicle(COneVehicleTypeIterator *this)
-
 int  COneVehicleTypeIterator::NextVehicle(void) {
   
   int v1; // eax
@@ -49,7 +46,6 @@ int  COneVehicleTypeIterator::NextVehicle(void) {
 
 // address=[0x1315640]
 // Decompiled from int __thiscall COneVehicleTypeIterator::NextVehicleIfCurrentIsNotValid(COneVehicleTypeIterator *this)
-
 int  COneVehicleTypeIterator::NextVehicleIfCurrentIsNotValid(void) {
   
   if ( CVehicleIteratorBase::VehicleValid(this, *((_DWORD *)this + 1)) )
@@ -61,7 +57,6 @@ int  COneVehicleTypeIterator::NextVehicleIfCurrentIsNotValid(void) {
 
 // address=[0x1317290]
 // Decompiled from COneVehicleTypeIterator *__thiscall COneVehicleTypeIterator::COneVehicleTypeIterator(COneVehicleTypeIterator *this)
-
  COneVehicleTypeIterator::COneVehicleTypeIterator(void) {
   
   return this;

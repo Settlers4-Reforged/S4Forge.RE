@@ -4,7 +4,6 @@
 
 // address=[0x13fff00]
 // Decompiled from int __cdecl CBuildingSupplyPriority::New(int a1)
-
 static class CPersistence * __cdecl CBuildingSupplyPriority::New(std::istream &) {
   
   if ( operator new(0x10u) )
@@ -16,7 +15,6 @@ static class CPersistence * __cdecl CBuildingSupplyPriority::New(std::istream &)
 
 // address=[0x140aae0]
 // Decompiled from _DWORD *__thiscall CBuildingSupplyPriority::CBuildingSupplyPriority(_DWORD *this, int a2)
-
  CBuildingSupplyPriority::CBuildingSupplyPriority(std::istream &) {
   
   _DWORD *v2; // eax
@@ -81,7 +79,6 @@ static class CPersistence * __cdecl CBuildingSupplyPriority::New(std::istream &)
 
 // address=[0x140aca0]
 // Decompiled from int __thiscall CBuildingSupplyPriority::Store(struct CPersistence *this, struct std::ostream *a2)
-
 void  CBuildingSupplyPriority::Store(std::ostream &) {
   
   _BYTE v3[12]; // [esp+4h] [ebp-88h] BYREF
@@ -161,10 +158,7 @@ void  CBuildingSupplyPriority::Store(std::ostream &) {
 
 
 // address=[0x140aea0]
-// Decompiled from CBuildingSupplyPriority *__thiscall CBuildingSupplyPriority::CBuildingSupplyPriority(
-        CBuildingSupplyPriority *this,
-        int a2)
-
+// Decompiled from CBuildingSupplyPriority *__thiscall CBuildingSupplyPriority::CBuildingSupplyPriority(  CBuildingSupplyPriority *this,  int a2)
  CBuildingSupplyPriority::CBuildingSupplyPriority(int) {
   
   CPersistence::CPersistence(this);
@@ -193,7 +187,6 @@ void  CBuildingSupplyPriority::Store(std::ostream &) {
 
 // address=[0x140af60]
 // Decompiled from int __thiscall CBuildingSupplyPriority::GetPriority(void *this, int a2, int a3)
-
 int  CBuildingSupplyPriority::GetPriority(enum BUILDING_TYPES,enum PILE_TYPES) {
   
   _BYTE v4[12]; // [esp+4h] [ebp-68h] BYREF
@@ -265,7 +258,6 @@ int  CBuildingSupplyPriority::GetPriority(enum BUILDING_TYPES,enum PILE_TYPES) {
 
 // address=[0x140b0f0]
 // Decompiled from int __thiscall CBuildingSupplyPriority::GetNumberOfSupplyBuildings(void *this, int a2, int a3)
-
 int  CBuildingSupplyPriority::GetNumberOfSupplyBuildings(enum PILE_TYPES,struct SDistributionInfo * const) {
   
   _DWORD *v3; // eax
@@ -343,7 +335,6 @@ int  CBuildingSupplyPriority::GetNumberOfSupplyBuildings(enum PILE_TYPES,struct 
 
 // address=[0x140b280]
 // Decompiled from int __thiscall CBuildingSupplyPriority::GetNumberOfSupplyBuildings(void *this, int a2)
-
 int  CBuildingSupplyPriority::GetNumberOfSupplyBuildings(enum PILE_TYPES) {
   
   std::_Iterator_base12 *v3; // [esp-4h] [ebp-80h]
@@ -413,7 +404,6 @@ int  CBuildingSupplyPriority::GetNumberOfSupplyBuildings(enum PILE_TYPES) {
 
 // address=[0x140b3d0]
 // Decompiled from int __thiscall CBuildingSupplyPriority::ChangePriority(void *this, int a2, int a3)
-
 void  CBuildingSupplyPriority::ChangePriority(enum PILE_TYPES,struct SDistributionInfo * const) {
   
   int v3; // eax
@@ -496,7 +486,6 @@ void  CBuildingSupplyPriority::ChangePriority(enum PILE_TYPES,struct SDistributi
 
 // address=[0x140b590]
 // Decompiled from int __thiscall CBuildingSupplyPriority::ChangePriority(void *this, int a2, int a3, int a4)
-
 void  CBuildingSupplyPriority::ChangePriority(enum PILE_TYPES,enum BUILDING_TYPES,int) {
   
   int *v4; // eax
@@ -574,7 +563,6 @@ void  CBuildingSupplyPriority::ChangePriority(enum PILE_TYPES,enum BUILDING_TYPE
 
 // address=[0x1417110]
 // Decompiled from int __thiscall CBuildingSupplyPriority::ClassID(CBuildingSupplyPriority *this)
-
 unsigned long  CBuildingSupplyPriority::ClassID(void)const {
   
   return CBuildingSupplyPriority::m_iClassID;
@@ -583,7 +571,6 @@ unsigned long  CBuildingSupplyPriority::ClassID(void)const {
 
 // address=[0x14380c0]
 // Decompiled from void __thiscall CBuildingSupplyPriority::~CBuildingSupplyPriority(CDaoIndexFieldInfo *this)
-
  CBuildingSupplyPriority::~CBuildingSupplyPriority(void) {
   
   std::map<int,std::map<int,int>>::~map<int,std::map<int,int>>((char *)this + 4, this);
@@ -595,7 +582,6 @@ unsigned long  CBuildingSupplyPriority::ClassID(void)const {
 
 // address=[0x140b740]
 // Decompiled from int __thiscall CBuildingSupplyPriority::CreateRomanPriorities(CBuildingSupplyPriority *this)
-
 void  CBuildingSupplyPriority::CreateRomanPriorities(void) {
   
   int IntArray; // esi
@@ -739,7 +725,6 @@ void  CBuildingSupplyPriority::CreateRomanPriorities(void) {
 
 // address=[0x140bbe0]
 // Decompiled from int __thiscall CBuildingSupplyPriority::CreateVikingPriorities(CBuildingSupplyPriority *this)
-
 void  CBuildingSupplyPriority::CreateVikingPriorities(void) {
   
   int IntArray; // esi
@@ -925,7 +910,6 @@ void  CBuildingSupplyPriority::CreateVikingPriorities(void) {
 
 // address=[0x140c1f0]
 // Decompiled from int __thiscall CBuildingSupplyPriority::CreateMayaPriorities(CBuildingSupplyPriority *this)
-
 void  CBuildingSupplyPriority::CreateMayaPriorities(void) {
   
   int IntArray; // esi
@@ -1097,7 +1081,6 @@ void  CBuildingSupplyPriority::CreateMayaPriorities(void) {
 
 // address=[0x140c790]
 // Decompiled from int __thiscall CBuildingSupplyPriority::CreateTrojanPriorities(CBuildingSupplyPriority *this)
-
 void  CBuildingSupplyPriority::CreateTrojanPriorities(void) {
   
   int IntArray; // esi
@@ -1274,7 +1257,6 @@ void  CBuildingSupplyPriority::CreateTrojanPriorities(void) {
 
 // address=[0x140cd60]
 // Decompiled from int __thiscall CBuildingSupplyPriority::CreateAllRacesPriorities(CBuildingSupplyPriority *this)
-
 void  CBuildingSupplyPriority::CreateAllRacesPriorities(void) {
   
   _DWORD *IntArray; // esi

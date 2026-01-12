@@ -4,7 +4,6 @@
 
 // address=[0x14027a0]
 // Decompiled from int __cdecl CVikingCatapult::New(int a1)
-
 static class CPersistence * __cdecl CVikingCatapult::New(std::istream &) {
   
   if ( CVikingCatapult::operator new(0xD8u) )
@@ -16,7 +15,6 @@ static class CPersistence * __cdecl CVikingCatapult::New(std::istream &) {
 
 // address=[0x153eeb0]
 // Decompiled from unsigned int __cdecl CVikingCatapult::operator new(unsigned int a1)
-
 static void * __cdecl CVikingCatapult::operator new(unsigned int) {
   
   return CVehicleMgr::Alloc((CVehicleMgr *)&g_cVehicleMgr, a1);
@@ -25,7 +23,6 @@ static void * __cdecl CVikingCatapult::operator new(unsigned int) {
 
 // address=[0x153eed0]
 // Decompiled from void __cdecl CVikingCatapult::operator delete(void *a1)
-
 static void __cdecl CVikingCatapult::operator delete(void *) {
   
   CVehicleMgr::Dealloc((CVehicleMgr *)&g_cVehicleMgr, a1);
@@ -34,7 +31,6 @@ static void __cdecl CVikingCatapult::operator delete(void *) {
 
 // address=[0x153ef10]
 // Decompiled from _DWORD *__thiscall CVikingCatapult::CVikingCatapult(_DWORD *this, int a2)
-
  CVikingCatapult::CVikingCatapult(std::istream &) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
@@ -62,7 +58,6 @@ static void __cdecl CVikingCatapult::operator delete(void *) {
 
 // address=[0x153efd0]
 // Decompiled from int __thiscall CVikingCatapult::Store(void *this, struct std::ostream *a2)
-
 void  CVikingCatapult::Store(std::ostream &) {
   
   int v3[2]; // [esp+0h] [ebp-8h] BYREF
@@ -76,7 +71,6 @@ void  CVikingCatapult::Store(std::ostream &) {
 
 // address=[0x153fb00]
 // Decompiled from void __thiscall CVikingCatapult::~CVikingCatapult(CVikingCatapult *this)
-
  CVikingCatapult::~CVikingCatapult(void) {
   
   CCatapult::~CCatapult(this);
@@ -85,7 +79,6 @@ void  CVikingCatapult::Store(std::ostream &) {
 
 // address=[0x153fd80]
 // Decompiled from int __thiscall CVikingCatapult::ClassID(CVikingCatapult *this)
-
 unsigned long  CVikingCatapult::ClassID(void)const {
   
   return CVikingCatapult::m_iClassID;
@@ -93,10 +86,7 @@ unsigned long  CVikingCatapult::ClassID(void)const {
 
 
 // address=[0x153fdf0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CVikingCatapult::IncreaseAmmo(CVikingCatapult *this, int a2)
-
+// Decompiled from void __thiscall CVikingCatapult::IncreaseAmmo(CVikingCatapult *this, int a2)
 void  CVikingCatapult::IncreaseAmmo(int) {
   
   ;
@@ -107,16 +97,7 @@ void  CVikingCatapult::IncreaseAmmo(int) {
 // [Decompilation failed for static unsigned long CVikingCatapult::m_iClassID]
 
 // address=[0x153f010]
-// Decompiled from CVikingCatapult *__thiscall CVikingCatapult::CVikingCatapult(
-        CVikingCatapult *this,
-        int a2,
-        int a3,
-        int a4,
-        int a5,
-        int a6,
-        int a7,
-        bool a8)
-
+// Decompiled from CVikingCatapult *__thiscall CVikingCatapult::CVikingCatapult(  CVikingCatapult *this,  int a2,  int a3,  int a4,  int a5,  int a6,  int a7,  bool a8)
  CVikingCatapult::CVikingCatapult(int,int,int,int,int,int,bool) {
   
   CCatapult::CCatapult(this, a2, a3, a4, a5, a6, a7, a8);
@@ -128,7 +109,6 @@ void  CVikingCatapult::IncreaseAmmo(int) {
 
 // address=[0x153f060]
 // Decompiled from bool __thiscall CVikingCatapult::EnoughAmmo(CVikingCatapult *this)
-
 bool  CVikingCatapult::EnoughAmmo(void)const {
   
   int v1; // eax
@@ -145,7 +125,6 @@ bool  CVikingCatapult::EnoughAmmo(void)const {
 
 // address=[0x153f0d0]
 // Decompiled from int __thiscall CVikingCatapult::AmmoAmount(CVikingCatapult *this)
-
 unsigned int  CVikingCatapult::AmmoAmount(void)const {
   
   int v1; // eax
@@ -162,7 +141,6 @@ unsigned int  CVikingCatapult::AmmoAmount(void)const {
 
 // address=[0x153f130]
 // Decompiled from void __thiscall CVikingCatapult::DecreaseAmmo(CVikingCatapult *this)
-
 void  CVikingCatapult::DecreaseAmmo(void) {
   
   int v1; // eax

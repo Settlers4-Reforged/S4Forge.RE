@@ -3,16 +3,7 @@
 // Definitions for class CHeightBlob
 
 // address=[0x2fccbb0]
-// Decompiled from CHeightBlob *__thiscall CHeightBlob::CHeightBlob(
-        CHeightBlob *this,
-        int a2,
-        int a3,
-        int a4,
-        int a5,
-        int a6,
-        int a7,
-        struct CCheckLayer *a8)
-
+// Decompiled from CHeightBlob *__thiscall CHeightBlob::CHeightBlob(  CHeightBlob *this,  int a2,  int a3,  int a4,  int a5,  int a6,  int a7,  struct CCheckLayer *a8)
  CHeightBlob::CHeightBlob(int,int,int,int,int,int,class CCheckLayer *) {
   
   CBlob::CBlob(this, a2, a3, a4, a5, 0, a6, a7, a8);
@@ -35,7 +26,6 @@
 
 // address=[0x2fccce0]
 // Decompiled from __int16 __thiscall CHeightBlob::fillBlob(CCheckLayer **this, int a2, int a3)
-
 void  CHeightBlob::fillBlob(int,int) {
   
   int v3; // eax
@@ -162,7 +152,6 @@ void  CHeightBlob::fillBlob(int,int) {
 
 // address=[0x2fcd100]
 // Decompiled from int __thiscall CHeightBlob::processFillPoint(CHeightBlob *this, int a2, int a3)
-
 void  CHeightBlob::processFillPoint(int,int) {
   
   int result; // eax

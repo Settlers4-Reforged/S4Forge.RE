@@ -4,7 +4,6 @@
 
 // address=[0x2f3ee40]
 // Decompiled from CConditionSet *__thiscall CConditionSet::CConditionSet(CConditionSet *this)
-
  CConditionSet::CConditionSet(void) {
   
   CDynList *v3; // [esp+Ch] [ebp-14h]
@@ -22,7 +21,6 @@
 
 // address=[0x2f3eec0]
 // Decompiled from CDynList **__thiscall CConditionSet::~CConditionSet(CDynList **this)
-
  CConditionSet::~CConditionSet(void) {
   
   CDynList **result; // eax
@@ -36,7 +34,6 @@
 
 // address=[0x2f3ef00]
 // Decompiled from int __thiscall CConditionSet::size(CDynList **this)
-
 int  CConditionSet::size(void) {
   
   return CDynList::size(*this);
@@ -45,7 +42,6 @@ int  CConditionSet::size(void) {
 
 // address=[0x2f3ef20]
 // Decompiled from int __thiscall CConditionSet::elementAt(CDynList **this, int a2)
-
 class CCondition *  CConditionSet::elementAt(int) {
   
   return CDynList::elementAt(*this, a2);
@@ -54,7 +50,6 @@ class CCondition *  CConditionSet::elementAt(int) {
 
 // address=[0x2f3ef40]
 // Decompiled from void __thiscall CConditionSet::NewMayProblem(CConditionSet *this, int a2, struct CParam *a3)
-
 void  CConditionSet::NewMayProblem(int,class CParam *) {
   
   COptimizeOptions *v4; // [esp+10h] [ebp-14h]
@@ -71,13 +66,7 @@ void  CConditionSet::NewMayProblem(int,class CParam *) {
 
 
 // address=[0x2f3efe0]
-// Decompiled from // public: void __thiscall CConditionSet::NewMayProblem(int,class CParam *,class COptimizeOptions *)
-void __thiscall CConditionSet::NewMayProblem_0(
-        CConditionSet *this,
-        int a2,
-        struct CParam *a3,
-        struct COptimizeOptions *a4)
-
+// Decompiled from void __thiscall CConditionSet::NewMayProblem_0(  CConditionSet *this,  int a2,  struct CParam *a3,  struct COptimizeOptions *a4)
 void  CConditionSet::NewMayProblem(int,class CParam *,class COptimizeOptions *) {
   
   *((_DWORD *)a4 + 4) = 0;
@@ -87,7 +76,6 @@ void  CConditionSet::NewMayProblem(int,class CParam *,class COptimizeOptions *) 
 
 // address=[0x2f3f010]
 // Decompiled from void __thiscall CConditionSet::NewProblem(CConditionSet *this, int a2, struct CParam *a3)
-
 void  CConditionSet::NewProblem(int,class CParam *) {
   
   struct COptimizeOptions *v4; // [esp+10h] [ebp-14h]
@@ -104,7 +92,6 @@ void  CConditionSet::NewProblem(int,class CParam *) {
 
 // address=[0x2f3f0a0]
 // Decompiled from int __thiscall CConditionSet::NewProblem(CDynList **this, int a2, struct CParam *a3, struct COptimizeOptions *a4)
-
 void  CConditionSet::NewProblem(int,class CParam *,class COptimizeOptions *) {
   
   struct CDynListEntry *v5; // [esp+10h] [ebp-24h]
@@ -137,9 +124,7 @@ void  CConditionSet::NewProblem(int,class CParam *,class COptimizeOptions *) {
 
 
 // address=[0x2f3f1e0]
-// Decompiled from // public: void __thiscall CConditionSet::Ausgabe(void)
-int __thiscall CConditionSet::Ausgabe(CDynList **this)
-
+// Decompiled from int __thiscall CConditionSet::Ausgabe(CDynList **this)
 void  CConditionSet::Ausgabe(void) {
   
   int result; // eax

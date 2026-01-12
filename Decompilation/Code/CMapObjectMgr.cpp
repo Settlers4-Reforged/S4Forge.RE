@@ -4,7 +4,6 @@
 
 // address=[0x12fd030]
 // Decompiled from int __cdecl CMapObjectMgr::EntityPtr(int a1)
-
 static class IEntity * __cdecl CMapObjectMgr::EntityPtr(int) {
   
   if ( !CMapObjectMgr::ValidEntityId(a1) && BBSupportDbgReport(2, string__2, 212, "ValidEntityId( _iId )") == 1 )
@@ -15,7 +14,6 @@ static class IEntity * __cdecl CMapObjectMgr::EntityPtr(int) {
 
 // address=[0x12fd860]
 // Decompiled from bool __cdecl CMapObjectMgr::ValidEntityId(unsigned int a1)
-
 static bool __cdecl CMapObjectMgr::ValidEntityId(int) {
   
   return a1 <= CMapObjectMgr::m_iMaxLastUsedId;
@@ -24,7 +22,6 @@ static bool __cdecl CMapObjectMgr::ValidEntityId(int) {
 
 // address=[0x13094c0]
 // Decompiled from int __cdecl CMapObjectMgr::Entity(int a1)
-
 static class IEntity & __cdecl CMapObjectMgr::Entity(int) {
   
   if ( !CMapObjectMgr::ValidUsedEntityId(a1) && BBSupportDbgReport(2, string__2, 228, "ValidUsedEntityId( _iId )") == 1 )
@@ -35,7 +32,6 @@ static class IEntity & __cdecl CMapObjectMgr::Entity(int) {
 
 // address=[0x13096b0]
 // Decompiled from bool __cdecl CMapObjectMgr::ValidUsedEntityId(unsigned int a1)
-
 static bool __cdecl CMapObjectMgr::ValidUsedEntityId(int) {
   
   return a1 <= CMapObjectMgr::m_iLastUsedId && CMapObjectMgr::m_vEntities[a1];
@@ -44,7 +40,6 @@ static bool __cdecl CMapObjectMgr::ValidUsedEntityId(int) {
 
 // address=[0x130ee70]
 // Decompiled from int __cdecl CMapObjectMgr::GetUniqueId(unsigned int a1)
-
 static int __cdecl CMapObjectMgr::GetUniqueId(int) {
   
   int v3; // [esp+4h] [ebp-4h]
@@ -61,7 +56,6 @@ static int __cdecl CMapObjectMgr::GetUniqueId(int) {
 
 // address=[0x130f140]
 // Decompiled from void **__cdecl CMapObjectMgr::MovingEntity(int a1)
-
 static class IMovingEntity & __cdecl CMapObjectMgr::MovingEntity(int) {
   
   void **v2; // [esp+0h] [ebp-4h]
@@ -80,7 +74,6 @@ static class IMovingEntity & __cdecl CMapObjectMgr::MovingEntity(int) {
 
 // address=[0x1439c10]
 // Decompiled from int CMapObjectMgr::LastUsedId()
-
 static int __cdecl CMapObjectMgr::LastUsedId(void) {
   
   return CMapObjectMgr::m_iLastUsedId;
@@ -89,7 +82,6 @@ static int __cdecl CMapObjectMgr::LastUsedId(void) {
 
 // address=[0x14aaa30]
 // Decompiled from int CMapObjectMgr::CRCLogicUpdate()
-
 static unsigned int __cdecl CMapObjectMgr::CRCLogicUpdate(void) {
   
   return CMapObjectMgr::m_uCRCLogicUpdate;
@@ -98,7 +90,6 @@ static unsigned int __cdecl CMapObjectMgr::CRCLogicUpdate(void) {
 
 // address=[0x15560f0]
 // Decompiled from CMapObjectMgr *__thiscall CMapObjectMgr::CMapObjectMgr(CMapObjectMgr *this)
-
  CMapObjectMgr::CMapObjectMgr(void) {
   
   int FreeSlot; // eax
@@ -167,7 +158,6 @@ static unsigned int __cdecl CMapObjectMgr::CRCLogicUpdate(void) {
 
 // address=[0x1556330]
 // Decompiled from int __thiscall CMapObjectMgr::~CMapObjectMgr(CMapObjectMgr *this)
-
  CMapObjectMgr::~CMapObjectMgr(void) {
   
   int i; // [esp+14h] [ebp-10h]
@@ -207,7 +197,6 @@ static unsigned int __cdecl CMapObjectMgr::CRCLogicUpdate(void) {
 
 // address=[0x15564b0]
 // Decompiled from int CMapObjectMgr::GetFreeSlot()
-
 static int __cdecl CMapObjectMgr::GetFreeSlot(void) {
   
   int i; // [esp+8h] [ebp-4h]
@@ -234,7 +223,6 @@ static int __cdecl CMapObjectMgr::GetFreeSlot(void) {
 
 // address=[0x1556580]
 // Decompiled from int __cdecl CMapObjectMgr::RegisterEntity(int a1, struct IEntity *pEntity, bool a3)
-
 static void __cdecl CMapObjectMgr::RegisterEntity(int,class IEntity *,bool) {
   
   int result; // eax
@@ -296,7 +284,6 @@ static void __cdecl CMapObjectMgr::RegisterEntity(int,class IEntity *,bool) {
 
 // address=[0x1556710]
 // Decompiled from int __cdecl CMapObjectMgr::AssignNewUniqueId(int a1)
-
 static void __cdecl CMapObjectMgr::AssignNewUniqueId(int) {
   
   int result; // eax
@@ -318,7 +305,6 @@ static void __cdecl CMapObjectMgr::AssignNewUniqueId(int) {
 
 // address=[0x1556760]
 // Decompiled from int __thiscall CMapObjectMgr::Kill(_DWORD *this, int a2, int a3)
-
 void  CMapObjectMgr::Kill(int,int) {
   
   int v3; // eax
@@ -441,7 +427,6 @@ void  CMapObjectMgr::Kill(int,int) {
 
 // address=[0x1556b00]
 // Decompiled from int __thiscall CMapObjectMgr::Destroy(CMapObjectMgr *this, int a2)
-
 void  CMapObjectMgr::Destroy(int) {
   
   int result; // eax
@@ -486,7 +471,6 @@ void  CMapObjectMgr::Destroy(int) {
 
 // address=[0x1556cb0]
 // Decompiled from CMapObjectMgr *__thiscall CMapObjectMgr::LogicUpdate(CMapObjectMgr *this)
-
 void  CMapObjectMgr::LogicUpdate(void) {
   
   int v1; // eax
@@ -617,7 +601,6 @@ void  CMapObjectMgr::LogicUpdate(void) {
 
 // address=[0x15571c0]
 // Decompiled from unsigned int __thiscall CMapObjectMgr::RegisterForLogicUpdate(CMapObjectMgr *this, int a2, int a3)
-
 int  CMapObjectMgr::RegisterForLogicUpdate(int,int) {
   
   int v3; // eax
@@ -694,7 +677,6 @@ int  CMapObjectMgr::RegisterForLogicUpdate(int,int) {
 
 // address=[0x1557350]
 // Decompiled from void __thiscall CMapObjectMgr::UnRegisterFromLogicUpdate(CMapObjectMgr *this, unsigned int a2, int a3)
-
 void  CMapObjectMgr::UnRegisterFromLogicUpdate(int,int) {
   
   char v3; // [esp-Ch] [ebp-70h] BYREF
@@ -759,7 +741,6 @@ void  CMapObjectMgr::UnRegisterFromLogicUpdate(int,int) {
 
 // address=[0x15574c0]
 // Decompiled from void __thiscall CMapObjectMgr::Store(CMapObjectMgr *this, struct S4::CMapFile *a2)
-
 void  CMapObjectMgr::Store(class S4::CMapFile &) {
   
   std::strstreambuf *v2; // eax
@@ -892,7 +873,6 @@ void  CMapObjectMgr::Store(class S4::CMapFile &) {
 
 // address=[0x1557910]
 // Decompiled from void __thiscall CMapObjectMgr::Load(CMapObjectMgr *this, struct S4::CMapFile *a2)
-
 void  CMapObjectMgr::Load(class S4::CMapFile &) {
   
   int v2; // [esp+0h] [ebp-12Ch] BYREF
@@ -982,7 +962,6 @@ void  CMapObjectMgr::Load(class S4::CMapFile &) {
 
 // address=[0x1557c60]
 // Decompiled from int __thiscall CMapObjectMgr::PrintEntity(CMapObjectMgr *this, unsigned int a2, int a3, const char *a4)
-
 void  CMapObjectMgr::PrintEntity(int,int,char const *) {
   
   const char *v5; // [esp+4h] [ebp-Ch]
@@ -1008,7 +987,6 @@ void  CMapObjectMgr::PrintEntity(int,int,char const *) {
 
 // address=[0x1557d40]
 // Decompiled from int __thiscall CMapObjectMgr::DbgPrintEntity(CFormView *this, unsigned int a2, int a3, struct tagVARIANT *a4)
-
 void  CMapObjectMgr::DbgPrintEntity(int,int,char const *) {
   
   return CMapObjectMgr::PrintEntity(this, a2, a3, (const char *)a4);
@@ -1017,7 +995,6 @@ void  CMapObjectMgr::DbgPrintEntity(int,int,char const *) {
 
 // address=[0x1557d70]
 // Decompiled from int __thiscall CMapObjectMgr::PrintAllEntities(CMapObjectMgr *this, int a2)
-
 void  CMapObjectMgr::PrintAllEntities(int) {
   
   _BYTE v3[12]; // [esp+4h] [ebp-200C4h] BYREF
@@ -1170,7 +1147,6 @@ void  CMapObjectMgr::PrintAllEntities(int) {
 
 // address=[0x15582e0]
 // Decompiled from int __thiscall CMapObjectMgr::DbgPrintAllEntities(CMapObjectMgr *this, int a2)
-
 void  CMapObjectMgr::DbgPrintAllEntities(int) {
   
   return CMapObjectMgr::PrintAllEntities(this, a2);
@@ -1179,7 +1155,6 @@ void  CMapObjectMgr::DbgPrintAllEntities(int) {
 
 // address=[0x1558cb0]
 // Decompiled from int __thiscall CMapObjectMgr::GetGfxInfo(CMapObjectMgr *this, int a2, int a3)
-
 struct SGfxObjectInfo *  CMapObjectMgr::GetGfxInfo(int,int) {
   
   if ( !CMapObjectMgr::ValidUsedEntityId(a2) && BBSupportDbgReport(2, string__2, 205, "ValidUsedEntityId( _iId )") == 1 )

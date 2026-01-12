@@ -3,14 +3,7 @@
 // Definitions for class CBuildingFlagsWalk
 
 // address=[0x14eaf90]
-// Decompiled from CBuildingFlagsWalk *__thiscall CBuildingFlagsWalk::CBuildingFlagsWalk(
-        CBuildingFlagsWalk *this,
-        int a2,
-        int a3,
-        int a4,
-        int a5,
-        int a6)
-
+// Decompiled from CBuildingFlagsWalk *__thiscall CBuildingFlagsWalk::CBuildingFlagsWalk(  CBuildingFlagsWalk *this,  int a2,  int a3,  int a4,  int a5,  int a6)
  CBuildingFlagsWalk::CBuildingFlagsWalk(int,int,int,int,class std::vector<unsigned int,class std::allocator<unsigned int> > const &) {
   
   *(_DWORD *)this = a6;
@@ -22,10 +15,7 @@
 
 
 // address=[0x14eb380]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CBuildingFlagsWalk::CurrentX(_DWORD *this)
-
+// Decompiled from int __thiscall CBuildingFlagsWalk::CurrentX(_DWORD *this)
 int  CBuildingFlagsWalk::CurrentX(void)const {
   
   return this[5];
@@ -33,9 +23,7 @@ int  CBuildingFlagsWalk::CurrentX(void)const {
 
 
 // address=[0x14eb3a0]
-// Decompiled from // MFC 3.1-14.0 32bit
-int __thiscall CBuildingFlagsWalk::CurrentY(CBuildingFlagsWalk *this)
-
+// Decompiled from int __thiscall CBuildingFlagsWalk::CurrentY(CBuildingFlagsWalk *this)
 int  CBuildingFlagsWalk::CurrentY(void)const {
   
   return *((_DWORD *)this + 6);
@@ -44,7 +32,6 @@ int  CBuildingFlagsWalk::CurrentY(void)const {
 
 // address=[0x14eb430]
 // Decompiled from int __thiscall CBuildingFlagsWalk::Init(CBuildingFlagsWalk *this)
-
 void  CBuildingFlagsWalk::Init(void) {
   
   int result; // eax
@@ -68,7 +55,6 @@ void  CBuildingFlagsWalk::Init(void) {
 
 // address=[0x14eb5b0]
 // Decompiled from char __thiscall CBuildingFlagsWalk::NextPosition(CBuildingFlagsWalk *this)
-
 bool  CBuildingFlagsWalk::NextPosition(void) {
   
   int v2; // [esp+0h] [ebp-Ch]

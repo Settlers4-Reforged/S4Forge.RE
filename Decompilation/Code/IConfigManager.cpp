@@ -4,7 +4,6 @@
 
 // address=[0x2eef090]
 // Decompiled from CConfigManager *IConfigManager::CreateConfigManger()
-
 static class IConfigManager * __cdecl IConfigManager::CreateConfigManger(void) {
   
   CConfigManager *C; // [esp+Ch] [ebp-10h]
@@ -19,7 +18,6 @@ static class IConfigManager * __cdecl IConfigManager::CreateConfigManger(void) {
 
 // address=[0x2ef8840]
 // Decompiled from IConfigManager *__thiscall IConfigManager::IConfigManager(IConfigManager *this)
-
  IConfigManager::IConfigManager(void) {
   
   *(_DWORD *)this = &IConfigManager::_vftable_;
@@ -29,7 +27,6 @@ static class IConfigManager * __cdecl IConfigManager::CreateConfigManger(void) {
 
 // address=[0x2ef8cd0]
 // Decompiled from IConfigManager *__thiscall IConfigManager::~IConfigManager(IConfigManager *this)
-
  IConfigManager::~IConfigManager(void) {
   
   IConfigManager *result; // eax

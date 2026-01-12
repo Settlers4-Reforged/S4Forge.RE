@@ -4,7 +4,6 @@
 
 // address=[0x1315680]
 // Decompiled from int __thiscall CManyVehicleTypesIterator::Init(CManyVehicleTypesIterator *this, int a2, int a3, int a4)
-
 void  CManyVehicleTypesIterator::Init(int,int,int) {
   
   int result; // eax
@@ -22,7 +21,6 @@ void  CManyVehicleTypesIterator::Init(int,int,int) {
 
 // address=[0x13156c0]
 // Decompiled from int __thiscall CManyVehicleTypesIterator::FirstVehicle(CManyVehicleTypesIterator *this)
-
 int  CManyVehicleTypesIterator::FirstVehicle(void) {
   
   bool v2; // [esp+0h] [ebp-8h]
@@ -42,7 +40,6 @@ int  CManyVehicleTypesIterator::FirstVehicle(void) {
 
 // address=[0x1315740]
 // Decompiled from int __thiscall CManyVehicleTypesIterator::NextVehicle(CManyVehicleTypesIterator *this)
-
 int  CManyVehicleTypesIterator::NextVehicle(void) {
   
   int v1; // eax
@@ -70,9 +67,7 @@ int  CManyVehicleTypesIterator::NextVehicle(void) {
 
 
 // address=[0x13157e0]
-// Decompiled from // public: int __thiscall CManyVehicleTypesIterator::NextVehicleIfCurrentIsNotValid(void)
-int __thiscall CManyVehicleTypesIterator::NextVehicleIfCurrentIsNotValid(CManyVehicleTypesIterator *this)
-
+// Decompiled from int __thiscall CManyVehicleTypesIterator::NextVehicleIfCurrentIsNotValid(CManyVehicleTypesIterator *this)
 int  CManyVehicleTypesIterator::NextVehicleIfCurrentIsNotValid(void) {
   
   if ( CVehicleIteratorBase::VehicleValid(this, *((_DWORD *)this + 1)) )
@@ -83,9 +78,7 @@ int  CManyVehicleTypesIterator::NextVehicleIfCurrentIsNotValid(void) {
 
 
 // address=[0x1317230]
-// Decompiled from CManyVehicleTypesIterator *__thiscall CManyVehicleTypesIterator::CManyVehicleTypesIterator(
-        CManyVehicleTypesIterator *this)
-
+// Decompiled from CManyVehicleTypesIterator *__thiscall CManyVehicleTypesIterator::CManyVehicleTypesIterator(  CManyVehicleTypesIterator *this)
  CManyVehicleTypesIterator::CManyVehicleTypesIterator(void) {
   
   return this;

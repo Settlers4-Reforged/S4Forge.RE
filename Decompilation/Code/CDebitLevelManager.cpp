@@ -4,7 +4,6 @@
 
 // address=[0x2f58b30]
 // Decompiled from CDebitLevelManager *__thiscall CDebitLevelManager::CDebitLevelManager(CDebitLevelManager *this, struct CSchedule *a2)
-
  CDebitLevelManager::CDebitLevelManager(class CSchedule *) {
   
   *((_DWORD *)this + 200) = 0;
@@ -14,10 +13,7 @@
 
 
 // address=[0x2f58b60]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CDebitLevelManager::~CDebitLevelManager(CDebitLevelManager *this)
-
+// Decompiled from void __thiscall CDebitLevelManager::~CDebitLevelManager(CDebitLevelManager *this)
  CDebitLevelManager::~CDebitLevelManager(void) {
   
   ;
@@ -25,18 +21,7 @@ void __thiscall CDebitLevelManager::~CDebitLevelManager(CDebitLevelManager *this
 
 
 // address=[0x2f58b70]
-// Decompiled from char __thiscall CDebitLevelManager::AddDebitLevel(
-        _DWORD *this,
-        int a2,
-        int a3,
-        unsigned __int8 a4,
-        int a5,
-        int a6,
-        int a7,
-        int a8,
-        int a9,
-        int a10)
-
+// Decompiled from char __thiscall CDebitLevelManager::AddDebitLevel(  _DWORD *this,  int a2,  int a3,  unsigned __int8 a4,  int a5,  int a6,  int a7,  int a8,  int a9,  int a10)
 bool  CDebitLevelManager::AddDebitLevel(int,enum PILE_TYPES,bool,int,int,int,int,int,int) {
   
   int i; // [esp+0h] [ebp-Ch]
@@ -77,7 +62,6 @@ bool  CDebitLevelManager::AddDebitLevel(int,enum PILE_TYPES,bool,int,int,int,int
 
 // address=[0x2f58d00]
 // Decompiled from int __thiscall CDebitLevelManager::GetDebitValue(CDebitLevelManager *this, int a2, int a3, unsigned __int8 a4, int a5)
-
 int  CDebitLevelManager::GetDebitValue(int,enum PILE_TYPES,bool,int) {
   
   int v6; // [esp+4h] [ebp-Ch]
@@ -108,7 +92,6 @@ int  CDebitLevelManager::GetDebitValue(int,enum PILE_TYPES,bool,int) {
 
 // address=[0x2f58df0]
 // Decompiled from int __thiscall CDebitLevelManager::DebitPreCondition(CDebitLevelManager *this, int a2)
-
 int  CDebitLevelManager::DebitPreCondition(int) {
   
   int result; // eax
@@ -213,7 +196,6 @@ CDebitLevelManager__DebitPreCondition___def_3358E0C:
 
 // address=[0x2f59050]
 // Decompiled from void *__thiscall CDebitLevelManager::DebitException(std::_Ref_count_base *this, const struct type_info *a2)
-
 int  CDebitLevelManager::DebitException(int) {
   
   return 0;

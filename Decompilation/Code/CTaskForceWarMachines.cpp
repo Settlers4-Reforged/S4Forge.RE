@@ -4,7 +4,6 @@
 
 // address=[0x132a200]
 // Decompiled from _DWORD *__thiscall CTaskForceWarMachines::CTaskForceWarMachines(_DWORD *this, int a2, int a3, int a4)
-
  CTaskForceWarMachines::CTaskForceWarMachines(int,enum T_AI_TASK_FORCE_TYPE,int) {
   
   CAITaskForceEx::CAITaskForceEx(this, a2, 4, a3, a4);
@@ -15,7 +14,6 @@
 
 // address=[0x132a2e0]
 // Decompiled from void __thiscall CTaskForceWarMachines::~CTaskForceWarMachines(CTaskForceWarMachines *this)
-
  CTaskForceWarMachines::~CTaskForceWarMachines(void) {
   
   CAITaskForceEx::~CAITaskForceEx(this);
@@ -24,7 +22,6 @@
 
 // address=[0x132c940]
 // Decompiled from char __thiscall CTaskForceWarMachines::IsAddEntityOk(CTaskForceWarMachines *this, int a2)
-
 bool  CTaskForceWarMachines::IsAddEntityOk(int) {
   
   if ( IAIEnvironment::EntityWarriorType(a2) == 8 )
@@ -49,7 +46,6 @@ bool  CTaskForceWarMachines::IsAddEntityOk(int) {
 
 // address=[0x132c9a0]
 // Decompiled from int __thiscall CTaskForceWarMachines::InitWarMachineWalk(CTaskForceWarMachines *this, bool a2)
-
 void  CTaskForceWarMachines::InitWarMachineWalk(bool) {
   
   int result; // eax
@@ -76,7 +72,6 @@ void  CTaskForceWarMachines::InitWarMachineWalk(bool) {
 
 // address=[0x132ca20]
 // Decompiled from int __thiscall CTaskForceWarMachines::CatapultSectorId(CTaskForceWarMachines *this)
-
 int  CTaskForceWarMachines::CatapultSectorId(void)const {
   
   struct _Cnd_internal_imp_t *v2; // [esp+0h] [ebp-18h] BYREF
@@ -100,7 +95,6 @@ int  CTaskForceWarMachines::CatapultSectorId(void)const {
 
 // address=[0x132caa0]
 // Decompiled from int __thiscall CTaskForceWarMachines::CalculateBuildingDestination(CTaskForceWarMachines *this, int a2)
-
 int  CTaskForceWarMachines::CalculateBuildingDestination(int) {
   
   int v3; // [esp+0h] [ebp-14h] BYREF
@@ -123,7 +117,6 @@ int  CTaskForceWarMachines::CalculateBuildingDestination(int) {
 
 // address=[0x132cb00]
 // Decompiled from int __thiscall CTaskForceWarMachines::CheckBuildingDestination(CTaskForceWarMachines *this)
-
 void  CTaskForceWarMachines::CheckBuildingDestination(void) {
   
   int result; // eax
@@ -163,7 +156,6 @@ void  CTaskForceWarMachines::CheckBuildingDestination(void) {
 
 // address=[0x132cbd0]
 // Decompiled from int __thiscall CTaskForceWarMachines::Execute(CTaskForceWarMachines *this)
-
 void  CTaskForceWarMachines::Execute(void) {
   
   int result; // eax

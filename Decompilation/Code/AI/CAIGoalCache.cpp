@@ -4,7 +4,6 @@
 
 // address=[0x1301470]
 // Decompiled from char *__thiscall CAIGoalCache::Goal(CAIGoalCache *this, int a2)
-
 class CAIGoal const &  CAIGoalCache::Goal(int) {
   
   return (char *)this + 12 * a2 + 20;
@@ -12,10 +11,7 @@ class CAIGoal const &  CAIGoalCache::Goal(int) {
 
 
 // address=[0x13015a0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CAIGoalCache::NumberOfCachedGoals(CAIGoalCache *this)
-
+// Decompiled from int __thiscall CAIGoalCache::NumberOfCachedGoals(CAIGoalCache *this)
 int  CAIGoalCache::NumberOfCachedGoals(void)const {
   
   return *((_DWORD *)this + 1);
@@ -24,7 +20,6 @@ int  CAIGoalCache::NumberOfCachedGoals(void)const {
 
 // address=[0x13140c0]
 // Decompiled from CAIGoal *__thiscall CAIGoalCache::Init(CAIGoalCache *this)
-
 void  CAIGoalCache::Init(void) {
   
   CAIGoal *result; // eax
@@ -38,7 +33,6 @@ void  CAIGoalCache::Init(void) {
 
 // address=[0x1314100]
 // Decompiled from CAIGoalCache *__thiscall CAIGoalCache::Insert(CAIGoalCache *this, int a2, int a3)
-
 void  CAIGoalCache::Insert(int,int) {
   
   _DWORD *v3; // ecx
@@ -101,7 +95,6 @@ void  CAIGoalCache::Insert(int,int) {
 
 // address=[0x1314350]
 // Decompiled from void __thiscall CAIGoalCache::Delete(CAIGoalCache *this, int a2)
-
 void  CAIGoalCache::Delete(int) {
   
   int v3; // [esp+4h] [ebp-4h]
@@ -114,7 +107,6 @@ void  CAIGoalCache::Delete(int) {
 
 // address=[0x1314380]
 // Decompiled from CAIGoalCache *__thiscall CAIGoalCache::DbgPrint(CAIGoalCache *this, const char *a2)
-
 void  CAIGoalCache::DbgPrint(char const * const) {
   
   CAIGoalCache *result; // eax
@@ -155,7 +147,6 @@ void  CAIGoalCache::DbgPrint(char const * const) {
 
 // address=[0x13144a0]
 // Decompiled from int __thiscall CAIGoalCache::DeleteInvalidGoals(CAIGoalCache *this)
-
 void  CAIGoalCache::DeleteInvalidGoals(void) {
   
   int result; // eax
@@ -181,7 +172,6 @@ void  CAIGoalCache::DeleteInvalidGoals(void) {
 
 // address=[0x1314530]
 // Decompiled from int __thiscall CAIGoalCache::DeleteInvalidGoalsIfNecessary(CAIGoalCache *this)
-
 void  CAIGoalCache::DeleteInvalidGoalsIfNecessary(void) {
   
   int result; // eax
@@ -195,7 +185,6 @@ void  CAIGoalCache::DeleteInvalidGoalsIfNecessary(void) {
 
 // address=[0x1314560]
 // Decompiled from int __thiscall CAIGoalCache::Load(CAIGoalCache *this, struct IS4Chunk *a2)
-
 void  CAIGoalCache::Load(class IS4Chunk &) {
   
   (*(void (__thiscall **)(struct IS4Chunk *, int, int))(*(_DWORD *)a2 + 4))(a2, 1, 1);
@@ -208,7 +197,6 @@ void  CAIGoalCache::Load(class IS4Chunk &) {
 
 // address=[0x13145d0]
 // Decompiled from int __thiscall CAIGoalCache::Save(CAIGoalCache *this, struct IS4Chunk *a2)
-
 void  CAIGoalCache::Save(class IS4Chunk &) {
   
   (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 20))(a2, 1);
@@ -221,7 +209,6 @@ void  CAIGoalCache::Save(class IS4Chunk &) {
 
 // address=[0x1325b90]
 // Decompiled from CAIGoalCache *__thiscall CAIGoalCache::CAIGoalCache(CAIGoalCache *this)
-
  CAIGoalCache::CAIGoalCache(void) {
   
   IS4ChunkObject::IS4ChunkObject(this);
@@ -233,7 +220,6 @@ void  CAIGoalCache::Save(class IS4Chunk &) {
 
 // address=[0x1314640]
 // Decompiled from int __thiscall CAIGoalCache::Search(CAIGoalCache *this, int a2)
-
 int  CAIGoalCache::Search(int)const {
   
   int v3; // [esp+0h] [ebp-Ch]
@@ -251,7 +237,6 @@ int  CAIGoalCache::Search(int)const {
 
 // address=[0x1314690]
 // Decompiled from CAIGoalCache *__thiscall CAIGoalCache::DeleteIdx(CAIGoalCache *this, int a2)
-
 void  CAIGoalCache::DeleteIdx(int) {
   
   _DWORD *v2; // edx

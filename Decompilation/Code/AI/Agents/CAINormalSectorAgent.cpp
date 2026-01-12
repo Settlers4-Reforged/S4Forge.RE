@@ -4,7 +4,6 @@
 
 // address=[0x1300fe0]
 // Decompiled from CAINormalSectorAgent *__thiscall CAINormalSectorAgent::CAINormalSectorAgent(CAINormalSectorAgent *this, const char *a2)
-
  CAINormalSectorAgent::CAINormalSectorAgent(char const *) {
   
   CAIAgent::CAIAgent(this, a2);
@@ -16,7 +15,6 @@
 
 // address=[0x1301040]
 // Decompiled from void __thiscall CAINormalSectorAgent::~CAINormalSectorAgent(CAINormalSectorAgent *this)
-
  CAINormalSectorAgent::~CAINormalSectorAgent(void) {
   
   CAIAgent::~CAIAgent(this);
@@ -24,9 +22,7 @@
 
 
 // address=[0x1301810]
-// Decompiled from // MFC 3.1-14.0 32bit
-int __thiscall CAINormalSectorAgent::SectorAI(CAINormalSectorAgent *this)
-
+// Decompiled from int __thiscall CAINormalSectorAgent::SectorAI(CAINormalSectorAgent *this)
 class CAINormalSectorAI *  CAINormalSectorAgent::SectorAI(void)const {
   
   return *((_DWORD *)this + 9);
@@ -34,10 +30,7 @@ class CAINormalSectorAI *  CAINormalSectorAgent::SectorAI(void)const {
 
 
 // address=[0x1303c90]
-// Decompiled from CAINormalSectorAgent *__thiscall CAINormalSectorAgent::AttachSectorAI(
-        CAINormalSectorAgent *this,
-        struct CAINormalSectorAI *a2)
-
+// Decompiled from CAINormalSectorAgent *__thiscall CAINormalSectorAgent::AttachSectorAI(  CAINormalSectorAgent *this,  struct CAINormalSectorAI *a2)
 void  CAINormalSectorAgent::AttachSectorAI(class CAINormalSectorAI *) {
   
   CAINormalSectorAgent *result; // eax

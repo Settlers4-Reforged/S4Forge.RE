@@ -4,7 +4,6 @@
 
 // address=[0x160dbd0]
 // Decompiled from int __thiscall CStdScriptFile::CStdScriptFile(int this, wchar_t *FileName)
-
  CStdScriptFile::CStdScriptFile(wchar_t const *) {
   
   _DWORD v4[26]; // [esp+Ch] [ebp-7Ch] BYREF
@@ -34,7 +33,6 @@
 
 // address=[0x160dd00]
 // Decompiled from void __thiscall CStdScriptFile::~CStdScriptFile(void **this)
-
  CStdScriptFile::~CStdScriptFile(void) {
   
   *this = &CStdScriptFile::_vftable_;
@@ -48,10 +46,7 @@
 
 
 // address=[0x160dd50]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CStdScriptFile::GetScript(CStdScriptFile *this)
-
+// Decompiled from int __thiscall CStdScriptFile::GetScript(CStdScriptFile *this)
 char const *  CStdScriptFile::GetScript(void) {
   
   return *((_DWORD *)this + 1);
@@ -59,10 +54,7 @@ char const *  CStdScriptFile::GetScript(void) {
 
 
 // address=[0x160dd70]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CStdScriptFile::GetSize(CStdScriptFile *this)
-
+// Decompiled from int __thiscall CStdScriptFile::GetSize(CStdScriptFile *this)
 unsigned int  CStdScriptFile::GetSize(void) {
   
   return *((_DWORD *)this + 2);

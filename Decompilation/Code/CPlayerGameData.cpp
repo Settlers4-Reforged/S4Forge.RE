@@ -4,7 +4,6 @@
 
 // address=[0x1470ac0]
 // Decompiled from const char *__thiscall CPlayerGameData::MagicData(type_info *this)
-
 class CPlayerMagicData &  CPlayerGameData::MagicData(void) {
   
   return (char *)this + 8;
@@ -13,7 +12,6 @@ class CPlayerMagicData &  CPlayerGameData::MagicData(void) {
 
 // address=[0x1473250]
 // Decompiled from int __thiscall CPlayerGameData::Clear(CPlayerGameData *this)
-
 void  CPlayerGameData::Clear(void) {
   
   _BYTE v2[12]; // [esp+4h] [ebp-24h] BYREF
@@ -38,7 +36,6 @@ void  CPlayerGameData::Clear(void) {
 
 // address=[0x1473300]
 // Decompiled from int __thiscall CPlayerGameData::AddEcoSectorId(CPlayerGameData *this, __int16 a2)
-
 void  CPlayerGameData::AddEcoSectorId(int) {
   
   char v3; // [esp-20h] [ebp-78h] BYREF
@@ -120,7 +117,6 @@ void  CPlayerGameData::AddEcoSectorId(int) {
 
 // address=[0x1473470]
 // Decompiled from int __thiscall CPlayerGameData::DeleteEcoSectorId(CPlayerGameData *this, __int16 a2)
-
 void  CPlayerGameData::DeleteEcoSectorId(int) {
   
   __int16 v3; // [esp+6h] [ebp-2h] BYREF
@@ -132,7 +128,6 @@ void  CPlayerGameData::DeleteEcoSectorId(int) {
 
 // address=[0x14734a0]
 // Decompiled from int __thiscall CPlayerGameData::ResetIterator(CPlayerGameData *this)
-
 void  CPlayerGameData::ResetIterator(void)const {
   
   _BYTE v2[12]; // [esp+4h] [ebp-24h] BYREF
@@ -153,7 +148,6 @@ void  CPlayerGameData::ResetIterator(void)const {
 
 // address=[0x1473520]
 // Decompiled from int __thiscall CPlayerGameData::GetNextEcoSectorId(CPlayerGameData *this)
-
 int  CPlayerGameData::GetNextEcoSectorId(void)const {
   
   _BYTE v2[12]; // [esp+4h] [ebp-48h] BYREF
@@ -205,7 +199,6 @@ int  CPlayerGameData::GetNextEcoSectorId(void)const {
 
 // address=[0x1473660]
 // Decompiled from void __thiscall CPlayerGameData::Load(CPlayerGameData *this, struct IS4Chunk *a2)
-
 void  CPlayerGameData::Load(class IS4Chunk &) {
   
   (*(void (__thiscall **)(struct IS4Chunk *, int, int))(*(_DWORD *)a2 + 4))(a2, 1982022950, 1982022950);
@@ -216,7 +209,6 @@ void  CPlayerGameData::Load(class IS4Chunk &) {
 
 // address=[0x14736b0]
 // Decompiled from void __thiscall CPlayerGameData::Save(CPlayerGameData *this, struct IS4Chunk *a2)
-
 void  CPlayerGameData::Save(class IS4Chunk &) {
   
   (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 20))(a2, 1982022950);
@@ -227,7 +219,6 @@ void  CPlayerGameData::Save(class IS4Chunk &) {
 
 // address=[0x1473700]
 // Decompiled from int __thiscall CPlayerGameData::PostLoadInit(CPlayerGameData *this, int a2)
-
 void  CPlayerGameData::PostLoadInit(int) {
   
   int result; // eax
@@ -246,7 +237,6 @@ void  CPlayerGameData::PostLoadInit(int) {
 
 // address=[0x1498020]
 // Decompiled from CPlayerGameData *__thiscall CPlayerGameData::CPlayerGameData(CPlayerGameData *this)
-
  CPlayerGameData::CPlayerGameData(void) {
   
   *(_DWORD *)this = CPlayerGameData::_vftable_;
@@ -259,7 +249,6 @@ void  CPlayerGameData::PostLoadInit(int) {
 
 // address=[0x14982b0]
 // Decompiled from int __thiscall CPlayerGameData::~CPlayerGameData(CPlayerGameData *this)
-
  CPlayerGameData::~CPlayerGameData(void) {
   
   std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::~_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>((char *)this + 140);
@@ -269,7 +258,6 @@ void  CPlayerGameData::PostLoadInit(int) {
 
 // address=[0x14eb7b0]
 // Decompiled from void __thiscall CPlayerGameData::SetPlayerLostFlag(CPlayerGameData *this)
-
 void  CPlayerGameData::SetPlayerLostFlag(void) {
   
   unsigned int v1; // eax
@@ -281,7 +269,6 @@ void  CPlayerGameData::SetPlayerLostFlag(void) {
 
 // address=[0x1508240]
 // Decompiled from char *__thiscall CPlayerGameData::StaticData(CPlayerGameData *this)
-
 class CPlayerStatisticData &  CPlayerGameData::StaticData(void) {
   
   return (char *)this + 120;
@@ -290,7 +277,6 @@ class CPlayerStatisticData &  CPlayerGameData::StaticData(void) {
 
 // address=[0x160dad0]
 // Decompiled from bool __thiscall CPlayerGameData::PlayerLost(CPlayerGameData *this)
-
 bool  CPlayerGameData::PlayerLost(void)const {
   
   return (CPlayerGameData::Flags(this) & 1) != 0;
@@ -299,7 +285,6 @@ bool  CPlayerGameData::PlayerLost(void)const {
 
 // address=[0x1473760]
 // Decompiled from void *__thiscall CPlayerGameData::LoadDataBlock(CPlayerGameData *this, struct IS4Chunk *a2, char *a3, unsigned int a4)
-
 void  CPlayerGameData::LoadDataBlock(class IS4Chunk &,void *,unsigned int) {
   
   void *result; // eax
@@ -319,7 +304,6 @@ void  CPlayerGameData::LoadDataBlock(class IS4Chunk &,void *,unsigned int) {
 
 // address=[0x1473800]
 // Decompiled from int __thiscall CPlayerGameData::SaveDataBlock(CPlayerGameData *this, struct IS4Chunk *a2, void *a3, unsigned int a4)
-
 void  CPlayerGameData::SaveDataBlock(class IS4Chunk &,void *,unsigned int) {
   
   if ( !a3 && BBSupportDbgReport(2, "Logic\\PlayerGameData.cpp", 78, "_pData != 0") == 1 )
@@ -333,7 +317,6 @@ void  CPlayerGameData::SaveDataBlock(class IS4Chunk &,void *,unsigned int) {
 
 // address=[0x1474ca0]
 // Decompiled from int __thiscall CPlayerGameData::SetFlags(CPlayerGameData *this, unsigned int a2)
-
 void  CPlayerGameData::SetFlags(unsigned int) {
   
   int result; // eax
@@ -346,7 +329,6 @@ void  CPlayerGameData::SetFlags(unsigned int) {
 
 // address=[0x14eb410]
 // Decompiled from int __thiscall CPlayerGameData::Flags(CPlayerGameData *this)
-
 unsigned int  CPlayerGameData::Flags(void)const {
   
   return *((_DWORD *)this + 1) - 1398813903;

@@ -4,7 +4,6 @@
 
 // address=[0x1461e60]
 // Decompiled from CInternationalTrader *__thiscall CInternationalTrader::CInternationalTrader(CInternationalTrader *this)
-
  CInternationalTrader::CInternationalTrader(void) {
   
   IS4ChunkObject::IS4ChunkObject(this);
@@ -18,7 +17,6 @@
 
 // address=[0x1461ea0]
 // Decompiled from CInternationalTrader *__thiscall CInternationalTrader::~CInternationalTrader(CInternationalTrader *this)
-
  CInternationalTrader::~CInternationalTrader(void) {
   
   CInternationalTrader *result; // eax
@@ -31,7 +29,6 @@
 
 // address=[0x1461ec0]
 // Decompiled from int __thiscall CInternationalTrader::Load(CInternationalTrader *this, struct IS4Chunk *a2)
-
 void  CInternationalTrader::Load(class IS4Chunk &) {
   
   int result; // eax
@@ -77,7 +74,6 @@ void  CInternationalTrader::Load(class IS4Chunk &) {
 
 // address=[0x14620a0]
 // Decompiled from int __thiscall CInternationalTrader::Save(CInternationalTrader *this, struct IS4Chunk *a2)
-
 void  CInternationalTrader::Save(class IS4Chunk &) {
   
   int result; // eax
@@ -166,7 +162,6 @@ void  CInternationalTrader::Save(class IS4Chunk &) {
 
 // address=[0x14622f0]
 // Decompiled from int CInternationalTrader::ReInit()
-
 static void __cdecl CInternationalTrader::ReInit(void) {
   
   int result; // eax
@@ -225,7 +220,6 @@ static void __cdecl CInternationalTrader::ReInit(void) {
 
 // address=[0x1462420]
 // Decompiled from char __thiscall CInternationalTrader::Trade(CInternationalTrader *this, struct CBuilding *a2)
-
 bool  CInternationalTrader::Trade(class CBuilding *) {
   
   int *v3; // eax
@@ -346,10 +340,7 @@ bool  CInternationalTrader::Trade(class CBuilding *) {
 
 
 // address=[0x1462700]
-// Decompiled from CInternationalTrader::CPlayerTradeInfo **__thiscall CInternationalTrader::AddBuilding(
-        CInternationalTrader *this,
-        struct CBuilding *a2)
-
+// Decompiled from CInternationalTrader::CPlayerTradeInfo **__thiscall CInternationalTrader::AddBuilding(  CInternationalTrader *this,  struct CBuilding *a2)
 void  CInternationalTrader::AddBuilding(class CBuilding *) {
   
   CInternationalTrader::CPlayerTradeInfo **result; // eax
@@ -381,7 +372,6 @@ void  CInternationalTrader::AddBuilding(class CBuilding *) {
 
 // address=[0x14627a0]
 // Decompiled from int __thiscall CInternationalTrader::RemoveBuilding(CInternationalTrader *this, struct CBuilding *a2)
-
 void  CInternationalTrader::RemoveBuilding(class CBuilding *) {
   
   int result; // eax
@@ -405,12 +395,7 @@ void  CInternationalTrader::RemoveBuilding(class CBuilding *) {
 
 
 // address=[0x1462840]
-// Decompiled from struct CInternationalTrader::CTradeBuildingInfo *__stdcall CInternationalTrader::SetGoodStatus(
-        int a1,
-        struct CBuilding *a2,
-        int a3,
-        int a4)
-
+// Decompiled from struct CInternationalTrader::CTradeBuildingInfo *__stdcall CInternationalTrader::SetGoodStatus(  int a1,  struct CBuilding *a2,  int a3,  int a4)
 void  CInternationalTrader::SetGoodStatus(int,class CBuilding *,enum PILE_TYPES,enum TGOOD_STATUS) {
   
   struct CInternationalTrader::CTradeBuildingInfo *result; // eax
@@ -460,9 +445,7 @@ void  CInternationalTrader::SetGoodStatus(int,class CBuilding *,enum PILE_TYPES,
 
 
 // address=[0x1462930]
-// Decompiled from // public: void __thiscall CInternationalTrader::SwitchToNextGoodStatus(int,class CBuilding *,enum PILE_TYPES)
-int __thiscall CInternationalTrader::SwitchToNextGoodStatus(void *this, int a2, int a3, int a4)
-
+// Decompiled from int __thiscall CInternationalTrader::SwitchToNextGoodStatus(void *this, int a2, int a3, int a4)
 void  CInternationalTrader::SwitchToNextGoodStatus(int,class CBuilding *,enum PILE_TYPES) {
   
   int result; // eax
@@ -493,7 +476,6 @@ void  CInternationalTrader::SwitchToNextGoodStatus(int,class CBuilding *,enum PI
 
 // address=[0x14629f0]
 // Decompiled from bool __thiscall CInternationalTrader::SwitchPlayerTradeStatus(CInternationalTrader *this, int a2, int a3)
-
 void  CInternationalTrader::SwitchPlayerTradeStatus(int,int) {
   
   CInternationalTrader::CPlayerTradeInfo **v3; // eax
@@ -523,7 +505,6 @@ void  CInternationalTrader::SwitchPlayerTradeStatus(int,int) {
 
 // address=[0x1462a80]
 // Decompiled from char *__thiscall CInternationalTrader::SetPlayerTradeStatus(CInternationalTrader *this, int a2, int a3, bool a4)
-
 void  CInternationalTrader::SetPlayerTradeStatus(int,int,bool) {
   
   CInternationalTrader::CPlayerTradeInfo **v4; // eax
@@ -555,7 +536,6 @@ void  CInternationalTrader::SetPlayerTradeStatus(int,int,bool) {
 
 // address=[0x1462b40]
 // Decompiled from char __thiscall CInternationalTrader::GetPlayerTradeStatus(CInternationalTrader *this, int a2, int a3)
-
 bool  CInternationalTrader::GetPlayerTradeStatus(int,int) {
   
   CInternationalTrader::CPlayerTradeInfo **v3; // eax
@@ -585,7 +565,6 @@ bool  CInternationalTrader::GetPlayerTradeStatus(int,int) {
 
 // address=[0x1462bd0]
 // Decompiled from char __thiscall CInternationalTrader::TradeWithSomeone(CInternationalTrader *this, int a2)
-
 bool  CInternationalTrader::TradeWithSomeone(int) {
   
   CInternationalTrader::CPlayerTradeInfo **v2; // eax
@@ -606,7 +585,6 @@ bool  CInternationalTrader::TradeWithSomeone(int) {
 
 // address=[0x1462c30]
 // Decompiled from char __thiscall CInternationalTrader::CheckGoodMatch(CInternationalTrader *this, int a2, int a3)
-
 bool  CInternationalTrader::CheckGoodMatch(int,int) {
   
   int v4; // eax
@@ -684,7 +662,6 @@ bool  CInternationalTrader::CheckGoodMatch(int,int) {
 
 // address=[0x1462e10]
 // Decompiled from char __thiscall CInternationalTrader::CheckGoodMatch(void *this, int a2, int a3, int a4)
-
 bool  CInternationalTrader::CheckGoodMatch(int,int,enum PILE_TYPES) {
   
   int v5; // eax
@@ -765,7 +742,6 @@ bool  CInternationalTrader::CheckGoodMatch(int,int,enum PILE_TYPES) {
 
 // address=[0x1463000]
 // Decompiled from int __stdcall CInternationalTrader::GetGoodStatus(int a1, struct CBuilding *a2, int a3)
-
 enum TGOOD_STATUS  CInternationalTrader::GetGoodStatus(int,class CBuilding *,enum PILE_TYPES) {
   
   CInternationalTrader::CPlayerTradeInfo *v4; // [esp+4h] [ebp-4h]
@@ -792,7 +768,6 @@ enum TGOOD_STATUS  CInternationalTrader::GetGoodStatus(int,class CBuilding *,enu
 
 // address=[0x14630c0]
 // Decompiled from int __stdcall CInternationalTrader::GetExportGoodList(int a1, unsigned __int8 *a2)
-
 class std::vector<struct CInternationalTrader::CPlayerTradeInfo::TGoodInfo,class std::allocator<struct CInternationalTrader::CPlayerTradeInfo::TGoodInfo> >  CInternationalTrader::GetExportGoodList(class CBuilding *) {
   
   int v2; // eax
@@ -809,7 +784,6 @@ class std::vector<struct CInternationalTrader::CPlayerTradeInfo::TGoodInfo,class
 
 // address=[0x1463130]
 // Decompiled from bool __thiscall CInternationalTrader::CanWalk(CInternationalTrader *this, int a2, int a3)
-
 bool  CInternationalTrader::CanWalk(int,int) {
   
   int v4; // esi
@@ -870,7 +844,6 @@ bool  CInternationalTrader::CanWalk(int,int) {
 
 // address=[0x14632c0]
 // Decompiled from int CInternationalTrader::InitPlayerList()
-
 static void __cdecl CInternationalTrader::InitPlayerList(void) {
   
   int result; // eax
@@ -905,12 +878,7 @@ static void __cdecl CInternationalTrader::InitPlayerList(void) {
 
 
 // address=[0x14633b0]
-// Decompiled from int __thiscall CInternationalTrader::CheckTrade(
-        CInternationalTrader *this,
-        struct CInternationalTrader::CPlayerTradeInfo *a2,
-        struct CInternationalTrader::CPlayerTradeInfo *a3,
-        struct CBuilding *a4)
-
+// Decompiled from int __thiscall CInternationalTrader::CheckTrade(  CInternationalTrader *this,  struct CInternationalTrader::CPlayerTradeInfo *a2,  struct CInternationalTrader::CPlayerTradeInfo *a3,  struct CBuilding *a4)
 int  CInternationalTrader::CheckTrade(class CInternationalTrader::CPlayerTradeInfo *,class CInternationalTrader::CPlayerTradeInfo *,class CBuilding *) {
   
   int v5; // eax
@@ -1098,9 +1066,7 @@ LABEL_39:
 
 
 // address=[0x1463850]
-// Decompiled from // private: void __thiscall CInternationalTrader::DisableTrading(class CBuilding *,int,int)
-void __stdcall CInternationalTrader::DisableTrading(_DWORD *a1, int a2, int a3)
-
+// Decompiled from void __stdcall CInternationalTrader::DisableTrading(_DWORD *a1, int a2, int a3)
 void  CInternationalTrader::DisableTrading(class CBuilding *,int,int) {
   
   CTradingBuildingRole *v3; // [esp+4h] [ebp-4h]
@@ -1116,9 +1082,7 @@ void  CInternationalTrader::DisableTrading(class CBuilding *,int,int) {
 
 
 // address=[0x14638a0]
-// Decompiled from // private: bool __thiscall CInternationalTrader::IsBuildingAnPort(class CBuilding *)
-bool __stdcall CInternationalTrader::IsBuildingAnPort(unsigned __int8 *a1)
-
+// Decompiled from bool __stdcall CInternationalTrader::IsBuildingAnPort(unsigned __int8 *a1)
 bool  CInternationalTrader::IsBuildingAnPort(class CBuilding *) {
   
   int v1; // eax

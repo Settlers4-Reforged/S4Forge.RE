@@ -4,7 +4,6 @@
 
 // address=[0x15dc3e0]
 // Decompiled from int __thiscall CNeighborRelIndices::Init(CNeighborRelIndices *this, int a2)
-
 void  CNeighborRelIndices::Init(int) {
   
   int result; // eax

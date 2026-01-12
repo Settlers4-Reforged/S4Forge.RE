@@ -4,7 +4,6 @@
 
 // address=[0x144ff70]
 // Decompiled from CFutureEvents *IFutureEvents::CreateFutureEvents()
-
 static class IFutureEvents * __cdecl IFutureEvents::CreateFutureEvents(void) {
   
   CFutureEvents *C; // [esp+Ch] [ebp-10h]
@@ -19,7 +18,6 @@ static class IFutureEvents * __cdecl IFutureEvents::CreateFutureEvents(void) {
 
 // address=[0x14529b0]
 // Decompiled from IFutureEvents *__thiscall IFutureEvents::IFutureEvents(IFutureEvents *this)
-
  IFutureEvents::IFutureEvents(void) {
   
   IS4ChunkObject::IS4ChunkObject(this);
@@ -29,16 +27,7 @@ static class IFutureEvents * __cdecl IFutureEvents::CreateFutureEvents(void) {
 
 
 // address=[0x1470750]
-// Decompiled from int __thiscall IFutureEvents::AddFutureEvent16(
-        void *this,
-        int a2,
-        int a3,
-        int a4,
-        unsigned int a5,
-        unsigned int a6,
-        unsigned int a7,
-        unsigned int a8)
-
+// Decompiled from int __thiscall IFutureEvents::AddFutureEvent16(  void *this,  int a2,  int a3,  int a4,  unsigned int a5,  unsigned int a6,  unsigned int a7,  unsigned int a8)
 bool  IFutureEvents::AddFutureEvent16(enum T_FUTURE_EVENT,unsigned int,unsigned int,unsigned int,unsigned int,unsigned int,unsigned int) {
   
   if ( a5 > 0xFFFF

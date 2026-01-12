@@ -4,7 +4,6 @@
 
 // address=[0x2f16690]
 // Decompiled from _DWORD *__thiscall AdvXMLParser::Comment::Comment(_DWORD *this, int a2)
-
  AdvXMLParser::Comment::Comment(std::string const &) {
   
   _BYTE v4[28]; // [esp+8h] [ebp-2Ch] BYREF
@@ -23,7 +22,6 @@
 
 // address=[0x2f16730]
 // Decompiled from _DWORD *__thiscall AdvXMLParser::Comment::Comment(_DWORD *this, int a2, int a3)
-
  AdvXMLParser::Comment::Comment(class AdvXMLParser::NodeContainer &,std::string const &) {
   
   _BYTE v5[28]; // [esp+8h] [ebp-2Ch] BYREF
@@ -42,7 +40,6 @@
 
 // address=[0x2f167d0]
 // Decompiled from int __thiscall AdvXMLParser::Comment::Clone(AdvXMLParser::Comment *this, struct AdvXMLParser::NodeContainer *a2)
-
 class AdvXMLParser::Comment *  AdvXMLParser::Comment::Clone(class AdvXMLParser::NodeContainer &)const {
   
   int v3; // [esp+Ch] [ebp-44h]
@@ -73,7 +70,6 @@ class AdvXMLParser::Comment *  AdvXMLParser::Comment::Clone(class AdvXMLParser::
 
 // address=[0x2f168b0]
 // Decompiled from int __thiscall AdvXMLParser::Comment::GetData(char *this, int a2)
-
 std::string  AdvXMLParser::Comment::GetData(void)const {
   
   std::string::string(this + 36);
@@ -83,7 +79,6 @@ std::string  AdvXMLParser::Comment::GetData(void)const {
 
 // address=[0x2f168f0]
 // Decompiled from int __thiscall AdvXMLParser::Comment::GetValue(char *this, int a2)
-
 std::string  AdvXMLParser::Comment::GetValue(void)const {
   
   std::string::string(this + 36);
@@ -93,7 +88,6 @@ std::string  AdvXMLParser::Comment::GetValue(void)const {
 
 // address=[0x2f16930]
 // Decompiled from bool __thiscall AdvXMLParser::Comment::IsKindOf(AdvXMLParser::Comment *this, int a2)
-
 bool  AdvXMLParser::Comment::IsKindOf(int)const {
   
   return a2 == 8 || AdvXMLParser::Node::IsKindOf(this, a2);
@@ -102,7 +96,6 @@ bool  AdvXMLParser::Comment::IsKindOf(int)const {
 
 // address=[0x2f16960]
 // Decompiled from int __thiscall AdvXMLParser::Comment::CloneNode(AdvXMLParser::Comment *this, struct AdvXMLParser::NodeContainer *a2)
-
 class AdvXMLParser::Node *  AdvXMLParser::Comment::CloneNode(class AdvXMLParser::NodeContainer &)const {
   
   return AdvXMLParser::Comment::Clone(this, a2);
@@ -111,7 +104,6 @@ class AdvXMLParser::Node *  AdvXMLParser::Comment::CloneNode(class AdvXMLParser:
 
 // address=[0x2f1cd50]
 // Decompiled from void __thiscall AdvXMLParser::Comment::~Comment(AdvXMLParser::Comment *this)
-
  AdvXMLParser::Comment::~Comment(void) {
   
   std::string::~string((char *)this + 36);
@@ -121,7 +113,6 @@ class AdvXMLParser::Node *  AdvXMLParser::Comment::CloneNode(class AdvXMLParser:
 
 // address=[0x2f24560]
 // Decompiled from int __cdecl AdvXMLParser::Comment::Parse(struct AdvXMLParser::Parser *a1, struct AdvXMLParser::NodeContainer *a2)
-
 static class AdvXMLParser::Comment * __cdecl AdvXMLParser::Comment::Parse(class AdvXMLParser::Parser &,class AdvXMLParser::NodeContainer &) {
   
   unsigned __int8 Char; // al
@@ -164,10 +155,7 @@ static class AdvXMLParser::Comment * __cdecl AdvXMLParser::Comment::Parse(class 
 
 
 // address=[0x2f2d190]
-// Decompiled from void __thiscall AdvXMLParser::Comment::GenerateXML(
-        AdvXMLParser::Comment *this,
-        struct AdvXMLParser::GenerateContext *a2)
-
+// Decompiled from void __thiscall AdvXMLParser::Comment::GenerateXML(  AdvXMLParser::Comment *this,  struct AdvXMLParser::GenerateContext *a2)
 void  AdvXMLParser::Comment::GenerateXML(class AdvXMLParser::GenerateContext &)const {
   
   AdvXMLParser::GenerateContext::GenerateStartTagIndentation(a2);

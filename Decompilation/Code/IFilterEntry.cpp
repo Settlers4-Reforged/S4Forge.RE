@@ -4,7 +4,6 @@
 
 // address=[0x2f3b310]
 // Decompiled from IFilterEntry *__thiscall IFilterEntry::IFilterEntry(IFilterEntry *this)
-
  IFilterEntry::IFilterEntry(void) {
   
   CDynListEntry::CDynListEntry(this);
@@ -15,7 +14,6 @@
 
 // address=[0x2f3b660]
 // Decompiled from void __thiscall IFilterEntry::~IFilterEntry(IFilterEntry *this)
-
  IFilterEntry::~IFilterEntry(void) {
   
   *(_DWORD *)this = &IFilterEntry::_vftable_;

@@ -4,7 +4,6 @@
 
 // address=[0x149ab50]
 // Decompiled from const char *__cdecl CS4DefineNames::GetAnimalName(unsigned int a1)
-
 static char const * __cdecl CS4DefineNames::GetAnimalName(int) {
   
   if ( a1 >= 0x12 )
@@ -16,7 +15,6 @@ static char const * __cdecl CS4DefineNames::GetAnimalName(int) {
 
 // address=[0x149ab70]
 // Decompiled from const char *__cdecl CS4DefineNames::GetBuildingName(unsigned int a1)
-
 static char const * __cdecl CS4DefineNames::GetBuildingName(int) {
   
   if ( a1 >= 0x53 )
@@ -27,9 +25,7 @@ static char const * __cdecl CS4DefineNames::GetBuildingName(int) {
 
 
 // address=[0x149ab90]
-// Decompiled from // public: static char const * __cdecl CS4DefineNames::GetGoodName(int)
-const char *__cdecl CS4DefineNames::GetGoodName(unsigned int a1)
-
+// Decompiled from const char *__cdecl CS4DefineNames::GetGoodName(unsigned int a1)
 static char const * __cdecl CS4DefineNames::GetGoodName(int) {
   
   if ( a1 >= 0x2B )
@@ -41,7 +37,6 @@ static char const * __cdecl CS4DefineNames::GetGoodName(int) {
 
 // address=[0x149abb0]
 // Decompiled from const char *__cdecl CS4DefineNames::GetObjectName(unsigned int a1)
-
 static char const * __cdecl CS4DefineNames::GetObjectName(int) {
   
   if ( a1 >= 0x123 )
@@ -53,7 +48,6 @@ static char const * __cdecl CS4DefineNames::GetObjectName(int) {
 
 // address=[0x149abe0]
 // Decompiled from const char *__cdecl CS4DefineNames::GetRaceName(unsigned int a1)
-
 static char const * __cdecl CS4DefineNames::GetRaceName(int) {
   
   if ( a1 >= 5 )
@@ -65,7 +59,6 @@ static char const * __cdecl CS4DefineNames::GetRaceName(int) {
 
 // address=[0x149ac00]
 // Decompiled from const char *__cdecl CS4DefineNames::GetSettlerName(unsigned int a1)
-
 static char const * __cdecl CS4DefineNames::GetSettlerName(int) {
   
   if ( a1 >= 0x43 )
@@ -77,7 +70,6 @@ static char const * __cdecl CS4DefineNames::GetSettlerName(int) {
 
 // address=[0x149ac20]
 // Decompiled from const char *__cdecl CS4DefineNames::GetSettlerJobName(unsigned int a1)
-
 static char const * __cdecl CS4DefineNames::GetSettlerJobName(int) {
   
   if ( a1 >= 0x16F )
@@ -89,7 +81,6 @@ static char const * __cdecl CS4DefineNames::GetSettlerJobName(int) {
 
 // address=[0x149ac60]
 // Decompiled from const char *__cdecl CS4DefineNames::GetSoundName(unsigned int a1)
-
 static char const * __cdecl CS4DefineNames::GetSoundName(int) {
   
   if ( a1 >= 0x6D )
@@ -101,7 +92,6 @@ static char const * __cdecl CS4DefineNames::GetSoundName(int) {
 
 // address=[0x149ac80]
 // Decompiled from const char *__cdecl CS4DefineNames::GetStringName(unsigned int a1)
-
 static char const * __cdecl CS4DefineNames::GetStringName(int) {
   
   if ( a1 >= 0xEFD )
@@ -113,7 +103,6 @@ static char const * __cdecl CS4DefineNames::GetStringName(int) {
 
 // address=[0x149acb0]
 // Decompiled from int __cdecl CS4DefineNames::GetStringId(char *Str1)
-
 static int __cdecl CS4DefineNames::GetStringId(char const *) {
   
   int i; // [esp+4h] [ebp-4h]

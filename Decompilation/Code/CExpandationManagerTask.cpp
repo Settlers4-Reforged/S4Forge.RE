@@ -4,7 +4,6 @@
 
 // address=[0x2f51910]
 // Decompiled from CExpandationManagerTask *__thiscall CExpandationManagerTask::CExpandationManagerTask(CExpandationManagerTask *this)
-
  CExpandationManagerTask::CExpandationManagerTask(void) {
   
   IScheduleEntry::IScheduleEntry(this);
@@ -30,7 +29,6 @@
 
 // address=[0x2f51a10]
 // Decompiled from void __thiscall CExpandationManagerTask::~CExpandationManagerTask(CExpandationManagerTask *this)
-
  CExpandationManagerTask::~CExpandationManagerTask(void) {
   
   *(_DWORD *)this = &CExpandationManagerTask::_vftable_;
@@ -41,10 +39,7 @@
 
 
 // address=[0x2f51a50]
-// Decompiled from char __thiscall CExpandationManagerTask::GetExpandationPermission(
-        CExpandationManagerTask *this,
-        struct CExpandationEvent *a2)
-
+// Decompiled from char __thiscall CExpandationManagerTask::GetExpandationPermission(  CExpandationManagerTask *this,  struct CExpandationEvent *a2)
 bool  CExpandationManagerTask::GetExpandationPermission(class CExpandationEvent *) {
   
   struct CDynListEntry *i; // [esp+8h] [ebp-8h]
@@ -65,7 +60,6 @@ bool  CExpandationManagerTask::GetExpandationPermission(class CExpandationEvent 
 
 // address=[0x2f51af0]
 // Decompiled from char __thiscall CExpandationManagerTask::IsBorderElement(CReserveDatabase ***this, int a2, int a3)
-
 bool  CExpandationManagerTask::IsBorderElement(int,int) {
   
   int v4; // [esp+0h] [ebp-Ch]
@@ -83,7 +77,6 @@ bool  CExpandationManagerTask::IsBorderElement(int,int) {
 
 // address=[0x2f51b60]
 // Decompiled from char __thiscall CExpandationManagerTask::IsShooting(CSchedule **this)
-
 bool  CExpandationManagerTask::IsShooting(void) {
   
   struct IAIEcoManager *EcoSector; // eax
@@ -128,9 +121,7 @@ bool  CExpandationManagerTask::IsShooting(void) {
 
 
 // address=[0x2f51d10]
-// Decompiled from // Microsoft VisualC 14/net runtime
-char __thiscall CExpandationManagerTask::action(CExpandationManagerTask *this)
-
+// Decompiled from char __thiscall CExpandationManagerTask::action(CExpandationManagerTask *this)
 bool  CExpandationManagerTask::action(void) {
   
   return 0;
@@ -139,7 +130,6 @@ bool  CExpandationManagerTask::action(void) {
 
 // address=[0x2f51d20]
 // Decompiled from char __thiscall CExpandationManagerTask::IsAlive(CExpandationManagerTask *this)
-
 bool  CExpandationManagerTask::IsAlive(void) {
   
   return 1;
@@ -148,7 +138,6 @@ bool  CExpandationManagerTask::IsAlive(void) {
 
 // address=[0x2f51d30]
 // Decompiled from char __thiscall CExpandationManagerTask::WaitFor(CExpandationManagerTask *this)
-
 bool  CExpandationManagerTask::WaitFor(void) {
   
   return 1;

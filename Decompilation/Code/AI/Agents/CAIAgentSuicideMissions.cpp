@@ -3,11 +3,7 @@
 // Definitions for class CAIAgentSuicideMissions
 
 // address=[0x1303ee0]
-// Decompiled from unsigned int __thiscall CAIAgentSuicideMissions::Execute(
-        CAIAgentSuicideMissions *this,
-        unsigned int a2,
-        unsigned int a3)
-
+// Decompiled from unsigned int __thiscall CAIAgentSuicideMissions::Execute(  CAIAgentSuicideMissions *this,  unsigned int a2,  unsigned int a3)
 unsigned int  CAIAgentSuicideMissions::Execute(unsigned int,unsigned int) {
   
   struct CAINormalSectorAI *v3; // eax
@@ -70,7 +66,6 @@ unsigned int  CAIAgentSuicideMissions::Execute(unsigned int,unsigned int) {
 
 // address=[0x1325b00]
 // Decompiled from CAIAgentSuicideMissions *__thiscall CAIAgentSuicideMissions::CAIAgentSuicideMissions(CAIAgentSuicideMissions *this)
-
  CAIAgentSuicideMissions::CAIAgentSuicideMissions(void) {
   
   CAINormalSectorAgent::CAINormalSectorAgent(this, string__26);
@@ -81,7 +76,6 @@ unsigned int  CAIAgentSuicideMissions::Execute(unsigned int,unsigned int) {
 
 // address=[0x1325cb0]
 // Decompiled from void __thiscall CAIAgentSuicideMissions::~CAIAgentSuicideMissions(CAIAgentSuicideMissions *this)
-
  CAIAgentSuicideMissions::~CAIAgentSuicideMissions(void) {
   
   CAINormalSectorAgent::~CAINormalSectorAgent(this);

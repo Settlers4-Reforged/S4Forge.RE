@@ -4,7 +4,6 @@
 
 // address=[0x132a1c0]
 // Decompiled from CAITaskForceShamans *__thiscall CAITaskForceShamans::CAITaskForceShamans(CAITaskForceShamans *this, int a2, int a3)
-
  CAITaskForceShamans::CAITaskForceShamans(int,int) {
   
   CAITaskForceEx::CAITaskForceEx(this, a2, 7, 12, a3);
@@ -15,7 +14,6 @@
 
 // address=[0x132a2c0]
 // Decompiled from void __thiscall CAITaskForceShamans::~CAITaskForceShamans(CAITaskForceShamans *this)
-
  CAITaskForceShamans::~CAITaskForceShamans(void) {
   
   CAITaskForceEx::~CAITaskForceEx(this);
@@ -24,7 +22,6 @@
 
 // address=[0x132cf70]
 // Decompiled from char __thiscall CAITaskForceShamans::Execute(CAITaskForceShamans *this)
-
 void  CAITaskForceShamans::Execute(void) {
   
   int Entity; // eax
@@ -134,7 +131,6 @@ void  CAITaskForceShamans::Execute(void) {
 
 // address=[0x132d170]
 // Decompiled from char __thiscall CAITaskForceShamans::NewCommand(CAITaskForceShamans *this, unsigned int a2, int a3, int a4)
-
 bool  CAITaskForceShamans::NewCommand(int,int,int) {
   
   char result; // al

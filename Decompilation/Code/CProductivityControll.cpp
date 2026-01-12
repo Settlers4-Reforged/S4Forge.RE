@@ -3,9 +3,7 @@
 // Definitions for class CProductivityControll
 
 // address=[0x2f57570]
-// Decompiled from // public: __thiscall CProductivityControll::CProductivityControll(void)
-CProductivityControll *__thiscall CProductivityControll::CProductivityControll(CProductivityControll *this)
-
+// Decompiled from CProductivityControll *__thiscall CProductivityControll::CProductivityControll(CProductivityControll *this)
  CProductivityControll::CProductivityControll(void) {
   
   IScheduleEntry::IScheduleEntry(this);
@@ -18,14 +16,7 @@ CProductivityControll *__thiscall CProductivityControll::CProductivityControll(C
 
 
 // address=[0x2f575b0]
-// Decompiled from IScheduleEntry *__thiscall CProductivityControll::CProductivityControll(
-        IScheduleEntry *this,
-        int a2,
-        int a3,
-        int a4,
-        int a5,
-        int a6)
-
+// Decompiled from IScheduleEntry *__thiscall CProductivityControll::CProductivityControll(  IScheduleEntry *this,  int a2,  int a3,  int a4,  int a5,  int a6)
  CProductivityControll::CProductivityControll(struct SBuildId,enum BUILDING_TYPES,int,int) {
   
   _BYTE v7[112]; // [esp+4h] [ebp-80h] BYREF
@@ -44,7 +35,6 @@ CProductivityControll *__thiscall CProductivityControll::CProductivityControll(C
 
 // address=[0x2f57630]
 // Decompiled from int __thiscall CProductivityControll::CProductivityControll(int this, int a2, int a3, int a4, int a5, int a6)
-
  CProductivityControll::CProductivityControll(int,enum T_BUILD_LEVEL,enum BUILDING_TYPES,int,int) {
   
   IScheduleEntry::IScheduleEntry((IScheduleEntry *)this);
@@ -93,7 +83,6 @@ CProductivityControll *__thiscall CProductivityControll::CProductivityControll(C
 
 // address=[0x2f57770]
 // Decompiled from void __thiscall CProductivityControll::~CProductivityControll(CProductivityControll *this)
-
  CProductivityControll::~CProductivityControll(void) {
   
   *(_DWORD *)this = &CProductivityControll::_vftable_;
@@ -103,7 +92,6 @@ CProductivityControll *__thiscall CProductivityControll::CProductivityControll(C
 
 // address=[0x2f57790]
 // Decompiled from char __thiscall CProductivityControll::IsShooting(CProductivityControll *this)
-
 bool  CProductivityControll::IsShooting(void) {
   
   char result; // al
@@ -428,7 +416,6 @@ LABEL_57:
 
 // address=[0x2f57f90]
 // Decompiled from char __thiscall CProductivityControll::action(CReserveDatabase ***this)
-
 bool  CProductivityControll::action(void) {
   
   CReserveDatabase **v1; // eax
@@ -596,7 +583,6 @@ CProductivityControll__action___def_335801D:
 
 // address=[0x2f58410]
 // Decompiled from char __thiscall CProductivityControll::IsAlive(CProductivityControll *this)
-
 bool  CProductivityControll::IsAlive(void) {
   
   struct IAIEcoManager *EcoSector; // [esp+0h] [ebp-8h]
@@ -617,7 +603,6 @@ bool  CProductivityControll::IsAlive(void) {
 
 // address=[0x2f58470]
 // Decompiled from char __thiscall CProductivityControll::WaitFor(CProductivityControll *this)
-
 bool  CProductivityControll::WaitFor(void) {
   
   if ( *((_DWORD *)this + 23) == 1 )
@@ -644,7 +629,6 @@ bool  CProductivityControll::WaitFor(void) {
 
 // address=[0x2f58500]
 // Decompiled from int __thiscall CProductivityControll::CalcPotentialOutput(CProductivityControll *this)
-
 int  CProductivityControll::CalcPotentialOutput(void) {
   
   int NeededFixTicks; // esi
@@ -682,7 +666,6 @@ int  CProductivityControll::CalcPotentialOutput(void) {
 
 // address=[0x2f58610]
 // Decompiled from char __thiscall CProductivityControll::PileDistribution(CProductivityControll *this)
-
 bool  CProductivityControll::PileDistribution(void) {
   
   int v1; // eax
@@ -786,9 +769,7 @@ bool  CProductivityControll::PileDistribution(void) {
 
 
 // address=[0x2f588c0]
-// Decompiled from // public: enum BUILDING_TYPES __thiscall CProductivityControll::GetFoodBuilding(enum BUILDING_TYPES)
-int __stdcall CProductivityControll::GetFoodBuilding(int a1)
-
+// Decompiled from int __stdcall CProductivityControll::GetFoodBuilding(int a1)
 enum BUILDING_TYPES  CProductivityControll::GetFoodBuilding(enum BUILDING_TYPES) {
   
   int result; // eax
@@ -820,7 +801,6 @@ enum BUILDING_TYPES  CProductivityControll::GetFoodBuilding(enum BUILDING_TYPES)
 
 // address=[0x2f58930]
 // Decompiled from char __thiscall CProductivityControll::CheckProductivity(CProductivityControll *this)
-
 bool  CProductivityControll::CheckProductivity(void) {
   
   struct IAIEcoManager *EcoSector; // [esp+4h] [ebp-8h]

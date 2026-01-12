@@ -4,7 +4,6 @@
 
 // address=[0x15f90b0]
 // Decompiled from CWalkingWorker *__thiscall CWalkingWorker::CWalkingWorker(CWalkingWorker *this, int a2)
-
  CWalkingWorker::CWalkingWorker(int) {
   
   CWalkingBase::CWalkingBase(this, 0, a2);
@@ -16,7 +15,6 @@
 
 // address=[0x15fafd0]
 // Decompiled from CWalking *__thiscall CWalkingWorker::~CWalkingWorker(CWalkingWorker *this)
-
  CWalkingWorker::~CWalkingWorker(void) {
   
   return CWalkingBase::~CWalkingBase(this);
@@ -24,10 +22,7 @@
 
 
 // address=[0x15fb290]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int CWalkingWorker::GetWalkingType()
-
+// Decompiled from int CWalkingWorker::GetWalkingType()
 enum T_WALKING_TYPE const  CWalkingWorker::GetWalkingType(void) {
   
   return 1;
@@ -36,7 +31,6 @@ enum T_WALKING_TYPE const  CWalkingWorker::GetWalkingType(void) {
 
 // address=[0x15f90f0]
 // Decompiled from bool __thiscall CWalkingWorker::IsNotBlocked(CWalkingWorker *this, int a2)
-
 bool  CWalkingWorker::IsNotBlocked(int) {
   
   CTile *v2; // eax
@@ -54,7 +48,6 @@ bool  CWalkingWorker::IsNotBlocked(int) {
 
 // address=[0x15f9150]
 // Decompiled from int __thiscall CWalkingWorker::SectorId(CWalkingWorker *this, int a2)
-
 int  CWalkingWorker::SectorId(int) {
   
   return ITiling::EcoSectorId(a2);
@@ -63,7 +56,6 @@ int  CWalkingWorker::SectorId(int) {
 
 // address=[0x15f9170]
 // Decompiled from char __thiscall CWalkingWorker::FindPathAStar64(CWalkingWorker *this, int a2, int a3, struct CDirCache *a4)
-
 bool  CWalkingWorker::FindPathAStar64(int,int,class CDirCache &) {
   
   return CAStar64::FindPath((CAStar64 *)&g_cAStar64Worker, a2, a3, a4);

@@ -4,7 +4,6 @@
 
 // address=[0x14c0800]
 // Decompiled from CStateLobbyMultiplayerType *__cdecl CStateLobbyMultiplayerType::DynamicCreateFunc(void *a1)
-
 static class CGameState * __cdecl CStateLobbyMultiplayerType::DynamicCreateFunc(void *) {
   
   CStateLobbyMultiplayerType *C; // [esp+Ch] [ebp-10h]
@@ -18,10 +17,7 @@ static class CGameState * __cdecl CStateLobbyMultiplayerType::DynamicCreateFunc(
 
 
 // address=[0x14c0a50]
-// Decompiled from CStateLobbyMultiplayerType *__thiscall CStateLobbyMultiplayerType::CStateLobbyMultiplayerType(
-        CStateLobbyMultiplayerType *this,
-        void *a2)
-
+// Decompiled from CStateLobbyMultiplayerType *__thiscall CStateLobbyMultiplayerType::CStateLobbyMultiplayerType(  CStateLobbyMultiplayerType *this,  void *a2)
  CStateLobbyMultiplayerType::CStateLobbyMultiplayerType(void *) {
   
   CGuiGameState::CGuiGameState(this);
@@ -34,7 +30,6 @@ static class CGameState * __cdecl CStateLobbyMultiplayerType::DynamicCreateFunc(
 
 // address=[0x14c0ac0]
 // Decompiled from void __thiscall CStateLobbyMultiplayerType::~CStateLobbyMultiplayerType(CStateLobbyMultiplayerType *this)
-
  CStateLobbyMultiplayerType::~CStateLobbyMultiplayerType(void) {
   
   *(_DWORD *)this = &CStateLobbyMultiplayerType::_vftable_;
@@ -49,7 +44,6 @@ static class CGameState * __cdecl CStateLobbyMultiplayerType::DynamicCreateFunc(
 
 // address=[0x14c0b40]
 // Decompiled from char __thiscall CStateLobbyMultiplayerType::Perform(CStateLobbyMultiplayerType *this)
-
 bool  CStateLobbyMultiplayerType::Perform(void) {
   
   DWORD v1; // esi
@@ -76,7 +70,6 @@ bool  CStateLobbyMultiplayerType::Perform(void) {
 
 // address=[0x14c0be0]
 // Decompiled from char __thiscall CStateLobbyMultiplayerType::OnEvent(CStateLobbyMultiplayerType *this, struct CEvn_Event *a2)
-
 bool  CStateLobbyMultiplayerType::OnEvent(class CEvn_Event &) {
   
   char result; // al
@@ -178,16 +171,7 @@ CStateLobbyMultiplayerType__OnEvent___def_18C0C31:
 
 
 // address=[0x14c0880]
-// Decompiled from char __thiscall CStateLobbyMultiplayerType::LaunchWebLobby(
-        void *this,
-        char a2,
-        int a3,
-        int a4,
-        int a5,
-        int a6,
-        int a7,
-        int a8)
-
+// Decompiled from char __thiscall CStateLobbyMultiplayerType::LaunchWebLobby(  void *this,  char a2,  int a3,  int a4,  int a5,  int a6,  int a7,  int a8)
 bool  CStateLobbyMultiplayerType::LaunchWebLobby(std::string) {
   
   char v9; // [esp-38h] [ebp-190h] BYREF

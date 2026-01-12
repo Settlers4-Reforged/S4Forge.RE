@@ -4,7 +4,6 @@
 
 // address=[0x15e79a0]
 // Decompiled from CSectors *__thiscall CSectors::Init(CSectors *this)
-
 void  CSectors::Init(void) {
   
   CSectors *result; // eax
@@ -22,7 +21,6 @@ void  CSectors::Init(void) {
 
 // address=[0x15e7a20]
 // Decompiled from int __thiscall CSectors::NewSector(CSectors *this, unsigned __int8 a2)
-
 int  CSectors::NewSector(unsigned char) {
   
   if ( *(int *)this >= 32766
@@ -41,7 +39,6 @@ int  CSectors::NewSector(unsigned char) {
 
 // address=[0x15e7ad0]
 // Decompiled from CSectors *__thiscall CSectors::DeleteSector(CSectors *this, CSectors *a2)
-
 void  CSectors::DeleteSector(int) {
   
   CSectors *result; // eax
@@ -58,9 +55,7 @@ void  CSectors::DeleteSector(int) {
 
 
 // address=[0x15e7b40]
-// Decompiled from // public: int __thiscall CSectors::CountSectors(unsigned char)const 
-int __thiscall CSectors::CountSectors(_BYTE *this, unsigned __int8 a2)
-
+// Decompiled from int __thiscall CSectors::CountSectors(_BYTE *this, unsigned __int8 a2)
 int  CSectors::CountSectors(unsigned char)const {
   
   int v3; // [esp+8h] [ebp-8h]
@@ -75,7 +70,6 @@ int  CSectors::CountSectors(unsigned char)const {
 
 // address=[0x15f3ed0]
 // Decompiled from CSectors *__thiscall CSectors::CSectors(CSectors *this)
-
  CSectors::CSectors(void) {
   
   CSectors::Init(this);
@@ -85,7 +79,6 @@ int  CSectors::CountSectors(unsigned char)const {
 
 // address=[0x15f4620]
 // Decompiled from int __thiscall CSectors::IncSectorSize(CSectors *this, int a2)
-
 void  CSectors::IncSectorSize(int) {
   
   int result; // eax
@@ -98,7 +91,6 @@ void  CSectors::IncSectorSize(int) {
 
 // address=[0x15f5660]
 // Decompiled from int __thiscall CSectors::SectorSize(CSectors *this, int a2)
-
 int  CSectors::SectorSize(int)const {
   
   return *((_DWORD *)this + a2 + 8193);

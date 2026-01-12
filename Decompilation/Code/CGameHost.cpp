@@ -4,7 +4,6 @@
 
 // address=[0x14aab10]
 // Decompiled from int __thiscall CGameHost::GetBytesPerSecond(CGameHost *this)
-
 unsigned int  CGameHost::GetBytesPerSecond(void) {
   
   if ( *((_DWORD *)this + 49) )
@@ -16,7 +15,6 @@ unsigned int  CGameHost::GetBytesPerSecond(void) {
 
 // address=[0x15b4e60]
 // Decompiled from char __thiscall CGameHost::AllSend(_DWORD *this)
-
 bool  CGameHost::AllSend(void) {
   
   int v2; // eax
@@ -110,7 +108,6 @@ bool  CGameHost::AllSend(void) {
 
 // address=[0x15b51a0]
 // Decompiled from char __thiscall CGameHost::StartNewCycle(CGameHost *this, bool a2)
-
 bool  CGameHost::StartNewCycle(bool) {
   
   int ValidTick; // esi
@@ -178,7 +175,6 @@ LABEL_7:
 
 // address=[0x15b5360]
 // Decompiled from int __thiscall sub_19B5360(_DWORD *this)
-
 int  CGameHost::GetValidTick(void) {
   
   return CMsgStacks::GetValidTick(this[5]);
@@ -187,7 +183,6 @@ int  CGameHost::GetValidTick(void) {
 
 // address=[0x15b5380]
 // Decompiled from int __thiscall CGameHost::GetVirtualTick(CMsgStacks **this)
-
 int  CGameHost::GetVirtualTick(void) {
   
   return CMsgStacks::GetVirtualTick(this[5]);
@@ -196,7 +191,6 @@ int  CGameHost::GetVirtualTick(void) {
 
 // address=[0x15b53a0]
 // Decompiled from char __thiscall CGameHost::RegisterMsgStacks(CGameHost *this, struct CMsgStacks *a2)
-
 bool  CGameHost::RegisterMsgStacks(class CMsgStacks *) {
   
   if ( *((_DWORD *)this + 5) )
@@ -208,7 +202,6 @@ bool  CGameHost::RegisterMsgStacks(class CMsgStacks *) {
 
 // address=[0x15b53d0]
 // Decompiled from char __thiscall CGameHost::InitAsClient(CGameHost *this, unsigned int a2)
-
 bool  CGameHost::InitAsClient(unsigned int) {
   
   if ( !*((_DWORD *)this + 3) && BBSupportDbgReport(2, "Net\\GameHost.cpp", 3237, "m_pFsm") == 1 )
@@ -223,7 +216,6 @@ bool  CGameHost::InitAsClient(unsigned int) {
 
 // address=[0x15b5440]
 // Decompiled from char __thiscall CGameHost::InitAsHost(CGameHost *this, unsigned int a2)
-
 bool  CGameHost::InitAsHost(unsigned int) {
   
   if ( !*((_DWORD *)this + 3) && BBSupportDbgReport(2, "Net\\GameHost.cpp", 589, "m_pFsm") == 1 )
@@ -238,7 +230,6 @@ bool  CGameHost::InitAsHost(unsigned int) {
 
 // address=[0x15b54b0]
 // Decompiled from CGameHost *__thiscall CGameHost::CGameHost(CGameHost *this, char a2)
-
  CGameHost::CGameHost(bool) {
   
   const char *v2; // eax
@@ -409,7 +400,6 @@ LABEL_12:
 
 // address=[0x15b5ed0]
 // Decompiled from void __thiscall CGameHost::~CGameHost(CGameHost *this)
-
  CGameHost::~CGameHost(void) {
   
   CFsm *v1; // [esp+28h] [ebp-20h]
@@ -470,7 +460,6 @@ LABEL_12:
 
 // address=[0x15b60d0]
 // Decompiled from bool __thiscall CGameHost::PushMsg(CMsgStacks **this, struct CNet_Event *a2)
-
 bool  CGameHost::PushMsg(class CNet_Event &) {
   
   int v2; // esi
@@ -501,7 +490,6 @@ bool  CGameHost::PushMsg(class CNet_Event &) {
 
 // address=[0x15b6190]
 // Decompiled from void __thiscall CGameHost::PushAsyncMsg(int this, unsigned __int16 *Src, unsigned __int8 a3)
-
 void  CGameHost::PushAsyncMsg(class CNet_Event &,unsigned char) {
   
   int v3; // eax
@@ -561,7 +549,6 @@ void  CGameHost::PushAsyncMsg(class CNet_Event &,unsigned char) {
 
 // address=[0x15b63b0]
 // Decompiled from int __thiscall CGameHost::PopMsg(_DWORD *this, int a2)
-
 class CNet_Event  CGameHost::PopMsg(void) {
   
   CMsgStacks::PopMsg(this[5], a2);
@@ -571,7 +558,6 @@ class CNet_Event  CGameHost::PopMsg(void) {
 
 // address=[0x15b63f0]
 // Decompiled from int __thiscall CGameHost::GetLocalIP(CGameHost *this)
-
 long  CGameHost::GetLocalIP(void) {
   
   return (*(int (__thiscall **)(_DWORD, CGameHost *))(**((_DWORD **)this + 49) + 16))(*((_DWORD *)this + 49), this);
@@ -580,7 +566,6 @@ long  CGameHost::GetLocalIP(void) {
 
 // address=[0x15b6420]
 // Decompiled from int __thiscall sub_19B6420(_DWORD **this)
-
 unsigned short  CGameHost::GetMessageLength(void) {
   
   return (*(int (__thiscall **)(_DWORD *, _DWORD **))(*this[49] + 44))(this[49], this) - 2;
@@ -589,7 +574,6 @@ unsigned short  CGameHost::GetMessageLength(void) {
 
 // address=[0x15b6450]
 // Decompiled from _DWORD *__thiscall CGameHost::GameInitalized(CFsm **this)
-
 void  CGameHost::GameInitalized(void) {
   
   CEvn_Event v2; // [esp+8h] [ebp-28h] BYREF
@@ -607,7 +591,6 @@ void  CGameHost::GameInitalized(void) {
 
 // address=[0x15b64f0]
 // Decompiled from CGameHost *__thiscall CGameHost::ContinueSearchForHost(CGameHost *this)
-
 void  CGameHost::ContinueSearchForHost(void) {
   
   CGameHost *result; // eax
@@ -620,7 +603,6 @@ void  CGameHost::ContinueSearchForHost(void) {
 
 // address=[0x15b6510]
 // Decompiled from char __thiscall CGameHost::Run(CGameHost *this)
-
 bool  CGameHost::Run(void) {
   
   const char *v1; // eax
@@ -804,7 +786,6 @@ bool  CGameHost::Run(void) {
 
 // address=[0x15b6c60]
 // Decompiled from char __thiscall CGameHost::StartIniFileGame(CGameHost *this, wchar_t *Source)
-
 bool  CGameHost::StartIniFileGame(wchar_t const *) {
   
   void *v2; // esp
@@ -1466,7 +1447,6 @@ bool  CGameHost::StartIniFileGame(wchar_t const *) {
 
 // address=[0x15b88c0]
 // Decompiled from DWORD __thiscall CGameHost::PingClients(CGameHost *this)
-
 void  CGameHost::PingClients(void) {
   
   unsigned int v1; // esi
@@ -1516,7 +1496,6 @@ void  CGameHost::PingClients(void) {
 
 // address=[0x15b8990]
 // Decompiled from void __thiscall CGameHost::DeliverSimpleMessage(CGameHost *this)
-
 void  CGameHost::DeliverSimpleMessage(void) {
   
   const char *v1; // eax
@@ -1643,7 +1622,6 @@ void  CGameHost::DeliverSimpleMessage(void) {
 
 // address=[0x15b8d70]
 // Decompiled from void *__thiscall CGameHost::ConvertIPAddress(_DWORD **this, void *a2, int a3)
-
 std::string  CGameHost::ConvertIPAddress(unsigned int) {
   
   char *v3; // eax
@@ -1663,7 +1641,6 @@ std::string  CGameHost::ConvertIPAddress(unsigned int) {
 
 // address=[0x15b8de0]
 // Decompiled from char __thiscall CGameHost::RemovePlayerPeerId(CMsgStacks **this, unsigned int a2)
-
 bool  CGameHost::RemovePlayerPeerId(unsigned int) {
   
   int Instance; // eax
@@ -1720,9 +1697,7 @@ bool  CGameHost::RemovePlayerPeerId(unsigned int) {
 
 
 // address=[0x15b9000]
-// Decompiled from // public: bool __thiscall CGameHost::IsLocalIP(unsigned int)
-char __thiscall CGameHost::IsLocalIP(_DWORD **this, int a2)
-
+// Decompiled from char __thiscall CGameHost::IsLocalIP(_DWORD **this, int a2)
 bool  CGameHost::IsLocalIP(unsigned int) {
   
   if ( this[49] )
@@ -1734,7 +1709,6 @@ bool  CGameHost::IsLocalIP(unsigned int) {
 
 // address=[0x15b9040]
 // Decompiled from char __thiscall CGameHost::OnEndGame(CGameHost *this, int a2)
-
 bool  CGameHost::OnEndGame(int) {
   
   return 1;
@@ -1743,7 +1717,6 @@ bool  CGameHost::OnEndGame(int) {
 
 // address=[0x15b9050]
 // Decompiled from void __thiscall CGameHost::OnEndSaving(CMsgStacks **this, int a2)
-
 void  CGameHost::OnEndSaving(int) {
   
   CMsgStacks::OnEndSaving(this[5], *(_DWORD *)(g_pGameType + 112), a2);
@@ -1752,7 +1725,6 @@ void  CGameHost::OnEndSaving(int) {
 
 // address=[0x15b9080]
 // Decompiled from _DWORD *__thiscall CGameHost::StormJoinSessionSucceeded(CClientList **this)
-
 void  CGameHost::StormJoinSessionSucceeded(void) {
   
   storm::SimpleSessionHandler **Instance; // eax
@@ -1793,7 +1765,6 @@ void  CGameHost::StormJoinSessionSucceeded(void) {
 
 // address=[0x15b91b0]
 // Decompiled from int __stdcall CGameHost::StormHost_NewPlayerMessage(int a1, _Cnd_internal_imp_t *a2, char a3)
-
 void  CGameHost::StormHost_NewPlayerMessage(unsigned int,std::wstring &,int) {
   
   const wchar_t *v3; // eax
@@ -1813,7 +1784,6 @@ void  CGameHost::StormHost_NewPlayerMessage(unsigned int,std::wstring &,int) {
 
 // address=[0x15b9210]
 // Decompiled from int __thiscall CGameHost::StormClientLeavesMyGame(CClientList **this, unsigned int a2)
-
 void  CGameHost::StormClientLeavesMyGame(unsigned int) {
   
   int Instance; // eax
@@ -1830,7 +1800,6 @@ void  CGameHost::StormClientLeavesMyGame(unsigned int) {
 
 // address=[0x15b9280]
 // Decompiled from int __thiscall CGameHost::PromoteToHost(CGameHost *this)
-
 void  CGameHost::PromoteToHost(void) {
   
   void **CurrentState; // eax
@@ -1857,7 +1826,6 @@ void  CGameHost::PromoteToHost(void) {
 
 // address=[0x15b9300]
 // Decompiled from void __thiscall CGameHost::OnQuickMatched(CGameHost *this, bool a2)
-
 void  CGameHost::OnQuickMatched(bool) {
   
   if ( a2 )
@@ -1869,7 +1837,6 @@ void  CGameHost::OnQuickMatched(bool) {
 
 // address=[0x15b9330]
 // Decompiled from _DWORD *__thiscall CGameHost::OnQuickMatchedHosted(CGameHost *this)
-
 void  CGameHost::OnQuickMatchedHosted(void) {
   
   const wchar_t *v1; // eax
@@ -1918,7 +1885,6 @@ void  CGameHost::OnQuickMatchedHosted(void) {
 
 // address=[0x15b9500]
 // Decompiled from int __thiscall CGameHost::OnJoinedFromOnlineFlow(CGameHost *this)
-
 void  CGameHost::OnJoinedFromOnlineFlow(void) {
   
   int Instance; // eax
@@ -2096,7 +2062,6 @@ void  CGameHost::OnJoinedFromOnlineFlow(void) {
 
 // address=[0x15b9860]
 // Decompiled from int __thiscall sub_19B9860(_DWORD *this)
-
 void  CGameHost::FillHandlersArray(void) {
   
   int result; // eax
@@ -2161,7 +2126,6 @@ void  CGameHost::FillHandlersArray(void) {
 
 // address=[0x15b9cd0]
 // Decompiled from char __thiscall CGameHost::OnHostWait(CGameHost *this, void *a2)
-
 bool  CGameHost::OnHostWait(void *) {
   
   return 1;
@@ -2170,7 +2134,6 @@ bool  CGameHost::OnHostWait(void *) {
 
 // address=[0x15b9ce0]
 // Decompiled from char __thiscall CGameHost::OnClientRun(CGameHost *this)
-
 bool  CGameHost::OnClientRun(void) {
   
   if ( !*((_DWORD *)this + 3) || CFsm::CurrentState(*((CFsm **)this + 3)) != 5 || *((_DWORD *)this + 9) )
@@ -2182,7 +2145,6 @@ bool  CGameHost::OnClientRun(void) {
 
 // address=[0x15b9d20]
 // Decompiled from int __thiscall CGameHost::OnHostRun(CFsm **this)
-
 void  CGameHost::OnHostRun(void) {
   
   int result; // eax
@@ -2204,7 +2166,6 @@ void  CGameHost::OnHostRun(void) {
 
 // address=[0x15b9da0]
 // Decompiled from char __thiscall CGameHost::InitHostNetwork(CGameHost *this, void *a2)
-
 bool  CGameHost::InitHostNetwork(void *) {
   
   *((_BYTE *)this + 8) = 1;
@@ -2214,7 +2175,6 @@ bool  CGameHost::InitHostNetwork(void *) {
 
 // address=[0x15b9dc0]
 // Decompiled from char __thiscall CGameHost::InitClientNetwork(CGameHost *this, void *a2)
-
 bool  CGameHost::InitClientNetwork(void *) {
   
   *((_BYTE *)this + 9) = 1;
@@ -2225,7 +2185,6 @@ bool  CGameHost::InitClientNetwork(void *) {
 
 // address=[0x15b9df0]
 // Decompiled from char __thiscall CGameHost::ErrorState(int this, int a2)
-
 bool  CGameHost::ErrorState(void *) {
   
   int v2; // eax
@@ -2251,7 +2210,6 @@ bool  CGameHost::ErrorState(void *) {
 
 // address=[0x15b9e70]
 // Decompiled from int __stdcall CGameHost::ProcessPlayerData(int a1)
-
 void  CGameHost::ProcessPlayerData(struct SLobbyPlayerData &) {
   
   int result; // eax
@@ -2315,7 +2273,6 @@ void  CGameHost::ProcessPlayerData(struct SLobbyPlayerData &) {
 
 // address=[0x15ba130]
 // Decompiled from int __thiscall CGameHost::SendPlayerData(void *this, int a2)
-
 void  CGameHost::SendPlayerData(unsigned int) {
   
   int result; // eax
@@ -2374,7 +2331,6 @@ void  CGameHost::SendPlayerData(unsigned int) {
 
 // address=[0x15ba420]
 // Decompiled from void __thiscall CGameHost::SendToAll(int this, int a2, void *Src, size_t Size, void *a5, size_t a6, char a7)
-
 void  CGameHost::SendToAll(unsigned int,short *,unsigned int,short *,unsigned int,bool) {
   
   int v7; // eax
@@ -2453,7 +2409,6 @@ void  CGameHost::SendToAll(unsigned int,short *,unsigned int,short *,unsigned in
 
 // address=[0x15ba650]
 // Decompiled from _DWORD *__thiscall CGameHost::SendToHost(_DWORD *this, int a2, void *Src, size_t Size, void *a5, size_t a6, char a7)
-
 void  CGameHost::SendToHost(unsigned int,short *,unsigned int,short *,unsigned int,bool) {
   
   _DWORD *result; // eax
@@ -2528,7 +2483,6 @@ void  CGameHost::SendToHost(unsigned int,short *,unsigned int,short *,unsigned i
 
 // address=[0x15ba860]
 // Decompiled from char __thiscall CGameHost::AddGame(CGameHost *this, struct SGameInfo *a2)
-
 bool  CGameHost::AddGame(struct SGameInfo &) {
   
   int v3; // [esp-10h] [ebp-8Ch] BYREF
@@ -2602,7 +2556,6 @@ bool  CGameHost::AddGame(struct SGameInfo &) {
 
 // address=[0x15baa20]
 // Decompiled from int __thiscall CGameHost::ValidateGameList(CGameHost *this)
-
 void  CGameHost::ValidateGameList(void) {
   
   char v2; // [esp-1Ch] [ebp-A8h] BYREF
@@ -2683,7 +2636,6 @@ void  CGameHost::ValidateGameList(void) {
 
 // address=[0x15baba0]
 // Decompiled from int __thiscall CGameHost::GetLocalID(CGameHost *this)
-
 unsigned int  CGameHost::GetLocalID(void) {
   
   int Instance; // eax
@@ -2703,7 +2655,6 @@ unsigned int  CGameHost::GetLocalID(void) {
 
 // address=[0x15bac30]
 // Decompiled from int __thiscall CGameHost::GetSlot(CGameHost *this, unsigned int a2)
-
 int  CGameHost::GetSlot(unsigned int) {
   
   int i; // [esp+4h] [ebp-4h]
@@ -2721,7 +2672,6 @@ int  CGameHost::GetSlot(unsigned int) {
 
 // address=[0x15bacb0]
 // Decompiled from void __thiscall CGameHost::NotifyClients(CGameHost *this, int a2)
-
 void  CGameHost::NotifyClients(unsigned int) {
   
   unsigned int ValidTick; // eax
@@ -2816,7 +2766,6 @@ void  CGameHost::NotifyClients(unsigned int) {
 
 // address=[0x15bb0e0]
 // Decompiled from char __thiscall CGameHost::IsExclusiveColor(CGameHost *this, int a2)
-
 bool  CGameHost::IsExclusiveColor(int) {
   
   int i; // [esp+8h] [ebp-4h]
@@ -2836,7 +2785,6 @@ bool  CGameHost::IsExclusiveColor(int) {
 
 // address=[0x15bb160]
 // Decompiled from char __thiscall CGameHost::HostChoseMap(_BYTE *this, int a2)
-
 bool  CGameHost::HostChoseMap(void *) {
   
   const wchar_t *v2; // eax
@@ -2894,7 +2842,6 @@ bool  CGameHost::HostChoseMap(void *) {
 
 // address=[0x15bb380]
 // Decompiled from char __stdcall CGameHost::QuickMatchChoseMap(int a1)
-
 bool  CGameHost::QuickMatchChoseMap(void *) {
   
   int v2; // [esp-4h] [ebp-8h]
@@ -2908,7 +2855,6 @@ bool  CGameHost::QuickMatchChoseMap(void *) {
 
 // address=[0x15bb3b0]
 // Decompiled from char __thiscall CGameHost::InviteAccepted(CGameHost *this, int a2)
-
 bool  CGameHost::InviteAccepted(void *) {
   
   OnlineManager *Instance; // eax
@@ -2942,7 +2888,6 @@ bool  CGameHost::InviteAccepted(void *) {
 
 // address=[0x15bb430]
 // Decompiled from char __stdcall sub_19BB430(int a1)
-
 bool  CGameHost::StartState(void *) {
   
   return 0;
@@ -2951,7 +2896,6 @@ bool  CGameHost::StartState(void *) {
 
 // address=[0x15bb440]
 // Decompiled from char __thiscall SearchHost(void *this, int a2)
-
 bool  CGameHost::SearchHost(void *) {
   
   int v2; // eax
@@ -3001,7 +2945,6 @@ bool  CGameHost::SearchHost(void *) {
 
 // address=[0x15bb5b0]
 // Decompiled from char __thiscall CGameHost::ClientSearchesGameHost(_DWORD **this, int a2)
-
 bool  CGameHost::ClientSearchesGameHost(void *) {
   
   _DWORD *v2; // eax
@@ -3045,7 +2988,6 @@ bool  CGameHost::ClientSearchesGameHost(void *) {
 
 // address=[0x15bb880]
 // Decompiled from char __thiscall CGameHost::ClientReceivesGameInfo(_DWORD **this, void *Src)
-
 bool  CGameHost::ClientReceivesGameInfo(void *) {
   
   unsigned __int16 MessageLength; // ax
@@ -3092,7 +3034,6 @@ bool  CGameHost::ClientReceivesGameInfo(void *) {
 
 // address=[0x15bba10]
 // Decompiled from char __thiscall CGameHost::ClientLoginHost(CGameHost *this, int a2)
-
 bool  CGameHost::ClientLoginHost(void *) {
   
   int Instance; // eax
@@ -3216,7 +3157,6 @@ bool  CGameHost::ClientLoginHost(void *) {
 
 // address=[0x15bbdf0]
 // Decompiled from char __thiscall CGameHost::ClientJoins(int this, void *Src)
-
 bool  CGameHost::ClientJoins(void *) {
   
   unsigned int v3; // eax
@@ -3279,7 +3219,6 @@ bool  CGameHost::ClientJoins(void *) {
 
 // address=[0x15bc010]
 // Decompiled from char __stdcall sub_19BC010(int a1)
-
 bool  CGameHost::ClientWrongVersion(void *) {
   
   CGameStateHandler::Queue((int)CStateMessageBox::DynamicCreateFunc, 2412);
@@ -3290,7 +3229,6 @@ bool  CGameHost::ClientWrongVersion(void *) {
 
 // address=[0x15bc040]
 // Decompiled from char __stdcall sub_19BC040(int a1)
-
 bool  CGameHost::ClientWrongVersionAfterLobby(void *) {
   
   CGameStateHandler::Queue((int)CStateMessageBox::DynamicCreateFunc, 2414);
@@ -3301,7 +3239,6 @@ bool  CGameHost::ClientWrongVersionAfterLobby(void *) {
 
 // address=[0x15bc070]
 // Decompiled from char __thiscall CGameHost::ClientReceivePlayerData(int this, void *Src)
-
 bool  CGameHost::ClientReceivePlayerData(void *) {
   
   unsigned __int16 MessageLength; // ax
@@ -3349,7 +3286,6 @@ bool  CGameHost::ClientReceivePlayerData(void *) {
 
 // address=[0x15bc320]
 // Decompiled from char __thiscall CGameHost::ClientReceivePlayerPing(void *this, void *Src)
-
 bool  CGameHost::ClientReceivePlayerPing(void *) {
   
   unsigned __int16 MessageLength; // ax
@@ -3368,7 +3304,6 @@ bool  CGameHost::ClientReceivePlayerPing(void *) {
 
 // address=[0x15bc370]
 // Decompiled from char __thiscall sub_19BC370(void *this, int a2)
-
 bool  CGameHost::ClientLobbyPrepare(void *) {
   
   std::list<SGameInfo>::clear(this);
@@ -3379,7 +3314,6 @@ bool  CGameHost::ClientLobbyPrepare(void *) {
 
 // address=[0x15bc3a0]
 // Decompiled from char __thiscall CGameHost::ResendPlayerData(void *this, int a2)
-
 bool  CGameHost::ResendPlayerData(void *) {
   
   CGameHost::SendPlayerData(this, 0);
@@ -3389,7 +3323,6 @@ bool  CGameHost::ResendPlayerData(void *) {
 
 // address=[0x15bc3c0]
 // Decompiled from char __thiscall CGameHost::ResendPlayerPing(_DWORD *this, int a2)
-
 bool  CGameHost::ResendPlayerPing(void *) {
   
   _BYTE Src[8]; // [esp+0h] [ebp-10h] BYREF
@@ -3411,7 +3344,6 @@ bool  CGameHost::ResendPlayerPing(void *) {
 
 // address=[0x15bc450]
 // Decompiled from char __stdcall CGameHost::HostPressedStart(int a1)
-
 bool  CGameHost::HostPressedStart(void *) {
   
   int MultiPlayerGameID; // eax
@@ -3447,7 +3379,6 @@ bool  CGameHost::HostPressedStart(void *) {
 
 // address=[0x15bc560]
 // Decompiled from char __thiscall sub_19BC560(int this, void *Src)
-
 bool  CGameHost::InitGameStruct(void *) {
   
   int v2; // eax
@@ -3490,7 +3421,6 @@ bool  CGameHost::InitGameStruct(void *) {
 
 // address=[0x15bc680]
 // Decompiled from char __thiscall sub_19BC680(int this, int a2)
-
 bool  CGameHost::ResendFinalPData(void *) {
   
   int v2; // eax
@@ -3521,7 +3451,6 @@ bool  CGameHost::ResendFinalPData(void *) {
 
 // address=[0x15bc720]
 // Decompiled from char __thiscall CGameHost::ChatLine(_BYTE *this, void *Src)
-
 bool  CGameHost::ChatLine(void *) {
   
   unsigned __int16 MessageLength; // ax
@@ -3539,7 +3468,6 @@ bool  CGameHost::ChatLine(void *) {
 
 // address=[0x15bc7c0]
 // Decompiled from char __stdcall sub_19BC7C0(int a1)
-
 bool  CGameHost::GameAlreadyFull(void *) {
   
   CGameStateHandler::Queue(CStateMessageBox::DynamicCreateFunc, 2410);
@@ -3550,7 +3478,6 @@ bool  CGameHost::GameAlreadyFull(void *) {
 
 // address=[0x15bc7f0]
 // Decompiled from char __thiscall CGameHost::SendMapToClient(int this, int a2)
-
 bool  CGameHost::SendMapToClient(void *) {
   
   unsigned int v2; // eax
@@ -3684,7 +3611,6 @@ bool  CGameHost::SendMapToClient(void *) {
 
 // address=[0x15bce20]
 // Decompiled from char __thiscall CGameHost::ClientReceiveMap(void **this, void *Src)
-
 bool  CGameHost::ClientReceiveMap(void *) {
   
   unsigned __int16 MessageLength; // ax
@@ -3815,7 +3741,6 @@ bool  CGameHost::ClientReceiveMap(void *) {
 
 // address=[0x15bd220]
 // Decompiled from char __thiscall RemoveClient(_DWORD **this, int a2)
-
 bool  CGameHost::ClientLeavesMyGame(void *) {
   
   int v3; // [esp+0h] [ebp-8h]
@@ -3831,7 +3756,6 @@ bool  CGameHost::ClientLeavesMyGame(void *) {
 
 // address=[0x15bd290]
 // Decompiled from char __thiscall sub_19BD290(void *this, int a2)
-
 bool  CGameHost::PerformLeaveGame(void *) {
   
   int v2; // eax
@@ -3844,7 +3768,6 @@ bool  CGameHost::PerformLeaveGame(void *) {
 
 // address=[0x15bd2b0]
 // Decompiled from char __thiscall CGameHost::SendChatLine(_BYTE *this, wchar_t *Source)
-
 bool  CGameHost::SendChatLine(void *) {
   
   _DWORD *v2; // eax
@@ -3884,7 +3807,6 @@ bool  CGameHost::SendChatLine(void *) {
 
 // address=[0x15bd420]
 // Decompiled from char __thiscall CGameHost::UserDataChange(CGameHost *this, int *a2)
-
 bool  CGameHost::UserDataChange(void *) {
   
   int v4; // [esp+8h] [ebp-14h]
@@ -3993,7 +3915,6 @@ bool  CGameHost::UserDataChange(void *) {
 
 // address=[0x15bd980]
 // Decompiled from char __thiscall CGameHost::KickClient(_DWORD **this, int a2)
-
 bool  CGameHost::KickClient(void *) {
   
   unsigned int v4; // [esp+4h] [ebp-Ch]
@@ -4020,7 +3941,6 @@ bool  CGameHost::KickClient(void *) {
 
 // address=[0x15bda30]
 // Decompiled from char __thiscall sub_19BDA30(void *this, int a2)
-
 bool  CGameHost::WereKicked(void *) {
   
   void *v2; // eax
@@ -4035,7 +3955,6 @@ bool  CGameHost::WereKicked(void *) {
 
 // address=[0x15bda70]
 // Decompiled from char __thiscall CGameHost::UserChangeSlots(CGameHost *this, unsigned int *a2)
-
 bool  CGameHost::UserChangeSlots(void *) {
   
   int RealPlayerName; // eax
@@ -4116,7 +4035,6 @@ bool  CGameHost::UserChangeSlots(void *) {
 
 // address=[0x15bde60]
 // Decompiled from char __thiscall sub_19BDE60(_BYTE *this, int a2)
-
 bool  CGameHost::InitHostAfterLobby(void *) {
   
   this[8] = 1;
@@ -4127,7 +4045,6 @@ bool  CGameHost::InitHostAfterLobby(void *) {
 
 // address=[0x15bde90]
 // Decompiled from char __thiscall sub_19BDE90(_BYTE *this, int a2)
-
 bool  CGameHost::InitClientAfterLobby(void *) {
   
   this[9] = 1;
@@ -4138,7 +4055,6 @@ bool  CGameHost::InitClientAfterLobby(void *) {
 
 // address=[0x15bdec0]
 // Decompiled from char __thiscall CGameHost::WaitingForGameConnect(_BYTE *this, void *Src)
-
 bool  CGameHost::WaitingForGameConnect(void *) {
   
   unsigned __int16 MessageLength; // ax
@@ -4255,7 +4171,6 @@ bool  CGameHost::WaitingForGameConnect(void *) {
 
 // address=[0x15be220]
 // Decompiled from char __thiscall CGameHost::HostInitGame(int this, int a2)
-
 bool  CGameHost::HostInitGame(void *) {
   
   int v2; // eax
@@ -4300,9 +4215,7 @@ bool  CGameHost::HostInitGame(void *) {
 
 
 // address=[0x15be3c0]
-// Decompiled from // bad sp value at call has been detected, the output may be wrong!
-char __thiscall sub_19BE3C0(_DWORD **this, int a2)
-
+// Decompiled from char __thiscall sub_19BE3C0(_DWORD **this, int a2)
 bool  CGameHost::HostStartTick(void *) {
   
   _BYTE v3[24]; // [esp+Ch] [ebp-28h] BYREF
@@ -4320,7 +4233,6 @@ bool  CGameHost::HostStartTick(void *) {
 
 // address=[0x15be460]
 // Decompiled from char __thiscall CGameHost::RegClientConnect(int this, int a2)
-
 bool  CGameHost::RegClientConnect(void *) {
   
   int Instance; // eax
@@ -4400,7 +4312,6 @@ bool  CGameHost::RegClientConnect(void *) {
 
 // address=[0x15be750]
 // Decompiled from char __stdcall sub_19BE750(int a1)
-
 bool  CGameHost::WereConnectedForGame(void *) {
   
   return 1;
@@ -4409,7 +4320,6 @@ bool  CGameHost::WereConnectedForGame(void *) {
 
 // address=[0x15be760]
 // Decompiled from char __thiscall CGameHost::ClientStartingGame(_DWORD *this, int a2)
-
 bool  CGameHost::ClientStartingGame(void *) {
   
   int v4; // [esp+Ch] [ebp-38h]
@@ -4443,7 +4353,6 @@ bool  CGameHost::ClientStartingGame(void *) {
 
 // address=[0x15be8b0]
 // Decompiled from char __stdcall sub_19BE8B0(int a1)
-
 bool  CGameHost::ClientGameInited(void *) {
   
   CGameHost::SendToHost(1018, 0, 0, 0, 0, 1);
@@ -4452,9 +4361,7 @@ bool  CGameHost::ClientGameInited(void *) {
 
 
 // address=[0x15be8e0]
-// Decompiled from // bad sp value at call has been detected, the output may be wrong!
-char __thiscall sub_19BE8E0(_DWORD **this, int a2)
-
+// Decompiled from char __thiscall sub_19BE8E0(_DWORD **this, int a2)
 bool  CGameHost::ClientStartTick(void *) {
   
   _BYTE v3[24]; // [esp+Ch] [ebp-28h] BYREF
@@ -4472,7 +4379,6 @@ bool  CGameHost::ClientStartTick(void *) {
 
 // address=[0x15be980]
 // Decompiled from char __thiscall CGameHost::HostGameInited(int this, int a2)
-
 bool  CGameHost::HostGameInited(void *) {
   
   unsigned int v2; // eax
@@ -4530,7 +4436,6 @@ bool  CGameHost::HostGameInited(void *) {
 
 // address=[0x15beaf0]
 // Decompiled from char __thiscall CGameHost::GameSyncMsgGot(_DWORD *this, int *a2)
-
 bool  CGameHost::GameSyncMsgGot(void *) {
   
   int v2; // esi
@@ -4547,7 +4452,6 @@ bool  CGameHost::GameSyncMsgGot(void *) {
 
 // address=[0x15beba0]
 // Decompiled from char __thiscall CGameHost::GameSync0MsgGot(CGameHost *this, int *a2)
-
 bool  CGameHost::GameSync0MsgGot(void *) {
   
   int v3; // esi
@@ -4566,7 +4470,6 @@ bool  CGameHost::GameSync0MsgGot(void *) {
 
 // address=[0x15bec60]
 // Decompiled from char __thiscall CGameHost::GameInGameMsgGot(CMsgStacks **this, void *Src)
-
 bool  CGameHost::GameInGameMsgGot(void *) {
   
   unsigned __int16 MessageLength; // ax
@@ -4594,7 +4497,6 @@ bool  CGameHost::GameInGameMsgGot(void *) {
 
 // address=[0x15bed50]
 // Decompiled from char __thiscall CGameHost::GameAsyncMsgGot(void *this, void *Src)
-
 bool  CGameHost::GameAsyncMsgGot(void *) {
   
   unsigned __int16 MessageLength; // ax
@@ -4630,7 +4532,6 @@ bool  CGameHost::GameAsyncMsgGot(void *) {
 
 // address=[0x15bee60]
 // Decompiled from char __thiscall sub_19BEE60(_DWORD **this, int a2)
-
 bool  CGameHost::AmIStillAlive(void *) {
   
   int v2; // eax
@@ -4653,7 +4554,6 @@ bool  CGameHost::AmIStillAlive(void *) {
 
 // address=[0x15bef30]
 // Decompiled from char __stdcall sub_19BEF30(char *a1)
-
 bool  CGameHost::HeIsStillAlive(void *) {
   
   DWORD Time; // eax
@@ -4666,7 +4566,6 @@ bool  CGameHost::HeIsStillAlive(void *) {
 
 // address=[0x15bef60]
 // Decompiled from char __thiscall CGameHost::GameInGamePackedGot(_DWORD *this, int a2)
-
 bool  CGameHost::GameInGamePackedGot(void *) {
   
   int v3; // [esp+4h] [ebp-1Ch]
@@ -4706,7 +4605,6 @@ bool  CGameHost::GameInGamePackedGot(void *) {
 
 // address=[0x15bf0e0]
 // Decompiled from char __thiscall CGameHost::IsValidSaveGame(CGameHost *this, struct SGameInfo *a2)
-
 bool  CGameHost::IsValidSaveGame(struct SGameInfo &) {
   
   const wchar_t *v2; // eax
@@ -4744,7 +4642,6 @@ bool  CGameHost::IsValidSaveGame(struct SGameInfo &) {
 
 // address=[0x15c4970]
 // Decompiled from char __stdcall sub_19C4970(int a1)
-
 bool  CGameHost::DoNothing(void *) {
   
   return 1;

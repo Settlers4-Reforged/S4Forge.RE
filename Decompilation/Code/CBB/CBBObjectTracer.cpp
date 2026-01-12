@@ -4,7 +4,6 @@
 
 // address=[0x2f33a90]
 // Decompiled from void CBBObjectTracer::Enter()
-
 static void __cdecl CBBObjectTracer::Enter(void) {
   
   if ( !CBBObjectTracer::m_uCurrentSerialNumber )
@@ -18,7 +17,6 @@ static void __cdecl CBBObjectTracer::Enter(void) {
 
 // address=[0x2f33ad0]
 // Decompiled from _DWORD *__cdecl CBBObjectTracer::InitObject(_DWORD *a1, const char *a2, char a3)
-
 static void __cdecl CBBObjectTracer::InitObject(class CBBObject &,char const *,bool) {
   
   _DWORD *result; // eax
@@ -49,7 +47,6 @@ static void __cdecl CBBObjectTracer::InitObject(class CBBObject &,char const *,b
 
 // address=[0x2f33b70]
 // Decompiled from char __cdecl CBBObjectTracer::IsObjectInList(unsigned int a1, struct CBBObject **a2)
-
 static bool __cdecl CBBObjectTracer::IsObjectInList(unsigned int,class CBBObject * &) {
   
   struct CBBObject *v3; // [esp+0h] [ebp-8h]
@@ -74,7 +71,6 @@ static bool __cdecl CBBObjectTracer::IsObjectInList(unsigned int,class CBBObject
 
 // address=[0x2f33bd0]
 // Decompiled from void CBBObjectTracer::DumpObjects()
-
 static void __cdecl CBBObjectTracer::DumpObjects(void) {
   
   const char *v0; // [esp+4h] [ebp-8h]
@@ -98,7 +94,6 @@ static void __cdecl CBBObjectTracer::DumpObjects(void) {
 
 // address=[0x2f33dd0]
 // Decompiled from void CBBObjectTracer::Leave()
-
 static void __cdecl CBBObjectTracer::Leave(void) {
   
   LeaveCriticalSection(&CBBObjectTracer::m_sCriticalSection);

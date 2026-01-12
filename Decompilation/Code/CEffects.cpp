@@ -4,7 +4,6 @@
 
 // address=[0x144bfb0]
 // Decompiled from CEffects *__thiscall CEffects::CEffects(CEffects *this)
-
  CEffects::CEffects(void) {
   
   unsigned int i; // [esp+4h] [ebp-14h]
@@ -44,7 +43,6 @@
 
 // address=[0x144c200]
 // Decompiled from void __thiscall CEffects::~CEffects(CEffects *this)
-
  CEffects::~CEffects(void) {
   
   *(_DWORD *)this = &CEffects::_vftable_;
@@ -58,7 +56,6 @@
 
 // address=[0x144c280]
 // Decompiled from CEffects *__thiscall CEffects::SetEffectsViewport(CEffects *this, int a2, int a3, int a4, int a5, int a6)
-
 void  CEffects::SetEffectsViewport(int,int,int,int,int) {
   
   CEffects *result; // eax
@@ -90,7 +87,6 @@ void  CEffects::SetEffectsViewport(int,int,int,int,int) {
 
 // address=[0x144c3a0]
 // Decompiled from int __thiscall CEffects::FirstEffect(CEffects *this, Squares *a2)
-
 struct SGfxObjectInfo *  CEffects::FirstEffect(int) {
   
   struct IUnknown *v3; // [esp+0h] [ebp-34h]
@@ -195,7 +191,6 @@ LABEL_40:
 
 // address=[0x144c6e0]
 // Decompiled from void *__thiscall CEffects::NextEffect(CEffects *this)
-
 struct SGfxObjectInfo *  CEffects::NextEffect(void) {
   
   int v2; // eax
@@ -255,7 +250,6 @@ struct SGfxObjectInfo *  CEffects::NextEffect(void) {
 
 // address=[0x144c880]
 // Decompiled from int __thiscall CEffects::Load(CEffects *this, struct IS4Chunk *a2)
-
 void  CEffects::Load(class IS4Chunk &) {
   
   int v2; // eax
@@ -290,7 +284,6 @@ void  CEffects::Load(class IS4Chunk &) {
 
 // address=[0x144ca00]
 // Decompiled from int __thiscall CEffects::Save(CEffects *this, struct IS4Chunk *a2)
-
 void  CEffects::Save(class IS4Chunk &) {
   
   if ( *((_DWORD *)this + 69743) < (unsigned int)CStateGame::GetTickCounter(g_pGame) )
@@ -308,7 +301,6 @@ void  CEffects::Save(class IS4Chunk &) {
 
 // address=[0x144cae0]
 // Decompiled from int __thiscall CEffects::AddEffect(CEffects *this, int a2, char a3, int a4, int a5, int a6, int a7, char a8)
-
 unsigned int  CEffects::AddEffect(int,enum SIV_SOUNDS,int,int,unsigned int,int,bool) {
   
   unsigned int FreeEffectId; // [esp+10h] [ebp-4h]
@@ -345,7 +337,6 @@ unsigned int  CEffects::AddEffect(int,enum SIV_SOUNDS,int,int,unsigned int,int,b
 
 // address=[0x144cbb0]
 // Decompiled from unsigned int __thiscall CEffects::AddAngel(CEffects *this, int a2, char a3, int a4, int a5, int a6, unsigned int a7)
-
 unsigned int  CEffects::AddAngel(enum T_EFFECT_ANGEL,enum SIV_SOUNDS,int,int,int,unsigned int) {
   
   unsigned int FreeEffectId; // [esp+10h] [ebp-4h]
@@ -376,7 +367,6 @@ unsigned int  CEffects::AddAngel(enum T_EFFECT_ANGEL,enum SIV_SOUNDS,int,int,int
 
 // address=[0x144cd20]
 // Decompiled from unsigned int __thiscall CEffects::AddMissile(CEffects *this, int a2, int a3, int a4, unsigned int a5, int a6, int a7)
-
 unsigned int  CEffects::AddMissile(enum T_EFFECT_MISSILE,int,int,unsigned int,int,int) {
   
   unsigned int FreeEffectId; // [esp+8h] [ebp-4h]
@@ -407,7 +397,6 @@ unsigned int  CEffects::AddMissile(enum T_EFFECT_MISSILE,int,int,unsigned int,in
 
 // address=[0x144ce50]
 // Decompiled from unsigned int __thiscall CEffects::AddSporeCloud(CEffects *this, int a2, int a3, unsigned int a4)
-
 unsigned int  CEffects::AddSporeCloud(int,int,unsigned int) {
   
   int v5; // [esp+0h] [ebp-14h]
@@ -449,15 +438,7 @@ unsigned int  CEffects::AddSporeCloud(int,int,unsigned int) {
 
 
 // address=[0x144cf90]
-// Decompiled from unsigned int __thiscall CEffects::AddStagnantAnimal(
-        CEffects *this,
-        signed int a2,
-        char a3,
-        int a4,
-        int a5,
-        unsigned int a6,
-        unsigned int a7)
-
+// Decompiled from unsigned int __thiscall CEffects::AddStagnantAnimal(  CEffects *this,  signed int a2,  char a3,  int a4,  int a5,  unsigned int a6,  unsigned int a7)
 unsigned int  CEffects::AddStagnantAnimal(enum SIV_ANIMALS,enum SIV_SOUNDS,int,int,int,unsigned int) {
   
   unsigned int FreeEffectId; // [esp+8h] [ebp-4h]
@@ -487,7 +468,6 @@ unsigned int  CEffects::AddStagnantAnimal(enum SIV_ANIMALS,enum SIV_SOUNDS,int,i
 
 // address=[0x144d0f0]
 // Decompiled from _BYTE *__thiscall CEffects::DeleteEffect(CEffects *this, struct IUnknown *a2)
-
 void  CEffects::DeleteEffect(unsigned int) {
   
   _BYTE *result; // eax
@@ -513,7 +493,6 @@ void  CEffects::DeleteEffect(unsigned int) {
 
 // address=[0x144d180]
 // Decompiled from unsigned int __thiscall CEffects::CreateMovingEffect(CEffects *this, int a2, int a3, int a4)
-
 unsigned int  CEffects::CreateMovingEffect(int,int,int) {
   
   unsigned int FreeEffectId; // [esp+4h] [ebp-8h]
@@ -541,7 +520,6 @@ unsigned int  CEffects::CreateMovingEffect(int,int,int) {
 
 // address=[0x144d230]
 // Decompiled from unsigned int __thiscall CEffects::ChangeMovingEffectType(CEffects *this, unsigned int a2, unsigned int a3)
-
 void  CEffects::ChangeMovingEffectType(unsigned int,int) {
   
   unsigned int result; // eax
@@ -576,7 +554,6 @@ void  CEffects::ChangeMovingEffectType(unsigned int,int) {
 
 // address=[0x144d330]
 // Decompiled from int __thiscall CEffects::NumberOfMovingEffects(CEffects *this, unsigned int a2)
-
 int  CEffects::NumberOfMovingEffects(int) {
   
   if ( a2 >= 0x56
@@ -595,7 +572,6 @@ int  CEffects::NumberOfMovingEffects(int) {
 
 // address=[0x144d3a0]
 // Decompiled from int __thiscall CEffects::GetMovingEffectInfo(CEffects *this, unsigned int a2, int *a3, int *a4, int *a5, int *a6)
-
 void  CEffects::GetMovingEffectInfo(unsigned int,int &,int &,int &,int &) {
   
   int result; // eax
@@ -648,7 +624,6 @@ void  CEffects::GetMovingEffectInfo(unsigned int,int &,int &,int &,int &) {
 
 // address=[0x144d4f0]
 // Decompiled from _BYTE *__thiscall CEffects::SetMovingEffectSpeed(CEffects *this, unsigned int a2, int a3)
-
 void  CEffects::SetMovingEffectSpeed(unsigned int,int) {
   
   _BYTE *result; // eax
@@ -677,7 +652,6 @@ void  CEffects::SetMovingEffectSpeed(unsigned int,int) {
 
 // address=[0x144d560]
 // Decompiled from int __thiscall CEffects::SetMovingEffectDestination(CEffects *this, unsigned int a2, int a3, int a4, char a5)
-
 unsigned int  CEffects::SetMovingEffectDestination(unsigned int,int,int,int) {
   
   int v6; // [esp+0h] [ebp-Ch]
@@ -706,7 +680,6 @@ unsigned int  CEffects::SetMovingEffectDestination(unsigned int,int,int,int) {
 
 // address=[0x144d620]
 // Decompiled from int __thiscall CEffects::GetMovingEffectDirection(CEffects *this, unsigned int a2)
-
 int  CEffects::GetMovingEffectDirection(unsigned int) {
   
   int v3; // [esp+4h] [ebp-8h]
@@ -722,7 +695,6 @@ int  CEffects::GetMovingEffectDirection(unsigned int) {
 
 // address=[0x144d680]
 // Decompiled from unsigned int __thiscall CEffects::SetMovingEffectDirection(CEffects *this, unsigned int a2, int a3)
-
 void  CEffects::SetMovingEffectDirection(unsigned int,int) {
   
   unsigned int result; // eax
@@ -745,7 +717,6 @@ void  CEffects::SetMovingEffectDirection(unsigned int,int) {
 
 // address=[0x144d6f0]
 // Decompiled from int __thiscall CEffects::GetMovingEffectSoundId(CEffects *this, unsigned int a2)
-
 int  CEffects::GetMovingEffectSoundId(unsigned int) {
   
   if ( (!a2 || a2 >= 0x1000)
@@ -759,7 +730,6 @@ int  CEffects::GetMovingEffectSoundId(unsigned int) {
 
 // address=[0x144d740]
 // Decompiled from int __thiscall CEffects::SetMovingEffectSoundId(CEffects *this, unsigned int a2, int a3)
-
 void  CEffects::SetMovingEffectSoundId(unsigned int,int) {
   
   int result; // eax
@@ -777,7 +747,6 @@ void  CEffects::SetMovingEffectSoundId(unsigned int,int) {
 
 // address=[0x144d790]
 // Decompiled from unsigned int __thiscall CEffects::CreateAttachedEffect(CEffects *this, int a2, unsigned int a3, char a4)
-
 unsigned int  CEffects::CreateAttachedEffect(int,unsigned int,int) {
   
   unsigned int FreeEffectId; // [esp+8h] [ebp-8h]
@@ -812,7 +781,6 @@ unsigned int  CEffects::CreateAttachedEffect(int,unsigned int,int) {
 
 // address=[0x144d860]
 // Decompiled from _BYTE *__thiscall CEffects::SetAttachedEffectOffset(CEffects *this, unsigned int a2, float a3, float a4)
-
 void  CEffects::SetAttachedEffectOffset(unsigned int,float,float) {
   
   _BYTE *result; // eax
@@ -831,7 +799,6 @@ void  CEffects::SetAttachedEffectOffset(unsigned int,float,float) {
 
 // address=[0x144d8c0]
 // Decompiled from void __thiscall CEffects::UpdateAttachedEffect(CEffects *this, unsigned int a2)
-
 void  CEffects::UpdateAttachedEffect(unsigned int) {
   
   const struct CEffect *v2; // [esp+0h] [ebp-Ch]
@@ -856,7 +823,6 @@ void  CEffects::UpdateAttachedEffect(unsigned int) {
 
 // address=[0x144d950]
 // Decompiled from bool __thiscall CEffects::WasAttachedEffectVisible(CEffects *this, unsigned int a2)
-
 bool  CEffects::WasAttachedEffectVisible(unsigned int) {
   
   bool v3; // [esp+Bh] [ebp-1h]
@@ -874,7 +840,6 @@ bool  CEffects::WasAttachedEffectVisible(unsigned int) {
 
 // address=[0x144d9b0]
 // Decompiled from int __thiscall CEffects::Execute(CEffects *this)
-
 void  CEffects::Execute(void) {
   
   Squares *v1; // eax
@@ -940,7 +905,6 @@ void  CEffects::Execute(void) {
 
 // address=[0x144dbf0]
 // Decompiled from CEffects *__thiscall CEffects::Release(CEffects *this)
-
 void  CEffects::Release(void) {
   
   CEffects *result; // eax
@@ -954,7 +918,6 @@ void  CEffects::Release(void) {
 
 // address=[0x144dc30]
 // Decompiled from void *__thiscall CEffects::DbgCheckData(std::_Ref_count_base *this, const struct type_info *a2)
-
 unsigned int  CEffects::DbgCheckData(int) {
   
   return 0;
@@ -963,7 +926,6 @@ unsigned int  CEffects::DbgCheckData(int) {
 
 // address=[0x144dc40]
 // Decompiled from CEffects *__thiscall CEffects::AddEffectToFreeList(CEffects *this, unsigned int a2)
-
 void  CEffects::AddEffectToFreeList(unsigned int) {
   
   CEffects *result; // eax
@@ -1008,7 +970,6 @@ void  CEffects::AddEffectToFreeList(unsigned int) {
 
 // address=[0x144dda0]
 // Decompiled from int __thiscall CEffects::AddEffectToSquareList(CEffects *this, unsigned int a2)
-
 void  CEffects::AddEffectToSquareList(unsigned int) {
   
   int result; // eax
@@ -1066,7 +1027,6 @@ void  CEffects::AddEffectToSquareList(unsigned int) {
 
 // address=[0x144df80]
 // Decompiled from char *__thiscall CEffects::RemoveEffectFromList(CEffects *this, unsigned int a2)
-
 void  CEffects::RemoveEffectFromList(unsigned int) {
   
   char *result; // eax
@@ -1124,7 +1084,6 @@ void  CEffects::RemoveEffectFromList(unsigned int) {
 
 // address=[0x144e170]
 // Decompiled from __int16 __thiscall CEffects::CleanUp(CEffects *this)
-
 void  CEffects::CleanUp(void) {
   
   __int16 result; // ax
@@ -1170,7 +1129,6 @@ void  CEffects::CleanUp(void) {
 
 // address=[0x144f340]
 // Decompiled from bool __thiscall CEffects::CheckParentEffect(CEffects *this, unsigned int a2)
-
 bool  CEffects::CheckParentEffect(unsigned int) {
   
   return a2 && a2 < 0x1000 && *((_BYTE *)this + 60 * a2 + 16828) && *((_BYTE *)this + 60 * a2 + 16828) != 11;
@@ -1179,7 +1137,6 @@ bool  CEffects::CheckParentEffect(unsigned int) {
 
 // address=[0x144f3b0]
 // Decompiled from int *__cdecl CEffects::ClipXOrY(int *a1)
-
 static void __cdecl CEffects::ClipXOrY(int &) {
   
   int *result; // eax
@@ -1203,7 +1160,6 @@ static void __cdecl CEffects::ClipXOrY(int &) {
 
 // address=[0x144f3f0]
 // Decompiled from void __thiscall CEffects::DecreaseMovingEffectCounter(CEffects *this, unsigned int a2)
-
 void  CEffects::DecreaseMovingEffectCounter(int) {
   
   if ( a2 < 0x74 )
@@ -1220,7 +1176,6 @@ void  CEffects::DecreaseMovingEffectCounter(int) {
 
 // address=[0x144f4a0]
 // Decompiled from char *__thiscall CEffects::EffectSquareListHeadVW(CEffects *this, int a2, int a3)
-
 unsigned short &  CEffects::EffectSquareListHeadVW(int,int) {
   
   return (char *)this + 128 * a3 + 2 * a2 + 8380;
@@ -1229,7 +1184,6 @@ unsigned short &  CEffects::EffectSquareListHeadVW(int,int) {
 
 // address=[0x144f4d0]
 // Decompiled from int __thiscall CEffects::FirstFreeEffectId(CEffects *this)
-
 unsigned int  CEffects::FirstFreeEffectId(void) {
   
   return *((unsigned __int16 *)this + 8473);
@@ -1238,7 +1192,6 @@ unsigned int  CEffects::FirstFreeEffectId(void) {
 
 // address=[0x144f650]
 // Decompiled from unsigned int __thiscall CEffects::IncreaseMovingEffectCounter(CEffects *this, unsigned int a2)
-
 void  CEffects::IncreaseMovingEffectCounter(int) {
   
   unsigned int result; // eax
@@ -1253,7 +1206,6 @@ void  CEffects::IncreaseMovingEffectCounter(int) {
 
 // address=[0x144f6d0]
 // Decompiled from CEffects *__thiscall CEffects::MoveEffectFromSquareListToFreeList(ATL::CDynamicAccessor *this, struct IUnknown *a2)
-
 void  CEffects::MoveEffectFromSquareListToFreeList(unsigned int) {
   
   CEffects::RemoveEffectFromList(this, (unsigned int)a2);

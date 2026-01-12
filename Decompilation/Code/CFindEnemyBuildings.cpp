@@ -4,7 +4,6 @@
 
 // address=[0x15af9c0]
 // Decompiled from struct CMFCToolBar *__thiscall CFindEnemyBuildings::BuildingId(CMFCCustomizeButton *this)
-
 int  CFindEnemyBuildings::BuildingId(void)const {
   
   return (struct CMFCToolBar *)*((_DWORD *)this + 62);
@@ -12,9 +11,7 @@ int  CFindEnemyBuildings::BuildingId(void)const {
 
 
 // address=[0x15af9e0]
-// Decompiled from // MFC 3.1-14.0 32bit
-int __thiscall CFindEnemyBuildings::BuildingPtr(CFindEnemyBuildings *this)
-
+// Decompiled from int __thiscall CFindEnemyBuildings::BuildingPtr(CFindEnemyBuildings *this)
 class CBuilding *  CFindEnemyBuildings::BuildingPtr(void)const {
   
   return *((_DWORD *)this + 63);
@@ -22,14 +19,7 @@ class CBuilding *  CFindEnemyBuildings::BuildingPtr(void)const {
 
 
 // address=[0x15dee30]
-// Decompiled from CFindEnemyBuildings *__thiscall CFindEnemyBuildings::CFindEnemyBuildings(
-        CFindEnemyBuildings *this,
-        int a2,
-        int a3,
-        int a4,
-        int a5,
-        bool a6)
-
+// Decompiled from CFindEnemyBuildings *__thiscall CFindEnemyBuildings::CFindEnemyBuildings(  CFindEnemyBuildings *this,  int a2,  int a3,  int a4,  int a5,  bool a6)
  CFindEnemyBuildings::CFindEnemyBuildings(int,int,int,int,bool) {
   
   CVWList::CVWList(this, a2, a3, a4);
@@ -47,7 +37,6 @@ class CBuilding *  CFindEnemyBuildings::BuildingPtr(void)const {
 
 // address=[0x15deec0]
 // Decompiled from char __thiscall CFindEnemyBuildings::NextBuilding(CPropertySet **this)
-
 bool  CFindEnemyBuildings::NextBuilding(void) {
   
   struct CPtrList *v1; // eax

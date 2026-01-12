@@ -4,7 +4,6 @@
 
 // address=[0x15e7130]
 // Decompiled from bool __cdecl CTiles::IsValidRealTile(int a1)
-
 static bool __cdecl CTiles::IsValidRealTile(int) {
   
   return (unsigned int)(a1 - 10) <= 0x7FF4;
@@ -13,7 +12,6 @@ static bool __cdecl CTiles::IsValidRealTile(int) {
 
 // address=[0x15f4960]
 // Decompiled from bool __cdecl CTiles::IsValidPseudoTile(unsigned int a1)
-
 static bool __cdecl CTiles::IsValidPseudoTile(int) {
   
   return a1 < 0xA;
@@ -22,7 +20,6 @@ static bool __cdecl CTiles::IsValidPseudoTile(int) {
 
 // address=[0x15f4990]
 // Decompiled from bool __cdecl CTiles::IsValidTileId(unsigned int a1)
-
 static bool __cdecl CTiles::IsValidTileId(int) {
   
   return a1 <= 0x7FFE;
@@ -31,7 +28,6 @@ static bool __cdecl CTiles::IsValidTileId(int) {
 
 // address=[0x15e7450]
 // Decompiled from char *__cdecl CTiles::SquareFirstLastXY(Squares *a1, Squares *a2)
-
 static struct CTiles::SFirstLast & __cdecl CTiles::SquareFirstLastXY(int,int) {
   
   int v2; // esi
@@ -43,7 +39,6 @@ static struct CTiles::SFirstLast & __cdecl CTiles::SquareFirstLastXY(int,int) {
 
 // address=[0x15e7490]
 // Decompiled from int **__cdecl CTiles::TileEx(int a1)
-
 static class CTile & __cdecl CTiles::TileEx(int) {
   
   return &(&CTiles::m_cTiles)[5 * a1];

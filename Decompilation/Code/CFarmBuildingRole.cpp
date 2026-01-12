@@ -4,7 +4,6 @@
 
 // address=[0x1400900]
 // Decompiled from int __cdecl CFarmBuildingRole::New(int a1)
-
 static class CPersistence * __cdecl CFarmBuildingRole::New(std::istream &) {
   
   if ( operator new(0x180u) )
@@ -16,7 +15,6 @@ static class CPersistence * __cdecl CFarmBuildingRole::New(std::istream &) {
 
 // address=[0x14fc9a0]
 // Decompiled from CFarmBuildingRole *__thiscall CFarmBuildingRole::CFarmBuildingRole(CFarmBuildingRole *this)
-
  CFarmBuildingRole::CFarmBuildingRole(void) {
   
   IBuildingRole::IBuildingRole(this);
@@ -27,7 +25,6 @@ static class CPersistence * __cdecl CFarmBuildingRole::New(std::istream &) {
 
 // address=[0x14fcc10]
 // Decompiled from int __thiscall CFarmBuildingRole::~CFarmBuildingRole(CFarmBuildingRole *this)
-
  CFarmBuildingRole::~CFarmBuildingRole(void) {
   
   return IBuildingRole::~IBuildingRole(this);
@@ -36,7 +33,6 @@ static class CPersistence * __cdecl CFarmBuildingRole::New(std::istream &) {
 
 // address=[0x14fd0c0]
 // Decompiled from int __thiscall CFarmBuildingRole::ClassID(CFarmBuildingRole *this)
-
 unsigned long  CFarmBuildingRole::ClassID(void)const {
   
   return CFarmBuildingRole::m_iClassID;
@@ -45,7 +41,6 @@ unsigned long  CFarmBuildingRole::ClassID(void)const {
 
 // address=[0x14fd360]
 // Decompiled from void *__thiscall CFarmBuildingRole::GetBuildingNeed(std::_Ref_count_base *this, const struct type_info *a2)
-
 int  CFarmBuildingRole::GetBuildingNeed(int)const {
   
   return 0;
@@ -54,7 +49,6 @@ int  CFarmBuildingRole::GetBuildingNeed(int)const {
 
 // address=[0x14fd4a0]
 // Decompiled from int __thiscall CFarmBuildingRole::GetBuildingRole(CFarmBuildingRole *this)
-
 int  CFarmBuildingRole::GetBuildingRole(void) {
   
   return 8;
@@ -63,7 +57,6 @@ int  CFarmBuildingRole::GetBuildingRole(void) {
 
 // address=[0x14fd600]
 // Decompiled from int __thiscall CFarmBuildingRole::GetPileIdWithGood(CFarmBuildingRole *this, int a2)
-
 int  CFarmBuildingRole::GetPileIdWithGood(int)const {
   
   return *((unsigned __int16 *)this + 190);
@@ -71,10 +64,7 @@ int  CFarmBuildingRole::GetPileIdWithGood(int)const {
 
 
 // address=[0x14fd700]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CFarmBuildingRole::GoodArrive(CFarmBuildingRole *this, int a2)
-
+// Decompiled from void __thiscall CFarmBuildingRole::GoodArrive(CFarmBuildingRole *this, int a2)
 void  CFarmBuildingRole::GoodArrive(int) {
   
   ;
@@ -83,7 +73,6 @@ void  CFarmBuildingRole::GoodArrive(int) {
 
 // address=[0x14fd9f0]
 // Decompiled from int __cdecl CFarmBuildingRole::Load(int a1)
-
 static class CFarmBuildingRole * __cdecl CFarmBuildingRole::Load(std::istream &) {
   
   void **v1; // eax
@@ -96,7 +85,6 @@ static class CFarmBuildingRole * __cdecl CFarmBuildingRole::Load(std::istream &)
 
 // address=[0x150a5e0]
 // Decompiled from int __thiscall CFarmBuildingRole::LogicUpdate(CFarmBuildingRole *this, struct CBuilding *a2)
-
 void  CFarmBuildingRole::LogicUpdate(class CBuilding *) {
   
   int result; // eax
@@ -237,7 +225,6 @@ void  CFarmBuildingRole::LogicUpdate(class CBuilding *) {
 
 // address=[0x150aa20]
 // Decompiled from int __thiscall CFarmBuildingRole::FillGfxInfo(CFarmBuildingRole *this, struct CBuilding *a2, struct SGfxObjectInfo *a3)
-
 void  CFarmBuildingRole::FillGfxInfo(class CBuilding *,struct SGfxObjectInfo &) {
   
   int v3; // eax
@@ -265,7 +252,6 @@ void  CFarmBuildingRole::FillGfxInfo(class CBuilding *,struct SGfxObjectInfo &) 
 
 // address=[0x150aae0]
 // Decompiled from int __thiscall CFarmBuildingRole::Init(_BYTE *this, _BYTE *a2)
-
 void  CFarmBuildingRole::Init(class CBuilding *) {
   
   int v2; // eax
@@ -348,7 +334,6 @@ void  CFarmBuildingRole::Init(class CBuilding *) {
 
 // address=[0x150add0]
 // Decompiled from int __thiscall CFarmBuildingRole::PostLoadInit(_DWORD *this, unsigned __int16 *a2)
-
 void  CFarmBuildingRole::PostLoadInit(class CBuilding *) {
   
   int v2; // eax
@@ -365,7 +350,6 @@ void  CFarmBuildingRole::PostLoadInit(class CBuilding *) {
 
 // address=[0x150ae00]
 // Decompiled from _DWORD *__thiscall CFarmBuildingRole::LockPiles(CFarmBuildingRole *this, struct CBuilding *a2, bool a3)
-
 void  CFarmBuildingRole::LockPiles(class CBuilding *,bool) {
   
   unsigned __int8 *v3; // eax
@@ -380,7 +364,6 @@ void  CFarmBuildingRole::LockPiles(class CBuilding *,bool) {
 
 // address=[0x150ae60]
 // Decompiled from char __thiscall CFarmBuildingRole::SettlerEnter(CFarmBuildingRole *this, struct CBuilding *a2, int a3)
-
 bool  CFarmBuildingRole::SettlerEnter(class CBuilding *,int) {
   
   int v3; // eax
@@ -438,7 +421,6 @@ bool  CFarmBuildingRole::SettlerEnter(class CBuilding *,int) {
 
 // address=[0x150afa0]
 // Decompiled from _DWORD *__thiscall CFarmBuildingRole::FillDialog(CFarmBuildingRole *this, struct CBuilding *a2, bool a3)
-
 void  CFarmBuildingRole::FillDialog(class CBuilding *,bool) {
   
   int v3; // eax
@@ -483,7 +465,6 @@ void  CFarmBuildingRole::FillDialog(class CBuilding *,bool) {
 
 // address=[0x150b160]
 // Decompiled from char *__thiscall CFarmBuildingRole::CFarmBuildingRole(char *this, int a2)
-
  CFarmBuildingRole::CFarmBuildingRole(std::istream &) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
@@ -511,7 +492,6 @@ void  CFarmBuildingRole::FillDialog(class CBuilding *,bool) {
 
 // address=[0x150b220]
 // Decompiled from int __thiscall CFarmBuildingRole::Store(struct IBuildingRole *this, struct std::ostream *a2)
-
 void  CFarmBuildingRole::Store(std::ostream &) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
@@ -530,7 +510,6 @@ void  CFarmBuildingRole::Store(std::ostream &) {
 
 // address=[0x14fd200]
 // Decompiled from void __stdcall CFarmBuildingRole::ConvertEventIntoGoal(int a1, int a2)
-
 void  CFarmBuildingRole::ConvertEventIntoGoal(class CBuilding *,class CEntityEvent *) {
   
   ;
@@ -539,7 +518,6 @@ void  CFarmBuildingRole::ConvertEventIntoGoal(class CBuilding *,class CEntityEve
 
 // address=[0x14fd280]
 // Decompiled from char __thiscall CFarmBuildingRole::CrushBuilding(CFarmBuildingRole *this)
-
 bool  CFarmBuildingRole::CrushBuilding(void) {
   
   return 1;
@@ -548,7 +526,6 @@ bool  CFarmBuildingRole::CrushBuilding(void) {
 
 // address=[0x14fde30]
 // Decompiled from char __thiscall CFarmBuildingRole::TryCrushBuilding(CFarmBuildingRole *this)
-
 bool  CFarmBuildingRole::TryCrushBuilding(void) {
   
   return 1;

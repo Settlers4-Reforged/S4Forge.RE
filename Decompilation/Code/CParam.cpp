@@ -4,7 +4,6 @@
 
 // address=[0x2f3e8a0]
 // Decompiled from CParam *__thiscall CParam::CParam(CParam *this)
-
  CParam::CParam(void) {
   
   CDynListEntry::CDynListEntry(this);
@@ -19,7 +18,6 @@
 
 // address=[0x2f3e8f0]
 // Decompiled from CParam *__thiscall CParam::CParam(CParam *this, int a2, int a3, int a4, int a5)
-
  CParam::CParam(int,int,int,int) {
   
   CDynListEntry::CDynListEntry(this);
@@ -34,7 +32,6 @@
 
 // address=[0x2f3e940]
 // Decompiled from CParam *__thiscall CParam::CParam(CParam *this, struct CParam *a2)
-
  CParam::CParam(class CParam *) {
   
   CDynListEntry::CDynListEntry(this);
@@ -49,7 +46,6 @@
 
 // address=[0x2f3e9a0]
 // Decompiled from void __thiscall CParam::~CParam(CParam *this)
-
  CParam::~CParam(void) {
   
   *(_DWORD *)this = &CParam::_vftable_;
@@ -58,9 +54,7 @@
 
 
 // address=[0x2f3e9c0]
-// Decompiled from // public: void __thiscall CParam::SetParameter(int,int,int,int)
-_DWORD *__thiscall CParam::SetParameter(_DWORD *this, int a2, int a3, int a4, int a5)
-
+// Decompiled from _DWORD *__thiscall CParam::SetParameter(_DWORD *this, int a2, int a3, int a4, int a5)
 void  CParam::SetParameter(int,int,int,int) {
   
   _DWORD *result; // eax
@@ -75,9 +69,7 @@ void  CParam::SetParameter(int,int,int,int) {
 
 
 // address=[0x2f3ea00]
-// Decompiled from // public: void __thiscall CParam::SetParameterX(int,int)
-_DWORD *__thiscall CParam::SetParameterX(_DWORD *this, _DWORD *a2, _DWORD *a3)
-
+// Decompiled from _DWORD *__thiscall CParam::SetParameterX(_DWORD *this, _DWORD *a2, _DWORD *a3)
 void  CParam::SetParameterX(int,int) {
   
   _DWORD *result; // eax
@@ -109,7 +101,6 @@ void  CParam::SetParameterX(int,int) {
 
 // address=[0x2f3ea70]
 // Decompiled from BOOL __thiscall CParam::ParamAreEqual(CParam *this, struct CParam *a2)
-
 int  CParam::ParamAreEqual(class CParam *) {
   
   return *((_DWORD *)this + 3) == *((_DWORD *)a2 + 3)

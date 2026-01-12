@@ -4,7 +4,6 @@
 
 // address=[0x1306b10]
 // Decompiled from CAIAgentPlayerBase *__thiscall CAIAgentPlayerBase::AttachPlayerAI(CAIAgentPlayerBase *this, struct CAIPlayerAI *a2)
-
 void  CAIAgentPlayerBase::AttachPlayerAI(class CAIPlayerAI *) {
   
   CAIAgentPlayerBase *result; // eax
@@ -20,9 +19,7 @@ void  CAIAgentPlayerBase::AttachPlayerAI(class CAIPlayerAI *) {
 
 
 // address=[0x1307170]
-// Decompiled from // MFC 3.1-14.0 32bit
-int __thiscall CAIAgentPlayerBase::PlayerAI(CAIAgentPlayerBase *this)
-
+// Decompiled from int __thiscall CAIAgentPlayerBase::PlayerAI(CAIAgentPlayerBase *this)
 class CAIPlayerAI *  CAIAgentPlayerBase::PlayerAI(void)const {
   
   return *((_DWORD *)this + 9);
@@ -31,7 +28,6 @@ class CAIPlayerAI *  CAIAgentPlayerBase::PlayerAI(void)const {
 
 // address=[0x1319190]
 // Decompiled from CAIAgentPlayerBase *__thiscall CAIAgentPlayerBase::CAIAgentPlayerBase(CAIAgentPlayerBase *this, const char *a2)
-
  CAIAgentPlayerBase::CAIAgentPlayerBase(char const *) {
   
   CAIAgent::CAIAgent(this, a2);
@@ -43,7 +39,6 @@ class CAIPlayerAI *  CAIAgentPlayerBase::PlayerAI(void)const {
 
 // address=[0x1319280]
 // Decompiled from void __thiscall CAIAgentPlayerBase::~CAIAgentPlayerBase(CAIAgentPlayerBase *this)
-
  CAIAgentPlayerBase::~CAIAgentPlayerBase(void) {
   
   CAIAgent::~CAIAgent(this);

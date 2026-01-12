@@ -4,7 +4,6 @@
 
 // address=[0x2f86ec0]
 // Decompiled from CSurfaceV3 *__thiscall CSurfaceV3::CSurfaceV3(CSurfaceV3 *this)
-
  CSurfaceV3::CSurfaceV3(void) {
   
   CSurface::CSurface(this);
@@ -18,7 +17,6 @@
 
 // address=[0x2f86f00]
 // Decompiled from CSurfaceV3 *__thiscall CSurfaceV3::Release(CSurfaceV3 *this)
-
 void  CSurfaceV3::Release(void) {
   
   CSurfaceV3 *result; // eax
@@ -32,7 +30,6 @@ void  CSurfaceV3::Release(void) {
 
 // address=[0x2f86f30]
 // Decompiled from int __thiscall CSurfaceV3::Restore(CSurfaceV3 *this)
-
 long  CSurfaceV3::Restore(void) {
   
   return (*(int (__stdcall **)(_DWORD))(**((_DWORD **)this + 2) + 108))(*((_DWORD *)this + 2));
@@ -41,7 +38,6 @@ long  CSurfaceV3::Restore(void) {
 
 // address=[0x2f86f50]
 // Decompiled from int __thiscall CSurfaceV3::IsLost(CSurfaceV3 *this)
-
 long  CSurfaceV3::IsLost(void) {
   
   return (*(int (__stdcall **)(_DWORD))(**((_DWORD **)this + 2) + 96))(*((_DWORD *)this + 2));
@@ -50,7 +46,6 @@ long  CSurfaceV3::IsLost(void) {
 
 // address=[0x2f86f70]
 // Decompiled from int __thiscall CSurfaceV3::ClearSurface(CSurfaceV3 *this, struct CBlitFX *a2)
-
 long  CSurfaceV3::ClearSurface(class CBlitFX *) {
   
   CBlitFX *BlitStructPtr; // eax
@@ -101,7 +96,6 @@ long  CSurfaceV3::ClearSurface(class CBlitFX *) {
 
 // address=[0x2f87010]
 // Decompiled from int __thiscall CSurfaceV3::ClearSurface(CSurfaceV3 *this, struct tagRECT a2, struct CBlitFX *a3)
-
 long  CSurfaceV3::ClearSurface(struct tagRECT,class CBlitFX *) {
   
   CBlitFX *BlitStructPtr; // eax
@@ -153,14 +147,7 @@ long  CSurfaceV3::ClearSurface(struct tagRECT,class CBlitFX *) {
 
 
 // address=[0x2f870b0]
-// Decompiled from int __thiscall CSurfaceV3::Blt(
-        CSurfaceV3 *this,
-        struct tagRECT *a2,
-        struct CSurface *a3,
-        struct tagRECT *a4,
-        unsigned int a5,
-        struct _DDBLTFX *a6)
-
+// Decompiled from int __thiscall CSurfaceV3::Blt(  CSurfaceV3 *this,  struct tagRECT *a2,  struct CSurface *a3,  struct tagRECT *a4,  unsigned int a5,  struct _DDBLTFX *a6)
 long  CSurfaceV3::Blt(struct tagRECT *,class CSurface *,struct tagRECT *,unsigned long,struct _DDBLTFX *) {
   
   int v8; // [esp+4h] [ebp-4h]
@@ -184,7 +171,6 @@ long  CSurfaceV3::Blt(struct tagRECT *,class CSurface *,struct tagRECT *,unsigne
 
 // address=[0x2f87110]
 // Decompiled from int __thiscall CSurfaceV3::Flip(CSurfaceV3 *this)
-
 long  CSurfaceV3::Flip(void) {
   
   return (*(int (__stdcall **)(_DWORD, _DWORD, int))(**((_DWORD **)this + 2) + 44))(*((_DWORD *)this + 2), 0, 1);
@@ -193,7 +179,6 @@ long  CSurfaceV3::Flip(void) {
 
 // address=[0x2f87140]
 // Decompiled from int __thiscall CSurfaceV3::Lock(CSurfaceV3 *this, unsigned int *a2, void **a3, bool a4)
-
 long  CSurfaceV3::Lock(unsigned int &,void * &,bool) {
   
   int v6; // [esp+8h] [ebp-4h]
@@ -218,7 +203,6 @@ long  CSurfaceV3::Lock(unsigned int &,void * &,bool) {
 
 // address=[0x2f871b0]
 // Decompiled from int __thiscall CSurfaceV3::Unlock(CSurfaceV3 *this)
-
 long  CSurfaceV3::Unlock(void) {
   
   return (*(int (__stdcall **)(_DWORD, _DWORD))(**((_DWORD **)this + 2) + 128))(*((_DWORD *)this + 2), 0);
@@ -227,7 +211,6 @@ long  CSurfaceV3::Unlock(void) {
 
 // address=[0x2f871e0]
 // Decompiled from int __thiscall CSurfaceV3::GetDC(CSurfaceV3 *this, HDC *a2)
-
 long  CSurfaceV3::GetDC(struct HDC__ * *) {
   
   int v4; // [esp+4h] [ebp-4h]
@@ -245,7 +228,6 @@ long  CSurfaceV3::GetDC(struct HDC__ * *) {
 
 // address=[0x2f87220]
 // Decompiled from int __thiscall CSurfaceV3::ReleaseDC(CSurfaceV3 *this, HDC a2)
-
 long  CSurfaceV3::ReleaseDC(struct HDC__ *) {
   
   return (*(int (__thiscall **)(_DWORD, _DWORD, HDC))(**((_DWORD **)this + 2) + 104))(
@@ -256,19 +238,7 @@ long  CSurfaceV3::ReleaseDC(struct HDC__ *) {
 
 
 // address=[0x2f87250]
-// Decompiled from int __thiscall CSurfaceV3::CreateSurface(
-        CSurfaceV3 *this,
-        void *a2,
-        int a3,
-        int a4,
-        bool a5,
-        bool a6,
-        bool a7,
-        int a8,
-        bool a9,
-        bool a10,
-        bool a11)
-
+// Decompiled from int __thiscall CSurfaceV3::CreateSurface(  CSurfaceV3 *this,  void *a2,  int a3,  int a4,  bool a5,  bool a6,  bool a7,  int a8,  bool a9,  bool a10,  bool a11)
 long  CSurfaceV3::CreateSurface(void *,int,int,bool,bool,bool,int,bool,bool,bool) {
   
   dword_46C6790 = 1;
@@ -343,7 +313,6 @@ long  CSurfaceV3::CreateSurface(void *,int,int,bool,bool,bool,int,bool,bool,bool
 
 // address=[0x2f87470]
 // Decompiled from int __thiscall CSurfaceV3::SetColorKey(CSurfaceV3 *this, unsigned int a2, struct _DDCOLORKEY *a3)
-
 long  CSurfaceV3::SetColorKey(unsigned long,struct _DDCOLORKEY *) {
   
   return (*(int (__stdcall **)(_DWORD, unsigned int, struct _DDCOLORKEY *))(**((_DWORD **)this + 2) + 116))(
@@ -355,7 +324,6 @@ long  CSurfaceV3::SetColorKey(unsigned long,struct _DDCOLORKEY *) {
 
 // address=[0x2f874a0]
 // Decompiled from int __thiscall CSurfaceV3::GetPixelFormat(CSurfaceV3 *this, bool *a2)
-
 long  CSurfaceV3::GetPixelFormat(bool &) {
   
   int v3; // [esp+0h] [ebp-30h]
@@ -374,7 +342,6 @@ long  CSurfaceV3::GetPixelFormat(bool &) {
 
 // address=[0x2f87560]
 // Decompiled from int __thiscall CSurfaceV3::GetBitDepth(CSurfaceV3 *this, int *a2)
-
 long  CSurfaceV3::GetBitDepth(int &) {
   
   int result; // eax
@@ -390,7 +357,6 @@ long  CSurfaceV3::GetBitDepth(int &) {
 
 // address=[0x2f875c0]
 // Decompiled from int __thiscall CSurfaceV3::GetSurfaceSize(CSurfaceV3 *this, int *a2, int *a3)
-
 long  CSurfaceV3::GetSurfaceSize(int &,int &) {
   
   int result; // eax
@@ -404,7 +370,6 @@ long  CSurfaceV3::GetSurfaceSize(int &,int &) {
 
 // address=[0x2f87610]
 // Decompiled from int __thiscall CSurfaceV3::SetClipper(CSurfaceV3 *this, struct IDirectDrawClipper *a2)
-
 long  CSurfaceV3::SetClipper(struct IDirectDrawClipper *) {
   
   return (*(int (__thiscall **)(_DWORD, _DWORD, struct IDirectDrawClipper *))(**((_DWORD **)this + 2) + 112))(
@@ -415,10 +380,7 @@ long  CSurfaceV3::SetClipper(struct IDirectDrawClipper *) {
 
 
 // address=[0x2f87640]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CSurfaceV3::GetSurfacePtr(CSurfaceV3 *this)
-
+// Decompiled from int __thiscall CSurfaceV3::GetSurfacePtr(CSurfaceV3 *this)
 void *  CSurfaceV3::GetSurfacePtr(void) {
   
   return *((_DWORD *)this + 2);
@@ -427,7 +389,6 @@ void *  CSurfaceV3::GetSurfacePtr(void) {
 
 // address=[0x2f87660]
 // Decompiled from CSurfaceV3 *__thiscall CSurfaceV3::SetSurfacePtr(CSurfaceV3 *this, void *a2)
-
 void  CSurfaceV3::SetSurfacePtr(void *) {
   
   CSurfaceV3 *result; // eax
@@ -441,7 +402,6 @@ void  CSurfaceV3::SetSurfacePtr(void *) {
 
 // address=[0x2f87680]
 // Decompiled from int __thiscall CSurfaceV3::GetAttachedSurfacePtr(CSurfaceV3 *this)
-
 void *  CSurfaceV3::GetAttachedSurfacePtr(void) {
   
   int v2; // [esp+0h] [ebp-10h] BYREF
@@ -457,9 +417,7 @@ void *  CSurfaceV3::GetAttachedSurfacePtr(void) {
 
 
 // address=[0x2f876c0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-char __thiscall CSurfaceV3::IsBackBufferReference(CSurfaceV3 *this)
-
+// Decompiled from char __thiscall CSurfaceV3::IsBackBufferReference(CSurfaceV3 *this)
 bool  CSurfaceV3::IsBackBufferReference(void) {
   
   return *((_BYTE *)this + 12);
@@ -468,7 +426,6 @@ bool  CSurfaceV3::IsBackBufferReference(void) {
 
 // address=[0x2f876e0]
 // Decompiled from int __thiscall CSurfaceV3::SetAsRenderTarget(CSurfaceV3 *this, struct IDirect3DDevice7 *a2)
-
 long  CSurfaceV3::SetAsRenderTarget(struct IDirect3DDevice7 *) {
   
   return -2147467259;
@@ -477,7 +434,6 @@ long  CSurfaceV3::SetAsRenderTarget(struct IDirect3DDevice7 *) {
 
 // address=[0x2f8a320]
 // Decompiled from void __thiscall CSurfaceV3::~CSurfaceV3(CSurfaceV3 *this)
-
  CSurfaceV3::~CSurfaceV3(void) {
   
   CSurface::~CSurface(this);

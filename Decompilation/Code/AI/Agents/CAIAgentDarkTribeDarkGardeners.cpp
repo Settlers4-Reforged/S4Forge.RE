@@ -3,11 +3,7 @@
 // Definitions for class CAIAgentDarkTribeDarkGardeners
 
 // address=[0x1301980]
-// Decompiled from unsigned int __thiscall CAIAgentDarkTribeDarkGardeners::Execute(
-        CAIAgentDarkTribeDarkGardeners *this,
-        unsigned int a2,
-        unsigned int a3)
-
+// Decompiled from unsigned int __thiscall CAIAgentDarkTribeDarkGardeners::Execute(  CAIAgentDarkTribeDarkGardeners *this,  unsigned int a2,  unsigned int a3)
 unsigned int  CAIAgentDarkTribeDarkGardeners::Execute(unsigned int,unsigned int) {
   
   struct CAIDarkTribeSectorAI *v3; // eax
@@ -162,9 +158,7 @@ unsigned int  CAIAgentDarkTribeDarkGardeners::Execute(unsigned int,unsigned int)
 
 
 // address=[0x1322d70]
-// Decompiled from CAIAgentDarkTribeDarkGardeners *__thiscall CAIAgentDarkTribeDarkGardeners::CAIAgentDarkTribeDarkGardeners(
-        CAIAgentDarkTribeDarkGardeners *this)
-
+// Decompiled from CAIAgentDarkTribeDarkGardeners *__thiscall CAIAgentDarkTribeDarkGardeners::CAIAgentDarkTribeDarkGardeners(  CAIAgentDarkTribeDarkGardeners *this)
  CAIAgentDarkTribeDarkGardeners::CAIAgentDarkTribeDarkGardeners(void) {
   
   CAIDarkTribeSectorAgent::CAIDarkTribeSectorAgent(this, "dark gardeners");
@@ -175,7 +169,6 @@ unsigned int  CAIAgentDarkTribeDarkGardeners::Execute(unsigned int,unsigned int)
 
 // address=[0x1322ee0]
 // Decompiled from void __thiscall CAIAgentDarkTribeDarkGardeners::~CAIAgentDarkTribeDarkGardeners(CAIAgentDarkTribeDarkGardeners *this)
-
  CAIAgentDarkTribeDarkGardeners::~CAIAgentDarkTribeDarkGardeners(void) {
   
   CAIDarkTribeSectorAgent::~CAIDarkTribeSectorAgent(this);

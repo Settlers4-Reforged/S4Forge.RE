@@ -3,14 +3,7 @@
 // Definitions for class CWarriorEntitySpiralWalk
 
 // address=[0x1470560]
-// Decompiled from CWarriorEntitySpiralWalk *__thiscall CWarriorEntitySpiralWalk::CWarriorEntitySpiralWalk(
-        CWarriorEntitySpiralWalk *this,
-        int a2,
-        int a3,
-        int a4,
-        int a5,
-        int a6)
-
+// Decompiled from CWarriorEntitySpiralWalk *__thiscall CWarriorEntitySpiralWalk::CWarriorEntitySpiralWalk(  CWarriorEntitySpiralWalk *this,  int a2,  int a3,  int a4,  int a5,  int a6)
  CWarriorEntitySpiralWalk::CWarriorEntitySpiralWalk(int,int,int,int,int) {
   
   CSettlerSpiralWalk::CSettlerSpiralWalk(this, a2, a3, a4);
@@ -22,7 +15,6 @@
 
 // address=[0x15e2d90]
 // Decompiled from char __thiscall CWarriorEntitySpiralWalk::NextEntity(CWarriorEntitySpiralWalk *this, struct IEntity **a2)
-
 bool  CWarriorEntitySpiralWalk::NextEntity(class IEntity * &) {
   
   int v2; // eax

@@ -4,7 +4,6 @@
 
 // address=[0x132efa0]
 // Decompiled from int __thiscall CAIWatchTowerEx::Calculate(CAIWatchTowerEx *this)
-
 int  CAIWatchTowerEx::Calculate(void) {
   
   int v1; // eax

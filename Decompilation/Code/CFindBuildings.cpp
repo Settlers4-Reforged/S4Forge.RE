@@ -4,7 +4,6 @@
 
 // address=[0x1470890]
 // Decompiled from int __thiscall CFindBuildings::BuildingPtr(CFindBuildings *this)
-
 class CBuilding *  CFindBuildings::BuildingPtr(void)const {
   
   return *((_DWORD *)this + 61);
@@ -13,7 +12,6 @@ class CBuilding *  CFindBuildings::BuildingPtr(void)const {
 
 // address=[0x15dec30]
 // Decompiled from CFindBuildings *__thiscall CFindBuildings::CFindBuildings(CFindBuildings *this, int a2, int a3, int a4)
-
  CFindBuildings::CFindBuildings(int,int,int) {
   
   CVWList::CVWList(this, a2, a3, a4);
@@ -29,7 +27,6 @@ class CBuilding *  CFindBuildings::BuildingPtr(void)const {
 
 // address=[0x15deca0]
 // Decompiled from char __thiscall CFindBuildings::NextBuilding(CPropertySet **this)
-
 bool  CFindBuildings::NextBuilding(void) {
   
   struct CPtrList *v1; // eax

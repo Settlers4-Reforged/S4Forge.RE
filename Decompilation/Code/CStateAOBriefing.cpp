@@ -4,7 +4,6 @@
 
 // address=[0x149d9d0]
 // Decompiled from CStateAOBriefing *__cdecl CStateAOBriefing::DynamicCreateFunc(int a1)
-
 static class CGameState * __cdecl CStateAOBriefing::DynamicCreateFunc(void *) {
   
   CStateAOBriefing *C; // [esp+Ch] [ebp-10h]
@@ -19,7 +18,6 @@ static class CGameState * __cdecl CStateAOBriefing::DynamicCreateFunc(void *) {
 
 // address=[0x149da50]
 // Decompiled from CStateAOBriefing *__thiscall CStateAOBriefing::CStateAOBriefing(CStateAOBriefing *this, int a2)
-
  CStateAOBriefing::CStateAOBriefing(void *) {
   
   const char *v2; // eax
@@ -146,7 +144,6 @@ static class CGameState * __cdecl CStateAOBriefing::DynamicCreateFunc(void *) {
 
 // address=[0x149dea0]
 // Decompiled from void __thiscall CStateAOBriefing::~CStateAOBriefing(CStateAOBriefing *this)
-
  CStateAOBriefing::~CStateAOBriefing(void) {
   
   *(_DWORD *)this = &CStateAOBriefing::_vftable_;
@@ -157,7 +154,6 @@ static class CGameState * __cdecl CStateAOBriefing::DynamicCreateFunc(void *) {
 
 // address=[0x149df00]
 // Decompiled from char __thiscall CStateAOBriefing::Perform(CStateAOBriefing *this)
-
 bool  CStateAOBriefing::Perform(void) {
   
   DWORD v2; // esi
@@ -228,7 +224,6 @@ bool  CStateAOBriefing::Perform(void) {
 
 // address=[0x149e0f0]
 // Decompiled from bool __thiscall CStateAOBriefing::OnEvent(CStateAOBriefing *this, struct CEvn_Event *a2)
-
 bool  CStateAOBriefing::OnEvent(class CEvn_Event &) {
   
   CGUIWrapper *Instance; // eax
@@ -505,7 +500,6 @@ bool  CStateAOBriefing::OnEvent(class CEvn_Event &) {
 
 // address=[0x149e9b0]
 // Decompiled from void *__cdecl CStateAOBriefing::InitBriefingTexts(int a1, int a2)
-
 static void __cdecl CStateAOBriefing::InitBriefingTexts(int,int) {
   
   char *v2; // eax
@@ -644,9 +638,7 @@ static void __cdecl CStateAOBriefing::InitBriefingTexts(int,int) {
 
 
 // address=[0x149f4f0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-char __thiscall CStateAOBriefing::CanProcessInvites(CStateAOBriefing *this)
-
+// Decompiled from char __thiscall CStateAOBriefing::CanProcessInvites(CStateAOBriefing *this)
 bool  CStateAOBriefing::CanProcessInvites(void) {
   
   return 0;

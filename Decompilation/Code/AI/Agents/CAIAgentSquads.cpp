@@ -4,7 +4,6 @@
 
 // address=[0x13071b0]
 // Decompiled from CAIAgentSquads *__thiscall CAIAgentSquads::CAIAgentSquads(CAIAgentSquads *this)
-
  CAIAgentSquads::CAIAgentSquads(void) {
   
   CAINormalSectorAgent::CAINormalSectorAgent(this, "squad management");
@@ -15,7 +14,6 @@
 
 // address=[0x13071e0]
 // Decompiled from unsigned int __thiscall CAIAgentSquads::Execute(CAIAgentSquads *this, unsigned int a2, unsigned int a3)
-
 unsigned int  CAIAgentSquads::Execute(unsigned int,unsigned int) {
   
   pairNode *v3; // eax
@@ -553,7 +551,6 @@ LABEL_26:
 
 // address=[0x1309360]
 // Decompiled from void __thiscall CAIAgentSquads::~CAIAgentSquads(CAIAgentSquads *this)
-
  CAIAgentSquads::~CAIAgentSquads(void) {
   
   CAINormalSectorAgent::~CAINormalSectorAgent(this);
@@ -561,12 +558,7 @@ LABEL_26:
 
 
 // address=[0x13088d0]
-// Decompiled from struct CAITaskForce *__thiscall CAIAgentSquads::SimpleSquadManagement(
-        CAINormalSectorAgent *this,
-        int a2,
-        int a3,
-        int a4)
-
+// Decompiled from struct CAITaskForce *__thiscall CAIAgentSquads::SimpleSquadManagement(  CAINormalSectorAgent *this,  int a2,  int a3,  int a4)
 void  CAIAgentSquads::SimpleSquadManagement(enum T_AI_WARRIOR_TYPE,enum T_AI_TASK_FORCE_TYPE,int) {
   
   struct CAINormalSectorAI *v4; // eax
@@ -660,7 +652,6 @@ LABEL_12:
 
 // address=[0x1308b30]
 // Decompiled from struct CAITaskForce *__thiscall CAIAgentSquads::AssociateTaskForcesToSquads(CAINormalSectorAgent *this, int a2)
-
 void  CAIAgentSquads::AssociateTaskForcesToSquads(enum T_AI_TASK_FORCE_CLASS) {
   
   struct CAINormalSectorAI *v2; // eax

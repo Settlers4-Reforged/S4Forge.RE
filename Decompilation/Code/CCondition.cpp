@@ -3,9 +3,7 @@
 // Definitions for class CCondition
 
 // address=[0x2f3ed60]
-// Decompiled from // public: __thiscall CCondition::CCondition(void)
-CCondition *__thiscall CCondition::CCondition(CCondition *this)
-
+// Decompiled from CCondition *__thiscall CCondition::CCondition(CCondition *this)
  CCondition::CCondition(void) {
   
   CDynListEntry::CDynListEntry(this);
@@ -16,7 +14,6 @@ CCondition *__thiscall CCondition::CCondition(CCondition *this)
 
 // address=[0x2f3ed80]
 // Decompiled from void __thiscall CCondition::~CCondition(CCondition *this)
-
  CCondition::~CCondition(void) {
   
   *(_DWORD *)this = &CCondition::_vftable_;
@@ -30,7 +27,6 @@ CCondition *__thiscall CCondition::CCondition(CCondition *this)
 
 // address=[0x2f3ee00]
 // Decompiled from CCondition *__thiscall CCondition::CCondition(CCondition *this, int a2, struct CParam *a3, struct COptimizeOptions *a4)
-
  CCondition::CCondition(int,class CParam *,class COptimizeOptions *) {
   
   CDynListEntry::CDynListEntry(this);

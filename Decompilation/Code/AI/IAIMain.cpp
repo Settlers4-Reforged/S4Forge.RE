@@ -4,7 +4,6 @@
 
 // address=[0x1313f20]
 // Decompiled from IAIMain *__thiscall IAIMain::IAIMain(IAIMain *this)
-
  IAIMain::IAIMain(void) {
   
   IS4ChunkObject::IS4ChunkObject(this);

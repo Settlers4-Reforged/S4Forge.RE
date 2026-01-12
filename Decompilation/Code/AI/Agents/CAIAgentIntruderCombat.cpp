@@ -4,7 +4,6 @@
 
 // address=[0x1304730]
 // Decompiled from CAIAgentIntruderCombat *__thiscall CAIAgentIntruderCombat::CAIAgentIntruderCombat(CAIAgentIntruderCombat *this)
-
  CAIAgentIntruderCombat::CAIAgentIntruderCombat(void) {
   
   CAINormalSectorAgent::CAINormalSectorAgent(this, "intruder combat");
@@ -16,7 +15,6 @@
 
 // address=[0x1304760]
 // Decompiled from unsigned int __thiscall CAIAgentIntruderCombat::Execute(CAIAgentIntruderCombat *this, unsigned int a2, unsigned int a3)
-
 unsigned int  CAIAgentIntruderCombat::Execute(unsigned int,unsigned int) {
   
   struct CAINormalSectorAI *v3; // eax
@@ -111,7 +109,6 @@ unsigned int  CAIAgentIntruderCombat::Execute(unsigned int,unsigned int) {
 
 // address=[0x13062a0]
 // Decompiled from void __thiscall CAIAgentIntruderCombat::~CAIAgentIntruderCombat(CAIAgentIntruderCombat *this)
-
  CAIAgentIntruderCombat::~CAIAgentIntruderCombat(void) {
   
   CAINormalSectorAgent::~CAINormalSectorAgent(this);
@@ -120,7 +117,6 @@ unsigned int  CAIAgentIntruderCombat::Execute(unsigned int,unsigned int) {
 
 // address=[0x1304940]
 // Decompiled from int __thiscall CAIAgentIntruderCombat::MoveHunterHome(CAIAgentIntruderCombat *this, int a2)
-
 void  CAIAgentIntruderCombat::MoveHunterHome(int) {
   
   struct CAINormalSectorAI *v2; // eax
@@ -153,7 +149,6 @@ void  CAIAgentIntruderCombat::MoveHunterHome(int) {
 
 // address=[0x13049f0]
 // Decompiled from int __thiscall CAIAgentIntruderCombat::HuntNextIntruderType(CAIAgentIntruderCombat *this)
-
 int  CAIAgentIntruderCombat::HuntNextIntruderType(void) {
   
   unsigned int v1; // eax
@@ -168,7 +163,6 @@ int  CAIAgentIntruderCombat::HuntNextIntruderType(void) {
 
 // address=[0x1304a40]
 // Decompiled from int __thiscall CAIAgentIntruderCombat::HuntIntruders(CAIAgentIntruderCombat *this, int a2)
-
 int  CAIAgentIntruderCombat::HuntIntruders(int) {
   
   struct CAINormalSectorAI *v2; // eax

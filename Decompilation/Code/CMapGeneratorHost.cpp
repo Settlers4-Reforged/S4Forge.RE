@@ -4,7 +4,6 @@
 
 // address=[0x1498520]
 // Decompiled from void *__thiscall CMapGeneratorHost::Init(void **this, int a2)
-
 void  CMapGeneratorHost::Init(int) {
   
   void *result; // eax
@@ -34,7 +33,6 @@ void  CMapGeneratorHost::Init(int) {
 
 // address=[0x1498680]
 // Decompiled from CMapGeneratorHost *__thiscall CMapGeneratorHost::UpdateGroundInformation(CMapGeneratorHost **this)
-
 void  CMapGeneratorHost::UpdateGroundInformation(void) {
   
   CMapGeneratorHost *result; // eax
@@ -67,7 +65,6 @@ void  CMapGeneratorHost::UpdateGroundInformation(void) {
 
 // address=[0x1498720]
 // Decompiled from char __thiscall CMapGeneratorHost::SetObject(CMapGeneratorHost *this, Grid *a2, int a3, int a4)
-
 bool  CMapGeneratorHost::SetObject(int,int,int) {
   
   char *v5; // [esp+4h] [ebp-6Ch]
@@ -169,7 +166,6 @@ bool  CMapGeneratorHost::SetObject(int,int,int) {
 
 // address=[0x1498b10]
 // Decompiled from int __thiscall CMapGeneratorHost::SetPlayerStartPosition(CMapGeneratorHost *this, int a2, int a3, int a4)
-
 void  CMapGeneratorHost::SetPlayerStartPosition(int,int,int) {
   
   int result; // eax
@@ -184,10 +180,7 @@ void  CMapGeneratorHost::SetPlayerStartPosition(int,int,int) {
 
 
 // address=[0x1498b50]
-// Decompiled from CMapGeneratorHost *__thiscall CMapGeneratorHost::CMapGeneratorHost(
-        CMapGeneratorHost *this,
-        const struct SRandomMapParams *a2)
-
+// Decompiled from CMapGeneratorHost *__thiscall CMapGeneratorHost::CMapGeneratorHost(  CMapGeneratorHost *this,  const struct SRandomMapParams *a2)
  CMapGeneratorHost::CMapGeneratorHost(struct SRandomMapParams const &) {
   
   IMapGeneratorHost::IMapGeneratorHost(this);
@@ -224,7 +217,6 @@ void  CMapGeneratorHost::SetPlayerStartPosition(int,int,int) {
 
 // address=[0x1498c30]
 // Decompiled from void __thiscall CMapGeneratorHost::~CMapGeneratorHost(CMapGeneratorHost *this)
-
  CMapGeneratorHost::~CMapGeneratorHost(void) {
   
   *(_DWORD *)this = &CMapGeneratorHost::_vftable_;
@@ -234,7 +226,6 @@ void  CMapGeneratorHost::SetPlayerStartPosition(int,int,int) {
 
 // address=[0x1498c80]
 // Decompiled from CMapGeneratorHost *__thiscall CMapGeneratorHost::CleanUp(void **this)
-
 void  CMapGeneratorHost::CleanUp(void) {
   
   CMapGeneratorHost *result; // eax
@@ -262,7 +253,6 @@ void  CMapGeneratorHost::CleanUp(void) {
 
 // address=[0x1498d20]
 // Decompiled from CMapGeneratorHost *__thiscall CMapGeneratorHost::ClearRandomMapInfo(CMapGeneratorHost *this)
-
 void  CMapGeneratorHost::ClearRandomMapInfo(void) {
   
   CMapGeneratorHost *result; // eax
@@ -278,7 +268,6 @@ void  CMapGeneratorHost::ClearRandomMapInfo(void) {
 
 // address=[0x1498d70]
 // Decompiled from int __thiscall CMapGeneratorHost::UploadChunks(void **this, struct S4::CMapFile *a2)
-
 void  CMapGeneratorHost::UploadChunks(class S4::CMapFile &) {
   
   S4::CMapFile::UploadBuffer(1, 0, this + 72, 0x18u, 0);
@@ -290,7 +279,6 @@ void  CMapGeneratorHost::UploadChunks(class S4::CMapFile &) {
 
 // address=[0x1498e00]
 // Decompiled from int __thiscall CMapGeneratorHost::RefreshShading(CMapGeneratorHost *this, int a2)
-
 void  CMapGeneratorHost::RefreshShading(int) {
   
   int result; // eax
@@ -328,7 +316,6 @@ void  CMapGeneratorHost::RefreshShading(int) {
 
 // address=[0x14991b0]
 // Decompiled from int __thiscall CMapGeneratorHost::GetEditorLayer(CMapGeneratorHost *this)
-
 struct SEditorElementMap *  CMapGeneratorHost::GetEditorLayer(void) {
   
   return *((_DWORD *)this + 79);
@@ -337,7 +324,6 @@ struct SEditorElementMap *  CMapGeneratorHost::GetEditorLayer(void) {
 
 // address=[0x14991d0]
 // Decompiled from int __thiscall CMapGeneratorHost::GetGfxLayer(CMFCBaseTabCtrl *this)
-
 struct T_GFX_MAP_ELEMENT *  CMapGeneratorHost::GetGfxLayer(void) {
   
   return *((_DWORD *)this + 78);
@@ -346,7 +332,6 @@ struct T_GFX_MAP_ELEMENT *  CMapGeneratorHost::GetGfxLayer(void) {
 
 // address=[0x14991f0]
 // Decompiled from int __stdcall CMapGeneratorHost::GetInterfaceVersion(CMapGeneratorHost *this)
-
 int __stdcall CMapGeneratorHost::GetInterfaceVersion(void) {
   
   return 2;
@@ -354,9 +339,7 @@ int __stdcall CMapGeneratorHost::GetInterfaceVersion(void) {
 
 
 // address=[0x1499200]
-// Decompiled from // MFC 3.1-14.0 32bit
-int __thiscall CMapGeneratorHost::GetMapWidthHeight(CMapGeneratorHost *this)
-
+// Decompiled from int __thiscall CMapGeneratorHost::GetMapWidthHeight(CMapGeneratorHost *this)
 int  CMapGeneratorHost::GetMapWidthHeight(void) {
   
   return *((_DWORD *)this + 52);
@@ -364,9 +347,7 @@ int  CMapGeneratorHost::GetMapWidthHeight(void) {
 
 
 // address=[0x1499220]
-// Decompiled from // Microsoft VisualC 14/net runtime
-char __thiscall CMapGeneratorHost::IsEditorHost(CMapGeneratorHost *this)
-
+// Decompiled from char __thiscall CMapGeneratorHost::IsEditorHost(CMapGeneratorHost *this)
 bool  CMapGeneratorHost::IsEditorHost(void) {
   
   return 0;
@@ -375,7 +356,6 @@ bool  CMapGeneratorHost::IsEditorHost(void) {
 
 // address=[0x149a7a0]
 // Decompiled from char *__thiscall CMapGeneratorHost::GetRandomMapInfo(CMapGeneratorHost *this)
-
 struct SRandomMapInfo const *  CMapGeneratorHost::GetRandomMapInfo(void)const {
   
   return (char *)this + 196;

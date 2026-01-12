@@ -4,7 +4,6 @@
 
 // address=[0x1481020]
 // Decompiled from SEnvironmentInfo *__thiscall SEnvironmentInfo::SEnvironmentInfo(SEnvironmentInfo *this)
-
  SEnvironmentInfo::SEnvironmentInfo(void) {
   
   std::string::string();
@@ -15,7 +14,6 @@
 
 // address=[0x1481050]
 // Decompiled from void __thiscall SEnvironmentInfo::~SEnvironmentInfo(SEnvironmentInfo *this)
-
  SEnvironmentInfo::~SEnvironmentInfo(void) {
   
   std::string::~string((char *)this + 80);

@@ -4,7 +4,6 @@
 
 // address=[0x15b1490]
 // Decompiled from int __cdecl CMinimapHandler::FilterKeyPressed(int a1)
-
 static void __cdecl CMinimapHandler::FilterKeyPressed(int) {
   
   int result; // eax
@@ -26,7 +25,6 @@ static void __cdecl CMinimapHandler::FilterKeyPressed(int) {
 
 // address=[0x15b1510]
 // Decompiled from int CMinimapHandler::Init()
-
 static void __cdecl CMinimapHandler::Init(void) {
   
   int result; // eax
@@ -78,7 +76,6 @@ static void __cdecl CMinimapHandler::Init(void) {
 
 // address=[0x15b1730]
 // Decompiled from _DWORD *CMinimapHandler::UpdateAlliances()
-
 static void __cdecl CMinimapHandler::UpdateAlliances(void) {
   
   _DWORD *result; // eax
@@ -126,7 +123,6 @@ static void __cdecl CMinimapHandler::UpdateAlliances(void) {
 
 // address=[0x16a6ef0]
 // Decompiled from int __cdecl CMinimapHandler::GetEcoSectorColor(int a1, struct SGfxColor *a2)
-
 static void __cdecl CMinimapHandler::GetEcoSectorColor(int,struct SGfxColor &) {
   
   _DWORD *v2; // eax
@@ -143,7 +139,6 @@ static void __cdecl CMinimapHandler::GetEcoSectorColor(int,struct SGfxColor &) {
 
 // address=[0x16a6f20]
 // Decompiled from char __cdecl CMinimapHandler::GetObjectColor(int a1, struct SGfxColor *a2, int a3, int a4)
-
 static bool __cdecl CMinimapHandler::GetObjectColor(int,struct SGfxColor &,int,int) {
   
   _DWORD *v5; // eax
@@ -173,7 +168,6 @@ static bool __cdecl CMinimapHandler::GetObjectColor(int,struct SGfxColor &,int,i
 
 // address=[0x16a71c0]
 // Decompiled from bool CMinimapHandler::IsEcoSectorEnabled()
-
 static bool __cdecl CMinimapHandler::IsEcoSectorEnabled(void) {
   
   return CMinimapHandler::m_iGroupEnabled[3] != 0;

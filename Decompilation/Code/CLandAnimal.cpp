@@ -4,7 +4,6 @@
 
 // address=[0x1400fe0]
 // Decompiled from int __cdecl CLandAnimal::New(int a1)
-
 static class CPersistence * __cdecl CLandAnimal::New(std::istream &) {
   
   if ( CLandAnimal::operator new(0xB0u) )
@@ -16,7 +15,6 @@ static class CPersistence * __cdecl CLandAnimal::New(std::istream &) {
 
 // address=[0x14e0eb0]
 // Decompiled from int __thiscall CLandAnimal::Init(CLandAnimal *this, struct SAnimalData *a2)
-
 void  CLandAnimal::Init(struct SAnimalData *) {
   
   int v2; // eax
@@ -71,7 +69,6 @@ void  CLandAnimal::Init(struct SAnimalData *) {
 
 // address=[0x14e1030]
 // Decompiled from void *__cdecl CLandAnimal::operator new(unsigned int a1)
-
 static void * __cdecl CLandAnimal::operator new(unsigned int) {
   
   return CAnimalMgr::Alloc((CAnimalMgr *)&g_cAnimalMgr, a1);
@@ -80,7 +77,6 @@ static void * __cdecl CLandAnimal::operator new(unsigned int) {
 
 // address=[0x14e1050]
 // Decompiled from void __cdecl CLandAnimal::operator delete(void *a1)
-
 static void __cdecl CLandAnimal::operator delete(void *) {
   
   CAnimalMgr::Dealloc((CAnimalMgr *)&g_cAnimalMgr, a1);
@@ -89,7 +85,6 @@ static void __cdecl CLandAnimal::operator delete(void *) {
 
 // address=[0x14e1090]
 // Decompiled from int __thiscall CLandAnimal::GetGoodType(CLandAnimal *this)
-
 int  CLandAnimal::GetGoodType(void)const {
   
   return 24;
@@ -98,7 +93,6 @@ int  CLandAnimal::GetGoodType(void)const {
 
 // address=[0x14e10a0]
 // Decompiled from void __thiscall CLandAnimal::Decrease(CLandAnimal *this, int a2)
-
 void  CLandAnimal::Decrease(int) {
   
   if ( *((_DWORD *)this + 25) != 5 )
@@ -111,7 +105,6 @@ void  CLandAnimal::Decrease(int) {
 
 // address=[0x14e10d0]
 // Decompiled from void __thiscall CLandAnimal::Take(CLandAnimal *this, int a2)
-
 void  CLandAnimal::Take(int) {
   
   int v2; // eax
@@ -123,7 +116,6 @@ void  CLandAnimal::Take(int) {
 
 // address=[0x14e10f0]
 // Decompiled from unsigned __int16 *__thiscall CLandAnimal::CLandAnimal(unsigned __int16 *this, int a2)
-
  CLandAnimal::CLandAnimal(std::istream &) {
   
   int v2; // eax
@@ -174,7 +166,6 @@ void  CLandAnimal::Take(int) {
 
 // address=[0x14e12f0]
 // Decompiled from int __thiscall CLandAnimal::Store(int *this, struct std::ostream *a2)
-
 void  CLandAnimal::Store(std::ostream &) {
   
   _BYTE v3[12]; // [esp+4h] [ebp-38h] BYREF
@@ -227,7 +218,6 @@ void  CLandAnimal::Store(std::ostream &) {
 
 // address=[0x14e2f90]
 // Decompiled from int __thiscall CLandAnimal::ClassID(CLandAnimal *this)
-
 unsigned long  CLandAnimal::ClassID(void)const {
   
   return CLandAnimal::m_iClassID;
@@ -239,7 +229,6 @@ unsigned long  CLandAnimal::ClassID(void)const {
 
 // address=[0x14e14c0]
 // Decompiled from CLandAnimal *__thiscall CLandAnimal::CLandAnimal(CLandAnimal *this, int a2, int a3, int a4, int a5)
-
  CLandAnimal::CLandAnimal(int,int,int,int) {
   
   CAnimal::CAnimal(this, a2, a3, a4, a5);
@@ -260,7 +249,6 @@ unsigned long  CLandAnimal::ClassID(void)const {
 
 // address=[0x14e1570]
 // Decompiled from int __thiscall CLandAnimal::~CLandAnimal(CLandAnimal *this)
-
  CLandAnimal::~CLandAnimal(void) {
   
   *(_DWORD *)this = &CLandAnimal::_vftable_;
@@ -270,7 +258,6 @@ unsigned long  CLandAnimal::ClassID(void)const {
 
 // address=[0x14e1590]
 // Decompiled from int __thiscall CLandAnimal::PostLoadInit(CLandAnimal *this, struct SAnimalData *a2, int a3)
-
 void  CLandAnimal::PostLoadInit(struct SAnimalData *,int) {
   
   int v3; // eax
@@ -310,7 +297,6 @@ void  CLandAnimal::PostLoadInit(struct SAnimalData *,int) {
 
 // address=[0x14e1690]
 // Decompiled from void __thiscall CLandAnimal::LogicUpdateSpec(CLandAnimal *this)
-
 void  CLandAnimal::LogicUpdateSpec(void) {
   
   int v1; // eax
@@ -461,7 +447,6 @@ LABEL_27:
 
 // address=[0x14e1a10]
 // Decompiled from int __thiscall CLandAnimal::GetMoveDir(CLandAnimal *this)
-
 int  CLandAnimal::GetMoveDir(void) {
   
   Squares *v1; // eax
@@ -621,7 +606,6 @@ int  CLandAnimal::GetMoveDir(void) {
 
 // address=[0x14e1f60]
 // Decompiled from Y16X16 *__thiscall CLandAnimal::GetFleeDir(CLandAnimal *this)
-
 int  CLandAnimal::GetFleeDir(void) {
   
   int v1; // esi
@@ -674,7 +658,6 @@ int  CLandAnimal::GetFleeDir(void) {
 
 // address=[0x14e2100]
 // Decompiled from int __thiscall CLandAnimal::GetTerritoryDir(CLandAnimal *this)
-
 int  CLandAnimal::GetTerritoryDir(void) {
   
   Squares *v1; // eax
@@ -704,7 +687,6 @@ int  CLandAnimal::GetTerritoryDir(void) {
 
 // address=[0x14e21d0]
 // Decompiled from int __thiscall CLandAnimal::GetDirection(CLandAnimal *this, Y16X16 *a2)
-
 int  CLandAnimal::GetDirection(int) {
   
   int v3; // [esp+0h] [ebp-18h]
@@ -739,7 +721,6 @@ int  CLandAnimal::GetDirection(int) {
 
 // address=[0x14e22d0]
 // Decompiled from bool __thiscall CLandAnimal::CheckForEnemies(CLandAnimal *this)
-
 bool  CLandAnimal::CheckForEnemies(void) {
   
   int v1; // eax
@@ -772,7 +753,6 @@ bool  CLandAnimal::CheckForEnemies(void) {
 
 // address=[0x14e23a0]
 // Decompiled from bool __thiscall CLandAnimal::CheckTerritory(CLandAnimal *this)
-
 bool  CLandAnimal::CheckTerritory(void) {
   
   Squares *v1; // eax
@@ -790,7 +770,6 @@ bool  CLandAnimal::CheckTerritory(void) {
 
 // address=[0x14e23f0]
 // Decompiled from bool __thiscall CLandAnimal::IsValidSquare(CLandAnimal *this, int a2, int a3)
-
 bool  CLandAnimal::IsValidSquare(int,int) {
   
   int v4; // [esp+8h] [ebp-18h]
@@ -821,7 +800,6 @@ bool  CLandAnimal::IsValidSquare(int,int) {
 
 // address=[0x14e2510]
 // Decompiled from bool __thiscall CLandAnimal::CheckTile(CLandAnimal *this, int a2)
-
 bool  CLandAnimal::CheckTile(int) {
   
   return CLandAnimal::IsTileFree(this, a2) && CLandAnimal::CheckGround(this, a2);
@@ -830,7 +808,6 @@ bool  CLandAnimal::CheckTile(int) {
 
 // address=[0x14e2540]
 // Decompiled from bool __thiscall CLandAnimal::IsTileFree(CLandAnimal *this, int a2)
-
 bool  CLandAnimal::IsTileFree(int) {
   
   return !(unsigned __int8)CWorldManager::IsBlockedLand(a2)
@@ -841,7 +818,6 @@ bool  CLandAnimal::IsTileFree(int) {
 
 // address=[0x14e25a0]
 // Decompiled from bool __thiscall CLandAnimal::CheckGround(CLandAnimal *this, int a2)
-
 bool  CLandAnimal::CheckGround(int) {
   
   bool result; // al
@@ -872,7 +848,6 @@ bool  CLandAnimal::CheckGround(int) {
 
 // address=[0x14e26c0]
 // Decompiled from char __thiscall CLandAnimal::IsSettlerAroundTile(CLandAnimal *this, int a2)
-
 bool  CLandAnimal::IsSettlerAroundTile(int) {
   
   int v3; // [esp+0h] [ebp-10h]

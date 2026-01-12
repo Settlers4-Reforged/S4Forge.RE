@@ -4,7 +4,6 @@
 
 // address=[0x2f2aa40]
 // Decompiled from LZHLEncoderStat *__thiscall LZHLEncoderStat::LZHLEncoderStat(LZHLEncoderStat *this)
-
  LZHLEncoderStat::LZHLEncoderStat(void) {
   
   HuffStat::HuffStat(this);
@@ -17,7 +16,6 @@
 
 // address=[0x2f2aad0]
 // Decompiled from int __thiscall LZHLEncoderStat::~LZHLEncoderStat(void **this)
-
  LZHLEncoderStat::~LZHLEncoderStat(void) {
   
   operator delete[](this[2]);
@@ -27,7 +25,6 @@
 
 // address=[0x2f2ab00]
 // Decompiled from void __thiscall LZHLEncoderStat::calcStat(LZHLEncoderStat *this, int *a2)
-
 void  LZHLEncoderStat::calcStat(int *) {
   
   int v2; // esi
@@ -143,7 +140,6 @@ void  LZHLEncoderStat::calcStat(int *) {
 
 // address=[0x2f2c360]
 // Decompiled from int __cdecl LZHLEncoderStat::_addGroup(int *a1, int a2, int a3)
-
 static void __cdecl LZHLEncoderStat::_addGroup(int *,int,int) {
   
   int result; // eax

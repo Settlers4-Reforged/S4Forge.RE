@@ -4,7 +4,6 @@
 
 // address=[0x1461000]
 // Decompiled from char __thiscall CInternationalTrader::CPlayerTradeInfo::TradeWithSomeone(CInternationalTrader::CPlayerTradeInfo *this)
-
 bool  CInternationalTrader::CPlayerTradeInfo::TradeWithSomeone(void) {
   
   int i; // [esp+4h] [ebp-8h]
@@ -18,10 +17,7 @@ bool  CInternationalTrader::CPlayerTradeInfo::TradeWithSomeone(void) {
 
 
 // address=[0x1461050]
-// Decompiled from int __thiscall CInternationalTrader::CPlayerTradeInfo::AddBuilding(
-        CInternationalTrader::CPlayerTradeInfo *this,
-        struct CBuilding *a2)
-
+// Decompiled from int __thiscall CInternationalTrader::CPlayerTradeInfo::AddBuilding(  CInternationalTrader::CPlayerTradeInfo *this,  struct CBuilding *a2)
 void  CInternationalTrader::CPlayerTradeInfo::AddBuilding(class CBuilding *) {
   
   int result; // eax
@@ -57,10 +53,7 @@ void  CInternationalTrader::CPlayerTradeInfo::AddBuilding(class CBuilding *) {
 
 
 // address=[0x1461150]
-// Decompiled from int __thiscall CInternationalTrader::CPlayerTradeInfo::RemoveBuilding(
-        CInternationalTrader::CPlayerTradeInfo *this,
-        struct CBuilding *a2)
-
+// Decompiled from int __thiscall CInternationalTrader::CPlayerTradeInfo::RemoveBuilding(  CInternationalTrader::CPlayerTradeInfo *this,  struct CBuilding *a2)
 void  CInternationalTrader::CPlayerTradeInfo::RemoveBuilding(class CBuilding *) {
   
   int result; // eax
@@ -166,12 +159,7 @@ void  CInternationalTrader::CPlayerTradeInfo::RemoveBuilding(class CBuilding *) 
 
 
 // address=[0x14613a0]
-// Decompiled from struct CInternationalTrader::CTradeBuildingInfo *__thiscall CInternationalTrader::CPlayerTradeInfo::SetGoodStatus(
-        CInternationalTrader::CPlayerTradeInfo *this,
-        struct CBuilding *a2,
-        int a3,
-        int a4)
-
+// Decompiled from struct CInternationalTrader::CTradeBuildingInfo *__thiscall CInternationalTrader::CPlayerTradeInfo::SetGoodStatus(  CInternationalTrader::CPlayerTradeInfo *this,  struct CBuilding *a2,  int a3,  int a4)
 void  CInternationalTrader::CPlayerTradeInfo::SetGoodStatus(class CBuilding *,enum PILE_TYPES,enum TGOOD_STATUS) {
   
   struct CInternationalTrader::CTradeBuildingInfo *result; // eax
@@ -191,11 +179,7 @@ void  CInternationalTrader::CPlayerTradeInfo::SetGoodStatus(class CBuilding *,en
 
 
 // address=[0x1461410]
-// Decompiled from int __thiscall CInternationalTrader::CPlayerTradeInfo::GetGoodStatus(
-        CInternationalTrader::CPlayerTradeInfo *this,
-        struct CBuilding *a2,
-        int a3)
-
+// Decompiled from int __thiscall CInternationalTrader::CPlayerTradeInfo::GetGoodStatus(  CInternationalTrader::CPlayerTradeInfo *this,  struct CBuilding *a2,  int a3)
 enum TGOOD_STATUS  CInternationalTrader::CPlayerTradeInfo::GetGoodStatus(class CBuilding *,enum PILE_TYPES) {
   
   struct CInternationalTrader::CTradeBuildingInfo *BuildingInfo; // [esp+4h] [ebp-4h]
@@ -215,10 +199,7 @@ enum TGOOD_STATUS  CInternationalTrader::CPlayerTradeInfo::GetGoodStatus(class C
 
 
 // address=[0x14614a0]
-// Decompiled from int __thiscall CInternationalTrader::CPlayerTradeInfo::GetBuildingInfo(
-        CInternationalTrader::CPlayerTradeInfo *this,
-        struct CBuilding *a2)
-
+// Decompiled from int __thiscall CInternationalTrader::CPlayerTradeInfo::GetBuildingInfo(  CInternationalTrader::CPlayerTradeInfo *this,  struct CBuilding *a2)
 class CInternationalTrader::CTradeBuildingInfo *  CInternationalTrader::CPlayerTradeInfo::GetBuildingInfo(class CBuilding *) {
   
   _DWORD *v3; // esi
@@ -311,11 +292,7 @@ class CInternationalTrader::CTradeBuildingInfo *  CInternationalTrader::CPlayerT
 
 
 // address=[0x14616a0]
-// Decompiled from int __thiscall CInternationalTrader::CPlayerTradeInfo::GetExportListForBuilding(
-        CInternationalTrader::CPlayerTradeInfo *this,
-        int a2,
-        struct CBuilding *a3)
-
+// Decompiled from int __thiscall CInternationalTrader::CPlayerTradeInfo::GetExportListForBuilding(  CInternationalTrader::CPlayerTradeInfo *this,  int a2,  struct CBuilding *a3)
 class std::vector<struct CInternationalTrader::CPlayerTradeInfo::TGoodInfo,class std::allocator<struct CInternationalTrader::CPlayerTradeInfo::TGoodInfo> >  CInternationalTrader::CPlayerTradeInfo::GetExportListForBuilding(class CBuilding *) {
   
   _BYTE v4[16]; // [esp+4h] [ebp-34h] BYREF
@@ -355,7 +332,6 @@ class std::vector<struct CInternationalTrader::CPlayerTradeInfo::TGoodInfo,class
 
 // address=[0x14617d0]
 // Decompiled from int __thiscall CInternationalTrader::CPlayerTradeInfo::GetExportList(void *this, int a2, int a3)
-
 class std::vector<struct CInternationalTrader::CPlayerTradeInfo::TGoodInfo,class std::allocator<struct CInternationalTrader::CPlayerTradeInfo::TGoodInfo> >  CInternationalTrader::CPlayerTradeInfo::GetExportList(enum BUILDING_TYPES) {
   
   _BYTE v4[12]; // [esp+4h] [ebp-A0h] BYREF
@@ -459,7 +435,6 @@ class std::vector<struct CInternationalTrader::CPlayerTradeInfo::TGoodInfo,class
 
 // address=[0x1461a00]
 // Decompiled from int __thiscall CInternationalTrader::CPlayerTradeInfo::GetImportList(void *this, int a2, int a3)
-
 class std::vector<struct CInternationalTrader::CPlayerTradeInfo::TGoodInfo,class std::allocator<struct CInternationalTrader::CPlayerTradeInfo::TGoodInfo> >  CInternationalTrader::CPlayerTradeInfo::GetImportList(enum BUILDING_TYPES) {
   
   _BYTE v4[12]; // [esp+4h] [ebp-A0h] BYREF
@@ -563,7 +538,6 @@ class std::vector<struct CInternationalTrader::CPlayerTradeInfo::TGoodInfo,class
 
 // address=[0x1461c30]
 // Decompiled from char __thiscall CInternationalTrader::CPlayerTradeInfo::ImportGood(void *this, int a2, int a3)
-
 bool  CInternationalTrader::CPlayerTradeInfo::ImportGood(enum PILE_TYPES,enum BUILDING_TYPES) {
   
   _BYTE v4[16]; // [esp+4h] [ebp-50h] BYREF
@@ -619,7 +593,6 @@ bool  CInternationalTrader::CPlayerTradeInfo::ImportGood(enum PILE_TYPES,enum BU
 
 // address=[0x1461d40]
 // Decompiled from char __thiscall CInternationalTrader::CPlayerTradeInfo::ImportGoodAtBuilding(void *this, _DWORD *a2, int a3, int a4)
-
 bool  CInternationalTrader::CPlayerTradeInfo::ImportGoodAtBuilding(int &,enum PILE_TYPES,enum BUILDING_TYPES) {
   
   _BYTE v5[16]; // [esp+4h] [ebp-50h] BYREF
@@ -675,9 +648,7 @@ bool  CInternationalTrader::CPlayerTradeInfo::ImportGoodAtBuilding(int &,enum PI
 
 
 // address=[0x1465d20]
-// Decompiled from CInternationalTrader::CPlayerTradeInfo *__thiscall CInternationalTrader::CPlayerTradeInfo::CPlayerTradeInfo(
-        CInternationalTrader::CPlayerTradeInfo *this)
-
+// Decompiled from CInternationalTrader::CPlayerTradeInfo *__thiscall CInternationalTrader::CPlayerTradeInfo::CPlayerTradeInfo(  CInternationalTrader::CPlayerTradeInfo *this)
  CInternationalTrader::CPlayerTradeInfo::CPlayerTradeInfo(void) {
   
   std::list<CInternationalTrader::CTradeBuildingInfo>::list<CInternationalTrader::CTradeBuildingInfo>(this);
@@ -689,9 +660,7 @@ bool  CInternationalTrader::CPlayerTradeInfo::ImportGoodAtBuilding(int &,enum PI
 
 
 // address=[0x1466c10]
-// Decompiled from // MFC 3.1-14.0 32bit
-int __thiscall CInternationalTrader::CPlayerTradeInfo::GetPlayerID(CInternationalTrader::CPlayerTradeInfo *this)
-
+// Decompiled from int __thiscall CInternationalTrader::CPlayerTradeInfo::GetPlayerID(CInternationalTrader::CPlayerTradeInfo *this)
 int  CInternationalTrader::CPlayerTradeInfo::GetPlayerID(void) {
   
   return *((_DWORD *)this + 6);
@@ -699,10 +668,7 @@ int  CInternationalTrader::CPlayerTradeInfo::GetPlayerID(void) {
 
 
 // address=[0x1466c30]
-// Decompiled from char __thiscall CInternationalTrader::CPlayerTradeInfo::GetPlayerTradeStatus(
-        CInternationalTrader::CPlayerTradeInfo *this,
-        int a2)
-
+// Decompiled from char __thiscall CInternationalTrader::CPlayerTradeInfo::GetPlayerTradeStatus(  CInternationalTrader::CPlayerTradeInfo *this,  int a2)
 bool  CInternationalTrader::CPlayerTradeInfo::GetPlayerTradeStatus(int) {
   
   return *((_BYTE *)this + a2 + 28);
@@ -710,10 +676,7 @@ bool  CInternationalTrader::CPlayerTradeInfo::GetPlayerTradeStatus(int) {
 
 
 // address=[0x1466c50]
-// Decompiled from CInternationalTrader::CPlayerTradeInfo *__thiscall CInternationalTrader::CPlayerTradeInfo::SetPlayerID(
-        CInternationalTrader::CPlayerTradeInfo *this,
-        int a2)
-
+// Decompiled from CInternationalTrader::CPlayerTradeInfo *__thiscall CInternationalTrader::CPlayerTradeInfo::SetPlayerID(  CInternationalTrader::CPlayerTradeInfo *this,  int a2)
 void  CInternationalTrader::CPlayerTradeInfo::SetPlayerID(int) {
   
   CInternationalTrader::CPlayerTradeInfo *result; // eax
@@ -743,11 +706,7 @@ void  CInternationalTrader::CPlayerTradeInfo::SetPlayerID(int) {
 
 
 // address=[0x1466ce0]
-// Decompiled from char *__thiscall CInternationalTrader::CPlayerTradeInfo::SetPlayerTradeStatus(
-        CInternationalTrader::CPlayerTradeInfo *this,
-        int a2,
-        bool a3)
-
+// Decompiled from char *__thiscall CInternationalTrader::CPlayerTradeInfo::SetPlayerTradeStatus(  CInternationalTrader::CPlayerTradeInfo *this,  int a2,  bool a3)
 void  CInternationalTrader::CPlayerTradeInfo::SetPlayerTradeStatus(int,bool) {
   
   char *result; // eax
@@ -759,10 +718,7 @@ void  CInternationalTrader::CPlayerTradeInfo::SetPlayerTradeStatus(int,bool) {
 
 
 // address=[0x1466d00]
-// Decompiled from bool __thiscall CInternationalTrader::CPlayerTradeInfo::SwitchPlayerTradeStatus(
-        CInternationalTrader::CPlayerTradeInfo *this,
-        int a2)
-
+// Decompiled from bool __thiscall CInternationalTrader::CPlayerTradeInfo::SwitchPlayerTradeStatus(  CInternationalTrader::CPlayerTradeInfo *this,  int a2)
 void  CInternationalTrader::CPlayerTradeInfo::SwitchPlayerTradeStatus(int) {
   
   bool result; // al
@@ -774,10 +730,7 @@ void  CInternationalTrader::CPlayerTradeInfo::SwitchPlayerTradeStatus(int) {
 
 
 // address=[0x1466d50]
-// Decompiled from char __thiscall CInternationalTrader::CPlayerTradeInfo::TradeWithPlayer(
-        CInternationalTrader::CPlayerTradeInfo *this,
-        int a2)
-
+// Decompiled from char __thiscall CInternationalTrader::CPlayerTradeInfo::TradeWithPlayer(  CInternationalTrader::CPlayerTradeInfo *this,  int a2)
 bool  CInternationalTrader::CPlayerTradeInfo::TradeWithPlayer(int) {
   
   return *((_BYTE *)this + a2 + 28);

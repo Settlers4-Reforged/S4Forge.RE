@@ -4,7 +4,6 @@
 
 // address=[0x1489f60]
 // Decompiled from CGameStateEventHandle *__thiscall CGameStateEventHandle::CGameStateEventHandle(CGameStateEventHandle *this)
-
  CGameStateEventHandle::CGameStateEventHandle(void) {
   
   IEvn_Handle::IEvn_Handle(this);
@@ -15,7 +14,6 @@
 
 // address=[0x1489f80]
 // Decompiled from void __thiscall CGameStateEventHandle::~CGameStateEventHandle(_AFX_OLE_STATE *this)
-
  CGameStateEventHandle::~CGameStateEventHandle(void) {
   
   *(_DWORD *)this = &CGameStateEventHandle::_vftable_;
@@ -24,7 +22,6 @@
 
 // address=[0x1489fa0]
 // Decompiled from char __thiscall CGameStateEventHandle::OnEvent(CGameStateEventHandle *this, struct CEvn_Event *a2)
-
 bool  CGameStateEventHandle::OnEvent(class CEvn_Event &) {
   
   char result; // al

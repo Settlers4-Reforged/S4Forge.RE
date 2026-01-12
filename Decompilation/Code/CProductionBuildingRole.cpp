@@ -4,7 +4,6 @@
 
 // address=[0x1401800]
 // Decompiled from int __cdecl CProductionBuildingRole::New(int a1)
-
 static class CPersistence * __cdecl CProductionBuildingRole::New(std::istream &) {
   
   if ( operator new(0x1B0u) )
@@ -16,7 +15,6 @@ static class CPersistence * __cdecl CProductionBuildingRole::New(std::istream &)
 
 // address=[0x14fca80]
 // Decompiled from CProductionBuildingRole *__thiscall CProductionBuildingRole::CProductionBuildingRole(CProductionBuildingRole *this)
-
  CProductionBuildingRole::CProductionBuildingRole(void) {
   
   IBuildingRole::IBuildingRole(this);
@@ -30,7 +28,6 @@ static class CPersistence * __cdecl CProductionBuildingRole::New(std::istream &)
 
 // address=[0x14fccb0]
 // Decompiled from int __thiscall CProductionBuildingRole::~CProductionBuildingRole(CProductionBuildingRole *this)
-
  CProductionBuildingRole::~CProductionBuildingRole(void) {
   
   std::vector<unsigned char>::~vector<unsigned char>();
@@ -42,7 +39,6 @@ static class CPersistence * __cdecl CProductionBuildingRole::New(std::istream &)
 
 // address=[0x14fd140]
 // Decompiled from int __thiscall CProductionBuildingRole::ClassID(CProductionBuildingRole *this)
-
 unsigned long  CProductionBuildingRole::ClassID(void)const {
   
   return CProductionBuildingRole::m_iClassID;
@@ -50,9 +46,7 @@ unsigned long  CProductionBuildingRole::ClassID(void)const {
 
 
 // address=[0x14fd520]
-// Decompiled from // MFC 3.1-14.0 32bit
-int __thiscall CProductionBuildingRole::GetBuildingRole(CProductionBuildingRole *this)
-
+// Decompiled from int __thiscall CProductionBuildingRole::GetBuildingRole(CProductionBuildingRole *this)
 int  CProductionBuildingRole::GetBuildingRole(void) {
   
   return 4;
@@ -61,7 +55,6 @@ int  CProductionBuildingRole::GetBuildingRole(void) {
 
 // address=[0x14fdb70]
 // Decompiled from int __cdecl CProductionBuildingRole::Load(int a1)
-
 static class CProductionBuildingRole * __cdecl CProductionBuildingRole::Load(std::istream &) {
   
   void **v1; // eax
@@ -74,7 +67,6 @@ static class CProductionBuildingRole * __cdecl CProductionBuildingRole::Load(std
 
 // address=[0x1516150]
 // Decompiled from int __thiscall CProductionBuildingRole::LogicUpdate(_BYTE *this, _DWORD *a2)
-
 void  CProductionBuildingRole::LogicUpdate(class CBuilding *) {
   
   int result; // eax
@@ -148,11 +140,7 @@ void  CProductionBuildingRole::LogicUpdate(class CBuilding *) {
 
 
 // address=[0x1516390]
-// Decompiled from unsigned int __thiscall CProductionBuildingRole::FillGfxInfo(
-        CProductionBuildingRole *this,
-        struct CBuilding *a2,
-        struct SGfxObjectInfo *a3)
-
+// Decompiled from unsigned int __thiscall CProductionBuildingRole::FillGfxInfo(  CProductionBuildingRole *this,  struct CBuilding *a2,  struct SGfxObjectInfo *a3)
 void  CProductionBuildingRole::FillGfxInfo(class CBuilding *,struct SGfxObjectInfo &) {
   
   int v3; // eax
@@ -232,7 +220,6 @@ void  CProductionBuildingRole::FillGfxInfo(class CBuilding *,struct SGfxObjectIn
 
 // address=[0x15166b0]
 // Decompiled from int __thiscall CProductionBuildingRole::Init(CProductionBuildingRole *this, struct CBuilding *a2)
-
 void  CProductionBuildingRole::Init(class CBuilding *) {
   
   int v2; // eax
@@ -341,7 +328,6 @@ void  CProductionBuildingRole::Init(class CBuilding *) {
 
 // address=[0x15169a0]
 // Decompiled from int __thiscall CProductionBuildingRole::PostLoadInit(CProductionBuildingRole *this, struct CBuilding *a2)
-
 void  CProductionBuildingRole::PostLoadInit(class CBuilding *) {
   
   int v2; // eax
@@ -357,11 +343,7 @@ void  CProductionBuildingRole::PostLoadInit(class CBuilding *) {
 
 
 // address=[0x15169d0]
-// Decompiled from unsigned int __thiscall CProductionBuildingRole::LockPiles(
-        CProductionBuildingRole *this,
-        struct CBuilding *a2,
-        bool a3)
-
+// Decompiled from unsigned int __thiscall CProductionBuildingRole::LockPiles(  CProductionBuildingRole *this,  struct CBuilding *a2,  bool a3)
 void  CProductionBuildingRole::LockPiles(class CBuilding *,bool) {
   
   unsigned __int16 *v3; // eax
@@ -399,7 +381,6 @@ void  CProductionBuildingRole::LockPiles(class CBuilding *,bool) {
 
 // address=[0x1516af0]
 // Decompiled from char __thiscall CProductionBuildingRole::SettlerEnter(_DWORD *this, unsigned __int8 *a2, int a3)
-
 bool  CProductionBuildingRole::SettlerEnter(class CBuilding *,int) {
   
   int v3; // eax
@@ -512,7 +493,6 @@ bool  CProductionBuildingRole::SettlerEnter(class CBuilding *,int) {
 
 // address=[0x1516de0]
 // Decompiled from int __thiscall CProductionBuildingRole::GetBuildingNeed(CProductionBuildingRole *this, int a2)
-
 int  CProductionBuildingRole::GetBuildingNeed(int)const {
   
   unsigned __int16 *v2; // eax
@@ -533,7 +513,6 @@ int  CProductionBuildingRole::GetBuildingNeed(int)const {
 
 // address=[0x1516e80]
 // Decompiled from int __thiscall CProductionBuildingRole::GetPileIdWithGood(CProductionBuildingRole *this, int a2)
-
 int  CProductionBuildingRole::GetPileIdWithGood(int)const {
   
   unsigned __int16 *v2; // eax
@@ -573,10 +552,7 @@ int  CProductionBuildingRole::GetPileIdWithGood(int)const {
 
 
 // address=[0x1516fc0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CProductionBuildingRole::GoodArrive(CProductionBuildingRole *this, int a2)
-
+// Decompiled from void __thiscall CProductionBuildingRole::GoodArrive(CProductionBuildingRole *this, int a2)
 void  CProductionBuildingRole::GoodArrive(int) {
   
   ;
@@ -584,11 +560,7 @@ void  CProductionBuildingRole::GoodArrive(int) {
 
 
 // address=[0x1516fd0]
-// Decompiled from _DWORD *__thiscall CProductionBuildingRole::FillToolSideBar(
-        CProductionBuildingRole *this,
-        struct CAddToolSideBarInfo *a2,
-        bool a3)
-
+// Decompiled from _DWORD *__thiscall CProductionBuildingRole::FillToolSideBar(  CProductionBuildingRole *this,  struct CAddToolSideBarInfo *a2,  bool a3)
 void  CProductionBuildingRole::FillToolSideBar(class CAddToolSideBarInfo *,bool) {
   
   int v3; // eax
@@ -653,7 +625,6 @@ void  CProductionBuildingRole::FillToolSideBar(class CAddToolSideBarInfo *,bool)
 
 // address=[0x1517210]
 // Decompiled from int __thiscall CProductionBuildingRole::FillWeaponSideBar(unsigned __int16 *this, int a2, char a3)
-
 void  CProductionBuildingRole::FillWeaponSideBar(class CWeaponSideBarInfo *,bool) {
   
   int v3; // eax
@@ -696,7 +667,6 @@ void  CProductionBuildingRole::FillWeaponSideBar(class CWeaponSideBarInfo *,bool
 
 // address=[0x15173c0]
 // Decompiled from char *__thiscall CProductionBuildingRole::CProductionBuildingRole(char *this, int a2)
-
  CProductionBuildingRole::CProductionBuildingRole(std::istream &) {
   
   int v3; // [esp+8h] [ebp-28h] BYREF
@@ -751,7 +721,6 @@ void  CProductionBuildingRole::FillWeaponSideBar(class CWeaponSideBarInfo *,bool
 
 // address=[0x15175c0]
 // Decompiled from int __thiscall CProductionBuildingRole::Store(struct IBuildingRole *this, struct std::ostream *a2)
-
 void  CProductionBuildingRole::Store(std::ostream &) {
   
   __int16 *v2; // eax
@@ -799,11 +768,7 @@ void  CProductionBuildingRole::Store(std::ostream &) {
 // [Decompilation failed for static unsigned long CProductionBuildingRole::m_iClassID]
 
 // address=[0x14fd230]
-// Decompiled from void __thiscall CProductionBuildingRole::ConvertEventIntoGoal(
-        CProductionBuildingRole *this,
-        struct CBuilding *a2,
-        struct CEntityEvent *a3)
-
+// Decompiled from void __thiscall CProductionBuildingRole::ConvertEventIntoGoal(  CProductionBuildingRole *this,  struct CBuilding *a2,  struct CEntityEvent *a3)
 void  CProductionBuildingRole::ConvertEventIntoGoal(class CBuilding *,class CEntityEvent *) {
   
   ;
@@ -812,7 +777,6 @@ void  CProductionBuildingRole::ConvertEventIntoGoal(class CBuilding *,class CEnt
 
 // address=[0x14fd2a0]
 // Decompiled from char __thiscall CProductionBuildingRole::CrushBuilding(CProductionBuildingRole *this)
-
 bool  CProductionBuildingRole::CrushBuilding(void) {
   
   return 1;
@@ -821,7 +785,6 @@ bool  CProductionBuildingRole::CrushBuilding(void) {
 
 // address=[0x14fde60]
 // Decompiled from char __thiscall CProductionBuildingRole::TryCrushBuilding(CProductionBuildingRole *this)
-
 bool  CProductionBuildingRole::TryCrushBuilding(void) {
   
   return 1;
@@ -830,7 +793,6 @@ bool  CProductionBuildingRole::TryCrushBuilding(void) {
 
 // address=[0x1517740]
 // Decompiled from char __thiscall CProductionBuildingRole::HaveMaterial(CProductionBuildingRole *this, struct CBuilding *a2)
-
 bool  CProductionBuildingRole::HaveMaterial(class CBuilding *) {
   
   int v3; // [esp+0h] [ebp-10h]
@@ -850,7 +812,6 @@ bool  CProductionBuildingRole::HaveMaterial(class CBuilding *) {
 
 // address=[0x15177c0]
 // Decompiled from bool __thiscall CProductionBuildingRole::HaveFreeSlotForProduct(CProductionBuildingRole *this, struct CBuilding *a2)
-
 bool  CProductionBuildingRole::HaveFreeSlotForProduct(class CBuilding *) {
   
   unsigned __int16 *v2; // eax
@@ -871,7 +832,6 @@ bool  CProductionBuildingRole::HaveFreeSlotForProduct(class CBuilding *) {
 
 // address=[0x1517840]
 // Decompiled from char __thiscall CProductionBuildingRole::HaveProductionOrder(CProductionBuildingRole *this)
-
 bool  CProductionBuildingRole::HaveProductionOrder(void) {
   
   int v1; // eax
@@ -975,7 +935,6 @@ bool  CProductionBuildingRole::HaveProductionOrder(void) {
 
 // address=[0x1517bb0]
 // Decompiled from _DWORD *__thiscall CProductionBuildingRole::FillDialog(CProductionBuildingRole *this, struct CBuilding *a2, bool a3)
-
 void  CProductionBuildingRole::FillDialog(class CBuilding *,bool) {
   
   int v3; // eax
@@ -1043,7 +1002,6 @@ void  CProductionBuildingRole::FillDialog(class CBuilding *,bool) {
 
 // address=[0x1577240]
 // Decompiled from int __thiscall CProductionBuildingRole::GetProductType(CProductionBuildingRole *this)
-
 int  CProductionBuildingRole::GetProductType(void)const {
   
   return *((unsigned __int8 *)this + 380);

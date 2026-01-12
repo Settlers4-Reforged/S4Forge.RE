@@ -4,7 +4,6 @@
 
 // address=[0x1401440]
 // Decompiled from int __cdecl CMineRole::New(int a1)
-
 static class CPersistence * __cdecl CMineRole::New(std::istream &) {
   
   if ( operator new(0x1BCu) )
@@ -16,7 +15,6 @@ static class CPersistence * __cdecl CMineRole::New(std::istream &) {
 
 // address=[0x14fdb30]
 // Decompiled from int __cdecl CMineRole::Load(int a1)
-
 static class CMineRole * __cdecl CMineRole::Load(std::istream &) {
   
   void **v1; // eax
@@ -29,7 +27,6 @@ static class CMineRole * __cdecl CMineRole::Load(std::istream &) {
 
 // address=[0x1513d90]
 // Decompiled from CMineRole *__thiscall CMineRole::CMineRole(CMineRole *this)
-
  CMineRole::CMineRole(void) {
   
   IBuildingRole::IBuildingRole(this);
@@ -52,7 +49,6 @@ static class CMineRole * __cdecl CMineRole::Load(std::istream &) {
 
 // address=[0x1513e50]
 // Decompiled from void __thiscall CMineRole::LogicUpdate(CMineRole *this, struct CBuilding *a2)
-
 void  CMineRole::LogicUpdate(class CBuilding *) {
   
   int v2; // esi
@@ -128,7 +124,6 @@ LABEL_27:
 
 // address=[0x1514060]
 // Decompiled from unsigned int __thiscall CMineRole::FillGfxInfo(CMineRole *this, struct CBuilding *a2, struct SGfxObjectInfo *a3)
-
 void  CMineRole::FillGfxInfo(class CBuilding *,struct SGfxObjectInfo &) {
   
   int v3; // eax
@@ -187,7 +182,6 @@ void  CMineRole::FillGfxInfo(class CBuilding *,struct SGfxObjectInfo &) {
 
 // address=[0x1514210]
 // Decompiled from int __thiscall CMineRole::Init(CMineRole *this, struct CBuilding *a2)
-
 void  CMineRole::Init(class CBuilding *) {
   
   int v2; // eax
@@ -279,7 +273,6 @@ void  CMineRole::Init(class CBuilding *) {
 
 // address=[0x1514520]
 // Decompiled from int __thiscall CMineRole::PostLoadInit(CMineRole *this, struct CBuilding *a2)
-
 void  CMineRole::PostLoadInit(class CBuilding *) {
   
   int v2; // eax
@@ -296,7 +289,6 @@ void  CMineRole::PostLoadInit(class CBuilding *) {
 
 // address=[0x1514550]
 // Decompiled from char __thiscall CMineRole::SettlerEnter(CMineRole *this, struct CBuilding *a2, int a3)
-
 bool  CMineRole::SettlerEnter(class CBuilding *,int) {
   
   int v3; // eax
@@ -395,7 +387,6 @@ bool  CMineRole::SettlerEnter(class CBuilding *,int) {
 
 // address=[0x15147f0]
 // Decompiled from int __thiscall CMineRole::GetPileIdWithGood(CMineRole *this, int a2)
-
 int  CMineRole::GetPileIdWithGood(int)const {
   
   unsigned __int16 *v2; // eax
@@ -427,7 +418,6 @@ int  CMineRole::GetPileIdWithGood(int)const {
 
 // address=[0x1514900]
 // Decompiled from int __thiscall CMineRole::GoodArrive(CMineRole *this, int a2)
-
 void  CMineRole::GoodArrive(int) {
   
   _DWORD *v2; // eax
@@ -445,7 +435,6 @@ void  CMineRole::GoodArrive(int) {
 
 // address=[0x1514970]
 // Decompiled from struct CPile *__thiscall CMineRole::RestockFavouriteFood(CMineRole *this)
-
 void  CMineRole::RestockFavouriteFood(void) {
   
   struct CPile *result; // eax
@@ -473,7 +462,6 @@ void  CMineRole::RestockFavouriteFood(void) {
 
 // address=[0x1514a00]
 // Decompiled from _DWORD *__thiscall CMineRole::FillDialog(CMineRole *this, struct CBuilding *a2, bool a3)
-
 void  CMineRole::FillDialog(class CBuilding *,bool) {
   
   int v3; // eax
@@ -535,7 +523,6 @@ void  CMineRole::FillDialog(class CBuilding *,bool) {
 
 // address=[0x1514ca0]
 // Decompiled from char *__thiscall CMineRole::CMineRole(char *this, int a2)
-
  CMineRole::CMineRole(std::istream &) {
   
   int v3; // [esp+8h] [ebp-24h] BYREF
@@ -589,7 +576,6 @@ void  CMineRole::FillDialog(class CBuilding *,bool) {
 
 // address=[0x1514ed0]
 // Decompiled from unsigned int __thiscall CMineRole::Store(struct IBuildingRole *this, struct std::ostream *a2)
-
 void  CMineRole::Store(std::ostream &) {
   
   __int16 *v2; // eax
@@ -638,7 +624,6 @@ void  CMineRole::Store(std::ostream &) {
 
 // address=[0x1516030]
 // Decompiled from int __thiscall CMineRole::~CMineRole(CMineRole *this)
-
  CMineRole::~CMineRole(void) {
   
   std::vector<unsigned short>::~vector<unsigned short>((char *)this + 408);
@@ -649,7 +634,6 @@ void  CMineRole::Store(std::ostream &) {
 
 // address=[0x15160b0]
 // Decompiled from int __thiscall CMineRole::ClassID(CMineRole *this)
-
 unsigned long  CMineRole::ClassID(void)const {
   
   return CMineRole::m_iClassID;
@@ -658,7 +642,6 @@ unsigned long  CMineRole::ClassID(void)const {
 
 // address=[0x15160d0]
 // Decompiled from void *__thiscall CMineRole::GetBuildingNeed(std::_Ref_count_base *this, const struct type_info *a2)
-
 int  CMineRole::GetBuildingNeed(int)const {
   
   return 0;
@@ -667,7 +650,6 @@ int  CMineRole::GetBuildingNeed(int)const {
 
 // address=[0x15160f0]
 // Decompiled from int __thiscall CMineRole::GetBuildingRole(CMineRole *this)
-
 int  CMineRole::GetBuildingRole(void) {
   
   return 7;
@@ -679,7 +661,6 @@ int  CMineRole::GetBuildingRole(void) {
 
 // address=[0x1515070]
 // Decompiled from char __thiscall CMineRole::CrushBuilding(CMineRole *this)
-
 bool  CMineRole::CrushBuilding(void) {
   
   return 1;
@@ -688,7 +669,6 @@ bool  CMineRole::CrushBuilding(void) {
 
 // address=[0x1515080]
 // Decompiled from void __thiscall CMineRole::ConvertEventIntoGoal(CMineRole *this, struct CBuilding *a2, struct CEntityEvent *a3)
-
 void  CMineRole::ConvertEventIntoGoal(class CBuilding *,class CEntityEvent *) {
   
   ;
@@ -697,7 +677,6 @@ void  CMineRole::ConvertEventIntoGoal(class CBuilding *,class CEntityEvent *) {
 
 // address=[0x1515090]
 // Decompiled from int __thiscall CMineRole::RememberProductivity(CMineRole *this, struct CBuilding *a2, bool a3)
-
 void  CMineRole::RememberProductivity(class CBuilding *,bool) {
   
   int result; // eax
@@ -718,7 +697,6 @@ void  CMineRole::RememberProductivity(class CBuilding *,bool) {
 
 // address=[0x1515100]
 // Decompiled from int __thiscall CMineRole::GetProductivity(CMineRole *this, struct CBuilding *a2)
-
 int  CMineRole::GetProductivity(class CBuilding *) {
   
   int v4; // [esp+4h] [ebp-8h]
@@ -745,7 +723,6 @@ int  CMineRole::GetProductivity(class CBuilding *) {
 
 // address=[0x15151a0]
 // Decompiled from int __thiscall CMineRole::InitMine(CMineRole *this, struct CBuilding *a2)
-
 void  CMineRole::InitMine(class CBuilding *) {
   
   int result; // eax
@@ -822,7 +799,6 @@ void  CMineRole::InitMine(class CBuilding *) {
 
 // address=[0x1515460]
 // Decompiled from CMineRole *__thiscall CMineRole::Work(CMineRole *this, struct CBuilding *a2)
-
 void  CMineRole::Work(class CBuilding *) {
   
   CMineRole *result; // eax
@@ -872,7 +848,6 @@ void  CMineRole::Work(class CBuilding *) {
 
 // address=[0x15155e0]
 // Decompiled from int __thiscall CMineRole::TakeNextFood(CMineRole *this, struct CBuilding *a2)
-
 void  CMineRole::TakeNextFood(class CBuilding *) {
   
   unsigned __int16 *v2; // eax
@@ -945,7 +920,6 @@ void  CMineRole::TakeNextFood(class CBuilding *) {
 
 // address=[0x1515760]
 // Decompiled from char __thiscall CMineRole::SearchResource(CMineRole *this, struct CBuilding *a2)
-
 bool  CMineRole::SearchResource(class CBuilding *) {
   
   int v2; // esi
@@ -1015,7 +989,6 @@ bool  CMineRole::SearchResource(class CBuilding *) {
 
 // address=[0x1516140]
 // Decompiled from char __thiscall CMineRole::TryCrushBuilding(CMineRole *this)
-
 bool  CMineRole::TryCrushBuilding(void) {
   
   return 1;

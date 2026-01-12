@@ -4,7 +4,6 @@
 
 // address=[0x1401120]
 // Decompiled from int __cdecl CManakopter::New(int a1)
-
 static class CPersistence * __cdecl CManakopter::New(std::istream &) {
   
   if ( operator new(0x94u) )
@@ -16,7 +15,6 @@ static class CPersistence * __cdecl CManakopter::New(std::istream &) {
 
 // address=[0x1552980]
 // Decompiled from CManakopter *__thiscall CManakopter::CManakopter(CManakopter *this, int a2, __int64 a3, unsigned __int8 a4)
-
  CManakopter::CManakopter(int,int,int,int) {
   
   char v5; // [esp+30h] [ebp-28h]
@@ -84,10 +82,7 @@ static class CPersistence * __cdecl CManakopter::New(std::istream &) {
 
 
 // address=[0x1552c00]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CManakopter::GetGfxInfos(CManakopter *this)
-
+// Decompiled from int __thiscall CManakopter::GetGfxInfos(CManakopter *this)
 struct SGfxObjectInfo *  CManakopter::GetGfxInfos(void) {
   
   return 0;
@@ -95,9 +90,7 @@ struct SGfxObjectInfo *  CManakopter::GetGfxInfos(void) {
 
 
 // address=[0x1552c10]
-// Decompiled from // public: virtual void __thiscall CManakopter::LogicUpdate(void)
-void __thiscall CManakopter::LogicUpdate(CPropertySet *this)
-
+// Decompiled from void __thiscall CManakopter::LogicUpdate(CPropertySet *this)
 void  CManakopter::LogicUpdate(void) {
   
   int v1; // eax
@@ -264,7 +257,6 @@ void  CManakopter::LogicUpdate(void) {
 
 // address=[0x1553110]
 // Decompiled from char __thiscall CManakopter::SettlerEnter(CManakopter *this, int a2)
-
 bool  CManakopter::SettlerEnter(int) {
   
   int v3; // eax
@@ -333,7 +325,6 @@ bool  CManakopter::SettlerEnter(int) {
 
 // address=[0x1553300]
 // Decompiled from char *__thiscall CManakopter::UnloadSettlers(CManakopter *this)
-
 void  CManakopter::UnloadSettlers(void) {
   
   int v1; // eax
@@ -407,7 +398,6 @@ void  CManakopter::UnloadSettlers(void) {
 
 // address=[0x15534e0]
 // Decompiled from void __thiscall CManakopter::Attach(CManakopter *this, int a2)
-
 void  CManakopter::Attach(int) {
   
   IFlyingEntity::SetFlyingFlagBits(this, 4);
@@ -418,7 +408,6 @@ void  CManakopter::Attach(int) {
 
 // address=[0x1553510]
 // Decompiled from void __thiscall CManakopter::Delete(CManakopter *this)
-
 void  CManakopter::Delete(void) {
   
   int v1; // eax
@@ -485,7 +474,6 @@ void  CManakopter::Delete(void) {
 
 // address=[0x1553670]
 // Decompiled from void __thiscall CManakopter::Decrease(CManakopter *this, int a2)
-
 void  CManakopter::Decrease(int) {
   
   int v3; // [esp+4h] [ebp-8h]
@@ -505,7 +493,6 @@ void  CManakopter::Decrease(int) {
 
 // address=[0x15536c0]
 // Decompiled from _DWORD *__thiscall CManakopter::CManakopter(_DWORD *this, int a2)
-
  CManakopter::CManakopter(std::istream &) {
   
   _BYTE v3[4]; // [esp+4h] [ebp-34h] BYREF
@@ -563,7 +550,6 @@ void  CManakopter::Decrease(int) {
 
 // address=[0x15538c0]
 // Decompiled from int __thiscall CManakopter::Store(char *this, struct std::ostream *a2)
-
 void  CManakopter::Store(std::ostream &) {
   
   const struct CManakopter::CSettlerStatus *v2; // eax
@@ -608,7 +594,6 @@ void  CManakopter::Store(std::ostream &) {
 
 // address=[0x1554b30]
 // Decompiled from void __thiscall CManakopter::~CManakopter(CManakopter *this)
-
  CManakopter::~CManakopter(void) {
   
   IFlyingEntity *v1; // [esp+0h] [ebp-4h]
@@ -620,7 +605,6 @@ void  CManakopter::Store(std::ostream &) {
 
 // address=[0x1554fc0]
 // Decompiled from int __thiscall CManakopter::ClassID(CManakopter *this)
-
 unsigned long  CManakopter::ClassID(void)const {
   
   return CManakopter::m_iClassID;

@@ -4,7 +4,6 @@
 
 // address=[0x164d6e0]
 // Decompiled from GameSessionHandler *__thiscall GameSessionHandler::GameSessionHandler(GameSessionHandler *this)
-
  GameSessionHandler::GameSessionHandler(void) {
   
   storm::SimpleSessionHandler::SimpleSessionHandler(this);
@@ -17,7 +16,6 @@
 
 // address=[0x1684b00]
 // Decompiled from void __thiscall GameSessionHandler::~GameSessionHandler(GameSessionHandler *this)
-
  GameSessionHandler::~GameSessionHandler(void) {
   
   storm::SimpleSessionHandler::~SimpleSessionHandler(this);
@@ -26,7 +24,6 @@
 
 // address=[0x1689550]
 // Decompiled from int *GameSessionHandler::GetClassTypeName()
-
 static char const * __cdecl GameSessionHandler::GetClassTypeName(void) {
   
   return &dword_3834C88[1];
@@ -35,7 +32,6 @@ static char const * __cdecl GameSessionHandler::GetClassTypeName(void) {
 
 // address=[0x16895c0]
 // Decompiled from int GameSessionHandler::GetClassTypeStaticCrc()
-
 static unsigned long __cdecl GameSessionHandler::GetClassTypeStaticCrc(void) {
   
   return 1608834342;

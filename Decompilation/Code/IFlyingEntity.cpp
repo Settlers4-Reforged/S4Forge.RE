@@ -4,7 +4,6 @@
 
 // address=[0x12fd150]
 // Decompiled from int __thiscall IFlyingEntity::FlyingFlagBits(IFlyingEntity *this, int a2)
-
 int  IFlyingEntity::FlyingFlagBits(int)const {
   
   return a2 & *((__int16 *)this + 40);
@@ -13,7 +12,6 @@ int  IFlyingEntity::FlyingFlagBits(int)const {
 
 // address=[0x154ee80]
 // Decompiled from IFlyingEntity *__thiscall IFlyingEntity::IFlyingEntity(IFlyingEntity *this, int a2, int a3, __int16 a4, __int16 a5)
-
  IFlyingEntity::IFlyingEntity(int,int,int,int) {
   
   int v6; // [esp+4h] [ebp-14h]
@@ -36,7 +34,6 @@ int  IFlyingEntity::FlyingFlagBits(int)const {
 
 // address=[0x154ef70]
 // Decompiled from _DWORD *__thiscall IFlyingEntity::IFlyingEntity(_DWORD *this, int a2)
-
  IFlyingEntity::IFlyingEntity(std::istream &) {
   
   int v3; // [esp+8h] [ebp-14h] BYREF
@@ -64,7 +61,6 @@ int  IFlyingEntity::FlyingFlagBits(int)const {
 
 // address=[0x154f080]
 // Decompiled from int __thiscall IFlyingEntity::Store(char *this, struct std::ostream *a2)
-
 void  IFlyingEntity::Store(std::ostream &) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
@@ -86,7 +82,6 @@ void  IFlyingEntity::Store(std::ostream &) {
 
 // address=[0x154f140]
 // Decompiled from int __thiscall IFlyingEntity::FlyTo(IFlyingEntity *this, __int16 a2, __int16 a3)
-
 void  IFlyingEntity::FlyTo(int,int) {
   
   *((_WORD *)this + 38) = a2;
@@ -98,7 +93,6 @@ void  IFlyingEntity::FlyTo(int,int) {
 
 // address=[0x154f180]
 // Decompiled from void __thiscall IFlyingEntity::Delete(IFlyingEntity *this)
-
 void  IFlyingEntity::Delete(void) {
   
   int v1; // eax
@@ -129,7 +123,6 @@ void  IFlyingEntity::Delete(void) {
 
 // address=[0x154f230]
 // Decompiled from void __thiscall IFlyingEntity::Attach(IFlyingEntity *this, int a2)
-
 void  IFlyingEntity::Attach(int) {
   
   int v2; // eax
@@ -141,7 +134,6 @@ void  IFlyingEntity::Attach(int) {
 
 // address=[0x154f260]
 // Decompiled from int __thiscall IFlyingEntity::Detach(IFlyingEntity *this, int a2)
-
 void  IFlyingEntity::Detach(int) {
   
   IFlyingEntity::DetachWithoutNotify(this, a2);
@@ -151,7 +143,6 @@ void  IFlyingEntity::Detach(int) {
 
 // address=[0x154f290]
 // Decompiled from int __thiscall IFlyingEntity::Notify(IFlyingEntity *this, const struct CEntityEvent *a2)
-
 void  IFlyingEntity::Notify(class CEntityEvent const &)const {
   
   return CObserverList::NotifyAllObservers((char *)this + 84, (int)a2);
@@ -160,7 +151,6 @@ void  IFlyingEntity::Notify(class CEntityEvent const &)const {
 
 // address=[0x154f3e0]
 // Decompiled from void __thiscall IFlyingEntity::~IFlyingEntity(IFlyingEntity *this)
-
  IFlyingEntity::~IFlyingEntity(void) {
   
   *(_DWORD *)this = &IFlyingEntity::_vftable_;
@@ -171,7 +161,6 @@ void  IFlyingEntity::Notify(class CEntityEvent const &)const {
 
 // address=[0x154f460]
 // Decompiled from IFlyingEntity *__thiscall IFlyingEntity::SetFlyingFlagBits(IFlyingEntity *this, __int16 a2)
-
 void  IFlyingEntity::SetFlyingFlagBits(int) {
   
   IFlyingEntity *result; // eax
@@ -184,7 +173,6 @@ void  IFlyingEntity::SetFlyingFlagBits(int) {
 
 // address=[0x1554fe0]
 // Decompiled from IFlyingEntity *__thiscall IFlyingEntity::ClearFlyingFlagBits(IFlyingEntity *this, __int16 a2)
-
 void  IFlyingEntity::ClearFlyingFlagBits(int) {
   
   IFlyingEntity *result; // eax
@@ -197,7 +185,6 @@ void  IFlyingEntity::ClearFlyingFlagBits(int) {
 
 // address=[0x154f2b0]
 // Decompiled from void __thiscall IFlyingEntity::DetachWithoutNotify(IFlyingEntity *this, int a2)
-
 void  IFlyingEntity::DetachWithoutNotify(int) {
   
   CObserverList::Detach((IFlyingEntity *)((char *)this + 84), a2);
@@ -205,10 +192,7 @@ void  IFlyingEntity::DetachWithoutNotify(int) {
 
 
 // address=[0x154f450]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall IFlyingEntity::NotifyDetach(IFlyingEntity *this, int a2)
-
+// Decompiled from void __thiscall IFlyingEntity::NotifyDetach(IFlyingEntity *this, int a2)
 void  IFlyingEntity::NotifyDetach(int) {
   
   ;

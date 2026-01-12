@@ -4,7 +4,6 @@
 
 // address=[0x2fbecd0]
 // Decompiled from BSTR **__thiscall _bstr_t::_bstr_t(BSTR **this, OLECHAR *psz)
-
  _bstr_t::_bstr_t(wchar_t const *) {
   
   BSTR *v3; // [esp+8h] [ebp-18h]
@@ -24,7 +23,6 @@
 
 // address=[0x2fbedb0]
 // Decompiled from void __thiscall _bstr_t::~_bstr_t(_bstr_t *this)
-
  _bstr_t::~_bstr_t(void) {
   
   _bstr_t::_Free(this);
@@ -33,7 +31,6 @@
 
 // address=[0x2fbedf0]
 // Decompiled from int __thiscall _bstr_t::operator char const *(_bstr_t::Data_t **this)
-
  _bstr_t::operator char const *(void)const {
   
   if ( *this )
@@ -45,7 +42,6 @@
 
 // address=[0x2fbef80]
 // Decompiled from _bstr_t::Data_t **__thiscall _bstr_t::_Free(_bstr_t::Data_t **this)
-
 void  _bstr_t::_Free(void) {
   
   _bstr_t::Data_t **result; // eax

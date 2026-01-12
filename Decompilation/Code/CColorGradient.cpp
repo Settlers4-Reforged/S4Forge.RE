@@ -4,7 +4,6 @@
 
 // address=[0x2f6ff70]
 // Decompiled from int __thiscall CColorGradient::SetupGradients(_WORD *this, int a2, int a3, int a4, int a5, int a6)
-
 void  CColorGradient::SetupGradients(int,struct SGfxColor,int) {
   
   int result; // eax
@@ -80,7 +79,6 @@ void  CColorGradient::SetupGradients(int,struct SGfxColor,int) {
 
 // address=[0x2f71c10]
 // Decompiled from CColorGradient *__thiscall CColorGradient::CColorGradient(CColorGradient *this)
-
  CColorGradient::CColorGradient(void) {
   
   j__memcpy((char *)this + 524, &unk_3ACC190, 0x6Cu);

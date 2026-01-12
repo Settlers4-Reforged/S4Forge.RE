@@ -3,10 +3,7 @@
 // Definitions for class CVehicleIteratorBase
 
 // address=[0x1317500]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CVehicleIteratorBase::VehicleId(CVehicleIteratorBase *this)
-
+// Decompiled from int __thiscall CVehicleIteratorBase::VehicleId(CVehicleIteratorBase *this)
 int  CVehicleIteratorBase::VehicleId(void)const {
   
   return *((_DWORD *)this + 1);
@@ -14,10 +11,7 @@ int  CVehicleIteratorBase::VehicleId(void)const {
 
 
 // address=[0x1317520]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CVehicleIteratorBase::VehicleType(CVehicleIteratorBase *this)
-
+// Decompiled from int __thiscall CVehicleIteratorBase::VehicleType(CVehicleIteratorBase *this)
 int  CVehicleIteratorBase::VehicleType(void)const {
   
   return *(_DWORD *)this;
@@ -26,7 +20,6 @@ int  CVehicleIteratorBase::VehicleType(void)const {
 
 // address=[0x1317400]
 // Decompiled from CVehicleIteratorBase *__thiscall CVehicleIteratorBase::Init(CVehicleIteratorBase *this, int a2)
-
 void  CVehicleIteratorBase::Init(int) {
   
   CVehicleIteratorBase *result; // eax
@@ -40,7 +33,6 @@ void  CVehicleIteratorBase::Init(int) {
 
 // address=[0x1317540]
 // Decompiled from bool __thiscall CVehicleIteratorBase::VehicleValid(CVehicleIteratorBase *this, int a2)
-
 bool  CVehicleIteratorBase::VehicleValid(int) {
   
   struct IEntity *v2; // eax

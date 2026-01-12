@@ -4,7 +4,6 @@
 
 // address=[0x14600e0]
 // Decompiled from _DWORD *__thiscall TSparseMap<unsigned char>::TNode::TNode(_DWORD *this)
-
  TSparseMap<unsigned char>::TNode::TNode(void) {
   
   *this = 0;
@@ -16,7 +15,6 @@
 
 // address=[0x1460180]
 // Decompiled from unsigned int __cdecl TSparseMap<unsigned char>::TNode::operator new(int a1)
-
 static void * __cdecl TSparseMap<unsigned char>::TNode::operator new(unsigned int) {
   
   unsigned int *v1; // eax
@@ -28,9 +26,7 @@ static void * __cdecl TSparseMap<unsigned char>::TNode::operator new(unsigned in
 
 
 // address=[0x14601a0]
-// Decompiled from // MFC 3.1-14.0 32bit
-void __cdecl TSparseMap<unsigned char>::TNode::operator delete(void *a1)
-
+// Decompiled from void __cdecl TSparseMap<unsigned char>::TNode::operator delete(void *a1)
 static void __cdecl TSparseMap<unsigned char>::TNode::operator delete(void *) {
   
   MemoryAllocator *v1; // eax
@@ -43,7 +39,6 @@ static void __cdecl TSparseMap<unsigned char>::TNode::operator delete(void *) {
 
 // address=[0x1460c10]
 // Decompiled from void *TSparseMap<unsigned char>::TNode::_allocator()
-
 static class TheAllocator<class TSparseMap<unsigned char>::TNode> & __cdecl TSparseMap<unsigned char>::TNode::_allocator(void) {
   
   if ( TSparseMap_unsigned_char_::TNode::_allocator_::_2_::_TSS0 <= *(_DWORD *)(*((_DWORD *)NtCurrentTeb()->ThreadLocalStoragePointer

@@ -4,7 +4,6 @@
 
 // address=[0x130a3d0]
 // Decompiled from int __thiscall CEcoSectorMgr::GetEcoSectorPtr(CEcoSectorMgr *this, int a2)
-
 class CEcoSector *  CEcoSectorMgr::GetEcoSectorPtr(int) {
   
   if ( a2 <= 0
@@ -40,7 +39,6 @@ class CEcoSector *  CEcoSectorMgr::GetEcoSectorPtr(int) {
 
 // address=[0x130ec00]
 // Decompiled from int __thiscall CEcoSectorMgr::GetEcoSectorPtrEx(CEcoSectorMgr *this, unsigned int a2)
-
 class CEcoSector *  CEcoSectorMgr::GetEcoSectorPtrEx(int) {
   
   if ( a2 >= 0x4000 )
@@ -52,7 +50,6 @@ class CEcoSector *  CEcoSectorMgr::GetEcoSectorPtrEx(int) {
 
 // address=[0x130ec30]
 // Decompiled from struct CEcoSector *__thiscall CEcoSectorMgr::GetEcoSectorPtrEx(CEcoSectorMgr *this, int a2, int a3)
-
 class CEcoSector *  CEcoSectorMgr::GetEcoSectorPtrEx(int,int) {
   
   struct CEcoSector *EcoSectorPtr; // [esp+8h] [ebp-4h]
@@ -66,10 +63,7 @@ class CEcoSector *  CEcoSectorMgr::GetEcoSectorPtrEx(int,int) {
 
 
 // address=[0x130f120]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CEcoSectorMgr::LastUsedEcoSectorId(CEcoSectorMgr *this)
-
+// Decompiled from int __thiscall CEcoSectorMgr::LastUsedEcoSectorId(CEcoSectorMgr *this)
 int  CEcoSectorMgr::LastUsedEcoSectorId(void)const {
   
   return *((_DWORD *)this + 2);
@@ -78,7 +72,6 @@ int  CEcoSectorMgr::LastUsedEcoSectorId(void)const {
 
 // address=[0x1326e00]
 // Decompiled from int __thiscall CEcoSectorMgr::EntryPtr(CEcoSectorMgr *this, int a2)
-
 class CEcoSector *  CEcoSectorMgr::EntryPtr(int) {
   
   if ( a2 <= 0
@@ -114,7 +107,6 @@ class CEcoSector *  CEcoSectorMgr::EntryPtr(int) {
 
 // address=[0x1346370]
 // Decompiled from int __thiscall CEcoSectorMgr::operator[](_DWORD *this, int a2)
-
 class CEcoSector &  CEcoSectorMgr::operator[](int) {
   
   if ( a2 <= 0
@@ -159,7 +151,6 @@ class CEcoSector &  CEcoSectorMgr::operator[](int) {
 
 // address=[0x1441b90]
 // Decompiled from CEcoSectorMgr *__thiscall CEcoSectorMgr::CEcoSectorMgr(CEcoSectorMgr *this)
-
  CEcoSectorMgr::CEcoSectorMgr(void) {
   
   int i; // [esp+0h] [ebp-8h]
@@ -183,7 +174,6 @@ class CEcoSector &  CEcoSectorMgr::operator[](int) {
 
 // address=[0x1441c30]
 // Decompiled from void __thiscall CEcoSectorMgr::~CEcoSectorMgr(CEcoSectorMgr *this)
-
  CEcoSectorMgr::~CEcoSectorMgr(void) {
   
   CEcoSectorMgr::Clear(this);
@@ -193,7 +183,6 @@ class CEcoSector &  CEcoSectorMgr::operator[](int) {
 
 // address=[0x1441c90]
 // Decompiled from int __thiscall CEcoSectorMgr::OrderDiggerAndBuilderAtStartUp(CEcoSectorMgr *this)
-
 void  CEcoSectorMgr::OrderDiggerAndBuilderAtStartUp(void) {
   
   int result; // eax
@@ -217,7 +206,6 @@ void  CEcoSectorMgr::OrderDiggerAndBuilderAtStartUp(void) {
 
 // address=[0x1441ce0]
 // Decompiled from CEcoSectorMgr *__thiscall CEcoSectorMgr::Clear(CEcoSectorMgr *this)
-
 void  CEcoSectorMgr::Clear(void) {
   
   CEcoSectorMgr *result; // eax
@@ -249,7 +237,6 @@ void  CEcoSectorMgr::Clear(void) {
 
 // address=[0x1441dc0]
 // Decompiled from CEcoSectorMgr *__thiscall CEcoSectorMgr::Update(CEcoSectorMgr *this)
-
 void  CEcoSectorMgr::Update(void) {
   
   CEcoSectorMgr *result; // eax
@@ -266,7 +253,6 @@ void  CEcoSectorMgr::Update(void) {
 
 // address=[0x1441e10]
 // Decompiled from int __thiscall CEcoSectorMgr::GetNrStrikingCarriers(CEcoSectorMgr *this, int a2)
-
 int  CEcoSectorMgr::GetNrStrikingCarriers(int) {
   
   return std::vector<unsigned short>::size((char *)this + 16 * a2 + 65596);
@@ -275,7 +261,6 @@ int  CEcoSectorMgr::GetNrStrikingCarriers(int) {
 
 // address=[0x1441e40]
 // Decompiled from int __thiscall CEcoSectorMgr::GetNrOfStrikingCarriersInEcoSector(CEcoSectorMgr *this, int a2)
-
 int  CEcoSectorMgr::GetNrOfStrikingCarriersInEcoSector(int) {
   
   unsigned __int16 *v3; // eax
@@ -307,7 +292,6 @@ int  CEcoSectorMgr::GetNrOfStrikingCarriersInEcoSector(int) {
 
 // address=[0x1441f20]
 // Decompiled from int __thiscall CEcoSectorMgr::GetNrOfInitialFreeBeds(CEcoSectorMgr *this, int a2)
-
 int  CEcoSectorMgr::GetNrOfInitialFreeBeds(int) {
   
   if ( (a2 < 1 || a2 > 8)
@@ -328,7 +312,6 @@ int  CEcoSectorMgr::GetNrOfInitialFreeBeds(int) {
 
 // address=[0x1441f80]
 // Decompiled from int __thiscall CEcoSectorMgr::GetNrOfCurrentTotalBeds(CEcoSectorMgr *this, int a2)
-
 int  CEcoSectorMgr::GetNrOfCurrentTotalBeds(int) {
   
   int NumberOfBuildings; // esi
@@ -361,7 +344,6 @@ int  CEcoSectorMgr::GetNrOfCurrentTotalBeds(int) {
 
 // address=[0x1442080]
 // Decompiled from unsigned int __thiscall CEcoSectorMgr::RemoveCarrierFromStrikeSettlers(CEcoSectorMgr *this, int a2, int a3)
-
 void  CEcoSectorMgr::RemoveCarrierFromStrikeSettlers(int,int) {
   
   unsigned int result; // eax
@@ -388,7 +370,6 @@ void  CEcoSectorMgr::RemoveCarrierFromStrikeSettlers(int,int) {
 
 // address=[0x1442150]
 // Decompiled from int __thiscall CEcoSectorMgr::CalculateInitialFreeBeds(CEcoSectorMgr *this)
-
 void  CEcoSectorMgr::CalculateInitialFreeBeds(void) {
   
   int result; // eax
@@ -410,7 +391,6 @@ void  CEcoSectorMgr::CalculateInitialFreeBeds(void) {
 
 // address=[0x14421b0]
 // Decompiled from int __thiscall CEcoSectorMgr::UpdateStrikeSettlers(CEcoSectorMgr *this)
-
 void  CEcoSectorMgr::UpdateStrikeSettlers(void) {
   
   int result; // eax
@@ -548,7 +528,6 @@ void  CEcoSectorMgr::UpdateStrikeSettlers(void) {
 
 // address=[0x14425c0]
 // Decompiled from int __thiscall CEcoSectorMgr::NotifyCreateEcoSector(CEcoSectorMgr *this, int a2)
-
 int  CEcoSectorMgr::NotifyCreateEcoSector(int) {
   
   if ( debug && DEBUG_FLAGS[dword_3F0EC00] )
@@ -559,7 +538,6 @@ int  CEcoSectorMgr::NotifyCreateEcoSector(int) {
 
 // address=[0x1442610]
 // Decompiled from void __thiscall CEcoSectorMgr::NotifyChangeEcoSector(_DWORD *this, int a2, int a3, int a4)
-
 void  CEcoSectorMgr::NotifyChangeEcoSector(int,int,int) {
   
   int v4; // eax
@@ -766,7 +744,6 @@ void  CEcoSectorMgr::NotifyChangeEcoSector(int,int,int) {
 
 // address=[0x1442c00]
 // Decompiled from void __thiscall CEcoSectorMgr::NotifyDeleteEcoSector(CEcoSectorMgr *this, int a2)
-
 void  CEcoSectorMgr::NotifyDeleteEcoSector(int) {
   
   CEcoSectorMgr::DeleteEcoSector(this, a2);
@@ -775,7 +752,6 @@ void  CEcoSectorMgr::NotifyDeleteEcoSector(int) {
 
 // address=[0x1442c20]
 // Decompiled from unsigned int __thiscall CEcoSectorMgr::SeparateEconomy(CEcoSectorMgr *this, unsigned int a2, unsigned int a3)
-
 void  CEcoSectorMgr::SeparateEconomy(int,int) {
   
   int v3; // eax
@@ -890,7 +866,6 @@ void  CEcoSectorMgr::SeparateEconomy(int,int) {
 
 // address=[0x1442f60]
 // Decompiled from CEcoSectorMgr *__thiscall CEcoSectorMgr::NotifyEcoSectorMerge(CEcoSectorMgr *this, int a2, int a3)
-
 void  CEcoSectorMgr::NotifyEcoSectorMerge(int,int) {
   
   CEcoSectorMgr *result; // eax
@@ -904,7 +879,6 @@ void  CEcoSectorMgr::NotifyEcoSectorMerge(int,int) {
 
 // address=[0x1442f80]
 // Decompiled from _DWORD *__thiscall CEcoSectorMgr::ConnectEconomy(CEcoSectorMgr *this, int a2, int a3)
-
 void  CEcoSectorMgr::ConnectEconomy(int,int) {
   
   int v3; // eax
@@ -1044,9 +1018,7 @@ void  CEcoSectorMgr::ConnectEconomy(int,int) {
 
 
 // address=[0x1443370]
-// Decompiled from // public: void __thiscall CEcoSectorMgr::OfferSettler(int,int,int)
-_DWORD *__thiscall CEcoSectorMgr::OfferSettler(CEcoSectorMgr *this, int a2, int a3, int a4)
-
+// Decompiled from _DWORD *__thiscall CEcoSectorMgr::OfferSettler(CEcoSectorMgr *this, int a2, int a3, int a4)
 void  CEcoSectorMgr::OfferSettler(int,int,int) {
   
   _DWORD *result; // eax
@@ -1068,9 +1040,7 @@ void  CEcoSectorMgr::OfferSettler(int,int,int) {
 
 
 // address=[0x14433d0]
-// Decompiled from // public: void __thiscall CEcoSectorMgr::OfferGood(int,int,int)
-_DWORD *__thiscall CEcoSectorMgr::OfferGood(CEcoSectorMgr *this, int a2, int a3, int a4)
-
+// Decompiled from _DWORD *__thiscall CEcoSectorMgr::OfferGood(CEcoSectorMgr *this, int a2, int a3, int a4)
 void  CEcoSectorMgr::OfferGood(int,int,int) {
   
   _DWORD *result; // eax
@@ -1093,7 +1063,6 @@ void  CEcoSectorMgr::OfferGood(int,int,int) {
 
 // address=[0x1443430]
 // Decompiled from void __thiscall CEcoSectorMgr::InitTransport(CEcoSectorMgr *this)
-
 void  CEcoSectorMgr::InitTransport(void) {
   
   CEcoSector *v2; // [esp+4h] [ebp-8h]
@@ -1111,7 +1080,6 @@ void  CEcoSectorMgr::InitTransport(void) {
 
 // address=[0x1443490]
 // Decompiled from int __thiscall CEcoSectorMgr::RecruiteSpecialist(CEcoSectorMgr *this)
-
 void  CEcoSectorMgr::RecruiteSpecialist(void) {
   
   int result; // eax
@@ -1131,7 +1099,6 @@ void  CEcoSectorMgr::RecruiteSpecialist(void) {
 
 // address=[0x14434e0]
 // Decompiled from int __thiscall CEcoSectorMgr::RecruiteWorker(CEcoSectorMgr *this)
-
 void  CEcoSectorMgr::RecruiteWorker(void) {
   
   int result; // eax
@@ -1151,7 +1118,6 @@ void  CEcoSectorMgr::RecruiteWorker(void) {
 
 // address=[0x1443530]
 // Decompiled from unsigned int __cdecl CEcoSectorMgr::FillGoodAmount(void **a1, unsigned __int8 a2, char a3)
-
 static void __cdecl CEcoSectorMgr::FillGoodAmount(class CInfoExchange *,bool,bool) {
   
   unsigned int result; // eax
@@ -1237,7 +1203,6 @@ static void __cdecl CEcoSectorMgr::FillGoodAmount(class CInfoExchange *,bool,boo
 
 // address=[0x1443770]
 // Decompiled from _DWORD *__cdecl CEcoSectorMgr::FillTransportPrio(struct CInfoExchange *a1, bool a2)
-
 static void __cdecl CEcoSectorMgr::FillTransportPrio(class CInfoExchange *,bool,bool) {
   
   unsigned int v3; // [esp+8h] [ebp-34h]
@@ -1275,7 +1240,6 @@ static void __cdecl CEcoSectorMgr::FillTransportPrio(class CInfoExchange *,bool,
 
 // address=[0x14438a0]
 // Decompiled from _DWORD *__cdecl CEcoSectorMgr::ChangeTransportPrio(int a1, int a2)
-
 static void __cdecl CEcoSectorMgr::ChangeTransportPrio(enum PILE_TYPES,int,bool,bool) {
   
   _DWORD *result; // eax
@@ -1300,7 +1264,6 @@ static void __cdecl CEcoSectorMgr::ChangeTransportPrio(enum PILE_TYPES,int,bool,
 
 // address=[0x1443980]
 // Decompiled from struct CEcoSector *__cdecl CEcoSectorMgr::ChangeTransportPrio(int a1, int a2, int a3)
-
 static void __cdecl CEcoSectorMgr::ChangeTransportPrio(enum PILE_TYPES,int,int) {
   
   struct CEcoSector *result; // eax
@@ -1332,7 +1295,6 @@ static void __cdecl CEcoSectorMgr::ChangeTransportPrio(enum PILE_TYPES,int,int) 
 
 // address=[0x1443a90]
 // Decompiled from void __cdecl CEcoSectorMgr::FillGoodDistribution(struct CInfoExchange *a1)
-
 static void __cdecl CEcoSectorMgr::FillGoodDistribution(class CInfoExchange *,bool,bool) {
   
   int LocalPlayerId; // [esp+8h] [ebp-38h]
@@ -1382,9 +1344,7 @@ static void __cdecl CEcoSectorMgr::FillGoodDistribution(class CInfoExchange *,bo
 
 
 // address=[0x1443c10]
-// Decompiled from // public: static void __cdecl CEcoSectorMgr::ChangeGoodDistributionPrio(enum PILE_TYPES,enum BUILDING_TYPES,int,signed char)
-int __cdecl CEcoSectorMgr::ChangeGoodDistributionPrio(int a1, int a2, int a3, unsigned __int8 a4)
-
+// Decompiled from int __cdecl CEcoSectorMgr::ChangeGoodDistributionPrio(int a1, int a2, int a3, unsigned __int8 a4)
 static void __cdecl CEcoSectorMgr::ChangeGoodDistributionPrio(enum PILE_TYPES,enum BUILDING_TYPES,int,signed char) {
   
   int result; // eax
@@ -1416,7 +1376,6 @@ static void __cdecl CEcoSectorMgr::ChangeGoodDistributionPrio(enum PILE_TYPES,en
 
 // address=[0x1443cd0]
 // Decompiled from int CEcoSectorMgr::GetLocalPlayerEcoSectorIdAtCenter()
-
 static int __cdecl CEcoSectorMgr::GetLocalPlayerEcoSectorIdAtCenter(void) {
   
   int v0; // eax
@@ -1450,7 +1409,6 @@ static int __cdecl CEcoSectorMgr::GetLocalPlayerEcoSectorIdAtCenter(void) {
 
 // address=[0x1443d80]
 // Decompiled from struct CEcoSector *CEcoSectorMgr::GetLocalPlayerEcoSectorPtrAtCenter()
-
 static class CEcoSector * __cdecl CEcoSectorMgr::GetLocalPlayerEcoSectorPtrAtCenter(void) {
   
   struct CEcoSector *EcoSectorPtr; // [esp+0h] [ebp-8h]
@@ -1468,7 +1426,6 @@ static class CEcoSector * __cdecl CEcoSectorMgr::GetLocalPlayerEcoSectorPtrAtCen
 
 // address=[0x1443de0]
 // Decompiled from void __thiscall CEcoSectorMgr::Store(CEcoSectorMgr *this, struct S4::CMapFile *a2)
-
 void  CEcoSectorMgr::Store(class S4::CMapFile &) {
   
   std::strstreambuf *v2; // eax
@@ -1591,7 +1548,6 @@ void  CEcoSectorMgr::Store(class S4::CMapFile &) {
 
 // address=[0x1444230]
 // Decompiled from void __thiscall CEcoSectorMgr::Load(char *this, S4::CMapFile *a2)
-
 void  CEcoSectorMgr::Load(class S4::CMapFile &) {
   
   int v2; // [esp+0h] [ebp-128h] BYREF
@@ -1683,7 +1639,6 @@ void  CEcoSectorMgr::Load(class S4::CMapFile &) {
 
 // address=[0x14445d0]
 // Decompiled from int __thiscall CEcoSectorMgr::GetNearestPileIDOfferGood(CEcoSectorMgr *this, int a2, int a3, int a4, int a5)
-
 int  CEcoSectorMgr::GetNearestPileIDOfferGood(int,int,int,int) {
   
   int v5; // eax
@@ -1735,7 +1690,6 @@ int  CEcoSectorMgr::GetNearestPileIDOfferGood(int,int,int,int) {
 
 // address=[0x1444720]
 // Decompiled from int __thiscall CEcoSectorMgr::DBG_CheckEcoSectors(CEcoSectorMgr *this)
-
 void  CEcoSectorMgr::DBG_CheckEcoSectors(void) {
   
   int result; // eax
@@ -1757,7 +1711,6 @@ void  CEcoSectorMgr::DBG_CheckEcoSectors(void) {
 
 // address=[0x1444770]
 // Decompiled from int __thiscall CEcoSectorMgr::GetFirstESForPlayer(CEcoSectorMgr *this, int a2)
-
 int  CEcoSectorMgr::GetFirstESForPlayer(int) {
   
   int v3; // [esp+0h] [ebp-Ch]
@@ -1775,7 +1728,6 @@ int  CEcoSectorMgr::GetFirstESForPlayer(int) {
 
 // address=[0x14447d0]
 // Decompiled from int __thiscall CEcoSectorMgr::GetNextESForPlayer(CEcoSectorMgr *this, int a2, int a3)
-
 int  CEcoSectorMgr::GetNextESForPlayer(int,int) {
   
   int v4; // [esp+0h] [ebp-Ch]
@@ -1793,7 +1745,6 @@ int  CEcoSectorMgr::GetNextESForPlayer(int,int) {
 
 // address=[0x1444830]
 // Decompiled from int __thiscall CEcoSectorMgr::GetFreeSlot(CEcoSectorMgr *this)
-
 int  CEcoSectorMgr::GetFreeSlot(void) {
   
   int v2; // [esp+4h] [ebp-Ch]
@@ -1827,7 +1778,6 @@ int  CEcoSectorMgr::GetFreeSlot(void) {
 
 // address=[0x14448e0]
 // Decompiled from CEcoSectorMgr *__thiscall CEcoSectorMgr::RegisterEcoSector(CEcoSectorMgr *this, int a2, struct CEcoSector *a3, bool a4)
-
 void  CEcoSectorMgr::RegisterEcoSector(int,class CEcoSector *,bool) {
   
   CEcoSectorMgr *result; // eax
@@ -1877,7 +1827,6 @@ void  CEcoSectorMgr::RegisterEcoSector(int,class CEcoSector *,bool) {
 
 // address=[0x1444a50]
 // Decompiled from CEcoSectorMgr *__thiscall CEcoSectorMgr::DestroyEcoSector(CEcoSectorMgr *this, int a2)
-
 void  CEcoSectorMgr::DestroyEcoSector(int) {
   
   CEcoSectorMgr *result; // eax
@@ -1931,7 +1880,6 @@ void  CEcoSectorMgr::DestroyEcoSector(int) {
 
 // address=[0x1444c50]
 // Decompiled from int __thiscall CEcoSectorMgr::CalculateStoreWorldIndices(_DWORD *this)
-
 void  CEcoSectorMgr::CalculateStoreWorldIndices(void) {
   
   int v1; // ecx
@@ -2027,7 +1975,6 @@ void  CEcoSectorMgr::CalculateStoreWorldIndices(void) {
 
 // address=[0x1444f60]
 // Decompiled from int __thiscall CEcoSectorMgr::NewEcoSector(CEcoSectorMgr *this, int a2)
-
 int  CEcoSectorMgr::NewEcoSector(int) {
   
   CPlayerGameData *v2; // eax
@@ -2064,7 +2011,6 @@ int  CEcoSectorMgr::NewEcoSector(int) {
 
 // address=[0x14450d0]
 // Decompiled from CEcoSectorMgr *__thiscall CEcoSectorMgr::DeleteEcoSector(CEcoSectorMgr *this, int a2)
-
 void  CEcoSectorMgr::DeleteEcoSector(int) {
   
   CEcoSectorMgr *result; // eax

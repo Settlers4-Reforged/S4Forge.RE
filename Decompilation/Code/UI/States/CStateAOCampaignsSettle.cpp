@@ -4,7 +4,6 @@
 
 // address=[0x14a0af0]
 // Decompiled from CStateAOCampaignsSettle *__cdecl CStateAOCampaignsSettle::DynamicCreateFunc(void *a1)
-
 static class CGameState * __cdecl CStateAOCampaignsSettle::DynamicCreateFunc(void *) {
   
   CStateAOCampaignsSettle *C; // [esp+Ch] [ebp-10h]
@@ -18,10 +17,7 @@ static class CGameState * __cdecl CStateAOCampaignsSettle::DynamicCreateFunc(voi
 
 
 // address=[0x14a0b70]
-// Decompiled from CStateAOCampaignsSettle *__thiscall CStateAOCampaignsSettle::CStateAOCampaignsSettle(
-        CStateAOCampaignsSettle *this,
-        void *a2)
-
+// Decompiled from CStateAOCampaignsSettle *__thiscall CStateAOCampaignsSettle::CStateAOCampaignsSettle(  CStateAOCampaignsSettle *this,  void *a2)
  CStateAOCampaignsSettle::CStateAOCampaignsSettle(void *) {
   
   CGuiGameState::CGuiGameState(this);
@@ -38,7 +34,6 @@ static class CGameState * __cdecl CStateAOCampaignsSettle::DynamicCreateFunc(voi
 
 // address=[0x14a0c30]
 // Decompiled from void __thiscall CStateAOCampaignsSettle::~CStateAOCampaignsSettle(CStateAOCampaignsSettle *this)
-
  CStateAOCampaignsSettle::~CStateAOCampaignsSettle(void) {
   
   *(_DWORD *)this = &CStateAOCampaignsSettle::_vftable_;
@@ -49,7 +44,6 @@ static class CGameState * __cdecl CStateAOCampaignsSettle::DynamicCreateFunc(voi
 
 // address=[0x14a0c90]
 // Decompiled from char __thiscall CStateAOCampaignsSettle::Perform(CStateAOCampaignsSettle *this)
-
 bool  CStateAOCampaignsSettle::Perform(void) {
   
   DWORD v2; // esi
@@ -86,7 +80,6 @@ bool  CStateAOCampaignsSettle::Perform(void) {
 
 // address=[0x14a0d70]
 // Decompiled from char __thiscall CStateAOCampaignsSettle::OnEvent(CStateAOCampaignsSettle *this, struct CEvn_Event *a2)
-
 bool  CStateAOCampaignsSettle::OnEvent(class CEvn_Event &) {
   
   CEvn_Event *v3; // [esp+Ch] [ebp-38h]
@@ -120,9 +113,7 @@ bool  CStateAOCampaignsSettle::OnEvent(class CEvn_Event &) {
 
 
 // address=[0x14a0fb0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-char __thiscall CStateAOCampaignsSettle::CanProcessInvites(CStateAOCampaignsSettle *this)
-
+// Decompiled from char __thiscall CStateAOCampaignsSettle::CanProcessInvites(CStateAOCampaignsSettle *this)
 bool  CStateAOCampaignsSettle::CanProcessInvites(void) {
   
   return 0;

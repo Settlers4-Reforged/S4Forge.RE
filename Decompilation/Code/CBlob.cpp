@@ -3,9 +3,7 @@
 // Definitions for class CBlob
 
 // address=[0x2fc88f0]
-// Decompiled from // public: __thiscall CBlob::CBlob(void)
-_DWORD *__thiscall CBlob::CBlob(_DWORD *this)
-
+// Decompiled from _DWORD *__thiscall CBlob::CBlob(_DWORD *this)
  CBlob::CBlob(void) {
   
   *this = CBlob::_vftable_;
@@ -14,17 +12,7 @@ _DWORD *__thiscall CBlob::CBlob(_DWORD *this)
 
 
 // address=[0x2fc8910]
-// Decompiled from CBlob *__thiscall CBlob::CBlob(
-        CBlob *this,
-        int a2,
-        int a3,
-        int a4,
-        int a5,
-        int a6,
-        int a7,
-        int a8,
-        struct CCheckLayer *a9)
-
+// Decompiled from CBlob *__thiscall CBlob::CBlob(  CBlob *this,  int a2,  int a3,  int a4,  int a5,  int a6,  int a7,  int a8,  struct CCheckLayer *a9)
  CBlob::CBlob(int,int,int,int,int,int,int,class CCheckLayer *) {
   
   unsigned int v10; // [esp+4h] [ebp-Ch]
@@ -100,7 +88,6 @@ _DWORD *__thiscall CBlob::CBlob(_DWORD *this)
 
 // address=[0x2fc8be0]
 // Decompiled from CBlob *__thiscall CBlob::drawBlob(CBlob *this)
-
 void  CBlob::drawBlob(void) {
   
   CBlob *result; // eax
@@ -257,7 +244,6 @@ void  CBlob::drawBlob(void) {
 
 // address=[0x2fc9100]
 // Decompiled from int __thiscall CBlob::fillBlob(CBlob *this, int a2, int a3)
-
 void  CBlob::fillBlob(int,int) {
   
   int result; // eax
@@ -339,7 +325,6 @@ void  CBlob::fillBlob(int,int) {
 
 // address=[0x2fc9490]
 // Decompiled from int __thiscall CBlob::getNextDirection(CBlob *this, int a2, int a3)
-
 int  CBlob::getNextDirection(int,int) {
   
   signed int v4; // [esp+Ch] [ebp-Ch]
@@ -367,7 +352,6 @@ int  CBlob::getNextDirection(int,int) {
 
 // address=[0x2fc95d0]
 // Decompiled from int __thiscall CBlob::processPoint(CCheckLayer **this, int a2, int a3)
-
 void  CBlob::processPoint(int,int) {
   
   return CCheckLayer::setPoint(this[8], a2 - (_DWORD)this[9], a3 - (_DWORD)this[10], 1u);

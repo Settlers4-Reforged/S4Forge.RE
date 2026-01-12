@@ -4,7 +4,6 @@
 
 // address=[0x2fc5160]
 // Decompiled from void __thiscall CBasicGrid::~CBasicGrid(CBasicGrid *this)
-
  CBasicGrid::~CBasicGrid(void) {
   
   CGrid::~CGrid((CBasicGrid *)((char *)this + 4));
@@ -13,7 +12,6 @@
 
 // address=[0x2fc56e0]
 // Decompiled from CBasicGrid *__thiscall CBasicGrid::CBasicGrid(CBasicGrid *this, int a2, int a3)
-
  CBasicGrid::CBasicGrid(int,int) {
   
   CGrid::CGrid((CBasicGrid *)((char *)this + 4), a2);
@@ -25,7 +23,6 @@
 
 // address=[0x2fc5720]
 // Decompiled from int __thiscall CBasicGrid::initGrid(CBasicGrid *this)
-
 void  CBasicGrid::initGrid(void) {
   
   int v1; // esi

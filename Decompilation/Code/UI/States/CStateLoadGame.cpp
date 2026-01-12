@@ -4,7 +4,6 @@
 
 // address=[0x148fe10]
 // Decompiled from void *CStateLoadGame::InitSaveList()
-
 static void __cdecl CStateLoadGame::InitSaveList(void) {
   
   void *result; // eax
@@ -17,7 +16,6 @@ static void __cdecl CStateLoadGame::InitSaveList(void) {
 
 // address=[0x14b52b0]
 // Decompiled from CStateLoadGame *__cdecl CStateLoadGame::DynamicCreateFunc(void *a1)
-
 static class CGameState * __cdecl CStateLoadGame::DynamicCreateFunc(void *) {
   
   CStateLoadGame *C; // [esp+Ch] [ebp-10h]
@@ -32,7 +30,6 @@ static class CGameState * __cdecl CStateLoadGame::DynamicCreateFunc(void *) {
 
 // address=[0x14b5680]
 // Decompiled from CStateLoadGame *__thiscall CStateLoadGame::CStateLoadGame(CStateLoadGame *this, void *a2)
-
  CStateLoadGame::CStateLoadGame(void *) {
   
   CGuiGameState::CGuiGameState(this);
@@ -69,7 +66,6 @@ static class CGameState * __cdecl CStateLoadGame::DynamicCreateFunc(void *) {
 
 // address=[0x14b57c0]
 // Decompiled from void __thiscall CStateLoadGame::~CStateLoadGame(CStateLoadGame *this)
-
  CStateLoadGame::~CStateLoadGame(void) {
   
   *(_DWORD *)this = &CStateLoadGame::_vftable_;
@@ -84,7 +80,6 @@ static class CGameState * __cdecl CStateLoadGame::DynamicCreateFunc(void *) {
 
 // address=[0x14b5840]
 // Decompiled from char __thiscall CStateLoadGame::Perform(CStateLoadGame *this)
-
 bool  CStateLoadGame::Perform(void) {
   
   DWORD v1; // esi
@@ -111,7 +106,6 @@ bool  CStateLoadGame::Perform(void) {
 
 // address=[0x14b58e0]
 // Decompiled from char __thiscall CStateLoadGame::OnEvent(CStateLoadGame *this, struct CEvn_Event *a2)
-
 bool  CStateLoadGame::OnEvent(class CEvn_Event &) {
   
   char v3; // [esp-1Ch] [ebp-68h] BYREF
@@ -157,7 +151,6 @@ bool  CStateLoadGame::OnEvent(class CEvn_Event &) {
 
 // address=[0x14b5a30]
 // Decompiled from void __cdecl CStateLoadGame::BuildSaveList(int a1, int a2)
-
 static void __cdecl CStateLoadGame::BuildSaveList(enum TGAME_TYPE,enum CAMPAIGN_TYPE) {
   
   int v2; // eax
@@ -258,7 +251,6 @@ static void __cdecl CStateLoadGame::BuildSaveList(enum TGAME_TYPE,enum CAMPAIGN_
 
 // address=[0x14b5dd0]
 // Decompiled from void CStateLoadGame::DestroySaveList()
-
 static void __cdecl CStateLoadGame::DestroySaveList(void) {
   
   int i; // [esp+Ch] [ebp-4h]
@@ -279,7 +271,6 @@ static void __cdecl CStateLoadGame::DestroySaveList(void) {
 
 // address=[0x14b5330]
 // Decompiled from bool __cdecl CStateLoadGame::FileMatch(wchar_t *String, int a2, int a3, void *a4)
-
 static bool __cdecl CStateLoadGame::FileMatch(wchar_t const *,enum TGAME_TYPE,enum CAMPAIGN_TYPE,std::string &) {
   
   bool result; // al

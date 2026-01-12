@@ -4,7 +4,6 @@
 
 // address=[0x1351b50]
 // Decompiled from int __thiscall ISettlerRole::GetTask(ISettlerRole *this)
-
 int  ISettlerRole::GetTask(void)const {
   
   return *((char *)this + 4);
@@ -13,7 +12,6 @@ int  ISettlerRole::GetTask(void)const {
 
 // address=[0x1563710]
 // Decompiled from ISettlerRole *__thiscall ISettlerRole::~ISettlerRole(ISettlerRole *this)
-
  ISettlerRole::~ISettlerRole(void) {
   
   ISettlerRole *result; // eax
@@ -26,7 +24,6 @@ int  ISettlerRole::GetTask(void)const {
 
 // address=[0x15637d0]
 // Decompiled from void *__thiscall ISettlerRole::ClearGroupFlagBits(std::_Ref_count_base *this, const struct type_info *a2)
-
 int  ISettlerRole::ClearGroupFlagBits(int) {
   
   return 0;
@@ -35,7 +32,6 @@ int  ISettlerRole::ClearGroupFlagBits(int) {
 
 // address=[0x15637f0]
 // Decompiled from int __thiscall ISettlerRole::Decrease(ISettlerRole *this, int a2)
-
 int  ISettlerRole::Decrease(int) {
   
   return a2;
@@ -43,10 +39,7 @@ int  ISettlerRole::Decrease(int) {
 
 
 // address=[0x1563810]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall ISettlerRole::GetGroupFlags(ISettlerRole *this)
-
+// Decompiled from int __thiscall ISettlerRole::GetGroupFlags(ISettlerRole *this)
 int  ISettlerRole::GetGroupFlags(void)const {
   
   return 0;
@@ -54,10 +47,7 @@ int  ISettlerRole::GetGroupFlags(void)const {
 
 
 // address=[0x1563840]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall ISettlerRole::GetWarriorBehavior(ISettlerRole *this)
-
+// Decompiled from int __thiscall ISettlerRole::GetWarriorBehavior(ISettlerRole *this)
 class CWarriorBehavior *  ISettlerRole::GetWarriorBehavior(void) {
   
   return 0;
@@ -66,7 +56,6 @@ class CWarriorBehavior *  ISettlerRole::GetWarriorBehavior(void) {
 
 // address=[0x1563850]
 // Decompiled from int __thiscall ISettlerRole::HomeEntityId(ISettlerRole *this)
-
 int  ISettlerRole::HomeEntityId(void)const {
   
   return *((unsigned __int16 *)this + 16);
@@ -74,9 +63,7 @@ int  ISettlerRole::HomeEntityId(void)const {
 
 
 // address=[0x1563930]
-// Decompiled from // Microsoft VisualC 14/net runtime
-char __thiscall ISettlerRole::IsUnEmployed(ISettlerRole *this)
-
+// Decompiled from char __thiscall ISettlerRole::IsUnEmployed(ISettlerRole *this)
 bool  ISettlerRole::IsUnEmployed(void)const {
   
   return 0;
@@ -85,7 +72,6 @@ bool  ISettlerRole::IsUnEmployed(void)const {
 
 // address=[0x1563940]
 // Decompiled from ISettlerRole *__thiscall ISettlerRole::SetBuilding(ISettlerRole *this, __int16 a2)
-
 void  ISettlerRole::SetBuilding(int) {
   
   ISettlerRole *result; // eax
@@ -98,7 +84,6 @@ void  ISettlerRole::SetBuilding(int) {
 
 // address=[0x15639a0]
 // Decompiled from ISettlerRole *__thiscall ISettlerRole::SetEntity(ISettlerRole *this, __int16 a2)
-
 void  ISettlerRole::SetEntity(int) {
   
   ISettlerRole *result; // eax
@@ -111,7 +96,6 @@ void  ISettlerRole::SetEntity(int) {
 
 // address=[0x15639e0]
 // Decompiled from void *__thiscall ISettlerRole::SetGroupFlagBits(std::_Ref_count_base *this, const struct type_info *a2)
-
 int  ISettlerRole::SetGroupFlagBits(int) {
   
   return 0;
@@ -120,7 +104,6 @@ int  ISettlerRole::SetGroupFlagBits(int) {
 
 // address=[0x1563a00]
 // Decompiled from void *__thiscall ISettlerRole::SetGroupFlags(std::_Ref_count_base *this, const struct type_info *a2)
-
 int  ISettlerRole::SetGroupFlags(int) {
   
   return 0;
@@ -128,10 +111,7 @@ int  ISettlerRole::SetGroupFlags(int) {
 
 
 // address=[0x1563a20]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall ISettlerRole::UpdateJob(ISettlerRole *this, struct CSettler *a2)
-
+// Decompiled from void __thiscall ISettlerRole::UpdateJob(ISettlerRole *this, struct CSettler *a2)
 void  ISettlerRole::UpdateJob(class CSettler *) {
   
   ;
@@ -140,7 +120,6 @@ void  ISettlerRole::UpdateJob(class CSettler *) {
 
 // address=[0x15671a0]
 // Decompiled from int __thiscall ISettlerRole::SourcePileId(ISettlerRole *this)
-
 int  ISettlerRole::SourcePileId(void)const {
   
   return *((unsigned __int16 *)this + 10);
@@ -149,7 +128,6 @@ int  ISettlerRole::SourcePileId(void)const {
 
 // address=[0x15897e0]
 // Decompiled from ISettlerRole *__thiscall ISettlerRole::ISettlerRole(ISettlerRole *this)
-
  ISettlerRole::ISettlerRole(void) {
   
   CPersistence::CPersistence(this);
@@ -178,7 +156,6 @@ int  ISettlerRole::SourcePileId(void)const {
 
 // address=[0x15898a0]
 // Decompiled from int __thiscall ISettlerRole::Go(ISettlerRole *this, struct CSettler *a2)
-
 void  ISettlerRole::Go(class CSettler *) {
   
   int v3; // eax
@@ -213,7 +190,6 @@ void  ISettlerRole::Go(class CSettler *) {
 
 // address=[0x15899a0]
 // Decompiled from int __thiscall ISettlerRole::LogicUpdate(ISettlerRole *this, struct CSettler *a2)
-
 void  ISettlerRole::LogicUpdate(class CSettler *) {
   
   int v2; // eax
@@ -270,7 +246,6 @@ void  ISettlerRole::LogicUpdate(class CSettler *) {
 
 // address=[0x1589b30]
 // Decompiled from void __thiscall ISettlerRole::Update(_WORD *this, CMFCCaptionButton *a2)
-
 void  ISettlerRole::Update(class CSettler *) {
   
   __int16 TickCounter; // si
@@ -387,7 +362,6 @@ void  ISettlerRole::Update(class CSettler *) {
 
 // address=[0x1589e30]
 // Decompiled from int __thiscall ISettlerRole::NewDestination(ISettlerRole *this, struct CSettler *a2, int a3, int a4)
-
 void  ISettlerRole::NewDestination(class CSettler *,int,int) {
   
   int result; // eax
@@ -401,7 +375,6 @@ void  ISettlerRole::NewDestination(class CSettler *,int,int) {
 
 // address=[0x1589e60]
 // Decompiled from int __thiscall ISettlerRole::NewDestination(ISettlerRole *this, struct CSettler *a2, int a3, int a4, int a5)
-
 void  ISettlerRole::NewDestination(class CSettler *,int,int,int) {
   
   int result; // eax
@@ -414,9 +387,7 @@ void  ISettlerRole::NewDestination(class CSettler *,int,int,int) {
 
 
 // address=[0x1589ea0]
-// Decompiled from // public: bool __thiscall ISettlerRole::SearchPosition(class CSettler *,int)
-char __thiscall ISettlerRole::SearchPosition(int this, _DWORD *a2, int a3)
-
+// Decompiled from char __thiscall ISettlerRole::SearchPosition(int this, _DWORD *a2, int a3)
 bool  ISettlerRole::SearchPosition(class CSettler *,int) {
   
   int v3; // eax
@@ -482,7 +453,6 @@ bool  ISettlerRole::SearchPosition(class CSettler *,int) {
 
 // address=[0x158a0a0]
 // Decompiled from char __thiscall ISettlerRole::ESChanged(ISettlerRole *this, struct CSettler *a2)
-
 bool  ISettlerRole::ESChanged(class CSettler *) {
   
   int v2; // eax
@@ -550,7 +520,6 @@ bool  ISettlerRole::ESChanged(class CSettler *) {
 
 // address=[0x158a230]
 // Decompiled from char __thiscall ISettlerRole::SetFree(ISettlerRole *this, struct CSettler *a2, int a3)
-
 bool  ISettlerRole::SetFree(class CSettler *,int) {
   
   unsigned __int8 *v3; // eax
@@ -660,7 +629,6 @@ LABEL_22:
 
 // address=[0x158a4d0]
 // Decompiled from int __thiscall ISettlerRole::SetObserverTarget(_WORD *this, int a2, __int16 a3)
-
 void  ISettlerRole::SetObserverTarget(enum T_OBSERVER_TARGET,int) {
   
   int result; // eax
@@ -694,7 +662,6 @@ void  ISettlerRole::SetObserverTarget(enum T_OBSERVER_TARGET,int) {
 
 // address=[0x158a530]
 // Decompiled from int __thiscall ISettlerRole::GetObserverTarget(unsigned __int16 *this, int a2)
-
 int  ISettlerRole::GetObserverTarget(enum T_OBSERVER_TARGET) {
   
   if ( !a2 )
@@ -707,7 +674,6 @@ int  ISettlerRole::GetObserverTarget(enum T_OBSERVER_TARGET) {
 
 // address=[0x158a570]
 // Decompiled from char *__thiscall ISettlerRole::ISettlerRole(char *this, int a2)
-
  ISettlerRole::ISettlerRole(std::istream &) {
   
   int pExceptionObject; // [esp+0h] [ebp-Ch] BYREF
@@ -754,7 +720,6 @@ int  ISettlerRole::GetObserverTarget(enum T_OBSERVER_TARGET) {
 
 // address=[0x158a740]
 // Decompiled from int __thiscall ISettlerRole::Store(struct CPersistence *this, struct std::ostream *a2)
-
 void  ISettlerRole::Store(std::ostream &) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
@@ -786,9 +751,7 @@ void  ISettlerRole::Store(std::ostream &) {
 
 
 // address=[0x158a8d0]
-// Decompiled from // MFC 3.1-14.0 32bit
-int __thiscall ISettlerRole::GetKindOfSelection(ISettlerRole *this, struct CSettler *a2)
-
+// Decompiled from int __thiscall ISettlerRole::GetKindOfSelection(ISettlerRole *this, struct CSettler *a2)
 int  ISettlerRole::GetKindOfSelection(class CSettler *)const {
   
   return 1;
@@ -797,7 +760,6 @@ int  ISettlerRole::GetKindOfSelection(class CSettler *)const {
 
 // address=[0x158a8f0]
 // Decompiled from int __thiscall ISettlerRole::MarkPileAsUnused(void *this, int a2)
-
 void  ISettlerRole::MarkPileAsUnused(enum T_OBSERVER_TARGET) {
   
   int result; // eax
@@ -838,7 +800,6 @@ void  ISettlerRole::MarkPileAsUnused(enum T_OBSERVER_TARGET) {
 
 // address=[0x158a9c0]
 // Decompiled from int __thiscall ISettlerRole::DetachFromPile(void *this, unsigned __int16 *a2, int a3, char a4)
-
 void  ISettlerRole::DetachFromPile(class CSettler *,enum T_OBSERVER_TARGET,bool) {
   
   int result; // eax
@@ -897,10 +858,7 @@ void  ISettlerRole::DetachFromPile(class CSettler *,enum T_OBSERVER_TARGET,bool)
 
 
 // address=[0x158ab30]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall ISettlerRole::GetNextSettlerType(ISettlerRole *this)
-
+// Decompiled from int __thiscall ISettlerRole::GetNextSettlerType(ISettlerRole *this)
 int  ISettlerRole::GetNextSettlerType(void) {
   
   return 0;
@@ -909,7 +867,6 @@ int  ISettlerRole::GetNextSettlerType(void) {
 
 // address=[0x158ab40]
 // Decompiled from char __thiscall ISettlerRole::SetNextSettlerType(ISettlerRole *this, int a2)
-
 bool  ISettlerRole::SetNextSettlerType(int) {
   
   return 0;
@@ -918,7 +875,6 @@ bool  ISettlerRole::SetNextSettlerType(int) {
 
 // address=[0x158ab50]
 // Decompiled from int __thiscall ISettlerRole::SettlerWalk(ISettlerRole *this, struct CSettler *a2)
-
 int  ISettlerRole::SettlerWalk(class CSettler *) {
   
   return CSettler::Walk(a2);
@@ -927,7 +883,6 @@ int  ISettlerRole::SettlerWalk(class CSettler *) {
 
 // address=[0x158ab70]
 // Decompiled from char __thiscall ISettlerRole::SearchRestingPlace(ISettlerRole *this, struct CSettler *a2, int a3)
-
 bool  ISettlerRole::SearchRestingPlace(class CSettler *,int) {
   
   int v3; // esi
@@ -965,7 +920,6 @@ bool  ISettlerRole::SearchRestingPlace(class CSettler *,int) {
 
 // address=[0x158aca0]
 // Decompiled from char __thiscall ISettlerRole::CheckHome(ISettlerRole *this, struct CSettler *a2)
-
 bool  ISettlerRole::CheckHome(class CSettler *) {
   
   if ( *((_WORD *)this + 16) )
@@ -976,11 +930,7 @@ bool  ISettlerRole::CheckHome(class CSettler *) {
 
 
 // address=[0x158ace0]
-// Decompiled from int __thiscall ISettlerRole::InitCommonTaskValues(
-        ISettlerRole *this,
-        struct CSettler *a2,
-        const struct CEntityTask *a3)
-
+// Decompiled from int __thiscall ISettlerRole::InitCommonTaskValues(  ISettlerRole *this,  struct CSettler *a2,  const struct CEntityTask *a3)
 void  ISettlerRole::InitCommonTaskValues(class CSettler *,class CEntityTask const &) {
   
   int v3; // eax
@@ -1068,14 +1018,7 @@ void  ISettlerRole::InitCommonTaskValues(class CSettler *,class CEntityTask cons
 
 
 // address=[0x158afa0]
-// Decompiled from int __thiscall ISettlerRole::NewDestinationEx(
-        void *this,
-        unsigned __int16 *a2,
-        void *a3,
-        __int16 a4,
-        __int16 a5,
-        char a6)
-
+// Decompiled from int __thiscall ISettlerRole::NewDestinationEx(  void *this,  unsigned __int16 *a2,  void *a3,  __int16 a4,  __int16 a5,  char a6)
 void  ISettlerRole::NewDestinationEx(class CSettler *,class std::list<class CEntityTask,class std::allocator<class CEntityTask> > &,int,int,int) {
   
   int v6; // eax

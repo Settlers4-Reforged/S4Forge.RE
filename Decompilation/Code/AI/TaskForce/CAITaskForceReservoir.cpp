@@ -4,7 +4,6 @@
 
 // address=[0x13191d0]
 // Decompiled from CAITaskForceReservoir *__thiscall CAITaskForceReservoir::CAITaskForceReservoir(CAITaskForceReservoir *this, int a2)
-
  CAITaskForceReservoir::CAITaskForceReservoir(int) {
   
   CAITaskForce::CAITaskForce((int)this, a2, 1, 1, 0x80000000);
@@ -15,7 +14,6 @@
 
 // address=[0x13192d0]
 // Decompiled from void __thiscall CAITaskForceReservoir::~CAITaskForceReservoir(CAITaskForceReservoir *this)
-
  CAITaskForceReservoir::~CAITaskForceReservoir(void) {
   
   CAITaskForce::~CAITaskForce(this);
@@ -23,10 +21,7 @@
 
 
 // address=[0x13196a0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CAITaskForceReservoir::Execute(CAITaskForceReservoir *this)
-
+// Decompiled from void __thiscall CAITaskForceReservoir::Execute(CAITaskForceReservoir *this)
 void  CAITaskForceReservoir::Execute(void) {
   
   ;

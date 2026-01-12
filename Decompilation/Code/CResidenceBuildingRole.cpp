@@ -4,7 +4,6 @@
 
 // address=[0x1401940]
 // Decompiled from int __cdecl CResidenceBuildingRole::New(int a1)
-
 static class CPersistence * __cdecl CResidenceBuildingRole::New(std::istream &) {
   
   if ( operator new(0x180u) )
@@ -16,7 +15,6 @@ static class CPersistence * __cdecl CResidenceBuildingRole::New(std::istream &) 
 
 // address=[0x14fcae0]
 // Decompiled from CResidenceBuildingRole *__thiscall CResidenceBuildingRole::CResidenceBuildingRole(CResidenceBuildingRole *this)
-
  CResidenceBuildingRole::CResidenceBuildingRole(void) {
   
   IBuildingRole::IBuildingRole(this);
@@ -27,7 +25,6 @@ static class CPersistence * __cdecl CResidenceBuildingRole::New(std::istream &) 
 
 // address=[0x14fcd00]
 // Decompiled from int __thiscall CResidenceBuildingRole::~CResidenceBuildingRole(CResidenceBuildingRole *this)
-
  CResidenceBuildingRole::~CResidenceBuildingRole(void) {
   
   return IBuildingRole::~IBuildingRole(this);
@@ -36,7 +33,6 @@ static class CPersistence * __cdecl CResidenceBuildingRole::New(std::istream &) 
 
 // address=[0x14fd160]
 // Decompiled from int __thiscall CResidenceBuildingRole::ClassID(CResidenceBuildingRole *this)
-
 unsigned long  CResidenceBuildingRole::ClassID(void)const {
   
   return CResidenceBuildingRole::m_iClassID;
@@ -45,7 +41,6 @@ unsigned long  CResidenceBuildingRole::ClassID(void)const {
 
 // address=[0x14fd3e0]
 // Decompiled from void *__thiscall CResidenceBuildingRole::GetBuildingNeed(std::_Ref_count_base *this, const struct type_info *a2)
-
 int  CResidenceBuildingRole::GetBuildingNeed(int)const {
   
   return 0;
@@ -54,7 +49,6 @@ int  CResidenceBuildingRole::GetBuildingNeed(int)const {
 
 // address=[0x14fd540]
 // Decompiled from int __thiscall CResidenceBuildingRole::GetBuildingRole(CResidenceBuildingRole *this)
-
 int  CResidenceBuildingRole::GetBuildingRole(void) {
   
   return 14;
@@ -63,7 +57,6 @@ int  CResidenceBuildingRole::GetBuildingRole(void) {
 
 // address=[0x14fd680]
 // Decompiled from void *__thiscall CResidenceBuildingRole::GetPileIdWithGood(std::_Ref_count_base *this, const struct type_info *a2)
-
 int  CResidenceBuildingRole::GetPileIdWithGood(int)const {
   
   return 0;
@@ -71,10 +64,7 @@ int  CResidenceBuildingRole::GetPileIdWithGood(int)const {
 
 
 // address=[0x14fd740]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CResidenceBuildingRole::GoodArrive(CResidenceBuildingRole *this, int a2)
-
+// Decompiled from void __thiscall CResidenceBuildingRole::GoodArrive(CResidenceBuildingRole *this, int a2)
 void  CResidenceBuildingRole::GoodArrive(int) {
   
   ;
@@ -83,7 +73,6 @@ void  CResidenceBuildingRole::GoodArrive(int) {
 
 // address=[0x14fdbb0]
 // Decompiled from int __cdecl CResidenceBuildingRole::Load(int a1)
-
 static class CResidenceBuildingRole * __cdecl CResidenceBuildingRole::Load(std::istream &) {
   
   void **v1; // eax
@@ -96,7 +85,6 @@ static class CResidenceBuildingRole * __cdecl CResidenceBuildingRole::Load(std::
 
 // address=[0x1518780]
 // Decompiled from char __thiscall CResidenceBuildingRole::LogicUpdate(CResidenceBuildingRole *this, struct CBuilding *a2)
-
 void  CResidenceBuildingRole::LogicUpdate(class CBuilding *) {
   
   int LocalPlayerId; // eax
@@ -238,11 +226,7 @@ void  CResidenceBuildingRole::LogicUpdate(class CBuilding *) {
 
 
 // address=[0x1518af0]
-// Decompiled from int __thiscall CResidenceBuildingRole::FillGfxInfo(
-        CResidenceBuildingRole *this,
-        struct CBuilding *a2,
-        struct SGfxObjectInfo *a3)
-
+// Decompiled from int __thiscall CResidenceBuildingRole::FillGfxInfo(  CResidenceBuildingRole *this,  struct CBuilding *a2,  struct SGfxObjectInfo *a3)
 void  CResidenceBuildingRole::FillGfxInfo(class CBuilding *,struct SGfxObjectInfo &) {
   
   int v3; // eax
@@ -257,7 +241,6 @@ void  CResidenceBuildingRole::FillGfxInfo(class CBuilding *,struct SGfxObjectInf
 
 // address=[0x1518b40]
 // Decompiled from CResidenceBuildingRole *__thiscall CResidenceBuildingRole::Init(CResidenceBuildingRole *this, struct CBuilding *a2)
-
 void  CResidenceBuildingRole::Init(class CBuilding *) {
   
   int v2; // eax
@@ -304,7 +287,6 @@ void  CResidenceBuildingRole::Init(class CBuilding *) {
 
 // address=[0x1518c80]
 // Decompiled from int __thiscall CResidenceBuildingRole::PostLoadInit(CResidenceBuildingRole *this, struct CBuilding *a2)
-
 void  CResidenceBuildingRole::PostLoadInit(class CBuilding *) {
   
   int v2; // eax
@@ -321,7 +303,6 @@ void  CResidenceBuildingRole::PostLoadInit(class CBuilding *) {
 
 // address=[0x1518cb0]
 // Decompiled from _DWORD *__thiscall CResidenceBuildingRole::FillDialog(CResidenceBuildingRole *this, struct CBuilding *a2, bool a3)
-
 void  CResidenceBuildingRole::FillDialog(class CBuilding *,bool) {
   
   int v3; // eax
@@ -360,7 +341,6 @@ void  CResidenceBuildingRole::FillDialog(class CBuilding *,bool) {
 
 // address=[0x1518e10]
 // Decompiled from int __thiscall CResidenceBuildingRole::ReturnRemainingSettlers(CResidenceBuildingRole *this)
-
 int  CResidenceBuildingRole::ReturnRemainingSettlers(void) {
   
   int v2; // [esp+4h] [ebp-4h]
@@ -374,7 +354,6 @@ int  CResidenceBuildingRole::ReturnRemainingSettlers(void) {
 
 // address=[0x1518e50]
 // Decompiled from char *__thiscall CResidenceBuildingRole::CResidenceBuildingRole(char *this, int a2)
-
  CResidenceBuildingRole::CResidenceBuildingRole(std::istream &) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
@@ -402,7 +381,6 @@ int  CResidenceBuildingRole::ReturnRemainingSettlers(void) {
 
 // address=[0x1518f10]
 // Decompiled from int __thiscall CResidenceBuildingRole::Store(struct IBuildingRole *this, struct std::ostream *a2)
-
 void  CResidenceBuildingRole::Store(std::ostream &) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
@@ -420,11 +398,7 @@ void  CResidenceBuildingRole::Store(std::ostream &) {
 // [Decompilation failed for static unsigned long CResidenceBuildingRole::m_iClassID]
 
 // address=[0x14fd240]
-// Decompiled from void __thiscall CResidenceBuildingRole::ConvertEventIntoGoal(
-        CResidenceBuildingRole *this,
-        struct CBuilding *a2,
-        struct CEntityEvent *a3)
-
+// Decompiled from void __thiscall CResidenceBuildingRole::ConvertEventIntoGoal(  CResidenceBuildingRole *this,  struct CBuilding *a2,  struct CEntityEvent *a3)
 void  CResidenceBuildingRole::ConvertEventIntoGoal(class CBuilding *,class CEntityEvent *) {
   
   ;
@@ -433,7 +407,6 @@ void  CResidenceBuildingRole::ConvertEventIntoGoal(class CBuilding *,class CEnti
 
 // address=[0x14fde70]
 // Decompiled from char __thiscall CResidenceBuildingRole::TryCrushBuilding(CResidenceBuildingRole *this)
-
 bool  CResidenceBuildingRole::TryCrushBuilding(void) {
   
   return 1;
@@ -442,7 +415,6 @@ bool  CResidenceBuildingRole::TryCrushBuilding(void) {
 
 // address=[0x1518f60]
 // Decompiled from char __thiscall CResidenceBuildingRole::CrushBuilding(CResidenceBuildingRole *this)
-
 bool  CResidenceBuildingRole::CrushBuilding(void) {
   
   unsigned __int8 *v1; // eax

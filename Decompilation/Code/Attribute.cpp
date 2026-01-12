@@ -4,7 +4,6 @@
 
 // address=[0x2f148f0]
 // Decompiled from _DWORD *__thiscall AdvXMLParser::Attribute::Attribute(_DWORD *this, int a2, int a3)
-
  AdvXMLParser::Attribute::Attribute(class AdvXMLParser::NodeContainer &,std::string const &) {
   
   AdvXMLParser::NodeContainer::NodeContainer(a2, a3);
@@ -15,7 +14,6 @@
 
 // address=[0x2f14920]
 // Decompiled from int __thiscall AdvXMLParser::Attribute::Clone(AdvXMLParser::Attribute *this, struct AdvXMLParser::NodeContainer *a2)
-
 class AdvXMLParser::Attribute *  AdvXMLParser::Attribute::Clone(class AdvXMLParser::NodeContainer &)const {
   
   int Name; // eax
@@ -48,7 +46,6 @@ class AdvXMLParser::Attribute *  AdvXMLParser::Attribute::Clone(class AdvXMLPars
 
 // address=[0x2f149f0]
 // Decompiled from int __thiscall AdvXMLParser::Attribute::GetData(void *this, int a2)
-
 std::string  AdvXMLParser::Attribute::GetData(void)const {
   
   (*(void (__thiscall **)(void *, int))(*(_DWORD *)this + 8))(this, a2);
@@ -58,7 +55,6 @@ std::string  AdvXMLParser::Attribute::GetData(void)const {
 
 // address=[0x2f14a30]
 // Decompiled from int __thiscall AdvXMLParser::Attribute::GetValue(void *this, int a2)
-
 std::string  AdvXMLParser::Attribute::GetValue(void)const {
   
   _BYTE v3[12]; // [esp+4h] [ebp-80h] BYREF
@@ -113,7 +109,6 @@ std::string  AdvXMLParser::Attribute::GetValue(void)const {
 
 // address=[0x2f14b70]
 // Decompiled from bool __thiscall AdvXMLParser::Attribute::IsKindOf(AdvXMLParser::Attribute *this, int a2)
-
 bool  AdvXMLParser::Attribute::IsKindOf(int)const {
   
   return a2 == 2 || AdvXMLParser::Node::IsKindOf(this, a2);
@@ -121,10 +116,7 @@ bool  AdvXMLParser::Attribute::IsKindOf(int)const {
 
 
 // address=[0x2f14ba0]
-// Decompiled from int __thiscall AdvXMLParser::Attribute::CloneNode(
-        AdvXMLParser::Attribute *this,
-        struct AdvXMLParser::NodeContainer *a2)
-
+// Decompiled from int __thiscall AdvXMLParser::Attribute::CloneNode(  AdvXMLParser::Attribute *this,  struct AdvXMLParser::NodeContainer *a2)
 class AdvXMLParser::Node *  AdvXMLParser::Attribute::CloneNode(class AdvXMLParser::NodeContainer &)const {
   
   return AdvXMLParser::Attribute::Clone(this, a2);
@@ -133,7 +125,6 @@ class AdvXMLParser::Node *  AdvXMLParser::Attribute::CloneNode(class AdvXMLParse
 
 // address=[0x2f1cce0]
 // Decompiled from void __thiscall AdvXMLParser::Attribute::~Attribute(AdvXMLParser::Attribute *this)
-
  AdvXMLParser::Attribute::~Attribute(void) {
   
   AdvXMLParser::NodeContainer::~NodeContainer(this);
@@ -142,7 +133,6 @@ class AdvXMLParser::Node *  AdvXMLParser::Attribute::CloneNode(class AdvXMLParse
 
 // address=[0x2f23650]
 // Decompiled from int __cdecl AdvXMLParser::Attribute::Parse(struct AdvXMLParser::Parser *a1, struct AdvXMLParser::Element *a2)
-
 static class AdvXMLParser::Attribute * __cdecl AdvXMLParser::Attribute::Parse(class AdvXMLParser::Parser &,class AdvXMLParser::Element &) {
   
   AdvXMLParser::Attribute *v3; // eax
@@ -190,7 +180,6 @@ static class AdvXMLParser::Attribute * __cdecl AdvXMLParser::Attribute::Parse(cl
 
 // address=[0x2f23790]
 // Decompiled from char __thiscall AdvXMLParser::Attribute::ParseAttValue(AdvXMLParser::Attribute *this, struct AdvXMLParser::Parser *a2)
-
 bool  AdvXMLParser::Attribute::ParseAttValue(class AdvXMLParser::Parser &) {
   
   struct AdvXMLParser::Reference *v3; // eax
@@ -256,10 +245,7 @@ bool  AdvXMLParser::Attribute::ParseAttValue(class AdvXMLParser::Parser &) {
 
 
 // address=[0x2f2cf30]
-// Decompiled from int __thiscall AdvXMLParser::Attribute::GenerateXML(
-        AdvXMLParser::Attribute *this,
-        struct AdvXMLParser::GenerateContext *a2)
-
+// Decompiled from int __thiscall AdvXMLParser::Attribute::GenerateXML(  AdvXMLParser::Attribute *this,  struct AdvXMLParser::GenerateContext *a2)
 void  AdvXMLParser::Attribute::GenerateXML(class AdvXMLParser::GenerateContext &)const {
   
   int Name; // eax

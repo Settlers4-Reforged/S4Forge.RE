@@ -4,7 +4,6 @@
 
 // address=[0x15d3dc0]
 // Decompiled from bool __cdecl CAStar64Worker::IsNotBlocked(int a1)
-
 static bool __cdecl CAStar64Worker::IsNotBlocked(int) {
   
   CTile *v1; // eax
@@ -20,7 +19,6 @@ static bool __cdecl CAStar64Worker::IsNotBlocked(int) {
 
 // address=[0x15d3e20]
 // Decompiled from int __cdecl CAStar64Worker::MoveCosts(int a1, int a2)
-
 static int __cdecl CAStar64Worker::MoveCosts(int,int) {
   
   int v2; // esi
@@ -34,7 +32,6 @@ static int __cdecl CAStar64Worker::MoveCosts(int,int) {
 
 // address=[0x15d5f50]
 // Decompiled from CAStar64Worker *__thiscall CAStar64Worker::CAStar64Worker(CAStar64Worker *this)
-
  CAStar64Worker::CAStar64Worker(void) {
   
   CAStar64Normal::CAStar64Normal(this);
@@ -45,7 +42,6 @@ static int __cdecl CAStar64Worker::MoveCosts(int,int) {
 
 // address=[0x15d3d60]
 // Decompiled from bool __thiscall CAStar64Worker::InitFindPath(CAStar64Worker *this)
-
 bool  CAStar64Worker::InitFindPath(void) {
   
   int v1; // eax

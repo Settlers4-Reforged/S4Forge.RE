@@ -4,7 +4,6 @@
 
 // address=[0x30812c0]
 // Decompiled from charNode *__thiscall charNode::charNode(charNode *this, char a2)
-
  charNode::charNode(char) {
   
   DNameNode::DNameNode(this);
@@ -15,9 +14,7 @@
 
 
 // address=[0x3088040]
-// Decompiled from // Microsoft VisualC 14/net runtime
-char __thiscall charNode::getLastChar(charNode *this)
-
+// Decompiled from char __thiscall charNode::getLastChar(charNode *this)
 char  charNode::getLastChar(void)const {
   
   return *((_BYTE *)this + 4);
@@ -26,7 +23,6 @@ char  charNode::getLastChar(void)const {
 
 // address=[0x308a620]
 // Decompiled from char *__thiscall charNode::getString(charNode *this, char *a2, char *a3)
-
 char *  charNode::getString(char *,char *)const {
   
   if ( a2 < a3 )
@@ -36,10 +32,7 @@ char *  charNode::getString(char *,char *)const {
 
 
 // address=[0x308cf90]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall charNode::length(charNode *this)
-
+// Decompiled from int __thiscall charNode::length(charNode *this)
 int  charNode::length(void)const {
   
   return 1;

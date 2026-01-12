@@ -4,7 +4,6 @@
 
 // address=[0x2fd1bb0]
 // Decompiled from IA_ColorReduction *__thiscall IA_ColorReduction::IA_ColorReduction(IA_ColorReduction *this)
-
  IA_ColorReduction::IA_ColorReduction(void) {
   
   j__memset(this, 0, 0x50u);
@@ -15,7 +14,6 @@
 
 // address=[0x2fd1be0]
 // Decompiled from void *__thiscall IA_ColorReduction::~IA_ColorReduction(void **this)
-
  IA_ColorReduction::~IA_ColorReduction(void) {
   
   IA_ColorReduction::DeleteTree((IA_ColorReduction *)this);
@@ -27,7 +25,6 @@
 
 // address=[0x2fd1c50]
 // Decompiled from bool __thiscall IA_ColorReduction::InitTree(void **this)
-
 bool  IA_ColorReduction::InitTree(void) {
   
   struct IA_ColorReduction_Node *Node; // [esp+4h] [ebp-8h]
@@ -45,7 +42,6 @@ bool  IA_ColorReduction::InitTree(void) {
 
 // address=[0x2fd1cc0]
 // Decompiled from char __thiscall IA_ColorReduction::BuildTree(IA_ColorReduction *this, unsigned __int8 **const a2, unsigned int a3)
-
 bool  IA_ColorReduction::BuildTree(unsigned char * * const,unsigned int) {
   
   int v4; // [esp+0h] [ebp-20h]
@@ -86,7 +82,6 @@ bool  IA_ColorReduction::BuildTree(unsigned char * * const,unsigned int) {
 
 // address=[0x2fd1dc0]
 // Decompiled from struct IA_ColorReduction_Node **__thiscall IA_ColorReduction::DeleteTree(struct IA_ColorReduction_Node **this)
-
 void  IA_ColorReduction::DeleteTree(void) {
   
   struct IA_ColorReduction_Node **result; // eax
@@ -101,7 +96,6 @@ void  IA_ColorReduction::DeleteTree(void) {
 
 // address=[0x2fd1df0]
 // Decompiled from IA_ColorReduction *__thiscall IA_ColorReduction::ReduceIt(IA_ColorReduction *this, unsigned int a2)
-
 void  IA_ColorReduction::ReduceIt(unsigned int) {
   
   IA_ColorReduction *result; // eax
@@ -118,12 +112,7 @@ void  IA_ColorReduction::ReduceIt(unsigned int) {
 
 
 // address=[0x2fd1e20]
-// Decompiled from unsigned int __thiscall IA_ColorReduction::MapColors(
-        struct IA_ColorReduction_Node **this,
-        unsigned __int8 **const a2,
-        unsigned __int8 *a3,
-        unsigned int a4)
-
+// Decompiled from unsigned int __thiscall IA_ColorReduction::MapColors(  struct IA_ColorReduction_Node **this,  unsigned __int8 **const a2,  unsigned __int8 *a3,  unsigned int a4)
 void  IA_ColorReduction::MapColors(unsigned char * * const,unsigned char *,unsigned int) {
   
   unsigned int result; // eax
@@ -154,11 +143,7 @@ void  IA_ColorReduction::MapColors(unsigned char * * const,unsigned char *,unsig
 
 
 // address=[0x2fd1ef0]
-// Decompiled from IA_ColorReduction *__thiscall IA_ColorReduction::InitPalette(
-        IA_ColorReduction *this,
-        unsigned __int8 **const a2,
-        unsigned int a3)
-
+// Decompiled from IA_ColorReduction *__thiscall IA_ColorReduction::InitPalette(  IA_ColorReduction *this,  unsigned __int8 **const a2,  unsigned int a3)
 void  IA_ColorReduction::InitPalette(unsigned char * * const,unsigned int) {
   
   unsigned __int8 Blue; // al
@@ -220,11 +205,7 @@ void  IA_ColorReduction::InitPalette(unsigned char * * const,unsigned int) {
 
 
 // address=[0x2fd20e0]
-// Decompiled from bool __thiscall IA_ColorReduction::InsertNode(
-        IA_ColorReduction *this,
-        struct IA_ColorReduction_Node *a2,
-        struct IA_ColorReduction_Color *a3)
-
+// Decompiled from bool __thiscall IA_ColorReduction::InsertNode(  IA_ColorReduction *this,  struct IA_ColorReduction_Node *a2,  struct IA_ColorReduction_Color *a3)
 bool  IA_ColorReduction::InsertNode(class IA_ColorReduction_Node *,class IA_ColorReduction_Color &) {
   
   int Child; // [esp+0h] [ebp-14h]
@@ -255,7 +236,6 @@ bool  IA_ColorReduction::InsertNode(class IA_ColorReduction_Node *,class IA_Colo
 
 // address=[0x2fd21d0]
 // Decompiled from IA_ColorReduction_Node *__thiscall IA_ColorReduction::MakeNode(IA_ColorReduction *this, int a2)
-
 class IA_ColorReduction_Node *  IA_ColorReduction::MakeNode(int) {
   
   IA_ColorReduction_Node *C; // [esp+Ch] [ebp-18h]
@@ -274,7 +254,6 @@ class IA_ColorReduction_Node *  IA_ColorReduction::MakeNode(int) {
 
 // address=[0x2fd2290]
 // Decompiled from void __thiscall IA_ColorReduction::DeleteNode(IA_ColorReduction *this, struct IA_ColorReduction_Node *a2)
-
 void  IA_ColorReduction::DeleteNode(class IA_ColorReduction_Node *) {
   
   struct IA_ColorReduction_Node *Child; // [esp+Ch] [ebp-Ch]
@@ -306,7 +285,6 @@ void  IA_ColorReduction::DeleteNode(class IA_ColorReduction_Node *) {
 
 // address=[0x2fd2350]
 // Decompiled from void __thiscall IA_ColorReduction::MakeReducible(IA_ColorReduction *this, struct IA_ColorReduction_Node *a2)
-
 void  IA_ColorReduction::MakeReducible(class IA_ColorReduction_Node *) {
   
   int Level; // [esp+4h] [ebp-8h]
@@ -324,7 +302,6 @@ void  IA_ColorReduction::MakeReducible(class IA_ColorReduction_Node *) {
 
 // address=[0x2fd23b0]
 // Decompiled from int __thiscall IA_ColorReduction::ReduceTree(IA_ColorReduction *this)
-
 void  IA_ColorReduction::ReduceTree(void) {
   
   int result; // eax
@@ -356,7 +333,6 @@ void  IA_ColorReduction::ReduceTree(void) {
 
 // address=[0x2fd2460]
 // Decompiled from IA_ColorReduction_Node *__thiscall IA_ColorReduction::GetReducible(IA_ColorReduction *this)
-
 class IA_ColorReduction_Node *  IA_ColorReduction::GetReducible(void) {
   
   unsigned int ColorCount; // esi
@@ -404,11 +380,7 @@ class IA_ColorReduction_Node *  IA_ColorReduction::GetReducible(void) {
 
 
 // address=[0x2fd2560]
-// Decompiled from void __thiscall IA_ColorReduction::FillPalette(
-        IA_ColorReduction *this,
-        struct IA_ColorReduction_Node *a2,
-        unsigned int *a3)
-
+// Decompiled from void __thiscall IA_ColorReduction::FillPalette(  IA_ColorReduction *this,  struct IA_ColorReduction_Node *a2,  unsigned int *a3)
 void  IA_ColorReduction::FillPalette(class IA_ColorReduction_Node *,unsigned int *) {
   
   _DWORD *Color; // eax
@@ -440,11 +412,7 @@ void  IA_ColorReduction::FillPalette(class IA_ColorReduction_Node *,unsigned int
 
 
 // address=[0x2fd2610]
-// Decompiled from int __thiscall IA_ColorReduction::QuantizeColor(
-        IA_ColorReduction *this,
-        struct IA_ColorReduction_Node *a2,
-        struct IA_ColorReduction_Color *a3)
-
+// Decompiled from int __thiscall IA_ColorReduction::QuantizeColor(  IA_ColorReduction *this,  struct IA_ColorReduction_Node *a2,  struct IA_ColorReduction_Color *a3)
 int  IA_ColorReduction::QuantizeColor(class IA_ColorReduction_Node *,class IA_ColorReduction_Color &) {
   
   int Child; // eax

@@ -4,7 +4,6 @@
 
 // address=[0x15f65e0]
 // Decompiled from CGroupWalking *__thiscall CGroupWalking::CGroupWalking(CGroupWalking *this)
-
  CGroupWalking::CGroupWalking(void) {
   
   BB::ZeroMemPtr(this, 0x10u);
@@ -13,9 +12,7 @@
 
 
 // address=[0x15f6600]
-// Decompiled from // public: void __thiscall CGroupWalking::SetFast(void)
-int CGroupWalking::SetFast()
-
+// Decompiled from int CGroupWalking::SetFast()
 void  CGroupWalking::SetFast(void) {
   
   int result; // eax
@@ -28,9 +25,7 @@ void  CGroupWalking::SetFast(void) {
 
 
 // address=[0x15f6630]
-// Decompiled from // public: void __thiscall CGroupWalking::SetNormal(void)
-int CGroupWalking::SetNormal()
-
+// Decompiled from int CGroupWalking::SetNormal()
 void  CGroupWalking::SetNormal(void) {
   
   int result; // eax

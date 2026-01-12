@@ -4,7 +4,6 @@
 
 // address=[0x15aae80]
 // Decompiled from void __thiscall CVehicleInfoMgr::InitializeVehicleProperties(CVehicleInfoMgr *this, bool a2, bool a3)
-
 void  CVehicleInfoMgr::InitializeVehicleProperties(bool,bool) {
   
   char *v3; // eax
@@ -41,7 +40,6 @@ void  CVehicleInfoMgr::InitializeVehicleProperties(bool,bool) {
 
 // address=[0x15ac350]
 // Decompiled from CVehicleInfoMgr *__thiscall CVehicleInfoMgr::CVehicleInfoMgr(CVehicleInfoMgr *this)
-
  CVehicleInfoMgr::CVehicleInfoMgr(void) {
   
   IVehicleInfoMgr::IVehicleInfoMgr(this);
@@ -52,7 +50,6 @@ void  CVehicleInfoMgr::InitializeVehicleProperties(bool,bool) {
 
 // address=[0x15aafc0]
 // Decompiled from char *__thiscall CVehicleInfoMgr::ReadXMLFile(CVehicleInfoMgr *this)
-
 void  CVehicleInfoMgr::ReadXMLFile(void) {
   
   char *result; // eax

@@ -3,11 +3,7 @@
 // Definitions for class CAIAgentDarkTribeShamans
 
 // address=[0x13022a0]
-// Decompiled from unsigned int __thiscall CAIAgentDarkTribeShamans::Execute(
-        CAIAgentDarkTribeShamans *this,
-        unsigned int a2,
-        unsigned int a3)
-
+// Decompiled from unsigned int __thiscall CAIAgentDarkTribeShamans::Execute(  CAIAgentDarkTribeShamans *this,  unsigned int a2,  unsigned int a3)
 unsigned int  CAIAgentDarkTribeShamans::Execute(unsigned int,unsigned int) {
   
   struct CAIDarkTribeSectorAI *v3; // eax
@@ -71,7 +67,6 @@ unsigned int  CAIAgentDarkTribeShamans::Execute(unsigned int,unsigned int) {
 
 // address=[0x1322e70]
 // Decompiled from CAIAgentDarkTribeShamans *__thiscall CAIAgentDarkTribeShamans::CAIAgentDarkTribeShamans(CAIAgentDarkTribeShamans *this)
-
  CAIAgentDarkTribeShamans::CAIAgentDarkTribeShamans(void) {
   
   CAIDarkTribeSectorAgent::CAIDarkTribeSectorAgent(this, "shamans");
@@ -82,7 +77,6 @@ unsigned int  CAIAgentDarkTribeShamans::Execute(unsigned int,unsigned int) {
 
 // address=[0x1322f80]
 // Decompiled from void __thiscall CAIAgentDarkTribeShamans::~CAIAgentDarkTribeShamans(CAIAgentDarkTribeShamans *this)
-
  CAIAgentDarkTribeShamans::~CAIAgentDarkTribeShamans(void) {
   
   CAIDarkTribeSectorAgent::~CAIDarkTribeSectorAgent(this);

@@ -4,7 +4,6 @@
 
 // address=[0x139fea0]
 // Decompiled from CGuiChatMsgList *__thiscall CGuiChatMsgList::CGuiChatMsgList(CGuiChatMsgList *this)
-
  CGuiChatMsgList::CGuiChatMsgList(void) {
   
   *((_DWORD *)this + 10030) = -1;
@@ -17,7 +16,6 @@
 
 // address=[0x139fef0]
 // Decompiled from char __thiscall CGuiChatMsgList::AddListItem(int *this, char *Str)
-
 bool  CGuiChatMsgList::AddListItem(char const *) {
   
   if ( this[10031] >= 200 )
@@ -30,9 +28,7 @@ bool  CGuiChatMsgList::AddListItem(char const *) {
 
 
 // address=[0x139ff70]
-// Decompiled from // public: bool __thiscall CGuiChatMsgList::SetListindex(int)
-char __thiscall CGuiChatMsgList::SetListindex(_DWORD *this, int a2)
-
+// Decompiled from char __thiscall CGuiChatMsgList::SetListindex(_DWORD *this, int a2)
 bool  CGuiChatMsgList::SetListindex(int) {
   
   if ( a2 >= this[10031] )
@@ -45,7 +41,6 @@ bool  CGuiChatMsgList::SetListindex(int) {
 
 // address=[0x139ffb0]
 // Decompiled from char __thiscall CGuiChatMsgList::SetTopindex(CGuiChatMsgList *this, int a2)
-
 bool  CGuiChatMsgList::SetTopindex(int) {
   
   int j; // [esp+0h] [ebp-10h]
@@ -73,7 +68,6 @@ bool  CGuiChatMsgList::SetTopindex(int) {
 
 // address=[0x13a0090]
 // Decompiled from char __thiscall CGuiChatMsgList::RemoveListItem(CGuiChatMsgList *this, int a2)
-
 bool  CGuiChatMsgList::RemoveListItem(int) {
   
   int v3; // [esp+0h] [ebp-Ch]
@@ -98,7 +92,6 @@ bool  CGuiChatMsgList::RemoveListItem(int) {
 
 // address=[0x13a0160]
 // Decompiled from char __thiscall CGuiChatMsgList::Clear(CGuiChatMsgList *this)
-
 bool  CGuiChatMsgList::Clear(void) {
   
   int i; // [esp+4h] [ebp-4h]
@@ -113,7 +106,6 @@ bool  CGuiChatMsgList::Clear(void) {
 
 // address=[0x13a01d0]
 // Decompiled from char __thiscall CGuiChatMsgList::SetOutputControls(CGuiChatMsgList *this, int a2, struct CGuiChatMsgList::SControl *a3)
-
 bool  CGuiChatMsgList::SetOutputControls(int,struct CGuiChatMsgList::SControl *) {
   
   _DWORD *v3; // edx
@@ -138,7 +130,6 @@ bool  CGuiChatMsgList::SetOutputControls(int,struct CGuiChatMsgList::SControl *)
 
 // address=[0x13a0270]
 // Decompiled from int __thiscall CGuiChatMsgList::SetListentry(CGuiChatMsgList *this, int a2, int a3)
-
 int  CGuiChatMsgList::SetListentry(int,int) {
   
   signed int Count; // [esp+0h] [ebp-E0h]
@@ -204,10 +195,7 @@ int  CGuiChatMsgList::SetListentry(int,int) {
 
 
 // address=[0x13a40f0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CGuiChatMsgList::~CGuiChatMsgList(CGuiChatMsgList *this)
-
+// Decompiled from void __thiscall CGuiChatMsgList::~CGuiChatMsgList(CGuiChatMsgList *this)
  CGuiChatMsgList::~CGuiChatMsgList(void) {
   
   ;
@@ -216,7 +204,6 @@ void __thiscall CGuiChatMsgList::~CGuiChatMsgList(CGuiChatMsgList *this)
 
 // address=[0x13a4120]
 // Decompiled from int __thiscall CGuiChatMsgList::GetTopindex(CGuiChatMsgList *this)
-
 int  CGuiChatMsgList::GetTopindex(void) {
   
   return *((_DWORD *)this + 10033);
@@ -225,7 +212,6 @@ int  CGuiChatMsgList::GetTopindex(void) {
 
 // address=[0x13a4230]
 // Decompiled from int __thiscall CGuiChatMsgList::Listcount(CGuiChatMsgList *this)
-
 int  CGuiChatMsgList::Listcount(void) {
   
   return *((_DWORD *)this + 10031);

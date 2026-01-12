@@ -4,7 +4,6 @@
 
 // address=[0x2f71cc0]
 // Decompiled from int __thiscall CHeightAndTypeTable::GetObjectFog(CHeightAndTypeTable *this, int a2, int a3, int a4)
-
 int  CHeightAndTypeTable::GetObjectFog(int,int,int) {
   
   return (unsigned __int8)*((_DWORD *)this + 2048 * a2 + 16 * a3 + 2 * a4 + 2577);
@@ -13,7 +12,6 @@ int  CHeightAndTypeTable::GetObjectFog(int,int,int) {
 
 // address=[0x2f7c6a0]
 // Decompiled from CHeightAndTypeTable *__thiscall CHeightAndTypeTable::CHeightAndTypeTable(CHeightAndTypeTable *this)
-
  CHeightAndTypeTable::CHeightAndTypeTable(void) {
   
   unsigned int v2; // [esp+0h] [ebp-1Ch] BYREF
@@ -477,7 +475,6 @@ int  CHeightAndTypeTable::GetObjectFog(int,int,int) {
 
 // address=[0x2f81cd0]
 // Decompiled from int __thiscall CHeightAndTypeTable::InitShadeTables(CHeightAndTypeTable *this)
-
 void  CHeightAndTypeTable::InitShadeTables(void) {
   
   int result; // eax
@@ -535,15 +532,7 @@ void  CHeightAndTypeTable::InitShadeTables(void) {
 
 
 // address=[0x2f85c90]
-// Decompiled from int __thiscall CHeightAndTypeTable::CalcFogging(
-        CHeightAndTypeTable *this,
-        int a2,
-        int a3,
-        int a4,
-        int a5,
-        unsigned int *a6,
-        unsigned int *a7)
-
+// Decompiled from int __thiscall CHeightAndTypeTable::CalcFogging(  CHeightAndTypeTable *this,  int a2,  int a3,  int a4,  int a5,  unsigned int *a6,  unsigned int *a7)
 void  CHeightAndTypeTable::CalcFogging(int,int,int,int,unsigned int &,unsigned int &) {
   
   int result; // eax
@@ -576,7 +565,6 @@ void  CHeightAndTypeTable::CalcFogging(int,int,int,int,unsigned int &,unsigned i
 
 // address=[0x2f86020]
 // Decompiled from int __thiscall CHeightAndTypeTable::GetAverageShadingValue(CHeightAndTypeTable *this, int a2, int a3)
-
 int  CHeightAndTypeTable::GetAverageShadingValue(int,int) {
   
   return ((unsigned __int8)a3 + (unsigned __int8)a2) / 2
@@ -587,7 +575,6 @@ int  CHeightAndTypeTable::GetAverageShadingValue(int,int) {
 
 // address=[0x2f860e0]
 // Decompiled from int __thiscall CHeightAndTypeTable::GetLightFog(CHeightAndTypeTable *this, int a2, int a3, int a4, int a5)
-
 int  CHeightAndTypeTable::GetLightFog(int,int,int,int) {
   
   return *((_DWORD *)this + 2048 * a2 + 128 * a3 + 16 * a4 + 2 * a5 + 1554);
@@ -596,7 +583,6 @@ int  CHeightAndTypeTable::GetLightFog(int,int,int,int) {
 
 // address=[0x2f86130]
 // Decompiled from int __thiscall CHeightAndTypeTable::GetShadowFog(CHeightAndTypeTable *this, int a2, int a3, int a4, int a5)
-
 int  CHeightAndTypeTable::GetShadowFog(int,int,int,int) {
   
   return *((_DWORD *)this + 2048 * a2 + 128 * a3 + 16 * a4 + 2 * a5 + 1553);

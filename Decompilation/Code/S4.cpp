@@ -4,7 +4,6 @@
 
 // address=[0x16a7240]
 // Decompiled from void __thiscall TMap<unsigned char>::LoadMap(void **this, S4::CMapFile *a2, unsigned __int16 a3, int a4)
-
 void  TMap<unsigned char>::LoadMap(class S4::CMapFile &,int,int) {
   
   int v4; // [esp+0h] [ebp-Ch] BYREF
@@ -25,7 +24,6 @@ void  TMap<unsigned char>::LoadMap(class S4::CMapFile &,int,int) {
 
 // address=[0x16a72d0]
 // Decompiled from void __thiscall TMap<unsigned short>::LoadMap(void **this, S4::CMapFile *a2, unsigned __int16 a3, int a4)
-
 void  TMap<unsigned short>::LoadMap(class S4::CMapFile &,int,int) {
   
   int v4; // [esp+0h] [ebp-Ch] BYREF
@@ -46,7 +44,6 @@ void  TMap<unsigned short>::LoadMap(class S4::CMapFile &,int,int) {
 
 // address=[0x16a7370]
 // Decompiled from void __thiscall TMap<T_GFX_MAP_ELEMENT>::LoadMap(void **this, S4::CMapFile *a2, unsigned __int16 a3, int a4)
-
 void  TMap<struct T_GFX_MAP_ELEMENT>::LoadMap(class S4::CMapFile &,int,int) {
   
   int v4; // [esp+0h] [ebp-Ch] BYREF
@@ -67,7 +64,6 @@ void  TMap<struct T_GFX_MAP_ELEMENT>::LoadMap(class S4::CMapFile &,int,int) {
 
 // address=[0x16a7410]
 // Decompiled from char __thiscall TSparseMap<unsigned char>::LoadMap(void *this, S4::CMapFile *a2, unsigned __int16 a3)
-
 bool  TSparseMap<unsigned char>::LoadMap(class S4::CMapFile &,int) {
   
   int v4; // [esp+0h] [ebp-Ch] BYREF
@@ -99,7 +95,6 @@ bool  TSparseMap<unsigned char>::LoadMap(class S4::CMapFile &,int) {
 
 // address=[0x16a7580]
 // Decompiled from int __thiscall TMap<unsigned char>::SaveMap(void **this, int a2, __int16 a3, int a4)
-
 void  TMap<unsigned char>::SaveMap(class S4::CMapFile &,int,int) {
   
   int result; // eax
@@ -113,7 +108,6 @@ void  TMap<unsigned char>::SaveMap(class S4::CMapFile &,int,int) {
 
 // address=[0x16a75d0]
 // Decompiled from int __thiscall TMap<unsigned short>::SaveMap(void **this, int a2, __int16 a3, int a4)
-
 void  TMap<unsigned short>::SaveMap(class S4::CMapFile &,int,int) {
   
   int result; // eax
@@ -127,7 +121,6 @@ void  TMap<unsigned short>::SaveMap(class S4::CMapFile &,int,int) {
 
 // address=[0x16a7620]
 // Decompiled from int __thiscall TMap<T_GFX_MAP_ELEMENT>::SaveMap(void **this, int a2, __int16 a3, int a4)
-
 void  TMap<struct T_GFX_MAP_ELEMENT>::SaveMap(class S4::CMapFile &,int,int) {
   
   int result; // eax
@@ -141,7 +134,6 @@ void  TMap<struct T_GFX_MAP_ELEMENT>::SaveMap(class S4::CMapFile &,int,int) {
 
 // address=[0x16a7670]
 // Decompiled from char __thiscall TSparseMap<unsigned char>::SaveMap(_DWORD *this, int a2, __int16 a3)
-
 bool  TSparseMap<unsigned char>::SaveMap(class S4::CMapFile &,int) {
   
   int v3; // eax

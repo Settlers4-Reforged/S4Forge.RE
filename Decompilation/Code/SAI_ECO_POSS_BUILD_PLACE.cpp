@@ -4,7 +4,6 @@
 
 // address=[0x1345720]
 // Decompiled from _WORD *__thiscall SAI_ECO_POSS_BUILD_PLACE::SAI_ECO_POSS_BUILD_PLACE(_WORD *this, _WORD *a2)
-
  SAI_ECO_POSS_BUILD_PLACE::SAI_ECO_POSS_BUILD_PLACE(struct SAI_ECO_POSS_BUILD_PLACE &&) {
   
   *this = *a2;
@@ -15,10 +14,7 @@
 
 
 // address=[0x1345770]
-// Decompiled from SAI_ECO_POSS_BUILD_PLACE *__thiscall SAI_ECO_POSS_BUILD_PLACE::SAI_ECO_POSS_BUILD_PLACE(
-        SAI_ECO_POSS_BUILD_PLACE *this,
-        const struct SAI_ECO_POSS_BUILD_PLACE *a2)
-
+// Decompiled from SAI_ECO_POSS_BUILD_PLACE *__thiscall SAI_ECO_POSS_BUILD_PLACE::SAI_ECO_POSS_BUILD_PLACE(  SAI_ECO_POSS_BUILD_PLACE *this,  const struct SAI_ECO_POSS_BUILD_PLACE *a2)
  SAI_ECO_POSS_BUILD_PLACE::SAI_ECO_POSS_BUILD_PLACE(struct SAI_ECO_POSS_BUILD_PLACE const &) {
   
   *(_WORD *)this = *(_WORD *)a2;
@@ -30,7 +26,6 @@
 
 // address=[0x1345810]
 // Decompiled from SAI_ECO_POSS_BUILD_PLACE *__thiscall SAI_ECO_POSS_BUILD_PLACE::SAI_ECO_POSS_BUILD_PLACE(SAI_ECO_POSS_BUILD_PLACE *this)
-
  SAI_ECO_POSS_BUILD_PLACE::SAI_ECO_POSS_BUILD_PLACE(void) {
   
   std::vector<int>::vector<int>((char *)this + 4);
@@ -41,7 +36,6 @@
 
 // address=[0x1345e40]
 // Decompiled from int __thiscall SAI_ECO_POSS_BUILD_PLACE::~SAI_ECO_POSS_BUILD_PLACE(SAI_ECO_POSS_BUILD_PLACE *this)
-
  SAI_ECO_POSS_BUILD_PLACE::~SAI_ECO_POSS_BUILD_PLACE(void) {
   
   std::vector<signed char>::~vector<signed char>(this);

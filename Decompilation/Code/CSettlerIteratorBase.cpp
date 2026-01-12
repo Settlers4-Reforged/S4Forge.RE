@@ -3,10 +3,7 @@
 // Definitions for class CSettlerIteratorBase
 
 // address=[0x1317460]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CSettlerIteratorBase::SettlerId(CSettlerIteratorBase *this)
-
+// Decompiled from int __thiscall CSettlerIteratorBase::SettlerId(CSettlerIteratorBase *this)
 int  CSettlerIteratorBase::SettlerId(void)const {
   
   return *((_DWORD *)this + 1);
@@ -14,10 +11,7 @@ int  CSettlerIteratorBase::SettlerId(void)const {
 
 
 // address=[0x1317480]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CSettlerIteratorBase::SettlerType(CSettlerIteratorBase *this)
-
+// Decompiled from int __thiscall CSettlerIteratorBase::SettlerType(CSettlerIteratorBase *this)
 int  CSettlerIteratorBase::SettlerType(void)const {
   
   return *(_DWORD *)this;
@@ -26,7 +20,6 @@ int  CSettlerIteratorBase::SettlerType(void)const {
 
 // address=[0x13173d0]
 // Decompiled from CSettlerIteratorBase *__thiscall CSettlerIteratorBase::Init(CSettlerIteratorBase *this, int a2)
-
 void  CSettlerIteratorBase::Init(int) {
   
   CSettlerIteratorBase *result; // eax
@@ -40,7 +33,6 @@ void  CSettlerIteratorBase::Init(int) {
 
 // address=[0x13174a0]
 // Decompiled from bool __thiscall CSettlerIteratorBase::SettlerValid(CSettlerIteratorBase *this, int a2)
-
 bool  CSettlerIteratorBase::SettlerValid(int) {
   
   struct IEntity *v2; // eax

@@ -4,7 +4,6 @@
 
 // address=[0x1361470]
 // Decompiled from CGfxManager *__thiscall CGfxManager::CGfxManager(CGfxManager *this, bool a2, bool a3, bool a4)
-
  CGfxManager::CGfxManager(bool,bool,bool) {
   
   int v5; // [esp+4h] [ebp-34h]
@@ -48,7 +47,6 @@
 
 // address=[0x1361660]
 // Decompiled from void __thiscall CGfxManager::~CGfxManager(CGfxManager *this)
-
  CGfxManager::~CGfxManager(void) {
   
   *(_DWORD *)this = &CGfxManager::_vftable_;
@@ -60,7 +58,6 @@
 
 // address=[0x13616d0]
 // Decompiled from char __thiscall CGfxManager::OpenGFXFiles(CGfxManager *this)
-
 bool  CGfxManager::OpenGFXFiles(void) {
   
   CGfxManager::EnableGfxFile(this, 0x14u, 0, 1, 0x3Au);
@@ -102,7 +99,6 @@ bool  CGfxManager::OpenGFXFiles(void) {
 
 // address=[0x13618d0]
 // Decompiled from void __thiscall CGfxManager::GetGuiGfxInfo(CGfxManager *this, struct SGfxObjectInfo *a2, unsigned int a3)
-
 void  CGfxManager::GetGuiGfxInfo(struct SGfxObjectInfo &,unsigned int) {
   
   unsigned int v3; // [esp+0h] [ebp-8h]
@@ -130,12 +126,7 @@ void  CGfxManager::GetGuiGfxInfo(struct SGfxObjectInfo &,unsigned int) {
 
 
 // address=[0x13619d0]
-// Decompiled from void __thiscall CGfxManager::GetUserLogoGfxInfo(
-        CGfxManager *this,
-        struct SGfxObjectInfo *userLogoGfxInfo,
-        unsigned int logoNr,
-        unsigned int direction)
-
+// Decompiled from void __thiscall CGfxManager::GetUserLogoGfxInfo(  CGfxManager *this,  struct SGfxObjectInfo *userLogoGfxInfo,  unsigned int logoNr,  unsigned int direction)
 void  CGfxManager::GetUserLogoGfxInfo(struct SGfxObjectInfo &,unsigned int,unsigned int) {
   
   int logoIndex; // [esp+18h] [ebp+Ch]
@@ -158,14 +149,7 @@ void  CGfxManager::GetUserLogoGfxInfo(struct SGfxObjectInfo &,unsigned int,unsig
 
 
 // address=[0x1361af0]
-// Decompiled from void __thiscall CGfxManager::GetBuildingGfxInfo(
-        CGfxManager *this,
-        struct SGfxObjectInfo *a2,
-        unsigned int a3,
-        unsigned int a4,
-        int a5,
-        int a6)
-
+// Decompiled from void __thiscall CGfxManager::GetBuildingGfxInfo(  CGfxManager *this,  struct SGfxObjectInfo *a2,  unsigned int a3,  unsigned int a4,  int a5,  int a6)
 void  CGfxManager::GetBuildingGfxInfo(struct SGfxObjectInfo &,unsigned int,unsigned int,unsigned int,struct SBuildingFX *) {
   
   unsigned int v7; // [esp+20h] [ebp-8h]
@@ -261,7 +245,6 @@ void  CGfxManager::GetBuildingGfxInfo(struct SGfxObjectInfo &,unsigned int,unsig
 
 // address=[0x1361f10]
 // Decompiled from int __thiscall CGfxManager::GetBuildingFirstJob(CGfxManager *this, unsigned int a2, unsigned int a3)
-
 unsigned int  CGfxManager::GetBuildingFirstJob(unsigned int,unsigned int) {
   
   int v4; // [esp+0h] [ebp-10h] BYREF
@@ -282,13 +265,7 @@ unsigned int  CGfxManager::GetBuildingFirstJob(unsigned int,unsigned int) {
 
 
 // address=[0x1361f80]
-// Decompiled from void __thiscall CGfxManager::GetObjectGfxInfo(
-        CGfxManager *this,
-        struct SGfxObjectInfo *a2,
-        unsigned int a3,
-        unsigned int a4,
-        int a5)
-
+// Decompiled from void __thiscall CGfxManager::GetObjectGfxInfo(  CGfxManager *this,  struct SGfxObjectInfo *a2,  unsigned int a3,  unsigned int a4,  int a5)
 void  CGfxManager::GetObjectGfxInfo(struct SGfxObjectInfo &,unsigned int,unsigned int,unsigned int) {
   
   unsigned int v6; // [esp+24h] [ebp+Ch]
@@ -327,7 +304,6 @@ void  CGfxManager::GetObjectGfxInfo(struct SGfxObjectInfo &,unsigned int,unsigne
 
 // address=[0x13621a0]
 // Decompiled from unsigned int __thiscall CGfxManager::GetObjectFirstJob(CGfxManager *this, unsigned int a2)
-
 unsigned int  CGfxManager::GetObjectFirstJob(unsigned int) {
   
   if ( !*((_DWORD *)this + 473)
@@ -340,14 +316,7 @@ unsigned int  CGfxManager::GetObjectFirstJob(unsigned int) {
 
 
 // address=[0x1362210]
-// Decompiled from void __thiscall CGfxManager::GetSettlerGfxInfo(
-        CGfxManager *this,
-        struct SGfxObjectInfo *a2,
-        unsigned int a3,
-        unsigned int a4,
-        unsigned int a5,
-        unsigned int a6)
-
+// Decompiled from void __thiscall CGfxManager::GetSettlerGfxInfo(  CGfxManager *this,  struct SGfxObjectInfo *a2,  unsigned int a3,  unsigned int a4,  unsigned int a5,  unsigned int a6)
 void  CGfxManager::GetSettlerGfxInfo(struct SGfxObjectInfo &,unsigned int,unsigned int,unsigned int,unsigned int) {
   
   unsigned int v7; // [esp+Ch] [ebp-8h]
@@ -383,7 +352,6 @@ void  CGfxManager::GetSettlerGfxInfo(struct SGfxObjectInfo &,unsigned int,unsign
 
 // address=[0x1362410]
 // Decompiled from unsigned int __thiscall CGfxManager::GetSettlerFirstJob(_DWORD *this, int a2, int a3)
-
 unsigned int  CGfxManager::GetSettlerFirstJob(unsigned int,unsigned int) {
   
   int v4; // [esp+Ch] [ebp-4h]
@@ -410,14 +378,7 @@ unsigned int  CGfxManager::GetSettlerFirstJob(unsigned int,unsigned int) {
 
 
 // address=[0x13624d0]
-// Decompiled from void __thiscall CGfxManager::GetPatchSettlerGfxInfo(
-        CGfxManager *this,
-        struct SGfxPatchObject *a2,
-        unsigned int a3,
-        unsigned int a4,
-        unsigned int a5,
-        unsigned int a6)
-
+// Decompiled from void __thiscall CGfxManager::GetPatchSettlerGfxInfo(  CGfxManager *this,  struct SGfxPatchObject *a2,  unsigned int a3,  unsigned int a4,  unsigned int a5,  unsigned int a6)
 void  CGfxManager::GetPatchSettlerGfxInfo(struct SGfxPatchObject &,unsigned int,unsigned int,unsigned int,unsigned int) {
   
   unsigned int v7; // [esp+4h] [ebp-4h]
@@ -446,13 +407,7 @@ void  CGfxManager::GetPatchSettlerGfxInfo(struct SGfxPatchObject &,unsigned int,
 
 
 // address=[0x1362620]
-// Decompiled from void __thiscall CGfxManager::GetPileGfxInfo(
-        CGfxManager *this,
-        struct SGfxObjectInfo *a2,
-        int a3,
-        int a4,
-        unsigned int a5)
-
+// Decompiled from void __thiscall CGfxManager::GetPileGfxInfo(  CGfxManager *this,  struct SGfxObjectInfo *a2,  int a3,  int a4,  unsigned int a5)
 void  CGfxManager::GetPileGfxInfo(struct SGfxObjectInfo &,unsigned int,unsigned int,unsigned int) {
   
   unsigned int v6; // [esp+24h] [ebp+10h]
@@ -490,13 +445,7 @@ void  CGfxManager::GetPileGfxInfo(struct SGfxObjectInfo &,unsigned int,unsigned 
 
 
 // address=[0x1362810]
-// Decompiled from void __thiscall CGfxManager::GetPatchPileGfxInfo(
-        CGfxManager *this,
-        struct SGfxPatchObject *a2,
-        int a3,
-        unsigned int a4,
-        unsigned int a5)
-
+// Decompiled from void __thiscall CGfxManager::GetPatchPileGfxInfo(  CGfxManager *this,  struct SGfxPatchObject *a2,  int a3,  unsigned int a4,  unsigned int a5)
 void  CGfxManager::GetPatchPileGfxInfo(struct SGfxPatchObject &,unsigned int,unsigned int,unsigned int) {
   
   unsigned int v6; // [esp+24h] [ebp+10h]
@@ -532,16 +481,7 @@ void  CGfxManager::GetPatchPileGfxInfo(struct SGfxPatchObject &,unsigned int,uns
 
 
 // address=[0x1362a00]
-// Decompiled from void __thiscall CGfxManager::GetVehicleGfxInfo(
-        CGfxManager *this,
-        struct SGfxObjectInfo *a2,
-        unsigned int a3,
-        unsigned int a4,
-        unsigned int a5,
-        unsigned int a6,
-        unsigned int a7,
-        unsigned int a8)
-
+// Decompiled from void __thiscall CGfxManager::GetVehicleGfxInfo(  CGfxManager *this,  struct SGfxObjectInfo *a2,  unsigned int a3,  unsigned int a4,  unsigned int a5,  unsigned int a6,  unsigned int a7,  unsigned int a8)
 void  CGfxManager::GetVehicleGfxInfo(struct SGfxObjectInfo &,unsigned int,unsigned int,unsigned int,unsigned int,unsigned int,unsigned int) {
   
   unsigned int v9; // [esp+1Ch] [ebp-8h]
@@ -604,7 +544,6 @@ void  CGfxManager::GetVehicleGfxInfo(struct SGfxObjectInfo &,unsigned int,unsign
 
 // address=[0x1362d50]
 // Decompiled from unsigned int __thiscall CGfxManager::GetVehicleFirstJob(CGfxManager *this, unsigned int a2, unsigned int a3)
-
 unsigned int  CGfxManager::GetVehicleFirstJob(unsigned int,unsigned int) {
   
   int v5; // [esp+8h] [ebp-4h]
@@ -620,13 +559,7 @@ unsigned int  CGfxManager::GetVehicleFirstJob(unsigned int,unsigned int) {
 
 
 // address=[0x1362dc0]
-// Decompiled from void __thiscall CGfxManager::GetAnimalGfxInfo(
-        CGfxManager *this,
-        struct SGfxObjectInfo *a2,
-        unsigned int a3,
-        int a4,
-        unsigned int a5)
-
+// Decompiled from void __thiscall CGfxManager::GetAnimalGfxInfo(  CGfxManager *this,  struct SGfxObjectInfo *a2,  unsigned int a3,  int a4,  unsigned int a5)
 void  CGfxManager::GetAnimalGfxInfo(struct SGfxObjectInfo &,unsigned int,unsigned int,unsigned int) {
   
   unsigned int v6; // [esp+28h] [ebp+Ch]
@@ -665,7 +598,6 @@ void  CGfxManager::GetAnimalGfxInfo(struct SGfxObjectInfo &,unsigned int,unsigne
 
 // address=[0x1362fc0]
 // Decompiled from unsigned int __thiscall CGfxManager::GetAnimalFirstJob(CGfxManager *this, unsigned int a2)
-
 unsigned int  CGfxManager::GetAnimalFirstJob(unsigned int) {
   
   if ( !*((_DWORD *)this + 479)
@@ -678,13 +610,7 @@ unsigned int  CGfxManager::GetAnimalFirstJob(unsigned int) {
 
 
 // address=[0x1363030]
-// Decompiled from void __thiscall CGfxManager::GetEffectGfxInfo(
-        CGfxManager *this,
-        struct SGfxObjectInfo *a2,
-        unsigned int a3,
-        unsigned int a4,
-        unsigned int a5)
-
+// Decompiled from void __thiscall CGfxManager::GetEffectGfxInfo(  CGfxManager *this,  struct SGfxObjectInfo *a2,  unsigned int a3,  unsigned int a4,  unsigned int a5)
 void  CGfxManager::GetEffectGfxInfo(struct SGfxObjectInfo &,unsigned int,unsigned int,unsigned int) {
   
   unsigned int v5; // [esp+Ch] [ebp-24h]
@@ -760,7 +686,6 @@ void  CGfxManager::GetEffectGfxInfo(struct SGfxObjectInfo &,unsigned int,unsigne
 
 // address=[0x13632c0]
 // Decompiled from void __thiscall CGfxManager::GetAccessoryGfxInfo(CGfxManager *this, struct SGfxObjectInfo *a2, unsigned int a3)
-
 void  CGfxManager::GetAccessoryGfxInfo(struct SGfxObjectInfo &,unsigned int) {
   
   unsigned int v4; // [esp+20h] [ebp+Ch]
@@ -787,7 +712,6 @@ void  CGfxManager::GetAccessoryGfxInfo(struct SGfxObjectInfo &,unsigned int) {
 
 // address=[0x1363410]
 // Decompiled from int __thiscall CGfxManager::GetSettlerJobFrameCount(CGfxManager *this, unsigned int a2, int a3, int a4)
-
 unsigned int  CGfxManager::GetSettlerJobFrameCount(unsigned int,unsigned int,unsigned int) {
   
   return CGfxManager::GetJobFrameCount(a2 + 20, a3, a4);
@@ -796,7 +720,6 @@ unsigned int  CGfxManager::GetSettlerJobFrameCount(unsigned int,unsigned int,uns
 
 // address=[0x1363440]
 // Decompiled from int __thiscall CGfxManager::GetObjectFrameCount(CGfxManager *this, int a2)
-
 unsigned int  CGfxManager::GetObjectFrameCount(unsigned int) {
   
   return CGfxManager::GetJobFrameCount(5, a2, 0);
@@ -805,7 +728,6 @@ unsigned int  CGfxManager::GetObjectFrameCount(unsigned int) {
 
 // address=[0x1363470]
 // Decompiled from int __stdcall sub_1763470(int a1)
-
 unsigned int  CGfxManager::GetPileFrameCount(unsigned int) {
   
   return CGfxManager::GetJobFrameCount(3, a1, 0);
@@ -814,7 +736,6 @@ unsigned int  CGfxManager::GetPileFrameCount(unsigned int) {
 
 // address=[0x13634a0]
 // Decompiled from int __thiscall CGfxManager::GetVehicleFrameCount(CGfxManager *this, unsigned int a2, int a3)
-
 unsigned int  CGfxManager::GetVehicleFrameCount(unsigned int,unsigned int) {
   
   return CGfxManager::GetJobFrameCount(a2 + 30, a3, 2);
@@ -823,7 +744,6 @@ unsigned int  CGfxManager::GetVehicleFrameCount(unsigned int,unsigned int) {
 
 // address=[0x13634e0]
 // Decompiled from int __thiscall CGfxManager::GetAnimalFrameCount(CGfxManager *this, int a2)
-
 unsigned int  CGfxManager::GetAnimalFrameCount(unsigned int) {
   
   return CGfxManager::GetJobFrameCount(8, a2, 2);
@@ -832,7 +752,6 @@ unsigned int  CGfxManager::GetAnimalFrameCount(unsigned int) {
 
 // address=[0x1363510]
 // Decompiled from int __thiscall CGfxManager::GetEffectFrameCount(CGfxManager *this, unsigned int a2)
-
 unsigned int  CGfxManager::GetEffectFrameCount(unsigned int) {
   
   int v3; // [esp+4h] [ebp-10h]
@@ -864,7 +783,6 @@ unsigned int  CGfxManager::GetEffectFrameCount(unsigned int) {
 
 // address=[0x13635a0]
 // Decompiled from int __thiscall CGfxManager::GetBuildingJobFrameCount(CGfxManager *this, unsigned int a2, int a3)
-
 unsigned int  CGfxManager::GetBuildingJobFrameCount(unsigned int,unsigned int) {
   
   return CGfxManager::GetJobFrameCount(a2 + 10, a3, 0);
@@ -872,13 +790,7 @@ unsigned int  CGfxManager::GetBuildingJobFrameCount(unsigned int,unsigned int) {
 
 
 // address=[0x13635d0]
-// Decompiled from struct SGfxBoundingBox *__thiscall CGfxManager::GetBoundingBox(
-        CGfxManager *this,
-        struct SGfxBoundingBox *a2,
-        unsigned int a3,
-        unsigned int a4,
-        unsigned int a5)
-
+// Decompiled from struct SGfxBoundingBox *__thiscall CGfxManager::GetBoundingBox(  CGfxManager *this,  struct SGfxBoundingBox *a2,  unsigned int a3,  unsigned int a4,  unsigned int a5)
 void  CGfxManager::GetBoundingBox(struct SGfxBoundingBox &,unsigned int,unsigned int,unsigned int) {
   
   struct SGfxBoundingBox *result; // eax
@@ -925,7 +837,6 @@ void  CGfxManager::GetBoundingBox(struct SGfxBoundingBox &,unsigned int,unsigned
 
 // address=[0x13637e0]
 // Decompiled from char __thiscall CGfxManager::EnableGfxFile(CGfxManager *this, unsigned int a2, int a3, bool a4, unsigned int a5)
-
 bool  CGfxManager::EnableGfxFile(unsigned int,int,bool,unsigned int) {
   
   char result; // al
@@ -1098,7 +1009,6 @@ LABEL_52:
 
 // address=[0x1363b20]
 // Decompiled from int __cdecl CGfxManager::Reload(int a1, bool a2, bool a3)
-
 static void * __cdecl CGfxManager::Reload(int,bool,bool) {
   
   int v4; // [esp+4h] [ebp-4h]
@@ -1151,12 +1061,7 @@ static void * __cdecl CGfxManager::Reload(int,bool,bool) {
 
 
 // address=[0x1363d10]
-// Decompiled from unsigned int __thiscall CGfxManager::GetJobFrameCount(
-        CGfxManager *this,
-        unsigned int a2,
-        unsigned int a3,
-        unsigned int a4)
-
+// Decompiled from unsigned int __thiscall CGfxManager::GetJobFrameCount(  CGfxManager *this,  unsigned int a2,  unsigned int a3,  unsigned int a4)
 unsigned int  CGfxManager::GetJobFrameCount(unsigned int,unsigned int,unsigned int) {
   
   int v6; // [esp+30h] [ebp-28h]
@@ -1263,9 +1168,7 @@ unsigned int  CGfxManager::GetJobFrameCount(unsigned int,unsigned int,unsigned i
 
 
 // address=[0x13640d0]
-// Decompiled from // public: bool __thiscall CGfxManager::IsDirectionAvailable(unsigned int,unsigned int,unsigned int)
-bool __thiscall CGfxManager::IsDirectionAvailable(_DWORD *this, unsigned int a2, int a3, int a4)
-
+// Decompiled from bool __thiscall CGfxManager::IsDirectionAvailable(_DWORD *this, unsigned int a2, int a3, int a4)
 bool  CGfxManager::IsDirectionAvailable(unsigned int,unsigned int,unsigned int) {
   
   if ( a2 == this[807] )
@@ -1287,15 +1190,7 @@ bool  CGfxManager::IsDirectionAvailable(unsigned int,unsigned int,unsigned int) 
 
 
 // address=[0x1364190]
-// Decompiled from // public: void __thiscall CGfxManager::GetRawGfxInfo(struct SGfxObjectInfo &,unsigned int,unsigned int,unsigned int,unsigned int)
-int __thiscall CGfxManager::GetRawGfxInfo(
-        CGfxManager *this,
-        _DWORD *a2,
-        unsigned int a3,
-        unsigned int a4,
-        int a5,
-        int a6)
-
+// Decompiled from int __thiscall CGfxManager::GetRawGfxInfo(  CGfxManager *this,  _DWORD *a2,  unsigned int a3,  unsigned int a4,  int a5,  int a6)
 void  CGfxManager::GetRawGfxInfo(struct SGfxObjectInfo &,unsigned int,unsigned int,unsigned int,unsigned int) {
   
   int result; // eax
@@ -1350,9 +1245,7 @@ void  CGfxManager::GetRawGfxInfo(struct SGfxObjectInfo &,unsigned int,unsigned i
 
 
 // address=[0x1364360]
-// Decompiled from // public: void __thiscall CGfxManager::GetRawGfxInfo(struct SGfxObjectInfo &,unsigned int,unsigned int)
-char __thiscall CGfxManager::GetRawGfxInfo_0(CGfxManager *this, _DWORD *a2, unsigned int a3, unsigned int a4)
-
+// Decompiled from char __thiscall CGfxManager::GetRawGfxInfo_0(CGfxManager *this, _DWORD *a2, unsigned int a3, unsigned int a4)
 void  CGfxManager::GetRawGfxInfo(struct SGfxObjectInfo &,unsigned int,unsigned int) {
   
   int v4; // eax
@@ -1384,15 +1277,7 @@ void  CGfxManager::GetRawGfxInfo(struct SGfxObjectInfo &,unsigned int,unsigned i
 
 
 // address=[0x1364430]
-// Decompiled from char __thiscall CGfxManager::GetImageInfo(
-        CGfxManager *this,
-        unsigned int a2,
-        unsigned int a3,
-        int *a4,
-        int *a5,
-        int *a6,
-        int *a7)
-
+// Decompiled from char __thiscall CGfxManager::GetImageInfo(  CGfxManager *this,  unsigned int a2,  unsigned int a3,  int *a4,  int *a5,  int *a6,  int *a7)
 bool  CGfxManager::GetImageInfo(unsigned int,unsigned int,int &,int &,int &,int &) {
   
   unsigned int v8; // [esp+18h] [ebp-20h]
@@ -1538,15 +1423,7 @@ LABEL_30:
 
 
 // address=[0x1364940]
-// Decompiled from // public: bool __thiscall CGfxManager::GetImageInfo(unsigned int,unsigned int,int &,int &,int &)
-char __thiscall CGfxManager::GetImageInfo_0(
-        CGfxManager *this,
-        unsigned int a2,
-        unsigned int a3,
-        int *a4,
-        int *a5,
-        int *a6)
-
+// Decompiled from char __thiscall CGfxManager::GetImageInfo_0(  CGfxManager *this,  unsigned int a2,  unsigned int a3,  int *a4,  int *a5,  int *a6)
 bool  CGfxManager::GetImageInfo(unsigned int,unsigned int,int &,int &,int &) {
   
   int v7; // [esp+4h] [ebp-4h] BYREF
@@ -1557,13 +1434,7 @@ bool  CGfxManager::GetImageInfo(unsigned int,unsigned int,int &,int &,int &) {
 
 
 // address=[0x1364980]
-// Decompiled from char __thiscall CGfxManager::GetJobIndices(
-        CGfxManager *this,
-        unsigned int a2,
-        unsigned int a3,
-        unsigned int *a4,
-        int *a5)
-
+// Decompiled from char __thiscall CGfxManager::GetJobIndices(  CGfxManager *this,  unsigned int a2,  unsigned int a3,  unsigned int *a4,  int *a5)
 bool  CGfxManager::GetJobIndices(unsigned int,unsigned int,int &,int &) {
   
   int i; // [esp+0h] [ebp-Ch]
@@ -1616,7 +1487,6 @@ bool  CGfxManager::GetJobIndices(unsigned int,unsigned int,int &,int &) {
 
 // address=[0x1364ba0]
 // Decompiled from bool __thiscall CGfxManager::DisableGfxFile(CGfxManager *this, int a2)
-
 void  CGfxManager::DisableGfxFile(int) {
   
   return CGfxManager::RemoveAllGFX(this, a2);
@@ -1625,7 +1495,6 @@ void  CGfxManager::DisableGfxFile(int) {
 
 // address=[0x1364bc0]
 // Decompiled from CGfxManager *__thiscall CGfxManager::EnableMCD2Textures(CGfxManager *this, bool a2)
-
 void  CGfxManager::EnableMCD2Textures(bool) {
   
   CGfxManager *result; // eax
@@ -1638,7 +1507,6 @@ void  CGfxManager::EnableMCD2Textures(bool) {
 
 // address=[0x136a1e0]
 // Decompiled from int __thiscall CGfxManager::GetNrDirection(CGfxManager *this, unsigned int a2)
-
 unsigned int  CGfxManager::GetNrDirection(unsigned int) {
   
   return dword_3687E28[a2];
@@ -1647,7 +1515,6 @@ unsigned int  CGfxManager::GetNrDirection(unsigned int) {
 
 // address=[0x136a200]
 // Decompiled from char __thiscall CGfxManager::HasSil(CGfxManager *this, unsigned int a2)
-
 bool  CGfxManager::HasSil(unsigned int) {
   
   return byte_3687DFC[a2];
@@ -1656,7 +1523,6 @@ bool  CGfxManager::HasSil(unsigned int) {
 
 // address=[0x13d8be0]
 // Decompiled from bool __thiscall CGfxManager::IsGfxFileEnabled(CGfxManager *this, int a2)
-
 bool  CGfxManager::IsGfxFileEnabled(int) {
   
   return *((_DWORD *)this + 4 * a2 + 547) != 0;
@@ -1665,7 +1531,6 @@ bool  CGfxManager::IsGfxFileEnabled(int) {
 
 // address=[0x1364be0]
 // Decompiled from char __thiscall CGfxManager::RemoveAllGFX(CGfxManager *this, int a2)
-
 bool  CGfxManager::RemoveAllGFX(int) {
   
   int v3; // [esp+30h] [ebp-20h]
@@ -1768,7 +1633,6 @@ bool  CGfxManager::RemoveAllGFX(int) {
 
 // address=[0x1364f80]
 // Decompiled from void __stdcall CGfxManager::ErrorMessageBox(char a1, int a2, int a3, int a4, int a5, int a6, int a7)
-
 void  CGfxManager::ErrorMessageBox(class String) {
   
   HWND ActiveWindow; // eax
@@ -1782,18 +1646,7 @@ void  CGfxManager::ErrorMessageBox(class String) {
 
 
 // address=[0x1364ff0]
-// Decompiled from int *__thiscall CGfxManager::LoadFile(
-        char *this,
-        char a2,
-        int a3,
-        int a4,
-        int a5,
-        int a6,
-        int a7,
-        int a8,
-        size_t *a9,
-        int a10)
-
+// Decompiled from int *__thiscall CGfxManager::LoadFile(  char *this,  char a2,  int a3,  int a4,  int a5,  int a6,  int a7,  int a8,  size_t *a9,  int a10)
 void *  CGfxManager::LoadFile(std::wstring,unsigned long *,unsigned int) {
   
   wchar_t *v10; // eax
@@ -1882,17 +1735,7 @@ void *  CGfxManager::LoadFile(std::wstring,unsigned long *,unsigned int) {
 
 
 // address=[0x1365310]
-// Decompiled from CFileEx *__thiscall CGfxManager::MapFullFile(
-        char *this,
-        char a2,
-        int a3,
-        int a4,
-        int a5,
-        int a6,
-        int a7,
-        int a8,
-        int a9)
-
+// Decompiled from CFileEx *__thiscall CGfxManager::MapFullFile(  char *this,  char a2,  int a3,  int a4,  int a5,  int a6,  int a7,  int a8,  int a9)
 class CFileEx *  CGfxManager::MapFullFile(std::wstring,unsigned int) {
   
   _DWORD *v9; // eax
@@ -2035,7 +1878,6 @@ class CFileEx *  CGfxManager::MapFullFile(std::wstring,unsigned int) {
 
 // address=[0x1365750]
 // Decompiled from char __thiscall CGfxManager::LoadGfxFile(CGfxManager *this, unsigned int a2, bool a3, unsigned int a4)
-
 bool  CGfxManager::LoadGfxFile(unsigned int,bool,unsigned int) {
   
   char v4; // al
@@ -2151,7 +1993,6 @@ bool  CGfxManager::LoadGfxFile(unsigned int,bool,unsigned int) {
 
 // address=[0x1365a70]
 // Decompiled from char __thiscall CGfxManager::LoadGfxColorFile(CGfxManager *this, int a2, char a3, int a4)
-
 bool  CGfxManager::LoadGfxColorFile(unsigned int,bool,unsigned int) {
   
   char v4; // al
@@ -2242,7 +2083,6 @@ bool  CGfxManager::LoadGfxColorFile(unsigned int,bool,unsigned int) {
 
 // address=[0x1365ce0]
 // Decompiled from char __thiscall CGfxManager::LoadGilFile(CGfxManager *this, unsigned int a2, int a3)
-
 bool  CGfxManager::LoadGilFile(unsigned int,unsigned int) {
   
   char v3; // al
@@ -2319,7 +2159,6 @@ bool  CGfxManager::LoadGilFile(unsigned int,unsigned int) {
 
 // address=[0x1365f30]
 // Decompiled from char __thiscall CGfxManager::LoadDilFile(CGfxManager *this, unsigned int a2, int a3)
-
 bool  CGfxManager::LoadDilFile(unsigned int,unsigned int) {
   
   char v3; // al
@@ -2396,7 +2235,6 @@ bool  CGfxManager::LoadDilFile(unsigned int,unsigned int) {
 
 // address=[0x1366180]
 // Decompiled from char __thiscall CGfxManager::LoadJilFile(CGfxManager *this, unsigned int a2, int a3)
-
 bool  CGfxManager::LoadJilFile(unsigned int,unsigned int) {
   
   char v3; // al
@@ -2473,7 +2311,6 @@ bool  CGfxManager::LoadJilFile(unsigned int,unsigned int) {
 
 // address=[0x13663d0]
 // Decompiled from char __thiscall CGfxManager::LoadSilFile(CGfxManager *this, unsigned int a2, int a3)
-
 bool  CGfxManager::LoadSilFile(unsigned int,unsigned int) {
   
   char v3; // al
@@ -2528,7 +2365,6 @@ bool  CGfxManager::LoadSilFile(unsigned int,unsigned int) {
 
 // address=[0x1366520]
 // Decompiled from char __thiscall CGfxManager::LoadPilFile(CGfxManager *this, int a2, int a3, bool a4)
-
 bool  CGfxManager::LoadPilFile(unsigned int,unsigned int,bool) {
   
   char v4; // al
@@ -2609,7 +2445,6 @@ bool  CGfxManager::LoadPilFile(unsigned int,unsigned int,bool) {
 
 // address=[0x1366790]
 // Decompiled from char __thiscall CGfxManager::LoadPalFile(CGfxManager *this, int a2, int a3, bool a4)
-
 bool  CGfxManager::LoadPalFile(unsigned int,unsigned int,bool) {
   
   char v4; // al
@@ -2717,7 +2552,6 @@ bool  CGfxManager::LoadPalFile(unsigned int,unsigned int,bool) {
 
 // address=[0x1366b90]
 // Decompiled from char __thiscall CGfxManager::MoveAccessoriesToGfxEngine(CGfxManager *this)
-
 bool  CGfxManager::MoveAccessoriesToGfxEngine(void) {
   
   unsigned int i; // [esp+Ch] [ebp-4h]
@@ -2741,7 +2575,6 @@ bool  CGfxManager::MoveAccessoriesToGfxEngine(void) {
 
 // address=[0x1366c80]
 // Decompiled from char __thiscall CGfxManager::MoveWavesToGfxEngine(CGfxManager *this)
-
 bool  CGfxManager::MoveWavesToGfxEngine(void) {
   
   unsigned int ObjectFrameCount; // eax
@@ -2977,7 +2810,6 @@ bool  CGfxManager::MoveWavesToGfxEngine(void) {
 
 // address=[0x1367b70]
 // Decompiled from __int16 *__thiscall CGfxManager::Debug_Check_LayerBlock(CGfxManager *this, unsigned int a2, struct SGfxObjectInfo *a3)
-
 void  CGfxManager::Debug_Check_LayerBlock(unsigned int,struct SGfxObjectInfo &) {
   
   __int16 *result; // eax
@@ -3056,11 +2888,7 @@ void  CGfxManager::Debug_Check_LayerBlock(unsigned int,struct SGfxObjectInfo &) 
 
 
 // address=[0x1367e50]
-// Decompiled from struct SGfxPatchObject *__thiscall CGfxManager::Debug_Check_PatchLayerBlock(
-        CGfxManager *this,
-        unsigned int a2,
-        struct SGfxPatchObject *a3)
-
+// Decompiled from struct SGfxPatchObject *__thiscall CGfxManager::Debug_Check_PatchLayerBlock(  CGfxManager *this,  unsigned int a2,  struct SGfxPatchObject *a3)
 void  CGfxManager::Debug_Check_PatchLayerBlock(unsigned int,struct SGfxPatchObject &) {
   
   struct SGfxPatchObject *result; // eax

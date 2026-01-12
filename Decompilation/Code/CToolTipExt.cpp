@@ -4,7 +4,6 @@
 
 // address=[0x2f9fe20]
 // Decompiled from char __thiscall CToolTipExt::ResetActiveText(CToolTipExt *this)
-
 void  CToolTipExt::ResetActiveText(void) {
   
   *((_BYTE *)this + 8) = 0;
@@ -14,7 +13,6 @@ void  CToolTipExt::ResetActiveText(void) {
 
 // address=[0x2fa35e0]
 // Decompiled from CToolTipExt *__thiscall CToolTipExt::CToolTipExt(CToolTipExt *this)
-
  CToolTipExt::CToolTipExt(void) {
   
   CToolTip::CToolTip(this);
@@ -30,7 +28,6 @@ void  CToolTipExt::ResetActiveText(void) {
 
 // address=[0x2fa3640]
 // Decompiled from char __thiscall CToolTipExt::OpenTooltip(CToolTipExt *this)
-
 bool  CToolTipExt::OpenTooltip(void) {
   
   CToolTip *v2; // ecx
@@ -173,7 +170,6 @@ bool  CToolTipExt::OpenTooltip(void) {
 
 // address=[0x2fa3a70]
 // Decompiled from char __thiscall CToolTipExt::UpdateText(CToolTipExt *this)
-
 bool  CToolTipExt::UpdateText(void) {
   
   int v2; // [esp+0h] [ebp-3Ch] BYREF
@@ -261,7 +257,6 @@ bool  CToolTipExt::UpdateText(void) {
 
 // address=[0x2fa4000]
 // Decompiled from bool __thiscall CToolTipExt::~CToolTipExt(CToolTipExt *this)
-
  CToolTipExt::~CToolTipExt(void) {
   
   return CToolTip::~CToolTip(this);

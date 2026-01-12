@@ -4,7 +4,6 @@
 
 // address=[0x144f850]
 // Decompiled from CEndStatistic *__thiscall CEndStatistic::CEndStatistic(CEndStatistic *this)
-
  CEndStatistic::CEndStatistic(void) {
   
   CStatistic::CStatistic(this);
@@ -18,7 +17,6 @@
 
 // address=[0x144f8e0]
 // Decompiled from CEndStatistic *__thiscall CEndStatistic::Clear(CEndStatistic *this)
-
 void  CEndStatistic::Clear(void) {
   
   CEndStatistic *result; // eax
@@ -44,7 +42,6 @@ void  CEndStatistic::Clear(void) {
 
 // address=[0x144f990]
 // Decompiled from int __thiscall CEndStatistic::Init(CEndStatistic *this)
-
 void  CEndStatistic::Init(void) {
   
   int result; // eax
@@ -56,71 +53,7 @@ void  CEndStatistic::Init(void) {
 
 
 // address=[0x144f9b0]
-// Decompiled from int __userpurge CEndStatistic::Update@<eax>(
-        int a1@<ecx>,
-        char a2,
-        int a3,
-        int a4,
-        int a5,
-        int a6,
-        int a7,
-        int a8,
-        int a9,
-        int a10,
-        int a11,
-        int a12,
-        int a13,
-        int a14,
-        int a15,
-        int a16,
-        int a17,
-        int a18,
-        int a19,
-        int a20,
-        int a21,
-        int a22,
-        int a23,
-        int a24,
-        int a25,
-        int a26,
-        int a27,
-        int a28,
-        int a29,
-        int a30,
-        int a31,
-        int a32,
-        int a33,
-        int a34,
-        int a35,
-        int a36,
-        int a37,
-        int a38,
-        int a39,
-        int a40,
-        int a41,
-        int a42,
-        int a43,
-        int a44,
-        int a45,
-        int a46,
-        int a47,
-        int a48,
-        int a49,
-        int a50,
-        int a51,
-        int a52,
-        int a53,
-        int a54,
-        int a55,
-        int a56,
-        int a57,
-        int a58,
-        int a59,
-        int a60,
-        int a61,
-        int a62,
-        int a63)
-
+// Decompiled from int __userpurge CEndStatistic::Update@<eax>(  int a1@<ecx>,  char a2,  int a3,  int a4,  int a5,  int a6,  int a7,  int a8,  int a9,  int a10,  int a11,  int a12,  int a13,  int a14,  int a15,  int a16,  int a17,  int a18,  int a19,  int a20,  int a21,  int a22,  int a23,  int a24,  int a25,  int a26,  int a27,  int a28,  int a29,  int a30,  int a31,  int a32,  int a33,  int a34,  int a35,  int a36,  int a37,  int a38,  int a39,  int a40,  int a41,  int a42,  int a43,  int a44,  int a45,  int a46,  int a47,  int a48,  int a49,  int a50,  int a51,  int a52,  int a53,  int a54,  int a55,  int a56,  int a57,  int a58,  int a59,  int a60,  int a61,  int a62,  int a63)
 void  CEndStatistic::Update(class CStatistic) {
   
   int result; // eax
@@ -153,7 +86,6 @@ void  CEndStatistic::Update(class CStatistic) {
 
 // address=[0x144fb00]
 // Decompiled from _DWORD *__thiscall CEndStatistic::GetMapName(CEndStatistic *this)
-
 wchar_t const *  CEndStatistic::GetMapName(void) {
   
   return std::wstring::c_str((CEndStatistic *)((char *)this + 39544));
@@ -162,7 +94,6 @@ wchar_t const *  CEndStatistic::GetMapName(void) {
 
 // address=[0x144fb20]
 // Decompiled from int __thiscall CEndStatistic::GetPlayerName(void *this, int a2, int a3)
-
 std::wstring  CEndStatistic::GetPlayerName(int) {
   
   if ( (a3 <= 0 || a3 >= 9)
@@ -177,7 +108,6 @@ std::wstring  CEndStatistic::GetPlayerName(int) {
 
 // address=[0x144fb90]
 // Decompiled from int __thiscall CEndStatistic::GetNumberOfPlayers(CEndStatistic *this)
-
 int  CEndStatistic::GetNumberOfPlayers(void) {
   
   return *((_DWORD *)this + 9956);
@@ -186,7 +116,6 @@ int  CEndStatistic::GetNumberOfPlayers(void) {
 
 // address=[0x144fbb0]
 // Decompiled from int __thiscall CEndStatistic::GetPlayerRace(CEndStatistic *this, int a2)
-
 int  CEndStatistic::GetPlayerRace(int) {
   
   if ( (a2 <= 0 || a2 >= 9)
@@ -200,7 +129,6 @@ int  CEndStatistic::GetPlayerRace(int) {
 
 // address=[0x144fc00]
 // Decompiled from int __thiscall CEndStatistic::GetPlayerColor(CEndStatistic *this, int a2)
-
 int  CEndStatistic::GetPlayerColor(int) {
   
   if ( (a2 <= 0 || a2 >= 9)
@@ -214,7 +142,6 @@ int  CEndStatistic::GetPlayerColor(int) {
 
 // address=[0x144fc50]
 // Decompiled from int __thiscall CEndStatistic::GetPlayerAlliance(CEndStatistic *this, int a2)
-
 int  CEndStatistic::GetPlayerAlliance(int) {
   
   if ( (a2 <= 0 || a2 >= 9)
@@ -228,7 +155,6 @@ int  CEndStatistic::GetPlayerAlliance(int) {
 
 // address=[0x144fca0]
 // Decompiled from char __thiscall CEndStatistic::IsGameWone(CEndStatistic *this)
-
 bool  CEndStatistic::IsGameWone(void) {
   
   return *((_BYTE *)this + 39536);
@@ -237,7 +163,6 @@ bool  CEndStatistic::IsGameWone(void) {
 
 // address=[0x144fcc0]
 // Decompiled from int __thiscall CEndStatistic::GetWonAlliance(CEndStatistic *this)
-
 int  CEndStatistic::GetWonAlliance(void) {
   
   return *((_DWORD *)this + 9885);
@@ -246,7 +171,6 @@ int  CEndStatistic::GetWonAlliance(void) {
 
 // address=[0x144fce0]
 // Decompiled from int __thiscall CEndStatistic::GetTickCounter(CEndStatistic *this)
-
 unsigned int  CEndStatistic::GetTickCounter(void) {
   
   return *((_DWORD *)this + 9957);
@@ -255,7 +179,6 @@ unsigned int  CEndStatistic::GetTickCounter(void) {
 
 // address=[0x144fe20]
 // Decompiled from void __thiscall CEndStatistic::~CEndStatistic(CEndStatistic *this)
-
  CEndStatistic::~CEndStatistic(void) {
   
   `eh vector destructor iterator'((char *)this + 39572, 0x1Cu, 9u, std::wstring::~wstring);

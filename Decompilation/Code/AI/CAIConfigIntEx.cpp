@@ -4,7 +4,6 @@
 
 // address=[0x131e810]
 // Decompiled from CAIConfigIntEx *__thiscall CAIConfigIntEx::CAIConfigIntEx(CAIConfigIntEx *this, const char *a2, int a3, int a4, int a5)
-
  CAIConfigIntEx::CAIConfigIntEx(char const *,int,int,int) {
   
   int v6; // [esp+4h] [ebp-Ch]
@@ -34,7 +33,6 @@
 
 // address=[0x131ea80]
 // Decompiled from int __thiscall CAIConfigIntEx::~CAIConfigIntEx(CAIConfigIntEx *this)
-
  CAIConfigIntEx::~CAIConfigIntEx(void) {
   
   return TStaticConfigIntArray<3>::~TStaticConfigIntArray<3>(this, this);
@@ -42,10 +40,7 @@
 
 
 // address=[0x131ecd0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CAIConfigIntEx::Name(CAIConfigIntEx *this)
-
+// Decompiled from int __thiscall CAIConfigIntEx::Name(CAIConfigIntEx *this)
 char const *  CAIConfigIntEx::Name(void)const {
   
   return *((_DWORD *)this + 5);

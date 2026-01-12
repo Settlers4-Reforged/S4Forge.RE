@@ -4,7 +4,6 @@
 
 // address=[0x146af50]
 // Decompiled from void __cdecl CMagic::InitPlayerMagicData(int a1)
-
 static void __cdecl CMagic::InitPlayerMagicData(int) {
   
   type_info *v1; // eax
@@ -38,7 +37,6 @@ static void __cdecl CMagic::InitPlayerMagicData(int) {
 
 // address=[0x146b040]
 // Decompiled from int CMagic::InitMagicData()
-
 static void __cdecl CMagic::InitMagicData(void) {
   
   int result; // eax
@@ -58,7 +56,6 @@ static void __cdecl CMagic::InitMagicData(void) {
 
 // address=[0x146b080]
 // Decompiled from int __cdecl CMagic::CastSpell(int a1, int a2, unsigned int a3, unsigned int a4, unsigned int a5, int a6)
-
 static int __cdecl CMagic::CastSpell(int,int,int,int,int,int) {
   
   type_info *v6; // eax
@@ -202,7 +199,6 @@ LABEL_32:
 
 // address=[0x146b580]
 // Decompiled from int __cdecl CMagic::CheckManaForCastSpell(int a1, int a2, int a3)
-
 static int __cdecl CMagic::CheckManaForCastSpell(int,int,int) {
   
   type_info *v3; // eax
@@ -233,9 +229,7 @@ static int __cdecl CMagic::CheckManaForCastSpell(int,int,int) {
 
 
 // address=[0x146b650]
-// Decompiled from // public: static int __cdecl CMagic::GetSpellRange(int,int)
-int __cdecl CMagic::GetSpellRange(int a1, int a2)
-
+// Decompiled from int __cdecl CMagic::GetSpellRange(int a1, int a2)
 static int __cdecl CMagic::GetSpellRange(int,int) {
   
   int v3; // [esp+4h] [ebp-4h]
@@ -257,7 +251,6 @@ static int __cdecl CMagic::GetSpellRange(int,int) {
 
 // address=[0x146b6f0]
 // Decompiled from int __cdecl CMagic::GetCurrentManaAmount(int a1)
-
 static int __cdecl CMagic::GetCurrentManaAmount(int) {
   
   type_info *v1; // eax
@@ -276,7 +269,6 @@ static int __cdecl CMagic::GetCurrentManaAmount(int) {
 
 // address=[0x146b750]
 // Decompiled from int __cdecl CMagic::GetCurrentSpellCategoryCost(int a1, int a2)
-
 static int __cdecl CMagic::GetCurrentSpellCategoryCost(int,int) {
   
   type_info *v2; // eax
@@ -313,7 +305,6 @@ static int __cdecl CMagic::GetCurrentSpellCategoryCost(int,int) {
 
 // address=[0x146b800]
 // Decompiled from int __cdecl CMagic::GetCurrentSpellCategoryCounter(int a1, int a2)
-
 static int __cdecl CMagic::GetCurrentSpellCategoryCounter(int,int) {
   
   type_info *v2; // eax
@@ -352,7 +343,6 @@ static int __cdecl CMagic::GetCurrentSpellCategoryCounter(int,int) {
 
 // address=[0x146b8a0]
 // Decompiled from int __cdecl CMagic::CalculatePossibleNumberOfCastSpell(int a1, int a2, int a3)
-
 static int __cdecl CMagic::CalculatePossibleNumberOfCastSpell(int,int,int) {
   
   type_info *v4; // eax
@@ -429,9 +419,7 @@ static int __cdecl CMagic::CalculatePossibleNumberOfCastSpell(int,int,int) {
 
 
 // address=[0x146bb70]
-// Decompiled from // public: static void __cdecl CMagic::GetConvertGoodInfo(int,int &,int &)
-int __cdecl CMagic::GetConvertGoodInfo(int a1, int a2, int a3)
-
+// Decompiled from int __cdecl CMagic::GetConvertGoodInfo(int a1, int a2, int a3)
 static void __cdecl CMagic::GetConvertGoodInfo(int,int &,int &) {
   
   int v4; // [esp+0h] [ebp-4h]
@@ -452,7 +440,6 @@ static void __cdecl CMagic::GetConvertGoodInfo(int,int &,int &) {
 
 // address=[0x146bbe0]
 // Decompiled from void __cdecl CMagic::IncreaseManaByDonation(int a1)
-
 static void __cdecl CMagic::IncreaseManaByDonation(int) {
   
   int v1; // eax
@@ -478,7 +465,6 @@ static void __cdecl CMagic::IncreaseManaByDonation(int) {
 
 // address=[0x146bc80]
 // Decompiled from void __cdecl CMagic::IncreaseManaByBigTemple(int a1)
-
 static void __cdecl CMagic::IncreaseManaByBigTemple(int) {
   
   int v1; // eax
@@ -504,7 +490,6 @@ static void __cdecl CMagic::IncreaseManaByBigTemple(int) {
 
 // address=[0x146bd20]
 // Decompiled from int __cdecl CMagic::TotalAmountOfCollectedMana(int a1)
-
 static int __cdecl CMagic::TotalAmountOfCollectedMana(int) {
   
   type_info *v1; // eax
@@ -528,7 +513,6 @@ static int __cdecl CMagic::TotalAmountOfCollectedMana(int) {
 
 // address=[0x146bd90]
 // Decompiled from void __cdecl CMagic::DecreaseManaAfterWarmachineShot(int a1)
-
 static void __cdecl CMagic::DecreaseManaAfterWarmachineShot(int) {
   
   int v1; // eax
@@ -542,7 +526,6 @@ static void __cdecl CMagic::DecreaseManaAfterWarmachineShot(int) {
 
 // address=[0x146bdd0]
 // Decompiled from void __cdecl CMagic::IncreaseMana(int a1, int a2)
-
 static void __cdecl CMagic::IncreaseMana(int,int) {
   
   type_info *v2; // eax
@@ -567,7 +550,6 @@ static void __cdecl CMagic::IncreaseMana(int,int) {
 
 // address=[0x146be70]
 // Decompiled from void __cdecl CMagic::DecreaseMana(int a1, int a2)
-
 static void __cdecl CMagic::DecreaseMana(int,int) {
   
   type_info *v2; // eax
@@ -597,7 +579,6 @@ static void __cdecl CMagic::DecreaseMana(int,int) {
 
 // address=[0x146bf30]
 // Decompiled from char __cdecl CMagic::CheckAndDecreaseMana(int a1, int a2)
-
 static bool __cdecl CMagic::CheckAndDecreaseMana(int,int) {
   
   type_info *v2; // eax
@@ -632,7 +613,6 @@ static bool __cdecl CMagic::CheckAndDecreaseMana(int,int) {
 
 // address=[0x146bff0]
 // Decompiled from void __cdecl CMagic::DbgPrint(int a1)
-
 static void __cdecl CMagic::DbgPrint(int) {
   
   type_info *v1; // eax
@@ -731,7 +711,6 @@ static void __cdecl CMagic::DbgPrint(int) {
 
 // address=[0x146c220]
 // Decompiled from int __cdecl CMagic::MagicGetSpellRange(int a1, int a2)
-
 static int __cdecl CMagic::MagicGetSpellRange(int,int) {
   
   int v3; // eax
@@ -755,7 +734,6 @@ static int __cdecl CMagic::MagicGetSpellRange(int,int) {
 
 // address=[0x146c320]
 // Decompiled from void __cdecl CMagic::ExecuteCastSpell(unsigned int a1, unsigned int a2, unsigned int a3)
-
 static void __cdecl CMagic::ExecuteCastSpell(unsigned int,unsigned int,unsigned int) {
   
   _DWORD *v3; // eax

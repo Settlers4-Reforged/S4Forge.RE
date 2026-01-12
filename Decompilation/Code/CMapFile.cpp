@@ -4,7 +4,6 @@
 
 // address=[0x13da7f0]
 // Decompiled from struct CMapFile *__thiscall S4::CMapFile::CMapFile(CHandleMap *this, bool a2)
-
  S4::CMapFile::CMapFile(bool) {
   
   *(_DWORD *)this = &S4::CMapFile::_vftable_;
@@ -24,7 +23,6 @@
 
 // address=[0x13da8d0]
 // Decompiled from void __thiscall S4::CMapFile::~CMapFile(CHandleMap *this)
-
  S4::CMapFile::~CMapFile(void) {
   
   *(_DWORD *)this = &S4::CMapFile::_vftable_;
@@ -39,7 +37,6 @@
 
 // address=[0x13da960]
 // Decompiled from S4::CMapFile *__thiscall S4::CMapFile::Open(S4::CMapFile *this, int a2, int a3, char a4)
-
 void  S4::CMapFile::Open(std::wstring const &,int,bool) {
   
   S4::CMapFile *result; // eax
@@ -100,7 +97,6 @@ void  S4::CMapFile::Open(std::wstring const &,int,bool) {
 
 // address=[0x13dab20]
 // Decompiled from int __thiscall S4::CMapFile::Close(S4::CMapFile *this)
-
 void  S4::CMapFile::Close(void) {
   
   _BYTE v2[12]; // [esp+4h] [ebp-54h] BYREF
@@ -163,7 +159,6 @@ void  S4::CMapFile::Close(void) {
 
 // address=[0x13dace0]
 // Decompiled from S4::CMapFile *__thiscall S4::CMapFile::Virtualize(S4::CMapFile *this)
-
 void  S4::CMapFile::Virtualize(void) {
   
   S4::CMapFile *result; // eax
@@ -177,9 +172,7 @@ void  S4::CMapFile::Virtualize(void) {
 
 
 // address=[0x13dad20]
-// Decompiled from // MFC 3.1-14.0 32bit
-int __thiscall S4::CMapFile::GetChecksum(S4::CMapFile *this)
-
+// Decompiled from int __thiscall S4::CMapFile::GetChecksum(S4::CMapFile *this)
 unsigned int  S4::CMapFile::GetChecksum(void)const {
   
   return *((_DWORD *)this + 31);
@@ -188,7 +181,6 @@ unsigned int  S4::CMapFile::GetChecksum(void)const {
 
 // address=[0x13dad40]
 // Decompiled from void *__thiscall S4::CMapFile::LoadChunk(S4::CMapFile *this, unsigned __int16 a2, unsigned __int16 a3)
-
 void const *  S4::CMapFile::LoadChunk(unsigned int,unsigned int) {
   
   int v4; // [esp+4h] [ebp-4h] BYREF
@@ -199,13 +191,7 @@ void const *  S4::CMapFile::LoadChunk(unsigned int,unsigned int) {
 
 
 // address=[0x13dad70]
-// Decompiled from void *__thiscall S4::CMapFile::LoadChunk(
-        S4::CMapFile *this,
-        unsigned __int16 a2,
-        unsigned __int16 a3,
-        int *a4,
-        size_t *a5)
-
+// Decompiled from void *__thiscall S4::CMapFile::LoadChunk(  S4::CMapFile *this,  unsigned __int16 a2,  unsigned __int16 a3,  int *a4,  size_t *a5)
 void const *  S4::CMapFile::LoadChunk(unsigned short,unsigned short,int &,int *) {
   
   void **v6; // eax
@@ -448,7 +434,6 @@ void const *  S4::CMapFile::LoadChunk(unsigned short,unsigned short,int &,int *)
 
 // address=[0x13db3e0]
 // Decompiled from _DWORD *__thiscall S4::CMapFile::CloseChunk(S4::CMapFile *this, unsigned __int16 a2, unsigned __int16 a3)
-
 void  S4::CMapFile::CloseChunk(unsigned short,unsigned short) {
   
   _DWORD *result; // eax
@@ -541,7 +526,6 @@ void  S4::CMapFile::CloseChunk(unsigned short,unsigned short) {
 
 // address=[0x13db650]
 // Decompiled from void **__thiscall S4::CMapFile::UploadBuffer(void **this, unsigned int a2, int a3, void *Src, size_t Size, void *a6)
-
 void  S4::CMapFile::UploadBuffer(unsigned int,unsigned int,void const *,unsigned int,int) {
   
   void **result; // eax
@@ -618,14 +602,7 @@ void  S4::CMapFile::UploadBuffer(unsigned int,unsigned int,void const *,unsigned
 
 
 // address=[0x13db820]
-// Decompiled from int __thiscall S4::CMapFile::SaveChunk(
-        S4::CMapFile *this,
-        __int16 a2,
-        __int16 a3,
-        size_t Size,
-        void *Src,
-        unsigned __int8 a6)
-
+// Decompiled from int __thiscall S4::CMapFile::SaveChunk(  S4::CMapFile *this,  __int16 a2,  __int16 a3,  size_t Size,  void *Src,  unsigned __int8 a6)
 void  S4::CMapFile::SaveChunk(unsigned short,unsigned short,unsigned int,void const *,bool) {
   
   unsigned int v6; // eax
@@ -675,13 +652,7 @@ void  S4::CMapFile::SaveChunk(unsigned short,unsigned short,unsigned int,void co
 
 
 // address=[0x13db990]
-// Decompiled from char __thiscall S4::CMapFile::LoadChunkObject(
-        S4::CMapFile *this,
-        unsigned __int16 a2,
-        unsigned __int16 a3,
-        void (__thiscall ***a4)(_DWORD, _BYTE *),
-        int a5)
-
+// Decompiled from char __thiscall S4::CMapFile::LoadChunkObject(  S4::CMapFile *this,  unsigned __int16 a2,  unsigned __int16 a3,  void (__thiscall ***a4)(_DWORD, _BYTE *),  int a5)
 bool  S4::CMapFile::LoadChunkObject(unsigned short,unsigned short,class IS4ChunkObject &,enum T_S4_MAP_CHUNK_STATUS) {
   
   _BYTE v6[28]; // [esp+4h] [ebp-48h] BYREF
@@ -725,13 +696,7 @@ bool  S4::CMapFile::LoadChunkObject(unsigned short,unsigned short,class IS4Chunk
 
 
 // address=[0x13dbaa0]
-// Decompiled from void __thiscall S4::CMapFile::SaveChunkObject(
-        S4::CMapFile *this,
-        __int16 a2,
-        __int16 a3,
-        struct IS4ChunkObject *a4,
-        char a5)
-
+// Decompiled from void __thiscall S4::CMapFile::SaveChunkObject(  S4::CMapFile *this,  __int16 a2,  __int16 a3,  struct IS4ChunkObject *a4,  char a5)
 void  S4::CMapFile::SaveChunkObject(unsigned short,unsigned short,class IS4ChunkObject &,bool) {
   
   size_t v5; // eax
@@ -757,7 +722,6 @@ void  S4::CMapFile::SaveChunkObject(unsigned short,unsigned short,class IS4Chunk
 
 // address=[0x13dbb60]
 // Decompiled from int __thiscall S4::CMapFile::SaveDbgInfoChunk(S4::CMapFile *this, const char *a2)
-
 void  S4::CMapFile::SaveDbgInfoChunk(char const *) {
   
   int i; // [esp+8h] [ebp-28h]
@@ -776,7 +740,6 @@ void  S4::CMapFile::SaveDbgInfoChunk(char const *) {
 
 // address=[0x13dbc20]
 // Decompiled from void __thiscall S4::CMapFile::Cryption(S4::CMapFile *this, unsigned __int8 *a2, unsigned int a3)
-
 void  S4::CMapFile::Cryption(void *,unsigned int) {
   
   unsigned int i; // [esp+14h] [ebp-7Ch]
@@ -800,7 +763,6 @@ void  S4::CMapFile::Cryption(void *,unsigned int) {
 
 // address=[0x13dbd00]
 // Decompiled from unsigned int __thiscall S4::CMapFile::Crc(S4::CMapFile *this, void *a2, unsigned int a3)
-
 unsigned int  S4::CMapFile::Crc(void *,unsigned int) {
   
   unsigned int NormalCRC; // [esp+8h] [ebp-8h]
@@ -815,7 +777,6 @@ unsigned int  S4::CMapFile::Crc(void *,unsigned int) {
 
 // address=[0x13dbd60]
 // Decompiled from unsigned int __thiscall S4::CMapFile::FileCRC(S4::CMapFile *this, int a2, int a3)
-
 unsigned int  S4::CMapFile::FileCRC(int,int) {
   
   unsigned int NormalCRC; // [esp+0h] [ebp-10h]

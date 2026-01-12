@@ -3,12 +3,7 @@
 // Definitions for class CBBSStackTrace
 
 // address=[0x2f30fa0]
-// Decompiled from BBSupportLib::CBBSStackTrace *__thiscall BBSupportLib::CBBSStackTrace::CBBSStackTrace(
-        BBSupportLib::CBBSStackTrace *this,
-        void *a2,
-        void *a3,
-        const struct _CONTEXT *a4)
-
+// Decompiled from BBSupportLib::CBBSStackTrace *__thiscall BBSupportLib::CBBSStackTrace::CBBSStackTrace(  BBSupportLib::CBBSStackTrace *this,  void *a2,  void *a3,  const struct _CONTEXT *a4)
  BBSupportLib::CBBSStackTrace::CBBSStackTrace(void *,void *,struct _CONTEXT const &) {
   
   *(_DWORD *)this = a2;
@@ -21,7 +16,6 @@
 
 // address=[0x2f30ff0]
 // Decompiled from char *__thiscall BBSupportLib::CBBSStackTrace::GetNextTraceStr(BBSupportLib::CBBSStackTrace *this)
-
 char const *  BBSupportLib::CBBSStackTrace::GetNextTraceStr(void) {
   
   if ( ATL::CComCriticalSection::Init(this) <= 0 )

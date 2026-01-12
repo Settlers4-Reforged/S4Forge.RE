@@ -3,9 +3,7 @@
 // Definitions for class CQuickScan
 
 // address=[0x1305850]
-// Decompiled from // public: __thiscall CQuickScan::CQuickScan(int,int,unsigned int,unsigned int)
-CQuickScan *__thiscall CQuickScan::CQuickScan(CQuickScan *this, int a2, int a3, unsigned int a4, unsigned int a5)
-
+// Decompiled from CQuickScan *__thiscall CQuickScan::CQuickScan(CQuickScan *this, int a2, int a3, unsigned int a4, unsigned int a5)
  CQuickScan::CQuickScan(int,int,unsigned int,unsigned int) {
   
   int v5; // eax
@@ -28,7 +26,6 @@ CQuickScan *__thiscall CQuickScan::CQuickScan(CQuickScan *this, int a2, int a3, 
 
 // address=[0x1305900]
 // Decompiled from _DWORD *__thiscall sub_1705900(_DWORD *this, int a2, unsigned int a3, unsigned int a4)
-
  CQuickScan::CQuickScan(int,unsigned int,unsigned int) {
   
   int v4; // eax
@@ -51,7 +48,6 @@ CQuickScan *__thiscall CQuickScan::CQuickScan(CQuickScan *this, int a2, int a3, 
 
 // address=[0x13059c0]
 // Decompiled from char __thiscall CQuickScan::NextPosition(CQuickScan *this, int *a2, int *a3)
-
 bool  CQuickScan::NextPosition(int &,int &) {
   
   int v4; // [esp+0h] [ebp-10h]
@@ -81,7 +77,6 @@ bool  CQuickScan::NextPosition(int &,int &) {
 
 // address=[0x1306470]
 // Decompiled from int __thiscall CQuickScan::CenterSectorId(CQuickScan *this)
-
 int  CQuickScan::CenterSectorId(void)const {
   
   return IAIEnvironment::WorldSectorId(*(_DWORD *)this, *((_DWORD *)this + 1));

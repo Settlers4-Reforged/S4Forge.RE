@@ -4,7 +4,6 @@
 
 // address=[0x15b1d30]
 // Decompiled from int __thiscall CClientList::GetPlayerIP(CClientList *this, int a2)
-
 long  CClientList::GetPlayerIP(int) {
   
   CClient *v2; // eax
@@ -16,7 +15,6 @@ long  CClientList::GetPlayerIP(int) {
 
 // address=[0x15b1d60]
 // Decompiled from int __thiscall CClientList::GetPlayerPeerId(CClientList *this, int a2)
-
 unsigned int  CClientList::GetPlayerPeerId(int) {
   
   pairNode *v2; // eax
@@ -28,7 +26,6 @@ unsigned int  CClientList::GetPlayerPeerId(int) {
 
 // address=[0x15b1d90]
 // Decompiled from char __thiscall CClientList::ContainsPeerId(CClientList *this, int a2)
-
 bool  CClientList::ContainsPeerId(unsigned int) {
   
   unsigned int v2; // eax
@@ -64,7 +61,6 @@ bool  CClientList::ContainsPeerId(unsigned int) {
 
 // address=[0x15b1e50]
 // Decompiled from char __thiscall CClientList::Add(CClientList *this, int a2, int a3, unsigned int a4)
-
 bool  CClientList::Add(unsigned int,int,int) {
   
   char v5; // [esp-10h] [ebp-78h] BYREF
@@ -106,9 +102,7 @@ bool  CClientList::Add(unsigned int,int,int) {
 
 
 // address=[0x15b1f30]
-// Decompiled from // public: unsigned int __thiscall CClientList::GetPlayerPing(unsigned int)
-int __thiscall CClientList::GetPlayerPing(CDaoIndexFieldInfo *this, unsigned int a2)
-
+// Decompiled from int __thiscall CClientList::GetPlayerPing(CDaoIndexFieldInfo *this, unsigned int a2)
 unsigned int  CClientList::GetPlayerPing(unsigned int) {
   
   int v2; // eax
@@ -124,7 +118,6 @@ unsigned int  CClientList::GetPlayerPing(unsigned int) {
 
 // address=[0x15b1f90]
 // Decompiled from CClientList *__thiscall CClientList::CClientList(CClientList *this)
-
  CClientList::CClientList(void) {
   
   CClientList *v2; // [esp+0h] [ebp-4h]
@@ -137,7 +130,6 @@ unsigned int  CClientList::GetPlayerPing(unsigned int) {
 
 // address=[0x15b1fc0]
 // Decompiled from void __thiscall CClientList::~CClientList(boost::exception *this)
-
  CClientList::~CClientList(void) {
   
   *(_DWORD *)this = &CClientList::_vftable_;
@@ -147,7 +139,6 @@ unsigned int  CClientList::GetPlayerPing(unsigned int) {
 
 // address=[0x15b1fe0]
 // Decompiled from int __thiscall CClientList::CreateNewPlayerID(CClientList *this)
-
 int  CClientList::CreateNewPlayerID(void) {
   
   return std::vector<CClient>::size((char *)this + 4);
@@ -156,7 +147,6 @@ int  CClientList::CreateNewPlayerID(void) {
 
 // address=[0x15b2000]
 // Decompiled from char __thiscall CClientList::RemoveClientAt(char *this, unsigned int a2)
-
 bool  CClientList::RemoveClientAt(int) {
   
   _DWORD v3[4]; // [esp-Ch] [ebp-48h] BYREF
@@ -188,7 +178,6 @@ bool  CClientList::RemoveClientAt(int) {
 
 // address=[0x15b20c0]
 // Decompiled from char __thiscall CClientList::RemoveClientPeerId(CClientList *this, int a2)
-
 bool  CClientList::RemoveClientPeerId(unsigned int) {
   
   _DWORD *v2; // eax
@@ -241,7 +230,6 @@ bool  CClientList::RemoveClientPeerId(unsigned int) {
 
 // address=[0x15b21d0]
 // Decompiled from char __thiscall CClientList::AllClientsReady(CClientList *this)
-
 bool  CClientList::AllClientsReady(void) {
   
   unsigned int i; // [esp+4h] [ebp-4h]
@@ -257,7 +245,6 @@ bool  CClientList::AllClientsReady(void) {
 
 // address=[0x15b2220]
 // Decompiled from CClient *__thiscall CClientList::SetClientReadyFromPeerId(CClientList *this, int a2, bool a3)
-
 void  CClientList::SetClientReadyFromPeerId(unsigned int,bool) {
   
   unsigned int v3; // eax
@@ -295,7 +282,6 @@ void  CClientList::SetClientReadyFromPeerId(unsigned int,bool) {
 
 // address=[0x15b2320]
 // Decompiled from int __thiscall CClientList::GetClientIndexPerPeerId(CClientList *this, int a2)
-
 int  CClientList::GetClientIndexPerPeerId(unsigned int) {
   
   unsigned int v2; // eax
@@ -331,7 +317,6 @@ int  CClientList::GetClientIndexPerPeerId(unsigned int) {
 
 // address=[0x15b3b90]
 // Decompiled from void __thiscall CClientList::GetSize(CDaoIndexFieldInfo *this)
-
 int  CClientList::GetSize(void) {
   
   std::vector<CClient>::size((char *)this + 4);
@@ -340,7 +325,6 @@ int  CClientList::GetSize(void) {
 
 // address=[0x15c4d90]
 // Decompiled from CClient *__thiscall CClientList::SetClientLastAck(CClientList *this, unsigned int a2, unsigned int a3)
-
 void  CClientList::SetClientLastAck(unsigned int,unsigned int) {
   
   CClient *v3; // eax

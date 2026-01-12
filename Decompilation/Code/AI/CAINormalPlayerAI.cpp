@@ -4,7 +4,6 @@
 
 // address=[0x131a540]
 // Decompiled from CAINormalPlayerAI *__thiscall CAINormalPlayerAI::CAINormalPlayerAI(CAINormalPlayerAI *this, int a2)
-
  CAINormalPlayerAI::CAINormalPlayerAI(int) {
   
   CAIPlayerAI::CAIPlayerAI(this, a2, 0);
@@ -16,7 +15,6 @@
 
 // address=[0x131a580]
 // Decompiled from int __thiscall CAINormalPlayerAI::Load(CAINormalPlayerAI *this, struct IS4Chunk *a2)
-
 void  CAINormalPlayerAI::Load(class IS4Chunk &) {
   
   int v3; // [esp+0h] [ebp-14h]
@@ -46,7 +44,6 @@ void  CAINormalPlayerAI::Load(class IS4Chunk &) {
 
 // address=[0x131a670]
 // Decompiled from int __thiscall CAINormalPlayerAI::Save(CAINormalPlayerAI *this, struct IS4Chunk *a2)
-
 void  CAINormalPlayerAI::Save(class IS4Chunk &) {
   
   int v3; // [esp+0h] [ebp-10h]
@@ -70,7 +67,6 @@ void  CAINormalPlayerAI::Save(class IS4Chunk &) {
 
 // address=[0x131a730]
 // Decompiled from int __thiscall CAINormalPlayerAI::Init(CAINormalPlayerAI *this)
-
 void  CAINormalPlayerAI::Init(void) {
   
   CAIPlayerAI::Init(this);

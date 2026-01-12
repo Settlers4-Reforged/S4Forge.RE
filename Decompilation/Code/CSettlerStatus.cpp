@@ -3,10 +3,7 @@
 // Definitions for class CSettlerStatus
 
 // address=[0x1554910]
-// Decompiled from CManakopter::CSettlerStatus *__thiscall CManakopter::CSettlerStatus::CSettlerStatus(
-        CManakopter::CSettlerStatus *this,
-        const struct CManakopter::CSettlerStatus *a2)
-
+// Decompiled from CManakopter::CSettlerStatus *__thiscall CManakopter::CSettlerStatus::CSettlerStatus(  CManakopter::CSettlerStatus *this,  const struct CManakopter::CSettlerStatus *a2)
  CManakopter::CSettlerStatus::CSettlerStatus(class CManakopter::CSettlerStatus const &) {
   
   *(_DWORD *)this = *(_DWORD *)a2;
@@ -18,7 +15,6 @@
 
 // address=[0x1554950]
 // Decompiled from _DWORD *__thiscall CManakopter::CSettlerStatus::CSettlerStatus(_DWORD *this, int a2, int a3, int a4)
-
  CManakopter::CSettlerStatus::CSettlerStatus(int,enum SETTLER_TYPES,int) {
   
   *this = a4;
@@ -29,9 +25,7 @@
 
 
 // address=[0x1554990]
-// Decompiled from // MFC 3.1-14.0 32bit
-CManakopter::CSettlerStatus *__thiscall CManakopter::CSettlerStatus::CSettlerStatus(CManakopter::CSettlerStatus *this)
-
+// Decompiled from CManakopter::CSettlerStatus *__thiscall CManakopter::CSettlerStatus::CSettlerStatus(CManakopter::CSettlerStatus *this)
  CManakopter::CSettlerStatus::CSettlerStatus(void) {
   
   *(_DWORD *)this = 0;
@@ -42,10 +36,7 @@ CManakopter::CSettlerStatus *__thiscall CManakopter::CSettlerStatus::CSettlerSta
 
 
 // address=[0x1554b60]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CManakopter::CSettlerStatus::~CSettlerStatus(CManakopter::CSettlerStatus *this)
-
+// Decompiled from void __thiscall CManakopter::CSettlerStatus::~CSettlerStatus(CManakopter::CSettlerStatus *this)
  CManakopter::CSettlerStatus::~CSettlerStatus(void) {
   
   ;

@@ -4,7 +4,6 @@
 
 // address=[0x12fcaf0]
 // Decompiled from int __thiscall CAIPlayerScriptVars::operator[](_DWORD *this, unsigned int a2)
-
 int  CAIPlayerScriptVars::operator[](enum T_AI_PLAYER_SCRIPT_VAR_INDEX)const {
   
   if ( a2 > 0x16
@@ -21,10 +20,7 @@ int  CAIPlayerScriptVars::operator[](enum T_AI_PLAYER_SCRIPT_VAR_INDEX)const {
 
 
 // address=[0x1303840]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CAIPlayerScriptVars::Flags(CAIPlayerScriptVars *this)
-
+// Decompiled from int __thiscall CAIPlayerScriptVars::Flags(CAIPlayerScriptVars *this)
 int  CAIPlayerScriptVars::Flags(void)const {
   
   return *((_DWORD *)this + 1);
@@ -32,10 +28,7 @@ int  CAIPlayerScriptVars::Flags(void)const {
 
 
 // address=[0x1306500]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CAIPlayerScriptVars::DifficultyLevel(void *this)
-
+// Decompiled from int __thiscall CAIPlayerScriptVars::DifficultyLevel(void *this)
 enum T_AI_DIFFICULTY_LEVEL  CAIPlayerScriptVars::DifficultyLevel(void)const {
   
   return *(_DWORD *)this;
@@ -44,7 +37,6 @@ enum T_AI_DIFFICULTY_LEVEL  CAIPlayerScriptVars::DifficultyLevel(void)const {
 
 // address=[0x1309800]
 // Decompiled from unsigned int *__thiscall CAIPlayerScriptVars::SetDifficultyLevel(unsigned int *this, unsigned int a2)
-
 void  CAIPlayerScriptVars::SetDifficultyLevel(enum T_AI_DIFFICULTY_LEVEL) {
   
   unsigned int *result; // eax
@@ -67,7 +59,6 @@ void  CAIPlayerScriptVars::SetDifficultyLevel(enum T_AI_DIFFICULTY_LEVEL) {
 
 // address=[0x131cad0]
 // Decompiled from CAIPlayerScriptVars *__thiscall CAIPlayerScriptVars::Init(CAIPlayerScriptVars *this)
-
 void  CAIPlayerScriptVars::Init(void) {
   
   CAIPlayerScriptVars *result; // eax
@@ -91,7 +82,6 @@ void  CAIPlayerScriptVars::Init(void) {
 
 // address=[0x131cb50]
 // Decompiled from int __thiscall CAIPlayerScriptVars::Load(CAIPlayerScriptVars *this, struct IS4Chunk *a2)
-
 void  CAIPlayerScriptVars::Load(class IS4Chunk &) {
   
   int result; // eax
@@ -128,7 +118,6 @@ void  CAIPlayerScriptVars::Load(class IS4Chunk &) {
 
 // address=[0x131cc40]
 // Decompiled from int __thiscall CAIPlayerScriptVars::Save(CAIPlayerScriptVars *this, struct IS4Chunk *a2)
-
 void  CAIPlayerScriptVars::Save(class IS4Chunk &) {
   
   int result; // eax
@@ -150,9 +139,7 @@ void  CAIPlayerScriptVars::Save(class IS4Chunk &) {
 
 
 // address=[0x131ed70]
-// Decompiled from // MFC 3.1-14.0 32bit
-CAIPlayerScriptVars *__thiscall CAIPlayerScriptVars::SetFlags(CAIPlayerScriptVars *this, int a2)
-
+// Decompiled from CAIPlayerScriptVars *__thiscall CAIPlayerScriptVars::SetFlags(CAIPlayerScriptVars *this, int a2)
 void  CAIPlayerScriptVars::SetFlags(int) {
   
   CAIPlayerScriptVars *result; // eax

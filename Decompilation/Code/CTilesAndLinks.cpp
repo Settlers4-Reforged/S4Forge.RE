@@ -4,7 +4,6 @@
 
 // address=[0x15e5000]
 // Decompiled from int **CTilesAndLinks::InitTiles()
-
 static void __cdecl CTilesAndLinks::InitTiles(void) {
   
   struct CLinkList *v0; // eax
@@ -16,7 +15,6 @@ static void __cdecl CTilesAndLinks::InitTiles(void) {
 
 // address=[0x15e5020]
 // Decompiled from int __cdecl CTilesAndLinks::MoveLinkList(int a1, int a2)
-
 static int __cdecl CTilesAndLinks::MoveLinkList(int,int) {
   
   CLink *v2; // eax
@@ -63,7 +61,6 @@ static int __cdecl CTilesAndLinks::MoveLinkList(int,int) {
 
 // address=[0x15e51c0]
 // Decompiled from char __cdecl CTilesAndLinks::LinksGarbageCollection(int a1)
-
 static void __cdecl CTilesAndLinks::LinksGarbageCollection(int) {
   
   CLink *v1; // eax
@@ -367,7 +364,6 @@ static void __cdecl CTilesAndLinks::LinksGarbageCollection(int) {
 
 // address=[0x15e5ac0]
 // Decompiled from struct CLinkList *__cdecl CTilesAndLinks::PushLinksUndef(int a1)
-
 static class CLinkList & __cdecl CTilesAndLinks::PushLinksUndef(int) {
   
   int v2; // [esp+0h] [ebp-4h]
@@ -389,7 +385,6 @@ static class CLinkList & __cdecl CTilesAndLinks::PushLinksUndef(int) {
 
 // address=[0x15e5b70]
 // Decompiled from struct CLinkList *__cdecl CTilesAndLinks::PushLinks(const struct CIntLinkList *a1)
-
 static class CLinkList & __cdecl CTilesAndLinks::PushLinks(class CIntLinkList const &) {
   
   int v1; // eax
@@ -405,7 +400,6 @@ static class CLinkList & __cdecl CTilesAndLinks::PushLinks(class CIntLinkList co
 
 // address=[0x15e5ba0]
 // Decompiled from int __cdecl CTilesAndLinks::AddLink(int a1, int a2)
-
 static void __cdecl CTilesAndLinks::AddLink(int,int) {
   
   int **v2; // eax
@@ -460,7 +454,6 @@ static void __cdecl CTilesAndLinks::AddLink(int,int) {
 
 // address=[0x15e5d40]
 // Decompiled from char __cdecl CTilesAndLinks::DeleteLink(int a1, int a2)
-
 static void __cdecl CTilesAndLinks::DeleteLink(int,int) {
   
   int **v2; // eax
@@ -491,7 +484,6 @@ static void __cdecl CTilesAndLinks::DeleteLink(int,int) {
 
 // address=[0x15e5e30]
 // Decompiled from char __cdecl CTilesAndLinks::ReplaceLink(int a1, int a2, int a3)
-
 static void __cdecl CTilesAndLinks::ReplaceLink(int,int,int) {
   
   int **v3; // eax
@@ -522,7 +514,6 @@ static void __cdecl CTilesAndLinks::ReplaceLink(int,int,int) {
 
 // address=[0x15e5ef0]
 // Decompiled from int __cdecl CTilesAndLinks::AddLinkList(const struct CLinkList *a1)
-
 static void __cdecl CTilesAndLinks::AddLinkList(class CLinkList const &) {
   
   int result; // eax
@@ -551,7 +542,6 @@ static void __cdecl CTilesAndLinks::AddLinkList(class CLinkList const &) {
 
 // address=[0x15e5f80]
 // Decompiled from int __cdecl CTilesAndLinks::DeleteLinkList(struct CLinkList *a1)
-
 static void __cdecl CTilesAndLinks::DeleteLinkList(class CLinkList &) {
   
   unsigned __int16 *v1; // eax
@@ -577,7 +567,6 @@ static void __cdecl CTilesAndLinks::DeleteLinkList(class CLinkList &) {
 
 // address=[0x15e6020]
 // Decompiled from int __cdecl CTilesAndLinks::DeleteTile(int *a1)
-
 static void __cdecl CTilesAndLinks::DeleteTile(int) {
   
   int **v2; // eax
@@ -604,7 +593,6 @@ static void __cdecl CTilesAndLinks::DeleteTile(int) {
 
 // address=[0x15e6090]
 // Decompiled from int __cdecl CTilesAndLinks::MergeTileLinkLists(int a1, int a2)
-
 static void __cdecl CTilesAndLinks::MergeTileLinkLists(int,int) {
   
   int **v2; // eax

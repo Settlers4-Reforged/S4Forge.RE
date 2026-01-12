@@ -4,7 +4,6 @@
 
 // address=[0x15d61f0]
 // Decompiled from int __cdecl CY6R1X6::DeltaX(char a1, char a2)
-
 static int __cdecl CY6R1X6::DeltaX(int,int) {
   
   return (a2 & 0x3F) - (a1 & 0x3F);
@@ -13,7 +12,6 @@ static int __cdecl CY6R1X6::DeltaX(int,int) {
 
 // address=[0x15d6210]
 // Decompiled from int __cdecl CY6R1X6::DeltaY(int a1, int a2)
-
 static int __cdecl CY6R1X6::DeltaY(int,int) {
   
   return (a2 >> 7) - (a1 >> 7);
@@ -22,7 +20,6 @@ static int __cdecl CY6R1X6::DeltaY(int,int) {
 
 // address=[0x15d6250]
 // Decompiled from int __cdecl CY6R1X6::Distance(int a1, int a2)
-
 static int __cdecl CY6R1X6::Distance(int,int) {
   
   Grid *v3; // [esp+0h] [ebp-8h]
@@ -36,7 +33,6 @@ static int __cdecl CY6R1X6::Distance(int,int) {
 
 // address=[0x15d6780]
 // Decompiled from int __cdecl CY6R1X6::NeighborRelPackedIdx(int a1)
-
 static int __cdecl CY6R1X6::NeighborRelPackedIdx(int) {
   
   return dword_37D7CF8[a1];
@@ -45,7 +41,6 @@ static int __cdecl CY6R1X6::NeighborRelPackedIdx(int) {
 
 // address=[0x15d67a0]
 // Decompiled from int __cdecl CY6R1X6::PackedIdx(int a1)
-
 static int __cdecl CY6R1X6::PackedIdx(int) {
   
   int v2; // [esp+0h] [ebp-8h]
@@ -57,7 +52,6 @@ static int __cdecl CY6R1X6::PackedIdx(int) {
 
 // address=[0x15d70b0]
 // Decompiled from bool __cdecl CY6R1X6::Valid(int a1)
-
 static bool __cdecl CY6R1X6::Valid(int) {
   
   return (a1 & 0xFFFFE040) == 0;
@@ -66,7 +60,6 @@ static bool __cdecl CY6R1X6::Valid(int) {
 
 // address=[0x15d70e0]
 // Decompiled from int __cdecl CY6R1X6::WorldIdx(int a1)
-
 static int __cdecl CY6R1X6::WorldIdx(int) {
   
   int v2; // [esp+0h] [ebp-8h]
@@ -80,7 +73,6 @@ static int __cdecl CY6R1X6::WorldIdx(int) {
 
 // address=[0x15d7180]
 // Decompiled from int __cdecl CY6R1X6::X(char a1)
-
 static int __cdecl CY6R1X6::X(int) {
   
   return a1 & 0x3F;
@@ -89,7 +81,6 @@ static int __cdecl CY6R1X6::X(int) {
 
 // address=[0x15d71c0]
 // Decompiled from int __cdecl CY6R1X6::Y(int a1)
-
 static int __cdecl CY6R1X6::Y(int) {
   
   return a1 >> 7;

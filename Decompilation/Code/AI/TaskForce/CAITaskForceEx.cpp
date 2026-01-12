@@ -4,7 +4,6 @@
 
 // address=[0x132a540]
 // Decompiled from CAITaskForceEx *__thiscall CAITaskForceEx::ClearWaypoints(CAITaskForceEx *this)
-
 void  CAITaskForceEx::ClearWaypoints(void) {
   
   CAITaskForceEx *result; // eax
@@ -19,7 +18,6 @@ void  CAITaskForceEx::ClearWaypoints(void) {
 
 // address=[0x132a590]
 // Decompiled from int __thiscall CAITaskForceEx::PopWaypoint(CAITaskForceEx *this)
-
 void  CAITaskForceEx::PopWaypoint(void) {
   
   int result; // eax
@@ -34,7 +32,6 @@ void  CAITaskForceEx::PopWaypoint(void) {
 
 // address=[0x132a600]
 // Decompiled from bool __thiscall CAITaskForceEx::CheckWaypoint(CAITaskForceEx *this)
-
 bool  CAITaskForceEx::CheckWaypoint(void) {
   
   struct _Cnd_internal_imp_t *v2; // [esp+4h] [ebp-20h]
@@ -63,7 +60,6 @@ bool  CAITaskForceEx::CheckWaypoint(void) {
 
 // address=[0x132a6c0]
 // Decompiled from char __thiscall CAITaskForceEx::CheckDestination(CAITaskForceEx *this)
-
 bool  CAITaskForceEx::CheckDestination(void) {
   
   char v1; // al
@@ -126,7 +122,6 @@ bool  CAITaskForceEx::CheckDestination(void) {
 
 // address=[0x132a840]
 // Decompiled from char __thiscall CAITaskForceEx::FindWaypoints(CAITaskForceEx *this)
-
 bool  CAITaskForceEx::FindWaypoints(void) {
   
   int v2; // eax
@@ -164,7 +159,6 @@ bool  CAITaskForceEx::FindWaypoints(void) {
 
 // address=[0x132a990]
 // Decompiled from char __thiscall CAITaskForceEx::SetDestinationXY(CAITaskForceEx *this, int a2)
-
 bool  CAITaskForceEx::SetDestinationXY(int) {
   
   *((_DWORD *)this + 20) = a2;
@@ -175,7 +169,6 @@ bool  CAITaskForceEx::SetDestinationXY(int) {
 
 // address=[0x132a9b0]
 // Decompiled from char __thiscall CAITaskForceEx::Execute(CAITaskForceEx *this)
-
 void  CAITaskForceEx::Execute(void) {
   
   int v1; // eax
@@ -297,7 +290,6 @@ LABEL_2:
 
 // address=[0x132ace0]
 // Decompiled from int __thiscall CAITaskForceEx::InitWalk(CAITaskForceEx *this, bool a2)
-
 void  CAITaskForceEx::InitWalk(bool) {
   
   int result; // eax
@@ -373,7 +365,6 @@ void  CAITaskForceEx::InitWalk(bool) {
 
 // address=[0x132aef0]
 // Decompiled from int __thiscall CAITaskForceEx::InitGroupWalk(CAITaskForceEx *this)
-
 void  CAITaskForceEx::InitGroupWalk(void) {
   
   bool v3; // [esp+7h] [ebp-1h]
@@ -385,7 +376,6 @@ void  CAITaskForceEx::InitGroupWalk(void) {
 
 // address=[0x132af30]
 // Decompiled from char __thiscall CAITaskForceEx::FindSneakUpPosition(CAITaskForceEx *this)
-
 bool  CAITaskForceEx::FindSneakUpPosition(void) {
   
   int v2; // eax
@@ -455,7 +445,6 @@ bool  CAITaskForceEx::FindSneakUpPosition(void) {
 
 // address=[0x132b0f0]
 // Decompiled from int __thiscall CAITaskForceEx::Load(CAITaskForceEx *this, struct IS4Chunk *a2)
-
 void  CAITaskForceEx::Load(class IS4Chunk &) {
   
   (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 12))(a2, -1516371456);
@@ -471,7 +460,6 @@ void  CAITaskForceEx::Load(class IS4Chunk &) {
 
 // address=[0x132b190]
 // Decompiled from int __thiscall CAITaskForceEx::Save(CAITaskForceEx *this, struct IS4Chunk *a2)
-
 void  CAITaskForceEx::Save(class IS4Chunk &) {
   
   (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 24))(a2, -1516371456);
@@ -487,7 +475,6 @@ void  CAITaskForceEx::Save(class IS4Chunk &) {
 
 // address=[0x132e950]
 // Decompiled from int __thiscall CAITaskForceEx::DestinationX(CAITaskForceEx *this)
-
 int  CAITaskForceEx::DestinationX(void)const {
   
   return IAIEnvironment::UnpackXFast(*((_DWORD *)this + 20));
@@ -495,9 +482,7 @@ int  CAITaskForceEx::DestinationX(void)const {
 
 
 // address=[0x132e970]
-// Decompiled from // MFC 3.1-14.0 32bit
-int __thiscall CAITaskForceEx::DestinationXY(CAITaskForceEx *this)
-
+// Decompiled from int __thiscall CAITaskForceEx::DestinationXY(CAITaskForceEx *this)
 int  CAITaskForceEx::DestinationXY(void)const {
   
   return *((_DWORD *)this + 20);
@@ -506,7 +491,6 @@ int  CAITaskForceEx::DestinationXY(void)const {
 
 // address=[0x132e990]
 // Decompiled from int __thiscall CAITaskForceEx::DestinationY(CAITaskForceEx *this)
-
 int  CAITaskForceEx::DestinationY(void)const {
   
   return IAIEnvironment::UnpackYFast(*((_DWORD *)this + 20));
@@ -515,7 +499,6 @@ int  CAITaskForceEx::DestinationY(void)const {
 
 // address=[0x132ed00]
 // Decompiled from bool __thiscall CAITaskForceEx::WaypointAvailable(CAITaskForceEx *this)
-
 bool  CAITaskForceEx::WaypointAvailable(void)const {
   
   return *((_DWORD *)this + 21) >= 0;
@@ -524,7 +507,6 @@ bool  CAITaskForceEx::WaypointAvailable(void)const {
 
 // address=[0x132ed40]
 // Decompiled from int __thiscall CAITaskForceEx::WaypointX(CAITaskForceEx *this)
-
 int  CAITaskForceEx::WaypointX(void)const {
   
   return IAIEnvironment::UnpackXFast(*((_DWORD *)this + 21));
@@ -533,7 +515,6 @@ int  CAITaskForceEx::WaypointX(void)const {
 
 // address=[0x132ed70]
 // Decompiled from int __thiscall CAITaskForceEx::WaypointXY(CAITaskForceEx *this)
-
 int  CAITaskForceEx::WaypointXY(void)const {
   
   return *((_DWORD *)this + 21);
@@ -542,7 +523,6 @@ int  CAITaskForceEx::WaypointXY(void)const {
 
 // address=[0x132ed90]
 // Decompiled from int __thiscall CAITaskForceEx::WaypointY(CAITaskForceEx *this)
-
 int  CAITaskForceEx::WaypointY(void)const {
   
   return IAIEnvironment::UnpackYFast(*((_DWORD *)this + 21));
@@ -551,7 +531,6 @@ int  CAITaskForceEx::WaypointY(void)const {
 
 // address=[0x13192a0]
 // Decompiled from void __thiscall CAITaskForceEx::~CAITaskForceEx(CAITaskForceEx *this)
-
  CAITaskForceEx::~CAITaskForceEx(void) {
   
   *(_DWORD *)this = CAITaskForceEx::_vftable_;
@@ -561,7 +540,6 @@ int  CAITaskForceEx::WaypointY(void)const {
 
 // address=[0x132a140]
 // Decompiled from _DWORD *__thiscall CAITaskForceEx::CAITaskForceEx(_DWORD *this, int a2, int a3, int a4, int a5)
-
  CAITaskForceEx::CAITaskForceEx(int,enum T_AI_TASK_FORCE_CLASS,enum T_AI_TASK_FORCE_TYPE,int) {
   
   CAITaskForce::CAITaskForce((int)this, a2, a3, a4, a5);
@@ -572,7 +550,6 @@ int  CAITaskForceEx::WaypointY(void)const {
 
 // address=[0x132b230]
 // Decompiled from char __thiscall CAITaskForceEx::EscortInitWalk(CAITaskForceEx *this)
-
 bool  CAITaskForceEx::EscortInitWalk(void) {
   
   int v2; // eax
@@ -646,7 +623,6 @@ LABEL_17:
 
 // address=[0x132eac0]
 // Decompiled from int __thiscall CAITaskForceEx::SetCommandAndClearStuff(CAITaskForceEx *this, unsigned int a2, int a3, int a4)
-
 void  CAITaskForceEx::SetCommandAndClearStuff(int,int,int) {
   
   CAITaskForce::SetCommand(this, a2, a3, a4);

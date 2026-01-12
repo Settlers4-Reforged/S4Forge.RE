@@ -4,7 +4,6 @@
 
 // address=[0x1454410]
 // Decompiled from CAddToolSideBarInfo *__thiscall CAddToolSideBarInfo::CAddToolSideBarInfo(CAddToolSideBarInfo *this)
-
  CAddToolSideBarInfo::CAddToolSideBarInfo(void) {
   
   CInfoExchange::CInfoExchange(this);
@@ -15,7 +14,6 @@
 
 // address=[0x1454ad0]
 // Decompiled from int __thiscall CAddToolSideBarInfo::Size(CAddToolSideBarInfo *this)
-
 unsigned int  CAddToolSideBarInfo::Size(void)const {
   
   return 16;

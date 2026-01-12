@@ -4,7 +4,6 @@
 
 // address=[0x2efd820]
 // Decompiled from CProfile *__thiscall CProfile::CProfile(CProfile *this)
-
  CProfile::CProfile(void) {
   
   if ( !dword_46851B0 )
@@ -16,7 +15,6 @@
 
 // address=[0x2efd850]
 // Decompiled from BOOL __thiscall CProfile::Clear(LARGE_INTEGER *this)
-
 void  CProfile::Clear(void) {
   
   BOOL result; // eax
@@ -29,7 +27,6 @@ void  CProfile::Clear(void) {
 
 // address=[0x2efd880]
 // Decompiled from BOOL __thiscall CProfile::Begin(LARGE_INTEGER *this)
-
 void  CProfile::Begin(void) {
   
   return QueryPerformanceCounter(this + 2);
@@ -38,7 +35,6 @@ void  CProfile::Begin(void) {
 
 // address=[0x2efd8a0]
 // Decompiled from LARGE_INTEGER *__thiscall CProfile::End(LARGE_INTEGER *this)
-
 void  CProfile::End(void) {
   
   int v1; // eax
@@ -58,7 +54,6 @@ void  CProfile::End(void) {
 
 // address=[0x2efd920]
 // Decompiled from double __thiscall CProfile::TimeMs(CProfile *this)
-
 double  CProfile::TimeMs(void)const {
   
   if ( *((_DWORD *)this + 40) )
@@ -70,7 +65,6 @@ double  CProfile::TimeMs(void)const {
 
 // address=[0x2efd990]
 // Decompiled from char *__thiscall CProfile::InfoStr(CProfile *this)
-
 char const *  CProfile::InfoStr(void)const {
   
   double v1; // st7
@@ -94,9 +88,7 @@ char const *  CProfile::InfoStr(void)const {
 
 
 // address=[0x2efda70]
-// Decompiled from // public: char const * __thiscall CProfile::TraceStr(void)const 
-char *__thiscall CProfile::TraceStr(CProfile *this)
-
+// Decompiled from char *__thiscall CProfile::TraceStr(CProfile *this)
 char const *  CProfile::TraceStr(void)const {
   
   double v1; // st7

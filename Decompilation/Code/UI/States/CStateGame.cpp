@@ -3,9 +3,7 @@
 // Definitions for class CStateGame
 
 // address=[0x1303890]
-// Decompiled from // MFC 3.1-14.0 32bit
-int __thiscall CStateGame::GetTickCounter(CStateGame *this)
-
+// Decompiled from int __thiscall CStateGame::GetTickCounter(CStateGame *this)
 unsigned int  CStateGame::GetTickCounter(void) {
   
   return *((_DWORD *)this + 19);
@@ -14,7 +12,6 @@ unsigned int  CStateGame::GetTickCounter(void) {
 
 // address=[0x130f320]
 // Decompiled from char *__thiscall CStateGame::Random16(CStateGame *this)
-
 class CRandom16 &  CStateGame::Random16(void) {
   
   return (char *)this + 120;
@@ -23,7 +20,6 @@ class CRandom16 &  CStateGame::Random16(void) {
 
 // address=[0x1326f20]
 // Decompiled from unsigned int __thiscall CStateGame::Rand(CStateGame *this)
-
 unsigned int  CStateGame::Rand(void) {
   
   return CRandom16::Rand((CStateGame *)((char *)this + 120));
@@ -32,7 +28,6 @@ unsigned int  CStateGame::Rand(void) {
 
 // address=[0x14606d0]
 // Decompiled from int __thiscall CStateGame::IsMessage(CStateGame *this)
-
 bool  CStateGame::IsMessage(void) {
   
   return (*(int (__thiscall **)(_DWORD, CStateGame *))(**((_DWORD **)this + 63) + 12))(*((_DWORD *)this + 63), this);
@@ -41,7 +36,6 @@ bool  CStateGame::IsMessage(void) {
 
 // address=[0x14607a0]
 // Decompiled from int __thiscall CStateGame::PopMessage(_DWORD **this, int a2)
-
 class CEvn_Logic  CStateGame::PopMessage(void) {
   
   struct boost::exception_detail::clone_base *v2; // eax
@@ -54,7 +48,6 @@ class CEvn_Logic  CStateGame::PopMessage(void) {
 
 // address=[0x1486df0]
 // Decompiled from char *__thiscall CStateGame::GameData(CStateGame *this)
-
 class CGameData &  CStateGame::GameData(void) {
   
   return (char *)this + 76;
@@ -63,7 +56,6 @@ class CGameData &  CStateGame::GameData(void) {
 
 // address=[0x14a52f0]
 // Decompiled from CStateGame *__cdecl CStateGame::DynamicCreateFunc(void *a1)
-
 static class CGameState * __cdecl CStateGame::DynamicCreateFunc(void *) {
   
   CStateGame *C; // [esp+Ch] [ebp-10h]
@@ -78,7 +70,6 @@ static class CGameState * __cdecl CStateGame::DynamicCreateFunc(void *) {
 
 // address=[0x14a5370]
 // Decompiled from int __thiscall CStateGame::UpdateToGuiInfoStruct(CStateGame *this)
-
 void  CStateGame::UpdateToGuiInfoStruct(void) {
   
   int LocalPlayerId; // eax
@@ -180,7 +171,6 @@ void  CStateGame::UpdateToGuiInfoStruct(void) {
 
 // address=[0x14a5950]
 // Decompiled from void __thiscall CStateGame::UpdateFromGuiInfoStruct(CStateGame *this)
-
 void  CStateGame::UpdateFromGuiInfoStruct(void) {
   
   int v1; // [esp+0h] [ebp-18h]
@@ -222,7 +212,6 @@ void  CStateGame::UpdateFromGuiInfoStruct(void) {
 
 // address=[0x14a5b90]
 // Decompiled from void __thiscall CStateGame::UpdateMusicSettings(CStateGame *this)
-
 void  CStateGame::UpdateMusicSettings(void) {
   
   int LocalPlayerId; // eax
@@ -282,7 +271,6 @@ void  CStateGame::UpdateMusicSettings(void) {
 
 // address=[0x14a5d70]
 // Decompiled from char __thiscall CStateGame::IsInMinimap(CStateGame *this, struct tagPOINT *a2, struct tagPOINT *a3)
-
 bool  CStateGame::IsInMinimap(struct tagPOINT *,struct tagPOINT *) {
   
   struct tagPOINT v4; // [esp+0h] [ebp-10h]
@@ -303,7 +291,6 @@ bool  CStateGame::IsInMinimap(struct tagPOINT *,struct tagPOINT *) {
 
 // address=[0x14a5e00]
 // Decompiled from bool __thiscall CStateGame::RenderFrame(CStateGame *this)
-
 bool  CStateGame::RenderFrame(void) {
   
   DWORD Time; // [esp+0h] [ebp-Ch]
@@ -319,7 +306,6 @@ bool  CStateGame::RenderFrame(void) {
 
 // address=[0x14a5e50]
 // Decompiled from void __stdcall CStateGame::PerformCommand(char a1, int a2, int a3, int a4, int a5, int a6, int a7)
-
 void  CStateGame::PerformCommand(std::string) {
   
   int LocalPlayerId; // eax
@@ -362,7 +348,6 @@ void  CStateGame::PerformCommand(std::string) {
 
 // address=[0x14a5f80]
 // Decompiled from int __thiscall CStateGame::SetupGUI(CStateGame *this)
-
 void  CStateGame::SetupGUI(void) {
   
   int LocalPlayerId; // eax
@@ -429,7 +414,6 @@ void  CStateGame::SetupGUI(void) {
 
 // address=[0x14a61c0]
 // Decompiled from bool __thiscall CStateGame::ExitGUI(CStateGame *this)
-
 void  CStateGame::ExitGUI(void) {
   
   if ( g_pGuiMainEvents )
@@ -454,7 +438,6 @@ void  CStateGame::ExitGUI(void) {
 
 // address=[0x14a62a0]
 // Decompiled from char __thiscall CStateGame::InitGuiEngine(CStateGame *this, char *a2)
-
 bool  CStateGame::InitGuiEngine(char *) {
   
   int Language; // eax
@@ -508,9 +491,7 @@ bool  CStateGame::InitGuiEngine(char *) {
 
 
 // address=[0x14a6430]
-// Decompiled from // bad sp value at call has been detected, the output may be wrong!
-int __thiscall CStateGame::EndGame(CStateGame *this)
-
+// Decompiled from int __thiscall CStateGame::EndGame(CStateGame *this)
 void  CStateGame::EndGame(void) {
   
   void *v1; // esp
@@ -698,7 +679,6 @@ void  CStateGame::EndGame(void) {
 
 // address=[0x14a6900]
 // Decompiled from char __thiscall CStateGame::SwitchPause(CStateGame *this)
-
 bool  CStateGame::SwitchPause(void) {
   
   if ( CGameData::IsNetworkGame((CStateGame *)((char *)this + 76)) )
@@ -721,15 +701,7 @@ bool  CStateGame::SwitchPause(void) {
 
 
 // address=[0x14a69e0]
-// Decompiled from void __thiscall CStateGame::SendLogicMessage(
-        CStateGame *this,
-        unsigned int a2,
-        unsigned int a3,
-        unsigned int a4,
-        unsigned int a5,
-        unsigned int a6,
-        unsigned int a7)
-
+// Decompiled from void __thiscall CStateGame::SendLogicMessage(  CStateGame *this,  unsigned int a2,  unsigned int a3,  unsigned int a4,  unsigned int a5,  unsigned int a6,  unsigned int a7)
 void  CStateGame::SendLogicMessage(unsigned int,unsigned int,long,unsigned int,unsigned int,unsigned int) {
   
   _BYTE v8[32]; // [esp+8h] [ebp-30h] BYREF
@@ -761,7 +733,6 @@ void  CStateGame::SendLogicMessage(unsigned int,unsigned int,long,unsigned int,u
 
 // address=[0x14a6b40]
 // Decompiled from bool __thiscall CStateGame::IsCursorChangeAllowed(CStateGame *this)
-
 bool  CStateGame::IsCursorChangeAllowed(void) {
   
   return !*((_BYTE *)this + 246) && !*((_BYTE *)this + 71);
@@ -770,7 +741,6 @@ bool  CStateGame::IsCursorChangeAllowed(void) {
 
 // address=[0x14a6b70]
 // Decompiled from int __thiscall CStateGame::GetModifierState(CStateGame *this)
-
 int  CStateGame::GetModifierState(void) {
   
   __int16 v2; // [esp+4h] [ebp-10h]
@@ -799,7 +769,6 @@ int  CStateGame::GetModifierState(void) {
 
 // address=[0x14a6c20]
 // Decompiled from CStateGame *__thiscall CStateGame::CStateGame(CStateGame *this, void *a2)
-
  CStateGame::CStateGame(void *) {
   
   bool IsMCD2TextureSet; // al
@@ -1129,7 +1098,6 @@ int  CStateGame::GetModifierState(void) {
 
 // address=[0x14a7a50]
 // Decompiled from void __thiscall CStateGame::~CStateGame(CStateGame *this)
-
  CStateGame::~CStateGame(void) {
   
   *(_DWORD *)this = &CStateGame::_vftable_;
@@ -1165,7 +1133,6 @@ int  CStateGame::GetModifierState(void) {
 
 // address=[0x14a7bc0]
 // Decompiled from char __thiscall CStateGame::Perform(CStateGame *this)
-
 bool  CStateGame::Perform(void) {
   
   float v2; // xmm0_4
@@ -1487,7 +1454,6 @@ bool  CStateGame::Perform(void) {
 
 // address=[0x14a87c0]
 // Decompiled from double __thiscall CStateGame::GetZoomFactor(CStateGame *this)
-
 float  CStateGame::GetZoomFactor(void) {
   
   float v1; // xmm0_4
@@ -1499,7 +1465,6 @@ float  CStateGame::GetZoomFactor(void) {
 
 // address=[0x14a8820]
 // Decompiled from int __thiscall CStateGame::NotifyGfxEngine(CStateGame *this)
-
 void  CStateGame::NotifyGfxEngine(void) {
   
   int v1; // ecx
@@ -1528,7 +1493,6 @@ void  CStateGame::NotifyGfxEngine(void) {
 
 // address=[0x14a88b0]
 // Decompiled from char __thiscall CStateGame::EnableOrDisableDebugString(CStateGame *this, bool a2)
-
 bool  CStateGame::EnableOrDisableDebugString(bool) {
   
   char v4; // [esp+7h] [ebp-1h]
@@ -1545,7 +1509,6 @@ bool  CStateGame::EnableOrDisableDebugString(bool) {
 
 // address=[0x14a8900]
 // Decompiled from bool __thiscall CStateGame::CanSave(CStateGame *this)
-
 bool  CStateGame::CanSave(void) {
   
   return !*((_BYTE *)this + 71)
@@ -1558,7 +1521,6 @@ bool  CStateGame::CanSave(void) {
 
 // address=[0x14a8980]
 // Decompiled from _DWORD *__thiscall CStateGame::SaveGame(int this, unsigned int a2)
-
 void  CStateGame::SaveGame(enum SaveType) {
   
   _DWORD *result; // eax
@@ -1585,7 +1547,6 @@ void  CStateGame::SaveGame(enum SaveType) {
 
 // address=[0x14ac920]
 // Decompiled from void __thiscall CStateGame::ZoomIn(CStateGame *this, int a2)
-
 void  CStateGame::ZoomIn(int) {
   
   int *v2; // [esp+0h] [ebp-Ch]
@@ -1601,7 +1562,6 @@ void  CStateGame::ZoomIn(int) {
 
 // address=[0x14ac980]
 // Decompiled from void __thiscall CStateGame::ZoomOut(CStateGame *this, int a2)
-
 void  CStateGame::ZoomOut(int) {
   
   int v2; // [esp+0h] [ebp-Ch]
@@ -1617,7 +1577,6 @@ void  CStateGame::ZoomOut(int) {
 
 // address=[0x14ac9e0]
 // Decompiled from CStateGame *__thiscall CStateGame::UpdateTriangleSizePreservingWorldPosition(CStateGame *this, int a2)
-
 void  CStateGame::UpdateTriangleSizePreservingWorldPosition(int) {
   
   CStateGame *result; // eax
@@ -1634,7 +1593,6 @@ void  CStateGame::UpdateTriangleSizePreservingWorldPosition(int) {
 
 // address=[0x14aca40]
 // Decompiled from _DWORD *__thiscall CStateGame::UpdateZoomFactor(CStateGame *this)
-
 void  CStateGame::UpdateZoomFactor(void) {
   
   CEvn_Event v3; // [esp+18h] [ebp-28h] BYREF
@@ -1656,7 +1614,6 @@ void  CStateGame::UpdateZoomFactor(void) {
 
 // address=[0x14acb10]
 // Decompiled from void __thiscall CStateGame::VerifyWorldOffset(CStateGame *this)
-
 void  CStateGame::VerifyWorldOffset(void) {
   
   int v1; // [esp+Ch] [ebp-3Ch]
@@ -1705,7 +1662,6 @@ void  CStateGame::VerifyWorldOffset(void) {
 
 // address=[0x14acd30]
 // Decompiled from void __thiscall CStateGame::HandleBorderScroll(CStateGame *this)
-
 void  CStateGame::HandleBorderScroll(void) {
   
   if ( *((_DWORD *)this + 64) )
@@ -1718,7 +1674,6 @@ void  CStateGame::HandleBorderScroll(void) {
 
 // address=[0x14acdb0]
 // Decompiled from void __thiscall CStateGame::ReadyToGo(CStateGame *this)
-
 void  CStateGame::ReadyToGo(void) {
   
   *((_BYTE *)this + 70) = 1;
@@ -1729,7 +1684,6 @@ void  CStateGame::ReadyToGo(void) {
 
 // address=[0x14acde0]
 // Decompiled from void __thiscall CStateGame::SetViewPos(CStateGame *this, unsigned int a2, unsigned int a3)
-
 void  CStateGame::SetViewPos(unsigned int,unsigned int) {
   
   signed int v3; // kr00_4
@@ -1743,7 +1697,6 @@ void  CStateGame::SetViewPos(unsigned int,unsigned int) {
 
 // address=[0x14ace40]
 // Decompiled from int __thiscall CStateGame::UpdateClientSize(CStateGame *this)
-
 void  CStateGame::UpdateClientSize(void) {
   
   int result; // eax
@@ -1762,7 +1715,6 @@ void  CStateGame::UpdateClientSize(void) {
 
 // address=[0x14aceb0]
 // Decompiled from char __thiscall CStateGame::OnEvent(CStateGame *this, struct CEvn_Event *a2)
-
 bool  CStateGame::OnEvent(class CEvn_Event &) {
   
   char result; // al
@@ -3751,7 +3703,6 @@ LABEL_61:
 
 // address=[0x14b1950]
 // Decompiled from int __thiscall CStateGame::GetCenterWorldCoordinate(CStateGame *this, int *a2, int *a3)
-
 void  CStateGame::GetCenterWorldCoordinate(int &,int &) {
   
   int result; // eax
@@ -3766,7 +3717,6 @@ void  CStateGame::GetCenterWorldCoordinate(int &,int &) {
 
 // address=[0x14b4890]
 // Decompiled from CStateGame *__thiscall CStateGame::ScrollHorizontal(CStateGame *this, bool a2)
-
 void  CStateGame::ScrollHorizontal(bool) {
   
   CStateGame *result; // eax
@@ -3784,7 +3734,6 @@ void  CStateGame::ScrollHorizontal(bool) {
 
 // address=[0x14b48e0]
 // Decompiled from CStateGame *__thiscall CStateGame::ScrollVertical(CStateGame *this, bool a2)
-
 void  CStateGame::ScrollVertical(bool) {
   
   CStateGame *result; // eax
@@ -3802,7 +3751,6 @@ void  CStateGame::ScrollVertical(bool) {
 
 // address=[0x14a8a30]
 // Decompiled from char __thiscall CStateGame::CheckAutosaveTimer(CStateGame *this)
-
 void  CStateGame::CheckAutosaveTimer(void) {
   
   int TickCounter; // eax

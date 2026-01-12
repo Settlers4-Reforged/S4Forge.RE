@@ -4,7 +4,6 @@
 
 // address=[0x14005e0]
 // Decompiled from int __cdecl CDoorRole::New(int a1)
-
 static class CPersistence * __cdecl CDoorRole::New(std::istream &) {
   
   if ( operator new(0x2Cu) )
@@ -16,7 +15,6 @@ static class CPersistence * __cdecl CDoorRole::New(std::istream &) {
 
 // address=[0x156ce70]
 // Decompiled from int __thiscall CDoorRole::LogicUpdate(CDoorRole *this, struct CSettler *a2)
-
 void  CDoorRole::LogicUpdate(class CSettler *) {
   
   int v2; // eax
@@ -40,7 +38,6 @@ void  CDoorRole::LogicUpdate(class CSettler *) {
 
 // address=[0x156cef0]
 // Decompiled from int __stdcall CDoorRole::PostLoadInit(CPropertySet *a1)
-
 void  CDoorRole::PostLoadInit(class CSettler *) {
   
   int result; // eax
@@ -56,7 +53,6 @@ void  CDoorRole::PostLoadInit(class CSettler *) {
 
 // address=[0x156cf40]
 // Decompiled from char __thiscall CDoorRole::SetFree(CDoorRole *this, struct CSettler *a2, int a3)
-
 bool  CDoorRole::SetFree(class CSettler *,int) {
   
   void **v3; // eax
@@ -89,7 +85,6 @@ bool  CDoorRole::SetFree(class CSettler *,int) {
 
 // address=[0x156cfd0]
 // Decompiled from int __thiscall CDoorRole::Decrease(CDoorRole *this, int a2)
-
 int  CDoorRole::Decrease(int) {
   
   _DWORD *v3; // [esp+4h] [ebp-4h]
@@ -105,7 +100,6 @@ int  CDoorRole::Decrease(int) {
 
 // address=[0x156d020]
 // Decompiled from char *__thiscall CDoorRole::CDoorRole(char *this, int a2)
-
  CDoorRole::CDoorRole(std::istream &) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
@@ -132,7 +126,6 @@ int  CDoorRole::Decrease(int) {
 
 // address=[0x156d0d0]
 // Decompiled from int __thiscall CDoorRole::Store(struct CPersistence *this, struct std::ostream *a2)
-
 void  CDoorRole::Store(std::ostream &) {
   
   int v3[2]; // [esp+0h] [ebp-8h] BYREF
@@ -146,7 +139,6 @@ void  CDoorRole::Store(std::ostream &) {
 
 // address=[0x156d2b0]
 // Decompiled from int __thiscall CDoorRole::ClassID(CDoorRole *this)
-
 unsigned long  CDoorRole::ClassID(void)const {
   
   return CDoorRole::m_iClassID;
@@ -155,7 +147,6 @@ unsigned long  CDoorRole::ClassID(void)const {
 
 // address=[0x156d2d0]
 // Decompiled from void __thiscall CDoorRole::ConvertEventIntoGoal(CDoorRole *this, struct CSettler *a2, struct CEntityEvent *a3)
-
 void  CDoorRole::ConvertEventIntoGoal(class CSettler *,class CEntityEvent *) {
   
   ;
@@ -164,7 +155,6 @@ void  CDoorRole::ConvertEventIntoGoal(class CSettler *,class CEntityEvent *) {
 
 // address=[0x156d2f0]
 // Decompiled from int __thiscall CDoorRole::GetSettlerRole(CDoorRole *this)
-
 int  CDoorRole::GetSettlerRole(void)const {
   
   return 21;
@@ -173,7 +163,6 @@ int  CDoorRole::GetSettlerRole(void)const {
 
 // address=[0x156d310]
 // Decompiled from void *__thiscall CDoorRole::InitWalking(std::_Ref_count_base *this, const struct type_info *a2)
-
 class CWalking *  CDoorRole::InitWalking(class CSettler *) {
   
   return 0;
@@ -181,10 +170,7 @@ class CWalking *  CDoorRole::InitWalking(class CSettler *) {
 
 
 // address=[0x156d330]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CDoorRole::LogicUpdateJob(CDoorRole *this, struct CSettler *a2)
-
+// Decompiled from void __thiscall CDoorRole::LogicUpdateJob(CDoorRole *this, struct CSettler *a2)
 void  CDoorRole::LogicUpdateJob(class CSettler *) {
   
   ;
@@ -193,7 +179,6 @@ void  CDoorRole::LogicUpdateJob(class CSettler *) {
 
 // address=[0x1588580]
 // Decompiled from int __cdecl CDoorRole::Load(int a1)
-
 static class CDoorRole * __cdecl CDoorRole::Load(std::istream &) {
   
   void **v1; // eax
@@ -209,7 +194,6 @@ static class CDoorRole * __cdecl CDoorRole::Load(std::istream &) {
 
 // address=[0x156d110]
 // Decompiled from IEntity *__thiscall CDoorRole::Init(_WORD *this, CPropertySet *a2)
-
 void  CDoorRole::Init(class CSettler *) {
   
   IEntity *result; // eax
@@ -229,7 +213,6 @@ void  CDoorRole::Init(class CSettler *) {
 
 // address=[0x156d240]
 // Decompiled from ISettlerRole *__thiscall CDoorRole::~CDoorRole(CDoorRole *this)
-
  CDoorRole::~CDoorRole(void) {
   
   *(_DWORD *)this = &CDoorRole::_vftable_;
@@ -238,10 +221,7 @@ void  CDoorRole::Init(class CSettler *) {
 
 
 // address=[0x156d2e0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CDoorRole::GetNextJob(CDoorRole *this, struct CSettler *a2)
-
+// Decompiled from void __thiscall CDoorRole::GetNextJob(CDoorRole *this, struct CSettler *a2)
 void  CDoorRole::GetNextJob(class CSettler *) {
   
   ;
@@ -249,10 +229,7 @@ void  CDoorRole::GetNextJob(class CSettler *) {
 
 
 // address=[0x156d360]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CDoorRole::TakeJob(CDoorRole *this, struct CSettler *a2)
-
+// Decompiled from void __thiscall CDoorRole::TakeJob(CDoorRole *this, struct CSettler *a2)
 void  CDoorRole::TakeJob(class CSettler *) {
   
   ;
@@ -261,7 +238,6 @@ void  CDoorRole::TakeJob(class CSettler *) {
 
 // address=[0x1587a50]
 // Decompiled from CDoorRole *__thiscall CDoorRole::CDoorRole(CDoorRole *this)
-
  CDoorRole::CDoorRole(void) {
   
   ISettlerRole::ISettlerRole(this);

@@ -4,7 +4,6 @@
 
 // address=[0x14b6160]
 // Decompiled from SSaveEntry *__thiscall SSaveEntry::SSaveEntry(SSaveEntry *this)
-
  SSaveEntry::SSaveEntry(void) {
   
   std::wstring::wstring(this);
@@ -16,7 +15,6 @@
 
 // address=[0x14b61c0]
 // Decompiled from void __thiscall SSaveEntry::~SSaveEntry(SSaveEntry *this)
-
  SSaveEntry::~SSaveEntry(void) {
   
   std::string::~string((char *)this + 56);

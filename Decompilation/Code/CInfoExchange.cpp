@@ -4,7 +4,6 @@
 
 // address=[0x1454320]
 // Decompiled from void *__thiscall CInfoExchange::Clear(char *this)
-
 void  CInfoExchange::Clear(void) {
   
   void *result; // eax
@@ -22,7 +21,6 @@ void  CInfoExchange::Clear(void) {
 
 // address=[0x1415220]
 // Decompiled from CInfoExchange *__thiscall CInfoExchange::CInfoExchange(CInfoExchange *this)
-
  CInfoExchange::CInfoExchange(void) {
   
   *(_DWORD *)this = &CInfoExchange::_vftable_;

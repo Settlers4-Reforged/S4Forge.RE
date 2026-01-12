@@ -4,7 +4,6 @@
 
 // address=[0x2f34cd0]
 // Decompiled from void __thiscall CSiedlerAI::InitNetAI(CSiedlerAI *this, int a2)
-
 void  CSiedlerAI::InitNetAI(int) {
   
   *((_DWORD *)this + 7) = a2;
@@ -22,7 +21,6 @@ void  CSiedlerAI::InitNetAI(int) {
 
 // address=[0x2f34d60]
 // Decompiled from CSiedlerAI *__thiscall CSiedlerAI::CSiedlerAI(CSiedlerAI *this, struct CEcoSectorAI *a2, int a3)
-
  CSiedlerAI::CSiedlerAI(class CEcoSectorAI *,int) {
   
   int v3; // eax
@@ -46,7 +44,6 @@ void  CSiedlerAI::InitNetAI(int) {
 
 // address=[0x2f34e50]
 // Decompiled from void __thiscall CSiedlerAI::~CSiedlerAI(CSiedlerAI *this)
-
  CSiedlerAI::~CSiedlerAI(void) {
   
   *(_DWORD *)this = &CSiedlerAI::_vftable_;
@@ -56,7 +53,6 @@ void  CSiedlerAI::InitNetAI(int) {
 
 // address=[0x2f34e70]
 // Decompiled from CParameterSet *__thiscall CSiedlerAI::GenerateAlternatives(CSiedlerAI *this, int a2, struct CParam *a3)
-
 class CParameterSet *  CSiedlerAI::GenerateAlternatives(int,class CParam *) {
   
   int ProdIdForGoodType; // eax
@@ -1385,7 +1381,6 @@ CSiedlerAI__GenerateAlternatives___def_3335063:
 
 // address=[0x2f37a70]
 // Decompiled from CConditionSet *__thiscall CSiedlerAI::Condition(CSiedlerAI *this, int a2, struct CParam *a3)
-
 class CConditionSet *  CSiedlerAI::Condition(int,class CParam *) {
   
   int v4; // [esp+8h] [ebp-18Ch]
@@ -1808,7 +1803,6 @@ class CConditionSet *  CSiedlerAI::Condition(int,class CParam *) {
 
 // address=[0x2f389f0]
 // Decompiled from double __thiscall CSiedlerAI::Valuation(CSiedlerAI *this, int a2, struct CParam *a3, int a4, int a5)
-
 double  CSiedlerAI::Valuation(int,class CParam *,int,int) {
   
   double v6; // [esp+0h] [ebp-48h]
@@ -1902,7 +1896,6 @@ double  CSiedlerAI::Valuation(int,class CParam *,int,int) {
 
 // address=[0x2f38ca0]
 // Decompiled from int __thiscall CSiedlerAI::RepeatingBehaviour(CSiedlerAI *this, int a2, struct CParam *a3)
-
 int  CSiedlerAI::RepeatingBehaviour(int,class CParam *) {
   
   int v4; // [esp+8h] [ebp-4h]
@@ -1916,7 +1909,6 @@ int  CSiedlerAI::RepeatingBehaviour(int,class CParam *) {
 
 // address=[0x2f38cd0]
 // Decompiled from int __thiscall CSiedlerAI::PreferExternSolution(CSiedlerAI *this, int a2, struct CParam *a3)
-
 int  CSiedlerAI::PreferExternSolution(int,class CParam *) {
   
   int v4; // [esp+4h] [ebp-8h]
@@ -1930,7 +1922,6 @@ int  CSiedlerAI::PreferExternSolution(int,class CParam *) {
 
 // address=[0x2f38d10]
 // Decompiled from struct CSolutionTree *__thiscall CSiedlerAI::ImportSolution(CSchedule **this, int a2, struct CParam *a3)
-
 class CSolutionTree *  CSiedlerAI::ImportSolution(int,class CParam *) {
   
   int v4; // [esp+0h] [ebp-10h]
@@ -1955,7 +1946,6 @@ class CSolutionTree *  CSiedlerAI::ImportSolution(int,class CParam *) {
 
 // address=[0x2f38da0]
 // Decompiled from void __thiscall CSiedlerAI::Consequence(CSiedlerAI *this, int a2, struct CParam *a3)
-
 void  CSiedlerAI::Consequence(int,class CParam *) {
   
   ;
@@ -1964,7 +1954,6 @@ void  CSiedlerAI::Consequence(int,class CParam *) {
 
 // address=[0x2f38db0]
 // Decompiled from int __thiscall CSiedlerAI::ExecuteAction(CSiedlerAI *this, int a2, struct CParam *a3)
-
 void  CSiedlerAI::ExecuteAction(int,class CParam *) {
   
   int result; // eax
@@ -2036,7 +2025,6 @@ void  CSiedlerAI::ExecuteAction(int,class CParam *) {
 
 // address=[0x2f38f70]
 // Decompiled from int __thiscall CSiedlerAI::PreExecuteAction(CSiedlerAI *this, int a2, struct CParam *a3)
-
 void  CSiedlerAI::PreExecuteAction(int,class CParam *) {
   
   return a2;
@@ -2045,7 +2033,6 @@ void  CSiedlerAI::PreExecuteAction(int,class CParam *) {
 
 // address=[0x2f38f90]
 // Decompiled from int __thiscall CSiedlerAI::GetInvokeBuildingType(CSiedlerAI *this, struct IScheduleEntry *a2, enum BUILDING_TYPES *a3)
-
 void  CSiedlerAI::GetInvokeBuildingType(class IScheduleEntry *,enum BUILDING_TYPES *) {
   
   int result; // eax
@@ -2114,7 +2101,6 @@ void  CSiedlerAI::GetInvokeBuildingType(class IScheduleEntry *,enum BUILDING_TYP
 
 // address=[0x2f39150]
 // Decompiled from int __thiscall CSiedlerAI::GetInvokePosition(CSiedlerAI *this, int a2, int a3, int a4, int a5, int a6)
-
 int  CSiedlerAI::GetInvokePosition(int,int,int,int,int) {
   
   int v7; // [esp+4h] [ebp-10h]
@@ -2146,9 +2132,7 @@ int  CSiedlerAI::GetInvokePosition(int,int,int,int,int) {
 
 
 // address=[0x2f39260]
-// Decompiled from // public: int __thiscall CSiedlerAI::GetBestBuilding(struct SBUILDINFODATA *,int,int &)
-int __thiscall CSiedlerAI::GetBestBuilding(CSiedlerAI *this, int a2, int a3, _DWORD *a4)
-
+// Decompiled from int __thiscall CSiedlerAI::GetBestBuilding(CSiedlerAI *this, int a2, int a3, _DWORD *a4)
 int  CSiedlerAI::GetBestBuilding(struct SBUILDINFODATA *,int,int &) {
   
   int v6; // [esp+8h] [ebp-10h]
@@ -2171,7 +2155,6 @@ int  CSiedlerAI::GetBestBuilding(struct SBUILDINFODATA *,int,int &) {
 
 // address=[0x2f392f0]
 // Decompiled from int __thiscall CSiedlerAI::ScoringBuilding(CSiedlerAI *this, struct SBUILDINFODATA *a2)
-
 int  CSiedlerAI::ScoringBuilding(struct SBUILDINFODATA *) {
   
   return 500;
@@ -2180,7 +2163,6 @@ int  CSiedlerAI::ScoringBuilding(struct SBUILDINFODATA *) {
 
 // address=[0x2f39310]
 // Decompiled from double __thiscall CSiedlerAI::GeneralValuation(int this, int a2, int a3, int a4, unsigned __int8 a5)
-
 double  CSiedlerAI::GeneralValuation(enum BUILDING_TYPES,int,int,bool) {
   
   int PackWorldPosition; // eax
@@ -2205,10 +2187,7 @@ double  CSiedlerAI::GeneralValuation(enum BUILDING_TYPES,int,int,bool) {
 
 
 // address=[0x2f393a0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CSiedlerAI::CloneMemory(CSiedlerAI *this)
-
+// Decompiled from int __thiscall CSiedlerAI::CloneMemory(CSiedlerAI *this)
 class CDynList *  CSiedlerAI::CloneMemory(void) {
   
   return 0;
@@ -2216,10 +2195,7 @@ class CDynList *  CSiedlerAI::CloneMemory(void) {
 
 
 // address=[0x2f393b0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CSiedlerAI::tmp_speichern(CSiedlerAI *this)
-
+// Decompiled from int __thiscall CSiedlerAI::tmp_speichern(CSiedlerAI *this)
 class tmp_mem *  CSiedlerAI::tmp_speichern(void) {
   
   return 0;
@@ -2227,10 +2203,7 @@ class tmp_mem *  CSiedlerAI::tmp_speichern(void) {
 
 
 // address=[0x2f393c0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CSiedlerAI::tmp_rueckspeichern(CSiedlerAI *this, struct tmp_mem *a2)
-
+// Decompiled from void __thiscall CSiedlerAI::tmp_rueckspeichern(CSiedlerAI *this, struct tmp_mem *a2)
 void  CSiedlerAI::tmp_rueckspeichern(class tmp_mem *) {
   
   ;

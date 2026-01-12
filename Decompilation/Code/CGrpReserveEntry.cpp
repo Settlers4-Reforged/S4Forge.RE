@@ -4,7 +4,6 @@
 
 // address=[0x2f41730]
 // Decompiled from _DWORD *__thiscall CGrpReserveEntry::CGrpReserveEntry(_DWORD *this, int a2, int a3, int a4, int a5)
-
  CGrpReserveEntry::CGrpReserveEntry(enum BUILDING_TYPES,int,int,int) {
   
   CDynList *v6; // [esp+8h] [ebp-18h]
@@ -28,7 +27,6 @@
 
 // address=[0x2f417f0]
 // Decompiled from void __thiscall CGrpReserveEntry::~CGrpReserveEntry(CDynList **this)
-
  CGrpReserveEntry::~CGrpReserveEntry(void) {
   
   *this = (CDynList *)&CGrpReserveEntry::_vftable_;

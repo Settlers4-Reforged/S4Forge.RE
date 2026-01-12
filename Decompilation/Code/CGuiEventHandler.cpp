@@ -4,7 +4,6 @@
 
 // address=[0x139da10]
 // Decompiled from CGuiEventHandler *__thiscall CGuiEventHandler::CGuiEventHandler(CGuiEventHandler *this, bool a2)
-
  CGuiEventHandler::CGuiEventHandler(bool) {
   
   IEvn_Handle::IEvn_Handle(this);
@@ -34,7 +33,6 @@
 
 // address=[0x139daf0]
 // Decompiled from CGuiEventHandler *__thiscall CGuiEventHandler::~CGuiEventHandler(CGuiEventHandler *this)
-
  CGuiEventHandler::~CGuiEventHandler(void) {
   
   CGuiEventHandler *result; // eax
@@ -65,10 +63,7 @@
 
 
 // address=[0x139dbc0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CGuiEventHandler::GetEventFunction(CGuiEventHandler *this)
-
+// Decompiled from int __thiscall CGuiEventHandler::GetEventFunction(CGuiEventHandler *this)
 void *  CGuiEventHandler::GetEventFunction(void) {
   
   return 0;
@@ -77,7 +72,6 @@ void *  CGuiEventHandler::GetEventFunction(void) {
 
 // address=[0x139dbd0]
 // Decompiled from bool __thiscall CGuiEventHandler::OnEvent(CGuiEventHandler *this, struct CEvn_Event *a2)
-
 bool  CGuiEventHandler::OnEvent(class CEvn_Event &) {
   
   bool result; // al
@@ -514,7 +508,6 @@ LABEL_134:
 
 // address=[0x139eaa0]
 // Decompiled from bool __thiscall CGuiEventHandler::RecalcDialogPos(CGuiEventHandler *this, bool a2)
-
 void  CGuiEventHandler::RecalcDialogPos(bool) {
   
   bool result; // al
@@ -651,7 +644,6 @@ void  CGuiEventHandler::RecalcDialogPos(bool) {
 
 // address=[0x139c480]
 // Decompiled from char __thiscall CGuiEventHandler::HandleMsgKeyPress(CGuiEventHandler *this, struct CEvn_Event *a2)
-
 bool  CGuiEventHandler::HandleMsgKeyPress(class CEvn_Event &) {
   
   char result; // al
@@ -802,7 +794,6 @@ bool  CGuiEventHandler::HandleMsgKeyPress(class CEvn_Event &) {
 
 // address=[0x139c960]
 // Decompiled from char __thiscall CGuiEventHandler::HandleMsgKeyDown(CGuiEventHandler *this, struct CEvn_Event *a2)
-
 bool  CGuiEventHandler::HandleMsgKeyDown(class CEvn_Event &) {
   
   CEvn_Event *v3; // [esp+4h] [ebp-58h]
@@ -854,7 +845,6 @@ bool  CGuiEventHandler::HandleMsgKeyDown(class CEvn_Event &) {
 
 // address=[0x139cae0]
 // Decompiled from char __thiscall CGuiEventHandler::HandleMsgNewDialog(CGuiEventHandler *this, struct CEvn_Event *a2)
-
 void  CGuiEventHandler::HandleMsgNewDialog(class CEvn_Event &) {
   
   char result; // al
@@ -1026,7 +1016,6 @@ void  CGuiEventHandler::HandleMsgNewDialog(class CEvn_Event &) {
 
 // address=[0x139d020]
 // Decompiled from char __thiscall CGuiEventHandler::HandleMsgOpenSettings(CGuiEventHandler *this, struct CEvn_Event *a2)
-
 void  CGuiEventHandler::HandleMsgOpenSettings(class CEvn_Event &) {
   
   char result; // al
@@ -1079,7 +1068,6 @@ void  CGuiEventHandler::HandleMsgOpenSettings(class CEvn_Event &) {
 
 // address=[0x139d150]
 // Decompiled from char __thiscall CGuiEventHandler::HandleMsgOpenSidebar(CGuiEventHandler *this, struct CEvn_Event *a2)
-
 void  CGuiEventHandler::HandleMsgOpenSidebar(class CEvn_Event &) {
   
   int v2; // eax
@@ -1149,7 +1137,6 @@ void  CGuiEventHandler::HandleMsgOpenSidebar(class CEvn_Event &) {
 
 // address=[0x139d340]
 // Decompiled from CGuiEventHandler *__thiscall CGuiEventHandler::HandleMsgCloseAllDialogs(CGuiEventHandler *this)
-
 void  CGuiEventHandler::HandleMsgCloseAllDialogs(void) {
   
   CGuiEventHandler *result; // eax
@@ -1235,7 +1222,6 @@ void  CGuiEventHandler::HandleMsgCloseAllDialogs(void) {
 
 // address=[0x139d5c0]
 // Decompiled from void __thiscall CGuiEventHandler::HandleMsgRefreshDialog(CGuiEventHandler *this, struct CEvn_Event *a2)
-
 void  CGuiEventHandler::HandleMsgRefreshDialog(class CEvn_Event &) {
   
   int lparam; // [esp+10h] [ebp-4h]
@@ -1378,7 +1364,6 @@ void  CGuiEventHandler::HandleMsgRefreshDialog(class CEvn_Event &) {
 
 // address=[0x139d830]
 // Decompiled from void __thiscall CGuiEventHandler::HandleMsgRefreshSettingsDialog(CGuiEventHandler *this, struct CEvn_Event *a2)
-
 void  CGuiEventHandler::HandleMsgRefreshSettingsDialog(class CEvn_Event &) {
   
   _DWORD *lparam; // [esp+8h] [ebp-4h]
@@ -1416,7 +1401,6 @@ LABEL_8:
 
 // address=[0x139d8b0]
 // Decompiled from char __thiscall CGuiEventHandler::ResetMainMenu(CGuiEventHandler *this)
-
 void  CGuiEventHandler::ResetMainMenu(void) {
   
   char result; // al
@@ -1430,7 +1414,6 @@ void  CGuiEventHandler::ResetMainMenu(void) {
 
 // address=[0x139d8e0]
 // Decompiled from CGuiEventHandler *__thiscall CGuiEventHandler::ResetMainMenuForContext(CGuiEventHandler *this)
-
 void  CGuiEventHandler::ResetMainMenuForContext(void) {
   
   CGuiEventHandler *result; // eax
@@ -1469,7 +1452,6 @@ void  CGuiEventHandler::ResetMainMenuForContext(void) {
 
 // address=[0x139f020]
 // Decompiled from _DWORD *__thiscall CGuiEventHandler::GetTextMessageDialogParameters(_BYTE *this, _DWORD *a2)
-
 struct CGuiEventHandler::GuiDialogParameters  CGuiEventHandler::GetTextMessageDialogParameters(void)const {
   
   if ( IGfxEngine::GetOutputWidth((IGfxEngine *)g_pGfxEngine) < 1280 )

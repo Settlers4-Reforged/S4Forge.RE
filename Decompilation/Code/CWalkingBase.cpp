@@ -4,7 +4,6 @@
 
 // address=[0x15f6660]
 // Decompiled from CWalking *__thiscall CWalkingBase::~CWalkingBase(CWalkingBase *this)
-
  CWalkingBase::~CWalkingBase(void) {
   
   *(_DWORD *)this = &CWalkingBase::_vftable_;
@@ -15,7 +14,6 @@
 
 // address=[0x15f66b0]
 // Decompiled from int __thiscall CWalkingBase::Store(int *this, int a2)
-
 void  CWalkingBase::Store(std::ostream &) {
   
   int v3; // [esp+0h] [ebp-10h] BYREF
@@ -53,7 +51,6 @@ void  CWalkingBase::Store(std::ostream &) {
 
 // address=[0x15f6860]
 // Decompiled from int __thiscall CWalkingBase::Init(CWalkingBase *this, int a2, int a3)
-
 void  CWalkingBase::Init(int,int) {
   
   int result; // eax
@@ -92,7 +89,6 @@ void  CWalkingBase::Init(int,int) {
 
 // address=[0x15f6950]
 // Decompiled from void __thiscall CWalkingBase::Init(CWalkingBase *this, struct CWalking *a2, int a3)
-
 void  CWalkingBase::Init(class CWalking *,int) {
   
   (*(void (__thiscall **)(CWalkingBase *, int, int))(*(_DWORD *)this + 8))(this, -1, a3);
@@ -102,7 +98,6 @@ void  CWalkingBase::Init(class CWalking *,int) {
 
 // address=[0x15f6980]
 // Decompiled from CWalkingBase *__thiscall CWalkingBase::InitIfLeader(CWalkingBase *this, int a2, int a3)
-
 void  CWalkingBase::InitIfLeader(int,int) {
   
   CWalkingBase *result; // eax
@@ -124,7 +119,6 @@ void  CWalkingBase::InitIfLeader(int,int) {
 
 // address=[0x15f69f0]
 // Decompiled from int __thiscall CWalkingBase::Walk(CWalkingBase *this, Y16X16 *a2)
-
 int  CWalkingBase::Walk(int) {
   
   void *v2; // eax
@@ -622,7 +616,6 @@ LABEL_16:
 
 // address=[0x15f7bc0]
 // Decompiled from int __thiscall CWalkingBase::IdleWalk(CWalkingBase *this, Y16X16 *a2, int a3)
-
 int  CWalkingBase::IdleWalk(int,int) {
   
   int v3; // eax
@@ -848,10 +841,7 @@ int  CWalkingBase::IdleWalk(int,int) {
 
 
 // address=[0x15f8420]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CWalkingBase::DestinationXY(CWalkingBase *this)
-
+// Decompiled from int __thiscall CWalkingBase::DestinationXY(CWalkingBase *this)
 int  CWalkingBase::DestinationXY(void)const {
   
   return *((_DWORD *)this + 4);
@@ -860,7 +850,6 @@ int  CWalkingBase::DestinationXY(void)const {
 
 // address=[0x15f8440]
 // Decompiled from int __thiscall CWalkingBase::State(CWalkingBase *this, int a2)
-
 int  CWalkingBase::State(int)const {
   
   int result; // eax
@@ -923,7 +912,6 @@ int  CWalkingBase::State(int)const {
 
 // address=[0x15f8580]
 // Decompiled from int __thiscall CWalkingBase::OwnerId(CWalkingBase *this)
-
 int  CWalkingBase::OwnerId(void)const {
   
   return *((_DWORD *)this + 13) & 0xF;
@@ -932,7 +920,6 @@ int  CWalkingBase::OwnerId(void)const {
 
 // address=[0x15f85a0]
 // Decompiled from bool __thiscall CWalkingBase::IsNotBlocked(CWalkingBase *this, int a2)
-
 bool  CWalkingBase::IsNotBlocked(int) {
   
   return (unsigned __int8)CWorldManager::IsBlockedLand(a2) == 0;
@@ -941,7 +928,6 @@ bool  CWalkingBase::IsNotBlocked(int) {
 
 // address=[0x15f85e0]
 // Decompiled from bool __thiscall CWalkingBase::IsNotOccupied(CWalkingBase *this, int a2)
-
 bool  CWalkingBase::IsNotOccupied(int) {
   
   return CWorldManager::OccupyingEntityId(a2) == 0;
@@ -950,7 +936,6 @@ bool  CWalkingBase::IsNotOccupied(int) {
 
 // address=[0x15f8620]
 // Decompiled from int __thiscall CWalkingBase::SectorId(CWalkingBase *this, int a2)
-
 int  CWalkingBase::SectorId(int) {
   
   return ITiling::SectorId(a2);
@@ -959,7 +944,6 @@ int  CWalkingBase::SectorId(int) {
 
 // address=[0x15f8640]
 // Decompiled from int __thiscall CWalkingBase::TileId(CWalkingBase *this, int a2)
-
 int  CWalkingBase::TileId(int) {
   
   return ITiling::NormalTileId(a2);
@@ -968,7 +952,6 @@ int  CWalkingBase::TileId(int) {
 
 // address=[0x15f8660]
 // Decompiled from int __thiscall CWalkingBase::GetNextWaypoint(CWalkingBase *this)
-
 int  CWalkingBase::GetNextWaypoint(void) {
   
   int result; // eax
@@ -1005,7 +988,6 @@ int  CWalkingBase::GetNextWaypoint(void) {
 
 // address=[0x15faee0]
 // Decompiled from CWalkingBase *__thiscall CWalkingBase::CWalkingBase(CWalkingBase *this, int a2, int a3)
-
  CWalkingBase::CWalkingBase(int,int) {
   
   CWalking::CWalking(this);
@@ -1019,10 +1001,7 @@ int  CWalkingBase::GetNextWaypoint(void) {
 
 
 // address=[0x15fb220]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-char *__thiscall CWalkingBase::GetData(CWalkingBase *this)
-
+// Decompiled from char *__thiscall CWalkingBase::GetData(CWalkingBase *this)
 struct CWalkingBase::SData &  CWalkingBase::GetData(void) {
   
   return (char *)this + 4;
@@ -1031,7 +1010,6 @@ struct CWalkingBase::SData &  CWalkingBase::GetData(void) {
 
 // address=[0x15f86e0]
 // Decompiled from char __thiscall CWalkingBase::FindPathAStar64(CWalkingBase *this, int a2, int a3, struct CDirCache *a4)
-
 bool  CWalkingBase::FindPathAStar64(int,int,class CDirCache &) {
   
   return CAStar64::FindPath((CAStar64 *)&g_cAStar64Normal, a2, a3, a4);
@@ -1040,7 +1018,6 @@ bool  CWalkingBase::FindPathAStar64(int,int,class CDirCache &) {
 
 // address=[0x15f8710]
 // Decompiled from int __thiscall CWalkingBase::FindNearest(CWalkingBase *this, int a2, int a3, int a4)
-
 int  CWalkingBase::FindNearest(int,int,int) {
   
   int v4; // eax
@@ -1064,7 +1041,6 @@ int  CWalkingBase::FindNearest(int,int,int) {
 
 // address=[0x15f87f0]
 // Decompiled from int __thiscall CWalkingBase::GoalCheck(CWalkingBase *this, Y16X16 *a2)
-
 void  CWalkingBase::GoalCheck(int) {
   
   int v2; // eax
@@ -1173,7 +1149,6 @@ void  CWalkingBase::GoalCheck(int) {
 
 // address=[0x15f8a40]
 // Decompiled from int __thiscall CWalkingBase::DbgPrintElementInfo(CWalkingBase *this, const char *a2, int a3)
-
 void  CWalkingBase::DbgPrintElementInfo(char const *,int) {
   
   int v4; // [esp+0h] [ebp-2Ch]
@@ -1217,7 +1192,6 @@ void  CWalkingBase::DbgPrintElementInfo(char const *,int) {
 
 // address=[0x15f8b70]
 // Decompiled from struct CWalkingBase *__thiscall CWalkingBase::AttachWalking(CWalkingBase *this, struct CWalkingBase *a2)
-
 void  CWalkingBase::AttachWalking(class CWalkingBase *) {
   
   struct CWalkingBase *result; // eax
@@ -1251,7 +1225,6 @@ void  CWalkingBase::AttachWalking(class CWalkingBase *) {
 
 // address=[0x15f8c90]
 // Decompiled from _DWORD *__thiscall CWalkingBase::DetachWalking(CWalkingBase *this)
-
 class CWalking *  CWalkingBase::DetachWalking(void) {
   
   int v2; // [esp+0h] [ebp-10h]
@@ -1317,7 +1290,6 @@ class CWalking *  CWalkingBase::DetachWalking(void) {
 
 // address=[0x15f8e70]
 // Decompiled from int __thiscall CWalkingBase::GroupLeaderWalking(CWalkingBase *this, int a2, int a3)
-
 void  CWalkingBase::GroupLeaderWalking(int,int) {
   
   int result; // eax
@@ -1390,7 +1362,6 @@ void  CWalkingBase::GroupLeaderWalking(int,int) {
 
 // address=[0x15fb200]
 // Decompiled from int __thiscall CWalkingBase::Flags(CPaneContainer *this)
-
 int  CWalkingBase::Flags(void) {
   
   return *((_DWORD *)this + 12);
@@ -1399,7 +1370,6 @@ int  CWalkingBase::Flags(void) {
 
 // address=[0x15fb2b0]
 // Decompiled from char __thiscall CWalkingBase::IsNeighborTile(CWalkingBase *this, int a2, int a3)
-
 bool  CWalkingBase::IsNeighborTile(int,int) {
   
   CLinkList *v4; // [esp+4h] [ebp-8h]
@@ -1413,7 +1383,6 @@ bool  CWalkingBase::IsNeighborTile(int,int) {
 
 // address=[0x15fb300]
 // Decompiled from char __thiscall CWalkingBase::NextCoarseWaypoint(_DWORD *this, int a2)
-
 bool  CWalkingBase::NextCoarseWaypoint(int) {
   
   int v3; // eax

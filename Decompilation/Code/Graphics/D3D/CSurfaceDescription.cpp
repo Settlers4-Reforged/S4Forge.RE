@@ -4,7 +4,6 @@
 
 // address=[0x2f87700]
 // Decompiled from CSurfaceDescription *__thiscall CSurfaceDescription::CSurfaceDescription(CSurfaceDescription *this)
-
  CSurfaceDescription::CSurfaceDescription(void) {
   
   j__memset(this, 0, 0x7Cu);

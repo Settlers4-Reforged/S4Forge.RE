@@ -4,7 +4,6 @@
 
 // address=[0x2f2b470]
 // Decompiled from LZHLDecoderStat *__thiscall LZHLDecoderStat::LZHLDecoderStat(LZHLDecoderStat *this)
-
  LZHLDecoderStat::LZHLDecoderStat(void) {
   
   HuffStat::HuffStat(this);
@@ -17,7 +16,6 @@
 
 // address=[0x2f2b510]
 // Decompiled from int __thiscall LZHLDecoderStat::~LZHLDecoderStat(void **this)
-
  LZHLDecoderStat::~LZHLDecoderStat(void) {
   
   operator delete[](this[33]);

@@ -4,7 +4,6 @@
 
 // address=[0x1400860]
 // Decompiled from int __cdecl CEyeCatcherRole::New(int a1)
-
 static class CPersistence * __cdecl CEyeCatcherRole::New(std::istream &) {
   
   if ( operator new(0x17Cu) )
@@ -16,7 +15,6 @@ static class CPersistence * __cdecl CEyeCatcherRole::New(std::istream &) {
 
 // address=[0x14fc970]
 // Decompiled from CEyeCatcherRole *__thiscall CEyeCatcherRole::CEyeCatcherRole(CEyeCatcherRole *this)
-
  CEyeCatcherRole::CEyeCatcherRole(void) {
   
   IBuildingRole::IBuildingRole(this);
@@ -27,7 +25,6 @@ static class CPersistence * __cdecl CEyeCatcherRole::New(std::istream &) {
 
 // address=[0x14fcbf0]
 // Decompiled from int __thiscall CEyeCatcherRole::~CEyeCatcherRole(CEyeCatcherRole *this)
-
  CEyeCatcherRole::~CEyeCatcherRole(void) {
   
   return IBuildingRole::~IBuildingRole(this);
@@ -36,7 +33,6 @@ static class CPersistence * __cdecl CEyeCatcherRole::New(std::istream &) {
 
 // address=[0x14fd0a0]
 // Decompiled from int __thiscall CEyeCatcherRole::ClassID(CEyeCatcherRole *this)
-
 unsigned long  CEyeCatcherRole::ClassID(void)const {
   
   return CEyeCatcherRole::m_iClassID;
@@ -45,7 +41,6 @@ unsigned long  CEyeCatcherRole::ClassID(void)const {
 
 // address=[0x14fd340]
 // Decompiled from void *__thiscall CEyeCatcherRole::GetBuildingNeed(std::_Ref_count_base *this, const struct type_info *a2)
-
 int  CEyeCatcherRole::GetBuildingNeed(int)const {
   
   return 0;
@@ -54,7 +49,6 @@ int  CEyeCatcherRole::GetBuildingNeed(int)const {
 
 // address=[0x14fd480]
 // Decompiled from int __thiscall CEyeCatcherRole::GetBuildingRole(CEyeCatcherRole *this)
-
 int  CEyeCatcherRole::GetBuildingRole(void) {
   
   return 19;
@@ -63,7 +57,6 @@ int  CEyeCatcherRole::GetBuildingRole(void) {
 
 // address=[0x14fd5e0]
 // Decompiled from void *__thiscall CEyeCatcherRole::GetPileIdWithGood(std::_Ref_count_base *this, const struct type_info *a2)
-
 int  CEyeCatcherRole::GetPileIdWithGood(int)const {
   
   return 0;
@@ -71,10 +64,7 @@ int  CEyeCatcherRole::GetPileIdWithGood(int)const {
 
 
 // address=[0x14fd6f0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CEyeCatcherRole::GoodArrive(CEyeCatcherRole *this, int a2)
-
+// Decompiled from void __thiscall CEyeCatcherRole::GoodArrive(CEyeCatcherRole *this, int a2)
 void  CEyeCatcherRole::GoodArrive(int) {
   
   ;
@@ -83,7 +73,6 @@ void  CEyeCatcherRole::GoodArrive(int) {
 
 // address=[0x14fd9b0]
 // Decompiled from int __cdecl CEyeCatcherRole::Load(int a1)
-
 static class CEyeCatcherRole * __cdecl CEyeCatcherRole::Load(std::istream &) {
   
   void **v1; // eax
@@ -95,10 +84,7 @@ static class CEyeCatcherRole * __cdecl CEyeCatcherRole::Load(std::istream &) {
 
 
 // address=[0x150a110]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CEyeCatcherRole::LogicUpdate(CEyeCatcherRole *this, struct CBuilding *a2)
-
+// Decompiled from void __thiscall CEyeCatcherRole::LogicUpdate(CEyeCatcherRole *this, struct CBuilding *a2)
 void  CEyeCatcherRole::LogicUpdate(class CBuilding *) {
   
   ;
@@ -106,11 +92,7 @@ void  CEyeCatcherRole::LogicUpdate(class CBuilding *) {
 
 
 // address=[0x150a120]
-// Decompiled from CEyeCatcherRole *__thiscall CEyeCatcherRole::FillGfxInfo(
-        CEyeCatcherRole *this,
-        struct CBuilding *a2,
-        struct SGfxObjectInfo *a3)
-
+// Decompiled from CEyeCatcherRole *__thiscall CEyeCatcherRole::FillGfxInfo(  CEyeCatcherRole *this,  struct CBuilding *a2,  struct SGfxObjectInfo *a3)
 void  CEyeCatcherRole::FillGfxInfo(class CBuilding *,struct SGfxObjectInfo &) {
   
   int v3; // eax
@@ -142,7 +124,6 @@ void  CEyeCatcherRole::FillGfxInfo(class CBuilding *,struct SGfxObjectInfo &) {
 
 // address=[0x150a240]
 // Decompiled from int __thiscall CEyeCatcherRole::Init(CEyeCatcherRole *this, struct CBuilding *a2)
-
 void  CEyeCatcherRole::Init(class CBuilding *) {
   
   int result; // eax
@@ -157,7 +138,6 @@ void  CEyeCatcherRole::Init(class CBuilding *) {
 
 // address=[0x150a280]
 // Decompiled from int __thiscall CEyeCatcherRole::PostLoadInit(CEyeCatcherRole *this, struct CBuilding *a2)
-
 void  CEyeCatcherRole::PostLoadInit(class CBuilding *) {
   
   int v2; // eax
@@ -174,7 +154,6 @@ void  CEyeCatcherRole::PostLoadInit(class CBuilding *) {
 
 // address=[0x150a2b0]
 // Decompiled from _DWORD *__thiscall CEyeCatcherRole::FillDialog(CEyeCatcherRole *this, struct CBuilding *a2, bool a3)
-
 void  CEyeCatcherRole::FillDialog(class CBuilding *,bool) {
   
   int v3; // eax
@@ -212,7 +191,6 @@ void  CEyeCatcherRole::FillDialog(class CBuilding *,bool) {
 
 // address=[0x150a400]
 // Decompiled from char *__thiscall CEyeCatcherRole::CEyeCatcherRole(char *this, int a2)
-
  CEyeCatcherRole::CEyeCatcherRole(std::istream &) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
@@ -239,7 +217,6 @@ void  CEyeCatcherRole::FillDialog(class CBuilding *,bool) {
 
 // address=[0x150a4b0]
 // Decompiled from int __thiscall CEyeCatcherRole::Store(struct IBuildingRole *this, struct std::ostream *a2)
-
 void  CEyeCatcherRole::Store(std::ostream &) {
   
   int v3[2]; // [esp+0h] [ebp-8h] BYREF
@@ -255,11 +232,7 @@ void  CEyeCatcherRole::Store(std::ostream &) {
 // [Decompilation failed for static unsigned long CEyeCatcherRole::m_iClassID]
 
 // address=[0x14fd1f0]
-// Decompiled from void __thiscall CEyeCatcherRole::ConvertEventIntoGoal(
-        CEyeCatcherRole *this,
-        struct CBuilding *a2,
-        struct CEntityEvent *a3)
-
+// Decompiled from void __thiscall CEyeCatcherRole::ConvertEventIntoGoal(  CEyeCatcherRole *this,  struct CBuilding *a2,  struct CEntityEvent *a3)
 void  CEyeCatcherRole::ConvertEventIntoGoal(class CBuilding *,class CEntityEvent *) {
   
   ;
@@ -268,7 +241,6 @@ void  CEyeCatcherRole::ConvertEventIntoGoal(class CBuilding *,class CEntityEvent
 
 // address=[0x14fd270]
 // Decompiled from char __thiscall CEyeCatcherRole::CrushBuilding(CEyeCatcherRole *this)
-
 bool  CEyeCatcherRole::CrushBuilding(void) {
   
   return 1;
@@ -277,7 +249,6 @@ bool  CEyeCatcherRole::CrushBuilding(void) {
 
 // address=[0x14fde20]
 // Decompiled from char __thiscall CEyeCatcherRole::TryCrushBuilding(CEyeCatcherRole *this)
-
 bool  CEyeCatcherRole::TryCrushBuilding(void) {
   
   return 1;

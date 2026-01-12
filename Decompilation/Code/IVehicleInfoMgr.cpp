@@ -4,7 +4,6 @@
 
 // address=[0x152f270]
 // Decompiled from char *__cdecl IVehicleInfoMgr::VehicleProperties(unsigned int a1, unsigned int a2)
-
 static struct SVehicleProperties const * __cdecl IVehicleInfoMgr::VehicleProperties(unsigned int,unsigned int) {
   
   if ( !IVehicleInfoMgr::m_bInitialized
@@ -49,7 +48,6 @@ static struct SVehicleProperties const * __cdecl IVehicleInfoMgr::VehiclePropert
 
 // address=[0x15ac380]
 // Decompiled from IVehicleInfoMgr *__thiscall IVehicleInfoMgr::IVehicleInfoMgr(IVehicleInfoMgr *this)
-
  IVehicleInfoMgr::IVehicleInfoMgr(void) {
   
   *(_DWORD *)this = &IVehicleInfoMgr::_vftable_;

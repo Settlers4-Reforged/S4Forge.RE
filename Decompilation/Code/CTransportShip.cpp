@@ -4,7 +4,6 @@
 
 // address=[0x1402520]
 // Decompiled from int __cdecl CTransportShip::New(int a1)
-
 static class CPersistence * __cdecl CTransportShip::New(std::istream &) {
   
   if ( CTransportShip::operator new(0x12Cu) )
@@ -16,7 +15,6 @@ static class CPersistence * __cdecl CTransportShip::New(std::istream &) {
 
 // address=[0x152bdd0]
 // Decompiled from int __thiscall CTransportShip::GetTradingState(CMFCBaseTabCtrl *this)
-
 enum CTransportShip::TIntTraderState  CTransportShip::GetTradingState(void) {
   
   return *((_DWORD *)this + 73);
@@ -25,7 +23,6 @@ enum CTransportShip::TIntTraderState  CTransportShip::GetTradingState(void) {
 
 // address=[0x152be30]
 // Decompiled from char __thiscall CTransportShip::IsNeutralTrader(CTransportShip *this)
-
 bool  CTransportShip::IsNeutralTrader(void) {
   
   return *((_BYTE *)this + 193);
@@ -34,7 +31,6 @@ bool  CTransportShip::IsNeutralTrader(void) {
 
 // address=[0x152beb0]
 // Decompiled from CTransportShip *__thiscall CTransportShip::MemHomePosition(CTransportShip *this)
-
 void  CTransportShip::MemHomePosition(void) {
   
   CTransportShip *result; // eax
@@ -47,7 +43,6 @@ void  CTransportShip::MemHomePosition(void) {
 
 // address=[0x159e950]
 // Decompiled from _DWORD *__thiscall CTransportShip::FillDialog(CTransportShip *this, bool a2)
-
 void  CTransportShip::FillDialog(bool) {
   
   unsigned int v3; // [esp+4h] [ebp-34h]
@@ -75,7 +70,6 @@ void  CTransportShip::FillDialog(bool) {
 
 // address=[0x159ea50]
 // Decompiled from int __thiscall CTransportShip::GetGoodAmount(CTransportShip *this, int a2)
-
 int  CTransportShip::GetGoodAmount(int) {
   
   int v3; // [esp+4h] [ebp-8h]
@@ -93,7 +87,6 @@ int  CTransportShip::GetGoodAmount(int) {
 
 // address=[0x159eab0]
 // Decompiled from int __thiscall CTransportShip::AddGood(CTransportShip *this, int a2, int a3)
-
 int  CTransportShip::AddGood(int,int) {
   
   int v4; // [esp+0h] [ebp-18h]
@@ -137,7 +130,6 @@ int  CTransportShip::AddGood(int,int) {
 
 // address=[0x159ec10]
 // Decompiled from int __thiscall CTransportShip::RemoveGood(CTransportShip *this, int a2, int a3)
-
 int  CTransportShip::RemoveGood(int,int) {
   
   int v4; // [esp+8h] [ebp-Ch]
@@ -165,7 +157,6 @@ int  CTransportShip::RemoveGood(int,int) {
 
 // address=[0x159ed00]
 // Decompiled from char __thiscall CTransportShip::IsSpaceAvailable(CTransportShip *this, int a2)
-
 bool  CTransportShip::IsSpaceAvailable(int) {
   
   int i; // [esp+4h] [ebp-4h]
@@ -183,7 +174,6 @@ bool  CTransportShip::IsSpaceAvailable(int) {
 
 // address=[0x159ed70]
 // Decompiled from int __thiscall CTransportShip::GetAvailableSpace(CTransportShip *this, int a2)
-
 int  CTransportShip::GetAvailableSpace(int) {
   
   int v3; // [esp+0h] [ebp-Ch]
@@ -201,7 +191,6 @@ int  CTransportShip::GetAvailableSpace(int) {
 
 // address=[0x159edf0]
 // Decompiled from int __thiscall CTransportShip::GetAvailableSpace(CTransportShip *this)
-
 int  CTransportShip::GetAvailableSpace(void) {
   
   int v2; // [esp+4h] [ebp-8h]
@@ -219,7 +208,6 @@ int  CTransportShip::GetAvailableSpace(void) {
 
 // address=[0x159ee40]
 // Decompiled from char __thiscall CTransportShip::IsFull(CTransportShip *this)
-
 bool  CTransportShip::IsFull(void) {
   
   int v2; // [esp+0h] [ebp-14h]
@@ -257,7 +245,6 @@ bool  CTransportShip::IsFull(void) {
 
 // address=[0x159ef20]
 // Decompiled from bool __thiscall CTransportShip::HasLoadedSomething(CTransportShip *this)
-
 bool  CTransportShip::HasLoadedSomething(void) {
   
   int i; // [esp+4h] [ebp-8h]
@@ -272,7 +259,6 @@ bool  CTransportShip::HasLoadedSomething(void) {
 
 // address=[0x159ef70]
 // Decompiled from char __thiscall CTransportShip::HasLoadGood(int *this, int a2)
-
 bool  CTransportShip::HasLoadGood(enum PILE_TYPES) {
   
   int i; // [esp+4h] [ebp-4h]
@@ -288,7 +274,6 @@ bool  CTransportShip::HasLoadGood(enum PILE_TYPES) {
 
 // address=[0x159efd0]
 // Decompiled from CTransportShip *__thiscall CTransportShip::SetTargetHarbourID(CTransportShip *this, int a2)
-
 void  CTransportShip::SetTargetHarbourID(int) {
   
   CTransportShip *result; // eax
@@ -300,9 +285,7 @@ void  CTransportShip::SetTargetHarbourID(int) {
 
 
 // address=[0x159eff0]
-// Decompiled from // MFC 3.1-14.0 32bit
-int __thiscall CTransportShip::GetTargetHarbourID(CTransportShip *this)
-
+// Decompiled from int __thiscall CTransportShip::GetTargetHarbourID(CTransportShip *this)
 int  CTransportShip::GetTargetHarbourID(void) {
   
   return *((_DWORD *)this + 43);
@@ -311,7 +294,6 @@ int  CTransportShip::GetTargetHarbourID(void) {
 
 // address=[0x159f010]
 // Decompiled from void __thiscall CTransportShip::TargetHarbourDestroyed(CTransportShip *this)
-
 void  CTransportShip::TargetHarbourDestroyed(void) {
   
   int v1; // eax
@@ -362,7 +344,6 @@ void  CTransportShip::TargetHarbourDestroyed(void) {
 
 // address=[0x159f120]
 // Decompiled from CTransportShip *__thiscall CTransportShip::SetDepartHarbourID(CTransportShip *this, int a2)
-
 void  CTransportShip::SetDepartHarbourID(int) {
   
   CTransportShip *result; // eax
@@ -374,9 +355,7 @@ void  CTransportShip::SetDepartHarbourID(int) {
 
 
 // address=[0x159f140]
-// Decompiled from // MFC 3.1-14.0 32bit
-int __thiscall CTransportShip::GetDepartHarbourID(CTransportShip *this)
-
+// Decompiled from int __thiscall CTransportShip::GetDepartHarbourID(CTransportShip *this)
 int  CTransportShip::GetDepartHarbourID(void) {
   
   return *((_DWORD *)this + 44);
@@ -385,7 +364,6 @@ int  CTransportShip::GetDepartHarbourID(void) {
 
 // address=[0x159f160]
 // Decompiled from void __thiscall CTransportShip::DepartHarbourDestroyed(CTransportShip *this)
-
 void  CTransportShip::DepartHarbourDestroyed(void) {
   
   int v1; // eax
@@ -408,10 +386,7 @@ void  CTransportShip::DepartHarbourDestroyed(void) {
 
 
 // address=[0x159f1e0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CTransportShip::DestroyShip(CTransportShip *this)
-
+// Decompiled from void __thiscall CTransportShip::DestroyShip(CTransportShip *this)
 void  CTransportShip::DestroyShip(void) {
   
   ;
@@ -420,7 +395,6 @@ void  CTransportShip::DestroyShip(void) {
 
 // address=[0x159f1f0]
 // Decompiled from void __thiscall CTransportShip::ShipArrived(CTransportShip *this)
-
 void  CTransportShip::ShipArrived(void) {
   
   int v1; // eax
@@ -484,7 +458,6 @@ void  CTransportShip::ShipArrived(void) {
 
 // address=[0x159f340]
 // Decompiled from CTransportShip *__thiscall CTransportShip::MoveToTarget(CTransportShip *this)
-
 void  CTransportShip::MoveToTarget(void) {
   
   CTransportShip *result; // eax
@@ -511,7 +484,6 @@ void  CTransportShip::MoveToTarget(void) {
 
 // address=[0x159f3e0]
 // Decompiled from void __thiscall CTransportShip::SetFree(CTransportShip *this)
-
 void  CTransportShip::SetFree(void) {
   
   if ( CTransportShip::HasLoadedSomething(this) )
@@ -521,7 +493,6 @@ void  CTransportShip::SetFree(void) {
 
 // address=[0x159f410]
 // Decompiled from int __thiscall CTransportShip::DropGoods(CTransportShip *this)
-
 void  CTransportShip::DropGoods(void) {
   
   int GoodAmount; // [esp+0h] [ebp-Ch]
@@ -539,7 +510,6 @@ void  CTransportShip::DropGoods(void) {
 
 // address=[0x159f470]
 // Decompiled from CTransportShip *__thiscall CTransportShip::TryToGoHome(Y16X16 **this)
-
 void  CTransportShip::TryToGoHome(void) {
   
   CTransportShip *result; // eax
@@ -562,9 +532,7 @@ void  CTransportShip::TryToGoHome(void) {
 
 
 // address=[0x159f4f0]
-// Decompiled from // public: void __thiscall CTransportShip::GoToHomeTradingBuilding(void)
-_DWORD *__thiscall CTransportShip::GoToHomeTradingBuilding(CTransportShip *this)
-
+// Decompiled from _DWORD *__thiscall CTransportShip::GoToHomeTradingBuilding(CTransportShip *this)
 void  CTransportShip::GoToHomeTradingBuilding(void) {
   
   unsigned __int8 *BuildingPtr; // eax
@@ -601,7 +569,6 @@ void  CTransportShip::GoToHomeTradingBuilding(void) {
 
 // address=[0x159f5e0]
 // Decompiled from unsigned __int8 *__thiscall CTransportShip::SetHomeID(CTransportShip *this, unsigned int a2)
-
 void  CTransportShip::SetHomeID(int) {
   
   unsigned __int8 *result; // eax
@@ -635,9 +602,7 @@ void  CTransportShip::SetHomeID(int) {
 
 
 // address=[0x159f6a0]
-// Decompiled from // MFC 3.1-14.0 32bit
-CTransportShip *__thiscall CTransportShip::SetJobType(CTransportShip *this, int a2)
-
+// Decompiled from CTransportShip *__thiscall CTransportShip::SetJobType(CTransportShip *this, int a2)
 void  CTransportShip::SetJobType(int) {
   
   CTransportShip *result; // eax
@@ -649,9 +614,7 @@ void  CTransportShip::SetJobType(int) {
 
 
 // address=[0x159f6c0]
-// Decompiled from // MFC 3.1-14.0 32bit
-int __thiscall CTransportShip::GetJobType(CTransportShip *this)
-
+// Decompiled from int __thiscall CTransportShip::GetJobType(CTransportShip *this)
 int  CTransportShip::GetJobType(void) {
   
   return *((_DWORD *)this + 47);
@@ -660,7 +623,6 @@ int  CTransportShip::GetJobType(void) {
 
 // address=[0x159f6e0]
 // Decompiled from CTransportShip *__thiscall CTransportShip::SetGoToSource(CTransportShip *this, bool a2)
-
 void  CTransportShip::SetGoToSource(bool) {
   
   CTransportShip *result; // eax
@@ -673,7 +635,6 @@ void  CTransportShip::SetGoToSource(bool) {
 
 // address=[0x159f700]
 // Decompiled from CTransportShip *__thiscall CTransportShip::SetGoToTarget(CTransportShip *this, bool a2)
-
 void  CTransportShip::SetGoToTarget(bool) {
   
   CTransportShip *result; // eax
@@ -686,7 +647,6 @@ void  CTransportShip::SetGoToTarget(bool) {
 
 // address=[0x159f720]
 // Decompiled from CTransportShip *__thiscall CTransportShip::VehicleLogicUpdate(CTransportShip *this)
-
 void  CTransportShip::VehicleLogicUpdate(void) {
   
   int v1; // eax
@@ -746,7 +706,6 @@ void  CTransportShip::VehicleLogicUpdate(void) {
 
 // address=[0x159f8b0]
 // Decompiled from void __thiscall CTransportShip::ConvertEventIntoGoal(CTransportShip *this, struct CEntityEvent *a2)
-
 void  CTransportShip::ConvertEventIntoGoal(class CEntityEvent *) {
   
   if ( *((_DWORD *)a2 + 1) == 9 || *((_DWORD *)a2 + 1) == 7 )
@@ -762,7 +721,6 @@ void  CTransportShip::ConvertEventIntoGoal(class CEntityEvent *) {
 
 // address=[0x159f910]
 // Decompiled from CTransportShip *__thiscall CTransportShip::TakeJob(CTransportShip *this)
-
 void  CTransportShip::TakeJob(void) {
   
   CTransportShip *result; // eax
@@ -776,7 +734,6 @@ void  CTransportShip::TakeJob(void) {
 
 // address=[0x159f940]
 // Decompiled from void *__thiscall CTransportShip::GetGfxInfos(CTransportShip *this)
-
 struct SGfxObjectInfo *  CTransportShip::GetGfxInfos(void) {
   
   CShip::GetGfxInfos((int)this);
@@ -788,7 +745,6 @@ struct SGfxObjectInfo *  CTransportShip::GetGfxInfos(void) {
 
 // address=[0x159f980]
 // Decompiled from CTransportShip *__thiscall CTransportShip::SetNeutralTraderStatus(CTransportShip *this, bool a2)
-
 void  CTransportShip::SetNeutralTraderStatus(bool) {
   
   CTransportShip *result; // eax
@@ -825,7 +781,6 @@ void  CTransportShip::SetNeutralTraderStatus(bool) {
 
 // address=[0x159fa30]
 // Decompiled from _DWORD *__thiscall CTransportShip::ClearNeutralTraderStatus(CTransportShip *this)
-
 void  CTransportShip::ClearNeutralTraderStatus(void) {
   
   *((_BYTE *)this + 193) = 0;
@@ -836,7 +791,6 @@ void  CTransportShip::ClearNeutralTraderStatus(void) {
 
 // address=[0x159fa60]
 // Decompiled from unsigned int __cdecl CTransportShip::operator new(unsigned int a1)
-
 static void * __cdecl CTransportShip::operator new(unsigned int) {
   
   return CVehicleMgr::Alloc((CVehicleMgr *)&g_cVehicleMgr, a1);
@@ -845,7 +799,6 @@ static void * __cdecl CTransportShip::operator new(unsigned int) {
 
 // address=[0x159fa80]
 // Decompiled from void __cdecl CTransportShip::operator delete(void *a1)
-
 static void __cdecl CTransportShip::operator delete(void *) {
   
   CVehicleMgr::Dealloc((CVehicleMgr *)&g_cVehicleMgr, a1);
@@ -854,7 +807,6 @@ static void __cdecl CTransportShip::operator delete(void *) {
 
 // address=[0x159fac0]
 // Decompiled from char *__thiscall CTransportShip::CTransportShip(char *this, int a2)
-
  CTransportShip::CTransportShip(std::istream &) {
   
   int v3; // [esp+4h] [ebp-34h] BYREF
@@ -959,7 +911,6 @@ static void __cdecl CTransportShip::operator delete(void *) {
 
 // address=[0x15a0060]
 // Decompiled from int __thiscall CTransportShip::Store(int *this, struct std::ostream *a2)
-
 void  CTransportShip::Store(std::ostream &) {
   
   int v3; // [esp+0h] [ebp-10h] BYREF
@@ -993,7 +944,6 @@ void  CTransportShip::Store(std::ostream &) {
 
 // address=[0x15a09c0]
 // Decompiled from int __thiscall CTransportShip::ClassID(CTransportShip *this)
-
 unsigned long  CTransportShip::ClassID(void)const {
   
   return CTransportShip::m_iClassID;
@@ -1004,16 +954,7 @@ unsigned long  CTransportShip::ClassID(void)const {
 // [Decompilation failed for static unsigned long CTransportShip::m_iClassID]
 
 // address=[0x15a01e0]
-// Decompiled from CTransportShip *__thiscall CTransportShip::CTransportShip(
-        CTransportShip *this,
-        int a2,
-        int a3,
-        int a4,
-        int a5,
-        int a6,
-        int a7,
-        bool a8)
-
+// Decompiled from CTransportShip *__thiscall CTransportShip::CTransportShip(  CTransportShip *this,  int a2,  int a3,  int a4,  int a5,  int a6,  int a7,  bool a8)
  CTransportShip::CTransportShip(int,int,int,int,int,int,bool) {
   
   int i; // [esp+0h] [ebp-8h]
@@ -1040,7 +981,6 @@ unsigned long  CTransportShip::ClassID(void)const {
 
 // address=[0x15a02d0]
 // Decompiled from void __thiscall CTransportShip::~CTransportShip(CTransportShip *this)
-
  CTransportShip::~CTransportShip(void) {
   
   *(_DWORD *)this = &CTransportShip::_vftable_;

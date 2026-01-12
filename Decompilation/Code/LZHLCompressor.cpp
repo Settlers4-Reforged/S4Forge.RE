@@ -4,7 +4,6 @@
 
 // address=[0x2f02850]
 // Decompiled from unsigned int __cdecl LZHLCompressor::calcMaxBuf(unsigned int a1)
-
 static unsigned int __cdecl LZHLCompressor::calcMaxBuf(unsigned int) {
   
   return LZHLEncoder::calcMaxBuf(a1);
@@ -13,7 +12,6 @@ static unsigned int __cdecl LZHLCompressor::calcMaxBuf(unsigned int) {
 
 // address=[0x2f29650]
 // Decompiled from LZHLCompressor *__thiscall LZHLCompressor::LZHLCompressor(LZHLCompressor *this)
-
  LZHLCompressor::LZHLCompressor(void) {
   
   int i; // [esp+Ch] [ebp-14h]
@@ -29,7 +27,6 @@ static unsigned int __cdecl LZHLCompressor::calcMaxBuf(unsigned int) {
 
 // address=[0x2f29710]
 // Decompiled from void __thiscall LZHLCompressor::~LZHLCompressor(void **this)
-
  LZHLCompressor::~LZHLCompressor(void) {
   
   operator delete[](this[5]);
@@ -40,7 +37,6 @@ static unsigned int __cdecl LZHLCompressor::calcMaxBuf(unsigned int) {
 
 // address=[0x2f29750]
 // Decompiled from unsigned int __thiscall LZHLCompressor::compress(int this, unsigned __int8 *a2, unsigned __int8 *Src, unsigned int a4)
-
 unsigned int  LZHLCompressor::compress(unsigned char *,unsigned char const *,unsigned int) {
   
   signed int v4; // eax
@@ -317,13 +313,7 @@ LABEL_5:
 
 
 // address=[0x2f2a790]
-// Decompiled from int __thiscall LZHLCompressor::_updateTable(
-        LZHLCompressor *this,
-        unsigned int a2,
-        const unsigned __int8 *a3,
-        unsigned int a4,
-        int a5)
-
+// Decompiled from int __thiscall LZHLCompressor::_updateTable(  LZHLCompressor *this,  unsigned int a2,  const unsigned __int8 *a3,  unsigned int a4,  int a5)
 unsigned long  LZHLCompressor::_updateTable(unsigned long,unsigned char const *,unsigned long,int) {
   
   const unsigned __int8 *j; // [esp+8h] [ebp-8h]

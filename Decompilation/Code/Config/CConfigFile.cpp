@@ -4,7 +4,6 @@
 
 // address=[0x2f28860]
 // Decompiled from int __thiscall CConfigFile::CConfigFile(int this, wchar_t *FileName)
-
  CConfigFile::CConfigFile(wchar_t const *) {
   
   _DWORD v4[26]; // [esp+Ch] [ebp-7Ch] BYREF
@@ -31,7 +30,6 @@
 
 // address=[0x2f28980]
 // Decompiled from void __thiscall CConfigFile::~CConfigFile(void **this)
-
  CConfigFile::~CConfigFile(void) {
   
   if ( this[7] )
@@ -41,10 +39,7 @@
 
 
 // address=[0x2f289c0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CConfigFile::GetConfig(CConfigFile *this)
-
+// Decompiled from int __thiscall CConfigFile::GetConfig(CConfigFile *this)
 char *  CConfigFile::GetConfig(void) {
   
   return *((_DWORD *)this + 7);
@@ -52,9 +47,7 @@ char *  CConfigFile::GetConfig(void) {
 
 
 // address=[0x2f289e0]
-// Decompiled from // MFC 3.1-14.0 32bit
-int __thiscall CConfigFile::GetSize(CConfigFile *this)
-
+// Decompiled from int __thiscall CConfigFile::GetSize(CConfigFile *this)
 unsigned int  CConfigFile::GetSize(void) {
   
   return *((_DWORD *)this + 8);
@@ -62,9 +55,7 @@ unsigned int  CConfigFile::GetSize(void) {
 
 
 // address=[0x2f28a00]
-// Decompiled from // public: wchar_t const * __thiscall CConfigFile::GetName(void)
-_DWORD *__thiscall CConfigFile::GetName(_Cnd_internal_imp_t *this)
-
+// Decompiled from _DWORD *__thiscall CConfigFile::GetName(_Cnd_internal_imp_t *this)
 wchar_t const *  CConfigFile::GetName(void) {
   
   return std::wstring::c_str(this);

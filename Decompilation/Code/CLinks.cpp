@@ -4,7 +4,6 @@
 
 // address=[0x15e3cf0]
 // Decompiled from int CLinks::InitLinks()
-
 static void __cdecl CLinks::InitLinks(void) {
   
   int result; // eax
@@ -30,7 +29,6 @@ static void __cdecl CLinks::InitLinks(void) {
 
 // address=[0x15e3db0]
 // Decompiled from int CLinks::DeactivateLinksPushBackMode()
-
 static void __cdecl CLinks::DeactivateLinksPushBackMode(void) {
   
   if ( !CLinks::m_iLinksPushBackMode
@@ -46,7 +44,6 @@ static void __cdecl CLinks::DeactivateLinksPushBackMode(void) {
 
 // address=[0x15e3e00]
 // Decompiled from struct CLinkList *__cdecl CLinks::PushLinksBack(const struct CIntLinkList *a1)
-
 static class CLinkList & __cdecl CLinks::PushLinksBack(class CIntLinkList const &) {
   
   int v1; // esi
@@ -71,7 +68,6 @@ static class CLinkList & __cdecl CLinks::PushLinksBack(class CIntLinkList const 
 
 // address=[0x15e3e90]
 // Decompiled from int __cdecl CLinks::PushLinksUndef(int a1)
-
 static int __cdecl CLinks::PushLinksUndef(int) {
   
   CLink *v1; // eax
@@ -125,7 +121,6 @@ static int __cdecl CLinks::PushLinksUndef(int) {
 
 // address=[0x15e70b0]
 // Decompiled from BOOL __cdecl CLinks::IsValidRealLinkList(const struct CLinkList *a1)
-
 static bool __cdecl CLinks::IsValidRealLinkList(class CLinkList const &) {
   
   return a1 <= (const struct CLinkList *)&CLinks::m_cLinks[262141]
@@ -135,7 +130,6 @@ static bool __cdecl CLinks::IsValidRealLinkList(class CLinkList const &) {
 
 // address=[0x15e7170]
 // Decompiled from int __cdecl CLinks::IsValidUsedLinkList(const struct CLinkList *a1)
-
 static bool __cdecl CLinks::IsValidUsedLinkList(class CLinkList const &) {
   
   bool v2; // [esp+0h] [ebp-4h]
@@ -147,7 +141,6 @@ static bool __cdecl CLinks::IsValidUsedLinkList(class CLinkList const &) {
 
 // address=[0x15e7250]
 // Decompiled from __int16 *__cdecl CLinks::Link(int a1)
-
 static class CLink const & __cdecl CLinks::Link(int) {
   
   return &CLinks::m_cLinks[a1];
@@ -156,7 +149,6 @@ static class CLink const & __cdecl CLinks::Link(int) {
 
 // address=[0x15e7270]
 // Decompiled from __int16 *__cdecl CLinks::LinkList(int a1)
-
 static class CLinkList & __cdecl CLinks::LinkList(int) {
   
   return &CLinks::m_cLinks[a1];
@@ -165,7 +157,6 @@ static class CLinkList & __cdecl CLinks::LinkList(int) {
 
 // address=[0x15e4050]
 // Decompiled from int __cdecl CLinks::LinkListMarkAsUnused(struct CLinkList *a1)
-
 static void __cdecl CLinks::LinkListMarkAsUnused(class CLinkList &) {
   
   int v1; // esi
@@ -197,7 +188,6 @@ static void __cdecl CLinks::LinkListMarkAsUnused(class CLinkList &) {
 
 // address=[0x15e4140]
 // Decompiled from int __cdecl CLinks::LinkListPushLinkTileId(struct CLinkList *a1, int a2)
-
 static void __cdecl CLinks::LinkListPushLinkTileId(class CLinkList &,int) {
   
   CLink *v2; // eax
@@ -288,7 +278,6 @@ static void __cdecl CLinks::LinkListPushLinkTileId(class CLinkList &,int) {
 
 // address=[0x15e4410]
 // Decompiled from char __cdecl CLinks::LinkListRemoveLinkTileId(struct CLinkList *a1, int a2)
-
 static bool __cdecl CLinks::LinkListRemoveLinkTileId(class CLinkList &,int) {
   
   int v3; // [esp+4h] [ebp-10h]
@@ -324,7 +313,6 @@ static bool __cdecl CLinks::LinkListRemoveLinkTileId(class CLinkList &,int) {
 
 // address=[0x15e44f0]
 // Decompiled from char __cdecl CLinks::LinkListReplaceLink(struct CLinkList *a1, int a2, __int16 a3)
-
 static bool __cdecl CLinks::LinkListReplaceLink(class CLinkList &,int,int) {
   
   int i; // [esp+4h] [ebp-4h]
@@ -343,7 +331,6 @@ static bool __cdecl CLinks::LinkListReplaceLink(class CLinkList &,int,int) {
 
 // address=[0x15e4550]
 // Decompiled from int __cdecl CLinks::SearchForUnusedLinkEntries(int a1)
-
 static int __cdecl CLinks::SearchForUnusedLinkEntries(int) {
   
   CLink *v1; // eax
@@ -526,7 +513,6 @@ static int __cdecl CLinks::SearchForUnusedLinkEntries(int) {
 
 // address=[0x15e4b00]
 // Decompiled from int CLinks::CalculateLinksInfo()
-
 static void __cdecl CLinks::CalculateLinksInfo(void) {
   
   CLink *v0; // eax
@@ -623,7 +609,6 @@ static void __cdecl CLinks::CalculateLinksInfo(void) {
 
 // address=[0x15e4dd0]
 // Decompiled from void CLinks::CheckLinksInfo()
-
 static void __cdecl CLinks::CheckLinksInfo(void) {
   
   ;
@@ -632,7 +617,6 @@ static void __cdecl CLinks::CheckLinksInfo(void) {
 
 // address=[0x15e7290]
 // Decompiled from int __cdecl CLinks::LinksId(const struct CLinkList *a1)
-
 static int __cdecl CLinks::LinksId(class CLinkList const &) {
   
   return (a1 - (const struct CLinkList *)CLinks::m_cLinks) >> 1;

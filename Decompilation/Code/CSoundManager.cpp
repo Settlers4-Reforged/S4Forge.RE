@@ -4,7 +4,6 @@
 
 // address=[0x149bd80]
 // Decompiled from CSoundManager *__thiscall CSoundManager::CSoundManager(CSoundManager *this)
-
  CSoundManager::CSoundManager(void) {
   
   int i; // [esp+0h] [ebp-8h]
@@ -30,7 +29,6 @@
 
 // address=[0x149be60]
 // Decompiled from void __thiscall CSoundManager::~CSoundManager(CSoundManager *this)
-
  CSoundManager::~CSoundManager(void) {
   
   int v1; // [esp+18h] [ebp-18h]
@@ -64,7 +62,6 @@
 
 // address=[0x149bfb0]
 // Decompiled from char __thiscall CSoundManager::OpenSoundFiles(CSoundManager *this)
-
 bool  CSoundManager::OpenSoundFiles(void) {
   
   int v1; // eax
@@ -155,7 +152,6 @@ bool  CSoundManager::OpenSoundFiles(void) {
 
 // address=[0x149c410]
 // Decompiled from int __thiscall CSoundManager::PlaySoundFX(_DWORD *this, int a2)
-
 unsigned int  CSoundManager::PlaySoundFX(enum SIV_SOUNDS) {
   
   if ( a2 >= 109 && BBSupportDbgReport(2, "Main\\SoundManager.cpp", 240, "_iSoundID < SOUND_MAX") == 1 )
@@ -168,9 +164,7 @@ unsigned int  CSoundManager::PlaySoundFX(enum SIV_SOUNDS) {
 
 
 // address=[0x149c470]
-// Decompiled from // public: unsigned int __thiscall CSoundManager::PlaySoundFXLooped(enum SIV_SOUNDS)
-int __thiscall CSoundManager::PlaySoundFXLooped(_DWORD *this, int a2)
-
+// Decompiled from int __thiscall CSoundManager::PlaySoundFXLooped(_DWORD *this, int a2)
 unsigned int  CSoundManager::PlaySoundFXLooped(enum SIV_SOUNDS) {
   
   if ( a2 >= 109 && BBSupportDbgReport(2, "Main\\SoundManager.cpp", 256, "_iSoundID < SOUND_MAX") == 1 )
@@ -183,14 +177,7 @@ unsigned int  CSoundManager::PlaySoundFXLooped(enum SIV_SOUNDS) {
 
 
 // address=[0x149c4d0]
-// Decompiled from unsigned int __thiscall CSoundManager::PlaySoundFX(
-        CSoundManager *this,
-        unsigned int a2,
-        int a3,
-        int a4,
-        int a5,
-        bool a6)
-
+// Decompiled from unsigned int __thiscall CSoundManager::PlaySoundFX(  CSoundManager *this,  unsigned int a2,  int a3,  int a4,  int a5,  bool a6)
 unsigned int  CSoundManager::PlaySoundFX(enum SIV_SOUNDS,int,int,int,bool) {
   
   const char *v7; // eax
@@ -275,7 +262,6 @@ unsigned int  CSoundManager::PlaySoundFX(enum SIV_SOUNDS,int,int,int,bool) {
 
 // address=[0x149c6b0]
 // Decompiled from int __thiscall CSoundManager::PlayEnvironmentSound(CSoundManager *this, int a2, int a3, int a4, unsigned __int8 a5)
-
 unsigned int  CSoundManager::PlayEnvironmentSound(enum SIV_SOUNDS,int,int,bool) {
   
   int v6; // [esp+0h] [ebp-Ch] BYREF
@@ -294,7 +280,6 @@ unsigned int  CSoundManager::PlayEnvironmentSound(enum SIV_SOUNDS,int,int,bool) 
 
 // address=[0x149c730]
 // Decompiled from unsigned int __thiscall CSoundManager::PlaySoundFile(CSoundManager *this, const wchar_t *a2, int a3, int a4)
-
 unsigned int  CSoundManager::PlaySoundFile(wchar_t const *,int,int) {
   
   if ( g_pSoundEngine )
@@ -306,7 +291,6 @@ unsigned int  CSoundManager::PlaySoundFile(wchar_t const *,int,int) {
 
 // address=[0x149c770]
 // Decompiled from int __thiscall CSoundManager::PlayBackgroundMusic(CSoundManager *this, int a2, int a3, wchar_t *String)
-
 unsigned int  CSoundManager::PlayBackgroundMusic(int,enum SIV_MUSICSTYLES,wchar_t const *) {
   
   if ( !g_pSoundEngine )
@@ -331,7 +315,6 @@ unsigned int  CSoundManager::PlayBackgroundMusic(int,enum SIV_MUSICSTYLES,wchar_
 
 // address=[0x149c810]
 // Decompiled from int __stdcall CSoundManager::PlayDirectory(wchar_t *String)
-
 unsigned int  CSoundManager::PlayDirectory(wchar_t const *) {
   
   return CSoundManager::PlayBackgroundMusic(-1, 0, String);
@@ -340,7 +323,6 @@ unsigned int  CSoundManager::PlayDirectory(wchar_t const *) {
 
 // address=[0x149c830]
 // Decompiled from unsigned int __thiscall CSoundManager::ChangeMusicStyle(_DWORD *this, int a2)
-
 unsigned int  CSoundManager::ChangeMusicStyle(enum SIV_MUSICSTYLES) {
   
   if ( g_pSoundEngine )
@@ -351,9 +333,7 @@ unsigned int  CSoundManager::ChangeMusicStyle(enum SIV_MUSICSTYLES) {
 
 
 // address=[0x149c860]
-// Decompiled from // public: unsigned int __thiscall CSoundManager::FadeInSound(enum SIV_SOUNDS,int,int,int)
-unsigned int __thiscall CSoundManager::FadeInSound(CSoundManager *this, signed int a2, int a3, int a4, int a5)
-
+// Decompiled from unsigned int __thiscall CSoundManager::FadeInSound(CSoundManager *this, signed int a2, int a3, int a4, int a5)
 unsigned int  CSoundManager::FadeInSound(enum SIV_SOUNDS,int,int,int) {
   
   const char *SoundName; // eax
@@ -388,9 +368,7 @@ unsigned int  CSoundManager::FadeInSound(enum SIV_SOUNDS,int,int,int) {
 
 
 // address=[0x149c950]
-// Decompiled from // public: unsigned int __thiscall CSoundManager::CrossFade(unsigned int,enum SIV_SOUNDS,int,int)
-unsigned int __thiscall CSoundManager::CrossFade(CSoundManager *this, unsigned int a2, int a3, int a4, int a5)
-
+// Decompiled from unsigned int __thiscall CSoundManager::CrossFade(CSoundManager *this, unsigned int a2, int a3, int a4, int a5)
 unsigned int  CSoundManager::CrossFade(unsigned int,enum SIV_SOUNDS,int,int) {
   
   int v6; // eax
@@ -421,9 +399,7 @@ unsigned int  CSoundManager::CrossFade(unsigned int,enum SIV_SOUNDS,int,int) {
 
 
 // address=[0x149ca10]
-// Decompiled from // public: bool __thiscall CSoundManager::FadeOutSound(unsigned int,int,int)
-bool __stdcall CSoundManager::FadeOutSound(unsigned int a1, int a2, int a3)
-
+// Decompiled from bool __stdcall CSoundManager::FadeOutSound(unsigned int a1, int a2, int a3)
 bool  CSoundManager::FadeOutSound(unsigned int,int,int) {
   
   return g_pSoundEngine && ISoundEngine::Fade((ISoundEngine *)g_pSoundEngine, a1, a2, a3);
@@ -432,7 +408,6 @@ bool  CSoundManager::FadeOutSound(unsigned int,int,int) {
 
 // address=[0x149ca50]
 // Decompiled from void __thiscall CSoundManager::SetMusicVolume(CSoundManager *this, int a2)
-
 void  CSoundManager::SetMusicVolume(int) {
   
   if ( g_pSoundEngine )
@@ -455,7 +430,6 @@ void  CSoundManager::SetMusicVolume(int) {
 
 // address=[0x149cad0]
 // Decompiled from void __thiscall CSoundManager::SetSoundVolume(CSoundManager *this, int a2)
-
 void  CSoundManager::SetSoundVolume(int) {
   
   if ( g_pSoundEngine )
@@ -478,7 +452,6 @@ void  CSoundManager::SetSoundVolume(int) {
 
 // address=[0x149cb50]
 // Decompiled from void __thiscall CSoundManager::Mute(CSoundManager *this, bool a2)
-
 void  CSoundManager::Mute(bool) {
   
   int v2; // [esp+4h] [ebp-8h]
@@ -500,9 +473,7 @@ void  CSoundManager::Mute(bool) {
 
 
 // address=[0x149cbc0]
-// Decompiled from // public: void __thiscall CSoundManager::PausePlayback(bool)
-void __stdcall CSoundManager::PausePlayback(bool a1)
-
+// Decompiled from void __stdcall CSoundManager::PausePlayback(bool a1)
 void  CSoundManager::PausePlayback(bool) {
   
   if ( g_pSoundEngine )
@@ -512,7 +483,6 @@ void  CSoundManager::PausePlayback(bool) {
 
 // address=[0x149cbf0]
 // Decompiled from CSoundManager *__thiscall CSoundManager::StopMusic(CSoundManager *this)
-
 void  CSoundManager::StopMusic(void) {
   
   CSoundManager *result; // eax
@@ -527,7 +497,6 @@ void  CSoundManager::StopMusic(void) {
 
 // address=[0x149cc20]
 // Decompiled from void __thiscall CSoundManager::StopSounds(CSoundManager *this)
-
 void  CSoundManager::StopSounds(void) {
   
   int i; // [esp+4h] [ebp-4h]
@@ -546,7 +515,6 @@ void  CSoundManager::StopSounds(void) {
 
 // address=[0x149cc90]
 // Decompiled from void __thiscall CSoundManager::StopSound(CSoundManager *this, unsigned int a2)
-
 void  CSoundManager::StopSound(unsigned int) {
   
   if ( g_pSoundEngine )
@@ -556,7 +524,6 @@ void  CSoundManager::StopSound(unsigned int) {
 
 // address=[0x149ccc0]
 // Decompiled from bool __thiscall CSoundManager::IsPlaying(CSoundManager *this, unsigned int a2)
-
 bool  CSoundManager::IsPlaying(unsigned int) {
   
   return !g_pSoundEngine || ISoundEngine::IsRunning((ISoundEngine *)g_pSoundEngine, a2);
@@ -565,7 +532,6 @@ bool  CSoundManager::IsPlaying(unsigned int) {
 
 // address=[0x149cd00]
 // Decompiled from void __thiscall CSoundManager::Update(CSoundManager *this)
-
 void  CSoundManager::Update(void) {
   
   int OutputWidth; // eax
@@ -647,7 +613,6 @@ void  CSoundManager::Update(void) {
 
 // address=[0x149b280]
 // Decompiled from char __thiscall CSoundManager::CreatePlaylists(CSoundManager *this, int a2, const wchar_t *a3)
-
 bool  CSoundManager::CreatePlaylists(int,wchar_t const *) {
   
   int i; // [esp+4h] [ebp-4h]
@@ -672,7 +637,6 @@ bool  CSoundManager::CreatePlaylists(int,wchar_t const *) {
 
 // address=[0x149b310]
 // Decompiled from int __thiscall CSoundManager::CalcFinalVolume(CSoundManager *this, int a2, int a3, int a4)
-
 int  CSoundManager::CalcFinalVolume(int,int,int) {
   
   int v5; // [esp+4h] [ebp-4h]
@@ -688,7 +652,6 @@ int  CSoundManager::CalcFinalVolume(int,int,int) {
 
 // address=[0x149b370]
 // Decompiled from char __thiscall CSoundManager::LoadRaceTitles(CSoundManager *this, int a2, const wchar_t *a3)
-
 bool  CSoundManager::LoadRaceTitles(int,wchar_t const *) {
   
   int v3; // eax
@@ -869,7 +832,6 @@ bool  CSoundManager::LoadRaceTitles(int,wchar_t const *) {
 
 // address=[0x149b9f0]
 // Decompiled from char __thiscall CSoundManager::CreateDirPlaylist(_DWORD *this, wchar_t *String)
-
 bool  CSoundManager::CreateDirPlaylist(wchar_t const *) {
   
   HANDLE hFindFile; // [esp+8h] [ebp-4A8h]
@@ -929,7 +891,6 @@ bool  CSoundManager::CreateDirPlaylist(wchar_t const *) {
 
 // address=[0x149bc00]
 // Decompiled from int __thiscall CSoundManager::CalcPanningAndVolume(CSoundManager *this, int a2, int a3, int *a4, int *a5)
-
 void  CSoundManager::CalcPanningAndVolume(int,int,int &,int &) {
   
   int result; // eax

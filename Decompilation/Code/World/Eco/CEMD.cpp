@@ -4,7 +4,6 @@
 
 // address=[0x1345630]
 // Decompiled from CEcoManager::CEMD *__thiscall CEcoManager::CEMD::CEMD(CEcoManager::CEMD *this)
-
  CEcoManager::CEMD::CEMD(void) {
   
   `eh vector constructor iterator'(
@@ -31,7 +30,6 @@
 
 // address=[0x1345d80]
 // Decompiled from void __thiscall CEcoManager::CEMD::~CEMD(CEcoManager::CEMD *this)
-
  CEcoManager::CEMD::~CEMD(void) {
   
   `eh vector destructor iterator'(

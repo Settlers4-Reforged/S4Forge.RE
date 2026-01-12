@@ -4,7 +4,6 @@
 
 // address=[0x14c7c10]
 // Decompiled from CStateMDCampaignViking *__cdecl CStateMDCampaignViking::DynamicCreateFunc(void *a1)
-
 static class CGameState * __cdecl CStateMDCampaignViking::DynamicCreateFunc(void *) {
   
   CStateMDCampaignViking *C; // [esp+Ch] [ebp-10h]
@@ -18,10 +17,7 @@ static class CGameState * __cdecl CStateMDCampaignViking::DynamicCreateFunc(void
 
 
 // address=[0x14c7c90]
-// Decompiled from CStateMDCampaignViking *__thiscall CStateMDCampaignViking::CStateMDCampaignViking(
-        CStateMDCampaignViking *this,
-        void *a2)
-
+// Decompiled from CStateMDCampaignViking *__thiscall CStateMDCampaignViking::CStateMDCampaignViking(  CStateMDCampaignViking *this,  void *a2)
  CStateMDCampaignViking::CStateMDCampaignViking(void *) {
   
   CGuiGameState::CGuiGameState(this);
@@ -38,7 +34,6 @@ static class CGameState * __cdecl CStateMDCampaignViking::DynamicCreateFunc(void
 
 // address=[0x14c7d50]
 // Decompiled from void __thiscall CStateMDCampaignViking::~CStateMDCampaignViking(CStateMDCampaignViking *this)
-
  CStateMDCampaignViking::~CStateMDCampaignViking(void) {
   
   *(_DWORD *)this = &CStateMDCampaignViking::_vftable_;
@@ -49,7 +44,6 @@ static class CGameState * __cdecl CStateMDCampaignViking::DynamicCreateFunc(void
 
 // address=[0x14c7db0]
 // Decompiled from char __thiscall CStateMDCampaignViking::Perform(CStateMDCampaignViking *this)
-
 bool  CStateMDCampaignViking::Perform(void) {
   
   DWORD v2; // esi
@@ -86,7 +80,6 @@ bool  CStateMDCampaignViking::Perform(void) {
 
 // address=[0x14c7e90]
 // Decompiled from char __thiscall CStateMDCampaignViking::OnEvent(CStateMDCampaignViking *this, struct CEvn_Event *a2)
-
 bool  CStateMDCampaignViking::OnEvent(class CEvn_Event &) {
   
   CEvn_Event *v3; // [esp+Ch] [ebp-38h]
@@ -120,9 +113,7 @@ bool  CStateMDCampaignViking::OnEvent(class CEvn_Event &) {
 
 
 // address=[0x14c80d0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-char __thiscall CStateMDCampaignViking::CanProcessInvites(CStateMDCampaignViking *this)
-
+// Decompiled from char __thiscall CStateMDCampaignViking::CanProcessInvites(CStateMDCampaignViking *this)
 bool  CStateMDCampaignViking::CanProcessInvites(void) {
   
   return 0;

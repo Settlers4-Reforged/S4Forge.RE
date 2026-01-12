@@ -4,7 +4,6 @@
 
 // address=[0x1311f30]
 // Decompiled from int __thiscall CAIMain::InitScripting(CAIMain *this)
-
 void  CAIMain::InitScripting(void) {
   
   return (**(int (__thiscall ***)(void *, CAIMain *))off_3D7A560)(off_3D7A560, this);
@@ -13,7 +12,6 @@ void  CAIMain::InitScripting(void) {
 
 // address=[0x1311f50]
 // Decompiled from void __thiscall CAIMain::Init(CAIMain *this)
-
 void  CAIMain::Init(void) {
   
   (*(void (__thiscall **)(CAIMain *))(*(_DWORD *)this + 20))(this);
@@ -31,9 +29,7 @@ void  CAIMain::Init(void) {
 
 
 // address=[0x1311fc0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-char __thiscall CAIMain::IsInitialised(CAIMain *this)
-
+// Decompiled from char __thiscall CAIMain::IsInitialised(CAIMain *this)
 bool  CAIMain::IsInitialised(void) {
   
   return *((_BYTE *)this + 4);
@@ -42,7 +38,6 @@ bool  CAIMain::IsInitialised(void) {
 
 // address=[0x1311fe0]
 // Decompiled from int __thiscall CAIMain::Done(CAIMain *this)
-
 void  CAIMain::Done(void) {
   
   int result; // eax
@@ -69,7 +64,6 @@ void  CAIMain::Done(void) {
 
 // address=[0x1312070]
 // Decompiled from int __thiscall CAIMain::Load(CAIMain *this, struct IS4Chunk *a2)
-
 void  CAIMain::Load(class IS4Chunk &) {
   
   struct CFrameWnd *v2; // eax
@@ -119,7 +113,6 @@ void  CAIMain::Load(class IS4Chunk &) {
 
 // address=[0x13121f0]
 // Decompiled from int __thiscall CAIMain::Save(CAIMain *this, struct IS4Chunk *a2)
-
 void  CAIMain::Save(class IS4Chunk &) {
   
   int v2; // eax
@@ -154,7 +147,6 @@ void  CAIMain::Save(class IS4Chunk &) {
 
 // address=[0x1312330]
 // Decompiled from CAIMain *__thiscall CAIMain::Execute(CAIMain *this)
-
 void  CAIMain::Execute(void) {
   
   CAIMain *result; // eax
@@ -198,7 +190,6 @@ void  CAIMain::Execute(void) {
 
 // address=[0x1312470]
 // Decompiled from void __thiscall CAIMain::ActivatePlayerAI(CAIMain *this, unsigned int a2)
-
 void  CAIMain::ActivatePlayerAI(int) {
   
   if ( *((_BYTE *)this + 4) )
@@ -229,7 +220,6 @@ void  CAIMain::ActivatePlayerAI(int) {
 
 // address=[0x1312520]
 // Decompiled from int __thiscall CAIMain::DeactivatePlayerAI(CAIMain *this, unsigned int a2)
-
 void  CAIMain::DeactivatePlayerAI(int) {
   
   int result; // eax
@@ -280,7 +270,6 @@ void  CAIMain::DeactivatePlayerAI(int) {
 
 // address=[0x13126c0]
 // Decompiled from int __thiscall CAIMain::DeactivateAllPlayerAIs(CAIMain *this)
-
 void  CAIMain::DeactivateAllPlayerAIs(void) {
   
   int result; // eax
@@ -297,7 +286,6 @@ void  CAIMain::DeactivateAllPlayerAIs(void) {
 
 // address=[0x1312700]
 // Decompiled from bool __thiscall CAIMain::IsPlayerAIActive(CAIMain *this, unsigned int a2)
-
 bool  CAIMain::IsPlayerAIActive(int) {
   
   if ( !*((_BYTE *)this + 4) && BBSupportDbgReport(2, aAiAiMainC, 353, "m_bInitialized") == 1 )
@@ -308,7 +296,6 @@ bool  CAIMain::IsPlayerAIActive(int) {
 
 // address=[0x1312780]
 // Decompiled from void __thiscall CAIMain::PostAIEvent(CAIPlayerAI **this, int a2, int a3, int a4, int a5)
-
 void  CAIMain::PostAIEvent(int,int,int,int) {
   
   int v5; // [esp+C8h] [ebp-48h]
@@ -547,7 +534,6 @@ LABEL_89:
 
 // address=[0x1313410]
 // Decompiled from void __thiscall CAIMain::DarkTribeIncreaseManaForNewManaSphere(CAIMain *this, int a2)
-
 void  CAIMain::DarkTribeIncreaseManaForNewManaSphere(int) {
   
   int Value; // [esp+4h] [ebp-4h]
@@ -569,7 +555,6 @@ void  CAIMain::DarkTribeIncreaseManaForNewManaSphere(int) {
 
 // address=[0x13134b0]
 // Decompiled from void *__thiscall CAIMain::DarkTribeGetProductionCostConfigVar(CAIMain *this, int a2)
-
 class CStaticConfigVarInt const *  CAIMain::DarkTribeGetProductionCostConfigVar(int)const {
   
   void *result; // eax
@@ -608,7 +593,6 @@ class CStaticConfigVarInt const *  CAIMain::DarkTribeGetProductionCostConfigVar(
 
 // address=[0x1313570]
 // Decompiled from char __thiscall CAIMain::DbgPrint(CAIMain *this, unsigned int a2)
-
 void  CAIMain::DbgPrint(int) {
   
   int PlayerId; // eax
@@ -644,7 +628,6 @@ void  CAIMain::DbgPrint(int) {
 
 // address=[0x1313630]
 // Decompiled from CAIMain *__thiscall CAIMain::CAIMain(CAIMain *this)
-
  CAIMain::CAIMain(void) {
   
   IAIMain::IAIMain(this);
@@ -662,7 +645,6 @@ void  CAIMain::DbgPrint(int) {
 
 // address=[0x13136e0]
 // Decompiled from int __thiscall CAIMain::PrepareAI(CAIMain *this)
-
 void  CAIMain::PrepareAI(void) {
   
   return CAIPlayerEvaluations::EvaluateAllPlayers((CAIPlayerEvaluations *)&g_cAIPlayerEvaluations);
@@ -671,7 +653,6 @@ void  CAIMain::PrepareAI(void) {
 
 // address=[0x1313700]
 // Decompiled from int __thiscall CAIMain::CreatePlayerAI(CAIMain *this, unsigned int a2, struct IS4Chunk *a3)
-
 void  CAIMain::CreatePlayerAI(int,class IS4Chunk *) {
   
   int result; // eax
@@ -703,7 +684,6 @@ void  CAIMain::CreatePlayerAI(int,class IS4Chunk *) {
 
 // address=[0x1313f50]
 // Decompiled from void __thiscall CAIMain::~CAIMain(CAIMain *this)
-
  CAIMain::~CAIMain(void) {
   
   CAIAgentEvaluation::~CAIAgentEvaluation((CAIMain *)((char *)this + 92));
@@ -713,7 +693,6 @@ void  CAIMain::CreatePlayerAI(int,class IS4Chunk *) {
 
 // address=[0x1314050]
 // Decompiled from bool __cdecl CAIMain::IsRealPlayerId(unsigned int a1)
-
 static bool __cdecl CAIMain::IsRealPlayerId(unsigned int) {
   
   return a1 - 1 <= 7;

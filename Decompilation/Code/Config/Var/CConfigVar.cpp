@@ -4,7 +4,6 @@
 
 // address=[0x12fd170]
 // Decompiled from double sub_16FD170()
-
 float  CConfigVar::GetFloatValue(void)const {
   
   return 0.0;
@@ -12,10 +11,7 @@ float  CConfigVar::GetFloatValue(void)const {
 
 
 // address=[0x12fd1a0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CConfigVar::GetIntArray(CConfigVar *this)
-
+// Decompiled from int __thiscall CConfigVar::GetIntArray(CConfigVar *this)
 int *  CConfigVar::GetIntArray(void) {
   
   return 0;
@@ -23,10 +19,7 @@ int *  CConfigVar::GetIntArray(void) {
 
 
 // address=[0x12fd1b0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CConfigVar::GetIntArray(CConfigVar *this)
-
+// Decompiled from int __thiscall CConfigVar::GetIntArray(CConfigVar *this)
 int const *  CConfigVar::GetIntArray(void)const {
   
   return 0;
@@ -34,10 +27,7 @@ int const *  CConfigVar::GetIntArray(void)const {
 
 
 // address=[0x12fd1c0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int CConfigVar::GetIntValue()
-
+// Decompiled from int CConfigVar::GetIntValue()
 int  CConfigVar::GetIntValue(void)const {
   
   return 0;
@@ -46,7 +36,6 @@ int  CConfigVar::GetIntValue(void)const {
 
 // address=[0x12fd250]
 // Decompiled from int __stdcall sub_16FD250(int a1)
-
 std::string  CConfigVar::GetStringValue(void)const {
   
   std::string::string((char *)&off_366DCF4);
@@ -55,10 +44,7 @@ std::string  CConfigVar::GetStringValue(void)const {
 
 
 // address=[0x12fd690]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __stdcall CConfigVar::SetValue(int a1)
-
+// Decompiled from void __stdcall CConfigVar::SetValue(int a1)
 void  CConfigVar::SetValue(std::string const &) {
   
   ;
@@ -66,10 +52,7 @@ void  CConfigVar::SetValue(std::string const &) {
 
 
 // address=[0x12fd6a0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CConfigVar::SetValue(CConfigVar *this, int a2)
-
+// Decompiled from void __thiscall CConfigVar::SetValue(CConfigVar *this, int a2)
 void  CConfigVar::SetValue(int) {
   
   ;
@@ -77,10 +60,7 @@ void  CConfigVar::SetValue(int) {
 
 
 // address=[0x12fd6b0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CConfigVar::SetValue(CConfigVar *this, float a2)
-
+// Decompiled from void __thiscall CConfigVar::SetValue(CConfigVar *this, float a2)
 void  CConfigVar::SetValue(float) {
   
   ;
@@ -88,10 +68,7 @@ void  CConfigVar::SetValue(float) {
 
 
 // address=[0x12fd6c0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CConfigVar::SetValue(CConfigVar *this, const char *a2)
-
+// Decompiled from void __thiscall CConfigVar::SetValue(CConfigVar *this, const char *a2)
 void  CConfigVar::SetValue(char const *) {
   
   ;
@@ -100,7 +77,6 @@ void  CConfigVar::SetValue(char const *) {
 
 // address=[0x160db90]
 // Decompiled from int __thiscall CConfigVar::Size(CConfigVar *this)
-
 int  CConfigVar::Size(void)const {
   
   return *((unsigned __int8 *)this + 6);
@@ -109,7 +85,6 @@ int  CConfigVar::Size(void)const {
 
 // address=[0x160dbb0]
 // Decompiled from int __thiscall CConfigVar::Type(CConfigVar *this)
-
 int  CConfigVar::Type(void)const {
   
   return *((unsigned __int8 *)this + 5);
@@ -117,9 +92,7 @@ int  CConfigVar::Type(void)const {
 
 
 // address=[0x2efa370]
-// Decompiled from // Microsoft VisualC 14/net runtime
-char __thiscall CConfigVar::Static(_BYTE *this)
-
+// Decompiled from char __thiscall CConfigVar::Static(_BYTE *this)
 bool  CConfigVar::Static(void)const {
   
   return this[4];
@@ -128,7 +101,6 @@ bool  CConfigVar::Static(void)const {
 
 // address=[0x12fca20]
 // Decompiled from CConfigVar *__thiscall CConfigVar::~CConfigVar(CConfigVar *this)
-
  CConfigVar::~CConfigVar(void) {
   
   CConfigVar *result; // eax
@@ -141,7 +113,6 @@ bool  CConfigVar::Static(void)const {
 
 // address=[0x2ef86a0]
 // Decompiled from _BYTE *__thiscall CConfigVar::CConfigVar(_BYTE *this, char a2, char a3, char a4)
-
  CConfigVar::CConfigVar(bool,enum T_CFGVAR_TYPE,int) {
   
   *(_DWORD *)this = &CConfigVar::_vftable_;

@@ -4,7 +4,6 @@
 
 // address=[0x147e9f0]
 // Decompiled from CCDDrive *__thiscall CCDDrive::CCDDrive(CCDDrive *this)
-
  CCDDrive::CCDDrive(void) {
   
   ICDDrive::ICDDrive(this);
@@ -17,7 +16,6 @@
 
 // address=[0x147eb30]
 // Decompiled from int __thiscall CCDDrive::GetCDType(CCDDrive *this, char a2)
-
 enum T_S4_CDROM_TYPE  CCDDrive::GetCDType(char) {
   
   int v3; // [esp+8h] [ebp-80Ch]
@@ -45,7 +43,6 @@ enum T_S4_CDROM_TYPE  CCDDrive::GetCDType(char) {
 
 // address=[0x147ec40]
 // Decompiled from char __thiscall CCDDrive::GetCDDrive(_BYTE *this, int a2)
-
 char  CCDDrive::GetCDDrive(enum T_S4_CDROM_TYPE) {
   
   int v3; // eax
@@ -85,7 +82,6 @@ char  CCDDrive::GetCDDrive(enum T_S4_CDROM_TYPE) {
 
 // address=[0x147ed00]
 // Decompiled from char __thiscall CCDDrive::GetCDPath(void *this, void *a2, LPCWSTR lpFileName, int a4)
-
 bool  CCDDrive::GetCDPath(std::wstring &,wchar_t const *,int) {
   
   int i; // [esp+0h] [ebp-1114h]
@@ -180,7 +176,6 @@ bool  CCDDrive::GetCDPath(std::wstring &,wchar_t const *,int) {
 
 // address=[0x147ea30]
 // Decompiled from char __cdecl CCDDrive::FindFile(LPCWSTR lpFileName)
-
 static bool __cdecl CCDDrive::FindFile(wchar_t const *) {
   
   HANDLE hFindFile; // [esp+0h] [ebp-258h]
@@ -198,7 +193,6 @@ static bool __cdecl CCDDrive::FindFile(wchar_t const *) {
 
 // address=[0x147eab0]
 // Decompiled from UINT __thiscall CCDDrive::GetDriveTypeA(CCDDrive *this, CHAR a2)
-
 unsigned int  CCDDrive::GetDriveTypeA(char) {
   
   CHAR RootPathName[4]; // [esp+8h] [ebp-Ch] BYREF
@@ -215,7 +209,6 @@ unsigned int  CCDDrive::GetDriveTypeA(char) {
 
 // address=[0x147f1f0]
 // Decompiled from bool __cdecl CCDDrive::AreCDTypesMatching(int a1, int a2)
-
 static bool __cdecl CCDDrive::AreCDTypesMatching(enum T_S4_CDROM_TYPE,enum T_S4_CDROM_TYPE) {
   
   bool v4; // [esp+6h] [ebp-2h]
@@ -236,10 +229,7 @@ static bool __cdecl CCDDrive::AreCDTypesMatching(enum T_S4_CDROM_TYPE,enum T_S4_
 
 
 // address=[0x147eb20]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CCDDrive::DriveTypeExCheck(CCDDrive *this)
-
+// Decompiled from int __thiscall CCDDrive::DriveTypeExCheck(CCDDrive *this)
 int  CCDDrive::DriveTypeExCheck(void) {
   
   return -1;

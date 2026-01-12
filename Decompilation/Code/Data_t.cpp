@@ -4,7 +4,6 @@
 
 // address=[0x2fbec70]
 // Decompiled from BSTR *__thiscall _bstr_t::Data_t::Data_t(BSTR *this, OLECHAR *psz)
-
  _bstr_t::Data_t::Data_t(wchar_t const *) {
   
   this[1] = 0;
@@ -17,9 +16,7 @@
 
 
 // address=[0x2fbedd0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-void *__cdecl _bstr_t::Data_t::operator new(size_t Size)
-
+// Decompiled from void *__cdecl _bstr_t::Data_t::operator new(size_t Size)
 static void * __cdecl _bstr_t::Data_t::operator new(unsigned int) {
   
   return operator new(Size);
@@ -28,7 +25,6 @@ static void * __cdecl _bstr_t::Data_t::operator new(unsigned int) {
 
 // address=[0x2fbee70]
 // Decompiled from int __thiscall _bstr_t::Data_t::GetString(_bstr_t::Data_t *this)
-
 char const *  _bstr_t::Data_t::GetString(void)const {
   
   if ( !*((_DWORD *)this + 1) )
@@ -39,7 +35,6 @@ char const *  _bstr_t::Data_t::GetString(void)const {
 
 // address=[0x2fbeeb0]
 // Decompiled from signed __int32 __thiscall _bstr_t::Data_t::Release(_bstr_t::Data_t *this)
-
 unsigned long  _bstr_t::Data_t::Release(void) {
   
   signed __int32 v2; // [esp+8h] [ebp-Ch]
@@ -53,7 +48,6 @@ unsigned long  _bstr_t::Data_t::Release(void) {
 
 // address=[0x2fbed90]
 // Decompiled from void __thiscall _bstr_t::Data_t::~Data_t(_bstr_t::Data_t *this)
-
  _bstr_t::Data_t::~Data_t(void) {
   
   _bstr_t::Data_t::_Free(this);
@@ -62,7 +56,6 @@ unsigned long  _bstr_t::Data_t::Release(void) {
 
 // address=[0x2fbef10]
 // Decompiled from _bstr_t::Data_t *__thiscall _bstr_t::Data_t::_Free(void **this)
-
 void  _bstr_t::Data_t::_Free(void) {
   
   _bstr_t::Data_t *result; // eax

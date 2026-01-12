@@ -4,7 +4,6 @@
 
 // address=[0x2f3f3f0]
 // Decompiled from CSolution *__thiscall CSolution::CSolution(CSolution *this, int a2, struct CParam *a3)
-
  CSolution::CSolution(int,class CParam *) {
   
   CParam *v4; // [esp+8h] [ebp-18h]
@@ -25,7 +24,6 @@
 
 // address=[0x2f3f4b0]
 // Decompiled from void __thiscall CSolution::~CSolution(CSolution *this)
-
  CSolution::~CSolution(void) {
   
   *(_DWORD *)this = &CSolution::_vftable_;

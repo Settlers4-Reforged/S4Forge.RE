@@ -4,7 +4,6 @@
 
 // address=[0x2f3b640]
 // Decompiled from CDynListEntry *__thiscall CDynListEntry::~CDynListEntry(CDynListEntry *this)
-
  CDynListEntry::~CDynListEntry(void) {
   
   CDynListEntry *result; // eax
@@ -17,7 +16,6 @@
 
 // address=[0x2f3c790]
 // Decompiled from CDynListEntry *__thiscall CDynListEntry::CDynListEntry(CDynListEntry *this)
-
  CDynListEntry::CDynListEntry(void) {
   
   *(_DWORD *)this = &CDynListEntry::_vftable_;
@@ -29,7 +27,6 @@
 
 // address=[0x2f3c7c0]
 // Decompiled from double __thiscall CDynListEntry::SortValue(CDynListEntry *this, int a2)
-
 float  CDynListEntry::SortValue(int) {
   
   return (float)*((int *)this + 2);
@@ -37,10 +34,7 @@ float  CDynListEntry::SortValue(int) {
 
 
 // address=[0x2f4c910]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CDynListEntry::GetIndex(CDynListEntry *this)
-
+// Decompiled from int __thiscall CDynListEntry::GetIndex(CDynListEntry *this)
 int  CDynListEntry::GetIndex(void) {
   
   return *((_DWORD *)this + 2);
@@ -48,10 +42,7 @@ int  CDynListEntry::GetIndex(void) {
 
 
 // address=[0x2f4c9e0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CDynListEntry::Next(CDynListEntry *this)
-
+// Decompiled from int __thiscall CDynListEntry::Next(CDynListEntry *this)
 class CDynListEntry *  CDynListEntry::Next(void) {
   
   return *((_DWORD *)this + 1);

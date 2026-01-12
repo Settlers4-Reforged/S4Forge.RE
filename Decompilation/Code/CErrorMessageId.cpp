@@ -4,7 +4,6 @@
 
 // address=[0x14810b0]
 // Decompiled from int *__thiscall CErrorMessageId::CErrorMessageId(int *this, char *Str1)
-
  CErrorMessageId::CErrorMessageId(char const *) {
   
   int i; // [esp+8h] [ebp-4h]
@@ -32,7 +31,6 @@
 
 // address=[0x1481160]
 // Decompiled from CErrorMessageId *__thiscall CErrorMessageId::CErrorMessageId(CErrorMessageId *this, const struct CErrorMessageId *a2)
-
  CErrorMessageId::CErrorMessageId(class CErrorMessageId const &) {
   
   *(_DWORD *)this = *(_DWORD *)a2;
@@ -41,10 +39,7 @@
 
 
 // address=[0x1481180]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CErrorMessageId::GetId(CErrorMessageId *this)
-
+// Decompiled from int __thiscall CErrorMessageId::GetId(CErrorMessageId *this)
 int  CErrorMessageId::GetId(void)const {
   
   return *(_DWORD *)this;

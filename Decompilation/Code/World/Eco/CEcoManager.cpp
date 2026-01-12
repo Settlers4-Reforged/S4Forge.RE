@@ -3,12 +3,7 @@
 // Definitions for class CEcoManager
 
 // address=[0x133af00]
-// Decompiled from CEcoManager *__thiscall CEcoManager::CEcoManager(
-        CEcoManager *this,
-        int a2,
-        struct IAISectorAI *a3,
-        struct IAIEventQueue *a4)
-
+// Decompiled from CEcoManager *__thiscall CEcoManager::CEcoManager(  CEcoManager *this,  int a2,  struct IAISectorAI *a3,  struct IAIEventQueue *a4)
  CEcoManager::CEcoManager(int,class IAISectorAI *,class IAIEventQueue *) {
   
   int v4; // eax
@@ -34,7 +29,6 @@
 
 // address=[0x133b010]
 // Decompiled from IAIEcoManager *__thiscall CEcoManager::~CEcoManager(CEcoManager *this)
-
  CEcoManager::~CEcoManager(void) {
   
   CAIEcoSpecialBuildingInfos *v2; // [esp+Ch] [ebp-18h]
@@ -55,9 +49,7 @@
 
 
 // address=[0x133b0c0]
-// Decompiled from // MFC 3.1-14.0 32bit
-int __thiscall CEcoManager::InterfaceVersion(CEcoManager *this)
-
+// Decompiled from int __thiscall CEcoManager::InterfaceVersion(CEcoManager *this)
 int  CEcoManager::InterfaceVersion(void) {
   
   return 2;
@@ -65,10 +57,7 @@ int  CEcoManager::InterfaceVersion(void) {
 
 
 // address=[0x133b0d0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CEcoManager::GetEcoSectorID(CEcoManager *this)
-
+// Decompiled from int __thiscall CEcoManager::GetEcoSectorID(CEcoManager *this)
 int  CEcoManager::GetEcoSectorID(void) {
   
   return *((_DWORD *)this + 1);
@@ -77,7 +66,6 @@ int  CEcoManager::GetEcoSectorID(void) {
 
 // address=[0x133b0f0]
 // Decompiled from int __thiscall CEcoManager::Invoke(_BYTE *this, unsigned int a2)
-
 enum AI_ECOMANAGER_ERROR  CEcoManager::Invoke(enum BUILDING_TYPES) {
   
   int Tree; // [esp+0h] [ebp-8h]
@@ -116,7 +104,6 @@ enum AI_ECOMANAGER_ERROR  CEcoManager::Invoke(enum BUILDING_TYPES) {
 
 // address=[0x133b240]
 // Decompiled from int __thiscall CEcoManager::Invoke(CEcoManager *this, unsigned int iBuildingType, Squares *a3, unsigned int a4)
-
 enum AI_ECOMANAGER_ERROR  CEcoManager::Invoke(enum BUILDING_TYPES,int,int) {
   
   _WORD v5[18]; // [esp+4h] [ebp-4Ch] BYREF
@@ -193,7 +180,6 @@ enum AI_ECOMANAGER_ERROR  CEcoManager::Invoke(enum BUILDING_TYPES,int,int) {
 
 // address=[0x133b4c0]
 // Decompiled from char __thiscall CEcoManager::Discard(_BYTE *this, unsigned int a2)
-
 bool  CEcoManager::Discard(enum BUILDING_TYPES) {
   
   if ( !CheckBuildingType(a2)
@@ -224,7 +210,6 @@ bool  CEcoManager::Discard(enum BUILDING_TYPES) {
 
 // address=[0x133b620]
 // Decompiled from bool __thiscall CEcoManager::DiscardPosition(_DWORD *this, unsigned int a2, struct SBUILDINFODATA *a3)
-
 bool  CEcoManager::DiscardPosition(enum BUILDING_TYPES,struct SBUILDINFODATA *) {
   
   if ( !CheckBuildingType(a2)
@@ -240,7 +225,6 @@ bool  CEcoManager::DiscardPosition(enum BUILDING_TYPES,struct SBUILDINFODATA *) 
 
 // address=[0x133b6b0]
 // Decompiled from int __thiscall CEcoManager::GetBuildPlace(_DWORD *this, int a2, unsigned int a3, int a4)
-
 int  CEcoManager::GetBuildPlace(enum IECONOMANAGERGRIDRESOLUTION,enum BUILDING_TYPES,class std::vector<struct SBUILDINFODATA,class std::allocator<struct SBUILDINFODATA> > &) {
   
   struct Concurrency::details::stl_condition_variable_win7 *BuildInfo; // eax
@@ -308,7 +292,6 @@ int  CEcoManager::GetBuildPlace(enum IECONOMANAGERGRIDRESOLUTION,enum BUILDING_T
 
 // address=[0x133b820]
 // Decompiled from int __thiscall CEcoManager::GetBuildPlace(unsigned __int8 *this, int a2, int *a3, int a4, unsigned int a5)
-
 int  CEcoManager::GetBuildPlace(enum BUILDING_TYPES,struct SBUILDINFODATA *,class std::vector<struct SBUILDINFODATA,class std::allocator<struct SBUILDINFODATA> > &,int) {
   
   struct Concurrency::details::stl_condition_variable_win7 *BuildInfo; // eax
@@ -359,7 +342,6 @@ int  CEcoManager::GetBuildPlace(enum BUILDING_TYPES,struct SBUILDINFODATA *,clas
 
 // address=[0x133b9c0]
 // Decompiled from void *__thiscall CEcoManager::GetBuildPlace(_DWORD *this, void *a2, int a3, unsigned int a4, int a5, int a6, int a7)
-
 struct SBUILDINFODATA  CEcoManager::GetBuildPlace(enum IECONOMANAGERGRIDRESOLUTION,enum BUILDING_TYPES,int,int,int) {
   
   _Cnd_internal_imp_t *v8; // [esp+4h] [ebp-ECh]
@@ -454,7 +436,6 @@ struct SBUILDINFODATA  CEcoManager::GetBuildPlace(enum IECONOMANAGERGRIDRESOLUTI
 
 // address=[0x133bf80]
 // Decompiled from bool __thiscall CEcoManager::IsInside(void *this, unsigned int a2, int a3, int a4)
-
 bool  CEcoManager::IsInside(enum BUILDING_TYPES,int,int) {
   
   int v5; // eax
@@ -478,7 +459,6 @@ bool  CEcoManager::IsInside(enum BUILDING_TYPES,int,int) {
 
 // address=[0x133c050]
 // Decompiled from bool __thiscall CEcoManager::AreBuildingsOverlapped(void *this, unsigned int a2, int a3, unsigned int a4, int a5)
-
 bool  CEcoManager::AreBuildingsOverlapped(enum BUILDING_TYPES,int,enum BUILDING_TYPES,int) {
   
   int v5; // eax
@@ -530,7 +510,6 @@ bool  CEcoManager::AreBuildingsOverlapped(enum BUILDING_TYPES,int,enum BUILDING_
 
 // address=[0x133c260]
 // Decompiled from int __thiscall CEcoManager::CheckBuildingOverlappingWithinGrid(void *this, unsigned int a2, int a3)
-
 int  CEcoManager::CheckBuildingOverlappingWithinGrid(enum BUILDING_TYPES,int) {
   
   int v3; // eax
@@ -575,7 +554,6 @@ int  CEcoManager::CheckBuildingOverlappingWithinGrid(enum BUILDING_TYPES,int) {
 
 // address=[0x133c370]
 // Decompiled from int __thiscall CEcoManager::GetBuildingIndex(CEcoManager *this, int a2, int a3)
-
 int  CEcoManager::GetBuildingIndex(int,int) {
   
   if ( !(unsigned __int8)_should_initialize_environment_1(a2, a3)
@@ -589,7 +567,6 @@ int  CEcoManager::GetBuildingIndex(int,int) {
 
 // address=[0x133c3d0]
 // Decompiled from char __thiscall CEcoManager::GetBuildingPosition(CEcoManager *this, int a2, int *a3, int *a4)
-
 bool  CEcoManager::GetBuildingPosition(int,int &,int &) {
   
   unsigned __int8 *BuildingPtr; // [esp+4h] [ebp-4h]
@@ -626,7 +603,6 @@ bool  CEcoManager::GetBuildingPosition(int,int &,int &) {
 
 // address=[0x133c490]
 // Decompiled from int __thiscall CEcoManager::GetPileAmount(void *this, int a2, int a3)
-
 int  CEcoManager::GetPileAmount(int,enum PILE_TYPES) {
   
   int PileIdWithGood; // [esp+0h] [ebp-10h]
@@ -659,7 +635,6 @@ int  CEcoManager::GetPileAmount(int,enum PILE_TYPES) {
 
 // address=[0x133c570]
 // Decompiled from int __thiscall CEcoManager::GetCountOfGoodsForBuilding(void *this, unsigned int a2, int a3)
-
 int  CEcoManager::GetCountOfGoodsForBuilding(enum BUILDING_TYPES,enum IECONEEDEDRESOURCE) {
   
   unsigned __int8 *v3; // eax
@@ -704,7 +679,6 @@ int  CEcoManager::GetCountOfGoodsForBuilding(enum BUILDING_TYPES,enum IECONEEDED
 
 // address=[0x133c630]
 // Decompiled from int __thiscall CEcoManager::GetCountOfPendingGoodsForBuilding(void *this, int a2, int a3)
-
 int  CEcoManager::GetCountOfPendingGoodsForBuilding(int,enum IECONEEDEDRESOURCE) {
   
   int v4; // [esp+8h] [ebp-8h]
@@ -734,7 +708,6 @@ int  CEcoManager::GetCountOfPendingGoodsForBuilding(int,enum IECONEEDEDRESOURCE)
 
 // address=[0x133c6f0]
 // Decompiled from int __thiscall CEcoManager::BuildingProgress(CEcoManager *this, int a2)
-
 int  CEcoManager::BuildingProgress(int) {
   
   CBuildingSiteRole *v3; // [esp+0h] [ebp-Ch]
@@ -755,7 +728,6 @@ int  CEcoManager::BuildingProgress(int) {
 
 // address=[0x133c780]
 // Decompiled from bool __thiscall CEcoManager::IsActive(void *this, int a2)
-
 bool  CEcoManager::IsActive(int) {
   
   _DWORD *v4; // [esp+4h] [ebp-8h]
@@ -772,7 +744,6 @@ bool  CEcoManager::IsActive(int) {
 
 // address=[0x133c810]
 // Decompiled from bool __thiscall CEcoManager::IsBuildingPlaceActive(void *this, int a2)
-
 bool  CEcoManager::IsBuildingPlaceActive(int) {
   
   _DWORD *v3; // [esp+0h] [ebp-Ch]
@@ -789,7 +760,6 @@ bool  CEcoManager::IsBuildingPlaceActive(int) {
 
 // address=[0x133c890]
 // Decompiled from int __thiscall CEcoManager::GetBuildingType(void *this, int a2)
-
 enum BUILDING_TYPES  CEcoManager::GetBuildingType(int) {
   
   unsigned __int16 *v3; // [esp+0h] [ebp-8h]
@@ -806,7 +776,6 @@ enum BUILDING_TYPES  CEcoManager::GetBuildingType(int) {
 
 // address=[0x133c900]
 // Decompiled from int __thiscall CEcoManager::HaveInhabitant(CEcoManager *this, int a2)
-
 bool  CEcoManager::HaveInhabitant(int) {
   
   if ( !(*(unsigned __int8 (__thiscall **)(CEcoManager *, int))(*(_DWORD *)this + 304))(this, a2)
@@ -821,7 +790,6 @@ bool  CEcoManager::HaveInhabitant(int) {
 
 // address=[0x133c970]
 // Decompiled from int __thiscall CEcoManager::GetNrOfSettlerComingOutOfResidence(void *this, int a2)
-
 int  CEcoManager::GetNrOfSettlerComingOutOfResidence(enum BUILDING_TYPES) {
   
   int v2; // eax
@@ -833,7 +801,6 @@ int  CEcoManager::GetNrOfSettlerComingOutOfResidence(enum BUILDING_TYPES) {
 
 // address=[0x133c9b0]
 // Decompiled from int __thiscall CEcoManager::GetRemainingNrOfSettlersComingOutOfResidence(CEcoManager *this, int a2)
-
 int  CEcoManager::GetRemainingNrOfSettlersComingOutOfResidence(int) {
   
   CResidenceBuildingRole *v3; // [esp+0h] [ebp-10h]
@@ -856,7 +823,6 @@ int  CEcoManager::GetRemainingNrOfSettlersComingOutOfResidence(int) {
 
 // address=[0x133ca40]
 // Decompiled from int __thiscall CEcoManager::GetBuildingEcoSectorID(_DWORD *this, int a2)
-
 int  CEcoManager::GetBuildingEcoSectorID(int) {
   
   _DWORD *BuildingPtr; // [esp+4h] [ebp-4h]
@@ -874,9 +840,7 @@ int  CEcoManager::GetBuildingEcoSectorID(int) {
 
 
 // address=[0x133caa0]
-// Decompiled from // bad sp value at call has been detected, the output may be wrong!
-int __thiscall CEcoManager::ConstructBuilding(int *this, unsigned int a2, int a3, int a4)
-
+// Decompiled from int __thiscall CEcoManager::ConstructBuilding(int *this, unsigned int a2, int a3, int a4)
 enum AI_ECOMANAGER_ERROR  CEcoManager::ConstructBuilding(enum BUILDING_TYPES,int,int) {
   
   int v4; // eax
@@ -917,9 +881,7 @@ enum AI_ECOMANAGER_ERROR  CEcoManager::ConstructBuilding(enum BUILDING_TYPES,int
 
 
 // address=[0x133cbf0]
-// Decompiled from // bad sp value at call has been detected, the output may be wrong!
-int __thiscall CEcoManager::DestroyBuilding(int *this, unsigned int a2)
-
+// Decompiled from int __thiscall CEcoManager::DestroyBuilding(int *this, unsigned int a2)
 enum AI_ECOMANAGER_ERROR  CEcoManager::DestroyBuilding(int) {
   
   char v2; // al
@@ -951,7 +913,6 @@ enum AI_ECOMANAGER_ERROR  CEcoManager::DestroyBuilding(int) {
 
 // address=[0x133ccf0]
 // Decompiled from int __thiscall CEcoManager::GetContentOfWorkingArea(CEcoManager *this, int a2)
-
 int  CEcoManager::GetContentOfWorkingArea(int) {
   
   int v2; // eax
@@ -976,7 +937,6 @@ int  CEcoManager::GetContentOfWorkingArea(int) {
 
 // address=[0x133cd90]
 // Decompiled from char __thiscall CEcoManager::ChangeWorkingAreaTo(CEcoManager *this, unsigned int a2, int a3, int a4)
-
 bool  CEcoManager::ChangeWorkingAreaTo(int,int,int) {
   
   char v5; // al
@@ -1017,7 +977,6 @@ bool  CEcoManager::ChangeWorkingAreaTo(int,int,int) {
 
 // address=[0x133cf00]
 // Decompiled from char __thiscall CEcoManager::GetPositionWorkingArea(CEcoManager *this, int a2, int *a3, int *a4)
-
 bool  CEcoManager::GetPositionWorkingArea(int,int &,int &) {
   
   void *v5; // [esp+0h] [ebp-Ch]
@@ -1040,7 +999,6 @@ bool  CEcoManager::GetPositionWorkingArea(int,int &,int &) {
 
 // address=[0x133cfa0]
 // Decompiled from int __thiscall CEcoManager::GetContentOfWorkingArea(void *this, unsigned int a2, int a3, int a4)
-
 int  CEcoManager::GetContentOfWorkingArea(enum BUILDING_TYPES,int,int) {
   
   _DWORD v5[4]; // [esp+0h] [ebp-38h] BYREF
@@ -1131,7 +1089,6 @@ int  CEcoManager::GetContentOfWorkingArea(enum BUILDING_TYPES,int,int) {
 
 // address=[0x133d2a0]
 // Decompiled from int __thiscall CEcoManager::GetWorkingAreaSize(void *this, unsigned int a2)
-
 int  CEcoManager::GetWorkingAreaSize(enum BUILDING_TYPES) {
   
   int v2; // eax
@@ -1148,7 +1105,6 @@ int  CEcoManager::GetWorkingAreaSize(enum BUILDING_TYPES) {
 
 // address=[0x133d310]
 // Decompiled from int __thiscall CEcoManager::GetPlayerId(CEcoManager *this)
-
 int  CEcoManager::GetPlayerId(void) {
   
   int v1; // eax
@@ -1161,7 +1117,6 @@ int  CEcoManager::GetPlayerId(void) {
 
 // address=[0x133d340]
 // Decompiled from int __thiscall CEcoManager::GetRace(CEcoManager *this)
-
 int  CEcoManager::GetRace(void) {
   
   int v2; // [esp+0h] [ebp-8h]
@@ -1173,7 +1128,6 @@ int  CEcoManager::GetRace(void) {
 
 // address=[0x133d370]
 // Decompiled from int __thiscall CEcoManager::GetRangeOfTower(void *this, unsigned int a2)
-
 int  CEcoManager::GetRangeOfTower(enum BUILDING_TYPES) {
   
   int v2; // eax
@@ -1190,7 +1144,6 @@ int  CEcoManager::GetRangeOfTower(enum BUILDING_TYPES) {
 
 // address=[0x133d3e0]
 // Decompiled from int __thiscall CEcoManager::GetGoodAmount(int *this, int a2)
-
 int  CEcoManager::GetGoodAmount(enum PILE_TYPES) {
   
   CEcoSector *v2; // eax
@@ -1207,7 +1160,6 @@ int  CEcoManager::GetGoodAmount(enum PILE_TYPES) {
 
 // address=[0x133d440]
 // Decompiled from int __thiscall CEcoManager::WorkerDeltaAmount(CEcoManager *this, int a2)
-
 int  CEcoManager::WorkerDeltaAmount(int) {
   
   CEcoSector *v2; // eax
@@ -1219,7 +1171,6 @@ int  CEcoManager::WorkerDeltaAmount(int) {
 
 // address=[0x133d470]
 // Decompiled from int __thiscall CEcoManager::GetSettlerAmount(int *this, int a2)
-
 int  CEcoManager::GetSettlerAmount(enum SETTLER_TYPES) {
   
   CEcoSector *v2; // eax
@@ -1236,7 +1187,6 @@ int  CEcoManager::GetSettlerAmount(enum SETTLER_TYPES) {
 
 // address=[0x133d4d0]
 // Decompiled from int __thiscall CEcoManager::GetBuildingAmount(CEcoManager *this, unsigned int a2)
-
 int  CEcoManager::GetBuildingAmount(enum BUILDING_TYPES) {
   
   int v3; // [esp+4h] [ebp-14h]
@@ -1265,7 +1215,6 @@ int  CEcoManager::GetBuildingAmount(enum BUILDING_TYPES) {
 
 // address=[0x133d590]
 // Decompiled from int __thiscall CEcoManager::GetBuildingIDs(_DWORD *this, int a2, int a3)
-
 int  CEcoManager::GetBuildingIDs(enum BUILDING_TYPES,class std::vector<int,class std::allocator<int> > &) {
   
   int v3; // eax
@@ -1307,7 +1256,6 @@ int  CEcoManager::GetBuildingIDs(enum BUILDING_TYPES,class std::vector<int,class
 
 // address=[0x133d680]
 // Decompiled from int __thiscall CEcoManager::GetResourceAmountAt(CEcoManager *this, int a2, Squares *a3, unsigned int a4)
-
 int  CEcoManager::GetResourceAmountAt(int,int,int) {
   
   CAIResourceData *v5; // eax
@@ -1323,7 +1271,6 @@ int  CEcoManager::GetResourceAmountAt(int,int,int) {
 
 // address=[0x133d6e0]
 // Decompiled from int __thiscall CEcoManager::GetResourceAmountAtAndAround(CEcoManager *this, int a2, Squares *a3, unsigned int a4)
-
 int  CEcoManager::GetResourceAmountAtAndAround(int,int,int) {
   
   CAIResourceData *v5; // eax
@@ -1339,7 +1286,6 @@ int  CEcoManager::GetResourceAmountAtAndAround(int,int,int) {
 
 // address=[0x133d740]
 // Decompiled from char __thiscall CEcoManager::GetResourceCenterXY(CEcoManager *this, int a2, Squares *a3, Squares *a4, int *a5, int *a6)
-
 bool  CEcoManager::GetResourceCenterXY(int,int,int,int &,int &) {
   
   int v7; // edx
@@ -1422,7 +1368,6 @@ bool  CEcoManager::GetResourceCenterXY(int,int,int,int &,int &) {
 
 // address=[0x133d8f0]
 // Decompiled from int __thiscall CEcoManager::GetSingleResourceConcentrationAt(CEcoManager *this, int a2, Squares *a3, Squares *a4)
-
 int  CEcoManager::GetSingleResourceConcentrationAt(int,int,int) {
   
   int v5; // edx
@@ -1492,7 +1437,6 @@ int  CEcoManager::GetSingleResourceConcentrationAt(int,int,int) {
 
 // address=[0x133da60]
 // Decompiled from int __thiscall CEcoManager::GetSingleResourceConcentrationInside(int *this, int a2, int a3)
-
 int  CEcoManager::GetSingleResourceConcentrationInside(int,class std::vector<struct SRESOURCECONCENTRATIONDATA,class std::allocator<struct SRESOURCECONCENTRATIONDATA> > &) {
   
   int v4; // [esp+4h] [ebp-A40h]
@@ -1541,7 +1485,6 @@ int  CEcoManager::GetSingleResourceConcentrationInside(int,class std::vector<str
 
 // address=[0x133dbf0]
 // Decompiled from int __thiscall CEcoManager::GetAroundResourceConcentrationInside(int *this, int a2, int a3)
-
 int  CEcoManager::GetAroundResourceConcentrationInside(int,class std::vector<struct SRESOURCECONCENTRATIONDATA,class std::allocator<struct SRESOURCECONCENTRATIONDATA> > &) {
   
   int v4; // [esp+4h] [ebp-A40h]
@@ -1588,7 +1531,6 @@ int  CEcoManager::GetAroundResourceConcentrationInside(int,class std::vector<str
 
 // address=[0x133dd70]
 // Decompiled from int __thiscall CEcoManager::GetSingleResourceConcentrationOutside(unsigned __int8 *this, int a2, int a3)
-
 int  CEcoManager::GetSingleResourceConcentrationOutside(int,class std::vector<struct SRESOURCECONCENTRATIONDATA,class std::allocator<struct SRESOURCECONCENTRATIONDATA> > &) {
   
   int v4; // eax
@@ -1632,7 +1574,6 @@ int  CEcoManager::GetSingleResourceConcentrationOutside(int,class std::vector<st
 
 // address=[0x133dee0]
 // Decompiled from int __thiscall CEcoManager::GetAroundResourceConcentrationOutside(unsigned __int8 *this, int a2, int a3)
-
 int  CEcoManager::GetAroundResourceConcentrationOutside(int,class std::vector<struct SRESOURCECONCENTRATIONDATA,class std::allocator<struct SRESOURCECONCENTRATIONDATA> > &) {
   
   int v4; // eax
@@ -1676,7 +1617,6 @@ int  CEcoManager::GetAroundResourceConcentrationOutside(int,class std::vector<st
 
 // address=[0x133e050]
 // Decompiled from bool __thiscall CEcoManager::IsMyEcoSector(CEcoManager *this, int a2, int a3)
-
 bool  CEcoManager::IsMyEcoSector(int,int) {
   
   return (unsigned __int8)CWorldManager::InWorld(a2, a3) && *((_DWORD *)this + 1) == CWorldManager::EcoSectorId(a2, a3);
@@ -1685,7 +1625,6 @@ bool  CEcoManager::IsMyEcoSector(int,int) {
 
 // address=[0x133e0b0]
 // Decompiled from char __thiscall CEcoManager::IsBorderElement(CEcoManager *this, Squares *a2, unsigned int a3)
-
 bool  CEcoManager::IsBorderElement(int,int) {
   
   struct CTile *v5; // [esp+4h] [ebp-8h]
@@ -1711,7 +1650,6 @@ bool  CEcoManager::IsBorderElement(int,int) {
 
 // address=[0x133e150]
 // Decompiled from char __thiscall CEcoManager::IsResourceAround(CEcoManager *this, int a2, Squares *a3, unsigned int a4, int a5)
-
 bool  CEcoManager::IsResourceAround(int,int,int,int) {
   
   int v7; // [esp+20h] [ebp-3Ch]
@@ -1750,7 +1688,6 @@ bool  CEcoManager::IsResourceAround(int,int,int,int) {
 
 // address=[0x133e300]
 // Decompiled from char __thiscall CEcoManager::IsLandscapeAround(CEcoManager *this, int a2, Squares *a3, unsigned int a4, int a5)
-
 bool  CEcoManager::IsLandscapeAround(int,int,int,int) {
   
   int i; // [esp+20h] [ebp-38h]
@@ -1788,7 +1725,6 @@ bool  CEcoManager::IsLandscapeAround(int,int,int,int) {
 
 // address=[0x133e480]
 // Decompiled from bool __thiscall CEcoManager::HasLand(CEcoManager *this, Squares *a2, unsigned int a3)
-
 bool  CEcoManager::HasLand(int,int) {
   
   CAIResourceData *v4; // [esp+4h] [ebp-4h]
@@ -1802,7 +1738,6 @@ bool  CEcoManager::HasLand(int,int) {
 
 // address=[0x133e4d0]
 // Decompiled from bool __thiscall CEcoManager::HasLandAround(CEcoManager *this, Squares *a2, unsigned int a3)
-
 bool  CEcoManager::HasLandAround(int,int) {
   
   CAIResourceData *v4; // [esp+4h] [ebp-4h]
@@ -1816,7 +1751,6 @@ bool  CEcoManager::HasLandAround(int,int) {
 
 // address=[0x133e520]
 // Decompiled from bool __thiscall CEcoManager::HasWater(CEcoManager *this, Squares *a2, unsigned int a3)
-
 bool  CEcoManager::HasWater(int,int) {
   
   CAIResourceData *v4; // [esp+4h] [ebp-4h]
@@ -1830,7 +1764,6 @@ bool  CEcoManager::HasWater(int,int) {
 
 // address=[0x133e570]
 // Decompiled from bool __thiscall CEcoManager::HasWaterAround(CEcoManager *this, Squares *a2, unsigned int a3)
-
 bool  CEcoManager::HasWaterAround(int,int) {
   
   CAIResourceData *v4; // [esp+4h] [ebp-4h]
@@ -1844,7 +1777,6 @@ bool  CEcoManager::HasWaterAround(int,int) {
 
 // address=[0x133e5c0]
 // Decompiled from bool __thiscall CEcoManager::HasRiver(CEcoManager *this, Squares *a2, unsigned int a3)
-
 bool  CEcoManager::HasRiver(int,int) {
   
   CAIResourceData *v4; // [esp+4h] [ebp-4h]
@@ -1858,7 +1790,6 @@ bool  CEcoManager::HasRiver(int,int) {
 
 // address=[0x133e610]
 // Decompiled from bool __thiscall CEcoManager::HasRiverAround(CEcoManager *this, Squares *a2, unsigned int a3)
-
 bool  CEcoManager::HasRiverAround(int,int) {
   
   CAIResourceData *v4; // [esp+4h] [ebp-4h]
@@ -1872,7 +1803,6 @@ bool  CEcoManager::HasRiverAround(int,int) {
 
 // address=[0x133e660]
 // Decompiled from int __thiscall CEcoManager::GetResourceAmountXY(CEcoManager *this, int a2, int a3, int a4)
-
 int  CEcoManager::GetResourceAmountXY(int,int,int) {
   
   if ( (unsigned __int8)CWorldManager::InWorld(a3, a4) )
@@ -1884,7 +1814,6 @@ int  CEcoManager::GetResourceAmountXY(int,int,int) {
 
 // address=[0x133e6a0]
 // Decompiled from bool __stdcall CEcoManager::HasLandscapeType(int a1, int a2, int a3)
-
 bool  CEcoManager::HasLandscapeType(enum AI_ECO_LANDSCAPE_TYPE,int,int) {
   
   int v4; // [esp+4h] [ebp-14h]
@@ -1932,7 +1861,6 @@ bool  CEcoManager::HasLandscapeType(enum AI_ECO_LANDSCAPE_TYPE,int,int) {
 
 // address=[0x133e790]
 // Decompiled from int __thiscall CEcoManager::GetLandscapeAmount(CEcoManager *this, int a2, Squares *a3, unsigned int a4)
-
 int  CEcoManager::GetLandscapeAmount(int,int,int) {
   
   CAIResourceData *v5; // [esp+4h] [ebp-4h]
@@ -1946,7 +1874,6 @@ int  CEcoManager::GetLandscapeAmount(int,int,int) {
 
 // address=[0x133e7e0]
 // Decompiled from int __thiscall CEcoManager::GetLandscapeConcentrationInside(int *this, int a2, int a3)
-
 int  CEcoManager::GetLandscapeConcentrationInside(int,class std::vector<struct SUNDERGROUNDCONCENTRATIONDATA,class std::allocator<struct SUNDERGROUNDCONCENTRATIONDATA> > &) {
   
   int v4; // [esp+4h] [ebp-A40h]
@@ -1993,7 +1920,6 @@ int  CEcoManager::GetLandscapeConcentrationInside(int,class std::vector<struct S
 
 // address=[0x133e960]
 // Decompiled from int __thiscall CEcoManager::GetLandscapeConcentrationOutside(unsigned __int8 *this, int a2, int a3)
-
 int  CEcoManager::GetLandscapeConcentrationOutside(int,class std::vector<struct SUNDERGROUNDCONCENTRATIONDATA,class std::allocator<struct SUNDERGROUNDCONCENTRATIONDATA> > &) {
   
   int v3; // eax
@@ -2035,7 +1961,6 @@ int  CEcoManager::GetLandscapeConcentrationOutside(int,class std::vector<struct 
 
 // address=[0x133eab0]
 // Decompiled from int __thiscall CEcoManager::GetBorderElements(int *this, int a2)
-
 int  CEcoManager::GetBorderElements(class std::vector<int,class std::allocator<int> > &) {
   
   int v3; // [esp+4h] [ebp-A38h]
@@ -2072,7 +1997,6 @@ int  CEcoManager::GetBorderElements(class std::vector<int,class std::allocator<i
 
 // address=[0x133ec00]
 // Decompiled from int __thiscall CEcoManager::GetFirstRiverPos(CEcoManager *this, Squares *a2, Squares *a3)
-
 int  CEcoManager::GetFirstRiverPos(int,int) {
   
   int v4; // [esp+8h] [ebp-10h]
@@ -2096,7 +2020,6 @@ int  CEcoManager::GetFirstRiverPos(int,int) {
 
 // address=[0x133eca0]
 // Decompiled from int __thiscall CEcoManager::ConvertTo(_DWORD *this, int a2, int a3, _DWORD *a4, int a5)
-
 int  CEcoManager::ConvertTo(enum BUILDING_TYPES,enum IECONOMANAGERGRIDRESOLUTION,struct SBUILDINFODATA *,struct SBUILDINFODATA *) {
   
   int j; // eax
@@ -2182,9 +2105,7 @@ int  CEcoManager::ConvertTo(enum BUILDING_TYPES,enum IECONOMANAGERGRIDRESOLUTION
 
 
 // address=[0x133eef0]
-// Decompiled from // bad sp value at call has been detected, the output may be wrong!
-int __thiscall CEcoManager::SendProduceOrder(int *this, int a2, int a3, unsigned int a4)
-
+// Decompiled from int __thiscall CEcoManager::SendProduceOrder(int *this, int a2, int a3, unsigned int a4)
 enum AI_ECOMANAGER_ERROR  CEcoManager::SendProduceOrder(int,enum PILE_TYPES,int) {
   
   char v4; // al
@@ -2213,9 +2134,7 @@ enum AI_ECOMANAGER_ERROR  CEcoManager::SendProduceOrder(int,enum PILE_TYPES,int)
 
 
 // address=[0x133efd0]
-// Decompiled from // bad sp value at call has been detected, the output may be wrong!
-int __thiscall CEcoManager::RecruteSpecialist(int *this, int a2, int a3, unsigned int a4)
-
+// Decompiled from int __thiscall CEcoManager::RecruteSpecialist(int *this, int a2, int a3, unsigned int a4)
 enum AI_ECOMANAGER_ERROR  CEcoManager::RecruteSpecialist(int,enum SETTLER_TYPES,int) {
   
   char v4; // al
@@ -2244,9 +2163,7 @@ enum AI_ECOMANAGER_ERROR  CEcoManager::RecruteSpecialist(int,enum SETTLER_TYPES,
 
 
 // address=[0x133f0b0]
-// Decompiled from // bad sp value at call has been detected, the output may be wrong!
-int __thiscall CEcoManager::SwitchBuildingStatus(int *this, unsigned int a2)
-
+// Decompiled from int __thiscall CEcoManager::SwitchBuildingStatus(int *this, unsigned int a2)
 enum AI_ECOMANAGER_ERROR  CEcoManager::SwitchBuildingStatus(int) {
   
   char v2; // al
@@ -2277,14 +2194,7 @@ enum AI_ECOMANAGER_ERROR  CEcoManager::SwitchBuildingStatus(int) {
 
 
 // address=[0x133f1b0]
-// Decompiled from int __thiscall CEcoManager::SendNetMessage(
-        _DWORD *this,
-        unsigned int a2,
-        unsigned int a3,
-        unsigned int a4,
-        int a5,
-        unsigned int a6)
-
+// Decompiled from int __thiscall CEcoManager::SendNetMessage(  _DWORD *this,  unsigned int a2,  unsigned int a3,  unsigned int a4,  int a5,  unsigned int a6)
 enum AI_ECOMANAGER_ERROR  CEcoManager::SendNetMessage(int,int,int,int,int) {
   
   _BYTE v7[32]; // [esp+Ch] [ebp-50h] BYREF
@@ -2325,7 +2235,6 @@ enum AI_ECOMANAGER_ERROR  CEcoManager::SendNetMessage(int,int,int,int,int) {
 
 // address=[0x133f310]
 // Decompiled from int __thiscall CEcoManager::GetResidenceNeed(CEcoManager *this)
-
 int  CEcoManager::GetResidenceNeed(void) {
   
   int v1; // eax
@@ -2337,7 +2246,6 @@ int  CEcoManager::GetResidenceNeed(void) {
 
 // address=[0x133f340]
 // Decompiled from int __thiscall CEcoManager::GetResidenceSpace(CEcoManager *this)
-
 int  CEcoManager::GetResidenceSpace(void) {
   
   int v1; // eax
@@ -2349,7 +2257,6 @@ int  CEcoManager::GetResidenceSpace(void) {
 
 // address=[0x133f370]
 // Decompiled from int __thiscall CEcoManager::GetTickCount(CEcoManager *this)
-
 unsigned int  CEcoManager::GetTickCount(void) {
   
   return CStateGame::GetTickCounter(g_pGame);
@@ -2358,7 +2265,6 @@ unsigned int  CEcoManager::GetTickCount(void) {
 
 // address=[0x133f390]
 // Decompiled from int __thiscall CEcoManager::GetLastSpiralIndex(CEcoManager *this, int a2)
-
 int  CEcoManager::GetLastSpiralIndex(int) {
   
   return CSpiralOffsets::First(a2 + 1) - 1;
@@ -2367,7 +2273,6 @@ int  CEcoManager::GetLastSpiralIndex(int) {
 
 // address=[0x133f3b0]
 // Decompiled from int __thiscall CEcoManager::GetSpiralDeltaOffset(CEcoManager *this, int a2, int *a3, int *a4)
-
 void  CEcoManager::GetSpiralDeltaOffset(int,int &,int &) {
   
   int result; // eax
@@ -2381,7 +2286,6 @@ void  CEcoManager::GetSpiralDeltaOffset(int,int &,int &) {
 
 // address=[0x133f3e0]
 // Decompiled from int __thiscall CEcoManager::GetStoragePlace(CEcoManager *this, int a2, int a3)
-
 int  CEcoManager::GetStoragePlace(int,int) {
   
   CStorageBuildingRole *v3; // eax
@@ -2402,7 +2306,6 @@ int  CEcoManager::GetStoragePlace(int,int) {
 
 // address=[0x133f470]
 // Decompiled from char __thiscall CEcoManager::CheckBuildingId(_DWORD *this, unsigned int a2)
-
 bool  CEcoManager::CheckBuildingId(unsigned int) {
   
   _DWORD *BuildingPtr; // [esp+Ch] [ebp-4h]
@@ -2423,7 +2326,6 @@ bool  CEcoManager::CheckBuildingId(unsigned int) {
 
 // address=[0x133f510]
 // Decompiled from int __thiscall CEcoManager::GetMinimumCarrier(CEcoManager *this)
-
 int  CEcoManager::GetMinimumCarrier(void) {
   
   CEcoSector *v1; // eax
@@ -2435,7 +2337,6 @@ int  CEcoManager::GetMinimumCarrier(void) {
 
 // address=[0x133f540]
 // Decompiled from void __thiscall CEcoManager::SetMinimumCarrier(CEcoManager *this, int a2)
-
 void  CEcoManager::SetMinimumCarrier(int) {
   
   int v2; // [esp+0h] [ebp-10h]
@@ -2449,7 +2350,6 @@ void  CEcoManager::SetMinimumCarrier(int) {
 
 // address=[0x133f590]
 // Decompiled from int __thiscall CEcoManager::GetMinimumCarrierForRecruitment(CEcoManager *this)
-
 int  CEcoManager::GetMinimumCarrierForRecruitment(void) {
   
   CEcoSector *v1; // eax
@@ -2461,7 +2361,6 @@ int  CEcoManager::GetMinimumCarrierForRecruitment(void) {
 
 // address=[0x133f5c0]
 // Decompiled from CEcoSector *__thiscall CEcoManager::SetMinimumCarrierForRecruitment(CEcoManager *this, int a2)
-
 void  CEcoManager::SetMinimumCarrierForRecruitment(int) {
   
   int v3; // [esp+0h] [ebp-10h]
@@ -2475,7 +2374,6 @@ void  CEcoManager::SetMinimumCarrierForRecruitment(int) {
 
 // address=[0x133f610]
 // Decompiled from int __thiscall CEcoManager::GetConfigManager(CEcoManager *this)
-
 class IConfigManager *  CEcoManager::GetConfigManager(void) {
   
   return CConfigManagerPtr::GetInstance(this);
@@ -2484,7 +2382,6 @@ class IConfigManager *  CEcoManager::GetConfigManager(void) {
 
 // address=[0x133f620]
 // Decompiled from int __thiscall CEcoManager::GetSectorAI(CEcoManager *this)
-
 class IAISectorAI *  CEcoManager::GetSectorAI(void) {
   
   return *((_DWORD *)this + 65430);
@@ -2493,7 +2390,6 @@ class IAISectorAI *  CEcoManager::GetSectorAI(void) {
 
 // address=[0x133f640]
 // Decompiled from int __thiscall CEcoManager::GetEventQueue(CEcoManager *this)
-
 class IAIEventQueue *  CEcoManager::GetEventQueue(void) {
   
   return *((_DWORD *)this + 65431);
@@ -2502,7 +2398,6 @@ class IAIEventQueue *  CEcoManager::GetEventQueue(void) {
 
 // address=[0x133f660]
 // Decompiled from int CEcoManager::AddRef()
-
 static int __cdecl CEcoManager::AddRef(void) {
   
   return ++CEcoManager::m_iRefCounter;
@@ -2511,7 +2406,6 @@ static int __cdecl CEcoManager::AddRef(void) {
 
 // address=[0x133f680]
 // Decompiled from int CEcoManager::Release()
-
 static int __cdecl CEcoManager::Release(void) {
   
   return --CEcoManager::m_iRefCounter;
@@ -2520,7 +2414,6 @@ static int __cdecl CEcoManager::Release(void) {
 
 // address=[0x133f6a0]
 // Decompiled from int __thiscall CEcoManager::CreateTree(CEcoManager *this, int a2, CEcoManagerTree **a3)
-
 enum AI_ECOMANAGER_ERROR  CEcoManager::CreateTree(enum BUILDING_TYPES,class CEcoManagerTree * &) {
   
   unsigned int v4; // eax
@@ -2763,7 +2656,6 @@ enum AI_ECOMANAGER_ERROR  CEcoManager::CreateTree(enum BUILDING_TYPES,class CEco
 
 // address=[0x133fea0]
 // Decompiled from char __thiscall CEcoManager::WorkOnTile(unsigned __int8 *this, int a2, int a3, int a4, int a5)
-
 bool  CEcoManager::WorkOnTile(enum BUILDING_TYPES,int,int,class CEcoManagerTree *) {
   
   int v6; // esi
@@ -2922,7 +2814,6 @@ bool  CEcoManager::WorkOnTile(enum BUILDING_TYPES,int,int,class CEcoManagerTree 
 
 // address=[0x1340480]
 // Decompiled from char __thiscall CEcoManager::IsMyTile(CEcoManager *this, int SquareTile)
-
 bool  CEcoManager::IsMyTile(int) {
   
   struct CTile *v5; // [esp+8h] [ebp-4h]
@@ -2941,9 +2832,7 @@ bool  CEcoManager::IsMyTile(int) {
 
 
 // address=[0x13404e0]
-// Decompiled from // private: int __thiscall CEcoManager::GetResourceAmountFast(int,int,int)
-int __stdcall CEcoManager::GetResourceAmountFast(int a1, int a2, int a3)
-
+// Decompiled from int __stdcall CEcoManager::GetResourceAmountFast(int a1, int a2, int a3)
 int  CEcoManager::GetResourceAmountFast(int,int,int) {
   
   CAIResourceData *v3; // eax
@@ -2955,7 +2844,6 @@ int  CEcoManager::GetResourceAmountFast(int,int,int) {
 
 // address=[0x1340510]
 // Decompiled from int __thiscall CEcoManager::GetDefaultUndergroundByRace(CEcoManager *this)
-
 int  CEcoManager::GetDefaultUndergroundByRace(void) {
   
   int result; // eax
@@ -2987,7 +2875,6 @@ int  CEcoManager::GetDefaultUndergroundByRace(void) {
 
 // address=[0x1340580]
 // Decompiled from int __thiscall CEcoManager::GetBuildingEcoSectorID(CEcoManager *this, struct CBuilding *a2)
-
 int  CEcoManager::GetBuildingEcoSectorID(class CBuilding *) {
   
   int v2; // eax
@@ -2999,7 +2886,6 @@ int  CEcoManager::GetBuildingEcoSectorID(class CBuilding *) {
 
 // address=[0x13405a0]
 // Decompiled from char __thiscall CEcoManager::CanBeReachedByFisher(_DWORD *this, int a2, int a3)
-
 bool  CEcoManager::CanBeReachedByFisher(int,int) {
   
   int j; // eax
@@ -3033,7 +2919,6 @@ bool  CEcoManager::CanBeReachedByFisher(int,int) {
 
 // address=[0x1340660]
 // Decompiled from char __stdcall CEcoManager::CopyData(_Cnd_internal_imp_t *a1, int a2)
-
 bool  CEcoManager::CopyData(class CEcoManagerLeaf *,struct SBUILDINFODATA *) {
   
   struct Concurrency::details::stl_condition_variable_win7 *BuildInfo; // eax
@@ -3048,7 +2933,6 @@ bool  CEcoManager::CopyData(class CEcoManagerLeaf *,struct SBUILDINFODATA *) {
 
 // address=[0x13467d0]
 // Decompiled from bool __thiscall CEcoManager::IsChecked(unsigned __int8 *this, int a2, int a3, int a4)
-
 bool  CEcoManager::IsChecked(enum BUILDING_TYPES,int,int) {
   
   if ( a3 < 0 || a4 < 0 )
@@ -3061,7 +2945,6 @@ bool  CEcoManager::IsChecked(enum BUILDING_TYPES,int,int) {
 
 // address=[0x13468b0]
 // Decompiled from void *__thiscall CEcoManager::ResetCheckField(char *this, int a2)
-
 void  CEcoManager::ResetCheckField(enum BUILDING_TYPES) {
   
   return j__memset(&this[512 * a2 + 217228], 0, 0x200u);
@@ -3070,7 +2953,6 @@ void  CEcoManager::ResetCheckField(enum BUILDING_TYPES) {
 
 // address=[0x13468f0]
 // Decompiled from int __thiscall CEcoManager::SetChecked(_BYTE *this, int a2, int a3, int a4)
-
 void  CEcoManager::SetChecked(enum BUILDING_TYPES,int,int) {
   
   int result; // eax

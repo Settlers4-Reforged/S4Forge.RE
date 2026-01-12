@@ -4,7 +4,6 @@
 
 // address=[0x1454a50]
 // Decompiled from CWeaponSideBarInfo *__thiscall CWeaponSideBarInfo::CWeaponSideBarInfo(CWeaponSideBarInfo *this)
-
  CWeaponSideBarInfo::CWeaponSideBarInfo(void) {
   
   CInfoExchange::CInfoExchange(this);
@@ -15,7 +14,6 @@
 
 // address=[0x1454ed0]
 // Decompiled from int __thiscall CWeaponSideBarInfo::Size(CWeaponSideBarInfo *this)
-
 unsigned int  CWeaponSideBarInfo::Size(void)const {
   
   return 60;

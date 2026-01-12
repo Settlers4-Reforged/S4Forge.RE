@@ -4,7 +4,6 @@
 
 // address=[0x14a3fb0]
 // Decompiled from CStateCredits *__cdecl CStateCredits::DynamicCreateFunc(void *a1)
-
 static class CGameState * __cdecl CStateCredits::DynamicCreateFunc(void *) {
   
   CStateCredits *C; // [esp+Ch] [ebp-10h]
@@ -19,7 +18,6 @@ static class CGameState * __cdecl CStateCredits::DynamicCreateFunc(void *) {
 
 // address=[0x14a4160]
 // Decompiled from CStateCredits *__thiscall CStateCredits::CStateCredits(CStateCredits *this, void *a2)
-
  CStateCredits::CStateCredits(void *) {
   
   CGuiGameState::CGuiGameState(this);
@@ -33,7 +31,6 @@ static class CGameState * __cdecl CStateCredits::DynamicCreateFunc(void *) {
 
 // address=[0x14a41e0]
 // Decompiled from void __thiscall CStateCredits::~CStateCredits(CStateCredits *this)
-
  CStateCredits::~CStateCredits(void) {
   
   *(_DWORD *)this = &CStateCredits::_vftable_;
@@ -67,7 +64,6 @@ static class CGameState * __cdecl CStateCredits::DynamicCreateFunc(void *) {
 
 // address=[0x14a4330]
 // Decompiled from char __thiscall CStateCredits::Perform(CStateCredits *this)
-
 bool  CStateCredits::Perform(void) {
   
   signed int Time; // [esp+4h] [ebp-4h]
@@ -91,7 +87,6 @@ bool  CStateCredits::Perform(void) {
 
 // address=[0x14a43b0]
 // Decompiled from char __thiscall CStateCredits::OnEvent(CStateCredits *this, struct CEvn_Event *a2)
-
 bool  CStateCredits::OnEvent(class CEvn_Event &) {
   
   char result; // al
@@ -138,7 +133,6 @@ CStateCredits__OnEvent___def_18A4401:
 
 // address=[0x14a4030]
 // Decompiled from int __thiscall CStateCredits::SetupGUI(CStateCredits *this)
-
 void  CStateCredits::SetupGUI(void) {
   
   if ( g_pSoundManager )

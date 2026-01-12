@@ -4,7 +4,6 @@
 
 // address=[0x2f3f700]
 // Decompiled from CHistorySolution *__thiscall CHistorySolution::CHistorySolution(CHistorySolution *this, int a2, struct CParam *a3)
-
  CHistorySolution::CHistorySolution(int,class CParam *) {
   
   CParam *v4; // [esp+8h] [ebp-18h]
@@ -25,7 +24,6 @@
 
 // address=[0x2f3f7c0]
 // Decompiled from void __thiscall CHistorySolution::~CHistorySolution(CHistorySolution *this)
-
  CHistorySolution::~CHistorySolution(void) {
   
   *(_DWORD *)this = &CHistorySolution::_vftable_;

@@ -4,7 +4,6 @@
 
 // address=[0x13a4250]
 // Decompiled from char __thiscall INetworkEngine::StormDidEnterSession(INetworkEngine *this)
-
 bool  INetworkEngine::StormDidEnterSession(void)const {
   
   return *((_BYTE *)this + 7);
@@ -13,7 +12,6 @@ bool  INetworkEngine::StormDidEnterSession(void)const {
 
 // address=[0x1486f50]
 // Decompiled from int __thiscall INetworkEngine::GetVirtualTick(CGameHost **this)
-
 int  INetworkEngine::GetVirtualTick(void) {
   
   return CGameHost::GetVirtualTick(this[2]);
@@ -22,7 +20,6 @@ int  INetworkEngine::GetVirtualTick(void) {
 
 // address=[0x149f500]
 // Decompiled from char *__thiscall INetworkEngine::GetLocalIP(CGameHost **this)
-
 long  INetworkEngine::GetLocalIP(void) {
   
   if ( *((_BYTE *)this + 12) )
@@ -34,7 +31,6 @@ long  INetworkEngine::GetLocalIP(void) {
 
 // address=[0x14aaa40]
 // Decompiled from char __thiscall INetworkEngine::EndTick(INetworkEngine *this)
-
 bool  INetworkEngine::EndTick(void) {
   
   char result; // al
@@ -47,7 +43,6 @@ bool  INetworkEngine::EndTick(void) {
 
 // address=[0x14aaa70]
 // Decompiled from void __thiscall INetworkEngine::GameInitalized(CGameHost **this)
-
 void  INetworkEngine::GameInitalized(void) {
   
   CGameHost::GameInitalized(this[2]);
@@ -56,7 +51,6 @@ void  INetworkEngine::GameInitalized(void) {
 
 // address=[0x14aab60]
 // Decompiled from unsigned int __thiscall INetworkEngine::GetBytesPerSecond(CGameHost **this)
-
 unsigned int  INetworkEngine::GetBytesPerSecond(void) {
   
   return CGameHost::GetBytesPerSecond(this[2]);
@@ -65,7 +59,6 @@ unsigned int  INetworkEngine::GetBytesPerSecond(void) {
 
 // address=[0x14aada0]
 // Decompiled from int __thiscall INetworkEngine::GetValidTick(void **this)
-
 int  INetworkEngine::GetValidTick(void) {
   
   return CGameHost::GetValidTick(this[2]);
@@ -73,9 +66,7 @@ int  INetworkEngine::GetValidTick(void) {
 
 
 // address=[0x14aae30]
-// Decompiled from // Microsoft VisualC 14/net runtime
-char __thiscall INetworkEngine::IsHost(INetworkEngine *this)
-
+// Decompiled from char __thiscall INetworkEngine::IsHost(INetworkEngine *this)
 bool  INetworkEngine::IsHost(void) {
   
   return *((_BYTE *)this + 4);
@@ -84,7 +75,6 @@ bool  INetworkEngine::IsHost(void) {
 
 // address=[0x14ab0d0]
 // Decompiled from char __thiscall INetworkEngine::StartNewTick(CGameHost **this, bool a2)
-
 bool  INetworkEngine::StartNewTick(bool) {
   
   char started; // [esp+7h] [ebp-1h]
@@ -98,7 +88,6 @@ bool  INetworkEngine::StartNewTick(bool) {
 
 // address=[0x14b46a0]
 // Decompiled from int __stdcall INetworkEngine::ConvertIPAddress(int a1, int a2)
-
 std::string  INetworkEngine::ConvertIPAddress(unsigned int) {
   
   CGameHost::ConvertIPAddress(a1, a2);
@@ -108,7 +97,6 @@ std::string  INetworkEngine::ConvertIPAddress(unsigned int) {
 
 // address=[0x14b46f0]
 // Decompiled from bool __thiscall INetworkEngine::EndGame(CGameHost **this, int a2)
-
 bool  INetworkEngine::EndGame(int) {
   
   return CGameHost::OnEndGame(this[2], a2);
@@ -117,7 +105,6 @@ bool  INetworkEngine::EndGame(int) {
 
 // address=[0x14b4760]
 // Decompiled from bool __thiscall INetworkEngine::KickPlayerPeerId(CGameHost **this, unsigned int a2)
-
 bool  INetworkEngine::KickPlayerPeerId(unsigned int) {
   
   return CGameHost::RemovePlayerPeerId(this[2], a2);
@@ -126,7 +113,6 @@ bool  INetworkEngine::KickPlayerPeerId(unsigned int) {
 
 // address=[0x14b4860]
 // Decompiled from bool __thiscall INetworkEngine::RemovePlayerPeerId(CGameHost **this, unsigned int a2)
-
 bool  INetworkEngine::RemovePlayerPeerId(unsigned int) {
   
   return CGameHost::RemovePlayerPeerId(this[2], a2);
@@ -135,7 +121,6 @@ bool  INetworkEngine::RemovePlayerPeerId(unsigned int) {
 
 // address=[0x14bce40]
 // Decompiled from INetworkEngine *__thiscall INetworkEngine::StormResetEnterSessionFlag(INetworkEngine *this)
-
 void  INetworkEngine::StormResetEnterSessionFlag(void) {
   
   INetworkEngine *result; // eax
@@ -148,7 +133,6 @@ void  INetworkEngine::StormResetEnterSessionFlag(void) {
 
 // address=[0x15c8460]
 // Decompiled from INetworkEngine *__thiscall INetworkEngine::INetworkEngine(INetworkEngine *this, bool a2)
-
  INetworkEngine::INetworkEngine(bool) {
   
   *(_DWORD *)this = &INetworkEngine::_vftable_;
@@ -166,7 +150,6 @@ void  INetworkEngine::StormResetEnterSessionFlag(void) {
 
 // address=[0x15c84d0]
 // Decompiled from INetworkEngine *__thiscall INetworkEngine::~INetworkEngine(INetworkEngine *this)
-
  INetworkEngine::~INetworkEngine(void) {
   
   INetworkEngine *result; // eax
@@ -184,7 +167,6 @@ void  INetworkEngine::StormResetEnterSessionFlag(void) {
 
 // address=[0x15c8530]
 // Decompiled from char __thiscall INetworkEngine::SendNetMessage(INetworkEngine *this, struct CEvn_Logic *a2)
-
 bool  INetworkEngine::SendNetMessage(class CEvn_Logic &) {
   
   _BYTE v4[32]; // [esp+Ch] [ebp-30h] BYREF
@@ -221,13 +203,7 @@ bool  INetworkEngine::SendNetMessage(class CEvn_Logic &) {
 
 
 // address=[0x15c8690]
-// Decompiled from char __thiscall INetworkEngine::SendNetMessage(
-        INetworkEngine *this,
-        unsigned int a2,
-        unsigned int a3,
-        unsigned int a4,
-        int a5)
-
+// Decompiled from char __thiscall INetworkEngine::SendNetMessage(  INetworkEngine *this,  unsigned int a2,  unsigned int a3,  unsigned int a4,  int a5)
 bool  INetworkEngine::SendNetMessage(unsigned int,unsigned int,unsigned int,int) {
   
   unsigned int CurrentTickCounter; // [esp+8h] [ebp-38h]
@@ -266,7 +242,6 @@ bool  INetworkEngine::SendNetMessage(unsigned int,unsigned int,unsigned int,int)
 
 // address=[0x15c87e0]
 // Decompiled from char __thiscall INetworkEngine::SendAsyncNetMessage(INetworkEngine *this, struct CEvn_Logic *a2, char a3)
-
 bool  INetworkEngine::SendAsyncNetMessage(class CEvn_Logic &,unsigned char) {
   
   _BYTE Src[32]; // [esp+Ch] [ebp-30h] BYREF
@@ -291,7 +266,6 @@ bool  INetworkEngine::SendAsyncNetMessage(class CEvn_Logic &,unsigned char) {
 
 // address=[0x15c8890]
 // Decompiled from char __thiscall INetworkEngine::DeliverNetMessages(INetworkEngine *this)
-
 bool  INetworkEngine::DeliverNetMessages(void) {
   
   _BYTE v3[4]; // [esp+8h] [ebp-50h] BYREF
@@ -333,7 +307,6 @@ bool  INetworkEngine::DeliverNetMessages(void) {
 
 // address=[0x15c8990]
 // Decompiled from bool __thiscall INetworkEngine::CheckForMsg(INetworkEngine *this)
-
 bool  INetworkEngine::CheckForMsg(void) {
   
   return !*((_BYTE *)this + 12) || !*((_DWORD *)this + 2) || CGameHost::Run(*((CGameHost **)this + 2));
@@ -342,7 +315,6 @@ bool  INetworkEngine::CheckForMsg(void) {
 
 // address=[0x15c89c0]
 // Decompiled from char __thiscall INetworkEngine::Start(int this, char a2, unsigned int a3, int a4, wchar_t *Source)
-
 bool  INetworkEngine::Start(bool,unsigned int,unsigned int,wchar_t const *) {
   
   struct CMsgStacks *v6; // [esp+10h] [ebp-20h]
@@ -400,9 +372,7 @@ bool  INetworkEngine::Start(bool,unsigned int,unsigned int,wchar_t const *) {
 
 
 // address=[0x15c8bf0]
-// Decompiled from // public: void __thiscall INetworkEngine::ContinueSearchForHost(void)
-CGameHost *__thiscall INetworkEngine::ContinueSearchForHost(CGameHost **this)
-
+// Decompiled from CGameHost *__thiscall INetworkEngine::ContinueSearchForHost(CGameHost **this)
 void  INetworkEngine::ContinueSearchForHost(void) {
   
   return CGameHost::ContinueSearchForHost(this[2]);
@@ -411,7 +381,6 @@ void  INetworkEngine::ContinueSearchForHost(void) {
 
 // address=[0x15c8c10]
 // Decompiled from void __thiscall INetworkEngine::OnEndSaving(INetworkEngine *this)
-
 void  INetworkEngine::OnEndSaving(void) {
   
   int v1; // eax
@@ -428,7 +397,6 @@ void  INetworkEngine::OnEndSaving(void) {
 
 // address=[0x15c8c70]
 // Decompiled from void __thiscall INetworkEngine::StormJoinSessionSucceeded(INetworkEngine *this)
-
 void  INetworkEngine::StormJoinSessionSucceeded(void) {
   
   if ( !*((_DWORD *)this + 2) && BBSupportDbgReport(2, "Net\\INetworkEngine.cpp", 314, "m_pGameHost != NULL") == 1 )
@@ -439,7 +407,6 @@ void  INetworkEngine::StormJoinSessionSucceeded(void) {
 
 // address=[0x15c8cb0]
 // Decompiled from int __thiscall INetworkEngine::StormHost_NewPlayerMessage(_DWORD *this, int a2, int a3, char a4)
-
 void  INetworkEngine::StormHost_NewPlayerMessage(unsigned int,std::wstring &,int) {
   
   if ( !this[2] && BBSupportDbgReport(2, "Net\\INetworkEngine.cpp", 320, "m_pGameHost != NULL") == 1 )
@@ -450,7 +417,6 @@ void  INetworkEngine::StormHost_NewPlayerMessage(unsigned int,std::wstring &,int
 
 // address=[0x15c8d00]
 // Decompiled from void __thiscall INetworkEngine::StormOnPeerGone(CGameHost **this, unsigned int a2)
-
 void  INetworkEngine::StormOnPeerGone(unsigned int) {
   
   CGameHost::StormClientLeavesMyGame(this[2], a2);
@@ -459,7 +425,6 @@ void  INetworkEngine::StormOnPeerGone(unsigned int) {
 
 // address=[0x15c8d20]
 // Decompiled from void __thiscall INetworkEngine::StormOnHost(CGameHost **this)
-
 void  INetworkEngine::StormOnHost(void) {
   
   std::wstring::operator=((int)&unk_4030720);
@@ -470,7 +435,6 @@ void  INetworkEngine::StormOnHost(void) {
 
 // address=[0x15c8d60]
 // Decompiled from void __thiscall INetworkEngine::OnQuickMatched(CGameHost **this, bool a2)
-
 void  INetworkEngine::OnQuickMatched(bool) {
   
   CGameHost::OnQuickMatched(this[2], a2);
@@ -479,7 +443,6 @@ void  INetworkEngine::OnQuickMatched(bool) {
 
 // address=[0x15c8d80]
 // Decompiled from void __thiscall INetworkEngine::OnJoinedFromInvite(CGameHost **this)
-
 void  INetworkEngine::OnJoinedFromInvite(void) {
   
   CGameHost::OnJoinedFromOnlineFlow(this[2]);
@@ -488,7 +451,6 @@ void  INetworkEngine::OnJoinedFromInvite(void) {
 
 // address=[0x16227a0]
 // Decompiled from INetworkEngine *__thiscall INetworkEngine::StormEnteredSession(INetworkEngine *this)
-
 void  INetworkEngine::StormEnteredSession(void) {
   
   INetworkEngine *result; // eax
@@ -501,7 +463,6 @@ void  INetworkEngine::StormEnteredSession(void) {
 
 // address=[0x15c9030]
 // Decompiled from int __thiscall INetworkEngine::PopMsg(_DWORD *this, int a2)
-
 class CNet_Event  INetworkEngine::PopMsg(void) {
   
   CGameHost::PopMsg(this[2], a2);
@@ -511,7 +472,6 @@ class CNet_Event  INetworkEngine::PopMsg(void) {
 
 // address=[0x15c9070]
 // Decompiled from int __stdcall INetworkEngine::PushAsyncMsg(void *Src, char a2)
-
 void  INetworkEngine::PushAsyncMsg(class CNet_Event &,unsigned char) {
   
   return CGameHost::PushAsyncMsg(Src, a2);
@@ -520,7 +480,6 @@ void  INetworkEngine::PushAsyncMsg(class CNet_Event &,unsigned char) {
 
 // address=[0x15c90a0]
 // Decompiled from bool __thiscall INetworkEngine::PushMsg(CGameHost **this, struct CNet_Event *a2)
-
 bool  INetworkEngine::PushMsg(class CNet_Event &) {
   
   return CGameHost::PushMsg(this[2], a2);

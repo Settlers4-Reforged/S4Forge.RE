@@ -3,10 +3,7 @@
 // Definitions for class CDestructionPhase
 
 // address=[0x1425d60]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-CDestructionPhase *__thiscall CDestructionPhase::CDestructionPhase(CDestructionPhase *this, int a2)
-
+// Decompiled from CDestructionPhase *__thiscall CDestructionPhase::CDestructionPhase(CDestructionPhase *this, int a2)
  CDestructionPhase::CDestructionPhase(int) {
   
   *(_DWORD *)this = a2;
@@ -16,7 +13,6 @@ CDestructionPhase *__thiscall CDestructionPhase::CDestructionPhase(CDestructionP
 
 // address=[0x2f05560]
 // Decompiled from bool __thiscall CDestructionPhase::operator>(_DWORD *this, _DWORD *a2)
-
 bool  CDestructionPhase::operator>(class CDestructionPhase const &)const {
   
   return *this > *a2;

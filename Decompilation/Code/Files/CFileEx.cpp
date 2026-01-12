@@ -4,7 +4,6 @@
 
 // address=[0x135cb10]
 // Decompiled from CFileEx *__thiscall CFileEx::CFileEx(CFileEx *this, int a2)
-
  CFileEx::CFileEx(void) {
   
   if ( a2 )
@@ -31,7 +30,6 @@
 
 // address=[0x135d430]
 // Decompiled from int __thiscall CFileEx::_CFileEx(_DWORD *this)
-
  CFileEx::~CFileEx(void) {
   
   *this = CFileEx::_vftable_;
@@ -44,7 +42,6 @@
 
 // address=[0x1496960]
 // Decompiled from char __thiscall CFileEx::InLibrary(CFileEx *this)
-
 bool  CFileEx::InLibrary(void)const {
   
   return *((_BYTE *)this + 80);
@@ -53,7 +50,6 @@ bool  CFileEx::InLibrary(void)const {
 
 // address=[0x2f01710]
 // Decompiled from _DWORD *__thiscall CFileEx::CFileEx(_DWORD *this, _Cnd_internal_imp_t *a2, int a3, unsigned __int8 a4, int a5)
-
  CFileEx::CFileEx(std::wstring const &,unsigned int,bool) {
   
   wchar_t *v5; // eax
@@ -78,7 +74,6 @@ bool  CFileEx::InLibrary(void)const {
 
 // address=[0x2f017f0]
 // Decompiled from int __thiscall CFileEx::CFileEx(int this, wchar_t *FileName, int a2, char a4, int a5)
-
  CFileEx::CFileEx(wchar_t const *,unsigned int,bool) {
   
   if ( a5 )
@@ -106,7 +101,6 @@ bool  CFileEx::InLibrary(void)const {
 
 // address=[0x2f01900]
 // Decompiled from int __thiscall CFileEx::Open(_DWORD *this, _Cnd_internal_imp_t *a2, int a3, unsigned __int8 a4, int a5, int a6)
-
 void  CFileEx::Open(std::wstring const &,unsigned int,bool,char *,int) {
   
   _DWORD *v6; // eax
@@ -125,7 +119,6 @@ void  CFileEx::Open(std::wstring const &,unsigned int,bool,char *,int) {
 
 // address=[0x2f01950]
 // Decompiled from void __thiscall CFileEx::Open(_DWORD *this, wchar_t *FileName, char a3, char a4, char *Str, int a6)
-
 void  CFileEx::Open(wchar_t const *,unsigned int,bool,char *,int) {
   
   wchar_t *v6; // eax
@@ -170,7 +163,6 @@ void  CFileEx::Open(wchar_t const *,unsigned int,bool,char *,int) {
 
 // address=[0x2f01ad0]
 // Decompiled from int __thiscall CFileEx::MapFile(_DWORD *this, WCHAR *lpFileName, const char *a3, int a4)
-
 int  CFileEx::MapFile(wchar_t const *,char *,int) {
   
   DWORD LastError; // eax
@@ -238,7 +230,6 @@ int  CFileEx::MapFile(wchar_t const *,char *,int) {
 
 // address=[0x2f01d30]
 // Decompiled from int __thiscall CFileEx::GetMapFilePtr(CFileEx *this)
-
 void *  CFileEx::GetMapFilePtr(void) {
   
   return *((_DWORD *)this - 2);
@@ -247,7 +238,6 @@ void *  CFileEx::GetMapFilePtr(void) {
 
 // address=[0x2f01d50]
 // Decompiled from int __thiscall CFileEx::Read_0(_DWORD *this, void *Buffer, int ElementSize, int ElementCount, const char *a5, int a6)
-
 unsigned int  CFileEx::Read(void *,int,int,char *,int) {
   
   int v7; // [esp+0h] [ebp-238h]
@@ -288,7 +278,6 @@ unsigned int  CFileEx::Read(void *,int,int,char *,int) {
 
 // address=[0x2f01ef0]
 // Decompiled from int __thiscall CFileEx::Write(char *this, void *Buffer, size_t ElementSize, size_t ElementCount, int a5, int a6)
-
 unsigned int  CFileEx::Write(void const *,int,int,char *,int) {
   
   if ( *(this - 24) || *(this - 23) )
@@ -300,7 +289,6 @@ unsigned int  CFileEx::Write(void const *,int,int,char *,int) {
 
 // address=[0x2f01f40]
 // Decompiled from int __thiscall CFileEx::Seek(_DWORD *this, int Offset, int Origin, const char *a4, int a5)
-
 int  CFileEx::Seek(int,int,char *,int) {
   
   if ( *((_BYTE *)this - 23) )
@@ -379,7 +367,6 @@ int  CFileEx::Seek(int,int,char *,int) {
 
 // address=[0x2f02120]
 // Decompiled from int __thiscall CFileEx::Size_0(int this)
-
 int  CFileEx::Size(void)const {
   
   if ( *(_BYTE *)(this + 80) || *(_BYTE *)(this + 81) )
@@ -391,7 +378,6 @@ int  CFileEx::Size(void)const {
 
 // address=[0x2f02160]
 // Decompiled from int __thiscall CFileEx::Close(void **this, char *a2, int a3)
-
 int  CFileEx::Close(char *,int) {
   
   if ( *((_BYTE *)this - 24) )
@@ -426,7 +412,6 @@ int  CFileEx::Close(char *,int) {
 
 // address=[0x2f02220]
 // Decompiled from char *__thiscall CFileEx::Release(CFileEx *this)
-
 void  CFileEx::Release(void) {
   
   char *result; // eax

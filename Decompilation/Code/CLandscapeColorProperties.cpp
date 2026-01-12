@@ -3,9 +3,7 @@
 // Definitions for class CLandscapeColorProperties
 
 // address=[0x2f8dcb0]
-// Decompiled from CLandscapeColorProperties *__thiscall CLandscapeColorProperties::CLandscapeColorProperties(
-        CLandscapeColorProperties *this)
-
+// Decompiled from CLandscapeColorProperties *__thiscall CLandscapeColorProperties::CLandscapeColorProperties(  CLandscapeColorProperties *this)
  CLandscapeColorProperties::CLandscapeColorProperties(void) {
   
   int i; // [esp+10h] [ebp-Ch]
@@ -150,7 +148,6 @@
 
 // address=[0x2f8eab0]
 // Decompiled from char *__thiscall CLandscapeColorProperties::ColorEntry(CLandscapeColorProperties *this, int a2)
-
 struct CLandscapeColorProperties::SColorEntry const &  CLandscapeColorProperties::ColorEntry(int)const {
   
   return (char *)this + 3 * a2 + 512;
@@ -159,7 +156,6 @@ struct CLandscapeColorProperties::SColorEntry const &  CLandscapeColorProperties
 
 // address=[0x2fc5290]
 // Decompiled from __int16 __thiscall CLandscapeColorProperties::HiColValue(CLandscapeColorProperties *this, int a2)
-
 unsigned short  CLandscapeColorProperties::HiColValue(int)const {
   
   return *((_WORD *)this + a2);

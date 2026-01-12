@@ -4,7 +4,6 @@
 
 // address=[0x2fc5520]
 // Decompiled from CGrid *__thiscall CGrid::CGrid(CGrid *this, int a2)
-
  CGrid::CGrid(int) {
   
   *((_DWORD *)this + 1) = a2;
@@ -16,7 +15,6 @@
 
 // address=[0x2fc5580]
 // Decompiled from int __thiscall CGrid::~CGrid(void **this)
-
  CGrid::~CGrid(void) {
   
   return operator delete[](*this);
@@ -25,7 +23,6 @@
 
 // address=[0x2fc55b0]
 // Decompiled from int __thiscall CGrid::getElement(CGrid *this, int a2, int a3)
-
 int  CGrid::getElement(int,int) {
   
   if ( a2 >= *((_DWORD *)this + 1) || a3 >= *((_DWORD *)this + 1) )
@@ -37,7 +34,6 @@ int  CGrid::getElement(int,int) {
 
 // address=[0x2fc55f0]
 // Decompiled from char __thiscall CGrid::setElement(CGrid *this, int a2, int a3, char a4)
-
 void  CGrid::setElement(int,int,int) {
   
   char result; // al
@@ -56,7 +52,6 @@ void  CGrid::setElement(int,int,int) {
 
 // address=[0x2fc5630]
 // Decompiled from int __thiscall CGrid::getElement(CGrid *this, int a2)
-
 int  CGrid::getElement(int) {
   
   if ( a2 >= *((_DWORD *)this + 1) * *((_DWORD *)this + 1) )
@@ -68,7 +63,6 @@ int  CGrid::getElement(int) {
 
 // address=[0x2fc5660]
 // Decompiled from void __thiscall CGrid::setElement(CGrid *this, int a2, int a3)
-
 void  CGrid::setElement(int,int) {
   
   ;
@@ -76,10 +70,7 @@ void  CGrid::setElement(int,int) {
 
 
 // address=[0x2fc5670]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CGrid::getSize(CGrid *this)
-
+// Decompiled from int __thiscall CGrid::getSize(CGrid *this)
 int  CGrid::getSize(void) {
   
   return *((_DWORD *)this + 1);

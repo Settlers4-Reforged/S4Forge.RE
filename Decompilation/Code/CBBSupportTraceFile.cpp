@@ -3,9 +3,7 @@
 // Definitions for class CBBSupportTraceFile
 
 // address=[0x2f2ee90]
-// Decompiled from BBSupportLib::CBBSupportTraceFile *__thiscall BBSupportLib::CBBSupportTraceFile::CBBSupportTraceFile(
-        BBSupportLib::CBBSupportTraceFile *this)
-
+// Decompiled from BBSupportLib::CBBSupportTraceFile *__thiscall BBSupportLib::CBBSupportTraceFile::CBBSupportTraceFile(  BBSupportLib::CBBSupportTraceFile *this)
  BBSupportLib::CBBSupportTraceFile::CBBSupportTraceFile(void) {
   
   char v2; // [esp+8h] [ebp-24h]
@@ -45,7 +43,6 @@
 
 // address=[0x2f2f020]
 // Decompiled from void __thiscall BBSupportLib::CBBSupportTraceFile::~CBBSupportTraceFile(BBSupportLib::CBBSupportTraceFile *this)
-
  BBSupportLib::CBBSupportTraceFile::~CBBSupportTraceFile(void) {
   
   *(_DWORD *)this = &BBSupportLib::CBBSupportTraceFile::_vftable_;
@@ -57,10 +54,7 @@
 
 
 // address=[0x2f2f090]
-// Decompiled from void __stdcall BBSupportLib::CBBSupportTraceFile::SetFilePath(
-        BBSupportLib::CBBSupportTraceFile *this,
-        const wchar_t *a2)
-
+// Decompiled from void __stdcall BBSupportLib::CBBSupportTraceFile::SetFilePath(  BBSupportLib::CBBSupportTraceFile *this,  const wchar_t *a2)
 void __stdcall BBSupportLib::CBBSupportTraceFile::SetFilePath(wchar_t const *) {
   
   if ( a2 && *a2 )
@@ -72,7 +66,6 @@ void __stdcall BBSupportLib::CBBSupportTraceFile::SetFilePath(wchar_t const *) {
 
 // address=[0x2f2f0d0]
 // Decompiled from void __stdcall BBSupportLib::CBBSupportTraceFile::PrintTime(BBSupportLib::CBBSupportTraceFile *this)
-
 void __stdcall BBSupportLib::CBBSupportTraceFile::PrintTime(void) {
   
   DWORD dwErrCode; // [esp+0h] [ebp-18h]
@@ -95,7 +88,6 @@ void __stdcall BBSupportLib::CBBSupportTraceFile::PrintTime(void) {
 
 // address=[0x2f2f150]
 // Decompiled from char __stdcall BBSupportLib::CBBSupportTraceFile::Open(BBSupportLib::CBBSupportTraceFile *this)
-
 void __stdcall BBSupportLib::CBBSupportTraceFile::Open(void) {
   
   char result; // al
@@ -119,7 +111,6 @@ void __stdcall BBSupportLib::CBBSupportTraceFile::Open(void) {
 
 // address=[0x2f2f1e0]
 // Decompiled from void __stdcall BBSupportLib::CBBSupportTraceFile::Close(BBSupportLib::CBBSupportTraceFile *this)
-
 void __stdcall BBSupportLib::CBBSupportTraceFile::Close(void) {
   
   if ( CBBSupportLogFile::IsOpen(this) )

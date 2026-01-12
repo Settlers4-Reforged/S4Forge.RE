@@ -4,7 +4,6 @@
 
 // address=[0x13098e0]
 // Decompiled from CAIEcoSectorAIEx *__thiscall CAIEcoSectorAIEx::CAIEcoSectorAIEx(CAIEcoSectorAIEx *this, struct IAISectorAI *a2, int a3)
-
  CAIEcoSectorAIEx::CAIEcoSectorAIEx(class IAISectorAI *,int) {
   
   int v3; // eax
@@ -38,7 +37,6 @@
 
 // address=[0x1309a50]
 // Decompiled from void __thiscall CAIEcoSectorAIEx::~CAIEcoSectorAIEx(CAIEcoSectorAIEx *this)
-
  CAIEcoSectorAIEx::~CAIEcoSectorAIEx(void) {
   
   *(_DWORD *)this = CAIEcoSectorAIEx::_vftable_;
@@ -64,7 +62,6 @@
 
 // address=[0x1309b30]
 // Decompiled from CAIEcoSectorAIEx *__cdecl CAIEcoSectorAIEx::CreateEcoSectorAIEx(struct IAISectorAI *a1, int a2)
-
 static class CAIEcoSectorAIEx * __cdecl CAIEcoSectorAIEx::CreateEcoSectorAIEx(class IAISectorAI *,int) {
   
   void *Memory; // [esp+8h] [ebp-18h]
@@ -81,7 +78,6 @@ static class CAIEcoSectorAIEx * __cdecl CAIEcoSectorAIEx::CreateEcoSectorAIEx(cl
 
 // address=[0x1309bc0]
 // Decompiled from void __thiscall CAIEcoSectorAIEx::Execute(CAIEcoSectorAIEx *this)
-
 void  CAIEcoSectorAIEx::Execute(void) {
   
   CRandom16 *v1; // eax
@@ -127,7 +123,6 @@ void  CAIEcoSectorAIEx::Execute(void) {
 
 // address=[0x1309cc0]
 // Decompiled from int __thiscall CAIEcoSectorAIEx::Release(CAIEcoSectorAIEx *this)
-
 void  CAIEcoSectorAIEx::Release(void) {
   
   return TAIStaticObjectMemoryPool<CAIEcoSectorAIEx,48,512>::Delete(this);
@@ -136,7 +131,6 @@ void  CAIEcoSectorAIEx::Release(void) {
 
 // address=[0x1309ce0]
 // Decompiled from bool __thiscall CAIEcoSectorAIEx::IsEcoSectorValid(CAIEcoSectorAIEx *this)
-
 bool  CAIEcoSectorAIEx::IsEcoSectorValid(void)const {
   
   return IAIEnvironment::EcoSectorCheckId(*((_DWORD *)this + 1), *((_DWORD *)this + 2));
@@ -145,7 +139,6 @@ bool  CAIEcoSectorAIEx::IsEcoSectorValid(void)const {
 
 // address=[0x13260f0]
 // Decompiled from void __thiscall CAIEcoSectorAIEx::ClearEventQueue(CAIEcoSectorAIEx *this)
-
 void  CAIEcoSectorAIEx::ClearEventQueue(void) {
   
   CAIEventQueue::Clear((CAIEcoSectorAIEx *)((char *)this + 16));
@@ -154,7 +147,6 @@ void  CAIEcoSectorAIEx::ClearEventQueue(void) {
 
 // address=[0x1326110]
 // Decompiled from int __thiscall CAIEcoSectorAIEx::CreationTime(pairNode *this)
-
 unsigned int  CAIEcoSectorAIEx::CreationTime(void)const {
   
   return *((_DWORD *)this + 3);
@@ -162,10 +154,7 @@ unsigned int  CAIEcoSectorAIEx::CreationTime(void)const {
 
 
 // address=[0x1326150]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CAIEcoSectorAIEx::EcoSectorId(CAIEcoSectorAIEx *this)
-
+// Decompiled from int __thiscall CAIEcoSectorAIEx::EcoSectorId(CAIEcoSectorAIEx *this)
 int  CAIEcoSectorAIEx::EcoSectorId(void)const {
   
   return *((_DWORD *)this + 1);
@@ -174,7 +163,6 @@ int  CAIEcoSectorAIEx::EcoSectorId(void)const {
 
 // address=[0x13261b0]
 // Decompiled from void __thiscall CAIEcoSectorAIEx::PostAIEvent(CAIEcoSectorAIEx *this, int a2, int a3, int a4, int a5)
-
 void  CAIEcoSectorAIEx::PostAIEvent(int,int,int,int) {
   
   CAIEventQueue::PostAIEvent((CAIEcoSectorAIEx *)((char *)this + 16), a2, a3, a4, a5);

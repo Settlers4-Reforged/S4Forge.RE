@@ -3,10 +3,7 @@
 // Definitions for class CBuildingIteratorBase
 
 // address=[0x1317300]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CBuildingIteratorBase::BuildingId(CBuildingIteratorBase *this)
-
+// Decompiled from int __thiscall CBuildingIteratorBase::BuildingId(CBuildingIteratorBase *this)
 int  CBuildingIteratorBase::BuildingId(void)const {
   
   return *((_DWORD *)this + 1);
@@ -14,10 +11,7 @@ int  CBuildingIteratorBase::BuildingId(void)const {
 
 
 // address=[0x1317320]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CBuildingIteratorBase::BuildingType(CBuildingIteratorBase *this)
-
+// Decompiled from int __thiscall CBuildingIteratorBase::BuildingType(CBuildingIteratorBase *this)
 int  CBuildingIteratorBase::BuildingType(void)const {
   
   return *(_DWORD *)this;
@@ -26,7 +20,6 @@ int  CBuildingIteratorBase::BuildingType(void)const {
 
 // address=[0x1317340]
 // Decompiled from bool __thiscall CBuildingIteratorBase::BuildingValid(CBuildingIteratorBase *this, int a2)
-
 bool  CBuildingIteratorBase::BuildingValid(int) {
   
   struct IEntity *v2; // eax
@@ -44,7 +37,6 @@ bool  CBuildingIteratorBase::BuildingValid(int) {
 
 // address=[0x13173a0]
 // Decompiled from CBuildingIteratorBase *__thiscall CBuildingIteratorBase::Init(CBuildingIteratorBase *this, int a2)
-
 void  CBuildingIteratorBase::Init(int) {
   
   CBuildingIteratorBase *result; // eax

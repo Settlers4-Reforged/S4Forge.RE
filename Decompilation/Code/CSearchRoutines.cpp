@@ -4,7 +4,6 @@
 
 // address=[0x15191f0]
 // Decompiled from char *__cdecl CSearchRoutines::GetSearchData(int a1)
-
 static struct SSearchData const & __cdecl CSearchRoutines::GetSearchData(int) {
   
   if ( a1 <= 0 || a1 >= 27 )
@@ -16,7 +15,6 @@ static struct SSearchData const & __cdecl CSearchRoutines::GetSearchData(int) {
 
 // address=[0x1519220]
 // Decompiled from int CSearchRoutines::SearchNoSearch()
-
 static int __cdecl CSearchRoutines::SearchNoSearch(int,int,int) {
   
   return 0;
@@ -25,7 +23,6 @@ static int __cdecl CSearchRoutines::SearchNoSearch(int,int,int) {
 
 // address=[0x1519230]
 // Decompiled from int __cdecl CSearchRoutines::SearchTree(int a1, int a2)
-
 static int __cdecl CSearchRoutines::SearchTree(int,int,int) {
   
   bool IsStaticInstance; // al
@@ -66,7 +63,6 @@ static int __cdecl CSearchRoutines::SearchTree(int,int,int) {
 
 // address=[0x1519360]
 // Decompiled from int __cdecl CSearchRoutines::SearchTreeSeedPos(int a1, int a2, char a3)
-
 static int __cdecl CSearchRoutines::SearchTreeSeedPos(int,int,int) {
   
   int v4; // [esp+4h] [ebp-24h]
@@ -99,7 +95,6 @@ static int __cdecl CSearchRoutines::SearchTreeSeedPos(int,int,int) {
 
 // address=[0x1519480]
 // Decompiled from int __cdecl CSearchRoutines::SearchTreeSeedPosMaya(int a1, int a2, char a3)
-
 static int __cdecl CSearchRoutines::SearchTreeSeedPosMaya(int,int,int) {
   
   int v4; // [esp+0h] [ebp-28h]
@@ -134,7 +129,6 @@ static int __cdecl CSearchRoutines::SearchTreeSeedPosMaya(int,int,int) {
 
 // address=[0x15195a0]
 // Decompiled from int __cdecl CSearchRoutines::SearchAgave(int a1, int a2)
-
 static int __cdecl CSearchRoutines::SearchAgave(int,int,int) {
   
   bool IsStaticInstance; // al
@@ -168,7 +162,6 @@ static int __cdecl CSearchRoutines::SearchAgave(int,int,int) {
 
 // address=[0x15196b0]
 // Decompiled from int __cdecl CSearchRoutines::SearchAgaveSeedPos(int a1, int a2)
-
 static int __cdecl CSearchRoutines::SearchAgaveSeedPos(int,int,int) {
   
   int v3; // [esp+8h] [ebp-14h]
@@ -200,7 +193,6 @@ static int __cdecl CSearchRoutines::SearchAgaveSeedPos(int,int,int) {
 
 // address=[0x15197a0]
 // Decompiled from int __cdecl CSearchRoutines::SearchSunflower(int a1, int a2)
-
 static int __cdecl CSearchRoutines::SearchSunflower(int,int,int) {
   
   bool IsStaticInstance; // al
@@ -234,7 +226,6 @@ static int __cdecl CSearchRoutines::SearchSunflower(int,int,int) {
 
 // address=[0x15198b0]
 // Decompiled from int __cdecl CSearchRoutines::SearchSunflowerSeedPos(int a1, int a2)
-
 static int __cdecl CSearchRoutines::SearchSunflowerSeedPos(int,int,int) {
   
   int v3; // [esp+8h] [ebp-14h]
@@ -266,7 +257,6 @@ static int __cdecl CSearchRoutines::SearchSunflowerSeedPos(int,int,int) {
 
 // address=[0x15199a0]
 // Decompiled from int __cdecl CSearchRoutines::SearchVine(int a1, int a2)
-
 static int __cdecl CSearchRoutines::SearchVine(int,int,int) {
   
   bool IsStaticInstance; // al
@@ -300,7 +290,6 @@ static int __cdecl CSearchRoutines::SearchVine(int,int,int) {
 
 // address=[0x1519ab0]
 // Decompiled from int __cdecl CSearchRoutines::SearchVineSeedPos(int a1, int a2)
-
 static int __cdecl CSearchRoutines::SearchVineSeedPos(int,int,int) {
   
   int v3; // [esp+4h] [ebp-18h]
@@ -330,7 +319,6 @@ static int __cdecl CSearchRoutines::SearchVineSeedPos(int,int,int) {
 
 // address=[0x1519b90]
 // Decompiled from int __cdecl CSearchRoutines::SearchGrain(int a1, int a2)
-
 static int __cdecl CSearchRoutines::SearchGrain(int,int,int) {
   
   bool IsStaticInstance; // al
@@ -365,7 +353,6 @@ static int __cdecl CSearchRoutines::SearchGrain(int,int,int) {
 
 // address=[0x1519cb0]
 // Decompiled from int __cdecl CSearchRoutines::SearchGrainSeedPos(int a1, int a2)
-
 static int __cdecl CSearchRoutines::SearchGrainSeedPos(int,int,int) {
   
   int v3; // [esp+8h] [ebp-14h]
@@ -397,7 +384,6 @@ static int __cdecl CSearchRoutines::SearchGrainSeedPos(int,int,int) {
 
 // address=[0x1519da0]
 // Decompiled from int __cdecl CSearchRoutines::SearchBeehive(int a1, int a2)
-
 static int __cdecl CSearchRoutines::SearchBeehive(int,int,int) {
   
   int v3; // [esp+0h] [ebp-10h]
@@ -423,7 +409,6 @@ static int __cdecl CSearchRoutines::SearchBeehive(int,int,int) {
 
 // address=[0x1519e50]
 // Decompiled from int __cdecl CSearchRoutines::SearchBeehivePos(int a1, int a2)
-
 static int __cdecl CSearchRoutines::SearchBeehivePos(int,int,int) {
   
   unsigned int v2; // eax
@@ -439,7 +424,6 @@ static int __cdecl CSearchRoutines::SearchBeehivePos(int,int,int) {
 
 // address=[0x1519eb0]
 // Decompiled from int __cdecl CSearchRoutines::SearchMushroom(int a1, int a2)
-
 static int __cdecl CSearchRoutines::SearchMushroom(int,int,int) {
   
   IDecoObject *v3; // [esp+0h] [ebp-Ch]
@@ -466,7 +450,6 @@ static int __cdecl CSearchRoutines::SearchMushroom(int,int,int) {
 
 // address=[0x1519f60]
 // Decompiled from int __cdecl CSearchRoutines::SearchMushroomSeedPos(int a1, int a2)
-
 static int __cdecl CSearchRoutines::SearchMushroomSeedPos(int,int,int) {
   
   int v3; // [esp+0h] [ebp-4h]
@@ -482,7 +465,6 @@ static int __cdecl CSearchRoutines::SearchMushroomSeedPos(int,int,int) {
 
 // address=[0x1519fc0]
 // Decompiled from int __cdecl CSearchRoutines::SearchVenison(int a1, int a2)
-
 static int __cdecl CSearchRoutines::SearchVenison(int,int,int) {
   
   int v2; // eax
@@ -506,7 +488,6 @@ static int __cdecl CSearchRoutines::SearchVenison(int,int,int) {
 
 // address=[0x151a040]
 // Decompiled from BOOL __cdecl CSearchRoutines::SearchWater(int a1, int a2)
-
 static int __cdecl CSearchRoutines::SearchWater(int,int,int) {
   
   return (CWorldManager::Ground(a1, a2) & 0xF0) == 96;
@@ -515,7 +496,6 @@ static int __cdecl CSearchRoutines::SearchWater(int,int,int) {
 
 // address=[0x151a070]
 // Decompiled from int __cdecl CSearchRoutines::SearchStone(int a1, int a2)
-
 static int __cdecl CSearchRoutines::SearchStone(int,int,int) {
   
   int v3; // eax
@@ -547,7 +527,6 @@ static int __cdecl CSearchRoutines::SearchStone(int,int,int) {
 
 // address=[0x151a190]
 // Decompiled from int __cdecl CSearchRoutines::SearchFish(int a1, int a2)
-
 static int __cdecl CSearchRoutines::SearchFish(int,int,int) {
   
   const char *v3; // [esp+4h] [ebp-24h]
@@ -592,7 +571,6 @@ static int __cdecl CSearchRoutines::SearchFish(int,int,int) {
 
 // address=[0x151a300]
 // Decompiled from int __cdecl CSearchRoutines::SearchGold(int a1, int a2)
-
 static int __cdecl CSearchRoutines::SearchGold(int,int,int) {
   
   if ( CWorldManager::ResourceType(a1, a2) == 16 )
@@ -604,7 +582,6 @@ static int __cdecl CSearchRoutines::SearchGold(int,int,int) {
 
 // address=[0x151a330]
 // Decompiled from int __cdecl CSearchRoutines::SearchCoal(int a1, int a2)
-
 static int __cdecl CSearchRoutines::SearchCoal(int,int,int) {
   
   if ( CWorldManager::ResourceType(a1, a2) == 16 )
@@ -616,7 +593,6 @@ static int __cdecl CSearchRoutines::SearchCoal(int,int,int) {
 
 // address=[0x151a360]
 // Decompiled from int __cdecl CSearchRoutines::SearchIron(int a1, int a2)
-
 static int __cdecl CSearchRoutines::SearchIron(int,int,int) {
   
   if ( CWorldManager::ResourceType(a1, a2) == 32 )
@@ -628,7 +604,6 @@ static int __cdecl CSearchRoutines::SearchIron(int,int,int) {
 
 // address=[0x151a390]
 // Decompiled from int __cdecl CSearchRoutines::SearchSulfur(int a1, int a2)
-
 static int __cdecl CSearchRoutines::SearchSulfur(int,int,int) {
   
   if ( CWorldManager::ResourceType(a1, a2) == 64 )
@@ -640,7 +615,6 @@ static int __cdecl CSearchRoutines::SearchSulfur(int,int,int) {
 
 // address=[0x151a3c0]
 // Decompiled from int __cdecl CSearchRoutines::SearchGranit(int a1, int a2)
-
 static int __cdecl CSearchRoutines::SearchGranit(int,int,int) {
   
   if ( CWorldManager::ResourceType(a1, a2) == 80 )
@@ -652,7 +626,6 @@ static int __cdecl CSearchRoutines::SearchGranit(int,int,int) {
 
 // address=[0x151a3f0]
 // Decompiled from int __cdecl CSearchRoutines::SearchDarkLand(int a1, int a2)
-
 static int __cdecl CSearchRoutines::SearchDarkLand(int,int,int) {
   
   int v3; // [esp+0h] [ebp-4h]
@@ -667,7 +640,6 @@ static int __cdecl CSearchRoutines::SearchDarkLand(int,int,int) {
 
 // address=[0x151a430]
 // Decompiled from int __cdecl CSearchRoutines::SearchGreenLand(int a1, int a2)
-
 static int __cdecl CSearchRoutines::SearchGreenLand(int,int,int) {
   
   int v3; // [esp+0h] [ebp-4h]
@@ -682,7 +654,6 @@ static int __cdecl CSearchRoutines::SearchGreenLand(int,int,int) {
 
 // address=[0x151a470]
 // Decompiled from int __cdecl CSearchRoutines::CalcRawness(int a1)
-
 static int __cdecl CSearchRoutines::CalcRawness(int) {
   
   int v1; // ecx

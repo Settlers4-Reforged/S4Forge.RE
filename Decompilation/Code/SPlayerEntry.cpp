@@ -3,9 +3,7 @@
 // Definitions for class SPlayerEntry
 
 // address=[0x14b7e50]
-// Decompiled from CLanLobbyGameSettings::SPlayerEntry *__thiscall CLanLobbyGameSettings::SPlayerEntry::SPlayerEntry(
-        CLanLobbyGameSettings::SPlayerEntry *this)
-
+// Decompiled from CLanLobbyGameSettings::SPlayerEntry *__thiscall CLanLobbyGameSettings::SPlayerEntry::SPlayerEntry(  CLanLobbyGameSettings::SPlayerEntry *this)
  CLanLobbyGameSettings::SPlayerEntry::SPlayerEntry(void) {
   
   std::wstring::wstring((char *)this + 8);
@@ -26,7 +24,6 @@
 
 // address=[0x14bcda0]
 // Decompiled from void __thiscall CLanLobbyGameSettings::SPlayerEntry::~SPlayerEntry(CDHtmlElementEventSink *this)
-
  CLanLobbyGameSettings::SPlayerEntry::~SPlayerEntry(void) {
   
   std::wstring::~wstring((char *)this + 8);

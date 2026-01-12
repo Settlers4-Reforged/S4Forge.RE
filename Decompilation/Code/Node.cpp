@@ -3,10 +3,7 @@
 // Definitions for class Node
 
 // address=[0x14f3f10]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-char *__thiscall AdvXMLParser::Node::GetName(char *this)
-
+// Decompiled from char *__thiscall AdvXMLParser::Node::GetName(char *this)
 std::string const &  AdvXMLParser::Node::GetName(void)const {
   
   return this + 4;
@@ -15,7 +12,6 @@ std::string const &  AdvXMLParser::Node::GetName(void)const {
 
 // address=[0x14f3f90]
 // Decompiled from bool __thiscall AdvXMLParser::Node::IsNull(AdvXMLParser::Node *this)
-
 bool  AdvXMLParser::Node::IsNull(void)const {
   
   return this == (AdvXMLParser::Node *)&AdvXMLParser::Attribute::null
@@ -28,7 +24,6 @@ bool  AdvXMLParser::Node::IsNull(void)const {
 
 // address=[0x2f13420]
 // Decompiled from _DWORD *__thiscall AdvXMLParser::Node::Node(_DWORD *this, int a2, int a3)
-
  AdvXMLParser::Node::Node(class AdvXMLParser::NodeContainer &,std::string const &) {
   
   *this = &AdvXMLParser::Node::_vftable_;
@@ -40,7 +35,6 @@ bool  AdvXMLParser::Node::IsNull(void)const {
 
 // address=[0x2f13460]
 // Decompiled from void __thiscall AdvXMLParser::Node::~Node(boost::exception *this)
-
  AdvXMLParser::Node::~Node(void) {
   
   *(_DWORD *)this = &AdvXMLParser::Node::_vftable_;
@@ -49,9 +43,7 @@ bool  AdvXMLParser::Node::IsNull(void)const {
 
 
 // address=[0x2f13480]
-// Decompiled from // public: void __thiscall AdvXMLParser::Node::Delete(void)
-int __thiscall AdvXMLParser::Node::Delete(int this)
-
+// Decompiled from int __thiscall AdvXMLParser::Node::Delete(int this)
 void  AdvXMLParser::Node::Delete(void) {
   
   return AdvXMLParser::NodeContainer::DeleteChild(
@@ -62,7 +54,6 @@ void  AdvXMLParser::Node::Delete(void) {
 
 // address=[0x2f134a0]
 // Decompiled from char __thiscall AdvXMLParser::Node::IsKindOf(AdvXMLParser::Node *this, int a2)
-
 bool  AdvXMLParser::Node::IsKindOf(int)const {
   
   return 0;
@@ -70,9 +61,7 @@ bool  AdvXMLParser::Node::IsKindOf(int)const {
 
 
 // address=[0x2f1e510]
-// Decompiled from // MFC 3.1-14.0 32bit
-int __thiscall AdvXMLParser::Node::GetParent(AdvXMLParser::Node *this)
-
+// Decompiled from int __thiscall AdvXMLParser::Node::GetParent(AdvXMLParser::Node *this)
 class AdvXMLParser::NodeContainer &  AdvXMLParser::Node::GetParent(void)const {
   
   return *((_DWORD *)this + 8);

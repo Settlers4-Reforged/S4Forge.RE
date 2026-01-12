@@ -4,7 +4,6 @@
 
 // address=[0x13e6540]
 // Decompiled from int __thiscall CS4MemChunk::Data(pairNode *this)
-
 void const *  CS4MemChunk::Data(void)const {
   
   return *((_DWORD *)this + 3);
@@ -12,10 +11,7 @@ void const *  CS4MemChunk::Data(void)const {
 
 
 // address=[0x13e6890]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CS4MemChunk::Size(CS4MemChunk *this)
-
+// Decompiled from int __thiscall CS4MemChunk::Size(CS4MemChunk *this)
 unsigned int  CS4MemChunk::Size(void)const {
   
   return *((_DWORD *)this + 2);
@@ -24,7 +20,6 @@ unsigned int  CS4MemChunk::Size(void)const {
 
 // address=[0x13eca00]
 // Decompiled from CS4MemChunk *__thiscall CS4MemChunk::CS4MemChunk(CS4MemChunk *this)
-
  CS4MemChunk::CS4MemChunk(void) {
   
   IS4Chunk::IS4Chunk(this);
@@ -41,7 +36,6 @@ unsigned int  CS4MemChunk::Size(void)const {
 
 // address=[0x13eca60]
 // Decompiled from void __thiscall CS4MemChunk::~CS4MemChunk(CS4MemChunk *this)
-
  CS4MemChunk::~CS4MemChunk(void) {
   
   *(_DWORD *)this = &CS4MemChunk::_vftable_;
@@ -51,7 +45,6 @@ unsigned int  CS4MemChunk::Size(void)const {
 
 // address=[0x13ecab0]
 // Decompiled from CS4MemChunk *__thiscall CS4MemChunk::InitLoadData(CS4MemChunk *this, const void *chunkData, unsigned int chunkSize)
-
 void  CS4MemChunk::InitLoadData(void const *,unsigned int) {
   
   CS4MemChunk *result; // eax
@@ -75,7 +68,6 @@ void  CS4MemChunk::InitLoadData(void const *,unsigned int) {
 
 // address=[0x13ecb70]
 // Decompiled from CS4MemChunk *__thiscall CS4MemChunk::InitSaveCalcSize(CS4MemChunk *this)
-
 void  CS4MemChunk::InitSaveCalcSize(void) {
   
   CS4MemChunk *result; // eax
@@ -95,7 +87,6 @@ void  CS4MemChunk::InitSaveCalcSize(void) {
 
 // address=[0x13ecbe0]
 // Decompiled from CS4MemChunk *__thiscall CS4MemChunk::InitSaveData(CS4MemChunk *this, bool a2)
-
 void  CS4MemChunk::InitSaveData(bool) {
   
   CS4MemChunk *result; // eax
@@ -122,7 +113,6 @@ void  CS4MemChunk::InitSaveData(bool) {
 
 // address=[0x13ecc80]
 // Decompiled from void **__thiscall CS4MemChunk::Done(void **this)
-
 void  CS4MemChunk::Done(void) {
   
   void **result; // eax
@@ -142,7 +132,6 @@ void  CS4MemChunk::Done(void) {
 
 // address=[0x13ecd00]
 // Decompiled from int __thiscall CS4MemChunk::Load(void *this, void *a2, size_t Size)
-
 void  CS4MemChunk::Load(void *,unsigned int) {
   
   int result; // eax
@@ -177,7 +166,6 @@ void  CS4MemChunk::Load(void *,unsigned int) {
 
 // address=[0x13ece20]
 // Decompiled from unsigned int __thiscall CS4MemChunk::LoadUnsigned32(CS4MemChunk *this)
-
 unsigned int  CS4MemChunk::LoadUnsigned32(void) {
   
   return CS4MemChunk::LoadUnsigned32Inline(this);
@@ -186,7 +174,6 @@ unsigned int  CS4MemChunk::LoadUnsigned32(void) {
 
 // address=[0x13ece40]
 // Decompiled from unsigned int __thiscall CS4MemChunk::LoadUnsigned32(CS4MemChunk *this, unsigned int a2, unsigned int a3)
-
 unsigned int  CS4MemChunk::LoadUnsigned32(unsigned int,unsigned int) {
   
   int v4; // [esp+4h] [ebp-Ch] BYREF
@@ -215,7 +202,6 @@ unsigned int  CS4MemChunk::LoadUnsigned32(unsigned int,unsigned int) {
 
 // address=[0x13ecee0]
 // Decompiled from unsigned int __thiscall CS4MemChunk::LoadSignature(CS4MemChunk *this, unsigned int a2)
-
 void  CS4MemChunk::LoadSignature(unsigned int) {
   
   unsigned int result; // eax
@@ -233,11 +219,7 @@ void  CS4MemChunk::LoadSignature(unsigned int) {
 
 
 // address=[0x13ecf40]
-// Decompiled from int __thiscall CS4MemChunk::Save(
-        int (__fastcall **this)(CS4MemChunk *, const void *, unsigned int),
-        const void *a2,
-        unsigned int a3)
-
+// Decompiled from int __thiscall CS4MemChunk::Save(  int (__fastcall **this)(CS4MemChunk *, const void *, unsigned int),  const void *a2,  unsigned int a3)
 void  CS4MemChunk::Save(void const *,unsigned int) {
   
   return this[5]((CS4MemChunk *)this, a2, a3);
@@ -246,7 +228,6 @@ void  CS4MemChunk::Save(void const *,unsigned int) {
 
 // address=[0x13ecf60]
 // Decompiled from int __thiscall CS4MemChunk::SaveUnsigned32(CS4MemChunk *this, unsigned int a2)
-
 void  CS4MemChunk::SaveUnsigned32(unsigned int) {
   
   return (*((int (__fastcall **)(CS4MemChunk *, unsigned int, CS4MemChunk *))this + 6))(this, a2, this);
@@ -255,7 +236,6 @@ void  CS4MemChunk::SaveUnsigned32(unsigned int) {
 
 // address=[0x13ecf80]
 // Decompiled from int __thiscall CS4MemChunk::SaveSignature(CS4MemChunk *this, unsigned int a2)
-
 void  CS4MemChunk::SaveSignature(unsigned int) {
   
   return (*((int (__fastcall **)(CS4MemChunk *, unsigned int, CS4MemChunk *))this + 6))(this, a2, this);
@@ -264,7 +244,6 @@ void  CS4MemChunk::SaveSignature(unsigned int) {
 
 // address=[0x13ecfa0]
 // Decompiled from unsigned int __thiscall CS4MemChunk::Adler32(CS4MemChunk *this, unsigned int a2)
-
 unsigned int  CS4MemChunk::Adler32(unsigned int) {
   
   return Adler32(*((const void **)this + 3), *((_DWORD *)this + 2), a2);
@@ -273,7 +252,6 @@ unsigned int  CS4MemChunk::Adler32(unsigned int) {
 
 // address=[0x13ecfd0]
 // Decompiled from void __cdecl CS4MemChunk::ObjectLoad(struct IS4ChunkObject *a1, const void *a2, unsigned int a3)
-
 static void __cdecl CS4MemChunk::ObjectLoad(class IS4ChunkObject &,void const *,unsigned int) {
   
   _BYTE v3[28]; // [esp+4h] [ebp-28h] BYREF
@@ -290,7 +268,6 @@ static void __cdecl CS4MemChunk::ObjectLoad(class IS4ChunkObject &,void const *,
 
 // address=[0x13ed050]
 // Decompiled from void __cdecl CS4MemChunk::ObjectSave(struct IS4ChunkObject *a1, void **a2, unsigned int *a3)
-
 static void __cdecl CS4MemChunk::ObjectSave(class IS4ChunkObject &,void * *,unsigned int *) {
   
   _BYTE v3[8]; // [esp+4h] [ebp-28h] BYREF
@@ -312,9 +289,7 @@ static void __cdecl CS4MemChunk::ObjectSave(class IS4ChunkObject &,void * *,unsi
 
 
 // address=[0x13ed0f0]
-// Decompiled from // protected: void __fastcall CS4MemChunk::SaveFuncNOP(void const *,unsigned int)
-int __stdcall CS4MemChunk::SaveFuncNOP(int a1)
-
+// Decompiled from int __stdcall CS4MemChunk::SaveFuncNOP(int a1)
 void __fastcall CS4MemChunk::SaveFuncNOP(void const *,unsigned int) {
   
   if ( BBSupportDbgReport(0, "LoadSave\\MemChunk.cpp", 291, "CS4MemChunk::SaveFuncNOP() should never be called!") == 1 )
@@ -325,7 +300,6 @@ void __fastcall CS4MemChunk::SaveFuncNOP(void const *,unsigned int) {
 
 // address=[0x13ed130]
 // Decompiled from CS4MemChunk *__fastcall CS4MemChunk::SaveFuncCalcSize(CS4MemChunk *this, const void *a2, unsigned int a3)
-
 void __fastcall CS4MemChunk::SaveFuncCalcSize(void const *,unsigned int) {
   
   CS4MemChunk *result; // eax
@@ -347,7 +321,6 @@ void __fastcall CS4MemChunk::SaveFuncCalcSize(void const *,unsigned int) {
 
 // address=[0x13ed1d0]
 // Decompiled from int __fastcall CS4MemChunk::SaveFuncSaveData(int a1, const void *a2, size_t Size)
-
 void __fastcall CS4MemChunk::SaveFuncSaveData(void const *,unsigned int) {
   
   int result; // eax
@@ -384,7 +357,6 @@ void __fastcall CS4MemChunk::SaveFuncSaveData(void const *,unsigned int) {
 
 // address=[0x13ed310]
 // Decompiled from int CS4MemChunk::SaveUnsigned32NOP()
-
 void __fastcall CS4MemChunk::SaveUnsigned32NOP(unsigned int) {
   
   if ( BBSupportDbgReport(0, "LoadSave\\MemChunk.cpp", 336, "CS4MemChunk::SaveUnsigned32NOP() should never be called!") == 1 )
@@ -394,9 +366,7 @@ void __fastcall CS4MemChunk::SaveUnsigned32NOP(unsigned int) {
 
 
 // address=[0x13ed340]
-// Decompiled from // protected: void __fastcall CS4MemChunk::SaveUnsigned32CalcSize(unsigned int)
-int __thiscall CS4MemChunk::SaveUnsigned32CalcSize(_DWORD *this)
-
+// Decompiled from int __thiscall CS4MemChunk::SaveUnsigned32CalcSize(_DWORD *this)
 void __fastcall CS4MemChunk::SaveUnsigned32CalcSize(unsigned int) {
   
   int result; // eax
@@ -411,7 +381,6 @@ void __fastcall CS4MemChunk::SaveUnsigned32CalcSize(unsigned int) {
 
 // address=[0x13ed390]
 // Decompiled from int __fastcall CS4MemChunk::SaveUnsigned32SaveData(CS4MemChunk *this, unsigned int a2)
-
 void __fastcall CS4MemChunk::SaveUnsigned32SaveData(unsigned int) {
   
   int result; // eax
@@ -448,7 +417,6 @@ void __fastcall CS4MemChunk::SaveUnsigned32SaveData(unsigned int) {
 
 // address=[0x13ed740]
 // Decompiled from int __thiscall CS4MemChunk::LoadUnsigned32Inline(CS4MemChunk *this)
-
 unsigned int  CS4MemChunk::LoadUnsigned32Inline(void) {
   
   int v2; // [esp+0h] [ebp-Ch]

@@ -4,7 +4,6 @@
 
 // address=[0x1400cc0]
 // Decompiled from int __cdecl CGeologistRole::New(int a1)
-
 static class CPersistence * __cdecl CGeologistRole::New(std::istream &) {
   
   if ( operator new(0x54u) )
@@ -16,7 +15,6 @@ static class CPersistence * __cdecl CGeologistRole::New(std::istream &) {
 
 // address=[0x15720a0]
 // Decompiled from int __thiscall CGeologistRole::InitWalking(CGeologistRole *this, struct CSettler *a2)
-
 class CWalking *  CGeologistRole::InitWalking(class CSettler *) {
   
   int v2; // eax
@@ -31,7 +29,6 @@ class CWalking *  CGeologistRole::InitWalking(class CSettler *) {
 
 // address=[0x15720e0]
 // Decompiled from int __thiscall CGeologistRole::LogicUpdateJob(CGeologistRole *this, struct CSettler *a2)
-
 void  CGeologistRole::LogicUpdateJob(class CSettler *) {
   
   int result; // eax
@@ -79,7 +76,6 @@ LABEL_18:
 
 // address=[0x15722a0]
 // Decompiled from int __thiscall CGeologistRole::PostLoadInit(int this, CPropertySet *a2)
-
 void  CGeologistRole::PostLoadInit(class CSettler *) {
   
   int result; // eax
@@ -104,7 +100,6 @@ void  CGeologistRole::PostLoadInit(class CSettler *) {
 
 // address=[0x1572310]
 // Decompiled from _DWORD *__thiscall CGeologistRole::CGeologistRole(_DWORD *this, int a2)
-
  CGeologistRole::CGeologistRole(std::istream &) {
   
   int v2; // eax
@@ -149,7 +144,6 @@ void  CGeologistRole::PostLoadInit(class CSettler *) {
 
 // address=[0x1572490]
 // Decompiled from int __thiscall CGeologistRole::Store(int *this, struct std::ostream *a2)
-
 void  CGeologistRole::Store(std::ostream &) {
   
   unsigned int v2; // esi
@@ -245,7 +239,6 @@ void  CGeologistRole::Store(std::ostream &) {
 
 // address=[0x15744d0]
 // Decompiled from int __thiscall CGeologistRole::ClassID(CGeologistRole *this)
-
 unsigned long  CGeologistRole::ClassID(void)const {
   
   return CGeologistRole::m_iClassID;
@@ -254,7 +247,6 @@ unsigned long  CGeologistRole::ClassID(void)const {
 
 // address=[0x15744f0]
 // Decompiled from int __thiscall CGeologistRole::GetSettlerRole(CGeologistRole *this)
-
 int  CGeologistRole::GetSettlerRole(void)const {
   
   return 12;
@@ -263,7 +255,6 @@ int  CGeologistRole::GetSettlerRole(void)const {
 
 // address=[0x1588680]
 // Decompiled from int __cdecl CGeologistRole::Load(int a1)
-
 static class CGeologistRole * __cdecl CGeologistRole::Load(std::istream &) {
   
   void **v1; // eax
@@ -279,7 +270,6 @@ static class CGeologistRole * __cdecl CGeologistRole::Load(std::istream &) {
 
 // address=[0x1572700]
 // Decompiled from CGeologistRole *__thiscall CGeologistRole::CGeologistRole(CGeologistRole *this)
-
  CGeologistRole::CGeologistRole(void) {
   
   ISelectableSettlerRole::ISelectableSettlerRole(this);
@@ -291,7 +281,6 @@ static class CGeologistRole * __cdecl CGeologistRole::Load(std::istream &) {
 
 // address=[0x1572770]
 // Decompiled from void __thiscall CGeologistRole::~CGeologistRole(CGeologistRole *this)
-
  CGeologistRole::~CGeologistRole(void) {
   
   int v1; // [esp+4h] [ebp-1Ch]
@@ -317,7 +306,6 @@ static class CGeologistRole * __cdecl CGeologistRole::Load(std::istream &) {
 
 // address=[0x1572860]
 // Decompiled from int __thiscall CGeologistRole::GetNextJob(CGeologistRole *this, struct CSettler *a2)
-
 void  CGeologistRole::GetNextJob(class CSettler *) {
   
   CGeologistRole *v3; // [esp+0h] [ebp-4h]
@@ -332,7 +320,6 @@ void  CGeologistRole::GetNextJob(class CSettler *) {
 
 // address=[0x15728a0]
 // Decompiled from void __thiscall CGeologistRole::TakeJob(int this, COleCmdUI *a2)
-
 void  CGeologistRole::TakeJob(class CSettler *) {
   
   const struct CEntityTask *ActualTask; // eax
@@ -448,7 +435,6 @@ LABEL_12:
 
 // address=[0x1572d10]
 // Decompiled from int __thiscall CGeologistRole::Init(int this, CPropertySet *a2)
-
 void  CGeologistRole::Init(class CSettler *) {
   
   int result; // eax
@@ -485,7 +471,6 @@ void  CGeologistRole::Init(class CSettler *) {
 
 // address=[0x1572df0]
 // Decompiled from int __thiscall CGeologistRole::WorkIsDone(CGeologistRole *this, struct CSettler *a2)
-
 void  CGeologistRole::WorkIsDone(class CSettler *) {
   
   *((_BYTE *)this + 4) = 17;
@@ -495,7 +480,6 @@ void  CGeologistRole::WorkIsDone(class CSettler *) {
 
 // address=[0x1572e10]
 // Decompiled from char __thiscall CGeologistRole::ConvertEventIntoGoal(int this, CPropertySet *a2, const struct CEntityEvent *a3)
-
 void  CGeologistRole::ConvertEventIntoGoal(class CSettler *,class CEntityEvent *) {
   
   int v3; // eax
@@ -686,7 +670,6 @@ void  CGeologistRole::ConvertEventIntoGoal(class CSettler *,class CEntityEvent *
 
 // address=[0x15732d0]
 // Decompiled from char __thiscall CGeologistRole::SearchPosition(CGeologistRole *this, struct CSettler *a2)
-
 bool  CGeologistRole::SearchPosition(class CSettler *) {
   
   int v3; // [esp+4h] [ebp-3Ch]
@@ -754,9 +737,7 @@ bool  CGeologistRole::SearchPosition(class CSettler *) {
 
 
 // address=[0x1573530]
-// Decompiled from // private: bool __thiscall CGeologistRole::CheckResource(class CSettler *)
-char __thiscall CGeologistRole::CheckResource(CGeologistRole *this, _DWORD *a2)
-
+// Decompiled from char __thiscall CGeologistRole::CheckResource(CGeologistRole *this, _DWORD *a2)
 bool  CGeologistRole::CheckResource(class CSettler *) {
   
   int v4; // [esp+4h] [ebp-8h]
@@ -792,7 +773,6 @@ bool  CGeologistRole::CheckResource(class CSettler *) {
 
 // address=[0x15736b0]
 // Decompiled from char __thiscall CGeologistRole::SetSign(CGeologistRole *this, struct CSettler *a2)
-
 void  CGeologistRole::SetSign(class CSettler *) {
   
   int v2; // eax
@@ -985,7 +965,6 @@ void  CGeologistRole::SetSign(class CSettler *) {
 
 // address=[0x1573bc0]
 // Decompiled from bool __thiscall CGeologistRole::CheckPosition(CGeologistRole *this, int a2, int a3, bool a4, bool a5)
-
 bool  CGeologistRole::CheckPosition(int,int,bool,bool) {
   
   int v6; // [esp+8h] [ebp-8h]

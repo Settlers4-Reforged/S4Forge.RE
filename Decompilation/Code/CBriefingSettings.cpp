@@ -4,7 +4,6 @@
 
 // address=[0x14a3450]
 // Decompiled from CBriefingSettings *__thiscall CBriefingSettings::CBriefingSettings(CBriefingSettings *this)
-
  CBriefingSettings::CBriefingSettings(void) {
   
   std::string::string();
@@ -17,7 +16,6 @@
 
 // address=[0x14a34a0]
 // Decompiled from void __thiscall CBriefingSettings::~CBriefingSettings(CBriefingSettings *this)
-
  CBriefingSettings::~CBriefingSettings(void) {
   
   std::string::~string((char *)this + 88);

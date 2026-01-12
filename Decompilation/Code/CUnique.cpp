@@ -3,9 +3,7 @@
 // Definitions for class CUnique
 
 // address=[0x14035b0]
-// Decompiled from // public: static class CUnique * __cdecl CUnique::GetObjectPtr(class std::basic_istream<char,struct std::char_traits<char> > &)
-int __cdecl CUnique::GetObjectPtr(int a1)
-
+// Decompiled from int __cdecl CUnique::GetObjectPtr(int a1)
 static class CUnique * __cdecl CUnique::GetObjectPtr(std::istream &) {
   
   char v2; // [esp+0h] [ebp-4h]
@@ -16,9 +14,7 @@ static class CUnique * __cdecl CUnique::GetObjectPtr(std::istream &) {
 
 
 // address=[0x14035e0]
-// Decompiled from // public: static class CUnique & __cdecl CUnique::GetObjectA(class std::basic_istream<char,struct std::char_traits<char> > &)
-int __cdecl CUnique::GetObjectA(int a1)
-
+// Decompiled from int __cdecl CUnique::GetObjectA(int a1)
 static class CUnique & __cdecl CUnique::GetObjectA(std::istream &) {
   
   char v2; // [esp+0h] [ebp-4h]
@@ -30,7 +26,6 @@ static class CUnique & __cdecl CUnique::GetObjectA(std::istream &) {
 
 // address=[0x1403610]
 // Decompiled from int __cdecl CUnique::GetObjectA(char a1)
-
 static class CUnique & __cdecl CUnique::GetObjectA(unsigned long) {
   
   _BYTE v2[12]; // [esp+4h] [ebp-1Ch] BYREF
@@ -51,7 +46,6 @@ static class CUnique & __cdecl CUnique::GetObjectA(unsigned long) {
 
 // address=[0x1403680]
 // Decompiled from int __cdecl CUnique::GetObjectPtr(char a1)
-
 static class CUnique * __cdecl CUnique::GetObjectPtr(unsigned long) {
   
   _BYTE v2[12]; // [esp+4h] [ebp-38h] BYREF
@@ -93,7 +87,6 @@ static class CUnique * __cdecl CUnique::GetObjectPtr(unsigned long) {
 
 // address=[0x1403760]
 // Decompiled from int __cdecl CUnique::GetNextObjectPtr(char a1)
-
 static class CUnique * __cdecl CUnique::GetNextObjectPtr(unsigned long) {
   
   _BYTE v2[12]; // [esp+4h] [ebp-5Ch] BYREF
@@ -161,7 +154,6 @@ static class CUnique * __cdecl CUnique::GetNextObjectPtr(unsigned long) {
 
 // address=[0x14038b0]
 // Decompiled from int CUnique::GetFirstObjectPtr()
-
 static class CUnique * __cdecl CUnique::GetFirstObjectPtr(void) {
   
   _BYTE v1[12]; // [esp+4h] [ebp-38h] BYREF
@@ -200,9 +192,7 @@ static class CUnique * __cdecl CUnique::GetFirstObjectPtr(void) {
 
 
 // address=[0x1403990]
-// Decompiled from // public: static void __cdecl CUnique::Init(class std::basic_istream<char,struct std::char_traits<char> > &)
-int __cdecl CUnique::Init(int a1)
-
+// Decompiled from int __cdecl CUnique::Init(int a1)
 static void __cdecl CUnique::Init(std::istream &) {
   
   int result; // eax
@@ -218,7 +208,6 @@ static void __cdecl CUnique::Init(std::istream &) {
 
 // address=[0x14039c0]
 // Decompiled from struct std::ostream *__cdecl CUnique::Exit(struct std::ostream *a1)
-
 static void __cdecl CUnique::Exit(std::ostream &) {
   
   return operator^<unsigned long>(a1, (const unsigned int *)&CUnique::_NextObjID);
@@ -226,9 +215,7 @@ static void __cdecl CUnique::Exit(std::ostream &) {
 
 
 // address=[0x14039e0]
-// Decompiled from // public: __thiscall CUnique::CUnique(class std::basic_istream<char,struct std::char_traits<char> > &)
-struct CUnique *__thiscall CUnique::CUnique(struct CUnique *this, int a2)
-
+// Decompiled from struct CUnique *__thiscall CUnique::CUnique(struct CUnique *this, int a2)
  CUnique::CUnique(std::istream &) {
   
   CPersistence::CPersistence(this);
@@ -240,9 +227,7 @@ struct CUnique *__thiscall CUnique::CUnique(struct CUnique *this, int a2)
 
 
 // address=[0x1403a30]
-// Decompiled from // public: virtual void __thiscall CUnique::Store(class std::ostream &)
-struct std::ostream *__thiscall CUnique::Store(CUnique *this, struct std::ostream *a2)
-
+// Decompiled from struct std::ostream *__thiscall CUnique::Store(CUnique *this, struct std::ostream *a2)
 void  CUnique::Store(std::ostream &) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
@@ -256,10 +241,7 @@ void  CUnique::Store(std::ostream &) {
 
 
 // address=[0x1407c30]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CUnique::ObjectID(CUnique *this)
-
+// Decompiled from int __thiscall CUnique::ObjectID(CUnique *this)
 unsigned long  CUnique::ObjectID(void)const {
   
   return *((_DWORD *)this + 1);
@@ -268,7 +250,6 @@ unsigned long  CUnique::ObjectID(void)const {
 
 // address=[0x1403a70]
 // Decompiled from _DWORD *__cdecl CUnique::_add(char a1, struct CUnique *a2)
-
 static void __cdecl CUnique::_add(unsigned long,class CUnique *) {
   
   _DWORD *result; // eax
@@ -280,9 +261,7 @@ static void __cdecl CUnique::_add(unsigned long,class CUnique *) {
 
 
 // address=[0x1403a90]
-// Decompiled from // private: static void __cdecl CUnique::_remove(unsigned long)
-int __cdecl CUnique::_remove(char a1)
-
+// Decompiled from int __cdecl CUnique::_remove(char a1)
 static void __cdecl CUnique::_remove(unsigned long) {
   
   return std::_Tree<std::_Tmap_traits<unsigned long,CUnique *,std::less<unsigned long>,std::allocator<std::pair<unsigned long const,CUnique *>>,0>>::erase(&a1);

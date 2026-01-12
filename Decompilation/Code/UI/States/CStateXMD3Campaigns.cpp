@@ -4,7 +4,6 @@
 
 // address=[0x14cdf60]
 // Decompiled from CStateXMD3Campaigns *__cdecl CStateXMD3Campaigns::DynamicCreateFunc(void *a1)
-
 static class CGameState * __cdecl CStateXMD3Campaigns::DynamicCreateFunc(void *) {
   
   CStateXMD3Campaigns *C; // [esp+Ch] [ebp-10h]
@@ -19,7 +18,6 @@ static class CGameState * __cdecl CStateXMD3Campaigns::DynamicCreateFunc(void *)
 
 // address=[0x14cdfe0]
 // Decompiled from CStateXMD3Campaigns *__thiscall CStateXMD3Campaigns::CStateXMD3Campaigns(CStateXMD3Campaigns *this, void *a2)
-
  CStateXMD3Campaigns::CStateXMD3Campaigns(void *) {
   
   CGuiGameState::CGuiGameState(this);
@@ -42,7 +40,6 @@ static class CGameState * __cdecl CStateXMD3Campaigns::DynamicCreateFunc(void *)
 
 // address=[0x14ce120]
 // Decompiled from void __thiscall CStateXMD3Campaigns::~CStateXMD3Campaigns(CStateXMD3Campaigns *this)
-
  CStateXMD3Campaigns::~CStateXMD3Campaigns(void) {
   
   *(_DWORD *)this = &CStateXMD3Campaigns::_vftable_;
@@ -53,7 +50,6 @@ static class CGameState * __cdecl CStateXMD3Campaigns::DynamicCreateFunc(void *)
 
 // address=[0x14ce180]
 // Decompiled from char __thiscall CStateXMD3Campaigns::Perform(CStateXMD3Campaigns *this)
-
 bool  CStateXMD3Campaigns::Perform(void) {
   
   DWORD v2; // esi
@@ -97,7 +93,6 @@ bool  CStateXMD3Campaigns::Perform(void) {
 
 // address=[0x14ce2b0]
 // Decompiled from char __thiscall CStateXMD3Campaigns::OnEvent(CStateXMD3Campaigns *this, struct CEvn_Event *a2)
-
 bool  CStateXMD3Campaigns::OnEvent(class CEvn_Event &) {
   
   char result; // al
@@ -172,9 +167,7 @@ bool  CStateXMD3Campaigns::OnEvent(class CEvn_Event &) {
 
 
 // address=[0x14ce6f0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-char __thiscall CStateXMD3Campaigns::CanProcessInvites(CStateXMD3Campaigns *this)
-
+// Decompiled from char __thiscall CStateXMD3Campaigns::CanProcessInvites(CStateXMD3Campaigns *this)
 bool  CStateXMD3Campaigns::CanProcessInvites(void) {
   
   return 0;

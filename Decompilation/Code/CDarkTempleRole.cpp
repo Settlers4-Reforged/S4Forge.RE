@@ -4,7 +4,6 @@
 
 // address=[0x14002c0]
 // Decompiled from int __cdecl CDarkTempleRole::New(int a1)
-
 static class CPersistence * __cdecl CDarkTempleRole::New(std::istream &) {
   
   if ( operator new(0x1B4u) )
@@ -16,7 +15,6 @@ static class CPersistence * __cdecl CDarkTempleRole::New(std::istream &) {
 
 // address=[0x14fd970]
 // Decompiled from int __cdecl CDarkTempleRole::Load(int a1)
-
 static class CDarkTempleRole * __cdecl CDarkTempleRole::Load(std::istream &) {
   
   void **v1; // eax
@@ -29,7 +27,6 @@ static class CDarkTempleRole * __cdecl CDarkTempleRole::Load(std::istream &) {
 
 // address=[0x1508260]
 // Decompiled from CDarkTempleRole *__thiscall CDarkTempleRole::CDarkTempleRole(CDarkTempleRole *this)
-
  CDarkTempleRole::CDarkTempleRole(void) {
   
   int v2; // [esp+4h] [ebp-18h]
@@ -58,7 +55,6 @@ static class CDarkTempleRole * __cdecl CDarkTempleRole::Load(std::istream &) {
 
 // address=[0x1508360]
 // Decompiled from int __thiscall CDarkTempleRole::LogicUpdate(CDarkTempleRole *this, struct CBuilding *a2)
-
 void  CDarkTempleRole::LogicUpdate(class CBuilding *) {
   
   _DWORD *v2; // eax
@@ -104,7 +100,6 @@ void  CDarkTempleRole::LogicUpdate(class CBuilding *) {
 
 // address=[0x15084c0]
 // Decompiled from int __thiscall CDarkTempleRole::FillGfxInfo(CDarkTempleRole *this, struct CBuilding *a2, struct SGfxObjectInfo *a3)
-
 void  CDarkTempleRole::FillGfxInfo(class CBuilding *,struct SGfxObjectInfo &) {
   
   int v3; // eax
@@ -119,7 +114,6 @@ void  CDarkTempleRole::FillGfxInfo(class CBuilding *,struct SGfxObjectInfo &) {
 
 // address=[0x1508510]
 // Decompiled from int __thiscall CDarkTempleRole::Init(CDarkTempleRole *this, struct CBuilding *a2)
-
 void  CDarkTempleRole::Init(class CBuilding *) {
   
   int v3; // [esp+0h] [ebp-10h]
@@ -152,7 +146,6 @@ void  CDarkTempleRole::Init(class CBuilding *) {
 
 // address=[0x1508610]
 // Decompiled from int __thiscall CDarkTempleRole::PostLoadInit(CDarkTempleRole *this, struct CBuilding *a2)
-
 void  CDarkTempleRole::PostLoadInit(class CBuilding *) {
   
   int v2; // eax
@@ -175,7 +168,6 @@ void  CDarkTempleRole::PostLoadInit(class CBuilding *) {
 
 // address=[0x1508690]
 // Decompiled from char __thiscall CDarkTempleRole::SettlerEnter(CDarkTempleRole *this, struct CBuilding *a2, int a3)
-
 bool  CDarkTempleRole::SettlerEnter(class CBuilding *,int) {
   
   int v3; // eax
@@ -242,7 +234,6 @@ bool  CDarkTempleRole::SettlerEnter(class CBuilding *,int) {
 
 // address=[0x1508820]
 // Decompiled from int __thiscall CDarkTempleRole::TakeOrder(CDarkTempleRole *this, int a2, int a3)
-
 void  CDarkTempleRole::TakeOrder(int,int) {
   
   int result; // eax
@@ -347,7 +338,6 @@ void  CDarkTempleRole::TakeOrder(int,int) {
 
 // address=[0x15089c0]
 // Decompiled from int __thiscall CDarkTempleRole::ProduceMushroomFarmer(CDarkTempleRole *this, struct CBuilding *a2)
-
 int  CDarkTempleRole::ProduceMushroomFarmer(class CBuilding *) {
   
   int v2; // eax
@@ -359,7 +349,6 @@ int  CDarkTempleRole::ProduceMushroomFarmer(class CBuilding *) {
 
 // address=[0x15089f0]
 // Decompiled from char *__thiscall CDarkTempleRole::CDarkTempleRole(char *this, int a2)
-
  CDarkTempleRole::CDarkTempleRole(std::istream &) {
   
   int v2; // eax
@@ -416,7 +405,6 @@ int  CDarkTempleRole::ProduceMushroomFarmer(class CBuilding *) {
 
 // address=[0x1508bd0]
 // Decompiled from int __thiscall CDarkTempleRole::Store(struct IBuildingRole *this, struct std::ostream *a2)
-
 void  CDarkTempleRole::Store(std::ostream &) {
   
   int result; // eax
@@ -449,7 +437,6 @@ void  CDarkTempleRole::Store(std::ostream &) {
 
 // address=[0x1509b60]
 // Decompiled from int __thiscall CDarkTempleRole::~CDarkTempleRole(CDarkTempleRole *this)
-
  CDarkTempleRole::~CDarkTempleRole(void) {
   
   std::vector<int>::~vector<int>();
@@ -459,7 +446,6 @@ void  CDarkTempleRole::Store(std::ostream &) {
 
 // address=[0x1509ef0]
 // Decompiled from int __thiscall CDarkTempleRole::ClassID(CDarkTempleRole *this)
-
 unsigned long  CDarkTempleRole::ClassID(void)const {
   
   return CDarkTempleRole::m_iClassID;
@@ -468,7 +454,6 @@ unsigned long  CDarkTempleRole::ClassID(void)const {
 
 // address=[0x1509f50]
 // Decompiled from void __thiscall CDarkTempleRole::FillDialog(CDarkTempleRole *this, struct CBuilding *a2, bool a3)
-
 void  CDarkTempleRole::FillDialog(class CBuilding *,bool) {
   
   ;
@@ -477,7 +462,6 @@ void  CDarkTempleRole::FillDialog(class CBuilding *,bool) {
 
 // address=[0x1509f60]
 // Decompiled from void *__thiscall CDarkTempleRole::GetBuildingNeed(std::_Ref_count_base *this, const struct type_info *a2)
-
 int  CDarkTempleRole::GetBuildingNeed(int)const {
   
   return 0;
@@ -486,7 +470,6 @@ int  CDarkTempleRole::GetBuildingNeed(int)const {
 
 // address=[0x1509f80]
 // Decompiled from int __thiscall CDarkTempleRole::GetBuildingRole(CDarkTempleRole *this)
-
 int  CDarkTempleRole::GetBuildingRole(void) {
   
   return 18;
@@ -495,7 +478,6 @@ int  CDarkTempleRole::GetBuildingRole(void) {
 
 // address=[0x1509fa0]
 // Decompiled from void *__thiscall CDarkTempleRole::GetPileIdWithGood(std::_Ref_count_base *this, const struct type_info *a2)
-
 int  CDarkTempleRole::GetPileIdWithGood(int)const {
   
   return 0;
@@ -503,10 +485,7 @@ int  CDarkTempleRole::GetPileIdWithGood(int)const {
 
 
 // address=[0x1509fc0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CDarkTempleRole::GoodArrive(CDarkTempleRole *this, int a2)
-
+// Decompiled from void __thiscall CDarkTempleRole::GoodArrive(CDarkTempleRole *this, int a2)
 void  CDarkTempleRole::GoodArrive(int) {
   
   ;
@@ -518,7 +497,6 @@ void  CDarkTempleRole::GoodArrive(int) {
 
 // address=[0x1508ce0]
 // Decompiled from int __thiscall CDarkTempleRole::Produce(CDarkTempleRole *this, struct CBuilding *a2)
-
 void  CDarkTempleRole::Produce(class CBuilding *) {
   
   type_info *v2; // eax
@@ -603,7 +581,6 @@ void  CDarkTempleRole::Produce(class CBuilding *) {
 
 // address=[0x1508f70]
 // Decompiled from int __thiscall CDarkTempleRole::AttackEnemies(CDarkTempleRole *this, _DWORD *a2)
-
 void  CDarkTempleRole::AttackEnemies(class CBuilding *) {
   
   int result; // eax
@@ -776,7 +753,6 @@ void  CDarkTempleRole::AttackEnemies(class CBuilding *) {
 
 // address=[0x1509350]
 // Decompiled from int __thiscall CDarkTempleRole::ShowFireRing(CDarkTempleRole *this, int a2, int a3, int a4, int a5)
-
 void  CDarkTempleRole::ShowFireRing(int,int,int,int) {
   
   int result; // eax
@@ -822,7 +798,6 @@ void  CDarkTempleRole::ShowFireRing(int,int,int,int) {
 
 // address=[0x1509450]
 // Decompiled from int __thiscall CDarkTempleRole::ServantManagement(CDarkTempleRole *this, struct CBuilding *a2)
-
 void  CDarkTempleRole::ServantManagement(class CBuilding *) {
   
   int result; // eax
@@ -854,7 +829,6 @@ void  CDarkTempleRole::ServantManagement(class CBuilding *) {
 
 // address=[0x15094f0]
 // Decompiled from int __thiscall CDarkTempleRole::AddSettlerToWorld(CDarkTempleRole *this, int a2, int a3, int a4)
-
 int  CDarkTempleRole::AddSettlerToWorld(int,int,int) {
   
   int v5; // [esp+0h] [ebp-14h]
@@ -887,11 +861,7 @@ int  CDarkTempleRole::AddSettlerToWorld(int,int,int) {
 
 
 // address=[0x1509f10]
-// Decompiled from void __thiscall CDarkTempleRole::ConvertEventIntoGoal(
-        CDarkTempleRole *this,
-        struct CBuilding *a2,
-        struct CEntityEvent *a3)
-
+// Decompiled from void __thiscall CDarkTempleRole::ConvertEventIntoGoal(  CDarkTempleRole *this,  struct CBuilding *a2,  struct CEntityEvent *a3)
 void  CDarkTempleRole::ConvertEventIntoGoal(class CBuilding *,class CEntityEvent *) {
   
   ;
@@ -900,7 +870,6 @@ void  CDarkTempleRole::ConvertEventIntoGoal(class CBuilding *,class CEntityEvent
 
 // address=[0x1509f20]
 // Decompiled from char __thiscall CDarkTempleRole::CrushBuilding(CDarkTempleRole *this)
-
 bool  CDarkTempleRole::CrushBuilding(void) {
   
   return 1;
@@ -909,7 +878,6 @@ bool  CDarkTempleRole::CrushBuilding(void) {
 
 // address=[0x1509fd0]
 // Decompiled from char __thiscall CDarkTempleRole::TryCrushBuilding(CDarkTempleRole *this)
-
 bool  CDarkTempleRole::TryCrushBuilding(void) {
   
   return 1;

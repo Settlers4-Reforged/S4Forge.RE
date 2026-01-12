@@ -4,7 +4,6 @@
 
 // address=[0x1305510]
 // Decompiled from CAIAgentRecruitment *__thiscall CAIAgentRecruitment::CAIAgentRecruitment(CAIAgentRecruitment *this)
-
  CAIAgentRecruitment::CAIAgentRecruitment(void) {
   
   CAINormalSectorAgent::CAINormalSectorAgent(this, "recruitment");
@@ -16,7 +15,6 @@
 
 // address=[0x1305540]
 // Decompiled from unsigned int __thiscall CAIAgentRecruitment::Execute(CAIAgentRecruitment *this, unsigned int a2, unsigned int a3)
-
 unsigned int  CAIAgentRecruitment::Execute(unsigned int,unsigned int) {
   
   struct CAINormalSectorAI *v3; // eax
@@ -102,7 +100,6 @@ unsigned int  CAIAgentRecruitment::Execute(unsigned int,unsigned int) {
 
 // address=[0x13062e0]
 // Decompiled from void __thiscall CAIAgentRecruitment::~CAIAgentRecruitment(CAIAgentRecruitment *this)
-
  CAIAgentRecruitment::~CAIAgentRecruitment(void) {
   
   CAINormalSectorAgent::~CAINormalSectorAgent(this);
@@ -111,7 +108,6 @@ unsigned int  CAIAgentRecruitment::Execute(unsigned int,unsigned int) {
 
 // address=[0x1309670]
 // Decompiled from CAIAgentRecruitment *__thiscall CAIAgentRecruitment::SetUniqueFighterRecruitment(CAIAgentRecruitment *this, int a2)
-
 void  CAIAgentRecruitment::SetUniqueFighterRecruitment(int) {
   
   CAIAgentRecruitment *result; // eax

@@ -4,7 +4,6 @@
 
 // address=[0x135ca40]
 // Decompiled from CFile *__thiscall CFile::CFile(CFile *this)
-
  CFile::CFile(void) {
   
   IFSNode::IFSNode(this);
@@ -20,7 +19,6 @@
 
 // address=[0x135d3a0]
 // Decompiled from void __thiscall CFile::~CFile(CFile *this)
-
  CFile::~CFile(void) {
   
   *(_DWORD *)this = CFile::_vftable_;
@@ -33,7 +31,6 @@
 
 // address=[0x135df00]
 // Decompiled from int __thiscall CFile::Accept(CFile *this, struct IFSVisitor *a2)
-
 void  CFile::Accept(class IFSVisitor &) {
   
   return (*(int (__thiscall **)(struct IFSVisitor *, CFile *))(*(_DWORD *)a2 + 8))(a2, this);
@@ -41,10 +38,7 @@ void  CFile::Accept(class IFSVisitor &) {
 
 
 // address=[0x135dff0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-char *__thiscall CFile::GetName(char *this)
-
+// Decompiled from char *__thiscall CFile::GetName(char *this)
 std::string const &  CFile::GetName(void) {
   
   return this + 4;
@@ -53,7 +47,6 @@ std::string const &  CFile::GetName(void) {
 
 // address=[0x2f01020]
 // Decompiled from _DWORD *__thiscall CFile::CFile(_DWORD *this, _Cnd_internal_imp_t *a2, int a3)
-
  CFile::CFile(std::wstring const &,unsigned int) {
   
   wchar_t *v3; // eax
@@ -71,7 +64,6 @@ std::string const &  CFile::GetName(void) {
 
 // address=[0x2f010d0]
 // Decompiled from _DWORD *__thiscall CFile::CFile(_DWORD *this, wchar_t *FileName, int a3)
-
  CFile::CFile(wchar_t const *,unsigned int) {
   
   CFile *v4; // [esp+4h] [ebp-64h]
@@ -103,7 +95,6 @@ std::string const &  CFile::GetName(void) {
 
 // address=[0x2f011c0]
 // Decompiled from int __stdcall CFile::Open(_Cnd_internal_imp_t *a1, int a2, char *Str, int a4)
-
 void  CFile::Open(std::wstring const &,unsigned int,char *,int) {
   
   wchar_t *v4; // eax
@@ -115,7 +106,6 @@ void  CFile::Open(std::wstring const &,unsigned int,char *,int) {
 
 // address=[0x2f011f0]
 // Decompiled from void __thiscall CFile::Open(_DWORD *this, wchar_t *FileName, char a3, char *Str, int a5)
-
 void  CFile::Open(wchar_t const *,unsigned int,char *,int) {
   
   wchar_t *v5; // eax
@@ -140,7 +130,6 @@ void  CFile::Open(wchar_t const *,unsigned int,char *,int) {
 
 // address=[0x2f012d0]
 // Decompiled from size_t __thiscall CFile::Read(FILE **this, void *Buffer, size_t ElementSize, size_t ElementCount, int a5, int a6)
-
 unsigned int  CFile::Read(void *,int,int,char *,int) {
   
   return j__fread(Buffer, ElementSize, ElementCount, this[17]);
@@ -149,7 +138,6 @@ unsigned int  CFile::Read(void *,int,int,char *,int) {
 
 // address=[0x2f01300]
 // Decompiled from size_t __thiscall CFile::Write(FILE **this, void *Buffer, size_t ElementSize, size_t ElementCount, int a5, int a6)
-
 unsigned int  CFile::Write(void const *,int,int,char *,int) {
   
   return j__fwrite(Buffer, ElementSize, ElementCount, this[17]);
@@ -158,7 +146,6 @@ unsigned int  CFile::Write(void const *,int,int,char *,int) {
 
 // address=[0x2f01330]
 // Decompiled from int __thiscall CFile::Seek(FILE **this, int Offset, int Origin, int a4, int a5)
-
 int  CFile::Seek(int,int,char *,int) {
   
   int v6; // [esp+4h] [ebp-8h]
@@ -172,7 +159,6 @@ int  CFile::Seek(int,int,char *,int) {
 
 // address=[0x2f01380]
 // Decompiled from int __thiscall CFile::Size(FILE **this)
-
 int  CFile::Size(void)const {
   
   int v2; // [esp+0h] [ebp-Ch]
@@ -188,7 +174,6 @@ int  CFile::Size(void)const {
 
 // address=[0x2f013e0]
 // Decompiled from int __thiscall CFile::Tell(FILE **this, char *a2, int a3)
-
 int  CFile::Tell(char *,int)const {
   
   return j__ftell(this[17]);
@@ -197,7 +182,6 @@ int  CFile::Tell(char *,int)const {
 
 // address=[0x2f01400]
 // Decompiled from int __thiscall CFile::Eof(FILE **this)
-
 int  CFile::Eof(void) {
   
   return j__feof(this[17]);
@@ -205,9 +189,7 @@ int  CFile::Eof(void) {
 
 
 // address=[0x2f01420]
-// Decompiled from // public: int __thiscall CFile::Error(void)
-int __thiscall CFile::Error(FILE **this)
-
+// Decompiled from int __thiscall CFile::Error(FILE **this)
 int  CFile::Error(void) {
   
   return j__ferror(this[17]);
@@ -216,7 +198,6 @@ int  CFile::Error(void) {
 
 // address=[0x2f01440]
 // Decompiled from int __thiscall CFile::Close(CFile *this, char *a2, int a3)
-
 int  CFile::Close(char *,int) {
   
   int result; // eax
@@ -235,7 +216,6 @@ int  CFile::Close(char *,int) {
 
 // address=[0x2f016b0]
 // Decompiled from FILE **__thiscall CFile::operator=(FILE **this, CDockState *a2)
-
 class CFile &  CFile::operator=(class CFile &) {
   
   j__fclose(this[17]);
@@ -246,7 +226,6 @@ class CFile &  CFile::operator=(class CFile &) {
 
 // address=[0x2f016f0]
 // Decompiled from unsigned int __thiscall CFile::GetFile(CDockState *this)
-
 struct _iobuf *  CFile::GetFile(void) {
   
   return *((_DWORD *)this + 17);
@@ -255,7 +234,6 @@ struct _iobuf *  CFile::GetFile(void) {
 
 // address=[0x2f014c0]
 // Decompiled from int __thiscall CFile::OpenMaskToCWStr(_DWORD *this, char a2, int a3)
-
 void  CFile::OpenMaskToCWStr(unsigned int,std::wstring &) {
   
   int result; // eax

@@ -3,9 +3,7 @@
 // Definitions for class CInvokeEvent
 
 // address=[0x2f4e930]
-// Decompiled from // public: __thiscall CInvokeEvent::CInvokeEvent(void)
-int __thiscall CInvokeEvent::CInvokeEvent(int this)
-
+// Decompiled from int __thiscall CInvokeEvent::CInvokeEvent(int this)
  CInvokeEvent::CInvokeEvent(void) {
   
   IScheduleEntry::IScheduleEntry((IScheduleEntry *)this);
@@ -17,7 +15,6 @@ int __thiscall CInvokeEvent::CInvokeEvent(int this)
 
 // address=[0x2f4e960]
 // Decompiled from int __thiscall CInvokeEvent::CInvokeEvent(int this, int a2)
-
  CInvokeEvent::CInvokeEvent(enum BUILDING_TYPES) {
   
   IScheduleEntry::IScheduleEntry((IScheduleEntry *)this);
@@ -36,9 +33,7 @@ int __thiscall CInvokeEvent::CInvokeEvent(int this)
 
 
 // address=[0x2f4e9e0]
-// Decompiled from // public: bool __thiscall CInvokeEvent::AddInvokePosition(int,int)
-char __thiscall CInvokeEvent::AddInvokePosition(CReserveDatabase ***this, int a2, int a3)
-
+// Decompiled from char __thiscall CInvokeEvent::AddInvokePosition(CReserveDatabase ***this, int a2, int a3)
 bool  CInvokeEvent::AddInvokePosition(int,int) {
   
   int v4; // [esp+0h] [ebp-8h] BYREF
@@ -54,7 +49,6 @@ bool  CInvokeEvent::AddInvokePosition(int,int) {
 
 // address=[0x2f4ea20]
 // Decompiled from char __thiscall CInvokeEvent::AddInvokePosition(CInvokeEvent *this, int a2)
-
 bool  CInvokeEvent::AddInvokePosition(int) {
   
   *((_BYTE *)this + 56) = 0;
@@ -65,7 +59,6 @@ bool  CInvokeEvent::AddInvokePosition(int) {
 
 // address=[0x2f4ea50]
 // Decompiled from int __thiscall CInvokeEvent::AddInvokePositionAroundResource(CInvokeEvent *this, int a2, int a3)
-
 int  CInvokeEvent::AddInvokePositionAroundResource(enum BUILDING_TYPES,int) {
   
   int ResourceForBuilding; // [esp+0h] [ebp-38h]
@@ -165,7 +158,6 @@ int  CInvokeEvent::AddInvokePositionAroundResource(enum BUILDING_TYPES,int) {
 
 // address=[0x2f4ed40]
 // Decompiled from void __thiscall CInvokeEvent::~CInvokeEvent(CSchedule **this)
-
  CInvokeEvent::~CInvokeEvent(void) {
   
   struct IAIEcoManager *EcoSector; // [esp+4h] [ebp-14h]
@@ -181,7 +173,6 @@ int  CInvokeEvent::AddInvokePositionAroundResource(enum BUILDING_TYPES,int) {
 
 // address=[0x2f4edc0]
 // Decompiled from char __thiscall CInvokeEvent::IsShooting(CInvokeEvent *this)
-
 bool  CInvokeEvent::IsShooting(void) {
   
   if ( !*((_BYTE *)this + 76) )
@@ -205,7 +196,6 @@ bool  CInvokeEvent::IsShooting(void) {
 
 // address=[0x2f4ee10]
 // Decompiled from char __thiscall CInvokeEvent::action(CInvokeEvent *this)
-
 bool  CInvokeEvent::action(void) {
   
   unsigned int v1; // eax
@@ -263,7 +253,6 @@ bool  CInvokeEvent::action(void) {
 
 // address=[0x2f4ef80]
 // Decompiled from char __thiscall CInvokeEvent::IsAlive(CInvokeEvent *this)
-
 bool  CInvokeEvent::IsAlive(void) {
   
   struct IAIEcoManager *EcoSector; // [esp+0h] [ebp-8h]
@@ -281,7 +270,6 @@ bool  CInvokeEvent::IsAlive(void) {
 
 // address=[0x2f4efd0]
 // Decompiled from char __thiscall CInvokeEvent::WaitFor(CInvokeEvent *this)
-
 bool  CInvokeEvent::WaitFor(void) {
   
   struct IAIEcoManager *EcoSector; // [esp+0h] [ebp-8h]

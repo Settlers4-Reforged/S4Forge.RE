@@ -3,9 +3,7 @@
 // Definitions for class CAStar64Catapult
 
 // address=[0x15d3ea0]
-// Decompiled from // public: static bool __cdecl CAStar64Catapult::IsNotBlocked(int)
-bool __cdecl CAStar64Catapult::IsNotBlocked(int a1)
-
+// Decompiled from bool __cdecl CAStar64Catapult::IsNotBlocked(int a1)
 static bool __cdecl CAStar64Catapult::IsNotBlocked(int) {
   
   return (unsigned int)(CWorldManager::CatapultTileId(a1) - 1) < 0xBFFF;
@@ -13,9 +11,7 @@ static bool __cdecl CAStar64Catapult::IsNotBlocked(int) {
 
 
 // address=[0x15d3ee0]
-// Decompiled from // public: static int __cdecl CAStar64Catapult::MoveCosts(int,int)
-int __cdecl CAStar64Catapult::MoveCosts(int a1, int a2)
-
+// Decompiled from int __cdecl CAStar64Catapult::MoveCosts(int a1, int a2)
 static int __cdecl CAStar64Catapult::MoveCosts(int,int) {
   
   int v3; // [esp+4h] [ebp-14h]
@@ -46,7 +42,6 @@ static int __cdecl CAStar64Catapult::MoveCosts(int,int) {
 
 // address=[0x15d5ec0]
 // Decompiled from CAStar64Catapult *__thiscall CAStar64Catapult::CAStar64Catapult(CAStar64Catapult *this)
-
  CAStar64Catapult::CAStar64Catapult(void) {
   
   CAStar64::CAStar64(this);
@@ -57,7 +52,6 @@ static int __cdecl CAStar64Catapult::MoveCosts(int,int) {
 
 // address=[0x15d3e70]
 // Decompiled from char __thiscall CAStar64Catapult::InitFindPath(CAStar64Catapult *this)
-
 bool  CAStar64Catapult::InitFindPath(void) {
   
   dword_415C76C = (int (__cdecl *)(_DWORD))j_CAStar64Catapult::IsNotBlocked;

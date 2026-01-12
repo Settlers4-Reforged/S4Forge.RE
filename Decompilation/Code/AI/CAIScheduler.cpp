@@ -4,7 +4,6 @@
 
 // address=[0x12ff090]
 // Decompiled from CAIScheduler *__thiscall CAIScheduler::CAIScheduler(CAIScheduler *this)
-
  CAIScheduler::CAIScheduler(void) {
   
   CAIAgent::CAIAgent(this, "Scheduler");
@@ -17,7 +16,6 @@
 
 // address=[0x12ff0d0]
 // Decompiled from void __thiscall CAIScheduler::~CAIScheduler(CAIScheduler *this)
-
  CAIScheduler::~CAIScheduler(void) {
   
   *(_DWORD *)this = &CAIScheduler::_vftable_;
@@ -27,13 +25,7 @@
 
 
 // address=[0x12ff120]
-// Decompiled from void __thiscall CAIScheduler::AddAgent(
-        CAIScheduler *this,
-        CAIScheduler **a2,
-        CAIScheduler *a3,
-        CAIScheduler *a4,
-        CAIScheduler *a5)
-
+// Decompiled from void __thiscall CAIScheduler::AddAgent(  CAIScheduler *this,  CAIScheduler **a2,  CAIScheduler *a3,  CAIScheduler *a4,  CAIScheduler *a5)
 void  CAIScheduler::AddAgent(class CAIAgent &,unsigned int,unsigned int,unsigned int) {
   
   if ( a2[5] )
@@ -48,7 +40,6 @@ void  CAIScheduler::AddAgent(class CAIAgent &,unsigned int,unsigned int,unsigned
 
 // address=[0x12ff180]
 // Decompiled from void __thiscall CAIScheduler::RemoveAgent(CAIScheduler *this, struct CAIAgent *a2)
-
 void  CAIScheduler::RemoveAgent(class CAIAgent &) {
   
   if ( *((CAIScheduler **)a2 + 5) == this )
@@ -64,7 +55,6 @@ void  CAIScheduler::RemoveAgent(class CAIAgent &) {
 
 // address=[0x12ff1d0]
 // Decompiled from CAIScheduler *__thiscall CAIScheduler::RemoveAllAgents(struct CAIAgent **this)
-
 void  CAIScheduler::RemoveAllAgents(void) {
   
   CAIScheduler *result; // eax
@@ -82,7 +72,6 @@ void  CAIScheduler::RemoveAllAgents(void) {
 
 // address=[0x12ff200]
 // Decompiled from void __thiscall CAIScheduler::UpdateAgentScheduleTime(CAIScheduler *this, struct CAIAgent *a2, unsigned int a3)
-
 void  CAIScheduler::UpdateAgentScheduleTime(class CAIAgent &,unsigned int) {
   
   if ( *((CAIScheduler **)a2 + 5) == this )
@@ -103,7 +92,6 @@ void  CAIScheduler::UpdateAgentScheduleTime(class CAIAgent &,unsigned int) {
 
 // address=[0x12ff270]
 // Decompiled from unsigned int __thiscall CAIScheduler::Execute(CAIScheduler *this, unsigned int a2, unsigned int a3)
-
 unsigned int  CAIScheduler::Execute(unsigned int,unsigned int) {
   
   unsigned int v4; // [esp+0h] [ebp-1Ch]
@@ -160,7 +148,6 @@ unsigned int  CAIScheduler::Execute(unsigned int,unsigned int) {
 
 // address=[0x12ff400]
 // Decompiled from CAIScheduler *__thiscall CAIScheduler::AddAgentEx(CAIScheduler *this, struct CAIAgent *a2)
-
 void  CAIScheduler::AddAgentEx(class CAIAgent *) {
   
   CAIScheduler *result; // eax
@@ -209,7 +196,6 @@ void  CAIScheduler::AddAgentEx(class CAIAgent *) {
 
 // address=[0x12ff580]
 // Decompiled from struct CAIAgent **__thiscall CAIScheduler::RemoveAgentEx(struct CAIAgent **this, struct CAIAgent *a2)
-
 void  CAIScheduler::RemoveAgentEx(class CAIAgent *) {
   
   struct CAIAgent **result; // eax

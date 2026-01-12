@@ -4,7 +4,6 @@
 
 // address=[0x15e3040]
 // Decompiled from int **__cdecl CTilesEx::InitTiles(struct CLinkList *a1)
-
 static void __cdecl CTilesEx::InitTiles(class CLinkList &) {
   
   int **v1; // eax
@@ -56,7 +55,6 @@ static void __cdecl CTilesEx::InitTiles(class CLinkList &) {
 
 // address=[0x15e31c0]
 // Decompiled from void __thiscall CTilesEx::DeactivateTilesPushBackMode(void *this)
-
 static void __cdecl CTilesEx::DeactivateTilesPushBackMode(void) {
   
   int *v2; // [esp+0h] [ebp-4h]
@@ -86,9 +84,7 @@ static void __cdecl CTilesEx::DeactivateTilesPushBackMode(void) {
 
 
 // address=[0x15e3250]
-// Decompiled from // MFC 3.1-14.0 32bit
-int CTilesEx::CalculateOwnerBits()
-
+// Decompiled from int CTilesEx::CalculateOwnerBits()
 static void __cdecl CTilesEx::CalculateOwnerBits(void) {
   
   return COwnerMapEx::CalculateOwnerBits();
@@ -97,7 +93,6 @@ static void __cdecl CTilesEx::CalculateOwnerBits(void) {
 
 // address=[0x15e3260]
 // Decompiled from __int16 __cdecl CTilesEx::InsertTileIntoSquareList(int a1)
-
 static void __cdecl CTilesEx::InsertTileIntoSquareList(int) {
   
   int **v1; // eax
@@ -184,7 +179,6 @@ static void __cdecl CTilesEx::InsertTileIntoSquareList(int) {
 
 // address=[0x15e34f0]
 // Decompiled from int **__cdecl CTilesEx::DeleteTileFromSquareList(int a1)
-
 static void __cdecl CTilesEx::DeleteTileFromSquareList(int) {
   
   int **v1; // eax
@@ -263,7 +257,6 @@ static void __cdecl CTilesEx::DeleteTileFromSquareList(int) {
 
 // address=[0x15e36f0]
 // Decompiled from int CTilesEx::CalculateListOfFreeTiles()
-
 static void __cdecl CTilesEx::CalculateListOfFreeTiles(void) {
   
   int **v0; // eax
@@ -304,7 +297,6 @@ static void __cdecl CTilesEx::CalculateListOfFreeTiles(void) {
 
 // address=[0x15e3810]
 // Decompiled from int CTilesEx::CalculateSquareTileLists()
-
 static void __cdecl CTilesEx::CalculateSquareTileLists(void) {
   
   int result; // eax
@@ -328,7 +320,6 @@ static void __cdecl CTilesEx::CalculateSquareTileLists(void) {
 
 // address=[0x15e3880]
 // Decompiled from int *CTilesEx::PushTileUndef()
-
 static int __cdecl CTilesEx::PushTileUndef(void) {
   
   int v0; // ecx
@@ -384,7 +375,6 @@ static int __cdecl CTilesEx::PushTileUndef(void) {
 
 // address=[0x15e3a10]
 // Decompiled from int __cdecl CTilesEx::PushTilesBackUndef(int a1)
-
 static int __cdecl CTilesEx::PushTilesBackUndef(int) {
   
   int v2; // [esp+0h] [ebp-4h]
@@ -410,7 +400,6 @@ static int __cdecl CTilesEx::PushTilesBackUndef(int) {
 
 // address=[0x15e3ac0]
 // Decompiled from int *__cdecl CTilesEx::PushTile(DWORD a1, DWORD a2)
-
 static int __cdecl CTilesEx::PushTile(int,int) {
   
   int **v2; // eax
@@ -430,7 +419,6 @@ static int __cdecl CTilesEx::PushTile(int,int) {
 
 // address=[0x15e3b30]
 // Decompiled from int *__cdecl CTilesEx::DuplicateTile(int a1)
-
 static int __cdecl CTilesEx::DuplicateTile(int) {
   
   int **v1; // eax
@@ -456,7 +444,6 @@ static int __cdecl CTilesEx::DuplicateTile(int) {
 
 // address=[0x15e3bb0]
 // Decompiled from int __cdecl CTilesEx::DeleteTile(int *a1)
-
 static void __cdecl CTilesEx::DeleteTile(int) {
   
   int result; // eax
@@ -512,7 +499,6 @@ static void __cdecl CTilesEx::DeleteTile(int) {
 
 // address=[0x15e7050]
 // Decompiled from bool __cdecl CTilesEx::IsUsedRealTile(int a1)
-
 static bool __cdecl CTilesEx::IsUsedRealTile(int) {
   
   int **v1; // eax
@@ -530,7 +516,6 @@ static bool __cdecl CTilesEx::IsUsedRealTile(int) {
 
 // address=[0x15e71c0]
 // Decompiled from bool __cdecl CTilesEx::IsValidUsedTile(int a1)
-
 static bool __cdecl CTilesEx::IsValidUsedTile(int) {
   
   int **v1; // eax
@@ -548,7 +533,6 @@ static bool __cdecl CTilesEx::IsValidUsedTile(int) {
 
 // address=[0x15e7220]
 // Decompiled from int CTilesEx::LastUsedTileId()
-
 static int __cdecl CTilesEx::LastUsedTileId(void) {
   
   return CTilesEx::m_iLastUsedTileId;
@@ -557,7 +541,6 @@ static int __cdecl CTilesEx::LastUsedTileId(void) {
 
 // address=[0x15f5230]
 // Decompiled from int CTilesEx::NumberOfUsedTiles()
-
 static int __cdecl CTilesEx::NumberOfUsedTiles(void) {
   
   return CTilesEx::m_iNumberOfUsedTiles;

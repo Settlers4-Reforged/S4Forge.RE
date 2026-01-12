@@ -3,17 +3,7 @@
 // Definitions for class CSubProblemSolveEvent
 
 // address=[0x2f4e360]
-// Decompiled from CSubProblemSolveEvent *__thiscall CSubProblemSolveEvent::CSubProblemSolveEvent(
-        CSubProblemSolveEvent *this,
-        struct CSiedlerAI *a2,
-        int a3,
-        int a4,
-        int a5,
-        int a6,
-        int a7,
-        int a8,
-        struct COptimizeOptions *a9)
-
+// Decompiled from CSubProblemSolveEvent *__thiscall CSubProblemSolveEvent::CSubProblemSolveEvent(  CSubProblemSolveEvent *this,  struct CSiedlerAI *a2,  int a3,  int a4,  int a5,  int a6,  int a7,  int a8,  struct COptimizeOptions *a9)
  CSubProblemSolveEvent::CSubProblemSolveEvent(class CSiedlerAI *,int,int,int,int,int,int,class COptimizeOptions *) {
   
   int i; // [esp+4h] [ebp-14h]
@@ -42,7 +32,6 @@
 
 // address=[0x2f4e470]
 // Decompiled from void __thiscall CSubProblemSolveEvent::~CSubProblemSolveEvent(COptimizeOptions **this)
-
  CSubProblemSolveEvent::~CSubProblemSolveEvent(void) {
   
   *this = (COptimizeOptions *)&CSubProblemSolveEvent::_vftable_;
@@ -54,7 +43,6 @@
 
 // address=[0x2f4e4c0]
 // Decompiled from char __thiscall CSubProblemSolveEvent::IsShooting(CSubProblemSolveEvent *this)
-
 bool  CSubProblemSolveEvent::IsShooting(void) {
   
   int LockedSchedNr; // esi
@@ -87,7 +75,6 @@ bool  CSubProblemSolveEvent::IsShooting(void) {
 
 // address=[0x2f4e550]
 // Decompiled from char __thiscall CSubProblemSolveEvent::action(CSubProblemSolveEvent *this)
-
 bool  CSubProblemSolveEvent::action(void) {
   
   int MainProblemSolve; // [esp+8h] [ebp-34h]
@@ -204,7 +191,6 @@ bool  CSubProblemSolveEvent::action(void) {
 
 // address=[0x2f4e8b0]
 // Decompiled from char __thiscall CSubProblemSolveEvent::IsAlive(CSubProblemSolveEvent *this)
-
 bool  CSubProblemSolveEvent::IsAlive(void) {
   
   if ( CSchedule::GetMainProblemSolve(*((CSchedule **)this + 10), *((_DWORD *)this + 8)) )
@@ -216,7 +202,6 @@ bool  CSubProblemSolveEvent::IsAlive(void) {
 
 // address=[0x2f4e8f0]
 // Decompiled from bool __thiscall CSubProblemSolveEvent::WaitFor(CSubProblemSolveEvent *this)
-
 bool  CSubProblemSolveEvent::WaitFor(void) {
   
   return CSchedule::AllSubProblemsSolved(*((CDynList ***)this + 10), *((_DWORD *)this + 3)) && !*((_DWORD *)this + 17);

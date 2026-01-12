@@ -4,7 +4,6 @@
 
 // address=[0x13045a0]
 // Decompiled from CAIAgentEvalDefence *__thiscall CAIAgentEvalDefence::CAIAgentEvalDefence(CAIAgentEvalDefence *this)
-
  CAIAgentEvalDefence::CAIAgentEvalDefence(void) {
   
   CAINormalSectorAgent::CAINormalSectorAgent(this, "defence evaluation");
@@ -16,7 +15,6 @@
 
 // address=[0x13045d0]
 // Decompiled from unsigned int __thiscall CAIAgentEvalDefence::Execute(CAIAgentEvalDefence *this, unsigned int a2, unsigned int a3)
-
 unsigned int  CAIAgentEvalDefence::Execute(unsigned int,unsigned int) {
   
   CAINormalSectorAI *v3; // eax
@@ -29,7 +27,6 @@ unsigned int  CAIAgentEvalDefence::Execute(unsigned int,unsigned int) {
 
 // address=[0x1304600]
 // Decompiled from int __thiscall CAIAgentEvalDefence::Load(CAIAgentEvalDefence *this, struct IS4Chunk *a2)
-
 void  CAIAgentEvalDefence::Load(class IS4Chunk &) {
   
   (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 12))(a2, -1516285952);
@@ -43,7 +40,6 @@ void  CAIAgentEvalDefence::Load(class IS4Chunk &) {
 
 // address=[0x1304680]
 // Decompiled from int __thiscall CAIAgentEvalDefence::Save(CAIAgentEvalDefence *this, struct IS4Chunk *a2)
-
 void  CAIAgentEvalDefence::Save(class IS4Chunk &) {
   
   (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 24))(a2, -1516285952);
@@ -57,7 +53,6 @@ void  CAIAgentEvalDefence::Save(class IS4Chunk &) {
 
 // address=[0x1306280]
 // Decompiled from void __thiscall CAIAgentEvalDefence::~CAIAgentEvalDefence(CAIAgentEvalDefence *this)
-
  CAIAgentEvalDefence::~CAIAgentEvalDefence(void) {
   
   CAINormalSectorAgent::~CAINormalSectorAgent(this);
@@ -66,7 +61,6 @@ void  CAIAgentEvalDefence::Save(class IS4Chunk &) {
 
 // address=[0x1309520]
 // Decompiled from int __thiscall CAIAgentEvalDefence::EvaluationCounter(CAIAgentEvalDefence *this)
-
 int  CAIAgentEvalDefence::EvaluationCounter(void)const {
   
   return *((_DWORD *)this + 10);

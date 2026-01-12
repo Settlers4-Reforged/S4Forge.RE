@@ -4,7 +4,6 @@
 
 // address=[0x14a14b0]
 // Decompiled from CStateAOCampaignViking *__cdecl CStateAOCampaignViking::DynamicCreateFunc(void *a1)
-
 static class CGameState * __cdecl CStateAOCampaignViking::DynamicCreateFunc(void *) {
   
   CStateAOCampaignViking *C; // [esp+Ch] [ebp-10h]
@@ -18,10 +17,7 @@ static class CGameState * __cdecl CStateAOCampaignViking::DynamicCreateFunc(void
 
 
 // address=[0x14a1530]
-// Decompiled from CStateAOCampaignViking *__thiscall CStateAOCampaignViking::CStateAOCampaignViking(
-        CStateAOCampaignViking *this,
-        void *a2)
-
+// Decompiled from CStateAOCampaignViking *__thiscall CStateAOCampaignViking::CStateAOCampaignViking(  CStateAOCampaignViking *this,  void *a2)
  CStateAOCampaignViking::CStateAOCampaignViking(void *) {
   
   CGuiGameState::CGuiGameState(this);
@@ -38,7 +34,6 @@ static class CGameState * __cdecl CStateAOCampaignViking::DynamicCreateFunc(void
 
 // address=[0x14a15f0]
 // Decompiled from void __thiscall CStateAOCampaignViking::~CStateAOCampaignViking(CStateAOCampaignViking *this)
-
  CStateAOCampaignViking::~CStateAOCampaignViking(void) {
   
   *(_DWORD *)this = &CStateAOCampaignViking::_vftable_;
@@ -49,7 +44,6 @@ static class CGameState * __cdecl CStateAOCampaignViking::DynamicCreateFunc(void
 
 // address=[0x14a1650]
 // Decompiled from char __thiscall CStateAOCampaignViking::Perform(CStateAOCampaignViking *this)
-
 bool  CStateAOCampaignViking::Perform(void) {
   
   DWORD v2; // esi
@@ -86,7 +80,6 @@ bool  CStateAOCampaignViking::Perform(void) {
 
 // address=[0x14a1730]
 // Decompiled from char __thiscall CStateAOCampaignViking::OnEvent(CStateAOCampaignViking *this, struct CEvn_Event *a2)
-
 bool  CStateAOCampaignViking::OnEvent(class CEvn_Event &) {
   
   CEvn_Event *v3; // [esp+Ch] [ebp-38h]
@@ -120,9 +113,7 @@ bool  CStateAOCampaignViking::OnEvent(class CEvn_Event &) {
 
 
 // address=[0x14a1970]
-// Decompiled from // Microsoft VisualC 14/net runtime
-char __thiscall CStateAOCampaignViking::CanProcessInvites(CStateAOCampaignViking *this)
-
+// Decompiled from char __thiscall CStateAOCampaignViking::CanProcessInvites(CStateAOCampaignViking *this)
 bool  CStateAOCampaignViking::CanProcessInvites(void) {
   
   return 0;

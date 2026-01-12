@@ -4,7 +4,6 @@
 
 // address=[0x2f2fa50]
 // Decompiled from bool __stdcall CBBSupportLogFile::IsOpen(CBBSupportLogFile *this)
-
 bool __stdcall CBBSupportLogFile::IsOpen(void) {
   
   return *((_DWORD *)this + 4) != 0;
@@ -13,7 +12,6 @@ bool __stdcall CBBSupportLogFile::IsOpen(void) {
 
 // address=[0x2f33df0]
 // Decompiled from CBBSupportLogFile *__thiscall CBBSupportLogFile::CBBSupportLogFile(CBBSupportLogFile *this)
-
  CBBSupportLogFile::CBBSupportLogFile(void) {
   
   *(_DWORD *)this = &CBBSupportLogFile::_vftable_;
@@ -28,7 +26,6 @@ bool __stdcall CBBSupportLogFile::IsOpen(void) {
 
 // address=[0x2f33e50]
 // Decompiled from void __thiscall CBBSupportLogFile::~CBBSupportLogFile(CBBSupportLogFile *this)
-
  CBBSupportLogFile::~CBBSupportLogFile(void) {
   
   *(_DWORD *)this = &CBBSupportLogFile::_vftable_;
@@ -38,7 +35,6 @@ bool __stdcall CBBSupportLogFile::IsOpen(void) {
 
 // address=[0x2f33ea0]
 // Decompiled from CBBSupportLogFile *__stdcall CBBSupportLogFile::SetFileMode(CBBSupportLogFile *this, unsigned int a2)
-
 void __stdcall CBBSupportLogFile::SetFileMode(int) {
   
   CBBSupportLogFile *result; // eax
@@ -55,7 +51,6 @@ void __stdcall CBBSupportLogFile::SetFileMode(int) {
 
 // address=[0x2f33ee0]
 // Decompiled from CBBSupportLogFile *__stdcall CBBSupportLogFile::SetFilePath(CBBSupportLogFile *this, wchar_t *a2)
-
 void __stdcall CBBSupportLogFile::SetFilePath(wchar_t const *) {
   
   CBBSupportLogFile *result; // eax
@@ -81,12 +76,7 @@ void __stdcall CBBSupportLogFile::SetFilePath(wchar_t const *) {
 
 
 // address=[0x2f33f50]
-// Decompiled from int __thiscall CBBSupportLogFile::SetFileModePathAndCreateOrDeleteIfDesired(
-        void *ecx0,
-        CBBSupportLogFile *this,
-        int a3,
-        const wchar_t *a4)
-
+// Decompiled from int __thiscall CBBSupportLogFile::SetFileModePathAndCreateOrDeleteIfDesired(  void *ecx0,  CBBSupportLogFile *this,  int a3,  const wchar_t *a4)
 void __stdcall CBBSupportLogFile::SetFileModePathAndCreateOrDeleteIfDesired(int,wchar_t const *) {
   
   int result; // eax
@@ -107,7 +97,6 @@ void __stdcall CBBSupportLogFile::SetFileModePathAndCreateOrDeleteIfDesired(int,
 
 // address=[0x2f33fc0]
 // Decompiled from void __stdcall CBBSupportLogFile::Write(int a1, LPCVOID lpBuffer, DWORD nNumberOfBytesToWrite)
-
 void __stdcall CBBSupportLogFile::Write(void const *,unsigned int) {
   
   DWORD dwErrCode; // [esp+0h] [ebp-10h]
@@ -130,7 +119,6 @@ void __stdcall CBBSupportLogFile::Write(void const *,unsigned int) {
 
 // address=[0x2f34050]
 // Decompiled from int __stdcall CBBSupportLogFile::Print(CBBSupportLogFile *this, const char *a2)
-
 void __stdcall CBBSupportLogFile::Print(char const *) {
   
   int result; // eax
@@ -150,7 +138,6 @@ void __stdcall CBBSupportLogFile::Print(char const *) {
 
 // address=[0x2f340a0]
 // Decompiled from void CBBSupportLogFile::PrintF(int a1, LPCSTR a2, ...)
-
 void __cdecl CBBSupportLogFile::PrintF(char const *,...) {
   
   DWORD dwErrCode; // [esp+0h] [ebp-414h]
@@ -175,7 +162,6 @@ void __cdecl CBBSupportLogFile::PrintF(char const *,...) {
 
 // address=[0x2f34190]
 // Decompiled from CBBSupportLogFile *__cdecl CBBSupportLogFile::PrintNewLine(CBBSupportLogFile *this)
-
 void __cdecl CBBSupportLogFile::PrintNewLine(void) {
   
   CBBSupportLogFile *result; // eax
@@ -194,7 +180,6 @@ void __cdecl CBBSupportLogFile::PrintNewLine(void) {
 
 // address=[0x2f341c0]
 // Decompiled from void __stdcall CBBSupportLogFile::Flush(HANDLE *this)
-
 void __stdcall CBBSupportLogFile::Flush(void) {
   
   DWORD dwErrCode; // [esp+0h] [ebp-4h]
@@ -210,7 +195,6 @@ void __stdcall CBBSupportLogFile::Flush(void) {
 
 // address=[0x2f34200]
 // Decompiled from void __stdcall CBBSupportLogFile::Open(CBBSupportLogFile *this)
-
 void __stdcall CBBSupportLogFile::Open(void) {
   
   HANDLE FileW; // eax
@@ -253,7 +237,6 @@ void __stdcall CBBSupportLogFile::Open(void) {
 
 // address=[0x2f34340]
 // Decompiled from void __stdcall CBBSupportLogFile::Delete(const WCHAR *this)
-
 void __stdcall CBBSupportLogFile::Delete(void) {
   
   DWORD dwErrCode; // [esp+0h] [ebp-4h]
@@ -266,7 +249,6 @@ void __stdcall CBBSupportLogFile::Delete(void) {
 
 // address=[0x2f34370]
 // Decompiled from void __stdcall CBBSupportLogFile::Close(CBBSupportLogFile *this)
-
 void __stdcall CBBSupportLogFile::Close(void) {
   
   DWORD dwErrCode; // [esp+0h] [ebp-8h]
@@ -291,7 +273,6 @@ void __stdcall CBBSupportLogFile::Close(void) {
 
 // address=[0x2f343e0]
 // Decompiled from char __stdcall CBBSupportLogFile::GetFilePath(CBBSupportLogFile *this, wchar_t *a2, unsigned int a3)
-
 bool __stdcall CBBSupportLogFile::GetFilePath(wchar_t *,unsigned int) {
   
   if ( *((_WORD *)this + 10) != 0 && *((_DWORD *)this + 1) != 0 )
@@ -309,7 +290,6 @@ bool __stdcall CBBSupportLogFile::GetFilePath(wchar_t *,unsigned int) {
 
 // address=[0x2f34670]
 // Decompiled from bool __stdcall CBBSupportLogFile::OpenIfNecessary(CBBSupportLogFile *this)
-
 bool __stdcall CBBSupportLogFile::OpenIfNecessary(void) {
   
   if ( *((_DWORD *)this + 2) == 0 && *((_DWORD *)this + 1) == 2 )

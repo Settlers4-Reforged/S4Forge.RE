@@ -4,7 +4,6 @@
 
 // address=[0x1360fd0]
 // Decompiled from CGameData *__thiscall CGameData::CGameData(CGameData *this)
-
  CGameData::CGameData(void) {
   
   *(_DWORD *)this = 0;
@@ -56,7 +55,6 @@
 
 // address=[0x1361270]
 // Decompiled from bool __thiscall CGameData::IsTutorial(CGameData *this)
-
 bool  CGameData::IsTutorial(void) {
   
   return *((_DWORD *)this + 15) == 4;
@@ -65,7 +63,6 @@ bool  CGameData::IsTutorial(void) {
 
 // address=[0x13612a0]
 // Decompiled from bool __thiscall CGameData::IsCampaign(CGameData *this)
-
 bool  CGameData::IsCampaign(void) {
   
   return *((_DWORD *)this + 15) == 3;
@@ -74,7 +71,6 @@ bool  CGameData::IsCampaign(void) {
 
 // address=[0x13612d0]
 // Decompiled from char __thiscall CGameData::IsLadder(CGameData *this)
-
 bool  CGameData::IsLadder(void) {
   
   return *((_BYTE *)this + 127);
@@ -82,9 +78,7 @@ bool  CGameData::IsLadder(void) {
 
 
 // address=[0x1395840]
-// Decompiled from // MFC 3.1-14.0 32bit
-int __thiscall CGameData::GetMode(CGameData *this)
-
+// Decompiled from int __thiscall CGameData::GetMode(CGameData *this)
 int  CGameData::GetMode(void) {
   
   return *((_DWORD *)this + 23);
@@ -93,7 +87,6 @@ int  CGameData::GetMode(void) {
 
 // address=[0x139fe80]
 // Decompiled from char __thiscall CGameData::IsNetworkGame(CGameData *this)
-
 bool  CGameData::IsNetworkGame(void) {
   
   return *((_BYTE *)this + 124);
@@ -101,10 +94,7 @@ bool  CGameData::IsNetworkGame(void) {
 
 
 // address=[0x144fe90]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CGameData::GetTickCounter(CGameData *this)
-
+// Decompiled from int __thiscall CGameData::GetTickCounter(CGameData *this)
 unsigned int  CGameData::GetTickCounter(void)const {
   
   return *(_DWORD *)this;
@@ -113,7 +103,6 @@ unsigned int  CGameData::GetTickCounter(void)const {
 
 // address=[0x144feb0]
 // Decompiled from char __thiscall CGameData::IsGameWon(CGameData *this)
-
 bool  CGameData::IsGameWon(void) {
   
   return *((_BYTE *)this + 52);
@@ -121,9 +110,7 @@ bool  CGameData::IsGameWon(void) {
 
 
 // address=[0x144ff50]
-// Decompiled from // Microsoft VisualC 14/net runtime
-unsigned int __thiscall CGameData::TeamWon(CUserToolsManager *this)
-
+// Decompiled from unsigned int __thiscall CGameData::TeamWon(CUserToolsManager *this)
 int  CGameData::TeamWon(void) {
   
   return *((_DWORD *)this + 14);
@@ -132,7 +119,6 @@ int  CGameData::TeamWon(void) {
 
 // address=[0x14606b0]
 // Decompiled from char __thiscall CGameData::IsLastFrameRendered(CGameData *this)
-
 bool  CGameData::IsLastFrameRendered(void) {
   
   return *((_BYTE *)this + 125);
@@ -141,7 +127,6 @@ bool  CGameData::IsLastFrameRendered(void) {
 
 // address=[0x146ae80]
 // Decompiled from const char *__thiscall CGameData::Rand(std::_Locinfo *this)
-
 unsigned int  CGameData::Rand(void) {
   
   return (const char *)CRandom16::Rand((std::_Locinfo *)((char *)this + 44));
@@ -150,7 +135,6 @@ unsigned int  CGameData::Rand(void) {
 
 // address=[0x147a2f0]
 // Decompiled from char *__thiscall CGameData::GetEconomyGoodsArray(CGameData *this)
-
 unsigned char *  CGameData::GetEconomyGoodsArray(void) {
   
   return (char *)this + 128;
@@ -159,7 +143,6 @@ unsigned char *  CGameData::GetEconomyGoodsArray(void) {
 
 // address=[0x14aa9a0]
 // Decompiled from void __thiscall CGameData::~CGameData(CGameData *this)
-
  CGameData::~CGameData(void) {
   
   std::string::~string((char *)this + 96);
@@ -169,7 +152,6 @@ unsigned char *  CGameData::GetEconomyGoodsArray(void) {
 
 // address=[0x14aac40]
 // Decompiled from int __thiscall CGameData::GetModeString(char *this, int a2)
-
 std::string  CGameData::GetModeString(void) {
   
   std::string::string(this + 96);
@@ -179,7 +161,6 @@ std::string  CGameData::GetModeString(void) {
 
 // address=[0x14aad60]
 // Decompiled from int __thiscall CGameData::GetTypeString(char *this, int a2)
-
 std::string  CGameData::GetTypeString(void) {
   
   std::string::string(this + 64);
@@ -189,7 +170,6 @@ std::string  CGameData::GetTypeString(void) {
 
 // address=[0x14aaf30]
 // Decompiled from CGameData *__thiscall CGameData::SetLastFrameRendered(CGameData *this, bool a2)
-
 void  CGameData::SetLastFrameRendered(bool) {
   
   CGameData *result; // eax
@@ -202,7 +182,6 @@ void  CGameData::SetLastFrameRendered(bool) {
 
 // address=[0x14b4a60]
 // Decompiled from CGameData *__thiscall CGameData::TeamWon(CGameData *this, int a2)
-
 void  CGameData::TeamWon(int) {
   
   CGameData *result; // eax

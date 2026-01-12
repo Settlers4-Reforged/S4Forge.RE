@@ -4,7 +4,6 @@
 
 // address=[0x14018a0]
 // Decompiled from void __cdecl CProductionPileRole::New(struct std::_Facet_base *a1)
-
 static class CPersistence * __cdecl CProductionPileRole::New(std::istream &) {
   
   if ( operator new(8u) )
@@ -14,7 +13,6 @@ static class CPersistence * __cdecl CProductionPileRole::New(std::istream &) {
 
 // address=[0x1560240]
 // Decompiled from void __thiscall CProductionPileRole::~CProductionPileRole(CProductionPileRole *this)
-
  CProductionPileRole::~CProductionPileRole(void) {
   
   IPileRole::~IPileRole(this);
@@ -23,7 +21,6 @@ static class CPersistence * __cdecl CProductionPileRole::New(std::istream &) {
 
 // address=[0x1560300]
 // Decompiled from int __thiscall CProductionPileRole::ClassID(CProductionPileRole *this)
-
 unsigned long  CProductionPileRole::ClassID(void)const {
   
   return CProductionPileRole::m_iClassID;
@@ -32,7 +29,6 @@ unsigned long  CProductionPileRole::ClassID(void)const {
 
 // address=[0x1560400]
 // Decompiled from int __cdecl CProductionPileRole::Load(int a1)
-
 static class CProductionPileRole * __cdecl CProductionPileRole::Load(std::istream &) {
   
   void **v1; // eax
@@ -45,7 +41,6 @@ static class CProductionPileRole * __cdecl CProductionPileRole::Load(std::istrea
 
 // address=[0x15615d0]
 // Decompiled from int __thiscall CProductionPileRole::Init(CProductionPileRole *this, struct CPile *a2)
-
 void  CProductionPileRole::Init(class CPile *) {
   
   int v2; // eax
@@ -84,7 +79,6 @@ void  CProductionPileRole::Init(class CPile *) {
 
 // address=[0x1561680]
 // Decompiled from int __thiscall CProductionPileRole::LogicUpdate(CProductionPileRole *this, struct CPile *a2)
-
 void  CProductionPileRole::LogicUpdate(class CPile *) {
   
   int v2; // eax
@@ -103,7 +97,6 @@ void  CProductionPileRole::LogicUpdate(class CPile *) {
 
 // address=[0x15616d0]
 // Decompiled from void __thiscall CProductionPileRole::Increase(CProductionPileRole *this, struct CPile *a2, int a3)
-
 void  CProductionPileRole::Increase(class CPile *,int) {
   
   int v3; // eax
@@ -125,7 +118,6 @@ void  CProductionPileRole::Increase(class CPile *,int) {
 
 // address=[0x1561750]
 // Decompiled from int __thiscall CProductionPileRole::ReassessDistance(CProductionPileRole *this, struct CPile *a2, int *a3)
-
 void  CProductionPileRole::ReassessDistance(class CPile *,int &) {
   
   int result; // eax
@@ -138,7 +130,6 @@ void  CProductionPileRole::ReassessDistance(class CPile *,int &) {
 
 // address=[0x1561770]
 // Decompiled from _DWORD *__thiscall CProductionPileRole::CProductionPileRole(_DWORD *this, int a2)
-
  CProductionPileRole::CProductionPileRole(std::istream &) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
@@ -165,7 +156,6 @@ void  CProductionPileRole::ReassessDistance(class CPile *,int &) {
 
 // address=[0x1561820]
 // Decompiled from int __thiscall CProductionPileRole::Store(void *this, struct std::ostream *a2)
-
 void  CProductionPileRole::Store(std::ostream &) {
   
   int v3[2]; // [esp+0h] [ebp-8h] BYREF
@@ -182,7 +172,6 @@ void  CProductionPileRole::Store(std::ostream &) {
 
 // address=[0x15601a0]
 // Decompiled from CProductionPileRole *__thiscall CProductionPileRole::CProductionPileRole(CProductionPileRole *this)
-
  CProductionPileRole::CProductionPileRole(void) {
   
   IPileRole::IPileRole(this);

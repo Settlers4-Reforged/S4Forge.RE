@@ -4,7 +4,6 @@
 
 // address=[0x2fd5550]
 // Decompiled from ISoundEngine *__thiscall ISoundEngine::ISoundEngine(ISoundEngine *this)
-
  ISoundEngine::ISoundEngine(void) {
   
   CSoundSystem *v3; // [esp+Ch] [ebp-14h]
@@ -30,7 +29,6 @@
 
 // address=[0x2fd5630]
 // Decompiled from int __thiscall ISoundEngine::~ISoundEngine(ISoundEngine *this)
-
  ISoundEngine::~ISoundEngine(void) {
   
   *(_DWORD *)this = &ISoundEngine::_vftable_;
@@ -52,7 +50,6 @@
 
 // address=[0x2fd5720]
 // Decompiled from bool __thiscall ISoundEngine::Init(ISoundEngine *this, wchar_t *a2, int a3, bool a4, int a5, int a6, int a7)
-
 bool  ISoundEngine::Init(wchar_t *,int,bool,int,int,int) {
   
   const char *v7; // eax
@@ -83,7 +80,6 @@ bool  ISoundEngine::Init(wchar_t *,int,bool,int,int,int) {
 
 // address=[0x2fd5840]
 // Decompiled from void __thiscall ISoundEngine::SetTimerInterval(ISoundEngine *this, int a2)
-
 void  ISoundEngine::SetTimerInterval(int) {
   
   if ( !g_pcSoundSystem && BBSupportDbgReport(2, "SoundEngineInterface.cpp", 222, "g_pcSoundSystem") == 1 )
@@ -93,9 +89,7 @@ void  ISoundEngine::SetTimerInterval(int) {
 
 
 // address=[0x2fd5890]
-// Decompiled from // public: int __thiscall ISoundEngine::GetNumberOfSoundCards(void)
-int ISoundEngine::GetNumberOfSoundCards()
-
+// Decompiled from int ISoundEngine::GetNumberOfSoundCards()
 int  ISoundEngine::GetNumberOfSoundCards(void) {
   
   if ( g_pcSoundSystem )
@@ -106,9 +100,7 @@ int  ISoundEngine::GetNumberOfSoundCards(void) {
 
 
 // address=[0x2fd58c0]
-// Decompiled from // public: void __thiscall ISoundEngine::SetSoundCard(int)
-CSoundSystem *__stdcall ISoundEngine::SetSoundCard(int a1)
-
+// Decompiled from CSoundSystem *__stdcall ISoundEngine::SetSoundCard(int a1)
 void  ISoundEngine::SetSoundCard(int) {
   
   CSoundSystem *result; // eax
@@ -120,9 +112,7 @@ void  ISoundEngine::SetSoundCard(int) {
 
 
 // address=[0x2fd58f0]
-// Decompiled from // public: class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > __thiscall ISoundEngine::GetSoundCardName(int)
-void *__stdcall ISoundEngine::GetSoundCardName(void *a1, int a2)
-
+// Decompiled from void *__stdcall ISoundEngine::GetSoundCardName(void *a1, int a2)
 std::string  ISoundEngine::GetSoundCardName(int) {
   
   if ( g_pcSoundSystem )
@@ -135,7 +125,6 @@ std::string  ISoundEngine::GetSoundCardName(int) {
 
 // address=[0x2fd5950]
 // Decompiled from unsigned int __thiscall ISoundEngine::PlaySoundFile(ISoundEngine *this, const wchar_t *a2, int a3, int a4)
-
 unsigned int  ISoundEngine::PlaySoundFile(wchar_t const *,int,int) {
   
   const char *v4; // eax
@@ -164,7 +153,6 @@ unsigned int  ISoundEngine::PlaySoundFile(wchar_t const *,int,int) {
 
 // address=[0x2fd5a40]
 // Decompiled from int __thiscall ISoundEngine::PlayStream(ISoundEngine *this, const wchar_t *a2, unsigned int a3, unsigned int a4)
-
 unsigned int  ISoundEngine::PlayStream(wchar_t const *,int,int) {
   
   const char *v4; // eax
@@ -192,16 +180,7 @@ unsigned int  ISoundEngine::PlayStream(wchar_t const *,int,int) {
 
 
 // address=[0x2fd5b30]
-// Decompiled from unsigned int __thiscall ISoundEngine::PlaySoundFromMemory(
-        ISoundEngine *this,
-        unsigned int *a2,
-        char *a3,
-        unsigned int a4,
-        int a5,
-        int a6,
-        int a7,
-        bool a8)
-
+// Decompiled from unsigned int __thiscall ISoundEngine::PlaySoundFromMemory(  ISoundEngine *this,  unsigned int *a2,  char *a3,  unsigned int a4,  int a5,  int a6,  int a7,  bool a8)
 unsigned int  ISoundEngine::PlaySoundFromMemory(unsigned int *,char *,unsigned int,int,int,int,bool) {
   
   if ( !g_pcSoundSystem && BBSupportDbgReport(2, "SoundEngineInterface.cpp", 279, "g_pcSoundSystem") == 1 )
@@ -212,7 +191,6 @@ unsigned int  ISoundEngine::PlaySoundFromMemory(unsigned int *,char *,unsigned i
 
 // address=[0x2fd5b90]
 // Decompiled from bool __thiscall ISoundEngine::ChangeVolume(ISoundEngine *this, unsigned int a2, int a3)
-
 bool  ISoundEngine::ChangeVolume(unsigned int,int) {
   
   if ( !g_pcSoundSystem && BBSupportDbgReport(2, "SoundEngineInterface.cpp", 182, "g_pcSoundSystem") == 1 )
@@ -223,7 +201,6 @@ bool  ISoundEngine::ChangeVolume(unsigned int,int) {
 
 // address=[0x2fd5be0]
 // Decompiled from int __thiscall ISoundEngine::GetVolume(ISoundEngine *this, unsigned int a2)
-
 int  ISoundEngine::GetVolume(unsigned int) {
   
   if ( !g_pcSoundSystem && BBSupportDbgReport(2, "SoundEngineInterface.cpp", 192, "g_pcSoundSystem") == 1 )
@@ -234,7 +211,6 @@ int  ISoundEngine::GetVolume(unsigned int) {
 
 // address=[0x2fd5c30]
 // Decompiled from bool __thiscall ISoundEngine::ChangePan(ISoundEngine *this, unsigned int a2, int a3)
-
 bool  ISoundEngine::ChangePan(unsigned int,int) {
   
   if ( !g_pcSoundSystem && BBSupportDbgReport(2, "SoundEngineInterface.cpp", 202, "g_pcSoundSystem") == 1 )
@@ -245,7 +221,6 @@ bool  ISoundEngine::ChangePan(unsigned int,int) {
 
 // address=[0x2fd5c80]
 // Decompiled from bool __thiscall ISoundEngine::Fade(ISoundEngine *this, unsigned int a2, int a3, int a4)
-
 bool  ISoundEngine::Fade(unsigned int,int,int) {
   
   if ( !g_pcSoundSystem && BBSupportDbgReport(2, "SoundEngineInterface.cpp", 212, "g_pcSoundSystem") == 1 )
@@ -256,7 +231,6 @@ bool  ISoundEngine::Fade(unsigned int,int,int) {
 
 // address=[0x2fd5cd0]
 // Decompiled from void __thiscall ISoundEngine::StopSample(ISoundEngine *this, unsigned int a2)
-
 void  ISoundEngine::StopSample(unsigned int) {
   
   if ( !g_pcSoundSystem && BBSupportDbgReport(2, "SoundEngineInterface.cpp", 289, "g_pcSoundSystem") == 1 )
@@ -267,7 +241,6 @@ void  ISoundEngine::StopSample(unsigned int) {
 
 // address=[0x2fd5d20]
 // Decompiled from void __thiscall ISoundEngine::StopStreams(ISoundEngine *this)
-
 void  ISoundEngine::StopStreams(void) {
   
   if ( !g_pcSoundSystem && BBSupportDbgReport(2, "SoundEngineInterface.cpp", 299, "g_pcSoundSystem") == 1 )
@@ -277,9 +250,7 @@ void  ISoundEngine::StopStreams(void) {
 
 
 // address=[0x2fd5d60]
-// Decompiled from // public: void __thiscall ISoundEngine::StopSounds(void)
-CSoundSystem *ISoundEngine::StopSounds()
-
+// Decompiled from CSoundSystem *ISoundEngine::StopSounds()
 void  ISoundEngine::StopSounds(void) {
   
   if ( !g_pcSoundSystem && BBSupportDbgReport(2, "SoundEngineInterface.cpp", 309, "g_pcSoundSystem") == 1 )
@@ -290,7 +261,6 @@ void  ISoundEngine::StopSounds(void) {
 
 // address=[0x2fd5da0]
 // Decompiled from void __thiscall ISoundEngine::StopPlayback(ISoundEngine *this)
-
 void  ISoundEngine::StopPlayback(void) {
   
   if ( !g_pcSoundSystem && BBSupportDbgReport(2, "SoundEngineInterface.cpp", 114, "g_pcSoundSystem") == 1 )
@@ -301,7 +271,6 @@ void  ISoundEngine::StopPlayback(void) {
 
 // address=[0x2fd5de0]
 // Decompiled from void __thiscall ISoundEngine::ChangeStreamVolume(ISoundEngine *this, int a2)
-
 void  ISoundEngine::ChangeStreamVolume(int) {
   
   if ( g_pcSoundSystem )
@@ -311,7 +280,6 @@ void  ISoundEngine::ChangeStreamVolume(int) {
 
 // address=[0x2fd5e10]
 // Decompiled from void __thiscall ISoundEngine::ChangeSoundVolume(ISoundEngine *this, int a2)
-
 void  ISoundEngine::ChangeSoundVolume(int) {
   
   if ( g_pcSoundSystem )
@@ -321,7 +289,6 @@ void  ISoundEngine::ChangeSoundVolume(int) {
 
 // address=[0x2fd5e40]
 // Decompiled from void __thiscall ISoundEngine::PausePlayback(ISoundEngine *this, bool a2)
-
 void  ISoundEngine::PausePlayback(bool) {
   
   if ( g_pcSoundSystem )
@@ -336,7 +303,6 @@ void  ISoundEngine::PausePlayback(bool) {
 
 // address=[0x2fd5e80]
 // Decompiled from void __thiscall ISoundEngine::Perform(ISoundEngine *this)
-
 void  ISoundEngine::Perform(void) {
   
   if ( !g_pcSoundSystem && BBSupportDbgReport(2, "SoundEngineInterface.cpp", 232, "g_pcSoundSystem") == 1 )
@@ -348,9 +314,7 @@ void  ISoundEngine::Perform(void) {
 
 
 // address=[0x2fd5ee0]
-// Decompiled from // public: void __thiscall ISoundEngine::Shutdown(void)
-int ISoundEngine::Shutdown()
-
+// Decompiled from int ISoundEngine::Shutdown()
 void  ISoundEngine::Shutdown(void) {
   
   if ( !g_pcSoundSystem && BBSupportDbgReport(2, "SoundEngineInterface.cpp", 124, "g_pcSoundSystem") == 1 )
@@ -362,9 +326,7 @@ void  ISoundEngine::Shutdown(void) {
 
 
 // address=[0x2fd5f40]
-// Decompiled from // public: int __thiscall ISoundEngine::GetCpuUsage(void)
-int ISoundEngine::GetCpuUsage()
-
+// Decompiled from int ISoundEngine::GetCpuUsage()
 int  ISoundEngine::GetCpuUsage(void) {
   
   if ( !g_pcSoundSystem && BBSupportDbgReport(2, "SoundEngineInterface.cpp", 138, "g_pcSoundSystem") == 1 )
@@ -375,7 +337,6 @@ int  ISoundEngine::GetCpuUsage(void) {
 
 // address=[0x2fd5f80]
 // Decompiled from unsigned int __thiscall ISoundEngine::GetDigitalDriver(ISoundEngine *this)
-
 unsigned int  ISoundEngine::GetDigitalDriver(void) {
   
   if ( !g_pcSoundSystem && BBSupportDbgReport(2, "SoundEngineInterface.cpp", 319, "g_pcSoundSystem") == 1 )
@@ -386,7 +347,6 @@ unsigned int  ISoundEngine::GetDigitalDriver(void) {
 
 // address=[0x2fd5fc0]
 // Decompiled from bool __thiscall ISoundEngine::IsRunning(ISoundEngine *this, unsigned int a2)
-
 bool  ISoundEngine::IsRunning(unsigned int) {
   
   if ( !g_pcSoundSystem && BBSupportDbgReport(2, "SoundEngineInterface.cpp", 329, "g_pcSoundSystem") == 1 )
@@ -397,7 +357,6 @@ bool  ISoundEngine::IsRunning(unsigned int) {
 
 // address=[0x2fd6010]
 // Decompiled from void __thiscall ISoundEngine::CreatePlaylists(ISoundEngine *this, int a2)
-
 void  ISoundEngine::CreatePlaylists(int) {
   
   if ( g_pcSoundSystem )
@@ -407,7 +366,6 @@ void  ISoundEngine::CreatePlaylists(int) {
 
 // address=[0x2fd6040]
 // Decompiled from void __thiscall ISoundEngine::InitPlaylist(ISoundEngine *this, int a2, int a3)
-
 void  ISoundEngine::InitPlaylist(int,int) {
   
   if ( !g_pcSoundSystem && BBSupportDbgReport(2, "SoundEngineInterface.cpp", 251, "g_pcSoundSystem") == 1 )
@@ -418,7 +376,6 @@ void  ISoundEngine::InitPlaylist(int,int) {
 
 // address=[0x2fd6090]
 // Decompiled from char __stdcall ISoundEngine::AddTitleToPlaylist(int a1, int a2, int a3)
-
 bool  ISoundEngine::AddTitleToPlaylist(int,std::wstring *,int) {
   
   char v4; // [esp+Bh] [ebp-85h]
@@ -445,7 +402,6 @@ bool  ISoundEngine::AddTitleToPlaylist(int,std::wstring *,int) {
 
 // address=[0x2fd6170]
 // Decompiled from unsigned int __thiscall ISoundEngine::StartPlaylist(ISoundEngine *this, int a2, int a3)
-
 unsigned int  ISoundEngine::StartPlaylist(int,int) {
   
   if ( g_pcSoundSystem )
@@ -457,7 +413,6 @@ unsigned int  ISoundEngine::StartPlaylist(int,int) {
 
 // address=[0x2fd61a0]
 // Decompiled from unsigned int __thiscall ISoundEngine::ChangePlaylist(ISoundEngine *this, int a2, int a3)
-
 unsigned int  ISoundEngine::ChangePlaylist(int,int) {
   
   if ( g_pcSoundSystem )
@@ -468,9 +423,7 @@ unsigned int  ISoundEngine::ChangePlaylist(int,int) {
 
 
 // address=[0x2fd61d0]
-// Decompiled from // public: void __thiscall ISoundEngine::SkipTitle(void)
-int ISoundEngine::SkipTitle()
-
+// Decompiled from int ISoundEngine::SkipTitle()
 void  ISoundEngine::SkipTitle(void) {
   
   int result; // eax
@@ -482,9 +435,7 @@ void  ISoundEngine::SkipTitle(void) {
 
 
 // address=[0x2fd61f0]
-// Decompiled from // public: void __thiscall ISoundEngine::VCToggleRecording(bool)
-void __stdcall ISoundEngine::VCToggleRecording(bool a1)
-
+// Decompiled from void __stdcall ISoundEngine::VCToggleRecording(bool a1)
 void  ISoundEngine::VCToggleRecording(bool) {
   
   if ( g_pcVoiceChat )
@@ -494,7 +445,6 @@ void  ISoundEngine::VCToggleRecording(bool) {
 
 // address=[0x2fd6220]
 // Decompiled from char __thiscall ISoundEngine::VCStart(ISoundEngine *this, struct IEventEngine *a2, int a3)
-
 bool  ISoundEngine::VCStart(class IEventEngine *,int) {
   
   int SamplingRate; // eax
@@ -525,9 +475,7 @@ bool  ISoundEngine::VCStart(class IEventEngine *,int) {
 
 
 // address=[0x2fd6330]
-// Decompiled from // public: void __thiscall ISoundEngine::VCStop(void)
-void ISoundEngine::VCStop()
-
+// Decompiled from void ISoundEngine::VCStop()
 void  ISoundEngine::VCStop(void) {
   
   if ( g_pcVoiceChat )
@@ -539,9 +487,7 @@ void  ISoundEngine::VCStop(void) {
 
 
 // address=[0x2fd6380]
-// Decompiled from // public: bool __thiscall ISoundEngine::VCReceivePackage(signed char *,int)
-char __stdcall ISoundEngine::VCReceivePackage(void *Src, int a2)
-
+// Decompiled from char __stdcall ISoundEngine::VCReceivePackage(void *Src, int a2)
 bool  ISoundEngine::VCReceivePackage(signed char *,int) {
   
   if ( g_pcVoiceChat )
@@ -552,9 +498,7 @@ bool  ISoundEngine::VCReceivePackage(signed char *,int) {
 
 
 // address=[0x2fd63b0]
-// Decompiled from // public: int __thiscall ISoundEngine::VCGetInputRate(void)
-int ISoundEngine::VCGetInputRate()
-
+// Decompiled from int ISoundEngine::VCGetInputRate()
 int  ISoundEngine::VCGetInputRate(void) {
   
   if ( g_pcVoiceChat )
@@ -565,9 +509,7 @@ int  ISoundEngine::VCGetInputRate(void) {
 
 
 // address=[0x2fd63e0]
-// Decompiled from // public: bool __thiscall ISoundEngine::VCUsesFullDuplex(void)
-bool ISoundEngine::VCUsesFullDuplex()
-
+// Decompiled from bool ISoundEngine::VCUsesFullDuplex()
 bool  ISoundEngine::VCUsesFullDuplex(void) {
   
   return g_pcVoiceChat && CVoiceChat::UsesFullDuplex((CVoiceChat *)g_pcVoiceChat);
@@ -575,9 +517,7 @@ bool  ISoundEngine::VCUsesFullDuplex(void) {
 
 
 // address=[0x2fd6410]
-// Decompiled from // public: bool __thiscall ISoundEngine::VCIsRecording(void)
-bool ISoundEngine::VCIsRecording()
-
+// Decompiled from bool ISoundEngine::VCIsRecording()
 bool  ISoundEngine::VCIsRecording(void) {
   
   return g_pcVoiceChat && CVoiceChat::IsRecording((CVoiceChat *)g_pcVoiceChat);
@@ -585,9 +525,7 @@ bool  ISoundEngine::VCIsRecording(void) {
 
 
 // address=[0x2fd6440]
-// Decompiled from // public: void __thiscall ISoundEngine::VCCalcBaseNoise(void)
-void ISoundEngine::VCCalcBaseNoise()
-
+// Decompiled from void ISoundEngine::VCCalcBaseNoise()
 void  ISoundEngine::VCCalcBaseNoise(void) {
   
   if ( g_pcVoiceChat )
@@ -596,9 +534,7 @@ void  ISoundEngine::VCCalcBaseNoise(void) {
 
 
 // address=[0x2fd6460]
-// Decompiled from // public: void __thiscall ISoundEngine::VCSetTestMode(bool)
-CVoiceChat *__stdcall ISoundEngine::VCSetTestMode(bool a1)
-
+// Decompiled from CVoiceChat *__stdcall ISoundEngine::VCSetTestMode(bool a1)
 void  ISoundEngine::VCSetTestMode(bool) {
   
   CVoiceChat *result; // eax
@@ -611,7 +547,6 @@ void  ISoundEngine::VCSetTestMode(bool) {
 
 // address=[0x2fd6490]
 // Decompiled from CVoiceChat *__thiscall ISoundEngine::VCSetVolume(ISoundEngine *this, int a2)
-
 void  ISoundEngine::VCSetVolume(int) {
   
   CVoiceChat *result; // eax
@@ -624,7 +559,6 @@ void  ISoundEngine::VCSetVolume(int) {
 
 // address=[0x2fd64c0]
 // Decompiled from char __thiscall ISoundEngine::VCSetMicVolume(ISoundEngine *this, unsigned int a2)
-
 void  ISoundEngine::VCSetMicVolume(int) {
   
   char result; // al
@@ -636,9 +570,7 @@ void  ISoundEngine::VCSetMicVolume(int) {
 
 
 // address=[0x2fd64f0]
-// Decompiled from // public: int __thiscall ISoundEngine::VCGetMicVolume(void)
-int ISoundEngine::VCGetMicVolume()
-
+// Decompiled from int ISoundEngine::VCGetMicVolume()
 int  ISoundEngine::VCGetMicVolume(void) {
   
   if ( g_pcVoiceChat )

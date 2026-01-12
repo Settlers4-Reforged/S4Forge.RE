@@ -3,20 +3,7 @@
 // Definitions for class CObjectBlob
 
 // address=[0x2fca1a0]
-// Decompiled from CObjectBlob *__thiscall CObjectBlob::CObjectBlob(
-        CObjectBlob *this,
-        int a2,
-        int a3,
-        int a4,
-        int a5,
-        int a6,
-        int a7,
-        int a8,
-        int a9,
-        int a10,
-        int a11,
-        struct CCheckLayer *a12)
-
+// Decompiled from CObjectBlob *__thiscall CObjectBlob::CObjectBlob(  CObjectBlob *this,  int a2,  int a3,  int a4,  int a5,  int a6,  int a7,  int a8,  int a9,  int a10,  int a11,  struct CCheckLayer *a12)
  CObjectBlob::CObjectBlob(int,int,int,int,int,int,int,int,int,int,class CCheckLayer *) {
   
   CBlob::CBlob(this, a2, a3, a4, a5, a9, a10, a11, a12);
@@ -30,7 +17,6 @@
 
 // address=[0x2fca200]
 // Decompiled from int __thiscall CObjectBlob::processFillPoint(CCheckLayer **this, int a2, int a3)
-
 void  CObjectBlob::processFillPoint(int,int) {
   
   unsigned int v3; // eax

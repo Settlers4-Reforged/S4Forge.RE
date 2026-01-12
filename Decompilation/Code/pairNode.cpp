@@ -3,9 +3,7 @@
 // Definitions for class pairNode
 
 // address=[0x3081380]
-// Decompiled from // Microsoft VisualC 14/net runtime
-pairNode *__thiscall pairNode::pairNode(pairNode *this, struct DNameNode *a2, struct DNameNode *a3)
-
+// Decompiled from pairNode *__thiscall pairNode::pairNode(pairNode *this, struct DNameNode *a2, struct DNameNode *a3)
  pairNode::pairNode(class DNameNode *,class DNameNode *) {
   
   DNameNode::DNameNode(this);
@@ -19,7 +17,6 @@ pairNode *__thiscall pairNode::pairNode(pairNode *this, struct DNameNode *a2, st
 
 // address=[0x30880a0]
 // Decompiled from char __thiscall pairNode::getLastChar(pairNode *this)
-
 char  pairNode::getLastChar(void)const {
   
   char v3; // [esp+13h] [ebp-1h]
@@ -33,7 +30,6 @@ char  pairNode::getLastChar(void)const {
 
 // address=[0x308a6b0]
 // Decompiled from char *__thiscall pairNode::getString(pairNode *this, char *a2, char *a3)
-
 char *  pairNode::getString(char *,char *)const {
   
   unsigned int v4; // [esp+Ch] [ebp-8h]
@@ -51,7 +47,6 @@ char *  pairNode::getString(char *,char *)const {
 
 // address=[0x308cff0]
 // Decompiled from int __thiscall pairNode::length(pairNode *this)
-
 int  pairNode::length(void)const {
   
   int v1; // esi

@@ -4,7 +4,6 @@
 
 // address=[0x2f029a0]
 // Decompiled from Cryptor *__thiscall Cryptor::Cryptor(Cryptor *this)
-
  Cryptor::Cryptor(void) {
   
   std::string::string();
@@ -26,7 +25,6 @@
 
 // address=[0x2f02a30]
 // Decompiled from void __thiscall Cryptor::~Cryptor(Cryptor *this)
-
  Cryptor::~Cryptor(void) {
   
   std::string::~string(this);
@@ -35,7 +33,6 @@
 
 // address=[0x2f02a50]
 // Decompiled from void __thiscall Cryptor::Set_Key(_DWORD *this, int a2)
-
 void  Cryptor::Set_Key(std::string const &) {
   
   char *v2; // eax
@@ -84,7 +81,6 @@ void  Cryptor::Set_Key(std::string const &) {
 
 // address=[0x2f02c10]
 // Decompiled from int __thiscall Cryptor::Transform_Char(Cryptor *this, unsigned __int8 *a2)
-
 void  Cryptor::Transform_Char(unsigned char &) {
   
   int result; // eax
@@ -136,7 +132,6 @@ void  Cryptor::Transform_Char(unsigned char &) {
 
 // address=[0x2f02d60]
 // Decompiled from int __thiscall Cryptor::Transform_File(Cryptor *this, int a2, void *a3)
-
 void  Cryptor::Transform_File(std::string const &,std::string const &) {
   
   char *v3; // eax
@@ -184,9 +179,7 @@ void  Cryptor::Transform_File(std::string const &,std::string const &) {
 
 
 // address=[0x2f02e90]
-// Decompiled from // public: void __thiscall Cryptor::Transform_String(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > &)
-int __thiscall Cryptor::Transform_String(Cryptor *this, int a2, int a3)
-
+// Decompiled from int __thiscall Cryptor::Transform_String(Cryptor *this, int a2, int a3)
 void  Cryptor::Transform_String(std::string const &,std::string &) {
   
   int result; // eax
@@ -207,9 +200,7 @@ void  Cryptor::Transform_String(std::string const &,std::string &) {
 
 
 // address=[0x2f02f00]
-// Decompiled from // public: void __thiscall Cryptor::Weak_Transform_Char(unsigned char &)
-int __thiscall Cryptor::Weak_Transform_Char(_DWORD *this, _BYTE *a2)
-
+// Decompiled from int __thiscall Cryptor::Weak_Transform_Char(_DWORD *this, _BYTE *a2)
 void  Cryptor::Weak_Transform_Char(unsigned char &) {
   
   int result; // eax

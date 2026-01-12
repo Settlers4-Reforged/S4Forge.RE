@@ -4,7 +4,6 @@
 
 // address=[0x2f2a930]
 // Decompiled from HuffStat *__thiscall HuffStat::HuffStat(HuffStat *this)
-
  HuffStat::HuffStat(void) {
   
   *(_DWORD *)this = operator new[](0x224u);
@@ -15,7 +14,6 @@
 
 // address=[0x2f2a970]
 // Decompiled from int __thiscall HuffStat::~HuffStat(void **this)
-
  HuffStat::~HuffStat(void) {
   
   return operator delete[](*this);
@@ -24,7 +22,6 @@
 
 // address=[0x2f2a9a0]
 // Decompiled from int __thiscall HuffStat::makeSortedTmp(HuffStat *this, struct HuffStatTmpStruct *a2)
-
 int  HuffStat::makeSortedTmp(struct HuffStatTmpStruct *) {
   
   int v3; // [esp+4h] [ebp-Ch]

@@ -4,7 +4,6 @@
 
 // address=[0x1402340]
 // Decompiled from int __cdecl CTowerSoldier::New(int a1)
-
 static class CPersistence * __cdecl CTowerSoldier::New(std::istream &) {
   
   if ( operator new(0x34u) )
@@ -16,7 +15,6 @@ static class CPersistence * __cdecl CTowerSoldier::New(std::istream &) {
 
 // address=[0x15139d0]
 // Decompiled from int __thiscall CTowerSoldier::GetSlot(CTowerSoldier *this)
-
 int  CTowerSoldier::GetSlot(void)const {
   
   return *((unsigned __int8 *)this + 44);
@@ -25,7 +23,6 @@ int  CTowerSoldier::GetSlot(void)const {
 
 // address=[0x1588980]
 // Decompiled from int __cdecl CTowerSoldier::Load(int a1)
-
 static class CTowerSoldier * __cdecl CTowerSoldier::Load(std::istream &) {
   
   void **v1; // eax
@@ -38,7 +35,6 @@ static class CTowerSoldier * __cdecl CTowerSoldier::Load(std::istream &) {
 
 // address=[0x15948d0]
 // Decompiled from int __thiscall CTowerSoldier::InitWalking(CTowerSoldier *this, struct CSettler *a2)
-
 class CWalking *  CTowerSoldier::InitWalking(class CSettler *) {
   
   int v2; // eax
@@ -53,7 +49,6 @@ class CWalking *  CTowerSoldier::InitWalking(class CSettler *) {
 
 // address=[0x1594910]
 // Decompiled from void __thiscall CTowerSoldier::LogicUpdate(CTowerSoldier *this, struct CSettler *a2)
-
 void  CTowerSoldier::LogicUpdate(class CSettler *) {
   
   int v2; // eax
@@ -294,10 +289,7 @@ LABEL_35:
 
 
 // address=[0x1594ef0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CTowerSoldier::PostLoadInit(CTowerSoldier *this, struct CSettler *a2)
-
+// Decompiled from void __thiscall CTowerSoldier::PostLoadInit(CTowerSoldier *this, struct CSettler *a2)
 void  CTowerSoldier::PostLoadInit(class CSettler *) {
   
   ;
@@ -306,7 +298,6 @@ void  CTowerSoldier::PostLoadInit(class CSettler *) {
 
 // address=[0x1594f00]
 // Decompiled from char __thiscall CTowerSoldier::SetFree(CTowerSoldier *this, struct CSettler *a2, int a3)
-
 bool  CTowerSoldier::SetFree(class CSettler *,int) {
   
   CBuilding *v3; // eax
@@ -324,7 +315,6 @@ bool  CTowerSoldier::SetFree(class CSettler *,int) {
 
 // address=[0x1594f50]
 // Decompiled from int __thiscall CTowerSoldier::SetTowerInfo(int this, unsigned int a2, int a3, unsigned int a4)
-
 void  CTowerSoldier::SetTowerInfo(int,enum CTowerSoldier::T_TOWER_POSITION,int) {
   
   int result; // eax
@@ -366,7 +356,6 @@ void  CTowerSoldier::SetTowerInfo(int,enum CTowerSoldier::T_TOWER_POSITION,int) 
 
 // address=[0x1595000]
 // Decompiled from int __thiscall CTowerSoldier::Decrease(CTowerSoldier *this, int a2)
-
 int  CTowerSoldier::Decrease(int) {
   
   *((_DWORD *)this + 12) = CStateGame::GetTickCounter(g_pGame);
@@ -376,7 +365,6 @@ int  CTowerSoldier::Decrease(int) {
 
 // address=[0x1595030]
 // Decompiled from char *__thiscall CTowerSoldier::CTowerSoldier(char *this, int a2)
-
  CTowerSoldier::CTowerSoldier(std::istream &) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
@@ -408,7 +396,6 @@ int  CTowerSoldier::Decrease(int) {
 
 // address=[0x1595140]
 // Decompiled from int __thiscall CTowerSoldier::Store(struct CPersistence *this, struct std::ostream *a2)
-
 void  CTowerSoldier::Store(std::ostream &) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
@@ -428,7 +415,6 @@ void  CTowerSoldier::Store(std::ostream &) {
 
 // address=[0x15962c0]
 // Decompiled from int __thiscall CTowerSoldier::ClassID(CTowerSoldier *this)
-
 unsigned long  CTowerSoldier::ClassID(void)const {
   
   return CTowerSoldier::m_iClassID;
@@ -437,7 +423,6 @@ unsigned long  CTowerSoldier::ClassID(void)const {
 
 // address=[0x15962e0]
 // Decompiled from int __thiscall CTowerSoldier::GetSettlerRole(CTowerSoldier *this)
-
 int  CTowerSoldier::GetSettlerRole(void)const {
   
   return 22;
@@ -445,10 +430,7 @@ int  CTowerSoldier::GetSettlerRole(void)const {
 
 
 // address=[0x1596300]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CTowerSoldier::LogicUpdateJob(CTowerSoldier *this, struct CSettler *a2)
-
+// Decompiled from void __thiscall CTowerSoldier::LogicUpdateJob(CTowerSoldier *this, struct CSettler *a2)
 void  CTowerSoldier::LogicUpdateJob(class CSettler *) {
   
   ;
@@ -460,7 +442,6 @@ void  CTowerSoldier::LogicUpdateJob(class CSettler *) {
 
 // address=[0x15951e0]
 // Decompiled from int __cdecl CTowerSoldier::SearchDoorGuardTarget(int a1, int a2)
-
 static int __cdecl CTowerSoldier::SearchDoorGuardTarget(int,int) {
   
   int v2; // eax
@@ -524,7 +505,6 @@ static int __cdecl CTowerSoldier::SearchDoorGuardTarget(int,int) {
 
 // address=[0x15953a0]
 // Decompiled from int __cdecl CTowerSoldier::SearchBowmanTarget(int a1, int a2)
-
 static int __cdecl CTowerSoldier::SearchBowmanTarget(int,int) {
   
   _DWORD *v3; // eax
@@ -638,7 +618,6 @@ static int __cdecl CTowerSoldier::SearchBowmanTarget(int,int) {
 
 // address=[0x15956a0]
 // Decompiled from CTowerSoldier *__thiscall CTowerSoldier::CTowerSoldier(CTowerSoldier *this)
-
  CTowerSoldier::CTowerSoldier(void) {
   
   ISettlerRole::ISettlerRole(this);
@@ -654,7 +633,6 @@ static int __cdecl CTowerSoldier::SearchBowmanTarget(int,int) {
 
 // address=[0x15956f0]
 // Decompiled from ISettlerRole *__thiscall CTowerSoldier::~CTowerSoldier(CTowerSoldier *this)
-
  CTowerSoldier::~CTowerSoldier(void) {
   
   *(_DWORD *)this = &CTowerSoldier::_vftable_;
@@ -664,7 +642,6 @@ static int __cdecl CTowerSoldier::SearchBowmanTarget(int,int) {
 
 // address=[0x1595710]
 // Decompiled from int __thiscall CTowerSoldier::GetNextJob(CTowerSoldier *this, struct CSettler *a2)
-
 void  CTowerSoldier::GetNextJob(class CSettler *) {
   
   CTowerSoldier *v3; // [esp+0h] [ebp-4h]
@@ -679,7 +656,6 @@ void  CTowerSoldier::GetNextJob(class CSettler *) {
 
 // address=[0x1595750]
 // Decompiled from int __thiscall CTowerSoldier::TakeJob(CTowerSoldier *this, struct CSettler *a2)
-
 void  CTowerSoldier::TakeJob(class CSettler *) {
   
   const struct CEntityTask *ActualTask; // eax
@@ -724,7 +700,6 @@ void  CTowerSoldier::TakeJob(class CSettler *) {
 
 // address=[0x1595830]
 // Decompiled from CTowerSoldier *__thiscall CTowerSoldier::Init(CTowerSoldier *this, struct CSettler *a2)
-
 void  CTowerSoldier::Init(class CSettler *) {
   
   CTowerSoldier *result; // eax
@@ -754,9 +729,7 @@ void  CTowerSoldier::Init(class CSettler *) {
 
 
 // address=[0x15958d0]
-// Decompiled from // private: void __thiscall CTowerSoldier::SearchEnemy(class CSettler *)
-void __thiscall CTowerSoldier::SearchEnemy(CTowerSoldier *this, struct CSettler *a2)
-
+// Decompiled from void __thiscall CTowerSoldier::SearchEnemy(CTowerSoldier *this, struct CSettler *a2)
 void  CTowerSoldier::SearchEnemy(class CSettler *) {
   
   int v2; // eax
@@ -771,7 +744,6 @@ void  CTowerSoldier::SearchEnemy(class CSettler *) {
 
 // address=[0x1595920]
 // Decompiled from char __thiscall CTowerSoldier::GetAttacker(CTowerSoldier *this, struct CSettler *a2, int a3)
-
 bool  CTowerSoldier::GetAttacker(class CSettler *,int) {
   
   int v3; // eax
@@ -807,7 +779,6 @@ bool  CTowerSoldier::GetAttacker(class CSettler *,int) {
 
 // address=[0x15959e0]
 // Decompiled from void __thiscall CTowerSoldier::WorkIsDone(CTowerSoldier *this, struct CSettler *a2)
-
 void  CTowerSoldier::WorkIsDone(class CSettler *) {
   
   CBuilding *v2; // eax
@@ -822,7 +793,6 @@ void  CTowerSoldier::WorkIsDone(class CSettler *) {
 
 // address=[0x1595a20]
 // Decompiled from void __thiscall CTowerSoldier::ConvertEventIntoGoal(int this, CPropertySet *a2, int a3)
-
 void  CTowerSoldier::ConvertEventIntoGoal(class CSettler *,class CEntityEvent *) {
   
   int v3; // eax

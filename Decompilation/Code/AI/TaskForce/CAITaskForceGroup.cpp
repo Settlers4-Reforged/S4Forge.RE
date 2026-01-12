@@ -4,7 +4,6 @@
 
 // address=[0x12fd0d0]
 // Decompiled from int __thiscall CAITaskForceGroup::FirstTaskForce(_DWORD *this, int a2)
-
 class CAITaskForce *  CAITaskForceGroup::FirstTaskForce(enum T_AI_TASK_FORCE_CLASS)const {
   
   return this[a2 + 26];
@@ -13,7 +12,6 @@ class CAITaskForce *  CAITaskForceGroup::FirstTaskForce(enum T_AI_TASK_FORCE_CLA
 
 // address=[0x13015c0]
 // Decompiled from int __thiscall CAITaskForceGroup::NumberOfTaskForcesOfType(_DWORD *this, int a2)
-
 int  CAITaskForceGroup::NumberOfTaskForcesOfType(enum T_AI_TASK_FORCE_TYPE)const {
   
   return this[a2 + 12];
@@ -22,7 +20,6 @@ int  CAITaskForceGroup::NumberOfTaskForcesOfType(enum T_AI_TASK_FORCE_TYPE)const
 
 // address=[0x1303970]
 // Decompiled from int __thiscall CAITaskForceGroup::NumberOfTaskForcesOfClass(_DWORD *this, int a2)
-
 int  CAITaskForceGroup::NumberOfTaskForcesOfClass(enum T_AI_TASK_FORCE_CLASS)const {
   
   return this[a2 + 3];
@@ -31,7 +28,6 @@ int  CAITaskForceGroup::NumberOfTaskForcesOfClass(enum T_AI_TASK_FORCE_CLASS)con
 
 // address=[0x1328380]
 // Decompiled from CAITaskForceGroup *__thiscall CAITaskForceGroup::CAITaskForceGroup(CAITaskForceGroup *this, int a2)
-
  CAITaskForceGroup::CAITaskForceGroup(int) {
   
   *(_DWORD *)this = CAITaskForceGroup::_vftable_;
@@ -43,7 +39,6 @@ int  CAITaskForceGroup::NumberOfTaskForcesOfClass(enum T_AI_TASK_FORCE_CLASS)con
 
 // address=[0x13283c0]
 // Decompiled from void __thiscall CAITaskForceGroup::~CAITaskForceGroup(CAITaskForceGroup *this)
-
  CAITaskForceGroup::~CAITaskForceGroup(void) {
   
   *(_DWORD *)this = CAITaskForceGroup::_vftable_;
@@ -53,7 +48,6 @@ int  CAITaskForceGroup::NumberOfTaskForcesOfClass(enum T_AI_TASK_FORCE_CLASS)con
 
 // address=[0x1328410]
 // Decompiled from struct CAITaskForce *__thiscall CAITaskForceGroup::CreateTaskForce(CAITaskForceGroup *this, int a2)
-
 class CAITaskForce *  CAITaskForceGroup::CreateTaskForce(enum T_AI_TASK_FORCE_TYPE) {
   
   struct CAITaskForce *TaskForce; // [esp+4h] [ebp-4h]
@@ -67,7 +61,6 @@ class CAITaskForce *  CAITaskForceGroup::CreateTaskForce(enum T_AI_TASK_FORCE_TY
 
 // address=[0x1328450]
 // Decompiled from void __thiscall CAITaskForceGroup::DeleteAllTaskForces(CAITaskForceGroup *this)
-
 void  CAITaskForceGroup::DeleteAllTaskForces(void) {
   
   struct CAITaskForce *TaskForceGroupMemberOfSameClass; // [esp+0h] [ebp-20h]
@@ -92,7 +85,6 @@ void  CAITaskForceGroup::DeleteAllTaskForces(void) {
 
 // address=[0x1328510]
 // Decompiled from int __thiscall CAITaskForceGroup::Load(CAITaskForceGroup *this, struct IS4Chunk *a2)
-
 void  CAITaskForceGroup::Load(class IS4Chunk &) {
   
   int v2; // eax
@@ -146,7 +138,6 @@ void  CAITaskForceGroup::Load(class IS4Chunk &) {
 
 // address=[0x13286f0]
 // Decompiled from int __thiscall CAITaskForceGroup::Save(CAITaskForceGroup *this, struct IS4Chunk *a2)
-
 void  CAITaskForceGroup::Save(class IS4Chunk &) {
   
   int v2; // eax
@@ -231,10 +222,7 @@ void  CAITaskForceGroup::Save(class IS4Chunk &) {
 
 
 // address=[0x132a500]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CAITaskForceGroup::PlayerId(CAITaskForceGroup *this)
-
+// Decompiled from int __thiscall CAITaskForceGroup::PlayerId(CAITaskForceGroup *this)
 int  CAITaskForceGroup::PlayerId(void) {
   
   return *((_DWORD *)this + 1);
@@ -243,7 +231,6 @@ int  CAITaskForceGroup::PlayerId(void) {
 
 // address=[0x1328970]
 // Decompiled from _DWORD *__thiscall CAITaskForceGroup::AddTaskForce(CAITaskForceGroup *this, struct CAITaskForce *a2)
-
 void  CAITaskForceGroup::AddTaskForce(class CAITaskForce *) {
   
   _DWORD *result; // eax
@@ -302,7 +289,6 @@ void  CAITaskForceGroup::AddTaskForce(class CAITaskForce *) {
 
 // address=[0x1328b20]
 // Decompiled from int __thiscall CAITaskForceGroup::RemoveTaskForce(_DWORD *this, _DWORD *a2)
-
 void  CAITaskForceGroup::RemoveTaskForce(class CAITaskForce *) {
   
   int v2; // eax

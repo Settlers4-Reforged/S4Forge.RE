@@ -4,7 +4,6 @@
 
 // address=[0x130e450]
 // Decompiled from _DWORD *__thiscall sub_170E450(_DWORD *this)
-
  CEvn_Event::~CEvn_Event(void) {
   
   _DWORD *result; // eax
@@ -16,13 +15,7 @@
 
 
 // address=[0x1334dc0]
-// Decompiled from CEvn_Event *__thiscall CEvn_Event::CEvn_Event(
-        CEvn_Event *this,
-        unsigned int a2,
-        unsigned int a3,
-        unsigned int a4,
-        unsigned __int8 a5)
-
+// Decompiled from CEvn_Event *__thiscall CEvn_Event::CEvn_Event(  CEvn_Event *this,  unsigned int a2,  unsigned int a3,  unsigned int a4,  unsigned __int8 a5)
  CEvn_Event::CEvn_Event(unsigned int,unsigned int,unsigned int,unsigned char) {
   
   IS4ChunkObject::IS4ChunkObject(this);
@@ -40,10 +33,7 @@
 
 
 // address=[0x1352be0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CEvn_Event::Load(CEvn_Event *this, struct IS4Chunk *a2)
-
+// Decompiled from void __thiscall CEvn_Event::Load(CEvn_Event *this, struct IS4Chunk *a2)
 void  CEvn_Event::Load(class IS4Chunk &) {
   
   ;
@@ -51,10 +41,7 @@ void  CEvn_Event::Load(class IS4Chunk &) {
 
 
 // address=[0x1352bf0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CEvn_Event::Save(CEvn_Event *this, struct IS4Chunk *a2)
-
+// Decompiled from void __thiscall CEvn_Event::Save(CEvn_Event *this, struct IS4Chunk *a2)
 void  CEvn_Event::Save(class IS4Chunk &) {
   
   ;
@@ -63,7 +50,6 @@ void  CEvn_Event::Save(class IS4Chunk &) {
 
 // address=[0x145ff30]
 // Decompiled from int __thiscall CEvn_Event::CEvn_Event(int this, struct boost::exception_detail::clone_base *a2)
-
  CEvn_Event::CEvn_Event(class CEvn_Event const &) {
   
   _DWORD *v3; // [esp+0h] [ebp-8h]
@@ -88,7 +74,6 @@ void  CEvn_Event::Save(class IS4Chunk &) {
 
 // address=[0x1486b30]
 // Decompiled from int __thiscall CEvn_Event::operator=(int this, _BYTE *a2)
-
 class CEvn_Event &  CEvn_Event::operator=(class CEvn_Event const &) {
   
   _DWORD *v3; // [esp+0h] [ebp-8h]

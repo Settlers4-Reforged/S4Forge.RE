@@ -4,7 +4,6 @@
 
 // address=[0x12fd1f0]
 // Decompiled from unsigned __int8 *__cdecl CPileMgr::GetPilePtr(int a1)
-
 static class CPile * __cdecl CPileMgr::GetPilePtr(int) {
   
   unsigned __int8 *v3; // [esp+8h] [ebp-4h]
@@ -19,7 +18,6 @@ static class CPile * __cdecl CPileMgr::GetPilePtr(int) {
 
 // address=[0x1438a40]
 // Decompiled from unsigned __int8 *__stdcall CPileMgr::operator[](int a1)
-
 class CPile &  CPileMgr::operator[](int) {
   
   unsigned __int8 *v2; // [esp+4h] [ebp-4h]
@@ -49,7 +47,6 @@ class CPile &  CPileMgr::operator[](int) {
 
 // address=[0x155e900]
 // Decompiled from CPileMgr *__thiscall CPileMgr::CPileMgr(CPileMgr *this)
-
  CPileMgr::CPileMgr(void) {
   
   MemoryAllocator::MemoryAllocator(this, 0x7Cu, 0x20u, 0);
@@ -61,7 +58,6 @@ class CPile &  CPileMgr::operator[](int) {
 
 // address=[0x155e930]
 // Decompiled from void __thiscall CPileMgr::~CPileMgr(CPileMgr *this)
-
  CPileMgr::~CPileMgr(void) {
   
   MemoryAllocator::~MemoryAllocator(this);
@@ -70,7 +66,6 @@ class CPile &  CPileMgr::operator[](int) {
 
 // address=[0x155e950]
 // Decompiled from CPileMgr *__thiscall CPileMgr::Clear(CPileMgr *this)
-
 void  CPileMgr::Clear(void) {
   
   CPileMgr *result; // eax
@@ -83,7 +78,6 @@ void  CPileMgr::Clear(void) {
 
 // address=[0x155e970]
 // Decompiled from char *__thiscall CPileMgr::LoadPileData(CPileMgr *this, struct S4::CMapFile *a2, int a3)
-
 void  CPileMgr::LoadPileData(class S4::CMapFile &,int) {
   
   char *result; // eax
@@ -120,18 +114,7 @@ void  CPileMgr::LoadPileData(class S4::CMapFile &,int) {
 
 
 // address=[0x155ea20]
-// Decompiled from int __thiscall CPileMgr::AddPile(
-        CPileMgr *this,
-        int a2,
-        int a3,
-        unsigned int a4,
-        unsigned int a5,
-        unsigned int a6,
-        int a7,
-        int a8,
-        int a9,
-        int a10)
-
+// Decompiled from int __thiscall CPileMgr::AddPile(  CPileMgr *this,  int a2,  int a3,  unsigned int a4,  unsigned int a5,  unsigned int a6,  int a7,  int a8,  int a9,  int a10)
 int  CPileMgr::AddPile(int,int,int,int,int,int,int,int,int) {
   
   int v11; // [esp-18h] [ebp-54h] BYREF
@@ -212,7 +195,6 @@ int  CPileMgr::AddPile(int,int,int,int,int,int,int,int,int) {
 
 // address=[0x155ec40]
 // Decompiled from void __thiscall CPileMgr::DeletePile(CPileMgr *this, int a2)
-
 void  CPileMgr::DeletePile(int) {
   
   unsigned __int8 *v2; // eax
@@ -246,9 +228,7 @@ void  CPileMgr::DeletePile(int) {
 
 
 // address=[0x155ed50]
-// Decompiled from // public: void __thiscall CPileMgr::DeletePileUnforeseen(int)
-void __thiscall CPileMgr::DeletePileUnforeseen(CPileMgr *this, int a2)
-
+// Decompiled from void __thiscall CPileMgr::DeletePileUnforeseen(CPileMgr *this, int a2)
 void  CPileMgr::DeletePileUnforeseen(int) {
   
   if ( a2 <= 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\PileMgr.cpp", 538, "_iPileId>0") == 1 )
@@ -268,7 +248,6 @@ void  CPileMgr::DeletePileUnforeseen(int) {
 
 // address=[0x155ede0]
 // Decompiled from int __thiscall CPileMgr::GetNearestPile(CPileMgr *this, int a2, int a3, int a4)
-
 int  CPileMgr::GetNearestPile(int,int,int) {
   
   int v5; // esi
@@ -316,7 +295,6 @@ int  CPileMgr::GetNearestPile(int,int,int) {
 
 // address=[0x155eef0]
 // Decompiled from int __thiscall CPileMgr::SearchSpaceForGoods(CPileMgr *this, int a2, int a3, unsigned int a4, unsigned int a5)
-
 void  CPileMgr::SearchSpaceForGoods(int,int,int,int) {
   
   int result; // eax
@@ -454,7 +432,6 @@ void  CPileMgr::SearchSpaceForGoods(int,int,int,int) {
 
 // address=[0x155f280]
 // Decompiled from void __thiscall CPileMgr::Store(CPileMgr *this, struct S4::CMapFile *a2)
-
 void  CPileMgr::Store(class S4::CMapFile &) {
   
   std::strstreambuf *v2; // eax
@@ -530,7 +507,6 @@ void  CPileMgr::Store(class S4::CMapFile &) {
 
 // address=[0x155f4c0]
 // Decompiled from void __thiscall CPileMgr::Load(CPileMgr *this, struct S4::CMapFile *a2)
-
 void  CPileMgr::Load(class S4::CMapFile &) {
   
   int v2; // [esp+0h] [ebp-FCh]
@@ -584,9 +560,7 @@ void  CPileMgr::Load(class S4::CMapFile &) {
 
 
 // address=[0x155f670]
-// Decompiled from // public: int __thiscall CPileMgr::DbgCheckPiles(int)
-int __thiscall CPileMgr::DbgCheckPiles(_DWORD *this, int a2)
-
+// Decompiled from int __thiscall CPileMgr::DbgCheckPiles(_DWORD *this, int a2)
 int  CPileMgr::DbgCheckPiles(int) {
   
   int UsedId; // [esp+0h] [ebp-1Ch]
@@ -624,7 +598,6 @@ int  CPileMgr::DbgCheckPiles(int) {
 
 // address=[0x155f760]
 // Decompiled from int __thiscall CPileMgr::ConvertGoodType(CPileMgr *this, int a2, int a3)
-
 int  CPileMgr::ConvertGoodType(int,int) {
   
   int v4; // [esp+4h] [ebp-Ch]
@@ -656,7 +629,6 @@ int  CPileMgr::ConvertGoodType(int,int) {
 
 // address=[0x155f820]
 // Decompiled from CProductionPileRole *__cdecl CPileMgr::CreatePileRole(int a1)
-
 static class IPileRole * __cdecl CPileMgr::CreatePileRole(int) {
   
   CProductionPileRole *result; // eax
@@ -745,7 +717,6 @@ static class IPileRole * __cdecl CPileMgr::CreatePileRole(int) {
 
 // address=[0x155e750]
 // Decompiled from unsigned int __thiscall CPileMgr::Alloc(CPileMgr *this, unsigned int a2)
-
 void *  CPileMgr::Alloc(unsigned int) {
   
   return MemoryAllocator::allocate((unsigned int *)this, a2);
@@ -754,7 +725,6 @@ void *  CPileMgr::Alloc(unsigned int) {
 
 // address=[0x155e7b0]
 // Decompiled from void __thiscall CPileMgr::Dealloc(CPileMgr *this, void *a2)
-
 void  CPileMgr::Dealloc(void *) {
   
   MemoryAllocator::deallocate(this, a2);
@@ -763,7 +733,6 @@ void  CPileMgr::Dealloc(void *) {
 
 // address=[0x155fa90]
 // Decompiled from int __thiscall CPileMgr::TracePile(CPileMgr *this, int a2)
-
 void  CPileMgr::TracePile(int) {
   
   int v2; // eax
@@ -819,7 +788,6 @@ void  CPileMgr::TracePile(int) {
 
 // address=[0x155fb30]
 // Decompiled from int __cdecl CPileMgr::LoadPileRole(int a1, int a2)
-
 static class IPileRole * __cdecl CPileMgr::LoadPileRole(std::istream &,int) {
   
   int result; // eax
@@ -862,10 +830,7 @@ static class IPileRole * __cdecl CPileMgr::LoadPileRole(std::istream &,int) {
 
 
 // address=[0x155fc30]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CPileMgr::CheckOutPile(CPileMgr *this, int a2)
-
+// Decompiled from void __thiscall CPileMgr::CheckOutPile(CPileMgr *this, int a2)
 void  CPileMgr::CheckOutPile(int) {
   
   ;

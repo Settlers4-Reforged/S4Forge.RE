@@ -4,7 +4,6 @@
 
 // address=[0x1402700]
 // Decompiled from int __cdecl CTrojanWarShip::New(int a1)
-
 static class CPersistence * __cdecl CTrojanWarShip::New(std::istream &) {
   
   if ( CWarShip::operator new(0xC8u) )
@@ -16,7 +15,6 @@ static class CPersistence * __cdecl CTrojanWarShip::New(std::istream &) {
 
 // address=[0x15a1d70]
 // Decompiled from _DWORD *__thiscall CTrojanWarShip::CTrojanWarShip(_DWORD *this, int a2)
-
  CTrojanWarShip::CTrojanWarShip(std::istream &) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
@@ -44,7 +42,6 @@ static class CPersistence * __cdecl CTrojanWarShip::New(std::istream &) {
 
 // address=[0x15a1e30]
 // Decompiled from int __thiscall CTrojanWarShip::Store(void *this, struct std::ostream *a2)
-
 void  CTrojanWarShip::Store(std::ostream &) {
   
   int v3[2]; // [esp+0h] [ebp-8h] BYREF
@@ -58,7 +55,6 @@ void  CTrojanWarShip::Store(std::ostream &) {
 
 // address=[0x15a2440]
 // Decompiled from void __thiscall CTrojanWarShip::~CTrojanWarShip(CTrojanWarShip *this)
-
  CTrojanWarShip::~CTrojanWarShip(void) {
   
   CWarShip::~CWarShip(this);
@@ -67,7 +63,6 @@ void  CTrojanWarShip::Store(std::ostream &) {
 
 // address=[0x15a26e0]
 // Decompiled from int __thiscall CTrojanWarShip::ClassID(CTrojanWarShip *this)
-
 unsigned long  CTrojanWarShip::ClassID(void)const {
   
   return CTrojanWarShip::m_iClassID;
@@ -78,16 +73,7 @@ unsigned long  CTrojanWarShip::ClassID(void)const {
 // [Decompilation failed for static unsigned long CTrojanWarShip::m_iClassID]
 
 // address=[0x15a1e70]
-// Decompiled from CTrojanWarShip *__thiscall CTrojanWarShip::CTrojanWarShip(
-        CTrojanWarShip *this,
-        int a2,
-        int a3,
-        int a4,
-        int a5,
-        int a6,
-        int a7,
-        bool a8)
-
+// Decompiled from CTrojanWarShip *__thiscall CTrojanWarShip::CTrojanWarShip(  CTrojanWarShip *this,  int a2,  int a3,  int a4,  int a5,  int a6,  int a7,  bool a8)
  CTrojanWarShip::CTrojanWarShip(int,int,int,int,int,int,bool) {
   
   CWarShip::CWarShip(this, a2, a3, a4, a5, a6, a7, a8);

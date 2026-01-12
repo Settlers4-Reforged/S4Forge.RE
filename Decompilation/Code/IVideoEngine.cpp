@@ -4,7 +4,6 @@
 
 // address=[0x16a20b0]
 // Decompiled from IVideoEngine *__thiscall IVideoEngine::IVideoEngine(IVideoEngine *this)
-
  IVideoEngine::IVideoEngine(void) {
   
   CBinkInterface *v3; // [esp+Ch] [ebp-14h]
@@ -24,7 +23,6 @@
 
 // address=[0x16a2160]
 // Decompiled from void __thiscall IVideoEngine::~IVideoEngine(IVideoEngine *this)
-
  IVideoEngine::~IVideoEngine(void) {
   
   if ( g_pVideo )
@@ -39,7 +37,6 @@
 
 // address=[0x16a21e0]
 // Decompiled from char __thiscall IVideoEngine::Init(IVideoEngine *this, unsigned int a2)
-
 bool  IVideoEngine::Init(unsigned int) {
   
   if ( !g_pVideo && BBSupportDbgReport(2, "VideoEngine\\VideoEngineInterface.cpp", 59, "g_pVideo") == 1 )
@@ -53,7 +50,6 @@ bool  IVideoEngine::Init(unsigned int) {
 
 // address=[0x16a2230]
 // Decompiled from char __thiscall IVideoEngine::StartVideo(IVideoEngine *this, char *a2, unsigned int a3, unsigned int a4)
-
 bool  IVideoEngine::StartVideo(char *,unsigned int,unsigned int) {
   
   return CBinkInterface::OpenVideo((CBinkInterface *)g_pVideo, a2, a3, a4);
@@ -62,7 +58,6 @@ bool  IVideoEngine::StartVideo(char *,unsigned int,unsigned int) {
 
 // address=[0x16a2260]
 // Decompiled from char __thiscall IVideoEngine::StopVideo(IVideoEngine *this)
-
 bool  IVideoEngine::StopVideo(void) {
   
   CBinkInterface::CloseBink((CBinkInterface *)g_pVideo);
@@ -72,7 +67,6 @@ bool  IVideoEngine::StopVideo(void) {
 
 // address=[0x16a2280]
 // Decompiled from int __thiscall IVideoEngine::PauseVideo(IVideoEngine *this)
-
 void  IVideoEngine::PauseVideo(void) {
   
   return CBinkInterface::StartPause((CBinkInterface *)g_pVideo);
@@ -81,7 +75,6 @@ void  IVideoEngine::PauseVideo(void) {
 
 // address=[0x16a22a0]
 // Decompiled from int __thiscall IVideoEngine::UnPauseVideo(IVideoEngine *this)
-
 void  IVideoEngine::UnPauseVideo(void) {
   
   return CBinkInterface::StopPause((CBinkInterface *)g_pVideo);
@@ -89,9 +82,7 @@ void  IVideoEngine::UnPauseVideo(void) {
 
 
 // address=[0x16a22c0]
-// Decompiled from // public: int __thiscall IVideoEngine::GetVideoHeight(void)
-int IVideoEngine::GetVideoHeight()
-
+// Decompiled from int IVideoEngine::GetVideoHeight()
 int  IVideoEngine::GetVideoHeight(void) {
   
   if ( !g_pVideo && BBSupportDbgReport(2, "VideoEngine\\VideoEngineInterface.cpp", 116, "g_pVideo") == 1 )
@@ -101,9 +92,7 @@ int  IVideoEngine::GetVideoHeight(void) {
 
 
 // address=[0x16a2300]
-// Decompiled from // public: int __thiscall IVideoEngine::GetVideoWidth(void)
-int IVideoEngine::GetVideoWidth()
-
+// Decompiled from int IVideoEngine::GetVideoWidth()
 int  IVideoEngine::GetVideoWidth(void) {
   
   if ( !g_pVideo && BBSupportDbgReport(2, "VideoEngine\\VideoEngineInterface.cpp", 126, "g_pVideo") == 1 )
@@ -114,7 +103,6 @@ int  IVideoEngine::GetVideoWidth(void) {
 
 // address=[0x16a2340]
 // Decompiled from CBinkInterface *__thiscall IVideoEngine::Set_555_GfxMode(IVideoEngine *this)
-
 void  IVideoEngine::Set_555_GfxMode(void) {
   
   if ( !g_pVideo && BBSupportDbgReport(2, "VideoEngine\\VideoEngineInterface.cpp", 146, "g_pVideo") == 1 )
@@ -125,7 +113,6 @@ void  IVideoEngine::Set_555_GfxMode(void) {
 
 // address=[0x16a2380]
 // Decompiled from CBinkInterface *__thiscall IVideoEngine::Set_565_GfxMode(IVideoEngine *this)
-
 void  IVideoEngine::Set_565_GfxMode(void) {
   
   if ( !g_pVideo && BBSupportDbgReport(2, "VideoEngine\\VideoEngineInterface.cpp", 153, "g_pVideo") == 1 )
@@ -136,7 +123,6 @@ void  IVideoEngine::Set_565_GfxMode(void) {
 
 // address=[0x16a23c0]
 // Decompiled from char __thiscall IVideoEngine::RenderToSurface(IVideoEngine *this, unsigned __int16 *a2, unsigned int a3)
-
 bool  IVideoEngine::RenderToSurface(unsigned short *,unsigned int) {
   
   if ( !g_pVideo && BBSupportDbgReport(2, "VideoEngine\\VideoEngineInterface.cpp", 136, "g_pVideo") == 1 )
@@ -147,7 +133,6 @@ bool  IVideoEngine::RenderToSurface(unsigned short *,unsigned int) {
 
 // address=[0x16a2410]
 // Decompiled from bool __thiscall IVideoEngine::IsReadyForNextFrame(IVideoEngine *this)
-
 bool  IVideoEngine::IsReadyForNextFrame(void) {
   
   if ( !g_pVideo && BBSupportDbgReport(2, "VideoEngine\\VideoEngineInterface.cpp", 163, "g_pVideo") == 1 )

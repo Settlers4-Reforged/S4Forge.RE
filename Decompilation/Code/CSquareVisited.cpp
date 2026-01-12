@@ -4,7 +4,6 @@
 
 // address=[0x15f1030]
 // Decompiled from CSquareVisited *__thiscall CSquareVisited::CSquareVisited(CSquareVisited *this)
-
  CSquareVisited::CSquareVisited(void) {
   
   *((_BYTE *)this + 12) = 0;
@@ -15,7 +14,6 @@
 
 // address=[0x15f1070]
 // Decompiled from void __thiscall CSquareVisited::Init(CSquareVisited *this, int a2, int a3)
-
 void  CSquareVisited::Init(int,int) {
   
   int v3; // [esp+0h] [ebp-Ch]
@@ -32,7 +30,6 @@ void  CSquareVisited::Init(int,int) {
 
 // address=[0x15f4030]
 // Decompiled from bool __thiscall CSquareVisited::operator[](unsigned __int8 *this, int a2)
-
 bool  CSquareVisited::operator[](int)const {
   
   return this[a2 + 13] == this[12];
@@ -41,7 +38,6 @@ bool  CSquareVisited::operator[](int)const {
 
 // address=[0x15f4280]
 // Decompiled from int __thiscall CSquareVisited::ClearArray(CSquareVisited *this)
-
 void  CSquareVisited::ClearArray(void) {
   
   int result; // eax
@@ -55,7 +51,6 @@ void  CSquareVisited::ClearArray(void) {
 
 // address=[0x15f4820]
 // Decompiled from void __thiscall CSquareVisited::Init(CSquareVisited *this, int a2)
-
 void  CSquareVisited::Init(int) {
   
   int v2; // eax
@@ -69,7 +64,6 @@ void  CSquareVisited::Init(int) {
 
 // address=[0x15f49e0]
 // Decompiled from int __cdecl CSquareVisited::NeighborRelIndex(int a1)
-
 static int __cdecl CSquareVisited::NeighborRelIndex(int) {
   
   return dword_37E0190[a1];
@@ -78,7 +72,6 @@ static int __cdecl CSquareVisited::NeighborRelIndex(int) {
 
 // address=[0x15f56c0]
 // Decompiled from char *__thiscall CSquareVisited::Set(CSquareVisited *this, int a2)
-
 void  CSquareVisited::Set(int) {
   
   char *result; // eax
@@ -91,7 +84,6 @@ void  CSquareVisited::Set(int) {
 
 // address=[0x15f57a0]
 // Decompiled from char __thiscall CSquareVisited::SetIfNotVisited(CSquareVisited *this, int a2)
-
 bool  CSquareVisited::SetIfNotVisited(int) {
   
   if ( *((unsigned __int8 *)this + a2 + 13) == *((unsigned __int8 *)this + 12) )
@@ -102,10 +94,7 @@ bool  CSquareVisited::SetIfNotVisited(int) {
 
 
 // address=[0x15f5920]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CSquareVisited::StartIndex(CSquareVisited *this)
-
+// Decompiled from int __thiscall CSquareVisited::StartIndex(CSquareVisited *this)
 int  CSquareVisited::StartIndex(void)const {
   
   return *((_DWORD *)this + 2);
@@ -114,7 +103,6 @@ int  CSquareVisited::StartIndex(void)const {
 
 // address=[0x15f5b80]
 // Decompiled from int __thiscall CSquareVisited::WorldIdx(CSquareVisited *this, int a2)
-
 int  CSquareVisited::WorldIdx(int)const {
   
   return *((_DWORD *)this + 1) + CTilingWorld::WorldIndex(a2 % 32, a2 / 32);
@@ -123,7 +111,6 @@ int  CSquareVisited::WorldIdx(int)const {
 
 // address=[0x15f5f40]
 // Decompiled from int __thiscall CSquareVisited::WorldPackedXYIndex(CSquareVisited *this, int a2)
-
 int  CSquareVisited::WorldPackedXYIndex(int)const {
   
   int v2; // esi

@@ -4,7 +4,6 @@
 
 // address=[0x16a1c40]
 // Decompiled from CBinkInterface *__thiscall CBinkInterface::CBinkInterface(CBinkInterface *this)
-
  CBinkInterface::CBinkInterface(void) {
   
   *(_DWORD *)this = 0;
@@ -15,7 +14,6 @@
 
 // address=[0x16a1c70]
 // Decompiled from void __thiscall CBinkInterface::~CBinkInterface(CBinkInterface *this)
-
  CBinkInterface::~CBinkInterface(void) {
   
   CBinkInterface::CloseBink(this);
@@ -24,7 +22,6 @@
 
 // address=[0x16a1cb0]
 // Decompiled from char __thiscall CBinkInterface::OpenVideo(CBinkInterface *this, char *a2, unsigned int a3, unsigned int a4)
-
 bool  CBinkInterface::OpenVideo(char *,unsigned int,unsigned int) {
   
   const char *Error; // eax
@@ -57,7 +54,6 @@ bool  CBinkInterface::OpenVideo(char *,unsigned int,unsigned int) {
 
 // address=[0x16a1d40]
 // Decompiled from int __thiscall CBinkInterface::StartPause(CBinkInterface *this)
-
 void  CBinkInterface::StartPause(void) {
   
   if ( !*(_DWORD *)this && BBSupportDbgReport(2, "VideoEngine\\VideoEngine.cpp", 80, "m_hBink") == 1 )
@@ -68,7 +64,6 @@ void  CBinkInterface::StartPause(void) {
 
 // address=[0x16a1d80]
 // Decompiled from int __thiscall CBinkInterface::StopPause(CBinkInterface *this)
-
 void  CBinkInterface::StopPause(void) {
   
   if ( !*(_DWORD *)this && BBSupportDbgReport(2, "VideoEngine\\VideoEngine.cpp", 89, "m_hBink") == 1 )
@@ -79,7 +74,6 @@ void  CBinkInterface::StopPause(void) {
 
 // address=[0x16a1dc0]
 // Decompiled from int __thiscall CBinkInterface::GetHeight(CBinkInterface *this)
-
 int  CBinkInterface::GetHeight(void) {
   
   if ( !*(_DWORD *)this && BBSupportDbgReport(2, "VideoEngine\\VideoEngine.cpp", 98, "m_hBink") == 1 )
@@ -90,7 +84,6 @@ int  CBinkInterface::GetHeight(void) {
 
 // address=[0x16a1e00]
 // Decompiled from int __thiscall CBinkInterface::GetWidth(CBinkInterface *this)
-
 int  CBinkInterface::GetWidth(void) {
   
   if ( !*(_DWORD *)this && BBSupportDbgReport(2, "VideoEngine\\VideoEngine.cpp", 107, "m_hBink") == 1 )
@@ -101,7 +94,6 @@ int  CBinkInterface::GetWidth(void) {
 
 // address=[0x16a1e40]
 // Decompiled from int __thiscall CBinkInterface::UseMiles(CBinkInterface *this, unsigned int a2)
-
 void  CBinkInterface::UseMiles(unsigned long) {
   
   return BinkSetSoundSystem(BinkOpenMiles, a2);
@@ -110,7 +102,6 @@ void  CBinkInterface::UseMiles(unsigned long) {
 
 // address=[0x16a1e60]
 // Decompiled from CBinkInterface *__thiscall CBinkInterface::CloseBink(CBinkInterface *this)
-
 void  CBinkInterface::CloseBink(void) {
   
   CBinkInterface *result; // eax
@@ -127,7 +118,6 @@ void  CBinkInterface::CloseBink(void) {
 
 // address=[0x16a1e90]
 // Decompiled from char __thiscall CBinkInterface::RenderToSurface(CBinkInterface *this, unsigned __int16 *a2, unsigned int a3)
-
 bool  CBinkInterface::RenderToSurface(unsigned short *,unsigned int) {
   
   if ( !*(_DWORD *)this )
@@ -153,7 +143,6 @@ bool  CBinkInterface::RenderToSurface(unsigned short *,unsigned int) {
 
 // address=[0x16a1f50]
 // Decompiled from CBinkInterface *__thiscall CBinkInterface::Set_555_GfxMode(CBinkInterface *this)
-
 void  CBinkInterface::Set_555_GfxMode(void) {
   
   CBinkInterface *result; // eax
@@ -166,7 +155,6 @@ void  CBinkInterface::Set_555_GfxMode(void) {
 
 // address=[0x16a1f70]
 // Decompiled from CBinkInterface *__thiscall CBinkInterface::Set_565_GfxMode(CBinkInterface *this)
-
 void  CBinkInterface::Set_565_GfxMode(void) {
   
   CBinkInterface *result; // eax
@@ -179,7 +167,6 @@ void  CBinkInterface::Set_565_GfxMode(void) {
 
 // address=[0x16a1f90]
 // Decompiled from bool __thiscall CBinkInterface::IsReadyForNextFrame(CBinkInterface *this)
-
 bool  CBinkInterface::IsReadyForNextFrame(void) {
   
   return BinkWait(*(_DWORD *)this) == 0;

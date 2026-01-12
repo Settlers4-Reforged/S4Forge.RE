@@ -3,10 +3,7 @@
 // Definitions for class CScrollMultiline
 
 // address=[0x1377dc0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CScrollMultiline::~CScrollMultiline(CScrollMultiline *this)
-
+// Decompiled from void __thiscall CScrollMultiline::~CScrollMultiline(CScrollMultiline *this)
  CScrollMultiline::~CScrollMultiline(void) {
   
   ;
@@ -14,14 +11,7 @@ void __thiscall CScrollMultiline::~CScrollMultiline(CScrollMultiline *this)
 
 
 // address=[0x13da4c0]
-// Decompiled from CScrollMultiline *__thiscall CScrollMultiline::CScrollMultiline(
-        CScrollMultiline *this,
-        int a2,
-        int a3,
-        int a4,
-        int a5,
-        int a6)
-
+// Decompiled from CScrollMultiline *__thiscall CScrollMultiline::CScrollMultiline(  CScrollMultiline *this,  int a2,  int a3,  int a4,  int a5,  int a6)
  CScrollMultiline::CScrollMultiline(int,int,int,int,int) {
   
   int i; // [esp+0h] [ebp-8h]
@@ -39,7 +29,6 @@ void __thiscall CScrollMultiline::~CScrollMultiline(CScrollMultiline *this)
 
 // address=[0x13da540]
 // Decompiled from char __thiscall CScrollMultiline::ScrollUp(CScrollMultiline *this)
-
 void  CScrollMultiline::ScrollUp(void) {
   
   char result; // al
@@ -58,7 +47,6 @@ void  CScrollMultiline::ScrollUp(void) {
 
 // address=[0x13da5a0]
 // Decompiled from char __thiscall CScrollMultiline::ScrollDown(CScrollMultiline *this)
-
 void  CScrollMultiline::ScrollDown(void) {
   
   char result; // al
@@ -77,7 +65,6 @@ void  CScrollMultiline::ScrollDown(void) {
 
 // address=[0x13da610]
 // Decompiled from char __thiscall CScrollMultiline::SetText(_DWORD *this, int a2)
-
 void  CScrollMultiline::SetText(char const *) {
   
   this[507] = a2;
@@ -89,7 +76,6 @@ void  CScrollMultiline::SetText(char const *) {
 
 // address=[0x13da090]
 // Decompiled from unsigned __int8 *__thiscall CScrollMultiline::GetWrapPointer(int *this, char *Str)
-
 unsigned char *  CScrollMultiline::GetWrapPointer(unsigned char *) {
   
   char *v3; // [esp+0h] [ebp-20h]
@@ -175,11 +161,7 @@ LABEL_20:
 
 
 // address=[0x13da3c0]
-// Decompiled from unsigned __int8 *__thiscall CScrollMultiline::GetCRLFWrapPointer(
-        CScrollMultiline *this,
-        unsigned __int8 *a2,
-        unsigned __int8 *a3)
-
+// Decompiled from unsigned __int8 *__thiscall CScrollMultiline::GetCRLFWrapPointer(  CScrollMultiline *this,  unsigned __int8 *a2,  unsigned __int8 *a3)
 unsigned char *  CScrollMultiline::GetCRLFWrapPointer(unsigned char *,unsigned char *) {
   
   unsigned __int8 *v3; // eax
@@ -195,7 +177,6 @@ unsigned char *  CScrollMultiline::GetCRLFWrapPointer(unsigned char *,unsigned c
 
 // address=[0x13da440]
 // Decompiled from CScrollMultiline *__thiscall CScrollMultiline::SplitText(char **this)
-
 void  CScrollMultiline::SplitText(void) {
   
   CScrollMultiline *result; // eax

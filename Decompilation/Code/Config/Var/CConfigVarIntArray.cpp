@@ -3,10 +3,7 @@
 // Definitions for class CConfigVarIntArray
 
 // address=[0x2efa070]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CConfigVarIntArray::GetIntArray(CConfigVarIntArray *this)
-
+// Decompiled from int __thiscall CConfigVarIntArray::GetIntArray(CConfigVarIntArray *this)
 int *  CConfigVarIntArray::GetIntArray(void) {
   
   return *((_DWORD *)this + 2);
@@ -14,10 +11,7 @@ int *  CConfigVarIntArray::GetIntArray(void) {
 
 
 // address=[0x2efa090]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CConfigVarIntArray::GetIntArray(CConfigVarIntArray *this)
-
+// Decompiled from int __thiscall CConfigVarIntArray::GetIntArray(CConfigVarIntArray *this)
 int const *  CConfigVarIntArray::GetIntArray(void)const {
   
   return *((_DWORD *)this + 2);
@@ -26,7 +20,6 @@ int const *  CConfigVarIntArray::GetIntArray(void)const {
 
 // address=[0x2eeef30]
 // Decompiled from void **__thiscall CConfigVarIntArray::CConfigVarIntArray(void **this, void *Src, int a3)
-
  CConfigVarIntArray::CConfigVarIntArray(int const *,int) {
   
   CDynamicConfigVar::CDynamicConfigVar(this, 2, a3);
@@ -50,7 +43,6 @@ int const *  CConfigVarIntArray::GetIntArray(void)const {
 
 // address=[0x2eef050]
 // Decompiled from void __thiscall CConfigVarIntArray::~CConfigVarIntArray(void **this)
-
  CConfigVarIntArray::~CConfigVarIntArray(void) {
   
   *this = &CConfigVarIntArray::_vftable_;

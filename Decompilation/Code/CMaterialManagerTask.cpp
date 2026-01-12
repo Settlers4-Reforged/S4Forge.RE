@@ -4,7 +4,6 @@
 
 // address=[0x2f55020]
 // Decompiled from IScheduleEntry *__thiscall CMaterialManagerTask::CMaterialManagerTask(IScheduleEntry *this, int a2, int a3)
-
  CMaterialManagerTask::CMaterialManagerTask(enum PILE_TYPES,int) {
   
   IScheduleEntry::IScheduleEntry(this);
@@ -23,7 +22,6 @@
 
 // address=[0x2f55090]
 // Decompiled from void __thiscall CMaterialManagerTask::~CMaterialManagerTask(CMaterialManagerTask *this)
-
  CMaterialManagerTask::~CMaterialManagerTask(void) {
   
   *(_DWORD *)this = &CMaterialManagerTask::_vftable_;
@@ -33,7 +31,6 @@
 
 // address=[0x2f550b0]
 // Decompiled from bool __thiscall CMaterialManagerTask::IsShooting(CMaterialManagerTask *this)
-
 bool  CMaterialManagerTask::IsShooting(void) {
   
   int v2; // esi
@@ -53,7 +50,6 @@ bool  CMaterialManagerTask::IsShooting(void) {
 
 // address=[0x2f55110]
 // Decompiled from char __thiscall CMaterialManagerTask::action(CMaterialManagerTask *this)
-
 bool  CMaterialManagerTask::action(void) {
   
   CExpandationEvent *v2; // [esp+14h] [ebp-40h]
@@ -173,7 +169,6 @@ CMaterialManagerTask__action___def_33551D7:
 
 // address=[0x2f55460]
 // Decompiled from char __thiscall CMaterialManagerTask::IsAlive(CMaterialManagerTask *this)
-
 bool  CMaterialManagerTask::IsAlive(void) {
   
   return 1;
@@ -182,7 +177,6 @@ bool  CMaterialManagerTask::IsAlive(void) {
 
 // address=[0x2f55470]
 // Decompiled from char __thiscall CMaterialManagerTask::WaitFor(CSchedule **this)
-
 bool  CMaterialManagerTask::WaitFor(void) {
   
   char result; // al
@@ -315,7 +309,6 @@ CMaterialManagerTask__WaitFor___def_33554A8:
 
 // address=[0x2f55790]
 // Decompiled from int __thiscall CMaterialManagerTask::MinDebitOutput(CSchedule **this, int a2)
-
 int  CMaterialManagerTask::MinDebitOutput(enum PILE_TYPES) {
   
   struct IAIEcoManager *EcoSector; // eax
@@ -331,7 +324,6 @@ int  CMaterialManagerTask::MinDebitOutput(enum PILE_TYPES) {
 
 // address=[0x2f557e0]
 // Decompiled from int __thiscall CMaterialManagerTask::MinCreditOutput(_DWORD *this, int a2)
-
 int  CMaterialManagerTask::MinCreditOutput(enum PILE_TYPES) {
   
   int v3; // [esp+1Ch] [ebp-14h]
@@ -348,7 +340,6 @@ int  CMaterialManagerTask::MinCreditOutput(enum PILE_TYPES) {
 
 // address=[0x2f55890]
 // Decompiled from bool __stdcall CMaterialManagerTask::IsSingleChainProduction(int a1)
-
 bool  CMaterialManagerTask::IsSingleChainProduction(enum PILE_TYPES) {
   
   return a1 == 11 || a1 == 32 || a1 == 37;

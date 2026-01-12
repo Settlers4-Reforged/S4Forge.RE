@@ -4,7 +4,6 @@
 
 // address=[0x1356900]
 // Decompiled from CEvn_HandleList *__thiscall CEvn_HandleList::CEvn_HandleList(CEvn_HandleList *this)
-
  CEvn_HandleList::CEvn_HandleList(void) {
   
   std::list<IEvn_Handle *>::list<IEvn_Handle *>((char *)this + 4);
@@ -15,7 +14,6 @@
 
 // address=[0x1356930]
 // Decompiled from int __thiscall CEvn_HandleList::~CEvn_HandleList(CEvn_HandleList *this)
-
  CEvn_HandleList::~CEvn_HandleList(void) {
   
   _BYTE v2[12]; // [esp+4h] [ebp-24h] BYREF

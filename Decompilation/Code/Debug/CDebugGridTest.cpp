@@ -4,7 +4,6 @@
 
 // address=[0x15dcbc0]
 // Decompiled from CDebugGridTest *__thiscall CDebugGridTest::CDebugGridTest(CDebugGridTest *this)
-
  CDebugGridTest::CDebugGridTest(void) {
   
   return this;
@@ -12,9 +11,7 @@
 
 
 // address=[0x15dcbd0]
-// Decompiled from // public: void __thiscall CDebugGridTest::Test(void)
-int CDebugGridTest::Test()
-
+// Decompiled from int CDebugGridTest::Test()
 void  CDebugGridTest::Test(void) {
   
   Grid *v0; // eax

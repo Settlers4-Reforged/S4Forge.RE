@@ -4,7 +4,6 @@
 
 // address=[0x1301740]
 // Decompiled from char *__thiscall IMessageTracer::PushFormatedInts(IMessageTracer *this, const char *a2, char *a3)
-
 void  IMessageTracer::PushFormatedInts(char const *,int) {
   
   char *result; // eax
@@ -23,7 +22,6 @@ void  IMessageTracer::PushFormatedInts(char const *,int) {
 
 // address=[0x1301780]
 // Decompiled from char *__thiscall IMessageTracer::PushFormatedInts(IMessageTracer *this, const char *a2, char *a3, int a4)
-
 void  IMessageTracer::PushFormatedInts(char const *,int,int) {
   
   char *result; // eax
@@ -43,7 +41,6 @@ void  IMessageTracer::PushFormatedInts(char const *,int,int) {
 
 // address=[0x13017d0]
 // Decompiled from char *__thiscall IMessageTracer::PushStaticText(IMessageTracer *this, const char *a2)
-
 void  IMessageTracer::PushStaticText(char const *) {
   
   char *result; // eax
@@ -57,7 +54,6 @@ void  IMessageTracer::PushStaticText(char const *) {
 
 // address=[0x1311dc0]
 // Decompiled from char *__thiscall IMessageTracer::PushFormatedInts(IMessageTracer *this, const char *a2, int a3, int a4, int a5)
-
 void  IMessageTracer::PushFormatedInts(char const *,int,int,int) {
   
   char *result; // eax
@@ -74,14 +70,7 @@ void  IMessageTracer::PushFormatedInts(char const *,int,int,int) {
 
 
 // address=[0x1311e20]
-// Decompiled from char *__thiscall IMessageTracer::PushFormatedInts(
-        IMessageTracer *this,
-        const char *a2,
-        int a3,
-        int a4,
-        int a5,
-        char *a6)
-
+// Decompiled from char *__thiscall IMessageTracer::PushFormatedInts(  IMessageTracer *this,  const char *a2,  int a3,  int a4,  int a5,  char *a6)
 void  IMessageTracer::PushFormatedInts(char const *,int,int,int,int) {
   
   char *result; // eax
@@ -102,15 +91,7 @@ void  IMessageTracer::PushFormatedInts(char const *,int,int,int,int) {
 
 
 // address=[0x1311e80]
-// Decompiled from struct IMessageTracer::STraceMsg *__thiscall IMessageTracer::PushFormatedInts(
-        IMessageTracer *this,
-        const char *a2,
-        int a3,
-        int a4,
-        int a5,
-        struct IMessageTracer::STraceMsg *a6,
-        int a7)
-
+// Decompiled from struct IMessageTracer::STraceMsg *__thiscall IMessageTracer::PushFormatedInts(  IMessageTracer *this,  const char *a2,  int a3,  int a4,  int a5,  struct IMessageTracer::STraceMsg *a6,  int a7)
 void  IMessageTracer::PushFormatedInts(char const *,int,int,int,int,int) {
   
   struct IMessageTracer::STraceMsg *result; // eax
@@ -133,7 +114,6 @@ void  IMessageTracer::PushFormatedInts(char const *,int,int,int,int,int) {
 
 // address=[0x1496d60]
 // Decompiled from void *__thiscall IMessageTracer::Init(IMessageTracer *this)
-
 void  IMessageTracer::Init(void) {
   
   *(_DWORD *)this = 0;
@@ -144,7 +124,6 @@ void  IMessageTracer::Init(void) {
 
 // address=[0x1496da0]
 // Decompiled from IMessageTracer *__thiscall IMessageTracer::Done(IMessageTracer *this)
-
 void  IMessageTracer::Done(void) {
   
   IMessageTracer *result; // eax
@@ -161,7 +140,6 @@ void  IMessageTracer::Done(void) {
 
 // address=[0x1496dd0]
 // Decompiled from int __thiscall IMessageTracer::PrintMessages(IMessageTracer *this, int a2, unsigned int a3)
-
 void  IMessageTracer::PrintMessages(unsigned int,unsigned int) {
   
   int result; // eax
@@ -242,7 +220,6 @@ void  IMessageTracer::PrintMessages(unsigned int,unsigned int) {
 
 // address=[0x14970f0]
 // Decompiled from IMessageTracer *__thiscall IMessageTracer::IMessageTracer(IMessageTracer *this)
-
  IMessageTracer::IMessageTracer(void) {
   
   *(_DWORD *)this = -1;
@@ -253,7 +230,6 @@ void  IMessageTracer::PrintMessages(unsigned int,unsigned int) {
 
 // address=[0x1558d30]
 // Decompiled from char __thiscall IMessageTracer::RemoveCurrentMsgIfEqual(const char **this, const char *a2, const char *a3)
-
 bool  IMessageTracer::RemoveCurrentMsgIfEqual(char const *,int) {
   
   int v4; // [esp+0h] [ebp-8h]
@@ -270,7 +246,6 @@ bool  IMessageTracer::RemoveCurrentMsgIfEqual(char const *,int) {
 
 // address=[0x1301410]
 // Decompiled from char *__thiscall IMessageTracer::GetNextTraceMsg(IMessageTracer *this)
-
 struct IMessageTracer::STraceMsg *  IMessageTracer::GetNextTraceMsg(void) {
   
   char *v2; // [esp+0h] [ebp-8h]

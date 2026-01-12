@@ -4,7 +4,6 @@
 
 // address=[0x151aae0]
 // Decompiled from char __thiscall IDecoObject::IsStaticInstance(IDecoObject *this)
-
 bool  IDecoObject::IsStaticInstance(void)const {
   
   return *((_BYTE *)this + 68);
@@ -13,7 +12,6 @@ bool  IDecoObject::IsStaticInstance(void)const {
 
 // address=[0x15414c0]
 // Decompiled from IDecoObject *__thiscall IDecoObject::IDecoObject(IDecoObject *this, int a2, int a3, int a4, int a5, bool a6)
-
  IDecoObject::IDecoObject(int,int,int,int,bool) {
   
   int v7; // [esp+4h] [ebp-1Ch]
@@ -76,13 +74,7 @@ bool  IDecoObject::IsStaticInstance(void)const {
 
 
 // address=[0x1541700]
-// Decompiled from IDecoObject *__thiscall IDecoObject::IDecoObject(
-        IDecoObject *this,
-        const struct IDecoObject *a2,
-        int a3,
-        int a4,
-        int a5)
-
+// Decompiled from IDecoObject *__thiscall IDecoObject::IDecoObject(  IDecoObject *this,  const struct IDecoObject *a2,  int a3,  int a4,  int a5)
  IDecoObject::IDecoObject(class IDecoObject const &,int,int,int) {
   
   int v5; // esi
@@ -137,7 +129,6 @@ bool  IDecoObject::IsStaticInstance(void)const {
 
 // address=[0x15418d0]
 // Decompiled from void __thiscall IDecoObject::~IDecoObject(IDecoObject *this)
-
  IDecoObject::~IDecoObject(void) {
   
   int v1; // eax
@@ -178,7 +169,6 @@ bool  IDecoObject::IsStaticInstance(void)const {
 
 // address=[0x1541a00]
 // Decompiled from int __thiscall IDecoObject::ConvertToDarkOrGreen(IDecoObject *this, bool a2)
-
 int  IDecoObject::ConvertToDarkOrGreen(bool) {
   
   int DarkObject; // [esp+Ch] [ebp-8h]
@@ -198,7 +188,6 @@ int  IDecoObject::ConvertToDarkOrGreen(bool) {
 
 // address=[0x1541a60]
 // Decompiled from _DWORD *__thiscall IDecoObject::IDecoObject(_DWORD *this, int a2)
-
  IDecoObject::IDecoObject(std::istream &) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
@@ -226,7 +215,6 @@ int  IDecoObject::ConvertToDarkOrGreen(bool) {
 
 // address=[0x1541b20]
 // Decompiled from int __thiscall IDecoObject::Store(void *this, struct std::ostream *a2)
-
 void  IDecoObject::Store(std::ostream &) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF

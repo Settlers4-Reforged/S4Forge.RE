@@ -4,7 +4,6 @@
 
 // address=[0x1401c60]
 // Decompiled from int __cdecl CShadowHerb::New(int a1)
-
 static class CPersistence * __cdecl CShadowHerb::New(std::istream &) {
   
   if ( CShadowHerb::operator new(0x50u) )
@@ -16,7 +15,6 @@ static class CPersistence * __cdecl CShadowHerb::New(std::istream &) {
 
 // address=[0x154abc0]
 // Decompiled from CShadowHerb *__thiscall CShadowHerb::CShadowHerb(CShadowHerb *this, int a2, int a3, int a4, int a5, int a6)
-
  CShadowHerb::CShadowHerb(int,int,int,int,int) {
   
   IDecoObject::IDecoObject(this, a2, a3, a4, a5, 0);
@@ -45,7 +43,6 @@ static class CPersistence * __cdecl CShadowHerb::New(std::istream &) {
 
 // address=[0x154ace0]
 // Decompiled from void __thiscall CShadowHerb::LogicUpdate(CShadowHerb *this)
-
 void  CShadowHerb::LogicUpdate(void) {
   
   int v1; // eax
@@ -111,7 +108,6 @@ void  CShadowHerb::LogicUpdate(void) {
 
 // address=[0x154ae90]
 // Decompiled from void *__thiscall CShadowHerb::GetGfxInfos(CShadowHerb *this)
-
 struct SGfxObjectInfo *  CShadowHerb::GetGfxInfos(void) {
   
   int TickCounter; // esi
@@ -137,10 +133,7 @@ struct SGfxObjectInfo *  CShadowHerb::GetGfxInfos(void) {
 
 
 // address=[0x154af50]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CShadowHerb::Decrease(CShadowHerb *this, int a2)
-
+// Decompiled from void __thiscall CShadowHerb::Decrease(CShadowHerb *this, int a2)
 void  CShadowHerb::Decrease(int) {
   
   ;
@@ -148,9 +141,7 @@ void  CShadowHerb::Decrease(int) {
 
 
 // address=[0x154af60]
-// Decompiled from // MFC 3.1-14.0 32bit
-int __thiscall CShadowHerb::Increase(CShadowHerb *this, int a2)
-
+// Decompiled from int __thiscall CShadowHerb::Increase(CShadowHerb *this, int a2)
 int  CShadowHerb::Increase(int) {
   
   return 1;
@@ -159,7 +150,6 @@ int  CShadowHerb::Increase(int) {
 
 // address=[0x154af80]
 // Decompiled from unsigned int __cdecl CShadowHerb::operator new(unsigned int a1)
-
 static void * __cdecl CShadowHerb::operator new(unsigned int) {
   
   return CDecoObjMgr::Alloc((CDecoObjMgr *)&g_cDecoObjMgr, a1);
@@ -168,7 +158,6 @@ static void * __cdecl CShadowHerb::operator new(unsigned int) {
 
 // address=[0x154afa0]
 // Decompiled from void __cdecl CShadowHerb::operator delete(void *a1)
-
 static void __cdecl CShadowHerb::operator delete(void *) {
   
   CDecoObjMgr::Dealloc((CDecoObjMgr *)&g_cDecoObjMgr, a1);
@@ -177,7 +166,6 @@ static void __cdecl CShadowHerb::operator delete(void *) {
 
 // address=[0x154afe0]
 // Decompiled from int __thiscall CShadowHerb::ConvertToDarkOrGreen(CShadowHerb *this, bool a2)
-
 int  CShadowHerb::ConvertToDarkOrGreen(bool) {
   
   return IEntity::Type((unsigned __int16 *)this);
@@ -186,7 +174,6 @@ int  CShadowHerb::ConvertToDarkOrGreen(bool) {
 
 // address=[0x154b000]
 // Decompiled from _DWORD *__thiscall CShadowHerb::CShadowHerb(_DWORD *this, int a2)
-
  CShadowHerb::CShadowHerb(std::istream &) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
@@ -217,7 +204,6 @@ int  CShadowHerb::ConvertToDarkOrGreen(bool) {
 
 // address=[0x154b100]
 // Decompiled from int __thiscall CShadowHerb::Store(int *this, struct std::ostream *a2)
-
 void  CShadowHerb::Store(std::ostream &) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
@@ -236,7 +222,6 @@ void  CShadowHerb::Store(std::ostream &) {
 
 // address=[0x154b2f0]
 // Decompiled from void __thiscall CShadowHerb::~CShadowHerb(CShadowHerb *this)
-
  CShadowHerb::~CShadowHerb(void) {
   
   *(_DWORD *)this = &CShadowHerb::_vftable_;
@@ -246,7 +231,6 @@ void  CShadowHerb::Store(std::ostream &) {
 
 // address=[0x154b3b0]
 // Decompiled from int __thiscall CShadowHerb::ClassID(CShadowHerb *this)
-
 unsigned long  CShadowHerb::ClassID(void)const {
   
   return CShadowHerb::m_iClassID;

@@ -3,10 +3,7 @@
 // Definitions for class CDynList
 
 // address=[0x2f3bb50]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CDynList::FirstEntry(CDynList *this)
-
+// Decompiled from int __thiscall CDynList::FirstEntry(CDynList *this)
 class CDynListEntry *  CDynList::FirstEntry(void)const {
   
   return *(_DWORD *)this;
@@ -14,9 +11,7 @@ class CDynListEntry *  CDynList::FirstEntry(void)const {
 
 
 // address=[0x2f3c7e0]
-// Decompiled from // MFC 3.1-14.0 32bit
-CDynList *__thiscall CDynList::CDynList(CDynList *this)
-
+// Decompiled from CDynList *__thiscall CDynList::CDynList(CDynList *this)
  CDynList::CDynList(void) {
   
   *(_DWORD *)this = 0;
@@ -28,7 +23,6 @@ CDynList *__thiscall CDynList::CDynList(CDynList *this)
 
 // address=[0x2f3c810]
 // Decompiled from void __thiscall CDynList::~CDynList(CDynList *this)
-
  CDynList::~CDynList(void) {
   
   CDynList::ClearDynList(this);
@@ -37,7 +31,6 @@ CDynList *__thiscall CDynList::CDynList(CDynList *this)
 
 // address=[0x2f3c850]
 // Decompiled from int __thiscall CDynList::addElement(CDynList *this, struct CDynListEntry *a2)
-
 int  CDynList::addElement(class CDynListEntry *) {
   
   int v3; // [esp+4h] [ebp-4h]
@@ -64,7 +57,6 @@ int  CDynList::addElement(class CDynListEntry *) {
 
 // address=[0x2f3c8d0]
 // Decompiled from int __thiscall CDynList::insertElementAt(CDynList *this, struct CDynListEntry *a2, int a3)
-
 int  CDynList::insertElementAt(class CDynListEntry *,int) {
   
   int v4; // [esp+4h] [ebp-Ch]
@@ -103,7 +95,6 @@ int  CDynList::insertElementAt(class CDynListEntry *,int) {
 
 // address=[0x2f3c980]
 // Decompiled from int __thiscall CDynList::elementAt(CDynList *this, int a2)
-
 class CDynListEntry *  CDynList::elementAt(int) {
   
   int v3; // [esp+4h] [ebp-4h]
@@ -124,7 +115,6 @@ class CDynListEntry *  CDynList::elementAt(int) {
 
 // address=[0x2f3c9f0]
 // Decompiled from int __thiscall CDynList::resize(CDynList *this)
-
 int  CDynList::resize(void) {
   
   int v2; // [esp+4h] [ebp-8h]
@@ -149,7 +139,6 @@ int  CDynList::resize(void) {
 
 // address=[0x2f3ca60]
 // Decompiled from int __thiscall CDynList::delElement(CDynList *this, int a2)
-
 int  CDynList::delElement(int) {
   
   int v3; // [esp+18h] [ebp-Ch]
@@ -187,7 +176,6 @@ LABEL_3:
 
 // address=[0x2f3cb60]
 // Decompiled from int __thiscall CDynList::delElement(CDynList *this, struct CDynListEntry *a2)
-
 int  CDynList::delElement(class CDynListEntry *) {
   
   return CDynList::delElement(this, *((_DWORD *)a2 + 2));
@@ -196,7 +184,6 @@ int  CDynList::delElement(class CDynListEntry *) {
 
 // address=[0x2f3cb80]
 // Decompiled from CDynList *__thiscall CDynList::ClearDynList(CDynList *this)
-
 void  CDynList::ClearDynList(void) {
   
   CDynList *result; // eax
@@ -225,9 +212,7 @@ void  CDynList::ClearDynList(void) {
 
 
 // address=[0x2f3cc30]
-// Decompiled from // public: int __thiscall CDynList::sort(int)
-int __thiscall CDynList::sort(CDynList *this, int a2)
-
+// Decompiled from int __thiscall CDynList::sort(CDynList *this, int a2)
 int  CDynList::sort(int) {
   
   float v3; // [esp+0h] [ebp-20h]
@@ -275,7 +260,6 @@ int  CDynList::sort(int) {
 
 // address=[0x2f404e0]
 // Decompiled from BOOL __thiscall CDynList::isEmpty(CDynList *this)
-
 int  CDynList::isEmpty(void) {
   
   return *((_DWORD *)this + 1) == 0;
@@ -283,10 +267,7 @@ int  CDynList::isEmpty(void) {
 
 
 // address=[0x2f40520]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CDynList::size(CDynList *this)
-
+// Decompiled from int __thiscall CDynList::size(CDynList *this)
 int  CDynList::size(void) {
   
   return *((_DWORD *)this + 1);

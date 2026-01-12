@@ -4,7 +4,6 @@
 
 // address=[0x13151c0]
 // Decompiled from int __thiscall CManySettlerTypesIterator::Init(CManySettlerTypesIterator *this, int a2, int a3, int a4)
-
 void  CManySettlerTypesIterator::Init(int,int,int) {
   
   int result; // eax
@@ -22,7 +21,6 @@ void  CManySettlerTypesIterator::Init(int,int,int) {
 
 // address=[0x1315200]
 // Decompiled from int __thiscall CManySettlerTypesIterator::FirstSettler(CManySettlerTypesIterator *this)
-
 int  CManySettlerTypesIterator::FirstSettler(void) {
   
   bool v2; // [esp+0h] [ebp-8h]
@@ -42,7 +40,6 @@ int  CManySettlerTypesIterator::FirstSettler(void) {
 
 // address=[0x1315280]
 // Decompiled from int __thiscall CManySettlerTypesIterator::NextSettler(CManySettlerTypesIterator *this)
-
 int  CManySettlerTypesIterator::NextSettler(void) {
   
   int v1; // eax
@@ -70,9 +67,7 @@ int  CManySettlerTypesIterator::NextSettler(void) {
 
 
 // address=[0x1315320]
-// Decompiled from // public: int __thiscall CManySettlerTypesIterator::NextSettlerIfCurrentIsNotValid(void)
-int __thiscall CManySettlerTypesIterator::NextSettlerIfCurrentIsNotValid(CManySettlerTypesIterator *this)
-
+// Decompiled from int __thiscall CManySettlerTypesIterator::NextSettlerIfCurrentIsNotValid(CManySettlerTypesIterator *this)
 int  CManySettlerTypesIterator::NextSettlerIfCurrentIsNotValid(void) {
   
   if ( CSettlerIteratorBase::SettlerValid(this, *((_DWORD *)this + 1)) )
@@ -83,9 +78,7 @@ int  CManySettlerTypesIterator::NextSettlerIfCurrentIsNotValid(void) {
 
 
 // address=[0x1317210]
-// Decompiled from CManySettlerTypesIterator *__thiscall CManySettlerTypesIterator::CManySettlerTypesIterator(
-        CManySettlerTypesIterator *this)
-
+// Decompiled from CManySettlerTypesIterator *__thiscall CManySettlerTypesIterator::CManySettlerTypesIterator(  CManySettlerTypesIterator *this)
  CManySettlerTypesIterator::CManySettlerTypesIterator(void) {
   
   return this;

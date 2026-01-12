@@ -4,7 +4,6 @@
 
 // address=[0x14c80e0]
 // Decompiled from CStateMDRandomMapParameters *__cdecl CStateMDRandomMapParameters::DynamicCreateFunc(void *a1)
-
 static class CGameState * __cdecl CStateMDRandomMapParameters::DynamicCreateFunc(void *) {
   
   CStateMDRandomMapParameters *C; // [esp+Ch] [ebp-10h]
@@ -18,10 +17,7 @@ static class CGameState * __cdecl CStateMDRandomMapParameters::DynamicCreateFunc
 
 
 // address=[0x14c8180]
-// Decompiled from CStateMDRandomMapParameters *__thiscall CStateMDRandomMapParameters::CStateMDRandomMapParameters(
-        CStateMDRandomMapParameters *this,
-        void *a2)
-
+// Decompiled from CStateMDRandomMapParameters *__thiscall CStateMDRandomMapParameters::CStateMDRandomMapParameters(  CStateMDRandomMapParameters *this,  void *a2)
  CStateMDRandomMapParameters::CStateMDRandomMapParameters(void *) {
   
   __int64 v2; // kr00_8
@@ -120,7 +116,6 @@ static class CGameState * __cdecl CStateMDRandomMapParameters::DynamicCreateFunc
 
 // address=[0x14c85d0]
 // Decompiled from void __thiscall CStateMDRandomMapParameters::~CStateMDRandomMapParameters(CStateMDRandomMapParameters *this)
-
  CStateMDRandomMapParameters::~CStateMDRandomMapParameters(void) {
   
   *(_DWORD *)this = &CStateMDRandomMapParameters::_vftable_;
@@ -131,7 +126,6 @@ static class CGameState * __cdecl CStateMDRandomMapParameters::DynamicCreateFunc
 
 // address=[0x14c8630]
 // Decompiled from char __thiscall CStateMDRandomMapParameters::Perform(CStateMDRandomMapParameters *this)
-
 bool  CStateMDRandomMapParameters::Perform(void) {
   
   DWORD v1; // esi
@@ -158,7 +152,6 @@ bool  CStateMDRandomMapParameters::Perform(void) {
 
 // address=[0x14c86d0]
 // Decompiled from char __thiscall CStateMDRandomMapParameters::OnEvent(CStateMDRandomMapParameters *this, struct CEvn_Event *a2)
-
 bool  CStateMDRandomMapParameters::OnEvent(class CEvn_Event &) {
   
   char result; // al
@@ -667,13 +660,7 @@ LABEL_134:
 
 
 // address=[0x14c96a0]
-// Decompiled from int __cdecl CStateMDRandomMapParameters::DrawMap(
-        unsigned __int16 *a1,
-        unsigned __int16 *a2,
-        unsigned int a3,
-        int a4,
-        int a5)
-
+// Decompiled from int __cdecl CStateMDRandomMapParameters::DrawMap(  unsigned __int16 *a1,  unsigned __int16 *a2,  unsigned int a3,  int a4,  int a5)
 static void __cdecl CStateMDRandomMapParameters::DrawMap(unsigned short *,unsigned short *,unsigned int,int,int) {
   
   int result; // eax
@@ -779,7 +766,6 @@ static void __cdecl CStateMDRandomMapParameters::DrawMap(unsigned short *,unsign
 
 // address=[0x14c9c20]
 // Decompiled from char __thiscall CStateMDRandomMapParameters::PaintMap(CStateMDRandomMapParameters *this)
-
 void  CStateMDRandomMapParameters::PaintMap(void) {
   
   char result; // al
@@ -803,7 +789,6 @@ void  CStateMDRandomMapParameters::PaintMap(void) {
 
 // address=[0x14c8160]
 // Decompiled from char __thiscall CStateMDRandomMapParameters::SetupGUI(CStateMDRandomMapParameters *this)
-
 void  CStateMDRandomMapParameters::SetupGUI(void) {
   
   return CGuiGameState::OpenDialog(this, dword_4031998, GuiDlgMDRandomMapParametersProc);

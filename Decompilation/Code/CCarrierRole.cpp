@@ -4,7 +4,6 @@
 
 // address=[0x13fffa0]
 // Decompiled from int __cdecl CCarrierRole::New(int a1)
-
 static class CPersistence * __cdecl CCarrierRole::New(std::istream &) {
   
   if ( operator new(0x38u) )
@@ -16,7 +15,6 @@ static class CPersistence * __cdecl CCarrierRole::New(std::istream &) {
 
 // address=[0x1563a30]
 // Decompiled from int __thiscall CCarrierRole::InitWalking(CCarrierRole *this, struct CSettler *a2)
-
 class CWalking *  CCarrierRole::InitWalking(class CSettler *) {
   
   int v2; // eax
@@ -31,7 +29,6 @@ class CWalking *  CCarrierRole::InitWalking(class CSettler *) {
 
 // address=[0x1563a70]
 // Decompiled from int __thiscall CCarrierRole::LogicUpdate(CCarrierRole *this, struct CSettler *a2)
-
 void  CCarrierRole::LogicUpdate(class CSettler *) {
   
   int result; // eax
@@ -69,7 +66,6 @@ void  CCarrierRole::LogicUpdate(class CSettler *) {
 
 // address=[0x1563b90]
 // Decompiled from int __thiscall CCarrierRole::LogicUpdateJob(CCarrierRole *this, struct CSettler *a2)
-
 void  CCarrierRole::LogicUpdateJob(class CSettler *) {
   
   int v2; // ecx
@@ -323,7 +319,6 @@ LABEL_91:
 
 // address=[0x1564340]
 // Decompiled from int __thiscall CCarrierRole::UpdateJob(CCarrierRole *this, struct CSettler *a2)
-
 void  CCarrierRole::UpdateJob(class CSettler *) {
   
   int v2; // ecx
@@ -370,7 +365,6 @@ void  CCarrierRole::UpdateJob(class CSettler *) {
 
 // address=[0x1564420]
 // Decompiled from int __stdcall CCarrierRole::PostLoadInit(CPropertySet *a1)
-
 void  CCarrierRole::PostLoadInit(class CSettler *) {
   
   return CWarMap::AddEntity(a1);
@@ -379,7 +373,6 @@ void  CCarrierRole::PostLoadInit(class CSettler *) {
 
 // address=[0x1564440]
 // Decompiled from __int16 __thiscall CCarrierRole::SetObserverTarget(_WORD *this, int a2, __int16 a3)
-
 void  CCarrierRole::SetObserverTarget(enum T_OBSERVER_TARGET,int) {
   
   __int16 result; // ax
@@ -421,7 +414,6 @@ void  CCarrierRole::SetObserverTarget(enum T_OBSERVER_TARGET,int) {
 
 // address=[0x15644e0]
 // Decompiled from int __thiscall CCarrierRole::GetObserverTarget(unsigned __int16 *this, int a2)
-
 int  CCarrierRole::GetObserverTarget(enum T_OBSERVER_TARGET) {
   
   int result; // eax
@@ -453,7 +445,6 @@ int  CCarrierRole::GetObserverTarget(enum T_OBSERVER_TARGET) {
 
 // address=[0x1564550]
 // Decompiled from unsigned __int8 *__thiscall CCarrierRole::UpdateCatapultPosition(CCarrierRole *this, int a2)
-
 void  CCarrierRole::UpdateCatapultPosition(int) {
   
   unsigned __int8 *result; // eax
@@ -475,7 +466,6 @@ void  CCarrierRole::UpdateCatapultPosition(int) {
 
 // address=[0x15645c0]
 // Decompiled from char *__thiscall CCarrierRole::CCarrierRole(char *this, int a2)
-
  CCarrierRole::CCarrierRole(std::istream &) {
   
   int v3; // [esp+4h] [ebp-1Ch] BYREF
@@ -530,7 +520,6 @@ void  CCarrierRole::UpdateCatapultPosition(int) {
 
 // address=[0x15647e0]
 // Decompiled from int __thiscall CCarrierRole::Store(struct CPersistence *this, struct std::ostream *a2)
-
 void  CCarrierRole::Store(std::ostream &) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
@@ -553,7 +542,6 @@ void  CCarrierRole::Store(std::ostream &) {
 
 // address=[0x1567060]
 // Decompiled from int __thiscall CCarrierRole::ClassID(CCarrierRole *this)
-
 unsigned long  CCarrierRole::ClassID(void)const {
   
   return CCarrierRole::m_iClassID;
@@ -561,10 +549,7 @@ unsigned long  CCarrierRole::ClassID(void)const {
 
 
 // address=[0x15670c0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CCarrierRole::GetSettlerRole(CCarrierRole *this)
-
+// Decompiled from int __thiscall CCarrierRole::GetSettlerRole(CCarrierRole *this)
 int  CCarrierRole::GetSettlerRole(void)const {
   
   return 1;
@@ -573,7 +558,6 @@ int  CCarrierRole::GetSettlerRole(void)const {
 
 // address=[0x1588480]
 // Decompiled from int __cdecl CCarrierRole::Load(int a1)
-
 static class CCarrierRole * __cdecl CCarrierRole::Load(std::istream &) {
   
   void **v1; // eax
@@ -589,7 +573,6 @@ static class CCarrierRole * __cdecl CCarrierRole::Load(std::istream &) {
 
 // address=[0x15648b0]
 // Decompiled from int __thiscall CCarrierRole::GetNextSettlerType(CCarrierRole *this)
-
 int  CCarrierRole::GetNextSettlerType(void) {
   
   return *((unsigned __int8 *)this + 45);
@@ -598,7 +581,6 @@ int  CCarrierRole::GetNextSettlerType(void) {
 
 // address=[0x15648d0]
 // Decompiled from char __thiscall CCarrierRole::SetNextSettlerType(CCarrierRole *this, char a2)
-
 bool  CCarrierRole::SetNextSettlerType(int) {
   
   *((_BYTE *)this + 45) = a2;
@@ -608,7 +590,6 @@ bool  CCarrierRole::SetNextSettlerType(int) {
 
 // address=[0x15648f0]
 // Decompiled from int __thiscall CCarrierRole::ChangeToNextType(CCarrierRole *this, struct CSettler *a2, char a3, char a4)
-
 void  CCarrierRole::ChangeToNextType(class CSettler *,bool,bool) {
   
   int v4; // eax
@@ -642,7 +623,6 @@ void  CCarrierRole::ChangeToNextType(class CSettler *,bool,bool) {
 
 // address=[0x15649c0]
 // Decompiled from CCarrierRole *__thiscall CCarrierRole::CCarrierRole(CCarrierRole *this)
-
  CCarrierRole::CCarrierRole(void) {
   
   CRandom16 *v1; // eax
@@ -663,7 +643,6 @@ void  CCarrierRole::ChangeToNextType(class CSettler *,bool,bool) {
 
 // address=[0x1564a80]
 // Decompiled from ISettlerRole *__thiscall CCarrierRole::~CCarrierRole(CCarrierRole *this)
-
  CCarrierRole::~CCarrierRole(void) {
   
   *(_DWORD *)this = &CCarrierRole::_vftable_;
@@ -673,7 +652,6 @@ void  CCarrierRole::ChangeToNextType(class CSettler *,bool,bool) {
 
 // address=[0x1564aa0]
 // Decompiled from int __thiscall CCarrierRole::GetNextJob(CCarrierRole *this, struct CSettler *a2)
-
 void  CCarrierRole::GetNextJob(class CSettler *) {
   
   IMovingEntity::IncToDoListIter(a2);
@@ -686,7 +664,6 @@ void  CCarrierRole::GetNextJob(class CSettler *) {
 
 // address=[0x1564af0]
 // Decompiled from char __thiscall CCarrierRole::TakeJob(ISettlerRole *this, COleCmdUI *a2)
-
 void  CCarrierRole::TakeJob(class CSettler *) {
   
   const struct CEntityTask *ActualTask; // eax
@@ -1006,7 +983,6 @@ LABEL_27:
 
 // address=[0x1565510]
 // Decompiled from _DWORD *__thiscall CCarrierRole::Init(int this, CPropertySet *a2)
-
 void  CCarrierRole::Init(class CSettler *) {
   
   int v2; // eax
@@ -1055,7 +1031,6 @@ void  CCarrierRole::Init(class CSettler *) {
 
 // address=[0x1565660]
 // Decompiled from CEcoSector *__thiscall CCarrierRole::ConvertEventIntoGoal(ISettlerRole *this, CPropertySet *a2, _DWORD *a3)
-
 void  CCarrierRole::ConvertEventIntoGoal(class CSettler *,class CEntityEvent *) {
   
   CEcoSector *result; // eax
@@ -1474,7 +1449,6 @@ LABEL_87:
 
 // address=[0x1566220]
 // Decompiled from char __thiscall CCarrierRole::SetFree(CCarrierRole *this, struct CSettler *a2, int a3)
-
 bool  CCarrierRole::SetFree(class CSettler *,int) {
   
   int v3; // eax
@@ -1571,7 +1545,6 @@ bool  CCarrierRole::SetFree(class CSettler *,int) {
 
 // address=[0x15664c0]
 // Decompiled from int __thiscall CCarrierRole::TryToGoHome(CCarrierRole *this, struct CSettler *a2)
-
 void  CCarrierRole::TryToGoHome(class CSettler *) {
   
   int v2; // eax
@@ -1599,7 +1572,6 @@ void  CCarrierRole::TryToGoHome(class CSettler *) {
 
 // address=[0x1567080]
 // Decompiled from int __thiscall CCarrierRole::DestinationPileId(CCarrierRole *this)
-
 int  CCarrierRole::DestinationPileId(void)const {
   
   return *((unsigned __int16 *)this + 23);
@@ -1608,7 +1580,6 @@ int  CCarrierRole::DestinationPileId(void)const {
 
 // address=[0x1567120]
 // Decompiled from int __thiscall CCarrierRole::NextSettlerType(CCarrierRole *this)
-
 int  CCarrierRole::NextSettlerType(void) {
   
   return *((unsigned __int8 *)this + 45);
@@ -1617,7 +1588,6 @@ int  CCarrierRole::NextSettlerType(void) {
 
 // address=[0x1567160]
 // Decompiled from int __thiscall CCarrierRole::SourcePileId2(CCarrierRole *this)
-
 int  CCarrierRole::SourcePileId2(void)const {
   
   return *((unsigned __int16 *)this + 24);
@@ -1626,7 +1596,6 @@ int  CCarrierRole::SourcePileId2(void)const {
 
 // address=[0x1567180]
 // Decompiled from int __thiscall CCarrierRole::SourcePileId3(CCarrierRole *this)
-
 int  CCarrierRole::SourcePileId3(void)const {
   
   return *((unsigned __int16 *)this + 25);

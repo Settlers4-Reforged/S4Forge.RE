@@ -4,7 +4,6 @@
 
 // address=[0x12fd010]
 // Decompiled from int __thiscall CAIEntityInfo::EntityId(CAIEntityInfo *this)
-
 int  CAIEntityInfo::EntityId(void)const {
   
   return *(unsigned __int16 *)this;
@@ -12,10 +11,7 @@ int  CAIEntityInfo::EntityId(void)const {
 
 
 // address=[0x12fd380]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CAIEntityInfo::Next(CAIEntityInfo *this)
-
+// Decompiled from int __thiscall CAIEntityInfo::Next(CAIEntityInfo *this)
 class CAIEntityInfo *  CAIEntityInfo::Next(void)const {
   
   return *((_DWORD *)this + 4);
@@ -23,10 +19,7 @@ class CAIEntityInfo *  CAIEntityInfo::Next(void)const {
 
 
 // address=[0x12fd730]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CAIEntityInfo::TaskForce(CAIEntityInfo *this)
-
+// Decompiled from int __thiscall CAIEntityInfo::TaskForce(CAIEntityInfo *this)
 class CAITaskForce *  CAIEntityInfo::TaskForce(void)const {
   
   return *((_DWORD *)this + 2);
@@ -35,7 +28,6 @@ class CAITaskForce *  CAIEntityInfo::TaskForce(void)const {
 
 // address=[0x1306910]
 // Decompiled from int __thiscall CAIEntityInfo::Prev(pairNode *this)
-
 class CAIEntityInfo *  CAIEntityInfo::Prev(void)const {
   
   return *((_DWORD *)this + 3);
@@ -44,7 +36,6 @@ class CAIEntityInfo *  CAIEntityInfo::Prev(void)const {
 
 // address=[0x13069a0]
 // Decompiled from void __thiscall CAIEntityInfo::SetTargetId(CPropertySet *this, unsigned __int16 a2)
-
 void  CAIEntityInfo::SetTargetId(int) {
   
   *((_WORD *)this + 1) = a2;
@@ -52,9 +43,7 @@ void  CAIEntityInfo::SetTargetId(int) {
 
 
 // address=[0x13069c0]
-// Decompiled from // MFC 3.1-14.0 32bit
-CAIEntityInfo *__thiscall CAIEntityInfo::SetTimeStamp(CAIEntityInfo *this, unsigned int a2)
-
+// Decompiled from CAIEntityInfo *__thiscall CAIEntityInfo::SetTimeStamp(CAIEntityInfo *this, unsigned int a2)
 void  CAIEntityInfo::SetTimeStamp(unsigned int) {
   
   CAIEntityInfo *result; // eax
@@ -67,7 +56,6 @@ void  CAIEntityInfo::SetTimeStamp(unsigned int) {
 
 // address=[0x13069e0]
 // Decompiled from int __thiscall CAIEntityInfo::TargetId(CAIEntityInfo *this)
-
 int  CAIEntityInfo::TargetId(void)const {
   
   return *((unsigned __int16 *)this + 1);
@@ -75,10 +63,7 @@ int  CAIEntityInfo::TargetId(void)const {
 
 
 // address=[0x1306a00]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CAIEntityInfo::TimeStamp(CAIEntityInfo *this)
-
+// Decompiled from int __thiscall CAIEntityInfo::TimeStamp(CAIEntityInfo *this)
 unsigned int  CAIEntityInfo::TimeStamp(void)const {
   
   return *((_DWORD *)this + 1);
@@ -87,7 +72,6 @@ unsigned int  CAIEntityInfo::TimeStamp(void)const {
 
 // address=[0x130a880]
 // Decompiled from CAIEntityInfo *__thiscall CAIEntityInfo::CAIEntityInfo(CAIEntityInfo *this, __int16 a2)
-
  CAIEntityInfo::CAIEntityInfo(int) {
   
   *(_WORD *)this = a2;
@@ -103,7 +87,6 @@ unsigned int  CAIEntityInfo::TimeStamp(void)const {
 
 // address=[0x130a8e0]
 // Decompiled from CAIEntityInfo *__thiscall CAIEntityInfo::~CAIEntityInfo(CAIEntityInfo *this)
-
  CAIEntityInfo::~CAIEntityInfo(void) {
   
   CAIEntityInfo *result; // eax
@@ -134,7 +117,6 @@ unsigned int  CAIEntityInfo::TimeStamp(void)const {
 
 // address=[0x130aa00]
 // Decompiled from int __thiscall CAIEntityInfo::ExtendedInfo(_DWORD *this, int a2)
-
 class CAIEntityInfoEx *  CAIEntityInfo::ExtendedInfo(enum T_AI_ENTITY_INFO_EX_CLASS) {
   
   void (__thiscall ***v3)(_DWORD, int); // [esp+8h] [ebp-8h]

@@ -4,7 +4,6 @@
 
 // address=[0x1309710]
 // Decompiled from int __cdecl IAIDifficultyLevels::GetDifficultyLevel(int a1)
-
 static enum T_AI_DIFFICULTY_LEVEL __cdecl IAIDifficultyLevels::GetDifficultyLevel(int) {
   
   int v1; // ecx
@@ -26,7 +25,6 @@ static enum T_AI_DIFFICULTY_LEVEL __cdecl IAIDifficultyLevels::GetDifficultyLeve
 
 // address=[0x1309780]
 // Decompiled from unsigned int *__stdcall IAIDifficultyLevels::SetDifficultyLevel(int a1, unsigned int a2)
-
 void  IAIDifficultyLevels::SetDifficultyLevel(int,enum T_AI_DIFFICULTY_LEVEL) {
   
   unsigned int *result; // eax

@@ -4,7 +4,6 @@
 
 // address=[0x2f86560]
 // Decompiled from CSurfaceV7 *__cdecl CSurface::CreateSurfacePtr(bool a1)
-
 static class CSurface * __cdecl CSurface::CreateSurfacePtr(bool) {
   
   CSurfaceV7 *v3; // [esp+10h] [ebp-18h]
@@ -31,7 +30,6 @@ static class CSurface * __cdecl CSurface::CreateSurfacePtr(bool) {
 
 // address=[0x2f8a2f0]
 // Decompiled from CSurface *__thiscall CSurface::CSurface(CSurface *this)
-
  CSurface::CSurface(void) {
   
   *(_DWORD *)this = &CSurface::_vftable_;
@@ -40,10 +38,7 @@ static class CSurface * __cdecl CSurface::CreateSurfacePtr(bool) {
 
 
 // address=[0x2f8a310]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CSurface::~CSurface(CSurface *this)
-
+// Decompiled from void __thiscall CSurface::~CSurface(CSurface *this)
  CSurface::~CSurface(void) {
   
   ;

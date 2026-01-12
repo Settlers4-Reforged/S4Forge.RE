@@ -3,9 +3,7 @@
 // Definitions for class CIntResSquare
 
 // address=[0x131b560]
-// Decompiled from // public: int __thiscall CIntResSquare::Value(void)
-int __thiscall CIntResSquare::Value(_DWORD *this)
-
+// Decompiled from int __thiscall CIntResSquare::Value(_DWORD *this)
 int  CIntResSquare::Value(void) {
   
   int v2; // [esp+8h] [ebp-Ch]
@@ -22,9 +20,7 @@ int  CIntResSquare::Value(void) {
 
 
 // address=[0x131b5d0]
-// Decompiled from // public: class CIntResSquare & __thiscall CIntResSquare::operator+=(class CAIResourceData const &)
-_DWORD *__thiscall CIntResSquare::operator__(_DWORD *this, CAIResourceData *a2)
-
+// Decompiled from _DWORD *__thiscall CIntResSquare::operator__(_DWORD *this, CAIResourceData *a2)
 class CIntResSquare &  CIntResSquare::operator+=(class CAIResourceData const &) {
   
   int i; // [esp+0h] [ebp-8h]
@@ -39,9 +35,7 @@ class CIntResSquare &  CIntResSquare::operator+=(class CAIResourceData const &) 
 
 
 // address=[0x131b660]
-// Decompiled from // public: bool __thiscall CIntResSquare::operator>=(class CIntResSquare const &)
-bool __thiscall CIntResSquare::operator___0(_DWORD *this, _DWORD *a2)
-
+// Decompiled from bool __thiscall CIntResSquare::operator___0(_DWORD *this, _DWORD *a2)
 bool  CIntResSquare::operator>=(class CIntResSquare const &) {
   
   int i; // [esp+14h] [ebp-4h]

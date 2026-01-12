@@ -3,9 +3,7 @@
 // Definitions for class CAIEcoSpecialBuildingInfos
 
 // address=[0x133a1d0]
-// Decompiled from CAIEcoSpecialBuildingInfos *__thiscall CAIEcoSpecialBuildingInfos::CAIEcoSpecialBuildingInfos(
-        CAIEcoSpecialBuildingInfos *this)
-
+// Decompiled from CAIEcoSpecialBuildingInfos *__thiscall CAIEcoSpecialBuildingInfos::CAIEcoSpecialBuildingInfos(  CAIEcoSpecialBuildingInfos *this)
  CAIEcoSpecialBuildingInfos::CAIEcoSpecialBuildingInfos(void) {
   
   if ( CAIEcoSpecialBuildingInfos::pSingleInstance
@@ -27,7 +25,6 @@
 
 // address=[0x133a230]
 // Decompiled from void __thiscall CAIEcoSpecialBuildingInfos::~CAIEcoSpecialBuildingInfos(AFX_GLOBAL_DATA *this)
-
  CAIEcoSpecialBuildingInfos::~CAIEcoSpecialBuildingInfos(void) {
   
   CAIEcoSpecialBuildingInfos::pSingleInstance = 0;
@@ -36,7 +33,6 @@
 
 // address=[0x133a250]
 // Decompiled from int CAIEcoSpecialBuildingInfos::TheObject()
-
 static class CAIEcoSpecialBuildingInfos * __cdecl CAIEcoSpecialBuildingInfos::TheObject(void) {
   
   CAIEcoSpecialBuildingInfos *C; // [esp+Ch] [ebp-10h]
@@ -52,7 +48,6 @@ static class CAIEcoSpecialBuildingInfos * __cdecl CAIEcoSpecialBuildingInfos::Th
 
 // address=[0x133a2d0]
 // Decompiled from int __thiscall CAIEcoSpecialBuildingInfos::GetBoundingBoxInfo(void *this, int a2, int a3)
-
 struct SAIESBIBoundingInfos const *  CAIEcoSpecialBuildingInfos::GetBoundingBoxInfo(int,enum BUILDING_TYPES) {
   
   if ( a2 < 5 )
@@ -64,7 +59,6 @@ struct SAIESBIBoundingInfos const *  CAIEcoSpecialBuildingInfos::GetBoundingBoxI
 
 // address=[0x133a300]
 // Decompiled from int __thiscall CAIEcoSpecialBuildingInfos::GetBlockingBitAmount(unsigned __int16 *this, int a2, int a3)
-
 int  CAIEcoSpecialBuildingInfos::GetBlockingBitAmount(int,enum BUILDING_TYPES) {
   
   if ( a2 < 5 )
@@ -76,7 +70,6 @@ int  CAIEcoSpecialBuildingInfos::GetBlockingBitAmount(int,enum BUILDING_TYPES) {
 
 // address=[0x133a330]
 // Decompiled from int __thiscall CAIEcoSpecialBuildingInfos::GetNrNeededBoards(unsigned __int8 *this, int a2, int a3)
-
 int  CAIEcoSpecialBuildingInfos::GetNrNeededBoards(int,enum BUILDING_TYPES) {
   
   if ( a2 < 5 )
@@ -88,7 +81,6 @@ int  CAIEcoSpecialBuildingInfos::GetNrNeededBoards(int,enum BUILDING_TYPES) {
 
 // address=[0x133a360]
 // Decompiled from int __thiscall CAIEcoSpecialBuildingInfos::GetNrNeededStones(unsigned __int8 *this, int a2, int a3)
-
 int  CAIEcoSpecialBuildingInfos::GetNrNeededStones(int,enum BUILDING_TYPES) {
   
   if ( a2 < 5 )
@@ -100,7 +92,6 @@ int  CAIEcoSpecialBuildingInfos::GetNrNeededStones(int,enum BUILDING_TYPES) {
 
 // address=[0x133a390]
 // Decompiled from int __thiscall CAIEcoSpecialBuildingInfos::GetNrNeededGold(unsigned __int8 *this, int a2, int a3)
-
 int  CAIEcoSpecialBuildingInfos::GetNrNeededGold(int,enum BUILDING_TYPES) {
   
   if ( a2 < 5 )
@@ -112,7 +103,6 @@ int  CAIEcoSpecialBuildingInfos::GetNrNeededGold(int,enum BUILDING_TYPES) {
 
 // address=[0x133a3c0]
 // Decompiled from void __thiscall CAIEcoSpecialBuildingInfos::InitBoundingBoxes(CAIEcoSpecialBuildingInfos *this)
-
 void  CAIEcoSpecialBuildingInfos::InitBoundingBoxes(void) {
   
   _BYTE *BuildingInfo; // [esp+0h] [ebp-10h]
@@ -136,7 +126,6 @@ void  CAIEcoSpecialBuildingInfos::InitBoundingBoxes(void) {
 
 // address=[0x133a4a0]
 // Decompiled from int __thiscall CAIEcoSpecialBuildingInfos::InitBlockingBitCount(CAIEcoSpecialBuildingInfos *this)
-
 void  CAIEcoSpecialBuildingInfos::InitBlockingBitCount(void) {
   
   _DWORD *v1; // eax
@@ -202,7 +191,6 @@ void  CAIEcoSpecialBuildingInfos::InitBlockingBitCount(void) {
 
 // address=[0x133a640]
 // Decompiled from void __thiscall CAIEcoSpecialBuildingInfos::InitBuildResources(CAIEcoSpecialBuildingInfos *this)
-
 void  CAIEcoSpecialBuildingInfos::InitBuildResources(void) {
   
   _BYTE *BuildingInfo; // [esp+0h] [ebp-10h]

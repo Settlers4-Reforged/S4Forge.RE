@@ -4,7 +4,6 @@
 
 // address=[0x15e7010]
 // Decompiled from bool __thiscall CLink::IsHeader(CLink *this)
-
 bool  CLink::IsHeader(void)const {
   
   return *((unsigned __int8 *)this + 1) == 253;
@@ -13,7 +12,6 @@ bool  CLink::IsHeader(void)const {
 
 // address=[0x15e74d0]
 // Decompiled from bool __thiscall CLink::Unused(CLink *this)
-
 bool  CLink::Unused(void)const {
   
   return *((unsigned __int8 *)this + 1) == 255;
@@ -22,7 +20,6 @@ bool  CLink::Unused(void)const {
 
 // address=[0x15e7550]
 // Decompiled from bool __thiscall CLink::Used(CLink *this)
-
 bool  CLink::Used(void)const {
   
   return *((unsigned __int8 *)this + 1) < 0xFEu;
@@ -31,7 +28,6 @@ bool  CLink::Used(void)const {
 
 // address=[0x15f5360]
 // Decompiled from bool __thiscall CLink::PrevLinkIsLastOne(CLink *this)
-
 bool  CLink::PrevLinkIsLastOne(void)const {
   
   return *((unsigned __int8 *)this + 1) >= 0xFDu;

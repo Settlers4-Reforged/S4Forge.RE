@@ -4,7 +4,6 @@
 
 // address=[0x14b7f10]
 // Decompiled from int __cdecl sub_18B7F10(int a1)
-
 static class CGameState * __cdecl CStateLobbyGameSettings::DynamicCreateFunc(void *) {
   
   if ( operator new(0xAF9Cu) )
@@ -15,10 +14,7 @@ static class CGameState * __cdecl CStateLobbyGameSettings::DynamicCreateFunc(voi
 
 
 // address=[0x14b7f90]
-// Decompiled from CStateLobbyGameSettings *__thiscall CStateLobbyGameSettings::CStateLobbyGameSettings(
-        CStateLobbyGameSettings *this,
-        int a2)
-
+// Decompiled from CStateLobbyGameSettings *__thiscall CStateLobbyGameSettings::CStateLobbyGameSettings(  CStateLobbyGameSettings *this,  int a2)
  CStateLobbyGameSettings::CStateLobbyGameSettings(void *) {
   
   const WCHAR *v2; // eax
@@ -143,7 +139,6 @@ static class CGameState * __cdecl CStateLobbyGameSettings::DynamicCreateFunc(voi
 
 // address=[0x14b84f0]
 // Decompiled from void __thiscall CStateLobbyGameSettings::~CStateLobbyGameSettings(CStateLobbyGameSettings *this)
-
  CStateLobbyGameSettings::~CStateLobbyGameSettings(void) {
   
   bool v2; // [esp+Bh] [ebp-Dh]
@@ -167,7 +162,6 @@ static class CGameState * __cdecl CStateLobbyGameSettings::DynamicCreateFunc(voi
 
 // address=[0x14b85e0]
 // Decompiled from char __thiscall CStateLobbyGameSettings::Perform(CStateLobbyGameSettings *this)
-
 bool  CStateLobbyGameSettings::Perform(void) {
   
   OnlineManager *Instance; // eax
@@ -256,7 +250,6 @@ bool  CStateLobbyGameSettings::Perform(void) {
 
 // address=[0x14b8890]
 // Decompiled from char __thiscall CStateLobbyGameSettings::OnEvent(CStateLobbyGameSettings *this, struct CEvn_Event *a2)
-
 bool  CStateLobbyGameSettings::OnEvent(class CEvn_Event &) {
   
   char result; // al
@@ -580,7 +573,6 @@ bool  CStateLobbyGameSettings::OnEvent(class CEvn_Event &) {
 
 // address=[0x14b9490]
 // Decompiled from void __thiscall CStateLobbyGameSettings::UpdatePlayerList(CStateLobbyGameSettings *this, bool a2)
-
 void  CStateLobbyGameSettings::UpdatePlayerList(bool) {
   
   OnlineManager *Instance; // eax
@@ -727,7 +719,6 @@ void  CStateLobbyGameSettings::UpdatePlayerList(bool) {
 
 // address=[0x14b9b30]
 // Decompiled from int __stdcall CStateLobbyGameSettings::PrintChatLine(wchar_t *String, wchar_t *Source)
-
 void  CStateLobbyGameSettings::PrintChatLine(unsigned short const *,unsigned short const *) {
   
   size_t v2; // eax
@@ -758,7 +749,6 @@ void  CStateLobbyGameSettings::PrintChatLine(unsigned short const *,unsigned sho
 
 // address=[0x14b9ca0]
 // Decompiled from int CStateLobbyGameSettings::CompileUserFlags()
-
 static int __cdecl CStateLobbyGameSettings::CompileUserFlags(void) {
   
   int v1; // eax
@@ -965,7 +955,6 @@ static int __cdecl CStateLobbyGameSettings::CompileUserFlags(void) {
 
 // address=[0x14ba340]
 // Decompiled from char CStateLobbyGameSettings::CopyDefaultUserFlags()
-
 static bool __cdecl CStateLobbyGameSettings::CopyDefaultUserFlags(void) {
   
   const WCHAR *v0; // eax
@@ -1068,13 +1057,7 @@ static bool __cdecl CStateLobbyGameSettings::CopyDefaultUserFlags(void) {
 
 
 // address=[0x14ba670]
-// Decompiled from int __cdecl CStateLobbyGameSettings::DrawMap(
-        unsigned __int16 *a1,
-        unsigned __int16 *a2,
-        unsigned int a3,
-        int a4,
-        int a5)
-
+// Decompiled from int __cdecl CStateLobbyGameSettings::DrawMap(  unsigned __int16 *a1,  unsigned __int16 *a2,  unsigned int a3,  int a4,  int a5)
 static void __cdecl CStateLobbyGameSettings::DrawMap(unsigned short *,unsigned short *,unsigned int,int,int) {
   
   int result; // eax
@@ -1180,7 +1163,6 @@ static void __cdecl CStateLobbyGameSettings::DrawMap(unsigned short *,unsigned s
 
 // address=[0x14babf0]
 // Decompiled from void __thiscall CStateLobbyGameSettings::PaintMap(_DWORD *this)
-
 void  CStateLobbyGameSettings::PaintMap(void) {
   
   _DWORD *v1; // [esp+0h] [ebp-24h]
@@ -1249,7 +1231,6 @@ void  CStateLobbyGameSettings::PaintMap(void) {
 
 // address=[0x14badb0]
 // Decompiled from int __thiscall CStateLobbyGameSettings::TransitionToHost(CStateLobbyGameSettings *this)
-
 void  CStateLobbyGameSettings::TransitionToHost(void) {
   
   bool v2; // [esp+0h] [ebp-Ch]
@@ -1271,7 +1252,6 @@ void  CStateLobbyGameSettings::TransitionToHost(void) {
 
 // address=[0x14bae60]
 // Decompiled from int __thiscall CStateLobbyGameSettings::CreateLobbyGameInfo(_BYTE *this, int a2, int a3)
-
 void  CStateLobbyGameSettings::CreateLobbyGameInfo(class CLanLobbyGameSettings &,std::wstring &) {
   
   *(_BYTE *)(a2 + 140) = CGameType::IsWebGame(g_pGameType);
@@ -1292,7 +1272,6 @@ void  CStateLobbyGameSettings::CreateLobbyGameInfo(class CLanLobbyGameSettings &
 
 // address=[0x14baf80]
 // Decompiled from char __thiscall CStateLobbyGameSettings::CreateRandomGoods(CStateLobbyGameSettings *this)
-
 void  CStateLobbyGameSettings::CreateRandomGoods(void) {
   
   int v1; // eax
@@ -1343,7 +1322,6 @@ void  CStateLobbyGameSettings::CreateRandomGoods(void) {
 
 // address=[0x14bb1c0]
 // Decompiled from char __thiscall CStateLobbyGameSettings::CheckDoubleEconomyGood(CStateLobbyGameSettings *this, int a2)
-
 bool  CStateLobbyGameSettings::CheckDoubleEconomyGood(int) {
   
   int i; // [esp+4h] [ebp-4h]
@@ -1359,7 +1337,6 @@ bool  CStateLobbyGameSettings::CheckDoubleEconomyGood(int) {
 
 // address=[0x14bb220]
 // Decompiled from bool __thiscall CStateLobbyGameSettings::ReadUserflagFiles(CStateLobbyGameSettings *this)
-
 bool  CStateLobbyGameSettings::ReadUserflagFiles(void) {
   
   const wchar_t *v1; // eax
@@ -1427,7 +1404,6 @@ bool  CStateLobbyGameSettings::ReadUserflagFiles(void) {
 
 // address=[0x14bb450]
 // Decompiled from CStateLobbyGameSettings *__thiscall CStateLobbyGameSettings::ClearFlagnameList(CStateLobbyGameSettings *this)
-
 void  CStateLobbyGameSettings::ClearFlagnameList(void) {
   
   CStateLobbyGameSettings *result; // eax
@@ -1443,7 +1419,6 @@ void  CStateLobbyGameSettings::ClearFlagnameList(void) {
 
 // address=[0x14bb4a0]
 // Decompiled from int __thiscall CStateLobbyGameSettings::SetupGUI(CStateLobbyGameSettings *this)
-
 void  CStateLobbyGameSettings::SetupGUI(void) {
   
   int result; // eax
@@ -1467,7 +1442,6 @@ void  CStateLobbyGameSettings::SetupGUI(void) {
 
 // address=[0x14bb540]
 // Decompiled from bool __thiscall CStateLobbyGameSettings::CheckContinue(CStateLobbyGameSettings *this)
-
 bool  CStateLobbyGameSettings::CheckContinue(void) {
   
   int v2; // [esp+4h] [ebp-Ch]
@@ -1492,7 +1466,6 @@ bool  CStateLobbyGameSettings::CheckContinue(void) {
 
 // address=[0x14bb630]
 // Decompiled from char __thiscall CStateLobbyGameSettings::CheckReady(CStateLobbyGameSettings *this)
-
 bool  CStateLobbyGameSettings::CheckReady(void) {
   
   int LocalSlot; // [esp+18h] [ebp-18h]
@@ -1553,7 +1526,6 @@ bool  CStateLobbyGameSettings::CheckReady(void) {
 
 // address=[0x14bb870]
 // Decompiled from int __thiscall CStateLobbyGameSettings::SetBackButtonState(CStateLobbyGameSettings *this)
-
 void  CStateLobbyGameSettings::SetBackButtonState(void) {
   
   int result; // eax
@@ -1574,7 +1546,6 @@ void  CStateLobbyGameSettings::SetBackButtonState(void) {
 
 // address=[0x14bb8f0]
 // Decompiled from void __thiscall CStateLobbyGameSettings::UserflagChanged(CStateLobbyGameSettings *this, int a2, int a3)
-
 void  CStateLobbyGameSettings::UserflagChanged(int,int) {
   
   const WCHAR *v3; // eax
@@ -1668,7 +1639,6 @@ void  CStateLobbyGameSettings::UserflagChanged(int,int) {
 
 // address=[0x14bbbc0]
 // Decompiled from CStateLobbyGameSettings *__thiscall CStateLobbyGameSettings::SetRandomRaces(CStateLobbyGameSettings *this)
-
 void  CStateLobbyGameSettings::SetRandomRaces(void) {
   
   CStateLobbyGameSettings *result; // eax

@@ -4,7 +4,6 @@
 
 // address=[0x130e470]
 // Decompiled from _DWORD *__thiscall CEvn_Logic::~CEvn_Logic(CEvn_Logic *this)
-
  CEvn_Logic::~CEvn_Logic(void) {
   
   return CEvn_Event::~CEvn_Event(this);
@@ -12,15 +11,7 @@
 
 
 // address=[0x1334e60]
-// Decompiled from CEvn_Logic *__thiscall CEvn_Logic::CEvn_Logic(
-        CEvn_Logic *this,
-        unsigned int a2,
-        unsigned int a3,
-        unsigned int a4,
-        char a5,
-        unsigned int a6,
-        unsigned __int16 a7)
-
+// Decompiled from CEvn_Logic *__thiscall CEvn_Logic::CEvn_Logic(  CEvn_Logic *this,  unsigned int a2,  unsigned int a3,  unsigned int a4,  char a5,  unsigned int a6,  unsigned __int16 a7)
  CEvn_Logic::CEvn_Logic(unsigned int,unsigned int,unsigned int,unsigned char,unsigned int,unsigned short) {
   
   CEvn_Event::CEvn_Event((CEvn_Event *)this, a2, a3, a4, 0);
@@ -34,7 +25,6 @@
 
 // address=[0x1355030]
 // Decompiled from CEvn_Logic *__thiscall CEvn_Logic::CEvn_Logic(CEvn_Logic *this)
-
  CEvn_Logic::CEvn_Logic(void) {
   
   CEvn_Event::CEvn_Event((CEvn_Event *)this, 0, 0, 0, 0);
@@ -48,7 +38,6 @@
 
 // address=[0x13570f0]
 // Decompiled from int __thiscall CEvn_Logic::Load(CEvn_Logic *this, struct IS4Chunk *a2)
-
 void  CEvn_Logic::Load(class IS4Chunk &) {
   
   int result; // eax
@@ -70,7 +59,6 @@ void  CEvn_Logic::Load(class IS4Chunk &) {
 
 // address=[0x13571b0]
 // Decompiled from int __thiscall CEvn_Logic::Save(CEvn_Logic *this, struct IS4Chunk *a2)
-
 void  CEvn_Logic::Save(class IS4Chunk &) {
   
   int result; // eax
@@ -105,7 +93,6 @@ void  CEvn_Logic::Save(class IS4Chunk &) {
 
 // address=[0x145fff0]
 // Decompiled from _DWORD *__thiscall CEvn_Logic::CEvn_Logic(_DWORD *this, struct boost::exception_detail::clone_base *a2)
-
  CEvn_Logic::CEvn_Logic(class CEvn_Logic const &) {
   
   CEvn_Event::CEvn_Event(a2);
@@ -120,7 +107,6 @@ void  CEvn_Logic::Save(class IS4Chunk &) {
 
 // address=[0x1486be0]
 // Decompiled from int __thiscall CEvn_Logic::operator=(int this, int a2)
-
 class CEvn_Logic &  CEvn_Logic::operator=(class CEvn_Logic const &) {
   
   CEvn_Event::operator=(this, (_BYTE *)a2);

@@ -3,9 +3,7 @@
 // Definitions for class CClient
 
 // address=[0x15b1b00]
-// Decompiled from // public: __thiscall CClient::CClient(void)
-CClient *__thiscall CClient::CClient(CClient *this)
-
+// Decompiled from CClient *__thiscall CClient::CClient(CClient *this)
  CClient::CClient(void) {
   
   *(_DWORD *)this = &CClient::_vftable_;
@@ -22,7 +20,6 @@ CClient *__thiscall CClient::CClient(CClient *this)
 
 // address=[0x15b1b60]
 // Decompiled from CClient *__thiscall CClient::CClient(CClient *this, const struct CClient *a2)
-
  CClient::CClient(class CClient const &) {
   
   *(_DWORD *)this = &CClient::_vftable_;
@@ -39,7 +36,6 @@ CClient *__thiscall CClient::CClient(CClient *this)
 
 // address=[0x15b1bd0]
 // Decompiled from CClient *__thiscall CClient::CClient(CClient *this, int a2, int a3, int a4)
-
  CClient::CClient(long,int,int) {
   
   *(_DWORD *)this = &CClient::_vftable_;
@@ -57,7 +53,6 @@ CClient *__thiscall CClient::CClient(CClient *this)
 
 // address=[0x15b1c40]
 // Decompiled from CClient *__thiscall CClient::~CClient(CClient *this)
-
  CClient::~CClient(void) {
   
   CClient *result; // eax
@@ -70,7 +65,6 @@ CClient *__thiscall CClient::CClient(CClient *this)
 
 // address=[0x15b1c60]
 // Decompiled from bool __thiscall CClient::operator==(_DWORD *this, int a2)
-
 bool  CClient::operator==(unsigned int) {
   
   return this[3] == a2;
@@ -79,7 +73,6 @@ bool  CClient::operator==(unsigned int) {
 
 // address=[0x15b3530]
 // Decompiled from int __thiscall CClient::operator=(int this, int a2)
-
 class CClient &  CClient::operator=(class CClient const &) {
   
   *(_BYTE *)(this + 4) = *(_BYTE *)(a2 + 4);
@@ -95,10 +88,7 @@ class CClient &  CClient::operator=(class CClient const &) {
 
 
 // address=[0x15b3b30]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CClient::GetIP(CClient *this)
-
+// Decompiled from int __thiscall CClient::GetIP(CClient *this)
 long  CClient::GetIP(void) {
   
   return *((_DWORD *)this + 2);
@@ -106,10 +96,7 @@ long  CClient::GetIP(void) {
 
 
 // address=[0x15b3b50]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CClient::GetLastPingTime(CClient *this)
-
+// Decompiled from int __thiscall CClient::GetLastPingTime(CClient *this)
 unsigned int  CClient::GetLastPingTime(void) {
   
   return *((_DWORD *)this + 5);
@@ -118,7 +105,6 @@ unsigned int  CClient::GetLastPingTime(void) {
 
 // address=[0x15b3b70]
 // Decompiled from int __thiscall CClient::GetPeerId(pairNode *this)
-
 unsigned int  CClient::GetPeerId(void) {
   
   return *((_DWORD *)this + 3);
@@ -126,9 +112,7 @@ unsigned int  CClient::GetPeerId(void) {
 
 
 // address=[0x15c4df0]
-// Decompiled from // MFC 3.1-14.0 32bit
-CClient *__thiscall CClient::SetLastAckTime(CClient *this, unsigned int a2)
-
+// Decompiled from CClient *__thiscall CClient::SetLastAckTime(CClient *this, unsigned int a2)
 void  CClient::SetLastAckTime(unsigned int) {
   
   CClient *result; // eax

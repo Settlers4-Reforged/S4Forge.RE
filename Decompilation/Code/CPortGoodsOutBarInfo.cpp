@@ -4,7 +4,6 @@
 
 // address=[0x1454740]
 // Decompiled from CPortGoodsOutBarInfo *__thiscall CPortGoodsOutBarInfo::CPortGoodsOutBarInfo(CPortGoodsOutBarInfo *this)
-
  CPortGoodsOutBarInfo::CPortGoodsOutBarInfo(void) {
   
   CInfoExchange::CInfoExchange(this);
@@ -15,7 +14,6 @@
 
 // address=[0x1454cd0]
 // Decompiled from int __thiscall CPortGoodsOutBarInfo::Size(CPortGoodsOutBarInfo *this)
-
 unsigned int  CPortGoodsOutBarInfo::Size(void)const {
   
   return 52;

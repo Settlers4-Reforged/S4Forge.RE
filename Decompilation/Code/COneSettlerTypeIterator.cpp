@@ -3,11 +3,7 @@
 // Definitions for class COneSettlerTypeIterator
 
 // address=[0x13037c0]
-// Decompiled from COneSettlerTypeIterator *__thiscall COneSettlerTypeIterator::COneSettlerTypeIterator(
-        COneSettlerTypeIterator *this,
-        int a2,
-        int a3)
-
+// Decompiled from COneSettlerTypeIterator *__thiscall COneSettlerTypeIterator::COneSettlerTypeIterator(  COneSettlerTypeIterator *this,  int a2,  int a3)
  COneSettlerTypeIterator::COneSettlerTypeIterator(int,int) {
   
   COneSettlerTypeIterator::Init(this, a2, a3);
@@ -17,7 +13,6 @@
 
 // address=[0x13150d0]
 // Decompiled from int __thiscall COneSettlerTypeIterator::Init(COneSettlerTypeIterator *this, int a2, int a3)
-
 void  COneSettlerTypeIterator::Init(int,int) {
   
   int result; // eax
@@ -30,7 +25,6 @@ void  COneSettlerTypeIterator::Init(int,int) {
 
 // address=[0x1315100]
 // Decompiled from int __thiscall COneSettlerTypeIterator::FirstSettler(COneSettlerTypeIterator *this)
-
 int  COneSettlerTypeIterator::FirstSettler(void) {
   
   *((_DWORD *)this + 1) = CSettlerMgr::GetFirstSettlerId(
@@ -43,7 +37,6 @@ int  COneSettlerTypeIterator::FirstSettler(void) {
 
 // address=[0x1315130]
 // Decompiled from int __thiscall COneSettlerTypeIterator::NextSettler(COneSettlerTypeIterator *this)
-
 int  COneSettlerTypeIterator::NextSettler(void) {
   
   int v1; // eax
@@ -63,7 +56,6 @@ int  COneSettlerTypeIterator::NextSettler(void) {
 
 // address=[0x1315180]
 // Decompiled from int __thiscall COneSettlerTypeIterator::NextSettlerIfCurrentIsNotValid(COneSettlerTypeIterator *this)
-
 int  COneSettlerTypeIterator::NextSettlerIfCurrentIsNotValid(void) {
   
   if ( CSettlerIteratorBase::SettlerValid(this, *((_DWORD *)this + 1)) )
@@ -75,7 +67,6 @@ int  COneSettlerTypeIterator::NextSettlerIfCurrentIsNotValid(void) {
 
 // address=[0x1317270]
 // Decompiled from COneSettlerTypeIterator *__thiscall COneSettlerTypeIterator::COneSettlerTypeIterator(COneSettlerTypeIterator *this)
-
  COneSettlerTypeIterator::COneSettlerTypeIterator(void) {
   
   return this;

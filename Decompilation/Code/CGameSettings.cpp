@@ -4,7 +4,6 @@
 
 // address=[0x13558a0]
 // Decompiled from void CGameSettings::Save()
-
 static void __cdecl CGameSettings::Save(void) {
   
   _DWORD *v0; // eax
@@ -28,7 +27,6 @@ static void __cdecl CGameSettings::Save(void) {
 
 // address=[0x1355980]
 // Decompiled from int __cdecl CGameSettings::SetGfxFullscreenEnabled(bool a1)
-
 static void __cdecl CGameSettings::SetGfxFullscreenEnabled(bool) {
   
   CStaticConfigVarInt::operator=(CGameSettings::m_iFullscreenEnabled, a1);
@@ -38,7 +36,6 @@ static void __cdecl CGameSettings::SetGfxFullscreenEnabled(bool) {
 
 // address=[0x13559a0]
 // Decompiled from int __cdecl CGameSettings::SetWindowsDimensions(int a1, int a2, int a3, int a4)
-
 static void __cdecl CGameSettings::SetWindowsDimensions(int,int,int,int) {
   
   CStaticConfigVarInt::operator=(CGameSettings::m_iWindowPosX, a1);
@@ -51,7 +48,6 @@ static void __cdecl CGameSettings::SetWindowsDimensions(int,int,int,int) {
 
 // address=[0x135df70]
 // Decompiled from int CGameSettings::GetGfxFullscreenEnabled()
-
 static int __cdecl CGameSettings::GetGfxFullscreenEnabled(void) {
   
   return CStaticConfigVarInt::operator int(&CGameSettings::m_iFullscreenEnabled);
@@ -60,7 +56,6 @@ static int __cdecl CGameSettings::GetGfxFullscreenEnabled(void) {
 
 // address=[0x135df90]
 // Decompiled from int CGameSettings::GetGfxHeight()
-
 static int __cdecl CGameSettings::GetGfxHeight(void) {
   
   return CStaticConfigVarInt::operator int(CGameSettings::m_iWindowHeight);
@@ -69,7 +64,6 @@ static int __cdecl CGameSettings::GetGfxHeight(void) {
 
 // address=[0x135dfb0]
 // Decompiled from int CGameSettings::GetGfxWidth()
-
 static int __cdecl CGameSettings::GetGfxWidth(void) {
   
   return CStaticConfigVarInt::operator int(&CGameSettings::m_iWindowWidth);
@@ -78,7 +72,6 @@ static int __cdecl CGameSettings::GetGfxWidth(void) {
 
 // address=[0x135dfd0]
 // Decompiled from int CGameSettings::GetLanguage()
-
 static int __cdecl CGameSettings::GetLanguage(void) {
   
   return CStaticConfigVarInt::operator int(&CGameSettings::m_iLanguage);
@@ -87,7 +80,6 @@ static int __cdecl CGameSettings::GetLanguage(void) {
 
 // address=[0x135e030]
 // Decompiled from int CGameSettings::GetWindowsPosX()
-
 static int __cdecl CGameSettings::GetWindowsPosX(void) {
   
   return CStaticConfigVarInt::operator int(CGameSettings::m_iWindowPosX);
@@ -96,7 +88,6 @@ static int __cdecl CGameSettings::GetWindowsPosX(void) {
 
 // address=[0x135e050]
 // Decompiled from int CGameSettings::GetWindowsPosY()
-
 static int __cdecl CGameSettings::GetWindowsPosY(void) {
   
   return CStaticConfigVarInt::operator int(CGameSettings::m_iWindowPosY);
@@ -105,7 +96,6 @@ static int __cdecl CGameSettings::GetWindowsPosY(void) {
 
 // address=[0x146ad50]
 // Decompiled from int CGameSettings::GetUserMP3()
-
 static int __cdecl CGameSettings::GetUserMP3(void) {
   
   return CStaticConfigVarInt::operator int(&CGameSettings::m_iUserMP3);
@@ -114,7 +104,6 @@ static int __cdecl CGameSettings::GetUserMP3(void) {
 
 // address=[0x14878c0]
 // Decompiled from void CGameSettings::LoadCommandLineValues()
-
 static void __cdecl CGameSettings::LoadCommandLineValues(void) {
   
   int v0; // eax
@@ -513,7 +502,6 @@ static void __cdecl CGameSettings::LoadCommandLineValues(void) {
 
 // address=[0x14884c0]
 // Decompiled from void CGameSettings::Validate()
-
 static void __cdecl CGameSettings::Validate(void) {
   
   ;
@@ -522,7 +510,6 @@ static void __cdecl CGameSettings::Validate(void) {
 
 // address=[0x14884d0]
 // Decompiled from BOOL CGameSettings::DetermineHighestResolution()
-
 static void __cdecl CGameSettings::DetermineHighestResolution(void) {
   
   BOOL result; // eax
@@ -548,7 +535,6 @@ static void __cdecl CGameSettings::DetermineHighestResolution(void) {
 
 // address=[0x1488560]
 // Decompiled from int __cdecl CGameSettings::GetUserConfigDirectory(int a1)
-
 static std::wstring __cdecl CGameSettings::GetUserConfigDirectory(void) {
   
   void *UserDirectoryPath; // [esp+4h] [ebp-38h]
@@ -566,7 +552,6 @@ static std::wstring __cdecl CGameSettings::GetUserConfigDirectory(void) {
 
 // address=[0x1488600]
 // Decompiled from int __cdecl CGameSettings::GetConfigFilePath(int a1, wchar_t *String, char a3)
-
 static std::wstring __cdecl CGameSettings::GetConfigFilePath(wchar_t const *,bool) {
   
   int v4; // [esp+4h] [ebp-A4h]
@@ -613,7 +598,6 @@ static std::wstring __cdecl CGameSettings::GetConfigFilePath(wchar_t const *,boo
 
 // address=[0x14887b0]
 // Decompiled from void __cdecl CGameSettings::SetPlayerName(char a1)
-
 static void __cdecl CGameSettings::SetPlayerName(std::wstring) {
   
   const wchar_t *v1; // eax
@@ -649,7 +633,6 @@ static void __cdecl CGameSettings::SetPlayerName(std::wstring) {
 
 // address=[0x14888f0]
 // Decompiled from int __cdecl CGameSettings::GetManualURL(int a1)
-
 static std::string __cdecl CGameSettings::GetManualURL(void) {
   
   int Language; // [esp+0h] [ebp-8h]
@@ -673,7 +656,6 @@ static std::string __cdecl CGameSettings::GetManualURL(void) {
 
 // address=[0x1488970]
 // Decompiled from int __cdecl CGameSettings::GetTipsURL(int a1)
-
 static std::string __cdecl CGameSettings::GetTipsURL(void) {
   
   int Language; // [esp+0h] [ebp-8h]
@@ -697,7 +679,6 @@ static std::string __cdecl CGameSettings::GetTipsURL(void) {
 
 // address=[0x14889f0]
 // Decompiled from int __cdecl CGameSettings::GetCampaignStatus(int a1)
-
 static int __cdecl CGameSettings::GetCampaignStatus(int) {
   
   unsigned int v2; // eax
@@ -822,7 +803,6 @@ static int __cdecl CGameSettings::GetCampaignStatus(int) {
 
 // address=[0x1488dc0]
 // Decompiled from void __cdecl CGameSettings::SetCampaignStatus(int a1, int a2)
-
 static void __cdecl CGameSettings::SetCampaignStatus(int,int) {
   
   _DWORD *v2; // eax
@@ -996,7 +976,6 @@ static void __cdecl CGameSettings::SetCampaignStatus(int,int) {
 
 // address=[0x1489530]
 // Decompiled from void __cdecl CGameSettings::Cryption(unsigned __int8 *a1, unsigned int a2)
-
 static void __cdecl CGameSettings::Cryption(unsigned char *,unsigned long) {
   
   unsigned int i; // [esp+4h] [ebp-7Ch]
@@ -1020,7 +999,6 @@ static void __cdecl CGameSettings::Cryption(unsigned char *,unsigned long) {
 
 // address=[0x14895f0]
 // Decompiled from unsigned int __cdecl CGameSettings::Crc(unsigned __int8 *a1, unsigned int a2)
-
 static unsigned int __cdecl CGameSettings::Crc(unsigned char *,unsigned long) {
   
   unsigned int NormalCRC; // [esp+0h] [ebp-8h]
@@ -1035,7 +1013,6 @@ static unsigned int __cdecl CGameSettings::Crc(unsigned char *,unsigned long) {
 
 // address=[0x148abd0]
 // Decompiled from int CGameSettings::GetWebHelpMode()
-
 static int __cdecl CGameSettings::GetWebHelpMode(void) {
   
   return CStaticConfigVarInt::operator int(&CGameSettings::m_iWebHelpMode);
@@ -1044,7 +1021,6 @@ static int __cdecl CGameSettings::GetWebHelpMode(void) {
 
 // address=[0x148abf0]
 // Decompiled from int __cdecl CGameSettings::SetWebHelpMode(int a1)
-
 static void __cdecl CGameSettings::SetWebHelpMode(int) {
   
   CStaticConfigVarInt::operator=(CGameSettings::m_iWebHelpMode, a1);
@@ -1054,7 +1030,6 @@ static void __cdecl CGameSettings::SetWebHelpMode(int) {
 
 // address=[0x148fd60]
 // Decompiled from bool CGameSettings::GetGfxFiltering()
-
 static bool __cdecl CGameSettings::GetGfxFiltering(void) {
   
   return CStaticConfigVarInt::operator int(&CGameSettings::m_iFiltering) == 1;
@@ -1063,7 +1038,6 @@ static bool __cdecl CGameSettings::GetGfxFiltering(void) {
 
 // address=[0x148fd90]
 // Decompiled from int CGameSettings::GetGfxForceBlit()
-
 static int __cdecl CGameSettings::GetGfxForceBlit(void) {
   
   return CStaticConfigVarInt::operator int(&CGameSettings::m_iForceBlit);
@@ -1072,7 +1046,6 @@ static int __cdecl CGameSettings::GetGfxForceBlit(void) {
 
 // address=[0x148fdb0]
 // Decompiled from char CGameSettings::GetGfxLandscapeHardware()
-
 static bool __cdecl CGameSettings::GetGfxLandscapeHardware(void) {
   
   return 1;
@@ -1081,7 +1054,6 @@ static bool __cdecl CGameSettings::GetGfxLandscapeHardware(void) {
 
 // address=[0x148fdc0]
 // Decompiled from char CGameSettings::GetGfxObjectHardware()
-
 static bool __cdecl CGameSettings::GetGfxObjectHardware(void) {
   
   return 1;
@@ -1090,7 +1062,6 @@ static bool __cdecl CGameSettings::GetGfxObjectHardware(void) {
 
 // address=[0x148fdd0]
 // Decompiled from int CGameSettings::GetGfxPureSoftwareMode()
-
 static int __cdecl CGameSettings::GetGfxPureSoftwareMode(void) {
   
   return 0;
@@ -1099,7 +1070,6 @@ static int __cdecl CGameSettings::GetGfxPureSoftwareMode(void) {
 
 // address=[0x148fde0]
 // Decompiled from int CGameSettings::GetGfxTextureQuality()
-
 static int __cdecl CGameSettings::GetGfxTextureQuality(void) {
   
   return CStaticConfigVarInt::operator int(&CGameSettings::m_iTextureQuality);
@@ -1108,7 +1078,6 @@ static int __cdecl CGameSettings::GetGfxTextureQuality(void) {
 
 // address=[0x148fe00]
 // Decompiled from char CGameSettings::GetShowVideos()
-
 static bool __cdecl CGameSettings::GetShowVideos(void) {
   
   return 0;
@@ -1117,7 +1086,6 @@ static bool __cdecl CGameSettings::GetShowVideos(void) {
 
 // address=[0x148ff20]
 // Decompiled from BOOL __cdecl CGameSettings::SetAlwaysHardwareImpossible(bool a1)
-
 static void __cdecl CGameSettings::SetAlwaysHardwareImpossible(bool) {
   
   BOOL result; // eax
@@ -1130,7 +1098,6 @@ static void __cdecl CGameSettings::SetAlwaysHardwareImpossible(bool) {
 
 // address=[0x148ff40]
 // Decompiled from BOOL __cdecl CGameSettings::SetAlwaysHardwareObjectImpossible(bool a1)
-
 static void __cdecl CGameSettings::SetAlwaysHardwareObjectImpossible(bool) {
   
   BOOL result; // eax
@@ -1143,7 +1110,6 @@ static void __cdecl CGameSettings::SetAlwaysHardwareObjectImpossible(bool) {
 
 // address=[0x148ff60]
 // Decompiled from int __cdecl CGameSettings::SetGfxFiltering(bool a1)
-
 static void __cdecl CGameSettings::SetGfxFiltering(bool) {
   
   CStaticConfigVarInt::operator=(CGameSettings::m_iFiltering, a1);
@@ -1153,7 +1119,6 @@ static void __cdecl CGameSettings::SetGfxFiltering(bool) {
 
 // address=[0x148ffa0]
 // Decompiled from int __cdecl CGameSettings::SetGfxTextureQuality(int a1)
-
 static void __cdecl CGameSettings::SetGfxTextureQuality(int) {
   
   CStaticConfigVarInt::operator=(CGameSettings::m_iTextureQuality, a1);
@@ -1163,7 +1128,6 @@ static void __cdecl CGameSettings::SetGfxTextureQuality(int) {
 
 // address=[0x1494480]
 // Decompiled from int __cdecl CGameSettings::GetAIName(int a1, int a2)
-
 static std::wstring __cdecl CGameSettings::GetAIName(int) {
   
   std::wstring::wstring((int)&CGameSettings::m_wstrAINames + 28 * a2);
@@ -1173,7 +1137,6 @@ static std::wstring __cdecl CGameSettings::GetAIName(int) {
 
 // address=[0x149f540]
 // Decompiled from int __cdecl CGameSettings::GetPlayerName(int a1)
-
 static std::wstring __cdecl CGameSettings::GetPlayerName(void) {
   
   std::wstring::wstring((int)&CGameSettings::m_wstrPlayerName);
@@ -1183,7 +1146,6 @@ static std::wstring __cdecl CGameSettings::GetPlayerName(void) {
 
 // address=[0x14a0ab0]
 // Decompiled from int CGameSettings::GetAIDifficulty()
-
 static int __cdecl CGameSettings::GetAIDifficulty(void) {
   
   return CStaticConfigVarInt::operator int(&CGameSettings::m_iAIDifficulty);
@@ -1192,7 +1154,6 @@ static int __cdecl CGameSettings::GetAIDifficulty(void) {
 
 // address=[0x14a0ad0]
 // Decompiled from int __cdecl CGameSettings::SetAIDifficulty(int a1)
-
 static void __cdecl CGameSettings::SetAIDifficulty(int) {
   
   CStaticConfigVarInt::operator=(CGameSettings::m_iAIDifficulty, a1);
@@ -1202,7 +1163,6 @@ static void __cdecl CGameSettings::SetAIDifficulty(int) {
 
 // address=[0x14aaa90]
 // Decompiled from bool CGameSettings::GetAlwaysUrgentMsg()
-
 static bool __cdecl CGameSettings::GetAlwaysUrgentMsg(void) {
   
   return CStaticConfigVarInt::operator int(&CGameSettings::m_iAlwaysUrgentMsg) != 0;
@@ -1211,7 +1171,6 @@ static bool __cdecl CGameSettings::GetAlwaysUrgentMsg(void) {
 
 // address=[0x14aaac0]
 // Decompiled from int CGameSettings::GetAutosaveInterval()
-
 static int __cdecl CGameSettings::GetAutosaveInterval(void) {
   
   return CStaticConfigVarInt::operator int(&CGameSettings::m_iAutoSaveInterval);
@@ -1220,7 +1179,6 @@ static int __cdecl CGameSettings::GetAutosaveInterval(void) {
 
 // address=[0x14aaae0]
 // Decompiled from bool CGameSettings::GetBorderScrollEnabled()
-
 static bool __cdecl CGameSettings::GetBorderScrollEnabled(void) {
   
   return CStaticConfigVarInt::operator int(&CGameSettings::m_iBorderScroll) != 0;
@@ -1229,7 +1187,6 @@ static bool __cdecl CGameSettings::GetBorderScrollEnabled(void) {
 
 // address=[0x14aab80]
 // Decompiled from int CGameSettings::GetChatMessageFilter()
-
 static int __cdecl CGameSettings::GetChatMessageFilter(void) {
   
   return CStaticConfigVarInt::operator int(&CGameSettings::m_iChatMessageFilter);
@@ -1238,7 +1195,6 @@ static int __cdecl CGameSettings::GetChatMessageFilter(void) {
 
 // address=[0x14aabf0]
 // Decompiled from int CGameSettings::GetExtendedTooltip()
-
 static int __cdecl CGameSettings::GetExtendedTooltip(void) {
   
   return CStaticConfigVarInt::operator int(&CGameSettings::m_iExtendedTooltip);
@@ -1247,7 +1203,6 @@ static int __cdecl CGameSettings::GetExtendedTooltip(void) {
 
 // address=[0x14aac10]
 // Decompiled from int CGameSettings::GetGfxHighestResolution()
-
 static int __cdecl CGameSettings::GetGfxHighestResolution(void) {
   
   return CGameSettings::m_iHighestPossibleResolution;
@@ -1256,7 +1211,6 @@ static int __cdecl CGameSettings::GetGfxHighestResolution(void) {
 
 // address=[0x14aac80]
 // Decompiled from int CGameSettings::GetMsgHistory()
-
 static int __cdecl CGameSettings::GetMsgHistory(void) {
   
   return CStaticConfigVarInt::operator int(&CGameSettings::m_iMsgHistory);
@@ -1265,7 +1219,6 @@ static int __cdecl CGameSettings::GetMsgHistory(void) {
 
 // address=[0x14aaca0]
 // Decompiled from int CGameSettings::GetMsgLevelMask()
-
 static int __cdecl CGameSettings::GetMsgLevelMask(void) {
   
   return CStaticConfigVarInt::operator int(&CGameSettings::m_iMsgLevelMask);
@@ -1274,7 +1227,6 @@ static int __cdecl CGameSettings::GetMsgLevelMask(void) {
 
 // address=[0x14aacc0]
 // Decompiled from int CGameSettings::GetMusicOn()
-
 static int __cdecl CGameSettings::GetMusicOn(void) {
   
   return CStaticConfigVarInt::operator int(&CGameSettings::m_iMusicOn);
@@ -1283,7 +1235,6 @@ static int __cdecl CGameSettings::GetMusicOn(void) {
 
 // address=[0x14aace0]
 // Decompiled from int CGameSettings::GetMusicVolume()
-
 static int __cdecl CGameSettings::GetMusicVolume(void) {
   
   return CStaticConfigVarInt::operator int(&CGameSettings::m_iMusicVolume);
@@ -1292,7 +1243,6 @@ static int __cdecl CGameSettings::GetMusicVolume(void) {
 
 // address=[0x14aad00]
 // Decompiled from int CGameSettings::GetScrollStepValue()
-
 static int __cdecl CGameSettings::GetScrollStepValue(void) {
   
   return CStaticConfigVarInt::operator int(&CGameSettings::m_iScrollStepValue);
@@ -1301,7 +1251,6 @@ static int __cdecl CGameSettings::GetScrollStepValue(void) {
 
 // address=[0x14aad20]
 // Decompiled from int CGameSettings::GetSoundFXVolume()
-
 static int __cdecl CGameSettings::GetSoundFXVolume(void) {
   
   return CStaticConfigVarInt::operator int(&CGameSettings::m_iSoundFXVolume);
@@ -1310,7 +1259,6 @@ static int __cdecl CGameSettings::GetSoundFXVolume(void) {
 
 // address=[0x14aad40]
 // Decompiled from int CGameSettings::GetSoundFxOn()
-
 static int __cdecl CGameSettings::GetSoundFxOn(void) {
   
   return CStaticConfigVarInt::operator int(&CGameSettings::m_iSoundFXOn);
@@ -1319,7 +1267,6 @@ static int __cdecl CGameSettings::GetSoundFxOn(void) {
 
 // address=[0x14aadc0]
 // Decompiled from int CGameSettings::GetVoiceChatMicro()
-
 static int __cdecl CGameSettings::GetVoiceChatMicro(void) {
   
   return CStaticConfigVarInt::operator int(&CGameSettings::m_iVoiceChatMicro);
@@ -1328,7 +1275,6 @@ static int __cdecl CGameSettings::GetVoiceChatMicro(void) {
 
 // address=[0x14aade0]
 // Decompiled from int CGameSettings::GetVoiceChatOn()
-
 static int __cdecl CGameSettings::GetVoiceChatOn(void) {
   
   return CStaticConfigVarInt::operator int(&CGameSettings::m_iVoiceChatOn);
@@ -1337,7 +1283,6 @@ static int __cdecl CGameSettings::GetVoiceChatOn(void) {
 
 // address=[0x14aae00]
 // Decompiled from int CGameSettings::GetVoiceChatVolume()
-
 static int __cdecl CGameSettings::GetVoiceChatVolume(void) {
   
   return CStaticConfigVarInt::operator int(&CGameSettings::m_iVoiceChatVolume);
@@ -1346,7 +1291,6 @@ static int __cdecl CGameSettings::GetVoiceChatVolume(void) {
 
 // address=[0x14aaeb0]
 // Decompiled from _DWORD *__cdecl CGameSettings::SetAlwaysUrgentMsg(bool a1)
-
 static void __cdecl CGameSettings::SetAlwaysUrgentMsg(bool) {
   
   return CStaticConfigVarInt::operator=(CGameSettings::m_iAlwaysUrgentMsg, a1);
@@ -1355,7 +1299,6 @@ static void __cdecl CGameSettings::SetAlwaysUrgentMsg(bool) {
 
 // address=[0x14aaed0]
 // Decompiled from int __cdecl CGameSettings::SetBorderScrollEnabled(bool a1)
-
 static void __cdecl CGameSettings::SetBorderScrollEnabled(bool) {
   
   CStaticConfigVarInt::operator=(CGameSettings::m_iBorderScroll, a1);
@@ -1365,7 +1308,6 @@ static void __cdecl CGameSettings::SetBorderScrollEnabled(bool) {
 
 // address=[0x14aaef0]
 // Decompiled from _DWORD *__cdecl CGameSettings::SetChatMessageFilter(int a1)
-
 static void __cdecl CGameSettings::SetChatMessageFilter(int) {
   
   return CStaticConfigVarInt::operator=(CGameSettings::m_iChatMessageFilter, a1);
@@ -1374,7 +1316,6 @@ static void __cdecl CGameSettings::SetChatMessageFilter(int) {
 
 // address=[0x14aaf10]
 // Decompiled from _DWORD *__cdecl CGameSettings::SetExtendedTooltip(int a1)
-
 static void __cdecl CGameSettings::SetExtendedTooltip(int) {
   
   return CStaticConfigVarInt::operator=(CGameSettings::m_iExtendedTooltip, a1);
@@ -1383,7 +1324,6 @@ static void __cdecl CGameSettings::SetExtendedTooltip(int) {
 
 // address=[0x14aaf50]
 // Decompiled from int __cdecl CGameSettings::SetMsgHistory(int a1)
-
 static void __cdecl CGameSettings::SetMsgHistory(int) {
   
   CStaticConfigVarInt::operator=(CGameSettings::m_iMsgHistory, a1);
@@ -1393,7 +1333,6 @@ static void __cdecl CGameSettings::SetMsgHistory(int) {
 
 // address=[0x14aaf70]
 // Decompiled from int __cdecl CGameSettings::SetMsgLevelMask(int a1)
-
 static void __cdecl CGameSettings::SetMsgLevelMask(int) {
   
   CStaticConfigVarInt::operator=(CGameSettings::m_iMsgLevelMask, a1);
@@ -1403,7 +1342,6 @@ static void __cdecl CGameSettings::SetMsgLevelMask(int) {
 
 // address=[0x14aaf90]
 // Decompiled from int __cdecl CGameSettings::SetMusicOn(int a1)
-
 static void __cdecl CGameSettings::SetMusicOn(int) {
   
   CStaticConfigVarInt::operator=(CGameSettings::m_iMusicOn, a1);
@@ -1413,7 +1351,6 @@ static void __cdecl CGameSettings::SetMusicOn(int) {
 
 // address=[0x14aafb0]
 // Decompiled from int __cdecl CGameSettings::SetMusicVolume(int a1)
-
 static void __cdecl CGameSettings::SetMusicVolume(int) {
   
   CStaticConfigVarInt::operator=(CGameSettings::m_iMusicVolume, a1);
@@ -1423,7 +1360,6 @@ static void __cdecl CGameSettings::SetMusicVolume(int) {
 
 // address=[0x14aafd0]
 // Decompiled from int __cdecl CGameSettings::SetScrollStepValue(int a1)
-
 static void __cdecl CGameSettings::SetScrollStepValue(int) {
   
   CStaticConfigVarInt::operator=(CGameSettings::m_iScrollStepValue, a1);
@@ -1433,7 +1369,6 @@ static void __cdecl CGameSettings::SetScrollStepValue(int) {
 
 // address=[0x14aaff0]
 // Decompiled from int __cdecl CGameSettings::SetSoundFXOn(int a1)
-
 static void __cdecl CGameSettings::SetSoundFXOn(int) {
   
   CStaticConfigVarInt::operator=(CGameSettings::m_iSoundFXOn, a1);
@@ -1443,7 +1378,6 @@ static void __cdecl CGameSettings::SetSoundFXOn(int) {
 
 // address=[0x14ab010]
 // Decompiled from int __cdecl CGameSettings::SetSoundFXVolume(int a1)
-
 static void __cdecl CGameSettings::SetSoundFXVolume(int) {
   
   CStaticConfigVarInt::operator=(CGameSettings::m_iSoundFXVolume, a1);
@@ -1453,7 +1387,6 @@ static void __cdecl CGameSettings::SetSoundFXVolume(int) {
 
 // address=[0x14ab050]
 // Decompiled from _DWORD *__cdecl CGameSettings::SetUserMP3(int a1)
-
 static void __cdecl CGameSettings::SetUserMP3(int) {
   
   return CStaticConfigVarInt::operator=(CGameSettings::m_iUserMP3, a1);
@@ -1462,7 +1395,6 @@ static void __cdecl CGameSettings::SetUserMP3(int) {
 
 // address=[0x14ab070]
 // Decompiled from int __cdecl CGameSettings::SetVoiceChatMicro(int a1)
-
 static void __cdecl CGameSettings::SetVoiceChatMicro(int) {
   
   CStaticConfigVarInt::operator=(CGameSettings::m_iVoiceChatMicro, a1);
@@ -1472,7 +1404,6 @@ static void __cdecl CGameSettings::SetVoiceChatMicro(int) {
 
 // address=[0x14ab090]
 // Decompiled from int __cdecl CGameSettings::SetVoiceChatOn(int a1)
-
 static void __cdecl CGameSettings::SetVoiceChatOn(int) {
   
   CStaticConfigVarInt::operator=(CGameSettings::m_iVoiceChatOn, a1);
@@ -1482,7 +1413,6 @@ static void __cdecl CGameSettings::SetVoiceChatOn(int) {
 
 // address=[0x14ab0b0]
 // Decompiled from int __cdecl CGameSettings::SetVoiceChatVolume(int a1)
-
 static void __cdecl CGameSettings::SetVoiceChatVolume(int) {
   
   CStaticConfigVarInt::operator=(CGameSettings::m_iVoiceChatVolume, a1);
@@ -1492,7 +1422,6 @@ static void __cdecl CGameSettings::SetVoiceChatVolume(int) {
 
 // address=[0x14c1000]
 // Decompiled from int __cdecl CGameSettings::GetHelpURLenglish(int a1)
-
 static std::string __cdecl CGameSettings::GetHelpURLenglish(void) {
   
   std::string::string(&CGameSettings::m_strHelpURLenglish);
@@ -1502,7 +1431,6 @@ static std::string __cdecl CGameSettings::GetHelpURLenglish(void) {
 
 // address=[0x14c1040]
 // Decompiled from int __cdecl CGameSettings::GetHelpURLgerman(int a1)
-
 static std::string __cdecl CGameSettings::GetHelpURLgerman(void) {
   
   std::string::string(&CGameSettings::m_strHelpURLgerman);
@@ -1512,7 +1440,6 @@ static std::string __cdecl CGameSettings::GetHelpURLgerman(void) {
 
 // address=[0x14c1080]
 // Decompiled from int __cdecl CGameSettings::GetNormURLenglish(int a1)
-
 static std::string __cdecl CGameSettings::GetNormURLenglish(void) {
   
   std::string::string(&CGameSettings::m_strNormURLenglish);
@@ -1522,7 +1449,6 @@ static std::string __cdecl CGameSettings::GetNormURLenglish(void) {
 
 // address=[0x14c10c0]
 // Decompiled from int __cdecl CGameSettings::GetNormURLgerman(int a1)
-
 static std::string __cdecl CGameSettings::GetNormURLgerman(void) {
   
   std::string::string(&CGameSettings::m_strNormURLgerman);
@@ -1532,7 +1458,6 @@ static std::string __cdecl CGameSettings::GetNormURLgerman(void) {
 
 // address=[0x14cb750]
 // Decompiled from int CGameSettings::GetTutorialStatus()
-
 static int __cdecl CGameSettings::GetTutorialStatus(void) {
   
   return CStaticConfigVarInt::operator int(&CGameSettings::m_uiTutorialSave);
@@ -1541,7 +1466,6 @@ static int __cdecl CGameSettings::GetTutorialStatus(void) {
 
 // address=[0x1487680]
 // Decompiled from int CGameSettings::LoadAINames()
-
 static void __cdecl CGameSettings::LoadAINames(void) {
   
   int result; // eax

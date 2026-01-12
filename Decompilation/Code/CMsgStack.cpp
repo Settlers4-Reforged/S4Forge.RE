@@ -4,7 +4,6 @@
 
 // address=[0x15c49f0]
 // Decompiled from char __thiscall CMsgStack::GetAI(CMsgStack *this)
-
 bool  CMsgStack::GetAI(void) {
   
   return *((_BYTE *)this + 20);
@@ -13,7 +12,6 @@ bool  CMsgStack::GetAI(void) {
 
 // address=[0x15c9d30]
 // Decompiled from _DWORD *__thiscall sub_19C9D30(_DWORD *this)
-
  CMsgStack::CMsgStack(void) {
   
   std::list<CNet_Event>::list<CNet_Event>(this + 1);
@@ -27,7 +25,6 @@ bool  CMsgStack::GetAI(void) {
 
 // address=[0x15c9d70]
 // Decompiled from void __thiscall CMsgStack::~CMsgStack(boost::exception *this)
-
  CMsgStack::~CMsgStack(void) {
   
   *(_DWORD *)this = &CMsgStack::_vftable_;
@@ -37,7 +34,6 @@ bool  CMsgStack::GetAI(void) {
 
 // address=[0x15c9d90]
 // Decompiled from int __thiscall CMsgStack::Clear(CMsgStack *this)
-
 void  CMsgStack::Clear(void) {
   
   int result; // eax
@@ -59,7 +55,6 @@ void  CMsgStack::Clear(void) {
 
 // address=[0x15c9dc0]
 // Decompiled from int __stdcall CMsgStack::GetMsg(int a1)
-
 class CNet_Event  CMsgStack::GetMsg(void) {
   
   struct boost::exception_detail::clone_base *v1; // eax
@@ -79,7 +74,6 @@ class CNet_Event  CMsgStack::GetMsg(void) {
 
 // address=[0x15c9e60]
 // Decompiled from DWORD __thiscall CMsgStack::AddMsg(CMsgStack *this, struct CNet_Event *a2)
-
 void  CMsgStack::AddMsg(class CNet_Event &) {
   
   DWORD result; // eax
@@ -93,7 +87,6 @@ void  CMsgStack::AddMsg(class CNet_Event &) {
 
 // address=[0x15c9e90]
 // Decompiled from bool __thiscall CMsgStack::IsValid(CMsgStack *this)
-
 bool  CMsgStack::IsValid(void) {
   
   int v2; // [esp+4h] [ebp-8h]
@@ -109,7 +102,6 @@ bool  CMsgStack::IsValid(void) {
 
 // address=[0x15c9f00]
 // Decompiled from DWORD __thiscall sub_19C9F00(_DWORD *this, int a2)
-
 void  CMsgStack::SetExpectedSize(int) {
   
   DWORD result; // eax
@@ -123,7 +115,6 @@ void  CMsgStack::SetExpectedSize(int) {
 
 // address=[0x15c9f30]
 // Decompiled from void __thiscall CMsgStack::Sort(CDaoIndexFieldInfo *this)
-
 void  CMsgStack::Sort(void) {
   
   std::list<CNet_Event>::sort((char *)this + 4, this);
@@ -132,7 +123,6 @@ void  CMsgStack::Sort(void) {
 
 // address=[0x15c9f50]
 // Decompiled from char __thiscall CMsgStack::IsInStack(CMsgStack *this, unsigned __int8 a2)
-
 bool  CMsgStack::IsInStack(unsigned char) {
   
   _BYTE v3[12]; // [esp+4h] [ebp-40h] BYREF
@@ -179,7 +169,6 @@ bool  CMsgStack::IsInStack(unsigned char) {
 
 // address=[0x15cadc0]
 // Decompiled from bool __thiscall CMsgStack::IsSizeAlreadySet(CMsgStack *this)
-
 bool  CMsgStack::IsSizeAlreadySet(void) {
   
   return *((_DWORD *)this + 4) != -1;
@@ -188,7 +177,6 @@ bool  CMsgStack::IsSizeAlreadySet(void) {
 
 // address=[0x15cc590]
 // Decompiled from int __thiscall CMsgStack::ClearAndValidate(CMsgStack *this)
-
 void  CMsgStack::ClearAndValidate(void) {
   
   *((_DWORD *)this + 4) = 0;
@@ -197,10 +185,7 @@ void  CMsgStack::ClearAndValidate(void) {
 
 
 // address=[0x15cc5c0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CMsgStack::GetExpectedSize(CMsgStack *this)
-
+// Decompiled from int __thiscall CMsgStack::GetExpectedSize(CMsgStack *this)
 int  CMsgStack::GetExpectedSize(void) {
   
   return *((_DWORD *)this + 4);
@@ -209,7 +194,6 @@ int  CMsgStack::GetExpectedSize(void) {
 
 // address=[0x15cc5e0]
 // Decompiled from int __thiscall CMsgStack::Invalidate(CMsgStack *this)
-
 void  CMsgStack::Invalidate(void) {
   
   *((_DWORD *)this + 4) = -1;
@@ -219,7 +203,6 @@ void  CMsgStack::Invalidate(void) {
 
 // address=[0x15cc610]
 // Decompiled from bool __thiscall CMsgStack::IsEmpty(CMsgStack *this)
-
 bool  CMsgStack::IsEmpty(void) {
   
   return std::list<CNet_Event>::size((char *)this + 4) == 0;
@@ -228,7 +211,6 @@ bool  CMsgStack::IsEmpty(void) {
 
 // address=[0x15cc650]
 // Decompiled from CMsgStack *__thiscall CMsgStack::SetAI(CMsgStack *this, bool a2)
-
 void  CMsgStack::SetAI(bool) {
   
   CMsgStack *result; // eax

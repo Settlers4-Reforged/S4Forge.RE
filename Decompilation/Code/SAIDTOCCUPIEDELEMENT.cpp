@@ -3,11 +3,7 @@
 // Definitions for class SAIDTOCCUPIEDELEMENT
 
 // address=[0x1334f20]
-// Decompiled from SAIDTOCCUPIEDELEMENT *__thiscall SAIDTOCCUPIEDELEMENT::SAIDTOCCUPIEDELEMENT(
-        SAIDTOCCUPIEDELEMENT *this,
-        int a2,
-        __int16 a3)
-
+// Decompiled from SAIDTOCCUPIEDELEMENT *__thiscall SAIDTOCCUPIEDELEMENT::SAIDTOCCUPIEDELEMENT(  SAIDTOCCUPIEDELEMENT *this,  int a2,  __int16 a3)
  SAIDTOCCUPIEDELEMENT::SAIDTOCCUPIEDELEMENT(int,short) {
   
   *(_DWORD *)this = a2;

@@ -4,7 +4,6 @@
 
 // address=[0x14c76b0]
 // Decompiled from CStateMDCampaignsEcoConflict *__cdecl CStateMDCampaignsEcoConflict::DynamicCreateFunc(void *a1)
-
 static class CGameState * __cdecl CStateMDCampaignsEcoConflict::DynamicCreateFunc(void *) {
   
   CStateMDCampaignsEcoConflict *C; // [esp+Ch] [ebp-10h]
@@ -18,10 +17,7 @@ static class CGameState * __cdecl CStateMDCampaignsEcoConflict::DynamicCreateFun
 
 
 // address=[0x14c7730]
-// Decompiled from CStateMDCampaignsEcoConflict *__thiscall CStateMDCampaignsEcoConflict::CStateMDCampaignsEcoConflict(
-        CStateMDCampaignsEcoConflict *this,
-        void *a2)
-
+// Decompiled from CStateMDCampaignsEcoConflict *__thiscall CStateMDCampaignsEcoConflict::CStateMDCampaignsEcoConflict(  CStateMDCampaignsEcoConflict *this,  void *a2)
  CStateMDCampaignsEcoConflict::CStateMDCampaignsEcoConflict(void *) {
   
   CGuiGameState::CGuiGameState(this);
@@ -40,7 +36,6 @@ static class CGameState * __cdecl CStateMDCampaignsEcoConflict::DynamicCreateFun
 
 // address=[0x14c7820]
 // Decompiled from void __thiscall CStateMDCampaignsEcoConflict::~CStateMDCampaignsEcoConflict(CStateMDCampaignsEcoConflict *this)
-
  CStateMDCampaignsEcoConflict::~CStateMDCampaignsEcoConflict(void) {
   
   *(_DWORD *)this = &CStateMDCampaignsEcoConflict::_vftable_;
@@ -51,7 +46,6 @@ static class CGameState * __cdecl CStateMDCampaignsEcoConflict::DynamicCreateFun
 
 // address=[0x14c7880]
 // Decompiled from char __thiscall CStateMDCampaignsEcoConflict::Perform(CStateMDCampaignsEcoConflict *this)
-
 bool  CStateMDCampaignsEcoConflict::Perform(void) {
   
   DWORD v2; // esi
@@ -88,7 +82,6 @@ bool  CStateMDCampaignsEcoConflict::Perform(void) {
 
 // address=[0x14c7960]
 // Decompiled from char __thiscall CStateMDCampaignsEcoConflict::OnEvent(CStateMDCampaignsEcoConflict *this, struct CEvn_Event *a2)
-
 bool  CStateMDCampaignsEcoConflict::OnEvent(class CEvn_Event &) {
   
   CEvn_Event *v3; // [esp+10h] [ebp-38h]
@@ -133,9 +126,7 @@ bool  CStateMDCampaignsEcoConflict::OnEvent(class CEvn_Event &) {
 
 
 // address=[0x14c7c00]
-// Decompiled from // Microsoft VisualC 14/net runtime
-char __thiscall CStateMDCampaignsEcoConflict::CanProcessInvites(CStateMDCampaignsEcoConflict *this)
-
+// Decompiled from char __thiscall CStateMDCampaignsEcoConflict::CanProcessInvites(CStateMDCampaignsEcoConflict *this)
 bool  CStateMDCampaignsEcoConflict::CanProcessInvites(void) {
   
   return 0;

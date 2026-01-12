@@ -4,7 +4,6 @@
 
 // address=[0x1402840]
 // Decompiled from int __cdecl CVikingWarShip::New(int a1)
-
 static class CPersistence * __cdecl CVikingWarShip::New(std::istream &) {
   
   if ( CWarShip::operator new(0xC8u) )
@@ -16,7 +15,6 @@ static class CPersistence * __cdecl CVikingWarShip::New(std::istream &) {
 
 // address=[0x15a1b30]
 // Decompiled from _DWORD *__thiscall CVikingWarShip::CVikingWarShip(_DWORD *this, int a2)
-
  CVikingWarShip::CVikingWarShip(std::istream &) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
@@ -44,7 +42,6 @@ static class CPersistence * __cdecl CVikingWarShip::New(std::istream &) {
 
 // address=[0x15a1bf0]
 // Decompiled from int __thiscall CVikingWarShip::Store(void *this, struct std::ostream *a2)
-
 void  CVikingWarShip::Store(std::ostream &) {
   
   int v3[2]; // [esp+0h] [ebp-8h] BYREF
@@ -58,7 +55,6 @@ void  CVikingWarShip::Store(std::ostream &) {
 
 // address=[0x15a2460]
 // Decompiled from void __thiscall CVikingWarShip::~CVikingWarShip(CVikingWarShip *this)
-
  CVikingWarShip::~CVikingWarShip(void) {
   
   CWarShip::~CWarShip(this);
@@ -67,7 +63,6 @@ void  CVikingWarShip::Store(std::ostream &) {
 
 // address=[0x15a2700]
 // Decompiled from int __thiscall CVikingWarShip::ClassID(CVikingWarShip *this)
-
 unsigned long  CVikingWarShip::ClassID(void)const {
   
   return CVikingWarShip::m_iClassID;
@@ -75,10 +70,7 @@ unsigned long  CVikingWarShip::ClassID(void)const {
 
 
 // address=[0x15a2740]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CVikingWarShip::IncreaseAmmo(CVikingWarShip *this, int a2)
-
+// Decompiled from void __thiscall CVikingWarShip::IncreaseAmmo(CVikingWarShip *this, int a2)
 void  CVikingWarShip::IncreaseAmmo(int) {
   
   ;
@@ -89,16 +81,7 @@ void  CVikingWarShip::IncreaseAmmo(int) {
 // [Decompilation failed for static unsigned long CVikingWarShip::m_iClassID]
 
 // address=[0x15a1c30]
-// Decompiled from CVikingWarShip *__thiscall CVikingWarShip::CVikingWarShip(
-        CVikingWarShip *this,
-        int a2,
-        int a3,
-        int a4,
-        int a5,
-        int a6,
-        int a7,
-        bool a8)
-
+// Decompiled from CVikingWarShip *__thiscall CVikingWarShip::CVikingWarShip(  CVikingWarShip *this,  int a2,  int a3,  int a4,  int a5,  int a6,  int a7,  bool a8)
  CVikingWarShip::CVikingWarShip(int,int,int,int,int,int,bool) {
   
   CWarShip::CWarShip(this, a2, a3, a4, a5, a6, a7, a8);
@@ -110,7 +93,6 @@ void  CVikingWarShip::IncreaseAmmo(int) {
 
 // address=[0x15a1c80]
 // Decompiled from bool __thiscall CVikingWarShip::EnoughAmmo(CVikingWarShip *this)
-
 bool  CVikingWarShip::EnoughAmmo(void)const {
   
   int v1; // eax
@@ -127,7 +109,6 @@ bool  CVikingWarShip::EnoughAmmo(void)const {
 
 // address=[0x15a1cf0]
 // Decompiled from int __thiscall CVikingWarShip::AmmoAmount(CVikingWarShip *this)
-
 unsigned int  CVikingWarShip::AmmoAmount(void)const {
   
   int v1; // eax
@@ -144,7 +125,6 @@ unsigned int  CVikingWarShip::AmmoAmount(void)const {
 
 // address=[0x15a1d50]
 // Decompiled from void __thiscall CVikingWarShip::DecreaseAmmo(CVikingWarShip *this)
-
 void  CVikingWarShip::DecreaseAmmo(void) {
   
   int v1; // eax

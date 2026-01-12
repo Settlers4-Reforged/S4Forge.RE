@@ -4,7 +4,6 @@
 
 // address=[0x140a760]
 // Decompiled from bool __thiscall CAttackMsgFilter::IsInRadius(Grid **this, int a2, int a3)
-
 bool  CAttackMsgFilter::IsInRadius(int,int) {
   
   return Grid::Distance(this[1], this[2], a2, a3) <= 25;
@@ -13,7 +12,6 @@ bool  CAttackMsgFilter::IsInRadius(int,int) {
 
 // address=[0x140a7b0]
 // Decompiled from char __thiscall CAttackMsgFilter::Activate(CAttackMsgFilter *this, int a2, int a3, int a4)
-
 bool  CAttackMsgFilter::Activate(int,int,int) {
   
   if ( *(_BYTE *)this )
@@ -28,7 +26,6 @@ bool  CAttackMsgFilter::Activate(int,int,int) {
 
 // address=[0x140a9a0]
 // Decompiled from CAttackMsgFilter *__thiscall CAttackMsgFilter::CAttackMsgFilter(CAttackMsgFilter *this)
-
  CAttackMsgFilter::CAttackMsgFilter(void) {
   
   *(_BYTE *)this = 0;
@@ -37,10 +34,7 @@ bool  CAttackMsgFilter::Activate(int,int,int) {
 
 
 // address=[0x140a9f0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CAttackMsgFilter::~CAttackMsgFilter(CAttackMsgFilter *this)
-
+// Decompiled from void __thiscall CAttackMsgFilter::~CAttackMsgFilter(CAttackMsgFilter *this)
  CAttackMsgFilter::~CAttackMsgFilter(void) {
   
   ;
@@ -49,7 +43,6 @@ void __thiscall CAttackMsgFilter::~CAttackMsgFilter(CAttackMsgFilter *this)
 
 // address=[0x140aa60]
 // Decompiled from CAttackMsgFilter *__thiscall CAttackMsgFilter::Deactivate(CAttackMsgFilter *this)
-
 void  CAttackMsgFilter::Deactivate(void) {
   
   CAttackMsgFilter *result; // eax
@@ -62,7 +55,6 @@ void  CAttackMsgFilter::Deactivate(void) {
 
 // address=[0x140aa80]
 // Decompiled from char __thiscall CAttackMsgFilter::IsActive(CAttackMsgFilter *this)
-
 bool  CAttackMsgFilter::IsActive(void) {
   
   return *(_BYTE *)this;
@@ -71,7 +63,6 @@ bool  CAttackMsgFilter::IsActive(void) {
 
 // address=[0x140aaa0]
 // Decompiled from bool __thiscall CAttackMsgFilter::IsOld(CAttackMsgFilter *this, int a2)
-
 bool  CAttackMsgFilter::IsOld(int) {
   
   return a2 > *((_DWORD *)this + 3);

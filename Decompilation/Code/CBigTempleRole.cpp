@@ -4,7 +4,6 @@
 
 // address=[0x13ffbe0]
 // Decompiled from int __cdecl CBigTempleRole::New(int a1)
-
 static class CPersistence * __cdecl CBigTempleRole::New(std::istream &) {
   
   if ( operator new(0x180u) )
@@ -16,7 +15,6 @@ static class CPersistence * __cdecl CBigTempleRole::New(std::istream &) {
 
 // address=[0x14e8200]
 // Decompiled from int __thiscall CBigTempleRole::LogicUpdate(int this, CMFCToolBarButton *a2)
-
 void  CBigTempleRole::LogicUpdate(class CBuilding *) {
   
   int result; // eax
@@ -84,7 +82,6 @@ void  CBigTempleRole::LogicUpdate(class CBuilding *) {
 
 // address=[0x14e8350]
 // Decompiled from int __thiscall CBigTempleRole::FillGfxInfo(CBigTempleRole *this, struct CBuilding *a2, struct SGfxObjectInfo *a3)
-
 void  CBigTempleRole::FillGfxInfo(class CBuilding *,struct SGfxObjectInfo &) {
   
   int v3; // eax
@@ -99,7 +96,6 @@ void  CBigTempleRole::FillGfxInfo(class CBuilding *,struct SGfxObjectInfo &) {
 
 // address=[0x14e83a0]
 // Decompiled from int __thiscall CBigTempleRole::Init(CBigTempleRole *this, struct CBuilding *a2)
-
 void  CBigTempleRole::Init(class CBuilding *) {
   
   int v2; // eax
@@ -116,7 +112,6 @@ void  CBigTempleRole::Init(class CBuilding *) {
 
 // address=[0x14e8400]
 // Decompiled from int __thiscall CBigTempleRole::PostLoadInit(CBigTempleRole *this, struct CBuilding *a2)
-
 void  CBigTempleRole::PostLoadInit(class CBuilding *) {
   
   int v2; // eax
@@ -133,7 +128,6 @@ void  CBigTempleRole::PostLoadInit(class CBuilding *) {
 
 // address=[0x14e8430]
 // Decompiled from _DWORD *__thiscall CBigTempleRole::FillDialog(CBigTempleRole *this, struct CBuilding *a2, bool a3)
-
 void  CBigTempleRole::FillDialog(class CBuilding *,bool) {
   
   int v3; // eax
@@ -170,7 +164,6 @@ void  CBigTempleRole::FillDialog(class CBuilding *,bool) {
 
 // address=[0x14e8560]
 // Decompiled from char *__thiscall CBigTempleRole::CBigTempleRole(char *this, int a2)
-
  CBigTempleRole::CBigTempleRole(std::istream &) {
   
   int v3; // [esp+4h] [ebp-1Ch] BYREF
@@ -206,7 +199,6 @@ void  CBigTempleRole::FillDialog(class CBuilding *,bool) {
 
 // address=[0x14e8630]
 // Decompiled from int __thiscall CBigTempleRole::Store(struct IBuildingRole *this, struct std::ostream *a2)
-
 void  CBigTempleRole::Store(std::ostream &) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
@@ -222,7 +214,6 @@ void  CBigTempleRole::Store(std::ostream &) {
 
 // address=[0x14e8850]
 // Decompiled from int __thiscall CBigTempleRole::~CBigTempleRole(CBigTempleRole *this)
-
  CBigTempleRole::~CBigTempleRole(void) {
   
   return IBuildingRole::~IBuildingRole(this);
@@ -231,7 +222,6 @@ void  CBigTempleRole::Store(std::ostream &) {
 
 // address=[0x14e88d0]
 // Decompiled from int __thiscall CBigTempleRole::ClassID(CBigTempleRole *this)
-
 unsigned long  CBigTempleRole::ClassID(void)const {
   
   return CBigTempleRole::m_iClassID;
@@ -240,7 +230,6 @@ unsigned long  CBigTempleRole::ClassID(void)const {
 
 // address=[0x14e8930]
 // Decompiled from void *__thiscall CBigTempleRole::GetBuildingNeed(std::_Ref_count_base *this, const struct type_info *a2)
-
 int  CBigTempleRole::GetBuildingNeed(int)const {
   
   return 0;
@@ -249,7 +238,6 @@ int  CBigTempleRole::GetBuildingNeed(int)const {
 
 // address=[0x14e8950]
 // Decompiled from int __thiscall CBigTempleRole::GetBuildingRole(CBigTempleRole *this)
-
 int  CBigTempleRole::GetBuildingRole(void) {
   
   return 17;
@@ -258,7 +246,6 @@ int  CBigTempleRole::GetBuildingRole(void) {
 
 // address=[0x14e8970]
 // Decompiled from void *__thiscall CBigTempleRole::GetPileIdWithGood(std::_Ref_count_base *this, const struct type_info *a2)
-
 int  CBigTempleRole::GetPileIdWithGood(int)const {
   
   return 0;
@@ -266,10 +253,7 @@ int  CBigTempleRole::GetPileIdWithGood(int)const {
 
 
 // address=[0x14e8990]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CBigTempleRole::GoodArrive(CBigTempleRole *this, int a2)
-
+// Decompiled from void __thiscall CBigTempleRole::GoodArrive(CBigTempleRole *this, int a2)
 void  CBigTempleRole::GoodArrive(int) {
   
   ;
@@ -278,7 +262,6 @@ void  CBigTempleRole::GoodArrive(int) {
 
 // address=[0x14fc8d0]
 // Decompiled from CBigTempleRole *__thiscall CBigTempleRole::CBigTempleRole(CBigTempleRole *this)
-
  CBigTempleRole::CBigTempleRole(void) {
   
   IBuildingRole::IBuildingRole(this);
@@ -290,7 +273,6 @@ void  CBigTempleRole::GoodArrive(int) {
 
 // address=[0x14fd870]
 // Decompiled from int __cdecl CBigTempleRole::Load(int a1)
-
 static class CBigTempleRole * __cdecl CBigTempleRole::Load(std::istream &) {
   
   void **v1; // eax
@@ -306,7 +288,6 @@ static class CBigTempleRole * __cdecl CBigTempleRole::Load(std::istream &) {
 
 // address=[0x14e8680]
 // Decompiled from BOOL __thiscall CBigTempleRole::ThrowOutPriest(int this, CMFCToolBarButton *a2)
-
 void  CBigTempleRole::ThrowOutPriest(class CBuilding *) {
   
   int v2; // eax
@@ -336,11 +317,7 @@ void  CBigTempleRole::ThrowOutPriest(class CBuilding *) {
 
 
 // address=[0x14e88f0]
-// Decompiled from void __thiscall CBigTempleRole::ConvertEventIntoGoal(
-        CBigTempleRole *this,
-        struct CBuilding *a2,
-        struct CEntityEvent *a3)
-
+// Decompiled from void __thiscall CBigTempleRole::ConvertEventIntoGoal(  CBigTempleRole *this,  struct CBuilding *a2,  struct CEntityEvent *a3)
 void  CBigTempleRole::ConvertEventIntoGoal(class CBuilding *,class CEntityEvent *) {
   
   ;
@@ -349,7 +326,6 @@ void  CBigTempleRole::ConvertEventIntoGoal(class CBuilding *,class CEntityEvent 
 
 // address=[0x14e8900]
 // Decompiled from char __thiscall CBigTempleRole::CrushBuilding(CBigTempleRole *this)
-
 bool  CBigTempleRole::CrushBuilding(void) {
   
   return 1;
@@ -358,7 +334,6 @@ bool  CBigTempleRole::CrushBuilding(void) {
 
 // address=[0x14e89a0]
 // Decompiled from char __thiscall CBigTempleRole::TryCrushBuilding(CBigTempleRole *this)
-
 bool  CBigTempleRole::TryCrushBuilding(void) {
   
   return 1;

@@ -3,10 +3,7 @@
 // Definitions for class Dtd
 
 // address=[0x2f249c0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-AdvXMLParser::Dtd *__thiscall AdvXMLParser::Dtd::Dtd(AdvXMLParser::Dtd *this, struct Document *a2)
-
+// Decompiled from AdvXMLParser::Dtd *__thiscall AdvXMLParser::Dtd::Dtd(AdvXMLParser::Dtd *this, struct Document *a2)
  AdvXMLParser::Dtd::Dtd(class AdvXMLParser::Document &) {
   
   *(_DWORD *)this = a2;
@@ -16,7 +13,6 @@ AdvXMLParser::Dtd *__thiscall AdvXMLParser::Dtd::Dtd(AdvXMLParser::Dtd *this, st
 
 // address=[0x2f249e0]
 // Decompiled from char __thiscall AdvXMLParser::Dtd::ParseDoctypedecl(AdvXMLParser::Dtd *this, struct AdvXMLParser::Parser *a2)
-
 bool  AdvXMLParser::Dtd::ParseDoctypedecl(class AdvXMLParser::Parser &) {
   
   _BYTE v4[28]; // [esp+Ch] [ebp-2Ch] BYREF
@@ -56,7 +52,6 @@ bool  AdvXMLParser::Dtd::ParseDoctypedecl(class AdvXMLParser::Parser &) {
 
 // address=[0x2f24b50]
 // Decompiled from char __thiscall AdvXMLParser::Dtd::ParsePEReference(AdvXMLParser::Dtd *this, struct AdvXMLParser::Parser *a2)
-
 bool  AdvXMLParser::Dtd::ParsePEReference(class AdvXMLParser::Parser &) {
   
   _BYTE v3[28]; // [esp+Ch] [ebp-2Ch] BYREF
@@ -76,7 +71,6 @@ bool  AdvXMLParser::Dtd::ParsePEReference(class AdvXMLParser::Parser &) {
 
 // address=[0x2f24c00]
 // Decompiled from char __thiscall AdvXMLParser::Dtd::ParseSystemLiteral(AdvXMLParser::Dtd *this, struct AdvXMLParser::Parser *a2)
-
 bool  AdvXMLParser::Dtd::ParseSystemLiteral(class AdvXMLParser::Parser &) {
   
   char Char; // [esp+Ah] [ebp-2h]
@@ -101,7 +95,6 @@ bool  AdvXMLParser::Dtd::ParseSystemLiteral(class AdvXMLParser::Parser &) {
 
 // address=[0x2f24c90]
 // Decompiled from char __thiscall AdvXMLParser::Dtd::ParsePubidLiteral(AdvXMLParser::Dtd *this, struct AdvXMLParser::Parser *a2)
-
 bool  AdvXMLParser::Dtd::ParsePubidLiteral(class AdvXMLParser::Parser &) {
   
   char Char; // [esp+6h] [ebp-2h]
@@ -126,7 +119,6 @@ bool  AdvXMLParser::Dtd::ParsePubidLiteral(class AdvXMLParser::Parser &) {
 
 // address=[0x2f24d20]
 // Decompiled from bool __thiscall AdvXMLParser::Dtd::ParseMarkupdecl(AdvXMLParser::Dtd *this, struct AdvXMLParser::Parser *a2)
-
 bool  AdvXMLParser::Dtd::ParseMarkupdecl(class AdvXMLParser::Parser &) {
   
   return AdvXMLParser::Dtd::ParseElementDecl(this, a2)
@@ -138,7 +130,6 @@ bool  AdvXMLParser::Dtd::ParseMarkupdecl(class AdvXMLParser::Parser &) {
 
 // address=[0x2f24d90]
 // Decompiled from char __thiscall AdvXMLParser::Dtd::ParseElementDecl(AdvXMLParser::Dtd *this, struct AdvXMLParser::Parser *a2)
-
 bool  AdvXMLParser::Dtd::ParseElementDecl(class AdvXMLParser::Parser &) {
   
   _BYTE v4[28]; // [esp+Ch] [ebp-2Ch] BYREF
@@ -166,7 +157,6 @@ bool  AdvXMLParser::Dtd::ParseElementDecl(class AdvXMLParser::Parser &) {
 
 // address=[0x2f24e90]
 // Decompiled from bool __thiscall AdvXMLParser::Dtd::ParseContentspec(AdvXMLParser::Dtd *this, struct AdvXMLParser::Parser *a2)
-
 bool  AdvXMLParser::Dtd::ParseContentspec(class AdvXMLParser::Parser &) {
   
   if ( AdvXMLParser::Parser::ParseString(a2, "EMPTY") )
@@ -179,7 +169,6 @@ bool  AdvXMLParser::Dtd::ParseContentspec(class AdvXMLParser::Parser &) {
 
 // address=[0x2f24f00]
 // Decompiled from char __thiscall AdvXMLParser::Dtd::ParseMixed(AdvXMLParser::Dtd *this, struct AdvXMLParser::Parser *a2)
-
 bool  AdvXMLParser::Dtd::ParseMixed(class AdvXMLParser::Parser &) {
   
   _BYTE v3[16]; // [esp+4h] [ebp-40h] BYREF
@@ -234,7 +223,6 @@ bool  AdvXMLParser::Dtd::ParseMixed(class AdvXMLParser::Parser &) {
 
 // address=[0x2f25050]
 // Decompiled from char __thiscall AdvXMLParser::Dtd::ParseChildren(AdvXMLParser::Dtd *this, struct AdvXMLParser::Parser *a2)
-
 bool  AdvXMLParser::Dtd::ParseChildren(class AdvXMLParser::Parser &) {
   
   char Char; // [esp+4h] [ebp-8h]
@@ -251,7 +239,6 @@ bool  AdvXMLParser::Dtd::ParseChildren(class AdvXMLParser::Parser &) {
 
 // address=[0x2f250b0]
 // Decompiled from char __thiscall AdvXMLParser::Dtd::ParseChoiceSeq(AdvXMLParser::Dtd *this, struct AdvXMLParser::Parser *a2, bool *a3)
-
 bool  AdvXMLParser::Dtd::ParseChoiceSeq(class AdvXMLParser::Parser &,bool &) {
   
   char v5; // [esp+Eh] [ebp-2h]
@@ -287,7 +274,6 @@ bool  AdvXMLParser::Dtd::ParseChoiceSeq(class AdvXMLParser::Parser &,bool &) {
 
 // address=[0x2f251b0]
 // Decompiled from char __thiscall AdvXMLParser::Dtd::ParseCp(AdvXMLParser::Dtd *this, struct AdvXMLParser::Parser *a2)
-
 bool  AdvXMLParser::Dtd::ParseCp(class AdvXMLParser::Parser &) {
   
   char Char; // [esp+8h] [ebp-34h]
@@ -321,7 +307,6 @@ bool  AdvXMLParser::Dtd::ParseCp(class AdvXMLParser::Parser &) {
 
 // address=[0x2f25290]
 // Decompiled from char __thiscall AdvXMLParser::Dtd::ParseAttlistDecl(AdvXMLParser::Dtd *this, struct AdvXMLParser::Parser *a2)
-
 bool  AdvXMLParser::Dtd::ParseAttlistDecl(class AdvXMLParser::Parser &) {
   
   _BYTE v4[28]; // [esp+Ch] [ebp-2Ch] BYREF
@@ -346,7 +331,6 @@ bool  AdvXMLParser::Dtd::ParseAttlistDecl(class AdvXMLParser::Parser &) {
 
 // address=[0x2f25380]
 // Decompiled from char __thiscall AdvXMLParser::Dtd::ParseAttDef(AdvXMLParser::Dtd *this, struct AdvXMLParser::Parser *a2)
-
 bool  AdvXMLParser::Dtd::ParseAttDef(class AdvXMLParser::Parser &) {
   
   _BYTE v3[16]; // [esp+4h] [ebp-44h] BYREF
@@ -387,7 +371,6 @@ bool  AdvXMLParser::Dtd::ParseAttDef(class AdvXMLParser::Parser &) {
 
 // address=[0x2f25490]
 // Decompiled from bool __thiscall AdvXMLParser::Dtd::ParseAttType(AdvXMLParser::Dtd *this, struct AdvXMLParser::Parser *a2)
-
 bool  AdvXMLParser::Dtd::ParseAttType(class AdvXMLParser::Parser &) {
   
   if ( AdvXMLParser::Parser::ParseString(a2, "CDATA") )
@@ -408,7 +391,6 @@ bool  AdvXMLParser::Dtd::ParseAttType(class AdvXMLParser::Parser &) {
 
 // address=[0x2f25580]
 // Decompiled from char __thiscall AdvXMLParser::Dtd::ParseNotationType(AdvXMLParser::Dtd *this, struct AdvXMLParser::Parser *a2)
-
 bool  AdvXMLParser::Dtd::ParseNotationType(class AdvXMLParser::Parser &) {
   
   _BYTE v3[28]; // [esp+Ch] [ebp-48h] BYREF
@@ -446,7 +428,6 @@ bool  AdvXMLParser::Dtd::ParseNotationType(class AdvXMLParser::Parser &) {
 
 // address=[0x2f256d0]
 // Decompiled from char __thiscall AdvXMLParser::Dtd::ParseEnumeration(AdvXMLParser::Dtd *this, struct AdvXMLParser::Parser *a2)
-
 bool  AdvXMLParser::Dtd::ParseEnumeration(class AdvXMLParser::Parser &) {
   
   _BYTE v3[28]; // [esp+Ch] [ebp-48h] BYREF
@@ -482,7 +463,6 @@ bool  AdvXMLParser::Dtd::ParseEnumeration(class AdvXMLParser::Parser &) {
 
 // address=[0x2f25800]
 // Decompiled from char __thiscall AdvXMLParser::Dtd::ParseDefaultDecl(AdvXMLParser::Dtd *this, struct AdvXMLParser::Parser *a2)
-
 bool  AdvXMLParser::Dtd::ParseDefaultDecl(class AdvXMLParser::Parser &) {
   
   _BYTE v3[56]; // [esp+Ch] [ebp-64h] BYREF
@@ -515,7 +495,6 @@ bool  AdvXMLParser::Dtd::ParseDefaultDecl(class AdvXMLParser::Parser &) {
 
 // address=[0x2f25920]
 // Decompiled from char __thiscall AdvXMLParser::Dtd::ParseEntityDecl(AdvXMLParser::Dtd *this, struct AdvXMLParser::Parser *a2)
-
 bool  AdvXMLParser::Dtd::ParseEntityDecl(class AdvXMLParser::Parser &) {
   
   _BYTE v4[28]; // [esp+8h] [ebp-48h] BYREF
@@ -562,7 +541,6 @@ bool  AdvXMLParser::Dtd::ParseEntityDecl(class AdvXMLParser::Parser &) {
 
 // address=[0x2f25aa0]
 // Decompiled from char __thiscall AdvXMLParser::Dtd::ParseEntityDef(AdvXMLParser::Dtd *this, struct AdvXMLParser::Parser *a2)
-
 bool  AdvXMLParser::Dtd::ParseEntityDef(class AdvXMLParser::Parser &) {
   
   if ( AdvXMLParser::Dtd::ParseEntityValue(this, a2) )
@@ -576,7 +554,6 @@ bool  AdvXMLParser::Dtd::ParseEntityDef(class AdvXMLParser::Parser &) {
 
 // address=[0x2f25af0]
 // Decompiled from char __thiscall AdvXMLParser::Dtd::ParseNDataDecl(AdvXMLParser::Dtd *this, struct AdvXMLParser::Parser *a2)
-
 bool  AdvXMLParser::Dtd::ParseNDataDecl(class AdvXMLParser::Parser &) {
   
   _BYTE v3[16]; // [esp+4h] [ebp-44h] BYREF
@@ -610,7 +587,6 @@ bool  AdvXMLParser::Dtd::ParseNDataDecl(class AdvXMLParser::Parser &) {
 
 // address=[0x2f25bd0]
 // Decompiled from bool __thiscall AdvXMLParser::Dtd::ParsePEDef(AdvXMLParser::Dtd *this, struct AdvXMLParser::Parser *a2)
-
 bool  AdvXMLParser::Dtd::ParsePEDef(class AdvXMLParser::Parser &) {
   
   return AdvXMLParser::Dtd::ParseEntityValue(this, a2) || AdvXMLParser::Dtd::ParseExternalID(this, a2);
@@ -619,7 +595,6 @@ bool  AdvXMLParser::Dtd::ParsePEDef(class AdvXMLParser::Parser &) {
 
 // address=[0x2f25c20]
 // Decompiled from char __thiscall AdvXMLParser::Dtd::ParseEntityValue(AdvXMLParser::Dtd *this, struct AdvXMLParser::Parser *a2)
-
 bool  AdvXMLParser::Dtd::ParseEntityValue(class AdvXMLParser::Parser &) {
   
   struct AdvXMLParser::Reference *v3; // eax
@@ -675,7 +650,6 @@ bool  AdvXMLParser::Dtd::ParseEntityValue(class AdvXMLParser::Parser &) {
 
 // address=[0x2f25d80]
 // Decompiled from char __thiscall AdvXMLParser::Dtd::ParseNotationDecl(AdvXMLParser::Dtd *this, struct AdvXMLParser::Parser *a2)
-
 bool  AdvXMLParser::Dtd::ParseNotationDecl(class AdvXMLParser::Parser &) {
   
   _BYTE v4[28]; // [esp+Ch] [ebp-2Ch] BYREF
@@ -704,7 +678,6 @@ bool  AdvXMLParser::Dtd::ParseNotationDecl(class AdvXMLParser::Parser &) {
 
 // address=[0x2f25ea0]
 // Decompiled from char __thiscall AdvXMLParser::Dtd::ParseExternalID(AdvXMLParser::Dtd *this, struct AdvXMLParser::Parser *a2)
-
 bool  AdvXMLParser::Dtd::ParseExternalID(class AdvXMLParser::Parser &) {
   
   if ( AdvXMLParser::Parser::ParseString(a2, "SYSTEM") )
@@ -730,7 +703,6 @@ bool  AdvXMLParser::Dtd::ParseExternalID(class AdvXMLParser::Parser &) {
 
 // address=[0x2f25f60]
 // Decompiled from char __thiscall AdvXMLParser::Dtd::ParsePublicID(AdvXMLParser::Dtd *this, struct AdvXMLParser::Parser *a2)
-
 bool  AdvXMLParser::Dtd::ParsePublicID(class AdvXMLParser::Parser &) {
   
   if ( !AdvXMLParser::Parser::ParseString(a2, "PUBLIC") )

@@ -4,7 +4,6 @@
 
 // address=[0x141dbe0]
 // Decompiled from int __thiscall CDefineTranslator::GetValueOfDefine(void *this, int a2)
-
 int  CDefineTranslator::GetValueOfDefine(std::string const &)const {
   
   _BYTE v3[12]; // [esp+4h] [ebp-54h] BYREF
@@ -54,7 +53,6 @@ int  CDefineTranslator::GetValueOfDefine(std::string const &)const {
 
 // address=[0x14f3f70]
 // Decompiled from int CDefineTranslator::Instance()
-
 static class CDefineTranslator & __cdecl CDefineTranslator::Instance(void) {
   
   _DWORD *Instance; // eax
@@ -66,7 +64,6 @@ static class CDefineTranslator & __cdecl CDefineTranslator::Instance(void) {
 
 // address=[0x141dcf0]
 // Decompiled from void *CDefineTranslator::GetInstance()
-
 static class std::auto_ptr<class CDefineTranslator> & __cdecl CDefineTranslator::GetInstance(void) {
   
   CDefineTranslator *v1; // [esp+8h] [ebp-14h]
@@ -91,7 +88,6 @@ static class std::auto_ptr<class CDefineTranslator> & __cdecl CDefineTranslator:
 
 // address=[0x141ddd0]
 // Decompiled from CDefineTranslator *__thiscall CDefineTranslator::CDefineTranslator(CDefineTranslator *this)
-
  CDefineTranslator::CDefineTranslator(void) {
   
   CDestructionPhase *v1; // eax
@@ -1863,7 +1859,6 @@ static class std::auto_ptr<class CDefineTranslator> & __cdecl CDefineTranslator:
 
 // address=[0x1422bf0]
 // Decompiled from int __thiscall CDefineTranslator::~CDefineTranslator(CDefineTranslator *this)
-
  CDefineTranslator::~CDefineTranslator(void) {
   
   CDefineTranslator::Status(this);
@@ -1873,9 +1868,7 @@ static class std::auto_ptr<class CDefineTranslator> & __cdecl CDefineTranslator:
 
 
 // address=[0x1422c40]
-// Decompiled from // Microsoft VisualC 14/net runtime
-char __thiscall CDefineTranslator::Status(CDefineTranslator *this)
-
+// Decompiled from char __thiscall CDefineTranslator::Status(CDefineTranslator *this)
 bool  CDefineTranslator::Status(void) {
   
   return 0;
@@ -1884,7 +1877,6 @@ bool  CDefineTranslator::Status(void) {
 
 // address=[0x14269c0]
 // Decompiled from CDefineTranslator *CDefineTranslator::DestroyInstance()
-
 static void __cdecl CDefineTranslator::DestroyInstance(void) {
   
   int Instance; // eax

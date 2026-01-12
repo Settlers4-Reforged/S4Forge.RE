@@ -4,7 +4,6 @@
 
 // address=[0x14ca410]
 // Decompiled from CStateMessageBox *__cdecl CStateMessageBox::DynamicCreateFunc(void *a1)
-
 static class CGameState * __cdecl CStateMessageBox::DynamicCreateFunc(void *) {
   
   CStateMessageBox *C; // [esp+Ch] [ebp-10h]
@@ -19,7 +18,6 @@ static class CGameState * __cdecl CStateMessageBox::DynamicCreateFunc(void *) {
 
 // address=[0x14ca490]
 // Decompiled from CStateMessageBox *__thiscall CStateMessageBox::CStateMessageBox(CStateMessageBox *this, int Str)
-
  CStateMessageBox::CStateMessageBox(void *) {
   
   char *v2; // eax
@@ -44,7 +42,6 @@ static class CGameState * __cdecl CStateMessageBox::DynamicCreateFunc(void *) {
 
 // address=[0x14ca560]
 // Decompiled from void __thiscall CStateMessageBox::~CStateMessageBox(CStateMessageBox *this)
-
  CStateMessageBox::~CStateMessageBox(void) {
   
   *(_DWORD *)this = &CStateMessageBox::_vftable_;
@@ -59,7 +56,6 @@ static class CGameState * __cdecl CStateMessageBox::DynamicCreateFunc(void *) {
 
 // address=[0x14ca5e0]
 // Decompiled from char __thiscall CStateMessageBox::Perform(CStateMessageBox *this)
-
 bool  CStateMessageBox::Perform(void) {
   
   DWORD v1; // esi
@@ -86,7 +82,6 @@ bool  CStateMessageBox::Perform(void) {
 
 // address=[0x14ca680]
 // Decompiled from char __thiscall CStateMessageBox::OnEvent(CStateMessageBox *this, struct CEvn_Event *a2)
-
 bool  CStateMessageBox::OnEvent(class CEvn_Event &) {
   
   CEvn_Event *v3; // [esp+8h] [ebp-38h]

@@ -3,9 +3,7 @@
 // Definitions for class GenerateContext
 
 // address=[0x2f2c9d0]
-// Decompiled from // public: __thiscall AdvXMLParser::GenerateContext::GenerateContext(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > &,char const *,unsigned long)
-_DWORD *__thiscall AdvXMLParser::GenerateContext::GenerateContext(_DWORD *this, int a2, const char *a3, int a4)
-
+// Decompiled from _DWORD *__thiscall AdvXMLParser::GenerateContext::GenerateContext(_DWORD *this, int a2, const char *a3, int a4)
  AdvXMLParser::GenerateContext::GenerateContext(std::string &,char const *,unsigned long) {
   
   const char *v5; // [esp+0h] [ebp-8h]
@@ -25,9 +23,7 @@ _DWORD *__thiscall AdvXMLParser::GenerateContext::GenerateContext(_DWORD *this, 
 
 
 // address=[0x2f2ca30]
-// Decompiled from // public: __thiscall AdvXMLParser::GenerateContext::GenerateContext(class AdvXMLParser::GenerateContext const &)
-_DWORD *__thiscall AdvXMLParser::GenerateContext::GenerateContext_0(_DWORD *this, int a2)
-
+// Decompiled from _DWORD *__thiscall AdvXMLParser::GenerateContext::GenerateContext_0(_DWORD *this, int a2)
  AdvXMLParser::GenerateContext::GenerateContext(class AdvXMLParser::GenerateContext const &) {
   
   *this = *(_DWORD *)a2;
@@ -41,9 +37,7 @@ _DWORD *__thiscall AdvXMLParser::GenerateContext::GenerateContext_0(_DWORD *this
 
 
 // address=[0x2f2ca90]
-// Decompiled from // public: void __thiscall AdvXMLParser::GenerateContext::operator=(class AdvXMLParser::GenerateContext const &)
-_DWORD *__thiscall AdvXMLParser::GenerateContext::operator_(_DWORD *this, int a2)
-
+// Decompiled from _DWORD *__thiscall AdvXMLParser::GenerateContext::operator_(_DWORD *this, int a2)
 void  AdvXMLParser::GenerateContext::operator=(class AdvXMLParser::GenerateContext const &) {
   
   _DWORD *result; // eax
@@ -60,9 +54,7 @@ void  AdvXMLParser::GenerateContext::operator=(class AdvXMLParser::GenerateConte
 
 
 // address=[0x2f2caf0]
-// Decompiled from AdvXMLParser::GenerateContext *__thiscall AdvXMLParser::GenerateContext::GenerateStartTagIndentation(
-        AdvXMLParser::GenerateContext *this)
-
+// Decompiled from AdvXMLParser::GenerateContext *__thiscall AdvXMLParser::GenerateContext::GenerateStartTagIndentation(  AdvXMLParser::GenerateContext *this)
 void  AdvXMLParser::GenerateContext::GenerateStartTagIndentation(void) {
   
   AdvXMLParser::GenerateContext *result; // eax
@@ -79,9 +71,7 @@ void  AdvXMLParser::GenerateContext::GenerateStartTagIndentation(void) {
 
 
 // address=[0x2f2cb30]
-// Decompiled from AdvXMLParser::GenerateContext *__thiscall AdvXMLParser::GenerateContext::GenerateEndTagIndentation(
-        AdvXMLParser::GenerateContext *this)
-
+// Decompiled from AdvXMLParser::GenerateContext *__thiscall AdvXMLParser::GenerateContext::GenerateEndTagIndentation(  AdvXMLParser::GenerateContext *this)
 void  AdvXMLParser::GenerateContext::GenerateEndTagIndentation(void) {
   
   AdvXMLParser::GenerateContext *result; // eax
@@ -105,7 +95,6 @@ void  AdvXMLParser::GenerateContext::GenerateEndTagIndentation(void) {
 
 // address=[0x2f2cba0]
 // Decompiled from int __thiscall AdvXMLParser::GenerateContext::EndTag(AdvXMLParser::GenerateContext *this)
-
 void  AdvXMLParser::GenerateContext::EndTag(void) {
   
   int result; // eax
@@ -120,9 +109,7 @@ void  AdvXMLParser::GenerateContext::EndTag(void) {
 
 
 // address=[0x2f2cbf0]
-// Decompiled from AdvXMLParser::GenerateContext *__fastcall AdvXMLParser::GenerateContext::GenerateNewLine(
-        AdvXMLParser::GenerateContext *this)
-
+// Decompiled from AdvXMLParser::GenerateContext *__fastcall AdvXMLParser::GenerateContext::GenerateNewLine(  AdvXMLParser::GenerateContext *this)
 void  AdvXMLParser::GenerateContext::GenerateNewLine(void) {
   
   AdvXMLParser::GenerateContext *result; // eax
@@ -141,7 +128,6 @@ void  AdvXMLParser::GenerateContext::GenerateNewLine(void) {
 
 // address=[0x2f2d730]
 // Decompiled from int __thiscall AdvXMLParser::GenerateContext::operator+=(_BYTE *this, int a2)
-
 void  AdvXMLParser::GenerateContext::operator+=(std::string const &) {
   
   this[17] = 0;
@@ -151,7 +137,6 @@ void  AdvXMLParser::GenerateContext::operator+=(std::string const &) {
 
 // address=[0x2f2d760]
 // Decompiled from int __thiscall AdvXMLParser::GenerateContext::operator+=(_BYTE *this, char a2)
-
 void  AdvXMLParser::GenerateContext::operator+=(char) {
   
   this[17] = 0;
@@ -161,7 +146,6 @@ void  AdvXMLParser::GenerateContext::operator+=(char) {
 
 // address=[0x2f2d790]
 // Decompiled from int __thiscall AdvXMLParser::GenerateContext::operator+=(_BYTE *this, char *Str)
-
 void  AdvXMLParser::GenerateContext::operator+=(char const *) {
   
   this[17] = 0;
@@ -171,7 +155,6 @@ void  AdvXMLParser::GenerateContext::operator+=(char const *) {
 
 // address=[0x2f2d860]
 // Decompiled from int __thiscall AdvXMLParser::GenerateContext::MustPreserve(AdvXMLParser::GenerateContext *this)
-
 bool  AdvXMLParser::GenerateContext::MustPreserve(void)const {
   
   return *(_DWORD *)this & 1;
@@ -180,7 +163,6 @@ bool  AdvXMLParser::GenerateContext::MustPreserve(void)const {
 
 // address=[0x2f2cc30]
 // Decompiled from int __thiscall AdvXMLParser::GenerateContext::GenerateIndentation(AdvXMLParser::GenerateContext *this)
-
 void  AdvXMLParser::GenerateContext::GenerateIndentation(void) {
   
   int result; // eax

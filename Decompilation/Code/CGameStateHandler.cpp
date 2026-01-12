@@ -4,7 +4,6 @@
 
 // address=[0x148ac10]
 // Decompiled from char CGameStateHandler::Init()
-
 static bool __cdecl CGameStateHandler::Init(void) {
   
   int v1; // [esp+4h] [ebp-128h]
@@ -192,7 +191,6 @@ static bool __cdecl CGameStateHandler::Init(void) {
 
 // address=[0x148b240]
 // Decompiled from char CGameStateHandler::Perform()
-
 static bool __cdecl CGameStateHandler::Perform(void) {
   
   OnlineManager *v1; // eax
@@ -293,7 +291,6 @@ static bool __cdecl CGameStateHandler::Perform(void) {
 
 // address=[0x148b530]
 // Decompiled from char CGameStateHandler::CanProcessInvites()
-
 static bool __cdecl CGameStateHandler::CanProcessInvites(void) {
   
   if ( CGameStateHandler::m_s_pCurrentState )
@@ -305,7 +302,6 @@ static bool __cdecl CGameStateHandler::CanProcessInvites(void) {
 
 // address=[0x148b560]
 // Decompiled from MMRESULT CGameStateHandler::Kill()
-
 static void __cdecl CGameStateHandler::Kill(void) {
   
   CDestructionManager *v0; // eax
@@ -387,7 +383,6 @@ static void __cdecl CGameStateHandler::Kill(void) {
 
 // address=[0x148b900]
 // Decompiled from char CGameStateHandler::InitGfxEngine()
-
 static bool __cdecl CGameStateHandler::InitGfxEngine(void) {
   
   IGfxEngine *v1; // [esp+14h] [ebp-14h]
@@ -422,7 +417,6 @@ static bool __cdecl CGameStateHandler::InitGfxEngine(void) {
 
 // address=[0x148ba60]
 // Decompiled from bool CGameStateHandler::InitSoundEngine()
-
 static bool __cdecl CGameStateHandler::InitSoundEngine(void) {
   
   ISoundEngine *v1; // [esp+14h] [ebp-18h]
@@ -467,7 +461,6 @@ static bool __cdecl CGameStateHandler::InitSoundEngine(void) {
 
 // address=[0x148bc10]
 // Decompiled from char CGameStateHandler::InitGfxManager()
-
 static bool __cdecl CGameStateHandler::InitGfxManager(void) {
   
   char v1; // al
@@ -527,7 +520,6 @@ static bool __cdecl CGameStateHandler::InitGfxManager(void) {
 
 // address=[0x148be00]
 // Decompiled from bool CGameStateHandler::InitSoundManager()
-
 static bool __cdecl CGameStateHandler::InitSoundManager(void) {
   
   CSoundManager *v1; // [esp+8h] [ebp-14h]
@@ -545,7 +537,6 @@ static bool __cdecl CGameStateHandler::InitSoundManager(void) {
 
 // address=[0x148bea0]
 // Decompiled from char CGameStateHandler::InitConfigManager()
-
 static bool __cdecl CGameStateHandler::InitConfigManager(void) {
   
   g_pCfgMgr = CConfigManagerPtr::GetInstance();
@@ -575,7 +566,6 @@ static bool __cdecl CGameStateHandler::InitConfigManager(void) {
 
 // address=[0x148c0f0]
 // Decompiled from char CGameStateHandler::InitStringEngine()
-
 static bool __cdecl CGameStateHandler::InitStringEngine(void) {
   
   int v0; // eax
@@ -592,7 +582,6 @@ static bool __cdecl CGameStateHandler::InitStringEngine(void) {
 
 // address=[0x148c130]
 // Decompiled from char CGameStateHandler::InitFileLibrary()
-
 static bool __cdecl CGameStateHandler::InitFileLibrary(void) {
   
   return 1;
@@ -601,7 +590,6 @@ static bool __cdecl CGameStateHandler::InitFileLibrary(void) {
 
 // address=[0x148c140]
 // Decompiled from char CGameStateHandler::InitGfxCompiler()
-
 static bool __cdecl CGameStateHandler::InitGfxCompiler(void) {
   
   j___controlfp(0xA031Fu, (unsigned int)&loc_30F031E + 1);
@@ -628,7 +616,6 @@ static bool __cdecl CGameStateHandler::InitGfxCompiler(void) {
 
 // address=[0x148c1b0]
 // Decompiled from void CGameStateHandler::DietmarsGameSettingsDefaults()
-
 static void __cdecl CGameStateHandler::DietmarsGameSettingsDefaults(void) {
   
   int v0; // [esp+0h] [ebp-Ch]
@@ -649,7 +636,6 @@ static void __cdecl CGameStateHandler::DietmarsGameSettingsDefaults(void) {
 
 // address=[0x148c260]
 // Decompiled from void CGameStateHandler::LoadAllConfigFiles()
-
 static void __cdecl CGameStateHandler::LoadAllConfigFiles(void) {
   
   _DWORD *v0; // eax
@@ -693,7 +679,6 @@ static void __cdecl CGameStateHandler::LoadAllConfigFiles(void) {
 
 // address=[0x148c400]
 // Decompiled from char __cdecl CGameStateHandler::RebuildGfxEngine(char a1)
-
 static bool __cdecl CGameStateHandler::RebuildGfxEngine(bool) {
   
   int v2; // esi
@@ -754,9 +739,7 @@ static bool __cdecl CGameStateHandler::RebuildGfxEngine(bool) {
 
 
 // address=[0x148c590]
-// Decompiled from // public: static bool __cdecl CGameStateHandler::CheckGfxRenderQuality(unsigned int)
-char __cdecl CGameStateHandler::CheckGfxRenderQuality(int a1)
-
+// Decompiled from char __cdecl CGameStateHandler::CheckGfxRenderQuality(int a1)
 static bool __cdecl CGameStateHandler::CheckGfxRenderQuality(unsigned int) {
   
   int v2[9]; // [esp-24h] [ebp-50h] BYREF
@@ -780,9 +763,7 @@ static bool __cdecl CGameStateHandler::CheckGfxRenderQuality(unsigned int) {
 
 
 // address=[0x148c5d0]
-// Decompiled from // public: static bool __cdecl CGameStateHandler::CheckGfxHardwareMode(unsigned int)
-char __cdecl CGameStateHandler::CheckGfxHardwareMode(int a1)
-
+// Decompiled from char __cdecl CGameStateHandler::CheckGfxHardwareMode(int a1)
 static bool __cdecl CGameStateHandler::CheckGfxHardwareMode(unsigned int) {
   
   int v2[9]; // [esp-24h] [ebp-54h] BYREF
@@ -808,7 +789,6 @@ static bool __cdecl CGameStateHandler::CheckGfxHardwareMode(unsigned int) {
 
 // address=[0x148c620]
 // Decompiled from char __cdecl CGameStateHandler::ShowHTMLPage(char a1, int a2, int a3, int a4, int a5, int a6, int a7, char a8)
-
 static bool __cdecl CGameStateHandler::ShowHTMLPage(std::string,std::string) {
   
   const CHAR *v8; // eax
@@ -899,7 +879,6 @@ LABEL_12:
 
 // address=[0x148c880]
 // Decompiled from int CGameStateHandler::SetCorrectWindowSize()
-
 static void __cdecl CGameStateHandler::SetCorrectWindowSize(void) {
   
   int v0; // eax
@@ -958,7 +937,6 @@ static void __cdecl CGameStateHandler::SetCorrectWindowSize(void) {
 
 // address=[0x148fef0]
 // Decompiled from int __cdecl sub_188FEF0(int a1, int a2)
-
 static void __cdecl CGameStateHandler::Queue(class CGameState * (__cdecl*)(void *),void *) {
   
   _DWORD v3[2]; // [esp+0h] [ebp-8h] BYREF
@@ -971,7 +949,6 @@ static void __cdecl CGameStateHandler::Queue(class CGameState * (__cdecl*)(void 
 
 // address=[0x1490010]
 // Decompiled from int __cdecl sub_1890010(int a1, int a2)
-
 static void __cdecl CGameStateHandler::Switch(class CGameState * (__cdecl*)(void *),void *) {
   
   int result; // eax
@@ -984,7 +961,6 @@ static void __cdecl CGameStateHandler::Switch(class CGameState * (__cdecl*)(void
 
 // address=[0x14a1d40]
 // Decompiled from void CGameStateHandler::Next()
-
 static void __cdecl CGameStateHandler::Next(void) {
   
   CGameStateHandler::m_bWantSwitch = 1;
@@ -993,7 +969,6 @@ static void __cdecl CGameStateHandler::Next(void) {
 
 // address=[0x14aae20]
 // Decompiled from char CGameStateHandler::IsGrabbing()
-
 static bool __cdecl CGameStateHandler::IsGrabbing(void) {
   
   return CGameStateHandler::m_bGrab;
@@ -1002,7 +977,6 @@ static bool __cdecl CGameStateHandler::IsGrabbing(void) {
 
 // address=[0x15c4a10]
 // Decompiled from int CGameStateHandler::GetCurrentState()
-
 static class CGameState * __cdecl CGameStateHandler::GetCurrentState(void) {
   
   return CGameStateHandler::m_s_pCurrentState;
@@ -1011,7 +985,6 @@ static class CGameState * __cdecl CGameStateHandler::GetCurrentState(void) {
 
 // address=[0x148c9a0]
 // Decompiled from void __cdecl CGameStateHandler::LoadConfigFile(wchar_t *String, const char *a2)
-
 static void __cdecl CGameStateHandler::LoadConfigFile(wchar_t const *,char const *) {
   
   _DWORD *v2; // eax
@@ -1053,7 +1026,6 @@ static void __cdecl CGameStateHandler::LoadConfigFile(wchar_t const *,char const
 
 // address=[0x148cac0]
 // Decompiled from char CGameStateHandler::StartDummyGame()
-
 static bool __cdecl CGameStateHandler::StartDummyGame(void) {
   
   const CHAR *v0; // eax
@@ -1233,7 +1205,6 @@ static bool __cdecl CGameStateHandler::StartDummyGame(void) {
 
 // address=[0x148d250]
 // Decompiled from unsigned __int8 __fastcall CGameStateHandler::PerformPendingFullScreenEnterOrExit(__int16 a1)
-
 static void __cdecl CGameStateHandler::PerformPendingFullScreenEnterOrExit(void) {
   
   unsigned __int8 result; // al
@@ -1251,7 +1222,6 @@ static void __cdecl CGameStateHandler::PerformPendingFullScreenEnterOrExit(void)
 
 // address=[0x148d290]
 // Decompiled from char __cdecl CGameStateHandler::BuildInitRenderCfg(bool a1, bool a2)
-
 static bool __cdecl CGameStateHandler::BuildInitRenderCfg(bool,bool) {
   
   int *v2; // eax

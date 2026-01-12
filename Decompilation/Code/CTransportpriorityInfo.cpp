@@ -4,7 +4,6 @@
 
 // address=[0x1454980]
 // Decompiled from CTransportpriorityInfo *__thiscall CTransportpriorityInfo::CTransportpriorityInfo(CTransportpriorityInfo *this)
-
  CTransportpriorityInfo::CTransportpriorityInfo(void) {
   
   CInfoExchange::CInfoExchange(this);
@@ -17,7 +16,6 @@
 
 // address=[0x1454e50]
 // Decompiled from int __thiscall CTransportpriorityInfo::Size(CTransportpriorityInfo *this)
-
 unsigned int  CTransportpriorityInfo::Size(void)const {
   
   return 136;

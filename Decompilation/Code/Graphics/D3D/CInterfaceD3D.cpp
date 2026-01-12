@@ -4,7 +4,6 @@
 
 // address=[0x2f5f250]
 // Decompiled from void __thiscall CInterfaceD3D::BlitCursor(CInterfaceD3D *this)
-
 void  CInterfaceD3D::BlitCursor(void) {
   
   int v1; // [esp+0h] [ebp-8h]
@@ -22,7 +21,6 @@ void  CInterfaceD3D::BlitCursor(void) {
 
 // address=[0x2f5f390]
 // Decompiled from bool __thiscall CInterfaceD3D::HasCameraWindowSurface(CInterfaceD3D *this)
-
 bool  CInterfaceD3D::HasCameraWindowSurface(void)const {
   
   return this->field_5C != 0;
@@ -31,7 +29,6 @@ bool  CInterfaceD3D::HasCameraWindowSurface(void)const {
 
 // address=[0x2f62860]
 // Decompiled from CInterfaceD3D *__thiscall CInterfaceD3D::CInterfaceD3D(CInterfaceD3D *this)
-
  CInterfaceD3D::CInterfaceD3D(void) {
   
   unsigned int i; // [esp+4h] [ebp-14h]
@@ -93,7 +90,6 @@ bool  CInterfaceD3D::HasCameraWindowSurface(void)const {
 
 // address=[0x2f62b00]
 // Decompiled from void __thiscall CInterfaceD3D::~CInterfaceD3D(CInterfaceD3D *this)
-
  CInterfaceD3D::~CInterfaceD3D(void) {
   
   CUploadCachePageManager *v1; // [esp+7Ch] [ebp-50h]
@@ -302,7 +298,6 @@ bool  CInterfaceD3D::HasCameraWindowSurface(void)const {
 
 // address=[0x2f63450]
 // Decompiled from char __thiscall CInterfaceD3D::InitCommon(CInterfaceD3D *this)
-
 bool  CInterfaceD3D::InitCommon(void) {
   
   int v2; // eax
@@ -836,7 +831,6 @@ bool  CInterfaceD3D::InitCommon(void) {
 
 // address=[0x2f643e0]
 // Decompiled from char __thiscall CInterfaceD3D::InitCommonV3(CInterfaceD3D *this)
-
 bool  CInterfaceD3D::InitCommonV3(void) {
   
   int v2; // eax
@@ -1353,7 +1347,6 @@ bool  CInterfaceD3D::InitCommonV3(void) {
 
 // address=[0x2f65300]
 // Decompiled from char __thiscall CInterfaceD3D::InitHardware(CInterfaceD3D *this)
-
 bool  CInterfaceD3D::InitHardware(void) {
   
   int v2; // eax
@@ -1843,7 +1836,6 @@ bool  CInterfaceD3D::InitHardware(void) {
 
 // address=[0x2f665f0]
 // Decompiled from char __thiscall CInterfaceD3D::InitSoftware(CInterfaceD3D *this)
-
 bool  CInterfaceD3D::InitSoftware(void) {
   
   int GradientFormat; // eax
@@ -1904,7 +1896,6 @@ bool  CInterfaceD3D::InitSoftware(void) {
 
 // address=[0x2f667c0]
 // Decompiled from char __thiscall CInterfaceD3D::BlitSurfaceToDIB(_DWORD **this, HWND hWnd, HGDIOBJ h)
-
 bool  CInterfaceD3D::BlitSurfaceToDIB(struct HWND__ *,struct HBITMAP__ *) {
   
   HDC hdc; // [esp+4h] [ebp-14h]
@@ -1939,7 +1930,6 @@ bool  CInterfaceD3D::BlitSurfaceToDIB(struct HWND__ *,struct HBITMAP__ *) {
 
 // address=[0x2f668c0]
 // Decompiled from char __thiscall CInterfaceD3D::BlitSurfaceToWindow(CInterfaceD3D *this)
-
 bool  CInterfaceD3D::BlitSurfaceToWindow(void) {
   
   CBlitFX *BlitStructPtr; // eax
@@ -2095,9 +2085,7 @@ bool  CInterfaceD3D::BlitSurfaceToWindow(void) {
 
 
 // address=[0x2f66d00]
-// Decompiled from // public: void __thiscall CInterfaceD3D::BlitDIBToSurface(struct HWND__ *,int,int,struct IDirectDrawSurface4 *)
-BOOL __stdcall CInterfaceD3D::BlitDIBToSurface(HWND hWnd, int a2, int cy, int a4)
-
+// Decompiled from BOOL __stdcall CInterfaceD3D::BlitDIBToSurface(HWND hWnd, int a2, int cy, int a4)
 void  CInterfaceD3D::BlitDIBToSurface(struct HWND__ *,int,int,struct IDirectDrawSurface4 *) {
   
   HDC hdc; // [esp+8h] [ebp-Ch]
@@ -2118,7 +2106,6 @@ void  CInterfaceD3D::BlitDIBToSurface(struct HWND__ *,int,int,struct IDirectDraw
 
 // address=[0x2f66dc0]
 // Decompiled from int __thiscall CInterfaceD3D::GetGradientFormat(CInterfaceD3D *this)
-
 int  CInterfaceD3D::GetGradientFormat(void) {
   
   if ( this->field_71D )
@@ -2130,7 +2117,6 @@ int  CInterfaceD3D::GetGradientFormat(void) {
 
 // address=[0x2f66e00]
 // Decompiled from int __stdcall CInterfaceD3D::EnumModesCallback(struct _DDSURFACEDESC2 *a1, void *a2)
-
 static long __stdcall CInterfaceD3D::EnumModesCallback(struct _DDSURFACEDESC2 *,void *) {
   
   if ( !a1 )
@@ -2170,9 +2156,7 @@ static long __stdcall CInterfaceD3D::EnumModesCallback(struct _DDSURFACEDESC2 *,
 
 
 // address=[0x2f66f40]
-// Decompiled from // public: static long __stdcall CInterfaceD3D::EnumModesCallbackOld(struct _DDSURFACEDESC *,void *)
-int __stdcall CInterfaceD3D::EnumModesCallbackOld(_DWORD *a1, int a2)
-
+// Decompiled from int __stdcall CInterfaceD3D::EnumModesCallbackOld(_DWORD *a1, int a2)
 static long __stdcall CInterfaceD3D::EnumModesCallbackOld(struct _DDSURFACEDESC *,void *) {
   
   if ( !a1 )
@@ -2213,7 +2197,6 @@ static long __stdcall CInterfaceD3D::EnumModesCallbackOld(struct _DDSURFACEDESC 
 
 // address=[0x2f67080]
 // Decompiled from char __thiscall CInterfaceD3D::LoadTexturePageContents(CInterfaceD3D *this)
-
 bool  CInterfaceD3D::LoadTexturePageContents(void) {
   
   char IsHardwareLandscapeEngine; // al
@@ -2246,7 +2229,6 @@ bool  CInterfaceD3D::LoadTexturePageContents(void) {
 
 // address=[0x2f67190]
 // Decompiled from void __thiscall CInterfaceD3D::SetupViewport(CInterfaceD3D *this, int a2, int a3, int a4, int a5)
-
 void  CInterfaceD3D::SetupViewport(int,int,int,int) {
   
   HRESULT v5; // [esp+0h] [ebp-8h]
@@ -2275,7 +2257,6 @@ void  CInterfaceD3D::SetupViewport(int,int,int,int) {
 
 // address=[0x2f67250]
 // Decompiled from int __thiscall CInterfaceD3D::SetCustomClipper(CInterfaceD3D *this, struct SurfaceClipper *a2)
-
 long  CInterfaceD3D::SetCustomClipper(class SurfaceClipper &) {
   
   struct IDirectDrawClipper *Clipper; // eax
@@ -2291,7 +2272,6 @@ long  CInterfaceD3D::SetCustomClipper(class SurfaceClipper &) {
 
 // address=[0x2f672a0]
 // Decompiled from int __thiscall CInterfaceD3D::ClearCustomClipper(CInterfaceD3D *this)
-
 long  CInterfaceD3D::ClearCustomClipper(void) {
   
   struct IDirectDrawClipper *Clipper; // eax
@@ -2305,7 +2285,6 @@ long  CInterfaceD3D::ClearCustomClipper(void) {
 
 // address=[0x2f672d0]
 // Decompiled from CInterfaceD3D *__thiscall CInterfaceD3D::DeleteEngineData(CInterfaceD3D *this)
-
 void  CInterfaceD3D::DeleteEngineData(void) {
   
   CInterfaceD3D *result; // eax
@@ -2329,7 +2308,6 @@ void  CInterfaceD3D::DeleteEngineData(void) {
 
 // address=[0x2f67350]
 // Decompiled from int __thiscall CInterfaceD3D::BeginLandscapeScene(CInterfaceD3D *this)
-
 long  CInterfaceD3D::BeginLandscapeScene(void) {
   
   int v2; // [esp+0h] [ebp-8h]
@@ -2352,7 +2330,6 @@ long  CInterfaceD3D::BeginLandscapeScene(void) {
 
 // address=[0x2f673e0]
 // Decompiled from int __thiscall CInterfaceD3D::EndLandscapeScene(CInterfaceD3D *this)
-
 long  CInterfaceD3D::EndLandscapeScene(void) {
   
   int v2; // [esp+0h] [ebp-8h]
@@ -2369,7 +2346,6 @@ long  CInterfaceD3D::EndLandscapeScene(void) {
 
 // address=[0x2f67460]
 // Decompiled from int __thiscall CInterfaceD3D::BeginObjectScene(CInterfaceD3D *this)
-
 long  CInterfaceD3D::BeginObjectScene(void) {
   
   int v2; // [esp+0h] [ebp-8h]
@@ -2392,7 +2368,6 @@ long  CInterfaceD3D::BeginObjectScene(void) {
 
 // address=[0x2f674f0]
 // Decompiled from int __thiscall CInterfaceD3D::EndObjectScene(CInterfaceD3D *this)
-
 long  CInterfaceD3D::EndObjectScene(void) {
   
   int v2; // [esp+0h] [ebp-8h]
@@ -2409,7 +2384,6 @@ long  CInterfaceD3D::EndObjectScene(void) {
 
 // address=[0x2f67570]
 // Decompiled from char __thiscall CInterfaceD3D::CreateCameraWindowSurface(CInterfaceD3D *this, int a2, int a3)
-
 bool  CInterfaceD3D::CreateCameraWindowSurface(int,int) {
   
   unsigned __int8 IsHardwareLandscapeEngine; // al
@@ -2459,7 +2433,6 @@ bool  CInterfaceD3D::CreateCameraWindowSurface(int,int) {
 
 // address=[0x2f67660]
 // Decompiled from CInterfaceD3D *__thiscall CInterfaceD3D::DestroyCameraWindowSurface(CInterfaceD3D *this)
-
 void  CInterfaceD3D::DestroyCameraWindowSurface(void) {
   
   CInterfaceD3D *result; // eax
@@ -2480,7 +2453,6 @@ void  CInterfaceD3D::DestroyCameraWindowSurface(void) {
 
 // address=[0x2f676f0]
 // Decompiled from int __thiscall CInterfaceD3D::SwitchLandscapeRenderTarget(CInterfaceD3D *this, bool a2)
-
 long  CInterfaceD3D::SwitchLandscapeRenderTarget(bool) {
   
   int v3; // [esp+0h] [ebp-10h]
@@ -2507,7 +2479,6 @@ long  CInterfaceD3D::SwitchLandscapeRenderTarget(bool) {
 
 // address=[0x2f74fc0]
 // Decompiled from int __thiscall CInterfaceD3D::GetGuiMemorySize(CInterfaceD3D *this)
-
 int  CInterfaceD3D::GetGuiMemorySize(void) {
   
   return this->field_734;
@@ -2516,7 +2487,6 @@ int  CInterfaceD3D::GetGuiMemorySize(void) {
 
 // address=[0x2f74fe0]
 // Decompiled from CInterfaceD3D *__thiscall CInterfaceD3D::SetGuiMemorySize(CInterfaceD3D *this, int a2)
-
 void  CInterfaceD3D::SetGuiMemorySize(int) {
   
   CInterfaceD3D *result; // eax
@@ -2529,7 +2499,6 @@ void  CInterfaceD3D::SetGuiMemorySize(int) {
 
 // address=[0x2f81fe0]
 // Decompiled from int __thiscall CInterfaceD3D::InitTexturedLandscapeModule(CInterfaceD3D *this)
-
 void  CInterfaceD3D::InitTexturedLandscapeModule(void) {
   
   int result; // eax
@@ -2553,7 +2522,6 @@ void  CInterfaceD3D::InitTexturedLandscapeModule(void) {
 
 // address=[0x2f82050]
 // Decompiled from int __thiscall CInterfaceD3D::PreCalcTextureVertices(CInterfaceD3D *this, int a2)
-
 void  CInterfaceD3D::PreCalcTextureVertices(int) {
   
   int result; // eax
@@ -2596,9 +2564,7 @@ void  CInterfaceD3D::PreCalcTextureVertices(int) {
 
 
 // address=[0x2f82260]
-// Decompiled from // write access to const memory has been detected, the output may be wrong!
-int __thiscall CInterfaceD3D::InitTexturePtr(CInterfaceD3D *this)
-
+// Decompiled from int __thiscall CInterfaceD3D::InitTexturePtr(CInterfaceD3D *this)
 void  CInterfaceD3D::InitTexturePtr(void) {
   
   int result; // eax
@@ -2613,7 +2579,6 @@ void  CInterfaceD3D::InitTexturePtr(void) {
 
 // address=[0x2f822a0]
 // Decompiled from int __thiscall CInterfaceD3D::CalcTilingVerticesType1(CInterfaceD3D *this, int a2)
-
 void  CInterfaceD3D::CalcTilingVerticesType1(int) {
   
   int result; // eax
@@ -2649,7 +2614,6 @@ void  CInterfaceD3D::CalcTilingVerticesType1(int) {
 
 // address=[0x2f823f0]
 // Decompiled from int __thiscall CInterfaceD3D::CalcTilingVerticesType2(CInterfaceD3D *this, int a2)
-
 void  CInterfaceD3D::CalcTilingVerticesType2(int) {
   
   int result; // eax
@@ -2688,7 +2652,6 @@ void  CInterfaceD3D::CalcTilingVerticesType2(int) {
 
 // address=[0x2f82540]
 // Decompiled from int __thiscall CInterfaceD3D::AllocateEngineData(CInterfaceD3D *this, signed int a2)
-
 int  CInterfaceD3D::AllocateEngineData(int) {
   
   void *v3; // [esp+10h] [ebp-20h]
@@ -2735,9 +2698,7 @@ int  CInterfaceD3D::AllocateEngineData(int) {
 
 
 // address=[0x2f85f40]
-// Decompiled from // write access to const memory has been detected, the output may be wrong!
-int __thiscall CInterfaceD3D::ChangeCurrentTexturePage(CInterfaceD3D *this, int a2)
-
+// Decompiled from int __thiscall CInterfaceD3D::ChangeCurrentTexturePage(CInterfaceD3D *this, int a2)
 void  CInterfaceD3D::ChangeCurrentTexturePage(int) {
   
   int result; // eax
@@ -2765,7 +2726,6 @@ void  CInterfaceD3D::ChangeCurrentTexturePage(int) {
 
 // address=[0x2f860c0]
 // Decompiled from CSurfaceV7 *__thiscall CInterfaceD3D::GetLandscapeRenderTargetSurface(CInterfaceD3D *this)
-
 class CSurface *  CInterfaceD3D::GetLandscapeRenderTargetSurface(void) {
   
   return this->LandscapeSurface2;
@@ -2774,7 +2734,6 @@ class CSurface *  CInterfaceD3D::GetLandscapeRenderTargetSurface(void) {
 
 // address=[0x2f86180]
 // Decompiled from CInterfaceD3D *__thiscall CInterfaceD3D::RenderScene(CInterfaceD3D *this, bool a2)
-
 void  CInterfaceD3D::RenderScene(bool) {
   
   CInterfaceD3D *result; // eax
@@ -2828,7 +2787,6 @@ void  CInterfaceD3D::RenderScene(bool) {
 
 // address=[0x2f8a910]
 // Decompiled from int __thiscall CInterfaceD3D::IsInterface7Available(CInterfaceD3D *this, bool *a2, HWND a3)
-
 int  CInterfaceD3D::IsInterface7Available(bool &,struct HWND__ *) {
   
   int v4; // eax
@@ -3248,7 +3206,6 @@ int  CInterfaceD3D::IsInterface7Available(bool &,struct HWND__ *) {
 
 // address=[0x2f8b530]
 // Decompiled from int __thiscall CInterfaceD3D::IsInterface3Available(CInterfaceD3D *this, HWND a2)
-
 int  CInterfaceD3D::IsInterface3Available(struct HWND__ *) {
   
   int v3; // eax
@@ -3473,9 +3430,7 @@ int  CInterfaceD3D::IsInterface3Available(struct HWND__ *) {
 
 
 // address=[0x2f8bba0]
-// Decompiled from // public: bool __thiscall CInterfaceD3D::CanCreateEngine(bool)
-char __thiscall CInterfaceD3D::CanCreateEngine(_DWORD *this, bool a2)
-
+// Decompiled from char __thiscall CInterfaceD3D::CanCreateEngine(_DWORD *this, bool a2)
 bool  CInterfaceD3D::CanCreateEngine(bool) {
   
   int v3; // eax
@@ -3521,7 +3476,6 @@ bool  CInterfaceD3D::CanCreateEngine(bool) {
 
 // address=[0x2f8bcc0]
 // Decompiled from CInterfaceD3D *__thiscall CInterfaceD3D::CleanUpCheckObjects(CInterfaceD3D *this)
-
 void  CInterfaceD3D::CleanUpCheckObjects(void) {
   
   CInterfaceD3D *result; // eax
@@ -3569,7 +3523,6 @@ void  CInterfaceD3D::CleanUpCheckObjects(void) {
 
 // address=[0x2f996f0]
 // Decompiled from CInterfaceD3D *__thiscall CInterfaceD3D::DecreaseCacheRetrys(CInterfaceD3D *this)
-
 void  CInterfaceD3D::DecreaseCacheRetrys(void) {
   
   CInterfaceD3D *result; // eax
@@ -3582,7 +3535,6 @@ void  CInterfaceD3D::DecreaseCacheRetrys(void) {
 
 // address=[0x2f99720]
 // Decompiled from int __thiscall CInterfaceD3D::GetCacheRetrys(CInterfaceD3D *this)
-
 int  CInterfaceD3D::GetCacheRetrys(void) {
   
   return this->field_73C;

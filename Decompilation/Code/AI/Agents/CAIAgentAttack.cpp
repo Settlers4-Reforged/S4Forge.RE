@@ -4,7 +4,6 @@
 
 // address=[0x12ffa00]
 // Decompiled from CAIAgentAttack *__thiscall CAIAgentAttack::CAIAgentAttack(CAIAgentAttack *this)
-
  CAIAgentAttack::CAIAgentAttack(void) {
   
   CAINormalSectorAgent::CAINormalSectorAgent(this, "attack");
@@ -16,7 +15,6 @@
 
 // address=[0x12ffa70]
 // Decompiled from unsigned int __thiscall CAIAgentAttack::Execute(CAIAgentAttack *this, unsigned int a2, unsigned int a3)
-
 unsigned int  CAIAgentAttack::Execute(unsigned int,unsigned int) {
   
   struct CAINormalSectorAI *v3; // eax
@@ -113,7 +111,6 @@ LABEL_23:
 
 // address=[0x12ffd40]
 // Decompiled from int __thiscall CAIAgentAttack::Load(CAIAgentAttack *this, struct IS4Chunk *a2)
-
 void  CAIAgentAttack::Load(class IS4Chunk &) {
   
   CAIAgentAttack::ResetAttackState(this);
@@ -137,7 +134,6 @@ void  CAIAgentAttack::Load(class IS4Chunk &) {
 
 // address=[0x12ffe70]
 // Decompiled from int __thiscall CAIAgentAttack::Save(CAIAgentAttack *this, struct IS4Chunk *a2)
-
 void  CAIAgentAttack::Save(class IS4Chunk &) {
   
   (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 24))(a2, -1516290048);
@@ -160,7 +156,6 @@ void  CAIAgentAttack::Save(class IS4Chunk &) {
 
 // address=[0x12fffa0]
 // Decompiled from int __thiscall CAIAgentAttack::SetOwnFighterNumberAndValue(CAIAgentAttack *this, int a2, int a3)
-
 void  CAIAgentAttack::SetOwnFighterNumberAndValue(int,int) {
   
   int result; // eax
@@ -174,7 +169,6 @@ void  CAIAgentAttack::SetOwnFighterNumberAndValue(int,int) {
 
 // address=[0x12fffc0]
 // Decompiled from char __thiscall CAIAgentAttack::AttackNow(CAIAgentAttack *this, int a2, int a3)
-
 bool  CAIAgentAttack::AttackNow(int,int) {
   
   struct CAINormalSectorAI *v4; // eax
@@ -205,7 +199,6 @@ bool  CAIAgentAttack::AttackNow(int,int) {
 
 // address=[0x1301020]
 // Decompiled from void __thiscall CAIAgentAttack::~CAIAgentAttack(CAIAgentAttack *this)
-
  CAIAgentAttack::~CAIAgentAttack(void) {
   
   CAINormalSectorAgent::~CAINormalSectorAgent(this);
@@ -214,7 +207,6 @@ bool  CAIAgentAttack::AttackNow(int,int) {
 
 // address=[0x1300070]
 // Decompiled from void __thiscall CAIAgentAttack::ResetAttackState(CAIAgentAttack *this)
-
 void  CAIAgentAttack::ResetAttackState(void) {
   
   int v1; // esi
@@ -231,7 +223,6 @@ void  CAIAgentAttack::ResetAttackState(void) {
 
 // address=[0x13000d0]
 // Decompiled from CAIAgentAttack *__thiscall CAIAgentAttack::ResetAttackTarget(CAIAgentAttack *this)
-
 void  CAIAgentAttack::ResetAttackTarget(void) {
   
   CAIAgentAttack *result; // eax
@@ -248,7 +239,6 @@ void  CAIAgentAttack::ResetAttackTarget(void) {
 
 // address=[0x1300110]
 // Decompiled from char __thiscall CAIAgentAttack::SetAttackTarget(CAIAgentAttack *this, int a2)
-
 bool  CAIAgentAttack::SetAttackTarget(int) {
   
   int v3; // [esp+0h] [ebp-Ch]
@@ -274,9 +264,7 @@ bool  CAIAgentAttack::SetAttackTarget(int) {
 
 
 // address=[0x13001b0]
-// Decompiled from // protected: bool __thiscall CAIAgentAttack::CheckAttackPosition(void)
-bool __thiscall CAIAgentAttack::CheckAttackPosition(int *this)
-
+// Decompiled from bool __thiscall CAIAgentAttack::CheckAttackPosition(int *this)
 bool  CAIAgentAttack::CheckAttackPosition(void) {
   
   CAISectorAI *v1; // eax
@@ -296,7 +284,6 @@ bool  CAIAgentAttack::CheckAttackPosition(void) {
 
 // address=[0x1300210]
 // Decompiled from int __thiscall CAIAgentAttack::OrderSquadsToAttack(CAIAgentAttack *this)
-
 int  CAIAgentAttack::OrderSquadsToAttack(void) {
   
   struct CAINormalSectorAI *v1; // eax
@@ -323,7 +310,6 @@ int  CAIAgentAttack::OrderSquadsToAttack(void) {
 
 // address=[0x1300280]
 // Decompiled from int __thiscall CAIAgentAttack::OrderSquadsHome(CAINormalSectorAgent *this, int a2)
-
 void  CAIAgentAttack::OrderSquadsHome(enum T_AI_TASK_FORCE_CMD) {
   
   struct CAINormalSectorAI *v2; // eax
@@ -356,9 +342,7 @@ void  CAIAgentAttack::OrderSquadsHome(enum T_AI_TASK_FORCE_CMD) {
 
 
 // address=[0x13002f0]
-// Decompiled from // protected: bool __thiscall CAIAgentAttack::CheckSquadTarget(class CAITaskForce *)
-bool __stdcall CAIAgentAttack::CheckSquadTarget(CAITaskForce *a1)
-
+// Decompiled from bool __stdcall CAIAgentAttack::CheckSquadTarget(CAITaskForce *a1)
 bool  CAIAgentAttack::CheckSquadTarget(class CAITaskForce *) {
   
   int v2; // [esp+4h] [ebp-8h]
@@ -372,7 +356,6 @@ bool  CAIAgentAttack::CheckSquadTarget(class CAITaskForce *) {
 
 // address=[0x1300330]
 // Decompiled from int __thiscall CAIAgentAttack::CheckIfSneakUpPositionIsReached(CAIAgentAttack *this)
-
 int  CAIAgentAttack::CheckIfSneakUpPositionIsReached(void) {
   
   struct CAINormalSectorAI *v1; // eax
@@ -400,7 +383,6 @@ int  CAIAgentAttack::CheckIfSneakUpPositionIsReached(void) {
 
 // address=[0x13003a0]
 // Decompiled from bool __thiscall CAIAgentAttack::CheckCurrentTarget(CAIAgentAttack *this, bool a2)
-
 bool  CAIAgentAttack::CheckCurrentTarget(bool) {
   
   struct CAINormalSectorAI *v2; // eax
@@ -430,7 +412,6 @@ bool  CAIAgentAttack::CheckCurrentTarget(bool) {
 
 // address=[0x1300450]
 // Decompiled from int __thiscall CAIAgentAttack::CheckSquadTargets(CAIAgentAttack *this)
-
 int  CAIAgentAttack::CheckSquadTargets(void) {
   
   struct CAINormalSectorAI *v1; // eax
@@ -520,7 +501,6 @@ int  CAIAgentAttack::CheckSquadTargets(void) {
 
 // address=[0x1300630]
 // Decompiled from bool __fastcall CAIAgentAttack::FindNearTarget(CAIAgentAttack *this, int a2, struct CAITaskForce *a3, int a4, int *a5)
-
 bool  CAIAgentAttack::FindNearTarget(class CAITaskForce *,int,int &) {
   
   int v6; // eax
@@ -544,7 +524,6 @@ bool  CAIAgentAttack::FindNearTarget(class CAITaskForce *,int,int &) {
 
 // address=[0x13006e0]
 // Decompiled from char __thiscall CAIAgentAttack::CheckStrengthAndFindAnyTarget(CAIAgentAttack *this, int a2, int a3)
-
 bool  CAIAgentAttack::CheckStrengthAndFindAnyTarget(int,int) {
   
   pairNode *v3; // eax
@@ -630,7 +609,6 @@ bool  CAIAgentAttack::CheckStrengthAndFindAnyTarget(int,int) {
 
 // address=[0x13008d0]
 // Decompiled from bool __thiscall CAIAgentAttack::OrderSquadsToSneakUpPosition(CAIAgentAttack *this, int a2)
-
 bool  CAIAgentAttack::OrderSquadsToSneakUpPosition(int) {
   
   CAITaskForce *v3; // [esp+0h] [ebp-1D8h] BYREF

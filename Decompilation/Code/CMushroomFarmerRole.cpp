@@ -4,7 +4,6 @@
 
 // address=[0x14014e0]
 // Decompiled from int __cdecl CMushroomFarmerRole::New(int a1)
-
 static class CPersistence * __cdecl CMushroomFarmerRole::New(std::istream &) {
   
   if ( operator new(0x30u) )
@@ -16,7 +15,6 @@ static class CPersistence * __cdecl CMushroomFarmerRole::New(std::istream &) {
 
 // address=[0x15787f0]
 // Decompiled from int __thiscall CMushroomFarmerRole::InitWalking(CMushroomFarmerRole *this, struct CSettler *a2)
-
 class CWalking *  CMushroomFarmerRole::InitWalking(class CSettler *) {
   
   int v2; // eax
@@ -31,7 +29,6 @@ class CWalking *  CMushroomFarmerRole::InitWalking(class CSettler *) {
 
 // address=[0x1578830]
 // Decompiled from int __thiscall CMushroomFarmerRole::LogicUpdateJob(CMushroomFarmerRole *this, struct CSettler *a2)
-
 void  CMushroomFarmerRole::LogicUpdateJob(class CSettler *) {
   
   int v2; // eax
@@ -103,7 +100,6 @@ void  CMushroomFarmerRole::LogicUpdateJob(class CSettler *) {
 
 // address=[0x1578a30]
 // Decompiled from int __thiscall CMushroomFarmerRole::UpdateJob(CMushroomFarmerRole *this, struct CSettler *a2)
-
 void  CMushroomFarmerRole::UpdateJob(class CSettler *) {
   
   int v2; // eax
@@ -141,7 +137,6 @@ void  CMushroomFarmerRole::UpdateJob(class CSettler *) {
 
 // address=[0x1578b00]
 // Decompiled from int __stdcall CMushroomFarmerRole::PostLoadInit(CPropertySet *a1)
-
 void  CMushroomFarmerRole::PostLoadInit(class CSettler *) {
   
   return CWarMap::AddEntity(a1);
@@ -150,7 +145,6 @@ void  CMushroomFarmerRole::PostLoadInit(class CSettler *) {
 
 // address=[0x1578b20]
 // Decompiled from char __thiscall CMushroomFarmerRole::SetFree(CMushroomFarmerRole *this, struct CSettler *a2, int a3)
-
 bool  CMushroomFarmerRole::SetFree(class CSettler *,int) {
   
   int v3; // eax
@@ -176,7 +170,6 @@ bool  CMushroomFarmerRole::SetFree(class CSettler *,int) {
 
 // address=[0x1578ba0]
 // Decompiled from char __thiscall CMushroomFarmerRole::ESChanged(CMushroomFarmerRole *this, struct CSettler *a2)
-
 bool  CMushroomFarmerRole::ESChanged(class CSettler *) {
   
   return 0;
@@ -185,7 +178,6 @@ bool  CMushroomFarmerRole::ESChanged(class CSettler *) {
 
 // address=[0x1578bb0]
 // Decompiled from char *__thiscall CMushroomFarmerRole::CMushroomFarmerRole(char *this, int a2)
-
  CMushroomFarmerRole::CMushroomFarmerRole(std::istream &) {
   
   int v3; // [esp+4h] [ebp-1Ch] BYREF
@@ -221,7 +213,6 @@ bool  CMushroomFarmerRole::ESChanged(class CSettler *) {
 
 // address=[0x1578c80]
 // Decompiled from int __thiscall CMushroomFarmerRole::Store(struct CPersistence *this, struct std::ostream *a2)
-
 void  CMushroomFarmerRole::Store(std::ostream &) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
@@ -237,7 +228,6 @@ void  CMushroomFarmerRole::Store(std::ostream &) {
 
 // address=[0x1579690]
 // Decompiled from int __thiscall CMushroomFarmerRole::ClassID(CMushroomFarmerRole *this)
-
 unsigned long  CMushroomFarmerRole::ClassID(void)const {
   
   return CMushroomFarmerRole::m_iClassID;
@@ -246,7 +236,6 @@ unsigned long  CMushroomFarmerRole::ClassID(void)const {
 
 // address=[0x15796b0]
 // Decompiled from int __thiscall CMushroomFarmerRole::GetSettlerRole(CMushroomFarmerRole *this)
-
 int  CMushroomFarmerRole::GetSettlerRole(void)const {
   
   return 15;
@@ -255,7 +244,6 @@ int  CMushroomFarmerRole::GetSettlerRole(void)const {
 
 // address=[0x1588780]
 // Decompiled from int __cdecl CMushroomFarmerRole::Load(int a1)
-
 static class CMushroomFarmerRole * __cdecl CMushroomFarmerRole::Load(std::istream &) {
   
   void **v1; // eax
@@ -271,7 +259,6 @@ static class CMushroomFarmerRole * __cdecl CMushroomFarmerRole::Load(std::istrea
 
 // address=[0x1578cd0]
 // Decompiled from CMushroomFarmerRole *__thiscall CMushroomFarmerRole::CMushroomFarmerRole(CMushroomFarmerRole *this)
-
  CMushroomFarmerRole::CMushroomFarmerRole(void) {
   
   ISettlerRole::ISettlerRole(this);
@@ -283,7 +270,6 @@ static class CMushroomFarmerRole * __cdecl CMushroomFarmerRole::Load(std::istrea
 
 // address=[0x1578d00]
 // Decompiled from ISettlerRole *__thiscall CMushroomFarmerRole::~CMushroomFarmerRole(CMushroomFarmerRole *this)
-
  CMushroomFarmerRole::~CMushroomFarmerRole(void) {
   
   *(_DWORD *)this = &CMushroomFarmerRole::_vftable_;
@@ -293,7 +279,6 @@ static class CMushroomFarmerRole * __cdecl CMushroomFarmerRole::Load(std::istrea
 
 // address=[0x1578d20]
 // Decompiled from int __thiscall CMushroomFarmerRole::GetNextJob(CMushroomFarmerRole *this, struct CSettler *a2)
-
 void  CMushroomFarmerRole::GetNextJob(class CSettler *) {
   
   int result; // eax
@@ -309,7 +294,6 @@ void  CMushroomFarmerRole::GetNextJob(class CSettler *) {
 
 // address=[0x1578d60]
 // Decompiled from void __thiscall CMushroomFarmerRole::TakeJob(CMushroomFarmerRole *this, struct CSettler *a2)
-
 void  CMushroomFarmerRole::TakeJob(class CSettler *) {
   
   const struct CEntityTask *ActualTask; // eax
@@ -398,7 +382,6 @@ void  CMushroomFarmerRole::TakeJob(class CSettler *) {
 
 // address=[0x1579050]
 // Decompiled from int __stdcall CMushroomFarmerRole::Init(CPropertySet *a1)
-
 void  CMushroomFarmerRole::Init(class CSettler *) {
   
   return CWarMap::AddEntity(a1);
@@ -406,11 +389,7 @@ void  CMushroomFarmerRole::Init(class CSettler *) {
 
 
 // address=[0x1579070]
-// Decompiled from _DWORD *__thiscall CMushroomFarmerRole::ConvertEventIntoGoal(
-        CMushroomFarmerRole *this,
-        struct CSettler *a2,
-        struct CEntityEvent *a3)
-
+// Decompiled from _DWORD *__thiscall CMushroomFarmerRole::ConvertEventIntoGoal(  CMushroomFarmerRole *this,  struct CSettler *a2,  struct CEntityEvent *a3)
 void  CMushroomFarmerRole::ConvertEventIntoGoal(class CSettler *,class CEntityEvent *) {
   
   int v3; // eax

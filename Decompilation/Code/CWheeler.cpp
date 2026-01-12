@@ -4,7 +4,6 @@
 
 // address=[0x1539640]
 // Decompiled from void __thiscall CWheeler::~CWheeler(CWheeler *this)
-
  CWheeler::~CWheeler(void) {
   
   CVehicle::~CVehicle(this);
@@ -12,10 +11,7 @@
 
 
 // address=[0x153fdc0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CWheeler::FillDialog(CWheeler *this, bool a2)
-
+// Decompiled from void __thiscall CWheeler::FillDialog(CWheeler *this, bool a2)
 void  CWheeler::FillDialog(bool) {
   
   ;
@@ -23,10 +19,7 @@ void  CWheeler::FillDialog(bool) {
 
 
 // address=[0x153feb0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CWheeler::UnloadToPosition(CWheeler *this, int a2)
-
+// Decompiled from void __thiscall CWheeler::UnloadToPosition(CWheeler *this, int a2)
 void  CWheeler::UnloadToPosition(int) {
   
   ;
@@ -35,7 +28,6 @@ void  CWheeler::UnloadToPosition(int) {
 
 // address=[0x159bb30]
 // Decompiled from int __thiscall CWheeler::RemoveFromWorld(CWheeler *this)
-
 void  CWheeler::RemoveFromWorld(void) {
   
   int v1; // eax
@@ -50,7 +42,6 @@ void  CWheeler::RemoveFromWorld(void) {
 
 // address=[0x15afef0]
 // Decompiled from int __thiscall CWheeler::Delete(CWheeler *this)
-
 void  CWheeler::Delete(void) {
   
   void **v1; // eax
@@ -80,7 +71,6 @@ void  CWheeler::Delete(void) {
 
 // address=[0x15aff90]
 // Decompiled from void *__thiscall CWheeler::GetGfxInfos(int this)
-
 struct SGfxObjectInfo *  CWheeler::GetGfxInfos(void) {
   
   int v1; // eax
@@ -138,7 +128,6 @@ struct SGfxObjectInfo *  CWheeler::GetGfxInfos(void) {
 
 // address=[0x15b0110]
 // Decompiled from void __thiscall CWheeler::ConvertEventIntoGoal(CWheeler *this, struct CEntityEvent *a2)
-
 void  CWheeler::ConvertEventIntoGoal(class CEntityEvent *) {
   
   int v2; // eax
@@ -250,7 +239,6 @@ CWheeler__ConvertEventIntoGoal___def_19B016F:
 
 // address=[0x15b0480]
 // Decompiled from int __thiscall CWheeler::RepairBuildingInRange(CWheeler *this)
-
 int  CWheeler::RepairBuildingInRange(void) {
   
   unsigned __int16 *v2; // [esp+0h] [ebp-24h]
@@ -286,7 +274,6 @@ int  CWheeler::RepairBuildingInRange(void) {
 
 // address=[0x15b0560]
 // Decompiled from CWheeler *__thiscall CWheeler::RepairAt(CWheeler *this, int a2)
-
 void  CWheeler::RepairAt(int) {
   
   CWheeler *result; // eax
@@ -314,7 +301,6 @@ void  CWheeler::RepairAt(int) {
 
 // address=[0x15b0600]
 // Decompiled from _DWORD *__thiscall CWheeler::SetObserverTarget(_DWORD *this, int a2, int a3)
-
 void  CWheeler::SetObserverTarget(enum T_OBSERVER_TARGET,int) {
   
   _DWORD *result; // eax
@@ -342,7 +328,6 @@ void  CWheeler::SetObserverTarget(enum T_OBSERVER_TARGET,int) {
 
 // address=[0x15b0680]
 // Decompiled from int __thiscall CWheeler::GetObserverTarget(_DWORD *this, int a2)
-
 int  CWheeler::GetObserverTarget(enum T_OBSERVER_TARGET) {
   
   if ( a2 )
@@ -353,10 +338,7 @@ int  CWheeler::GetObserverTarget(enum T_OBSERVER_TARGET) {
 
 
 // address=[0x153a640]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CWheeler::Unload(CWheeler *this)
-
+// Decompiled from void __thiscall CWheeler::Unload(CWheeler *this)
 void  CWheeler::Unload(void) {
   
   ;
@@ -364,16 +346,7 @@ void  CWheeler::Unload(void) {
 
 
 // address=[0x15b06b0]
-// Decompiled from CWheeler *__thiscall CWheeler::CWheeler(
-        CWheeler *this,
-        int a2,
-        int a3,
-        int a4,
-        int a5,
-        __int16 a6,
-        unsigned int a7,
-        bool a8)
-
+// Decompiled from CWheeler *__thiscall CWheeler::CWheeler(  CWheeler *this,  int a2,  int a3,  int a4,  int a5,  __int16 a6,  unsigned int a7,  bool a8)
  CWheeler::CWheeler(int,int,int,int,int,int,bool) {
   
   int v9; // [esp+8h] [ebp-14h]
@@ -411,7 +384,6 @@ void  CWheeler::Unload(void) {
 
 // address=[0x15b07e0]
 // Decompiled from _DWORD *__thiscall CWheeler::CWheeler(_DWORD *this, int a2)
-
  CWheeler::CWheeler(std::istream &) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
@@ -441,7 +413,6 @@ void  CWheeler::Unload(void) {
 
 // address=[0x15b08d0]
 // Decompiled from int __thiscall CWheeler::Store(int *this, struct std::ostream *a2)
-
 void  CWheeler::Store(std::ostream &) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
@@ -459,7 +430,6 @@ void  CWheeler::Store(std::ostream &) {
 
 // address=[0x15b0950]
 // Decompiled from char __thiscall CWheeler::WalkDir(CWheeler *this, char a2)
-
 void  CWheeler::WalkDir(int) {
   
   int v2; // esi
@@ -527,7 +497,6 @@ void  CWheeler::WalkDir(int) {
 
 // address=[0x15b0af0]
 // Decompiled from int __thiscall CWheeler::PlaceVehicle(CWheeler *this, int a2)
-
 void  CWheeler::PlaceVehicle(int) {
   
   int result; // eax
@@ -580,7 +549,6 @@ void  CWheeler::PlaceVehicle(int) {
 
 // address=[0x15b0ca0]
 // Decompiled from int __thiscall CWheeler::RemoveVehicle(CWheeler *this, int a2)
-
 void  CWheeler::RemoveVehicle(int) {
   
   int result; // eax
@@ -631,7 +599,6 @@ void  CWheeler::RemoveVehicle(int) {
 
 // address=[0x15b0e20]
 // Decompiled from int __thiscall CWheeler::OnComeToFerry(CWheeler *this, int a2)
-
 void  CWheeler::OnComeToFerry(int) {
   
   void **VehiclePtr; // eax

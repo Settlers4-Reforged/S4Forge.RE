@@ -4,7 +4,6 @@
 
 // address=[0x14028e0]
 // Decompiled from int __cdecl CWarShip::New(int a1)
-
 static class CPersistence * __cdecl CWarShip::New(std::istream &) {
   
   if ( CWarShip::operator new(0xC8u) )
@@ -16,7 +15,6 @@ static class CPersistence * __cdecl CWarShip::New(std::istream &) {
 
 // address=[0x15a09e0]
 // Decompiled from int __thiscall CWarShip::WarriorTaskWalkOneStep(CWarShip *this, struct IMovingEntity *a2)
-
 int  CWarShip::WarriorTaskWalkOneStep(class IMovingEntity &) {
   
   int v2; // eax
@@ -33,7 +31,6 @@ int  CWarShip::WarriorTaskWalkOneStep(class IMovingEntity &) {
 
 // address=[0x15a0a40]
 // Decompiled from int __thiscall CWarShip::WarriorTaskAttack(char *this, int a2, int a3, int a4)
-
 void  CWarShip::WarriorTaskAttack(class IMovingEntity &,int,enum T_WARRIOR_ATTACK) {
   
   int v4; // eax
@@ -47,7 +44,6 @@ void  CWarShip::WarriorTaskAttack(class IMovingEntity &,int,enum T_WARRIOR_ATTAC
 
 // address=[0x15a0aa0]
 // Decompiled from int __thiscall CWarShip::WarriorTaskFinished(CWarShip *this, struct IMovingEntity *a2)
-
 void  CWarShip::WarriorTaskFinished(class IMovingEntity &) {
   
   return CVehicle::GetNextJob((CWarShip *)((char *)this - 172));
@@ -56,7 +52,6 @@ void  CWarShip::WarriorTaskFinished(class IMovingEntity &) {
 
 // address=[0x15a0ac0]
 // Decompiled from int __thiscall CWarShip::WarriorTaskIdleWalk(CWarShip *this, struct IMovingEntity *a2)
-
 int  CWarShip::WarriorTaskIdleWalk(class IMovingEntity &) {
   
   int v2; // eax
@@ -73,7 +68,6 @@ int  CWarShip::WarriorTaskIdleWalk(class IMovingEntity &) {
 
 // address=[0x15a0b20]
 // Decompiled from unsigned int __cdecl CWarShip::operator new(unsigned int a1)
-
 static void * __cdecl CWarShip::operator new(unsigned int) {
   
   return CVehicleMgr::Alloc((CVehicleMgr *)&g_cVehicleMgr, a1);
@@ -82,7 +76,6 @@ static void * __cdecl CWarShip::operator new(unsigned int) {
 
 // address=[0x15a0b40]
 // Decompiled from void __cdecl CWarShip::operator delete(void *a1)
-
 static void __cdecl CWarShip::operator delete(void *) {
   
   CVehicleMgr::Dealloc((CVehicleMgr *)&g_cVehicleMgr, a1);
@@ -91,7 +84,6 @@ static void __cdecl CWarShip::operator delete(void *) {
 
 // address=[0x15a0b80]
 // Decompiled from void __thiscall CWarShip::ConvertEventIntoGoal(CWarShip *this, struct CEntityEvent *a2)
-
 void  CWarShip::ConvertEventIntoGoal(class CEntityEvent *) {
   
   int v2; // [esp+0h] [ebp-14h]
@@ -115,7 +107,6 @@ void  CWarShip::ConvertEventIntoGoal(class CEntityEvent *) {
 
 // address=[0x15a0c30]
 // Decompiled from struct IMovingEntity *__thiscall CWarShip::CWarShip(struct IMovingEntity *this, int a2)
-
  CWarShip::CWarShip(std::istream &) {
   
   int v3; // [esp+8h] [ebp-20h] BYREF
@@ -152,7 +143,6 @@ void  CWarShip::ConvertEventIntoGoal(class CEntityEvent *) {
 
 // address=[0x15a0d60]
 // Decompiled from int __thiscall CWarShip::Store(char *this, struct std::ostream *a2)
-
 void  CWarShip::Store(std::ostream &) {
   
   struct CWarriorBehavior::SWarriorBehaviorData *WarriorBehaviorData; // eax
@@ -174,7 +164,6 @@ void  CWarShip::Store(std::ostream &) {
 
 // address=[0x15a2720]
 // Decompiled from int __thiscall CWarShip::ClassID(CWarShip *this)
-
 unsigned long  CWarShip::ClassID(void)const {
   
   return CWarShip::m_iClassID;
@@ -186,7 +175,6 @@ unsigned long  CWarShip::ClassID(void)const {
 
 // address=[0x15a0df0]
 // Decompiled from CWarShip *__thiscall CWarShip::CWarShip(CWarShip *this, int a2, int a3, int a4, int a5, int a6, int a7, bool a8)
-
  CWarShip::CWarShip(int,int,int,int,int,int,bool) {
   
   CShip::CShip(this, a2, a3, a4, a5, a6, a7, a8);
@@ -210,7 +198,6 @@ unsigned long  CWarShip::ClassID(void)const {
 
 // address=[0x15a0ed0]
 // Decompiled from void __thiscall CWarShip::~CWarShip(CWarShip *this)
-
  CWarShip::~CWarShip(void) {
   
   *(_DWORD *)this = &CWarShip::_vftable_;
@@ -221,7 +208,6 @@ unsigned long  CWarShip::ClassID(void)const {
 
 // address=[0x15a0f00]
 // Decompiled from void __thiscall CWarShip::VehicleLogicUpdate(CWarShip *this)
-
 void  CWarShip::VehicleLogicUpdate(void) {
   
   int v1; // [esp+4h] [ebp-18h]
@@ -249,7 +235,6 @@ void  CWarShip::VehicleLogicUpdate(void) {
 
 // address=[0x15a0fe0]
 // Decompiled from struct CVehicle *__thiscall CWarShip::TakeJob(CWarShip *this)
-
 void  CWarShip::TakeJob(void) {
   
   int v1; // eax
@@ -306,7 +291,6 @@ LABEL_7:
 
 // address=[0x15a1240]
 // Decompiled from void *__thiscall CWarShip::GetGfxInfos(CWarShip *this)
-
 struct SGfxObjectInfo *  CWarShip::GetGfxInfos(void) {
   
   CShip::GetGfxInfos((int)this);
@@ -320,7 +304,6 @@ struct SGfxObjectInfo *  CWarShip::GetGfxInfos(void) {
 
 // address=[0x15a1290]
 // Decompiled from int __thiscall CWarShip::GetAmmoDisplayID(CWarShip *this)
-
 int  CWarShip::GetAmmoDisplayID(void) {
   
   int v2; // eax
@@ -390,7 +373,6 @@ int  CWarShip::GetAmmoDisplayID(void) {
 
 // address=[0x15a1450]
 // Decompiled from char __thiscall CWarShip::AttackTargetAt(CWarShip *this, int a2, int a3)
-
 bool  CWarShip::AttackTargetAt(int,int) {
   
   const struct IEntity *v4; // [esp+0h] [ebp-1Ch]
@@ -434,7 +416,6 @@ bool  CWarShip::AttackTargetAt(int,int) {
 
 // address=[0x15a1570]
 // Decompiled from unsigned int __fastcall CWarShip::TakeAmmo(CWarShip *this)
-
 void  CWarShip::TakeAmmo(void) {
   
   unsigned int result; // eax
@@ -470,7 +451,6 @@ void  CWarShip::TakeAmmo(void) {
 
 // address=[0x15a1650]
 // Decompiled from int __thiscall CWarShip::SearchForAmmo(CWarShip *this)
-
 int  CWarShip::SearchForAmmo(void) {
   
   void **v1; // eax
@@ -543,9 +523,7 @@ int  CWarShip::SearchForAmmo(void) {
 
 
 // address=[0x15a2680]
-// Decompiled from // MFC 3.1-14.0 32bit
-int __thiscall CWarShip::AmmoPerPile(CWarShip *this)
-
+// Decompiled from int __thiscall CWarShip::AmmoPerPile(CWarShip *this)
 int const  CWarShip::AmmoPerPile(void) {
   
   return 4;

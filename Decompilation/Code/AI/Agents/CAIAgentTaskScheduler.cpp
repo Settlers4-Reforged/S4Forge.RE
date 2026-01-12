@@ -3,9 +3,7 @@
 // Definitions for class CAIAgentTaskScheduler
 
 // address=[0x1303d00]
-// Decompiled from // public: virtual unsigned int __thiscall CAIAgentTaskScheduler::Execute(unsigned int,unsigned int)
-int __thiscall CAIAgentTaskScheduler::Execute(CAINormalSectorAgent *this, int a2, int a3)
-
+// Decompiled from int __thiscall CAIAgentTaskScheduler::Execute(CAINormalSectorAgent *this, int a2, int a3)
 unsigned int  CAIAgentTaskScheduler::Execute(unsigned int,unsigned int) {
   
   struct CAINormalSectorAI *v3; // eax

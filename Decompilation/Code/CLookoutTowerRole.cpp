@@ -4,7 +4,6 @@
 
 // address=[0x1401080]
 // Decompiled from int __cdecl CLookoutTowerRole::New(int a1)
-
 static class CPersistence * __cdecl CLookoutTowerRole::New(std::istream &) {
   
   if ( operator new(0x180u) )
@@ -16,7 +15,6 @@ static class CPersistence * __cdecl CLookoutTowerRole::New(std::istream &) {
 
 // address=[0x14fca00]
 // Decompiled from CLookoutTowerRole *__thiscall CLookoutTowerRole::CLookoutTowerRole(CLookoutTowerRole *this)
-
  CLookoutTowerRole::CLookoutTowerRole(void) {
   
   IBuildingRole::IBuildingRole(this);
@@ -27,7 +25,6 @@ static class CPersistence * __cdecl CLookoutTowerRole::New(std::istream &) {
 
 // address=[0x14fcc50]
 // Decompiled from int __thiscall CLookoutTowerRole::~CLookoutTowerRole(CLookoutTowerRole *this)
-
  CLookoutTowerRole::~CLookoutTowerRole(void) {
   
   return IBuildingRole::~IBuildingRole(this);
@@ -36,7 +33,6 @@ static class CPersistence * __cdecl CLookoutTowerRole::New(std::istream &) {
 
 // address=[0x14fd100]
 // Decompiled from int __thiscall CLookoutTowerRole::ClassID(CLookoutTowerRole *this)
-
 unsigned long  CLookoutTowerRole::ClassID(void)const {
   
   return CLookoutTowerRole::m_iClassID;
@@ -45,7 +41,6 @@ unsigned long  CLookoutTowerRole::ClassID(void)const {
 
 // address=[0x14fd3a0]
 // Decompiled from void *__thiscall CLookoutTowerRole::GetBuildingNeed(std::_Ref_count_base *this, const struct type_info *a2)
-
 int  CLookoutTowerRole::GetBuildingNeed(int)const {
   
   return 0;
@@ -54,7 +49,6 @@ int  CLookoutTowerRole::GetBuildingNeed(int)const {
 
 // address=[0x14fd4e0]
 // Decompiled from int __thiscall CLookoutTowerRole::GetBuildingRole(CLookoutTowerRole *this)
-
 int  CLookoutTowerRole::GetBuildingRole(void) {
   
   return 9;
@@ -63,7 +57,6 @@ int  CLookoutTowerRole::GetBuildingRole(void) {
 
 // address=[0x14fd640]
 // Decompiled from void *__thiscall CLookoutTowerRole::GetPileIdWithGood(std::_Ref_count_base *this, const struct type_info *a2)
-
 int  CLookoutTowerRole::GetPileIdWithGood(int)const {
   
   return 0;
@@ -71,10 +64,7 @@ int  CLookoutTowerRole::GetPileIdWithGood(int)const {
 
 
 // address=[0x14fd720]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CLookoutTowerRole::GoodArrive(CLookoutTowerRole *this, int a2)
-
+// Decompiled from void __thiscall CLookoutTowerRole::GoodArrive(CLookoutTowerRole *this, int a2)
 void  CLookoutTowerRole::GoodArrive(int) {
   
   ;
@@ -83,7 +73,6 @@ void  CLookoutTowerRole::GoodArrive(int) {
 
 // address=[0x14fda70]
 // Decompiled from int __cdecl CLookoutTowerRole::Load(int a1)
-
 static class CLookoutTowerRole * __cdecl CLookoutTowerRole::Load(std::istream &) {
   
   void **v1; // eax
@@ -96,7 +85,6 @@ static class CLookoutTowerRole * __cdecl CLookoutTowerRole::Load(std::istream &)
 
 // address=[0x150c280]
 // Decompiled from int __thiscall CLookoutTowerRole::LogicUpdate(CLookoutTowerRole *this, struct CBuilding *a2)
-
 void  CLookoutTowerRole::LogicUpdate(class CBuilding *) {
   
   int v2; // eax
@@ -167,11 +155,7 @@ void  CLookoutTowerRole::LogicUpdate(class CBuilding *) {
 
 
 // address=[0x150c410]
-// Decompiled from IBuildingRole *__thiscall CLookoutTowerRole::FillGfxInfo(
-        CLookoutTowerRole *this,
-        struct CBuilding *a2,
-        struct SGfxObjectInfo *a3)
-
+// Decompiled from IBuildingRole *__thiscall CLookoutTowerRole::FillGfxInfo(  CLookoutTowerRole *this,  struct CBuilding *a2,  struct SGfxObjectInfo *a3)
 void  CLookoutTowerRole::FillGfxInfo(class CBuilding *,struct SGfxObjectInfo &) {
   
   int v3; // eax
@@ -189,7 +173,6 @@ void  CLookoutTowerRole::FillGfxInfo(class CBuilding *,struct SGfxObjectInfo &) 
 
 // address=[0x150c470]
 // Decompiled from int __thiscall CLookoutTowerRole::Init(CLookoutTowerRole *this, struct CBuilding *a2)
-
 void  CLookoutTowerRole::Init(class CBuilding *) {
   
   int result; // eax
@@ -207,7 +190,6 @@ void  CLookoutTowerRole::Init(class CBuilding *) {
 
 // address=[0x150c4d0]
 // Decompiled from int __thiscall CLookoutTowerRole::PostLoadInit(CLookoutTowerRole *this, struct CBuilding *a2)
-
 void  CLookoutTowerRole::PostLoadInit(class CBuilding *) {
   
   int v2; // eax
@@ -224,7 +206,6 @@ void  CLookoutTowerRole::PostLoadInit(class CBuilding *) {
 
 // address=[0x150c500]
 // Decompiled from char __thiscall CLookoutTowerRole::SettlerEnter(CLookoutTowerRole *this, struct CBuilding *a2, int a3)
-
 bool  CLookoutTowerRole::SettlerEnter(class CBuilding *,int) {
   
   if ( *((_BYTE *)this + 29)
@@ -241,7 +222,6 @@ bool  CLookoutTowerRole::SettlerEnter(class CBuilding *,int) {
 
 // address=[0x150c560]
 // Decompiled from _DWORD *__thiscall CLookoutTowerRole::FillDialog(CLookoutTowerRole *this, struct CBuilding *a2, bool a3)
-
 void  CLookoutTowerRole::FillDialog(class CBuilding *,bool) {
   
   int v3; // eax
@@ -279,7 +259,6 @@ void  CLookoutTowerRole::FillDialog(class CBuilding *,bool) {
 
 // address=[0x150c6a0]
 // Decompiled from char *__thiscall CLookoutTowerRole::CLookoutTowerRole(char *this, int a2)
-
  CLookoutTowerRole::CLookoutTowerRole(std::istream &) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
@@ -307,7 +286,6 @@ void  CLookoutTowerRole::FillDialog(class CBuilding *,bool) {
 
 // address=[0x150c760]
 // Decompiled from int __thiscall CLookoutTowerRole::Store(struct IBuildingRole *this, struct std::ostream *a2)
-
 void  CLookoutTowerRole::Store(std::ostream &) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
@@ -325,11 +303,7 @@ void  CLookoutTowerRole::Store(std::ostream &) {
 // [Decompilation failed for static unsigned long CLookoutTowerRole::m_iClassID]
 
 // address=[0x14fd220]
-// Decompiled from void __thiscall CLookoutTowerRole::ConvertEventIntoGoal(
-        CLookoutTowerRole *this,
-        struct CBuilding *a2,
-        struct CEntityEvent *a3)
-
+// Decompiled from void __thiscall CLookoutTowerRole::ConvertEventIntoGoal(  CLookoutTowerRole *this,  struct CBuilding *a2,  struct CEntityEvent *a3)
 void  CLookoutTowerRole::ConvertEventIntoGoal(class CBuilding *,class CEntityEvent *) {
   
   ;
@@ -338,7 +312,6 @@ void  CLookoutTowerRole::ConvertEventIntoGoal(class CBuilding *,class CEntityEve
 
 // address=[0x14fd290]
 // Decompiled from char __thiscall CLookoutTowerRole::CrushBuilding(CLookoutTowerRole *this)
-
 bool  CLookoutTowerRole::CrushBuilding(void) {
   
   return 1;
@@ -347,7 +320,6 @@ bool  CLookoutTowerRole::CrushBuilding(void) {
 
 // address=[0x14fde50]
 // Decompiled from char __thiscall CLookoutTowerRole::TryCrushBuilding(CLookoutTowerRole *this)
-
 bool  CLookoutTowerRole::TryCrushBuilding(void) {
   
   return 1;

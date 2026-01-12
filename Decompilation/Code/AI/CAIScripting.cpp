@@ -4,7 +4,6 @@
 
 // address=[0x131d980]
 // Decompiled from int __thiscall CAIScripting::Init(CAIScripting *this)
-
 void  CAIScripting::Init(void) {
   
   int v1; // eax
@@ -50,9 +49,7 @@ void  CAIScripting::Init(void) {
 
 
 // address=[0x131db20]
-// Decompiled from // Microsoft VisualC 14/net runtime
-void __thiscall CAIScripting::Load(CAIScripting *this, struct IS4Chunk *a2)
-
+// Decompiled from void __thiscall CAIScripting::Load(CAIScripting *this, struct IS4Chunk *a2)
 void  CAIScripting::Load(class IS4Chunk &) {
   
   ;
@@ -60,10 +57,7 @@ void  CAIScripting::Load(class IS4Chunk &) {
 
 
 // address=[0x131db30]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CAIScripting::Save(CAIScripting *this, struct IS4Chunk *a2)
-
+// Decompiled from void __thiscall CAIScripting::Save(CAIScripting *this, struct IS4Chunk *a2)
 void  CAIScripting::Save(class IS4Chunk &) {
   
   ;
@@ -72,7 +66,6 @@ void  CAIScripting::Save(class IS4Chunk &) {
 
 // address=[0x131db40]
 // Decompiled from unsigned int __thiscall CAIScripting::Adler32(CAIScripting *this, unsigned int a2)
-
 unsigned int  CAIScripting::Adler32(unsigned int) {
   
   double v2; // st7
@@ -106,7 +99,6 @@ unsigned int  CAIScripting::Adler32(unsigned int) {
 
 // address=[0x131e8c0]
 // Decompiled from CAIScripting *__thiscall CAIScripting::CAIScripting(CAIScripting *this)
-
  CAIScripting::CAIScripting(void) {
   
   IAIScripting::IAIScripting(this);
@@ -117,7 +109,6 @@ unsigned int  CAIScripting::Adler32(unsigned int) {
 
 // address=[0x131dc20]
 // Decompiled from int __thiscall CAIScripting::InitPlayerScriptVarsDefaultValues(CAIScripting *this)
-
 void  CAIScripting::InitPlayerScriptVarsDefaultValues(void) {
   
   int result; // eax

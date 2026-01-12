@@ -3,12 +3,7 @@
 // Definitions for class CBuildingPlace
 
 // address=[0x2f56730]
-// Decompiled from CResourceManagerTask::CBuildingPlace *__thiscall CResourceManagerTask::CBuildingPlace::CBuildingPlace(
-        CResourceManagerTask::CBuildingPlace *this,
-        int a2,
-        int a3,
-        int a4)
-
+// Decompiled from CResourceManagerTask::CBuildingPlace *__thiscall CResourceManagerTask::CBuildingPlace::CBuildingPlace(  CResourceManagerTask::CBuildingPlace *this,  int a2,  int a3,  int a4)
  CResourceManagerTask::CBuildingPlace::CBuildingPlace(int,int,int) {
   
   CDynListEntry::CDynListEntry(this);
@@ -22,7 +17,6 @@
 
 // address=[0x2f5a070]
 // Decompiled from void __thiscall CResourceManagerTask::CBuildingPlace::~CBuildingPlace(CResourceManagerTask::CBuildingPlace *this)
-
  CResourceManagerTask::CBuildingPlace::~CBuildingPlace(void) {
   
   CDynListEntry::~CDynListEntry(this);

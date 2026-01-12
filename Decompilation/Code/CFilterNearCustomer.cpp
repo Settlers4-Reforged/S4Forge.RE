@@ -4,7 +4,6 @@
 
 // address=[0x2f58ab0]
 // Decompiled from IFilterEntry *__thiscall CFilterNearCustomer::CFilterNearCustomer(IFilterEntry *this, int a2, int a3, int a4, int a5)
-
  CFilterNearCustomer::CFilterNearCustomer(int,int,enum T_BUILD_LEVEL,int) {
   
   IFilterEntry::IFilterEntry(this);
@@ -19,7 +18,6 @@
 
 // address=[0x2f58b00]
 // Decompiled from double __thiscall CFilterNearCustomer::GetFilterValue(CFilterNearCustomer *this)
-
 float  CFilterNearCustomer::GetFilterValue(void) {
   
   return (float)(1000 - *((_DWORD *)this + 3));
@@ -28,7 +26,6 @@ float  CFilterNearCustomer::GetFilterValue(void) {
 
 // address=[0x2f5a090]
 // Decompiled from void __thiscall CFilterNearCustomer::~CFilterNearCustomer(CFilterNearCustomer *this)
-
  CFilterNearCustomer::~CFilterNearCustomer(void) {
   
   *(_DWORD *)this = &CFilterNearCustomer::_vftable_;

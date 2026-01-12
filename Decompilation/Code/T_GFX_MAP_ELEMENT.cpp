@@ -4,7 +4,6 @@
 
 // address=[0x151aa30]
 // Decompiled from int __thiscall T_GFX_MAP_ELEMENT::GetGradient(T_GFX_MAP_ELEMENT *this)
-
 int  T_GFX_MAP_ELEMENT::GetGradient(void) {
   
   return *((_BYTE *)this + 2) & 0xF;
@@ -13,7 +12,6 @@ int  T_GFX_MAP_ELEMENT::GetGradient(void) {
 
 // address=[0x15db1b0]
 // Decompiled from int __thiscall T_GFX_MAP_ELEMENT::GetNewFogging(T_GFX_MAP_ELEMENT *this)
-
 int  T_GFX_MAP_ELEMENT::GetNewFogging(void) {
   
   return (*((_BYTE *)this + 3) & 0x38) >> 3;
@@ -22,7 +20,6 @@ int  T_GFX_MAP_ELEMENT::GetNewFogging(void) {
 
 // address=[0x15db1d0]
 // Decompiled from int __thiscall T_GFX_MAP_ELEMENT::GetOldFogging(T_GFX_MAP_ELEMENT *this)
-
 int  T_GFX_MAP_ELEMENT::GetOldFogging(void) {
   
   return *((_BYTE *)this + 3) & 7;
@@ -31,7 +28,6 @@ int  T_GFX_MAP_ELEMENT::GetOldFogging(void) {
 
 // address=[0x2f90e30]
 // Decompiled from T_GFX_MAP_ELEMENT *__thiscall T_GFX_MAP_ELEMENT::SetNewFogging(T_GFX_MAP_ELEMENT *this, char a2)
-
 void  T_GFX_MAP_ELEMENT::SetNewFogging(int) {
   
   T_GFX_MAP_ELEMENT *result; // eax

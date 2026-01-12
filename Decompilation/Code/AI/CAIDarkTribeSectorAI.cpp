@@ -4,7 +4,6 @@
 
 // address=[0x1303820]
 // Decompiled from int __thiscall CAIDarkTribeSectorAI::EconomyAI(CAIDarkTribeSectorAI *this)
-
 class IAIDarkTribeEcoAI *  CAIDarkTribeSectorAI::EconomyAI(void)const {
   
   return *((_DWORD *)this + 261);
@@ -13,7 +12,6 @@ class IAIDarkTribeEcoAI *  CAIDarkTribeSectorAI::EconomyAI(void)const {
 
 // address=[0x1322250]
 // Decompiled from void __thiscall CAIDarkTribeSectorAI::~CAIDarkTribeSectorAI(CAIDarkTribeSectorAI *this)
-
  CAIDarkTribeSectorAI::~CAIDarkTribeSectorAI(void) {
   
   *(_DWORD *)this = &CAIDarkTribeSectorAI::_vftable_;
@@ -42,7 +40,6 @@ class IAIDarkTribeEcoAI *  CAIDarkTribeSectorAI::EconomyAI(void)const {
 
 // address=[0x1322390]
 // Decompiled from int __thiscall CAIDarkTribeSectorAI::Load(CAIDarkTribeSectorAI *this, struct IS4Chunk *a2)
-
 void  CAIDarkTribeSectorAI::Load(class IS4Chunk &) {
   
   (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 12))(a2, -1517154304);
@@ -63,7 +60,6 @@ void  CAIDarkTribeSectorAI::Load(class IS4Chunk &) {
 
 // address=[0x13224d0]
 // Decompiled from int __thiscall CAIDarkTribeSectorAI::Save(CAIDarkTribeSectorAI *this, struct IS4Chunk *a2)
-
 void  CAIDarkTribeSectorAI::Save(class IS4Chunk &) {
   
   (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 24))(a2, -1517154304);
@@ -84,7 +80,6 @@ void  CAIDarkTribeSectorAI::Save(class IS4Chunk &) {
 
 // address=[0x1322610]
 // Decompiled from void __thiscall CAIDarkTribeSectorAI::PostAIEvent(CAIDarkTribeSectorAI *this, int a2, int a3, int a4, int a5)
-
 void  CAIDarkTribeSectorAI::PostAIEvent(int,int,int,int) {
   
   CAIEventQueue::PostAIEvent((CAIDarkTribeSectorAI *)((char *)this + 8), a2, a3, a4, a5);
@@ -94,7 +89,6 @@ void  CAIDarkTribeSectorAI::PostAIEvent(int,int,int,int) {
 
 // address=[0x1322660]
 // Decompiled from int __thiscall CAIDarkTribeSectorAI::Execute(CAIDarkTribeSectorAI *this)
-
 void  CAIDarkTribeSectorAI::Execute(void) {
   
   CAISectorAI::ProcessEvents(this);
@@ -103,13 +97,7 @@ void  CAIDarkTribeSectorAI::Execute(void) {
 
 
 // address=[0x1322690]
-// Decompiled from char __thiscall CAIDarkTribeSectorAI::FindMushroomFarm(
-        CAIDarkTribeSectorAI *this,
-        struct _Cnd_internal_imp_t **a2,
-        struct _Mtx_internal_imp_t **a3,
-        int a4,
-        int a5)
-
+// Decompiled from char __thiscall CAIDarkTribeSectorAI::FindMushroomFarm(  CAIDarkTribeSectorAI *this,  struct _Cnd_internal_imp_t **a2,  struct _Mtx_internal_imp_t **a3,  int a4,  int a5)
 bool  CAIDarkTribeSectorAI::FindMushroomFarm(int &,int &,int,int) {
   
   pairNode *v6; // eax
@@ -184,10 +172,7 @@ bool  CAIDarkTribeSectorAI::FindMushroomFarm(int &,int &,int,int) {
 
 
 // address=[0x1323210]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CAIDarkTribeSectorAI::DbgPrint(CAIDarkTribeSectorAI *this)
-
+// Decompiled from void __thiscall CAIDarkTribeSectorAI::DbgPrint(CAIDarkTribeSectorAI *this)
 void  CAIDarkTribeSectorAI::DbgPrint(void) {
   
   ;
@@ -195,9 +180,7 @@ void  CAIDarkTribeSectorAI::DbgPrint(void) {
 
 
 // address=[0x1323240]
-// Decompiled from // Microsoft VisualC 14/net runtime
-char __thiscall CAIDarkTribeSectorAI::IsNormalPlayerSector(CAIDarkTribeSectorAI *this)
-
+// Decompiled from char __thiscall CAIDarkTribeSectorAI::IsNormalPlayerSector(CAIDarkTribeSectorAI *this)
 bool  CAIDarkTribeSectorAI::IsNormalPlayerSector(void)const {
   
   return 0;
@@ -205,11 +188,7 @@ bool  CAIDarkTribeSectorAI::IsNormalPlayerSector(void)const {
 
 
 // address=[0x1321d50]
-// Decompiled from std::bad_function_call *__thiscall CAIDarkTribeSectorAI::CAIDarkTribeSectorAI(
-        std::bad_function_call *this,
-        pairNode *a2,
-        int a3)
-
+// Decompiled from std::bad_function_call *__thiscall CAIDarkTribeSectorAI::CAIDarkTribeSectorAI(  std::bad_function_call *this,  pairNode *a2,  int a3)
  CAIDarkTribeSectorAI::CAIDarkTribeSectorAI(class CAIPlayerAI &,int) {
   
   struct IAIDarkTribeEcoAI *EcoAI; // eax
@@ -321,7 +300,6 @@ bool  CAIDarkTribeSectorAI::IsNormalPlayerSector(void)const {
 
 // address=[0x13228d0]
 // Decompiled from char __thiscall CAIDarkTribeSectorAI::ProcessEvent(_DWORD **this, pairNode *a2)
-
 bool  CAIDarkTribeSectorAI::ProcessEvent(class CAIEvent const *) {
   
   int v3; // [esp+0h] [ebp-28h]
@@ -364,13 +342,7 @@ bool  CAIDarkTribeSectorAI::ProcessEvent(class CAIEvent const *) {
 
 
 // address=[0x1322a00]
-// Decompiled from void __thiscall CAIDarkTribeSectorAI::AttachAgentEx(
-        CAIDarkTribeSectorAI *this,
-        struct CAIDarkTribeSectorAgent *a2,
-        unsigned int a3,
-        unsigned int a4,
-        unsigned int a5)
-
+// Decompiled from void __thiscall CAIDarkTribeSectorAI::AttachAgentEx(  CAIDarkTribeSectorAI *this,  struct CAIDarkTribeSectorAgent *a2,  unsigned int a3,  unsigned int a4,  unsigned int a5)
 void  CAIDarkTribeSectorAI::AttachAgentEx(class CAIDarkTribeSectorAgent &,unsigned int,unsigned int,unsigned int) {
   
   CAIDarkTribeSectorAgent::AttachSectorAI(a2, this);

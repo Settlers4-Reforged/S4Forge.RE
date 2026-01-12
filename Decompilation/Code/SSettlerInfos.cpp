@@ -4,7 +4,6 @@
 
 // address=[0x1587b80]
 // Decompiled from int __thiscall CSettlerMgr::SSettlerInfos::SSettlerInfos(CSettlerMgr::SSettlerInfos *this)
-
  CSettlerMgr::SSettlerInfos::SSettlerInfos(void) {
   
   int v2; // [esp+0h] [ebp-4h]
@@ -17,7 +16,6 @@
 
 // address=[0x1587cb0]
 // Decompiled from int __thiscall CSettlerMgr::SSettlerInfos::~SSettlerInfos(CSettlerMgr::SSettlerInfos *this)
-
  CSettlerMgr::SSettlerInfos::~SSettlerInfos(void) {
   
   std::vector<unsigned short>::~vector<unsigned short>((char *)this + 24);
@@ -27,7 +25,6 @@
 
 // address=[0x1588360]
 // Decompiled from _BYTE *__thiscall CSettlerMgr::SSettlerInfos::operator=(_BYTE *this, _BYTE *a2)
-
 struct CSettlerMgr::SSettlerInfos &  CSettlerMgr::SSettlerInfos::operator=(struct CSettlerMgr::SSettlerInfos const &) {
   
   *this = *a2;

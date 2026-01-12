@@ -4,7 +4,6 @@
 
 // address=[0x3088000]
 // Decompiled from char __thiscall DNameStatusNode::getLastChar(DNameStatusNode *this)
-
 char  DNameStatusNode::getLastChar(void)const {
   
   if ( *((_DWORD *)this + 1) == 1 )
@@ -16,7 +15,6 @@ char  DNameStatusNode::getLastChar(void)const {
 
 // address=[0x308a5e0]
 // Decompiled from char *__thiscall DNameStatusNode::getString(DNameStatusNode *this, char *a2, char *a3)
-
 char *  DNameStatusNode::getString(char *,char *)const {
   
   if ( *((_DWORD *)this + 1) == 1 )
@@ -27,10 +25,7 @@ char *  DNameStatusNode::getString(char *,char *)const {
 
 
 // address=[0x308cf70]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall DNameStatusNode::length(DNameStatusNode *this)
-
+// Decompiled from int __thiscall DNameStatusNode::length(DNameStatusNode *this)
 int  DNameStatusNode::length(void)const {
   
   return *((_DWORD *)this + 2);
@@ -39,7 +34,6 @@ int  DNameStatusNode::length(void)const {
 
 // address=[0x308d0a0]
 // Decompiled from char *__cdecl DNameStatusNode::make(unsigned int a1)
-
 static class DNameStatusNode * __cdecl DNameStatusNode::make(enum DNameStatus) {
   
   if ( (DNameStatusNode::make_::_2_::_local_static_guard_ & 1) == 0 )
@@ -59,7 +53,6 @@ static class DNameStatusNode * __cdecl DNameStatusNode::make(enum DNameStatus) {
 
 // address=[0x3081170]
 // Decompiled from DNameNode *__thiscall DNameStatusNode::DNameStatusNode(DNameNode *this, int a2)
-
  DNameStatusNode::DNameStatusNode(enum DNameStatus) {
   
   int v3; // [esp+0h] [ebp-8h]

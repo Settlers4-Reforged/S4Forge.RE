@@ -4,7 +4,6 @@
 
 // address=[0x15488d0]
 // Decompiled from CHive *__thiscall CHive::CHive(CHive *this, int a2, int a3, int a4, int a5, int a6)
-
  CHive::CHive(int,int,int,int,int) {
   
   IDecoObject::IDecoObject(this, a2, a3, a4, a5, a6 != 0);
@@ -42,7 +41,6 @@
 
 // address=[0x1548a60]
 // Decompiled from CHive *__thiscall CHive::CHive(CHive *this, const struct CHive *a2, int a3, int a4, int a5)
-
  CHive::CHive(class CHive const &,int,int,int) {
   
   IDecoObject::IDecoObject(this, a2, a3, a4, a5);
@@ -62,7 +60,6 @@
 
 // address=[0x1548b50]
 // Decompiled from void __thiscall CHive::~CHive(CHive *this)
-
  CHive::~CHive(void) {
   
   *(_DWORD *)this = &CHive::_vftable_;
@@ -72,7 +69,6 @@
 
 // address=[0x1548b70]
 // Decompiled from void __thiscall CHive::LogicUpdate(CHive *this)
-
 void  CHive::LogicUpdate(void) {
   
   unsigned int v1; // esi
@@ -182,7 +178,6 @@ LABEL_24:
 
 // address=[0x1548eb0]
 // Decompiled from void *__thiscall CHive::GetGfxInfos(CHive *this)
-
 struct SGfxObjectInfo *  CHive::GetGfxInfos(void) {
   
   int TickCounter; // esi
@@ -209,7 +204,6 @@ struct SGfxObjectInfo *  CHive::GetGfxInfos(void) {
 
 // address=[0x1548f50]
 // Decompiled from int __thiscall CHive::Decrease(CHive *this, int a2)
-
 void  CHive::Decrease(int) {
   
   int result; // eax
@@ -246,9 +240,7 @@ void  CHive::Decrease(int) {
 
 
 // address=[0x1549060]
-// Decompiled from // MFC 3.1-14.0 32bit
-int __thiscall CHive::Increase(CHive *this, int a2)
-
+// Decompiled from int __thiscall CHive::Increase(CHive *this, int a2)
 int  CHive::Increase(int) {
   
   return 1;
@@ -257,7 +249,6 @@ int  CHive::Increase(int) {
 
 // address=[0x1549080]
 // Decompiled from unsigned int __cdecl CHive::operator new(unsigned int a1)
-
 static void * __cdecl CHive::operator new(unsigned int) {
   
   return CDecoObjMgr::Alloc((CDecoObjMgr *)&g_cDecoObjMgr, a1);
@@ -266,7 +257,6 @@ static void * __cdecl CHive::operator new(unsigned int) {
 
 // address=[0x15490a0]
 // Decompiled from void __cdecl CHive::operator delete(void *a1)
-
 static void __cdecl CHive::operator delete(void *) {
   
   CDecoObjMgr::Dealloc((CDecoObjMgr *)&g_cDecoObjMgr, a1);
@@ -275,7 +265,6 @@ static void __cdecl CHive::operator delete(void *) {
 
 // address=[0x15490e0]
 // Decompiled from char __thiscall CHive::IsFlowerInSurrounding(CHive *this)
-
 bool  CHive::IsFlowerInSurrounding(void) {
   
   int v1; // esi
@@ -313,7 +302,6 @@ bool  CHive::IsFlowerInSurrounding(void) {
 
 // address=[0x15491c0]
 // Decompiled from _DWORD *__thiscall CHive::CHive(_DWORD *this, int a2)
-
  CHive::CHive(std::istream &) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
@@ -345,7 +333,6 @@ bool  CHive::IsFlowerInSurrounding(void) {
 
 // address=[0x15492d0]
 // Decompiled from int __thiscall CHive::Store(int *this, struct std::ostream *a2)
-
 void  CHive::Store(std::ostream &) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
@@ -365,7 +352,6 @@ void  CHive::Store(std::ostream &) {
 
 // address=[0x1549670]
 // Decompiled from int __thiscall CHive::ClassID(CHive *this)
-
 unsigned long  CHive::ClassID(void)const {
   
   return CHive::m_iClassID;

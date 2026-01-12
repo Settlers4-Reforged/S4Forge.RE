@@ -4,7 +4,6 @@
 
 // address=[0x14f37c0]
 // Decompiled from void __thiscall AdvXMLParser::ParsingException::~ParsingException(AdvXMLParser::ParsingException *this)
-
  AdvXMLParser::ParsingException::~ParsingException(void) {
   
   AdvXMLParser::Exception::~Exception(this);
@@ -12,10 +11,7 @@
 
 
 // address=[0x14f3ef0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall AdvXMLParser::ParsingException::GetLine(AdvXMLParser::ParsingException *this)
-
+// Decompiled from int __thiscall AdvXMLParser::ParsingException::GetLine(AdvXMLParser::ParsingException *this)
 int  AdvXMLParser::ParsingException::GetLine(void)const {
   
   return *((_DWORD *)this + 2);
@@ -23,10 +19,7 @@ int  AdvXMLParser::ParsingException::GetLine(void)const {
 
 
 // address=[0x2f27ef0]
-// Decompiled from boost::exception_detail::clone_base *__thiscall AdvXMLParser::ParsingException::ParsingException(
-        boost::exception_detail::clone_base *this,
-        struct boost::exception_detail::clone_base *a2)
-
+// Decompiled from boost::exception_detail::clone_base *__thiscall AdvXMLParser::ParsingException::ParsingException(  boost::exception_detail::clone_base *this,  struct boost::exception_detail::clone_base *a2)
  AdvXMLParser::ParsingException::ParsingException(class AdvXMLParser::ParsingException const &) {
   
   AdvXMLParser::Exception::Exception(this, a2);
@@ -39,12 +32,7 @@ int  AdvXMLParser::ParsingException::GetLine(void)const {
 
 
 // address=[0x2f27f50]
-// Decompiled from AdvXMLParser::Exception *__thiscall AdvXMLParser::ParsingException::ParsingException(
-        AdvXMLParser::Exception *this,
-        int a2,
-        int a3,
-        int a4)
-
+// Decompiled from AdvXMLParser::Exception *__thiscall AdvXMLParser::ParsingException::ParsingException(  AdvXMLParser::Exception *this,  int a2,  int a3,  int a4)
  AdvXMLParser::ParsingException::ParsingException(enum AdvXMLParser::PARSER_ERROR,int,int) {
   
   AdvXMLParser::Exception::Exception(this);

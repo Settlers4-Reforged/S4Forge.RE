@@ -4,7 +4,6 @@
 
 // address=[0x1304230]
 // Decompiled from unsigned int __thiscall CAIAgentGardeners::Execute(CAIAgentGardeners *this, unsigned int a2, unsigned int a3)
-
 unsigned int  CAIAgentGardeners::Execute(unsigned int,unsigned int) {
   
   return CAIAgent::ExecuteResult(0, 0);
@@ -13,7 +12,6 @@ unsigned int  CAIAgentGardeners::Execute(unsigned int,unsigned int) {
 
 // address=[0x1325a70]
 // Decompiled from CAIAgentGardeners *__thiscall CAIAgentGardeners::CAIAgentGardeners(CAIAgentGardeners *this)
-
  CAIAgentGardeners::CAIAgentGardeners(void) {
   
   CAINormalSectorAgent::CAINormalSectorAgent(this, string__27);
@@ -24,7 +22,6 @@ unsigned int  CAIAgentGardeners::Execute(unsigned int,unsigned int) {
 
 // address=[0x1325c50]
 // Decompiled from void __thiscall CAIAgentGardeners::~CAIAgentGardeners(CAIAgentGardeners *this)
-
  CAIAgentGardeners::~CAIAgentGardeners(void) {
   
   CAINormalSectorAgent::~CAINormalSectorAgent(this);

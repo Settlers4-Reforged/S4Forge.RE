@@ -4,7 +4,6 @@
 
 // address=[0x1401f80]
 // Decompiled from int __cdecl CSoldierRole::New(int a1)
-
 static class CPersistence * __cdecl CSoldierRole::New(std::istream &) {
   
   if ( operator new(0x64u) )
@@ -16,7 +15,6 @@ static class CPersistence * __cdecl CSoldierRole::New(std::istream &) {
 
 // address=[0x1588900]
 // Decompiled from int __cdecl CSoldierRole::Load(int a1)
-
 static class CSoldierRole * __cdecl CSoldierRole::Load(std::istream &) {
   
   void **v1; // eax
@@ -29,7 +27,6 @@ static class CSoldierRole * __cdecl CSoldierRole::Load(std::istream &) {
 
 // address=[0x158e510]
 // Decompiled from int __thiscall CSoldierRole::InitWalking(CSoldierRole *this, struct CSettler *a2)
-
 class CWalking *  CSoldierRole::InitWalking(class CSettler *) {
   
   int v2; // eax
@@ -41,7 +38,6 @@ class CWalking *  CSoldierRole::InitWalking(class CSettler *) {
 
 // address=[0x158e540]
 // Decompiled from void __thiscall CSoldierRole::LogicUpdateJob(CSoldierRole *this, struct CSettler *a2)
-
 void  CSoldierRole::LogicUpdateJob(class CSettler *) {
   
   int v2; // eax
@@ -258,7 +254,6 @@ void  CSoldierRole::LogicUpdateJob(class CSettler *) {
 
 // address=[0x158ebc0]
 // Decompiled from int __thiscall CSoldierRole::UpdateJob(CSoldierRole *this, struct CSettler *a2)
-
 void  CSoldierRole::UpdateJob(class CSettler *) {
   
   int v2; // eax
@@ -297,7 +292,6 @@ void  CSoldierRole::UpdateJob(class CSettler *) {
 
 // address=[0x158ed00]
 // Decompiled from int __thiscall CSoldierRole::WarriorTaskWalkOneStep(CSoldierRole *this, struct IMovingEntity *a2)
-
 int  CSoldierRole::WarriorTaskWalkOneStep(class IMovingEntity &) {
   
   int v4; // [esp+8h] [ebp-4h]
@@ -310,7 +304,6 @@ int  CSoldierRole::WarriorTaskWalkOneStep(class IMovingEntity &) {
 
 // address=[0x158ed40]
 // Decompiled from int __thiscall CSoldierRole::WarriorTaskAttack(_DWORD *this, _DWORD *a2, unsigned int a3, int a4)
-
 void  CSoldierRole::WarriorTaskAttack(class IMovingEntity &,int,enum T_WARRIOR_ATTACK) {
   
   int v4; // eax
@@ -546,7 +539,6 @@ void  CSoldierRole::WarriorTaskAttack(class IMovingEntity &,int,enum T_WARRIOR_A
 
 // address=[0x158f1a0]
 // Decompiled from int __thiscall CSoldierRole::WarriorTaskFinished(CSoldierRole *this, struct IMovingEntity *a2)
-
 void  CSoldierRole::WarriorTaskFinished(class IMovingEntity &) {
   
   IAnimatedEntity::RegisterForLogicUpdate(1);
@@ -557,7 +549,6 @@ void  CSoldierRole::WarriorTaskFinished(class IMovingEntity &) {
 
 // address=[0x158f1e0]
 // Decompiled from int __thiscall CSoldierRole::WarriorTaskIdleWalk(CSoldierRole *this, struct IMovingEntity *a2)
-
 int  CSoldierRole::WarriorTaskIdleWalk(class IMovingEntity &) {
   
   int v2; // eax
@@ -577,7 +568,6 @@ int  CSoldierRole::WarriorTaskIdleWalk(class IMovingEntity &) {
 
 // address=[0x158f250]
 // Decompiled from char __thiscall CSoldierRole::SetFree(CSoldierRole *this, struct CSettler *a2, int a3)
-
 bool  CSoldierRole::SetFree(class CSettler *,int) {
   
   int v4; // [esp+0h] [ebp-10h]
@@ -632,7 +622,6 @@ bool  CSoldierRole::SetFree(class CSettler *,int) {
 
 // address=[0x158f390]
 // Decompiled from int __thiscall CSoldierRole::PostLoadInit(_DWORD *this, CPropertySet *a2)
-
 void  CSoldierRole::PostLoadInit(class CSettler *) {
   
   int v2; // esi
@@ -725,7 +714,6 @@ void  CSoldierRole::PostLoadInit(class CSettler *) {
 
 // address=[0x158f5c0]
 // Decompiled from void __thiscall CSoldierRole::CheckToDoList(CSoldierRole *this)
-
 void  CSoldierRole::CheckToDoList(void) {
   
   _BYTE v1[12]; // [esp+4h] [ebp-4Ch] BYREF
@@ -781,7 +769,6 @@ void  CSoldierRole::CheckToDoList(void) {
 
 // address=[0x158f700]
 // Decompiled from char *__thiscall CSoldierRole::GetWarriorBehavior(CSoldierRole *this)
-
 class CWarriorBehavior *  CSoldierRole::GetWarriorBehavior(void) {
   
   if ( this )
@@ -793,7 +780,6 @@ class CWarriorBehavior *  CSoldierRole::GetWarriorBehavior(void) {
 
 // address=[0x158f730]
 // Decompiled from int __thiscall CSoldierRole::GetKindOfSelection(CSoldierRole *this, struct CSettler *a2)
-
 int  CSoldierRole::GetKindOfSelection(class CSettler *)const {
   
   int v3; // [esp+8h] [ebp-4h]
@@ -832,7 +818,6 @@ int  CSoldierRole::GetKindOfSelection(class CSettler *)const {
 
 // address=[0x158f7e0]
 // Decompiled from _DWORD *__thiscall CSoldierRole::CSoldierRole(_DWORD *this, int a2)
-
  CSoldierRole::CSoldierRole(std::istream &) {
   
   struct CWarriorBehavior::SWarriorBehaviorData *WarriorBehaviorData; // eax
@@ -911,7 +896,6 @@ int  CSoldierRole::GetKindOfSelection(class CSettler *)const {
 
 // address=[0x158fa60]
 // Decompiled from int __thiscall CSoldierRole::Store(int *this, struct std::ostream *a2)
-
 void  CSoldierRole::Store(std::ostream &) {
   
   struct CWarriorBehavior::SWarriorBehaviorData *WarriorBehaviorData; // eax
@@ -1023,7 +1007,6 @@ void  CSoldierRole::Store(std::ostream &) {
 
 // address=[0x1592140]
 // Decompiled from int __thiscall CSoldierRole::ClassID(CSoldierRole *this)
-
 unsigned long  CSoldierRole::ClassID(void)const {
   
   return CSoldierRole::m_iClassID;
@@ -1032,7 +1015,6 @@ unsigned long  CSoldierRole::ClassID(void)const {
 
 // address=[0x15921e0]
 // Decompiled from int __thiscall CSoldierRole::GetSettlerRole(CSoldierRole *this)
-
 int  CSoldierRole::GetSettlerRole(void)const {
   
   return 7;
@@ -1041,7 +1023,6 @@ int  CSoldierRole::GetSettlerRole(void)const {
 
 // address=[0x15afa00]
 // Decompiled from int __thiscall CSoldierRole::GetNumberOfHealings(CSoldierRole *this)
-
 int  CSoldierRole::GetNumberOfHealings(void) {
   
   return *((unsigned __int8 *)this + 73);
@@ -1053,7 +1034,6 @@ int  CSoldierRole::GetNumberOfHealings(void) {
 
 // address=[0x158fd10]
 // Decompiled from CSoldierRole *__thiscall CSoldierRole::CSoldierRole(CSoldierRole *this)
-
  CSoldierRole::CSoldierRole(void) {
   
   ISelectableSettlerRole::ISelectableSettlerRole(this);
@@ -1072,7 +1052,6 @@ int  CSoldierRole::GetNumberOfHealings(void) {
 
 // address=[0x158fdc0]
 // Decompiled from void __thiscall CSoldierRole::~CSoldierRole(CSoldierRole *this)
-
  CSoldierRole::~CSoldierRole(void) {
   
   *(_DWORD *)this = &CSoldierRole::_vftable_;
@@ -1086,7 +1065,6 @@ int  CSoldierRole::GetNumberOfHealings(void) {
 
 // address=[0x158fe10]
 // Decompiled from int __thiscall CSoldierRole::SoldierMagicIdleWalk(CSoldierRole *this, struct CSettler *a2)
-
 void  CSoldierRole::SoldierMagicIdleWalk(class CSettler *) {
   
   int v2; // eax
@@ -1122,7 +1100,6 @@ void  CSoldierRole::SoldierMagicIdleWalk(class CSettler *) {
 
 // address=[0x158fed0]
 // Decompiled from int __thiscall CSoldierRole::GetNextJob(CSoldierRole *this, void **a2)
-
 void  CSoldierRole::GetNextJob(class CSettler *) {
   
   int result; // eax
@@ -1180,7 +1157,6 @@ void  CSoldierRole::GetNextJob(class CSettler *) {
 
 // address=[0x1590040]
 // Decompiled from int __thiscall CSoldierRole::TakeJob(ISettlerRole *this, CPaneContainer *a2)
-
 void  CSoldierRole::TakeJob(class CSettler *) {
   
   const struct CEntityTask *v2; // eax
@@ -1372,7 +1348,6 @@ LABEL_8:
 
 // address=[0x1590680]
 // Decompiled from int __thiscall CSoldierRole::Init(int this, CPropertySet *a2)
-
 void  CSoldierRole::Init(class CSettler *) {
   
   int v2; // eax
@@ -1405,7 +1380,6 @@ void  CSoldierRole::Init(class CSettler *) {
 
 // address=[0x1590740]
 // Decompiled from void __thiscall CSoldierRole::ConvertEventIntoGoal(int this, CPropertySet *a2, const struct CEntityEvent *a3)
-
 void  CSoldierRole::ConvertEventIntoGoal(class CSettler *,class CEntityEvent *) {
   
   int v3; // eax
@@ -1720,7 +1694,6 @@ LABEL_12:
 
 // address=[0x1590f40]
 // Decompiled from int __thiscall CSoldierRole::ComeToWork(CSoldierRole *this, struct CSettler *a2, int a3)
-
 void  CSoldierRole::ComeToWork(class CSettler *,int) {
   
   int v3; // eax
@@ -1783,7 +1756,6 @@ void  CSoldierRole::ComeToWork(class CSettler *,int) {
 
 // address=[0x1591100]
 // Decompiled from char __thiscall CSoldierRole::NewDestinationEx(CSoldierRole *this, struct CSettler *a2, int a3, int a4, __int16 a5)
-
 bool  CSoldierRole::NewDestinationEx(class CSettler *,int,int,int) {
   
   int v5; // eax
@@ -1964,7 +1936,6 @@ bool  CSoldierRole::NewDestinationEx(class CSettler *,int,int,int) {
 
 // address=[0x1591450]
 // Decompiled from int __thiscall CSoldierRole::EvaluateWalkAndRegister(CSoldierRole *this, struct IMovingEntity *a2, char a3)
-
 void  CSoldierRole::EvaluateWalkAndRegister(class IMovingEntity &,int) {
   
   *((_BYTE *)this + 5) = a3;
@@ -1989,7 +1960,6 @@ void  CSoldierRole::EvaluateWalkAndRegister(class IMovingEntity &,int) {
 
 // address=[0x1592280]
 // Decompiled from int __thiscall CSoldierRole::SoldierWarriorLogicUpdate(CSoldierRole *this, struct CSettler *a2)
-
 void  CSoldierRole::SoldierWarriorLogicUpdate(class CSettler *) {
   
   unsigned int TickCounter; // esi

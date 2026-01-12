@@ -4,7 +4,6 @@
 
 // address=[0x14a4c30]
 // Decompiled from CStateEndStatistic *__cdecl CStateEndStatistic::DynamicCreateFunc(void *a1)
-
 static class CGameState * __cdecl CStateEndStatistic::DynamicCreateFunc(void *) {
   
   CStateEndStatistic *C; // [esp+Ch] [ebp-10h]
@@ -19,7 +18,6 @@ static class CGameState * __cdecl CStateEndStatistic::DynamicCreateFunc(void *) 
 
 // address=[0x14a4cb0]
 // Decompiled from CStateEndStatistic *__thiscall CStateEndStatistic::CStateEndStatistic(CStateEndStatistic *this, void *a2)
-
  CStateEndStatistic::CStateEndStatistic(void *) {
   
   wchar_t *v2; // eax
@@ -58,7 +56,6 @@ static class CGameState * __cdecl CStateEndStatistic::DynamicCreateFunc(void *) 
 
 // address=[0x14a4dc0]
 // Decompiled from void __thiscall CStateEndStatistic::~CStateEndStatistic(CStateEndStatistic *this)
-
  CStateEndStatistic::~CStateEndStatistic(void) {
   
   *(_DWORD *)this = &CStateEndStatistic::_vftable_;
@@ -73,7 +70,6 @@ static class CGameState * __cdecl CStateEndStatistic::DynamicCreateFunc(void *) 
 
 // address=[0x14a4e40]
 // Decompiled from char __thiscall CStateEndStatistic::Perform(CStateEndStatistic *this)
-
 bool  CStateEndStatistic::Perform(void) {
   
   DWORD v1; // esi
@@ -100,7 +96,6 @@ bool  CStateEndStatistic::Perform(void) {
 
 // address=[0x14a4ee0]
 // Decompiled from char __thiscall CStateEndStatistic::OnEvent(CStateEndStatistic *this, struct CEvn_Event *a2)
-
 bool  CStateEndStatistic::OnEvent(class CEvn_Event &) {
   
   char result; // al

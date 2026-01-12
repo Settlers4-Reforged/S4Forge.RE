@@ -4,7 +4,6 @@
 
 // address=[0x1400a40]
 // Decompiled from int __cdecl CFleeRole::New(int a1)
-
 static class CPersistence * __cdecl CFleeRole::New(std::istream &) {
   
   if ( operator new(0x2Cu) )
@@ -16,7 +15,6 @@ static class CPersistence * __cdecl CFleeRole::New(std::istream &) {
 
 // address=[0x156d370]
 // Decompiled from int __thiscall CFleeRole::InitWalking(CFleeRole *this, struct CSettler *a2)
-
 class CWalking *  CFleeRole::InitWalking(class CSettler *) {
   
   int v2; // eax
@@ -31,7 +29,6 @@ class CWalking *  CFleeRole::InitWalking(class CSettler *) {
 
 // address=[0x156d3b0]
 // Decompiled from char __thiscall CFleeRole::LogicUpdate(CFleeRole *this, struct CSettler *a2)
-
 void  CFleeRole::LogicUpdate(class CSettler *) {
   
   int v2; // eax
@@ -170,10 +167,7 @@ void  CFleeRole::LogicUpdate(class CSettler *) {
 
 
 // address=[0x156d730]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CFleeRole::UpdateJob(CFleeRole *this, struct CSettler *a2)
-
+// Decompiled from void __thiscall CFleeRole::UpdateJob(CFleeRole *this, struct CSettler *a2)
 void  CFleeRole::UpdateJob(class CSettler *) {
   
   ;
@@ -182,7 +176,6 @@ void  CFleeRole::UpdateJob(class CSettler *) {
 
 // address=[0x156d740]
 // Decompiled from int __stdcall CFleeRole::PostLoadInit(CPropertySet *a1)
-
 void  CFleeRole::PostLoadInit(class CSettler *) {
   
   return CWarMap::AddEntity(a1);
@@ -191,7 +184,6 @@ void  CFleeRole::PostLoadInit(class CSettler *) {
 
 // address=[0x156d760]
 // Decompiled from char __thiscall CFleeRole::SetFree(CFleeRole *this, struct CSettler *a2, int a3)
-
 bool  CFleeRole::SetFree(class CSettler *,int) {
   
   return 0;
@@ -200,7 +192,6 @@ bool  CFleeRole::SetFree(class CSettler *,int) {
 
 // address=[0x156d770]
 // Decompiled from char __thiscall CFleeRole::ESChanged(CFleeRole *this, struct CSettler *a2)
-
 bool  CFleeRole::ESChanged(class CSettler *) {
   
   return 0;
@@ -209,7 +200,6 @@ bool  CFleeRole::ESChanged(class CSettler *) {
 
 // address=[0x156d780]
 // Decompiled from char *__thiscall CFleeRole::CFleeRole(char *this, int a2)
-
  CFleeRole::CFleeRole(std::istream &) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
@@ -236,7 +226,6 @@ bool  CFleeRole::ESChanged(class CSettler *) {
 
 // address=[0x156d830]
 // Decompiled from int __thiscall CFleeRole::Store(struct CPersistence *this, struct std::ostream *a2)
-
 void  CFleeRole::Store(std::ostream &) {
   
   int v3[2]; // [esp+0h] [ebp-8h] BYREF
@@ -250,7 +239,6 @@ void  CFleeRole::Store(std::ostream &) {
 
 // address=[0x156dbc0]
 // Decompiled from int __thiscall CFleeRole::ClassID(CFleeRole *this)
-
 unsigned long  CFleeRole::ClassID(void)const {
   
   return CFleeRole::m_iClassID;
@@ -259,7 +247,6 @@ unsigned long  CFleeRole::ClassID(void)const {
 
 // address=[0x156dbe0]
 // Decompiled from int __thiscall CFleeRole::GetSettlerRole(CFleeRole *this)
-
 int  CFleeRole::GetSettlerRole(void)const {
   
   return 18;
@@ -267,10 +254,7 @@ int  CFleeRole::GetSettlerRole(void)const {
 
 
 // address=[0x156dc00]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CFleeRole::LogicUpdateJob(CFleeRole *this, struct CSettler *a2)
-
+// Decompiled from void __thiscall CFleeRole::LogicUpdateJob(CFleeRole *this, struct CSettler *a2)
 void  CFleeRole::LogicUpdateJob(class CSettler *) {
   
   ;
@@ -279,7 +263,6 @@ void  CFleeRole::LogicUpdateJob(class CSettler *) {
 
 // address=[0x15885c0]
 // Decompiled from int __cdecl CFleeRole::Load(int a1)
-
 static class CFleeRole * __cdecl CFleeRole::Load(std::istream &) {
   
   void **v1; // eax
@@ -295,7 +278,6 @@ static class CFleeRole * __cdecl CFleeRole::Load(std::istream &) {
 
 // address=[0x156d870]
 // Decompiled from CFleeRole *__thiscall CFleeRole::CFleeRole(CFleeRole *this)
-
  CFleeRole::CFleeRole(void) {
   
   ISettlerRole::ISettlerRole(this);
@@ -306,7 +288,6 @@ static class CFleeRole * __cdecl CFleeRole::Load(std::istream &) {
 
 // address=[0x156d890]
 // Decompiled from void __thiscall CFleeRole::~CFleeRole(_AFX_OLE_STATE *this)
-
  CFleeRole::~CFleeRole(void) {
   
   *(_DWORD *)this = &CFleeRole::_vftable_;
@@ -316,7 +297,6 @@ static class CFleeRole * __cdecl CFleeRole::Load(std::istream &) {
 
 // address=[0x156d8b0]
 // Decompiled from int __thiscall CFleeRole::GetNextJob(CFleeRole *this, struct CSettler *a2)
-
 void  CFleeRole::GetNextJob(class CSettler *) {
   
   return (*(int (__thiscall **)(CFleeRole *, struct CSettler *))(*(_DWORD *)this + 40))(this, a2);
@@ -325,7 +305,6 @@ void  CFleeRole::GetNextJob(class CSettler *) {
 
 // address=[0x156d8d0]
 // Decompiled from void __thiscall CFleeRole::TakeJob(CFleeRole *this, struct CSettler *a2)
-
 void  CFleeRole::TakeJob(class CSettler *) {
   
   const struct CEntityTask *ActualTask; // eax
@@ -339,7 +318,6 @@ void  CFleeRole::TakeJob(class CSettler *) {
 
 // address=[0x156d910]
 // Decompiled from int __thiscall CFleeRole::Init(_BYTE *this, CPropertySet *a2)
-
 void  CFleeRole::Init(class CSettler *) {
   
   int result; // eax
@@ -369,7 +347,6 @@ void  CFleeRole::Init(class CSettler *) {
 
 // address=[0x156d9b0]
 // Decompiled from int __thiscall CFleeRole::ConvertEventIntoGoal(CFleeRole *this, struct CSettler *a2, struct CEntityEvent *a3)
-
 void  CFleeRole::ConvertEventIntoGoal(class CSettler *,class CEntityEvent *) {
   
   int result; // eax

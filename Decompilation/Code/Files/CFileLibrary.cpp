@@ -3,9 +3,7 @@
 // Definitions for class CFileLibrary
 
 // address=[0x2f099d0]
-// Decompiled from // public: unsigned int __thiscall CFileLibrary::FileSize(wchar_t const *)
-int __stdcall CFileLibrary::FileSize(wchar_t *String)
-
+// Decompiled from int __stdcall CFileLibrary::FileSize(wchar_t *String)
 unsigned int  CFileLibrary::FileSize(wchar_t const *) {
   
   int Directory; // [esp+0h] [ebp-420h]
@@ -42,7 +40,6 @@ unsigned int  CFileLibrary::FileSize(wchar_t const *) {
 
 // address=[0x2f09ae0]
 // Decompiled from int __thiscall CFileLibrary::FileSize(CFileLibrary *this, unsigned int a2)
-
 unsigned int  CFileLibrary::FileSize(unsigned int) {
   
   struct FLIntHandleStruct *IntHandlePtr; // [esp+4h] [ebp-4h]
@@ -65,7 +62,6 @@ unsigned int  CFileLibrary::FileSize(unsigned int) {
 
 // address=[0x2f09b40]
 // Decompiled from CFileLibrary *__thiscall CFileLibrary::UnmapFile(CFileLibrary *this, unsigned int a2)
-
 void  CFileLibrary::UnmapFile(void *) {
   
   CFileLibrary *result; // eax
@@ -96,7 +92,6 @@ void  CFileLibrary::UnmapFile(void *) {
 
 // address=[0x2f09c70]
 // Decompiled from bool __stdcall CFileLibrary::DoesFileExistInLib(wchar_t *String)
-
 bool  CFileLibrary::DoesFileExistInLib(wchar_t const *) {
   
   int Directory; // [esp+0h] [ebp-420h]
@@ -116,7 +111,6 @@ bool  CFileLibrary::DoesFileExistInLib(wchar_t const *) {
 
 // address=[0x2f09d30]
 // Decompiled from int __thiscall CFileLibrary::MapFile(CFileLibrary *this, unsigned int a2)
-
 void *  CFileLibrary::MapFile(unsigned int) {
   
   DWORD LastError; // eax
@@ -171,7 +165,6 @@ void *  CFileLibrary::MapFile(unsigned int) {
 
 // address=[0x2f09ef0]
 // Decompiled from unsigned int __thiscall CFileLibrary::FileOpen(_DWORD *this, wchar_t *String, int Size)
-
 unsigned int  CFileLibrary::FileOpen(wchar_t const *,int) {
   
   FLIntHandleStruct *v4; // [esp+10h] [ebp-44Ch]
@@ -258,7 +251,6 @@ unsigned int  CFileLibrary::FileOpen(wchar_t const *,int) {
 
 // address=[0x2f0a220]
 // Decompiled from CFileLibrary *__thiscall CFileLibrary::FileClose(CFileLibrary *this, unsigned int a2)
-
 void  CFileLibrary::FileClose(unsigned int) {
   
   CFileLibrary *result; // eax
@@ -291,7 +283,6 @@ void  CFileLibrary::FileClose(unsigned int) {
 
 // address=[0x2f0a2e0]
 // Decompiled from int __thiscall CFileLibrary::FileSeek(CFileLibrary *this, unsigned int a2, int a3, int a4)
-
 unsigned int  CFileLibrary::FileSeek(unsigned int,long,int) {
   
   int v5; // [esp+10h] [ebp-Ch]
@@ -350,7 +341,6 @@ unsigned int  CFileLibrary::FileSeek(unsigned int,long,int) {
 
 // address=[0x2f0a420]
 // Decompiled from size_t __thiscall CFileLibrary::FileRead(_DWORD *this, int a2, char *lpBuffer, size_t Size)
-
 unsigned int  CFileLibrary::FileRead(unsigned int,void *,unsigned int) {
   
   DWORD v5; // [esp+4h] [ebp-48h] BYREF
@@ -567,7 +557,6 @@ unsigned int  CFileLibrary::FileRead(unsigned int,void *,unsigned int) {
 
 // address=[0x2f0a9d0]
 // Decompiled from int __thiscall CFileLibrary::AddFileLibrary(CFileLibrary *this, LPCWSTR lpFileName, int a3)
-
 int  CFileLibrary::AddFileLibrary(wchar_t const *,int) {
   
   size_t v4; // eax
@@ -973,7 +962,6 @@ int  CFileLibrary::AddFileLibrary(wchar_t const *,int) {
 
 // address=[0x2f0b6c0]
 // Decompiled from int __thiscall CFileLibrary::ListFilesInLib(_DWORD *this, int a2, char a3)
-
 class std::vector<struct std::pair<std::wstring,std::wstring >,class std::allocator<struct std::pair<std::wstring,std::wstring > > >  CFileLibrary::ListFilesInLib(wchar_t const *) {
   
   char v4; // [esp-1Ch] [ebp-94h] BYREF
@@ -1068,7 +1056,6 @@ class std::vector<struct std::pair<std::wstring,std::wstring >,class std::alloca
 
 // address=[0x2f0b8c0]
 // Decompiled from int __thiscall CFileLibrary::DumpFilesInLib(CFileLibrary *this, const wchar_t *a2, wchar_t *String)
-
 void  CFileLibrary::DumpFilesInLib(wchar_t const *,wchar_t const *) {
   
   wchar_t *v4; // eax
@@ -1220,7 +1207,6 @@ void  CFileLibrary::DumpFilesInLib(wchar_t const *,wchar_t const *) {
 
 // address=[0x2f0bd30]
 // Decompiled from void __thiscall CFileLibrary::InitFileLibraries(CFileLibrary *this)
-
 void  CFileLibrary::InitFileLibraries(void) {
   
   CFileLibrary::pFreeFLData(this);
@@ -1228,9 +1214,7 @@ void  CFileLibrary::InitFileLibraries(void) {
 
 
 // address=[0x2f0bd50]
-// Decompiled from // public: void __thiscall CFileLibrary::C_Init(void)
-void __thiscall CFileLibrary::C_Init(CFileLibrary *this)
-
+// Decompiled from void __thiscall CFileLibrary::C_Init(CFileLibrary *this)
 void  CFileLibrary::C_Init(void) {
   
   CFileLibrary::pFreeFLCreationData(this);
@@ -1239,7 +1223,6 @@ void  CFileLibrary::C_Init(void) {
 
 // address=[0x2f0bd70]
 // Decompiled from wchar_t *__thiscall CFileLibrary::C_AddPath(_DWORD *this, wchar_t *String, int a3, wchar_t *Source, wchar_t *a5)
-
 void  CFileLibrary::C_AddPath(wchar_t const *,int,wchar_t const *,wchar_t const *) {
   
   wchar_t *result; // eax
@@ -1304,13 +1287,7 @@ void  CFileLibrary::C_AddPath(wchar_t const *,int,wchar_t const *,wchar_t const 
 
 
 // address=[0x2f0bfc0]
-// Decompiled from int __thiscall CFileLibrary::C_CreateFileLibrary(
-        _DWORD *this,
-        LPCWSTR lpFileName,
-        CHAR *a3,
-        char a4,
-        DWORD nNumberOfBytesToRead)
-
+// Decompiled from int __thiscall CFileLibrary::C_CreateFileLibrary(  _DWORD *this,  LPCWSTR lpFileName,  CHAR *a3,  char a4,  DWORD nNumberOfBytesToRead)
 int  CFileLibrary::C_CreateFileLibrary(wchar_t const *,char *,int,int) {
   
   size_t v6; // eax
@@ -1880,7 +1857,6 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const *,char *,int,int) {
 
 // address=[0x2f0d650]
 // Decompiled from CFileLibrary *__thiscall CFileLibrary::CFileLibrary(CFileLibrary *this, int a2)
-
  CFileLibrary::CFileLibrary(int) {
   
   FLFHandleStruct *v3; // [esp+Ch] [ebp-28h]
@@ -1949,7 +1925,6 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const *,char *,int,int) {
 
 // address=[0x2f0d880]
 // Decompiled from int __thiscall CFileLibrary::~CFileLibrary(CFileLibrary *this)
-
  CFileLibrary::~CFileLibrary(void) {
   
   _DWORD *v2; // [esp+8h] [ebp-18h]
@@ -1978,7 +1953,6 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const *,char *,int,int) {
 
 // address=[0x2f08050]
 // Decompiled from char __stdcall CFileLibrary::pCutPathAndFilename(wchar_t *String, wchar_t *Destination, wchar_t *a3)
-
 bool  CFileLibrary::pCutPathAndFilename(wchar_t const *,wchar_t *,wchar_t *) {
   
   int v4; // [esp+8h] [ebp-8h]
@@ -2018,7 +1992,6 @@ bool  CFileLibrary::pCutPathAndFilename(wchar_t const *,wchar_t *,wchar_t *) {
 
 // address=[0x2f08230]
 // Decompiled from int __thiscall CFileLibrary::pGetFileLibraryHandle(CFileLibrary *this, int a2)
-
 void *  CFileLibrary::pGetFileLibraryHandle(int) {
   
   struct FLFHandleStruct *j; // [esp+4h] [ebp-10h]
@@ -2102,7 +2075,6 @@ void *  CFileLibrary::pGetFileLibraryHandle(int) {
 
 // address=[0x2f08480]
 // Decompiled from int __stdcall CFileLibrary::pC_CopyFile(LPCWSTR lpFileName, HANDLE a2, signed int nNumberOfBytesToRead, DWORD *a4)
-
 int  CFileLibrary::pC_CopyFile(wchar_t const *,void *,int,struct FLCopyProgressStruct *) {
   
   DWORD NumberOfBytesRead; // [esp+14h] [ebp-14h] BYREF
@@ -2168,7 +2140,6 @@ int  CFileLibrary::pC_CopyFile(wchar_t const *,void *,int,struct FLCopyProgressS
 
 // address=[0x2f08690]
 // Decompiled from DWORD __thiscall CFileLibrary::pC_PackFile(CFileLibrary *this, HANDLE a2, HANDLE hFile, _DWORD *a4, char a5)
-
 int  CFileLibrary::pC_PackFile(void *,void *,unsigned int *,bool) {
   
   DWORD NumberOfBytesWritten; // [esp+8h] [ebp-2Ch] BYREF
@@ -2224,7 +2195,6 @@ int  CFileLibrary::pC_PackFile(void *,void *,unsigned int *,bool) {
 
 // address=[0x2f087f0]
 // Decompiled from int __thiscall CFileLibrary::UnpackData(CFileLibrary *this, char *a2, int a3, char *a4, int a5, bool a6)
-
 int  CFileLibrary::UnpackData(char *,int,char *,int,bool) {
   
   _DWORD v7[5]; // [esp+0h] [ebp-38h] BYREF
@@ -2255,7 +2225,6 @@ int  CFileLibrary::UnpackData(char *,int,char *,int,bool) {
 
 // address=[0x2f08fb0]
 // Decompiled from CFileLibrary *__thiscall CFileLibrary::pFreeFLCreationData(CFileLibrary *this)
-
 void  CFileLibrary::pFreeFLCreationData(void) {
   
   CFileLibrary *result; // eax
@@ -2293,7 +2262,6 @@ void  CFileLibrary::pFreeFLCreationData(void) {
 
 // address=[0x2f090a0]
 // Decompiled from CFileLibrary *__thiscall CFileLibrary::pFreeFLData(CFileLibrary *this)
-
 void  CFileLibrary::pFreeFLData(void) {
   
   CFileLibrary *result; // eax
@@ -2376,7 +2344,6 @@ void  CFileLibrary::pFreeFLData(void) {
 
 // address=[0x2f09350]
 // Decompiled from CFileLibrary *__thiscall CFileLibrary::pOptimize(CFileLibrary *this)
-
 void  CFileLibrary::pOptimize(void) {
   
   CFileLibrary *result; // eax
@@ -2448,7 +2415,6 @@ void  CFileLibrary::pOptimize(void) {
 
 // address=[0x2f095f0]
 // Decompiled from DWORD __thiscall CFileLibrary::LoadEntireFile(CFileLibrary *this, unsigned int a2, char *a3, int a4, char a5)
-
 int  CFileLibrary::LoadEntireFile(unsigned int,void *,unsigned int,int) {
   
   __int16 v6; // [esp+14h] [ebp-1Ch]
@@ -2554,7 +2520,6 @@ int  CFileLibrary::LoadEntireFile(unsigned int,void *,unsigned int,int) {
 
 // address=[0x2f09890]
 // Decompiled from void __cdecl CFileLibrary::DataCryptor(unsigned __int8 *a1, int a2)
-
 static void __cdecl CFileLibrary::DataCryptor(void *,int) {
   
   int i; // [esp+8h] [ebp-7Ch]
@@ -2578,7 +2543,6 @@ static void __cdecl CFileLibrary::DataCryptor(void *,int) {
 
 // address=[0x2f09950]
 // Decompiled from unsigned int __thiscall CFileLibrary::CRC(CFileLibrary *this, _BYTE *a2, int a3)
-
 unsigned int  CFileLibrary::CRC(void *,int) {
   
   unsigned int NormalCRC; // [esp+Ch] [ebp-Ch]

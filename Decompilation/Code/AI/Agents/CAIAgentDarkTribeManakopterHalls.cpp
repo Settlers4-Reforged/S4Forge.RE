@@ -3,11 +3,7 @@
 // Definitions for class CAIAgentDarkTribeManakopterHalls
 
 // address=[0x1302dc0]
-// Decompiled from unsigned int __thiscall CAIAgentDarkTribeManakopterHalls::Execute(
-        CAIAgentDarkTribeManakopterHalls *this,
-        unsigned int a2,
-        unsigned int a3)
-
+// Decompiled from unsigned int __thiscall CAIAgentDarkTribeManakopterHalls::Execute(  CAIAgentDarkTribeManakopterHalls *this,  unsigned int a2,  unsigned int a3)
 unsigned int  CAIAgentDarkTribeManakopterHalls::Execute(unsigned int,unsigned int) {
   
   struct CAIDarkTribeSectorAI *v3; // eax
@@ -67,7 +63,6 @@ unsigned int  CAIAgentDarkTribeManakopterHalls::Execute(unsigned int,unsigned in
 
 // address=[0x1302f80]
 // Decompiled from int __thiscall CAIAgentDarkTribeManakopterHalls::Load(CAIAgentDarkTribeManakopterHalls *this, struct IS4Chunk *a2)
-
 void  CAIAgentDarkTribeManakopterHalls::Load(class IS4Chunk &) {
   
   (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 12))(a2, -1516302333);
@@ -81,7 +76,6 @@ void  CAIAgentDarkTribeManakopterHalls::Load(class IS4Chunk &) {
 
 // address=[0x1303000]
 // Decompiled from int __thiscall CAIAgentDarkTribeManakopterHalls::Save(CAIAgentDarkTribeManakopterHalls *this, struct IS4Chunk *a2)
-
 void  CAIAgentDarkTribeManakopterHalls::Save(class IS4Chunk &) {
   
   (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 24))(a2, -1516302333);
@@ -94,9 +88,7 @@ void  CAIAgentDarkTribeManakopterHalls::Save(class IS4Chunk &) {
 
 
 // address=[0x1322da0]
-// Decompiled from CAIAgentDarkTribeManakopterHalls *__thiscall CAIAgentDarkTribeManakopterHalls::CAIAgentDarkTribeManakopterHalls(
-        CAIAgentDarkTribeManakopterHalls *this)
-
+// Decompiled from CAIAgentDarkTribeManakopterHalls *__thiscall CAIAgentDarkTribeManakopterHalls::CAIAgentDarkTribeManakopterHalls(  CAIAgentDarkTribeManakopterHalls *this)
  CAIAgentDarkTribeManakopterHalls::CAIAgentDarkTribeManakopterHalls(void) {
   
   CAIDarkTribeSectorAgent::CAIDarkTribeSectorAgent(this, "manakopterhalls");
@@ -107,9 +99,7 @@ void  CAIAgentDarkTribeManakopterHalls::Save(class IS4Chunk &) {
 
 
 // address=[0x1322f00]
-// Decompiled from void __thiscall CAIAgentDarkTribeManakopterHalls::~CAIAgentDarkTribeManakopterHalls(
-        CAIAgentDarkTribeManakopterHalls *this)
-
+// Decompiled from void __thiscall CAIAgentDarkTribeManakopterHalls::~CAIAgentDarkTribeManakopterHalls(  CAIAgentDarkTribeManakopterHalls *this)
  CAIAgentDarkTribeManakopterHalls::~CAIAgentDarkTribeManakopterHalls(void) {
   
   CAIDarkTribeSectorAgent::~CAIDarkTribeSectorAgent(this);

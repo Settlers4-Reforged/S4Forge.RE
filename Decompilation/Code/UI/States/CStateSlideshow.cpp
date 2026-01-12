@@ -4,7 +4,6 @@
 
 // address=[0x14ca870]
 // Decompiled from CStateSlideshow *__cdecl CStateSlideshow::DynamicCreateFunc(void *a1)
-
 static class CGameState * __cdecl CStateSlideshow::DynamicCreateFunc(void *) {
   
   CStateSlideshow *C; // [esp+Ch] [ebp-10h]
@@ -19,7 +18,6 @@ static class CGameState * __cdecl CStateSlideshow::DynamicCreateFunc(void *) {
 
 // address=[0x14ca8f0]
 // Decompiled from CStateSlideshow *__thiscall CStateSlideshow::CStateSlideshow(CStateSlideshow *this, void *a2)
-
  CStateSlideshow::CStateSlideshow(void *) {
   
   CGameState::CGameState(this);
@@ -37,7 +35,6 @@ static class CGameState * __cdecl CStateSlideshow::DynamicCreateFunc(void *) {
 
 // address=[0x14ca9b0]
 // Decompiled from void __thiscall CStateSlideshow::~CStateSlideshow(CStateSlideshow *this)
-
  CStateSlideshow::~CStateSlideshow(void) {
   
   char v1; // [esp-38h] [ebp-74h] BYREF
@@ -72,7 +69,6 @@ static class CGameState * __cdecl CStateSlideshow::DynamicCreateFunc(void *) {
 
 // address=[0x14caa60]
 // Decompiled from char __thiscall CStateSlideshow::Perform(CStateSlideshow *this)
-
 bool  CStateSlideshow::Perform(void) {
   
   DWORD v2; // esi
@@ -112,7 +108,6 @@ bool  CStateSlideshow::Perform(void) {
 
 // address=[0x14caba0]
 // Decompiled from char __thiscall CStateSlideshow::OnEvent(CStateSlideshow *this, struct CEvn_Event *a2)
-
 bool  CStateSlideshow::OnEvent(class CEvn_Event &) {
   
   CEvn_Event *v3; // [esp+8h] [ebp-38h]

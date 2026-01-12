@@ -4,7 +4,6 @@
 
 // address=[0x1310d40]
 // Decompiled from CAIPlayerEvaluation *__thiscall CAIPlayerEvaluation::Clear(CAIPlayerEvaluation *this)
-
 void  CAIPlayerEvaluation::Clear(void) {
   
   CAIPlayerEvaluation *result; // eax
@@ -38,7 +37,6 @@ void  CAIPlayerEvaluation::Clear(void) {
 
 // address=[0x1310e30]
 // Decompiled from void __thiscall CAIPlayerEvaluation::EvaluatePlayer(CAIPlayerEvaluation *this, int a2)
-
 void  CAIPlayerEvaluation::EvaluatePlayer(int) {
   
   int Seed; // eax
@@ -61,7 +59,6 @@ void  CAIPlayerEvaluation::EvaluatePlayer(int) {
 
 // address=[0x1310ea0]
 // Decompiled from void __thiscall CAIPlayerEvaluation::DbgPrint(CAIPlayerEvaluation *this)
-
 void  CAIPlayerEvaluation::DbgPrint(void) {
   
   IAIEnvironment::DbgTracePrintF(
@@ -83,7 +80,6 @@ void  CAIPlayerEvaluation::DbgPrint(void) {
 
 // address=[0x1310f40]
 // Decompiled from void __thiscall CAIPlayerEvaluation::EvaluateGoods(CAIPlayerEvaluation *this, int a2)
-
 void  CAIPlayerEvaluation::EvaluateGoods(int) {
   
   int v2; // [esp+0h] [ebp-Ch]
@@ -121,7 +117,6 @@ void  CAIPlayerEvaluation::EvaluateGoods(int) {
 
 // address=[0x1311060]
 // Decompiled from void __thiscall CAIPlayerEvaluation::EvaluateWarriors(CAIPlayerEvaluation *this, int a2)
-
 void  CAIPlayerEvaluation::EvaluateWarriors(int) {
   
   int v2; // [esp+0h] [ebp-7Ch]
@@ -211,7 +206,6 @@ void  CAIPlayerEvaluation::EvaluateWarriors(int) {
 
 // address=[0x1311400]
 // Decompiled from char *__thiscall CAIPlayerEvaluation::EvaluateBuildings(CAIPlayerEvaluation *this, int a2)
-
 void  CAIPlayerEvaluation::EvaluateBuildings(int) {
   
   int NumberOfBuildings; // [esp+0h] [ebp-18h]

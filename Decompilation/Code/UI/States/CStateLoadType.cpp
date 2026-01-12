@@ -4,7 +4,6 @@
 
 // address=[0x14b6480]
 // Decompiled from CStateLoadType *__cdecl CStateLoadType::DynamicCreateFunc(void *a1)
-
 static class CGameState * __cdecl CStateLoadType::DynamicCreateFunc(void *) {
   
   CStateLoadType *C; // [esp+Ch] [ebp-10h]
@@ -19,7 +18,6 @@ static class CGameState * __cdecl CStateLoadType::DynamicCreateFunc(void *) {
 
 // address=[0x14b6500]
 // Decompiled from CStateLoadType *__thiscall CStateLoadType::CStateLoadType(CStateLoadType *this, void *a2)
-
  CStateLoadType::CStateLoadType(void *) {
   
   CGuiGameState::CGuiGameState(this);
@@ -32,7 +30,6 @@ static class CGameState * __cdecl CStateLoadType::DynamicCreateFunc(void *) {
 
 // address=[0x14b6570]
 // Decompiled from void __thiscall CStateLoadType::~CStateLoadType(CStateLoadType *this)
-
  CStateLoadType::~CStateLoadType(void) {
   
   *(_DWORD *)this = &CStateLoadType::_vftable_;
@@ -47,7 +44,6 @@ static class CGameState * __cdecl CStateLoadType::DynamicCreateFunc(void *) {
 
 // address=[0x14b65f0]
 // Decompiled from char __thiscall CStateLoadType::Perform(CStateLoadType *this)
-
 bool  CStateLoadType::Perform(void) {
   
   DWORD v1; // esi
@@ -74,7 +70,6 @@ bool  CStateLoadType::Perform(void) {
 
 // address=[0x14b6690]
 // Decompiled from char __thiscall CStateLoadType::OnEvent(CStateLoadType *this, struct CEvn_Event *a2)
-
 bool  CStateLoadType::OnEvent(class CEvn_Event &) {
   
   char result; // al

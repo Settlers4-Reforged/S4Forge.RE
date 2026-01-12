@@ -4,7 +4,6 @@
 
 // address=[0x146c970]
 // Decompiled from int __thiscall CMagicSpell::SettlerFlagBitChange(_DWORD *this, int a2, int a3, EntityFlag a4, int a5, int a6)
-
 int  CMagicSpell::SettlerFlagBitChange(int,int,int,int,enum SIV_SOUNDS) {
   
   int v6; // eax
@@ -71,10 +70,7 @@ int  CMagicSpell::SettlerFlagBitChange(int,int,int,int,enum SIV_SOUNDS) {
 
 
 // address=[0x146cac0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CMagicSpell::SpellDoNothing(CMagicSpell *this)
-
+// Decompiled from int __thiscall CMagicSpell::SpellDoNothing(CMagicSpell *this)
 int  CMagicSpell::SpellDoNothing(void) {
   
   return 0;
@@ -83,7 +79,6 @@ int  CMagicSpell::SpellDoNothing(void) {
 
 // address=[0x146cad0]
 // Decompiled from int __thiscall CMagicSpell::SpellDivinePresent(_DWORD *this)
-
 int  CMagicSpell::SpellDivinePresent(void) {
   
   int v1; // eax
@@ -203,7 +198,6 @@ int  CMagicSpell::SpellDivinePresent(void) {
 
 // address=[0x146ce20]
 // Decompiled from int __thiscall CMagicSpell::SpellConvertGood(CMagicSpell *this)
-
 int  CMagicSpell::SpellConvertGood(void) {
   
   int v1; // eax
@@ -285,7 +279,6 @@ int  CMagicSpell::SpellConvertGood(void) {
 
 // address=[0x146d010]
 // Decompiled from unsigned int __thiscall CMagicSpell::SpellConvertTerrain(CMagicSpell *this)
-
 int  CMagicSpell::SpellConvertTerrain(void) {
   
   _DWORD v2[4]; // [esp+0h] [ebp-54h] BYREF
@@ -364,7 +357,6 @@ int  CMagicSpell::SpellConvertTerrain(void) {
 
 // address=[0x146d220]
 // Decompiled from int __thiscall CMagicSpell::SpellFoodMoreFish(CMagicSpell *this)
-
 int  CMagicSpell::SpellFoodMoreFish(void) {
   
   char v1; // al
@@ -470,7 +462,6 @@ int  CMagicSpell::SpellFoodMoreFish(void) {
 
 // address=[0x146d460]
 // Decompiled from int __thiscall CMagicSpell::SpellDefenceShield(CMagicSpell *this)
-
 int  CMagicSpell::SpellDefenceShield(void) {
   
   int v2; // [esp+8h] [ebp-8h]
@@ -482,7 +473,6 @@ int  CMagicSpell::SpellDefenceShield(void) {
 
 // address=[0x146d4b0]
 // Decompiled from int __thiscall CMagicSpell::SpellAttackLightningBolt(CMagicSpell *this)
-
 int  CMagicSpell::SpellAttackLightningBolt(void) {
   
   unsigned int v1; // eax
@@ -562,7 +552,6 @@ int  CMagicSpell::SpellAttackLightningBolt(void) {
 
 // address=[0x146d650]
 // Decompiled from int __thiscall CMagicSpell::SpellSoldierConvertBarbarians(CMagicSpell *this)
-
 int  CMagicSpell::SpellSoldierConvertBarbarians(void) {
   
   int v1; // eax
@@ -676,7 +665,6 @@ int  CMagicSpell::SpellSoldierConvertBarbarians(void) {
 
 // address=[0x146d870]
 // Decompiled from int __thiscall CMagicSpell::SpellSpecialMoreResources(CMagicSpell *this)
-
 int  CMagicSpell::SpellSpecialMoreResources(void) {
   
   int v1; // esi
@@ -787,7 +775,6 @@ int  CMagicSpell::SpellSpecialMoreResources(void) {
 
 // address=[0x146dae0]
 // Decompiled from int __thiscall CMagicSpell::SpellFoodMoreGame(_DWORD *this)
-
 int  CMagicSpell::SpellFoodMoreGame(void) {
   
   int v1; // eax
@@ -849,7 +836,6 @@ int  CMagicSpell::SpellFoodMoreGame(void) {
 
 // address=[0x146dc80]
 // Decompiled from int __thiscall CMagicSpell::SpellDefenceFreezeFoes(CMagicSpell *this)
-
 int  CMagicSpell::SpellDefenceFreezeFoes(void) {
   
   int v2; // [esp+8h] [ebp-8h]
@@ -861,7 +847,6 @@ int  CMagicSpell::SpellDefenceFreezeFoes(void) {
 
 // address=[0x146dcd0]
 // Decompiled from int __thiscall CMagicSpell::SpellAttackBloodlust(CMagicSpell *this)
-
 int  CMagicSpell::SpellAttackBloodlust(void) {
   
   int v2; // [esp+8h] [ebp-8h]
@@ -873,7 +858,6 @@ int  CMagicSpell::SpellAttackBloodlust(void) {
 
 // address=[0x146dd20]
 // Decompiled from int __thiscall CMagicSpell::SpellSoldierFear(CMagicSpell *this)
-
 int  CMagicSpell::SpellSoldierFear(void) {
   
   int v2; // [esp+8h] [ebp-8h]
@@ -885,7 +869,6 @@ int  CMagicSpell::SpellSoldierFear(void) {
 
 // address=[0x146dd70]
 // Decompiled from int __thiscall CMagicSpell::SpellSpecialThorsHammer(CMagicSpell *this)
-
 int  CMagicSpell::SpellSpecialThorsHammer(void) {
   
   int v1; // eax
@@ -940,7 +923,6 @@ int  CMagicSpell::SpellSpecialThorsHammer(void) {
 
 // address=[0x146deb0]
 // Decompiled from int __thiscall CMagicSpell::SpellFoodFasterCrops(_DWORD *this)
-
 int  CMagicSpell::SpellFoodFasterCrops(void) {
   
   void **v2; // [esp+10h] [ebp-34h]
@@ -1004,7 +986,6 @@ int  CMagicSpell::SpellFoodFasterCrops(void) {
 
 // address=[0x146e020]
 // Decompiled from int __thiscall CMagicSpell::SpellDefenceBanFoes(CMagicSpell *this)
-
 int  CMagicSpell::SpellDefenceBanFoes(void) {
   
   int v1; // eax
@@ -1152,7 +1133,6 @@ int  CMagicSpell::SpellDefenceBanFoes(void) {
 
 // address=[0x146e350]
 // Decompiled from int __thiscall CMagicSpell::SpellAttackPunishBowmen(CMagicSpell *this)
-
 int  CMagicSpell::SpellAttackPunishBowmen(void) {
   
   int v1; // eax
@@ -1208,7 +1188,6 @@ int  CMagicSpell::SpellAttackPunishBowmen(void) {
 
 // address=[0x146e440]
 // Decompiled from int __thiscall CMagicSpell::SpellSoldierRevaluation(CMagicSpell *this)
-
 int  CMagicSpell::SpellSoldierRevaluation(void) {
   
   int v1; // eax
@@ -1355,7 +1334,6 @@ int  CMagicSpell::SpellSoldierRevaluation(void) {
 
 // address=[0x146e740]
 // Decompiled from int __thiscall CMagicSpell::SpellSpecialRainOfStone(CMagicSpell *this)
-
 int  CMagicSpell::SpellSpecialRainOfStone(void) {
   
   char v1; // al
@@ -1418,7 +1396,6 @@ int  CMagicSpell::SpellSpecialRainOfStone(void) {
 
 // address=[0x146e940]
 // Decompiled from int __thiscall CMagicSpell::SpellWitherPlants(CMagicSpell *this)
-
 int  CMagicSpell::SpellWitherPlants(void) {
   
   int v1; // ecx
@@ -1457,7 +1434,6 @@ int  CMagicSpell::SpellWitherPlants(void) {
 
 // address=[0x146e9f0]
 // Decompiled from int __thiscall CMagicSpell::SpellTeleportPiles(CMagicSpell *this)
-
 int  CMagicSpell::SpellTeleportPiles(void) {
   
   int v1; // esi
@@ -1532,7 +1508,6 @@ int  CMagicSpell::SpellTeleportPiles(void) {
 
 // address=[0x146ebc0]
 // Decompiled from int __thiscall CMagicSpell::SpellFoodRestockMines(CMagicSpell *this)
-
 int  CMagicSpell::SpellFoodRestockMines(void) {
   
   void **v1; // eax
@@ -1589,7 +1564,6 @@ int  CMagicSpell::SpellFoodRestockMines(void) {
 
 // address=[0x146ed10]
 // Decompiled from int __thiscall CMagicSpell::SpellDefenceFortifyDoors(CMagicSpell *this)
-
 int  CMagicSpell::SpellDefenceFortifyDoors(void) {
   
   void **v1; // eax
@@ -1645,7 +1619,6 @@ int  CMagicSpell::SpellDefenceFortifyDoors(void) {
 
 // address=[0x146ee70]
 // Decompiled from int __thiscall CMagicSpell::SpellAttackInvisibility(CMagicSpell *this)
-
 int  CMagicSpell::SpellAttackInvisibility(void) {
   
   int v1; // eax
@@ -1657,7 +1630,6 @@ int  CMagicSpell::SpellAttackInvisibility(void) {
 
 // address=[0x146eea0]
 // Decompiled from int __thiscall CMagicSpell::SpellSoldierPacify(CMagicSpell *this)
-
 int  CMagicSpell::SpellSoldierPacify(void) {
   
   int v1; // eax
@@ -1756,7 +1728,6 @@ LABEL_11:
 
 // address=[0x146f100]
 // Decompiled from int __thiscall CMagicSpell::SpellSpecialOracle(CMagicSpell *this)
-
 int  CMagicSpell::SpellSpecialOracle(void) {
   
   int TickCounter; // esi
@@ -1778,7 +1749,6 @@ int  CMagicSpell::SpellSpecialOracle(void) {
 
 // address=[0x146f170]
 // Decompiled from int *__cdecl CMagicSpell::ShowSpellEffect(int a1, int a2, int a3, int a4)
-
 static void __cdecl CMagicSpell::ShowSpellEffect(int,int,int,int) {
   
   int *result; // eax
@@ -1821,18 +1791,7 @@ static void __cdecl CMagicSpell::ShowSpellEffect(int,int,int,int) {
 
 
 // address=[0x14704b0]
-// Decompiled from CMagicSpell *__thiscall CMagicSpell::CMagicSpell(
-        CMagicSpell *this,
-        int a2,
-        int a3,
-        int a4,
-        int a5,
-        int a6,
-        int a7,
-        int a8,
-        int a9,
-        int a10)
-
+// Decompiled from CMagicSpell *__thiscall CMagicSpell::CMagicSpell(  CMagicSpell *this,  int a2,  int a3,  int a4,  int a5,  int a6,  int a7,  int a8,  int a9,  int a10)
  CMagicSpell::CMagicSpell(int,int,int,int,int,int,int,int,int) {
   
   *(_DWORD *)this = a2;
@@ -1850,7 +1809,6 @@ static void __cdecl CMagicSpell::ShowSpellEffect(int,int,int,int) {
 
 // address=[0x14708b0]
 // Decompiled from int __thiscall CMagicSpell::CastSpell(CMagicSpell *this, int a2, int a3)
-
 int  CMagicSpell::CastSpell(int,int) {
   
   return ((int (__thiscall *)(CMagicSpell *, CMagicSpell *))*(&CMagicSpell::m_pSpellFuncs[8 * a2] + a3))(this, this);
@@ -1859,7 +1817,6 @@ int  CMagicSpell::CastSpell(int,int) {
 
 // address=[0x14709e0]
 // Decompiled from int __cdecl CMagicSpell::InvisibleKill(struct IEntity *a1)
-
 static void __cdecl CMagicSpell::InvisibleKill(class IEntity *) {
   
   int v2; // [esp+0h] [ebp-4h]

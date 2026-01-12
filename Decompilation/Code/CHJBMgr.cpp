@@ -4,7 +4,6 @@
 
 // address=[0x1574510]
 // Decompiled from bool __thiscall CHJBMgr::LocalLoadHJBGfxFileIfNecessary(CHJBMgr *this)
-
 bool  CHJBMgr::LocalLoadHJBGfxFileIfNecessary(void) {
   
   bool v2; // [esp+Fh] [ebp-1h]
@@ -23,7 +22,6 @@ bool  CHJBMgr::LocalLoadHJBGfxFileIfNecessary(void) {
 
 // address=[0x15745a0]
 // Decompiled from bool __thiscall CHJBMgr::StaticCheckHJBCommand(CHJBMgr *this, const char *a2)
-
 bool  CHJBMgr::StaticCheckHJBCommand(char const *) {
   
   if ( !a2 )
@@ -34,7 +32,6 @@ bool  CHJBMgr::StaticCheckHJBCommand(char const *) {
 
 // address=[0x1574630]
 // Decompiled from char __stdcall CHJBMgr::StaticCheckHJBPlayerName(int a1)
-
 bool  CHJBMgr::StaticCheckHJBPlayerName(std::wstring const &) {
   
   int v2; // [esp+4h] [ebp-28h]
@@ -50,7 +47,6 @@ bool  CHJBMgr::StaticCheckHJBPlayerName(std::wstring const &) {
 
 // address=[0x1574690]
 // Decompiled from void __thiscall CHJBMgr::ProcessHJBRequest(CHJBMgr *this, int a2)
-
 void  CHJBMgr::ProcessHJBRequest(int) {
   
   int v2; // [esp+0h] [ebp-10h]
@@ -70,7 +66,6 @@ void  CHJBMgr::ProcessHJBRequest(int) {
 
 // address=[0x1574720]
 // Decompiled from void __thiscall CHJBMgr::ProcessHJBAcknowledgement(CHJBMgr *this, int a2, int a3)
-
 void  CHJBMgr::ProcessHJBAcknowledgement(int,int) {
   
   int PlayerId; // [esp+0h] [ebp-10h]
@@ -110,7 +105,6 @@ void  CHJBMgr::ProcessHJBAcknowledgement(int,int) {
 
 // address=[0x15748b0]
 // Decompiled from CHJBMgr *__thiscall CHJBMgr::CHJBMgr(CHJBMgr *this)
-
  CHJBMgr::CHJBMgr(void) {
   
   IHJBMgr::IHJBMgr(this);
@@ -124,7 +118,6 @@ void  CHJBMgr::ProcessHJBAcknowledgement(int,int) {
 
 // address=[0x1574820]
 // Decompiled from void __thiscall CHJBMgr::InitHJBManager(CHJBMgr *this)
-
 void  CHJBMgr::InitHJBManager(void) {
   
   IHJBMgr::m_iHJBPlayerId = 0;
@@ -135,7 +128,6 @@ void  CHJBMgr::InitHJBManager(void) {
 
 // address=[0x1574850]
 // Decompiled from char __thiscall CHJBMgr::LocalIsHJBAllowedEx(CHJBMgr *this)
-
 bool  CHJBMgr::LocalIsHJBAllowedEx(void) {
   
   int v2; // [esp+0h] [ebp-Ch]
@@ -161,7 +153,6 @@ bool  CHJBMgr::LocalIsHJBAllowedEx(void) {
 
 // address=[0x15748f0]
 // Decompiled from void __thiscall CHJBMgr::ActivateHJB(CHJBMgr *this, int a2)
-
 void  CHJBMgr::ActivateHJB(int) {
   
   if ( a2 >= 1 && a2 <= 8 && !IHJBMgr::m_iHJBPlayerId )
@@ -180,7 +171,6 @@ void  CHJBMgr::ActivateHJB(int) {
 
 // address=[0x1574960]
 // Decompiled from char __thiscall CHJBMgr::CheckHJBDatFile(CHJBMgr *this)
-
 bool  CHJBMgr::CheckHJBDatFile(void) {
   
   wchar_t *v2; // eax
@@ -250,7 +240,6 @@ bool  CHJBMgr::CheckHJBDatFile(void) {
 
 // address=[0x1574d90]
 // Decompiled from void *__thiscall CHJBMgr::ClearRequest(CHJBMgr *this)
-
 void  CHJBMgr::ClearRequest(void) {
   
   *((_DWORD *)this + 1) = 0;

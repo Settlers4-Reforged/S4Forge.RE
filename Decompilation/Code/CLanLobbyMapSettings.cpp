@@ -4,7 +4,6 @@
 
 // address=[0x14c0630]
 // Decompiled from CLanLobbyMapSettings *__thiscall CLanLobbyMapSettings::CLanLobbyMapSettings(CLanLobbyMapSettings *this)
-
  CLanLobbyMapSettings::CLanLobbyMapSettings(void) {
   
   std::string::string();
@@ -16,7 +15,6 @@
 
 // address=[0x14c06b0]
 // Decompiled from void __thiscall CLanLobbyMapSettings::~CLanLobbyMapSettings(CLanLobbyMapSettings *this)
-
  CLanLobbyMapSettings::~CLanLobbyMapSettings(void) {
   
   std::string::~string((char *)this + 108);

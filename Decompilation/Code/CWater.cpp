@@ -4,7 +4,6 @@
 
 // address=[0x15fc7f0]
 // Decompiled from CWater *__thiscall CWater::CWater(CWater *this)
-
  CWater::CWater(void) {
   
   if ( CWater::m_iInstanceCounter
@@ -21,7 +20,6 @@
 
 // address=[0x15fc860]
 // Decompiled from int __thiscall CWater::~CWater(CWater *this)
-
  CWater::~CWater(void) {
   
   int result; // eax
@@ -39,7 +37,6 @@
 
 // address=[0x15fc8d0]
 // Decompiled from int __cdecl CWater::Init(unsigned __int16 *a1)
-
 static void __cdecl CWater::Init(unsigned short *) {
   
   int result; // eax
@@ -54,7 +51,6 @@ static void __cdecl CWater::Init(unsigned short *) {
 
 // address=[0x15fc900]
 // Decompiled from int CWater::Done()
-
 static void __cdecl CWater::Done(void) {
   
   int result; // eax
@@ -70,7 +66,6 @@ static void __cdecl CWater::Done(void) {
 
 // address=[0x15fc930]
 // Decompiled from char __cdecl CWater::PlaceShip(int a1)
-
 static bool __cdecl CWater::PlaceShip(int) {
   
   int v2; // [esp+0h] [ebp-Ch]
@@ -91,7 +86,6 @@ static bool __cdecl CWater::PlaceShip(int) {
 
 // address=[0x15fc9b0]
 // Decompiled from bool __cdecl CWater::IsPlaceShipOk(int a1)
-
 static bool __cdecl CWater::IsPlaceShipOk(int) {
   
   int v2; // [esp+0h] [ebp-10h]
@@ -111,7 +105,6 @@ static bool __cdecl CWater::IsPlaceShipOk(int) {
 
 // address=[0x15fca50]
 // Decompiled from char __cdecl CWater::RemoveShip(int a1)
-
 static bool __cdecl CWater::RemoveShip(int) {
   
   if ( !CShipMap::RemoveShip(a1) )
@@ -123,7 +116,6 @@ static bool __cdecl CWater::RemoveShip(int) {
 
 // address=[0x15fca80]
 // Decompiled from char __cdecl CWater::MoveShip(int a1, int a2)
-
 static bool __cdecl CWater::MoveShip(int,int) {
   
   bool v3; // [esp+1h] [ebp-1h]
@@ -170,9 +162,7 @@ static bool __cdecl CWater::MoveShip(int,int) {
 
 
 // address=[0x15fcbf0]
-// Decompiled from // public: static bool __cdecl CWater::PlacePseudoShip(int)
-bool __cdecl CWater::PlacePseudoShip(int a1)
-
+// Decompiled from bool __cdecl CWater::PlacePseudoShip(int a1)
 static bool __cdecl CWater::PlacePseudoShip(int) {
   
   int v2; // [esp+0h] [ebp-10h]
@@ -192,9 +182,7 @@ static bool __cdecl CWater::PlacePseudoShip(int) {
 
 
 // address=[0x15fcca0]
-// Decompiled from // public: static bool __cdecl CWater::RemovePseudoShip(int)
-bool __cdecl CWater::RemovePseudoShip(int a1)
-
+// Decompiled from bool __cdecl CWater::RemovePseudoShip(int a1)
 static bool __cdecl CWater::RemovePseudoShip(int) {
   
   int v2; // [esp+0h] [ebp-10h]

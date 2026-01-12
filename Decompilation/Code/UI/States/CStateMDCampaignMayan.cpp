@@ -4,7 +4,6 @@
 
 // address=[0x14c65f0]
 // Decompiled from CStateMDCampaignMayan *__cdecl CStateMDCampaignMayan::DynamicCreateFunc(void *a1)
-
 static class CGameState * __cdecl CStateMDCampaignMayan::DynamicCreateFunc(void *) {
   
   CStateMDCampaignMayan *C; // [esp+Ch] [ebp-10h]
@@ -19,7 +18,6 @@ static class CGameState * __cdecl CStateMDCampaignMayan::DynamicCreateFunc(void 
 
 // address=[0x14c6670]
 // Decompiled from CStateMDCampaignMayan *__thiscall CStateMDCampaignMayan::CStateMDCampaignMayan(CStateMDCampaignMayan *this, void *a2)
-
  CStateMDCampaignMayan::CStateMDCampaignMayan(void *) {
   
   CGuiGameState::CGuiGameState(this);
@@ -36,7 +34,6 @@ static class CGameState * __cdecl CStateMDCampaignMayan::DynamicCreateFunc(void 
 
 // address=[0x14c6730]
 // Decompiled from void __thiscall CStateMDCampaignMayan::~CStateMDCampaignMayan(CStateMDCampaignMayan *this)
-
  CStateMDCampaignMayan::~CStateMDCampaignMayan(void) {
   
   *(_DWORD *)this = &CStateMDCampaignMayan::_vftable_;
@@ -47,7 +44,6 @@ static class CGameState * __cdecl CStateMDCampaignMayan::DynamicCreateFunc(void 
 
 // address=[0x14c6790]
 // Decompiled from char __thiscall CStateMDCampaignMayan::Perform(CStateMDCampaignMayan *this)
-
 bool  CStateMDCampaignMayan::Perform(void) {
   
   DWORD v2; // esi
@@ -84,7 +80,6 @@ bool  CStateMDCampaignMayan::Perform(void) {
 
 // address=[0x14c6870]
 // Decompiled from char __thiscall CStateMDCampaignMayan::OnEvent(CStateMDCampaignMayan *this, struct CEvn_Event *a2)
-
 bool  CStateMDCampaignMayan::OnEvent(class CEvn_Event &) {
   
   CEvn_Event *v3; // [esp+Ch] [ebp-38h]
@@ -118,9 +113,7 @@ bool  CStateMDCampaignMayan::OnEvent(class CEvn_Event &) {
 
 
 // address=[0x14c6ab0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-char __thiscall CStateMDCampaignMayan::CanProcessInvites(CStateMDCampaignMayan *this)
-
+// Decompiled from char __thiscall CStateMDCampaignMayan::CanProcessInvites(CStateMDCampaignMayan *this)
 bool  CStateMDCampaignMayan::CanProcessInvites(void) {
   
   return 0;

@@ -4,7 +4,6 @@
 
 // address=[0x1400400]
 // Decompiled from void __cdecl CDeliverPileRole::New(struct std::_Facet_base *a1)
-
 static class CPersistence * __cdecl CDeliverPileRole::New(std::istream &) {
   
   if ( operator new(8u) )
@@ -14,7 +13,6 @@ static class CPersistence * __cdecl CDeliverPileRole::New(std::istream &) {
 
 // address=[0x155b880]
 // Decompiled from int __thiscall CDeliverPileRole::Init(CDeliverPileRole *this, struct CPile *a2)
-
 void  CDeliverPileRole::Init(class CPile *) {
   
   int v2; // eax
@@ -51,7 +49,6 @@ void  CDeliverPileRole::Init(class CPile *) {
 
 // address=[0x155b920]
 // Decompiled from int __thiscall CDeliverPileRole::LogicUpdate(CDeliverPileRole *this, struct CPile *a2)
-
 void  CDeliverPileRole::LogicUpdate(class CPile *) {
   
   int result; // eax
@@ -100,7 +97,6 @@ void  CDeliverPileRole::LogicUpdate(class CPile *) {
 
 // address=[0x155ba20]
 // Decompiled from unsigned __int8 *__thiscall CDeliverPileRole::Increase(CDeliverPileRole *this, struct CPile *a2, int a3)
-
 void  CDeliverPileRole::Increase(class CPile *,int) {
   
   int BuildingId; // eax
@@ -129,7 +125,6 @@ void  CDeliverPileRole::Increase(class CPile *,int) {
 
 // address=[0x155bae0]
 // Decompiled from void __thiscall CDeliverPileRole::SubjectStopped(CDeliverPileRole *this, struct CPile *a2)
-
 void  CDeliverPileRole::SubjectStopped(class CPile *) {
   
   CPile::NotifyTargetDieAndDetachAllObservers(a2);
@@ -140,7 +135,6 @@ void  CDeliverPileRole::SubjectStopped(class CPile *) {
 
 // address=[0x155bb10]
 // Decompiled from int __thiscall CDeliverPileRole::SubjectStarted(CDeliverPileRole *this, struct CPile *a2)
-
 void  CDeliverPileRole::SubjectStarted(class CPile *) {
   
   CPile::NotifyTargetDieAndDetachAllObservers(a2);
@@ -152,7 +146,6 @@ void  CDeliverPileRole::SubjectStarted(class CPile *) {
 
 // address=[0x155bb50]
 // Decompiled from _DWORD *__thiscall CDeliverPileRole::CDeliverPileRole(_DWORD *this, int a2)
-
  CDeliverPileRole::CDeliverPileRole(std::istream &) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
@@ -179,7 +172,6 @@ void  CDeliverPileRole::SubjectStarted(class CPile *) {
 
 // address=[0x155bc00]
 // Decompiled from int __thiscall CDeliverPileRole::Store(void *this, struct std::ostream *a2)
-
 void  CDeliverPileRole::Store(std::ostream &) {
   
   int v3[2]; // [esp+0h] [ebp-8h] BYREF
@@ -193,7 +185,6 @@ void  CDeliverPileRole::Store(std::ostream &) {
 
 // address=[0x155bd20]
 // Decompiled from void __thiscall CDeliverPileRole::~CDeliverPileRole(CDeliverPileRole *this)
-
  CDeliverPileRole::~CDeliverPileRole(void) {
   
   IPileRole::~IPileRole(this);
@@ -202,7 +193,6 @@ void  CDeliverPileRole::Store(std::ostream &) {
 
 // address=[0x155bd80]
 // Decompiled from int __thiscall CDeliverPileRole::ClassID(CDeliverPileRole *this)
-
 unsigned long  CDeliverPileRole::ClassID(void)const {
   
   return CDeliverPileRole::m_iClassID;
@@ -211,7 +201,6 @@ unsigned long  CDeliverPileRole::ClassID(void)const {
 
 // address=[0x15603c0]
 // Decompiled from int __cdecl CDeliverPileRole::Load(int a1)
-
 static class CDeliverPileRole * __cdecl CDeliverPileRole::Load(std::istream &) {
   
   void **v1; // eax
@@ -227,7 +216,6 @@ static class CDeliverPileRole * __cdecl CDeliverPileRole::Load(std::istream &) {
 
 // address=[0x1560170]
 // Decompiled from CDeliverPileRole *__thiscall CDeliverPileRole::CDeliverPileRole(CDeliverPileRole *this)
-
  CDeliverPileRole::CDeliverPileRole(void) {
   
   IPileRole::IPileRole(this);

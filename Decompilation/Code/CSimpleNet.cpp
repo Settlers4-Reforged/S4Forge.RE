@@ -4,7 +4,6 @@
 
 // address=[0x15ccbf0]
 // Decompiled from CSimpleNet *__thiscall CSimpleNet::CSimpleNet(CSimpleNet *this)
-
  CSimpleNet::CSimpleNet(void) {
   
   ISimpleNet::ISimpleNet(this);
@@ -30,7 +29,6 @@
 
 // address=[0x15ccd30]
 // Decompiled from int __thiscall CSimpleNet::~CSimpleNet(CSimpleNet *this)
-
  CSimpleNet::~CSimpleNet(void) {
   
   int v2; // [esp-4h] [ebp-1Ch]
@@ -58,7 +56,6 @@
 
 // address=[0x15cce40]
 // Decompiled from void *__thiscall CSimpleNet::GetCurrentLocalIPString(char *this, void *a2)
-
 std::string  CSimpleNet::GetCurrentLocalIPString(void) {
   
   std::string::string(a2, this + 20);
@@ -68,7 +65,6 @@ std::string  CSimpleNet::GetCurrentLocalIPString(void) {
 
 // address=[0x15cce80]
 // Decompiled from char __thiscall CSimpleNet::Run(CSimpleNet *this)
-
 bool  CSimpleNet::Run(void) {
   
   float v1; // xmm0_4
@@ -95,7 +91,6 @@ bool  CSimpleNet::Run(void) {
 
 // address=[0x15ccf90]
 // Decompiled from bool __thiscall CSimpleNet::IsMessage(CSimpleNet *this, int a2)
-
 bool  CSimpleNet::IsMessage(int) {
   
   OnlineManager *Instance; // eax
@@ -109,7 +104,6 @@ bool  CSimpleNet::IsMessage(int) {
 
 // address=[0x15ccfd0]
 // Decompiled from char __thiscall CSimpleNet::PopMessage(CSimpleNet *this, void **a2, unsigned int *a3, unsigned int *a4)
-
 bool  CSimpleNet::PopMessage(void * &,unsigned int &,unsigned int &) {
   
   int v4; // eax
@@ -162,16 +156,7 @@ bool  CSimpleNet::PopMessage(void * &,unsigned int &,unsigned int &) {
 
 
 // address=[0x15cd190]
-// Decompiled from int __thiscall CSimpleNet::PushMessage(
-        _DWORD *this,
-        int a2,
-        int a3,
-        unsigned __int16 a4,
-        void *Src,
-        size_t Size,
-        char a7,
-        char a8)
-
+// Decompiled from int __thiscall CSimpleNet::PushMessage(  _DWORD *this,  int a2,  int a3,  unsigned __int16 a4,  void *Src,  size_t Size,  char a7,  char a8)
 bool  CSimpleNet::PushMessage(unsigned int,unsigned int,unsigned short,void *,unsigned int,bool,bool) {
   
   __int16 v9; // [esp+4h] [ebp-434h]
@@ -220,7 +205,6 @@ bool  CSimpleNet::PushMessage(unsigned int,unsigned int,unsigned short,void *,un
 
 // address=[0x15cd490]
 // Decompiled from int __thiscall CSimpleNet::GetIPString(CSimpleNet *this, int a2)
-
 char *  CSimpleNet::GetIPString(unsigned int) {
   
   dword_415C3AC = a2;
@@ -230,7 +214,6 @@ char *  CSimpleNet::GetIPString(unsigned int) {
 
 // address=[0x15cd4d0]
 // Decompiled from int __thiscall CSimpleNet::RemoveMsgsForIP(CSimpleNet *this, unsigned int a2)
-
 void  CSimpleNet::RemoveMsgsForIP(unsigned int) {
   
   const char *v2; // eax
@@ -311,7 +294,6 @@ void  CSimpleNet::RemoveMsgsForIP(unsigned int) {
 
 // address=[0x15cd6a0]
 // Decompiled from bool __thiscall CSimpleNet::IsLocalIP(CSimpleNet *this, unsigned int a2)
-
 bool  CSimpleNet::IsLocalIP(unsigned int) {
   
   _BYTE v3[12]; // [esp+4h] [ebp-48h] BYREF
@@ -359,7 +341,6 @@ bool  CSimpleNet::IsLocalIP(unsigned int) {
 
 // address=[0x15d1290]
 // Decompiled from CSimpleNet *__thiscall CSimpleNet::Delete(CSimpleNet *this)
-
 void  CSimpleNet::Delete(void) {
   
   CSimpleNet *result; // eax
@@ -373,7 +354,6 @@ void  CSimpleNet::Delete(void) {
 
 // address=[0x15d12e0]
 // Decompiled from int __thiscall CSimpleNet::GetBytesPerSecond(CSimpleNet *this)
-
 unsigned int  CSimpleNet::GetBytesPerSecond(void) {
   
   return *((_DWORD *)this + 106);
@@ -381,10 +361,7 @@ unsigned int  CSimpleNet::GetBytesPerSecond(void) {
 
 
 // address=[0x15d1300]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CSimpleNet::GetCurrentLocalIPLong(CSimpleNet *this)
-
+// Decompiled from int __thiscall CSimpleNet::GetCurrentLocalIPLong(CSimpleNet *this)
 long  CSimpleNet::GetCurrentLocalIPLong(void) {
   
   return *((_DWORD *)this + 4);
@@ -393,7 +370,6 @@ long  CSimpleNet::GetCurrentLocalIPLong(void) {
 
 // address=[0x15d1320]
 // Decompiled from int __stdcall CSimpleNet::GetIPLong(char a1, int a2, int a3, int a4, int a5, int a6, int a7)
-
 unsigned int  CSimpleNet::GetIPLong(std::string) {
   
   int v7; // eax
@@ -408,7 +384,6 @@ unsigned int  CSimpleNet::GetIPLong(std::string) {
 
 // address=[0x15d13a0]
 // Decompiled from int __thiscall CSimpleNet::GetLastDataLength(CSimpleNet *this)
-
 unsigned int  CSimpleNet::GetLastDataLength(void) {
   
   return *((_DWORD *)this + 107);
@@ -417,7 +392,6 @@ unsigned int  CSimpleNet::GetLastDataLength(void) {
 
 // address=[0x15d13c0]
 // Decompiled from int __thiscall CSimpleNet::GetLastErrorString(char *this, int a2)
-
 std::string  CSimpleNet::GetLastErrorString(void) {
   
   std::string::string(this + 208);
@@ -427,7 +401,6 @@ std::string  CSimpleNet::GetLastErrorString(void) {
 
 // address=[0x15d1400]
 // Decompiled from int __thiscall CSimpleNet::GetLastSenderIP(CSimpleNet *this)
-
 long  CSimpleNet::GetLastSenderIP(void) {
   
   return *((_DWORD *)this + 98);
@@ -436,7 +409,6 @@ long  CSimpleNet::GetLastSenderIP(void) {
 
 // address=[0x15d1420]
 // Decompiled from int __thiscall CSimpleNet::GetLastSenderPeerId(CSimpleNet *this)
-
 unsigned int  CSimpleNet::GetLastSenderPeerId(void) {
   
   return *((_DWORD *)this + 101);
@@ -445,7 +417,6 @@ unsigned int  CSimpleNet::GetLastSenderPeerId(void) {
 
 // address=[0x15d1440]
 // Decompiled from int __thiscall CSimpleNet::RemoveAllResendMsgs(CSimpleNet *this)
-
 void  CSimpleNet::RemoveAllResendMsgs(void) {
   
   int result; // eax
@@ -460,7 +431,6 @@ void  CSimpleNet::RemoveAllResendMsgs(void) {
 
 // address=[0x15d1490]
 // Decompiled from CSimpleNet *__thiscall CSimpleNet::SetAdditionalLocalAddress(CSimpleNet *this, unsigned int a2)
-
 void  CSimpleNet::SetAdditionalLocalAddress(unsigned int) {
   
   CSimpleNet *result; // eax
@@ -473,7 +443,6 @@ void  CSimpleNet::SetAdditionalLocalAddress(unsigned int) {
 
 // address=[0x15d1520]
 // Decompiled from char __thiscall CSimpleNet::WasError(CSimpleNet *this)
-
 bool  CSimpleNet::WasError(void) {
   
   return *((_BYTE *)this + 204);
@@ -482,7 +451,6 @@ bool  CSimpleNet::WasError(void) {
 
 // address=[0x15cd7d0]
 // Decompiled from bool __thiscall CSimpleNet::SendMessageA(CSimpleNet *this, unsigned int a2, struct SMessage *a3)
-
 bool  CSimpleNet::SendMessageA(unsigned int,struct SMessage &) {
   
   return (*(unsigned __int8 (__thiscall **)(CSimpleNet *, unsigned int, struct SMessage *))(*(_DWORD *)this + 80))(
@@ -494,7 +462,6 @@ bool  CSimpleNet::SendMessageA(unsigned int,struct SMessage &) {
 
 // address=[0x15cdc40]
 // Decompiled from char __thiscall CSimpleNet::RealSendMessage(CSimpleNet *this, unsigned int a2, struct SMessage *a3)
-
 bool  CSimpleNet::RealSendMessage(unsigned int,struct SMessage &) {
   
   OnlineManager *Instance; // eax
@@ -526,7 +493,6 @@ bool  CSimpleNet::RealSendMessage(unsigned int,struct SMessage &) {
 
 // address=[0x15cdd50]
 // Decompiled from char __thiscall CSimpleNet::RemoveMsgFromResendList(CSimpleNet *this, unsigned __int16 a2)
-
 bool  CSimpleNet::RemoveMsgFromResendList(unsigned short) {
   
   char v3; // [esp-Ch] [ebp-68h] BYREF
@@ -583,7 +549,6 @@ bool  CSimpleNet::RemoveMsgFromResendList(unsigned short) {
 
 // address=[0x15cdea0]
 // Decompiled from bool __thiscall CSimpleNet::LaunchWinsock(CSimpleNet *this)
-
 bool  CSimpleNet::LaunchWinsock(void) {
   
   _BYTE v3[4]; // [esp+10h] [ebp-194h] BYREF
@@ -626,7 +591,6 @@ bool  CSimpleNet::LaunchWinsock(void) {
 
 // address=[0x15ce080]
 // Decompiled from char __thiscall CSimpleNet::EnumerateLocalIP(CSimpleNet *this)
-
 bool  CSimpleNet::EnumerateLocalIP(void) {
   
   return 1;
@@ -635,7 +599,6 @@ bool  CSimpleNet::EnumerateLocalIP(void) {
 
 // address=[0x15ce3c0]
 // Decompiled from bool __thiscall CSimpleNet::ConnectSocket(CSimpleNet *this)
-
 bool  CSimpleNet::ConnectSocket(void) {
   
   _DWORD *v1; // eax
@@ -795,7 +758,6 @@ bool  CSimpleNet::ConnectSocket(void) {
 
 // address=[0x15d1220]
 // Decompiled from void __thiscall CSimpleNet::ClearErrorString(CSimpleNet *this)
-
 void  CSimpleNet::ClearErrorString(void) {
   
   void *v1; // [esp+0h] [ebp-28h]
@@ -810,7 +772,6 @@ void  CSimpleNet::ClearErrorString(void) {
 
 // address=[0x15d14b0]
 // Decompiled from char __thiscall CSimpleNet::SetErrorString(_BYTE *this, char *Str, char a3)
-
 void  CSimpleNet::SetErrorString(char const *,bool) {
   
   char result; // al

@@ -4,7 +4,6 @@
 
 // address=[0x1400360]
 // Decompiled from int __cdecl CDecoObject::New(int a1)
-
 static class CPersistence * __cdecl CDecoObject::New(std::istream &) {
   
   if ( CDecoObject::operator new(0x50u) )
@@ -15,15 +14,7 @@ static class CPersistence * __cdecl CDecoObject::New(std::istream &) {
 
 
 // address=[0x1541b70]
-// Decompiled from CDecoObject *__thiscall CDecoObject::CDecoObject(
-        CDecoObject *this,
-        int a2,
-        int a3,
-        unsigned int a4,
-        int a5,
-        int a6,
-        int a7)
-
+// Decompiled from CDecoObject *__thiscall CDecoObject::CDecoObject(  CDecoObject *this,  int a2,  int a3,  unsigned int a4,  int a5,  int a6,  int a7)
  CDecoObject::CDecoObject(int,int,int,int,int,int) {
   
   IDecoObject::IDecoObject(this, a2, a3, a4, a5, 1);
@@ -47,7 +38,6 @@ static class CPersistence * __cdecl CDecoObject::New(std::istream &) {
 
 // address=[0x1541c80]
 // Decompiled from void *__thiscall sub_1941C80(int this)
-
 struct SGfxObjectInfo *  CDecoObject::GetGfxInfos(void) {
   
   unsigned int v2; // [esp+8h] [ebp-8h]
@@ -96,7 +86,6 @@ struct SGfxObjectInfo *  CDecoObject::GetGfxInfos(void) {
 
 // address=[0x1541e20]
 // Decompiled from unsigned int __cdecl CDecoObject::operator new(unsigned int a1)
-
 static void * __cdecl CDecoObject::operator new(unsigned int) {
   
   return CDecoObjMgr::Alloc((CDecoObjMgr *)&g_cDecoObjMgr, a1);
@@ -105,7 +94,6 @@ static void * __cdecl CDecoObject::operator new(unsigned int) {
 
 // address=[0x1541e40]
 // Decompiled from void __cdecl CDecoObject::operator delete(void *a1)
-
 static void __cdecl CDecoObject::operator delete(void *) {
   
   CDecoObjMgr::Dealloc((CDecoObjMgr *)&g_cDecoObjMgr, a1);
@@ -114,7 +102,6 @@ static void __cdecl CDecoObject::operator delete(void *) {
 
 // address=[0x1541e80]
 // Decompiled from _DWORD *__thiscall CDecoObject::CDecoObject(_DWORD *this, int a2)
-
  CDecoObject::CDecoObject(std::istream &) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
@@ -145,7 +132,6 @@ static void __cdecl CDecoObject::operator delete(void *) {
 
 // address=[0x1541f80]
 // Decompiled from int __thiscall CDecoObject::Store(__int16 *this, struct std::ostream *a2)
-
 void  CDecoObject::Store(std::ostream &) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
@@ -164,7 +150,6 @@ void  CDecoObject::Store(std::ostream &) {
 
 // address=[0x15422d0]
 // Decompiled from void __thiscall CDecoObject::~CDecoObject(CDecoObject *this)
-
  CDecoObject::~CDecoObject(void) {
   
   *(_DWORD *)this = &CDecoObject::_vftable_;
@@ -173,10 +158,7 @@ void  CDecoObject::Store(std::ostream &) {
 
 
 // address=[0x15423c0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CDecoObject::Amount(CDecoObject *this)
-
+// Decompiled from int __thiscall CDecoObject::Amount(CDecoObject *this)
 int  CDecoObject::Amount(void)const {
   
   return 1;
@@ -185,7 +167,6 @@ int  CDecoObject::Amount(void)const {
 
 // address=[0x15423e0]
 // Decompiled from int __thiscall CDecoObject::ClassID(CDecoObject *this)
-
 unsigned long  CDecoObject::ClassID(void)const {
   
   return CDecoObject::m_iClassID;
@@ -193,10 +174,7 @@ unsigned long  CDecoObject::ClassID(void)const {
 
 
 // address=[0x1542420]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CDecoObject::Decrease(CDecoObject *this, int a2)
-
+// Decompiled from void __thiscall CDecoObject::Decrease(CDecoObject *this, int a2)
 void  CDecoObject::Decrease(int) {
   
   ;
@@ -204,9 +182,7 @@ void  CDecoObject::Decrease(int) {
 
 
 // address=[0x1542460]
-// Decompiled from // MFC 3.1-14.0 32bit
-int __thiscall CDecoObject::Increase(CDecoObject *this, int a2)
-
+// Decompiled from int __thiscall CDecoObject::Increase(CDecoObject *this, int a2)
 int  CDecoObject::Increase(int) {
   
   return 1;
@@ -214,10 +190,7 @@ int  CDecoObject::Increase(int) {
 
 
 // address=[0x1542480]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CDecoObject::LogicUpdate(CDecoObject *this)
-
+// Decompiled from void __thiscall CDecoObject::LogicUpdate(CDecoObject *this)
 void  CDecoObject::LogicUpdate(void) {
   
   ;

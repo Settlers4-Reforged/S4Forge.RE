@@ -4,7 +4,6 @@
 
 // address=[0x2f3e7e0]
 // Decompiled from CSolutionEdge *__thiscall CSolutionEdge::CSolutionEdge(CSolutionEdge *this, int a2, int a3)
-
  CSolutionEdge::CSolutionEdge(int,int) {
   
   CDynListEntry::CDynListEntry(this);
@@ -17,7 +16,6 @@
 
 // address=[0x2f3e820]
 // Decompiled from void __thiscall CSolutionEdge::~CSolutionEdge(CSolutionEdge *this)
-
  CSolutionEdge::~CSolutionEdge(void) {
   
   *(_DWORD *)this = &CSolutionEdge::_vftable_;
@@ -26,9 +24,7 @@
 
 
 // address=[0x2f3e840]
-// Decompiled from // public: void __thiscall CSolutionEdge::show(void)
-int __thiscall CSolutionEdge::show(_DWORD *this)
-
+// Decompiled from int __thiscall CSolutionEdge::show(_DWORD *this)
 void  CSolutionEdge::show(void) {
   
   int v1; // eax

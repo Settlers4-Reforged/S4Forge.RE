@@ -4,7 +4,6 @@
 
 // address=[0x1401a80]
 // Decompiled from int __cdecl CRomanWarShip::New(int a1)
-
 static class CPersistence * __cdecl CRomanWarShip::New(std::istream &) {
   
   if ( CWarShip::operator new(0xC8u) )
@@ -16,7 +15,6 @@ static class CPersistence * __cdecl CRomanWarShip::New(std::istream &) {
 
 // address=[0x15a1890]
 // Decompiled from _DWORD *__thiscall CRomanWarShip::CRomanWarShip(_DWORD *this, int a2)
-
  CRomanWarShip::CRomanWarShip(std::istream &) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
@@ -44,7 +42,6 @@ static class CPersistence * __cdecl CRomanWarShip::New(std::istream &) {
 
 // address=[0x15a1950]
 // Decompiled from int __thiscall CRomanWarShip::Store(void *this, struct std::ostream *a2)
-
 void  CRomanWarShip::Store(std::ostream &) {
   
   int v3[2]; // [esp+0h] [ebp-8h] BYREF
@@ -58,7 +55,6 @@ void  CRomanWarShip::Store(std::ostream &) {
 
 // address=[0x15a2420]
 // Decompiled from void __thiscall CRomanWarShip::~CRomanWarShip(CRomanWarShip *this)
-
  CRomanWarShip::~CRomanWarShip(void) {
   
   CWarShip::~CWarShip(this);
@@ -67,7 +63,6 @@ void  CRomanWarShip::Store(std::ostream &) {
 
 // address=[0x15a26c0]
 // Decompiled from int __thiscall CRomanWarShip::ClassID(CRomanWarShip *this)
-
 unsigned long  CRomanWarShip::ClassID(void)const {
   
   return CRomanWarShip::m_iClassID;
@@ -78,16 +73,7 @@ unsigned long  CRomanWarShip::ClassID(void)const {
 // [Decompilation failed for static unsigned long CRomanWarShip::m_iClassID]
 
 // address=[0x15a1990]
-// Decompiled from CRomanWarShip *__thiscall CRomanWarShip::CRomanWarShip(
-        CRomanWarShip *this,
-        int a2,
-        int a3,
-        int a4,
-        int a5,
-        int a6,
-        int a7,
-        bool a8)
-
+// Decompiled from CRomanWarShip *__thiscall CRomanWarShip::CRomanWarShip(  CRomanWarShip *this,  int a2,  int a3,  int a4,  int a5,  int a6,  int a7,  bool a8)
  CRomanWarShip::CRomanWarShip(int,int,int,int,int,int,bool) {
   
   CWarShip::CWarShip(this, a2, a3, a4, a5, a6, a7, a8);

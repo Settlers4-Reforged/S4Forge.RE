@@ -4,7 +4,6 @@
 
 // address=[0x14a0fc0]
 // Decompiled from CStateAOCampaignTrojan *__cdecl CStateAOCampaignTrojan::DynamicCreateFunc(void *a1)
-
 static class CGameState * __cdecl CStateAOCampaignTrojan::DynamicCreateFunc(void *) {
   
   CStateAOCampaignTrojan *C; // [esp+Ch] [ebp-10h]
@@ -18,10 +17,7 @@ static class CGameState * __cdecl CStateAOCampaignTrojan::DynamicCreateFunc(void
 
 
 // address=[0x14a1040]
-// Decompiled from CStateAOCampaignTrojan *__thiscall CStateAOCampaignTrojan::CStateAOCampaignTrojan(
-        CStateAOCampaignTrojan *this,
-        void *a2)
-
+// Decompiled from CStateAOCampaignTrojan *__thiscall CStateAOCampaignTrojan::CStateAOCampaignTrojan(  CStateAOCampaignTrojan *this,  void *a2)
  CStateAOCampaignTrojan::CStateAOCampaignTrojan(void *) {
   
   CGuiGameState::CGuiGameState(this);
@@ -38,7 +34,6 @@ static class CGameState * __cdecl CStateAOCampaignTrojan::DynamicCreateFunc(void
 
 // address=[0x14a1100]
 // Decompiled from void __thiscall CStateAOCampaignTrojan::~CStateAOCampaignTrojan(CStateAOCampaignTrojan *this)
-
  CStateAOCampaignTrojan::~CStateAOCampaignTrojan(void) {
   
   *(_DWORD *)this = &CStateAOCampaignTrojan::_vftable_;
@@ -49,7 +44,6 @@ static class CGameState * __cdecl CStateAOCampaignTrojan::DynamicCreateFunc(void
 
 // address=[0x14a1160]
 // Decompiled from char __thiscall CStateAOCampaignTrojan::Perform(CStateAOCampaignTrojan *this)
-
 bool  CStateAOCampaignTrojan::Perform(void) {
   
   DWORD v2; // esi
@@ -86,7 +80,6 @@ bool  CStateAOCampaignTrojan::Perform(void) {
 
 // address=[0x14a1240]
 // Decompiled from char __thiscall CStateAOCampaignTrojan::OnEvent(CStateAOCampaignTrojan *this, struct CEvn_Event *a2)
-
 bool  CStateAOCampaignTrojan::OnEvent(class CEvn_Event &) {
   
   CEvn_Event *v3; // [esp+8h] [ebp-3Ch]
@@ -126,9 +119,7 @@ bool  CStateAOCampaignTrojan::OnEvent(class CEvn_Event &) {
 
 
 // address=[0x14a14a0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-char __thiscall CStateAOCampaignTrojan::CanProcessInvites(CStateAOCampaignTrojan *this)
-
+// Decompiled from char __thiscall CStateAOCampaignTrojan::CanProcessInvites(CStateAOCampaignTrojan *this)
 bool  CStateAOCampaignTrojan::CanProcessInvites(void) {
   
   return 0;

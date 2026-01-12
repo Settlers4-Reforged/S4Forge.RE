@@ -4,7 +4,6 @@
 
 // address=[0x15c9580]
 // Decompiled from char __cdecl CLanLobby::ConnectPlayer(wchar_t *String, signed int a2)
-
 static bool __cdecl CLanLobby::ConnectPlayer(struct SConnectGameInfoFromClient &,int) {
   
   int v3; // [esp+4h] [ebp-4Ch]
@@ -76,7 +75,6 @@ static bool __cdecl CLanLobby::ConnectPlayer(struct SConnectGameInfoFromClient &
 
 // address=[0x15c9860]
 // Decompiled from char __cdecl CLanLobby::DisconnectPlayerPeerId(unsigned int a1, int a2)
-
 static bool __cdecl CLanLobby::DisconnectPlayerPeerId(unsigned int,int) {
   
   int v3; // [esp+0h] [ebp-Ch]
@@ -108,7 +106,6 @@ static bool __cdecl CLanLobby::DisconnectPlayerPeerId(unsigned int,int) {
 
 // address=[0x15c9930]
 // Decompiled from _DWORD *CLanLobby::RedrawPlayerList()
-
 static void __cdecl CLanLobby::RedrawPlayerList(void) {
   
   void **CurrentState; // eax
@@ -134,7 +131,6 @@ static void __cdecl CLanLobby::RedrawPlayerList(void) {
 
 // address=[0x15c99a0]
 // Decompiled from int *__cdecl CLanLobby::ChangeData(int *Src)
-
 static void __cdecl CLanLobby::ChangeData(struct SLobbyChange *) {
   
   int *result; // eax
@@ -154,7 +150,6 @@ static void __cdecl CLanLobby::ChangeData(struct SLobbyChange *) {
 
 // address=[0x15c9a00]
 // Decompiled from int *__cdecl CLanLobby::ChangeSlots(int *Src)
-
 static void __cdecl CLanLobby::ChangeSlots(struct SLobbyChange *) {
   
   int *result; // eax
@@ -174,7 +169,6 @@ static void __cdecl CLanLobby::ChangeSlots(struct SLobbyChange *) {
 
 // address=[0x15c9a60]
 // Decompiled from int __cdecl CLanLobby::Communicate(int a1, void *a2)
-
 static void __cdecl CLanLobby::Communicate(int,void *) {
   
   int result; // eax
@@ -190,7 +184,6 @@ static void __cdecl CLanLobby::Communicate(int,void *) {
 
 // address=[0x15c4dc0]
 // Decompiled from void __cdecl CLanLobby::SetGameHost(struct CFrameWnd *a1)
-
 static void __cdecl CLanLobby::SetGameHost(class CGameHost *) {
   
   CLanLobby::m_pGameHost = (int)a1;
@@ -199,7 +192,6 @@ static void __cdecl CLanLobby::SetGameHost(class CGameHost *) {
 
 // address=[0x15c90d0]
 // Decompiled from char CLanLobby::StartWaitGameDlg()
-
 static bool __cdecl CLanLobby::StartWaitGameDlg(bool) {
   
   return 1;
@@ -208,7 +200,6 @@ static bool __cdecl CLanLobby::StartWaitGameDlg(bool) {
 
 // address=[0x15c90e0]
 // Decompiled from char CLanLobby::EndWaitGameDlg()
-
 static bool __cdecl CLanLobby::EndWaitGameDlg(void) {
   
   return 1;
@@ -217,7 +208,6 @@ static bool __cdecl CLanLobby::EndWaitGameDlg(void) {
 
 // address=[0x15c90f0]
 // Decompiled from int CLanLobby::RedrawGameList()
-
 static void __cdecl CLanLobby::RedrawGameList(void) {
   
   void **CurrentState; // eax
@@ -321,7 +311,6 @@ static void __cdecl CLanLobby::RedrawGameList(void) {
 
 // address=[0x15c94f0]
 // Decompiled from void *CLanLobby::RedrawMap()
-
 static void __cdecl CLanLobby::RedrawMap(void) {
   
   void **CurrentState; // eax
@@ -342,7 +331,6 @@ static void __cdecl CLanLobby::RedrawMap(void) {
 
 // address=[0x15c9530]
 // Decompiled from int __cdecl sub_19C9530(wchar_t *String, wchar_t *Source)
-
 static void __cdecl CLanLobby::PrintChatLine(unsigned short const *,unsigned short const *) {
   
   void **v2; // eax

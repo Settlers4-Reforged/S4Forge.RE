@@ -4,7 +4,6 @@
 
 // address=[0x14c30d0]
 // Decompiled from CStateMD2Briefing *__cdecl CStateMD2Briefing::DynamicCreateFunc(void *a1)
-
 static class CGameState * __cdecl CStateMD2Briefing::DynamicCreateFunc(void *) {
   
   CStateMD2Briefing *C; // [esp+Ch] [ebp-10h]
@@ -19,7 +18,6 @@ static class CGameState * __cdecl CStateMD2Briefing::DynamicCreateFunc(void *) {
 
 // address=[0x14c3150]
 // Decompiled from CStateMD2Briefing *__thiscall CStateMD2Briefing::CStateMD2Briefing(CStateMD2Briefing *this, void *a2)
-
  CStateMD2Briefing::CStateMD2Briefing(void *) {
   
   int v3; // [esp+4h] [ebp-14h]
@@ -71,7 +69,6 @@ static class CGameState * __cdecl CStateMD2Briefing::DynamicCreateFunc(void *) {
 
 // address=[0x14c3320]
 // Decompiled from void __thiscall CStateMD2Briefing::~CStateMD2Briefing(CStateMD2Briefing *this)
-
  CStateMD2Briefing::~CStateMD2Briefing(void) {
   
   *(_DWORD *)this = &CStateMD2Briefing::_vftable_;
@@ -82,7 +79,6 @@ static class CGameState * __cdecl CStateMD2Briefing::DynamicCreateFunc(void *) {
 
 // address=[0x14c3380]
 // Decompiled from char __thiscall CStateMD2Briefing::Perform(CStateMD2Briefing *this)
-
 bool  CStateMD2Briefing::Perform(void) {
   
   char result; // al
@@ -144,7 +140,6 @@ bool  CStateMD2Briefing::Perform(void) {
 
 // address=[0x14c3560]
 // Decompiled from char __thiscall CStateMD2Briefing::OnEvent(CStateMD2Briefing *this, struct CEvn_Event *a2)
-
 bool  CStateMD2Briefing::OnEvent(class CEvn_Event &) {
   
   char result; // al
@@ -409,7 +404,6 @@ bool  CStateMD2Briefing::OnEvent(class CEvn_Event &) {
 
 // address=[0x14c3e10]
 // Decompiled from void *__cdecl CStateMD2Briefing::InitBriefingTexts(int a1, int a2)
-
 static void __cdecl CStateMD2Briefing::InitBriefingTexts(int,int) {
   
   char *v2; // eax
@@ -507,9 +501,7 @@ static void __cdecl CStateMD2Briefing::InitBriefingTexts(int,int) {
 
 
 // address=[0x14c4600]
-// Decompiled from // Microsoft VisualC 14/net runtime
-char __thiscall CStateMD2Briefing::CanProcessInvites(CStateMD2Briefing *this)
-
+// Decompiled from char __thiscall CStateMD2Briefing::CanProcessInvites(CStateMD2Briefing *this)
 bool  CStateMD2Briefing::CanProcessInvites(void) {
   
   return 0;

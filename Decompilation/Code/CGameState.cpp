@@ -4,7 +4,6 @@
 
 // address=[0x13728e0]
 // Decompiled from char __stdcall CGameState::OnEvent(int a1)
-
 bool  CGameState::OnEvent(class CEvn_Event &) {
   
   return 0;
@@ -13,7 +12,6 @@ bool  CGameState::OnEvent(class CEvn_Event &) {
 
 // address=[0x149d860]
 // Decompiled from int __cdecl CGameState::DynamicCreateFunc(struct boost::exception_detail::clone_base *a1)
-
 static class CGameState * __cdecl CGameState::DynamicCreateFunc(void *) {
   
   boost::exception_detail::clone_base *v3; // [esp+Ch] [ebp-10h]
@@ -28,7 +26,6 @@ static class CGameState * __cdecl CGameState::DynamicCreateFunc(void *) {
 
 // address=[0x149d900]
 // Decompiled from CGameState *__thiscall CGameState::CGameState(CGameState *this, const struct boost::exception_detail::clone_base *a2)
-
  CGameState::CGameState(void *) {
   
   *(_DWORD *)this = &CGameState::_vftable_;
@@ -38,7 +35,6 @@ static class CGameState * __cdecl CGameState::DynamicCreateFunc(void *) {
 
 // address=[0x149d920]
 // Decompiled from CGameState *__thiscall CGameState::~CGameState(CGameState *this)
-
  CGameState::~CGameState(void) {
   
   CGameState *result; // eax
@@ -51,7 +47,6 @@ static class CGameState * __cdecl CGameState::DynamicCreateFunc(void *) {
 
 // address=[0x149d980]
 // Decompiled from char __thiscall CGameState::CanProcessInvites(CGameState *this)
-
 bool  CGameState::CanProcessInvites(void) {
   
   return 1;
@@ -60,7 +55,6 @@ bool  CGameState::CanProcessInvites(void) {
 
 // address=[0x149d990]
 // Decompiled from char CGameState::Perform()
-
 bool  CGameState::Perform(void) {
   
   if ( BBSupportDbgReport(
@@ -75,7 +69,6 @@ bool  CGameState::Perform(void) {
 
 // address=[0x149f3c0]
 // Decompiled from CGameState *__thiscall CGameState::CGameState(CGameState *this)
-
  CGameState::CGameState(void) {
   
   *(_DWORD *)this = &CGameState::_vftable_;

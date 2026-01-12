@@ -4,7 +4,6 @@
 
 // address=[0x1400d60]
 // Decompiled from int __cdecl CGoodTransportPriority::New(int a1)
-
 static class CPersistence * __cdecl CGoodTransportPriority::New(std::istream &) {
   
   if ( operator new(0x64u) )
@@ -15,9 +14,7 @@ static class CPersistence * __cdecl CGoodTransportPriority::New(std::istream &) 
 
 
 // address=[0x1439ae0]
-// Decompiled from // MFC 3.1-14.0 32bit
-int __thiscall CGoodTransportPriority::GetNumberOfPriorities(CGoodTransportPriority *this)
-
+// Decompiled from int __thiscall CGoodTransportPriority::GetNumberOfPriorities(CGoodTransportPriority *this)
 int  CGoodTransportPriority::GetNumberOfPriorities(void) {
   
   return *((_DWORD *)this + 23);
@@ -26,7 +23,6 @@ int  CGoodTransportPriority::GetNumberOfPriorities(void) {
 
 // address=[0x1439b40]
 // Decompiled from int __thiscall CGoodTransportPriority::GetPriority(unsigned __int16 *this, int a2)
-
 int  CGoodTransportPriority::GetPriority(enum PILE_TYPES) {
   
   if ( (a2 <= 0 || a2 >= 43)
@@ -47,7 +43,6 @@ int  CGoodTransportPriority::GetPriority(enum PILE_TYPES) {
 
 // address=[0x1452ac0]
 // Decompiled from _DWORD *__thiscall CGoodTransportPriority::CGoodTransportPriority(_DWORD *this, int a2)
-
  CGoodTransportPriority::CGoodTransportPriority(std::istream &) {
   
   _BYTE v3[4]; // [esp+0h] [ebp-14h] BYREF
@@ -78,7 +73,6 @@ int  CGoodTransportPriority::GetPriority(enum PILE_TYPES) {
 
 // address=[0x1452b80]
 // Decompiled from int __thiscall CGoodTransportPriority::Store(struct CPersistence *this, struct std::ostream *a2)
-
 void  CGoodTransportPriority::Store(std::ostream &) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
@@ -95,10 +89,7 @@ void  CGoodTransportPriority::Store(std::ostream &) {
 
 
 // address=[0x1452bf0]
-// Decompiled from CGoodTransportPriority *__thiscall CGoodTransportPriority::CGoodTransportPriority(
-        CGoodTransportPriority *this,
-        unsigned __int8 a2)
-
+// Decompiled from CGoodTransportPriority *__thiscall CGoodTransportPriority::CGoodTransportPriority(  CGoodTransportPriority *this,  unsigned __int8 a2)
  CGoodTransportPriority::CGoodTransportPriority(unsigned char) {
   
   CPersistence::CPersistence(this);
@@ -127,7 +118,6 @@ void  CGoodTransportPriority::Store(std::ostream &) {
 
 // address=[0x1452c70]
 // Decompiled from int __thiscall CGoodTransportPriority::ChangePriority(_WORD *this, int a2, int a3)
-
 void  CGoodTransportPriority::ChangePriority(enum PILE_TYPES,int) {
   
   int result; // eax
@@ -191,7 +181,6 @@ void  CGoodTransportPriority::ChangePriority(enum PILE_TYPES,int) {
 
 // address=[0x1452e30]
 // Decompiled from CGoodTransportPriority *__thiscall CGoodTransportPriority::GetSortedGoods(CGoodTransportPriority *this, int *const a2)
-
 void  CGoodTransportPriority::GetSortedGoods(int * const) {
   
   CGoodTransportPriority *result; // eax
@@ -236,7 +225,6 @@ void  CGoodTransportPriority::GetSortedGoods(int * const) {
 
 // address=[0x1454260]
 // Decompiled from int __thiscall CGoodTransportPriority::ClassID(CGoodTransportPriority *this)
-
 unsigned long  CGoodTransportPriority::ClassID(void)const {
   
   return CGoodTransportPriority::m_iClassID;
@@ -248,7 +236,6 @@ unsigned long  CGoodTransportPriority::ClassID(void)const {
 
 // address=[0x1452f50]
 // Decompiled from int __thiscall CGoodTransportPriority::CreateRomanPriorities(CGoodTransportPriority *this)
-
 void  CGoodTransportPriority::CreateRomanPriorities(void) {
   
   int result; // eax
@@ -290,7 +277,6 @@ void  CGoodTransportPriority::CreateRomanPriorities(void) {
 
 // address=[0x1453250]
 // Decompiled from int __thiscall CGoodTransportPriority::CreateVikingPriorities(CGoodTransportPriority *this)
-
 void  CGoodTransportPriority::CreateVikingPriorities(void) {
   
   int result; // eax
@@ -333,7 +319,6 @@ void  CGoodTransportPriority::CreateVikingPriorities(void) {
 
 // address=[0x1453570]
 // Decompiled from int __thiscall CGoodTransportPriority::CreateMayaPriorities(CGoodTransportPriority *this)
-
 void  CGoodTransportPriority::CreateMayaPriorities(void) {
   
   int result; // eax
@@ -377,7 +362,6 @@ void  CGoodTransportPriority::CreateMayaPriorities(void) {
 
 // address=[0x14538b0]
 // Decompiled from CGoodTransportPriority *__thiscall CGoodTransportPriority::CreateTrojanPriorities(CGoodTransportPriority *this)
-
 void  CGoodTransportPriority::CreateTrojanPriorities(void) {
   
   CGoodTransportPriority *result; // eax

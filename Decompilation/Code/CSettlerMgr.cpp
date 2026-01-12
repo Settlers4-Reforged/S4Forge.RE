@@ -4,7 +4,6 @@
 
 // address=[0x130e490]
 // Decompiled from unsigned __int8 *__stdcall CSettlerMgr::operator[](int a1)
-
 class CSettler &  CSettlerMgr::operator[](int) {
   
   unsigned __int8 *v2; // [esp+4h] [ebp-4h]
@@ -34,7 +33,6 @@ class CSettler &  CSettlerMgr::operator[](int) {
 
 // address=[0x130ecc0]
 // Decompiled from int __thiscall CSettlerMgr::GetNumberOfSettlers(CSettlerMgr *this, int a2, int a3)
-
 int  CSettlerMgr::GetNumberOfSettlers(int,int)const {
   
   if ( (a2 < 1 || a2 > 8)
@@ -61,7 +59,6 @@ int  CSettlerMgr::GetNumberOfSettlers(int,int)const {
 
 // address=[0x130edf0]
 // Decompiled from unsigned __int8 *__stdcall CSettlerMgr::GetSettlerPtr(int a1)
-
 class CSettler *  CSettlerMgr::GetSettlerPtr(int) {
   
   unsigned __int8 *v3; // [esp+Ch] [ebp-4h]
@@ -76,7 +73,6 @@ class CSettler *  CSettlerMgr::GetSettlerPtr(int) {
 
 // address=[0x1311cd0]
 // Decompiled from int __thiscall CSettlerMgr::GetNumberOfOfferedSettlers(CSettlerMgr *this, int a2, int a3)
-
 int  CSettlerMgr::GetNumberOfOfferedSettlers(int,int)const {
   
   if ( (a2 < 1 || a2 > 8)
@@ -103,7 +99,6 @@ int  CSettlerMgr::GetNumberOfOfferedSettlers(int,int)const {
 
 // address=[0x1439bb0]
 // Decompiled from char *__cdecl sub_1839BB0(int a1, int a2)
-
 static struct CSettlerMgr::SSettlerInfos const & __cdecl CSettlerMgr::GetSettlerInfo(int,int) {
   
   return &CSettlerMgr::m_vSettlerInfos[3080 * a1 + 44 * a2];
@@ -112,7 +107,6 @@ static struct CSettlerMgr::SSettlerInfos const & __cdecl CSettlerMgr::GetSettler
 
 // address=[0x1439ed0]
 // Decompiled from int __cdecl CSettlerMgr::SettlerWarriorType(int a1)
-
 static int __cdecl CSettlerMgr::SettlerWarriorType(int) {
   
   if ( !CSettlerMgr::m_uSettlerWarriorTypes[29]
@@ -130,7 +124,6 @@ static int __cdecl CSettlerMgr::SettlerWarriorType(int) {
 
 // address=[0x1580220]
 // Decompiled from CSettlerMgr *__thiscall CSettlerMgr::CSettlerMgr(CSettlerMgr *this)
-
  CSettlerMgr::CSettlerMgr(void) {
   
   unsigned __int8 *i; // [esp+8h] [ebp-10h]
@@ -183,7 +176,6 @@ static int __cdecl CSettlerMgr::SettlerWarriorType(int) {
 
 // address=[0x1580410]
 // Decompiled from void __thiscall CSettlerMgr::~CSettlerMgr(CSettlerMgr *this)
-
  CSettlerMgr::~CSettlerMgr(void) {
   
   MemoryAllocator::~MemoryAllocator(this);
@@ -192,7 +184,6 @@ static int __cdecl CSettlerMgr::SettlerWarriorType(int) {
 
 // address=[0x1580430]
 // Decompiled from int __thiscall CSettlerMgr::Clear(CSettlerMgr *this)
-
 void  CSettlerMgr::Clear(void) {
   
   j__memset((char *)this + 28, 0, 0x96Cu);
@@ -205,7 +196,6 @@ void  CSettlerMgr::Clear(void) {
 
 // address=[0x15804a0]
 // Decompiled from CCarrierRole *__thiscall CSettlerMgr::CreateSettlerRole(CSettlerMgr *this, unsigned int a2, int a3)
-
 class ISettlerRole *  CSettlerMgr::CreateSettlerRole(int,int) {
   
   CCarrierRole *result; // eax
@@ -430,7 +420,6 @@ class ISettlerRole *  CSettlerMgr::CreateSettlerRole(int,int) {
 
 // address=[0x1580c20]
 // Decompiled from int __cdecl CSettlerMgr::LoadSettlerRole(int a1, int a2)
-
 static class ISettlerRole * __cdecl CSettlerMgr::LoadSettlerRole(std::istream &,int) {
   
   int result; // eax
@@ -518,7 +507,6 @@ static class ISettlerRole * __cdecl CSettlerMgr::LoadSettlerRole(std::istream &,
 
 // address=[0x1580eb0]
 // Decompiled from void __thiscall CSettlerMgr::LoadSettlerData(CSettlerMgr *this, struct S4::CMapFile *a2, unsigned __int16 a3)
-
 void  CSettlerMgr::LoadSettlerData(class S4::CMapFile &,int) {
   
   char *v4; // [esp+10h] [ebp-28h]
@@ -555,7 +543,6 @@ void  CSettlerMgr::LoadSettlerData(class S4::CMapFile &,int) {
 
 // address=[0x1580fe0]
 // Decompiled from unsigned int __thiscall CSettlerMgr::LoadInfo(_BYTE *this, char a2)
-
 void  CSettlerMgr::LoadInfo(bool) {
   
   unsigned int result; // eax
@@ -1116,7 +1103,6 @@ void  CSettlerMgr::LoadInfo(bool) {
 
 // address=[0x1582460]
 // Decompiled from int __thiscall CSettlerMgr::AddSettler(CSettlerMgr *this, int a2, int a3, int a4, int a5, int a6)
-
 int  CSettlerMgr::AddSettler(int,int,int,int,int) {
   
   void *v6; // eax
@@ -1232,7 +1218,6 @@ int  CSettlerMgr::AddSettler(int,int,int,int,int) {
 
 // address=[0x1582720]
 // Decompiled from bool __thiscall CSettlerMgr::IsAddSettlerOk(CSettlerMgr *this, int a2, int a3, int a4)
-
 bool  CSettlerMgr::IsAddSettlerOk(int,int,int) {
   
   int v5; // [esp+4h] [ebp-4h]
@@ -1250,7 +1235,6 @@ bool  CSettlerMgr::IsAddSettlerOk(int,int,int) {
 
 // address=[0x15827b0]
 // Decompiled from int __thiscall CSettlerMgr::AddSettlers(CSettlerMgr *this, int a2, int a3, int a4, int a5, int a6, int a7)
-
 void  CSettlerMgr::AddSettlers(int,int,int,int,int,int) {
   
   int result; // eax
@@ -1303,7 +1287,6 @@ void  CSettlerMgr::AddSettlers(int,int,int,int,int,int) {
 
 // address=[0x1582970]
 // Decompiled from int __thiscall CSettlerMgr::AddGuardSettler(CSettlerMgr *this, int a2, int a3, int a4)
-
 int  CSettlerMgr::AddGuardSettler(int,int,int) {
   
   int v5; // [esp-8h] [ebp-54h] BYREF
@@ -1381,7 +1364,6 @@ int  CSettlerMgr::AddGuardSettler(int,int,int) {
 
 // address=[0x1582b30]
 // Decompiled from int __thiscall CSettlerMgr::DeleteSettler(CSettlerMgr *this, int a2)
-
 void  CSettlerMgr::DeleteSettler(int) {
   
   unsigned __int8 *v2; // eax
@@ -1411,7 +1393,6 @@ void  CSettlerMgr::DeleteSettler(int) {
 
 // address=[0x1582bc0]
 // Decompiled from char __thiscall CSettlerMgr::SearchSpaceForSettler(CSettlerMgr *this, int a2, int a3, int a4)
-
 bool  CSettlerMgr::SearchSpaceForSettler(int,int,int) {
   
   int v4; // eax
@@ -1464,7 +1445,6 @@ bool  CSettlerMgr::SearchSpaceForSettler(int,int,int) {
 
 // address=[0x1582d50]
 // Decompiled from char __thiscall CSettlerMgr::SearchFreePositionInSector(CSettlerMgr *this, int *a2, int *a3, int a4, int a5)
-
 bool  CSettlerMgr::SearchFreePositionInSector(int &,int &,int,int) {
   
   _DWORD v6[6]; // [esp+0h] [ebp-24h] BYREF
@@ -1501,7 +1481,6 @@ bool  CSettlerMgr::SearchFreePositionInSector(int &,int &,int,int) {
 
 // address=[0x1582e60]
 // Decompiled from char __thiscall CSettlerMgr::SearchFreePositionInEcoSector(CSettlerMgr *this, int *a2, int *a3, int a4)
-
 bool  CSettlerMgr::SearchFreePositionInEcoSector(int &,int &,int) {
   
   _DWORD v5[6]; // [esp+0h] [ebp-24h] BYREF
@@ -1530,7 +1509,6 @@ bool  CSettlerMgr::SearchFreePositionInEcoSector(int &,int &,int) {
 
 // address=[0x1582f20]
 // Decompiled from int __thiscall CSettlerMgr::GetFirstSettlerId(CSettlerMgr *this, int a2, int a3)
-
 int  CSettlerMgr::GetFirstSettlerId(int,int)const {
   
   if ( (a2 <= 0 || a2 >= 9)
@@ -1549,7 +1527,6 @@ int  CSettlerMgr::GetFirstSettlerId(int,int)const {
 
 // address=[0x1582fa0]
 // Decompiled from int __thiscall CSettlerMgr::OrderWarrior(CSettlerMgr *this, int a2, int a3, unsigned int a4)
-
 int  CSettlerMgr::OrderWarrior(int,int,int) {
   
   int v4; // eax
@@ -1627,7 +1604,6 @@ int  CSettlerMgr::OrderWarrior(int,int,int) {
 
 // address=[0x1583190]
 // Decompiled from int __thiscall CSettlerMgr::OrderAIWarrior(CSettlerMgr *this, int a2, int a3)
-
 int  CSettlerMgr::OrderAIWarrior(int,int) {
   
   int v4; // eax
@@ -1700,7 +1676,6 @@ LABEL_18:
 
 // address=[0x1583370]
 // Decompiled from int __thiscall CSettlerMgr::OrderSpecialist(CSettlerMgr *this, int a2, int a3)
-
 int  CSettlerMgr::OrderSpecialist(int,int) {
   
   int v4; // eax
@@ -1789,7 +1764,6 @@ int  CSettlerMgr::OrderSpecialist(int,int) {
 
 // address=[0x15835e0]
 // Decompiled from int __thiscall CSettlerMgr::OrderWarriorToTower(CSettlerMgr *this, int a2, int a3)
-
 void  CSettlerMgr::OrderWarriorToTower(int,int) {
   
   int v3; // esi
@@ -1825,7 +1799,6 @@ void  CSettlerMgr::OrderWarriorToTower(int,int) {
 
 // address=[0x1583730]
 // Decompiled from _DWORD *__cdecl CSettlerMgr::FillSettlerAmount(void **a1, char a2, char a3)
-
 static void __cdecl CSettlerMgr::FillSettlerAmount(class CInfoExchange *,bool,bool) {
   
   _DWORD *result; // eax
@@ -1995,7 +1968,6 @@ static void __cdecl CSettlerMgr::FillSettlerAmount(class CInfoExchange *,bool,bo
 
 // address=[0x1583c60]
 // Decompiled from _DWORD *__cdecl CSettlerMgr::FillFreeCarrier(void **a1, char a2)
-
 static void __cdecl CSettlerMgr::FillFreeCarrier(class CInfoExchange *,bool,bool) {
   
   int LocalPlayerId; // [esp+4h] [ebp-40h]
@@ -2071,7 +2043,6 @@ static void __cdecl CSettlerMgr::FillFreeCarrier(class CInfoExchange *,bool,bool
 
 // address=[0x1583f30]
 // Decompiled from _DWORD *__cdecl CSettlerMgr::FillSpecialistProduction(void **a1, char a2)
-
 static void __cdecl CSettlerMgr::FillSpecialistProduction(class CInfoExchange *,bool,bool) {
   
   int v2; // esi
@@ -2167,7 +2138,6 @@ static void __cdecl CSettlerMgr::FillSpecialistProduction(class CInfoExchange *,
 
 // address=[0x1584240]
 // Decompiled from _DWORD *__cdecl CSettlerMgr::FillSoldierMenu(void **a1, char a2)
-
 static void __cdecl CSettlerMgr::FillSoldierMenu(class CInfoExchange *,bool,bool) {
   
   int v3; // [esp+4h] [ebp-64h]
@@ -2284,7 +2254,6 @@ static void __cdecl CSettlerMgr::FillSoldierMenu(class CInfoExchange *,bool,bool
 
 // address=[0x15845d0]
 // Decompiled from _DWORD *__cdecl CSettlerMgr::FillSpecialistMenu(void **a1, char a2)
-
 static void __cdecl CSettlerMgr::FillSpecialistMenu(class CInfoExchange *,bool,bool) {
   
   unsigned __int16 *v2; // eax
@@ -2373,7 +2342,6 @@ static void __cdecl CSettlerMgr::FillSpecialistMenu(class CInfoExchange *,bool,b
 
 // address=[0x1584870]
 // Decompiled from void __thiscall CSettlerMgr::Store(CSettlerMgr *this, struct S4::CMapFile *a2)
-
 void  CSettlerMgr::Store(class S4::CMapFile &) {
   
   std::strstreambuf *v2; // eax
@@ -2456,7 +2424,6 @@ void  CSettlerMgr::Store(class S4::CMapFile &) {
 
 // address=[0x1584c80]
 // Decompiled from void __thiscall CSettlerMgr::Load(CSettlerMgr *this, struct S4::CMapFile *a2)
-
 void  CSettlerMgr::Load(class S4::CMapFile &) {
   
   int v2; // [esp+0h] [ebp-100h] BYREF
@@ -2532,7 +2499,6 @@ void  CSettlerMgr::Load(class S4::CMapFile &) {
 
 // address=[0x1584f70]
 // Decompiled from void __thiscall CSettlerMgr::IncNumberOfSettler(CSettlerMgr *this, int a2, int a3)
-
 void  CSettlerMgr::IncNumberOfSettler(int,int) {
   
   if ( (a2 < 1 || a2 > 8)
@@ -2560,7 +2526,6 @@ void  CSettlerMgr::IncNumberOfSettler(int,int) {
 
 // address=[0x1585020]
 // Decompiled from void __thiscall CSettlerMgr::DecNumberOfSettler(CSettlerMgr *this, int a2, int a3)
-
 void  CSettlerMgr::DecNumberOfSettler(int,int) {
   
   if ( (a2 < 1 || a2 > 8)
@@ -2598,7 +2563,6 @@ void  CSettlerMgr::DecNumberOfSettler(int,int) {
 
 // address=[0x15889c0]
 // Decompiled from unsigned __int8 *__thiscall CSettlerMgr::Settler(CSettlerMgr *this, int a2)
-
 class CSettler &  CSettlerMgr::Settler(int) {
   
   unsigned __int8 *v3; // [esp+4h] [ebp-4h]
@@ -2628,7 +2592,6 @@ class CSettler &  CSettlerMgr::Settler(int) {
 
 // address=[0x1592200]
 // Decompiled from int __cdecl CSettlerMgr::GetSquadLeaderBonus256(int a1)
-
 static int __cdecl CSettlerMgr::GetSquadLeaderBonus256(int) {
   
   return CSettlerMgr::m_iSquadLeaderBoni256[a1];
@@ -2637,7 +2600,6 @@ static int __cdecl CSettlerMgr::GetSquadLeaderBonus256(int) {
 
 // address=[0x15a7b80]
 // Decompiled from int __cdecl CSettlerMgr::SettlerWarriorLevel(int a1)
-
 static int __cdecl CSettlerMgr::SettlerWarriorLevel(int) {
   
   if ( !CSettlerMgr::m_uSettlerWarriorLevels[29]
@@ -2655,7 +2617,6 @@ static int __cdecl CSettlerMgr::SettlerWarriorLevel(int) {
 
 // address=[0x1585120]
 // Decompiled from void __thiscall CSettlerMgr::AttachSettler(CSettlerMgr *this, struct CSettler *a2)
-
 void  CSettlerMgr::AttachSettler(class CSettler &) {
   
   unsigned __int8 *SettlerPtr; // [esp+0h] [ebp-18h]
@@ -2730,7 +2691,6 @@ void  CSettlerMgr::AttachSettler(class CSettler &) {
 
 // address=[0x15853f0]
 // Decompiled from int __thiscall CSettlerMgr::DetachSettler(int *this, unsigned __int8 *a2)
-
 void  CSettlerMgr::DetachSettler(class CSettler &) {
   
   unsigned __int8 *v3; // [esp+0h] [ebp-20h]
@@ -2829,7 +2789,6 @@ void  CSettlerMgr::DetachSettler(class CSettler &) {
 
 // address=[0x157ff60]
 // Decompiled from unsigned int __thiscall CSettlerMgr::Alloc(CSettlerMgr *this, unsigned int a2)
-
 void *  CSettlerMgr::Alloc(unsigned int) {
   
   return MemoryAllocator::allocate((unsigned int *)this, a2);
@@ -2838,7 +2797,6 @@ void *  CSettlerMgr::Alloc(unsigned int) {
 
 // address=[0x1580020]
 // Decompiled from void __thiscall CSettlerMgr::Dealloc(CSettlerMgr *this, void *a2)
-
 void  CSettlerMgr::Dealloc(void *) {
   
   MemoryAllocator::deallocate(this, a2);
@@ -2847,7 +2805,6 @@ void  CSettlerMgr::Dealloc(void *) {
 
 // address=[0x1585740]
 // Decompiled from void __thiscall CSettlerMgr::CheckOutSettler(CSettlerMgr *this, int a2)
-
 void  CSettlerMgr::CheckOutSettler(int) {
   
   int v2; // eax
@@ -2901,7 +2858,6 @@ void  CSettlerMgr::CheckOutSettler(int) {
 
 // address=[0x15858b0]
 // Decompiled from int CSettlerMgr::GetUserESInMiddleOfTheScreen()
-
 static int __cdecl CSettlerMgr::GetUserESInMiddleOfTheScreen(void) {
   
   int v0; // eax

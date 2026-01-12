@@ -3,10 +3,7 @@
 // Definitions for class CWaypoints
 
 // address=[0x130efd0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CWaypoints::GoalDistance(CWaypoints *this)
-
+// Decompiled from int __thiscall CWaypoints::GoalDistance(CWaypoints *this)
 int  CWaypoints::GoalDistance(void)const {
   
   return *((_DWORD *)this + 1);
@@ -15,7 +12,6 @@ int  CWaypoints::GoalDistance(void)const {
 
 // address=[0x132e830]
 // Decompiled from int __thiscall CWaypoints::Back(CWaypoints *this)
-
 int  CWaypoints::Back(void)const {
   
   return *((_DWORD *)this + *((_DWORD *)this + 4) + 5);
@@ -24,7 +20,6 @@ int  CWaypoints::Back(void)const {
 
 // address=[0x132e850]
 // Decompiled from int __thiscall CWaypoints::CachedWaypointsCount(pairNode *this)
-
 int  CWaypoints::CachedWaypointsCount(void)const {
   
   return *((_DWORD *)this + 3);
@@ -33,7 +28,6 @@ int  CWaypoints::CachedWaypointsCount(void)const {
 
 // address=[0x132ea70]
 // Decompiled from CWaypoints *__thiscall CWaypoints::PopBack(CWaypoints *this)
-
 void  CWaypoints::PopBack(void) {
   
   CWaypoints *result; // eax
@@ -49,10 +43,7 @@ void  CWaypoints::PopBack(void) {
 
 
 // address=[0x159e920]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CWaypoints::Goal(CWaypoints *this)
-
+// Decompiled from int __thiscall CWaypoints::Goal(CWaypoints *this)
 int  CWaypoints::Goal(void)const {
   
   return *(_DWORD *)this;
@@ -61,7 +52,6 @@ int  CWaypoints::Goal(void)const {
 
 // address=[0x15d65e0]
 // Decompiled from char __thiscall CWaypoints::GoalCached(CWaypoints *this)
-
 bool  CWaypoints::GoalCached(void)const {
   
   return *((_BYTE *)this + 84);
@@ -70,7 +60,6 @@ bool  CWaypoints::GoalCached(void)const {
 
 // address=[0x15d66b0]
 // Decompiled from CWaypoints *__thiscall CWaypoints::Init(CWaypoints *this)
-
 void  CWaypoints::Init(void) {
   
   CWaypoints *result; // eax
@@ -87,7 +76,6 @@ void  CWaypoints::Init(void) {
 
 // address=[0x15d6a20]
 // Decompiled from int __thiscall CWaypoints::PushBack(CWaypoints *this, int a2)
-
 void  CWaypoints::PushBack(int) {
   
   int result; // eax
@@ -104,7 +92,6 @@ void  CWaypoints::PushBack(int) {
 
 // address=[0x15d6ad0]
 // Decompiled from int __thiscall CWaypoints::PushGoal(CWaypoints *this, int a2, int a3)
-
 void  CWaypoints::PushGoal(int,int) {
   
   int result; // eax
@@ -132,7 +119,6 @@ void  CWaypoints::PushGoal(int,int) {
 
 // address=[0x132e930]
 // Decompiled from int __cdecl CWaypoints::DecWrap(char a1)
-
 static int __cdecl CWaypoints::DecWrap(int) {
   
   return (a1 - 1) & 0xF;
@@ -141,7 +127,6 @@ static int __cdecl CWaypoints::DecWrap(int) {
 
 // address=[0x15d6620]
 // Decompiled from int __cdecl CWaypoints::IncWrap(char a1)
-
 static int __cdecl CWaypoints::IncWrap(int) {
   
   return (a1 + 1) & 0xF;

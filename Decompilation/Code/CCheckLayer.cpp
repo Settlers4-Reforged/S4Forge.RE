@@ -4,7 +4,6 @@
 
 // address=[0x2fc85d0]
 // Decompiled from CCheckLayer *__thiscall CCheckLayer::CCheckLayer(CCheckLayer *this, int a2)
-
  CCheckLayer::CCheckLayer(int) {
   
   *((_DWORD *)this + 1) = a2;
@@ -16,7 +15,6 @@
 
 // address=[0x2fc8630]
 // Decompiled from int __thiscall CCheckLayer::~CCheckLayer(void **this)
-
  CCheckLayer::~CCheckLayer(void) {
   
   return operator delete[](*this);
@@ -25,7 +23,6 @@
 
 // address=[0x2fc8660]
 // Decompiled from __int16 __thiscall CCheckLayer::getPoint(CCheckLayer *this, int a2, int a3)
-
 unsigned short  CCheckLayer::getPoint(int,int) {
   
   if ( a2 >= *((_DWORD *)this + 1) && BBSupportDbgReport(2, "CCheckLayer.cpp", 35, "_iX < m_iSizeX") == 1 )
@@ -45,7 +42,6 @@ unsigned short  CCheckLayer::getPoint(int,int) {
 
 // address=[0x2fc8740]
 // Decompiled from int __thiscall CCheckLayer::setPoint(CCheckLayer *this, int a2, int a3, unsigned __int16 a4)
-
 void  CCheckLayer::setPoint(int,int,unsigned short) {
   
   int result; // eax
@@ -69,7 +65,6 @@ void  CCheckLayer::setPoint(int,int,unsigned short) {
 
 // address=[0x2fc8820]
 // Decompiled from void *__thiscall CCheckLayer::clear(void **this)
-
 void  CCheckLayer::clear(void) {
   
   return j__memset(*this, 0, 2 * (_DWORD)this[2] * (_DWORD)this[1]);

@@ -4,7 +4,6 @@
 
 // address=[0x15d4050]
 // Decompiled from int __cdecl CAStarTiling::FindPath(int a1, int a2, struct CWaypoints *a3, __int16 a4)
-
 static int __cdecl CAStarTiling::FindPath(int,int,class CWaypoints &,int) {
   
   int v4; // eax

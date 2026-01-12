@@ -4,7 +4,6 @@
 
 // address=[0x2f3bbd0]
 // Decompiled from int __stdcall CProductionTab::GetProdBuildingByProdIndex(int a1, int a2, int a3)
-
 enum BUILDING_TYPES  CProductionTab::GetProdBuildingByProdIndex(int,int,int) {
   
   return CProductionTab::m_aProductionEntry[8 * a1 + 3 + a2];
@@ -13,7 +12,6 @@ enum BUILDING_TYPES  CProductionTab::GetProdBuildingByProdIndex(int,int,int) {
 
 // address=[0x2f3bc00]
 // Decompiled from int __stdcall CProductionTab::GetProdIdForGoodType(int a1, int a2)
-
 int  CProductionTab::GetProdIdForGoodType(enum PILE_TYPES,int) {
   
   return CProductionTab::m_aRaceAndGoodToProdIdMap[43 * a2 + a1];
@@ -22,7 +20,6 @@ int  CProductionTab::GetProdIdForGoodType(enum PILE_TYPES,int) {
 
 // address=[0x2f53d00]
 // Decompiled from CProductionTab *__thiscall CProductionTab::CProductionTab(CProductionTab *this)
-
  CProductionTab::CProductionTab(void) {
   
   if ( CProductionTab::m_iNumberOfEntries )
@@ -55,10 +52,7 @@ int  CProductionTab::GetProdIdForGoodType(enum PILE_TYPES,int) {
 
 
 // address=[0x2f53f80]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CProductionTab::~CProductionTab(CProductionTab *this)
-
+// Decompiled from void __thiscall CProductionTab::~CProductionTab(CProductionTab *this)
  CProductionTab::~CProductionTab(void) {
   
   ;
@@ -66,9 +60,7 @@ void __thiscall CProductionTab::~CProductionTab(CProductionTab *this)
 
 
 // address=[0x2f53f90]
-// Decompiled from // public: int __thiscall CProductionTab::GetAlternateProdForProdId(enum PILE_TYPES,int)
-int __thiscall CProductionTab::GetAlternateProdForProdId(void *this, int a2, int a3)
-
+// Decompiled from int __thiscall CProductionTab::GetAlternateProdForProdId(void *this, int a2, int a3)
 int  CProductionTab::GetAlternateProdForProdId(enum PILE_TYPES,int) {
   
   int ProdIdForGoodType; // [esp+4h] [ebp-8h]
@@ -97,7 +89,6 @@ int  CProductionTab::GetAlternateProdForProdId(enum PILE_TYPES,int) {
 
 // address=[0x2f53ff0]
 // Decompiled from int __stdcall CProductionTab::PT(int a1, int a2, int a3, int a4, int a5, int a6, int a7, int a8)
-
 void  CProductionTab::PT(char const *,int,enum PILE_TYPES,enum BUILDING_TYPES,enum BUILDING_TYPES,enum BUILDING_TYPES,enum BUILDING_TYPES,enum BUILDING_TYPES) {
   
   int result; // eax

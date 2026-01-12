@@ -4,7 +4,6 @@
 
 // address=[0x1369ef0]
 // Decompiled from CGfxManager::SGFXINFO *__thiscall CGfxManager::SGFXINFO::SGFXINFO(CGfxManager::SGFXINFO *this)
-
  CGfxManager::SGFXINFO::SGFXINFO(void) {
   
   *((_DWORD *)this + 2) = 0;

@@ -4,7 +4,6 @@
 
 // address=[0x1592e10]
 // Decompiled from int __thiscall CWarriorBehavior::WarriorDestinationXY(pairNode *this)
-
 int  CWarriorBehavior::WarriorDestinationXY(void)const {
   
   return *((_DWORD *)this + 3);
@@ -13,7 +12,6 @@ int  CWarriorBehavior::WarriorDestinationXY(void)const {
 
 // address=[0x15ac3a0]
 // Decompiled from CWarriorBehavior *__thiscall CWarriorBehavior::CWarriorBehavior(CWarriorBehavior *this)
-
  CWarriorBehavior::CWarriorBehavior(void) {
   
   *(_DWORD *)this = &CWarriorBehavior::_vftable_;
@@ -25,7 +23,6 @@ int  CWarriorBehavior::WarriorDestinationXY(void)const {
 
 // address=[0x15ac3e0]
 // Decompiled from void __thiscall CWarriorBehavior::WarriorInit(CWarriorBehavior *this, struct IMovingEntity *a2, int a3, int a4)
-
 void  CWarriorBehavior::WarriorInit(class IMovingEntity &,int,int) {
   
   int v4; // eax
@@ -124,12 +121,7 @@ void  CWarriorBehavior::WarriorInit(class IMovingEntity &,int,int) {
 
 
 // address=[0x15ac600]
-// Decompiled from void __thiscall CWarriorBehavior::WarriorLogicUpdate(
-        CWarriorBehavior *this,
-        struct IMovingEntity *a2,
-        unsigned int a3,
-        char a4)
-
+// Decompiled from void __thiscall CWarriorBehavior::WarriorLogicUpdate(  CWarriorBehavior *this,  struct IMovingEntity *a2,  unsigned int a3,  char a4)
 void  CWarriorBehavior::WarriorLogicUpdate(class IMovingEntity &,unsigned int,int) {
   
   int v4; // esi
@@ -351,12 +343,7 @@ LABEL_64:
 
 
 // address=[0x15acbd0]
-// Decompiled from void __thiscall CWarriorBehavior::WarriorVehicleLogicUpdate(
-        CWarriorBehavior *this,
-        struct IEntity *a2,
-        unsigned int a3,
-        char a4)
-
+// Decompiled from void __thiscall CWarriorBehavior::WarriorVehicleLogicUpdate(  CWarriorBehavior *this,  struct IEntity *a2,  unsigned int a3,  char a4)
 void  CWarriorBehavior::WarriorVehicleLogicUpdate(class IMovingEntity &,unsigned int,int) {
   
   Y16X16 *v4; // eax
@@ -564,7 +551,6 @@ LABEL_61:
 
 // address=[0x15ad0e0]
 // Decompiled from bool __thiscall CWarriorBehavior::WarriorCheckTargetAndDistance(CWarriorBehavior *this, struct IEntity *a2, int a3)
-
 bool  CWarriorBehavior::WarriorCheckTargetAndDistance(class IMovingEntity &,int) {
   
   int v4; // [esp+0h] [ebp-38h]
@@ -599,7 +585,6 @@ bool  CWarriorBehavior::WarriorCheckTargetAndDistance(class IMovingEntity &,int)
 
 // address=[0x15ad1f0]
 // Decompiled from bool __thiscall CWarriorBehavior::WarriorValidLastTargetMedic(CWarriorBehavior *this, struct IMovingEntity *a2, int a3)
-
 bool  CWarriorBehavior::WarriorValidLastTargetMedic(class IMovingEntity &,int) {
   
   void **v3; // eax
@@ -623,11 +608,7 @@ bool  CWarriorBehavior::WarriorValidLastTargetMedic(class IMovingEntity &,int) {
 
 
 // address=[0x15ad2a0]
-// Decompiled from char __thiscall CWarriorBehavior::WarriorValidLastTargetAxeWarrior(
-        CWarriorBehavior *this,
-        struct IMovingEntity *a2,
-        int a3)
-
+// Decompiled from char __thiscall CWarriorBehavior::WarriorValidLastTargetAxeWarrior(  CWarriorBehavior *this,  struct IMovingEntity *a2,  int a3)
 bool  CWarriorBehavior::WarriorValidLastTargetAxeWarrior(class IMovingEntity &,int) {
   
   return 0;
@@ -635,11 +616,7 @@ bool  CWarriorBehavior::WarriorValidLastTargetAxeWarrior(class IMovingEntity &,i
 
 
 // address=[0x15ad2b0]
-// Decompiled from char __thiscall CWarriorBehavior::WarriorValidLastTargetSaboteur(
-        CWarriorBehavior *this,
-        struct IMovingEntity *a2,
-        int a3)
-
+// Decompiled from char __thiscall CWarriorBehavior::WarriorValidLastTargetSaboteur(  CWarriorBehavior *this,  struct IMovingEntity *a2,  int a3)
 bool  CWarriorBehavior::WarriorValidLastTargetSaboteur(class IMovingEntity &,int) {
   
   return 0;
@@ -648,7 +625,6 @@ bool  CWarriorBehavior::WarriorValidLastTargetSaboteur(class IMovingEntity &,int
 
 // address=[0x15ad2c0]
 // Decompiled from int __thiscall CWarriorBehavior::WarriorAttackCheck1(CWarriorBehavior *this, struct IEntity *a2)
-
 int  CWarriorBehavior::WarriorAttackCheck1(class IMovingEntity &) {
   
   int v2; // eax
@@ -727,7 +703,6 @@ int  CWarriorBehavior::WarriorAttackCheck1(class IMovingEntity &) {
 
 // address=[0x15ad4a0]
 // Decompiled from int __thiscall CWarriorBehavior::WarriorAttackCheck15(CWarriorBehavior *this, struct IEntity *a2)
-
 int  CWarriorBehavior::WarriorAttackCheck15(class IMovingEntity &) {
   
   int v3; // eax
@@ -796,7 +771,6 @@ int  CWarriorBehavior::WarriorAttackCheck15(class IMovingEntity &) {
 
 // address=[0x15ad6a0]
 // Decompiled from int __thiscall CWarriorBehavior::WarriorAttackCheckBowman(CWarriorBehavior *this, struct IEntity *a2)
-
 int  CWarriorBehavior::WarriorAttackCheckBowman(class IMovingEntity &) {
   
   _DWORD *v2; // eax
@@ -863,7 +837,6 @@ int  CWarriorBehavior::WarriorAttackCheckBowman(class IMovingEntity &) {
 
 // address=[0x15ad840]
 // Decompiled from int __thiscall CWarriorBehavior::WarriorAttackCheckMedic(CWarriorBehavior *this, struct IEntity *a2)
-
 int  CWarriorBehavior::WarriorAttackCheckMedic(class IMovingEntity &) {
   
   void **v2; // eax
@@ -920,7 +893,6 @@ int  CWarriorBehavior::WarriorAttackCheckMedic(class IMovingEntity &) {
 
 // address=[0x15ad980]
 // Decompiled from int __thiscall CWarriorBehavior::WarriorAttackCheckAxeWarrior(CWarriorBehavior *this, struct IEntity *a2)
-
 int  CWarriorBehavior::WarriorAttackCheckAxeWarrior(class IMovingEntity &) {
   
   int v4; // [esp+4h] [ebp-4h]
@@ -935,7 +907,6 @@ int  CWarriorBehavior::WarriorAttackCheckAxeWarrior(class IMovingEntity &) {
 
 // address=[0x15ad9c0]
 // Decompiled from int __thiscall CWarriorBehavior::WarriorAttackCheckSaboteur(CWarriorBehavior *this, struct IMovingEntity *a2)
-
 int  CWarriorBehavior::WarriorAttackCheckSaboteur(class IMovingEntity &) {
   
   int v4; // [esp+8h] [ebp-4h]
@@ -950,7 +921,6 @@ int  CWarriorBehavior::WarriorAttackCheckSaboteur(class IMovingEntity &) {
 
 // address=[0x15ada00]
 // Decompiled from int __thiscall CWarriorBehavior::WarriorAttackScan15(CWarriorBehavior *this, struct IEntity *a2, int *a3)
-
 int  CWarriorBehavior::WarriorAttackScan15(class IMovingEntity &,int *) {
   
   int v3; // eax
@@ -1002,7 +972,6 @@ int  CWarriorBehavior::WarriorAttackScan15(class IMovingEntity &,int *) {
 
 // address=[0x15adb50]
 // Decompiled from int __thiscall CWarriorBehavior::WarriorAttackScanBowman(CWarriorBehavior *this, struct IEntity *a2, int *a3)
-
 int  CWarriorBehavior::WarriorAttackScanBowman(class IMovingEntity &,int *) {
   
   _DWORD *v3; // eax
@@ -1061,7 +1030,6 @@ int  CWarriorBehavior::WarriorAttackScanBowman(class IMovingEntity &,int *) {
 
 // address=[0x15adcd0]
 // Decompiled from int __thiscall CWarriorBehavior::WarriorAttackScanMedic(CWarriorBehavior *this, struct IEntity *a2, int *a3)
-
 int  CWarriorBehavior::WarriorAttackScanMedic(class IMovingEntity &,int *) {
   
   void **v3; // eax
@@ -1132,7 +1100,6 @@ int  CWarriorBehavior::WarriorAttackScanMedic(class IMovingEntity &,int *) {
 
 // address=[0x15ade90]
 // Decompiled from int __thiscall CWarriorBehavior::WarriorAttackScanAxeWarrior(CWarriorBehavior *this, struct IEntity *a2, int *a3)
-
 int  CWarriorBehavior::WarriorAttackScanAxeWarrior(class IMovingEntity &,int *) {
   
   int v5; // [esp+4h] [ebp-4h]
@@ -1147,7 +1114,6 @@ int  CWarriorBehavior::WarriorAttackScanAxeWarrior(class IMovingEntity &,int *) 
 
 // address=[0x15adee0]
 // Decompiled from int __thiscall CWarriorBehavior::WarriorAttackScanSaboteur(CWarriorBehavior *this, struct IMovingEntity *a2, int *a3)
-
 int  CWarriorBehavior::WarriorAttackScanSaboteur(class IMovingEntity &,int *) {
   
   return sub_15AEDC0(a2, 21, -12, 0, a3);
@@ -1156,7 +1122,6 @@ int  CWarriorBehavior::WarriorAttackScanSaboteur(class IMovingEntity &,int *) {
 
 // address=[0x15adf10]
 // Decompiled from int __thiscall CWarriorBehavior::WarriorEvadeScan15a(CWarriorBehavior *this, struct IEntity *a2, int *a3)
-
 int  CWarriorBehavior::WarriorEvadeScan15a(class IMovingEntity &,int *) {
   
   int v3; // eax
@@ -1222,11 +1187,7 @@ int  CWarriorBehavior::WarriorEvadeScan15a(class IMovingEntity &,int *) {
 
 
 // address=[0x15ae0f0]
-// Decompiled from int __thiscall CWarriorBehavior::WarriorVehicleAttackScan31(
-        CWarriorBehavior *this,
-        struct IEntity *a2,
-        struct CWarriorBehavior::SWarriorScanResult *a3)
-
+// Decompiled from int __thiscall CWarriorBehavior::WarriorVehicleAttackScan31(  CWarriorBehavior *this,  struct IEntity *a2,  struct CWarriorBehavior::SWarriorScanResult *a3)
 void  CWarriorBehavior::WarriorVehicleAttackScan31(class IMovingEntity &,struct CWarriorBehavior::SWarriorScanResult &) {
   
   int v3; // eax
@@ -1364,7 +1325,6 @@ void  CWarriorBehavior::WarriorVehicleAttackScan31(class IMovingEntity &,struct 
 
 // address=[0x15ae660]
 // Decompiled from int __thiscall CWarriorBehavior::WarriorVehicleIdleWalkOneStep(CWarriorBehavior *this, struct IMovingEntity *a2)
-
 void  CWarriorBehavior::WarriorVehicleIdleWalkOneStep(class IMovingEntity &) {
   
   return (*(int (__thiscall **)(CWarriorBehavior *, struct IMovingEntity *))(*(_DWORD *)this + 8))(this, a2);
@@ -1373,7 +1333,6 @@ void  CWarriorBehavior::WarriorVehicleIdleWalkOneStep(class IMovingEntity &) {
 
 // address=[0x15ae680]
 // Decompiled from int __thiscall CWarriorBehavior::WarriorVehicleMoveWalkOneStep(CWarriorBehavior *this, struct IMovingEntity *a2)
-
 void  CWarriorBehavior::WarriorVehicleMoveWalkOneStep(class IMovingEntity &) {
   
   int v2; // eax
@@ -1393,9 +1352,7 @@ void  CWarriorBehavior::WarriorVehicleMoveWalkOneStep(class IMovingEntity &) {
 
 
 // address=[0x15ae6f0]
-// Decompiled from // public: void __thiscall CWarriorBehavior::WarriorVehicleEscortWalkOneStep(class IMovingEntity &)
-int __thiscall CWarriorBehavior::WarriorVehicleEscortWalkOneStep(pairNode *this, struct IMovingEntity *a2)
-
+// Decompiled from int __thiscall CWarriorBehavior::WarriorVehicleEscortWalkOneStep(pairNode *this, struct IMovingEntity *a2)
 void  CWarriorBehavior::WarriorVehicleEscortWalkOneStep(class IMovingEntity &) {
   
   int v2; // eax
@@ -1420,11 +1377,7 @@ void  CWarriorBehavior::WarriorVehicleEscortWalkOneStep(class IMovingEntity &) {
 
 
 // address=[0x15ae7b0]
-// Decompiled from bool __thiscall CWarriorBehavior::IsValidTarget(
-        CWarriorBehavior *this,
-        const struct IEntity *a2,
-        const struct IEntity *a3)
-
+// Decompiled from bool __thiscall CWarriorBehavior::IsValidTarget(  CWarriorBehavior *this,  const struct IEntity *a2,  const struct IEntity *a3)
 bool  CWarriorBehavior::IsValidTarget(class IMovingEntity const &,class IEntity const &) {
   
   int v4; // [esp+0h] [ebp-Ch] BYREF
@@ -1437,11 +1390,7 @@ bool  CWarriorBehavior::IsValidTarget(class IMovingEntity const &,class IEntity 
 
 
 // address=[0x15ae7f0]
-// Decompiled from BOOL __thiscall CWarriorBehavior::IsTargetInAtackRange(
-        CWarriorBehavior *this,
-        const struct IMovingEntity *a2,
-        struct IEntity *a3)
-
+// Decompiled from BOOL __thiscall CWarriorBehavior::IsTargetInAtackRange(  CWarriorBehavior *this,  const struct IMovingEntity *a2,  struct IEntity *a3)
 bool  CWarriorBehavior::IsTargetInAtackRange(class IMovingEntity const &,class IEntity const &) {
   
   int v4; // [esp+0h] [ebp-2Ch]
@@ -1465,7 +1414,6 @@ bool  CWarriorBehavior::IsTargetInAtackRange(class IMovingEntity const &,class I
 
 // address=[0x15ae8c0]
 // Decompiled from bool __thiscall CWarriorBehavior::WarriorCheckInflu1(CWarriorBehavior *this, struct IMovingEntity *a2)
-
 bool  CWarriorBehavior::WarriorCheckInflu1(class IMovingEntity &) {
   
   int v2; // eax
@@ -1483,7 +1431,6 @@ bool  CWarriorBehavior::WarriorCheckInflu1(class IMovingEntity &) {
 
 // address=[0x15ae930]
 // Decompiled from bool __thiscall CWarriorBehavior::WarriorCheckOwner9(CWarriorBehavior *this, struct IMovingEntity *a2)
-
 bool  CWarriorBehavior::WarriorCheckOwner9(class IMovingEntity &) {
   
   int v2; // eax
@@ -1501,7 +1448,6 @@ bool  CWarriorBehavior::WarriorCheckOwner9(class IMovingEntity &) {
 
 // address=[0x15ae9a0]
 // Decompiled from char __thiscall CWarriorBehavior::WarriorCheckMedic(CWarriorBehavior *this, struct IMovingEntity *a2)
-
 bool  CWarriorBehavior::WarriorCheckMedic(class IMovingEntity &) {
   
   return 1;
@@ -1510,7 +1456,6 @@ bool  CWarriorBehavior::WarriorCheckMedic(class IMovingEntity &) {
 
 // address=[0x15ae9b0]
 // Decompiled from char __thiscall CWarriorBehavior::WarriorCheckSaboteur(CWarriorBehavior *this, struct IMovingEntity *a2)
-
 bool  CWarriorBehavior::WarriorCheckSaboteur(class IMovingEntity &) {
   
   return 1;
@@ -1519,7 +1464,6 @@ bool  CWarriorBehavior::WarriorCheckSaboteur(class IMovingEntity &) {
 
 // address=[0x15afe80]
 // Decompiled from void __thiscall CWarriorBehavior::WarriorVehicleAttackTarget(CWarriorBehavior *this, struct IMovingEntity *a2, int a3)
-
 void  CWarriorBehavior::WarriorVehicleAttackTarget(class IMovingEntity &,int) {
   
   *((_BYTE *)this + 9) |= 1u;
@@ -1528,10 +1472,7 @@ void  CWarriorBehavior::WarriorVehicleAttackTarget(class IMovingEntity &,int) {
 
 
 // address=[0x153fdd0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-char *__thiscall CWarriorBehavior::GetWarriorBehaviorData(CWarriorBehavior *this)
-
+// Decompiled from char *__thiscall CWarriorBehavior::GetWarriorBehaviorData(CWarriorBehavior *this)
 struct CWarriorBehavior::SWarriorBehaviorData &  CWarriorBehavior::GetWarriorBehaviorData(void) {
   
   return (char *)this + 4;
@@ -1540,7 +1481,6 @@ struct CWarriorBehavior::SWarriorBehaviorData &  CWarriorBehavior::GetWarriorBeh
 
 // address=[0x15ae9c0]
 // Decompiled from int __thiscall CWarriorBehavior::WarriorPseudoInitWalk(CWarriorBehavior *this, struct IMovingEntity *a2, int a3)
-
 int  CWarriorBehavior::WarriorPseudoInitWalk(class IMovingEntity &,int) {
   
   int v3; // eax
@@ -1571,11 +1511,7 @@ int  CWarriorBehavior::WarriorPseudoInitWalk(class IMovingEntity &,int) {
 
 
 // address=[0x15aea80]
-// Decompiled from int __thiscall CWarriorBehavior::FindAttackWayPoint(
-        CWarriorBehavior *this,
-        struct IMovingEntity *a2,
-        struct IEntity *a3)
-
+// Decompiled from int __thiscall CWarriorBehavior::FindAttackWayPoint(  CWarriorBehavior *this,  struct IMovingEntity *a2,  struct IEntity *a3)
 int  CWarriorBehavior::FindAttackWayPoint(class IMovingEntity &,class IEntity &) {
   
   int v3; // esi
@@ -1606,7 +1542,6 @@ int  CWarriorBehavior::FindAttackWayPoint(class IMovingEntity &,class IEntity &)
 
 // address=[0x15afa60]
 // Decompiled from int __thiscall CWarriorBehavior::WarriorAttackCheck(CWarriorBehavior *this, struct IMovingEntity *a2)
-
 int  CWarriorBehavior::WarriorAttackCheck(class IMovingEntity &) {
   
   return (*(int (__thiscall **)(CWarriorBehavior *, struct IMovingEntity *))(*((_DWORD *)this + 1) + 8))(this, a2);
@@ -1615,7 +1550,6 @@ int  CWarriorBehavior::WarriorAttackCheck(class IMovingEntity &) {
 
 // address=[0x15afa90]
 // Decompiled from int __thiscall CWarriorBehavior::WarriorAttackTarget(CWarriorBehavior *this, struct IMovingEntity *a2, int a3)
-
 void  CWarriorBehavior::WarriorAttackTarget(class IMovingEntity &,int) {
   
   return (*(int (__thiscall **)(CWarriorBehavior *, struct IMovingEntity *, int, _DWORD))(*(_DWORD *)this + 12))(
@@ -1628,7 +1562,6 @@ void  CWarriorBehavior::WarriorAttackTarget(class IMovingEntity &,int) {
 
 // address=[0x15afad0]
 // Decompiled from bool __cdecl CWarriorBehavior::WarriorCheckTarget(struct IEntity *a1, int a2, int a3)
-
 static bool __cdecl CWarriorBehavior::WarriorCheckTarget(class IEntity const &,int,int) {
   
   int v3; // eax
@@ -1641,7 +1574,6 @@ static bool __cdecl CWarriorBehavior::WarriorCheckTarget(class IEntity const &,i
 
 // address=[0x15afb20]
 // Decompiled from bool __cdecl CWarriorBehavior::WarriorCheckTarget(int a1, int a2, int a3)
-
 static bool __cdecl CWarriorBehavior::WarriorCheckTarget(int,int,int) {
   
   const struct IEntity *v4; // [esp+0h] [ebp-8h]
@@ -1655,7 +1587,6 @@ static bool __cdecl CWarriorBehavior::WarriorCheckTarget(int,int,int) {
 
 // address=[0x15afb70]
 // Decompiled from int __thiscall CWarriorBehavior::WarriorDestinationId(pairNode *this)
-
 int  CWarriorBehavior::WarriorDestinationId(void)const {
   
   return *((_DWORD *)this + 3);
@@ -1663,12 +1594,7 @@ int  CWarriorBehavior::WarriorDestinationId(void)const {
 
 
 // address=[0x15afb90]
-// Decompiled from int *__thiscall CWarriorBehavior::WarriorGetEnemyBitsAndScanMask(
-        CWarriorBehavior *this,
-        struct IEntity *a2,
-        int *a3,
-        int *a4)
-
+// Decompiled from int *__thiscall CWarriorBehavior::WarriorGetEnemyBitsAndScanMask(  CWarriorBehavior *this,  struct IEntity *a2,  int *a3,  int *a4)
 void  CWarriorBehavior::WarriorGetEnemyBitsAndScanMask(class IEntity const &,int &,int &) {
   
   int v4; // eax
@@ -1689,7 +1615,6 @@ void  CWarriorBehavior::WarriorGetEnemyBitsAndScanMask(class IEntity const &,int
 
 // address=[0x15afc10]
 // Decompiled from int __thiscall CWarriorBehavior::WarriorInitWalk(CWarriorBehavior *this, struct IMovingEntity *a2, int a3)
-
 void  CWarriorBehavior::WarriorInitWalk(class IMovingEntity &,int) {
   
   int v4; // [esp+0h] [ebp-Ch]
@@ -1703,7 +1628,6 @@ void  CWarriorBehavior::WarriorInitWalk(class IMovingEntity &,int) {
 
 // address=[0x15afc70]
 // Decompiled from bool __thiscall CWarriorBehavior::WarriorIsFullUpdate(CWarriorBehavior *this, unsigned int a2)
-
 bool  CWarriorBehavior::WarriorIsFullUpdate(unsigned int)const {
   
   return a2 >= *((_DWORD *)this + 5);
@@ -1711,10 +1635,7 @@ bool  CWarriorBehavior::WarriorIsFullUpdate(unsigned int)const {
 
 
 // address=[0x15afcb0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CWarriorBehavior::WarriorProperties(CWarriorBehavior *this)
-
+// Decompiled from int __thiscall CWarriorBehavior::WarriorProperties(CWarriorBehavior *this)
 class CWarriorProperties const &  CWarriorBehavior::WarriorProperties(void)const {
   
   return *((_DWORD *)this + 1);
@@ -1723,7 +1644,6 @@ class CWarriorProperties const &  CWarriorBehavior::WarriorProperties(void)const
 
 // address=[0x15afcd0]
 // Decompiled from int __thiscall CWarriorBehavior::WarriorSetNextFullUpdate(CWarriorBehavior *this, unsigned int a2, unsigned int a3)
-
 void  CWarriorBehavior::WarriorSetNextFullUpdate(unsigned int,unsigned int) {
   
   int result; // eax
@@ -1736,7 +1656,6 @@ void  CWarriorBehavior::WarriorSetNextFullUpdate(unsigned int,unsigned int) {
 
 // address=[0x15afcf0]
 // Decompiled from bool __cdecl CWarriorBehavior::WarriorTargetAllowableAndVulnerable(unsigned __int16 *a1, int a2)
-
 static bool __cdecl CWarriorBehavior::WarriorTargetAllowableAndVulnerable(class IEntity const &,int) {
   
   int v3; // [esp+4h] [ebp-18h]
@@ -1772,7 +1691,6 @@ static bool __cdecl CWarriorBehavior::WarriorTargetAllowableAndVulnerable(class 
 
 // address=[0x15afec0]
 // Decompiled from int __thiscall CWarriorBehavior::WarriorWalkDestinationXY(CWarriorBehavior *this, struct IMovingEntity *a2)
-
 int  CWarriorBehavior::WarriorWalkDestinationXY(class IMovingEntity &) {
   
   struct CWalking *v2; // eax

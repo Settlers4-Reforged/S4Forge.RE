@@ -4,7 +4,6 @@
 
 // address=[0x2f56aa0]
 // Decompiled from CPeopleManagerTask *__thiscall CPeopleManagerTask::CPeopleManagerTask(CPeopleManagerTask *this)
-
  CPeopleManagerTask::CPeopleManagerTask(void) {
   
   IScheduleEntry::IScheduleEntry(this);
@@ -21,7 +20,6 @@
 
 // address=[0x2f56b00]
 // Decompiled from void __thiscall CPeopleManagerTask::~CPeopleManagerTask(CPeopleManagerTask *this)
-
  CPeopleManagerTask::~CPeopleManagerTask(void) {
   
   *(_DWORD *)this = &CPeopleManagerTask::_vftable_;
@@ -31,7 +29,6 @@
 
 // address=[0x2f56b20]
 // Decompiled from char __thiscall CPeopleManagerTask::IsShooting(CSchedule **this)
-
 bool  CPeopleManagerTask::IsShooting(void) {
   
   int v2; // [esp+8h] [ebp-48h]
@@ -94,7 +91,6 @@ bool  CPeopleManagerTask::IsShooting(void) {
 
 // address=[0x2f56d00]
 // Decompiled from char __thiscall CPeopleManagerTask::action(CPeopleManagerTask *this)
-
 bool  CPeopleManagerTask::action(void) {
   
   struct IScheduleEntry *v2; // [esp+8h] [ebp-1Ch]
@@ -128,7 +124,6 @@ bool  CPeopleManagerTask::action(void) {
 
 // address=[0x2f56e10]
 // Decompiled from char __thiscall CPeopleManagerTask::IsAlive(CPeopleManagerTask *this)
-
 bool  CPeopleManagerTask::IsAlive(void) {
   
   return 1;
@@ -137,7 +132,6 @@ bool  CPeopleManagerTask::IsAlive(void) {
 
 // address=[0x2f56e20]
 // Decompiled from char __thiscall CPeopleManagerTask::WaitFor(CSchedule **this)
-
 bool  CPeopleManagerTask::WaitFor(void) {
   
   struct IScheduleEntry *SpecialTask; // [esp+8h] [ebp-1Ch]
@@ -178,7 +172,6 @@ bool  CPeopleManagerTask::WaitFor(void) {
 
 // address=[0x2f56f70]
 // Decompiled from int __thiscall CPeopleManagerTask::GetNeededCarierSettler(CSchedule **this)
-
 int  CPeopleManagerTask::GetNeededCarierSettler(void) {
   
   int v1; // esi
@@ -200,7 +193,6 @@ int  CPeopleManagerTask::GetNeededCarierSettler(void) {
 
 // address=[0x2f57010]
 // Decompiled from int __thiscall CPeopleManagerTask::GetNeededBuildingSettler(CPeopleManagerTask *this, int a2)
-
 int  CPeopleManagerTask::GetNeededBuildingSettler(int) {
   
   int v3; // [esp+4h] [ebp-4h]
@@ -216,7 +208,6 @@ int  CPeopleManagerTask::GetNeededBuildingSettler(int) {
 
 // address=[0x2f57060]
 // Decompiled from char __thiscall CPeopleManagerTask::DestroyResidenceBuildings(CPeopleManagerTask *this)
-
 bool  CPeopleManagerTask::DestroyResidenceBuildings(void) {
   
   _DWORD *v1; // eax
@@ -303,7 +294,6 @@ bool  CPeopleManagerTask::DestroyResidenceBuildings(void) {
 
 // address=[0x2f57310]
 // Decompiled from int __thiscall CPeopleManagerTask::SetMinimumCarrier(CPeopleManagerTask *this)
-
 void  CPeopleManagerTask::SetMinimumCarrier(void) {
   
   int NumberOfBuildingTypeAtWork; // esi
@@ -334,7 +324,6 @@ void  CPeopleManagerTask::SetMinimumCarrier(void) {
 
 // address=[0x2f573f0]
 // Decompiled from char __thiscall CPeopleManagerTask::ExistNotEmptyResidence(CPeopleManagerTask *this)
-
 bool  CPeopleManagerTask::ExistNotEmptyResidence(void) {
   
   unsigned int v1; // eax

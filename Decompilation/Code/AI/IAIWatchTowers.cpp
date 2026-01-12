@@ -4,7 +4,6 @@
 
 // address=[0x132f800]
 // Decompiled from IAIWatchTowers *__thiscall IAIWatchTowers::IAIWatchTowers(IAIWatchTowers *this)
-
  IAIWatchTowers::IAIWatchTowers(void) {
   
   *(_DWORD *)this = IAIWatchTowers::_vftable_;

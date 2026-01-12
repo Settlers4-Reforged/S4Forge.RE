@@ -4,7 +4,6 @@
 
 // address=[0x141d960]
 // Decompiled from bool __thiscall CLandscapeProperties::IsBlockedLand(CLandscapeProperties *this, int a2)
-
 bool  CLandscapeProperties::IsBlockedLand(int) {
   
   return (*((_BYTE *)this + a2) & 0x10) != 0;
@@ -13,7 +12,6 @@ bool  CLandscapeProperties::IsBlockedLand(int) {
 
 // address=[0x141d9a0]
 // Decompiled from bool __cdecl CLandscapeProperties::IsWater(int a1)
-
 static bool __cdecl CLandscapeProperties::IsWater(int) {
   
   return a1 <= 8;
@@ -22,7 +20,6 @@ static bool __cdecl CLandscapeProperties::IsWater(int) {
 
 // address=[0x15f5960]
 // Decompiled from int __thiscall CLandscapeProperties::TileType(CLandscapeProperties *this, int a2)
-
 unsigned int  CLandscapeProperties::TileType(int) {
   
   return *((unsigned __int8 *)this + a2) << 28;
@@ -31,7 +28,6 @@ unsigned int  CLandscapeProperties::TileType(int) {
 
 // address=[0x16a5e60]
 // Decompiled from CLandscapeProperties *__thiscall CLandscapeProperties::CLandscapeProperties(CLandscapeProperties *this)
-
  CLandscapeProperties::CLandscapeProperties(void) {
   
   *((_BYTE *)this + 16) = 1;
@@ -75,7 +71,6 @@ unsigned int  CLandscapeProperties::TileType(int) {
 
 // address=[0x16a7200]
 // Decompiled from bool __thiscall CLandscapeProperties::IsSlowType(CLandscapeProperties *this, int a2)
-
 bool  CLandscapeProperties::IsSlowType(int) {
   
   return (*((_BYTE *)this + a2) & 4) != 0;

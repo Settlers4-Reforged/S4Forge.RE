@@ -4,7 +4,6 @@
 
 // address=[0x2ef1280]
 // Decompiled from int __thiscall sub_32F1280(_DWORD *this)
-
  CConfigManager::~CConfigManager(void) {
   
   int v1; // eax
@@ -51,7 +50,6 @@
 
 // address=[0x2ef1390]
 // Decompiled from int __thiscall CConfigManager::AddConfigFile(CConfigManager *this, const wchar_t *a2)
-
 bool  CConfigManager::AddConfigFile(wchar_t const *) {
   
   return ((int (__thiscall *)(CConfigManager *, const wchar_t *, _DWORD))this->j_?AddConfigFileEx@CConfigManager@@UAE_NPB_WPBD@Z)(
@@ -63,7 +61,6 @@ bool  CConfigManager::AddConfigFile(wchar_t const *) {
 
 // address=[0x2ef13b0]
 // Decompiled from void __thiscall CConfigManager::AddConfigFileEx(void *this, wchar_t *FileName, char *String2)
-
 bool  CConfigManager::AddConfigFileEx(wchar_t const *,char const *) {
   
   _DWORD v3[6]; // [esp+0h] [ebp-54h] BYREF
@@ -89,7 +86,6 @@ bool  CConfigManager::AddConfigFileEx(wchar_t const *,char const *) {
 
 // address=[0x2ef1470]
 // Decompiled from bool __thiscall CConfigManager::AddCommandLine(CConfigManager *this, char *groupName, int argc, char **const argv)
-
 bool  CConfigManager::AddCommandLine(char const *,int,char * * const) {
   
   size_t v4; // eax
@@ -130,7 +126,6 @@ bool  CConfigManager::AddCommandLine(char const *,int,char * * const) {
 
 // address=[0x2ef15c0]
 // Decompiled from int __stdcall CConfigManager::GetIntValue(char *Str, char *a2, int a3)
-
 int  CConfigManager::GetIntValue(char const *,char const *,int) {
   
   int Section; // [esp+8h] [ebp-6Ch]
@@ -165,7 +160,6 @@ int  CConfigManager::GetIntValue(char const *,char const *,int) {
 
 // address=[0x2ef16d0]
 // Decompiled from int __stdcall CConfigManager::GetIntValueNoAdd(char *Str, char *a2, int a3)
-
 int  CConfigManager::GetIntValueNoAdd(char const *,char const *,int) {
   
   int Section; // [esp+8h] [ebp-50h]
@@ -195,7 +189,6 @@ int  CConfigManager::GetIntValueNoAdd(char const *,char const *,int) {
 
 // address=[0x2ef17a0]
 // Decompiled from double __stdcall CConfigManager::GetFloatValue(char *Str, char *a2, int a3)
-
 float  CConfigManager::GetFloatValue(char const *,char const *,float) {
   
   double result; // st7
@@ -237,7 +230,6 @@ float  CConfigManager::GetFloatValue(char const *,char const *,float) {
 
 // address=[0x2ef18b0]
 // Decompiled from double __stdcall CConfigManager::GetFloatValueNoAdd(char *Str, char *a2, float a3)
-
 float  CConfigManager::GetFloatValueNoAdd(char const *,char const *,float) {
   
   double result; // st7
@@ -268,7 +260,6 @@ float  CConfigManager::GetFloatValueNoAdd(char const *,char const *,float) {
 
 // address=[0x2ef1990]
 // Decompiled from int __stdcall CConfigManager::GetStringValue(int a1, char *Str, char *a3, int a4)
-
 std::string  CConfigManager::GetStringValue(char const *,char const *,std::string const &) {
   
   int Section; // [esp+8h] [ebp-70h]
@@ -315,7 +306,6 @@ std::string  CConfigManager::GetStringValue(char const *,char const *,std::strin
 
 // address=[0x2ef1ae0]
 // Decompiled from int __stdcall CConfigManager::GetStringValueNoAdd(int a1, char *Str, char *a3, int a4)
-
 std::string  CConfigManager::GetStringValueNoAdd(char const *,char const *,std::string const &) {
   
   int Section; // [esp+8h] [ebp-54h]
@@ -352,7 +342,6 @@ std::string  CConfigManager::GetStringValueNoAdd(char const *,char const *,std::
 
 // address=[0x2ef1c00]
 // Decompiled from int __stdcall CConfigManager::GetConfigVar(char *Str, char *a2)
-
 class CConfigVar *  CConfigManager::GetConfigVar(char const *,char const *) {
   
   int Var; // [esp+4h] [ebp-54h]
@@ -379,7 +368,6 @@ class CConfigVar *  CConfigManager::GetConfigVar(char const *,char const *) {
 
 // address=[0x2ef1cc0]
 // Decompiled from void __thiscall CConfigManager::AddDefines(CConfigManager *this, char **a2, int a3)
-
 void  CConfigManager::AddDefines(struct SConfigTypeString const *,int) {
   
   int i; // [esp+8h] [ebp-30h]
@@ -402,7 +390,6 @@ void  CConfigManager::AddDefines(struct SConfigTypeString const *,int) {
 
 // address=[0x2ef1d70]
 // Decompiled from int __thiscall CConfigManager::GetDefineValue(void *this, char *Str)
-
 int  CConfigManager::GetDefineValue(char const *) {
   
   _BYTE v3[12]; // [esp+4h] [ebp-70h] BYREF
@@ -457,7 +444,6 @@ int  CConfigManager::GetDefineValue(char const *) {
 
 // address=[0x2ef1eb0]
 // Decompiled from void __stdcall CConfigManager::AddStaticConfigVar(char *Str, char *a2, int a3)
-
 void  CConfigManager::AddStaticConfigVar(char const *,char const *,class CConfigVar &) {
   
   int Section; // [esp+8h] [ebp-4Ch]
@@ -483,7 +469,6 @@ void  CConfigManager::AddStaticConfigVar(char const *,char const *,class CConfig
 
 // address=[0x2ef1f70]
 // Decompiled from char __stdcall CConfigManager::SaveSection(char *Str, wchar_t *FileName)
-
 bool  CConfigManager::SaveSection(char const *,wchar_t const *) {
   
   int Section; // [esp+8h] [ebp-30h]
@@ -504,7 +489,6 @@ bool  CConfigManager::SaveSection(char const *,wchar_t const *) {
 
 // address=[0x2ef2020]
 // Decompiled from int __stdcall CConfigManager::GetSectionEntryCount(char *Str)
-
 int  CConfigManager::GetSectionEntryCount(char const *) {
   
   CConfigSection *Section; // [esp+8h] [ebp-30h]
@@ -525,7 +509,6 @@ int  CConfigManager::GetSectionEntryCount(char const *) {
 
 // address=[0x2ef20b0]
 // Decompiled from bool __stdcall CConfigManager::DoesExist(char *Str, char *a2)
-
 bool  CConfigManager::DoesExist(char const *,char const *) {
   
   int Var; // [esp+4h] [ebp-58h]
@@ -554,7 +537,6 @@ bool  CConfigManager::DoesExist(char const *,char const *) {
 
 // address=[0x2ef8610]
 // Decompiled from CConfigManager *__thiscall CConfigManager::CConfigManager(CConfigManager *this)
-
  CConfigManager::CConfigManager(void) {
   
   IConfigManager::IConfigManager((IConfigManager *)this);
@@ -567,7 +549,6 @@ bool  CConfigManager::DoesExist(char const *,char const *) {
 
 // address=[0x2eefee0]
 // Decompiled from char __thiscall CConfigManager::ParseData(CConfigManager *this, char *a2, int a3)
-
 bool  CConfigManager::ParseData(char *,int) {
   
   void *Section; // [esp+4h] [ebp-5Ch]
@@ -604,7 +585,6 @@ bool  CConfigManager::ParseData(char *,int) {
 
 // address=[0x2eeffe0]
 // Decompiled from char __thiscall CConfigManager::Parse(CConfigManager *this, CConfigFile *a2, char *String2)
-
 bool  CConfigManager::Parse(class CConfigFile *,char const *) {
   
   const char *v4; // eax
@@ -649,7 +629,6 @@ bool  CConfigManager::Parse(class CConfigFile *,char const *) {
 
 // address=[0x2ef0120]
 // Decompiled from void *__stdcall CConfigManager::ParseFindSection(void *a1, int a2, _DWORD *a3, _DWORD *a4)
-
 std::string  CConfigManager::ParseFindSection(char *,int &,int const &) {
   
   void *Line; // [esp+4h] [ebp-5Ch]
@@ -687,14 +666,7 @@ std::string  CConfigManager::ParseFindSection(char *,int &,int const &) {
 
 
 // address=[0x2ef0270]
-// Decompiled from void __fastcall CConfigManager::ParseAddSectionVars(
-        CConfigManager *this,
-        int a2,
-        struct CConfigSection *a3,
-        char *a4,
-        int *a5,
-        const int *a6)
-
+// Decompiled from void __fastcall CConfigManager::ParseAddSectionVars(  CConfigManager *this,  int a2,  struct CConfigSection *a3,  char *a4,  int *a5,  const int *a6)
 void  CConfigManager::ParseAddSectionVars(class CConfigSection *,char *,int &,int const &) {
   
   const char *v6; // eax
@@ -844,7 +816,6 @@ void  CConfigManager::ParseAddSectionVars(class CConfigSection *,char *,int &,in
 
 // address=[0x2ef07d0]
 // Decompiled from void *__stdcall CConfigManager::ParseGetLine(void *a1, int a2, _DWORD *a3, _DWORD *a4)
-
 std::string  CConfigManager::ParseGetLine(char *,int &,int const &) {
   
   char v5; // [esp+Fh] [ebp-2Dh]
@@ -883,7 +854,6 @@ std::string  CConfigManager::ParseGetLine(char *,int &,int const &) {
 
 // address=[0x2ef0960]
 // Decompiled from int __stdcall CConfigManager::ParseGetVar(void *a1, void *a2, void *a3)
-
 enum T_CFGVAR_TYPE  CConfigManager::ParseGetVar(std::string &,std::string &,std::string &) {
   
   int v4; // eax
@@ -1039,7 +1009,6 @@ LABEL_36:
 
 // address=[0x2ef0ea0]
 // Decompiled from void __stdcall CConfigManager::ParseGetArrayVars(int a1, int a2, _DWORD *a3, _DWORD *a4)
-
 void  CConfigManager::ParseGetArrayVars(std::string &,int *,int &,int &) {
   
   const char *v4; // eax
@@ -1084,7 +1053,6 @@ void  CConfigManager::ParseGetArrayVars(std::string &,int *,int &,int &) {
 
 // address=[0x2ef1010]
 // Decompiled from int __thiscall CConfigManager::ParseGetDefineVar(void *this, void *a2)
-
 int  CConfigManager::ParseGetDefineVar(std::string &) {
   
   int v2; // eax
@@ -1102,9 +1070,7 @@ int  CConfigManager::ParseGetDefineVar(std::string &) {
 
 
 // address=[0x2ef1090]
-// Decompiled from // protected: void __thiscall CConfigManager::AddDefineVar(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &,int)
-_DWORD *__stdcall CConfigManager::AddDefineVar(int a1, int a2)
-
+// Decompiled from _DWORD *__stdcall CConfigManager::AddDefineVar(int a1, int a2)
 void  CConfigManager::AddDefineVar(std::string const &,int) {
   
   _DWORD *result; // eax
@@ -1117,7 +1083,6 @@ void  CConfigManager::AddDefineVar(std::string const &,int) {
 
 // address=[0x2ef10c0]
 // Decompiled from char *__thiscall CConfigManager::GetSection(void *this, int a2, char a3)
-
 class CConfigSection *  CConfigManager::GetSection(std::string const &,bool) {
   
   void *v3; // eax

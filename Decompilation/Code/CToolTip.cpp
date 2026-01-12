@@ -4,7 +4,6 @@
 
 // address=[0x2f9fd80]
 // Decompiled from size_t __thiscall CToolTip::GetCurrentLengthOfTooltip(CToolTip *this)
-
 int  CToolTip::GetCurrentLengthOfTooltip(void) {
   
   return j___mbstrlen((const char *)this + 8);
@@ -13,7 +12,6 @@ int  CToolTip::GetCurrentLengthOfTooltip(void) {
 
 // address=[0x2f9fda0]
 // Decompiled from char *__thiscall CToolTip::GetTooltipStringPtr(CToolTip *this)
-
 char *  CToolTip::GetTooltipStringPtr(void) {
   
   return (char *)this + 8;
@@ -22,7 +20,6 @@ char *  CToolTip::GetTooltipStringPtr(void) {
 
 // address=[0x2f9fdc0]
 // Decompiled from char __thiscall CToolTip::IsLocked(CToolTip *this)
-
 bool  CToolTip::IsLocked(void) {
   
   return *((_BYTE *)this + 337);
@@ -31,7 +28,6 @@ bool  CToolTip::IsLocked(void) {
 
 // address=[0x2f9fde0]
 // Decompiled from char __thiscall CToolTip::IsOpen(CToolTip *this)
-
 bool  CToolTip::IsOpen(void) {
   
   return *((_BYTE *)this + 336);
@@ -40,7 +36,6 @@ bool  CToolTip::IsOpen(void) {
 
 // address=[0x2f9fe00]
 // Decompiled from CToolTip *__thiscall CToolTip::Lock(CToolTip *this)
-
 void  CToolTip::Lock(void) {
   
   CToolTip *result; // eax
@@ -52,9 +47,7 @@ void  CToolTip::Lock(void) {
 
 
 // address=[0x2f9fe50]
-// Decompiled from // MFC 3.1-14.0 32bit
-CToolTip *__thiscall CToolTip::SetSourceDialogSurfaceID(CToolTip *this, int a2)
-
+// Decompiled from CToolTip *__thiscall CToolTip::SetSourceDialogSurfaceID(CToolTip *this, int a2)
 void  CToolTip::SetSourceDialogSurfaceID(int) {
   
   CToolTip *result; // eax
@@ -67,7 +60,6 @@ void  CToolTip::SetSourceDialogSurfaceID(int) {
 
 // address=[0x2f9fe70]
 // Decompiled from CToolTip *__thiscall CToolTip::Unlock(CToolTip *this)
-
 void  CToolTip::Unlock(void) {
   
   CToolTip *result; // eax
@@ -79,10 +71,7 @@ void  CToolTip::Unlock(void) {
 
 
 // address=[0x2fa0fa0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CToolTip::GetSourceDialogSurfaceID(CToolTip *this)
-
+// Decompiled from int __thiscall CToolTip::GetSourceDialogSurfaceID(CToolTip *this)
 int  CToolTip::GetSourceDialogSurfaceID(void) {
   
   return *((_DWORD *)this + 1);
@@ -91,7 +80,6 @@ int  CToolTip::GetSourceDialogSurfaceID(void) {
 
 // address=[0x2fa2f70]
 // Decompiled from CToolTip *__thiscall CToolTip::SetEnableStatus(CToolTip *this, bool a2)
-
 void  CToolTip::SetEnableStatus(bool) {
   
   CToolTip *result; // eax
@@ -104,7 +92,6 @@ void  CToolTip::SetEnableStatus(bool) {
 
 // address=[0x2fa3070]
 // Decompiled from CToolTip *__thiscall CToolTip::CToolTip(CToolTip *this)
-
  CToolTip::CToolTip(void) {
   
   j__memset((char *)this + 8, 0, 0x12Cu);
@@ -120,7 +107,6 @@ void  CToolTip::SetEnableStatus(bool) {
 
 // address=[0x2fa30d0]
 // Decompiled from char *__thiscall CToolTip::SetTooltipText(char *this, char *Str)
-
 void  CToolTip::SetTooltipText(char const *) {
   
   char *result; // eax
@@ -137,7 +123,6 @@ void  CToolTip::SetTooltipText(char const *) {
 
 // address=[0x2fa3130]
 // Decompiled from char __thiscall CToolTip::OpenTooltip(CToolTip *this, int a2, int a3)
-
 bool  CToolTip::OpenTooltip(int,int) {
   
   CToolTip *v4; // eax
@@ -285,7 +270,6 @@ bool  CToolTip::OpenTooltip(int,int) {
 
 // address=[0x2fa3560]
 // Decompiled from char __thiscall CToolTip::CloseTooltip(CToolTip *this)
-
 bool  CToolTip::CloseTooltip(void) {
   
   if ( !*((_BYTE *)this + 336) )
@@ -308,7 +292,6 @@ bool  CToolTip::CloseTooltip(void) {
 
 // address=[0x2fa3fb0]
 // Decompiled from bool __thiscall CToolTip::~CToolTip(CToolTip *this)
-
  CToolTip::~CToolTip(void) {
   
   return CToolTip::CloseTooltip(this);
@@ -317,7 +300,6 @@ bool  CToolTip::CloseTooltip(void) {
 
 // address=[0x2fa4020]
 // Decompiled from int __thiscall CToolTip::GetMaxLengthOfTooltip(CToolTip *this)
-
 int  CToolTip::GetMaxLengthOfTooltip(void) {
   
   return 300;

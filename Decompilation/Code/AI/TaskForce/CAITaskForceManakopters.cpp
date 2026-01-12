@@ -3,11 +3,7 @@
 // Definitions for class CAITaskForceManakopters
 
 // address=[0x132a180]
-// Decompiled from CAITaskForceManakopters *__thiscall CAITaskForceManakopters::CAITaskForceManakopters(
-        CAITaskForceManakopters *this,
-        int a2,
-        int a3)
-
+// Decompiled from CAITaskForceManakopters *__thiscall CAITaskForceManakopters::CAITaskForceManakopters(  CAITaskForceManakopters *this,  int a2,  int a3)
  CAITaskForceManakopters::CAITaskForceManakopters(int,int) {
   
   CAITaskForceEx::CAITaskForceEx(this, a2, 8, 13, a3);
@@ -18,7 +14,6 @@
 
 // address=[0x132a2a0]
 // Decompiled from void __thiscall CAITaskForceManakopters::~CAITaskForceManakopters(CAITaskForceManakopters *this)
-
  CAITaskForceManakopters::~CAITaskForceManakopters(void) {
   
   CAITaskForceEx::~CAITaskForceEx(this);
@@ -27,7 +22,6 @@
 
 // address=[0x132d290]
 // Decompiled from int __thiscall CAITaskForceManakopters::Execute(CAITaskForceManakopters *this)
-
 void  CAITaskForceManakopters::Execute(void) {
   
   int result; // eax
@@ -105,7 +99,6 @@ void  CAITaskForceManakopters::Execute(void) {
 
 // address=[0x132d480]
 // Decompiled from char __thiscall CAITaskForceManakopters::NewCommand(CAITaskForceManakopters *this, unsigned int a2, int a3, int a4)
-
 bool  CAITaskForceManakopters::NewCommand(int,int,int) {
   
   char result; // al

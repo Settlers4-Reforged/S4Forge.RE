@@ -3,18 +3,7 @@
 // Definitions for class CLandBlob
 
 // address=[0x2fc9de0]
-// Decompiled from CLandBlob *__thiscall CLandBlob::CLandBlob(
-        CLandBlob *this,
-        int a2,
-        int a3,
-        int a4,
-        int a5,
-        bool a6,
-        int a7,
-        int a8,
-        int a9,
-        struct CCheckLayer *a10)
-
+// Decompiled from CLandBlob *__thiscall CLandBlob::CLandBlob(  CLandBlob *this,  int a2,  int a3,  int a4,  int a5,  bool a6,  int a7,  int a8,  int a9,  struct CCheckLayer *a10)
  CLandBlob::CLandBlob(int,int,int,int,bool,int,int,int,class CCheckLayer *) {
   
   CBlob::CBlob(this, a2, a3, a4, a5, a7, a8, a9, a10);
@@ -32,7 +21,6 @@
 
 // address=[0x2fc9eb0]
 // Decompiled from int __thiscall CLandBlob::processPoint(CCheckLayer **this, int a2, int a3)
-
 void  CLandBlob::processPoint(int,int) {
   
   int result; // eax
@@ -48,7 +36,6 @@ void  CLandBlob::processPoint(int,int) {
 
 // address=[0x2fc9f50]
 // Decompiled from int __thiscall CLandBlob::processFillPoint(CCheckLayer **this, int a2, int a3)
-
 void  CLandBlob::processFillPoint(int,int) {
   
   int result; // eax

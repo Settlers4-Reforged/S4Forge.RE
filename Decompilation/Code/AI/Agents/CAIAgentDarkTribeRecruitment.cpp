@@ -3,11 +3,7 @@
 // Definitions for class CAIAgentDarkTribeRecruitment
 
 // address=[0x1301f00]
-// Decompiled from unsigned int __thiscall CAIAgentDarkTribeRecruitment::Execute(
-        CAIAgentDarkTribeRecruitment *this,
-        unsigned int a2,
-        unsigned int a3)
-
+// Decompiled from unsigned int __thiscall CAIAgentDarkTribeRecruitment::Execute(  CAIAgentDarkTribeRecruitment *this,  unsigned int a2,  unsigned int a3)
 unsigned int  CAIAgentDarkTribeRecruitment::Execute(unsigned int,unsigned int) {
   
   struct CAIDarkTribeSectorAI *v3; // eax
@@ -136,9 +132,7 @@ unsigned int  CAIAgentDarkTribeRecruitment::Execute(unsigned int,unsigned int) {
 
 
 // address=[0x1322e40]
-// Decompiled from CAIAgentDarkTribeRecruitment *__thiscall CAIAgentDarkTribeRecruitment::CAIAgentDarkTribeRecruitment(
-        CAIAgentDarkTribeRecruitment *this)
-
+// Decompiled from CAIAgentDarkTribeRecruitment *__thiscall CAIAgentDarkTribeRecruitment::CAIAgentDarkTribeRecruitment(  CAIAgentDarkTribeRecruitment *this)
  CAIAgentDarkTribeRecruitment::CAIAgentDarkTribeRecruitment(void) {
   
   CAIDarkTribeSectorAgent::CAIDarkTribeSectorAgent(this, "dark tribe recruitment");
@@ -149,7 +143,6 @@ unsigned int  CAIAgentDarkTribeRecruitment::Execute(unsigned int,unsigned int) {
 
 // address=[0x1322f60]
 // Decompiled from void __thiscall CAIAgentDarkTribeRecruitment::~CAIAgentDarkTribeRecruitment(CAIAgentDarkTribeRecruitment *this)
-
  CAIAgentDarkTribeRecruitment::~CAIAgentDarkTribeRecruitment(void) {
   
   CAIDarkTribeSectorAgent::~CAIDarkTribeSectorAgent(this);

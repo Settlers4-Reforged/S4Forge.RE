@@ -3,9 +3,7 @@
 // Definitions for class CEcoSectorAI
 
 // address=[0x2f34860]
-// Decompiled from // public: __thiscall CEcoSectorAI::CEcoSectorAI(void)
-IAIEcoSectorAI *__thiscall CEcoSectorAI::CEcoSectorAI(IAIEcoSectorAI *this)
-
+// Decompiled from IAIEcoSectorAI *__thiscall CEcoSectorAI::CEcoSectorAI(IAIEcoSectorAI *this)
  CEcoSectorAI::CEcoSectorAI(void) {
   
   IAIEcoSectorAI::IAIEcoSectorAI(this);
@@ -16,13 +14,7 @@ IAIEcoSectorAI *__thiscall CEcoSectorAI::CEcoSectorAI(IAIEcoSectorAI *this)
 
 
 // address=[0x2f34890]
-// Decompiled from CEcoSectorAI *__thiscall CEcoSectorAI::CEcoSectorAI(
-        CEcoSectorAI *this,
-        struct IAIEcoManager *a2,
-        struct IAISectorAI *a3,
-        int a4,
-        int a5)
-
+// Decompiled from CEcoSectorAI *__thiscall CEcoSectorAI::CEcoSectorAI(  CEcoSectorAI *this,  struct IAIEcoManager *a2,  struct IAISectorAI *a3,  int a4,  int a5)
  CEcoSectorAI::CEcoSectorAI(class IAIEcoManager *,class IAISectorAI *,int,int) {
   
   CSchedule *v6; // [esp+14h] [ebp-30h]
@@ -70,7 +62,6 @@ IAIEcoSectorAI *__thiscall CEcoSectorAI::CEcoSectorAI(IAIEcoSectorAI *this)
 
 // address=[0x2f34a20]
 // Decompiled from CReserveDatabase *__thiscall CEcoSectorAI::~CEcoSectorAI(CReserveDatabase **this)
-
  CEcoSectorAI::~CEcoSectorAI(void) {
   
   CReserveDatabase *result; // eax
@@ -91,7 +82,6 @@ IAIEcoSectorAI *__thiscall CEcoSectorAI::CEcoSectorAI(IAIEcoSectorAI *this)
 
 // address=[0x2f34af0]
 // Decompiled from CEcoSectorAI *__thiscall CEcoSectorAI::Release(CEcoSectorAI *this)
-
 void  CEcoSectorAI::Release(void) {
   
   CEcoSectorAI *result; // eax
@@ -104,9 +94,7 @@ void  CEcoSectorAI::Release(void) {
 
 
 // address=[0x2f34b30]
-// Decompiled from // public: void __thiscall CEcoSectorAI::ReadConfigFile(void)
-int CEcoSectorAI::ReadConfigFile()
-
+// Decompiled from int CEcoSectorAI::ReadConfigFile()
 void  CEcoSectorAI::ReadConfigFile(void) {
   
   int result; // eax
@@ -120,7 +108,6 @@ void  CEcoSectorAI::ReadConfigFile(void) {
 
 // address=[0x2f34bb0]
 // Decompiled from bool __thiscall CEcoSectorAI::Execute(CSchedule **this)
-
 void  CEcoSectorAI::Execute(void) {
   
   return CSchedule::trigger(this[1]);
@@ -129,7 +116,6 @@ void  CEcoSectorAI::Execute(void) {
 
 // address=[0x2f34bd0]
 // Decompiled from int __thiscall CEcoSectorAI::PutUpBuilding(CSchedule **this, int a2, int a3, int a4, int a5)
-
 enum T_AI_BUILD_RESULT  CEcoSectorAI::PutUpBuilding(int,int,int,int) {
   
   int v6; // [esp+10h] [ebp-1Ch]
@@ -148,9 +134,7 @@ enum T_AI_BUILD_RESULT  CEcoSectorAI::PutUpBuilding(int,int,int,int) {
 
 
 // address=[0x2f34c90]
-// Decompiled from // MFC 3.1-14.0 32bit
-int __thiscall CEcoSectorAI::Flags(CEcoSectorAI *this)
-
+// Decompiled from int __thiscall CEcoSectorAI::Flags(CEcoSectorAI *this)
 int  CEcoSectorAI::Flags(void) {
   
   return *((_DWORD *)this + 8);
@@ -159,7 +143,6 @@ int  CEcoSectorAI::Flags(void) {
 
 // address=[0x2f34cb0]
 // Decompiled from void __thiscall CEcoSectorAI::SetFlags(CPaneContainer *this, int a2)
-
 void  CEcoSectorAI::SetFlags(int) {
   
   *((_DWORD *)this + 8) = a2;

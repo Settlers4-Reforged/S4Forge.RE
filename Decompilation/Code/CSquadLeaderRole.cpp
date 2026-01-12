@@ -4,7 +4,6 @@
 
 // address=[0x1402020]
 // Decompiled from int __cdecl CSquadLeaderRole::New(int a1)
-
 static class CPersistence * __cdecl CSquadLeaderRole::New(std::istream &) {
   
   if ( operator new(0x74u) )
@@ -16,7 +15,6 @@ static class CPersistence * __cdecl CSquadLeaderRole::New(std::istream &) {
 
 // address=[0x1575bb0]
 // Decompiled from int __thiscall CSquadLeaderRole::ClassID(CSquadLeaderRole *this)
-
 unsigned long  CSquadLeaderRole::ClassID(void)const {
   
   return CSquadLeaderRole::m_iClassID;
@@ -25,7 +23,6 @@ unsigned long  CSquadLeaderRole::ClassID(void)const {
 
 // address=[0x1575bf0]
 // Decompiled from int __thiscall CSquadLeaderRole::GetSettlerRole(CSquadLeaderRole *this)
-
 int  CSquadLeaderRole::GetSettlerRole(void)const {
   
   return 23;
@@ -33,9 +30,7 @@ int  CSquadLeaderRole::GetSettlerRole(void)const {
 
 
 // address=[0x1575c20]
-// Decompiled from // Microsoft VisualC 14/net runtime
-char __thiscall CSquadLeaderRole::IsHJB(CSquadLeaderRole *this)
-
+// Decompiled from char __thiscall CSquadLeaderRole::IsHJB(CSquadLeaderRole *this)
 bool  CSquadLeaderRole::IsHJB(void) {
   
   return 0;
@@ -44,7 +39,6 @@ bool  CSquadLeaderRole::IsHJB(void) {
 
 // address=[0x1592380]
 // Decompiled from _DWORD *__thiscall CSquadLeaderRole::Init(_DWORD *this, CPropertySet *a2)
-
 void  CSquadLeaderRole::Init(class CSettler *) {
   
   _DWORD *result; // eax
@@ -60,10 +54,7 @@ void  CSquadLeaderRole::Init(class CSettler *) {
 
 
 // address=[0x15923d0]
-// Decompiled from struct CWarriorBehavior::SWarriorBehaviorData *__thiscall CSquadLeaderRole::LogicUpdateJob(
-        CSquadLeaderRole *this,
-        struct CSettler *a2)
-
+// Decompiled from struct CWarriorBehavior::SWarriorBehaviorData *__thiscall CSquadLeaderRole::LogicUpdateJob(  CSquadLeaderRole *this,  struct CSettler *a2)
 void  CSquadLeaderRole::LogicUpdateJob(class CSettler *) {
   
   struct CWarriorBehavior::SWarriorBehaviorData *result; // eax
@@ -80,7 +71,6 @@ void  CSquadLeaderRole::LogicUpdateJob(class CSettler *) {
 
 // address=[0x1592420]
 // Decompiled from int __thiscall CSquadLeaderRole::WarriorInit(CSquadLeaderRole *this, struct IMovingEntity *a2, int a3, int a4)
-
 void  CSquadLeaderRole::WarriorInit(class IMovingEntity &,int,int) {
   
   int result; // eax
@@ -97,7 +87,6 @@ void  CSquadLeaderRole::WarriorInit(class IMovingEntity &,int,int) {
 
 // address=[0x15929d0]
 // Decompiled from _DWORD *__thiscall CSquadLeaderRole::CSquadLeaderRole(_DWORD *this, int a2)
-
  CSquadLeaderRole::CSquadLeaderRole(std::istream &) {
   
   int pExceptionObject; // [esp+8h] [ebp-14h] BYREF
@@ -127,7 +116,6 @@ void  CSquadLeaderRole::WarriorInit(class IMovingEntity &,int,int) {
 
 // address=[0x1592ac0]
 // Decompiled from int __thiscall CSquadLeaderRole::Store(int *this, struct std::ostream *a2)
-
 void  CSquadLeaderRole::Store(std::ostream &) {
   
   CSoldierRole::Store(a2);
@@ -143,7 +131,6 @@ void  CSquadLeaderRole::Store(std::ostream &) {
 
 // address=[0x1575ab0]
 // Decompiled from void __thiscall CSquadLeaderRole::~CSquadLeaderRole(CSquadLeaderRole *this)
-
  CSquadLeaderRole::~CSquadLeaderRole(void) {
   
   *(_DWORD *)this = &CSquadLeaderRole::_vftable_;
@@ -154,7 +141,6 @@ void  CSquadLeaderRole::Store(std::ostream &) {
 
 // address=[0x1592470]
 // Decompiled from int __thiscall CSquadLeaderRole::WarriorTaskWalkOneStep(CSquadLeaderRole *this, struct IMovingEntity *a2)
-
 int  CSquadLeaderRole::WarriorTaskWalkOneStep(class IMovingEntity &) {
   
   Y16X16 *v2; // eax
@@ -206,7 +192,6 @@ int  CSquadLeaderRole::WarriorTaskWalkOneStep(class IMovingEntity &) {
 
 // address=[0x15925a0]
 // Decompiled from int __thiscall CSquadLeaderRole::WarriorTaskIdleWalk(CSquadLeaderRole *this, struct IMovingEntity *a2)
-
 int  CSquadLeaderRole::WarriorTaskIdleWalk(class IMovingEntity &) {
   
   int v3; // [esp+0h] [ebp-8h]
@@ -219,7 +204,6 @@ int  CSquadLeaderRole::WarriorTaskIdleWalk(class IMovingEntity &) {
 
 // address=[0x15925d0]
 // Decompiled from int __thiscall CSquadLeaderRole::WarriorTaskAttack(char *this, struct IMovingEntity *a2, int a3, int a4)
-
 void  CSquadLeaderRole::WarriorTaskAttack(class IMovingEntity &,int,enum T_WARRIOR_ATTACK) {
   
   CSquadLeaderRole::CommandGroupMembers((CSquadLeaderRole *)(this - 48), a2);
@@ -229,7 +213,6 @@ void  CSquadLeaderRole::WarriorTaskAttack(class IMovingEntity &,int,enum T_WARRI
 
 // address=[0x1592600]
 // Decompiled from int __thiscall CSquadLeaderRole::WarriorTaskFinished(CSquadLeaderRole *this, struct IMovingEntity *a2)
-
 void  CSquadLeaderRole::WarriorTaskFinished(class IMovingEntity &) {
   
   return CSoldierRole::WarriorTaskFinished(this, a2);
@@ -238,7 +221,6 @@ void  CSquadLeaderRole::WarriorTaskFinished(class IMovingEntity &) {
 
 // address=[0x1592b50]
 // Decompiled from CSquadLeaderRole *__thiscall CSquadLeaderRole::CSquadLeaderRole(CSquadLeaderRole *this)
-
  CSquadLeaderRole::CSquadLeaderRole(void) {
   
   CSoldierRole::CSoldierRole(this);
@@ -253,7 +235,6 @@ void  CSquadLeaderRole::WarriorTaskFinished(class IMovingEntity &) {
 
 // address=[0x1592620]
 // Decompiled from int __thiscall CSquadLeaderRole::CommandGroupMembers(CSquadLeaderRole *this, struct IMovingEntity *a2)
-
 void  CSquadLeaderRole::CommandGroupMembers(class IMovingEntity &) {
   
   int result; // eax
@@ -357,7 +338,6 @@ void  CSquadLeaderRole::CommandGroupMembers(class IMovingEntity &) {
 
 // address=[0x1592b20]
 // Decompiled from int __cdecl CSquadLeaderRole::Load_HACK_VERSION(int a1)
-
 static class CSquadLeaderRole * __cdecl CSquadLeaderRole::Load_HACK_VERSION(std::istream &) {
   
   void **v1; // eax

@@ -4,7 +4,6 @@
 
 // address=[0x12fd110]
 // Decompiled from int __thiscall IEntity::FlagBits(_DWORD *this, EntityFlag a2)
-
 int  IEntity::FlagBits(int)const {
   
   return a2 & this[5];
@@ -13,7 +12,6 @@ int  IEntity::FlagBits(int)const {
 
 // address=[0x12fd480]
 // Decompiled from int __thiscall IEntity::ObjType(unsigned __int8 *this)
-
 int  IEntity::ObjType(void)const {
   
   return this[10];
@@ -21,9 +19,7 @@ int  IEntity::ObjType(void)const {
 
 
 // address=[0x1309650]
-// Decompiled from // MFC 3.1-14.0 32bit
-struct IEntityVtbl *__thiscall IEntity::PackedXY(IEntity *this)
-
+// Decompiled from struct IEntityVtbl *__thiscall IEntity::PackedXY(IEntity *this)
 int  IEntity::PackedXY(void)const {
   
   return this[6].lpVtbl;
@@ -31,10 +27,7 @@ int  IEntity::PackedXY(void)const {
 
 
 // address=[0x130e8a0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-struct IEntityVtbl *__thiscall IEntity::AIEntityInfoPtr(IEntity *this)
-
+// Decompiled from struct IEntityVtbl *__thiscall IEntity::AIEntityInfoPtr(IEntity *this)
 class CAIEntityInfo *  IEntity::AIEntityInfoPtr(void)const {
   
   return this[4].lpVtbl;
@@ -43,7 +36,6 @@ class CAIEntityInfo *  IEntity::AIEntityInfoPtr(void)const {
 
 // address=[0x130ea10]
 // Decompiled from int __thiscall IEntity::ClearFlagBits(_DWORD *this, EntityFlag a2)
-
 void  IEntity::ClearFlagBits(int) {
   
   int result; // eax
@@ -55,10 +47,7 @@ void  IEntity::ClearFlagBits(int) {
 
 
 // address=[0x130eb60]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall IEntity::Flags(_DWORD *this)
-
+// Decompiled from int __thiscall IEntity::Flags(_DWORD *this)
 int  IEntity::Flags(void)const {
   
   return this[5];
@@ -67,7 +56,6 @@ int  IEntity::Flags(void)const {
 
 // address=[0x130f060]
 // Decompiled from int __thiscall IEntity::ID(unsigned __int16 *this)
-
 int  IEntity::ID(void)const {
   
   return this[4];
@@ -76,7 +64,6 @@ int  IEntity::ID(void)const {
 
 // address=[0x130f250]
 // Decompiled from int __thiscall IEntity::OwnerId(unsigned __int8 *this)
-
 int  IEntity::OwnerId(void)const {
   
   return (int)this[32] >> 4;
@@ -85,7 +72,6 @@ int  IEntity::OwnerId(void)const {
 
 // address=[0x130f390]
 // Decompiled from _DWORD *__thiscall IEntity::SetFlagBits(_DWORD *this, EntityFlag a2)
-
 void  IEntity::SetFlagBits(int) {
   
   _DWORD *result; // eax
@@ -97,9 +83,7 @@ void  IEntity::SetFlagBits(int) {
 
 
 // address=[0x130f420]
-// Decompiled from // Microsoft VisualC 14/net runtime
-int __thiscall IEntity::Type(unsigned __int16 *this)
-
+// Decompiled from int __thiscall IEntity::Type(unsigned __int16 *this)
 int  IEntity::Type(void)const {
   
   return this[6];
@@ -107,10 +91,7 @@ int  IEntity::Type(void)const {
 
 
 // address=[0x130f440]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall IEntity::UniqueId(_DWORD *this)
-
+// Decompiled from int __thiscall IEntity::UniqueId(_DWORD *this)
 int  IEntity::UniqueId(void)const {
   
   return this[1];
@@ -119,7 +100,6 @@ int  IEntity::UniqueId(void)const {
 
 // address=[0x130f520]
 // Decompiled from int __thiscall IEntity::WarriorType(_DWORD *this)
-
 int  IEntity::WarriorType(void)const {
   
   return this[5] & 0xF;
@@ -128,7 +108,6 @@ int  IEntity::WarriorType(void)const {
 
 // address=[0x130f550]
 // Decompiled from int __thiscall sub_170F550(_DWORD *this)
-
 int  IEntity::X(void)const {
   
   return Y16X16::UnpackXFast(this[6]);
@@ -137,7 +116,6 @@ int  IEntity::X(void)const {
 
 // address=[0x130f570]
 // Decompiled from int __thiscall sub_170F570(_DWORD *this)
-
 int  IEntity::Y(void)const {
   
   return Y16X16::UnpackYFast(this[6]);
@@ -146,7 +124,6 @@ int  IEntity::Y(void)const {
 
 // address=[0x1336860]
 // Decompiled from struct CPtrList *__thiscall IEntity::WarMapNode(CPropertySet *this)
-
 class CWarMapNode const &  IEntity::WarMapNode(void)const {
   
   return (CPropertySet *)((char *)this + 28);
@@ -155,7 +132,6 @@ class CWarMapNode const &  IEntity::WarMapNode(void)const {
 
 // address=[0x13469e0]
 // Decompiled from struct CPtrList *__thiscall IEntity::WarMapNode(CPropertySet *this)
-
 class CWarMapNode &  IEntity::WarMapNode(void) {
   
   return (CPropertySet *)((char *)this + 28);
@@ -164,7 +140,6 @@ class CWarMapNode &  IEntity::WarMapNode(void) {
 
 // address=[0x141d8b0]
 // Decompiled from int __thiscall IEntity::EntityId(USHORT *this)
-
 int  IEntity::EntityId(void)const {
   
   return this[4];
@@ -173,7 +148,6 @@ int  IEntity::EntityId(void)const {
 
 // address=[0x141da20]
 // Decompiled from int __thiscall sub_181DA20(_BYTE *this)
-
 int  IEntity::Race(void)const {
   
   return this[32] & 0xF;
@@ -182,7 +156,6 @@ int  IEntity::Race(void)const {
 
 // address=[0x1460630]
 // Decompiled from int __thiscall IEntity::Hitpoints(IEntity *this)
-
 int  IEntity::Hitpoints(void)const {
   
   return BYTE1(this[8].lpVtbl);
@@ -191,7 +164,6 @@ int  IEntity::Hitpoints(void)const {
 
 // address=[0x14d8640]
 // Decompiled from void *__thiscall IEntity::ClearGroupFlagBits(std::_Ref_count_base *this, const struct type_info *a2)
-
 int  IEntity::ClearGroupFlagBits(int) {
   
   return 0;
@@ -199,10 +171,7 @@ int  IEntity::ClearGroupFlagBits(int) {
 
 
 // address=[0x14d8670]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall IEntity::GetGoodType(IEntity *this)
-
+// Decompiled from int __thiscall IEntity::GetGoodType(IEntity *this)
 int  IEntity::GetGoodType(void)const {
   
   return 0;
@@ -210,10 +179,7 @@ int  IEntity::GetGoodType(void)const {
 
 
 // address=[0x14d8680]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int IEntity::GetGroupFlags()
-
+// Decompiled from int IEntity::GetGroupFlags()
 int  IEntity::GetGroupFlags(void)const {
   
   return 0;
@@ -222,7 +188,6 @@ int  IEntity::GetGroupFlags(void)const {
 
 // address=[0x14d8720]
 // Decompiled from bool __thiscall IEntity::IsVisible(_DWORD *this)
-
 bool  IEntity::IsVisible(void)const {
   
   return (this[5] & 0x80100) == 256;
@@ -231,7 +196,6 @@ bool  IEntity::IsVisible(void)const {
 
 // address=[0x14d8790]
 // Decompiled from void *__thiscall IEntity::SetGroupFlagBits(std::_Ref_count_base *this, const struct type_info *a2)
-
 int  IEntity::SetGroupFlagBits(int) {
   
   return 0;
@@ -240,7 +204,6 @@ int  IEntity::SetGroupFlagBits(int) {
 
 // address=[0x14d87b0]
 // Decompiled from void *__thiscall IEntity::SetGroupFlags(std::_Ref_count_base *this, const struct type_info *a2)
-
 int  IEntity::SetGroupFlags(int) {
   
   return 0;
@@ -249,7 +212,6 @@ int  IEntity::SetGroupFlags(int) {
 
 // address=[0x14d8810]
 // Decompiled from struct IEntityVtbl *__thiscall IEntity::SetPosition(IEntity *this, int a2, int a3)
-
 void  IEntity::SetPosition(int,int) {
   
   struct IEntityVtbl *result; // eax
@@ -261,10 +223,7 @@ void  IEntity::SetPosition(int,int) {
 
 
 // address=[0x14e4af0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void IEntity::Delete()
-
+// Decompiled from void IEntity::Delete()
 void  IEntity::Delete(void) {
   
   ;
@@ -272,10 +231,7 @@ void  IEntity::Delete(void) {
 
 
 // address=[0x14e4bf0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __stdcall IEntity::Take(int a1)
-
+// Decompiled from void __stdcall IEntity::Take(int a1)
 void  IEntity::Take(int) {
   
   ;
@@ -284,7 +240,6 @@ void  IEntity::Take(int) {
 
 // address=[0x14eb780]
 // Decompiled from IEntity *__thiscall IEntity::SetOwnerId(IEntity *this, unsigned __int8 a2)
-
 void  IEntity::SetOwnerId(unsigned char) {
   
   IEntity *result; // eax
@@ -297,7 +252,6 @@ void  IEntity::SetOwnerId(unsigned char) {
 
 // address=[0x14eb7e0]
 // Decompiled from IEntity *__thiscall IEntity::SetRace(IEntity *this, unsigned __int8 a2)
-
 void  IEntity::SetRace(unsigned char) {
   
   IEntity *result; // eax
@@ -310,7 +264,6 @@ void  IEntity::SetRace(unsigned char) {
 
 // address=[0x1508220]
 // Decompiled from void __thiscall IEntity::SetPosition(CPaneContainer *this, struct CPaneContainer *a2)
-
 void  IEntity::SetPosition(int) {
   
   *((_DWORD *)this + 6) = a2;
@@ -319,7 +272,6 @@ void  IEntity::SetPosition(int) {
 
 // address=[0x15191b0]
 // Decompiled from bool __thiscall IEntity::IsSelected(IEntity *this)
-
 bool  IEntity::IsSelected(void)const {
   
   return ((int)this[5].lpVtbl & 0x200) != 0;
@@ -328,7 +280,6 @@ bool  IEntity::IsSelected(void)const {
 
 // address=[0x154b3d0]
 // Decompiled from IEntity *__thiscall IEntity::IEntity(IEntity *this, int a2)
-
  IEntity::IEntity(int) {
   
   CPersistence::CPersistence(this);
@@ -350,7 +301,6 @@ bool  IEntity::IsSelected(void)const {
 
 // address=[0x154b4a0]
 // Decompiled from int __thiscall IEntity::_IEntity(_DWORD *this)
-
  IEntity::~IEntity(void) {
   
   *this = &IEntity::_vftable_;
@@ -369,7 +319,6 @@ bool  IEntity::IsSelected(void)const {
 
 // address=[0x154b570]
 // Decompiled from struct IEntity *__thiscall IEntity::IEntity(struct IEntity *this, struct std::istream *a2)
-
  IEntity::IEntity(std::istream &) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
@@ -407,7 +356,6 @@ bool  IEntity::IsSelected(void)const {
 
 // address=[0x154b6e0]
 // Decompiled from int __thiscall IEntity::Store(char *this, struct std::ostream *a2)
-
 void  IEntity::Store(std::ostream &) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
@@ -428,7 +376,6 @@ void  IEntity::Store(std::ostream &) {
 
 // address=[0x154b7b0]
 // Decompiled from int IEntity::PostLoadInit()
-
 void  IEntity::PostLoadInit(void) {
   
   IEntity::ClearFlagBits(0x200);
@@ -438,7 +385,6 @@ void  IEntity::PostLoadInit(void) {
 
 // address=[0x154b7e0]
 // Decompiled from int __thiscall IEntity::WorldIdx(_DWORD *this)
-
 int  IEntity::WorldIdx(void)const {
   
   return CWorldManager::Index(this[6]);
@@ -447,7 +393,6 @@ int  IEntity::WorldIdx(void)const {
 
 // address=[0x154b800]
 // Decompiled from int __thiscall IEntity::Increase(_BYTE *this, int a2)
-
 int  IEntity::Increase(int) {
   
   if ( a2 + (unsigned __int8)this[33] <= 255 )
@@ -460,7 +405,6 @@ int  IEntity::Increase(int) {
 
 // address=[0x154b850]
 // Decompiled from int __thiscall Damage(int this, int a2)
-
 void  IEntity::Decrease(int) {
   
   int result; // eax
@@ -483,7 +427,6 @@ void  IEntity::Decrease(int) {
 
 // address=[0x154b8b0]
 // Decompiled from int __thiscall IEntity::Decrease(void *this, int a2, int a3)
-
 void  IEntity::Decrease(int,int) {
   
   int result; // eax
@@ -497,7 +440,6 @@ void  IEntity::Decrease(int,int) {
 
 // address=[0x154b8e0]
 // Decompiled from int __thiscall sub_194B8E0(unsigned __int8 *this)
-
 int  IEntity::Amount(void)const {
   
   return this[33];
@@ -505,10 +447,7 @@ int  IEntity::Amount(void)const {
 
 
 // address=[0x154b900]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int IEntity::MaxHitpoints()
-
+// Decompiled from int IEntity::MaxHitpoints()
 int  IEntity::MaxHitpoints(void)const {
   
   return 0;
@@ -517,7 +456,6 @@ int  IEntity::MaxHitpoints(void)const {
 
 // address=[0x154b910]
 // Decompiled from void *__thiscall IEntity::SetAIEntityInfoPtr(IEntity *this, struct IEntityVtbl *a2)
-
 void  IEntity::SetAIEntityInfoPtr(class CAIEntityInfo *) {
   
   void *result; // eax
@@ -536,7 +474,6 @@ void  IEntity::SetAIEntityInfoPtr(class CAIEntityInfo *) {
 
 // address=[0x154b960]
 // Decompiled from int __thiscall IEntity::DbgPrint(_DWORD *this, int a2, const char *a3)
-
 void  IEntity::DbgPrint(int,char const *) {
   
   void *v3; // eax
@@ -583,7 +520,6 @@ void  IEntity::DbgPrint(int,char const *) {
 
 // address=[0x154ba00]
 // Decompiled from int __thiscall sub_194BA00(CPaneContainer *this, struct CPaneContainer *a2)
-
 void  IEntity::PlaceInMapObjectLayer(int) {
   
   __int16 v2; // ax
@@ -627,7 +563,6 @@ void  IEntity::PlaceInMapObjectLayer(int) {
 
 // address=[0x154bb50]
 // Decompiled from int __thiscall sub_194BB50(CPropertySet *this)
-
 void  IEntity::RemoveFromMapObjectLayer(void) {
   
   int v1; // esi
@@ -662,7 +597,6 @@ void  IEntity::RemoveFromMapObjectLayer(void) {
 
 // address=[0x154bc60]
 // Decompiled from int __thiscall IEntity::RemoveFromMapObjectLayerIfNecessary(IEntity *this)
-
 void  IEntity::RemoveFromMapObjectLayerIfNecessary(void) {
   
   int result; // eax
@@ -698,7 +632,6 @@ void  IEntity::RemoveFromMapObjectLayerIfNecessary(void) {
 
 // address=[0x154bd00]
 // Decompiled from int __stdcall sub_194BD00(int a1)
-
 void  IEntity::Detach(int) {
   
   if ( BBSupportDbgReport(1, "MapObjects\\Entity.cpp", 360, "IEntity::Detach() called!") == 1 )
@@ -709,7 +642,6 @@ void  IEntity::Detach(int) {
 
 // address=[0x154bd30]
 // Decompiled from void __stdcall IEntity::SetObserverTarget(int a1, int a2)
-
 void  IEntity::SetObserverTarget(enum T_OBSERVER_TARGET,int) {
   
   ;
@@ -718,7 +650,6 @@ void  IEntity::SetObserverTarget(enum T_OBSERVER_TARGET,int) {
 
 // address=[0x154bd40]
 // Decompiled from void *__thiscall IEntity::GetObserverTarget(std::_Ref_count_base *this, const struct type_info *a2)
-
 int  IEntity::GetObserverTarget(enum T_OBSERVER_TARGET) {
   
   return 0;
@@ -727,7 +658,6 @@ int  IEntity::GetObserverTarget(enum T_OBSERVER_TARGET) {
 
 // address=[0x154bd50]
 // Decompiled from int __thiscall sub_194BD50(CPropertySet *this)
-
 void  IEntity::AddToWarMap(void) {
   
   int result; // eax
@@ -741,7 +671,6 @@ void  IEntity::AddToWarMap(void) {
 
 // address=[0x154bd80]
 // Decompiled from int __thiscall IEntity::RemoveFromAllGroups(unsigned __int16 *this)
-
 void  IEntity::RemoveFromAllGroups(void) {
   
   int v1; // eax
@@ -752,10 +681,7 @@ void  IEntity::RemoveFromAllGroups(void) {
 
 
 // address=[0x154c100]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __stdcall IEntity::SetEvent(int a1)
-
+// Decompiled from void __stdcall IEntity::SetEvent(int a1)
 void  IEntity::SetEvent(class CEntityEvent const &) {
   
   ;
@@ -764,7 +690,6 @@ void  IEntity::SetEvent(class CEntityEvent const &) {
 
 // address=[0x1552650]
 // Decompiled from BOOL __thiscall IEntity::CheckType(IEntity *this, char a2, int a3)
-
 bool  IEntity::CheckType(int,int)const {
   
   return LOWORD(this[3].lpVtbl) == a3 && (unsigned __int8)(a2 & BYTE2(this[2].lpVtbl)) != 0;
@@ -773,7 +698,6 @@ bool  IEntity::CheckType(int,int)const {
 
 // address=[0x156d340]
 // Decompiled from IEntity *__thiscall IEntity::SetHitpoints(IEntity *this, char a2)
-
 void  IEntity::SetHitpoints(unsigned int) {
   
   IEntity *result; // eax

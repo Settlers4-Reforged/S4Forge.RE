@@ -4,7 +4,6 @@
 
 // address=[0x1315b40]
 // Decompiled from int __thiscall CManyBuildingTypesIterator::Init(CManyBuildingTypesIterator *this, int a2, int a3, int a4)
-
 void  CManyBuildingTypesIterator::Init(int,int,int) {
   
   int result; // eax
@@ -22,7 +21,6 @@ void  CManyBuildingTypesIterator::Init(int,int,int) {
 
 // address=[0x1315b80]
 // Decompiled from int __thiscall CManyBuildingTypesIterator::FirstBuilding(CManyBuildingTypesIterator *this)
-
 int  CManyBuildingTypesIterator::FirstBuilding(void) {
   
   bool v2; // [esp+0h] [ebp-8h]
@@ -42,7 +40,6 @@ int  CManyBuildingTypesIterator::FirstBuilding(void) {
 
 // address=[0x1315c00]
 // Decompiled from int __thiscall CManyBuildingTypesIterator::NextBuilding(CManyBuildingTypesIterator *this)
-
 int  CManyBuildingTypesIterator::NextBuilding(void) {
   
   int v1; // eax
@@ -76,9 +73,7 @@ int  CManyBuildingTypesIterator::NextBuilding(void) {
 
 
 // address=[0x1315ca0]
-// Decompiled from // public: int __thiscall CManyBuildingTypesIterator::NextBuildingIfCurrentIsNotValid(void)
-int __thiscall CManyBuildingTypesIterator::NextBuildingIfCurrentIsNotValid(CManyBuildingTypesIterator *this)
-
+// Decompiled from int __thiscall CManyBuildingTypesIterator::NextBuildingIfCurrentIsNotValid(CManyBuildingTypesIterator *this)
 int  CManyBuildingTypesIterator::NextBuildingIfCurrentIsNotValid(void) {
   
   if ( CBuildingIteratorBase::BuildingValid(this, *((_DWORD *)this + 1)) )
@@ -89,9 +84,7 @@ int  CManyBuildingTypesIterator::NextBuildingIfCurrentIsNotValid(void) {
 
 
 // address=[0x13171f0]
-// Decompiled from CManyBuildingTypesIterator *__thiscall CManyBuildingTypesIterator::CManyBuildingTypesIterator(
-        CManyBuildingTypesIterator *this)
-
+// Decompiled from CManyBuildingTypesIterator *__thiscall CManyBuildingTypesIterator::CManyBuildingTypesIterator(  CManyBuildingTypesIterator *this)
  CManyBuildingTypesIterator::CManyBuildingTypesIterator(void) {
   
   return this;

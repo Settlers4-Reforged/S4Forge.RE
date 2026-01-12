@@ -4,7 +4,6 @@
 
 // address=[0x1306230]
 // Decompiled from CSpiralWalk *__thiscall CSpiralWalk::CSpiralWalk(CSpiralWalk *this, int a2, int a3, int a4)
-
  CSpiralWalk::CSpiralWalk(int,int,int) {
   
   *((_DWORD *)this + 1) = a2;
@@ -17,7 +16,6 @@
 
 // address=[0x1306800]
 // Decompiled from char __thiscall CSpiralWalk::NextXY(_DWORD *this, int *a2, int *a3)
-
 bool  CSpiralWalk::NextXY(int &,int &) {
   
   int v4; // [esp+0h] [ebp-Ch]
@@ -41,7 +39,6 @@ bool  CSpiralWalk::NextXY(int &,int &) {
 
 // address=[0x1509f30]
 // Decompiled from int __thiscall CSpiralWalk::CurrentRadius(CSpiralWalk *this)
-
 int  CSpiralWalk::CurrentRadius(void)const {
   
   return CSpiralOffsets::Radius(*(_DWORD *)this);

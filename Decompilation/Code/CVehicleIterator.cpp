@@ -4,7 +4,6 @@
 
 // address=[0x15aa510]
 // Decompiled from int __thiscall CVehicleIterator::FirstVehicle(CVehicleIterator *this)
-
 class CVehicle *  CVehicleIterator::FirstVehicle(void) {
   
   int FirstVehicleId; // [esp+0h] [ebp-Ch]
@@ -45,7 +44,6 @@ class CVehicle *  CVehicleIterator::FirstVehicle(void) {
 
 // address=[0x15aad90]
 // Decompiled from int __thiscall CVehicleIterator::NextVehicle(CVehicleIterator *this)
-
 class CVehicle *  CVehicleIterator::NextVehicle(void) {
   
   do
@@ -57,7 +55,6 @@ class CVehicle *  CVehicleIterator::NextVehicle(void) {
 
 // address=[0x160d920]
 // Decompiled from CVehicleIterator *__thiscall CVehicleIterator::CVehicleIterator(CVehicleIterator *this, int a2, int a3)
-
  CVehicleIterator::CVehicleIterator(int,int) {
   
   *(_DWORD *)this = a2;
@@ -69,7 +66,6 @@ class CVehicle *  CVehicleIterator::NextVehicle(void) {
 
 // address=[0x15aad50]
 // Decompiled from bool __cdecl CVehicleIterator::IsEntityNullOrValid(struct IEntity *a1)
-
 static bool __cdecl CVehicleIterator::IsEntityNullOrValid(class IEntity *) {
   
   return !a1 || IEntity::FlagBits(a1, (EntityFlag)&loc_3000000);
@@ -78,7 +74,6 @@ static bool __cdecl CVehicleIterator::IsEntityNullOrValid(class IEntity *) {
 
 // address=[0x15aade0]
 // Decompiled from void **__thiscall CVehicleIterator::NextVehicleEx(CVehicleIterator *this, struct CVehicle *a2)
-
 class CVehicle *  CVehicleIterator::NextVehicleEx(class CVehicle *) {
   
   int v3; // eax

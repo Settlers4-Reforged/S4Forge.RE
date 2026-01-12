@@ -4,7 +4,6 @@
 
 // address=[0x1314f30]
 // Decompiled from bool __thiscall CPlayerIterator::Init(CPlayerIterator *this, int a2)
-
 bool  CPlayerIterator::Init(int) {
   
   int v3; // [esp+4h] [ebp-14h]
@@ -41,7 +40,6 @@ bool  CPlayerIterator::Init(int) {
 
 // address=[0x1315000]
 // Decompiled from int __thiscall CPlayerIterator::FirstPlayer(CPlayerIterator *this)
-
 int  CPlayerIterator::FirstPlayer(void) {
   
   *((_DWORD *)this + 3) = *((_DWORD *)this + 1);
@@ -52,7 +50,6 @@ int  CPlayerIterator::FirstPlayer(void) {
 
 // address=[0x1315040]
 // Decompiled from int __thiscall CPlayerIterator::NextPlayer(CPlayerIterator *this)
-
 int  CPlayerIterator::NextPlayer(void) {
   
   int v2; // [esp+8h] [ebp-Ch]
@@ -79,7 +76,6 @@ int  CPlayerIterator::NextPlayer(void) {
 
 // address=[0x13172b0]
 // Decompiled from CPlayerIterator *__thiscall CPlayerIterator::CPlayerIterator(CPlayerIterator *this)
-
  CPlayerIterator::CPlayerIterator(void) {
   
   return this;
@@ -88,7 +84,6 @@ int  CPlayerIterator::NextPlayer(void) {
 
 // address=[0x1317440]
 // Decompiled from int __thiscall CPlayerIterator::PlayerId(pairNode *this)
-
 int  CPlayerIterator::PlayerId(void)const {
   
   return *((_DWORD *)this + 3);

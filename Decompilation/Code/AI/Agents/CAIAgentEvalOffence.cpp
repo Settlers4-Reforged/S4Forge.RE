@@ -4,7 +4,6 @@
 
 // address=[0x1304700]
 // Decompiled from unsigned int __thiscall CAIAgentEvalOffence::Execute(CAIAgentEvalOffence *this, unsigned int a2, unsigned int a3)
-
 unsigned int  CAIAgentEvalOffence::Execute(unsigned int,unsigned int) {
   
   CAINormalSectorAI *v3; // eax
@@ -17,7 +16,6 @@ unsigned int  CAIAgentEvalOffence::Execute(unsigned int,unsigned int) {
 
 // address=[0x1325a40]
 // Decompiled from CAIAgentEvalOffence *__thiscall CAIAgentEvalOffence::CAIAgentEvalOffence(CAIAgentEvalOffence *this)
-
  CAIAgentEvalOffence::CAIAgentEvalOffence(void) {
   
   CAINormalSectorAgent::CAINormalSectorAgent(this, "offence evaluation");
@@ -28,7 +26,6 @@ unsigned int  CAIAgentEvalOffence::Execute(unsigned int,unsigned int) {
 
 // address=[0x1325c30]
 // Decompiled from void __thiscall CAIAgentEvalOffence::~CAIAgentEvalOffence(CAIAgentEvalOffence *this)
-
  CAIAgentEvalOffence::~CAIAgentEvalOffence(void) {
   
   CAINormalSectorAgent::~CAINormalSectorAgent(this);

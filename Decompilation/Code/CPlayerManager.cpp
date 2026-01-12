@@ -4,7 +4,6 @@
 
 // address=[0x130f2c0]
 // Decompiled from int __cdecl CPlayerManager::Race(int a1)
-
 static int __cdecl CPlayerManager::Race(int) {
   
   if ( !CPlayerManager::ValidUsedPlayerId(a1)
@@ -22,7 +21,6 @@ static int __cdecl CPlayerManager::Race(int) {
 
 // address=[0x130f490]
 // Decompiled from bool __cdecl CPlayerManager::ValidUsedPlayerId(int a1)
-
 static bool __cdecl CPlayerManager::ValidUsedPlayerId(int) {
   
   return a1 - 1 < CPlayerManager::m_iNumberOfPlayer;
@@ -31,7 +29,6 @@ static bool __cdecl CPlayerManager::ValidUsedPlayerId(int) {
 
 // address=[0x1314080]
 // Decompiled from int CPlayerManager::LastPlayerId()
-
 static int __cdecl CPlayerManager::LastPlayerId(void) {
   
   return CPlayerManager::m_iNumberOfPlayer;
@@ -40,7 +37,6 @@ static int __cdecl CPlayerManager::LastPlayerId(void) {
 
 // address=[0x13736c0]
 // Decompiled from int sub_17736C0()
-
 static int __cdecl CPlayerManager::GetLocalPlayerId(void) {
   
   return CPlayerManager::m_iLocalPlayer;
@@ -49,7 +45,6 @@ static int __cdecl CPlayerManager::GetLocalPlayerId(void) {
 
 // address=[0x13736d0]
 // Decompiled from char *__cdecl CPlayerManager::PlayerInfo(int a1)
-
 static class CPlayerInfo const & __cdecl CPlayerManager::PlayerInfo(int) {
   
   if ( !CPlayerManager::ValidUsedPlayerId(a1)
@@ -67,7 +62,6 @@ static class CPlayerInfo const & __cdecl CPlayerManager::PlayerInfo(int) {
 
 // address=[0x13919d0]
 // Decompiled from int __cdecl CPlayerManager::Color(int a1)
-
 static int __cdecl CPlayerManager::Color(int) {
   
   if ( !CPlayerManager::ValidUsedPlayerId(a1)
@@ -85,7 +79,6 @@ static int __cdecl CPlayerManager::Color(int) {
 
 // address=[0x1391a30]
 // Decompiled from int CPlayerManager::NumberOfPlayers()
-
 static int __cdecl CPlayerManager::NumberOfPlayers(void) {
   
   return CPlayerManager::m_iNumberOfPlayer;
@@ -94,7 +87,6 @@ static int __cdecl CPlayerManager::NumberOfPlayers(void) {
 
 // address=[0x14477c0]
 // Decompiled from char *__cdecl CPlayerManager::PlayerGameData(int a1)
-
 static class CPlayerGameData & __cdecl CPlayerManager::PlayerGameData(int) {
   
   if ( !CPlayerManager::ValidUsedPlayerId(a1)
@@ -112,7 +104,6 @@ static class CPlayerGameData & __cdecl CPlayerManager::PlayerGameData(int) {
 
 // address=[0x144fed0]
 // Decompiled from int __cdecl CPlayerManager::Name(int a1, int a2)
-
 static std::wstring __cdecl CPlayerManager::Name(int) {
   
   if ( !CPlayerManager::ValidUsedPlayerId(a2)
@@ -131,7 +122,6 @@ static std::wstring __cdecl CPlayerManager::Name(int) {
 
 // address=[0x1460650]
 // Decompiled from char __cdecl CPlayerManager::IsAlive(int a1)
-
 static bool __cdecl CPlayerManager::IsAlive(int) {
   
   if ( !CPlayerManager::ValidUsedPlayerId(a1)
@@ -149,7 +139,6 @@ static bool __cdecl CPlayerManager::IsAlive(int) {
 
 // address=[0x147a320]
 // Decompiled from bool __cdecl CPlayerManager::IsAI(int a1)
-
 static bool __cdecl CPlayerManager::IsAI(int) {
   
   if ( !CPlayerManager::ValidUsedPlayerId(a1)
@@ -167,7 +156,6 @@ static bool __cdecl CPlayerManager::IsAI(int) {
 
 // address=[0x1486e90]
 // Decompiled from int __cdecl CPlayerManager::GetPlayerControl(int a1)
-
 static int __cdecl CPlayerManager::GetPlayerControl(int) {
   
   if ( !CPlayerManager::ValidUsedPlayerId(a1)
@@ -185,7 +173,6 @@ static int __cdecl CPlayerManager::GetPlayerControl(int) {
 
 // address=[0x14973a0]
 // Decompiled from int __thiscall CPlayerManager::Init(void *this)
-
 static void __cdecl CPlayerManager::Init(void) {
   
   int result; // eax
@@ -208,22 +195,7 @@ static void __cdecl CPlayerManager::Init(void) {
 
 
 // address=[0x1497420]
-// Decompiled from int __cdecl CPlayerManager::AddPlayer(
-        int a1,
-        int a2,
-        int a3,
-        int a4,
-        int a5,
-        int a6,
-        char a7,
-        int a8,
-        int a9,
-        int a10,
-        int a11,
-        int a12,
-        int a13,
-        int a14)
-
+// Decompiled from int __cdecl CPlayerManager::AddPlayer(  int a1,  int a2,  int a3,  int a4,  int a5,  int a6,  char a7,  int a8,  int a9,  int a10,  int a11,  int a12,  int a13,  int a14)
 static int __cdecl CPlayerManager::AddPlayer(int,int,int,int,int,int,std::wstring,int) {
   
   OnlineManager *Instance; // eax
@@ -303,7 +275,6 @@ LABEL_15:
 
 // address=[0x14976e0]
 // Decompiled from char CPlayerManager::Lock()
-
 static bool __cdecl CPlayerManager::Lock(void) {
   
   if ( CPlayerManager::m_iInitialized )
@@ -342,7 +313,6 @@ static bool __cdecl CPlayerManager::Lock(void) {
 
 // address=[0x1497790]
 // Decompiled from void CPlayerManager::Done()
-
 static void __cdecl CPlayerManager::Done(void) {
   
   CPlayerManager::m_iInitialized = 0;
@@ -352,7 +322,6 @@ static void __cdecl CPlayerManager::Done(void) {
 
 // address=[0x14977b0]
 // Decompiled from int __thiscall CPlayerManager::Load(CPlayerManager *this, struct IS4Chunk *a2)
-
 void  CPlayerManager::Load(class IS4Chunk &) {
   
   int result; // eax
@@ -382,7 +351,6 @@ void  CPlayerManager::Load(class IS4Chunk &) {
 
 // address=[0x1497870]
 // Decompiled from int __thiscall CPlayerManager::Save(CPlayerManager *this, struct IS4Chunk *a2)
-
 void  CPlayerManager::Save(class IS4Chunk &) {
   
   int result; // eax
@@ -409,7 +377,6 @@ void  CPlayerManager::Save(class IS4Chunk &) {
 
 // address=[0x1497920]
 // Decompiled from int CPlayerManager::PrintStats()
-
 static void __cdecl CPlayerManager::PrintStats(void) {
   
   const char *v0; // eax
@@ -448,7 +415,6 @@ static void __cdecl CPlayerManager::PrintStats(void) {
 
 // address=[0x1497a60]
 // Decompiled from char CPlayerManager::GetLocalSlot()
-
 static signed char __cdecl CPlayerManager::GetLocalSlot(void) {
   
   OnlineManager *Instance; // eax
@@ -484,7 +450,6 @@ static signed char __cdecl CPlayerManager::GetLocalSlot(void) {
 
 // address=[0x1498150]
 // Decompiled from CPlayerManager *__thiscall CPlayerManager::CPlayerManager(CPlayerManager *this)
-
  CPlayerManager::CPlayerManager(void) {
   
   IS4ChunkObject::IS4ChunkObject(this);
@@ -495,7 +460,6 @@ static signed char __cdecl CPlayerManager::GetLocalSlot(void) {
 
 // address=[0x14aae50]
 // Decompiled from int __cdecl CPlayerManager::PlayerDied(int a1)
-
 static void __cdecl CPlayerManager::PlayerDied(int) {
   
   if ( !CPlayerManager::ValidUsedPlayerId(a1)
@@ -514,7 +478,6 @@ static void __cdecl CPlayerManager::PlayerDied(int) {
 
 // address=[0x14b4800]
 // Decompiled from int __cdecl CPlayerManager::PeerId(int a1)
-
 static int __cdecl CPlayerManager::PeerId(int) {
   
   if ( !CPlayerManager::ValidUsedPlayerId(a1)
@@ -532,7 +495,6 @@ static int __cdecl CPlayerManager::PeerId(int) {
 
 // address=[0x14b4930]
 // Decompiled from int __cdecl CPlayerManager::SetLocalPlayerId(int a1)
-
 static void __cdecl CPlayerManager::SetLocalPlayerId(int) {
   
   int result; // eax
@@ -554,7 +516,6 @@ static void __cdecl CPlayerManager::SetLocalPlayerId(int) {
 
 // address=[0x14b4980]
 // Decompiled from int __cdecl CPlayerManager::SetPlayerControl(int a1, int a2)
-
 static void __cdecl CPlayerManager::SetPlayerControl(int,int) {
   
   int v3; // [esp+0h] [ebp-24h]
@@ -581,7 +542,6 @@ static void __cdecl CPlayerManager::SetPlayerControl(int,int) {
 
 // address=[0x15c4d00]
 // Decompiled from int __cdecl CPlayerManager::IP(int a1)
-
 static int __cdecl CPlayerManager::IP(int) {
   
   if ( !CPlayerManager::ValidUsedPlayerId(a1)

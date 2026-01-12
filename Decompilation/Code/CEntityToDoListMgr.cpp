@@ -4,7 +4,6 @@
 
 // address=[0x154c610]
 // Decompiled from CEntityToDoListMgr *__thiscall CEntityToDoListMgr::CEntityToDoListMgr(CEntityToDoListMgr *this)
-
  CEntityToDoListMgr::CEntityToDoListMgr(void) {
   
   CEntityTask *v1; // eax
@@ -825,7 +824,6 @@
 
 // address=[0x154e090]
 // Decompiled from void __thiscall CEntityToDoListMgr::~CEntityToDoListMgr(CEntityToDoListMgr *this)
-
  CEntityToDoListMgr::~CEntityToDoListMgr(void) {
   
   int k; // [esp+1Ch] [ebp-10h]
@@ -860,7 +858,6 @@
 
 // address=[0x154e220]
 // Decompiled from int __thiscall CEntityToDoListMgr::SettlerJobList(_DWORD *this, unsigned int a2, unsigned int a3)
-
 class std::list<class CEntityTask,class std::allocator<class CEntityTask> > *  CEntityToDoListMgr::SettlerJobList(int,int) {
   
   if ( a2 > 4
@@ -879,7 +876,6 @@ class std::list<class CEntityTask,class std::allocator<class CEntityTask> > *  C
 
 // address=[0x154e2a0]
 // Decompiled from char __cdecl CEntityToDoListMgr::GetJobSoundInfo(int a1, struct SJobSoundInfo *a2)
-
 static void __cdecl CEntityToDoListMgr::GetJobSoundInfo(int,struct SJobSoundInfo &) {
   
   char result; // al

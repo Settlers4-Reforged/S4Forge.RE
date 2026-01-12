@@ -4,7 +4,6 @@
 
 // address=[0x15c4910]
 // Decompiled from CMsgStacks *__thiscall CMsgStacks::AdvanceValidTick(CMsgStacks *this)
-
 void  CMsgStacks::AdvanceValidTick(void) {
   
   CMsgStacks *result; // eax
@@ -17,7 +16,6 @@ void  CMsgStacks::AdvanceValidTick(void) {
 
 // address=[0x15c4940]
 // Decompiled from CMsgStacks *__thiscall CMsgStacks::AdvanceVirtualTick(CMsgStacks *this)
-
 void  CMsgStacks::AdvanceVirtualTick(void) {
   
   CMsgStacks *result; // eax
@@ -30,7 +28,6 @@ void  CMsgStacks::AdvanceVirtualTick(void) {
 
 // address=[0x15c4a20]
 // Decompiled from int __thiscall CMsgStacks::GetLastMsgTime(CMsgStacks *this, unsigned int a2)
-
 unsigned int  CMsgStacks::GetLastMsgTime(unsigned int) {
   
   return *(_DWORD *)(*((_DWORD *)this + a2 + 13) + 24);
@@ -39,7 +36,6 @@ unsigned int  CMsgStacks::GetLastMsgTime(unsigned int) {
 
 // address=[0x15c4aa0]
 // Decompiled from int __thiscall CMsgStacks::GetNumberOfStacks(pairNode *this)
-
 int  CMsgStacks::GetNumberOfStacks(void) {
   
   return *((_DWORD *)this + 3);
@@ -48,7 +44,6 @@ int  CMsgStacks::GetNumberOfStacks(void) {
 
 // address=[0x15c4ca0]
 // Decompiled from int __thiscall sub_19C4CA0(_DWORD *this)
-
 int  CMsgStacks::GetValidTick(void) {
   
   return this[406];
@@ -57,7 +52,6 @@ int  CMsgStacks::GetValidTick(void) {
 
 // address=[0x15c4cc0]
 // Decompiled from int __thiscall CMsgStacks::GetVirtualTick(CMsgStacks *this)
-
 int  CMsgStacks::GetVirtualTick(void) {
   
   return *((_DWORD *)this + 405);
@@ -65,10 +59,7 @@ int  CMsgStacks::GetVirtualTick(void) {
 
 
 // address=[0x15c4ce0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CMsgStacks::Getdt(CMsgStacks *this)
-
+// Decompiled from int __thiscall CMsgStacks::Getdt(CMsgStacks *this)
 int  CMsgStacks::Getdt(void) {
   
   return *((_DWORD *)this + 2);
@@ -77,7 +68,6 @@ int  CMsgStacks::Getdt(void) {
 
 // address=[0x15c4d60]
 // Decompiled from bool __thiscall CMsgStacks::IsStackAI(CMsgStack **this, unsigned int a2)
-
 bool  CMsgStacks::IsStackAI(unsigned int) {
   
   return CMsgStack::GetAI(this[a2 + 5]);
@@ -86,7 +76,6 @@ bool  CMsgStacks::IsStackAI(unsigned int) {
 
 // address=[0x15c4e10]
 // Decompiled from int __thiscall CMsgStacks::SetLastMsgTime(_DWORD *this, int a2, int a3, char a4)
-
 void  CMsgStacks::SetLastMsgTime(unsigned int,unsigned int,bool) {
   
   int result; // eax
@@ -109,7 +98,6 @@ void  CMsgStacks::SetLastMsgTime(unsigned int,unsigned int,bool) {
 
 // address=[0x15cb660]
 // Decompiled from char __thiscall CMsgStacks::TriggerTime(CMsgStack **this)
-
 bool  CMsgStacks::TriggerTime(void) {
   
   CMsgStack *v2; // [esp+4h] [ebp-10h]
@@ -135,7 +123,6 @@ bool  CMsgStacks::TriggerTime(void) {
 
 // address=[0x15cb780]
 // Decompiled from CMsgStacks *__thiscall CMsgStacks::CMsgStacks(CMsgStacks *this, int a2, int a3, int a4)
-
  CMsgStacks::CMsgStacks(int,int,int) {
   
   double v5; // [esp+0h] [ebp-14h]
@@ -161,7 +148,6 @@ bool  CMsgStacks::TriggerTime(void) {
 
 // address=[0x15cb850]
 // Decompiled from int __thiscall CMsgStacks::~CMsgStacks(CMsgStacks *this)
-
  CMsgStacks::~CMsgStacks(void) {
   
   int result; // eax
@@ -191,7 +177,6 @@ bool  CMsgStacks::TriggerTime(void) {
 
 // address=[0x15cb920]
 // Decompiled from char __thiscall CMsgStacks::PushMsg(CMsgStacks *this, struct CNet_Event *a2)
-
 bool  CMsgStacks::PushMsg(class CNet_Event &) {
   
   int v3; // [esp+4h] [ebp-10h]
@@ -230,7 +215,6 @@ bool  CMsgStacks::PushMsg(class CNet_Event &) {
 
 // address=[0x15cba00]
 // Decompiled from CNet_Event *__thiscall CMsgStacks::PopMsg(_DWORD *this, CNet_Event *a2)
-
 class CNet_Event  CMsgStacks::PopMsg(void) {
   
   int i; // [esp+8h] [ebp-28h]
@@ -254,7 +238,6 @@ class CNet_Event  CMsgStacks::PopMsg(void) {
 
 // address=[0x15cbae0]
 // Decompiled from char __thiscall CMsgStacks::AddNewPlayer(CMsgStacks *this)
-
 bool  CMsgStacks::AddNewPlayer(void) {
   
   int v2; // [esp+8h] [ebp-1Ch]
@@ -276,10 +259,7 @@ bool  CMsgStacks::AddNewPlayer(void) {
 
 
 // address=[0x15cbba0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CMsgStacks::GetNumPlayers(CMsgStacks *this)
-
+// Decompiled from int __thiscall CMsgStacks::GetNumPlayers(CMsgStacks *this)
 int  CMsgStacks::GetNumPlayers(void) {
   
   return *((_DWORD *)this + 4);
@@ -287,9 +267,7 @@ int  CMsgStacks::GetNumPlayers(void) {
 
 
 // address=[0x15cbbc0]
-// Decompiled from // public: bool __thiscall CMsgStacks::SetNumberOfClients(unsigned int)
-char __thiscall CMsgStacks::SetNumberOfClients(CMsgStacks *this, unsigned int a2)
-
+// Decompiled from char __thiscall CMsgStacks::SetNumberOfClients(CMsgStacks *this, unsigned int a2)
 bool  CMsgStacks::SetNumberOfClients(unsigned int) {
   
   unsigned int i; // [esp+4h] [ebp-4h]
@@ -302,7 +280,6 @@ bool  CMsgStacks::SetNumberOfClients(unsigned int) {
 
 // address=[0x15cbc00]
 // Decompiled from int __thiscall CMsgStacks::Get(CMsgStacks *this, unsigned int a2, unsigned __int8 a3)
-
 class CMsgStack *  CMsgStacks::Get(unsigned int,unsigned char) {
   
   return *((_DWORD *)this + 8 * a2 + a3 + 5);
@@ -311,7 +288,6 @@ class CMsgStack *  CMsgStacks::Get(unsigned int,unsigned char) {
 
 // address=[0x15cbc30]
 // Decompiled from char __thiscall CMsgStacks::IsEmpty(CMsgStacks *this, unsigned int a2)
-
 bool  CMsgStacks::IsEmpty(unsigned int) {
   
   int v2; // eax
@@ -328,9 +304,7 @@ bool  CMsgStacks::IsEmpty(unsigned int) {
 
 
 // address=[0x15cbc90]
-// Decompiled from // public: class CNet_Event __thiscall CMsgStacks::GetMsgToSend(void)
-CNet_Event *__thiscall CMsgStacks::GetMsgToSend(CMsgStacks *this, CNet_Event *a2)
-
+// Decompiled from CNet_Event *__thiscall CMsgStacks::GetMsgToSend(CMsgStacks *this, CNet_Event *a2)
 class CNet_Event  CMsgStacks::GetMsgToSend(void) {
   
   int v2; // eax
@@ -356,7 +330,6 @@ class CNet_Event  CMsgStacks::GetMsgToSend(void) {
 
 // address=[0x15cbd50]
 // Decompiled from _DWORD *__thiscall CMsgStacks::SetNumberOfExpectedMsgs(_DWORD *this, int a2, char a3, unsigned __int8 a4)
-
 void  CMsgStacks::SetNumberOfExpectedMsgs(unsigned int,unsigned char,unsigned char) {
   
   _DWORD *result; // eax
@@ -390,7 +363,6 @@ void  CMsgStacks::SetNumberOfExpectedMsgs(unsigned int,unsigned char,unsigned ch
 
 // address=[0x15cbe20]
 // Decompiled from bool __thiscall CMsgStacks::IsSizeAlreadySet(_DWORD *this, int a2, unsigned __int8 a3)
-
 bool  CMsgStacks::IsSizeAlreadySet(unsigned int,unsigned char) {
   
   int ValidTick; // [esp+0h] [ebp-14h]
@@ -402,7 +374,6 @@ bool  CMsgStacks::IsSizeAlreadySet(unsigned int,unsigned char) {
 
 // address=[0x15cbe90]
 // Decompiled from char __thiscall CMsgStacks::IsMsgStackValid(CMsgStacks *this, unsigned int a2, unsigned int *a3)
-
 bool  CMsgStacks::IsMsgStackValid(unsigned int,unsigned int &) {
   
   DWORD Time; // [esp+0h] [ebp-1Ch]
@@ -429,7 +400,6 @@ bool  CMsgStacks::IsMsgStackValid(unsigned int,unsigned int &) {
 
 // address=[0x15cbf80]
 // Decompiled from int __thiscall sub_19CBF80(_DWORD *this, unsigned int a2, char a3)
-
 void  CMsgStacks::SetStackAI(unsigned int,bool) {
   
   int result; // eax
@@ -453,7 +423,6 @@ void  CMsgStacks::SetStackAI(unsigned int,bool) {
 
 // address=[0x15cc000]
 // Decompiled from bool __thiscall CMsgStacks::IsInStack(CMsgStacks *this, struct CNet_Event *a2)
-
 bool  CMsgStacks::IsInStack(class CNet_Event &) {
   
   int v3; // [esp+4h] [ebp-10h]
@@ -473,7 +442,6 @@ bool  CMsgStacks::IsInStack(class CNet_Event &) {
 
 // address=[0x15cc0a0]
 // Decompiled from int __thiscall CMsgStacks::ClearAndValidate(CMsgStack **this, int a2)
-
 void  CMsgStacks::ClearAndValidate(int) {
   
   int result; // eax
@@ -490,7 +458,6 @@ void  CMsgStacks::ClearAndValidate(int) {
 
 // address=[0x15cc0f0]
 // Decompiled from void __thiscall CMsgStacks::OnEndSaving(CMsgStacks *this, int a2, int a3)
-
 void  CMsgStacks::OnEndSaving(int,int) {
   
   DWORD Time; // eax
@@ -506,7 +473,6 @@ void  CMsgStacks::OnEndSaving(int,int) {
 
 // address=[0x15cc140]
 // Decompiled from bool __thiscall CMsgStacks::InitStacks(_DWORD *this)
-
 bool  CMsgStacks::InitStacks(void) {
   
   int v2; // [esp+10h] [ebp-20h]

@@ -4,7 +4,6 @@
 
 // address=[0x14a3ac0]
 // Decompiled from CStateCampaignDark *__cdecl CStateCampaignDark::DynamicCreateFunc(void *a1)
-
 static class CGameState * __cdecl CStateCampaignDark::DynamicCreateFunc(void *) {
   
   CStateCampaignDark *C; // [esp+Ch] [ebp-10h]
@@ -19,7 +18,6 @@ static class CGameState * __cdecl CStateCampaignDark::DynamicCreateFunc(void *) 
 
 // address=[0x14a3b40]
 // Decompiled from CStateCampaignDark *__thiscall CStateCampaignDark::CStateCampaignDark(CStateCampaignDark *this, void *a2)
-
  CStateCampaignDark::CStateCampaignDark(void *) {
   
   CGuiGameState::CGuiGameState(this);
@@ -34,7 +32,6 @@ static class CGameState * __cdecl CStateCampaignDark::DynamicCreateFunc(void *) 
 
 // address=[0x14a3be0]
 // Decompiled from void __thiscall CStateCampaignDark::~CStateCampaignDark(CStateCampaignDark *this)
-
  CStateCampaignDark::~CStateCampaignDark(void) {
   
   *(_DWORD *)this = &CStateCampaignDark::_vftable_;
@@ -49,7 +46,6 @@ static class CGameState * __cdecl CStateCampaignDark::DynamicCreateFunc(void *) 
 
 // address=[0x14a3c60]
 // Decompiled from char __thiscall CStateCampaignDark::Perform(CStateCampaignDark *this)
-
 bool  CStateCampaignDark::Perform(void) {
   
   DWORD v1; // esi
@@ -76,7 +72,6 @@ bool  CStateCampaignDark::Perform(void) {
 
 // address=[0x14a3d00]
 // Decompiled from char __thiscall CStateCampaignDark::OnEvent(CStateCampaignDark *this, struct CEvn_Event *a2)
-
 bool  CStateCampaignDark::OnEvent(class CEvn_Event &) {
   
   CEvn_Event *v3; // [esp+8h] [ebp-3Ch]

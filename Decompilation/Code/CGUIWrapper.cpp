@@ -4,7 +4,6 @@
 
 // address=[0x13d8780]
 // Decompiled from void *CGUIWrapper::GetInstance()
-
 static class CGUIWrapper * __cdecl CGUIWrapper::GetInstance(void) {
   
   if ( dword_3EFD61C <= *(_DWORD *)(*((_DWORD *)NtCurrentTeb()->ThreadLocalStoragePointer + _tls_index) + 20296) )
@@ -20,7 +19,6 @@ static class CGUIWrapper * __cdecl CGUIWrapper::GetInstance(void) {
 
 // address=[0x13d8810]
 // Decompiled from CGUIWrapper *__thiscall CGUIWrapper::ReleaseGUIGFXFile(CGUIWrapper *this)
-
 void  CGUIWrapper::ReleaseGUIGFXFile(void) {
   
   CGUIWrapper *result; // eax
@@ -32,13 +30,7 @@ void  CGUIWrapper::ReleaseGUIGFXFile(void) {
 
 
 // address=[0x13d8830]
-// Decompiled from char __thiscall CGUIWrapper::RebuildGuiEngineWithGfxFile(
-        CGUIWrapper *this,
-        unsigned int a2,
-        int a3,
-        int a4,
-        bool (__cdecl *a5)(int, int, int))
-
+// Decompiled from char __thiscall CGUIWrapper::RebuildGuiEngineWithGfxFile(  CGUIWrapper *this,  unsigned int a2,  int a3,  int a4,  bool (__cdecl *a5)(int, int, int))
 bool  CGUIWrapper::RebuildGuiEngineWithGfxFile(unsigned int,void *,int,bool (__cdecl*)(int,int,int)) {
   
   int Language; // eax
@@ -101,7 +93,6 @@ bool  CGUIWrapper::RebuildGuiEngineWithGfxFile(unsigned int,void *,int,bool (__c
 
 // address=[0x13d8a20]
 // Decompiled from int __thiscall CGUIWrapper::GetActiveGUIGFXFile(CGUIWrapper *this)
-
 unsigned int  CGUIWrapper::GetActiveGUIGFXFile(void) {
   
   if ( g_pGfxManager )
@@ -113,7 +104,6 @@ unsigned int  CGUIWrapper::GetActiveGUIGFXFile(void) {
 
 // address=[0x13d8a50]
 // Decompiled from CGUIWrapper *__thiscall CGUIWrapper::CGUIWrapper(CGUIWrapper *this)
-
  CGUIWrapper::CGUIWrapper(void) {
   
   *(_DWORD *)this = -1;

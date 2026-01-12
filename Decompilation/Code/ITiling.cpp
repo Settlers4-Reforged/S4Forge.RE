@@ -4,7 +4,6 @@
 
 // address=[0x12fcea0]
 // Decompiled from int __cdecl ITiling::CatapultSectorId(int a1)
-
 static int __cdecl ITiling::CatapultSectorId(int) {
   
   int v1; // eax
@@ -18,7 +17,6 @@ static int __cdecl ITiling::CatapultSectorId(int) {
 
 // address=[0x12fced0]
 // Decompiled from int __cdecl ITiling::CatapultTileId(int a1)
-
 static int __cdecl ITiling::CatapultTileId(int) {
   
   if ( (unsigned __int16)(*(&ITiling::m_pTileIds + 1))[a1] >= 0x8000u )
@@ -30,7 +28,6 @@ static int __cdecl ITiling::CatapultTileId(int) {
 
 // address=[0x12fd780]
 // Decompiled from CTile *__cdecl ITiling::Tile(int a1)
-
 static class CTile const & __cdecl ITiling::Tile(int) {
   
   return &CTiles::m_cTiles[a1];
@@ -39,7 +36,6 @@ static class CTile const & __cdecl ITiling::Tile(int) {
 
 // address=[0x13066a0]
 // Decompiled from int __cdecl ITiling::FirstTileOfSquareVW(int a1, int a2)
-
 static int __cdecl ITiling::FirstTileOfSquareVW(int,int) {
   
   return (unsigned __int16)CTiles::m_sSquareFirstLastTiles[128 * a2 + 128 + 2 * a1];
@@ -48,7 +44,6 @@ static int __cdecl ITiling::FirstTileOfSquareVW(int,int) {
 
 // address=[0x130eb10]
 // Decompiled from int __cdecl ITiling::EcoSectorId(int a1)
-
 static int __cdecl ITiling::EcoSectorId(int) {
   
   int v1; // eax
@@ -62,7 +57,6 @@ static int __cdecl ITiling::EcoSectorId(int) {
 
 // address=[0x130f210]
 // Decompiled from int __cdecl ITiling::NormalTileId(int a1)
-
 static int __cdecl ITiling::NormalTileId(int) {
   
   return (unsigned __int16)ITiling::m_pTileIds[a1];
@@ -71,7 +65,6 @@ static int __cdecl ITiling::NormalTileId(int) {
 
 // address=[0x130f270]
 // Decompiled from int __cdecl ITiling::OwnerId(int a1)
-
 static int __cdecl ITiling::OwnerId(int) {
   
   int v1; // eax
@@ -85,7 +78,6 @@ static int __cdecl ITiling::OwnerId(int) {
 
 // address=[0x130f360]
 // Decompiled from int __cdecl ITiling::SectorId(int a1)
-
 static int __cdecl ITiling::SectorId(int) {
   
   int v1; // eax
@@ -99,7 +91,6 @@ static int __cdecl ITiling::SectorId(int) {
 
 // address=[0x1351c50]
 // Decompiled from int __cdecl ITiling::NumberOfWaterElementsDiv2XY(Squares *a1, Squares *a2)
-
 static int __cdecl ITiling::NumberOfWaterElementsDiv2XY(int,int) {
   
   int v2; // esi
@@ -111,7 +102,6 @@ static int __cdecl ITiling::NumberOfWaterElementsDiv2XY(int,int) {
 
 // address=[0x14e0060]
 // Decompiled from int __cdecl ITiling::NumberOfWaterElementsDiv2VW(int a1, int a2)
-
 static int __cdecl ITiling::NumberOfWaterElementsDiv2VW(int,int) {
   
   return (unsigned __int8)ITiling::m_uSquareNumberOfWaterElementsDiv2[64 * a2 + 64 + a1];
@@ -120,7 +110,6 @@ static int __cdecl ITiling::NumberOfWaterElementsDiv2VW(int,int) {
 
 // address=[0x15f3f60]
 // Decompiled from ITiling *__thiscall ITiling::ITiling(ITiling *this)
-
  ITiling::ITiling(void) {
   
   *(_DWORD *)this = ITiling::_vftable_;
@@ -129,10 +118,7 @@ static int __cdecl ITiling::NumberOfWaterElementsDiv2VW(int,int) {
 
 
 // address=[0x15f5240]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __cdecl ITiling::OwnerPseudoTileId(int a1)
-
+// Decompiled from int __cdecl ITiling::OwnerPseudoTileId(int a1)
 static int __cdecl ITiling::OwnerPseudoTileId(int) {
   
   return a1;

@@ -3,9 +3,7 @@
 // Definitions for class CFindEnemyFighters
 
 // address=[0x15de990]
-// Decompiled from // public: __thiscall CFindEnemyFighters::CFindEnemyFighters(int,int,int,int,int)
-CVWList *__thiscall CFindEnemyFighters::CFindEnemyFighters(CVWList *this, int a2, int a3, int a4, int a5, int a6)
-
+// Decompiled from CVWList *__thiscall CFindEnemyFighters::CFindEnemyFighters(CVWList *this, int a2, int a3, int a4, int a5, int a6)
  CFindEnemyFighters::CFindEnemyFighters(int,int,int,int,int) {
   
   CVWList::CVWList(this, a2, a3, a4);
@@ -23,9 +21,7 @@ CVWList *__thiscall CFindEnemyFighters::CFindEnemyFighters(CVWList *this, int a2
 
 
 // address=[0x15dea40]
-// Decompiled from // public: bool __thiscall CFindEnemyFighters::NextFighter(void)
-char __thiscall CFindEnemyFighters::NextFighter(int this)
-
+// Decompiled from char __thiscall CFindEnemyFighters::NextFighter(int this)
 bool  CFindEnemyFighters::NextFighter(void) {
   
   struct CPtrList *v1; // eax

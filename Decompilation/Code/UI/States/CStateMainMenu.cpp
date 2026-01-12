@@ -4,7 +4,6 @@
 
 // address=[0x14c16a0]
 // Decompiled from CStateMainMenu *__cdecl CStateMainMenu::DynamicCreateFunc(void *a1)
-
 static class CGameState * __cdecl CStateMainMenu::DynamicCreateFunc(void *) {
   
   CStateMainMenu *C; // [esp+Ch] [ebp-10h]
@@ -19,7 +18,6 @@ static class CGameState * __cdecl CStateMainMenu::DynamicCreateFunc(void *) {
 
 // address=[0x14c1740]
 // Decompiled from char __cdecl CStateMainMenu::PreLoadGame(char a1)
-
 static bool __cdecl CStateMainMenu::PreLoadGame(std::wstring) {
   
   OnlineManager *Instance; // eax
@@ -127,7 +125,6 @@ static bool __cdecl CStateMainMenu::PreLoadGame(std::wstring) {
 
 // address=[0x14c1bc0]
 // Decompiled from CStateMainMenu *__thiscall CStateMainMenu::CStateMainMenu(CStateMainMenu *this, void *a2)
-
  CStateMainMenu::CStateMainMenu(void *) {
   
   size_t v2; // eax
@@ -344,7 +341,6 @@ LABEL_46:
 
 // address=[0x14c22a0]
 // Decompiled from void __thiscall CStateMainMenu::~CStateMainMenu(CStateMainMenu *this)
-
  CStateMainMenu::~CStateMainMenu(void) {
   
   *(_DWORD *)this = &CStateMainMenu::_vftable_;
@@ -359,7 +355,6 @@ LABEL_46:
 
 // address=[0x14c2320]
 // Decompiled from char __thiscall CStateMainMenu::Perform(CStateMainMenu *this)
-
 bool  CStateMainMenu::Perform(void) {
   
   DWORD v2; // esi
@@ -399,7 +394,6 @@ bool  CStateMainMenu::Perform(void) {
 
 // address=[0x14c2420]
 // Decompiled from char __thiscall CStateMainMenu::OnEvent(CStateMainMenu *this, struct CEvn_Event *a2)
-
 bool  CStateMainMenu::OnEvent(class CEvn_Event &) {
   
   char result; // al
@@ -593,9 +587,7 @@ bool  CStateMainMenu::OnEvent(class CEvn_Event &) {
 
 
 // address=[0x14c2e20]
-// Decompiled from // Microsoft VisualC 14/net runtime
-char __thiscall CStateMainMenu::CanProcessInvites(CStateMainMenu *this)
-
+// Decompiled from char __thiscall CStateMainMenu::CanProcessInvites(CStateMainMenu *this)
 bool  CStateMainMenu::CanProcessInvites(void) {
   
   return 0;
@@ -604,7 +596,6 @@ bool  CStateMainMenu::CanProcessInvites(void) {
 
 // address=[0x14c1720]
 // Decompiled from void __thiscall CStateMainMenu::SetupGUI(CStateMainMenu *this)
-
 void  CStateMainMenu::SetupGUI(void) {
   
   CGuiGameState::SetupGui(

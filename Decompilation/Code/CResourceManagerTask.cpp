@@ -3,9 +3,7 @@
 // Definitions for class CResourceManagerTask
 
 // address=[0x2f558c0]
-// Decompiled from // public: __thiscall CResourceManagerTask::CResourceManagerTask(void)
-IScheduleEntry *__thiscall CResourceManagerTask::CResourceManagerTask(IScheduleEntry *this)
-
+// Decompiled from IScheduleEntry *__thiscall CResourceManagerTask::CResourceManagerTask(IScheduleEntry *this)
  CResourceManagerTask::CResourceManagerTask(void) {
   
   IScheduleEntry::IScheduleEntry(this);
@@ -16,7 +14,6 @@ IScheduleEntry *__thiscall CResourceManagerTask::CResourceManagerTask(IScheduleE
 
 // address=[0x2f558e0]
 // Decompiled from CResourceManagerTask *__thiscall CResourceManagerTask::CResourceManagerTask(CResourceManagerTask *this, int a2)
-
  CResourceManagerTask::CResourceManagerTask(int) {
   
   IScheduleEntry::IScheduleEntry(this);
@@ -42,7 +39,6 @@ IScheduleEntry *__thiscall CResourceManagerTask::CResourceManagerTask(IScheduleE
 
 // address=[0x2f559a0]
 // Decompiled from void __thiscall CResourceManagerTask::~CResourceManagerTask(CDynList **this)
-
  CResourceManagerTask::~CResourceManagerTask(void) {
   
   *this = (CDynList *)&CResourceManagerTask::_vftable_;
@@ -56,9 +52,7 @@ IScheduleEntry *__thiscall CResourceManagerTask::CResourceManagerTask(IScheduleE
 
 
 // address=[0x2f55a40]
-// Decompiled from // public: void __thiscall CResourceManagerTask::ClearBuildingPlaces(void)
-int __thiscall CResourceManagerTask::ClearBuildingPlaces(int this)
-
+// Decompiled from int __thiscall CResourceManagerTask::ClearBuildingPlaces(int this)
 void  CResourceManagerTask::ClearBuildingPlaces(void) {
   
   int result; // eax
@@ -74,7 +68,6 @@ void  CResourceManagerTask::ClearBuildingPlaces(void) {
 
 // address=[0x2f55a80]
 // Decompiled from int __thiscall CResourceManagerTask::NewBuildingPlace(CDynList **this, int a2, int a3, int a4)
-
 void  CResourceManagerTask::NewBuildingPlace(int,int,int) {
   
   int result; // eax
@@ -108,9 +101,7 @@ void  CResourceManagerTask::NewBuildingPlace(int,int,int) {
 
 
 // address=[0x2f55b70]
-// Decompiled from // public: void __thiscall CResourceManagerTask::UpdateBuildingPlaces(void)
-int __thiscall CResourceManagerTask::UpdateBuildingPlaces(int this)
-
+// Decompiled from int __thiscall CResourceManagerTask::UpdateBuildingPlaces(int this)
 void  CResourceManagerTask::UpdateBuildingPlaces(void) {
   
   int result; // eax
@@ -126,7 +117,6 @@ void  CResourceManagerTask::UpdateBuildingPlaces(void) {
 
 // address=[0x2f55bd0]
 // Decompiled from char __thiscall CResourceManagerTask::AreaHasResource(CFilter **this, int a2, int a3)
-
 bool  CResourceManagerTask::AreaHasResource(int,int) {
   
   struct IFilterEntry *FilterEntry; // [esp+8h] [ebp-8h]
@@ -144,7 +134,6 @@ bool  CResourceManagerTask::AreaHasResource(int,int) {
 
 // address=[0x2f55c50]
 // Decompiled from int __thiscall CResourceManagerTask::FillRareBuildings(CDynList **this, struct CReserveEntry *a2, int a3)
-
 int  CResourceManagerTask::FillRareBuildings(class CReserveEntry *,int) {
   
   _DWORD *v5; // [esp+4h] [ebp-8h]
@@ -163,7 +152,6 @@ int  CResourceManagerTask::FillRareBuildings(class CReserveEntry *,int) {
 
 // address=[0x2f55ce0]
 // Decompiled from char __thiscall CResourceManagerTask::IsShooting(CResourceManagerTask *this)
-
 bool  CResourceManagerTask::IsShooting(void) {
   
   int BuildingForResource; // eax
@@ -511,7 +499,6 @@ bool  CResourceManagerTask::IsShooting(void) {
 
 // address=[0x2f56630]
 // Decompiled from char __thiscall CResourceManagerTask::action(CDynList ***this)
-
 bool  CResourceManagerTask::action(void) {
   
   struct IScheduleEntry *v2; // [esp+8h] [ebp-18h]
@@ -531,7 +518,6 @@ bool  CResourceManagerTask::action(void) {
 
 // address=[0x2f566e0]
 // Decompiled from char __thiscall CResourceManagerTask::IsAlive(CResourceManagerTask *this)
-
 bool  CResourceManagerTask::IsAlive(void) {
   
   return 1;
@@ -540,7 +526,6 @@ bool  CResourceManagerTask::IsAlive(void) {
 
 // address=[0x2f566f0]
 // Decompiled from char __thiscall CResourceManagerTask::WaitFor(CResourceManagerTask *this)
-
 bool  CResourceManagerTask::WaitFor(void) {
   
   if ( *(_DWORD *)(CSchedule::GetInvokeEvent(*((_DWORD *)this + 10), *((_DWORD *)this + 20)) + 48) != 2 )

@@ -4,7 +4,6 @@
 
 // address=[0x2dbc220]
 // Decompiled from SimplLockWrapper *__thiscall SimplLockWrapper::SimplLockWrapper(SimplLockWrapper *this, int a2)
-
  SimplLockWrapper::SimplLockWrapper(char const *) {
   
   InitializeCriticalSection((LPCRITICAL_SECTION)this);
@@ -14,7 +13,6 @@
 
 // address=[0x2dc1a70]
 // Decompiled from void __thiscall SimplLockWrapper::~SimplLockWrapper(struct _RTL_CRITICAL_SECTION *this)
-
  SimplLockWrapper::~SimplLockWrapper(void) {
   
   DeleteCriticalSection(this);
@@ -22,9 +20,7 @@
 
 
 // address=[0x2dd13a0]
-// Decompiled from // MFC 3.1-14.0 32bit
-SimplLockWrapper *__thiscall SimplLockWrapper::GetLock(SimplLockWrapper *this)
-
+// Decompiled from SimplLockWrapper *__thiscall SimplLockWrapper::GetLock(SimplLockWrapper *this)
 struct _RTL_CRITICAL_SECTION &  SimplLockWrapper::GetLock(void) {
   
   return this;

@@ -4,7 +4,6 @@
 
 // address=[0x15d61b0]
 // Decompiled from int __thiscall CG24Closed1Parent16::Closed(CG24Closed1Parent16 *this)
-
 int  CG24Closed1Parent16::Closed(void)const {
   
   return *((unsigned __int8 *)this + 6);
@@ -12,10 +11,7 @@ int  CG24Closed1Parent16::Closed(void)const {
 
 
 // address=[0x15d6560]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CG24Closed1Parent16::G(CG24Closed1Parent16 *this)
-
+// Decompiled from int __thiscall CG24Closed1Parent16::G(CG24Closed1Parent16 *this)
 int  CG24Closed1Parent16::G(void)const {
   
   return *(_DWORD *)this;
@@ -24,7 +20,6 @@ int  CG24Closed1Parent16::G(void)const {
 
 // address=[0x15d67e0]
 // Decompiled from int __thiscall CG24Closed1Parent16::Parent(CG24Closed1Parent16 *this)
-
 int  CG24Closed1Parent16::Parent(void)const {
   
   return *((unsigned __int16 *)this + 2);
@@ -32,13 +27,7 @@ int  CG24Closed1Parent16::Parent(void)const {
 
 
 // address=[0x15d6cb0]
-// Decompiled from CG24Closed1Parent16 *__thiscall CG24Closed1Parent16::Set(
-        CG24Closed1Parent16 *this,
-        int a2,
-        __int16 a3,
-        bool a4,
-        char a5)
-
+// Decompiled from CG24Closed1Parent16 *__thiscall CG24Closed1Parent16::Set(  CG24Closed1Parent16 *this,  int a2,  __int16 a3,  bool a4,  char a5)
 void  CG24Closed1Parent16::Set(int,int,bool,int) {
   
   CG24Closed1Parent16 *result; // eax
@@ -54,7 +43,6 @@ void  CG24Closed1Parent16::Set(int,int,bool,int) {
 
 // address=[0x15d6d90]
 // Decompiled from CG24Closed1Parent16 *__thiscall CG24Closed1Parent16::SetClosedFlag(CG24Closed1Parent16 *this)
-
 void  CG24Closed1Parent16::SetClosedFlag(void) {
   
   CG24Closed1Parent16 *result; // eax
@@ -67,7 +55,6 @@ void  CG24Closed1Parent16::SetClosedFlag(void) {
 
 // address=[0x15d6e50]
 // Decompiled from int __thiscall CG24Closed1Parent16::State(CG24Closed1Parent16 *this)
-
 int  CG24Closed1Parent16::State(void)const {
   
   return *((unsigned __int8 *)this + 7);

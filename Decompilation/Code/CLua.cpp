@@ -4,7 +4,6 @@
 
 // address=[0x131eb90]
 // Decompiled from void *__thiscall CLua::ActivateScriptingEnvironment(CLua *this)
-
 struct lua_State *  CLua::ActivateScriptingEnvironment(void) {
   
   lua_state = *(void **)this;
@@ -14,7 +13,6 @@ struct lua_State *  CLua::ActivateScriptingEnvironment(void) {
 
 // address=[0x1601e20]
 // Decompiled from int __thiscall CLua::BeginBlock(void **this)
-
 void  CLua::BeginBlock(void) {
   
   lua_state = *this;
@@ -24,7 +22,6 @@ void  CLua::BeginBlock(void) {
 
 // address=[0x1602150]
 // Decompiled from int __thiscall CLua::CallFunction(void **this, unsigned int a2)
-
 void  CLua::CallFunction(unsigned int) {
   
   lua_state = *this;
@@ -43,7 +40,6 @@ void  CLua::CallFunction(unsigned int) {
 
 // address=[0x16021c0]
 // Decompiled from int __thiscall CLua::CallFunction(void **this, char *Str)
-
 void  CLua::CallFunction(char const *) {
   
   int result; // eax
@@ -85,7 +81,6 @@ void  CLua::CallFunction(char const *) {
 
 // address=[0x1602280]
 // Decompiled from bool __thiscall CLua::CheckParam(void **this, int a2)
-
 bool  CLua::CheckParam(int) {
   
   lua_state = *this;
@@ -95,7 +90,6 @@ bool  CLua::CheckParam(int) {
 
 // address=[0x1602310]
 // Decompiled from int __thiscall CLua::CreateTable(void **this, char *Str)
-
 void  CLua::CreateTable(char const *) {
   
   int v2; // eax
@@ -118,7 +112,6 @@ void  CLua::CreateTable(char const *) {
 
 // address=[0x1602380]
 // Decompiled from int __thiscall CLua::EndBlock(void **this)
-
 void  CLua::EndBlock(void) {
   
   lua_state = *this;
@@ -128,7 +121,6 @@ void  CLua::EndBlock(void) {
 
 // address=[0x16023b0]
 // Decompiled from int __thiscall CLua::GetCurrentLine(void **this, unsigned int a2)
-
 int  CLua::GetCurrentLine(unsigned int) {
   
   lua_state = *this;
@@ -138,7 +130,6 @@ int  CLua::GetCurrentLine(unsigned int) {
 
 // address=[0x16023e0]
 // Decompiled from int __thiscall CLua::GetFuncInfo(void **this, unsigned int a2, char **a3, int *a4)
-
 void  CLua::GetFuncInfo(unsigned int,char * *,int *) {
   
   lua_state = *this;
@@ -148,7 +139,6 @@ void  CLua::GetFuncInfo(unsigned int,char * *,int *) {
 
 // address=[0x1602420]
 // Decompiled from int __thiscall CLua::GetGlobal(void **this, char *Str)
-
 unsigned int  CLua::GetGlobal(char const *) {
   
   if ( !Str
@@ -167,7 +157,6 @@ unsigned int  CLua::GetGlobal(char const *) {
 
 // address=[0x1602480]
 // Decompiled from int __thiscall CLua::GetInt(CLua *this, int a2)
-
 int  CLua::GetInt(int) {
   
   int v2; // eax
@@ -181,7 +170,6 @@ int  CLua::GetInt(int) {
 
 // address=[0x16024e0]
 // Decompiled from int __thiscall CLua::GetObjName(void **this, unsigned int a2, char **a3)
-
 char *  CLua::GetObjName(unsigned int,char * *) {
   
   lua_state = *this;
@@ -191,7 +179,6 @@ char *  CLua::GetObjName(unsigned int,char * *) {
 
 // address=[0x1602520]
 // Decompiled from int __thiscall CLua::GetParam(CLua *this, int a2)
-
 unsigned int  CLua::GetParam(int) {
   
   lua_state = *(void **)this;
@@ -202,7 +189,6 @@ unsigned int  CLua::GetParam(int) {
 
 // address=[0x1602560]
 // Decompiled from int __thiscall CLua::GetRef(void **this, int a2)
-
 unsigned int  CLua::GetRef(int) {
   
   lua_state = *this;
@@ -212,7 +198,6 @@ unsigned int  CLua::GetRef(int) {
 
 // address=[0x16025e0]
 // Decompiled from int __thiscall CLua::GetStackedFunction(void **this, int a2)
-
 unsigned int  CLua::GetStackedFunction(int) {
   
   lua_state = *this;
@@ -222,7 +207,6 @@ unsigned int  CLua::GetStackedFunction(int) {
 
 // address=[0x1602610]
 // Decompiled from int __thiscall CLua::GetString(CLua *this, int a2)
-
 char *  CLua::GetString(int) {
   
   int v2; // eax
@@ -236,7 +220,6 @@ char *  CLua::GetString(int) {
 
 // address=[0x1602660]
 // Decompiled from bool __thiscall CLua::IsNil(void **this, char *Str)
-
 bool  CLua::IsNil(char const *) {
   
   int v3; // [esp+0h] [ebp-Ch]
@@ -249,7 +232,6 @@ bool  CLua::IsNil(char const *) {
 
 // address=[0x1602720]
 // Decompiled from int __thiscall CLua::PushInt(void **this, int a2)
-
 void  CLua::PushInt(int) {
   
   lua_state = *this;
@@ -259,7 +241,6 @@ void  CLua::PushInt(int) {
 
 // address=[0x1602760]
 // Decompiled from int __thiscall CLua::SetGlobal(void **this, char *Str)
-
 void  CLua::SetGlobal(char const *) {
   
   if ( !Str
@@ -278,7 +259,6 @@ void  CLua::SetGlobal(char const *) {
 
 // address=[0x16027c0]
 // Decompiled from CLua *__thiscall CLua::CLua(CLua *this)
-
  CLua::CLua(void) {
   
   lua_state = 0;
@@ -293,7 +273,6 @@ void  CLua::SetGlobal(char const *) {
 
 // address=[0x1602800]
 // Decompiled from int __thiscall CLua::~CLua(void **this)
-
  CLua::~CLua(void) {
   
   int result; // eax
@@ -307,7 +286,6 @@ void  CLua::SetGlobal(char const *) {
 
 // address=[0x1602830]
 // Decompiled from char __thiscall CLua::ExecuteScript(void **this, wchar_t *FileName)
-
 bool  CLua::ExecuteScript(wchar_t const *) {
   
   int v3; // [esp+0h] [ebp-B4h] BYREF
@@ -372,7 +350,6 @@ bool  CLua::ExecuteScript(wchar_t const *) {
 
 // address=[0x1602a30]
 // Decompiled from bool __thiscall CLua::ExecuteScript(void **this, struct IScriptFile *a2)
-
 bool  CLua::ExecuteScript(class IScriptFile &) {
   
   int v2; // eax
@@ -389,7 +366,6 @@ bool  CLua::ExecuteScript(class IScriptFile &) {
 
 // address=[0x1602aa0]
 // Decompiled from bool __thiscall CLua::ExecuteScript(CLua *this, void *a2, int a3, char *a4)
-
 bool  CLua::ExecuteScript(void *,int,char *) {
   
   return j__lua_dobuffer(a2, a3, a4) == 0;
@@ -398,7 +374,6 @@ bool  CLua::ExecuteScript(void *,int,char *) {
 
 // address=[0x1602ae0]
 // Decompiled from bool __thiscall CLua::ExecuteString(void **this, char *Str)
-
 bool  CLua::ExecuteString(char const *) {
   
   lua_state = *this;
@@ -408,7 +383,6 @@ bool  CLua::ExecuteString(char const *) {
 
 // address=[0x1602b20]
 // Decompiled from int __thiscall CLua::ExportFunction(void **this, int a2, char *Str)
-
 void  CLua::ExportFunction(void (__cdecl*)(void),char const *) {
   
   lua_state = *this;
@@ -419,7 +393,6 @@ void  CLua::ExportFunction(void (__cdecl*)(void),char const *) {
 
 // address=[0x1602b60]
 // Decompiled from int __thiscall CLua::ExportTableFunction(void **this, char *a2, int a3, char *Str)
-
 void  CLua::ExportTableFunction(char const *,void (__cdecl*)(void),char const *) {
   
   int v5; // [esp+0h] [ebp-8h]
@@ -445,9 +418,7 @@ void  CLua::ExportTableFunction(char const *,void (__cdecl*)(void),char const *)
 
 
 // address=[0x1602c20]
-// Decompiled from // public: void __thiscall CLua::ExportFunctions(struct CLua::SFuncInfo *)
-int __stdcall CLua::ExportFunctions(int a1)
-
+// Decompiled from int __stdcall CLua::ExportFunctions(int a1)
 void  CLua::ExportFunctions(struct CLua::SFuncInfo *) {
   
   int result; // eax
@@ -466,7 +437,6 @@ void  CLua::ExportFunctions(struct CLua::SFuncInfo *) {
 
 // address=[0x1602c90]
 // Decompiled from struct CLua::SFuncInfo *__thiscall CLua::ExportTableFunctions(CLua *this, const char *a2, struct CLua::SFuncInfo *a3)
-
 void  CLua::ExportTableFunctions(char const *,struct CLua::SFuncInfo *) {
   
   struct CLua::SFuncInfo *result; // eax
@@ -495,7 +465,6 @@ void  CLua::ExportTableFunctions(char const *,struct CLua::SFuncInfo *) {
 
 // address=[0x1602d20]
 // Decompiled from int __thiscall CLua::ExportTableVar(void **this, char *a2, char *Str, __int64 a4)
-
 void  CLua::ExportTableVar(char const *,char const *,double) {
   
   int v6; // [esp+8h] [ebp-8h]
@@ -526,7 +495,6 @@ void  CLua::ExportTableVar(char const *,char const *,double) {
 
 // address=[0x1602e30]
 // Decompiled from char *__thiscall CLua::ExportTableVars(CLua *this, char *a2, struct CLua::SVarInfo *a3)
-
 void  CLua::ExportTableVars(char const *,struct CLua::SVarInfo *) {
   
   char *result; // eax
@@ -546,7 +514,6 @@ void  CLua::ExportTableVars(char const *,struct CLua::SVarInfo *) {
 
 // address=[0x1602ea0]
 // Decompiled from int __stdcall CLua::ExportTableTypes(char *a1, char *Str, int *a3, unsigned int a4)
-
 void  CLua::ExportTableTypes(char const *,char const *,struct SConfigTypeString const *,unsigned int) {
   
   int result; // eax
@@ -577,7 +544,6 @@ void  CLua::ExportTableTypes(char const *,char const *,struct SConfigTypeString 
 
 // address=[0x1602f60]
 // Decompiled from int __thiscall CLua::ExportGlobalVar(void **this, char *Str, __int64 a3)
-
 void  CLua::ExportGlobalVar(char const *,double) {
   
   int result; // eax
@@ -591,9 +557,7 @@ void  CLua::ExportGlobalVar(char const *,double) {
 
 
 // address=[0x1602fa0]
-// Decompiled from // public: void __cdecl CLua::Push(enum EScriptType,...)
-int __cdecl CLua::Push(void **a1)
-
+// Decompiled from int __cdecl CLua::Push(void **a1)
 void __cdecl CLua::Push(enum EScriptType,...) {
   
   int result; // eax
@@ -655,9 +619,7 @@ void __cdecl CLua::Push(enum EScriptType,...) {
 
 
 // address=[0x1603120]
-// Decompiled from // public: void __cdecl CLua::Get(enum EScriptType,...)
-int __cdecl CLua::Get(void **a1)
-
+// Decompiled from int __cdecl CLua::Get(void **a1)
 void __cdecl CLua::Get(enum EScriptType,...) {
   
   int result; // eax
@@ -738,7 +700,6 @@ void __cdecl CLua::Get(enum EScriptType,...) {
 
 // address=[0x16032e0]
 // Decompiled from bool __thiscall CLua::EqualObjects(void **this, unsigned int a2, unsigned int a3)
-
 bool  CLua::EqualObjects(unsigned int,unsigned int) {
   
   int v3; // eax
@@ -753,7 +714,6 @@ bool  CLua::EqualObjects(unsigned int,unsigned int) {
 
 // address=[0x1603340]
 // Decompiled from int __thiscall CLua::DbgDumpTable(void **this, char *Str)
-
 void  CLua::DbgDumpTable(char const *) {
   
   int v3; // [esp+0h] [ebp-8h]
@@ -780,7 +740,6 @@ void  CLua::DbgDumpTable(char const *) {
 
 // address=[0x16038c0]
 // Decompiled from void __thiscall CLua::GetDouble(CLua *this, int a2)
-
 double  CLua::GetDouble(int) {
   
   int v2; // eax
@@ -794,7 +753,6 @@ double  CLua::GetDouble(int) {
 
 // address=[0x160d9a0]
 // Decompiled from double __thiscall CLua::GetFloat(CLua *this, int a2)
-
 float  CLua::GetFloat(int) {
   
   int v2; // eax
@@ -808,7 +766,6 @@ float  CLua::GetFloat(int) {
 
 // address=[0x160da30]
 // Decompiled from char *__thiscall CLua::GetString(CLua *this, int a2, int a3)
-
 void  CLua::GetString(int,std::string &) {
   
   int v3; // eax
@@ -826,7 +783,6 @@ void  CLua::GetString(int,std::string &) {
 
 // address=[0x160db10]
 // Decompiled from int __thiscall CLua::PushDouble(void **this, __int64 a2)
-
 void  CLua::PushDouble(double) {
   
   lua_state = *this;
@@ -836,7 +792,6 @@ void  CLua::PushDouble(double) {
 
 // address=[0x160e270]
 // Decompiled from bool __thiscall CLua::IsFunction(void **this, unsigned int a2)
-
 bool  CLua::IsFunction(unsigned int) {
   
   lua_state = *this;
@@ -846,7 +801,6 @@ bool  CLua::IsFunction(unsigned int) {
 
 // address=[0x160e2c0]
 // Decompiled from int __thiscall CLua::Lock(void **this, unsigned int a2)
-
 int  CLua::Lock(unsigned int) {
   
   lua_state = *this;
@@ -857,7 +811,6 @@ int  CLua::Lock(unsigned int) {
 
 // address=[0x16033d0]
 // Decompiled from int __thiscall CLua::dbgCheckParam(void **this, int a2)
-
 void  CLua::dbgCheckParam(int) {
   
   int v2; // eax
@@ -880,7 +833,6 @@ void  CLua::dbgCheckParam(int) {
 
 // address=[0x1603450]
 // Decompiled from int __usercall CLua::scrDbgDumpTableEntry@<eax>(double a1@<st0>)
-
 static void __cdecl CLua::scrDbgDumpTableEntry(void) {
   
   char *Str; // [esp+14h] [ebp-4h]
@@ -894,7 +846,6 @@ static void __cdecl CLua::scrDbgDumpTableEntry(void) {
 
 // address=[0x16034b0]
 // Decompiled from void __cdecl CLua::scrIncTableEntryCount()
-
 static void __cdecl CLua::scrIncTableEntryCount(void) {
   
   ++CLua::s_iTableEntryCount;
@@ -902,9 +853,7 @@ static void __cdecl CLua::scrIncTableEntryCount(void) {
 
 
 // address=[0x16034d0]
-// Decompiled from // private: int __thiscall CLua::CountTableEntries(char const *)
-int __thiscall CLua::CountTableEntries(void **this, char *Str)
-
+// Decompiled from int __thiscall CLua::CountTableEntries(void **this, char *Str)
 int  CLua::CountTableEntries(char const *) {
   
   void **v3; // [esp+0h] [ebp-8h]

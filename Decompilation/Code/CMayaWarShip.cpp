@@ -4,7 +4,6 @@
 
 // address=[0x1401300]
 // Decompiled from int __cdecl CMayaWarShip::New(int a1)
-
 static class CPersistence * __cdecl CMayaWarShip::New(std::istream &) {
   
   if ( CWarShip::operator new(0xC8u) )
@@ -16,7 +15,6 @@ static class CPersistence * __cdecl CMayaWarShip::New(std::istream &) {
 
 // address=[0x15a19e0]
 // Decompiled from _DWORD *__thiscall CMayaWarShip::CMayaWarShip(_DWORD *this, int a2)
-
  CMayaWarShip::CMayaWarShip(std::istream &) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
@@ -44,7 +42,6 @@ static class CPersistence * __cdecl CMayaWarShip::New(std::istream &) {
 
 // address=[0x15a1aa0]
 // Decompiled from int __thiscall CMayaWarShip::Store(void *this, struct std::ostream *a2)
-
 void  CMayaWarShip::Store(std::ostream &) {
   
   int v3[2]; // [esp+0h] [ebp-8h] BYREF
@@ -58,7 +55,6 @@ void  CMayaWarShip::Store(std::ostream &) {
 
 // address=[0x15a2400]
 // Decompiled from void __thiscall CMayaWarShip::~CMayaWarShip(CMayaWarShip *this)
-
  CMayaWarShip::~CMayaWarShip(void) {
   
   CWarShip::~CWarShip(this);
@@ -67,7 +63,6 @@ void  CMayaWarShip::Store(std::ostream &) {
 
 // address=[0x15a26a0]
 // Decompiled from int __thiscall CMayaWarShip::ClassID(CMayaWarShip *this)
-
 unsigned long  CMayaWarShip::ClassID(void)const {
   
   return CMayaWarShip::m_iClassID;
@@ -78,16 +73,7 @@ unsigned long  CMayaWarShip::ClassID(void)const {
 // [Decompilation failed for static unsigned long CMayaWarShip::m_iClassID]
 
 // address=[0x15a1ae0]
-// Decompiled from CMayaWarShip *__thiscall CMayaWarShip::CMayaWarShip(
-        CMayaWarShip *this,
-        int a2,
-        int a3,
-        int a4,
-        int a5,
-        int a6,
-        int a7,
-        bool a8)
-
+// Decompiled from CMayaWarShip *__thiscall CMayaWarShip::CMayaWarShip(  CMayaWarShip *this,  int a2,  int a3,  int a4,  int a5,  int a6,  int a7,  bool a8)
  CMayaWarShip::CMayaWarShip(int,int,int,int,int,int,bool) {
   
   CWarShip::CWarShip(this, a2, a3, a4, a5, a6, a7, a8);
@@ -99,7 +85,6 @@ unsigned long  CMayaWarShip::ClassID(void)const {
 
 // address=[0x15a2660]
 // Decompiled from int __thiscall CMayaWarShip::AmmoPerPile(CMayaWarShip *this)
-
 int const  CMayaWarShip::AmmoPerPile(void) {
   
   return 8;

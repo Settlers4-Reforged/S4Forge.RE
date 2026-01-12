@@ -4,7 +4,6 @@
 
 // address=[0x2fd8e60]
 // Decompiled from CPlaylist *__thiscall CPlaylist::CPlaylist(CPlaylist *this)
-
  CPlaylist::CPlaylist(void) {
   
   CPlaylist *v2; // [esp+0h] [ebp-4h]
@@ -22,7 +21,6 @@
 
 // address=[0x2fd8ec0]
 // Decompiled from void __thiscall CPlaylist::~CPlaylist(CHandleMap *this)
-
  CPlaylist::~CPlaylist(void) {
   
   *(_DWORD *)this = &CPlaylist::_vftable_;
@@ -33,7 +31,6 @@
 
 // address=[0x2fd8f20]
 // Decompiled from int __thiscall CPlaylist::Init(CPlaylist *this, int a2)
-
 void  CPlaylist::Init(int) {
   
   int result; // eax
@@ -49,7 +46,6 @@ void  CPlaylist::Init(int) {
 
 // address=[0x2fd8f60]
 // Decompiled from int __thiscall CPlaylist::AddTitle(_DWORD *this, int a2, int a3)
-
 void  CPlaylist::AddTitle(std::string const *,int) {
   
   int result; // eax
@@ -74,7 +70,6 @@ void  CPlaylist::AddTitle(std::string const *,int) {
 
 // address=[0x2fd8fd0]
 // Decompiled from CPlaylist *__thiscall CPlaylist::TitleEnded(CPlaylist *this)
-
 void  CPlaylist::TitleEnded(void) {
   
   CPlaylist *result; // eax
@@ -97,9 +92,7 @@ void  CPlaylist::TitleEnded(void) {
 
 
 // address=[0x2fd9050]
-// Decompiled from // public: int __thiscall CPlaylist::GetStreamPos(void)
-int __thiscall CPlaylist::GetStreamPos(_DWORD *this)
-
+// Decompiled from int __thiscall CPlaylist::GetStreamPos(_DWORD *this)
 int  CPlaylist::GetStreamPos(void) {
   
   return AIL_stream_position(this[11]);
@@ -107,9 +100,7 @@ int  CPlaylist::GetStreamPos(void) {
 
 
 // address=[0x2fd9070]
-// Decompiled from // public: void __thiscall CPlaylist::SetStreamPos(int)
-int __thiscall CPlaylist::SetStreamPos(_DWORD *this, int a2)
-
+// Decompiled from int __thiscall CPlaylist::SetStreamPos(_DWORD *this, int a2)
 void  CPlaylist::SetStreamPos(int) {
   
   return AIL_set_stream_position(this[11], a2);
@@ -118,7 +109,6 @@ void  CPlaylist::SetStreamPos(int) {
 
 // address=[0x2fd9090]
 // Decompiled from int __thiscall CPlaylist::StoreStreamPos(CPlaylist *this)
-
 void  CPlaylist::StoreStreamPos(void) {
   
   int result; // eax
@@ -131,7 +121,6 @@ void  CPlaylist::StoreStreamPos(void) {
 
 // address=[0x2fd90b0]
 // Decompiled from int __thiscall CPlaylist::ResumeOnLastPos(CPlaylist *this)
-
 void  CPlaylist::ResumeOnLastPos(void) {
   
   return AIL_set_stream_position(*((_DWORD *)this + 11), *((_DWORD *)this + 9));
@@ -139,9 +128,7 @@ void  CPlaylist::ResumeOnLastPos(void) {
 
 
 // address=[0x2fd90d0]
-// Decompiled from // MFC 3.1-14.0 32bit
-int __thiscall CPlaylist::GetPlayingTitleNum(CPlaylist *this)
-
+// Decompiled from int __thiscall CPlaylist::GetPlayingTitleNum(CPlaylist *this)
 int  CPlaylist::GetPlayingTitleNum(void) {
   
   return *((_DWORD *)this + 6);
@@ -149,9 +136,7 @@ int  CPlaylist::GetPlayingTitleNum(void) {
 
 
 // address=[0x2fd90f0]
-// Decompiled from // public: char const * __thiscall CPlaylist::GetTitle(int)
-int __thiscall CPlaylist::GetTitle(_DWORD *this, int a2)
-
+// Decompiled from int __thiscall CPlaylist::GetTitle(_DWORD *this, int a2)
 char const *  CPlaylist::GetTitle(int) {
   
   void **v2; // eax
@@ -165,7 +150,6 @@ char const *  CPlaylist::GetTitle(int) {
 
 // address=[0x2fd9130]
 // Decompiled from int __thiscall CPlaylist::GetActiveTitle(CPlaylist *this)
-
 char const *  CPlaylist::GetActiveTitle(void) {
   
   void **v1; // eax
@@ -179,7 +163,6 @@ char const *  CPlaylist::GetActiveTitle(void) {
 
 // address=[0x2fd9170]
 // Decompiled from CPlaylist *__thiscall CPlaylist::SetTrackID(CPlaylist *this, unsigned int a2)
-
 void  CPlaylist::SetTrackID(unsigned int) {
   
   CPlaylist *result; // eax
@@ -192,7 +175,6 @@ void  CPlaylist::SetTrackID(unsigned int) {
 
 // address=[0x2fd9190]
 // Decompiled from int __thiscall CPlaylist::GetTrackID(CPlaylist *this)
-
 unsigned int  CPlaylist::GetTrackID(void) {
   
   return *((_DWORD *)this + 10);
@@ -201,7 +183,6 @@ unsigned int  CPlaylist::GetTrackID(void) {
 
 // address=[0x2fd91b0]
 // Decompiled from CPlaylist *__thiscall CPlaylist::SetTitle(CPlaylist *this, int a2)
-
 void  CPlaylist::SetTitle(int) {
   
   CPlaylist *result; // eax
@@ -222,7 +203,6 @@ void  CPlaylist::SetTitle(int) {
 
 // address=[0x2fd91e0]
 // Decompiled from void __thiscall CPlaylist::SetHandle(CMFCCaptionButton *this, int a2)
-
 void  CPlaylist::SetHandle(struct _STREAM *) {
   
   *((_DWORD *)this + 11) = a2;
@@ -231,7 +211,6 @@ void  CPlaylist::SetHandle(struct _STREAM *) {
 
 // address=[0x2fd9200]
 // Decompiled from int __thiscall CPlaylist::GetFadeInTime(CPlaylist *this, int a2)
-
 int  CPlaylist::GetFadeInTime(int) {
   
   if ( a2 < *((_DWORD *)this + 5) )
@@ -243,7 +222,6 @@ int  CPlaylist::GetFadeInTime(int) {
 
 // address=[0x2fd9240]
 // Decompiled from int __thiscall CPlaylist::SkipTitle(CPlaylist *this)
-
 void  CPlaylist::SkipTitle(void) {
   
   _BYTE v2[4]; // [esp+0h] [ebp-14h] BYREF
@@ -260,7 +238,6 @@ void  CPlaylist::SkipTitle(void) {
 
 // address=[0x2fd8d30]
 // Decompiled from int __thiscall CPlaylist::FreeMemory(CPlaylist *this)
-
 void  CPlaylist::FreeMemory(void) {
   
   _DWORD v2[4]; // [esp-Ch] [ebp-6Ch] BYREF

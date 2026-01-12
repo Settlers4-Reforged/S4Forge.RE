@@ -3,9 +3,7 @@
 // Definitions for class CSetReportHook
 
 // address=[0x14d3880]
-// Decompiled from // public: __thiscall CSetReportHook::CSetReportHook(void)
-CSetReportHook *__thiscall CSetReportHook::CSetReportHook(CSetReportHook *this)
-
+// Decompiled from CSetReportHook *__thiscall CSetReportHook::CSetReportHook(CSetReportHook *this)
  CSetReportHook::CSetReportHook(void) {
   
   j___CrtSetReportHook(sub_14D37F0);
@@ -17,9 +15,7 @@ CSetReportHook *__thiscall CSetReportHook::CSetReportHook(CSetReportHook *this)
 
 
 // address=[0x14d38c0]
-// Decompiled from // public: __thiscall CSetReportHook::~CSetReportHook(void)
-int __fastcall CSetReportHook::_CSetReportHook(char a1)
-
+// Decompiled from int __fastcall CSetReportHook::_CSetReportHook(char a1)
  CSetReportHook::~CSetReportHook(void) {
   
   int (__cdecl *v3)(int, int, int); // [esp+4h] [ebp-4h]

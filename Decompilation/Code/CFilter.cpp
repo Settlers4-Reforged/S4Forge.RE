@@ -4,7 +4,6 @@
 
 // address=[0x2f393d0]
 // Decompiled from CFilter *__thiscall CFilter::CFilter(CFilter *this, int a2)
-
  CFilter::CFilter(int) {
   
   CDynList *v3; // [esp+8h] [ebp-18h]
@@ -26,7 +25,6 @@
 
 // address=[0x2f39480]
 // Decompiled from void *__thiscall CFilter::~CFilter(CFilter *this)
-
  CFilter::~CFilter(void) {
   
   void *result; // eax
@@ -41,7 +39,6 @@
 
 // address=[0x2f394d0]
 // Decompiled from char __userpurge CFilter::AddFilterEntry@<al>(CDynList **this@<ecx>, double a2@<st0>, struct IFilterEntry *a3)
-
 bool  CFilter::AddFilterEntry(class IFilterEntry *) {
   
   int v4; // [esp+10h] [ebp-24h]
@@ -107,7 +104,6 @@ bool  CFilter::AddFilterEntry(class IFilterEntry *) {
 
 // address=[0x2f396b0]
 // Decompiled from struct CDynListEntry *__thiscall CFilter::GetFilterEntry(CDynList **this, int a2)
-
 class IFilterEntry *  CFilter::GetFilterEntry(int) {
   
   int v3; // [esp+4h] [ebp-8h]

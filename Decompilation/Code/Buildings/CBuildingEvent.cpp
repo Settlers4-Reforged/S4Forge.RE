@@ -4,7 +4,6 @@
 
 // address=[0x2f51210]
 // Decompiled from int __thiscall CBuildingEvent::CBuildingEvent(int this, int a2, int a3, int a4, int a5, int a6, int a7, int a8)
-
  CBuildingEvent::CBuildingEvent(enum BUILDING_TYPES,int,int,int,int,int,enum T_BUILD_LEVEL) {
   
   IScheduleEntry::IScheduleEntry((IScheduleEntry *)this);
@@ -31,7 +30,6 @@
 
 // address=[0x2f512c0]
 // Decompiled from void __thiscall CBuildingEvent::~CBuildingEvent(CBuildingEvent *this)
-
  CBuildingEvent::~CBuildingEvent(void) {
   
   *(_DWORD *)this = &CBuildingEvent::_vftable_;
@@ -41,7 +39,6 @@
 
 // address=[0x2f512e0]
 // Decompiled from char __thiscall CBuildingEvent::IsShooting(CSchedule **this)
-
 bool  CBuildingEvent::IsShooting(void) {
   
   char result; // al
@@ -182,7 +179,6 @@ CBuildingEvent__IsShooting___def_3351498:
 
 // address=[0x2f516c0]
 // Decompiled from char __thiscall CBuildingEvent::action(CBuildingEvent *this)
-
 bool  CBuildingEvent::action(void) {
   
   int v1; // ecx
@@ -245,7 +241,6 @@ bool  CBuildingEvent::action(void) {
 
 // address=[0x2f51850]
 // Decompiled from char __thiscall CBuildingEvent::IsAlive(CBuildingEvent *this)
-
 bool  CBuildingEvent::IsAlive(void) {
   
   struct IAIEcoManager *EcoSector; // [esp+0h] [ebp-8h]
@@ -266,7 +261,6 @@ bool  CBuildingEvent::IsAlive(void) {
 
 // address=[0x2f518b0]
 // Decompiled from bool __thiscall CBuildingEvent::WaitFor(CReserveDatabase ***this)
-
 bool  CBuildingEvent::WaitFor(void) {
   
   int v2; // [esp+0h] [ebp-10h] BYREF

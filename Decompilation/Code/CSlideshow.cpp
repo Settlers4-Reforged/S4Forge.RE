@@ -4,7 +4,6 @@
 
 // address=[0x149ada0]
 // Decompiled from CSlideshow *__thiscall CSlideshow::CSlideshow(CSlideshow *this, int a2)
-
  CSlideshow::CSlideshow(int) {
   
   int OutputWidth; // [esp+0h] [ebp-3Ch]
@@ -47,7 +46,6 @@
 
 // address=[0x149aec0]
 // Decompiled from bool __thiscall CSlideshow::~CSlideshow(CSlideshow *this)
-
  CSlideshow::~CSlideshow(void) {
   
   bool result; // al
@@ -61,7 +59,6 @@
 
 // address=[0x149af20]
 // Decompiled from bool __thiscall CSlideshow::Advance(CSlideshow *this)
-
 bool  CSlideshow::Advance(void) {
   
   bool v3; // [esp+7h] [ebp-1h]
@@ -74,7 +71,6 @@ bool  CSlideshow::Advance(void) {
 
 // address=[0x149af50]
 // Decompiled from char __thiscall CSlideshow::ShowPicture(CSlideshow *this)
-
 bool  CSlideshow::ShowPicture(void) {
   
   int OutputWidth; // eax
@@ -125,7 +121,6 @@ bool  CSlideshow::ShowPicture(void) {
 
 // address=[0x149b240]
 // Decompiled from bool __thiscall CSlideshow::HasDisplaySurface(CSlideshow *this)
-
 bool  CSlideshow::HasDisplaySurface(void)const {
   
   return *((_DWORD *)this + 2) != -1;

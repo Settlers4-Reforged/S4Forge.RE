@@ -4,7 +4,6 @@
 
 // address=[0x14cbb00]
 // Decompiled from CStateVideo *__cdecl CStateVideo::DynamicCreateFunc(void *a1)
-
 static class CGameState * __cdecl CStateVideo::DynamicCreateFunc(void *) {
   
   CStateVideo *C; // [esp+Ch] [ebp-10h]
@@ -19,7 +18,6 @@ static class CGameState * __cdecl CStateVideo::DynamicCreateFunc(void *) {
 
 // address=[0x14cbb80]
 // Decompiled from CStateVideo *__thiscall CStateVideo::CStateVideo(CStateVideo *this, void *a2)
-
  CStateVideo::CStateVideo(void *) {
   
   int Language; // [esp+28h] [ebp-34h]
@@ -109,7 +107,6 @@ static class CGameState * __cdecl CStateVideo::DynamicCreateFunc(void *) {
 
 // address=[0x14cbe60]
 // Decompiled from void __thiscall CStateVideo::~CStateVideo(CStateVideo *this)
-
  CStateVideo::~CStateVideo(void) {
   
   *(_DWORD *)this = &CStateVideo::_vftable_;
@@ -124,7 +121,6 @@ static class CGameState * __cdecl CStateVideo::DynamicCreateFunc(void *) {
 
 // address=[0x14cbec0]
 // Decompiled from char __thiscall CStateVideo::Perform(CStateVideo *this)
-
 bool  CStateVideo::Perform(void) {
   
   unsigned int v2; // [esp+Ch] [ebp-40h] BYREF
@@ -197,7 +193,6 @@ bool  CStateVideo::Perform(void) {
 
 // address=[0x14cc060]
 // Decompiled from char __thiscall CStateVideo::OnEvent(CStateVideo *this, struct CEvn_Event *a2)
-
 bool  CStateVideo::OnEvent(class CEvn_Event &) {
   
   char result; // al
@@ -246,7 +241,6 @@ CStateVideo__OnEvent___def_18CC08F:
 
 // address=[0x14cc150]
 // Decompiled from char __thiscall CStateVideo::StartVideo(CStateVideo *this, void *a2)
-
 bool  CStateVideo::StartVideo(void *) {
   
   int CursorShape; // eax
@@ -311,7 +305,6 @@ bool  CStateVideo::StartVideo(void *) {
 
 // address=[0x14cc320]
 // Decompiled from char __thiscall CStateVideo::EndVideo(CStateVideo *this)
-
 bool  CStateVideo::EndVideo(void) {
   
   if ( !g_pGfxEngine && BBSupportDbgReport(2, "Main\\States\\StateVideo.cpp", 447, "g_pGfxEngine") == 1 )
@@ -331,7 +324,6 @@ bool  CStateVideo::EndVideo(void) {
 
 // address=[0x14cc3b0]
 // Decompiled from void __thiscall CStateVideo::PauseVideo(CStateVideo *this)
-
 void  CStateVideo::PauseVideo(void) {
   
   if ( !g_pGfxEngine && BBSupportDbgReport(2, "Main\\States\\StateVideo.cpp", 470, "g_pGfxEngine") == 1 )
@@ -351,7 +343,6 @@ void  CStateVideo::PauseVideo(void) {
 
 // address=[0x14cc440]
 // Decompiled from void __thiscall CStateVideo::UnPauseVideo(CStateVideo *this)
-
 void  CStateVideo::UnPauseVideo(void) {
   
   if ( !g_pGfxEngine && BBSupportDbgReport(2, "Main\\States\\StateVideo.cpp", 485, "g_pGfxEngine") == 1 )
@@ -371,7 +362,6 @@ void  CStateVideo::UnPauseVideo(void) {
 
 // address=[0x14cc4d0]
 // Decompiled from void __thiscall CStateVideo::AlignVideoSurface(CStateVideo *this)
-
 void  CStateVideo::AlignVideoSurface(void) {
   
   int OutputWidth; // [esp+8h] [ebp-24h]

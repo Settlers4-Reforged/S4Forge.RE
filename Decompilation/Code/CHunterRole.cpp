@@ -4,7 +4,6 @@
 
 // address=[0x1400f40]
 // Decompiled from int __cdecl CHunterRole::New(int a1)
-
 static class CPersistence * __cdecl CHunterRole::New(std::istream &) {
   
   if ( operator new(0x30u) )
@@ -16,7 +15,6 @@ static class CPersistence * __cdecl CHunterRole::New(std::istream &) {
 
 // address=[0x1577280]
 // Decompiled from int __thiscall CHunterRole::InitWalking(CHunterRole *this, struct CSettler *a2)
-
 class CWalking *  CHunterRole::InitWalking(class CSettler *) {
   
   int v2; // eax
@@ -31,7 +29,6 @@ class CWalking *  CHunterRole::InitWalking(class CSettler *) {
 
 // address=[0x15772c0]
 // Decompiled from void __thiscall CHunterRole::LogicUpdateJob(CHunterRole *this, struct CSettler *a2)
-
 void  CHunterRole::LogicUpdateJob(class CSettler *) {
   
   int v2; // eax
@@ -207,7 +204,6 @@ LABEL_9:
 
 // address=[0x15777f0]
 // Decompiled from int __thiscall CHunterRole::UpdateJob(CHunterRole *this, struct CSettler *a2)
-
 void  CHunterRole::UpdateJob(class CSettler *) {
   
   int v3; // [esp+0h] [ebp-10h]
@@ -228,7 +224,6 @@ void  CHunterRole::UpdateJob(class CSettler *) {
 
 // address=[0x1577860]
 // Decompiled from int __stdcall CHunterRole::PostLoadInit(CPropertySet *a1)
-
 void  CHunterRole::PostLoadInit(class CSettler *) {
   
   return CWarMap::AddEntity(a1);
@@ -237,7 +232,6 @@ void  CHunterRole::PostLoadInit(class CSettler *) {
 
 // address=[0x1577880]
 // Decompiled from char *__thiscall CHunterRole::CHunterRole(char *this, int a2)
-
  CHunterRole::CHunterRole(std::istream &) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
@@ -265,7 +259,6 @@ void  CHunterRole::PostLoadInit(class CSettler *) {
 
 // address=[0x1577940]
 // Decompiled from int __thiscall CHunterRole::Store(struct CPersistence *this, struct std::ostream *a2)
-
 void  CHunterRole::Store(std::ostream &) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
@@ -281,7 +274,6 @@ void  CHunterRole::Store(std::ostream &) {
 
 // address=[0x1578790]
 // Decompiled from int __thiscall CHunterRole::ClassID(CHunterRole *this)
-
 unsigned long  CHunterRole::ClassID(void)const {
   
   return CHunterRole::m_iClassID;
@@ -290,7 +282,6 @@ unsigned long  CHunterRole::ClassID(void)const {
 
 // address=[0x15787d0]
 // Decompiled from int __thiscall CHunterRole::GetSettlerRole(CHunterRole *this)
-
 int  CHunterRole::GetSettlerRole(void)const {
   
   return 8;
@@ -299,7 +290,6 @@ int  CHunterRole::GetSettlerRole(void)const {
 
 // address=[0x1588740]
 // Decompiled from int __cdecl CHunterRole::Load(int a1)
-
 static class CHunterRole * __cdecl CHunterRole::Load(std::istream &) {
   
   void **v1; // eax
@@ -315,7 +305,6 @@ static class CHunterRole * __cdecl CHunterRole::Load(std::istream &) {
 
 // address=[0x1577990]
 // Decompiled from ISettlerRole *__thiscall CHunterRole::~CHunterRole(CHunterRole *this)
-
  CHunterRole::~CHunterRole(void) {
   
   *(_DWORD *)this = &CHunterRole::_vftable_;
@@ -325,7 +314,6 @@ static class CHunterRole * __cdecl CHunterRole::Load(std::istream &) {
 
 // address=[0x15779b0]
 // Decompiled from int __thiscall CHunterRole::GetNextJob(CHunterRole *this, struct CSettler *a2)
-
 void  CHunterRole::GetNextJob(class CSettler *) {
   
   int result; // eax
@@ -341,7 +329,6 @@ void  CHunterRole::GetNextJob(class CSettler *) {
 
 // address=[0x15779f0]
 // Decompiled from void __thiscall CHunterRole::TakeJob(CHunterRole *this, struct CSettler *a2)
-
 void  CHunterRole::TakeJob(class CSettler *) {
   
   const struct CEntityTask *ActualTask; // eax
@@ -478,7 +465,6 @@ void  CHunterRole::TakeJob(class CSettler *) {
 
 // address=[0x1577e00]
 // Decompiled from int __thiscall CHunterRole::Init(_BYTE *this, CPropertySet *a2)
-
 void  CHunterRole::Init(class CSettler *) {
   
   int result; // eax
@@ -491,7 +477,6 @@ void  CHunterRole::Init(class CSettler *) {
 
 // address=[0x1577e20]
 // Decompiled from int __thiscall CHunterRole::GoHomeEmpty(CHunterRole *this, struct CSettler *a2)
-
 void  CHunterRole::GoHomeEmpty(class CSettler *) {
   
   int result; // eax
@@ -515,7 +500,6 @@ void  CHunterRole::GoHomeEmpty(class CSettler *) {
 
 // address=[0x1577eb0]
 // Decompiled from void __thiscall CHunterRole::HarvestDeadAnimal(CHunterRole *this, struct CSettler *a2)
-
 void  CHunterRole::HarvestDeadAnimal(class CSettler *) {
   
   int v2; // eax
@@ -550,7 +534,6 @@ void  CHunterRole::HarvestDeadAnimal(class CSettler *) {
 
 // address=[0x1577f80]
 // Decompiled from bool __thiscall CHunterRole::AreWeChasing(CHunterRole *this, struct CSettler *a2)
-
 bool  CHunterRole::AreWeChasing(class CSettler *) {
   
   struct CAnimal *AnimalPtr; // [esp+0h] [ebp-Ch]
@@ -569,7 +552,6 @@ bool  CHunterRole::AreWeChasing(class CSettler *) {
 
 // address=[0x1578010]
 // Decompiled from int __thiscall CHunterRole::GetVictimPosition(CHunterRole *this)
-
 int  CHunterRole::GetVictimPosition(void) {
   
   int v2; // eax
@@ -589,7 +571,6 @@ int  CHunterRole::GetVictimPosition(void) {
 
 // address=[0x1578080]
 // Decompiled from int __thiscall CHunterRole::ConvertEventIntoGoal(CHunterRole *this, struct CSettler *a2, struct CEntityEvent *a3)
-
 void  CHunterRole::ConvertEventIntoGoal(class CSettler *,class CEntityEvent *) {
   
   int result; // eax
@@ -678,7 +659,6 @@ void  CHunterRole::ConvertEventIntoGoal(class CSettler *,class CEntityEvent *) {
 
 // address=[0x15782d0]
 // Decompiled from char __thiscall CHunterRole::SetFree(CHunterRole *this, struct CSettler *a2, int a3)
-
 bool  CHunterRole::SetFree(class CSettler *,int) {
   
   int v3; // eax
@@ -697,7 +677,6 @@ bool  CHunterRole::SetFree(class CSettler *,int) {
 
 // address=[0x1587ad0]
 // Decompiled from CHunterRole *__thiscall CHunterRole::CHunterRole(CHunterRole *this)
-
  CHunterRole::CHunterRole(void) {
   
   ISettlerRole::ISettlerRole(this);

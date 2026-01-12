@@ -4,7 +4,6 @@
 
 // address=[0x1454a80]
 // Decompiled from SBuildingMenu *__thiscall SBuildingMenu::SBuildingMenu(SBuildingMenu *this)
-
  SBuildingMenu::SBuildingMenu(void) {
   
   CInfoExchange::CInfoExchange(this);
@@ -15,7 +14,6 @@
 
 // address=[0x1454ef0]
 // Decompiled from int __thiscall SBuildingMenu::Size(SBuildingMenu *this)
-
 unsigned int  SBuildingMenu::Size(void)const {
   
   return 172;

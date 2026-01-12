@@ -4,7 +4,6 @@
 
 // address=[0x2fc5fb0]
 // Decompiled from CMirrorBasicGrid *__thiscall CMirrorBasicGrid::CMirrorBasicGrid(CMirrorBasicGrid *this, int a2, int a3)
-
  CMirrorBasicGrid::CMirrorBasicGrid(int,int) {
   
   CBasicGrid::CBasicGrid(this, a2, a3);
@@ -15,7 +14,6 @@
 
 // address=[0x2fc5fe0]
 // Decompiled from int __thiscall CMirrorBasicGrid::initGrid(CMirrorBasicGrid *this)
-
 void  CMirrorBasicGrid::initGrid(void) {
   
   int result; // eax
@@ -147,7 +145,6 @@ void  CMirrorBasicGrid::initGrid(void) {
 
 // address=[0x2fc6600]
 // Decompiled from int *__thiscall CMirrorBasicGrid::getMirrorBasisPoint(CMirrorBasicGrid *this, unsigned int *a2, int *a3, bool a4)
-
 void  CMirrorBasicGrid::getMirrorBasisPoint(int &,int &,bool) {
   
   int *result; // eax

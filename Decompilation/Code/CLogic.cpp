@@ -4,7 +4,6 @@
 
 // address=[0x141d890]
 // Decompiled from int __thiscall CLogic::Effects(DWORD *this)
-
 class IEffects &  CLogic::Effects(void) {
   
   return this[12];
@@ -12,12 +11,7 @@ class IEffects &  CLogic::Effects(void) {
 
 
 // address=[0x14609a0]
-// Decompiled from struct CInfoExchange *__thiscall CLogic::SetFillDialogInfos(
-        CLogic *this,
-        void (__cdecl *a2)(struct CInfoExchange *, bool, bool),
-        struct CInfoExchange *a3,
-        bool a4)
-
+// Decompiled from struct CInfoExchange *__thiscall CLogic::SetFillDialogInfos(  CLogic *this,  void (__cdecl *a2)(struct CInfoExchange *, bool, bool),  struct CInfoExchange *a3,  bool a4)
 void  CLogic::SetFillDialogInfos(void (__cdecl*)(class CInfoExchange *,bool,bool),class CInfoExchange *,bool) {
   
   struct CInfoExchange *result; // eax
@@ -31,12 +25,7 @@ void  CLogic::SetFillDialogInfos(void (__cdecl*)(class CInfoExchange *,bool,bool
 
 
 // address=[0x14609e0]
-// Decompiled from struct CInfoExchange *__thiscall CLogic::SetFillSideBarInfos(
-        CLogic *this,
-        void (__cdecl *a2)(struct CInfoExchange *, bool, int),
-        struct CInfoExchange *a3,
-        int a4)
-
+// Decompiled from struct CInfoExchange *__thiscall CLogic::SetFillSideBarInfos(  CLogic *this,  void (__cdecl *a2)(struct CInfoExchange *, bool, int),  struct CInfoExchange *a3,  int a4)
 void  CLogic::SetFillSideBarInfos(void (__cdecl*)(class CInfoExchange *,bool,int),class CInfoExchange *,int) {
   
   struct CInfoExchange *result; // eax
@@ -51,7 +40,6 @@ void  CLogic::SetFillSideBarInfos(void (__cdecl*)(class CInfoExchange *,bool,int
 
 // address=[0x1460a50]
 // Decompiled from CLogic *__thiscall CLogic::SetLocalGlobalSwitch(CLogic *this, bool a2)
-
 void  CLogic::SetLocalGlobalSwitch(bool) {
   
   CLogic *result; // eax
@@ -64,7 +52,6 @@ void  CLogic::SetLocalGlobalSwitch(bool) {
 
 // address=[0x1460a70]
 // Decompiled from CLogic *__thiscall CLogic::SwitchExtraInfoMenu(CLogic *this, bool a2)
-
 void  CLogic::SwitchExtraInfoMenu(bool) {
   
   CLogic *result; // eax
@@ -77,7 +64,6 @@ void  CLogic::SwitchExtraInfoMenu(bool) {
 
 // address=[0x1469c90]
 // Decompiled from CLogic *__thiscall CLogic::CLogic(CLogic *this)
-
  CLogic::CLogic(void) {
   
   CBBObject::CBBObject(this, (int)"CLogic", 1);
@@ -103,7 +89,6 @@ void  CLogic::SwitchExtraInfoMenu(bool) {
 
 // address=[0x1469d90]
 // Decompiled from void __thiscall CLogic::~CLogic(CLogic *this)
-
  CLogic::~CLogic(void) {
   
   *(_DWORD *)this = &CLogic::_vftable_;
@@ -132,7 +117,6 @@ void  CLogic::SwitchExtraInfoMenu(bool) {
 
 // address=[0x1469e80]
 // Decompiled from BOOL __thiscall CLogic::PostLoadMap(CLogic *this, struct CGameType *a2)
-
 void  CLogic::PostLoadMap(class CGameType &) {
   
   BOOL result; // eax
@@ -171,7 +155,6 @@ void  CLogic::PostLoadMap(class CGameType &) {
 
 // address=[0x1469f30]
 // Decompiled from void __thiscall CLogic::LogicUpdate(CLogic *this)
-
 void  CLogic::LogicUpdate(void) {
   
   int LocalPlayerId; // eax
@@ -215,9 +198,7 @@ void  CLogic::LogicUpdate(void) {
 
 
 // address=[0x1470980]
-// Decompiled from // MFC 3.1-14.0 32bit
-int __thiscall CLogic::FutureEvents(_DWORD *this)
-
+// Decompiled from int __thiscall CLogic::FutureEvents(_DWORD *this)
 class IFutureEvents &  CLogic::FutureEvents(void) {
   
   return this[11];
@@ -226,7 +207,6 @@ class IFutureEvents &  CLogic::FutureEvents(void) {
 
 // address=[0x158b9a0]
 // Decompiled from CLogic *__thiscall CLogic::SetWarAction(CLogic *this)
-
 void  CLogic::SetWarAction(void) {
   
   CLogic *result; // eax
@@ -239,7 +219,6 @@ void  CLogic::SetWarAction(void) {
 
 // address=[0x146a0b0]
 // Decompiled from int __thiscall CLogic::ChangeWorldPosition(CLogic *this)
-
 void  CLogic::ChangeWorldPosition(void) {
   
   unsigned __int8 v1; // al
@@ -323,7 +302,6 @@ void  CLogic::ChangeWorldPosition(void) {
 
 // address=[0x146a380]
 // Decompiled from int __thiscall CLogic::HandleCursor(void *this)
-
 void  CLogic::HandleCursor(void) {
   
   int result; // eax
@@ -497,7 +475,6 @@ void  CLogic::HandleCursor(void) {
 
 // address=[0x146a770]
 // Decompiled from int __thiscall CLogic::HandleSoundtracks(CLogic *this)
-
 void  CLogic::HandleSoundtracks(void) {
   
   int result; // eax

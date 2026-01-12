@@ -3,10 +3,7 @@
 // Definitions for class CBBFileException
 
 // address=[0x14c2e30]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CBBFileException::Cause(CBBFileException *this)
-
+// Decompiled from int __thiscall CBBFileException::Cause(CBBFileException *this)
 int  CBBFileException::Cause(void)const {
   
   return *((_DWORD *)this + 1);
@@ -15,7 +12,6 @@ int  CBBFileException::Cause(void)const {
 
 // address=[0x14c2e50]
 // Decompiled from const char *__thiscall CBBFileException::FileName(type_info *this)
-
 wchar_t const *  CBBFileException::FileName(void)const {
   
   return (char *)this + 8;
@@ -24,7 +20,6 @@ wchar_t const *  CBBFileException::FileName(void)const {
 
 // address=[0x14dfb00]
 // Decompiled from _DWORD *__thiscall CBBFileException::CBBFileException(_DWORD *this, struct boost::exception_detail::clone_base *a2)
-
  CBBFileException::CBBFileException(class CBBFileException const &) {
   
   CBBException::CBBException((boost::exception_detail::clone_base *)this, a2);
@@ -37,7 +32,6 @@ wchar_t const *  CBBFileException::FileName(void)const {
 
 // address=[0x2f309f0]
 // Decompiled from CBBFileException *__thiscall CBBFileException::CBBFileException(CBBFileException *this, int a2, const wchar_t *a3)
-
  CBBFileException::CBBFileException(int,wchar_t const *) {
   
   CBBException::CBBException(this);
@@ -50,7 +44,6 @@ wchar_t const *  CBBFileException::FileName(void)const {
 
 // address=[0x2f30a70]
 // Decompiled from CBBException *__thiscall CBBFileException::~CBBFileException(CBBFileException *this)
-
  CBBFileException::~CBBFileException(void) {
   
   *(_DWORD *)this = &CBBFileException::_vftable_;
@@ -60,7 +53,6 @@ wchar_t const *  CBBFileException::FileName(void)const {
 
 // address=[0x2f30a90]
 // Decompiled from char __thiscall CBBFileException::GetErrorMessage(CBBFileException *this, char *a2, unsigned int a3)
-
 bool  CBBFileException::GetErrorMessage(char *,unsigned int) {
   
   const char *v3; // eax

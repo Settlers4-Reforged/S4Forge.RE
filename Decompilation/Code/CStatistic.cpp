@@ -4,7 +4,6 @@
 
 // address=[0x13adcc0]
 // Decompiled from int __thiscall CStatistic::DefenceStrength100Max(CStatistic *this, int a2)
-
 int  CStatistic::DefenceStrength100Max(int)const {
   
   if ( (a2 < 1 || a2 > 8)
@@ -22,7 +21,6 @@ int  CStatistic::DefenceStrength100Max(int)const {
 
 // address=[0x13add30]
 // Decompiled from int __thiscall CStatistic::GetDontShowLastNPlayers(CStatistic *this)
-
 int  CStatistic::GetDontShowLastNPlayers(void) {
   
   return *((_DWORD *)this + 9883);
@@ -31,7 +29,6 @@ int  CStatistic::GetDontShowLastNPlayers(void) {
 
 // address=[0x13add50]
 // Decompiled from int __thiscall CStatistic::OffenceStrength100Max(CStatistic *this, int a2)
-
 int  CStatistic::OffenceStrength100Max(int)const {
   
   if ( (a2 < 1 || a2 > 8)
@@ -49,7 +46,6 @@ int  CStatistic::OffenceStrength100Max(int)const {
 
 // address=[0x1475d60]
 // Decompiled from CStatistic *__thiscall CStatistic::CStatistic(CStatistic *this)
-
  CStatistic::CStatistic(void) {
   
   IS4ChunkObject::IS4ChunkObject(this);
@@ -61,7 +57,6 @@ int  CStatistic::OffenceStrength100Max(int)const {
 
 // address=[0x1475d90]
 // Decompiled from void *__thiscall CStatistic::Clear(CStatistic *this)
-
 void  CStatistic::Clear(void) {
   
   void *result; // eax
@@ -74,7 +69,6 @@ void  CStatistic::Clear(void) {
 
 // address=[0x1475dc0]
 // Decompiled from void __thiscall CStatistic::Init(CStatistic *this)
-
 void  CStatistic::Init(void) {
   
   CStatistic::Clear(this);
@@ -85,7 +79,6 @@ void  CStatistic::Init(void) {
 
 // address=[0x1475df0]
 // Decompiled from void *__thiscall CStatistic::Update(CStatistic *this)
-
 void  CStatistic::Update(void) {
   
   void *result; // eax
@@ -106,7 +99,6 @@ void  CStatistic::Update(void) {
 
 // address=[0x1475e80]
 // Decompiled from struct CStatistic *__thiscall CStatistic::Update(CStatistic *this, struct CStatistic *a2)
-
 void  CStatistic::Update(class CStatistic &) {
   
   struct CStatistic *result; // eax
@@ -121,7 +113,6 @@ void  CStatistic::Update(class CStatistic &) {
 
 // address=[0x1475ed0]
 // Decompiled from int __thiscall CStatistic::Load(CStatistic *this, struct IS4Chunk *a2)
-
 void  CStatistic::Load(class IS4Chunk &) {
   
   int result; // eax
@@ -158,7 +149,6 @@ void  CStatistic::Load(class IS4Chunk &) {
 
 // address=[0x1475fc0]
 // Decompiled from int __thiscall CStatistic::Save(CStatistic *this, struct IS4Chunk *a2)
-
 void  CStatistic::Save(class IS4Chunk &) {
   
   CStatistic::Update(this);
@@ -172,7 +162,6 @@ void  CStatistic::Save(class IS4Chunk &) {
 
 // address=[0x1476040]
 // Decompiled from int __thiscall CStatistic::DecSettler(CStatistic *this, int a2, int a3)
-
 void  CStatistic::DecSettler(int,int) {
   
   int result; // eax
@@ -246,7 +235,6 @@ void  CStatistic::DecSettler(int,int) {
 
 // address=[0x14762c0]
 // Decompiled from int __thiscall CStatistic::AddSettler(CStatistic *this, int a2, int a3)
-
 void  CStatistic::AddSettler(int,int) {
   
   int result; // eax
@@ -285,9 +273,7 @@ void  CStatistic::AddSettler(int,int) {
 
 
 // address=[0x1476410]
-// Decompiled from // public: int __thiscall CStatistic::GetSettler(int,int)const 
-int __thiscall CStatistic::GetSettler(_DWORD *this, int a2, int a3)
-
+// Decompiled from int __thiscall CStatistic::GetSettler(_DWORD *this, int a2, int a3)
 int  CStatistic::GetSettler(int,int)const {
   
   if ( (a2 < 1 || a2 > 8)
@@ -305,9 +291,7 @@ int  CStatistic::GetSettler(int,int)const {
 
 
 // address=[0x1476490]
-// Decompiled from // public: int __thiscall CStatistic::GetTotalSettler(int)const 
-int __thiscall CStatistic::GetTotalSettler(_DWORD *this, int a2)
-
+// Decompiled from int __thiscall CStatistic::GetTotalSettler(_DWORD *this, int a2)
 int  CStatistic::GetTotalSettler(int)const {
   
   if ( (a2 < 1 || a2 > 8)
@@ -321,7 +305,6 @@ int  CStatistic::GetTotalSettler(int)const {
 
 // address=[0x14764f0]
 // Decompiled from int __thiscall CStatistic::GetCivilian(CStatistic *this, int a2)
-
 int  CStatistic::GetCivilian(int)const {
   
   if ( (a2 < 1 || a2 > 8)
@@ -335,7 +318,6 @@ int  CStatistic::GetCivilian(int)const {
 
 // address=[0x1476540]
 // Decompiled from int __thiscall CStatistic::GetSoldiers(CStatistic *this, int a2)
-
 int  CStatistic::GetSoldiers(int)const {
   
   int v4; // [esp+8h] [ebp-Ch]
@@ -360,7 +342,6 @@ int  CStatistic::GetSoldiers(int)const {
 
 // address=[0x14765e0]
 // Decompiled from int __thiscall CStatistic::GetNrOfSoldiers(CStatistic *this, int a2)
-
 int  CStatistic::GetNrOfSoldiers(int)const {
   
   if ( (a2 < 1 || a2 > 8)
@@ -374,7 +355,6 @@ int  CStatistic::GetNrOfSoldiers(int)const {
 
 // address=[0x1476630]
 // Decompiled from int __thiscall CStatistic::AddProducedSettler(CStatistic *this, int a2, int a3)
-
 void  CStatistic::AddProducedSettler(int,int) {
   
   int result; // eax
@@ -398,7 +378,6 @@ void  CStatistic::AddProducedSettler(int,int) {
 
 // address=[0x14766f0]
 // Decompiled from int __thiscall CStatistic::GetProducedSettler(CStatistic *this, int a2, int a3)
-
 int  CStatistic::GetProducedSettler(int,int)const {
   
   if ( (a2 < 1 || a2 > 8)
@@ -417,7 +396,6 @@ int  CStatistic::GetProducedSettler(int,int)const {
 
 // address=[0x1476770]
 // Decompiled from int __thiscall CStatistic::GetTotalProducedSettler(CStatistic *this, int a2)
-
 int  CStatistic::GetTotalProducedSettler(int)const {
   
   if ( (a2 < 1 || a2 > 8)
@@ -430,9 +408,7 @@ int  CStatistic::GetTotalProducedSettler(int)const {
 
 
 // address=[0x14767c0]
-// Decompiled from // public: int __thiscall CStatistic::GetBuildingProductivity(int,int)const 
-int __thiscall CStatistic::GetBuildingProductivity(unsigned __int8 *this, int a2, int a3)
-
+// Decompiled from int __thiscall CStatistic::GetBuildingProductivity(unsigned __int8 *this, int a2, int a3)
 int  CStatistic::GetBuildingProductivity(int,int)const {
   
   return this[4392 * a2 + 3020 + a3];
@@ -441,7 +417,6 @@ int  CStatistic::GetBuildingProductivity(int,int)const {
 
 // address=[0x14767f0]
 // Decompiled from void __thiscall CStatistic::AddBuilding(CStatistic *this, int a2, int a3, int a4)
-
 void  CStatistic::AddBuilding(int,int,int) {
   
   int v4; // eax
@@ -455,7 +430,6 @@ void  CStatistic::AddBuilding(int,int,int) {
 
 // address=[0x1476880]
 // Decompiled from void __thiscall CStatistic::DecBuilding(CStatistic *this, int a2, int a3, int a4)
-
 void  CStatistic::DecBuilding(int,int,int) {
   
   int v4; // eax
@@ -479,7 +453,6 @@ void  CStatistic::DecBuilding(int,int,int) {
 
 // address=[0x1476960]
 // Decompiled from int __thiscall CStatistic::GetBuildings(CStatistic *this, int a2, int a3)
-
 int  CStatistic::GetBuildings(int,int)const {
   
   return *((_DWORD *)this + 1098 * a2 + a3 + 139);
@@ -488,7 +461,6 @@ int  CStatistic::GetBuildings(int,int)const {
 
 // address=[0x1476990]
 // Decompiled from int __thiscall CStatistic::AddProducedBuilding(CStatistic *this, int a2, int a3, int a4)
-
 void  CStatistic::AddProducedBuilding(int,int,int) {
   
   int result; // eax
@@ -509,7 +481,6 @@ void  CStatistic::AddProducedBuilding(int,int,int) {
 
 // address=[0x1476a50]
 // Decompiled from int __thiscall CStatistic::GetProducedBuildings(CStatistic *this, int a2, int a3)
-
 int  CStatistic::GetProducedBuildings(int,int)const {
   
   if ( (a2 <= 0 || a2 >= 9)
@@ -524,9 +495,7 @@ int  CStatistic::GetProducedBuildings(int,int)const {
 
 
 // address=[0x1476ad0]
-// Decompiled from // public: int __thiscall CStatistic::GetTotalBuildings(int)const 
-int __thiscall CStatistic::GetTotalBuildings(_DWORD *this, int a2)
-
+// Decompiled from int __thiscall CStatistic::GetTotalBuildings(_DWORD *this, int a2)
 int  CStatistic::GetTotalBuildings(int)const {
   
   return this[1098 * a2 + 388];
@@ -535,7 +504,6 @@ int  CStatistic::GetTotalBuildings(int)const {
 
 // address=[0x1476af0]
 // Decompiled from int __thiscall CStatistic::GetTotalProducedBuildings(CStatistic *this, int a2)
-
 int  CStatistic::GetTotalProducedBuildings(int)const {
   
   return *((_DWORD *)this + 1098 * a2 + 472);
@@ -543,9 +511,7 @@ int  CStatistic::GetTotalProducedBuildings(int)const {
 
 
 // address=[0x1476b10]
-// Decompiled from // public: int __thiscall CStatistic::GetTotalBuildingsOfType(int,int)const 
-int __thiscall CStatistic::GetTotalBuildingsOfType(CStatistic *this, int a2, int a3)
-
+// Decompiled from int __thiscall CStatistic::GetTotalBuildingsOfType(CStatistic *this, int a2, int a3)
 int  CStatistic::GetTotalBuildingsOfType(int,int)const {
   
   int Buildings; // esi
@@ -557,7 +523,6 @@ int  CStatistic::GetTotalBuildingsOfType(int,int)const {
 
 // address=[0x1476b50]
 // Decompiled from char *__thiscall CStatistic::AddCaptureBuilding(CStatistic *this, int a2, int a3, int a4)
-
 void  CStatistic::AddCaptureBuilding(int,int,int) {
   
   char *result; // eax
@@ -571,7 +536,6 @@ void  CStatistic::AddCaptureBuilding(int,int,int) {
 
 // address=[0x1476bd0]
 // Decompiled from int __thiscall CStatistic::GetCapturedTowers(CStatistic *this, int a2)
-
 int  CStatistic::GetCapturedTowers(int) {
   
   if ( (a2 <= 0 || a2 >= 9)
@@ -585,7 +549,6 @@ int  CStatistic::GetCapturedTowers(int) {
 
 // address=[0x1476c70]
 // Decompiled from int __thiscall CStatistic::GetLossesTowers(CStatistic *this, int a2)
-
 int  CStatistic::GetLossesTowers(int) {
   
   return *((_DWORD *)this + 1098 * a2 + 353) + *((_DWORD *)this + 1098 * a2 + 352) + *((_DWORD *)this + 1098 * a2 + 351);
@@ -593,9 +556,7 @@ int  CStatistic::GetLossesTowers(int) {
 
 
 // address=[0x1476ce0]
-// Decompiled from // public: void __thiscall CStatistic::AddConstruction(int,int,int)
-int __thiscall CStatistic::AddConstruction(_DWORD *this, int a2, int a3, int a4)
-
+// Decompiled from int __thiscall CStatistic::AddConstruction(_DWORD *this, int a2, int a3, int a4)
 void  CStatistic::AddConstruction(int,int,int) {
   
   int result; // eax
@@ -608,9 +569,7 @@ void  CStatistic::AddConstruction(int,int,int) {
 
 
 // address=[0x1476d50]
-// Decompiled from // public: void __thiscall CStatistic::DecConstruction(int,int,int)
-int __thiscall CStatistic::DecConstruction(_DWORD *this, int a2, int a3, int a4)
-
+// Decompiled from int __thiscall CStatistic::DecConstruction(_DWORD *this, int a2, int a3, int a4)
 void  CStatistic::DecConstruction(int,int,int) {
   
   int result; // eax
@@ -632,9 +591,7 @@ void  CStatistic::DecConstruction(int,int,int) {
 
 
 // address=[0x1476e00]
-// Decompiled from // public: int __thiscall CStatistic::GetTotalBuildingsUnderConstruction(int)const 
-int __thiscall CStatistic::GetTotalBuildingsUnderConstruction(_DWORD *this, int a2)
-
+// Decompiled from int __thiscall CStatistic::GetTotalBuildingsUnderConstruction(_DWORD *this, int a2)
 int  CStatistic::GetTotalBuildingsUnderConstruction(int)const {
   
   return this[1098 * a2 + 556];
@@ -643,7 +600,6 @@ int  CStatistic::GetTotalBuildingsUnderConstruction(int)const {
 
 // address=[0x1476e20]
 // Decompiled from int __thiscall CStatistic::GetConstructions(CStatistic *this, int a2, int a3)
-
 int  CStatistic::GetConstructions(int,int)const {
   
   return *((_DWORD *)this + 1098 * a2 + a3 + 473);
@@ -651,9 +607,7 @@ int  CStatistic::GetConstructions(int,int)const {
 
 
 // address=[0x1476e50]
-// Decompiled from // public: void __thiscall CStatistic::ChangeResidenceNeed(int,int)
-int __thiscall CStatistic::ChangeResidenceNeed(_DWORD *this, int a2, int a3)
-
+// Decompiled from int __thiscall CStatistic::ChangeResidenceNeed(_DWORD *this, int a2, int a3)
 void  CStatistic::ChangeResidenceNeed(int,int) {
   
   int result; // eax
@@ -666,7 +620,6 @@ void  CStatistic::ChangeResidenceNeed(int,int) {
 
 // address=[0x1476e90]
 // Decompiled from int __thiscall CStatistic::GetResidenceNeed(CStatistic *this, int a2)
-
 int  CStatistic::GetResidenceNeed(int)const {
   
   return *((_DWORD *)this + 1098 * a2 + 2);
@@ -675,7 +628,6 @@ int  CStatistic::GetResidenceNeed(int)const {
 
 // address=[0x1476ec0]
 // Decompiled from int __thiscall CStatistic::ChangeResidenceSpace(CStatistic *this, int a2, int a3)
-
 void  CStatistic::ChangeResidenceSpace(int,int) {
   
   int result; // eax
@@ -688,7 +640,6 @@ void  CStatistic::ChangeResidenceSpace(int,int) {
 
 // address=[0x1476f00]
 // Decompiled from int __thiscall CStatistic::GetResidenceSpace(CStatistic *this, int a2)
-
 int  CStatistic::GetResidenceSpace(int)const {
   
   return CEcoSectorMgr::GetNrOfCurrentTotalBeds((CEcoSectorMgr *)g_cESMgr, a2);
@@ -697,7 +648,6 @@ int  CStatistic::GetResidenceSpace(int)const {
 
 // address=[0x1476f20]
 // Decompiled from int __thiscall CStatistic::AddGood(CStatistic *this, int a2, int a3, int a4)
-
 void  CStatistic::AddGood(int,int,int) {
   
   int result; // eax
@@ -722,7 +672,6 @@ void  CStatistic::AddGood(int,int,int) {
 
 // address=[0x1477020]
 // Decompiled from CStatistic *__thiscall CStatistic::DecGood(CStatistic *this, int a2, int a3, int a4)
-
 void  CStatistic::DecGood(int,int,int) {
   
   CStatistic *result; // eax
@@ -747,7 +696,6 @@ void  CStatistic::DecGood(int,int,int) {
 
 // address=[0x1477120]
 // Decompiled from int __thiscall CStatistic::GetGood(CStatistic *this, int a2, int a3)
-
 int  CStatistic::GetGood(int,int)const {
   
   if ( (a2 <= 0 || a2 >= 9)
@@ -763,7 +711,6 @@ int  CStatistic::GetGood(int,int)const {
 
 // address=[0x14771a0]
 // Decompiled from int __thiscall CStatistic::GetWinGood(CStatistic *this, int a2, int a3)
-
 int  CStatistic::GetWinGood(int,int)const {
   
   if ( (a2 <= 0 || a2 >= 9)
@@ -778,9 +725,7 @@ int  CStatistic::GetWinGood(int,int)const {
 
 
 // address=[0x1477220]
-// Decompiled from // public: int __thiscall CStatistic::GetTotalGood(int)const 
-int __thiscall CStatistic::GetTotalGood(_DWORD *this, int a2)
-
+// Decompiled from int __thiscall CStatistic::GetTotalGood(_DWORD *this, int a2)
 int  CStatistic::GetTotalGood(int)const {
   
   if ( (a2 <= 0 || a2 >= 9)
@@ -794,7 +739,6 @@ int  CStatistic::GetTotalGood(int)const {
 
 // address=[0x1477270]
 // Decompiled from int __thiscall CStatistic::AddProducedGoods(CStatistic *this, int a2, int a3, int a4)
-
 void  CStatistic::AddProducedGoods(int,int,int) {
   
   int result; // eax
@@ -815,7 +759,6 @@ void  CStatistic::AddProducedGoods(int,int,int) {
 
 // address=[0x1477330]
 // Decompiled from int __thiscall CStatistic::GetProducedGoods(CStatistic *this, int a2, int a3)
-
 int  CStatistic::GetProducedGoods(int,int)const {
   
   if ( (a2 <= 0 || a2 >= 9)
@@ -830,9 +773,7 @@ int  CStatistic::GetProducedGoods(int,int)const {
 
 
 // address=[0x14773b0]
-// Decompiled from // public: int __thiscall CStatistic::GetTotalProducedGood(int)const 
-int __thiscall CStatistic::GetTotalProducedGood(_DWORD *this, int a2)
-
+// Decompiled from int __thiscall CStatistic::GetTotalProducedGood(_DWORD *this, int a2)
 int  CStatistic::GetTotalProducedGood(int)const {
   
   if ( (a2 <= 0 || a2 >= 9)
@@ -846,7 +787,6 @@ int  CStatistic::GetTotalProducedGood(int)const {
 
 // address=[0x1477400]
 // Decompiled from int __thiscall CStatistic::AddVehicle(CStatistic *this, int a2, int a3, int a4)
-
 void  CStatistic::AddVehicle(int,int,int) {
   
   int result; // eax
@@ -867,7 +807,6 @@ void  CStatistic::AddVehicle(int,int,int) {
 
 // address=[0x14774c0]
 // Decompiled from int __thiscall CStatistic::DecVehicle(CStatistic *this, int a2, int a3, int a4)
-
 void  CStatistic::DecVehicle(int,int,int) {
   
   int result; // eax
@@ -884,9 +823,7 @@ void  CStatistic::DecVehicle(int,int,int) {
 
 
 // address=[0x1477570]
-// Decompiled from // public: int __thiscall CStatistic::GetVehicle(int,int)const 
-int __thiscall CStatistic::GetVehicle(_DWORD *this, int a2, int a3)
-
+// Decompiled from int __thiscall CStatistic::GetVehicle(_DWORD *this, int a2, int a3)
 int  CStatistic::GetVehicle(int,int)const {
   
   return this[1098 * a2 + 730 + a3];
@@ -894,9 +831,7 @@ int  CStatistic::GetVehicle(int,int)const {
 
 
 // address=[0x14775a0]
-// Decompiled from // public: int __thiscall CStatistic::GetTotalVehicle(int)const 
-int __thiscall CStatistic::GetTotalVehicle(_DWORD *this, int a2)
-
+// Decompiled from int __thiscall CStatistic::GetTotalVehicle(_DWORD *this, int a2)
 int  CStatistic::GetTotalVehicle(int)const {
   
   if ( (a2 < 1 || a2 > 8)
@@ -910,7 +845,6 @@ int  CStatistic::GetTotalVehicle(int)const {
 
 // address=[0x14775f0]
 // Decompiled from int __thiscall CStatistic::AddProducedVehicle(CStatistic *this, int a2, int a3, int a4)
-
 void  CStatistic::AddProducedVehicle(int,int,int) {
   
   int result; // eax
@@ -934,7 +868,6 @@ void  CStatistic::AddProducedVehicle(int,int,int) {
 
 // address=[0x14776b0]
 // Decompiled from int __thiscall CStatistic::GetProducedVehicle(CStatistic *this, int a2, int a3)
-
 int  CStatistic::GetProducedVehicle(int,int)const {
   
   if ( (a2 < 1 || a2 > 8)
@@ -952,9 +885,7 @@ int  CStatistic::GetProducedVehicle(int,int)const {
 
 
 // address=[0x1477730]
-// Decompiled from // public: int __thiscall CStatistic::GetTotalProducedVehicled(int)const 
-int __thiscall CStatistic::GetTotalProducedVehicled(_DWORD *this, int a2)
-
+// Decompiled from int __thiscall CStatistic::GetTotalProducedVehicled(_DWORD *this, int a2)
 int  CStatistic::GetTotalProducedVehicled(int)const {
   
   if ( (a2 < 1 || a2 > 8)
@@ -968,7 +899,6 @@ int  CStatistic::GetTotalProducedVehicled(int)const {
 
 // address=[0x1477780]
 // Decompiled from int __thiscall CStatistic::GetMana(CStatistic *this, int a2)
-
 int  CStatistic::GetMana(int)const {
   
   if ( (a2 <= 0 || a2 >= 9)
@@ -982,7 +912,6 @@ int  CStatistic::GetMana(int)const {
 
 // address=[0x14777d0]
 // Decompiled from int __thiscall CStatistic::GetProducedMana(CStatistic *this, int a2)
-
 int  CStatistic::GetProducedMana(int)const {
   
   if ( (a2 <= 0 || a2 >= 9)
@@ -996,7 +925,6 @@ int  CStatistic::GetProducedMana(int)const {
 
 // address=[0x1477820]
 // Decompiled from int __thiscall CStatistic::IncKillsOfType(_DWORD *this, int a2, int a3)
-
 void  CStatistic::IncKillsOfType(int,int) {
   
   int result; // eax
@@ -1023,9 +951,7 @@ void  CStatistic::IncKillsOfType(int,int) {
 
 
 // address=[0x14778e0]
-// Decompiled from // public: int __thiscall CStatistic::GetKillsOfType(int,int)const 
-int __thiscall CStatistic::GetKillsOfType(_DWORD *this, int a2, int a3)
-
+// Decompiled from int __thiscall CStatistic::GetKillsOfType(_DWORD *this, int a2, int a3)
 int  CStatistic::GetKillsOfType(int,int)const {
   
   return this[1098 * a2 + 776 + a3];
@@ -1034,7 +960,6 @@ int  CStatistic::GetKillsOfType(int,int)const {
 
 // address=[0x1477910]
 // Decompiled from int __thiscall CStatistic::GetKills(CStatistic *this, int a2)
-
 int  CStatistic::GetKills(int)const {
   
   return *((_DWORD *)this + 1098 * a2 + 843);
@@ -1043,7 +968,6 @@ int  CStatistic::GetKills(int)const {
 
 // address=[0x1477930]
 // Decompiled from int __thiscall CStatistic::IncLossesOfType(CStatistic *this, int a2, int a3)
-
 void  CStatistic::IncLossesOfType(int,int) {
   
   int result; // eax
@@ -1070,9 +994,7 @@ void  CStatistic::IncLossesOfType(int,int) {
 
 
 // address=[0x14779f0]
-// Decompiled from // public: int __thiscall CStatistic::GetLossesOfType(int,int)const 
-int __thiscall CStatistic::GetLossesOfType(_DWORD *this, int a2, int a3)
-
+// Decompiled from int __thiscall CStatistic::GetLossesOfType(_DWORD *this, int a2, int a3)
 int  CStatistic::GetLossesOfType(int,int)const {
   
   return this[1098 * a2 + 844 + a3];
@@ -1081,7 +1003,6 @@ int  CStatistic::GetLossesOfType(int,int)const {
 
 // address=[0x1477a20]
 // Decompiled from int __thiscall CStatistic::GetLosses(CStatistic *this, int a2)
-
 int  CStatistic::GetLosses(int)const {
   
   return *((_DWORD *)this + 1098 * a2 + 911);
@@ -1090,7 +1011,6 @@ int  CStatistic::GetLosses(int)const {
 
 // address=[0x1477a40]
 // Decompiled from int __thiscall CStatistic::IncKillsVehicleOfType(CStatistic *this, int a2, int a3)
-
 void  CStatistic::IncKillsVehicleOfType(int,int) {
   
   int result; // eax
@@ -1113,9 +1033,7 @@ void  CStatistic::IncKillsVehicleOfType(int,int) {
 
 
 // address=[0x1477b00]
-// Decompiled from // public: int __thiscall CStatistic::GetKillsVehicleOfType(int,int)const 
-int __thiscall CStatistic::GetKillsVehicleOfType(_DWORD *this, int a2, int a3)
-
+// Decompiled from int __thiscall CStatistic::GetKillsVehicleOfType(_DWORD *this, int a2, int a3)
 int  CStatistic::GetKillsVehicleOfType(int,int)const {
   
   return this[1098 * a2 + 913 + a3];
@@ -1124,7 +1042,6 @@ int  CStatistic::GetKillsVehicleOfType(int,int)const {
 
 // address=[0x1477b30]
 // Decompiled from int __thiscall CStatistic::GetKillsVehicle(CStatistic *this, int a2)
-
 int  CStatistic::GetKillsVehicle(int)const {
   
   return *((_DWORD *)this + 1098 * a2 + 980);
@@ -1133,7 +1050,6 @@ int  CStatistic::GetKillsVehicle(int)const {
 
 // address=[0x1477b50]
 // Decompiled from int __thiscall CStatistic::IncLossesVehicleOfType(CStatistic *this, int a2, int a3)
-
 void  CStatistic::IncLossesVehicleOfType(int,int) {
   
   int result; // eax
@@ -1156,9 +1072,7 @@ void  CStatistic::IncLossesVehicleOfType(int,int) {
 
 
 // address=[0x1477c10]
-// Decompiled from // public: int __thiscall CStatistic::GetLossesVehicleOfType(int,int)const 
-int __thiscall CStatistic::GetLossesVehicleOfType(_DWORD *this, int a2, int a3)
-
+// Decompiled from int __thiscall CStatistic::GetLossesVehicleOfType(_DWORD *this, int a2, int a3)
 int  CStatistic::GetLossesVehicleOfType(int,int)const {
   
   return this[1098 * a2 + 981 + a3];
@@ -1167,7 +1081,6 @@ int  CStatistic::GetLossesVehicleOfType(int,int)const {
 
 // address=[0x1477c40]
 // Decompiled from int __thiscall CStatistic::GetLossesVehicle(CStatistic *this, int a2)
-
 int  CStatistic::GetLossesVehicle(int)const {
   
   return *((_DWORD *)this + 1098 * a2 + 1048);
@@ -1176,7 +1089,6 @@ int  CStatistic::GetLossesVehicle(int)const {
 
 // address=[0x1477c60]
 // Decompiled from int __thiscall CStatistic::IncBuildingLosses(CStatistic *this, int a2)
-
 void  CStatistic::IncBuildingLosses(int) {
   
   int result; // eax
@@ -1189,7 +1101,6 @@ void  CStatistic::IncBuildingLosses(int) {
 
 // address=[0x1477ca0]
 // Decompiled from int __thiscall CStatistic::GetBuildingLosses(CStatistic *this, int a2)
-
 int  CStatistic::GetBuildingLosses(int) {
   
   return *((_DWORD *)this + 1098 * a2 + 912);
@@ -1198,7 +1109,6 @@ int  CStatistic::GetBuildingLosses(int) {
 
 // address=[0x1477cc0]
 // Decompiled from void __thiscall CStatistic::DecLandSize(CStatistic *this, int a2, int a3)
-
 void  CStatistic::DecLandSize(int,int) {
   
   ;
@@ -1207,7 +1117,6 @@ void  CStatistic::DecLandSize(int,int) {
 
 // address=[0x1477cd0]
 // Decompiled from void __thiscall CStatistic::IncLandSize(CStatistic *this, int a2, int a3)
-
 void  CStatistic::IncLandSize(int,int) {
   
   ;
@@ -1216,7 +1125,6 @@ void  CStatistic::IncLandSize(int,int) {
 
 // address=[0x1477ce0]
 // Decompiled from int __thiscall CStatistic::GetLandSize(CStatistic *this, int a2)
-
 int  CStatistic::GetLandSize(int)const {
   
   return *((_DWORD *)this + 1098 * a2 + 744);
@@ -1225,7 +1133,6 @@ int  CStatistic::GetLandSize(int)const {
 
 // address=[0x1477d00]
 // Decompiled from int __thiscall CStatistic::GetMaxLandSize(CStatistic *this, int a2)
-
 int  CStatistic::GetMaxLandSize(int)const {
   
   return *((_DWORD *)this + 1098 * a2 + 1052);
@@ -1234,7 +1141,6 @@ int  CStatistic::GetMaxLandSize(int)const {
 
 // address=[0x1477d20]
 // Decompiled from int __thiscall CStatistic::GetLandSizePercent(CStatistic *this, int a2)
-
 int  CStatistic::GetLandSizePercent(int) {
   
   CStatistic::CalculateLandSize(this);
@@ -1244,7 +1150,6 @@ int  CStatistic::GetLandSizePercent(int) {
 
 // address=[0x1477d50]
 // Decompiled from void __thiscall CStatistic::SetOffenceStrength100(CStatistic *this, int a2, int a3)
-
 void  CStatistic::SetOffenceStrength100(int,int) {
   
   int v4; // [esp+8h] [ebp-4h]
@@ -1278,7 +1183,6 @@ void  CStatistic::SetOffenceStrength100(int,int) {
 
 // address=[0x1477e10]
 // Decompiled from int __thiscall CStatistic::UsedBuildingMaterial(CStatistic *this, int a2)
-
 int  CStatistic::UsedBuildingMaterial(int)const {
   
   if ( (a2 <= 0 || a2 >= 9)
@@ -1292,7 +1196,6 @@ int  CStatistic::UsedBuildingMaterial(int)const {
 
 // address=[0x1477e60]
 // Decompiled from int __thiscall CStatistic::GetTotalTowers(CStatistic *this, int a2)
-
 int  CStatistic::GetTotalTowers(int) {
   
   if ( (a2 <= 0 || a2 >= 9)
@@ -1306,7 +1209,6 @@ int  CStatistic::GetTotalTowers(int) {
 
 // address=[0x1477f00]
 // Decompiled from int __thiscall CStatistic::GetTotalMineProduction(CStatistic *this, int a2)
-
 int  CStatistic::GetTotalMineProduction(int) {
   
   if ( (a2 <= 0 || a2 >= 9)
@@ -1323,7 +1225,6 @@ int  CStatistic::GetTotalMineProduction(int) {
 
 // address=[0x1477fb0]
 // Decompiled from int __thiscall CStatistic::GetTotalFood(CStatistic *this, int a2)
-
 int  CStatistic::GetTotalFood(int) {
   
   if ( (a2 <= 0 || a2 >= 9)
@@ -1336,9 +1237,7 @@ int  CStatistic::GetTotalFood(int) {
 
 
 // address=[0x1478050]
-// Decompiled from // public: void __thiscall CStatistic::SetPlayerExitTime(int,unsigned int)
-int __thiscall CStatistic::SetPlayerExitTime(_DWORD *this, int a2, int a3)
-
+// Decompiled from int __thiscall CStatistic::SetPlayerExitTime(_DWORD *this, int a2, int a3)
 void  CStatistic::SetPlayerExitTime(int,unsigned int) {
   
   int result; // eax
@@ -1356,7 +1255,6 @@ void  CStatistic::SetPlayerExitTime(int,unsigned int) {
 
 // address=[0x14780a0]
 // Decompiled from int __thiscall CStatistic::GetPlayerExitTime(CStatistic *this, int a2)
-
 unsigned int  CStatistic::GetPlayerExitTime(int) {
   
   if ( (a2 <= 0 || a2 >= 9)
@@ -1370,7 +1268,6 @@ unsigned int  CStatistic::GetPlayerExitTime(int) {
 
 // address=[0x14780f0]
 // Decompiled from int __thiscall CStatistic::UpdateStartStatistic(CStatistic *this)
-
 void  CStatistic::UpdateStartStatistic(void) {
   
   int result; // eax
@@ -1410,7 +1307,6 @@ void  CStatistic::UpdateStartStatistic(void) {
 
 // address=[0x1478330]
 // Decompiled from _DWORD *__thiscall CStatistic::FillExtraInfo(CStatistic *this)
-
 void  CStatistic::FillExtraInfo(void) {
   
   int v1; // esi
@@ -1518,7 +1414,6 @@ void  CStatistic::FillExtraInfo(void) {
 
 // address=[0x1478720]
 // Decompiled from _DWORD *CStatistic::FillEconomyGameMenu()
-
 static void __cdecl CStatistic::FillEconomyGameMenu(class CInfoExchange *,bool,bool) {
   
   CEvn_Event *v1; // [esp+8h] [ebp-40h]
@@ -1552,7 +1447,6 @@ static void __cdecl CStatistic::FillEconomyGameMenu(class CInfoExchange *,bool,b
 
 // address=[0x1478890]
 // Decompiled from void *__thiscall CStatistic::FreezeEcoStatistic(CStatistic *this)
-
 void  CStatistic::FreezeEcoStatistic(void) {
   
   void *result; // eax
@@ -1570,7 +1464,6 @@ void  CStatistic::FreezeEcoStatistic(void) {
 
 // address=[0x147a280]
 // Decompiled from int __thiscall CStatistic::DefenceStrength100(CStatistic *this, int a2)
-
 int  CStatistic::DefenceStrength100(int)const {
   
   if ( (a2 < 1 || a2 > 8)
@@ -1588,7 +1481,6 @@ int  CStatistic::DefenceStrength100(int)const {
 
 // address=[0x147a3b0]
 // Decompiled from int __thiscall CStatistic::OffenceStrength100(CStatistic *this, int a2)
-
 int  CStatistic::OffenceStrength100(int)const {
   
   if ( (a2 < 1 || a2 > 8)
@@ -1606,7 +1498,6 @@ int  CStatistic::OffenceStrength100(int)const {
 
 // address=[0x14aa6b0]
 // Decompiled from int __thiscall CStatistic::CStatistic(int this, struct boost::exception_detail::clone_base *a2)
-
  CStatistic::CStatistic(class CStatistic const &) {
   
   IS4ChunkObject::IS4ChunkObject((boost::exception_detail::clone_base *)this, a2);
@@ -1618,7 +1509,6 @@ int  CStatistic::OffenceStrength100(int)const {
 
 // address=[0x1592160]
 // Decompiled from int __thiscall CStatistic::DefenceStrength256(CStatistic *this, int a2)
-
 int  CStatistic::DefenceStrength256(int)const {
   
   if ( (a2 < 1 || a2 > 8)
@@ -1636,7 +1526,6 @@ int  CStatistic::DefenceStrength256(int)const {
 
 // address=[0x1592220]
 // Decompiled from int __thiscall CStatistic::OffenceStrength256(CStatistic *this, int a2)
-
 int  CStatistic::OffenceStrength256(int)const {
   
   if ( (a2 < 1 || a2 > 8)
@@ -1654,7 +1543,6 @@ int  CStatistic::OffenceStrength256(int)const {
 
 // address=[0x160db70]
 // Decompiled from CStatistic *__thiscall CStatistic::SetDontShowLastNPlayers(CStatistic *this, int a2)
-
 void  CStatistic::SetDontShowLastNPlayers(int) {
   
   CStatistic *result; // eax
@@ -1667,7 +1555,6 @@ void  CStatistic::SetDontShowLastNPlayers(int) {
 
 // address=[0x1478900]
 // Decompiled from int __thiscall CStatistic::CalcPlayerOffenceStrengthBaseValues(CStatistic *this)
-
 void  CStatistic::CalcPlayerOffenceStrengthBaseValues(void) {
   
   int result; // eax
@@ -1704,7 +1591,6 @@ void  CStatistic::CalcPlayerOffenceStrengthBaseValues(void) {
 
 // address=[0x1478a00]
 // Decompiled from void __thiscall CStatistic::UpdateFightingStrength(CStatistic *this, int a2, unsigned int a3, int a4, int a5)
-
 void  CStatistic::UpdateFightingStrength(int,int,int,int) {
   
   char *BuildingInfo; // [esp+10h] [ebp-8h]
@@ -1751,7 +1637,6 @@ void  CStatistic::UpdateFightingStrength(int,int,int,int) {
 
 // address=[0x1478b20]
 // Decompiled from int __thiscall CStatistic::CalculateFightingStrengths(CStatistic *this)
-
 void  CStatistic::CalculateFightingStrengths(void) {
   
   int result; // eax
@@ -1771,7 +1656,6 @@ void  CStatistic::CalculateFightingStrengths(void) {
 
 // address=[0x1478b70]
 // Decompiled from int __thiscall CStatistic::CalculateLandSize(CStatistic *this)
-
 void  CStatistic::CalculateLandSize(void) {
   
   int result; // eax
@@ -1797,7 +1681,6 @@ void  CStatistic::CalculateLandSize(void) {
 
 // address=[0x1478c50]
 // Decompiled from int __thiscall CStatistic::CalculateMana(CStatistic *this)
-
 void  CStatistic::CalculateMana(void) {
   
   int result; // eax

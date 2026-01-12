@@ -4,7 +4,6 @@
 
 // address=[0x1315360]
 // Decompiled from char __thiscall CGenericSettlerIterator::Init(CGenericSettlerIterator *this, int a2, int a3, int a4)
-
 bool  CGenericSettlerIterator::Init(int,int,int) {
   
   CSettlerIteratorBase::Init((CGenericSettlerIterator *)((char *)this + 20), 0);
@@ -27,7 +26,6 @@ bool  CGenericSettlerIterator::Init(int,int,int) {
 
 // address=[0x13153d0]
 // Decompiled from int __thiscall CGenericSettlerIterator::FirstSettler(CGenericSettlerIterator *this)
-
 int  CGenericSettlerIterator::FirstSettler(void) {
   
   int v2; // eax
@@ -55,7 +53,6 @@ int  CGenericSettlerIterator::FirstSettler(void) {
 
 // address=[0x1315450]
 // Decompiled from int __thiscall CGenericSettlerIterator::NextSettler(CGenericSettlerIterator *this)
-
 int  CGenericSettlerIterator::NextSettler(void) {
   
   int v1; // eax
@@ -87,9 +84,7 @@ int  CGenericSettlerIterator::NextSettler(void) {
 
 
 // address=[0x1315520]
-// Decompiled from // public: int __thiscall CGenericSettlerIterator::NextSettlerIfCurrentIsNotValid(void)
-int __thiscall CGenericSettlerIterator::NextSettlerIfCurrentIsNotValid(_DWORD *this)
-
+// Decompiled from int __thiscall CGenericSettlerIterator::NextSettlerIfCurrentIsNotValid(_DWORD *this)
 int  CGenericSettlerIterator::NextSettlerIfCurrentIsNotValid(void) {
   
   if ( CSettlerIteratorBase::SettlerValid((CSettlerIteratorBase *)(this + 5), this[6]) )
@@ -100,9 +95,7 @@ int  CGenericSettlerIterator::NextSettlerIfCurrentIsNotValid(void) {
 
 
 // address=[0x1315560]
-// Decompiled from // public: int __thiscall CGenericSettlerIterator::NextSettlerOrFirstIfCurrentIsEndOfList(void)
-int __thiscall CGenericSettlerIterator::NextSettlerOrFirstIfCurrentIsEndOfList(CGenericSettlerIterator *this)
-
+// Decompiled from int __thiscall CGenericSettlerIterator::NextSettlerOrFirstIfCurrentIsEndOfList(CGenericSettlerIterator *this)
 int  CGenericSettlerIterator::NextSettlerOrFirstIfCurrentIsEndOfList(void) {
   
   if ( *((_DWORD *)this + 6) )
@@ -114,7 +107,6 @@ int  CGenericSettlerIterator::NextSettlerOrFirstIfCurrentIsEndOfList(void) {
 
 // address=[0x13171b0]
 // Decompiled from CGenericSettlerIterator *__thiscall CGenericSettlerIterator::CGenericSettlerIterator(CGenericSettlerIterator *this)
-
  CGenericSettlerIterator::CGenericSettlerIterator(void) {
   
   CPlayerIterator::CPlayerIterator(this);

@@ -4,7 +4,6 @@
 
 // address=[0x147cd30]
 // Decompiled from int __cdecl CTransportMgr::GetNearestEntity(int a1, int a2, int a3, int a4, int a5)
-
 static class IMovingEntity * __cdecl CTransportMgr::GetNearestEntity(int,int,int,int,int) {
   
   int v5; // eax
@@ -130,16 +129,7 @@ static class IMovingEntity * __cdecl CTransportMgr::GetNearestEntity(int,int,int
 
 
 // address=[0x147d080]
-// Decompiled from // public: static class IMovingEntity * __cdecl CTransportMgr::GetNearestTransportEntity(int,int,int,int,int,int,bool)
-unsigned __int8 *__cdecl CTransportMgr::GetNearestTransportEntity(
-        int a1,
-        int a2,
-        int a3,
-        int a4,
-        int a5,
-        int a6,
-        char a7)
-
+// Decompiled from unsigned __int8 *__cdecl CTransportMgr::GetNearestTransportEntity(  int a1,  int a2,  int a3,  int a4,  int a5,  int a6,  char a7)
 static class IMovingEntity * __cdecl CTransportMgr::GetNearestTransportEntity(int,int,int,int,int,int,bool) {
   
   int v8; // eax
@@ -186,9 +176,7 @@ static class IMovingEntity * __cdecl CTransportMgr::GetNearestTransportEntity(in
 
 
 // address=[0x147d210]
-// Decompiled from // public: static class CSettler * __cdecl CTransportMgr::GetNearestCarrier(int,int,int)
-unsigned __int8 *__cdecl CTransportMgr::GetNearestCarrier(int a1, int a2, int a3)
-
+// Decompiled from unsigned __int8 *__cdecl CTransportMgr::GetNearestCarrier(int a1, int a2, int a3)
 static class CSettler * __cdecl CTransportMgr::GetNearestCarrier(int,int,int) {
   
   int v3; // eax
@@ -213,7 +201,6 @@ static class CSettler * __cdecl CTransportMgr::GetNearestCarrier(int,int,int) {
 
 // address=[0x147d2a0]
 // Decompiled from unsigned __int8 *__cdecl CTransportMgr::GetVehicleCargoLoader(int a1, int a2, int a3, int a4, int a5, int a6, int *a7)
-
 static class IMovingEntity * __cdecl CTransportMgr::GetVehicleCargoLoader(int,int,int,int,int,int,int &) {
   
   int v8; // eax

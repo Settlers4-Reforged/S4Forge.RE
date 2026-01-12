@@ -4,7 +4,6 @@
 
 // address=[0x15e7bb0]
 // Decompiled from int CTiling::BlockBorder()
-
 static void __cdecl CTiling::BlockBorder(void) {
   
   int result; // eax
@@ -48,7 +47,6 @@ static void __cdecl CTiling::BlockBorder(void) {
 
 // address=[0x15e7cd0]
 // Decompiled from int CTiling::PrepareReCalculate()
-
 static void __cdecl CTiling::PrepareReCalculate(void) {
   
   CTile *v0; // eax
@@ -74,7 +72,6 @@ static void __cdecl CTiling::PrepareReCalculate(void) {
 
 // address=[0x15e7d80]
 // Decompiled from void CTiling::CalcSquareComponents()
-
 static void __cdecl CTiling::CalcSquareComponents(void) {
   
   int v0; // [esp+14h] [ebp-38h]
@@ -195,7 +192,6 @@ static void __cdecl CTiling::CalcSquareComponents(void) {
 
 // address=[0x15e81a0]
 // Decompiled from int __cdecl CTiling::CalcSquareTiles(int a1)
-
 static void __cdecl CTiling::CalcSquareTiles(enum T_TILING_TYPE) {
   
   int v1; // eax
@@ -269,7 +265,6 @@ static void __cdecl CTiling::CalcSquareTiles(enum T_TILING_TYPE) {
 
 // address=[0x15f3f30]
 // Decompiled from CTiling *__thiscall CTiling::CTiling(CTiling *this)
-
  CTiling::CTiling(void) {
   
   ITiling::ITiling(this);
@@ -280,7 +275,6 @@ static void __cdecl CTiling::CalcSquareTiles(enum T_TILING_TYPE) {
 
 // address=[0x15f4600]
 // Decompiled from int __cdecl CTiling::GetTilingType(int a1)
-
 static enum T_TILING_TYPE __cdecl CTiling::GetTilingType(int) {
   
   return CTile::TilingType(&CTiles::m_cTiles[a1]);
@@ -289,7 +283,6 @@ static enum T_TILING_TYPE __cdecl CTiling::GetTilingType(int) {
 
 // address=[0x15f58b0]
 // Decompiled from __int16 __cdecl CTiling::SetTileId(int a1, int a2, __int16 a3)
-
 static void __cdecl CTiling::SetTileId(enum T_TILING_TYPE,int,int) {
   
   __int16 result; // ax
@@ -302,7 +295,6 @@ static void __cdecl CTiling::SetTileId(enum T_TILING_TYPE,int,int) {
 
 // address=[0x15f5940]
 // Decompiled from int __cdecl CTiling::TileId(int a1, int a2)
-
 static int __cdecl CTiling::TileId(enum T_TILING_TYPE,int) {
   
   return (unsigned __int16)(&ITiling::m_pTileIds)[a1][a2];
@@ -311,7 +303,6 @@ static int __cdecl CTiling::TileId(enum T_TILING_TYPE,int) {
 
 // address=[0x15e83e0]
 // Decompiled from int __cdecl CTiling::SearchForNearestTileElement(int a1, int a2, int a3)
-
 static int __cdecl CTiling::SearchForNearestTileElement(int,int,enum T_TILING_TYPE) {
   
   int v4; // [esp+0h] [ebp-30h]
@@ -373,7 +364,6 @@ static int __cdecl CTiling::SearchForNearestTileElement(int,int,enum T_TILING_TY
 
 // address=[0x15e85d0]
 // Decompiled from void CTiling::CalcAllTiles()
-
 static void __cdecl CTiling::CalcAllTiles(void) {
   
   int v0; // esi
@@ -429,7 +419,6 @@ static void __cdecl CTiling::CalcAllTiles(void) {
 
 // address=[0x15e8780]
 // Decompiled from int CTiling::CalcAllTileLinks()
-
 static void __cdecl CTiling::CalcAllTileLinks(void) {
   
   int v0; // eax
@@ -522,7 +511,6 @@ static void __cdecl CTiling::CalcAllTileLinks(void) {
 
 // address=[0x15e8aa0]
 // Decompiled from void __cdecl CTiling::CalcSectorIds(bool a1)
-
 static void __cdecl CTiling::CalcSectorIds(bool) {
   
   int **v1; // eax
@@ -587,7 +575,6 @@ static void __cdecl CTiling::CalcSectorIds(bool) {
 
 // address=[0x15e8ca0]
 // Decompiled from int __cdecl CTiling::CalcNotifyAll(bool a1)
-
 static void __cdecl CTiling::CalcNotifyAll(bool) {
   
   int result; // eax
@@ -622,7 +609,6 @@ static void __cdecl CTiling::CalcNotifyAll(bool) {
 
 // address=[0x15e8d50]
 // Decompiled from int __cdecl CTiling::CalcTileLinks(int a1)
-
 static void __cdecl CTiling::CalcTileLinks(int) {
   
   int v1; // eax
@@ -651,7 +637,6 @@ static void __cdecl CTiling::CalcTileLinks(int) {
 
 // address=[0x15e8e20]
 // Decompiled from int __cdecl CTiling::RecalcTileLinks(int a1)
-
 static void __cdecl CTiling::RecalcTileLinks(int) {
   
   int v1; // eax
@@ -690,7 +675,6 @@ static void __cdecl CTiling::RecalcTileLinks(int) {
 
 // address=[0x15e8f40]
 // Decompiled from void __cdecl CTiling::ChangeTileIds(int a1, int a2, int a3)
-
 static void __cdecl CTiling::ChangeTileIds(enum T_TILING_TYPE,int,int) {
   
   struct CTile *v3; // eax
@@ -744,7 +728,6 @@ static void __cdecl CTiling::ChangeTileIds(enum T_TILING_TYPE,int,int) {
 
 // address=[0x15e9100]
 // Decompiled from int *__cdecl CTiling::SplitTile(int a1, int a2)
-
 static int __cdecl CTiling::SplitTile(enum T_TILING_TYPE,int) {
   
   int **v2; // eax
@@ -765,7 +748,6 @@ static int __cdecl CTiling::SplitTile(enum T_TILING_TYPE,int) {
 
 // address=[0x15e9180]
 // Decompiled from char __cdecl CTiling::CheckBorderLink(int a1, int a2)
-
 static bool __cdecl CTiling::CheckBorderLink(int,int) {
   
   struct CTile *v2; // eax
@@ -839,7 +821,6 @@ static bool __cdecl CTiling::CheckBorderLink(int,int) {
 
 // address=[0x15e93e0]
 // Decompiled from void CTiling::NUpdateLinksAndCheckTileSpliting()
-
 static void __cdecl CTiling::NUpdateLinksAndCheckTileSpliting(void) {
   
   int v0; // eax
@@ -910,7 +891,6 @@ static void __cdecl CTiling::NUpdateLinksAndCheckTileSpliting(void) {
 
 // address=[0x15e95e0]
 // Decompiled from int __cdecl CTiling::CalcIntLinkList(CIntLinkList *a1, int a2, int a3)
-
 static int __cdecl CTiling::CalcIntLinkList(class CIntLinkList &,enum T_TILING_TYPE,int) {
   
   int v3; // eax
@@ -985,7 +965,6 @@ static int __cdecl CTiling::CalcIntLinkList(class CIntLinkList &,enum T_TILING_T
 
 // address=[0x15e98c0]
 // Decompiled from _BYTE *CTiling::NCheckTileSplit()
-
 static void __cdecl CTiling::NCheckTileSplit(void) {
   
   _BYTE *result; // eax
@@ -1034,7 +1013,6 @@ static void __cdecl CTiling::NCheckTileSplit(void) {
 
 // address=[0x15e9a60]
 // Decompiled from void CTiling::NCheckSectorSplit()
-
 static void __cdecl CTiling::NCheckSectorSplit(void) {
   
   int **v0; // eax
@@ -1107,7 +1085,6 @@ static void __cdecl CTiling::NCheckSectorSplit(void) {
 
 // address=[0x15e9c30]
 // Decompiled from void __cdecl CTiling::NCalcNewTileId(DWORD a1)
-
 static void __cdecl CTiling::NCalcNewTileId(int) {
   
   struct CTile *v1; // eax
@@ -1154,7 +1131,6 @@ static void __cdecl CTiling::NCalcNewTileId(int) {
 
 // address=[0x15e9d80]
 // Decompiled from void __cdecl CTiling::NCheckSectorMerge(int a1)
-
 static void __cdecl CTiling::NCheckSectorMerge(int) {
   
   int **v1; // eax
@@ -1181,7 +1157,6 @@ static void __cdecl CTiling::NCheckSectorMerge(int) {
 
 // address=[0x15e9e00]
 // Decompiled from void __cdecl CTiling::NCheckEcoSectorJoin(int a1)
-
 static void __cdecl CTiling::NCheckEcoSectorJoin(int) {
   
   int **v1; // eax
@@ -1231,7 +1206,6 @@ static void __cdecl CTiling::NCheckEcoSectorJoin(int) {
 
 // address=[0x15e9f60]
 // Decompiled from void CTiling::NCheckSectorAndEcoSectorDelete()
-
 static void __cdecl CTiling::NCheckSectorAndEcoSectorDelete(void) {
   
   int **v0; // eax
@@ -1272,7 +1246,6 @@ static void __cdecl CTiling::NCheckSectorAndEcoSectorDelete(void) {
 
 // address=[0x15ea0d0]
 // Decompiled from void CTiling::NRemoveElementFromTile()
-
 static void __cdecl CTiling::NRemoveElementFromTile(void) {
   
   int v0; // esi
@@ -1302,7 +1275,6 @@ static void __cdecl CTiling::NRemoveElementFromTile(void) {
 
 // address=[0x15ea1b0]
 // Decompiled from void __cdecl CTiling::NCheckEcoSectorSplit(int a1)
-
 static void __cdecl CTiling::NCheckEcoSectorSplit(int) {
   
   int **v1; // eax
@@ -1419,7 +1391,6 @@ static void __cdecl CTiling::NCheckEcoSectorSplit(int) {
 
 // address=[0x15ea530]
 // Decompiled from void CTiling::NCheckEcoSectorDelete()
-
 static void __cdecl CTiling::NCheckEcoSectorDelete(void) {
   
   int **v0; // eax
@@ -1448,7 +1419,6 @@ static void __cdecl CTiling::NCheckEcoSectorDelete(void) {
 
 // address=[0x15ea600]
 // Decompiled from int __cdecl CTiling::NCheckEcoSectorMerge(int a1, int a2)
-
 static void __cdecl CTiling::NCheckEcoSectorMerge(int,int) {
   
   int **v2; // eax
@@ -1510,7 +1480,6 @@ static void __cdecl CTiling::NCheckEcoSectorMerge(int,int) {
 
 // address=[0x15ea7c0]
 // Decompiled from void CTiling::NCheckSectorJoin()
-
 static void __cdecl CTiling::NCheckSectorJoin(void) {
   
   int **v0; // eax
@@ -1553,7 +1522,6 @@ static void __cdecl CTiling::NCheckSectorJoin(void) {
 
 // address=[0x15ea8c0]
 // Decompiled from int CTiling::NCheckTileMerge()
-
 static void __cdecl CTiling::NCheckTileMerge(void) {
   
   int result; // eax
@@ -1667,7 +1635,6 @@ static void __cdecl CTiling::NCheckTileMerge(void) {
 
 // address=[0x15eabd0]
 // Decompiled from int __cdecl CTiling::MergeTiles(int a1, int *a2)
-
 static void __cdecl CTiling::MergeTiles(int,int) {
   
   int v2; // esi
@@ -1736,7 +1703,6 @@ static void __cdecl CTiling::MergeTiles(int,int) {
 
 // address=[0x15eade0]
 // Decompiled from void __cdecl CTiling::MergeSectors(int a1, int a2)
-
 static void __cdecl CTiling::MergeSectors(int,int) {
   
   int **v2; // eax
@@ -1755,7 +1721,6 @@ static void __cdecl CTiling::MergeSectors(int,int) {
 
 // address=[0x15eae40]
 // Decompiled from int __cdecl CTiling::MergeEcoSectors(int a1, int a2)
-
 static int __cdecl CTiling::MergeEcoSectors(int,int) {
   
   int **v2; // eax
@@ -1787,7 +1752,6 @@ static int __cdecl CTiling::MergeEcoSectors(int,int) {
 
 // address=[0x15eaf00]
 // Decompiled from int __cdecl CTiling::WalkTileChangeTileId(int a1, int a2)
-
 static void __cdecl CTiling::WalkTileChangeTileId(int,int) {
   
   int TilingType; // esi
@@ -1848,7 +1812,6 @@ static void __cdecl CTiling::WalkTileChangeTileId(int,int) {
 
 // address=[0x15eb0e0]
 // Decompiled from int __cdecl CTiling::WalkTileNotifyEcoSectorChange(int a1, int a2, int a3)
-
 static void __cdecl CTiling::WalkTileNotifyEcoSectorChange(int,int,int) {
   
   int **v3; // eax
@@ -1913,7 +1876,6 @@ static void __cdecl CTiling::WalkTileNotifyEcoSectorChange(int,int,int) {
 
 // address=[0x15eb310]
 // Decompiled from int __cdecl CTiling::WalkTilesSetVisited(int a1)
-
 static void __cdecl CTiling::WalkTilesSetVisited(int) {
   
   int **v1; // eax
@@ -1970,7 +1932,6 @@ static void __cdecl CTiling::WalkTilesSetVisited(int) {
 
 // address=[0x15eb4b0]
 // Decompiled from int __cdecl CTiling::WalkTilesChangeSector(int a1, int a2)
-
 static void __cdecl CTiling::WalkTilesChangeSector(int,int) {
   
   int **v2; // eax
@@ -2035,7 +1996,6 @@ static void __cdecl CTiling::WalkTilesChangeSector(int,int) {
 
 // address=[0x15eb690]
 // Decompiled from int __cdecl CTiling::WalkTilesSectorSetVisited(int a1)
-
 static void __cdecl CTiling::WalkTilesSectorSetVisited(int) {
   
   int **v1; // eax
@@ -2092,7 +2052,6 @@ static void __cdecl CTiling::WalkTilesSectorSetVisited(int) {
 
 // address=[0x15eb840]
 // Decompiled from int __cdecl CTiling::WalkTilesEcoSectorSetVisited(int a1)
-
 static void __cdecl CTiling::WalkTilesEcoSectorSetVisited(int) {
   
   int **v1; // eax
@@ -2149,7 +2108,6 @@ static void __cdecl CTiling::WalkTilesEcoSectorSetVisited(int) {
 
 // address=[0x15eb9f0]
 // Decompiled from int __cdecl CTiling::WalkTilesEcoSectorSetVisitedAndCountSize(int a1)
-
 static int __cdecl CTiling::WalkTilesEcoSectorSetVisitedAndCountSize(int) {
   
   int **v1; // eax
@@ -2231,7 +2189,6 @@ static int __cdecl CTiling::WalkTilesEcoSectorSetVisitedAndCountSize(int) {
 
 // address=[0x15ebcb0]
 // Decompiled from int __cdecl CTiling::WalkTilesChangeEcoSector(int a1, int a2)
-
 static void __cdecl CTiling::WalkTilesChangeEcoSector(int,int) {
   
   int **v2; // eax
@@ -2297,7 +2254,6 @@ static void __cdecl CTiling::WalkTilesChangeEcoSector(int,int) {
 
 // address=[0x15ebea0]
 // Decompiled from int __cdecl CTiling::WalkTilesChangeEcoSectorAndNotify(int a1, int a2)
-
 static void __cdecl CTiling::WalkTilesChangeEcoSectorAndNotify(int,int) {
   
   int **v2; // eax
@@ -2364,7 +2320,6 @@ static void __cdecl CTiling::WalkTilesChangeEcoSectorAndNotify(int,int) {
 
 // address=[0x15ec0c0]
 // Decompiled from int __cdecl CTiling::CalculateBorderstoneBit(unsigned int a1, unsigned int a2)
-
 static void __cdecl CTiling::CalculateBorderstoneBit(int,int) {
   
   int v3; // [esp+0h] [ebp-18h]
@@ -2401,7 +2356,6 @@ static void __cdecl CTiling::CalculateBorderstoneBit(int,int) {
 
 // address=[0x15ec1c0]
 // Decompiled from int __cdecl CTiling::CalculateBorderstoneBits7(unsigned int a1, unsigned int a2)
-
 static void __cdecl CTiling::CalculateBorderstoneBits7(int,int) {
   
   int result; // eax
@@ -2424,7 +2378,6 @@ static void __cdecl CTiling::CalculateBorderstoneBits7(int,int) {
 
 // address=[0x15ec260]
 // Decompiled from int CTiling::ClearBorderstoneBits()
-
 static void __cdecl CTiling::ClearBorderstoneBits(void) {
   
   int result; // eax
@@ -2441,7 +2394,6 @@ static void __cdecl CTiling::ClearBorderstoneBits(void) {
 
 // address=[0x15ec2b0]
 // Decompiled from char *CTiling::CalculateBorderstoneBits()
-
 static void __cdecl CTiling::CalculateBorderstoneBits(void) {
   
   Squares *v0; // eax
@@ -2480,7 +2432,6 @@ static void __cdecl CTiling::CalculateBorderstoneBits(void) {
 
 // address=[0x15ec3a0]
 // Decompiled from char __cdecl CTiling::BlockedLandSurroundingCheck(int a1, int a2)
-
 static void __cdecl CTiling::BlockedLandSurroundingCheck(int,int) {
   
   Grid *v2; // eax
@@ -2682,16 +2633,7 @@ static void __cdecl CTiling::BlockedLandSurroundingCheck(int,int) {
 
 
 // address=[0x15ecb50]
-// Decompiled from int __thiscall CTiling::Init(
-        CTiling *this,
-        int a2,
-        struct T_GFX_MAP_ELEMENT *a3,
-        unsigned __int8 *a4,
-        unsigned __int16 *a5,
-        unsigned __int16 *a6,
-        unsigned __int8 *a7,
-        bool a8)
-
+// Decompiled from int __thiscall CTiling::Init(  CTiling *this,  int a2,  struct T_GFX_MAP_ELEMENT *a3,  unsigned __int8 *a4,  unsigned __int16 *a5,  unsigned __int16 *a6,  unsigned __int8 *a7,  bool a8)
 void  CTiling::Init(int,struct T_GFX_MAP_ELEMENT *,unsigned char *,unsigned short *,unsigned short *,unsigned char *,bool) {
   
   double v8; // st7
@@ -2781,7 +2723,6 @@ void  CTiling::Init(int,struct T_GFX_MAP_ELEMENT *,unsigned char *,unsigned shor
 
 // address=[0x15ece80]
 // Decompiled from void __thiscall CTiling::Done(CTiling *this)
-
 void  CTiling::Done(void) {
   
   const char *v1; // eax
@@ -2822,7 +2763,6 @@ void  CTiling::Done(void) {
 
 // address=[0x15ecfe0]
 // Decompiled from int __thiscall CTiling::Update(CTiling *this)
-
 void  CTiling::Update(void) {
   
   if ( CTiling::m_iInitialized )
@@ -2841,7 +2781,6 @@ void  CTiling::Update(void) {
 
 // address=[0x15ed050]
 // Decompiled from void __thiscall CTiling::SetBlockedLand(CTiling *this, unsigned int a2, unsigned int a3)
-
 void  CTiling::SetBlockedLand(int,int) {
   
   int v3; // eax
@@ -2902,7 +2841,6 @@ void  CTiling::SetBlockedLand(int,int) {
 
 // address=[0x15ed210]
 // Decompiled from int __stdcall sub_19ED210(int a1, int a2)
-
 void  CTiling::SetBlockedWater(int,int) {
   
   int result; // eax
@@ -2948,7 +2886,6 @@ void  CTiling::SetBlockedWater(int,int) {
 
 // address=[0x15ed320]
 // Decompiled from void __thiscall CTiling::ClearBlockedLand(CTiling *this, unsigned int a2, unsigned int a3)
-
 void  CTiling::ClearBlockedLand(int,int) {
   
   int v3; // [esp+0h] [ebp-28h]
@@ -3019,7 +2956,6 @@ void  CTiling::ClearBlockedLand(int,int) {
 
 // address=[0x15ed510]
 // Decompiled from char __thiscall CTiling::ClearBlockedWater(CTiling *this, int a2, int a3)
-
 void  CTiling::ClearBlockedWater(int,int) {
   
   int v3; // eax
@@ -3075,7 +3011,6 @@ void  CTiling::ClearBlockedWater(int,int) {
 
 // address=[0x15ed660]
 // Decompiled from void __thiscall CTiling::ChangeOwner(CTiling *this, unsigned int a2, unsigned int a3, int a4)
-
 void  CTiling::ChangeOwner(int,int,int) {
   
   int **v4; // eax
@@ -3217,7 +3152,6 @@ void  CTiling::ChangeOwner(int,int,int) {
 
 // address=[0x15eda70]
 // Decompiled from void __thiscall CTiling::SetBlockingEx(void *this, int a2, unsigned int a3, unsigned int a4)
-
 void  CTiling::SetBlockingEx(enum T_TILING_TYPE,int,int) {
   
   CTile *v4; // eax
@@ -3306,7 +3240,6 @@ void  CTiling::SetBlockingEx(enum T_TILING_TYPE,int,int) {
 
 // address=[0x15edcf0]
 // Decompiled from void __thiscall CTiling::ClearBlockingEx(NeighborAnalysis *this, int a2, unsigned int a3, unsigned int a4)
-
 void  CTiling::ClearBlockingEx(enum T_TILING_TYPE,int,int) {
   
   int v4; // eax
@@ -3375,7 +3308,6 @@ void  CTiling::ClearBlockingEx(enum T_TILING_TYPE,int,int) {
 
 // address=[0x15eded0]
 // Decompiled from int __thiscall CTiling::SectorSize(CTiling *this, int a2)
-
 int  CTiling::SectorSize(int)const {
   
   int v3; // [esp+4h] [ebp-4h]
@@ -3393,7 +3325,6 @@ int  CTiling::SectorSize(int)const {
 
 // address=[0x15edf50]
 // Decompiled from int __thiscall CTiling::EcoSectorSize(CTiling *this, int a2)
-
 int  CTiling::EcoSectorSize(int)const {
   
   if ( a2 < 0 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4762, "_iEcoSectorId >= 0") == 1 )
@@ -3411,7 +3342,6 @@ int  CTiling::EcoSectorSize(int)const {
 
 // address=[0x15edff0]
 // Decompiled from int __thiscall CTiling::EcoSectorPackedPosition(CTiling *this, int a2)
-
 int  CTiling::EcoSectorPackedPosition(int)const {
   
   int v2; // eax
@@ -3539,7 +3469,6 @@ int  CTiling::EcoSectorPackedPosition(int)const {
 
 // address=[0x15ee310]
 // Decompiled from int __thiscall CTiling::NumberOfWorldElements(CTiling *this)
-
 int  CTiling::NumberOfWorldElements(void)const {
   
   int v3; // [esp+8h] [ebp-4h]
@@ -3554,7 +3483,6 @@ int  CTiling::NumberOfWorldElements(void)const {
 
 // address=[0x15ee340]
 // Decompiled from int __thiscall CTiling::NumberOfLandElements(CTiling *this)
-
 int  CTiling::NumberOfLandElements(void)const {
   
   return CTilingWorld::WorldNumberOfElements() - CTiling::m_iNumberOfWaterElements;
@@ -3563,7 +3491,6 @@ int  CTiling::NumberOfLandElements(void)const {
 
 // address=[0x15ee360]
 // Decompiled from int __thiscall CTiling::NumberOfWaterElements(CTiling *this)
-
 int  CTiling::NumberOfWaterElements(void)const {
   
   return CTiling::m_iNumberOfWaterElements;
@@ -3572,7 +3499,6 @@ int  CTiling::NumberOfWaterElements(void)const {
 
 // address=[0x15ee370]
 // Decompiled from int __thiscall CTiling::NumberOfOwnedLandElements(CTiling *this, unsigned int a2)
-
 int  CTiling::NumberOfOwnedLandElements(int)const {
   
   if ( a2 >= 9 )
@@ -3584,7 +3510,6 @@ int  CTiling::NumberOfOwnedLandElements(int)const {
 
 // address=[0x15ee3a0]
 // Decompiled from char __thiscall CTiling::AreNeighborSquaresConnectedViaLand(CTiling *this, int a2, int a3, int a4, int a5)
-
 bool  CTiling::AreNeighborSquaresConnectedViaLand(int,int,int,int) {
   
   int j; // eax
@@ -3628,14 +3553,7 @@ bool  CTiling::AreNeighborSquaresConnectedViaLand(int,int,int,int) {
 
 
 // address=[0x15ee4e0]
-// Decompiled from char __thiscall CTiling::CheckFlagBits(
-        CTiling *this,
-        unsigned int a2,
-        unsigned int a3,
-        unsigned int a4,
-        const unsigned int *a5,
-        unsigned int a6)
-
+// Decompiled from char __thiscall CTiling::CheckFlagBits(  CTiling *this,  unsigned int a2,  unsigned int a3,  unsigned int a4,  const unsigned int *a5,  unsigned int a6)
 bool  CTiling::CheckFlagBits(int,int,unsigned int,unsigned int const *,unsigned int) {
   
   unsigned int v6; // ecx
@@ -3745,7 +3663,6 @@ bool  CTiling::CheckFlagBits(int,int,unsigned int,unsigned int const *,unsigned 
 
 // address=[0x15ee720]
 // Decompiled from int __cdecl CTiling::DbgCheckTileLinkList(int a1, int a2)
-
 static int __cdecl CTiling::DbgCheckTileLinkList(int,int) {
   
   const struct CTile *v2; // eax
@@ -3922,7 +3839,6 @@ LABEL_14:
 
 // address=[0x15eec10]
 // Decompiled from char __cdecl CTiling::DbgCheckTileLink(int a1, int a2)
-
 static bool __cdecl CTiling::DbgCheckTileLink(int,int) {
   
   const struct CTile *v2; // eax
@@ -3942,10 +3858,7 @@ static bool __cdecl CTiling::DbgCheckTileLink(int,int) {
 
 
 // address=[0x15eec90]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CTiling::DbgPrintTilingInfo(CTiling *this, int a2)
-
+// Decompiled from void __thiscall CTiling::DbgPrintTilingInfo(CTiling *this, int a2)
 void  CTiling::DbgPrintTilingInfo(int) {
   
   ;
@@ -3954,7 +3867,6 @@ void  CTiling::DbgPrintTilingInfo(int) {
 
 // address=[0x15eeca0]
 // Decompiled from int __thiscall CTiling::DbgCheckTiling(CTiling *this, char a2)
-
 int  CTiling::DbgCheckTiling(int) {
   
   int v2; // eax
@@ -4366,7 +4278,6 @@ int  CTiling::DbgCheckTiling(int) {
 
 // address=[0x15efc00]
 // Decompiled from int __thiscall CTiling::DbgReCalculate(CTiling *this, int a2)
-
 void  CTiling::DbgReCalculate(int) {
   
   int v3; // [esp+0h] [ebp-1Ch]
@@ -4400,7 +4311,6 @@ void  CTiling::DbgReCalculate(int) {
 
 // address=[0x15efcc0]
 // Decompiled from int __thiscall CTiling::DbgCheckBlocking(CTiling *this, int a2)
-
 void  CTiling::DbgCheckBlocking(int) {
   
   int v2; // eax
@@ -4516,7 +4426,6 @@ void  CTiling::DbgCheckBlocking(int) {
 
 // address=[0x15f00e0]
 // Decompiled from int __cdecl CTiling::DbgPrintLinkList(const struct CLinkList *a1)
-
 static void __cdecl CTiling::DbgPrintLinkList(class CLinkList const &) {
   
   unsigned __int16 *v1; // eax
@@ -4551,7 +4460,6 @@ static void __cdecl CTiling::DbgPrintLinkList(class CLinkList const &) {
 
 // address=[0x15f0220]
 // Decompiled from int CTiling::DbgCheckSectors()
-
 static int __cdecl CTiling::DbgCheckSectors(int) {
   
   int v0; // eax
@@ -4631,7 +4539,6 @@ static int __cdecl CTiling::DbgCheckSectors(int) {
 
 // address=[0x15f0520]
 // Decompiled from int CTiling::DbgCheckEcoSectors()
-
 static int __cdecl CTiling::DbgCheckEcoSectors(int) {
   
   int v0; // eax
@@ -4729,7 +4636,6 @@ static int __cdecl CTiling::DbgCheckEcoSectors(int) {
 
 // address=[0x15f0870]
 // Decompiled from int CTiling::DbgCheckTileSizes()
-
 static int __cdecl CTiling::DbgCheckTileSizes(int) {
   
   int v0; // eax
@@ -4775,7 +4681,6 @@ static int __cdecl CTiling::DbgCheckTileSizes(int) {
 
 // address=[0x15f41e0]
 // Decompiled from void __cdecl CTiling::CalcSquarePrepareCatapult(int a1, int a2)
-
 static void __cdecl CTiling::CalcSquarePrepareCatapult(int,int) {
   
   CSquare::InitAndFillTypeMapCatapult((CSquare *)&dword_42F7C50, a1, a2);
@@ -4784,7 +4689,6 @@ static void __cdecl CTiling::CalcSquarePrepareCatapult(int,int) {
 
 // address=[0x15f4200]
 // Decompiled from void __cdecl CTiling::CalcSquarePrepareNormal(int a1, int a2)
-
 static void __cdecl CTiling::CalcSquarePrepareNormal(int,int) {
   
   CSquare::InitAndFillTypeMapNormal((CSquare *)&dword_42F7C50, a1, a2);
@@ -4793,7 +4697,6 @@ static void __cdecl CTiling::CalcSquarePrepareNormal(int,int) {
 
 // address=[0x15f4390]
 // Decompiled from int __cdecl CTiling::EcoSectorSizeEx(int a1)
-
 static int __cdecl CTiling::EcoSectorSizeEx(int) {
   
   int v2; // [esp+0h] [ebp-4h]
@@ -4816,7 +4719,6 @@ static int __cdecl CTiling::EcoSectorSizeEx(int) {
 
 // address=[0x15f4930]
 // Decompiled from bool __cdecl CTiling::IsValidOwnerId(unsigned int a1)
-
 static bool __cdecl CTiling::IsValidOwnerId(int) {
   
   return a1 <= 8;
@@ -4825,7 +4727,6 @@ static bool __cdecl CTiling::IsValidOwnerId(int) {
 
 // address=[0x15f4a90]
 // Decompiled from void __cdecl CTiling::NotifyChangeEcoSector(int a1, int a2, int a3, bool a4)
-
 static void __cdecl CTiling::NotifyChangeEcoSector(int,int,int,bool) {
   
   if ( a2 == a3 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 195, "_iOldEcoSectorId != _iNewEcoSectorId") == 1 )
@@ -4880,7 +4781,6 @@ static void __cdecl CTiling::NotifyChangeEcoSector(int,int,int,bool) {
 
 // address=[0x15f4ce0]
 // Decompiled from int CTiling::NotifyCreateCatapultSector()
-
 static int __cdecl CTiling::NotifyCreateCatapultSector(void) {
   
   return CSectors::NewSector((CSectors *)&CTiling::m_cSectors, 8u);
@@ -4889,7 +4789,6 @@ static int __cdecl CTiling::NotifyCreateCatapultSector(void) {
 
 // address=[0x15f4d00]
 // Decompiled from int __cdecl CTiling::NotifyCreateEcoSector(int a1, bool a2)
-
 static int __cdecl CTiling::NotifyCreateEcoSector(int,bool) {
   
   int EcoSector; // [esp+0h] [ebp-4h]
@@ -4921,7 +4820,6 @@ static int __cdecl CTiling::NotifyCreateEcoSector(int,bool) {
 
 // address=[0x15f4e10]
 // Decompiled from int CTiling::NotifyCreateSector()
-
 static int __cdecl CTiling::NotifyCreateSector(void) {
   
   return CSectors::NewSector((CSectors *)&CTiling::m_cSectors, 2u);
@@ -4930,7 +4828,6 @@ static int __cdecl CTiling::NotifyCreateSector(void) {
 
 // address=[0x15f4e30]
 // Decompiled from void __cdecl CTiling::NotifyDeleteEcoSector(int a1)
-
 static void __cdecl CTiling::NotifyDeleteEcoSector(int) {
   
   if ( a1 <= 0 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 178, (const char *)&dword_366FF60[1]) == 1 )
@@ -4949,7 +4846,6 @@ static void __cdecl CTiling::NotifyDeleteEcoSector(int) {
 
 // address=[0x15f4f00]
 // Decompiled from CSectors *__cdecl CTiling::NotifyDeleteSector(CSectors *a1)
-
 static void __cdecl CTiling::NotifyDeleteSector(int) {
   
   return CSectors::DeleteSector((CSectors *)&CTiling::m_cSectors, a1);
@@ -4958,7 +4854,6 @@ static void __cdecl CTiling::NotifyDeleteSector(int) {
 
 // address=[0x15f4f20]
 // Decompiled from CEcoSectorMgr *__cdecl CTiling::NotifyEcoSectorMerge(int a1, int a2)
-
 static void __cdecl CTiling::NotifyEcoSectorMerge(int,int) {
   
   return CEcoSectorMgr::NotifyEcoSectorMerge((CEcoSectorMgr *)g_cESMgr, a1, a2);
@@ -4967,7 +4862,6 @@ static void __cdecl CTiling::NotifyEcoSectorMerge(int,int) {
 
 // address=[0x15f4f40]
 // Decompiled from unsigned int __cdecl CTiling::NotifyEcoSectorSplit(signed int a1, signed int a2)
-
 static void __cdecl CTiling::NotifyEcoSectorSplit(int,int) {
   
   if ( (a1 <= 0 || a1 >= 0x4000)
@@ -5006,7 +4900,6 @@ static void __cdecl CTiling::NotifyEcoSectorSplit(int,int) {
 
 // address=[0x15f5080]
 // Decompiled from _DWORD *__cdecl CTiling::NotifyEcoSectorsMerged(int a1, int a2)
-
 static void __cdecl CTiling::NotifyEcoSectorsMerged(int,int) {
   
   if ( (a1 <= 0 || a1 >= 0x4000)
@@ -5045,7 +4938,6 @@ static void __cdecl CTiling::NotifyEcoSectorsMerged(int,int) {
 
 // address=[0x15f51c0]
 // Decompiled from void *CTiling::NotifyInitEcoSectors()
-
 static void __cdecl CTiling::NotifyInitEcoSectors(bool) {
   
   CTiling::m_iInitLastEcoSectorId = 0;
@@ -5058,7 +4950,6 @@ static void __cdecl CTiling::NotifyInitEcoSectors(bool) {
 
 // address=[0x15f57f0]
 // Decompiled from int __cdecl CTiling::SetNormalTileId(int a1, __int16 a2)
-
 static void __cdecl CTiling::SetNormalTileId(int,int) {
   
   int result; // eax
@@ -5071,7 +4962,6 @@ static void __cdecl CTiling::SetNormalTileId(int,int) {
 
 // address=[0x15f5980]
 // Decompiled from int __cdecl CTiling::TileType(int a1, int a2, int a3, int a4)
-
 static int __cdecl CTiling::TileType(int,int,int,int) {
   
   int v4; // esi

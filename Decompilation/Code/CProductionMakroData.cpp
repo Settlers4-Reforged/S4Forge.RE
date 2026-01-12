@@ -4,7 +4,6 @@
 
 // address=[0x2f567f0]
 // Decompiled from CProductionMakroData *__thiscall CProductionMakroData::CProductionMakroData(CProductionMakroData *this)
-
  CProductionMakroData::CProductionMakroData(void) {
   
   std::vector<SMakroEntry>::vector<SMakroEntry>();
@@ -13,14 +12,7 @@
 
 
 // address=[0x2f56810]
-// Decompiled from _DWORD *__thiscall CProductionMakroData::CProductionMakroData(
-        _DWORD *this,
-        CDynList **a2,
-        int a3,
-        int a4,
-        int a5,
-        int a6)
-
+// Decompiled from _DWORD *__thiscall CProductionMakroData::CProductionMakroData(  _DWORD *this,  CDynList **a2,  int a3,  int a4,  int a5,  int a6)
  CProductionMakroData::CProductionMakroData(class CSchedule *,int,enum BUILDING_TYPES,struct SBuildId *,struct SBuildId *) {
   
   struct CDynListEntry *ProductivityControll; // [esp+8h] [ebp-20h]
@@ -71,7 +63,6 @@
 
 // address=[0x2f56a70]
 // Decompiled from int __thiscall CProductionMakroData::~CProductionMakroData(CProductionMakroData *this)
-
  CProductionMakroData::~CProductionMakroData(void) {
   
   return std::vector<SMakroEntry>::~vector<SMakroEntry>();
@@ -80,7 +71,6 @@
 
 // address=[0x2f56a90]
 // Decompiled from CProductionMakroData *__thiscall CProductionMakroData::GetBuildArray(CProductionMakroData *this)
-
 struct SBuildId *  CProductionMakroData::GetBuildArray(void) {
   
   return this;

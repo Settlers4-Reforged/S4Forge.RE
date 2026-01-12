@@ -4,7 +4,6 @@
 
 // address=[0x1402a20]
 // Decompiled from int __cdecl CWorkshopBuildingRole::New(int a1)
-
 static class CPersistence * __cdecl CWorkshopBuildingRole::New(std::istream &) {
   
   if ( operator new(0x19Cu) )
@@ -16,7 +15,6 @@ static class CPersistence * __cdecl CWorkshopBuildingRole::New(std::istream &) {
 
 // address=[0x14fdd30]
 // Decompiled from int __cdecl CWorkshopBuildingRole::Load(int a1)
-
 static class CWorkshopBuildingRole * __cdecl CWorkshopBuildingRole::Load(std::istream &) {
   
   void **v1; // eax
@@ -29,7 +27,6 @@ static class CWorkshopBuildingRole * __cdecl CWorkshopBuildingRole::Load(std::is
 
 // address=[0x152cc10]
 // Decompiled from CWorkshopBuildingRole *__thiscall CWorkshopBuildingRole::CWorkshopBuildingRole(CWorkshopBuildingRole *this)
-
  CWorkshopBuildingRole::CWorkshopBuildingRole(void) {
   
   IBuildingRole::IBuildingRole(this);
@@ -42,7 +39,6 @@ static class CWorkshopBuildingRole * __cdecl CWorkshopBuildingRole::Load(std::is
 
 // address=[0x152cc90]
 // Decompiled from int __thiscall CWorkshopBuildingRole::LogicUpdate(CWorkshopBuildingRole *this, struct CBuilding *a2)
-
 void  CWorkshopBuildingRole::LogicUpdate(class CBuilding *) {
   
   int result; // eax
@@ -150,11 +146,7 @@ void  CWorkshopBuildingRole::LogicUpdate(class CBuilding *) {
 
 
 // address=[0x152cff0]
-// Decompiled from unsigned int __thiscall CWorkshopBuildingRole::FillGfxInfo(
-        CWorkshopBuildingRole *this,
-        struct CBuilding *a2,
-        struct SGfxObjectInfo *a3)
-
+// Decompiled from unsigned int __thiscall CWorkshopBuildingRole::FillGfxInfo(  CWorkshopBuildingRole *this,  struct CBuilding *a2,  struct SGfxObjectInfo *a3)
 void  CWorkshopBuildingRole::FillGfxInfo(class CBuilding *,struct SGfxObjectInfo &) {
   
   int v3; // eax
@@ -220,7 +212,6 @@ void  CWorkshopBuildingRole::FillGfxInfo(class CBuilding *,struct SGfxObjectInfo
 
 // address=[0x152d260]
 // Decompiled from unsigned int __thiscall CWorkshopBuildingRole::Init(CWorkshopBuildingRole *this, struct CBuilding *a2)
-
 void  CWorkshopBuildingRole::Init(class CBuilding *) {
   
   int v2; // eax
@@ -309,7 +300,6 @@ void  CWorkshopBuildingRole::Init(class CBuilding *) {
 
 // address=[0x152d540]
 // Decompiled from char __thiscall CWorkshopBuildingRole::PostLoadInit(CWorkshopBuildingRole *this, struct CBuilding *a2)
-
 void  CWorkshopBuildingRole::PostLoadInit(class CBuilding *) {
   
   int v2; // eax
@@ -342,7 +332,6 @@ void  CWorkshopBuildingRole::PostLoadInit(class CBuilding *) {
 
 // address=[0x152d610]
 // Decompiled from char __thiscall CWorkshopBuildingRole::SettlerEnter(CWorkshopBuildingRole *this, struct CBuilding *a2, int a3)
-
 bool  CWorkshopBuildingRole::SettlerEnter(class CBuilding *,int) {
   
   int v3; // eax
@@ -459,7 +448,6 @@ bool  CWorkshopBuildingRole::SettlerEnter(class CBuilding *,int) {
 
 // address=[0x152d940]
 // Decompiled from int __thiscall CWorkshopBuildingRole::GetBuildingNeed(CWorkshopBuildingRole *this, int a2)
-
 int  CWorkshopBuildingRole::GetBuildingNeed(int)const {
   
   unsigned __int16 *v2; // eax
@@ -480,7 +468,6 @@ int  CWorkshopBuildingRole::GetBuildingNeed(int)const {
 
 // address=[0x152d9e0]
 // Decompiled from int __thiscall CWorkshopBuildingRole::GetPileIdWithGood(CWorkshopBuildingRole *this, int a2)
-
 int  CWorkshopBuildingRole::GetPileIdWithGood(int)const {
   
   unsigned __int16 *v2; // eax
@@ -506,7 +493,6 @@ int  CWorkshopBuildingRole::GetPileIdWithGood(int)const {
 
 // address=[0x152da90]
 // Decompiled from char __thiscall CWorkshopBuildingRole::HasShipAmmo(CWorkshopBuildingRole *this, int a2)
-
 bool  CWorkshopBuildingRole::HasShipAmmo(int)const {
   
   unsigned __int16 *v2; // eax
@@ -526,7 +512,6 @@ bool  CWorkshopBuildingRole::HasShipAmmo(int)const {
 
 // address=[0x152db10]
 // Decompiled from int __thiscall CWorkshopBuildingRole::GetPileIdWithNeedForGood(CWorkshopBuildingRole *this, int a2)
-
 int  CWorkshopBuildingRole::GetPileIdWithNeedForGood(int)const {
   
   unsigned __int16 *v2; // eax
@@ -551,10 +536,7 @@ int  CWorkshopBuildingRole::GetPileIdWithNeedForGood(int)const {
 
 
 // address=[0x152dbd0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CWorkshopBuildingRole::GoodArrive(CWorkshopBuildingRole *this, int a2)
-
+// Decompiled from void __thiscall CWorkshopBuildingRole::GoodArrive(CWorkshopBuildingRole *this, int a2)
 void  CWorkshopBuildingRole::GoodArrive(int) {
   
   ;
@@ -563,7 +545,6 @@ void  CWorkshopBuildingRole::GoodArrive(int) {
 
 // address=[0x152dbe0]
 // Decompiled from char __thiscall CWorkshopBuildingRole::HaveStillOrders(CWorkshopBuildingRole *this)
-
 bool  CWorkshopBuildingRole::HaveStillOrders(void)const {
   
   int i; // [esp+4h] [ebp-4h]
@@ -578,9 +559,7 @@ bool  CWorkshopBuildingRole::HaveStillOrders(void)const {
 
 
 // address=[0x152dc20]
-// Decompiled from // public: bool __thiscall CWorkshopBuildingRole::HaveSpecialOrder(int)const 
-char __thiscall CWorkshopBuildingRole::HaveSpecialOrder(_BYTE *this, int a2)
-
+// Decompiled from char __thiscall CWorkshopBuildingRole::HaveSpecialOrder(_BYTE *this, int a2)
 bool  CWorkshopBuildingRole::HaveSpecialOrder(int)const {
   
   int i; // [esp+4h] [ebp-4h]
@@ -596,7 +575,6 @@ bool  CWorkshopBuildingRole::HaveSpecialOrder(int)const {
 
 // address=[0x152dc70]
 // Decompiled from unsigned int __thiscall CWorkshopBuildingRole::LockPiles(CWorkshopBuildingRole *this, struct CBuilding *a2, bool a3)
-
 void  CWorkshopBuildingRole::LockPiles(class CBuilding *,bool) {
   
   unsigned int result; // eax
@@ -622,7 +600,6 @@ void  CWorkshopBuildingRole::LockPiles(class CBuilding *,bool) {
 
 // address=[0x152dd10]
 // Decompiled from CWorkshopBuildingRole *__thiscall CWorkshopBuildingRole::TakeOrder(CWorkshopBuildingRole *this, int a2, int a3)
-
 void  CWorkshopBuildingRole::TakeOrder(int,int) {
   
   CWorkshopBuildingRole *result; // eax
@@ -672,11 +649,7 @@ void  CWorkshopBuildingRole::TakeOrder(int,int) {
 
 
 // address=[0x152dde0]
-// Decompiled from _DWORD *__thiscall CWorkshopBuildingRole::FillAddVehicleSideBar(
-        CWorkshopBuildingRole *this,
-        struct CAddVehicleBarInfo *a2,
-        bool a3)
-
+// Decompiled from _DWORD *__thiscall CWorkshopBuildingRole::FillAddVehicleSideBar(  CWorkshopBuildingRole *this,  struct CAddVehicleBarInfo *a2,  bool a3)
 void  CWorkshopBuildingRole::FillAddVehicleSideBar(class CAddVehicleBarInfo *,bool) {
   
   unsigned __int16 *v3; // eax
@@ -735,7 +708,6 @@ void  CWorkshopBuildingRole::FillAddVehicleSideBar(class CAddVehicleBarInfo *,bo
 
 // address=[0x152dfd0]
 // Decompiled from char __thiscall CWorkshopBuildingRole::CancelCurrentProduction(CWorkshopBuildingRole *this)
-
 bool  CWorkshopBuildingRole::CancelCurrentProduction(void) {
   
   void *v1; // eax
@@ -784,7 +756,6 @@ bool  CWorkshopBuildingRole::CancelCurrentProduction(void) {
 
 // address=[0x152e100]
 // Decompiled from char *__thiscall CWorkshopBuildingRole::CWorkshopBuildingRole(char *this, int a2)
-
  CWorkshopBuildingRole::CWorkshopBuildingRole(std::istream &) {
   
   int v3; // [esp+8h] [ebp-24h] BYREF
@@ -829,7 +800,6 @@ bool  CWorkshopBuildingRole::CancelCurrentProduction(void) {
 
 // address=[0x152e2b0]
 // Decompiled from int __thiscall CWorkshopBuildingRole::Store(struct IBuildingRole *this, struct std::ostream *a2)
-
 void  CWorkshopBuildingRole::Store(std::ostream &) {
   
   __int16 *v2; // eax
@@ -864,7 +834,6 @@ void  CWorkshopBuildingRole::Store(std::ostream &) {
 
 // address=[0x152f150]
 // Decompiled from int __thiscall CWorkshopBuildingRole::~CWorkshopBuildingRole(CWorkshopBuildingRole *this)
-
  CWorkshopBuildingRole::~CWorkshopBuildingRole(void) {
   
   std::vector<unsigned short>::~vector<unsigned short>((char *)this + 388);
@@ -874,7 +843,6 @@ void  CWorkshopBuildingRole::Store(std::ostream &) {
 
 // address=[0x152f1c0]
 // Decompiled from int __thiscall CWorkshopBuildingRole::ClassID(CWorkshopBuildingRole *this)
-
 unsigned long  CWorkshopBuildingRole::ClassID(void)const {
   
   return CWorkshopBuildingRole::m_iClassID;
@@ -883,7 +851,6 @@ unsigned long  CWorkshopBuildingRole::ClassID(void)const {
 
 // address=[0x152f1f0]
 // Decompiled from int __thiscall CWorkshopBuildingRole::GetBuildingRole(CWorkshopBuildingRole *this)
-
 int  CWorkshopBuildingRole::GetBuildingRole(void) {
   
   return 5;
@@ -895,7 +862,6 @@ int  CWorkshopBuildingRole::GetBuildingRole(void) {
 
 // address=[0x152e3f0]
 // Decompiled from char __thiscall CWorkshopBuildingRole::CrushBuilding(CWorkshopBuildingRole *this)
-
 bool  CWorkshopBuildingRole::CrushBuilding(void) {
   
   void *v1; // eax
@@ -927,9 +893,7 @@ bool  CWorkshopBuildingRole::CrushBuilding(void) {
 
 
 // address=[0x152e4a0]
-// Decompiled from // private: bool __thiscall CWorkshopBuildingRole::HaveMaterial(class CBuilding *)
-char __thiscall CWorkshopBuildingRole::HaveMaterial(int this, int a2)
-
+// Decompiled from char __thiscall CWorkshopBuildingRole::HaveMaterial(int this, int a2)
 bool  CWorkshopBuildingRole::HaveMaterial(class CBuilding *) {
   
   unsigned __int16 *v2; // eax
@@ -949,7 +913,6 @@ bool  CWorkshopBuildingRole::HaveMaterial(class CBuilding *) {
 
 // address=[0x152e510]
 // Decompiled from char __thiscall CWorkshopBuildingRole::HaveProductionOrder(CWorkshopBuildingRole *this)
-
 bool  CWorkshopBuildingRole::HaveProductionOrder(void) {
   
   unsigned int i; // [esp+4h] [ebp-Ch]
@@ -973,12 +936,7 @@ bool  CWorkshopBuildingRole::HaveProductionOrder(void) {
 
 
 // address=[0x152e5c0]
-// Decompiled from int __thiscall CWorkshopBuildingRole::GetPositionForNewVehicle(
-        CWorkshopBuildingRole *this,
-        struct CBuilding *a2,
-        int *a3,
-        int *a4)
-
+// Decompiled from int __thiscall CWorkshopBuildingRole::GetPositionForNewVehicle(  CWorkshopBuildingRole *this,  struct CBuilding *a2,  int *a3,  int *a4)
 void  CWorkshopBuildingRole::GetPositionForNewVehicle(class CBuilding *,int &,int &) {
   
   int result; // eax
@@ -992,7 +950,6 @@ void  CWorkshopBuildingRole::GetPositionForNewVehicle(class CBuilding *,int &,in
 
 // address=[0x152e610]
 // Decompiled from int __thiscall CWorkshopBuildingRole::GetDirectionForNewVehicle(CWorkshopBuildingRole *this, struct CBuilding *a2)
-
 int  CWorkshopBuildingRole::GetDirectionForNewVehicle(class CBuilding *) {
   
   int result; // eax
@@ -1032,11 +989,7 @@ int  CWorkshopBuildingRole::GetDirectionForNewVehicle(class CBuilding *) {
 
 
 // address=[0x152e6c0]
-// Decompiled from bool __thiscall CWorkshopBuildingRole::IsSpaceForVehicleAvailable(
-        CWorkshopBuildingRole *this,
-        struct CBuilding *a2,
-        int a3)
-
+// Decompiled from bool __thiscall CWorkshopBuildingRole::IsSpaceForVehicleAvailable(  CWorkshopBuildingRole *this,  struct CBuilding *a2,  int a3)
 bool  CWorkshopBuildingRole::IsSpaceForVehicleAvailable(class CBuilding *,int) {
   
   int v4; // [esp+0h] [ebp-Ch] BYREF
@@ -1053,7 +1006,6 @@ bool  CWorkshopBuildingRole::IsSpaceForVehicleAvailable(class CBuilding *,int) {
 
 // address=[0x152e710]
 // Decompiled from _DWORD *__thiscall CWorkshopBuildingRole::FillDialog(CWorkshopBuildingRole *this, struct CBuilding *a2, bool a3)
-
 void  CWorkshopBuildingRole::FillDialog(class CBuilding *,bool) {
   
   int v3; // eax
@@ -1114,7 +1066,6 @@ void  CWorkshopBuildingRole::FillDialog(class CBuilding *,bool) {
 
 // address=[0x152e980]
 // Decompiled from void *__thiscall CWorkshopBuildingRole::Clear(CWorkshopBuildingRole *this)
-
 void  CWorkshopBuildingRole::Clear(void) {
   
   *((_BYTE *)this + 380) = 0;
@@ -1127,11 +1078,7 @@ void  CWorkshopBuildingRole::Clear(void) {
 
 
 // address=[0x152f1e0]
-// Decompiled from void __thiscall CWorkshopBuildingRole::ConvertEventIntoGoal(
-        CWorkshopBuildingRole *this,
-        struct CBuilding *a2,
-        struct CEntityEvent *a3)
-
+// Decompiled from void __thiscall CWorkshopBuildingRole::ConvertEventIntoGoal(  CWorkshopBuildingRole *this,  struct CBuilding *a2,  struct CEntityEvent *a3)
 void  CWorkshopBuildingRole::ConvertEventIntoGoal(class CBuilding *,class CEntityEvent *) {
   
   ;
@@ -1140,7 +1087,6 @@ void  CWorkshopBuildingRole::ConvertEventIntoGoal(class CBuilding *,class CEntit
 
 // address=[0x152f260]
 // Decompiled from char __thiscall CWorkshopBuildingRole::TryCrushBuilding(CWorkshopBuildingRole *this)
-
 bool  CWorkshopBuildingRole::TryCrushBuilding(void) {
   
   return 1;

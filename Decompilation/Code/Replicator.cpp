@@ -4,7 +4,6 @@
 
 // address=[0x30811e0]
 // Decompiled from Replicator *__thiscall Replicator::Replicator(Replicator *this)
-
  Replicator::Replicator(void) {
   
   *(_DWORD *)this = -1;
@@ -14,7 +13,6 @@
 
 // address=[0x30819c0]
 // Decompiled from DName *__thiscall Replicator::operator[](_DWORD *this, DName *a2, unsigned int a3)
-
 class DName  Replicator::operator[](int)const {
   
   if ( a3 < 0xA )
@@ -40,7 +38,6 @@ class DName  Replicator::operator[](int)const {
 
 // address=[0x3082320]
 // Decompiled from Replicator *__thiscall Replicator::operator+=(Replicator *this, DName *a2)
-
 class Replicator &  Replicator::operator+=(class DName const &) {
   
   int v3; // [esp+4h] [ebp-10h]
@@ -65,7 +62,6 @@ class Replicator &  Replicator::operator+=(class DName const &) {
 
 // address=[0x308cd80]
 // Decompiled from BOOL __thiscall Replicator::isFull(Replicator *this)
-
 int  Replicator::isFull(void)const {
   
   return *(_DWORD *)this == 9;

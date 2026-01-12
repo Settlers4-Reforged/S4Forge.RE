@@ -4,7 +4,6 @@
 
 // address=[0x14b6970]
 // Decompiled from int __cdecl sub_18B6970(int a1)
-
 static class CGameState * __cdecl CStateLobbyConnect::DynamicCreateFunc(void *) {
   
   if ( operator new(0xB48u) )
@@ -16,7 +15,6 @@ static class CGameState * __cdecl CStateLobbyConnect::DynamicCreateFunc(void *) 
 
 // address=[0x14b69f0]
 // Decompiled from CStateLobbyConnect *__thiscall CStateLobbyConnect::CStateLobbyConnect(CStateLobbyConnect *this, int a2)
-
  CStateLobbyConnect::CStateLobbyConnect(void *) {
   
   OnlineManager *Instance; // eax
@@ -85,7 +83,6 @@ static class CGameState * __cdecl CStateLobbyConnect::DynamicCreateFunc(void *) 
 
 // address=[0x14b6ca0]
 // Decompiled from void __thiscall CStateLobbyConnect::~CStateLobbyConnect(CStateLobbyConnect *this)
-
  CStateLobbyConnect::~CStateLobbyConnect(void) {
   
   *(_DWORD *)this = &CStateLobbyConnect::_vftable_;
@@ -101,7 +98,6 @@ static class CGameState * __cdecl CStateLobbyConnect::DynamicCreateFunc(void *) 
 
 // address=[0x14b6d40]
 // Decompiled from char __thiscall CStateLobbyConnect::Perform(CStateLobbyConnect *this)
-
 bool  CStateLobbyConnect::Perform(void) {
   
   OnlineManager *Instance; // eax
@@ -198,7 +194,6 @@ bool  CStateLobbyConnect::Perform(void) {
 
 // address=[0x14b70b0]
 // Decompiled from char __thiscall CStateLobbyConnect::OnEvent(CStateLobbyConnect *this, struct CEvn_Event *a2)
-
 bool  CStateLobbyConnect::OnEvent(class CEvn_Event &) {
   
   char result; // al

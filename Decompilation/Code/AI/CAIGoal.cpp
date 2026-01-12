@@ -3,10 +3,7 @@
 // Definitions for class CAIGoal
 
 // address=[0x1301370]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CAIGoal::EntityId(CAIGoal *this)
-
+// Decompiled from int __thiscall CAIGoal::EntityId(CAIGoal *this)
 int  CAIGoal::EntityId(void)const {
   
   return *(_DWORD *)this;
@@ -14,10 +11,7 @@ int  CAIGoal::EntityId(void)const {
 
 
 // address=[0x1301850]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CAIGoal::UniqueId(CAIGoal *this)
-
+// Decompiled from int __thiscall CAIGoal::UniqueId(CAIGoal *this)
 int  CAIGoal::UniqueId(void)const {
   
   return *((_DWORD *)this + 1);
@@ -25,10 +19,7 @@ int  CAIGoal::UniqueId(void)const {
 
 
 // address=[0x13096f0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CAIGoal::Value(CAIGoal *this)
-
+// Decompiled from int __thiscall CAIGoal::Value(CAIGoal *this)
 int  CAIGoal::Value(void)const {
   
   return *((_DWORD *)this + 2);
@@ -37,7 +28,6 @@ int  CAIGoal::Value(void)const {
 
 // address=[0x1314ec0]
 // Decompiled from CAIGoal *__thiscall CAIGoal::Maximum(CAIGoal *this)
-
 void  CAIGoal::Maximum(void) {
   
   CAIGoal *result; // eax
@@ -52,7 +42,6 @@ void  CAIGoal::Maximum(void) {
 
 // address=[0x1314f00]
 // Decompiled from int __thiscall CAIGoal::Set(CAIGoal *this, int a2, int a3, int a4)
-
 void  CAIGoal::Set(int,int,int) {
   
   int result; // eax

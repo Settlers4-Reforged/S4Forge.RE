@@ -4,7 +4,6 @@
 
 // address=[0x1315820]
 // Decompiled from char __thiscall CGenericVehicleIterator::Init(CGenericVehicleIterator *this, int a2, int a3, int a4)
-
 bool  CGenericVehicleIterator::Init(int,int,int) {
   
   CVehicleIteratorBase::Init((CGenericVehicleIterator *)((char *)this + 20), 0);
@@ -27,7 +26,6 @@ bool  CGenericVehicleIterator::Init(int,int,int) {
 
 // address=[0x1315890]
 // Decompiled from int __thiscall CGenericVehicleIterator::FirstVehicle(CGenericVehicleIterator *this)
-
 int  CGenericVehicleIterator::FirstVehicle(void) {
   
   int v2; // eax
@@ -55,7 +53,6 @@ int  CGenericVehicleIterator::FirstVehicle(void) {
 
 // address=[0x1315910]
 // Decompiled from int __thiscall CGenericVehicleIterator::NextVehicle(CGenericVehicleIterator *this)
-
 int  CGenericVehicleIterator::NextVehicle(void) {
   
   int v1; // eax
@@ -87,9 +84,7 @@ int  CGenericVehicleIterator::NextVehicle(void) {
 
 
 // address=[0x13159e0]
-// Decompiled from // public: int __thiscall CGenericVehicleIterator::NextVehicleIfCurrentIsNotValid(void)
-int __thiscall CGenericVehicleIterator::NextVehicleIfCurrentIsNotValid(_DWORD *this)
-
+// Decompiled from int __thiscall CGenericVehicleIterator::NextVehicleIfCurrentIsNotValid(_DWORD *this)
 int  CGenericVehicleIterator::NextVehicleIfCurrentIsNotValid(void) {
   
   if ( CVehicleIteratorBase::VehicleValid((CVehicleIteratorBase *)(this + 5), this[6]) )
@@ -100,9 +95,7 @@ int  CGenericVehicleIterator::NextVehicleIfCurrentIsNotValid(void) {
 
 
 // address=[0x1315a20]
-// Decompiled from // public: int __thiscall CGenericVehicleIterator::NextVehicleOrFirstIfCurrentIsEndOfList(void)
-int __thiscall CGenericVehicleIterator::NextVehicleOrFirstIfCurrentIsEndOfList(CGenericVehicleIterator *this)
-
+// Decompiled from int __thiscall CGenericVehicleIterator::NextVehicleOrFirstIfCurrentIsEndOfList(CGenericVehicleIterator *this)
 int  CGenericVehicleIterator::NextVehicleOrFirstIfCurrentIsEndOfList(void) {
   
   if ( *((_DWORD *)this + 6) )
@@ -114,7 +107,6 @@ int  CGenericVehicleIterator::NextVehicleOrFirstIfCurrentIsEndOfList(void) {
 
 // address=[0x13171d0]
 // Decompiled from CGenericVehicleIterator *__thiscall CGenericVehicleIterator::CGenericVehicleIterator(CGenericVehicleIterator *this)
-
  CGenericVehicleIterator::CGenericVehicleIterator(void) {
   
   CPlayerIterator::CPlayerIterator(this);

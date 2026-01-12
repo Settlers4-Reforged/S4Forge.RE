@@ -4,7 +4,6 @@
 
 // address=[0x12fd510]
 // Decompiled from int __thiscall CAIPlayerAI::PlayerId(pairNode *this)
-
 int  CAIPlayerAI::PlayerId(void)const {
   
   return *((_DWORD *)this + 3);
@@ -12,10 +11,7 @@ int  CAIPlayerAI::PlayerId(void)const {
 
 
 // address=[0x1306930]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CAIPlayerAI::Race(CAIPlayerAI *this)
-
+// Decompiled from int __thiscall CAIPlayerAI::Race(CAIPlayerAI *this)
 int  CAIPlayerAI::Race(void)const {
   
   return *((_DWORD *)this + 4);
@@ -24,7 +20,6 @@ int  CAIPlayerAI::Race(void)const {
 
 // address=[0x13175a0]
 // Decompiled from int __thiscall CAIPlayerAI::Execute(CAIPlayerAI *this)
-
 void  CAIPlayerAI::Execute(void) {
   
   int result; // eax
@@ -57,7 +52,6 @@ void  CAIPlayerAI::Execute(void) {
 
 // address=[0x1317660]
 // Decompiled from int __thiscall CAIPlayerAI::Release(CAIPlayerAI *this)
-
 void  CAIPlayerAI::Release(void) {
   
   return TAIStaticObjectMemoryPool<CAIPlayerAI,692,9>::Delete(this);
@@ -66,7 +60,6 @@ void  CAIPlayerAI::Release(void) {
 
 // address=[0x1317680]
 // Decompiled from void __thiscall CAIPlayerAI::PostAIEvent(CAIPlayerAI *this, int a2, int a3, int a4, int a5)
-
 void  CAIPlayerAI::PostAIEvent(int,int,int,int) {
   
   CAIEventQueue::PostAIEvent((CAIPlayerAI *)((char *)this + 108), a2, a3, a4, a5);
@@ -75,7 +68,6 @@ void  CAIPlayerAI::PostAIEvent(int,int,int,int) {
 
 // address=[0x13176b0]
 // Decompiled from CAIPlayerAI *__thiscall CAIPlayerAI::CAIPlayerAI(CAIPlayerAI *this, int a2, bool a3)
-
  CAIPlayerAI::CAIPlayerAI(int,bool) {
   
   IAIUnknown::IAIUnknown(this);
@@ -105,7 +97,6 @@ void  CAIPlayerAI::PostAIEvent(int,int,int,int) {
 
 // address=[0x1317870]
 // Decompiled from void __thiscall CAIPlayerAI::~CAIPlayerAI(CAIPlayerAI *this)
-
  CAIPlayerAI::~CAIPlayerAI(void) {
   
   int v2; // [esp+0h] [ebp-4h]
@@ -126,10 +117,7 @@ void  CAIPlayerAI::PostAIEvent(int,int,int,int) {
 
 
 // address=[0x1317920]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CAIPlayerAI::Init(CAIPlayerAI *this)
-
+// Decompiled from void __thiscall CAIPlayerAI::Init(CAIPlayerAI *this)
 void  CAIPlayerAI::Init(void) {
   
   ;
@@ -138,7 +126,6 @@ void  CAIPlayerAI::Init(void) {
 
 // address=[0x1317930]
 // Decompiled from CAIDarkTribePlayerAI *__cdecl CAIPlayerAI::CreatePlayerAI(int a1, struct IS4Chunk *a2)
-
 static class CAIPlayerAI * __cdecl CAIPlayerAI::CreatePlayerAI(int,class IS4Chunk *) {
   
   void *Memory; // [esp+8h] [ebp-30h]
@@ -181,7 +168,6 @@ static class CAIPlayerAI * __cdecl CAIPlayerAI::CreatePlayerAI(int,class IS4Chun
 
 // address=[0x1317a90]
 // Decompiled from int __thiscall CAIPlayerAI::DbgPrint(CAIPlayerAI *this)
-
 void  CAIPlayerAI::DbgPrint(void) {
   
   int result; // eax
@@ -201,9 +187,7 @@ void  CAIPlayerAI::DbgPrint(void) {
 
 
 // address=[0x1317ae0]
-// Decompiled from // public: int __thiscall CAIPlayerAI::GetNumberOfOwnBuildings(int,int)
-int __thiscall CAIPlayerAI::GetNumberOfOwnBuildings(pairNode *this, int a2, unsigned int a3)
-
+// Decompiled from int __thiscall CAIPlayerAI::GetNumberOfOwnBuildings(pairNode *this, int a2, unsigned int a3)
 int  CAIPlayerAI::GetNumberOfOwnBuildings(int,int) {
   
   int v3; // eax
@@ -214,9 +198,7 @@ int  CAIPlayerAI::GetNumberOfOwnBuildings(int,int) {
 
 
 // address=[0x1317b10]
-// Decompiled from // public: int __thiscall CAIPlayerAI::GetNumberOfOwnVehicles(int,int)
-int __thiscall CAIPlayerAI::GetNumberOfOwnVehicles(pairNode *this, int a2, int a3)
-
+// Decompiled from int __thiscall CAIPlayerAI::GetNumberOfOwnVehicles(pairNode *this, int a2, int a3)
 int  CAIPlayerAI::GetNumberOfOwnVehicles(int,int) {
   
   int v3; // eax
@@ -228,7 +210,6 @@ int  CAIPlayerAI::GetNumberOfOwnVehicles(int,int) {
 
 // address=[0x1317b40]
 // Decompiled from int __thiscall CAIPlayerAI::MoveEntitiesToSectorReservoirs(CAIPlayerAI *this)
-
 void  CAIPlayerAI::MoveEntitiesToSectorReservoirs(void) {
   
   int result; // eax
@@ -256,7 +237,6 @@ void  CAIPlayerAI::MoveEntitiesToSectorReservoirs(void) {
 
 // address=[0x1317bd0]
 // Decompiled from int __thiscall CAIPlayerAI::ScanForNewSectors(CAIPlayerAI *this)
-
 void  CAIPlayerAI::ScanForNewSectors(void) {
   
   int result; // eax
@@ -352,7 +332,6 @@ void  CAIPlayerAI::ScanForNewSectors(void) {
 
 // address=[0x1317e10]
 // Decompiled from int __thiscall CAIPlayerAI::Load(CAIPlayerAI *this, struct IS4Chunk *a2)
-
 void  CAIPlayerAI::Load(class IS4Chunk &) {
   
   unsigned int v3; // [esp+0h] [ebp-8h]
@@ -376,7 +355,6 @@ void  CAIPlayerAI::Load(class IS4Chunk &) {
 
 // address=[0x1317f40]
 // Decompiled from int __thiscall CAIPlayerAI::Save(CAIPlayerAI *this, struct IS4Chunk *a2)
-
 void  CAIPlayerAI::Save(class IS4Chunk &) {
   
   (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 24))(a2, -1517223936);
@@ -396,7 +374,6 @@ void  CAIPlayerAI::Save(class IS4Chunk &) {
 
 // address=[0x1318070]
 // Decompiled from pairNode *__thiscall CAIPlayerAI::ProcessEvents(CAIPlayerAI *this)
-
 void  CAIPlayerAI::ProcessEvents(void) {
   
   pairNode *result; // eax
@@ -605,7 +582,6 @@ void  CAIPlayerAI::ProcessEvents(void) {
 
 // address=[0x1318660]
 // Decompiled from int __thiscall CAIPlayerAI::CalculateSectorAndEcoSectorIds(CAIPlayerAI *this)
-
 void  CAIPlayerAI::CalculateSectorAndEcoSectorIds(void) {
   
   int result; // eax
@@ -632,7 +608,6 @@ void  CAIPlayerAI::CalculateSectorAndEcoSectorIds(void) {
 
 // address=[0x13186e0]
 // Decompiled from int __thiscall CAIPlayerAI::FillGeneralReservoir(CAIPlayerAI *this)
-
 int  CAIPlayerAI::FillGeneralReservoir(void) {
   
   int v2; // [esp+0h] [ebp-24h]
@@ -680,7 +655,6 @@ int  CAIPlayerAI::FillGeneralReservoir(void) {
 
 // address=[0x1318820]
 // Decompiled from int __thiscall CAIPlayerAI::AddEntityToSectorReservoir(char *this, int a2, int a3, int a4)
-
 void  CAIPlayerAI::AddEntityToSectorReservoir(int,enum T_AI_WARRIOR_TYPE,int) {
   
   int result; // eax
@@ -717,7 +691,6 @@ void  CAIPlayerAI::AddEntityToSectorReservoir(int,enum T_AI_WARRIOR_TYPE,int) {
 
 // address=[0x1318920]
 // Decompiled from int __thiscall CAIPlayerAI::MoveNewWarShips(CAIPlayerAI *this, int a2, int a3, bool a4)
-
 void  CAIPlayerAI::MoveNewWarShips(int,int,bool) {
   
   int result; // eax
@@ -741,7 +714,6 @@ void  CAIPlayerAI::MoveNewWarShips(int,int,bool) {
 
 // address=[0x13189b0]
 // Decompiled from char __thiscall CAIPlayerAI::ExistsSectorAI(CAIPlayerAI *this, int a2)
-
 bool  CAIPlayerAI::ExistsSectorAI(int) {
   
   CAISectorAI *v3; // [esp+0h] [ebp-10h]
@@ -761,7 +733,6 @@ bool  CAIPlayerAI::ExistsSectorAI(int) {
 
 // address=[0x1318a10]
 // Decompiled from int __thiscall CAIPlayerAI::MoveToSuicideSquad(CAIPlayerAI *this)
-
 void  CAIPlayerAI::MoveToSuicideSquad(void) {
   
   int result; // eax

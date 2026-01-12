@@ -4,7 +4,6 @@
 
 // address=[0x1402200]
 // Decompiled from void __cdecl CStoragePileRole::New(struct std::_Facet_base *a1)
-
 static class CPersistence * __cdecl CStoragePileRole::New(std::istream &) {
   
   if ( operator new(8u) )
@@ -14,7 +13,6 @@ static class CPersistence * __cdecl CStoragePileRole::New(std::istream &) {
 
 // address=[0x1560260]
 // Decompiled from void __thiscall CStoragePileRole::~CStoragePileRole(CStoragePileRole *this)
-
  CStoragePileRole::~CStoragePileRole(void) {
   
   IPileRole::~IPileRole(this);
@@ -23,7 +21,6 @@ static class CPersistence * __cdecl CStoragePileRole::New(std::istream &) {
 
 // address=[0x1560320]
 // Decompiled from int __thiscall CStoragePileRole::ClassID(CStoragePileRole *this)
-
 unsigned long  CStoragePileRole::ClassID(void)const {
   
   return CStoragePileRole::m_iClassID;
@@ -32,7 +29,6 @@ unsigned long  CStoragePileRole::ClassID(void)const {
 
 // address=[0x1560440]
 // Decompiled from int __cdecl CStoragePileRole::Load(int a1)
-
 static class CStoragePileRole * __cdecl CStoragePileRole::Load(std::istream &) {
   
   void **v1; // eax
@@ -45,7 +41,6 @@ static class CStoragePileRole * __cdecl CStoragePileRole::Load(std::istream &) {
 
 // address=[0x1561900]
 // Decompiled from void __thiscall CStoragePileRole::Init(CStoragePileRole *this, struct CPile *a2)
-
 void  CStoragePileRole::Init(class CPile *) {
   
   IPileRole::Init(this, a2);
@@ -57,7 +52,6 @@ void  CStoragePileRole::Init(class CPile *) {
 
 // address=[0x1561940]
 // Decompiled from _DWORD *__thiscall CStoragePileRole::CStoragePileRole(_DWORD *this, int a2)
-
  CStoragePileRole::CStoragePileRole(std::istream &) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
@@ -84,7 +78,6 @@ void  CStoragePileRole::Init(class CPile *) {
 
 // address=[0x15619f0]
 // Decompiled from int __thiscall CStoragePileRole::Store(void *this, struct std::ostream *a2)
-
 void  CStoragePileRole::Store(std::ostream &) {
   
   int v3[2]; // [esp+0h] [ebp-8h] BYREF
@@ -101,7 +94,6 @@ void  CStoragePileRole::Store(std::ostream &) {
 
 // address=[0x15601d0]
 // Decompiled from CStoragePileRole *__thiscall CStoragePileRole::CStoragePileRole(CStoragePileRole *this)
-
  CStoragePileRole::CStoragePileRole(void) {
   
   IPileRole::IPileRole(this);

@@ -4,7 +4,6 @@
 
 // address=[0x2efd660]
 // Decompiled from CPerformanceCounter *__thiscall CPerformanceCounter::CPerformanceCounter(CPerformanceCounter *this)
-
  CPerformanceCounter::CPerformanceCounter(void) {
   
   if ( !dword_46851B0 )
@@ -16,7 +15,6 @@
 
 // address=[0x2efd690]
 // Decompiled from BOOL __thiscall CPerformanceCounter::Start(LARGE_INTEGER *this)
-
 void  CPerformanceCounter::Start(void) {
   
   this[2].LowPart = GetTickCount();
@@ -26,7 +24,6 @@ void  CPerformanceCounter::Start(void) {
 
 // address=[0x2efd6c0]
 // Decompiled from DWORD __thiscall CPerformanceCounter::Measure(LARGE_INTEGER *this)
-
 void  CPerformanceCounter::Measure(void) {
   
   DWORD result; // eax
@@ -40,7 +37,6 @@ void  CPerformanceCounter::Measure(void) {
 
 // address=[0x2efd6f0]
 // Decompiled from double __thiscall CPerformanceCounter::TimeMs(CPerformanceCounter *this)
-
 double  CPerformanceCounter::TimeMs(void)const {
   
   double v2; // [esp+4h] [ebp-14h]
@@ -57,7 +53,6 @@ double  CPerformanceCounter::TimeMs(void)const {
 
 // address=[0x2efd760]
 // Decompiled from char *__thiscall CPerformanceCounter::TimeMsStr(CPerformanceCounter *this, __int64 a2)
-
 char const *  CPerformanceCounter::TimeMsStr(int,int)const {
   
   double v2; // st7
@@ -81,7 +76,6 @@ char const *  CPerformanceCounter::TimeMsStr(int,int)const {
 
 // address=[0x2efe090]
 // Decompiled from CPerformanceCounter *__thiscall CPerformanceCounter::Clear(CPerformanceCounter *this)
-
 void  CPerformanceCounter::Clear(void) {
   
   CPerformanceCounter *result; // eax

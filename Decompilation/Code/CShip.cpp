@@ -4,7 +4,6 @@
 
 // address=[0x159d4e0]
 // Decompiled from void __thiscall CShip::VehicleLogicUpdate(CShip *this)
-
 void  CShip::VehicleLogicUpdate(void) {
   
   int v1; // eax
@@ -50,7 +49,6 @@ void  CShip::VehicleLogicUpdate(void) {
 
 // address=[0x159d5c0]
 // Decompiled from void *__thiscall CShip::GetGfxInfos(int this)
-
 struct SGfxObjectInfo *  CShip::GetGfxInfos(void) {
   
   int v1; // eax
@@ -130,9 +128,7 @@ struct SGfxObjectInfo *  CShip::GetGfxInfos(void) {
 
 
 // address=[0x159d7c0]
-// Decompiled from // public: static int __cdecl CShip::FindBoardingLocation(class std::vector<unsigned short,class std::allocator<unsigned short> > const &,int,struct SBoardingInfo &)
-int __cdecl CShip::FindBoardingLocation(int a1, int a2, void *a3)
-
+// Decompiled from int __cdecl CShip::FindBoardingLocation(int a1, int a2, void *a3)
 static int __cdecl CShip::FindBoardingLocation(class std::vector<unsigned short,class std::allocator<unsigned short> > const &,int,struct SBoardingInfo &) {
   
   struct IEntity *v3; // eax
@@ -198,7 +194,6 @@ static int __cdecl CShip::FindBoardingLocation(class std::vector<unsigned short,
 
 // address=[0x159d950]
 // Decompiled from int __cdecl CShip::FindBoardingLocation(int a1, int a2, int *a3)
-
 static int __cdecl CShip::FindBoardingLocation(int,int,struct SBoardingInfo &) {
   
   Y16X16 *v3; // eax
@@ -283,10 +278,7 @@ static int __cdecl CShip::FindBoardingLocation(int,int,struct SBoardingInfo &) {
 
 
 // address=[0x159e8f0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CShip::FillDialog(CShip *this, bool a2)
-
+// Decompiled from void __thiscall CShip::FillDialog(CShip *this, bool a2)
 void  CShip::FillDialog(bool) {
   
   ;
@@ -294,10 +286,7 @@ void  CShip::FillDialog(bool) {
 
 
 // address=[0x159e940]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CShip::Unload(CShip *this)
-
+// Decompiled from void __thiscall CShip::Unload(CShip *this)
 void  CShip::Unload(void) {
   
   ;
@@ -306,7 +295,6 @@ void  CShip::Unload(void) {
 
 // address=[0x159dbb0]
 // Decompiled from CShip *__thiscall CShip::CShip(CShip *this, int a2, int a3, int a4, int a5, __int16 a6, unsigned int a7, bool a8)
-
  CShip::CShip(int,int,int,int,int,int,bool) {
   
   int v8; // eax
@@ -329,7 +317,6 @@ void  CShip::Unload(void) {
 
 // address=[0x159dc80]
 // Decompiled from void __thiscall CShip::~CShip(CShip *this)
-
  CShip::~CShip(void) {
   
   *(_DWORD *)this = &CShip::_vftable_;
@@ -339,7 +326,6 @@ void  CShip::Unload(void) {
 
 // address=[0x159dca0]
 // Decompiled from _DWORD *__thiscall CShip::CShip(_DWORD *this, int a2)
-
  CShip::CShip(std::istream &) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
@@ -367,7 +353,6 @@ void  CShip::Unload(void) {
 
 // address=[0x159dd60]
 // Decompiled from int __thiscall CShip::Store(int *this, struct std::ostream *a2)
-
 void  CShip::Store(std::ostream &) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
@@ -383,7 +368,6 @@ void  CShip::Store(std::ostream &) {
 
 // address=[0x159ddb0]
 // Decompiled from struct CVehicle *__thiscall CShip::TakeJob(CShip *this)
-
 void  CShip::TakeJob(void) {
   
   int v1; // eax
@@ -434,7 +418,6 @@ LABEL_5:
 
 // address=[0x159df50]
 // Decompiled from char __thiscall CShip::WalkDir(CShip *this, char a2)
-
 void  CShip::WalkDir(int) {
   
   int v2; // esi
@@ -486,7 +469,6 @@ void  CShip::WalkDir(int) {
 
 // address=[0x159e070]
 // Decompiled from int __thiscall CShip::PlaceVehicle(CShip *this, int a2)
-
 void  CShip::PlaceVehicle(int) {
   
   __int16 v3; // [esp+0h] [ebp-10h]
@@ -512,7 +494,6 @@ void  CShip::PlaceVehicle(int) {
 
 // address=[0x159e150]
 // Decompiled from char __thiscall CShip::RemoveVehicle(CShip *this, int a2)
-
 void  CShip::RemoveVehicle(int) {
   
   int v2; // esi
@@ -553,7 +534,6 @@ void  CShip::RemoveVehicle(int) {
 
 // address=[0x159e260]
 // Decompiled from int __thiscall CShip::RepairBuildingInRange(CShip *this)
-
 int  CShip::RepairBuildingInRange(void) {
   
   unsigned __int16 *v2; // [esp+0h] [ebp-24h]
@@ -589,7 +569,6 @@ int  CShip::RepairBuildingInRange(void) {
 
 // address=[0x159e340]
 // Decompiled from CShip *__thiscall CShip::RepairAt(CShip *this, int a2)
-
 void  CShip::RepairAt(int) {
   
   CShip *result; // eax
@@ -617,7 +596,6 @@ void  CShip::RepairAt(int) {
 
 // address=[0x159e3e0]
 // Decompiled from int __thiscall CShip::GetHealthDisplayID(CShip *this)
-
 int  CShip::GetHealthDisplayID(void) {
   
   unsigned int v2; // [esp+0h] [ebp-8h]

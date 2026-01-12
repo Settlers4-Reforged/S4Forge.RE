@@ -4,7 +4,6 @@
 
 // address=[0x1315a50]
 // Decompiled from int __thiscall COneBuildingTypeIterator::Init(COneBuildingTypeIterator *this, int a2, int a3)
-
 void  COneBuildingTypeIterator::Init(int,int) {
   
   int result; // eax
@@ -17,7 +16,6 @@ void  COneBuildingTypeIterator::Init(int,int) {
 
 // address=[0x1315a80]
 // Decompiled from int __thiscall COneBuildingTypeIterator::FirstBuilding(COneBuildingTypeIterator *this)
-
 int  COneBuildingTypeIterator::FirstBuilding(void) {
   
   *((_DWORD *)this + 1) = CBuildingMgr::GetFirstBuildingId(
@@ -30,7 +28,6 @@ int  COneBuildingTypeIterator::FirstBuilding(void) {
 
 // address=[0x1315ab0]
 // Decompiled from int __thiscall COneBuildingTypeIterator::NextBuilding(COneBuildingTypeIterator *this)
-
 int  COneBuildingTypeIterator::NextBuilding(void) {
   
   bool i; // al
@@ -50,7 +47,6 @@ int  COneBuildingTypeIterator::NextBuilding(void) {
 
 // address=[0x1315b00]
 // Decompiled from int __thiscall COneBuildingTypeIterator::NextBuildingIfCurrentIsNotValid(COneBuildingTypeIterator *this)
-
 int  COneBuildingTypeIterator::NextBuildingIfCurrentIsNotValid(void) {
   
   if ( CBuildingIteratorBase::BuildingValid(this, *((_DWORD *)this + 1)) )
@@ -62,7 +58,6 @@ int  COneBuildingTypeIterator::NextBuildingIfCurrentIsNotValid(void) {
 
 // address=[0x1317250]
 // Decompiled from COneBuildingTypeIterator *__thiscall COneBuildingTypeIterator::COneBuildingTypeIterator(COneBuildingTypeIterator *this)
-
  COneBuildingTypeIterator::COneBuildingTypeIterator(void) {
   
   return this;

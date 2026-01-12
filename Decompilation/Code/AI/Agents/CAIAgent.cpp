@@ -4,7 +4,6 @@
 
 // address=[0x12fd090]
 // Decompiled from unsigned int __cdecl CAIAgent::ExecuteResult(unsigned int a1, unsigned int a2)
-
 static unsigned int __cdecl CAIAgent::ExecuteResult(unsigned int,unsigned int) {
   
   return a2 | (a1 << 12);
@@ -12,10 +11,7 @@ static unsigned int __cdecl CAIAgent::ExecuteResult(unsigned int,unsigned int) {
 
 
 // address=[0x12fd530]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-void __thiscall CAIAgent::ProcessEvent(CAIAgent *this, const struct CAIEvent *a2)
-
+// Decompiled from void __thiscall CAIAgent::ProcessEvent(CAIAgent *this, const struct CAIEvent *a2)
 void  CAIAgent::ProcessEvent(class CAIEvent const &) {
   
   ;
@@ -24,7 +20,6 @@ void  CAIAgent::ProcessEvent(class CAIEvent const &) {
 
 // address=[0x12fd7e0]
 // Decompiled from void __thiscall CAIAgent::UpdateScheduleTimeIfLess(CAIScheduler **this, unsigned int a2)
-
 void  CAIAgent::UpdateScheduleTimeIfLess(unsigned int) {
   
   if ( a2 < (unsigned int)this[1] && this[5] != 0 )
@@ -34,7 +29,6 @@ void  CAIAgent::UpdateScheduleTimeIfLess(unsigned int) {
 
 // address=[0x12fee10]
 // Decompiled from CAIAgent *__thiscall CAIAgent::CAIAgent(CAIAgent *this, const char *a2)
-
  CAIAgent::CAIAgent(char const *) {
   
   *(_DWORD *)this = &CAIAgent::_vftable_;
@@ -52,7 +46,6 @@ void  CAIAgent::UpdateScheduleTimeIfLess(unsigned int) {
 
 // address=[0x12fee80]
 // Decompiled from int __thiscall CAIAgent::~CAIAgent(CAIScheduler **this)
-
  CAIAgent::~CAIAgent(void) {
   
   *this = (CAIScheduler *)&CAIAgent::_vftable_;
@@ -70,7 +63,6 @@ void  CAIAgent::UpdateScheduleTimeIfLess(unsigned int) {
 
 // address=[0x12fef50]
 // Decompiled from int __thiscall CAIAgent::Load(CAIAgent *this, struct IS4Chunk *a2)
-
 void  CAIAgent::Load(class IS4Chunk &) {
   
   unsigned int v4; // [esp+4h] [ebp-4h]
@@ -94,7 +86,6 @@ void  CAIAgent::Load(class IS4Chunk &) {
 
 // address=[0x12ff000]
 // Decompiled from int __thiscall CAIAgent::Save(CAIAgent *this, struct IS4Chunk *a2)
-
 void  CAIAgent::Save(class IS4Chunk &) {
   
   int v3; // [esp+4h] [ebp-8h]
@@ -113,7 +104,6 @@ void  CAIAgent::Save(class IS4Chunk &) {
 
 // address=[0x12ff9c0]
 // Decompiled from void __thiscall CAIAgent::UpdateScheduleTime(CAIScheduler **this, unsigned int a2)
-
 void  CAIAgent::UpdateScheduleTime(unsigned int) {
   
   if ( this[5] )
@@ -122,10 +112,7 @@ void  CAIAgent::UpdateScheduleTime(unsigned int) {
 
 
 // address=[0x13064e0]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CAIAgent::DefaultExecutionDelay(CAIAgent *this)
-
+// Decompiled from int __thiscall CAIAgent::DefaultExecutionDelay(CAIAgent *this)
 unsigned int  CAIAgent::DefaultExecutionDelay(void)const {
   
   return *((_DWORD *)this + 2);

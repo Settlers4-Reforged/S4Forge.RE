@@ -4,7 +4,6 @@
 
 // address=[0x130eb80]
 // Decompiled from int __thiscall IMovingEntity::GetActualTask(IMovingEntity *this)
-
 class CEntityTask const &  IMovingEntity::GetActualTask(void)const {
   
   return std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator*((char *)this + 88);
@@ -13,7 +12,6 @@ class CEntityTask const &  IMovingEntity::GetActualTask(void)const {
 
 // address=[0x130f500]
 // Decompiled from int __thiscall IMovingEntity::Walking(IMovingEntity *this)
-
 class CWalking *  IMovingEntity::Walking(void) {
   
   return std::auto_ptr<CWalking>::get((char *)this + 80, this);
@@ -22,7 +20,6 @@ class CWalking *  IMovingEntity::Walking(void) {
 
 // address=[0x1351ad0]
 // Decompiled from int __thiscall IMovingEntity::Direction(IMovingEntity *this)
-
 int  IMovingEntity::Direction(void)const {
   
   return *((char *)this + 68);
@@ -31,7 +28,6 @@ int  IMovingEntity::Direction(void)const {
 
 // address=[0x1351af0]
 // Decompiled from int __thiscall IMovingEntity::Distance(IMovingEntity *this)
-
 int  IMovingEntity::Distance(void)const {
   
   return *((unsigned __int8 *)this + 69);
@@ -40,7 +36,6 @@ int  IMovingEntity::Distance(void)const {
 
 // address=[0x1460610]
 // Decompiled from int __thiscall IMovingEntity::GetJobPart(IMovingEntity *this)
-
 int  IMovingEntity::GetJobPart(void)const {
   
   return *((unsigned __int16 *)this + 19);
@@ -49,7 +44,6 @@ int  IMovingEntity::GetJobPart(void)const {
 
 // address=[0x1470a80]
 // Decompiled from bool __thiscall IMovingEntity::IsFree(IMovingEntity *this, int a2)
-
 bool  IMovingEntity::IsFree(int) {
   
   return IMovingEntity::IsNotBlocked(this, a2) && IMovingEntity::IsNotOccupied(this, a2);
@@ -58,7 +52,6 @@ bool  IMovingEntity::IsFree(int) {
 
 // address=[0x14d86e0]
 // Decompiled from char __thiscall IMovingEntity::IsUnEmployed(IMovingEntity *this)
-
 bool  IMovingEntity::IsUnEmployed(void)const {
   
   if ( BBSupportDbgReport(
@@ -73,7 +66,6 @@ bool  IMovingEntity::IsUnEmployed(void)const {
 
 // address=[0x14e2fd0]
 // Decompiled from int __thiscall IMovingEntity::IncToDoListIter(IMovingEntity *this)
-
 void  IMovingEntity::IncToDoListIter(void) {
   
   return std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator++((char *)this + 88);
@@ -82,7 +74,6 @@ void  IMovingEntity::IncToDoListIter(void) {
 
 // address=[0x150b590]
 // Decompiled from _BYTE *__thiscall IMovingEntity::SetDisplacementCosts(_BYTE *this, char a2)
-
 void  IMovingEntity::SetDisplacementCosts(int) {
   
   _BYTE *result; // eax
@@ -95,7 +86,6 @@ void  IMovingEntity::SetDisplacementCosts(int) {
 
 // address=[0x1513b10]
 // Decompiled from IMovingEntity *__thiscall IMovingEntity::SetDirection(IMovingEntity *this, char a2)
-
 void  IMovingEntity::SetDirection(int) {
   
   IMovingEntity *result; // eax
@@ -108,7 +98,6 @@ void  IMovingEntity::SetDirection(int) {
 
 // address=[0x15590a0]
 // Decompiled from IMovingEntity *__thiscall IMovingEntity::IMovingEntity(IMovingEntity *this, int a2)
-
  IMovingEntity::IMovingEntity(int) {
   
   IAnimatedEntity::IAnimatedEntity(this, a2);
@@ -124,7 +113,6 @@ void  IMovingEntity::SetDirection(int) {
 
 // address=[0x1559130]
 // Decompiled from void __thiscall IMovingEntity::~IMovingEntity(IMovingEntity *this)
-
  IMovingEntity::~IMovingEntity(void) {
   
   *(_DWORD *)this = &IMovingEntity::_vftable_;
@@ -136,7 +124,6 @@ void  IMovingEntity::SetDirection(int) {
 
 // address=[0x1559170]
 // Decompiled from int __thiscall IMovingEntity::WalkToXY(IMovingEntity *this, int a2, int a3)
-
 void  IMovingEntity::WalkToXY(int,int) {
   
   int v3; // eax
@@ -148,7 +135,6 @@ void  IMovingEntity::WalkToXY(int,int) {
 
 // address=[0x15591b0]
 // Decompiled from int __thiscall IMovingEntity::NewToDoList(_DWORD *this, int a2, __int16 a3)
-
 void  IMovingEntity::NewToDoList(class std::list<class CEntityTask,class std::allocator<class CEntityTask> > *,int) {
   
   int result; // eax
@@ -175,7 +161,6 @@ void  IMovingEntity::NewToDoList(class std::list<class CEntityTask,class std::al
 
 // address=[0x1559260]
 // Decompiled from int __thiscall IMovingEntity::ResetToDoList(IMovingEntity *this)
-
 void  IMovingEntity::ResetToDoList(void) {
   
   _BYTE v2[12]; // [esp+4h] [ebp-38h] BYREF
@@ -213,7 +198,6 @@ void  IMovingEntity::ResetToDoList(void) {
 
 // address=[0x1559340]
 // Decompiled from int __thiscall IMovingEntity::SetToDoList(_DWORD *this, int a2)
-
 void  IMovingEntity::SetToDoList(class std::list<class CEntityTask,class std::allocator<class CEntityTask> > *) {
   
   _BYTE v3[12]; // [esp+4h] [ebp-24h] BYREF
@@ -238,7 +222,6 @@ void  IMovingEntity::SetToDoList(class std::list<class CEntityTask,class std::al
 
 // address=[0x1559400]
 // Decompiled from int __thiscall IMovingEntity::IsNotOccupied(IMovingEntity *this, int a2)
-
 bool  IMovingEntity::IsNotOccupied(int) {
   
   int v3; // [esp+4h] [ebp-4h]
@@ -250,7 +233,6 @@ bool  IMovingEntity::IsNotOccupied(int) {
 
 // address=[0x1559430]
 // Decompiled from int __thiscall IMovingEntity::IsNotBlocked(IMovingEntity *this, int a2)
-
 bool  IMovingEntity::IsNotBlocked(int) {
   
   int v3; // [esp+4h] [ebp-4h]
@@ -262,7 +244,6 @@ bool  IMovingEntity::IsNotBlocked(int) {
 
 // address=[0x1563870]
 // Decompiled from bool __thiscall IMovingEntity::IsEndIter(IMovingEntity *this)
-
 bool  IMovingEntity::IsEndIter(void) {
   
   _BYTE v2[12]; // [esp+4h] [ebp-28h] BYREF
@@ -287,7 +268,6 @@ bool  IMovingEntity::IsEndIter(void) {
 
 // address=[0x1563980]
 // Decompiled from IMovingEntity *__thiscall IMovingEntity::SetDistance(IMovingEntity *this, char a2)
-
 void  IMovingEntity::SetDistance(int) {
   
   IMovingEntity *result; // eax
@@ -300,7 +280,6 @@ void  IMovingEntity::SetDistance(int) {
 
 // address=[0x1568790]
 // Decompiled from int __thiscall IMovingEntity::GetActualIter(char *this, int a2)
-
 class std::_List_iterator<class std::_List_val<struct std::_List_simple_types<class CEntityTask> > > const  IMovingEntity::GetActualIter(void)const {
   
   std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(this + 88);
@@ -310,7 +289,6 @@ class std::_List_iterator<class std::_List_val<struct std::_List_simple_types<cl
 
 // address=[0x15d6230]
 // Decompiled from int __thiscall IMovingEntity::DisplacementCosts(IMovingEntity *this)
-
 int  IMovingEntity::DisplacementCosts(void)const {
   
   return *((unsigned __int8 *)this + 70);
@@ -319,7 +297,6 @@ int  IMovingEntity::DisplacementCosts(void)const {
 
 // address=[0x14d8840]
 // Decompiled from char __thiscall IMovingEntity::SetPositionAndDir(IMovingEntity *this, int a2, char a3)
-
 void  IMovingEntity::SetPositionAndDir(int,int) {
   
   char result; // al
@@ -333,7 +310,6 @@ void  IMovingEntity::SetPositionAndDir(int,int) {
 
 // address=[0x1559460]
 // Decompiled from _DWORD *__thiscall sub_1959460(_DWORD *this, int a2)
-
  IMovingEntity::IMovingEntity(std::istream &) {
   
   int v2; // eax
@@ -386,7 +362,6 @@ void  IMovingEntity::SetPositionAndDir(int,int) {
 
 // address=[0x15595e0]
 // Decompiled from int __thiscall IMovingEntity::Store(int *this, struct std::ostream *a2)
-
 void  IMovingEntity::Store(std::ostream &) {
   
   int result; // eax
@@ -416,7 +391,6 @@ void  IMovingEntity::Store(std::ostream &) {
 
 // address=[0x15596c0]
 // Decompiled from IMovingEntity *__thiscall IMovingEntity::InitDistance(IMovingEntity *this)
-
 void  IMovingEntity::InitDistance(void) {
   
   IMovingEntity *result; // eax
@@ -429,7 +403,6 @@ void  IMovingEntity::InitDistance(void) {
 
 // address=[0x15596e0]
 // Decompiled from IMovingEntity *__thiscall IMovingEntity::DecDistance(IMovingEntity *this, unsigned int a2)
-
 void  IMovingEntity::DecDistance(unsigned int) {
   
   IMovingEntity *result; // eax

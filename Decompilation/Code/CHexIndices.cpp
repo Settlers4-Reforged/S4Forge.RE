@@ -4,7 +4,6 @@
 
 // address=[0x2fcabb0]
 // Decompiled from CHexIndices *__thiscall CHexIndices::CHexIndices(CHexIndices *this)
-
  CHexIndices::CHexIndices(void) {
   
   _DWORD v3[6000]; // [esp+4h] [ebp-5DC4h] BYREF
@@ -61,7 +60,6 @@
 
 // address=[0x2fcb110]
 // Decompiled from CHexIndices *__thiscall CHexIndices::SetFirst(CHexIndices *this)
-
 void  CHexIndices::SetFirst(void) {
   
   CHexIndices *result; // eax
@@ -75,7 +73,6 @@ void  CHexIndices::SetFirst(void) {
 
 // address=[0x2fcb140]
 // Decompiled from int __thiscall CHexIndices::GetIndex(CHexIndices *this)
-
 int  CHexIndices::GetIndex(void) {
   
   if ( *((_DWORD *)this + 8001) )

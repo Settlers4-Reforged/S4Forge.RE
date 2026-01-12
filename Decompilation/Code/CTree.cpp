@@ -4,7 +4,6 @@
 
 // address=[0x14025c0]
 // Decompiled from int __cdecl CTree::New(int a1)
-
 static class CPersistence * __cdecl CTree::New(std::istream &) {
   
   if ( CTree::operator new(0x50u) )
@@ -16,7 +15,6 @@ static class CPersistence * __cdecl CTree::New(std::istream &) {
 
 // address=[0x15a2e10]
 // Decompiled from CTree *__thiscall CTree::CTree(CTree *this, int a2, int a3, int a4, int a5, int a6)
-
  CTree::CTree(int,int,int,int,int) {
   
   IDecoObject::IDecoObject(this, a2, a3, a4, a5, a6 != 0);
@@ -43,7 +41,6 @@ static class CPersistence * __cdecl CTree::New(std::istream &) {
 
 // address=[0x15a2f50]
 // Decompiled from CTree *__thiscall CTree::CTree(CTree *this, const struct CTree *a2, int a3, int a4, int a5)
-
  CTree::CTree(class CTree const &,int,int,int) {
   
   IDecoObject::IDecoObject(this, a2, a3, a4, a5);
@@ -65,7 +62,6 @@ static class CPersistence * __cdecl CTree::New(std::istream &) {
 
 // address=[0x15a3040]
 // Decompiled from void __thiscall CTree::LogicUpdate(CTree *this)
-
 void  CTree::LogicUpdate(void) {
   
   int v1; // eax
@@ -163,7 +159,6 @@ LABEL_17:
 
 // address=[0x15a3310]
 // Decompiled from void *__thiscall sub_19A3310(int this)
-
 struct SGfxObjectInfo *  CTree::GetGfxInfos(void) {
   
   int v1; // esi
@@ -193,7 +188,6 @@ struct SGfxObjectInfo *  CTree::GetGfxInfos(void) {
 
 // address=[0x15a33e0]
 // Decompiled from int __thiscall CTree::GetGoodType(CTree *this)
-
 int  CTree::GetGoodType(void)const {
   
   return 22;
@@ -202,7 +196,6 @@ int  CTree::GetGoodType(void)const {
 
 // address=[0x15a33f0]
 // Decompiled from CTree *__thiscall CTree::Decrease(CTree *this, int a2)
-
 void  CTree::Decrease(int) {
   
   int v2; // eax
@@ -239,9 +232,7 @@ void  CTree::Decrease(int) {
 
 
 // address=[0x15a3500]
-// Decompiled from // MFC 3.1-14.0 32bit
-int __thiscall CTree::Increase(CTree *this, int a2)
-
+// Decompiled from int __thiscall CTree::Increase(CTree *this, int a2)
 int  CTree::Increase(int) {
   
   return 1;
@@ -250,7 +241,6 @@ int  CTree::Increase(int) {
 
 // address=[0x15a3520]
 // Decompiled from int __thiscall CTree::Take(CTree *this, int a2)
-
 void  CTree::Take(int) {
   
   return (*(int (__thiscall **)(CTree *, int))(*(_DWORD *)this + 32))(this, 1);
@@ -259,7 +249,6 @@ void  CTree::Take(int) {
 
 // address=[0x15a3540]
 // Decompiled from int __thiscall CTree::ConvertToDarkOrGreen(CTree *this, bool a2)
-
 int  CTree::ConvertToDarkOrGreen(bool) {
   
   int v3; // [esp+0h] [ebp-Ch]
@@ -284,7 +273,6 @@ int  CTree::ConvertToDarkOrGreen(bool) {
 
 // address=[0x15a35d0]
 // Decompiled from unsigned int __cdecl CTree::operator new(unsigned int a1)
-
 static void * __cdecl CTree::operator new(unsigned int) {
   
   return CDecoObjMgr::Alloc((CDecoObjMgr *)&g_cDecoObjMgr, a1);
@@ -293,7 +281,6 @@ static void * __cdecl CTree::operator new(unsigned int) {
 
 // address=[0x15a35f0]
 // Decompiled from void __cdecl CTree::operator delete(void *a1)
-
 static void __cdecl CTree::operator delete(void *) {
   
   CDecoObjMgr::Dealloc((CDecoObjMgr *)&g_cDecoObjMgr, a1);
@@ -302,7 +289,6 @@ static void __cdecl CTree::operator delete(void *) {
 
 // address=[0x15a3630]
 // Decompiled from _DWORD *__thiscall CTree::CTree(_DWORD *this, int a2)
-
  CTree::CTree(std::istream &) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
@@ -333,7 +319,6 @@ static void __cdecl CTree::operator delete(void *) {
 
 // address=[0x15a3730]
 // Decompiled from int __thiscall CTree::Store(int *this, struct std::ostream *a2)
-
 void  CTree::Store(std::ostream &) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
@@ -352,7 +337,6 @@ void  CTree::Store(std::ostream &) {
 
 // address=[0x15a3a20]
 // Decompiled from void __thiscall CTree::~CTree(CTree *this)
-
  CTree::~CTree(void) {
   
   *(_DWORD *)this = &CTree::_vftable_;
@@ -362,7 +346,6 @@ void  CTree::Store(std::ostream &) {
 
 // address=[0x15a3ab0]
 // Decompiled from int __thiscall CTree::ClassID(CTree *this)
-
 unsigned long  CTree::ClassID(void)const {
   
   return CTree::m_iClassID;

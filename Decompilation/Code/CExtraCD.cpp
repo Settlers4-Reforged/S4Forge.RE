@@ -4,7 +4,6 @@
 
 // address=[0x1481700]
 // Decompiled from CExtraCD *__thiscall CExtraCD::CExtraCD(CExtraCD *this)
-
  CExtraCD::CExtraCD(void) {
   
   IExtraCD::IExtraCD(this);
@@ -18,7 +17,6 @@
 
 // address=[0x1481740]
 // Decompiled from IExtraCD *__thiscall CExtraCD::~CExtraCD(void **this)
-
  CExtraCD::~CExtraCD(void) {
   
   *this = &CExtraCD::_vftable_;
@@ -35,7 +33,6 @@
 
 // address=[0x14817a0]
 // Decompiled from char __thiscall CExtraCD::IsExtraInstalled(CExtraCD *this)
-
 bool  CExtraCD::IsExtraInstalled(void) {
   
   if ( *((_BYTE *)this + 8) )
@@ -48,7 +45,6 @@ bool  CExtraCD::IsExtraInstalled(void) {
 
 // address=[0x14817e0]
 // Decompiled from char __thiscall CExtraCD::EnsureMainGUI(CExtraCD *this, int a2, bool (__cdecl *a3)(int, int, int))
-
 void  CExtraCD::EnsureMainGUI(int,bool (__cdecl*)(int,int,int)) {
   
   return CExtraCD::EnsureGuiEngineHasGfxFileLoaded(this, 0, (int)g_pDialogData, a2, a3, 0);
@@ -56,14 +52,7 @@ void  CExtraCD::EnsureMainGUI(int,bool (__cdecl*)(int,int,int)) {
 
 
 // address=[0x1481810]
-// Decompiled from char __thiscall CExtraCD::EnsureGuiEngineHasGfxFileLoaded(
-        CExtraCD *this,
-        unsigned int a2,
-        int a3,
-        int a4,
-        bool (__cdecl *a5)(int, int, int),
-        bool a6)
-
+// Decompiled from char __thiscall CExtraCD::EnsureGuiEngineHasGfxFileLoaded(  CExtraCD *this,  unsigned int a2,  int a3,  int a4,  bool (__cdecl *a5)(int, int, int),  bool a6)
 void  CExtraCD::EnsureGuiEngineHasGfxFileLoaded(unsigned int,void *,int,bool (__cdecl*)(int,int,int),bool) {
   
   unsigned int ActiveGUIGFXFile; // eax
@@ -95,7 +84,6 @@ void  CExtraCD::EnsureGuiEngineHasGfxFileLoaded(unsigned int,void *,int,bool (__
 
 // address=[0x14818e0]
 // Decompiled from char __cdecl CExtraCD::ExistsFile(wchar_t *FileName)
-
 static bool __cdecl CExtraCD::ExistsFile(wchar_t const *) {
   
   int v2; // [esp+0h] [ebp-94h] BYREF
@@ -120,7 +108,6 @@ static bool __cdecl CExtraCD::ExistsFile(wchar_t const *) {
 
 // address=[0x14819b0]
 // Decompiled from char __cdecl CExtraCD::ExistsFiles(wchar_t **a1)
-
 static bool __cdecl CExtraCD::ExistsFiles(wchar_t const * *) {
   
   wchar_t **i; // [esp+0h] [ebp-4h]
@@ -139,7 +126,6 @@ static bool __cdecl CExtraCD::ExistsFiles(wchar_t const * *) {
 
 // address=[0x1481a00]
 // Decompiled from int __thiscall CExtraCD::LoadMenuData(void **this, wchar_t *FileName)
-
 void  CExtraCD::LoadMenuData(wchar_t const *) {
   
   size_t v2; // eax

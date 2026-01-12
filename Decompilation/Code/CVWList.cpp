@@ -4,7 +4,6 @@
 
 // address=[0x1334ec0]
 // Decompiled from CVWList *__thiscall CVWList::CVWList(CVWList *this, int a2, int a3, int a4)
-
  CVWList::CVWList(int,int,int) {
   
   CVWList::CalculateOverlappingSquares(this, a2, a3, a4);
@@ -14,7 +13,6 @@
 
 // address=[0x1335b10]
 // Decompiled from int __thiscall CVWList::operator[](void *this, int a2)
-
 struct CVWList::SVW const &  CVWList::operator[](int)const {
   
   return (int)this + 8 * a2 + 8;
@@ -22,10 +20,7 @@ struct CVWList::SVW const &  CVWList::operator[](int)const {
 
 
 // address=[0x1336840]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CVWList::Size(CVWList *this)
-
+// Decompiled from int __thiscall CVWList::Size(CVWList *this)
 int  CVWList::Size(void)const {
   
   return *(_DWORD *)this;
@@ -34,7 +29,6 @@ int  CVWList::Size(void)const {
 
 // address=[0x15de830]
 // Decompiled from CVWList *__thiscall CVWList::CalculateOverlappingSquares(CVWList *this, int a2, int a3, unsigned int a4)
-
 void  CVWList::CalculateOverlappingSquares(int,int,int) {
   
   CVWList *result; // eax
@@ -74,7 +68,6 @@ void  CVWList::CalculateOverlappingSquares(int,int,int) {
 
 // address=[0x15e2cf0]
 // Decompiled from int __thiscall CVWList::PushEx(CVWList *this, int *a2, int a3, int a4)
-
 void  CVWList::PushEx(int &,int,int) {
   
   int result; // eax

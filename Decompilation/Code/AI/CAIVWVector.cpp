@@ -4,7 +4,6 @@
 
 // address=[0x1334d40]
 // Decompiled from CAIVWVector *__thiscall CAIVWVector::CAIVWVector(CAIVWVector *this)
-
  CAIVWVector::CAIVWVector(void) {
   
   std::vector<int>::vector<int>(this);
@@ -16,7 +15,6 @@
 
 // address=[0x1335450]
 // Decompiled from int __thiscall CAIVWVector::~CAIVWVector(CAIVWVector *this)
-
  CAIVWVector::~CAIVWVector(void) {
   
   return std::vector<int>::~vector<int>();
@@ -25,7 +23,6 @@
 
 // address=[0x1335ee0]
 // Decompiled from int __thiscall CAIVWVector::At(CAIVWVector *this, unsigned int a2)
-
 int  CAIVWVector::At(int)const {
   
   if ( a2 >= std::vector<int>::size(this) )
@@ -37,7 +34,6 @@ int  CAIVWVector::At(int)const {
 
 // address=[0x1335f30]
 // Decompiled from void *__thiscall CAIVWVector::Clear(CAIVWVector *this)
-
 void  CAIVWVector::Clear(void) {
   
   std::vector<int>::clear();
@@ -47,7 +43,6 @@ void  CAIVWVector::Clear(void) {
 
 // address=[0x1336240]
 // Decompiled from int __thiscall CAIVWVector::Index(CAIVWVector *this, int a2)
-
 int  CAIVWVector::Index(int)const {
   
   Grid *v4; // [esp+4h] [ebp-8h]
@@ -70,7 +65,6 @@ int  CAIVWVector::Index(int)const {
 
 // address=[0x1336440]
 // Decompiled from Grid *__thiscall CAIVWVector::PushBack(CAIVWVector *this, int a2)
-
 void  CAIVWVector::PushBack(int) {
   
   Grid *result; // eax
@@ -122,7 +116,6 @@ void  CAIVWVector::PushBack(int) {
 
 // address=[0x13365a0]
 // Decompiled from int __thiscall CAIVWVector::Remove(CAIVWVector *this, unsigned int a2)
-
 void  CAIVWVector::Remove(int) {
   
   int result; // eax
@@ -173,7 +166,6 @@ void  CAIVWVector::Remove(int) {
 
 // address=[0x1336820]
 // Decompiled from int __thiscall CAIVWVector::Size(CAIVWVector *this)
-
 int  CAIVWVector::Size(void)const {
   
   return std::vector<int>::size(this);

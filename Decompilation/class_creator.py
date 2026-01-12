@@ -706,7 +706,14 @@ def write_class_definitions(classes):
                         
                     [func_name, func_without_declaration] = func.split("{", 1)
                     func = strip_for_decompilation(entry["declaration"]) + " {\n  " + func_without_declaration
-                    
+
+                    commented_func_name = func_name.split("\n")
+                    print("Pre Comment clean:", "||".join(commented_func_name))
+                    commented_func_name = [line.strip() for line in commented_func_name if line.strip() != '' and not line.strip().startswith("//")]
+                    print("Post Comment clean:", "||".join(commented_func_name))
+                    func_name = "\n ".join(commented_func_name)
+
+                    func_name = func_name.strip().replace("\n", " ")
                     f.write(f"// Decompiled from {func_name}\n")
                     f.write(f"{func}\n\n")
 

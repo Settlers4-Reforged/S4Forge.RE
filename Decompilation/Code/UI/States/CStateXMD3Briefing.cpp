@@ -4,7 +4,6 @@
 
 // address=[0x14cca70]
 // Decompiled from CStateXMD3Briefing *__cdecl CStateXMD3Briefing::DynamicCreateFunc(void *a1)
-
 static class CGameState * __cdecl CStateXMD3Briefing::DynamicCreateFunc(void *) {
   
   CStateXMD3Briefing *C; // [esp+Ch] [ebp-10h]
@@ -19,7 +18,6 @@ static class CGameState * __cdecl CStateXMD3Briefing::DynamicCreateFunc(void *) 
 
 // address=[0x14ccbd0]
 // Decompiled from CStateXMD3Briefing *__thiscall CStateXMD3Briefing::CStateXMD3Briefing(CStateXMD3Briefing *this, void *a2)
-
  CStateXMD3Briefing::CStateXMD3Briefing(void *) {
   
   const char *v2; // eax
@@ -180,7 +178,6 @@ static class CGameState * __cdecl CStateXMD3Briefing::DynamicCreateFunc(void *) 
 
 // address=[0x14cd0b0]
 // Decompiled from void __thiscall CStateXMD3Briefing::~CStateXMD3Briefing(CStateXMD3Briefing *this)
-
  CStateXMD3Briefing::~CStateXMD3Briefing(void) {
   
   *(_DWORD *)this = &CStateXMD3Briefing::_vftable_;
@@ -191,7 +188,6 @@ static class CGameState * __cdecl CStateXMD3Briefing::DynamicCreateFunc(void *) 
 
 // address=[0x14cd110]
 // Decompiled from char __thiscall CStateXMD3Briefing::Perform(CStateXMD3Briefing *this)
-
 bool  CStateXMD3Briefing::Perform(void) {
   
   DWORD v2; // esi
@@ -247,7 +243,6 @@ bool  CStateXMD3Briefing::Perform(void) {
 
 // address=[0x14cd280]
 // Decompiled from char __thiscall CStateXMD3Briefing::OnEvent(CStateXMD3Briefing *this, struct CEvn_Event *a2)
-
 bool  CStateXMD3Briefing::OnEvent(class CEvn_Event &) {
   
   CGUIWrapper *Instance; // eax
@@ -382,7 +377,6 @@ bool  CStateXMD3Briefing::OnEvent(class CEvn_Event &) {
 
 // address=[0x14cd770]
 // Decompiled from void *__cdecl CStateXMD3Briefing::InitBriefingTexts(int a1, int a2)
-
 static void __cdecl CStateXMD3Briefing::InitBriefingTexts(int,int) {
   
   char *v2; // eax
@@ -480,9 +474,7 @@ static void __cdecl CStateXMD3Briefing::InitBriefingTexts(int,int) {
 
 
 // address=[0x14cdf50]
-// Decompiled from // Microsoft VisualC 14/net runtime
-char __thiscall CStateXMD3Briefing::CanProcessInvites(CStateXMD3Briefing *this)
-
+// Decompiled from char __thiscall CStateXMD3Briefing::CanProcessInvites(CStateXMD3Briefing *this)
 bool  CStateXMD3Briefing::CanProcessInvites(void) {
   
   return 0;
@@ -490,9 +482,7 @@ bool  CStateXMD3Briefing::CanProcessInvites(void) {
 
 
 // address=[0x14ccaf0]
-// Decompiled from // private: void __thiscall CStateXMD3Briefing::PaintMap(bool)
-char __stdcall CStateXMD3Briefing::PaintMap(char a1)
-
+// Decompiled from char __stdcall CStateXMD3Briefing::PaintMap(char a1)
 void  CStateXMD3Briefing::PaintMap(bool) {
   
   char result; // al

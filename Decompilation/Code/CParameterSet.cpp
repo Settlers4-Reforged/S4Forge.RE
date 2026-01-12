@@ -4,7 +4,6 @@
 
 // address=[0x2f3f500]
 // Decompiled from CParameterSet *__thiscall CParameterSet::CParameterSet(CParameterSet *this)
-
  CParameterSet::CParameterSet(void) {
   
   CDynList *v2; // [esp+8h] [ebp-18h]
@@ -24,7 +23,6 @@
 
 // address=[0x2f3f5a0]
 // Decompiled from void __thiscall CParameterSet::~CParameterSet(CDynList **this)
-
  CParameterSet::~CParameterSet(void) {
   
   *this = (CDynList *)&CParameterSet::_vftable_;
@@ -36,7 +34,6 @@
 
 // address=[0x2f3f5f0]
 // Decompiled from int __thiscall CParameterSet::size(CDynList **this)
-
 int  CParameterSet::size(void) {
   
   return CDynList::size(this[3]);
@@ -45,7 +42,6 @@ int  CParameterSet::size(void) {
 
 // address=[0x2f3f610]
 // Decompiled from int __thiscall CParameterSet::elementAt(CDynList **this, int a2)
-
 class CParam *  CParameterSet::elementAt(int) {
   
   return CDynList::elementAt(this[3], a2);
@@ -54,7 +50,6 @@ class CParam *  CParameterSet::elementAt(int) {
 
 // address=[0x2f3f630]
 // Decompiled from int __thiscall CParameterSet::NewParameterSet(CDynList **this, struct CParam *a2)
-
 void  CParameterSet::NewParameterSet(class CParam *) {
   
   return CDynList::addElement(this[3], a2);
@@ -63,7 +58,6 @@ void  CParameterSet::NewParameterSet(class CParam *) {
 
 // address=[0x2f3f650]
 // Decompiled from int __thiscall CParameterSet::Ausgabe(CDynList **this)
-
 void  CParameterSet::Ausgabe(void) {
   
   int result; // eax

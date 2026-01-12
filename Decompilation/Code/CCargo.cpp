@@ -3,10 +3,7 @@
 // Definitions for class CCargo
 
 // address=[0x159af90]
-// Decompiled from CFerryShip::CCargo *__thiscall CFerryShip::CCargo::CCargo(
-        CFerryShip::CCargo *this,
-        const struct CFerryShip::CCargo *a2)
-
+// Decompiled from CFerryShip::CCargo *__thiscall CFerryShip::CCargo::CCargo(  CFerryShip::CCargo *this,  const struct CFerryShip::CCargo *a2)
  CFerryShip::CCargo::CCargo(class CFerryShip::CCargo const &) {
   
   *(_DWORD *)this = *(_DWORD *)a2;
@@ -22,7 +19,6 @@
 
 // address=[0x159b010]
 // Decompiled from CFerryShip::CCargo *__thiscall CFerryShip::CCargo::CCargo(CFerryShip::CCargo *this, int a2, int a3, int a4, int a5)
-
  CFerryShip::CCargo::CCargo(int,int,int,int) {
   
   *(_DWORD *)this = a2;
@@ -38,7 +34,6 @@
 
 // address=[0x159b070]
 // Decompiled from CFerryShip::CCargo *__thiscall CFerryShip::CCargo::CCargo(CFerryShip::CCargo *this)
-
  CFerryShip::CCargo::CCargo(void) {
   
   *(_DWORD *)this = 0;
@@ -54,7 +49,6 @@
 
 // address=[0x159bab0]
 // Decompiled from int __thiscall CFerryShip::CCargo::GetCargoSize(CFerryShip::CCargo *this)
-
 int  CFerryShip::CCargo::GetCargoSize(void) {
   
   return CFerryShip::GetCargoSize(*(_DWORD *)this, *((_DWORD *)this + 1));

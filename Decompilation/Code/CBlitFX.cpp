@@ -4,7 +4,6 @@
 
 // address=[0x2f69900]
 // Decompiled from CBlitFX *__thiscall CBlitFX::GetBlitStructPtr(CBlitFX *this)
-
 struct _DDBLTFX *  CBlitFX::GetBlitStructPtr(void) {
   
   return this;
@@ -13,7 +12,6 @@ struct _DDBLTFX *  CBlitFX::GetBlitStructPtr(void) {
 
 // address=[0x2f86400]
 // Decompiled from CBlitFX *__thiscall CBlitFX::CBlitFX(CBlitFX *this)
-
  CBlitFX::CBlitFX(void) {
   
   j__memset(this, 0, 0x64u);
@@ -24,7 +22,6 @@ struct _DDBLTFX *  CBlitFX::GetBlitStructPtr(void) {
 
 // address=[0x2f86430]
 // Decompiled from CBlitFX *__thiscall CBlitFX::SetFillColor(CBlitFX *this, int a2, int a3, int a4, bool a5)
-
 void  CBlitFX::SetFillColor(int,int,int,bool) {
   
   int v5; // edx
@@ -44,7 +41,6 @@ void  CBlitFX::SetFillColor(int,int,int,bool) {
 
 // address=[0x2f864e0]
 // Decompiled from int __thiscall CBlitFX::SetFillColorAlpha(CBlitFX *this, int a2, int a3, int a4, int a5)
-
 void  CBlitFX::SetFillColorAlpha(int,int,int,int) {
   
   int result; // eax

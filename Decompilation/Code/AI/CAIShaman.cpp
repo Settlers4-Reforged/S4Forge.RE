@@ -4,7 +4,6 @@
 
 // address=[0x13264f0]
 // Decompiled from char __thiscall CAIShaman::FindGlobalTargetForShaman(CAIShaman *this, int player, int a3, int *x, int *y, bool a6)
-
 bool  CAIShaman::FindGlobalTargetForShaman(int,int,int &,int &,bool) {
   
   _DWORD *v6; // eax
@@ -98,7 +97,6 @@ bool  CAIShaman::FindGlobalTargetForShaman(int,int,int &,int &,bool) {
 
 // address=[0x13267b0]
 // Decompiled from char __thiscall CAIShaman::FindNearTargetForShaman(CAIShaman *this, int a2, int a3, int *a4, int *a5)
-
 bool  CAIShaman::FindNearTargetForShaman(int,int,int &,int &) {
   
   int v6; // [esp+Ch] [ebp-8h]
@@ -117,7 +115,6 @@ bool  CAIShaman::FindNearTargetForShaman(int,int,int &,int &) {
 
 // address=[0x1326840]
 // Decompiled from int __thiscall CAIShaman::FindTeleportationTarget(CAIShaman *this, int *a2, int *a3, int a4)
-
 int  CAIShaman::FindTeleportationTarget(int &,int &,int) {
   
   int GoodOffer; // eax
@@ -171,7 +168,6 @@ int  CAIShaman::FindTeleportationTarget(int &,int &,int) {
 
 // address=[0x1326950]
 // Decompiled from int __thiscall CAIShaman::FindFieldToRot(CAIShaman *this, int *a2, int *a3, int a4)
-
 int  CAIShaman::FindFieldToRot(int &,int &,int) {
   
   _DWORD v5[5]; // [esp+0h] [ebp-30h] BYREF
@@ -217,7 +213,6 @@ int  CAIShaman::FindFieldToRot(int &,int &,int) {
 
 // address=[0x1326d60]
 // Decompiled from CAIShaman *__thiscall CAIShaman::CAIShaman(CAIShaman *this)
-
  CAIShaman::CAIShaman(void) {
   
   IAIShaman::IAIShaman(this);
@@ -228,7 +223,6 @@ int  CAIShaman::FindFieldToRot(int &,int &,int) {
 
 // address=[0x1326a60]
 // Decompiled from int __thiscall CAIShaman::EvaluateTargetPosition(CAIShaman *this, Squares *a2, Squares *a3)
-
 int  CAIShaman::EvaluateTargetPosition(int,int) {
   
   int v4; // [esp+4h] [ebp-18h]
@@ -250,15 +244,7 @@ int  CAIShaman::EvaluateTargetPosition(int,int) {
 
 
 // address=[0x1326af0]
-// Decompiled from int __thiscall CAIShaman::FindBetterTargetBuilding(
-        CAIShaman *this,
-        int a2,
-        int a3,
-        struct _Cnd_internal_imp_t **a4,
-        Squares **a5,
-        int *a6,
-        bool a7)
-
+// Decompiled from int __thiscall CAIShaman::FindBetterTargetBuilding(  CAIShaman *this,  int a2,  int a3,  struct _Cnd_internal_imp_t **a4,  Squares **a5,  int *a6,  bool a7)
 void  CAIShaman::FindBetterTargetBuilding(int,int,int &,int &,int &,bool) {
   
   int result; // eax

@@ -4,7 +4,6 @@
 
 // address=[0x1361450]
 // Decompiled from char __thiscall CGameType::IsLadderGame(CGameType *this)
-
 bool  CGameType::IsLadderGame(void)const {
   
   return *((_BYTE *)this + 1545);
@@ -13,7 +12,6 @@ bool  CGameType::IsLadderGame(void)const {
 
 // address=[0x13a4100]
 // Decompiled from CGameType *__thiscall CGameType::ChangeLocalSlot(CGameType *this, signed __int8 a2)
-
 void  CGameType::ChangeLocalSlot(signed char) {
   
   CGameType *result; // eax
@@ -26,7 +24,6 @@ void  CGameType::ChangeLocalSlot(signed char) {
 
 // address=[0x13a4140]
 // Decompiled from char __thiscall CGameType::IsClanGame(CGameType *this)
-
 bool const  CGameType::IsClanGame(void) {
   
   return *((_BYTE *)this + 1544);
@@ -35,7 +32,6 @@ bool const  CGameType::IsClanGame(void) {
 
 // address=[0x13a4160]
 // Decompiled from char __thiscall sub_17A4160(_BYTE *this)
-
 bool const  CGameType::IsSaveGame(void)const {
   
   return this[696];
@@ -44,7 +40,6 @@ bool const  CGameType::IsSaveGame(void)const {
 
 // address=[0x13a4180]
 // Decompiled from bool __thiscall CGameType::IsSlotChangable(CGameType *this, int a2, bool *a3)
-
 bool  CGameType::IsSlotChangable(int,bool *) {
   
   bool v4; // [esp+4h] [ebp-8h]
@@ -61,7 +56,6 @@ bool  CGameType::IsSlotChangable(int,bool *) {
 
 // address=[0x13a8490]
 // Decompiled from char __thiscall CGameType::IsAddOnMap(CGameType *this)
-
 bool  CGameType::IsAddOnMap(void) {
   
   return *((_BYTE *)this + 1546);
@@ -70,7 +64,6 @@ bool  CGameType::IsAddOnMap(void) {
 
 // address=[0x13a84b0]
 // Decompiled from bool __thiscall CGameType::IsEmptyMap(CGameType *this)
-
 bool  CGameType::IsEmptyMap(void) {
   
   return *((_DWORD *)this + 15) == 1;
@@ -79,7 +72,6 @@ bool  CGameType::IsEmptyMap(void) {
 
 // address=[0x1486e10]
 // Decompiled from int __thiscall CGameType::GetLocalSlot(CGameType *this)
-
 int const  CGameType::GetLocalSlot(void) {
   
   return *((char *)this + 1537);
@@ -88,7 +80,6 @@ int const  CGameType::GetLocalSlot(void) {
 
 // address=[0x1486e30]
 // Decompiled from int __thiscall CGameType::GetMapBuildingXMLVersion(CGameType *this)
-
 int  CGameType::GetMapBuildingXMLVersion(void)const {
   
   return *((_DWORD *)this + 389);
@@ -97,7 +88,6 @@ int  CGameType::GetMapBuildingXMLVersion(void)const {
 
 // address=[0x1486e50]
 // Decompiled from int __thiscall CGameType::GetMapObjectXMLVersion(CGameType *this)
-
 int  CGameType::GetMapObjectXMLVersion(void)const {
   
   return *((_DWORD *)this + 388);
@@ -106,7 +96,6 @@ int  CGameType::GetMapObjectXMLVersion(void)const {
 
 // address=[0x1486e70]
 // Decompiled from int __thiscall CGameType::GetMultiPlayerGameID(CGameType *this)
-
 unsigned int const  CGameType::GetMultiPlayerGameID(void) {
   
   return *((_DWORD *)this + 383);
@@ -115,7 +104,6 @@ unsigned int const  CGameType::GetMultiPlayerGameID(void) {
 
 // address=[0x1486ef0]
 // Decompiled from int __thiscall CGameType::GetRealPlayerName(void *this, unsigned int a2)
-
 std::wstring &  CGameType::GetRealPlayerName(int) {
   
   if ( a2 >= 0xA
@@ -133,7 +121,6 @@ std::wstring &  CGameType::GetRealPlayerName(int) {
 
 // address=[0x1486fe0]
 // Decompiled from char __thiscall CGameType::IsBlueByteAddOnMap(CGameType *this)
-
 bool  CGameType::IsBlueByteAddOnMap(void) {
   
   return *((_BYTE *)this + 1547);
@@ -142,7 +129,6 @@ bool  CGameType::IsBlueByteAddOnMap(void) {
 
 // address=[0x1487000]
 // Decompiled from char __thiscall CGameType::IsBlueByteMCD2Map(CGameType *this)
-
 bool  CGameType::IsBlueByteMCD2Map(void) {
   
   return *((_BYTE *)this + 1548);
@@ -151,7 +137,6 @@ bool  CGameType::IsBlueByteMCD2Map(void) {
 
 // address=[0x1487020]
 // Decompiled from char __thiscall CGameType::IsCampaignMap(CGameType *this)
-
 bool  CGameType::IsCampaignMap(void) {
   
   return *((_BYTE *)this + 997);
@@ -160,7 +145,6 @@ bool  CGameType::IsCampaignMap(void) {
 
 // address=[0x1487040]
 // Decompiled from char __thiscall CGameType::IsHost(CGameType *this)
-
 bool const  CGameType::IsHost(void) {
   
   return *((_BYTE *)this + 1538);
@@ -169,7 +153,6 @@ bool const  CGameType::IsHost(void) {
 
 // address=[0x1487060]
 // Decompiled from char __thiscall CGameType::IsMCD2TextureSet(CGameType *this)
-
 bool  CGameType::IsMCD2TextureSet(void) {
   
   return *((_BYTE *)this + 1549);
@@ -178,7 +161,6 @@ bool  CGameType::IsMCD2TextureSet(void) {
 
 // address=[0x1487080]
 // Decompiled from bool __thiscall CGameType::IsMultiplayerGame(CGameType *this)
-
 bool const  CGameType::IsMultiplayerGame(void) {
   
   return *((_DWORD *)this + 173) == 2;
@@ -187,7 +169,6 @@ bool const  CGameType::IsMultiplayerGame(void) {
 
 // address=[0x14873d0]
 // Decompiled from CGameType *__thiscall CGameType::SetBlueByteMCD2Map(CGameType *this, bool a2)
-
 void  CGameType::SetBlueByteMCD2Map(bool) {
   
   CGameType *result; // eax
@@ -200,7 +181,6 @@ void  CGameType::SetBlueByteMCD2Map(bool) {
 
 // address=[0x14873f0]
 // Decompiled from CGameType *__thiscall CGameType::SetClanGame(CGameType *this, bool a2)
-
 void  CGameType::SetClanGame(bool) {
   
   CGameType *result; // eax
@@ -213,7 +193,6 @@ void  CGameType::SetClanGame(bool) {
 
 // address=[0x1487410]
 // Decompiled from CGameType *__thiscall CGameType::SetHost(CGameType *this, bool a2)
-
 void  CGameType::SetHost(bool) {
   
   CGameType *result; // eax
@@ -226,7 +205,6 @@ void  CGameType::SetHost(bool) {
 
 // address=[0x1487430]
 // Decompiled from int __thiscall CGameType::SetLocalSlot(CGameType *this, signed __int8 a2)
-
 void  CGameType::SetLocalSlot(signed char) {
   
   int result; // eax
@@ -251,7 +229,6 @@ void  CGameType::SetLocalSlot(signed char) {
 
 // address=[0x14874d0]
 // Decompiled from CGameType *__thiscall CGameType::SetMCD2TextureSet(CGameType *this, bool a2)
-
 void  CGameType::SetMCD2TextureSet(bool) {
   
   CGameType *result; // eax
@@ -264,7 +241,6 @@ void  CGameType::SetMCD2TextureSet(bool) {
 
 // address=[0x14874f0]
 // Decompiled from CGameType *__thiscall CGameType::SetMPSavegameID(CGameType *this, int a2)
-
 void  CGameType::SetMPSavegameID(int) {
   
   CGameType *result; // eax
@@ -277,7 +253,6 @@ void  CGameType::SetMPSavegameID(int) {
 
 // address=[0x1487510]
 // Decompiled from CGameType *__thiscall CGameType::SetMultiPlayerGameID(CGameType *this, unsigned int a2)
-
 void  CGameType::SetMultiPlayerGameID(unsigned int) {
   
   CGameType *result; // eax
@@ -290,7 +265,6 @@ void  CGameType::SetMultiPlayerGameID(unsigned int) {
 
 // address=[0x1487530]
 // Decompiled from int __stdcall CGameType::SetPlayerName(unsigned int a1, int a2)
-
 void  CGameType::SetPlayerName(int,std::wstring &) {
   
   if ( a1 >= 0xA
@@ -308,7 +282,6 @@ void  CGameType::SetPlayerName(int,std::wstring &) {
 
 // address=[0x1490f90]
 // Decompiled from CGameType *__thiscall CGameType::CGameType(CGameType *this)
-
  CGameType::CGameType(void) {
   
   std::wstring::wstring(this);
@@ -388,7 +361,6 @@ void  CGameType::SetPlayerName(int,std::wstring &) {
 
 // address=[0x1491360]
 // Decompiled from void __thiscall CGameType::~CGameType(void **this)
-
  CGameType::~CGameType(void) {
   
   if ( this[254] )
@@ -413,25 +385,7 @@ void  CGameType::SetPlayerName(int,std::wstring &) {
 
 
 // address=[0x1491490]
-// Decompiled from char __thiscall CGameType::LoadMapData(
-        CGameType *this,
-        char a2,
-        int a3,
-        int a4,
-        int a5,
-        int a6,
-        int a7,
-        int a8,
-        bool a9,
-        int a10,
-        unsigned __int8 a11,
-        char a12,
-        int a13,
-        int a14,
-        int a15,
-        unsigned __int8 a16,
-        char a17)
-
+// Decompiled from char __thiscall CGameType::LoadMapData(  CGameType *this,  char a2,  int a3,  int a4,  int a5,  int a6,  int a7,  int a8,  bool a9,  int a10,  unsigned __int8 a11,  char a12,  int a13,  int a14,  int a15,  unsigned __int8 a16,  char a17)
 bool  CGameType::LoadMapData(std::wstring,bool,unsigned int,bool,bool,int,int,int,bool,bool) {
   
   OLECHAR *v18; // eax
@@ -1017,7 +971,6 @@ bool  CGameType::LoadMapData(std::wstring,bool,unsigned int,bool,bool,int,int,in
 
 // address=[0x1492f70]
 // Decompiled from bool __thiscall CGameType::IsMapAvailable(char *this, int a2, int a3)
-
 bool  CGameType::IsMapAvailable(std::wstring &,int) {
   
   OLECHAR *v4; // eax
@@ -1061,9 +1014,7 @@ bool  CGameType::IsMapAvailable(std::wstring &,int) {
 
 
 // address=[0x1493090]
-// Decompiled from // public: void __thiscall CGameType::SetMapCRC(class std::basic_string<wchar_t,struct std::char_traits<wchar_t>,class std::allocator<wchar_t> > &)
-void __thiscall CGameType::SetMapCRC(_DWORD *this, int a2)
-
+// Decompiled from void __thiscall CGameType::SetMapCRC(_DWORD *this, int a2)
 void  CGameType::SetMapCRC(std::wstring &) {
   
   OLECHAR *v2; // eax
@@ -1114,7 +1065,6 @@ void  CGameType::SetMapCRC(std::wstring &) {
 
 // address=[0x1493190]
 // Decompiled from int __thiscall CGameType::HumanPlayers(CGameType *this)
-
 int  CGameType::HumanPlayers(void) {
   
   int v2; // [esp+4h] [ebp-8h]
@@ -1132,7 +1082,6 @@ int  CGameType::HumanPlayers(void) {
 
 // address=[0x14931e0]
 // Decompiled from CGameType *__thiscall CGameType::Init(CGameType *this)
-
 void  CGameType::Init(void) {
   
   CGameType *result; // eax
@@ -1227,7 +1176,6 @@ void  CGameType::Init(void) {
 
 // address=[0x1493620]
 // Decompiled from int __thiscall CGameType::ConvertMapNameToMPGameName(char *this, int a2)
-
 std::wstring  CGameType::ConvertMapNameToMPGameName(void) {
   
   CGameType::ConvertMapNameToMPGameName(a2, this + 28);
@@ -1237,7 +1185,6 @@ std::wstring  CGameType::ConvertMapNameToMPGameName(void) {
 
 // address=[0x1493660]
 // Decompiled from void *__cdecl CGameType::ConvertMapNameToMPGameName(void *a1, _Cnd_internal_imp_t *a2)
-
 static std::wstring __cdecl CGameType::ConvertMapNameToMPGameName(std::wstring &) {
   
   const wchar_t *v2; // eax
@@ -1257,7 +1204,6 @@ static std::wstring __cdecl CGameType::ConvertMapNameToMPGameName(std::wstring &
 
 // address=[0x14936f0]
 // Decompiled from void *__thiscall CGameType::GetPlayerName(void *this, void *a2, unsigned int a3)
-
 std::wstring  CGameType::GetPlayerName(int) {
   
   _BYTE v5[28]; // [esp+Ch] [ebp-2Ch] BYREF
@@ -1288,7 +1234,6 @@ std::wstring  CGameType::GetPlayerName(int) {
 
 // address=[0x1493810]
 // Decompiled from int __thiscall CGameType::SetPlayerClanShortcut(void *this, unsigned int a2, int a3)
-
 void  CGameType::SetPlayerClanShortcut(int,std::wstring &) {
   
   int result; // eax
@@ -1307,7 +1252,6 @@ void  CGameType::SetPlayerClanShortcut(int,std::wstring &) {
 
 // address=[0x1493870]
 // Decompiled from int __thiscall CGameType::GetNumberHumanPlayers(CGameType *this)
-
 int const  CGameType::GetNumberHumanPlayers(void) {
   
   int v2; // [esp+4h] [ebp-8h]
@@ -1325,7 +1269,6 @@ int const  CGameType::GetNumberHumanPlayers(void) {
 
 // address=[0x14bce00]
 // Decompiled from char __thiscall CGameType::IsMapLoaded(CGameType *this)
-
 bool const  CGameType::IsMapLoaded(void) {
   
   return *((_BYTE *)this + 1536);
@@ -1334,7 +1277,6 @@ bool const  CGameType::IsMapLoaded(void) {
 
 // address=[0x14bce20]
 // Decompiled from char __thiscall CGameType::IsWebGame(CGameType *this)
-
 bool const  CGameType::IsWebGame(void) {
   
   return *((_BYTE *)this + 1539);
@@ -1343,7 +1285,6 @@ bool const  CGameType::IsWebGame(void) {
 
 // address=[0x15c4a50]
 // Decompiled from int __thiscall CGameType::GetMPSavegameID(CGameType *this)
-
 int const  CGameType::GetMPSavegameID(void) {
   
   return *((_DWORD *)this + 385);
@@ -1352,7 +1293,6 @@ int const  CGameType::GetMPSavegameID(void) {
 
 // address=[0x15c4ae0]
 // Decompiled from void *__thiscall CGameType::GetPlayerClanShortcut(void *this, void *a2, unsigned int a3)
-
 std::wstring  CGameType::GetPlayerClanShortcut(int) {
   
   _BYTE v5[28]; // [esp+Ch] [ebp-2Ch] BYREF
@@ -1381,7 +1321,6 @@ std::wstring  CGameType::GetPlayerClanShortcut(int) {
 
 // address=[0x15c4dd0]
 // Decompiled from CGameType *__thiscall CGameType::SetLadderGame(CGameType *this, bool a2)
-
 void  CGameType::SetLadderGame(bool) {
   
   CGameType *result; // eax
@@ -1394,7 +1333,6 @@ void  CGameType::SetLadderGame(bool) {
 
 // address=[0x15c4e90]
 // Decompiled from CGameType *__thiscall CGameType::SetWebGame(CGameType *this, bool a2)
-
 void  CGameType::SetWebGame(bool) {
   
   CGameType *result; // eax
@@ -1407,7 +1345,6 @@ void  CGameType::SetWebGame(bool) {
 
 // address=[0x14938c0]
 // Decompiled from int __thiscall CGameType::PatchMaps(CGameType *this, bool a2)
-
 void  CGameType::PatchMaps(bool) {
   
   _DWORD *v2; // eax

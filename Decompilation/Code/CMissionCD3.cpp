@@ -4,7 +4,6 @@
 
 // address=[0x1481c60]
 // Decompiled from char __thiscall CMissionCD3::IsExtraInstalledEx(CMissionCD3 *this)
-
 bool  CMissionCD3::IsExtraInstalledEx(void) {
   
   return CExtraCD::ExistsFiles(s_pMissionDisk3Files);
@@ -13,7 +12,6 @@ bool  CMissionCD3::IsExtraInstalledEx(void) {
 
 // address=[0x1481c80]
 // Decompiled from char __thiscall CMissionCD3::EnsureExtraGUI(CMissionCD3 *this, int a2, bool (__cdecl *a3)(int, int, int))
-
 void  CMissionCD3::EnsureExtraGUI(int,bool (__cdecl*)(int,int,int)) {
   
   if ( !*((_DWORD *)this + 1) )
@@ -24,7 +22,6 @@ void  CMissionCD3::EnsureExtraGUI(int,bool (__cdecl*)(int,int,int)) {
 
 // address=[0x1481f50]
 // Decompiled from CMissionCD3 *__thiscall CMissionCD3::CMissionCD3(CMissionCD3 *this)
-
  CMissionCD3::CMissionCD3(void) {
   
   CExtraCD::CExtraCD(this);
@@ -35,7 +32,6 @@ void  CMissionCD3::EnsureExtraGUI(int,bool (__cdecl*)(int,int,int)) {
 
 // address=[0x1482010]
 // Decompiled from IExtraCD *__thiscall CMissionCD3::~CMissionCD3(void **this)
-
  CMissionCD3::~CMissionCD3(void) {
   
   return CExtraCD::~CExtraCD(this);

@@ -4,7 +4,6 @@
 
 // address=[0x1311690]
 // Decompiled from void __thiscall CAIRegions::DefineRegion(CAIRegions *this, int a2, int a3, int a4, int a5)
-
 void  CAIRegions::DefineRegion(int,int,int,int) {
   
   if ( a5 <= 0 )
@@ -22,7 +21,6 @@ void  CAIRegions::DefineRegion(int,int,int,int) {
 
 // address=[0x1311700]
 // Decompiled from void __thiscall CAIRegions::ClearRegion(CAIRegions *this, int a2)
-
 void  CAIRegions::ClearRegion(int) {
   
   if ( CAIRegions::IsValidRegionId(a2) )
@@ -46,7 +44,6 @@ void  CAIRegions::ClearRegion(int) {
 
 // address=[0x1311790]
 // Decompiled from int __thiscall CAIRegions::ClearAllRegions(CAIRegions *this)
-
 void  CAIRegions::ClearAllRegions(void) {
   
   int result; // eax
@@ -64,9 +61,7 @@ void  CAIRegions::ClearAllRegions(void) {
 
 
 // address=[0x13117e0]
-// Decompiled from // public: void __thiscall CAIRegions::ClearAllPlayerRegionFlags(void)
-void *__thiscall CAIRegions::ClearAllPlayerRegionFlags(int this)
-
+// Decompiled from void *__thiscall CAIRegions::ClearAllPlayerRegionFlags(int this)
 void  CAIRegions::ClearAllPlayerRegionFlags(void) {
   
   return j__memset((void *)(this + 196), 0, 0x240u);
@@ -75,7 +70,6 @@ void  CAIRegions::ClearAllPlayerRegionFlags(void) {
 
 // address=[0x1311810]
 // Decompiled from void __thiscall CAIRegions::Load(CAIRegions *this, struct IS4Chunk *a2)
-
 void  CAIRegions::Load(class IS4Chunk &) {
   
   int i; // [esp+8h] [ebp-4h]
@@ -94,7 +88,6 @@ void  CAIRegions::Load(class IS4Chunk &) {
 
 // address=[0x13118b0]
 // Decompiled from int __thiscall CAIRegions::Save(CAIRegions *this, struct IS4Chunk *a2)
-
 void  CAIRegions::Save(class IS4Chunk &) {
   
   int i; // [esp+4h] [ebp-4h]
@@ -108,7 +101,6 @@ void  CAIRegions::Save(class IS4Chunk &) {
 
 // address=[0x1311d90]
 // Decompiled from bool __cdecl CAIRegions::IsValidRegionId(int a1)
-
 static bool __cdecl CAIRegions::IsValidRegionId(int) {
   
   return (unsigned int)(a1 - 1) < 0xF;
@@ -117,7 +109,6 @@ static bool __cdecl CAIRegions::IsValidRegionId(int) {
 
 // address=[0x131ee40]
 // Decompiled from int __thiscall CAIRegions::SetPlayerRegionFlagBits(CAIRegions *this, unsigned int a2, unsigned int a3, int a4)
-
 void  CAIRegions::SetPlayerRegionFlagBits(int,int,int) {
   
   int result; // eax
@@ -148,7 +139,6 @@ void  CAIRegions::SetPlayerRegionFlagBits(int,int,int) {
 
 // address=[0x1311920]
 // Decompiled from char __thiscall CAIRegions::CalculateLastUsedRegionId(CAIRegions *this)
-
 void  CAIRegions::CalculateLastUsedRegionId(void) {
   
   char result; // al

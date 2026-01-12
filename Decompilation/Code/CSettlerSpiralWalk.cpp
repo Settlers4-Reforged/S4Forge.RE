@@ -4,7 +4,6 @@
 
 // address=[0x1470530]
 // Decompiled from CSettlerSpiralWalk *__thiscall CSettlerSpiralWalk::CSettlerSpiralWalk(CSettlerSpiralWalk *this, int a2, int a3, int a4)
-
  CSettlerSpiralWalk::CSettlerSpiralWalk(int,int,int) {
   
   CSpiralWalk::CSpiralWalk(this, a2, a3, a4);
@@ -13,10 +12,7 @@
 
 
 // address=[0x1470940]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CSettlerSpiralWalk::CurrentX(_DWORD *this)
-
+// Decompiled from int __thiscall CSettlerSpiralWalk::CurrentX(_DWORD *this)
 int  CSettlerSpiralWalk::CurrentX(void)const {
   
   return this[4];
@@ -24,10 +20,7 @@ int  CSettlerSpiralWalk::CurrentX(void)const {
 
 
 // address=[0x1470960]
-// Decompiled from // Microsoft VisualC 14/net runtime
-// MFC 3.1-14.0 32bit
-int __thiscall CSettlerSpiralWalk::CurrentY(_DWORD *this)
-
+// Decompiled from int __thiscall CSettlerSpiralWalk::CurrentY(_DWORD *this)
 int  CSettlerSpiralWalk::CurrentY(void)const {
   
   return this[5];
@@ -36,7 +29,6 @@ int  CSettlerSpiralWalk::CurrentY(void)const {
 
 // address=[0x1513a40]
 // Decompiled from char __thiscall CSettlerSpiralWalk::NextSettlerId(CSettlerSpiralWalk *this, int *a2)
-
 bool  CSettlerSpiralWalk::NextSettlerId(int &) {
   
   int v3; // [esp+0h] [ebp-14h]
