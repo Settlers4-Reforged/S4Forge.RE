@@ -30,10 +30,10 @@ static bool __cdecl CWorldManager::InWorld(int,int) {
 
 
 // address=[0x12fd350]
-// Decompiled from int __cdecl CWorldManager::Index(int a1, int a2)
+// Decompiled from int __cdecl CWorldManager::Index(int x, int y)
 static int __cdecl CWorldManager::Index(int,int) {
   
-  return a1 + CWorldManager::m_iWidthHeight * a2;
+  return x + CWorldManager::m_iWidthHeight * y;
 }
 
 
@@ -90,7 +90,7 @@ static int __cdecl CWorldManager::Ground(int) {
 
 
 // address=[0x130f080]
-// Decompiled from int __cdecl CWorldManager::InWorldPackedXY(int a1)
+// Decompiled from bool __cdecl CWorldManager::InWorldPackedXY(int a1)
 static bool __cdecl CWorldManager::InWorldPackedXY(int) {
   
   int v1; // eax
