@@ -61,7 +61,7 @@ void  CStatistic::Clear(void) {
   
   void *result; // eax
 
-  result = j__memset((char *)this + 4, 0, 0x9A68u);
+  result = memset((char *)this + 4, 0, 0x9A68u);
   *((_DWORD *)this + 9883) = 0;
   return result;
 }

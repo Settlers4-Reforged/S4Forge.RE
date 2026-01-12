@@ -19,7 +19,7 @@
   *((_DWORD *)this + 2) = -1;
   *(_DWORD *)this = a2;
   *((_DWORD *)this + 1) = 0;
-  j__memset(v6, 0, sizeof(v6));
+  memset(v6, 0, sizeof(v6));
   LOBYTE(v6[6]) = 0;
   OutputWidth = IGfxEngine::GetOutputWidth((IGfxEngine *)g_pGfxEngine);
   OutputHeight = IGfxEngine::GetOutputHeight((IGfxEngine *)g_pGfxEngine);

@@ -155,7 +155,7 @@ void  CObserverList::NotifyAllObservers(class CEntityEvent const &)const {
     if ( v7 <= 0 && BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 159, "iEntityId > 0") == 1 )
       __debugbreak();
     v6 = CMapObjectMgr::Entity(v7);
-    ((void (__thiscall *)(struct IEntity *, int))v6->lpVtbl[1].GetNamedEntity)(v6, a2);
+    ((void (__thiscall *)(struct IEntity *, int))v6->CPersistence[1].GetNamedEntity)(v6, a2);
     std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::operator++(v5);
   }
   LOBYTE(v9) = 1;
@@ -193,7 +193,7 @@ void  CObserverList::NotifyAllObservers(class CEntityEvent const &,class INotify
       __debugbreak();
     v9 = CMapObjectMgr::Entity(v7);
     if ( (**(unsigned __int8 (__thiscall ***)(struct INotifyFilter *, struct IEntity *))a3)(a3, v9) )
-      ((void (__thiscall *)(struct IEntity *, const struct CEntityEvent *))v9->lpVtbl[1].GetNamedEntity)(v9, a2);
+      ((void (__thiscall *)(struct IEntity *, const struct CEntityEvent *))v9->CPersistence[1].GetNamedEntity)(v9, a2);
     std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::operator++(v6);
   }
   LOBYTE(v10) = 1;

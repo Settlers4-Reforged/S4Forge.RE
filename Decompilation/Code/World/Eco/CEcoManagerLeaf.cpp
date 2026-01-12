@@ -7,7 +7,7 @@
  CEcoManagerLeaf::CEcoManagerLeaf(enum IECONOMANAGERGRIDRESOLUTION,enum BUILDING_TYPES,int,int) {
   
   CEcoManagerLeaf::CEMLD::CEMLD(this);
-  j__memset(this, 0, 0x68u);
+  memset(this, 0, 0x68u);
   *((_DWORD *)this + 3) = a2;
   *(_DWORD *)this = a4;
   *((_DWORD *)this + 1) = a5;

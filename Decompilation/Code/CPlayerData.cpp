@@ -40,7 +40,7 @@ void  CPlayerData::Init(void) {
     }
   }
   for ( k = 0; k < 10; ++k )
-    result = (CPlayerData *)j__memset((char *)this + 33 * k, 0, 0x21u);
+    result = (CPlayerData *)memset((char *)this + 33 * k, 0, 0x21u);
   return result;
 }
 

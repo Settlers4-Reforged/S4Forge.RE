@@ -67,7 +67,7 @@ enum PILE_TYPES  CProductionDataTab::GetTool(enum BUILDING_TYPES) {
   
   if ( CProductionDataTab::m_iNumberOfEntries )
     return this;
-  j__memset(&CProductionDataTab::m_aBuildingTypeToTabIndexMap, 0, 0x67Cu);
+  memset(&CProductionDataTab::m_aBuildingTypeToTabIndexMap, 0, 0x67Cu);
   CProductionDataTab::m_iNumberOfEntries = 1;
   CProductionDataTab::PDT(this, 5, 1, 70, 20, 8000, 2, 0, 0, 22, 4, 112, 4, 22, 0, 1);
   CProductionDataTab::PDT(this, 5, 2, 20, 5, 10, 1, 0, 0, 0, 0, -1, 6, 50, 0, 1);

@@ -288,7 +288,7 @@ static void __cdecl CGameSettings::LoadCommandLineValues(void) {
   std::string::~string(v99);
   if ( !std::string::compare("Player1") )
   {
-    j__memset(Buffer, 0, sizeof(Buffer));
+    memset(Buffer, 0, sizeof(Buffer));
     pcbBuffer = 256;
     GetUserNameA(Buffer, &pcbBuffer);
     if ( j__strlen(Buffer) )

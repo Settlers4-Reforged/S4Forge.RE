@@ -240,7 +240,7 @@ void  CGoodTransportPriority::CreateRomanPriorities(void) {
   
   int result; // eax
 
-  j__memset((char *)this + 4, 0, 0x56u);
+  memset((char *)this + 4, 0, 0x56u);
   *((_WORD *)this + 4) = CStaticConfigVarInt::operator int(&CGoodTransportPriority::m_iDefault_ROMAN_TP_AMMO);
   *((_WORD *)this + 5) = CStaticConfigVarInt::operator int(&CGoodTransportPriority::m_iDefault_ROMAN_TP_ARMOR);
   *((_WORD *)this + 6) = CStaticConfigVarInt::operator int(&CGoodTransportPriority::m_iDefault_ROMAN_TP_AXE);
@@ -281,7 +281,7 @@ void  CGoodTransportPriority::CreateVikingPriorities(void) {
   
   int result; // eax
 
-  j__memset((char *)this + 4, 0, 0x56u);
+  memset((char *)this + 4, 0, 0x56u);
   *((_WORD *)this + 5) = CStaticConfigVarInt::operator int(&CGoodTransportPriority::m_iDefault_VIKING_TP_ARMOR);
   *((_WORD *)this + 6) = CStaticConfigVarInt::operator int(&CGoodTransportPriority::m_iDefault_VIKING_TP_AXE);
   *((_WORD *)this + 7) = CStaticConfigVarInt::operator int(&CGoodTransportPriority::m_iDefault_VIKING_TP_BATTLEAXE);
@@ -323,7 +323,7 @@ void  CGoodTransportPriority::CreateMayaPriorities(void) {
   
   int result; // eax
 
-  j__memset((char *)this + 4, 0, 0x56u);
+  memset((char *)this + 4, 0, 0x56u);
   *((_WORD *)this + 3) = CStaticConfigVarInt::operator int(&CGoodTransportPriority::m_iDefault_MAYA_TP_AGAVE);
   *((_WORD *)this + 5) = CStaticConfigVarInt::operator int(&CGoodTransportPriority::m_iDefault_MAYA_TP_ARMOR);
   *((_WORD *)this + 6) = CStaticConfigVarInt::operator int(&CGoodTransportPriority::m_iDefault_MAYA_TP_AXE);
@@ -366,7 +366,7 @@ void  CGoodTransportPriority::CreateTrojanPriorities(void) {
   
   CGoodTransportPriority *result; // eax
 
-  j__memset((char *)this + 4, 0, 0x56u);
+  memset((char *)this + 4, 0, 0x56u);
   *((_WORD *)this + 44) = CStaticConfigVarInt::operator int(&CGoodTransportPriority::m_iDefault_TROJAN_TP_SUNFLOWER);
   *((_WORD *)this + 5) = CStaticConfigVarInt::operator int(&CGoodTransportPriority::m_iDefault_TROJAN_TP_ARMOR);
   *((_WORD *)this + 6) = CStaticConfigVarInt::operator int(&CGoodTransportPriority::m_iDefault_TROJAN_TP_AXE);

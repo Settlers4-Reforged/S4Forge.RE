@@ -6,7 +6,7 @@
 // Decompiled from IA_ColorReduction *__thiscall IA_ColorReduction::IA_ColorReduction(IA_ColorReduction *this)
  IA_ColorReduction::IA_ColorReduction(void) {
   
-  j__memset(this, 0, 0x50u);
+  memset(this, 0, 0x50u);
   *(_DWORD *)this = 16;
   return this;
 }
@@ -19,7 +19,7 @@
   IA_ColorReduction::DeleteTree((IA_ColorReduction *)this);
   if ( this[19] )
     operator delete[](this[19]);
-  return j__memset(this, 0, 0x50u);
+  return memset(this, 0, 0x50u);
 }
 
 
@@ -32,7 +32,7 @@ bool  IA_ColorReduction::InitTree(void) {
   IA_ColorReduction::DeleteTree((IA_ColorReduction *)this);
   if ( this[19] )
     operator delete[](this[19]);
-  j__memset(this, 0, 0x50u);
+  memset(this, 0, 0x50u);
   *this = (void *)16;
   Node = IA_ColorReduction::MakeNode((IA_ColorReduction *)this, 0);
   this[2] = Node;

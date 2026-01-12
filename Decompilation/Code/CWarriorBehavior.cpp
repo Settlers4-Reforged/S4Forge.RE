@@ -15,7 +15,7 @@ int  CWarriorBehavior::WarriorDestinationXY(void)const {
  CWarriorBehavior::CWarriorBehavior(void) {
   
   *(_DWORD *)this = &CWarriorBehavior::_vftable_;
-  j__memset((char *)this + 4, 0, 0x14u);
+  memset((char *)this + 4, 0, 0x14u);
   *((_DWORD *)this + 1) = &dword_4159C28;
   return this;
 }

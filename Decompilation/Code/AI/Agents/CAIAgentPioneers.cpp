@@ -219,7 +219,7 @@ bool  CAIAgentPioneers::FindWorkPosition(int &,int &) {
   {
     __debugbreak();
   }
-  j__memset(v21, 0, 0x31u);
+  memset(v21, 0, 0x31u);
   for ( i = 0; i < 49; ++i )
   {
     v16 = (Grid *)(dword_3D7A030[2 * i] + v12);

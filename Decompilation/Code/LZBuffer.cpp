@@ -7,7 +7,7 @@
  LZBuffer::LZBuffer(void) {
   
   *(_DWORD *)this = operator new[](0x10000u);
-  j__memset((void *)(*(_DWORD *)this + 65280), 0, 0x100u);
+  memset((void *)(*(_DWORD *)this + 65280), 0, 0x100u);
   *((_DWORD *)this + 1) = 0;
   return this;
 }

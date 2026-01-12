@@ -41,8 +41,8 @@ static void __cdecl CGrabber::DoGrab(std::wstring) {
   std::wstring::operator=(v2);
   std::wstring::~wstring(v12);
   FilePaths::EnsurePathExists(&a1);
-  j__memset(v18, 0, sizeof(v18));
-  j__memset(v11, 0, sizeof(v11));
+  memset(v18, 0, sizeof(v18));
+  memset(v11, 0, sizeof(v11));
   lpBuffer = (LPCVOID)CGrabber::GetScreenBits(0, (int)v11, (int)&v6, (int)&v7, 16, 0);
   v18[0] = 19778;
   *(_DWORD *)&v18[1] = v7 * 2 * v6 + 54;
@@ -125,7 +125,7 @@ static void * __cdecl CGrabber::GetScreenBits(void *,void *,int *,int *,int,bool
         lpbmi = v16;
       else
         lpbmi = (LPBITMAPINFO)&v25;
-      j__memset(lpbmi, 0, sizeof(struct tagBITMAPINFO));
+      memset(lpbmi, 0, sizeof(struct tagBITMAPINFO));
       lpbmi->bmiHeader.biSize = 40;
       lpbmi->bmiHeader.biWidth = v15;
       if ( a6 )

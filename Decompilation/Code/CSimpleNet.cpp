@@ -17,7 +17,7 @@
   *((_DWORD *)this + 104) = 0;
   *((_DWORD *)this + 107) = 0;
   *((_DWORD *)this + 106) = 0;
-  j__memset((char *)this + 388, 0, 0x10u);
+  memset((char *)this + 388, 0, 0x10u);
   *((_DWORD *)this + 45) = 0;
   *((_DWORD *)this + 101) = -1;
   CSimpleNet::ClearErrorString(this);
@@ -131,7 +131,7 @@ bool  CSimpleNet::PopMessage(void * &,unsigned int &,unsigned int &) {
       *((_DWORD *)v11 + 107) = v9;
       v6 = j__LZHLCreateDecompressor(v8, v9);
       *((_DWORD *)v11 + 1134) = v6;
-      j__memset((char *)v11 + 1456, 0, 0x400u);
+      memset((char *)v11 + 1456, 0, 0x400u);
       j__LZHLDecompress(*((_DWORD *)v11 + 1134), (char *)v11 + 1456, &v9, (char *)v11 + 2484, &v8);
       j__LZHLDestroyDecompressor(*((_DWORD *)v11 + 1134));
       *a2 = (char *)v11 + 1456;
@@ -173,14 +173,14 @@ bool  CSimpleNet::PushMessage(unsigned int,unsigned int,unsigned short,void *,un
     if ( Size > 0x400 )
       Size = 1024;
     j__memcpy(v11, Src, Size);
-    j__memset(&v11[Size], 0, 0x20u);
+    memset(&v11[Size], 0, 0x20u);
     if ( j__LZHLCompressorCalcMaxBuf(Size) >= 0x800u
       && BBSupportDbgReport(2, "net\\SimpleNet.cpp", 999, "iBufferLen < sizeof( sMessage.m_sMessage.m_cDataBuffer )") == 1 )
     {
       __debugbreak();
     }
     this[1133] = j__LZHLCreateCompressor(0, 32);
-    j__memset(&unk_415B9FA, 0, 0x800u);
+    memset(&unk_415B9FA, 0, 0x800u);
     v9 = j__LZHLCompress(this[1133], &unk_415B9FA, v11, Size);
     j__LZHLDestroyCompressor(this[1133]);
     dword_415B9F6 = ((Size & 0x3FF) << 12) | dword_415B9F6 & 0xFFC00FFF;
@@ -732,7 +732,7 @@ bool  CSimpleNet::ConnectSocket(void) {
       }
       *((_WORD *)v25 + 187) = dword_415B9AC(3105);
       *((_DWORD *)v25 + 94) = *((_DWORD *)v25 + 4);
-      j__memset(v26, 0, sizeof(v26));
+      memset(v26, 0, sizeof(v26));
       v17 = 16;
       if ( dword_415B99C(*((_DWORD *)v25 + 92), v26, &v17) == -1 )
       {

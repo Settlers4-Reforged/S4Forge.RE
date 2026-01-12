@@ -18,7 +18,7 @@ static class std::vector<unsigned short,class std::allocator<unsigned short> > c
   *(_DWORD *)this = &CInputProcessor::_vftable_;
   *((_BYTE *)this + 52) = 0;
   std::vector<unsigned short>::vector<unsigned short>((char *)this + 84);
-  j__memset(&CInputProcessor::m_sGfxObj, 0, 0x2E0u);
+  memset(&CInputProcessor::m_sGfxObj, 0, 0x2E0u);
   CInputProcessor::FillHandlersArray(this);
   std::vector<unsigned short>::reserve(128);
   std::vector<unsigned short>::reserve(256);

@@ -713,7 +713,7 @@
   v276 = -1;
   C = v241;
   operator delete[](v241);
-  j__memset(CEntityToDoListMgr::m_vJobSoundInfo, 0, 0xB78u);
+  memset(CEntityToDoListMgr::m_vJobSoundInfo, 0, 0xB78u);
   v237 = 0;
   v241 = AdvXMLParser::Parser::OpenXMLFile(aGamedataJobsou, &v237);
   if ( !v241 )

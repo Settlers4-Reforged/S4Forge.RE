@@ -865,8 +865,8 @@ static void __cdecl CAISectorAI::AwakeAgent(class CAIAgent &) {
   CAIEventQueue::CAIEventQueue((CAISectorAI *)((char *)this + 8));
   v2 = CAIPlayerAI::PlayerId(a2);
   CAITaskForceGroup::CAITaskForceGroup((CAISectorAI *)((char *)this + 92), v2);
-  j__memset((char *)this + 32, 0, 0x3Cu);
-  j__memset((char *)this + 232, 0, 0x20u);
+  memset((char *)this + 32, 0, 0x3Cu);
+  memset((char *)this + 232, 0, 0x20u);
   return this;
 }
 

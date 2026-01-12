@@ -15,7 +15,7 @@
   *((_DWORD *)this + 65430) = a3;
   *((_DWORD *)this + 65431) = a4;
   EnableDebugFlag(dword_3ECD4F0);
-  j__memset((char *)this + 4, 0, 0x3FE54u);
+  memset((char *)this + 4, 0, 0x3FE54u);
   if ( CEcoManager::AddRef() )
     CAIEcoSpecialBuildingInfos::TheObject();
   *((_DWORD *)this + 1) = a2;
@@ -373,7 +373,7 @@ struct SBUILDINFODATA  CEcoManager::GetBuildPlace(enum IECONOMANAGERGRIDRESOLUTI
   v24 = 1;
   `eh vector constructor iterator'(v23, 0x4Cu, 1u, SBUILDINFODATA::SBUILDINFODATA, SBUILDINFODATA::~SBUILDINFODATA);
   LOBYTE(v24) = 2;
-  j__memset(v22, 0, sizeof(v22));
+  memset(v22, 0, sizeof(v22));
   v15 = 0;
   v16 = 0;
   v12 = 0;
@@ -2947,7 +2947,7 @@ bool  CEcoManager::IsChecked(enum BUILDING_TYPES,int,int) {
 // Decompiled from void *__thiscall CEcoManager::ResetCheckField(char *this, int a2)
 void  CEcoManager::ResetCheckField(enum BUILDING_TYPES) {
   
-  return j__memset(&this[512 * a2 + 217228], 0, 0x200u);
+  return memset(&this[512 * a2 + 217228], 0, 0x200u);
 }
 
 

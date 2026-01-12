@@ -14,7 +14,7 @@ struct _DDBLTFX *  CBlitFX::GetBlitStructPtr(void) {
 // Decompiled from CBlitFX *__thiscall CBlitFX::CBlitFX(CBlitFX *this)
  CBlitFX::CBlitFX(void) {
   
-  j__memset(this, 0, 0x64u);
+  memset(this, 0, 0x64u);
   *(_DWORD *)this = 100;
   return this;
 }

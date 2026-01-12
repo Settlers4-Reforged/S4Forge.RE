@@ -2611,8 +2611,8 @@ int  CEcoSector::DbgCheckEcoSector(int) {
   if ( (*(int (__thiscall **)(void *, int))(*(_DWORD *)g_pTiling + 40))(g_pTiling, v13) <= 20 )
     return v17;
   v11 = CEcoSector::Owner(this);
-  j__memset(v20, 0, sizeof(v20));
-  j__memset(v21, 0, sizeof(v21));
+  memset(v20, 0, sizeof(v20));
+  memset(v21, 0, sizeof(v21));
   UsedId = CMapObjectMgr::LastUsedId();
   for ( i = 7; i <= UsedId; ++i )
   {
@@ -3724,16 +3724,16 @@ void  CEcoSector::DecSize(void) {
   *((_WORD *)this + 16) = 5;
   *((_WORD *)this + 17) = 0;
   *((_BYTE *)this + 896) = 100;
-  j__memset((char *)this + 36, 0, 0x86u);
-  j__memset((char *)this + 170, 0, 0x86u);
-  j__memset((char *)this + 304, 0, 0x56u);
-  j__memset((char *)this + 472, 0, 0x54u);
-  j__memset((char *)this + 672, 0, 5u);
-  j__memset((char *)this + 677, 0, 2u);
-  j__memset((char *)this + 680, 0, 0x56u);
-  j__memset((char *)this + 766, 0, 0x56u);
+  memset((char *)this + 36, 0, 0x86u);
+  memset((char *)this + 170, 0, 0x86u);
+  memset((char *)this + 304, 0, 0x56u);
+  memset((char *)this + 472, 0, 0x54u);
+  memset((char *)this + 672, 0, 5u);
+  memset((char *)this + 677, 0, 2u);
+  memset((char *)this + 680, 0, 0x56u);
+  memset((char *)this + 766, 0, 0x56u);
   std::vector<std::deque<unsigned short>>::resize(43);
-  j__memset((char *)this + 852, 0, 0xAu);
+  memset((char *)this + 852, 0, 0xAu);
   v5 = CPlayerManager::Race(*((unsigned __int8 *)this + 18));
   BuildingInfo = CBuildingInfoMgr::GetBuildingInfo(v5, 22);
   for ( i = 0; i < *(char *)(BuildingInfo + 57); ++i )

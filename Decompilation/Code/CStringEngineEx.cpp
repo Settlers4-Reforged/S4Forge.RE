@@ -207,7 +207,7 @@ bool  CStringEngineEx::ImportFile(wchar_t const *,int) {
   {
     v9 = (wchar_t **)operator new[](15348u);    // 3837 entries
     this->strings = v9;
-    j__memset(this->strings, 0, 15348u);
+    memset(this->strings, 0, 15348u);
   }
   Size = CFileEx::Size(v16);
   Buffer = operator new[](Size);

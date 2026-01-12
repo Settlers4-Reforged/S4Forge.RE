@@ -17,7 +17,7 @@ void  CCacheManager::Reset(void) {
   
   void *result; // eax
 
-  result = j__memset(this, 0, 0x1FFFEu);
+  result = memset(this, 0, 0x1FFFEu);
   *((_DWORD *)this + 0x8000) = 0;
   return result;
 }

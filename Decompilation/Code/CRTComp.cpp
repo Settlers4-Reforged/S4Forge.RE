@@ -8,7 +8,7 @@
   
   IRTComp::IRTComp(this);
   *(_DWORD *)this = &CRTComp::_vftable_;
-  j__memset((char *)this + 4, 0, 0x4Cu);
+  memset((char *)this + 4, 0, 0x4Cu);
   return this;
 }
 
@@ -201,7 +201,7 @@ enum RTCOMP_ERROR  CRTComp::Compile(int) {
   IA_ColorReduction::IA_ColorReduction((IA_ColorReduction *)v13);
   v125 = 0;
   BB_SIV_ChunkHeader::BB_SIV_ChunkHeader((BB_SIV_ChunkHeader *)v108);
-  j__memset(v122, 0, sizeof(v122));
+  memset(v122, 0, sizeof(v122));
   if ( a2 >= 1 && a2 <= 8 )
   {
     if ( *((_DWORD *)v120 + 1) )
@@ -209,7 +209,7 @@ enum RTCOMP_ERROR  CRTComp::Compile(int) {
       GetCurrentDirectoryW(0x400u, Buffer);
       if ( SetCurrentDirectoryW(*((LPCWSTR *)v120 + 1)) )
       {
-        j__memset(v121, 0, sizeof(v121));
+        memset(v121, 0, sizeof(v121));
         v118 = 0;
         v119 = 0;
         v114 = 0;
@@ -341,7 +341,7 @@ enum RTCOMP_ERROR  CRTComp::Compile(int) {
                               v114 += ElementSize;
                               C = v113;
                               operator delete[](v113);
-                              j__memset(v123[3], 255, 0x100u);
+                              memset(v123[3], 255, 0x100u);
                               v75 = operator new(0x1005u);
                               LOBYTE(v125) = 1;
                               if ( v75 )
@@ -816,7 +816,7 @@ enum RTCOMP_ERROR  CRTComp::LoadPng(wchar_t *,struct SM_S_BF_BITMAP_DATA *) {
   void **v11; // [esp+40h] [ebp-38h] BYREF
   _DWORD v12[12]; // [esp+44h] [ebp-34h] BYREF
 
-  j__memset(&v12[1], 0, 0x2Cu);
+  memset(&v12[1], 0, 0x2Cu);
   v11 = j__png_create_read_struct("1.0.6", 0, 0, 0);
   if ( !v11 )
     return 4;
@@ -1058,7 +1058,7 @@ void  CRTComp::CreateColorField(unsigned char * * const,int) {
   for ( i = 0; i < 4; ++i )
   {
     *(_DWORD *)(a1 + 4 * i) = operator new[](Size + 1);
-    j__memset(*(void **)(a1 + 4 * i), 0, Size);
+    memset(*(void **)(a1 + 4 * i), 0, Size);
   }
 }
 
@@ -1286,7 +1286,7 @@ void  CRTComp::CenterBitmap(struct SM_S_BF_BITMAP_DATA *) {
   if ( *((_DWORD *)a2 + 7) - *((_DWORD *)a2 + 5) == 19 && *((_DWORD *)a2 + 8) - *((_DWORD *)a2 + 6) == 19 )
     return result;
   Src = operator new[](0x191u);
-  j__memset(Src, 0, 0x191u);
+  memset(Src, 0, 0x191u);
   v5 = *((_DWORD *)a2 + 7) - *((_DWORD *)a2 + 5) + 1;
   v4 = *((_DWORD *)a2 + 8) - *((_DWORD *)a2 + 6) + 1;
   for ( i = 0; i < v5; ++i )
@@ -1312,7 +1312,7 @@ void  CRTComp::CreateMagBorder(struct SM_S_BF_BITMAP_DATA *) {
   int i; // [esp+1Ch] [ebp-4h]
 
   v3 = operator new[](0x1E5u);
-  j__memset(v3, 0, 0x1E5u);
+  memset(v3, 0, 0x1E5u);
   for ( i = 0; i < 20; ++i )
   {
     for ( j = 0; j < 20; ++j )
@@ -1354,7 +1354,7 @@ void  CRTComp::AddPlayerColor(struct SM_S_BF_BITMAP_DATA *) {
   {
     v7 = *(_DWORD *)(a2 + 28) - *(_DWORD *)(a2 + 20) + 4;
     v3 = operator new[]((*(_DWORD *)(a2 + 32) - *(_DWORD *)(a2 + 24) + 4) * v7 + 1);
-    j__memset(v3, 0, (v4 + 3) * (v5 + 3));
+    memset(v3, 0, (v4 + 3) * (v5 + 3));
     for ( i = 0; i < v5; ++i )
     {
       for ( j = 0; j < v4; ++j )
@@ -1429,7 +1429,7 @@ unsigned char *  CRTComp::MakePanel(struct SM_S_BF_BITMAP_DATA *,bool) {
   int m; // [esp+24h] [ebp-4h]
 
   v4 = operator new[](2 * a1[10] * a1[9] + 1);
-  j__memset(v4, 0, 2 * a1[10] * a1[9]);
+  memset(v4, 0, 2 * a1[10] * a1[9]);
   v6 = a1[9];
   v3 = a1[10];
   if ( a2 )
@@ -1600,7 +1600,7 @@ void  CRTComp::Save8Bitmap(unsigned int,unsigned int,unsigned char *,unsigned ch
   Stream = result;
   if ( !result )
     return result;
-  j__memset(Buffer, 0, 0xEu);
+  memset(Buffer, 0, 0xEu);
   Buffer[0] = 19778;
   *(_DWORD *)&Buffer[5] = 1078;
   *(_DWORD *)&Buffer[1] = a2 * ElementCount + 1078;

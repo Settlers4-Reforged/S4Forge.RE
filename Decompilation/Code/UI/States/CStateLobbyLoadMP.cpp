@@ -145,9 +145,9 @@ void  CStateLobbyLoadMP::UpdateGameTypeData(void) {
   {
     CGameType::SetHost((CGameType *)g_pGameType, 1);
     *(_DWORD *)(g_pGameType + 68) = INetworkEngine::GetLocalIP((CGameHost **)g_pNetworkEngine);
-    j__memset((void *)(g_pGameType + 188), 0, 0x24u);
+    memset((void *)(g_pGameType + 188), 0, 0x24u);
     *(_DWORD *)(g_pGameType + 4 * CGameType::GetLocalSlot(g_pGameType) + 188) = *(_DWORD *)(g_pGameType + 68);
-    j__memset((void *)(g_pGameType + 224), -1, 0x24u);
+    memset((void *)(g_pGameType + 224), -1, 0x24u);
     Instance = (OnlineManager *)OnlineManager::GetInstance();
     LocalPeerId = OnlineManager::GetLocalPeerId(Instance);
     *(_DWORD *)(g_pGameType + 4 * CGameType::GetLocalSlot(g_pGameType) + 224) = LocalPeerId;

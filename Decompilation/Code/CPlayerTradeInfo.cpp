@@ -654,7 +654,7 @@ bool  CInternationalTrader::CPlayerTradeInfo::ImportGoodAtBuilding(int &,enum PI
   std::list<CInternationalTrader::CTradeBuildingInfo>::list<CInternationalTrader::CTradeBuildingInfo>(this);
   std::list<CInternationalTrader::CTradeBuildingInfo>::list<CInternationalTrader::CTradeBuildingInfo>((char *)this + 12);
   *((_DWORD *)this + 6) = -1;
-  j__memset((char *)this + 28, 0, 9u);
+  memset((char *)this + 28, 0, 9u);
   return this;
 }
 

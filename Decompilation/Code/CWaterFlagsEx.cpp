@@ -111,8 +111,8 @@ static void __cdecl CWaterFlagsEx::CalcWaterFlags(void) {
   }
   v15 = (unsigned __int8 *)operator new[](v39 * v39);
   v40 = v15;
-  j__memset(v15, 129, 2 * v39);
-  j__memset(&v40[v39 * (v39 - 2)], 129, 2 * v39);
+  memset(v15, 129, 2 * v39);
+  memset(&v40[v39 * (v39 - 2)], 129, 2 * v39);
   v14 = v39 * v39 - 1;
   for ( j = 0; j <= v14; j += v39 )
   {

@@ -19,7 +19,7 @@ bool __stdcall CBBSupportLogFile::IsOpen(void) {
   *((_DWORD *)this + 2) = 0;
   *((_DWORD *)this + 3) = 0;
   *((_DWORD *)this + 4) = 0;
-  j__memset((char *)this + 20, 0, 0x228u);
+  memset((char *)this + 20, 0, 0x228u);
   return this;
 }
 
@@ -59,7 +59,7 @@ void __stdcall CBBSupportLogFile::SetFilePath(wchar_t const *) {
   result = this;
   if ( *((_DWORD *)this + 2) )
     return result;
-  result = (CBBSupportLogFile *)j__memset((char *)this + 20, 0, 0x228u);
+  result = (CBBSupportLogFile *)memset((char *)this + 20, 0, 0x228u);
   if ( a2 )
   {
     for ( i = 0; i < 0x227; ++i )

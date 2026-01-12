@@ -304,7 +304,7 @@ static void __cdecl CTilesEx::CalculateSquareTileLists(void) {
   int v2; // [esp+0h] [ebp-8h]
   int i; // [esp+4h] [ebp-4h]
 
-  j__memset(CTiles::m_sSquareFirstLastTiles, 0, sizeof(CTiles::m_sSquareFirstLastTiles));
+  memset(CTiles::m_sSquareFirstLastTiles, 0, sizeof(CTiles::m_sSquareFirstLastTiles));
   result = CTilesEx::LastUsedTileId();
   v2 = result;
   for ( i = 10; i <= v2; ++i )

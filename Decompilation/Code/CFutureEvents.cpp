@@ -329,7 +329,7 @@ unsigned int  CFutureEvents::DbgCheckData(int) {
       }
     }
   }
-  j__memset(v12, 0, sizeof(v12));
+  memset(v12, 0, sizeof(v12));
   for ( k = 1; k < 2; ++k )
   {
     for ( m = *((unsigned __int16 *)this + 12 * k + 25);
@@ -404,7 +404,7 @@ void  CFutureEvents::Init(void) {
 
   *((_DWORD *)this + 6) = -1;
   *((_BYTE *)this + 20) = 0;
-  j__memset((char *)this + 28, 0, 0x60000u);
+  memset((char *)this + 28, 0, 0x60000u);
   *((_WORD *)this + 37) = 34;
   *((_WORD *)this + 432) = 1;
   *((_WORD *)this + 433) = 35;
@@ -577,7 +577,7 @@ unsigned int  CFutureEvents::Compactify(void) {
         v2[3] = *((_DWORD *)this + 6 * i + 10);
         v2[4] = *((_DWORD *)this + 6 * i + 11);
         v2[5] = *((_DWORD *)this + 6 * i + 12);
-        j__memset((char *)this + 24 * i + 28, 0, 0x18u);
+        memset((char *)this + 24 * i + 28, 0, 0x18u);
         CFutureEvents::AddFutureEventToList(this, 1u, i);
         CFutureEvents::AddFutureEventToList(this, v3 + 2, v4);
         --i;

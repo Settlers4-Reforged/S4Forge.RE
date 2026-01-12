@@ -8,7 +8,7 @@
   
   *((_DWORD *)this + 1) = a2;
   *(_DWORD *)this = operator new[](*((_DWORD *)this + 1) * *((_DWORD *)this + 1));
-  j__memset(*(void **)this, 0, *((_DWORD *)this + 1) * *((_DWORD *)this + 1));
+  memset(*(void **)this, 0, *((_DWORD *)this + 1) * *((_DWORD *)this + 1));
   return this;
 }
 

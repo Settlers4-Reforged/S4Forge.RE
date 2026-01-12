@@ -303,7 +303,7 @@ void  IAnimatedEntity::SetJobPart(int) {
   v9 = this;
   IEntity::IEntity(this, a2);
   v10 = 0;
-  v9->lpVtbl = (struct IEntityVtbl *)&IAnimatedEntity::_vftable_;
+  v9->CPersistence = (struct IEntityVtbl *)&IAnimatedEntity::_vftable_;
   std::vector<CEntityEvent>::vector<CEntityEvent>(v4);
   LOBYTE(v10) = 1;
   operator^<unsigned int>(a2, &v6);
@@ -316,10 +316,10 @@ void  IAnimatedEntity::SetJobPart(int) {
     _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
   }
   operator^<unsigned char>(a2, &v9[9]);
-  operator^<unsigned char>(a2, (char *)&v9[9].lpVtbl + 1);
-  operator^<unsigned short>(a2, (char *)&v9[9].lpVtbl + 2);
+  operator^<unsigned char>(a2, (char *)&v9[9].CPersistence + 1);
+  operator^<unsigned short>(a2, (char *)&v9[9].CPersistence + 2);
   operator^<unsigned short>(a2, &v9[10]);
-  operator^<unsigned short>(a2, (char *)&v9[10].lpVtbl + 2);
+  operator^<unsigned short>(a2, (char *)&v9[10].CPersistence + 2);
   operator^<unsigned int>(a2, &v9[11]);
   operator^<int>((int)a2, (int)&v9[12]);
   operator^<unsigned int>(a2, v5);

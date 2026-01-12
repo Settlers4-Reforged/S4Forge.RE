@@ -439,7 +439,7 @@ void  CHJBRole::ExecuteAttackSpell(class CSettler *,int,int) {
       v7 = IEntity::X(v17);
       CAttackMsgList::SendAttackMessage((CAttackMsgList *)&g_cAttackMsgList, v7, v10);
     }
-    ((void (__thiscall *)(struct IEntity *, unsigned int))v17->lpVtbl->NamedEntities)(v17, v12);
+    ((void (__thiscall *)(struct IEntity *, unsigned int))v17->NamedEntities)(v17, v12);
     v14 = CLogic::Effects((DWORD *)g_pLogic);
     v9 = CSettlerSpiralWalk::CurrentY(v11);
     v8 = CSettlerSpiralWalk::CurrentX(v11);

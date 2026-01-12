@@ -1267,7 +1267,7 @@ int  CSettler::SetGroupFlags(int) {
 
   v19 = 0;
   IMovingEntity::IMovingEntity((IMovingEntity *)this, id);
-  this->lpVtbl = (struct IEntityVtbl *)&CSettler::_vftable_;
+  this->CPersistence = (struct IEntityVtbl *)&CSettler::_vftable_;
   std::auto_ptr<ISettlerRole>::auto_ptr<ISettlerRole>(&a6);
   LOBYTE(v19) = 2;
   IMessageTracer::PushFormatedInts(
@@ -1278,20 +1278,20 @@ int  CSettler::SetGroupFlags(int) {
     settlerType,
     posX,
     posY);
-  BYTE1(this[17].lpVtbl) = 0;
+  BYTE1(this[17].CPersistence) = 0;
   IEntity::SetPosition(this, posX, posY);
-  BYTE2(this[2].lpVtbl) = 1;
-  LOWORD(this[3].lpVtbl) = settlerType;
-  LOBYTE(this[17].lpVtbl) = (unsigned int)CGameData::Rand(g_pGameData) % 6;
+  BYTE2(this[2].CPersistence) = 1;
+  LOWORD(this[3].CPersistence) = settlerType;
+  LOBYTE(this[17].CPersistence) = (unsigned int)CGameData::Rand(g_pGameData) % 6;
   IEntity::SetOwnerId(this, player);
   v7 = (void *)CPlayerManager::PlayerInfo(player);
   v8 = CPlayerInfo::Race(v7);
   IEntity::SetRace(this, v8);
   v9 = IEntity::Race(this);
-  BYTE1(this[8].lpVtbl) = *(_BYTE *)(CSettlerMgr::GetSettlerInfo(v9, settlerType) + 2);
+  BYTE1(this[8].CPersistence) = *(_BYTE *)(CSettlerMgr::GetSettlerInfo(v9, settlerType) + 2);
   IEntity::ClearFlagBits(this, (EntityFlag)0x2800u);
   IEntity::SetFlagBits(this, (EntityFlag)((char *)&loc_20010FE + 2));
-  this[5].lpVtbl = (struct IEntityVtbl *)((int)this[5].lpVtbl | CSettlerMgr::SettlerWarriorType(settlerType));
+  this[5].CPersistence = (struct IEntityVtbl *)((int)this[5].CPersistence | CSettlerMgr::SettlerWarriorType(settlerType));
   if ( !IEntity::WarriorType() )
   {
     v10 = IEntity::WorldIdx();
@@ -1301,9 +1301,9 @@ int  CSettler::SetGroupFlags(int) {
       v17 = (unsigned __int16 *)CEcoSectorMgr::operator[](v16);
       if ( CEcoSector::Owner(v17) == player )
       {
-        CEcoSector::ChangeNrOfSettler((CEcoSector *)v17, LOWORD(this[3].lpVtbl), 1);
+        CEcoSector::ChangeNrOfSettler((CEcoSector *)v17, LOWORD(this[3].CPersistence), 1);
         if ( IEntity::Type((unsigned __int16 *)this) != 1 )
-          CEcoSector::SetSettlerOffer(v17, LOWORD(this[3].lpVtbl), LOWORD(this[2].lpVtbl));
+          CEcoSector::SetSettlerOffer(v17, LOWORD(this[3].CPersistence), LOWORD(this[2].CPersistence));
       }
     }
   }
@@ -1312,14 +1312,14 @@ int  CSettler::SetGroupFlags(int) {
   {
     __debugbreak();
   }
-  CWorldManager::SetSettlerId(posX, posY, (__int16)this[2].lpVtbl);
+  CWorldManager::SetSettlerId(posX, posY, (__int16)this[2].CPersistence);
   IMovingEntity::SetDisplacementCosts(0);
-  v15 = std::auto_ptr<ISettlerRole>::operator->(&this[25].lpVtbl);
+  v15 = std::auto_ptr<ISettlerRole>::operator->(&this[25].CPersistence);
   v11 = (*(int (__thiscall **)(int, IEntity *))(*(_DWORD *)v15 + 20))(v15, this);
   std::auto_ptr<CWalking>::auto_ptr<CWalking>(v11);
   LOBYTE(v19) = 3;
   std::auto_ptr<CWalking>::operator=(v13);
-  v14 = std::auto_ptr<ISettlerRole>::operator->(&this[25].lpVtbl);
+  v14 = std::auto_ptr<ISettlerRole>::operator->(&this[25].CPersistence);
   (*(void (__thiscall **)(int, IEntity *))(*(_DWORD *)v14 + 44))(v14, this);
   CSettler::TakeWaitList(this);
   LOBYTE(v19) = 2;

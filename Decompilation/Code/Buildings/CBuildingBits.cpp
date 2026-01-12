@@ -33,7 +33,7 @@ void  CBuildingBits::PrintToTraceFile(unsigned int) {
 // Decompiled from CBuildingBits *__thiscall CBuildingBits::CBuildingBits(CBuildingBits *this)
  CBuildingBits::CBuildingBits(void) {
   
-  j__memset(this, 0, 0x1900u);
+  memset(this, 0, 0x1900u);
   return this;
 }
 

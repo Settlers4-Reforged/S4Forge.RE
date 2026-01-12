@@ -110,10 +110,10 @@ static class CPersistence * __cdecl CPersistence::New_HACK_VERSION(std::istream 
 
 
 // address=[0x14d7f80]
-// Decompiled from CPersistence *__thiscall CPersistence::CPersistence(  CPersistence *this,  const struct boost::exception_detail::clone_base *a2)
+// Decompiled from CPersistence *__thiscall CPersistence::CPersistence(CPersistence *this)
  CPersistence::CPersistence(class CPersistence const &) {
   
-  *(_DWORD *)this = &CPersistence::_vftable_;
+  this->__vftable = (CPersistence_vtbl *)&CPersistence::_vftable_;
   return this;
 }
 

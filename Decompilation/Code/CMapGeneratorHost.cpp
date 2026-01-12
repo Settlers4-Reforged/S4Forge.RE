@@ -15,13 +15,13 @@ void  CMapGeneratorHost::Init(int) {
   CMapGeneratorHost::ClearRandomMapInfo((CMapGeneratorHost *)this);
   this[52] = this[5];
   this[53] = this[11];
-  j__memset(this + 72, 0, 0x18u);
+  memset(this + 72, 0, 0x18u);
   this[75] = this[5];
   this[73] = this[11];
   this[78] = operator new[](4 * (_DWORD)this[2]);
-  j__memset(this[78], 0, 4 * (_DWORD)this[2]);
+  memset(this[78], 0, 4 * (_DWORD)this[2]);
   this[79] = operator new[](4 * (_DWORD)this[2]);
-  result = j__memset(this[79], 0, 4 * (_DWORD)this[2]);
+  result = memset(this[79], 0, 4 * (_DWORD)this[2]);
   for ( i = 0; i < (int)this[2]; ++i )
   {
     *((_BYTE *)this[78] + 4 * i + 1) = 7;
@@ -257,7 +257,7 @@ void  CMapGeneratorHost::ClearRandomMapInfo(void) {
   
   CMapGeneratorHost *result; // eax
 
-  j__memset((char *)this + 196, 0, 0x5Cu);
+  memset((char *)this + 196, 0, 0x5Cu);
   *((_DWORD *)this + 49) = 92;
   *((_DWORD *)this + 50) = 1;
   result = this;

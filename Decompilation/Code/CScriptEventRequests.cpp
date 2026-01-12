@@ -175,7 +175,7 @@ int  CScriptEventRequests::operator[](int)const {
 void  CScriptEventRequests::Clear(void) {
   
   *(_DWORD *)this = 0;
-  return j__memset((char *)this + 4, 255, 0x40u);
+  return memset((char *)this + 4, 255, 0x40u);
 }
 
 

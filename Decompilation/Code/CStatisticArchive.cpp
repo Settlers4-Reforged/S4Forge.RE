@@ -15,19 +15,19 @@
   *((_DWORD *)this + 5) = 15;
   *((_DWORD *)this + 2) = *((_DWORD *)this + 5) / 16;
   *((_DWORD *)this + 6) = 0;
-  j__memset((char *)this + 68, 0, 0x6E40u);
+  memset((char *)this + 68, 0, 0x6E40u);
   *((_DWORD *)this + 9) = 16;
   *((_DWORD *)this + 8) = -1;
   *((_DWORD *)this + 10) = 60;
   *((_DWORD *)this + 7) = *((_DWORD *)this + 10) / 16;
   *((_DWORD *)this + 11) = 0;
-  j__memset((char *)this + 28292, 0, 0x6E40u);
+  memset((char *)this + 28292, 0, 0x6E40u);
   *((_DWORD *)this + 14) = 16;
   *((_DWORD *)this + 13) = -1;
   *((_DWORD *)this + 15) = 240;
   *((_DWORD *)this + 12) = *((_DWORD *)this + 15) / 16;
   *((_DWORD *)this + 16) = 0;
-  j__memset((char *)this + 56516, 0, 0x6E40u);
+  memset((char *)this + 56516, 0, 0x6E40u);
   *((_DWORD *)this + 1) = 10;
   return this;
 }

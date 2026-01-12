@@ -472,7 +472,7 @@ bool  CFeatureGrid::findNearestElement(int &,int &,int,bool) {
   Size = *((_DWORD *)this + 1) * *((_DWORD *)this + 1);
   v11 = operator new[](Size);
   v18 = v11;
-  j__memset(v11, 0, Size);
+  memset(v11, 0, Size);
   TStaticFIFO<int,256>::TStaticFIFO<int,256>(v22);
   v10 = v21 + *((_DWORD *)v19 + 1) * v20;
   TStaticFIFO<int,256>::Push(&v10);

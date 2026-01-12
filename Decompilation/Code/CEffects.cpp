@@ -13,12 +13,12 @@
   *(_DWORD *)this = &CEffects::_vftable_;
   *((_DWORD *)this + 1) = &CEffects::`vftable';
   *((_DWORD *)this + 2) = &CEffects::`vftable';
-  j__memset((char *)this + 24, 0, 0x20A4u);
+  memset((char *)this + 24, 0, 0x20A4u);
   *((_DWORD *)this + 12) = -1;
   *((_DWORD *)this + 13) = -1;
-  j__memset((char *)this + 8380, 0, 0x2100u);
-  j__memset((char *)this + 16828, 0, 0x3C000u);
-  j__memset((char *)this + 262588, 255, 0x4000u);
+  memset((char *)this + 8380, 0, 0x2100u);
+  memset((char *)this + 16828, 0, 0x3C000u);
+  memset((char *)this + 262588, 255, 0x4000u);
   *((_WORD *)this + 8472) = 0;
   *((_WORD *)this + 8473) = 2;
   *((_WORD *)this + 8502) = 1;
@@ -32,8 +32,8 @@
   *((_WORD *)this + 131293) = 0;
   *((_DWORD *)this + 69743) = 0;
   *((_DWORD *)this + 69744) = 0;
-  j__memset((char *)this + 278980, 0, 0x1D0u);
-  j__memset(&CEffects::m_sGfxInfo, 0, 0x2D0u);
+  memset((char *)this + 278980, 0, 0x1D0u);
+  memset(&CEffects::m_sGfxInfo, 0, 0x2D0u);
   if ( !g_pGfxEngine && BBSupportDbgReport(2, "Logic\\Effects.cpp", 1696, "g_pGfxEngine != 0") == 1 )
     __debugbreak();
   IGfxEngine::SetEffectSystemInterfacePtr((IGfxEngine *)g_pGfxEngine, this);
@@ -140,7 +140,7 @@ struct SGfxObjectInfo *  CEffects::FirstEffect(int) {
       v11 = (Squares *)((char *)v11 - 1);
     if ( v10 < 63 )
       ++v10;
-    j__memset((char *)this + 60, 0, 0x80u);
+    memset((char *)this + 60, 0, 0x80u);
     for ( i = v11; (int)i <= v10; i = (Squares *)((char *)i + 1) )
     {
       for ( j = (struct IUnknown *)*CEffects::EffectSquareListHeadVW(this, i, v7); j; j = v3 )
@@ -256,7 +256,7 @@ void  CEffects::Load(class IS4Chunk &) {
   unsigned __int8 *v4; // [esp+0h] [ebp-Ch]
   unsigned int i; // [esp+4h] [ebp-8h]
 
-  j__memset((char *)this + 20, 0, 0x20A4u);
+  memset((char *)this + 20, 0, 0x20A4u);
   *((_DWORD *)this + 11) = -1;
   *((_DWORD *)this + 12) = -1;
   (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 12))(a2, -1824106861);
@@ -268,8 +268,8 @@ void  CEffects::Load(class IS4Chunk &) {
   (**(void (__thiscall ***)(struct IS4Chunk *, char *, int))a2)(a2, (char *)this + 16824, 245760);
   *((_DWORD *)this + 69742) = 0;
   *((_DWORD *)this + 69743) = 0;
-  j__memset((char *)this + 278976, 0, 0x1D0u);
-  j__memset(&CEffects::m_sGfxInfo, 0, 0x2D0u);
+  memset((char *)this + 278976, 0, 0x1D0u);
+  memset(&CEffects::m_sGfxInfo, 0, 0x2D0u);
   for ( i = 2; i < 0x1000; ++i )
   {
     v4 = (unsigned __int8 *)this + 60 * i + 16824;
@@ -1116,7 +1116,7 @@ void  CEffects::CleanUp(void) {
     result = v8;
     if ( v8 )
     {
-      j__memset(v5, 0, 0x3Cu);
+      memset(v5, 0, 0x3Cu);
       *((_WORD *)this + 30 * i + 8442) = v4;
       result = i;
       *((_WORD *)this + 30 * v4 + 8443) = i;

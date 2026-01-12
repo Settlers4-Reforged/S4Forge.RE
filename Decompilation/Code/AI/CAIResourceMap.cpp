@@ -189,7 +189,7 @@ static void __cdecl CAIResourceMap::Init(void) {
 
   dword_3EC2D1C = -1;
   dword_3EC2D20 = 0;
-  j__memset(byte_3EC2CD8, 0, 0x42u);
+  memset(byte_3EC2CD8, 0, 0x42u);
   CPerformanceCounter::Start((CPerformanceCounter *)&unk_3EC2CB0);
   CAIResourceMap::Done();
   InitResourceGroundInfoMap();
@@ -202,7 +202,7 @@ static void __cdecl CAIResourceMap::Init(void) {
     __debugbreak();
   dword_3EC2CD0 = 0;
   dword_3EC2CD4 = 0;
-  j__memset(&CAIResourceMap::m_cData, 0, 0x2B500u);
+  memset(&CAIResourceMap::m_cData, 0, 0x2B500u);
   v2 = CWorldManager::Width(v1);
   if ( v2 == CWorldManager::Height(v4, v3) && CWorldManager::Width(v5) <= 1024 && (CWorldManager::Width(v6) & 0xF) == 0 )
   {

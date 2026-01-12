@@ -729,7 +729,7 @@ void  CStateLobbyGameSettings::PrintChatLine(unsigned short const *,unsigned sho
   char v8[256]; // [esp+114h] [ebp-204h] BYREF
   char Dest[256]; // [esp+214h] [ebp-104h] BYREF
 
-  j__memset(Dest, 0, sizeof(Dest));
+  memset(Dest, 0, sizeof(Dest));
   v2 = j__wcslen(String);
   v6 = j__wcstombs(Dest, String, v2);
   if ( v6 >= 0x100 )
@@ -1492,7 +1492,7 @@ bool  CStateLobbyGameSettings::CheckReady(void) {
   if ( *(_DWORD *)(g_pGameType + 864) != 3 )
     return 1;
   v3 = operator new[](4 * *(_DWORD *)(g_pGameType + 72));
-  j__memset(v3, 0, 4 * *(_DWORD *)(g_pGameType + 72));
+  memset(v3, 0, 4 * *(_DWORD *)(g_pGameType + 72));
   for ( j = 0; j < *(_DWORD *)(g_pGameType + 112); ++j )
   {
     v4 = *(_DWORD *)(g_pGameType + 4 * j + 152);

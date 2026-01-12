@@ -48,7 +48,7 @@ static void __cdecl CShipMap::Init(void) {
   
   void *result; // eax
 
-  result = j__memset(&CShipMap::m_tShipLists, 0, 0x10800u);
+  result = memset(&CShipMap::m_tShipLists, 0, 0x10800u);
   CShipMap::m_iInitialized = 1;
   return result;
 }

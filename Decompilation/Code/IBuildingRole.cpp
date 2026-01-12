@@ -1117,7 +1117,7 @@ void  IBuildingRole::InitHousePatches(void) {
   {
     __debugbreak();
   }
-  result = j__memset((void *)(this + 156), 0, 0xC8u);
+  result = memset((void *)(this + 156), 0, 0xC8u);
   for ( i = 0; i < 0xA; ++i )
   {
     if ( *(_DWORD *)(*(_DWORD *)(this + 376) + 16 * i + 504) )

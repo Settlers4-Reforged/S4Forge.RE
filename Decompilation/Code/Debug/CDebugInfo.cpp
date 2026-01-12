@@ -18,7 +18,7 @@ static bool __cdecl CDebugInfo::CheckEnvironment(bool) {
   DWORD v2; // eax
   DWORD v3; // eax
 
-  j__memset(&CDebugInfo::m_EnvInfo, 0, 0x74u);
+  memset(&CDebugInfo::m_EnvInfo, 0, 0x74u);
   if ( !(unsigned __int8)CDebugInfo::CheckOS() )
   {
     LastError = GetLastError();
@@ -134,7 +134,7 @@ static bool __cdecl CDebugInfo::CheckOS(void) {
   
   _OSVERSIONINFOA VersionInformation; // [esp+8h] [ebp-98h] BYREF
 
-  j__memset(&VersionInformation, 0, sizeof(VersionInformation));
+  memset(&VersionInformation, 0, sizeof(VersionInformation));
   VersionInformation.dwOSVersionInfoSize = 148;
   if ( GetVersionExA(&VersionInformation) )
   {
@@ -227,7 +227,7 @@ static bool __cdecl CDebugInfo::CheckCPU(void) {
   v10 = v0[2];
   v11 = v0[3];
   dword_3F44EC8 = v11;
-  j__memset(&SystemInfo, 0, sizeof(SystemInfo));
+  memset(&SystemInfo, 0, sizeof(SystemInfo));
   GetSystemInfo(&SystemInfo);
   dword_3F44EC4 = SystemInfo.dwNumberOfProcessors;
   byte_3F44EC0 = ((unsigned int)dword_800000 & CDebugInfo::wincpufeatures()) != 0;
@@ -274,7 +274,7 @@ static struct SFreqInfo __cdecl CDebugInfo::CPUSpeed(int) {
   v12 = CDebugInfo::wincpuid();
   v9 = CDebugInfo::wincpufeatures();
   v11 = 0;
-  j__memset(v13, 0, sizeof(v13));
+  memset(v13, 0, sizeof(v13));
   if ( a2 > 0 )
   {
     if ( a2 <= 150 )
@@ -347,7 +347,7 @@ static bool __cdecl CDebugInfo::CheckMemory(void) {
   
   _MEMORYSTATUS Buffer; // [esp+0h] [ebp-24h] BYREF
 
-  j__memset(&Buffer, 0, sizeof(Buffer));
+  memset(&Buffer, 0, sizeof(Buffer));
   GlobalMemoryStatus(&Buffer);
   dword_3F44ECC = Buffer.dwTotalPhys;
   dword_3F44ED0 = Buffer.dwTotalPageFile;
@@ -375,7 +375,7 @@ static struct SFreqInfo __cdecl CDebugInfo::GetBSFCpuSpeed(unsigned int) {
   v10 = 0;
   v8 = 0;
   v7 = -1;
-  j__memset(v12, 0, sizeof(v12));
+  memset(v12, 0, sizeof(v12));
   if ( QueryPerformanceFrequency(&Frequency) )
   {
     for ( i = 0; i < 10; ++i )
@@ -447,7 +447,7 @@ static struct SFreqInfo __cdecl CDebugInfo::GetRDTSCCpuSpeed(void) {
   v14 = 0;
   v15 = 0;
   hThread = GetCurrentThread();
-  j__memset(v20, 0, sizeof(v20));
+  memset(v20, 0, sizeof(v20));
   if ( QueryPerformanceFrequency(&Frequency) )
   {
     do
@@ -598,7 +598,7 @@ static struct SFreqInfo __cdecl CDebugInfo::GetCmosCpuSpeed(void) {
 
   v16 = 0;
   hThread = GetCurrentThread();
-  j__memset(v19, 0, sizeof(v19));
+  memset(v19, 0, sizeof(v19));
   nPriority = GetThreadPriority(hThread);
   if ( nPriority != 0x7FFFFFFF )
     SetThreadPriority(hThread, nPriority + 1);

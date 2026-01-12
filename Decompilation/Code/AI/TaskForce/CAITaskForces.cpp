@@ -17,7 +17,7 @@ static void __cdecl CAITaskForces::Init(void) {
   void *result; // eax
 
   CAITaskForces::Done();
-  result = j__memset(&dword_3ECCD28, 0, 0x208u);
+  result = memset(&dword_3ECCD28, 0, 0x208u);
   dword_3ECCD24 = 1;
   return result;
 }

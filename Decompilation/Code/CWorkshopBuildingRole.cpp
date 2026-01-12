@@ -1073,7 +1073,7 @@ void  CWorkshopBuildingRole::Clear(void) {
   *((_WORD *)this + 191) = 0;
   *((_DWORD *)this + 96) = 0;
   std::vector<unsigned short>::clear();
-  return j__memset((char *)this + 404, 0, 5u);
+  return memset((char *)this + 404, 0, 5u);
 }
 
 

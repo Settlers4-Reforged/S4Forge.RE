@@ -6,7 +6,7 @@
 // Decompiled from IA_ColorReduction_Color *__thiscall IA_ColorReduction_Color::IA_ColorReduction_Color(IA_ColorReduction_Color *this)
  IA_ColorReduction_Color::IA_ColorReduction_Color(void) {
   
-  j__memset(this, 0, 4u);
+  memset(this, 0, 4u);
   return this;
 }
 

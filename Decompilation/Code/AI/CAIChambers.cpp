@@ -8,7 +8,7 @@
   
   *(_DWORD *)this = IAIEnvironment::UnpackXFast(a2);
   *((_DWORD *)this + 1) = IAIEnvironment::UnpackYFast(a2);
-  j__memset((char *)this + 8, 0, 0x140u);
+  memset((char *)this + 8, 0, 0x140u);
   *((_DWORD *)this + 3242) = -1;
   return this;
 }
@@ -122,7 +122,7 @@ int  CAIChambers::Next(void) {
 // Decompiled from void *__thiscall CAIChambers::Clear(CAIChambers *this)
 void  CAIChambers::Clear(void) {
   
-  return j__memset((char *)this + 8, 0, 0x140u);
+  return memset((char *)this + 8, 0, 0x140u);
 }
 
 

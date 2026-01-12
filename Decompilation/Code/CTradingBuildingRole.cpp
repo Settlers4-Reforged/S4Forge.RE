@@ -1267,7 +1267,7 @@ void  CTradingBuildingRole::FillTradeSideBar(class CPortGoodsTradeBarInfo *,bool
   result = 0;
   if ( !BuildingPtr )
     return result;
-  j__memset((char *)a2 + 8, 0, 9u);
+  memset((char *)a2 + 8, 0, 9u);
   for ( i = 1; i <= CPlayerManager::NumberOfPlayers(); ++i )
   {
     v4 = IEntity::OwnerId(BuildingPtr);
@@ -1305,7 +1305,7 @@ void  CTradingBuildingRole::FillGoodsOutSideBar(class CPortGoodsOutBarInfo *,boo
   int v8; // [esp+34h] [ebp-4h]
 
   *((_DWORD *)a2 + 1) = 14;
-  j__memset((char *)a2 + 8, 0, 0x2Bu);
+  memset((char *)a2 + 8, 0, 0x2Bu);
   for ( i = 0; i < 43; ++i )
   {
     if ( (unsigned __int8)CTradingBuildingRole::HasGoodState(this, i, 2) )

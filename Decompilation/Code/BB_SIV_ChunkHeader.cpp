@@ -6,7 +6,7 @@
 // Decompiled from BB_SIV_ChunkHeader *__thiscall BB_SIV_ChunkHeader::BB_SIV_ChunkHeader(BB_SIV_ChunkHeader *this)
  BB_SIV_ChunkHeader::BB_SIV_ChunkHeader(void) {
   
-  j__memset(this, 0, 0x14u);
+  memset(this, 0, 0x14u);
   return this;
 }
 

@@ -992,7 +992,7 @@ int  CWalkingBase::GetNextWaypoint(void) {
   
   CWalking::CWalking(this);
   *(_DWORD *)this = &CWalkingBase::_vftable_;
-  j__memset((char *)this + 4, 0, 0xBCu);
+  memset((char *)this + 4, 0, 0xBCu);
   *((_DWORD *)this + 1) = a2;
   *((_DWORD *)this + 2) = 1;
   *((_DWORD *)this + 13) = a3;

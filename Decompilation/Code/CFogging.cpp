@@ -139,8 +139,8 @@ void  CFogging::Init(struct T_GFX_MAP_ELEMENT *,unsigned char *) {
     __debugbreak();
   if ( !*((_DWORD *)this + 11) && BBSupportDbgReport(2, "Pathing\\Fogging.cpp", 1296, "m_pRWM2 != 0") == 1 )
     __debugbreak();
-  j__memset(*((void **)this + 10), 0, 8u);
-  return j__memset(*((void **)this + 11), 0, 8u);
+  memset(*((void **)this + 10), 0, 8u);
+  return memset(*((void **)this + 11), 0, 8u);
 }
 
 
@@ -735,7 +735,7 @@ void  CFogging::ClearDynamicFoggingAndCalcStatic(void) {
   {
     __debugbreak();
   }
-  j__memset(*((void **)this + 3), 7, (_DWORD)v28 * (_DWORD)v28);
+  memset(*((void **)this + 3), 7, (_DWORD)v28 * (_DWORD)v28);
   LocalPlayerId = CPlayerManager::GetLocalPlayerId(v4);
   if ( *((_BYTE *)this + 76) )
     v14 = (char *)CAlliances::PlayerBit(LocalPlayerId);

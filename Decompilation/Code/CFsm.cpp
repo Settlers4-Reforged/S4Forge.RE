@@ -20,7 +20,7 @@ int  CFsm::CurrentState(void)const {
   *((_DWORD *)this + 2) = a4;
   *((_DWORD *)this + 1) = 0;
   *((_DWORD *)this + 1) = operator new[](16 * *(_DWORD *)this);
-  j__memset(*((void **)this + 1), -1, 16 * *(_DWORD *)this);
+  memset(*((void **)this + 1), -1, 16 * *(_DWORD *)this);
   return this;
 }
 

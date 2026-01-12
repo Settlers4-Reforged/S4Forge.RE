@@ -65,7 +65,7 @@ static void __cdecl CTiling::PrepareReCalculate(void) {
     v1 = ITiling::OwnerPseudoTileId(v3);
     CTiling::SetNormalTileId(i, v1);
   }
-  j__memset(*(&ITiling::m_pTileIds + 1), 0, 2 * v5);
+  memset(*(&ITiling::m_pTileIds + 1), 0, 2 * v5);
   return CTiling::ClearBorderstoneBits(v3, v4);
 }
 
@@ -380,8 +380,8 @@ static void __cdecl CTiling::CalcAllTiles(void) {
 
   CTilesAndLinks::InitTiles();
   CTiling::m_iNumberOfWaterElements = 0;
-  j__memset(CTiling::m_iNumberOfOwnedElements, 0, sizeof(CTiling::m_iNumberOfOwnedElements));
-  j__memset(ITiling::m_uSquareNumberOfWaterElementsDiv2, 0, sizeof(ITiling::m_uSquareNumberOfWaterElementsDiv2));
+  memset(CTiling::m_iNumberOfOwnedElements, 0, sizeof(CTiling::m_iNumberOfOwnedElements));
+  memset(ITiling::m_uSquareNumberOfWaterElementsDiv2, 0, sizeof(ITiling::m_uSquareNumberOfWaterElementsDiv2));
   v8 = CTilingWorld::WorldWidthHeight();
   for ( i = 0; (int)i < v8; i = (Squares *)((char *)i + 16) )
   {
@@ -4484,7 +4484,7 @@ static int __cdecl CTiling::DbgCheckSectors(int) {
   BBSupportTracePrintF(0, "CTiling::DbgCheckSectors()...");
   v9 = CTilingWorld::WorldWidthHeight();
   v7 = v9 * v9;
-  j__memset(v16, 0, sizeof(v16));
+  memset(v16, 0, sizeof(v16));
   for ( i = 0; i < v7; ++i )
   {
     v0 = ITiling::NormalTileId(i);
@@ -4564,7 +4564,7 @@ static int __cdecl CTiling::DbgCheckEcoSectors(int) {
   BBSupportTracePrintF(0, "CTiling::DbgCheckEcoSectors()...");
   v9 = CTilingWorld::WorldWidthHeight();
   v7 = v9 * v9;
-  j__memset(v17, 0, sizeof(v17));
+  memset(v17, 0, sizeof(v17));
   for ( i = 0; i < v7; ++i )
   {
     v0 = ITiling::NormalTileId(i);
@@ -4651,7 +4651,7 @@ static int __cdecl CTiling::DbgCheckTileSizes(int) {
 
   v7 = 0;
   BBSupportTracePrintF(0, "CTiling::DbgCheckTileSizes()...");
-  j__memset(v10, 0, sizeof(v10));
+  memset(v10, 0, sizeof(v10));
   v3 = CTilingWorld::WorldNumberOfElements();
   for ( i = 0; i < v3; ++i )
   {
@@ -4941,10 +4941,10 @@ static void __cdecl CTiling::NotifyEcoSectorsMerged(int,int) {
 static void __cdecl CTiling::NotifyInitEcoSectors(bool) {
   
   CTiling::m_iInitLastEcoSectorId = 0;
-  j__memset(CTiling::m_iEcoSectorSizes, 255, sizeof(CTiling::m_iEcoSectorSizes));
+  memset(CTiling::m_iEcoSectorSizes, 255, sizeof(CTiling::m_iEcoSectorSizes));
   CTiling::m_iEcoSectorTileIdIterator = 0;
-  j__memset(CTiling::m_uEcoSectorAnyTileIds, 0, sizeof(CTiling::m_uEcoSectorAnyTileIds));
-  return j__memset(word_43010C0, 0, 0x200000u);
+  memset(CTiling::m_uEcoSectorAnyTileIds, 0, sizeof(CTiling::m_uEcoSectorAnyTileIds));
+  return memset(word_43010C0, 0, 0x200000u);
 }
 
 

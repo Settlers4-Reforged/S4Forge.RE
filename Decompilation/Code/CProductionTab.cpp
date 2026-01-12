@@ -24,7 +24,7 @@ int  CProductionTab::GetProdIdForGoodType(enum PILE_TYPES,int) {
   
   if ( CProductionTab::m_iNumberOfEntries )
     return this;
-  j__memset(CProductionTab::m_aRaceAndGoodToProdIdMap, 0, 0x35Cu);
+  memset(CProductionTab::m_aRaceAndGoodToProdIdMap, 0, 0x35Cu);
   CProductionTab::m_iNumberOfEntries = 1;
   CProductionTab::PT(this, "Holzproduktion", 5, 7, 1, 3, 0, 0, 0);
   CProductionTab::PT(this, "Steinproduktion", 5, 32, 4, 0, 0, 0, 0);

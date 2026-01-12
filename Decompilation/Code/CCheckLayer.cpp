@@ -67,7 +67,7 @@ void  CCheckLayer::setPoint(int,int,unsigned short) {
 // Decompiled from void *__thiscall CCheckLayer::clear(void **this)
 void  CCheckLayer::clear(void) {
   
-  return j__memset(*this, 0, 2 * (_DWORD)this[2] * (_DWORD)this[1]);
+  return memset(*this, 0, 2 * (_DWORD)this[2] * (_DWORD)this[1]);
 }
 
 

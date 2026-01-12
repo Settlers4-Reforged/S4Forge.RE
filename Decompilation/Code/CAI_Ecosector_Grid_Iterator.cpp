@@ -7,7 +7,7 @@
  CAI_Ecosector_Grid_Iterator::CAI_Ecosector_Grid_Iterator(void) {
   
   CAI_Ecosector_Grid_Iterator::CESGI::CESGI(this);
-  j__memset(this, 0, 0xA10u);
+  memset(this, 0, 0xA10u);
   return this;
 }
 
@@ -32,7 +32,7 @@ void  CAI_Ecosector_Grid_Iterator::Init(int) {
   CAI_Ecosector_Grid_Iterator::FindStartPoint(this);
   TStaticFIFO<unsigned short,1024>::Init((char *)this + 520);
   TStaticFIFO<unsigned short,1024>::Push((char *)this + 4);
-  return j__memset((char *)this + 8, 0, 0x200u);
+  return memset((char *)this + 8, 0, 0x200u);
 }
 
 

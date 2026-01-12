@@ -6,7 +6,7 @@
 // Decompiled from SM_SIV_PaletteBlock *__thiscall SM_SIV_PaletteBlock::SM_SIV_PaletteBlock(SM_SIV_PaletteBlock *this, int a2, bool a3)
  SM_SIV_PaletteBlock::SM_SIV_PaletteBlock(int,bool) {
   
-  j__memset(this, 0, 0x1005u);
+  memset(this, 0, 0x1005u);
   *(_DWORD *)this = a2;
   *((_BYTE *)this + 4) = a3;
   return this;

@@ -125,7 +125,7 @@ bool  CRandomMaps::GetParamsFromMapKey(struct SRandomMapParams *,wchar_t const *
 
   if ( !a1 )
     return 0;
-  j__memset(a1, 0, 0xB8u);
+  memset(a1, 0, 0xB8u);
   j__wcsncpy(Destination, Source, 0x3FFu);
   Destination[1023] = 0;
   if ( !(unsigned __int8)IsValidMapKey(Destination) )

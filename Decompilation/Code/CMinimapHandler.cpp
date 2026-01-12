@@ -33,9 +33,9 @@ static void __cdecl CMinimapHandler::Init(void) {
   int j; // [esp+0h] [ebp-4h]
   int k; // [esp+0h] [ebp-4h]
 
-  j__memset(CMinimapHandler::m_iGroupEnabled, 0, sizeof(CMinimapHandler::m_iGroupEnabled));
-  j__memset(CMinimapHandler::m_sObjectColor, 255, 0x48u);
-  j__memset(CMinimapHandler::m_iObjectBitMask, 0, sizeof(CMinimapHandler::m_iObjectBitMask));
+  memset(CMinimapHandler::m_iGroupEnabled, 0, sizeof(CMinimapHandler::m_iGroupEnabled));
+  memset(CMinimapHandler::m_sObjectColor, 255, 0x48u);
+  memset(CMinimapHandler::m_iObjectBitMask, 0, sizeof(CMinimapHandler::m_iObjectBitMask));
   for ( i = 0; i < 132; ++i )
     CMinimapHandler::m_iObjectGroups[i] = 5;
   CMinimapHandler::m_iObjectGroups[8] = 0;

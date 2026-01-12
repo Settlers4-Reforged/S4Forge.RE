@@ -15,7 +15,7 @@ void  CAIMain::InitScripting(void) {
 void  CAIMain::Init(void) {
   
   (*(void (__thiscall **)(CAIMain *))(*(_DWORD *)this + 20))(this);
-  j__memset((char *)this + 12, 0, 0x24u);
+  memset((char *)this + 12, 0, 0x24u);
   CAIPlayerEvaluations::Clear((CAIPlayerEvaluations *)&g_cAIPlayerEvaluations);
   CAIRegions::ClearAllRegions((CAIRegions *)&g_cAIRegions);
   CAIPlayersScriptVars::Init((CAIPlayersScriptVars *)g_cAIPlayersScriptVars);

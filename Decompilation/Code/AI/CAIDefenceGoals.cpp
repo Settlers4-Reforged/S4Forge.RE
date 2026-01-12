@@ -16,7 +16,7 @@
 void  CAIDefenceGoals::Clear(void) {
   
   *(_DWORD *)this = 0;
-  return j__memset((char *)this + 4, 0, 0x3C0u);
+  return memset((char *)this + 4, 0, 0x3C0u);
 }
 
 

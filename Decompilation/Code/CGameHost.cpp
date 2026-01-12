@@ -268,12 +268,12 @@ bool  CGameHost::InitAsHost(unsigned int) {
   *((_DWORD *)this + 49) = 0;
   std::list<SGameInfo>::list<SGameInfo>((char *)this + 268);
   std::list<CNet_Event>::list<CNet_Event>((char *)this + 280);
-  j__memset((char *)this + 88, 0, 0x20u);
-  j__memset((char *)this + 120, 0, 0x20u);
-  j__memset((char *)this + 152, 0, 0x20u);
-  j__memset((char *)this + 200, 0, 0x20u);
-  j__memset((char *)this + 232, 0, 0x20u);
-  j__memset((char *)this + 292, 0, 0x3CBu);
+  memset((char *)this + 88, 0, 0x20u);
+  memset((char *)this + 120, 0, 0x20u);
+  memset((char *)this + 152, 0, 0x20u);
+  memset((char *)this + 200, 0, 0x20u);
+  memset((char *)this + 232, 0, 0x20u);
+  memset((char *)this + 292, 0, 0x3CBu);
   CGameHost::FillHandlersArray(this);
   C = (CFsm *)operator new(0x1Cu);
   LOBYTE(v11) = 3;
@@ -910,7 +910,7 @@ bool  CGameHost::StartIniFileGame(wchar_t const *) {
   Size = ElementSize + 128;
   v45 = operator new[](ElementSize + 128);
   Buffer = v45;
-  j__memset(v45, 0, Size);
+  memset(v45, 0, Size);
   CFile::Read(Buffer, ElementSize, 1u, (int)"d:\\projects\\tshe\\purplelamp\\s4\\source\\baselib\\include\\File.h", 0);
   CFile::Close((CFile *)v84, "d:\\projects\\tshe\\purplelamp\\s4\\source\\baselib\\include\\File.h", 0);
   CClassNetGameIniBuffer::CClassNetGameIniBuffer((CClassNetGameIniBuffer *)v33, (const char *)Buffer, ElementSize);
@@ -1167,7 +1167,7 @@ bool  CGameHost::StartIniFileGame(wchar_t const *) {
   }
   `eh vector constructor iterator'(v91, 0x1Cu, 9u, std::wstring::wstring, std::wstring::~wstring);
   LOBYTE(v101) = 9;
-  j__memset(v92, 0, sizeof(v92));
+  memset(v92, 0, sizeof(v92));
   for ( i = 0; (int)i < v62; ++i )
   {
     j__sprintf((char *const)Dest, "PlayerIP%d=", i);
@@ -1403,7 +1403,7 @@ bool  CGameHost::StartIniFileGame(wchar_t const *) {
   else
   {
     Sleep(0x7D0u);
-    j__memset(v80, 0, sizeof(v80));
+    memset(v80, 0, sizeof(v80));
     LOBYTE(v80[1]) = 1;
     LOBYTE(v80[150]) = 0;
     v80[148] = *(_DWORD *)(g_pGameType + 616);
@@ -2288,7 +2288,7 @@ void  CGameHost::SendPlayerData(unsigned int) {
 
   for ( i = 0; i < *(_DWORD *)(g_pGameType + 852); ++i )
   {
-    j__memset(Src, 0, 0x77u);
+    memset(Src, 0, 0x77u);
     Src[1] = *(_BYTE *)(g_pGameType + 620);
     Src[2] = *(_BYTE *)(g_pGameType + 112);
     Src[3] = i;
@@ -2956,7 +2956,7 @@ bool  CGameHost::ClientSearchesGameHost(void *) {
   int v10; // [esp+448h] [ebp-30h] BYREF
   int v11; // [esp+474h] [ebp-4h]
 
-  j__memset(v8, 0, 0x402u);
+  memset(v8, 0, 0x402u);
   v8[0] = 1022;
   LOBYTE(v8[293]) = *(_BYTE *)(g_pGameType + 609);
   *(_DWORD *)&v8[297] = *(_DWORD *)(g_pGameType + 620);
@@ -3270,7 +3270,7 @@ bool  CGameHost::ClientReceivePlayerData(void *) {
     if ( *(_DWORD *)(g_pGameType + 856) % 0x300u )
       ++*(_DWORD *)(this + 84);
     *(_DWORD *)(this + 72) = operator new[](*(_DWORD *)(this + 84));
-    j__memset(*(void **)(this + 72), 0, *(_DWORD *)(this + 84));
+    memset(*(void **)(this + 72), 0, *(_DWORD *)(this + 84));
     *(_DWORD *)(this + 68) = operator new[](*(_DWORD *)(g_pGameType + 856));
     *(_DWORD *)(this + 80) = 0;
     *(_BYTE *)(this + 76) = 1;
@@ -3332,7 +3332,7 @@ bool  CGameHost::ResendPlayerPing(void *) {
   v4 = this;
   for ( i = 0; i < *(_DWORD *)(g_pGameType + 852); ++i )
   {
-    j__memset(Src, 0, 5u);
+    memset(Src, 0, 5u);
     Src[0] = i;
     *(_DWORD *)&Src[1] = *(_DWORD *)(g_pGameType + 4 * i + 624);
     CGameHost::SendToAll((int)v4, 1034, Src, 5u, 0, 0, 1u);
@@ -3779,7 +3779,7 @@ bool  CGameHost::SendChatLine(void *) {
   _BYTE v10[28]; // [esp+134h] [ebp-2Ch] BYREF
   int v11; // [esp+15Ch] [ebp-4h]
 
-  j__memset(Src, 0, sizeof(Src));
+  memset(Src, 0, sizeof(Src));
   MyWStrNCopy((int)&Src[64], (int)Source, 192);
   PlayerName = (_Cnd_internal_imp_t *)CGameSettings::GetPlayerName((int)v10);
   v11 = 0;

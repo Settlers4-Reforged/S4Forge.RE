@@ -10,8 +10,8 @@ void  CSectors::Init(void) {
 
   *(_DWORD *)this = 0;
   *((_DWORD *)this + 40961) = 1;
-  j__memset((char *)this + 4, 0, 0x8000u);
-  j__memset((char *)this + 32772, -1, 0x20000u);
+  memset((char *)this + 4, 0, 0x8000u);
+  memset((char *)this + 32772, -1, 0x20000u);
   *((_BYTE *)this + 4) = 1;
   result = this;
   *((_DWORD *)this + 8193) = 0;

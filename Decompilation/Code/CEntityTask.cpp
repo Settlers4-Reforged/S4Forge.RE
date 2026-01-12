@@ -14,24 +14,24 @@ static class CPersistence * __cdecl CEntityTask::New(std::istream &) {
 
 
 // address=[0x14d7e80]
-// Decompiled from int __thiscall CEntityTask::CEntityTask(int this, struct boost::exception_detail::clone_base *a2)
+// Decompiled from CEntityTask *__thiscall CEntityTask::CEntityTask(CEntityTask *this, CEntityTask *cloneSource)
  CEntityTask::CEntityTask(class CEntityTask const &) {
   
-  CPersistence::CPersistence((boost::exception_detail::clone_base *)this, a2);
+  CPersistence::CPersistence((CPersistence *)this);
   *(_DWORD *)this = &CEntityTask::_vftable_;
-  *(_BYTE *)(this + 4) = *((_BYTE *)a2 + 4);
-  *(_BYTE *)(this + 5) = *((_BYTE *)a2 + 5);
-  *(_BYTE *)(this + 6) = *((_BYTE *)a2 + 6);
-  *(_BYTE *)(this + 7) = *((_BYTE *)a2 + 7);
-  *(_BYTE *)(this + 8) = *((_BYTE *)a2 + 8);
-  *(_BYTE *)(this + 9) = *((_BYTE *)a2 + 9);
-  *(_WORD *)(this + 10) = *((_WORD *)a2 + 5);
-  *(_WORD *)(this + 12) = *((_WORD *)a2 + 6);
-  *(_WORD *)(this + 14) = *((_WORD *)a2 + 7);
-  *(_WORD *)(this + 16) = *((_WORD *)a2 + 8);
-  *(_WORD *)(this + 18) = *((_WORD *)a2 + 9);
-  *(_BYTE *)(this + 20) = *((_BYTE *)a2 + 20);
-  *(_BYTE *)(this + 21) = *((_BYTE *)a2 + 21);
+  *((_BYTE *)this + 4) = *((_BYTE *)cloneSource + 4);
+  *((_BYTE *)this + 5) = *((_BYTE *)cloneSource + 5);
+  *((_BYTE *)this + 6) = *((_BYTE *)cloneSource + 6);
+  *((_BYTE *)this + 7) = *((_BYTE *)cloneSource + 7);
+  *((_BYTE *)this + 8) = *((_BYTE *)cloneSource + 8);
+  *((_BYTE *)this + 9) = *((_BYTE *)cloneSource + 9);
+  *((_WORD *)this + 5) = *((_WORD *)cloneSource + 5);
+  *((_WORD *)this + 6) = *((_WORD *)cloneSource + 6);
+  *((_WORD *)this + 7) = *((_WORD *)cloneSource + 7);
+  *((_WORD *)this + 8) = *((_WORD *)cloneSource + 8);
+  *((_WORD *)this + 9) = *((_WORD *)cloneSource + 9);
+  *((_BYTE *)this + 20) = *((_BYTE *)cloneSource + 20);
+  *((_BYTE *)this + 21) = *((_BYTE *)cloneSource + 21);
   return this;
 }
 

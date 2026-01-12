@@ -42,7 +42,7 @@ static class CMineRole * __cdecl CMineRole::Load(std::istream &) {
   *((_DWORD *)this + 110) = 0;
   std::vector<unsigned short>::clear();
   std::vector<unsigned short>::clear();
-  j__memset((char *)this + 424, 0, 0xFu);
+  memset((char *)this + 424, 0, 0xFu);
   return this;
 }
 
@@ -203,7 +203,7 @@ void  CMineRole::Init(class CBuilding *) {
   IAnimatedEntity::RegisterForLogicUpdate(2);
   *((_WORD *)this + 191) = 0;
   std::vector<unsigned short>::clear();
-  j__memset((char *)this + 424, 0, 0xFu);
+  memset((char *)this + 424, 0, 0xFu);
   for ( i = 0; i < *(char *)(*((_DWORD *)this + 94) + 57); ++i )
   {
     v2 = IEntity::WorldIdx();
@@ -480,8 +480,8 @@ void  CMineRole::FillDialog(class CBuilding *,bool) {
   int v18; // [esp+48h] [ebp-4h]
 
   dword_3F1E500 = 3;
-  j__memset(byte_3F1E510, 0, 0xAu);
-  j__memset(&byte_3F1E51A, 0, 0x14u);
+  memset(byte_3F1E510, 0, 0xAu);
+  memset(&byte_3F1E51A, 0, 0x14u);
   byte_3F1E505 = IEntity::Race(a2);
   byte_3F1E504 = IEntity::Type((unsigned __int16 *)a2);
   byte_3F1E507 = 1;

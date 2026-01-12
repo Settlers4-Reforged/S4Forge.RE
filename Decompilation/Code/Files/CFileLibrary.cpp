@@ -669,7 +669,7 @@ int  CFileLibrary::AddFileLibrary(wchar_t const *,int) {
       v19 = v46;
       v82 = -1;
       v56 = v46;
-      j__memset(v46, 0, 24 * (*((_DWORD *)v74 + 11) + 8));
+      memset(v46, 0, 24 * (*((_DWORD *)v74 + 11) + 8));
       if ( *((int *)v74 + 11) > 0 )
       {
         j__memmove(v56, *((const void **)v74 + 116), 24 * *((_DWORD *)v74 + 11));
@@ -1147,7 +1147,7 @@ void  CFileLibrary::DumpFilesInLib(wchar_t const *,wchar_t const *) {
       }
       v20 = operator new[](Size);
       Buffer = v20;
-      j__memset(v20, 0, Size);
+      memset(v20, 0, Size);
       v19 = CFileLibrary::FileRead(v27, Buffer, Size);
       if ( v19 == -1 )
       {

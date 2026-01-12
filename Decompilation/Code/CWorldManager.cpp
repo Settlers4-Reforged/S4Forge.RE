@@ -947,7 +947,7 @@ static bool __cdecl CWorldManager::LoadMap(class S4::CMapFile &,int) {
   TMap<unsigned char>::Done(&v4);
   v6 = -1;
   TMap<unsigned char>::~TMap<unsigned char>();
-  j__memset(CWorldManager::m_cCatapultTileIdMap, 0, 2 * CWorldManager::m_iWorldIdxMax);
+  memset(CWorldManager::m_cCatapultTileIdMap, 0, 2 * CWorldManager::m_iWorldIdxMax);
   TMap<T_GFX_MAP_ELEMENT>::LoadMap(a1, 200, CWorldManager::m_iWidthHeight);
   TMap<unsigned char>::LoadMap((void **)&CWorldManager::m_cFlagMap, a1, 0xCDu, CWorldManager::m_iWidthHeight);
   TMap<unsigned short>::LoadMap((void **)&CWorldManager::m_cMapObjectMap, a1, 0xCAu, CWorldManager::m_iWidthHeight);
@@ -1320,7 +1320,7 @@ static void __cdecl CWorldManager::SetOwner(int,int) {
   {
     __debugbreak();
   }
-  j__memset(v63, 0, sizeof(v63));
+  memset(v63, 0, sizeof(v63));
   v43 = 0;
   v51 = 0;
   if ( a1 - 100 < 1 )

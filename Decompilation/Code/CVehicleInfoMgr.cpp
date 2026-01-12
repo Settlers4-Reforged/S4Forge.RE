@@ -14,7 +14,7 @@ void  CVehicleInfoMgr::InitializeVehicleProperties(bool,bool) {
   if ( a2 || !IVehicleInfoMgr::m_bInitialized )
   {
     IVehicleInfoMgr::m_bInitialized = 1;
-    j__memset(&IVehicleInfoMgr::m_sVehicleProperties, 0, 0xAC8u);
+    memset(&IVehicleInfoMgr::m_sVehicleProperties, 0, 0xAC8u);
     for ( i = (char *)&unk_37C03B8; *((_DWORD *)i + 2); i += 12 )
     {
       v5 = *((_DWORD *)i + 1);

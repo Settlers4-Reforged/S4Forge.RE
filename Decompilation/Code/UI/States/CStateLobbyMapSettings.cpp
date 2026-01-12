@@ -65,7 +65,7 @@ static class CGameState * __cdecl CStateLobbyMapSettings::DynamicCreateFunc(void
       v7 = 0;
     LOBYTE(v15) = 0;
     g_pGameType = (int)v7;
-    j__memset(&CStateLobbyMapSettings::m_stempMapPtr, 0, 0xFA0u);
+    memset(&CStateLobbyMapSettings::m_stempMapPtr, 0, 0xFA0u);
     dword_4031938 = 0;
     CStateLobbyMapSettings::SetupGUI(this);
     dword_4031920 = (int)&CStateLobbyMapSettings::m_stempMapPtr;
@@ -590,7 +590,7 @@ void  CStateLobbyMapSettings::AddMapList(std::wstring,std::wstring) {
       v48 = operator new(0x7Cu);
       if ( v48 )
       {
-        j__memset(v48, 0, 0x7Cu);
+        memset(v48, 0, 0x7Cu);
         v47 = CLanLobbyMapSettings::SMapEntry::SMapEntry((CLanLobbyMapSettings::SMapEntry *)v48);
       }
       else

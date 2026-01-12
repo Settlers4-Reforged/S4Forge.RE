@@ -118,7 +118,7 @@ void  IMessageTracer::Init(void) {
   
   *(_DWORD *)this = 0;
   *((_DWORD *)this + 1) = 0xFFFFFFFF;
-  return j__memset((char *)this + 8, 0, 0x60000u);
+  return memset((char *)this + 8, 0, 0x60000u);
 }
 
 
@@ -173,7 +173,7 @@ void  IMessageTracer::PrintMessages(unsigned int,unsigned int) {
   result = 24;
   if ( !*((_DWORD *)v13 + 2) )
     return result;
-  j__memset(Source, 0, sizeof(Source));
+  memset(Source, 0, sizeof(Source));
   if ( *((_DWORD *)v13 + 98300) )
   {
     v5 = v11;

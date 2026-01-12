@@ -52,7 +52,7 @@ static int __cdecl COwnerMap::OwnerBits9XY(int,int) {
 // Decompiled from void *COwnerMap::ClearOwnerBits()
 static void __cdecl COwnerMap::ClearOwnerBits(void) {
   
-  return j__memset(COwnerMap::m_sOwnerBits, 0, 0x2100u);
+  return memset(COwnerMap::m_sOwnerBits, 0, 0x2100u);
 }
 
 

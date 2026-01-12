@@ -8,7 +8,7 @@ static void __cdecl CStateLoadGame::InitSaveList(void) {
   
   void *result; // eax
 
-  result = j__memset(&CStateLoadGame::m_stempSavePtr, 0, 0xFA0u);
+  result = memset(&CStateLoadGame::m_stempSavePtr, 0, 0xFA0u);
   g_cSaveGameContext = 5;
   return result;
 }
@@ -36,7 +36,7 @@ static class CGameState * __cdecl CStateLoadGame::DynamicCreateFunc(void *) {
   *(_DWORD *)this = &CStateLoadGame::_vftable_;
   CGuiGameState::EnsureGfxEngineIsInGuiMode(this);
   IGfxEngine::SetCursorShape((IGfxEngine *)g_pGfxEngine, 1, 4);
-  j__memset(&CStateLoadGame::m_stempSavePtr, 0, 0xFA0u);
+  memset(&CStateLoadGame::m_stempSavePtr, 0, 0xFA0u);
   if ( !(_BYTE)a2 )
   {
     *((_DWORD *)this + 1) = 3;
@@ -218,7 +218,7 @@ static void __cdecl CStateLoadGame::BuildSaveList(enum TGAME_TYPE,enum CAMPAIGN_
         v10 = operator new(0x54u);
         if ( v10 )
         {
-          j__memset(v10, 0, 0x54u);
+          memset(v10, 0, 0x54u);
           v9 = SSaveEntry::SSaveEntry((SSaveEntry *)v10);
         }
         else

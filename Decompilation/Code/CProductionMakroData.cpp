@@ -29,9 +29,9 @@
   v8 = 0;
   for ( i = 0; i < 20; ++i )
   {
-    j__memset(&this[2 * i], 0, 8u);
-    j__memset(&this[2 * i + 40], 0, 8u);
-    j__memset(&this[2 * i + 80], 0, 8u);
+    memset(&this[2 * i], 0, 8u);
+    memset(&this[2 * i + 40], 0, 8u);
+    memset(&this[2 * i + 80], 0, 8u);
   }
   this[127] = 0;
   if ( !this[125] )

@@ -88,7 +88,7 @@ static void __cdecl CAlliances::Init(void) {
   
   void *result; // eax
 
-  result = j__memset(&CAlliances::m_sData, 0, 0x308u);
+  result = memset(&CAlliances::m_sData, 0, 0x308u);
   CAlliances::m_iInitialized = 1;
   CAlliances::m_iLocked = 0;
   return result;
@@ -101,7 +101,7 @@ static void __cdecl CAlliances::Done(void) {
   
   void *result; // eax
 
-  result = j__memset(&CAlliances::m_sData, 0, 0x308u);
+  result = memset(&CAlliances::m_sData, 0, 0x308u);
   CAlliances::m_iInitialized = 0;
   CAlliances::m_iLocked = 0;
   return result;
@@ -272,7 +272,7 @@ static bool __cdecl CAlliances::Lock(void) {
         }
       }
       v11 = 0;
-      j__memset(v19, 0, sizeof(v19));
+      memset(v19, 0, sizeof(v19));
       for ( m = 1; m <= dword_415C3C8; ++m )
       {
         v4 = CAlliances::PlayerBit(m);

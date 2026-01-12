@@ -568,7 +568,7 @@ bool  ISettlerRole::SetFree(class CSettler *,int) {
     }
     v20 = CMapObjectMgr::Entity(*((unsigned __int16 *)v21 + 16));
     v5 = IEntity::ID();
-    ((void (__thiscall *)(struct IEntity *, int))v20->lpVtbl[1].Relationships)(v20, v5);
+    ((void (__thiscall *)(struct IEntity *, int))v20->CPersistence[1].Relationships)(v20, v5);
     *((_WORD *)v21 + 16) = 0;
   }
   if ( IEntity::FlagBits(a2, Attached)

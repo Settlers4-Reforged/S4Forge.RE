@@ -15,7 +15,7 @@
   *((_DWORD *)this + 31) = 0;
   std::map<unsigned int,void *>::map<unsigned int,void *>((char *)this + 128);
   std::map<unsigned int,int>::map<unsigned int,int>((char *)this + 140);
-  j__memset((char *)this + 152, 0, 0x400u);
+  memset((char *)this + 152, 0, 0x400u);
   *((_BYTE *)this + 6) = 0;
   return this;
 }
@@ -151,7 +151,7 @@ void  S4::CMapFile::Close(void) {
   *((_BYTE *)v12 + 4) = 0;
   *((_DWORD *)v12 + 31) = 0;
   *((_BYTE *)v12 + 5) = 0;
-  j__memset((char *)v12 + 152, 0, 0x400u);
+  memset((char *)v12 + 152, 0, 0x400u);
   v14 = -1;
   return std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,void *>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,void *>>>>(v4);
 }
@@ -727,7 +727,7 @@ void  S4::CMapFile::SaveDbgInfoChunk(char const *) {
   int i; // [esp+8h] [ebp-28h]
   _BYTE Src[32]; // [esp+Ch] [ebp-24h] BYREF
 
-  j__memset(Src, 32, sizeof(Src));
+  memset(Src, 32, sizeof(Src));
   memset(Src, 33, 4);
   if ( a2 )
   {

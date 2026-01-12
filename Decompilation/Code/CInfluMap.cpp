@@ -48,7 +48,7 @@ static void __cdecl CInfluMap::Init(void) {
   
   void *result; // eax
 
-  result = j__memset(CInfluMap::m_uValues, 0, 0x12900u);
+  result = memset(CInfluMap::m_uValues, 0, 0x12900u);
   CInfluMap::m_iInitialized = 1;
   return result;
 }

@@ -36,7 +36,7 @@ int const *  CConfigVarIntArray::GetIntArray(void)const {
   if ( Src )
     j__memcpy(this[2], Src, 4 * a3);
   else
-    j__memset(this[2], 0, 4 * a3);
+    memset(this[2], 0, 4 * a3);
   return this;
 }
 

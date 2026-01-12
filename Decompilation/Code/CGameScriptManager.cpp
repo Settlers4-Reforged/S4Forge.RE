@@ -268,7 +268,7 @@ void  CGameScriptManager::NewGameEx(char const *,unsigned int,wchar_t const *,bo
 
   v28 = &v7;
   v16 = this;
-  j__memset(String, 0, sizeof(String));
+  memset(String, 0, sizeof(String));
   j__wcscpy(String, L"Script\\");
   if ( Src && *Src && Size >= 2 )
   {
@@ -1254,7 +1254,7 @@ static void __cdecl CGameScriptManager::LuaErrorToTrace(void) {
   }
   ScriptEnv = (void **)CGameScriptManager::GetScriptEnv((CGameScriptManager *)CGameScriptManager::m_pGameScriptManager);
   Source = (char *)CLua::GetString((CLua *)ScriptEnv, 1);
-  j__memset(Destination, 0, sizeof(Destination));
+  memset(Destination, 0, sizeof(Destination));
   j__strncpy(Destination, Source, 0x3FFu);
   for ( i = 0; Destination[i]; ++i )
   {

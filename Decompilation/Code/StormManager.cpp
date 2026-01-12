@@ -13,7 +13,7 @@ static void __cdecl StormManager::CreateInstance(void) {
   C = operator new(0xAA4u);
   if ( C )
   {
-    j__memset(C, 0, 0xAA4u);
+    memset(C, 0, 0xAA4u);
     v1 = StormManager::StormManager();
   }
   else

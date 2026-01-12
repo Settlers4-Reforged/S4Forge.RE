@@ -76,7 +76,7 @@ static class CGameState * __cdecl CStateMDRandomMapParameters::DynamicCreateFunc
     byte_403195A = 1;
     byte_403195B = 1;
     dword_4031930 = 2;
-    j__memset(&g_sRMP, 0, 0xB8u);
+    memset(&g_sRMP, 0, 0xB8u);
     g_sRMP = 184;
     dword_4031F98 = 0;
     dword_4031F9C = 0;

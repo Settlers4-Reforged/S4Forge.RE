@@ -25,19 +25,19 @@
   v8 = 1;
   String::String((CGfxManager *)((char *)this + 3232));
   *((_BYTE *)this + 3224) = a2;
-  j__memset((char *)this + 2188, 0, 0x2A0u);
-  j__memset((char *)this + 4, 0, 0x2A0u);
-  j__memset((char *)this + 676, 0, 0xA8u);
-  j__memset((char *)this + 844, 0, 0x150u);
-  j__memset((char *)this + 1180, 0, 0x150u);
-  j__memset((char *)this + 1516, 0, 0x150u);
-  j__memset((char *)this + 1852, 0, 0x150u);
-  j__memset((char *)this + 2860, 0, 0xA8u);
+  memset((char *)this + 2188, 0, 0x2A0u);
+  memset((char *)this + 4, 0, 0x2A0u);
+  memset((char *)this + 676, 0, 0xA8u);
+  memset((char *)this + 844, 0, 0x150u);
+  memset((char *)this + 1180, 0, 0x150u);
+  memset((char *)this + 1516, 0, 0x150u);
+  memset((char *)this + 1852, 0, 0x150u);
+  memset((char *)this + 2860, 0, 0xA8u);
   v5 = std::wstring::wstring(v7, (wchar_t *)L"Gfx");
   std::wstring::operator=(v5);
   std::wstring::~wstring(v7);
   *((_DWORD *)this + 807) = -1;
-  j__memset(byte_3ECDBF4, 0, 0x2Au);
+  memset(byte_3ECDBF4, 0, 0x2Au);
   *((_BYTE *)this + 3260) = a3;
   *((_BYTE *)this + 3261) = a4;
   *((_BYTE *)this + 3262) = 0;
@@ -120,7 +120,7 @@ void  CGfxManager::GetGuiGfxInfo(struct SGfxObjectInfo &,unsigned int) {
   }
   else
   {
-    j__memset(a2, 0, 0x2D0u);
+    memset(a2, 0, 0x2D0u);
   }
 }
 

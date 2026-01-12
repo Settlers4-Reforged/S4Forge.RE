@@ -14,7 +14,7 @@ void  CInfoExchange::Clear(void) {
     __debugbreak();
   result = this + 4;
   if ( v2 > 4 )
-    return j__memset(this + 4, 0, v2 - 4);
+    return memset(this + 4, 0, v2 - 4);
   return result;
 }
 

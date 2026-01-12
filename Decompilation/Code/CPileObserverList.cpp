@@ -332,7 +332,7 @@ void  CPileObserverList::Clear(void) {
   
   void *result; // eax
 
-  result = j__memset(this, 0, 0x20u);
+  result = memset(this, 0, 0x20u);
   *((_BYTE *)this + 32) = 0;
   return result;
 }

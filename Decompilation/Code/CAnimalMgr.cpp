@@ -238,8 +238,8 @@ void  CAnimalMgr::ShutDown(void) {
 // Decompiled from void *__thiscall CAnimalMgr::Clear(CAnimalMgr *this)
 void  CAnimalMgr::Clear(void) {
   
-  j__memset((char *)this + 24, 0, 0x24u);
-  return j__memset((char *)this + 60, 0, 0x24u);
+  memset((char *)this + 24, 0, 0x24u);
+  return memset((char *)this + 60, 0, 0x24u);
 }
 
 
@@ -1028,8 +1028,8 @@ void  CAnimalMgr::LoadAnimalData(void) {
   char v30; // [esp+56h] [ebp-2h]
   char v31; // [esp+57h] [ebp-1h]
 
-  j__memset(CAnimalMgr::m_asAnimalData, 0, 0x2D0u);
-  j__memset(CAnimalMgr::m_asAnimalEffectData, 0, 0x140u);
+  memset(CAnimalMgr::m_asAnimalData, 0, 0x2D0u);
+  memset(CAnimalMgr::m_asAnimalEffectData, 0, 0x140u);
   *((_DWORD *)this + 64) = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->GetIntValueNoAdd)(
                              g_pCfgMgr,
                              "ANIMAL_DATA",
@@ -1121,7 +1121,7 @@ void  CAnimalMgr::LoadAnimalData(void) {
            AnimalName,
            0) )
     {
-      j__memset(&CAnimalMgr::m_asAnimalData[10 * i], 0, 0x28u);
+      memset(&CAnimalMgr::m_asAnimalData[10 * i], 0, 0x28u);
       v2 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->GetIntValueNoAdd)(
              g_pCfgMgr,
              AnimalName,
@@ -1223,7 +1223,7 @@ LABEL_23:
            v27,
            0) )
     {
-      j__memset(&CAnimalMgr::m_asAnimalEffectData[10 * i], 0, 0x28u);
+      memset(&CAnimalMgr::m_asAnimalEffectData[10 * i], 0, 0x28u);
       v7 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->GetIntValueNoAdd)(
              g_pCfgMgr,
              v27,

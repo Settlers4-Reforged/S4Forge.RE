@@ -3095,7 +3095,7 @@ void  CSchedule::CopyMakroBuildings(struct SBuildId *,struct SBuildId *,int) {
   int v4; // [esp+8h] [ebp-4h]
 
   v4 = 0;
-  j__memset(a1, 0, 8 * a3);
+  memset(a1, 0, 8 * a3);
   while ( 1 )
   {
     result = a2;

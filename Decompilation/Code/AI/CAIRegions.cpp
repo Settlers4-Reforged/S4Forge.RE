@@ -64,7 +64,7 @@ void  CAIRegions::ClearAllRegions(void) {
 // Decompiled from void *__thiscall CAIRegions::ClearAllPlayerRegionFlags(int this)
 void  CAIRegions::ClearAllPlayerRegionFlags(void) {
   
-  return j__memset((void *)(this + 196), 0, 0x240u);
+  return memset((void *)(this + 196), 0, 0x240u);
 }
 
 

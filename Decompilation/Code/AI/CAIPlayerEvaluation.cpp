@@ -132,7 +132,7 @@ void  CAIPlayerEvaluation::EvaluateWarriors(int) {
   int i; // [esp+30h] [ebp-4Ch]
   _DWORD v14[16]; // [esp+38h] [ebp-44h] BYREF
 
-  j__memset(v14, 0, sizeof(v14));
+  memset(v14, 0, sizeof(v14));
   for ( i = 0; dword_3D7A218[3 * i]; ++i )
   {
     NumberOfSettlers = IAIEnvironment::SettlerGetNumberOfSettlers(a2, dword_3D7A218[3 * i]);

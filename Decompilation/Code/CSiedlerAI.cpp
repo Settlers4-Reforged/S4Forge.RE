@@ -305,7 +305,7 @@ class CParameterSet *  CSiedlerAI::GenerateAlternatives(int,class CParam *) {
   v207 = 0;
   v89[0] = 0;
   for ( i = 0; i < 60; ++i )
-    j__memset(&v224[11 * i], 0, 0x2Cu);
+    memset(&v224[11 * i], 0, 0x2Cu);
   CSchedule::GetBuildingInPlannedStatus(*((CSchedule **)v218 + 11), (struct CReserveEntry *)v224);
   v183 = a2 - 3;
   switch ( a2 )

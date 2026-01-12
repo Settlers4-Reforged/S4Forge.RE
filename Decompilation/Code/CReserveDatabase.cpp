@@ -503,7 +503,7 @@ bool  CReserveDatabase::IsBuildingTypeInGrp(enum BUILDING_TYPES,int) {
   `eh vector constructor iterator'(v7, 0x2Cu, 6u, CReserveEntry::CReserveEntry, CReserveEntry::~CReserveEntry);
   v8 = 0;
   for ( i = 0; i < 6; ++i )
-    j__memset(&v7[11 * i], 0, 0x2Cu);
+    memset(&v7[11 * i], 0, 0x2Cu);
   if ( CReserveDatabase::GetResBuildingInGroup(this, a3, (struct CReserveEntry *)v7) )
   {
     for ( j = 0; v7[11 * j + 3]; ++j )

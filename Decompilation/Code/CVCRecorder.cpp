@@ -105,7 +105,7 @@ long  CVCRecorder::CopyDataToEncoder(void *,long,long) {
     }
     else
     {
-      j__memset(a2, 0, a3);
+      memset(a2, 0, a3);
       return a3;
     }
   }
@@ -410,9 +410,9 @@ LABEL_13:
   {
     v5 = *(void **)(*(_DWORD *)(this + 4) + 4 * *(_DWORD *)(this + 12));
     if ( Size < *(_DWORD *)(this + 16) )
-      j__memset(v5, 0, *(_DWORD *)(this + 16));
+      memset(v5, 0, *(_DWORD *)(this + 16));
     if ( v10 )
-      j__memset(v5, 0, Size);
+      memset(v5, 0, Size);
     else
       j__memcpy(v5, Src, Size);
     LOBYTE(v3) = this;

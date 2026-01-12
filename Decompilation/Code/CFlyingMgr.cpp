@@ -449,8 +449,8 @@ void  CFlyingMgr::Load(class S4::CMapFile &) {
 // Decompiled from void *__thiscall CFlyingMgr::Clear(CFlyingMgr *this)
 void  CFlyingMgr::Clear(void) {
   
-  j__memset((char *)this + 4, 0, 0x48u);
-  return j__memset((char *)this + 76, 0, 0x48u);
+  memset((char *)this + 4, 0, 0x48u);
+  return memset((char *)this + 76, 0, 0x48u);
 }
 
 

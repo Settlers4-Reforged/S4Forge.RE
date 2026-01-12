@@ -24,7 +24,7 @@ int  CHeightAndTypeTable::GetObjectFog(int,int,int) {
 
   v8 = this;
   CHeightAndTypeTable::InitShadeTables(this);
-  j__memset((char *)v8 + 128, 0, 0x17C4u);
+  memset((char *)v8 + 128, 0, 0x17C4u);
   *((_BYTE *)v8 + 156 * (unsigned __int8)byte_3ACD510[16] + 4 * (unsigned __int8)byte_3ACD510[18] + 128) = 3;
   *((_BYTE *)v8 + 156 * (unsigned __int8)byte_3ACD510[16] + 4 * (unsigned __int8)byte_3ACD510[18] + 129) = 2;
   *((_BYTE *)v8 + 156 * (unsigned __int8)byte_3ACD510[16] + 4 * (unsigned __int8)byte_3ACD510[18] + 130) = 3;

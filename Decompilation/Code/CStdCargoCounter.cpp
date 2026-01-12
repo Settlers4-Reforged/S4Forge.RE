@@ -6,7 +6,7 @@
 // Decompiled from void *__thiscall CStdCargoCounter::Clear(CStdCargoCounter *this)
 void  CStdCargoCounter::Clear(void) {
   
-  return j__memset((char *)this + 4, 0, 0x28u);
+  return memset((char *)this + 4, 0, 0x28u);
 }
 
 

@@ -13,8 +13,8 @@
 
   BBSupportLib::IBBSupportTraceFile::IBBSupportTraceFile(this);
   *(_DWORD *)this = &BBSupportLib::CBBSupportTraceFile::_vftable_;
-  j__memset((char *)this + 572, 0, 0x18u);
-  j__memset((char *)this + 596, 0, 0xC8u);
+  memset((char *)this + 572, 0, 0x18u);
+  memset((char *)this + 596, 0, 0xC8u);
   InitializeCriticalSection((LPCRITICAL_SECTION)((char *)this + 572));
   *((_BYTE *)this + 596) = 5;
   *((_BYTE *)this + 597) = 5;

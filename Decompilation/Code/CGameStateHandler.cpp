@@ -394,7 +394,7 @@ static bool __cdecl CGameStateHandler::InitGfxEngine(void) {
     CTrace::Print("Wrong version of gfx engine!");
     return 1;
   }
-  j__memset(&CGameStateHandler::m_sRenderCfg, 0, 0x24u);
+  memset(&CGameStateHandler::m_sRenderCfg, 0, 0x24u);
   C = (IGfxEngine *)operator new(0x28u);
   if ( C )
     v1 = IGfxEngine::IGfxEngine(C);

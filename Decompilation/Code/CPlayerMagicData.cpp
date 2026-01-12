@@ -66,7 +66,7 @@ bool  CPlayerMagicData::ManaAmountChanged(void)const {
 // Decompiled from void *__thiscall CPlayerMagicData::MarkMaxSpellCastNumbersAsInvalid(CPlayerMagicData *this)
 void  CPlayerMagicData::MarkMaxSpellCastNumbersAsInvalid(void) {
   
-  return j__memset((char *)this + 80, -1, 0x20u);
+  return memset((char *)this + 80, -1, 0x20u);
 }
 
 

@@ -295,7 +295,7 @@ long  CSurfaceV7::GetPixelFormat(bool &) {
   HRESULT v3; // [esp+0h] [ebp-2Ch]
   _DWORD v5[8]; // [esp+8h] [ebp-24h] BYREF
 
-  j__memset(v5, 0, sizeof(v5));
+  memset(v5, 0, sizeof(v5));
   v5[0] = 32;
   v3 = this->innerSurface->lpVtbl->GetPixelFormat(this->innerSurface, (LPDDPIXELFORMAT)v5);
   *a2 = 0;
@@ -313,7 +313,7 @@ long  CSurfaceV7::GetBitDepth(int &) {
   HRESULT result; // eax
   _DWORD v4[8]; // [esp+8h] [ebp-24h] BYREF
 
-  j__memset(v4, 0, sizeof(v4));
+  memset(v4, 0, sizeof(v4));
   v4[0] = 32;
   result = this->innerSurface->lpVtbl->GetPixelFormat(this->innerSurface, (LPDDPIXELFORMAT)v4);
   *a2 = v4[3];

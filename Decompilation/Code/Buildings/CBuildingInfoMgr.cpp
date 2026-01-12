@@ -474,7 +474,7 @@ void  CBuildingInfoMgr::ClearInfo(void) {
   {
     for ( j = 0; j < 83; ++j )
     {
-      j__memset((char *)&CBuildingInfoMgr::m_vBuildingInfos + 70384 * i + 848 * j, 0, Size);
+      memset((char *)&CBuildingInfoMgr::m_vBuildingInfos + 70384 * i + 848 * j, 0, Size);
       std::vector<unsigned char>::clear(v2, Size);
       std::vector<unsigned int>::clear(v3, Sizea);
       std::vector<unsigned int>::clear(v4, Sizeb);
@@ -486,7 +486,7 @@ void  CBuildingInfoMgr::ClearInfo(void) {
       std::vector<unsigned int>::clear(v10, Sizeh);
     }
   }
-  result = j__memset(&CBuildingInfoMgr::m_vTriggerInfos, 0, 0x210Cu);
+  result = memset(&CBuildingInfoMgr::m_vTriggerInfos, 0, 0x210Cu);
   *(_DWORD *)v2 = 0;
   return result;
 }
@@ -2710,7 +2710,7 @@ LABEL_16:
   {
     __debugbreak();
   }
-  j__memset(&CBuildingInfoMgr::m_vTriggerInfos, 0, 0x210Cu);
+  memset(&CBuildingInfoMgr::m_vTriggerInfos, 0, 0x210Cu);
   v787 = 0;
   result = AdvXMLParser::Parser::OpenXMLFile(aGamedataBuildi_0, &v787);
   v795 = result;

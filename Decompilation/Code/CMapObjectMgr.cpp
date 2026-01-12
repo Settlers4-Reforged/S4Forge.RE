@@ -3,7 +3,7 @@
 // Definitions for class CMapObjectMgr
 
 // address=[0x12fd030]
-// Decompiled from int __cdecl CMapObjectMgr::EntityPtr(int a1)
+// Decompiled from IEntity *__cdecl CMapObjectMgr::EntityPtr(int a1)
 static class IEntity * __cdecl CMapObjectMgr::EntityPtr(int) {
   
   if ( !CMapObjectMgr::ValidEntityId(a1) && BBSupportDbgReport(2, string__2, 212, "ValidEntityId( _iId )") == 1 )
@@ -107,7 +107,7 @@ static unsigned int __cdecl CMapObjectMgr::CRCLogicUpdate(void) {
 
   std::vector<std::deque<unsigned short>>::vector<std::deque<unsigned short>>();
   std::vector<std::deque<unsigned short>>::vector<std::deque<unsigned short>>();
-  j__memset(CMapObjectMgr::m_vEntities, 0, 0x40000u);
+  memset(CMapObjectMgr::m_vEntities, 0, 0x40000u);
   CMapObjectMgr::m_iMinFreeId = 1;
   CMapObjectMgr::m_iLastUsedId = 0;
   CMapObjectMgr::m_iMaxLastUsedId = 0;
@@ -241,7 +241,7 @@ static void __cdecl CMapObjectMgr::RegisterEntity(int,class IEntity *,bool) {
   }
   if ( a3 )
   {
-    if ( pEntity[1].lpVtbl != (struct IEntityVtbl *)-1
+    if ( pEntity[1].CPersistence != (struct IEntityVtbl *)-1
       && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 389, "_pEntity->m_iUniqueId == -1") == 1 )
     {
       __debugbreak();
@@ -260,9 +260,9 @@ static void __cdecl CMapObjectMgr::RegisterEntity(int,class IEntity *,bool) {
     {
       __debugbreak();
     }
-    pEntity[1].lpVtbl = (struct IEntityVtbl *)CMapObjectMgr::m_iCurrentUniqueId++;
+    pEntity[1].CPersistence = (struct IEntityVtbl *)CMapObjectMgr::m_iCurrentUniqueId++;
   }
-  else if ( (int)pEntity[1].lpVtbl <= 0
+  else if ( (int)pEntity[1].CPersistence <= 0
          && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 397, "_pEntity->m_iUniqueId > 0") == 1 )
   {
     __debugbreak();
@@ -304,50 +304,50 @@ static void __cdecl CMapObjectMgr::AssignNewUniqueId(int) {
 
 
 // address=[0x1556760]
-// Decompiled from int __thiscall CMapObjectMgr::Kill(_DWORD *this, int a2, int a3)
+// Decompiled from int __thiscall CMapObjectMgr::Kill(_DWORD *this, int entityId, int attacker)
 void  CMapObjectMgr::Kill(int,int) {
   
-  int v3; // eax
+  int objType; // eax
   int result; // eax
   int v5; // eax
-  int v6; // [esp-8h] [ebp-34h]
+  int type; // [esp-8h] [ebp-34h]
   unsigned int v7; // [esp+0h] [ebp-2Ch]
-  CAIEntityInfo *v9; // [esp+10h] [ebp-1Ch]
+  CAIEntityInfo *unk_10; // [esp+10h] [ebp-1Ch]
   int v10; // [esp+14h] [ebp-18h]
   int v11; // [esp+18h] [ebp-14h]
   int v12; // [esp+1Ch] [ebp-10h]
   int v13; // [esp+20h] [ebp-Ch]
-  void **v14; // [esp+24h] [ebp-8h]
+  IEntity *entity; // [esp+24h] [ebp-8h]
   __int16 v15; // [esp+2Ah] [ebp-2h] BYREF
 
-  if ( (a2 <= 0 || a2 >= 0xFFFF)
+  if ( (entityId <= 0 || entityId >= 0xFFFF)
     && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 449, "_iEntityId>0 && _iEntityId<MAX_ENTRIES") == 1 )
   {
     __debugbreak();
   }
-  if ( !CMapObjectMgr::m_vEntities[a2]
+  if ( !CMapObjectMgr::m_vEntities[entityId]
     && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 450, "m_vEntities[ _iEntityId ] != 0") == 1 )
   {
     __debugbreak();
   }
-  v14 = (void **)CMapObjectMgr::m_vEntities[a2];
-  v6 = IEntity::Type((unsigned __int16 *)v14);
-  v3 = IEntity::ObjType((unsigned __int8 *)v14);
+  entity = CMapObjectMgr::m_vEntities[entityId];
+  type = IEntity::Type(entity);
+  objType = IEntity::ObjType(entity);
   IMessageTracer::PushFormatedInts(
     g_pMsgTracer,
     "CMapObjectMgr::Kill(): id %u, type %u / %u, attacker %i",
-    a2,
-    v3,
-    v6,
-    a3);
-  if ( ((unsigned int)v14[1] & 0x20000000) != 0 )
+    entityId,
+    objType,
+    type,
+    attacker);
+  if ( (entity->uniqueId & 0x20000000) != 0 )
   {
-    if ( IEntity::FlagBits(v14, (EntityFlag)&loc_3000000)
+    if ( IEntity::FlagBits(entity, AliveMask)
       && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 460, "pEntity->FlagBits(ENTITY_FLAG_ALIVE_MASK) == 0") == 1 )
     {
       __debugbreak();
     }
-    result = IEntity::FlagBits(v14, (EntityFlag)&unk_4000000);
+    result = IEntity::FlagBits(entity, Died);
     if ( !result )
     {
       result = BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 461, "pEntity->FlagBits(ENTITY_FLAG_DIED) != 0");
@@ -357,52 +357,57 @@ void  CMapObjectMgr::Kill(int,int) {
   }
   else
   {
-    v14[1] = (void *)((unsigned int)v14[1] | 0x20000000);
-    if ( IEntity::FlagBits(v14, (EntityFlag)&unk_4000000)
+    entity->uniqueId |= 0x20000000u;
+    if ( IEntity::FlagBits(entity, Died)
       && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 468, "pEntity->FlagBits(ENTITY_FLAG_DIED) == 0") == 1 )
     {
       __debugbreak();
     }
-    if ( IEntity::FlagBits(v14, (EntityFlag)&dword_F29144[220079]) )
-      IEntity::SetFlagBits(v14, (EntityFlag)0x100000u);
+    if ( IEntity::FlagBits(entity, Birth) )
+      IEntity::SetFlagBits(entity, (EntityFlag)0x100000u);
     else
-      IEntity::ClearFlagBits(v14, (EntityFlag)0x100000u);
-    IEntity::ClearFlagBits(v14, (EntityFlag)&loc_3000000);
-    IEntity::SetFlagBits(v14, (EntityFlag)&unk_4000000);
-    if ( CWarMapNode::IsInWarMap((_anonymous_namespace_::_GetFileInfoByHandleEx *)(v14 + 7)) )
-      CWarMap::RemoveEntity((CPropertySet *)v14);
-    if ( IEntity::FlagBits(v14, Selected) || IEntity::FlagBits(v14, (EntityFlag)0x400u) )
+      IEntity::ClearFlagBits(entity, (EntityFlag)0x100000u);
+    IEntity::ClearFlagBits(entity, AliveMask);
+    IEntity::SetFlagBits(entity, Died);
+    if ( CWarMapNode::IsInWarMap((DWORD *)&entity->warMapNode) )
+      CWarMap::RemoveEntity(entity);
+    if ( IEntity::FlagBits(entity, Selected) || IEntity::FlagBits(entity, (EntityFlag)0x400u) )
     {
-      v5 = IEntity::ID();
+      v5 = IEntity::ID(entity);
       CInputProcessor::DeSelectEntity(&g_cInputProcessor, v5);
     }
-    if ( (*((int (__thiscall **)(void **))*v14 + 21))(v14) )
-      (*(void (__thiscall **)(void *, int))(*(_DWORD *)g_pGroupMgr + 28))(g_pGroupMgr, a2);
-    if ( a3 > 0 )
+    if ( entity->GetGroupFlags() )
+      (*(void (__thiscall **)(void *, int))(*(_DWORD *)g_pGroupMgr + 28))(g_pGroupMgr, entityId);
+    if ( attacker > 0 )
     {
-      v10 = IEntity::OwnerId((unsigned __int8 *)v14);
-      v12 = IEntity::ObjType((unsigned __int8 *)v14);
-      v13 = IEntity::Type((unsigned __int16 *)v14);
+      v10 = IEntity::OwnerId(entity);
+      v12 = IEntity::ObjType(entity);
+      v13 = IEntity::Type(entity);
       if ( v12 == 1 )
       {
-        CStatistic::IncKillsOfType(a3, v13);
+        CStatistic::IncKillsOfType(attacker, v13);
         CStatistic::IncLossesOfType((CStatistic *)&g_cStatistic, v10, v13);
       }
       if ( v12 == 2 || v12 == 4 )
       {
-        CStatistic::IncKillsVehicleOfType((CStatistic *)&g_cStatistic, a3, v13);
+        CStatistic::IncKillsVehicleOfType((CStatistic *)&g_cStatistic, attacker, v13);
         CStatistic::IncLossesVehicleOfType((CStatistic *)&g_cStatistic, v10, v13);
       }
     }
-    if ( v14[4] )
+    if ( entity->unk_10 )
     {
-      v9 = (CAIEntityInfo *)v14[4];
-      if ( v9 )
-        CAIEntityInfo::`scalar deleting destructor'(v9, 1u);
-      v14[4] = 0;
+      unk_10 = (CAIEntityInfo *)entity->unk_10;
+      if ( unk_10 )
+        CAIEntityInfo::`scalar deleting destructor'(unk_10, 1u);
+      entity->unk_10 = 0;
     }
-    (*((void (__thiscall **)(void **))*v14 + 4))(v14);
-    v11 = j____RTDynamicCast(v14, 0, &IEntity__RTTI_Type_Descriptor_, &IAnimatedEntity__RTTI_Type_Descriptor_, 0);
+    ((void (__thiscall *)(IEntity *))entity->j_?Delete@IEntity@@UAEXXZ)(entity);
+    v11 = j____RTDynamicCast(
+            (void **)&entity->__vftable,
+            0,
+            &IEntity__RTTI_Type_Descriptor_,
+            &IAnimatedEntity__RTTI_Type_Descriptor_,
+            0);
     if ( v11 )
     {
       if ( IAnimatedEntity::Previous(v11)
@@ -417,7 +422,7 @@ void  CMapObjectMgr::Kill(int,int) {
       }
     }
     v7 = (this[4] + 31) % 0x20u;
-    v15 = a2;
+    v15 = entityId;
     std::vector<std::deque<unsigned short>>::operator[](v7);
     return std::deque<unsigned short>::push_front((int)&v15);
   }
@@ -961,35 +966,35 @@ void  CMapObjectMgr::Load(class S4::CMapFile &) {
 
 
 // address=[0x1557c60]
-// Decompiled from int __thiscall CMapObjectMgr::PrintEntity(CMapObjectMgr *this, unsigned int a2, int a3, const char *a4)
+// Decompiled from int __thiscall CMapObjectMgr::PrintEntity(CMapObjectMgr *this, int entityId, int logLevel, const char *customMessage)
 void  CMapObjectMgr::PrintEntity(int,int,char const *) {
   
-  const char *v5; // [esp+4h] [ebp-Ch]
-  int v6; // [esp+8h] [ebp-8h]
+  const char *message; // [esp+4h] [ebp-Ch]
+  IEntity *v6; // [esp+8h] [ebp-8h]
 
-  if ( a4 )
-    v5 = a4;
+  if ( customMessage )
+    message = customMessage;
   else
-    v5 = "CMapObjectMgr::PrintEntity()";
-  if ( a2 >= 0x10000 )
-    return BBSupportTracePrintF(a3, "%s: Entity id %i out of range!", v5, a2);
-  if ( !a2 )
-    return BBSupportTracePrintF(a3, "%s: Entity id 0 is reserved!", v5);
-  if ( (int)a2 > CMapObjectMgr::m_iMaxLastUsedId )
-    return BBSupportTracePrintF(a3, "%s: Entity id %i is > MaxLastUsedId!", v5, a2);
-  v6 = CMapObjectMgr::m_vEntities[a2];
+    message = "CMapObjectMgr::PrintEntity()";
+  if ( (unsigned int)entityId >= 0x10000 )
+    return BBSupportTracePrintF(logLevel, "%s: Entity id %i out of range!", message, entityId);
+  if ( !entityId )
+    return BBSupportTracePrintF(logLevel, "%s: Entity id 0 is reserved!", message);
+  if ( entityId > CMapObjectMgr::m_iMaxLastUsedId )
+    return BBSupportTracePrintF(logLevel, "%s: Entity id %i is > MaxLastUsedId!", message, entityId);
+  v6 = CMapObjectMgr::m_vEntities[entityId];
   if ( v6 )
-    return (*(int (__thiscall **)(int, int, const char *))(*(_DWORD *)v6 + 48))(v6, a3, v5);
+    return v6->DbgPrint(v6, logLevel, message);
   else
-    return BBSupportTracePrintF(a3, "%s: Entity id %i is unused!", v5, a2);
+    return BBSupportTracePrintF(logLevel, "%s: Entity id %i is unused!", message, entityId);
 }
 
 
 // address=[0x1557d40]
-// Decompiled from int __thiscall CMapObjectMgr::DbgPrintEntity(CFormView *this, unsigned int a2, int a3, struct tagVARIANT *a4)
+// Decompiled from int __thiscall CMapObjectMgr::DbgPrintEntity(CMapObjectMgr *this, int a2, int a3, const char *a4)
 void  CMapObjectMgr::DbgPrintEntity(int,int,char const *) {
   
-  return CMapObjectMgr::PrintEntity(this, a2, a3, (const char *)a4);
+  return CMapObjectMgr::PrintEntity(this, a2, a3, a4);
 }
 
 
@@ -1049,8 +1054,8 @@ void  CMapObjectMgr::PrintAllEntities(int) {
         ++v22;
     }
   }
-  j__memset(v35, 255, sizeof(v35));
-  j__memset(v36, 0, sizeof(v36));
+  memset(v35, 255, sizeof(v35));
+  memset(v36, 0, sizeof(v36));
   for ( j = 0; j < 32; ++j )
   {
     v14 = std::vector<std::deque<unsigned short>>::operator[](j);

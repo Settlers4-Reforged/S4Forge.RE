@@ -161,7 +161,7 @@ class CEcoSector &  CEcoSectorMgr::operator[](int) {
     9u,
     std::vector<unsigned short>::vector<unsigned short>,
     std::vector<unsigned short>::~vector<unsigned short>);
-  j__memset(this, 0, 0x1003Cu);
+  memset(this, 0, 0x1003Cu);
   *((_DWORD *)this + 1) = 1;
   *((_DWORD *)this + 2) = 0;
   *((_DWORD *)this + 3) = 0;
@@ -223,7 +223,7 @@ void  CEcoSectorMgr::Clear(void) {
       *((_DWORD *)this + i + 5) = 0;
     }
   }
-  j__memset(this, 0, 0x1003Cu);
+  memset(this, 0, 0x1003Cu);
   *((_DWORD *)this + 1) = 1;
   *((_DWORD *)this + 2) = 0;
   result = this;
@@ -1900,7 +1900,7 @@ void  CEcoSectorMgr::CalculateStoreWorldIndices(void) {
   int v17; // [esp+28h] [ebp-10008h]
   _DWORD v18[16384]; // [esp+2Ch] [ebp-10004h] BYREF
 
-  j__memset(v18, 255, sizeof(v18));
+  memset(v18, 255, sizeof(v18));
   v2 = CWorldManager::Width(v1);
   if ( v2 != CWorldManager::Height(v4, v3)
     && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 2164, "g_cWorld.Width() == g_cWorld.Height()") == 1 )

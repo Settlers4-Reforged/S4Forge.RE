@@ -122,7 +122,7 @@ static bool __cdecl CInstallationInfo::GetFileProperties(wchar_t const *,struct 
   int v10; // [esp+94h] [ebp-4h]
 
   v9[2] = &v3;
-  j__memset(a2, 0, 8u);
+  memset(a2, 0, 8u);
   v7 = 0;
   if ( !String || !*String )
     return v7;
@@ -184,7 +184,7 @@ static unsigned int __cdecl CInstallationInfo::GetFileCRC(wchar_t const *,unsign
     v7 = operator new[](ElementCount + 8);
     v6 = v7;
     Buffer = v7;
-    j__memset(v7, 0, ElementCount + 8);
+    memset(v7, 0, ElementCount + 8);
     CFileEx::Read(
       v13,
       Buffer,

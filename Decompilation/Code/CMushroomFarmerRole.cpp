@@ -156,7 +156,7 @@ bool  CMushroomFarmerRole::SetFree(class CSettler *,int) {
     v3 = ISettlerRole::HomeEntityId(this);
     v6 = CMapObjectMgr::Entity(v3);
     v4 = IEntity::EntityId((unsigned __int16 *)a2);
-    ((void (__thiscall *)(struct IEntity *, int))v6->lpVtbl[1].Relationships)(v6, v4);
+    ((void (__thiscall *)(struct IEntity *, int))v6->CPersistence[1].Relationships)(v6, v4);
     if ( ISettlerRole::HomeEntityId(this) )
     {
       if ( BBSupportDbgReport(2, "MapObjects\\Settler\\MushroomfarmerRole.cpp", 680, "HomeEntityId() == 0") == 1 )

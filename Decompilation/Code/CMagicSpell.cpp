@@ -530,7 +530,7 @@ int  CMagicSpell::SpellAttackLightningBolt(void) {
       v3 = IEntity::X(v19);
       CAttackMsgList::SendAttackMessage((CAttackMsgList *)&g_cAttackMsgList, v3, v7);
     }
-    ((void (__thiscall *)(struct IEntity *, unsigned int))v19->lpVtbl->NamedEntities)(v19, v10);
+    ((void (__thiscall *)(struct IEntity *, unsigned int))v19->NamedEntities)(v19, v10);
     v12 = CLogic::Effects((DWORD *)g_pLogic);
     v6 = CSettlerSpiralWalk::CurrentY(v9);
     v4 = CSettlerSpiralWalk::CurrentX(v9);
@@ -632,7 +632,7 @@ int  CMagicSpell::SpellSoldierConvertBarbarians(void) {
         }
         if ( v20 )
         {
-          v8[8] = ((int (__thiscall *)(struct IEntity *))v19->lpVtbl->DefaultPhrase)(v19);
+          v8[8] = ((int (__thiscall *)(struct IEntity *))v19->DefaultPhrase)(v19);
           CMagicSpell::InvisibleKill(v19);
           v7 = v20;
           v6 = *(_DWORD *)v18;

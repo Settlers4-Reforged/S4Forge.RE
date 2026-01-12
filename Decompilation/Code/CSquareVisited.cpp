@@ -7,7 +7,7 @@
  CSquareVisited::CSquareVisited(void) {
   
   *((_BYTE *)this + 12) = 0;
-  j__memset((char *)this + 13, 255, 0x240u);
+  memset((char *)this + 13, 255, 0x240u);
   return this;
 }
 

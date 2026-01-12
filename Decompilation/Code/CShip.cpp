@@ -150,7 +150,7 @@ static int __cdecl CShip::FindBoardingLocation(class std::vector<unsigned short,
   v10 = std::vector<unsigned short>::size(a1);
   if ( v10 <= 0 )
   {
-    j__memset(a3, 0, 0x10u);
+    memset(a3, 0, 0x10u);
     return 0;
   }
   else
@@ -226,7 +226,7 @@ static int __cdecl CShip::FindBoardingLocation(int,int,struct SBoardingInfo &) {
   {
     __debugbreak();
   }
-  j__memset(a3, 0, 0x10u);
+  memset(a3, 0, 0x10u);
   if ( (int)CAStarTiling::FindPath(a1, a2, (struct CWaypoints *)v22, 768) <= 0 )
     return 0;
   v3 = (Y16X16 *)CWaypoints::Goal((CWaypoints *)v22);

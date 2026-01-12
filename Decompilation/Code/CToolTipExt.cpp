@@ -16,7 +16,7 @@ void  CToolTipExt::ResetActiveText(void) {
  CToolTipExt::CToolTipExt(void) {
   
   CToolTip::CToolTip(this);
-  j__memset((char *)this + 8, 0, 0x12Cu);
+  memset((char *)this + 8, 0, 0x12Cu);
   *(_DWORD *)this = 7;
   *((_BYTE *)this + 332) = 1;
   *((_DWORD *)this + 85) = -1;

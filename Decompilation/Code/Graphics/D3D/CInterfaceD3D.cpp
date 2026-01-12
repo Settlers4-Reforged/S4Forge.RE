@@ -48,7 +48,7 @@ bool  CInterfaceD3D::HasCameraWindowSurface(void)const {
   this->field_740 = 0;
   this->field_730 = 0;
   this->field_72C = 0;
-  j__memset(this->field_71E, 0, sizeof(this->field_71E));
+  memset(this->field_71E, 0, sizeof(this->field_71E));
   this->field_71D = 0;
   this->field_71C = 0;
   this->field_723 = 1;
@@ -1747,7 +1747,7 @@ bool  CInterfaceD3D::InitHardware(void) {
       }
     }
     CCachePageManager::SetCurrentZoomFactor((CCachePageManager *)this->CCachePageManager[0], *(float *)&dword_3E2E2F4);
-    j__memset(v44, 0, sizeof(v44));
+    memset(v44, 0, sizeof(v44));
     v44[0] = 4096;
     v27 = this->DDraw7->lpVtbl->GetAvailableVidMem(this->DDraw7, (LPDDSCAPS2)v44, (LPDWORD)v11, (LPDWORD)&v24);
     if ( v27 )

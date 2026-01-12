@@ -139,8 +139,8 @@ void  CVehicleMgr::Dealloc(void *) {
 void  CVehicleMgr::Clear(void) {
   
   *((_DWORD *)this + 6) = 0;
-  j__memset((char *)this + 28, 0, 0x144u);
-  return j__memset((char *)this + 352, 0, 0x6Cu);
+  memset((char *)this + 28, 0, 0x144u);
+  return memset((char *)this + 352, 0, 0x6Cu);
 }
 
 
@@ -409,7 +409,7 @@ static void __cdecl CVehicleMgr::FillVehicleGroupMenu(class CInfoExchange *,bool
   if ( !a1 && BBSupportDbgReport(2, "MapObjects\\VehicleMgr.cpp", 1016, "_pInfoExchange != 0") == 1 )
     __debugbreak();
   v13 = a1;
-  j__memset(a1, 0, 0x20u);
+  memset(a1, 0, 0x20u);
   *((_DWORD *)a1 + 2) = 4;
   *((_DWORD *)v13 + 4) = 1;
   *((_DWORD *)v13 + 6) = 2;

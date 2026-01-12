@@ -14,7 +14,7 @@
   IAIDarkTribeEcoAI::IAIDarkTribeEcoAI(this);
   *(_DWORD *)this = CAIDarkTribe::_vftable_;
   CAIDarkTribe::SAIDTUD::SAIDTUD((CAIDarkTribe *)((char *)this + 40));
-  j__memset((char *)this + 4, 0, 0x24u);
+  memset((char *)this + 4, 0, 0x24u);
   v3 = (Squares *)CWorldManager::Width(v2);
   *((_DWORD *)this + 2) = Squares::XYToVW(v3);
   v5 = (Squares *)CWorldManager::Height(this, v4);
@@ -547,7 +547,7 @@ void  CAIDarkTribe::UnInitDarkTribeElements(void) {
   
   int v2; // [esp+0h] [ebp-4h]
 
-  j__memset((char *)this + 40, 0, 0x2000u);
+  memset((char *)this + 40, 0, 0x2000u);
   std::vector<SAIDTOCCUPIEDELEMENT>::clear(this);
   std::vector<int>::clear();
   std::vector<int>::clear();

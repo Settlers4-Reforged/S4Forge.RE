@@ -94,7 +94,7 @@ void  CToolTip::SetEnableStatus(bool) {
 // Decompiled from CToolTip *__thiscall CToolTip::CToolTip(CToolTip *this)
  CToolTip::CToolTip(void) {
   
-  j__memset((char *)this + 8, 0, 0x12Cu);
+  memset((char *)this + 8, 0, 0x12Cu);
   *(_DWORD *)this = 10;
   *((_BYTE *)this + 332) = 1;
   *((_BYTE *)this + 337) = 0;

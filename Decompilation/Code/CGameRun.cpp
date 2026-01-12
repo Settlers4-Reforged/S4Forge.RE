@@ -889,7 +889,7 @@ static void __cdecl CGameRun::SetupPlayersAndAlliances(void) {
   _DWORD v15[9]; // [esp+14h] [ebp-28h] BYREF
 
   CPlayerManager::Init(this);
-  j__memset(v15, 0, sizeof(v15));
+  memset(v15, 0, sizeof(v15));
   v13 = 0;
   for ( i = 0; i < *(_DWORD *)(g_pGameType + 852); ++i )
   {
@@ -964,7 +964,7 @@ static void __cdecl CGameRun::GetUsedTeam(int,int *) {
   void *result; // eax
   int i; // [esp+4h] [ebp-4h]
 
-  result = j__memset(a2, 0, 4 * a1 + 4);
+  result = memset(a2, 0, 4 * a1 + 4);
   for ( i = 0; i < *(_DWORD *)(g_pGameType + 852); ++i )
   {
     *((_DWORD *)a2 + *(_DWORD *)(g_pGameType + 4 * i + 152)) = 1;
@@ -1035,7 +1035,7 @@ static bool __cdecl CGameRun::SaveGeneralInfo(class S4::CMapFile &) {
   _BYTE v42[28]; // [esp+978h] [ebp-20h] BYREF
 
   CGameChunkGeneral::CGameChunkGeneral(v13);
-  j__memset(Destination, 0, 0x1Au);
+  memset(Destination, 0, 0x1Au);
   v9 = CGameSettings::GetLanguage() == 1;
   DateTimeString = (void *)CTimeInfo::GetDateTimeString(v42, v9);
   v1 = (const char *)std::string::c_str(DateTimeString);
@@ -1095,13 +1095,13 @@ static bool __cdecl CGameRun::SaveGeneralInfo(class S4::CMapFile &) {
     v31 = -1;
   v28[167] = CGameType::GetMultiPlayerGameID(g_pGameType);
   v36 = *(_DWORD *)(g_pGameType + 660);
-  j__memset(v23, 0, sizeof(v23));
+  memset(v23, 0, sizeof(v23));
   v2 = (const wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)(g_pGameType + 28));
   j__wcscpy(v23, v2);
   v17 = *(_DWORD *)(g_pGameType + 692);
   v15 = *(_DWORD *)(g_pGameType + 740);
   v16 = *(_DWORD *)(g_pGameType + 744);
-  j__memset(v22, 0, sizeof(v22));
+  memset(v22, 0, sizeof(v22));
   v3 = (const wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)g_pGameType);
   j__wcscpy(v22, v3);
   v25 = *(_DWORD *)(g_pGameType + 112);
@@ -1114,7 +1114,7 @@ static bool __cdecl CGameRun::SaveGeneralInfo(class S4::CMapFile &) {
   for ( j = 0; j < 8; ++j )
   {
     v28[21 * j - 1] = *(_DWORD *)(g_pGameType + 4 * j + 116);
-    j__memset(&v28[21 * j], 0, 0x40u);
+    memset(&v28[21 * j], 0, 0x40u);
     RealPlayerName = (_Cnd_internal_imp_t *)CGameType::GetRealPlayerName((void *)g_pGameType, j);
     v6 = (const wchar_t *)std::wstring::c_str(RealPlayerName);
     j__wcscpy((wchar_t *)&v28[21 * j], v6);

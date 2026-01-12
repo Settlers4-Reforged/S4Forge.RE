@@ -1538,7 +1538,7 @@ bool  CCarrierRole::SetFree(class CSettler *,int) {
   if ( !*((_WORD *)this + 16) )
     return ISettlerRole::SetFree(this, a2, a3);
   v11 = CMapObjectMgr::Entity(*((unsigned __int16 *)this + 16));
-  ((void (__thiscall *)(struct IEntity *, int))v11->lpVtbl[1].Relationships)(v11, v13);
+  ((void (__thiscall *)(struct IEntity *, int))v11->CPersistence[1].Relationships)(v11, v13);
   return ISettlerRole::SetFree(this, a2, a3);
 }
 

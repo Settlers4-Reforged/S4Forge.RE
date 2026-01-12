@@ -6,7 +6,7 @@
 // Decompiled from IA_ColorReduction_Node *__thiscall IA_ColorReduction_Node::IA_ColorReduction_Node(  IA_ColorReduction_Node *this,  int a2,  bool a3)
  IA_ColorReduction_Node::IA_ColorReduction_Node(int,bool) {
   
-  j__memset(this, 0, 0x6Cu);
+  memset(this, 0, 0x6Cu);
   *(_DWORD *)this = a2;
   *((_BYTE *)this + 4) = a3;
   return this;

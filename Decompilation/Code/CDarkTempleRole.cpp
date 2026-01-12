@@ -38,8 +38,8 @@ static class CDarkTempleRole * __cdecl CDarkTempleRole::Load(std::istream &) {
   if ( byte_40F2218 )
     return this;
   byte_40F2218 = 1;
-  j__memset(byte_40F2220, 0, 0x43u);
-  j__memset(dword_40F2264, 0, 0x18u);
+  memset(byte_40F2220, 0, 0x43u);
+  memset(dword_40F2264, 0, 0x18u);
   for ( i = 0; i < 6; ++i )
   {
     v2 = dword_378588C[i];
@@ -135,7 +135,7 @@ void  CDarkTempleRole::Init(class CBuilding *) {
   {
     __debugbreak();
   }
-  j__memset((char *)this + 384, 0, 0x18u);
+  memset((char *)this + 384, 0, 0x18u);
   *((_DWORD *)this + 102) = 0;
   *((_DWORD *)this + 103) = -1024;
   *((_DWORD *)this + 104) = 0;

@@ -71,9 +71,9 @@ void  CBasicGrid::initGrid(void) {
   CPlayerData::setStartPos_Basic(*(CPlayerData **)g_pPlayerData, v35, v36);
   v19 = *((_DWORD *)v37 + 2);
   v34 = operator new[](4 * *((_DWORD *)v37 + 2));
-  j__memset(v34, 0, 4 * *((_DWORD *)v37 + 2));
+  memset(v34, 0, 4 * *((_DWORD *)v37 + 2));
   v33 = operator new[](4 * *((_DWORD *)v37 + 2));
-  j__memset(v33, 0, 4 * *((_DWORD *)v37 + 2));
+  memset(v33, 0, 4 * *((_DWORD *)v37 + 2));
   for ( i = 1; i < (unsigned __int8)g_iNumPlayers; ++i )
   {
     v8 = pow<int,int>(v19, 3);

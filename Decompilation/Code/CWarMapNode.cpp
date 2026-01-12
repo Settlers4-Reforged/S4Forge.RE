@@ -6,7 +6,7 @@
 // Decompiled from int __thiscall CWarMapNode::Next(CWarMapNode *this)
 int  CWarMapNode::Next(void)const {
   
-  return *((unsigned __int16 *)this + 1);
+  return this->next;
 }
 
 
@@ -14,16 +14,16 @@ int  CWarMapNode::Next(void)const {
 // Decompiled from CWarMapNode *__thiscall CWarMapNode::CWarMapNode(CWarMapNode *this)
  CWarMapNode::CWarMapNode(void) {
   
-  *(_DWORD *)this = 0xFFFF;
+  *this = (CWarMapNode)0xFFFF;
   return this;
 }
 
 
 // address=[0x154c0c0]
-// Decompiled from bool __thiscall CWarMapNode::IsInWarMap(_anonymous_namespace_::_GetFileInfoByHandleEx *this)
+// Decompiled from bool __thiscall CWarMapNode::IsInWarMap(CWarMapNode *this)
 bool  CWarMapNode::IsInWarMap(void)const {
   
-  return *(_DWORD *)this != 0xFFFF;
+  return *this != 0xFFFF;
 }
 
 
@@ -47,15 +47,15 @@ bool  CWarMapNode::IsInWarMap(void)const {
 // Decompiled from int __thiscall CWarMapNode::Prev(CWarMapNode *this)
 int  CWarMapNode::Prev(void)const {
   
-  return *(unsigned __int16 *)this;
+  return *(unsigned __int16 *)&this->prev;
 }
 
 
 // address=[0x15fc750]
-// Decompiled from void __thiscall CWarMapNode::SetNext(CPropertySet *this, unsigned __int16 a2)
+// Decompiled from void __thiscall CWarMapNode::SetNext(CWarMapNode *this, WORD a2)
 void  CWarMapNode::SetNext(int) {
   
-  *((_WORD *)this + 1) = a2;
+  this->next = a2;
 }
 
 
@@ -78,7 +78,7 @@ void  CWarMapNode::SetPrevNext(int,int) {
   int result; // eax
 
   result = a2 | (a3 << 16);
-  *(_DWORD *)this = result;
+  *this = (CWarMapNode)result;
   return result;
 }
 

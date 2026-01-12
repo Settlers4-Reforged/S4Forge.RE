@@ -6,7 +6,7 @@
 // Decompiled from CInternationalTrader::CTradeBuildingInfo *__thiscall CInternationalTrader::CTradeBuildingInfo::CTradeBuildingInfo(  CInternationalTrader::CTradeBuildingInfo *this)
  CInternationalTrader::CTradeBuildingInfo::CTradeBuildingInfo(void) {
   
-  j__memset((char *)this + 8, 0, 0x158u);
+  memset((char *)this + 8, 0, 0x158u);
   *(_DWORD *)this = -1;
   *((_DWORD *)this + 1) = 0;
   return this;

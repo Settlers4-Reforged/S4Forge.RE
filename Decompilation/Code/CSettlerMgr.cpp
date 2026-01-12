@@ -131,9 +131,9 @@ static int __cdecl CSettlerMgr::SettlerWarriorType(int) {
   MemoryAllocator::MemoryAllocator(this, 0x68u, 0x20u, 0);
   *((_WORD *)this + 12) = 0;
   *((_BYTE *)this + 26) = 0;
-  j__memset(CSettlerMgr::m_uSettlerWarriorTypes, 0, 0x46u);
-  j__memset(CSettlerMgr::m_uSettlerWarriorLevels, 0, 0x46u);
-  j__memset(CSettlerMgr::m_vSettlerInfos, 0, 0x3C28u);
+  memset(CSettlerMgr::m_uSettlerWarriorTypes, 0, 0x46u);
+  memset(CSettlerMgr::m_uSettlerWarriorLevels, 0, 0x46u);
+  memset(CSettlerMgr::m_vSettlerInfos, 0, 0x3C28u);
   for ( i = (unsigned __int8 *)&unk_37B5B38; *i; i += 4 )
   {
     if ( *i >= 0x43u
@@ -167,9 +167,9 @@ static int __cdecl CSettlerMgr::SettlerWarriorType(int) {
     CSettlerMgr::m_uSettlerWarriorTypes[*i] = i[1];
     CSettlerMgr::m_uSettlerWarriorLevels[*i] = i[2];
   }
-  j__memset((char *)this + 28, 0, 0x96Cu);
-  j__memset((char *)this + 2440, 0, 0x96Cu);
-  j__memset((char *)this + 4852, 0, 0x96Cu);
+  memset((char *)this + 28, 0, 0x96Cu);
+  memset((char *)this + 2440, 0, 0x96Cu);
+  memset((char *)this + 4852, 0, 0x96Cu);
   return this;
 }
 
@@ -186,9 +186,9 @@ static int __cdecl CSettlerMgr::SettlerWarriorType(int) {
 // Decompiled from int __thiscall CSettlerMgr::Clear(CSettlerMgr *this)
 void  CSettlerMgr::Clear(void) {
   
-  j__memset((char *)this + 28, 0, 0x96Cu);
-  j__memset((char *)this + 2440, 0, 0x96Cu);
-  j__memset((char *)this + 4852, 0, 0x96Cu);
+  memset((char *)this + 28, 0, 0x96Cu);
+  memset((char *)this + 2440, 0, 0x96Cu);
+  memset((char *)this + 4852, 0, 0x96Cu);
   *((_WORD *)this + 12) = 0;
   return (*(int (__thiscall **)(void *))(*(_DWORD *)g_pHJBMgr + 20))(g_pHJBMgr);
 }
@@ -1435,7 +1435,7 @@ bool  CSettlerMgr::SearchSpaceForSettler(int,int,int) {
       v7 = IEntity::Type((unsigned __int16 *)v13);
       v4 = IEntity::Race(v13);
       v5 = CEntityToDoListMgr::SettlerJobList(v4, v7);
-      ((void (__thiscall *)(IEntity *, int, int))v13->lpVtbl[2].GetRelationship)(v13, v5, v8);
+      ((void (__thiscall *)(IEntity *, int, int))v13->CPersistence[2].GetRelationship)(v13, v5, v8);
       return 1;
     }
   }

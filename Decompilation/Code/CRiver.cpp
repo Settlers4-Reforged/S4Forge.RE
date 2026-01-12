@@ -352,7 +352,7 @@ int  CRiver::findBorder(int,int) {
   Size = g_iWorldSize * g_iWorldSize;
   TStaticFIFO<int,1024>::TStaticFIFO<int,1024>(v10);
   Block = j__malloc(Size);
-  j__memset(Block, 0, Size);
+  memset(Block, 0, Size);
   v4[0] = a2 + g_iWorldSize * a3;
   TStaticFIFO<int,1024>::Push(v4);
   *((_BYTE *)Block + a2 + g_iWorldSize * a3) = 1;

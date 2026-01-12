@@ -9,7 +9,7 @@
   ICDDrive::ICDDrive(this);
   *(_DWORD *)this = &CCDDrive::_vftable_;
   *((_DWORD *)this + 1) = 0;
-  j__memset((char *)this + 8, 0, 9u);
+  memset((char *)this + 8, 0, 9u);
   return this;
 }
 
@@ -105,8 +105,8 @@ bool  CCDDrive::GetCDPath(std::wstring &,wchar_t const *,int) {
   {
     if ( (a4 & 0x400000) != 0 )
     {
-      j__memset(Source, 0, sizeof(Source));
-      j__memset(v12, 0, sizeof(v12));
+      memset(Source, 0, sizeof(Source));
+      memset(v12, 0, sizeof(v12));
       for ( i = 1; i < 9; ++i )
       {
         v8 = (*(int (__thiscall **)(void *, int))(*(_DWORD *)this + 4))(this, i);

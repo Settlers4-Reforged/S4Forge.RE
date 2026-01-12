@@ -123,15 +123,15 @@ static bool __cdecl CBuildingMgr::IsMilitaryBuildingEx(int) {
 void  CBuildingMgr::Clear(void) {
   
   *((_DWORD *)this + 6) = 0;
-  j__memset((char *)this + 28, 0, 0xBACu);
-  j__memset((char *)this + 3016, 0, 0x1758u);
-  j__memset((char *)this + 8992, 0, 0xBACu);
-  j__memset((char *)this + 288731, 0, 0x400u);
-  j__memset((char *)this + 289755, 0, 0x400u);
-  j__memset((char *)this + 11981, 0, 0x4390Eu);
-  j__memset((char *)this + 290780, 0, 0x2D0u);
-  j__memset((char *)this + 291500, 0, 0x24u);
-  return j__memset((char *)this + 291536, 0, 0x24u);
+  memset((char *)this + 28, 0, 0xBACu);
+  memset((char *)this + 3016, 0, 0x1758u);
+  memset((char *)this + 8992, 0, 0xBACu);
+  memset((char *)this + 288731, 0, 0x400u);
+  memset((char *)this + 289755, 0, 0x400u);
+  memset((char *)this + 11981, 0, 0x4390Eu);
+  memset((char *)this + 290780, 0, 0x2D0u);
+  memset((char *)this + 291500, 0, 0x24u);
+  return memset((char *)this + 291536, 0, 0x24u);
 }
 
 

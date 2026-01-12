@@ -7,7 +7,7 @@
  CEcoManagerTree::CEcoManagerTree(void) {
   
   CEcoManagerTree::CEMTD::CEMTD(this);
-  j__memset(this, 0, 0x10u);
+  memset(this, 0, 0x10u);
   return this;
 }
 

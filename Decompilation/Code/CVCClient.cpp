@@ -178,7 +178,7 @@ void  CVCClient::PlayStream(void) {
   }
   else
   {
-    j__memset((void *)this[(_DWORD)result + 12], 0, this[14]);
+    memset((void *)this[(_DWORD)result + 12], 0, this[14]);
   }
   return (CVCClient *)AIL_load_sample_buffer(this[28], v2, this[(_DWORD)v2 + 12], this[14]);
 }

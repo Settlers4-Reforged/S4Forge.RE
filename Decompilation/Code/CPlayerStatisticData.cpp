@@ -34,7 +34,7 @@ int  CPlayerStatisticData::ServantsFreed(void)const {
 // Decompiled from void *__thiscall CPlayerStatisticData::Clear(CPlayerStatisticData *this)
 void  CPlayerStatisticData::Clear(void) {
   
-  return j__memset(this, 0, 8u);
+  return memset(this, 0, 8u);
 }
 
 

@@ -90,7 +90,7 @@ int  CDecoObjMgr::GetTotalBuildingRings(int) {
   TArgv<unsigned int,std::vector<unsigned int>>::~TArgv<unsigned int,std::vector<unsigned int>>(v4);
   *((_DWORD *)v14 + 6) = 0;
   *((_BYTE *)v14 + 28) = 0;
-  j__memset((char *)v14 + 38444, 0, 0x918u);
+  memset((char *)v14 + 38444, 0, 0x918u);
   CDecoObjMgr::Clear(v14);
   return v14;
 }
@@ -108,7 +108,7 @@ int  CDecoObjMgr::GetTotalBuildingRings(int) {
 // Decompiled from void *__thiscall CDecoObjMgr::Clear(CDecoObjMgr *this)
 void  CDecoObjMgr::Clear(void) {
   
-  return j__memset((char *)this + 32, 0, 0x960Cu);
+  return memset((char *)this + 32, 0, 0x960Cu);
 }
 
 

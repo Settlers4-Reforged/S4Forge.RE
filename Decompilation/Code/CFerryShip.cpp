@@ -651,9 +651,9 @@ bool  CFerryShip::EmergencyReload(int) {
   v10 = IEntity::Type(v21);
   v4 = IEntity::ObjType((unsigned __int8 *)v21);
   CargoSize = CFerryShip::GetCargoSize(v4, v10);
-  v22[49].lpVtbl = (struct IEntityVtbl *)((char *)v22[49].lpVtbl + CargoSize);
+  v22[49].CPersistence = (struct IEntityVtbl *)((char *)v22[49].CPersistence + CargoSize);
   if ( IEntity::IsSelected(v22) )
-    ((void (__thiscall *)(IEntity *, int))v22->lpVtbl[3].Base)(v22, 1);
+    ((void (__thiscall *)(IEntity *, int))v22->CPersistence[3].Base)(v22, 1);
   return 1;
 }
 
@@ -1161,7 +1161,7 @@ bool  CFerryShip::OnLoad(void) {
         IEntity::SetFlagBits(v14, OnBoard);
         v11 = (unsigned __int16 *)v14;
         v4 = IEntity::ID();
-        ((void (__thiscall *)(IEntity *, int))this->lpVtbl[1].Relationships)(this, v4);
+        ((void (__thiscall *)(IEntity *, int))this->CPersistence[1].Relationships)(this, v4);
       }
       if ( SettlerPtr )
       {
@@ -1176,16 +1176,16 @@ bool  CFerryShip::OnLoad(void) {
         }
         v11 = (unsigned __int16 *)SettlerPtr;
         v7 = IEntity::ID();
-        ((void (__thiscall *)(IEntity *, int))this->lpVtbl[1].Relationships)(this, v7);
+        ((void (__thiscall *)(IEntity *, int))this->CPersistence[1].Relationships)(this, v7);
       }
       v10 = IEntity::Type(v11);
       v8 = IEntity::ObjType((unsigned __int8 *)v11);
-      this[49].lpVtbl = (struct IEntityVtbl *)((char *)this[49].lpVtbl + CFerryShip::GetCargoSize(v8, v10));
+      this[49].CPersistence = (struct IEntityVtbl *)((char *)this[49].CPersistence + CFerryShip::GetCargoSize(v8, v10));
       *(_BYTE *)(v13 + 21) = 1;
     }
   }
   if ( IEntity::IsSelected(this) )
-    ((void (__thiscall *)(IEntity *, int))this->lpVtbl[3].Base)(this, 1);
+    ((void (__thiscall *)(IEntity *, int))this->CPersistence[3].Base)(this, 1);
   return 1;
 }
 

@@ -161,7 +161,7 @@ void  CSoldierRole::LogicUpdateJob(class CSettler *) {
                 v37 = v49 > 0;
                 v49 = v37;
                 v9 = IEntity::OwnerId((unsigned __int8 *)a2);
-                ((void (__thiscall *)(struct IEntity *, _DWORD, int))v48->lpVtbl->MetaData)(v48, v18[v49], v9);
+                ((void (__thiscall *)(struct IEntity *, _DWORD, int))v48->MetaData)(v48, v18[v49], v9);
               }
             }
           }

@@ -37,7 +37,7 @@ int  CAIVWVector::At(int)const {
 void  CAIVWVector::Clear(void) {
   
   std::vector<int>::clear();
-  return j__memset((char *)this + 16, 0, 0x2000u);
+  return memset((char *)this + 16, 0, 0x2000u);
 }
 
 

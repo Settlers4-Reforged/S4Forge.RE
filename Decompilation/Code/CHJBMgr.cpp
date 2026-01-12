@@ -205,7 +205,7 @@ bool  CHJBMgr::CheckHJBDatFile(void) {
     v9 = 1;
     v5 = operator new[](0x4000u);
     Buffer = v5;
-    j__memset(v5, 0, 0x4000u);
+    memset(v5, 0, 0x4000u);
     LOBYTE(v13) = 1;
     v3[4] = CFile::CFile((CFile *)v10);
     LOBYTE(v13) = 2;
@@ -243,7 +243,7 @@ bool  CHJBMgr::CheckHJBDatFile(void) {
 void  CHJBMgr::ClearRequest(void) {
   
   *((_DWORD *)this + 1) = 0;
-  return j__memset((char *)this + 8, 0, 9u);
+  return memset((char *)this + 8, 0, 9u);
 }
 
 

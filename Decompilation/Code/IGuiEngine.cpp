@@ -281,9 +281,9 @@ bool  IGuiEngine::Init(class IGfxEngine *,class CGfxManager *,void *,int,bool (_
       g_pCurrentDragControl = 0;
       g_pCurrentEditControl = 0;
       g_pCurrentRepeatControl = 0;
-      j__memset(g_iOpenDialogs, 0, sizeof(g_iOpenDialogs));
-      j__memset(g_mbstrTextTable, 0, 0x5DC0u);
-      j__memset(g_bUsedTexts, 0, 0x50u);
+      memset(g_iOpenDialogs, 0, sizeof(g_iOpenDialogs));
+      memset(g_mbstrTextTable, 0, 0x5DC0u);
+      memset(g_bUsedTexts, 0, 0x50u);
       IGuiEngine::InitShadeTables(this);
       g_bGuiIsDirty = 1;
       IGuiEngine::OpenDialog(this, a5, a6);

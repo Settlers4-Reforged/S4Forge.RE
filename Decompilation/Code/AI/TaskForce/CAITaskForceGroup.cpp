@@ -31,7 +31,7 @@ int  CAITaskForceGroup::NumberOfTaskForcesOfClass(enum T_AI_TASK_FORCE_CLASS)con
  CAITaskForceGroup::CAITaskForceGroup(int) {
   
   *(_DWORD *)this = CAITaskForceGroup::_vftable_;
-  j__memset((char *)this + 4, 0, 0x88u);
+  memset((char *)this + 4, 0, 0x88u);
   *((_DWORD *)this + 1) = a2;
   return this;
 }

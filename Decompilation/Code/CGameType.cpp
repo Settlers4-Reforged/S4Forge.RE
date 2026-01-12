@@ -636,14 +636,14 @@ bool  CGameType::LoadMapData(std::wstring,bool,unsigned int,bool,bool,int,int,in
     std::string::operator=((char *)v83 + 884, (char *)&byte_36FE61F);
     std::string::operator=((char *)v83 + 912, (char *)&byte_36FE682);
     std::string::operator=((char *)v83 + 940, (char *)&byte_36FE683);
-    j__memset(Destination, 0, sizeof(Destination));
-    j__memset(Dest, 0, sizeof(Dest));
+    memset(Destination, 0, sizeof(Destination));
+    memset(Dest, 0, sizeof(Dest));
     v81 = 0;
     pbstr = 0;
     MA_GetDescriptionText(0, &pbstr);
     if ( pbstr )
     {
-      j__memset(Str, 0, sizeof(Str));
+      memset(Str, 0, sizeof(Str));
       v69 = pbstr;
       for ( j = SysStringLen(pbstr); j > 0 && *v69 <= 0x20u; --j )
         ++v69;
@@ -710,12 +710,12 @@ bool  CGameType::LoadMapData(std::wstring,bool,unsigned int,bool,bool,int,int,in
       MA_GetDescriptionText(v42, &bstrString);
       v27 = j__wcstombs(Destination, bstrString, 0x3FFEu);
       if ( v27 <= 0 )
-        j__memset(Destination, 0, sizeof(Destination));
+        memset(Destination, 0, sizeof(Destination));
       SysFreeString(bstrString);
       MA_GetDescriptionText(v41 + 1, &bstrString);
       v28 = j__wcstombs(Dest, bstrString, 0x3FFEu);
       if ( v28 <= 0 )
-        j__memset(Dest, 0, sizeof(Dest));
+        memset(Dest, 0, sizeof(Dest));
       SysFreeString(bstrString);
     }
     if ( Destination[0] )
@@ -1154,7 +1154,7 @@ void  CGameType::Init(void) {
   *((_DWORD *)this + 165) = CStaticConfigVarInt::operator int(&g_iNetworkTimeDelta);
   *((_DWORD *)this + 175) = 0;
   *((_WORD *)this + 424) = 0;
-  j__memset((char *)this + 784, 0, 7u);
+  memset((char *)this + 784, 0, 7u);
   *((_BYTE *)this + 1537) = -1;
   *((_BYTE *)this + 1538) = 0;
   *((_BYTE *)this + 1539) = 0;

@@ -7,7 +7,7 @@
  HuffStat::HuffStat(void) {
   
   *(_DWORD *)this = operator new[](0x224u);
-  j__memset(*(void **)this, 0, 0x224u);
+  memset(*(void **)this, 0, 0x224u);
   return this;
 }
 

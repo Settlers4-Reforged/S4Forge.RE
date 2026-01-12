@@ -297,7 +297,7 @@ void  CPlayerGameData::LoadDataBlock(class IS4Chunk &,void *,unsigned int) {
   v5 = (*(int (__thiscall **)(struct IS4Chunk *, int, unsigned int))(*(_DWORD *)a2 + 4))(a2, 1, a4);
   result = (void *)(**(int (__thiscall ***)(struct IS4Chunk *, char *, unsigned int))a2)(a2, a3, v5);
   if ( v5 < a4 )
-    return j__memset(&a3[v5], 0, a4 - v5);
+    return memset(&a3[v5], 0, a4 - v5);
   return result;
 }
 

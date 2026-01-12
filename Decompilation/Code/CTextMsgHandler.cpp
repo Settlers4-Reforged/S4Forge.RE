@@ -22,7 +22,7 @@ static bool __cdecl CTextMsgHandler::AddChatMsg(char const *,int) {
     __debugbreak();
   PlayerIcon = CTextMsgHandler::GetPlayerIcon(a2);
   v5 = operator new(0x24u);
-  j__memset(v5, 0, 0x24u);
+  memset(v5, 0, 0x24u);
   *v5 = 679;
   v5[1] = a2;
   v5[3] = -1;
@@ -65,7 +65,7 @@ static bool __cdecl CTextMsgHandler::AddTextMsg(int,int,int,int,bool,bool,...) {
   if ( Format )
   {
     v11 = operator new(0x24u);
-    j__memset(v11, 0, 0x24u);
+    memset(v11, 0, 0x24u);
     *(_DWORD *)v11 = a1;
     *((_DWORD *)v11 + 1) = a2;
     if ( v12 )
@@ -125,7 +125,7 @@ static bool __cdecl CTextMsgHandler::AddTextMsg(int,int,bool,bool,...) {
   if ( Format )
   {
     v9 = operator new(0x24u);
-    j__memset(v9, 0, 0x24u);
+    memset(v9, 0, 0x24u);
     *(_DWORD *)v9 = a1;
     *((_DWORD *)v9 + 1) = a2;
     v5 = CStaticConfigVarInt::operator int(&unk_403221C);
@@ -170,7 +170,7 @@ static bool __cdecl CTextMsgHandler::AddTextMsg(int,int,bool) {
   if ( g_pStringEngine->GetString(g_pStringEngine, a1) )
   {
     v5 = (int *)operator new(0x24u);
-    j__memset(v5, 0, 0x24u);
+    memset(v5, 0, 0x24u);
     *v5 = a1;
     v5[1] = a2;
     v5[3] = CStaticConfigVarInt::operator int(&unk_403221C) / 2;
@@ -207,7 +207,7 @@ static bool __cdecl CTextMsgHandler::AddTextMsg(char const *,int,int,int,bool) {
     __debugbreak();
   PlayerIcon = CTextMsgHandler::GetPlayerIcon(a2);
   v8 = operator new(0x24u);
-  j__memset(v8, 0, 0x24u);
+  memset(v8, 0, 0x24u);
   *v8 = 3837;
   v8[1] = a2;
   v8[3] = -1;
@@ -240,7 +240,7 @@ static bool __cdecl CTextMsgHandler::AddWarningMsg(int,int,int,int) {
   {
     v7 = operator new(0x24u);
     v10 = v7;
-    j__memset(v7, 0, 0x24u);
+    memset(v7, 0, 0x24u);
     *(_DWORD *)v10 = a1;
     *((_DWORD *)v10 + 1) = a2;
     v5 = CStaticConfigVarInt::operator int(&unk_403221C);
@@ -286,7 +286,7 @@ static bool __cdecl CTextMsgHandler::AddWarningMsg(int,int) {
   {
     v5 = operator new(0x24u);
     v8 = v5;
-    j__memset(v5, 0, 0x24u);
+    memset(v5, 0, 0x24u);
     *(_DWORD *)v8 = a1;
     *((_DWORD *)v8 + 1) = a2;
     v3 = CStaticConfigVarInt::operator int(&unk_403221C);

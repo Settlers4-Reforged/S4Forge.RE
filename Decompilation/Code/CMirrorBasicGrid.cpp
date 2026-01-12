@@ -66,10 +66,10 @@ void  CMirrorBasicGrid::initGrid(void) {
     }
     *(_BYTE *)(*((_DWORD *)v19 + 1) + v9 + *((_DWORD *)v19 + 2) * v10) = 1;
   }
-  j__memset(v22, -1, sizeof(v22));
-  j__memset(v23, -1, sizeof(v23));
-  j__memset(v24, -1, sizeof(v24));
-  result = (int)j__memset(v25, -1, sizeof(v25));
+  memset(v22, -1, sizeof(v22));
+  memset(v23, -1, sizeof(v23));
+  memset(v24, -1, sizeof(v24));
+  result = (int)memset(v25, -1, sizeof(v25));
   v7 = 0;
   v5 = 0;
   v6 = 0;

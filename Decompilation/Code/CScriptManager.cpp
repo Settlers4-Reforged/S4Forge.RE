@@ -137,7 +137,7 @@ void  CScriptManager::Call(int,int,int,int,int) {
   CScriptManager::m_pScriptManager = (int)this;
   *((_DWORD *)this + 1) = a2;
   *((_DWORD *)this + 2) = 0;
-  j__memset((char *)this + 12, 0, 0x100u);
+  memset((char *)this + 12, 0, 0x100u);
   *((_BYTE *)this + 268) = 0;
   CLua::ExportFunction((int)CScriptManager::LuaRegisterFunction, (char *)&dword_381E474[1]);
   return this;

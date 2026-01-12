@@ -63,7 +63,7 @@ bool  CBBFileException::GetErrorMessage(char *,unsigned int) {
   char Buffer[1032]; // [esp+84h] [ebp-418h] BYREF
   int v11; // [esp+498h] [ebp-4h]
 
-  j__memset(Buffer, 0, sizeof(Buffer));
+  memset(Buffer, 0, sizeof(Buffer));
   std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v8);
   v11 = 0;
   std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(

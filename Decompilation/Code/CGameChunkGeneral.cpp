@@ -60,10 +60,10 @@ void  CGameChunkGeneral::Load(class IS4Chunk &) {
   int v17; // [esp+498h] [ebp-4h]
 
   v13 = this;
-  j__memset((char *)this + 1324, 0, 0x400u);
+  memset((char *)this + 1324, 0, 0x400u);
   *((_BYTE *)v13 + 2356) = 0;
   *((_BYTE *)v13 + 2348) = 0;
-  j__memset((char *)v13 + 2349, 0, 7u);
+  memset((char *)v13 + 2349, 0, 7u);
   *((_BYTE *)v13 + 2364) = -1;
   *((_BYTE *)v13 + 2365) = 0;
   *((_DWORD *)v13 + 592) = 0;
