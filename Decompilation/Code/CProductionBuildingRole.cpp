@@ -475,7 +475,7 @@ bool  CProductionBuildingRole::SettlerEnter(class CBuilding *,int) {
     IAnimatedEntity::RegisterForLogicUpdate(31);
     v9 = IEntity::Race(a2);
     RaceName = CS4DefineNames::GetRaceName(v9);
-    v10 = (void *)j____RTtypeid(v28);
+    v10 = (void *)typeid(v28);
     v14 = (const char *)type_info::name(v10);
     v11 = CBuilding::BuildingTypeEx(a2);
     BuildingName = CS4DefineNames::GetBuildingName(v11);

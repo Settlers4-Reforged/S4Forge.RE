@@ -369,7 +369,7 @@ bool  CGatherBuildingRole::SettlerEnter(class CBuilding *,int) {
     IAnimatedEntity::RegisterForLogicUpdate(31);
     v3 = IEntity::Race(a2);
     RaceName = CS4DefineNames::GetRaceName(v3);
-    v4 = (void *)j____RTtypeid(this);
+    v4 = (void *)typeid(this);
     v8 = (const char *)type_info::name(v4);
     v5 = IEntity::Type((unsigned __int16 *)a2);
     BuildingName = CS4DefineNames::GetBuildingName(v5);

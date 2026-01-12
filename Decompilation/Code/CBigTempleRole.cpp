@@ -63,7 +63,7 @@ void  CBigTempleRole::LogicUpdate(class CBuilding *) {
         IAnimatedEntity::RegisterForLogicUpdate(31);
         v3 = IEntity::Race(a2);
         RaceName = CS4DefineNames::GetRaceName(v3);
-        v4 = (void *)j____RTtypeid((_DWORD *)this);
+        v4 = (void *)typeid((_DWORD *)this);
         v7 = (const char *)type_info::name(v4);
         v5 = CBuilding::BuildingTypeEx((unsigned __int8 *)a2);
         BuildingName = CS4DefineNames::GetBuildingName(v5);

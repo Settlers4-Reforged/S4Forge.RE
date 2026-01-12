@@ -193,7 +193,7 @@ void  CResidenceBuildingRole::LogicUpdate(class CBuilding *) {
       IAnimatedEntity::RegisterForLogicUpdate(31);
       v10 = IEntity::Race(a2);
       RaceName = CS4DefineNames::GetRaceName(v10);
-      v11 = (void *)j____RTtypeid(v26);
+      v11 = (void *)typeid(v26);
       v17 = (const char *)type_info::name(v11);
       v12 = CBuilding::BuildingTypeEx((unsigned __int8 *)a2);
       BuildingName = CS4DefineNames::GetBuildingName(v12);

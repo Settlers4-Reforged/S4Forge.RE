@@ -186,7 +186,7 @@ int  CWalkingBase::Walk(int) {
   if ( !(*(unsigned __int8 (__thiscall **)(CWalkingBase *, int))(*(_DWORD *)this + 20))(this, v41)
     || (*(int (__thiscall **)(CWalkingBase *, int))(*(_DWORD *)this + 28))(this, v41) <= 0 )
   {
-    v2 = (void *)j____RTtypeid(this);
+    v2 = (void *)typeid(this);
     v3 = (const char *)type_info::name(v2);
     BBSupportTracePrintF(0, "Walk() [%s]: Invalid current position!", v3);
     BBSupportTracePrintF(0, "  WalkState: %i.", *((_DWORD *)this + 2));
@@ -551,7 +551,7 @@ LABEL_119:
               v27 = Y16X16::UnpackYFast((int)a2);
               v21 = CWorldManager::Index(v26, v27);
               v25 = CWorldManager::MapObjectId(v21);
-              v14 = (void *)j____RTtypeid(this);
+              v14 = (void *)typeid(this);
               v15 = (const char *)type_info::name(v14);
               BBSupportTracePrintF(0, "Walk() [%s]: FindPathAStar64() failed!", v15);
               CWalkingBase::DbgPrintElementInfo(this, "  Current:  ", a2);
@@ -606,7 +606,7 @@ LABEL_16:
         goto LABEL_16;
     }
   }
-  v16 = (void *)j____RTtypeid(this);
+  v16 = (void *)typeid(this);
   v17 = (const char *)type_info::name(v16);
   BBSupportTracePrintF(3, "### Walk() [%s]: LoopCount >= 32! ###", v17);
   *((_DWORD *)this + 2) = 7;

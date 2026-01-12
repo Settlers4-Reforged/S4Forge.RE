@@ -182,7 +182,7 @@ bool  IPileRole::SetFree(class CPile *,int) {
   int v9; // [esp-4h] [ebp-8h]
 
   v9 = CPile::BuildingId(a2);
-  v3 = (void *)j____RTtypeid(this);
+  v3 = (void *)typeid(this);
   v8 = (const char *)type_info::name(v3);
   v7 = IEntity::Y(a2);
   v6 = IEntity::X(a2);

@@ -371,7 +371,7 @@ bool  CSmallTempleRole::SettlerEnter(class CBuilding *,int) {
     IAnimatedEntity::RegisterForLogicUpdate(31);
     v9 = IEntity::Race(a2);
     RaceName = CS4DefineNames::GetRaceName(v9);
-    v10 = (void *)j____RTtypeid(v26);
+    v10 = (void *)typeid(v26);
     v14 = (const char *)type_info::name(v10);
     v11 = CBuilding::BuildingTypeEx((unsigned __int8 *)a2);
     BuildingName = CS4DefineNames::GetBuildingName(v11);

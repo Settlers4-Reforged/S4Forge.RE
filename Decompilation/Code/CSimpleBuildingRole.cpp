@@ -506,7 +506,7 @@ bool  CSimpleBuildingRole::SettlerEnter(class CBuilding *,int) {
     IAnimatedEntity::RegisterForLogicUpdate(31);
     v6 = IEntity::Race(a2);
     RaceName = CS4DefineNames::GetRaceName(v6);
-    v7 = (void *)j____RTtypeid(this);
+    v7 = (void *)typeid(this);
     v11 = (const char *)type_info::name(v7);
     v8 = CBuilding::BuildingTypeEx((unsigned __int8 *)a2);
     BuildingName = CS4DefineNames::GetBuildingName(v8);
