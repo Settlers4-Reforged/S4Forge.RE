@@ -56,13 +56,13 @@ void  IAnimatedEntity::SetNext(int) {
 
 
 // address=[0x1439eb0]
-// Decompiled from IAnimatedEntity *__thiscall IAnimatedEntity::SetPrevious(IAnimatedEntity *this, __int16 a2)
+// Decompiled from IAnimatedEntity *__thiscall IAnimatedEntity::SetPrevious(IAnimatedEntity *this, WORD a2)
 void  IAnimatedEntity::SetPrevious(int) {
   
   IAnimatedEntity *result; // eax
 
   result = this;
-  *((_WORD *)this + 20) = a2;
+  this->prevEntity = a2;
   return result;
 }
 
@@ -76,15 +76,15 @@ void  IAnimatedEntity::SetLastUpdateTick(unsigned int) {
 
 
 // address=[0x14e31a0]
-// Decompiled from int __stdcall IAnimatedEntity::RegisterForLogicUpdate(int a1)
+// Decompiled from int __thiscall IAnimatedEntity::RegisterForLogicUpdate(IAnimatedEntity *this, int a2)
 int  IAnimatedEntity::RegisterForLogicUpdate(int) {
   
-  int v1; // eax
-  int v2; // eax
+  const char *id; // eax
+  unsigned int v3; // eax
 
-  v1 = IEntity::ID();
-  v2 = CMapObjectMgr::RegisterForLogicUpdate(a1, v1);
-  return IAnimatedEntity::SetLastLogicUpdate(v2);
+  id = (const char *)IEntity::ID(this);
+  v3 = CMapObjectMgr::RegisterForLogicUpdate(g_pMapObjectMgr, a2, id);
+  return IAnimatedEntity::SetLastLogicUpdate(v3);
 }
 
 
@@ -334,7 +334,7 @@ void  IAnimatedEntity::SetJobPart(int) {
 
 
 // address=[0x14e35f0]
-// Decompiled from int __thiscall IAnimatedEntity::Store(char *this, struct std::ostream *a2)
+// Decompiled from int __thiscall IAnimatedEntity::Store(IAnimatedEntity *this, struct std::ostream *a2)
 void  IAnimatedEntity::Store(std::ostream &) {
   
   _BYTE v3[12]; // [esp+4h] [ebp-40h] BYREF
@@ -344,24 +344,22 @@ void  IAnimatedEntity::Store(std::ostream &) {
   int v7; // [esp+24h] [ebp-20h] BYREF
   int v8; // [esp+28h] [ebp-1Ch] BYREF
   int v9; // [esp+2Ch] [ebp-18h]
-  char *v10; // [esp+30h] [ebp-14h]
   char v11; // [esp+37h] [ebp-Dh]
   int v12; // [esp+40h] [ebp-4h]
 
-  v10 = this;
-  IEntity::Store(this, (int)a2);
+  IEntity::Store((char *)this, (int)a2);
   v8 = 1;
   operator^<unsigned int>(a2, &v8);
-  operator^<unsigned char>(a2, (int)(v10 + 36));
-  operator^<unsigned char>(a2, (int)(v10 + 37));
-  operator^<unsigned short>((int)a2, (__int16 *)v10 + 19);
-  operator^<unsigned short>((int)a2, (__int16 *)v10 + 20);
-  operator^<unsigned short>((int)a2, (__int16 *)v10 + 21);
-  operator^<unsigned int>(a2, (int *)v10 + 11);
-  operator^<int>((int)a2, (int *)v10 + 12);
-  v7 = std::vector<CEntityEvent>::size(v10 + 52);
+  operator^<unsigned char>(a2, &this->frame);
+  operator^<unsigned char>(a2, &this->attackerPlayerId);
+  operator^<unsigned short>(a2, &this->jobPart);
+  operator^<unsigned short>(a2, &this->prevEntity);
+  operator^<unsigned short>(a2, &this->nextEntity);
+  operator^<unsigned int>(a2, (int *)&this->lastUpdateTick);
+  operator^<int>(a2, (int *)&this->lastLogicUpdate);
+  v7 = std::vector<CEntityEvent>::size(&this->eventQueue);
   operator^<unsigned int>(a2, &v7);
-  std::vector<CEntityEvent>::begin(v4);
+  std::vector<CEntityEvent>::begin(&this->eventQueue, (int)v4);
   v12 = 0;
   while ( 1 )
   {

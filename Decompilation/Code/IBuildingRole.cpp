@@ -997,10 +997,10 @@ void  IBuildingRole::PostLoadSetWaterFlags(class CBuilding *) {
 
 
 // address=[0x14ffaa0]
-// Decompiled from int __thiscall IBuildingRole::Store(struct IBuildingRole *this, struct std::ostream *a2)
+// Decompiled from struct std::ostream *__thiscall IBuildingRole::Store(struct IBuildingRole *this, struct std::ostream *a2)
 void  IBuildingRole::Store(std::ostream &) {
   
-  int result; // eax
+  struct std::ostream *result; // eax
   int v3; // [esp+0h] [ebp-10h] BYREF
   int v4; // [esp+4h] [ebp-Ch] BYREF
   unsigned int i; // [esp+8h] [ebp-8h]
@@ -1010,51 +1010,51 @@ void  IBuildingRole::Store(std::ostream &) {
   CPersistence::Store(this, a2);
   v3 = 4;
   operator^<unsigned int>(a2, &v3);
-  operator^<unsigned char>(a2, (int)v6 + 4);
-  operator^<unsigned char>(a2, (int)v6 + 5);
-  operator^<unsigned short>((int)a2, (__int16 *)v6 + 3);
-  operator^<unsigned short>((int)a2, (__int16 *)v6 + 4);
-  operator^<short>((int)a2, (__int16 *)v6 + 5);
-  operator^<unsigned short>((int)a2, (__int16 *)v6 + 6);
-  operator^<int>((int)a2, (int *)v6 + 4);
-  operator^<unsigned short>((int)a2, (__int16 *)v6 + 10);
-  operator^<unsigned short>((int)a2, (__int16 *)v6 + 11);
-  operator^<unsigned short>((int)a2, (__int16 *)v6 + 12);
-  operator^<unsigned short>((int)a2, (__int16 *)v6 + 13);
-  operator^<bool>((int)a2, (int)v6 + 28);
-  operator^<bool>((int)a2, (int)v6 + 29);
-  operator^<unsigned char>(a2, (int)v6 + 356);
-  operator^<unsigned char>(a2, (int)v6 + 357);
-  operator^<unsigned char>(a2, (int)v6 + 358);
-  operator^<unsigned char>(a2, (int)v6 + 359);
-  operator^<short>((int)a2, (__int16 *)v6 + 180);
-  operator^<short>((int)a2, (__int16 *)v6 + 181);
-  operator^<unsigned char>(a2, (int)v6 + 364);
-  operator^<unsigned char>(a2, (int)v6 + 365);
-  v4 = *((_DWORD *)v6 + 92);
-  operator^<int>((int)a2, &v4);
-  operator^<unsigned char>(a2, (int)v6 + 372);
-  result = operator^<unsigned char>(a2, (int)v6 + 373);
+  operator^<unsigned char>(a2, (BYTE *)&v6[1]);
+  operator^<unsigned char>(a2, (BYTE *)&v6[1].__vftable + 1);
+  operator^<unsigned short>(a2, (WORD *)&v6[1].__vftable + 1);
+  operator^<unsigned short>(a2, (WORD *)&v6[2]);
+  operator^<short>(a2, (__int16 *)&v6[2].__vftable + 1);
+  operator^<unsigned short>(a2, (WORD *)&v6[3]);
+  operator^<int>(a2, (int *)&v6[4]);
+  operator^<unsigned short>(a2, (WORD *)&v6[5]);
+  operator^<unsigned short>(a2, (WORD *)&v6[5].__vftable + 1);
+  operator^<unsigned short>(a2, (WORD *)&v6[6]);
+  operator^<unsigned short>(a2, (WORD *)&v6[6].__vftable + 1);
+  operator^<bool>(a2, (char *)&v6[7]);
+  operator^<bool>(a2, (char *)&v6[7].__vftable + 1);
+  operator^<unsigned char>(a2, (BYTE *)&v6[89]);
+  operator^<unsigned char>(a2, (BYTE *)&v6[89].__vftable + 1);
+  operator^<unsigned char>(a2, (BYTE *)&v6[89].__vftable + 2);
+  operator^<unsigned char>(a2, (BYTE *)&v6[89].__vftable + 3);
+  operator^<short>(a2, (__int16 *)&v6[90]);
+  operator^<short>(a2, (__int16 *)&v6[90].__vftable + 1);
+  operator^<unsigned char>(a2, (BYTE *)&v6[91]);
+  operator^<unsigned char>(a2, (BYTE *)&v6[91].__vftable + 1);
+  v4 = (int)v6[92].__vftable;
+  operator^<int>(a2, &v4);
+  operator^<unsigned char>(a2, (BYTE *)&v6[93]);
+  result = operator^<unsigned char>(a2, (BYTE *)&v6[93].__vftable + 1);
   for ( i = 0; i < 0xA; ++i )
   {
-    operator^<unsigned int>(a2, (int *)v6 + 2 * i + 19);
-    operator^<unsigned int>(a2, (int *)v6 + 2 * i + 20);
-    result = i + 1;
+    operator^<unsigned int>(a2, (int *)&v6[2 * i + 19]);
+    operator^<unsigned int>(a2, (int *)&v6[2 * i + 20]);
+    result = (struct std::ostream *)(i + 1);
   }
   for ( i = 0; i < 0xA; ++i )
   {
-    operator^<unsigned char>(a2, (int)v6 + 20 * i + 157);
-    operator^<unsigned char>(a2, (int)v6 + 20 * i + 158);
-    operator^<unsigned char>(a2, (int)v6 + 20 * i + 159);
-    operator^<unsigned int>(a2, (int *)v6 + 5 * i + 40);
-    operator^<unsigned char>(a2, (int)v6 + 20 * i + 164);
-    operator^<unsigned char>(a2, (int)v6 + 20 * i + 165);
-    operator^<unsigned char>(a2, (int)v6 + 20 * i + 156);
-    v4 = *((_DWORD *)v6 + 5 * i + 42);
-    operator^<int>((int)a2, &v4);
-    operator^<unsigned char>(a2, (int)v6 + 20 * i + 172);
-    operator^<unsigned char>(a2, (int)v6 + 20 * i + 173);
-    result = i + 1;
+    operator^<unsigned char>(a2, (BYTE *)&v6[5 * i + 39].__vftable + 1);
+    operator^<unsigned char>(a2, (BYTE *)&v6[5 * i + 39].__vftable + 2);
+    operator^<unsigned char>(a2, (BYTE *)&v6[5 * i + 39].__vftable + 3);
+    operator^<unsigned int>(a2, (int *)&v6[5 * i + 40]);
+    operator^<unsigned char>(a2, (BYTE *)&v6[5 * i + 41]);
+    operator^<unsigned char>(a2, (BYTE *)&v6[5 * i + 41].__vftable + 1);
+    operator^<unsigned char>(a2, (BYTE *)&v6[5 * i + 39]);
+    v4 = (int)v6[5 * i + 42].__vftable;
+    operator^<int>(a2, &v4);
+    operator^<unsigned char>(a2, (BYTE *)&v6[5 * i + 43]);
+    operator^<unsigned char>(a2, (BYTE *)&v6[5 * i + 43].__vftable + 1);
+    result = (struct std::ostream *)(i + 1);
   }
   return result;
 }

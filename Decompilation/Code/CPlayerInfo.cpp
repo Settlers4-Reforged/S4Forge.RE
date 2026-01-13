@@ -3,35 +3,37 @@
 // Definitions for class CPlayerInfo
 
 // address=[0x1373730]
-// Decompiled from int __thiscall CPlayerInfo::Race(CPlayerInfo *this)
+// Decompiled from DWORD __thiscall CPlayerInfo::Race(CPlayerInfo *this)
 int  CPlayerInfo::Race(void)const {
   
-  return *((_DWORD *)this + 1);
+  return this->race;
 }
 
 
 // address=[0x1397b20]
-// Decompiled from int __thiscall CPlayerInfo::StartX(CPlayerInfo *this)
+// Decompiled from DWORD __thiscall CPlayerInfo::StartX(CPlayerInfo *this)
 int  CPlayerInfo::StartX(void)const {
   
-  return *((_DWORD *)this + 2);
+  return this->startX;
 }
 
 
 // address=[0x1397b40]
-// Decompiled from int __thiscall CPlayerInfo::StartY(pairNode *this)
+// Decompiled from DWORD __thiscall CPlayerInfo::StartY(CPlayerInfo *this)
 int  CPlayerInfo::StartY(void)const {
   
-  return *((_DWORD *)this + 3);
+  return this->startY;
 }
 
 
 // address=[0x13d1290]
-// Decompiled from int __thiscall CPlayerInfo::Name(void *this, int a2)
+// Decompiled from int __thiscall CPlayerInfo::Name(CPlayerInfo *this)
 std::wstring  CPlayerInfo::Name(void)const {
   
-  std::wstring::wstring((int)this + 28);
-  return a2;
+  void *v2; // [esp+10h] [ebp+8h]
+
+  std::wstring::wstring(v2, &this->name);
+  return (int)v2;
 }
 
 
@@ -39,13 +41,13 @@ std::wstring  CPlayerInfo::Name(void)const {
 // Decompiled from void *__thiscall CPlayerInfo::Clear(CPlayerInfo *this)
 void  CPlayerInfo::Clear(void) {
   
-  *((_DWORD *)this + 1) = 0;
-  *((_DWORD *)this + 2) = 0;
-  *((_DWORD *)this + 3) = 0;
-  *((_DWORD *)this + 4) = 0;
-  *((_DWORD *)this + 5) = 0;
-  *((_DWORD *)this + 6) = 0;
-  return std::wstring::operator=((char *)this + 28, (wchar_t *)&word_3702DA4);
+  this->race = 0;
+  this->startX = 0;
+  this->startY = 0;
+  this->unk_10 = 0;
+  this->unk_14 = 0;
+  this->unk_18 = 0;
+  return std::wstring::operator=(&this->name, (wchar_t *)&word_3702DA4);
 }
 
 
@@ -53,8 +55,8 @@ void  CPlayerInfo::Clear(void) {
 // Decompiled from int __thiscall CPlayerInfo::Load(CPlayerInfo *this, struct IS4Chunk *a2)
 void  CPlayerInfo::Load(class IS4Chunk &) {
   
-  (**(void (__thiscall ***)(struct IS4Chunk *, char *, int))a2)(a2, (char *)this + 4, 4);
-  return (**(int (__thiscall ***)(struct IS4Chunk *, char *, int))a2)(a2, (char *)this + 24, 4);
+  (**(void (__thiscall ***)(struct IS4Chunk *, DWORD *, int))a2)(a2, &this->race, 4);
+  return (**(int (__thiscall ***)(struct IS4Chunk *, DWORD *, int))a2)(a2, &this->unk_18, 4);
 }
 
 
@@ -62,8 +64,8 @@ void  CPlayerInfo::Load(class IS4Chunk &) {
 // Decompiled from int __thiscall CPlayerInfo::Save(CPlayerInfo *this, struct IS4Chunk *a2)
 void  CPlayerInfo::Save(class IS4Chunk &) {
   
-  (*(void (__thiscall **)(struct IS4Chunk *, char *, int))(*(_DWORD *)a2 + 16))(a2, (char *)this + 4, 4);
-  return (*(int (__thiscall **)(struct IS4Chunk *, char *, int))(*(_DWORD *)a2 + 16))(a2, (char *)this + 24, 4);
+  (*(void (__thiscall **)(struct IS4Chunk *, DWORD *, int))(*(_DWORD *)a2 + 16))(a2, &this->race, 4);
+  return (*(int (__thiscall **)(struct IS4Chunk *, DWORD *, int))(*(_DWORD *)a2 + 16))(a2, &this->unk_18, 4);
 }
 
 
@@ -72,8 +74,8 @@ void  CPlayerInfo::Save(class IS4Chunk &) {
  CPlayerInfo::CPlayerInfo(void) {
   
   IS4ChunkObject::IS4ChunkObject(this);
-  *(_DWORD *)this = CPlayerInfo::_vftable_;
-  std::wstring::wstring((char *)this + 28);
+  this->__vftable = (CPlayerInfo_vtbl *)CPlayerInfo::_vftable_;
+  std::wstring::wstring(&this->name);
   CPlayerInfo::Clear(this);
   return this;
 }
@@ -83,7 +85,7 @@ void  CPlayerInfo::Save(class IS4Chunk &) {
 // Decompiled from void __thiscall CPlayerInfo::~CPlayerInfo(CPlayerInfo *this)
  CPlayerInfo::~CPlayerInfo(void) {
   
-  std::wstring::~wstring((char *)this + 28);
+  std::wstring::~wstring(&this->name);
 }
 
 

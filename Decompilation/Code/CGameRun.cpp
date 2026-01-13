@@ -17,7 +17,7 @@ static bool __cdecl CGameRun::Init(void) {
   CLogic *v9; // [esp+30h] [ebp-840h]
   CGameScriptManager *v10; // [esp+34h] [ebp-83Ch]
   CGameScriptManager *v11; // [esp+38h] [ebp-838h]
-  CFormView *v12; // [esp+3Ch] [ebp-834h]
+  CMapObjectMgr *v12; // [esp+3Ch] [ebp-834h]
   CMapObjectMgr *C; // [esp+40h] [ebp-830h]
   _DWORD *v14; // [esp+44h] [ebp-82Ch]
   _DWORD *v15; // [esp+48h] [ebp-828h]
@@ -73,8 +73,8 @@ static bool __cdecl CGameRun::Init(void) {
     v8 = 0;
   v21 = -1;
   g_pLogic = v8;
-  (*(void (__thiscall **)(void *))(*(_DWORD *)g_pGroupMgr + 8))(g_pGroupMgr);
-  CInputProcessor::Reset((CInputProcessor *)&g_cInputProcessor);
+  ((void (__thiscall *)(CGroupMgr *))g_pGroupMgr->j_?Clear@CGroupMgr@@UAEXXZ)(g_pGroupMgr);
+  CInputProcessor::Reset((CFsm **)&g_cInputProcessor);
   v7 = (CLogicRingBuffer *)operator new(0x1Cu);
   v21 = 4;
   if ( v7 )
@@ -154,7 +154,7 @@ static bool __cdecl CGameRun::Init(void) {
   LocalSlot = CPlayerManager::GetLocalSlot();
   CGameType::SetLocalSlot((CGameType *)g_pGameType, LocalSlot);
   CGameScriptManager::StartScript((CGameScriptManager *)g_pScriptMgr);
-  CAnimalMgr::Init((CAnimalMgr *)&g_cAnimalMgr);
+  CAnimalMgr::Init((CAnimalEffect **)&g_cAnimalMgr);
   CGameRun::m_bInitialized = 1;
   return 1;
 }

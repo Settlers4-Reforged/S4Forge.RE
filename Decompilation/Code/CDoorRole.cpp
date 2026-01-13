@@ -14,24 +14,24 @@ static class CPersistence * __cdecl CDoorRole::New(std::istream &) {
 
 
 // address=[0x156ce70]
-// Decompiled from int __thiscall CDoorRole::LogicUpdate(CDoorRole *this, struct CSettler *a2)
+// Decompiled from int __thiscall CDoorRole::LogicUpdate(CDoorRole *this, IEntity *a2)
 void  CDoorRole::LogicUpdate(class CSettler *) {
   
   int v2; // eax
   int result; // eax
   int v4; // [esp-4h] [ebp-10h]
   int SettlerInfo; // [esp+4h] [ebp-8h]
-  unsigned int v7; // [esp+8h] [ebp-4h]
+  unsigned int v6; // [esp+8h] [ebp-4h]
 
-  v4 = IEntity::Type((unsigned __int16 *)a2);
+  v4 = IEntity::Type(a2);
   v2 = IEntity::Race(a2);
   SettlerInfo = CSettlerMgr::GetSettlerInfo(v2, v4);
-  result = (*(int (__thiscall **)(struct CSettler *, CDoorRole *))(*(_DWORD *)a2 + 40))(a2, this);
+  result = a2->Amount();
   if ( result >= *(unsigned __int8 *)(SettlerInfo + 2) )
     return result;
-  v7 = IEntity::Hitpoints((IEntity *)a2);
-  if ( v7 < CStaticConfigVarInt::operator int(&unk_41520B4) )
-    IEntity::SetHitpoints((IEntity *)a2, v7 + 1);
+  v6 = IEntity::Hitpoints(a2);
+  if ( v6 < CStaticConfigVarInt::operator int(&unk_41520B4) )
+    IEntity::SetHitpoints(a2, v6 + 1);
   return IAnimatedEntity::RegisterForLogicUpdate(15);
 }
 

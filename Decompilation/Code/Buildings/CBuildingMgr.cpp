@@ -3,12 +3,12 @@
 // Definitions for class CBuildingMgr
 
 // address=[0x12fcb90]
-// Decompiled from unsigned __int8 *__stdcall CBuildingMgr::operator[](int a1)
+// Decompiled from CBuilding *__stdcall CBuildingMgr::operator[](int a1)
 class CBuilding &  CBuildingMgr::operator[](int) {
   
-  unsigned __int8 *v2; // [esp+4h] [ebp-4h]
+  IEntity *v2; // [esp+4h] [ebp-4h]
 
-  v2 = (unsigned __int8 *)CMapObjectMgr::EntityPtr(a1);
+  v2 = CMapObjectMgr::EntityPtr(a1);
   if ( !v2
     && BBSupportDbgReport(
          2,
@@ -27,7 +27,7 @@ class CBuilding &  CBuildingMgr::operator[](int) {
   {
     __debugbreak();
   }
-  return v2;
+  return (CBuilding *)v2;
 }
 
 

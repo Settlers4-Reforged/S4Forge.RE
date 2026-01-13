@@ -360,11 +360,11 @@ bool  CResourceManagerTask::IsShooting(void) {
       v59 = 6;
     if ( *((_DWORD *)v63 + 11) == -6 )
       v59 = 2;
-    CProfile::Begin((CProfile *)&unk_4689998);
+    CProfile::Begin((CProfile *)&stru_4689998);
     EcoSector = CSchedule::GetEcoSector(*((CSchedule **)v63 + 10));
     v2 = (*(int (__thiscall **)(struct IAIEcoManager *, int, _BYTE *))(*(_DWORD *)EcoSector + 248))(EcoSector, v59, v34);
     *((_DWORD *)v63 + 13) = v2;
-    CProfile::End((CProfile *)&unk_4689998);
+    CProfile::End((CProfile *)&stru_4689998);
     v45 = operator new(0x18u);
     LOBYTE(v64) = 7;
     if ( v45 )
@@ -374,7 +374,7 @@ bool  CResourceManagerTask::IsShooting(void) {
     v28 = v44;
     LOBYTE(v64) = 2;
     *((_DWORD *)v63 + 21) = v44;
-    CProfile::Begin((CProfile *)&unk_4689998);
+    CProfile::Begin((CProfile *)&stru_4689998);
     for ( i = 0; ; ++i )
     {
       v3 = std::vector<SUNDERGROUNDCONCENTRATIONDATA>::size(v34);
@@ -401,7 +401,7 @@ bool  CResourceManagerTask::IsShooting(void) {
       }
     }
     std::vector<SUNDERGROUNDCONCENTRATIONDATA>::clear();
-    CProfile::End((CProfile *)&unk_4689998);
+    CProfile::End((CProfile *)&stru_4689998);
   }
   else
   {

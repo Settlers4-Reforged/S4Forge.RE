@@ -190,7 +190,7 @@ static void __cdecl CAIResourceMap::Init(void) {
   dword_3EC2D1C = -1;
   dword_3EC2D20 = 0;
   memset(byte_3EC2CD8, 0, 0x42u);
-  CPerformanceCounter::Start((CPerformanceCounter *)&unk_3EC2CB0);
+  CPerformanceCounter::Start((CPerformanceCounter *)&stru_3EC2CB0);
   CAIResourceMap::Done();
   InitResourceGroundInfoMap();
   dword_3EC2CAC = CWorldManager::Width(v0);
@@ -222,7 +222,7 @@ static void __cdecl CAIResourceMap::Init(void) {
         sub_131B8B0(m, k);
     }
     CAIResourceMap::s_iInitialized = 1;
-    CPerformanceCounter::Measure((CPerformanceCounter *)&unk_3EC2CB0);
+    CPerformanceCounter::Measure((CPerformanceCounter *)&stru_3EC2CB0);
   }
   else if ( BBSupportDbgReport(1, "AI\\AI_ResourceMap.cpp", 776, "CInit(): Invalid map width or height!") == 1 )
   {

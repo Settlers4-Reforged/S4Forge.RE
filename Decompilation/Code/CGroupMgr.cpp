@@ -387,7 +387,7 @@ void  CGroupMgr::SendGroupCommand(int,unsigned short const *,int,int,int) {
     if ( i >= 0 )
     {
       if ( (sendFlags & 8) != 0 )
-      {
+      {                                         // Seems like, when 8 Flag is set, then all commands are send to the individuals instead of as a whole group
         while ( i < groupSize )
         {
           v20 = group[i];

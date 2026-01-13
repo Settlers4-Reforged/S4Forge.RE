@@ -17,12 +17,12 @@ static class CPile * __cdecl CPileMgr::GetPilePtr(int) {
 
 
 // address=[0x1438a40]
-// Decompiled from unsigned __int8 *__stdcall CPileMgr::operator[](int a1)
+// Decompiled from IEntity *__stdcall CPileMgr::operator[](int a1)
 class CPile &  CPileMgr::operator[](int) {
   
-  unsigned __int8 *v2; // [esp+4h] [ebp-4h]
+  IEntity *v2; // [esp+4h] [ebp-4h]
 
-  v2 = (unsigned __int8 *)CMapObjectMgr::EntityPtr(a1);
+  v2 = CMapObjectMgr::EntityPtr(a1);
   if ( !v2
     && BBSupportDbgReport(
          2,

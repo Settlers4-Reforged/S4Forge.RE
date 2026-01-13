@@ -439,6 +439,8 @@ class RTTIParser:
 
 def get_function_definition(ea):
     cfunc = ida_hexrays.decompile(ea)
+    if(cfunc is not None):
+        cfunc.refresh_func_ctext()
     pseudocode_text = str(cfunc)
     return pseudocode_text
 

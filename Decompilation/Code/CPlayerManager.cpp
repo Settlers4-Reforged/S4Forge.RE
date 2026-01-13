@@ -44,7 +44,7 @@ static int __cdecl CPlayerManager::GetLocalPlayerId(void) {
 
 
 // address=[0x13736d0]
-// Decompiled from char *__cdecl CPlayerManager::PlayerInfo(int a1)
+// Decompiled from CPlayerInfo *__cdecl CPlayerManager::PlayerInfo(int a1)
 static class CPlayerInfo const & __cdecl CPlayerManager::PlayerInfo(int) {
   
   if ( !CPlayerManager::ValidUsedPlayerId(a1)
@@ -56,7 +56,7 @@ static class CPlayerInfo const & __cdecl CPlayerManager::PlayerInfo(int) {
   {
     __debugbreak();
   }
-  return (char *)&CPlayerManager::m_cPlayerInfos + 64 * a1;
+  return &CPlayerManager::m_cPlayerInfos[a1];
 }
 
 
@@ -195,14 +195,14 @@ static void __cdecl CPlayerManager::Init(void) {
 
 
 // address=[0x1497420]
-// Decompiled from int __cdecl CPlayerManager::AddPlayer(  int a1,  int a2,  int a3,  int a4,  int a5,  int a6,  char a7,  int a8,  int a9,  int a10,  int a11,  int a12,  int a13,  int a14)
+// Decompiled from int __cdecl CPlayerManager::AddPlayer(  DWORD a1,  DWORD a2,  DWORD a3,  DWORD a4,  DWORD a5,  DWORD a6,  int a7,  int a8,  int a9,  int a10,  int a11,  int a12,  int a13,  DWORD a14)
 static int __cdecl CPlayerManager::AddPlayer(int,int,int,int,int,int,std::wstring,int) {
   
   OnlineManager *Instance; // eax
   const wchar_t *v16; // eax
   size_t v17; // [esp+18h] [ebp-11Ch]
   int v18; // [esp+1Ch] [ebp-118h]
-  char *v19; // [esp+20h] [ebp-114h]
+  CPlayerInfo *v19; // [esp+20h] [ebp-114h]
   char Dest[256]; // [esp+24h] [ebp-110h] BYREF
   int v21; // [esp+130h] [ebp-4h]
 
@@ -238,16 +238,16 @@ LABEL_15:
     goto LABEL_15;
   }
   v18 = ++CPlayerManager::m_iNumberOfPlayer;
-  v19 = (char *)&CPlayerManager::m_cPlayerInfos + 64 * CPlayerManager::m_iNumberOfPlayer;
-  *((_DWORD *)v19 + 1) = a1;
-  *((_DWORD *)v19 + 2) = a2;
-  *((_DWORD *)v19 + 3) = a3;
-  *((_DWORD *)v19 + 6) = a4;
-  *((_DWORD *)v19 + 4) = a5;
-  *((_DWORD *)v19 + 5) = a6;
+  v19 = &CPlayerManager::m_cPlayerInfos[CPlayerManager::m_iNumberOfPlayer];
+  v19->race = a1;
+  v19->startX = a2;
+  v19->startY = a3;
+  v19->unk_18 = a4;
+  v19->unk_10 = a5;
+  v19->unk_14 = a6;
   std::wstring::operator=((int)&a7);
-  *((_DWORD *)v19 + 14) = a14;
-  v19[60] = 1;
+  v19->unk_38 = a14;
+  LOBYTE(v19->unk_3c) = 1;
   Instance = (OnlineManager *)OnlineManager::GetInstance();
   if ( OnlineManager::IsLocalPeerId(Instance, a6) )
   {
@@ -343,7 +343,7 @@ void  CPlayerManager::Load(class IS4Chunk &) {
     result = CPlayerManager::LastPlayerId();
     if ( j > result )
       break;
-    CPlayerInfo::Load((CPlayerInfo *)((char *)&CPlayerManager::m_cPlayerInfos + 64 * j), a2);
+    CPlayerInfo::Load(&CPlayerManager::m_cPlayerInfos[j], a2);
   }
   return result;
 }

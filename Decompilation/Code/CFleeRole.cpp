@@ -280,7 +280,7 @@ static class CFleeRole * __cdecl CFleeRole::Load(std::istream &) {
 // Decompiled from CFleeRole *__thiscall CFleeRole::CFleeRole(CFleeRole *this)
  CFleeRole::CFleeRole(void) {
   
-  ISettlerRole::ISettlerRole(this);
+  ISettlerRole::ISettlerRole((ISettlerRole *)this);
   *(_DWORD *)this = &CFleeRole::_vftable_;
   return this;
 }

@@ -841,31 +841,27 @@ unsigned int  CVehicle::TurnCounter(void)const {
 
 
 // address=[0x15a4d60]
-// Decompiled from CVehicle *__thiscall CVehicle::CVehicle(  CVehicle *this,  int a2,  int a3,  int a4,  int a5,  __int16 a6,  unsigned int a7,  bool a8)
+// Decompiled from CVehicle *__thiscall CVehicle::CVehicle(  CVehicle *this,  int a2,  int a3,  int a4,  int a5,  WORD a6,  unsigned int a7,  bool a8)
  CVehicle::CVehicle(int,int,int,int,int,int,bool) {
   
   void *v8; // eax
   int v9; // eax
   int v10; // eax
   int v11; // eax
-  int v13; // [esp+0h] [ebp-24h]
-  int v14; // [esp+0h] [ebp-24h]
-  int v15; // [esp+4h] [ebp-20h] BYREF
-  int v16; // [esp+8h] [ebp-1Ch]
-  unsigned int v17; // [esp+Ch] [ebp-18h]
-  int v18; // [esp+10h] [ebp-14h]
-  _DWORD *v19; // [esp+14h] [ebp-10h]
-  int v20; // [esp+20h] [ebp-4h]
+  int v13; // [esp+4h] [ebp-20h] BYREF
+  int v14; // [esp+8h] [ebp-1Ch]
+  unsigned int v15; // [esp+Ch] [ebp-18h]
+  int v16; // [esp+10h] [ebp-14h]
+  int v18; // [esp+20h] [ebp-4h]
 
-  v19 = this;
-  IMovingEntity::IMovingEntity(this, a5);
-  v20 = 0;
-  *v19 = &CVehicle::_vftable_;
-  *((_WORD *)v19 + 57) = 0;
-  v19[34] = 0;
+  IMovingEntity::IMovingEntity((IMovingEntity *)this, a5);
+  v18 = 0;
+  *(_DWORD *)this = &CVehicle::_vftable_;
+  *((_WORD *)this + 57) = 0;
+  *((_DWORD *)this + 34) = 0;
   std::vector<CEntityTask>::vector<CEntityTask>();
-  CObserverList::CObserverList(v19 + 39);
-  LOBYTE(v20) = 2;
+  CObserverList::CObserverList((char *)this + 156);
+  LOBYTE(v18) = 2;
   if ( !CWorldManager::InInnerWorld1(a2, a3)
     && BBSupportDbgReport(2, "MapObjects\\Vehicle.cpp", 110, "g_cWorld.InInnerWorld1(_iX, _iY)") == 1 )
   {
@@ -877,79 +873,79 @@ unsigned int  CVehicle::TurnCounter(void)const {
     __debugbreak();
   }
   v8 = (void *)CPlayerManager::PlayerInfo(a4);
-  v18 = CPlayerInfo::Race(v8);
-  *((_WORD *)v19 + 6) = a6;
-  v19[25] = IVehicleInfoMgr::VehicleProperties(v18, *((unsigned __int16 *)v19 + 6));
-  *((_BYTE *)v19 + 10) = *(_BYTE *)(v19[25] + 8);
-  IEntity::SetOwnerId((IEntity *)v19, a4);
-  IEntity::SetRace((IEntity *)v19, v18);
-  v17 = a7;
+  v16 = CPlayerInfo::Race(v8);
+  *((_WORD *)this + 6) = a6;
+  *((_DWORD *)this + 25) = IVehicleInfoMgr::VehicleProperties(v16, *((unsigned __int16 *)this + 6));
+  *((_BYTE *)this + 10) = *(_BYTE *)(*((_DWORD *)this + 25) + 8);
+  IEntity::SetOwnerId((IEntity *)this, a4);
+  IEntity::SetRace((IEntity *)this, v16);
+  v15 = a7;
   if ( a7 == -1 )
-    v17 = CStateGame::Rand(g_pGame) % 6u;
+    v15 = CStateGame::Rand(g_pGame) % 6u;
   v9 = Y16X16::PackXYFast(a2, a3);
-  IMovingEntity::SetPositionAndDir((IMovingEntity *)v19, v9, v17);
+  IMovingEntity::SetPositionAndDir((IMovingEntity *)this, v9, v15);
   IMovingEntity::SetDisplacementCosts(10);
   if ( a8 )
   {
-    CVehicle::InitBuildingSite((CVehicle *)v19);
-    *((_WORD *)v19 + 19) = CGfxManager::GetVehicleFirstJob(
-                             (CGfxManager *)g_pGfxManager,
-                             v18,
-                             *((unsigned __int16 *)v19 + 6));
-    *((_BYTE *)v19 + 109) = CGfxManager::GetVehicleFrameCount(
+    CVehicle::InitBuildingSite(this);
+    *((_WORD *)this + 19) = CGfxManager::GetVehicleFirstJob(
                               (CGfxManager *)g_pGfxManager,
-                              v18,
-                              *((unsigned __int16 *)v19 + 19));
-    if ( !*((_BYTE *)v19 + 109) && BBSupportDbgReport(2, "MapObjects\\Vehicle.cpp", 139, "m_uCycleFrames > 0") == 1 )
+                              v16,
+                              *((unsigned __int16 *)this + 6));
+    *((_BYTE *)this + 109) = CGfxManager::GetVehicleFrameCount(
+                               (CGfxManager *)g_pGfxManager,
+                               v16,
+                               *((unsigned __int16 *)this + 19));
+    if ( !*((_BYTE *)this + 109) && BBSupportDbgReport(2, "MapObjects\\Vehicle.cpp", 139, "m_uCycleFrames > 0") == 1 )
       __debugbreak();
     IAnimatedEntity::RegisterForLogicUpdate(16);
   }
   else
   {
-    IEntity::SetFlagBits(v19, *(EntityFlag *)(v19[25] + 40));
-    IEntity::SetFlagBits(v19, (EntityFlag)&byte_20300FD[3]);
+    IEntity::SetFlagBits(this, *(EntityFlag *)(*((_DWORD *)this + 25) + 40));
+    IEntity::SetFlagBits(this, (EntityFlag)&byte_20300FD[3]);
   }
-  *((_BYTE *)v19 + 69) = 0;
-  *((_BYTE *)v19 + 33) = *(_BYTE *)(v19[25] + 48);
-  *((_WORD *)v19 + 19) = CGfxManager::GetVehicleFirstJob(
-                           (CGfxManager *)g_pGfxManager,
-                           v18,
-                           *((unsigned __int16 *)v19 + 6));
-  *((_BYTE *)v19 + 109) = CGfxManager::GetVehicleFrameCount(
+  *((_BYTE *)this + 69) = 0;
+  *((_BYTE *)this + 33) = *(_BYTE *)(*((_DWORD *)this + 25) + 48);
+  *((_WORD *)this + 19) = CGfxManager::GetVehicleFirstJob(
                             (CGfxManager *)g_pGfxManager,
-                            v18,
-                            *((unsigned __int16 *)v19 + 19));
-  if ( !*((_BYTE *)v19 + 109) && BBSupportDbgReport(2, "MapObjects\\Vehicle.cpp", 161, "m_uCycleFrames > 0") == 1 )
+                            v16,
+                            *((unsigned __int16 *)this + 6));
+  *((_BYTE *)this + 109) = CGfxManager::GetVehicleFrameCount(
+                             (CGfxManager *)g_pGfxManager,
+                             v16,
+                             *((unsigned __int16 *)this + 19));
+  if ( !*((_BYTE *)this + 109) && BBSupportDbgReport(2, "MapObjects\\Vehicle.cpp", 161, "m_uCycleFrames > 0") == 1 )
     __debugbreak();
-  IEntity::SetFlagBits(v19, *(EntityFlag *)(v19[25] + 16));
-  v10 = IEntity::OwnerId((unsigned __int8 *)v19);
-  v11 = CWalking::Create(*(_DWORD *)(v19[25] + 20), v10);
-  std::auto_ptr<CWalking>::auto_ptr<CWalking>(v11);
-  LOBYTE(v20) = 3;
-  std::auto_ptr<CWalking>::operator=(&v15);
-  v16 = std::auto_ptr<CWalking>::operator->(v13);
-  (*(void (__thiscall **)(int, int, _DWORD))(*(_DWORD *)v16 + 8))(v16, -1, 0);
-  *((_BYTE *)v19 + 104) = 8;
-  *((_BYTE *)v19 + 105) = 0;
-  *((_BYTE *)v19 + 106) = 0;
-  *((_BYTE *)v19 + 107) = 0;
-  *((_BYTE *)v19 + 108) = 0;
-  *((_BYTE *)v19 + 110) = *(_BYTE *)(v19[25] + 44);
-  if ( !*((_BYTE *)v19 + 110) && BBSupportDbgReport(2, "MapObjects\\Vehicle.cpp", 181, "m_uWalkSteps > 0") == 1 )
+  IEntity::SetFlagBits(this, *(EntityFlag *)(*((_DWORD *)this + 25) + 16));
+  v10 = IEntity::OwnerId((IEntity *)this);
+  v11 = CWalking::Create(*(_DWORD *)(*((_DWORD *)this + 25) + 20), v10);
+  std::auto_ptr<CWalking>::auto_ptr<CWalking>(&v13, v11);
+  LOBYTE(v18) = 3;
+  std::auto_ptr<CWalking>::operator=(&v13);
+  v14 = std::auto_ptr<CWalking>::operator->((_DWORD *)this + 20);
+  (*(void (__thiscall **)(int, int, _DWORD))(*(_DWORD *)v14 + 8))(v14, -1, 0);
+  *((_BYTE *)this + 104) = 8;
+  *((_BYTE *)this + 105) = 0;
+  *((_BYTE *)this + 106) = 0;
+  *((_BYTE *)this + 107) = 0;
+  *((_BYTE *)this + 108) = 0;
+  *((_BYTE *)this + 110) = *(_BYTE *)(*((_DWORD *)this + 25) + 44);
+  if ( !*((_BYTE *)this + 110) && BBSupportDbgReport(2, "MapObjects\\Vehicle.cpp", 181, "m_uWalkSteps > 0") == 1 )
     __debugbreak();
-  if ( *((unsigned __int8 *)v19 + 110) >= 0x20u
+  if ( *((unsigned __int8 *)this + 110) >= 0x20u
     && BBSupportDbgReport(2, "MapObjects\\Vehicle.cpp", 182, "m_uWalkSteps < 32") == 1 )
   {
     __debugbreak();
   }
-  *((_BYTE *)v19 + 111) = 0;
-  *((_BYTE *)v19 + 112) = 0;
-  *((_BYTE *)v19 + 113) = 0;
-  v19[29] = 0;
-  std::vector<CEntityTask>::clear(v14, v15);
-  LOBYTE(v20) = 2;
-  std::auto_ptr<CWalking>::~auto_ptr<CWalking>(&v15);
-  return (CVehicle *)v19;
+  *((_BYTE *)this + 111) = 0;
+  *((_BYTE *)this + 112) = 0;
+  *((_BYTE *)this + 113) = 0;
+  *((_DWORD *)this + 29) = 0;
+  std::vector<CEntityTask>::clear();
+  LOBYTE(v18) = 2;
+  std::auto_ptr<CWalking>::~auto_ptr<CWalking>(&v13);
+  return this;
 }
 
 
@@ -1024,7 +1020,7 @@ unsigned int  CVehicle::TurnCounter(void)const {
 
 
 // address=[0x15a54a0]
-// Decompiled from int __thiscall CVehicle::Store(int *this, struct std::ostream *a2)
+// Decompiled from int __thiscall CVehicle::Store(IMovingEntity *this, struct std::ostream *a1)
 void  CVehicle::Store(std::ostream &) {
   
   _BYTE v3[12]; // [esp+4h] [ebp-40h] BYREF
@@ -1034,40 +1030,40 @@ void  CVehicle::Store(std::ostream &) {
   int v7; // [esp+24h] [ebp-20h] BYREF
   int v8; // [esp+28h] [ebp-1Ch] BYREF
   int v9; // [esp+2Ch] [ebp-18h]
-  int *v10; // [esp+30h] [ebp-14h]
+  IMovingEntity *v10; // [esp+30h] [ebp-14h]
   char v11; // [esp+37h] [ebp-Dh]
   int v12; // [esp+40h] [ebp-4h]
 
   v10 = this;
-  IMovingEntity::Store(this, a2);
-  CObserverList::Store(a2);
+  IMovingEntity::Store(this, a1);
+  CObserverList::Store(&v10[1].unk_40, a1);
   v8 = 2;
-  operator^<unsigned int>(a2, &v8);
-  operator^<unsigned char>(a2, (int)(v10 + 26));
-  operator^<unsigned char>(a2, (int)v10 + 105);
-  operator^<unsigned char>(a2, (int)v10 + 106);
-  operator^<unsigned char>(a2, (int)v10 + 107);
-  operator^<unsigned char>(a2, (int)(v10 + 27));
-  operator^<unsigned char>(a2, (int)v10 + 109);
-  operator^<unsigned char>(a2, (int)v10 + 110);
-  operator^<unsigned char>(a2, (int)v10 + 111);
-  operator^<unsigned char>(a2, (int)(v10 + 28));
-  operator^<unsigned char>(a2, (int)v10 + 113);
-  operator^<unsigned int>(a2, v10 + 29);
-  operator^<bool>((int)a2, (int)&CVehicle::m_bCallTakeJob);
-  operator^<unsigned char>(a2, (int)(v10 + 30));
-  operator^<unsigned char>(a2, (int)v10 + 121);
-  operator^<unsigned char>(a2, (int)v10 + 122);
-  operator^<unsigned char>(a2, (int)v10 + 123);
-  operator^<unsigned short>((int)a2, (__int16 *)v10 + 62);
-  operator^<unsigned short>((int)a2, (__int16 *)v10 + 63);
-  operator^<unsigned short>((int)a2, (__int16 *)v10 + 64);
-  operator^<unsigned short>((int)a2, (__int16 *)v10 + 65);
-  operator^<unsigned short>((int)a2, (__int16 *)v10 + 66);
-  operator^<float>(a2, v10 + 34);
-  operator^<unsigned char>(a2, (int)v10 + 69);
-  v7 = std::vector<CEntityTask>::size(v10 + 35);
-  operator^<unsigned int>(a2, &v7);
+  operator^<unsigned int>(a1, &v8);
+  operator^<unsigned char>(a1, (BYTE *)&v10[1].type);
+  operator^<unsigned char>(a1, (BYTE *)&v10[1].type + 1);
+  operator^<unsigned char>(a1, &v10[1].unk_e);
+  operator^<unsigned char>(a1, &v10[1].unk_f);
+  operator^<unsigned char>(a1, (BYTE *)&v10[1].AIEntityInfoPtr);
+  operator^<unsigned char>(a1, (BYTE *)&v10[1].AIEntityInfoPtr + 1);
+  operator^<unsigned char>(a1, (BYTE *)&v10[1].AIEntityInfoPtr + 2);
+  operator^<unsigned char>(a1, (BYTE *)&v10[1].AIEntityInfoPtr + 3);
+  operator^<unsigned char>(a1, (BYTE *)&v10[1].warriorType);
+  operator^<unsigned char>(a1, &v10[1].selectionFlags);
+  operator^<unsigned int>(a1, (int *)&v10[1].x);
+  operator^<bool>(a1, &CVehicle::m_bCallTakeJob);
+  operator^<unsigned char>(a1, (BYTE *)&v10[1].warMapNode);
+  operator^<unsigned char>(a1, &v10[1].warMapNode.unk_1d);
+  operator^<unsigned char>(a1, (BYTE *)&v10[1].warMapNode.next);
+  operator^<unsigned char>(a1, (BYTE *)&v10[1].warMapNode.next + 1);
+  operator^<unsigned short>(a1, (WORD *)&v10[1].PackedTribePlayer);
+  operator^<unsigned short>(a1, (WORD *)&v10[1].pad_22);
+  operator^<unsigned short>(a1, (WORD *)&v10[1].frame);
+  operator^<unsigned short>(a1, &v10[1].jobPart);
+  operator^<unsigned short>(a1, &v10[1].prevEntity);
+  operator^<float>(a1, &v10[1].lastUpdateTick);
+  operator^<unsigned char>(a1, &v10->unk_45);
+  v7 = std::vector<CEntityTask>::size(&v10[1].lastLogicUpdate);
+  operator^<unsigned int>(a1, &v7);
   std::vector<CEntityTask>::begin(v4);
   v12 = 0;
   while ( 1 )
@@ -1081,12 +1077,12 @@ void  CVehicle::Store(std::ostream &) {
     if ( !v11 )
       break;
     v9 = std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CEntityTask>>>::operator->(v4);
-    (*(void (__thiscall **)(int, struct std::ostream *))(*(_DWORD *)v9 + 4))(v9, a2);
+    (*(void (__thiscall **)(int, struct std::ostream *))(*(_DWORD *)v9 + 4))(v9, a1);
     std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CEntityTask>>>::operator++(v4);
   }
   v12 = -1;
   std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CEntityTask>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CEntityTask>>>(v4);
-  return operator^<unsigned short>((int)a2, (__int16 *)v10 + 57);
+  return operator^<unsigned short>(a1, (WORD *)&v10[1].unk_16);
 }
 
 

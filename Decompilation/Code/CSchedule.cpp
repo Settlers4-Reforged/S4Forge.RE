@@ -480,7 +480,7 @@ bool  CSchedule::trigger(void) {
   v8 = 0;
   ++*((_DWORD *)this + 4);
   v5 = 0;
-  CProfile::Begin((CProfile *)&unk_46871A0);
+  CProfile::Begin((CProfile *)&stru_46871A0);
   if ( CSchedule::ReadMessages(this) )
     return 1;
   v4 = (CPerformanceCounter *)operator new(0x18u);

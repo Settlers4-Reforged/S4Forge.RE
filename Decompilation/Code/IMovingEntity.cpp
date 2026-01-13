@@ -46,7 +46,10 @@ int  IMovingEntity::GetJobPart(void)const {
 // Decompiled from bool __thiscall IMovingEntity::IsFree(IMovingEntity *this, int a2)
 bool  IMovingEntity::IsFree(int) {
   
-  return IMovingEntity::IsNotBlocked(this, a2) && IMovingEntity::IsNotOccupied(this, a2);
+  if ( IMovingEntity::IsNotBlocked(this, a2) )
+    return IMovingEntity::IsNotOccupied(this, a2);
+  else
+    return 0;
 }
 
 
@@ -73,14 +76,10 @@ void  IMovingEntity::IncToDoListIter(void) {
 
 
 // address=[0x150b590]
-// Decompiled from _BYTE *__thiscall IMovingEntity::SetDisplacementCosts(_BYTE *this, char a2)
+// Decompiled from void __thiscall IMovingEntity::SetDisplacementCosts(IMovingEntity *this, char a2)
 void  IMovingEntity::SetDisplacementCosts(int) {
   
-  _BYTE *result; // eax
-
-  result = this;
-  this[70] = a2;
-  return result;
+  this->displacementCosts = a2;
 }
 
 
@@ -101,12 +100,11 @@ void  IMovingEntity::SetDirection(int) {
  IMovingEntity::IMovingEntity(int) {
   
   IAnimatedEntity::IAnimatedEntity(this, a2);
-  *(_DWORD *)this = &IMovingEntity::_vftable_;
-  std::auto_ptr<CWalking>::auto_ptr<CWalking>(0);
-  std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>((char *)this + 88);
-  *((_BYTE *)this + 68) = 0;
-  *((_BYTE *)this + 69) = 0;
-  *((_BYTE *)this + 70) = 0;
+  this->__vftable = (IMovingEntity_vtbl *)&IMovingEntity::_vftable_;
+  std::auto_ptr<CWalking>::auto_ptr<CWalking>(&this->walking, 0);
+  std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(&this->unk_58);
+  this->someRandomNumber = 0;
+  LOBYTE(this->displacementCosts) = 0;
   return this;
 }
 
@@ -226,18 +224,18 @@ bool  IMovingEntity::IsNotOccupied(int) {
   
   int v3; // [esp+4h] [ebp-4h]
 
-  v3 = std::auto_ptr<CWalking>::operator->(this);
+  v3 = std::auto_ptr<CWalking>::operator->(&this->walking);
   return (*(int (__thiscall **)(int, int))(*(_DWORD *)v3 + 24))(v3, a2);
 }
 
 
 // address=[0x1559430]
-// Decompiled from int __thiscall IMovingEntity::IsNotBlocked(IMovingEntity *this, int a2)
+// Decompiled from bool __thiscall IMovingEntity::IsNotBlocked(IMovingEntity *this, int a2)
 bool  IMovingEntity::IsNotBlocked(int) {
   
   int v3; // [esp+4h] [ebp-4h]
 
-  v3 = std::auto_ptr<CWalking>::operator->(this);
+  v3 = std::auto_ptr<CWalking>::operator->(&this->walking);
   return (*(int (__thiscall **)(int, int))(*(_DWORD *)v3 + 20))(v3, a2);
 }
 
@@ -291,7 +289,7 @@ class std::_List_iterator<class std::_List_val<struct std::_List_simple_types<cl
 // Decompiled from int __thiscall IMovingEntity::DisplacementCosts(IMovingEntity *this)
 int  IMovingEntity::DisplacementCosts(void)const {
   
-  return *((unsigned __int8 *)this + 70);
+  return this->displacementCosts;
 }
 
 
@@ -361,31 +359,29 @@ void  IMovingEntity::SetPositionAndDir(int,int) {
 
 
 // address=[0x15595e0]
-// Decompiled from int __thiscall IMovingEntity::Store(int *this, struct std::ostream *a2)
+// Decompiled from struct std::ostream *__thiscall IMovingEntity::Store(IMovingEntity *this, struct std::ostream *a1)
 void  IMovingEntity::Store(std::ostream &) {
   
-  int result; // eax
+  struct std::ostream *result; // eax
   int v3; // [esp+0h] [ebp-14h] BYREF
   int (__thiscall ***v4)(_DWORD, struct std::ostream *); // [esp+4h] [ebp-10h]
   BOOL v5; // [esp+8h] [ebp-Ch]
-  int *v6; // [esp+Ch] [ebp-8h]
   bool v7; // [esp+13h] [ebp-1h] BYREF
 
-  v6 = this;
-  IAnimatedEntity::Store(a2);
+  IAnimatedEntity::Store(this, a1);
   v3 = 1;
-  operator^<unsigned int>(a2, &v3);
-  operator^<signed char>(a2, v6 + 17);
-  operator^<unsigned char>(a2, (int)v6 + 69);
-  operator^<unsigned char>(a2, (int)v6 + 70);
-  operator^<int>((int)a2, v6 + 19);
-  v5 = std::auto_ptr<CWalking>::get(v6 + 20, v3) != 0;
+  operator^<unsigned int>(a1, &v3);
+  operator^<signed char>(a1, &this->someRandomNumber);
+  operator^<unsigned char>(a1, &this->unk_45);
+  operator^<unsigned char>(a1, &this->displacementCosts);
+  operator^<int>(a1, (int *)&this->unk_4c);
+  v5 = std::auto_ptr<CWalking>::get(&this->walking) != 0;
   v7 = v5;
-  result = operator^<bool>((int)a2, (int)&v7);
+  result = operator^<bool>(a1, (char *)&v7);
   if ( !v7 )
     return result;
-  v4 = (int (__thiscall ***)(_DWORD, struct std::ostream *))std::auto_ptr<CWalking>::operator->(v3);
-  return (**v4)(v4, a2);
+  v4 = (int (__thiscall ***)(_DWORD, struct std::ostream *))std::auto_ptr<CWalking>::operator->(&this->walking);
+  return (struct std::ostream *)(**v4)(v4, a1);
 }
 
 

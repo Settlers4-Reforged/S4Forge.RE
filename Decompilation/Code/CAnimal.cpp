@@ -45,27 +45,25 @@
 
 
 // address=[0x14d6260]
-// Decompiled from int __thiscall sub_18D6260(char *this, int a2)
+// Decompiled from void __thiscall CAnimal::Store(CAnimal *this, struct std::ostream *a1)
 void  CAnimal::Store(std::ostream &) {
   
-  int v3; // [esp+0h] [ebp-Ch] BYREF
-  char *v4; // [esp+4h] [ebp-8h]
-  __int16 v5; // [esp+Ah] [ebp-2h] BYREF
+  int v2; // [esp+0h] [ebp-Ch] BYREF
+  __int16 unk_64; // [esp+Ah] [ebp-2h] BYREF
 
-  v4 = this;
-  IMovingEntity::Store(a2);
-  v3 = 2;
-  operator^<unsigned int>(a2, &v3);
-  operator^<unsigned char>(a2, v4 + 120);
-  operator^<unsigned char>(a2, v4 + 121);
-  operator^<unsigned char>(a2, v4 + 122);
-  operator^<unsigned char>(a2, v4 + 123);
-  operator^<unsigned char>(a2, v4 + 124);
-  operator^<unsigned char>(a2, v4 + 125);
-  operator^<int>(a2, v4 + 136);
-  operator^<int>(a2, v4 + 128);
-  v5 = *((_WORD *)v4 + 50);
-  return operator^<short>(a2, &v5);
+  IMovingEntity::Store(this, a1);
+  v2 = 2;
+  operator^<unsigned int>(a1, &v2);
+  operator^<unsigned char>(a1, &this->unk_78);
+  operator^<unsigned char>(a1, &this->unk_79);
+  operator^<unsigned char>(a1, &this->unk_7a);
+  operator^<unsigned char>(a1, &this->unk_7b);
+  operator^<unsigned char>(a1, &this->unk_7c);
+  operator^<unsigned char>(a1, &this->unk_7d);
+  operator^<int>(a1, &this->unk_88);
+  operator^<int>(a1, &this->unk_80);
+  unk_64 = this->unk_64;
+  operator^<short>(a1, &unk_64);
 }
 
 

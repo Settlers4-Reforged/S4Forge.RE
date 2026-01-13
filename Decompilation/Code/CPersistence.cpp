@@ -139,7 +139,7 @@ class CPersistence &  CPersistence::operator=(class CPersistence const &) {
 // Decompiled from CPersistence *__thiscall CPersistence::CPersistence(CPersistence *this)
  CPersistence::CPersistence(void) {
   
-  *(_DWORD *)this = &CPersistence::_vftable_;
+  this->__vftable = (CPersistence_vtbl *)&CPersistence::_vftable_;
   return this;
 }
 

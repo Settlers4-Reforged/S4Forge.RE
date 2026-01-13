@@ -777,9 +777,9 @@ static bool __cdecl CTiling::CheckBorderLink(int,int) {
   v10 = CTile::TilingType(v2);
   CTileIdRef::CTileIdRef(v13, v10, 0);
   v5 = CTileIdRef::TileId((CTileIdRef *)v13, v9);
-  CSquareVisited::Init((CSquareVisited *)&unk_4300E70, a1);
+  CSquareVisited::Init((CSquareVisited *)&byte_4300E70, a1);
   TLimitedFIFO<int,576>::TLimitedFIFO<int,576>(v18);
-  started = CSquareVisited::StartIndex((CSquareVisited *)&unk_4300E70);
+  started = CSquareVisited::StartIndex((CSquareVisited *)&byte_4300E70);
   TLimitedFIFO<int,576>::Push(&started);
   while ( !(unsigned __int8)TLimitedFIFO<int,576>::Empty(v18) )
   {
@@ -787,8 +787,8 @@ static bool __cdecl CTiling::CheckBorderLink(int,int) {
     TLimitedFIFO<int,576>::Pop(v18);
     v14 = 0;
     v17 = 1;
-    v7 = CSquareVisited::WorldIdx((CSquareVisited *)&unk_4300E70, v15);
-    if ( CSquareVisited::SetIfNotVisited((CSquareVisited *)&unk_4300E70, v15) )
+    v7 = CSquareVisited::WorldIdx((CSquareVisited *)&byte_4300E70, v15);
+    if ( CSquareVisited::SetIfNotVisited((CSquareVisited *)&byte_4300E70, v15) )
     {
       for ( i = 0; i < 6; ++i )
       {
@@ -926,18 +926,18 @@ static int __cdecl CTiling::CalcIntLinkList(class CIntLinkList &,enum T_TILING_T
     __debugbreak();
   }
   CIntLinkList::Init(a1, v14);
-  CSquareVisited::Init((CSquareVisited *)&unk_4300E70, v15, v16);
+  CSquareVisited::Init((CSquareVisited *)&byte_4300E70, v15, v16);
   TStaticFIFO<int,256>::TStaticFIFO<int,256>(v19);
-  started = CSquareVisited::StartIndex((CSquareVisited *)&unk_4300E70);
+  started = CSquareVisited::StartIndex((CSquareVisited *)&byte_4300E70);
   TStaticFIFO<int,256>::Push(&started);
-  v3 = CSquareVisited::StartIndex((CSquareVisited *)&unk_4300E70);
-  CSquareVisited::Set((CSquareVisited *)&unk_4300E70, v3);
+  v3 = CSquareVisited::StartIndex((CSquareVisited *)&byte_4300E70);
+  CSquareVisited::Set((CSquareVisited *)&byte_4300E70, v3);
   v12 = 1;
   while ( !(unsigned __int8)TStaticFIFO<int,256>::Empty(v19) )
   {
     v11 = *(_DWORD *)TStaticFIFO<int,256>::Top(v19);
     TStaticFIFO<int,256>::Pop(v19);
-    v7 = CSquareVisited::WorldIdx((CSquareVisited *)&unk_4300E70, v11);
+    v7 = CSquareVisited::WorldIdx((CSquareVisited *)&byte_4300E70, v11);
     for ( i = 0; i < 6; ++i )
     {
       v4 = CSquareVisited::NeighborRelIndex(i);
@@ -945,7 +945,7 @@ static int __cdecl CTiling::CalcIntLinkList(class CIntLinkList &,enum T_TILING_T
       v6 = v7 + CTilingWorld::WorldNeighborRelIndex(i);
       if ( !(unsigned __int8)CSquareVisited::operator[](v13) )
       {
-        CSquareVisited::Set((CSquareVisited *)&unk_4300E70, v13);
+        CSquareVisited::Set((CSquareVisited *)&byte_4300E70, v13);
         v17 = CTileIdRef::TileId((CTileIdRef *)v10, v6);
         if ( v17 == v14 )
         {
@@ -981,7 +981,7 @@ static void __cdecl CTiling::NCheckTileSplit(void) {
   int j; // [esp+30h] [ebp-10h]
 
   CTiling::RecalcTileLinks(dword_4502110);
-  result = (_BYTE *)CSquareVisited::WorldPackedXYIndex((CSquareVisited *)&unk_4300E70, dword_4300E6C);
+  result = (_BYTE *)CSquareVisited::WorldPackedXYIndex((CSquareVisited *)&byte_4300E70, dword_4300E6C);
   v7 = result;
   for ( i = 0; i < 6; ++i )
   {
@@ -996,7 +996,7 @@ static void __cdecl CTiling::NCheckTileSplit(void) {
     {
       v5 = dword_4300E6C + Y16X16::NeighborModifier((Y16X16 *)j);
       CTiling::SplitTile(dword_42CF9A4, v5);
-      v4 = CSquareVisited::WorldPackedXYIndex((CSquareVisited *)&unk_4300E70, dword_4300E6C);
+      v4 = CSquareVisited::WorldPackedXYIndex((CSquareVisited *)&byte_4300E70, dword_4300E6C);
       for ( k = 0; k < 6; ++k )
       {
         v3 = v4 + CSquareVisited::NeighborRelIndex(k);
@@ -1845,12 +1845,12 @@ static void __cdecl CTiling::WalkTileNotifyEcoSectorChange(int,int,int) {
   v5 = CTiles::TileEx(a1);
   v6 = CTile::CenterXY(v5);
   v14 = Y16X16::UnpackYFast(v6);
-  CSquareVisited::Init((CSquareVisited *)&unk_4300E70, v13, v14);
+  CSquareVisited::Init((CSquareVisited *)&byte_4300E70, v13, v14);
   TStaticFIFO<int,256>::TStaticFIFO<int,256>(v19);
-  started = CSquareVisited::StartIndex((CSquareVisited *)&unk_4300E70);
+  started = CSquareVisited::StartIndex((CSquareVisited *)&byte_4300E70);
   TStaticFIFO<int,256>::Push(&started);
-  v7 = CSquareVisited::StartIndex((CSquareVisited *)&unk_4300E70);
-  CSquareVisited::Set((CSquareVisited *)&unk_4300E70, v7);
+  v7 = CSquareVisited::StartIndex((CSquareVisited *)&byte_4300E70);
+  CSquareVisited::Set((CSquareVisited *)&byte_4300E70, v7);
   while ( 1 )
   {
     result = TStaticFIFO<int,256>::Empty(v19);
@@ -1858,7 +1858,7 @@ static void __cdecl CTiling::WalkTileNotifyEcoSectorChange(int,int,int) {
       break;
     v17 = *(_DWORD *)TStaticFIFO<int,256>::Top(v19);
     TStaticFIFO<int,256>::Pop(v19);
-    v16 = CSquareVisited::WorldIdx((CSquareVisited *)&unk_4300E70, v17);
+    v16 = CSquareVisited::WorldIdx((CSquareVisited *)&byte_4300E70, v17);
     CTiling::NotifyChangeEcoSector(v16, a2, a3, 1);
     for ( i = 0; i < 6; ++i )
     {
@@ -1866,7 +1866,7 @@ static void __cdecl CTiling::WalkTileNotifyEcoSectorChange(int,int,int) {
       v15 = v17 + v9;
       v10 = CTilingWorld::WorldNeighborRelIndex(i);
       v11 = v16 + v10;
-      if ( CSquareVisited::SetIfNotVisited((CSquareVisited *)&unk_4300E70, v15) && ITiling::NormalTileId(v11) == a1 )
+      if ( CSquareVisited::SetIfNotVisited((CSquareVisited *)&byte_4300E70, v15) && ITiling::NormalTileId(v11) == a1 )
         TStaticFIFO<int,256>::Push(&v15);
     }
   }
@@ -2693,10 +2693,10 @@ void  CTiling::Init(int,struct T_GFX_MAP_ELEMENT *,unsigned char *,unsigned shor
   CPerformanceCounter::Measure((CPerformanceCounter *)v10);
   v8 = CPerformanceCounter::TimeMs((CPerformanceCounter *)v10);
   BBSupportTracePrintF(0, "CTiling::Init(): %.3f ms", v8);
-  CProfile::Clear((CProfile *)&unk_42F79B0);
-  CProfile::Clear((CProfile *)&unk_42F7A58);
-  CProfile::Clear((CProfile *)&unk_42F7B00);
-  CProfile::Clear((CProfile *)&unk_42F7BA8);
+  CProfile::Clear((CProfile *)&stru_42F79B0);
+  CProfile::Clear((CProfile *)&stru_42F7A58);
+  CProfile::Clear((CProfile *)&stru_42F7B00);
+  CProfile::Clear((CProfile *)&stru_42F7BA8);
   if ( (*(int (__thiscall **)(CTiling *, _DWORD))(*(_DWORD *)v16 + 72))(v16, 0)
     && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 3994, "DbgCheckTiling() == 0") == 1 )
   {
@@ -2743,13 +2743,13 @@ void  CTiling::Done(void) {
       CTilesEx::m_iMaxUsedTiles,
       (double)CTilesEx::m_iMaxUsedTiles / 32757.0 * 100.0);
     BBSupportTracePrintF(0, "  CalculateListOfFreeTiles() was called %i times.", CTilesEx::m_iCalcFreeListCounter);
-    v1 = CProfile::InfoStr((CProfile *)&unk_42F79B0);
+    v1 = CProfile::InfoStr((CProfile *)&stru_42F79B0);
     BBSupportTracePrintF(0, "  SetBlockedLand():   %s", v1);
-    v2 = CProfile::InfoStr((CProfile *)&unk_42F7A58);
+    v2 = CProfile::InfoStr((CProfile *)&stru_42F7A58);
     BBSupportTracePrintF(0, "  ClearBlockedLand(): %s", v2);
-    v3 = CProfile::InfoStr((CProfile *)&unk_42F7B00);
+    v3 = CProfile::InfoStr((CProfile *)&stru_42F7B00);
     BBSupportTracePrintF(0, "  ChangeOwner():      %s", v3);
-    v4 = CProfile::InfoStr((CProfile *)&unk_42F7BA8);
+    v4 = CProfile::InfoStr((CProfile *)&stru_42F7BA8);
     BBSupportTracePrintF(0, "  Update():           %s", v4);
     CTiling::m_iInitialized = 0;
     (*(void (__thiscall **)(void *))(*(_DWORD *)g_pFogging + 12))(g_pFogging);
@@ -2767,9 +2767,9 @@ void  CTiling::Update(void) {
   
   if ( CTiling::m_iInitialized )
   {
-    CProfile::Begin((CProfile *)&unk_42F7BA8);
+    CProfile::Begin((CProfile *)&stru_42F7BA8);
     CTilesAndLinks::LinksGarbageCollection(16);
-    CProfile::End((CProfile *)&unk_42F7BA8);
+    CProfile::End((CProfile *)&stru_42F7BA8);
   }
   else if ( BBSupportDbgReport(1, "Pathing\\Tiling.cpp", 4076, "CTiling::Update(): Not initialized!") == 1 )
   {
@@ -2812,7 +2812,7 @@ void  CTiling::SetBlockedLand(int,int) {
       {
         __debugbreak();
       }
-      CProfile::Begin((CProfile *)&unk_42F79B0);
+      CProfile::Begin((CProfile *)&stru_42F79B0);
       CTilingWorld::WorldSetBlockedLandFlag(v7);
       CTiling::SetBlockingEx(this, 0, a2, a3);
       for ( i = 0; i < 19; ++i )
@@ -2822,7 +2822,7 @@ void  CTiling::SetBlockedLand(int,int) {
         CTiling::SetBlockingEx(this, 1, v4, v5);
       }
       CTiling::CalculateBorderstoneBits7(a2, a3);
-      CProfile::End((CProfile *)&unk_42F79B0);
+      CProfile::End((CProfile *)&stru_42F79B0);
       byte_42CF998 = 0;
     }
   }
@@ -2910,7 +2910,7 @@ void  CTiling::ClearBlockedLand(int,int) {
     }
     else if ( CTilingWorld::WorldIsBlockedLand(v9) )
     {
-      CProfile::Begin((CProfile *)&unk_42F7A58);
+      CProfile::Begin((CProfile *)&stru_42F7A58);
       CTilingWorld::WorldClearBlockedLandFlag(v9);
       CTiling::ClearBlockingEx(this, 0, a2, a3);
       for ( i = 0; i < 19; ++i )
@@ -2933,7 +2933,7 @@ void  CTiling::ClearBlockedLand(int,int) {
           CTiling::ClearBlockingEx(this, 1, v7, v8);
       }
       CTiling::CalculateBorderstoneBits7(a2, a3);
-      CProfile::End((CProfile *)&unk_42F7A58);
+      CProfile::End((CProfile *)&stru_42F7A58);
       byte_42CF998 = 0;
     }
     else
@@ -3062,7 +3062,7 @@ void  CTiling::ChangeOwner(int,int,int) {
     {
       if ( !CTilingWorld::WorldIsWater(v20) )
       {
-        CProfile::Begin((CProfile *)&unk_42F7B00);
+        CProfile::Begin((CProfile *)&stru_42F7B00);
         v6 = ITiling::OwnerPseudoTileId(a4);
         CTiling::SetNormalTileId(v20, v6);
         CTiling::CalculateBorderstoneBits7(a2, a3);
@@ -3071,7 +3071,7 @@ void  CTiling::ChangeOwner(int,int,int) {
           a2,
           a3,
           a4);
-        CProfile::End((CProfile *)&unk_42F7B00);
+        CProfile::End((CProfile *)&stru_42F7B00);
       }
       byte_42CF998 = 0;
     }
@@ -3087,7 +3087,7 @@ void  CTiling::ChangeOwner(int,int,int) {
       {
         __debugbreak();
       }
-      CProfile::Begin((CProfile *)&unk_42F7B00);
+      CProfile::Begin((CProfile *)&stru_42F7B00);
       v7 = CTilingWorld::WorldGroundType(v20);
       v18 = CTiling::TileType(a4, v7, a2, a3);
       NeighborAnalysis::Init(0, a2, a3);
@@ -3143,7 +3143,7 @@ void  CTiling::ChangeOwner(int,int,int) {
         a2,
         a3,
         a4);
-      CProfile::End((CProfile *)&unk_42F7B00);
+      CProfile::End((CProfile *)&stru_42F7B00);
       byte_42CF998 = 0;
     }
   }

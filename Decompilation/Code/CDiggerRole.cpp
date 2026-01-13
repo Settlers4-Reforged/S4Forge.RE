@@ -181,7 +181,7 @@ static class CDiggerRole * __cdecl CDiggerRole::Load(std::istream &) {
 // Decompiled from CDiggerRole *__thiscall CDiggerRole::CDiggerRole(CDiggerRole *this)
  CDiggerRole::CDiggerRole(void) {
   
-  ISettlerRole::ISettlerRole(this);
+  ISettlerRole::ISettlerRole((ISettlerRole *)this);
   *(_DWORD *)this = &CDiggerRole::_vftable_;
   *((_WORD *)this + 22) = 0;
   *((_BYTE *)this + 46) = 0;

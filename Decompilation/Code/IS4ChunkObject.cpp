@@ -6,7 +6,7 @@
 // Decompiled from IS4ChunkObject *__thiscall IS4ChunkObject::IS4ChunkObject(IS4ChunkObject *this)
  IS4ChunkObject::IS4ChunkObject(void) {
   
-  *(_DWORD *)this = IS4ChunkObject::_vftable_;
+  this->__vftable = (IS4ChunkObject_vtbl *)IS4ChunkObject::_vftable_;
   return this;
 }
 

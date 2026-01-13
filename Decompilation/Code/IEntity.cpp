@@ -143,7 +143,7 @@ int  IEntity::EntityId(void)const {
 
 
 // address=[0x141da20]
-// Decompiled from int __thiscall sub_181DA20(IEntity *this)
+// Decompiled from int __thiscall IEntity::Race(IEntity *this)
 int  IEntity::Race(void)const {
   
   return this->PackedTribePlayer.Packed & 0xF;
