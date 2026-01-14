@@ -1496,9 +1496,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
           Instance = CConfigManagerPtr::GetInstance();
           v777 = Instance;
           v5 = std::string::c_str(v917);
-          v645 = ((int (__thiscall *)(CConfigManager *, int))v777->j_?GetDefineValue@CConfigManager@@UAEHPBD@Z)(
-                   v777,
-                   v5);
+          v645 = ((int (__thiscall *)(CConfigManager *, int))v777->GetDefineValue)(v777, v5);
           v811 = v645;
           if ( v645 <= 0 )
           {
@@ -1806,9 +1804,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
               v237 = v236;
               LOBYTE(v919) = 17;
               v59 = std::string::c_str(v236);
-              v238 = ((int (__thiscall *)(CConfigManager *, int))v743->j_?GetDefineValue@CConfigManager@@UAEHPBD@Z)(
-                       v743,
-                       v59);
+              v238 = ((int (__thiscall *)(CConfigManager *, int))v743->GetDefineValue)(v743, v59);
               v817[16 * m + 62] = v238;
               LOBYTE(v919) = 16;
               std::string::~string(v880);
@@ -2029,9 +2025,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
               v302 = CConfigManagerPtr::GetInstance();
               v725 = v302;
               v88 = std::string::c_str(v914);
-              v303 = ((int (__thiscall *)(CConfigManager *, int))v725->j_?GetDefineValue@CConfigManager@@UAEHPBD@Z)(
-                       v725,
-                       v88);
+              v303 = ((int (__thiscall *)(CConfigManager *, int))v725->GetDefineValue)(v725, v88);
               v817[478] = v303;
             }
             v304 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
@@ -2043,9 +2037,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
             v308 = v307;
             LOBYTE(v919) = 24;
             v89 = std::string::c_str(v307);
-            v309 = ((int (__thiscall *)(CConfigManager *, int))v723->j_?GetDefineValue@CConfigManager@@UAEHPBD@Z)(
-                     v723,
-                     v89);
+            v309 = ((int (__thiscall *)(CConfigManager *, int))v723->GetDefineValue)(v723, v89);
             v817[479] = v309;
             LOBYTE(v919) = 23;
             std::string::~string(v896);
@@ -2188,9 +2180,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
               v505 = CConfigManagerPtr::GetInstance();
               v712 = v505;
               v106 = std::string::c_str(v905);
-              v504 = ((int (__thiscall *)(CConfigManager *, int))v712->j_?GetDefineValue@CConfigManager@@UAEHPBD@Z)(
-                       v712,
-                       v106);
+              v504 = ((int (__thiscall *)(CConfigManager *, int))v712->GetDefineValue)(v712, v106);
               v503 = v504;
               v803 = v504;
               std::vector<unsigned char>::push_back(&v803);
@@ -2242,9 +2232,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
               v485 = v486;
               LOBYTE(v919) = 48;
               v108 = std::string::c_str(v486);
-              v484 = ((int (__thiscall *)(CConfigManager *, int))v709->j_?GetDefineValue@CConfigManager@@UAEHPBD@Z)(
-                       v709,
-                       v108);
+              v484 = ((int (__thiscall *)(CConfigManager *, int))v709->GetDefineValue)(v709, v108);
               v786 = v484;
               LOBYTE(v919) = 47;
               std::string::~string(v825);
@@ -2310,9 +2298,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
               v465 = v466;
               LOBYTE(v919) = 51;
               v116 = std::string::c_str(v466);
-              v464 = ((int (__thiscall *)(CConfigManager *, int))v703->j_?GetDefineValue@CConfigManager@@UAEHPBD@Z)(
-                       v703,
-                       v116);
+              v464 = ((int (__thiscall *)(CConfigManager *, int))v703->GetDefineValue)(v703, v116);
               v782 = v464;
               LOBYTE(v919) = 47;
               std::string::~string(v829);
@@ -2787,7 +2773,7 @@ LABEL_16:
       v400 = CConfigManagerPtr::GetInstance();
       v690 = v400;
       v126 = std::string::c_str(v912);
-      v399 = ((int (__thiscall *)(CConfigManager *, int))v690->j_?GetDefineValue@CConfigManager@@UAEHPBD@Z)(v690, v126);
+      v399 = ((int (__thiscall *)(CConfigManager *, int))v690->GetDefineValue)(v690, v126);
       *(_DWORD *)v816 = v399;
       v398 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v784);
       v397 = AdvXMLParser::Element::operator()("patch", 0);
@@ -2840,7 +2826,7 @@ LABEL_16:
       v378 = CConfigManagerPtr::GetInstance();
       v685 = v378;
       v134 = std::string::c_str(v910);
-      v377 = ((int (__thiscall *)(CConfigManager *, int))v685->j_?GetDefineValue@CConfigManager@@UAEHPBD@Z)(v685, v134);
+      v377 = ((int (__thiscall *)(CConfigManager *, int))v685->GetDefineValue)(v685, v134);
       *((_DWORD *)v816 + 2) = v377;
       if ( *((_DWORD *)v816 + 2) == -1 )
         *((_DWORD *)v816 + 2) = 0;
@@ -2876,7 +2862,7 @@ LABEL_16:
       v361 = v362;
       LOBYTE(v919) = 91;
       v139 = std::string::c_str(v362);
-      v360 = ((int (__thiscall *)(CConfigManager *, int))v681->j_?GetDefineValue@CConfigManager@@UAEHPBD@Z)(v681, v139);
+      v360 = ((int (__thiscall *)(CConfigManager *, int))v681->GetDefineValue)(v681, v139);
       *((_DWORD *)v816 + 4) = v360;
       LOBYTE(v919) = 90;
       std::string::~string(v840);
@@ -2927,7 +2913,7 @@ LABEL_16:
       v337 = v338;
       LOBYTE(v919) = 92;
       v148 = std::string::c_str(v338);
-      v336 = ((int (__thiscall *)(CConfigManager *, int))v675->j_?GetDefineValue@CConfigManager@@UAEHPBD@Z)(v675, v148);
+      v336 = ((int (__thiscall *)(CConfigManager *, int))v675->GetDefineValue)(v675, v148);
       *((_DWORD *)v816 + 7) = v336;
       LOBYTE(v919) = 90;
       std::string::~string(v845);

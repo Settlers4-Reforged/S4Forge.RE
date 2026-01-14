@@ -719,7 +719,7 @@ void  CSettler::ChangeType(int,bool,bool) {
           type = IEntity::Type(this);
           race = IEntity::Race(this);
           settlerInfo = CSettlerMgr::GetSettlerInfo(race, type);
-          unk_5 = settlerInfo->unk_5;
+          unk_5 = settlerInfo->m_uTool;
           if ( unk_5 )
           {
             v21 = IEntity::Y(this);
@@ -806,7 +806,7 @@ void  CSettler::ChangeType(int,bool,bool) {
         type = IEntity::Type(this);
         race = IEntity::Race(this);
         settlerInfo = CSettlerMgr::GetSettlerInfo(race, type);
-        this->health = settlerInfo->maxHitpoints;
+        this->health = settlerInfo->m_bHealth;
         aiEvent = CAIEvent::Pack(v27, newSettlerType);
         v22 = IEntity::ID(this);
         v20 = IEntity::OwnerId(this);
@@ -910,7 +910,7 @@ int  CSettler::Increase(int) {
 
   v3 = IEntity::Race(this);
   v4 = IEntity::Type(this);
-  maxHitpoints = CSettlerMgr::GetSettlerInfo(v3, v4)->maxHitpoints;
+  maxHitpoints = CSettlerMgr::GetSettlerInfo(v3, v4)->m_bHealth;
   if ( a2 >= 0 )
   {
     v5 = a2 + this->health;
@@ -958,7 +958,7 @@ int  CSettler::MaxHitpoints(void)const {
 
   race = IEntity::Race(this);
   type = IEntity::Type(this);
-  return CSettlerMgr::GetSettlerInfo(race, type)->maxHitpoints;
+  return CSettlerMgr::GetSettlerInfo(race, type)->m_bHealth;
 }
 
 
@@ -1287,7 +1287,7 @@ int  CSettler::SetGroupFlags(int) {
   race = CPlayerInfo::Race(playerInfo);
   IEntity::SetRace(this, race);
   race2 = IEntity::Race(this);
-  this->health = CSettlerMgr::GetSettlerInfo(race2, settlerType)->maxHitpoints;
+  this->health = CSettlerMgr::GetSettlerInfo(race2, settlerType)->m_bHealth;
   IEntity::ClearFlagBits(this, (EntityFlag)0x2800u);
   IEntity::SetFlagBits(this, Ready|Visible|0x1000);
   *(_DWORD *)&this->warriorType |= CSettlerMgr::SettlerWarriorType(settlerType);

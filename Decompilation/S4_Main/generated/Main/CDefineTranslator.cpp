@@ -3,7 +3,7 @@
 // Definitions for class CDefineTranslator
 
 // address=[0x141dbe0]
-// Decompiled from int __thiscall CDefineTranslator::GetValueOfDefine(void *this, int a2)
+// Decompiled from int __thiscall CDefineTranslator::GetValueOfDefine(struct CDefineTranslator *this, struct std::string *a2)
 int  CDefineTranslator::GetValueOfDefine(std::string const &)const {
   
   _BYTE v3[12]; // [esp+4h] [ebp-54h] BYREF
@@ -14,7 +14,7 @@ int  CDefineTranslator::GetValueOfDefine(std::string const &)const {
   std::_Iterator_base12 *v8; // [esp+30h] [ebp-28h]
   int v9; // [esp+34h] [ebp-24h]
   int v10; // [esp+38h] [ebp-20h]
-  void *v12; // [esp+40h] [ebp-18h]
+  struct CDefineTranslator *v12; // [esp+40h] [ebp-18h]
   int v13; // [esp+44h] [ebp-14h]
   char v14; // [esp+4Bh] [ebp-Dh]
   int v15; // [esp+54h] [ebp-4h]

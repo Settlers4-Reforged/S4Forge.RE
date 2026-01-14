@@ -24,10 +24,12 @@
 
 
 // address=[0x14f3bb0]
-// Decompiled from int __stdcall AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator<(int a1)
+// Decompiled from bool __thiscall AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator<(_DWORD *this, int a2)
 bool  AdvXMLParser::ConstIterator<class AdvXMLParser::Element>::operator<(struct AdvXMLParser::ConstIterator<class AdvXMLParser::Element> const &) {
   
-  return std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator<((std::_Iterator_base12 *)(a1 + 4));
+  return std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator<(
+           this + 1,
+           (std::_Iterator_base12 *)(a2 + 4));
 }
 
 

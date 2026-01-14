@@ -73,28 +73,29 @@ bool  CFileEx::InLibrary(void)const {
 
 
 // address=[0x2f017f0]
-// Decompiled from int __thiscall CFileEx::CFileEx(int this, wchar_t *FileName, int a2, char a4, int a5)
+// Decompiled from CFileEx *__thiscall CFileEx::CFileEx(CFileEx *this, wchar_t *FileName, int a2, char a4, int a5)
  CFileEx::CFileEx(wchar_t const *,unsigned int,bool) {
   
   if ( a5 )
   {
-    *(_DWORD *)(this + 72) = &CFileEx::_vbtable_;
-    IFileEx::IFileEx((void *)(this + 104));
+    *((_DWORD *)this + 18) = &CFileEx::_vbtable_;
+    IFileEx::IFileEx((char *)this + 104);
   }
-  CFile::CFile((CFile *)this);
+  CFile::CFile(this);
   *(_DWORD *)this = CFileEx::_vftable_;
-  *(_DWORD *)(this + *(_DWORD *)(*(_DWORD *)(this + 72) + 4) + 72) = &CFileEx::`vftable';
-  *(_DWORD *)(this + *(_DWORD *)(*(_DWORD *)(this + 72) + 4) + 68) = *(_DWORD *)(*(_DWORD *)(this + 72) + 4) - 32;
+  *(_DWORD *)((char *)this + *(_DWORD *)(*((_DWORD *)this + 18) + 4) + 72) = &CFileEx::`vftable';
+  *(_DWORD *)((char *)this + *(_DWORD *)(*((_DWORD *)this + 18) + 4) + 68) = *(_DWORD *)(*((_DWORD *)this + 18) + 4)
+                                                                           - 32;
   if ( !a2 )
     return this;
-  *(_DWORD *)(this + 92) = 0;
-  *(_DWORD *)(this + 96) = 0;
-  *(_BYTE *)(this + 80) = 0;
-  *(_BYTE *)(this + 81) = 0;
-  *(_DWORD *)(this + 68) = 0;
-  *(_DWORD *)(this + 88) = 0;
-  *(_DWORD *)(this + 76) = 0;
-  CFileEx::Open((_DWORD *)(this + 104), FileName, a2, a4, UNUSED_ARG(), UNUSED_ARG());
+  *((_DWORD *)this + 23) = 0;
+  *((_DWORD *)this + 24) = 0;
+  *((_BYTE *)this + 80) = 0;
+  *((_BYTE *)this + 81) = 0;
+  *((_DWORD *)this + 17) = 0;
+  *((_DWORD *)this + 22) = 0;
+  *((_DWORD *)this + 19) = 0;
+  CFileEx::Open((_DWORD *)this + 26, FileName, a2, a4, UNUSED_ARG(), UNUSED_ARG());
   return this;
 }
 

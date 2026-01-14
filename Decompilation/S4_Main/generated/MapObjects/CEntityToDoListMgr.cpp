@@ -465,7 +465,7 @@
       Instance = CConfigManagerPtr::GetInstance();
       v208 = Instance;
       v6 = std::string::c_str(v273);
-      v83 = ((int (__thiscall *)(CConfigManager *, int))v208->j_?GetDefineValue@CConfigManager@@UAEHPBD@Z)(v208, v6);
+      v83 = ((int (__thiscall *)(CConfigManager *, int))v208->GetDefineValue)(v208, v6);
       v238 = v83;
       if ( v83 == -1 )
       {
@@ -506,7 +506,7 @@
         v186 = CConfigManagerPtr::GetInstance();
         v210 = v186;
         v8 = std::string::c_str(v272);
-        v185 = ((int (__thiscall *)(CConfigManager *, int))v210->j_?GetDefineValue@CConfigManager@@UAEHPBD@Z)(v210, v8);
+        v185 = ((int (__thiscall *)(CConfigManager *, int))v210->GetDefineValue)(v210, v8);
         v232 = v185;
         if ( v185 == -1 )
         {
@@ -591,7 +591,7 @@
         v162 = CConfigManagerPtr::GetInstance();
         v216 = v162;
         v16 = std::string::c_str(v269);
-        v161 = ((int (__thiscall *)(CConfigManager *, int))v216->j_?GetDefineValue@CConfigManager@@UAEHPBD@Z)(v216, v16);
+        v161 = ((int (__thiscall *)(CConfigManager *, int))v216->GetDefineValue)(v216, v16);
         v228 = v161;
         if ( v161 == -1 )
           v228 = 0;
@@ -754,7 +754,7 @@
     v123 = CConfigManagerPtr::GetInstance();
     v223 = v123;
     v22 = std::string::c_str(v271);
-    v122 = ((int (__thiscall *)(CConfigManager *, int))v223->j_?GetDefineValue@CConfigManager@@UAEHPBD@Z)(v223, v22);
+    v122 = ((int (__thiscall *)(CConfigManager *, int))v223->GetDefineValue)(v223, v22);
     v231 = v122;
     if ( v122 <= 0 || v231 >= 367 )
     {
@@ -777,7 +777,7 @@
     v115 = CConfigManagerPtr::GetInstance();
     v221 = v115;
     v24 = std::string::c_str(v270);
-    v114 = ((int (__thiscall *)(CConfigManager *, int))v221->j_?GetDefineValue@CConfigManager@@UAEHPBD@Z)(v221, v24);
+    v114 = ((int (__thiscall *)(CConfigManager *, int))v221->GetDefineValue)(v221, v24);
     *v242 = v114;
     if ( *v242 == -1 )
       *v242 = 0;

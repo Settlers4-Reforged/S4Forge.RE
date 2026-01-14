@@ -263,7 +263,7 @@ void  CVehicleInfoMgr::ReadXMLFile(void) {
       Instance = CConfigManagerPtr::GetInstance();
       v108 = Instance;
       v2 = std::string::c_str(v128);
-      v93 = ((int (__thiscall *)(CConfigManager *, int))v108->j_?GetDefineValue@CConfigManager@@UAEHPBD@Z)(v108, v2);
+      v93 = ((int (__thiscall *)(CConfigManager *, int))v108->GetDefineValue)(v108, v2);
       v122 = v93;
       if ( v93 <= 0 || v122 >= 6 )
       {

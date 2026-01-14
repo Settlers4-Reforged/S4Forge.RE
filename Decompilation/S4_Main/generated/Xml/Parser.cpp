@@ -36,7 +36,7 @@ static char * __cdecl AdvXMLParser::Parser::OpenXMLFile(wchar_t *,long &) {
   int v5; // [esp+7Ch] [ebp-14h] BYREF
   int v6; // [esp+8Ch] [ebp-4h]
 
-  CFileEx::CFileEx(FileName, 6, 0, 1);
+  CFileEx::CFileEx((CFileEx *)v4, FileName, 6, 0, 1);
   v6 = 0;
   *a2 = CFileEx::Size(v4);
   Buffer = operator new[](*a2 + 1);

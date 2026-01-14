@@ -2001,7 +2001,7 @@ void  CDecoObjMgr::ReadObjectInfos(void) {
       Instance = CConfigManagerPtr::GetInstance();
       v65 = Instance;
       v5 = std::string::c_str(v97);
-      v55 = ((int (__thiscall *)(CConfigManager *, int))v65->j_?GetDefineValue@CConfigManager@@UAEHPBD@Z)(v65, v5);
+      v55 = ((int (__thiscall *)(CConfigManager *, int))v65->GetDefineValue)(v65, v5);
       v91 = v55;
       if ( v55 < 0 )
       {

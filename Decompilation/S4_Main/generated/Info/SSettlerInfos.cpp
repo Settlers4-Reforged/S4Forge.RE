@@ -24,21 +24,21 @@
 
 
 // address=[0x1588360]
-// Decompiled from _BYTE *__thiscall CSettlerMgr::SSettlerInfos::operator=(_BYTE *this, _BYTE *a2)
+// Decompiled from CSettlerMgr::SSettlerInfos *__thiscall CSettlerMgr::SSettlerInfos::operator=(  CSettlerMgr::SSettlerInfos *this,  CSettlerMgr::SSettlerInfos *a2)
 struct CSettlerMgr::SSettlerInfos &  CSettlerMgr::SSettlerInfos::operator=(struct CSettlerMgr::SSettlerInfos const &) {
   
-  *this = *a2;
-  this[1] = a2[1];
-  this[2] = a2[2];
-  this[3] = a2[3];
-  this[4] = a2[4];
-  this[5] = a2[5];
-  this[6] = a2[6];
-  this[7] = a2[7];
-  std::vector<CSettlerMgr::SSearchInfos>::operator=(a2 + 8);
-  std::vector<unsigned short>::operator=(a2 + 24);
-  this[40] = a2[40];
-  this[41] = a2[41];
+  this->m_uRole = a2->m_uRole;
+  this->m_bSpeed = a2->m_bSpeed;
+  this->m_bHealth = a2->m_bHealth;
+  this->m_bDamage = a2->m_bDamage;
+  this->m_bArmor = a2->m_bArmor;
+  this->m_uTool = a2->m_uTool;
+  this->m_uOther = a2->m_uOther;
+  this->m_bMisc = a2->m_bMisc;
+  std::vector<CSettlerMgr::SSearchInfos>::operator=(this->m_vSearches, a2->m_vSearches);
+  std::vector<unsigned short>::operator=(this->g_vAnimLists, a2->g_vAnimLists);
+  this->m_bDamage2 = a2->m_bDamage2;
+  this->m_bDamage3 = a2->m_bDamage3;
   return this;
 }
 
