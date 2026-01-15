@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "LZHLDecoderStat.h"
 
 // Definitions for class LZHLDecoderStat
 

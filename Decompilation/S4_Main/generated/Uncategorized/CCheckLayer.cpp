@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CCheckLayer.h"
 
 // Definitions for class CCheckLayer
 

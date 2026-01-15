@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CDarkGardenerRole.h"
 
 // Definitions for class CDarkGardenerRole
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CAIDarkTribe.h"
 
 // Definitions for class CAIDarkTribe
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CScriptEventRequests.h"
 
 // Definitions for class CScriptEventRequests
 

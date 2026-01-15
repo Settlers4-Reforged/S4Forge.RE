@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CRandom16.h"
 
 // Definitions for class CRandom16
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "INotifyFilter.h"
 
 // Definitions for class INotifyFilter
 

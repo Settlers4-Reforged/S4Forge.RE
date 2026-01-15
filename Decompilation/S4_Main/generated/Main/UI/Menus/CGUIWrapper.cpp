@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CGUIWrapper.h"
 
 // Definitions for class CGUIWrapper
 

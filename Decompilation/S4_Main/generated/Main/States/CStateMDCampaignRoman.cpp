@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CStateMDCampaignRoman.h"
 
 // Definitions for class CStateMDCampaignRoman
 

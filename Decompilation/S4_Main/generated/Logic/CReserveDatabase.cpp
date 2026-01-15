@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CReserveDatabase.h"
 
 // Definitions for class CReserveDatabase
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CFindEnemyBuildings.h"
 
 // Definitions for class CFindEnemyBuildings
 

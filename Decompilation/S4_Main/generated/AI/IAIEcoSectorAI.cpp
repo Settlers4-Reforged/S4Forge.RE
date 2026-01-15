@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "IAIEcoSectorAI.h"
 
 // Definitions for class IAIEcoSectorAI
 

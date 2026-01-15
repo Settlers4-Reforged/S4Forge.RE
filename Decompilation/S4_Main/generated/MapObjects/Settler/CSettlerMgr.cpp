@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CSettlerMgr.h"
 
 // Definitions for class CSettlerMgr
 

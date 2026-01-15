@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CMushroomFarmerRole.h"
 
 // Definitions for class CMushroomFarmerRole
 

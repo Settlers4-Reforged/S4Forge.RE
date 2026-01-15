@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CSolution.h"
 
 // Definitions for class CSolution
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "PathSplitResult.h"
 
 // Definitions for class PathSplitResult
 

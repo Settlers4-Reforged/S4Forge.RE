@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CSpecialistsInfo.h"
 
 // Definitions for class CSpecialistsInfo
 

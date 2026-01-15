@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CBuildingSitePileRole.h"
 
 // Definitions for class CBuildingSitePileRole
 

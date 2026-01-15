@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CMsgStacks.h"
 
 // Definitions for class CMsgStacks
 

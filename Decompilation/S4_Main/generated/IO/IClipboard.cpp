@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "IClipboard.h"
 
 // Definitions for class IClipboard
 

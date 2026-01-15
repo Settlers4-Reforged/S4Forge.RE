@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CPileMgr.h"
 
 // Definitions for class CPileMgr
 

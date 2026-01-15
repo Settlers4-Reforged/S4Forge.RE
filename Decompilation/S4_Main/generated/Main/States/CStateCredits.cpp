@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CStateCredits.h"
 
 // Definitions for class CStateCredits
 

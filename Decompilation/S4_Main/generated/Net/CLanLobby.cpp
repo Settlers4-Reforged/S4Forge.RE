@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CLanLobby.h"
 
 // Definitions for class CLanLobby
 

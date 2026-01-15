@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CFreeWorkerRole.h"
 
 // Definitions for class CFreeWorkerRole
 

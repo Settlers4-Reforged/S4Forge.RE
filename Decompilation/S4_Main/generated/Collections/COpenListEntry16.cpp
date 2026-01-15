@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "COpenListEntry16.h"
 
 // Definitions for class COpenListEntry16
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "COneBuildingTypeIterator.h"
 
 // Definitions for class COneBuildingTypeIterator
 

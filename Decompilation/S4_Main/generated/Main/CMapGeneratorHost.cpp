@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CMapGeneratorHost.h"
 
 // Definitions for class CMapGeneratorHost
 

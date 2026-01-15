@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CProductionBuildingRole.h"
 
 // Definitions for class CProductionBuildingRole
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CS4ErrorException.h"
 
 // Definitions for class CS4ErrorException
 

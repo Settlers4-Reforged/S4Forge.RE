@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CStorageInfo.h"
 
 // Definitions for class CStorageInfo
 

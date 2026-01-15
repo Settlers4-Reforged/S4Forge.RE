@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CLanLobbyMapSettings.h"
 
 // Definitions for class CLanLobbyMapSettings
 

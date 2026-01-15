@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "SSaveEntry.h"
 
 // Definitions for class SSaveEntry
 

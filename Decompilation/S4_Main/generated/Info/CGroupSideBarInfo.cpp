@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CGroupSideBarInfo.h"
 
 // Definitions for class CGroupSideBarInfo
 

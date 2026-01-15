@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CSpiralOffsets.h"
 
 // Definitions for class CSpiralOffsets
 

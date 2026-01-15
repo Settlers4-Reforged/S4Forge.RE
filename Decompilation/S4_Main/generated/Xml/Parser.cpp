@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "Parser.h"
 
 // Definitions for class Parser
 

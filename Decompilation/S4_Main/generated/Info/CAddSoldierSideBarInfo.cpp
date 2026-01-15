@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CAddSoldierSideBarInfo.h"
 
 // Definitions for class CAddSoldierSideBarInfo
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CAIAgentWarMachines.h"
 
 // Definitions for class CAIAgentWarMachines
 

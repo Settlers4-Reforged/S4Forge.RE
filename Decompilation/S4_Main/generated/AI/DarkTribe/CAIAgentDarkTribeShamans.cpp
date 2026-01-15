@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CAIAgentDarkTribeShamans.h"
 
 // Definitions for class CAIAgentDarkTribeShamans
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CVehicleInfo.h"
 
 // Definitions for class CVehicleInfo
 

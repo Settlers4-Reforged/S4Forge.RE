@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CG24Closed1Parent16.h"
 
 // Definitions for class CG24Closed1Parent16
 

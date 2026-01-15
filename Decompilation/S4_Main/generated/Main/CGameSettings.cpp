@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CGameSettings.h"
 
 // Definitions for class CGameSettings
 

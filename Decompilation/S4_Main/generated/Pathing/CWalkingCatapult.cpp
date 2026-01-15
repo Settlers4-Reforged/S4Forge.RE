@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CWalkingCatapult.h"
 
 // Definitions for class CWalkingCatapult
 

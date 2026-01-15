@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CParam.h"
 
 // Definitions for class CParam
 

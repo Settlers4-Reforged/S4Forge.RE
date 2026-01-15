@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "IFSNode.h"
 
 // Definitions for class IFSNode
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "IAIMain.h"
 
 // Definitions for class IAIMain
 

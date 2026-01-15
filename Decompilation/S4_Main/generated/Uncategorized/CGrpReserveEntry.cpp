@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CGrpReserveEntry.h"
 
 // Definitions for class CGrpReserveEntry
 

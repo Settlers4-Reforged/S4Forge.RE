@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CBuildingFlagsWalk.h"
 
 // Definitions for class CBuildingFlagsWalk
 

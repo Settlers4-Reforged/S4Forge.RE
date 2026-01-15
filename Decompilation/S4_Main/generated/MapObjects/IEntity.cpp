@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "IEntity.h"
 
 // Definitions for class IEntity
 

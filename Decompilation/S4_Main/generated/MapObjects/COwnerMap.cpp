@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "COwnerMap.h"
 
 // Definitions for class COwnerMap
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CStateAOCampaignsSettle.h"
 
 // Definitions for class CStateAOCampaignsSettle
 

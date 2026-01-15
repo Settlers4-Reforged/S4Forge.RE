@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "ISelectableSettlerRole.h"
 
 // Definitions for class ISelectableSettlerRole
 

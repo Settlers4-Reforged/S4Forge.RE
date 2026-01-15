@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CFlyingMgr.h"
 
 // Definitions for class CFlyingMgr
 

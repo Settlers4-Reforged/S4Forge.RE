@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "IS4Chunk.h"
 
 // Definitions for class IS4Chunk
 

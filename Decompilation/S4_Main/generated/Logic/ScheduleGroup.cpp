@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "ScheduleGroup.h"
 
 // Definitions for class ScheduleGroup
 

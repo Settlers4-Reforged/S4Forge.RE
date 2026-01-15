@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CY6R1X6.h"
 
 // Definitions for class CY6R1X6
 

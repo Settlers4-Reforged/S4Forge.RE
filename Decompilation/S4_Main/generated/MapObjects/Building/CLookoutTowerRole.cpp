@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CLookoutTowerRole.h"
 
 // Definitions for class CLookoutTowerRole
 

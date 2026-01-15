@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CAIConfigIntEx.h"
 
 // Definitions for class CAIConfigIntEx
 

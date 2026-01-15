@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CSoldierInfo.h"
 
 // Definitions for class CSoldierInfo
 

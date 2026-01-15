@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "PlayerMessage.h"
 
 // Definitions for class PlayerMessage
 

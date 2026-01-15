@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CVikingWarShip.h"
 
 // Definitions for class CVikingWarShip
 

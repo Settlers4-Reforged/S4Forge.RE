@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CClient.h"
 
 // Definitions for class CClient
 

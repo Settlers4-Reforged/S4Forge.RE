@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CBlitFX.h"
 
 // Definitions for class CBlitFX
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CGenericSettlerIterator.h"
 
 // Definitions for class CGenericSettlerIterator
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CToolTipExt.h"
 
 // Definitions for class CToolTipExt
 

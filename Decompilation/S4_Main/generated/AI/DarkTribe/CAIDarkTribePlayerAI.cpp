@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CAIDarkTribePlayerAI.h"
 
 // Definitions for class CAIDarkTribePlayerAI
 

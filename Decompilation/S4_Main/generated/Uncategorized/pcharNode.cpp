@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "pcharNode.h"
 
 // Definitions for class pcharNode
 

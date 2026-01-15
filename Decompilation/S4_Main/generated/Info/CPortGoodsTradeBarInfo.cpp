@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CPortGoodsTradeBarInfo.h"
 
 // Definitions for class CPortGoodsTradeBarInfo
 

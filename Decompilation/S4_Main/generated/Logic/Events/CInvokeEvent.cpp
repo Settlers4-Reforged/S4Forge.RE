@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CInvokeEvent.h"
 
 // Definitions for class CInvokeEvent
 

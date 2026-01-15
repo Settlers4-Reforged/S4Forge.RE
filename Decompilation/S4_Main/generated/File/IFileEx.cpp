@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "IFileEx.h"
 
 // Definitions for class IFileEx
 

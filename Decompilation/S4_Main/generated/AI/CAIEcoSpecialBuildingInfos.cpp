@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CAIEcoSpecialBuildingInfos.h"
 
 // Definitions for class CAIEcoSpecialBuildingInfos
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CHunterRole.h"
 
 // Definitions for class CHunterRole
 

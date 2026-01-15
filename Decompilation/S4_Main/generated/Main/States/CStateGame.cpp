@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CStateGame.h"
 
 // Definitions for class CStateGame
 

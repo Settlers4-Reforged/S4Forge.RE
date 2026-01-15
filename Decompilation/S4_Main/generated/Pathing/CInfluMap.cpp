@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CInfluMap.h"
 
 // Definitions for class CInfluMap
 

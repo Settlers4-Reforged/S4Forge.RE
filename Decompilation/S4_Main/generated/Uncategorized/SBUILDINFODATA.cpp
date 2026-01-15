@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "SBUILDINFODATA.h"
 
 // Definitions for class SBUILDINFODATA
 

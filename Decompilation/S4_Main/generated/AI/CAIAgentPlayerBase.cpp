@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CAIAgentPlayerBase.h"
 
 // Definitions for class CAIAgentPlayerBase
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CStatistic.h"
 
 // Definitions for class CStatistic
 

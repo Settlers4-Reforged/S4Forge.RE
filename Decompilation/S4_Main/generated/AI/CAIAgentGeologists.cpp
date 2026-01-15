@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CAIAgentGeologists.h"
 
 // Definitions for class CAIAgentGeologists
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "std.h"
 
 // Definitions for class std
 

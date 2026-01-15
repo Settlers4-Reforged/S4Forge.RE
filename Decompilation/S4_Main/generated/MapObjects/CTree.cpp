@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CTree.h"
 
 // Definitions for class CTree
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CGameStateEventHandle.h"
 
 // Definitions for class CGameStateEventHandle
 

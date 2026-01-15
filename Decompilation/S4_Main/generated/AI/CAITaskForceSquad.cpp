@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CAITaskForceSquad.h"
 
 // Definitions for class CAITaskForceSquad
 

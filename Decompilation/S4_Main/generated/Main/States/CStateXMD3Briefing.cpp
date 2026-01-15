@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CStateXMD3Briefing.h"
 
 // Definitions for class CStateXMD3Briefing
 

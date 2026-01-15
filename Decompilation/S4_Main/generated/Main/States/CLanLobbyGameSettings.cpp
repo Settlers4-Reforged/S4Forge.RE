@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CLanLobbyGameSettings.h"
 
 // Definitions for class CLanLobbyGameSettings
 

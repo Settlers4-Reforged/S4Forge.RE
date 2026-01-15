@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CStateAOCampaignTrojan.h"
 
 // Definitions for class CStateAOCampaignTrojan
 

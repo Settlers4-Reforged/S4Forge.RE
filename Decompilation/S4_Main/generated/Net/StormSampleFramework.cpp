@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "StormSampleFramework.h"
 
 // Definitions for class StormSampleFramework
 

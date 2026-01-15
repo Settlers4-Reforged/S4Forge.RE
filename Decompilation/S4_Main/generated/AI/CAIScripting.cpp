@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CAIScripting.h"
 
 // Definitions for class CAIScripting
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CGoodsStatisticInfo.h"
 
 // Definitions for class CGoodsStatisticInfo
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CBuilderRole.h"
 
 // Definitions for class CBuilderRole
 

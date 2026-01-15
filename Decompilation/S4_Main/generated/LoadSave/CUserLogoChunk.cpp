@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CUserLogoChunk.h"
 
 // Definitions for class CUserLogoChunk
 

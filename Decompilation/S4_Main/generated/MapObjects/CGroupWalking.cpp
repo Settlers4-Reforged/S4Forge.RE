@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CGroupWalking.h"
 
 // Definitions for class CGroupWalking
 

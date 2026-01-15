@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CBinkInterface.h"
 
 // Definitions for class CBinkInterface
 

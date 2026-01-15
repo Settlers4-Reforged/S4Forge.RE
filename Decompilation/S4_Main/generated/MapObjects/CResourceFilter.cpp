@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CResourceFilter.h"
 
 // Definitions for class CResourceFilter
 

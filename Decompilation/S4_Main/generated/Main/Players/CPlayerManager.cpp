@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CPlayerManager.h"
 
 // Definitions for class CPlayerManager
 

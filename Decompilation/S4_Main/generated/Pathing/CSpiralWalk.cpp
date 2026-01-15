@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CSpiralWalk.h"
 
 // Definitions for class CSpiralWalk
 

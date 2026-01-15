@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CAIAgentTowerOccupation.h"
 
 // Definitions for class CAIAgentTowerOccupation
 

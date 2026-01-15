@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CConfigSection.h"
 
 // Definitions for class CConfigSection
 

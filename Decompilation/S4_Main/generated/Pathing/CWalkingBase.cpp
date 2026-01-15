@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CWalkingBase.h"
 
 // Definitions for class CWalkingBase
 

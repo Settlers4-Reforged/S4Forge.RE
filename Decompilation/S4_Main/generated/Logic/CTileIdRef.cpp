@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CTileIdRef.h"
 
 // Definitions for class CTileIdRef
 

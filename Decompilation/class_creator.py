@@ -1355,8 +1355,8 @@ def write_class_definitions(classes):
         abs_path += ".cpp"
 
         with open(abs_path, "w", encoding="utf-8") as f:
-            f.write(f'#include "all_headers.h"\n\n')
-
+            f.write(f"#include \"{class_name}.h\"\n\n")
+            
             f.write(f"// Definitions for class {class_name}\n\n")
 
             for access in ("public", "protected", "private"):

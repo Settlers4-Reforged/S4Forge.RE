@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "COptimizeOptions.h"
 
 // Definitions for class COptimizeOptions
 

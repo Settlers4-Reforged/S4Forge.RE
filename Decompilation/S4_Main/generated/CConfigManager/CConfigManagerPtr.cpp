@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CConfigManagerPtr.h"
 
 // Definitions for class CConfigManagerPtr
 

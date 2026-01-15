@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CAINormalSectorAI.h"
 
 // Definitions for class CAINormalSectorAI
 

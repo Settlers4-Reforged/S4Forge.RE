@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "IEffects.h"
 
 // Definitions for class IEffects
 

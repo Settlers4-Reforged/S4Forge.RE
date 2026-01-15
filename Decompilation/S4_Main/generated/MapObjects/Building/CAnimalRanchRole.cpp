@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CAnimalRanchRole.h"
 
 // Definitions for class CAnimalRanchRole
 

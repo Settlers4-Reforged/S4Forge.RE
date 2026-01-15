@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "INetInputProcessor.h"
 
 // Definitions for class INetInputProcessor
 

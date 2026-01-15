@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CSubProblemSolveEvent.h"
 
 // Definitions for class CSubProblemSolveEvent
 

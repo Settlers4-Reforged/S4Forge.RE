@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CBBSupportTraceFile.h"
 
 // Definitions for class CBBSupportTraceFile
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CWeaponSideBarInfo.h"
 
 // Definitions for class CWeaponSideBarInfo
 

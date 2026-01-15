@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CManakopterHallRole.h"
 
 // Definitions for class CManakopterHallRole
 

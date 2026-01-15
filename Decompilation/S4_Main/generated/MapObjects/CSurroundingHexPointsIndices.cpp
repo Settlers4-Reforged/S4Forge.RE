@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CSurroundingHexPointsIndices.h"
 
 // Definitions for class CSurroundingHexPointsIndices
 

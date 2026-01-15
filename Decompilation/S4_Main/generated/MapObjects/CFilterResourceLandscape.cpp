@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CFilterResourceLandscape.h"
 
 // Definitions for class CFilterResourceLandscape
 

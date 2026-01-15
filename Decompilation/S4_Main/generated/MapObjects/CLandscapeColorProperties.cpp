@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CLandscapeColorProperties.h"
 
 // Definitions for class CLandscapeColorProperties
 

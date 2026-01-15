@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CAITaskForcePriestsRoman.h"
 
 // Definitions for class CAITaskForcePriestsRoman
 

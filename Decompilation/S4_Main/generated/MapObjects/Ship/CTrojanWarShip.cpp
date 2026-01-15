@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CTrojanWarShip.h"
 
 // Definitions for class CTrojanWarShip
 

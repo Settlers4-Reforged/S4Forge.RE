@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CGuiEventHandler.h"
 
 // Definitions for class CGuiEventHandler
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CSlideshow.h"
 
 // Definitions for class CSlideshow
 

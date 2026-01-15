@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CMineRole.h"
 
 // Definitions for class CMineRole
 

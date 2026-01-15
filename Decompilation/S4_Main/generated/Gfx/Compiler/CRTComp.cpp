@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CRTComp.h"
 
 // Definitions for class CRTComp
 

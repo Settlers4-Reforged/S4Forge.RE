@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CFindBuildings.h"
 
 // Definitions for class CFindBuildings
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CDefineTranslator.h"
 
 // Definitions for class CDefineTranslator
 

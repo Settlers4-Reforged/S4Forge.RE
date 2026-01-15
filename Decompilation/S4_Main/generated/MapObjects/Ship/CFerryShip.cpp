@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CFerryShip.h"
 
 // Definitions for class CFerryShip
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CWaterFlags.h"
 
 // Definitions for class CWaterFlags
 

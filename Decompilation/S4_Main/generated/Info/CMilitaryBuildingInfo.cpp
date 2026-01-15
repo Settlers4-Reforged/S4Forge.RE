@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CMilitaryBuildingInfo.h"
 
 // Definitions for class CMilitaryBuildingInfo
 

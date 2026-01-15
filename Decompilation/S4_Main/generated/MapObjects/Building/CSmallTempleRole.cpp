@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CSmallTempleRole.h"
 
 // Definitions for class CSmallTempleRole
 

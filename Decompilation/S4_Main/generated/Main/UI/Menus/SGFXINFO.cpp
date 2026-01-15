@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "SGFXINFO.h"
 
 // Definitions for class SGFXINFO
 

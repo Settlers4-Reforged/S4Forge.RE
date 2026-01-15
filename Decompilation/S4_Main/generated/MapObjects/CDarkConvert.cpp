@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CDarkConvert.h"
 
 // Definitions for class CDarkConvert
 

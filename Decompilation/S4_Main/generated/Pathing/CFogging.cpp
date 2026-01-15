@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CFogging.h"
 
 // Definitions for class CFogging
 

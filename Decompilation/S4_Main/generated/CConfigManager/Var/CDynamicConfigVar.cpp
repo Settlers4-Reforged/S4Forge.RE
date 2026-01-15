@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CDynamicConfigVar.h"
 
 // Definitions for class CDynamicConfigVar
 

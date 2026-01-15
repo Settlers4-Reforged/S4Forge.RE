@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "IGfxEngine.h"
 
 // Definitions for class IGfxEngine
 

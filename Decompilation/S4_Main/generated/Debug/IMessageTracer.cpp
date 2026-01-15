@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "IMessageTracer.h"
 
 // Definitions for class IMessageTracer
 

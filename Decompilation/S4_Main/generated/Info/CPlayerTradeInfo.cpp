@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CPlayerTradeInfo.h"
 
 // Definitions for class CPlayerTradeInfo
 

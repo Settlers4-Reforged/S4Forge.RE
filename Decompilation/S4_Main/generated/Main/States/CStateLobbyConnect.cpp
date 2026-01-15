@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CStateLobbyConnect.h"
 
 // Definitions for class CStateLobbyConnect
 

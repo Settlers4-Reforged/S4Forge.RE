@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CTransportpriorityInfo.h"
 
 // Definitions for class CTransportpriorityInfo
 

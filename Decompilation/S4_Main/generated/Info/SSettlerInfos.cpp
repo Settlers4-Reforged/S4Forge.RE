@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "SSettlerInfos.h"
 
 // Definitions for class SSettlerInfos
 

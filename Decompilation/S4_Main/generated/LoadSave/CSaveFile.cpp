@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CSaveFile.h"
 
 // Definitions for class CSaveFile
 

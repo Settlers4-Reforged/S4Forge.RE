@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "EntityRef.h"
 
 // Definitions for class EntityRef
 

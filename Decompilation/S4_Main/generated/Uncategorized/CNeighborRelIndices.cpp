@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CNeighborRelIndices.h"
 
 // Definitions for class CNeighborRelIndices
 

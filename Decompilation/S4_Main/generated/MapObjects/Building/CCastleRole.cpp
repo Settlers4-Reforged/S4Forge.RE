@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CCastleRole.h"
 
 // Definitions for class CCastleRole
 

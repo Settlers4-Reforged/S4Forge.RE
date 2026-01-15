@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CBigTempleRole.h"
 
 // Definitions for class CBigTempleRole
 

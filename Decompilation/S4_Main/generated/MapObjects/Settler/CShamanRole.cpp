@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CShamanRole.h"
 
 // Definitions for class CShamanRole
 

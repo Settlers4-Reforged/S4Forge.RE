@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CProfile.h"
 
 // Definitions for class CProfile
 

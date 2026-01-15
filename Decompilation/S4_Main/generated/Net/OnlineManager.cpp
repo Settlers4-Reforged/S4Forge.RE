@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "OnlineManager.h"
 
 // Definitions for class OnlineManager
 

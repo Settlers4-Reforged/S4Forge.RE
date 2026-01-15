@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "SerialError.h"
 
 // Definitions for class SerialError
 

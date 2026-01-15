@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CEconomyGameInfo.h"
 
 // Definitions for class CEconomyGameInfo
 

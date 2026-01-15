@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CLandAnimal.h"
 
 // Definitions for class CLandAnimal
 

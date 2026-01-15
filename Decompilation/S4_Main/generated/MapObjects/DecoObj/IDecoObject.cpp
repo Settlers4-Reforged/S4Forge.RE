@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "IDecoObject.h"
 
 // Definitions for class IDecoObject
 

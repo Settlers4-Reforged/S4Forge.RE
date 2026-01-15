@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CGameChunkGeneral.h"
 
 // Definitions for class CGameChunkGeneral
 

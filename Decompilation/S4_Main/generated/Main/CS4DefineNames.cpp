@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CS4DefineNames.h"
 
 // Definitions for class CS4DefineNames
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CTimeInfo.h"
 
 // Definitions for class CTimeInfo
 

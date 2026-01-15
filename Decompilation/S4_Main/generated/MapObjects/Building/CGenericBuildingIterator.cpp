@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CGenericBuildingIterator.h"
 
 // Definitions for class CGenericBuildingIterator
 

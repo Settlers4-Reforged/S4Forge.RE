@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CSectorSpiralWalk.h"
 
 // Definitions for class CSectorSpiralWalk
 

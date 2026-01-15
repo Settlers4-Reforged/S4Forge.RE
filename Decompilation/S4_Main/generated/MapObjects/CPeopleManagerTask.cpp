@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CPeopleManagerTask.h"
 
 // Definitions for class CPeopleManagerTask
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CFarmBuildingRole.h"
 
 // Definitions for class CFarmBuildingRole
 

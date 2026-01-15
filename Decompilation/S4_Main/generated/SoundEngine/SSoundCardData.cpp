@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "SSoundCardData.h"
 
 // Definitions for class SSoundCardData
 

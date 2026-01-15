@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CInfoExchangeInt.h"
 
 // Definitions for class CInfoExchangeInt
 

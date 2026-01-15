@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CObserverList.h"
 
 // Definitions for class CObserverList
 

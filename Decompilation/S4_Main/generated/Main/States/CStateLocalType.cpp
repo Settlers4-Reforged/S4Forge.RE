@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CStateLocalType.h"
 
 // Definitions for class CStateLocalType
 

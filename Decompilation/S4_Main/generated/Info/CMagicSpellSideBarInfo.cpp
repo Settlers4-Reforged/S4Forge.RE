@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CMagicSpellSideBarInfo.h"
 
 // Definitions for class CMagicSpellSideBarInfo
 

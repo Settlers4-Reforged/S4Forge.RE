@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CGuiChatMsgList.h"
 
 // Definitions for class CGuiChatMsgList
 

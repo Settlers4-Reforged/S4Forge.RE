@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CStateMDRandomMapParameters.h"
 
 // Definitions for class CStateMDRandomMapParameters
 

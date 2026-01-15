@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "LZHLEncoder.h"
 
 // Definitions for class LZHLEncoder
 

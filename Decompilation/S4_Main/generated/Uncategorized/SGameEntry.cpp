@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "SGameEntry.h"
 
 // Definitions for class SGameEntry
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CSettlerStatus.h"
 
 // Definitions for class CSettlerStatus
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CPlayerIterator.h"
 
 // Definitions for class CPlayerIterator
 

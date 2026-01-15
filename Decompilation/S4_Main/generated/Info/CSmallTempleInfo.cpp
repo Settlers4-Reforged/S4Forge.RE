@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CSmallTempleInfo.h"
 
 // Definitions for class CSmallTempleInfo
 

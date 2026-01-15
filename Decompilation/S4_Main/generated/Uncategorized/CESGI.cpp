@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CESGI.h"
 
 // Definitions for class CESGI
 

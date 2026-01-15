@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "SBuildingInfos.h"
 
 // Definitions for class SBuildingInfos
 

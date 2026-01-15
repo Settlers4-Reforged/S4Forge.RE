@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CSiedlerAI.h"
 
 // Definitions for class CSiedlerAI
 

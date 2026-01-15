@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CExtendedMenuInfo.h"
 
 // Definitions for class CExtendedMenuInfo
 

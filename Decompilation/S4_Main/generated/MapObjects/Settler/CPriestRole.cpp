@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CPriestRole.h"
 
 // Definitions for class CPriestRole
 

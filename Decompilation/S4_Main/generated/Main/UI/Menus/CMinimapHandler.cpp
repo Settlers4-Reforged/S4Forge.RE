@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CMinimapHandler.h"
 
 // Definitions for class CMinimapHandler
 

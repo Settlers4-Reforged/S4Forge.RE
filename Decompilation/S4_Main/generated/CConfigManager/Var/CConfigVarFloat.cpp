@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CConfigVarFloat.h"
 
 // Definitions for class CConfigVarFloat
 

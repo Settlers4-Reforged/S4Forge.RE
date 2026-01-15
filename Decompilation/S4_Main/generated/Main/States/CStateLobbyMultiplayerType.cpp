@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CStateLobbyMultiplayerType.h"
 
 // Definitions for class CStateLobbyMultiplayerType
 

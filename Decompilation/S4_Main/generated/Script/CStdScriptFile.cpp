@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CStdScriptFile.h"
 
 // Definitions for class CStdScriptFile
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CStringEngineEx.h"
 
 // Definitions for class CStringEngineEx
 

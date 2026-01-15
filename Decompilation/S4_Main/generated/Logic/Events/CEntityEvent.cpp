@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CEntityEvent.h"
 
 // Definitions for class CEntityEvent
 

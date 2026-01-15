@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CDarkMushroomFarmRole.h"
 
 // Definitions for class CDarkMushroomFarmRole
 

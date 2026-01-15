@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CBBFileException.h"
 
 // Definitions for class CBBFileException
 

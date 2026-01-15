@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CAIEnemySettlerInSectorIterator.h"
 
 // Definitions for class CAIEnemySettlerInSectorIterator
 

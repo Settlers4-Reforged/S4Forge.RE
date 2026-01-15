@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CEcoSectorAI.h"
 
 // Definitions for class CEcoSectorAI
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "GenerateContext.h"
 
 // Definitions for class GenerateContext
 

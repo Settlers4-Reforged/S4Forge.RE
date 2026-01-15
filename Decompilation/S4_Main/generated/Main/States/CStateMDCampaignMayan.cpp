@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CStateMDCampaignMayan.h"
 
 // Definitions for class CStateMDCampaignMayan
 

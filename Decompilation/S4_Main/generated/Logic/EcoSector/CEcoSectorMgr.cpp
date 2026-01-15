@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CEcoSectorMgr.h"
 
 // Definitions for class CEcoSectorMgr
 

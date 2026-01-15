@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CNetInputProcessor.h"
 
 // Definitions for class CNetInputProcessor
 

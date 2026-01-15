@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CGuiGameState.h"
 
 // Definitions for class CGuiGameState
 

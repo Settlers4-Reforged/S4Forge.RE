@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "IAI_Module.h"
 
 // Definitions for class IAI_Module
 

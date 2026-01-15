@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CFerryLoadInfo.h"
 
 // Definitions for class CFerryLoadInfo
 

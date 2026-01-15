@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "SSurroundingPoint8.h"
 
 // Definitions for class SSurroundingPoint8
 

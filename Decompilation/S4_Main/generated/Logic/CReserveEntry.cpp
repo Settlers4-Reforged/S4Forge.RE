@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CReserveEntry.h"
 
 // Definitions for class CReserveEntry
 

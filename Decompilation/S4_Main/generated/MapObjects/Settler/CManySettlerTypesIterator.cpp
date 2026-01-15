@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CManySettlerTypesIterator.h"
 
 // Definitions for class CManySettlerTypesIterator
 

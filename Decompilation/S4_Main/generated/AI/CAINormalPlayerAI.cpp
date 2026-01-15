@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CAINormalPlayerAI.h"
 
 // Definitions for class CAINormalPlayerAI
 

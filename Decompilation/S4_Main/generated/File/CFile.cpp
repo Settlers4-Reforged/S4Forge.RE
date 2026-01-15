@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CFile.h"
 
 // Definitions for class CFile
 

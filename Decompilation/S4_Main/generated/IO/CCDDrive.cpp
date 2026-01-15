@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CCDDrive.h"
 
 // Definitions for class CCDDrive
 

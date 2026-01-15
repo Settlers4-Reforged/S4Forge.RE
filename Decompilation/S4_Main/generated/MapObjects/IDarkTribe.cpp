@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "IDarkTribe.h"
 
 // Definitions for class IDarkTribe
 

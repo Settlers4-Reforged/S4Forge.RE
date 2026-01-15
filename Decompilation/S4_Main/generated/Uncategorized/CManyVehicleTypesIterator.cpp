@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CManyVehicleTypesIterator.h"
 
 // Definitions for class CManyVehicleTypesIterator
 

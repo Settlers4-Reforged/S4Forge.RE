@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CSoundManager.h"
 
 // Definitions for class CSoundManager
 

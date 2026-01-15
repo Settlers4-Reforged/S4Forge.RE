@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CTransportShip.h"
 
 // Definitions for class CTransportShip
 

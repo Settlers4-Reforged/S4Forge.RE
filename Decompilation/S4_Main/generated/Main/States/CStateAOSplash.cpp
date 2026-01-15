@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CStateAOSplash.h"
 
 // Definitions for class CStateAOSplash
 

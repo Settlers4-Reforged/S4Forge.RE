@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "ISoundEngine.h"
 
 // Definitions for class ISoundEngine
 

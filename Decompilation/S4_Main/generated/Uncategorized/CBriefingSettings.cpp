@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CBriefingSettings.h"
 
 // Definitions for class CBriefingSettings
 

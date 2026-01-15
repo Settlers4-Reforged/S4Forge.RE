@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CMissionCD.h"
 
 // Definitions for class CMissionCD
 

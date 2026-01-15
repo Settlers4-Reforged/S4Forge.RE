@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "IBuildingRole.h"
 
 // Definitions for class IBuildingRole
 

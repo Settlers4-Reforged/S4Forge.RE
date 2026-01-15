@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CAITaskForcePriestsMaya.h"
 
 // Definitions for class CAITaskForcePriestsMaya
 

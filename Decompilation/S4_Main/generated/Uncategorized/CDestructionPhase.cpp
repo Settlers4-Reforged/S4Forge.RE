@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CDestructionPhase.h"
 
 // Definitions for class CDestructionPhase
 

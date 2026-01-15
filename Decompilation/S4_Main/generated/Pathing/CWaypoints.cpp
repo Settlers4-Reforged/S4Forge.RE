@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CWaypoints.h"
 
 // Definitions for class CWaypoints
 

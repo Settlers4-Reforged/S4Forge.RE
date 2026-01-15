@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CThiefRole.h"
 
 // Definitions for class CThiefRole
 

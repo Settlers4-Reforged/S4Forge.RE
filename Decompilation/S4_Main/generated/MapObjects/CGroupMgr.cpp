@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CGroupMgr.h"
 
 // Definitions for class CGroupMgr
 

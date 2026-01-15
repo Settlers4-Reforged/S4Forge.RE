@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CStateAOCampaignViking.h"
 
 // Definitions for class CStateAOCampaignViking
 

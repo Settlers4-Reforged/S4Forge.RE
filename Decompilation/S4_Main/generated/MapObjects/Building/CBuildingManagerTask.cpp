@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CBuildingManagerTask.h"
 
 // Definitions for class CBuildingManagerTask
 

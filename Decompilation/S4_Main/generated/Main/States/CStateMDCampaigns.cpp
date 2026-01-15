@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CStateMDCampaigns.h"
 
 // Definitions for class CStateMDCampaigns
 

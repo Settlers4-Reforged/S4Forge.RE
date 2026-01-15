@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "Comment.h"
 
 // Definitions for class Comment
 

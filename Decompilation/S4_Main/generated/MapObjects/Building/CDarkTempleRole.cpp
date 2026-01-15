@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CDarkTempleRole.h"
 
 // Definitions for class CDarkTempleRole
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CUnique.h"
 
 // Definitions for class CUnique
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CHive.h"
 
 // Definitions for class CHive
 

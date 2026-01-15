@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CAStar64Catapult.h"
 
 // Definitions for class CAStar64Catapult
 

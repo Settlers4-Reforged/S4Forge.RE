@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CAIBuildingEnsignPositionIterator.h"
 
 // Definitions for class CAIBuildingEnsignPositionIterator
 

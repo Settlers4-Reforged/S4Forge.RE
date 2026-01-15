@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CFeatureGrid.h"
 
 // Definitions for class CFeatureGrid
 

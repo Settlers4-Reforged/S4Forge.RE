@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CSimpleBuildingRole.h"
 
 // Definitions for class CSimpleBuildingRole
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CBarracksInfo.h"
 
 // Definitions for class CBarracksInfo
 

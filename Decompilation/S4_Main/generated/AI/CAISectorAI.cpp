@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CAISectorAI.h"
 
 // Definitions for class CAISectorAI
 

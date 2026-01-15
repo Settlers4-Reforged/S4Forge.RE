@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CDebugGridTest.h"
 
 // Definitions for class CDebugGridTest
 

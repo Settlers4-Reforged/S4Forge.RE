@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CAIAgentDarkTribeManakopters.h"
 
 // Definitions for class CAIAgentDarkTribeManakopters
 

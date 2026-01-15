@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CStaticConfigVarInt.h"
 
 // Definitions for class CStaticConfigVarInt
 

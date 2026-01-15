@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "IRandomMaps.h"
 
 // Definitions for class IRandomMaps
 

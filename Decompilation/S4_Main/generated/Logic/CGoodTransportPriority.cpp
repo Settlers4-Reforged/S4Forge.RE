@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CGoodTransportPriority.h"
 
 // Definitions for class CGoodTransportPriority
 

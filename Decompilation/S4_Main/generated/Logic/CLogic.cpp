@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CLogic.h"
 
 // Definitions for class CLogic
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "IAIDifficultyLevels.h"
 
 // Definitions for class IAIDifficultyLevels
 

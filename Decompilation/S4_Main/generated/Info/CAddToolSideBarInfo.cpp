@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CAddToolSideBarInfo.h"
 
 // Definitions for class CAddToolSideBarInfo
 

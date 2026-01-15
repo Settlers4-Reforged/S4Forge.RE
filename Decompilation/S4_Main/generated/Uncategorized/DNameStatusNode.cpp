@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "DNameStatusNode.h"
 
 // Definitions for class DNameStatusNode
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CConfigVarInt.h"
 
 // Definitions for class CConfigVarInt
 

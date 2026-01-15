@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CAIShaman.h"
 
 // Definitions for class CAIShaman
 

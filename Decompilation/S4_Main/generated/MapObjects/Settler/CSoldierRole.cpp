@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CSoldierRole.h"
 
 // Definitions for class CSoldierRole
 

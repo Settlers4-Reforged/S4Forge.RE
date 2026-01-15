@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "SDetailStatisticItem.h"
 
 // Definitions for class SDetailStatisticItem
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CGrabber.h"
 
 // Definitions for class CGrabber
 

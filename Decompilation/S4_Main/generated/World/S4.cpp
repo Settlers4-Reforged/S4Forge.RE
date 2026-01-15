@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "S4.h"
 
 // Definitions for class S4
 

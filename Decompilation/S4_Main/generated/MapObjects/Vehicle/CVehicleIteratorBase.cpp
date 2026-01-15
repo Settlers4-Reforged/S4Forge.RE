@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CVehicleIteratorBase.h"
 
 // Definitions for class CVehicleIteratorBase
 

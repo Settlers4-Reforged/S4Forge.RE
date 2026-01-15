@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CObjectBlob.h"
 
 // Definitions for class CObjectBlob
 

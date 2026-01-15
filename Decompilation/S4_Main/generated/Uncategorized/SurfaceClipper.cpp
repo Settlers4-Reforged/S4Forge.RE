@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "SurfaceClipper.h"
 
 // Definitions for class SurfaceClipper
 

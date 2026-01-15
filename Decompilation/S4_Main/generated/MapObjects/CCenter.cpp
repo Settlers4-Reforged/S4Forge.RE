@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CCenter.h"
 
 // Definitions for class CCenter
 

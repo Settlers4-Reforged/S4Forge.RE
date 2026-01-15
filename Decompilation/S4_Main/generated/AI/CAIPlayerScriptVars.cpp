@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CAIPlayerScriptVars.h"
 
 // Definitions for class CAIPlayerScriptVars
 

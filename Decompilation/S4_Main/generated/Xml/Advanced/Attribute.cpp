@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "Attribute.h"
 
 // Definitions for class Attribute
 

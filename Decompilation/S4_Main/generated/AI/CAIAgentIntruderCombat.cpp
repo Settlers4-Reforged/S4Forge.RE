@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CAIAgentIntruderCombat.h"
 
 // Definitions for class CAIAgentIntruderCombat
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CShip.h"
 
 // Definitions for class CShip
 

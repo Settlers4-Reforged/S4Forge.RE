@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CShipMap.h"
 
 // Definitions for class CShipMap
 

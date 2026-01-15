@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CFoundationCardCargo.h"
 
 // Definitions for class CFoundationCardCargo
 

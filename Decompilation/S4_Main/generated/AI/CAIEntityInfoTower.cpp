@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CAIEntityInfoTower.h"
 
 // Definitions for class CAIEntityInfoTower
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CVikingCatapult.h"
 
 // Definitions for class CVikingCatapult
 

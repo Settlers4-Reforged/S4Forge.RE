@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CTaskForceWarShips.h"
 
 // Definitions for class CTaskForceWarShips
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "IAIDarkTribeEcoAI.h"
 
 // Definitions for class IAIDarkTribeEcoAI
 

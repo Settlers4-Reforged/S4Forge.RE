@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CMayaCatapult.h"
 
 // Definitions for class CMayaCatapult
 

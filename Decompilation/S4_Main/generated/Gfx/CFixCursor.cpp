@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CFixCursor.h"
 
 // Definitions for class CFixCursor
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CGame_InitNetwork.h"
 
 // Definitions for class CGame_InitNetwork
 

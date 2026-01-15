@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CMagic.h"
 
 // Definitions for class CMagic
 

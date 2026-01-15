@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CManakopter.h"
 
 // Definitions for class CManakopter
 

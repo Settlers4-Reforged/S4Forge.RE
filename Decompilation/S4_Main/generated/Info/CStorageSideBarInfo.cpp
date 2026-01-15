@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CStorageSideBarInfo.h"
 
 // Definitions for class CStorageSideBarInfo
 

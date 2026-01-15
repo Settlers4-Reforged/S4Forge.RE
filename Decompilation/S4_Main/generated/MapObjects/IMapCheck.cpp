@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "IMapCheck.h"
 
 // Definitions for class IMapCheck
 

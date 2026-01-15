@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "IA_ColorReduction_Node.h"
 
 // Definitions for class IA_ColorReduction_Node
 

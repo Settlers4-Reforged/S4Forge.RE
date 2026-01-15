@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CSoundSystem.h"
 
 // Definitions for class CSoundSystem
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CGoodDistributionInfo.h"
 
 // Definitions for class CGoodDistributionInfo
 

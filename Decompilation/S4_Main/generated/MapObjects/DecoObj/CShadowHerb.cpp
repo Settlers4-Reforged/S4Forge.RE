@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CShadowHerb.h"
 
 // Definitions for class CShadowHerb
 

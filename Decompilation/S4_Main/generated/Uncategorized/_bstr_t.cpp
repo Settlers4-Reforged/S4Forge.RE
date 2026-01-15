@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "_bstr_t.h"
 
 // Definitions for class _bstr_t
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "SSaveData.h"
 
 // Definitions for class SSaveData
 

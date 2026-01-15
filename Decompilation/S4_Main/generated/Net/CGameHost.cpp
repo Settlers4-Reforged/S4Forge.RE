@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CGameHost.h"
 
 // Definitions for class CGameHost
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CMilitaryBuildingIterator.h"
 
 // Definitions for class CMilitaryBuildingIterator
 

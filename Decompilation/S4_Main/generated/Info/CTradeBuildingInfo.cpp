@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CTradeBuildingInfo.h"
 
 // Definitions for class CTradeBuildingInfo
 

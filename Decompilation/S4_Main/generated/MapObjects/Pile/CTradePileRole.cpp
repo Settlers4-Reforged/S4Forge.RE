@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CTradePileRole.h"
 
 // Definitions for class CTradePileRole
 

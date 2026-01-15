@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "IFogging.h"
 
 // Definitions for class IFogging
 

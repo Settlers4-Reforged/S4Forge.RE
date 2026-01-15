@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "pairNode.h"
 
 // Definitions for class pairNode
 

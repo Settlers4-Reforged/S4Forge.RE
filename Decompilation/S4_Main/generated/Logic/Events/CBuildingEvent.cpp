@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CBuildingEvent.h"
 
 // Definitions for class CBuildingEvent
 

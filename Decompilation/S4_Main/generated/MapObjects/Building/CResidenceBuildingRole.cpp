@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CResidenceBuildingRole.h"
 
 // Definitions for class CResidenceBuildingRole
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CColorGradient.h"
 
 // Definitions for class CColorGradient
 

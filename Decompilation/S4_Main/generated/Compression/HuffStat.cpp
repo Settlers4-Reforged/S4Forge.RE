@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "HuffStat.h"
 
 // Definitions for class HuffStat
 

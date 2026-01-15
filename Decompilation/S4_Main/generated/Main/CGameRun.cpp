@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CGameRun.h"
 
 // Definitions for class CGameRun
 

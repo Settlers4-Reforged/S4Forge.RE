@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "GameSessionDescriptor.h"
 
 // Definitions for class GameSessionDescriptor
 

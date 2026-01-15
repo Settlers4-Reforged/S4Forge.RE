@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CStoragePileRole.h"
 
 // Definitions for class CStoragePileRole
 

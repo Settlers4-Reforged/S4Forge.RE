@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CBasicGrid.h"
 
 // Definitions for class CBasicGrid
 

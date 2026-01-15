@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CMagicSpell.h"
 
 // Definitions for class CMagicSpell
 

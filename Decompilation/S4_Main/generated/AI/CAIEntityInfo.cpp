@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CAIEntityInfo.h"
 
 // Definitions for class CAIEntityInfo
 

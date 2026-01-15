@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "IAIEcoManager.h"
 
 // Definitions for class IAIEcoManager
 

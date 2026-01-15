@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "COpenListEntry24.h"
 
 // Definitions for class COpenListEntry24
 

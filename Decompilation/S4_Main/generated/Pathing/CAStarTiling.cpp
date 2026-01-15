@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CAStarTiling.h"
 
 // Definitions for class CAStarTiling
 

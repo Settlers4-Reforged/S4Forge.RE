@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CStateMD2Briefing.h"
 
 // Definitions for class CStateMD2Briefing
 

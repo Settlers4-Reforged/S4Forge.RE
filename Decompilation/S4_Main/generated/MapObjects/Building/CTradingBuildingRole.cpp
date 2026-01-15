@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CTradingBuildingRole.h"
 
 // Definitions for class CTradingBuildingRole
 

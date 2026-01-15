@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CTiles.h"
 
 // Definitions for class CTiles
 

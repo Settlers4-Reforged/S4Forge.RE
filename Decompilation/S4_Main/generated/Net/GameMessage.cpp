@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "GameMessage.h"
 
 // Definitions for class GameMessage
 

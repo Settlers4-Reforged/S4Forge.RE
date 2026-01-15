@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CBuildingIteratorBase.h"
 
 // Definitions for class CBuildingIteratorBase
 

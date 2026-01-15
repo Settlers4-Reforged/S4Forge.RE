@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "IMapGeneratorHost.h"
 
 // Definitions for class IMapGeneratorHost
 

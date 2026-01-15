@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "LZHLDecompressor.h"
 
 // Definitions for class LZHLDecompressor
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CAIGoal.h"
 
 // Definitions for class CAIGoal
 

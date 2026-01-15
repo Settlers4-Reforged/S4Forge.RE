@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CStateBriefing.h"
 
 // Definitions for class CStateBriefing
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CWorldManager.h"
 
 // Definitions for class CWorldManager
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CRiver.h"
 
 // Definitions for class CRiver
 

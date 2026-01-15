@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CTrace.h"
 
 // Definitions for class CTrace
 

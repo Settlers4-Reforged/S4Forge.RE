@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CFileMgr.h"
 
 // Definitions for class CFileMgr
 

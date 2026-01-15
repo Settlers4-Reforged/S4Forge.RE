@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CVCRecorder.h"
 
 // Definitions for class CVCRecorder
 

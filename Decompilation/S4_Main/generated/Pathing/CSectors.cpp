@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CSectors.h"
 
 // Definitions for class CSectors
 

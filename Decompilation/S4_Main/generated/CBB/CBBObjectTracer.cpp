@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CBBObjectTracer.h"
 
 // Definitions for class CBBObjectTracer
 

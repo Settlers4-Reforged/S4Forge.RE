@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CDiggerRole.h"
 
 // Definitions for class CDiggerRole
 

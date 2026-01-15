@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CMapFile.h"
 
 // Definitions for class CMapFile
 

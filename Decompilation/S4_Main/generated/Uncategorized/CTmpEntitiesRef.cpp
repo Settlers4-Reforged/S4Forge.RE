@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CTmpEntitiesRef.h"
 
 // Definitions for class CTmpEntitiesRef
 

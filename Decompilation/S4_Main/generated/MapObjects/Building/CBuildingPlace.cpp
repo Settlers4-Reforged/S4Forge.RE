@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CBuildingPlace.h"
 
 // Definitions for class CBuildingPlace
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CAddOn.h"
 
 // Definitions for class CAddOn
 

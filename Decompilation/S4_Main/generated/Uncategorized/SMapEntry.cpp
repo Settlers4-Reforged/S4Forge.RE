@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "SMapEntry.h"
 
 // Definitions for class SMapEntry
 

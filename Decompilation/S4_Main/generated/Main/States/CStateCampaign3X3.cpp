@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CStateCampaign3X3.h"
 
 // Definitions for class CStateCampaign3X3
 

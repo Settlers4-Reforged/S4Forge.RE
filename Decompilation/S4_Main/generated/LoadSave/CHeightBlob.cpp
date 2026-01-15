@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CHeightBlob.h"
 
 // Definitions for class CHeightBlob
 

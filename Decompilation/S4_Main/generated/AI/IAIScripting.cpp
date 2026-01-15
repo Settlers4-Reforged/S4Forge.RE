@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "IAIScripting.h"
 
 // Definitions for class IAIScripting
 

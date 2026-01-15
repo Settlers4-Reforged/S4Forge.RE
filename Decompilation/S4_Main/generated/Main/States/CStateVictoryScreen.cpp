@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CStateVictoryScreen.h"
 
 // Definitions for class CStateVictoryScreen
 

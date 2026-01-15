@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CTilingWorld.h"
 
 // Definitions for class CTilingWorld
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CStone.h"
 
 // Definitions for class CStone
 

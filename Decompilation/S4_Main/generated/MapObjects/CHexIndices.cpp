@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CHexIndices.h"
 
 // Definitions for class CHexIndices
 

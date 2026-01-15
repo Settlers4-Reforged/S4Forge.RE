@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CEndStatistic.h"
 
 // Definitions for class CEndStatistic
 

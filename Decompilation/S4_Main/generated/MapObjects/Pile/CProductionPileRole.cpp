@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CProductionPileRole.h"
 
 // Definitions for class CProductionPileRole
 

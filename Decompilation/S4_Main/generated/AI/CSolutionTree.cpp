@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CSolutionTree.h"
 
 // Definitions for class CSolutionTree
 

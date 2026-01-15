@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CEcoManagerTree.h"
 
 // Definitions for class CEcoManagerTree
 

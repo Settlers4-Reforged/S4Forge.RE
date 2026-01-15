@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "IFlyingEntity.h"
 
 // Definitions for class IFlyingEntity
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CFilterNearCustomer.h"
 
 // Definitions for class CFilterNearCustomer
 

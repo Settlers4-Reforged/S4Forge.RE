@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "LZBuffer.h"
 
 // Definitions for class LZBuffer
 

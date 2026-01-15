@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CAIPlayerEvaluation.h"
 
 // Definitions for class CAIPlayerEvaluation
 

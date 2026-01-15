@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CGfxManager.h"
 
 // Definitions for class CGfxManager
 

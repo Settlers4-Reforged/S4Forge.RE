@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CResourceCollectorInfo.h"
 
 // Definitions for class CResourceCollectorInfo
 

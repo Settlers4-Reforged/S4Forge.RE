@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CGameScriptManager.h"
 
 // Definitions for class CGameScriptManager
 

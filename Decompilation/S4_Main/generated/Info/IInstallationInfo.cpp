@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "IInstallationInfo.h"
 
 // Definitions for class IInstallationInfo
 

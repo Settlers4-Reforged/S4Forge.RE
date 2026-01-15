@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CBBObject.h"
 
 // Definitions for class CBBObject
 

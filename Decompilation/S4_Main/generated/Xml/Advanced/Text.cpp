@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "Text.h"
 
 // Definitions for class Text
 

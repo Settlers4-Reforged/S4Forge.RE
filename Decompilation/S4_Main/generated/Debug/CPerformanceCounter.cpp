@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CPerformanceCounter.h"
 
 // Definitions for class CPerformanceCounter
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CMaterialManagerTask.h"
 
 // Definitions for class CMaterialManagerTask
 

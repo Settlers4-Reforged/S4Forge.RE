@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "IErrorMessages.h"
 
 // Definitions for class IErrorMessages
 

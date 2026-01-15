@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CSettlerSpiralWalk.h"
 
 // Definitions for class CSettlerSpiralWalk
 

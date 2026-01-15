@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CAIWatchTower.h"
 
 // Definitions for class CAIWatchTower
 

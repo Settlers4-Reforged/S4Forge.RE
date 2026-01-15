@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CLanLobbyConnect.h"
 
 // Definitions for class CLanLobbyConnect
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CAddVehicleBarInfo.h"
 
 // Definitions for class CAddVehicleBarInfo
 

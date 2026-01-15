@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "IScheduleEntry.h"
 
 // Definitions for class IScheduleEntry
 

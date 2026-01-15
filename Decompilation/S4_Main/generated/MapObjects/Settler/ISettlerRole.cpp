@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "ISettlerRole.h"
 
 // Definitions for class ISettlerRole
 

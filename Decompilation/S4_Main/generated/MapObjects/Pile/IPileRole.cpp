@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "IPileRole.h"
 
 // Definitions for class IPileRole
 

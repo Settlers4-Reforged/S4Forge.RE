@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "IHJBMgr.h"
 
 // Definitions for class IHJBMgr
 

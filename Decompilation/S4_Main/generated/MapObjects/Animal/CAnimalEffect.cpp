@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CAnimalEffect.h"
 
 // Definitions for class CAnimalEffect
 

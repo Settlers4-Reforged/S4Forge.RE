@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CRegistry.h"
 
 // Definitions for class CRegistry
 

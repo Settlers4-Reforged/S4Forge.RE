@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CDoorRole.h"
 
 // Definitions for class CDoorRole
 

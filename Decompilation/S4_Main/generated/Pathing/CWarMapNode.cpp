@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CWarMapNode.h"
 
 // Definitions for class CWarMapNode
 

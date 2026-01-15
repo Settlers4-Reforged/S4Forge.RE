@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CAnyWherePileRole.h"
 
 // Definitions for class CAnyWherePileRole
 

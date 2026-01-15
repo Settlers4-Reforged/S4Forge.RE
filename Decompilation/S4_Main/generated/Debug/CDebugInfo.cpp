@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CDebugInfo.h"
 
 // Definitions for class CDebugInfo
 

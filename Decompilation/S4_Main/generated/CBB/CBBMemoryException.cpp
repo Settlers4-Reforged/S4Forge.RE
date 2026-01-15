@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CBBMemoryException.h"
 
 // Definitions for class CBBMemoryException
 

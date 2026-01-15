@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CMirrorBasicGrid.h"
 
 // Definitions for class CMirrorBasicGrid
 

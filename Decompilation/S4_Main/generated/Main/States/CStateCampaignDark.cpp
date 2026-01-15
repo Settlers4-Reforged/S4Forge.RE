@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CStateCampaignDark.h"
 
 // Definitions for class CStateCampaignDark
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CWarriorEntitySpiralWalk.h"
 
 // Definitions for class CWarriorEntitySpiralWalk
 

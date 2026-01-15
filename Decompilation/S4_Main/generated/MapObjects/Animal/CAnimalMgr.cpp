@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CAnimalMgr.h"
 
 // Definitions for class CAnimalMgr
 

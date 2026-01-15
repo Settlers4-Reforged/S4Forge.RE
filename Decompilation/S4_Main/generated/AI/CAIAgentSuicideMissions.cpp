@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CAIAgentSuicideMissions.h"
 
 // Definitions for class CAIAgentSuicideMissions
 

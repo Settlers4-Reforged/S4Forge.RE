@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CDecoObjMgr.h"
 
 // Definitions for class CDecoObjMgr
 

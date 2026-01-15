@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CBuildingSupplyPriority.h"
 
 // Definitions for class CBuildingSupplyPriority
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "BadClassID.h"
 
 // Definitions for class BadClassID
 

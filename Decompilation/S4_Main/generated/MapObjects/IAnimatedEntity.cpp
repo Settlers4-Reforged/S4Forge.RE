@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "IAnimatedEntity.h"
 
 // Definitions for class IAnimatedEntity
 

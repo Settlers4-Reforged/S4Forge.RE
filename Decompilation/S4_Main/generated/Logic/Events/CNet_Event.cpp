@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CNet_Event.h"
 
 // Definitions for class CNet_Event
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CDeliverPileRole.h"
 
 // Definitions for class CDeliverPileRole
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CPioneerRole.h"
 
 // Definitions for class CPioneerRole
 

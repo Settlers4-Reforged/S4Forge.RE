@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CBuildingSiteInfo.h"
 
 // Definitions for class CBuildingSiteInfo
 

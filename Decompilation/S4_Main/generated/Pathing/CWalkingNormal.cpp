@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CWalkingNormal.h"
 
 // Definitions for class CWalkingNormal
 

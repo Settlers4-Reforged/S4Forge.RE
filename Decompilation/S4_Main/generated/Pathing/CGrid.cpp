@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CGrid.h"
 
 // Definitions for class CGrid
 

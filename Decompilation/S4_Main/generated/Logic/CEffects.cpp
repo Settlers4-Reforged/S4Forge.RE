@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CEffects.h"
 
 // Definitions for class CEffects
 

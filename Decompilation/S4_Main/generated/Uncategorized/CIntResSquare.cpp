@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CIntResSquare.h"
 
 // Definitions for class CIntResSquare
 

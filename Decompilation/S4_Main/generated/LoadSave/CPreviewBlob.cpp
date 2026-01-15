@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CPreviewBlob.h"
 
 // Definitions for class CPreviewBlob
 

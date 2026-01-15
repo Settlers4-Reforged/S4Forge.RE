@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "ITiling.h"
 
 // Definitions for class ITiling
 

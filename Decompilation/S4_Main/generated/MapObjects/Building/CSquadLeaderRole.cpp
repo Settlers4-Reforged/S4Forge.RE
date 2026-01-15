@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CSquadLeaderRole.h"
 
 // Definitions for class CSquadLeaderRole
 

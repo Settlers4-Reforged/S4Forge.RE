@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CStateMDBriefing.h"
 
 // Definitions for class CStateMDBriefing
 

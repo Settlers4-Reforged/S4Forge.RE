@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CSlaveRole.h"
 
 // Definitions for class CSlaveRole
 

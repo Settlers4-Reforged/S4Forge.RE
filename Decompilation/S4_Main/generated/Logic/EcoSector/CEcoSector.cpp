@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CEcoSector.h"
 
 // Definitions for class CEcoSector
 

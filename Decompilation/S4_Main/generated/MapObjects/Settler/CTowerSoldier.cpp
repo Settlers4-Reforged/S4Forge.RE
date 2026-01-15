@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CTowerSoldier.h"
 
 // Definitions for class CTowerSoldier
 

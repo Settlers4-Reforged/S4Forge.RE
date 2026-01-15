@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CGroupDestinations.h"
 
 // Definitions for class CGroupDestinations
 

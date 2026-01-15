@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CBlob.h"
 
 // Definitions for class CBlob
 

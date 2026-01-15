@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CVoiceChat.h"
 
 // Definitions for class CVoiceChat
 

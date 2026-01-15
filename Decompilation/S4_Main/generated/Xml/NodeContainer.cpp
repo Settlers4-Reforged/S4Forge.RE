@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "NodeContainer.h"
 
 // Definitions for class NodeContainer
 

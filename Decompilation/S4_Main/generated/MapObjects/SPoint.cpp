@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "SPoint.h"
 
 // Definitions for class SPoint
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CHJBRole.h"
 
 // Definitions for class CHJBRole
 

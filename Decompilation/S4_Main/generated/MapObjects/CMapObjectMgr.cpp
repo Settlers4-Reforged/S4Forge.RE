@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CMapObjectMgr.h"
 
 // Definitions for class CMapObjectMgr
 

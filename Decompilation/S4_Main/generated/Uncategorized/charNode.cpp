@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "charNode.h"
 
 // Definitions for class charNode
 

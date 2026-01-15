@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "DName.h"
 
 // Definitions for class DName
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CSaboteurRole.h"
 
 // Definitions for class CSaboteurRole
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CHouseWorkerRole.h"
 
 // Definitions for class CHouseWorkerRole
 

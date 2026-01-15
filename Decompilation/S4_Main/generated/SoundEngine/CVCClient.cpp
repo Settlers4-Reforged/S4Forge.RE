@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CVCClient.h"
 
 // Definitions for class CVCClient
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CDestructionManager.h"
 
 // Definitions for class CDestructionManager
 

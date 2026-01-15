@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CSavedPlayer.h"
 
 // Definitions for class CSavedPlayer
 

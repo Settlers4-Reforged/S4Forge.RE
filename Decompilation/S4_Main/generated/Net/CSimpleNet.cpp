@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CSimpleNet.h"
 
 // Definitions for class CSimpleNet
 

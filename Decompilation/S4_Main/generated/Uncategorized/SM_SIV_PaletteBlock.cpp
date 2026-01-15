@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "SM_SIV_PaletteBlock.h"
 
 // Definitions for class SM_SIV_PaletteBlock
 

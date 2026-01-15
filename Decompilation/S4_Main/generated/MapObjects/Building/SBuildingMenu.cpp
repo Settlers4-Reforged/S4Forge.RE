@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "SBuildingMenu.h"
 
 // Definitions for class SBuildingMenu
 

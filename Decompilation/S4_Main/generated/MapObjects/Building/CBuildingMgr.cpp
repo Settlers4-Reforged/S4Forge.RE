@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CBuildingMgr.h"
 
 // Definitions for class CBuildingMgr
 

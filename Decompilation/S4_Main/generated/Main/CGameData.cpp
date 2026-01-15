@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CGameData.h"
 
 // Definitions for class CGameData
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CSettlerStatisticInfo.h"
 
 // Definitions for class CSettlerStatisticInfo
 

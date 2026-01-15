@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CRCTable.h"
 
 // Definitions for class CRCTable
 

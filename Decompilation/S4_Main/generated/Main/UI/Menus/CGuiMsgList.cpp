@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CGuiMsgList.h"
 
 // Definitions for class CGuiMsgList
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CSquareVisited.h"
 
 // Definitions for class CSquareVisited
 

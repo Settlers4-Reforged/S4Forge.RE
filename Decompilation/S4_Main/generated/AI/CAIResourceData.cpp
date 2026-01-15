@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CAIResourceData.h"
 
 // Definitions for class CAIResourceData
 

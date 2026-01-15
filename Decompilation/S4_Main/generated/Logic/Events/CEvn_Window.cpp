@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CEvn_Window.h"
 
 // Definitions for class CEvn_Window
 

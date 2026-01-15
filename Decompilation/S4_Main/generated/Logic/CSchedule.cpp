@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CSchedule.h"
 
 // Definitions for class CSchedule
 

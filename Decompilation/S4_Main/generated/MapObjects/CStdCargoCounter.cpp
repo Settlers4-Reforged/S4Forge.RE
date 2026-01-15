@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CStdCargoCounter.h"
 
 // Definitions for class CStdCargoCounter
 

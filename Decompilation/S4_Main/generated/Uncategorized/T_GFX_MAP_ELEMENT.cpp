@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "T_GFX_MAP_ELEMENT.h"
 
 // Definitions for class T_GFX_MAP_ELEMENT
 

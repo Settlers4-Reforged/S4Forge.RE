@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CConfigFile.h"
 
 // Definitions for class CConfigFile
 

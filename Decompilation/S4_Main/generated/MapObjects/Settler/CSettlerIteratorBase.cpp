@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CSettlerIteratorBase.h"
 
 // Definitions for class CSettlerIteratorBase
 

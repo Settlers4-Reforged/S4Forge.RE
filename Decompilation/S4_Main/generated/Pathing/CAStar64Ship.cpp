@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CAStar64Ship.h"
 
 // Definitions for class CAStar64Ship
 

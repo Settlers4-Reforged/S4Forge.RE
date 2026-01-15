@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CGeologistRole.h"
 
 // Definitions for class CGeologistRole
 

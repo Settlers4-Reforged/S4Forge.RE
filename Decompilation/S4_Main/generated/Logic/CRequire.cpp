@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CRequire.h"
 
 // Definitions for class CRequire
 

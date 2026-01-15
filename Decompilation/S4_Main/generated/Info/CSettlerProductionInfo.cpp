@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CSettlerProductionInfo.h"
 
 // Definitions for class CSettlerProductionInfo
 

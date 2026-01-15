@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "COneVehicleTypeIterator.h"
 
 // Definitions for class COneVehicleTypeIterator
 

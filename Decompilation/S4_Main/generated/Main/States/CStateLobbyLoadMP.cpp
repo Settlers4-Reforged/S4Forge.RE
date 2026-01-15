@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CStateLobbyLoadMP.h"
 
 // Definitions for class CStateLobbyLoadMP
 

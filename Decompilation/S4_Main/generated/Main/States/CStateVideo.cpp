@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CStateVideo.h"
 
 // Definitions for class CStateVideo
 

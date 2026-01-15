@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CDonkeyRole.h"
 
 // Definitions for class CDonkeyRole
 

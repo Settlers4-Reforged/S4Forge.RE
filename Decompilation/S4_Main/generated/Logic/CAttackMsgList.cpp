@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CAttackMsgList.h"
 
 // Definitions for class CAttackMsgList
 

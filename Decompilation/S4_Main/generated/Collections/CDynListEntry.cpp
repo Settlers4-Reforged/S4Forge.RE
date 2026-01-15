@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CDynListEntry.h"
 
 // Definitions for class CDynListEntry
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CStateMainMenu.h"
 
 // Definitions for class CStateMainMenu
 

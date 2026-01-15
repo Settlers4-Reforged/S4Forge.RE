@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CInterfaceD3D.h"
 
 // Definitions for class CInterfaceD3D
 

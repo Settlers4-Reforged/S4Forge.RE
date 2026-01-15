@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CAIPlayerAI.h"
 
 // Definitions for class CAIPlayerAI
 

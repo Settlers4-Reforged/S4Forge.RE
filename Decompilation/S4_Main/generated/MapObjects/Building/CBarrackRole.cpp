@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CBarrackRole.h"
 
 // Definitions for class CBarrackRole
 

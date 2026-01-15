@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "IEventHandler.h"
 
 // Definitions for class IEventHandler
 

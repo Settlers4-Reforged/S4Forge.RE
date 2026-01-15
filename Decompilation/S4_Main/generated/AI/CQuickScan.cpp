@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CQuickScan.h"
 
 // Definitions for class CQuickScan
 

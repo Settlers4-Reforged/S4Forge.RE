@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "IScriptFile.h"
 
 // Definitions for class IScriptFile
 

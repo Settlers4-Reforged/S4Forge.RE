@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "Dtd.h"
 
 // Definitions for class Dtd
 

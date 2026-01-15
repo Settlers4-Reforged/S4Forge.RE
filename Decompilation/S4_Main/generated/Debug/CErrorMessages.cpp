@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CErrorMessages.h"
 
 // Definitions for class CErrorMessages
 

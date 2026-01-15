@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CPlant.h"
 
 // Definitions for class CPlant
 

@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CAStar64Worker.h"
 
 // Definitions for class CAStar64Worker
 

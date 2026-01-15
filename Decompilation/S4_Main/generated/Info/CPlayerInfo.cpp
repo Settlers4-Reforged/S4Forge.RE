@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CPlayerInfo.h"
 
 // Definitions for class CPlayerInfo
 

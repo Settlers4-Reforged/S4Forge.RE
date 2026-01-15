@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CHistorySolution.h"
 
 // Definitions for class CHistorySolution
 

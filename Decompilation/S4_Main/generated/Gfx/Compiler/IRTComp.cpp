@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "IRTComp.h"
 
 // Definitions for class IRTComp
 

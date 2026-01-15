@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CSaveGameContext.h"
 
 // Definitions for class CSaveGameContext
 

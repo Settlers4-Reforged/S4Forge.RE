@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CDestructor.h"
 
 // Definitions for class CDestructor
 

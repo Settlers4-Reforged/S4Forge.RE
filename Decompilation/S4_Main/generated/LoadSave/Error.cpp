@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "Error.h"
 
 // Definitions for class Error
 

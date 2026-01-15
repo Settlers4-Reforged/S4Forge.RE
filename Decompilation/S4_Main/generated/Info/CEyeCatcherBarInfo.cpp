@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CEyeCatcherBarInfo.h"
 
 // Definitions for class CEyeCatcherBarInfo
 

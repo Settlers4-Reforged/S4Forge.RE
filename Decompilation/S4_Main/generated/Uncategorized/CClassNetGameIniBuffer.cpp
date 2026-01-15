@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CClassNetGameIniBuffer.h"
 
 // Definitions for class CClassNetGameIniBuffer
 

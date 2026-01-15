@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CConfigManager.h"
 
 // Definitions for class CConfigManager
 

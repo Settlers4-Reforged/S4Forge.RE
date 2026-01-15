@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "SPlayerEntry.h"
 
 // Definitions for class SPlayerEntry
 

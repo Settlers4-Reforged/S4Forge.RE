@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CInternationalTrader.h"
 
 // Definitions for class CInternationalTrader
 

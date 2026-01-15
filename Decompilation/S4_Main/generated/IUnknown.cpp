@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "IUnknown.h"
 
 // Definitions for class IUnknown
 

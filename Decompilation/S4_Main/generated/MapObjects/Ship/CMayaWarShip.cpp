@@ -1,4 +1,4 @@
-#include "all_headers.h"
+#include "CMayaWarShip.h"
 
 // Definitions for class CMayaWarShip
 
