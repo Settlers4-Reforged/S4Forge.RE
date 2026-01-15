@@ -6,6 +6,10 @@ public:
     // address=[0x26164b0]
      IAudioEndpointVolumeCallback(void);
 
+    // Type information members
+private:
+    struct IAudioEndpointVolumeCallbackVtbl * lpVtbl;
+
 };
 
 

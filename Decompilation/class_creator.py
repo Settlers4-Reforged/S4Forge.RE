@@ -1,5 +1,6 @@
 import ida_hexrays
 import ida_bytes
+import ida_typeinf
 import idautils
 import idc
 import os
@@ -1111,6 +1112,30 @@ def get_function_definition(ea):
     pseudocode_text = str(cfunc)
     return pseudocode_text
 
+def get_class_members(class_name: str):
+    tif = ida_typeinf.tinfo_t()
+    if not tif.get_named_type(class_name) or not tif.is_struct():
+        return []
+
+    udt = ida_typeinf.udt_type_data_t()
+    if not tif.get_udt_details(udt):
+        return []
+
+    members = []
+    for i in range(udt.size()):
+        member = udt[i]
+        member_name = member.name
+        if member_name == "":
+            continue # skip base classes
+
+        if member_name.startswith("__"):
+            continue # skip vtable and other compiler-generated members
+
+        member_type = member.type
+        type_str = member_type.dstr()
+        members.append((type_str, member_name))
+
+    return members
 
 # --------------------------------------------
 seen_destructors = set()
@@ -1319,6 +1344,14 @@ def write_class_headers(classes, generated_headers):
 
                         f.write(f"    {clean_decl};\n\n")
 
+            type_members = get_class_members(class_name)
+            if type_members:
+                f.write("    // Type information members\n")
+                f.write("private:\n")
+                for type_str, member_name in type_members:
+                    f.write(f"    {type_str} {member_name};\n")
+                f.write("\n")
+
             f.write("};\n\n")
 
             close_namespaces(f, namespaces)
@@ -1347,6 +1380,31 @@ def strip_for_decompilation(method_name: str) -> str:
     
     return method_name
 
+def strip_destructor(func: str) -> str:
+    """Strips unnecessary parts from destructor for decompilation"""
+    
+    # Destructors look like this in MSVC decompilation:
+    # ClassName::`scalar deleting destructor'(pointer) for ClassName, with optional other params
+    # We want to convert it to:
+    # delete pointer;
+    # There is also vector deleting destructor, which is similar.
+    # It will be converted to delete[] pointer;
+
+    # The func can contain multiple destructors
+
+    pattern = re.compile(r"(\w+)::`(scalar|vector) deleting destructor'\(([^,]+).+\)")
+    def replacer(match):
+        # class_name = match.group(1)
+        delete_type = match.group(2)
+        pointer = match.group(3).strip()
+
+        if delete_type == "scalar":
+            return f"delete {pointer}"
+        else:
+            return f"delete[] {pointer}"
+    
+    return pattern.sub(replacer, func)
+
 def write_class_definitions(classes):
     for (namespaces, class_name), members in classes.items():
 
@@ -1356,7 +1414,7 @@ def write_class_definitions(classes):
 
         with open(abs_path, "w", encoding="utf-8") as f:
             f.write(f"#include \"{class_name}.h\"\n\n")
-            
+
             f.write(f"// Definitions for class {class_name}\n\n")
 
             for access in ("public", "protected", "private"):
@@ -1382,6 +1440,8 @@ def write_class_definitions(classes):
 
                     func_name = func_name.strip().replace("\n", " ")
                     f.write(f"// Decompiled from {func_name}\n")
+                    
+                    func = strip_destructor(func)
                     f.write(f"{func}\n\n")
 
 

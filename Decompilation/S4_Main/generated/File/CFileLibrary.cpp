@@ -271,7 +271,7 @@ void  CFileLibrary::FileClose(unsigned int) {
         *((_DWORD *)v3 + 6) = *((_DWORD *)v4 + 6);
       else
         *((_DWORD *)this + a2 % 0x64 + 14) = *((_DWORD *)v4 + 6);
-      return (CFileLibrary *)FLIntHandleStruct::`scalar deleting destructor'(v4, 1u);
+      return (CFileLibrary *)delete v4;
     }
     result = v4;
     v3 = v4;
@@ -655,11 +655,7 @@ int  CFileLibrary::AddFileLibrary(wchar_t const *,int) {
       v82 = 0;
       if ( v57 )
       {
-        `vector constructor iterator'(
-          v57,
-          0x18u,
-          v47,
-          (void *(__thiscall *)(void *))FLLibraryFileStruct::FLLibraryFileStruct);
+        _vec_ctor_no(v57, 0x18u, v47, (void *(__thiscall *)(void *))FLLibraryFileStruct::FLLibraryFileStruct);
         v46 = v57;
       }
       else
@@ -727,11 +723,7 @@ int  CFileLibrary::AddFileLibrary(wchar_t const *,int) {
               v82 = 1;
               if ( v54 )
               {
-                `vector constructor iterator'(
-                  v54,
-                  0x18u,
-                  v43,
-                  (void *(__thiscall *)(void *))FLHeaderFileStruct::FLHeaderFileStruct);
+                _vec_ctor_no(v54, 0x18u, v43, (void *(__thiscall *)(void *))FLHeaderFileStruct::FLHeaderFileStruct);
                 v44 = v54;
               }
               else
@@ -1684,7 +1676,7 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const *,char *,int,int) {
       v23 = v24;
       v54 = v24;
       if ( v24 )
-        FLDirListStruct::`scalar deleting destructor'(v54, 1u);
+        delete v54;
     }
     v91 = *(_DWORD *)(v91 + 16);
   }
@@ -1769,11 +1761,7 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const *,char *,int,int) {
       v115 = 9;
       if ( v62 )
       {
-        `vector constructor iterator'(
-          v62,
-          0x18u,
-          v50,
-          (void *(__thiscall *)(void *))FLHeaderFileStruct::FLHeaderFileStruct);
+        _vec_ctor_no(v62, 0x18u, v50, (void *(__thiscall *)(void *))FLHeaderFileStruct::FLHeaderFileStruct);
         v49 = v62;
       }
       else
@@ -1832,7 +1820,7 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const *,char *,int,int) {
     v84 = (FLDirListStruct *)*((_DWORD *)v84 + 3);
     v32 = v19;
     v48 = v19;
-    v31 = FLDirListStruct::`scalar deleting destructor'(v19, 1u);
+    v31 = delete v19;
   }
   if ( v95 )
   {
@@ -2237,14 +2225,14 @@ void  CFileLibrary::pFreeFLCreationData(void) {
     v4 = (FLPathListStruct *)*((_DWORD *)this + 5);
     *((_DWORD *)this + 5) = *((_DWORD *)v4 + 4);
     if ( v4 )
-      FLPathListStruct::`scalar deleting destructor'(v4, 1u);
+      delete v4;
   }
   while ( *((_DWORD *)this + 6) )
   {
     v3 = (FLDirListStruct *)*((_DWORD *)this + 6);
     *((_DWORD *)this + 6) = *((_DWORD *)v3 + 3);
     if ( v3 )
-      FLDirListStruct::`scalar deleting destructor'(v3, 1u);
+      delete v3;
   }
   while ( 1 )
   {
@@ -2254,7 +2242,7 @@ void  CFileLibrary::pFreeFLCreationData(void) {
     v2 = (FLFileListStruct *)*((_DWORD *)this + 7);
     *((_DWORD *)this + 7) = *((_DWORD *)v2 + 5);
     if ( v2 )
-      FLFileListStruct::`scalar deleting destructor'(v2, 1u);
+      delete v2;
   }
   return result;
 }
@@ -2332,7 +2320,7 @@ void  CFileLibrary::pFreeFLData(void) {
     {
       v2 = v5;
       v5 = (FLIntHandleStruct *)*((_DWORD *)v5 + 6);
-      FLIntHandleStruct::`scalar deleting destructor'(v2, 1u);
+      delete v2;
     }
     *((_DWORD *)this + n + 14) = 0;
   }
@@ -2365,7 +2353,7 @@ void  CFileLibrary::pOptimize(void) {
     v8 = operator new[](16 * v5);
     if ( v8 )
     {
-      `vector constructor iterator'(v8, 0x10u, v5, (void *(__thiscall *)(void *))FLMemDirStruct::FLMemDirStruct);
+      _vec_ctor_no(v8, 0x10u, v5, (void *(__thiscall *)(void *))FLMemDirStruct::FLMemDirStruct);
       v4 = v8;
     }
     else
@@ -2391,7 +2379,7 @@ void  CFileLibrary::pOptimize(void) {
         v6 = operator new[](32 * v3);
         if ( v6 )
         {
-          `vector constructor iterator'(v6, 0x20u, v3, (void *(__thiscall *)(void *))FLMemFileStruct::FLMemFileStruct);
+          _vec_ctor_no(v6, 0x20u, v3, (void *(__thiscall *)(void *))FLMemFileStruct::FLMemFileStruct);
           v2 = v6;
         }
         else

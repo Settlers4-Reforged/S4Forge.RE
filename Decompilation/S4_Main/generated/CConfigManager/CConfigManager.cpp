@@ -36,14 +36,14 @@
     {
       v8 = v10;
       v9 = v10;
-      v7 = CConfigSection::`scalar deleting destructor'(1);
+      v7 = delete 1);
     }
     std::_List_iterator<std::_List_val<std::_List_simple_types<CConfigSection *>>>::operator++(v6);
   }
   std::_List_iterator<std::_List_val<std::_List_simple_types<CConfigSection *>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CConfigSection *>>>(v6);
   std::list<CConfigSection *>::clear();
   std::list<CConfigSection *>::~list<CConfigSection *>();
-  std::map<std::string,int>::~map<std::string,int>(v11 + 1);
+  std::map<std::string;
   return IConfigManager::~IConfigManager(v11);
 }
 

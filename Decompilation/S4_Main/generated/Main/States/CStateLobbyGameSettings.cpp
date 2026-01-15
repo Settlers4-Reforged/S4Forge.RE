@@ -33,13 +33,13 @@ static class CGameState * __cdecl CStateLobbyGameSettings::DynamicCreateFunc(voi
   CGuiGameState::CGuiGameState(this);
   v15 = 0;
   *(_DWORD *)this = &CStateLobbyGameSettings::_vftable_;
-  `eh vector constructor iterator'(
+  _vec_ctor(
     (char *)this + 4,
     0x844u,
     8u,
     CLanLobbyGameSettings::SPlayerEntry::SPlayerEntry,
     (void (__thiscall *)(void *))CLanLobbyGameSettings::SPlayerEntry::~SPlayerEntry);
-  `eh vector constructor iterator'((char *)this + 16944, 0x1Cu, 0x3E8u, std::wstring::wstring, std::wstring::~wstring);
+  _vec_ctor((char *)this + 16944, 0x1Cu, 0x3E8u, std::wstring::wstring, std::wstring::~wstring);
   LOBYTE(v15) = 2;
   if ( (unsigned __int8)CGameType::IsMultiplayerGame(g_pGameType) )
   {
@@ -185,7 +185,7 @@ bool  CStateLobbyGameSettings::Perform(void) {
     g_pNetworkEngine = 0;
     if ( !g_pGameType )
       return 1;
-    CGameType::`scalar deleting destructor'((CGameType *)g_pGameType, 1u);
+    delete (CGameType *)g_pGameType;
     g_pGameType = 0;
     return 1;
   }
@@ -408,7 +408,7 @@ bool  CStateLobbyGameSettings::OnEvent(class CEvn_Event &) {
         g_pNetworkEngine = 0;
         if ( g_pGameType )
         {
-          CGameType::`scalar deleting destructor'((CGameType *)g_pGameType, 1u);
+          delete (CGameType *)g_pGameType;
           g_pGameType = 0;
         }
         result = 1;

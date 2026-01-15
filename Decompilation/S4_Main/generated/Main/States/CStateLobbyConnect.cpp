@@ -31,7 +31,7 @@ static class CGameState * __cdecl CStateLobbyConnect::DynamicCreateFunc(void *) 
   CGuiGameState::CGuiGameState(this);
   v13 = 0;
   *(_DWORD *)this = &CStateLobbyConnect::_vftable_;
-  `eh vector constructor iterator'(
+  _vec_ctor(
     (char *)this + 4,
     0x8Cu,
     0x14u,
@@ -301,7 +301,7 @@ bool  CStateLobbyConnect::OnEvent(class CEvn_Event &) {
       if ( g_pGameType )
       {
         v44 = g_pGameType;
-        v43 = CGameType::`scalar deleting destructor'((CGameType *)g_pGameType, 1u);
+        v43 = delete (CGameType *)g_pGameType;
         g_pGameType = 0;
       }
       result = 1;
@@ -351,7 +351,7 @@ bool  CStateLobbyConnect::OnEvent(class CEvn_Event &) {
           v37 = g_pGameType;
           v51 = (CGameType *)g_pGameType;
           if ( g_pGameType )
-            v36 = CGameType::`scalar deleting destructor'(v51, 1u);
+            v36 = delete v51;
           else
             v36 = 0;
           v50 = operator new(0x620u);
@@ -401,7 +401,7 @@ bool  CStateLobbyConnect::OnEvent(class CEvn_Event &) {
       {
         v34 = g_pGameType;
         v48 = g_pGameType;
-        v33 = CGameType::`scalar deleting destructor'((CGameType *)g_pGameType, 1u);
+        v33 = delete (CGameType *)g_pGameType;
         g_pGameType = 0;
       }
       v25 = &v14;
@@ -423,7 +423,7 @@ bool  CStateLobbyConnect::OnEvent(class CEvn_Event &) {
       {
         v42 = g_pGameType;
         v54 = g_pGameType;
-        v41 = CGameType::`scalar deleting destructor'((CGameType *)g_pGameType, 1u);
+        v41 = delete (CGameType *)g_pGameType;
         g_pGameType = 0;
       }
       v27 = &v14;

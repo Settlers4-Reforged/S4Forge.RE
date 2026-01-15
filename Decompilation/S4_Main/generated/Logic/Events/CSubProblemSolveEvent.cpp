@@ -36,7 +36,7 @@
   
   *this = (COptimizeOptions *)&CSubProblemSolveEvent::_vftable_;
   if ( this[25] )
-    COptimizeOptions::`scalar deleting destructor'(this[25], 1u);
+    delete this[25];
   IScheduleEntry::~IScheduleEntry((IScheduleEntry *)this);
 }
 

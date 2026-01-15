@@ -132,6 +132,63 @@ public:
     // address=[0x2f99720]
     int  GetCacheRetrys(void);
 
+    // Type information members
+private:
+    _DWORD field_0;
+    IDirectDraw7 * DDraw;
+    struct SurfaceClipper * Clipper1;
+    struct SurfaceClipper * field_C;
+    _BYTE[12] gap_9;
+    struct SurfaceClipper * MinimapClipper;
+    _BYTE[15] gap_1D;
+    _BYTE gap2F;
+    int LandscapeRenderDevice;
+    IDirectDrawSurface7 * LandscapeSurfacePtr;
+    int field_38;
+    _DWORD field_3C;
+    _DWORD field_40;
+    _DWORD field_44;
+    _DWORD field_48;
+    _DWORD field_4C;
+    float field_50;
+    IDirectDraw7 * DDraw7;
+    CSurfaceV7 * LandscapeSurface;
+    int field_5C;
+    CSurfaceV7 * LandscapeSurface2;
+    CSurfaceV7 * FinalRenderSurface;
+    int field_68;
+    CSurfaceV7 * PrimarySurface;
+    CSurfaceV7 *[44] LandscapeTextureTable;
+    CSurfaceV7 *[2] ObjectTextureTable;
+    CSurfaceV7 *[2] ObjectTextureSystemMemoryTable;
+    CSurfaceV7 * MiniMapSurface;
+    CSurfaceV7 * MiniMapAreaSurface;
+    DWORD[14] field_138;
+    CSurfaceV7 * MoveCursorSurface;
+    CSurfaceV7 * ZoomCursorSurface;
+    DWORD[180] field_178;
+    int field_448;
+    DWORD[180] field_44C;
+    char field_71C;
+    char field_71D;
+    _BYTE[5] field_71E;
+    char field_723;
+    DWORD[2] CCachePageManager;
+    int field_72C;
+    int field_730;
+    int field_734;
+    _BYTE[4] gap_738;
+    int field_73C;
+    char field_740;
+    char IsHQTextureSet;
+    char IsForceBlit;
+    char field_743;
+    struct CFixCursor * MoveCursor;
+    _BYTE[35] gap_745;
+    _BYTE gap76B;
+    struct CFixCursor * ZoomCursor;
+    _BYTE[35] gap_770;
+
 };
 
 

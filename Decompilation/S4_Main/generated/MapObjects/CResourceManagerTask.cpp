@@ -43,7 +43,7 @@
   
   *this = (CDynList *)&CResourceManagerTask::_vftable_;
   if ( this[19] )
-    CDynList::`scalar deleting destructor'(this[19], 1u);
+    delete this[19];
   if ( this[21] )
     (**(void (__thiscall ***)(CDynList *, int))this[21])(this[21], 1);
   this[18] = 0;

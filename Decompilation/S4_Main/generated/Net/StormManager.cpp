@@ -32,7 +32,7 @@ static void __cdecl StormManager::CreateInstance(void) {
 static void __cdecl StormManager::DestroyInstance(void) {
   
   if ( StormManager::m_instance )
-    StormManager::`scalar deleting destructor'((StormManager *)StormManager::m_instance, 1u);
+    delete (StormManager *)StormManager::m_instance;
 }
 
 

@@ -127,7 +127,7 @@ void  CGameScriptManager::SetVictoryConditionHook(void (__cdecl*)(void)) {
   
   IS4ChunkObject::IS4ChunkObject(this);
   *(_DWORD *)this = CGameScriptManager::_vftable_;
-  `vector constructor iterator'(
+  _vec_ctor_no(
     (char *)this + 28,
     0x44u,
     0x17u,
@@ -726,7 +726,7 @@ void  CGameScriptManager::Done(void) {
   {
     v2 = (CLua *)*((_DWORD *)this + 3);
     if ( v2 )
-      CLua::`scalar deleting destructor'(v2, 1u);
+      delete v2;
     *((_DWORD *)this + 3) = 0;
   }
   if ( *((_DWORD *)this + 5) )

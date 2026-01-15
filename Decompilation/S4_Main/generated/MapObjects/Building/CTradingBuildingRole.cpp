@@ -76,7 +76,7 @@ static class CTradingBuildingRole * __cdecl CTradingBuildingRole::Load(std::istr
   }
   if ( *((_DWORD *)this + 171) )
   {
-    CInternationalTrader::`scalar deleting destructor'(*((CInternationalTrader **)this + 171), 1u);
+    delete *((CInternationalTrader **)this + 171);
     *((_DWORD *)this + 171) = 0;
   }
   std::vector<CTradingBuildingRole::STradersEx>::~vector<CTradingBuildingRole::STradersEx>();

@@ -273,7 +273,7 @@ void  CPlaylist::FreeMemory(void) {
     v11 = *(CPlaylist::SEntry **)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CPlaylist::SEntry *>>>::operator*(v5);
     v14 = v11;
     if ( v11 )
-      v10 = CPlaylist::SEntry::`scalar deleting destructor'(v14, 1u);
+      v10 = CPlaylist::delete v14;
     else
       v10 = 0;
     v7 = v2;

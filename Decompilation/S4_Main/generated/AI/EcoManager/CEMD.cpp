@@ -6,19 +6,19 @@
 // Decompiled from CEcoManager::CEMD *__thiscall CEcoManager::CEMD::CEMD(CEcoManager::CEMD *this)
  CEcoManager::CEMD::CEMD(void) {
   
-  `eh vector constructor iterator'(
+  _vec_ctor(
     (char *)this + 760,
     0xA10u,
     0x53u,
     CAI_Ecosector_Grid_Iterator::CAI_Ecosector_Grid_Iterator,
     CAI_Ecosector_Grid_Iterator::~CAI_Ecosector_Grid_Iterator);
-  `eh vector constructor iterator'(
+  _vec_ctor(
     (char *)this + 214568,
     0x10u,
     0x53u,
     std::vector<SAI_ECO_POSS_BUILD_PLACE>::vector<SAI_ECO_POSS_BUILD_PLACE>,
     std::vector<SAI_ECO_POSS_BUILD_PLACE>::~vector<SAI_ECO_POSS_BUILD_PLACE>);
-  `eh vector constructor iterator'(
+  _vec_ctor(
     (char *)this + 215896,
     0x10u,
     0x53u,

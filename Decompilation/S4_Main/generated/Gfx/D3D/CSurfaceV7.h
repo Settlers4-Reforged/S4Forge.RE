@@ -75,6 +75,12 @@ public:
     // address=[0x2f8a340]
     virtual  ~CSurfaceV7(void);
 
+    // Type information members
+private:
+    LPDIRECTDRAWSURFACE7 innerSurface;
+    int field_8;
+    char field_C;
+
 };
 
 

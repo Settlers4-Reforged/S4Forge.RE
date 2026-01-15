@@ -69,6 +69,10 @@ private:
     // address=[0x2f26670]
     void  ParseRootElement(class AdvXMLParser::Parser &);
 
+    // Type information members
+private:
+    struct DocumentVtbl * lpVtbl;
+
 };
 
 } // namespace AdvXMLParser

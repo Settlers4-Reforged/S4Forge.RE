@@ -426,7 +426,7 @@ LABEL_12:
   {
     v1 = (CFsm *)*((_DWORD *)this + 3);
     if ( v1 )
-      CFsm::`scalar deleting destructor'(v1, 1u);
+      delete v1;
     *((_DWORD *)this + 3) = 0;
   }
   if ( *((_DWORD *)this + 18) )
@@ -1165,7 +1165,7 @@ bool  CGameHost::StartIniFileGame(wchar_t const *) {
     *(_BYTE *)(g_pGameType + 560) |= v48;
     g_uiExtrasAllowed = *(_BYTE *)(g_pGameType + 560);
   }
-  `eh vector constructor iterator'(v91, 0x1Cu, 9u, std::wstring::wstring, std::wstring::~wstring);
+  _vec_ctor(v91, 0x1Cu, 9u, std::wstring::wstring, std::wstring::~wstring);
   LOBYTE(v101) = 9;
   memset(v92, 0, sizeof(v92));
   for ( i = 0; (int)i < v62; ++i )
@@ -1974,7 +1974,7 @@ void  CGameHost::OnJoinedFromOnlineFlow(void) {
     v34 = g_pGameType;
     v39 = (CGameType *)g_pGameType;
     if ( g_pGameType )
-      v33 = CGameType::`scalar deleting destructor'(v39, 1u);
+      v33 = delete v39;
     else
       v33 = 0;
     v38 = operator new(0x620u);

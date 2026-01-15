@@ -115,6 +115,33 @@ protected:
     // address=[0x158afa0]
     virtual void  NewDestinationEx(class CSettler *,class std::list<class CEntityTask,class std::allocator<class CEntityTask> > &,int,int,int);
 
+    // Type information members
+private:
+    CHAR task;
+    BYTE settlerWalk;
+    BYTE walkspeed;
+    BYTE unk_07;
+    WORD unk_08;
+    BYTE unk_0A;
+    BYTE unk_0B;
+    BYTE unk_0C;
+    BYTE pad_0D;
+    WORD unk_0E;
+    WORD unk_10;
+    WORD unk_12;
+    WORD sourcePileId;
+    WORD pad_16;
+    DWORD destinationPosition;
+    DWORD startPosition;
+    WORD homeEntityId;
+    WORD entityId;
+    WORD unk_24;
+    WORD unk_26;
+    WORD unk_28;
+    WORD unk_2A;
+    DWORD unk_2c;
+    DWORD unk_30;
+
 };
 
 

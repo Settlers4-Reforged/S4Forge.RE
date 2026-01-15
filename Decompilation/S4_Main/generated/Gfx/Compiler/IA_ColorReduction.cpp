@@ -166,11 +166,7 @@ void  IA_ColorReduction::InitPalette(unsigned char * * const,unsigned int) {
   v14 = 0;
   if ( v11 )
   {
-    `vector constructor iterator'(
-      v11,
-      4u,
-      v10,
-      (void *(__thiscall *)(void *))IA_ColorReduction_Color::IA_ColorReduction_Color);
+    _vec_ctor_no(v11, 4u, v10, (void *(__thiscall *)(void *))IA_ColorReduction_Color::IA_ColorReduction_Color);
     v9 = v11;
   }
   else
@@ -278,7 +274,7 @@ void  IA_ColorReduction::DeleteNode(class IA_ColorReduction_Node *) {
         }
       }
     }
-    IA_ColorReduction_Node::`scalar deleting destructor'(a2, 1u);
+    delete a2;
   }
 }
 

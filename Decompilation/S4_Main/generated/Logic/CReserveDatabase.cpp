@@ -67,12 +67,12 @@ void  CReserveDatabase::UnpackPosition(int,int &,int &) {
   CDynList **result; // eax
 
   if ( *this )
-    CDynList::`scalar deleting destructor'(*this, 1u);
+    delete *this;
   if ( this[1] )
-    CDynList::`scalar deleting destructor'(this[1], 1u);
+    delete this[1];
   result = this;
   if ( this[2] )
-    return (CDynList **)CDynList::`scalar deleting destructor'(this[2], 1u);
+    return (CDynList **)delete this[2];
   return result;
 }
 
@@ -500,7 +500,7 @@ bool  CReserveDatabase::IsBuildingTypeInGrp(enum BUILDING_TYPES,int) {
   _DWORD v7[66]; // [esp+10h] [ebp-118h] BYREF
   int v8; // [esp+124h] [ebp-4h]
 
-  `eh vector constructor iterator'(v7, 0x2Cu, 6u, CReserveEntry::CReserveEntry, CReserveEntry::~CReserveEntry);
+  _vec_ctor(v7, 0x2Cu, 6u, CReserveEntry::CReserveEntry, CReserveEntry::~CReserveEntry);
   v8 = 0;
   for ( i = 0; i < 6; ++i )
     memset(&v7[11 * i], 0, 0x2Cu);

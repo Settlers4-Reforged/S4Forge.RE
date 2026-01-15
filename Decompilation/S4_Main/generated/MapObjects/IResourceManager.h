@@ -8,6 +8,10 @@ public:
     // address=[0x3026100]
      IResourceManager(void);
 
+    // Type information members
+private:
+    struct IResourceManagerVtbl * lpVtbl;
+
 };
 
 } // namespace Concurrency

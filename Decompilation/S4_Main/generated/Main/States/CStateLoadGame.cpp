@@ -259,7 +259,7 @@ static void __cdecl CStateLoadGame::DestroySaveList(void) {
   {
     if ( CStateLoadGame::m_stempSavePtr[i] )
     {
-      SSaveEntry::`scalar deleting destructor'((__ExceptionPtr *)CStateLoadGame::m_stempSavePtr[i], 1u);
+      delete (__ExceptionPtr *)CStateLoadGame::m_stempSavePtr[i];
       CStateLoadGame::m_stempSavePtr[i] = 0;
     }
   }

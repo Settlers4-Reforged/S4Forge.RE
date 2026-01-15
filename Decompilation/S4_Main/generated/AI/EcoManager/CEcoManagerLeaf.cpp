@@ -321,7 +321,7 @@ bool  CEcoManagerLeaf::RemoveChild(int) {
   if ( !CEcoManagerLeaf::GetChild(this, a2) )
     return 0;
   if ( *((_DWORD *)this + a2 + 19) )
-    CEcoManagerLeaf::`scalar deleting destructor'(*((CEcoManagerLeaf **)this + a2 + 19), 1u);
+    delete *((CEcoManagerLeaf **)this + a2 + 19);
   *((_DWORD *)this + a2 + 19) = 0;
   return 1;
 }

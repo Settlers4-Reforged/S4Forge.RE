@@ -684,11 +684,7 @@ void  CGroupMgr::FillMagicSideBarEx(class CInfoExchange *,bool,int) {
   
   IGroupMgr::IGroupMgr(this);
   this->__vftable = (CGroupMgr_vtbl *)CGroupMgr::_vftable_;
-  `vector constructor iterator'(
-    this->entries,
-    204u,
-    99u,
-    TStaticArray<unsigned short,100>::TStaticArray<unsigned short,100>);
+  _vec_ctor_no(this->entries, 204u, 99u, TStaticArray<unsigned short,100>::TStaticArray<unsigned short,100>);
   return this;
 }
 

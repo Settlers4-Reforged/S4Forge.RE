@@ -48,7 +48,7 @@ static class CGameState * __cdecl CStateLobbyMapSettings::DynamicCreateFunc(void
   }
   if ( g_pGameType )
   {
-    CGameType::`scalar deleting destructor'((CGameType *)g_pGameType, 1u);
+    delete (CGameType *)g_pGameType;
     g_pGameType = 0;
   }
   if ( g_pGameType )
@@ -234,7 +234,7 @@ bool  CStateLobbyMapSettings::OnEvent(class CEvn_Event &) {
       if ( !g_pGameType )
         return 1;
       v35 = g_pGameType;
-      v34 = CGameType::`scalar deleting destructor'((CGameType *)g_pGameType, 1u);
+      v34 = delete (CGameType *)g_pGameType;
       g_pGameType = 0;
       return 1;
     case 0x33u:
@@ -634,7 +634,7 @@ void  CStateLobbyMapSettings::AddMapList(std::wstring,std::wstring) {
         v35 = (CLanLobbyMapSettings::SMapEntry *)CStateLobbyMapSettings::m_stempMapPtr[*v52];
         v39 = v35;
         if ( v35 )
-          v34 = CLanLobbyMapSettings::SMapEntry::`scalar deleting destructor'(v39, 1u);
+          v34 = CLanLobbyMapSettings::delete v39;
         else
           v34 = 0;
         CStateLobbyMapSettings::m_stempMapPtr[*v52] = 0;
@@ -805,8 +805,7 @@ void  CStateLobbyMapSettings::ClearMapList(void) {
   {
     if ( CStateLobbyMapSettings::m_stempMapPtr[i] )
     {
-      CLanLobbyMapSettings::SMapEntry::`scalar deleting destructor'(
-        (CLanLobbyMapSettings::SMapEntry *)CStateLobbyMapSettings::m_stempMapPtr[i],
+      CLanLobbyMapSettings::delete (CLanLobbyMapSettings::SMapEntryCStateLobbyMapSettings::m_stempMapPtr[i],
         1u);
       CStateLobbyMapSettings::m_stempMapPtr[i] = 0;
     }

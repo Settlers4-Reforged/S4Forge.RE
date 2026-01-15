@@ -88,6 +88,15 @@ protected:
     // address=[0x15e6fc0]
     void  InitPseudoTile(int,class CLinkList &);
 
+    // Type information members
+private:
+    DWORD type;
+    DWORD ecoSectorId;
+    DWORD center;
+    WORD field_C;
+    WORD nextSquareTile;
+    DWORD LinkList;
+
 };
 
 

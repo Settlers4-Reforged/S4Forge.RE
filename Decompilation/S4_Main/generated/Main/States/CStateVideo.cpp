@@ -30,7 +30,7 @@ static class CGameState * __cdecl CStateVideo::DynamicCreateFunc(void *) {
   *(_DWORD *)this = &CStateVideo::_vftable_;
   if ( g_pGUIEngine )
   {
-    IGuiEngine::`scalar deleting destructor'((IGuiEngine *)g_pGUIEngine, 1u);
+    delete (IGuiEngine *)g_pGUIEngine;
     g_pGUIEngine = 0;
   }
   if ( g_pDialogData )
@@ -91,14 +91,14 @@ static class CGameState * __cdecl CStateVideo::DynamicCreateFunc(void *) {
     {
       CTrace::Print("VideoPlayer :\t CStateVideo::StartVideo : Unknown Gfx mode ");
       if ( g_pVideoEngine )
-        IVideoEngine::`scalar deleting destructor'((IVideoEngine *)g_pVideoEngine, 1u);
+        delete (IVideoEngine *)g_pVideoEngine;
       g_pVideoEngine = 0;
     }
   }
   else
   {
     if ( g_pVideoEngine )
-      IVideoEngine::`scalar deleting destructor'((IVideoEngine *)g_pVideoEngine, 1u);
+      delete (IVideoEngine *)g_pVideoEngine;
     g_pVideoEngine = 0;
   }
   return this;
@@ -112,7 +112,7 @@ static class CGameState * __cdecl CStateVideo::DynamicCreateFunc(void *) {
   *(_DWORD *)this = &CStateVideo::_vftable_;
   if ( g_pVideoEngine )
   {
-    IVideoEngine::`scalar deleting destructor'((IVideoEngine *)g_pVideoEngine, 1u);
+    delete (IVideoEngine *)g_pVideoEngine;
     g_pVideoEngine = 0;
   }
   CGameState::~CGameState(this);

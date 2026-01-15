@@ -25,7 +25,7 @@
   {
     BaseLeaf = CEcoManagerTree::GetBaseLeaf(this, v4);
     if ( BaseLeaf )
-      CEcoManagerLeaf::`scalar deleting destructor'(BaseLeaf, 1u);
+      delete BaseLeaf;
     ++v4;
   }
   std::vector<CEcoManagerLeaf *>::clear();
@@ -100,7 +100,7 @@ bool  CEcoManagerTree::RemoveLeaf(int) {
   BaseLeaf = CEcoManagerTree::GetBaseLeaf(this, a2);
   if ( !BaseLeaf )
     return 0;
-  CEcoManagerLeaf::`scalar deleting destructor'(BaseLeaf, 1u);
+  delete BaseLeaf;
   NrBaseLeaves = CEcoManagerTree::GetNrBaseLeaves(this);
   v4 = (_DWORD *)std::vector<CEcoManagerLeaf *>::operator[](NrBaseLeaves - 1);
   *(_DWORD *)std::vector<CEcoManagerLeaf *>::operator[](a2) = *v4;

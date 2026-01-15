@@ -178,6 +178,24 @@ protected:
     // address=[0x40fe250]
     static struct SGfxObjectInfo m_sGfxInfo;
 
+    // Type information members
+private:
+    int m_iUniqueId;
+    WORD m_nEntityId;
+    enum IEntity::EntityType m_objType;
+    BYTE pad_b;
+    WORD m_nType;
+    BYTE unk_e;
+    BYTE unk_f;
+    struct CAIEntityInfo * m_psAIEntityInfo;
+    int m_iFlags;
+    int m_uPackedXY;
+    CWarMapNode m_warMapNode;
+    union IEntity::PackedTribePlayer m_packedTribePlayer;
+    BYTE m_cHealth;
+    BYTE pad_22;
+    BYTE pad_23;
+
 };
 
 

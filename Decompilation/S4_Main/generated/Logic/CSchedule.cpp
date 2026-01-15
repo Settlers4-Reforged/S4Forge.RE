@@ -36,10 +36,10 @@
   CDynList **result; // eax
 
   if ( this[1] )
-    CDynList::`scalar deleting destructor'(this[1], 1u);
+    delete this[1];
   result = this;
   if ( this[2] )
-    return (CDynList **)CDebitLevelManager::`scalar deleting destructor'(this[2], 1u);
+    return (CDynList **)delete this[2];
   return result;
 }
 
@@ -2762,12 +2762,7 @@ bool  CSchedule::GetWeakBuilding(enum BUILDING_TYPES,class std::vector<struct SM
   v42 = 1;
   v40 = 0;
   v39 = 1;
-  `eh vector constructor iterator'(
-    v50,
-    0x204u,
-    7u,
-    CProductionMakroData::CProductionMakroData,
-    CProductionMakroData::~CProductionMakroData);
+  _vec_ctor(v50, 0x204u, 7u, CProductionMakroData::CProductionMakroData, CProductionMakroData::~CProductionMakroData);
   v56 = 0;
   MakroIndex = 0;
   v34 = 0;

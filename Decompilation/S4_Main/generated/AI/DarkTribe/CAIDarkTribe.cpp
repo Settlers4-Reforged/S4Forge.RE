@@ -60,7 +60,7 @@ void  CAIDarkTribe::Release(void) {
 
   result = this;
   if ( this )
-    return (CAIDarkTribe *)CAIDarkTribe::`scalar deleting destructor'(this, 1u);
+    return (CAIDarkTribe *)delete this;
   return result;
 }
 

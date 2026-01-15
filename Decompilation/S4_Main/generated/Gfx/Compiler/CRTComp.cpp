@@ -378,19 +378,19 @@ enum RTCOMP_ERROR  CRTComp::Compile(int) {
                               v54 = v117;
                               v105 = v117;
                               if ( v117 )
-                                v53 = SM_SIV_PaletteBlock::`scalar deleting destructor'(v105, 1u);
+                                v53 = delete v105;
                               else
                                 v53 = 0;
                               v52 = v116;
                               v104 = v116;
                               if ( v116 )
-                                v51 = SM_SIV_PaletteBlock::`scalar deleting destructor'(v104, 1u);
+                                v51 = delete v104;
                               else
                                 v51 = 0;
                               v50 = v115;
                               v103 = v115;
                               if ( v115 )
-                                v49 = SM_SIV_PaletteBlock::`scalar deleting destructor'(v103, 1u);
+                                v49 = delete v103;
                               else
                                 v49 = 0;
                               v102 = operator new(0x1005u);
@@ -429,19 +429,19 @@ enum RTCOMP_ERROR  CRTComp::Compile(int) {
                               v45 = v117;
                               v96 = v117;
                               if ( v117 )
-                                v44 = SM_SIV_PaletteBlock::`scalar deleting destructor'(v96, 1u);
+                                v44 = delete v96;
                               else
                                 v44 = 0;
                               v43 = v116;
                               v95 = v116;
                               if ( v116 )
-                                v42 = SM_SIV_PaletteBlock::`scalar deleting destructor'(v95, 1u);
+                                v42 = delete v95;
                               else
                                 v42 = 0;
                               v41 = v115;
                               v94 = v115;
                               if ( v115 )
-                                v26 = SM_SIV_PaletteBlock::`scalar deleting destructor'(v94, 1u);
+                                v26 = delete v94;
                               else
                                 v26 = 0;
                               j__fwrite(&v114, 4u, 1u, *((FILE **)v120 + 11));
@@ -500,19 +500,19 @@ enum RTCOMP_ERROR  CRTComp::Compile(int) {
                               v34 = v117;
                               v87 = v117;
                               if ( v117 )
-                                v33 = SM_SIV_PaletteBlock::`scalar deleting destructor'(v87, 1u);
+                                v33 = delete v87;
                               else
                                 v33 = 0;
                               v32 = v116;
                               v86 = v116;
                               if ( v116 )
-                                v31 = SM_SIV_PaletteBlock::`scalar deleting destructor'(v86, 1u);
+                                v31 = delete v86;
                               else
                                 v31 = 0;
                               v30 = v115;
                               v85 = v115;
                               if ( v115 )
-                                v29 = SM_SIV_PaletteBlock::`scalar deleting destructor'(v85, 1u);
+                                v29 = delete v85;
                               else
                                 v29 = 0;
                               v84 = operator new(0x1005u);
@@ -551,19 +551,19 @@ enum RTCOMP_ERROR  CRTComp::Compile(int) {
                               v25 = v117;
                               v78 = v117;
                               if ( v117 )
-                                v24 = SM_SIV_PaletteBlock::`scalar deleting destructor'(v78, 1u);
+                                v24 = delete v78;
                               else
                                 v24 = 0;
                               v23 = v116;
                               v71 = v116;
                               if ( v116 )
-                                v22 = SM_SIV_PaletteBlock::`scalar deleting destructor'(v71, 1u);
+                                v22 = delete v71;
                               else
                                 v22 = 0;
                               v21 = v115;
                               v76 = v115;
                               if ( v115 )
-                                v20 = SM_SIV_PaletteBlock::`scalar deleting destructor'(v76, 1u);
+                                v20 = delete v76;
                               else
                                 v20 = 0;
                               CRTComp::DeleteCurFilename(v120, FileName);

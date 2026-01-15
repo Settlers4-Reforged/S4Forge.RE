@@ -62,7 +62,7 @@ static bool __cdecl CStateMainMenu::PreLoadGame(std::wstring) {
   {
     v4[9] = g_pGameType;
     v13 = g_pGameType;
-    v4[8] = CGameType::`scalar deleting destructor'((CGameType *)g_pGameType, 1u);
+    v4[8] = delete (CGameType *)g_pGameType;
     g_pGameType = 0;
   }
   C = operator new(0x620u);

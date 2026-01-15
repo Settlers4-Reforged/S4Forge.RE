@@ -82,6 +82,18 @@ protected:
     // address=[0x14e26c0]
     bool  IsSettlerAroundTile(int);
 
+    // Type information members
+private:
+    DWORD unk_7c;
+    DWORD unk_80;
+    DWORD unk_84;
+    DWORD unk_88;
+    DWORD unk_8c;
+    DWORD unk_90;
+    DWORD unk_94;
+    DWORD unk_98;
+    DWORD unk_9c;
+
 };
 
 

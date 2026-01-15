@@ -9,7 +9,7 @@
   CStatistic::CStatistic(this);
   *(_DWORD *)this = CEndStatistic::_vftable_;
   std::wstring::wstring((char *)this + 39544);
-  `eh vector constructor iterator'((char *)this + 39572, 0x1Cu, 9u, std::wstring::wstring, std::wstring::~wstring);
+  _vec_ctor((char *)this + 39572, 0x1Cu, 9u, std::wstring::wstring, std::wstring::~wstring);
   CEndStatistic::Clear(this);
   return this;
 }

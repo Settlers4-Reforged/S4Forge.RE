@@ -29,7 +29,7 @@
   {
     CBinkInterface::CloseBink((CBinkInterface *)g_pVideo);
     if ( g_pVideo )
-      CBinkInterface::`scalar deleting destructor'((CBinkInterface *)g_pVideo, 1u);
+      delete (CBinkInterface *)g_pVideo;
     g_pVideo = 0;
   }
 }

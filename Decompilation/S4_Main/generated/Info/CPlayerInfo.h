@@ -30,6 +30,24 @@ public:
     // address=[0x14982e0]
      ~CPlayerInfo(void);
 
+    // Type information members
+private:
+    DWORD race;
+    DWORD startX;
+    DWORD startY;
+    DWORD unk_10;
+    DWORD unk_14;
+    DWORD unk_18;
+    DWORD name;
+    DWORD unk_20;
+    DWORD unk_24;
+    DWORD unk_28;
+    DWORD unk_2c;
+    DWORD unk_30;
+    DWORD unk_34;
+    DWORD unk_38;
+    DWORD unk_3c;
+
 };
 
 

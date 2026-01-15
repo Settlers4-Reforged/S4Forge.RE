@@ -25,7 +25,7 @@ static void __cdecl OnlineManager::Destroy(void) {
   
   if ( OnlineManager::m_instance )
   {
-    OnlineManager::`scalar deleting destructor'((OnlineManager *)OnlineManager::m_instance, 1u);
+    delete (OnlineManager *)OnlineManager::m_instance;
     OnlineManager::m_instance = 0;
   }
 }

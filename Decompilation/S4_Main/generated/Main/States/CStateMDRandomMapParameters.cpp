@@ -51,7 +51,7 @@ static class CGameState * __cdecl CStateMDRandomMapParameters::DynamicCreateFunc
   }
   if ( g_pGameType )
   {
-    CGameType::`scalar deleting destructor'((CGameType *)g_pGameType, 1u);
+    delete (CGameType *)g_pGameType;
     g_pGameType = 0;
   }
   CGuiGameState::SetupExtraGui(g_pMissionCD, 6, (int)GuiDlgMDRandomMapParametersProc);
@@ -449,7 +449,7 @@ bool  CStateMDRandomMapParameters::OnEvent(class CEvn_Event &) {
           v29 = g_pGameType;
           v40 = (CGameType *)g_pGameType;
           if ( g_pGameType )
-            v28 = CGameType::`scalar deleting destructor'(v40, 1u);
+            v28 = delete v40;
           else
             v28 = 0;
           g_pGameType = v27;
@@ -487,7 +487,7 @@ CStateMDRandomMapParameters__OnEvent___def_18C873C:
     if ( !g_pGameType )
       return 1;
     v35 = g_pGameType;
-    v34 = CGameType::`scalar deleting destructor'((CGameType *)g_pGameType, 1u);
+    v34 = delete (CGameType *)g_pGameType;
     g_pGameType = 0;
     return 1;
   }

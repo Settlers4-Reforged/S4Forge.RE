@@ -56,7 +56,7 @@
   IScheduleEntry::IScheduleEntry(this);
   v46 = 0;
   *(_DWORD *)v45 = &CBuildingManagerTask::_vftable_;
-  `eh vector constructor iterator'((char *)v45 + 96, 0x10u, 0xBu, CRequire::CRequire, CRequire::~CRequire);
+  _vec_ctor((char *)v45 + 96, 0x10u, 0xBu, CRequire::CRequire, CRequire::~CRequire);
   LOBYTE(v46) = 1;
   *((_DWORD *)v45 + 4) = 3;
   *((_DWORD *)v45 + 22) = 0;

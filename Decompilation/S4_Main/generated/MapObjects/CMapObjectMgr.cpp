@@ -397,7 +397,7 @@ void  CMapObjectMgr::Kill(int,int) {
     {
       AIEntityInfoPtr = entity->m_psAIEntityInfo;
       if ( AIEntityInfoPtr )
-        CAIEntityInfo::`scalar deleting destructor'(AIEntityInfoPtr, 1);
+        delete AIEntityInfoPtr;
       entity->m_psAIEntityInfo = 0;
     }
     ((void (__thiscall *)(IEntity *))entity->j_?Delete@IEntity@@UAEXXZ)(entity);

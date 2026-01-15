@@ -35,7 +35,7 @@
   BBSupportTracePrintF(0, "ISoundEngine::~ISoundEngine() called.");
   if ( g_pcVoiceChat )
   {
-    CVoiceChat::`scalar deleting destructor'((CVoiceChat *)g_pcVoiceChat, 1u);
+    delete (CVoiceChat *)g_pcVoiceChat;
     g_pcVoiceChat = 0;
   }
   if ( !g_pcSoundSystem )
@@ -468,7 +468,7 @@ bool  ISoundEngine::VCStart(class IEventEngine *,int) {
   if ( (unsigned __int8)CVoiceChat::Init(SamplingRate, DigitalDriver, ".v29") )
     return 1;
   if ( g_pcVoiceChat )
-    CVoiceChat::`scalar deleting destructor'((CVoiceChat *)g_pcVoiceChat, 1u);
+    delete (CVoiceChat *)g_pcVoiceChat;
   g_pcVoiceChat = 0;
   return 0;
 }
@@ -480,7 +480,7 @@ void  ISoundEngine::VCStop(void) {
   
   if ( g_pcVoiceChat )
   {
-    CVoiceChat::`scalar deleting destructor'((CVoiceChat *)g_pcVoiceChat, 1u);
+    delete (CVoiceChat *)g_pcVoiceChat;
     g_pcVoiceChat = 0;
   }
 }

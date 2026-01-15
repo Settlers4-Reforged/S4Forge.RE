@@ -39,11 +39,11 @@
 
   *this = (CDynList *)IAI_Module::_vftable_;
   if ( this[1] )
-    CDynList::`scalar deleting destructor'(this[1], 1u);
+    delete this[1];
   this[1] = 0;
   result = this[2];
   if ( result )
-    result = (CDynList *)CDynList::`scalar deleting destructor'(this[2], 1u);
+    result = (CDynList *)delete this[2];
   this[2] = 0;
   return result;
 }
@@ -90,7 +90,7 @@ class CSolutionTree *  IAI_Module::Problem(int,int,int,int,int) {
   if ( v11 )
     (**(void (__thiscall ***)(struct CParam *, int))v11)(v11, 1);
   if ( v9 )
-    COptimizeOptions::`scalar deleting destructor'(v9, 1u);
+    delete v9;
   return v7;
 }
 
@@ -335,7 +335,7 @@ class CSolutionTree *  IAI_Module::ProblemSolve(int,class CParam *,class COptimi
 LABEL_63:
     --*((_DWORD *)this + 3);
     if ( v16 )
-      CConditionSet::`scalar deleting destructor'(v16, 1u);
+      delete v16;
     if ( v9 )
       (*(void (__thiscall **)(CDynList **, int))*v9)(v9, 1);
     return BestSolution;
@@ -369,7 +369,7 @@ LABEL_63:
   if ( v9 )
     (*(void (__thiscall **)(CDynList **, int))*v9)(v9, 1);
   if ( v16 )
-    CConditionSet::`scalar deleting destructor'(v16, 1u);
+    delete v16;
   if ( v7 )
     (**(void (__thiscall ***)(CSolutionTree *, int))v7)(v7, 1);
   return 0;
@@ -474,7 +474,7 @@ class CSolutionTree *  IAI_Module::GetBestSolution(class CSolutionSet *,class CO
       }
     }
     if ( v15 )
-      CConditionSet::`scalar deleting destructor'(v15, 1u);
+      delete v15;
     if ( v21 )
     {
       if ( ((++v13,
@@ -534,7 +534,7 @@ void  IAI_Module::DeleteHistory(void) {
   CDynList *C; // [esp+18h] [ebp-14h]
 
   if ( this[2] )
-    CDynList::`scalar deleting destructor'(this[2], 1u);
+    delete this[2];
   C = (CDynList *)operator new(0xCu);
   if ( C )
     v3 = CDynList::CDynList(C);

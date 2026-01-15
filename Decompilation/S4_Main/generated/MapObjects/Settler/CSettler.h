@@ -142,6 +142,10 @@ protected:
     // address=[0x157ffe0]
     virtual void  ConvertEventIntoGoal(class CEntityEvent *);
 
+    // Type information members
+private:
+    ISettlerRole * role;
+
 };
 
 

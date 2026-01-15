@@ -28,6 +28,12 @@ protected:
     // address=[0x15fc790]
     void  SetPrevNext(int,int);
 
+    // Type information members
+private:
+    BYTE prev;
+    BYTE unk_1d;
+    WORD next;
+
 };
 
 

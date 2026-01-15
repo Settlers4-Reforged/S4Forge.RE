@@ -445,11 +445,7 @@ static void __cdecl CTiling::CalcAllTileLinks(void) {
   v10 = (char *)operator new[](v8 << 8);
   if ( v10 )
   {
-    `vector constructor iterator'(
-      v10,
-      0x100u,
-      v8,
-      (void *(__thiscall *)(void *))CIntLinkList::`default constructor closure');
+    _vec_ctor_no(v10, 0x100u, v8, (void *(__thiscall *)(void *))CIntLinkList::`default constructor closure');
     v7 = v10;
   }
   else

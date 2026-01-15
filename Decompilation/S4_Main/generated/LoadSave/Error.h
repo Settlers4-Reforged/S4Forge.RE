@@ -11,6 +11,10 @@ public:
     // address=[0x13f2570]
      Error(void);
 
+    // Type information members
+private:
+    struct ErrorVtbl * lpVtbl;
+
 };
 
 } // namespace CPersistence

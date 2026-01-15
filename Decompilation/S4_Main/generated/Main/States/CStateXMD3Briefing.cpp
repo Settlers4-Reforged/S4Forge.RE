@@ -166,7 +166,7 @@ static class CGameState * __cdecl CStateXMD3Briefing::DynamicCreateFunc(void *) 
     {
       v27 = g_pGameType;
       v29 = g_pGameType;
-      v26 = CGameType::`scalar deleting destructor'((CGameType *)g_pGameType, 1u);
+      v26 = delete (CGameType *)g_pGameType;
       g_pGameType = 0;
     }
   }
@@ -205,7 +205,7 @@ bool  CStateXMD3Briefing::Perform(void) {
       __debugbreak();
     }
     if ( g_pGameType )
-      CGameType::`scalar deleting destructor'((CGameType *)g_pGameType, 1u);
+      delete (CGameType *)g_pGameType;
     g_pGameType = 0;
     v4 = *((_DWORD *)this + 1);
     if ( v4 < 21 || v4 > 24 )
@@ -295,7 +295,7 @@ bool  CStateXMD3Briefing::OnEvent(class CEvn_Event &) {
       __debugbreak();
     }
     if ( g_pGameType )
-      CGameType::`scalar deleting destructor'((CGameType *)g_pGameType, 1u);
+      delete (CGameType *)g_pGameType;
     g_pGameType = 0;
     v9 = *((_DWORD *)this + 1);
     if ( v9 < 21 || v9 > 24 )

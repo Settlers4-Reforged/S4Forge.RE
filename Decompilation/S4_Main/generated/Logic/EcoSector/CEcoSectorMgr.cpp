@@ -155,7 +155,7 @@ class CEcoSector &  CEcoSectorMgr::operator[](int) {
   
   int i; // [esp+0h] [ebp-8h]
 
-  `eh vector constructor iterator'(
+  _vec_ctor(
     (char *)this + 65596,
     0x10u,
     9u,
@@ -219,7 +219,7 @@ void  CEcoSectorMgr::Clear(void) {
     {
       v2 = (CEcoSector *)*((_DWORD *)this + i + 5);
       if ( v2 )
-        CEcoSector::`scalar deleting destructor'(v2, 1u);
+        delete v2;
       *((_DWORD *)this + i + 5) = 0;
     }
   }
@@ -1851,7 +1851,7 @@ void  CEcoSectorMgr::DestroyEcoSector(int) {
     __debugbreak();
   }
   if ( v3 )
-    CEcoSector::`scalar deleting destructor'(v3, 1u);
+    delete v3;
   *((_DWORD *)this + a2 + 5) = 0;
   if ( a2 < *((_DWORD *)this + 1) )
     *((_DWORD *)this + 1) = a2;

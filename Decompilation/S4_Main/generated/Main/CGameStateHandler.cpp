@@ -345,22 +345,22 @@ static void __cdecl CGameStateHandler::Kill(void) {
   }
   if ( g_pGUIEngine )
   {
-    IGuiEngine::`scalar deleting destructor'((IGuiEngine *)g_pGUIEngine, 1u);
+    delete (IGuiEngine *)g_pGUIEngine;
     g_pGUIEngine = 0;
   }
   if ( g_pGfxEngine )
   {
-    IGfxEngine::`scalar deleting destructor'((IGfxEngine *)g_pGfxEngine, 1u);
+    delete (IGfxEngine *)g_pGfxEngine;
     g_pGfxEngine = 0;
   }
   if ( g_pGfxManager )
   {
-    CGfxManager::`scalar deleting destructor'((CGfxManager *)g_pGfxManager, 1u);
+    delete (CGfxManager *)g_pGfxManager;
     g_pGfxManager = 0;
   }
   if ( g_pSoundManager )
   {
-    CSoundManager::`scalar deleting destructor'((CSoundManager *)g_pSoundManager, 1u);
+    delete (CSoundManager *)g_pSoundManager;
     g_pSoundManager = 0;
   }
   if ( g_pStringEngine )
@@ -409,7 +409,7 @@ static bool __cdecl CGameStateHandler::InitGfxEngine(void) {
   if ( CGameStateHandler::BuildInitRenderCfg(0, 1) )
     return 1;
   if ( g_pGfxEngine )
-    IGfxEngine::`scalar deleting destructor'((IGfxEngine *)g_pGfxEngine, 1u);
+    delete (IGfxEngine *)g_pGfxEngine;
   g_pGfxEngine = 0;
   return 0;
 }
@@ -505,7 +505,7 @@ static bool __cdecl CGameStateHandler::InitGfxManager(void) {
     else
     {
       if ( g_pGfxManager )
-        CGfxManager::`scalar deleting destructor'((CGfxManager *)g_pGfxManager, 1u);
+        delete (CGfxManager *)g_pGfxManager;
       g_pGfxManager = 0;
       return 0;
     }

@@ -79,6 +79,18 @@ protected:
     // address=[0x14e4b90]
     int  SetLastLogicUpdate(int);
 
+    // Type information members
+private:
+    BYTE m_cFrame;
+    BYTE m_cAttackerPlayerId;
+    WORD m_wJobPart;
+    WORD m_wPrevEntity;
+    WORD m_wNextEntity;
+    DWORD m_uLastUpdateTick;
+    DWORD m_uLastLogicUpdate;
+    INT m_iEventQueue;
+    INT m_iUnk_38;
+
 };
 
 

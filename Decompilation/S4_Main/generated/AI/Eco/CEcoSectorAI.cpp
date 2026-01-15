@@ -68,14 +68,14 @@
 
   *this = (CReserveDatabase *)CEcoSectorAI::_vftable_;
   if ( this[3] )
-    CReserveDatabase::`scalar deleting destructor'(this[3], 1u);
+    delete this[3];
   if ( this[4] )
-    CProductionTab::`scalar deleting destructor'(this[4], 1u);
+    delete this[4];
   if ( this[5] )
-    CProductionDataTab::`scalar deleting destructor'(this[5], 1u);
+    delete this[5];
   result = this[1];
   if ( result )
-    return (CReserveDatabase *)CSchedule::`scalar deleting destructor'(this[1], 1u);
+    return (CReserveDatabase *)delete this[1];
   return result;
 }
 
@@ -88,7 +88,7 @@ void  CEcoSectorAI::Release(void) {
 
   result = this;
   if ( this )
-    return (CEcoSectorAI *)CEcoSectorAI::`scalar deleting destructor'(this, 1u);
+    return (CEcoSectorAI *)delete this;
   return result;
 }
 

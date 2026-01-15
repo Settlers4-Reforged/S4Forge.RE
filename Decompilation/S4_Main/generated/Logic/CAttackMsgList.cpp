@@ -69,12 +69,7 @@ void  CAttackMsgList::SendAttackMessage(int,int) {
 // Decompiled from CAttackMsgList *__thiscall CAttackMsgList::CAttackMsgList(CAttackMsgList *this)
  CAttackMsgList::CAttackMsgList(void) {
   
-  `eh vector constructor iterator'(
-    this,
-    0x10u,
-    0xFu,
-    CAttackMsgFilter::CAttackMsgFilter,
-    CAttackMsgFilter::~CAttackMsgFilter);
+  _vec_ctor(this, 0x10u, 0xFu, CAttackMsgFilter::CAttackMsgFilter, CAttackMsgFilter::~CAttackMsgFilter);
   return this;
 }
 

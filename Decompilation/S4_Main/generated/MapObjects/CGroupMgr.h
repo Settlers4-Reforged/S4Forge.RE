@@ -45,6 +45,11 @@ public:
     // address=[0x1552590]
      CGroupMgr(void);
 
+    // Type information members
+private:
+    BYTE[100] groupFlags;
+    struct CGroupMgr::TStaticArray100short[99] entries;
+
 };
 
 

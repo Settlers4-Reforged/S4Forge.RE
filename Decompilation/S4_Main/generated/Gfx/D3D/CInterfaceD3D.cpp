@@ -122,7 +122,7 @@ bool  CInterfaceD3D::HasCameraWindowSurface(void)const {
         CCachePageManager::UnlockSourceSurface((CCachePageManager *)this->field_44C[i]);
       v2 = (CCachePageManager *)this->field_44C[i];
       if ( v2 )
-        CCachePageManager::`scalar deleting destructor'(v2, 1u);
+        delete v2;
       this->field_44C[i] = 0;
     }
     if ( this->field_178[i] )
@@ -141,7 +141,7 @@ bool  CInterfaceD3D::HasCameraWindowSurface(void)const {
         CCachePageManager::UnlockSourceSurface((CCachePageManager *)this->CCachePageManager[j]);
       v1 = (CUploadCachePageManager *)this->CCachePageManager[j];
       if ( v1 )
-        CUploadCachePageManager::`scalar deleting destructor'(v1, 1u);
+        delete v1;
       this->CCachePageManager[j] = 0;
     }
     if ( this->ObjectTextureSystemMemoryTable[j] )
@@ -2547,7 +2547,7 @@ void  CInterfaceD3D::PreCalcTextureVertices(int) {
     {
       for ( k = 0; k < 6; ++k )
       {
-        `vector constructor iterator'(v7, 0x20u, 3u, (void *(__thiscall *)(void *))_D3DTLVERTEX::_D3DTLVERTEX);
+        _vec_ctor_no(v7, 0x20u, 3u, (void *(__thiscall *)(void *))_D3DTLVERTEX::_D3DTLVERTEX);
         ((void (__cdecl *)(_DWORD, _DWORD, _DWORD, _DWORD))sub_2F7BC20)(v7, (float)j, (float)i, k);
         PatternTripleVertices[144 * j + 36 * i + 6 * k] = v8 + v3;
         PatternTripleVertices[144 * j + 1 + 36 * i + 6 * k] = v9 + v3;
@@ -2663,7 +2663,7 @@ int  CInterfaceD3D::AllocateEngineData(int) {
   v4 = operator new[](32 * a2);
   if ( v4 )
   {
-    `vector constructor iterator'(v4, 0x20u, a2, (void *(__thiscall *)(void *))_D3DTLVERTEX::_D3DTLVERTEX);
+    _vec_ctor_no(v4, 0x20u, a2, (void *(__thiscall *)(void *))_D3DTLVERTEX::_D3DTLVERTEX);
     v3 = v4;
   }
   else

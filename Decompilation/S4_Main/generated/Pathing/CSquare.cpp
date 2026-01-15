@@ -158,7 +158,7 @@ void  CSquare::InitAndFillTypeMapCatapult(int,int) {
 // Decompiled from CSquare *__thiscall CSquare::CSquare(CSquare *this)
  CSquare::CSquare(void) {
   
-  `vector constructor iterator'((char *)this + 3096, 0x100u, 0x80u, (void *(__thiscall *)(void *))CAreaList::CAreaList);
+  _vec_ctor_no((char *)this + 3096, 0x100u, 0x80u, (void *(__thiscall *)(void *))CAreaList::CAreaList);
   return this;
 }
 

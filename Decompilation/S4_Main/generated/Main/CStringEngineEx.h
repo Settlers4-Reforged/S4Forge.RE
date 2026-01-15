@@ -22,6 +22,10 @@ private:
     // address=[0x14cef30]
     void  CreateTextForEmptyStrings(void);
 
+    // Type information members
+private:
+    wchar_t ** strings;
+
 };
 
 

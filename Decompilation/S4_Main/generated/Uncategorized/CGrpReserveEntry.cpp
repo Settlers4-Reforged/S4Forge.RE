@@ -31,7 +31,7 @@
   
   *this = (CDynList *)&CGrpReserveEntry::_vftable_;
   if ( this[12] )
-    CDynList::`scalar deleting destructor'(this[12], 1u);
+    delete this[12];
   CReserveEntry::~CReserveEntry(this);
 }
 

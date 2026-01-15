@@ -35,7 +35,7 @@ static class std::vector<unsigned short,class std::allocator<unsigned short> > c
   *this = (CFsm *)&CInputProcessor::_vftable_;
   if ( this[2] )
   {
-    CFsm::`scalar deleting destructor'(this[2], 1u);
+    delete this[2];
     this[2] = 0;
   }
   std::vector<unsigned short>::~vector<unsigned short>(this + 21);
@@ -51,7 +51,7 @@ void  CInputProcessor::Reset(void) {
 
   if ( this[2] )
   {
-    CFsm::`scalar deleting destructor'(this[2], 1u);
+    delete this[2];
     this[2] = 0;
   }
   CInputProcessor::InitFSM((CInputProcessor *)this);

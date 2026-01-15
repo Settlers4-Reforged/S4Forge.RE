@@ -283,13 +283,13 @@ class CParameterSet *  CSiedlerAI::GenerateAlternatives(int,class CParam *) {
   v114 = 0;
   ResGrpNr = 0;
   v205 = 0;
-  `eh vector constructor iterator'(v223, 0x4Cu, 0x50u, SBUILDINFODATA::SBUILDINFODATA, SBUILDINFODATA::~SBUILDINFODATA);
+  _vec_ctor(v223, 0x4Cu, 0x50u, SBUILDINFODATA::SBUILDINFODATA, SBUILDINFODATA::~SBUILDINFODATA);
   v225 = 0;
   std::vector<SBUILDINFODATA>::vector<SBUILDINFODATA>();
   LOBYTE(v225) = 1;
   std::vector<SMakroEntry>::vector<SMakroEntry>();
   LOBYTE(v225) = 2;
-  `eh vector constructor iterator'(v224, 0x2Cu, 0x3Cu, CReserveEntry::CReserveEntry, CReserveEntry::~CReserveEntry);
+  _vec_ctor(v224, 0x2Cu, 0x3Cu, CReserveEntry::CReserveEntry, CReserveEntry::~CReserveEntry);
   LOBYTE(v225) = 3;
   SBUILDINFODATA::SBUILDINFODATA(&v219);
   LOBYTE(v225) = 4;

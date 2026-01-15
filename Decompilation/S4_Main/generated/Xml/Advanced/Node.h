@@ -29,6 +29,10 @@ public:
     // address=[0x3e2d2a8]
     static class AdvXMLParser::NodeContainer & null;
 
+    // Type information members
+private:
+    struct NodeVtbl * lpVtbl;
+
 };
 
 } // namespace AdvXMLParser

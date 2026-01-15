@@ -69,6 +69,20 @@ public:
     // address=[0x14b4740]
     bool  IsEventRecording(void);
 
+    // Type information members
+private:
+    struct CEvn_HandleList * EventHandleList;
+    _BYTE[4] gap_8;
+    _DWORD hwnd;
+    int logFileHandle;
+    BYTE loggingEnabled;
+    _BYTE[3] pad_15;
+    int tick;
+    char enabled;
+    _BYTE[3] gap_1D;
+    int field_20;
+    unsigned __int8 (__cdecl *)(struct SEventStruct *) activePrimaryHandler;
+
 };
 
 

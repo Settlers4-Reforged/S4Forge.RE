@@ -425,7 +425,7 @@ void  CStateGame::ExitGUI(void) {
   }
   if ( g_pGUIEngine )
   {
-    IGuiEngine::`scalar deleting destructor'((IGuiEngine *)g_pGUIEngine, 1u);
+    delete (IGuiEngine *)g_pGUIEngine;
     g_pGUIEngine = 0;
   }
   if ( !g_pDialogData )
@@ -1118,7 +1118,7 @@ int  CStateGame::GetModifierState(void) {
   }
   if ( g_pGameType )
   {
-    CGameType::`scalar deleting destructor'((CGameType *)g_pGameType, 1u);
+    delete (CGameType *)g_pGameType;
     g_pGameType = 0;
   }
   CSoundManager::StopMusic(g_pSoundManager);

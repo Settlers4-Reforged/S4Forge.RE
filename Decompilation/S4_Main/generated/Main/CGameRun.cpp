@@ -318,12 +318,12 @@ static bool __cdecl CGameRun::Exit(void) {
   }
   if ( g_pEntityToDoListMgr )
   {
-    CEntityToDoListMgr::`scalar deleting destructor'((CEntityToDoListMgr *)g_pEntityToDoListMgr, 1u);
+    delete (CEntityToDoListMgr *)g_pEntityToDoListMgr;
     g_pEntityToDoListMgr = 0;
   }
   if ( g_pMapObjectMgr )
   {
-    CMapObjectMgr::`scalar deleting destructor'(g_pMapObjectMgr, 1u);
+    delete g_pMapObjectMgr;
     g_pMapObjectMgr = 0;
   }
   CAnimalMgr::ShutDown((CAnimalMgr *)&g_cAnimalMgr);

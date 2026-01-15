@@ -38,7 +38,7 @@
   if ( *((_DWORD *)this + 17) )
     (***((void (__thiscall ****)(_DWORD, int))this + 17))(*((_DWORD *)this + 17), 1);
   if ( *((_DWORD *)this + 25) )
-    CSiedlerAI::`scalar deleting destructor'(*((CSiedlerAI **)this + 25), 1u);
+    delete *((CSiedlerAI **)this + 25);
   IScheduleEntry::~IScheduleEntry(this);
 }
 

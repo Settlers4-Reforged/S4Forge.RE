@@ -2788,7 +2788,7 @@ bool  IGfxEngine::IsHardwareRenderingAvailable(void) {
     v6 = D3DObjectPtr;
     v8 = D3DObjectPtr;
     if ( D3DObjectPtr )
-      v5 = CInterfaceD3D::`scalar deleting destructor'(v8, 1u);
+      v5 = delete v8;
     else
       v5 = 0;
     D3DObjectPtr = 0;
@@ -2850,7 +2850,7 @@ bool  IGfxEngine::IsSoftwareRenderingAvailable(void) {
     v6 = D3DObjectPtr;
     v8 = D3DObjectPtr;
     if ( D3DObjectPtr )
-      v5 = CInterfaceD3D::`scalar deleting destructor'(v8, 1u);
+      v5 = delete v8;
     else
       v5 = 0;
     D3DObjectPtr = 0;
@@ -2877,7 +2877,7 @@ bool  IGfxEngine::SetRenderEnvironment(void) {
 
   if ( D3DObjectPtr )
   {
-    CInterfaceD3D::`scalar deleting destructor'(D3DObjectPtr, 1u);
+    delete D3DObjectPtr;
     C = (CInterfaceD3D *)operator new(0x794u);
     if ( C )
       v3 = CInterfaceD3D::CInterfaceD3D(C);

@@ -18,7 +18,7 @@
   
   *this = (CDynList *)&CSolutionTree::_vftable_;
   if ( this[5] )
-    CDynList::`scalar deleting destructor'(this[5], 1u);
+    delete this[5];
   if ( this[3] )
     (**(void (__thiscall ***)(CDynList *, int))this[3])(this[3], 1);
   CDynListEntry::~CDynListEntry((CDynListEntry *)this);

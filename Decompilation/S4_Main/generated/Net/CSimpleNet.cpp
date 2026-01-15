@@ -347,7 +347,7 @@ void  CSimpleNet::Delete(void) {
 
   result = this;
   if ( this )
-    return (CSimpleNet *)CSimpleNet::`scalar deleting destructor'(this, 1u);
+    return (CSimpleNet *)delete this;
   return result;
 }
 

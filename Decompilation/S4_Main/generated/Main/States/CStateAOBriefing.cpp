@@ -171,7 +171,7 @@ bool  CStateAOBriefing::Perform(void) {
     }
     if ( g_pGameType )
     {
-      CGameType::`scalar deleting destructor'((CGameType *)g_pGameType, 1u);
+      delete (CGameType *)g_pGameType;
       g_pGameType = 0;
     }
     switch ( *((_DWORD *)this + 1) )
@@ -329,7 +329,7 @@ bool  CStateAOBriefing::OnEvent(class CEvn_Event &) {
     {
       v36 = g_pGameType;
       v43 = g_pGameType;
-      v35 = CGameType::`scalar deleting destructor'((CGameType *)g_pGameType, 1u);
+      v35 = delete (CGameType *)g_pGameType;
       g_pGameType = 0;
     }
     switch ( *((_DWORD *)v51 + 1) )
@@ -473,7 +473,7 @@ bool  CStateAOBriefing::OnEvent(class CEvn_Event &) {
         {
           v33 = g_pGameType;
           v40 = g_pGameType;
-          v32 = CGameType::`scalar deleting destructor'((CGameType *)g_pGameType, 1u);
+          v32 = delete (CGameType *)g_pGameType;
           g_pGameType = 0;
         }
         v49 = 1;

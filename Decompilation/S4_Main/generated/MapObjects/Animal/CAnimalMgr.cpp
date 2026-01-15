@@ -212,7 +212,7 @@ void  CAnimalMgr::ShutDown(void) {
   {
     result = this[97];
     if ( result )
-      result = (CAnimalMgr *)CAnimalEffect::`scalar deleting destructor'(this[97], 1u);
+      result = (CAnimalMgr *)delete this[97];
     this[97] = 0;
   }
   for ( i = 0; i < 17; ++i )

@@ -284,7 +284,7 @@ bool  IEntity::IsSelected(void)const {
 
 
 // address=[0x154b4a0]
-// Decompiled from int __thiscall IEntity::~IEntity(IEntity *this)
+// Decompiled from void __thiscall IEntity::~IEntity(IEntity *this)
  IEntity::~IEntity(void) {
   
   CAIEntityInfo *m_psAIEntityInfo; // [esp+Ch] [ebp-14h]
@@ -296,12 +296,12 @@ bool  IEntity::IsSelected(void)const {
   {
     m_psAIEntityInfo = this->m_psAIEntityInfo;
     if ( m_psAIEntityInfo )
-      CAIEntityInfo::`scalar deleting destructor'(m_psAIEntityInfo, 1);
+      delete m_psAIEntityInfo;
     this->m_psAIEntityInfo = 0;
   }
   this->m_iUniqueId |= 0x40000000u;
   this->m_iFlags = 0;
-  return CWarMapNode::~CWarMapNode();
+  CWarMapNode::~CWarMapNode();
 }
 
 
@@ -441,7 +441,7 @@ int  IEntity::MaxHitpoints(void)const {
 void  IEntity::SetAIEntityInfoPtr(class CAIEntityInfo *) {
   
   if ( this->m_psAIEntityInfo )
-    CAIEntityInfo::`scalar deleting destructor'(this->m_psAIEntityInfo, 1);
+    delete this->m_psAIEntityInfo;
   this->m_psAIEntityInfo = a2;
 }
 

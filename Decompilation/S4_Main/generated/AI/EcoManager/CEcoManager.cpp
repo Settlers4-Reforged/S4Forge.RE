@@ -41,7 +41,7 @@
   {
     v2 = (CAIEcoSpecialBuildingInfos *)CAIEcoSpecialBuildingInfos::TheObject();
     if ( v2 )
-      CAIEcoSpecialBuildingInfos::`scalar deleting destructor'(v2, 1u);
+      delete v2;
   }
   CEcoManager::CEMD::~CEMD((CEcoManager *)((char *)this + 4));
   return IAIEcoManager::~IAIEcoManager(this);
@@ -202,7 +202,7 @@ bool  CEcoManager::Discard(enum BUILDING_TYPES) {
   std::vector<SAI_ECO_POSS_BUILD_PLACE>::clear();
   if ( !*(_DWORD *)&this[4 * a2 + 16] )
     return 0;
-  CEcoManagerTree::`scalar deleting destructor'(*(CEcoManagerTree **)&this[4 * a2 + 16], 1u);
+  delete *(CEcoManagerTree **)&this[4 * a2 + 16];
   *(_DWORD *)&this[4 * a2 + 16] = 0;
   return 1;
 }
@@ -371,7 +371,7 @@ struct SBUILDINFODATA  CEcoManager::GetBuildPlace(enum IECONOMANAGERGRIDRESOLUTI
   }
   SBUILDINFODATA::SBUILDINFODATA(v22);
   v24 = 1;
-  `eh vector constructor iterator'(v23, 0x4Cu, 1u, SBUILDINFODATA::SBUILDINFODATA, SBUILDINFODATA::~SBUILDINFODATA);
+  _vec_ctor(v23, 0x4Cu, 1u, SBUILDINFODATA::SBUILDINFODATA, SBUILDINFODATA::~SBUILDINFODATA);
   LOBYTE(v24) = 2;
   memset(v22, 0, sizeof(v22));
   v15 = 0;

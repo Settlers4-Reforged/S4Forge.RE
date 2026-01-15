@@ -79,6 +79,26 @@ protected:
     // address=[0x14d8150]
     virtual  ~CAnimal(void);
 
+    // Type information members
+private:
+    __int16 unk_64;
+    BYTE[14] unk_66;
+    BYTE unk_74;
+    BYTE unk_75;
+    BYTE unk_76;
+    BYTE unk_77;
+    BYTE unk_78;
+    BYTE unk_79;
+    BYTE unk_7a;
+    BYTE unk_7b;
+    BYTE unk_7c;
+    BYTE unk_7d;
+    BYTE unk_7e;
+    BYTE unk_7f;
+    int unk_80;
+    DWORD unk_84;
+    int unk_88;
+
 };
 
 

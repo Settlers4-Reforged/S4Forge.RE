@@ -6,6 +6,10 @@ public:
     // address=[0x2616650]
      IUnknown(void);
 
+    // Type information members
+private:
+    struct IUnknownVtbl * lpVtbl;
+
 };
 
 

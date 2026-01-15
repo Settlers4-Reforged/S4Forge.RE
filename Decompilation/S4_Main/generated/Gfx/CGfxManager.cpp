@@ -11,16 +11,8 @@
   int v8; // [esp+34h] [ebp-4h]
 
   *(_DWORD *)this = &CGfxManager::_vftable_;
-  `vector constructor iterator'(
-    (char *)this + 4,
-    0x10u,
-    0x2Au,
-    (void *(__thiscall *)(void *))CGfxManager::SGFXINFO::SGFXINFO);
-  `vector constructor iterator'(
-    (char *)this + 2188,
-    0x10u,
-    0x2Au,
-    (void *(__thiscall *)(void *))CGfxManager::SGFXINFO::SGFXINFO);
+  _vec_ctor_no((char *)this + 4, 0x10u, 0x2Au, (void *(__thiscall *)(void *))CGfxManager::SGFXINFO::SGFXINFO);
+  _vec_ctor_no((char *)this + 2188, 0x10u, 0x2Au, (void *(__thiscall *)(void *))CGfxManager::SGFXINFO::SGFXINFO);
   std::wstring::wstring((char *)this + 3196);
   v8 = 1;
   String::String((CGfxManager *)((char *)this + 3232));

@@ -251,7 +251,7 @@ bool  CStateBriefing::OnEvent(class CEvn_Event &) {
         {
           v36 = g_pGameType;
           v44 = g_pGameType;
-          v35 = CGameType::`scalar deleting destructor'((CGameType *)g_pGameType, 1u);
+          v35 = delete (CGameType *)g_pGameType;
           g_pGameType = 0;
         }
         if ( *((_DWORD *)v54 + 1) == 4 )
@@ -385,7 +385,7 @@ bool  CStateBriefing::OnEvent(class CEvn_Event &) {
             {
               v33 = g_pGameType;
               v41 = g_pGameType;
-              v32 = CGameType::`scalar deleting destructor'((CGameType *)g_pGameType, 1u);
+              v32 = delete (CGameType *)g_pGameType;
               g_pGameType = 0;
             }
             v52 = 1;

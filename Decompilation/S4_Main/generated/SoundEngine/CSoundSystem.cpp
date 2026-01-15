@@ -56,7 +56,7 @@
   {
     v1 = this[13];
     if ( v1 )
-      CSoundSystem::SSoundCardData::`vector deleting destructor'(v1, 3u);
+      CSoundSystem::delete[] v1;
     this[13] = 0;
   }
 }
@@ -771,12 +771,7 @@ void  CSoundSystem::CreatePlaylists(int) {
   if ( v7 )
   {
     *v7 = a2;
-    `eh vector constructor iterator'(
-      v7 + 1,
-      0x30u,
-      a2,
-      CPlaylist::CPlaylist,
-      (void (__thiscall *)(void *))CPlaylist::~CPlaylist);
+    _vec_ctor(v7 + 1, 0x30u, a2, CPlaylist::CPlaylist, (void (__thiscall *)(void *))CPlaylist::~CPlaylist);
     v4 = v7 + 1;
   }
   else
@@ -1085,7 +1080,7 @@ void  CSoundSystem::AddSoundCard(struct _GUID *,char const *) {
   if ( v7 )
   {
     *v7 = v6;
-    `eh vector constructor iterator'(
+    _vec_ctor(
       v7 + 1,
       0x20u,
       v6,
@@ -1105,7 +1100,7 @@ void  CSoundSystem::AddSoundCard(struct _GUID *,char const *) {
       std::string::operator=(*((_DWORD *)this + 13) + 32 * i + 4);
     }
     if ( *((_DWORD *)this + 13) )
-      CSoundSystem::SSoundCardData::`vector deleting destructor'(*((CSoundSystem::SSoundCardData **)this + 13), 3u);
+      CSoundSystem::delete[] *((CSoundSystem::SSoundCardData **)this + 13);
   }
   *((_DWORD *)this + 13) = v5;
   *(_DWORD *)(*((_DWORD *)this + 13) + 32 * (*((_DWORD *)this + 6) - 1)) = a2;

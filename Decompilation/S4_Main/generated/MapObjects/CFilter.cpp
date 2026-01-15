@@ -32,7 +32,7 @@
   *(_DWORD *)this = &CFilter::_vftable_;
   result = (void *)*((_DWORD *)this + 1);
   if ( result )
-    return CDynList::`scalar deleting destructor'(*((CDynList **)this + 1), 1u);
+    return delete *((CDynList **)this + 1);
   return result;
 }
 

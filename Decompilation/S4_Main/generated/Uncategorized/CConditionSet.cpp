@@ -27,7 +27,7 @@
 
   result = this;
   if ( *this )
-    return (CDynList **)CDynList::`scalar deleting destructor'(*this, 1u);
+    return (CDynList **)delete *this;
   return result;
 }
 

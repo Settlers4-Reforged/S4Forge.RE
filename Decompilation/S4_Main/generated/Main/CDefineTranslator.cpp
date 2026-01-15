@@ -1885,7 +1885,7 @@ static void __cdecl CDefineTranslator::DestroyInstance(void) {
   Instance = CDefineTranslator::GetInstance();
   result = (CDefineTranslator *)std::auto_ptr<CDefineTranslator>::release(Instance);
   if ( result )
-    return (CDefineTranslator *)CDefineTranslator::`scalar deleting destructor'(result, 1u);
+    return (CDefineTranslator *)delete result;
   return result;
 }
 

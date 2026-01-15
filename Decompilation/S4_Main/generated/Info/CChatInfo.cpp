@@ -6,7 +6,7 @@
 // Decompiled from CChatInfo *__thiscall CChatInfo::CChatInfo(CChatInfo *this)
  CChatInfo::CChatInfo(void) {
   
-  `eh vector constructor iterator'((char *)this + 16, 0x28u, 8u, SPlayerInfo::SPlayerInfo, SPlayerInfo::~SPlayerInfo);
+  _vec_ctor((char *)this + 16, 0x28u, 8u, SPlayerInfo::SPlayerInfo, SPlayerInfo::~SPlayerInfo);
   return this;
 }
 

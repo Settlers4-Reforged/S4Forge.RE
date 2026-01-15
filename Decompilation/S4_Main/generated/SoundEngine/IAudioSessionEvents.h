@@ -6,6 +6,10 @@ public:
     // address=[0x26164e0]
      IAudioSessionEvents(void);
 
+    // Type information members
+private:
+    struct IAudioSessionEventsVtbl * lpVtbl;
+
 };
 
 

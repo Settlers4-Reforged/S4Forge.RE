@@ -27,7 +27,7 @@
   
   *this = (CDynList *)&CParameterSet::_vftable_;
   if ( this[3] )
-    CDynList::`scalar deleting destructor'(this[3], 1u);
+    delete this[3];
   CDynListEntry::~CDynListEntry((CDynListEntry *)this);
 }
 

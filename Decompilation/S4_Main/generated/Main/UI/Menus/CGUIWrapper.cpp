@@ -56,7 +56,7 @@ bool  CGUIWrapper::RebuildGuiEngineWithGfxFile(unsigned int,void *,int,bool (__c
     DialogsRenderScaleX = IGuiEngine::GetDialogsRenderScaleX((IGuiEngine *)g_pGUIEngine);
     DialogsRenderScaleY = IGuiEngine::GetDialogsRenderScaleY((IGuiEngine *)g_pGUIEngine);
     if ( g_pGUIEngine )
-      IGuiEngine::`scalar deleting destructor'((IGuiEngine *)g_pGUIEngine, 1u);
+      delete (IGuiEngine *)g_pGUIEngine;
     if ( CGfxManager::IsGfxFileEnabled((CGfxManager *)g_pGfxManager, *(_DWORD *)this) )
       CGfxManager::DisableGfxFile((CGfxManager *)g_pGfxManager, *(_DWORD *)this);
   }

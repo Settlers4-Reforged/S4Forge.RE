@@ -336,8 +336,8 @@ void  CGameType::SetPlayerName(int,std::wstring &) {
   *((_DWORD *)this + 254) = 0;
   *((_DWORD *)this + 255) = 0;
   *((_DWORD *)this + 256) = 0;
-  `eh vector constructor iterator'((char *)this + 1028, 0x1Cu, 9u, std::wstring::wstring, std::wstring::~wstring);
-  `eh vector constructor iterator'((char *)this + 1280, 0x1Cu, 9u, std::wstring::wstring, std::wstring::~wstring);
+  _vec_ctor((char *)this + 1028, 0x1Cu, 9u, std::wstring::wstring, std::wstring::~wstring);
+  _vec_ctor((char *)this + 1280, 0x1Cu, 9u, std::wstring::wstring, std::wstring::~wstring);
   *((_DWORD *)this + 383) = 0;
   *((_BYTE *)this + 1536) = 0;
   *((_BYTE *)this + 1537) = 0;

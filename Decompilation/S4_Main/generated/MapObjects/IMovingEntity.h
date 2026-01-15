@@ -85,6 +85,26 @@ protected:
     // address=[0x15596e0]
     void  DecDistance(unsigned int);
 
+    // Type information members
+private:
+    DWORD unk_3c;
+    CHAR unk_40;
+    BYTE unk_41;
+    BYTE unk_42;
+    BYTE pad_43;
+    BYTE someRandomNumber;
+    BYTE unk_45;
+    BYTE displacementCosts;
+    BYTE pad;
+    __int16 unk_48;
+    WORD unk_4A;
+    DWORD unk_4c;
+    LPVOID walking;
+    DWORD entityTasks;
+    struct IMovingEntity::IMovingEntity::IMovingEntity::IMovingEntity::IMovingEntity::IMovingEntity::std::List * unk_58;
+    DWORD unk_5C;
+    DWORD unk_60;
+
 };
 
 

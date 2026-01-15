@@ -20,7 +20,7 @@
   if ( *((_DWORD *)this + 4) )
     (***((void (__thiscall ****)(_DWORD, int))this + 4))(*((_DWORD *)this + 4), 1);
   if ( *((_DWORD *)this + 5) )
-    COptimizeOptions::`scalar deleting destructor'(*((COptimizeOptions **)this + 5), 1u);
+    delete *((COptimizeOptions **)this + 5);
   CDynListEntry::~CDynListEntry(this);
 }
 
