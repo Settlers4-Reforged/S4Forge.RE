@@ -6,7 +6,7 @@
 // Decompiled from int __thiscall IEntity::FlagBits(IEntity *this, EntityFlag a2)
 int  IEntity::FlagBits(int)const {
   
-  return a2 & *(_DWORD *)&this->warriorType;
+  return a2 & this->m_iFlags;
 }
 
 
@@ -14,7 +14,7 @@ int  IEntity::FlagBits(int)const {
 // Decompiled from int __thiscall IEntity::ObjType(IEntity *this)
 int  IEntity::ObjType(void)const {
   
-  return this->objType;
+  return this->m_objType;
 }
 
 
@@ -22,7 +22,7 @@ int  IEntity::ObjType(void)const {
 // Decompiled from int __thiscall IEntity::PackedXY(IEntity *this)
 int  IEntity::PackedXY(void)const {
   
-  return *(_DWORD *)&this->x;
+  return this->m_uPackedXY;
 }
 
 
@@ -30,7 +30,7 @@ int  IEntity::PackedXY(void)const {
 // Decompiled from struct CAIEntityInfo *__thiscall IEntity::AIEntityInfoPtr(IEntity *this)
 class CAIEntityInfo *  IEntity::AIEntityInfoPtr(void)const {
   
-  return this->AIEntityInfoPtr;
+  return this->m_psAIEntityInfo;
 }
 
 
@@ -40,8 +40,8 @@ void  IEntity::ClearFlagBits(int) {
   
   int result; // eax
 
-  result = *(_DWORD *)&this->warriorType & ~a2;
-  *(_DWORD *)&this->warriorType = result;
+  result = this->m_iFlags & ~a2;
+  this->m_iFlags = result;
   return result;
 }
 
@@ -50,7 +50,7 @@ void  IEntity::ClearFlagBits(int) {
 // Decompiled from int __thiscall IEntity::Flags(IEntity *this)
 int  IEntity::Flags(void)const {
   
-  return *(_DWORD *)&this->warriorType;
+  return this->m_iFlags;
 }
 
 
@@ -58,7 +58,7 @@ int  IEntity::Flags(void)const {
 // Decompiled from int __thiscall IEntity::ID(IEntity *this)
 int  IEntity::ID(void)const {
   
-  return this->entityId;
+  return this->m_nEntityId;
 }
 
 
@@ -66,7 +66,7 @@ int  IEntity::ID(void)const {
 // Decompiled from int __thiscall IEntity::OwnerId(IEntity *this)
 int  IEntity::OwnerId(void)const {
   
-  return (int)this->PackedTribePlayer.Packed >> 4;
+  return (int)this->m_packedTribePlayer.Packed >> 4;
 }
 
 
@@ -74,7 +74,7 @@ int  IEntity::OwnerId(void)const {
 // Decompiled from void __thiscall IEntity::SetFlagBits(IEntity *this, EntityFlag a2)
 void  IEntity::SetFlagBits(int) {
   
-  *(_DWORD *)&this->warriorType |= a2;
+  this->m_iFlags |= a2;
 }
 
 
@@ -82,7 +82,7 @@ void  IEntity::SetFlagBits(int) {
 // Decompiled from int __thiscall IEntity::Type(IEntity *this)
 int  IEntity::Type(void)const {
   
-  return this->type;
+  return this->m_nType;
 }
 
 
@@ -90,15 +90,15 @@ int  IEntity::Type(void)const {
 // Decompiled from DWORD __thiscall IEntity::UniqueId(IEntity *this)
 int  IEntity::UniqueId(void)const {
   
-  return this->uniqueId;
+  return this->m_iUniqueId;
 }
 
 
 // address=[0x130f520]
-// Decompiled from int __thiscall IEntity::WarriorType(IEntity *this)
+// Decompiled from DWORD __thiscall IEntity::WarriorType(IEntity *this)
 int  IEntity::WarriorType(void)const {
   
-  return *(_DWORD *)&this->warriorType & 0xF;
+  return this->m_iFlags & 0xF;
 }
 
 
@@ -106,7 +106,7 @@ int  IEntity::WarriorType(void)const {
 // Decompiled from int __thiscall IEntity::X(IEntity *this)
 int  IEntity::X(void)const {
   
-  return Y16X16::UnpackXFast(*(_DWORD *)&this->x);
+  return Y16X16::UnpackXFast(this->m_uPackedXY);
 }
 
 
@@ -114,7 +114,7 @@ int  IEntity::X(void)const {
 // Decompiled from int __thiscall IEntity::Y(IEntity *this)
 int  IEntity::Y(void)const {
   
-  return Y16X16::UnpackYFast(*(_DWORD *)&this->x);
+  return Y16X16::UnpackYFast(this->m_uPackedXY);
 }
 
 
@@ -122,7 +122,7 @@ int  IEntity::Y(void)const {
 // Decompiled from CWarMapNode *__thiscall IEntity::WarMapNode(IEntity *this)
 class CWarMapNode const &  IEntity::WarMapNode(void)const {
   
-  return &this->warMapNode;
+  return &this->m_warMapNode;
 }
 
 
@@ -130,7 +130,7 @@ class CWarMapNode const &  IEntity::WarMapNode(void)const {
 // Decompiled from struct CWarMapNode *__thiscall IEntity::WarMapNode(IEntity *this)
 class CWarMapNode &  IEntity::WarMapNode(void) {
   
-  return &this->warMapNode;
+  return &this->m_warMapNode;
 }
 
 
@@ -138,7 +138,7 @@ class CWarMapNode &  IEntity::WarMapNode(void) {
 // Decompiled from int __thiscall IEntity::EntityId(IEntity *this)
 int  IEntity::EntityId(void)const {
   
-  return this->entityId;
+  return this->m_nEntityId;
 }
 
 
@@ -146,7 +146,7 @@ int  IEntity::EntityId(void)const {
 // Decompiled from int __thiscall IEntity::Race(IEntity *this)
 int  IEntity::Race(void)const {
   
-  return this->PackedTribePlayer.Packed & 0xF;
+  return this->m_packedTribePlayer.Packed & 0xF;
 }
 
 
@@ -154,7 +154,7 @@ int  IEntity::Race(void)const {
 // Decompiled from int __thiscall IEntity::Hitpoints(IEntity *this)
 int  IEntity::Hitpoints(void)const {
   
-  return this->health;
+  return this->m_cHealth;
 }
 
 
@@ -186,7 +186,7 @@ int  IEntity::GetGroupFlags(void)const {
 // Decompiled from bool __thiscall IEntity::IsVisible(IEntity *this)
 bool  IEntity::IsVisible(void)const {
   
-  return (*(_DWORD *)&this->warriorType & 0x80100) == 256;
+  return (this->m_iFlags & 0x80100) == 256;
 }
 
 
@@ -207,14 +207,10 @@ int  IEntity::SetGroupFlags(int) {
 
 
 // address=[0x14d8810]
-// Decompiled from struct IEntityVtbl *__thiscall IEntity::SetPosition(IEntity *this, int x, int y)
+// Decompiled from void __thiscall IEntity::SetPosition(IEntity *this, int x, int y)
 void  IEntity::SetPosition(int,int) {
   
-  struct IEntityVtbl *result; // eax
-
-  result = (struct IEntityVtbl *)Y16X16::PackXYFast(x, y);
-  *(_DWORD *)&this->x = result;
-  return result;
+  this->m_uPackedXY = Y16X16::PackXYFast(x, y);
 }
 
 
@@ -235,26 +231,18 @@ void  IEntity::Take(int) {
 
 
 // address=[0x14eb780]
-// Decompiled from IEntity *__thiscall IEntity::SetOwnerId(IEntity *this, unsigned __int8 owner)
+// Decompiled from void __thiscall IEntity::SetOwnerId(IEntity *this, unsigned __int8 owner)
 void  IEntity::SetOwnerId(unsigned char) {
   
-  IEntity *result; // eax
-
-  result = this;
-  this->PackedTribePlayer.Packed = (16 * owner) | this->PackedTribePlayer.Packed & 0xF;
-  return result;
+  this->m_packedTribePlayer.Packed = (16 * owner) | this->m_packedTribePlayer.Packed & 0xF;
 }
 
 
 // address=[0x14eb7e0]
-// Decompiled from IEntity *__thiscall IEntity::SetRace(IEntity *this, unsigned __int8 a2)
+// Decompiled from void __thiscall IEntity::SetRace(IEntity *this, unsigned __int8 a2)
 void  IEntity::SetRace(unsigned char) {
   
-  IEntity *result; // eax
-
-  result = this;
-  this->PackedTribePlayer.Packed = a2 | this->PackedTribePlayer.Packed & 0xF0;
-  return result;
+  this->m_packedTribePlayer.Packed = a2 | this->m_packedTribePlayer.Packed & 0xF0;
 }
 
 
@@ -262,7 +250,7 @@ void  IEntity::SetRace(unsigned char) {
 // Decompiled from void __thiscall IEntity::SetPosition(IEntity *this, int a2)
 void  IEntity::SetPosition(int) {
   
-  *(_DWORD *)&this->x = a2;
+  this->m_uPackedXY = a2;
 }
 
 
@@ -270,7 +258,7 @@ void  IEntity::SetPosition(int) {
 // Decompiled from bool __thiscall IEntity::IsSelected(IEntity *this)
 bool  IEntity::IsSelected(void)const {
   
-  return (*(_DWORD *)&this->warriorType & 0x200) != 0;
+  return (this->m_iFlags & 0x200) != 0;
 }
 
 
@@ -280,16 +268,16 @@ bool  IEntity::IsSelected(void)const {
   
   CPersistence::CPersistence(this);
   this->__vftable = (IEntity_vtbl *)&IEntity::_vftable_;
-  this->uniqueId = -1;
-  this->entityId = id;
-  this->objType = 0;
-  this->type = 0;
-  this->AIEntityInfoPtr = 0;
-  *(_DWORD *)&this->warriorType = 0;
-  *(_DWORD *)&this->x = 0;
-  CWarMapNode::CWarMapNode(&this->warMapNode);
-  this->PackedTribePlayer.Packed = 0;
-  this->health = 0;
+  this->m_iUniqueId = -1;
+  this->m_nEntityId = id;
+  this->m_objType = 0;
+  this->m_nType = 0;
+  this->m_psAIEntityInfo = 0;
+  this->m_iFlags = 0;
+  this->m_uPackedXY = 0;
+  CWarMapNode::CWarMapNode(&this->m_warMapNode);
+  this->m_packedTribePlayer.Packed = 0;
+  this->m_cHealth = 0;
   CMapObjectMgr::RegisterEntity(id, this, 1);
   return this;
 }
@@ -299,26 +287,26 @@ bool  IEntity::IsSelected(void)const {
 // Decompiled from int __thiscall IEntity::~IEntity(IEntity *this)
  IEntity::~IEntity(void) {
   
-  CAIEntityInfo *AIEntityInfoPtr; // [esp+Ch] [ebp-14h]
+  CAIEntityInfo *m_psAIEntityInfo; // [esp+Ch] [ebp-14h]
 
   this->__vftable = (IEntity_vtbl *)&IEntity::_vftable_;
-  if ( CWarMapNode::IsInWarMap(&this->warMapNode) )
+  if ( CWarMapNode::IsInWarMap(&this->m_warMapNode) )
     CWarMap::RemoveEntity(this);
-  if ( this->AIEntityInfoPtr )
+  if ( this->m_psAIEntityInfo )
   {
-    AIEntityInfoPtr = this->AIEntityInfoPtr;
-    if ( AIEntityInfoPtr )
-      CAIEntityInfo::`scalar deleting destructor'(AIEntityInfoPtr, 1);
-    this->AIEntityInfoPtr = 0;
+    m_psAIEntityInfo = this->m_psAIEntityInfo;
+    if ( m_psAIEntityInfo )
+      CAIEntityInfo::`scalar deleting destructor'(m_psAIEntityInfo, 1);
+    this->m_psAIEntityInfo = 0;
   }
-  this->uniqueId |= 0x40000000u;
-  *(_DWORD *)&this->warriorType = 0;
+  this->m_iUniqueId |= 0x40000000u;
+  this->m_iFlags = 0;
   return CWarMapNode::~CWarMapNode();
 }
 
 
 // address=[0x154b570]
-// Decompiled from struct IEntity *__thiscall IEntity::IEntity(struct IEntity *this, struct std::istream *a2)
+// Decompiled from struct IEntity *__thiscall IEntity::IEntity(struct IEntity *this, struct std::istream *inputFile)
  IEntity::IEntity(std::istream &) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
@@ -329,9 +317,9 @@ bool  IEntity::IsSelected(void)const {
   v5 = this;
   CPersistence::CPersistence(this);
   v5->__vftable = (IEntity_vtbl *)&IEntity::_vftable_;
-  CWarMapNode::CWarMapNode(&v5->warMapNode);
+  CWarMapNode::CWarMapNode(&v5->m_warMapNode);
   v6 = 0;
-  operator^<unsigned int>(a2, &v3);
+  operator^<unsigned int>(inputFile, &v3);
   if ( v3 != 2 )
   {
     BBSupportTracePrintF(3, "load output defect Unknown fileFormatVersion for IEntity");
@@ -339,47 +327,47 @@ bool  IEntity::IsSelected(void)const {
     CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
     _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
   }
-  operator^<unsigned short>(a2, &v5->entityId);
-  operator^<unsigned short>(a2, &v5->type);
-  operator^<int>((int)a2, (int)&v5->x);
-  operator^<unsigned char>(a2, &v5->health);
-  operator^<unsigned char>(a2, &v5->objType);
-  operator^<unsigned char>(a2, &v5->PackedTribePlayer);
-  operator^<int>((int)a2, (int)&v5->warriorType);
-  operator^<int>((int)a2, (int)&v5->uniqueId);
-  v5->AIEntityInfoPtr = 0;
-  CMapObjectMgr::RegisterEntity(v5->entityId, v5, 0);
+  operator^<unsigned short>(inputFile, &v5->m_nEntityId);
+  operator^<unsigned short>(inputFile, &v5->m_nType);
+  operator^<int>(inputFile, &v5->m_uPackedXY);
+  operator^<unsigned char>(inputFile, &v5->m_cHealth);
+  operator^<unsigned char>(inputFile, &v5->m_objType);
+  operator^<unsigned char>(inputFile, &v5->m_packedTribePlayer);
+  operator^<int>(inputFile, &v5->m_iFlags);
+  operator^<int>(inputFile, &v5->m_iUniqueId);
+  v5->m_psAIEntityInfo = 0;
+  CMapObjectMgr::RegisterEntity(v5->m_nEntityId, v5, 0);
   v6 = -1;
   return v5;
 }
 
 
 // address=[0x154b6e0]
-// Decompiled from int __thiscall IEntity::Store(IEntity *this, struct std::ostream *a2)
+// Decompiled from void __thiscall IEntity::Store(IEntity *this, struct std::ostream *a2)
 void  IEntity::Store(std::ostream &) {
   
-  int v3; // [esp+0h] [ebp-8h] BYREF
+  int v2; // [esp+0h] [ebp-8h] BYREF
 
   CPersistence::Store(this, a2);
-  v3 = 2;
-  operator^<unsigned int>(a2, &v3);
-  operator^<unsigned short>(a2, (__int16 *)&this->entityId);
-  operator^<unsigned short>(a2, (__int16 *)&this->type);
-  operator^<int>(a2, (int *)&this->x);
-  operator^<unsigned char>(a2, (int)&this->health);
-  operator^<unsigned char>(a2, (int)&this->objType);
-  operator^<unsigned char>(a2, (int)&this->PackedTribePlayer);
-  operator^<int>(a2, (int *)&this->warriorType);
-  return operator^<int>(a2, (int *)&this->uniqueId);
+  v2 = 2;
+  operator^<unsigned int>(a2, &v2);
+  operator^<unsigned short>(a2, &this->m_nEntityId);
+  operator^<unsigned short>(a2, &this->m_nType);
+  operator^<int>(a2, &this->m_uPackedXY);
+  operator^<unsigned char>(a2, &this->m_cHealth);
+  operator^<unsigned char>(a2, (BYTE *)&this->m_objType);
+  operator^<unsigned char>(a2, (BYTE *)&this->m_packedTribePlayer);
+  operator^<int>(a2, &this->m_iFlags);
+  operator^<int>(a2, &this->m_iUniqueId);
 }
 
 
 // address=[0x154b7b0]
-// Decompiled from int IEntity::PostLoadInit()
+// Decompiled from void __thiscall IEntity::PostLoadInit(IEntity *this)
 void  IEntity::PostLoadInit(void) {
   
-  IEntity::ClearFlagBits(0x200);
-  return IEntity::ClearFlagBits(0x400);
+  IEntity::ClearFlagBits(this, Selected);
+  IEntity::ClearFlagBits(this, (EntityFlag)0x400u);
 }
 
 
@@ -387,7 +375,7 @@ void  IEntity::PostLoadInit(void) {
 // Decompiled from int __thiscall IEntity::WorldIdx(IEntity *this)
 int  IEntity::WorldIdx(void)const {
   
-  return CWorldManager::Index(*(_DWORD *)&this->x);
+  return CWorldManager::Index(this->m_uPackedXY);
 }
 
 
@@ -395,11 +383,11 @@ int  IEntity::WorldIdx(void)const {
 // Decompiled from int __thiscall IEntity::Increase(IEntity *this, int byAmount)
 int  IEntity::Increase(int) {
   
-  if ( byAmount + this->health <= 255 )
-    this->health += byAmount;
+  if ( byAmount + this->m_cHealth <= 255 )
+    this->m_cHealth += byAmount;
   else
-    this->health = -1;
-  return this->health;
+    this->m_cHealth = -1;
+  return this->m_cHealth;
 }
 
 
@@ -409,14 +397,14 @@ void  IEntity::Decrease(int) {
   
   if ( byAmount > 0 )
   {
-    if ( byAmount < this->health )
+    if ( byAmount < this->m_cHealth )
     {
-      this->health -= byAmount;
+      this->m_cHealth -= byAmount;
     }
     else
     {
-      this->health = 0;
-      CMapObjectMgr::Kill(g_pMapObjectMgr, this->entityId, g_CurrentEntityAttacker);
+      this->m_cHealth = 0;
+      CMapObjectMgr::Kill(g_pMapObjectMgr, this->m_nEntityId, g_CurrentEntityAttacker);
     }
   }
 }
@@ -436,7 +424,7 @@ void  IEntity::Decrease(int,int) {
 // Decompiled from int __thiscall IEntity::Amount(IEntity *this)
 int  IEntity::Amount(void)const {
   
-  return this->health;
+  return this->m_cHealth;
 }
 
 
@@ -452,19 +440,19 @@ int  IEntity::MaxHitpoints(void)const {
 // Decompiled from void __thiscall IEntity::SetAIEntityInfoPtr(IEntity *this, struct CAIEntityInfo *a2)
 void  IEntity::SetAIEntityInfoPtr(class CAIEntityInfo *) {
   
-  if ( this->AIEntityInfoPtr )
-    CAIEntityInfo::`scalar deleting destructor'(this->AIEntityInfoPtr, 1);
-  this->AIEntityInfoPtr = a2;
+  if ( this->m_psAIEntityInfo )
+    CAIEntityInfo::`scalar deleting destructor'(this->m_psAIEntityInfo, 1);
+  this->m_psAIEntityInfo = a2;
 }
 
 
 // address=[0x154b960]
-// Decompiled from int __thiscall IEntity::DbgPrint(IEntity *this, int logLevel, const char *customMessage)
+// Decompiled from void __thiscall IEntity::DbgPrint(IEntity *this, int logLevel, const char *customMessage)
 void  IEntity::DbgPrint(int,char const *) {
   
   struct type_info *v3; // eax
-  const char *v4; // eax
-  int v6; // [esp-20h] [ebp-28h]
+  const char *v4; // [esp-24h] [ebp-2Ch]
+  int entityId; // [esp-20h] [ebp-28h]
   int objType; // [esp-1Ch] [ebp-24h]
   int type; // [esp-18h] [ebp-20h]
   int race; // [esp-14h] [ebp-1Ch]
@@ -472,12 +460,12 @@ void  IEntity::DbgPrint(int,char const *) {
   int flags; // [esp-Ch] [ebp-14h]
   int x; // [esp-8h] [ebp-10h]
   int y; // [esp-4h] [ebp-Ch]
-  const char *v14; // [esp+0h] [ebp-8h]
+  const char *message; // [esp+0h] [ebp-8h]
 
   if ( customMessage )
-    v14 = customMessage;
+    message = customMessage;
   else
-    v14 = "IEntity::DbgPrint()";
+    message = "IEntity::DbgPrint()";
   y = IEntity::Y(this);
   x = IEntity::X(this);
   flags = IEntity::Flags(this);
@@ -485,22 +473,22 @@ void  IEntity::DbgPrint(int,char const *) {
   race = IEntity::Race(this);
   type = IEntity::Type(this);
   objType = IEntity::ObjType(this);
-  v6 = IEntity::EntityId(this);
+  entityId = IEntity::EntityId(this);
   v3 = typeid(this);
   v4 = type_info::name(v3);
-  return BBSupportTracePrintF(
-           logLevel,
-           "%s: %s, id %i, obj type %02x, type %i, race %i, owner %i, flags 0x%08x, pos (%i, %i).",
-           v14,
-           v4,
-           v6,
-           objType,
-           type,
-           race,
-           ownerId,
-           flags,
-           x,
-           y);
+  BBSupportTracePrintF(
+    logLevel,
+    "%s: %s, id %i, obj type %02x, type %i, race %i, owner %i, flags 0x%08x, pos (%i, %i).",
+    message,
+    v4,
+    entityId,
+    objType,
+    type,
+    race,
+    ownerId,
+    flags,
+    x,
+    y);
 }
 
 
@@ -513,12 +501,12 @@ void  IEntity::PlaceInMapObjectLayer(int) {
   int x; // [esp+4h] [ebp-Ch]
   int y; // [esp+8h] [ebp-8h]
 
-  if ( (*(_DWORD *)&this->warriorType & 0x8000) == 0
+  if ( (this->m_iFlags & 0x8000) == 0
     && BBSupportDbgReport(2, "MapObjects\\Entity.cpp", 284, "(m_iFlags & ENTITY_FLAG_ON_BOARD) != 0") == 1 )
   {
     __debugbreak();
   }
-  *(_DWORD *)&this->warriorType &= ~0x8000u;
+  this->m_iFlags &= ~0x8000u;
   if ( packedXY >= 0 )
   {
     if ( !CWorldManager::InWorldPackedXY(packedXY)
@@ -551,17 +539,17 @@ void  IEntity::PlaceInMapObjectLayer(int) {
 // Decompiled from void __thiscall IEntity::RemoveFromMapObjectLayer(IEntity *this)
 void  IEntity::RemoveFromMapObjectLayer(void) {
   
-  int v1; // esi
+  int mapId; // esi
   int worldIndex; // [esp+4h] [ebp-10h]
   int x; // [esp+8h] [ebp-Ch]
   int y; // [esp+Ch] [ebp-8h]
 
-  if ( (*(_DWORD *)&this->warriorType & 0x8000) != 0
+  if ( (this->m_iFlags & 0x8000) != 0
     && BBSupportDbgReport(2, "MapObjects\\Entity.cpp", 316, "(m_iFlags & ENTITY_FLAG_ON_BOARD) == 0") == 1 )
   {
     __debugbreak();
   }
-  *(_DWORD *)&this->warriorType |= 0x8000u;
+  this->m_iFlags |= 0x8000u;
   x = IEntity::X(this);
   y = IEntity::Y(this);
   if ( !CWorldManager::InWorld(x, y)
@@ -570,8 +558,8 @@ void  IEntity::RemoveFromMapObjectLayer(void) {
     __debugbreak();
   }
   worldIndex = CWorldManager::Index(x, y);
-  v1 = CWorldManager::MapObjectId(worldIndex);
-  if ( v1 != IEntity::EntityId(this)
+  mapId = CWorldManager::MapObjectId(worldIndex);
+  if ( mapId != IEntity::EntityId(this)
     && BBSupportDbgReport(2, "MapObjects\\Entity.cpp", 327, "g_cWorld.MapObjectId(iEntityWorldIdx) == EntityId()") == 1 )
   {
     __debugbreak();
@@ -589,7 +577,7 @@ void  IEntity::RemoveFromMapObjectLayerIfNecessary(void) {
   int mapId; // esi
   int y; // [esp-4h] [ebp-Ch] MAPDST
 
-  if ( (*(_DWORD *)&this->warriorType & 0x8000) != 0 )
+  if ( (this->m_iFlags & 0x8000) != 0 )
   {
     y = IEntity::Y(this);
     x = IEntity::X(this);
@@ -617,12 +605,11 @@ void  IEntity::RemoveFromMapObjectLayerIfNecessary(void) {
 
 
 // address=[0x154bd00]
-// Decompiled from int __stdcall IEntity::Detach(IEntity *a1)
+// Decompiled from void __stdcall IEntity::Detach(IEntity *a1)
 void  IEntity::Detach(int) {
   
   if ( BBSupportDbgReport(1, "MapObjects\\Entity.cpp", 360, "IEntity::Detach() called!") == 1 )
     __debugbreak();
-  return 0;
 }
 
 
@@ -674,7 +661,7 @@ void  IEntity::SetEvent(class CEntityEvent const &) {
 // Decompiled from BOOL __thiscall IEntity::CheckType(IEntity *this, char a2, int a3)
 bool  IEntity::CheckType(int,int)const {
   
-  return this->type == a3 && (unsigned __int8)(a2 & this->objType) != 0;
+  return this->m_nType == a3 && (unsigned __int8)(a2 & this->m_objType) != 0;
 }
 
 
@@ -682,7 +669,7 @@ bool  IEntity::CheckType(int,int)const {
 // Decompiled from void __thiscall IEntity::SetHitpoints(IEntity *this, char hp)
 void  IEntity::SetHitpoints(unsigned int) {
   
-  this->health = hp;
+  this->m_cHealth = hp;
 }
 
 

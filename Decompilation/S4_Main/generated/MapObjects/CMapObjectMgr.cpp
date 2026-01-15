@@ -241,7 +241,7 @@ static void __cdecl CMapObjectMgr::RegisterEntity(int,class IEntity *,bool) {
   }
   if ( a3 )
   {
-    if ( pEntity->uniqueId != -1
+    if ( pEntity->m_iUniqueId != -1
       && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 389, "_pEntity->m_iUniqueId == -1") == 1 )
     {
       __debugbreak();
@@ -260,9 +260,9 @@ static void __cdecl CMapObjectMgr::RegisterEntity(int,class IEntity *,bool) {
     {
       __debugbreak();
     }
-    pEntity->uniqueId = CMapObjectMgr::m_iCurrentUniqueId++;
+    pEntity->m_iUniqueId = CMapObjectMgr::m_iCurrentUniqueId++;
   }
-  else if ( (int)pEntity->uniqueId <= 0
+  else if ( (int)pEntity->m_iUniqueId <= 0
          && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 397, "_pEntity->m_iUniqueId > 0") == 1 )
   {
     __debugbreak();
@@ -339,7 +339,7 @@ void  CMapObjectMgr::Kill(int,int) {
     v4,
     type,
     (char *)attacker);
-  if ( (entity->uniqueId & 0x20000000) != 0 )
+  if ( (entity->m_iUniqueId & 0x20000000) != 0 )
   {
     if ( IEntity::FlagBits(entity, AliveMask)
       && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 460, "pEntity->FlagBits(ENTITY_FLAG_ALIVE_MASK) == 0") == 1 )
@@ -354,7 +354,7 @@ void  CMapObjectMgr::Kill(int,int) {
   }
   else
   {
-    entity->uniqueId |= 0x20000000u;
+    entity->m_iUniqueId |= 0x20000000u;
     if ( IEntity::FlagBits(entity, Died)
       && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 468, "pEntity->FlagBits(ENTITY_FLAG_DIED) == 0") == 1 )
     {
@@ -366,7 +366,7 @@ void  CMapObjectMgr::Kill(int,int) {
       IEntity::ClearFlagBits(entity, (EntityFlag)0x100000u);
     IEntity::ClearFlagBits(entity, AliveMask);
     IEntity::SetFlagBits(entity, Died);
-    if ( CWarMapNode::IsInWarMap(&entity->warMapNode) )
+    if ( CWarMapNode::IsInWarMap(&entity->m_warMapNode) )
       CWarMap::RemoveEntity(entity);
     if ( IEntity::FlagBits(entity, Selected) || IEntity::FlagBits(entity, (EntityFlag)0x400u) )
     {
@@ -393,12 +393,12 @@ void  CMapObjectMgr::Kill(int,int) {
         CStatistic::IncLossesVehicleOfType((CStatistic *)&g_cStatistic, v9, v12);
       }
     }
-    if ( entity->AIEntityInfoPtr )
+    if ( entity->m_psAIEntityInfo )
     {
-      AIEntityInfoPtr = entity->AIEntityInfoPtr;
+      AIEntityInfoPtr = entity->m_psAIEntityInfo;
       if ( AIEntityInfoPtr )
         CAIEntityInfo::`scalar deleting destructor'(AIEntityInfoPtr, 1);
-      entity->AIEntityInfoPtr = 0;
+      entity->m_psAIEntityInfo = 0;
     }
     ((void (__thiscall *)(IEntity *))entity->j_?Delete@IEntity@@UAEXXZ)(entity);
     v10 = j____RTDynamicCast(

@@ -1039,30 +1039,30 @@ void  CVehicle::Store(std::ostream &) {
   CObserverList::Store(&v10[1].unk_40, a1);
   v8 = 2;
   operator^<unsigned int>(a1, &v8);
-  operator^<unsigned char>(a1, (BYTE *)&v10[1].type);
-  operator^<unsigned char>(a1, (BYTE *)&v10[1].type + 1);
+  operator^<unsigned char>(a1, (BYTE *)&v10[1].m_nType);
+  operator^<unsigned char>(a1, (BYTE *)&v10[1].m_nType + 1);
   operator^<unsigned char>(a1, &v10[1].unk_e);
   operator^<unsigned char>(a1, &v10[1].unk_f);
-  operator^<unsigned char>(a1, (BYTE *)&v10[1].AIEntityInfoPtr);
-  operator^<unsigned char>(a1, (BYTE *)&v10[1].AIEntityInfoPtr + 1);
-  operator^<unsigned char>(a1, (BYTE *)&v10[1].AIEntityInfoPtr + 2);
-  operator^<unsigned char>(a1, (BYTE *)&v10[1].AIEntityInfoPtr + 3);
-  operator^<unsigned char>(a1, (BYTE *)&v10[1].warriorType);
-  operator^<unsigned char>(a1, &v10[1].selectionFlags);
-  operator^<unsigned int>(a1, (int *)&v10[1].x);
+  operator^<unsigned char>(a1, (BYTE *)&v10[1].m_psAIEntityInfo);
+  operator^<unsigned char>(a1, (BYTE *)&v10[1].m_psAIEntityInfo + 1);
+  operator^<unsigned char>(a1, (BYTE *)&v10[1].m_psAIEntityInfo + 2);
+  operator^<unsigned char>(a1, (BYTE *)&v10[1].m_psAIEntityInfo + 3);
+  operator^<unsigned char>(a1, (BYTE *)&v10[1].m_iFlags);
+  operator^<unsigned char>(a1, &v10[1].?);
+  operator^<unsigned int>(a1, (int *)&v10[1].m_uPackedXY);
   operator^<bool>(a1, &CVehicle::m_bCallTakeJob);
-  operator^<unsigned char>(a1, (BYTE *)&v10[1].warMapNode);
-  operator^<unsigned char>(a1, &v10[1].warMapNode.unk_1d);
-  operator^<unsigned char>(a1, (BYTE *)&v10[1].warMapNode.next);
-  operator^<unsigned char>(a1, (BYTE *)&v10[1].warMapNode.next + 1);
-  operator^<unsigned short>(a1, (WORD *)&v10[1].PackedTribePlayer);
+  operator^<unsigned char>(a1, (BYTE *)&v10[1].m_warMapNode);
+  operator^<unsigned char>(a1, &v10[1].m_warMapNode.unk_1d);
+  operator^<unsigned char>(a1, (BYTE *)&v10[1].m_warMapNode.next);
+  operator^<unsigned char>(a1, (BYTE *)&v10[1].m_warMapNode.next + 1);
+  operator^<unsigned short>(a1, (WORD *)&v10[1].m_packedTribePlayer);
   operator^<unsigned short>(a1, (WORD *)&v10[1].pad_22);
-  operator^<unsigned short>(a1, (WORD *)&v10[1].frame);
-  operator^<unsigned short>(a1, &v10[1].jobPart);
-  operator^<unsigned short>(a1, &v10[1].prevEntity);
-  operator^<float>(a1, &v10[1].lastUpdateTick);
+  operator^<unsigned short>(a1, (WORD *)&v10[1].m_cFrame);
+  operator^<unsigned short>(a1, &v10[1].m_wJobPart);
+  operator^<unsigned short>(a1, &v10[1].m_wPrevEntity);
+  operator^<float>(a1, &v10[1].m_uLastUpdateTick);
   operator^<unsigned char>(a1, &v10->unk_45);
-  v7 = std::vector<CEntityTask>::size(&v10[1].lastLogicUpdate);
+  v7 = std::vector<CEntityTask>::size(&v10[1].m_uLastLogicUpdate);
   operator^<unsigned int>(a1, &v7);
   std::vector<CEntityTask>::begin(v4);
   v12 = 0;
@@ -1082,7 +1082,7 @@ void  CVehicle::Store(std::ostream &) {
   }
   v12 = -1;
   std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CEntityTask>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CEntityTask>>>(v4);
-  return operator^<unsigned short>(a1, (WORD *)&v10[1].unk_16);
+  return operator^<unsigned short>(a1, (WORD *)&v10[1].?);
 }
 
 

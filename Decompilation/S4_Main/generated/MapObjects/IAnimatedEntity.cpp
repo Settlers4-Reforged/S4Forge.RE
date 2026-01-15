@@ -62,7 +62,7 @@ void  IAnimatedEntity::SetPrevious(int) {
   IAnimatedEntity *result; // eax
 
   result = this;
-  this->prevEntity = a2;
+  this->m_wPrevEntity = a2;
   return result;
 }
 
@@ -350,16 +350,16 @@ void  IAnimatedEntity::Store(std::ostream &) {
   IEntity::Store((char *)this, (int)a2);
   v8 = 1;
   operator^<unsigned int>(a2, &v8);
-  operator^<unsigned char>(a2, &this->frame);
-  operator^<unsigned char>(a2, &this->attackerPlayerId);
-  operator^<unsigned short>(a2, &this->jobPart);
-  operator^<unsigned short>(a2, &this->prevEntity);
-  operator^<unsigned short>(a2, &this->nextEntity);
-  operator^<unsigned int>(a2, (int *)&this->lastUpdateTick);
-  operator^<int>(a2, (int *)&this->lastLogicUpdate);
-  v7 = std::vector<CEntityEvent>::size(&this->eventQueue);
+  operator^<unsigned char>(a2, &this->m_cFrame);
+  operator^<unsigned char>(a2, &this->m_cAttackerPlayerId);
+  operator^<unsigned short>(a2, &this->m_wJobPart);
+  operator^<unsigned short>(a2, &this->m_wPrevEntity);
+  operator^<unsigned short>(a2, &this->m_wNextEntity);
+  operator^<unsigned int>(a2, (int *)&this->m_uLastUpdateTick);
+  operator^<int>(a2, (int *)&this->m_uLastLogicUpdate);
+  v7 = std::vector<CEntityEvent>::size(&this->m_iEventQueue);
   operator^<unsigned int>(a2, &v7);
-  std::vector<CEntityEvent>::begin(&this->eventQueue, (int)v4);
+  std::vector<CEntityEvent>::begin(&this->m_iEventQueue, (int)v4);
   v12 = 0;
   while ( 1 )
   {

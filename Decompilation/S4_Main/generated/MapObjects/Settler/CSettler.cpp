@@ -6,7 +6,7 @@
 // Decompiled from int __thiscall CSettler::Role(CSettler *this)
 class ISettlerRole &  CSettler::Role(void) {
   
-  return std::auto_ptr<ISettlerRole>::operator*(&this[1].entityId);
+  return std::auto_ptr<ISettlerRole>::operator*(&this[1].m_nEntityId);
 }
 
 
@@ -57,7 +57,7 @@ void  CSettler::SetFree(void) {
   
   int v2; // [esp+0h] [ebp-8h]
 
-  v2 = std::auto_ptr<ISettlerRole>::operator->(&this[1].entityId);
+  v2 = std::auto_ptr<ISettlerRole>::operator->(&this[1].m_nEntityId);
   return (*(int (__thiscall **)(int, CSettler *, int))(*(_DWORD *)v2 + 64))(v2, this, -1);
 }
 
@@ -480,16 +480,16 @@ void  CSettler::NewRole(class std::auto_ptr<class ISettlerRole>) {
   }
   else
   {
-    if ( !std::auto_ptr<ISettlerRole>::get(&this[1].entityId)
+    if ( !std::auto_ptr<ISettlerRole>::get(&this[1].m_nEntityId)
       && BBSupportDbgReport(2, "MapObjects\\Settler\\Settler.cpp", 549, "m_pBehavior.get()!=NULL") == 1 )
     {
       __debugbreak();
     }
     IEntity::RemoveFromAllGroups();
     std::auto_ptr<ISettlerRole>::operator=(&a2);
-    v6 = std::auto_ptr<ISettlerRole>::operator->(&this[1].entityId);
+    v6 = std::auto_ptr<ISettlerRole>::operator->(&this[1].m_nEntityId);
     (*(void (__thiscall **)(int, CSettler *))(*(_DWORD *)v6 + 44))(v6, this);
-    v5 = std::auto_ptr<ISettlerRole>::operator->(&this[1].entityId);
+    v5 = std::auto_ptr<ISettlerRole>::operator->(&this[1].m_nEntityId);
     v3 = (*(int (__thiscall **)(int, CSettler *))(*(_DWORD *)v5 + 20))(v5, this);
     std::auto_ptr<CWalking>::auto_ptr<CWalking>(v3);
     std::auto_ptr<CWalking>::operator=(v4);
@@ -742,11 +742,11 @@ void  CSettler::ChangeType(int,bool,bool) {
           CSettler::SetFree((CSettler *)this);
         v27 = IEntity::Type(this);
         CWarMap::RemoveEntity(this);
-        this->type = newSettlerType;
-        v29 = CSettlerMgr::SettlerWarriorType(this->type);
-        *(_DWORD *)&this->warriorType &= 0xFFFFFFF0;
-        *(_DWORD *)&this->warriorType |= v29;
-        *(_DWORD *)&this->warriorType &= ~0x10000000u;
+        this->m_nType = newSettlerType;
+        v29 = CSettlerMgr::SettlerWarriorType(this->m_nType);
+        *(_DWORD *)&this->m_iFlags &= 0xFFFFFFF0;
+        *(_DWORD *)&this->m_iFlags |= v29;
+        *(_DWORD *)&this->m_iFlags &= ~0x10000000u;
         CWarMap::AddEntity(this);
         SettlerRole = 0;
         if ( IHJBMgr::GetHJBPlayerId()
@@ -806,7 +806,7 @@ void  CSettler::ChangeType(int,bool,bool) {
         type = IEntity::Type(this);
         race = IEntity::Race(this);
         settlerInfo = CSettlerMgr::GetSettlerInfo(race, type);
-        this->health = settlerInfo->m_bHealth;
+        this->m_cHealth = settlerInfo->m_bHealth;
         aiEvent = CAIEvent::Pack(v27, newSettlerType);
         v22 = IEntity::ID(this);
         v20 = IEntity::OwnerId(this);
@@ -913,17 +913,17 @@ int  CSettler::Increase(int) {
   maxHitpoints = CSettlerMgr::GetSettlerInfo(v3, v4)->m_bHealth;
   if ( a2 >= 0 )
   {
-    v5 = a2 + this->health;
+    v5 = a2 + this->m_cHealth;
     if ( v5 > maxHitpoints )
-      this->health = maxHitpoints;
+      this->m_cHealth = maxHitpoints;
     else
-      this->health = v5;
+      this->m_cHealth = v5;
   }
   else
   {
-    this->health = maxHitpoints;
+    this->m_cHealth = maxHitpoints;
   }
-  return this->health;
+  return this->m_cHealth;
 }
 
 
@@ -1279,18 +1279,18 @@ int  CSettler::SetGroupFlags(int) {
     posY);
   this->unk_45 = 0;
   IEntity::SetPosition(this, posX, posY);
-  this->objType = Settler;
-  this->type = settlerType;
+  this->m_objType = Settler;
+  this->m_nType = settlerType;
   this->someRandomNumber = (unsigned int)CGameData::Rand(g_pGameData) % 6;
   IEntity::SetOwnerId(this, player);
   playerInfo = CPlayerManager::PlayerInfo(player);
   race = CPlayerInfo::Race(playerInfo);
   IEntity::SetRace(this, race);
   race2 = IEntity::Race(this);
-  this->health = CSettlerMgr::GetSettlerInfo(race2, settlerType)->m_bHealth;
+  this->m_cHealth = CSettlerMgr::GetSettlerInfo(race2, settlerType)->m_bHealth;
   IEntity::ClearFlagBits(this, (EntityFlag)0x2800u);
   IEntity::SetFlagBits(this, Ready|Visible|0x1000);
-  *(_DWORD *)&this->warriorType |= CSettlerMgr::SettlerWarriorType(settlerType);
+  *(_DWORD *)&this->m_iFlags |= CSettlerMgr::SettlerWarriorType(settlerType);
   if ( !IEntity::WarriorType() )
   {
     worldIdx = IEntity::WorldIdx();
@@ -1300,9 +1300,9 @@ int  CSettler::SetGroupFlags(int) {
       ecoSector = (unsigned __int16 *)CEcoSectorMgr::operator[](g_cESMgr, ecoSectorId);
       if ( CEcoSector::Owner(ecoSector) == player )
       {
-        CEcoSector::ChangeNrOfSettler((CEcoSector *)ecoSector, this->type, 1);
+        CEcoSector::ChangeNrOfSettler((CEcoSector *)ecoSector, this->m_nType, 1);
         if ( IEntity::Type(this) != 1 )
-          CEcoSector::SetSettlerOffer(ecoSector, this->type, this->entityId);
+          CEcoSector::SetSettlerOffer(ecoSector, this->m_nType, this->m_nEntityId);
       }
     }
   }
@@ -1311,7 +1311,7 @@ int  CSettler::SetGroupFlags(int) {
   {
     __debugbreak();
   }
-  CWorldManager::SetSettlerId(posX, posY, this->entityId);
+  CWorldManager::SetSettlerId(posX, posY, this->m_nEntityId);
   IMovingEntity::SetDisplacementCosts(this, 0);
   settlerRole = std::auto_ptr<ISettlerRole>::operator->(&this->role);
   v11 = ((int (__thiscall *)(struct ISettlerRole *, CSettler *))settlerRole->__vftable[1].dtor)(settlerRole, this);
