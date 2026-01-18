@@ -17,37 +17,7 @@ IGNORE_KEYWORDS = [
     "::TArgv",
     "std::SIMPL_NS",
 
-    "Concurrency::details::",
-    "Concurrency::Context",
-    "Concurrency::context_",
-    "Concurrency::critical_section",
-    "Concurrency::event",
-    "Concurrency::improper",
-    "Concurrency::invalid",
-    "Concurrency::task",
-    "Concurrency::unsupported",
-    "Concurrency::reader",
-    "Concurrency::Scheduler",
-    "Concurrency::scheduler",
-    "Concurrency::default",
-    "Concurrency::IVirtualProcessorRoot",
-    "Concurrency::location",
-    "Concurrency::message",
-    "Concurrency::nested_",
-    "Concurrency::missing_",
-    "Concurrency::operation_",
-    "Concurrency::DispatchState",
-    "Concurrency::IScheduler",
-    "Concurrency::ISchedulerProxy",
-    "Concurrency::IThreadProxy",
-    "Concurrency::ITopologyExecutionResource",
-    "Concurrency::ITopologyNode",
-    "Concurrency::IUMSCompletionList",
-    "Concurrency::IUMSScheduler",
-    "Concurrency::IUMSThreadProxy",
-    "Concurrency::IUMSUnblockNotification",
-    "Concurrency::IExecutionContext",
-    "Concurrency::IExecutionResource",
+    "Concurrency::",
     "bad_target",
     "UnDecorator",
     "Replicator",
@@ -63,17 +33,23 @@ IGNORE_KEYWORDS = [
     "__imp",
     "_png_",
 
+    "__cdecl Eal",
     "eal_",
-    "EalFileLibInitializer",
-    "EalInputLibInitializer",
-    "EalInterfaceInitializer",
-    "EalJobLibInitializer",
-    "EalLogLibInitializer",
-    "EalMemLibInitializer",
-    "EalNetLibInitializer",
+    "TgoEalHelper",
+    "EalFile",
+    "EalInput",
+    "EalInt",
+    "EalJob",
+    "EalLog",
+    "EalMem",
+    "EalNet",
+    "SimplPS",
     "SimplLockWrapper",
     "SimplLockWrapper",
     "SimplScopedLock",
+
+    " DName",
+    "DNameStatus",
 
     "FLDirListStruct",
     "FLFHandleStruct",
@@ -491,7 +467,6 @@ FOLDER_MAP =  {
         "CRequire",
         "CSchedule",
         "IScheduleEntry",
-        "ScheduleGroup",
         "CLogic",
         "CLogicRingBuffer",
         "CMagic",
@@ -673,7 +648,6 @@ FOLDER_MAP =  {
         "COwnerMapExEx",
         "CStone",
         "CTree",
-        "IResourceManager",
         "IFogging",
         "IHJBMgr",
         "IMapCheck",
@@ -962,9 +936,6 @@ FOLDER_MAP =  {
         "CRefGrpEntry",
         "CTmpEntitiesRef",
         "Cryptor",
-        "DName",
-        "DNameNode",
-        "DNameStatusNode",
         "SAIDTOCCUPIEDELEMENT",
         "SAIDTUD",
         "SAI_ECO_POSS_BUILD_PLACE",
@@ -1368,8 +1339,14 @@ def write_globals(globals_list, generated_headers):
         f.write(f"#ifndef {guard}\n#define {guard}\n\n")
 
         globals_by_ns = defaultdict(list)
+        skipped_entries = []
 
         for entry in globals_list:
+            # entries without any type information (aka, no space in the name) should just be maybe documented as comments, but otherwise skipped
+            if entry["symbol"].find(" ") == -1 or entry["symbol"].find("destructor iterator") != -1 or entry["symbol"].find("'") != -1:
+                skipped_entries.append(entry)
+                continue
+
             match = re.match(r"([\w:]+)::", entry["symbol"])
             namespaces = split_namespaces(match.group(1))[0] if match else []
             globals_by_ns[tuple(namespaces)].append(entry)
@@ -1386,7 +1363,46 @@ def write_globals(globals_list, generated_headers):
             if namespaces:
                 f.write("\n")
 
+        for entry in skipped_entries:
+                f.write(
+                    f"// SKIPPED address=[{hex(int(entry['address'], 16) - ADDRESS_OFFSET)}]\n")
+                f.write(f"// {entry['symbol']};\n")
+
         f.write(f"#endif // {guard}\n")
+    
+    implementation_path = os.path.join(OUTPUT_DIR, GLOBAL_HEADER.replace(".h", ".cpp"))
+    with open(implementation_path, "w", encoding="utf-8") as f:
+        f.write(f'#include "{GLOBAL_HEADER}"\n')
+
+        for namespaces, entries in globals_by_ns.items():
+            for entry in entries:
+                f.write(
+                    f"// address=[{hex(int(entry['address'], 16) - ADDRESS_OFFSET)}]\n")
+                func = get_function_definition(int(entry['address'], 16) - ADDRESS_OFFSET)
+                
+                if func == "None":
+                    f.write(f"// [Decompilation failed for {entry['symbol']}]\n\n")
+                    continue
+
+                func_name = strip_for_decompilation(entry["symbol"])
+
+                ftd = get_function_info_from_address(int(entry['address'], 16) - ADDRESS_OFFSET)
+                decl_arguments = get_arguments_from_function_info(ftd) if ftd else None
+                if decl_arguments:
+                    func_name = append_names(func_name, decl_arguments)
+
+                [ida_func_name, func_without_declaration] = func.split("{", 1)
+                func = func_name + " {\n  " + func_without_declaration
+
+                commented_func_name = ida_func_name.split("\n")
+                commented_func_name = [line.strip() for line in commented_func_name if line.strip() != '' and not line.strip().startswith("//")]
+                ida_func_name = "\n ".join(commented_func_name)
+
+                ida_func_name = ida_func_name.strip().replace("\n", " ")
+                f.write(f"// Decompiled from {ida_func_name}\n")
+                
+                func = strip_destructor(func)
+                f.write(f"{func}\n\n")
 
 
 def write_class_headers(classes, generated_headers):
