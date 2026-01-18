@@ -23,3 +23,4 @@ target_compile_features(S4_Main PRIVATE cxx_std_17)
 target_compile_options(S4_Main PRIVATE /W4 /WX /permissive-)
 
 target_include_directories(S4_Main PRIVATE S4_Main/generated)
+target_include_directories(S4_Main PRIVATE S4_Main/src)
