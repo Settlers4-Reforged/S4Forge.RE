@@ -417,7 +417,7 @@ bool  CWorkshopBuildingRole::SettlerEnter(class CBuilding * a2, int a3) {
   {
     v14 = IEntity::ID();
     v8 = IEntity::OwnerId((unsigned __int8 *)a2);
-    (*(void (__thiscall **)(void *, int, int, int, _DWORD))(*(_DWORD *)off_3D7A3D8 + 44))(off_3D7A3D8, 7, v8, v14, 0);
+    (*(void (__thiscall **)(void *, int, int, int, _DWORD))(*(_DWORD *)g_pAI + 44))(g_pAI, 7, v8, v14, 0);
   }
   if ( *(_BYTE *)(v28[94] + 480) )
   {
@@ -1079,7 +1079,7 @@ void  CWorkshopBuildingRole::Clear(void) {
 
 // address=[0x152f1e0]
 // Decompiled from void __thiscall CWorkshopBuildingRole::ConvertEventIntoGoal(  CWorkshopBuildingRole *this,  struct CBuilding *a2,  struct CEntityEvent *a3)
-void  CWorkshopBuildingRole::ConvertEventIntoGoal(class CBuilding *,class CEntityEvent *) {
+void  CWorkshopBuildingRole::ConvertEventIntoGoal(class CBuilding * a2, class CEntityEvent * a3) {
   
   ;
 }

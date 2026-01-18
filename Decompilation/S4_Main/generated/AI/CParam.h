@@ -12,7 +12,7 @@ public:
      CParam(int a2, int a3, int a4, int a5);
 
     // address=[0x2f3e940]
-     CParam(class CParam *);
+     CParam(class CParam * a2);
 
     // address=[0x2f3e9a0]
     virtual  ~CParam(void);

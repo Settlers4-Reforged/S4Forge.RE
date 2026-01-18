@@ -6,10 +6,10 @@
 class LZHLEncoder {
 public:
     // address=[0x2f02870]
-    static unsigned int __cdecl calcMaxBuf(unsigned int);
+    static unsigned int __cdecl calcMaxBuf(unsigned int a1);
 
     // address=[0x2f2a390]
-     LZHLEncoder(class LZHLEncoderStat *,unsigned char *);
+     LZHLEncoder(class LZHLEncoderStat * a2, unsigned char * a3);
 
     // address=[0x2f2a430]
      ~LZHLEncoder(void);

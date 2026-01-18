@@ -21,7 +21,7 @@ public:
     virtual void  Store(std::ostream & a2);
 
     // address=[0x1452bf0]
-     CGoodTransportPriority(unsigned char);
+     CGoodTransportPriority(unsigned char a2);
 
     // address=[0x1452c70]
     void  ChangePriority(enum PILE_TYPES a2, int a3);

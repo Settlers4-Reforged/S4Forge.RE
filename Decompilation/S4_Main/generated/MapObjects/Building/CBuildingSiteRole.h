@@ -145,7 +145,7 @@ private:
     void  DiggingIsReady(int a2);
 
     // address=[0x1503eb0]
-    void  TidyUp(class CEntityEvent &);
+    void  TidyUp(class CEntityEvent & a2);
 
     // address=[0x1503f10]
     void  NotifyDeliverPiles(class CEntityEvent & a2);
@@ -172,7 +172,7 @@ private:
     void  PrepareGround(class CBuilding * a2);
 
     // address=[0x15063d0]
-    virtual void  ConvertEventIntoGoal(class CBuilding *,class CEntityEvent *);
+    virtual void  ConvertEventIntoGoal(class CBuilding * a2, class CEntityEvent * a3);
 
     // address=[0x1506430]
     int  GetEcoSectorId(class CBuilding * a2);

@@ -20,7 +20,7 @@
 
 // address=[0x15b1b60]
 // Decompiled from CClient *__thiscall CClient::CClient(CClient *this, const struct CClient *a2)
- CClient::CClient(class CClient const &) {
+ CClient::CClient(class CClient const & a2) {
   
   *(_DWORD *)this = &CClient::_vftable_;
   *((_DWORD *)this + 2) = *((_DWORD *)a2 + 2);

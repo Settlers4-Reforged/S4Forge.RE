@@ -6,7 +6,7 @@
 class LZHLCompressor {
 public:
     // address=[0x2f02850]
-    static unsigned int __cdecl calcMaxBuf(unsigned int);
+    static unsigned int __cdecl calcMaxBuf(unsigned int a1);
 
     // address=[0x2f29650]
      LZHLCompressor(void);

@@ -36,7 +36,7 @@ public:
     virtual unsigned int  LoadUnsigned32(void);
 
     // address=[0x13ece40]
-    virtual unsigned int  LoadUnsigned32(unsigned int,unsigned int);
+    virtual unsigned int  LoadUnsigned32(unsigned int a2, unsigned int a3);
 
     // address=[0x13ecee0]
     virtual void  LoadSignature(unsigned int a2);
@@ -51,13 +51,13 @@ public:
     virtual void  SaveSignature(unsigned int a2);
 
     // address=[0x13ecfa0]
-    unsigned int  Adler32(unsigned int);
+    unsigned int  Adler32(unsigned int a2);
 
     // address=[0x13ecfd0]
-    static void __cdecl ObjectLoad(class IS4ChunkObject &,void const *,unsigned int);
+    static void __cdecl ObjectLoad(class IS4ChunkObject & a1, void const * a2, unsigned int a3);
 
     // address=[0x13ed050]
-    static void __cdecl ObjectSave(class IS4ChunkObject &,void * *,unsigned int *);
+    static void __cdecl ObjectSave(class IS4ChunkObject & a1, void * * a2, unsigned int * a3);
 
 protected:
     // address=[0x13ed0f0]

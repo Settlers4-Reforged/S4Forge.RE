@@ -15,7 +15,7 @@ public:
     virtual void  Increase(class CPile * a2, int a3);
 
     // address=[0x155b4f0]
-    virtual void  SubjectStopped(class CPile *);
+    virtual void  SubjectStopped(class CPile * a2);
 
     // address=[0x155b550]
     virtual void  SubjectStarted(class CPile * a2);

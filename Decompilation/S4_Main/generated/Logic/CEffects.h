@@ -81,10 +81,10 @@ public:
     virtual void  SetAttachedEffectOffset(unsigned int a2, float a3, float a4);
 
     // address=[0x144d8c0]
-    virtual void  UpdateAttachedEffect(unsigned int);
+    virtual void  UpdateAttachedEffect(unsigned int a2);
 
     // address=[0x144d950]
-    virtual bool  WasAttachedEffectVisible(unsigned int);
+    virtual bool  WasAttachedEffectVisible(unsigned int a2);
 
     // address=[0x144d9b0]
     virtual void  Execute(void);
@@ -109,7 +109,7 @@ protected:
     void  CleanUp(void);
 
     // address=[0x144f340]
-    bool  CheckParentEffect(unsigned int);
+    bool  CheckParentEffect(unsigned int a2);
 
     // address=[0x144f3b0]
     static void __cdecl ClipXOrY(int & a1);

@@ -4,7 +4,7 @@
 
 // address=[0x1302430]
 // Decompiled from unsigned int __thiscall CAIAgentDarkTribeSquadManager::Execute(  CAIAgentDarkTribeSquadManager *this,  unsigned int a2,  unsigned int a3)
-unsigned int  CAIAgentDarkTribeSquadManager::Execute(unsigned int,unsigned int) {
+unsigned int  CAIAgentDarkTribeSquadManager::Execute(unsigned int a2, unsigned int a3) {
   
   struct CAIDarkTribeSectorAI *v3; // eax
   struct CAIDarkTribeSectorAI *v4; // eax

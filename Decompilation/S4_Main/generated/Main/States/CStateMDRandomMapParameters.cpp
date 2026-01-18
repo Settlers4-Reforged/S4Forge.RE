@@ -18,7 +18,7 @@ class CGameState * __cdecl CStateMDRandomMapParameters::DynamicCreateFunc(void *
 
 // address=[0x14c8180]
 // Decompiled from CStateMDRandomMapParameters *__thiscall CStateMDRandomMapParameters::CStateMDRandomMapParameters(  CStateMDRandomMapParameters *this,  void *a2)
- CStateMDRandomMapParameters::CStateMDRandomMapParameters(void *) {
+ CStateMDRandomMapParameters::CStateMDRandomMapParameters(void * a2) {
   
   __int64 v2; // kr00_8
   const char *v3; // eax

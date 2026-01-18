@@ -304,7 +304,7 @@ void  CLookoutTowerRole::Store(std::ostream & a2) {
 
 // address=[0x14fd220]
 // Decompiled from void __thiscall CLookoutTowerRole::ConvertEventIntoGoal(  CLookoutTowerRole *this,  struct CBuilding *a2,  struct CEntityEvent *a3)
-void  CLookoutTowerRole::ConvertEventIntoGoal(class CBuilding *,class CEntityEvent *) {
+void  CLookoutTowerRole::ConvertEventIntoGoal(class CBuilding * a2, class CEntityEvent * a3) {
   
   ;
 }

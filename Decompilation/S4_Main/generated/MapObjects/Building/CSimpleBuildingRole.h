@@ -61,7 +61,7 @@ public:
 
 private:
     // address=[0x14fd250]
-    virtual void  ConvertEventIntoGoal(class CBuilding *,class CEntityEvent *);
+    virtual void  ConvertEventIntoGoal(class CBuilding * a2, class CEntityEvent * a3);
 
     // address=[0x14fd2b0]
     virtual bool  CrushBuilding(void);

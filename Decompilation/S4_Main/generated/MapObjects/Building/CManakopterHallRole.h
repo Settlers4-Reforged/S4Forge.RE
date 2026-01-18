@@ -42,7 +42,7 @@ public:
     virtual void  GoodArrive(int a2);
 
     // address=[0x150d4c0]
-    virtual void  FillDialog(class CBuilding *,bool);
+    virtual void  FillDialog(class CBuilding * a2, bool a3);
 
     // address=[0x150d4d0]
     int  GetMostRequiredGood(void);
@@ -73,7 +73,7 @@ public:
 
 private:
     // address=[0x150dd60]
-    virtual void  ConvertEventIntoGoal(class CBuilding *,class CEntityEvent *);
+    virtual void  ConvertEventIntoGoal(class CBuilding * a2, class CEntityEvent * a3);
 
     // address=[0x150dd70]
     virtual bool  CrushBuilding(void);

@@ -54,7 +54,7 @@ private:
     void  Cryption(void * a2, unsigned int a3);
 
     // address=[0x13dbd00]
-    unsigned int  Crc(void *,unsigned int);
+    unsigned int  Crc(void * a2, unsigned int a3);
 
     // address=[0x13dbd60]
     unsigned int  FileCRC(int a2, int a3);

@@ -318,7 +318,7 @@ void  CBigTempleRole::ThrowOutPriest(class CBuilding * a2) {
 
 // address=[0x14e88f0]
 // Decompiled from void __thiscall CBigTempleRole::ConvertEventIntoGoal(  CBigTempleRole *this,  struct CBuilding *a2,  struct CEntityEvent *a3)
-void  CBigTempleRole::ConvertEventIntoGoal(class CBuilding *,class CEntityEvent *) {
+void  CBigTempleRole::ConvertEventIntoGoal(class CBuilding * a2, class CEntityEvent * a3) {
   
   ;
 }

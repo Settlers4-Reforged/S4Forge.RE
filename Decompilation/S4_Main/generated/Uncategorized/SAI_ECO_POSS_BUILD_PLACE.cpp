@@ -15,7 +15,7 @@
 
 // address=[0x1345770]
 // Decompiled from SAI_ECO_POSS_BUILD_PLACE *__thiscall SAI_ECO_POSS_BUILD_PLACE::SAI_ECO_POSS_BUILD_PLACE(  SAI_ECO_POSS_BUILD_PLACE *this,  const struct SAI_ECO_POSS_BUILD_PLACE *a2)
- SAI_ECO_POSS_BUILD_PLACE::SAI_ECO_POSS_BUILD_PLACE(struct SAI_ECO_POSS_BUILD_PLACE const &) {
+ SAI_ECO_POSS_BUILD_PLACE::SAI_ECO_POSS_BUILD_PLACE(struct SAI_ECO_POSS_BUILD_PLACE const & a2) {
   
   *(_WORD *)this = *(_WORD *)a2;
   std::vector<int>::vector<int>((char *)a2 + 4);

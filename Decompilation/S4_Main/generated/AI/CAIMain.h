@@ -63,7 +63,7 @@ public:
      ~CAIMain(void);
 
     // address=[0x1314050]
-    static bool __cdecl IsRealPlayerId(unsigned int);
+    static bool __cdecl IsRealPlayerId(unsigned int a1);
 
 };
 

@@ -112,7 +112,7 @@ private:
     virtual bool  CrushBuilding(void);
 
     // address=[0x151fa10]
-    virtual void  ConvertEventIntoGoal(class CBuilding *,class CEntityEvent *);
+    virtual void  ConvertEventIntoGoal(class CBuilding * a2, class CEntityEvent * a3);
 
     // address=[0x151faf0]
     virtual bool  TryCrushBuilding(void);

@@ -75,10 +75,10 @@ public:
     bool  CheckSeagullUndergroundAddPosition(int a2, int a3);
 
     // address=[0x14dc590]
-    void  Store(class S4::CMapFile &);
+    void  Store(class S4::CMapFile & a2);
 
     // address=[0x14dc840]
-    void  Load(class S4::CMapFile &);
+    void  Load(class S4::CMapFile & a2);
 
     // address=[0x14dc9f0]
     bool  IsHuntable(int a2);

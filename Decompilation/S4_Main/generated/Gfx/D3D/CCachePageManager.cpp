@@ -28,7 +28,7 @@ bool  CCachePageManager::IsVideoSurfaceLocked(void) {
 
 // address=[0x2f87760]
 // Decompiled from CCachePageManager *__thiscall CCachePageManager::CCachePageManager(  CCachePageManager *this,  struct IDirectDrawSurface7 *a2,  struct IDirectDrawSurface7 *a3,  struct IDirect3DDevice7 *a4)
- CCachePageManager::CCachePageManager(struct IDirectDrawSurface7 *,struct IDirectDrawSurface7 *,struct IDirect3DDevice7 *) {
+ CCachePageManager::CCachePageManager(struct IDirectDrawSurface7 * a2, struct IDirectDrawSurface7 * a3, struct IDirect3DDevice7 * a4) {
   
   int i; // [esp+4h] [ebp-8h]
   int j; // [esp+4h] [ebp-8h]
@@ -227,7 +227,7 @@ long  CCachePageManager::EraseExtensionAreas(int a2, int a3, int a4, int a5, int
 
 // address=[0x2f87db0]
 // Decompiled from bool __thiscall CCachePageManager::UploadData(CCachePageManager *this, int *a2)
-bool  CCachePageManager::UploadData(long &) {
+bool  CCachePageManager::UploadData(long & a2) {
   
   if ( CCachePageManager::IsData(this) )
   {
@@ -391,7 +391,7 @@ bool  CCachePageManager::UploadDataAndRender(long & a2) {
 
 // address=[0x2f88440]
 // Decompiled from bool __thiscall CCachePageManager::ShowPageContent(CCachePageManager *this, int *a2)
-bool  CCachePageManager::ShowPageContent(long &) {
+bool  CCachePageManager::ShowPageContent(long & a2) {
   
   CBlitFX *BlitStructPtr; // eax
   int v4; // [esp+0h] [ebp-28h]

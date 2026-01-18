@@ -9,7 +9,7 @@ public:
     static class CGameState * __cdecl DynamicCreateFunc(void * a1);
 
     // address=[0x14c3150]
-     CStateMD2Briefing(void *);
+     CStateMD2Briefing(void * a2);
 
     // address=[0x14c3320]
     virtual  ~CStateMD2Briefing(void);

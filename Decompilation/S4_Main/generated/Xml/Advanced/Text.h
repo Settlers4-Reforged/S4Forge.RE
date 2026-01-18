@@ -35,7 +35,7 @@ public:
     void  Concatenate(std::string const & a1);
 
     // address=[0x2f2cca0]
-    virtual void  GenerateXML(class AdvXMLParser::GenerateContext &)const;
+    virtual void  GenerateXML(class AdvXMLParser::GenerateContext & a2)const;
 
 };
 

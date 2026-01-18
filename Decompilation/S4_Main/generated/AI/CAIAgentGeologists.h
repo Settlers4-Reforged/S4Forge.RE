@@ -6,7 +6,7 @@
 class CAIAgentGeologists : public CAINormalSectorAgent {
 public:
     // address=[0x1304250]
-    virtual unsigned int  Execute(unsigned int,unsigned int);
+    virtual unsigned int  Execute(unsigned int a2, unsigned int a3);
 
     // address=[0x1325aa0]
      CAIAgentGeologists(void);

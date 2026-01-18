@@ -34,7 +34,7 @@
 
 // address=[0x1352be0]
 // Decompiled from void __thiscall CEvn_Event::Load(CEvn_Event *this, struct IS4Chunk *a2)
-void  CEvn_Event::Load(class IS4Chunk &) {
+void  CEvn_Event::Load(class IS4Chunk & a2) {
   
   ;
 }
@@ -42,7 +42,7 @@ void  CEvn_Event::Load(class IS4Chunk &) {
 
 // address=[0x1352bf0]
 // Decompiled from void __thiscall CEvn_Event::Save(CEvn_Event *this, struct IS4Chunk *a2)
-void  CEvn_Event::Save(class IS4Chunk &) {
+void  CEvn_Event::Save(class IS4Chunk & a2) {
   
   ;
 }

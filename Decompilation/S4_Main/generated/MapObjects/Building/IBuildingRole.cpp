@@ -40,7 +40,7 @@ bool  IBuildingRole::HasShipAmmo(int a1)const {
 
 // address=[0x14e6820]
 // Decompiled from void __thiscall IBuildingRole::LockPiles(IBuildingRole *this, struct CBuilding *a2, bool a3)
-void  IBuildingRole::LockPiles(class CBuilding *,bool) {
+void  IBuildingRole::LockPiles(class CBuilding * a2, bool a3) {
   
   ;
 }
@@ -1062,7 +1062,7 @@ void  IBuildingRole::Store(std::ostream & a2) {
 
 // address=[0x14ffe90]
 // Decompiled from void __thiscall IBuildingRole::KillInhabitant(IBuildingRole *this, struct CBuilding *a2)
-void  IBuildingRole::KillInhabitant(class CBuilding *) {
+void  IBuildingRole::KillInhabitant(class CBuilding * a2) {
   
   ;
 }

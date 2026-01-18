@@ -4,7 +4,7 @@
 
 // address=[0x1304700]
 // Decompiled from unsigned int __thiscall CAIAgentEvalOffence::Execute(CAIAgentEvalOffence *this, unsigned int a2, unsigned int a3)
-unsigned int  CAIAgentEvalOffence::Execute(unsigned int,unsigned int) {
+unsigned int  CAIAgentEvalOffence::Execute(unsigned int a2, unsigned int a3) {
   
   CAINormalSectorAI *v3; // eax
 

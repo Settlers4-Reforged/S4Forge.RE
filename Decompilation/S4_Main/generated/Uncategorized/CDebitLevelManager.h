@@ -6,7 +6,7 @@
 class CDebitLevelManager {
 public:
     // address=[0x2f58b30]
-     CDebitLevelManager(class CSchedule *);
+     CDebitLevelManager(class CSchedule * a2);
 
     // address=[0x2f58b60]
      ~CDebitLevelManager(void);

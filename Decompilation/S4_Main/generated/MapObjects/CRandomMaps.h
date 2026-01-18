@@ -33,7 +33,7 @@ public:
     virtual void  GetMapKeyFromParams(struct SRandomMapParams * a2, std::wstring & a3);
 
     // address=[0x14996d0]
-    virtual void  GetMapKeyFromParams(struct SRandomMapParams *,wchar_t *);
+    virtual void  GetMapKeyFromParams(struct SRandomMapParams * a2, wchar_t * a3);
 
     // address=[0x1499710]
     virtual bool  IsRandomMapFileName(wchar_t const * String, std::wstring * a2);

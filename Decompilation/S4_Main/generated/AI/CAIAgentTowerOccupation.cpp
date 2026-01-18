@@ -4,7 +4,7 @@
 
 // address=[0x1303df0]
 // Decompiled from unsigned int __thiscall CAIAgentTowerOccupation::Execute(  CAIAgentTowerOccupation *this,  unsigned int a2,  unsigned int a3)
-unsigned int  CAIAgentTowerOccupation::Execute(unsigned int,unsigned int) {
+unsigned int  CAIAgentTowerOccupation::Execute(unsigned int a2, unsigned int a3) {
   
   struct CAINormalSectorAI *v3; // eax
   CAISectorAI *v4; // eax

@@ -4,7 +4,7 @@
 
 // address=[0x1471110]
 // Decompiled from void __thiscall CNetInputProcessor::Process(CNetInputProcessor *this, struct CEvn_Logic *a2)
-void  CNetInputProcessor::Process(class CEvn_Logic &) {
+void  CNetInputProcessor::Process(class CEvn_Logic & a2) {
   
   void **v2; // eax
   void **v3; // eax
@@ -992,7 +992,7 @@ bool __cdecl CNetInputProcessor::IsReadyEntityOfPlayer(int a1, int a2) {
 
 // address=[0x1473190]
 // Decompiled from unsigned int __cdecl CNetInputProcessor::UnpackHiValue(unsigned int a1)
-unsigned int __cdecl CNetInputProcessor::UnpackHiValue(unsigned int) {
+unsigned int __cdecl CNetInputProcessor::UnpackHiValue(unsigned int a1) {
   
   return HIWORD(a1);
 }

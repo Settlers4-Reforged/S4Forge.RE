@@ -68,7 +68,7 @@ protected:
 
 private:
     // address=[0x14cf3e0]
-    static bool __cdecl CheckWarning(char const *,int *);
+    static bool __cdecl CheckWarning(char const * a1, int * a2);
 
     // address=[0x14cf4d0]
     static bool __cdecl CheckExists(struct STextMessage * a1);

@@ -63,7 +63,7 @@ public:
     virtual class tmp_mem *  tmp_speichern(void);
 
     // address=[0x2f393c0]
-    virtual void  tmp_rueckspeichern(class tmp_mem *);
+    virtual void  tmp_rueckspeichern(class tmp_mem * a2);
 
 };
 

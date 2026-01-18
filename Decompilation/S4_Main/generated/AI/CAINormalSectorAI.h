@@ -9,7 +9,7 @@ public:
      CAINormalSectorAI(class CAIPlayerAI & a2, int a3);
 
     // address=[0x13237a0]
-    virtual void  Load(class IS4Chunk &);
+    virtual void  Load(class IS4Chunk & a2);
 
     // address=[0x1323ab0]
     virtual void  Save(class IS4Chunk & a2);
@@ -36,7 +36,7 @@ public:
     int  FindTargetForSuicideMission(class CAITaskForce * a2);
 
     // address=[0x1324930]
-    void  MoveSquadHome(class CAITaskForce *);
+    void  MoveSquadHome(class CAITaskForce * a2);
 
     // address=[0x1324cf0]
     void  EvaluateNextEnemyMilitaryBuilding(void);

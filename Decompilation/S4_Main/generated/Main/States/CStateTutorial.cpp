@@ -18,7 +18,7 @@ class CGameState * __cdecl CStateTutorial::DynamicCreateFunc(void * a1) {
 
 // address=[0x14cae40]
 // Decompiled from CStateTutorial *__thiscall CStateTutorial::CStateTutorial(CStateTutorial *this, void *a2)
- CStateTutorial::CStateTutorial(void *) {
+ CStateTutorial::CStateTutorial(void * a2) {
   
   CGuiGameState::CGuiGameState(this);
   *(_DWORD *)this = &CStateTutorial::_vftable_;

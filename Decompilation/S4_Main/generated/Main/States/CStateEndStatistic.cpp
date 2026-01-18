@@ -18,7 +18,7 @@ class CGameState * __cdecl CStateEndStatistic::DynamicCreateFunc(void * a1) {
 
 // address=[0x14a4cb0]
 // Decompiled from CStateEndStatistic *__thiscall CStateEndStatistic::CStateEndStatistic(CStateEndStatistic *this, void *a2)
- CStateEndStatistic::CStateEndStatistic(void *) {
+ CStateEndStatistic::CStateEndStatistic(void * a2) {
   
   wchar_t *v2; // eax
   int Instance; // [esp+4h] [ebp-34h]

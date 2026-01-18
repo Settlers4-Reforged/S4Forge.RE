@@ -23,13 +23,13 @@ public:
     bool  ParsePubidLiteral(class AdvXMLParser::Parser & a2);
 
     // address=[0x2f24d20]
-    bool  ParseMarkupdecl(class AdvXMLParser::Parser &);
+    bool  ParseMarkupdecl(class AdvXMLParser::Parser & a2);
 
     // address=[0x2f24d90]
     bool  ParseElementDecl(class AdvXMLParser::Parser & a2);
 
     // address=[0x2f24e90]
-    bool  ParseContentspec(class AdvXMLParser::Parser &);
+    bool  ParseContentspec(class AdvXMLParser::Parser & a2);
 
     // address=[0x2f24f00]
     bool  ParseMixed(class AdvXMLParser::Parser & a2);
@@ -50,7 +50,7 @@ public:
     bool  ParseAttDef(class AdvXMLParser::Parser & a2);
 
     // address=[0x2f25490]
-    bool  ParseAttType(class AdvXMLParser::Parser &);
+    bool  ParseAttType(class AdvXMLParser::Parser & a2);
 
     // address=[0x2f25580]
     bool  ParseNotationType(class AdvXMLParser::Parser & a2);
@@ -71,7 +71,7 @@ public:
     bool  ParseNDataDecl(class AdvXMLParser::Parser & a2);
 
     // address=[0x2f25bd0]
-    bool  ParsePEDef(class AdvXMLParser::Parser &);
+    bool  ParsePEDef(class AdvXMLParser::Parser & a2);
 
     // address=[0x2f25c20]
     bool  ParseEntityValue(class AdvXMLParser::Parser & a2);

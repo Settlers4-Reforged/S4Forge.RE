@@ -24,7 +24,7 @@ public:
     void  Call(int a2, int a3, int a4, int a5, int a6);
 
     // address=[0x160deb0]
-     CScriptManager(class CLua &);
+     CScriptManager(class CLua & a2);
 
     // address=[0x160df40]
     virtual  ~CScriptManager(void);

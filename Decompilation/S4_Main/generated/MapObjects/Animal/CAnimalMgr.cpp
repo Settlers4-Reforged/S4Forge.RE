@@ -819,7 +819,7 @@ bool  CAnimalMgr::CheckSeagullUndergroundAddPosition(int a2, int a3) {
 
 // address=[0x14dc590]
 // Decompiled from void __thiscall CAnimalMgr::Store(CAnimalMgr *this, struct S4::CMapFile *a2)
-void  CAnimalMgr::Store(class S4::CMapFile &) {
+void  CAnimalMgr::Store(class S4::CMapFile & a2) {
   
   std::strstreambuf *v2; // eax
   void *v3; // eax
@@ -891,7 +891,7 @@ void  CAnimalMgr::Store(class S4::CMapFile &) {
 
 // address=[0x14dc840]
 // Decompiled from void __thiscall CAnimalMgr::Load(CAnimalMgr *this, struct S4::CMapFile *a2)
-void  CAnimalMgr::Load(class S4::CMapFile &) {
+void  CAnimalMgr::Load(class S4::CMapFile & a2) {
   
   int v2; // [esp+0h] [ebp-FCh]
   _DWORD v3[42]; // [esp+4h] [ebp-F8h] BYREF

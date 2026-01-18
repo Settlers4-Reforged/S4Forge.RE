@@ -485,7 +485,7 @@ void  IGuiEngine::EnableEventInput(bool a2) {
 
 // address=[0x2fa0910]
 // Decompiled from void __thiscall IGuiEngine::EnableShortcuts(IGuiEngine *this, bool a2)
-void  IGuiEngine::EnableShortcuts(bool) {
+void  IGuiEngine::EnableShortcuts(bool a2) {
   
   ;
 }

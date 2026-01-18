@@ -79,7 +79,7 @@ public:
 
 private:
     // address=[0x148c9a0]
-    static void __cdecl LoadConfigFile(wchar_t const *,char const *);
+    static void __cdecl LoadConfigFile(wchar_t const * String, char const * a2);
 
     // address=[0x148cac0]
     static bool __cdecl StartDummyGame(void);

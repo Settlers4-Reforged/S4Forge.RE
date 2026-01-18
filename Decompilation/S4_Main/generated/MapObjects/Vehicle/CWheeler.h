@@ -9,7 +9,7 @@ public:
     virtual  ~CWheeler(void);
 
     // address=[0x153fdc0]
-    virtual void  FillDialog(bool);
+    virtual void  FillDialog(bool a2);
 
     // address=[0x153feb0]
     virtual void  UnloadToPosition(int a2);

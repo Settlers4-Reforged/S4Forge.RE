@@ -39,7 +39,7 @@ char const *  CClassNetGameIniBuffer::GetStartOfEntry(char const * SubStr) {
 
 // address=[0x15c3880]
 // Decompiled from CClassNetGameIniBuffer *__thiscall CClassNetGameIniBuffer::CClassNetGameIniBuffer(  CClassNetGameIniBuffer *this,  const char *a2,  unsigned int a3)
- CClassNetGameIniBuffer::CClassNetGameIniBuffer(char const *,unsigned int) {
+ CClassNetGameIniBuffer::CClassNetGameIniBuffer(char const * a2, unsigned int a3) {
   
   *(_DWORD *)this = a2;
   *((_DWORD *)this + 1) = a3;

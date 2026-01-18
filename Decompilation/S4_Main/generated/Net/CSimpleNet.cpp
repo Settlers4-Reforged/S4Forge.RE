@@ -31,10 +31,10 @@
 // Decompiled from int __thiscall CSimpleNet::~CSimpleNet(CSimpleNet *this)
  CSimpleNet::~CSimpleNet(void) {
   
-  int v2; // [esp-4h] [ebp-1Ch]
-  int v3; // [esp-4h] [ebp-1Ch]
-  int v4; // [esp-4h] [ebp-1Ch]
-  int v5; // [esp-4h] [ebp-1Ch]
+  int v2; // [esp+0h] [ebp-18h]
+  int v3; // [esp+0h] [ebp-18h]
+  int v4; // [esp+0h] [ebp-18h]
+  int v5; // [esp+0h] [ebp-18h]
   int i; // [esp+4h] [ebp-14h]
 
   *(_DWORD *)this = &CSimpleNet::_vftable_;
@@ -206,7 +206,7 @@ bool  CSimpleNet::PushMessage(unsigned int a2, unsigned int a3, unsigned short a
 // Decompiled from char *__thiscall CSimpleNet::GetIPString(CSimpleNet *this, struct in_addr a2)
 char *  CSimpleNet::GetIPString(unsigned int a2) {
   
-  dword_415C3AC = a2.S_un.S_addr;
+  in = a2;
   return inet_ntoa(a2);
 }
 
@@ -293,7 +293,7 @@ void  CSimpleNet::RemoveMsgsForIP(unsigned int a2) {
 
 // address=[0x15cd6a0]
 // Decompiled from bool __thiscall CSimpleNet::IsLocalIP(CSimpleNet *this, unsigned int a2)
-bool  CSimpleNet::IsLocalIP(unsigned int) {
+bool  CSimpleNet::IsLocalIP(unsigned int a2) {
   
   _BYTE v3[12]; // [esp+4h] [ebp-48h] BYREF
   _BYTE v4[12]; // [esp+10h] [ebp-3Ch] BYREF
@@ -450,7 +450,7 @@ bool  CSimpleNet::WasError(void) {
 
 // address=[0x15cd7d0]
 // Decompiled from bool __thiscall CSimpleNet::SendMessageA(CSimpleNet *this, unsigned int a2, struct SMessage *a3)
-bool  CSimpleNet::SendMessageA(unsigned int,struct SMessage &) {
+bool  CSimpleNet::SendMessageA(unsigned int a2, struct SMessage & a3) {
   
   return (*(unsigned __int8 (__thiscall **)(CSimpleNet *, unsigned int, struct SMessage *))(*(_DWORD *)this + 80))(
            this,
@@ -550,10 +550,10 @@ bool  CSimpleNet::RemoveMsgFromResendList(unsigned short a2) {
 // Decompiled from bool __thiscall CSimpleNet::LaunchWinsock(CSimpleNet *this)
 bool  CSimpleNet::LaunchWinsock(void) {
   
-  struct WSAData v3; // [esp+10h] [ebp-194h] BYREF
+  struct WSAData WSAData; // [esp+10h] [ebp-194h] BYREF
 
   BBSupportTracePrintF(1, "SimpleNet: Requesting Winsock Version %d.%d!", 1, 1);
-  switch ( WSAStartup(0x101u, &v3) )
+  switch ( WSAStartup(0x101u, &WSAData) )
   {
     case 10036:
       (*(void (__thiscall **)(CSimpleNet *, const char *, int))(*(_DWORD *)this + 88))(
@@ -579,9 +579,9 @@ bool  CSimpleNet::LaunchWinsock(void) {
     default:
       break;
   }
-  BBSupportTracePrintF(1, "SimpleNet: Got Winsock Version %d.%d", HIBYTE(v3.wVersion), LOBYTE(v3.wVersion));
-  BBSupportTracePrintF(1, "SimpleNet: Info: %s", v3.szDescription);
-  BBSupportTracePrintF(1, "SimpleNet: Info: %s", v3.szSystemStatus);
+  BBSupportTracePrintF(1, "SimpleNet: Got Winsock Version %d.%d", HIBYTE(WSAData.wVersion), LOBYTE(WSAData.wVersion));
+  BBSupportTracePrintF(1, "SimpleNet: Info: %s", WSAData.szDescription);
+  BBSupportTracePrintF(1, "SimpleNet: Info: %s", WSAData.szSystemStatus);
   return *((_BYTE *)this + 204) == 0;
 }
 
@@ -600,155 +600,152 @@ bool  CSimpleNet::ConnectSocket(void) {
   
   _DWORD *v1; // eax
   int v2; // eax
-  u_short v3; // ax
-  const char *v4; // eax
+  const char *v3; // eax
+  int v5; // eax
   int v6; // eax
   int v7; // eax
-  int v8; // eax
-  u_short v9; // ax
-  const char *v10; // eax
+  const char *v8; // eax
   int Error; // [esp-4h] [ebp-80h]
-  int v12; // [esp-4h] [ebp-80h]
-  int v13; // [esp-4h] [ebp-80h]
-  _BYTE v14[12]; // [esp+4h] [ebp-78h] BYREF
-  _BYTE v15[12]; // [esp+10h] [ebp-6Ch] BYREF
-  _BYTE v16[12]; // [esp+1Ch] [ebp-60h] BYREF
-  int v17; // [esp+28h] [ebp-54h] BYREF
-  int v18; // [esp+2Ch] [ebp-50h] BYREF
-  _DWORD v19[2]; // [esp+30h] [ebp-4Ch] BYREF
-  int v20; // [esp+38h] [ebp-44h]
-  std::_Iterator_base12 *v21; // [esp+3Ch] [ebp-40h]
-  std::_Iterator_base12 *v22; // [esp+40h] [ebp-3Ch]
-  _BYTE v23[12]; // [esp+44h] [ebp-38h] BYREF
-  char v24; // [esp+57h] [ebp-25h]
-  CSimpleNet *v25; // [esp+58h] [ebp-24h]
-  struct sockaddr v26; // [esp+5Ch] [ebp-20h] BYREF
-  int v27; // [esp+78h] [ebp-4h]
+  int v10; // [esp-4h] [ebp-80h]
+  int v11; // [esp-4h] [ebp-80h]
+  _BYTE v12[12]; // [esp+4h] [ebp-78h] BYREF
+  _BYTE v13[12]; // [esp+10h] [ebp-6Ch] BYREF
+  _BYTE v14[12]; // [esp+1Ch] [ebp-60h] BYREF
+  int namelen; // [esp+28h] [ebp-54h] BYREF
+  char v16[4]; // [esp+2Ch] [ebp-50h] BYREF
+  char optval[4]; // [esp+30h] [ebp-4Ch] BYREF
+  int v18; // [esp+34h] [ebp-48h]
+  int v19; // [esp+38h] [ebp-44h]
+  std::_Iterator_base12 *v20; // [esp+3Ch] [ebp-40h]
+  std::_Iterator_base12 *v21; // [esp+40h] [ebp-3Ch]
+  _BYTE v22[12]; // [esp+44h] [ebp-38h] BYREF
+  char v23; // [esp+57h] [ebp-25h]
+  CSimpleNet *v24; // [esp+58h] [ebp-24h]
+  struct sockaddr name; // [esp+5Ch] [ebp-20h] BYREF
+  int v26; // [esp+78h] [ebp-4h]
 
-  v25 = this;
+  v24 = this;
   *((_DWORD *)this + 59) = 0;
-  std::list<SLocalAddress>::begin(v23);
-  v27 = 0;
+  std::list<SLocalAddress>::begin(v22);
+  v26 = 0;
   while ( 1 )
   {
-    v22 = (std::_Iterator_base12 *)std::list<SLocalAddress>::end(v15);
-    v21 = v22;
-    LOBYTE(v27) = 1;
-    v24 = std::_List_const_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>::operator!=(v22);
-    LOBYTE(v27) = 0;
-    std::_List_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>::~_List_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>(v15);
-    if ( !v24 )
+    v21 = (std::_Iterator_base12 *)std::list<SLocalAddress>::end(v13);
+    v20 = v21;
+    LOBYTE(v26) = 1;
+    v23 = std::_List_const_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>::operator!=(v21);
+    LOBYTE(v26) = 0;
+    std::_List_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>::~_List_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>(v13);
+    if ( !v23 )
       break;
-    if ( *((int *)v25 + 59) >= 32
+    if ( *((int *)v24 + 59) >= 32
       && BBSupportDbgReport(2, "net\\SimpleNet.cpp", 614, "m_iNumberReceiverSockets < MAX_RECEIVER_SOCKETS") == 1 )
     {
       __debugbreak();
     }
-    if ( *((_DWORD *)v25 + 59) == 32 )
+    if ( *((_DWORD *)v24 + 59) == 32 )
     {
-      v20 = std::list<SLocalAddress>::end(v14);
-      v19[1] = v20;
-      LOBYTE(v27) = 2;
-      std::_List_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>::operator=(v20);
-      LOBYTE(v27) = 0;
-      std::_List_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>::~_List_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>(v14);
+      v19 = std::list<SLocalAddress>::end(v12);
+      v18 = v19;
+      LOBYTE(v26) = 2;
+      std::_List_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>::operator=(v19);
+      LOBYTE(v26) = 0;
+      std::_List_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>::~_List_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>(v12);
     }
-    else if ( *(_BYTE *)(std::_List_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>::operator*(v23)
+    else if ( *(_BYTE *)(std::_List_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>::operator*(v22)
                        + 160) )
     {
-      *((_DWORD *)v25 + *((_DWORD *)v25 + 59) + 60) = socket(2, 2, 0);
-      if ( *((_DWORD *)v25 + *((_DWORD *)v25 + 59) + 60) == -1 )
+      *((_DWORD *)v24 + *((_DWORD *)v24 + 59) + 60) = socket(2, 2, 0);
+      if ( *((_DWORD *)v24 + *((_DWORD *)v24 + 59) + 60) == -1 )
       {
-        (*(void (__thiscall **)(CSimpleNet *, const char *, int))(*(_DWORD *)v25 + 88))(
-          v25,
+        (*(void (__thiscall **)(CSimpleNet *, const char *, int))(*(_DWORD *)v24 + 88))(
+          v24,
           "Unable to create socket!",
           1);
         BBSupportTracePrintF(3, "Unable to create socket!");
       }
       else
       {
-        *((_WORD *)v25 + 186) = 2;
-        *((_WORD *)v25 + 187) = htons(0xC21u);
-        v1 = (_DWORD *)std::_List_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>::operator*(v23);
-        *((_DWORD *)v25 + 94) = *v1;
-        if ( bind(*((_DWORD *)v25 + *((_DWORD *)v25 + 59) + 60), (const struct sockaddr *)((char *)v25 + 372), 16) == -1 )
+        *((_WORD *)v24 + 186) = 2;
+        *((_WORD *)v24 + 187) = htons(0xC21u);
+        v1 = (_DWORD *)std::_List_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>::operator*(v22);
+        *((_DWORD *)v24 + 94) = *v1;
+        if ( bind(*((_DWORD *)v24 + *((_DWORD *)v24 + 59) + 60), (const struct sockaddr *)((char *)v24 + 372), 16) == -1 )
         {
           Error = WSAGetLastError();
-          v2 = std::_List_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>::operator*(v23);
+          v2 = std::_List_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>::operator*(v22);
           j__sprintf(
-            (char *const)v25 + 432,
+            (char *const)v24 + 432,
             "SimpleNet: ::bind() to %s failed: LastWSAError: %d!",
             (const char *)(v2 + 4),
             Error);
-          (*(void (__thiscall **)(CSimpleNet *, int, int))(*(_DWORD *)v25 + 88))(v25, (int)v25 + 432, 1);
-          BBSupportTracePrintF(3, (char *)v25 + 432);
+          (*(void (__thiscall **)(CSimpleNet *, int, int))(*(_DWORD *)v24 + 88))(v24, (int)v24 + 432, 1);
+          BBSupportTracePrintF(3, (char *)v24 + 432);
         }
         else
         {
-          v3 = htons(*((_WORD *)v25 + 187));
-          v4 = (const char *)(*(int (__thiscall **)(CSimpleNet *, _DWORD, _DWORD))(*(_DWORD *)v25 + 48))(
-                               v25,
-                               *((_DWORD *)v25 + 94),
-                               v3);
-          BBSupportTracePrintF(1, "Simplenet.cpp: Receiver socket %d named %s:%d", *((_DWORD *)v25 + 59), v4, v12);
-          ++*((_DWORD *)v25 + 59);
+          v10 = htons(*((_WORD *)v24 + 187));
+          v3 = (const char *)(*(int (__thiscall **)(CSimpleNet *, _DWORD))(*(_DWORD *)v24 + 48))(
+                               v24,
+                               *((_DWORD *)v24 + 94));
+          BBSupportTracePrintF(1, "Simplenet.cpp: Receiver socket %d named %s:%d", *((_DWORD *)v24 + 59), v3, v10);
+          ++*((_DWORD *)v24 + 59);
         }
       }
     }
-    std::_List_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>::operator++(v16, 0);
-    std::_List_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>::~_List_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>(v16);
+    std::_List_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>::operator++(v14, 0);
+    std::_List_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>::~_List_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>(v14);
   }
-  v27 = -1;
-  std::_List_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>::~_List_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>(v23);
-  if ( *((_DWORD *)v25 + 59) )
+  v26 = -1;
+  std::_List_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>::~_List_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>(v22);
+  if ( *((_DWORD *)v24 + 59) )
   {
-    *((_DWORD *)v25 + 92) = socket(2, 2, 0);
-    if ( *((_DWORD *)v25 + 92) == -1 )
+    *((_DWORD *)v24 + 92) = socket(2, 2, 0);
+    if ( *((_DWORD *)v24 + 92) == -1 )
     {
-      (*(void (__thiscall **)(CSimpleNet *, const char *, int))(*(_DWORD *)v25 + 88))(
-        v25,
+      (*(void (__thiscall **)(CSimpleNet *, const char *, int))(*(_DWORD *)v24 + 88))(
+        v24,
         "Unable to create sender socket!",
         1);
       return 0;
     }
     else
     {
-      v19[0] = 1;
-      v18 = 1;
-      if ( setsockopt(*((_DWORD *)v25 + 92), 0xFFFF, 32, (const char *)v19, 4) == -1 )
+      *(_DWORD *)optval = 1;
+      *(_DWORD *)v16 = 1;
+      if ( setsockopt(*((_DWORD *)v24 + 92), 0xFFFF, 32, optval, 4) == -1 )
+      {
+        v5 = WSAGetLastError();
+        BBSupportTracePrintF(3, "::setsocketopt(SO_BROADCAST) failed: LastWSAError: %d!", v5);
+        (*(void (__thiscall **)(CSimpleNet *, const char *, int))(*(_DWORD *)v24 + 88))(v24, "SetSockOpt() failed", 1);
+      }
+      if ( setsockopt(*((_DWORD *)v24 + 92), 0xFFFF, 4, v16, 4) == -1 )
       {
         v6 = WSAGetLastError();
-        BBSupportTracePrintF(3, "::setsocketopt(SO_BROADCAST) failed: LastWSAError: %d!", v6);
-        (*(void (__thiscall **)(CSimpleNet *, const char *, int))(*(_DWORD *)v25 + 88))(v25, "SetSockOpt() failed", 1);
+        BBSupportTracePrintF(3, "::setsocketopt(SO_REUSEADDR) failed: LastWSAError: %d!", v6);
+        (*(void (__thiscall **)(CSimpleNet *, const char *, int))(*(_DWORD *)v24 + 88))(v24, "SetSockOpt() failed", 1);
       }
-      if ( setsockopt(*((_DWORD *)v25 + 92), 0xFFFF, 4, (const char *)&v18, 4) == -1 )
+      *((_WORD *)v24 + 187) = htons(0xC21u);
+      *((_DWORD *)v24 + 94) = *((_DWORD *)v24 + 4);
+      memset(&name, 0, sizeof(name));
+      namelen = 16;
+      if ( getsockname(*((_DWORD *)v24 + 92), &name, &namelen) == -1 )
       {
         v7 = WSAGetLastError();
-        BBSupportTracePrintF(3, "::setsocketopt(SO_REUSEADDR) failed: LastWSAError: %d!", v7);
-        (*(void (__thiscall **)(CSimpleNet *, const char *, int))(*(_DWORD *)v25 + 88))(v25, "SetSockOpt() failed", 1);
+        BBSupportTracePrintF(3, "::getsocketname SenderSocket failed: LastWSAError: %d!", v7);
       }
-      *((_WORD *)v25 + 187) = htons(0xC21u);
-      *((_DWORD *)v25 + 94) = *((_DWORD *)v25 + 4);
-      memset(&v26, 0, sizeof(v26));
-      v17 = 16;
-      if ( getsockname(*((_DWORD *)v25 + 92), &v26, &v17) == -1 )
-      {
-        v8 = WSAGetLastError();
-        BBSupportTracePrintF(3, "::getsocketname SenderSocket failed: LastWSAError: %d!", v8);
-      }
-      v9 = htons(*(u_short *)v26.sa_data);
-      v10 = (const char *)(*(int (__thiscall **)(CSimpleNet *, _DWORD, _DWORD))(*(_DWORD *)v25 + 48))(
-                            v25,
-                            *(_DWORD *)&v26.sa_data[2],
-                            v9);
-      BBSupportTracePrintF(1, "Simplenet.cpp: Sendersocket named %s:%d", v10, v13);
-      return *((_BYTE *)v25 + 204) == 0;
+      v11 = htons(*(u_short *)name.sa_data);
+      v8 = (const char *)(*(int (__thiscall **)(CSimpleNet *, _DWORD))(*(_DWORD *)v24 + 48))(
+                           v24,
+                           *(_DWORD *)&name.sa_data[2]);
+      BBSupportTracePrintF(1, "Simplenet.cpp: Sendersocket named %s:%d", v8, v11);
+      return *((_BYTE *)v24 + 204) == 0;
     }
   }
   else
   {
-    (*(void (__thiscall **)(CSimpleNet *, const char *, int))(*(_DWORD *)v25 + 88))(
-      v25,
+    (*(void (__thiscall **)(CSimpleNet *, const char *, int))(*(_DWORD *)v24 + 88))(
+      v24,
       "No Receiver socket could be bound! Aborting!",
       1);
     return 0;

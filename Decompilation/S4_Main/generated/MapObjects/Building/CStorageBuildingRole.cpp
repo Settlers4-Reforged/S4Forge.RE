@@ -1159,7 +1159,7 @@ bool  CStorageBuildingRole::CrushBuilding(void) {
 
 // address=[0x151fa10]
 // Decompiled from void __thiscall CStorageBuildingRole::ConvertEventIntoGoal(  CStorageBuildingRole *this,  struct CBuilding *a2,  struct CEntityEvent *a3)
-void  CStorageBuildingRole::ConvertEventIntoGoal(class CBuilding *,class CEntityEvent *) {
+void  CStorageBuildingRole::ConvertEventIntoGoal(class CBuilding * a2, class CEntityEvent * a3) {
   
   ;
 }

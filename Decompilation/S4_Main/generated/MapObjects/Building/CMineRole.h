@@ -67,7 +67,7 @@ private:
     virtual bool  CrushBuilding(void);
 
     // address=[0x1515080]
-    virtual void  ConvertEventIntoGoal(class CBuilding *,class CEntityEvent *);
+    virtual void  ConvertEventIntoGoal(class CBuilding * a2, class CEntityEvent * a3);
 
     // address=[0x1515090]
     void  RememberProductivity(class CBuilding * a2, bool a3);

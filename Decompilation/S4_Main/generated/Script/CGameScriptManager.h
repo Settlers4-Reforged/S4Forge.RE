@@ -33,7 +33,7 @@ public:
     virtual  ~CGameScriptManager(void);
 
     // address=[0x15fefe0]
-    void  Update(unsigned int);
+    void  Update(unsigned int a2);
 
     // address=[0x15ff140]
     void  NewGame(char const * Src, unsigned int Size);

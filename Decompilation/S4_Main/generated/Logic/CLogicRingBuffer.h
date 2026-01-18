@@ -12,7 +12,7 @@ public:
     virtual  ~CLogicRingBuffer(void);
 
     // address=[0x14870b0]
-    virtual void  Load(class IS4Chunk &);
+    virtual void  Load(class IS4Chunk & a2);
 
     // address=[0x14872e0]
     virtual void  Save(class IS4Chunk & a2);

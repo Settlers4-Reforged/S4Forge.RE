@@ -501,7 +501,7 @@ void  CSmallTempleRole::Store(std::ostream & a2) {
 
 // address=[0x14fd260]
 // Decompiled from void __thiscall CSmallTempleRole::ConvertEventIntoGoal(  CSmallTempleRole *this,  struct CBuilding *a2,  struct CEntityEvent *a3)
-void  CSmallTempleRole::ConvertEventIntoGoal(class CBuilding *,class CEntityEvent *) {
+void  CSmallTempleRole::ConvertEventIntoGoal(class CBuilding * a2, class CEntityEvent * a3) {
   
   ;
 }
@@ -525,7 +525,7 @@ bool  CSmallTempleRole::TryCrushBuilding(void) {
 
 // address=[0x151cc50]
 // Decompiled from bool __thiscall CSmallTempleRole::HaveMaterial(CSmallTempleRole *this, struct CBuilding *a2)
-bool  CSmallTempleRole::HaveMaterial(class CBuilding *) {
+bool  CSmallTempleRole::HaveMaterial(class CBuilding * a2) {
   
   unsigned __int8 *v2; // eax
 

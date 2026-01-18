@@ -9,7 +9,7 @@ public:
     static class CGameState * __cdecl DynamicCreateFunc(void * a1);
 
     // address=[0x14c8180]
-     CStateMDRandomMapParameters(void *);
+     CStateMDRandomMapParameters(void * a2);
 
     // address=[0x14c85d0]
     virtual  ~CStateMDRandomMapParameters(void);

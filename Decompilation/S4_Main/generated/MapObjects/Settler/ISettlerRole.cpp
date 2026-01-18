@@ -104,7 +104,7 @@ int  ISettlerRole::SetGroupFlags(int a2) {
 
 // address=[0x1563a20]
 // Decompiled from void __thiscall ISettlerRole::UpdateJob(ISettlerRole *this, struct CSettler *a2)
-void  ISettlerRole::UpdateJob(class CSettler *) {
+void  ISettlerRole::UpdateJob(class CSettler * a2) {
   
   ;
 }

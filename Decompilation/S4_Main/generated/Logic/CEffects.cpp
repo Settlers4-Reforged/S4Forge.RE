@@ -799,7 +799,7 @@ void  CEffects::SetAttachedEffectOffset(unsigned int a2, float a3, float a4) {
 
 // address=[0x144d8c0]
 // Decompiled from void __thiscall CEffects::UpdateAttachedEffect(CEffects *this, unsigned int a2)
-void  CEffects::UpdateAttachedEffect(unsigned int) {
+void  CEffects::UpdateAttachedEffect(unsigned int a2) {
   
   const struct CEffect *v2; // [esp+0h] [ebp-Ch]
   CEffect *v3; // [esp+4h] [ebp-8h]
@@ -823,7 +823,7 @@ void  CEffects::UpdateAttachedEffect(unsigned int) {
 
 // address=[0x144d950]
 // Decompiled from bool __thiscall CEffects::WasAttachedEffectVisible(CEffects *this, unsigned int a2)
-bool  CEffects::WasAttachedEffectVisible(unsigned int) {
+bool  CEffects::WasAttachedEffectVisible(unsigned int a2) {
   
   bool v3; // [esp+Bh] [ebp-1h]
 
@@ -1129,7 +1129,7 @@ void  CEffects::CleanUp(void) {
 
 // address=[0x144f340]
 // Decompiled from bool __thiscall CEffects::CheckParentEffect(CEffects *this, unsigned int a2)
-bool  CEffects::CheckParentEffect(unsigned int) {
+bool  CEffects::CheckParentEffect(unsigned int a2) {
   
   return a2 && a2 < 0x1000 && *((_BYTE *)this + 60 * a2 + 16828) && *((_BYTE *)this + 60 * a2 + 16828) != 11;
 }

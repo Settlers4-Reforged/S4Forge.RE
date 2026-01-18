@@ -6,7 +6,7 @@
 class CNetInputProcessor : public INetInputProcessor {
 public:
     // address=[0x1471110]
-    virtual void  Process(class CEvn_Logic &);
+    virtual void  Process(class CEvn_Logic & a2);
 
     // address=[0x1472fd0]
      CNetInputProcessor(void);
@@ -43,7 +43,7 @@ protected:
     static bool __cdecl IsReadyEntityOfPlayer(int a1, int a2);
 
     // address=[0x1473190]
-    static unsigned int __cdecl UnpackHiValue(unsigned int);
+    static unsigned int __cdecl UnpackHiValue(unsigned int a1);
 
     // address=[0x14731a0]
     static unsigned int __cdecl UnpackLoValue(unsigned int a1);

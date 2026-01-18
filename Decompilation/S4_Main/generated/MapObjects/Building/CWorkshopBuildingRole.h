@@ -106,7 +106,7 @@ private:
     void  Clear(void);
 
     // address=[0x152f1e0]
-    virtual void  ConvertEventIntoGoal(class CBuilding *,class CEntityEvent *);
+    virtual void  ConvertEventIntoGoal(class CBuilding * a2, class CEntityEvent * a3);
 
     // address=[0x152f260]
     virtual bool  TryCrushBuilding(void);

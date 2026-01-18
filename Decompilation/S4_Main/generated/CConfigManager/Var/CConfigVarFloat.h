@@ -19,7 +19,7 @@ public:
 
 private:
     // address=[0x2ef86f0]
-     CConfigVarFloat(float);
+     CConfigVarFloat(float a2);
 
     // address=[0x2ef8c20]
     virtual  ~CConfigVarFloat(void);

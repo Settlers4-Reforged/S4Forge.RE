@@ -42,7 +42,7 @@ public:
     virtual int  SetGroupFlags(int a2);
 
     // address=[0x1563a20]
-    virtual void  UpdateJob(class CSettler *);
+    virtual void  UpdateJob(class CSettler * a2);
 
     // address=[0x15671a0]
     int  SourcePileId(void)const;

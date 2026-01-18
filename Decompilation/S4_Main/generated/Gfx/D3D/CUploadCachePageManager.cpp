@@ -4,7 +4,7 @@
 
 // address=[0x2f69830]
 // Decompiled from CUploadCachePageManager *__thiscall CUploadCachePageManager::CUploadCachePageManager(  CUploadCachePageManager *this,  struct IDirectDrawSurface7 *a2,  struct IDirectDrawSurface7 *a3,  struct IDirect3DDevice7 *a4)
- CUploadCachePageManager::CUploadCachePageManager(struct IDirectDrawSurface7 *,struct IDirectDrawSurface7 *,struct IDirect3DDevice7 *) {
+ CUploadCachePageManager::CUploadCachePageManager(struct IDirectDrawSurface7 * a2, struct IDirectDrawSurface7 * a3, struct IDirect3DDevice7 * a4) {
   
   CCachePageManager::CCachePageManager(this, a2, a3, a4);
   return this;

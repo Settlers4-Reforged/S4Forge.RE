@@ -6,7 +6,7 @@
 class IAIDarkTribeEcoAI : public IAIUnknown {
 public:
     // address=[0x132fa50]
-    static class IAIDarkTribeEcoAI * __cdecl CreateEcoAI(struct SAIDarkTribeEcoAIParams const &);
+    static class IAIDarkTribeEcoAI * __cdecl CreateEcoAI(struct SAIDarkTribeEcoAIParams const & a1);
 
     // address=[0x1334ef0]
      IAIDarkTribeEcoAI(void);

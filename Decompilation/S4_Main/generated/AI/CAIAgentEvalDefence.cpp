@@ -15,11 +15,11 @@
 
 // address=[0x13045d0]
 // Decompiled from unsigned int __thiscall CAIAgentEvalDefence::Execute(CAIAgentEvalDefence *this, unsigned int a2, unsigned int a3)
-unsigned int  CAIAgentEvalDefence::Execute(unsigned int,unsigned int) {
+unsigned int  CAIAgentEvalDefence::Execute(unsigned int a2, unsigned int a3) {
   
-  CAINormalSectorAI *v3; // eax
+  CAIScheduler **v3; // eax
 
-  v3 = CAINormalSectorAgent::SectorAI(this);
+  v3 = (CAIScheduler **)CAINormalSectorAgent::SectorAI(this);
   CAINormalSectorAI::EvaluateNextOwnMilitaryBuilding(v3);
   return CAIAgent::ExecuteResult(0, 0);
 }

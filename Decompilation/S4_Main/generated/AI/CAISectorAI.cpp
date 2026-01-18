@@ -842,7 +842,7 @@ void  CAISectorAI::SetHeadquarterId(int a2) {
 
 // address=[0x13260c0]
 // Decompiled from void __cdecl CAISectorAI::AwakeAgent(struct CAIAgent *a1)
-void __cdecl CAISectorAI::AwakeAgent(class CAIAgent &) {
+void __cdecl CAISectorAI::AwakeAgent(class CAIAgent & a1) {
   
   int v1; // esi
   unsigned int v2; // eax

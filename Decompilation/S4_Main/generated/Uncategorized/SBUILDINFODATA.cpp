@@ -18,7 +18,7 @@
 
 // address=[0x13458f0]
 // Decompiled from SBUILDINFODATA *__thiscall SBUILDINFODATA::SBUILDINFODATA(SBUILDINFODATA *this, const struct SBUILDINFODATA *a2)
- SBUILDINFODATA::SBUILDINFODATA(struct SBUILDINFODATA const &) {
+ SBUILDINFODATA::SBUILDINFODATA(struct SBUILDINFODATA const & a2) {
   
   *(_DWORD *)this = *(_DWORD *)a2;
   *((_DWORD *)this + 1) = *((_DWORD *)a2 + 1);

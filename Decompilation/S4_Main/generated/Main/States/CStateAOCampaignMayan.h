@@ -9,7 +9,7 @@ public:
     static class CGameState * __cdecl DynamicCreateFunc(void * a1);
 
     // address=[0x149fa70]
-     CStateAOCampaignMayan(void *);
+     CStateAOCampaignMayan(void * a2);
 
     // address=[0x149fb30]
     virtual  ~CStateAOCampaignMayan(void);

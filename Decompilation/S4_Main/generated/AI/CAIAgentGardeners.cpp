@@ -4,7 +4,7 @@
 
 // address=[0x1304230]
 // Decompiled from unsigned int __thiscall CAIAgentGardeners::Execute(CAIAgentGardeners *this, unsigned int a2, unsigned int a3)
-unsigned int  CAIAgentGardeners::Execute(unsigned int,unsigned int) {
+unsigned int  CAIAgentGardeners::Execute(unsigned int a2, unsigned int a3) {
   
   return CAIAgent::ExecuteResult(0, 0);
 }

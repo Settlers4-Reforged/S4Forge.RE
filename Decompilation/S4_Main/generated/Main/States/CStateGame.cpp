@@ -769,7 +769,7 @@ int  CStateGame::GetModifierState(void) {
 
 // address=[0x14a6c20]
 // Decompiled from CStateGame *__thiscall CStateGame::CStateGame(CStateGame *this, void *a2)
- CStateGame::CStateGame(void *) {
+ CStateGame::CStateGame(void * a2) {
   
   bool IsMCD2TextureSet; // al
   int VirtualTick; // esi
@@ -1684,7 +1684,7 @@ void  CStateGame::ReadyToGo(void) {
 
 // address=[0x14acde0]
 // Decompiled from void __thiscall CStateGame::SetViewPos(CStateGame *this, unsigned int a2, unsigned int a3)
-void  CStateGame::SetViewPos(unsigned int,unsigned int) {
+void  CStateGame::SetViewPos(unsigned int a2, unsigned int a3) {
   
   signed int v3; // kr00_4
 
@@ -3520,7 +3520,7 @@ LABEL_61:
             }
             CPlayerManager::PlayerDied(a2->wparam);
             if ( CPlayerManager::IsAI(a2->wparam) )
-              (*(void (__thiscall **)(void *, int))(*(_DWORD *)off_3D7A3D8 + 32))(off_3D7A3D8, a2->wparam);
+              (*(void (__thiscall **)(void *, int))(*(_DWORD *)g_pAI + 32))(g_pAI, a2->wparam);
             CStatistic::FreezeEcoStatistic((CStatistic *)&g_cStatistic);
             for ( m = 1; m < 83; ++m )
             {
@@ -3562,7 +3562,7 @@ LABEL_61:
             CTextMsgHandler::AddTextMsg(2258, v19, 0, 1, v321);
             CStateGame::UpdateToGuiInfoStruct((CStateGame *)v278);
             if ( CPlayerManager::IsAlive((int)v277[2]) )
-              (*(void (__thiscall **)(void *, void *))(*(_DWORD *)off_3D7A3D8 + 28))(off_3D7A3D8, v277[2]);
+              (*(void (__thiscall **)(void *, void *))(*(_DWORD *)g_pAI + 28))(g_pAI, v277[2]);
             return 1;
           case 0x67u:
             CMinimapHandler::FilterKeyPressed((int)v277[2]);

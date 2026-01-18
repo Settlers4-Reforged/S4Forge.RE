@@ -8,8 +8,8 @@
   
   IFSNode::IFSNode(this);
   *(_DWORD *)this = CFile::_vftable_;
-  std::string::string((char *)this + 4, (char *)&dword_3686924[1]);
-  std::string::string();
+  std::string::string((CFile *)((char *)this + 4), (char *)&dword_3686924[1]);
+  std::string::string((char *)this + 36);
   *((_DWORD *)this + 17) = 0;
   *((_DWORD *)this + 8) = 1;
   std::string::operator=((char *)this + 36, " /\n\r\t");

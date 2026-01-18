@@ -22,7 +22,7 @@ bool  CHJBMgr::LocalLoadHJBGfxFileIfNecessary(void) {
 
 // address=[0x15745a0]
 // Decompiled from bool __thiscall CHJBMgr::StaticCheckHJBCommand(CHJBMgr *this, const char *a2)
-bool  CHJBMgr::StaticCheckHJBCommand(char const *) {
+bool  CHJBMgr::StaticCheckHJBCommand(char const * a2) {
   
   if ( !a2 )
     return 0;

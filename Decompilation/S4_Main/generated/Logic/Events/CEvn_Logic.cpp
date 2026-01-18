@@ -12,7 +12,7 @@
 
 // address=[0x1334e60]
 // Decompiled from CEvn_Logic *__thiscall CEvn_Logic::CEvn_Logic(  CEvn_Logic *this,  unsigned int a2,  unsigned int a3,  unsigned int a4,  char a5,  unsigned int a6,  unsigned __int16 a7)
- CEvn_Logic::CEvn_Logic(unsigned int,unsigned int,unsigned int,unsigned char,unsigned int,unsigned short) {
+ CEvn_Logic::CEvn_Logic(unsigned int a2, unsigned int a3, unsigned int a4, unsigned char a5, unsigned int a6, unsigned short a7) {
   
   CEvn_Event::CEvn_Event((CEvn_Event *)this, a2, a3, a4, 0);
   *(_DWORD *)this = CEvn_Logic::_vftable_;

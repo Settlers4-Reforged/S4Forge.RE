@@ -492,7 +492,7 @@ void  CPriestRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent 
       *(_BYTE *)(this + 4) = 27;
       v30 = IEntity::ID();
       v23 = IEntity::OwnerId((unsigned __int8 *)a2);
-      (*(void (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)off_3D7A3D8 + 44))(off_3D7A3D8, 21, v23, v30, v38);
+      (*(void (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)g_pAI + 44))(g_pAI, 21, v23, v30, v38);
       goto LABEL_19;
     case 0x11:
       if ( *((_DWORD *)a3 + 2) != 13 )
@@ -541,12 +541,7 @@ LABEL_19:
         v33 = *(unsigned __int16 *)(this + 32);
         v25 = IEntity::ID();
         v16 = IEntity::OwnerId((unsigned __int8 *)a2);
-        (*(void (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)off_3D7A3D8 + 44))(
-          off_3D7A3D8,
-          18,
-          v16,
-          v25,
-          v33);
+        (*(void (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)g_pAI + 44))(g_pAI, 18, v16, v25, v33);
       }
       else
       {
@@ -571,7 +566,7 @@ LABEL_19:
       v36 = *(unsigned __int16 *)(this + 32);
       v28 = IEntity::ID();
       v20 = IEntity::OwnerId((unsigned __int8 *)a2);
-      (*(void (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)off_3D7A3D8 + 44))(off_3D7A3D8, 21, v20, v28, v36);
+      (*(void (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)g_pAI + 44))(g_pAI, 21, v20, v28, v36);
       *(_WORD *)(this + 32) = 0;
       goto LABEL_19;
     default:

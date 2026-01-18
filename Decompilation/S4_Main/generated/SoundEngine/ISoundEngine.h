@@ -81,7 +81,7 @@ public:
     unsigned int  GetDigitalDriver(void);
 
     // address=[0x2fd5fc0]
-    bool  IsRunning(unsigned int);
+    bool  IsRunning(unsigned int a2);
 
     // address=[0x2fd6010]
     void  CreatePlaylists(int a2);

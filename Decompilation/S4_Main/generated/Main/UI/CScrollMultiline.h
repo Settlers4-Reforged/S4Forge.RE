@@ -25,7 +25,7 @@ private:
     unsigned char *  GetWrapPointer(unsigned char * Str);
 
     // address=[0x13da3c0]
-    unsigned char *  GetCRLFWrapPointer(unsigned char *,unsigned char *);
+    unsigned char *  GetCRLFWrapPointer(unsigned char * a2, unsigned char * a3);
 
     // address=[0x13da440]
     void  SplitText(void);

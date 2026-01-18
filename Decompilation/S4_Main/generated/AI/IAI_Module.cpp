@@ -601,7 +601,7 @@ void  IAI_Module::NewSolutionInHistory(class CSolutionTree * a2) {
 
 // address=[0x2f3e2d0]
 // Decompiled from CDynList *__thiscall IAI_Module::CloneHistorie(IAI_Module *this, struct CDynList *a2)
-class CDynList *  IAI_Module::CloneHistorie(class CDynList *) {
+class CDynList *  IAI_Module::CloneHistorie(class CDynList * a2) {
   
   struct CDynListEntry *v3; // [esp+14h] [ebp-24h]
   CHistorySolution *v4; // [esp+18h] [ebp-20h]

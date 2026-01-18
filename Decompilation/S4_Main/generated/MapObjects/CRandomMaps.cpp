@@ -149,7 +149,7 @@ void  CRandomMaps::GetMapKeyFromParams(struct SRandomMapParams * a2, std::wstrin
 
 // address=[0x14996d0]
 // Decompiled from void __thiscall CRandomMaps::GetMapKeyFromParams(CRandomMaps *this, struct SRandomMapParams *a2, wchar_t *a3)
-void  CRandomMaps::GetMapKeyFromParams(struct SRandomMapParams *,wchar_t *) {
+void  CRandomMaps::GetMapKeyFromParams(struct SRandomMapParams * a2, wchar_t * a3) {
   
   if ( a3 )
   {

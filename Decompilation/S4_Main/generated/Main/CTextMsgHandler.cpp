@@ -801,7 +801,7 @@ void *  CTextMsgHandler::GetEventFunction(void) {
 
 // address=[0x14cf3e0]
 // Decompiled from bool __cdecl CTextMsgHandler::CheckWarning(const char *a1, int *a2)
-bool __cdecl CTextMsgHandler::CheckWarning(char const *,int *) {
+bool __cdecl CTextMsgHandler::CheckWarning(char const * a1, int * a2) {
   
   int MsgLevelMask; // [esp+0h] [ebp-8h]
   unsigned int v4; // [esp+4h] [ebp-4h]

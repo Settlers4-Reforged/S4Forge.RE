@@ -126,7 +126,7 @@ void  CScriptManager::Call(int a2, int a3, int a4, int a5, int a6) {
 
 // address=[0x160deb0]
 // Decompiled from CScriptManager *__thiscall CScriptManager::CScriptManager(CScriptManager *this, struct CLua *a2)
- CScriptManager::CScriptManager(class CLua &) {
+ CScriptManager::CScriptManager(class CLua & a2) {
   
   *(_DWORD *)this = &CScriptManager::_vftable_;
   if ( CScriptManager::m_pScriptManager

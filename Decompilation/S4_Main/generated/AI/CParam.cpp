@@ -32,7 +32,7 @@
 
 // address=[0x2f3e940]
 // Decompiled from CParam *__thiscall CParam::CParam(CParam *this, struct CParam *a2)
- CParam::CParam(class CParam *) {
+ CParam::CParam(class CParam * a2) {
   
   CDynListEntry::CDynListEntry(this);
   *(_DWORD *)this = &CParam::_vftable_;

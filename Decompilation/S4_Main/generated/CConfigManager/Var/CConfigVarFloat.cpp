@@ -44,7 +44,7 @@ void  CConfigVarFloat::SetValue(float a2) {
 
 // address=[0x2ef86f0]
 // Decompiled from CConfigVarFloat *__thiscall CConfigVarFloat::CConfigVarFloat(CConfigVarFloat *this, float a2)
- CConfigVarFloat::CConfigVarFloat(float) {
+ CConfigVarFloat::CConfigVarFloat(float a2) {
   
   CDynamicConfigVar::CDynamicConfigVar(this, 3, 1);
   *(_DWORD *)this = &CConfigVarFloat::_vftable_;

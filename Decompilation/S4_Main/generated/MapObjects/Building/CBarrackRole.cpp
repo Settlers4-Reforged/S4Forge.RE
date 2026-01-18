@@ -642,7 +642,7 @@ void  CBarrackRole::FillDialog(class CBuilding * a2, bool a3) {
 
 // address=[0x14e80c0]
 // Decompiled from void __thiscall CBarrackRole::ConvertEventIntoGoal(CBarrackRole *this, struct CBuilding *a2, struct CEntityEvent *a3)
-void  CBarrackRole::ConvertEventIntoGoal(class CBuilding *,class CEntityEvent *) {
+void  CBarrackRole::ConvertEventIntoGoal(class CBuilding * a2, class CEntityEvent * a3) {
   
   ;
 }

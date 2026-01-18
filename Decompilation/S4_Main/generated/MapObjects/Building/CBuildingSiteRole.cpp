@@ -159,7 +159,7 @@ void  CBuildingSiteRole::Init(class CBuilding * a2) {
   IAnimatedEntity::RegisterForLogicUpdate(16);
   v6 = IEntity::ID();
   v4 = IEntity::OwnerId(a2);
-  return (*(int (__thiscall **)(void *, int, int, int, _DWORD))(*(_DWORD *)off_3D7A3D8 + 44))(off_3D7A3D8, 5, v4, v6, 0);
+  return (*(int (__thiscall **)(void *, int, int, int, _DWORD))(*(_DWORD *)g_pAI + 44))(g_pAI, 5, v4, v6, 0);
 }
 
 
@@ -1569,7 +1569,7 @@ void  CBuildingSiteRole::DiggingIsReady(int a2) {
 
 // address=[0x1503eb0]
 // Decompiled from void __thiscall CBuildingSiteRole::TidyUp(CBuildingSiteRole *this, struct CEntityEvent *a2)
-void  CBuildingSiteRole::TidyUp(class CEntityEvent &) {
+void  CBuildingSiteRole::TidyUp(class CEntityEvent & a2) {
   
   int EcoSectorId; // [esp+4h] [ebp-4h]
 
@@ -2245,7 +2245,7 @@ void  CBuildingSiteRole::PrepareGround(class CBuilding * a2) {
 
 // address=[0x15063d0]
 // Decompiled from void __thiscall CBuildingSiteRole::ConvertEventIntoGoal(  CBuildingSiteRole *this,  struct CBuilding *a2,  struct CEntityEvent *a3)
-void  CBuildingSiteRole::ConvertEventIntoGoal(class CBuilding *,class CEntityEvent *) {
+void  CBuildingSiteRole::ConvertEventIntoGoal(class CBuilding * a2, class CEntityEvent * a3) {
   
   ;
 }

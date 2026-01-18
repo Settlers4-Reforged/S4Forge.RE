@@ -985,7 +985,7 @@ class CGameState * __cdecl CGameStateHandler::GetCurrentState(void) {
 
 // address=[0x148c9a0]
 // Decompiled from void __cdecl CGameStateHandler::LoadConfigFile(wchar_t *String, const char *a2)
-void __cdecl CGameStateHandler::LoadConfigFile(wchar_t const *,char const *) {
+void __cdecl CGameStateHandler::LoadConfigFile(wchar_t const * String, char const * a2) {
   
   _DWORD *v2; // eax
   const char *v3; // eax

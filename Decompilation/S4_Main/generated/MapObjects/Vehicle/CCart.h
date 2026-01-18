@@ -63,7 +63,7 @@ public:
     bool  CreateSettlement(void);
 
     // address=[0x1532030]
-    virtual void  ConvertEventIntoGoal(class CEntityEvent *);
+    virtual void  ConvertEventIntoGoal(class CEntityEvent * a2);
 
     // address=[0x15320b0]
     virtual void  Decrease(int a2);

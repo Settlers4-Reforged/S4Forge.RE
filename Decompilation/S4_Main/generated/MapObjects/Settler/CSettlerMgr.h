@@ -99,10 +99,10 @@ public:
     static void __cdecl FillSpecialistMenu(class CInfoExchange * a1, bool a2, bool a3);
 
     // address=[0x1584870]
-    void  Store(class S4::CMapFile &);
+    void  Store(class S4::CMapFile & a2);
 
     // address=[0x1584c80]
-    void  Load(class S4::CMapFile &);
+    void  Load(class S4::CMapFile & a2);
 
     // address=[0x1584f70]
     void  IncNumberOfSettler(int a2, int a3);

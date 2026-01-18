@@ -52,7 +52,7 @@ private:
     static void __cdecl ExecuteDamageEntity(struct CFutureEvents::SFutureEvent & a1);
 
     // address=[0x1451510]
-    static void __cdecl ExecuteCastSpell(struct CFutureEvents::SFutureEvent &);
+    static void __cdecl ExecuteCastSpell(struct CFutureEvents::SFutureEvent & a1);
 
     // address=[0x1451540]
     static void __cdecl ExecuteSpellTerrainConversion(struct CFutureEvents::SFutureEvent & a1);
@@ -73,7 +73,7 @@ private:
     static void __cdecl ExecuteFreeServant(struct CFutureEvents::SFutureEvent & a1);
 
     // address=[0x1452a50]
-    static unsigned int __cdecl HiWord(unsigned int);
+    static unsigned int __cdecl HiWord(unsigned int a1);
 
     // address=[0x1452a60]
     static unsigned int __cdecl LoWord(unsigned int a1);

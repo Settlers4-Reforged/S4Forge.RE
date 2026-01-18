@@ -181,7 +181,7 @@ private:
     bool  RequestVehicle(class CBuilding * a2, bool a3);
 
     // address=[0x1523d60]
-    bool  IsVehicleRequested(class CBuilding *,bool);
+    bool  IsVehicleRequested(class CBuilding * a2, bool a3);
 
     // address=[0x1523e90]
     bool  IsVehicleAtBuilding(class CBuilding * a2);
@@ -235,7 +235,7 @@ private:
     bool  IsShipInHarbour(class CBuilding * a2);
 
     // address=[0x15252d0]
-    bool  IsTradeShipInHarbour(class CBuilding *);
+    bool  IsTradeShipInHarbour(class CBuilding * a2);
 
     // address=[0x15253a0]
     bool  IsShip(int a2);
@@ -271,7 +271,7 @@ private:
     bool  RequestDonkey(class CBuilding * a2, class CBuilding * a3, bool a4);
 
     // address=[0x1525ff0]
-    bool  IsDonkeyAtBuilding(class CBuilding *);
+    bool  IsDonkeyAtBuilding(class CBuilding * a2);
 
     // address=[0x15260d0]
     int  GetDonkeyIDAtBuilding(class CBuilding * a2);
@@ -304,7 +304,7 @@ private:
     bool  RequestCart(class CBuilding * a2, class CBuilding * a3, bool a4);
 
     // address=[0x1526f10]
-    bool  IsCartAtBuilding(class CBuilding *);
+    bool  IsCartAtBuilding(class CBuilding * a2);
 
     // address=[0x1526f40]
     int  GetCartIDAtBuilding(class CBuilding * a2);

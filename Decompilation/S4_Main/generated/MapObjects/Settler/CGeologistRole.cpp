@@ -542,12 +542,7 @@ void  CGeologistRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEve
       *(_BYTE *)(this + 4) = 27;
       v29 = IEntity::ID();
       v21 = IEntity::OwnerId((unsigned __int8 *)a2);
-      LOBYTE(v3) = (*(int (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)off_3D7A3D8 + 44))(
-                     off_3D7A3D8,
-                     21,
-                     v21,
-                     v29,
-                     v37);
+      LOBYTE(v3) = (*(int (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)g_pAI + 44))(g_pAI, 21, v21, v29, v37);
       break;
     case 0x11:
       LOBYTE(v3) = this;
@@ -617,8 +612,8 @@ void  CGeologistRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEve
         v32 = *(unsigned __int16 *)(this + 32);
         v24 = IEntity::ID();
         v14 = IEntity::OwnerId((unsigned __int8 *)a2);
-        LOBYTE(v3) = (*(int (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)off_3D7A3D8 + 44))(
-                       off_3D7A3D8,
+        LOBYTE(v3) = (*(int (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)g_pAI + 44))(
+                       g_pAI,
                        18,
                        v14,
                        v24,
@@ -647,12 +642,7 @@ void  CGeologistRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEve
       v35 = *(unsigned __int16 *)(this + 32);
       v27 = IEntity::ID();
       v18 = IEntity::OwnerId((unsigned __int8 *)a2);
-      LOBYTE(v3) = (*(int (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)off_3D7A3D8 + 44))(
-                     off_3D7A3D8,
-                     21,
-                     v18,
-                     v27,
-                     v35);
+      LOBYTE(v3) = (*(int (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)g_pAI + 44))(g_pAI, 21, v18, v27, v35);
       *(_WORD *)(this + 32) = 0;
       break;
     default:

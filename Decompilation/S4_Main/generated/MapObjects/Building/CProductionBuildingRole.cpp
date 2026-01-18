@@ -769,7 +769,7 @@ void  CProductionBuildingRole::Store(std::ostream & a2) {
 
 // address=[0x14fd230]
 // Decompiled from void __thiscall CProductionBuildingRole::ConvertEventIntoGoal(  CProductionBuildingRole *this,  struct CBuilding *a2,  struct CEntityEvent *a3)
-void  CProductionBuildingRole::ConvertEventIntoGoal(class CBuilding *,class CEntityEvent *) {
+void  CProductionBuildingRole::ConvertEventIntoGoal(class CBuilding * a2, class CEntityEvent * a3) {
   
   ;
 }
@@ -812,7 +812,7 @@ bool  CProductionBuildingRole::HaveMaterial(class CBuilding * a2) {
 
 // address=[0x15177c0]
 // Decompiled from bool __thiscall CProductionBuildingRole::HaveFreeSlotForProduct(CProductionBuildingRole *this, struct CBuilding *a2)
-bool  CProductionBuildingRole::HaveFreeSlotForProduct(class CBuilding *) {
+bool  CProductionBuildingRole::HaveFreeSlotForProduct(class CBuilding * a2) {
   
   unsigned __int16 *v2; // eax
   unsigned __int8 *v3; // eax

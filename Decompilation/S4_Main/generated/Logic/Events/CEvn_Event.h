@@ -12,10 +12,10 @@ public:
      CEvn_Event(unsigned int a2, unsigned int a3, unsigned int a4, unsigned char a5);
 
     // address=[0x1352be0]
-    virtual void  Load(class IS4Chunk &);
+    virtual void  Load(class IS4Chunk & a2);
 
     // address=[0x1352bf0]
-    virtual void  Save(class IS4Chunk &);
+    virtual void  Save(class IS4Chunk & a2);
 
     // address=[0x145ff30]
      CEvn_Event(class CEvn_Event const & a2);

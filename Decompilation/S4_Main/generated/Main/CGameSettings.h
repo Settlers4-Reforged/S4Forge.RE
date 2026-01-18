@@ -66,10 +66,10 @@ public:
     static void __cdecl SetCampaignStatus(int a1, int a2);
 
     // address=[0x1489530]
-    static void __cdecl Cryption(unsigned char *,unsigned long);
+    static void __cdecl Cryption(unsigned char * a1, unsigned long a2);
 
     // address=[0x14895f0]
-    static unsigned int __cdecl Crc(unsigned char *,unsigned long);
+    static unsigned int __cdecl Crc(unsigned char * a1, unsigned long a2);
 
     // address=[0x148abd0]
     static int __cdecl GetWebHelpMode(void);

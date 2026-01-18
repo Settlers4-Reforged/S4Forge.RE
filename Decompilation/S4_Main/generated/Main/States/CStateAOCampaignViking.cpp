@@ -18,7 +18,7 @@ class CGameState * __cdecl CStateAOCampaignViking::DynamicCreateFunc(void * a1) 
 
 // address=[0x14a1530]
 // Decompiled from CStateAOCampaignViking *__thiscall CStateAOCampaignViking::CStateAOCampaignViking(  CStateAOCampaignViking *this,  void *a2)
- CStateAOCampaignViking::CStateAOCampaignViking(void *) {
+ CStateAOCampaignViking::CStateAOCampaignViking(void * a2) {
   
   CGuiGameState::CGuiGameState(this);
   *(_DWORD *)this = &CStateAOCampaignViking::_vftable_;

@@ -27,10 +27,10 @@ public:
     virtual void  SetValue(int a2);
 
     // address=[0x12fd6b0]
-    virtual void  SetValue(float);
+    virtual void  SetValue(float a2);
 
     // address=[0x12fd6c0]
-    virtual void  SetValue(char const *);
+    virtual void  SetValue(char const * a2);
 
     // address=[0x160db90]
     int  Size(void)const;

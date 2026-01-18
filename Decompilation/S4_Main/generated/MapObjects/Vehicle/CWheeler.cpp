@@ -12,7 +12,7 @@
 
 // address=[0x153fdc0]
 // Decompiled from void __thiscall CWheeler::FillDialog(CWheeler *this, bool a2)
-void  CWheeler::FillDialog(bool) {
+void  CWheeler::FillDialog(bool a2) {
   
   ;
 }
@@ -665,12 +665,7 @@ void  CWheeler::OnComeToFerry(int a2) {
   v16 = IEntity::ID();
   v13 = IEntity::ID();
   v11 = IEntity::OwnerId((unsigned __int8 *)this);
-  return (*(int (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)off_3D7A3D8 + 44))(
-           off_3D7A3D8,
-           18,
-           v11,
-           v13,
-           v16);
+  return (*(int (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)g_pAI + 44))(g_pAI, 18, v11, v13, v16);
 }
 
 

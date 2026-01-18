@@ -157,7 +157,7 @@ protected:
     void  NotifyAllObservers(class CEntityEvent const & a2)const;
 
     // address=[0x1506640]
-    void  NotifyAndDetachAllObservers(class CEntityEvent const &);
+    void  NotifyAndDetachAllObservers(class CEntityEvent const & a2);
 
 private:
     // address=[0x14e9db0]

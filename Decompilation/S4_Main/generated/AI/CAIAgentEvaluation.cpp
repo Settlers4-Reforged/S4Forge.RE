@@ -4,7 +4,7 @@
 
 // address=[0x1303a40]
 // Decompiled from CAIAgentEvaluation *__thiscall CAIAgentEvaluation::CAIAgentEvaluation(  CAIAgentEvaluation *this,  struct CAIPlayerEvaluations *a2)
- CAIAgentEvaluation::CAIAgentEvaluation(class CAIPlayerEvaluations &) {
+ CAIAgentEvaluation::CAIAgentEvaluation(class CAIPlayerEvaluations & a2) {
   
   CAIAgent::CAIAgent(this, "player evaluation");
   *(_DWORD *)this = &CAIAgentEvaluation::_vftable_;
@@ -16,7 +16,7 @@
 
 // address=[0x1303a80]
 // Decompiled from unsigned int __thiscall CAIAgentEvaluation::Execute(CAIAgentEvaluation *this, unsigned int a2, unsigned int a3)
-unsigned int  CAIAgentEvaluation::Execute(unsigned int,unsigned int) {
+unsigned int  CAIAgentEvaluation::Execute(unsigned int a2, unsigned int a3) {
   
   if ( *((int *)this + 9) < 1
     && BBSupportDbgReport(2, "AI\\AI_AgentsEx.cpp", 43, "m_iCurrentPlayerId >= PLAYER_FIRST") == 1 )

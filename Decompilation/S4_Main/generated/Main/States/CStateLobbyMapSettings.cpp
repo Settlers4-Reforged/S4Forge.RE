@@ -18,7 +18,7 @@ class CGameState * __cdecl CStateLobbyMapSettings::DynamicCreateFunc(void * a1) 
 
 // address=[0x14bd770]
 // Decompiled from CStateLobbyMapSettings *__thiscall CStateLobbyMapSettings::CStateLobbyMapSettings(  CStateLobbyMapSettings *this,  void *a2)
- CStateLobbyMapSettings::CStateLobbyMapSettings(void *) {
+ CStateLobbyMapSettings::CStateLobbyMapSettings(void * a2) {
   
   const char *v2; // eax
   const char *v3; // eax

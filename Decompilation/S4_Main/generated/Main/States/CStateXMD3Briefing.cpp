@@ -18,7 +18,7 @@ class CGameState * __cdecl CStateXMD3Briefing::DynamicCreateFunc(void * a1) {
 
 // address=[0x14ccbd0]
 // Decompiled from CStateXMD3Briefing *__thiscall CStateXMD3Briefing::CStateXMD3Briefing(CStateXMD3Briefing *this, void *a2)
- CStateXMD3Briefing::CStateXMD3Briefing(void *) {
+ CStateXMD3Briefing::CStateXMD3Briefing(void * a2) {
   
   const char *v2; // eax
   wchar_t *v3; // eax

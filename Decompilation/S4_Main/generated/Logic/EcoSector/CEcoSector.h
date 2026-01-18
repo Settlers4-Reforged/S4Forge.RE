@@ -117,7 +117,7 @@ public:
     void  SetExtraMinCarrierForRecruitment(int a2);
 
     // address=[0x142b720]
-    bool  CarrierForJobOrderAvailable(bool);
+    bool  CarrierForJobOrderAvailable(bool a2);
 
     // address=[0x142b7a0]
     int  WorkerDeltaAmount(int a2);

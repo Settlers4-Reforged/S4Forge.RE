@@ -6,7 +6,7 @@
 class CAIAgentDarkTribeSquadManager : public CAIDarkTribeSectorAgent {
 public:
     // address=[0x1302430]
-    virtual unsigned int  Execute(unsigned int,unsigned int);
+    virtual unsigned int  Execute(unsigned int a2, unsigned int a3);
 
     // address=[0x1322ea0]
      CAIAgentDarkTribeSquadManager(void);

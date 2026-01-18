@@ -147,7 +147,7 @@ unsigned long  CDoorRole::ClassID(void)const {
 
 // address=[0x156d2d0]
 // Decompiled from void __thiscall CDoorRole::ConvertEventIntoGoal(CDoorRole *this, struct CSettler *a2, struct CEntityEvent *a3)
-void  CDoorRole::ConvertEventIntoGoal(class CSettler *,class CEntityEvent *) {
+void  CDoorRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent * a3) {
   
   ;
 }
@@ -171,7 +171,7 @@ class CWalking *  CDoorRole::InitWalking(class CSettler * a2) {
 
 // address=[0x156d330]
 // Decompiled from void __thiscall CDoorRole::LogicUpdateJob(CDoorRole *this, struct CSettler *a2)
-void  CDoorRole::LogicUpdateJob(class CSettler *) {
+void  CDoorRole::LogicUpdateJob(class CSettler * a2) {
   
   ;
 }
@@ -222,7 +222,7 @@ void  CDoorRole::Init(class CSettler * a2) {
 
 // address=[0x156d2e0]
 // Decompiled from void __thiscall CDoorRole::GetNextJob(CDoorRole *this, struct CSettler *a2)
-void  CDoorRole::GetNextJob(class CSettler *) {
+void  CDoorRole::GetNextJob(class CSettler * a2) {
   
   ;
 }
@@ -230,7 +230,7 @@ void  CDoorRole::GetNextJob(class CSettler *) {
 
 // address=[0x156d360]
 // Decompiled from void __thiscall CDoorRole::TakeJob(CDoorRole *this, struct CSettler *a2)
-void  CDoorRole::TakeJob(class CSettler *) {
+void  CDoorRole::TakeJob(class CSettler * a2) {
   
   ;
 }

@@ -1738,7 +1738,7 @@ void  IGfxEngine::SetCursorShape(bool a2, int a3) {
 
 // address=[0x2f5f950]
 // Decompiled from void __thiscall IGfxEngine::FixCursor(IGfxEngine *this, bool a2, bool a3)
-void  IGfxEngine::FixCursor(bool,bool) {
+void  IGfxEngine::FixCursor(bool a2, bool a3) {
   
   int CursorShape; // eax
   struct tagPOINT Point; // [esp+0h] [ebp-Ch] BYREF

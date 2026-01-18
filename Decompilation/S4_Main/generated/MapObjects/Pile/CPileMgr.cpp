@@ -432,7 +432,7 @@ void  CPileMgr::SearchSpaceForGoods(int a2, int a3, int a4, int a5) {
 
 // address=[0x155f280]
 // Decompiled from void __thiscall CPileMgr::Store(CPileMgr *this, struct S4::CMapFile *a2)
-void  CPileMgr::Store(class S4::CMapFile &) {
+void  CPileMgr::Store(class S4::CMapFile & a2) {
   
   std::strstreambuf *v2; // eax
   void *v3; // eax
@@ -507,7 +507,7 @@ void  CPileMgr::Store(class S4::CMapFile &) {
 
 // address=[0x155f4c0]
 // Decompiled from void __thiscall CPileMgr::Load(CPileMgr *this, struct S4::CMapFile *a2)
-void  CPileMgr::Load(class S4::CMapFile &) {
+void  CPileMgr::Load(class S4::CMapFile & a2) {
   
   int v2; // [esp+0h] [ebp-FCh]
   _DWORD v3[42]; // [esp+4h] [ebp-F8h] BYREF

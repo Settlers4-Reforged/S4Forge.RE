@@ -133,7 +133,7 @@ void  INetworkEngine::StormResetEnterSessionFlag(void) {
 
 // address=[0x15c8460]
 // Decompiled from INetworkEngine *__thiscall INetworkEngine::INetworkEngine(INetworkEngine *this, bool a2)
- INetworkEngine::INetworkEngine(bool) {
+ INetworkEngine::INetworkEngine(bool a2) {
   
   *(_DWORD *)this = &INetworkEngine::_vftable_;
   *((_BYTE *)this + 4) = 0;

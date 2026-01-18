@@ -15,7 +15,7 @@
 
 // address=[0x1304760]
 // Decompiled from unsigned int __thiscall CAIAgentIntruderCombat::Execute(CAIAgentIntruderCombat *this, unsigned int a2, unsigned int a3)
-unsigned int  CAIAgentIntruderCombat::Execute(unsigned int,unsigned int) {
+unsigned int  CAIAgentIntruderCombat::Execute(unsigned int a2, unsigned int a3) {
   
   struct CAINormalSectorAI *v3; // eax
   pairNode *v4; // eax

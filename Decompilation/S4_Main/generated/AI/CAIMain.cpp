@@ -693,7 +693,7 @@ void  CAIMain::CreatePlayerAI(int a2, class IS4Chunk * a3) {
 
 // address=[0x1314050]
 // Decompiled from bool __cdecl CAIMain::IsRealPlayerId(unsigned int a1)
-bool __cdecl CAIMain::IsRealPlayerId(unsigned int) {
+bool __cdecl CAIMain::IsRealPlayerId(unsigned int a1) {
   
   return a1 - 1 <= 7;
 }

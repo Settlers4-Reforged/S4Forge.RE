@@ -1251,7 +1251,7 @@ void  CEcoSector::SetExtraMinCarrierForRecruitment(int a2) {
 
 // address=[0x142b720]
 // Decompiled from bool __thiscall CEcoSector::CarrierForJobOrderAvailable(CEcoSector *this, bool a2)
-bool  CEcoSector::CarrierForJobOrderAvailable(bool) {
+bool  CEcoSector::CarrierForJobOrderAvailable(bool a2) {
   
   int v3; // [esp+14h] [ebp-8h]
 

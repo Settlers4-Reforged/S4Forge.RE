@@ -18,7 +18,7 @@ public:
     static class CStoragePileRole * __cdecl Load(std::istream & a1);
 
     // address=[0x1561900]
-    virtual void  Init(class CPile *);
+    virtual void  Init(class CPile * a2);
 
     // address=[0x1561940]
      CStoragePileRole(std::istream & a2);

@@ -62,12 +62,7 @@ bool  CFlyingMgr::AddFlyingEntity(int a2, int a3, int a4, int a5, bool a5) {
   CFlyingMgr::AttachFlyingEntity(this, a5, 1, FreeSlot);
   ++*((_DWORD *)this + 2 * a5 + 20);
   if ( a6 )
-    (*(void (__thiscall **)(void *, int, int, int, _DWORD))(*(_DWORD *)off_3D7A3D8 + 44))(
-      off_3D7A3D8,
-      20,
-      a5,
-      FreeSlot,
-      0);
+    (*(void (__thiscall **)(void *, int, int, int, _DWORD))(*(_DWORD *)g_pAI + 44))(g_pAI, 20, a5, FreeSlot, 0);
   return 1;
 }
 
@@ -285,7 +280,7 @@ int  CFlyingMgr::GetNearestEntity(int a2, int a3, int a4, int a5, int a6) {
 
 // address=[0x154fb10]
 // Decompiled from void __thiscall CFlyingMgr::Store(CFlyingMgr *this, struct S4::CMapFile *a2)
-void  CFlyingMgr::Store(class S4::CMapFile &) {
+void  CFlyingMgr::Store(class S4::CMapFile & a2) {
   
   std::strstreambuf *v2; // eax
   void *v3; // eax
@@ -361,7 +356,7 @@ void  CFlyingMgr::Store(class S4::CMapFile &) {
 
 // address=[0x154fe90]
 // Decompiled from void __thiscall CFlyingMgr::Load(CFlyingMgr *this, struct S4::CMapFile *a2)
-void  CFlyingMgr::Load(class S4::CMapFile &) {
+void  CFlyingMgr::Load(class S4::CMapFile & a2) {
   
   int v2; // [esp+0h] [ebp-118h] BYREF
   _DWORD v3[44]; // [esp+10h] [ebp-108h] BYREF

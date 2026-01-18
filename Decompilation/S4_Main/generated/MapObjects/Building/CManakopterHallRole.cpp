@@ -332,7 +332,7 @@ void  CManakopterHallRole::GoodArrive(int a2) {
 
 // address=[0x150d4c0]
 // Decompiled from void __thiscall CManakopterHallRole::FillDialog(CManakopterHallRole *this, struct CBuilding *a2, bool a3)
-void  CManakopterHallRole::FillDialog(class CBuilding *,bool) {
+void  CManakopterHallRole::FillDialog(class CBuilding * a2, bool a3) {
   
   ;
 }
@@ -549,7 +549,7 @@ int  CManakopterHallRole::GetPileIdWithGood(int a2)const {
 
 // address=[0x150dd60]
 // Decompiled from void __thiscall CManakopterHallRole::ConvertEventIntoGoal(  CManakopterHallRole *this,  struct CBuilding *a2,  struct CEntityEvent *a3)
-void  CManakopterHallRole::ConvertEventIntoGoal(class CBuilding *,class CEntityEvent *) {
+void  CManakopterHallRole::ConvertEventIntoGoal(class CBuilding * a2, class CEntityEvent * a3) {
   
   ;
 }

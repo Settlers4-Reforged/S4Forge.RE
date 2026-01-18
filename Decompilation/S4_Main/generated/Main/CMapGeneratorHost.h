@@ -18,7 +18,7 @@ public:
     virtual void  SetPlayerStartPosition(int a2, int a3, int a4);
 
     // address=[0x1498b50]
-     CMapGeneratorHost(struct SRandomMapParams const &);
+     CMapGeneratorHost(struct SRandomMapParams const & a2);
 
     // address=[0x1498c30]
     virtual  ~CMapGeneratorHost(void);

@@ -1344,12 +1344,7 @@ LABEL_111:
         v54 = *((unsigned __int16 *)v80 + 16);
         v44 = IEntity::ID();
         v29 = IEntity::OwnerId((unsigned __int8 *)a2);
-        (*(void (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)off_3D7A3D8 + 44))(
-          off_3D7A3D8,
-          18,
-          v29,
-          v44,
-          v54);
+        (*(void (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)g_pAI + 44))(g_pAI, 18, v29, v44, v54);
       }
       else
       {
@@ -1374,7 +1369,7 @@ LABEL_111:
       v57 = *((unsigned __int16 *)v80 + 16);
       v47 = IEntity::ID();
       v33 = IEntity::OwnerId((unsigned __int8 *)a2);
-      (*(void (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)off_3D7A3D8 + 44))(off_3D7A3D8, 21, v33, v47, v57);
+      (*(void (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)g_pAI + 44))(g_pAI, 21, v33, v47, v57);
       v34 = IEntity::WorldIdx();
       v67 = CWorldManager::EcoSectorId(v34);
       if ( !v67 )

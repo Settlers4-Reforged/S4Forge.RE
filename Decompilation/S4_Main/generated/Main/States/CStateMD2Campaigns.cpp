@@ -18,7 +18,7 @@ class CGameState * __cdecl CStateMD2Campaigns::DynamicCreateFunc(void * a1) {
 
 // address=[0x14c4690]
 // Decompiled from CStateMD2Campaigns *__thiscall CStateMD2Campaigns::CStateMD2Campaigns(CStateMD2Campaigns *this, void *a2)
- CStateMD2Campaigns::CStateMD2Campaigns(void *) {
+ CStateMD2Campaigns::CStateMD2Campaigns(void * a2) {
   
   CGuiGameState::CGuiGameState(this);
   *(_DWORD *)this = &CStateMD2Campaigns::_vftable_;

@@ -134,7 +134,7 @@ private:
     void  WarriorInitWalk(class IMovingEntity & a2, int a3);
 
     // address=[0x15afc70]
-    bool  WarriorIsFullUpdate(unsigned int)const;
+    bool  WarriorIsFullUpdate(unsigned int a2)const;
 
     // address=[0x15afcb0]
     class CWarriorProperties const &  WarriorProperties(void)const;

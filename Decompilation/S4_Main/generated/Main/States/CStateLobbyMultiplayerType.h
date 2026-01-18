@@ -9,7 +9,7 @@ public:
     static class CGameState * __cdecl DynamicCreateFunc(void * a1);
 
     // address=[0x14c0a50]
-     CStateLobbyMultiplayerType(void *);
+     CStateLobbyMultiplayerType(void * a2);
 
     // address=[0x14c0ac0]
     virtual  ~CStateLobbyMultiplayerType(void);

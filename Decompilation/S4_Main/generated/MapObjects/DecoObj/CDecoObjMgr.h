@@ -93,10 +93,10 @@ public:
     void  Rod(int a2, bool a3);
 
     // address=[0x1544590]
-    void  Store(class S4::CMapFile &);
+    void  Store(class S4::CMapFile & a2);
 
     // address=[0x1544810]
-    void  Load(class S4::CMapFile &);
+    void  Load(class S4::CMapFile & a2);
 
 private:
     // address=[0x1544b00]

@@ -12,7 +12,7 @@ public:
     virtual class IFSNode *  GetChild(int a2);
 
     // address=[0x135e0c0]
-    virtual void  Orphan(class IFSNode *);
+    virtual void  Orphan(class IFSNode * a2);
 
 protected:
     // address=[0x135cc00]

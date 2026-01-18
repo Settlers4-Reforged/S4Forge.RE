@@ -18,7 +18,7 @@ protected:
     static class CLinkList & __cdecl PushLinksUndef(int a1);
 
     // address=[0x15e5b70]
-    static class CLinkList & __cdecl PushLinks(class CIntLinkList const &);
+    static class CLinkList & __cdecl PushLinks(class CIntLinkList const & a1);
 
     // address=[0x15e5ba0]
     static void __cdecl AddLink(int a1, int a2);

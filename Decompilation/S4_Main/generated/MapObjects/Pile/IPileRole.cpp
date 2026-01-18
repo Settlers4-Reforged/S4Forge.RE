@@ -24,7 +24,7 @@ bool  IPileRole::ChangeGoodTypeUnforseen(class CPile * a2, int a3) {
 
 // address=[0x155b2c0]
 // Decompiled from void __thiscall IPileRole::DecAmountComing(IPileRole *this, struct CPile *a2)
-void  IPileRole::DecAmountComing(class CPile *) {
+void  IPileRole::DecAmountComing(class CPile * a2) {
   
   ;
 }
@@ -32,7 +32,7 @@ void  IPileRole::DecAmountComing(class CPile *) {
 
 // address=[0x155b2d0]
 // Decompiled from void __thiscall IPileRole::Empty(IPileRole *this, struct CPile *a2)
-void  IPileRole::Empty(class CPile *) {
+void  IPileRole::Empty(class CPile * a2) {
   
   ;
 }
@@ -40,7 +40,7 @@ void  IPileRole::Empty(class CPile *) {
 
 // address=[0x155b2e0]
 // Decompiled from void __thiscall IPileRole::IncAmountComing(IPileRole *this, struct CPile *a2)
-void  IPileRole::IncAmountComing(class CPile *) {
+void  IPileRole::IncAmountComing(class CPile * a2) {
   
   ;
 }
@@ -48,7 +48,7 @@ void  IPileRole::IncAmountComing(class CPile *) {
 
 // address=[0x155b2f0]
 // Decompiled from void __thiscall IPileRole::LogicUpdate(IPileRole *this, struct CPile *a2)
-void  IPileRole::LogicUpdate(class CPile *) {
+void  IPileRole::LogicUpdate(class CPile * a2) {
   
   ;
 }
@@ -56,7 +56,7 @@ void  IPileRole::LogicUpdate(class CPile *) {
 
 // address=[0x155b330]
 // Decompiled from void __thiscall IPileRole::ReassessDistance(IPileRole *this, struct CPile *a2, int *a3)
-void  IPileRole::ReassessDistance(class CPile *,int &) {
+void  IPileRole::ReassessDistance(class CPile * a2, int & a3) {
   
   ;
 }
@@ -109,7 +109,7 @@ void  IPileRole::Decrease(class CPile * a2, int a3) {
 
 // address=[0x1561050]
 // Decompiled from void __thiscall IPileRole::IncAmoutLeaving(IPileRole *this, struct CPile *a2)
-void  IPileRole::IncAmoutLeaving(class CPile *) {
+void  IPileRole::IncAmoutLeaving(class CPile * a2) {
   
   if ( CPile::IsInOfferList(a2) )
   {
@@ -242,7 +242,7 @@ void  IPileRole::SubjectDie(class CPile * a2, int a3) {
 
 // address=[0x1561350]
 // Decompiled from void __thiscall IPileRole::SubjectStopped(IPileRole *this, struct CPile *a2)
-void  IPileRole::SubjectStopped(class CPile *) {
+void  IPileRole::SubjectStopped(class CPile * a2) {
   
   ;
 }
@@ -250,7 +250,7 @@ void  IPileRole::SubjectStopped(class CPile *) {
 
 // address=[0x1561360]
 // Decompiled from void __thiscall IPileRole::SubjectStarted(IPileRole *this, struct CPile *a2)
-void  IPileRole::SubjectStarted(class CPile *) {
+void  IPileRole::SubjectStarted(class CPile * a2) {
   
   ;
 }

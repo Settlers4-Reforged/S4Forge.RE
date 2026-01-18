@@ -18,7 +18,7 @@ class CGameState * __cdecl CStateCampaignDark::DynamicCreateFunc(void * a1) {
 
 // address=[0x14a3b40]
 // Decompiled from CStateCampaignDark *__thiscall CStateCampaignDark::CStateCampaignDark(CStateCampaignDark *this, void *a2)
- CStateCampaignDark::CStateCampaignDark(void *) {
+ CStateCampaignDark::CStateCampaignDark(void * a2) {
   
   CGuiGameState::CGuiGameState(this);
   *(_DWORD *)this = &CStateCampaignDark::_vftable_;

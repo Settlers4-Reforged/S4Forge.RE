@@ -14,7 +14,7 @@
 
 // address=[0x15c38e0]
 // Decompiled from CNet_Event *__thiscall CNet_Event::CNet_Event(  CNet_Event *this,  unsigned int a2,  unsigned int a3,  unsigned int a4,  char a5,  unsigned int a6,  unsigned __int16 a7,  unsigned int a8)
- CNet_Event::CNet_Event(unsigned int,unsigned int,unsigned int,unsigned char,unsigned int,unsigned short,unsigned int) {
+ CNet_Event::CNet_Event(unsigned int a2, unsigned int a3, unsigned int a4, unsigned char a5, unsigned int a6, unsigned short a7, unsigned int a8) {
   
   CEvn_Logic::CEvn_Logic(this, a2, a3, a4, a5, a6, a7);
   *(_DWORD *)this = CNet_Event::_vftable_;

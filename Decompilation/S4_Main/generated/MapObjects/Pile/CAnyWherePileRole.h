@@ -9,7 +9,7 @@ public:
     static class CPersistence * __cdecl New(std::istream & a1);
 
     // address=[0x155af40]
-    virtual void  Init(class CPile *);
+    virtual void  Init(class CPile * a2);
 
     // address=[0x155afc0]
     virtual void  LogicUpdate(class CPile * a2);
@@ -42,10 +42,10 @@ public:
     virtual void  SubjectDie(class CPile * a2, int a3);
 
     // address=[0x155b390]
-    virtual void  SubjectStarted(class CPile *);
+    virtual void  SubjectStarted(class CPile * a2);
 
     // address=[0x155b3a0]
-    virtual void  SubjectStopped(class CPile *);
+    virtual void  SubjectStopped(class CPile * a2);
 
     // address=[0x1560340]
     static class CAnyWherePileRole * __cdecl Load(std::istream & a1);

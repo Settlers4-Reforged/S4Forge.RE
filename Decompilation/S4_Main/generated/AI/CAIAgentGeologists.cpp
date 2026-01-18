@@ -4,7 +4,7 @@
 
 // address=[0x1304250]
 // Decompiled from unsigned int __thiscall CAIAgentGeologists::Execute(CAIAgentGeologists *this, unsigned int a2, unsigned int a3)
-unsigned int  CAIAgentGeologists::Execute(unsigned int,unsigned int) {
+unsigned int  CAIAgentGeologists::Execute(unsigned int a2, unsigned int a3) {
   
   struct CAINormalSectorAI *v3; // eax
   struct CAINormalSectorAI *v4; // eax

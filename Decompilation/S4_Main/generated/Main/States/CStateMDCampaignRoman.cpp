@@ -18,7 +18,7 @@ class CGameState * __cdecl CStateMDCampaignRoman::DynamicCreateFunc(void * a1) {
 
 // address=[0x14c6b40]
 // Decompiled from CStateMDCampaignRoman *__thiscall CStateMDCampaignRoman::CStateMDCampaignRoman(CStateMDCampaignRoman *this, void *a2)
- CStateMDCampaignRoman::CStateMDCampaignRoman(void *) {
+ CStateMDCampaignRoman::CStateMDCampaignRoman(void * a2) {
   
   CGuiGameState::CGuiGameState(this);
   *(_DWORD *)this = &CStateMDCampaignRoman::_vftable_;

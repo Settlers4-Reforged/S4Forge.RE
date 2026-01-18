@@ -3,14 +3,14 @@
 // Definitions for class IAIDarkTribeEcoAI
 
 // address=[0x132fa50]
-// Decompiled from int IAIDarkTribeEcoAI::CreateEcoAI()
-class IAIDarkTribeEcoAI * __cdecl IAIDarkTribeEcoAI::CreateEcoAI(struct SAIDarkTribeEcoAIParams const &) {
+// Decompiled from struct IAIDarkTribeEcoAI *__cdecl IAIDarkTribeEcoAI::CreateEcoAI(const struct SAIDarkTribeEcoAIParams *a1)
+class IAIDarkTribeEcoAI * __cdecl IAIDarkTribeEcoAI::CreateEcoAI(struct SAIDarkTribeEcoAIParams const & a1) {
   
-  std::bad_function_call *v2; // [esp+Ch] [ebp-10h]
+  std::bad_function_call *v3; // [esp+Ch] [ebp-10h]
 
-  v2 = (std::bad_function_call *)operator new(0x4084u);
-  if ( v2 )
-    return CAIDarkTribe::CAIDarkTribe(v2);
+  v3 = (std::bad_function_call *)operator new(0x4084u);
+  if ( v3 )
+    return CAIDarkTribe::CAIDarkTribe(v3, *(_DWORD *)a1);
   else
     return 0;
 }

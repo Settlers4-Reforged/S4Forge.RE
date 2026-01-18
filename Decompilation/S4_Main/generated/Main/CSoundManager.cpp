@@ -452,7 +452,7 @@ void  CSoundManager::SetSoundVolume(int a2) {
 
 // address=[0x149cb50]
 // Decompiled from void __thiscall CSoundManager::Mute(CSoundManager *this, bool a2)
-void  CSoundManager::Mute(bool) {
+void  CSoundManager::Mute(bool a2) {
   
   int v2; // [esp+4h] [ebp-8h]
 
@@ -515,7 +515,7 @@ void  CSoundManager::StopSounds(void) {
 
 // address=[0x149cc90]
 // Decompiled from void __thiscall CSoundManager::StopSound(CSoundManager *this, unsigned int a2)
-void  CSoundManager::StopSound(unsigned int) {
+void  CSoundManager::StopSound(unsigned int a2) {
   
   if ( g_pSoundEngine )
     ISoundEngine::StopSample((ISoundEngine *)g_pSoundEngine, a2);
@@ -524,7 +524,7 @@ void  CSoundManager::StopSound(unsigned int) {
 
 // address=[0x149ccc0]
 // Decompiled from bool __thiscall CSoundManager::IsPlaying(CSoundManager *this, unsigned int a2)
-bool  CSoundManager::IsPlaying(unsigned int) {
+bool  CSoundManager::IsPlaying(unsigned int a2) {
   
   return !g_pSoundEngine || ISoundEngine::IsRunning((ISoundEngine *)g_pSoundEngine, a2);
 }

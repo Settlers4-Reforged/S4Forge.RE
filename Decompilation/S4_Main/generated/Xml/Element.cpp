@@ -1282,7 +1282,7 @@ bool  AdvXMLParser::Element::ParseMarkup(class AdvXMLParser::Parser & a2) {
 
 // address=[0x2f244a0]
 // Decompiled from void __thiscall AdvXMLParser::Element::HandleSpecialAttributes(  AdvXMLParser::Element *this,  const struct AdvXMLParser::Attribute *a2)
-void  AdvXMLParser::Element::HandleSpecialAttributes(class AdvXMLParser::Attribute const *) {
+void  AdvXMLParser::Element::HandleSpecialAttributes(class AdvXMLParser::Attribute const * a2) {
   
   _BYTE v3[28]; // [esp+14h] [ebp-2Ch] BYREF
   int v4; // [esp+3Ch] [ebp-4h]

@@ -690,7 +690,7 @@ void  CDarkTribe::ChangeElementToDarkOrGreen(int a2, int a3, bool a4, int a5) {
   {
     CDarkTribe::ChangeObjectToDarkOrGreen(v12, v11, a2, a3, a4);
   }
-  return (*(int (__thiscall **)(void *, int, int, int, bool))(*(_DWORD *)off_3D7A3D8 + 44))(off_3D7A3D8, 29, a2, a3, a4);
+  return (*(int (__thiscall **)(void *, int, int, int, bool))(*(_DWORD *)g_pAI + 44))(g_pAI, 29, a2, a3, a4);
 }
 
 

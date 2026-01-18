@@ -549,12 +549,7 @@ void  CPioneerRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent
       CSettler::TakeWaitList(a2);
       v22 = IEntity::ID();
       v4 = IEntity::OwnerId((unsigned __int8 *)a2);
-      LOBYTE(v3) = (*(int (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)off_3D7A3D8 + 44))(
-                     off_3D7A3D8,
-                     21,
-                     v4,
-                     v22,
-                     v37);
+      LOBYTE(v3) = (*(int (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)g_pAI + 44))(g_pAI, 21, v4, v22, v37);
       break;
     case 9:
       v38 = *((_DWORD *)a3 + 4);
@@ -629,8 +624,8 @@ void  CPioneerRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent
         v32 = *((unsigned __int16 *)this + 16);
         v25 = IEntity::ID();
         v16 = IEntity::OwnerId((unsigned __int8 *)a2);
-        LOBYTE(v3) = (*(int (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)off_3D7A3D8 + 44))(
-                       off_3D7A3D8,
+        LOBYTE(v3) = (*(int (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)g_pAI + 44))(
+                       g_pAI,
                        18,
                        v16,
                        v25,
@@ -659,12 +654,7 @@ void  CPioneerRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent
       v35 = *((unsigned __int16 *)this + 16);
       v28 = IEntity::ID();
       v20 = IEntity::OwnerId((unsigned __int8 *)a2);
-      LOBYTE(v3) = (*(int (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)off_3D7A3D8 + 44))(
-                     off_3D7A3D8,
-                     21,
-                     v20,
-                     v28,
-                     v35);
+      LOBYTE(v3) = (*(int (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)g_pAI + 44))(g_pAI, 21, v20, v28, v35);
       break;
     default:
       v3 = IEntity::FlagBits(a2, EntityFlag_Registered);

@@ -6,7 +6,7 @@
 class CS4ErrorException : public CBBException {
 public:
     // address=[0x1481190]
-     CS4ErrorException(class CErrorMessageId const &);
+     CS4ErrorException(class CErrorMessageId const & a2);
 
     // address=[0x1481200]
     virtual bool  GetErrorMessage(char * a2, unsigned int a3);

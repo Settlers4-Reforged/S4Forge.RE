@@ -66,7 +66,7 @@ class CVehicle *  CVehicleIterator::NextVehicle(void) {
 
 // address=[0x15aad50]
 // Decompiled from bool __cdecl CVehicleIterator::IsEntityNullOrValid(struct IEntity *a1)
-bool __cdecl CVehicleIterator::IsEntityNullOrValid(class IEntity *) {
+bool __cdecl CVehicleIterator::IsEntityNullOrValid(class IEntity * a1) {
   
   return !a1 || IEntity::FlagBits(a1, (EntityFlag)&loc_3000000);
 }

@@ -24,7 +24,7 @@
 
 // address=[0x14870b0]
 // Decompiled from void __thiscall CLogicRingBuffer::Load(CLogicRingBuffer *this, struct IS4Chunk *a2)
-void  CLogicRingBuffer::Load(class IS4Chunk &) {
+void  CLogicRingBuffer::Load(class IS4Chunk & a2) {
   
   unsigned int v2; // [esp+4h] [ebp-40h]
   unsigned int i; // [esp+8h] [ebp-3Ch]

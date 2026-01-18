@@ -1628,7 +1628,7 @@ void  CWarriorBehavior::WarriorInitWalk(class IMovingEntity & a2, int a3) {
 
 // address=[0x15afc70]
 // Decompiled from bool __thiscall CWarriorBehavior::WarriorIsFullUpdate(CWarriorBehavior *this, unsigned int a2)
-bool  CWarriorBehavior::WarriorIsFullUpdate(unsigned int)const {
+bool  CWarriorBehavior::WarriorIsFullUpdate(unsigned int a2)const {
   
   return a2 >= *((_DWORD *)this + 5);
 }

@@ -67,7 +67,7 @@ public:
 
 private:
     // address=[0x14fd230]
-    virtual void  ConvertEventIntoGoal(class CBuilding *,class CEntityEvent *);
+    virtual void  ConvertEventIntoGoal(class CBuilding * a2, class CEntityEvent * a3);
 
     // address=[0x14fd2a0]
     virtual bool  CrushBuilding(void);
@@ -79,7 +79,7 @@ private:
     bool  HaveMaterial(class CBuilding * a2);
 
     // address=[0x15177c0]
-    bool  HaveFreeSlotForProduct(class CBuilding *);
+    bool  HaveFreeSlotForProduct(class CBuilding * a2);
 
     // address=[0x1517840]
     bool  HaveProductionOrder(void);

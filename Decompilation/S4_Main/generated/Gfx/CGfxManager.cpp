@@ -4,7 +4,7 @@
 
 // address=[0x1361470]
 // Decompiled from CGfxManager *__thiscall CGfxManager::CGfxManager(CGfxManager *this, bool a2, bool a3, bool a4)
- CGfxManager::CGfxManager(bool,bool,bool) {
+ CGfxManager::CGfxManager(bool a2, bool a3, bool a4) {
   
   int v5; // [esp+4h] [ebp-34h]
   _BYTE v7[28]; // [esp+Ch] [ebp-2Ch] BYREF
@@ -296,7 +296,7 @@ void  CGfxManager::GetObjectGfxInfo(struct SGfxObjectInfo & a2, unsigned int a3,
 
 // address=[0x13621a0]
 // Decompiled from unsigned int __thiscall CGfxManager::GetObjectFirstJob(CGfxManager *this, unsigned int a2)
-unsigned int  CGfxManager::GetObjectFirstJob(unsigned int) {
+unsigned int  CGfxManager::GetObjectFirstJob(unsigned int a2) {
   
   if ( !*((_DWORD *)this + 473)
     && BBSupportDbgReportF(2, "GfxManager.cpp", 1085, "m_pFileGfxJobCodes[ %u ].pItem", 5) == 1 )
@@ -536,7 +536,7 @@ void  CGfxManager::GetVehicleGfxInfo(struct SGfxObjectInfo & a2, unsigned int a3
 
 // address=[0x1362d50]
 // Decompiled from unsigned int __thiscall CGfxManager::GetVehicleFirstJob(CGfxManager *this, unsigned int a2, unsigned int a3)
-unsigned int  CGfxManager::GetVehicleFirstJob(unsigned int,unsigned int) {
+unsigned int  CGfxManager::GetVehicleFirstJob(unsigned int a2, unsigned int a3) {
   
   int v5; // [esp+8h] [ebp-4h]
 
@@ -590,7 +590,7 @@ void  CGfxManager::GetAnimalGfxInfo(struct SGfxObjectInfo & a2, unsigned int a3,
 
 // address=[0x1362fc0]
 // Decompiled from unsigned int __thiscall CGfxManager::GetAnimalFirstJob(CGfxManager *this, unsigned int a2)
-unsigned int  CGfxManager::GetAnimalFirstJob(unsigned int) {
+unsigned int  CGfxManager::GetAnimalFirstJob(unsigned int a2) {
   
   if ( !*((_DWORD *)this + 479)
     && BBSupportDbgReportF(2, "GfxManager.cpp", 1099, "m_pFileGfxJobCodes[ %u ].pItem", 8) == 1 )

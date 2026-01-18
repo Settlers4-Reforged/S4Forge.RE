@@ -9,7 +9,7 @@ public:
      CNotifyExceptMushroomfarmer(void);
 
     // address=[0x1508190]
-    virtual bool  NotifyEntity(class IEntity const &);
+    virtual bool  NotifyEntity(class IEntity const & a2);
 
 };
 

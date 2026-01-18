@@ -12,7 +12,7 @@ public:
     static class CGameState * __cdecl DynamicCreateFunc(void * a1);
 
     // address=[0x14b5680]
-     CStateLoadGame(void *);
+     CStateLoadGame(void * a2);
 
     // address=[0x14b57c0]
     virtual  ~CStateLoadGame(void);

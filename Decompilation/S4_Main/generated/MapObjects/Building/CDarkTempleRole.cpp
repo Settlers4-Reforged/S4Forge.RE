@@ -46,7 +46,7 @@ class CDarkTempleRole * __cdecl CDarkTempleRole::Load(std::istream & a1) {
     if ( v2 > 0 )
     {
       byte_40F2220[v2] = i;
-      dword_40F2264[i] = (*(int (__thiscall **)(void *, int))(*(_DWORD *)off_3D7A3D8 + 52))(off_3D7A3D8, v2);
+      dword_40F2264[i] = (*(int (__thiscall **)(void *, int))(*(_DWORD *)g_pAI + 52))(g_pAI, v2);
     }
   }
   return this;
@@ -196,7 +196,7 @@ bool  CDarkTempleRole::SettlerEnter(class CBuilding * a2, int a3) {
     if ( v8 == 53 )
     {
       v5 = IEntity::OwnerId((unsigned __int8 *)a2);
-      (*(void (__thiscall **)(void *, int))(*(_DWORD *)off_3D7A3D8 + 48))(off_3D7A3D8, v5);
+      (*(void (__thiscall **)(void *, int))(*(_DWORD *)g_pAI + 48))(g_pAI, v5);
       IBuildingRole::DetachWithoutNotify(v9, a2, a3);
       IEntity::ClearFlagBits(v10, EntityFlag_Visible);
       if ( IEntity::FlagBits(v10, EntityFlag_OnBoard)
@@ -395,7 +395,7 @@ int  CDarkTempleRole::ProduceMushroomFarmer(class CBuilding * a2) {
     if ( v8 > 0 )
     {
       byte_40F2220[v8] = k;
-      v3 = (*(int (__thiscall **)(void *, int))(*(_DWORD *)off_3D7A3D8 + 52))(off_3D7A3D8, v8);
+      v3 = (*(int (__thiscall **)(void *, int))(*(_DWORD *)g_pAI + 52))(g_pAI, v8);
       dword_40F2264[k] = v3;
     }
   }
@@ -454,7 +454,7 @@ unsigned long  CDarkTempleRole::ClassID(void)const {
 
 // address=[0x1509f50]
 // Decompiled from void __thiscall CDarkTempleRole::FillDialog(CDarkTempleRole *this, struct CBuilding *a2, bool a3)
-void  CDarkTempleRole::FillDialog(class CBuilding *,bool) {
+void  CDarkTempleRole::FillDialog(class CBuilding * a2, bool a3) {
   
   ;
 }
@@ -862,7 +862,7 @@ int  CDarkTempleRole::AddSettlerToWorld(int a2, int a3, int a4) {
 
 // address=[0x1509f10]
 // Decompiled from void __thiscall CDarkTempleRole::ConvertEventIntoGoal(  CDarkTempleRole *this,  struct CBuilding *a2,  struct CEntityEvent *a3)
-void  CDarkTempleRole::ConvertEventIntoGoal(class CBuilding *,class CEntityEvent *) {
+void  CDarkTempleRole::ConvertEventIntoGoal(class CBuilding * a2, class CEntityEvent * a3) {
   
   ;
 }

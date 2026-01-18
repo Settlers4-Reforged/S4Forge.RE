@@ -12,7 +12,7 @@ public:
     static bool __cdecl PreLoadGame(std::wstring a1);
 
     // address=[0x14c1bc0]
-     CStateMainMenu(void *);
+     CStateMainMenu(void * a2);
 
     // address=[0x14c22a0]
     virtual  ~CStateMainMenu(void);

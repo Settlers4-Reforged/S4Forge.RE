@@ -279,7 +279,7 @@ int __cdecl CShip::FindBoardingLocation(int a1, int a2, struct SBoardingInfo & a
 
 // address=[0x159e8f0]
 // Decompiled from void __thiscall CShip::FillDialog(CShip *this, bool a2)
-void  CShip::FillDialog(bool) {
+void  CShip::FillDialog(bool a2) {
   
   ;
 }

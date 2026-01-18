@@ -12,19 +12,19 @@ public:
     virtual bool  ChangeGoodTypeUnforseen(class CPile * a2, int a3);
 
     // address=[0x155b2c0]
-    virtual void  DecAmountComing(class CPile *);
+    virtual void  DecAmountComing(class CPile * a2);
 
     // address=[0x155b2d0]
-    virtual void  Empty(class CPile *);
+    virtual void  Empty(class CPile * a2);
 
     // address=[0x155b2e0]
-    virtual void  IncAmountComing(class CPile *);
+    virtual void  IncAmountComing(class CPile * a2);
 
     // address=[0x155b2f0]
-    virtual void  LogicUpdate(class CPile *);
+    virtual void  LogicUpdate(class CPile * a2);
 
     // address=[0x155b330]
-    virtual void  ReassessDistance(class CPile *,int &);
+    virtual void  ReassessDistance(class CPile * a2, int & a3);
 
     // address=[0x1560f00]
     virtual void  Increase(class CPile * a2, int a3);
@@ -33,7 +33,7 @@ public:
     virtual void  Decrease(class CPile * a2, int a3);
 
     // address=[0x1561050]
-    virtual void  IncAmoutLeaving(class CPile *);
+    virtual void  IncAmoutLeaving(class CPile * a2);
 
     // address=[0x15610b0]
     virtual void  DecAmountLeaving(class CPile * a2);
@@ -54,10 +54,10 @@ public:
     virtual void  SubjectDie(class CPile * a2, int a3);
 
     // address=[0x1561350]
-    virtual void  SubjectStopped(class CPile *);
+    virtual void  SubjectStopped(class CPile * a2);
 
     // address=[0x1561360]
-    virtual void  SubjectStarted(class CPile *);
+    virtual void  SubjectStarted(class CPile * a2);
 
     // address=[0x1561370]
      IPileRole(std::istream & a2);

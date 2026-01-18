@@ -1113,23 +1113,29 @@ def get_class_members(class_name: str):
     return members
 
 def get_function_info_from_address(address: int) -> bool:
-    func = ida_funcs.get_func(address)
-    if not func:
-        return None
-
     tif = ida_typeinf.tinfo_t()
-
-    if not ida_nalt.get_tinfo(tif, func.start_ea):
-        return None
-
-    if not tif.is_func():
-        return None
-
-    ftd = ida_typeinf.func_type_data_t()
-    if not tif.get_func_details(ftd):
-        return None
     
-    return ftd
+    # 1. Try to get the explicit type (saved in DB)
+    success = ida_nalt.get_tinfo(tif, address)
+    
+    # 2. If that fails, ask IDA to guess the type
+    if not success:
+        print(f"No explicit type at {hex(address)}. Attempting to guess...")
+        # GUESS_FUNC_TINFO allows IDA to analyze the function instructions
+        # GUESS_DEFINITE means we prefer exact matches
+        success = ida_typeinf.guess_tinfo(tif, address)
+
+    if not success:
+        print("Could not determine type info.")
+        return False
+
+    # Now you can parse details as before...
+    func_data = ida_typeinf.func_type_data_t()
+    if tif.get_func_details(func_data):
+        return func_data
+    else:
+        print("Type info is not a function.")
+        return False
     
 def get_arguments_from_function_info(ftd):
     args = []
@@ -1450,6 +1456,7 @@ def write_class_headers(classes, generated_headers):
 
                         ftd = get_function_info_from_address(int(entry['address'], 16) - ADDRESS_OFFSET)
                         decl_arguments = get_arguments_from_function_info(ftd) if ftd else None 
+                        print (f"Processing {clean_decl} with args {decl_arguments} for function at {hex(int(entry['address'], 16) - ADDRESS_OFFSET)}")
                         if decl_arguments:
                             clean_decl = append_names(clean_decl, decl_arguments)
 

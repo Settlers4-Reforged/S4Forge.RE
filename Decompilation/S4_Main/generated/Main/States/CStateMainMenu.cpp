@@ -125,7 +125,7 @@ bool __cdecl CStateMainMenu::PreLoadGame(std::wstring a1) {
 
 // address=[0x14c1bc0]
 // Decompiled from CStateMainMenu *__thiscall CStateMainMenu::CStateMainMenu(CStateMainMenu *this, void *a2)
- CStateMainMenu::CStateMainMenu(void *) {
+ CStateMainMenu::CStateMainMenu(void * a2) {
   
   size_t v2; // eax
   size_t v3; // eax

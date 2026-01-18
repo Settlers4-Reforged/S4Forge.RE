@@ -763,7 +763,7 @@ void  S4::CMapFile::Cryption(void * a2, unsigned int a3) {
 
 // address=[0x13dbd00]
 // Decompiled from unsigned int __thiscall S4::CMapFile::Crc(S4::CMapFile *this, void *a2, unsigned int a3)
-unsigned int  S4::CMapFile::Crc(void *,unsigned int) {
+unsigned int  S4::CMapFile::Crc(void * a2, unsigned int a3) {
   
   unsigned int NormalCRC; // [esp+8h] [ebp-8h]
   _BYTE v5[4]; // [esp+Ch] [ebp-4h] BYREF

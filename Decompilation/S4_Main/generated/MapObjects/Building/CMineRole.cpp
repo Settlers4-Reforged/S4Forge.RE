@@ -669,7 +669,7 @@ bool  CMineRole::CrushBuilding(void) {
 
 // address=[0x1515080]
 // Decompiled from void __thiscall CMineRole::ConvertEventIntoGoal(CMineRole *this, struct CBuilding *a2, struct CEntityEvent *a3)
-void  CMineRole::ConvertEventIntoGoal(class CBuilding *,class CEntityEvent *) {
+void  CMineRole::ConvertEventIntoGoal(class CBuilding * a2, class CEntityEvent * a3) {
   
   ;
 }

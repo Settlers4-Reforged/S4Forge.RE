@@ -117,7 +117,7 @@ public:
     static class CEcoSector * __cdecl GetLocalPlayerEcoSectorPtrAtCenter(void);
 
     // address=[0x1443de0]
-    void  Store(class S4::CMapFile &);
+    void  Store(class S4::CMapFile & a2);
 
     // address=[0x1444230]
     void  Load(class S4::CMapFile & a2);

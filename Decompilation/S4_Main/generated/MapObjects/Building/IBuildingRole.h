@@ -18,7 +18,7 @@ public:
     virtual bool  HasShipAmmo(int a1)const;
 
     // address=[0x14e6820]
-    virtual void  LockPiles(class CBuilding *,bool);
+    virtual void  LockPiles(class CBuilding * a2, bool a3);
 
     // address=[0x14e6840]
     virtual void  NotifySelected(void);
@@ -70,7 +70,7 @@ public:
 
 protected:
     // address=[0x14ffe90]
-    virtual void  KillInhabitant(class CBuilding *);
+    virtual void  KillInhabitant(class CBuilding * a2);
 
     // address=[0x14ffea0]
     void  InitCommon(class CBuilding * a2);

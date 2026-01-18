@@ -16,7 +16,7 @@ public:
 
 protected:
     // address=[0x15aad50]
-    static bool __cdecl IsEntityNullOrValid(class IEntity *);
+    static bool __cdecl IsEntityNullOrValid(class IEntity * a1);
 
     // address=[0x15aade0]
     class CVehicle *  NextVehicleEx(class CVehicle * a2);

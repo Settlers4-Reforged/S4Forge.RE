@@ -64,7 +64,7 @@ bool __cdecl CGameRun::Init(void) {
     CGameScriptManager::SetVictoryConditionHook(
       (CGameScriptManager *)g_pScriptMgr,
       ScriptEconomyModeVictoryConditionCheck);
-  (*(void (__thiscall **)(void *))(*(_DWORD *)off_3D7A3D8 + 8))(off_3D7A3D8);
+  (*(void (__thiscall **)(void *))(*(_DWORD *)g_pAI + 8))(g_pAI);
   v9 = (CLogic *)operator new(0x48u);
   v21 = 3;
   if ( v9 )
@@ -218,7 +218,7 @@ bool __cdecl CGameRun::Run(void) {
   v16 = CRandom16::GetNumberOfRandCalls((CUserToolsManager *)((char *)g_pGameData + 44));
   v2 = CRandom16::GetSeed((CUserToolsManager *)((char *)g_pGameData + 44));
   IMessageTracer::PushFormatedInts((IMessageTracer *)g_pMsgTracer, "--> AI::Update(): seed 0x%08x, counter %u", v2, v16);
-  (*(void (__thiscall **)(void *))(*(_DWORD *)off_3D7A3D8 + 24))(off_3D7A3D8);
+  (*(void (__thiscall **)(void *))(*(_DWORD *)g_pAI + 24))(g_pAI);
   QueryPerformanceCounter(&v26);
   g_iAITicks = v26.LowPart - PerformanceCount.LowPart;
   QueryPerformanceCounter(&PerformanceCount);
@@ -310,7 +310,7 @@ bool __cdecl CGameRun::Exit(void) {
   IMessageTracer::Done(g_pMsgTracer2);
   (*(void (__thiscall **)(void *))(*(_DWORD *)g_pFogging + 12))(g_pFogging);
   IGfxEngine::SetObjectLayerAccess((IGfxEngine *)g_pGfxEngine, 0, 0, 0);
-  (*(void (__thiscall **)(void *))(*(_DWORD *)off_3D7A3D8 + 20))(off_3D7A3D8);
+  (*(void (__thiscall **)(void *))(*(_DWORD *)g_pAI + 20))(g_pAI);
   if ( g_pScriptMgr )
   {
     (*(void (__thiscall **)(int, int))(*(_DWORD *)g_pScriptMgr + 8))(g_pScriptMgr, 1);
@@ -459,8 +459,8 @@ bool __cdecl CGameRun::LoadGame(std::wstring & a1) {
   }
   S4::CMapFile::LoadChunkObject(&v25, 135, 0, g_pFogging, 0);
   BBSupportTracePrintF(1, "\tLoad GAME_CHUNK_FOGMAP\t\tok");
-  (*(void (__thiscall **)(void *))(*(_DWORD *)off_3D7A3D8 + 12))(off_3D7A3D8);
-  S4::CMapFile::LoadChunkObject(&v25, 150, 0, off_3D7A3D8, 1);
+  (*(void (__thiscall **)(void *))(*(_DWORD *)g_pAI + 12))(g_pAI);
+  S4::CMapFile::LoadChunkObject(&v25, 150, 0, g_pAI, 1);
   BBSupportTracePrintF(1, "\tLoad GAME_CHUNK_AI\t\tok");
   CGameChunkGeneral::CGameChunkGeneral(v17);
   S4::CMapFile::LoadChunkObject(&v25, 130, 0, v17, 0);
@@ -550,7 +550,7 @@ bool __cdecl CGameRun::SaveGame(std::wstring & a1) {
   else
     v10 = 0;
   CGameRun::SaveChunkObject((struct S4::CMapFile *)v14, 0x8Fu, 0, v10, "EFFECTS", 0);
-  CGameRun::SaveChunkObject((struct S4::CMapFile *)v14, 0x96u, 0, (struct IS4ChunkObject *)off_3D7A3D8, "AI", 0);
+  CGameRun::SaveChunkObject((struct S4::CMapFile *)v14, 0x96u, 0, (struct IS4ChunkObject *)g_pAI, "AI", 0);
   CGameRun::SaveInfoAndUpdateGUI((struct S4::CMapFile *)v14, "ES", 0);
   CEcoSectorMgr::Store((CEcoSectorMgr *)g_cESMgr, (struct S4::CMapFile *)v14);
   CGameRun::SaveInfoAndUpdateGUI((struct S4::CMapFile *)v14, "MAPOBJS", 0);
@@ -1216,7 +1216,7 @@ bool __cdecl CGameRun::LoadEditorMap(std::wstring & a1, bool a2) {
   S4::CMapFile::CloseChunk(v9, 0x10u, 0);
   if ( v10 && v9 )
     (**(void (__thiscall ***)(struct S4::CMapFile *, int))v9)(v9, 1);
-  (*(void (__thiscall **)(void *))(*(_DWORD *)off_3D7A3D8 + 12))(off_3D7A3D8);
+  (*(void (__thiscall **)(void *))(*(_DWORD *)g_pAI + 12))(g_pAI);
   if ( CGameType::IsCampaignMap((CGameType *)g_pGameType) && *(int *)(g_pGameType + 740) < 11 )
     IAIEnvironment::SetGlobalEcoAIFlags(0);
   else
@@ -1239,7 +1239,7 @@ void __cdecl CGameRun::ActivateAIs(void) {
   {
     if ( CPlayerManager::IsAI(i) )
     {
-      (*(void (__thiscall **)(void *, int))(*(_DWORD *)off_3D7A3D8 + 28))(off_3D7A3D8, i);
+      (*(void (__thiscall **)(void *, int))(*(_DWORD *)g_pAI + 28))(g_pAI, i);
       if ( CPlayerManager::GetPlayerControl(i) == 2 )
         IAIDifficultyLevels::SetDifficultyLevel(i, 1u);
       else
@@ -1268,7 +1268,7 @@ bool __cdecl CGameRun::SaveCurrentData(class S4::CMapFile & a1) {
 
 // address=[0x1485260]
 // Decompiled from void __cdecl CGameRun::SaveInfoAndUpdateGUI(struct S4::CMapFile *a1, const char *a2, const char *a3)
-void __cdecl CGameRun::SaveInfoAndUpdateGUI(class S4::CMapFile &,char const *,char const *) {
+void __cdecl CGameRun::SaveInfoAndUpdateGUI(class S4::CMapFile & a1, char const * a2, char const * a3) {
   
   if ( !a3 )
     a3 = a2;

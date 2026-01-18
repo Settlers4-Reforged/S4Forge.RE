@@ -6,7 +6,7 @@
 class CAIAgentGlobalSuicideMission : public CAIAgentPlayerBase {
 public:
     // address=[0x1306b70]
-    virtual unsigned int  Execute(unsigned int,unsigned int);
+    virtual unsigned int  Execute(unsigned int a2, unsigned int a3);
 
     // address=[0x1306e40]
     virtual void  Load(class IS4Chunk & a2);
@@ -15,7 +15,7 @@ public:
     virtual void  Save(class IS4Chunk & a2);
 
     // address=[0x1319160]
-     CAIAgentGlobalSuicideMission(char const *);
+     CAIAgentGlobalSuicideMission(char const * a2);
 
     // address=[0x1319260]
     virtual  ~CAIAgentGlobalSuicideMission(void);

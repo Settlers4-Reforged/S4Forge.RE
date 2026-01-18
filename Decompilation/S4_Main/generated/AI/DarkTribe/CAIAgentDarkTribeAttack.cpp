@@ -15,7 +15,7 @@
 
 // address=[0x12f9f10]
 // Decompiled from unsigned int __thiscall CAIAgentDarkTribeAttack::Execute(  CAIAgentDarkTribeAttack *this,  unsigned int a2,  unsigned int a3)
-unsigned int  CAIAgentDarkTribeAttack::Execute(unsigned int,unsigned int) {
+unsigned int  CAIAgentDarkTribeAttack::Execute(unsigned int a2, unsigned int a3) {
   
   struct CAIDarkTribeSectorAI *v3; // eax
   pairNode *v4; // eax

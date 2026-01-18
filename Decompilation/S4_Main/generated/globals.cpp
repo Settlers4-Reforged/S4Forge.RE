@@ -768,7 +768,12 @@ bool __cdecl Squares::ValidVW(int a1, int a2) {
 
 
 // address=[0x131d8c0]
-// [Decompilation failed for void __cdecl AILuaGlobalFuncDebugTest(void)]
+// Decompiled from void AILuaGlobalFuncDebugTest()
+void __cdecl AILuaGlobalFuncDebugTest(void) {
+  
+  ;
+}
+
 
 // address=[0x131e5d0]
 // Decompiled from _DWORD *__thiscall TStaticConfigIntArray<3>::TStaticConfigIntArray<3>(  _DWORD *this,  int a2,  int a3,  int a4,  int a5,  int a6)
@@ -1325,11 +1330,11 @@ void __cdecl SaveWindowsPositionAndSize(struct HWND__ * hwnd) {
 
 
 // address=[0x1353c30]
-// Decompiled from int __stdcall WndMsgProc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
+// Decompiled from int __stdcall WndMsgProc(HWND hWnd, unsigned int Msg, WPARAM wParam, LPARAM lParam)
 long __stdcall WndMsgProc(struct HWND__ * hWnd, unsigned int Msg, unsigned int wParam, long lParam) {
   
   int result; // eax
-  UINT v5; // [esp+0h] [ebp-20h]
+  MACRO_WM v5; // [esp+0h] [ebp-20h]
   WPARAM v6; // [esp+4h] [ebp-1Ch]
   LPARAM v7; // [esp+8h] [ebp-18h]
 
@@ -1357,20 +1362,20 @@ long __stdcall WndMsgProc(struct HWND__ * hWnd, unsigned int Msg, unsigned int w
           Msg = 111;
           goto LABEL_78;
         default:
-          goto WndMsgProc___def_1753C74;
+          goto DontHandleEvent;
       }
     }
     Msg = 118;
 LABEL_78:
     if ( !g_pEvnEngine )
       return 0;
-    if ( IEventEngine::IsEventEngineLocked((ATL::CImage *)g_pEvnEngine) )
+    if ( IEventEngine::IsEventEngineLocked(g_pEvnEngine) )
       return 0;
     if ( IEventEngine::SendRawWindowEvent(g_pEvnEngine, (int)hWnd, Msg, wParam, lParam) )
       return 0;
     return DefWindowProcA(hWnd, v5, v6, v7);
   }
-  if ( Msg <= 0x200 )
+  if ( Msg <= WM_MOUSEMOVE )
   {
     if ( Msg != 512 )
     {
@@ -1385,11 +1390,11 @@ LABEL_78:
         case 0x100u:
           Msg = 11;
           lParam = 0;
-          if ( (GetKeyState(18) & 0x8000000) != 0 )
+          if ( (GetKeyState(KEYMODIFIER_MENU|KEYMODIFIER_ALTGR) & 0x8000000) != 0 )
             lParam = 16;
-          if ( (GetKeyState(17) & 0x8000000) != 0 )
+          if ( (GetKeyState(KEYMODIFIER_CONTROL|KEYMODIFIER_ALTGR) & 0x8000000) != 0 )
             lParam |= 8u;
-          if ( (GetAsyncKeyState(16) & 0x8000000) != 0 )
+          if ( (GetAsyncKeyState(KEYMODIFIER_ALTGR) & 0x8000000) != 0 )
             lParam |= 4u;
           if ( lParam == 24 )
             lParam = 16;
@@ -1397,11 +1402,11 @@ LABEL_78:
         case 0x101u:
           Msg = 20;
           lParam = 0;
-          if ( (GetKeyState(18) & 0x8000000) != 0 )
+          if ( (GetKeyState(KEYMODIFIER_MENU|KEYMODIFIER_ALTGR) & 0x8000000) != 0 )
             lParam = 16;
-          if ( (GetKeyState(17) & 0x8000000) != 0 )
+          if ( (GetKeyState(KEYMODIFIER_CONTROL|KEYMODIFIER_ALTGR) & 0x8000000) != 0 )
             lParam |= 8u;
-          if ( (GetKeyState(16) & 0x8000000) != 0 )
+          if ( (GetKeyState(KEYMODIFIER_ALTGR) & 0x8000000) != 0 )
             lParam |= 4u;
           if ( lParam == 24 )
             lParam = 16;
@@ -1409,11 +1414,11 @@ LABEL_78:
         case 0x102u:
           Msg = 13;
           lParam = 0;
-          if ( (GetKeyState(18) & 0x8000000) != 0 )
+          if ( (GetKeyState(KEYMODIFIER_MENU|KEYMODIFIER_ALTGR) & 0x8000000) != 0 )
             lParam = 16;
-          if ( (GetKeyState(17) & 0x8000000) != 0 )
+          if ( (GetKeyState(KEYMODIFIER_CONTROL|KEYMODIFIER_ALTGR) & 0x8000000) != 0 )
             lParam |= 8u;
-          if ( (GetKeyState(16) & 0x8000000) != 0 )
+          if ( (GetKeyState(KEYMODIFIER_ALTGR) & 0x8000000) != 0 )
             lParam |= 4u;
           if ( lParam == 24 )
             lParam = 16;
@@ -1421,11 +1426,11 @@ LABEL_78:
         case 0x104u:
           Msg = 12;
           lParam = 0;
-          if ( (GetKeyState(18) & 0x8000000) != 0 )
+          if ( (GetKeyState(KEYMODIFIER_MENU|KEYMODIFIER_ALTGR) & 0x8000000) != 0 )
             lParam = 16;
-          if ( (GetKeyState(17) & 0x8000000) != 0 )
+          if ( (GetKeyState(KEYMODIFIER_CONTROL|KEYMODIFIER_ALTGR) & 0x8000000) != 0 )
             lParam |= 8u;
-          if ( (GetAsyncKeyState(16) & 0x8000000) != 0 )
+          if ( (GetAsyncKeyState(KEYMODIFIER_ALTGR) & 0x8000000) != 0 )
             lParam |= 4u;
           if ( lParam == 24 )
             lParam = 16;
@@ -1434,7 +1439,7 @@ LABEL_78:
           Msg = 0;
           goto LABEL_78;
         default:
-          goto WndMsgProc___def_1753C74;
+          goto DontHandleEvent;
       }
     }
     Msg = 5;
@@ -1442,48 +1447,49 @@ LABEL_78:
   }
   switch ( Msg )
   {
-    case 0x201u:
+    case WM_LBUTTONDOWN:
       Msg = 7;
       wParam &= ~0x10u;
       if ( (GetKeyState(18) & 0x8000000) != 0 )
         wParam |= 0x10u;
       goto LABEL_78;
-    case 0x202u:
+    case WM_LBUTTONUP:
       Msg = 8;
       wParam &= ~0x10u;
       if ( (GetKeyState(18) & 0x8000000) != 0 )
         wParam |= 0x10u;
       goto LABEL_78;
-    case 0x204u:
+    case WM_RBUTTONDOWN:
       Msg = 9;
       wParam &= ~0x10u;
       if ( (GetKeyState(18) & 0x8000000) != 0 )
         wParam |= 0x10u;
       goto LABEL_78;
-    case 0x205u:
-      Msg = 10;
+    case WM_RBUTTONUP:
+      Msg = 0xA;
       wParam &= ~0x10u;
       if ( (GetKeyState(18) & 0x8000000) != 0 )
         wParam |= 0x10u;
       goto LABEL_78;
-    case 0x20Au:
+    case WM_MOUSEWHEEL:
       Msg = 14;
       if ( (GetKeyState(18) & 0x8000000) != 0 )
         wParam |= 0x10u;
       goto LABEL_78;
-    case 0x214u:
+    case WM_SIZING:                             // lParam is from here a RECT*
+                                                // This here seems to force the window to be at least 800x600 in size
       if ( *(_DWORD *)(lParam + 8) - *(_DWORD *)lParam < 800 )
       {
         switch ( wParam )
         {
-          case 1u:
-          case 4u:
-          case 7u:
+          case WMSZ_LEFT:
+          case WMSZ_TOPLEFT:
+          case WMSZ_BOTTOMLEFT:
             *(_DWORD *)lParam = *(_DWORD *)(lParam + 8) - 800;
             break;
-          case 2u:
-          case 5u:
-          case 8u:
+          case WMSZ_RIGHT:
+          case WMSZ_TOPRIGHT:
+          case WMSZ_BOTTOMRIGHT:
             *(_DWORD *)(lParam + 8) = *(_DWORD *)lParam + 800;
             break;
           default:
@@ -1494,14 +1500,14 @@ LABEL_78:
       {
         switch ( wParam )
         {
-          case 3u:
-          case 4u:
-          case 5u:
+          case WMSZ_TOP:
+          case WMSZ_TOPLEFT:
+          case WMSZ_TOPRIGHT:
             *(_DWORD *)(lParam + 4) = *(_DWORD *)(lParam + 12) - 600;
             break;
-          case 6u:
-          case 7u:
-          case 8u:
+          case WMSZ_BOTTOM:
+          case WMSZ_BOTTOMLEFT:
+          case WMSZ_BOTTOMRIGHT:
             *(_DWORD *)(lParam + 12) = *(_DWORD *)(lParam + 4) + 600;
             break;
           default:
@@ -1510,7 +1516,7 @@ LABEL_78:
       }
       goto LABEL_78;
     default:
-WndMsgProc___def_1753C74:
+DontHandleEvent:
       result = DefWindowProcA(hWnd, Msg, wParam, lParam);
       break;
   }
@@ -1556,101 +1562,95 @@ unsigned short __cdecl RegisterWindowClass(struct HINSTANCE__ * hInstance) {
 // Decompiled from char ExistsExtractCommand()
 bool __cdecl ExistsExtractCommand(void) {
   
-  const wchar_t *v1; // eax
-  size_t v2; // eax
-  _DWORD v3[7]; // [esp+0h] [ebp-228h] BYREF
-  void *v4; // [esp+1Ch] [ebp-20Ch]
-  size_t v5; // [esp+20h] [ebp-208h]
-  size_t v6; // [esp+24h] [ebp-204h]
+  const wchar_t *v4; // eax
+  size_t v5; // eax
+  _DWORD v6[7]; // [esp+0h] [ebp-228h] BYREF
+  void *v7; // [esp+1Ch] [ebp-20Ch]
+  size_t v8; // [esp+20h] [ebp-208h]
+  size_t v9; // [esp+24h] [ebp-204h]
   void *Buffer; // [esp+28h] [ebp-200h]
   size_t ElementCount; // [esp+2Ch] [ebp-1FCh]
-  char v9; // [esp+31h] [ebp-1F7h]
-  char v10; // [esp+32h] [ebp-1F6h]
-  char v11; // [esp+33h] [ebp-1F5h]
-  char v12[88]; // [esp+34h] [ebp-1F4h] BYREF
-  _DWORD v13[26]; // [esp+8Ch] [ebp-19Ch] BYREF
-  int v14; // [esp+F4h] [ebp-134h] BYREF
-  int v15[7]; // [esp+F8h] [ebp-130h] BYREF
+  char v12; // [esp+31h] [ebp-1F7h]
+  char v13; // [esp+32h] [ebp-1F6h]
+  char v14; // [esp+33h] [ebp-1F5h]
+  char v15[88]; // [esp+34h] [ebp-1F4h] BYREF
+  _DWORD v16[26]; // [esp+8Ch] [ebp-19Ch] BYREF
+  int v17; // [esp+F4h] [ebp-134h] BYREF
+  int v18[7]; // [esp+F8h] [ebp-130h] BYREF
   wchar_t Src[128]; // [esp+114h] [ebp-114h] BYREF
-  _DWORD *v17; // [esp+218h] [ebp-10h]
-  int v18; // [esp+224h] [ebp-4h]
+  _DWORD *v20; // [esp+218h] [ebp-10h]
+  int v21; // [esp+224h] [ebp-4h]
 
-  v17 = v3;
-  v3[4] = 128;
+  v20 = v6;
+  v6[4] = 128;
   if ( !g_iArgc )
     return 0;
   memset(Src, 0, sizeof(Src));
-  std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v12);
-  v18 = 0;
+  std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v15);
+  v21 = 0;
   std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::from_bytes(
-    (int)v15,
+    (int)v18,
     *(char **)g_pArgv);
-  LOBYTE(v18) = 1;
-  v1 = (const wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)v15);
-  j__wcsncpy(Src, v1, 0x7Fu);
+  LOBYTE(v21) = 1;
+  v4 = (const wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)v18);
+  j__wcsncpy(Src, v4, 0x7Fu);
   j__wcsupr(Src);
   if ( wcsstr(Src, (wchar_t *)L"EXTRACT:\"") )
   {
-    v2 = j__wcslen(Src);
-    j__memcpy(Src, &Src[9], v2 - 9);
-    v6 = 2 * j__wcslen(Src) - 20;
-    if ( v6 >= 0x100 )
+    v5 = j__wcslen(Src);
+    j__memcpy(Src, &Src[9], v5 - 9);
+    v9 = 2 * j__wcslen(Src) - 20;
+    if ( v9 >= 0x100 )
       j____report_rangecheckfailure();
-    *(wchar_t *)((char *)Src + v6) = 0;
-    v11 = 1;
+    *(wchar_t *)((char *)Src + v9) = 0;
+    v14 = 1;
     ElementCount = 0;
     Buffer = 0;
-    CFileEx::CFileEx((CFileEx *)v13, 1);
-    LOBYTE(v18) = 3;
-    CFileEx::Open(&v14, Src, 6, 0, UNUSED_ARG(), UNUSED_ARG());
-    v5 = CFileEx::Size(v13);
-    ElementCount = v5;
-    if ( v5 )
+    CFileEx::CFileEx((CFileEx *)v16, 1);
+    LOBYTE(v21) = 3;
+    CFileEx::Open(&v17, Src, 6, 0, UNUSED_ARG(), UNUSED_ARG());
+    v8 = CFileEx::Size(v16);
+    ElementCount = v8;
+    if ( v8 )
     {
-      v4 = operator new[](ElementCount + 8);
-      v3[6] = v4;
-      Buffer = v4;
-      memset(v4, 0, ElementCount + 8);
-      CFileEx::Read(
-        &v14,
-        Buffer,
-        1,
-        ElementCount,
-        "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\BaseLib\\Include\\FileEx.h",
-        110);
+      v7 = operator new[](ElementCount + 8);
+      v6[6] = v7;
+      Buffer = v7;
+      memset(v7, 0, ElementCount + 8);
+      CFileEx::Read(&v17, Buffer, 1, ElementCount, UNUSED_ARG(), 110);
     }
-    v18 = 2;
-    CFileEx::Close((CFileEx *)&v14, UNUSED_ARG(), UNUSED_ARG());
-    if ( v11 && Buffer )
+    v21 = 2;
+    CFileEx::Close((CFileEx *)&v17, UNUSED_ARG(), UNUSED_ARG());
+    if ( v14 && Buffer )
     {
-      CFileEx::Open(&v14, (wchar_t *)L"Extract", 8, 0, UNUSED_ARG(), UNUSED_ARG());
+      CFileEx::Open(&v17, (wchar_t *)L"Extract", 8, 0, UNUSED_ARG(), UNUSED_ARG());
       CFileEx::Write(Buffer, 1u, ElementCount, UNUSED_ARG(), UNUSED_ARG());
-      CFileEx::Close((CFileEx *)&v14, UNUSED_ARG(), UNUSED_ARG());
+      CFileEx::Close((CFileEx *)&v17, UNUSED_ARG(), UNUSED_ARG());
       MessageBoxA(0, "File successfully extracted!", &byte_36833EB, 0);
-      v3[5] = Buffer;
+      v6[5] = Buffer;
       operator delete[](Buffer);
     }
     else
     {
       MessageBoxA(0, "Error while reading file!", &byte_368342B, 0);
     }
-    v10 = 1;
-    LOBYTE(v18) = 1;
-    CFileEx::~CFileEx(v13);
-    LOBYTE(v18) = 0;
-    std::wstring::~wstring(v15);
-    v18 = -1;
-    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::~wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v12);
-    return v10;
+    v13 = 1;
+    LOBYTE(v21) = 1;
+    CFileEx::~CFileEx(v16);
+    LOBYTE(v21) = 0;
+    std::wstring::~wstring(v18);
+    v21 = -1;
+    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::~wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v15);
+    return v13;
   }
   else
   {
-    v9 = 0;
-    LOBYTE(v18) = 0;
-    std::wstring::~wstring(v15);
-    v18 = -1;
-    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::~wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v12);
-    return v9;
+    v12 = 0;
+    LOBYTE(v21) = 0;
+    std::wstring::~wstring(v18);
+    v21 = -1;
+    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::~wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v15);
+    return v12;
   }
 }
 
@@ -1664,7 +1664,7 @@ void __cdecl WriteIniFile(void) {
   int v3; // [esp+14h] [ebp-1494h]
   int v4; // [esp+18h] [ebp-1490h]
   int v5; // [esp+1Ch] [ebp-148Ch]
-  _BYTE v6[72]; // [esp+20h] [ebp-1488h] BYREF
+  CFile *v6; // [esp+20h] [ebp-1488h] BYREF
   int v7[7]; // [esp+68h] [ebp-1440h] BYREF
   char v8[2048]; // [esp+84h] [ebp-1424h] BYREF
   wchar_t Dir[256]; // [esp+884h] [ebp-C24h] BYREF
@@ -1674,19 +1674,19 @@ void __cdecl WriteIniFile(void) {
   WCHAR Buffer[260]; // [esp+1284h] [ebp-224h] BYREF
   wchar_t Drive[4]; // [esp+148Ch] [ebp-1Ch] BYREF
   _DWORD *v15; // [esp+1498h] [ebp-10h]
-  int v16; // [esp+14A4h] [ebp-4h]
+  int exceptionBlock; // [esp+14A4h] [ebp-4h]
 
   v15 = v2;
   v2[4] = GetEnvironmentVariableW(L"SYSTEMROOT", Buffer, 0x208u);
-  CFile::CFile((CFile *)v6);
-  v16 = 0;
+  CFile::CFile((CFile *)&v6);
+  exceptionBlock = 0;
   std::wstring::wstring(v7, Buffer);
-  LOBYTE(v16) = 1;
+  LOBYTE(exceptionBlock) = 1;
   std::wstring::operator+=(v7, (wchar_t *)L"\\Settlers4.ini");
   GetModuleFileNameW(0, Buffer, 0x208u);
   j___wsplitpath(Buffer, Drive, Dir, Filename, Ext);
-  LOBYTE(v16) = 2;
-  CFile::Open((int)v7, 9, "d:\\projects\\tshe\\purplelamp\\s4\\source\\baselib\\include\\File.h", 0);
+  LOBYTE(exceptionBlock) = 2;
+  CFile::Open((int)v7, 9, UNUSED_ARG(), UNUSED_ARG());
   swprintf(v8, (char *)L"path=%s%s\nprogram=%s%s\nversion=%d.%d", (char)Drive);
   v4 = 0;
   v5 = 0;
@@ -1699,11 +1699,11 @@ void __cdecl WriteIniFile(void) {
     ++v4;
   }
   v0 = j__strlen(Str);
-  CFile::Write(Str, v0, 1u, (int)"d:\\projects\\tshe\\purplelamp\\s4\\source\\baselib\\include\\File.h", 0);
-  CFile::Close((CFile *)v6, "d:\\projects\\tshe\\purplelamp\\s4\\source\\baselib\\include\\File.h", 0);
-  v16 = 0;
+  CFile::Write(Str, v0, 1u, UNUSED_ARG(), UNUSED_ARG());
+  CFile::Close((CFile *)&v6, UNUSED_ARG(), UNUSED_ARG());
+  exceptionBlock = 0;
   std::wstring::~wstring(v7);
-  v16 = -1;
+  exceptionBlock = -1;
   return CFile::~CFile();
 }
 
@@ -23051,7 +23051,7 @@ LABEL_76:
 
 // address=[0x13b8be0]
 // Decompiled from void __cdecl UpdateGuiDlgMessages(struct CEvn_Event *a1)
-void __cdecl UpdateGuiDlgMessages(class CEvn_Event *) {
+void __cdecl UpdateGuiDlgMessages(class CEvn_Event * a1) {
   
   int v1; // eax
   int v2; // eax
@@ -36456,7 +36456,7 @@ std::ostream & __cdecl StoreArray<int>(std::ostream & a1, int const * const a2, 
 
 // address=[0x144f800]
 // Decompiled from double __cdecl sqrt(double x)
-float __cdecl sqrt(float) {
+float __cdecl sqrt(float a1) {
   
   return j__sqrtf(*(float *)&x);
 }
@@ -38105,7 +38105,7 @@ class ISimpleNet * __cdecl CreateSimpleNet(void) {
   
   std::bad_function_call *v2; // [esp+Ch] [ebp-10h]
 
-  if ( !dword_415B978
+  if ( !WSAStartup
     && BBSupportDbgReportF(
          2,
          "net\\SimpleNet.cpp",
@@ -38114,7 +38114,7 @@ class ISimpleNet * __cdecl CreateSimpleNet(void) {
   {
     __debugbreak();
   }
-  if ( !dword_415B978 )
+  if ( !WSAStartup )
     return 0;
   v2 = (std::bad_function_call *)operator new(0x11BCu);
   if ( v2 )
@@ -38891,7 +38891,7 @@ float __cdecl Max(float a1, float a2) {
 
 // address=[0x15ddd50]
 // Decompiled from double __cdecl fabs(double x)
-float __cdecl fabs(float) {
+float __cdecl fabs(float a1) {
   
   return j__fabsf(*(float *)&x);
 }
@@ -39744,7 +39744,7 @@ void __cdecl ScriptExportVars(class CLua & a1) {
 
 // address=[0x1603a90]
 // Decompiled from void __cdecl ScriptExportFunctions(struct CLua *a1)
-void __cdecl ScriptExportFunctions(class CLua &) {
+void __cdecl ScriptExportFunctions(class CLua & a1) {
   
   CLua::ExportTableFunctions(a1, "Buildings", (struct CLua::SFuncInfo *)&off_3D8C140);
   CLua::ExportTableFunctions(a1, "dbg", (struct CLua::SFuncInfo *)&off_3D8C1B8);
@@ -39764,7 +39764,13 @@ void __cdecl ScriptExportFunctions(class CLua &) {
 
 
 // address=[0x1603ba0]
-// [Decompilation failed for void __cdecl ScriptDefaultVictoryConditionCheck(void)]
+// Decompiled from int ScriptDefaultVictoryConditionCheck()
+void __cdecl ScriptDefaultVictoryConditionCheck(void) {
+  
+  sub_1609370();
+  return sub_16094C0(0, 0);
+}
+
 
 // address=[0x1603bc0]
 // Decompiled from int ScriptEconomyModeVictoryConditionCheck()
@@ -39983,7 +39989,7 @@ void __cdecl StatisticServantsFreed(void) {
 
 // address=[0x1615c30]
 // Decompiled from bool __cdecl storm_if_constexpr(bool a1)
-bool __cdecl storm_if_constexpr(bool) {
+bool __cdecl storm_if_constexpr(bool a1) {
   
   return a1;
 }
@@ -39991,7 +39997,7 @@ bool __cdecl storm_if_constexpr(bool) {
 
 // address=[0x1634440]
 // Decompiled from double __cdecl ceil(double x)
-float __cdecl ceil(float) {
+float __cdecl ceil(float a1) {
   
   return j__ceilf(*(float *)&x);
 }
@@ -40374,7 +40380,7 @@ int __cdecl fpclassify(float Px) {
 
 // address=[0x296dcd0]
 // Decompiled from double __cdecl acos(double x)
-float __cdecl acos(float) {
+float __cdecl acos(float a1) {
   
   return j__acosf(*(float *)&x);
 }
@@ -40382,7 +40388,7 @@ float __cdecl acos(float) {
 
 // address=[0x296f540]
 // Decompiled from double __cdecl asin(double x)
-float __cdecl asin(float) {
+float __cdecl asin(float a1) {
   
   return j__asinf(*(float *)&x);
 }
@@ -40398,7 +40404,7 @@ float __cdecl atan2(float y, float a2) {
 
 // address=[0x2971ef0]
 // Decompiled from double __cdecl cos(double x)
-float __cdecl cos(float) {
+float __cdecl cos(float a1) {
   
   return j__cosf(*(float *)&x);
 }
@@ -40406,7 +40412,7 @@ float __cdecl cos(float) {
 
 // address=[0x298b750]
 // Decompiled from double __cdecl sin(double x)
-float __cdecl sin(float) {
+float __cdecl sin(float a1) {
   
   return j__sinf(*(float *)&x);
 }
@@ -40647,7 +40653,7 @@ int __cdecl _snprintf_s<64>(char (&)[64] Buffer, unsigned int MaxCount, char con
 
 // address=[0x2dd0a20]
 // Decompiled from unsigned __int64 __cdecl ConvertToFAPTime(unsigned __int64 a1)
-unsigned __int64 __cdecl ConvertToFAPTime(unsigned __int64) {
+unsigned __int64 __cdecl ConvertToFAPTime(unsigned __int64 a1) {
   
   return ValidateTime(a1 * g_EalToFAPTimeFactor);
 }
@@ -40702,7 +40708,7 @@ bool __cdecl TrackEnabled(int a1) {
 
 // address=[0x2dd50e0]
 // Decompiled from unsigned __int64 __cdecl ValidateTime(unsigned __int64 a1)
-unsigned __int64 __cdecl ValidateTime(unsigned __int64) {
+unsigned __int64 __cdecl ValidateTime(unsigned __int64 a1) {
   
   return a1;
 }
@@ -43185,7 +43191,7 @@ void __cdecl RenderTmpText(void) {
 
 // address=[0x2f5dee0]
 // Decompiled from void __cdecl EnableCamRenderSettings(bool a1)
-void __cdecl EnableCamRenderSettings(bool) {
+void __cdecl EnableCamRenderSettings(bool a1) {
   
   if ( a1 )
   {
@@ -54004,7 +54010,7 @@ void __cdecl EnsureMultisliders(struct SGuiControl * a1) {
 
 // address=[0x2f9d580]
 // Decompiled from bool __cdecl CanLockMultislider(struct SGuiControl *a1)
-bool __cdecl CanLockMultislider(struct SGuiControl *) {
+bool __cdecl CanLockMultislider(struct SGuiControl * a1) {
   
   int v2; // [esp+Ch] [ebp-14h]
   int v3; // [esp+10h] [ebp-10h]
@@ -56657,7 +56663,7 @@ void __cdecl ReleaseMemory(void) {
 
 // address=[0x2fbfeb0]
 // Decompiled from unsigned int __cdecl Crc(unsigned __int8 *a1, unsigned int a2)
-unsigned int __cdecl Crc(unsigned char *,unsigned long) {
+unsigned int __cdecl Crc(unsigned char * a1, unsigned long a2) {
   
   unsigned int NormalCRC; // [esp+0h] [ebp-8h]
   _BYTE v4[4]; // [esp+4h] [ebp-4h] BYREF
@@ -56671,7 +56677,7 @@ unsigned int __cdecl Crc(unsigned char *,unsigned long) {
 
 // address=[0x2fbff00]
 // Decompiled from void __cdecl Cryption(unsigned __int8 *a1, unsigned int a2)
-void __cdecl Cryption(unsigned char *,unsigned long) {
+void __cdecl Cryption(unsigned char * a1, unsigned long a2) {
   
   unsigned int i; // [esp+Ch] [ebp-7Ch]
   _DWORD v3[19]; // [esp+10h] [ebp-78h] BYREF
@@ -58594,7 +58600,7 @@ unsigned int __cdecl GetSoundInterfaceVersion(void) {
 
 // address=[0x2fdbab0]
 // Decompiled from void __stdcall PlaylistCallback(struct _STREAM *a1)
-void __stdcall PlaylistCallback(struct _STREAM *) {
+void __stdcall PlaylistCallback(struct _STREAM * a1) {
   
   if ( g_pcSoundSystem )
     CSoundSystem::PlaylistTitleEnded((CSoundSystem *)g_pcSoundSystem, a1);
@@ -60048,7 +60054,7 @@ void __stdcall _CallMemberFunction2(void * const a1, void * const a2, void * con
 
 // address=[0x307dd50]
 // Decompiled from bool __cdecl _ValidateExecute(int (__stdcall *a1)())
-bool __cdecl _ValidateExecute(int (__stdcall*)(void)) {
+bool __cdecl _ValidateExecute(int (__stdcall*)(void) a1) {
   
   return a1 != 0;
 }

@@ -4,7 +4,7 @@
 
 // address=[0x139da10]
 // Decompiled from CGuiEventHandler *__thiscall CGuiEventHandler::CGuiEventHandler(CGuiEventHandler *this, bool a2)
- CGuiEventHandler::CGuiEventHandler(bool) {
+ CGuiEventHandler::CGuiEventHandler(bool a2) {
   
   IEvn_Handle::IEvn_Handle(this);
   *(_DWORD *)this = &CGuiEventHandler::_vftable_;
@@ -1222,7 +1222,7 @@ void  CGuiEventHandler::HandleMsgCloseAllDialogs(void) {
 
 // address=[0x139d5c0]
 // Decompiled from void __thiscall CGuiEventHandler::HandleMsgRefreshDialog(CGuiEventHandler *this, struct CEvn_Event *a2)
-void  CGuiEventHandler::HandleMsgRefreshDialog(class CEvn_Event &) {
+void  CGuiEventHandler::HandleMsgRefreshDialog(class CEvn_Event & a2) {
   
   int lparam; // [esp+10h] [ebp-4h]
 
@@ -1364,7 +1364,7 @@ void  CGuiEventHandler::HandleMsgRefreshDialog(class CEvn_Event &) {
 
 // address=[0x139d830]
 // Decompiled from void __thiscall CGuiEventHandler::HandleMsgRefreshSettingsDialog(CGuiEventHandler *this, struct CEvn_Event *a2)
-void  CGuiEventHandler::HandleMsgRefreshSettingsDialog(class CEvn_Event &) {
+void  CGuiEventHandler::HandleMsgRefreshSettingsDialog(class CEvn_Event & a2) {
   
   _DWORD *lparam; // [esp+8h] [ebp-4h]
 

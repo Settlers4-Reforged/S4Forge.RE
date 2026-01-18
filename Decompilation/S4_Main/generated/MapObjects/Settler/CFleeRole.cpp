@@ -168,7 +168,7 @@ void  CFleeRole::LogicUpdate(class CSettler * a2) {
 
 // address=[0x156d730]
 // Decompiled from void __thiscall CFleeRole::UpdateJob(CFleeRole *this, struct CSettler *a2)
-void  CFleeRole::UpdateJob(class CSettler *) {
+void  CFleeRole::UpdateJob(class CSettler * a2) {
   
   ;
 }
@@ -255,7 +255,7 @@ int  CFleeRole::GetSettlerRole(void)const {
 
 // address=[0x156dc00]
 // Decompiled from void __thiscall CFleeRole::LogicUpdateJob(CFleeRole *this, struct CSettler *a2)
-void  CFleeRole::LogicUpdateJob(class CSettler *) {
+void  CFleeRole::LogicUpdateJob(class CSettler * a2) {
   
   ;
 }

@@ -13,7 +13,7 @@
 
 // address=[0x155e7f0]
 // Decompiled from void __thiscall CPileObserverList::NotifyAndDetachAllObservers(CPileObserverList *this, const struct CEntityEvent *a2)
-void  CPileObserverList::NotifyAndDetachAllObservers(class CEntityEvent const &) {
+void  CPileObserverList::NotifyAndDetachAllObservers(class CEntityEvent const & a2) {
   
   CPileObserverList::NotifyAllObservers(this, a2);
   CPileObserverList::DetachAllObservers(this);

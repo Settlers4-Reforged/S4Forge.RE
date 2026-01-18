@@ -42,7 +42,7 @@ public:
     void  EnableEventInput(bool a2);
 
     // address=[0x2fa0910]
-    void  EnableShortcuts(bool);
+    void  EnableShortcuts(bool a2);
 
     // address=[0x2fa0920]
     void  SetCtrlStatusCallback(bool (__cdecl*)(int,int,int,bool,int) a2);

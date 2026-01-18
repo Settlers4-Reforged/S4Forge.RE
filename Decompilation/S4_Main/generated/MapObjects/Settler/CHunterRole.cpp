@@ -534,7 +534,7 @@ void  CHunterRole::HarvestDeadAnimal(class CSettler * a2) {
 
 // address=[0x1577f80]
 // Decompiled from bool __thiscall CHunterRole::AreWeChasing(CHunterRole *this, struct CSettler *a2)
-bool  CHunterRole::AreWeChasing(class CSettler *) {
+bool  CHunterRole::AreWeChasing(class CSettler * a2) {
   
   struct CAnimal *AnimalPtr; // [esp+0h] [ebp-Ch]
 

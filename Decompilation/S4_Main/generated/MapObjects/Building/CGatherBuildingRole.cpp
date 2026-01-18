@@ -476,7 +476,7 @@ void  CGatherBuildingRole::Store(std::ostream & a2) {
 
 // address=[0x14fd210]
 // Decompiled from void __thiscall CGatherBuildingRole::ConvertEventIntoGoal(  CGatherBuildingRole *this,  struct CBuilding *a2,  struct CEntityEvent *a3)
-void  CGatherBuildingRole::ConvertEventIntoGoal(class CBuilding *,class CEntityEvent *) {
+void  CGatherBuildingRole::ConvertEventIntoGoal(class CBuilding * a2, class CEntityEvent * a3) {
   
   ;
 }

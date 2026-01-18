@@ -6,51 +6,49 @@
 // Decompiled from int __thiscall CAIScripting::Init(CAIScripting *this)
 void  CAIScripting::Init(void) {
   
-  int v1; // eax
+  int lua_gAI; // eax
   CLua *ScriptEnv; // [esp+8h] [ebp-14h]
-  int v5; // [esp+10h] [ebp-Ch]
-  char **i; // [esp+14h] [ebp-8h]
-  char **j; // [esp+18h] [ebp-4h]
-  char **k; // [esp+18h] [ebp-4h]
+  int lua_gAITable; // [esp+10h] [ebp-Ch]
+  char **i; // [esp+14h] [ebp-8h] MAPDST
 
   CAIScripting::InitPlayerScriptVarsDefaultValues(this);
-  ScriptEnv = CGameScriptManager::GetScriptEnv((CGameScriptManager *)g_pScriptMgr);
+  ScriptEnv = CGameScriptManager::GetScriptEnv(g_pScriptMgr);
   CLua::ActivateScriptingEnvironment(ScriptEnv);
-  j__lua_beginblock(ScriptEnv, this);
-  v1 = j__lua_getglobal("AI");
-  if ( !j__lua_isnil(v1) && BBSupportDbgReport(2, "AI\\AI_Script.cpp", 1163, "lua_isnil(lua_getglobal(\"AI\"))") == 1 )
+  lua_beginblock();
+  lua_gAI = lua_getglobal("AI");
+  if ( !lua_isnil(lua_gAI) && BBSupportDbgReport(2, "AI\\AI_Script.cpp", 1163, "lua_isnil(lua_getglobal(\"AI\"))") == 1 )
     __debugbreak();
-  v5 = j__lua_createtable();
-  j__lua_pushobject(v5);
-  j__lua_rawsetglobal("AI");
+  lua_gAITable = lua_createtable();
+  lua_pushobject(lua_gAITable);
+  lua_rawsetglobal("AI");
   for ( i = &off_3676548; *i; i += 2 )
   {
-    j__lua_pushobject(v5);
-    j__lua_pushstring(*i);
-    j__lua_pushnumber(COERCE__INT64((double)(int)i[1]));
-    j__lua_rawsettable();
+    lua_pushobject(lua_gAITable);
+    lua_pushstring(*i);
+    lua_pushnumber((double)(int)i[1]);
+    lua_rawsettable();
   }
-  for ( j = &off_3676698; *j; j += 2 )
+  for ( i = &off_3676698; *i; i += 2 )
   {
-    j__lua_pushobject(v5);
-    j__lua_pushstring(*j);
-    j__lua_pushcclosure(j[1], 0);
-    j__lua_rawsettable();
+    lua_pushobject(lua_gAITable);
+    lua_pushstring(*i);
+    lua_pushcclosure((int)i[1], 0);
+    lua_rawsettable();
   }
-  for ( k = &off_3676700; *k; k += 2 )
+  for ( i = &off_3676700; *i; i += 2 )
   {
-    j__lua_pushobject(v5);
-    j__lua_pushstring(*k);
-    j__lua_pushcclosure(k[1], 0);
-    j__lua_rawsettable();
+    lua_pushobject(lua_gAITable);
+    lua_pushstring(*i);
+    lua_pushcclosure((int)i[1], 0);
+    lua_rawsettable();
   }
-  return j__lua_endblock();
+  return lua_endblock();
 }
 
 
 // address=[0x131db20]
 // Decompiled from void __thiscall CAIScripting::Load(CAIScripting *this, struct IS4Chunk *a2)
-void  CAIScripting::Load(class IS4Chunk &) {
+void  CAIScripting::Load(class IS4Chunk & a2) {
   
   ;
 }
@@ -58,7 +56,7 @@ void  CAIScripting::Load(class IS4Chunk &) {
 
 // address=[0x131db30]
 // Decompiled from void __thiscall CAIScripting::Save(CAIScripting *this, struct IS4Chunk *a2)
-void  CAIScripting::Save(class IS4Chunk &) {
+void  CAIScripting::Save(class IS4Chunk & a2) {
   
   ;
 }
@@ -66,7 +64,7 @@ void  CAIScripting::Save(class IS4Chunk &) {
 
 // address=[0x131db40]
 // Decompiled from unsigned int __thiscall CAIScripting::Adler32(CAIScripting *this, unsigned int a2)
-unsigned int  CAIScripting::Adler32(unsigned int) {
+unsigned int  CAIScripting::Adler32(unsigned int a2) {
   
   double v2; // st7
   _BYTE v4[28]; // [esp+14h] [ebp-4Ch] BYREF
@@ -121,27 +119,27 @@ void  CAIScripting::InitPlayerScriptVarsDefaultValues(void) {
   void *v8; // [esp-4h] [ebp-10h]
   void *v9; // [esp-4h] [ebp-10h]
   void *v10; // [esp-4h] [ebp-10h]
-  _UNKNOWN **v11; // [esp+4h] [ebp-8h]
+  void **v11; // [esp+4h] [ebp-8h]
   int i; // [esp+8h] [ebp-4h]
 
   result = 0;
   for ( i = 0; i <= 22; ++i )
   {
-    v11 = &off_3676210 + 3 * i;
+    v11 = (void **)(&off_3676210 + 3 * i);
     if ( *v11 )
     {
       dword_3ECC7C8[i] = 0;
       v8 = v11[2];
       v5 = v11[1];
-      v2 = (_DWORD *)TStaticConfigIntArrayBase<3>::operator[](0);
+      v2 = (_DWORD *)TStaticConfigIntArrayBase<3>::operator[](*v11, 0);
       dword_3ECC7C8[i + 23] = sub_131CE10(*v2, v5, v8);
       v9 = v11[2];
       v6 = v11[1];
-      v3 = (_DWORD *)TStaticConfigIntArrayBase<3>::operator[](1);
+      v3 = (_DWORD *)TStaticConfigIntArrayBase<3>::operator[](*v11, 1);
       dword_3ECC7C8[i + 46] = sub_131CE10(*v3, v6, v9);
       v10 = v11[2];
       v7 = v11[1];
-      v4 = (_DWORD *)TStaticConfigIntArrayBase<3>::operator[](2);
+      v4 = (_DWORD *)TStaticConfigIntArrayBase<3>::operator[](*v11, 2);
       result = sub_131CE10(*v4, v7, v10);
       dword_3ECC7C8[i + 69] = result;
     }

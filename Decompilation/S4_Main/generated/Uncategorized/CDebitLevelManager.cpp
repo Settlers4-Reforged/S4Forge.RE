@@ -4,7 +4,7 @@
 
 // address=[0x2f58b30]
 // Decompiled from CDebitLevelManager *__thiscall CDebitLevelManager::CDebitLevelManager(CDebitLevelManager *this, struct CSchedule *a2)
- CDebitLevelManager::CDebitLevelManager(class CSchedule *) {
+ CDebitLevelManager::CDebitLevelManager(class CSchedule * a2) {
   
   *((_DWORD *)this + 200) = 0;
   *((_DWORD *)this + 201) = a2;

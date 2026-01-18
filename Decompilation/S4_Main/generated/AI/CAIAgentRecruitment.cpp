@@ -15,7 +15,7 @@
 
 // address=[0x1305540]
 // Decompiled from unsigned int __thiscall CAIAgentRecruitment::Execute(CAIAgentRecruitment *this, unsigned int a2, unsigned int a3)
-unsigned int  CAIAgentRecruitment::Execute(unsigned int,unsigned int) {
+unsigned int  CAIAgentRecruitment::Execute(unsigned int a2, unsigned int a3) {
   
   struct CAINormalSectorAI *v3; // eax
   pairNode *v4; // eax

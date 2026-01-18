@@ -9,7 +9,7 @@ public:
     int  CurrentTask(void)const;
 
     // address=[0x153a430]
-    virtual void  CountCargo(class ICargoCounter &);
+    virtual void  CountCargo(class ICargoCounter & a2);
 
     // address=[0x153fda0]
     virtual void  DeleteSelectable(void);
@@ -102,7 +102,7 @@ public:
     virtual int  ClearGroupFlagBits(int a2);
 
     // address=[0x15a7a40]
-    virtual void  FillDialog(bool);
+    virtual void  FillDialog(bool a2);
 
 protected:
     // address=[0x153a460]
@@ -115,7 +115,7 @@ protected:
     unsigned int  TurnDirEx(void)const;
 
     // address=[0x153fe00]
-    bool  ReadyToFire(unsigned int)const;
+    bool  ReadyToFire(unsigned int a2)const;
 
     // address=[0x153fe40]
     void  RegisterNewTask(unsigned int a2, unsigned int a3);

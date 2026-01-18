@@ -30,7 +30,7 @@ public:
     virtual unsigned long  ClassID(void)const;
 
     // address=[0x156d2d0]
-    virtual void  ConvertEventIntoGoal(class CSettler *,class CEntityEvent *);
+    virtual void  ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent * a3);
 
     // address=[0x156d2f0]
     virtual int  GetSettlerRole(void)const;
@@ -39,7 +39,7 @@ public:
     virtual class CWalking *  InitWalking(class CSettler * a2);
 
     // address=[0x156d330]
-    virtual void  LogicUpdateJob(class CSettler *);
+    virtual void  LogicUpdateJob(class CSettler * a2);
 
     // address=[0x1588580]
     static class CDoorRole * __cdecl Load(std::istream & a1);
@@ -55,10 +55,10 @@ private:
     virtual  ~CDoorRole(void);
 
     // address=[0x156d2e0]
-    virtual void  GetNextJob(class CSettler *);
+    virtual void  GetNextJob(class CSettler * a2);
 
     // address=[0x156d360]
-    virtual void  TakeJob(class CSettler *);
+    virtual void  TakeJob(class CSettler * a2);
 
     // address=[0x1587a50]
      CDoorRole(void);

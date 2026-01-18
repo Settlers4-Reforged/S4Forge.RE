@@ -24,7 +24,7 @@ public:
     void  UpdateAgentScheduleTime(class CAIAgent & a2, unsigned int a3);
 
     // address=[0x12ff270]
-    virtual unsigned int  Execute(unsigned int,unsigned int);
+    virtual unsigned int  Execute(unsigned int a2, unsigned int a3);
 
 private:
     // address=[0x12ff400]

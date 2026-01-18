@@ -15,7 +15,7 @@
   this->pad_15[0] = 0;
   this->loggingEnabled = 0;
   this->tick = 0;
-  this->enabled = 0;
+  this->m_bLocked = 0;
   this->activePrimaryHandler = 0;
   this->field_20 = 0;
   return this;
@@ -577,10 +577,10 @@ void  IEventEngine::SetGuiEventProc(bool (__cdecl*)(struct SEventStruct &) a2) {
 
 
 // address=[0x1355880]
-// Decompiled from bool __thiscall IEventEngine::IsEventEngineLocked(ATL::CImage *this)
+// Decompiled from bool __thiscall IEventEngine::IsEventEngineLocked(struct IEventEngine *this)
 bool  IEventEngine::IsEventEngineLocked(void) {
   
-  return *((_BYTE *)this + 28);
+  return this->m_bLocked;
 }
 
 
@@ -599,7 +599,7 @@ void  IEventEngine::LockEventEngine(bool a2) {
   IEventEngine *result; // eax
 
   result = this;
-  this->enabled = a2;
+  this->m_bLocked = a2;
   return result;
 }
 

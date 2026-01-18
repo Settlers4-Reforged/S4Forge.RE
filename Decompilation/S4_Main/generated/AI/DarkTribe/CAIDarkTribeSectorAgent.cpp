@@ -4,7 +4,7 @@
 
 // address=[0x12fc7f0]
 // Decompiled from CAIDarkTribeSectorAgent *__thiscall CAIDarkTribeSectorAgent::CAIDarkTribeSectorAgent(  CAIDarkTribeSectorAgent *this,  const char *a2)
- CAIDarkTribeSectorAgent::CAIDarkTribeSectorAgent(char const *) {
+ CAIDarkTribeSectorAgent::CAIDarkTribeSectorAgent(char const * a2) {
   
   CAIAgent::CAIAgent(this, a2);
   *(_DWORD *)this = &CAIDarkTribeSectorAgent::_vftable_;

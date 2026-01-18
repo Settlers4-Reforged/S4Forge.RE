@@ -28,7 +28,7 @@ class CAIPlayerAI *  CAIAgentPlayerBase::PlayerAI(void)const {
 
 // address=[0x1319190]
 // Decompiled from CAIAgentPlayerBase *__thiscall CAIAgentPlayerBase::CAIAgentPlayerBase(CAIAgentPlayerBase *this, const char *a2)
- CAIAgentPlayerBase::CAIAgentPlayerBase(char const *) {
+ CAIAgentPlayerBase::CAIAgentPlayerBase(char const * a2) {
   
   CAIAgent::CAIAgent(this, a2);
   *(_DWORD *)this = &CAIAgentPlayerBase::_vftable_;

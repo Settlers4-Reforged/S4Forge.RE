@@ -13,7 +13,7 @@ class CPersistence * __cdecl CAnyWherePileRole::New(std::istream & a1) {
 
 // address=[0x155af40]
 // Decompiled from void __thiscall CAnyWherePileRole::Init(CAnyWherePileRole *this, struct CPile *a2)
-void  CAnyWherePileRole::Init(class CPile *) {
+void  CAnyWherePileRole::Init(class CPile * a2) {
   
   IPileRole::Init(this, a2);
   (*(void (__thiscall **)(struct CPile *))(*(_DWORD *)a2 + 104))(a2);
@@ -136,7 +136,7 @@ void  CAnyWherePileRole::SubjectDie(class CPile * a2, int a3) {
 
 // address=[0x155b390]
 // Decompiled from void __thiscall CAnyWherePileRole::SubjectStarted(CAnyWherePileRole *this, struct CPile *a2)
-void  CAnyWherePileRole::SubjectStarted(class CPile *) {
+void  CAnyWherePileRole::SubjectStarted(class CPile * a2) {
   
   ;
 }
@@ -144,7 +144,7 @@ void  CAnyWherePileRole::SubjectStarted(class CPile *) {
 
 // address=[0x155b3a0]
 // Decompiled from void __thiscall CAnyWherePileRole::SubjectStopped(CAnyWherePileRole *this, struct CPile *a2)
-void  CAnyWherePileRole::SubjectStopped(class CPile *) {
+void  CAnyWherePileRole::SubjectStopped(class CPile * a2) {
   
   ;
 }

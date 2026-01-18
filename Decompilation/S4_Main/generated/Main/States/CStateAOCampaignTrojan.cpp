@@ -18,7 +18,7 @@ class CGameState * __cdecl CStateAOCampaignTrojan::DynamicCreateFunc(void * a1) 
 
 // address=[0x14a1040]
 // Decompiled from CStateAOCampaignTrojan *__thiscall CStateAOCampaignTrojan::CStateAOCampaignTrojan(  CStateAOCampaignTrojan *this,  void *a2)
- CStateAOCampaignTrojan::CStateAOCampaignTrojan(void *) {
+ CStateAOCampaignTrojan::CStateAOCampaignTrojan(void * a2) {
   
   CGuiGameState::CGuiGameState(this);
   *(_DWORD *)this = &CStateAOCampaignTrojan::_vftable_;

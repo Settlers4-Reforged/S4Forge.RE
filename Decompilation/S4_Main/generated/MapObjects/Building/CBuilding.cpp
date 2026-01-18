@@ -214,7 +214,7 @@ void  CBuilding::Delete(void) {
   CBuildingMgr::CheckOutBuilding((CBuildingMgr *)g_cBuildingMgr, v5);
   IEntity::EntityId((unsigned __int16 *)v14);
   IEntity::OwnerId((unsigned __int8 *)v14);
-  return (*(int (__cdecl **)(int))(*(_DWORD *)off_3D7A3D8 + 44))(4);
+  return (*(int (__cdecl **)(int))(*(_DWORD *)g_pAI + 44))(4);
 }
 
 
@@ -1120,7 +1120,7 @@ void  CBuilding::NotifyAllObservers(class CEntityEvent const & a2)const {
 
 // address=[0x1506640]
 // Decompiled from void __thiscall CBuilding::NotifyAndDetachAllObservers(CBuilding *this, const struct CEntityEvent *a2)
-void  CBuilding::NotifyAndDetachAllObservers(class CEntityEvent const &) {
+void  CBuilding::NotifyAndDetachAllObservers(class CEntityEvent const & a2) {
   
   CObserverList::NotifyAndDetachAllObservers((CBuilding *)((char *)this + 88), a2);
 }
@@ -1301,7 +1301,7 @@ void  CBuilding::Ready(void) {
   CStatistic::AddProducedBuilding((CStatistic *)&g_cStatistic, v4, v18, 1);
   v19 = IEntity::ID();
   v5 = IEntity::OwnerId(v24);
-  (*(void (__thiscall **)(void *, int, int, int, _DWORD))(*(_DWORD *)off_3D7A3D8 + 44))(off_3D7A3D8, 6, v5, v19, 0);
+  (*(void (__thiscall **)(void *, int, int, int, _DWORD))(*(_DWORD *)g_pAI + 44))(g_pAI, 6, v5, v19, 0);
   v20 = IEntity::Race(v24);
   v6 = CBuilding::BuildingTypeEx(v24);
   BuildingRole = CBuildingMgr::CreateBuildingRole(v6, v20, 0);

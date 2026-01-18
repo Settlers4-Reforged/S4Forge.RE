@@ -18,7 +18,7 @@ class CGameState * __cdecl CStateEcoStatistic::DynamicCreateFunc(void * a1) {
 
 // address=[0x14a4830]
 // Decompiled from CStateEcoStatistic *__thiscall CStateEcoStatistic::CStateEcoStatistic(CStateEcoStatistic *this, void *a2)
- CStateEcoStatistic::CStateEcoStatistic(void *) {
+ CStateEcoStatistic::CStateEcoStatistic(void * a2) {
   
   CGuiGameState::CGuiGameState(this);
   *(_DWORD *)this = &CStateEcoStatistic::_vftable_;

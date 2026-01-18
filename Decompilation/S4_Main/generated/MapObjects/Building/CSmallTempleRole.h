@@ -64,7 +64,7 @@ public:
 
 private:
     // address=[0x14fd260]
-    virtual void  ConvertEventIntoGoal(class CBuilding *,class CEntityEvent *);
+    virtual void  ConvertEventIntoGoal(class CBuilding * a2, class CEntityEvent * a3);
 
     // address=[0x14fd2c0]
     virtual bool  CrushBuilding(void);
@@ -73,7 +73,7 @@ private:
     virtual bool  TryCrushBuilding(void);
 
     // address=[0x151cc50]
-    bool  HaveMaterial(class CBuilding *);
+    bool  HaveMaterial(class CBuilding * a2);
 
 };
 

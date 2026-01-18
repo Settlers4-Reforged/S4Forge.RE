@@ -109,7 +109,7 @@ protected:
     bool  SearchAttacker(class CBuilding * a2);
 
     // address=[0x1510430]
-    void  ThrowOut(class CBuilding *);
+    void  ThrowOut(class CBuilding * a2);
 
     // address=[0x1510510]
     void  ThrowOutId(class CBuilding * a2);

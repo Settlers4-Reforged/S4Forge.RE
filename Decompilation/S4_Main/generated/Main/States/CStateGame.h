@@ -69,7 +69,7 @@ public:
     int  GetModifierState(void);
 
     // address=[0x14a6c20]
-     CStateGame(void *);
+     CStateGame(void * a2);
 
     // address=[0x14a7a50]
     virtual  ~CStateGame(void);
@@ -114,7 +114,7 @@ public:
     void  ReadyToGo(void);
 
     // address=[0x14acde0]
-    void  SetViewPos(unsigned int,unsigned int);
+    void  SetViewPos(unsigned int a2, unsigned int a3);
 
     // address=[0x14ace40]
     void  UpdateClientSize(void);

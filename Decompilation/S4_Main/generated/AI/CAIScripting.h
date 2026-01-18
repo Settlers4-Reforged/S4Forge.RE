@@ -9,13 +9,13 @@ public:
     virtual void  Init(void);
 
     // address=[0x131db20]
-    virtual void  Load(class IS4Chunk &);
+    virtual void  Load(class IS4Chunk & a2);
 
     // address=[0x131db30]
-    virtual void  Save(class IS4Chunk &);
+    virtual void  Save(class IS4Chunk & a2);
 
     // address=[0x131db40]
-    virtual unsigned int  Adler32(unsigned int);
+    virtual unsigned int  Adler32(unsigned int a2);
 
     // address=[0x131e8c0]
      CAIScripting(void);

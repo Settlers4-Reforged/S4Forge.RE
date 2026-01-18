@@ -18,7 +18,7 @@ class CGameState * __cdecl CStateMDCampaignsEcoConflict::DynamicCreateFunc(void 
 
 // address=[0x14c7730]
 // Decompiled from CStateMDCampaignsEcoConflict *__thiscall CStateMDCampaignsEcoConflict::CStateMDCampaignsEcoConflict(  CStateMDCampaignsEcoConflict *this,  void *a2)
- CStateMDCampaignsEcoConflict::CStateMDCampaignsEcoConflict(void *) {
+ CStateMDCampaignsEcoConflict::CStateMDCampaignsEcoConflict(void * a2) {
   
   CGuiGameState::CGuiGameState(this);
   *(_DWORD *)this = &CStateMDCampaignsEcoConflict::_vftable_;

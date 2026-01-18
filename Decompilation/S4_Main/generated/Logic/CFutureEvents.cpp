@@ -672,7 +672,7 @@ void __cdecl CFutureEvents::ExecuteDamageEntity(struct CFutureEvents::SFutureEve
 
 // address=[0x1451510]
 // Decompiled from void __cdecl CFutureEvents::ExecuteCastSpell(struct CFutureEvents::SFutureEvent *a1)
-void __cdecl CFutureEvents::ExecuteCastSpell(struct CFutureEvents::SFutureEvent &) {
+void __cdecl CFutureEvents::ExecuteCastSpell(struct CFutureEvents::SFutureEvent & a1) {
   
   CMagic::ExecuteCastSpell(*((unsigned __int16 *)a1 + 1), *((_DWORD *)a1 + 3), *((_DWORD *)a1 + 4));
 }
@@ -927,7 +927,7 @@ void __cdecl CFutureEvents::ExecuteFreeServant(struct CFutureEvents::SFutureEven
 
 // address=[0x1452a50]
 // Decompiled from unsigned int __cdecl CFutureEvents::HiWord(unsigned int a1)
-unsigned int __cdecl CFutureEvents::HiWord(unsigned int) {
+unsigned int __cdecl CFutureEvents::HiWord(unsigned int a1) {
   
   return HIWORD(a1);
 }

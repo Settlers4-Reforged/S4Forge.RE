@@ -124,7 +124,7 @@ private:
     bool  IsPureDarkLandAround(int a2, int a3);
 
     // address=[0x1332670]
-    bool  HasChangeableLand(class CAIResourceData const &);
+    bool  HasChangeableLand(class CAIResourceData const & a2);
 
     // address=[0x13326d0]
     int  GetChangeableLandAmount(class CAIResourceData const & a2);

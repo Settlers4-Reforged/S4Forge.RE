@@ -102,7 +102,7 @@ void  AdvXMLParser::Text::Concatenate(std::string const & a1) {
 
 // address=[0x2f2cca0]
 // Decompiled from void __thiscall AdvXMLParser::Text::GenerateXML(AdvXMLParser::Text *this, struct AdvXMLParser::GenerateContext *a2)
-void  AdvXMLParser::Text::GenerateXML(class AdvXMLParser::GenerateContext &)const {
+void  AdvXMLParser::Text::GenerateXML(class AdvXMLParser::GenerateContext & a2)const {
   
   int v2; // [esp+4h] [ebp-8Ch]
   int v3; // [esp+Ch] [ebp-84h]

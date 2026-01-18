@@ -9,7 +9,7 @@ public:
      CAIAgentEvalDefence(void);
 
     // address=[0x13045d0]
-    virtual unsigned int  Execute(unsigned int,unsigned int);
+    virtual unsigned int  Execute(unsigned int a2, unsigned int a3);
 
     // address=[0x1304600]
     virtual void  Load(class IS4Chunk & a2);

@@ -1897,7 +1897,7 @@ void __cdecl CBuildingMgr::FillAddVehicleSideBar(class CInfoExchange * a1, bool 
 
 // address=[0x14f7350]
 // Decompiled from void __thiscall CBuildingMgr::Store(CBuildingMgr *this, struct S4::CMapFile *a2)
-void  CBuildingMgr::Store(class S4::CMapFile &) {
+void  CBuildingMgr::Store(class S4::CMapFile & a2) {
   
   std::strstreambuf *v2; // eax
   void *v3; // eax
@@ -2019,7 +2019,7 @@ void  CBuildingMgr::Store(class S4::CMapFile &) {
 
 // address=[0x14f7890]
 // Decompiled from void __thiscall CBuildingMgr::Load(CBuildingMgr *this, struct S4::CMapFile *a2)
-void  CBuildingMgr::Load(class S4::CMapFile &) {
+void  CBuildingMgr::Load(class S4::CMapFile & a2) {
   
   int v2; // [esp+0h] [ebp-118h]
   _DWORD v3[42]; // [esp+4h] [ebp-114h] BYREF

@@ -61,7 +61,7 @@ private:
     void  NewSolutionInHistory(class CSolutionTree * a2);
 
     // address=[0x2f3e2d0]
-    class CDynList *  CloneHistorie(class CDynList *);
+    class CDynList *  CloneHistorie(class CDynList * a2);
 
     // address=[0x2f3e3e0]
     double  ValuationSubSolution(class CSolutionTree * a2, int a3, int a4);

@@ -4,7 +4,7 @@
 
 // address=[0x1303ee0]
 // Decompiled from unsigned int __thiscall CAIAgentSuicideMissions::Execute(  CAIAgentSuicideMissions *this,  unsigned int a2,  unsigned int a3)
-unsigned int  CAIAgentSuicideMissions::Execute(unsigned int,unsigned int) {
+unsigned int  CAIAgentSuicideMissions::Execute(unsigned int a2, unsigned int a3) {
   
   struct CAINormalSectorAI *v3; // eax
   _DWORD *v4; // eax

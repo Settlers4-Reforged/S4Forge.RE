@@ -290,7 +290,7 @@ LABEL_35:
 
 // address=[0x1594ef0]
 // Decompiled from void __thiscall CTowerSoldier::PostLoadInit(CTowerSoldier *this, struct CSettler *a2)
-void  CTowerSoldier::PostLoadInit(class CSettler *) {
+void  CTowerSoldier::PostLoadInit(class CSettler * a2) {
   
   ;
 }
@@ -431,7 +431,7 @@ int  CTowerSoldier::GetSettlerRole(void)const {
 
 // address=[0x1596300]
 // Decompiled from void __thiscall CTowerSoldier::LogicUpdateJob(CTowerSoldier *this, struct CSettler *a2)
-void  CTowerSoldier::LogicUpdateJob(class CSettler *) {
+void  CTowerSoldier::LogicUpdateJob(class CSettler * a2) {
   
   ;
 }
@@ -848,12 +848,7 @@ void  CTowerSoldier::ConvertEventIntoGoal(class CSettler * a2, class CEntityEven
         v23 = *(unsigned __int16 *)(this + 32);
         v17 = IEntity::ID();
         v5 = IEntity::OwnerId((unsigned __int8 *)a2);
-        (*(void (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)off_3D7A3D8 + 44))(
-          off_3D7A3D8,
-          21,
-          v5,
-          v17,
-          v23);
+        (*(void (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)g_pAI + 44))(g_pAI, 21, v5, v17, v23);
         *(_WORD *)(this + 32) = 0;
       }
       break;
@@ -899,7 +894,7 @@ void  CTowerSoldier::ConvertEventIntoGoal(class CSettler * a2, class CEntityEven
       v25 = *(unsigned __int16 *)(this + 32);
       v19 = IEntity::ID();
       v7 = IEntity::OwnerId((unsigned __int8 *)a2);
-      (*(void (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)off_3D7A3D8 + 44))(off_3D7A3D8, 21, v7, v19, v25);
+      (*(void (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)g_pAI + 44))(g_pAI, 21, v7, v19, v25);
       *(_WORD *)(this + 32) = 0;
       break;
     default:

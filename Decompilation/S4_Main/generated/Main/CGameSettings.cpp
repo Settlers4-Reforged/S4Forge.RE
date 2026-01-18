@@ -976,7 +976,7 @@ void __cdecl CGameSettings::SetCampaignStatus(int a1, int a2) {
 
 // address=[0x1489530]
 // Decompiled from void __cdecl CGameSettings::Cryption(unsigned __int8 *a1, unsigned int a2)
-void __cdecl CGameSettings::Cryption(unsigned char *,unsigned long) {
+void __cdecl CGameSettings::Cryption(unsigned char * a1, unsigned long a2) {
   
   unsigned int i; // [esp+4h] [ebp-7Ch]
   _BYTE v3[76]; // [esp+8h] [ebp-78h] BYREF
@@ -999,7 +999,7 @@ void __cdecl CGameSettings::Cryption(unsigned char *,unsigned long) {
 
 // address=[0x14895f0]
 // Decompiled from unsigned int __cdecl CGameSettings::Crc(unsigned __int8 *a1, unsigned int a2)
-unsigned int __cdecl CGameSettings::Crc(unsigned char *,unsigned long) {
+unsigned int __cdecl CGameSettings::Crc(unsigned char * a1, unsigned long a2) {
   
   unsigned int NormalCRC; // [esp+0h] [ebp-8h]
   _BYTE v4[4]; // [esp+4h] [ebp-4h] BYREF

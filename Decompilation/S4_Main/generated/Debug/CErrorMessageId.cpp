@@ -31,7 +31,7 @@
 
 // address=[0x1481160]
 // Decompiled from CErrorMessageId *__thiscall CErrorMessageId::CErrorMessageId(CErrorMessageId *this, const struct CErrorMessageId *a2)
- CErrorMessageId::CErrorMessageId(class CErrorMessageId const &) {
+ CErrorMessageId::CErrorMessageId(class CErrorMessageId const & a2) {
   
   *(_DWORD *)this = *(_DWORD *)a2;
   return this;

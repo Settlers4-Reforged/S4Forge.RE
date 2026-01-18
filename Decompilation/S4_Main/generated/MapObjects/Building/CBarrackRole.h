@@ -67,7 +67,7 @@ private:
     virtual void  FillDialog(class CBuilding * a2, bool a3);
 
     // address=[0x14e80c0]
-    virtual void  ConvertEventIntoGoal(class CBuilding *,class CEntityEvent *);
+    virtual void  ConvertEventIntoGoal(class CBuilding * a2, class CEntityEvent * a3);
 
     // address=[0x14e80d0]
     virtual bool  CrushBuilding(void);

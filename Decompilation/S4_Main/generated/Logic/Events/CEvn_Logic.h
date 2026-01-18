@@ -9,7 +9,7 @@ public:
     virtual  ~CEvn_Logic(void);
 
     // address=[0x1334e60]
-     CEvn_Logic(unsigned int,unsigned int,unsigned int,unsigned char,unsigned int,unsigned short);
+     CEvn_Logic(unsigned int a2, unsigned int a3, unsigned int a4, unsigned char a5, unsigned int a6, unsigned short a7);
 
     // address=[0x1355030]
      CEvn_Logic(void);

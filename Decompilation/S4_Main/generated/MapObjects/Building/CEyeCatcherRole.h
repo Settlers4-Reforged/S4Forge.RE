@@ -33,7 +33,7 @@ public:
     static class CEyeCatcherRole * __cdecl Load(std::istream & a1);
 
     // address=[0x150a110]
-    virtual void  LogicUpdate(class CBuilding *);
+    virtual void  LogicUpdate(class CBuilding * a2);
 
     // address=[0x150a120]
     virtual void  FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo & a3);
@@ -58,7 +58,7 @@ public:
 
 private:
     // address=[0x14fd1f0]
-    virtual void  ConvertEventIntoGoal(class CBuilding *,class CEntityEvent *);
+    virtual void  ConvertEventIntoGoal(class CBuilding * a2, class CEntityEvent * a3);
 
     // address=[0x14fd270]
     virtual bool  CrushBuilding(void);

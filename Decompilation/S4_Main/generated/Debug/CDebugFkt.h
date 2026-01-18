@@ -18,7 +18,7 @@ public:
     static void __cdecl SetDebugString(class String const & a1);
 
     // address=[0x134f570]
-    static void __cdecl SetFrameCounter(float,float,float,float,float,float,float,unsigned int);
+    static void __cdecl SetFrameCounter(float a1, float a2, float a3, float a4, float a5, float a6, float a7, unsigned int a8);
 
 private:
     // address=[0x3f4558c]

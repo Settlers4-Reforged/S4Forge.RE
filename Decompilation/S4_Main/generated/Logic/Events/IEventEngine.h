@@ -80,7 +80,7 @@ private:
     BYTE loggingEnabled;
     _BYTE[3] pad_15;
     int tick;
-    char enabled;
+    char m_bLocked;
     _BYTE[3] gap_1D;
     int field_20;
     unsigned __int8 (__cdecl *)(struct SEventStruct *) activePrimaryHandler;

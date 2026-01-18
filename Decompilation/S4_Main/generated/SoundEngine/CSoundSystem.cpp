@@ -874,7 +874,7 @@ unsigned int  CSoundSystem::ChangePlaylist(int a2, int a3) {
 
 // address=[0x2fdb440]
 // Decompiled from void __thiscall CSoundSystem::PlaylistTitleEnded(CSoundSystem *this, struct _STREAM *a2)
-void  CSoundSystem::PlaylistTitleEnded(struct _STREAM *) {
+void  CSoundSystem::PlaylistTitleEnded(struct _STREAM * a2) {
   
   unsigned int v2; // [esp+4h] [ebp-18h]
   char *ActiveTitle; // [esp+8h] [ebp-14h]
@@ -1016,7 +1016,7 @@ int  CSoundSystem::GetHWFormat(void) {
 
 // address=[0x2fdb7d0]
 // Decompiled from bool __thiscall CSoundSystem::IsRunning(CSoundSystem *this, unsigned int a2)
-bool  CSoundSystem::IsRunning(unsigned int) {
+bool  CSoundSystem::IsRunning(unsigned int a2) {
   
   return (int)CSoundSystem::GetStreamIndex(this, a2) >= 0 || CSoundSystem::GetSoundIndex(this, a2) != -1;
 }

@@ -569,12 +569,7 @@ void  CGardenerRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEven
       *(_BYTE *)(this + 4) = 27;
       v31 = IEntity::ID();
       v22 = IEntity::OwnerId((unsigned __int8 *)a2);
-      result = (*(int (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)off_3D7A3D8 + 44))(
-                 off_3D7A3D8,
-                 21,
-                 v22,
-                 v31,
-                 v40);
+      result = (*(int (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)g_pAI + 44))(g_pAI, 21, v22, v31, v40);
       break;
     case 0xD:
       CTrace::Print("CGardenerRole - NewDestinationEx called from ConvertEventIntoGoal-GO_TO_POS");
@@ -670,12 +665,7 @@ void  CGardenerRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEven
         v35 = *(unsigned __int16 *)(this + 32);
         v26 = IEntity::ID();
         v15 = IEntity::OwnerId((unsigned __int8 *)a2);
-        result = (*(int (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)off_3D7A3D8 + 44))(
-                   off_3D7A3D8,
-                   18,
-                   v15,
-                   v26,
-                   v35);
+        result = (*(int (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)g_pAI + 44))(g_pAI, 18, v15, v26, v35);
       }
       else
       {
@@ -701,12 +691,7 @@ void  CGardenerRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEven
       v38 = *(unsigned __int16 *)(this + 32);
       v29 = IEntity::ID();
       v19 = IEntity::OwnerId((unsigned __int8 *)a2);
-      result = (*(int (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)off_3D7A3D8 + 44))(
-                 off_3D7A3D8,
-                 21,
-                 v19,
-                 v29,
-                 v38);
+      result = (*(int (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)g_pAI + 44))(g_pAI, 21, v19, v29, v38);
       break;
     default:
       result = IEntity::FlagBits(a2, EntityFlag_Registered);

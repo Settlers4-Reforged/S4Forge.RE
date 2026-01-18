@@ -14,7 +14,7 @@ unsigned int  CRandom16::Rand(void) {
 
 // address=[0x1301600]
 // Decompiled from unsigned int __cdecl CRandom16::PercentValue(unsigned int a1)
-unsigned int __cdecl CRandom16::PercentValue(unsigned int) {
+unsigned int __cdecl CRandom16::PercentValue(unsigned int a1) {
   
   return (a1 << 16) / 0x64;
 }
@@ -38,7 +38,7 @@ unsigned int  CRandom16::GetSeed(void)const {
 
 // address=[0x13613b0]
 // Decompiled from CRandom16 *__thiscall CRandom16::CRandom16(CRandom16 *this, unsigned int a2)
- CRandom16::CRandom16(unsigned int) {
+ CRandom16::CRandom16(unsigned int a2) {
   
   *(_DWORD *)this = a2;
   *((_DWORD *)this + 1) = 0;

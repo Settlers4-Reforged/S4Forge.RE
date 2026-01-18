@@ -48,7 +48,7 @@ public:
     void  StormResetEnterSessionFlag(void);
 
     // address=[0x15c8460]
-     INetworkEngine(bool);
+     INetworkEngine(bool a2);
 
     // address=[0x15c84d0]
     virtual  ~INetworkEngine(void);

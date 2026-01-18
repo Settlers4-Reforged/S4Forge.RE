@@ -21,7 +21,7 @@ public:
     virtual void  LogicUpdate(class CSettler * a2);
 
     // address=[0x1594ef0]
-    virtual void  PostLoadInit(class CSettler *);
+    virtual void  PostLoadInit(class CSettler * a2);
 
     // address=[0x1594f00]
     virtual bool  SetFree(class CSettler * a2, int a3);
@@ -45,7 +45,7 @@ public:
     virtual int  GetSettlerRole(void)const;
 
     // address=[0x1596300]
-    virtual void  LogicUpdateJob(class CSettler *);
+    virtual void  LogicUpdateJob(class CSettler * a2);
 
     // address=[0x3d8bfac]
     static unsigned long m_iClassID;

@@ -15,7 +15,7 @@ public:
     virtual void  LogicUpdate(class CSettler * a2);
 
     // address=[0x156d730]
-    virtual void  UpdateJob(class CSettler *);
+    virtual void  UpdateJob(class CSettler * a2);
 
     // address=[0x156d740]
     virtual void  PostLoadInit(class CSettler * a1);
@@ -39,7 +39,7 @@ public:
     virtual int  GetSettlerRole(void)const;
 
     // address=[0x156dc00]
-    virtual void  LogicUpdateJob(class CSettler *);
+    virtual void  LogicUpdateJob(class CSettler * a2);
 
     // address=[0x15885c0]
     static class CFleeRole * __cdecl Load(std::istream & a1);

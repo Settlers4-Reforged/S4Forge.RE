@@ -4,7 +4,7 @@
 
 // address=[0x13613e0]
 // Decompiled from CRandom16Ex *__thiscall CRandom16Ex::CRandom16Ex(CRandom16Ex *this, unsigned int a2)
- CRandom16Ex::CRandom16Ex(unsigned int) {
+ CRandom16Ex::CRandom16Ex(unsigned int a2) {
   
   CRandom16::CRandom16(this, 0);
   *(_DWORD *)this = a2;

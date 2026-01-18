@@ -39,10 +39,10 @@ public:
     void  SearchSpaceForGoods(int a2, int a3, int a4, int a5);
 
     // address=[0x155f280]
-    void  Store(class S4::CMapFile &);
+    void  Store(class S4::CMapFile & a2);
 
     // address=[0x155f4c0]
-    void  Load(class S4::CMapFile &);
+    void  Load(class S4::CMapFile & a2);
 
     // address=[0x155f670]
     int  DbgCheckPiles(int a2);

@@ -6,7 +6,7 @@
 class CRandom16Ex {
 public:
     // address=[0x13613e0]
-     CRandom16Ex(unsigned int);
+     CRandom16Ex(unsigned int a2);
 
     // address=[0x1361420]
     void  Init(unsigned int a2, unsigned int a3);

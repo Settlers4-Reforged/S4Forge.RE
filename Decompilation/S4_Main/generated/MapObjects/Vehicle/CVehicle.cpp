@@ -12,7 +12,7 @@ int  CVehicle::CurrentTask(void)const {
 
 // address=[0x153a430]
 // Decompiled from void __thiscall CVehicle::CountCargo(CVehicle *this, struct ICargoCounter *a2)
-void  CVehicle::CountCargo(class ICargoCounter &) {
+void  CVehicle::CountCargo(class ICargoCounter & a2) {
   
   ;
 }
@@ -163,7 +163,7 @@ void  CVehicle::Delete(void) {
   CVehicleMgr::CheckOutVehicle((CVehicleMgr *)&g_cVehicleMgr, v3);
   IEntity::ID();
   IEntity::OwnerId((unsigned __int8 *)v10);
-  return (*(int (__cdecl **)(int))(*(_DWORD *)off_3D7A3D8 + 44))(23);
+  return (*(int (__cdecl **)(int))(*(_DWORD *)g_pAI + 44))(23);
 }
 
 
@@ -782,7 +782,7 @@ int  CVehicle::ClearGroupFlagBits(int a2) {
 
 // address=[0x15a7a40]
 // Decompiled from void __thiscall CVehicle::FillDialog(CVehicle *this, bool a2)
-void  CVehicle::FillDialog(bool) {
+void  CVehicle::FillDialog(bool a2) {
   
   ;
 }
@@ -817,7 +817,7 @@ unsigned int  CVehicle::TurnDirEx(void)const {
 
 // address=[0x153fe00]
 // Decompiled from bool __thiscall CVehicle::ReadyToFire(CVehicle *this, unsigned int a2)
-bool  CVehicle::ReadyToFire(unsigned int)const {
+bool  CVehicle::ReadyToFire(unsigned int a2)const {
   
   return a2 >= *((_DWORD *)this + 29);
 }

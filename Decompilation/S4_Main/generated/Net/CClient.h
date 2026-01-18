@@ -9,7 +9,7 @@ public:
      CClient(void);
 
     // address=[0x15b1b60]
-     CClient(class CClient const &);
+     CClient(class CClient const & a2);
 
     // address=[0x15b1bd0]
      CClient(long a2, int a3, int a4);

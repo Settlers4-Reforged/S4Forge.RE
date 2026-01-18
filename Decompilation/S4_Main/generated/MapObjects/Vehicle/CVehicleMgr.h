@@ -54,10 +54,10 @@ public:
     static void __cdecl FillVehicleGroupMenu(class CInfoExchange * a1, bool a2, bool a3);
 
     // address=[0x15a9580]
-    void  Store(class S4::CMapFile &);
+    void  Store(class S4::CMapFile & a2);
 
     // address=[0x15a97e0]
-    void  Load(class S4::CMapFile &);
+    void  Load(class S4::CMapFile & a2);
 
     // address=[0x15a9b60]
     void  LoadInfo(void);

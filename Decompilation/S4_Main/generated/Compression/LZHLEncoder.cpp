@@ -4,7 +4,7 @@
 
 // address=[0x2f02870]
 // Decompiled from unsigned int __cdecl LZHLEncoder::calcMaxBuf(unsigned int a1)
-unsigned int __cdecl LZHLEncoder::calcMaxBuf(unsigned int) {
+unsigned int __cdecl LZHLEncoder::calcMaxBuf(unsigned int a1) {
   
   return a1 + (a1 >> 1) + 32;
 }
@@ -12,7 +12,7 @@ unsigned int __cdecl LZHLEncoder::calcMaxBuf(unsigned int) {
 
 // address=[0x2f2a390]
 // Decompiled from LZHLEncoder *__thiscall LZHLEncoder::LZHLEncoder(LZHLEncoder *this, struct LZHLEncoderStat *a2, unsigned __int8 *a3)
- LZHLEncoder::LZHLEncoder(class LZHLEncoderStat *,unsigned char *) {
+ LZHLEncoder::LZHLEncoder(class LZHLEncoderStat * a2, unsigned char * a3) {
   
   *(_DWORD *)this = a2;
   *((_DWORD *)this + 1) = *(_DWORD *)a2;

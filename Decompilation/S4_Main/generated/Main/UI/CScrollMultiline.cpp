@@ -162,7 +162,7 @@ LABEL_20:
 
 // address=[0x13da3c0]
 // Decompiled from unsigned __int8 *__thiscall CScrollMultiline::GetCRLFWrapPointer(  CScrollMultiline *this,  unsigned __int8 *a2,  unsigned __int8 *a3)
-unsigned char *  CScrollMultiline::GetCRLFWrapPointer(unsigned char *,unsigned char *) {
+unsigned char *  CScrollMultiline::GetCRLFWrapPointer(unsigned char * a2, unsigned char * a3) {
   
   unsigned __int8 *v3; // eax
 

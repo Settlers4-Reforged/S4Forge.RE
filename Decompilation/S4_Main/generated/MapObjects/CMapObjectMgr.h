@@ -60,10 +60,10 @@ public:
     void  UnRegisterFromLogicUpdate(int a2, int a3);
 
     // address=[0x15574c0]
-    void  Store(class S4::CMapFile &);
+    void  Store(class S4::CMapFile & a2);
 
     // address=[0x1557910]
-    void  Load(class S4::CMapFile &);
+    void  Load(class S4::CMapFile & a2);
 
     // address=[0x1557c60]
     void  PrintEntity(int entityId, int logLevel, char const * customMessage);

@@ -18,7 +18,7 @@ class CGameState * __cdecl CStateCredits::DynamicCreateFunc(void * a1) {
 
 // address=[0x14a4160]
 // Decompiled from CStateCredits *__thiscall CStateCredits::CStateCredits(CStateCredits *this, void *a2)
- CStateCredits::CStateCredits(void *) {
+ CStateCredits::CStateCredits(void * a2) {
   
   CGuiGameState::CGuiGameState(this);
   *(_DWORD *)this = &CStateCredits::_vftable_;

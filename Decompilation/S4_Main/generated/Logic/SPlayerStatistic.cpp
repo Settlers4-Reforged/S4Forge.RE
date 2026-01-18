@@ -53,7 +53,7 @@ void  CStatistic::SPlayerStatistic::CalculateFightingStrength(int a2) {
     {
       if ( g_pGameType
         && CPlayerManager::IsAI(a2)
-        && (*(unsigned __int8 (__thiscall **)(void *))(*(_DWORD *)off_3D7A3D8 + 16))(off_3D7A3D8)
+        && (*(unsigned __int8 (__thiscall **)(void *))(*(_DWORD *)g_pAI + 16))(g_pAI)
         && IAIDifficultyLevels::GetDifficultyLevel(a2) >= 2 )
       {
         v9 = *((_DWORD *)this + 746) + *((_DWORD *)this + 745) + 2 * *((_DWORD *)this + 747);

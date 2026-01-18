@@ -92,7 +92,7 @@ void  CAIScheduler::UpdateAgentScheduleTime(class CAIAgent & a2, unsigned int a3
 
 // address=[0x12ff270]
 // Decompiled from unsigned int __thiscall CAIScheduler::Execute(CAIScheduler *this, unsigned int a2, unsigned int a3)
-unsigned int  CAIScheduler::Execute(unsigned int,unsigned int) {
+unsigned int  CAIScheduler::Execute(unsigned int a2, unsigned int a3) {
   
   unsigned int v4; // [esp+0h] [ebp-1Ch]
   int v5; // [esp+4h] [ebp-18h]

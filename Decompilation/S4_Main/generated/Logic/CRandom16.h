@@ -9,7 +9,7 @@ public:
     unsigned int  Rand(void);
 
     // address=[0x1301600]
-    static unsigned int __cdecl PercentValue(unsigned int);
+    static unsigned int __cdecl PercentValue(unsigned int a1);
 
     // address=[0x130a490]
     unsigned int  GetNumberOfRandCalls(void)const;
@@ -18,7 +18,7 @@ public:
     unsigned int  GetSeed(void)const;
 
     // address=[0x13613b0]
-     CRandom16(unsigned int);
+     CRandom16(unsigned int a2);
 
 };
 

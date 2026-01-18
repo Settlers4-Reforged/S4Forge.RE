@@ -3,7 +3,7 @@
 // Definitions for class CGameScriptManager
 
 // address=[0x131ec80]
-// Decompiled from int __thiscall CGameScriptManager::GetScriptEnv(CGameScriptManager *this)
+// Decompiled from CLua *__thiscall CGameScriptManager::GetScriptEnv(CGameScriptManager *this)
 class CLua &  CGameScriptManager::GetScriptEnv(void) {
   
   if ( !*((_DWORD *)this + 3)
@@ -15,7 +15,7 @@ class CLua &  CGameScriptManager::GetScriptEnv(void) {
   {
     __debugbreak();
   }
-  return *((_DWORD *)this + 3);
+  return (CLua *)*((_DWORD *)this + 3);
 }
 
 
@@ -167,7 +167,7 @@ void  CGameScriptManager::SetVictoryConditionHook(void (__cdecl*)(void) a2) {
 
 // address=[0x15fefe0]
 // Decompiled from void __thiscall CGameScriptManager::Update(CGameScriptManager *this, unsigned int a2)
-void  CGameScriptManager::Update(unsigned int) {
+void  CGameScriptManager::Update(unsigned int a2) {
   
   if ( *((_DWORD *)this + 2) == 1 )
   {
@@ -984,8 +984,8 @@ void  CGameScriptManager::GetSaveVarValues(double * a2, int a3) {
   for ( i = 0; i < (int)a3; ++i )
   {
     Str[4] = i + 49;
-    j__lua_pushobject(v6);
-    j__lua_pushstring(Str);
+    lua_pushobject(v6);
+    lua_pushstring(Str);
     v5 = j__lua_rawgettable(v5);
     v4 = j__lua_getnumber(v5);
     result = a2;
@@ -1020,10 +1020,10 @@ void  CGameScriptManager::SetSaveVarValues(double * a2, int a3) {
   for ( i = 0; i < (int)a3; ++i )
   {
     Str[4] = i + 49;
-    j__lua_pushobject(v4);
-    j__lua_pushstring(Str);
-    j__lua_pushnumber(*(_QWORD *)&a2[i]);
-    result = j__lua_rawsettable();
+    lua_pushobject(v4);
+    lua_pushstring(Str);
+    lua_pushnumber(*(_QWORD *)&a2[i]);
+    result = lua_rawsettable();
   }
   return result;
 }

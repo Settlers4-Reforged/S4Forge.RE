@@ -744,7 +744,7 @@ void  CMapObjectMgr::UnRegisterFromLogicUpdate(int a2, int a3) {
 
 // address=[0x15574c0]
 // Decompiled from void __thiscall CMapObjectMgr::Store(CMapObjectMgr *this, struct S4::CMapFile *a2)
-void  CMapObjectMgr::Store(class S4::CMapFile &) {
+void  CMapObjectMgr::Store(class S4::CMapFile & a2) {
   
   std::strstreambuf *v2; // eax
   void *v3; // eax
@@ -876,7 +876,7 @@ void  CMapObjectMgr::Store(class S4::CMapFile &) {
 
 // address=[0x1557910]
 // Decompiled from void __thiscall CMapObjectMgr::Load(CMapObjectMgr *this, struct S4::CMapFile *a2)
-void  CMapObjectMgr::Load(class S4::CMapFile &) {
+void  CMapObjectMgr::Load(class S4::CMapFile & a2) {
   
   int v2; // [esp+0h] [ebp-12Ch] BYREF
   _DWORD v3[42]; // [esp+10h] [ebp-11Ch] BYREF

@@ -4,7 +4,7 @@
 
 // address=[0x2f02850]
 // Decompiled from unsigned int __cdecl LZHLCompressor::calcMaxBuf(unsigned int a1)
-unsigned int __cdecl LZHLCompressor::calcMaxBuf(unsigned int) {
+unsigned int __cdecl LZHLCompressor::calcMaxBuf(unsigned int a1) {
   
   return LZHLEncoder::calcMaxBuf(a1);
 }

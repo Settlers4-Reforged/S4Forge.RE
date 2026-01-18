@@ -57,7 +57,7 @@ void  CBuildingSitePileRole::Increase(class CPile * a2, int a3) {
 
 // address=[0x155b4f0]
 // Decompiled from void __thiscall CBuildingSitePileRole::SubjectStopped(CBuildingSitePileRole *this, struct CPile *a2)
-void  CBuildingSitePileRole::SubjectStopped(class CPile *) {
+void  CBuildingSitePileRole::SubjectStopped(class CPile * a2) {
   
   if ( CPile::AmountLeaving(a2)
     && BBSupportDbgReport(2, "MapObjects\\Pile\\BuildingSitePileRole.cpp", 105, "_pPile->AmountLeaving() == 0") == 1 )

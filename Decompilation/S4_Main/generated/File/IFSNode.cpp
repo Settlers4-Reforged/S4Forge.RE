@@ -20,7 +20,7 @@ class IFSNode *  IFSNode::GetChild(int a2) {
 
 // address=[0x135e0c0]
 // Decompiled from void __thiscall IFSNode::Orphan(IFSNode *this, struct IFSNode *a2)
-void  IFSNode::Orphan(class IFSNode *) {
+void  IFSNode::Orphan(class IFSNode * a2) {
   
   ;
 }

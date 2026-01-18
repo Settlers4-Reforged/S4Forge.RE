@@ -18,7 +18,7 @@ public:
     static int __cdecl FindBoardingLocation(int a1, int a2, struct SBoardingInfo & a3);
 
     // address=[0x159e8f0]
-    virtual void  FillDialog(bool);
+    virtual void  FillDialog(bool a2);
 
     // address=[0x159e940]
     virtual void  Unload(void);

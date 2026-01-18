@@ -113,7 +113,7 @@ void __cdecl CDebugFkt::SetDebugString(class String const & a1) {
 
 // address=[0x134f570]
 // Decompiled from void __cdecl CDebugFkt::SetFrameCounter(  float a1,  float a2,  float a3,  float a4,  float a5,  float a6,  float a7,  unsigned int a8)
-void __cdecl CDebugFkt::SetFrameCounter(float,float,float,float,float,float,float,unsigned int) {
+void __cdecl CDebugFkt::SetFrameCounter(float a1, float a2, float a3, float a4, float a5, float a6, float a7, unsigned int a8) {
   
   int v8; // [esp+40h] [ebp-458h]
   int v9; // [esp+48h] [ebp-450h]

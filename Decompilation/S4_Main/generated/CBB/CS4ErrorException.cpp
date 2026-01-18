@@ -4,7 +4,7 @@
 
 // address=[0x1481190]
 // Decompiled from CS4ErrorException *__thiscall CS4ErrorException::CS4ErrorException(  CS4ErrorException *this,  const struct CErrorMessageId *a2)
- CS4ErrorException::CS4ErrorException(class CErrorMessageId const &) {
+ CS4ErrorException::CS4ErrorException(class CErrorMessageId const & a2) {
   
   CBBException::CBBException(this);
   *(_DWORD *)this = &CS4ErrorException::_vftable_;

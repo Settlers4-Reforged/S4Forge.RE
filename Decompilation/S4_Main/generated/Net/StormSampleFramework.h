@@ -6,7 +6,7 @@
 class StormSampleFramework : public SampleFrameworkApplication {
 public:
     // address=[0x1683070]
-     StormSampleFramework(class StormManager &,bool);
+     StormSampleFramework(class StormManager & a2, bool a3);
 
     // address=[0x1685010]
     virtual  ~StormSampleFramework(void);

@@ -6,7 +6,7 @@
 class CGfxManager {
 public:
     // address=[0x1361470]
-     CGfxManager(bool,bool,bool);
+     CGfxManager(bool a2, bool a3, bool a4);
 
     // address=[0x1361660]
      ~CGfxManager(void);
@@ -30,7 +30,7 @@ public:
     void  GetObjectGfxInfo(struct SGfxObjectInfo & a2, unsigned int a3, unsigned int a4, unsigned int a5);
 
     // address=[0x13621a0]
-    unsigned int  GetObjectFirstJob(unsigned int);
+    unsigned int  GetObjectFirstJob(unsigned int a2);
 
     // address=[0x1362210]
     void  GetSettlerGfxInfo(struct SGfxObjectInfo & a2, unsigned int a3, unsigned int a4, unsigned int a5, unsigned int a6);
@@ -51,13 +51,13 @@ public:
     void  GetVehicleGfxInfo(struct SGfxObjectInfo & a2, unsigned int a3, unsigned int a4, unsigned int a5, unsigned int a6, unsigned int a7, unsigned int a8);
 
     // address=[0x1362d50]
-    unsigned int  GetVehicleFirstJob(unsigned int,unsigned int);
+    unsigned int  GetVehicleFirstJob(unsigned int a2, unsigned int a3);
 
     // address=[0x1362dc0]
     void  GetAnimalGfxInfo(struct SGfxObjectInfo & a2, unsigned int a3, unsigned int a4, unsigned int a5);
 
     // address=[0x1362fc0]
-    unsigned int  GetAnimalFirstJob(unsigned int);
+    unsigned int  GetAnimalFirstJob(unsigned int a2);
 
     // address=[0x1363030]
     void  GetEffectGfxInfo(struct SGfxObjectInfo & a2, unsigned int a3, unsigned int a4, unsigned int a5);

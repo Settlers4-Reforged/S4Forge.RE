@@ -9,7 +9,7 @@ public:
      SBUILDINFODATA(struct SBUILDINFODATA && a2);
 
     // address=[0x13458f0]
-     SBUILDINFODATA(struct SBUILDINFODATA const &);
+     SBUILDINFODATA(struct SBUILDINFODATA const & a2);
 
     // address=[0x13459a0]
      SBUILDINFODATA(void);

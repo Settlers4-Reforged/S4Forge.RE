@@ -4,7 +4,7 @@
 
 // address=[0x12fd090]
 // Decompiled from unsigned int __cdecl CAIAgent::ExecuteResult(unsigned int a1, unsigned int a2)
-unsigned int __cdecl CAIAgent::ExecuteResult(unsigned int,unsigned int) {
+unsigned int __cdecl CAIAgent::ExecuteResult(unsigned int a1, unsigned int a2) {
   
   return a2 | (a1 << 12);
 }
@@ -12,7 +12,7 @@ unsigned int __cdecl CAIAgent::ExecuteResult(unsigned int,unsigned int) {
 
 // address=[0x12fd530]
 // Decompiled from void __thiscall CAIAgent::ProcessEvent(CAIAgent *this, const struct CAIEvent *a2)
-void  CAIAgent::ProcessEvent(class CAIEvent const &) {
+void  CAIAgent::ProcessEvent(class CAIEvent const & a2) {
   
   ;
 }
@@ -29,7 +29,7 @@ void  CAIAgent::UpdateScheduleTimeIfLess(unsigned int a2) {
 
 // address=[0x12fee10]
 // Decompiled from CAIAgent *__thiscall CAIAgent::CAIAgent(CAIAgent *this, const char *a2)
- CAIAgent::CAIAgent(char const *) {
+ CAIAgent::CAIAgent(char const * a2) {
   
   *(_DWORD *)this = &CAIAgent::_vftable_;
   *((_DWORD *)this + 8) = a2;

@@ -9,7 +9,7 @@ public:
     virtual bool  LocalLoadHJBGfxFileIfNecessary(void);
 
     // address=[0x15745a0]
-    virtual bool  StaticCheckHJBCommand(char const *);
+    virtual bool  StaticCheckHJBCommand(char const * a2);
 
     // address=[0x1574630]
     virtual bool  StaticCheckHJBPlayerName(std::wstring const & a1);

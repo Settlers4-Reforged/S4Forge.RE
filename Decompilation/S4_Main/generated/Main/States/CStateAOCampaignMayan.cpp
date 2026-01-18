@@ -18,7 +18,7 @@ class CGameState * __cdecl CStateAOCampaignMayan::DynamicCreateFunc(void * a1) {
 
 // address=[0x149fa70]
 // Decompiled from CStateAOCampaignMayan *__thiscall CStateAOCampaignMayan::CStateAOCampaignMayan(CStateAOCampaignMayan *this, void *a2)
- CStateAOCampaignMayan::CStateAOCampaignMayan(void *) {
+ CStateAOCampaignMayan::CStateAOCampaignMayan(void * a2) {
   
   CGuiGameState::CGuiGameState(this);
   *(_DWORD *)this = &CStateAOCampaignMayan::_vftable_;

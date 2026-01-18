@@ -18,7 +18,7 @@ class CGameState * __cdecl CStateMD2Briefing::DynamicCreateFunc(void * a1) {
 
 // address=[0x14c3150]
 // Decompiled from CStateMD2Briefing *__thiscall CStateMD2Briefing::CStateMD2Briefing(CStateMD2Briefing *this, void *a2)
- CStateMD2Briefing::CStateMD2Briefing(void *) {
+ CStateMD2Briefing::CStateMD2Briefing(void * a2) {
   
   int v3; // [esp+4h] [ebp-14h]
 

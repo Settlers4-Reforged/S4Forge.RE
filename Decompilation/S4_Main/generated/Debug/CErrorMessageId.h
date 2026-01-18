@@ -9,7 +9,7 @@ public:
      CErrorMessageId(char const * Str1);
 
     // address=[0x1481160]
-     CErrorMessageId(class CErrorMessageId const &);
+     CErrorMessageId(class CErrorMessageId const & a2);
 
     // address=[0x1481180]
     int  GetId(void)const;

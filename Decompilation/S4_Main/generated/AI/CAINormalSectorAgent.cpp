@@ -4,7 +4,7 @@
 
 // address=[0x1300fe0]
 // Decompiled from CAINormalSectorAgent *__thiscall CAINormalSectorAgent::CAINormalSectorAgent(CAINormalSectorAgent *this, const char *a2)
- CAINormalSectorAgent::CAINormalSectorAgent(char const *) {
+ CAINormalSectorAgent::CAINormalSectorAgent(char const * a2) {
   
   CAIAgent::CAIAgent(this, a2);
   *(_DWORD *)this = &CAINormalSectorAgent::_vftable_;

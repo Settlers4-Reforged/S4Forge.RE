@@ -61,7 +61,7 @@ void  CConfigVar::SetValue(int a2) {
 
 // address=[0x12fd6b0]
 // Decompiled from void __thiscall CConfigVar::SetValue(CConfigVar *this, float a2)
-void  CConfigVar::SetValue(float) {
+void  CConfigVar::SetValue(float a2) {
   
   ;
 }
@@ -69,7 +69,7 @@ void  CConfigVar::SetValue(float) {
 
 // address=[0x12fd6c0]
 // Decompiled from void __thiscall CConfigVar::SetValue(CConfigVar *this, const char *a2)
-void  CConfigVar::SetValue(char const *) {
+void  CConfigVar::SetValue(char const * a2) {
   
   ;
 }

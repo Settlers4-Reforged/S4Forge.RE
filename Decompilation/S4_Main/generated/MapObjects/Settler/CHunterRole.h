@@ -58,7 +58,7 @@ private:
     void  HarvestDeadAnimal(class CSettler * a2);
 
     // address=[0x1577f80]
-    bool  AreWeChasing(class CSettler *);
+    bool  AreWeChasing(class CSettler * a2);
 
     // address=[0x1578010]
     int  GetVictimPosition(void);

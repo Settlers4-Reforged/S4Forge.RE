@@ -9,7 +9,7 @@ public:
      CAIAgentSquads(void);
 
     // address=[0x13071e0]
-    virtual unsigned int  Execute(unsigned int,unsigned int);
+    virtual unsigned int  Execute(unsigned int a2, unsigned int a3);
 
     // address=[0x1309360]
     virtual  ~CAIAgentSquads(void);

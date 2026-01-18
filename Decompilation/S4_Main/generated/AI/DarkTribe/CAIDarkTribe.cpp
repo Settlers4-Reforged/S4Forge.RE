@@ -6,19 +6,17 @@
 // Decompiled from CAIDarkTribe *__thiscall CAIDarkTribe::CAIDarkTribe(CAIDarkTribe *this, int a2)
  CAIDarkTribe::CAIDarkTribe(int a2) {
   
-  int v2; // ecx
-  Squares *v3; // eax
-  int v4; // edx
-  Squares *v5; // eax
+  int v2; // eax
+  int v3; // eax
 
   IAIDarkTribeEcoAI::IAIDarkTribeEcoAI(this);
-  *(_DWORD *)this = CAIDarkTribe::_vftable_;
+  *(_DWORD *)this = &CAIDarkTribe::_vftable_;
   CAIDarkTribe::SAIDTUD::SAIDTUD((CAIDarkTribe *)((char *)this + 40));
   memset((char *)this + 4, 0, 0x24u);
-  v3 = (Squares *)CWorldManager::Width(v2);
-  *((_DWORD *)this + 2) = Squares::XYToVW(v3);
-  v5 = (Squares *)CWorldManager::Height(this, v4);
-  *((_DWORD *)this + 3) = Squares::XYToVW(v5);
+  v2 = CWorldManager::Width();
+  *((_DWORD *)this + 2) = Squares::XYToVW(v2);
+  v3 = CWorldManager::Height();
+  *((_DWORD *)this + 3) = Squares::XYToVW(v3);
   *((_DWORD *)this + 1) = a2;
   *((_DWORD *)this + 8) = 1;
   g_pAIDarkTribe = (int)this;
@@ -1668,7 +1666,7 @@ bool  CAIDarkTribe::IsPureDarkLandAround(int a2, int a3) {
 
 // address=[0x1332670]
 // Decompiled from bool __thiscall CAIDarkTribe::HasChangeableLand(CAIDarkTribe *this, const struct CAIResourceData *a2)
-bool  CAIDarkTribe::HasChangeableLand(class CAIResourceData const &) {
+bool  CAIDarkTribe::HasChangeableLand(class CAIResourceData const & a2) {
   
   if ( (CAIResourceData::Flags1(a2) & 1) == 0 )
     return 0;

@@ -16,7 +16,7 @@ struct lua_State *  CLua::ActivateScriptingEnvironment(void) {
 void  CLua::BeginBlock(void) {
   
   lua_state = *this;
-  return j__lua_beginblock(this);
+  return lua_beginblock(this);
 }
 
 
@@ -48,7 +48,7 @@ void  CLua::CallFunction(char const * Str) {
   if ( Str )
   {
     lua_state = *this;
-    v3 = j__lua_getglobal(Str);
+    v3 = lua_getglobal(Str);
     if ( j__lua_isfunction(v3) )
     {
       return j__lua_callfunction(v3);
@@ -104,8 +104,8 @@ void  CLua::CreateTable(char const * Str) {
     __debugbreak();
   }
   lua_state = *this;
-  v2 = j__lua_createtable();
-  j__lua_pushobject(v2);
+  v2 = lua_createtable();
+  lua_pushobject(v2);
   return j__lua_setglobal(Str);
 }
 
@@ -115,7 +115,7 @@ void  CLua::CreateTable(char const * Str) {
 void  CLua::EndBlock(void) {
   
   lua_state = *this;
-  return j__lua_endblock(this);
+  return lua_endblock(this);
 }
 
 
@@ -151,7 +151,7 @@ unsigned int  CLua::GetGlobal(char const * Str) {
     __debugbreak();
   }
   lua_state = *this;
-  return j__lua_getglobal(Str);
+  return lua_getglobal(Str);
 }
 
 
@@ -225,8 +225,8 @@ bool  CLua::IsNil(char const * Str) {
   int v3; // [esp+0h] [ebp-Ch]
 
   lua_state = *this;
-  v3 = j__lua_getglobal(Str);
-  return j__lua_isnil(v3) != 0;
+  v3 = lua_getglobal(Str);
+  return lua_isnil(v3) != 0;
 }
 
 
@@ -235,7 +235,7 @@ bool  CLua::IsNil(char const * Str) {
 void  CLua::PushInt(int a2) {
   
   lua_state = *this;
-  return j__lua_pushnumber(COERCE__INT64((double)a2));
+  return lua_pushnumber(COERCE__INT64((double)a2));
 }
 
 
@@ -386,7 +386,7 @@ bool  CLua::ExecuteString(char const * Str) {
 void  CLua::ExportFunction(void (__cdecl*)(void) a2, char const * Str) {
   
   lua_state = *this;
-  j__lua_pushcclosure(a2, 0);
+  lua_pushcclosure(a2, 0);
   return j__lua_setglobal(Str);
 }
 
@@ -399,21 +399,21 @@ void  CLua::ExportTableFunction(char const * a2, void (__cdecl*)(void) a3, char 
   int v6; // [esp+4h] [ebp-4h]
 
   lua_state = *this;
-  j__lua_beginblock(this);
-  v6 = j__lua_getglobal(a2);
-  if ( j__lua_isnil(v6) )
+  lua_beginblock(this);
+  v6 = lua_getglobal(a2);
+  if ( lua_isnil(v6) )
   {
-    v6 = j__lua_createtable();
-    j__lua_pushobject(v6);
+    v6 = lua_createtable();
+    lua_pushobject(v6);
     j__lua_setglobal(a2);
   }
   if ( !j__lua_istable(v6) && BBSupportDbgReport(2, "Script\\Lua.cpp", 253, "lua_istable(TableObj)") == 1 )
     __debugbreak();
-  j__lua_pushobject(v6);
-  j__lua_pushstring(Str);
-  j__lua_pushcclosure(a3, 0);
+  lua_pushobject(v6);
+  lua_pushstring(Str);
+  lua_pushcclosure(a3, 0);
   j__lua_settable();
-  return j__lua_endblock(v5);
+  return lua_endblock(v5);
 }
 
 
@@ -475,21 +475,21 @@ void  CLua::ExportTableVar(char const * a2, char const * Str, double a4) {
   if ( !Str && BBSupportDbgReport(2, "Script\\Lua.cpp", 324, "_pVarName != NULL") == 1 )
     __debugbreak();
   lua_state = *this;
-  j__lua_beginblock(this);
-  v7 = j__lua_getglobal(a2);
-  if ( j__lua_isnil(v7) )
+  lua_beginblock(this);
+  v7 = lua_getglobal(a2);
+  if ( lua_isnil(v7) )
   {
-    v7 = j__lua_createtable();
-    j__lua_pushobject(v7);
+    v7 = lua_createtable();
+    lua_pushobject(v7);
     j__lua_setglobal(a2);
   }
   if ( !j__lua_istable(v7) && BBSupportDbgReport(2, "Script\\Lua.cpp", 340, "lua_istable(TableObj)") == 1 )
     __debugbreak();
-  j__lua_pushobject(v7);
-  j__lua_pushstring(Str);
-  j__lua_pushnumber(a4);
+  lua_pushobject(v7);
+  lua_pushstring(Str);
+  lua_pushnumber(a4);
   j__lua_settable();
-  return j__lua_endblock(v6);
+  return lua_endblock(v6);
 }
 
 
@@ -551,7 +551,7 @@ void  CLua::ExportGlobalVar(char const * Str, double a3) {
   if ( !Str )
     return result;
   lua_state = *this;
-  j__lua_pushnumber(a3);
+  lua_pushnumber(a3);
   return j__lua_setglobal(Str);
 }
 
@@ -581,16 +581,16 @@ void __cdecl CLua::Push(enum EScriptType a1, ... a2) {
       case 0:
         v9 += 4;
         v7 = *((_DWORD *)v9 - 1);
-        j__lua_pushnumber(COERCE__INT64((double)v7));
+        lua_pushnumber(COERCE__INT64((double)v7));
         break;
       case 1:
         v9 += 4;
         v6 = *((float *)v9 - 1);
-        j__lua_pushnumber(COERCE__INT64(v6));
+        lua_pushnumber(COERCE__INT64(v6));
         break;
       case 2:
         v9 += 8;
-        j__lua_pushnumber(*((_QWORD *)v9 - 1));
+        lua_pushnumber(*((_QWORD *)v9 - 1));
         break;
       case 3:
         v9 += 4;
@@ -600,7 +600,7 @@ void __cdecl CLua::Push(enum EScriptType a1, ... a2) {
       case 4:
         v9 += 4;
         Str = (char *)*((_DWORD *)v9 - 1);
-        j__lua_pushstring(Str);
+        lua_pushstring(Str);
         break;
       case 5:
         j__lua_pushnil();
@@ -720,13 +720,13 @@ void  CLua::DbgDumpTable(char const * Str) {
   int v4; // [esp+0h] [ebp-8h]
 
   lua_state = *this;
-  j__lua_beginblock(v3);
-  v4 = j__lua_getglobal(Str);
+  lua_beginblock(v3);
+  v4 = lua_getglobal(Str);
   if ( j__lua_istable(v4) )
   {
     CLua::s_pLua = (int)this;
-    j__lua_pushobject(v4);
-    j__lua_pushcclosure(CLua::scrDbgDumpTableEntry, 0);
+    lua_pushobject(v4);
+    lua_pushcclosure(CLua::scrDbgDumpTableEntry, 0);
     CLua::CallFunction(this, "foreach");
     CLua::s_pLua = 0;
   }
@@ -734,7 +734,7 @@ void  CLua::DbgDumpTable(char const * Str) {
   {
     BBSupportTracePrintF(0, "CLua::DbgDumpTableDbg(): Invalid table!");
   }
-  return j__lua_endblock(v4);
+  return lua_endblock(v4);
 }
 
 
@@ -786,7 +786,7 @@ void  CLua::GetString(int a2, std::string & a3) {
 void  CLua::PushDouble(double a2) {
   
   lua_state = *this;
-  return j__lua_pushnumber(a2);
+  return lua_pushnumber(a2);
 }
 
 
@@ -804,7 +804,7 @@ bool  CLua::IsFunction(unsigned int a2) {
 int  CLua::Lock(unsigned int a2) {
   
   lua_state = *this;
-  j__lua_pushobject(a2);
+  lua_pushobject(a2);
   return j__lua_ref(1);
 }
 
@@ -860,16 +860,16 @@ int  CLua::CountTableEntries(char const * Str) {
   int v4; // [esp+4h] [ebp-4h]
 
   lua_state = *this;
-  j__lua_beginblock(this);
+  lua_beginblock(this);
   CLua::s_iTableEntryCount = 0;
-  v4 = j__lua_getglobal(Str);
+  v4 = lua_getglobal(Str);
   if ( j__lua_istable(v4) )
   {
-    j__lua_pushobject(v4);
-    j__lua_pushcclosure(CLua::scrIncTableEntryCount, 0);
+    lua_pushobject(v4);
+    lua_pushcclosure(CLua::scrIncTableEntryCount, 0);
     CLua::CallFunction(v3, "foreach");
   }
-  j__lua_endblock(v3);
+  lua_endblock(v3);
   return CLua::s_iTableEntryCount;
 }
 

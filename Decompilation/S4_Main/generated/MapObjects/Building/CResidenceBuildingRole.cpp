@@ -156,12 +156,7 @@ void  CResidenceBuildingRole::LogicUpdate(class CBuilding * a2) {
           {
             v16 = IEntity::ID();
             v6 = IEntity::OwnerId((unsigned __int8 *)a2);
-            (*(void (__thiscall **)(void *, int, int, int, _DWORD))(*(_DWORD *)off_3D7A3D8 + 44))(
-              off_3D7A3D8,
-              8,
-              v6,
-              v16,
-              0);
+            (*(void (__thiscall **)(void *, int, int, int, _DWORD))(*(_DWORD *)g_pAI + 44))(g_pAI, 8, v6, v16, 0);
             v7 = IEntity::ID();
             BBSupportTracePrintF(0, "Residence: last settler left the buiding %u", v7);
             LOBYTE(LocalPlayerId) = IEntity::IsSelected((IEntity *)a2);
@@ -272,7 +267,7 @@ void  CResidenceBuildingRole::Init(class CBuilding * a2) {
       *((_BYTE *)this + 380) = *(_DWORD *)(*((_DWORD *)this + 94) + 496) + 1;
       v7 = IEntity::ID();
       v5 = IEntity::OwnerId((unsigned __int8 *)a2);
-      (*(void (__thiscall **)(void *, int, int, int, _DWORD))(*(_DWORD *)off_3D7A3D8 + 44))(off_3D7A3D8, 8, v5, v7, 0);
+      (*(void (__thiscall **)(void *, int, int, int, _DWORD))(*(_DWORD *)g_pAI + 44))(g_pAI, 8, v5, v7, 0);
     }
   }
   CEcoSectorMgr::UpdateStrikeSettlers(g_cESMgr);
@@ -399,7 +394,7 @@ void  CResidenceBuildingRole::Store(std::ostream & a2) {
 
 // address=[0x14fd240]
 // Decompiled from void __thiscall CResidenceBuildingRole::ConvertEventIntoGoal(  CResidenceBuildingRole *this,  struct CBuilding *a2,  struct CEntityEvent *a3)
-void  CResidenceBuildingRole::ConvertEventIntoGoal(class CBuilding *,class CEntityEvent *) {
+void  CResidenceBuildingRole::ConvertEventIntoGoal(class CBuilding * a2, class CEntityEvent * a3) {
   
   ;
 }

@@ -1126,12 +1126,7 @@ int  CSettlerMgr::AddSettler(int posX, int posY, int player, int settlerType, in
     {
       CSettlerMgr::AttachSettler(this, pNewSettler);
       if ( a6 > 0 )
-        (*(void (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)off_3D7A3D8 + 44))(
-          off_3D7A3D8,
-          20,
-          player,
-          v27,
-          a6);
+        (*(void (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)g_pAI + 44))(g_pAI, 20, player, v27, a6);
     }
     CSettlerMgr::IncNumberOfSettler(this, player, settlerType);
     v13 = v27;
@@ -2268,7 +2263,7 @@ void __cdecl CSettlerMgr::FillSpecialistMenu(class CInfoExchange * a1, bool a2, 
 
 // address=[0x1584870]
 // Decompiled from void __thiscall CSettlerMgr::Store(CSettlerMgr *this, struct S4::CMapFile *a2)
-void  CSettlerMgr::Store(class S4::CMapFile &) {
+void  CSettlerMgr::Store(class S4::CMapFile & a2) {
   
   std::strstreambuf *v2; // eax
   void *v3; // eax
@@ -2350,7 +2345,7 @@ void  CSettlerMgr::Store(class S4::CMapFile &) {
 
 // address=[0x1584c80]
 // Decompiled from void __thiscall CSettlerMgr::Load(CSettlerMgr *this, struct S4::CMapFile *a2)
-void  CSettlerMgr::Load(class S4::CMapFile &) {
+void  CSettlerMgr::Load(class S4::CMapFile & a2) {
   
   int v2; // [esp+0h] [ebp-100h] BYREF
   _DWORD v3[44]; // [esp+10h] [ebp-F0h] BYREF

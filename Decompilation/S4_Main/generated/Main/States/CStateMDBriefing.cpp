@@ -18,7 +18,7 @@ class CGameState * __cdecl CStateMDBriefing::DynamicCreateFunc(void * a1) {
 
 // address=[0x14c4e40]
 // Decompiled from CStateMDBriefing *__thiscall CStateMDBriefing::CStateMDBriefing(CStateMDBriefing *this, void *a2)
- CStateMDBriefing::CStateMDBriefing(void *) {
+ CStateMDBriefing::CStateMDBriefing(void * a2) {
   
   CGuiGameState::CGuiGameState(this);
   *(_DWORD *)this = &CStateMDBriefing::_vftable_;

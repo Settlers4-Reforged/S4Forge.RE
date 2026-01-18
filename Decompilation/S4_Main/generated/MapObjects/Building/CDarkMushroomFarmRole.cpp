@@ -324,7 +324,7 @@ bool  CDarkMushroomFarmRole::SettlerEnter(class CBuilding * a2, int a3) {
 
 // address=[0x1507180]
 // Decompiled from void __thiscall CDarkMushroomFarmRole::FillDialog(CDarkMushroomFarmRole *this, struct CBuilding *a2, bool a3)
-void  CDarkMushroomFarmRole::FillDialog(class CBuilding *,bool) {
+void  CDarkMushroomFarmRole::FillDialog(class CBuilding * a2, bool a3) {
   
   ;
 }
@@ -663,7 +663,7 @@ struct CBuildingInfoMgr::SBuildingInfos const *  CDarkMushroomFarmRole::GetBuild
 
 // address=[0x1507930]
 // Decompiled from bool __thiscall CDarkMushroomFarmRole::IsDoorNeighborAndEnsignPosGreen(  CDarkMushroomFarmRole *this,  struct CBuilding *a2)
-bool  CDarkMushroomFarmRole::IsDoorNeighborAndEnsignPosGreen(class CBuilding *) {
+bool  CDarkMushroomFarmRole::IsDoorNeighborAndEnsignPosGreen(class CBuilding * a2) {
   
   int v3; // eax
   int v4; // eax
@@ -697,7 +697,7 @@ bool  CDarkMushroomFarmRole::IsDoorNeighborAndEnsignPosGreen(class CBuilding *) 
 
 // address=[0x14fd1e0]
 // Decompiled from void __thiscall CDarkMushroomFarmRole::ConvertEventIntoGoal(  CDarkMushroomFarmRole *this,  struct CBuilding *a2,  struct CEntityEvent *a3)
-void  CDarkMushroomFarmRole::ConvertEventIntoGoal(class CBuilding *,class CEntityEvent *) {
+void  CDarkMushroomFarmRole::ConvertEventIntoGoal(class CBuilding * a2, class CEntityEvent * a3) {
   
   ;
 }

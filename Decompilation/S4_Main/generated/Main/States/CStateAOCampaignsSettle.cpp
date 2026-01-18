@@ -18,7 +18,7 @@ class CGameState * __cdecl CStateAOCampaignsSettle::DynamicCreateFunc(void * a1)
 
 // address=[0x14a0b70]
 // Decompiled from CStateAOCampaignsSettle *__thiscall CStateAOCampaignsSettle::CStateAOCampaignsSettle(  CStateAOCampaignsSettle *this,  void *a2)
- CStateAOCampaignsSettle::CStateAOCampaignsSettle(void *) {
+ CStateAOCampaignsSettle::CStateAOCampaignsSettle(void * a2) {
   
   CGuiGameState::CGuiGameState(this);
   *(_DWORD *)this = &CStateAOCampaignsSettle::_vftable_;

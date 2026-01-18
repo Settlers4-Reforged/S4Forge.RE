@@ -31,13 +31,13 @@ public:
 
 protected:
     // address=[0x2fd20e0]
-    bool  InsertNode(class IA_ColorReduction_Node *,class IA_ColorReduction_Color &);
+    bool  InsertNode(class IA_ColorReduction_Node * a2, class IA_ColorReduction_Color & a3);
 
     // address=[0x2fd21d0]
     class IA_ColorReduction_Node *  MakeNode(int a2);
 
     // address=[0x2fd2290]
-    void  DeleteNode(class IA_ColorReduction_Node *);
+    void  DeleteNode(class IA_ColorReduction_Node * a2);
 
     // address=[0x2fd2350]
     void  MakeReducible(class IA_ColorReduction_Node * a2);
@@ -49,7 +49,7 @@ protected:
     class IA_ColorReduction_Node *  GetReducible(void);
 
     // address=[0x2fd2560]
-    void  FillPalette(class IA_ColorReduction_Node *,unsigned int *);
+    void  FillPalette(class IA_ColorReduction_Node * a2, unsigned int * a3);
 
     // address=[0x2fd2610]
     int  QuantizeColor(class IA_ColorReduction_Node * a2, class IA_ColorReduction_Color & a3);

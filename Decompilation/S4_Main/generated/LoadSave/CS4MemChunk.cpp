@@ -174,7 +174,7 @@ unsigned int  CS4MemChunk::LoadUnsigned32(void) {
 
 // address=[0x13ece40]
 // Decompiled from unsigned int __thiscall CS4MemChunk::LoadUnsigned32(CS4MemChunk *this, unsigned int a2, unsigned int a3)
-unsigned int  CS4MemChunk::LoadUnsigned32(unsigned int,unsigned int) {
+unsigned int  CS4MemChunk::LoadUnsigned32(unsigned int a2, unsigned int a3) {
   
   int v4; // [esp+4h] [ebp-Ch] BYREF
   int pExceptionObject; // [esp+8h] [ebp-8h] BYREF
@@ -244,7 +244,7 @@ void  CS4MemChunk::SaveSignature(unsigned int a2) {
 
 // address=[0x13ecfa0]
 // Decompiled from unsigned int __thiscall CS4MemChunk::Adler32(CS4MemChunk *this, unsigned int a2)
-unsigned int  CS4MemChunk::Adler32(unsigned int) {
+unsigned int  CS4MemChunk::Adler32(unsigned int a2) {
   
   return Adler32(*((const void **)this + 3), *((_DWORD *)this + 2), a2);
 }
@@ -252,7 +252,7 @@ unsigned int  CS4MemChunk::Adler32(unsigned int) {
 
 // address=[0x13ecfd0]
 // Decompiled from void __cdecl CS4MemChunk::ObjectLoad(struct IS4ChunkObject *a1, const void *a2, unsigned int a3)
-void __cdecl CS4MemChunk::ObjectLoad(class IS4ChunkObject &,void const *,unsigned int) {
+void __cdecl CS4MemChunk::ObjectLoad(class IS4ChunkObject & a1, void const * a2, unsigned int a3) {
   
   _BYTE v3[28]; // [esp+4h] [ebp-28h] BYREF
   int v4; // [esp+28h] [ebp-4h]
@@ -268,7 +268,7 @@ void __cdecl CS4MemChunk::ObjectLoad(class IS4ChunkObject &,void const *,unsigne
 
 // address=[0x13ed050]
 // Decompiled from void __cdecl CS4MemChunk::ObjectSave(struct IS4ChunkObject *a1, void **a2, unsigned int *a3)
-void __cdecl CS4MemChunk::ObjectSave(class IS4ChunkObject &,void * *,unsigned int *) {
+void __cdecl CS4MemChunk::ObjectSave(class IS4ChunkObject & a1, void * * a2, unsigned int * a3) {
   
   _BYTE v3[8]; // [esp+4h] [ebp-28h] BYREF
   unsigned int v4; // [esp+Ch] [ebp-20h]

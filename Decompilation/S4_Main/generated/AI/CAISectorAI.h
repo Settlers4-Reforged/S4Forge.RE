@@ -108,7 +108,7 @@ public:
     void  SetHeadquarterId(int a2);
 
     // address=[0x13260c0]
-    static void __cdecl AwakeAgent(class CAIAgent &);
+    static void __cdecl AwakeAgent(class CAIAgent & a1);
 
 protected:
     // address=[0x131ff50]

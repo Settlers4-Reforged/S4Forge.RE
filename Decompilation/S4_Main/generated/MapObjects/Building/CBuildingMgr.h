@@ -120,10 +120,10 @@ public:
     static void __cdecl FillAddVehicleSideBar(class CInfoExchange * a1, bool a2, int a3);
 
     // address=[0x14f7350]
-    void  Store(class S4::CMapFile &);
+    void  Store(class S4::CMapFile & a2);
 
     // address=[0x14f7890]
-    void  Load(class S4::CMapFile &);
+    void  Load(class S4::CMapFile & a2);
 
     // address=[0x14f7d90]
     void  ChangeOwnerIdOfBuilding(int a2, int a3);

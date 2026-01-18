@@ -602,7 +602,7 @@ void  CEcoSectorMgr::NotifyChangeEcoSector(int a2, int a3, int a4) {
   {
     v31 = 0;
   }
-  (*(void (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)off_3D7A3D8 + 44))(off_3D7A3D8, 12, a2, a3, a4);
+  (*(void (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)g_pAI + 44))(g_pAI, 12, a2, a3, a4);
   if ( a4 )
   {
     if ( a3 )
@@ -787,7 +787,7 @@ void  CEcoSectorMgr::SeparateEconomy(int a2, int a3) {
   UniqueId = CEcoSector::GetUniqueId(v17);
   v12 = CAIEvent::Pack(a2, a3);
   v3 = CEcoSector::Owner(v23);
-  (*(void (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)off_3D7A3D8 + 44))(off_3D7A3D8, 16, v3, v12, UniqueId);
+  (*(void (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)g_pAI + 44))(g_pAI, 16, v3, v12, UniqueId);
   v4 = (CEcoSector *)CEcoSectorMgr::operator[](a3);
   if ( CEcoSector::BuildingSitesWithPrio(v4)
     && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 1104, "g_cESMgr[_iNewEcoSectorId].BuildingSitesWithPrio() == 0") == 1 )
@@ -925,7 +925,7 @@ void  CEcoSectorMgr::ConnectEconomy(int a2, int a3) {
   if ( debug && DEBUG_FLAGS[dword_3F0EC00] )
     BBSupportTracePrintF(0, "CEcoSectorMgr - ConnectEconomy actES %u  delES %u", a2, a3);
   v3 = CEcoSector::Owner(v38);
-  (*(void (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)off_3D7A3D8 + 44))(off_3D7A3D8, 15, v3, a2, a3);
+  (*(void (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)g_pAI + 44))(g_pAI, 15, v3, a2, a3);
   v4 = CEcoSector::BuildingSitesWithPrio(v37);
   CEcoSector::ChangeBuildingSitesWithPrio((CEcoSector *)v38, v4);
   v18 = CEcoSector::NeededPrioDigger(v37);
@@ -1426,7 +1426,7 @@ class CEcoSector * __cdecl CEcoSectorMgr::GetLocalPlayerEcoSectorPtrAtCenter(voi
 
 // address=[0x1443de0]
 // Decompiled from void __thiscall CEcoSectorMgr::Store(CEcoSectorMgr *this, struct S4::CMapFile *a2)
-void  CEcoSectorMgr::Store(class S4::CMapFile &) {
+void  CEcoSectorMgr::Store(class S4::CMapFile & a2) {
   
   std::strstreambuf *v2; // eax
   void *v3; // eax
@@ -2004,7 +2004,7 @@ int  CEcoSectorMgr::NewEcoSector(int a2) {
   v2 = CPlayerManager::PlayerGameData(a2);
   CPlayerGameData::AddEcoSectorId(v2, FreeSlot);
   CEcoSector::GetUniqueId(v4);
-  (*(void (__cdecl **)(int))(*(_DWORD *)off_3D7A3D8 + 44))(13);
+  (*(void (__cdecl **)(int))(*(_DWORD *)g_pAI + 44))(13);
   return FreeSlot;
 }
 
@@ -2052,8 +2052,8 @@ void  CEcoSectorMgr::DeleteEcoSector(int a2) {
   CEcoSectorMgr::DestroyEcoSector(this, a2);
   v3 = CPlayerManager::PlayerGameData(v5);
   CPlayerGameData::DeleteEcoSectorId(v3, a2);
-  return (CEcoSectorMgr *)(*(int (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)off_3D7A3D8 + 44))(
-                            off_3D7A3D8,
+  return (CEcoSectorMgr *)(*(int (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)g_pAI + 44))(
+                            g_pAI,
                             14,
                             v5,
                             a2,

@@ -1140,7 +1140,7 @@ bool  CMilitaryBuildingRole::FirstSettlerEnter(class CBuilding * a2, int a3) {
     {
       v19 = IEntity::ID();
       v5 = IEntity::OwnerId((unsigned __int8 *)a2);
-      (*(void (__thiscall **)(void *, int, int, int, _DWORD))(*(_DWORD *)off_3D7A3D8 + 44))(off_3D7A3D8, 10, v5, v19, 0);
+      (*(void (__thiscall **)(void *, int, int, int, _DWORD))(*(_DWORD *)g_pAI + 44))(g_pAI, 10, v5, v19, 0);
       v17 = IEntity::OwnerId((unsigned __int8 *)a2);
       v6 = IEntity::ID();
       CEvn_Logic::CEvn_Logic((CEvn_Logic *)v38, 0x2BDu, v6, 0, v17, 0, 0);
@@ -1209,7 +1209,7 @@ bool  CMilitaryBuildingRole::FirstSettlerEnter(class CBuilding * a2, int a3) {
       v14 = IEntity::Type((unsigned __int16 *)a2);
       CStatistic::AddCaptureBuilding((CStatistic *)&g_cStatistic, v33, v34, v14);
       v15 = IEntity::ID();
-      (*(void (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)off_3D7A3D8 + 44))(off_3D7A3D8, 3, v33, v15, v34);
+      (*(void (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)g_pAI + 44))(g_pAI, 3, v33, v15, v34);
       v39 = -1;
       CEvn_Logic::~CEvn_Logic(v37);
     }
@@ -1327,7 +1327,7 @@ bool  CMilitaryBuildingRole::SearchAttacker(class CBuilding * a2) {
 
 // address=[0x1510430]
 // Decompiled from void __thiscall CMilitaryBuildingRole::ThrowOut(CMilitaryBuildingRole *this, struct CBuilding *a2)
-void  CMilitaryBuildingRole::ThrowOut(class CBuilding *) {
+void  CMilitaryBuildingRole::ThrowOut(class CBuilding * a2) {
   
   int LastUsedSlot; // [esp+4h] [ebp-Ch]
   bool v4; // [esp+Fh] [ebp-1h]
@@ -1506,7 +1506,7 @@ void  CMilitaryBuildingRole::ThrowOutSettler(class CBuilding * a2, int a3) {
   v9 = IEntity::EntityId((unsigned __int16 *)a2);
   v8 = v13;
   v6 = IEntity::OwnerId((unsigned __int8 *)v15);
-  (*(void (__thiscall **)(void *, int, int, int))(*(_DWORD *)off_3D7A3D8 + 44))(off_3D7A3D8, 21, v6, v8);
+  (*(void (__thiscall **)(void *, int, int, int))(*(_DWORD *)g_pAI + 44))(g_pAI, 21, v6, v8);
   v16 = -1;
   return std::auto_ptr<ISettlerRole>::~auto_ptr<ISettlerRole>(v12);
 }

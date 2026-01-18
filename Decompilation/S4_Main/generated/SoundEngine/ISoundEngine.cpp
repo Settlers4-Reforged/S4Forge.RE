@@ -347,7 +347,7 @@ unsigned int  ISoundEngine::GetDigitalDriver(void) {
 
 // address=[0x2fd5fc0]
 // Decompiled from bool __thiscall ISoundEngine::IsRunning(ISoundEngine *this, unsigned int a2)
-bool  ISoundEngine::IsRunning(unsigned int) {
+bool  ISoundEngine::IsRunning(unsigned int a2) {
   
   if ( !g_pcSoundSystem && BBSupportDbgReport(2, "SoundEngineInterface.cpp", 329, "g_pcSoundSystem") == 1 )
     __debugbreak();

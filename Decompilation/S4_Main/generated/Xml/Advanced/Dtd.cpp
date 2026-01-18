@@ -119,7 +119,7 @@ bool  AdvXMLParser::Dtd::ParsePubidLiteral(class AdvXMLParser::Parser & a2) {
 
 // address=[0x2f24d20]
 // Decompiled from bool __thiscall AdvXMLParser::Dtd::ParseMarkupdecl(AdvXMLParser::Dtd *this, struct AdvXMLParser::Parser *a2)
-bool  AdvXMLParser::Dtd::ParseMarkupdecl(class AdvXMLParser::Parser &) {
+bool  AdvXMLParser::Dtd::ParseMarkupdecl(class AdvXMLParser::Parser & a2) {
   
   return AdvXMLParser::Dtd::ParseElementDecl(this, a2)
       || AdvXMLParser::Dtd::ParseAttlistDecl(this, a2)
@@ -157,7 +157,7 @@ bool  AdvXMLParser::Dtd::ParseElementDecl(class AdvXMLParser::Parser & a2) {
 
 // address=[0x2f24e90]
 // Decompiled from bool __thiscall AdvXMLParser::Dtd::ParseContentspec(AdvXMLParser::Dtd *this, struct AdvXMLParser::Parser *a2)
-bool  AdvXMLParser::Dtd::ParseContentspec(class AdvXMLParser::Parser &) {
+bool  AdvXMLParser::Dtd::ParseContentspec(class AdvXMLParser::Parser & a2) {
   
   if ( AdvXMLParser::Parser::ParseString(a2, "EMPTY") )
     return 1;
@@ -371,7 +371,7 @@ bool  AdvXMLParser::Dtd::ParseAttDef(class AdvXMLParser::Parser & a2) {
 
 // address=[0x2f25490]
 // Decompiled from bool __thiscall AdvXMLParser::Dtd::ParseAttType(AdvXMLParser::Dtd *this, struct AdvXMLParser::Parser *a2)
-bool  AdvXMLParser::Dtd::ParseAttType(class AdvXMLParser::Parser &) {
+bool  AdvXMLParser::Dtd::ParseAttType(class AdvXMLParser::Parser & a2) {
   
   if ( AdvXMLParser::Parser::ParseString(a2, "CDATA") )
     return 1;
@@ -587,7 +587,7 @@ bool  AdvXMLParser::Dtd::ParseNDataDecl(class AdvXMLParser::Parser & a2) {
 
 // address=[0x2f25bd0]
 // Decompiled from bool __thiscall AdvXMLParser::Dtd::ParsePEDef(AdvXMLParser::Dtd *this, struct AdvXMLParser::Parser *a2)
-bool  AdvXMLParser::Dtd::ParsePEDef(class AdvXMLParser::Parser &) {
+bool  AdvXMLParser::Dtd::ParsePEDef(class AdvXMLParser::Parser & a2) {
   
   return AdvXMLParser::Dtd::ParseEntityValue(this, a2) || AdvXMLParser::Dtd::ParseExternalID(this, a2);
 }

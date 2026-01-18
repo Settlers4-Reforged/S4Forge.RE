@@ -6,7 +6,7 @@
 class CAIAgentThieves : public CAINormalSectorAgent {
 public:
     // address=[0x1305810]
-    virtual unsigned int  Execute(unsigned int,unsigned int);
+    virtual unsigned int  Execute(unsigned int a2, unsigned int a3);
 
     // address=[0x1325b30]
      CAIAgentThieves(void);

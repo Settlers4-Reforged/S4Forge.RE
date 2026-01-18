@@ -711,8 +711,8 @@ void  CThiefRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent *
       CSettler::TakeWaitList(a2);
       v30 = IEntity::ID();
       v21 = IEntity::OwnerId((unsigned __int8 *)a2);
-      LOBYTE(v3) = (*(int (__thiscall **)(void *, int, int, int, unsigned int))(*(_DWORD *)off_3D7A3D8 + 44))(
-                     off_3D7A3D8,
+      LOBYTE(v3) = (*(int (__thiscall **)(void *, int, int, int, unsigned int))(*(_DWORD *)g_pAI + 44))(
+                     g_pAI,
                      21,
                      v21,
                      v30,
@@ -799,8 +799,8 @@ void  CThiefRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent *
         v34 = *(unsigned __int16 *)(this + 32);
         v26 = IEntity::ID();
         v16 = IEntity::OwnerId((unsigned __int8 *)a2);
-        LOBYTE(v3) = (*(int (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)off_3D7A3D8 + 44))(
-                       off_3D7A3D8,
+        LOBYTE(v3) = (*(int (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)g_pAI + 44))(
+                       g_pAI,
                        18,
                        v16,
                        v26,
@@ -829,12 +829,7 @@ void  CThiefRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent *
       v37 = *(unsigned __int16 *)(this + 32);
       v29 = IEntity::ID();
       v20 = IEntity::OwnerId((unsigned __int8 *)a2);
-      LOBYTE(v3) = (*(int (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)off_3D7A3D8 + 44))(
-                     off_3D7A3D8,
-                     21,
-                     v20,
-                     v29,
-                     v37);
+      LOBYTE(v3) = (*(int (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)g_pAI + 44))(g_pAI, 21, v20, v29, v37);
       break;
     default:
       v3 = IEntity::FlagBits(a2, EntityFlag_Registered);

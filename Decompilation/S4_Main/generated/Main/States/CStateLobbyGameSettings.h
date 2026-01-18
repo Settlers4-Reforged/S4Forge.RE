@@ -21,7 +21,7 @@ public:
     virtual bool  OnEvent(class CEvn_Event & a2);
 
     // address=[0x14b9490]
-    virtual void  UpdatePlayerList(bool);
+    virtual void  UpdatePlayerList(bool a2);
 
     // address=[0x14b9b30]
     void  PrintChatLine(unsigned short const * String, unsigned short const * Source);

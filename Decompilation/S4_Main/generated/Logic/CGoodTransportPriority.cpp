@@ -90,7 +90,7 @@ void  CGoodTransportPriority::Store(std::ostream & a2) {
 
 // address=[0x1452bf0]
 // Decompiled from CGoodTransportPriority *__thiscall CGoodTransportPriority::CGoodTransportPriority(  CGoodTransportPriority *this,  unsigned __int8 a2)
- CGoodTransportPriority::CGoodTransportPriority(unsigned char) {
+ CGoodTransportPriority::CGoodTransportPriority(unsigned char a2) {
   
   CPersistence::CPersistence(this);
   *(_DWORD *)this = &CGoodTransportPriority::_vftable_;

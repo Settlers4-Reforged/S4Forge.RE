@@ -77,7 +77,7 @@ void * __cdecl CLandAnimal::operator new(unsigned int a1) {
 
 // address=[0x14e1050]
 // Decompiled from void __cdecl CLandAnimal::operator delete(void *a1)
-void __cdecl CLandAnimal::operator delete(void *) {
+void __cdecl CLandAnimal::operator delete(void * a1) {
   
   CAnimalMgr::Dealloc((CAnimalMgr *)&g_cAnimalMgr, a1);
 }

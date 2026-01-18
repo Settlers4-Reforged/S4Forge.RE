@@ -18,7 +18,7 @@ class CGameState * __cdecl CStateLoadType::DynamicCreateFunc(void * a1) {
 
 // address=[0x14b6500]
 // Decompiled from CStateLoadType *__thiscall CStateLoadType::CStateLoadType(CStateLoadType *this, void *a2)
- CStateLoadType::CStateLoadType(void *) {
+ CStateLoadType::CStateLoadType(void * a2) {
   
   CGuiGameState::CGuiGameState(this);
   *(_DWORD *)this = &CStateLoadType::_vftable_;

@@ -10,7 +10,7 @@ enum T_AI_DIFFICULTY_LEVEL __cdecl IAIDifficultyLevels::GetDifficultyLevel(int a
   void *v2; // eax
   int v4; // [esp+0h] [ebp-4h]
 
-  if ( !(*(unsigned __int8 (__thiscall **)(void *, int, int))(*(_DWORD *)off_3D7A3D8 + 40))(off_3D7A3D8, a1, v1) )
+  if ( !(*(unsigned __int8 (__thiscall **)(void *, int, int))(*(_DWORD *)g_pAI + 40))(g_pAI, a1, v1) )
     return 0;
   v2 = (void *)CAIPlayersScriptVars::operator[](a1);
   v4 = CAIPlayerScriptVars::DifficultyLevel(v2);

@@ -18,7 +18,7 @@ class CGameState * __cdecl CStateSlideshow::DynamicCreateFunc(void * a1) {
 
 // address=[0x14ca8f0]
 // Decompiled from CStateSlideshow *__thiscall CStateSlideshow::CStateSlideshow(CStateSlideshow *this, void *a2)
- CStateSlideshow::CStateSlideshow(void *) {
+ CStateSlideshow::CStateSlideshow(void * a2) {
   
   CGameState::CGameState(this);
   *(_DWORD *)this = &CStateSlideshow::_vftable_;

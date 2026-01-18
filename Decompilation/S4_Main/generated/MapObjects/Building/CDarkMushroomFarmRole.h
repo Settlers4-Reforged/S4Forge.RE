@@ -51,7 +51,7 @@ public:
     virtual bool  SettlerEnter(class CBuilding * a2, int a3);
 
     // address=[0x1507180]
-    virtual void  FillDialog(class CBuilding *,bool);
+    virtual void  FillDialog(class CBuilding * a2, bool a3);
 
     // address=[0x1507190]
     bool  HarvestMushroom(class CBuilding * a2);
@@ -82,11 +82,11 @@ public:
 
 protected:
     // address=[0x1507930]
-    bool  IsDoorNeighborAndEnsignPosGreen(class CBuilding *);
+    bool  IsDoorNeighborAndEnsignPosGreen(class CBuilding * a2);
 
 private:
     // address=[0x14fd1e0]
-    virtual void  ConvertEventIntoGoal(class CBuilding *,class CEntityEvent *);
+    virtual void  ConvertEventIntoGoal(class CBuilding * a2, class CEntityEvent * a3);
 
     // address=[0x14fde10]
     virtual bool  TryCrushBuilding(void);

@@ -93,7 +93,7 @@ public:
     unsigned int  ChangePlaylist(int a2, int a3);
 
     // address=[0x2fdb440]
-    void  PlaylistTitleEnded(struct _STREAM *);
+    void  PlaylistTitleEnded(struct _STREAM * a2);
 
     // address=[0x2fdb5b0]
     void  SampleEnded(struct _SAMPLE * a2);
@@ -114,7 +114,7 @@ public:
     int  GetHWFormat(void);
 
     // address=[0x2fdb7d0]
-    bool  IsRunning(unsigned int);
+    bool  IsRunning(unsigned int a2);
 
     // address=[0x2fdb820]
     int  EnumSoundCards(void);

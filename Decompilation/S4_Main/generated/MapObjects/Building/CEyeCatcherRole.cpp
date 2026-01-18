@@ -85,7 +85,7 @@ class CEyeCatcherRole * __cdecl CEyeCatcherRole::Load(std::istream & a1) {
 
 // address=[0x150a110]
 // Decompiled from void __thiscall CEyeCatcherRole::LogicUpdate(CEyeCatcherRole *this, struct CBuilding *a2)
-void  CEyeCatcherRole::LogicUpdate(class CBuilding *) {
+void  CEyeCatcherRole::LogicUpdate(class CBuilding * a2) {
   
   ;
 }
@@ -233,7 +233,7 @@ void  CEyeCatcherRole::Store(std::ostream & a2) {
 
 // address=[0x14fd1f0]
 // Decompiled from void __thiscall CEyeCatcherRole::ConvertEventIntoGoal(  CEyeCatcherRole *this,  struct CBuilding *a2,  struct CEntityEvent *a3)
-void  CEyeCatcherRole::ConvertEventIntoGoal(class CBuilding *,class CEntityEvent *) {
+void  CEyeCatcherRole::ConvertEventIntoGoal(class CBuilding * a2, class CEntityEvent * a3) {
   
   ;
 }

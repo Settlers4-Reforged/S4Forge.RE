@@ -6,7 +6,7 @@
 class CGuiEventHandler : public IEvn_Handle {
 public:
     // address=[0x139da10]
-     CGuiEventHandler(bool);
+     CGuiEventHandler(bool a2);
 
     // address=[0x139daf0]
     virtual  ~CGuiEventHandler(void);
@@ -40,10 +40,10 @@ private:
     void  HandleMsgCloseAllDialogs(void);
 
     // address=[0x139d5c0]
-    void  HandleMsgRefreshDialog(class CEvn_Event &);
+    void  HandleMsgRefreshDialog(class CEvn_Event & a2);
 
     // address=[0x139d830]
-    void  HandleMsgRefreshSettingsDialog(class CEvn_Event &);
+    void  HandleMsgRefreshSettingsDialog(class CEvn_Event & a2);
 
     // address=[0x139d8b0]
     void  ResetMainMenu(void);

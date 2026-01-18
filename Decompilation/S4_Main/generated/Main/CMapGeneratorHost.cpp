@@ -181,7 +181,7 @@ void  CMapGeneratorHost::SetPlayerStartPosition(int a2, int a3, int a4) {
 
 // address=[0x1498b50]
 // Decompiled from CMapGeneratorHost *__thiscall CMapGeneratorHost::CMapGeneratorHost(  CMapGeneratorHost *this,  const struct SRandomMapParams *a2)
- CMapGeneratorHost::CMapGeneratorHost(struct SRandomMapParams const &) {
+ CMapGeneratorHost::CMapGeneratorHost(struct SRandomMapParams const & a2) {
   
   IMapGeneratorHost::IMapGeneratorHost(this);
   *(_DWORD *)this = &CMapGeneratorHost::_vftable_;

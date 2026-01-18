@@ -109,7 +109,7 @@
 
 // address=[0x13237a0]
 // Decompiled from void __thiscall CAINormalSectorAI::Load(CAINormalSectorAI *this, struct IS4Chunk *a2)
-void  CAINormalSectorAI::Load(class IS4Chunk &) {
+void  CAINormalSectorAI::Load(class IS4Chunk & a2) {
   
   (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 12))(a2, -1517150208);
   (*(void (__thiscall **)(struct IS4Chunk *, int, int))(*(_DWORD *)a2 + 4))(a2, 1, 1);
@@ -599,7 +599,7 @@ int  CAINormalSectorAI::FindTargetForSuicideMission(class CAITaskForce * a2) {
 
 // address=[0x1324930]
 // Decompiled from void __thiscall CAINormalSectorAI::MoveSquadHome(CAINormalSectorAI *this, struct CAITaskForce *a2)
-void  CAINormalSectorAI::MoveSquadHome(class CAITaskForce *) {
+void  CAINormalSectorAI::MoveSquadHome(class CAITaskForce * a2) {
   
   int v2; // eax
 

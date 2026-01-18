@@ -18,7 +18,7 @@ class CGameState * __cdecl CStateLobbyMultiplayerType::DynamicCreateFunc(void * 
 
 // address=[0x14c0a50]
 // Decompiled from CStateLobbyMultiplayerType *__thiscall CStateLobbyMultiplayerType::CStateLobbyMultiplayerType(  CStateLobbyMultiplayerType *this,  void *a2)
- CStateLobbyMultiplayerType::CStateLobbyMultiplayerType(void *) {
+ CStateLobbyMultiplayerType::CStateLobbyMultiplayerType(void * a2) {
   
   CGuiGameState::CGuiGameState(this);
   *(_DWORD *)this = &CStateLobbyMultiplayerType::_vftable_;

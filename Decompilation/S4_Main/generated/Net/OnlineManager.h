@@ -30,7 +30,7 @@ public:
     void  SetFreeSlotCount(int a2);
 
     // address=[0x1616540]
-    void  JoinSession(unsigned __int64 &);
+    void  JoinSession(unsigned __int64 & a2);
 
     // address=[0x16165c0]
     void  LeaveSession(void);
@@ -39,7 +39,7 @@ public:
     void  JoinSessionSucceeded(void);
 
     // address=[0x1616620]
-    void  SetJoinAndDiscoveryOverride(bool);
+    void  SetJoinAndDiscoveryOverride(bool a2);
 
     // address=[0x1616640]
     void  SearchForSessions(void);

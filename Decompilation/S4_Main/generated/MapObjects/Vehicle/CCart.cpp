@@ -815,7 +815,7 @@ bool  CCart::CreateSettlement(void) {
 
 // address=[0x1532030]
 // Decompiled from void __thiscall CCart::ConvertEventIntoGoal(CCart *this, struct CEntityEvent *a2)
-void  CCart::ConvertEventIntoGoal(class CEntityEvent *) {
+void  CCart::ConvertEventIntoGoal(class CEntityEvent * a2) {
   
   if ( *((_DWORD *)a2 + 1) == 9 || *((_DWORD *)a2 + 1) == 7 )
   {

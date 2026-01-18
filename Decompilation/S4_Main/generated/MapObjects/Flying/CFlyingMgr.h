@@ -39,10 +39,10 @@ public:
     int  GetNearestEntity(int a2, int a3, int a4, int a5, int a6);
 
     // address=[0x154fb10]
-    void  Store(class S4::CMapFile &);
+    void  Store(class S4::CMapFile & a2);
 
     // address=[0x154fe90]
-    void  Load(class S4::CMapFile &);
+    void  Load(class S4::CMapFile & a2);
 
     // address=[0x1550170]
     void  Clear(void);

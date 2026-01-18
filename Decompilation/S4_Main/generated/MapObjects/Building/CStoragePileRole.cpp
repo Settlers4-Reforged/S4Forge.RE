@@ -41,7 +41,7 @@ class CStoragePileRole * __cdecl CStoragePileRole::Load(std::istream & a1) {
 
 // address=[0x1561900]
 // Decompiled from void __thiscall CStoragePileRole::Init(CStoragePileRole *this, struct CPile *a2)
-void  CStoragePileRole::Init(class CPile *) {
+void  CStoragePileRole::Init(class CPile * a2) {
   
   IPileRole::Init(this, a2);
   CPile::SetRoleType(a2, 2);

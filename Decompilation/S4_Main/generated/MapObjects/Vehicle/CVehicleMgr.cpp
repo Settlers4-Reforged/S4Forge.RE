@@ -462,7 +462,7 @@ void __cdecl CVehicleMgr::FillVehicleGroupMenu(class CInfoExchange * a1, bool a2
 
 // address=[0x15a9580]
 // Decompiled from void __thiscall CVehicleMgr::Store(CVehicleMgr *this, struct S4::CMapFile *a2)
-void  CVehicleMgr::Store(class S4::CMapFile &) {
+void  CVehicleMgr::Store(class S4::CMapFile & a2) {
   
   std::strstreambuf *v2; // eax
   void *v3; // eax
@@ -539,7 +539,7 @@ void  CVehicleMgr::Store(class S4::CMapFile &) {
 
 // address=[0x15a97e0]
 // Decompiled from void __thiscall CVehicleMgr::Load(CVehicleMgr *this, struct S4::CMapFile *a2)
-void  CVehicleMgr::Load(class S4::CMapFile &) {
+void  CVehicleMgr::Load(class S4::CMapFile & a2) {
   
   int v2; // [esp+0h] [ebp-154h] BYREF
   _DWORD v3[42]; // [esp+10h] [ebp-144h] BYREF

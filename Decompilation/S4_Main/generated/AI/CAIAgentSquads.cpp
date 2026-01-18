@@ -14,7 +14,7 @@
 
 // address=[0x13071e0]
 // Decompiled from unsigned int __thiscall CAIAgentSquads::Execute(CAIAgentSquads *this, unsigned int a2, unsigned int a3)
-unsigned int  CAIAgentSquads::Execute(unsigned int,unsigned int) {
+unsigned int  CAIAgentSquads::Execute(unsigned int a2, unsigned int a3) {
   
   pairNode *v3; // eax
   CAIGoal *v4; // eax

@@ -9,7 +9,7 @@ public:
      CPileObserverList(void);
 
     // address=[0x155e7f0]
-    void  NotifyAndDetachAllObservers(class CEntityEvent const &);
+    void  NotifyAndDetachAllObservers(class CEntityEvent const & a2);
 
     // address=[0x155e820]
     int  NumberOfObservers(void)const;

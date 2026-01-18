@@ -18,7 +18,7 @@ class CGameState * __cdecl CStateVideo::DynamicCreateFunc(void * a1) {
 
 // address=[0x14cbb80]
 // Decompiled from CStateVideo *__thiscall CStateVideo::CStateVideo(CStateVideo *this, void *a2)
- CStateVideo::CStateVideo(void *) {
+ CStateVideo::CStateVideo(void * a2) {
   
   int Language; // [esp+28h] [ebp-34h]
   unsigned int DigitalDriver; // [esp+34h] [ebp-28h]

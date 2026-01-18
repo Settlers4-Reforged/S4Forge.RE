@@ -4,7 +4,7 @@
 
 // address=[0x1305810]
 // Decompiled from unsigned int __thiscall CAIAgentThieves::Execute(CAIAgentThieves *this, unsigned int a2, unsigned int a3)
-unsigned int  CAIAgentThieves::Execute(unsigned int,unsigned int) {
+unsigned int  CAIAgentThieves::Execute(unsigned int a2, unsigned int a3) {
   
   return CAIAgent::ExecuteResult(0, 0);
 }

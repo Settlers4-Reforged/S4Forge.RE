@@ -15,7 +15,7 @@ public:
     bool  IsVideoSurfaceLocked(void);
 
     // address=[0x2f87760]
-     CCachePageManager(struct IDirectDrawSurface7 *,struct IDirectDrawSurface7 *,struct IDirect3DDevice7 *);
+     CCachePageManager(struct IDirectDrawSurface7 * a2, struct IDirectDrawSurface7 * a3, struct IDirect3DDevice7 * a4);
 
     // address=[0x2f878f0]
      ~CCachePageManager(void);
@@ -27,13 +27,13 @@ public:
     long  EraseExtensionAreas(int a2, int a3, int a4, int a5, int a6, bool a7);
 
     // address=[0x2f87db0]
-    bool  UploadData(long &);
+    bool  UploadData(long & a2);
 
     // address=[0x2f87ea0]
     bool  UploadDataAndRender(long & a2);
 
     // address=[0x2f88440]
-    bool  ShowPageContent(long &);
+    bool  ShowPageContent(long & a2);
 
     // address=[0x2f888b0]
     void  ReleaseData(void);

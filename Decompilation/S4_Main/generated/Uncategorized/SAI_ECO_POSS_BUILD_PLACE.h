@@ -9,7 +9,7 @@ public:
      SAI_ECO_POSS_BUILD_PLACE(struct SAI_ECO_POSS_BUILD_PLACE && a2);
 
     // address=[0x1345770]
-     SAI_ECO_POSS_BUILD_PLACE(struct SAI_ECO_POSS_BUILD_PLACE const &);
+     SAI_ECO_POSS_BUILD_PLACE(struct SAI_ECO_POSS_BUILD_PLACE const & a2);
 
     // address=[0x1345810]
      SAI_ECO_POSS_BUILD_PLACE(void);

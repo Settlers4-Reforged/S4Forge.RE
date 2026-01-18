@@ -573,7 +573,7 @@ bool  CStateLobbyGameSettings::OnEvent(class CEvn_Event & a2) {
 
 // address=[0x14b9490]
 // Decompiled from void __thiscall CStateLobbyGameSettings::UpdatePlayerList(CStateLobbyGameSettings *this, bool a2)
-void  CStateLobbyGameSettings::UpdatePlayerList(bool) {
+void  CStateLobbyGameSettings::UpdatePlayerList(bool a2) {
   
   OnlineManager *Instance; // eax
   void *v3; // [esp+4h] [ebp-70h]

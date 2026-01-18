@@ -54,7 +54,7 @@ public:
     void  SetSoundVolume(int a2);
 
     // address=[0x149cb50]
-    void  Mute(bool);
+    void  Mute(bool a2);
 
     // address=[0x149cbc0]
     void  PausePlayback(bool a1);
@@ -66,10 +66,10 @@ public:
     void  StopSounds(void);
 
     // address=[0x149cc90]
-    void  StopSound(unsigned int);
+    void  StopSound(unsigned int a2);
 
     // address=[0x149ccc0]
-    bool  IsPlaying(unsigned int);
+    bool  IsPlaying(unsigned int a2);
 
     // address=[0x149cd00]
     void  Update(void);

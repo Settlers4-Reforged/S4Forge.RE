@@ -48,7 +48,7 @@ public:
     virtual unsigned long  ClassID(void)const;
 
     // address=[0x1509f50]
-    virtual void  FillDialog(class CBuilding *,bool);
+    virtual void  FillDialog(class CBuilding * a2, bool a3);
 
     // address=[0x1509f60]
     virtual int  GetBuildingNeed(int a2)const;
@@ -82,7 +82,7 @@ private:
     int  AddSettlerToWorld(int a2, int a3, int a4);
 
     // address=[0x1509f10]
-    virtual void  ConvertEventIntoGoal(class CBuilding *,class CEntityEvent *);
+    virtual void  ConvertEventIntoGoal(class CBuilding * a2, class CEntityEvent * a3);
 
     // address=[0x1509f20]
     virtual bool  CrushBuilding(void);

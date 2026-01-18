@@ -385,7 +385,7 @@ class CLinkList & __cdecl CTilesAndLinks::PushLinksUndef(int a1) {
 
 // address=[0x15e5b70]
 // Decompiled from struct CLinkList *__cdecl CTilesAndLinks::PushLinks(const struct CIntLinkList *a1)
-class CLinkList & __cdecl CTilesAndLinks::PushLinks(class CIntLinkList const &) {
+class CLinkList & __cdecl CTilesAndLinks::PushLinks(class CIntLinkList const & a1) {
   
   int v1; // eax
   struct CLinkList *v3; // [esp+0h] [ebp-4h]

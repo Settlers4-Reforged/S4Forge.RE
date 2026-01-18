@@ -246,7 +246,7 @@ public:
     void  SetCursorShape(bool a2, int a3);
 
     // address=[0x2f5f950]
-    void  FixCursor(bool,bool);
+    void  FixCursor(bool a2, bool a3);
 
     // address=[0x2f5fa70]
     int  GetCursorShape(void);

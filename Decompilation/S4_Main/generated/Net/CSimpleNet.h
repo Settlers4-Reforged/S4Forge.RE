@@ -33,7 +33,7 @@ public:
     virtual void  RemoveMsgsForIP(unsigned int a2);
 
     // address=[0x15cd6a0]
-    virtual bool  IsLocalIP(unsigned int);
+    virtual bool  IsLocalIP(unsigned int a2);
 
     // address=[0x15d1290]
     virtual void  Delete(void);
@@ -70,7 +70,7 @@ public:
 
 protected:
     // address=[0x15cd7d0]
-    virtual bool  SendMessageA(unsigned int,struct SMessage &);
+    virtual bool  SendMessageA(unsigned int a2, struct SMessage & a3);
 
     // address=[0x15cdc40]
     virtual bool  RealSendMessage(unsigned int a2, struct SMessage & a3);

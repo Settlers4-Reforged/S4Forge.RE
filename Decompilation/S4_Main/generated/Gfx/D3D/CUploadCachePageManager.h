@@ -6,7 +6,7 @@
 class CUploadCachePageManager {
 public:
     // address=[0x2f69830]
-     CUploadCachePageManager(struct IDirectDrawSurface7 *,struct IDirectDrawSurface7 *,struct IDirect3DDevice7 *);
+     CUploadCachePageManager(struct IDirectDrawSurface7 * a2, struct IDirectDrawSurface7 * a3, struct IDirect3DDevice7 * a4);
 
     // address=[0x2f69860]
      ~CUploadCachePageManager(void);

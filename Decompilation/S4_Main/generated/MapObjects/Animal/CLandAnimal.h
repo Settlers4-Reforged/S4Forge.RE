@@ -15,7 +15,7 @@ public:
     static void * __cdecl operator new(unsigned int a1);
 
     // address=[0x14e1050]
-    static void __cdecl operator delete(void *);
+    static void __cdecl operator delete(void * a1);
 
     // address=[0x14e1090]
     virtual int  GetGoodType(void)const;

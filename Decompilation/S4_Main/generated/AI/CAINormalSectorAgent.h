@@ -6,7 +6,7 @@
 class CAINormalSectorAgent : public CAIAgent {
 public:
     // address=[0x1300fe0]
-     CAINormalSectorAgent(char const *);
+     CAINormalSectorAgent(char const * a2);
 
     // address=[0x1301040]
     virtual  ~CAINormalSectorAgent(void);

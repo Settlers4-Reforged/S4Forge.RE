@@ -2298,7 +2298,7 @@ bool  CTradingBuildingRole::RequestVehicle(class CBuilding * a2, bool a3) {
 
 // address=[0x1523d60]
 // Decompiled from bool __thiscall CTradingBuildingRole::IsVehicleRequested(CTradingBuildingRole *this, struct CBuilding *a2, bool a3)
-bool  CTradingBuildingRole::IsVehicleRequested(class CBuilding *,bool) {
+bool  CTradingBuildingRole::IsVehicleRequested(class CBuilding * a2, bool a3) {
   
   int v5; // [esp+4h] [ebp-18h]
   int v6; // [esp+8h] [ebp-14h]
@@ -3135,7 +3135,7 @@ bool  CTradingBuildingRole::IsShipInHarbour(class CBuilding * a2) {
 
 // address=[0x15252d0]
 // Decompiled from bool __thiscall CTradingBuildingRole::IsTradeShipInHarbour(CTradingBuildingRole *this, struct CBuilding *a2)
-bool  CTradingBuildingRole::IsTradeShipInHarbour(class CBuilding *) {
+bool  CTradingBuildingRole::IsTradeShipInHarbour(class CBuilding * a2) {
   
   Y16X16 *WorkingAreaPackedXY; // eax
   unsigned __int16 *VehiclePtr; // [esp+4h] [ebp-10h]
@@ -3623,7 +3623,7 @@ bool  CTradingBuildingRole::RequestDonkey(class CBuilding * a2, class CBuilding 
 
 // address=[0x1525ff0]
 // Decompiled from bool __thiscall CTradingBuildingRole::IsDonkeyAtBuilding(CTradingBuildingRole *this, struct CBuilding *a2)
-bool  CTradingBuildingRole::IsDonkeyAtBuilding(class CBuilding *) {
+bool  CTradingBuildingRole::IsDonkeyAtBuilding(class CBuilding * a2) {
   
   Y16X16 *v2; // eax
   unsigned __int8 *v4; // [esp+4h] [ebp-14h]
@@ -4148,7 +4148,7 @@ bool  CTradingBuildingRole::RequestCart(class CBuilding * a2, class CBuilding * 
 
 // address=[0x1526f10]
 // Decompiled from bool __thiscall CTradingBuildingRole::IsCartAtBuilding(CTradingBuildingRole *this, struct CBuilding *a2)
-bool  CTradingBuildingRole::IsCartAtBuilding(class CBuilding *) {
+bool  CTradingBuildingRole::IsCartAtBuilding(class CBuilding * a2) {
   
   return CTradingBuildingRole::GetCartIDAtBuilding(this, a2) != 0;
 }

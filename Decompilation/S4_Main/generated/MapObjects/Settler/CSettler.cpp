@@ -810,12 +810,7 @@ void  CSettler::ChangeType(int newSettlerType, bool a3, bool a4) {
         aiEvent = CAIEvent::Pack(v27, newSettlerType);
         v22 = IEntity::ID(this);
         v20 = IEntity::OwnerId(this);
-        (*(void (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)off_3D7A3D8 + 44))(
-          off_3D7A3D8,
-          22,
-          v20,
-          v22,
-          aiEvent);
+        (*(void (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)g_pAI + 44))(g_pAI, 22, v20, v22, aiEvent);
         v41 = -1;
         std::auto_ptr<ISettlerRole>::~auto_ptr<ISettlerRole>(&v31);
       }

@@ -12,7 +12,7 @@ public:
     char const *  GetStartOfEntry(char const * SubStr);
 
     // address=[0x15c3880]
-     CClassNetGameIniBuffer(char const *,unsigned int);
+     CClassNetGameIniBuffer(char const * a2, unsigned int a3);
 
 };
 

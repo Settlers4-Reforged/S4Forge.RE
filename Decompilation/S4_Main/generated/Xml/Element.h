@@ -129,7 +129,7 @@ private:
     bool  ParseMarkup(class AdvXMLParser::Parser & a2);
 
     // address=[0x2f244a0]
-    void  HandleSpecialAttributes(class AdvXMLParser::Attribute const *);
+    void  HandleSpecialAttributes(class AdvXMLParser::Attribute const * a2);
 
 };
 

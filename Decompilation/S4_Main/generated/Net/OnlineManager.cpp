@@ -286,7 +286,7 @@ void  OnlineManager::SetFreeSlotCount(int a2) {
 
 // address=[0x1616540]
 // Decompiled from void __thiscall OnlineManager::JoinSession(OnlineManager *this, unsigned __int64 *a2)
-void  OnlineManager::JoinSession(unsigned __int64 &) {
+void  OnlineManager::JoinSession(unsigned __int64 & a2) {
   
   StormManager *Instance; // eax
   struct GUID v3; // [esp+4h] [ebp-20h] BYREF
@@ -327,7 +327,7 @@ void  OnlineManager::JoinSessionSucceeded(void) {
 
 // address=[0x1616620]
 // Decompiled from void __thiscall OnlineManager::SetJoinAndDiscoveryOverride(OnlineManager *this, bool a2)
-void  OnlineManager::SetJoinAndDiscoveryOverride(bool) {
+void  OnlineManager::SetJoinAndDiscoveryOverride(bool a2) {
   
   StormManager *Instance; // eax
 

@@ -58,7 +58,7 @@ private:
     static bool __cdecl SaveCurrentData(class S4::CMapFile & a1);
 
     // address=[0x1485260]
-    static void __cdecl SaveInfoAndUpdateGUI(class S4::CMapFile &,char const *,char const *);
+    static void __cdecl SaveInfoAndUpdateGUI(class S4::CMapFile & a1, char const * a2, char const * a3);
 
     // address=[0x1485300]
     static void __cdecl SaveChunkObject(class S4::CMapFile & a1, unsigned short a2, unsigned short a3, class IS4ChunkObject & a4, char const * a5, char const * a6);

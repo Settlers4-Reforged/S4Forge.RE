@@ -1130,7 +1130,7 @@ LABEL_35:
 
 // address=[0x1544590]
 // Decompiled from void __thiscall CDecoObjMgr::Store(CDecoObjMgr *this, struct S4::CMapFile *a2)
-void  CDecoObjMgr::Store(class S4::CMapFile &) {
+void  CDecoObjMgr::Store(class S4::CMapFile & a2) {
   
   std::strstreambuf *v2; // eax
   void *v3; // eax
@@ -1214,7 +1214,7 @@ void  CDecoObjMgr::Store(class S4::CMapFile &) {
 
 // address=[0x1544810]
 // Decompiled from void __thiscall CDecoObjMgr::Load(CDecoObjMgr *this, struct S4::CMapFile *a2)
-void  CDecoObjMgr::Load(class S4::CMapFile &) {
+void  CDecoObjMgr::Load(class S4::CMapFile & a2) {
   
   int v2; // eax
   int v3; // eax

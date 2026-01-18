@@ -1479,12 +1479,7 @@ void  CSoldierRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent
         v44 = *((_DWORD *)a3 + 3);
         v35 = IEntity::EntityId((unsigned __int16 *)a2);
         v3 = IEntity::OwnerId((unsigned __int8 *)a2);
-        (*(void (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)off_3D7A3D8 + 44))(
-          off_3D7A3D8,
-          21,
-          v3,
-          v35,
-          v44);
+        (*(void (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)g_pAI + 44))(g_pAI, 21, v3, v35, v44);
       }
       break;
     case 0x11:
@@ -1595,12 +1590,7 @@ LABEL_33:
         v49 = *(unsigned __int16 *)(this + 32);
         v40 = IEntity::ID();
         v27 = IEntity::OwnerId((unsigned __int8 *)a2);
-        (*(void (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)off_3D7A3D8 + 44))(
-          off_3D7A3D8,
-          18,
-          v27,
-          v40,
-          v49);
+        (*(void (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)g_pAI + 44))(g_pAI, 18, v27, v40, v49);
       }
       else
       {
@@ -1628,12 +1618,7 @@ LABEL_33:
         v46 = *(unsigned __int16 *)(this + 32);
         v37 = IEntity::ID();
         v5 = IEntity::OwnerId((unsigned __int8 *)a2);
-        (*(void (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)off_3D7A3D8 + 44))(
-          off_3D7A3D8,
-          21,
-          v5,
-          v37,
-          v46);
+        (*(void (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)g_pAI + 44))(g_pAI, 21, v5, v37, v46);
       }
       if ( IEntity::FlagBits(a2, EntityFlag_Attached) )
       {
@@ -1751,7 +1736,7 @@ void  CSoldierRole::ComeToWork(class CSettler * a2, int a3) {
   v11 = *((unsigned __int16 *)this + 16);
   v9 = IEntity::ID();
   v7 = IEntity::OwnerId((unsigned __int8 *)a2);
-  return (*(int (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)off_3D7A3D8 + 44))(off_3D7A3D8, 18, v7, v9, v11);
+  return (*(int (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)g_pAI + 44))(g_pAI, 18, v7, v9, v11);
 }
 
 

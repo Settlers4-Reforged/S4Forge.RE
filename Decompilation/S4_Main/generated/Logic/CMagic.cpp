@@ -190,7 +190,7 @@ LABEL_32:
   v11 = CPlayerMagicData::SpellCategoryCounter(v29, a2);
   CPlayerMagicData::SetSpellCategoryCounter(v29, a2, v11 + 1);
   v12 = Y16X16::PackXYFast(a3, a4);
-  (*(void (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)off_3D7A3D8 + 44))(off_3D7A3D8, 1, a1, a2, v12);
+  (*(void (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)g_pAI + 44))(g_pAI, 1, a1, a2, v12);
   if ( g_pScriptMgr )
     CGameScriptManager::SendGameEvent((CGameScriptManager *)g_pScriptMgr, 0x16u, a1, a2, a3, a4);
   return 1;

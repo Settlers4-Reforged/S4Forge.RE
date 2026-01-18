@@ -12,7 +12,7 @@ public:
     class CAIPlayerAI *  PlayerAI(void)const;
 
     // address=[0x1319190]
-     CAIAgentPlayerBase(char const *);
+     CAIAgentPlayerBase(char const * a2);
 
     // address=[0x1319280]
     virtual  ~CAIAgentPlayerBase(void);

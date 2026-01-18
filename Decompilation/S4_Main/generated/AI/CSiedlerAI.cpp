@@ -2204,7 +2204,7 @@ class tmp_mem *  CSiedlerAI::tmp_speichern(void) {
 
 // address=[0x2f393c0]
 // Decompiled from void __thiscall CSiedlerAI::tmp_rueckspeichern(CSiedlerAI *this, struct tmp_mem *a2)
-void  CSiedlerAI::tmp_rueckspeichern(class tmp_mem *) {
+void  CSiedlerAI::tmp_rueckspeichern(class tmp_mem * a2) {
   
   ;
 }
