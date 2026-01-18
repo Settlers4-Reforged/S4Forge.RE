@@ -1489,7 +1489,7 @@ int  CSettlerMgr::OrderWarrior(int a2, int a3, int a4) {
   while ( FirstSettlerId )
   {
     v22 = (_DWORD *)CSettlerMgr::operator[](FirstSettlerId);
-    if ( IEntity::FlagBits(v22, Selectable) )
+    if ( IEntity::FlagBits(v22, EntityFlag_Selectable) )
     {
       v5 = IEntity::WorldIdx();
       if ( CWorldManager::SectorId(v5) == v16 )
@@ -1512,7 +1512,7 @@ int  CSettlerMgr::OrderWarrior(int a2, int a3, int a4) {
   if ( !v25 )
     return 0;
   v10 = (_DWORD *)CSettlerMgr::operator[](v25);
-  IEntity::ClearFlagBits(v10, Selectable);
+  IEntity::ClearFlagBits(v10, EntityFlag_Selectable);
   if ( v18 == CPlayerManager::GetLocalPlayerId() )
     CInputProcessor::DeSelectEntity(&g_cInputProcessor, v25);
   v21 = (CSettler *)CSettlerMgr::operator[](v25);
@@ -1578,7 +1578,7 @@ int  CSettlerMgr::OrderAIWarrior(int a2, int a3) {
         v9 = ITiling::SectorId(v5),
         v10 == v9) )
   {
-    IEntity::ClearFlagBits(SettlerPtr, Selectable);
+    IEntity::ClearFlagBits(SettlerPtr, EntityFlag_Selectable);
     if ( v13 == CPlayerManager::GetLocalPlayerId() )
       CInputProcessor::DeSelectEntity(&g_cInputProcessor, v16);
     IEntity::RemoveFromAllGroups();
@@ -1653,7 +1653,7 @@ int  CSettlerMgr::OrderSpecialist(int a2, int a3) {
   while ( FirstSettlerId )
   {
     v21 = (_DWORD *)CSettlerMgr::operator[](FirstSettlerId);
-    if ( IEntity::FlagBits(v21, Selectable) )
+    if ( IEntity::FlagBits(v21, EntityFlag_Selectable) )
     {
       v5 = IEntity::WorldIdx();
       if ( CWorldManager::SectorId(v5) == v16 )
@@ -1675,7 +1675,7 @@ int  CSettlerMgr::OrderSpecialist(int a2, int a3) {
   if ( !v20 )
     return 0;
   v17 = (_DWORD *)CSettlerMgr::operator[](v20);
-  IEntity::ClearFlagBits(v17, Selectable);
+  IEntity::ClearFlagBits(v17, EntityFlag_Selectable);
   if ( v18 == CPlayerManager::GetLocalPlayerId() )
     CInputProcessor::DeSelectEntity(&g_cInputProcessor, v20);
   v12 = CEntityEvent::CEntityEvent((CEntityEvent *)v10, 0x18u, 0, a2, 0, 0);
@@ -1708,7 +1708,7 @@ void  CSettlerMgr::OrderWarriorToTower(int a2, int a3) {
   SettlerPtr = CSettlerMgr::GetSettlerPtr(a3);
   if ( !SettlerPtr && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 1228, "pSettler != 0") == 1 )
     __debugbreak();
-  IEntity::ClearFlagBits(SettlerPtr, Selectable);
+  IEntity::ClearFlagBits(SettlerPtr, EntityFlag_Selectable);
   v3 = IEntity::OwnerId(SettlerPtr);
   if ( v3 == CPlayerManager::GetLocalPlayerId() )
     CInputProcessor::DeSelectEntity(&g_cInputProcessor, a3);
@@ -2398,7 +2398,7 @@ void  CSettlerMgr::Load(class S4::CMapFile &) {
       v6 = (_DWORD *)CPersistence::New(v3, v2);
       v5 = v6;
       ++*((_WORD *)v13 + 12);
-      IEntity::ClearFlagBits(v5, Selected);
+      IEntity::ClearFlagBits(v5, EntityFlag_Selected);
     }
     for ( i = 0; i < 9; ++i )
     {
@@ -2552,12 +2552,12 @@ void  CSettlerMgr::AttachSettler(class CSettler & settler) {
   int type; // [esp+10h] [ebp-8h]
   int ownerId; // [esp+14h] [ebp-4h]
 
-  if ( IEntity::FlagBits(settler, Offered)
+  if ( IEntity::FlagBits(settler, EntityFlag_Offered)
     && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 806, "_rSettler.FlagBits(ENTITY_FLAG_OFFERED) == 0") == 1 )
   {
     __debugbreak();
   }
-  if ( IEntity::FlagBits(settler, GlobalOffered)
+  if ( IEntity::FlagBits(settler, EntityFlag_GlobalOffered)
     && BBSupportDbgReport(
          2,
          "MapObjects\\Settler\\SettlerMgr.cpp",
@@ -2576,8 +2576,8 @@ void  CSettlerMgr::AttachSettler(class CSettler & settler) {
   {
     __debugbreak();
   }
-  IEntity::ClearFlagBits(settler, Offered);
-  IEntity::SetFlagBits(settler, GlobalOffered);
+  IEntity::ClearFlagBits(settler, EntityFlag_Offered);
+  IEntity::SetFlagBits(settler, EntityFlag_GlobalOffered);
   ownerId = IEntity::OwnerId(settler);
   entityId = IEntity::EntityId(settler);
   type = IEntity::Type(settler);
@@ -2635,12 +2635,12 @@ void  CSettlerMgr::DetachSettler(class CSettler & a2) {
   int v9; // [esp+18h] [ebp-8h]
   int v10; // [esp+1Ch] [ebp-4h]
 
-  if ( IEntity::FlagBits(a2, Offered)
+  if ( IEntity::FlagBits(a2, EntityFlag_Offered)
     && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 889, "_rSettler.FlagBits(ENTITY_FLAG_OFFERED) == 0") == 1 )
   {
     __debugbreak();
   }
-  if ( !IEntity::FlagBits(a2, GlobalOffered)
+  if ( !IEntity::FlagBits(a2, EntityFlag_GlobalOffered)
     && BBSupportDbgReport(
          2,
          "MapObjects\\Settler\\SettlerMgr.cpp",
@@ -2649,7 +2649,7 @@ void  CSettlerMgr::DetachSettler(class CSettler & a2) {
   {
     __debugbreak();
   }
-  IEntity::ClearFlagBits(a2, GlobalOffered|Offered);
+  IEntity::ClearFlagBits(a2, EntityFlag_GlobalOffered|EntityFlag_Offered);
   v10 = IEntity::OwnerId(a2);
   v6 = IEntity::EntityId((unsigned __int16 *)a2);
   v9 = IEntity::Type((unsigned __int16 *)a2);
@@ -2769,12 +2769,12 @@ void  CSettlerMgr::CheckOutSettler(int a2) {
         v3 = CEcoSector::Owner(v8);
         if ( v3 == IEntity::OwnerId(v10) )
         {
-          if ( IEntity::FlagBits(v10, Offered) )
+          if ( IEntity::FlagBits(v10, EntityFlag_Offered) )
             CEcoSector::GetSettlerOutOfOffer(v8, a2);
           v5 = CSettler::Role(v10);
           if ( (*(int (__thiscall **)(int))(*(_DWORD *)v5 + 72))(v5) != 18
             && !IEntity::FlagBits(v10, (EntityFlag)0x80u)
-            && (!IEntity::FlagBits(v10, OnBoard) || IEntity::FlagBits(v10, (EntityFlag)0x10000000u)) )
+            && (!IEntity::FlagBits(v10, EntityFlag_OnBoard) || IEntity::FlagBits(v10, (EntityFlag)0x10000000u)) )
           {
             CEcoSector::ChangeNrOfSettler(v8, v7, -1);
             IEntity::ClearFlagBits(v10, (EntityFlag)0x10000000u);

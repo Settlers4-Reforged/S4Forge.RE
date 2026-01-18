@@ -151,7 +151,7 @@ void  CBuildingSiteRole::Init(class CBuilding * a2) {
                            + *(unsigned __int8 *)(this + 405)
                            + *(unsigned __int8 *)(this + 403));
   *(_DWORD *)(this + 420) = 131070 / *(_DWORD *)(this + 416);
-  IEntity::ClearFlagBits(a2, Ready);
+  IEntity::ClearFlagBits(a2, EntityFlag_Ready);
   IEntity::SetFlagBits(a2, (EntityFlag)0x1001000u);
   *(_WORD *)(this + 8) = 0;
   *(_WORD *)(this + 6) = IEntity::ID();
@@ -255,7 +255,7 @@ void  CBuildingSiteRole::LogicUpdate(class CBuilding * a2) {
   char v87; // [esp+E3h] [ebp-11h]
   int v89; // [esp+F0h] [ebp-4h]
 
-  if ( IEntity::FlagBits(a2, Selected) )
+  if ( IEntity::FlagBits(a2, EntityFlag_Selected) )
     (*(void (__thiscall **)(CBuildingSiteRole *, unsigned __int8 *, int))(*(_DWORD *)this + 88))(this, a2, 1);
   IAnimatedEntity::RegisterForLogicUpdate(15);
   if ( IEntity::FlagBits(a2, (EntityFlag)0x1000u) )
@@ -463,8 +463,8 @@ LABEL_57:
           CWorldManager::SetMapObjectId(v36, v55);
           v37 = IEntity::WorldIdx();
           CWorldManager::SetObjectId(v37, 0);
-          IEntity::ClearFlagBits(a2, Birth);
-          IEntity::SetFlagBits(a2, Ready);
+          IEntity::ClearFlagBits(a2, EntityFlag_Birth);
+          IEntity::SetFlagBits(a2, EntityFlag_Ready);
           CBuilding::Ready(a2);
           return;
         default:

@@ -66,7 +66,7 @@ public:
     bool  CheckNumberOfOccupiedMilitaryBuildings(int a2, int a3);
 
     // address=[0x14f5580]
-    static bool __cdecl IsMine(int a1);
+    static bool __cdecl IsMine(int buildingType);
 
     // address=[0x14f55e0]
     static bool __cdecl IsMilitary(int a1);
@@ -78,7 +78,7 @@ public:
     static bool __cdecl IsShipyardEx(int a1);
 
     // address=[0x14f56e0]
-    int  CheckForBuild(int a2, int a3, int a4, int a5, int a6);
+    int  CheckForBuild(int x, int y, int ownerId, int a5, int a6);
 
     // address=[0x14f6050]
     int  CheckForBuildInWater(int a2, int a3, int a4, int a5);

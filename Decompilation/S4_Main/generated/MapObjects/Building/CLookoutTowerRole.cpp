@@ -99,7 +99,7 @@ void  CLookoutTowerRole::LogicUpdate(class CBuilding * a2) {
   IBuildingRole *v11; // [esp+4h] [ebp-Ch]
   char v12; // [esp+8h] [ebp-8h]
 
-  if ( IEntity::FlagBits(a2, Selected) )
+  if ( IEntity::FlagBits(a2, EntityFlag_Selected) )
     (*(void (__thiscall **)(CLookoutTowerRole *, struct CBuilding *, int))(*(_DWORD *)this + 88))(this, a2, 1);
   v12 = *((_BYTE *)this + 4);
   if ( v12 == 1 )
@@ -181,7 +181,7 @@ void  CLookoutTowerRole::Init(class CBuilding * a2) {
   *((_BYTE *)this + 4) = 1;
   IAnimatedEntity::RegisterForLogicUpdate(2);
   *((_BYTE *)this + 380) = 0;
-  result = IEntity::FlagBits(a2, Selected);
+  result = IEntity::FlagBits(a2, EntityFlag_Selected);
   if ( result )
     return (*(int (__thiscall **)(CLookoutTowerRole *, struct CBuilding *, _DWORD))(*(_DWORD *)this + 88))(this, a2, 0);
   return result;

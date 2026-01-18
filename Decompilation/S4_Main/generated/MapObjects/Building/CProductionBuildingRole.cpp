@@ -81,7 +81,7 @@ void  CProductionBuildingRole::LogicUpdate(class CBuilding * a2) {
   int v11; // [esp+3Ch] [ebp-4h]
 
   v10 = this;
-  result = IEntity::FlagBits(a2, Selected);
+  result = IEntity::FlagBits(a2, EntityFlag_Selected);
   if ( result )
     result = (*(int (__thiscall **)(_BYTE *, _DWORD *, int))(*(_DWORD *)v10 + 88))(v10, a2, 1);
   v9 = v10[4];
@@ -118,7 +118,7 @@ void  CProductionBuildingRole::LogicUpdate(class CBuilding * a2) {
     return IAnimatedEntity::RegisterForLogicUpdate(31);
   }
   SettlerPtr = (_DWORD *)CSettlerMgr::GetSettlerPtr(*((unsigned __int16 *)v10 + 4));
-  if ( IEntity::FlagBits(SettlerPtr, Visible) )
+  if ( IEntity::FlagBits(SettlerPtr, EntityFlag_Visible) )
   {
     if ( BBSupportDbgReport(
            2,
@@ -316,7 +316,7 @@ void  CProductionBuildingRole::Init(class CBuilding * a2) {
   *((_BYTE *)this + 380) = 0;
   *((_BYTE *)this + 381) = 0;
   IAnimatedEntity::RegisterForLogicUpdate(2);
-  result = IEntity::FlagBits(a2, Selected);
+  result = IEntity::FlagBits(a2, EntityFlag_Selected);
   if ( result )
     return (*(int (__thiscall **)(CProductionBuildingRole *, struct CBuilding *, _DWORD))(*(_DWORD *)this + 88))(
              this,
@@ -414,7 +414,7 @@ bool  CProductionBuildingRole::SettlerEnter(class CBuilding * a2, int a3) {
   if ( a3 <= 0 && BBSupportDbgReport(2, "MapObjects\\Building\\ProductionBuilding.cpp", 254, "_iSettlerId > 0") == 1 )
     __debugbreak();
   v27 = (CSettler *)CSettlerMgr::operator[](a3);
-  if ( IEntity::FlagBits(v27, Visible) == 256
+  if ( IEntity::FlagBits(v27, EntityFlag_Visible) == 256
     && BBSupportDbgReport(
          2,
          "MapObjects\\Building\\ProductionBuilding.cpp",
@@ -445,8 +445,8 @@ bool  CProductionBuildingRole::SettlerEnter(class CBuilding * a2, int a3) {
       CEntityEvent::~CEntityEvent(v16);
     }
   }
-  IEntity::ClearFlagBits(v27, Visible);
-  IEntity::SetFlagBits(v27, MagicInvisible);
+  IEntity::ClearFlagBits(v27, EntityFlag_Visible);
+  IEntity::SetFlagBits(v27, EntityFlag_MagicInvisible);
   IMovingEntity::SetDisplacementCosts(10);
   v26 = (CMFCToolBarButton *)CBuildingMgr::operator[](*((unsigned __int16 *)v28 + 3));
   v3 = CBuilding::DoorPackedXY(v26);

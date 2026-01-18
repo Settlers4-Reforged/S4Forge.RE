@@ -22,7 +22,7 @@ void  CVehicle::CountCargo(class ICargoCounter &) {
 // Decompiled from int __thiscall CVehicle::DeleteSelectable(CVehicle *this)
 void  CVehicle::DeleteSelectable(void) {
   
-  return IEntity::ClearFlagBits(this, Selectable);
+  return IEntity::ClearFlagBits(this, EntityFlag_Selectable);
 }
 
 
@@ -30,7 +30,7 @@ void  CVehicle::DeleteSelectable(void) {
 // Decompiled from _DWORD *__thiscall CVehicle::SetSelectable(CVehicle *this)
 void  CVehicle::SetSelectable(void) {
   
-  return IEntity::SetFlagBits(this, Selectable);
+  return IEntity::SetFlagBits(this, EntityFlag_Selectable);
 }
 
 
@@ -535,12 +535,12 @@ void  CVehicle::OnBuildReady(void) {
 
   v16 = IEntity::OwnerId((unsigned __int8 *)this);
   v17 = IEntity::Type((unsigned __int16 *)this);
-  if ( !IEntity::FlagBits((_DWORD *)this, Birth)
+  if ( !IEntity::FlagBits((_DWORD *)this, EntityFlag_Birth)
     && BBSupportDbgReport(2, "MapObjects\\Vehicle.cpp", 477, "FlagBits(ENTITY_FLAG_BIRTH) != 0") == 1 )
   {
     __debugbreak();
   }
-  if ( IEntity::FlagBits((_DWORD *)this, Ready)
+  if ( IEntity::FlagBits((_DWORD *)this, EntityFlag_Ready)
     && BBSupportDbgReport(2, "MapObjects\\Vehicle.cpp", 478, "FlagBits(ENTITY_FLAG_READY) == 0") == 1 )
   {
     __debugbreak();
@@ -1503,15 +1503,15 @@ void  CVehicle::InitCommonTaskValues(class CEntityTask const * a2) {
     if ( *((char *)a2 + 6) >= 0 )
       *((_BYTE *)this + 68) = *((_BYTE *)a2 + 6);
     if ( *((_BYTE *)a2 + 20) )
-      IEntity::SetFlagBits(this, Visible);
+      IEntity::SetFlagBits(this, EntityFlag_Visible);
     else
-      IEntity::ClearFlagBits(this, Visible);
+      IEntity::ClearFlagBits(this, EntityFlag_Visible);
     *((_BYTE *)this + 107) = *((_BYTE *)a2 + 4);
     CVehicle::TakeJobPart(this, *((unsigned __int16 *)a2 + 7));
   }
   else
   {
-    IEntity::SetFlagBits(this, Visible);
+    IEntity::SetFlagBits(this, EntityFlag_Visible);
     *((_BYTE *)this + 107) = 17;
     CVehicle::TakeJobPart(this, *(_DWORD *)(*((_DWORD *)this + 25) + 24));
   }

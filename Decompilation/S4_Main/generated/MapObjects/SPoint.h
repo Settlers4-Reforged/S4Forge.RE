@@ -23,6 +23,11 @@ public:
     // address=[0x15ddd20]
     struct SPoint &  Zero(void);
 
+    // Type information members
+private:
+    int x;
+    int y;
+
 };
 
 

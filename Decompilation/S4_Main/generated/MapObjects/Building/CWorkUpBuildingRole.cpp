@@ -80,7 +80,7 @@ void  CWorkUpBuildingRole::LogicUpdate(class CBuilding * a2) {
   int v14; // [esp+44h] [ebp-4h]
 
   v13 = this;
-  result = IEntity::FlagBits(a2, Selected);
+  result = IEntity::FlagBits(a2, EntityFlag_Selected);
   if ( result )
     result = (*(int (__thiscall **)(CWorkUpBuildingRole *, struct CBuilding *, int))(*(_DWORD *)v13 + 88))(v13, a2, 1);
   v12 = *((_BYTE *)v13 + 4);
@@ -270,7 +270,7 @@ void  CWorkUpBuildingRole::Init(class CBuilding * a2) {
     if ( *(_BYTE *)(*((_DWORD *)this + 94) + 16 * i + 65) == 1 )
     {
       v6 = CPileMgr::operator[](v12);
-      IEntity::ClearFlagBits(v6, Visible);
+      IEntity::ClearFlagBits(v6, EntityFlag_Visible);
     }
     v11 = *(_BYTE *)(*((_DWORD *)this + 94) + 16 * i + 63);
     if ( v11 )
@@ -303,7 +303,7 @@ void  CWorkUpBuildingRole::Init(class CBuilding * a2) {
     __debugbreak();
   }
   *((_BYTE *)this + 4) = 1;
-  if ( IEntity::FlagBits(a2, Selected) )
+  if ( IEntity::FlagBits(a2, EntityFlag_Selected) )
     (*(void (__thiscall **)(CWorkUpBuildingRole *, struct CBuilding *, _DWORD))(*(_DWORD *)this + 88))(this, a2, 0);
   return IAnimatedEntity::RegisterForLogicUpdate(2);
 }
@@ -362,7 +362,7 @@ bool  CWorkUpBuildingRole::SettlerEnter(class CBuilding * a2, int a3) {
   if ( a3 <= 0 && BBSupportDbgReport(2, "MapObjects\\Building\\WorkUpBuilding.cpp", 240, "_iSettlerId > 0") == 1 )
     __debugbreak();
   v24 = (CSettler *)CSettlerMgr::operator[](a3);
-  if ( IEntity::FlagBits(v24, Visible)
+  if ( IEntity::FlagBits(v24, EntityFlag_Visible)
     && BBSupportDbgReport(
          2,
          "MapObjects\\Building\\WorkUpBuilding.cpp",
@@ -393,8 +393,8 @@ bool  CWorkUpBuildingRole::SettlerEnter(class CBuilding * a2, int a3) {
       CEntityEvent::~CEntityEvent(v15);
     }
   }
-  IEntity::ClearFlagBits(v24, Visible);
-  IEntity::SetFlagBits(v24, MagicInvisible);
+  IEntity::ClearFlagBits(v24, EntityFlag_Visible);
+  IEntity::SetFlagBits(v24, EntityFlag_MagicInvisible);
   IMovingEntity::SetDisplacementCosts(10);
   v23 = (CMFCToolBarButton *)CBuildingMgr::operator[](*((unsigned __int16 *)v25 + 3));
   v3 = CBuilding::DoorPackedXY(v23);

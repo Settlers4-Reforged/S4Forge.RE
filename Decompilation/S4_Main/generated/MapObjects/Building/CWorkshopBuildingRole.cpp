@@ -66,7 +66,7 @@ void  CWorkshopBuildingRole::LogicUpdate(class CBuilding * a2) {
   int v24; // [esp+50h] [ebp-4h]
 
   v23 = this;
-  result = IEntity::FlagBits(a2, Selected);
+  result = IEntity::FlagBits(a2, EntityFlag_Selected);
   if ( result )
     result = (*(int (__thiscall **)(CWorkshopBuildingRole *, struct CBuilding *, int))(*(_DWORD *)v23 + 88))(v23, a2, 1);
   v21 = *((_BYTE *)v23 + 4);
@@ -257,7 +257,7 @@ void  CWorkshopBuildingRole::Init(class CBuilding * a2) {
     if ( *(_BYTE *)(*((_DWORD *)this + 94) + 16 * i + 65) == 1 )
     {
       v5 = CPileMgr::operator[](v16);
-      IEntity::ClearFlagBits(v5, Visible);
+      IEntity::ClearFlagBits(v5, EntityFlag_Visible);
     }
     if ( *(_BYTE *)(*((_DWORD *)this + 94) + 16 * i + 63) != 1
       && BBSupportDbgReport(
@@ -285,7 +285,7 @@ void  CWorkshopBuildingRole::Init(class CBuilding * a2) {
       __debugbreak();
   }
   IAnimatedEntity::RegisterForLogicUpdate(2);
-  if ( IEntity::FlagBits(a2, Selected) )
+  if ( IEntity::FlagBits(a2, EntityFlag_Selected) )
     (*(void (__thiscall **)(CWorkshopBuildingRole *, struct CBuilding *, _DWORD))(*(_DWORD *)this + 88))(this, a2, 0);
   v12 = *(char *)(*((_DWORD *)this + 94) + 43) + IEntity::Y(a2);
   v7 = IEntity::X(a2);
@@ -379,8 +379,8 @@ bool  CWorkshopBuildingRole::SettlerEnter(class CBuilding * a2, int a3) {
       CEntityEvent::~CEntityEvent(v17);
     }
   }
-  IEntity::ClearFlagBits(v26, Visible);
-  IEntity::SetFlagBits(v26, MagicInvisible);
+  IEntity::ClearFlagBits(v26, EntityFlag_Visible);
+  IEntity::SetFlagBits(v26, EntityFlag_MagicInvisible);
   IMovingEntity::SetDisplacementCosts(10);
   v27 = (CMFCToolBarButton *)CBuildingMgr::operator[](*((unsigned __int16 *)v28 + 3));
   v3 = CBuilding::DoorPackedXY(v27);

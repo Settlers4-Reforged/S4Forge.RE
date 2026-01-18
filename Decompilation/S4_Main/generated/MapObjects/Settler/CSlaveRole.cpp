@@ -671,8 +671,8 @@ LABEL_15:
       v23 = IEntity::ID();
       CSettlerMgr::SearchSpaceForSettler((CSettlerMgr *)g_cSettlerMgr, v23, v28, v35);
       CWarMap::AddEntity(a2);
-      IEntity::SetFlagBits(a2, Selectable|Visible);
-      IEntity::ClearFlagBits(a2, OnBoard);
+      IEntity::SetFlagBits(a2, EntityFlag_Selectable|EntityFlag_Visible);
+      IEntity::ClearFlagBits(a2, EntityFlag_OnBoard);
       (*(void (__thiscall **)(ISettlerRole *, CPropertySet *, int))(*(_DWORD *)v55 + 64))(v55, a2, -1);
       *((_BYTE *)v55 + 4) = 17;
       v24 = IEntity::EntityId((unsigned __int16 *)a2);
@@ -713,7 +713,7 @@ LABEL_15:
         v20 = IEntity::Race(a2);
         v21 = CEntityToDoListMgr::SettlerJobList(v20, v27);
         (*(void (__thiscall **)(CPropertySet *, int, int))(*(_DWORD *)a2 + 112))(a2, v21, v34);
-        IEntity::ClearFlagBits(a2, Selectable|Selected);
+        IEntity::ClearFlagBits(a2, EntityFlag_Selectable|EntityFlag_Selected);
         v22 = IEntity::ID();
         (*(void (__thiscall **)(void *, int))(*(_DWORD *)g_pGroupMgr + 28))(g_pGroupMgr, v22);
       }
@@ -807,12 +807,12 @@ void  CSlaveRole::FreeServant(class CSettler * a2) {
   int v3; // esi
   int v4; // eax
 
-  if ( !IEntity::FlagBits(a2, OnBoard) )
+  if ( !IEntity::FlagBits(a2, EntityFlag_OnBoard) )
   {
     v2 = IEntity::WorldIdx();
     v3 = CWorldManager::MapObjectId(v2);
     if ( v3 == IEntity::ID() )
-      IEntity::SetFlagBits(a2, Visible);
+      IEntity::SetFlagBits(a2, EntityFlag_Visible);
   }
   v4 = IEntity::ID();
   return CMapObjectMgr::Kill(v4, 0);

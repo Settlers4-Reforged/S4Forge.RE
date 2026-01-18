@@ -612,7 +612,7 @@ void  CVehicleMgr::Load(class S4::CMapFile &) {
         CS4InvalidMapException::CS4InvalidMapException(&v22);
         _CxxThrowException(&v22, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
       }
-      IEntity::ClearFlagBits(v29, Selected);
+      IEntity::ClearFlagBits(v29, EntityFlag_Selected);
       (*(void (__thiscall **)(unsigned __int16 *))(*(_DWORD *)v29 + 12))(v29);
       v14 = IEntity::ID();
       v13 = IEntity::Type(v29);
@@ -634,7 +634,7 @@ void  CVehicleMgr::Load(class S4::CMapFile &) {
         v5 = v6;
         if ( CWaterFlags::IsBlockedWater(v6) )
         {
-          IEntity::ClearFlagBits(v29, Visible);
+          IEntity::ClearFlagBits(v29, EntityFlag_Visible);
           (*(void (__thiscall **)(unsigned __int16 *, int))(*(_DWORD *)v29 + 32))(v29, 0x4000);
         }
       }

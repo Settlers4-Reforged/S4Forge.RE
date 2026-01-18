@@ -670,7 +670,7 @@ void  CEcoSectorMgr::NotifyChangeEcoSector(int a2, int a3, int a4) {
                 ++*(_WORD *)(v19 + 34);
               }
               v20 = (_DWORD *)CSettlerMgr::operator[](v37);
-              if ( IEntity::FlagBits(v20, Offered) )
+              if ( IEntity::FlagBits(v20, EntityFlag_Offered) )
               {
                 v21 = (CEcoSector *)CEcoSectorMgr::operator[](a3);
                 CEcoSector::GetSettlerOutOfOffer(v21, v37);
@@ -718,7 +718,7 @@ void  CEcoSectorMgr::NotifyChangeEcoSector(int a2, int a3, int a4) {
       if ( !IEntity::WarriorType() )
       {
         v34 = (CEcoSector *)CEcoSectorMgr::operator[](a3);
-        if ( IEntity::FlagBits(v39, Offered) )
+        if ( IEntity::FlagBits(v39, EntityFlag_Offered) )
           CEcoSector::GetSettlerOutOfOffer(v34, v36);
         v30 = CSettler::Role(v39);
         if ( (*(int (__thiscall **)(int))(*(_DWORD *)v30 + 72))(v30) != 18 )
@@ -989,7 +989,7 @@ void  CEcoSectorMgr::ConnectEconomy(int a2, int a3) {
     {
       v31 = (unsigned __int16 *)CSettlerMgr::operator[](k);
       v25 = IAnimatedEntity::Next(v31);
-      IEntity::ClearFlagBits(v31, Offered);
+      IEntity::ClearFlagBits(v31, EntityFlag_Offered);
       v22 = IEntity::ID();
       v16 = IEntity::Type(v31);
       result = CEcoSector::SetSettlerOffer(v38, v16, v22);
@@ -1002,7 +1002,7 @@ void  CEcoSectorMgr::ConnectEconomy(int a2, int a3) {
     {
       v30 = CPileMgr::operator[](n);
       v24 = IAnimatedEntity::Next(v30);
-      IEntity::ClearFlagBits(v30, Offered);
+      IEntity::ClearFlagBits(v30, EntityFlag_Offered);
       v23 = IEntity::ID();
       v17 = IEntity::Type((unsigned __int16 *)v30);
       result = CEcoSector::SetGoodOffer(v38, v17, v23);

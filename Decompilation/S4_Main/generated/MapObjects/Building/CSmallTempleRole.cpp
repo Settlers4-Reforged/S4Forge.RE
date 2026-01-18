@@ -98,7 +98,7 @@ void  CSmallTempleRole::LogicUpdate(class CBuilding * a2) {
   int v10; // [esp+38h] [ebp-4h]
 
   v9 = this;
-  result = IEntity::FlagBits(a2, Selected);
+  result = IEntity::FlagBits(a2, EntityFlag_Selected);
   if ( result )
     result = (*(int (__thiscall **)(CSmallTempleRole *, struct CBuilding *, int))(*(_DWORD *)v9 + 88))(v9, a2, 1);
   v8 = *((_BYTE *)v9 + 4);
@@ -237,7 +237,7 @@ void  CSmallTempleRole::Init(class CBuilding * a2) {
     if ( *(_BYTE *)(*((_DWORD *)this + 94) + 16 * i + 65) == 1 )
     {
       v5 = CPileMgr::operator[](v11);
-      IEntity::ClearFlagBits(v5, Visible);
+      IEntity::ClearFlagBits(v5, EntityFlag_Visible);
     }
     v10 = *(_BYTE *)(*((_DWORD *)this + 94) + 16 * i + 63);
     if ( v10 )
@@ -263,7 +263,7 @@ void  CSmallTempleRole::Init(class CBuilding * a2) {
     __debugbreak();
   }
   (*(void (__thiscall **)(CSmallTempleRole *, struct CBuilding *))(*(_DWORD *)this + 120))(this, a2);
-  result = IEntity::FlagBits(a2, Selected);
+  result = IEntity::FlagBits(a2, EntityFlag_Selected);
   if ( result )
     return (*(int (__thiscall **)(CSmallTempleRole *, struct CBuilding *, _DWORD))(*(_DWORD *)this + 88))(this, a2, 0);
   return result;
@@ -344,8 +344,8 @@ bool  CSmallTempleRole::SettlerEnter(class CBuilding * a2, int a3) {
       CEntityEvent::~CEntityEvent(v16);
     }
   }
-  IEntity::ClearFlagBits(v24, Visible);
-  IEntity::SetFlagBits(v24, MagicInvisible);
+  IEntity::ClearFlagBits(v24, EntityFlag_Visible);
+  IEntity::SetFlagBits(v24, EntityFlag_MagicInvisible);
   IMovingEntity::SetDisplacementCosts(10);
   v25 = (CMFCToolBarButton *)CBuildingMgr::operator[](*((unsigned __int16 *)v26 + 3));
   v4 = CBuilding::DoorPackedXY(v25);

@@ -59,7 +59,7 @@ void  CMineRole::LogicUpdate(class CBuilding * a2) {
   int v7; // [esp+10h] [ebp-Ch]
   char v8; // [esp+14h] [ebp-8h]
 
-  if ( IEntity::FlagBits(a2, Selected) )
+  if ( IEntity::FlagBits(a2, EntityFlag_Selected) )
     (*(void (__thiscall **)(CMineRole *, struct CBuilding *, int))(*(_DWORD *)this + 88))(this, a2, 1);
   v8 = *((_BYTE *)this + 4);
   if ( v8 == 1 )
@@ -227,7 +227,7 @@ void  CMineRole::Init(class CBuilding * a2) {
     if ( *(_BYTE *)(*((_DWORD *)this + 94) + 16 * i + 65) == 1 )
     {
       v5 = CPileMgr::operator[](v11);
-      IEntity::ClearFlagBits(v5, Visible);
+      IEntity::ClearFlagBits(v5, EntityFlag_Visible);
     }
     v10 = *(_BYTE *)(*((_DWORD *)this + 94) + 16 * i + 63);
     if ( v10 )
@@ -263,7 +263,7 @@ void  CMineRole::Init(class CBuilding * a2) {
   *((_BYTE *)this + 380) = 0;
   byte_3F1E50A = 0;
   CMineRole::InitMine(this, a2);
-  result = IEntity::FlagBits(a2, Selected);
+  result = IEntity::FlagBits(a2, EntityFlag_Selected);
   if ( result )
     result = (*(int (__thiscall **)(CMineRole *, struct CBuilding *, _DWORD))(*(_DWORD *)this + 88))(this, a2, 0);
   *((_DWORD *)this + 110) = 0;
@@ -361,8 +361,8 @@ bool  CMineRole::SettlerEnter(class CBuilding * a2, int a3) {
   {
     CSettler::SetOffset(v24, 0.0, 0.0);
   }
-  IEntity::ClearFlagBits(v24, Visible);
-  IEntity::SetFlagBits(v24, MagicInvisible);
+  IEntity::ClearFlagBits(v24, EntityFlag_Visible);
+  IEntity::SetFlagBits(v24, EntityFlag_MagicInvisible);
   IMovingEntity::SetDisplacementCosts(10);
   *((_BYTE *)v25 + 4) = 2;
   *((_BYTE *)v25 + 5) = 0;
@@ -425,7 +425,7 @@ void  CMineRole::GoodArrive(int a2) {
 
   CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
   v2 = (_DWORD *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
-  result = IEntity::FlagBits(v2, Registered);
+  result = IEntity::FlagBits(v2, EntityFlag_Registered);
   if ( result )
     return result;
   CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));

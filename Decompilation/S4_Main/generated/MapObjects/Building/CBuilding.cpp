@@ -79,7 +79,7 @@ int  CBuilding::GetWorkingAreaPackedXY(void)const {
 // Decompiled from bool __thiscall CBuilding::IsBuildUp(_DWORD *this)
 bool  CBuilding::IsBuildUp(void)const {
   
-  return IEntity::FlagBits(this, Birth) == 0;
+  return IEntity::FlagBits(this, EntityFlag_Birth) == 0;
 }
 
 

@@ -53,7 +53,7 @@ void  CCart::Delete(void) {
       CTradingBuildingRole::VehicleArriveCancel(v2, v1, 2);
     }
   }
-  if ( IEntity::FlagBits(this, OnBoard) )
+  if ( IEntity::FlagBits(this, EntityFlag_OnBoard) )
     CCart::KillAllLoadedSettlers(this);
   else
     CCart::DropGoods(this);
@@ -201,9 +201,9 @@ struct SGfxObjectInfo *  CCart::GetGfxInfos(void) {
       0);
     dword_40FE2AC = 65534 - *((unsigned __int16 *)this + 62) * *((unsigned __int16 *)this + 64);
   }
-  if ( IEntity::FlagBits(this, Selected) )
+  if ( IEntity::FlagBits(this, EntityFlag_Selected) )
   {
-    if ( IEntity::FlagBits(this, Selected) )
+    if ( IEntity::FlagBits(this, EntityFlag_Selected) )
       v6 = 73;
     else
       v6 = 0;
@@ -298,7 +298,7 @@ void  CCart::VehicleLogicUpdate(void) {
 
   *((_BYTE *)this + 217) = CCart::IsOnOwnEcoSector(this);
   (*(void (__thiscall **)(CCart *))(*(_DWORD *)this + 172))(this);
-  if ( IEntity::FlagBits(this, Selected) || IEntity::FlagBits(this, (EntityFlag)0x400u) )
+  if ( IEntity::FlagBits(this, EntityFlag_Selected) || IEntity::FlagBits(this, (EntityFlag)0x400u) )
     (*(void (__thiscall **)(CCart *, int))(*(_DWORD *)this + 148))(this, 1);
   v5 = *((_BYTE *)this + 107);
   if ( v5 == 17 )
@@ -368,7 +368,7 @@ void  CCart::EntityEnter(int a2) {
         CWarMap::RemoveEntity(v11);
         v2 = IEntity::WorldIdx();
         CWorldManager::SetSettlerId(v2, 0);
-        IEntity::SetFlagBits(v11, OnBoard);
+        IEntity::SetFlagBits(v11, EntityFlag_OnBoard);
         v3 = IEntity::ID();
         if ( CCart::IsCarrier(this, v3) )
         {
@@ -387,7 +387,7 @@ void  CCart::EntityEnter(int a2) {
             CEcoSector::ChangeNrOfSettler(EcoSectorPtr, v5, -1);
           }
         }
-        if ( IEntity::FlagBits(v11, Selected) )
+        if ( IEntity::FlagBits(v11, EntityFlag_Selected) )
         {
           v6 = IEntity::ID();
           CInputProcessor::DeSelectEntity(&g_cInputProcessor, v6);
@@ -712,7 +712,7 @@ bool  CCart::CreateFoundationCart(void) {
         v19 = CStaticConfigVarInt::GetIntValue((CStaticConfigVarInt *)&CCart::m_iAmountOfStone) + v18;
         v20 = CStaticConfigVarInt::GetIntValue((CStaticConfigVarInt *)&CCart::m_iAmountOfHammer);
         *((_BYTE *)v53 + 219) = v20 + v19;
-        IEntity::SetFlagBits(v53, VulnerableMask);
+        IEntity::SetFlagBits(v53, EntityFlag_VulnerableMask);
         v21 = IEntity::ID();
         CInputProcessor::DeSelectEntity(&g_cInputProcessor, v21);
         IAnimatedEntity::RegisterForLogicUpdate(16);
@@ -841,12 +841,12 @@ void  CCart::Decrease(int a2) {
   else if ( CCart::HasLoadedSomething(this) )
   {
     CCart::DropGoods(this);
-    IEntity::ClearFlagBits(this, VulnerableMask);
+    IEntity::ClearFlagBits(this, EntityFlag_VulnerableMask);
     CCart::TargetBuildingDestroyed(this);
   }
   else
   {
-    IEntity::ClearFlagBits(this, VulnerableMask);
+    IEntity::ClearFlagBits(this, EntityFlag_VulnerableMask);
   }
 }
 
@@ -902,7 +902,7 @@ int  CCart::AddGood(int a2, int a3) {
         *((_DWORD *)this + 3 * j + 58) += v4;
         *((_DWORD *)this + 3 * j + 57) = a2;
         if ( *((int *)this + 3 * j + 58) > 0 )
-          IEntity::SetFlagBits(this, VulnerableMask);
+          IEntity::SetFlagBits(this, EntityFlag_VulnerableMask);
         a3 -= v4;
       }
     }
@@ -910,9 +910,9 @@ int  CCart::AddGood(int a2, int a3) {
   if ( IEntity::FlagBits(this, (EntityFlag)0x600u) )
     (*(void (__thiscall **)(CCart *, int))(*(_DWORD *)this + 148))(this, 1);
   if ( !CCart::HasLoadedSomething(this) || *((_BYTE *)this + 321) )
-    IEntity::ClearFlagBits(this, VulnerableMask);
+    IEntity::ClearFlagBits(this, EntityFlag_VulnerableMask);
   else
-    IEntity::SetFlagBits(this, VulnerableMask);
+    IEntity::SetFlagBits(this, EntityFlag_VulnerableMask);
   return a3;
 }
 
@@ -938,10 +938,10 @@ int  CCart::RemoveGood(int a2, int a3) {
       a3 -= v4;
     }
   }
-  if ( IEntity::FlagBits(this, Selected) )
+  if ( IEntity::FlagBits(this, EntityFlag_Selected) )
     (*(void (__thiscall **)(CCart *, int))(*(_DWORD *)this + 148))(this, 1);
   if ( !CCart::HasLoadedSomething(this) )
-    IEntity::ClearFlagBits(this, VulnerableMask);
+    IEntity::ClearFlagBits(this, EntityFlag_VulnerableMask);
   return a3;
 }
 
@@ -1440,16 +1440,16 @@ void  CCart::DonkeyArrived(int a2) {
   CWarMap::RemoveEntity(v6);
   v2 = IEntity::WorldIdx();
   CWorldManager::SetSettlerId(v2, 0);
-  IEntity::SetFlagBits(v6, OnBoard);
-  if ( IEntity::FlagBits(v6, Selected) )
+  IEntity::SetFlagBits(v6, EntityFlag_OnBoard);
+  if ( IEntity::FlagBits(v6, EntityFlag_Selected) )
   {
     v3 = IEntity::ID();
     CInputProcessor::DeSelectEntity(&g_cInputProcessor, v3);
   }
-  IEntity::ClearFlagBits(v6, Visible);
+  IEntity::ClearFlagBits(v6, EntityFlag_Visible);
   IAnimatedEntity::UnRegisterFromLogicUpdate(v6);
   CSettlerMgr::DeleteSettler((CSettlerMgr *)g_cSettlerMgr, a2);
-  IEntity::ClearFlagBits(this, VulnerableMask);
+  IEntity::ClearFlagBits(this, EntityFlag_VulnerableMask);
   return CVehicle::OnBuildReady((int)this);
 }
 
@@ -1483,7 +1483,7 @@ void  CCart::SetSelectable(void) {
   }
   else
   {
-    return IEntity::SetFlagBits(this, Selectable);
+    return IEntity::SetFlagBits(this, EntityFlag_Selectable);
   }
   return result;
 }
@@ -1733,8 +1733,8 @@ void  CCart::UnloadToPosition(int a2) {
   IEntity::SetPosition(this, a2);
   (*(void (__thiscall **)(CPaneContainer *, struct CPaneContainer *))(*(_DWORD *)this + 196))(this, a2);
   CWarMap::AddEntity(this);
-  IEntity::SetFlagBits(this, Selectable|Visible);
-  return IEntity::ClearFlagBits(this, OnBoard);
+  IEntity::SetFlagBits(this, EntityFlag_Selectable|EntityFlag_Visible);
+  return IEntity::ClearFlagBits(this, EntityFlag_OnBoard);
 }
 
 
@@ -1774,7 +1774,7 @@ void  CCart::UnloadToPosition(int a2) {
     *((_DWORD *)this + 3 * i + 57) = 0;
     *((_DWORD *)this + 3 * i + 58) = 0;
   }
-  IEntity::ClearFlagBits(this, VulnerableMask);
+  IEntity::ClearFlagBits(this, EntityFlag_VulnerableMask);
   *((_BYTE *)this + 320) = *((_BYTE *)this + 107);
   *((_DWORD *)this + 78) = 0;
   *((_DWORD *)this + 77) = 0;
@@ -1876,7 +1876,7 @@ void  CCart::DropGoods(void) {
   }
   CCart::UnLoadCargo(this);
   CCart::UnLoadSettler(this);
-  return IEntity::ClearFlagBits(this, VulnerableMask);
+  return IEntity::ClearFlagBits(this, EntityFlag_VulnerableMask);
 }
 
 
@@ -2041,7 +2041,7 @@ void  CCart::ChangeToFoundationCart(void) {
   v6 = CStaticConfigVarInt::operator int(&CCart::m_iAmountOfHammer);
   *((_BYTE *)v47 + 219) = v6 + v5;
   *((_BYTE *)v47 + 218) = *((_BYTE *)v47 + 219);
-  IEntity::SetFlagBits(v47, VulnerableMask);
+  IEntity::SetFlagBits(v47, EntityFlag_VulnerableMask);
   IAnimatedEntity::RegisterForLogicUpdate(1);
   *((_BYTE *)v47 + 107) = 27;
   *((_BYTE *)v47 + 214) = 0;
@@ -2066,7 +2066,7 @@ void  CCart::ChangeToFoundationCart(void) {
     CSettler::TakeWaitList(v46);
     (*(void (__thiscall **)(IAnimatedEntity *))(*(_DWORD *)v46 + 56))(v46);
     IAnimatedEntity::UnRegisterFromLogicUpdate(v46);
-    IEntity::ClearFlagBits(v46, Selectable|Visible);
+    IEntity::ClearFlagBits(v46, EntityFlag_Selectable|EntityFlag_Visible);
     v14 = 1;
     v10 = IEntity::Type((unsigned __int16 *)v46);
     v36 = CCart::CSettlerStatus::CSettlerStatus(v19, v44, v10, v14);
@@ -2182,7 +2182,7 @@ bool  CCart::OnRequestSettlers(void) {
       (*(void (__thiscall **)(unsigned __int8 *, CEntityEvent *))(*(_DWORD *)SettlerPtr + 80))(SettlerPtr, v28);
       v40 = -1;
       CEntityEvent::~CEntityEvent(v10);
-      IEntity::ClearFlagBits(SettlerPtr, Selectable|Selected);
+      IEntity::ClearFlagBits(SettlerPtr, EntityFlag_Selectable|EntityFlag_Selected);
       --v39[215];
       v26 = CCart::CSettlerStatus::CSettlerStatus(v11, NearestSettler, 1, 0);
       v25 = v26;
@@ -2386,7 +2386,7 @@ bool  CCart::UnLoadCargo(void) {
     }
   }
   std::vector<CCart::CFoundationCardCargo>::clear(v5);
-  IEntity::ClearFlagBits(this, VulnerableMask);
+  IEntity::ClearFlagBits(this, EntityFlag_VulnerableMask);
   return 1;
 }
 
@@ -2488,7 +2488,7 @@ bool  CCart::OnDestroyFoundationCart(void) {
   v4 = IEntity::Y(this);
   v1 = IEntity::X(this);
   CPileMgr::AddPile((CPileMgr *)&g_cPileMgr, v1, v4, 7, v5, 3, 0, 0, 0, 0);
-  IEntity::ClearFlagBits(this, Visible);
+  IEntity::ClearFlagBits(this, EntityFlag_Visible);
   v2 = IEntity::ID();
   CVehicleMgr::DeleteVehicle((CVehicleMgr *)&g_cVehicleMgr, v2);
   return 1;

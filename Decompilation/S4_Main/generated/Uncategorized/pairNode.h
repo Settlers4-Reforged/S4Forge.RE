@@ -5,9 +5,6 @@
 
 class pairNode : public DNameNode {
 public:
-    // address=[0x3081380]
-     pairNode(class DNameNode *,class DNameNode *);
-
     // address=[0x30880a0]
     virtual char  getLastChar(void)const;
 

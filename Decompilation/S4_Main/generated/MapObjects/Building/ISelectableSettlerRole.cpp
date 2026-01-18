@@ -284,7 +284,7 @@ unsigned int  ISelectableSettlerRole::ThiefCheckMasquerade(class CSettler * a2) 
 void  ISelectableSettlerRole::ThiefExpose(class IEntity * a2) {
   
   IEntity::ClearFlagBits(a2, (EntityFlag)0x10000000u);
-  return IEntity::SetFlagBits(a2, VulnerableMask);
+  return IEntity::SetFlagBits(a2, EntityFlag_VulnerableMask);
 }
 
 
@@ -293,7 +293,7 @@ void  ISelectableSettlerRole::ThiefExpose(class IEntity * a2) {
 void  ISelectableSettlerRole::ThiefDisguise(class IEntity * a2) {
   
   IEntity::SetFlagBits(a2, (EntityFlag)0x10000000u);
-  return IEntity::ClearFlagBits(a2, VulnerableMask);
+  return IEntity::ClearFlagBits(a2, EntityFlag_VulnerableMask);
 }
 
 

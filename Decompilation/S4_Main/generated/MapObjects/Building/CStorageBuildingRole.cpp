@@ -164,7 +164,7 @@ void  CStorageBuildingRole::Init(class CBuilding * a2) {
     if ( *(_BYTE *)(*((_DWORD *)this + 94) + 16 * j + 65) == 1 )
     {
       v5 = CPileMgr::operator[](v11);
-      IEntity::ClearFlagBits(v5, Visible);
+      IEntity::ClearFlagBits(v5, EntityFlag_Visible);
     }
     v15 = v11;
     std::vector<unsigned short>::push_back(&v15);
@@ -174,7 +174,7 @@ void  CStorageBuildingRole::Init(class CBuilding * a2) {
   {
     __debugbreak();
   }
-  if ( IEntity::FlagBits(a2, Selected) )
+  if ( IEntity::FlagBits(a2, EntityFlag_Selected) )
     (*(void (__thiscall **)(CStorageBuildingRole *, struct CBuilding *, _DWORD))(*(_DWORD *)this + 88))(this, a2, 0);
   v6 = CBuilding::EcoSectorId(a2);
   CStorageBuildingRole::RegisterPilesAndStorageAtEcosector(this, v6);
@@ -247,7 +247,7 @@ void  CStorageBuildingRole::Switch(void) {
 // Decompiled from int __thiscall CStorageBuildingRole::LogicUpdate(CStorageBuildingRole *this, struct CBuilding *a2)
 void  CStorageBuildingRole::LogicUpdate(class CBuilding * a2) {
   
-  if ( IEntity::FlagBits(a2, Selected) )
+  if ( IEntity::FlagBits(a2, EntityFlag_Selected) )
     (*(void (__thiscall **)(CStorageBuildingRole *, struct CBuilding *, int))(*(_DWORD *)this + 88))(this, a2, 1);
   return IAnimatedEntity::RegisterForLogicUpdate(14);
 }

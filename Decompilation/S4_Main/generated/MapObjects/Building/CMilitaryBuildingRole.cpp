@@ -107,7 +107,7 @@ void  CMilitaryBuildingRole::LogicUpdate(class CBuilding * a2) {
   }
   CMilitaryBuildingRole::ThrowOut(this, a2);
   CMilitaryBuildingRole::OrderWarrior(this, a2);
-  if ( IEntity::FlagBits(a2, Selected) )
+  if ( IEntity::FlagBits(a2, EntityFlag_Selected) )
     (*(void (__thiscall **)(CMilitaryBuildingRole *, struct CBuilding *, int))(*(_DWORD *)this + 88))(this, a2, 1);
   return IAnimatedEntity::RegisterForLogicUpdate(15);
 }
@@ -318,7 +318,7 @@ void  CMilitaryBuildingRole::Init(class CBuilding * a2) {
   }
   IEntity::ClearFlagBits(a2, (EntityFlag)0xFu);
   IEntity::SetFlagBits(a2, (EntityFlag)0xCu);
-  IEntity::SetFlagBits(a2, Ready|VulnerableMask);
+  IEntity::SetFlagBits(a2, EntityFlag_Ready|EntityFlag_VulnerableMask);
   *((_BYTE *)this + 380) = 0;
   *((_BYTE *)this + 381) = 0;
   *((_BYTE *)this + 382) = 0;
@@ -334,7 +334,7 @@ void  CMilitaryBuildingRole::Init(class CBuilding * a2) {
   std::vector<unsigned short>::clear();
   std::vector<unsigned short>::clear();
   std::vector<unsigned short>::resize(*(unsigned __int8 *)(this[94] + 220));
-  if ( IEntity::FlagBits(a2, Selected) )
+  if ( IEntity::FlagBits(a2, EntityFlag_Selected) )
     (*(void (__thiscall **)(_DWORD *, _DWORD *, _DWORD))(*this + 88))(this, a2, 0);
   v2 = IEntity::WorldIdx();
   v6 = *(char *)(this[94] + 40) + CWorldManager::X(v2);
@@ -628,7 +628,7 @@ void  CMilitaryBuildingRole::RemoveInhabitant(class CBuilding * a2) {
     if ( *v3 )
     {
       v4 = (_DWORD *)CSettlerMgr::operator[]((unsigned __int16)*v3);
-      if ( !IEntity::FlagBits(v4, OnBoard)
+      if ( !IEntity::FlagBits(v4, EntityFlag_OnBoard)
         && BBSupportDbgReport(
              2,
              "MapObjects\\Building\\MilitaryBuilding.cpp",
@@ -994,8 +994,8 @@ bool  CMilitaryBuildingRole::SettlerEnter(class CBuilding * a2, int a3) {
         v8 = (struct CPaneContainer *)IEntity::PackedXY(a2);
         IEntity::SetPosition(v22, v8);
         CSettler::TakeWaitList(v22);
-        IEntity::ClearFlagBits(v22, Attached);
-        IEntity::ClearFlagBits(v22, VulnerableMask);
+        IEntity::ClearFlagBits(v22, EntityFlag_Attached);
+        IEntity::ClearFlagBits(v22, EntityFlag_VulnerableMask);
         v9 = IEntity::Type((unsigned __int16 *)v22);
         v17 = CSettlerMgr::SettlerWarriorType(v9);
         if ( v17 == 2 )
@@ -1256,7 +1256,7 @@ void  CMilitaryBuildingRole::TowerGuardEnter(bool a2) {
   (*(void (__thiscall **)(IAnimatedEntity *))(*(_DWORD *)v5 + 104))(v5);
   IAnimatedEntity::UnRegisterFromLogicUpdate(v5);
   CSettler::TakeWaitList(v5);
-  IEntity::ClearFlagBits(v5, VulnerableMask);
+  IEntity::ClearFlagBits(v5, EntityFlag_VulnerableMask);
   CMilitaryBuildingRole::SetSettlerTowerInfo(this, v5, -1, -1, 0);
   *((_WORD *)this + 194) = 0;
   if ( a2 )
@@ -1290,7 +1290,7 @@ void  CMilitaryBuildingRole::KillInhabitant(class CBuilding * a2) {
     if ( *v4 )
     {
       v7 = (CSettler *)CSettlerMgr::operator[](v6);
-      if ( !IEntity::FlagBits(v7, OnBoard)
+      if ( !IEntity::FlagBits(v7, EntityFlag_OnBoard)
         && BBSupportDbgReport(
              2,
              "MapObjects\\Building\\MilitaryBuilding.cpp",
@@ -1300,7 +1300,7 @@ void  CMilitaryBuildingRole::KillInhabitant(class CBuilding * a2) {
         __debugbreak();
       }
       CSettler::SetBuilding(v7, 0);
-      IEntity::ClearFlagBits(v7, Visible);
+      IEntity::ClearFlagBits(v7, EntityFlag_Visible);
       CMapObjectMgr::Kill(v6, 0);
       *(_WORD *)std::vector<unsigned short>::operator[]((char *)this + 424, i) = 0;
     }
@@ -1501,8 +1501,8 @@ void  CMilitaryBuildingRole::ThrowOutSettler(class CBuilding * a2, int a3) {
   v5 = CBuilding::DoorX(a2);
   CSettlerMgr::SearchSpaceForSettler((CSettlerMgr *)g_cSettlerMgr, v13, v5, v9);
   CWarMap::AddEntity(v15);
-  IEntity::SetFlagBits(v15, Selectable|Visible);
-  IEntity::ClearFlagBits(v15, OnBoard);
+  IEntity::SetFlagBits(v15, EntityFlag_Selectable|EntityFlag_Visible);
+  IEntity::ClearFlagBits(v15, EntityFlag_OnBoard);
   v9 = IEntity::EntityId((unsigned __int16 *)a2);
   v8 = v13;
   v6 = IEntity::OwnerId((unsigned __int8 *)v15);
@@ -1774,7 +1774,7 @@ void  CMilitaryBuildingRole::InsertDoor(class CBuilding * a2, bool a3) {
   CSettler::SetBuilding(v7, *((unsigned __int16 *)this + 3));
   if ( a3 )
   {
-    IEntity::ClearFlagBits(v7, VulnerableMask);
+    IEntity::ClearFlagBits(v7, EntityFlag_VulnerableMask);
     *((_BYTE *)this + 336) = 0;
     *((_DWORD *)this + 37) = 0;
     result = (int)this;
@@ -1808,7 +1808,7 @@ void  CMilitaryBuildingRole::RemoveDoorIfNecessary(class CBuilding * a2) {
   *((_DWORD *)this + 37) = 0;
   *((_DWORD *)this + 38) = 0;
   v3 = (CSettler *)CSettlerMgr::operator[](v4);
-  IEntity::ClearFlagBits(v3, Visible);
+  IEntity::ClearFlagBits(v3, EntityFlag_Visible);
   CSettler::SetBuilding(v3, 0);
   return (CMilitaryBuildingRole *)CMapObjectMgr::Kill(v4, 0);
 }
@@ -2030,7 +2030,7 @@ void  CMilitaryBuildingRole::InsertTowerGuard(void) {
     {
       v17 = (unsigned __int8 *)CSettlerMgr::operator[](v18);
       v16 = IEntity::WarriorType();
-      if ( (v16 == 2 || v16 == 3) && IEntity::FlagBits(v17, Selectable|Attached) == 0x2000 )
+      if ( (v16 == 2 || v16 == 3) && IEntity::FlagBits(v17, EntityFlag_Selectable|EntityFlag_Attached) == 0x2000 )
       {
         v1 = IEntity::OwnerId(v17);
         v2 = CAlliances::PlayerBit(v1);

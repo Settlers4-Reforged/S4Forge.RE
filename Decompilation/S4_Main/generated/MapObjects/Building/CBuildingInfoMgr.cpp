@@ -9,9 +9,9 @@ struct CBuildingInfoMgr::SBuildingInfos const & __cdecl CBuildingInfoMgr::GetBui
   if ( CBuildingInfoMgr::m_bInit != 1
     && BBSupportDbgReport(
          2,
-         (int)"d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\mapobjects\\building\\BuildingInfoMgr.h",
+         "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\mapobjects\\building\\BuildingInfoMgr.h",
          312,
-         (int)"m_bInit == true") == 1 )
+         "m_bInit == true") == 1 )
   {
     __debugbreak();
   }
@@ -73,7 +73,7 @@ bool  CBuildingInfoMgr::DbgCheckBuildingBits(int a2, int a3) {
   const char *BuildingName; // eax
   const char *v12; // eax
   const char *v13; // eax
-  int v15; // [esp-8h] [ebp-4C00h]
+  unsigned int v15; // [esp-8h] [ebp-4C00h]
   const char *RaceName; // [esp-4h] [ebp-4BFCh]
   const char *v17; // [esp-4h] [ebp-4BFCh]
   const char *v18; // [esp-4h] [ebp-4BFCh]
@@ -133,12 +133,12 @@ bool  CBuildingInfoMgr::DbgCheckBuildingBits(int a2, int a3) {
   }
   v52 = (char *)&CBuildingInfoMgr::m_vBuildingInfos + 70384 * a2 + 848 * a3;
   v46 = 1;
-  CBuildingFlagsWalk::CBuildingFlagsWalk(0, 0, *v52, v52[1], v52 + 736);
+  CBuildingFlagsWalk::CBuildingFlagsWalk((CBuildingFlagsWalk *)v22, 0, 0, *v52, v52[1], (int)(v52 + 736));
   while ( (unsigned __int8)CBuildingFlagsWalk::NextPosition(v22) )
   {
     v15 = CBuildingFlagsWalk::CurrentY(v22) + 15;
     v3 = CBuildingFlagsWalk::CurrentX(v22);
-    if ( !Grid::InQuadrat((Grid *)(v3 + 15), v15, 31) )
+    if ( !Grid::InQuadrat(v3 + 15, v15, 0x1Fu) )
     {
       v46 = 0;
       break;
@@ -162,7 +162,7 @@ bool  CBuildingInfoMgr::DbgCheckBuildingBits(int a2, int a3) {
   }
   v45 = 1;
   v44 = 1;
-  CBuildingFlagsWalk::CBuildingFlagsWalk(0, 0, *v52, v52[1], v52 + 720);
+  CBuildingFlagsWalk::CBuildingFlagsWalk((CBuildingFlagsWalk *)v23, 0, 0, *v52, v52[1], (int)(v52 + 720));
   while ( (unsigned __int8)CBuildingFlagsWalk::NextPosition(v23) )
   {
     v4 = &v54[5 * CBuildingFlagsWalk::CurrentY(v23) + 200];
@@ -200,7 +200,7 @@ bool  CBuildingInfoMgr::DbgCheckBuildingBits(int a2, int a3) {
   }
   v47 = 1;
   v48 = 0;
-  CBuildingFlagsWalk::CBuildingFlagsWalk(0, 0, *v52, v52[1], v52 + 752);
+  CBuildingFlagsWalk::CBuildingFlagsWalk((CBuildingFlagsWalk *)v21, 0, 0, *v52, v52[1], (int)(v52 + 752));
   while ( (unsigned __int8)CBuildingFlagsWalk::NextPosition(v21) )
   {
     v33 = CBuildingFlagsWalk::CurrentX(v21);
@@ -321,7 +321,7 @@ bool  CBuildingInfoMgr::DbgCheckBuildingBits(int a2, int a3) {
     v43 = 0;
     v30 = v52[42];
     v31 = v52[43];
-    CBuildingFlagsWalk::CBuildingFlagsWalk(0, 0, *v52, v52[1], v52 + 752);
+    CBuildingFlagsWalk::CBuildingFlagsWalk((CBuildingFlagsWalk *)v20, 0, 0, *v52, v52[1], (int)(v52 + 752));
     while ( (unsigned __int8)CBuildingFlagsWalk::NextPosition(v20) )
     {
       v27 = CBuildingFlagsWalk::CurrentX(v20);
@@ -347,7 +347,7 @@ bool  CBuildingInfoMgr::DbgCheckBuildingBits(int a2, int a3) {
   }
   if ( v52[6] )
   {
-    CBuildingFlagsWalk::CBuildingFlagsWalk(0, 0, *v52, v52[1], v52 + 816);
+    CBuildingFlagsWalk::CBuildingFlagsWalk((CBuildingFlagsWalk *)v19, 0, 0, *v52, v52[1], (int)(v52 + 816));
     while ( (unsigned __int8)CBuildingFlagsWalk::NextPosition(v19) )
     {
       v24 = CBuildingFlagsWalk::CurrentX(v19);
@@ -360,19 +360,19 @@ bool  CBuildingInfoMgr::DbgCheckBuildingBits(int a2, int a3) {
   BBSupportTracePrintF(-2147483641, "%s (%s)", BuildingName, RaceName);
   BBSupportTracePrintF(-2147483641, "Hotspot: ( %i, %i )", *v52, v52[1]);
   BBSupportTracePrintF(-2147483641, "B U I L D I N G   B I T S");
-  CBuildingBits::PrintToTraceFile((CBuildingBits *)v54, 0x80000007);
+  CBuildingBits::PrintToTraceFile((CBuildingBits *)v54, -2147483641);
   v17 = CS4DefineNames::GetRaceName(a2);
   v12 = CS4DefineNames::GetBuildingName(a3);
   BBSupportTracePrintF(-2147483641, "%s (%s)", v12, v17);
   BBSupportTracePrintF(-2147483641, "B L O C K I N G   B I T S");
-  CBuildingBits::PrintToTraceFile((CBuildingBits *)v55, 0x80000007);
+  CBuildingBits::PrintToTraceFile((CBuildingBits *)v55, -2147483641);
   if ( !v52[6] )
     return v51;
   v18 = CS4DefineNames::GetRaceName(a2);
   v13 = CS4DefineNames::GetBuildingName(a3);
   BBSupportTracePrintF(-2147483641, "%s (%s)", v13, v18);
   BBSupportTracePrintF(-2147483641, "W A T E R   B I T S");
-  CBuildingBits::PrintToTraceFile((CBuildingBits *)v53, 0x80000007);
+  CBuildingBits::PrintToTraceFile((CBuildingBits *)v53, -2147483641);
   return v51;
 }
 

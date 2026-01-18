@@ -2,19 +2,6 @@
 
 // Definitions for class pairNode
 
-// address=[0x3081380]
-// Decompiled from pairNode *__thiscall pairNode::pairNode(pairNode *this, struct DNameNode *a2, struct DNameNode *a3)
- pairNode::pairNode(class DNameNode *,class DNameNode *) {
-  
-  DNameNode::DNameNode(this);
-  *(_DWORD *)this = &pairNode::_vftable_;
-  *((_DWORD *)this + 1) = a2;
-  *((_DWORD *)this + 2) = a3;
-  *((_DWORD *)this + 3) = -1;
-  return this;
-}
-
-
 // address=[0x30880a0]
 // Decompiled from char __thiscall pairNode::getLastChar(pairNode *this)
 char  pairNode::getLastChar(void)const {

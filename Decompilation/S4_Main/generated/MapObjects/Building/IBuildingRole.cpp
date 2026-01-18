@@ -484,7 +484,7 @@ void  IBuildingRole::RemoveInhabitant(class CBuilding * a2) {
   v3 = IEntity::PackedXY(v17);
   if ( v3 == IEntity::PackedXY(v13) )
   {
-    if ( !IEntity::FlagBits(v17, OnBoard)
+    if ( !IEntity::FlagBits(v17, EntityFlag_OnBoard)
       && BBSupportDbgReport(
            2,
            "MapObjects\\Building\\BuildingRole.cpp",
@@ -522,7 +522,7 @@ void  IBuildingRole::RemoveInhabitant(class CBuilding * a2) {
     v7 = Y16X16::PackXYFast(v15, v16);
     (*(void (__thiscall **)(unsigned __int8 *, int))(*(_DWORD *)v17 + 52))(v17, v7);
   }
-  else if ( IEntity::FlagBits(v17, OnBoard)
+  else if ( IEntity::FlagBits(v17, EntityFlag_OnBoard)
          && BBSupportDbgReport(
               2,
               "MapObjects\\Building\\BuildingRole.cpp",
@@ -531,9 +531,9 @@ void  IBuildingRole::RemoveInhabitant(class CBuilding * a2) {
   {
     __debugbreak();
   }
-  IEntity::SetFlagBits(v17, Visible);
-  IEntity::ClearFlagBits(v17, MagicInvisible);
-  IEntity::ClearFlagBits(v17, OnBoard);
+  IEntity::SetFlagBits(v17, EntityFlag_Visible);
+  IEntity::ClearFlagBits(v17, EntityFlag_MagicInvisible);
+  IEntity::ClearFlagBits(v17, EntityFlag_OnBoard);
   result = this;
   this[4] = 0;
   return result;
@@ -1082,8 +1082,8 @@ void  IBuildingRole::InitCommon(class CBuilding * a2) {
   *(_BYTE *)(this + 29) = 0;
   *(_BYTE *)(this + 5) = 0;
   IBuildingRole::WorkingAreaChanged(this);
-  IEntity::ClearFlagBits(a2, Birth);
-  IEntity::SetFlagBits(a2, Ready);
+  IEntity::ClearFlagBits(a2, EntityFlag_Birth);
+  IEntity::SetFlagBits(a2, EntityFlag_Ready);
   v6 = IEntity::ID();
   v5 = IEntity::Y(a2);
   v2 = IEntity::X(a2);

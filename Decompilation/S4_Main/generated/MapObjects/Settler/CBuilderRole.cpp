@@ -375,7 +375,7 @@ void  CBuilderRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent
   }
   else
   {
-    result = (CBuilderRole *)IEntity::FlagBits(a2, Registered);
+    result = (CBuilderRole *)IEntity::FlagBits(a2, EntityFlag_Registered);
     if ( !result )
     {
       if ( debug && DEBUG_FLAGS[dword_4152090] )

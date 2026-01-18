@@ -35,7 +35,7 @@ bool  IDecoObject::IsStaticInstance(void)const {
   *((_BYTE *)this + 10) = 32;
   *((_WORD *)this + 6) = a4;
   *((_BYTE *)this + 36) = 0;
-  IEntity::SetFlagBits(this, Visible);
+  IEntity::SetFlagBits(this, EntityFlag_Visible);
   if ( a6 )
     IEntity::SetPosition((IEntity *)this, 0, 0);
   else
@@ -107,7 +107,7 @@ bool  IDecoObject::IsStaticInstance(void)const {
   *((_BYTE *)this + 10) = 32;
   *((_WORD *)this + 6) = *((_WORD *)a2 + 6);
   *((_BYTE *)this + 36) = 0;
-  IEntity::SetFlagBits(this, Visible);
+  IEntity::SetFlagBits(this, EntityFlag_Visible);
   if ( CWorldManager::ObjectId(a4, a5) )
   {
     v5 = CWorldManager::ObjectId(a4, a5);

@@ -2,23 +2,6 @@
 
 // Definitions for class pDNameNode
 
-// address=[0x3081300]
-// Decompiled from pDNameNode *__thiscall pDNameNode::pDNameNode(pDNameNode *this, struct DName *a2)
- pDNameNode::pDNameNode(class DName * a2) {
-  
-  struct DName *v3; // [esp+0h] [ebp-8h]
-
-  DNameNode::DNameNode(this);
-  *(_DWORD *)this = &pDNameNode::_vftable_;
-  if ( a2 && (DName::status(a2) == 2 || DName::status(a2) == 3) )
-    v3 = 0;
-  else
-    v3 = a2;
-  *((_DWORD *)this + 1) = v3;
-  return this;
-}
-
-
 // address=[0x3088060]
 // Decompiled from char __thiscall pDNameNode::getLastChar(DName **this)
 char  pDNameNode::getLastChar(void)const {

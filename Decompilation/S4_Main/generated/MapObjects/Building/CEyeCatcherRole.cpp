@@ -129,7 +129,7 @@ void  CEyeCatcherRole::Init(class CBuilding * a2) {
   int result; // eax
 
   IBuildingRole::InitCommon((int)a2);
-  result = IEntity::FlagBits(a2, Selected);
+  result = IEntity::FlagBits(a2, EntityFlag_Selected);
   if ( result )
     return (*(int (__thiscall **)(CEyeCatcherRole *, struct CBuilding *, _DWORD))(*(_DWORD *)this + 88))(this, a2, 0);
   return result;

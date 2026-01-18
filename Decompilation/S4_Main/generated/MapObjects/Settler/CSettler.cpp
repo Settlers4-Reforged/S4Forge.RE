@@ -109,7 +109,7 @@ void  CSettler::Delete(void) {
   *(_DWORD *)(this + 20) &= ~0x10000000u;
   if ( IEntity::Type((unsigned __int16 *)this) < 67
     && !IEntity::WarriorType()
-    && !IEntity::FlagBits((_DWORD *)this, OnBoard) )
+    && !IEntity::FlagBits((_DWORD *)this, EntityFlag_OnBoard) )
   {
     *(_DWORD *)(this + 20) |= 0x10000000u;
   }
@@ -183,10 +183,10 @@ void  CSettler::LogicUpdate(void) {
       return result;
   }
   if ( IAnimatedEntity::ProcessAllEvents(this) )
-    return IEntity::FlagBits(this, Registered);
+    return IEntity::FlagBits(this, EntityFlag_Registered);
   v2 = std::auto_ptr<ISettlerRole>::operator->((_DWORD *)this + 25);
   (*(void (__thiscall **)(int, CSettler *))(*(_DWORD *)v2 + 24))(v2, this);
-  return IEntity::FlagBits(this, Registered);
+  return IEntity::FlagBits(this, EntityFlag_Registered);
 }
 
 
@@ -380,7 +380,7 @@ struct SGfxObjectInfo *  CSettler::GetGfxInfos(void) {
     dword_40FE26C = 0;
   }
   byte_40FE266 = 0;
-  if ( IEntity::FlagBits((_DWORD *)this, Selected) )
+  if ( IEntity::FlagBits((_DWORD *)this, EntityFlag_Selected) )
   {
     v8 = std::auto_ptr<ISettlerRole>::operator->((_DWORD *)(this + 100));
     byte_40FE266 = (*(int (__thiscall **)(int, int))(*(_DWORD *)v8 + 108))(v8, this);
@@ -446,7 +446,7 @@ void  CSettler::GetPatchGfx(struct SGfxPatchObject & a2) {
 
   std::auto_ptr<ISettlerRole>::operator->((_DWORD *)this + 25);
   ISettlerRole::Update(this);
-  result = IEntity::FlagBits(this, Visible);
+  result = IEntity::FlagBits(this, EntityFlag_Visible);
   if ( !result )
     return result;
   v7 = *((char *)this + 68);
@@ -472,7 +472,7 @@ void  CSettler::NewRole(class std::auto_ptr<class ISettlerRole> a2) {
   int v8; // [esp+1Ch] [ebp-4h]
 
   v8 = 0;
-  if ( IEntity::FlagBits(this, Died) )
+  if ( IEntity::FlagBits(this, EntityFlag_Died) )
   {
     BBSupportTracePrintF(0, "STOP this settler is dead");
     v8 = -1;
@@ -515,7 +515,7 @@ void  CSettler::NewToDoList(class std::list<class CEntityTask,class std::allocat
   int v11; // [esp+28h] [ebp-4h]
 
   v10 = this;
-  if ( IEntity::FlagBits(this, Died) )
+  if ( IEntity::FlagBits(this, EntityFlag_Died) )
     return BBSupportTracePrintF(0, "STOP this settler is dead");
   if ( a2 )
   {
@@ -621,7 +621,7 @@ void  CSettler::AttachToBuilding(int a2) {
   v4 = CBuildingMgr::operator[](a2);
   v2 = IEntity::EntityId((unsigned __int16 *)this);
   (*(void (__thiscall **)(int, int))(*(_DWORD *)v4 + 116))(v4, v2);
-  result = IEntity::FlagBits(this, Attached);
+  result = IEntity::FlagBits(this, EntityFlag_Attached);
   if ( result )
     return result;
   result = BBSupportDbgReport(2, "MapObjects\\Settler\\Settler.cpp", 1397, "FlagBits(ENTITY_FLAG_ATTACHED) != 0");
@@ -676,7 +676,7 @@ void  CSettler::ChangeType(int newSettlerType, bool a3, bool a4) {
   unsigned __int16 *ecoSector; // [esp+40h] [ebp-14h]
   int v41; // [esp+50h] [ebp-4h]
 
-  if ( IEntity::FlagBits(this, Died) )
+  if ( IEntity::FlagBits(this, EntityFlag_Died) )
   {
     BBSupportTracePrintF(0, "STOP this settler is dead");
   }
@@ -687,7 +687,7 @@ void  CSettler::ChangeType(int newSettlerType, bool a3, bool a4) {
     {
       __debugbreak();
     }
-    if ( IEntity::FlagBits(this, Offered)
+    if ( IEntity::FlagBits(this, EntityFlag_Offered)
       && BBSupportDbgReport(2, "MapObjects\\Settler\\Settler.cpp", 579, "!FlagBits(ENTITY_FLAG_OFFERED)") == 1 )
     {
       __debugbreak();
@@ -788,7 +788,7 @@ void  CSettler::ChangeType(int newSettlerType, bool a3, bool a4) {
           if ( IEntity::FlagBits(this, (EntityFlag)0x400u) )
           {
             IEntity::ClearFlagBits(this, (EntityFlag)0x400u);
-            IEntity::SetFlagBits(this, Selected);
+            IEntity::SetFlagBits(this, EntityFlag_Selected);
           }
         }
         else
@@ -1289,7 +1289,7 @@ int  CSettler::SetGroupFlags(int a2) {
   race2 = IEntity::Race(this);
   this->m_cHealth = CSettlerMgr::GetSettlerInfo(race2, settlerType)->m_bHealth;
   IEntity::ClearFlagBits(this, (EntityFlag)0x2800u);
-  IEntity::SetFlagBits(this, Ready|Visible|0x1000);
+  IEntity::SetFlagBits(this, EntityFlag_Ready|EntityFlag_Visible|0x1000);
   *(_DWORD *)&this->m_iFlags |= CSettlerMgr::SettlerWarriorType(settlerType);
   if ( !IEntity::WarriorType() )
   {
@@ -1339,7 +1339,7 @@ int  CSettler::SetGroupFlags(int a2) {
   *((_BYTE *)this + 69) = 0;
   *((_BYTE *)this + 10) = 0;
   *((_WORD *)this + 6) = a2;
-  IEntity::ClearFlagBits(this, VulnerableMask|Selectable|Visible|0x800);
+  IEntity::ClearFlagBits(this, EntityFlag_VulnerableMask|EntityFlag_Selectable|EntityFlag_Visible|0x800);
   *((_DWORD *)this + 5) = *((_DWORD *)this + 5);
   *((_BYTE *)this + 70) = 5;
   return this;
@@ -1401,7 +1401,7 @@ int  CSettler::Walk(void) {
   int v3; // eax
   int v4; // [esp+0h] [ebp-8h]
 
-  if ( IEntity::FlagBits(this, Died) )
+  if ( IEntity::FlagBits(this, EntityFlag_Died) )
   {
     BBSupportTracePrintF(0, "STOP this settler is dead");
     return -1;

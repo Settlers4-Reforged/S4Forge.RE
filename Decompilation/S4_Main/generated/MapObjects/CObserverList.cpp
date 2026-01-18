@@ -57,7 +57,7 @@ void  CObserverList::Attach(int a2, int a3) {
   {
     __debugbreak();
   }
-  if ( IEntity::FlagBits(v5, Attached)
+  if ( IEntity::FlagBits(v5, EntityFlag_Attached)
     && BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 40, "pObserver->FlagBits(ENTITY_FLAG_ATTACHED) == 0") == 1 )
   {
     __debugbreak();
@@ -72,7 +72,7 @@ void  CObserverList::Attach(int a2, int a3) {
   {
     __debugbreak();
   }
-  result = IEntity::FlagBits(v5, Attached);
+  result = IEntity::FlagBits(v5, EntityFlag_Attached);
   if ( result )
     return result;
   result = BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 45, "pObserver->FlagBits(ENTITY_FLAG_ATTACHED) != 0");
@@ -105,7 +105,7 @@ void  CObserverList::Detach(int a2) {
   {
     __debugbreak();
   }
-  if ( !IEntity::FlagBits(v4, Attached)
+  if ( !IEntity::FlagBits(v4, EntityFlag_Attached)
     && BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 66, "pObserver->FlagBits(ENTITY_FLAG_ATTACHED) != 0") == 1 )
   {
     __debugbreak();
@@ -120,7 +120,7 @@ void  CObserverList::Detach(int a2) {
   {
     __debugbreak();
   }
-  result = IEntity::FlagBits(v4, Attached);
+  result = IEntity::FlagBits(v4, EntityFlag_Attached);
   if ( !result )
     return result;
   result = BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 71, "pObserver->FlagBits(ENTITY_FLAG_ATTACHED) == 0");
@@ -258,7 +258,7 @@ void  CObserverList::DetachAllObservers(void) {
       {
         __debugbreak();
       }
-      if ( !IEntity::FlagBits(v14, Attached)
+      if ( !IEntity::FlagBits(v14, EntityFlag_Attached)
         && BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 93, "pObserver->FlagBits(ENTITY_FLAG_ATTACHED) != 0") == 1 )
       {
         __debugbreak();
@@ -273,7 +273,7 @@ void  CObserverList::DetachAllObservers(void) {
       {
         __debugbreak();
       }
-      if ( IEntity::FlagBits(v14, Attached) )
+      if ( IEntity::FlagBits(v14, EntityFlag_Attached) )
       {
         if ( BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 98, "pObserver->FlagBits(ENTITY_FLAG_ATTACHED) == 0") == 1 )
           __debugbreak();
@@ -367,7 +367,7 @@ void  CObserverList::DetachAllNonePileObservers(void) {
       {
         __debugbreak();
       }
-      if ( !IEntity::FlagBits(v17, Attached)
+      if ( !IEntity::FlagBits(v17, EntityFlag_Attached)
         && BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 127, "pObserver->FlagBits(ENTITY_FLAG_ATTACHED) != 0") == 1 )
       {
         __debugbreak();
@@ -382,7 +382,7 @@ void  CObserverList::DetachAllNonePileObservers(void) {
       {
         __debugbreak();
       }
-      if ( IEntity::FlagBits(v17, Attached) )
+      if ( IEntity::FlagBits(v17, EntityFlag_Attached) )
       {
         if ( BBSupportDbgReport(
                2,

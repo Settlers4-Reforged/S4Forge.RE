@@ -99,7 +99,8 @@ void  CSoldierRole::LogicUpdateJob(class CSettler * a2) {
     v54 = (unsigned __int8 *)CMapObjectMgr::EntityPtr(*((unsigned __int16 *)v55 + 17));
     if ( v54 )
     {
-      if ( IEntity::FlagBits(v54, (EntityFlag)((char *)&loc_1FFFFFF + 1)) && IEntity::FlagBits(v54, VulnerableMask) )
+      if ( IEntity::FlagBits(v54, (EntityFlag)((char *)&loc_1FFFFFF + 1))
+        && IEntity::FlagBits(v54, EntityFlag_VulnerableMask) )
       {
         v53 = *(unsigned __int8 *)(*((_DWORD *)v55 + 24) + 3);
         v43 = IEntity::OwnerId((unsigned __int8 *)a2);
@@ -578,7 +579,7 @@ bool  CSoldierRole::SetFree(class CSettler * a2, int a3) {
   v4 = IEntity::EntityId((unsigned __int16 *)a2);
   if ( v6 )
   {
-    if ( !IEntity::FlagBits(a2, Attached)
+    if ( !IEntity::FlagBits(a2, EntityFlag_Attached)
       && BBSupportDbgReport(
            2,
            "MapObjects\\Settler\\SoldierRole.cpp",
@@ -597,7 +598,7 @@ bool  CSoldierRole::SetFree(class CSettler * a2, int a3) {
     {
       __debugbreak();
     }
-    if ( IEntity::FlagBits(a2, Attached)
+    if ( IEntity::FlagBits(a2, EntityFlag_Attached)
       && BBSupportDbgReport(
            2,
            "MapObjects\\Settler\\SoldierRole.cpp",
@@ -607,7 +608,7 @@ bool  CSoldierRole::SetFree(class CSettler * a2, int a3) {
       __debugbreak();
     }
   }
-  else if ( IEntity::FlagBits(a2, Attached)
+  else if ( IEntity::FlagBits(a2, EntityFlag_Attached)
          && BBSupportDbgReport(
               2,
               "MapObjects\\Settler\\SoldierRole.cpp",
@@ -646,7 +647,7 @@ void  CSoldierRole::PostLoadInit(class CSettler * a2) {
   v19 = this;
   v18 = IEntity::PackedXY(a2);
   v17 = IEntity::WorldIdx();
-  if ( v18 && (unsigned __int8)CWorldManager::InWorldPackedXY(v18) && !IEntity::FlagBits(a2, OnBoard) )
+  if ( v18 && (unsigned __int8)CWorldManager::InWorldPackedXY(v18) && !IEntity::FlagBits(a2, EntityFlag_OnBoard) )
   {
     v2 = CWorldManager::MapObjectId(v17);
     if ( v2 != IEntity::EntityId((unsigned __int16 *)a2)
@@ -1296,7 +1297,7 @@ void  CSoldierRole::TakeJob(class CSettler * a2) {
       }
       v10 = IEntity::WorldIdx();
       CWorldManager::SetSettlerId(v10, 0);
-      if ( IEntity::FlagBits(a2, Selectable)
+      if ( IEntity::FlagBits(a2, EntityFlag_Selectable)
         && BBSupportDbgReport(
              2,
              "MapObjects\\Settler\\SoldierRole.cpp",
@@ -1305,7 +1306,7 @@ void  CSoldierRole::TakeJob(class CSettler * a2) {
       {
         __debugbreak();
       }
-      IEntity::SetFlagBits(a2, OnBoard);
+      IEntity::SetFlagBits(a2, EntityFlag_OnBoard);
       v24 = (unsigned __int8 *)CMapObjectMgr::EntityPtr(*((unsigned __int16 *)this + 16));
       if ( v24 )
       {
@@ -1363,7 +1364,7 @@ void  CSoldierRole::Init(class CSettler * a2) {
   CSettlerMgr::GetSettlerInfo(v2, v6);
   *(_WORD *)(this + 18) = IEntity::EntityId((unsigned __int16 *)a2);
   *(_DWORD *)(this + 80) = 0;
-  IEntity::SetFlagBits(a2, VulnerableMask|Selectable);
+  IEntity::SetFlagBits(a2, EntityFlag_VulnerableMask|EntityFlag_Selectable);
   v3 = IEntity::Type((unsigned __int16 *)a2);
   v8 = CSettlerMgr::SettlerWarriorType(v3);
   IEntity::SetFlagBits(a2, v8);
@@ -1469,9 +1470,9 @@ void  CSoldierRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent
       break;
     case 7:
     case 9:
-      if ( !IEntity::FlagBits(a2, Selectable) )
+      if ( !IEntity::FlagBits(a2, EntityFlag_Selectable) )
       {
-        IEntity::SetFlagBits(a2, Selectable);
+        IEntity::SetFlagBits(a2, EntityFlag_Selectable);
         CSettler::TakeWaitList(a2);
         (**(void (__thiscall ***)(int, CPropertySet *, int, _DWORD))(this + 48))(this + 48, a2, -1, 0);
         *(_BYTE *)(this + 4) = 27;
@@ -1487,7 +1488,7 @@ void  CSoldierRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent
       }
       break;
     case 0x11:
-      if ( !IEntity::FlagBits(a2, Selectable) )
+      if ( !IEntity::FlagBits(a2, EntityFlag_Selectable) )
         goto LABEL_12;
       if ( *((_DWORD *)a3 + 2) == 13
         && !ISelectableSettlerRole::ProcessGoToPosFerry((ISelectableSettlerRole *)this, a2, a3) )
@@ -1501,7 +1502,7 @@ void  CSoldierRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent
           goto LABEL_33;
         if ( ISettlerRole::HomeEntityId(this) )
           goto LABEL_33;
-        if ( !IEntity::FlagBits(a2, Selectable) )
+        if ( !IEntity::FlagBits(a2, EntityFlag_Selectable) )
           goto LABEL_33;
         if ( !CWorldManager::FlagBits(v65, v64, 1u) )
           goto LABEL_33;
@@ -1588,7 +1589,7 @@ LABEL_33:
         }
         v25 = IEntity::ID();
         (*(void (__thiscall **)(_DWORD *, int))(*v71 + 164))(v71, v25);
-        IEntity::ClearFlagBits(a2, Selectable|Selected);
+        IEntity::ClearFlagBits(a2, EntityFlag_Selectable|EntityFlag_Selected);
         v26 = IEntity::ID();
         (*(void (__thiscall **)(void *, int))(*(_DWORD *)g_pGroupMgr + 28))(g_pGroupMgr, v26);
         v49 = *(unsigned __int16 *)(this + 32);
@@ -1603,7 +1604,7 @@ LABEL_33:
       }
       else
       {
-        IEntity::SetFlagBits(a2, Selectable);
+        IEntity::SetFlagBits(a2, EntityFlag_Selectable);
         v50 = IEntity::Type((unsigned __int16 *)a2);
         v41 = IEntity::Type((unsigned __int16 *)a2);
         v28 = IEntity::Race(a2);
@@ -1618,8 +1619,8 @@ LABEL_33:
       v4 = IEntity::ID();
       CSettlerMgr::SearchSpaceForSettler((CSettlerMgr *)g_cSettlerMgr, v4, v36, v45);
       CWarMap::AddEntity(a2);
-      IEntity::SetFlagBits(a2, Selectable|Visible);
-      IEntity::ClearFlagBits(a2, OnBoard);
+      IEntity::SetFlagBits(a2, EntityFlag_Selectable|EntityFlag_Visible);
+      IEntity::ClearFlagBits(a2, EntityFlag_OnBoard);
       (**(void (__thiscall ***)(int, CPropertySet *, int, _DWORD))(this + 48))(this + 48, a2, -1, 0);
       *(_BYTE *)(this + 4) = 27;
       if ( IEntity::Race(a2) != 3 )
@@ -1634,7 +1635,7 @@ LABEL_33:
           v37,
           v46);
       }
-      if ( IEntity::FlagBits(a2, Attached) )
+      if ( IEntity::FlagBits(a2, EntityFlag_Attached) )
       {
         ManakopterPtr = CFlyingMgr::GetManakopterPtr((CFlyingMgr *)g_cFlyingMgr, *(unsigned __int16 *)(this + 32));
         if ( ManakopterPtr )
@@ -1663,7 +1664,7 @@ LABEL_33:
           v32 = IEntity::Race(a2);
           v33 = CEntityToDoListMgr::SettlerJobList(v32, v43);
           (*(void (__thiscall **)(CPropertySet *, int, int))(*(_DWORD *)a2 + 112))(a2, v33, v52);
-          IEntity::ClearFlagBits(a2, Selectable|Selected);
+          IEntity::ClearFlagBits(a2, EntityFlag_Selectable|EntityFlag_Selected);
           v34 = IEntity::ID();
           (*(void (__thiscall **)(struct CManakopter *, int))(*(_DWORD *)v70 + 112))(v70, v34);
         }
@@ -1682,7 +1683,7 @@ LABEL_12:
              "CSoldierRole::ConvertEventIntoGoal(): Invalid event %i!",
              *((_DWORD *)a3 + 1)) == 1 )
         __debugbreak();
-      if ( !IEntity::FlagBits(a2, Registered) )
+      if ( !IEntity::FlagBits(a2, EntityFlag_Registered) )
       {
         CTrace::Print("ConvertEventIntoGoal SoldierRole - unknown event %u", *((_DWORD *)a3 + 1));
         IAnimatedEntity::RegisterForLogicUpdate(1);
@@ -1716,7 +1717,7 @@ void  CSoldierRole::ComeToWork(class CSettler * a2, int a3) {
   {
     __debugbreak();
   }
-  if ( !IEntity::FlagBits(a2, Attached)
+  if ( !IEntity::FlagBits(a2, EntityFlag_Attached)
     && BBSupportDbgReport(
          2,
          "MapObjects\\Settler\\SoldierRole.cpp",
@@ -1743,7 +1744,7 @@ void  CSoldierRole::ComeToWork(class CSettler * a2, int a3) {
   v4 = IEntity::Race(a2);
   v5 = CEntityToDoListMgr::SettlerJobList(v4, v8);
   (*(void (__thiscall **)(struct CSettler *, int, int))(*(_DWORD *)a2 + 112))(a2, v5, v10);
-  IEntity::ClearFlagBits(a2, Selectable|Selected);
+  IEntity::ClearFlagBits(a2, EntityFlag_Selectable|EntityFlag_Selected);
   result = IEntity::Type((unsigned __int16 *)v12);
   if ( result == 24 )
     return result;

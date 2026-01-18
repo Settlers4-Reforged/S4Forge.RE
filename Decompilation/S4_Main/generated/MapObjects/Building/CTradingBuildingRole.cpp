@@ -93,7 +93,7 @@ void  CTradingBuildingRole::LogicUpdate(class CBuilding * a2) {
   unsigned __int8 *BuildingPtr; // [esp+0h] [ebp-Ch]
   char v4; // [esp+4h] [ebp-8h]
 
-  if ( IEntity::FlagBits(a2, Selected) )
+  if ( IEntity::FlagBits(a2, EntityFlag_Selected) )
   {
     (*((void (__thiscall **)(CInternationalTrader **, struct CBuilding *, int))*this + 22))(this, a2, 1);
     if ( !*((_BYTE *)this + 624) )
@@ -245,7 +245,7 @@ void  CTradingBuildingRole::Init(class CBuilding * a2) {
     if ( *(_BYTE *)(*((_DWORD *)this + 94) + 16 * k + 65) == 1 )
     {
       v5 = CPileMgr::operator[](v14);
-      IEntity::ClearFlagBits(v5, Visible);
+      IEntity::ClearFlagBits(v5, EntityFlag_Visible);
     }
     if ( *(_BYTE *)(*((_DWORD *)this + 94) + 16 * k + 63) != 4
       && BBSupportDbgReport(
@@ -271,7 +271,7 @@ void  CTradingBuildingRole::Init(class CBuilding * a2) {
   v9 = Y16X16::PackXYFast(v10, v11);
   CBuilding::SetWorkingAreaPackedXY(a2, v9);
   *((_BYTE *)this + 4) = 1;
-  if ( IEntity::FlagBits(a2, Selected) )
+  if ( IEntity::FlagBits(a2, EntityFlag_Selected) )
     (*(void (__thiscall **)(CTradingBuildingRole *, struct CBuilding *, _DWORD))(*(_DWORD *)this + 88))(this, a2, 0);
   IAnimatedEntity::RegisterForLogicUpdate(14);
   if ( !*((_DWORD *)this + 171)
@@ -338,7 +338,7 @@ void  CTradingBuildingRole::NotifySelected(void) {
   _DWORD *v1; // eax
 
   v1 = (_DWORD *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
-  if ( IEntity::FlagBits(v1, Selected) )
+  if ( IEntity::FlagBits(v1, EntityFlag_Selected) )
   {
     if ( !*((_BYTE *)this + 624) )
     {

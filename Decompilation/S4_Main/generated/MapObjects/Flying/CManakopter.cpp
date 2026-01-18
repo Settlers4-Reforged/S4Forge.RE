@@ -314,7 +314,7 @@ bool  CManakopter::SettlerEnter(int a2) {
   CWarMap::RemoveEntity(SettlerPtr);
   v3 = IEntity::WorldIdx();
   CWorldManager::SetSettlerId(v3, 0);
-  IEntity::SetFlagBits(SettlerPtr, OnBoard);
+  IEntity::SetFlagBits(SettlerPtr, EntityFlag_OnBoard);
   IFlyingEntity::SetFlyingFlagBits(v11, 4);
   IFlyingEntity::ClearFlyingFlagBits(v11, 2);
   if ( !*((_DWORD *)v11 + 30) && !*((_DWORD *)v11 + 31) && !*((_DWORD *)v11 + 32) )

@@ -48,7 +48,7 @@ void  CSaboteurRole::LogicUpdate(class CSettler * a2) {
   if ( !v11 )
     return ISettlerRole::LogicUpdate(this, a2);
   if ( !IEntity::FlagBits(v11, (EntityFlag)((char *)&loc_1FFFFFF + 1))
-    || !IEntity::FlagBits(v11, VulnerableMask)
+    || !IEntity::FlagBits(v11, EntityFlag_VulnerableMask)
     || CStateGame::Rand(g_pGame) >= (unsigned int)g_uSaboteurHitChange )
   {
     return ISettlerRole::LogicUpdate(this, a2);

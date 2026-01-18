@@ -381,7 +381,7 @@ void  CGroupMgr::SendGroupCommand(int groupSize, unsigned short const * group, i
     {
       v21 = group[i];
       v24 = CMapObjectMgr::EntityPtr(v21);
-      if ( v24 && IEntity::FlagBits(v24, Ready|OnBoard) == 0x2000000 )
+      if ( v24 && IEntity::FlagBits(v24, EntityFlag_Ready|EntityFlag_OnBoard) == 0x2000000 )
         break;
     }
     if ( i >= 0 )
@@ -394,7 +394,7 @@ void  CGroupMgr::SendGroupCommand(int groupSize, unsigned short const * group, i
           v27 = CMapObjectMgr::EntityPtr(v20);
           if ( v27 )
           {
-            if ( IEntity::FlagBits(v27, Ready|OnBoard) == Ready )
+            if ( IEntity::FlagBits(v27, EntityFlag_Ready|EntityFlag_OnBoard) == EntityFlag_Ready )
             {
               v19 = CEntityEvent::CEntityEvent((CEntityEvent *)v8, 0x11u, 13, sendFlags, 0, 0);
               v18 = v19;
@@ -430,7 +430,7 @@ void  CGroupMgr::SendGroupCommand(int groupSize, unsigned short const * group, i
         {
           groupMemberId = group[i];
           groupMember = CMapObjectMgr::EntityPtr(groupMemberId);
-          if ( groupMember && IEntity::FlagBits(groupMember, Ready|OnBoard) == Ready )
+          if ( groupMember && IEntity::FlagBits(groupMember, EntityFlag_Ready|EntityFlag_OnBoard) == EntityFlag_Ready )
           {
             NextDestination = CGroupDestinations::GetNextDestination((CGroupDestinations *)v30);
             if ( !(unsigned __int8)CWorldManager::InWorldPackedXY(NextDestination)

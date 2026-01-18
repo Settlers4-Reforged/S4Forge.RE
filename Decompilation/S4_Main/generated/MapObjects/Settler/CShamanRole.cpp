@@ -64,7 +64,7 @@ void  CShamanRole::LogicUpdateJob(class CSettler * a2) {
   {
     *((_DWORD *)v20 + 20) = 0;
     (*(void (__thiscall **)(CShamanRole *, struct CSettler *))(*(_DWORD *)v20 + 40))(v20, a2);
-    if ( !IEntity::FlagBits(a2, Registered) )
+    if ( !IEntity::FlagBits(a2, EntityFlag_Registered) )
       IAnimatedEntity::RegisterForLogicUpdate(1);
     return;
   }

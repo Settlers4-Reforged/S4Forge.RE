@@ -215,7 +215,7 @@ void  IPileRole::SubjectDie(class CPile * a2, int a3) {
   {
     __debugbreak();
   }
-  if ( IEntity::FlagBits(a2, Attached)
+  if ( IEntity::FlagBits(a2, EntityFlag_Attached)
     && BBSupportDbgReport(2, "MapObjects\\Pile\\PileRole.cpp", 221, "_pPile->FlagBits(ENTITY_FLAG_ATTACHED) == 0") == 1 )
   {
     __debugbreak();

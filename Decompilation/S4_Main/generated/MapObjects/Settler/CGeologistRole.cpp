@@ -289,7 +289,7 @@ class CGeologistRole * __cdecl CGeologistRole::Load(std::istream & a1) {
 
   *(_DWORD *)this = &CGeologistRole::_vftable_;
   v3 = (CPropertySet *)CSettlerMgr::operator[](*((unsigned __int16 *)this + 9));
-  if ( !IEntity::FlagBits(v3, OnBoard) )
+  if ( !IEntity::FlagBits(v3, EntityFlag_OnBoard) )
     CWarMap::RemoveEntity(v3);
   if ( *((_DWORD *)this + 6) )
   {
@@ -532,8 +532,8 @@ void  CGeologistRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEve
   {
     case 7:
       v37 = *((_DWORD *)a3 + 3);
-      IEntity::SetFlagBits(a2, Selectable);
-      IEntity::ClearFlagBits(a2, OnBoard);
+      IEntity::SetFlagBits(a2, EntityFlag_Selectable);
+      IEntity::ClearFlagBits(a2, EntityFlag_OnBoard);
       v36 = IEntity::Type((unsigned __int16 *)a2);
       v28 = IEntity::Type((unsigned __int16 *)a2);
       v19 = IEntity::Race(a2);
@@ -611,7 +611,7 @@ void  CGeologistRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEve
         }
         v12 = IEntity::ID();
         (*(void (__thiscall **)(_DWORD *, int))(*v47 + 164))(v47, v12);
-        IEntity::ClearFlagBits(a2, Selectable|Selected);
+        IEntity::ClearFlagBits(a2, EntityFlag_Selectable|EntityFlag_Selected);
         v13 = IEntity::ID();
         (*(void (__thiscall **)(void *, int))(*(_DWORD *)g_pGroupMgr + 28))(g_pGroupMgr, v13);
         v32 = *(unsigned __int16 *)(this + 32);
@@ -626,7 +626,7 @@ void  CGeologistRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEve
       }
       else
       {
-        IEntity::SetFlagBits(a2, Selectable);
+        IEntity::SetFlagBits(a2, EntityFlag_Selectable);
         v33 = IEntity::Type((unsigned __int16 *)a2);
         v25 = IEntity::Type((unsigned __int16 *)a2);
         v15 = IEntity::Race(a2);
@@ -641,8 +641,8 @@ void  CGeologistRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEve
       v17 = IEntity::ID();
       CSettlerMgr::SearchSpaceForSettler((CSettlerMgr *)g_cSettlerMgr, v17, v26, v34);
       CWarMap::AddEntity(a2);
-      IEntity::SetFlagBits(a2, Selectable|Visible);
-      IEntity::ClearFlagBits(a2, OnBoard);
+      IEntity::SetFlagBits(a2, EntityFlag_Selectable|EntityFlag_Visible);
+      IEntity::ClearFlagBits(a2, EntityFlag_OnBoard);
       *(_BYTE *)(this + 4) = 27;
       v35 = *(unsigned __int16 *)(this + 32);
       v27 = IEntity::ID();
@@ -656,7 +656,7 @@ void  CGeologistRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEve
       *(_WORD *)(this + 32) = 0;
       break;
     default:
-      v3 = IEntity::FlagBits(a2, Registered);
+      v3 = IEntity::FlagBits(a2, EntityFlag_Registered);
       if ( !v3 )
       {
         BBSupportTracePrintF(0, "ConvertEventIntoGoal GeologistRole - unknown event %u", *((_DWORD *)a3 + 1));

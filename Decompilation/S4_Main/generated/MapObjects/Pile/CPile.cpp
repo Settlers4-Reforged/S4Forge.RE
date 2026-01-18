@@ -170,7 +170,7 @@ bool  CPile::GetOfferFlag(void)const {
 // Decompiled from bool __thiscall CPile::IsInOfferList(CPile *this)
 bool  CPile::IsInOfferList(void)const {
   
-  return IEntity::FlagBits(this, Offered) != 0;
+  return IEntity::FlagBits(this, EntityFlag_Offered) != 0;
 }
 
 
@@ -1289,7 +1289,7 @@ bool  CPile::ExecuteChangeGoodTypeUnforseen(int a2) {
   *(_WORD *)(this + 78) = a11;
   *(_WORD *)(this + 82) = 0;
   IEntity::SetFlagBits((_DWORD *)this, (EntityFlag)0x1100u);
-  IEntity::ClearFlagBits((_DWORD *)this, Registered);
+  IEntity::ClearFlagBits((_DWORD *)this, EntityFlag_Registered);
   v15 = CWorldManager::Index(a2, a3);
   IEntity::SetPosition((IEntity *)this, a2, a3);
   v13 = a7;

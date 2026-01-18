@@ -363,8 +363,8 @@ void  IEntity::Store(std::ostream & a2) {
 // Decompiled from void __thiscall IEntity::PostLoadInit(IEntity *this)
 void  IEntity::PostLoadInit(void) {
   
-  IEntity::ClearFlagBits(this, Selected);
-  IEntity::ClearFlagBits(this, (EntityFlag)0x400u);
+  IEntity::ClearFlagBits(this, EntityFlag_Selected);
+  IEntity::ClearFlagBits(this, (EntityFlag)0x400);
 }
 
 
@@ -630,7 +630,7 @@ int  IEntity::GetObserverTarget(enum T_OBSERVER_TARGET a2) {
 // Decompiled from void __thiscall IEntity::AddToWarMap(IEntity *this)
 void  IEntity::AddToWarMap(void) {
   
-  if ( IEntity::FlagBits(this, Ready) )
+  if ( IEntity::FlagBits(this, EntityFlag_Ready) )
     CWarMap::AddEntity(this);
 }
 

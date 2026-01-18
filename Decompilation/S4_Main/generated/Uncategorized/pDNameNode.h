@@ -5,9 +5,6 @@
 
 class pDNameNode : public DNameNode {
 public:
-    // address=[0x3081300]
-     pDNameNode(class DName * a2);
-
     // address=[0x3088060]
     virtual char  getLastChar(void)const;
 

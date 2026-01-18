@@ -19,7 +19,7 @@ void  CAnyWherePileRole::Init(class CPile *) {
   (*(void (__thiscall **)(struct CPile *))(*(_DWORD *)a2 + 104))(a2);
   CPile::SetRoleType(a2, 3);
   CPile::SetOfferFlag(a2, 1);
-  IEntity::SetFlagBits(a2, Visible);
+  IEntity::SetFlagBits(a2, EntityFlag_Visible);
   if ( (*(int (__thiscall **)(struct CPile *))(*(_DWORD *)a2 + 40))(a2) )
   {
     CPile::OfferCompletePileIfPossible(a2, 0);

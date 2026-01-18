@@ -114,7 +114,7 @@ void  CResidenceBuildingRole::LogicUpdate(class CBuilding * a2) {
   unsigned __int8 v27; // [esp+2Bh] [ebp-1h]
 
   v26 = this;
-  LocalPlayerId = IEntity::FlagBits(a2, Selected);
+  LocalPlayerId = IEntity::FlagBits(a2, EntityFlag_Selected);
   if ( LocalPlayerId )
     LOBYTE(LocalPlayerId) = (*(int (__thiscall **)(_DWORD *, struct CBuilding *, int))(*v26 + 88))(v26, a2, 1);
   v21 = *((_BYTE *)v26 + 4);
@@ -276,7 +276,7 @@ void  CResidenceBuildingRole::Init(class CBuilding * a2) {
     }
   }
   CEcoSectorMgr::UpdateStrikeSettlers(g_cESMgr);
-  if ( IEntity::FlagBits(a2, Selected) )
+  if ( IEntity::FlagBits(a2, EntityFlag_Selected) )
     (*(void (__thiscall **)(CResidenceBuildingRole *, struct CBuilding *, _DWORD))(*(_DWORD *)this + 88))(this, a2, 0);
   result = this;
   if ( *((unsigned __int8 *)this + 380) < *(int *)(*((_DWORD *)this + 94) + 496) )

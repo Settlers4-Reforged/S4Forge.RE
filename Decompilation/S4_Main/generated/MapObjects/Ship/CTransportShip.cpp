@@ -504,7 +504,7 @@ void  CTransportShip::DropGoods(void) {
     if ( GoodAmount )
       CTransportShip::RemoveGood(this, i, GoodAmount);
   }
-  return IEntity::ClearFlagBits(this, VulnerableMask);
+  return IEntity::ClearFlagBits(this, EntityFlag_VulnerableMask);
 }
 
 
@@ -752,7 +752,7 @@ void  CTransportShip::SetNeutralTraderStatus(bool a2) {
   *((_BYTE *)this + 193) = a2;
   if ( a2 )
   {
-    IEntity::ClearFlagBits(this, VulnerableMask);
+    IEntity::ClearFlagBits(this, EntityFlag_VulnerableMask);
     result = this;
     if ( !*((_DWORD *)this + 73) || *((_DWORD *)this + 73) == 2 )
     {
@@ -785,7 +785,7 @@ void  CTransportShip::ClearNeutralTraderStatus(void) {
   
   *((_BYTE *)this + 193) = 0;
   *((_DWORD *)this + 73) = 0;
-  return IEntity::SetFlagBits(this, VulnerableMask);
+  return IEntity::SetFlagBits(this, EntityFlag_VulnerableMask);
 }
 
 

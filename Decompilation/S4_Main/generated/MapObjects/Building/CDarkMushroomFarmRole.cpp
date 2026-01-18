@@ -110,7 +110,7 @@ void  CDarkMushroomFarmRole::LogicUpdate(class CBuilding * a2) {
   unsigned __int8 v15; // [esp+16h] [ebp-2h]
   bool IsDoorNeighborAndEnsignPosGreen; // [esp+17h] [ebp-1h]
 
-  if ( IEntity::FlagBits(a2, Selected) )
+  if ( IEntity::FlagBits(a2, EntityFlag_Selected) )
     (*(void (__thiscall **)(unsigned int *, CMFCToolBarButton *, int))(*this + 88))(this, a2, 1);
   switch ( *((_BYTE *)this + 4) )
   {
@@ -316,7 +316,7 @@ bool  CDarkMushroomFarmRole::SettlerEnter(class CBuilding * a2, int a3) {
 
   *((_WORD *)this + 4) = a3;
   v4 = (_DWORD *)CSettlerMgr::operator[](a3);
-  IEntity::ClearFlagBits(v4, Visible);
+  IEntity::ClearFlagBits(v4, EntityFlag_Visible);
   *((_BYTE *)this + 29) = 1;
   return 0;
 }
@@ -503,7 +503,7 @@ bool  CDarkMushroomFarmRole::PlantMushroom(class CBuilding * a2) {
   v16 = *((unsigned __int16 *)v34 + 4);
   v11 = CBuilding::DoorWorldIdx(a2);
   CWorldManager::SetSettlerId(v11, v16);
-  IEntity::SetFlagBits(v32, Visible);
+  IEntity::SetFlagBits(v32, EntityFlag_Visible);
   v23 = CSettlerMgr::operator[](*((unsigned __int16 *)v34 + 4));
   v20 = CEntityEvent::CEntityEvent((CEntityEvent *)v17, 6u, 0, 0, ObjectType, v34[4]);
   v19 = v20;

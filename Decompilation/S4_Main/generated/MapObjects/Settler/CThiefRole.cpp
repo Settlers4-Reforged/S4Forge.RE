@@ -442,7 +442,7 @@ void  CThiefRole::TakeJob(class CSettler * a2) {
       result = IAnimatedEntity::RegisterForLogicUpdate(1);
       break;
     case 0xA:
-      if ( IEntity::FlagBits(a2, Attached) )
+      if ( IEntity::FlagBits(a2, EntityFlag_Attached) )
       {
         IAnimatedEntity::SetFrame(1);
         if ( *(__int16 *)(this + 14) > 0 || *(__int16 *)(this + 16) > 0 )
@@ -520,7 +520,7 @@ void  CThiefRole::TakeJob(class CSettler * a2) {
         v15 = CVehicleMgr::operator[](*(unsigned __int16 *)(this + 32));
         v11 = IEntity::ID();
         (*(void (__thiscall **)(int, int))(*(_DWORD *)v15 + 128))(v15, v11);
-        if ( !IEntity::FlagBits(a2, OnBoard)
+        if ( !IEntity::FlagBits(a2, EntityFlag_OnBoard)
           && BBSupportDbgReport(
                2,
                "MapObjects\\Settler\\ThiefRole.cpp",
@@ -546,7 +546,7 @@ void  CThiefRole::Init(class CSettler * a2) {
   
   int result; // eax
 
-  if ( IEntity::FlagBits(a2, Offered|Attached)
+  if ( IEntity::FlagBits(a2, EntityFlag_Offered|EntityFlag_Attached)
     && BBSupportDbgReport(
          2,
          "MapObjects\\Settler\\ThiefRole.cpp",
@@ -561,7 +561,7 @@ void  CThiefRole::Init(class CSettler * a2) {
     __debugbreak();
   }
   *(_WORD *)(this + 18) = IEntity::ID();
-  IEntity::SetFlagBits(a2, VulnerableMask|Selectable);
+  IEntity::SetFlagBits(a2, EntityFlag_VulnerableMask|EntityFlag_Selectable);
   CWarMap::AddEntity(a2);
   *(_DWORD *)(this + 60) = 0;
   *(_BYTE *)(this + 64) = 0;
@@ -706,8 +706,8 @@ void  CThiefRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent *
       {
         __debugbreak();
       }
-      IEntity::SetFlagBits(a2, Selectable);
-      IEntity::ClearFlagBits(a2, OnBoard);
+      IEntity::SetFlagBits(a2, EntityFlag_Selectable);
+      IEntity::ClearFlagBits(a2, EntityFlag_OnBoard);
       CSettler::TakeWaitList(a2);
       v30 = IEntity::ID();
       v21 = IEntity::OwnerId((unsigned __int8 *)a2);
@@ -782,7 +782,7 @@ void  CThiefRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent *
         ISettlerRole::NewDestination((ISettlerRole *)this, a2, v41, 0);
         v10 = IEntity::ID();
         (*(void (__thiscall **)(_DWORD *, int))(*v43 + 164))(v43, v10);
-        IEntity::ClearFlagBits(a2, Selectable|Selected);
+        IEntity::ClearFlagBits(a2, EntityFlag_Selectable|EntityFlag_Selected);
         v11 = IEntity::ID();
         (*(void (__thiscall **)(void *, int))(*(_DWORD *)g_pGroupMgr + 28))(g_pGroupMgr, v11);
         v33 = *(unsigned __int16 *)std::vector<unsigned short>::operator[](0);
@@ -808,7 +808,7 @@ void  CThiefRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent *
       }
       else
       {
-        IEntity::SetFlagBits(a2, Selectable);
+        IEntity::SetFlagBits(a2, EntityFlag_Selectable);
         v35 = IEntity::Type((unsigned __int16 *)a2);
         v27 = IEntity::Type((unsigned __int16 *)a2);
         v17 = IEntity::Race(a2);
@@ -823,8 +823,8 @@ void  CThiefRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent *
       v19 = IEntity::ID();
       CSettlerMgr::SearchSpaceForSettler((CSettlerMgr *)g_cSettlerMgr, v19, v28, v36);
       CWarMap::AddEntity(a2);
-      IEntity::SetFlagBits(a2, Selectable|Visible);
-      IEntity::ClearFlagBits(a2, OnBoard);
+      IEntity::SetFlagBits(a2, EntityFlag_Selectable|EntityFlag_Visible);
+      IEntity::ClearFlagBits(a2, EntityFlag_OnBoard);
       CSettler::TakeWaitList(a2);
       v37 = *(unsigned __int16 *)(this + 32);
       v29 = IEntity::ID();
@@ -837,7 +837,7 @@ void  CThiefRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent *
                      v37);
       break;
     default:
-      v3 = IEntity::FlagBits(a2, Registered);
+      v3 = IEntity::FlagBits(a2, EntityFlag_Registered);
       if ( !v3 )
       {
         CTrace::Print("ConvertEventIntoGoal ThiefRole - unknown event %u", *((_DWORD *)a3 + 1));

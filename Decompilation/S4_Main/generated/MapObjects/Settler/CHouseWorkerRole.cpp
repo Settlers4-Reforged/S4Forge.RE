@@ -506,7 +506,7 @@ LABEL_14:
       if ( (*(unsigned __int8 (__thiscall **)(ISettlerRole *, CMFCCaptionButton *))(*(_DWORD *)v21 + 124))(v21, a2) )
       {
         IMovingEntity::SetDisplacementCosts(10);
-        IEntity::ClearFlagBits(a2, Visible);
+        IEntity::ClearFlagBits(a2, EntityFlag_Visible);
         *((_DWORD *)v21 + 9) = 0;
         *((_DWORD *)v21 + 10) = 0;
         v7 = IEntity::ID();
@@ -579,7 +579,7 @@ void  CHouseWorkerRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityE
       }
       break;
     case 3:
-      if ( !IEntity::FlagBits(a2, MagicInvisible)
+      if ( !IEntity::FlagBits(a2, EntityFlag_MagicInvisible)
         && BBSupportDbgReport(
              2,
              "MapObjects\\Settler\\HouseWorkerRole.cpp",
@@ -616,7 +616,7 @@ void  CHouseWorkerRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityE
                  a3[5]);
       break;
     default:
-      result = IEntity::FlagBits(a2, Registered);
+      result = IEntity::FlagBits(a2, EntityFlag_Registered);
       if ( !result )
       {
         CTrace::Print("ConvertEventIntoGoal HouseWorker - unknown event %u", a3[1]);

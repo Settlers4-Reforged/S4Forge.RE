@@ -121,7 +121,7 @@ void  CHunterRole::LogicUpdateJob(class CSettler * a2) {
           v26 = CMapObjectMgr::EntityPtr(*((unsigned __int16 *)this + 17));
           (*(void (__thiscall **)(int, int))(*(_DWORD *)v26 + 36))(v26, 1);
           v10 = (_DWORD *)CMapObjectMgr::EntityPtr(*((unsigned __int16 *)this + 17));
-          IEntity::ClearFlagBits(v10, Visible);
+          IEntity::ClearFlagBits(v10, EntityFlag_Visible);
           v18 = *((unsigned __int16 *)this + 17);
           v11 = IEntity::ID();
           CTrace::Print("HunterRole: Hunter %d took animal entity %d", v11, v18);
@@ -638,13 +638,13 @@ void  CHunterRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent 
       }
       break;
     case 9:
-      IEntity::SetFlagBits(a2, Visible);
+      IEntity::SetFlagBits(a2, EntityFlag_Visible);
       return (*(int (__thiscall **)(CHunterRole *, struct CSettler *, int))(*(_DWORD *)this + 64))(this, a2, -1);
     default:
       result = (*(int (__thiscall **)(CHunterRole *, struct CSettler *))(*(_DWORD *)this + 124))(this, a2);
       if ( (_BYTE)result )
       {
-        result = IEntity::FlagBits(a2, Registered);
+        result = IEntity::FlagBits(a2, EntityFlag_Registered);
         if ( !result )
         {
           CTrace::Print("ConvertEventIntoGoal HunterRole - unknown event %u", *((_DWORD *)a3 + 1));

@@ -117,7 +117,7 @@ void  CFarmBuildingRole::LogicUpdate(class CBuilding * a2) {
   int v29; // [esp+78h] [ebp-4h]
 
   v28 = this;
-  result = IEntity::FlagBits(a2, Selected);
+  result = IEntity::FlagBits(a2, EntityFlag_Selected);
   if ( result )
     result = (*(int (__thiscall **)(CFarmBuildingRole *, struct CBuilding *, int))(*(_DWORD *)v28 + 88))(v28, a2, 1);
   v26 = *((_BYTE *)v28 + 4);
@@ -154,7 +154,7 @@ void  CFarmBuildingRole::LogicUpdate(class CBuilding * a2) {
            0) )
     {
       v25 = (_DWORD *)CSettlerMgr::operator[](*((unsigned __int16 *)v28 + 4));
-      IEntity::SetFlagBits(v25, Visible);
+      IEntity::SetFlagBits(v25, EntityFlag_Visible);
       v18 = CEntityEvent::CEntityEvent(
               (CEntityEvent *)v14,
               5u,
@@ -199,7 +199,7 @@ void  CFarmBuildingRole::LogicUpdate(class CBuilding * a2) {
                    v8,
                    v12);
     CDecoObjMgr::SetFlagsForObject((CDecoObjMgr *)&g_cDecoObjMgr, v21, v22, ObjectType, 0);
-    IEntity::SetFlagBits(v27, Visible);
+    IEntity::SetFlagBits(v27, EntityFlag_Visible);
     v19 = CSettlerMgr::operator[](*((unsigned __int16 *)v28 + 4));
     v16 = CEntityEvent::CEntityEvent((CEntityEvent *)v13, 6u, 0, 0, ObjectType, *((_DWORD *)v28 + 4));
     v15 = v16;
@@ -304,7 +304,7 @@ void  CFarmBuildingRole::Init(class CBuilding * a2) {
   if ( (unsigned __int8)CPile::IsPatchPile(v5) )
   {
     v6 = CPileMgr::operator[](*((unsigned __int16 *)this + 190));
-    IEntity::ClearFlagBits(v6, Visible);
+    IEntity::ClearFlagBits(v6, EntityFlag_Visible);
   }
   v10 = *(char *)(*((_DWORD *)this + 94) + 478);
   v7 = IEntity::Race(a2);
@@ -325,7 +325,7 @@ void  CFarmBuildingRole::Init(class CBuilding * a2) {
     __debugbreak();
   }
   IAnimatedEntity::RegisterForLogicUpdate(2);
-  result = IEntity::FlagBits(a2, Selected);
+  result = IEntity::FlagBits(a2, EntityFlag_Selected);
   if ( result )
     return (*(int (__thiscall **)(_BYTE *, _BYTE *, _DWORD))(*(_DWORD *)this + 88))(this, a2, 0);
   return result;
@@ -390,7 +390,7 @@ bool  CFarmBuildingRole::SettlerEnter(class CBuilding * a2, int a3) {
     *((_BYTE *)this + 29) = 1;
     *((_WORD *)this + 4) = a3;
   }
-  IEntity::ClearFlagBits(v10, Visible);
+  IEntity::ClearFlagBits(v10, EntityFlag_Visible);
   IMovingEntity::SetDisplacementCosts(10);
   if ( *(_BYTE *)(*((_DWORD *)this + 94) + 480) )
   {

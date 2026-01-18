@@ -341,12 +341,12 @@ void  CMapObjectMgr::Kill(int entityId, int attacker) {
     (char *)attacker);
   if ( (entity->m_iUniqueId & 0x20000000) != 0 )
   {
-    if ( IEntity::FlagBits(entity, AliveMask)
+    if ( IEntity::FlagBits(entity, EntityFlag_AliveMask)
       && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 460, "pEntity->FlagBits(ENTITY_FLAG_ALIVE_MASK) == 0") == 1 )
     {
       __debugbreak();
     }
-    if ( !IEntity::FlagBits(entity, Died)
+    if ( !IEntity::FlagBits(entity, EntityFlag_Died)
       && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 461, "pEntity->FlagBits(ENTITY_FLAG_DIED) != 0") == 1 )
     {
       __debugbreak();
@@ -355,20 +355,20 @@ void  CMapObjectMgr::Kill(int entityId, int attacker) {
   else
   {
     entity->m_iUniqueId |= 0x20000000u;
-    if ( IEntity::FlagBits(entity, Died)
+    if ( IEntity::FlagBits(entity, EntityFlag_Died)
       && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 468, "pEntity->FlagBits(ENTITY_FLAG_DIED) == 0") == 1 )
     {
       __debugbreak();
     }
-    if ( IEntity::FlagBits(entity, Birth) )
+    if ( IEntity::FlagBits(entity, EntityFlag_Birth) )
       IEntity::SetFlagBits(entity, (EntityFlag)0x100000u);
     else
       IEntity::ClearFlagBits(entity, (EntityFlag)0x100000u);
-    IEntity::ClearFlagBits(entity, AliveMask);
-    IEntity::SetFlagBits(entity, Died);
+    IEntity::ClearFlagBits(entity, EntityFlag_AliveMask);
+    IEntity::SetFlagBits(entity, EntityFlag_Died);
     if ( CWarMapNode::IsInWarMap(&entity->m_warMapNode) )
       CWarMap::RemoveEntity(entity);
-    if ( IEntity::FlagBits(entity, Selected) || IEntity::FlagBits(entity, (EntityFlag)0x400u) )
+    if ( IEntity::FlagBits(entity, EntityFlag_Selected) || IEntity::FlagBits(entity, (EntityFlag)0x400u) )
     {
       v3 = IEntity::ID(entity);
       CInputProcessor::DeSelectEntity(&g_cInputProcessor, v3);
@@ -567,7 +567,7 @@ void  CMapObjectMgr::LogicUpdate(void) {
       {
         __debugbreak();
       }
-      IEntity::ClearFlagBits(v21, Registered);
+      IEntity::ClearFlagBits(v21, EntityFlag_Registered);
       v6 = IEntity::Type((unsigned __int16 *)v21);
       v3 = IEntity::ObjType((unsigned __int8 *)v21);
       IMessageTracer::PushFormatedInts(
@@ -673,7 +673,7 @@ int  CMapObjectMgr::RegisterForLogicUpdate(int a2, int a3) {
   v12 = (__int16)a3;
   std::vector<std::deque<unsigned short>>::operator[](v9);
   std::deque<unsigned short>::push_front((int)&v12);
-  IEntity::SetFlagBits(v11, Registered);
+  IEntity::SetFlagBits(v11, EntityFlag_Registered);
   return v9;
 }
 
@@ -728,7 +728,7 @@ void  CMapObjectMgr::UnRegisterFromLogicUpdate(int a2, int a3) {
         v10 = std::deque<unsigned short>::erase(v7, v3, v4, v5);
         std::_Deque_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>::~_Deque_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>(v7);
         v13 = (_DWORD *)CMapObjectMgr::EntityPtr(a3);
-        IEntity::ClearFlagBits(v13, Registered);
+        IEntity::ClearFlagBits(v13, EntityFlag_Registered);
         v19 = -1;
         std::_Deque_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>::~_Deque_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>(v9);
         return;

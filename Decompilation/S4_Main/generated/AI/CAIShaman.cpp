@@ -35,7 +35,7 @@ bool  CAIShaman::FindGlobalTargetForShaman(int player, int a3, int & x, int & y,
   if ( FirstBuildingId )
   {
     v6 = (_DWORD *)CBuildingMgr::operator[](FirstBuildingId);
-    if ( IEntity::FlagBits(v6, Ready) )
+    if ( IEntity::FlagBits(v6, EntityFlag_Ready) )
     {
       v7 = (_DWORD *)CBuildingMgr::operator[](FirstBuildingId);
       v11 = CBuilding::Role(v7);

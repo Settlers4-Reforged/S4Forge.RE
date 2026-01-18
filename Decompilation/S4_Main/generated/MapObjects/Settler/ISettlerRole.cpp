@@ -538,7 +538,7 @@ bool  ISettlerRole::SetFree(class CSettler * settler, int a3) {
   ISettlerRole::DetachFromPile(this, settler, 4, 0);
   if ( this->homeEntityId )
   {
-    if ( !IEntity::FlagBits(settler, Attached)
+    if ( !IEntity::FlagBits(settler, EntityFlag_Attached)
       && BBSupportDbgReport(
            2,
            "MapObjects\\Settler\\SettlerRole.cpp",
@@ -559,7 +559,7 @@ bool  ISettlerRole::SetFree(class CSettler * settler, int a3) {
     ((void (__thiscall *)(struct IEntity *, int))homeEntityId->Detach)(homeEntityId, settlerId);
     this->homeEntityId = 0;
   }
-  if ( IEntity::FlagBits(settler, Attached)
+  if ( IEntity::FlagBits(settler, EntityFlag_Attached)
     && BBSupportDbgReport(
          2,
          "MapObjects\\Settler\\SettlerRole.cpp",
@@ -584,7 +584,7 @@ bool  ISettlerRole::SetFree(class CSettler * settler, int a3) {
   {
     v10 = IEntity::WorldIdx();
     v19 = CWorldManager::EcoSectorId(v10);
-    if ( !IEntity::FlagBits(settler, Offered) )
+    if ( !IEntity::FlagBits(settler, EntityFlag_Offered) )
     {
       settlerId = IEntity::ID(settler);
       v14 = IEntity::Type(settler);
@@ -943,9 +943,9 @@ void  ISettlerRole::InitCommonTaskValues(class CSettler * a2, class CEntityTask 
   if ( *((char *)a3 + 6) >= 0 )
     *((_BYTE *)a2 + 68) = *((_BYTE *)a3 + 6);
   if ( *((_BYTE *)a3 + 20) )
-    IEntity::SetFlagBits(a2, Visible);
+    IEntity::SetFlagBits(a2, EntityFlag_Visible);
   else
-    IEntity::ClearFlagBits(a2, Visible);
+    IEntity::ClearFlagBits(a2, EntityFlag_Visible);
   if ( *((_BYTE *)a3 + 9) )
   {
     if ( !*((_WORD *)this + 16)

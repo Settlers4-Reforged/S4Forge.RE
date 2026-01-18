@@ -275,7 +275,7 @@ LABEL_7:
           dword_600000);
         return (struct CVehicle *)(*(int (__thiscall **)(CWarShip *))(*(_DWORD *)this + 144))(this);
       case 0x24:
-        IEntity::ClearFlagBits(this, Visible);
+        IEntity::ClearFlagBits(this, EntityFlag_Visible);
         v3 = IEntity::EntityId((unsigned __int16 *)this);
         return CVehicleMgr::DeleteVehicle((CVehicleMgr *)&g_cVehicleMgr, v3);
       default:
@@ -294,7 +294,7 @@ LABEL_7:
 struct SGfxObjectInfo *  CWarShip::GetGfxInfos(void) {
   
   CShip::GetGfxInfos((int)this);
-  if ( !IEntity::FlagBits(this, Selected) )
+  if ( !IEntity::FlagBits(this, EntityFlag_Selected) )
     return &IEntity::m_sGfxInfo;
   byte_40FE264 = CShip::GetHealthDisplayID(this);
   byte_40FE265 = CWarShip::GetAmmoDisplayID(this);

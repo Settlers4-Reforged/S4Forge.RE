@@ -64,26 +64,26 @@ void  CMapGeneratorHost::UpdateGroundInformation(void) {
 
 
 // address=[0x1498720]
-// Decompiled from char __thiscall CMapGeneratorHost::SetObject(CMapGeneratorHost *this, Grid *a2, int a3, int a4)
+// Decompiled from char __thiscall CMapGeneratorHost::SetObject(CMapGeneratorHost *this, Grid *a2, unsigned int a3, int a4)
 bool  CMapGeneratorHost::SetObject(int a2, int a3, int a4) {
   
   char *v5; // [esp+4h] [ebp-6Ch]
-  int v6; // [esp+8h] [ebp-68h]
+  unsigned int v6; // [esp+8h] [ebp-68h]
   int v7; // [esp+Ch] [ebp-64h]
   int v8; // [esp+10h] [ebp-60h]
   char *v9; // [esp+14h] [ebp-5Ch]
-  int v10; // [esp+18h] [ebp-58h]
+  unsigned int v10; // [esp+18h] [ebp-58h]
   int v11; // [esp+1Ch] [ebp-54h]
   int v12; // [esp+24h] [ebp-4Ch]
   int v13; // [esp+28h] [ebp-48h]
   int v14; // [esp+2Ch] [ebp-44h]
   int v15; // [esp+34h] [ebp-3Ch] BYREF
   char *v16; // [esp+38h] [ebp-38h]
-  Grid *v17; // [esp+3Ch] [ebp-34h]
-  int v18; // [esp+40h] [ebp-30h]
-  char *v19; // [esp+44h] [ebp-2Ch]
-  Grid *v20; // [esp+48h] [ebp-28h]
-  int v21; // [esp+4Ch] [ebp-24h]
+  int v17; // [esp+3Ch] [ebp-34h]
+  unsigned int v18; // [esp+40h] [ebp-30h]
+  int v19; // [esp+44h] [ebp-2Ch]
+  int v20; // [esp+48h] [ebp-28h]
+  unsigned int v21; // [esp+4Ch] [ebp-24h]
   int m; // [esp+50h] [ebp-20h]
   char *v23; // [esp+54h] [ebp-1Ch]
   int k; // [esp+58h] [ebp-18h]
@@ -94,7 +94,7 @@ bool  CMapGeneratorHost::SetObject(int a2, int a3, int a4) {
   bool v29; // [esp+6Fh] [ebp-1h] BYREF
 
   v28 = this;
-  if ( !Grid::InQuadrat(a2, a3, *((_DWORD *)this + 52)) )
+  if ( !Grid::InQuadrat((int)a2, a3, *((_DWORD *)this + 52)) )
     return 0;
   v23 = (char *)a2 + *((_DWORD *)v28 + 52) * a3;
   if ( *(_BYTE *)(*((_DWORD *)v28 + 79) + 4 * (_DWORD)v23) )
@@ -112,14 +112,14 @@ bool  CMapGeneratorHost::SetObject(int a2, int a3, int a4) {
     v14 = CSpiralOffsets::First(v27);
     for ( i = 0; i < v14; ++i )
     {
-      v20 = (Grid *)((char *)a2 + CSpiralOffsets::DeltaX(i));
+      v20 = (int)a2 + CSpiralOffsets::DeltaX(i);
       v21 = a3 + CSpiralOffsets::DeltaY(i);
       if ( !Grid::InQuadrat(v20, v21, *((_DWORD *)v28 + 52)) )
         return 0;
-      v19 = (char *)v20 + *((_DWORD *)v28 + 52) * v21;
-      if ( *(_BYTE *)(*((_DWORD *)v28 + 79) + 4 * (_DWORD)v19) )
+      v19 = v20 + *((_DWORD *)v28 + 52) * v21;
+      if ( *(_BYTE *)(*((_DWORD *)v28 + 79) + 4 * v19) )
         return 0;
-      if ( (*(_BYTE *)(*((_DWORD *)v28 + 79) + 4 * (_DWORD)v19 + 2) & 0x43) != 0 )
+      if ( (*(_BYTE *)(*((_DWORD *)v28 + 79) + 4 * v19 + 2) & 0x43) != 0 )
         return 0;
     }
   }
@@ -127,11 +127,11 @@ bool  CMapGeneratorHost::SetObject(int a2, int a3, int a4) {
   v12 = CSpiralOffsets::First(v15);
   for ( j = v13; j < v12; ++j )
   {
-    v17 = (Grid *)((char *)a2 + CSpiralOffsets::DeltaX(j));
+    v17 = (int)a2 + CSpiralOffsets::DeltaX(j);
     v18 = a3 + CSpiralOffsets::DeltaY(j);
     if ( !Grid::InQuadrat(v17, v18, *((_DWORD *)v28 + 52)) )
       return 0;
-    if ( (*(_BYTE *)(*((_DWORD *)v28 + 79) + 4 * ((_DWORD)v17 + *((_DWORD *)v28 + 52) * v18) + 2) & 0x43) != 0 )
+    if ( (*(_BYTE *)(*((_DWORD *)v28 + 79) + 4 * (v17 + *((_DWORD *)v28 + 52) * v18) + 2) & 0x43) != 0 )
       return 0;
   }
   *(_BYTE *)(*((_DWORD *)v28 + 79) + 4 * (_DWORD)v23) = a4;

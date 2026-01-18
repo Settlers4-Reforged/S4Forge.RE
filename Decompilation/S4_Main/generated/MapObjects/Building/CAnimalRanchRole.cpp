@@ -54,7 +54,7 @@ void  CAnimalRanchRole::LogicUpdate(class CBuilding * a2) {
   int v37; // [esp+68h] [ebp-4h]
 
   v36 = this;
-  v2 = IEntity::FlagBits(a2, Selected);
+  v2 = IEntity::FlagBits(a2, EntityFlag_Selected);
   if ( v2 )
     LOBYTE(v2) = (*(int (__thiscall **)(CWorkUpBuildingRole *, struct CBuilding *, int))(*(_DWORD *)v36 + 88))(
                    v36,

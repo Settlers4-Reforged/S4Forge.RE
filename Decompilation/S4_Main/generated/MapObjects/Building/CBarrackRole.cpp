@@ -83,7 +83,7 @@ void  CBarrackRole::LogicUpdate(class CBuilding * a2) {
   int v54; // [esp+B8h] [ebp-4h]
 
   v53 = (unsigned __int8 *)this;
-  if ( IEntity::FlagBits(a2, Selected) )
+  if ( IEntity::FlagBits(a2, EntityFlag_Selected) )
     (*(void (__thiscall **)(unsigned __int8 *, struct CBuilding *, int))(*(_DWORD *)v53 + 88))(v53, a2, 1);
   if ( IEntity::FlagBits(a2, (EntityFlag)0x1000u) )
   {
@@ -325,7 +325,7 @@ void  CBarrackRole::Init(class CBuilding * a2) {
   {
     __debugbreak();
   }
-  if ( IEntity::FlagBits(a2, Selected) )
+  if ( IEntity::FlagBits(a2, EntityFlag_Selected) )
     (*(void (__thiscall **)(CBarrackRole *, struct CBuilding *, _DWORD))(*(_DWORD *)v12 + 88))(v12, a2, 0);
   if ( !IEntity::FlagBits(a2, (EntityFlag)0x1000u) )
     return IAnimatedEntity::RegisterForLogicUpdate(31);

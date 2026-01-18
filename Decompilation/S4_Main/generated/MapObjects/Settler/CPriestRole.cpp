@@ -225,7 +225,7 @@ int  CPriestRole::GetKindOfSelection(class CSettler * a2)const {
 
   *(_DWORD *)this = &CPriestRole::_vftable_;
   v2 = (CPropertySet *)CSettlerMgr::operator[](*((unsigned __int16 *)this + 9));
-  if ( !IEntity::FlagBits(v2, OnBoard) )
+  if ( !IEntity::FlagBits(v2, EntityFlag_OnBoard) )
     CWarMap::RemoveEntity(v2);
   if ( *((_WORD *)this + 16) )
   {
@@ -408,7 +408,7 @@ void  CPriestRole::Init(class CSettler * a2) {
   int result; // eax
 
   *(_WORD *)(this + 18) = IEntity::ID();
-  IEntity::SetFlagBits(a2, VulnerableMask|Selectable);
+  IEntity::SetFlagBits(a2, EntityFlag_VulnerableMask|EntityFlag_Selectable);
   CWarMap::AddEntity(a2);
   result = this;
   *(_DWORD *)(this + 60) = -1;
@@ -482,8 +482,8 @@ void  CPriestRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent 
       goto LABEL_19;
     case 7:
       v38 = *((_DWORD *)a3 + 3);
-      IEntity::SetFlagBits(a2, Selectable);
-      IEntity::ClearFlagBits(a2, OnBoard);
+      IEntity::SetFlagBits(a2, EntityFlag_Selectable);
+      IEntity::ClearFlagBits(a2, EntityFlag_OnBoard);
       v37 = IEntity::Type((unsigned __int16 *)a2);
       v29 = IEntity::Type((unsigned __int16 *)a2);
       v21 = IEntity::Race(a2);
@@ -535,7 +535,7 @@ LABEL_19:
         }
         v14 = IEntity::ID();
         (*(void (__thiscall **)(_DWORD *, int))(*v44 + 164))(v44, v14);
-        IEntity::ClearFlagBits(a2, Selectable|Selected);
+        IEntity::ClearFlagBits(a2, EntityFlag_Selectable|EntityFlag_Selected);
         v15 = IEntity::ID();
         (*(void (__thiscall **)(void *, int))(*(_DWORD *)g_pGroupMgr + 28))(g_pGroupMgr, v15);
         v33 = *(unsigned __int16 *)(this + 32);
@@ -550,7 +550,7 @@ LABEL_19:
       }
       else
       {
-        IEntity::SetFlagBits(a2, Selectable);
+        IEntity::SetFlagBits(a2, EntityFlag_Selectable);
         v34 = IEntity::Type((unsigned __int16 *)a2);
         v26 = IEntity::Type((unsigned __int16 *)a2);
         v17 = IEntity::Race(a2);
@@ -565,8 +565,8 @@ LABEL_19:
       v19 = IEntity::ID();
       CSettlerMgr::SearchSpaceForSettler((CSettlerMgr *)g_cSettlerMgr, v19, v27, v35);
       CWarMap::AddEntity(a2);
-      IEntity::SetFlagBits(a2, Selectable|Visible);
-      IEntity::ClearFlagBits(a2, OnBoard);
+      IEntity::SetFlagBits(a2, EntityFlag_Selectable|EntityFlag_Visible);
+      IEntity::ClearFlagBits(a2, EntityFlag_OnBoard);
       *(_BYTE *)(this + 4) = 27;
       v36 = *(unsigned __int16 *)(this + 32);
       v28 = IEntity::ID();

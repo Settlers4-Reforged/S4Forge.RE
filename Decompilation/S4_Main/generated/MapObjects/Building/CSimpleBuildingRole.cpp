@@ -151,7 +151,7 @@ void  CSimpleBuildingRole::LogicUpdate(class CBuilding * a2) {
   int v63; // [esp+D0h] [ebp-4h]
 
   v62 = this;
-  result = IEntity::FlagBits(a2, Selected);
+  result = IEntity::FlagBits(a2, EntityFlag_Selected);
   if ( result )
     result = (*(int (__thiscall **)(unsigned __int8 *, CMFCToolBarButton *, int))(*(_DWORD *)v62 + 88))(v62, a2, 1);
   v56 = v62[4];
@@ -209,7 +209,7 @@ void  CSimpleBuildingRole::LogicUpdate(class CBuilding * a2) {
           v27 = *((unsigned __int16 *)v62 + 4);
           v8 = CBuilding::DoorWorldIdx(a2);
           CWorldManager::SetSettlerId(v8, v27);
-          IEntity::ClearFlagBits(v57, OnBoard|Visible);
+          IEntity::ClearFlagBits(v57, EntityFlag_OnBoard|EntityFlag_Visible);
           v50 = CSettlerMgr::operator[](*((unsigned __int16 *)v62 + 4));
           v45 = CEntityEvent::CEntityEvent((CEntityEvent *)v32, 6u, 0, 0, ObjectType, *((_DWORD *)v62 + 4));
           v44 = v45;
@@ -382,7 +382,7 @@ void  CSimpleBuildingRole::Init(class CBuilding * a2) {
     }
   }
   IAnimatedEntity::RegisterForLogicUpdate(2);
-  result = IEntity::FlagBits(a2, Selected);
+  result = IEntity::FlagBits(a2, EntityFlag_Selected);
   if ( result )
     return (*(int (__thiscall **)(CSimpleBuildingRole *, struct CBuilding *, _DWORD))(*(_DWORD *)this + 88))(
              this,
@@ -479,7 +479,7 @@ bool  CSimpleBuildingRole::SettlerEnter(class CBuilding * a2, int a3) {
     v16 = v14 - IEntity::Y(v18);
     v5 = (float)((float)v16 * 24.0) / 2.0;
     CSettler::SetOffset(v17, (float)((float)v13 + (float)((float)((float)v16 * -1.0) / 2.0)) * 24.0, v5);
-    IEntity::SetFlagBits(v17, MagicInvisible);
+    IEntity::SetFlagBits(v17, EntityFlag_MagicInvisible);
   }
   else if ( *((_BYTE *)this + 29) )
   {
@@ -494,7 +494,7 @@ bool  CSimpleBuildingRole::SettlerEnter(class CBuilding * a2, int a3) {
     *((_BYTE *)this + 29) = 1;
     *((_WORD *)this + 4) = a3;
   }
-  IEntity::ClearFlagBits(v17, Visible);
+  IEntity::ClearFlagBits(v17, EntityFlag_Visible);
   IMovingEntity::SetDisplacementCosts(10);
   if ( *(_BYTE *)(*((_DWORD *)this + 94) + 480) )
   {

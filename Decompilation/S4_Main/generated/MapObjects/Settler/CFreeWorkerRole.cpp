@@ -885,12 +885,12 @@ void  CFreeWorkerRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEv
           this,
           a2,
           *((_DWORD *)a3 + 5));
-      result = IEntity::FlagBits(a2, Registered);
+      result = IEntity::FlagBits(a2, EntityFlag_Registered);
       if ( !result )
         result = IAnimatedEntity::RegisterForLogicUpdate(1);
       break;
     default:
-      result = IEntity::FlagBits(a2, Registered);
+      result = IEntity::FlagBits(a2, EntityFlag_Registered);
       if ( !result )
       {
         CTrace::Print("ConvertEventIntoGoal FreeWorkerRole - unknown event %u", *((_DWORD *)a3 + 1));
@@ -985,7 +985,7 @@ bool  CFreeWorkerRole::SetFree(class CSettler * a2, int a3) {
       }
       *((_WORD *)this + 17) = 0;
     }
-    IEntity::SetFlagBits(a2, Visible);
+    IEntity::SetFlagBits(a2, EntityFlag_Visible);
   }
   if ( *((_WORD *)this + 23) )
   {

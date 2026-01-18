@@ -73,7 +73,7 @@ bool  CDiggerRole::SetFree(class CSettler * a2, int a3) {
 
   if ( *((_WORD *)this + 16) )
   {
-    if ( !IEntity::FlagBits(a2, Attached)
+    if ( !IEntity::FlagBits(a2, EntityFlag_Attached)
       && BBSupportDbgReport(
            2,
            "MapObjects\\Settler\\DiggerRole.cpp",
@@ -293,7 +293,7 @@ void  CDiggerRole::Init(class CSettler * a2) {
   
   int result; // eax
 
-  if ( IEntity::FlagBits(a2, Attached)
+  if ( IEntity::FlagBits(a2, EntityFlag_Attached)
     && BBSupportDbgReport(2, "MapObjects\\Settler\\DiggerRole.cpp", 138, "!_pSettler->FlagBits( ENTITY_FLAG_ATTACHED )") == 1 )
   {
     __debugbreak();
@@ -377,7 +377,7 @@ void  CDiggerRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent 
   }
   else
   {
-    result = IEntity::FlagBits(a2, Registered);
+    result = IEntity::FlagBits(a2, EntityFlag_Registered);
     if ( !result )
     {
       if ( debug && DEBUG_FLAGS[dword_41520A4] )

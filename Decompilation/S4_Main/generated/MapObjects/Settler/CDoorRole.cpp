@@ -92,7 +92,7 @@ int  CDoorRole::Decrease(int a2) {
   if ( a2 <= 0 )
     return a2;
   v3 = (_DWORD *)CSettlerMgr::operator[](*((unsigned __int16 *)this + 9));
-  if ( !IEntity::FlagBits(v3, Registered) )
+  if ( !IEntity::FlagBits(v3, EntityFlag_Registered) )
     IAnimatedEntity::RegisterForLogicUpdate(15);
   return a2;
 }

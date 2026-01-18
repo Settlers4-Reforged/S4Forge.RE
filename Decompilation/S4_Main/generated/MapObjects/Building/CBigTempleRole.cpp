@@ -26,7 +26,7 @@ void  CBigTempleRole::LogicUpdate(class CBuilding * a2) {
   const char *RaceName; // [esp-4h] [ebp-Ch]
   char v9; // [esp+0h] [ebp-8h]
 
-  result = IEntity::FlagBits(a2, Selected);
+  result = IEntity::FlagBits(a2, EntityFlag_Selected);
   if ( result )
     result = (*(int (__thiscall **)(int, CMFCToolBarButton *, int))(*(_DWORD *)this + 88))(this, a2, 1);
   v9 = *(_BYTE *)(this + 4);
@@ -104,7 +104,7 @@ void  CBigTempleRole::Init(class CBuilding * a2) {
   *((_BYTE *)this + 4) = 3;
   v2 = IEntity::OwnerId((unsigned __int8 *)a2);
   CMagic::IncreaseManaByBigTemple(v2);
-  if ( IEntity::FlagBits(a2, Selected) )
+  if ( IEntity::FlagBits(a2, EntityFlag_Selected) )
     (*(void (__thiscall **)(CBigTempleRole *, struct CBuilding *, _DWORD))(*(_DWORD *)this + 88))(this, a2, 0);
   return IAnimatedEntity::RegisterForLogicUpdate(31);
 }

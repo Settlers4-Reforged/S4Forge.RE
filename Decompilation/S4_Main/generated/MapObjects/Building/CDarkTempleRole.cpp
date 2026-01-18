@@ -84,7 +84,7 @@ void  CDarkTempleRole::LogicUpdate(class CBuilding * a2) {
     }
     IEntity::SetPosition(v8, *((struct CPaneContainer **)this + 95));
     CWorldManager::SetSettlerId(*((_DWORD *)this + 95), *((unsigned __int16 *)this + 4));
-    IEntity::SetFlagBits(v8, Visible);
+    IEntity::SetFlagBits(v8, EntityFlag_Visible);
     v7 = IEntity::Type((unsigned __int16 *)v8);
     v6 = IEntity::Type((unsigned __int16 *)v8);
     v3 = IEntity::Race(v8);
@@ -183,7 +183,7 @@ bool  CDarkTempleRole::SettlerEnter(class CBuilding * a2, int a3) {
   v8 = IEntity::Type((unsigned __int16 *)v10);
   if ( v8 == 52 )
   {
-    IEntity::ClearFlagBits(v10, Visible);
+    IEntity::ClearFlagBits(v10, EntityFlag_Visible);
     v3 = IEntity::WorldIdx();
     CWorldManager::SetSettlerId(v3, 0);
     v4 = (struct CPaneContainer *)IEntity::PackedXY(a2);
@@ -198,8 +198,8 @@ bool  CDarkTempleRole::SettlerEnter(class CBuilding * a2, int a3) {
       v5 = IEntity::OwnerId((unsigned __int8 *)a2);
       (*(void (__thiscall **)(void *, int))(*(_DWORD *)off_3D7A3D8 + 48))(off_3D7A3D8, v5);
       IBuildingRole::DetachWithoutNotify(v9, a2, a3);
-      IEntity::ClearFlagBits(v10, Visible);
-      if ( IEntity::FlagBits(v10, OnBoard)
+      IEntity::ClearFlagBits(v10, EntityFlag_Visible);
+      if ( IEntity::FlagBits(v10, EntityFlag_OnBoard)
         && BBSupportDbgReport(
              2,
              "MapObjects\\Building\\DarkTemple.cpp",
@@ -215,8 +215,8 @@ bool  CDarkTempleRole::SettlerEnter(class CBuilding * a2, int a3) {
         return 1;
       ++*((_DWORD *)v9 + 104);
       IBuildingRole::DetachWithoutNotify(v9, a2, a3);
-      IEntity::ClearFlagBits(v10, Visible);
-      if ( IEntity::FlagBits(v10, OnBoard)
+      IEntity::ClearFlagBits(v10, EntityFlag_Visible);
+      if ( IEntity::FlagBits(v10, EntityFlag_OnBoard)
         && BBSupportDbgReport(
              2,
              "MapObjects\\Building\\DarkTemple.cpp",

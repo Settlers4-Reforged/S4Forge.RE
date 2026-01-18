@@ -458,7 +458,7 @@ class CAIEntityInfo * __cdecl IAIEnvironment::EntityGetEntityInfo(int a1, bool a
   v4 = IEntity::AIEntityInfoPtr(v5);
   if ( ((v4 == 0) & a2) == 0 )
     return v4;
-  if ( !IEntity::FlagBits(v5, AliveMask) )
+  if ( !IEntity::FlagBits(v5, EntityFlag_AliveMask) )
     return v4;
   if ( IEntity::ID() != a1
     && BBSupportDbgReport(2, (int)"AI\\AI_Environment.cpp", 369, (int)"pEntity->ID() == _iEntityId") == 1 )
@@ -633,7 +633,7 @@ bool __cdecl IAIEnvironment::EntityIsAliveAndHasGivenUniqueId(int a1, int a2) {
   v3 = (_DWORD *)CMapObjectMgr::EntityPtr(a1);
   if ( !v3 )
     return 0;
-  v4 = IEntity::FlagBits(v3, AliveMask) != 0;
+  v4 = IEntity::FlagBits(v3, EntityFlag_AliveMask) != 0;
   return IEntity::UniqueId(v3) == a2 && v4;
 }
 
@@ -648,7 +648,7 @@ bool __cdecl IAIEnvironment::EntityIsAliveAndOfGivenWarriorType(int a1, enum T_A
   v3 = (_DWORD *)CMapObjectMgr::EntityPtr(a1);
   if ( !v3 )
     return 0;
-  v4 = IEntity::FlagBits(v3, AliveMask) != 0;
+  v4 = IEntity::FlagBits(v3, EntityFlag_AliveMask) != 0;
   return IEntity::WarriorType() == a2 && v4;
 }
 
@@ -698,7 +698,7 @@ void __cdecl IAIEnvironment::EntitySendCastSpellCommand(int a1, int a2, int a3) 
   v8 = result;
   if ( !result )
     return result;
-  result = (unsigned __int16 *)IEntity::FlagBits(v8, Ready);
+  result = (unsigned __int16 *)IEntity::FlagBits(v8, EntityFlag_Ready);
   if ( !result )
     return result;
   result = (unsigned __int16 *)IEntity::Type(v8);
@@ -1164,7 +1164,7 @@ int __cdecl IAIEnvironment::VehicleGetFirstReadyAndCheckedOutVehicleId(int a1, i
   for ( i = CVehicleMgr::GetFirstVehicleId(a1, a2); i > 0; i = IAnimatedEntity::Next(v3) )
   {
     v3 = (_DWORD *)CVehicleMgr::operator[](i);
-    if ( (_UNKNOWN *)IEntity::FlagBits(v3, Ready|OnBoard) == &loc_1C00000 )
+    if ( (_UNKNOWN *)IEntity::FlagBits(v3, EntityFlag_Ready|EntityFlag_OnBoard) == &loc_1C00000 )
       return i;
   }
   return 0;

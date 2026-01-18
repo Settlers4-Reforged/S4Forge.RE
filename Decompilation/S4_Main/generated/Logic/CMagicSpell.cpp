@@ -164,7 +164,7 @@ int  CMagicSpell::SpellDivinePresent(void) {
             if ( v10 )
             {
               v6 = (_DWORD *)CMapObjectMgr::Entity(v10);
-              IEntity::SetFlagBits(v6, MagicInvisible);
+              IEntity::SetFlagBits(v6, EntityFlag_MagicInvisible);
               v8 = CStateGame::Rand(g_pGame) & 3;
               v9 = CLogic::Effects((DWORD *)g_pLogic);
               (*(void (__thiscall **)(int, int, _DWORD, int, int, int, _DWORD, _DWORD))(*(_DWORD *)v9 + 16))(
@@ -820,7 +820,7 @@ int  CMagicSpell::SpellFoodMoreGame(void) {
         if ( v11 )
         {
           v5 = (_DWORD *)CMapObjectMgr::Entity(v11);
-          IEntity::SetFlagBits(v5, MagicInvisible);
+          IEntity::SetFlagBits(v5, EntityFlag_MagicInvisible);
           v4 = v14 & 7;
           v8 = CLogic::FutureEvents(g_pLogic);
           (*(void (__thiscall **)(int, int, int, int, _DWORD, int))(*(_DWORD *)v8 + 12))(v8, 1, v4 + 4, v11, 0, 0x80000);
@@ -1826,7 +1826,7 @@ void __cdecl CMagicSpell::InvisibleKill(class IEntity * a1) {
   v2 = IEntity::ID();
   if ( v2 <= 0 && BBSupportDbgReport(2, "Logic\\Magic.cpp", 1002, "iEntityId > 0") == 1 )
     __debugbreak();
-  IEntity::ClearFlagBits(a1, Visible);
+  IEntity::ClearFlagBits(a1, EntityFlag_Visible);
   return CMapObjectMgr::Kill(v2, 0);
 }
 

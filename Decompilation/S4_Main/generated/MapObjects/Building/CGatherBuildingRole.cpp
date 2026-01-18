@@ -114,7 +114,7 @@ void  CGatherBuildingRole::LogicUpdate(class CBuilding * a2) {
   int v26; // [esp+68h] [ebp-4h]
 
   v25 = this;
-  result = IEntity::FlagBits(a2, Selected);
+  result = IEntity::FlagBits(a2, EntityFlag_Selected);
   if ( result )
     result = (*(int (__thiscall **)(CGatherBuildingRole *, struct CBuilding *, int))(*(_DWORD *)v25 + 88))(v25, a2, 1);
   v22 = *((_BYTE *)v25 + 4);
@@ -179,7 +179,7 @@ void  CGatherBuildingRole::LogicUpdate(class CBuilding * a2) {
     if ( !*((_DWORD *)v25 + 4) )
       return IAnimatedEntity::RegisterForLogicUpdate(31);
     v24 = (_DWORD *)CSettlerMgr::operator[](*((unsigned __int16 *)v25 + 4));
-    IEntity::ClearFlagBits(v24, Visible);
+    IEntity::ClearFlagBits(v24, EntityFlag_Visible);
     v10 = Y16X16::UnpackYFast(*((_DWORD *)v25 + 4));
     v7 = Y16X16::UnpackXFast(*((_DWORD *)v25 + 4));
     CWorldManager::SetFlagBits(v7, v10, 32);
@@ -305,7 +305,7 @@ void  CGatherBuildingRole::Init(class CBuilding * a2) {
     __debugbreak();
   }
   IAnimatedEntity::RegisterForLogicUpdate(2);
-  result = IEntity::FlagBits(a2, Selected);
+  result = IEntity::FlagBits(a2, EntityFlag_Selected);
   if ( result )
     return (*(int (__thiscall **)(CGatherBuildingRole *, struct CBuilding *, _DWORD))(*(_DWORD *)this + 88))(
              this,
@@ -357,7 +357,7 @@ bool  CGatherBuildingRole::SettlerEnter(class CBuilding * a2, int a3) {
   *((_BYTE *)this + 29) = 1;
   *((_WORD *)this + 4) = a3;
   v10 = (_DWORD *)CSettlerMgr::operator[](a3);
-  IEntity::ClearFlagBits(v10, Visible);
+  IEntity::ClearFlagBits(v10, EntityFlag_Visible);
   if ( *(_BYTE *)(*((_DWORD *)this + 94) + 480) )
   {
     *((_BYTE *)this + 5) = 0;

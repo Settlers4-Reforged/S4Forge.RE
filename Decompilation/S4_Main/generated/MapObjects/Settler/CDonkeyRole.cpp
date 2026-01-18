@@ -70,14 +70,14 @@ void  CDonkeyRole::LogicUpdateJob(class CSettler * a2) {
   int v8; // [esp+0h] [ebp-10h]
   int v9; // [esp+4h] [ebp-Ch]
 
-  if ( IEntity::FlagBits(a2, Selected) || IEntity::FlagBits(a2, (EntityFlag)0x400u) )
+  if ( IEntity::FlagBits(a2, EntityFlag_Selected) || IEntity::FlagBits(a2, (EntityFlag)0x400u) )
     (*(void (__thiscall **)(CDonkeyRole *, int))(*(_DWORD *)this + 132))(this, 1);
   switch ( *((_BYTE *)this + 4) )
   {
     case 6:
       IMovingEntity::SetDistance(a2, 0);
       (*(void (__thiscall **)(CDonkeyRole *, struct CSettler *))(*(_DWORD *)this + 16))(this, a2);
-      if ( !IEntity::FlagBits(a2, Registered) && debug && DEBUG_FLAGS[dword_41520AC] )
+      if ( !IEntity::FlagBits(a2, EntityFlag_Registered) && debug && DEBUG_FLAGS[dword_41520AC] )
       {
         v2 = IEntity::ID();
         BBSupportTracePrintF(0, "LogicUpdateJob - Go - not registered donkey %u", v2);
@@ -119,7 +119,7 @@ void  CDonkeyRole::LogicUpdateJob(class CSettler * a2) {
       CDonkeyRole::SetFree(this);
       CDonkeyRole::TryToGoHome(this);
       CDonkeyRole::SetJobType(this, 0);
-      if ( !IEntity::FlagBits(a2, Registered) && debug && DEBUG_FLAGS[dword_41520AC] )
+      if ( !IEntity::FlagBits(a2, EntityFlag_Registered) && debug && DEBUG_FLAGS[dword_41520AC] )
       {
         v6 = IEntity::ID();
         BBSupportTracePrintF(0, "LogicUpdateJob - LoadGood ready - not registered settler %u", v6);
@@ -284,7 +284,7 @@ int  CDonkeyRole::AddGood(int a2, int a3) {
     }
   }
   SettlerPtr = CSettlerMgr::GetSettlerPtr(*((_DWORD *)this + 12));
-  if ( IEntity::FlagBits(SettlerPtr, Selected) || IEntity::FlagBits(SettlerPtr, (EntityFlag)0x400u) )
+  if ( IEntity::FlagBits(SettlerPtr, EntityFlag_Selected) || IEntity::FlagBits(SettlerPtr, (EntityFlag)0x400u) )
     (*(void (__thiscall **)(CDonkeyRole *, int))(*(_DWORD *)this + 132))(this, 1);
   return a3;
 }
@@ -316,7 +316,7 @@ int  CDonkeyRole::RemoveGood(int a2, int a3) {
     }
   }
   SettlerPtr = CSettlerMgr::GetSettlerPtr(*((_DWORD *)this + 12));
-  if ( IEntity::FlagBits(SettlerPtr, Selected) || IEntity::FlagBits(SettlerPtr, (EntityFlag)0x400u) )
+  if ( IEntity::FlagBits(SettlerPtr, EntityFlag_Selected) || IEntity::FlagBits(SettlerPtr, (EntityFlag)0x400u) )
     (*(void (__thiscall **)(CDonkeyRole *, int))(*(_DWORD *)this + 132))(this, 1);
   return a3;
 }
@@ -445,7 +445,7 @@ void  CDonkeyRole::DropGoods(class CSettler * a2) {
       CDonkeyRole::RemoveGood(this, i, v6);
     }
   }
-  return IEntity::ClearFlagBits(a2, VulnerableMask);
+  return IEntity::ClearFlagBits(a2, EntityFlag_VulnerableMask);
 }
 
 
@@ -902,7 +902,7 @@ void  CDonkeyRole::SetNeutralTraderStatus(bool a2) {
     return (char)SettlerPtr;
   if ( a2 )
   {
-    IEntity::ClearFlagBits(v4, VulnerableMask);
+    IEntity::ClearFlagBits(v4, EntityFlag_VulnerableMask);
     if ( !*((_DWORD *)this + 29) || *((_DWORD *)this + 29) == 2 )
     {
       LOBYTE(SettlerPtr) = (_BYTE)this;
@@ -1281,7 +1281,7 @@ void  CDonkeyRole::TakeJob(class CSettler * a2) {
         v12 = CBuilding::EnsignPackedXY(v16);
         CDonkeyRole::MoveToTarget(this, v12, 0);
         if ( CDonkeyRole::HasLoadedSomething(this) && !CDonkeyRole::IsNeutralTrader(this) )
-          IEntity::SetFlagBits(a2, VulnerableMask);
+          IEntity::SetFlagBits(a2, EntityFlag_VulnerableMask);
       }
       break;
     case 0x15:
@@ -1291,7 +1291,7 @@ void  CDonkeyRole::TakeJob(class CSettler * a2) {
         BBSupportTracePrintF(0, "Carier %u TakeJob put_good", v4);
       }
       IMovingEntity::SetDisplacementCosts(10);
-      IEntity::ClearFlagBits(a2, VulnerableMask);
+      IEntity::ClearFlagBits(a2, EntityFlag_VulnerableMask);
       CDonkeyRole::DonkeyArrived(this);
       break;
     case 0x16:
@@ -1324,7 +1324,7 @@ void  CDonkeyRole::Init(class CSettler * a2) {
   
   int result; // eax
 
-  if ( IEntity::FlagBits(a2, Attached)
+  if ( IEntity::FlagBits(a2, EntityFlag_Attached)
     && BBSupportDbgReport(2, "MapObjects\\Settler\\DonkeyRole.cpp", 255, "!_pSettler->FlagBits( ENTITY_FLAG_ATTACHED )") == 1 )
   {
     __debugbreak();
@@ -1336,7 +1336,7 @@ void  CDonkeyRole::Init(class CSettler * a2) {
   }
   *(_DWORD *)(this + 48) = IEntity::ID();
   CWarMap::AddEntity(a2);
-  IEntity::ClearFlagBits(a2, VulnerableMask|Selectable|Selected);
+  IEntity::ClearFlagBits(a2, EntityFlag_VulnerableMask|EntityFlag_Selectable|EntityFlag_Selected);
   IEntity::SetFlagBits(a2, (EntityFlag)0x4000u);
   result = this;
   *(_DWORD *)(this + 56) = 0;
@@ -1469,7 +1469,7 @@ void  CDonkeyRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent 
         v21 = CVehicleMgr::operator[](*((_DWORD *)a3 + 5));
         (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)v21 + 124))(v21, *((unsigned __int16 *)this + 9));
 LABEL_57:
-        result = IEntity::FlagBits(a2, Registered);
+        result = IEntity::FlagBits(a2, EntityFlag_Registered);
         if ( result || !debug )
           return result;
         result = dword_41520AC;
@@ -1520,7 +1520,7 @@ LABEL_57:
       }
       goto LABEL_57;
     default:
-      if ( !IEntity::FlagBits(a2, Registered) )
+      if ( !IEntity::FlagBits(a2, EntityFlag_Registered) )
       {
         CTrace::Print("ConvertEventIntoGoal DonkeyRole - unknown event %u", *((_DWORD *)a3 + 1));
         IAnimatedEntity::RegisterForLogicUpdate(1);

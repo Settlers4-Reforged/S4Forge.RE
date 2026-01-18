@@ -109,7 +109,7 @@ void  CEcoSector::SetSettlerOffer(int a2, int a3) {
   int i; // [esp+10h] [ebp-4h]
 
   SettlerPtr = CSettlerMgr::GetSettlerPtr(a3);
-  if ( IEntity::FlagBits(SettlerPtr, Offered)
+  if ( IEntity::FlagBits(SettlerPtr, EntityFlag_Offered)
     && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 921, "!pSettler->FlagBits(ENTITY_FLAG_OFFERED)") == 1 )
   {
     __debugbreak();
@@ -144,7 +144,7 @@ void  CEcoSector::SetSettlerOffer(int a2, int a3) {
   }
   IAnimatedEntity::SetNext(SettlerPtr, v7);
   this[a2 + 85] = a3;
-  result = IEntity::SetFlagBits(SettlerPtr, Offered);
+  result = IEntity::SetFlagBits(SettlerPtr, EntityFlag_Offered);
   if ( !debug )
     return result;
   result = (_DWORD *)dword_3EFEB2C;
@@ -194,7 +194,7 @@ void  CEcoSector::GetSettlerOutOfOffer(int a2) {
   unsigned __int16 *v16; // [esp+10h] [ebp-4h]
 
   v16 = (unsigned __int16 *)CSettlerMgr::operator[](a2);
-  if ( !IEntity::FlagBits(v16, Offered)
+  if ( !IEntity::FlagBits(v16, EntityFlag_Offered)
     && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 1009, "rActSettler.FlagBits(ENTITY_FLAG_OFFERED)") == 1 )
   {
     __debugbreak();
@@ -225,7 +225,7 @@ void  CEcoSector::GetSettlerOutOfOffer(int a2) {
   }
   IAnimatedEntity::SetNext(v16, 0);
   IAnimatedEntity::SetPrevious((IAnimatedEntity *)v16, 0);
-  IEntity::ClearFlagBits(v16, Offered);
+  IEntity::ClearFlagBits(v16, EntityFlag_Offered);
   v14 = 0;
   result = *((unsigned __int16 *)this + IEntity::Type(v16) + 85);
   for ( i = result; i; i = result )
@@ -681,7 +681,7 @@ void  CEcoSector::SetGoodOffer(int a2, int a3) {
   if ( debug && DEBUG_FLAGS[dword_3EFEB2C] )
     BBSupportTracePrintF(0, "SetGoodOffer: es: %u good: %u, pileId: %u", this[8], a2, a3);
   v8 = CPileMgr::operator[](a3);
-  if ( IEntity::FlagBits(v8, Offered)
+  if ( IEntity::FlagBits(v8, EntityFlag_Offered)
     && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 1250, "!rPile.FlagBits(ENTITY_FLAG_OFFERED)") == 1 )
   {
     __debugbreak();
@@ -703,7 +703,7 @@ void  CEcoSector::SetGoodOffer(int a2, int a3) {
   v6 = CPileMgr::operator[](a3);
   IAnimatedEntity::SetNext(v6, v9);
   this[a2 + 152] = a3;
-  return IEntity::SetFlagBits(v8, Offered);
+  return IEntity::SetFlagBits(v8, EntityFlag_Offered);
 }
 
 
@@ -723,7 +723,7 @@ void  CEcoSector::GetPileOutOfOffer(int a2, int a3) {
   if ( debug && DEBUG_FLAGS[dword_3EFEB2C] )
     BBSupportTracePrintF(0, "GetPileOutOfOffer: es: %u good: %u, pileId: %u", *((unsigned __int16 *)this + 8), a2, a3);
   v12 = CPileMgr::operator[](a3);
-  if ( !IEntity::FlagBits(v12, Offered)
+  if ( !IEntity::FlagBits(v12, EntityFlag_Offered)
     && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 1310, "rActPile.FlagBits(ENTITY_FLAG_OFFERED)") == 1 )
   {
     __debugbreak();
@@ -749,7 +749,7 @@ void  CEcoSector::GetPileOutOfOffer(int a2, int a3) {
   }
   IAnimatedEntity::SetNext(v12, 0);
   IAnimatedEntity::SetPrevious((IAnimatedEntity *)v12, 0);
-  return IEntity::ClearFlagBits(v12, Offered);
+  return IEntity::ClearFlagBits(v12, EntityFlag_Offered);
 }
 
 
@@ -2034,7 +2034,7 @@ void  CEcoSector::RecruiteSpecialist(void) {
           FirstSettlerId = IAnimatedEntity::Next(v33);
           v2 = IEntity::WorldIdx();
           v27 = CWorldManager::EcoSectorId(v2);
-          if ( v27 == *((unsigned __int16 *)v41 + 8) && !IEntity::FlagBits(v33, OnBoard) )
+          if ( v27 == *((unsigned __int16 *)v41 + 8) && !IEntity::FlagBits(v33, EntityFlag_OnBoard) )
           {
             CSettler::ChangeType(v33, 1, 1, 0);
             ++*v36;

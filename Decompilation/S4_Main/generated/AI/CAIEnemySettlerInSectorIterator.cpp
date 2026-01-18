@@ -98,8 +98,8 @@ bool  CAIEnemySettlerInSectorIterator::NextEnemySettler(int & a2) {
         {
           __debugbreak();
         }
-        v6 = IEntity::FlagBits(v9, AliveMask) != 0;
-        if ( IEntity::FlagBits(v9, OnBoard) == 0 && v6 )
+        v6 = IEntity::FlagBits(v9, EntityFlag_AliveMask) != 0;
+        if ( IEntity::FlagBits(v9, EntityFlag_OnBoard) == 0 && v6 )
         {
           v7 = IEntity::X(v9);
           v8 = IEntity::Y(v9);

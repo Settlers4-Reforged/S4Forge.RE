@@ -114,7 +114,7 @@ void  CCarrierRole::LogicUpdateJob(class CSettler * a2) {
     case 6:
       IMovingEntity::SetDistance(a2, 0);
       (*(void (__thiscall **)(CCarrierRole *, struct CSettler *))(*(_DWORD *)this + 16))(this, a2);
-      result = IEntity::FlagBits(a2, Registered);
+      result = IEntity::FlagBits(a2, EntityFlag_Registered);
       if ( !result && debug )
       {
         if ( DEBUG_FLAGS[dword_4152098] )
@@ -169,7 +169,7 @@ void  CCarrierRole::LogicUpdateJob(class CSettler * a2) {
         }
         (*(void (__thiscall **)(CCarrierRole *, struct CSettler *, int))(*(_DWORD *)this + 64))(this, a2, -1);
         CCarrierRole::TryToGoHome(this, a2);
-        result = IEntity::FlagBits(a2, Registered);
+        result = IEntity::FlagBits(a2, EntityFlag_Registered);
         if ( !result && debug && DEBUG_FLAGS[dword_4152098] )
         {
           v16 = IEntity::ID();
@@ -195,7 +195,7 @@ void  CCarrierRole::LogicUpdateJob(class CSettler * a2) {
         }
         *((_BYTE *)this + 44) = 0;
         IAnimatedEntity::RegisterForLogicUpdate(v35 - 1);
-        result = IEntity::FlagBits(a2, Registered);
+        result = IEntity::FlagBits(a2, EntityFlag_Registered);
         if ( !result && debug && DEBUG_FLAGS[dword_4152098] )
         {
           v14 = IEntity::ID();
@@ -209,7 +209,7 @@ void  CCarrierRole::LogicUpdateJob(class CSettler * a2) {
       if ( *((char *)this + 6) < v34 )
       {
         (*(void (__thiscall **)(CCarrierRole *, struct CSettler *))(*(_DWORD *)this + 36))(this, a2);
-        result = IEntity::FlagBits(a2, Registered);
+        result = IEntity::FlagBits(a2, EntityFlag_Registered);
         if ( !result && debug && DEBUG_FLAGS[dword_4152098] )
         {
           v25 = IEntity::ID();
@@ -251,7 +251,7 @@ void  CCarrierRole::LogicUpdateJob(class CSettler * a2) {
         v23 = IEntity::EntityId((unsigned __int16 *)a2);
         CPile::ChangeAmountAndDetach(v37, v23);
         IAnimatedEntity::RegisterForLogicUpdate(v34);
-        result = IEntity::FlagBits(a2, Registered);
+        result = IEntity::FlagBits(a2, EntityFlag_Registered);
         if ( !result && debug && DEBUG_FLAGS[dword_4152098] )
         {
           v24 = IEntity::ID();
@@ -295,7 +295,7 @@ void  CCarrierRole::LogicUpdateJob(class CSettler * a2) {
         *((_BYTE *)this + 44) = 0;
         (*(void (__thiscall **)(CCarrierRole *, struct CSettler *, int))(*(_DWORD *)this + 64))(this, a2, -1);
         CCarrierRole::TryToGoHome(this, a2);
-        result = IEntity::FlagBits(a2, Registered);
+        result = IEntity::FlagBits(a2, EntityFlag_Registered);
         if ( !result && debug && DEBUG_FLAGS[dword_4152098] )
         {
           v10 = IEntity::ID();
@@ -839,7 +839,7 @@ LABEL_16:
       if ( !*((_WORD *)v53 + 16) )
         return (char)v4;
       IMovingEntity::SetDisplacementCosts(10);
-      IEntity::ClearFlagBits(a2, Visible);
+      IEntity::ClearFlagBits(a2, EntityFlag_Visible);
       if ( !g_pMapObjectMgr
         && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 831, "g_pMapObjectMgr!= NULL") == 1 )
       {
@@ -938,7 +938,7 @@ LABEL_16:
       if ( CCarrierRole::NextSettlerType(v53) && ISettlerRole::HomeEntityId(v53) )
       {
         v44 = ISettlerRole::HomeEntityId(v53);
-        if ( !IEntity::FlagBits(a2, Attached)
+        if ( !IEntity::FlagBits(a2, EntityFlag_Attached)
           && BBSupportDbgReport(
                2,
                "MapObjects\\Settler\\CarrierRole.cpp",
@@ -948,7 +948,7 @@ LABEL_16:
           __debugbreak();
         }
         CCarrierRole::ChangeToNextType(v53, a2, 1, 0);
-        if ( !IEntity::FlagBits(a2, Attached)
+        if ( !IEntity::FlagBits(a2, EntityFlag_Attached)
           && BBSupportDbgReport(
                2,
                "MapObjects\\Settler\\CarrierRole.cpp",
@@ -994,7 +994,7 @@ void  CCarrierRole::Init(class CSettler * a2) {
 
   if ( !a2 && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 203, "_pSettler!=NULL") == 1 )
     __debugbreak();
-  if ( IEntity::FlagBits(a2, Offered)
+  if ( IEntity::FlagBits(a2, EntityFlag_Offered)
     && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 204, "!_pSettler->FlagBits(ENTITY_FLAG_OFFERED)") == 1 )
   {
     __debugbreak();
@@ -1013,7 +1013,7 @@ void  CCarrierRole::Init(class CSettler * a2) {
   *(_WORD *)(this + 32) = 0;
   *(_WORD *)(this + 20) = 0;
   CWarMap::AddEntity(a2);
-  IEntity::ClearFlagBits(a2, VulnerableMask|Selectable|Selected);
+  IEntity::ClearFlagBits(a2, EntityFlag_VulnerableMask|EntityFlag_Selectable|EntityFlag_Selected);
   v2 = IEntity::WorldIdx();
   result = (_DWORD *)CWorldManager::EcoSectorId(v2);
   if ( !result )
@@ -1237,7 +1237,7 @@ void  CCarrierRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent
             (*(void (__thiscall **)(int, int))(*(_DWORD *)v79 + 136))(v79, v15);
           }
 LABEL_111:
-          result = (CEcoSector *)IEntity::FlagBits(a2, Registered);
+          result = (CEcoSector *)IEntity::FlagBits(a2, EntityFlag_Registered);
           if ( !result && debug )
           {
             if ( DEBUG_FLAGS[dword_4152098] )
@@ -1283,7 +1283,7 @@ LABEL_111:
       if ( CCarrierRole::NextSettlerType(v80) != a3[3] || ISettlerRole::HomeEntityId(v80) != a3[4] )
         goto LABEL_87;
       v70 = ISettlerRole::HomeEntityId(v80);
-      if ( !IEntity::FlagBits(a2, Attached)
+      if ( !IEntity::FlagBits(a2, EntityFlag_Attached)
         && BBSupportDbgReport(
              2,
              "MapObjects\\Settler\\CarrierRole.cpp",
@@ -1293,7 +1293,7 @@ LABEL_111:
         __debugbreak();
       }
       CCarrierRole::ChangeToNextType(v80, a2, 1, 0);
-      if ( !IEntity::FlagBits(a2, Attached)
+      if ( !IEntity::FlagBits(a2, EntityFlag_Attached)
         && BBSupportDbgReport(
              2,
              "MapObjects\\Settler\\CarrierRole.cpp",
@@ -1340,7 +1340,7 @@ LABEL_111:
         (*(void (__thiscall **)(CPropertySet *, int, int))(*(_DWORD *)a2 + 112))(a2, v27, v53);
         v28 = IEntity::ID();
         (*(void (__thiscall **)(_DWORD *, int))(*v77 + 164))(v77, v28);
-        IEntity::ClearFlagBits(a2, Selectable|Selected);
+        IEntity::ClearFlagBits(a2, EntityFlag_Selectable|EntityFlag_Selected);
         v54 = *((unsigned __int16 *)v80 + 16);
         v44 = IEntity::ID();
         v29 = IEntity::OwnerId((unsigned __int8 *)a2);
@@ -1353,7 +1353,7 @@ LABEL_111:
       }
       else
       {
-        IEntity::SetFlagBits(a2, Selectable);
+        IEntity::SetFlagBits(a2, EntityFlag_Selectable);
         v55 = IEntity::Type((unsigned __int16 *)a2);
         v45 = IEntity::Type((unsigned __int16 *)a2);
         v30 = IEntity::Race(a2);
@@ -1368,8 +1368,8 @@ LABEL_111:
       v32 = IEntity::ID();
       CSettlerMgr::SearchSpaceForSettler((CSettlerMgr *)g_cSettlerMgr, v32, v46, v56);
       CWarMap::AddEntity(a2);
-      IEntity::SetFlagBits(a2, Visible);
-      IEntity::ClearFlagBits(a2, OnBoard);
+      IEntity::SetFlagBits(a2, EntityFlag_Visible);
+      IEntity::ClearFlagBits(a2, EntityFlag_OnBoard);
       CSettler::TakeWaitList(a2);
       v57 = *((unsigned __int16 *)v80 + 16);
       v47 = IEntity::ID();
@@ -1436,7 +1436,7 @@ LABEL_87:
       }
       goto LABEL_111;
     default:
-      if ( !IEntity::FlagBits(a2, Registered) )
+      if ( !IEntity::FlagBits(a2, EntityFlag_Registered) )
       {
         if ( debug && DEBUG_FLAGS[dword_4152094] )
           BBSupportTracePrintF(0, "ConvertEventIntoGoal CarrierRole - unknown event %u", a3[1]);
@@ -1488,7 +1488,7 @@ bool  CCarrierRole::SetFree(class CSettler * a2, int a3) {
   }
   if ( *((_BYTE *)this + 45) )
   {
-    if ( IEntity::FlagBits(a2, Attached) )
+    if ( IEntity::FlagBits(a2, EntityFlag_Attached) )
     {
       if ( !*((_WORD *)this + 16)
         && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 1004, "m_uHomeEntityId > 0") == 1 )
@@ -1498,7 +1498,7 @@ bool  CCarrierRole::SetFree(class CSettler * a2, int a3) {
       v14 = (CBuilding *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 16));
       v5 = IEntity::EntityId((unsigned __int16 *)a2);
       CBuilding::InhabitantFlee(v14, v5);
-      if ( IEntity::FlagBits(a2, Attached) )
+      if ( IEntity::FlagBits(a2, EntityFlag_Attached) )
       {
         v6 = IEntity::EntityId((unsigned __int16 *)a2);
         (*(void (__thiscall **)(CBuilding *, int))(*(_DWORD *)v14 + 64))(v14, v6);
@@ -1509,7 +1509,7 @@ bool  CCarrierRole::SetFree(class CSettler * a2, int a3) {
         __debugbreak();
       }
       *((_WORD *)this + 16) = 0;
-      if ( IEntity::FlagBits(a2, Attached)
+      if ( IEntity::FlagBits(a2, EntityFlag_Attached)
         && BBSupportDbgReport(
              2,
              "MapObjects\\Settler\\CarrierRole.cpp",
