@@ -1457,6 +1457,35 @@ def write_aggregate_header(generated_headers):
 
         f.write(f"\n#endif // {guard}\n")
 
+def write_default_header():
+    path = os.path.join(OUTPUT_DIR, DEFINES_HEADER)
+    guard = "DEFINES_H"
+
+    with open(path, "w", encoding="utf-8") as f:
+        f.write(f"#ifndef {guard}\n#define {guard}\n\n")
+        f.write("// Auto-generated header file\n")
+
+        f.write("// Default includes for standard types\n\n")
+
+        f.write("#include <string>\n")
+        f.write("#include <vector>\n")
+        f.write("#include <list>\n")
+        f.write("#include <map>\n")
+
+        f.write("// Default includes for IDA types\n\n")
+
+        f.write("typedef unsigned char BYTE;\n")
+        f.write("typedef unsigned char _BYTE;\n\n")
+        
+        f.write("typedef unsigned short WORD;\n")
+        f.write("typedef unsigned short _WORD;\n\n")
+
+        f.write("typedef unsigned int DWORD;\n")
+        f.write("typedef unsigned int _DWORD;\n\n")
+
+        f.write("typedef unsigned long long QWORD;\n\n")
+
+        f.write(f"#endif // {guard}\n")
 
 def main(input_file):
     os.makedirs(OUTPUT_DIR, exist_ok=True)
@@ -1478,6 +1507,7 @@ def main(input_file):
                 classes[key][parsed["access"]].append(parsed)
 
     write_globals(globals_list, generated_headers)
+    write_default_header()
     write_class_headers(classes, generated_headers)
     write_aggregate_header(generated_headers)
     write_class_definitions(classes)
