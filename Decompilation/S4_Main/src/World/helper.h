@@ -1,9 +1,4 @@
-
-struct SPoint
-{
-    int x;
-    int y;
-};
+#include "MapObjects/SPoint.h"
 
 namespace Y16X16
 {
