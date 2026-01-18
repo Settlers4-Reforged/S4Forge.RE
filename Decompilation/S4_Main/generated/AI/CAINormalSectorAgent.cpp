@@ -31,7 +31,7 @@ class CAINormalSectorAI *  CAINormalSectorAgent::SectorAI(void)const {
 
 // address=[0x1303c90]
 // Decompiled from CAINormalSectorAgent *__thiscall CAINormalSectorAgent::AttachSectorAI(  CAINormalSectorAgent *this,  struct CAINormalSectorAI *a2)
-void  CAINormalSectorAgent::AttachSectorAI(class CAINormalSectorAI *) {
+void  CAINormalSectorAgent::AttachSectorAI(class CAINormalSectorAI * a2) {
   
   CAINormalSectorAgent *result; // eax
 

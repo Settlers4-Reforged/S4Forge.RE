@@ -4,7 +4,7 @@
 
 // address=[0x15f90b0]
 // Decompiled from CWalkingWorker *__thiscall CWalkingWorker::CWalkingWorker(CWalkingWorker *this, int a2)
- CWalkingWorker::CWalkingWorker(int) {
+ CWalkingWorker::CWalkingWorker(int a2) {
   
   CWalkingBase::CWalkingBase(this, 0, a2);
   *(_DWORD *)this = &CWalkingWorker::_vftable_;
@@ -31,7 +31,7 @@ enum T_WALKING_TYPE const  CWalkingWorker::GetWalkingType(void) {
 
 // address=[0x15f90f0]
 // Decompiled from bool __thiscall CWalkingWorker::IsNotBlocked(CWalkingWorker *this, int a2)
-bool  CWalkingWorker::IsNotBlocked(int) {
+bool  CWalkingWorker::IsNotBlocked(int a2) {
   
   CTile *v2; // eax
   int v3; // esi
@@ -48,7 +48,7 @@ bool  CWalkingWorker::IsNotBlocked(int) {
 
 // address=[0x15f9150]
 // Decompiled from int __thiscall CWalkingWorker::SectorId(CWalkingWorker *this, int a2)
-int  CWalkingWorker::SectorId(int) {
+int  CWalkingWorker::SectorId(int a2) {
   
   return ITiling::EcoSectorId(a2);
 }
@@ -56,7 +56,7 @@ int  CWalkingWorker::SectorId(int) {
 
 // address=[0x15f9170]
 // Decompiled from char __thiscall CWalkingWorker::FindPathAStar64(CWalkingWorker *this, int a2, int a3, struct CDirCache *a4)
-bool  CWalkingWorker::FindPathAStar64(int,int,class CDirCache &) {
+bool  CWalkingWorker::FindPathAStar64(int a2, int a3, class CDirCache & a4) {
   
   return CAStar64::FindPath((CAStar64 *)&g_cAStar64Worker, a2, a3, a4);
 }

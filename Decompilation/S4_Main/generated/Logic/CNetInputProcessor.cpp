@@ -851,7 +851,7 @@ void  CNetInputProcessor::Process(class CEvn_Logic &) {
 
 // address=[0x1470e70]
 // Decompiled from char *__cdecl CNetInputProcessor::DbgMsgName(int a1)
-static char * __cdecl CNetInputProcessor::DbgMsgName(int) {
+char * __cdecl CNetInputProcessor::DbgMsgName(int a1) {
   
   int i; // [esp+0h] [ebp-4h]
 
@@ -863,7 +863,7 @@ static char * __cdecl CNetInputProcessor::DbgMsgName(int) {
 
 // address=[0x1470ec0]
 // Decompiled from _DWORD *__cdecl CNetInputProcessor::GetReadySettlerPtr(int a1)
-static class CSettler * __cdecl CNetInputProcessor::GetReadySettlerPtr(int) {
+class CSettler * __cdecl CNetInputProcessor::GetReadySettlerPtr(int a1) {
   
   _DWORD *SettlerPtr; // [esp+0h] [ebp-4h]
 
@@ -877,7 +877,7 @@ static class CSettler * __cdecl CNetInputProcessor::GetReadySettlerPtr(int) {
 
 // address=[0x1470f00]
 // Decompiled from unsigned __int16 *__cdecl CNetInputProcessor::GetReadySettlerPtrOfType(int a1, int a2)
-static class CSettler * __cdecl CNetInputProcessor::GetReadySettlerPtrOfType(int,int) {
+class CSettler * __cdecl CNetInputProcessor::GetReadySettlerPtrOfType(int a1, int a2) {
   
   unsigned __int16 *SettlerPtr; // [esp+0h] [ebp-4h]
 
@@ -891,7 +891,7 @@ static class CSettler * __cdecl CNetInputProcessor::GetReadySettlerPtrOfType(int
 
 // address=[0x1470f50]
 // Decompiled from unsigned __int8 *__cdecl CNetInputProcessor::GetAliveBuildingPtr(int a1)
-static class CBuilding * __cdecl CNetInputProcessor::GetAliveBuildingPtr(int) {
+class CBuilding * __cdecl CNetInputProcessor::GetAliveBuildingPtr(int a1) {
   
   unsigned __int8 *BuildingPtr; // [esp+0h] [ebp-4h]
 
@@ -905,7 +905,7 @@ static class CBuilding * __cdecl CNetInputProcessor::GetAliveBuildingPtr(int) {
 
 // address=[0x1470f90]
 // Decompiled from unsigned __int8 *__cdecl CNetInputProcessor::GetAliveBuildingPtrOfPlayer(int a1, int a2)
-static class CBuilding * __cdecl CNetInputProcessor::GetAliveBuildingPtrOfPlayer(int,int) {
+class CBuilding * __cdecl CNetInputProcessor::GetAliveBuildingPtrOfPlayer(int a1, int a2) {
   
   unsigned __int8 *BuildingPtr; // [esp+0h] [ebp-4h]
 
@@ -919,7 +919,7 @@ static class CBuilding * __cdecl CNetInputProcessor::GetAliveBuildingPtrOfPlayer
 
 // address=[0x1470fe0]
 // Decompiled from struct CVehicle *__cdecl CNetInputProcessor::GetReadyVehiclePtr(int a1)
-static class CVehicle * __cdecl CNetInputProcessor::GetReadyVehiclePtr(int) {
+class CVehicle * __cdecl CNetInputProcessor::GetReadyVehiclePtr(int a1) {
   
   struct CVehicle *VehiclePtr; // [esp+0h] [ebp-4h]
 
@@ -933,7 +933,7 @@ static class CVehicle * __cdecl CNetInputProcessor::GetReadyVehiclePtr(int) {
 
 // address=[0x1471020]
 // Decompiled from int __cdecl CNetInputProcessor::GetReadyCartPtr(int a1)
-static class CCart * __cdecl CNetInputProcessor::GetReadyCartPtr(int) {
+class CCart * __cdecl CNetInputProcessor::GetReadyCartPtr(int a1) {
   
   void **ReadyVehiclePtr; // [esp+4h] [ebp-4h]
 
@@ -947,7 +947,7 @@ static class CCart * __cdecl CNetInputProcessor::GetReadyCartPtr(int) {
 
 // address=[0x1471070]
 // Decompiled from struct CEcoSector *__cdecl CNetInputProcessor::GetEcoSectorPtrOfPlayer(int a1, int a2)
-static class CEcoSector * __cdecl CNetInputProcessor::GetEcoSectorPtrOfPlayer(int,int) {
+class CEcoSector * __cdecl CNetInputProcessor::GetEcoSectorPtrOfPlayer(int a1, int a2) {
   
   struct CEcoSector *EcoSectorPtr; // [esp+0h] [ebp-4h]
 
@@ -963,7 +963,7 @@ static class CEcoSector * __cdecl CNetInputProcessor::GetEcoSectorPtrOfPlayer(in
 
 // address=[0x14710b0]
 // Decompiled from struct CEcoSector *__cdecl CNetInputProcessor::GetBuildingEcoSectorPtr(struct CBuilding *a1)
-static class CEcoSector * __cdecl CNetInputProcessor::GetBuildingEcoSectorPtr(class CBuilding *) {
+class CEcoSector * __cdecl CNetInputProcessor::GetBuildingEcoSectorPtr(class CBuilding * a1) {
   
   int v1; // eax
   int v4; // [esp+8h] [ebp-4h]
@@ -981,7 +981,7 @@ static class CEcoSector * __cdecl CNetInputProcessor::GetBuildingEcoSectorPtr(cl
 
 // address=[0x1473020]
 // Decompiled from bool __cdecl CNetInputProcessor::IsReadyEntityOfPlayer(int a1, int a2)
-static bool __cdecl CNetInputProcessor::IsReadyEntityOfPlayer(int,int) {
+bool __cdecl CNetInputProcessor::IsReadyEntityOfPlayer(int a1, int a2) {
   
   unsigned __int8 *v4; // [esp+4h] [ebp-4h]
 
@@ -992,7 +992,7 @@ static bool __cdecl CNetInputProcessor::IsReadyEntityOfPlayer(int,int) {
 
 // address=[0x1473190]
 // Decompiled from unsigned int __cdecl CNetInputProcessor::UnpackHiValue(unsigned int a1)
-static unsigned int __cdecl CNetInputProcessor::UnpackHiValue(unsigned int) {
+unsigned int __cdecl CNetInputProcessor::UnpackHiValue(unsigned int) {
   
   return HIWORD(a1);
 }
@@ -1000,7 +1000,7 @@ static unsigned int __cdecl CNetInputProcessor::UnpackHiValue(unsigned int) {
 
 // address=[0x14731a0]
 // Decompiled from int __cdecl CNetInputProcessor::UnpackLoValue(unsigned __int16 a1)
-static unsigned int __cdecl CNetInputProcessor::UnpackLoValue(unsigned int) {
+unsigned int __cdecl CNetInputProcessor::UnpackLoValue(unsigned int a1) {
   
   return a1;
 }
@@ -1008,7 +1008,7 @@ static unsigned int __cdecl CNetInputProcessor::UnpackLoValue(unsigned int) {
 
 // address=[0x14731b0]
 // Decompiled from int __cdecl CNetInputProcessor::UnpackSignedLoValue(__int16 a1)
-static int __cdecl CNetInputProcessor::UnpackSignedLoValue(unsigned int) {
+int __cdecl CNetInputProcessor::UnpackSignedLoValue(unsigned int a1) {
   
   return a1;
 }

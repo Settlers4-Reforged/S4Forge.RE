@@ -1,13 +1,15 @@
 #ifndef CDESTRUCTIONMANAGER_H
 #define CDESTRUCTIONMANAGER_H
 
+#include "defines.h"
+
 class CDestructionManager {
 public:
     // address=[0x1426a10]
     static class CDestructionManager & __cdecl Instance(void);
 
     // address=[0x1426a30]
-    void  RegisterDestructor(class CDestructor *);
+    void  RegisterDestructor(class CDestructor * a2);
 
     // address=[0x2f03a10]
     void  DestroyObjects(void);

@@ -53,7 +53,7 @@ int  CWarMapNode::Prev(void)const {
 
 // address=[0x15fc750]
 // Decompiled from void __thiscall CWarMapNode::SetNext(CWarMapNode *this, WORD a2)
-void  CWarMapNode::SetNext(int) {
+void  CWarMapNode::SetNext(int a2) {
   
   this->next = a2;
 }
@@ -61,7 +61,7 @@ void  CWarMapNode::SetNext(int) {
 
 // address=[0x15fc770]
 // Decompiled from CWarMapNode *__thiscall CWarMapNode::SetPrev(CWarMapNode *this, __int16 a2)
-void  CWarMapNode::SetPrev(int) {
+void  CWarMapNode::SetPrev(int a2) {
   
   CWarMapNode *result; // eax
 
@@ -73,7 +73,7 @@ void  CWarMapNode::SetPrev(int) {
 
 // address=[0x15fc790]
 // Decompiled from int __thiscall CWarMapNode::SetPrevNext(CWarMapNode *this, int a2, int a3)
-void  CWarMapNode::SetPrevNext(int,int) {
+void  CWarMapNode::SetPrevNext(int a2, int a3) {
   
   int result; // eax
 

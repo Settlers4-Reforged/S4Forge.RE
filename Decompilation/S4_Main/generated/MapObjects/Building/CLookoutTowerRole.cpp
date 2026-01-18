@@ -4,7 +4,7 @@
 
 // address=[0x1401080]
 // Decompiled from int __cdecl CLookoutTowerRole::New(int a1)
-static class CPersistence * __cdecl CLookoutTowerRole::New(std::istream &) {
+class CPersistence * __cdecl CLookoutTowerRole::New(std::istream & a1) {
   
   if ( operator new(0x180u) )
     return CLookoutTowerRole::CLookoutTowerRole(a1);
@@ -41,7 +41,7 @@ unsigned long  CLookoutTowerRole::ClassID(void)const {
 
 // address=[0x14fd3a0]
 // Decompiled from void *__thiscall CLookoutTowerRole::GetBuildingNeed(std::_Ref_count_base *this, const struct type_info *a2)
-int  CLookoutTowerRole::GetBuildingNeed(int)const {
+int  CLookoutTowerRole::GetBuildingNeed(int a2)const {
   
   return 0;
 }
@@ -57,7 +57,7 @@ int  CLookoutTowerRole::GetBuildingRole(void) {
 
 // address=[0x14fd640]
 // Decompiled from void *__thiscall CLookoutTowerRole::GetPileIdWithGood(std::_Ref_count_base *this, const struct type_info *a2)
-int  CLookoutTowerRole::GetPileIdWithGood(int)const {
+int  CLookoutTowerRole::GetPileIdWithGood(int a2)const {
   
   return 0;
 }
@@ -65,7 +65,7 @@ int  CLookoutTowerRole::GetPileIdWithGood(int)const {
 
 // address=[0x14fd720]
 // Decompiled from void __thiscall CLookoutTowerRole::GoodArrive(CLookoutTowerRole *this, int a2)
-void  CLookoutTowerRole::GoodArrive(int) {
+void  CLookoutTowerRole::GoodArrive(int a2) {
   
   ;
 }
@@ -73,7 +73,7 @@ void  CLookoutTowerRole::GoodArrive(int) {
 
 // address=[0x14fda70]
 // Decompiled from int __cdecl CLookoutTowerRole::Load(int a1)
-static class CLookoutTowerRole * __cdecl CLookoutTowerRole::Load(std::istream &) {
+class CLookoutTowerRole * __cdecl CLookoutTowerRole::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
@@ -85,7 +85,7 @@ static class CLookoutTowerRole * __cdecl CLookoutTowerRole::Load(std::istream &)
 
 // address=[0x150c280]
 // Decompiled from int __thiscall CLookoutTowerRole::LogicUpdate(CLookoutTowerRole *this, struct CBuilding *a2)
-void  CLookoutTowerRole::LogicUpdate(class CBuilding *) {
+void  CLookoutTowerRole::LogicUpdate(class CBuilding * a2) {
   
   int v2; // eax
   _DWORD *v3; // eax
@@ -156,7 +156,7 @@ void  CLookoutTowerRole::LogicUpdate(class CBuilding *) {
 
 // address=[0x150c410]
 // Decompiled from IBuildingRole *__thiscall CLookoutTowerRole::FillGfxInfo(  CLookoutTowerRole *this,  struct CBuilding *a2,  struct SGfxObjectInfo *a3)
-void  CLookoutTowerRole::FillGfxInfo(class CBuilding *,struct SGfxObjectInfo &) {
+void  CLookoutTowerRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo & a3) {
   
   int v3; // eax
   int v4; // eax
@@ -173,7 +173,7 @@ void  CLookoutTowerRole::FillGfxInfo(class CBuilding *,struct SGfxObjectInfo &) 
 
 // address=[0x150c470]
 // Decompiled from int __thiscall CLookoutTowerRole::Init(CLookoutTowerRole *this, struct CBuilding *a2)
-void  CLookoutTowerRole::Init(class CBuilding *) {
+void  CLookoutTowerRole::Init(class CBuilding * a2) {
   
   int result; // eax
 
@@ -190,7 +190,7 @@ void  CLookoutTowerRole::Init(class CBuilding *) {
 
 // address=[0x150c4d0]
 // Decompiled from int __thiscall CLookoutTowerRole::PostLoadInit(CLookoutTowerRole *this, struct CBuilding *a2)
-void  CLookoutTowerRole::PostLoadInit(class CBuilding *) {
+void  CLookoutTowerRole::PostLoadInit(class CBuilding * a2) {
   
   int v2; // eax
   int result; // eax
@@ -206,7 +206,7 @@ void  CLookoutTowerRole::PostLoadInit(class CBuilding *) {
 
 // address=[0x150c500]
 // Decompiled from char __thiscall CLookoutTowerRole::SettlerEnter(CLookoutTowerRole *this, struct CBuilding *a2, int a3)
-bool  CLookoutTowerRole::SettlerEnter(class CBuilding *,int) {
+bool  CLookoutTowerRole::SettlerEnter(class CBuilding * a2, int a3) {
   
   if ( *((_BYTE *)this + 29)
     && BBSupportDbgReport(2, "MapObjects\\Building\\LookoutTower.cpp", 143, "!m_bWorkerInHouse") == 1 )
@@ -222,7 +222,7 @@ bool  CLookoutTowerRole::SettlerEnter(class CBuilding *,int) {
 
 // address=[0x150c560]
 // Decompiled from _DWORD *__thiscall CLookoutTowerRole::FillDialog(CLookoutTowerRole *this, struct CBuilding *a2, bool a3)
-void  CLookoutTowerRole::FillDialog(class CBuilding *,bool) {
+void  CLookoutTowerRole::FillDialog(class CBuilding * a2, bool a3) {
   
   int v3; // eax
   int v4; // eax
@@ -259,7 +259,7 @@ void  CLookoutTowerRole::FillDialog(class CBuilding *,bool) {
 
 // address=[0x150c6a0]
 // Decompiled from char *__thiscall CLookoutTowerRole::CLookoutTowerRole(char *this, int a2)
- CLookoutTowerRole::CLookoutTowerRole(std::istream &) {
+ CLookoutTowerRole::CLookoutTowerRole(std::istream & a2) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
@@ -286,7 +286,7 @@ void  CLookoutTowerRole::FillDialog(class CBuilding *,bool) {
 
 // address=[0x150c760]
 // Decompiled from int __thiscall CLookoutTowerRole::Store(struct IBuildingRole *this, struct std::ostream *a2)
-void  CLookoutTowerRole::Store(std::ostream &) {
+void  CLookoutTowerRole::Store(std::ostream & a2) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
   struct IBuildingRole *v4; // [esp+4h] [ebp-4h]

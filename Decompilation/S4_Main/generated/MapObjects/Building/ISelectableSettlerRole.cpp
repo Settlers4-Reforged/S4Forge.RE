@@ -4,7 +4,7 @@
 
 // address=[0x157c980]
 // Decompiled from char *__thiscall ISelectableSettlerRole::ISelectableSettlerRole(char *this, int a2)
- ISelectableSettlerRole::ISelectableSettlerRole(std::istream &) {
+ ISelectableSettlerRole::ISelectableSettlerRole(std::istream & a2) {
   
   ISettlerRole::ISettlerRole(this, a2);
   *(_DWORD *)this = &ISelectableSettlerRole::_vftable_;
@@ -16,7 +16,7 @@
 
 // address=[0x157ca10]
 // Decompiled from int __thiscall ISelectableSettlerRole::Store(__int16 *this, struct std::ostream *a2)
-void  ISelectableSettlerRole::Store(std::ostream &) {
+void  ISelectableSettlerRole::Store(std::ostream & a2) {
   
   ISettlerRole::Store((struct CPersistence *)this, a2);
   Serial::StoreVersion(a2, 1);
@@ -34,7 +34,7 @@ int  ISelectableSettlerRole::GetGroupFlags(void)const {
 
 // address=[0x157ca70]
 // Decompiled from int __thiscall ISelectableSettlerRole::SetGroupFlags(ISelectableSettlerRole *this, unsigned int a2)
-int  ISelectableSettlerRole::SetGroupFlags(int) {
+int  ISelectableSettlerRole::SetGroupFlags(int a2) {
   
   if ( a2 >= 0x10000
     && BBSupportDbgReport(
@@ -52,7 +52,7 @@ int  ISelectableSettlerRole::SetGroupFlags(int) {
 
 // address=[0x157cac0]
 // Decompiled from int __thiscall ISelectableSettlerRole::SetGroupFlagBits(_WORD *this, unsigned int a2)
-int  ISelectableSettlerRole::SetGroupFlagBits(int) {
+int  ISelectableSettlerRole::SetGroupFlagBits(int a2) {
   
   if ( a2 >= 0x10000
     && BBSupportDbgReport(
@@ -70,7 +70,7 @@ int  ISelectableSettlerRole::SetGroupFlagBits(int) {
 
 // address=[0x157cb20]
 // Decompiled from int __thiscall ISelectableSettlerRole::ClearGroupFlagBits(ISelectableSettlerRole *this, unsigned int a2)
-int  ISelectableSettlerRole::ClearGroupFlagBits(int) {
+int  ISelectableSettlerRole::ClearGroupFlagBits(int a2) {
   
   if ( a2 >= 0x10000
     && BBSupportDbgReport(
@@ -116,7 +116,7 @@ int  ISelectableSettlerRole::GetPrimaryGroupId(void)const {
 
 // address=[0x157cb80]
 // Decompiled from char __thiscall ISelectableSettlerRole::TakeCommonJob(int this, COleCmdUI *a2)
-bool  ISelectableSettlerRole::TakeCommonJob(class CSettler *) {
+bool  ISelectableSettlerRole::TakeCommonJob(class CSettler * a2) {
   
   char v2; // al
   int v4; // [esp+0h] [ebp-14h]
@@ -152,7 +152,7 @@ bool  ISelectableSettlerRole::TakeCommonJob(class CSettler *) {
 
 // address=[0x157cc70]
 // Decompiled from int __thiscall ISelectableSettlerRole::Decrease(ISelectableSettlerRole *this, int a2)
-int  ISelectableSettlerRole::Decrease(int) {
+int  ISelectableSettlerRole::Decrease(int a2) {
   
   int v3; // [esp+8h] [ebp-10h]
   _BYTE *v4; // [esp+Ch] [ebp-Ch]
@@ -188,7 +188,7 @@ int  ISelectableSettlerRole::Decrease(int) {
 
 // address=[0x157cd70]
 // Decompiled from char __thiscall ISelectableSettlerRole::ProcessGoToPosFerry(  ISelectableSettlerRole *this,  struct CSettler *a2,  const struct CEntityEvent *a3)
-bool  ISelectableSettlerRole::ProcessGoToPosFerry(class CSettler *,class CEntityEvent const *) {
+bool  ISelectableSettlerRole::ProcessGoToPosFerry(class CSettler * a2, class CEntityEvent const * a3) {
   
   int v3; // esi
   int v4; // eax
@@ -235,7 +235,7 @@ bool  ISelectableSettlerRole::ProcessGoToPosFerry(class CSettler *,class CEntity
 
 // address=[0x157ce70]
 // Decompiled from int __thiscall ISelectableSettlerRole::ThiefCheckMasquerade(ISelectableSettlerRole *this, struct CSettler *a2)
-unsigned int  ISelectableSettlerRole::ThiefCheckMasquerade(class CSettler *) {
+unsigned int  ISelectableSettlerRole::ThiefCheckMasquerade(class CSettler * a2) {
   
   int v2; // eax
   int v3; // eax
@@ -281,7 +281,7 @@ unsigned int  ISelectableSettlerRole::ThiefCheckMasquerade(class CSettler *) {
 
 // address=[0x157cfa0]
 // Decompiled from _DWORD *__thiscall ISelectableSettlerRole::ThiefExpose(ISelectableSettlerRole *this, struct IEntity *a2)
-void  ISelectableSettlerRole::ThiefExpose(class IEntity *) {
+void  ISelectableSettlerRole::ThiefExpose(class IEntity * a2) {
   
   IEntity::ClearFlagBits(a2, (EntityFlag)0x10000000u);
   return IEntity::SetFlagBits(a2, VulnerableMask);
@@ -290,7 +290,7 @@ void  ISelectableSettlerRole::ThiefExpose(class IEntity *) {
 
 // address=[0x157cfd0]
 // Decompiled from int __thiscall ISelectableSettlerRole::ThiefDisguise(ISelectableSettlerRole *this, struct IEntity *a2)
-void  ISelectableSettlerRole::ThiefDisguise(class IEntity *) {
+void  ISelectableSettlerRole::ThiefDisguise(class IEntity * a2) {
   
   IEntity::SetFlagBits(a2, (EntityFlag)0x10000000u);
   return IEntity::ClearFlagBits(a2, VulnerableMask);

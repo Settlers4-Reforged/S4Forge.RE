@@ -15,7 +15,7 @@
 
 // address=[0x2f4e960]
 // Decompiled from int __thiscall CInvokeEvent::CInvokeEvent(int this, int a2)
- CInvokeEvent::CInvokeEvent(enum BUILDING_TYPES) {
+ CInvokeEvent::CInvokeEvent(enum BUILDING_TYPES a2) {
   
   IScheduleEntry::IScheduleEntry((IScheduleEntry *)this);
   *(_DWORD *)this = &CInvokeEvent::_vftable_;
@@ -34,7 +34,7 @@
 
 // address=[0x2f4e9e0]
 // Decompiled from char __thiscall CInvokeEvent::AddInvokePosition(CReserveDatabase ***this, int a2, int a3)
-bool  CInvokeEvent::AddInvokePosition(int,int) {
+bool  CInvokeEvent::AddInvokePosition(int a2, int a3) {
   
   int v4; // [esp+0h] [ebp-8h] BYREF
   CReserveDatabase ***v5; // [esp+4h] [ebp-4h]
@@ -49,7 +49,7 @@ bool  CInvokeEvent::AddInvokePosition(int,int) {
 
 // address=[0x2f4ea20]
 // Decompiled from char __thiscall CInvokeEvent::AddInvokePosition(CInvokeEvent *this, int a2)
-bool  CInvokeEvent::AddInvokePosition(int) {
+bool  CInvokeEvent::AddInvokePosition(int a2) {
   
   *((_BYTE *)this + 56) = 0;
   std::vector<int>::push_back(&a2);
@@ -59,7 +59,7 @@ bool  CInvokeEvent::AddInvokePosition(int) {
 
 // address=[0x2f4ea50]
 // Decompiled from int __thiscall CInvokeEvent::AddInvokePositionAroundResource(CInvokeEvent *this, int a2, int a3)
-int  CInvokeEvent::AddInvokePositionAroundResource(enum BUILDING_TYPES,int) {
+int  CInvokeEvent::AddInvokePositionAroundResource(enum BUILDING_TYPES a2, int a3) {
   
   int ResourceForBuilding; // [esp+0h] [ebp-38h]
   int v5; // [esp+4h] [ebp-34h]

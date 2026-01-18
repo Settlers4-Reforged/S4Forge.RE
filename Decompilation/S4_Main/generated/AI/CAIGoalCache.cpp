@@ -4,7 +4,7 @@
 
 // address=[0x1301470]
 // Decompiled from char *__thiscall CAIGoalCache::Goal(CAIGoalCache *this, int a2)
-class CAIGoal const &  CAIGoalCache::Goal(int) {
+class CAIGoal const &  CAIGoalCache::Goal(int a2) {
   
   return (char *)this + 12 * a2 + 20;
 }
@@ -33,7 +33,7 @@ void  CAIGoalCache::Init(void) {
 
 // address=[0x1314100]
 // Decompiled from CAIGoalCache *__thiscall CAIGoalCache::Insert(CAIGoalCache *this, int a2, int a3)
-void  CAIGoalCache::Insert(int,int) {
+void  CAIGoalCache::Insert(int a2, int a3) {
   
   _DWORD *v3; // ecx
   CAIGoalCache *result; // eax
@@ -95,7 +95,7 @@ void  CAIGoalCache::Insert(int,int) {
 
 // address=[0x1314350]
 // Decompiled from void __thiscall CAIGoalCache::Delete(CAIGoalCache *this, int a2)
-void  CAIGoalCache::Delete(int) {
+void  CAIGoalCache::Delete(int a2) {
   
   int v3; // [esp+4h] [ebp-4h]
 
@@ -107,7 +107,7 @@ void  CAIGoalCache::Delete(int) {
 
 // address=[0x1314380]
 // Decompiled from CAIGoalCache *__thiscall CAIGoalCache::DbgPrint(CAIGoalCache *this, const char *a2)
-void  CAIGoalCache::DbgPrint(char const * const) {
+void  CAIGoalCache::DbgPrint(char const * const a2) {
   
   CAIGoalCache *result; // eax
   int v3; // eax
@@ -185,7 +185,7 @@ void  CAIGoalCache::DeleteInvalidGoalsIfNecessary(void) {
 
 // address=[0x1314560]
 // Decompiled from int __thiscall CAIGoalCache::Load(CAIGoalCache *this, struct IS4Chunk *a2)
-void  CAIGoalCache::Load(class IS4Chunk &) {
+void  CAIGoalCache::Load(class IS4Chunk & a2) {
   
   (*(void (__thiscall **)(struct IS4Chunk *, int, int))(*(_DWORD *)a2 + 4))(a2, 1, 1);
   (*(void (__thiscall **)(struct IS4Chunk *, int, int))(*(_DWORD *)a2 + 4))(a2, 32, 32);
@@ -197,7 +197,7 @@ void  CAIGoalCache::Load(class IS4Chunk &) {
 
 // address=[0x13145d0]
 // Decompiled from int __thiscall CAIGoalCache::Save(CAIGoalCache *this, struct IS4Chunk *a2)
-void  CAIGoalCache::Save(class IS4Chunk &) {
+void  CAIGoalCache::Save(class IS4Chunk & a2) {
   
   (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 20))(a2, 1);
   (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 20))(a2, 32);
@@ -220,7 +220,7 @@ void  CAIGoalCache::Save(class IS4Chunk &) {
 
 // address=[0x1314640]
 // Decompiled from int __thiscall CAIGoalCache::Search(CAIGoalCache *this, int a2)
-int  CAIGoalCache::Search(int)const {
+int  CAIGoalCache::Search(int a2)const {
   
   int v3; // [esp+0h] [ebp-Ch]
   int i; // [esp+8h] [ebp-4h]
@@ -237,7 +237,7 @@ int  CAIGoalCache::Search(int)const {
 
 // address=[0x1314690]
 // Decompiled from CAIGoalCache *__thiscall CAIGoalCache::DeleteIdx(CAIGoalCache *this, int a2)
-void  CAIGoalCache::DeleteIdx(int) {
+void  CAIGoalCache::DeleteIdx(int a2) {
   
   _DWORD *v2; // edx
   CAIGoalCache *result; // eax

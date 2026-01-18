@@ -1,6 +1,8 @@
 #ifndef CSETTLERMGR_SSETTLERINFOS_H
 #define CSETTLERMGR_SSETTLERINFOS_H
 
+#include "defines.h"
+
 namespace CSettlerMgr {
 
 class SSettlerInfos {
@@ -12,7 +14,7 @@ public:
      ~SSettlerInfos(void);
 
     // address=[0x1588360]
-    struct CSettlerMgr::SSettlerInfos &  operator=(struct CSettlerMgr::SSettlerInfos const &);
+    struct CSettlerMgr::SSettlerInfos &  operator=(struct CSettlerMgr::SSettlerInfos const & a2);
 
 };
 

@@ -1,13 +1,15 @@
 #ifndef CDEBUGINFO_H
 #define CDEBUGINFO_H
 
+#include "defines.h"
+
 class CDebugInfo {
 public:
     // address=[0x135e070]
     static bool __cdecl IsMMX(void);
 
     // address=[0x1480a00]
-    static bool __cdecl CheckEnvironment(bool);
+    static bool __cdecl CheckEnvironment(bool a1);
 
     // address=[0x1480b10]
     static bool __cdecl IsTargetPlatform(void);
@@ -32,16 +34,16 @@ private:
     static bool __cdecl CheckGraphicsAdapter(void);
 
     // address=[0x147fd90]
-    static struct SFreqInfo __cdecl CPUSpeed(int);
+    static struct SFreqInfo __cdecl CPUSpeed(int a1);
 
     // address=[0x147ff20]
     static bool __cdecl CheckMemory(void);
 
     // address=[0x147ff80]
-    static struct SFreqInfo __cdecl GetBSFCpuSpeed(unsigned int);
+    static struct SFreqInfo __cdecl GetBSFCpuSpeed(unsigned int a1);
 
     // address=[0x14800f0]
-    static struct SFreqInfo __cdecl GetRDTSCCpuSpeed(void);
+    static struct SFreqInfo __cdecl GetRDTSCCpuSpeed(void a1);
 
     // address=[0x14803b0]
     static unsigned short __cdecl wincpuid(void);
@@ -50,7 +52,7 @@ private:
     static unsigned int __cdecl wincpufeatures(void);
 
     // address=[0x14804f0]
-    static struct SFreqInfo __cdecl GetCmosCpuSpeed(void);
+    static struct SFreqInfo __cdecl GetCmosCpuSpeed(void a1);
 
     // address=[0x1480700]
     static unsigned short __cdecl wincpuidsupport(void);
@@ -74,10 +76,10 @@ private:
     static int __cdecl GetCmosTick(void);
 
     // address=[0x1480980]
-    static unsigned int __cdecl cpuTimeStamp(unsigned long *,unsigned long *);
+    static unsigned int __cdecl cpuTimeStamp(unsigned long * a1, unsigned long * a2);
 
     // address=[0x14809c0]
-    static unsigned int __cdecl diffTime64(unsigned long,unsigned long,unsigned long,unsigned long,unsigned long *,unsigned long *);
+    static unsigned int __cdecl diffTime64(unsigned long a1, unsigned long a2, unsigned long a3, unsigned long a4, unsigned long * a5, unsigned long * a6);
 
     // address=[0x3d899d8]
     static unsigned int * processor_cycles;

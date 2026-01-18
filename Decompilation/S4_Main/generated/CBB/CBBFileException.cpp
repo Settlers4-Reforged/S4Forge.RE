@@ -20,7 +20,7 @@ wchar_t const *  CBBFileException::FileName(void)const {
 
 // address=[0x14dfb00]
 // Decompiled from _DWORD *__thiscall CBBFileException::CBBFileException(_DWORD *this, struct boost::exception_detail::clone_base *a2)
- CBBFileException::CBBFileException(class CBBFileException const &) {
+ CBBFileException::CBBFileException(class CBBFileException const & a2) {
   
   CBBException::CBBException((boost::exception_detail::clone_base *)this, a2);
   *this = &CBBFileException::_vftable_;
@@ -32,7 +32,7 @@ wchar_t const *  CBBFileException::FileName(void)const {
 
 // address=[0x2f309f0]
 // Decompiled from CBBFileException *__thiscall CBBFileException::CBBFileException(CBBFileException *this, int a2, const wchar_t *a3)
- CBBFileException::CBBFileException(int,wchar_t const *) {
+ CBBFileException::CBBFileException(int a2, wchar_t const * a3) {
   
   CBBException::CBBException(this);
   *(_DWORD *)this = &CBBFileException::_vftable_;
@@ -53,7 +53,7 @@ wchar_t const *  CBBFileException::FileName(void)const {
 
 // address=[0x2f30a90]
 // Decompiled from char __thiscall CBBFileException::GetErrorMessage(CBBFileException *this, char *a2, unsigned int a3)
-bool  CBBFileException::GetErrorMessage(char *,unsigned int) {
+bool  CBBFileException::GetErrorMessage(char * a2, unsigned int a3) {
   
   const char *v3; // eax
   const char *v4; // eax

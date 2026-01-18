@@ -4,7 +4,7 @@
 
 // address=[0x1481500]
 // Decompiled from CMissionCD *IExtraCD::CreateMissionCDObject()
-static class IExtraCD * __cdecl IExtraCD::CreateMissionCDObject(void) {
+class IExtraCD * __cdecl IExtraCD::CreateMissionCDObject(void) {
   
   CMissionCD *C; // [esp+Ch] [ebp-10h]
 
@@ -20,7 +20,7 @@ static class IExtraCD * __cdecl IExtraCD::CreateMissionCDObject(void) {
 
 // address=[0x1481580]
 // Decompiled from CAddOn *IExtraCD::CreateAddOnCDObject()
-static class IExtraCD * __cdecl IExtraCD::CreateAddOnCDObject(void) {
+class IExtraCD * __cdecl IExtraCD::CreateAddOnCDObject(void) {
   
   CAddOn *C; // [esp+Ch] [ebp-10h]
 
@@ -36,7 +36,7 @@ static class IExtraCD * __cdecl IExtraCD::CreateAddOnCDObject(void) {
 
 // address=[0x1481600]
 // Decompiled from CMissionCD2 *IExtraCD::CreateMissionCD2Object()
-static class IExtraCD * __cdecl IExtraCD::CreateMissionCD2Object(void) {
+class IExtraCD * __cdecl IExtraCD::CreateMissionCD2Object(void) {
   
   CMissionCD2 *C; // [esp+Ch] [ebp-10h]
 
@@ -52,7 +52,7 @@ static class IExtraCD * __cdecl IExtraCD::CreateMissionCD2Object(void) {
 
 // address=[0x1481680]
 // Decompiled from CMissionCD3 *IExtraCD::CreateMissionCD3Object()
-static class IExtraCD * __cdecl IExtraCD::CreateMissionCD3Object(void) {
+class IExtraCD * __cdecl IExtraCD::CreateMissionCD3Object(void) {
   
   CMissionCD3 *C; // [esp+Ch] [ebp-10h]
 

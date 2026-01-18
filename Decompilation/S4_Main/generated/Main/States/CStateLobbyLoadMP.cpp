@@ -4,7 +4,7 @@
 
 // address=[0x14bce60]
 // Decompiled from CStateLobbyLoadMP *__cdecl CStateLobbyLoadMP::DynamicCreateFunc(void *a1)
-static class CGameState * __cdecl CStateLobbyLoadMP::DynamicCreateFunc(void *) {
+class CGameState * __cdecl CStateLobbyLoadMP::DynamicCreateFunc(void * a1) {
   
   CStateLobbyLoadMP *C; // [esp+Ch] [ebp-10h]
 
@@ -18,7 +18,7 @@ static class CGameState * __cdecl CStateLobbyLoadMP::DynamicCreateFunc(void *) {
 
 // address=[0x14bcee0]
 // Decompiled from CStateLobbyLoadMP *__thiscall CStateLobbyLoadMP::CStateLobbyLoadMP(CStateLobbyLoadMP *this, int a2)
- CStateLobbyLoadMP::CStateLobbyLoadMP(void *) {
+ CStateLobbyLoadMP::CStateLobbyLoadMP(void * a2) {
   
   int v3; // [esp+4h] [ebp-38h]
   _BYTE v5[28]; // [esp+10h] [ebp-2Ch] BYREF
@@ -84,7 +84,7 @@ bool  CStateLobbyLoadMP::Perform(void) {
 
 // address=[0x14bd0b0]
 // Decompiled from char __thiscall CStateLobbyLoadMP::OnEvent(CStateLobbyLoadMP *this, struct CEvn_Event *a2)
-bool  CStateLobbyLoadMP::OnEvent(class CEvn_Event &) {
+bool  CStateLobbyLoadMP::OnEvent(class CEvn_Event & a2) {
   
   return CStateLobbyGameSettings::OnEvent(this, a2);
 }
@@ -92,7 +92,7 @@ bool  CStateLobbyLoadMP::OnEvent(class CEvn_Event &) {
 
 // address=[0x14bd0d0]
 // Decompiled from void __thiscall CStateLobbyLoadMP::CreateLobbyGameInfo(_BYTE *this, int a2, int a3)
-void  CStateLobbyLoadMP::CreateLobbyGameInfo(class CLanLobbyGameSettings &,std::wstring &) {
+void  CStateLobbyLoadMP::CreateLobbyGameInfo(class CLanLobbyGameSettings & a2, std::wstring & a3) {
   
   void *v3; // [esp+0h] [ebp-2Ch]
   unsigned int i; // [esp+4h] [ebp-28h]

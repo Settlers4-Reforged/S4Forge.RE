@@ -1,6 +1,8 @@
 #ifndef CAIENTITYINFO_H
 #define CAIENTITYINFO_H
 
+#include "defines.h"
+
 class CAIEntityInfo {
 public:
     // address=[0x12fd010]
@@ -16,10 +18,10 @@ public:
     class CAIEntityInfo *  Prev(void)const;
 
     // address=[0x13069a0]
-    void  SetTargetId(int);
+    void  SetTargetId(int a2);
 
     // address=[0x13069c0]
-    void  SetTimeStamp(unsigned int);
+    void  SetTimeStamp(unsigned int a2);
 
     // address=[0x13069e0]
     int  TargetId(void)const;
@@ -28,13 +30,13 @@ public:
     unsigned int  TimeStamp(void)const;
 
     // address=[0x130a880]
-     CAIEntityInfo(int);
+     CAIEntityInfo(int a2);
 
     // address=[0x130a8e0]
      ~CAIEntityInfo(void);
 
     // address=[0x130aa00]
-    class CAIEntityInfoEx *  ExtendedInfo(enum T_AI_ENTITY_INFO_EX_CLASS);
+    class CAIEntityInfoEx *  ExtendedInfo(enum T_AI_ENTITY_INFO_EX_CLASS a2);
 
 };
 

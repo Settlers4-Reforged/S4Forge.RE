@@ -20,7 +20,7 @@ int  CSettlerIteratorBase::SettlerType(void)const {
 
 // address=[0x13173d0]
 // Decompiled from CSettlerIteratorBase *__thiscall CSettlerIteratorBase::Init(CSettlerIteratorBase *this, int a2)
-void  CSettlerIteratorBase::Init(int) {
+void  CSettlerIteratorBase::Init(int a2) {
   
   CSettlerIteratorBase *result; // eax
 
@@ -33,7 +33,7 @@ void  CSettlerIteratorBase::Init(int) {
 
 // address=[0x13174a0]
 // Decompiled from bool __thiscall CSettlerIteratorBase::SettlerValid(CSettlerIteratorBase *this, int a2)
-bool  CSettlerIteratorBase::SettlerValid(int) {
+bool  CSettlerIteratorBase::SettlerValid(int a2) {
   
   struct IEntity *v2; // eax
   bool v4; // [esp+4h] [ebp-4h]

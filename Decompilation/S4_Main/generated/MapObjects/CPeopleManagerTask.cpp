@@ -193,7 +193,7 @@ int  CPeopleManagerTask::GetNeededCarierSettler(void) {
 
 // address=[0x2f57010]
 // Decompiled from int __thiscall CPeopleManagerTask::GetNeededBuildingSettler(CPeopleManagerTask *this, int a2)
-int  CPeopleManagerTask::GetNeededBuildingSettler(int) {
+int  CPeopleManagerTask::GetNeededBuildingSettler(int a2) {
   
   int v3; // [esp+4h] [ebp-4h]
 

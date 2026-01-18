@@ -4,7 +4,7 @@
 
 // address=[0x15d3ce0]
 // Decompiled from bool __cdecl CAStar64Normal::IsNotBlocked(int a1)
-static bool __cdecl CAStar64Normal::IsNotBlocked(int) {
+bool __cdecl CAStar64Normal::IsNotBlocked(int a1) {
   
   return (unsigned __int8)CWorldManager::IsBlockedLand(a1) == 0;
 }
@@ -12,7 +12,7 @@ static bool __cdecl CAStar64Normal::IsNotBlocked(int) {
 
 // address=[0x15d3d10]
 // Decompiled from int __cdecl CAStar64Normal::MoveCosts(int a1, int a2)
-static int __cdecl CAStar64Normal::MoveCosts(int,int) {
+int __cdecl CAStar64Normal::MoveCosts(int a1, int a2) {
   
   int v2; // esi
 

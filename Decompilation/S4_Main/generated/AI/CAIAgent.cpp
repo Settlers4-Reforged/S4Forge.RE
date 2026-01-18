@@ -4,7 +4,7 @@
 
 // address=[0x12fd090]
 // Decompiled from unsigned int __cdecl CAIAgent::ExecuteResult(unsigned int a1, unsigned int a2)
-static unsigned int __cdecl CAIAgent::ExecuteResult(unsigned int,unsigned int) {
+unsigned int __cdecl CAIAgent::ExecuteResult(unsigned int,unsigned int) {
   
   return a2 | (a1 << 12);
 }
@@ -20,7 +20,7 @@ void  CAIAgent::ProcessEvent(class CAIEvent const &) {
 
 // address=[0x12fd7e0]
 // Decompiled from void __thiscall CAIAgent::UpdateScheduleTimeIfLess(CAIScheduler **this, unsigned int a2)
-void  CAIAgent::UpdateScheduleTimeIfLess(unsigned int) {
+void  CAIAgent::UpdateScheduleTimeIfLess(unsigned int a2) {
   
   if ( a2 < (unsigned int)this[1] && this[5] != 0 )
     CAIScheduler::UpdateAgentScheduleTime(this[5], (struct CAIAgent *)this, a2);
@@ -63,7 +63,7 @@ void  CAIAgent::UpdateScheduleTimeIfLess(unsigned int) {
 
 // address=[0x12fef50]
 // Decompiled from int __thiscall CAIAgent::Load(CAIAgent *this, struct IS4Chunk *a2)
-void  CAIAgent::Load(class IS4Chunk &) {
+void  CAIAgent::Load(class IS4Chunk & a2) {
   
   unsigned int v4; // [esp+4h] [ebp-4h]
 
@@ -86,7 +86,7 @@ void  CAIAgent::Load(class IS4Chunk &) {
 
 // address=[0x12ff000]
 // Decompiled from int __thiscall CAIAgent::Save(CAIAgent *this, struct IS4Chunk *a2)
-void  CAIAgent::Save(class IS4Chunk &) {
+void  CAIAgent::Save(class IS4Chunk & a2) {
   
   int v3; // [esp+4h] [ebp-8h]
 
@@ -104,7 +104,7 @@ void  CAIAgent::Save(class IS4Chunk &) {
 
 // address=[0x12ff9c0]
 // Decompiled from void __thiscall CAIAgent::UpdateScheduleTime(CAIScheduler **this, unsigned int a2)
-void  CAIAgent::UpdateScheduleTime(unsigned int) {
+void  CAIAgent::UpdateScheduleTime(unsigned int a2) {
   
   if ( this[5] )
     CAIScheduler::UpdateAgentScheduleTime(this[5], (struct CAIAgent *)this, a2);

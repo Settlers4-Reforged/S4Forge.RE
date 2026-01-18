@@ -4,7 +4,7 @@
 
 // address=[0x13ffa00]
 // Decompiled from int __cdecl CAnimalRanchRole::New(int a1)
-static class CPersistence * __cdecl CAnimalRanchRole::New(std::istream &) {
+class CPersistence * __cdecl CAnimalRanchRole::New(std::istream & a1) {
   
   if ( operator new(0x194u) )
     return CAnimalRanchRole::CAnimalRanchRole(a1);
@@ -15,7 +15,7 @@ static class CPersistence * __cdecl CAnimalRanchRole::New(std::istream &) {
 
 // address=[0x14e5d70]
 // Decompiled from char __thiscall CAnimalRanchRole::LogicUpdate(CAnimalRanchRole *this, struct CBuilding *a2)
-void  CAnimalRanchRole::LogicUpdate(class CBuilding *) {
+void  CAnimalRanchRole::LogicUpdate(class CBuilding * a2) {
   
   unsigned int v2; // eax
   unsigned __int8 *v3; // eax
@@ -208,7 +208,7 @@ LABEL_35:
 
 // address=[0x14e62d0]
 // Decompiled from unsigned int __thiscall CAnimalRanchRole::Init(CAnimalRanchRole *this, struct CBuilding *a2)
-void  CAnimalRanchRole::Init(class CBuilding *) {
+void  CAnimalRanchRole::Init(class CBuilding * a2) {
   
   unsigned int v2; // eax
   int v3; // eax
@@ -234,7 +234,7 @@ void  CAnimalRanchRole::Init(class CBuilding *) {
 
 // address=[0x14e6390]
 // Decompiled from void __thiscall CAnimalRanchRole::PostLoadInit(CAnimalRanchRole *this, struct CBuilding *a2)
-void  CAnimalRanchRole::PostLoadInit(class CBuilding *) {
+void  CAnimalRanchRole::PostLoadInit(class CBuilding * a2) {
   
   CWorkUpBuildingRole::PostLoadInit(this, a2);
 }
@@ -242,7 +242,7 @@ void  CAnimalRanchRole::PostLoadInit(class CBuilding *) {
 
 // address=[0x14e63b0]
 // Decompiled from _DWORD *__thiscall CAnimalRanchRole::CAnimalRanchRole(_DWORD *this, int a2)
- CAnimalRanchRole::CAnimalRanchRole(std::istream &) {
+ CAnimalRanchRole::CAnimalRanchRole(std::istream & a2) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
@@ -269,7 +269,7 @@ void  CAnimalRanchRole::PostLoadInit(class CBuilding *) {
 
 // address=[0x14e6470]
 // Decompiled from int __thiscall CAnimalRanchRole::Store(void *this, struct std::ostream *a2)
-void  CAnimalRanchRole::Store(std::ostream &) {
+void  CAnimalRanchRole::Store(std::ostream & a2) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
   void *v4; // [esp+4h] [ebp-4h]
@@ -318,7 +318,7 @@ int  CAnimalRanchRole::GetBuildingRole(void) {
 
 // address=[0x14fd7f0]
 // Decompiled from int __cdecl CAnimalRanchRole::Load(int a1)
-static class CAnimalRanchRole * __cdecl CAnimalRanchRole::Load(std::istream &) {
+class CAnimalRanchRole * __cdecl CAnimalRanchRole::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]

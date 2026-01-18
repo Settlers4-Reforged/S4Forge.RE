@@ -1,19 +1,21 @@
 #ifndef CAICHAMBERS_H
 #define CAICHAMBERS_H
 
+#include "defines.h"
+
 class CAIChambers {
 public:
     // address=[0x1314700]
-     CAIChambers(int);
+     CAIChambers(int a2);
 
     // address=[0x1314770]
-    void  Push(int,int);
+    void  Push(int a2, int a3);
 
     // address=[0x1314880]
-    void  PushTaskForce(class CAITaskForce &);
+    void  PushTaskForce(class CAITaskForce & a2);
 
     // address=[0x13148e0]
-    void  PushTaskForceEx(class CAITaskForce &,int);
+    void  PushTaskForceEx(class CAITaskForce & a2, int a3);
 
     // address=[0x1314960]
     int  Next(void);

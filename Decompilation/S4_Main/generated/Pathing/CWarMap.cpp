@@ -4,7 +4,7 @@
 
 // address=[0x131c8e0]
 // Decompiled from int __cdecl CWarMap::FirstEntityIdVW(int a1, int a2, int a3)
-static int __cdecl CWarMap::FirstEntityIdVW(enum T_WAR_MAP_TYPE,int,int) {
+int __cdecl CWarMap::FirstEntityIdVW(enum T_WAR_MAP_TYPE a1, int a2, int a3) {
   
   return CWarMap::m_sSquares[640 * a3 + 640 + 10 * a2 + 2 * a1];
 }
@@ -12,7 +12,7 @@ static int __cdecl CWarMap::FirstEntityIdVW(enum T_WAR_MAP_TYPE,int,int) {
 
 // address=[0x1351c00]
 // Decompiled from int __cdecl CWarMap::NumberOfEntitiesXY(int a1, Squares *a2, Squares *a3)
-static unsigned int __cdecl CWarMap::NumberOfEntitiesXY(enum T_WAR_MAP_TYPE,int,int) {
+unsigned int __cdecl CWarMap::NumberOfEntitiesXY(enum T_WAR_MAP_TYPE a1, int a2, int a3) {
   
   int v3; // esi
 
@@ -23,7 +23,7 @@ static unsigned int __cdecl CWarMap::NumberOfEntitiesXY(enum T_WAR_MAP_TYPE,int,
 
 // address=[0x14e0030]
 // Decompiled from int __cdecl CWarMap::NumberOfEntitiesVW(int a1, int a2, int a3)
-static unsigned int __cdecl CWarMap::NumberOfEntitiesVW(enum T_WAR_MAP_TYPE,int,int) {
+unsigned int __cdecl CWarMap::NumberOfEntitiesVW(enum T_WAR_MAP_TYPE a1, int a2, int a3) {
   
   return CWarMap::m_sSquares[640 * a3 + 641 + 10 * a2 + 2 * a1];
 }
@@ -31,7 +31,7 @@ static unsigned int __cdecl CWarMap::NumberOfEntitiesVW(enum T_WAR_MAP_TYPE,int,
 
 // address=[0x152bce0]
 // Decompiled from int __cdecl CWarMap::FirstEntityIdXY(int a1, Squares *a2, Squares *a3)
-static int __cdecl CWarMap::FirstEntityIdXY(enum T_WAR_MAP_TYPE,int,int) {
+int __cdecl CWarMap::FirstEntityIdXY(enum T_WAR_MAP_TYPE a1, int a2, int a3) {
   
   int v3; // esi
 
@@ -42,7 +42,7 @@ static int __cdecl CWarMap::FirstEntityIdXY(enum T_WAR_MAP_TYPE,int,int) {
 
 // address=[0x15e2d40]
 // Decompiled from int __cdecl CWarMap::SettlerInfluValue(unsigned int a1)
-static int __cdecl CWarMap::SettlerInfluValue(int) {
+int __cdecl CWarMap::SettlerInfluValue(int a1) {
   
   if ( a1 >= 0x46
     && BBSupportDbgReport(
@@ -59,7 +59,7 @@ static int __cdecl CWarMap::SettlerInfluValue(int) {
 
 // address=[0x15fb5f0]
 // Decompiled from void *__thiscall CWarMap::Init(void *this)
-static void __cdecl CWarMap::Init(void) {
+void __cdecl CWarMap::Init(void) {
   
   void *result; // eax
   int *i; // [esp+0h] [ebp-4h]
@@ -98,7 +98,7 @@ static void __cdecl CWarMap::Init(void) {
 
 // address=[0x15fb7d0]
 // Decompiled from void CWarMap::Done()
-static void __cdecl CWarMap::Done(void) {
+void __cdecl CWarMap::Done(void) {
   
   unsigned int i; // [esp+0h] [ebp-4h]
 
@@ -120,7 +120,7 @@ static void __cdecl CWarMap::Done(void) {
 
 // address=[0x15fb840]
 // Decompiled from void __cdecl CWarMap::AddEntity(IEntity *target)
-static void __cdecl CWarMap::AddEntity(class IEntity &) {
+void __cdecl CWarMap::AddEntity(class IEntity & target) {
   
   int packedXY; // eax MAPDST
 
@@ -136,7 +136,7 @@ static void __cdecl CWarMap::AddEntity(class IEntity &) {
 
 // address=[0x15fb880]
 // Decompiled from void __cdecl CWarMap::RemoveEntity(IEntity *a1)
-static void __cdecl CWarMap::RemoveEntity(class IEntity &) {
+void __cdecl CWarMap::RemoveEntity(class IEntity & a1) {
   
   int v1; // [esp-4h] [ebp-4h]
 
@@ -150,7 +150,7 @@ static void __cdecl CWarMap::RemoveEntity(class IEntity &) {
 
 // address=[0x15fb8b0]
 // Decompiled from int __cdecl CWarMap::NotifyMove(CPropertySet *a1, int a2)
-static void __cdecl CWarMap::NotifyMove(class IEntity &,int) {
+void __cdecl CWarMap::NotifyMove(class IEntity & a1, int a2) {
   
   int v2; // eax
   int v3; // eax
@@ -273,7 +273,7 @@ static void __cdecl CWarMap::NotifyMove(class IEntity &,int) {
 
 // address=[0x15fc6b0]
 // Decompiled from int __cdecl CWarMap::ObjectTypeToWarMapType(char a1)
-static enum T_WAR_MAP_TYPE __cdecl CWarMap::ObjectTypeToWarMapType(int) {
+enum T_WAR_MAP_TYPE __cdecl CWarMap::ObjectTypeToWarMapType(int a1) {
   
   return (4 * ((a1 & 0x50) != 0)) | ((a1 & 0x86) != 0) | (2 * ((a1 & 0x88) != 0));
 }
@@ -281,7 +281,7 @@ static enum T_WAR_MAP_TYPE __cdecl CWarMap::ObjectTypeToWarMapType(int) {
 
 // address=[0x15fbb80]
 // Decompiled from void __cdecl CWarMap::AddEntityEx(IEntity *target, int packedXY)
-static void __cdecl CWarMap::AddEntityEx(class IEntity &,int) {
+void __cdecl CWarMap::AddEntityEx(class IEntity & target, int packedXY) {
   
   int targetId; // eax MAPDST
   char objType; // al MAPDST
@@ -394,7 +394,7 @@ static void __cdecl CWarMap::AddEntityEx(class IEntity &,int) {
 
 // address=[0x15fbeb0]
 // Decompiled from void __cdecl CWarMap::RemoveEntityEx(IEntity *a1, int a2)
-static void __cdecl CWarMap::RemoveEntityEx(class IEntity &,int) {
+void __cdecl CWarMap::RemoveEntityEx(class IEntity & a1, int a2) {
   
   int v2; // eax
   int v3; // eax
@@ -558,7 +558,7 @@ static void __cdecl CWarMap::RemoveEntityEx(class IEntity &,int) {
 
 // address=[0x15fc7c0]
 // Decompiled from unsigned __int16 *__cdecl CWarMap::WarMapTypeSquareDataVW(int a1, int a2, int a3)
-static struct CWarMap::SWarMapTypeSquareData & __cdecl CWarMap::WarMapTypeSquareDataVW(enum T_WAR_MAP_TYPE,int,int) {
+struct CWarMap::SWarMapTypeSquareData & __cdecl CWarMap::WarMapTypeSquareDataVW(enum T_WAR_MAP_TYPE a1, int a2, int a3) {
   
   return &CWarMap::m_sSquares[640 * a3 + 640 + 10 * a2 + 2 * a1];
 }

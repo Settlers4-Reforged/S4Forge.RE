@@ -4,7 +4,7 @@
 
 // address=[0x1351d70]
 // Decompiled from int __cdecl CWaterFlags::WaterFlags(int a1)
-static int __cdecl CWaterFlags::WaterFlags(int) {
+int __cdecl CWaterFlags::WaterFlags(int a1) {
   
   return *(unsigned __int16 *)(CWaterFlags::m_pWaterFlagsLayer + 2 * a1);
 }
@@ -12,7 +12,7 @@ static int __cdecl CWaterFlags::WaterFlags(int) {
 
 // address=[0x14dff20]
 // Decompiled from bool __cdecl CWaterFlags::IsBlockedWater(int a1)
-static bool __cdecl CWaterFlags::IsBlockedWater(int) {
+bool __cdecl CWaterFlags::IsBlockedWater(int a1) {
   
   return (*(_WORD *)(CWaterFlags::m_pWaterFlagsLayer + 2 * a1) & 0xC300) != 49152;
 }
@@ -20,7 +20,7 @@ static bool __cdecl CWaterFlags::IsBlockedWater(int) {
 
 // address=[0x14dfff0]
 // Decompiled from bool __cdecl CWaterFlags::IsWater(int a1)
-static bool __cdecl CWaterFlags::IsWater(int) {
+bool __cdecl CWaterFlags::IsWater(int a1) {
   
   return *(unsigned __int16 *)(CWaterFlags::m_pWaterFlagsLayer + 2 * a1) >= 0xC000u;
 }
@@ -28,7 +28,7 @@ static bool __cdecl CWaterFlags::IsWater(int) {
 
 // address=[0x14e0080]
 // Decompiled from int __cdecl CWaterFlags::WaterFlagsGetDistanceToNearestShip(char a1)
-static int __cdecl CWaterFlags::WaterFlagsGetDistanceToNearestShip(int) {
+int __cdecl CWaterFlags::WaterFlagsGetDistanceToNearestShip(int a1) {
   
   if ( (a1 & 0xF) != 0 )
     return 10 - (a1 & 0xF);
@@ -39,7 +39,7 @@ static int __cdecl CWaterFlags::WaterFlagsGetDistanceToNearestShip(int) {
 
 // address=[0x14eb310]
 // Decompiled from int __cdecl CWaterFlags::ClearWaterFlagBitRepelling(int a1)
-static void __cdecl CWaterFlags::ClearWaterFlagBitRepelling(int) {
+void __cdecl CWaterFlags::ClearWaterFlagBitRepelling(int a1) {
   
   int result; // eax
 
@@ -51,7 +51,7 @@ static void __cdecl CWaterFlags::ClearWaterFlagBitRepelling(int) {
 
 // address=[0x14fdea0]
 // Decompiled from bool __cdecl CWaterFlags::WaterFlagsIsFreeWater(__int16 a1)
-static bool __cdecl CWaterFlags::WaterFlagsIsFreeWater(int) {
+bool __cdecl CWaterFlags::WaterFlagsIsFreeWater(int a1) {
   
   return (a1 & 0xCB00) == 49152;
 }
@@ -59,7 +59,7 @@ static bool __cdecl CWaterFlags::WaterFlagsIsFreeWater(int) {
 
 // address=[0x15067a0]
 // Decompiled from int __cdecl CWaterFlags::SetWaterFlagBitRepelling(int a1)
-static void __cdecl CWaterFlags::SetWaterFlagBitRepelling(int) {
+void __cdecl CWaterFlags::SetWaterFlagBitRepelling(int a1) {
   
   int result; // eax
 
@@ -71,7 +71,7 @@ static void __cdecl CWaterFlags::SetWaterFlagBitRepelling(int) {
 
 // address=[0x15f48a0]
 // Decompiled from bool __cdecl CWaterFlags::IsFreeWater(int a1)
-static bool __cdecl CWaterFlags::IsFreeWater(int) {
+bool __cdecl CWaterFlags::IsFreeWater(int a1) {
   
   return (*(_WORD *)(CWaterFlags::m_pWaterFlagsLayer + 2 * a1) & 0xCB00) == 49152;
 }
@@ -79,7 +79,7 @@ static bool __cdecl CWaterFlags::IsFreeWater(int) {
 
 // address=[0x15fe810]
 // Decompiled from bool __cdecl CWaterFlags::WaterFlagsValid(int a1)
-static bool __cdecl CWaterFlags::WaterFlagsValid(int) {
+bool __cdecl CWaterFlags::WaterFlagsValid(int a1) {
   
   return a1 >= 49152;
 }
@@ -87,7 +87,7 @@ static bool __cdecl CWaterFlags::WaterFlagsValid(int) {
 
 // address=[0x15f42f0]
 // Decompiled from int __cdecl CWaterFlags::ClearWaterFlagBits(int a1, __int16 a2)
-static void __cdecl CWaterFlags::ClearWaterFlagBits(int,int) {
+void __cdecl CWaterFlags::ClearWaterFlagBits(int a1, int a2) {
   
   int result; // eax
 
@@ -99,7 +99,7 @@ static void __cdecl CWaterFlags::ClearWaterFlagBits(int,int) {
 
 // address=[0x15f58d0]
 // Decompiled from int __cdecl CWaterFlags::SetWaterFlagBits(int a1, __int16 a2)
-static void __cdecl CWaterFlags::SetWaterFlagBits(int,int) {
+void __cdecl CWaterFlags::SetWaterFlagBits(int a1, int a2) {
   
   int result; // eax
 
@@ -111,7 +111,7 @@ static void __cdecl CWaterFlags::SetWaterFlagBits(int,int) {
 
 // address=[0x15fcd50]
 // Decompiled from int __cdecl CWaterFlags::Init(unsigned __int16 *a1)
-static void __cdecl CWaterFlags::Init(unsigned short *) {
+void __cdecl CWaterFlags::Init(unsigned short * a1) {
   
   int result; // eax
 
@@ -127,7 +127,7 @@ static void __cdecl CWaterFlags::Init(unsigned short *) {
 
 // address=[0x15fcdc0]
 // Decompiled from void CWaterFlags::Done()
-static void __cdecl CWaterFlags::Done(void) {
+void __cdecl CWaterFlags::Done(void) {
   
   CWaterFlags::m_iInitialized = 0;
   CWaterFlags::m_pWaterFlagsLayer = 0;
@@ -136,7 +136,7 @@ static void __cdecl CWaterFlags::Done(void) {
 
 // address=[0x15fcde0]
 // Decompiled from void __cdecl CWaterFlags::PlaceShip(int a1)
-static void __cdecl CWaterFlags::PlaceShip(int) {
+void __cdecl CWaterFlags::PlaceShip(int a1) {
   
   unsigned int v1; // [esp+4h] [ebp-1Ch]
   __int16 v2; // [esp+8h] [ebp-18h]
@@ -197,7 +197,7 @@ static void __cdecl CWaterFlags::PlaceShip(int) {
 
 // address=[0x15fcfc0]
 // Decompiled from int __cdecl CWaterFlags::RemoveShip(int a1)
-static void __cdecl CWaterFlags::RemoveShip(int) {
+void __cdecl CWaterFlags::RemoveShip(int a1) {
   
   int result; // eax
   int v2; // eax
@@ -261,7 +261,7 @@ static void __cdecl CWaterFlags::RemoveShip(int) {
 
 // address=[0x15fe7a0]
 // Decompiled from int __cdecl CWaterFlags::SetWaterFlags(int a1, __int16 a2)
-static void __cdecl CWaterFlags::SetWaterFlags(int,int) {
+void __cdecl CWaterFlags::SetWaterFlags(int a1, int a2) {
   
   int result; // eax
 

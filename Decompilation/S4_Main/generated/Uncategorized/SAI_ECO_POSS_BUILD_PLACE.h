@@ -1,10 +1,12 @@
 #ifndef SAI_ECO_POSS_BUILD_PLACE_H
 #define SAI_ECO_POSS_BUILD_PLACE_H
 
+#include "defines.h"
+
 class SAI_ECO_POSS_BUILD_PLACE {
 public:
     // address=[0x1345720]
-     SAI_ECO_POSS_BUILD_PLACE(struct SAI_ECO_POSS_BUILD_PLACE &&);
+     SAI_ECO_POSS_BUILD_PLACE(struct SAI_ECO_POSS_BUILD_PLACE && a2);
 
     // address=[0x1345770]
      SAI_ECO_POSS_BUILD_PLACE(struct SAI_ECO_POSS_BUILD_PLACE const &);

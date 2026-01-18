@@ -4,7 +4,7 @@
 
 // address=[0x141bad0]
 // Decompiled from int __thiscall CDarkTribe::OrderMushroomFarmer(void *this, int a2)
-int  CDarkTribe::OrderMushroomFarmer(int) {
+int  CDarkTribe::OrderMushroomFarmer(int a2) {
   
   int v3; // eax
   int v4; // eax
@@ -87,7 +87,7 @@ int  CDarkTribe::OrderMushroomFarmer(int) {
 
 // address=[0x141bcc0]
 // Decompiled from int __thiscall CDarkTribe::OrderSettlerToDarkTemple(CDarkTribe *this, int a2, bool a3)
-int  CDarkTribe::OrderSettlerToDarkTemple(int,bool) {
+int  CDarkTribe::OrderSettlerToDarkTemple(int a2, bool a3) {
   
   _BYTE v4[24]; // [esp+4h] [ebp-40h] BYREF
   CEntityEvent *v5; // [esp+1Ch] [ebp-28h]
@@ -132,7 +132,7 @@ int  CDarkTribe::OrderSettlerToDarkTemple(int,bool) {
 
 // address=[0x141bde0]
 // Decompiled from void __thiscall CDarkTribe::AssociateServantWithMushroomFarm(CDarkTribe *this, int a2)
-void  CDarkTribe::AssociateServantWithMushroomFarm(int) {
+void  CDarkTribe::AssociateServantWithMushroomFarm(int a2) {
   
   int MushroomFarmForServant; // [esp+0h] [ebp-Ch]
   unsigned __int8 *SettlerPtr; // [esp+4h] [ebp-8h]
@@ -164,7 +164,7 @@ void  CDarkTribe::AssociateServantWithMushroomFarm(int) {
 
 // address=[0x141bea0]
 // Decompiled from unsigned __int8 *__thiscall CDarkTribe::GetDarkTempleIfReady(CDarkTribe *this, int a2)
-class CBuilding *  CDarkTribe::GetDarkTempleIfReady(int) {
+class CBuilding *  CDarkTribe::GetDarkTempleIfReady(int a2) {
   
   int DarkTempleId; // [esp+0h] [ebp-10h]
   unsigned __int8 *BuildingPtr; // [esp+Ch] [ebp-4h]
@@ -182,7 +182,7 @@ class CBuilding *  CDarkTribe::GetDarkTempleIfReady(int) {
 
 // address=[0x141cb10]
 // Decompiled from unsigned int __thiscall CDarkTribe::ChangePositionOrSurroundingToDarkLand(CDarkTribe *this, int a2, int a3, bool a4)
-void  CDarkTribe::ChangePositionOrSurroundingToDarkLand(int,int,bool) {
+void  CDarkTribe::ChangePositionOrSurroundingToDarkLand(int a2, int a3, bool a4) {
   
   unsigned int result; // eax
   int v5; // eax
@@ -238,7 +238,7 @@ void  CDarkTribe::ChangePositionOrSurroundingToDarkLand(int,int,bool) {
 
 // address=[0x141cca0]
 // Decompiled from void __thiscall CDarkTribe::ChangePositionToGreenLand(CDarkTribe *this, int a2, int a3, int a4)
-void  CDarkTribe::ChangePositionToGreenLand(int,int,int) {
+void  CDarkTribe::ChangePositionToGreenLand(int a2, int a3, int a4) {
   
   CDarkTribe::ChangeElementToDarkOrGreen(this, a2, a3, 0, a4);
   CDarkTribe::SetHolesDarkOrGreen(this, a2, a3, 0, a4);
@@ -247,7 +247,7 @@ void  CDarkTribe::ChangePositionToGreenLand(int,int,int) {
 
 // address=[0x141cce0]
 // Decompiled from char __thiscall CDarkTribe::IsMushroomFarmPositionValid(CDarkTribe *this, int a2, int a3, int a4)
-bool  CDarkTribe::IsMushroomFarmPositionValid(int,int,int) {
+bool  CDarkTribe::IsMushroomFarmPositionValid(int a2, int a3, int a4) {
   
   int v5; // [esp+8h] [ebp-38h]
   int v6; // [esp+Ch] [ebp-34h]
@@ -318,7 +318,7 @@ bool  CDarkTribe::IsMushroomFarmPositionValid(int,int,int) {
 
 // address=[0x141cec0]
 // Decompiled from bool __thiscall CDarkTribe::IsObjectSurrounded(CDarkTribe *this, int a2, bool a3)
-bool  CDarkTribe::IsObjectSurrounded(int,bool) {
+bool  CDarkTribe::IsObjectSurrounded(int a2, bool a3) {
   
   int v4; // [esp+1Ch] [ebp-40h]
   unsigned int v5; // [esp+20h] [ebp-3Ch]
@@ -417,7 +417,7 @@ bool  CDarkTribe::IsObjectSurrounded(int,bool) {
 
 // address=[0x141bf00]
 // Decompiled from int __thiscall CDarkTribe::GetDarkTempleId(CDarkTribe *this, int a2)
-int  CDarkTribe::GetDarkTempleId(int) {
+int  CDarkTribe::GetDarkTempleId(int a2) {
   
   int FirstBuildingId; // [esp+4h] [ebp-4h]
 
@@ -430,7 +430,7 @@ int  CDarkTribe::GetDarkTempleId(int) {
 
 // address=[0x141bf40]
 // Decompiled from char __thiscall CDarkTribe::GetDarkTempleIfReady(CDarkTribe *this, int a2, struct CBuilding **a3, void ***a4)
-bool  CDarkTribe::GetDarkTempleIfReady(int,class CBuilding * &,class CDarkTempleRole * &) {
+bool  CDarkTribe::GetDarkTempleIfReady(int a2, class CBuilding * & a3, class CDarkTempleRole * & a4) {
   
   int DarkTempleId; // [esp+0h] [ebp-10h]
   void **v6; // [esp+8h] [ebp-8h]
@@ -461,7 +461,7 @@ bool  CDarkTribe::GetDarkTempleIfReady(int,class CBuilding * &,class CDarkTemple
 
 // address=[0x141c000]
 // Decompiled from int __thiscall CDarkTribe::FindMushroomFarmForServant(CDarkTribe *this, int a2)
-int  CDarkTribe::FindMushroomFarmForServant(int) {
+int  CDarkTribe::FindMushroomFarmForServant(int a2) {
   
   void **v2; // eax
   CMFCVisualManagerOffice2003 *v4; // [esp+4h] [ebp-44h]
@@ -549,7 +549,7 @@ int  CDarkTribe::FindMushroomFarmForServant(int) {
 
 // address=[0x141c250]
 // Decompiled from int __thiscall CDarkTribe::OrderServantToMushroomFarm(CDarkTribe *this, int a2, int a3)
-void  CDarkTribe::OrderServantToMushroomFarm(int,int) {
+void  CDarkTribe::OrderServantToMushroomFarm(int a2, int a3) {
   
   unsigned __int16 *v3; // eax
   unsigned __int16 *v4; // eax
@@ -628,7 +628,7 @@ void  CDarkTribe::OrderServantToMushroomFarm(int,int) {
 
 // address=[0x141c470]
 // Decompiled from int __thiscall CDarkTribe::ChangeElementToDarkOrGreen(CDarkTribe *this, int a2, int a3, bool a4, int a5)
-void  CDarkTribe::ChangeElementToDarkOrGreen(int,int,bool,int) {
+void  CDarkTribe::ChangeElementToDarkOrGreen(int a2, int a3, bool a4, int a5) {
   
   int result; // eax
   int v6; // [esp+0h] [ebp-28h]
@@ -696,7 +696,7 @@ void  CDarkTribe::ChangeElementToDarkOrGreen(int,int,bool,int) {
 
 // address=[0x141c680]
 // Decompiled from void __thiscall CDarkTribe::ChangeObjectToDarkOrGreen(CDarkTribe *this, int a2, int a3, int a4, bool a5)
-void  CDarkTribe::ChangeObjectToDarkOrGreen(int,int,int,bool) {
+void  CDarkTribe::ChangeObjectToDarkOrGreen(int a2, int a3, int a4, bool a5) {
   
   int v5; // eax
   int v7; // [esp+4h] [ebp-18h]
@@ -753,7 +753,7 @@ void  CDarkTribe::ChangeObjectToDarkOrGreen(int,int,int,bool) {
 
 // address=[0x141c840]
 // Decompiled from void __thiscall CDarkTribe::FillUnderObject(CDarkTribe *this, int a2, int a3, bool a4)
-void  CDarkTribe::FillUnderObject(int,int,bool) {
+void  CDarkTribe::FillUnderObject(int a2, int a3, bool a4) {
   
   int v5; // [esp+Ch] [ebp-10h]
   int v6; // [esp+10h] [ebp-Ch]
@@ -784,7 +784,7 @@ void  CDarkTribe::FillUnderObject(int,int,bool) {
 
 // address=[0x141c9a0]
 // Decompiled from void __thiscall CDarkTribe::SetHolesDarkOrGreen(CDarkTribe *this, int a2, int a3, bool a4, int a5)
-void  CDarkTribe::SetHolesDarkOrGreen(int,int,bool,int) {
+void  CDarkTribe::SetHolesDarkOrGreen(int a2, int a3, bool a4, int a5) {
   
   int v6; // [esp+8h] [ebp-1Ch]
   int v7; // [esp+Ch] [ebp-18h]

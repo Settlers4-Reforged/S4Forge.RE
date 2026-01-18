@@ -1,6 +1,8 @@
 #ifndef CWEAPONSIDEBARINFO_H
 #define CWEAPONSIDEBARINFO_H
 
+#include "defines.h"
+
 class CWeaponSideBarInfo : public CInfoExchange {
 public:
     // address=[0x1454a50]

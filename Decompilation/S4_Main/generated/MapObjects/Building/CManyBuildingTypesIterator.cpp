@@ -4,7 +4,7 @@
 
 // address=[0x1315b40]
 // Decompiled from int __thiscall CManyBuildingTypesIterator::Init(CManyBuildingTypesIterator *this, int a2, int a3, int a4)
-void  CManyBuildingTypesIterator::Init(int,int,int) {
+void  CManyBuildingTypesIterator::Init(int a2, int a3, int a4) {
   
   int result; // eax
 

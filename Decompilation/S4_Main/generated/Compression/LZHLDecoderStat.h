@@ -1,6 +1,8 @@
 #ifndef LZHLDECODERSTAT_H
 #define LZHLDECODERSTAT_H
 
+#include "defines.h"
+
 class LZHLDecoderStat {
 public:
     // address=[0x2f2b470]

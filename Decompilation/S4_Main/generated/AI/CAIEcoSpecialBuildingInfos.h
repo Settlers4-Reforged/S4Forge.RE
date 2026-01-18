@@ -1,6 +1,8 @@
 #ifndef CAIECOSPECIALBUILDINGINFOS_H
 #define CAIECOSPECIALBUILDINGINFOS_H
 
+#include "defines.h"
+
 class CAIEcoSpecialBuildingInfos {
 public:
     // address=[0x133a1d0]
@@ -13,19 +15,19 @@ public:
     static class CAIEcoSpecialBuildingInfos * __cdecl TheObject(void);
 
     // address=[0x133a2d0]
-    struct SAIESBIBoundingInfos const *  GetBoundingBoxInfo(int,enum BUILDING_TYPES);
+    struct SAIESBIBoundingInfos const *  GetBoundingBoxInfo(int a2, enum BUILDING_TYPES a3);
 
     // address=[0x133a300]
-    int  GetBlockingBitAmount(int,enum BUILDING_TYPES);
+    int  GetBlockingBitAmount(int a2, enum BUILDING_TYPES a3);
 
     // address=[0x133a330]
-    int  GetNrNeededBoards(int,enum BUILDING_TYPES);
+    int  GetNrNeededBoards(int a2, enum BUILDING_TYPES a3);
 
     // address=[0x133a360]
-    int  GetNrNeededStones(int,enum BUILDING_TYPES);
+    int  GetNrNeededStones(int a2, enum BUILDING_TYPES a3);
 
     // address=[0x133a390]
-    int  GetNrNeededGold(int,enum BUILDING_TYPES);
+    int  GetNrNeededGold(int a2, enum BUILDING_TYPES a3);
 
 private:
     // address=[0x133a3c0]

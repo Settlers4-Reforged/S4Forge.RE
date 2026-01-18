@@ -4,7 +4,7 @@
 
 // address=[0x15c7f60]
 // Decompiled from CGame_InitNetwork *__cdecl CGame_InitNetwork::DynamicCreateFunc(void *a1)
-static class CGameState * __cdecl CGame_InitNetwork::DynamicCreateFunc(void *) {
+class CGameState * __cdecl CGame_InitNetwork::DynamicCreateFunc(void * a1) {
   
   CGame_InitNetwork *C; // [esp+Ch] [ebp-10h]
 
@@ -18,7 +18,7 @@ static class CGameState * __cdecl CGame_InitNetwork::DynamicCreateFunc(void *) {
 
 // address=[0x15c7fe0]
 // Decompiled from CGame_InitNetwork *__thiscall CGame_InitNetwork::CGame_InitNetwork(CGame_InitNetwork *this, wchar_t *a2)
- CGame_InitNetwork::CGame_InitNetwork(void *) {
+ CGame_InitNetwork::CGame_InitNetwork(void * a2) {
   
   int v3; // [esp+8h] [ebp-A4h]
   void *v4; // [esp+Ch] [ebp-A0h]
@@ -122,7 +122,7 @@ bool  CGame_InitNetwork::Perform(void) {
 
 // address=[0x15c82f0]
 // Decompiled from char __thiscall CGame_InitNetwork::OnEvent(CGame_InitNetwork *this, struct CEvn_Event *a2)
-bool  CGame_InitNetwork::OnEvent(class CEvn_Event &) {
+bool  CGame_InitNetwork::OnEvent(class CEvn_Event & a2) {
   
   if ( a2->event == 4001 )
     return 1;

@@ -4,7 +4,7 @@
 
 // address=[0x13037c0]
 // Decompiled from COneSettlerTypeIterator *__thiscall COneSettlerTypeIterator::COneSettlerTypeIterator(  COneSettlerTypeIterator *this,  int a2,  int a3)
- COneSettlerTypeIterator::COneSettlerTypeIterator(int,int) {
+ COneSettlerTypeIterator::COneSettlerTypeIterator(int a2, int a3) {
   
   COneSettlerTypeIterator::Init(this, a2, a3);
   return this;
@@ -13,7 +13,7 @@
 
 // address=[0x13150d0]
 // Decompiled from int __thiscall COneSettlerTypeIterator::Init(COneSettlerTypeIterator *this, int a2, int a3)
-void  COneSettlerTypeIterator::Init(int,int) {
+void  COneSettlerTypeIterator::Init(int a2, int a3) {
   
   int result; // eax
 

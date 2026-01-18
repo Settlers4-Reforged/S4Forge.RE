@@ -1,10 +1,12 @@
 #ifndef CTRANSPORTSHIP_H
 #define CTRANSPORTSHIP_H
 
+#include "defines.h"
+
 class CTransportShip : public CShip {
 public:
     // address=[0x1402520]
-    static class CPersistence * __cdecl New(std::istream &);
+    static class CPersistence * __cdecl New(std::istream & a1);
 
     // address=[0x152bdd0]
     enum TIntTraderState  CTransportShip::GetTradingState(void);
@@ -16,22 +18,22 @@ public:
     void  MemHomePosition(void);
 
     // address=[0x159e950]
-    virtual void  FillDialog(bool);
+    virtual void  FillDialog(bool a2);
 
     // address=[0x159ea50]
-    int  GetGoodAmount(int);
+    int  GetGoodAmount(int a2);
 
     // address=[0x159eab0]
-    int  AddGood(int,int);
+    int  AddGood(int a2, int a3);
 
     // address=[0x159ec10]
-    int  RemoveGood(int,int);
+    int  RemoveGood(int a2, int a3);
 
     // address=[0x159ed00]
-    bool  IsSpaceAvailable(int);
+    bool  IsSpaceAvailable(int a2);
 
     // address=[0x159ed70]
-    int  GetAvailableSpace(int);
+    int  GetAvailableSpace(int a2);
 
     // address=[0x159edf0]
     int  GetAvailableSpace(void);
@@ -43,10 +45,10 @@ public:
     bool  HasLoadedSomething(void);
 
     // address=[0x159ef70]
-    bool  HasLoadGood(enum PILE_TYPES);
+    bool  HasLoadGood(enum PILE_TYPES a2);
 
     // address=[0x159efd0]
-    void  SetTargetHarbourID(int);
+    void  SetTargetHarbourID(int a2);
 
     // address=[0x159eff0]
     int  GetTargetHarbourID(void);
@@ -55,7 +57,7 @@ public:
     void  TargetHarbourDestroyed(void);
 
     // address=[0x159f120]
-    void  SetDepartHarbourID(int);
+    void  SetDepartHarbourID(int a2);
 
     // address=[0x159f140]
     int  GetDepartHarbourID(void);
@@ -85,25 +87,25 @@ public:
     void  GoToHomeTradingBuilding(void);
 
     // address=[0x159f5e0]
-    void  SetHomeID(int);
+    void  SetHomeID(int a2);
 
     // address=[0x159f6a0]
-    void  SetJobType(int);
+    void  SetJobType(int a2);
 
     // address=[0x159f6c0]
     int  GetJobType(void);
 
     // address=[0x159f6e0]
-    void  SetGoToSource(bool);
+    void  SetGoToSource(bool a2);
 
     // address=[0x159f700]
-    void  SetGoToTarget(bool);
+    void  SetGoToTarget(bool a2);
 
     // address=[0x159f720]
     virtual void  VehicleLogicUpdate(void);
 
     // address=[0x159f8b0]
-    virtual void  ConvertEventIntoGoal(class CEntityEvent *);
+    virtual void  ConvertEventIntoGoal(class CEntityEvent * a2);
 
     // address=[0x159f910]
     virtual void  TakeJob(void);
@@ -112,22 +114,22 @@ public:
     virtual struct SGfxObjectInfo *  GetGfxInfos(void);
 
     // address=[0x159f980]
-    void  SetNeutralTraderStatus(bool);
+    void  SetNeutralTraderStatus(bool a2);
 
     // address=[0x159fa30]
     void  ClearNeutralTraderStatus(void);
 
     // address=[0x159fa60]
-    static void * __cdecl operator new(unsigned int);
+    static void * __cdecl operator new(unsigned int a1);
 
     // address=[0x159fa80]
-    static void __cdecl operator delete(void *);
+    static void __cdecl operator delete(void * a1);
 
     // address=[0x159fac0]
-     CTransportShip(std::istream &);
+     CTransportShip(std::istream & a2);
 
     // address=[0x15a0060]
-    virtual void  Store(std::ostream &);
+    virtual void  Store(std::ostream & a2);
 
     // address=[0x15a09c0]
     virtual unsigned long  ClassID(void)const;
@@ -137,7 +139,7 @@ public:
 
 protected:
     // address=[0x15a01e0]
-     CTransportShip(int,int,int,int,int,int,bool);
+     CTransportShip(int a2, int a3, int a4, int a5, int a6, int a7, bool a8);
 
     // address=[0x15a02d0]
     virtual  ~CTransportShip(void);

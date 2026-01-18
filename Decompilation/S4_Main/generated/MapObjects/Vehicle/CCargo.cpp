@@ -4,7 +4,7 @@
 
 // address=[0x159af90]
 // Decompiled from CFerryShip::CCargo *__thiscall CFerryShip::CCargo::CCargo(  CFerryShip::CCargo *this,  const struct CFerryShip::CCargo *a2)
- CFerryShip::CCargo::CCargo(class CFerryShip::CCargo const &) {
+ CFerryShip::CCargo::CCargo(class CFerryShip::CCargo const & a2) {
   
   *(_DWORD *)this = *(_DWORD *)a2;
   *((_DWORD *)this + 1) = *((_DWORD *)a2 + 1);
@@ -19,7 +19,7 @@
 
 // address=[0x159b010]
 // Decompiled from CFerryShip::CCargo *__thiscall CFerryShip::CCargo::CCargo(CFerryShip::CCargo *this, int a2, int a3, int a4, int a5)
- CFerryShip::CCargo::CCargo(int,int,int,int) {
+ CFerryShip::CCargo::CCargo(int a2, int a3, int a4, int a5) {
   
   *(_DWORD *)this = a2;
   *((_DWORD *)this + 1) = a3;

@@ -1,6 +1,8 @@
 #ifndef CAIAGENTTHIEVES_H
 #define CAIAGENTTHIEVES_H
 
+#include "defines.h"
+
 class CAIAgentThieves : public CAINormalSectorAgent {
 public:
     // address=[0x1305810]

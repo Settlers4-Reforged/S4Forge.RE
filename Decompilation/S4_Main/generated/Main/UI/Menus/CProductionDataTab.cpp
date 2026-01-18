@@ -4,7 +4,7 @@
 
 // address=[0x2f3bba0]
 // Decompiled from int __thiscall CProductionDataTab::GetMaxDistance(void *this, int a2, int a3)
-int  CProductionDataTab::GetMaxDistance(enum BUILDING_TYPES,int) {
+int  CProductionDataTab::GetMaxDistance(enum BUILDING_TYPES a2, int a3) {
   
   return *(_DWORD *)(CProductionDataTab::GetBuildData(this, a2, a3) + 8);
 }
@@ -12,7 +12,7 @@ int  CProductionDataTab::GetMaxDistance(enum BUILDING_TYPES,int) {
 
 // address=[0x2f4c730]
 // Decompiled from bool __thiscall CProductionDataTab::BuildingMustBeControl(void *this, int a2, int a3)
-bool  CProductionDataTab::BuildingMustBeControl(enum BUILDING_TYPES,int) {
+bool  CProductionDataTab::BuildingMustBeControl(enum BUILDING_TYPES a2, int a3) {
   
   return *(_DWORD *)(CProductionDataTab::GetBuildData(this, a2, a3) + 56) != 0;
 }
@@ -20,7 +20,7 @@ bool  CProductionDataTab::BuildingMustBeControl(enum BUILDING_TYPES,int) {
 
 // address=[0x2f4c930]
 // Decompiled from int __thiscall CProductionDataTab::GetInputTypePile(void *this, int a2, int a3, int a4)
-enum PILE_TYPES  CProductionDataTab::GetInputTypePile(enum BUILDING_TYPES,int,int) {
+enum PILE_TYPES  CProductionDataTab::GetInputTypePile(enum BUILDING_TYPES a2, int a3, int a4) {
   
   if ( a3 )
     return *(_DWORD *)(CProductionDataTab::GetBuildData(this, a2, a4) + 28);
@@ -31,7 +31,7 @@ enum PILE_TYPES  CProductionDataTab::GetInputTypePile(enum BUILDING_TYPES,int,in
 
 // address=[0x2f4c980]
 // Decompiled from int __thiscall CProductionDataTab::GetMaxBuildingInGroup(void *this, int a2, int a3)
-int  CProductionDataTab::GetMaxBuildingInGroup(enum BUILDING_TYPES,int) {
+int  CProductionDataTab::GetMaxBuildingInGroup(enum BUILDING_TYPES a2, int a3) {
   
   return *(_DWORD *)(CProductionDataTab::GetBuildData(this, a2, a3) + 20);
 }
@@ -39,7 +39,7 @@ int  CProductionDataTab::GetMaxBuildingInGroup(enum BUILDING_TYPES,int) {
 
 // address=[0x2f4c9b0]
 // Decompiled from int __thiscall CProductionDataTab::GetOutputTypePile(void *this, int a2, int a3)
-enum PILE_TYPES  CProductionDataTab::GetOutputTypePile(enum BUILDING_TYPES,int) {
+enum PILE_TYPES  CProductionDataTab::GetOutputTypePile(enum BUILDING_TYPES a2, int a3) {
   
   return *(_DWORD *)(CProductionDataTab::GetBuildData(this, a2, a3) + 32);
 }
@@ -47,7 +47,7 @@ enum PILE_TYPES  CProductionDataTab::GetOutputTypePile(enum BUILDING_TYPES,int) 
 
 // address=[0x2f53a90]
 // Decompiled from int __thiscall CProductionDataTab::GetNeededSettler(void *this, int a2)
-enum SETTLER_TYPES  CProductionDataTab::GetNeededSettler(enum BUILDING_TYPES) {
+enum SETTLER_TYPES  CProductionDataTab::GetNeededSettler(enum BUILDING_TYPES a2) {
   
   return *(_DWORD *)(CProductionDataTab::GetBuildData(this, a2, 0) + 44);
 }
@@ -55,7 +55,7 @@ enum SETTLER_TYPES  CProductionDataTab::GetNeededSettler(enum BUILDING_TYPES) {
 
 // address=[0x2f53ac0]
 // Decompiled from int __thiscall CProductionDataTab::GetTool(void *this, int a2)
-enum PILE_TYPES  CProductionDataTab::GetTool(enum BUILDING_TYPES) {
+enum PILE_TYPES  CProductionDataTab::GetTool(enum BUILDING_TYPES a2) {
   
   return *(_DWORD *)(CProductionDataTab::GetBuildData(this, a2, 0) + 36);
 }
@@ -129,7 +129,7 @@ enum PILE_TYPES  CProductionDataTab::GetTool(enum BUILDING_TYPES) {
 
 // address=[0x2f54920]
 // Decompiled from int __stdcall CProductionDataTab::GoodTypeProducedBy(int a1, int a2, int a3)
-enum BUILDING_TYPES  CProductionDataTab::GoodTypeProducedBy(enum PILE_TYPES,int,int) {
+enum BUILDING_TYPES  CProductionDataTab::GoodTypeProducedBy(enum PILE_TYPES a1, int a2, int a3) {
   
   int v4; // [esp+4h] [ebp-8h]
   int i; // [esp+8h] [ebp-4h]
@@ -152,7 +152,7 @@ enum BUILDING_TYPES  CProductionDataTab::GoodTypeProducedBy(enum PILE_TYPES,int,
 
 // address=[0x2f549a0]
 // Decompiled from int __stdcall CProductionDataTab::GetBuildingForResource(int a1, int a2)
-enum BUILDING_TYPES  CProductionDataTab::GetBuildingForResource(int,int) {
+enum BUILDING_TYPES  CProductionDataTab::GetBuildingForResource(int a1, int a2) {
   
   int i; // [esp+4h] [ebp-4h]
 
@@ -169,7 +169,7 @@ enum BUILDING_TYPES  CProductionDataTab::GetBuildingForResource(int,int) {
 
 // address=[0x2f54a00]
 // Decompiled from int __thiscall CProductionDataTab::GetResourceForBuilding(void *this, int a2, int a3)
-int  CProductionDataTab::GetResourceForBuilding(enum BUILDING_TYPES,int) {
+int  CProductionDataTab::GetResourceForBuilding(enum BUILDING_TYPES a2, int a3) {
   
   return *(_DWORD *)(CProductionDataTab::GetBuildData(this, a2, a3) + 40);
 }
@@ -177,7 +177,7 @@ int  CProductionDataTab::GetResourceForBuilding(enum BUILDING_TYPES,int) {
 
 // address=[0x2f54a20]
 // Decompiled from int __thiscall CProductionDataTab::SetProdTabValue(void *this, int a2, int a3, int a4)
-void  CProductionDataTab::SetProdTabValue(enum BUILDING_TYPES,int,int) {
+void  CProductionDataTab::SetProdTabValue(enum BUILDING_TYPES a2, int a3, int a4) {
   
   int result; // eax
   int v5; // [esp+8h] [ebp-4h]
@@ -217,7 +217,7 @@ void  CProductionDataTab::SetProdTabValue(enum BUILDING_TYPES,int,int) {
 
 // address=[0x2f5a2c0]
 // Decompiled from int __thiscall CProductionDataTab::GetMaxWorkLoad(void *this, int a2, int a3)
-int  CProductionDataTab::GetMaxWorkLoad(enum BUILDING_TYPES,int) {
+int  CProductionDataTab::GetMaxWorkLoad(enum BUILDING_TYPES a2, int a3) {
   
   return *(_DWORD *)(CProductionDataTab::GetBuildData(this, a2, a3) + 16);
 }
@@ -225,7 +225,7 @@ int  CProductionDataTab::GetMaxWorkLoad(enum BUILDING_TYPES,int) {
 
 // address=[0x2f5a2f0]
 // Decompiled from int __thiscall CProductionDataTab::GetMinWorkLoad(void *this, int a2, int a3)
-int  CProductionDataTab::GetMinWorkLoad(enum BUILDING_TYPES,int) {
+int  CProductionDataTab::GetMinWorkLoad(enum BUILDING_TYPES a2, int a3) {
   
   return *(_DWORD *)(CProductionDataTab::GetBuildData(this, a2, a3) + 12);
 }
@@ -233,7 +233,7 @@ int  CProductionDataTab::GetMinWorkLoad(enum BUILDING_TYPES,int) {
 
 // address=[0x2f5a320]
 // Decompiled from int __thiscall CProductionDataTab::GetNeededFixTicks(void *this, int a2, int a3)
-int  CProductionDataTab::GetNeededFixTicks(enum BUILDING_TYPES,int) {
+int  CProductionDataTab::GetNeededFixTicks(enum BUILDING_TYPES a2, int a3) {
   
   return *(_DWORD *)(CProductionDataTab::GetBuildData(this, a2, a3) + 48);
 }
@@ -241,7 +241,7 @@ int  CProductionDataTab::GetNeededFixTicks(enum BUILDING_TYPES,int) {
 
 // address=[0x2f5a350]
 // Decompiled from int __thiscall CProductionDataTab::GetNeededVarTicks(void *this, int a2, int a3)
-int  CProductionDataTab::GetNeededVarTicks(enum BUILDING_TYPES,int) {
+int  CProductionDataTab::GetNeededVarTicks(enum BUILDING_TYPES a2, int a3) {
   
   return *(_DWORD *)(CProductionDataTab::GetBuildData(this, a2, a3) + 52);
 }
@@ -252,7 +252,7 @@ int  CProductionDataTab::GetNeededVarTicks(enum BUILDING_TYPES,int) {
 
 // address=[0x2f3bb70]
 // Decompiled from int *__stdcall CProductionDataTab::GetBuildData(int a1, int a2)
-struct CProductionDataTab::SProductionDataEntry const *  CProductionDataTab::GetBuildData(enum BUILDING_TYPES,int) {
+struct CProductionDataTab::SProductionDataEntry const *  CProductionDataTab::GetBuildData(enum BUILDING_TYPES a1, int a2) {
   
   return &CProductionDataTab::m_aProductionDataEntry[15 * CProductionDataTab::m_aBuildingTypeToTabIndexMap[83 * a2 + a1]];
 }
@@ -260,7 +260,7 @@ struct CProductionDataTab::SProductionDataEntry const *  CProductionDataTab::Get
 
 // address=[0x2f54ad0]
 // Decompiled from int __stdcall CProductionDataTab::PDT(  int a1,  int a2,  int a3,  int a4,  int a5,  int a6,  int a7,  int a8,  int a9,  int a10,  int a11,  int a12,  int a13,  int a14,  int a15)
-void  CProductionDataTab::PDT(int,enum BUILDING_TYPES,int,int,int,int,enum PILE_TYPES,enum PILE_TYPES,enum PILE_TYPES,enum PILE_TYPES,int,enum SETTLER_TYPES,int,int,int) {
+void  CProductionDataTab::PDT(int a1, enum BUILDING_TYPES a2, int a3, int a4, int a5, int a6, enum PILE_TYPES a7, enum PILE_TYPES a8, enum PILE_TYPES a9, enum PILE_TYPES a10, int a11, enum SETTLER_TYPES a12, int a13, int a14, int a15) {
   
   int result; // eax
   int i; // [esp+4h] [ebp-4h]
@@ -296,7 +296,7 @@ void  CProductionDataTab::PDT(int,enum BUILDING_TYPES,int,int,int,int,enum PILE_
 
 // address=[0x2f55000]
 // Decompiled from int __stdcall CProductionDataTab::GetProdDataTabIndex(int a1, int a2)
-int  CProductionDataTab::GetProdDataTabIndex(enum BUILDING_TYPES,int) {
+int  CProductionDataTab::GetProdDataTabIndex(enum BUILDING_TYPES a1, int a2) {
   
   return 0;
 }

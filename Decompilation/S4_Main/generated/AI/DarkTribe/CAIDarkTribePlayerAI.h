@@ -1,19 +1,21 @@
 #ifndef CAIDARKTRIBEPLAYERAI_H
 #define CAIDARKTRIBEPLAYERAI_H
 
+#include "defines.h"
+
 class CAIDarkTribePlayerAI : public CAIPlayerAI {
 protected:
     // address=[0x1319d30]
-     CAIDarkTribePlayerAI(int);
+     CAIDarkTribePlayerAI(int a2);
 
     // address=[0x1319d70]
     virtual void  Execute(void);
 
     // address=[0x131a000]
-    virtual void  Load(class IS4Chunk &);
+    virtual void  Load(class IS4Chunk & a2);
 
     // address=[0x131a120]
-    virtual void  Save(class IS4Chunk &);
+    virtual void  Save(class IS4Chunk & a2);
 
     // address=[0x131a210]
     virtual void  Init(void);

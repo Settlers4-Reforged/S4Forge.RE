@@ -46,7 +46,7 @@ long  CSurfaceV7::IsLost(void) {
 
 // address=[0x2f866d0]
 // Decompiled from HRESULT __thiscall CSurfaceV7::ClearSurface(CSurfaceV7 *this, struct CBlitFX *a2)
-long  CSurfaceV7::ClearSurface(class CBlitFX *) {
+long  CSurfaceV7::ClearSurface(class CBlitFX * a2) {
   
   DDBLTFX *BlitStructPtr; // eax
   DDBLTFX *v3; // eax
@@ -84,7 +84,7 @@ long  CSurfaceV7::ClearSurface(class CBlitFX *) {
 
 // address=[0x2f86770]
 // Decompiled from HRESULT __thiscall CSurfaceV7::ClearSurface(CSurfaceV7 *this, struct tagRECT a2, struct CBlitFX *a3)
-long  CSurfaceV7::ClearSurface(struct tagRECT,class CBlitFX *) {
+long  CSurfaceV7::ClearSurface(struct tagRECT a2, class CBlitFX * a3) {
   
   DDBLTFX *BlitStructPtr; // eax
   DDBLTFX *v4; // eax
@@ -122,7 +122,7 @@ long  CSurfaceV7::ClearSurface(struct tagRECT,class CBlitFX *) {
 
 // address=[0x2f86810]
 // Decompiled from HRESULT __thiscall CSurfaceV7::Blt(  CSurfaceV7 *this,  struct tagRECT *a2,  CSurfaceV7 *a3,  struct tagRECT *a4,  DWORD a5,  struct _DDBLTFX *a6)
-long  CSurfaceV7::Blt(struct tagRECT *,class CSurface *,struct tagRECT *,unsigned long,struct _DDBLTFX *) {
+long  CSurfaceV7::Blt(struct tagRECT * a2, class CSurface * a3, struct tagRECT * a4, unsigned long a5, struct _DDBLTFX * a6) {
   
   HRESULT v8; // [esp+4h] [ebp-4h]
 
@@ -147,7 +147,7 @@ long  CSurfaceV7::Flip(void) {
 
 // address=[0x2f868a0]
 // Decompiled from HRESULT __thiscall CSurfaceV7::Lock(CSurfaceV7 *this, unsigned int *a2, void **a3, bool a4)
-long  CSurfaceV7::Lock(unsigned int &,void * &,bool) {
+long  CSurfaceV7::Lock(unsigned int & a2, void * & a3, bool a4) {
   
   HRESULT v6; // [esp+4h] [ebp-8h]
   DWORD v7; // [esp+8h] [ebp-4h]
@@ -178,7 +178,7 @@ long  CSurfaceV7::Unlock(void) {
 
 // address=[0x2f86950]
 // Decompiled from HRESULT __thiscall CSurfaceV7::GetDC(CSurfaceV7 *this, HDC *a2)
-long  CSurfaceV7::GetDC(struct HDC__ * *) {
+long  CSurfaceV7::GetDC(struct HDC__ * * a2) {
   
   HRESULT v4; // [esp+4h] [ebp-4h]
 
@@ -195,7 +195,7 @@ long  CSurfaceV7::GetDC(struct HDC__ * *) {
 
 // address=[0x2f86990]
 // Decompiled from int __thiscall CSurfaceV7::ReleaseDC(CSurfaceV7 *this, HDC a2)
-long  CSurfaceV7::ReleaseDC(struct HDC__ *) {
+long  CSurfaceV7::ReleaseDC(struct HDC__ * a2) {
   
   return ((int (__thiscall *)(LPDIRECTDRAWSURFACE7, LPDIRECTDRAWSURFACE7, HDC))this->innerSurface->lpVtbl->ReleaseDC)(
            this->innerSurface,
@@ -206,7 +206,7 @@ long  CSurfaceV7::ReleaseDC(struct HDC__ *) {
 
 // address=[0x2f869c0]
 // Decompiled from int __thiscall CSurfaceV7::CreateSurface(  CSurfaceV7 *this,  void *a2,  int a3,  int a4,  bool a5,  bool a6,  bool a7,  int a8,  bool a9,  bool a10,  bool a11)
-long  CSurfaceV7::CreateSurface(void *,int,int,bool,bool,bool,int,bool,bool,bool) {
+long  CSurfaceV7::CreateSurface(void * a2, int a3, int a4, bool a5, bool a6, bool a7, int a8, bool a9, bool a10, bool a11) {
   
   MEMORY[0x46C6714] = 1;
   if ( a9 )
@@ -282,7 +282,7 @@ long  CSurfaceV7::CreateSurface(void *,int,int,bool,bool,bool,int,bool,bool,bool
 
 // address=[0x2f86bf0]
 // Decompiled from HRESULT __thiscall CSurfaceV7::SetColorKey(CSurfaceV7 *this, DWORD a2, struct _DDCOLORKEY *a3)
-long  CSurfaceV7::SetColorKey(unsigned long,struct _DDCOLORKEY *) {
+long  CSurfaceV7::SetColorKey(unsigned long a2, struct _DDCOLORKEY * a3) {
   
   return this->innerSurface->lpVtbl->SetColorKey(this->innerSurface, a2, a3);
 }
@@ -290,7 +290,7 @@ long  CSurfaceV7::SetColorKey(unsigned long,struct _DDCOLORKEY *) {
 
 // address=[0x2f86c20]
 // Decompiled from HRESULT __thiscall CSurfaceV7::GetPixelFormat(CSurfaceV7 *this, bool *a2)
-long  CSurfaceV7::GetPixelFormat(bool &) {
+long  CSurfaceV7::GetPixelFormat(bool & a2) {
   
   HRESULT v3; // [esp+0h] [ebp-2Ch]
   _DWORD v5[8]; // [esp+8h] [ebp-24h] BYREF
@@ -308,7 +308,7 @@ long  CSurfaceV7::GetPixelFormat(bool &) {
 
 // address=[0x2f86cc0]
 // Decompiled from HRESULT __thiscall CSurfaceV7::GetBitDepth(CSurfaceV7 *this, int *a2)
-long  CSurfaceV7::GetBitDepth(int &) {
+long  CSurfaceV7::GetBitDepth(int & a2) {
   
   HRESULT result; // eax
   _DWORD v4[8]; // [esp+8h] [ebp-24h] BYREF
@@ -323,7 +323,7 @@ long  CSurfaceV7::GetBitDepth(int &) {
 
 // address=[0x2f86d20]
 // Decompiled from HRESULT __thiscall CSurfaceV7::GetSurfaceSize(CSurfaceV7 *this, DWORD *a2, DWORD *a3)
-long  CSurfaceV7::GetSurfaceSize(int &,int &) {
+long  CSurfaceV7::GetSurfaceSize(int & a2, int & a3) {
   
   HRESULT result; // eax
 
@@ -336,7 +336,7 @@ long  CSurfaceV7::GetSurfaceSize(int &,int &) {
 
 // address=[0x2f86d70]
 // Decompiled from int __thiscall CSurfaceV7::SetClipper(CSurfaceV7 *this, struct IDirectDrawClipper *a2)
-long  CSurfaceV7::SetClipper(struct IDirectDrawClipper *) {
+long  CSurfaceV7::SetClipper(struct IDirectDrawClipper * a2) {
   
   return ((int (__thiscall *)(LPDIRECTDRAWSURFACE7, LPDIRECTDRAWSURFACE7, struct IDirectDrawClipper *))this->innerSurface->lpVtbl->SetClipper)(
            this->innerSurface,
@@ -355,7 +355,7 @@ void *  CSurfaceV7::GetSurfacePtr(void) {
 
 // address=[0x2f86dc0]
 // Decompiled from CSurfaceV7 *__thiscall CSurfaceV7::SetSurfacePtr(CSurfaceV7 *this, struct IDirectDrawSurface7 *a2)
-void  CSurfaceV7::SetSurfacePtr(void *) {
+void  CSurfaceV7::SetSurfacePtr(void * a2) {
   
   CSurfaceV7 *result; // eax
 
@@ -402,7 +402,7 @@ bool  CSurfaceV7::IsBackBufferReference(void) {
 
 // address=[0x2f86e70]
 // Decompiled from int __thiscall CSurfaceV7::SetAsRenderTarget(CSurfaceV7 *this, struct IDirect3DDevice7 *a2)
-long  CSurfaceV7::SetAsRenderTarget(struct IDirect3DDevice7 *) {
+long  CSurfaceV7::SetAsRenderTarget(struct IDirect3DDevice7 * a2) {
   
   if ( !this->innerSurface )
     j___wassert(L"m_pSurfaceV7 != nullptr", L"DirectXHelperClasses.cpp", 0x56Au);

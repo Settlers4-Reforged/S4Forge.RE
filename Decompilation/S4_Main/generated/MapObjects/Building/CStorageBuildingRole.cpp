@@ -4,7 +4,7 @@
 
 // address=[0x1402160]
 // Decompiled from int __cdecl CStorageBuildingRole::New(int a1)
-static class CPersistence * __cdecl CStorageBuildingRole::New(std::istream &) {
+class CPersistence * __cdecl CStorageBuildingRole::New(std::istream & a1) {
   
   if ( operator new(0x1BCu) )
     return CStorageBuildingRole::CStorageBuildingRole(a1);
@@ -15,7 +15,7 @@ static class CPersistence * __cdecl CStorageBuildingRole::New(std::istream &) {
 
 // address=[0x14fdc70]
 // Decompiled from int __cdecl CStorageBuildingRole::Load(int a1)
-static class CStorageBuildingRole * __cdecl CStorageBuildingRole::Load(std::istream &) {
+class CStorageBuildingRole * __cdecl CStorageBuildingRole::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
@@ -44,7 +44,7 @@ static class CStorageBuildingRole * __cdecl CStorageBuildingRole::Load(std::istr
 
 // address=[0x151d070]
 // Decompiled from char *__thiscall CStorageBuildingRole::CStorageBuildingRole(char *this, int a2)
- CStorageBuildingRole::CStorageBuildingRole(std::istream &) {
+ CStorageBuildingRole::CStorageBuildingRole(std::istream & a2) {
   
   _DWORD v3[2]; // [esp+4h] [ebp-28h] BYREF
   int v4; // [esp+Ch] [ebp-20h] BYREF
@@ -84,7 +84,7 @@ static class CStorageBuildingRole * __cdecl CStorageBuildingRole::Load(std::istr
 
 // address=[0x151d1b0]
 // Decompiled from int __thiscall CStorageBuildingRole::Store(struct IBuildingRole *this, struct std::ostream *a2)
-void  CStorageBuildingRole::Store(std::ostream &) {
+void  CStorageBuildingRole::Store(std::ostream & a2) {
   
   int result; // eax
   __int16 *v3; // eax
@@ -113,7 +113,7 @@ void  CStorageBuildingRole::Store(std::ostream &) {
 
 // address=[0x151d270]
 // Decompiled from int __thiscall CStorageBuildingRole::Init(CStorageBuildingRole *this, struct CBuilding *a2)
-void  CStorageBuildingRole::Init(class CBuilding *) {
+void  CStorageBuildingRole::Init(class CBuilding * a2) {
   
   int v2; // eax
   int v3; // eax
@@ -184,7 +184,7 @@ void  CStorageBuildingRole::Init(class CBuilding *) {
 
 // address=[0x151d4f0]
 // Decompiled from void __thiscall CStorageBuildingRole::PostLoadInit(CStorageBuildingRole *this, struct CBuilding *a2)
-void  CStorageBuildingRole::PostLoadInit(class CBuilding *) {
+void  CStorageBuildingRole::PostLoadInit(class CBuilding * a2) {
   
   int v2; // eax
   int v3; // eax
@@ -245,7 +245,7 @@ void  CStorageBuildingRole::Switch(void) {
 
 // address=[0x151d670]
 // Decompiled from int __thiscall CStorageBuildingRole::LogicUpdate(CStorageBuildingRole *this, struct CBuilding *a2)
-void  CStorageBuildingRole::LogicUpdate(class CBuilding *) {
+void  CStorageBuildingRole::LogicUpdate(class CBuilding * a2) {
   
   if ( IEntity::FlagBits(a2, Selected) )
     (*(void (__thiscall **)(CStorageBuildingRole *, struct CBuilding *, int))(*(_DWORD *)this + 88))(this, a2, 1);
@@ -255,7 +255,7 @@ void  CStorageBuildingRole::LogicUpdate(class CBuilding *) {
 
 // address=[0x151d6b0]
 // Decompiled from unsigned int __thiscall CStorageBuildingRole::FillGfxInfo(  CStorageBuildingRole *this,  struct CBuilding *a2,  struct SGfxObjectInfo *a3)
-void  CStorageBuildingRole::FillGfxInfo(class CBuilding *,struct SGfxObjectInfo &) {
+void  CStorageBuildingRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo & a3) {
   
   int v3; // eax
   unsigned int result; // eax
@@ -292,7 +292,7 @@ void  CStorageBuildingRole::FillGfxInfo(class CBuilding *,struct SGfxObjectInfo 
 
 // address=[0x151d7a0]
 // Decompiled from _DWORD *__thiscall CStorageBuildingRole::FillDialog(CStorageBuildingRole *this, struct CBuilding *a2, bool a3)
-void  CStorageBuildingRole::FillDialog(class CBuilding *,bool) {
+void  CStorageBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
   
   int v3; // eax
   int v4; // eax
@@ -355,7 +355,7 @@ void  CStorageBuildingRole::FillDialog(class CBuilding *,bool) {
 
 // address=[0x151d9e0]
 // Decompiled from _DWORD *__thiscall CStorageBuildingRole::FillStorageSideBar(  CStorageBuildingRole *this,  struct CStorageSideBarInfo *a2,  bool a3)
-void  CStorageBuildingRole::FillStorageSideBar(class CStorageSideBarInfo *,bool) {
+void  CStorageBuildingRole::FillStorageSideBar(class CStorageSideBarInfo * a2, bool a3) {
   
   unsigned int v4; // [esp+8h] [ebp-30h]
   int i; // [esp+Ch] [ebp-2Ch]
@@ -387,7 +387,7 @@ void  CStorageBuildingRole::FillStorageSideBar(class CStorageSideBarInfo *,bool)
 
 // address=[0x151daf0]
 // Decompiled from int __thiscall CStorageBuildingRole::GetPileIdWithGood(CStorageBuildingRole *this, unsigned int a2)
-int  CStorageBuildingRole::GetPileIdWithGood(int)const {
+int  CStorageBuildingRole::GetPileIdWithGood(int a2)const {
   
   unsigned __int16 *v3; // eax
   int v4; // esi
@@ -423,7 +423,7 @@ int  CStorageBuildingRole::GetPileIdWithGood(int)const {
 
 // address=[0x151dbf0]
 // Decompiled from void __thiscall CStorageBuildingRole::GoodArrive(CStorageBuildingRole *this, int a2)
-void  CStorageBuildingRole::GoodArrive(int) {
+void  CStorageBuildingRole::GoodArrive(int a2) {
   
   ;
 }
@@ -461,7 +461,7 @@ int  CStorageBuildingRole::GetNextFreePile(void) {
 
 // address=[0x151dcc0]
 // Decompiled from int __thiscall CStorageBuildingRole::ReserveNextFreePile(_DWORD *this, char a2)
-int  CStorageBuildingRole::ReserveNextFreePile(int) {
+int  CStorageBuildingRole::ReserveNextFreePile(int a2) {
   
   unsigned __int16 *v2; // eax
   void *v4; // [esp+0h] [ebp-10h]
@@ -495,7 +495,7 @@ int  CStorageBuildingRole::ReserveNextFreePile(int) {
 
 // address=[0x151dd90]
 // Decompiled from char __thiscall CStorageBuildingRole::ReserveFreePile(CStorageBuildingRole *this, char a2, int a3)
-bool  CStorageBuildingRole::ReserveFreePile(int,int) {
+bool  CStorageBuildingRole::ReserveFreePile(int a2, int a3) {
   
   unsigned __int16 *v3; // eax
   void *v5; // [esp+0h] [ebp-10h]
@@ -538,7 +538,7 @@ bool  CStorageBuildingRole::ReserveFreePile(int,int) {
 
 // address=[0x151de90]
 // Decompiled from int __thiscall CStorageBuildingRole::GetSpaceAmount(CStorageBuildingRole *this, int a2)
-int  CStorageBuildingRole::GetSpaceAmount(int) {
+int  CStorageBuildingRole::GetSpaceAmount(int a2) {
   
   unsigned __int16 *v2; // eax
   int v3; // esi
@@ -582,7 +582,7 @@ int  CStorageBuildingRole::GetSpaceAmount(int) {
 
 // address=[0x151dfa0]
 // Decompiled from int __thiscall CStorageBuildingRole::RegisterPilesAndStorageAtEcosector(CStorageBuildingRole *this, int a2)
-void  CStorageBuildingRole::RegisterPilesAndStorageAtEcosector(int) {
+void  CStorageBuildingRole::RegisterPilesAndStorageAtEcosector(int a2) {
   
   int result; // eax
   unsigned __int16 *v3; // eax
@@ -646,7 +646,7 @@ void  CStorageBuildingRole::RegisterPilesAndStorageAtEcosector(int) {
 
 // address=[0x151e180]
 // Decompiled from void __thiscall CStorageBuildingRole::ExecuteUnforseenGoodTypeChange(  CStorageBuildingRole *this,  int a2,  int a3,  int a4)
-void  CStorageBuildingRole::ExecuteUnforseenGoodTypeChange(int,int,int) {
+void  CStorageBuildingRole::ExecuteUnforseenGoodTypeChange(int a2, int a3, int a4) {
   
   CPile *PilePtr; // [esp+0h] [ebp-10h]
   int v5; // [esp+4h] [ebp-Ch]
@@ -679,7 +679,7 @@ void  CStorageBuildingRole::ExecuteUnforseenGoodTypeChange(int,int,int) {
 
 // address=[0x151e290]
 // Decompiled from char __thiscall CStorageBuildingRole::UnregisterPile(CStorageBuildingRole *this, int a2)
-void  CStorageBuildingRole::UnregisterPile(int) {
+void  CStorageBuildingRole::UnregisterPile(int a2) {
   
   int TradeRoleType; // eax
   int v3; // eax
@@ -735,7 +735,7 @@ void  CStorageBuildingRole::UnregisterPile(int) {
 
 // address=[0x151e430]
 // Decompiled from void __thiscall CStorageBuildingRole::SwitchGood(CStorageBuildingRole *this, int a2, int a3)
-void  CStorageBuildingRole::SwitchGood(int,int) {
+void  CStorageBuildingRole::SwitchGood(int a2, int a3) {
   
   unsigned __int16 *v3; // eax
   _DWORD *v4; // eax
@@ -811,7 +811,7 @@ void  CStorageBuildingRole::SwitchGood(int,int) {
 
 // address=[0x151e690]
 // Decompiled from char __thiscall CStorageBuildingRole::NotifyChangeEcoSector(  CStorageBuildingRole *this,  struct CPile *a2,  int a3,  int a4)
-void  CStorageBuildingRole::NotifyChangeEcoSector(class CPile *,int,int) {
+void  CStorageBuildingRole::NotifyChangeEcoSector(class CPile * a2, int a3, int a4) {
   
   int TradeRoleType; // eax
   int v5; // eax
@@ -896,7 +896,7 @@ unsigned long  CStorageBuildingRole::ClassID(void)const {
 
 // address=[0x151fa50]
 // Decompiled from void *__thiscall CStorageBuildingRole::GetBuildingNeed(std::_Ref_count_base *this, const struct type_info *a2)
-int  CStorageBuildingRole::GetBuildingNeed(int)const {
+int  CStorageBuildingRole::GetBuildingNeed(int a2)const {
   
   return 0;
 }
@@ -1046,7 +1046,7 @@ void  CStorageBuildingRole::CheckGoodToStore(void) {
 
 // address=[0x151eb90]
 // Decompiled from int __thiscall CStorageBuildingRole::GetNextGoodToCheck(CStorageBuildingRole *this, int a2)
-int  CStorageBuildingRole::GetNextGoodToCheck(int) {
+int  CStorageBuildingRole::GetNextGoodToCheck(int a2) {
   
   int v3; // [esp+4h] [ebp-4h]
 
@@ -1064,7 +1064,7 @@ int  CStorageBuildingRole::GetNextGoodToCheck(int) {
 
 // address=[0x151ebf0]
 // Decompiled from int __thiscall CStorageBuildingRole::GetReservedPile(CStorageBuildingRole *this, int a2)
-int  CStorageBuildingRole::GetReservedPile(int) {
+int  CStorageBuildingRole::GetReservedPile(int a2) {
   
   unsigned __int16 *v2; // eax
   signed int i; // [esp+4h] [ebp-8h]
@@ -1095,7 +1095,7 @@ int  CStorageBuildingRole::GetReservedPile(int) {
 
 // address=[0x151ecc0]
 // Decompiled from int __thiscall CStorageBuildingRole::CheckEmptyPile(CStorageBuildingRole *this, int a2)
-void  CStorageBuildingRole::CheckEmptyPile(int) {
+void  CStorageBuildingRole::CheckEmptyPile(int a2) {
   
   int result; // eax
   int v3; // eax

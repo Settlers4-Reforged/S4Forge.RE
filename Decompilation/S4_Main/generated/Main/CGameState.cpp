@@ -4,7 +4,7 @@
 
 // address=[0x13728e0]
 // Decompiled from char __stdcall CGameState::OnEvent(int a1)
-bool  CGameState::OnEvent(class CEvn_Event &) {
+bool  CGameState::OnEvent(class CEvn_Event & a1) {
   
   return 0;
 }
@@ -12,7 +12,7 @@ bool  CGameState::OnEvent(class CEvn_Event &) {
 
 // address=[0x149d860]
 // Decompiled from int __cdecl CGameState::DynamicCreateFunc(struct boost::exception_detail::clone_base *a1)
-static class CGameState * __cdecl CGameState::DynamicCreateFunc(void *) {
+class CGameState * __cdecl CGameState::DynamicCreateFunc(void * a1) {
   
   boost::exception_detail::clone_base *v3; // [esp+Ch] [ebp-10h]
 
@@ -26,7 +26,7 @@ static class CGameState * __cdecl CGameState::DynamicCreateFunc(void *) {
 
 // address=[0x149d900]
 // Decompiled from CGameState *__thiscall CGameState::CGameState(CGameState *this, const struct boost::exception_detail::clone_base *a2)
- CGameState::CGameState(void *) {
+ CGameState::CGameState(void * a2) {
   
   *(_DWORD *)this = &CGameState::_vftable_;
   return this;

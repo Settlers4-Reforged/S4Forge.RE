@@ -4,7 +4,7 @@
 
 // address=[0x15fd5b0]
 // Decompiled from void __thiscall CShipList::PushNeighborShips(CShipList *this, int a2)
-void  CShipList::PushNeighborShips(int) {
+void  CShipList::PushNeighborShips(int a2) {
   
   Squares *v2; // eax
   Squares *v3; // eax
@@ -35,7 +35,7 @@ void  CShipList::PushNeighborShips(int) {
 
 // address=[0x15fd6e0]
 // Decompiled from int __thiscall CShipList::Nearest(CShipList *this, Y16X16 *a2)
-int  CShipList::Nearest(int) {
+int  CShipList::Nearest(int a2) {
   
   int i; // eax
   const struct CShipInfo *v3; // eax
@@ -72,7 +72,7 @@ int  CShipList::Nearest(int) {
 
 // address=[0x15fe630]
 // Decompiled from CShipList *__thiscall CShipList::CShipList(CShipList *this, int a2)
- CShipList::CShipList(int) {
+ CShipList::CShipList(int a2) {
   
   *(_DWORD *)this = 0;
   CShipList::PushNeighborShips(this, a2);
@@ -90,7 +90,7 @@ int  CShipList::NumberOfShips(void)const {
 
 // address=[0x15fe6c0]
 // Decompiled from int __thiscall CShipList::PushShip(CShipList *this, int a2)
-void  CShipList::PushShip(int) {
+void  CShipList::PushShip(int a2) {
   
   int result; // eax
 
@@ -103,7 +103,7 @@ void  CShipList::PushShip(int) {
 
 // address=[0x15fe700]
 // Decompiled from int __thiscall CShipList::PushSquareVW(CShipList *this, int a2, int a3, int a4)
-void  CShipList::PushSquareVW(int,int,int) {
+void  CShipList::PushSquareVW(int a2, int a3, int a4) {
   
   int result; // eax
   Y16X16 *v6; // [esp+4h] [ebp-Ch]
@@ -128,7 +128,7 @@ void  CShipList::PushSquareVW(int,int,int) {
 
 // address=[0x15fe7c0]
 // Decompiled from char *__thiscall CShipList::ShipInfo(CShipList *this, int a2)
-class CShipInfo const &  CShipList::ShipInfo(int)const {
+class CShipInfo const &  CShipList::ShipInfo(int a2)const {
   
   return (char *)this + 4 * a2 + 4;
 }

@@ -4,7 +4,7 @@
 
 // address=[0x1496ac0]
 // Decompiled from int __thiscall CMapCheck::CalculateMapCRC2(CMapCheck *this, int a2, int a3, int a4, int a5, int a6)
-unsigned int  CMapCheck::CalculateMapCRC2(int,int,int,int,int) {
+unsigned int  CMapCheck::CalculateMapCRC2(int a2, int a3, int a4, int a5, int a6) {
   
   return sub_1496A50(a2, a3, a4, a5, a6);
 }
@@ -12,7 +12,7 @@ unsigned int  CMapCheck::CalculateMapCRC2(int,int,int,int,int) {
 
 // address=[0x1496af0]
 // Decompiled from int __stdcall CMapCheck::GetPatchMap(wchar_t *Source, int a2, int a3)
-enum IMapCheck::PATCHMAPS  CMapCheck::GetPatchMap(wchar_t const *,unsigned int,unsigned int) {
+enum IMapCheck::PATCHMAPS  CMapCheck::GetPatchMap(wchar_t const * Source, unsigned int a2, unsigned int a3) {
   
   int i; // [esp+4h] [ebp-4h]
 
@@ -41,7 +41,7 @@ enum IMapCheck::PATCHMAPS  CMapCheck::GetPatchMap(wchar_t const *,unsigned int,u
 
 // address=[0x1496b80]
 // Decompiled from bool __cdecl CMapCheck::StrStrLo(wchar_t *Source, wchar_t *SubStr)
-static bool __cdecl CMapCheck::StrStrLo(wchar_t const *,wchar_t const *) {
+bool __cdecl CMapCheck::StrStrLo(wchar_t const * Source, wchar_t const * SubStr) {
   
   wchar_t Destination[1024]; // [esp+Ch] [ebp-804h] BYREF
 

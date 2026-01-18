@@ -4,7 +4,7 @@
 
 // address=[0x13f2590]
 // Decompiled from boost::exception_detail::clone_base *__thiscall CPersistence::SerialError::SerialError(  boost::exception_detail::clone_base *this,  struct boost::exception_detail::clone_base *a2)
- CPersistence::SerialError::SerialError(class CPersistence::SerialError const &) {
+ CPersistence::SerialError::SerialError(class CPersistence::SerialError const & a2) {
   
   CPersistence::Error::Error(this, a2);
   *(_DWORD *)this = &CPersistence::SerialError::_vftable_;

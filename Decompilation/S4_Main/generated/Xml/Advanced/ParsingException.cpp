@@ -20,7 +20,7 @@ int  AdvXMLParser::ParsingException::GetLine(void)const {
 
 // address=[0x2f27ef0]
 // Decompiled from boost::exception_detail::clone_base *__thiscall AdvXMLParser::ParsingException::ParsingException(  boost::exception_detail::clone_base *this,  struct boost::exception_detail::clone_base *a2)
- AdvXMLParser::ParsingException::ParsingException(class AdvXMLParser::ParsingException const &) {
+ AdvXMLParser::ParsingException::ParsingException(class AdvXMLParser::ParsingException const & a2) {
   
   AdvXMLParser::Exception::Exception(this, a2);
   *(_DWORD *)this = &AdvXMLParser::ParsingException::_vftable_;
@@ -33,7 +33,7 @@ int  AdvXMLParser::ParsingException::GetLine(void)const {
 
 // address=[0x2f27f50]
 // Decompiled from AdvXMLParser::Exception *__thiscall AdvXMLParser::ParsingException::ParsingException(  AdvXMLParser::Exception *this,  int a2,  int a3,  int a4)
- AdvXMLParser::ParsingException::ParsingException(enum AdvXMLParser::PARSER_ERROR,int,int) {
+ AdvXMLParser::ParsingException::ParsingException(enum AdvXMLParser::PARSER_ERROR a2, int a3, int a4) {
   
   AdvXMLParser::Exception::Exception(this);
   *(_DWORD *)this = &AdvXMLParser::ParsingException::_vftable_;

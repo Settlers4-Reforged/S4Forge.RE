@@ -1,6 +1,8 @@
 #ifndef SSAVEENTRY_H
 #define SSAVEENTRY_H
 
+#include "defines.h"
+
 class SSaveEntry {
 public:
     // address=[0x14b6160]

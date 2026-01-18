@@ -1,6 +1,8 @@
 #ifndef CAIAGENTGARDENERS_H
 #define CAIAGENTGARDENERS_H
 
+#include "defines.h"
+
 class CAIAgentGardeners : public CAINormalSectorAgent {
 public:
     // address=[0x1304230]

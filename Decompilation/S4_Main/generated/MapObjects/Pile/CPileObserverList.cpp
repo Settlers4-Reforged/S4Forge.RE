@@ -38,7 +38,7 @@ struct SPileObserver const *  CPileObserverList::Observers(void)const {
 
 // address=[0x1560500]
 // Decompiled from int __thiscall CPileObserverList::Attach(unsigned __int8 *this, int a2, int a3, int a4, int a5)
-void  CPileObserverList::Attach(enum T_OBSERVER_TARGET,int,int,int) {
+void  CPileObserverList::Attach(enum T_OBSERVER_TARGET a2, int a3, int a4, int a5) {
   
   int v6; // [esp+0h] [ebp-8h]
 
@@ -100,7 +100,7 @@ void  CPileObserverList::Attach(enum T_OBSERVER_TARGET,int,int,int) {
 
 // address=[0x1560710]
 // Decompiled from int __thiscall CPileObserverList::Detach(CPileObserverList *this, int a2)
-int  CPileObserverList::Detach(int) {
+int  CPileObserverList::Detach(int a2) {
   
   int v3; // [esp+0h] [ebp-1Ch]
   int v4; // [esp+4h] [ebp-18h]
@@ -169,7 +169,7 @@ int  CPileObserverList::Detach(int) {
 
 // address=[0x15608e0]
 // Decompiled from int __thiscall CPileObserverList::NotifyAllObservers(CPileObserverList *this, const struct CEntityEvent *a2)
-void  CPileObserverList::NotifyAllObservers(class CEntityEvent const &)const {
+void  CPileObserverList::NotifyAllObservers(class CEntityEvent const & a2)const {
   
   int result; // eax
   int v3; // [esp+0h] [ebp-18h]
@@ -263,7 +263,7 @@ void  CPileObserverList::DetachAllObservers(void) {
 
 // address=[0x1560b50]
 // Decompiled from CPileObserverList *__thiscall CPileObserverList::CPileObserverList(CPileObserverList *this, int a2)
- CPileObserverList::CPileObserverList(std::istream &) {
+ CPileObserverList::CPileObserverList(std::istream & a2) {
   
   int v3; // [esp+4h] [ebp-10h] BYREF
   int pExceptionObject; // [esp+8h] [ebp-Ch] BYREF
@@ -302,7 +302,7 @@ void  CPileObserverList::DetachAllObservers(void) {
 
 // address=[0x1560c60]
 // Decompiled from unsigned int __thiscall CPileObserverList::Store(__int16 *this, struct std::ostream *a2)
-void  CPileObserverList::Store(std::ostream &) {
+void  CPileObserverList::Store(std::ostream & a2) {
   
   unsigned int result; // eax
   int v3; // [esp+0h] [ebp-Ch] BYREF
@@ -340,7 +340,7 @@ void  CPileObserverList::Clear(void) {
 
 // address=[0x1560b00]
 // Decompiled from int __thiscall CPileObserverList::GetIndex(CPileObserverList *this, int a2)
-int  CPileObserverList::GetIndex(int)const {
+int  CPileObserverList::GetIndex(int a2)const {
   
   int i; // [esp+8h] [ebp-4h]
 

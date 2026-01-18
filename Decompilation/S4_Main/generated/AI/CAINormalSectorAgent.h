@@ -1,6 +1,8 @@
 #ifndef CAINORMALSECTORAGENT_H
 #define CAINORMALSECTORAGENT_H
 
+#include "defines.h"
+
 class CAINormalSectorAgent : public CAIAgent {
 public:
     // address=[0x1300fe0]
@@ -13,7 +15,7 @@ public:
     class CAINormalSectorAI *  SectorAI(void)const;
 
     // address=[0x1303c90]
-    void  AttachSectorAI(class CAINormalSectorAI *);
+    void  AttachSectorAI(class CAINormalSectorAI * a2);
 
 };
 

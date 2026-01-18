@@ -4,7 +4,7 @@
 
 // address=[0x1345720]
 // Decompiled from _WORD *__thiscall SAI_ECO_POSS_BUILD_PLACE::SAI_ECO_POSS_BUILD_PLACE(_WORD *this, _WORD *a2)
- SAI_ECO_POSS_BUILD_PLACE::SAI_ECO_POSS_BUILD_PLACE(struct SAI_ECO_POSS_BUILD_PLACE &&) {
+ SAI_ECO_POSS_BUILD_PLACE::SAI_ECO_POSS_BUILD_PLACE(struct SAI_ECO_POSS_BUILD_PLACE && a2) {
   
   *this = *a2;
   std::vector<int>::vector<int>(a2 + 2);

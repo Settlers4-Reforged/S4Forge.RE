@@ -4,7 +4,7 @@
 
 // address=[0x1319d30]
 // Decompiled from CAIDarkTribePlayerAI *__thiscall CAIDarkTribePlayerAI::CAIDarkTribePlayerAI(CAIDarkTribePlayerAI *this, int a2)
- CAIDarkTribePlayerAI::CAIDarkTribePlayerAI(int) {
+ CAIDarkTribePlayerAI::CAIDarkTribePlayerAI(int a2) {
   
   CAIPlayerAI::CAIPlayerAI(this, a2, 1);
   *(_DWORD *)this = CAIDarkTribePlayerAI::_vftable_;
@@ -93,7 +93,7 @@ void  CAIDarkTribePlayerAI::Execute(void) {
 
 // address=[0x131a000]
 // Decompiled from int __thiscall CAIDarkTribePlayerAI::Load(CAIDarkTribePlayerAI *this, struct IS4Chunk *a2)
-void  CAIDarkTribePlayerAI::Load(class IS4Chunk &) {
+void  CAIDarkTribePlayerAI::Load(class IS4Chunk & a2) {
   
   int result; // eax
   int v3; // [esp+0h] [ebp-14h]
@@ -133,7 +133,7 @@ void  CAIDarkTribePlayerAI::Load(class IS4Chunk &) {
 
 // address=[0x131a120]
 // Decompiled from int __thiscall CAIDarkTribePlayerAI::Save(CAIDarkTribePlayerAI *this, struct IS4Chunk *a2)
-void  CAIDarkTribePlayerAI::Save(class IS4Chunk &) {
+void  CAIDarkTribePlayerAI::Save(class IS4Chunk & a2) {
   
   int v3; // [esp+0h] [ebp-8h]
 

@@ -4,7 +4,7 @@
 
 // address=[0x2eef260]
 // Decompiled from char *__thiscall CConfigSection::CConfigSection(char *this, int a2)
- CConfigSection::CConfigSection(std::string const &) {
+ CConfigSection::CConfigSection(std::string const & a2) {
   
   std::string::string();
   std::map<std::string,CConfigVar *>::map<std::string,CConfigVar *>(this + 28);
@@ -65,7 +65,7 @@
 
 // address=[0x2eef3f0]
 // Decompiled from char __thiscall CConfigSection::VarExists(void *this, int a2)
-bool  CConfigSection::VarExists(std::string const &) {
+bool  CConfigSection::VarExists(std::string const & a2) {
   
   _BYTE v3[12]; // [esp+4h] [ebp-34h] BYREF
   _BYTE v4[12]; // [esp+10h] [ebp-28h] BYREF
@@ -94,7 +94,7 @@ bool  CConfigSection::VarExists(std::string const &) {
 
 // address=[0x2eef490]
 // Decompiled from int *__stdcall CConfigSection::AddVar(int a1, void *Src, int a3)
-void  CConfigSection::AddVar(std::string const &,int const *,int) {
+void  CConfigSection::AddVar(std::string const & a2, int const * Src, int a4) {
   
   int *result; // eax
   int v4; // [esp+Ch] [ebp-1Ch]
@@ -151,7 +151,7 @@ void  CConfigSection::AddVar(std::string const &,int const *,int) {
 
 // address=[0x2eef600]
 // Decompiled from CConfigVarInt **__stdcall CConfigSection::AddVar(int a1, int a2)
-void  CConfigSection::AddVar(std::string const &,int) {
+void  CConfigSection::AddVar(std::string const & a2, int a3) {
   
   CConfigVarInt **result; // eax
   CConfigVarInt *v3; // [esp+Ch] [ebp-18h]
@@ -174,7 +174,7 @@ void  CConfigSection::AddVar(std::string const &,int) {
 
 // address=[0x2eef6d0]
 // Decompiled from CConfigVarFloat **__stdcall CConfigSection::AddVar(int a1, float a2)
-void  CConfigSection::AddVar(std::string const &,float) {
+void  CConfigSection::AddVar(std::string const & a2, float a3) {
   
   CConfigVarFloat **result; // eax
   CConfigVarFloat *v3; // [esp+10h] [ebp-18h]
@@ -197,7 +197,7 @@ void  CConfigSection::AddVar(std::string const &,float) {
 
 // address=[0x2eef7b0]
 // Decompiled from _DWORD *__stdcall CConfigSection::AddVar(int a1, int a2)
-void  CConfigSection::AddVar(std::string const &,std::string const &) {
+void  CConfigSection::AddVar(std::string const & a2, std::string const & a3) {
   
   _DWORD *result; // eax
   int v3; // [esp+Ch] [ebp-18h]
@@ -218,7 +218,7 @@ void  CConfigSection::AddVar(std::string const &,std::string const &) {
 
 // address=[0x2eef880]
 // Decompiled from _DWORD *__stdcall CConfigSection::AddStaticConfigVar(int a1, int a2)
-void  CConfigSection::AddStaticConfigVar(std::string const &,class CConfigVar &) {
+void  CConfigSection::AddStaticConfigVar(std::string const & a2, class CConfigVar & a3) {
   
   _DWORD *result; // eax
 
@@ -243,7 +243,7 @@ void  CConfigSection::AddStaticConfigVar(std::string const &,class CConfigVar &)
 
 // address=[0x2eef8e0]
 // Decompiled from char __thiscall CConfigSection::Save(void *this, wchar_t *FileName)
-bool  CConfigSection::Save(wchar_t const *) {
+bool  CConfigSection::Save(wchar_t const * FileName) {
   
   size_t v2; // eax
   const char *v3; // eax
@@ -416,7 +416,7 @@ bool  CConfigSection::Save(wchar_t const *) {
 
 // address=[0x2efa130]
 // Decompiled from int __thiscall CConfigSection::GetVar(void *this, int a2)
-class CConfigVar *  CConfigSection::GetVar(std::string const &) {
+class CConfigVar *  CConfigSection::GetVar(std::string const & a2) {
   
   _BYTE v3[12]; // [esp+4h] [ebp-3Ch] BYREF
   _BYTE v4[12]; // [esp+10h] [ebp-30h] BYREF

@@ -4,7 +4,7 @@
 
 // address=[0x144a5e0]
 // Decompiled from int __thiscall CEffect::InitEffect(int this, int a2, char a3, int a4, int a5, int a6, int a7, char a8)
-void  CEffect::InitEffect(int,enum SIV_SOUNDS,int,int,unsigned int,int,bool) {
+void  CEffect::InitEffect(int a2, enum SIV_SOUNDS a3, int a4, int a5, unsigned int a6, int a7, bool a8) {
   
   unsigned int EffectNumberOfFrames; // [esp+4h] [ebp-8h]
 
@@ -35,7 +35,7 @@ void  CEffect::InitEffect(int,enum SIV_SOUNDS,int,int,unsigned int,int,bool) {
 
 // address=[0x144a700]
 // Decompiled from int __thiscall CEffect::InitAngel(int this, int a2, char a3, int a4, int a5, int a6, int a7)
-void  CEffect::InitAngel(enum T_EFFECT_ANGEL,enum SIV_SOUNDS,int,int,int,unsigned int) {
+void  CEffect::InitAngel(enum T_EFFECT_ANGEL a2, enum SIV_SOUNDS a3, int a4, int a5, int a6, unsigned int a7) {
   
   char v7; // al
   char v9; // [esp+Ch] [ebp-10h]
@@ -72,7 +72,7 @@ void  CEffect::InitAngel(enum T_EFFECT_ANGEL,enum SIV_SOUNDS,int,int,int,unsigne
 
 // address=[0x144a880]
 // Decompiled from int __thiscall CEffect::InitMissile(_DWORD *this, int a2, int a3, int a4, int a5, int a6, int a7)
-void  CEffect::InitMissile(enum T_EFFECT_MISSILE,int,int,unsigned int,int,int) {
+void  CEffect::InitMissile(enum T_EFFECT_MISSILE a2, int a3, int a4, unsigned int a5, int a6, int a7) {
   
   char EffectNumberOfFrames; // al
   char v8; // al
@@ -166,7 +166,7 @@ void  CEffect::InitMissile(enum T_EFFECT_MISSILE,int,int,unsigned int,int,int) {
 
 // address=[0x144ac00]
 // Decompiled from int __thiscall CEffect::InitSporeCloud(CEffect *this, int a2, int a3, unsigned int a4)
-void  CEffect::InitSporeCloud(int,int,unsigned int) {
+void  CEffect::InitSporeCloud(int a2, int a3, unsigned int a4) {
   
   int TickCounter; // eax
   double v6; // [esp+0h] [ebp-3Ch]
@@ -242,7 +242,7 @@ void  CEffect::InitSporeCloud(int,int,unsigned int) {
 
 // address=[0x144aed0]
 // Decompiled from int __thiscall CEffect::InitStagnantAnimal(int this, unsigned int a2, char a3, int a4, int a5, char a6, int a7)
-void  CEffect::InitStagnantAnimal(enum SIV_ANIMALS,enum SIV_SOUNDS,int,int,int,unsigned int) {
+void  CEffect::InitStagnantAnimal(enum SIV_ANIMALS a2, enum SIV_SOUNDS a3, int a4, int a5, int a6, unsigned int a7) {
   
   unsigned int AnimalFrameCount; // [esp+4h] [ebp-8h]
 
@@ -268,7 +268,7 @@ void  CEffect::InitStagnantAnimal(enum SIV_ANIMALS,enum SIV_SOUNDS,int,int,int,u
 
 // address=[0x144afe0]
 // Decompiled from int __thiscall CEffect::InitMovingEffect(CEffect *this, int a2, int a3, int a4)
-void  CEffect::InitMovingEffect(int,int,int) {
+void  CEffect::InitMovingEffect(int a2, int a3, int a4) {
   
   *((_DWORD *)this + 4) = a3;
   *((_DWORD *)this + 5) = a4;
@@ -295,7 +295,7 @@ void  CEffect::InitMovingEffect(int,int,int) {
 
 // address=[0x144b0f0]
 // Decompiled from int __thiscall CEffect::SetNewDestinationForMovingEffect(CEffect *this, int a2, int a3, char a4)
-unsigned int  CEffect::SetNewDestinationForMovingEffect(int,int,int) {
+unsigned int  CEffect::SetNewDestinationForMovingEffect(int a2, int a3, int a4) {
   
   int v5; // [esp+8h] [ebp-30h]
   int v6; // [esp+Ch] [ebp-2Ch]
@@ -377,7 +377,7 @@ unsigned int  CEffect::SetNewDestinationForMovingEffect(int,int,int) {
 
 // address=[0x144b3e0]
 // Decompiled from int __thiscall CEffect::UpdateAttachedEffect(CEffect *this, const struct CEffect *a2)
-void  CEffect::UpdateAttachedEffect(class CEffect const &) {
+void  CEffect::UpdateAttachedEffect(class CEffect const & a2) {
   
   int result; // eax
 
@@ -396,7 +396,7 @@ void  CEffect::UpdateAttachedEffect(class CEffect const &) {
 
 // address=[0x144b450]
 // Decompiled from int __thiscall CEffect::InitAttachedEffect(CEffect *this, int a2, unsigned int a3, const struct CEffect *a4, char a5)
-void  CEffect::InitAttachedEffect(int,unsigned int,class CEffect const &,int) {
+void  CEffect::InitAttachedEffect(int a2, unsigned int a3, class CEffect const & a4, int a5) {
   
   char v6; // [esp+0h] [ebp-Ch]
   unsigned int EffectNumberOfFrames; // [esp+4h] [ebp-8h]
@@ -428,7 +428,7 @@ void  CEffect::InitAttachedEffect(int,unsigned int,class CEffect const &,int) {
 
 // address=[0x144b530]
 // Decompiled from struct SGfxObjectInfo *__thiscall CEffect::VisualizeEffect(CEffect *this, struct SGfxObjectInfo *a2, int a3)
-void  CEffect::VisualizeEffect(struct SGfxObjectInfo &,int) {
+void  CEffect::VisualizeEffect(struct SGfxObjectInfo & a2, int a3) {
   
   struct SGfxObjectInfo *result; // eax
 
@@ -447,7 +447,7 @@ void  CEffect::VisualizeEffect(struct SGfxObjectInfo &,int) {
 
 // address=[0x144b5f0]
 // Decompiled from struct SGfxObjectInfo *__thiscall CEffect::VisualizeAngel(CEffect *this, struct SGfxObjectInfo *a2, int a3)
-void  CEffect::VisualizeAngel(struct SGfxObjectInfo &,int) {
+void  CEffect::VisualizeAngel(struct SGfxObjectInfo & a2, int a3) {
   
   struct SGfxObjectInfo *result; // eax
   char v4; // [esp+0h] [ebp-18h]
@@ -475,7 +475,7 @@ void  CEffect::VisualizeAngel(struct SGfxObjectInfo &,int) {
 
 // address=[0x144b6e0]
 // Decompiled from CEffect *__thiscall CEffect::VisualizeArrow(CEffect *this, struct SGfxObjectInfo *a2, int a3)
-void  CEffect::VisualizeArrow(struct SGfxObjectInfo &,int) {
+void  CEffect::VisualizeArrow(struct SGfxObjectInfo & a2, int a3) {
   
   CEffect *result; // eax
 
@@ -507,7 +507,7 @@ void  CEffect::VisualizeArrow(struct SGfxObjectInfo &,int) {
 
 // address=[0x144b800]
 // Decompiled from CEffect *__thiscall CEffect::VisualizeCannonball(CEffect *this, struct SGfxObjectInfo *a2, int a3)
-void  CEffect::VisualizeCannonball(struct SGfxObjectInfo &,int) {
+void  CEffect::VisualizeCannonball(struct SGfxObjectInfo & a2, int a3) {
   
   CEffect *result; // eax
 
@@ -541,7 +541,7 @@ void  CEffect::VisualizeCannonball(struct SGfxObjectInfo &,int) {
 
 // address=[0x144b950]
 // Decompiled from CEffect *__thiscall CEffect::VisualizeSporeCloud(CEffect *this, struct SGfxObjectInfo *a2, int a3)
-void  CEffect::VisualizeSporeCloud(struct SGfxObjectInfo &,int) {
+void  CEffect::VisualizeSporeCloud(struct SGfxObjectInfo & a2, int a3) {
   
   CEffect *result; // eax
 
@@ -564,7 +564,7 @@ void  CEffect::VisualizeSporeCloud(struct SGfxObjectInfo &,int) {
 
 // address=[0x144ba40]
 // Decompiled from int __thiscall sub_184BA40(int this, int a2, int a3)
-void  CEffect::VisualizeStagnantAnimal(struct SGfxObjectInfo &,int) {
+void  CEffect::VisualizeStagnantAnimal(struct SGfxObjectInfo & a2, int a3) {
   
   int result; // eax
 
@@ -587,7 +587,7 @@ void  CEffect::VisualizeStagnantAnimal(struct SGfxObjectInfo &,int) {
 
 // address=[0x144bb10]
 // Decompiled from int __thiscall CEffect::VisualizeMovingEffect(CEffect *this, struct SGfxObjectInfo *a2, int a3)
-void  CEffect::VisualizeMovingEffect(struct SGfxObjectInfo &,int) {
+void  CEffect::VisualizeMovingEffect(struct SGfxObjectInfo & a2, int a3) {
   
   int result; // eax
   int v4; // [esp+8h] [ebp-10h]
@@ -628,7 +628,7 @@ void  CEffect::VisualizeMovingEffect(struct SGfxObjectInfo &,int) {
 
 // address=[0x144bc80]
 // Decompiled from struct SGfxObjectInfo *__thiscall CEffect::VisualizeTopEffect(CEffect *this, struct SGfxObjectInfo *a2, int a3)
-void  CEffect::VisualizeTopEffect(struct SGfxObjectInfo &,int) {
+void  CEffect::VisualizeTopEffect(struct SGfxObjectInfo & a2, int a3) {
   
   struct SGfxObjectInfo *result; // eax
 
@@ -648,7 +648,7 @@ void  CEffect::VisualizeTopEffect(struct SGfxObjectInfo &,int) {
 
 // address=[0x144bd50]
 // Decompiled from CEffect *__thiscall CEffect::VisualizeTopFireball(CEffect *this, struct SGfxObjectInfo *a2, int a3)
-void  CEffect::VisualizeTopFireball(struct SGfxObjectInfo &,int) {
+void  CEffect::VisualizeTopFireball(struct SGfxObjectInfo & a2, int a3) {
   
   CEffect *result; // eax
 
@@ -683,7 +683,7 @@ void  CEffect::VisualizeTopFireball(struct SGfxObjectInfo &,int) {
 
 // address=[0x144beb0]
 // Decompiled from CEffect *__thiscall CEffect::VisualizeAttachedEffect(CEffect *this, struct SGfxObjectInfo *a2, int a3)
-void  CEffect::VisualizeAttachedEffect(struct SGfxObjectInfo &,int) {
+void  CEffect::VisualizeAttachedEffect(struct SGfxObjectInfo & a2, int a3) {
   
   CEffect *result; // eax
   int v4; // [esp+0h] [ebp-10h]
@@ -710,7 +710,7 @@ void  CEffect::VisualizeAttachedEffect(struct SGfxObjectInfo &,int) {
 
 // address=[0x144f270]
 // Decompiled from void __thiscall CEffect::VisualizeNOP(CEffect *this, struct SGfxObjectInfo *a2, int a3)
-void  CEffect::VisualizeNOP(struct SGfxObjectInfo &,int) {
+void  CEffect::VisualizeNOP(struct SGfxObjectInfo & a2, int a3) {
   
   ;
 }
@@ -718,7 +718,7 @@ void  CEffect::VisualizeNOP(struct SGfxObjectInfo &,int) {
 
 // address=[0x144f500]
 // Decompiled from void __cdecl CEffect::GetEffectGfxInfo(struct SGfxObjectInfo *a1, unsigned int a2, unsigned int a3, unsigned int a4)
-static void __cdecl CEffect::GetEffectGfxInfo(struct SGfxObjectInfo &,int,unsigned int,unsigned int) {
+void __cdecl CEffect::GetEffectGfxInfo(struct SGfxObjectInfo & a1, int a2, unsigned int a3, unsigned int a4) {
   
   CGfxManager::GetEffectGfxInfo((CGfxManager *)g_pGfxManager, a1, a2, a3, a4);
 }
@@ -726,7 +726,7 @@ static void __cdecl CEffect::GetEffectGfxInfo(struct SGfxObjectInfo &,int,unsign
 
 // address=[0x144f530]
 // Decompiled from int __cdecl CEffect::GetEffectNumberOfFrames(unsigned int a1)
-static unsigned int __cdecl CEffect::GetEffectNumberOfFrames(int) {
+unsigned int __cdecl CEffect::GetEffectNumberOfFrames(int a1) {
   
   unsigned int EffectFrameCount; // [esp+4h] [ebp-4h]
 
@@ -739,7 +739,7 @@ static unsigned int __cdecl CEffect::GetEffectNumberOfFrames(int) {
 
 // address=[0x144f5c0]
 // Decompiled from int __cdecl CEffect::GetWorldScreenCoordinates(int a1, int a2, int *a3, int *a4)
-static void __cdecl CEffect::GetWorldScreenCoordinates(int,int,int &,int &) {
+void __cdecl CEffect::GetWorldScreenCoordinates(int a1, int a2, int & a3, int & a4) {
   
   int result; // eax
   float v5; // [esp+0h] [ebp-8h] BYREF
@@ -757,7 +757,7 @@ static void __cdecl CEffect::GetWorldScreenCoordinates(int,int,int &,int &) {
 
 // address=[0x144f620]
 // Decompiled from void __cdecl CEffect::GetWorldScreenCoordinates(int a1, int a2, float *a3, float *a4)
-static void __cdecl CEffect::GetWorldScreenCoordinates(int,int,float &,float &) {
+void __cdecl CEffect::GetWorldScreenCoordinates(int a1, int a2, float & a3, float & a4) {
   
   IGfxEngine::ConvertMapPositionToWorldScreenOffsets((IGfxEngine *)g_pGfxEngine, a1, a2, a3, a4);
 }
@@ -765,7 +765,7 @@ static void __cdecl CEffect::GetWorldScreenCoordinates(int,int,float &,float &) 
 
 // address=[0x144f690]
 // Decompiled from BOOL __thiscall CEffect::IsOutOfDate(CEffect *this, int a2)
-int  CEffect::IsOutOfDate(int)const {
+int  CEffect::IsOutOfDate(int a2)const {
   
   return a2 >= *((_DWORD *)this + 3);
 }
@@ -773,7 +773,7 @@ int  CEffect::IsOutOfDate(int)const {
 
 // address=[0x144f700]
 // Decompiled from _DWORD *__thiscall CEffect::SetVisualizeFunc(_DWORD *this, int a2)
-void  CEffect::SetVisualizeFunc(enum T_VISUALIZE_FUNC) {
+void  CEffect::SetVisualizeFunc(enum T_VISUALIZE_FUNC a2) {
   
   _DWORD *result; // eax
 
@@ -800,7 +800,7 @@ int  CEffect::SquareRow(void)const {
 
 // address=[0x144f790]
 // Decompiled from int __thiscall CEffect::TimeIndex(CEffect *this, unsigned int a2)
-int  CEffect::TimeIndex(unsigned int)const {
+int  CEffect::TimeIndex(unsigned int a2)const {
   
   return a2 - *((_DWORD *)this + 2);
 }
@@ -808,7 +808,7 @@ int  CEffect::TimeIndex(unsigned int)const {
 
 // address=[0x144f7b0]
 // Decompiled from int __thiscall CEffect::Visualize(  int (__thiscall **this)(CEffect *, struct SGfxObjectInfo *, int),  struct SGfxObjectInfo *a2,  int a3)
-void  CEffect::Visualize(struct SGfxObjectInfo &,int) {
+void  CEffect::Visualize(struct SGfxObjectInfo & a2, int a3) {
   
   return this[13]((CEffect *)this, a2, a3);
 }

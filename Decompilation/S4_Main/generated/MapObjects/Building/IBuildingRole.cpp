@@ -24,7 +24,7 @@ bool  IBuildingRole::HaveInhabitant(void)const {
 
 // address=[0x14e67d0]
 // Decompiled from int __thiscall IBuildingRole::GetPileIdWithNeedForGood(IBuildingRole *this, int a2)
-int  IBuildingRole::GetPileIdWithNeedForGood(int)const {
+int  IBuildingRole::GetPileIdWithNeedForGood(int a2)const {
   
   return (*(int (__thiscall **)(IBuildingRole *, int))(*(_DWORD *)this + 56))(this, a2);
 }
@@ -32,7 +32,7 @@ int  IBuildingRole::GetPileIdWithNeedForGood(int)const {
 
 // address=[0x14e6800]
 // Decompiled from char __stdcall IBuildingRole::HasShipAmmo(int a1)
-bool  IBuildingRole::HasShipAmmo(int)const {
+bool  IBuildingRole::HasShipAmmo(int a1)const {
   
   return 0;
 }
@@ -56,7 +56,7 @@ void  IBuildingRole::NotifySelected(void) {
 
 // address=[0x14e6850]
 // Decompiled from int __thiscall IBuildingRole::OrderInhabitantCancelled(IBuildingRole *this, struct CBuilding *a2)
-void  IBuildingRole::OrderInhabitantCancelled(class CBuilding *) {
+void  IBuildingRole::OrderInhabitantCancelled(class CBuilding * a2) {
   
   return (*(int (__thiscall **)(IBuildingRole *, _DWORD))(*(_DWORD *)this + 80))(this, *((unsigned __int16 *)this + 4));
 }
@@ -64,7 +64,7 @@ void  IBuildingRole::OrderInhabitantCancelled(class CBuilding *) {
 
 // address=[0x14e68b0]
 // Decompiled from char __thiscall IBuildingRole::SettlerEnter(IBuildingRole *this, struct CBuilding *a2, int a3)
-bool  IBuildingRole::SettlerEnter(class CBuilding *,int) {
+bool  IBuildingRole::SettlerEnter(class CBuilding * a2, int a3) {
   
   (*(void (__thiscall **)(IBuildingRole *, struct CBuilding *, _DWORD))(*(_DWORD *)this + 72))(this, a2, 0);
   return 1;
@@ -111,7 +111,7 @@ void  IBuildingRole::SwitchPriority(void) {
 
 // address=[0x14fdfb0]
 // Decompiled from struct IBuildingRole *__thiscall IBuildingRole::Update(struct IBuildingRole *this, struct CBuilding *a2)
-void  IBuildingRole::Update(class CBuilding *) {
+void  IBuildingRole::Update(class CBuilding * a2) {
   
   int TickCounter; // esi
   int v3; // esi
@@ -355,7 +355,7 @@ void  IBuildingRole::Switch(void) {
 
 // address=[0x14fe6b0]
 // Decompiled from IBuildingRole *__thiscall IBuildingRole::InhabitantFlee(IBuildingRole *this, int a2)
-void  IBuildingRole::InhabitantFlee(int) {
+void  IBuildingRole::InhabitantFlee(int a2) {
   
   IBuildingRole *result; // eax
 
@@ -382,7 +382,7 @@ void  IBuildingRole::InhabitantFlee(int) {
 
 // address=[0x14fe750]
 // Decompiled from int __thiscall IBuildingRole::ReturnBuildingMaterial(IBuildingRole *this, struct CBuilding *a2)
-void  IBuildingRole::ReturnBuildingMaterial(class CBuilding *) {
+void  IBuildingRole::ReturnBuildingMaterial(class CBuilding * a2) {
   
   int v2; // eax
   int result; // eax
@@ -457,7 +457,7 @@ void  IBuildingRole::ReturnBuildingMaterial(class CBuilding *) {
 
 // address=[0x14fe8d0]
 // Decompiled from unsigned __int16 *__thiscall IBuildingRole::RemoveInhabitant(unsigned __int16 *this, _DWORD *a2)
-void  IBuildingRole::RemoveInhabitant(class CBuilding *) {
+void  IBuildingRole::RemoveInhabitant(class CBuilding * a2) {
   
   unsigned __int16 *result; // eax
   int v3; // esi
@@ -542,7 +542,7 @@ void  IBuildingRole::RemoveInhabitant(class CBuilding *) {
 
 // address=[0x14feaf0]
 // Decompiled from bool __thiscall IBuildingRole::SearchInWorkingArea(int this, unsigned __int8 *a2, int a3)
-bool  IBuildingRole::SearchInWorkingArea(class CBuilding *,int) {
+bool  IBuildingRole::SearchInWorkingArea(class CBuilding * a2, int a3) {
   
   int WorkingAreaPackedXY; // eax
   int v4; // eax
@@ -728,7 +728,7 @@ bool  IBuildingRole::SearchInWorkingArea(class CBuilding *,int) {
 
 // address=[0x14ff140]
 // Decompiled from int __thiscall IBuildingRole::Decrease(IBuildingRole *this, int a2)
-int  IBuildingRole::Decrease(int) {
+int  IBuildingRole::Decrease(int a2) {
   
   int v3; // [esp+Ch] [ebp+8h]
 
@@ -743,7 +743,7 @@ int  IBuildingRole::Decrease(int) {
 
 // address=[0x14ff180]
 // Decompiled from int __thiscall IBuildingRole::TakeJobTrigger(IBuildingRole *this, int a2)
-void  IBuildingRole::TakeJobTrigger(int) {
+void  IBuildingRole::TakeJobTrigger(int a2) {
   
   int v2; // eax
   int v3; // esi
@@ -879,7 +879,7 @@ void  IBuildingRole::TakeJobTrigger(int) {
 
 // address=[0x14ff580]
 // Decompiled from int __thiscall IBuildingRole::PostLoadSetWaterFlags(IBuildingRole *this, struct CBuilding *a2)
-void  IBuildingRole::PostLoadSetWaterFlags(class CBuilding *) {
+void  IBuildingRole::PostLoadSetWaterFlags(class CBuilding * a2) {
   
   int result; // eax
   int v3; // edx
@@ -925,7 +925,7 @@ void  IBuildingRole::PostLoadSetWaterFlags(class CBuilding *) {
 
 // address=[0x14ff650]
 // Decompiled from char *__thiscall IBuildingRole::IBuildingRole(char *this, int a2)
- IBuildingRole::IBuildingRole(std::istream &) {
+ IBuildingRole::IBuildingRole(std::istream & a2) {
   
   int v3; // [esp+4h] [ebp-14h] BYREF
   int pExceptionObject; // [esp+8h] [ebp-10h] BYREF
@@ -998,7 +998,7 @@ void  IBuildingRole::PostLoadSetWaterFlags(class CBuilding *) {
 
 // address=[0x14ffaa0]
 // Decompiled from struct std::ostream *__thiscall IBuildingRole::Store(struct IBuildingRole *this, struct std::ostream *a2)
-void  IBuildingRole::Store(std::ostream &) {
+void  IBuildingRole::Store(std::ostream & a2) {
   
   struct std::ostream *result; // eax
   int v3; // [esp+0h] [ebp-10h] BYREF
@@ -1070,7 +1070,7 @@ void  IBuildingRole::KillInhabitant(class CBuilding *) {
 
 // address=[0x14ffea0]
 // Decompiled from int __thiscall IBuildingRole::InitCommon(int this, _BYTE *a2)
-void  IBuildingRole::InitCommon(class CBuilding *) {
+void  IBuildingRole::InitCommon(class CBuilding * a2) {
   
   int v2; // eax
   int v3; // eax
@@ -1180,7 +1180,7 @@ void  IBuildingRole::InitHousePatches(void) {
 
 // address=[0x1500310]
 // Decompiled from char __thiscall IBuildingRole::OrderInhabitant(IBuildingRole *this, struct CBuilding *a2)
-bool  IBuildingRole::OrderInhabitant(class CBuilding *) {
+bool  IBuildingRole::OrderInhabitant(class CBuilding * a2) {
   
   int v2; // eax
   CEcoSector *v4; // eax
@@ -1209,7 +1209,7 @@ bool  IBuildingRole::OrderInhabitant(class CBuilding *) {
 
 // address=[0x15003d0]
 // Decompiled from IBuildingRole *__thiscall IBuildingRole::MiniFlag(IBuildingRole *this, struct SGfxObjectInfo *a2, int a3)
-void  IBuildingRole::MiniFlag(struct SGfxObjectInfo &,int) {
+void  IBuildingRole::MiniFlag(struct SGfxObjectInfo & a2, int a3) {
   
   IBuildingRole *result; // eax
   _DWORD *v4; // eax
@@ -1272,7 +1272,7 @@ void  IBuildingRole::WorkingAreaChanged(void) {
 
 // address=[0x1500620]
 // Decompiled from void __thiscall IBuildingRole::DetachWithoutNotify(IBuildingRole *this, struct CBuilding *a2, int a3)
-void  IBuildingRole::DetachWithoutNotify(class CBuilding *,int) {
+void  IBuildingRole::DetachWithoutNotify(class CBuilding * a2, int a3) {
   
   CBuilding::DetachWithoutNotify(a2, a3);
 }
@@ -1283,7 +1283,7 @@ void  IBuildingRole::DetachWithoutNotify(class CBuilding *,int) {
 
 // address=[0x14e6830]
 // Decompiled from void __thiscall IBuildingRole::NotifyDetach(IBuildingRole *this, struct CBuilding *a2, int a3)
-void  IBuildingRole::NotifyDetach(class CBuilding *,int) {
+void  IBuildingRole::NotifyDetach(class CBuilding * a2, int a3) {
   
   ;
 }

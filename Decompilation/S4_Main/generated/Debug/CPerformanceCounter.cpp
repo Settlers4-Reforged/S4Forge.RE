@@ -53,7 +53,7 @@ double  CPerformanceCounter::TimeMs(void)const {
 
 // address=[0x2efd760]
 // Decompiled from char *__thiscall CPerformanceCounter::TimeMsStr(CPerformanceCounter *this, __int64 a2)
-char const *  CPerformanceCounter::TimeMsStr(int,int)const {
+char const *  CPerformanceCounter::TimeMsStr(int a2, int a2)const {
   
   double v2; // st7
   double v3; // st7

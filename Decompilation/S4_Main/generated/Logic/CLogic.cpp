@@ -12,7 +12,7 @@ class IEffects &  CLogic::Effects(void) {
 
 // address=[0x14609a0]
 // Decompiled from struct CInfoExchange *__thiscall CLogic::SetFillDialogInfos(  CLogic *this,  void (__cdecl *a2)(struct CInfoExchange *, bool, bool),  struct CInfoExchange *a3,  bool a4)
-void  CLogic::SetFillDialogInfos(void (__cdecl*)(class CInfoExchange *,bool,bool),class CInfoExchange *,bool) {
+void  CLogic::SetFillDialogInfos(void (__cdecl*)(class CInfoExchange *,bool,bool) a2, class CInfoExchange * a3, bool a4) {
   
   struct CInfoExchange *result; // eax
 
@@ -26,7 +26,7 @@ void  CLogic::SetFillDialogInfos(void (__cdecl*)(class CInfoExchange *,bool,bool
 
 // address=[0x14609e0]
 // Decompiled from struct CInfoExchange *__thiscall CLogic::SetFillSideBarInfos(  CLogic *this,  void (__cdecl *a2)(struct CInfoExchange *, bool, int),  struct CInfoExchange *a3,  int a4)
-void  CLogic::SetFillSideBarInfos(void (__cdecl*)(class CInfoExchange *,bool,int),class CInfoExchange *,int) {
+void  CLogic::SetFillSideBarInfos(void (__cdecl*)(class CInfoExchange *,bool,int) a2, class CInfoExchange * a3, int a4) {
   
   struct CInfoExchange *result; // eax
 
@@ -40,7 +40,7 @@ void  CLogic::SetFillSideBarInfos(void (__cdecl*)(class CInfoExchange *,bool,int
 
 // address=[0x1460a50]
 // Decompiled from CLogic *__thiscall CLogic::SetLocalGlobalSwitch(CLogic *this, bool a2)
-void  CLogic::SetLocalGlobalSwitch(bool) {
+void  CLogic::SetLocalGlobalSwitch(bool a2) {
   
   CLogic *result; // eax
 
@@ -52,7 +52,7 @@ void  CLogic::SetLocalGlobalSwitch(bool) {
 
 // address=[0x1460a70]
 // Decompiled from CLogic *__thiscall CLogic::SwitchExtraInfoMenu(CLogic *this, bool a2)
-void  CLogic::SwitchExtraInfoMenu(bool) {
+void  CLogic::SwitchExtraInfoMenu(bool a2) {
   
   CLogic *result; // eax
 
@@ -117,7 +117,7 @@ void  CLogic::SwitchExtraInfoMenu(bool) {
 
 // address=[0x1469e80]
 // Decompiled from BOOL __thiscall CLogic::PostLoadMap(CLogic *this, struct CGameType *a2)
-void  CLogic::PostLoadMap(class CGameType &) {
+void  CLogic::PostLoadMap(class CGameType & a2) {
   
   BOOL result; // eax
   int v3; // [esp+8h] [ebp-Ch]

@@ -1,13 +1,15 @@
 #ifndef GAMESESSIONDESCRIPTOR_H
 #define GAMESESSIONDESCRIPTOR_H
 
+#include "defines.h"
+
 class GameSessionDescriptor : public SimpleSessionDescriptor_Matchmaking@storm {
 public:
     // address=[0x1308e60]
-    void  SetPeerCount(unsigned long);
+    void  SetPeerCount(unsigned long a2);
 
     // address=[0x1308f70]
-    void  SetSaveId(long);
+    void  SetSaveId(long a2);
 
     // address=[0x15c4ac0]
     unsigned long  GetPeerCount(void)const;
@@ -16,16 +18,16 @@ public:
     unsigned long  GetTickCount(void)const;
 
     // address=[0x160e800]
-    virtual void  GetMaxSlots(unsigned long &)const;
+    virtual void  GetMaxSlots(unsigned long & a2)const;
 
     // address=[0x160e820]
-    virtual void  SetMaxSlots(unsigned long);
+    virtual void  SetMaxSlots(unsigned long a2);
 
     // address=[0x160e8a0]
-    virtual void  GetFreeSlots(unsigned long &)const;
+    virtual void  GetFreeSlots(unsigned long & a2)const;
 
     // address=[0x160e8c0]
-    virtual void  SetFreeSlots(unsigned long);
+    virtual void  SetFreeSlots(unsigned long a2);
 
     // address=[0x16110a0]
     static char const * __cdecl GetClassTypeName(void);
@@ -43,7 +45,7 @@ public:
     virtual  ~GameSessionDescriptor(void);
 
     // address=[0x168cfb0]
-    void  SetTickCount(unsigned long);
+    void  SetTickCount(unsigned long a2);
 
 };
 

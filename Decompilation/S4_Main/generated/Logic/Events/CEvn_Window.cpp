@@ -4,7 +4,7 @@
 
 // address=[0x1355090]
 // Decompiled from CEvn_Window *__thiscall CEvn_Window::CEvn_Window(  CEvn_Window *this,  HWND a2,  unsigned int a3,  unsigned int a4,  unsigned int a5)
- CEvn_Window::CEvn_Window(struct HWND__ *,unsigned int,unsigned int,long) {
+ CEvn_Window::CEvn_Window(struct HWND__ * a2, unsigned int a3, unsigned int a4, long a5) {
   
   CEvn_Event::CEvn_Event((CEvn_Event *)this, a3, a4, a5, 0);
   *(_DWORD *)this = CEvn_Window::_vftable_;

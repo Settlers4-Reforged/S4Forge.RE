@@ -4,7 +4,7 @@
 
 // address=[0x1301740]
 // Decompiled from char *__thiscall IMessageTracer::PushFormatedInts(IMessageTracer *this, const char *a2, char *a3)
-void  IMessageTracer::PushFormatedInts(char const *,int) {
+void  IMessageTracer::PushFormatedInts(char const * a2, int a3) {
   
   char *result; // eax
   char *v4; // [esp+4h] [ebp-4h]
@@ -22,7 +22,7 @@ void  IMessageTracer::PushFormatedInts(char const *,int) {
 
 // address=[0x1301780]
 // Decompiled from char *__thiscall IMessageTracer::PushFormatedInts(IMessageTracer *this, const char *a2, char *a3, int a4)
-void  IMessageTracer::PushFormatedInts(char const *,int,int) {
+void  IMessageTracer::PushFormatedInts(char const * a2, int a3, int a4) {
   
   char *result; // eax
   char *v5; // [esp+4h] [ebp-4h]
@@ -41,7 +41,7 @@ void  IMessageTracer::PushFormatedInts(char const *,int,int) {
 
 // address=[0x13017d0]
 // Decompiled from char *__thiscall IMessageTracer::PushStaticText(IMessageTracer *this, const char *a2)
-void  IMessageTracer::PushStaticText(char const *) {
+void  IMessageTracer::PushStaticText(char const * a2) {
   
   char *result; // eax
 
@@ -54,7 +54,7 @@ void  IMessageTracer::PushStaticText(char const *) {
 
 // address=[0x1311dc0]
 // Decompiled from char *__thiscall IMessageTracer::PushFormatedInts(IMessageTracer *this, const char *a2, int a3, int a4, int a5)
-void  IMessageTracer::PushFormatedInts(char const *,int,int,int) {
+void  IMessageTracer::PushFormatedInts(char const * a2, int a3, int a4, int a5) {
   
   char *result; // eax
 
@@ -71,7 +71,7 @@ void  IMessageTracer::PushFormatedInts(char const *,int,int,int) {
 
 // address=[0x1311e20]
 // Decompiled from char *__thiscall IMessageTracer::PushFormatedInts(  IMessageTracer *this,  const char *a2,  int a3,  int a4,  int a5,  char *a6)
-void  IMessageTracer::PushFormatedInts(char const *,int,int,int,int) {
+void  IMessageTracer::PushFormatedInts(char const * a2, int a3, int a4, int a5, int a6) {
   
   char *result; // eax
   char *v7; // [esp+4h] [ebp-4h]
@@ -92,7 +92,7 @@ void  IMessageTracer::PushFormatedInts(char const *,int,int,int,int) {
 
 // address=[0x1311e80]
 // Decompiled from struct IMessageTracer::STraceMsg *__thiscall IMessageTracer::PushFormatedInts(  IMessageTracer *this,  const char *a2,  int a3,  int a4,  int a5,  struct IMessageTracer::STraceMsg *a6,  int a7)
-void  IMessageTracer::PushFormatedInts(char const *,int,int,int,int,int) {
+void  IMessageTracer::PushFormatedInts(char const * a2, int a3, int a4, int a5, int a6, int a7) {
   
   struct IMessageTracer::STraceMsg *result; // eax
   struct IMessageTracer::STraceMsg *v8; // [esp+4h] [ebp-4h]
@@ -140,7 +140,7 @@ void  IMessageTracer::Done(void) {
 
 // address=[0x1496dd0]
 // Decompiled from int __thiscall IMessageTracer::PrintMessages(IMessageTracer *this, int a2, unsigned int a3)
-void  IMessageTracer::PrintMessages(unsigned int,unsigned int) {
+void  IMessageTracer::PrintMessages(unsigned int a2, unsigned int a3) {
   
   int result; // eax
   int v4; // [esp+0h] [ebp-430h]
@@ -230,7 +230,7 @@ void  IMessageTracer::PrintMessages(unsigned int,unsigned int) {
 
 // address=[0x1558d30]
 // Decompiled from char __thiscall IMessageTracer::RemoveCurrentMsgIfEqual(const char **this, const char *a2, const char *a3)
-bool  IMessageTracer::RemoveCurrentMsgIfEqual(char const *,int) {
+bool  IMessageTracer::RemoveCurrentMsgIfEqual(char const * a2, int a3) {
   
   int v4; // [esp+0h] [ebp-8h]
 

@@ -1,10 +1,12 @@
 #ifndef CMINIMAPHANDLER_H
 #define CMINIMAPHANDLER_H
 
+#include "defines.h"
+
 class CMinimapHandler {
 public:
     // address=[0x15b1490]
-    static void __cdecl FilterKeyPressed(int);
+    static void __cdecl FilterKeyPressed(int a1);
 
     // address=[0x15b1510]
     static void __cdecl Init(void);
@@ -13,10 +15,10 @@ public:
     static void __cdecl UpdateAlliances(void);
 
     // address=[0x16a6ef0]
-    static void __cdecl GetEcoSectorColor(int,struct SGfxColor &);
+    static void __cdecl GetEcoSectorColor(int a1, struct SGfxColor & a2);
 
     // address=[0x16a6f20]
-    static bool __cdecl GetObjectColor(int,struct SGfxColor &,int,int);
+    static bool __cdecl GetObjectColor(int a1, struct SGfxColor & a2, int a3, int a4);
 
     // address=[0x16a71c0]
     static bool __cdecl IsEcoSectorEnabled(void);

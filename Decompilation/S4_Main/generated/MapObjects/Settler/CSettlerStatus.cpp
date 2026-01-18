@@ -4,7 +4,7 @@
 
 // address=[0x1554910]
 // Decompiled from CManakopter::CSettlerStatus *__thiscall CManakopter::CSettlerStatus::CSettlerStatus(  CManakopter::CSettlerStatus *this,  const struct CManakopter::CSettlerStatus *a2)
- CManakopter::CSettlerStatus::CSettlerStatus(class CManakopter::CSettlerStatus const &) {
+ CManakopter::CSettlerStatus::CSettlerStatus(class CManakopter::CSettlerStatus const & a2) {
   
   *(_DWORD *)this = *(_DWORD *)a2;
   *((_DWORD *)this + 1) = *((_DWORD *)a2 + 1);
@@ -15,7 +15,7 @@
 
 // address=[0x1554950]
 // Decompiled from _DWORD *__thiscall CManakopter::CSettlerStatus::CSettlerStatus(_DWORD *this, int a2, int a3, int a4)
- CManakopter::CSettlerStatus::CSettlerStatus(int,enum SETTLER_TYPES,int) {
+ CManakopter::CSettlerStatus::CSettlerStatus(int a2, enum SETTLER_TYPES a3, int a4) {
   
   *this = a4;
   this[1] = a2;

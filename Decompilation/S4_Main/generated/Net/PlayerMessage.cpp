@@ -23,7 +23,7 @@
 
 // address=[0x161de20]
 // Decompiled from _DWORD *__thiscall OnlineManager::PlayerMessage::operator=(_DWORD *this, int a2)
-struct OnlineManager::PlayerMessage &  OnlineManager::PlayerMessage::operator=(struct OnlineManager::PlayerMessage const &) {
+struct OnlineManager::PlayerMessage &  OnlineManager::PlayerMessage::operator=(struct OnlineManager::PlayerMessage const & a2) {
   
   *(_BYTE *)this = *(_BYTE *)a2;
   this[1] = *(_DWORD *)(a2 + 4);

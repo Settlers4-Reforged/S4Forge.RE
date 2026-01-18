@@ -4,7 +4,7 @@
 
 // address=[0x14c0800]
 // Decompiled from CStateLobbyMultiplayerType *__cdecl CStateLobbyMultiplayerType::DynamicCreateFunc(void *a1)
-static class CGameState * __cdecl CStateLobbyMultiplayerType::DynamicCreateFunc(void *) {
+class CGameState * __cdecl CStateLobbyMultiplayerType::DynamicCreateFunc(void * a1) {
   
   CStateLobbyMultiplayerType *C; // [esp+Ch] [ebp-10h]
 
@@ -70,7 +70,7 @@ bool  CStateLobbyMultiplayerType::Perform(void) {
 
 // address=[0x14c0be0]
 // Decompiled from char __thiscall CStateLobbyMultiplayerType::OnEvent(CStateLobbyMultiplayerType *this, struct CEvn_Event *a2)
-bool  CStateLobbyMultiplayerType::OnEvent(class CEvn_Event &) {
+bool  CStateLobbyMultiplayerType::OnEvent(class CEvn_Event & a2) {
   
   char result; // al
   char v3; // [esp-1Ch] [ebp-84h] BYREF
@@ -172,7 +172,7 @@ CStateLobbyMultiplayerType__OnEvent___def_18C0C31:
 
 // address=[0x14c0880]
 // Decompiled from char __thiscall CStateLobbyMultiplayerType::LaunchWebLobby(  void *this,  char a2,  int a3,  int a4,  int a5,  int a6,  int a7,  int a8)
-bool  CStateLobbyMultiplayerType::LaunchWebLobby(std::string) {
+bool  CStateLobbyMultiplayerType::LaunchWebLobby(std::string a2) {
   
   char v9; // [esp-38h] [ebp-190h] BYREF
   int v10; // [esp-34h] [ebp-18Ch]

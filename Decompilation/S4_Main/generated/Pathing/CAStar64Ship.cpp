@@ -4,7 +4,7 @@
 
 // address=[0x15d3fd0]
 // Decompiled from bool __cdecl CAStar64Ship::IsNotBlocked(int a1)
-static bool __cdecl CAStar64Ship::IsNotBlocked(int) {
+bool __cdecl CAStar64Ship::IsNotBlocked(int a1) {
   
   return !CWaterFlags::IsBlockedWater(a1);
 }
@@ -12,7 +12,7 @@ static bool __cdecl CAStar64Ship::IsNotBlocked(int) {
 
 // address=[0x15d4000]
 // Decompiled from int __cdecl CAStar64Ship::MoveCosts(int a1, int a2)
-static int __cdecl CAStar64Ship::MoveCosts(int,int) {
+int __cdecl CAStar64Ship::MoveCosts(int a1, int a2) {
   
   return (4 << (CWaterFlags::WaterFlags(a1) & 0xF) >> (a2 >= 7)) + 16;
 }

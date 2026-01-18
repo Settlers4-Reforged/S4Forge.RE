@@ -4,7 +4,7 @@
 
 // address=[0x2f337e0]
 // Decompiled from CBBObject *__thiscall CBBObject::CBBObject(CBBObject *this, int a2, char a3)
- CBBObject::CBBObject(char const *,bool) {
+ CBBObject::CBBObject(char const * a2, bool a3) {
   
   *(_DWORD *)this = &CBBObject::_vftable_;
   CBBObjectTracer::Enter();
@@ -34,7 +34,7 @@
 
 // address=[0x2f33860]
 // Decompiled from _DWORD *__thiscall CBBObject::CBBObject_0(_DWORD *this, int a2)
- CBBObject::CBBObject(class CBBObject const &) {
+ CBBObject::CBBObject(class CBBObject const & a2) {
   
   int v2; // ecx
 

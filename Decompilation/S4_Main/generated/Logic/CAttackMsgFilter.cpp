@@ -4,7 +4,7 @@
 
 // address=[0x140a760]
 // Decompiled from bool __thiscall CAttackMsgFilter::IsInRadius(Grid **this, int a2, int a3)
-bool  CAttackMsgFilter::IsInRadius(int,int) {
+bool  CAttackMsgFilter::IsInRadius(int a2, int a3) {
   
   return Grid::Distance(this[1], this[2], a2, a3) <= 25;
 }
@@ -12,7 +12,7 @@ bool  CAttackMsgFilter::IsInRadius(int,int) {
 
 // address=[0x140a7b0]
 // Decompiled from char __thiscall CAttackMsgFilter::Activate(CAttackMsgFilter *this, int a2, int a3, int a4)
-bool  CAttackMsgFilter::Activate(int,int,int) {
+bool  CAttackMsgFilter::Activate(int a2, int a3, int a4) {
   
   if ( *(_BYTE *)this )
     return 0;
@@ -63,7 +63,7 @@ bool  CAttackMsgFilter::IsActive(void) {
 
 // address=[0x140aaa0]
 // Decompiled from bool __thiscall CAttackMsgFilter::IsOld(CAttackMsgFilter *this, int a2)
-bool  CAttackMsgFilter::IsOld(int) {
+bool  CAttackMsgFilter::IsOld(int a2) {
   
   return a2 > *((_DWORD *)this + 3);
 }

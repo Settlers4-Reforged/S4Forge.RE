@@ -25,7 +25,7 @@
 
 // address=[0x2f2b5e0]
 // Decompiled from int __thiscall LZHLDecompressor::decompress(_DWORD *this, char *Src, _DWORD *a3, unsigned int a4, _DWORD *a5)
-int  LZHLDecompressor::decompress(unsigned char *,unsigned int *,unsigned char const *,unsigned int *) {
+int  LZHLDecompressor::decompress(unsigned char * Src, unsigned int * a3, unsigned char const * a4, unsigned int * a5) {
   
   int v6; // [esp+4h] [ebp-4B0h]
   char *v7; // [esp+8h] [ebp-4ACh]
@@ -177,7 +177,7 @@ int  LZHLDecompressor::decompress(unsigned char *,unsigned int *,unsigned char c
 
 // address=[0x2f2c4f0]
 // Decompiled from int __thiscall sub_332C4F0(_DWORD *this, unsigned int *a2, unsigned int a3, int a4)
-int  LZHLDecompressor::_get(unsigned char const * &,unsigned char const *,int) {
+int  LZHLDecompressor::_get(unsigned char const * & a2, unsigned char const * a3, int a4) {
   
   int v5; // [esp+0h] [ebp-8h]
 

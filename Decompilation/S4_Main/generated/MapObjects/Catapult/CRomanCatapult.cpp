@@ -4,7 +4,7 @@
 
 // address=[0x14019e0]
 // Decompiled from int __cdecl CRomanCatapult::New(int a1)
-static class CPersistence * __cdecl CRomanCatapult::New(std::istream &) {
+class CPersistence * __cdecl CRomanCatapult::New(std::istream & a1) {
   
   if ( CRomanCatapult::operator new(0xD8u) )
     return CRomanCatapult::CRomanCatapult(a1);
@@ -15,7 +15,7 @@ static class CPersistence * __cdecl CRomanCatapult::New(std::istream &) {
 
 // address=[0x153eb50]
 // Decompiled from unsigned int __cdecl CRomanCatapult::operator new(unsigned int a1)
-static void * __cdecl CRomanCatapult::operator new(unsigned int) {
+void * __cdecl CRomanCatapult::operator new(unsigned int a1) {
   
   return CVehicleMgr::Alloc((CVehicleMgr *)&g_cVehicleMgr, a1);
 }
@@ -23,7 +23,7 @@ static void * __cdecl CRomanCatapult::operator new(unsigned int) {
 
 // address=[0x153eb70]
 // Decompiled from void __cdecl CRomanCatapult::operator delete(void *a1)
-static void __cdecl CRomanCatapult::operator delete(void *) {
+void __cdecl CRomanCatapult::operator delete(void * a1) {
   
   CVehicleMgr::Dealloc((CVehicleMgr *)&g_cVehicleMgr, a1);
 }
@@ -31,7 +31,7 @@ static void __cdecl CRomanCatapult::operator delete(void *) {
 
 // address=[0x153ebb0]
 // Decompiled from _DWORD *__thiscall CRomanCatapult::CRomanCatapult(_DWORD *this, int a2)
- CRomanCatapult::CRomanCatapult(std::istream &) {
+ CRomanCatapult::CRomanCatapult(std::istream & a2) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
@@ -58,7 +58,7 @@ static void __cdecl CRomanCatapult::operator delete(void *) {
 
 // address=[0x153ec70]
 // Decompiled from int __thiscall CRomanCatapult::Store(void *this, struct std::ostream *a2)
-void  CRomanCatapult::Store(std::ostream &) {
+void  CRomanCatapult::Store(std::ostream & a2) {
   
   int v3[2]; // [esp+0h] [ebp-8h] BYREF
 
@@ -90,7 +90,7 @@ unsigned long  CRomanCatapult::ClassID(void)const {
 
 // address=[0x153ecb0]
 // Decompiled from CRomanCatapult *__thiscall CRomanCatapult::CRomanCatapult(  CRomanCatapult *this,  int a2,  int a3,  int a4,  int a5,  int a6,  int a7,  bool a8)
- CRomanCatapult::CRomanCatapult(int,int,int,int,int,int,bool) {
+ CRomanCatapult::CRomanCatapult(int a2, int a3, int a4, int a5, int a6, int a7, bool a8) {
   
   CCatapult::CCatapult(this, a2, a3, a4, a5, a6, a7, a8);
   *(_DWORD *)this = &CRomanCatapult::_vftable_;

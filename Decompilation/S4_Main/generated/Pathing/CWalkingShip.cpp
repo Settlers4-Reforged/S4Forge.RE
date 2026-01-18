@@ -31,7 +31,7 @@ enum T_WALKING_TYPE const  CWalkingShip::GetWalkingType(void) {
 
 // address=[0x15f9890]
 // Decompiled from bool __thiscall CWalkingShip::IsNotBlocked(CWalkingShip *this, int a2)
-bool  CWalkingShip::IsNotBlocked(int) {
+bool  CWalkingShip::IsNotBlocked(int a2) {
   
   return !CWaterFlags::IsBlockedWater(a2);
 }
@@ -39,7 +39,7 @@ bool  CWalkingShip::IsNotBlocked(int) {
 
 // address=[0x15f98d0]
 // Decompiled from bool __thiscall CWalkingShip::IsNotOccupied(CWalkingShip *this, int a2)
-bool  CWalkingShip::IsNotOccupied(int) {
+bool  CWalkingShip::IsNotOccupied(int a2) {
   
   return (CWaterFlags::WaterFlags(a2) & 0x800) == 0;
 }
@@ -47,7 +47,7 @@ bool  CWalkingShip::IsNotOccupied(int) {
 
 // address=[0x15f9910]
 // Decompiled from char __thiscall CWalkingShip::FindPathAStar64(CWalkingShip *this, int a2, int a3, struct CDirCache *a4)
-bool  CWalkingShip::FindPathAStar64(int,int,class CDirCache &) {
+bool  CWalkingShip::FindPathAStar64(int a2, int a3, class CDirCache & a4) {
   
   char Path; // [esp+5h] [ebp-3h]
 
@@ -62,7 +62,7 @@ bool  CWalkingShip::FindPathAStar64(int,int,class CDirCache &) {
 
 // address=[0x15f99b0]
 // Decompiled from int __thiscall CWalkingShip::IdleWalk(CWalkingShip *this, Y16X16 *a2, int a3)
-int  CWalkingShip::IdleWalk(int,int) {
+int  CWalkingShip::IdleWalk(int a2, int a3) {
   
   int v4; // [esp+8h] [ebp-B4h]
   int v5; // [esp+Ch] [ebp-B0h]

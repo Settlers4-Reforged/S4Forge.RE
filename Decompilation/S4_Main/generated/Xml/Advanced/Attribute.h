@@ -1,39 +1,41 @@
 #ifndef ADVXMLPARSER_ATTRIBUTE_H
 #define ADVXMLPARSER_ATTRIBUTE_H
 
+#include "defines.h"
+
 namespace AdvXMLParser {
 
 class Attribute {
 public:
     // address=[0x2f148f0]
-     Attribute(class AdvXMLParser::NodeContainer &,std::string const &);
+     Attribute(class AdvXMLParser::NodeContainer & a2, std::string const & a3);
 
     // address=[0x2f14920]
-    class AdvXMLParser::Attribute *  Clone(class AdvXMLParser::NodeContainer &)const;
+    class AdvXMLParser::Attribute *  Clone(class AdvXMLParser::NodeContainer & a2)const;
 
     // address=[0x2f149f0]
-    virtual std::string  GetData(void)const;
+    virtual std::string  GetData(void a2)const;
 
     // address=[0x2f14a30]
-    virtual std::string  GetValue(void)const;
+    virtual std::string  GetValue(void a2)const;
 
     // address=[0x2f14b70]
-    virtual bool  IsKindOf(int)const;
+    virtual bool  IsKindOf(int a2)const;
 
     // address=[0x2f14ba0]
-    virtual class AdvXMLParser::Node *  CloneNode(class AdvXMLParser::NodeContainer &)const;
+    virtual class AdvXMLParser::Node *  CloneNode(class AdvXMLParser::NodeContainer & a2)const;
 
     // address=[0x2f1cce0]
     virtual  ~Attribute(void);
 
     // address=[0x2f23650]
-    static class AdvXMLParser::Attribute * __cdecl Parse(class AdvXMLParser::Parser &,class AdvXMLParser::Element &);
+    static class AdvXMLParser::Attribute * __cdecl Parse(class AdvXMLParser::Parser & a1, class AdvXMLParser::Element & a2);
 
     // address=[0x2f23790]
-    bool  ParseAttValue(class AdvXMLParser::Parser &);
+    bool  ParseAttValue(class AdvXMLParser::Parser & a2);
 
     // address=[0x2f2cf30]
-    virtual void  GenerateXML(class AdvXMLParser::GenerateContext &)const;
+    virtual void  GenerateXML(class AdvXMLParser::GenerateContext & a2)const;
 
     // address=[0x46856a4]
     static class AdvXMLParser::Attribute null;

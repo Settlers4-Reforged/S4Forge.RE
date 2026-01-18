@@ -4,7 +4,7 @@
 
 // address=[0x1539190]
 // Decompiled from CCart::CFoundationCardCargo *__thiscall CCart::CFoundationCardCargo::CFoundationCardCargo(  CCart::CFoundationCardCargo *this,  const struct CCart::CFoundationCardCargo *a2)
- CCart::CFoundationCardCargo::CFoundationCardCargo(class CCart::CFoundationCardCargo const &) {
+ CCart::CFoundationCardCargo::CFoundationCardCargo(class CCart::CFoundationCardCargo const & a2) {
   
   *(_DWORD *)this = *(_DWORD *)a2;
   *((_DWORD *)this + 1) = *((_DWORD *)a2 + 1);
@@ -17,7 +17,7 @@
 
 // address=[0x15391f0]
 // Decompiled from CCart::CFoundationCardCargo *__thiscall CCart::CFoundationCardCargo::CFoundationCardCargo(  CCart::CFoundationCardCargo *this,  int a2,  int a3,  int a4,  int a5)
- CCart::CFoundationCardCargo::CFoundationCardCargo(int,int,int,int) {
+ CCart::CFoundationCardCargo::CFoundationCardCargo(int a2, int a3, int a4, int a5) {
   
   *(_DWORD *)this = a3;
   *((_DWORD *)this + 1) = a2;

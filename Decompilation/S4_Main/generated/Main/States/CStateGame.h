@@ -1,6 +1,8 @@
 #ifndef CSTATEGAME_H
 #define CSTATEGAME_H
 
+#include "defines.h"
+
 class CStateGame : public CGameState {
 public:
     // address=[0x1303890]
@@ -16,13 +18,13 @@ public:
     bool  IsMessage(void);
 
     // address=[0x14607a0]
-    class CEvn_Logic  PopMessage(void);
+    class CEvn_Logic  PopMessage(void a2);
 
     // address=[0x1486df0]
     class CGameData &  GameData(void);
 
     // address=[0x14a52f0]
-    static class CGameState * __cdecl DynamicCreateFunc(void *);
+    static class CGameState * __cdecl DynamicCreateFunc(void * a1);
 
     // address=[0x14a5370]
     void  UpdateToGuiInfoStruct(void);
@@ -34,13 +36,13 @@ public:
     void  UpdateMusicSettings(void);
 
     // address=[0x14a5d70]
-    bool  IsInMinimap(struct tagPOINT *,struct tagPOINT *);
+    bool  IsInMinimap(struct tagPOINT * a2, struct tagPOINT * a3);
 
     // address=[0x14a5e00]
     bool  RenderFrame(void);
 
     // address=[0x14a5e50]
-    void  PerformCommand(std::string);
+    void  PerformCommand(std::string a1);
 
     // address=[0x14a5f80]
     void  SetupGUI(void);
@@ -49,7 +51,7 @@ public:
     void  ExitGUI(void);
 
     // address=[0x14a62a0]
-    bool  InitGuiEngine(char *);
+    bool  InitGuiEngine(char * a2);
 
     // address=[0x14a6430]
     void  EndGame(void);
@@ -58,7 +60,7 @@ public:
     bool  SwitchPause(void);
 
     // address=[0x14a69e0]
-    void  SendLogicMessage(unsigned int,unsigned int,long,unsigned int,unsigned int,unsigned int);
+    void  SendLogicMessage(unsigned int a2, unsigned int a3, long a4, unsigned int a5, unsigned int a6, unsigned int a7);
 
     // address=[0x14a6b40]
     bool  IsCursorChangeAllowed(void);
@@ -82,22 +84,22 @@ public:
     void  NotifyGfxEngine(void);
 
     // address=[0x14a88b0]
-    bool  EnableOrDisableDebugString(bool);
+    bool  EnableOrDisableDebugString(bool a2);
 
     // address=[0x14a8900]
     bool  CanSave(void);
 
     // address=[0x14a8980]
-    void  SaveGame(enum SaveType);
+    void  SaveGame(enum SaveType a2);
 
     // address=[0x14ac920]
-    void  ZoomIn(int);
+    void  ZoomIn(int a2);
 
     // address=[0x14ac980]
-    void  ZoomOut(int);
+    void  ZoomOut(int a2);
 
     // address=[0x14ac9e0]
-    void  UpdateTriangleSizePreservingWorldPosition(int);
+    void  UpdateTriangleSizePreservingWorldPosition(int a2);
 
     // address=[0x14aca40]
     void  UpdateZoomFactor(void);
@@ -118,16 +120,16 @@ public:
     void  UpdateClientSize(void);
 
     // address=[0x14aceb0]
-    virtual bool  OnEvent(class CEvn_Event &);
+    virtual bool  OnEvent(class CEvn_Event & a2);
 
     // address=[0x14b1950]
-    void  GetCenterWorldCoordinate(int &,int &);
+    void  GetCenterWorldCoordinate(int & a2, int & a3);
 
     // address=[0x14b4890]
-    void  ScrollHorizontal(bool);
+    void  ScrollHorizontal(bool a2);
 
     // address=[0x14b48e0]
-    void  ScrollVertical(bool);
+    void  ScrollVertical(bool a2);
 
 private:
     // address=[0x14a8a30]

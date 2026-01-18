@@ -1,6 +1,8 @@
 #ifndef CSMALLTEMPLEINFO_H
 #define CSMALLTEMPLEINFO_H
 
+#include "defines.h"
+
 class CSmallTempleInfo : public CBuildingInfo {
 public:
     // address=[0x1454890]

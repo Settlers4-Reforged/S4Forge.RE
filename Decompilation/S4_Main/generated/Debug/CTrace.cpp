@@ -4,7 +4,7 @@
 
 // address=[0x14d3520]
 // Decompiled from CTrace *__thiscall CTrace::CTrace(CTrace *this, const struct boost::exception_detail::clone_base *a2)
- CTrace::CTrace(char const *) {
+ CTrace::CTrace(char const * a2) {
   
   *(_DWORD *)this = &CTrace::_vftable_;
   return this;
@@ -13,7 +13,7 @@
 
 // address=[0x14d3540]
 // Decompiled from CTrace *__thiscall CTrace::CTrace(CTrace *this, const struct boost::exception_detail::clone_base *a2)
- CTrace::CTrace(class CTrace const &) {
+ CTrace::CTrace(class CTrace const & a2) {
   
   *(_DWORD *)this = &CTrace::_vftable_;
   return this;
@@ -34,7 +34,7 @@
 
 // address=[0x14d3580]
 // Decompiled from _DWORD *__thiscall CTrace::operator_(_DWORD *this, int a2)
-class CTrace &  CTrace::operator=(class CTrace const &) {
+class CTrace &  CTrace::operator=(class CTrace const & a2) {
   
   this[2] = *(_DWORD *)(a2 + 8);
   return this;
@@ -43,7 +43,7 @@ class CTrace &  CTrace::operator=(class CTrace const &) {
 
 // address=[0x14d35a0]
 // Decompiled from void CTrace::Print(char *Format, ...)
-static void __cdecl CTrace::Print(char const *,...) {
+void __cdecl CTrace::Print(char const * Format, ... a2) {
   
   char Source[2048]; // [esp+4h] [ebp-804h] BYREF
   va_list va; // [esp+814h] [ebp+Ch] BYREF
@@ -57,7 +57,7 @@ static void __cdecl CTrace::Print(char const *,...) {
 
 // address=[0x14d3610]
 // Decompiled from void CTrace::TextEinfuegen(char *Format, ...)
-static void __cdecl CTrace::TextEinfuegen(char const *,...) {
+void __cdecl CTrace::TextEinfuegen(char const * Format, ... a2) {
   
   char Buffer[2048]; // [esp+4h] [ebp-804h] BYREF
   va_list va; // [esp+814h] [ebp+Ch] BYREF
@@ -71,7 +71,7 @@ static void __cdecl CTrace::TextEinfuegen(char const *,...) {
 
 // address=[0x14d3680]
 // Decompiled from _DWORD *__thiscall CTrace::TraceInitObject(_DWORD *this, int a2)
-void  CTrace::TraceInitObject(char const *) {
+void  CTrace::TraceInitObject(char const * a2) {
   
   _DWORD *result; // eax
 

@@ -13,7 +13,7 @@
 
 // address=[0x2f56810]
 // Decompiled from _DWORD *__thiscall CProductionMakroData::CProductionMakroData(  _DWORD *this,  CDynList **a2,  int a3,  int a4,  int a5,  int a6)
- CProductionMakroData::CProductionMakroData(class CSchedule *,int,enum BUILDING_TYPES,struct SBuildId *,struct SBuildId *) {
+ CProductionMakroData::CProductionMakroData(class CSchedule * a2, int a3, enum BUILDING_TYPES a4, struct SBuildId * a5, struct SBuildId * a6) {
   
   struct CDynListEntry *ProductivityControll; // [esp+8h] [ebp-20h]
   int v8; // [esp+Ch] [ebp-1Ch]

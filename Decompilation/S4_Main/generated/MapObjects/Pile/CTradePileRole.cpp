@@ -4,7 +4,7 @@
 
 // address=[0x14023e0]
 // Decompiled from int __cdecl CTradePileRole::New(int a1)
-static class CPersistence * __cdecl CTradePileRole::New(std::istream &) {
+class CPersistence * __cdecl CTradePileRole::New(std::istream & a1) {
   
   if ( operator new(0x14u) )
     return CTradePileRole::CTradePileRole(a1);
@@ -15,7 +15,7 @@ static class CPersistence * __cdecl CTradePileRole::New(std::istream &) {
 
 // address=[0x1560480]
 // Decompiled from int __cdecl CTradePileRole::Load(int a1)
-static class CTradePileRole * __cdecl CTradePileRole::Load(std::istream &) {
+class CTradePileRole * __cdecl CTradePileRole::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
@@ -27,7 +27,7 @@ static class CTradePileRole * __cdecl CTradePileRole::Load(std::istream &) {
 
 // address=[0x1561a70]
 // Decompiled from char __thiscall CTradePileRole::Increase(CTradePileRole *this, struct CPile *a2, int a3)
-void  CTradePileRole::Increase(class CPile *,int) {
+void  CTradePileRole::Increase(class CPile * a2, int a3) {
   
   int BuildingId; // eax
   CBuilding *v4; // eax
@@ -71,7 +71,7 @@ void  CTradePileRole::Increase(class CPile *,int) {
 
 // address=[0x1561b70]
 // Decompiled from CPile *__thiscall CTradePileRole::Decrease(CTradePileRole *this, struct CPile *a2, int a3)
-void  CTradePileRole::Decrease(class CPile *,int) {
+void  CTradePileRole::Decrease(class CPile * a2, int a3) {
   
   int BuildingId; // eax
   int v4; // eax
@@ -115,7 +115,7 @@ void  CTradePileRole::Decrease(class CPile *,int) {
 
 // address=[0x1561c90]
 // Decompiled from char __thiscall CTradePileRole::Empty(CTradePileRole *this, struct CPile *a2)
-void  CTradePileRole::Empty(class CPile *) {
+void  CTradePileRole::Empty(class CPile * a2) {
   
   int ExpectedAmount; // eax
   int v3; // eax
@@ -155,7 +155,7 @@ void  CTradePileRole::Empty(class CPile *) {
 
 // address=[0x1561d60]
 // Decompiled from CPile *__thiscall CTradePileRole::Init(CTradePileRole *this, struct CPile *a2)
-void  CTradePileRole::Init(class CPile *) {
+void  CTradePileRole::Init(class CPile * a2) {
   
   int v2; // eax
   CPile *result; // eax
@@ -177,7 +177,7 @@ void  CTradePileRole::Init(class CPile *) {
 
 // address=[0x1561de0]
 // Decompiled from int __thiscall CTradePileRole::LogicUpdate(CTradePileRole *this, struct CPile *a2)
-void  CTradePileRole::LogicUpdate(class CPile *) {
+void  CTradePileRole::LogicUpdate(class CPile * a2) {
   
   int v2; // eax
   int BuildingId; // eax
@@ -232,7 +232,7 @@ void  CTradePileRole::LogicUpdate(class CPile *) {
 
 // address=[0x1561f40]
 // Decompiled from char __thiscall CTradePileRole::Occupied(CTradePileRole *this, struct CPile *a2, int a3)
-void  CTradePileRole::Occupied(class CPile *,int) {
+void  CTradePileRole::Occupied(class CPile * a2, int a3) {
   
   int TradeRoleType; // eax
   int v4; // esi
@@ -259,7 +259,7 @@ void  CTradePileRole::Occupied(class CPile *,int) {
 
 // address=[0x1561fc0]
 // Decompiled from char __thiscall CTradePileRole::SetFree(CTradePileRole *this, struct CPile *a2, int a3)
-bool  CTradePileRole::SetFree(class CPile *,int) {
+bool  CTradePileRole::SetFree(class CPile * a2, int a3) {
   
   int v3; // esi
   int v4; // eax
@@ -287,7 +287,7 @@ bool  CTradePileRole::SetFree(class CPile *,int) {
 
 // address=[0x1562050]
 // Decompiled from char __thiscall CTradePileRole::NotifyChangeEcoSector(CTradePileRole *this, struct CPile *a2, int a3, int a4)
-void  CTradePileRole::NotifyChangeEcoSector(class CPile *,int,int) {
+void  CTradePileRole::NotifyChangeEcoSector(class CPile * a2, int a3, int a4) {
   
   int BuildingId; // eax
   int v5; // eax
@@ -308,7 +308,7 @@ void  CTradePileRole::NotifyChangeEcoSector(class CPile *,int,int) {
 
 // address=[0x15620c0]
 // Decompiled from int __thiscall CTradePileRole::SubjectDie(CTradePileRole *this, struct CPile *a2, int a3)
-void  CTradePileRole::SubjectDie(class CPile *,int) {
+void  CTradePileRole::SubjectDie(class CPile * a2, int a3) {
   
   int v3; // eax
   int v4; // eax
@@ -349,7 +349,7 @@ void  CTradePileRole::SubjectDie(class CPile *,int) {
 
 // address=[0x15621c0]
 // Decompiled from char __thiscall CTradePileRole::SubjectStopped(CTradePileRole *this, struct CPile *a2)
-void  CTradePileRole::SubjectStopped(class CPile *) {
+void  CTradePileRole::SubjectStopped(class CPile * a2) {
   
   int TradeRoleType; // eax
   int v3; // eax
@@ -373,7 +373,7 @@ void  CTradePileRole::SubjectStopped(class CPile *) {
 
 // address=[0x1562230]
 // Decompiled from int __thiscall CTradePileRole::SubjectStarted(CTradePileRole *this, struct CPile *a2)
-void  CTradePileRole::SubjectStarted(class CPile *) {
+void  CTradePileRole::SubjectStarted(class CPile * a2) {
   
   int v2; // eax
 
@@ -389,7 +389,7 @@ void  CTradePileRole::SubjectStarted(class CPile *) {
 
 // address=[0x1562290]
 // Decompiled from bool __thiscall CTradePileRole::ChangeGoodTypeUnforseen(CTradePileRole *this, struct CPile *a2, int a3)
-bool  CTradePileRole::ChangeGoodTypeUnforseen(class CPile *,int) {
+bool  CTradePileRole::ChangeGoodTypeUnforseen(class CPile * a2, int a3) {
   
   int BuildingId; // eax
   int v4; // eax
@@ -421,7 +421,7 @@ bool  CTradePileRole::ChangeGoodTypeUnforseen(class CPile *,int) {
 
 // address=[0x1562340]
 // Decompiled from char __thiscall CTradePileRole::SetTradeRoleType(int this, int a2)
-void  CTradePileRole::SetTradeRoleType(enum CTradePileRole::TRADEPILE_ROLE) {
+void  CTradePileRole::SetTradeRoleType(enum CTradePileRole::TRADEPILE_ROLE a2) {
   
   int v2; // eax
   int v3; // esi
@@ -474,7 +474,7 @@ int  CTradePileRole::GetTradeRoleType(void) {
 
 // address=[0x1562460]
 // Decompiled from void __thiscall CTradePileRole::SetExpectedAmount(CPaneContainer *this, struct CPaneDivider *a2)
-void  CTradePileRole::SetExpectedAmount(int) {
+void  CTradePileRole::SetExpectedAmount(int a2) {
   
   *((_DWORD *)this + 3) = a2;
 }
@@ -490,7 +490,7 @@ int  CTradePileRole::GetExpectedAmount(void) {
 
 // address=[0x15624a0]
 // Decompiled from char __thiscall CTradePileRole::IncAmoutLeaving(CTradePileRole *this, struct CPile *a2)
-void  CTradePileRole::IncAmoutLeaving(class CPile *) {
+void  CTradePileRole::IncAmoutLeaving(class CPile * a2) {
   
   int TradeRoleType; // eax
   int v3; // esi
@@ -513,7 +513,7 @@ void  CTradePileRole::IncAmoutLeaving(class CPile *) {
 
 // address=[0x1562500]
 // Decompiled from char __thiscall CTradePileRole::DecAmountLeaving(CTradePileRole *this, struct CPile *a2)
-void  CTradePileRole::DecAmountLeaving(class CPile *) {
+void  CTradePileRole::DecAmountLeaving(class CPile * a2) {
   
   int TradeRoleType; // eax
   int v3; // esi
@@ -536,7 +536,7 @@ void  CTradePileRole::DecAmountLeaving(class CPile *) {
 
 // address=[0x1562560]
 // Decompiled from CTradePileRole *__thiscall CTradePileRole::IncAmountComing(CTradePileRole *this, struct CPile *a2)
-void  CTradePileRole::IncAmountComing(class CPile *) {
+void  CTradePileRole::IncAmountComing(class CPile * a2) {
   
   CTradePileRole *result; // eax
 
@@ -551,7 +551,7 @@ void  CTradePileRole::IncAmountComing(class CPile *) {
 
 // address=[0x1562590]
 // Decompiled from int __thiscall CTradePileRole::DecAmountComing(CTradePileRole *this, struct CPile *a2)
-void  CTradePileRole::DecAmountComing(class CPile *) {
+void  CTradePileRole::DecAmountComing(class CPile * a2) {
   
   int v2; // esi
   int result; // eax
@@ -568,7 +568,7 @@ void  CTradePileRole::DecAmountComing(class CPile *) {
 
 // address=[0x15625e0]
 // Decompiled from int __thiscall CTradePileRole::ReservesGood(_DWORD *this, int a2, int a3, int a4)
-int  CTradePileRole::ReservesGood(int,enum PILE_TYPES,class CPile *) {
+int  CTradePileRole::ReservesGood(int a2, enum PILE_TYPES a3, class CPile * a4) {
   
   int v5; // eax
   int v6; // [esp+0h] [ebp-8h]
@@ -620,7 +620,7 @@ int  CTradePileRole::GetReserveAmount(void) {
 
 // address=[0x1562710]
 // Decompiled from _DWORD *__thiscall CTradePileRole::CTradePileRole(_DWORD *this, int a2)
- CTradePileRole::CTradePileRole(std::istream &) {
+ CTradePileRole::CTradePileRole(std::istream & a2) {
   
   int v3; // [esp+4h] [ebp-1Ch] BYREF
   int pExceptionObject; // [esp+8h] [ebp-18h] BYREF
@@ -656,7 +656,7 @@ int  CTradePileRole::GetReserveAmount(void) {
 
 // address=[0x1562810]
 // Decompiled from int __thiscall CTradePileRole::Store(_DWORD *this, struct std::ostream *a2)
-void  CTradePileRole::Store(std::ostream &) {
+void  CTradePileRole::Store(std::ostream & a2) {
   
   int v3; // [esp+0h] [ebp-Ch] BYREF
   int v4; // [esp+4h] [ebp-8h] BYREF

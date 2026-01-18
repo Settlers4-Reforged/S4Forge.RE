@@ -4,7 +4,7 @@
 
 // address=[0x14c6ac0]
 // Decompiled from CStateMDCampaignRoman *__cdecl CStateMDCampaignRoman::DynamicCreateFunc(void *a1)
-static class CGameState * __cdecl CStateMDCampaignRoman::DynamicCreateFunc(void *) {
+class CGameState * __cdecl CStateMDCampaignRoman::DynamicCreateFunc(void * a1) {
   
   CStateMDCampaignRoman *C; // [esp+Ch] [ebp-10h]
 
@@ -80,7 +80,7 @@ bool  CStateMDCampaignRoman::Perform(void) {
 
 // address=[0x14c6d40]
 // Decompiled from char __thiscall CStateMDCampaignRoman::OnEvent(CStateMDCampaignRoman *this, struct CEvn_Event *a2)
-bool  CStateMDCampaignRoman::OnEvent(class CEvn_Event &) {
+bool  CStateMDCampaignRoman::OnEvent(class CEvn_Event & a2) {
   
   CEvn_Event *v3; // [esp+Ch] [ebp-38h]
   int event; // [esp+18h] [ebp-2Ch]

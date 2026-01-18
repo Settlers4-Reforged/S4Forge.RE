@@ -1,13 +1,15 @@
 #ifndef CGAMETYPE_H
 #define CGAMETYPE_H
 
+#include "defines.h"
+
 class CGameType {
 public:
     // address=[0x1361450]
     bool  IsLadderGame(void)const;
 
     // address=[0x13a4100]
-    void  ChangeLocalSlot(signed char);
+    void  ChangeLocalSlot(signed char a2);
 
     // address=[0x13a4140]
     bool const  IsClanGame(void);
@@ -16,7 +18,7 @@ public:
     bool const  IsSaveGame(void)const;
 
     // address=[0x13a4180]
-    bool  IsSlotChangable(int,bool *);
+    bool  IsSlotChangable(int a2, bool * a3);
 
     // address=[0x13a8490]
     bool  IsAddOnMap(void);
@@ -37,7 +39,7 @@ public:
     unsigned int const  GetMultiPlayerGameID(void);
 
     // address=[0x1486ef0]
-    std::wstring &  GetRealPlayerName(int);
+    std::wstring &  GetRealPlayerName(int a2);
 
     // address=[0x1486fe0]
     bool  IsBlueByteAddOnMap(void);
@@ -58,28 +60,28 @@ public:
     bool const  IsMultiplayerGame(void);
 
     // address=[0x14873d0]
-    void  SetBlueByteMCD2Map(bool);
+    void  SetBlueByteMCD2Map(bool a2);
 
     // address=[0x14873f0]
-    void  SetClanGame(bool);
+    void  SetClanGame(bool a2);
 
     // address=[0x1487410]
-    void  SetHost(bool);
+    void  SetHost(bool a2);
 
     // address=[0x1487430]
-    void  SetLocalSlot(signed char);
+    void  SetLocalSlot(signed char a2);
 
     // address=[0x14874d0]
-    void  SetMCD2TextureSet(bool);
+    void  SetMCD2TextureSet(bool a2);
 
     // address=[0x14874f0]
-    void  SetMPSavegameID(int);
+    void  SetMPSavegameID(int a2);
 
     // address=[0x1487510]
-    void  SetMultiPlayerGameID(unsigned int);
+    void  SetMultiPlayerGameID(unsigned int a2);
 
     // address=[0x1487530]
-    void  SetPlayerName(int,std::wstring &);
+    void  SetPlayerName(int a1, std::wstring & a2);
 
     // address=[0x1490f90]
      CGameType(void);
@@ -88,13 +90,13 @@ public:
      ~CGameType(void);
 
     // address=[0x1491490]
-    bool  LoadMapData(std::wstring,bool,unsigned int,bool,bool,int,int,int,bool,bool);
+    bool  LoadMapData(std::wstring a2, bool a3, unsigned int a4, bool a5, bool a6, int a7, int a8, int a9, bool a10, bool a11);
 
     // address=[0x1492f70]
-    bool  IsMapAvailable(std::wstring &,int);
+    bool  IsMapAvailable(std::wstring & a2, int a3);
 
     // address=[0x1493090]
-    void  SetMapCRC(std::wstring &);
+    void  SetMapCRC(std::wstring & a2);
 
     // address=[0x1493190]
     int  HumanPlayers(void);
@@ -103,16 +105,16 @@ public:
     void  Init(void);
 
     // address=[0x1493620]
-    std::wstring  ConvertMapNameToMPGameName(void);
+    std::wstring  ConvertMapNameToMPGameName(void a2);
 
     // address=[0x1493660]
-    static std::wstring __cdecl ConvertMapNameToMPGameName(std::wstring &);
+    static std::wstring __cdecl ConvertMapNameToMPGameName(std::wstring & a1);
 
     // address=[0x14936f0]
-    std::wstring  GetPlayerName(int);
+    std::wstring  GetPlayerName(int a2);
 
     // address=[0x1493810]
-    void  SetPlayerClanShortcut(int,std::wstring &);
+    void  SetPlayerClanShortcut(int a2, std::wstring & a3);
 
     // address=[0x1493870]
     int const  GetNumberHumanPlayers(void);
@@ -127,17 +129,17 @@ public:
     int const  GetMPSavegameID(void);
 
     // address=[0x15c4ae0]
-    std::wstring  GetPlayerClanShortcut(int);
+    std::wstring  GetPlayerClanShortcut(int a2);
 
     // address=[0x15c4dd0]
-    void  SetLadderGame(bool);
+    void  SetLadderGame(bool a2);
 
     // address=[0x15c4e90]
-    void  SetWebGame(bool);
+    void  SetWebGame(bool a2);
 
 private:
     // address=[0x14938c0]
-    void  PatchMaps(bool);
+    void  PatchMaps(bool a2);
 
 };
 

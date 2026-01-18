@@ -1,6 +1,8 @@
 #ifndef CSTATICCONFIGVAR_H
 #define CSTATICCONFIGVAR_H
 
+#include "defines.h"
+
 class CStaticConfigVar : public CConfigVar {
 public:
     // address=[0x12fca40]
@@ -8,7 +10,7 @@ public:
 
 protected:
     // address=[0x2eeeea0]
-     CStaticConfigVar(char const *,char const *,enum T_CFGVAR_TYPE,int);
+     CStaticConfigVar(char const * a2, char const * a3, enum T_CFGVAR_TYPE a4, int a5);
 
 };
 

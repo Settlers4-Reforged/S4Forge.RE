@@ -4,7 +4,7 @@
 
 // address=[0x2f56770]
 // Decompiled from CResourceFilter *__thiscall CResourceFilter::CResourceFilter(CResourceFilter *this, int a2, int a3, int a4)
- CResourceFilter::CResourceFilter(int,int,int) {
+ CResourceFilter::CResourceFilter(int a2, int a3, int a4) {
   
   IFilterEntry::IFilterEntry(this);
   *(_DWORD *)this = &CResourceFilter::_vftable_;

@@ -4,7 +4,7 @@
 
 // address=[0x1314f30]
 // Decompiled from bool __thiscall CPlayerIterator::Init(CPlayerIterator *this, int a2)
-bool  CPlayerIterator::Init(int) {
+bool  CPlayerIterator::Init(int a2) {
   
   int v3; // [esp+4h] [ebp-14h]
   int v4; // [esp+8h] [ebp-10h]

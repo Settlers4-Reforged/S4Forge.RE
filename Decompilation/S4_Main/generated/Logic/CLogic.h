@@ -1,22 +1,24 @@
 #ifndef CLOGIC_H
 #define CLOGIC_H
 
+#include "defines.h"
+
 class CLogic : public CBBObject {
 public:
     // address=[0x141d890]
     class IEffects &  Effects(void);
 
     // address=[0x14609a0]
-    void  SetFillDialogInfos(void (__cdecl*)(class CInfoExchange *,bool,bool),class CInfoExchange *,bool);
+    void  SetFillDialogInfos(void (__cdecl*)(class CInfoExchange *,bool,bool) a2, class CInfoExchange * a3, bool a4);
 
     // address=[0x14609e0]
-    void  SetFillSideBarInfos(void (__cdecl*)(class CInfoExchange *,bool,int),class CInfoExchange *,int);
+    void  SetFillSideBarInfos(void (__cdecl*)(class CInfoExchange *,bool,int) a2, class CInfoExchange * a3, int a4);
 
     // address=[0x1460a50]
-    void  SetLocalGlobalSwitch(bool);
+    void  SetLocalGlobalSwitch(bool a2);
 
     // address=[0x1460a70]
-    void  SwitchExtraInfoMenu(bool);
+    void  SwitchExtraInfoMenu(bool a2);
 
     // address=[0x1469c90]
      CLogic(void);
@@ -25,7 +27,7 @@ public:
     virtual  ~CLogic(void);
 
     // address=[0x1469e80]
-    void  PostLoadMap(class CGameType &);
+    void  PostLoadMap(class CGameType & a2);
 
     // address=[0x1469f30]
     void  LogicUpdate(void);

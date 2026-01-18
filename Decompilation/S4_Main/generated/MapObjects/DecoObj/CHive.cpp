@@ -4,7 +4,7 @@
 
 // address=[0x15488d0]
 // Decompiled from CHive *__thiscall CHive::CHive(CHive *this, int a2, int a3, int a4, int a5, int a6)
- CHive::CHive(int,int,int,int,int) {
+ CHive::CHive(int a2, int a3, int a4, int a5, int a6) {
   
   IDecoObject::IDecoObject(this, a2, a3, a4, a5, a6 != 0);
   *(_DWORD *)this = &CHive::_vftable_;
@@ -41,7 +41,7 @@
 
 // address=[0x1548a60]
 // Decompiled from CHive *__thiscall CHive::CHive(CHive *this, const struct CHive *a2, int a3, int a4, int a5)
- CHive::CHive(class CHive const &,int,int,int) {
+ CHive::CHive(class CHive const & a2, int a3, int a4, int a5) {
   
   IDecoObject::IDecoObject(this, a2, a3, a4, a5);
   *(_DWORD *)this = &CHive::_vftable_;
@@ -204,7 +204,7 @@ struct SGfxObjectInfo *  CHive::GetGfxInfos(void) {
 
 // address=[0x1548f50]
 // Decompiled from int __thiscall CHive::Decrease(CHive *this, int a2)
-void  CHive::Decrease(int) {
+void  CHive::Decrease(int a2) {
   
   int result; // eax
 
@@ -241,7 +241,7 @@ void  CHive::Decrease(int) {
 
 // address=[0x1549060]
 // Decompiled from int __thiscall CHive::Increase(CHive *this, int a2)
-int  CHive::Increase(int) {
+int  CHive::Increase(int a2) {
   
   return 1;
 }
@@ -249,7 +249,7 @@ int  CHive::Increase(int) {
 
 // address=[0x1549080]
 // Decompiled from unsigned int __cdecl CHive::operator new(unsigned int a1)
-static void * __cdecl CHive::operator new(unsigned int) {
+void * __cdecl CHive::operator new(unsigned int a1) {
   
   return CDecoObjMgr::Alloc((CDecoObjMgr *)&g_cDecoObjMgr, a1);
 }
@@ -257,7 +257,7 @@ static void * __cdecl CHive::operator new(unsigned int) {
 
 // address=[0x15490a0]
 // Decompiled from void __cdecl CHive::operator delete(void *a1)
-static void __cdecl CHive::operator delete(void *) {
+void __cdecl CHive::operator delete(void * a1) {
   
   CDecoObjMgr::Dealloc((CDecoObjMgr *)&g_cDecoObjMgr, a1);
 }
@@ -302,7 +302,7 @@ bool  CHive::IsFlowerInSurrounding(void) {
 
 // address=[0x15491c0]
 // Decompiled from _DWORD *__thiscall CHive::CHive(_DWORD *this, int a2)
- CHive::CHive(std::istream &) {
+ CHive::CHive(std::istream & a2) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
@@ -333,7 +333,7 @@ bool  CHive::IsFlowerInSurrounding(void) {
 
 // address=[0x15492d0]
 // Decompiled from int __thiscall CHive::Store(int *this, struct std::ostream *a2)
-void  CHive::Store(std::ostream &) {
+void  CHive::Store(std::ostream & a2) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
   int *v4; // [esp+4h] [ebp-4h]

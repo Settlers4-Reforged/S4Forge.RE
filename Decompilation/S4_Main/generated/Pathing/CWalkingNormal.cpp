@@ -4,7 +4,7 @@
 
 // address=[0x15f9070]
 // Decompiled from CWalkingNormal *__thiscall CWalkingNormal::CWalkingNormal(CWalkingNormal *this, int a2)
- CWalkingNormal::CWalkingNormal(int) {
+ CWalkingNormal::CWalkingNormal(int a2) {
   
   CWalkingBase::CWalkingBase(this, 0, a2);
   *(_DWORD *)this = &CWalkingNormal::_vftable_;

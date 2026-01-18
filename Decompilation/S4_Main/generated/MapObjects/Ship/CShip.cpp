@@ -129,7 +129,7 @@ struct SGfxObjectInfo *  CShip::GetGfxInfos(void) {
 
 // address=[0x159d7c0]
 // Decompiled from int __cdecl CShip::FindBoardingLocation(int a1, int a2, void *a3)
-static int __cdecl CShip::FindBoardingLocation(class std::vector<unsigned short,class std::allocator<unsigned short> > const &,int,struct SBoardingInfo &) {
+int __cdecl CShip::FindBoardingLocation(class std::vector<unsigned short,class std::allocator<unsigned short> > const & a1, int a2, struct SBoardingInfo & a3) {
   
   struct IEntity *v3; // eax
   int v4; // eax
@@ -194,7 +194,7 @@ static int __cdecl CShip::FindBoardingLocation(class std::vector<unsigned short,
 
 // address=[0x159d950]
 // Decompiled from int __cdecl CShip::FindBoardingLocation(int a1, int a2, int *a3)
-static int __cdecl CShip::FindBoardingLocation(int,int,struct SBoardingInfo &) {
+int __cdecl CShip::FindBoardingLocation(int a1, int a2, struct SBoardingInfo & a3) {
   
   Y16X16 *v3; // eax
   int v4; // eax
@@ -295,7 +295,7 @@ void  CShip::Unload(void) {
 
 // address=[0x159dbb0]
 // Decompiled from CShip *__thiscall CShip::CShip(CShip *this, int a2, int a3, int a4, int a5, WORD a6, unsigned int a7, bool a8)
- CShip::CShip(int,int,int,int,int,int,bool) {
+ CShip::CShip(int a2, int a3, int a4, int a5, int a6, int a7, bool a8) {
   
   int v8; // eax
   int v10; // [esp-8h] [ebp-1Ch]
@@ -326,7 +326,7 @@ void  CShip::Unload(void) {
 
 // address=[0x159dca0]
 // Decompiled from _DWORD *__thiscall CShip::CShip(_DWORD *this, int a2)
- CShip::CShip(std::istream &) {
+ CShip::CShip(std::istream & a2) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
@@ -353,7 +353,7 @@ void  CShip::Unload(void) {
 
 // address=[0x159dd60]
 // Decompiled from int __thiscall CShip::Store(int *this, struct std::ostream *a2)
-void  CShip::Store(std::ostream &) {
+void  CShip::Store(std::ostream & a2) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
   int *v4; // [esp+4h] [ebp-4h]
@@ -418,7 +418,7 @@ LABEL_5:
 
 // address=[0x159df50]
 // Decompiled from char __thiscall CShip::WalkDir(CShip *this, char a2)
-void  CShip::WalkDir(int) {
+void  CShip::WalkDir(int a2) {
   
   int v2; // esi
   CWalking *v3; // eax
@@ -469,7 +469,7 @@ void  CShip::WalkDir(int) {
 
 // address=[0x159e070]
 // Decompiled from int __thiscall CShip::PlaceVehicle(CShip *this, int a2)
-void  CShip::PlaceVehicle(int) {
+void  CShip::PlaceVehicle(int a2) {
   
   __int16 v3; // [esp+0h] [ebp-10h]
   int v5; // [esp+8h] [ebp-8h]
@@ -494,7 +494,7 @@ void  CShip::PlaceVehicle(int) {
 
 // address=[0x159e150]
 // Decompiled from char __thiscall CShip::RemoveVehicle(CShip *this, int a2)
-void  CShip::RemoveVehicle(int) {
+void  CShip::RemoveVehicle(int a2) {
   
   int v2; // esi
   int v3; // esi
@@ -569,7 +569,7 @@ int  CShip::RepairBuildingInRange(void) {
 
 // address=[0x159e340]
 // Decompiled from CShip *__thiscall CShip::RepairAt(CShip *this, int a2)
-void  CShip::RepairAt(int) {
+void  CShip::RepairAt(int a2) {
   
   CShip *result; // eax
   char v3; // dl

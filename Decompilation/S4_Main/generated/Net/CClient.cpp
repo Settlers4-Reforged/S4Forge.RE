@@ -36,7 +36,7 @@
 
 // address=[0x15b1bd0]
 // Decompiled from CClient *__thiscall CClient::CClient(CClient *this, int a2, int a3, int a4)
- CClient::CClient(long,int,int) {
+ CClient::CClient(long a2, int a3, int a4) {
   
   *(_DWORD *)this = &CClient::_vftable_;
   *((_DWORD *)this + 6) = 0;
@@ -65,7 +65,7 @@
 
 // address=[0x15b1c60]
 // Decompiled from bool __thiscall CClient::operator==(_DWORD *this, int a2)
-bool  CClient::operator==(unsigned int) {
+bool  CClient::operator==(unsigned int a2) {
   
   return this[3] == a2;
 }
@@ -73,7 +73,7 @@ bool  CClient::operator==(unsigned int) {
 
 // address=[0x15b3530]
 // Decompiled from int __thiscall CClient::operator=(int this, int a2)
-class CClient &  CClient::operator=(class CClient const &) {
+class CClient &  CClient::operator=(class CClient const & a2) {
   
   *(_BYTE *)(this + 4) = *(_BYTE *)(a2 + 4);
   *(_DWORD *)(this + 8) = *(_DWORD *)(a2 + 8);
@@ -113,7 +113,7 @@ unsigned int  CClient::GetPeerId(void) {
 
 // address=[0x15c4df0]
 // Decompiled from CClient *__thiscall CClient::SetLastAckTime(CClient *this, unsigned int a2)
-void  CClient::SetLastAckTime(unsigned int) {
+void  CClient::SetLastAckTime(unsigned int a2) {
   
   CClient *result; // eax
 

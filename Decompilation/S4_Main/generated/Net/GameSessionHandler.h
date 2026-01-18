@@ -1,6 +1,8 @@
 #ifndef GAMESESSIONHANDLER_H
 #define GAMESESSIONHANDLER_H
 
+#include "defines.h"
+
 class GameSessionHandler : public SimpleSessionHandler@storm {
 public:
     // address=[0x164d6e0]

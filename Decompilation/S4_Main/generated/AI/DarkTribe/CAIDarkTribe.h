@@ -1,10 +1,12 @@
 #ifndef CAIDARKTRIBE_H
 #define CAIDARKTRIBE_H
 
+#include "defines.h"
+
 class CAIDarkTribe : public IAIDarkTribeEcoAI {
 public:
     // address=[0x132fad0]
-     CAIDarkTribe(int);
+     CAIDarkTribe(int a2);
 
     // address=[0x132fba0]
      ~CAIDarkTribe(void);
@@ -19,37 +21,37 @@ public:
     virtual void  Execute(void);
 
     // address=[0x132fcf0]
-    virtual int  GetNearGardenerWorkPosition(int);
+    virtual int  GetNearGardenerWorkPosition(int a2);
 
     // address=[0x1330090]
     virtual int  GetNextGardenerWorkPosition(void);
 
     // address=[0x13300e0]
-    virtual bool  IsBuildingPositionAvailable(enum BUILDING_TYPES);
+    virtual bool  IsBuildingPositionAvailable(enum BUILDING_TYPES a2);
 
     // address=[0x1330120]
-    virtual bool  InvokeBuilding(enum BUILDING_TYPES);
+    virtual bool  InvokeBuilding(enum BUILDING_TYPES a2);
 
     // address=[0x13301f0]
-    virtual void  UpdateLandChangement(int,int,bool);
+    virtual void  UpdateLandChangement(int a2, int a3, bool a4);
 
     // address=[0x1330350]
-    int  IsGardenerPosition(int,int);
+    int  IsGardenerPosition(int a2, int a3);
 
     // address=[0x1330360]
-    int  IsBuildedPosition(int,int);
+    int  IsBuildedPosition(int a2, int a3);
 
     // address=[0x1330420]
-    int  IsBuildingPosition(int,int);
+    int  IsBuildingPosition(int a2, int a3);
 
     // address=[0x1330490]
-    int  IsOccupiedPosition(int,int);
+    int  IsOccupiedPosition(int a2, int a3);
 
     // address=[0x1330500]
-    int  IsBorderPosition(int,int);
+    int  IsBorderPosition(int a2, int a3);
 
     // address=[0x1330570]
-    int  IsReservedMushroomPosition(int,int);
+    int  IsReservedMushroomPosition(int a2, int a3);
 
 private:
     // address=[0x1330620]
@@ -59,46 +61,46 @@ private:
     void  UnInitDarkTribeElements(void);
 
     // address=[0x13309a0]
-    void  UpdateDarkTribeElement(int,bool);
+    void  UpdateDarkTribeElement(int a2, bool a3);
 
     // address=[0x1330d60]
-    void  AddToElementList(int);
+    void  AddToElementList(int a2);
 
     // address=[0x13310b0]
-    void  PushNewOccupiedElement(struct SAIDTOCCUPIEDELEMENT const &);
+    void  PushNewOccupiedElement(struct SAIDTOCCUPIEDELEMENT const & a2);
 
     // address=[0x1331200]
-    bool  ReplaceOccupiedElement(int,struct SAIDTOCCUPIEDELEMENT const &);
+    bool  ReplaceOccupiedElement(int a2, struct SAIDTOCCUPIEDELEMENT const & a3);
 
     // address=[0x1331380]
-    void  RemoveOccupiedElement(int);
+    void  RemoveOccupiedElement(int a2);
 
     // address=[0x1331470]
-    bool  IsInOccupiedElementList(int);
+    bool  IsInOccupiedElementList(int a2);
 
     // address=[0x13314a0]
-    int  GetOccupiedElementListIndex(int);
+    int  GetOccupiedElementListIndex(int a2);
 
     // address=[0x1331520]
-    void  RemoveBorderElement(int);
+    void  RemoveBorderElement(int a2);
 
     // address=[0x1331600]
-    int  GetBorderElementListIndex(int)const;
+    int  GetBorderElementListIndex(int a2)const;
 
     // address=[0x1331650]
-    void  RemoveBorderElementInWork(int);
+    void  RemoveBorderElementInWork(int a2);
 
     // address=[0x13316c0]
-    int  GetBorderElementInWorkListIndex(int)const;
+    int  GetBorderElementInWorkListIndex(int a2)const;
 
     // address=[0x1331710]
-    int  GetLandConversionPosition(int)const;
+    int  GetLandConversionPosition(int a2)const;
 
     // address=[0x1331810]
-    int  GetLandConversionPositionIndex(int)const;
+    int  GetLandConversionPositionIndex(int a2)const;
 
     // address=[0x1331860]
-    void  CleanLandConversionPositionsOfGrid(int);
+    void  CleanLandConversionPositionsOfGrid(int a2);
 
     // address=[0x1331920]
     void  CheckSendGardenerPositions(void);
@@ -107,7 +109,7 @@ private:
     int  GetNextCurrentUsedInWorkElementIndex(void);
 
     // address=[0x1331c90]
-    bool  GetWorkingPosition(int,int,class CAIResourceData const &,class std::vector<int,class std::allocator<int> > &);
+    bool  GetWorkingPosition(int a2, int a3, class CAIResourceData const & a4, class std::vector<int,class std::allocator<int> > & a5);
 
     // address=[0x1331e60]
     int  GetNextBuildingPosition(void);
@@ -116,37 +118,37 @@ private:
     bool  CheckBuildingGrids(void);
 
     // address=[0x13323c0]
-    bool  CheckOtherBuildingPositions(int,int);
+    bool  CheckOtherBuildingPositions(int a2, int a3);
 
     // address=[0x13325c0]
-    bool  IsPureDarkLandAround(int,int);
+    bool  IsPureDarkLandAround(int a2, int a3);
 
     // address=[0x1332670]
     bool  HasChangeableLand(class CAIResourceData const &);
 
     // address=[0x13326d0]
-    int  GetChangeableLandAmount(class CAIResourceData const &);
+    int  GetChangeableLandAmount(class CAIResourceData const & a2);
 
     // address=[0x1332710]
-    int  CountAdjacentDarkLand(int,int);
+    int  CountAdjacentDarkLand(int a2, int a3);
 
     // address=[0x13327a0]
-    bool  IsAdjacent(int,int,int,int);
+    bool  IsAdjacent(int a2, int a3, int a4, int a5);
 
     // address=[0x1332800]
     void  CheckManakopterHallExists(void);
 
     // address=[0x1335fa0]
-    int  GetBorderElement(int)const;
+    int  GetBorderElement(int a2)const;
 
     // address=[0x1335ff0]
-    int  GetBorderElementInWork(int)const;
+    int  GetBorderElementInWork(int a2)const;
 
     // address=[0x1336040]
-    int  GetBuildingGrid(int)const;
+    int  GetBuildingGrid(int a2)const;
 
     // address=[0x1336070]
-    int  GetBuildingGridIndex(int)const;
+    int  GetBuildingGridIndex(int a2)const;
 
     // address=[0x13360a0]
     int  GetNrBorderElements(void)const;
@@ -164,28 +166,28 @@ private:
     int  GetNrOccupiedElements(void)const;
 
     // address=[0x1336140]
-    struct SAIDTOCCUPIEDELEMENT  GetOccupiedElement(int)const;
+    struct SAIDTOCCUPIEDELEMENT  GetOccupiedElement(int a2)const;
 
     // address=[0x13361f0]
     void  IncreaseNextCurrentUsedInWorkElementIndex(void);
 
     // address=[0x13362e0]
-    bool  IsInBorderElementInWorkList(int)const;
+    bool  IsInBorderElementInWorkList(int a2)const;
 
     // address=[0x1336320]
-    bool  IsInBorderElementList(int)const;
+    bool  IsInBorderElementList(int a2)const;
 
     // address=[0x1336360]
-    bool  IsInBuildingGridList(int)const;
+    bool  IsInBuildingGridList(int a2)const;
 
     // address=[0x13363a0]
-    bool  IsInLandConversionPositionsList(int)const;
+    bool  IsInLandConversionPositionsList(int a2)const;
 
     // address=[0x1336750]
-    void  RemoveBuildingGrid(int);
+    void  RemoveBuildingGrid(int a2);
 
     // address=[0x1336780]
-    void  RemoveLandConversionPosition(int);
+    void  RemoveLandConversionPosition(int a2);
 
 };
 

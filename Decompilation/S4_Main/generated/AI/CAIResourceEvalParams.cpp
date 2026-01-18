@@ -4,7 +4,7 @@
 
 // address=[0x131a800]
 // Decompiled from int __thiscall CAIResourceEvalParams::Evalute9(CAIResourceEvalParams *this, const struct CAIResourceData *a2)
-int  CAIResourceEvalParams::Evalute9(class CAIResourceData const &)const {
+int  CAIResourceEvalParams::Evalute9(class CAIResourceData const & a2)const {
   
   int v2; // eax
   int v4; // [esp+4h] [ebp-18h]

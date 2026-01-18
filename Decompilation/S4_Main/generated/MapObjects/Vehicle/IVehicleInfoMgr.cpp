@@ -4,7 +4,7 @@
 
 // address=[0x152f270]
 // Decompiled from char *__cdecl IVehicleInfoMgr::VehicleProperties(unsigned int a1, unsigned int a2)
-static struct SVehicleProperties const * __cdecl IVehicleInfoMgr::VehicleProperties(unsigned int,unsigned int) {
+struct SVehicleProperties const * __cdecl IVehicleInfoMgr::VehicleProperties(unsigned int a1, unsigned int a2) {
   
   if ( !IVehicleInfoMgr::m_bInitialized
     && BBSupportDbgReport(

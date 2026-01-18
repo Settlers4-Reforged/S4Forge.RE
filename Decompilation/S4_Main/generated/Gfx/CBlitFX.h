@@ -1,6 +1,8 @@
 #ifndef CBLITFX_H
 #define CBLITFX_H
 
+#include "defines.h"
+
 class CBlitFX {
 public:
     // address=[0x2f69900]
@@ -10,10 +12,10 @@ public:
      CBlitFX(void);
 
     // address=[0x2f86430]
-    void  SetFillColor(int,int,int,bool);
+    void  SetFillColor(int a2, int a3, int a4, bool a5);
 
     // address=[0x2f864e0]
-    void  SetFillColorAlpha(int,int,int,int);
+    void  SetFillColorAlpha(int a2, int a3, int a4, int a5);
 
 };
 

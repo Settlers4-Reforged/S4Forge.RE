@@ -39,7 +39,7 @@
 
 // address=[0x2f28be0]
 // Decompiled from int __cdecl CFileMgr::Open(wchar_t *FileName, wchar_t *Mode, char *Str, int a4)
-static struct _iobuf * __cdecl CFileMgr::Open(wchar_t const *,wchar_t const *,char *,int) {
+struct _iobuf * __cdecl CFileMgr::Open(wchar_t const * FileName, wchar_t const * Mode, char * Str, int a4) {
   
   int v5; // [esp+0h] [ebp-Ch] BYREF
   int v6; // [esp+4h] [ebp-8h]
@@ -70,7 +70,7 @@ static struct _iobuf * __cdecl CFileMgr::Open(wchar_t const *,wchar_t const *,ch
 
 // address=[0x2f28cd0]
 // Decompiled from int __cdecl CFileMgr::RemoveFromList(struct SFileDesc *a1)
-static void __cdecl CFileMgr::RemoveFromList(struct SFileDesc *) {
+void __cdecl CFileMgr::RemoveFromList(struct SFileDesc * a1) {
   
   int result; // eax
 
@@ -85,7 +85,7 @@ static void __cdecl CFileMgr::RemoveFromList(struct SFileDesc *) {
 
 // address=[0x2f28d40]
 // Decompiled from struct SFileDesc *__cdecl CFileMgr::CheckValidFilePtr(struct _iobuf *a1, char *a2, char *a3, int a4)
-static struct SFileDesc * __cdecl CFileMgr::CheckValidFilePtr(struct _iobuf *,char *,char *,int) {
+struct SFileDesc * __cdecl CFileMgr::CheckValidFilePtr(struct _iobuf * a1, char * a2, char * a3, int a4) {
   
   struct SFileDesc *v5; // [esp+0h] [ebp-4h]
 
@@ -106,7 +106,7 @@ static struct SFileDesc * __cdecl CFileMgr::CheckValidFilePtr(struct _iobuf *,ch
 
 // address=[0x2f28da0]
 // Decompiled from int CFileMgr::ReportOpenFiles()
-static void __cdecl CFileMgr::ReportOpenFiles(void) {
+void __cdecl CFileMgr::ReportOpenFiles(void) {
   
   struct _iobuf *v0; // eax
   struct _iobuf *v1; // eax
@@ -160,7 +160,7 @@ static void __cdecl CFileMgr::ReportOpenFiles(void) {
 
 // address=[0x2f28f30]
 // Decompiled from _DWORD *__cdecl CFileMgr::CheckOpenMode(int a1, int a2, int a3, int a4, wchar_t *String2, _DWORD *a6)
-static void __cdecl CFileMgr::CheckOpenMode(int,int,char *,wchar_t const *,wchar_t const *,int *) {
+void __cdecl CFileMgr::CheckOpenMode(int a1, int a2, char * a3, wchar_t const * a4, wchar_t const * String2, int * a6) {
   
   size_t v6; // eax
   _DWORD *result; // eax
@@ -228,7 +228,7 @@ static void __cdecl CFileMgr::CheckOpenMode(int,int,char *,wchar_t const *,wchar
 
 // address=[0x2f290d0]
 // Decompiled from int *__cdecl CFileMgr::AddNewFileDesc(int a1, int a2, int a3, char *Str, wchar_t *String, wchar_t *a6, int a7)
-static struct SFileDesc * __cdecl CFileMgr::AddNewFileDesc(struct _iobuf *,int,int,char const *,wchar_t const *,wchar_t const *,int) {
+struct SFileDesc * __cdecl CFileMgr::AddNewFileDesc(struct _iobuf * a1, int a2, int a3, char const * Str, wchar_t const * String, wchar_t const * a6, int a7) {
   
   int *v8; // [esp+0h] [ebp-230h]
   _BYTE pExceptionObject[552]; // [esp+4h] [ebp-22Ch] BYREF
@@ -253,7 +253,7 @@ static struct SFileDesc * __cdecl CFileMgr::AddNewFileDesc(struct _iobuf *,int,i
 
 // address=[0x2f291c0]
 // Decompiled from FILE *__cdecl CFileMgr::DisposeNode(void **a1)
-static void __cdecl CFileMgr::DisposeNode(struct SFileDesc *) {
+void __cdecl CFileMgr::DisposeNode(struct SFileDesc * a1) {
   
   FILE *result; // eax
 
@@ -274,7 +274,7 @@ static void __cdecl CFileMgr::DisposeNode(struct SFileDesc *) {
 
 // address=[0x2f29240]
 // Decompiled from int *__cdecl CFileMgr::IsFileOpen(wchar_t *String2)
-static struct SFileDesc * __cdecl CFileMgr::IsFileOpen(wchar_t const *) {
+struct SFileDesc * __cdecl CFileMgr::IsFileOpen(wchar_t const * String2) {
   
   int i; // [esp+0h] [ebp-4h]
 
@@ -289,7 +289,7 @@ static struct SFileDesc * __cdecl CFileMgr::IsFileOpen(wchar_t const *) {
 
 // address=[0x2f29290]
 // Decompiled from int *__cdecl CFileMgr::LookupFilePtr(struct _iobuf *a1)
-static struct SFileDesc * __cdecl CFileMgr::LookupFilePtr(struct _iobuf *) {
+struct SFileDesc * __cdecl CFileMgr::LookupFilePtr(struct _iobuf * a1) {
   
   int i; // [esp+0h] [ebp-4h]
 

@@ -4,7 +4,7 @@
 
 // address=[0x14ce780]
 // Decompiled from CStringEngineEx *__thiscall CStringEngineEx::CStringEngineEx(CStringEngineEx *this, int languageId)
- CStringEngineEx::CStringEngineEx(int) {
+ CStringEngineEx::CStringEngineEx(int languageId) {
   
   char Format[40]; // [esp+1Ch] [ebp-78h] BYREF
   wchar_t Buffer[32]; // [esp+44h] [ebp-50h] BYREF
@@ -55,7 +55,7 @@
 
 // address=[0x14ce9a0]
 // Decompiled from wchar_t *__thiscall CStringEngineEx::GetString(CStringEngineEx *this, int a2)
-char const *  CStringEngineEx::GetString(int) {
+char const *  CStringEngineEx::GetString(int a2) {
   
   int Language; // [esp+0h] [ebp-8h]
 
@@ -110,7 +110,7 @@ char const *  CStringEngineEx::GetString(int) {
 
 // address=[0x14cea80]
 // Decompiled from char __thiscall CStringEngineEx::ExtractStrings(CStringEngineEx *this, _DWORD *buffer, int size, char a4)
-bool  CStringEngineEx::ExtractStrings(char *,int,int) {
+bool  CStringEngineEx::ExtractStrings(char * buffer, int size, int a4) {
   
   int i; // [esp+10h] [ebp-18h]
   int pointer; // [esp+18h] [ebp-10h]
@@ -184,7 +184,7 @@ bool  CStringEngineEx::ExtractStrings(char *,int,int) {
 
 // address=[0x14ced10]
 // Decompiled from char __thiscall CStringEngineEx::ImportFile(CStringEngineEx *this, wchar_t *FileName, char a3)
-bool  CStringEngineEx::ImportFile(wchar_t const *,int) {
+bool  CStringEngineEx::ImportFile(wchar_t const * FileName, int a3) {
   
   int v4; // [esp+0h] [ebp-B4h] BYREF
   void *C; // [esp+14h] [ebp-A0h]

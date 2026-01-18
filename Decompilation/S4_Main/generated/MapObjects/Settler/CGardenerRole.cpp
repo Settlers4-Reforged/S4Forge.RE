@@ -4,7 +4,7 @@
 
 // address=[0x1400b80]
 // Decompiled from int __cdecl CGardenerRole::New(int a1)
-static class CPersistence * __cdecl CGardenerRole::New(std::istream &) {
+class CPersistence * __cdecl CGardenerRole::New(std::istream & a1) {
   
   if ( operator new(0x54u) )
     return CGardenerRole::CGardenerRole(a1);
@@ -15,7 +15,7 @@ static class CPersistence * __cdecl CGardenerRole::New(std::istream &) {
 
 // address=[0x1570050]
 // Decompiled from int __thiscall CGardenerRole::InitWalking(CGardenerRole *this, struct CSettler *a2)
-class CWalking *  CGardenerRole::InitWalking(class CSettler *) {
+class CWalking *  CGardenerRole::InitWalking(class CSettler * a2) {
   
   int v2; // eax
   int v4; // [esp+4h] [ebp-4h]
@@ -29,7 +29,7 @@ class CWalking *  CGardenerRole::InitWalking(class CSettler *) {
 
 // address=[0x1570090]
 // Decompiled from int __thiscall CGardenerRole::LogicUpdateJob(CGardenerRole *this, struct CSettler *a2)
-void  CGardenerRole::LogicUpdateJob(class CSettler *) {
+void  CGardenerRole::LogicUpdateJob(class CSettler * a2) {
   
   int result; // eax
   int v3; // eax
@@ -93,7 +93,7 @@ LABEL_11:
 
 // address=[0x1570280]
 // Decompiled from int __thiscall CGardenerRole::PostLoadInit(int this, CPropertySet *a2)
-void  CGardenerRole::PostLoadInit(class CSettler *) {
+void  CGardenerRole::PostLoadInit(class CSettler * a2) {
   
   int result; // eax
   int v4; // [esp+0h] [ebp-4h]
@@ -116,7 +116,7 @@ void  CGardenerRole::PostLoadInit(class CSettler *) {
 
 // address=[0x15702f0]
 // Decompiled from _DWORD *__thiscall CGardenerRole::CGardenerRole(_DWORD *this, int a2)
- CGardenerRole::CGardenerRole(std::istream &) {
+ CGardenerRole::CGardenerRole(std::istream & a2) {
   
   int v2; // eax
   _DWORD v4[2]; // [esp+4h] [ebp-24h] BYREF
@@ -161,7 +161,7 @@ void  CGardenerRole::PostLoadInit(class CSettler *) {
 
 // address=[0x1570480]
 // Decompiled from int __thiscall CGardenerRole::Store(int *this, struct std::ostream *a2)
-void  CGardenerRole::Store(std::ostream &) {
+void  CGardenerRole::Store(std::ostream & a2) {
   
   unsigned int v2; // esi
   int v4; // [esp+0h] [ebp-80h]
@@ -273,7 +273,7 @@ int  CGardenerRole::GetSettlerRole(void)const {
 
 // address=[0x1588640]
 // Decompiled from int __cdecl CGardenerRole::Load(int a1)
-static class CGardenerRole * __cdecl CGardenerRole::Load(std::istream &) {
+class CGardenerRole * __cdecl CGardenerRole::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
@@ -316,7 +316,7 @@ static class CGardenerRole * __cdecl CGardenerRole::Load(std::istream &) {
 
 // address=[0x1570820]
 // Decompiled from int __thiscall CGardenerRole::GetNextJob(CGardenerRole *this, struct CSettler *a2)
-void  CGardenerRole::GetNextJob(class CSettler *) {
+void  CGardenerRole::GetNextJob(class CSettler * a2) {
   
   CGardenerRole *v3; // [esp+0h] [ebp-4h]
 
@@ -330,7 +330,7 @@ void  CGardenerRole::GetNextJob(class CSettler *) {
 
 // address=[0x1570860]
 // Decompiled from void __thiscall CGardenerRole::TakeJob(int this, COleCmdUI *a2)
-void  CGardenerRole::TakeJob(class CSettler *) {
+void  CGardenerRole::TakeJob(class CSettler * a2) {
   
   const struct CEntityTask *ActualTask; // eax
   unsigned int v3; // eax
@@ -484,7 +484,7 @@ LABEL_31:
 
 // address=[0x1570e50]
 // Decompiled from int __thiscall CGardenerRole::Init(int this, CPropertySet *a2)
-void  CGardenerRole::Init(class CSettler *) {
+void  CGardenerRole::Init(class CSettler * a2) {
   
   int result; // eax
 
@@ -505,7 +505,7 @@ void  CGardenerRole::Init(class CSettler *) {
 
 // address=[0x1570ed0]
 // Decompiled from int __thiscall CGardenerRole::ConvertEventIntoGoal(int this, CPropertySet *a2, const struct CEntityEvent *a3)
-void  CGardenerRole::ConvertEventIntoGoal(class CSettler *,class CEntityEvent *) {
+void  CGardenerRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent * a3) {
   
   int result; // eax
   int v4; // eax
@@ -723,7 +723,7 @@ void  CGardenerRole::ConvertEventIntoGoal(class CSettler *,class CEntityEvent *)
 
 // address=[0x1571440]
 // Decompiled from int __thiscall CGardenerRole::WorkIsDone(CGardenerRole *this, struct CSettler *a2)
-void  CGardenerRole::WorkIsDone(class CSettler *) {
+void  CGardenerRole::WorkIsDone(class CSettler * a2) {
   
   int v2; // eax
   int v3; // eax
@@ -740,7 +740,7 @@ void  CGardenerRole::WorkIsDone(class CSettler *) {
 
 // address=[0x1571490]
 // Decompiled from char __thiscall CGardenerRole::SetFree(CGardenerRole *this, struct CSettler *a2, int a3)
-bool  CGardenerRole::SetFree(class CSettler *,int) {
+bool  CGardenerRole::SetFree(class CSettler * a2, int a3) {
   
   int v3; // eax
   int v5; // [esp-Ch] [ebp-14h]
@@ -766,7 +766,7 @@ bool  CGardenerRole::SetFree(class CSettler *,int) {
 
 // address=[0x1571520]
 // Decompiled from bool __thiscall CGardenerRole::CheckPosition(CGardenerRole *this, int a2, int a3, int a4, bool a5)
-bool  CGardenerRole::CheckPosition(int,int,int,bool) {
+bool  CGardenerRole::CheckPosition(int a2, int a3, int a4, bool a5) {
   
   IDecoObject *v6; // [esp+8h] [ebp-20h]
   int v7; // [esp+18h] [ebp-10h]
@@ -821,7 +821,7 @@ bool  CGardenerRole::CheckPosition(int,int,int,bool) {
 
 // address=[0x1571710]
 // Decompiled from char __thiscall CGardenerRole::SearchPosition(CGardenerRole *this, struct CSettler *a2, int a3)
-bool  CGardenerRole::SearchPosition(class CSettler *,int) {
+bool  CGardenerRole::SearchPosition(class CSettler * a2, int a3) {
   
   int v3; // eax
   int v4; // esi

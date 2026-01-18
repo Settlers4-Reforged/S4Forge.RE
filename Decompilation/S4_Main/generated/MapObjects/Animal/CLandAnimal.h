@@ -1,16 +1,18 @@
 #ifndef CLANDANIMAL_H
 #define CLANDANIMAL_H
 
+#include "defines.h"
+
 class CLandAnimal : public CAnimal {
 public:
     // address=[0x1400fe0]
-    static class CPersistence * __cdecl New(std::istream &);
+    static class CPersistence * __cdecl New(std::istream & a1);
 
     // address=[0x14e0eb0]
-    void  Init(struct SAnimalData *);
+    void  Init(struct SAnimalData * a2);
 
     // address=[0x14e1030]
-    static void * __cdecl operator new(unsigned int);
+    static void * __cdecl operator new(unsigned int a1);
 
     // address=[0x14e1050]
     static void __cdecl operator delete(void *);
@@ -19,16 +21,16 @@ public:
     virtual int  GetGoodType(void)const;
 
     // address=[0x14e10a0]
-    virtual void  Decrease(int);
+    virtual void  Decrease(int a2);
 
     // address=[0x14e10d0]
-    virtual void  Take(int);
+    virtual void  Take(int a2);
 
     // address=[0x14e10f0]
-     CLandAnimal(std::istream &);
+     CLandAnimal(std::istream & a2);
 
     // address=[0x14e12f0]
-    virtual void  Store(std::ostream &);
+    virtual void  Store(std::ostream & a2);
 
     // address=[0x14e2f90]
     virtual unsigned long  ClassID(void)const;
@@ -38,13 +40,13 @@ public:
 
 protected:
     // address=[0x14e14c0]
-     CLandAnimal(int,int,int,int);
+     CLandAnimal(int a2, int a3, int a4, int a5);
 
     // address=[0x14e1570]
     virtual  ~CLandAnimal(void);
 
     // address=[0x14e1590]
-    void  PostLoadInit(struct SAnimalData *,int);
+    void  PostLoadInit(struct SAnimalData * a2, int a3);
 
     // address=[0x14e1690]
     virtual void  LogicUpdateSpec(void);
@@ -59,7 +61,7 @@ protected:
     int  GetTerritoryDir(void);
 
     // address=[0x14e21d0]
-    int  GetDirection(int);
+    int  GetDirection(int a2);
 
     // address=[0x14e22d0]
     bool  CheckForEnemies(void);
@@ -68,19 +70,19 @@ protected:
     bool  CheckTerritory(void);
 
     // address=[0x14e23f0]
-    bool  IsValidSquare(int,int);
+    bool  IsValidSquare(int a2, int a3);
 
     // address=[0x14e2510]
-    bool  CheckTile(int);
+    bool  CheckTile(int a2);
 
     // address=[0x14e2540]
-    bool  IsTileFree(int);
+    bool  IsTileFree(int a2);
 
     // address=[0x14e25a0]
-    bool  CheckGround(int);
+    bool  CheckGround(int a2);
 
     // address=[0x14e26c0]
-    bool  IsSettlerAroundTile(int);
+    bool  IsSettlerAroundTile(int a2);
 
     // Type information members
 private:

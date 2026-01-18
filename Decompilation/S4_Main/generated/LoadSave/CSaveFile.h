@@ -1,6 +1,8 @@
 #ifndef S4_CSAVEFILE_H
 #define S4_CSAVEFILE_H
 
+#include "defines.h"
+
 namespace S4 {
 
 class CSaveFile {
@@ -12,22 +14,22 @@ public:
     unsigned int  GetFilePos(void);
 
     // address=[0x13eb4f0]
-     CSaveFile(bool);
+     CSaveFile(bool a2);
 
     // address=[0x13eb520]
-    bool  Open(std::wstring const &,int);
+    bool  Open(std::wstring const & a1, int a2);
 
     // address=[0x13eb590]
     bool  Close(void);
 
     // address=[0x13eb5b0]
-    int  Read(void *,int);
+    int  Read(void * Buffer, int ElementSize);
 
     // address=[0x13eb600]
-    int  Write(void const *,int);
+    int  Write(void const * Buffer, int ElementSize);
 
     // address=[0x13eb630]
-    void  SetFilePos(int,int);
+    void  SetFilePos(int Offset, int Origin);
 
     // address=[0x13eb660]
     unsigned int  GetFileSize(void);

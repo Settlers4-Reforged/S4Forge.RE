@@ -1,6 +1,8 @@
 #ifndef CFREECARRIERINFO_H
 #define CFREECARRIERINFO_H
 
+#include "defines.h"
+
 class CFreeCarrierInfo : public CInfoExchange {
 public:
     // address=[0x14545f0]

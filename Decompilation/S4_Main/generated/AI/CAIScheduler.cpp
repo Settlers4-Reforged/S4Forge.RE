@@ -26,7 +26,7 @@
 
 // address=[0x12ff120]
 // Decompiled from void __thiscall CAIScheduler::AddAgent(  CAIScheduler *this,  CAIScheduler **a2,  CAIScheduler *a3,  CAIScheduler *a4,  CAIScheduler *a5)
-void  CAIScheduler::AddAgent(class CAIAgent &,unsigned int,unsigned int,unsigned int) {
+void  CAIScheduler::AddAgent(class CAIAgent & a2, unsigned int a3, unsigned int a4, unsigned int a5) {
   
   if ( a2[5] )
     CAIScheduler::RemoveAgent(a2[5], (struct CAIAgent *)a2);
@@ -40,7 +40,7 @@ void  CAIScheduler::AddAgent(class CAIAgent &,unsigned int,unsigned int,unsigned
 
 // address=[0x12ff180]
 // Decompiled from void __thiscall CAIScheduler::RemoveAgent(CAIScheduler *this, struct CAIAgent *a2)
-void  CAIScheduler::RemoveAgent(class CAIAgent &) {
+void  CAIScheduler::RemoveAgent(class CAIAgent & a2) {
   
   if ( *((CAIScheduler **)a2 + 5) == this )
   {
@@ -72,7 +72,7 @@ void  CAIScheduler::RemoveAllAgents(void) {
 
 // address=[0x12ff200]
 // Decompiled from void __thiscall CAIScheduler::UpdateAgentScheduleTime(CAIScheduler *this, struct CAIAgent *a2, unsigned int a3)
-void  CAIScheduler::UpdateAgentScheduleTime(class CAIAgent &,unsigned int) {
+void  CAIScheduler::UpdateAgentScheduleTime(class CAIAgent & a2, unsigned int a3) {
   
   if ( *((CAIScheduler **)a2 + 5) == this )
   {
@@ -148,7 +148,7 @@ unsigned int  CAIScheduler::Execute(unsigned int,unsigned int) {
 
 // address=[0x12ff400]
 // Decompiled from CAIScheduler *__thiscall CAIScheduler::AddAgentEx(CAIScheduler *this, struct CAIAgent *a2)
-void  CAIScheduler::AddAgentEx(class CAIAgent *) {
+void  CAIScheduler::AddAgentEx(class CAIAgent * a2) {
   
   CAIScheduler *result; // eax
   unsigned int v3; // [esp+4h] [ebp-10h]
@@ -196,7 +196,7 @@ void  CAIScheduler::AddAgentEx(class CAIAgent *) {
 
 // address=[0x12ff580]
 // Decompiled from struct CAIAgent **__thiscall CAIScheduler::RemoveAgentEx(struct CAIAgent **this, struct CAIAgent *a2)
-void  CAIScheduler::RemoveAgentEx(class CAIAgent *) {
+void  CAIScheduler::RemoveAgentEx(class CAIAgent * a2) {
   
   struct CAIAgent **result; // eax
 

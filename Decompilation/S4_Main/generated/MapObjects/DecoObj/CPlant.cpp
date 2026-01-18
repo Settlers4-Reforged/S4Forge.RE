@@ -4,7 +4,7 @@
 
 // address=[0x14016c0]
 // Decompiled from int __cdecl CPlant::New(int a1)
-static class CPersistence * __cdecl CPlant::New(std::istream &) {
+class CPersistence * __cdecl CPlant::New(std::istream & a1) {
   
   if ( CPlant::operator new(0x50u) )
     return CPlant::CPlant(a1);
@@ -15,7 +15,7 @@ static class CPersistence * __cdecl CPlant::New(std::istream &) {
 
 // address=[0x154a040]
 // Decompiled from CPlant *__thiscall CPlant::CPlant(CPlant *this, int a2, int a3, int a4, int a5, char a6, int a7)
- CPlant::CPlant(int,int,int,int,int,int) {
+ CPlant::CPlant(int a2, int a3, int a4, int a5, int a6, int a7) {
   
   IDecoObject::IDecoObject(this, a2, a3, a4, a5, a7 != 0);
   *(_DWORD *)this = &CPlant::_vftable_;
@@ -47,7 +47,7 @@ static class CPersistence * __cdecl CPlant::New(std::istream &) {
 
 // address=[0x154a1a0]
 // Decompiled from CPlant *__thiscall CPlant::CPlant(CPlant *this, const struct CPlant *a2, int a3, int a4, int a5)
- CPlant::CPlant(class CPlant const &,int,int,int) {
+ CPlant::CPlant(class CPlant const & a2, int a3, int a4, int a5) {
   
   IDecoObject::IDecoObject(this, a2, a3, a4, a5);
   *(_DWORD *)this = &CPlant::_vftable_;
@@ -169,7 +169,7 @@ struct SGfxObjectInfo *  CPlant::GetGfxInfos(void) {
 
 // address=[0x154a540]
 // Decompiled from int __thiscall CPlant::Take(CPlant *this, int a2)
-void  CPlant::Take(int) {
+void  CPlant::Take(int a2) {
   
   if ( IDecoObject::IsStaticInstance(this)
     && BBSupportDbgReport(2, "MapObjects\\DecoObj\\Plant.cpp", 342, "! IsStaticInstance()") == 1 )
@@ -213,7 +213,7 @@ void  CPlant::Take(int) {
 
 // address=[0x154a6c0]
 // Decompiled from void __thiscall CPlant::Decrease(CPlant *this, int a2)
-void  CPlant::Decrease(int) {
+void  CPlant::Decrease(int a2) {
   
   ;
 }
@@ -221,7 +221,7 @@ void  CPlant::Decrease(int) {
 
 // address=[0x154a6d0]
 // Decompiled from int __thiscall CPlant::Increase(CPlant *this, int a2)
-int  CPlant::Increase(int) {
+int  CPlant::Increase(int a2) {
   
   return 1;
 }
@@ -229,7 +229,7 @@ int  CPlant::Increase(int) {
 
 // address=[0x154a6f0]
 // Decompiled from unsigned int __cdecl CPlant::operator new(unsigned int a1)
-static void * __cdecl CPlant::operator new(unsigned int) {
+void * __cdecl CPlant::operator new(unsigned int a1) {
   
   return CDecoObjMgr::Alloc((CDecoObjMgr *)&g_cDecoObjMgr, a1);
 }
@@ -237,7 +237,7 @@ static void * __cdecl CPlant::operator new(unsigned int) {
 
 // address=[0x154a710]
 // Decompiled from void __cdecl CPlant::operator delete(void *a1)
-static void __cdecl CPlant::operator delete(void *) {
+void __cdecl CPlant::operator delete(void * a1) {
   
   CDecoObjMgr::Dealloc((CDecoObjMgr *)&g_cDecoObjMgr, a1);
 }
@@ -245,7 +245,7 @@ static void __cdecl CPlant::operator delete(void *) {
 
 // address=[0x154a750]
 // Decompiled from char *__thiscall CPlant::CPlant(char *this, int a2)
- CPlant::CPlant(std::istream &) {
+ CPlant::CPlant(std::istream & a2) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
@@ -276,7 +276,7 @@ static void __cdecl CPlant::operator delete(void *) {
 
 // address=[0x154a860]
 // Decompiled from int __thiscall CPlant::Store(int *this, struct std::ostream *a2)
-void  CPlant::Store(std::ostream &) {
+void  CPlant::Store(std::ostream & a2) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
   int *v4; // [esp+4h] [ebp-4h]

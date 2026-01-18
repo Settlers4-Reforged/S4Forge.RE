@@ -4,7 +4,7 @@
 
 // address=[0x12fd0d0]
 // Decompiled from int __thiscall CAITaskForceGroup::FirstTaskForce(_DWORD *this, int a2)
-class CAITaskForce *  CAITaskForceGroup::FirstTaskForce(enum T_AI_TASK_FORCE_CLASS)const {
+class CAITaskForce *  CAITaskForceGroup::FirstTaskForce(enum T_AI_TASK_FORCE_CLASS a2)const {
   
   return this[a2 + 26];
 }
@@ -12,7 +12,7 @@ class CAITaskForce *  CAITaskForceGroup::FirstTaskForce(enum T_AI_TASK_FORCE_CLA
 
 // address=[0x13015c0]
 // Decompiled from int __thiscall CAITaskForceGroup::NumberOfTaskForcesOfType(_DWORD *this, int a2)
-int  CAITaskForceGroup::NumberOfTaskForcesOfType(enum T_AI_TASK_FORCE_TYPE)const {
+int  CAITaskForceGroup::NumberOfTaskForcesOfType(enum T_AI_TASK_FORCE_TYPE a2)const {
   
   return this[a2 + 12];
 }
@@ -20,7 +20,7 @@ int  CAITaskForceGroup::NumberOfTaskForcesOfType(enum T_AI_TASK_FORCE_TYPE)const
 
 // address=[0x1303970]
 // Decompiled from int __thiscall CAITaskForceGroup::NumberOfTaskForcesOfClass(_DWORD *this, int a2)
-int  CAITaskForceGroup::NumberOfTaskForcesOfClass(enum T_AI_TASK_FORCE_CLASS)const {
+int  CAITaskForceGroup::NumberOfTaskForcesOfClass(enum T_AI_TASK_FORCE_CLASS a2)const {
   
   return this[a2 + 3];
 }
@@ -28,7 +28,7 @@ int  CAITaskForceGroup::NumberOfTaskForcesOfClass(enum T_AI_TASK_FORCE_CLASS)con
 
 // address=[0x1328380]
 // Decompiled from CAITaskForceGroup *__thiscall CAITaskForceGroup::CAITaskForceGroup(CAITaskForceGroup *this, int a2)
- CAITaskForceGroup::CAITaskForceGroup(int) {
+ CAITaskForceGroup::CAITaskForceGroup(int a2) {
   
   *(_DWORD *)this = CAITaskForceGroup::_vftable_;
   memset((char *)this + 4, 0, 0x88u);
@@ -48,7 +48,7 @@ int  CAITaskForceGroup::NumberOfTaskForcesOfClass(enum T_AI_TASK_FORCE_CLASS)con
 
 // address=[0x1328410]
 // Decompiled from struct CAITaskForce *__thiscall CAITaskForceGroup::CreateTaskForce(CAITaskForceGroup *this, int a2)
-class CAITaskForce *  CAITaskForceGroup::CreateTaskForce(enum T_AI_TASK_FORCE_TYPE) {
+class CAITaskForce *  CAITaskForceGroup::CreateTaskForce(enum T_AI_TASK_FORCE_TYPE a2) {
   
   struct CAITaskForce *TaskForce; // [esp+4h] [ebp-4h]
 
@@ -85,7 +85,7 @@ void  CAITaskForceGroup::DeleteAllTaskForces(void) {
 
 // address=[0x1328510]
 // Decompiled from int __thiscall CAITaskForceGroup::Load(CAITaskForceGroup *this, struct IS4Chunk *a2)
-void  CAITaskForceGroup::Load(class IS4Chunk &) {
+void  CAITaskForceGroup::Load(class IS4Chunk & a2) {
   
   int v2; // eax
   int v4; // [esp-4h] [ebp-30h]
@@ -138,7 +138,7 @@ void  CAITaskForceGroup::Load(class IS4Chunk &) {
 
 // address=[0x13286f0]
 // Decompiled from int __thiscall CAITaskForceGroup::Save(CAITaskForceGroup *this, struct IS4Chunk *a2)
-void  CAITaskForceGroup::Save(class IS4Chunk &) {
+void  CAITaskForceGroup::Save(class IS4Chunk & a2) {
   
   int v2; // eax
   int v3; // eax
@@ -231,7 +231,7 @@ int  CAITaskForceGroup::PlayerId(void) {
 
 // address=[0x1328970]
 // Decompiled from _DWORD *__thiscall CAITaskForceGroup::AddTaskForce(CAITaskForceGroup *this, struct CAITaskForce *a2)
-void  CAITaskForceGroup::AddTaskForce(class CAITaskForce *) {
+void  CAITaskForceGroup::AddTaskForce(class CAITaskForce * a2) {
   
   _DWORD *result; // eax
   int v3; // [esp+Ch] [ebp-8h]
@@ -289,7 +289,7 @@ void  CAITaskForceGroup::AddTaskForce(class CAITaskForce *) {
 
 // address=[0x1328b20]
 // Decompiled from int __thiscall CAITaskForceGroup::RemoveTaskForce(_DWORD *this, _DWORD *a2)
-void  CAITaskForceGroup::RemoveTaskForce(class CAITaskForce *) {
+void  CAITaskForceGroup::RemoveTaskForce(class CAITaskForce * a2) {
   
   int v2; // eax
   int v4; // [esp+Ch] [ebp-8h]

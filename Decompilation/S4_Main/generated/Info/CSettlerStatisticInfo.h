@@ -1,6 +1,8 @@
 #ifndef CSETTLERSTATISTICINFO_H
 #define CSETTLERSTATISTICINFO_H
 
+#include "defines.h"
+
 class CSettlerStatisticInfo : public CInfoExchange {
 public:
     // address=[0x1454860]

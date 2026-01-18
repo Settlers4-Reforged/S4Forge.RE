@@ -4,7 +4,7 @@
 
 // address=[0x14028e0]
 // Decompiled from int __cdecl CWarShip::New(int a1)
-static class CPersistence * __cdecl CWarShip::New(std::istream &) {
+class CPersistence * __cdecl CWarShip::New(std::istream & a1) {
   
   if ( CWarShip::operator new(0xC8u) )
     return CWarShip::CWarShip(a1);
@@ -15,7 +15,7 @@ static class CPersistence * __cdecl CWarShip::New(std::istream &) {
 
 // address=[0x15a09e0]
 // Decompiled from int __thiscall CWarShip::WarriorTaskWalkOneStep(CWarShip *this, struct IMovingEntity *a2)
-int  CWarShip::WarriorTaskWalkOneStep(class IMovingEntity &) {
+int  CWarShip::WarriorTaskWalkOneStep(class IMovingEntity & a2) {
   
   int v2; // eax
   int v3; // eax
@@ -31,7 +31,7 @@ int  CWarShip::WarriorTaskWalkOneStep(class IMovingEntity &) {
 
 // address=[0x15a0a40]
 // Decompiled from int __thiscall CWarShip::WarriorTaskAttack(char *this, int a2, int a3, int a4)
-void  CWarShip::WarriorTaskAttack(class IMovingEntity &,int,enum T_WARRIOR_ATTACK) {
+void  CWarShip::WarriorTaskAttack(class IMovingEntity & a2, int a3, enum T_WARRIOR_ATTACK a4) {
   
   int v4; // eax
 
@@ -44,7 +44,7 @@ void  CWarShip::WarriorTaskAttack(class IMovingEntity &,int,enum T_WARRIOR_ATTAC
 
 // address=[0x15a0aa0]
 // Decompiled from int __thiscall CWarShip::WarriorTaskFinished(CWarShip *this, struct IMovingEntity *a2)
-void  CWarShip::WarriorTaskFinished(class IMovingEntity &) {
+void  CWarShip::WarriorTaskFinished(class IMovingEntity & a2) {
   
   return CVehicle::GetNextJob((CWarShip *)((char *)this - 172));
 }
@@ -52,7 +52,7 @@ void  CWarShip::WarriorTaskFinished(class IMovingEntity &) {
 
 // address=[0x15a0ac0]
 // Decompiled from int __thiscall CWarShip::WarriorTaskIdleWalk(CWarShip *this, struct IMovingEntity *a2)
-int  CWarShip::WarriorTaskIdleWalk(class IMovingEntity &) {
+int  CWarShip::WarriorTaskIdleWalk(class IMovingEntity & a2) {
   
   int v2; // eax
   int v3; // eax
@@ -68,7 +68,7 @@ int  CWarShip::WarriorTaskIdleWalk(class IMovingEntity &) {
 
 // address=[0x15a0b20]
 // Decompiled from unsigned int __cdecl CWarShip::operator new(unsigned int a1)
-static void * __cdecl CWarShip::operator new(unsigned int) {
+void * __cdecl CWarShip::operator new(unsigned int a1) {
   
   return CVehicleMgr::Alloc((CVehicleMgr *)&g_cVehicleMgr, a1);
 }
@@ -76,7 +76,7 @@ static void * __cdecl CWarShip::operator new(unsigned int) {
 
 // address=[0x15a0b40]
 // Decompiled from void __cdecl CWarShip::operator delete(void *a1)
-static void __cdecl CWarShip::operator delete(void *) {
+void __cdecl CWarShip::operator delete(void * a1) {
   
   CVehicleMgr::Dealloc((CVehicleMgr *)&g_cVehicleMgr, a1);
 }
@@ -84,7 +84,7 @@ static void __cdecl CWarShip::operator delete(void *) {
 
 // address=[0x15a0b80]
 // Decompiled from void __thiscall CWarShip::ConvertEventIntoGoal(CWarShip *this, struct CEntityEvent *a2)
-void  CWarShip::ConvertEventIntoGoal(class CEntityEvent *) {
+void  CWarShip::ConvertEventIntoGoal(class CEntityEvent * a2) {
   
   int v2; // [esp+0h] [ebp-14h]
   int v3; // [esp+4h] [ebp-10h]
@@ -107,7 +107,7 @@ void  CWarShip::ConvertEventIntoGoal(class CEntityEvent *) {
 
 // address=[0x15a0c30]
 // Decompiled from struct IMovingEntity *__thiscall CWarShip::CWarShip(struct IMovingEntity *this, int a2)
- CWarShip::CWarShip(std::istream &) {
+ CWarShip::CWarShip(std::istream & a2) {
   
   int v3; // [esp+8h] [ebp-20h] BYREF
   int v4; // [esp+Ch] [ebp-1Ch] BYREF
@@ -143,7 +143,7 @@ void  CWarShip::ConvertEventIntoGoal(class CEntityEvent *) {
 
 // address=[0x15a0d60]
 // Decompiled from int __thiscall CWarShip::Store(char *this, struct std::ostream *a2)
-void  CWarShip::Store(std::ostream &) {
+void  CWarShip::Store(std::ostream & a2) {
   
   struct CWarriorBehavior::SWarriorBehaviorData *WarriorBehaviorData; // eax
   struct CWarriorBehavior::SWarriorBehaviorData *v3; // eax
@@ -175,7 +175,7 @@ unsigned long  CWarShip::ClassID(void)const {
 
 // address=[0x15a0df0]
 // Decompiled from CWarShip *__thiscall CWarShip::CWarShip(CWarShip *this, int a2, int a3, int a4, int a5, int a6, int a7, bool a8)
- CWarShip::CWarShip(int,int,int,int,int,int,bool) {
+ CWarShip::CWarShip(int a2, int a3, int a4, int a5, int a6, int a7, bool a8) {
   
   CShip::CShip(this, a2, a3, a4, a5, a6, a7, a8);
   CWarriorBehavior::CWarriorBehavior((CWarShip *)((char *)this + 172));
@@ -373,7 +373,7 @@ int  CWarShip::GetAmmoDisplayID(void) {
 
 // address=[0x15a1450]
 // Decompiled from char __thiscall CWarShip::AttackTargetAt(CWarShip *this, int a2, int a3)
-bool  CWarShip::AttackTargetAt(int,int) {
+bool  CWarShip::AttackTargetAt(int a2, int a3) {
   
   const struct IEntity *v4; // [esp+0h] [ebp-1Ch]
   int v5; // [esp+4h] [ebp-18h]

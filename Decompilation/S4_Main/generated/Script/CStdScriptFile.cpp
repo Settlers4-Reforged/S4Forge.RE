@@ -4,7 +4,7 @@
 
 // address=[0x160dbd0]
 // Decompiled from int __thiscall CStdScriptFile::CStdScriptFile(int this, wchar_t *FileName)
- CStdScriptFile::CStdScriptFile(wchar_t const *) {
+ CStdScriptFile::CStdScriptFile(wchar_t const * FileName) {
   
   _DWORD v4[26]; // [esp+Ch] [ebp-7Ch] BYREF
   int v5; // [esp+74h] [ebp-14h] BYREF

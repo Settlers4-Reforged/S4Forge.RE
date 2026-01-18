@@ -22,7 +22,7 @@
 
 // address=[0x2f58b70]
 // Decompiled from char __thiscall CDebitLevelManager::AddDebitLevel(  _DWORD *this,  int a2,  int a3,  unsigned __int8 a4,  int a5,  int a6,  int a7,  int a8,  int a9,  int a10)
-bool  CDebitLevelManager::AddDebitLevel(int,enum PILE_TYPES,bool,int,int,int,int,int,int) {
+bool  CDebitLevelManager::AddDebitLevel(int a2, enum PILE_TYPES a3, bool a4, int a5, int a6, int a7, int a8, int a9, int a10) {
   
   int i; // [esp+0h] [ebp-Ch]
   int v12; // [esp+4h] [ebp-8h]
@@ -62,7 +62,7 @@ bool  CDebitLevelManager::AddDebitLevel(int,enum PILE_TYPES,bool,int,int,int,int
 
 // address=[0x2f58d00]
 // Decompiled from int __thiscall CDebitLevelManager::GetDebitValue(CDebitLevelManager *this, int a2, int a3, unsigned __int8 a4, int a5)
-int  CDebitLevelManager::GetDebitValue(int,enum PILE_TYPES,bool,int) {
+int  CDebitLevelManager::GetDebitValue(int a2, enum PILE_TYPES a3, bool a4, int a5) {
   
   int v6; // [esp+4h] [ebp-Ch]
   int i; // [esp+Ch] [ebp-4h]
@@ -92,7 +92,7 @@ int  CDebitLevelManager::GetDebitValue(int,enum PILE_TYPES,bool,int) {
 
 // address=[0x2f58df0]
 // Decompiled from int __thiscall CDebitLevelManager::DebitPreCondition(CDebitLevelManager *this, int a2)
-int  CDebitLevelManager::DebitPreCondition(int) {
+int  CDebitLevelManager::DebitPreCondition(int a2) {
   
   int result; // eax
   struct IAIEcoManager *EcoSector; // [esp+0h] [ebp-Ch]
@@ -196,7 +196,7 @@ CDebitLevelManager__DebitPreCondition___def_3358E0C:
 
 // address=[0x2f59050]
 // Decompiled from void *__thiscall CDebitLevelManager::DebitException(std::_Ref_count_base *this, const struct type_info *a2)
-int  CDebitLevelManager::DebitException(int) {
+int  CDebitLevelManager::DebitException(int a2) {
   
   return 0;
 }

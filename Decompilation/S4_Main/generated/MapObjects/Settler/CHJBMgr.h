@@ -1,6 +1,8 @@
 #ifndef CHJBMGR_H
 #define CHJBMGR_H
 
+#include "defines.h"
+
 class CHJBMgr : public IHJBMgr {
 public:
     // address=[0x1574510]
@@ -10,13 +12,13 @@ public:
     virtual bool  StaticCheckHJBCommand(char const *);
 
     // address=[0x1574630]
-    virtual bool  StaticCheckHJBPlayerName(std::wstring const &);
+    virtual bool  StaticCheckHJBPlayerName(std::wstring const & a1);
 
     // address=[0x1574690]
-    virtual void  ProcessHJBRequest(int);
+    virtual void  ProcessHJBRequest(int a2);
 
     // address=[0x1574720]
-    virtual void  ProcessHJBAcknowledgement(int,int);
+    virtual void  ProcessHJBAcknowledgement(int a2, int a3);
 
     // address=[0x15748b0]
      CHJBMgr(void);
@@ -29,7 +31,7 @@ protected:
     virtual bool  LocalIsHJBAllowedEx(void);
 
     // address=[0x15748f0]
-    void  ActivateHJB(int);
+    void  ActivateHJB(int a2);
 
     // address=[0x1574960]
     bool  CheckHJBDatFile(void);

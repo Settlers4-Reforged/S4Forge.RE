@@ -4,7 +4,7 @@
 
 // address=[0x149aa80]
 // Decompiled from char __stdcall CRegistry::ExistsHLMKey(LPCSTR lpSubKey)
-bool  CRegistry::ExistsHLMKey(char const *) {
+bool  CRegistry::ExistsHLMKey(char const * lpSubKey) {
   
   HKEY phkResult; // [esp+4h] [ebp-8h] BYREF
 

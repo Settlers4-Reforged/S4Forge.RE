@@ -4,7 +4,7 @@
 
 // address=[0x1400d60]
 // Decompiled from int __cdecl CGoodTransportPriority::New(int a1)
-static class CPersistence * __cdecl CGoodTransportPriority::New(std::istream &) {
+class CPersistence * __cdecl CGoodTransportPriority::New(std::istream & a1) {
   
   if ( operator new(0x64u) )
     return CGoodTransportPriority::CGoodTransportPriority(a1);
@@ -23,7 +23,7 @@ int  CGoodTransportPriority::GetNumberOfPriorities(void) {
 
 // address=[0x1439b40]
 // Decompiled from int __thiscall CGoodTransportPriority::GetPriority(unsigned __int16 *this, int a2)
-int  CGoodTransportPriority::GetPriority(enum PILE_TYPES) {
+int  CGoodTransportPriority::GetPriority(enum PILE_TYPES a2) {
   
   if ( (a2 <= 0 || a2 >= 43)
     && BBSupportDbgReport(
@@ -43,7 +43,7 @@ int  CGoodTransportPriority::GetPriority(enum PILE_TYPES) {
 
 // address=[0x1452ac0]
 // Decompiled from _DWORD *__thiscall CGoodTransportPriority::CGoodTransportPriority(_DWORD *this, int a2)
- CGoodTransportPriority::CGoodTransportPriority(std::istream &) {
+ CGoodTransportPriority::CGoodTransportPriority(std::istream & a2) {
   
   _BYTE v3[4]; // [esp+0h] [ebp-14h] BYREF
   int v4; // [esp+4h] [ebp-10h]
@@ -73,7 +73,7 @@ int  CGoodTransportPriority::GetPriority(enum PILE_TYPES) {
 
 // address=[0x1452b80]
 // Decompiled from int __thiscall CGoodTransportPriority::Store(struct CPersistence *this, struct std::ostream *a2)
-void  CGoodTransportPriority::Store(std::ostream &) {
+void  CGoodTransportPriority::Store(std::ostream & a2) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
   struct CPersistence *v4; // [esp+4h] [ebp-4h]
@@ -118,7 +118,7 @@ void  CGoodTransportPriority::Store(std::ostream &) {
 
 // address=[0x1452c70]
 // Decompiled from int __thiscall CGoodTransportPriority::ChangePriority(_WORD *this, int a2, int a3)
-void  CGoodTransportPriority::ChangePriority(enum PILE_TYPES,int) {
+void  CGoodTransportPriority::ChangePriority(enum PILE_TYPES a2, int a3) {
   
   int result; // eax
   int v4; // [esp+8h] [ebp-14h]
@@ -181,7 +181,7 @@ void  CGoodTransportPriority::ChangePriority(enum PILE_TYPES,int) {
 
 // address=[0x1452e30]
 // Decompiled from CGoodTransportPriority *__thiscall CGoodTransportPriority::GetSortedGoods(CGoodTransportPriority *this, int *const a2)
-void  CGoodTransportPriority::GetSortedGoods(int * const) {
+void  CGoodTransportPriority::GetSortedGoods(int * const a2) {
   
   CGoodTransportPriority *result; // eax
   int v3; // [esp+4h] [ebp-18h]

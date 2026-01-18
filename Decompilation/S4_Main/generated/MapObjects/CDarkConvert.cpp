@@ -4,7 +4,7 @@
 
 // address=[0x15413d0]
 // Decompiled from int __cdecl CDarkConvert::GetGreenObject(int a1)
-static int __cdecl CDarkConvert::GetGreenObject(int) {
+int __cdecl CDarkConvert::GetGreenObject(int a1) {
   
   int i; // [esp+0h] [ebp-4h]
 
@@ -19,7 +19,7 @@ static int __cdecl CDarkConvert::GetGreenObject(int) {
 
 // address=[0x1541430]
 // Decompiled from int __cdecl CDarkConvert::GetDarkObject(int a1)
-static int __cdecl CDarkConvert::GetDarkObject(int) {
+int __cdecl CDarkConvert::GetDarkObject(int a1) {
   
   int i; // [esp+0h] [ebp-4h]
 

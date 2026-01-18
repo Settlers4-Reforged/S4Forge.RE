@@ -1,6 +1,8 @@
 #ifndef IFILTERENTRY_H
 #define IFILTERENTRY_H
 
+#include "defines.h"
+
 class IFilterEntry : public CDynListEntry {
 public:
     // address=[0x2f3b310]

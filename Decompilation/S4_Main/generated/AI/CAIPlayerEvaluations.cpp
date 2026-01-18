@@ -4,7 +4,7 @@
 
 // address=[0x1303c50]
 // Decompiled from void __thiscall CAIPlayerEvaluations::EvaluatePlayer(CAIPlayerEvaluations *this, int a2)
-void  CAIPlayerEvaluations::EvaluatePlayer(int) {
+void  CAIPlayerEvaluations::EvaluatePlayer(int a2) {
   
   CAIPlayerEvaluation::EvaluatePlayer((CAIPlayerEvaluations *)((char *)this + 88 * a2), a2);
 }

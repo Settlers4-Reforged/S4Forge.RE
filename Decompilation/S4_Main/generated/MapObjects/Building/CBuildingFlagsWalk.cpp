@@ -4,7 +4,7 @@
 
 // address=[0x14eaf90]
 // Decompiled from CBuildingFlagsWalk *__thiscall CBuildingFlagsWalk::CBuildingFlagsWalk(  CBuildingFlagsWalk *this,  int a2,  int a3,  int a4,  int a5,  int a6)
- CBuildingFlagsWalk::CBuildingFlagsWalk(int,int,int,int,class std::vector<unsigned int,class std::allocator<unsigned int> > const &) {
+ CBuildingFlagsWalk::CBuildingFlagsWalk(int a2, int a3, int a4, int a5, class std::vector<unsigned int,class std::allocator<unsigned int> > const & a6) {
   
   *(_DWORD *)this = a6;
   *((_DWORD *)this + 1) = a2 - a4 - 1;

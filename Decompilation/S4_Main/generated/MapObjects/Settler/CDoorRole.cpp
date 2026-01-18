@@ -4,7 +4,7 @@
 
 // address=[0x14005e0]
 // Decompiled from int __cdecl CDoorRole::New(int a1)
-static class CPersistence * __cdecl CDoorRole::New(std::istream &) {
+class CPersistence * __cdecl CDoorRole::New(std::istream & a1) {
   
   if ( operator new(0x2Cu) )
     return CDoorRole::CDoorRole(a1);
@@ -15,7 +15,7 @@ static class CPersistence * __cdecl CDoorRole::New(std::istream &) {
 
 // address=[0x156ce70]
 // Decompiled from int __thiscall CDoorRole::LogicUpdate(CDoorRole *this, IEntity *a2)
-void  CDoorRole::LogicUpdate(class CSettler *) {
+void  CDoorRole::LogicUpdate(class CSettler * a2) {
   
   int v2; // eax
   int result; // eax
@@ -38,7 +38,7 @@ void  CDoorRole::LogicUpdate(class CSettler *) {
 
 // address=[0x156cef0]
 // Decompiled from int __stdcall CDoorRole::PostLoadInit(CPropertySet *a1)
-void  CDoorRole::PostLoadInit(class CSettler *) {
+void  CDoorRole::PostLoadInit(class CSettler * a1) {
   
   int result; // eax
 
@@ -53,7 +53,7 @@ void  CDoorRole::PostLoadInit(class CSettler *) {
 
 // address=[0x156cf40]
 // Decompiled from char __thiscall CDoorRole::SetFree(CDoorRole *this, struct CSettler *a2, int a3)
-bool  CDoorRole::SetFree(class CSettler *,int) {
+bool  CDoorRole::SetFree(class CSettler * a2, int a3) {
   
   void **v3; // eax
   int v5; // [esp+0h] [ebp-10h]
@@ -85,7 +85,7 @@ bool  CDoorRole::SetFree(class CSettler *,int) {
 
 // address=[0x156cfd0]
 // Decompiled from int __thiscall CDoorRole::Decrease(CDoorRole *this, int a2)
-int  CDoorRole::Decrease(int) {
+int  CDoorRole::Decrease(int a2) {
   
   _DWORD *v3; // [esp+4h] [ebp-4h]
 
@@ -100,7 +100,7 @@ int  CDoorRole::Decrease(int) {
 
 // address=[0x156d020]
 // Decompiled from char *__thiscall CDoorRole::CDoorRole(char *this, int a2)
- CDoorRole::CDoorRole(std::istream &) {
+ CDoorRole::CDoorRole(std::istream & a2) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
@@ -126,7 +126,7 @@ int  CDoorRole::Decrease(int) {
 
 // address=[0x156d0d0]
 // Decompiled from int __thiscall CDoorRole::Store(struct CPersistence *this, struct std::ostream *a2)
-void  CDoorRole::Store(std::ostream &) {
+void  CDoorRole::Store(std::ostream & a2) {
   
   int v3[2]; // [esp+0h] [ebp-8h] BYREF
 
@@ -163,7 +163,7 @@ int  CDoorRole::GetSettlerRole(void)const {
 
 // address=[0x156d310]
 // Decompiled from void *__thiscall CDoorRole::InitWalking(std::_Ref_count_base *this, const struct type_info *a2)
-class CWalking *  CDoorRole::InitWalking(class CSettler *) {
+class CWalking *  CDoorRole::InitWalking(class CSettler * a2) {
   
   return 0;
 }
@@ -179,7 +179,7 @@ void  CDoorRole::LogicUpdateJob(class CSettler *) {
 
 // address=[0x1588580]
 // Decompiled from int __cdecl CDoorRole::Load(int a1)
-static class CDoorRole * __cdecl CDoorRole::Load(std::istream &) {
+class CDoorRole * __cdecl CDoorRole::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
@@ -194,7 +194,7 @@ static class CDoorRole * __cdecl CDoorRole::Load(std::istream &) {
 
 // address=[0x156d110]
 // Decompiled from IEntity *__thiscall CDoorRole::Init(_WORD *this, CPropertySet *a2)
-void  CDoorRole::Init(class CSettler *) {
+void  CDoorRole::Init(class CSettler * a2) {
   
   IEntity *result; // eax
   char v3; // al

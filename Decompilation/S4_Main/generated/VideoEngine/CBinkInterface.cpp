@@ -22,7 +22,7 @@
 
 // address=[0x16a1cb0]
 // Decompiled from char __thiscall CBinkInterface::OpenVideo(CBinkInterface *this, char *a2, unsigned int a3, unsigned int a4)
-bool  CBinkInterface::OpenVideo(char *,unsigned int,unsigned int) {
+bool  CBinkInterface::OpenVideo(char * a2, unsigned int a3, unsigned int a4) {
   
   const char *Error; // eax
 
@@ -94,7 +94,7 @@ int  CBinkInterface::GetWidth(void) {
 
 // address=[0x16a1e40]
 // Decompiled from int __thiscall CBinkInterface::UseMiles(CBinkInterface *this, unsigned int a2)
-void  CBinkInterface::UseMiles(unsigned long) {
+void  CBinkInterface::UseMiles(unsigned long a2) {
   
   return BinkSetSoundSystem(BinkOpenMiles, a2);
 }
@@ -118,7 +118,7 @@ void  CBinkInterface::CloseBink(void) {
 
 // address=[0x16a1e90]
 // Decompiled from char __thiscall CBinkInterface::RenderToSurface(CBinkInterface *this, unsigned __int16 *a2, unsigned int a3)
-bool  CBinkInterface::RenderToSurface(unsigned short *,unsigned int) {
+bool  CBinkInterface::RenderToSurface(unsigned short * a2, unsigned int a3) {
   
   if ( !*(_DWORD *)this )
   {

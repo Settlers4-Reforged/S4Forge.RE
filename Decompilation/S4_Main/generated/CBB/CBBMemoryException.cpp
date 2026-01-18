@@ -23,7 +23,7 @@
 
 // address=[0x2f309c0]
 // Decompiled from char __thiscall CBBMemoryException::GetErrorMessage(CBBMemoryException *this, char *a2, unsigned int a3)
-bool  CBBMemoryException::GetErrorMessage(char *,unsigned int) {
+bool  CBBMemoryException::GetErrorMessage(char * a2, unsigned int a3) {
   
   BBSupportLib::BBSCopyString<char>(a2, "Out of memory!", a3);
   return 1;
@@ -32,7 +32,7 @@ bool  CBBMemoryException::GetErrorMessage(char *,unsigned int) {
 
 // address=[0x2f337b0]
 // Decompiled from boost::exception_detail::clone_base *__thiscall CBBMemoryException::CBBMemoryException(  boost::exception_detail::clone_base *this,  struct boost::exception_detail::clone_base *a2)
- CBBMemoryException::CBBMemoryException(class CBBMemoryException const &) {
+ CBBMemoryException::CBBMemoryException(class CBBMemoryException const & a2) {
   
   CBBException::CBBException(this, a2);
   *(_DWORD *)this = &CBBMemoryException::_vftable_;

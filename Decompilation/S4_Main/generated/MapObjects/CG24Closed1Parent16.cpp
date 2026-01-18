@@ -28,7 +28,7 @@ int  CG24Closed1Parent16::Parent(void)const {
 
 // address=[0x15d6cb0]
 // Decompiled from CG24Closed1Parent16 *__thiscall CG24Closed1Parent16::Set(  CG24Closed1Parent16 *this,  int a2,  __int16 a3,  bool a4,  char a5)
-void  CG24Closed1Parent16::Set(int,int,bool,int) {
+void  CG24Closed1Parent16::Set(int a2, int a3, bool a4, int a5) {
   
   CG24Closed1Parent16 *result; // eax
 

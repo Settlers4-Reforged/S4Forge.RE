@@ -1,10 +1,12 @@
 #ifndef CSTDSCRIPTFILE_H
 #define CSTDSCRIPTFILE_H
 
+#include "defines.h"
+
 class CStdScriptFile : public IScriptFile {
 public:
     // address=[0x160dbd0]
-     CStdScriptFile(wchar_t const *);
+     CStdScriptFile(wchar_t const * FileName);
 
     // address=[0x160dd00]
     virtual  ~CStdScriptFile(void);

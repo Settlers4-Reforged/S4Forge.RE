@@ -4,7 +4,7 @@
 
 // address=[0x1470560]
 // Decompiled from CWarriorEntitySpiralWalk *__thiscall CWarriorEntitySpiralWalk::CWarriorEntitySpiralWalk(  CWarriorEntitySpiralWalk *this,  int a2,  int a3,  int a4,  int a5,  int a6)
- CWarriorEntitySpiralWalk::CWarriorEntitySpiralWalk(int,int,int,int,int) {
+ CWarriorEntitySpiralWalk::CWarriorEntitySpiralWalk(int a2, int a3, int a4, int a5, int a6) {
   
   CSettlerSpiralWalk::CSettlerSpiralWalk(this, a2, a3, a4);
   *((_DWORD *)this + 6) = a5;
@@ -15,7 +15,7 @@
 
 // address=[0x15e2d90]
 // Decompiled from char __thiscall CWarriorEntitySpiralWalk::NextEntity(CWarriorEntitySpiralWalk *this, struct IEntity **a2)
-bool  CWarriorEntitySpiralWalk::NextEntity(class IEntity * &) {
+bool  CWarriorEntitySpiralWalk::NextEntity(class IEntity * & a2) {
   
   int v2; // eax
   int v4; // [esp+0h] [ebp-18h]

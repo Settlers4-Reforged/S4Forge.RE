@@ -4,7 +4,7 @@
 
 // address=[0x2f14bc0]
 // Decompiled from _DWORD *__thiscall AdvXMLParser::Reference::Reference(_DWORD *this, int a2, int a3)
- AdvXMLParser::Reference::Reference(class AdvXMLParser::NodeContainer &,std::string const &) {
+ AdvXMLParser::Reference::Reference(class AdvXMLParser::NodeContainer & a2, std::string const & a3) {
   
   AdvXMLParser::Node::Node(a2, a3);
   *this = &AdvXMLParser::Reference::_vftable_;
@@ -14,7 +14,7 @@
 
 // address=[0x2f14bf0]
 // Decompiled from bool __thiscall AdvXMLParser::Reference::IsKindOf(AdvXMLParser::Reference *this, int a2)
-bool  AdvXMLParser::Reference::IsKindOf(int)const {
+bool  AdvXMLParser::Reference::IsKindOf(int a2)const {
   
   return a2 == 5 || AdvXMLParser::Node::IsKindOf(this, a2);
 }
@@ -30,7 +30,7 @@ bool  AdvXMLParser::Reference::IsKindOf(int)const {
 
 // address=[0x2f23940]
 // Decompiled from struct AdvXMLParser::EntityRef *__cdecl AdvXMLParser::Reference::Parse(  struct AdvXMLParser::Parser *a1,  struct AdvXMLParser::NodeContainer *a2)
-static class AdvXMLParser::Reference * __cdecl AdvXMLParser::Reference::Parse(class AdvXMLParser::Parser &,class AdvXMLParser::NodeContainer &) {
+class AdvXMLParser::Reference * __cdecl AdvXMLParser::Reference::Parse(class AdvXMLParser::Parser & a1, class AdvXMLParser::NodeContainer & a2) {
   
   struct AdvXMLParser::CharRef *v3; // eax
   struct AdvXMLParser::EntityRef *v4; // [esp+4h] [ebp-18h]

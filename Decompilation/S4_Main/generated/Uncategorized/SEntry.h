@@ -1,6 +1,8 @@
 #ifndef CPLAYLIST_SENTRY_H
 #define CPLAYLIST_SENTRY_H
 
+#include "defines.h"
+
 namespace CPlaylist {
 
 class SEntry {

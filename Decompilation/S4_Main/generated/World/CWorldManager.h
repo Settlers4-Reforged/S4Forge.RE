@@ -1,166 +1,168 @@
 #ifndef CWORLDMANAGER_H
 #define CWORLDMANAGER_H
 
+#include "defines.h"
+
 class CWorldManager {
 public:
     // address=[0x12fd0f0]
-    static unsigned int __cdecl FlagBits(int,unsigned int);
+    static unsigned int __cdecl FlagBits(int a1, unsigned int a2);
 
     // address=[0x12fd2d0]
-    static bool __cdecl InWorld(int,int);
+    static bool __cdecl InWorld(int a1, int a2);
 
     // address=[0x12fd350]
-    static int __cdecl Index(int,int);
+    static int __cdecl Index(int x, int y);
 
     // address=[0x12fd440]
-    static int __cdecl NormalTileId(int);
+    static int __cdecl NormalTileId(int a1);
 
     // address=[0x12fd4a0]
-    static int __cdecl ObjectId(int,int);
+    static int __cdecl ObjectId(int a1, int a2);
 
     // address=[0x12fd620]
-    static int __cdecl SectorId(int);
+    static int __cdecl SectorId(int a1);
 
     // address=[0x1306950]
-    static int __cdecl SectorId(int,int);
+    static int __cdecl SectorId(int a1, int a2);
 
     // address=[0x130eff0]
-    static int __cdecl Ground(int);
+    static int __cdecl Ground(int a1);
 
     // address=[0x130f080]
-    static bool __cdecl InWorldPackedXY(int);
+    static bool __cdecl InWorldPackedXY(int a1);
 
     // address=[0x130f0b0]
-    static bool __cdecl IsBlockedLand(int);
+    static bool __cdecl IsBlockedLand(int a1);
 
     // address=[0x130f1f0]
-    static int __cdecl NeighborRelIndex(int);
+    static int __cdecl NeighborRelIndex(int a1);
 
     // address=[0x130f3c0]
-    static int __cdecl SettlerId(int,int);
+    static int __cdecl SettlerId(int a1, int a2);
 
     // address=[0x130f540]
     static int __cdecl Width(void);
 
     // address=[0x131c950]
-    static unsigned int __cdecl Flags(int);
+    static unsigned int __cdecl Flags(int a1);
 
     // address=[0x131c970]
-    static int __cdecl GroundHeight(int);
+    static int __cdecl GroundHeight(int a1);
 
     // address=[0x131c9b0]
     static int __cdecl Height(void);
 
     // address=[0x131c9c0]
-    static int __cdecl Resource(int);
+    static int __cdecl Resource(int a1);
 
     // address=[0x1326db0]
-    static int __cdecl EcoSectorId(int,int);
+    static int __cdecl EcoSectorId(int a1, int a2);
 
     // address=[0x1335f70]
-    static unsigned int __cdecl FlagBits(int,int,unsigned int);
+    static unsigned int __cdecl FlagBits(int a1, int a2, unsigned int a3);
 
     // address=[0x13367c0]
-    static int __cdecl ResourceAmount(int,int,int);
+    static int __cdecl ResourceAmount(int a1, int a2, int a3);
 
     // address=[0x1346600]
-    static int __cdecl BuildingId(int,int);
+    static int __cdecl BuildingId(int a1, int a2);
 
     // address=[0x1346660]
-    static int __cdecl EcoSectorId(int);
+    static int __cdecl EcoSectorId(int a1);
 
     // address=[0x1346760]
-    static int __cdecl Ground(int,int);
+    static int __cdecl Ground(int a1, int a2);
 
     // address=[0x1351a40]
-    static int __cdecl BuildingId(int);
+    static int __cdecl BuildingId(int a1);
 
     // address=[0x1351b70]
-    static int __cdecl MapObjectId(int);
+    static int __cdecl MapObjectId(int a1);
 
     // address=[0x1351b90]
-    static int __cdecl MapObjectId(int,int);
+    static int __cdecl MapObjectId(int a1, int a2);
 
     // address=[0x1351bc0]
-    static int __cdecl MoveCostsBits(int);
+    static int __cdecl MoveCostsBits(int a1);
 
     // address=[0x1351be0]
-    static int __cdecl MoveCount(int);
+    static int __cdecl MoveCount(int a1);
 
     // address=[0x1351c90]
-    static int __cdecl ObjectId(int);
+    static int __cdecl ObjectId(int a1);
 
     // address=[0x1351cb0]
-    static int __cdecl OccupyingEntityId(int);
+    static int __cdecl OccupyingEntityId(int a1);
 
     // address=[0x1351d00]
-    static int __cdecl OccupyingEntityId(int,int);
+    static int __cdecl OccupyingEntityId(int a1, int a2);
 
     // address=[0x141d7b0]
-    static void __cdecl ClearFlagBits(int,int,unsigned int);
+    static void __cdecl ClearFlagBits(int a1, int a2, unsigned int a3);
 
     // address=[0x141d830]
-    static void __cdecl ClearFlagBits(int,unsigned int);
+    static void __cdecl ClearFlagBits(int a1, unsigned int a2);
 
     // address=[0x141d8d0]
-    static bool __cdecl InInnerWorld16(int,int);
+    static bool __cdecl InInnerWorld16(int a1, int a2);
 
     // address=[0x141d9d0]
-    static bool __cdecl IsWater(int);
+    static bool __cdecl IsWater(int a1);
 
     // address=[0x141da40]
-    static void __cdecl SetFlagBits(int,int,unsigned int);
+    static void __cdecl SetFlagBits(int a1, int a2, unsigned int a3);
 
     // address=[0x141dac0]
-    static void __cdecl SetFlagBits(int,unsigned int);
+    static void __cdecl SetFlagBits(int a1, unsigned int a2);
 
     // address=[0x141dba0]
-    static int __cdecl X(int);
+    static int __cdecl X(int a1);
 
     // address=[0x141dbc0]
-    static int __cdecl Y(int);
+    static int __cdecl Y(int a1);
 
     // address=[0x1439bd0]
-    static int __cdecl Index(int);
+    static int __cdecl Index(int a1);
 
     // address=[0x1447770]
-    static int __cdecl PileId(int);
+    static int __cdecl PileId(int a1);
 
     // address=[0x1447860]
-    static int __cdecl SettlerId(int);
+    static int __cdecl SettlerId(int a1);
 
     // address=[0x1452a70]
-    static int __cdecl OwnerId(int,int);
+    static int __cdecl OwnerId(int a1, int a2);
 
     // address=[0x1460470]
     static void __cdecl ClearHelperObject(void);
 
     // address=[0x14605e0]
-    static int __cdecl GetHelperObject(int,int);
+    static int __cdecl GetHelperObject(int a1, int a2);
 
     // address=[0x1460a20]
-    static void __cdecl SetHelperObject(int,int,int);
+    static void __cdecl SetHelperObject(int a1, int a2, int a3);
 
     // address=[0x146aea0]
-    static int __cdecl ResourceAmount(int,int);
+    static int __cdecl ResourceAmount(int a1, int a2);
 
     // address=[0x146aef0]
-    static int __cdecl ResourceType(int);
+    static int __cdecl ResourceType(int a1);
 
     // address=[0x146af10]
-    static void __cdecl SetObjectId(int,int);
+    static void __cdecl SetObjectId(int a1, int a2);
 
     // address=[0x146af30]
-    static void __cdecl SetResource(int,int,int);
+    static void __cdecl SetResource(int a1, int a2, int a3);
 
     // address=[0x1470bb0]
-    static int __cdecl PileId(int,int);
+    static int __cdecl PileId(int a1, int a2);
 
     // address=[0x1470e10]
-    static int __cdecl SurroundingHexPointRelIndex(int);
+    static int __cdecl SurroundingHexPointRelIndex(int a1);
 
     // address=[0x1486fb0]
-    static int __cdecl GroundHeight(int,int);
+    static int __cdecl GroundHeight(int a1, int a2);
 
     // address=[0x14aabe0]
     static unsigned short * __cdecl GetDecoObjectPtr(void);
@@ -172,79 +174,79 @@ public:
     static unsigned short * __cdecl GetMapObjectPtr(void);
 
     // address=[0x14d87f0]
-    static void __cdecl SetMapObjectId(int,int);
+    static void __cdecl SetMapObjectId(int a1, int a2);
 
     // address=[0x14d8870]
-    static void __cdecl SetSettlerId(int,int);
+    static void __cdecl SetSettlerId(int a1, int a2);
 
     // address=[0x14dfef0]
-    static bool __cdecl InWorld(int);
+    static bool __cdecl InWorld(int a1);
 
     // address=[0x14dff70]
-    static bool __cdecl IsPositionFreeForSettler(int);
+    static bool __cdecl IsPositionFreeForSettler(int a1);
 
     // address=[0x14dffc0]
-    static bool __cdecl IsPositionFreeForSettler(int,int);
+    static bool __cdecl IsPositionFreeForSettler(int a1, int a2);
 
     // address=[0x14e3040]
-    static void __cdecl SetMapObjectId(int,int,int);
+    static void __cdecl SetMapObjectId(int x, int y, int id);
 
     // address=[0x14e3070]
-    static void __cdecl SetSettlerId(int,int,int);
+    static void __cdecl SetSettlerId(int x, int y, int id);
 
     // address=[0x14e6880]
-    static void __cdecl SetMoveCostsBits(int,int);
+    static void __cdecl SetMoveCostsBits(int a1, int a2);
 
     // address=[0x14eb2e0]
-    static void __cdecl ClearBlockedPosition(int,int);
+    static void __cdecl ClearBlockedPosition(int a1, int a2);
 
     // address=[0x14eb6f0]
-    static void __cdecl SetBlockedPosition(int,int);
+    static void __cdecl SetBlockedPosition(int a1, int a2);
 
     // address=[0x14eb720]
-    static void __cdecl SetMoveCount(int,int);
+    static void __cdecl SetMoveCount(int a1, int a2);
 
     // address=[0x14eb750]
-    static void __cdecl SetOwnerId(int,int,int);
+    static void __cdecl SetOwnerId(int a1, int a2, int a3);
 
     // address=[0x14fd2d0]
-    static void __cdecl DecreaseGroundHeight(int,int);
+    static void __cdecl DecreaseGroundHeight(int a1, int a2);
 
     // address=[0x14fd770]
-    static void __cdecl IncreaseGroundHeight(int,int);
+    static void __cdecl IncreaseGroundHeight(int a1, int a2);
 
     // address=[0x14fd7c0]
-    static bool __cdecl IsWater(int,int);
+    static bool __cdecl IsWater(int a1, int a2);
 
     // address=[0x14fdd70]
-    static int __cdecl OwnerId(int);
+    static int __cdecl OwnerId(int a1);
 
     // address=[0x1506770]
-    static void __cdecl SetObjectId(int,int,int);
+    static void __cdecl SetObjectId(int a1, int a2, int a3);
 
     // address=[0x1516110]
-    static void __cdecl SetResource(int,int,int,int);
+    static void __cdecl SetResource(int a1, int a2, int a3, int a4);
 
     // address=[0x151aa50]
-    static bool __cdecl InInnerWorld2(int,int);
+    static bool __cdecl InInnerWorld2(int a1, int a2);
 
     // address=[0x151ab00]
-    static int __cdecl ResourceType(int,int);
+    static int __cdecl ResourceType(int a1, int a2);
 
     // address=[0x151ab30]
-    static int __cdecl ShadingGradient(int);
+    static int __cdecl ShadingGradient(int a1);
 
     // address=[0x1575b60]
-    static int __cdecl CatapultTileId(int,int);
+    static int __cdecl CatapultTileId(int a1, int a2);
 
     // address=[0x15a7a50]
-    static bool __cdecl InInnerWorld1(int,int);
+    static bool __cdecl InInnerWorld1(int a1, int a2);
 
     // address=[0x15d6110]
-    static int __cdecl CatapultTileId(int);
+    static int __cdecl CatapultTileId(int a1);
 
     // address=[0x15fe660]
-    static bool __cdecl IsBlockedWater(int);
+    static bool __cdecl IsBlockedWater(int a1);
 
     // address=[0x16a2580]
      CWorldManager(void);
@@ -256,83 +258,83 @@ public:
     static void __cdecl Destruct(void);
 
     // address=[0x16a26d0]
-    static bool __cdecl LoadMap(class S4::CMapFile &,int);
+    static bool __cdecl LoadMap(class S4::CMapFile & a1, int a2);
 
     // address=[0x16a28b0]
-    static bool __cdecl SaveMap(class S4::CMapFile &);
+    static bool __cdecl SaveMap(class S4::CMapFile & a1);
 
     // address=[0x16a2a20]
-    static void __cdecl LoadGfxData(class S4::CMapFile &,int,int);
+    static void __cdecl LoadGfxData(class S4::CMapFile & a1, int a2, int a3);
 
     // address=[0x16a2d60]
-    static void __cdecl IncreaseWalkCount(int);
+    static void __cdecl IncreaseWalkCount(int a1);
 
     // address=[0x16a2e90]
-    static void __cdecl DecreaseWalkCount(int);
+    static void __cdecl DecreaseWalkCount(int a1);
 
     // address=[0x16a2fc0]
-    static void __cdecl SetPileId(int,int);
+    static void __cdecl SetPileId(int a1, int a2);
 
     // address=[0x16a3020]
-    static int __cdecl CheckBlockable(int,int);
+    static int __cdecl CheckBlockable(int a1, int a2);
 
     // address=[0x16a30e0]
-    static void __cdecl SetGround(int,int,int);
+    static void __cdecl SetGround(int a1, int a2, int a3);
 
     // address=[0x16a3170]
-    static void __cdecl SetOwner(int,int);
+    static void __cdecl SetOwner(int a1, int a2);
 
     // address=[0x16a4060]
-    static void __cdecl SetTowerBits(int,int,int,int);
+    static void __cdecl SetTowerBits(int a1, int a2, int a3, int a4);
 
     // address=[0x16a4170]
-    static void __cdecl TraceLine(int,int,int,int);
+    static void __cdecl TraceLine(int a1, int a2, int a3, int a4);
 
     // address=[0x16a4380]
-    static struct SGfxColor * __cdecl GetMiniMapColor(unsigned int);
+    static struct SGfxColor * __cdecl GetMiniMapColor(unsigned int a1);
 
     // address=[0x16a4480]
-    static void __cdecl WorldSetNumberOfNextLine(int);
+    static void __cdecl WorldSetNumberOfNextLine(int a1);
 
     // address=[0x16a44a0]
-    static unsigned char __cdecl WorldGetIconObjectByX(int);
+    static unsigned char __cdecl WorldGetIconObjectByX(int a1);
 
     // address=[0x16a44c0]
-    static int __cdecl WorldOwnerId(int);
+    static int __cdecl WorldOwnerId(int a1);
 
     // address=[0x16a44f0]
-    static int __cdecl WorldOwnerIdColor(int);
+    static int __cdecl WorldOwnerIdColor(int a1);
 
 protected:
     // address=[0x16a4520]
-    static void __cdecl Construct(int);
+    static void __cdecl Construct(int a1);
 
     // address=[0x16a46f0]
-    static void __cdecl SetGroundInit(int,int);
+    static void __cdecl SetGroundInit(int a1, int a2);
 
     // address=[0x16a4790]
-    static void __cdecl GetBuildingInfluenceInfo(int,int &,int &);
+    static void __cdecl GetBuildingInfluenceInfo(int a1, int & a2, int & a3);
 
     // address=[0x16a4800]
-    static int __cdecl CheckSettlerId(int);
+    static int __cdecl CheckSettlerId(int a1);
 
     // address=[0x16a4840]
-    static int __cdecl CheckBuildingId(int);
+    static int __cdecl CheckBuildingId(int a1);
 
     // address=[0x16a4880]
-    static int __cdecl CheckPileId(int);
+    static int __cdecl CheckPileId(int a1);
 
     // address=[0x16a6b40]
-    static void __cdecl ClearBlockedLandEx(int);
+    static void __cdecl ClearBlockedLandEx(int a1);
 
     // address=[0x16a7880]
-    static void __cdecl SetBlockedLandEx(int);
+    static void __cdecl SetBlockedLandEx(int a1);
 
     // address=[0x16a78a0]
-    static void __cdecl SetGroundTypeOnly(int,int);
+    static void __cdecl SetGroundTypeOnly(int a1, int a2);
 
     // address=[0x16a78e0]
-    static void __cdecl StartUpOwner(int,int);
+    static void __cdecl StartUpOwner(int a1, int a2);
 
     // address=[0x462bcd8]
     static int m_iWidthHeight;

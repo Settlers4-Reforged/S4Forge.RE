@@ -4,7 +4,7 @@
 
 // address=[0x14ca870]
 // Decompiled from CStateSlideshow *__cdecl CStateSlideshow::DynamicCreateFunc(void *a1)
-static class CGameState * __cdecl CStateSlideshow::DynamicCreateFunc(void *) {
+class CGameState * __cdecl CStateSlideshow::DynamicCreateFunc(void * a1) {
   
   CStateSlideshow *C; // [esp+Ch] [ebp-10h]
 
@@ -108,7 +108,7 @@ bool  CStateSlideshow::Perform(void) {
 
 // address=[0x14caba0]
 // Decompiled from char __thiscall CStateSlideshow::OnEvent(CStateSlideshow *this, struct CEvn_Event *a2)
-bool  CStateSlideshow::OnEvent(class CEvn_Event &) {
+bool  CStateSlideshow::OnEvent(class CEvn_Event & a2) {
   
   CEvn_Event *v3; // [esp+8h] [ebp-38h]
   int event; // [esp+14h] [ebp-2Ch]

@@ -4,7 +4,7 @@
 
 // address=[0x1372120]
 // Decompiled from int __thiscall CGuiGameState::OnEvent(CGuiGameState *this, struct CEvn_Event *a2)
-bool  CGuiGameState::OnEvent(class CEvn_Event &) {
+bool  CGuiGameState::OnEvent(class CEvn_Event & a2) {
   
   if ( a2->event == 3 )
     CGuiGameState::AlignDialogsInScreenCenter(this);
@@ -47,7 +47,7 @@ void  CGuiGameState::EnsureGfxEngineIsInGuiMode(void) {
 
 // address=[0x1372180]
 // Decompiled from void __thiscall CGuiGameState::SetupGui(  CGuiGameState *this,  wchar_t *FileName,  int a3,  bool (__cdecl *a4)(int, int, int),  int a5)
-void  CGuiGameState::SetupGui(wchar_t const *,int,bool (__cdecl*)(int,int,int),int) {
+void  CGuiGameState::SetupGui(wchar_t const * FileName, int a3, bool (__cdecl*)(int,int,int) a4, int a5) {
   
   sub_1372640(FileName);
   if ( g_pGUIEngine )
@@ -69,7 +69,7 @@ void  CGuiGameState::SetupGui(wchar_t const *,int,bool (__cdecl*)(int,int,int),i
 
 // address=[0x1372230]
 // Decompiled from void __thiscall CGuiGameState::SetupGuiWithExtra(  CGuiGameState *this,  wchar_t *FileName,  int a3,  bool (__cdecl *a4)(int, int, int),  struct IExtraCD *a5)
-void  CGuiGameState::SetupGuiWithExtra(wchar_t const *,int,bool (__cdecl*)(int,int,int),class IExtraCD *) {
+void  CGuiGameState::SetupGuiWithExtra(wchar_t const * FileName, int a3, bool (__cdecl*)(int,int,int) a4, class IExtraCD * a5) {
   
   sub_1372640(FileName);
   if ( g_pGUIEngine )
@@ -92,7 +92,7 @@ void  CGuiGameState::SetupGuiWithExtra(wchar_t const *,int,bool (__cdecl*)(int,i
 
 // address=[0x13722f0]
 // Decompiled from void __thiscall CGuiGameState::SetupExtraGui(  CGuiGameState *this,  struct IExtraCD *a2,  int a3,  bool (__cdecl *a4)(int, int, int))
-void  CGuiGameState::SetupExtraGui(class IExtraCD *,int,bool (__cdecl*)(int,int,int)) {
+void  CGuiGameState::SetupExtraGui(class IExtraCD * a2, int a3, bool (__cdecl*)(int,int,int) a4) {
   
   CGuiGameState *v5; // [esp+0h] [ebp-4h]
 
@@ -110,7 +110,7 @@ void  CGuiGameState::SetupExtraGui(class IExtraCD *,int,bool (__cdecl*)(int,int,
 
 // address=[0x1372380]
 // Decompiled from char __thiscall CGuiGameState::OpenDialog(CGuiGameState *this, int a2, bool (__cdecl *a3)(int, int, int))
-bool  CGuiGameState::OpenDialog(int,bool (__cdecl*)(int,int,int)) {
+bool  CGuiGameState::OpenDialog(int a2, bool (__cdecl*)(int,int,int) a3) {
   
   char v4; // [esp+7h] [ebp-1h]
 
@@ -123,7 +123,7 @@ bool  CGuiGameState::OpenDialog(int,bool (__cdecl*)(int,int,int)) {
 
 // address=[0x14a3530]
 // Decompiled from void __thiscall CGuiGameState::SetupGui(CGuiGameState *this, wchar_t *a2, int a3, bool (__cdecl *a4)(int, int, int))
-void  CGuiGameState::SetupGui(wchar_t const *,int,bool (__cdecl*)(int,int,int)) {
+void  CGuiGameState::SetupGui(wchar_t const * a2, int a3, bool (__cdecl*)(int,int,int) a4) {
   
   CGuiGameState::SetupGui(this, a2, a3, a4, a3);
 }
@@ -131,7 +131,7 @@ void  CGuiGameState::SetupGui(wchar_t const *,int,bool (__cdecl*)(int,int,int)) 
 
 // address=[0x13723d0]
 // Decompiled from char __thiscall CGuiGameState::InitGuiEngine(CGuiGameState *this, char *a2, int a3, bool (__cdecl *a4)(int, int, int))
-bool  CGuiGameState::InitGuiEngine(char *,int,bool (__cdecl*)(int,int,int)) {
+bool  CGuiGameState::InitGuiEngine(char * a2, int a3, bool (__cdecl*)(int,int,int) a4) {
   
   int Language; // eax
   IGuiEngine *v6; // [esp+Ch] [ebp-14h]

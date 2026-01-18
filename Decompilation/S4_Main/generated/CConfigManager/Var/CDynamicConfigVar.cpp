@@ -12,7 +12,7 @@
 
 // address=[0x2ef8800]
 // Decompiled from _BYTE *__thiscall CDynamicConfigVar::CDynamicConfigVar(_BYTE *this, char a2, char a3)
- CDynamicConfigVar::CDynamicConfigVar(enum T_CFGVAR_TYPE,int) {
+ CDynamicConfigVar::CDynamicConfigVar(enum T_CFGVAR_TYPE a2, int a3) {
   
   CConfigVar::CConfigVar(this, 0, a2, a3);
   *(_DWORD *)this = &CDynamicConfigVar::_vftable_;

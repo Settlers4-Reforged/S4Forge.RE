@@ -4,7 +4,7 @@
 
 // address=[0x14000e0]
 // Decompiled from int __cdecl CCastleRole::New(int a1)
-static class CPersistence * __cdecl CCastleRole::New(std::istream &) {
+class CPersistence * __cdecl CCastleRole::New(std::istream & a1) {
   
   if ( operator new(0x1C0u) )
     return CCastleRole::CCastleRole(a1);
@@ -49,7 +49,7 @@ int  CCastleRole::GetBuildingRole(void) {
 
 // address=[0x14fd8f0]
 // Decompiled from int __cdecl CCastleRole::Load(int a1)
-static class CCastleRole * __cdecl CCastleRole::Load(std::istream &) {
+class CCastleRole * __cdecl CCastleRole::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
@@ -61,7 +61,7 @@ static class CCastleRole * __cdecl CCastleRole::Load(std::istream &) {
 
 // address=[0x1506870]
 // Decompiled from int __stdcall CCastleRole::FillGfxInfo(unsigned __int16 *a1, int *a2)
-void  CCastleRole::FillGfxInfo(class CBuilding *,struct SGfxObjectInfo &) {
+void  CCastleRole::FillGfxInfo(class CBuilding * a1, struct SGfxObjectInfo & a2) {
   
   int v2; // eax
   int result; // eax
@@ -82,7 +82,7 @@ void  CCastleRole::FillGfxInfo(class CBuilding *,struct SGfxObjectInfo &) {
 
 // address=[0x15068f0]
 // Decompiled from int __thiscall CCastleRole::Init(CCastleRole *this, struct CBuilding *a2)
-void  CCastleRole::Init(class CBuilding *) {
+void  CCastleRole::Init(class CBuilding * a2) {
   
   int result; // eax
 
@@ -98,7 +98,7 @@ void  CCastleRole::Init(class CBuilding *) {
 
 // address=[0x1506960]
 // Decompiled from int __thiscall CCastleRole::PostLoadInit(CCastleRole *this, struct CBuilding *a2)
-void  CCastleRole::PostLoadInit(class CBuilding *) {
+void  CCastleRole::PostLoadInit(class CBuilding * a2) {
   
   int v2; // eax
   int result; // eax
@@ -114,7 +114,7 @@ void  CCastleRole::PostLoadInit(class CBuilding *) {
 
 // address=[0x1506990]
 // Decompiled from int __thiscall CCastleRole::Decrease(CCastleRole *this, int a2)
-int  CCastleRole::Decrease(int) {
+int  CCastleRole::Decrease(int a2) {
   
   return CMilitaryBuildingRole::Decrease(this, a2);
 }
@@ -122,7 +122,7 @@ int  CCastleRole::Decrease(int) {
 
 // address=[0x15069b0]
 // Decompiled from _DWORD *__thiscall CCastleRole::CCastleRole(_DWORD *this, int a2)
- CCastleRole::CCastleRole(std::istream &) {
+ CCastleRole::CCastleRole(std::istream & a2) {
   
   CMilitaryBuildingRole::CMilitaryBuildingRole(a2);
   *this = &CCastleRole::_vftable_;
@@ -132,7 +132,7 @@ int  CCastleRole::Decrease(int) {
 
 // address=[0x15069e0]
 // Decompiled from int __stdcall CCastleRole::Store(struct std::ostream *a1)
-void  CCastleRole::Store(std::ostream &) {
+void  CCastleRole::Store(std::ostream & a2) {
   
   return CMilitaryBuildingRole::Store(a1);
 }

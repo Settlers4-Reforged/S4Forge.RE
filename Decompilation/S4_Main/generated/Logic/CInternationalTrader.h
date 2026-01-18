@@ -1,6 +1,8 @@
 #ifndef CINTERNATIONALTRADER_H
 #define CINTERNATIONALTRADER_H
 
+#include "defines.h"
+
 class CInternationalTrader : public IS4ChunkObject {
 public:
     // address=[0x1461e60]
@@ -10,55 +12,55 @@ public:
      ~CInternationalTrader(void);
 
     // address=[0x1461ec0]
-    virtual void  Load(class IS4Chunk &);
+    virtual void  Load(class IS4Chunk & a2);
 
     // address=[0x14620a0]
-    virtual void  Save(class IS4Chunk &);
+    virtual void  Save(class IS4Chunk & a2);
 
     // address=[0x14622f0]
     static void __cdecl ReInit(void);
 
     // address=[0x1462420]
-    bool  Trade(class CBuilding *);
+    bool  Trade(class CBuilding * a2);
 
     // address=[0x1462700]
-    void  AddBuilding(class CBuilding *);
+    void  AddBuilding(class CBuilding * a2);
 
     // address=[0x14627a0]
-    void  RemoveBuilding(class CBuilding *);
+    void  RemoveBuilding(class CBuilding * a2);
 
     // address=[0x1462840]
-    void  SetGoodStatus(int,class CBuilding *,enum PILE_TYPES,enum TGOOD_STATUS);
+    void  SetGoodStatus(int a1, class CBuilding * a2, enum PILE_TYPES a3, enum TGOOD_STATUS a4);
 
     // address=[0x1462930]
-    void  SwitchToNextGoodStatus(int,class CBuilding *,enum PILE_TYPES);
+    void  SwitchToNextGoodStatus(int a2, class CBuilding * a3, enum PILE_TYPES a4);
 
     // address=[0x14629f0]
-    void  SwitchPlayerTradeStatus(int,int);
+    void  SwitchPlayerTradeStatus(int a2, int a3);
 
     // address=[0x1462a80]
-    void  SetPlayerTradeStatus(int,int,bool);
+    void  SetPlayerTradeStatus(int a2, int a3, bool a4);
 
     // address=[0x1462b40]
-    bool  GetPlayerTradeStatus(int,int);
+    bool  GetPlayerTradeStatus(int a2, int a3);
 
     // address=[0x1462bd0]
-    bool  TradeWithSomeone(int);
+    bool  TradeWithSomeone(int a2);
 
     // address=[0x1462c30]
-    bool  CheckGoodMatch(int,int);
+    bool  CheckGoodMatch(int a2, int a3);
 
     // address=[0x1462e10]
-    bool  CheckGoodMatch(int,int,enum PILE_TYPES);
+    bool  CheckGoodMatch(int a2, int a3, enum PILE_TYPES a4);
 
     // address=[0x1463000]
-    enum TGOOD_STATUS  GetGoodStatus(int,class CBuilding *,enum PILE_TYPES);
+    enum TGOOD_STATUS  GetGoodStatus(int a1, class CBuilding * a2, enum PILE_TYPES a3);
 
     // address=[0x14630c0]
-    class std::vector<struct CPlayerTradeInfo::TGoodInfo,class std::allocator<struct CInternationalTrader::CPlayerTradeInfo::TGoodInfo> >  CInternationalTrader::GetExportGoodList(class CBuilding *);
+    class std::vector<struct CPlayerTradeInfo::TGoodInfo,class std::allocator<struct CInternationalTrader::CPlayerTradeInfo::TGoodInfo> >  CInternationalTrader::GetExportGoodList(class CBuilding * a1);
 
     // address=[0x1463130]
-    bool  CanWalk(int,int);
+    bool  CanWalk(int a2, int a3);
 
     // address=[0x3f1f7b4]
     static bool m_bInit;
@@ -71,13 +73,13 @@ private:
     static void __cdecl InitPlayerList(void);
 
     // address=[0x14633b0]
-    int  CheckTrade(class CInternationalTrader::CPlayerTradeInfo *,class CInternationalTrader::CPlayerTradeInfo *,class CBuilding *);
+    int  CheckTrade(class CInternationalTrader::CPlayerTradeInfo * a2, class CInternationalTrader::CPlayerTradeInfo * a3, class CBuilding * a4);
 
     // address=[0x1463850]
-    void  DisableTrading(class CBuilding *,int,int);
+    void  DisableTrading(class CBuilding * a1, int a2, int a3);
 
     // address=[0x14638a0]
-    bool  IsBuildingAnPort(class CBuilding *);
+    bool  IsBuildingAnPort(class CBuilding * a1);
 
 };
 

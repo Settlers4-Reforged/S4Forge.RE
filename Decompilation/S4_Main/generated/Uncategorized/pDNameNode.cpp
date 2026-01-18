@@ -4,7 +4,7 @@
 
 // address=[0x3081300]
 // Decompiled from pDNameNode *__thiscall pDNameNode::pDNameNode(pDNameNode *this, struct DName *a2)
- pDNameNode::pDNameNode(class DName *) {
+ pDNameNode::pDNameNode(class DName * a2) {
   
   struct DName *v3; // [esp+0h] [ebp-8h]
 
@@ -32,7 +32,7 @@ char  pDNameNode::getLastChar(void)const {
 
 // address=[0x308a660]
 // Decompiled from char *__thiscall pDNameNode::getString(DName **this, char *a2, char *a3)
-char *  pDNameNode::getString(char *,char *)const {
+char *  pDNameNode::getString(char * a2, char * a3)const {
   
   if ( this[1] )
     return DName::getString(this[1], a2, a3);

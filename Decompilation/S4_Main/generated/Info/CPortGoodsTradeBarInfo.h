@@ -1,6 +1,8 @@
 #ifndef CPORTGOODSTRADEBARINFO_H
 #define CPORTGOODSTRADEBARINFO_H
 
+#include "defines.h"
+
 class CPortGoodsTradeBarInfo : public CInfoExchange {
 public:
     // address=[0x1454770]

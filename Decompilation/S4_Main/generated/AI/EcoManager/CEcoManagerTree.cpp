@@ -35,7 +35,7 @@
 
 // address=[0x134bda0]
 // Decompiled from char __thiscall CEcoManagerTree::CreateBaseLeaf(CEcoManagerTree *this, int a2, int a3, int a4, int a5)
-unsigned char  CEcoManagerTree::CreateBaseLeaf(enum BUILDING_TYPES,int,int,class std::vector<struct SPOSS_BUILD_PLACE,class std::allocator<struct SPOSS_BUILD_PLACE> > *) {
+unsigned char  CEcoManagerTree::CreateBaseLeaf(enum BUILDING_TYPES a2, int a3, int a4, class std::vector<struct SPOSS_BUILD_PLACE,class std::allocator<struct SPOSS_BUILD_PLACE> > * a5) {
   
   int NrBaseLeaves; // eax
   int v7; // [esp+8h] [ebp-34h] BYREF
@@ -91,7 +91,7 @@ unsigned char  CEcoManagerTree::CreateBaseLeaf(enum BUILDING_TYPES,int,int,class
 
 // address=[0x134bee0]
 // Decompiled from char __thiscall CEcoManagerTree::RemoveLeaf(CEcoManagerTree *this, int a2)
-bool  CEcoManagerTree::RemoveLeaf(int) {
+bool  CEcoManagerTree::RemoveLeaf(int a2) {
   
   int NrBaseLeaves; // eax
   _DWORD *v4; // esi
@@ -111,7 +111,7 @@ bool  CEcoManagerTree::RemoveLeaf(int) {
 
 // address=[0x134bf70]
 // Decompiled from char __thiscall CEcoManagerTree::RemoveLeaf(CEcoManagerTree *this, struct SBUILDINFODATA *a2)
-bool  CEcoManagerTree::RemoveLeaf(struct SBUILDINFODATA *) {
+bool  CEcoManagerTree::RemoveLeaf(struct SBUILDINFODATA * a2) {
   
   struct CEcoManagerLeaf *BaseLeaf; // eax
   struct CEcoManagerLeaf *Leaf; // [esp+0h] [ebp-Ch]
@@ -144,7 +144,7 @@ int  CEcoManagerTree::GetNrBaseLeaves(void) {
 
 // address=[0x134c030]
 // Decompiled from int __thiscall CEcoManagerTree::GetBaseLeaf(CEcoManagerTree *this, int a2)
-class CEcoManagerLeaf *  CEcoManagerTree::GetBaseLeaf(int) {
+class CEcoManagerLeaf *  CEcoManagerTree::GetBaseLeaf(int a2) {
   
   if ( a2 < CEcoManagerTree::GetNrBaseLeaves(this) && a2 >= 0 )
     return *(_DWORD *)std::vector<CEcoManagerLeaf *>::operator[](a2);
@@ -155,7 +155,7 @@ class CEcoManagerLeaf *  CEcoManagerTree::GetBaseLeaf(int) {
 
 // address=[0x134c070]
 // Decompiled from char __thiscall CEcoManagerTree::UpdateBaseLeaf(CEcoManagerTree *this, int a2)
-bool  CEcoManagerTree::UpdateBaseLeaf(int) {
+bool  CEcoManagerTree::UpdateBaseLeaf(int a2) {
   
   struct CEcoManagerLeaf *BaseLeaf; // [esp+4h] [ebp-4h]
 
@@ -169,7 +169,7 @@ bool  CEcoManagerTree::UpdateBaseLeaf(int) {
 
 // address=[0x134c0a0]
 // Decompiled from int __thiscall CEcoManagerTree::GetNrValidOfAllBaseLeafes(CEcoManagerTree *this, int a2)
-int  CEcoManagerTree::GetNrValidOfAllBaseLeafes(enum IECONOMANAGERGRIDRESOLUTION) {
+int  CEcoManagerTree::GetNrValidOfAllBaseLeafes(enum IECONOMANAGERGRIDRESOLUTION a2) {
   
   CEcoManagerLeaf *BaseLeaf; // eax
   CEcoManagerLeaf *v3; // eax
@@ -202,7 +202,7 @@ int  CEcoManagerTree::GetNrValidOfAllBaseLeafes(enum IECONOMANAGERGRIDRESOLUTION
 
 // address=[0x134c150]
 // Decompiled from struct CEcoManagerLeaf *__thiscall CEcoManagerTree::FindLeaf(CEcoManagerTree *this, int a2, int a3, int a4)
-class CEcoManagerLeaf *  CEcoManagerTree::FindLeaf(enum IECONOMANAGERGRIDRESOLUTION,int,int) {
+class CEcoManagerLeaf *  CEcoManagerTree::FindLeaf(enum IECONOMANAGERGRIDRESOLUTION a2, int a3, int a4) {
   
   int Child; // [esp+4h] [ebp-10h]
   int v6; // [esp+4h] [ebp-10h]
@@ -251,7 +251,7 @@ class CEcoManagerLeaf *  CEcoManagerTree::FindLeaf(enum IECONOMANAGERGRIDRESOLUT
 
 // address=[0x134c250]
 // Decompiled from int __thiscall CEcoManagerTree::FindNearLeaf(void *this, int a2, int a3, int a4, int a5)
-class CEcoManagerLeaf *  CEcoManagerTree::FindNearLeaf(enum IECONOMANAGERGRIDRESOLUTION,int,int,int) {
+class CEcoManagerLeaf *  CEcoManagerTree::FindNearLeaf(enum IECONOMANAGERGRIDRESOLUTION a2, int a3, int a4, int a5) {
   
   int i; // [esp+4h] [ebp-Ch]
   int j; // [esp+8h] [ebp-8h]
@@ -276,7 +276,7 @@ class CEcoManagerLeaf *  CEcoManagerTree::FindNearLeaf(enum IECONOMANAGERGRIDRES
 
 // address=[0x134c2f0]
 // Decompiled from struct CEcoManagerLeaf *__thiscall CEcoManagerTree::GetBaseLeaf(CEcoManagerTree *this, int a2, int a3)
-class CEcoManagerLeaf *  CEcoManagerTree::GetBaseLeaf(int,int) {
+class CEcoManagerLeaf *  CEcoManagerTree::GetBaseLeaf(int a2, int a3) {
   
   int NrBaseLeaves; // eax
   CEcoManagerLeaf *BaseLeaf; // eax
@@ -302,7 +302,7 @@ class CEcoManagerLeaf *  CEcoManagerTree::GetBaseLeaf(int,int) {
 
 // address=[0x134c360]
 // Decompiled from char __thiscall CEcoManagerTree::RemoveLeafRecursive(  CEcoManagerTree *this,  struct CEcoManagerLeaf *a2,  struct CEcoManagerLeaf *a3)
-bool  CEcoManagerTree::RemoveLeafRecursive(class CEcoManagerLeaf *,class CEcoManagerLeaf *) {
+bool  CEcoManagerTree::RemoveLeafRecursive(class CEcoManagerLeaf * a2, class CEcoManagerLeaf * a3) {
   
   struct CEcoManagerLeaf *Child; // eax
   int i; // [esp+4h] [ebp-4h]

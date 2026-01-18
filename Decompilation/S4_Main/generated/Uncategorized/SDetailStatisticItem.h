@@ -1,6 +1,8 @@
 #ifndef SDETAILSTATISTICITEM_H
 #define SDETAILSTATISTICITEM_H
 
+#include "defines.h"
+
 class SDetailStatisticItem {
 public:
     // address=[0x139c3b0]

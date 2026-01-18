@@ -4,7 +4,7 @@
 
 // address=[0x14a14b0]
 // Decompiled from CStateAOCampaignViking *__cdecl CStateAOCampaignViking::DynamicCreateFunc(void *a1)
-static class CGameState * __cdecl CStateAOCampaignViking::DynamicCreateFunc(void *) {
+class CGameState * __cdecl CStateAOCampaignViking::DynamicCreateFunc(void * a1) {
   
   CStateAOCampaignViking *C; // [esp+Ch] [ebp-10h]
 
@@ -80,7 +80,7 @@ bool  CStateAOCampaignViking::Perform(void) {
 
 // address=[0x14a1730]
 // Decompiled from char __thiscall CStateAOCampaignViking::OnEvent(CStateAOCampaignViking *this, struct CEvn_Event *a2)
-bool  CStateAOCampaignViking::OnEvent(class CEvn_Event &) {
+bool  CStateAOCampaignViking::OnEvent(class CEvn_Event & a2) {
   
   CEvn_Event *v3; // [esp+Ch] [ebp-38h]
   int event; // [esp+18h] [ebp-2Ch]

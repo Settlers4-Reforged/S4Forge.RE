@@ -1,13 +1,15 @@
 #ifndef CSTATEAOBRIEFING_H
 #define CSTATEAOBRIEFING_H
 
+#include "defines.h"
+
 class CStateAOBriefing : public CGuiGameState {
 public:
     // address=[0x149d9d0]
-    static class CGameState * __cdecl DynamicCreateFunc(void *);
+    static class CGameState * __cdecl DynamicCreateFunc(void * a1);
 
     // address=[0x149da50]
-     CStateAOBriefing(void *);
+     CStateAOBriefing(void * a2);
 
     // address=[0x149dea0]
     virtual  ~CStateAOBriefing(void);
@@ -16,10 +18,10 @@ public:
     virtual bool  Perform(void);
 
     // address=[0x149e0f0]
-    virtual bool  OnEvent(class CEvn_Event &);
+    virtual bool  OnEvent(class CEvn_Event & a2);
 
     // address=[0x149e9b0]
-    static void __cdecl InitBriefingTexts(int,int);
+    static void __cdecl InitBriefingTexts(int a1, int a2);
 
     // address=[0x149f4f0]
     virtual bool  CanProcessInvites(void);

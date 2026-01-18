@@ -63,7 +63,7 @@ int  CPlayerData::GetNumberOfSetups(void) {
 
 // address=[0x2fbf130]
 // Decompiled from int __thiscall CPlayerData::AddPlayer(int *this, int a2, int a3, int a4, char *Source)
-int  CPlayerData::AddPlayer(int,int,int,char *) {
+int  CPlayerData::AddPlayer(int a2, int a3, int a4, char * Source) {
   
   char *Destination; // [esp+0h] [ebp-8h]
 
@@ -80,7 +80,7 @@ int  CPlayerData::AddPlayer(int,int,int,char *) {
 
 // address=[0x2fbf1e0]
 // Decompiled from int __thiscall CPlayerData::DeletePlayer(int *this, int a2)
-int  CPlayerData::DeletePlayer(int) {
+int  CPlayerData::DeletePlayer(int a2) {
   
   int v3; // [esp+8h] [ebp-8h]
 
@@ -115,7 +115,7 @@ int  CPlayerData::AddSetup(void) {
 
 // address=[0x2fbf300]
 // Decompiled from int __thiscall CPlayerData::DeleteSetup(int *this, int a2)
-int  CPlayerData::DeleteSetup(int) {
+int  CPlayerData::DeleteSetup(int a2) {
   
   int i; // [esp+0h] [ebp-8h]
 
@@ -130,7 +130,7 @@ int  CPlayerData::DeleteSetup(int) {
 
 // address=[0x2fbf390]
 // Decompiled from int __thiscall CPlayerData::GetRaceOfPlayer(CPlayerData *this, int a2)
-int  CPlayerData::GetRaceOfPlayer(int) {
+int  CPlayerData::GetRaceOfPlayer(int a2) {
   
   if ( a2 < 1 )
     j___wassert(L"_Player>=1", L"PlayerAndTeamData.cpp", 0xDCu);
@@ -140,7 +140,7 @@ int  CPlayerData::GetRaceOfPlayer(int) {
 
 // address=[0x2fbf3d0]
 // Decompiled from int __thiscall CPlayerData::GetXOfPlayer(CPlayerData *this, int a2)
-int  CPlayerData::GetXOfPlayer(int) {
+int  CPlayerData::GetXOfPlayer(int a2) {
   
   if ( a2 < 1 )
     j___wassert(L"_Player>=1", L"PlayerAndTeamData.cpp", 0xEAu);
@@ -150,7 +150,7 @@ int  CPlayerData::GetXOfPlayer(int) {
 
 // address=[0x2fbf410]
 // Decompiled from int __thiscall CPlayerData::GetYOfPlayer(CPlayerData *this, int a2)
-int  CPlayerData::GetYOfPlayer(int) {
+int  CPlayerData::GetYOfPlayer(int a2) {
   
   if ( a2 < 1 )
     j___wassert(L"_Player>=1", L"PlayerAndTeamData.cpp", 0xF8u);
@@ -160,7 +160,7 @@ int  CPlayerData::GetYOfPlayer(int) {
 
 // address=[0x2fbf450]
 // Decompiled from void __thiscall CPlayerData::ChangePlayer(CPlayerData *this, int a2, int a3)
-void  CPlayerData::ChangePlayer(int,int) {
+void  CPlayerData::ChangePlayer(int a2, int a3) {
   
   int XOfPlayer; // eax
   int YOfPlayer; // eax
@@ -197,7 +197,7 @@ void  CPlayerData::ChangePlayer(int,int) {
 
 // address=[0x2fbf560]
 // Decompiled from char *__thiscall CPlayerData::GetNameOfPlayer(CPlayerData *this, int a2)
-char *  CPlayerData::GetNameOfPlayer(int) {
+char *  CPlayerData::GetNameOfPlayer(int a2) {
   
   if ( a2 < 1 )
     j___wassert(L"_Player>=1", L"PlayerAndTeamData.cpp", 0x106u);
@@ -207,7 +207,7 @@ char *  CPlayerData::GetNameOfPlayer(int) {
 
 // address=[0x2fbf5a0]
 // Decompiled from char *__thiscall CPlayerData::GetSetupName(CPlayerData *this, int a2)
-char *  CPlayerData::GetSetupName(int) {
+char *  CPlayerData::GetSetupName(int a2) {
   
   return (char *)this + 33 * a2;
 }
@@ -215,7 +215,7 @@ char *  CPlayerData::GetSetupName(int) {
 
 // address=[0x2fbf5c0]
 // Decompiled from int __thiscall CPlayerData::GetControlOfPlayer(CPlayerData *this, int a2, int a3)
-int  CPlayerData::GetControlOfPlayer(int,int) {
+int  CPlayerData::GetControlOfPlayer(int a2, int a3) {
   
   if ( a2 < 1 )
     j___wassert(L"_Player>=1", L"PlayerAndTeamData.cpp", 0x189u);
@@ -225,7 +225,7 @@ int  CPlayerData::GetControlOfPlayer(int,int) {
 
 // address=[0x2fbf610]
 // Decompiled from int __thiscall CPlayerData::GetTeamOfPlayer(CPlayerData *this, int a2, int a3)
-int  CPlayerData::GetTeamOfPlayer(int,int) {
+int  CPlayerData::GetTeamOfPlayer(int a2, int a3) {
   
   if ( a2 < 1 )
     j___wassert(L"_Player>=1", L"PlayerAndTeamData.cpp", 0x198u);
@@ -235,7 +235,7 @@ int  CPlayerData::GetTeamOfPlayer(int,int) {
 
 // address=[0x2fbf660]
 // Decompiled from CPlayerData *__thiscall CPlayerData::SetRaceOfPlayer(CPlayerData *this, int a2, int a3)
-void  CPlayerData::SetRaceOfPlayer(int,int) {
+void  CPlayerData::SetRaceOfPlayer(int a2, int a3) {
   
   CPlayerData *result; // eax
 
@@ -249,7 +249,7 @@ void  CPlayerData::SetRaceOfPlayer(int,int) {
 
 // address=[0x2fbf6a0]
 // Decompiled from CPlayerData *__thiscall CPlayerData::SetXOfPlayer(CPlayerData *this, int a2, int a3)
-void  CPlayerData::SetXOfPlayer(int,int) {
+void  CPlayerData::SetXOfPlayer(int a2, int a3) {
   
   CPlayerData *result; // eax
 
@@ -263,7 +263,7 @@ void  CPlayerData::SetXOfPlayer(int,int) {
 
 // address=[0x2fbf6e0]
 // Decompiled from CPlayerData *__thiscall CPlayerData::SetYOfPlayer(CPlayerData *this, int a2, int a3)
-void  CPlayerData::SetYOfPlayer(int,int) {
+void  CPlayerData::SetYOfPlayer(int a2, int a3) {
   
   CPlayerData *result; // eax
 
@@ -277,7 +277,7 @@ void  CPlayerData::SetYOfPlayer(int,int) {
 
 // address=[0x2fbf720]
 // Decompiled from char *__thiscall CPlayerData::SetNameOfPlayer(char *this, int a2, char *Source)
-void  CPlayerData::SetNameOfPlayer(int,char *) {
+void  CPlayerData::SetNameOfPlayer(int a2, char * Source) {
   
   if ( a2 < 1 )
     j___wassert(L"_Player>=1", L"PlayerAndTeamData.cpp", 0x121u);
@@ -287,7 +287,7 @@ void  CPlayerData::SetNameOfPlayer(int,char *) {
 
 // address=[0x2fbf770]
 // Decompiled from char *__thiscall CPlayerData::SetSetupName(char *this, int a2, char *Source)
-void  CPlayerData::SetSetupName(int,char *) {
+void  CPlayerData::SetSetupName(int a2, char * Source) {
   
   return j__strcpy_0(&this[33 * a2], Source);
 }
@@ -295,7 +295,7 @@ void  CPlayerData::SetSetupName(int,char *) {
 
 // address=[0x2fbf7a0]
 // Decompiled from char *__thiscall CPlayerData::SetControlOfPlayer(CPlayerData *this, int a2, int a3, char a4)
-void  CPlayerData::SetControlOfPlayer(int,int,int) {
+void  CPlayerData::SetControlOfPlayer(int a2, int a3, int a4) {
   
   char *result; // eax
 
@@ -309,7 +309,7 @@ void  CPlayerData::SetControlOfPlayer(int,int,int) {
 
 // address=[0x2fbf7f0]
 // Decompiled from char *__thiscall CPlayerData::SetTeamOfPlayer(CPlayerData *this, int a2, int a3, char a4)
-void  CPlayerData::SetTeamOfPlayer(int,int,int) {
+void  CPlayerData::SetTeamOfPlayer(int a2, int a3, int a4) {
   
   char *result; // eax
 
@@ -323,7 +323,7 @@ void  CPlayerData::SetTeamOfPlayer(int,int,int) {
 
 // address=[0x2fbf840]
 // Decompiled from int __thiscall CPlayerData::Save(int this, void *a2)
-int  CPlayerData::Save(unsigned char *) {
+int  CPlayerData::Save(unsigned char * a2) {
   
   int NumberOfPlayers; // eax
 
@@ -335,7 +335,7 @@ int  CPlayerData::Save(unsigned char *) {
 
 // address=[0x2fbf890]
 // Decompiled from int __thiscall CPlayerData::SaveTeamData(char *this, char *a2, int a3)
-int  CPlayerData::SaveTeamData(unsigned char *,int) {
+int  CPlayerData::SaveTeamData(unsigned char * a2, int a3) {
   
   int NumberOfPlayers; // eax
 
@@ -348,7 +348,7 @@ int  CPlayerData::SaveTeamData(unsigned char *,int) {
 
 // address=[0x2fbf900]
 // Decompiled from BOOL __thiscall CPlayerData::Load(  _DWORD *this,  LPVOID lpBuffer,  HANDLE hFile,  int a4,  DWORD nNumberOfBytesToRead,  int a6,  int a7,  int a8,  int a9)
-int  CPlayerData::Load(unsigned char *,void *,struct SMapChunkHeader) {
+int  CPlayerData::Load(unsigned char * lpBuffer, void * hFile, struct SMapChunkHeader a4) {
   
   DWORD NumberOfBytesRead; // [esp+0h] [ebp-Ch] BYREF
   BOOL v11; // [esp+4h] [ebp-8h]
@@ -365,7 +365,7 @@ int  CPlayerData::Load(unsigned char *,void *,struct SMapChunkHeader) {
 
 // address=[0x2fbf980]
 // Decompiled from BOOL __thiscall CPlayerData::LoadTeamData(  _DWORD *this,  char *lpBuffer,  HANDLE hFile,  int a4,  DWORD nNumberOfBytesToRead,  int a6,  int a7,  int a8,  int a9)
-int  CPlayerData::LoadTeamData(unsigned char *,void *,struct SMapChunkHeader) {
+int  CPlayerData::LoadTeamData(unsigned char * lpBuffer, void * hFile, struct SMapChunkHeader a4) {
   
   int NumberOfPlayers; // eax
   DWORD NumberOfBytesRead; // [esp+0h] [ebp-10h] BYREF
@@ -452,7 +452,7 @@ int  CPlayerData::CheckTeams(void) {
 
 // address=[0x2fc5330]
 // Decompiled from CPlayerData *__thiscall CPlayerData::CPlayerData(CPlayerData *this, int a2, bool a3)
- CPlayerData::CPlayerData(int,bool) {
+ CPlayerData::CPlayerData(int a2, bool a3) {
   
   *((_DWORD *)this + 6) = a2;
   *((_BYTE *)this + 28) = a3;
@@ -468,7 +468,7 @@ int  CPlayerData::CheckTeams(void) {
 
 // address=[0x2fc5390]
 // Decompiled from int __thiscall CPlayerData::setStartPos_Basic(CPlayerData *this, int a2, int a3)
-void  CPlayerData::setStartPos_Basic(int,int) {
+void  CPlayerData::setStartPos_Basic(int a2, int a3) {
   
   int result; // eax
 
@@ -481,7 +481,7 @@ void  CPlayerData::setStartPos_Basic(int,int) {
 
 // address=[0x2fc53b0]
 // Decompiled from int *__thiscall CPlayerData::getStartPos_Basic(CPlayerData *this, int *a2, int *a3)
-void  CPlayerData::getStartPos_Basic(int &,int &) {
+void  CPlayerData::getStartPos_Basic(int & a2, int & a3) {
   
   int *result; // eax
 
@@ -494,7 +494,7 @@ void  CPlayerData::getStartPos_Basic(int &,int &) {
 
 // address=[0x2fc53e0]
 // Decompiled from int __thiscall CPlayerData::setStartPos_Real(CPlayerData *this, int a2, int a3)
-void  CPlayerData::setStartPos_Real(int,int) {
+void  CPlayerData::setStartPos_Real(int a2, int a3) {
   
   int result; // eax
 
@@ -507,7 +507,7 @@ void  CPlayerData::setStartPos_Real(int,int) {
 
 // address=[0x2fc5400]
 // Decompiled from int *__thiscall CPlayerData::getStartPos_Real(CPlayerData *this, int *a2, int *a3)
-void  CPlayerData::getStartPos_Real(int &,int &) {
+void  CPlayerData::getStartPos_Real(int & a2, int & a3) {
   
   int *result; // eax
 
@@ -520,7 +520,7 @@ void  CPlayerData::getStartPos_Real(int &,int &) {
 
 // address=[0x2fc5430]
 // Decompiled from int *__thiscall CPlayerData::getNearestMountain(CPlayerData *this, int *a2, int *a3)
-void  CPlayerData::getNearestMountain(int &,int &) {
+void  CPlayerData::getNearestMountain(int & a2, int & a3) {
   
   int *result; // eax
 
@@ -533,7 +533,7 @@ void  CPlayerData::getNearestMountain(int &,int &) {
 
 // address=[0x2fc5460]
 // Decompiled from int __thiscall CPlayerData::setNearestMountain(CPlayerData *this, int a2, int a3)
-void  CPlayerData::setNearestMountain(int,int) {
+void  CPlayerData::setNearestMountain(int a2, int a3) {
   
   int result; // eax
 

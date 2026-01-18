@@ -4,7 +4,7 @@
 
 // address=[0x14a0af0]
 // Decompiled from CStateAOCampaignsSettle *__cdecl CStateAOCampaignsSettle::DynamicCreateFunc(void *a1)
-static class CGameState * __cdecl CStateAOCampaignsSettle::DynamicCreateFunc(void *) {
+class CGameState * __cdecl CStateAOCampaignsSettle::DynamicCreateFunc(void * a1) {
   
   CStateAOCampaignsSettle *C; // [esp+Ch] [ebp-10h]
 
@@ -80,7 +80,7 @@ bool  CStateAOCampaignsSettle::Perform(void) {
 
 // address=[0x14a0d70]
 // Decompiled from char __thiscall CStateAOCampaignsSettle::OnEvent(CStateAOCampaignsSettle *this, struct CEvn_Event *a2)
-bool  CStateAOCampaignsSettle::OnEvent(class CEvn_Event &) {
+bool  CStateAOCampaignsSettle::OnEvent(class CEvn_Event & a2) {
   
   CEvn_Event *v3; // [esp+Ch] [ebp-38h]
   int event; // [esp+18h] [ebp-2Ch]

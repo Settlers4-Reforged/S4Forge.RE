@@ -38,7 +38,7 @@
 
 // address=[0x13570f0]
 // Decompiled from int __thiscall CEvn_Logic::Load(CEvn_Logic *this, struct IS4Chunk *a2)
-void  CEvn_Logic::Load(class IS4Chunk &) {
+void  CEvn_Logic::Load(class IS4Chunk & a2) {
   
   int result; // eax
 
@@ -59,7 +59,7 @@ void  CEvn_Logic::Load(class IS4Chunk &) {
 
 // address=[0x13571b0]
 // Decompiled from int __thiscall CEvn_Logic::Save(CEvn_Logic *this, struct IS4Chunk *a2)
-void  CEvn_Logic::Save(class IS4Chunk &) {
+void  CEvn_Logic::Save(class IS4Chunk & a2) {
   
   int result; // eax
 
@@ -93,7 +93,7 @@ void  CEvn_Logic::Save(class IS4Chunk &) {
 
 // address=[0x145fff0]
 // Decompiled from _DWORD *__thiscall CEvn_Logic::CEvn_Logic(_DWORD *this, struct boost::exception_detail::clone_base *a2)
- CEvn_Logic::CEvn_Logic(class CEvn_Logic const &) {
+ CEvn_Logic::CEvn_Logic(class CEvn_Logic const & a2) {
   
   CEvn_Event::CEvn_Event(a2);
   *this = CEvn_Logic::_vftable_;
@@ -107,7 +107,7 @@ void  CEvn_Logic::Save(class IS4Chunk &) {
 
 // address=[0x1486be0]
 // Decompiled from int __thiscall CEvn_Logic::operator=(int this, int a2)
-class CEvn_Logic &  CEvn_Logic::operator=(class CEvn_Logic const &) {
+class CEvn_Logic &  CEvn_Logic::operator=(class CEvn_Logic const & a2) {
   
   CEvn_Event::operator=(this, (_BYTE *)a2);
   *(_DWORD *)(this + 24) = *(_DWORD *)(a2 + 24);

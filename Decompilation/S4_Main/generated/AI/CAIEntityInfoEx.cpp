@@ -4,7 +4,7 @@
 
 // address=[0x130acc0]
 // Decompiled from _BYTE *__thiscall CAIEntityInfoEx::CAIEntityInfoEx(_BYTE *this, char a2)
- CAIEntityInfoEx::CAIEntityInfoEx(enum T_AI_ENTITY_INFO_EX_CLASS) {
+ CAIEntityInfoEx::CAIEntityInfoEx(enum T_AI_ENTITY_INFO_EX_CLASS a2) {
   
   *(_DWORD *)this = &CAIEntityInfoEx::_vftable_;
   this[4] = a2;
@@ -34,7 +34,7 @@ enum T_AI_ENTITY_INFO_EX_CLASS  CAIEntityInfoEx::Class(void)const {
 
 // address=[0x130aaf0]
 // Decompiled from CAIEntityInfoTower *__cdecl CAIEntityInfoEx::CreateExtendedInfo(int a1)
-static class CAIEntityInfoEx * __cdecl CAIEntityInfoEx::CreateExtendedInfo(enum T_AI_ENTITY_INFO_EX_CLASS) {
+class CAIEntityInfoEx * __cdecl CAIEntityInfoEx::CreateExtendedInfo(enum T_AI_ENTITY_INFO_EX_CLASS a1) {
   
   int v2; // [esp+Ch] [ebp-18h]
   CAIEntityInfoTower *C; // [esp+14h] [ebp-10h]

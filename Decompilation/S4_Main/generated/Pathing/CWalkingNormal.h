@@ -1,10 +1,12 @@
 #ifndef CWALKINGNORMAL_H
 #define CWALKINGNORMAL_H
 
+#include "defines.h"
+
 class CWalkingNormal : public CWalkingBase {
 public:
     // address=[0x15f9070]
-     CWalkingNormal(int);
+     CWalkingNormal(int a2);
 
     // address=[0x15faf90]
     virtual  ~CWalkingNormal(void);

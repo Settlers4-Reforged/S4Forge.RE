@@ -4,7 +4,7 @@
 
 // address=[0x1301060]
 // Decompiled from bool __thiscall SSquadValue::operator<(_DWORD *this, int a2)
-bool  SSquadValue::operator<(struct SSquadValue const &)const {
+bool  SSquadValue::operator<(struct SSquadValue const & a2)const {
   
   return this[1] < *(_DWORD *)(a2 + 4);
 }

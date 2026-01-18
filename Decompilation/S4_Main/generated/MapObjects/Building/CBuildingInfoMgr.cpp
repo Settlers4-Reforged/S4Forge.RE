@@ -4,7 +4,7 @@
 
 // address=[0x133ac00]
 // Decompiled from char *__cdecl CBuildingInfoMgr::GetBuildingInfo(int a1, int a2)
-static struct CBuildingInfoMgr::SBuildingInfos const & __cdecl CBuildingInfoMgr::GetBuildingInfo(int,int) {
+struct CBuildingInfoMgr::SBuildingInfos const & __cdecl CBuildingInfoMgr::GetBuildingInfo(int a1, int a2) {
   
   if ( CBuildingInfoMgr::m_bInit != 1
     && BBSupportDbgReport(
@@ -46,7 +46,7 @@ int  CBuildingInfoMgr::GetXMLVersion(void)const {
 
 // address=[0x14eb930]
 // Decompiled from void __thiscall CBuildingInfoMgr::LoadInfo(CBuildingInfoMgr *this, bool a2)
-void  CBuildingInfoMgr::LoadInfo(bool) {
+void  CBuildingInfoMgr::LoadInfo(bool a2) {
   
   if ( a2 )
     CBuildingInfoMgr::ClearInfo(this);
@@ -60,7 +60,7 @@ void  CBuildingInfoMgr::LoadInfo(bool) {
 
 // address=[0x14eb970]
 // Decompiled from char __thiscall CBuildingInfoMgr::DbgCheckBuildingBits(CBuildingInfoMgr *this, int a2, int a3)
-bool  CBuildingInfoMgr::DbgCheckBuildingBits(int,int) {
+bool  CBuildingInfoMgr::DbgCheckBuildingBits(int a2, int a3) {
   
   int v3; // eax
   _OWORD *v4; // esi
@@ -410,7 +410,7 @@ void  CBuildingInfoMgr::DbgTraceProductionDelays(void) {
 
 // address=[0x14f3cc0]
 // Decompiled from bool __cdecl CBuildingInfoMgr::BuildingTypeExIsPort(int a1)
-static bool __cdecl CBuildingInfoMgr::BuildingTypeExIsPort(int) {
+bool __cdecl CBuildingInfoMgr::BuildingTypeExIsPort(int a1) {
   
   return a1 >= 52 && a1 <= 57 || a1 >= 78 && a1 <= 79;
 }
@@ -418,7 +418,7 @@ static bool __cdecl CBuildingInfoMgr::BuildingTypeExIsPort(int) {
 
 // address=[0x14f3d00]
 // Decompiled from bool __cdecl CBuildingInfoMgr::BuildingTypeExIsShipyard(int a1)
-static bool __cdecl CBuildingInfoMgr::BuildingTypeExIsShipyard(int) {
+bool __cdecl CBuildingInfoMgr::BuildingTypeExIsShipyard(int a1) {
   
   return a1 >= 58 && a1 <= 63 || a1 >= 76 && a1 <= 77;
 }
@@ -426,7 +426,7 @@ static bool __cdecl CBuildingInfoMgr::BuildingTypeExIsShipyard(int) {
 
 // address=[0x1501110]
 // Decompiled from char *__cdecl CBuildingInfoMgr::GetTriggerInfo(int a1, int a2)
-static struct CBuildingInfoMgr::STriggerInfos const & __cdecl CBuildingInfoMgr::GetTriggerInfo(int,int) {
+struct CBuildingInfoMgr::STriggerInfos const & __cdecl CBuildingInfoMgr::GetTriggerInfo(int a1, int a2) {
   
   if ( CBuildingInfoMgr::m_bInit != 1
     && BBSupportDbgReport(

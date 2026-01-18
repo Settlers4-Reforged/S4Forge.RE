@@ -55,7 +55,7 @@ void  CMsgStack::Clear(void) {
 
 // address=[0x15c9dc0]
 // Decompiled from int __stdcall CMsgStack::GetMsg(int a1)
-class CNet_Event  CMsgStack::GetMsg(void) {
+class CNet_Event  CMsgStack::GetMsg(void a1) {
   
   struct boost::exception_detail::clone_base *v1; // eax
   _BYTE v3[32]; // [esp+Ch] [ebp-30h] BYREF
@@ -74,7 +74,7 @@ class CNet_Event  CMsgStack::GetMsg(void) {
 
 // address=[0x15c9e60]
 // Decompiled from DWORD __thiscall CMsgStack::AddMsg(CMsgStack *this, struct CNet_Event *a2)
-void  CMsgStack::AddMsg(class CNet_Event &) {
+void  CMsgStack::AddMsg(class CNet_Event & a2) {
   
   DWORD result; // eax
 
@@ -102,7 +102,7 @@ bool  CMsgStack::IsValid(void) {
 
 // address=[0x15c9f00]
 // Decompiled from DWORD __thiscall sub_19C9F00(_DWORD *this, int a2)
-void  CMsgStack::SetExpectedSize(int) {
+void  CMsgStack::SetExpectedSize(int a2) {
   
   DWORD result; // eax
 
@@ -123,7 +123,7 @@ void  CMsgStack::Sort(void) {
 
 // address=[0x15c9f50]
 // Decompiled from char __thiscall CMsgStack::IsInStack(CMsgStack *this, unsigned __int8 a2)
-bool  CMsgStack::IsInStack(unsigned char) {
+bool  CMsgStack::IsInStack(unsigned char a2) {
   
   _BYTE v3[12]; // [esp+4h] [ebp-40h] BYREF
   _BYTE v4[12]; // [esp+10h] [ebp-34h] BYREF
@@ -211,7 +211,7 @@ bool  CMsgStack::IsEmpty(void) {
 
 // address=[0x15cc650]
 // Decompiled from CMsgStack *__thiscall CMsgStack::SetAI(CMsgStack *this, bool a2)
-void  CMsgStack::SetAI(bool) {
+void  CMsgStack::SetAI(bool a2) {
   
   CMsgStack *result; // eax
 

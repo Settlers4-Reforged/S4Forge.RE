@@ -28,7 +28,7 @@ int  T_GFX_MAP_ELEMENT::GetOldFogging(void) {
 
 // address=[0x2f90e30]
 // Decompiled from T_GFX_MAP_ELEMENT *__thiscall T_GFX_MAP_ELEMENT::SetNewFogging(T_GFX_MAP_ELEMENT *this, char a2)
-void  T_GFX_MAP_ELEMENT::SetNewFogging(int) {
+void  T_GFX_MAP_ELEMENT::SetNewFogging(int a2) {
   
   T_GFX_MAP_ELEMENT *result; // eax
 

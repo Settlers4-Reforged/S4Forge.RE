@@ -4,7 +4,7 @@
 
 // address=[0x149ab50]
 // Decompiled from const char *__cdecl CS4DefineNames::GetAnimalName(unsigned int a1)
-static char const * __cdecl CS4DefineNames::GetAnimalName(int) {
+char const * __cdecl CS4DefineNames::GetAnimalName(int a1) {
   
   if ( a1 >= 0x12 )
     return "<INVALID>";
@@ -15,7 +15,7 @@ static char const * __cdecl CS4DefineNames::GetAnimalName(int) {
 
 // address=[0x149ab70]
 // Decompiled from const char *__cdecl CS4DefineNames::GetBuildingName(unsigned int a1)
-static char const * __cdecl CS4DefineNames::GetBuildingName(int) {
+char const * __cdecl CS4DefineNames::GetBuildingName(int a1) {
   
   if ( a1 >= 0x53 )
     return "<INVALID>";
@@ -26,7 +26,7 @@ static char const * __cdecl CS4DefineNames::GetBuildingName(int) {
 
 // address=[0x149ab90]
 // Decompiled from const char *__cdecl CS4DefineNames::GetGoodName(unsigned int a1)
-static char const * __cdecl CS4DefineNames::GetGoodName(int) {
+char const * __cdecl CS4DefineNames::GetGoodName(int a1) {
   
   if ( a1 >= 0x2B )
     return "<INVALID>";
@@ -37,7 +37,7 @@ static char const * __cdecl CS4DefineNames::GetGoodName(int) {
 
 // address=[0x149abb0]
 // Decompiled from const char *__cdecl CS4DefineNames::GetObjectName(unsigned int a1)
-static char const * __cdecl CS4DefineNames::GetObjectName(int) {
+char const * __cdecl CS4DefineNames::GetObjectName(int a1) {
   
   if ( a1 >= 0x123 )
     return "<INVALID>";
@@ -48,7 +48,7 @@ static char const * __cdecl CS4DefineNames::GetObjectName(int) {
 
 // address=[0x149abe0]
 // Decompiled from const char *__cdecl CS4DefineNames::GetRaceName(unsigned int a1)
-static char const * __cdecl CS4DefineNames::GetRaceName(int) {
+char const * __cdecl CS4DefineNames::GetRaceName(int a1) {
   
   if ( a1 >= 5 )
     return "<INVALID>";
@@ -59,7 +59,7 @@ static char const * __cdecl CS4DefineNames::GetRaceName(int) {
 
 // address=[0x149ac00]
 // Decompiled from const char *__cdecl CS4DefineNames::GetSettlerName(unsigned int a1)
-static char const * __cdecl CS4DefineNames::GetSettlerName(int) {
+char const * __cdecl CS4DefineNames::GetSettlerName(int a1) {
   
   if ( a1 >= 0x43 )
     return "<INVALID>";
@@ -70,7 +70,7 @@ static char const * __cdecl CS4DefineNames::GetSettlerName(int) {
 
 // address=[0x149ac20]
 // Decompiled from const char *__cdecl CS4DefineNames::GetSettlerJobName(unsigned int a1)
-static char const * __cdecl CS4DefineNames::GetSettlerJobName(int) {
+char const * __cdecl CS4DefineNames::GetSettlerJobName(int a1) {
   
   if ( a1 >= 0x16F )
     return "<INVALID>";
@@ -81,7 +81,7 @@ static char const * __cdecl CS4DefineNames::GetSettlerJobName(int) {
 
 // address=[0x149ac60]
 // Decompiled from const char *__cdecl CS4DefineNames::GetSoundName(unsigned int a1)
-static char const * __cdecl CS4DefineNames::GetSoundName(int) {
+char const * __cdecl CS4DefineNames::GetSoundName(int a1) {
   
   if ( a1 >= 0x6D )
     return "<INVALID>";
@@ -92,7 +92,7 @@ static char const * __cdecl CS4DefineNames::GetSoundName(int) {
 
 // address=[0x149ac80]
 // Decompiled from const char *__cdecl CS4DefineNames::GetStringName(unsigned int a1)
-static char const * __cdecl CS4DefineNames::GetStringName(int) {
+char const * __cdecl CS4DefineNames::GetStringName(int a1) {
   
   if ( a1 >= 0xEFD )
     return "<INVALID>";
@@ -103,7 +103,7 @@ static char const * __cdecl CS4DefineNames::GetStringName(int) {
 
 // address=[0x149acb0]
 // Decompiled from int __cdecl CS4DefineNames::GetStringId(char *Str1)
-static int __cdecl CS4DefineNames::GetStringId(char const *) {
+int __cdecl CS4DefineNames::GetStringId(char const * Str1) {
   
   int i; // [esp+4h] [ebp-4h]
 

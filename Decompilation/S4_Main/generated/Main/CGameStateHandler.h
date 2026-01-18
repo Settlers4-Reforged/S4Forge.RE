@@ -1,6 +1,8 @@
 #ifndef CGAMESTATEHANDLER_H
 #define CGAMESTATEHANDLER_H
 
+#include "defines.h"
+
 class CGameStateHandler {
 public:
     // address=[0x148ac10]
@@ -46,25 +48,25 @@ public:
     static void __cdecl LoadAllConfigFiles(void);
 
     // address=[0x148c400]
-    static bool __cdecl RebuildGfxEngine(bool);
+    static bool __cdecl RebuildGfxEngine(bool a1);
 
     // address=[0x148c590]
-    static bool __cdecl CheckGfxRenderQuality(unsigned int);
+    static bool __cdecl CheckGfxRenderQuality(unsigned int a1);
 
     // address=[0x148c5d0]
-    static bool __cdecl CheckGfxHardwareMode(unsigned int);
+    static bool __cdecl CheckGfxHardwareMode(unsigned int a1);
 
     // address=[0x148c620]
-    static bool __cdecl ShowHTMLPage(std::string,std::string);
+    static bool __cdecl ShowHTMLPage(std::string a1, std::string a2);
 
     // address=[0x148c880]
     static void __cdecl SetCorrectWindowSize(void);
 
     // address=[0x148fef0]
-    static void __cdecl Queue(class CGameState * (__cdecl*)(void *),void *);
+    static void __cdecl Queue(class CGameState * (__cdecl*)(void *) a1, void * a2);
 
     // address=[0x1490010]
-    static void __cdecl Switch(class CGameState * (__cdecl*)(void *),void *);
+    static void __cdecl Switch(class CGameState * (__cdecl*)(void *) a1, void * a2);
 
     // address=[0x14a1d40]
     static void __cdecl Next(void);
@@ -83,10 +85,10 @@ private:
     static bool __cdecl StartDummyGame(void);
 
     // address=[0x148d250]
-    static void __cdecl PerformPendingFullScreenEnterOrExit(void);
+    static void __cdecl PerformPendingFullScreenEnterOrExit(void a1);
 
     // address=[0x148d290]
-    static bool __cdecl BuildInitRenderCfg(bool,bool);
+    static bool __cdecl BuildInitRenderCfg(bool a1, bool a2);
 
     // address=[0x3d89b2c]
     static bool m_bAppActive;

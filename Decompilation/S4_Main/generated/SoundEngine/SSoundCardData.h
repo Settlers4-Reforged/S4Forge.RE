@@ -1,6 +1,8 @@
 #ifndef CSOUNDSYSTEM_SSOUNDCARDDATA_H
 #define CSOUNDSYSTEM_SSOUNDCARDDATA_H
 
+#include "defines.h"
+
 namespace CSoundSystem {
 
 class SSoundCardData {

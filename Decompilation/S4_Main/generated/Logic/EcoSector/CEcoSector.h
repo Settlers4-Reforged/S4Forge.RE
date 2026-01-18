@@ -1,6 +1,8 @@
 #ifndef CECOSECTOR_H
 #define CECOSECTOR_H
 
+#include "defines.h"
+
 class CEcoSector : public CPersistence {
 public:
     // address=[0x130ee50]
@@ -16,118 +18,118 @@ public:
     int  MinCarrier(void)const;
 
     // address=[0x1400680]
-    static class CPersistence * __cdecl New(std::istream &);
+    static class CPersistence * __cdecl New(std::istream & a1);
 
     // address=[0x14299b0]
-    int  NrOfSettler(int)const;
+    int  NrOfSettler(int a2)const;
 
     // address=[0x1429a00]
-    void  ChangeNrOfSettler(int,int);
+    void  ChangeNrOfSettler(int a2, int a3);
 
     // address=[0x1429ab0]
-    int  GetSettlerOffer(int)const;
+    int  GetSettlerOffer(int a2)const;
 
     // address=[0x1429ad0]
-    void  SetSettlerOffer(int,int);
+    void  SetSettlerOffer(int a2, int a3);
 
     // address=[0x1429c80]
-    void  SetSettlerOfferIncDisplay(int,int);
+    void  SetSettlerOfferIncDisplay(int a2, int a3);
 
     // address=[0x1429ce0]
-    void  GetSettlerOutOfOffer(int);
+    void  GetSettlerOutOfOffer(int a2);
 
     // address=[0x1429ed0]
-    void  GetSettlerOutOfOfferDecDisplay(int);
+    void  GetSettlerOutOfOfferDecDisplay(int a2);
 
     // address=[0x1429f70]
-    void  GetCarrierOutOfOfferAndSetNextSettlerType(int,int);
+    void  GetCarrierOutOfOfferAndSetNextSettlerType(int a2, int a3);
 
     // address=[0x142a020]
-    void  ResetCarrierNextSettlerTypeAndDecrementOrder(int);
+    void  ResetCarrierNextSettlerTypeAndDecrementOrder(int a2);
 
     // address=[0x142a0c0]
-    int  OrderWorker(int,int);
+    int  OrderWorker(int a2, int a3);
 
     // address=[0x142a580]
-    int  CallWorker(int,int);
+    int  CallWorker(int a2, int a3);
 
     // address=[0x142a6f0]
-    int  GetNearestSettler(int,int,int);
+    int  GetNearestSettler(int a2, int a3, int a4);
 
     // address=[0x142a7f0]
     bool  HaveFreeCarrier(void)const;
 
     // address=[0x142a830]
-    int  NrOfGoods(int)const;
+    int  NrOfGoods(int a2)const;
 
     // address=[0x142a8a0]
-    int  GetGoodOffer(int)const;
+    int  GetGoodOffer(int a2)const;
 
     // address=[0x142a8c0]
-    void  SetGoodOffer(int,int);
+    void  SetGoodOffer(int a2, int a3);
 
     // address=[0x142aa20]
-    void  GetPileOutOfOffer(int,int);
+    void  GetPileOutOfOffer(int a2, int a3);
 
     // address=[0x142ab50]
-    void  RequestGood(int,enum PILE_TYPES);
+    void  RequestGood(int a1, enum PILE_TYPES a2);
 
     // address=[0x142ab90]
-    void  CleanUpBuildingNeed(int);
+    void  CleanUpBuildingNeed(int a2);
 
     // address=[0x142ad60]
-    int  RequestGoodToVehicle(int,int);
+    int  RequestGoodToVehicle(int a2, int a3);
 
     // address=[0x142aed0]
-    bool  TransportGood(int,int);
+    bool  TransportGood(int a2, int a3);
 
     // address=[0x142b020]
-    void  RequestSpace(class CPile *);
+    void  RequestSpace(class CPile * a2);
 
     // address=[0x142b090]
-    int  GetFullPile(int);
+    int  GetFullPile(int a2);
 
     // address=[0x142b100]
-    bool  RegisterFreeStoragePile(int,int);
+    bool  RegisterFreeStoragePile(int a2, int a3);
 
     // address=[0x142b150]
-    bool  UnregisterFreeStoragePile(int,int);
+    bool  UnregisterFreeStoragePile(int a2, int a3);
 
     // address=[0x142b1d0]
-    bool  RegisterGoodStoragePile(int,int,int);
+    bool  RegisterGoodStoragePile(int a2, int a3, int a4);
 
     // address=[0x142b240]
-    bool  UnregisterGoodStoragePile(int,int,int);
+    bool  UnregisterGoodStoragePile(int a2, int a3, int a4);
 
     // address=[0x142b2d0]
-    bool  RegisterGoodStorage(int,int);
+    bool  RegisterGoodStorage(int a2, int a3);
 
     // address=[0x142b320]
-    bool  UnregisterGoodStorage(int,int);
+    bool  UnregisterGoodStorage(int a2, int a3);
 
     // address=[0x142b3a0]
-    int  GetNearestStoragePile(class CPile &);
+    int  GetNearestStoragePile(class CPile & a2);
 
     // address=[0x142b600]
-    void  ChangeMinMaxValues(int,int);
+    void  ChangeMinMaxValues(int a2, int a3);
 
     // address=[0x142b6e0]
-    void  SetExtraMinCarrierForRecruitment(int);
+    void  SetExtraMinCarrierForRecruitment(int a2);
 
     // address=[0x142b720]
     bool  CarrierForJobOrderAvailable(bool);
 
     // address=[0x142b7a0]
-    int  WorkerDeltaAmount(int);
+    int  WorkerDeltaAmount(int a2);
 
     // address=[0x142b840]
-    void  ChangeWorkerDeltaAmount(int,int);
+    void  ChangeWorkerDeltaAmount(int a2, int a3);
 
     // address=[0x142b900]
-    int  SpecialistWishes(int);
+    int  SpecialistWishes(int a2);
 
     // address=[0x142b9a0]
-    void  ChangeSpecialistWish(int,int);
+    void  ChangeSpecialistWish(int a2, int a3);
 
     // address=[0x142ba70]
     void  InitTransport(void);
@@ -142,61 +144,61 @@ public:
     void  RecruiteWorker(void);
 
     // address=[0x142d120]
-    void  FillGoodDistribution(class CGoodDistributionInfo *);
+    void  FillGoodDistribution(class CGoodDistributionInfo * a2);
 
     // address=[0x142d1f0]
-    void  ChangeGoodDistribution(class CGoodDistributionInfo *);
+    void  ChangeGoodDistribution(class CGoodDistributionInfo * a2);
 
     // address=[0x142d250]
-    void  FillTransportPrio(class CTransportpriorityInfo *);
+    void  FillTransportPrio(class CTransportpriorityInfo * a2);
 
     // address=[0x142d2c0]
-    void  ChangeTransportPrio(enum PILE_TYPES,int);
+    void  ChangeTransportPrio(enum PILE_TYPES a2, int a3);
 
     // address=[0x142d2f0]
-    void  ChangeBuildingSupplyPrio(enum PILE_TYPES,enum BUILDING_TYPES,signed char);
+    void  ChangeBuildingSupplyPrio(enum PILE_TYPES a2, enum BUILDING_TYPES a3, signed char a4);
 
     // address=[0x142d330]
-    int  GetNumberOfGoods(int,enum CEcoSector::T_STATISTIC_GOOD_CATEGORY);
+    int  GetNumberOfGoods(int a2, enum CEcoSector::T_STATISTIC_GOOD_CATEGORY a3);
 
     // address=[0x142d3e0]
-    void  ChangeNumberOfGoodsPile(int,int);
+    void  ChangeNumberOfGoodsPile(int a2, int a3);
 
     // address=[0x142d4c0]
-    void  ChangeNumberOfGoodsCarrier(int,int);
+    void  ChangeNumberOfGoodsCarrier(int a2, int a3);
 
     // address=[0x142d5a0]
     void  OrderDiggerAndBuilderAtStartUp(void);
 
     // address=[0x142d6d0]
-    void  TakeSoldierOrder(int,int);
+    void  TakeSoldierOrder(int a2, int a3);
 
     // address=[0x142d7f0]
-    void  TakeWeaponOrder(int,int);
+    void  TakeWeaponOrder(int a2, int a3);
 
     // address=[0x142d8f0]
-    void  SetWeaponAutoProduction(bool);
+    void  SetWeaponAutoProduction(bool a2);
 
     // address=[0x142d930]
-    void  SetWeaponPercentage(unsigned int);
+    void  SetWeaponPercentage(unsigned int a2);
 
     // address=[0x142d9d0]
-    int  WeaponPercentage(int);
+    int  WeaponPercentage(int a2);
 
     // address=[0x142da00]
-    void  TakeToolOrder(int,int);
+    void  TakeToolOrder(int a2, int a3);
 
     // address=[0x142db00]
-    static int __cdecl GetSettlerCountEcoSectorId(class CSettler const *);
+    static int __cdecl GetSettlerCountEcoSectorId(class CSettler const * a1);
 
     // address=[0x142dba0]
-    int  DbgCheckEcoSector(int);
+    int  DbgCheckEcoSector(int a2);
 
     // address=[0x142eb00]
-     CEcoSector(std::istream &);
+     CEcoSector(std::istream & a2);
 
     // address=[0x142fd30]
-    virtual void  Store(std::ostream &);
+    virtual void  Store(std::ostream & a2);
 
     // address=[0x1439a60]
     virtual unsigned long  ClassID(void)const;
@@ -211,28 +213,28 @@ public:
     int  BuildingSitesWithPrio(void)const;
 
     // address=[0x1447370]
-    void  ChangeBuildingSitesWithPrio(int);
+    void  ChangeBuildingSitesWithPrio(int a2);
 
     // address=[0x14473d0]
-    void  ChangePrioBoards(int);
+    void  ChangePrioBoards(int a2);
 
     // address=[0x1447400]
-    void  ChangePrioBuilder(int,int);
+    void  ChangePrioBuilder(int a2, int a3);
 
     // address=[0x14474b0]
-    void  ChangePrioDigger(int,int);
+    void  ChangePrioDigger(int a2, int a3);
 
     // address=[0x1447560]
-    void  ChangePrioStone(int);
+    void  ChangePrioStone(int a2);
 
     // address=[0x1447590]
-    int  GetNrOfSoldierOrder(int)const;
+    int  GetNrOfSoldierOrder(int a2)const;
 
     // address=[0x14475b0]
-    int  GetNrOfToolOrder(int)const;
+    int  GetNrOfToolOrder(int a2)const;
 
     // address=[0x14475e0]
-    int  GetNrOfWeaponOrder(int)const;
+    int  GetNrOfWeaponOrder(int a2)const;
 
     // address=[0x14476f0]
     int  NeededPrioBuilder(void)const;
@@ -256,25 +258,25 @@ public:
     int  Size(void)const;
 
     // address=[0x1473090]
-    void  SetProducedArmors(unsigned int);
+    void  SetProducedArmors(unsigned int a2);
 
     // address=[0x14730b0]
-    void  SetProducedBows(unsigned int);
+    void  SetProducedBows(unsigned int a2);
 
     // address=[0x14730d0]
-    void  SetProducedSpecial(unsigned int);
+    void  SetProducedSpecial(unsigned int a2);
 
     // address=[0x14730f0]
-    void  SetProducedSwords(unsigned int);
+    void  SetProducedSwords(unsigned int a2);
 
     // address=[0x14e80e0]
-    void  DecNrOfSoldierOrder(int);
+    void  DecNrOfSoldierOrder(int a2);
 
     // address=[0x15185a0]
-    void  DecNrOfToolOrder(int);
+    void  DecNrOfToolOrder(int a2);
 
     // address=[0x15185e0]
-    void  DecNrOfWeaponOrder(int);
+    void  DecNrOfWeaponOrder(int a2);
 
     // address=[0x1518620]
     unsigned int  GetArmorsCounter(void);
@@ -314,31 +316,31 @@ private:
     void  DecSize(void);
 
     // address=[0x142df90]
-     CEcoSector(int,int);
+     CEcoSector(int a2, int a3);
 
     // address=[0x142e4a0]
      ~CEcoSector(void);
 
     // address=[0x142e5b0]
-    void  SetWorldIdxForStore(int);
+    void  SetWorldIdxForStore(int a2);
 
     // address=[0x142e650]
     void  ResetBuildingSitesWithPrio(void);
 
     // address=[0x142e690]
-    void  MissingToolWarning(int,int,int,int,int);
+    void  MissingToolWarning(int a2, int a3, int a4, int a5, int a6);
 
     // address=[0x142e800]
-    int  ChangeValue(int,int,int);
+    int  ChangeValue(int a2, int a3, int a4);
 
     // address=[0x142e880]
-    int  GetRegisteredFreeStoragePile(int,int);
+    int  GetRegisteredFreeStoragePile(int a2, int a3);
 
     // address=[0x142e910]
-    int  GetRegisteredGoodStoragePile(int,int,int);
+    int  GetRegisteredGoodStoragePile(int a2, int a3, int a4);
 
     // address=[0x142e9c0]
-    int  GetRegisteredGoodStorage(int,int);
+    int  GetRegisteredGoodStorage(int a2, int a3);
 
     // address=[0x142ea50]
     void  ClearAllStorageRegistrations(void);

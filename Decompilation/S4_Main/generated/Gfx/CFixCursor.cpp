@@ -22,7 +22,7 @@
 
 // address=[0x2f624a0]
 // Decompiled from int __thiscall CFixCursor::SetSurfacePtr(  CFixCursor *this,  unsigned __int16 a2,  struct CSurface *a3,  unsigned __int16 a4)
-void  CFixCursor::SetSurfacePtr(unsigned short,class CSurface *,unsigned short) {
+void  CFixCursor::SetSurfacePtr(unsigned short a2, class CSurface * a3, unsigned short a4) {
   
   unsigned int v5; // [esp+0h] [ebp-2Ch] BYREF
   COLORREF Pixel; // [esp+4h] [ebp-28h]
@@ -104,7 +104,7 @@ void  CFixCursor::SetSurfacePtr(unsigned short,class CSurface *,unsigned short) 
 
 // address=[0x2f626a0]
 // Decompiled from CFixCursor *__thiscall CFixCursor::SetFixCursor(CFixCursor *this, int a2, int a3, bool a4)
-void  CFixCursor::SetFixCursor(int,int,bool) {
+void  CFixCursor::SetFixCursor(int a2, int a3, bool a4) {
   
   CFixCursor *result; // eax
   int v5; // eax
@@ -156,7 +156,7 @@ void  CFixCursor::SetFixCursor(int,int,bool) {
 
 // address=[0x2f62800]
 // Decompiled from int __thiscall CFixCursor::Show(CFixCursor *this, struct CSurface *a2)
-long  CFixCursor::Show(class CSurface *) {
+long  CFixCursor::Show(class CSurface * a2) {
   
   if ( !CFixCursor::IsVisible(this) )
     return 0;

@@ -4,7 +4,7 @@
 
 // address=[0x15bf230]
 // Decompiled from int __thiscall CClassNetGameIniBuffer::GetIntValue(char *this, char *SubStr, int a3)
-int  CClassNetGameIniBuffer::GetIntValue(char const *,int) {
+int  CClassNetGameIniBuffer::GetIntValue(char const * SubStr, int a3) {
   
   char *EndPtr[2]; // [esp+0h] [ebp-10h] BYREF
   int v5; // [esp+8h] [ebp-8h]
@@ -21,7 +21,7 @@ int  CClassNetGameIniBuffer::GetIntValue(char const *,int) {
 
 // address=[0x15bf280]
 // Decompiled from const char *__thiscall CClassNetGameIniBuffer::GetStartOfEntry(const char **this, char *SubStr)
-char const *  CClassNetGameIniBuffer::GetStartOfEntry(char const *) {
+char const *  CClassNetGameIniBuffer::GetStartOfEntry(char const * SubStr) {
   
   const char *Str; // [esp+4h] [ebp-4h]
 

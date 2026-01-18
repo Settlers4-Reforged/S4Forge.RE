@@ -4,7 +4,7 @@
 
 // address=[0x14007c0]
 // Decompiled from int __cdecl CEntityTask::New(int a1)
-static class CPersistence * __cdecl CEntityTask::New(std::istream &) {
+class CPersistence * __cdecl CEntityTask::New(std::istream & a1) {
   
   if ( operator new(0x18u) )
     return CEntityTask::CEntityTask(a1);
@@ -15,7 +15,7 @@ static class CPersistence * __cdecl CEntityTask::New(std::istream &) {
 
 // address=[0x14d7e80]
 // Decompiled from CEntityTask *__thiscall CEntityTask::CEntityTask(CEntityTask *this, CEntityTask *cloneSource)
- CEntityTask::CEntityTask(class CEntityTask const &) {
+ CEntityTask::CEntityTask(class CEntityTask const & cloneSource) {
   
   CPersistence::CPersistence((CPersistence *)this);
   *(_DWORD *)this = &CEntityTask::_vftable_;
@@ -46,7 +46,7 @@ unsigned long  CEntityTask::ClassID(void)const {
 
 // address=[0x14dfb60]
 // Decompiled from CEntityTask *__thiscall CEntityTask::CEntityTask(  CEntityTask *this,  char a2,  __int16 a3,  __int16 a4,  __int16 a5,  char a6,  char a7,  char a8,  bool a9,  bool a10,  char a11,  __int16 a12,  __int16 a13,  char a14)
- CEntityTask::CEntityTask(int,int,int,int,int,int,int,bool,bool,int,unsigned int,unsigned int,unsigned int) {
+ CEntityTask::CEntityTask(int a2, int a3, int a4, int a5, int a6, int a7, int a8, bool a9, bool a10, int a11, unsigned int a12, unsigned int a13, unsigned int a14) {
   
   CPersistence::CPersistence(this);
   *(_DWORD *)this = &CEntityTask::_vftable_;
@@ -69,7 +69,7 @@ unsigned long  CEntityTask::ClassID(void)const {
 
 // address=[0x154c2d0]
 // Decompiled from char *__thiscall CEntityTask::CEntityTask(char *this, int a2)
- CEntityTask::CEntityTask(std::istream &) {
+ CEntityTask::CEntityTask(std::istream & a2) {
   
   int v3; // [esp+4h] [ebp-Ch] BYREF
   int pExceptionObject; // [esp+8h] [ebp-8h] BYREF
@@ -105,7 +105,7 @@ unsigned long  CEntityTask::ClassID(void)const {
 
 // address=[0x154c440]
 // Decompiled from int __thiscall CEntityTask::Store(struct CPersistence *this, struct std::ostream *a2)
-void  CEntityTask::Store(std::ostream &) {
+void  CEntityTask::Store(std::ostream & a2) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
   __int16 *v4; // [esp+4h] [ebp-4h]
@@ -132,7 +132,7 @@ void  CEntityTask::Store(std::ostream &) {
 
 // address=[0x154ecd0]
 // Decompiled from int __thiscall CEntityTask::CEntityTask(int this, struct boost::exception_detail::clone_base *a2)
- CEntityTask::CEntityTask(class CEntityTask &&) {
+ CEntityTask::CEntityTask(class CEntityTask && a2) {
   
   CPersistence::CPersistence((boost::exception_detail::clone_base *)this, a2);
   *(_DWORD *)this = &CEntityTask::_vftable_;
@@ -155,7 +155,7 @@ void  CEntityTask::Store(std::ostream &) {
 
 // address=[0x1568830]
 // Decompiled from int __cdecl CEntityTask::Load(int a1)
-static class CEntityTask * __cdecl CEntityTask::Load(std::istream &) {
+class CEntityTask * __cdecl CEntityTask::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]

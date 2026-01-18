@@ -1,13 +1,15 @@
 #ifndef CASTAR64SHIP_H
 #define CASTAR64SHIP_H
 
+#include "defines.h"
+
 class CAStar64Ship : public CAStar64 {
 public:
     // address=[0x15d3fd0]
-    static bool __cdecl IsNotBlocked(int);
+    static bool __cdecl IsNotBlocked(int a1);
 
     // address=[0x15d4000]
-    static int __cdecl MoveCosts(int,int);
+    static int __cdecl MoveCosts(int a1, int a2);
 
     // address=[0x15d5f20]
      CAStar64Ship(void);

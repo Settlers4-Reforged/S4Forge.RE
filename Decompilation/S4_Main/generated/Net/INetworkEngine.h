@@ -1,6 +1,8 @@
 #ifndef INETWORKENGINE_H
 #define INETWORKENGINE_H
 
+#include "defines.h"
+
 class INetworkEngine {
 public:
     // address=[0x13a4250]
@@ -28,19 +30,19 @@ public:
     bool  IsHost(void);
 
     // address=[0x14ab0d0]
-    bool  StartNewTick(bool);
+    bool  StartNewTick(bool a2);
 
     // address=[0x14b46a0]
-    std::string  ConvertIPAddress(unsigned int);
+    std::string  ConvertIPAddress(unsigned int a2);
 
     // address=[0x14b46f0]
-    bool  EndGame(int);
+    bool  EndGame(int a2);
 
     // address=[0x14b4760]
-    bool  KickPlayerPeerId(unsigned int);
+    bool  KickPlayerPeerId(unsigned int a2);
 
     // address=[0x14b4860]
-    bool  RemovePlayerPeerId(unsigned int);
+    bool  RemovePlayerPeerId(unsigned int a2);
 
     // address=[0x14bce40]
     void  StormResetEnterSessionFlag(void);
@@ -52,13 +54,13 @@ public:
     virtual  ~INetworkEngine(void);
 
     // address=[0x15c8530]
-    bool  SendNetMessage(class CEvn_Logic &);
+    bool  SendNetMessage(class CEvn_Logic & a2);
 
     // address=[0x15c8690]
-    bool  SendNetMessage(unsigned int,unsigned int,unsigned int,int);
+    bool  SendNetMessage(unsigned int a2, unsigned int a3, unsigned int a4, int a5);
 
     // address=[0x15c87e0]
-    bool  SendAsyncNetMessage(class CEvn_Logic &,unsigned char);
+    bool  SendAsyncNetMessage(class CEvn_Logic & a2, unsigned char a3);
 
     // address=[0x15c8890]
     bool  DeliverNetMessages(void);
@@ -67,7 +69,7 @@ public:
     bool  CheckForMsg(void);
 
     // address=[0x15c89c0]
-    bool  Start(bool,unsigned int,unsigned int,wchar_t const *);
+    bool  Start(bool a2, unsigned int a3, unsigned int a4, wchar_t const * Source);
 
     // address=[0x15c8bf0]
     void  ContinueSearchForHost(void);
@@ -79,16 +81,16 @@ public:
     void  StormJoinSessionSucceeded(void);
 
     // address=[0x15c8cb0]
-    void  StormHost_NewPlayerMessage(unsigned int,std::wstring &,int);
+    void  StormHost_NewPlayerMessage(unsigned int a2, std::wstring & a3, int a4);
 
     // address=[0x15c8d00]
-    void  StormOnPeerGone(unsigned int);
+    void  StormOnPeerGone(unsigned int a2);
 
     // address=[0x15c8d20]
     void  StormOnHost(void);
 
     // address=[0x15c8d60]
-    void  OnQuickMatched(bool);
+    void  OnQuickMatched(bool a2);
 
     // address=[0x15c8d80]
     void  OnJoinedFromInvite(void);
@@ -98,13 +100,13 @@ public:
 
 private:
     // address=[0x15c9030]
-    class CNet_Event  PopMsg(void);
+    class CNet_Event  PopMsg(void a2);
 
     // address=[0x15c9070]
-    void  PushAsyncMsg(class CNet_Event &,unsigned char);
+    void  PushAsyncMsg(class CNet_Event & Src, unsigned char a2);
 
     // address=[0x15c90a0]
-    bool  PushMsg(class CNet_Event &);
+    bool  PushMsg(class CNet_Event & a2);
 
 };
 

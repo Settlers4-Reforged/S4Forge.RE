@@ -4,7 +4,7 @@
 
 // address=[0x1315680]
 // Decompiled from int __thiscall CManyVehicleTypesIterator::Init(CManyVehicleTypesIterator *this, int a2, int a3, int a4)
-void  CManyVehicleTypesIterator::Init(int,int,int) {
+void  CManyVehicleTypesIterator::Init(int a2, int a3, int a4) {
   
   int result; // eax
 

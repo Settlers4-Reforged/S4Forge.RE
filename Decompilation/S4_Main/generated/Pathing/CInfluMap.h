@@ -1,19 +1,21 @@
 #ifndef CINFLUMAP_H
 #define CINFLUMAP_H
 
+#include "defines.h"
+
 class CInfluMap {
 public:
     // address=[0x1306520]
-    static int __cdecl EnemyValueVW(int,int,int);
+    static int __cdecl EnemyValueVW(int a1, int a2, int a3);
 
     // address=[0x1306580]
-    static int __cdecl EnemyValueXY(int,int,int);
+    static int __cdecl EnemyValueXY(int a1, int a2, int a3);
 
     // address=[0x130e900]
-    static int __cdecl AllyValueVW(int,int,int);
+    static int __cdecl AllyValueVW(int a1, int a2, int a3);
 
     // address=[0x13231c0]
-    static int __cdecl AllyValueXY(int,int,int);
+    static int __cdecl AllyValueXY(int a1, int a2, int a3);
 
 protected:
     // address=[0x15ddd70]
@@ -23,7 +25,7 @@ protected:
     static void __cdecl Done(void);
 
     // address=[0x15dddb0]
-    static void __cdecl ModifyInfluenceMapVW(int,int,int,int);
+    static void __cdecl ModifyInfluenceMapVW(int a1, int a2, int a3, int Number);
 
     // address=[0x41799ec]
     static int m_iInitialized;
@@ -33,7 +35,7 @@ protected:
 
 private:
     // address=[0x15ddff0]
-    static void __cdecl ModifyValueVW(int,int,int,int);
+    static void __cdecl ModifyValueVW(int a1, int a2, int a3, int a4);
 
 };
 

@@ -4,7 +4,7 @@
 
 // address=[0x2f51d40]
 // Decompiled from CExpandationEvent *__thiscall CExpandationEvent::CExpandationEvent(CExpandationEvent *this, int a2, int a3, int a4)
- CExpandationEvent::CExpandationEvent(int,int,int) {
+ CExpandationEvent::CExpandationEvent(int a2, int a3, int a4) {
   
   CExpandationEvent *v6; // [esp+0h] [ebp-4h]
 
@@ -28,7 +28,7 @@
 
 // address=[0x2f51de0]
 // Decompiled from CExpandationEvent *__thiscall CExpandationEvent::CExpandationEvent(CExpandationEvent *this, int a2, CDynList **a3)
- CExpandationEvent::CExpandationEvent(int,class CSchedule *) {
+ CExpandationEvent::CExpandationEvent(int a2, class CSchedule * a3) {
   
   int v4; // [esp+0h] [ebp-50h]
   struct IFilterEntry *v5; // [esp+14h] [ebp-3Ch]
@@ -133,7 +133,7 @@
 
 // address=[0x2f52180]
 // Decompiled from bool __thiscall CExpandationEvent::IsShooting(CSchedule **this)
-bool  CExpandationEvent::IsShooting(void) {
+bool  CExpandationEvent::IsShooting(void a2) {
   
   struct IAIEcoManager *v1; // eax
   int v3; // eax

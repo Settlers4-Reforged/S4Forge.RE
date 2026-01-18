@@ -1,6 +1,8 @@
 #ifndef CECONOMYGAMEINFO_H
 #define CECONOMYGAMEINFO_H
 
+#include "defines.h"
+
 class CEconomyGameInfo : public CInfoExchange {
 public:
     // address=[0x1454530]

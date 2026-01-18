@@ -1,10 +1,12 @@
 #ifndef _BSTR_T_H
 #define _BSTR_T_H
 
+#include "defines.h"
+
 class _bstr_t {
 public:
     // address=[0x2fbecd0]
-     _bstr_t(wchar_t const *);
+     _bstr_t(wchar_t const * psz);
 
     // address=[0x2fbedb0]
      ~_bstr_t(void);

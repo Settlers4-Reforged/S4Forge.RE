@@ -29,7 +29,7 @@
 
 // address=[0x2f26770]
 // Decompiled from void *__cdecl AdvXMLParser::Parser::OpenXMLFile(wchar_t *FileName, int *a2)
-static char * __cdecl AdvXMLParser::Parser::OpenXMLFile(wchar_t *,long &) {
+char * __cdecl AdvXMLParser::Parser::OpenXMLFile(wchar_t * FileName, long & a2) {
   
   void *Buffer; // [esp+10h] [ebp-80h]
   _DWORD v4[26]; // [esp+14h] [ebp-7Ch] BYREF
@@ -51,7 +51,7 @@ static char * __cdecl AdvXMLParser::Parser::OpenXMLFile(wchar_t *,long &) {
 
 // address=[0x2f26860]
 // Decompiled from int __thiscall AdvXMLParser::Parser::Parse(AdvXMLParser::Parser *this, const char *a2, int a3)
-class AdvXMLParser::Document *  AdvXMLParser::Parser::Parse(char const *,int) {
+class AdvXMLParser::Document *  AdvXMLParser::Parser::Parse(char const * a2, int a3) {
   
   int v3; // eax
   int v5; // [esp+0h] [ebp-Ch]
@@ -74,7 +74,7 @@ class AdvXMLParser::Document *  AdvXMLParser::Parser::Parse(char const *,int) {
 
 // address=[0x2f268e0]
 // Decompiled from void __thiscall __noreturn AdvXMLParser::Parser::SyntaxError(int *this, int a2)
-void  AdvXMLParser::Parser::SyntaxError(enum AdvXMLParser::PARSER_ERROR) {
+void  AdvXMLParser::Parser::SyntaxError(enum AdvXMLParser::PARSER_ERROR a2) {
   
   _BYTE pExceptionObject[16]; // [esp+0h] [ebp-14h] BYREF
   int *v3; // [esp+10h] [ebp-4h]
@@ -157,7 +157,7 @@ void  AdvXMLParser::Parser::PreviousChar(void) {
 
 // address=[0x2f26af0]
 // Decompiled from char __thiscall AdvXMLParser::Parser::ParseChar(AdvXMLParser::Parser *this, char a2)
-bool  AdvXMLParser::Parser::ParseChar(char) {
+bool  AdvXMLParser::Parser::ParseChar(char a2) {
   
   if ( AdvXMLParser::Parser::NextChar(this) == a2 )
     return 1;
@@ -168,7 +168,7 @@ bool  AdvXMLParser::Parser::ParseChar(char) {
 
 // address=[0x2f26b20]
 // Decompiled from char __thiscall AdvXMLParser::Parser::ParseString(AdvXMLParser::Parser *this, const char *a2)
-bool  AdvXMLParser::Parser::ParseString(char const *) {
+bool  AdvXMLParser::Parser::ParseString(char const * a2) {
   
   _BYTE v3[16]; // [esp+0h] [ebp-18h] BYREF
   AdvXMLParser::Parser *v4; // [esp+10h] [ebp-8h]
@@ -192,7 +192,7 @@ bool  AdvXMLParser::Parser::ParseString(char const *) {
 
 // address=[0x2f26b80]
 // Decompiled from char __thiscall AdvXMLParser::Parser::ParseStringNoCase(AdvXMLParser::Parser *this, _BYTE *a2)
-bool  AdvXMLParser::Parser::ParseStringNoCase(char const *) {
+bool  AdvXMLParser::Parser::ParseStringNoCase(char const * a2) {
   
   int v2; // esi
   _BYTE v4[16]; // [esp+4h] [ebp-18h] BYREF
@@ -218,7 +218,7 @@ bool  AdvXMLParser::Parser::ParseStringNoCase(char const *) {
 
 // address=[0x2f26c00]
 // Decompiled from char __thiscall AdvXMLParser::Parser::ParseNumber(AdvXMLParser::Parser *this, int *a2)
-bool  AdvXMLParser::Parser::ParseNumber(int &) {
+bool  AdvXMLParser::Parser::ParseNumber(int & a2) {
   
   char v3; // [esp+0h] [ebp-8h]
   AdvXMLParser::Parser *v4; // [esp+0h] [ebp-8h]
@@ -241,7 +241,7 @@ bool  AdvXMLParser::Parser::ParseNumber(int &) {
 
 // address=[0x2f26c80]
 // Decompiled from char __thiscall AdvXMLParser::Parser::ParseHexNumber(AdvXMLParser::Parser *this, int *a2)
-bool  AdvXMLParser::Parser::ParseHexNumber(int &) {
+bool  AdvXMLParser::Parser::ParseHexNumber(int & a2) {
   
   int v3; // esi
   char v4; // [esp+0h] [ebp-Ch]
@@ -264,7 +264,7 @@ bool  AdvXMLParser::Parser::ParseHexNumber(int &) {
 
 // address=[0x2f26d10]
 // Decompiled from char __thiscall AdvXMLParser::Parser::ParseDeclBegining(AdvXMLParser::Parser *this, const char *a2)
-bool  AdvXMLParser::Parser::ParseDeclBegining(char const *) {
+bool  AdvXMLParser::Parser::ParseDeclBegining(char const * a2) {
   
   _BYTE v3[16]; // [esp+0h] [ebp-14h] BYREF
   AdvXMLParser::Parser *v4; // [esp+10h] [ebp-4h]
@@ -339,7 +339,7 @@ bool  AdvXMLParser::Parser::ParseEq(void) {
 
 // address=[0x2f26e40]
 // Decompiled from char __thiscall AdvXMLParser::Parser::ParseName(AdvXMLParser::Parser *this, int a2)
-bool  AdvXMLParser::Parser::ParseName(std::string &) {
+bool  AdvXMLParser::Parser::ParseName(std::string & a2) {
   
   char v3[16]; // [esp+0h] [ebp-18h] BYREF
   AdvXMLParser::Parser *v4; // [esp+10h] [ebp-8h]
@@ -366,7 +366,7 @@ bool  AdvXMLParser::Parser::ParseName(std::string &) {
 
 // address=[0x2f26ee0]
 // Decompiled from char __thiscall AdvXMLParser::Parser::ParseNmtoken(AdvXMLParser::Parser *this, int a2)
-bool  AdvXMLParser::Parser::ParseNmtoken(std::string &) {
+bool  AdvXMLParser::Parser::ParseNmtoken(std::string & a2) {
   
   char v3[16]; // [esp+0h] [ebp-18h] BYREF
   AdvXMLParser::Parser *v4; // [esp+10h] [ebp-8h]

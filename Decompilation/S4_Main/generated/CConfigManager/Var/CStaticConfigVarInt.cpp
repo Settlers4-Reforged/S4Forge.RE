@@ -4,7 +4,7 @@
 
 // address=[0x12fc830]
 // Decompiled from CStaticConfigVarInt *__thiscall CStaticConfigVarInt::CStaticConfigVarInt(  CStaticConfigVarInt *this,  const char *a2,  const char *a3,  int a4)
- CStaticConfigVarInt::CStaticConfigVarInt(char const *,char const *,int) {
+ CStaticConfigVarInt::CStaticConfigVarInt(char const * a2, char const * a3, int a4) {
   
   CStaticConfigVar::CStaticConfigVar(this, a2, a3, 1, 1);
   *(_DWORD *)this = &CStaticConfigVarInt::_vftable_;
@@ -47,7 +47,7 @@ int  CStaticConfigVarInt::GetIntValue(void)const {
 
 // address=[0x12fd6d0]
 // Decompiled from CStaticConfigVarInt *__thiscall CStaticConfigVarInt::SetValue(CStaticConfigVarInt *this, int a2)
-void  CStaticConfigVarInt::SetValue(int) {
+void  CStaticConfigVarInt::SetValue(int a2) {
   
   CStaticConfigVarInt *result; // eax
 
@@ -59,7 +59,7 @@ void  CStaticConfigVarInt::SetValue(int) {
 
 // address=[0x12fd6f0]
 // Decompiled from int __thiscall CStaticConfigVarInt::SetValue(CStaticConfigVarInt *this, float a2)
-void  CStaticConfigVarInt::SetValue(float) {
+void  CStaticConfigVarInt::SetValue(float a2) {
   
   int result; // eax
 
@@ -71,7 +71,7 @@ void  CStaticConfigVarInt::SetValue(float) {
 
 // address=[0x1355250]
 // Decompiled from _DWORD *__thiscall CStaticConfigVarInt::operator=(_DWORD *this, int a2)
-class CStaticConfigVarInt &  CStaticConfigVarInt::operator=(int) {
+class CStaticConfigVarInt &  CStaticConfigVarInt::operator=(int a2) {
   
   this[2] = a2;
   return this;

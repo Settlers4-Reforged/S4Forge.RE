@@ -4,7 +4,7 @@
 
 // address=[0x30812c0]
 // Decompiled from charNode *__thiscall charNode::charNode(charNode *this, char a2)
- charNode::charNode(char) {
+ charNode::charNode(char a2) {
   
   DNameNode::DNameNode(this);
   *(_DWORD *)this = &charNode::_vftable_;
@@ -23,7 +23,7 @@ char  charNode::getLastChar(void)const {
 
 // address=[0x308a620]
 // Decompiled from char *__thiscall charNode::getString(charNode *this, char *a2, char *a3)
-char *  charNode::getString(char *,char *)const {
+char *  charNode::getString(char * a2, char * a3)const {
   
   if ( a2 < a3 )
     *a2++ = *((_BYTE *)this + 4);

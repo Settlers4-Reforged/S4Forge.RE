@@ -1,10 +1,11 @@
+#if FALSE
 #include "IEntity.h"
 
 // Definitions for class IEntity
 
 // address=[0x12fd110]
 // Decompiled from int __thiscall IEntity::FlagBits(IEntity *this, EntityFlag a2)
-int  IEntity::FlagBits(int)const {
+int  IEntity::FlagBits(int a2)const {
   
   return a2 & this->m_iFlags;
 }
@@ -35,14 +36,10 @@ class CAIEntityInfo *  IEntity::AIEntityInfoPtr(void)const {
 
 
 // address=[0x130ea10]
-// Decompiled from int __thiscall IEntity::ClearFlagBits(IEntity *this, EntityFlag a2)
-void  IEntity::ClearFlagBits(int) {
+// Decompiled from void __thiscall IEntity::ClearFlagBits(IEntity *this, EntityFlag a2)
+void  IEntity::ClearFlagBits(int a2) {
   
-  int result; // eax
-
-  result = this->m_iFlags & ~a2;
-  this->m_iFlags = result;
-  return result;
+  this->m_iFlags &= ~a2;
 }
 
 
@@ -72,7 +69,7 @@ int  IEntity::OwnerId(void)const {
 
 // address=[0x130f390]
 // Decompiled from void __thiscall IEntity::SetFlagBits(IEntity *this, EntityFlag a2)
-void  IEntity::SetFlagBits(int) {
+void  IEntity::SetFlagBits(int a2) {
   
   this->m_iFlags |= a2;
 }
@@ -160,7 +157,7 @@ int  IEntity::Hitpoints(void)const {
 
 // address=[0x14d8640]
 // Decompiled from int __thiscall IEntity::ClearGroupFlagBits(IEntity *this, DWORD a2)
-int  IEntity::ClearGroupFlagBits(int) {
+int  IEntity::ClearGroupFlagBits(int a2) {
   
   return 0;
 }
@@ -192,7 +189,7 @@ bool  IEntity::IsVisible(void)const {
 
 // address=[0x14d8790]
 // Decompiled from void *__thiscall IEntity::SetGroupFlagBits(std::_Ref_count_base *this, const struct type_info *a2)
-int  IEntity::SetGroupFlagBits(int) {
+int  IEntity::SetGroupFlagBits(int a2) {
   
   return 0;
 }
@@ -200,7 +197,7 @@ int  IEntity::SetGroupFlagBits(int) {
 
 // address=[0x14d87b0]
 // Decompiled from void *__thiscall IEntity::SetGroupFlags(std::_Ref_count_base *this, const struct type_info *a2)
-int  IEntity::SetGroupFlags(int) {
+int  IEntity::SetGroupFlags(int a2) {
   
   return 0;
 }
@@ -208,7 +205,7 @@ int  IEntity::SetGroupFlags(int) {
 
 // address=[0x14d8810]
 // Decompiled from void __thiscall IEntity::SetPosition(IEntity *this, int x, int y)
-void  IEntity::SetPosition(int,int) {
+void  IEntity::SetPosition(int x, int y) {
   
   this->m_uPackedXY = Y16X16::PackXYFast(x, y);
 }
@@ -224,7 +221,7 @@ void  IEntity::Delete(void) {
 
 // address=[0x14e4bf0]
 // Decompiled from void __stdcall IEntity::Take(int a1)
-void  IEntity::Take(int) {
+void  IEntity::Take(int a1) {
   
   ;
 }
@@ -232,7 +229,7 @@ void  IEntity::Take(int) {
 
 // address=[0x14eb780]
 // Decompiled from void __thiscall IEntity::SetOwnerId(IEntity *this, unsigned __int8 owner)
-void  IEntity::SetOwnerId(unsigned char) {
+void  IEntity::SetOwnerId(unsigned char owner) {
   
   this->m_packedTribePlayer.Packed = (16 * owner) | this->m_packedTribePlayer.Packed & 0xF;
 }
@@ -240,7 +237,7 @@ void  IEntity::SetOwnerId(unsigned char) {
 
 // address=[0x14eb7e0]
 // Decompiled from void __thiscall IEntity::SetRace(IEntity *this, unsigned __int8 a2)
-void  IEntity::SetRace(unsigned char) {
+void  IEntity::SetRace(unsigned char a2) {
   
   this->m_packedTribePlayer.Packed = a2 | this->m_packedTribePlayer.Packed & 0xF0;
 }
@@ -248,7 +245,7 @@ void  IEntity::SetRace(unsigned char) {
 
 // address=[0x1508220]
 // Decompiled from void __thiscall IEntity::SetPosition(IEntity *this, int a2)
-void  IEntity::SetPosition(int) {
+void  IEntity::SetPosition(int a2) {
   
   this->m_uPackedXY = a2;
 }
@@ -264,7 +261,7 @@ bool  IEntity::IsSelected(void)const {
 
 // address=[0x154b3d0]
 // Decompiled from IEntity *__thiscall IEntity::IEntity(IEntity *this, int id)
- IEntity::IEntity(int) {
+ IEntity::IEntity(int id) {
   
   CPersistence::CPersistence(this);
   this->__vftable = (IEntity_vtbl *)&IEntity::_vftable_;
@@ -307,7 +304,7 @@ bool  IEntity::IsSelected(void)const {
 
 // address=[0x154b570]
 // Decompiled from struct IEntity *__thiscall IEntity::IEntity(struct IEntity *this, struct std::istream *inputFile)
- IEntity::IEntity(std::istream &) {
+ IEntity::IEntity(std::istream & inputFile) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
@@ -344,7 +341,7 @@ bool  IEntity::IsSelected(void)const {
 
 // address=[0x154b6e0]
 // Decompiled from void __thiscall IEntity::Store(IEntity *this, struct std::ostream *a2)
-void  IEntity::Store(std::ostream &) {
+void  IEntity::Store(std::ostream & a2) {
   
   int v2; // [esp+0h] [ebp-8h] BYREF
 
@@ -381,7 +378,7 @@ int  IEntity::WorldIdx(void)const {
 
 // address=[0x154b800]
 // Decompiled from int __thiscall IEntity::Increase(IEntity *this, int byAmount)
-int  IEntity::Increase(int) {
+int  IEntity::Increase(int byAmount) {
   
   if ( byAmount + this->m_cHealth <= 255 )
     this->m_cHealth += byAmount;
@@ -393,7 +390,7 @@ int  IEntity::Increase(int) {
 
 // address=[0x154b850]
 // Decompiled from void __thiscall IEntity::Decrease(IEntity *this, int byAmount)
-void  IEntity::Decrease(int) {
+void  IEntity::Decrease(int byAmount) {
   
   if ( byAmount > 0 )
   {
@@ -412,7 +409,7 @@ void  IEntity::Decrease(int) {
 
 // address=[0x154b8b0]
 // Decompiled from void __thiscall IEntity::Decrease(IEntity *this, int a2, int attackerId)
-void  IEntity::Decrease(int,int) {
+void  IEntity::Decrease(int a2, int attackerId) {
   
   g_CurrentEntityAttacker = attackerId;
   this->Decrease(a2);
@@ -438,7 +435,7 @@ int  IEntity::MaxHitpoints(void)const {
 
 // address=[0x154b910]
 // Decompiled from void __thiscall IEntity::SetAIEntityInfoPtr(IEntity *this, struct CAIEntityInfo *a2)
-void  IEntity::SetAIEntityInfoPtr(class CAIEntityInfo *) {
+void  IEntity::SetAIEntityInfoPtr(class CAIEntityInfo * a2) {
   
   if ( this->m_psAIEntityInfo )
     delete this->m_psAIEntityInfo;
@@ -448,7 +445,7 @@ void  IEntity::SetAIEntityInfoPtr(class CAIEntityInfo *) {
 
 // address=[0x154b960]
 // Decompiled from void __thiscall IEntity::DbgPrint(IEntity *this, int logLevel, const char *customMessage)
-void  IEntity::DbgPrint(int,char const *) {
+void  IEntity::DbgPrint(int logLevel, char const * customMessage) {
   
   struct type_info *v3; // eax
   const char *v4; // [esp-24h] [ebp-2Ch]
@@ -494,7 +491,7 @@ void  IEntity::DbgPrint(int,char const *) {
 
 // address=[0x154ba00]
 // Decompiled from void __thiscall IEntity::PlaceInMapObjectLayer(IEntity *this, int packedXY)
-void  IEntity::PlaceInMapObjectLayer(int) {
+void  IEntity::PlaceInMapObjectLayer(int packedXY) {
   
   __int16 v2; // ax
   int worldIndex; // [esp+0h] [ebp-10h]
@@ -606,7 +603,7 @@ void  IEntity::RemoveFromMapObjectLayerIfNecessary(void) {
 
 // address=[0x154bd00]
 // Decompiled from void __stdcall IEntity::Detach(IEntity *a1)
-void  IEntity::Detach(int) {
+void  IEntity::Detach(int a1) {
   
   if ( BBSupportDbgReport(1, "MapObjects\\Entity.cpp", 360, "IEntity::Detach() called!") == 1 )
     __debugbreak();
@@ -615,7 +612,7 @@ void  IEntity::Detach(int) {
 
 // address=[0x154bd30]
 // Decompiled from void __stdcall IEntity::SetObserverTarget(int a1, int a2)
-void  IEntity::SetObserverTarget(enum T_OBSERVER_TARGET,int) {
+void  IEntity::SetObserverTarget(enum T_OBSERVER_TARGET a1, int a2) {
   
   ;
 }
@@ -623,7 +620,7 @@ void  IEntity::SetObserverTarget(enum T_OBSERVER_TARGET,int) {
 
 // address=[0x154bd40]
 // Decompiled from void *__thiscall IEntity::GetObserverTarget(std::_Ref_count_base *this, const struct type_info *a2)
-int  IEntity::GetObserverTarget(enum T_OBSERVER_TARGET) {
+int  IEntity::GetObserverTarget(enum T_OBSERVER_TARGET a2) {
   
   return 0;
 }
@@ -651,7 +648,7 @@ void  IEntity::RemoveFromAllGroups(void) {
 
 // address=[0x154c100]
 // Decompiled from void __stdcall IEntity::SetEvent(int a1)
-void  IEntity::SetEvent(class CEntityEvent const &) {
+void  IEntity::SetEvent(class CEntityEvent const & a1) {
   
   ;
 }
@@ -659,7 +656,7 @@ void  IEntity::SetEvent(class CEntityEvent const &) {
 
 // address=[0x1552650]
 // Decompiled from BOOL __thiscall IEntity::CheckType(IEntity *this, char a2, int a3)
-bool  IEntity::CheckType(int,int)const {
+bool  IEntity::CheckType(int a2, int a3)const {
   
   return this->m_nType == a3 && (unsigned __int8)(a2 & this->m_objType) != 0;
 }
@@ -667,7 +664,7 @@ bool  IEntity::CheckType(int,int)const {
 
 // address=[0x156d340]
 // Decompiled from void __thiscall IEntity::SetHitpoints(IEntity *this, char hp)
-void  IEntity::SetHitpoints(unsigned int) {
+void  IEntity::SetHitpoints(unsigned int hp) {
   
   this->m_cHealth = hp;
 }
@@ -679,3 +676,4 @@ void  IEntity::SetHitpoints(unsigned int) {
 // address=[0x40fe250]
 // [Decompilation failed for static struct SGfxObjectInfo IEntity::m_sGfxInfo]
 
+#endif // Already implemented

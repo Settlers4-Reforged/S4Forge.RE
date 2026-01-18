@@ -1,6 +1,8 @@
 #ifndef CDEBUGGRIDTEST_H
 #define CDEBUGGRIDTEST_H
 
+#include "defines.h"
+
 class CDebugGridTest {
 public:
     // address=[0x15dcbc0]

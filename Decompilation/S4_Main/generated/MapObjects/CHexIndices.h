@@ -1,6 +1,8 @@
 #ifndef CHEXINDICES_H
 #define CHEXINDICES_H
 
+#include "defines.h"
+
 class CHexIndices {
 public:
     // address=[0x2fcabb0]

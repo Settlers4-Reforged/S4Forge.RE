@@ -1,6 +1,8 @@
 #ifndef CGUIWRAPPER_H
 #define CGUIWRAPPER_H
 
+#include "defines.h"
+
 class CGUIWrapper {
 public:
     // address=[0x13d8780]
@@ -10,7 +12,7 @@ public:
     void  ReleaseGUIGFXFile(void);
 
     // address=[0x13d8830]
-    bool  RebuildGuiEngineWithGfxFile(unsigned int,void *,int,bool (__cdecl*)(int,int,int));
+    bool  RebuildGuiEngineWithGfxFile(unsigned int a2, void * a3, int a4, bool (__cdecl*)(int,int,int) a5);
 
     // address=[0x13d8a20]
     unsigned int  GetActiveGUIGFXFile(void);

@@ -1,6 +1,8 @@
 #ifndef CAI_ECOSECTOR_GRID_ITERATOR_CESGI_H
 #define CAI_ECOSECTOR_GRID_ITERATOR_CESGI_H
 
+#include "defines.h"
+
 namespace CAI_Ecosector_Grid_Iterator {
 
 class CESGI {

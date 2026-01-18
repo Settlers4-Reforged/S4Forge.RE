@@ -55,7 +55,7 @@
 
 // address=[0x2f2f090]
 // Decompiled from void __stdcall BBSupportLib::CBBSupportTraceFile::SetFilePath(  BBSupportLib::CBBSupportTraceFile *this,  const wchar_t *a2)
-void __stdcall BBSupportLib::CBBSupportTraceFile::SetFilePath(wchar_t const *) {
+void __stdcall BBSupportLib::CBBSupportTraceFile::SetFilePath(wchar_t const * a2) {
   
   if ( a2 && *a2 )
     CBBSupportLogFile::SetFilePath(this, a2);

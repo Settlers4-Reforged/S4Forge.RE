@@ -36,7 +36,7 @@ void  CVehicle::SetSelectable(void) {
 
 // address=[0x159e900]
 // Decompiled from int __thiscall CVehicle::GetMeetingPointXY(void *this, int a2, int a3)
-int const  CVehicle::GetMeetingPointXY(enum OBJ_TYPE,int) {
+int const  CVehicle::GetMeetingPointXY(enum OBJ_TYPE a2, int a3) {
   
   return IEntity::PackedXY(this);
 }
@@ -88,7 +88,7 @@ void  CVehicle::AddToWarMap(void) {
 
 // address=[0x15a3d10]
 // Decompiled from void __thiscall CVehicle::GoodIsComming(CVehicle *this, int a2, int a3)
-void  CVehicle::GoodIsComming(int,int) {
+void  CVehicle::GoodIsComming(int a2, int a3) {
   
   ;
 }
@@ -96,7 +96,7 @@ void  CVehicle::GoodIsComming(int,int) {
 
 // address=[0x15a3d20]
 // Decompiled from void __thiscall CVehicle::EntityOrderCanceled(CVehicle *this, int a2)
-void  CVehicle::EntityOrderCanceled(int) {
+void  CVehicle::EntityOrderCanceled(int a2) {
   
   ;
 }
@@ -104,7 +104,7 @@ void  CVehicle::EntityOrderCanceled(int) {
 
 // address=[0x15a3d30]
 // Decompiled from void __thiscall CVehicle::EntityEnter(CVehicle *this, int a2)
-void  CVehicle::EntityEnter(int) {
+void  CVehicle::EntityEnter(int a2) {
   
   ;
 }
@@ -112,7 +112,7 @@ void  CVehicle::EntityEnter(int) {
 
 // address=[0x15a3d40]
 // Decompiled from void __thiscall CVehicle::GoodArrived(CVehicle *this, int a2, int a3)
-void  CVehicle::GoodArrived(int,int) {
+void  CVehicle::GoodArrived(int a2, int a3) {
   
   ;
 }
@@ -120,7 +120,7 @@ void  CVehicle::GoodArrived(int,int) {
 
 // address=[0x15a3d50]
 // Decompiled from void __thiscall CVehicle::SupplyCanceled(CVehicle *this, int a2, int a3)
-void  CVehicle::SupplyCanceled(int,int) {
+void  CVehicle::SupplyCanceled(int a2, int a3) {
   
   ;
 }
@@ -169,7 +169,7 @@ void  CVehicle::Delete(void) {
 
 // address=[0x15a3e80]
 // Decompiled from int __thiscall CVehicle::FireMissile(CVehicle *this, int a2, int a3)
-void  CVehicle::FireMissile(int,int) {
+void  CVehicle::FireMissile(int a2, int a3) {
   
   int v3; // eax
   int v4; // eax
@@ -438,7 +438,7 @@ bool  CVehicle::IsUnEmployed(void)const {
 
 // address=[0x15a4500]
 // Decompiled from CVehicle *__thiscall CVehicle::IncreaseAmmo(CVehicle *this, int a2)
-void  CVehicle::IncreaseAmmo(int) {
+void  CVehicle::IncreaseAmmo(int a2) {
   
   CVehicle *result; // eax
   int v3; // [esp+4h] [ebp-10h]
@@ -632,7 +632,7 @@ void  CVehicle::OnBuildReady(void) {
 
 // address=[0x15a4a20]
 // Decompiled from char __thiscall CVehicle::NeedForBuildingMaterial(CVehicle *this, int a2)
-bool  CVehicle::NeedForBuildingMaterial(int) {
+bool  CVehicle::NeedForBuildingMaterial(int a2) {
   
   if ( a2 == 7 )
   {
@@ -649,7 +649,7 @@ bool  CVehicle::NeedForBuildingMaterial(int) {
 
 // address=[0x15a4a70]
 // Decompiled from CVehicle *__thiscall CVehicle::AddBuildingMaterial(CVehicle *this, CVehicle *a2)
-void  CVehicle::AddBuildingMaterial(int) {
+void  CVehicle::AddBuildingMaterial(int a2) {
   
   CVehicle *result; // eax
 
@@ -676,7 +676,7 @@ void  CVehicle::AddBuildingMaterial(int) {
 
 // address=[0x15a4b30]
 // Decompiled from void __thiscall CVehicle::Attach(CVehicle *this, int a2)
-void  CVehicle::Attach(int) {
+void  CVehicle::Attach(int a2) {
   
   int v2; // eax
 
@@ -687,7 +687,7 @@ void  CVehicle::Attach(int) {
 
 // address=[0x15a4b60]
 // Decompiled from int __thiscall CVehicle::Detach(CVehicle *this, int a2)
-void  CVehicle::Detach(int) {
+void  CVehicle::Detach(int a2) {
   
   CVehicle::DetachWithoutNotify(this, a2);
   return (*(int (__thiscall **)(CVehicle *, int))(*(_DWORD *)this + 192))(this, a2);
@@ -696,7 +696,7 @@ void  CVehicle::Detach(int) {
 
 // address=[0x15a4b90]
 // Decompiled from int __thiscall CVehicle::Notify(CVehicle *this, const struct CEntityEvent *a2)
-void  CVehicle::Notify(class CEntityEvent const &)const {
+void  CVehicle::Notify(class CEntityEvent const & a2)const {
   
   return CObserverList::NotifyAllObservers((char *)this + 156, (int)a2);
 }
@@ -704,7 +704,7 @@ void  CVehicle::Notify(class CEntityEvent const &)const {
 
 // address=[0x15a4bb0]
 // Decompiled from void __thiscall CVehicle::Decrease(CVehicle *this, int a2)
-void  CVehicle::Decrease(int) {
+void  CVehicle::Decrease(int a2) {
   
   int v2; // eax
   int v3; // [esp+0h] [ebp-1Ch]
@@ -754,7 +754,7 @@ int  CVehicle::GetGroupFlags(void)const {
 
 // address=[0x15a4ca0]
 // Decompiled from int __thiscall CVehicle::SetGroupFlagBits(CVehicle *this, unsigned int a2)
-int  CVehicle::SetGroupFlagBits(int) {
+int  CVehicle::SetGroupFlagBits(int a2) {
   
   if ( a2 >= 0x10000
     && BBSupportDbgReport(2, "MapObjects\\Vehicle.cpp", 1568, "(_iFlagBits >= 0) && (_iFlagBits <= 0xFFFF)") == 1 )
@@ -768,7 +768,7 @@ int  CVehicle::SetGroupFlagBits(int) {
 
 // address=[0x15a4d00]
 // Decompiled from int __thiscall CVehicle::ClearGroupFlagBits(CVehicle *this, unsigned int a2)
-int  CVehicle::ClearGroupFlagBits(int) {
+int  CVehicle::ClearGroupFlagBits(int a2) {
   
   if ( a2 >= 0x10000
     && BBSupportDbgReport(2, "MapObjects\\Vehicle.cpp", 1575, "(_iFlagBits >= 0) && (_iFlagBits <= 0xFFFF)") == 1 )
@@ -825,7 +825,7 @@ bool  CVehicle::ReadyToFire(unsigned int)const {
 
 // address=[0x153fe40]
 // Decompiled from int __thiscall CVehicle::RegisterNewTask(CVehicle *this, char a2, int a3)
-void  CVehicle::RegisterNewTask(unsigned int,unsigned int) {
+void  CVehicle::RegisterNewTask(unsigned int a2, unsigned int a3) {
   
   *((_BYTE *)this + 107) = a2;
   return IAnimatedEntity::RegisterForLogicUpdate(a3);
@@ -842,7 +842,7 @@ unsigned int  CVehicle::TurnCounter(void)const {
 
 // address=[0x15a4d60]
 // Decompiled from CVehicle *__thiscall CVehicle::CVehicle(  CVehicle *this,  int a2,  int a3,  int a4,  int a5,  WORD a6,  unsigned int a7,  bool a8)
- CVehicle::CVehicle(int,int,int,int,int,int,bool) {
+ CVehicle::CVehicle(int a2, int a3, int a4, int a5, int a6, int a7, bool a8) {
   
   void *v8; // eax
   int v9; // eax
@@ -964,7 +964,7 @@ unsigned int  CVehicle::TurnCounter(void)const {
 
 // address=[0x15a51a0]
 // Decompiled from _DWORD *__thiscall CVehicle::CVehicle(_DWORD *this, int a2)
- CVehicle::CVehicle(std::istream &) {
+ CVehicle::CVehicle(std::istream & a2) {
   
   int v2; // eax
   unsigned int v4; // [esp+4h] [ebp-20h] BYREF
@@ -1021,7 +1021,7 @@ unsigned int  CVehicle::TurnCounter(void)const {
 
 // address=[0x15a54a0]
 // Decompiled from int __thiscall CVehicle::Store(IMovingEntity *this, struct std::ostream *a1)
-void  CVehicle::Store(std::ostream &) {
+void  CVehicle::Store(std::ostream & a2) {
   
   _BYTE v3[12]; // [esp+4h] [ebp-40h] BYREF
   _BYTE v4[12]; // [esp+10h] [ebp-34h] BYREF
@@ -1117,7 +1117,7 @@ void  CVehicle::GetTurnGfxInfo(void) {
 
 // address=[0x15a5850]
 // Decompiled from unsigned int __thiscall CVehicle::InitTurn(CVehicle *this, int a2)
-unsigned int  CVehicle::InitTurn(int) {
+unsigned int  CVehicle::InitTurn(int a2) {
   
   int v3; // [esp+0h] [ebp-24h]
   int v4; // [esp+4h] [ebp-20h]
@@ -1164,7 +1164,7 @@ unsigned int  CVehicle::InitTurn(int) {
 
 // address=[0x15a5960]
 // Decompiled from int __thiscall CVehicle::TurnVehicle(CVehicle *this, unsigned int a2)
-unsigned int  CVehicle::TurnVehicle(unsigned int) {
+unsigned int  CVehicle::TurnVehicle(unsigned int a2) {
   
   int v3; // [esp+10h] [ebp-10h]
   unsigned int v4; // [esp+14h] [ebp-Ch]
@@ -1185,7 +1185,7 @@ unsigned int  CVehicle::TurnVehicle(unsigned int) {
 
 // address=[0x15a5a00]
 // Decompiled from int __thiscall CVehicle::TakeJobPart(CVehicle *this, unsigned int a2)
-void  CVehicle::TakeJobPart(unsigned int) {
+void  CVehicle::TakeJobPart(unsigned int a2) {
   
   unsigned int v2; // eax
   int result; // eax
@@ -1207,7 +1207,7 @@ void  CVehicle::TakeJobPart(unsigned int) {
 
 // address=[0x15a5a80]
 // Decompiled from char __thiscall CVehicle::NewDestination(CVehicle *this, int a2, int a3, char a4)
-bool  CVehicle::NewDestination(int,int,int) {
+bool  CVehicle::NewDestination(int a2, int a3, int a4) {
   
   CEntityTask *v5; // eax
   int v6; // eax
@@ -1354,7 +1354,7 @@ void  CVehicle::GetNextJob(void) {
 
 // address=[0x15a5e30]
 // Decompiled from void __thiscall CVehicle::DetachWithoutNotify(CVehicle *this, int a2)
-void  CVehicle::DetachWithoutNotify(int) {
+void  CVehicle::DetachWithoutNotify(int a2) {
   
   CObserverList::Detach((CVehicle *)((char *)this + 156), a2);
 }
@@ -1362,7 +1362,7 @@ void  CVehicle::DetachWithoutNotify(int) {
 
 // address=[0x15a5e50]
 // Decompiled from CVehicle *__thiscall CVehicle::SetReadyToFireTick(CVehicle *this, unsigned int a2)
-void  CVehicle::SetReadyToFireTick(unsigned int) {
+void  CVehicle::SetReadyToFireTick(unsigned int a2) {
   
   CVehicle *result; // eax
 
@@ -1405,7 +1405,7 @@ void  CVehicle::DecreaseAmmo(void) {
 
 // address=[0x15a5ef0]
 // Decompiled from int __thiscall CVehicle::AttackTarget(CVehicle *this, int a2)
-void  CVehicle::AttackTarget(int) {
+void  CVehicle::AttackTarget(int a2) {
   
   Y16X16 *v2; // eax
   unsigned int TickCounter; // eax
@@ -1446,7 +1446,7 @@ void  CVehicle::AttackTarget(int) {
 
 // address=[0x15a6040]
 // Decompiled from void __thiscall CVehicle::WalkDirAndRegister(CVehicle *this, int a2, bool a3)
-void  CVehicle::WalkDirAndRegister(int,bool) {
+void  CVehicle::WalkDirAndRegister(int a2, bool a3) {
   
   int v3; // eax
   unsigned int v4; // [esp+Ch] [ebp-10h]
@@ -1494,7 +1494,7 @@ void  CVehicle::WalkDirAndRegister(int,bool) {
 
 // address=[0x15a61a0]
 // Decompiled from CVehicle *__thiscall CVehicle::InitCommonTaskValues(CVehicle *this, const struct CEntityTask *a2)
-void  CVehicle::InitCommonTaskValues(class CEntityTask const *) {
+void  CVehicle::InitCommonTaskValues(class CEntityTask const * a2) {
   
   CVehicle *result; // eax
 
@@ -1525,7 +1525,7 @@ void  CVehicle::InitCommonTaskValues(class CEntityTask const *) {
 
 // address=[0x15a6250]
 // Decompiled from void __thiscall CVehicle::ConvertEventIntoGoal(CVehicle *this, struct CEntityEvent *a2)
-void  CVehicle::ConvertEventIntoGoal(class CEntityEvent *) {
+void  CVehicle::ConvertEventIntoGoal(class CEntityEvent * a2) {
   
   char v2; // al
   char v3; // al
@@ -1551,7 +1551,7 @@ void  CVehicle::ConvertEventIntoGoal(class CEntityEvent *) {
 
 // address=[0x15a6300]
 // Decompiled from int __thiscall CVehicle::MoveTo(CVehicle *this, int a2, int a3, int a4)
-void  CVehicle::MoveTo(int,int,int) {
+void  CVehicle::MoveTo(int a2, int a3, int a4) {
   
   int v4; // eax
   _BYTE v6[24]; // [esp+4h] [ebp-30h] BYREF
@@ -1573,7 +1573,7 @@ void  CVehicle::MoveTo(int,int,int) {
 
 // address=[0x15a7a20]
 // Decompiled from char CVehicle::CallTakeJob()
-static bool __cdecl CVehicle::CallTakeJob(void) {
+bool __cdecl CVehicle::CallTakeJob(void) {
   
   return CVehicle::m_bCallTakeJob;
 }
@@ -1581,7 +1581,7 @@ static bool __cdecl CVehicle::CallTakeJob(void) {
 
 // address=[0x15a7a30]
 // Decompiled from void CVehicle::ClearCallTakeJob()
-static void __cdecl CVehicle::ClearCallTakeJob(void) {
+void __cdecl CVehicle::ClearCallTakeJob(void) {
   
   CVehicle::m_bCallTakeJob = 0;
 }
@@ -1597,7 +1597,7 @@ bool  CVehicle::IsMoving(void)const {
 
 // address=[0x15a7b20]
 // Decompiled from int __cdecl CVehicle::NotifyCallTakeJob(bool a1)
-static void __cdecl CVehicle::NotifyCallTakeJob(bool) {
+void __cdecl CVehicle::NotifyCallTakeJob(bool a1) {
   
   int result; // eax
 
@@ -1609,7 +1609,7 @@ static void __cdecl CVehicle::NotifyCallTakeJob(bool) {
 
 // address=[0x15a7b40]
 // Decompiled from void __thiscall CVehicle::RegisterNewTaskAndTakeJobPartIfNecessary(CVehicle *this, char a2, int a3, unsigned int a4)
-void  CVehicle::RegisterNewTaskAndTakeJobPartIfNecessary(unsigned int,unsigned int,unsigned int) {
+void  CVehicle::RegisterNewTaskAndTakeJobPartIfNecessary(unsigned int a2, unsigned int a3, unsigned int a4) {
   
   CVehicle::RegisterNewTask(this, a2, a3);
   CVehicle::TakeJobPartIfNecessary(this, a4);
@@ -1618,7 +1618,7 @@ void  CVehicle::RegisterNewTaskAndTakeJobPartIfNecessary(unsigned int,unsigned i
 
 // address=[0x15a7be0]
 // Decompiled from CVehicle *__thiscall CVehicle::TakeJobPartIfNecessary(CVehicle *this, unsigned int a2)
-void  CVehicle::TakeJobPartIfNecessary(unsigned int) {
+void  CVehicle::TakeJobPartIfNecessary(unsigned int a2) {
   
   CVehicle *result; // eax
 
@@ -1634,7 +1634,7 @@ void  CVehicle::TakeJobPartIfNecessary(unsigned int) {
 
 // address=[0x153a570]
 // Decompiled from void __thiscall CVehicle::NotifyDetach(CVehicle *this, int a2)
-void  CVehicle::NotifyDetach(int) {
+void  CVehicle::NotifyDetach(int a2) {
   
   ;
 }

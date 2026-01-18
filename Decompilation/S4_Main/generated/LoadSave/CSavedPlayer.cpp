@@ -4,7 +4,7 @@
 
 // address=[0x13eb720]
 // Decompiled from int __thiscall CSavedPlayer::Load(CSavedPlayer *this, struct IS4Chunk *a2)
-void  CSavedPlayer::Load(class IS4Chunk &) {
+void  CSavedPlayer::Load(class IS4Chunk & a2) {
   
   int result; // eax
   int v3; // [esp+0h] [ebp-8h] BYREF
@@ -32,7 +32,7 @@ void  CSavedPlayer::Load(class IS4Chunk &) {
 
 // address=[0x13eb7f0]
 // Decompiled from int __thiscall CSavedPlayer::Save(CSavedPlayer *this, struct IS4Chunk *a2)
-void  CSavedPlayer::Save(class IS4Chunk &) {
+void  CSavedPlayer::Save(class IS4Chunk & a2) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
   CSavedPlayer *v4; // [esp+4h] [ebp-4h]

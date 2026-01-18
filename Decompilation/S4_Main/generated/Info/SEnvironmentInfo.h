@@ -1,6 +1,8 @@
 #ifndef SENVIRONMENTINFO_H
 #define SENVIRONMENTINFO_H
 
+#include "defines.h"
+
 class SEnvironmentInfo {
 public:
     // address=[0x1481020]

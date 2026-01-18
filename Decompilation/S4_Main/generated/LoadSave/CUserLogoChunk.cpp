@@ -4,7 +4,7 @@
 
 // address=[0x140a250]
 // Decompiled from int __thiscall CUserLogoChunk::Load(CUserLogoChunk *this, struct IS4Chunk *a2)
-void  CUserLogoChunk::Load(class IS4Chunk &) {
+void  CUserLogoChunk::Load(class IS4Chunk & a2) {
   
   int pExceptionObject; // [esp+10h] [ebp-290h] BYREF
   int v4; // [esp+14h] [ebp-28Ch] BYREF
@@ -49,7 +49,7 @@ void  CUserLogoChunk::Load(class IS4Chunk &) {
 
 // address=[0x140a470]
 // Decompiled from int __thiscall CUserLogoChunk::Save(CUserLogoChunk *this, struct IS4Chunk *a2)
-void  CUserLogoChunk::Save(class IS4Chunk &) {
+void  CUserLogoChunk::Save(class IS4Chunk & a2) {
   
   int v3; // [esp+10h] [ebp-28Ch] BYREF
   void *v4; // [esp+14h] [ebp-288h]

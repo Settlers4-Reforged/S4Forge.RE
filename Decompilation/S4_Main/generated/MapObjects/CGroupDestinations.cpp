@@ -4,7 +4,7 @@
 
 // address=[0x15507a0]
 // Decompiled from CGroupDestinations *__thiscall CGroupDestinations::CGroupDestinations(  CGroupDestinations *this,  int a2,  int a3,  int a4,  char a5,  int a6)
- CGroupDestinations::CGroupDestinations(int,int,int,int,int) {
+ CGroupDestinations::CGroupDestinations(int a2, int a3, int a4, int a5, int a6) {
   
   int v6; // esi
   int v7; // eax
@@ -120,7 +120,7 @@ int  CGroupDestinations::GetNextDestination(void) {
 
 // address=[0x15509f0]
 // Decompiled from int __fastcall CGroupDestinations::NormalSectorId(int a1, int a2)
-static int __fastcall CGroupDestinations::NormalSectorId(int,int) {
+int __fastcall CGroupDestinations::NormalSectorId(int a1, int a2) {
   
   return CWorldManager::SectorId(a1, a2);
 }
@@ -128,7 +128,7 @@ static int __fastcall CGroupDestinations::NormalSectorId(int,int) {
 
 // address=[0x1550a10]
 // Decompiled from int __fastcall CGroupDestinations::CatapultSectorId(int a1, int a2)
-static int __fastcall CGroupDestinations::CatapultSectorId(int,int) {
+int __fastcall CGroupDestinations::CatapultSectorId(int a1, int a2) {
   
   int v2; // eax
 

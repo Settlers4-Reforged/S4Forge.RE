@@ -22,7 +22,7 @@
 
 // address=[0x1323220]
 // Decompiled from int __thiscall CAIAgentDarkTribeManakopters::Execute(  CAIAgentDarkTribeManakopters *this,  unsigned int a2,  unsigned int a3)
-unsigned int  CAIAgentDarkTribeManakopters::Execute(unsigned int,unsigned int) {
+unsigned int  CAIAgentDarkTribeManakopters::Execute(unsigned int a2, unsigned int a3) {
   
   return 1;
 }

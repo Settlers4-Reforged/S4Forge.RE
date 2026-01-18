@@ -1,6 +1,8 @@
 #ifndef CTILE_H
 #define CTILE_H
 
+#include "defines.h"
+
 class CTile {
 public:
     // address=[0x12fd600]
@@ -34,22 +36,22 @@ public:
     int  CenterXY(void)const;
 
     // address=[0x15d6e90]
-    static int __cdecl TileTypeOwnerCheckMask(int,int);
+    static int __cdecl TileTypeOwnerCheckMask(int a1, int a2);
 
     // address=[0x15d6ed0]
-    static int __cdecl TileTypeOwnerCheckMaskFromPlayerBits(int);
+    static int __cdecl TileTypeOwnerCheckMaskFromPlayerBits(int a1);
 
     // address=[0x15e7360]
-    void  SetLinkList(class CLinkList &);
+    void  SetLinkList(class CLinkList & a2);
 
     // address=[0x15e7380]
-    void  SetSize(int);
+    void  SetSize(int a2);
 
     // address=[0x15e7410]
-    void  SetType(int);
+    void  SetType(int a2);
 
     // address=[0x15e74b0]
-    static int __cdecl TileType(int);
+    static int __cdecl TileType(int a1);
 
     // address=[0x15e7510]
     bool  Unused(void)const;
@@ -58,7 +60,7 @@ public:
     bool  Used(void)const;
 
     // address=[0x15f4220]
-    void  ChangeSize(int);
+    void  ChangeSize(int a2);
 
     // address=[0x15f4a70]
     int  NextFree(void)const;
@@ -67,26 +69,26 @@ public:
     int  PrevFree(void)const;
 
     // address=[0x15f56f0]
-    void  SetCenterXY(int);
+    void  SetCenterXY(int a2);
 
     // address=[0x15f5710]
-    void  SetEcoSectorId(int);
+    void  SetEcoSectorId(int a2);
 
     // address=[0x15f5840]
-    void  SetSectorId(int);
+    void  SetSectorId(int a2);
 
     // address=[0x15f5900]
     int  Size(void)const;
 
     // address=[0x15f59d0]
-    static int __cdecl TileTypeToOwnerId(int);
+    static int __cdecl TileTypeToOwnerId(int a1);
 
 protected:
     // address=[0x15e6f80]
-    void  Init(int,int,class CLinkList &);
+    void  Init(int a2, int a3, class CLinkList & a4);
 
     // address=[0x15e6fc0]
-    void  InitPseudoTile(int,class CLinkList &);
+    void  InitPseudoTile(int a2, class CLinkList & a3);
 
     // Type information members
 private:

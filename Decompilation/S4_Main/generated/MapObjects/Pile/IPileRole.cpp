@@ -16,7 +16,7 @@
 
 // address=[0x155b280]
 // Decompiled from char __thiscall IPileRole::ChangeGoodTypeUnforseen(IPileRole *this, struct CPile *a2, int a3)
-bool  IPileRole::ChangeGoodTypeUnforseen(class CPile *,int) {
+bool  IPileRole::ChangeGoodTypeUnforseen(class CPile * a2, int a3) {
   
   return 0;
 }
@@ -64,7 +64,7 @@ void  IPileRole::ReassessDistance(class CPile *,int &) {
 
 // address=[0x1560f00]
 // Decompiled from void __thiscall IPileRole::Increase(IPileRole *this, struct CPile *a2, int a3)
-void  IPileRole::Increase(class CPile *,int) {
+void  IPileRole::Increase(class CPile * a2, int a3) {
   
   if ( a3 <= 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\PileRole.cpp", 123, "_iAmount > 0") == 1 )
     __debugbreak();
@@ -90,7 +90,7 @@ void  IPileRole::Increase(class CPile *,int) {
 
 // address=[0x1560fc0]
 // Decompiled from void __thiscall IPileRole::Decrease(IPileRole *this, struct CPile *a2, int a3)
-void  IPileRole::Decrease(class CPile *,int) {
+void  IPileRole::Decrease(class CPile * a2, int a3) {
   
   if ( a3 <= 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\PileRole.cpp", 150, "_iAmount > 0") == 1 )
     __debugbreak();
@@ -126,7 +126,7 @@ void  IPileRole::IncAmoutLeaving(class CPile *) {
 
 // address=[0x15610b0]
 // Decompiled from void __thiscall IPileRole::DecAmountLeaving(IPileRole *this, struct CPile *a2)
-void  IPileRole::DecAmountLeaving(class CPile *) {
+void  IPileRole::DecAmountLeaving(class CPile * a2) {
   
   if ( CPile::NumberOfAvailableGoods(a2) <= 0
     && BBSupportDbgReport(2, "MapObjects\\Pile\\PileRole.cpp", 98, "_pPile->NumberOfAvailableGoods() > 0") == 1 )
@@ -150,7 +150,7 @@ void  IPileRole::DecAmountLeaving(class CPile *) {
 
 // address=[0x1561140]
 // Decompiled from int __thiscall IPileRole::Init(IPileRole *this, struct CPile *a2)
-void  IPileRole::Init(class CPile *) {
+void  IPileRole::Init(class CPile * a2) {
   
   int result; // eax
 
@@ -162,7 +162,7 @@ void  IPileRole::Init(class CPile *) {
 
 // address=[0x1561160]
 // Decompiled from int __thiscall IPileRole::Occupied(IPileRole *this, struct CPile *a2, int a3)
-void  IPileRole::Occupied(class CPile *,int) {
+void  IPileRole::Occupied(class CPile * a2, int a3) {
   
   if ( BBSupportDbgReport(1, "MapObjects\\Pile\\PileRole.cpp", 194, "IPileRole::Occupied() called!") == 1 )
     __debugbreak();
@@ -172,7 +172,7 @@ void  IPileRole::Occupied(class CPile *,int) {
 
 // address=[0x1561190]
 // Decompiled from char __thiscall IPileRole::SetFree(IPileRole *this, struct CPile *a2, int a3)
-bool  IPileRole::SetFree(class CPile *,int) {
+bool  IPileRole::SetFree(class CPile * a2, int a3) {
   
   void *v3; // eax
   int v4; // eax
@@ -196,7 +196,7 @@ bool  IPileRole::SetFree(class CPile *,int) {
 
 // address=[0x1561210]
 // Decompiled from void __thiscall IPileRole::NotifyChangeEcoSector(IPileRole *this, struct CPile *a2, int a3, int a4)
-void  IPileRole::NotifyChangeEcoSector(class CPile *,int,int) {
+void  IPileRole::NotifyChangeEcoSector(class CPile * a2, int a3, int a4) {
   
   if ( CPile::IsInOfferList(a2) )
   {
@@ -208,7 +208,7 @@ void  IPileRole::NotifyChangeEcoSector(class CPile *,int,int) {
 
 // address=[0x1561250]
 // Decompiled from int __thiscall IPileRole::SubjectDie(IPileRole *this, struct CPile *a2, int a3)
-void  IPileRole::SubjectDie(class CPile *,int) {
+void  IPileRole::SubjectDie(class CPile * a2, int a3) {
   
   if ( CPile::GetBuildingId(a2)
     && BBSupportDbgReport(2, "MapObjects\\Pile\\PileRole.cpp", 220, "_pPile->GetBuildingId() == 0") == 1 )
@@ -258,7 +258,7 @@ void  IPileRole::SubjectStarted(class CPile *) {
 
 // address=[0x1561370]
 // Decompiled from _DWORD *__thiscall IPileRole::IPileRole(_DWORD *this, int a2)
- IPileRole::IPileRole(std::istream &) {
+ IPileRole::IPileRole(std::istream & a2) {
   
   int v3; // [esp+4h] [ebp-Ch] BYREF
   int pExceptionObject; // [esp+8h] [ebp-8h] BYREF
@@ -282,7 +282,7 @@ void  IPileRole::SubjectStarted(class CPile *) {
 
 // address=[0x15613f0]
 // Decompiled from int __thiscall IPileRole::Store(struct CPersistence *this, struct std::ostream *a2)
-void  IPileRole::Store(std::ostream &) {
+void  IPileRole::Store(std::ostream & a2) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
   struct CPersistence *v4; // [esp+4h] [ebp-4h]
@@ -297,7 +297,7 @@ void  IPileRole::Store(std::ostream &) {
 
 // address=[0x1561440]
 // Decompiled from char __thiscall IPileRole::ExecuteChangeGoodTypeUnforseen(IPileRole *this, struct CPile *a2, int a3)
-bool  IPileRole::ExecuteChangeGoodTypeUnforseen(class CPile *,int) {
+bool  IPileRole::ExecuteChangeGoodTypeUnforseen(class CPile * a2, int a3) {
   
   return CPile::ExecuteChangeGoodTypeUnforseen(a2, a3);
 }

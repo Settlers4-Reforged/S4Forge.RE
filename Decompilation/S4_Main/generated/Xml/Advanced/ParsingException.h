@@ -1,6 +1,8 @@
 #ifndef ADVXMLPARSER_PARSINGEXCEPTION_H
 #define ADVXMLPARSER_PARSINGEXCEPTION_H
 
+#include "defines.h"
+
 namespace AdvXMLParser {
 
 class ParsingException {
@@ -12,10 +14,10 @@ public:
     int  GetLine(void)const;
 
     // address=[0x2f27ef0]
-     ParsingException(class AdvXMLParser::ParsingException const &);
+     ParsingException(class AdvXMLParser::ParsingException const & a2);
 
     // address=[0x2f27f50]
-     ParsingException(enum AdvXMLParser::PARSER_ERROR,int,int);
+     ParsingException(enum AdvXMLParser::PARSER_ERROR a2, int a3, int a4);
 
 };
 

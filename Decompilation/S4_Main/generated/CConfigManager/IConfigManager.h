@@ -1,6 +1,8 @@
 #ifndef ICONFIGMANAGER_H
 #define ICONFIGMANAGER_H
 
+#include "defines.h"
+
 class IConfigManager {
 public:
     // address=[0x2eef090]

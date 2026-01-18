@@ -1,6 +1,8 @@
 #ifndef HUFFSTAT_H
 #define HUFFSTAT_H
 
+#include "defines.h"
+
 class HuffStat {
 public:
     // address=[0x2f2a930]
@@ -11,7 +13,7 @@ public:
 
 protected:
     // address=[0x2f2a9a0]
-    int  makeSortedTmp(struct HuffStatTmpStruct *);
+    int  makeSortedTmp(struct HuffStatTmpStruct * a2);
 
 };
 

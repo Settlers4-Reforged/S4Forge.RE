@@ -4,7 +4,7 @@
 
 // address=[0x133ae70]
 // Decompiled from CEcoManager *__cdecl IAIEcoManager::CreateEcoManager(int a1, struct IAISectorAI *a2, struct IAIEventQueue *a3)
-static class IAIEcoManager * __cdecl IAIEcoManager::CreateEcoManager(int,class IAISectorAI *,class IAIEventQueue *) {
+class IAIEcoManager * __cdecl IAIEcoManager::CreateEcoManager(int a1, class IAISectorAI * a2, class IAIEventQueue * a3) {
   
   CEcoManager *C; // [esp+Ch] [ebp-10h]
 

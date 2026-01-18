@@ -4,7 +4,7 @@
 
 // address=[0x14004a0]
 // Decompiled from int __cdecl CDiggerRole::New(int a1)
-static class CPersistence * __cdecl CDiggerRole::New(std::istream &) {
+class CPersistence * __cdecl CDiggerRole::New(std::istream & a1) {
   
   if ( operator new(0x30u) )
     return CDiggerRole::CDiggerRole(a1);
@@ -15,7 +15,7 @@ static class CPersistence * __cdecl CDiggerRole::New(std::istream &) {
 
 // address=[0x1568910]
 // Decompiled from int __thiscall CDiggerRole::InitWalking(CDiggerRole *this, struct CSettler *a2)
-class CWalking *  CDiggerRole::InitWalking(class CSettler *) {
+class CWalking *  CDiggerRole::InitWalking(class CSettler * a2) {
   
   int v2; // eax
   int v4; // [esp+4h] [ebp-4h]
@@ -29,7 +29,7 @@ class CWalking *  CDiggerRole::InitWalking(class CSettler *) {
 
 // address=[0x1568950]
 // Decompiled from char __thiscall CDiggerRole::LogicUpdateJob(CDiggerRole *this, struct CSettler *a2)
-void  CDiggerRole::LogicUpdateJob(class CSettler *) {
+void  CDiggerRole::LogicUpdateJob(class CSettler * a2) {
   
   char result; // al
   char v3; // [esp+0h] [ebp-8h]
@@ -54,7 +54,7 @@ void  CDiggerRole::LogicUpdateJob(class CSettler *) {
 
 // address=[0x15689d0]
 // Decompiled from int __stdcall CDiggerRole::PostLoadInit(CPropertySet *a1)
-void  CDiggerRole::PostLoadInit(class CSettler *) {
+void  CDiggerRole::PostLoadInit(class CSettler * a1) {
   
   return CWarMap::AddEntity(a1);
 }
@@ -62,7 +62,7 @@ void  CDiggerRole::PostLoadInit(class CSettler *) {
 
 // address=[0x15689f0]
 // Decompiled from char __thiscall CDiggerRole::SetFree(CDiggerRole *this, struct CSettler *a2, int a3)
-bool  CDiggerRole::SetFree(class CSettler *,int) {
+bool  CDiggerRole::SetFree(class CSettler * a2, int a3) {
   
   int v3; // eax
   int v4; // eax
@@ -104,7 +104,7 @@ bool  CDiggerRole::SetFree(class CSettler *,int) {
 
 // address=[0x1568ae0]
 // Decompiled from _DWORD *__thiscall CDiggerRole::CDiggerRole(char *this, int a2)
- CDiggerRole::CDiggerRole(std::istream &) {
+ CDiggerRole::CDiggerRole(std::istream & a2) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
@@ -132,7 +132,7 @@ bool  CDiggerRole::SetFree(class CSettler *,int) {
 
 // address=[0x1568bb0]
 // Decompiled from int __thiscall CDiggerRole::Store(struct CPersistence *this, struct std::ostream *a2)
-void  CDiggerRole::Store(std::ostream &) {
+void  CDiggerRole::Store(std::ostream & a2) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
   struct CPersistence *v4; // [esp+4h] [ebp-4h]
@@ -164,7 +164,7 @@ int  CDiggerRole::GetSettlerRole(void)const {
 
 // address=[0x1588500]
 // Decompiled from int __cdecl CDiggerRole::Load(int a1)
-static class CDiggerRole * __cdecl CDiggerRole::Load(std::istream &) {
+class CDiggerRole * __cdecl CDiggerRole::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
@@ -200,7 +200,7 @@ static class CDiggerRole * __cdecl CDiggerRole::Load(std::istream &) {
 
 // address=[0x1568c60]
 // Decompiled from int __thiscall CDiggerRole::GetNextJob(CDiggerRole *this, struct CSettler *a2)
-void  CDiggerRole::GetNextJob(class CSettler *) {
+void  CDiggerRole::GetNextJob(class CSettler * a2) {
   
   CDiggerRole *v3; // [esp+0h] [ebp-4h]
 
@@ -214,7 +214,7 @@ void  CDiggerRole::GetNextJob(class CSettler *) {
 
 // address=[0x1568ca0]
 // Decompiled from int __thiscall CDiggerRole::TakeJob(CDiggerRole *this, struct CSettler *a2)
-void  CDiggerRole::TakeJob(class CSettler *) {
+void  CDiggerRole::TakeJob(class CSettler * a2) {
   
   const struct CEntityTask *ActualTask; // eax
   int result; // eax
@@ -289,7 +289,7 @@ void  CDiggerRole::TakeJob(class CSettler *) {
 
 // address=[0x1568ee0]
 // Decompiled from int __thiscall CDiggerRole::Init(int this, CPropertySet *a2)
-void  CDiggerRole::Init(class CSettler *) {
+void  CDiggerRole::Init(class CSettler * a2) {
   
   int result; // eax
 
@@ -313,7 +313,7 @@ void  CDiggerRole::Init(class CSettler *) {
 
 // address=[0x1568f70]
 // Decompiled from int __thiscall CDiggerRole::ConvertEventIntoGoal(CDiggerRole *this, struct CSettler *a2, struct CEntityEvent *a3)
-void  CDiggerRole::ConvertEventIntoGoal(class CSettler *,class CEntityEvent *) {
+void  CDiggerRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent * a3) {
   
   int v3; // eax
   int result; // eax
@@ -391,7 +391,7 @@ void  CDiggerRole::ConvertEventIntoGoal(class CSettler *,class CEntityEvent *) {
 
 // address=[0x1569130]
 // Decompiled from int __thiscall CDiggerRole::SearchDig(CDiggerRole *this, struct CSettler *a2)
-void  CDiggerRole::SearchDig(class CSettler *) {
+void  CDiggerRole::SearchDig(class CSettler * a2) {
   
   _DWORD *v2; // eax
   _DWORD *v3; // eax
@@ -501,7 +501,7 @@ void  CDiggerRole::SearchDig(class CSettler *) {
 
 // address=[0x1569540]
 // Decompiled from char __thiscall CDiggerRole::CheckDig(CDiggerRole *this, struct CSettler *a2)
-bool  CDiggerRole::CheckDig(class CSettler *) {
+bool  CDiggerRole::CheckDig(class CSettler * a2) {
   
   _DWORD *v2; // eax
   _DWORD *v4; // eax

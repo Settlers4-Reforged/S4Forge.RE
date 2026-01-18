@@ -4,7 +4,7 @@
 
 // address=[0x30813d0]
 // Decompiled from pcharNode *__thiscall pcharNode::pcharNode(pcharNode *this, char *a2, unsigned int a3)
- pcharNode::pcharNode(char const *,int) {
+ pcharNode::pcharNode(char const * a2, int a3) {
   
   DNameNode::DNameNode(this);
   *(_DWORD *)this = &pcharNode::_vftable_;
@@ -39,7 +39,7 @@ char  pcharNode::getLastChar(void)const {
 
 // address=[0x308a750]
 // Decompiled from char *__thiscall pcharNode::getString(pcharNode *this, char *a2, char *a3)
-char *  pcharNode::getString(char *,char *)const {
+char *  pcharNode::getString(char * a2, char * a3)const {
   
   return (char *)getStringHelper(a2, (int)a3, *((char **)this + 1), *((_DWORD *)this + 2));
 }

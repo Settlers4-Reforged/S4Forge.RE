@@ -4,7 +4,7 @@
 
 // address=[0x1323250]
 // Decompiled from std::bad_function_call *__thiscall CAINormalSectorAI::CAINormalSectorAI(  std::bad_function_call *this,  pairNode *a2,  int a3)
- CAINormalSectorAI::CAINormalSectorAI(class CAIPlayerAI &,int) {
+ CAINormalSectorAI::CAINormalSectorAI(class CAIPlayerAI & a2, int a3) {
   
   int v3; // eax
   int v4; // eax
@@ -148,7 +148,7 @@ void  CAINormalSectorAI::Load(class IS4Chunk &) {
 
 // address=[0x1323ab0]
 // Decompiled from int __thiscall CAINormalSectorAI::Save(CAINormalSectorAI *this, struct IS4Chunk *a2)
-void  CAINormalSectorAI::Save(class IS4Chunk &) {
+void  CAINormalSectorAI::Save(class IS4Chunk & a2) {
   
   (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 24))(a2, -1517150208);
   (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 20))(a2, 1);
@@ -185,7 +185,7 @@ void  CAINormalSectorAI::Save(class IS4Chunk &) {
 
 // address=[0x1323dc0]
 // Decompiled from int __thiscall CAINormalSectorAI::PostAIEvent(CAINormalSectorAI *this, int a2, int a3, int a4, int a5)
-void  CAINormalSectorAI::PostAIEvent(int,int,int,int) {
+void  CAINormalSectorAI::PostAIEvent(int a2, int a3, int a4, int a5) {
   
   int result; // eax
   CAIEcoSectorAIEx *v6; // eax
@@ -246,7 +246,7 @@ void  CAINormalSectorAI::Execute(void) {
 
 // address=[0x1323f40]
 // Decompiled from char __thiscall CAINormalSectorAI::ProcessEvent(int this, pairNode *a2)
-bool  CAINormalSectorAI::ProcessEvent(class CAIEvent const *) {
+bool  CAINormalSectorAI::ProcessEvent(class CAIEvent const * a2) {
   
   char result; // al
   int v3; // eax
@@ -406,7 +406,7 @@ LABEL_6:
 
 // address=[0x1324390]
 // Decompiled from void __thiscall CAINormalSectorAI::AttachAgentEx(  CAINormalSectorAI *this,  struct CAINormalSectorAgent *a2,  unsigned int a3,  unsigned int a4,  unsigned int a5)
-void  CAINormalSectorAI::AttachAgentEx(class CAINormalSectorAgent &,unsigned int,unsigned int,unsigned int) {
+void  CAINormalSectorAI::AttachAgentEx(class CAINormalSectorAgent & a2, unsigned int a3, unsigned int a4, unsigned int a5) {
   
   CAINormalSectorAgent::AttachSectorAI(a2, this);
   CAIScheduler::AddAgent((CAIScheduler *)(*((_DWORD *)this + 1) + 28), a2, a3, a4, a5);
@@ -447,7 +447,7 @@ void  CAINormalSectorAI::DbgPrint(void) {
 
 // address=[0x13244c0]
 // Decompiled from void __thiscall CAINormalSectorAI::OccupationCheck(pairNode **this, int a2)
-void  CAINormalSectorAI::OccupationCheck(int) {
+void  CAINormalSectorAI::OccupationCheck(int a2) {
   
   int v2; // eax
   int v3; // [esp-8h] [ebp-2Ch]
@@ -503,7 +503,7 @@ void  CAINormalSectorAI::OccupationCheck(int) {
 
 // address=[0x1324670]
 // Decompiled from int __thiscall CAINormalSectorAI::FindTargetForSuicideMission(char *this, pairNode *a2)
-int  CAINormalSectorAI::FindTargetForSuicideMission(class CAITaskForce *) {
+int  CAINormalSectorAI::FindTargetForSuicideMission(class CAITaskForce * a2) {
   
   pairNode *v3; // eax
   int v4; // eax
@@ -774,7 +774,7 @@ bool  CAINormalSectorAI::EvaluateNextOwnMilitaryBuilding(void) {
 
 // address=[0x1325170]
 // Decompiled from int __thiscall CAINormalSectorAI::PostAIEventToAllEcoSectorAIs(CAINormalSectorAI *this, int a2, int a3, int a4, int a5)
-void  CAINormalSectorAI::PostAIEventToAllEcoSectorAIs(int,int,int,int) {
+void  CAINormalSectorAI::PostAIEventToAllEcoSectorAIs(int a2, int a3, int a4, int a5) {
   
   int result; // eax
   CAIEcoSectorAIEx *v6; // eax
@@ -839,7 +839,7 @@ bool  CAINormalSectorAI::IsNormalPlayerSector(void)const {
 
 // address=[0x13249d0]
 // Decompiled from int __thiscall CAINormalSectorAI::GetEconomyAIIndex(CAINormalSectorAI *this, int a2)
-int  CAINormalSectorAI::GetEconomyAIIndex(int) {
+int  CAINormalSectorAI::GetEconomyAIIndex(int a2) {
   
   CAIEcoSectorAIEx *v2; // eax
   int v4; // [esp+0h] [ebp-Ch]
@@ -858,7 +858,7 @@ int  CAINormalSectorAI::GetEconomyAIIndex(int) {
 
 // address=[0x1324a40]
 // Decompiled from char __thiscall CAINormalSectorAI::IsEcoSectorAIActive(CAINormalSectorAI *this, int a2)
-bool  CAINormalSectorAI::IsEcoSectorAIActive(int) {
+bool  CAINormalSectorAI::IsEcoSectorAIActive(int a2) {
   
   CAIEcoSectorAIEx *v2; // eax
   int v4; // [esp+0h] [ebp-Ch]
@@ -877,7 +877,7 @@ bool  CAINormalSectorAI::IsEcoSectorAIActive(int) {
 
 // address=[0x1324aa0]
 // Decompiled from bool __thiscall CAINormalSectorAI::IsEcoSectorAIMeaningful(CAINormalSectorAI *this, int a2)
-bool  CAINormalSectorAI::IsEcoSectorAIMeaningful(int) {
+bool  CAINormalSectorAI::IsEcoSectorAIMeaningful(int a2) {
   
   pairNode *v2; // eax
   int v4; // [esp+4h] [ebp-Ch]
@@ -893,7 +893,7 @@ bool  CAINormalSectorAI::IsEcoSectorAIMeaningful(int) {
 
 // address=[0x1324b10]
 // Decompiled from char __thiscall CAINormalSectorAI::DeleteEcoSectorAI(CAINormalSectorAI *this, int a2)
-bool  CAINormalSectorAI::DeleteEcoSectorAI(int) {
+bool  CAINormalSectorAI::DeleteEcoSectorAI(int a2) {
   
   int EconomyAIIndex; // [esp+4h] [ebp-4h]
 
@@ -931,7 +931,7 @@ void  CAINormalSectorAI::DeleteInvalidEcoSectorAIs(void) {
 
 // address=[0x1324bc0]
 // Decompiled from char __thiscall CAINormalSectorAI::CreateNewEcoSectorAIIfNecessaryAndMeaningful(  CAINormalSectorAI *this,  int a2,  int a3)
-void  CAINormalSectorAI::CreateNewEcoSectorAIIfNecessaryAndMeaningful(int,int) {
+void  CAINormalSectorAI::CreateNewEcoSectorAIIfNecessaryAndMeaningful(int a2, int a3) {
   
   int v3; // eax
   int SectorId; // esi

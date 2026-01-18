@@ -4,7 +4,7 @@
 
 // address=[0x15f5b60]
 // Decompiled from int __cdecl CTilingWorld::WorldGroundType(int a1)
-static int __cdecl CTilingWorld::WorldGroundType(int) {
+int __cdecl CTilingWorld::WorldGroundType(int a1) {
   
   return *(unsigned __int8 *)(CTilingWorld::m_pWorldGfxMapElements + 4 * a1 + 1);
 }
@@ -12,7 +12,7 @@ static int __cdecl CTilingWorld::WorldGroundType(int) {
 
 // address=[0x15f5bd0]
 // Decompiled from BOOL __cdecl CTilingWorld::WorldInInnerWorld16(int a1, int a2)
-static bool __cdecl CTilingWorld::WorldInInnerWorld16(int,int) {
+bool __cdecl CTilingWorld::WorldInInnerWorld16(int a1, int a2) {
   
   return a2 - 16 < (unsigned int)(CTilingWorld::m_uWorldWidthHeight - 32)
       && a1 - 2 < (unsigned int)(CTilingWorld::m_uWorldWidthHeight - 16);
@@ -21,7 +21,7 @@ static bool __cdecl CTilingWorld::WorldInInnerWorld16(int,int) {
 
 // address=[0x15f5c40]
 // Decompiled from BOOL __cdecl CTilingWorld::WorldInInnerWorld1(int a1, int a2)
-static bool __cdecl CTilingWorld::WorldInInnerWorld1(int,int) {
+bool __cdecl CTilingWorld::WorldInInnerWorld1(int a1, int a2) {
   
   return a2 - 1 < (unsigned int)(CTilingWorld::m_uWorldWidthHeight - 2)
       && a1 - 1 < (unsigned int)(CTilingWorld::m_uWorldWidthHeight - 2);
@@ -30,7 +30,7 @@ static bool __cdecl CTilingWorld::WorldInInnerWorld1(int,int) {
 
 // address=[0x15f5cb0]
 // Decompiled from BOOL __cdecl CTilingWorld::WorldInInnerWorld2(int a1, int a2)
-static bool __cdecl CTilingWorld::WorldInInnerWorld2(int,int) {
+bool __cdecl CTilingWorld::WorldInInnerWorld2(int a1, int a2) {
   
   return a2 - 2 < (unsigned int)(CTilingWorld::m_uWorldWidthHeight - 4)
       && a1 - 2 < (unsigned int)(CTilingWorld::m_uWorldWidthHeight - 4);
@@ -39,7 +39,7 @@ static bool __cdecl CTilingWorld::WorldInInnerWorld2(int,int) {
 
 // address=[0x15f5d20]
 // Decompiled from BOOL __cdecl CTilingWorld::WorldInWorld(unsigned int a1, unsigned int a2)
-static bool __cdecl CTilingWorld::WorldInWorld(int,int) {
+bool __cdecl CTilingWorld::WorldInWorld(int a1, int a2) {
   
   return a2 < CTilingWorld::m_uWorldWidthHeight && a1 < CTilingWorld::m_uWorldWidthHeight;
 }
@@ -47,7 +47,7 @@ static bool __cdecl CTilingWorld::WorldInWorld(int,int) {
 
 // address=[0x15f5d80]
 // Decompiled from BOOL __cdecl CTilingWorld::WorldInWorldPackedXY(int a1)
-static bool __cdecl CTilingWorld::WorldInWorldPackedXY(int) {
+bool __cdecl CTilingWorld::WorldInWorldPackedXY(int a1) {
   
   return a1 >> 16 < (unsigned int)CTilingWorld::m_uWorldWidthHeight
       && (unsigned __int16)a1 < (unsigned int)CTilingWorld::m_uWorldWidthHeight;
@@ -56,7 +56,7 @@ static bool __cdecl CTilingWorld::WorldInWorldPackedXY(int) {
 
 // address=[0x15f5df0]
 // Decompiled from int __cdecl CTilingWorld::WorldIndex(int a1)
-static int __cdecl CTilingWorld::WorldIndex(int) {
+int __cdecl CTilingWorld::WorldIndex(int a1) {
   
   return CTilingWorld::m_uWorldWidthHeight * (a1 >> 16) + (unsigned __int16)a1;
 }
@@ -64,7 +64,7 @@ static int __cdecl CTilingWorld::WorldIndex(int) {
 
 // address=[0x15f5e20]
 // Decompiled from int __cdecl CTilingWorld::WorldIndex(int a1, int a2)
-static int __cdecl CTilingWorld::WorldIndex(int,int) {
+int __cdecl CTilingWorld::WorldIndex(int a1, int a2) {
   
   return a1 + a2 * CTilingWorld::m_uWorldWidthHeight;
 }
@@ -72,7 +72,7 @@ static int __cdecl CTilingWorld::WorldIndex(int,int) {
 
 // address=[0x15f5e40]
 // Decompiled from bool __cdecl CTilingWorld::WorldIsBlockedLand(int a1)
-static bool __cdecl CTilingWorld::WorldIsBlockedLand(int) {
+bool __cdecl CTilingWorld::WorldIsBlockedLand(int a1) {
   
   return (*(_BYTE *)(a1 + CTilingWorld::m_pWorldFlagBitsLayer) & 1) != 0;
 }
@@ -80,7 +80,7 @@ static bool __cdecl CTilingWorld::WorldIsBlockedLand(int) {
 
 // address=[0x15f5e80]
 // Decompiled from bool __cdecl CTilingWorld::WorldIsBuildingOrDecoObjectBitSet(int a1)
-static bool __cdecl CTilingWorld::WorldIsBuildingOrDecoObjectBitSet(int) {
+bool __cdecl CTilingWorld::WorldIsBuildingOrDecoObjectBitSet(int a1) {
   
   return (*(_BYTE *)(a1 + CTilingWorld::m_pWorldFlagBitsLayer) & 0x48) != 0;
 }
@@ -88,7 +88,7 @@ static bool __cdecl CTilingWorld::WorldIsBuildingOrDecoObjectBitSet(int) {
 
 // address=[0x15f5ec0]
 // Decompiled from BOOL __cdecl CTilingWorld::WorldIsGroundTypeWater(int a1)
-static int __cdecl CTilingWorld::WorldIsGroundTypeWater(int) {
+int __cdecl CTilingWorld::WorldIsGroundTypeWater(int a1) {
   
   return CLandscapeProperties::IsWater(a1);
 }
@@ -96,7 +96,7 @@ static int __cdecl CTilingWorld::WorldIsGroundTypeWater(int) {
 
 // address=[0x15f5ee0]
 // Decompiled from bool __cdecl CTilingWorld::WorldIsWater(int a1)
-static bool __cdecl CTilingWorld::WorldIsWater(int) {
+bool __cdecl CTilingWorld::WorldIsWater(int a1) {
   
   return CLandscapeProperties::IsWater(*(unsigned __int8 *)(CTilingWorld::m_pWorldGfxMapElements + 4 * a1 + 1));
 }
@@ -104,7 +104,7 @@ static bool __cdecl CTilingWorld::WorldIsWater(int) {
 
 // address=[0x15f5f10]
 // Decompiled from int __cdecl CTilingWorld::WorldNeighborRelIndex(int a1)
-static int __cdecl CTilingWorld::WorldNeighborRelIndex(int) {
+int __cdecl CTilingWorld::WorldNeighborRelIndex(int a1) {
   
   return CTilingWorld::m_iWorldNeighborRelIndices[a1];
 }
@@ -112,7 +112,7 @@ static int __cdecl CTilingWorld::WorldNeighborRelIndex(int) {
 
 // address=[0x15f5f30]
 // Decompiled from int CTilingWorld::WorldNumberOfElements()
-static int __cdecl CTilingWorld::WorldNumberOfElements(void) {
+int __cdecl CTilingWorld::WorldNumberOfElements(void) {
   
   return CTilingWorld::m_uWorldSize;
 }
@@ -120,7 +120,7 @@ static int __cdecl CTilingWorld::WorldNumberOfElements(void) {
 
 // address=[0x15f6030]
 // Decompiled from int __cdecl CTilingWorld::WorldSortedNeighborRelIndex(int a1)
-static int __cdecl CTilingWorld::WorldSortedNeighborRelIndex(int) {
+int __cdecl CTilingWorld::WorldSortedNeighborRelIndex(int a1) {
   
   return CTilingWorld::m_iWorldSortedNeighborRelIndices[a1];
 }
@@ -128,7 +128,7 @@ static int __cdecl CTilingWorld::WorldSortedNeighborRelIndex(int) {
 
 // address=[0x15f6050]
 // Decompiled from int __cdecl CTilingWorld::WorldSurroundingRelIndex(int a1)
-static int __cdecl CTilingWorld::WorldSurroundingRelIndex(int) {
+int __cdecl CTilingWorld::WorldSurroundingRelIndex(int a1) {
   
   return CTilingWorld::m_iWorldSurroundingRelIndices[a1];
 }
@@ -136,7 +136,7 @@ static int __cdecl CTilingWorld::WorldSurroundingRelIndex(int) {
 
 // address=[0x15f6070]
 // Decompiled from int CTilingWorld::WorldWidthHeight()
-static int __cdecl CTilingWorld::WorldWidthHeight(void) {
+int __cdecl CTilingWorld::WorldWidthHeight(void) {
   
   return CTilingWorld::m_uWorldWidthHeight;
 }
@@ -171,7 +171,7 @@ static int __cdecl CTilingWorld::WorldWidthHeight(void) {
 
 // address=[0x15e75d0]
 // Decompiled from int __cdecl CTilingWorld::WorldInterfaceInit(  int a1,  struct T_GFX_MAP_ELEMENT *a2,  unsigned __int8 *a3,  unsigned __int8 *a4)
-static void __cdecl CTilingWorld::WorldInterfaceInit(int,struct T_GFX_MAP_ELEMENT *,unsigned char *,unsigned char *) {
+void __cdecl CTilingWorld::WorldInterfaceInit(int a1, struct T_GFX_MAP_ELEMENT * a2, unsigned char * a3, unsigned char * a4) {
   
   int v4; // ecx
   int v5; // edx
@@ -285,7 +285,7 @@ static void __cdecl CTilingWorld::WorldInterfaceInit(int,struct T_GFX_MAP_ELEMEN
 
 // address=[0x15e7960]
 // Decompiled from void CTilingWorld::WorldInterfaceDone()
-static void __cdecl CTilingWorld::WorldInterfaceDone(void) {
+void __cdecl CTilingWorld::WorldInterfaceDone(void) {
   
   if ( CTilingWorld::m_iWorldInterfaceInitialized )
   {
@@ -300,7 +300,7 @@ static void __cdecl CTilingWorld::WorldInterfaceDone(void) {
 
 // address=[0x15f5b00]
 // Decompiled from int __cdecl CTilingWorld::WorldClearBlockedLandFlag(int a1)
-static void __cdecl CTilingWorld::WorldClearBlockedLandFlag(int) {
+void __cdecl CTilingWorld::WorldClearBlockedLandFlag(int a1) {
   
   int result; // eax
 
@@ -312,7 +312,7 @@ static void __cdecl CTilingWorld::WorldClearBlockedLandFlag(int) {
 
 // address=[0x15f5b30]
 // Decompiled from int __cdecl CTilingWorld::WorldClearGfxBorderstoneBit(int a1)
-static void __cdecl CTilingWorld::WorldClearGfxBorderstoneBit(int) {
+void __cdecl CTilingWorld::WorldClearGfxBorderstoneBit(int a1) {
   
   int result; // eax
 
@@ -324,7 +324,7 @@ static void __cdecl CTilingWorld::WorldClearGfxBorderstoneBit(int) {
 
 // address=[0x15f5fd0]
 // Decompiled from int __cdecl CTilingWorld::WorldSetBlockedLandFlag(int a1)
-static void __cdecl CTilingWorld::WorldSetBlockedLandFlag(int) {
+void __cdecl CTilingWorld::WorldSetBlockedLandFlag(int a1) {
   
   int result; // eax
 
@@ -336,7 +336,7 @@ static void __cdecl CTilingWorld::WorldSetBlockedLandFlag(int) {
 
 // address=[0x15f6000]
 // Decompiled from int __cdecl CTilingWorld::WorldSetGfxBorderstoneBit(int a1)
-static void __cdecl CTilingWorld::WorldSetGfxBorderstoneBit(int) {
+void __cdecl CTilingWorld::WorldSetGfxBorderstoneBit(int a1) {
   
   int result; // eax
 

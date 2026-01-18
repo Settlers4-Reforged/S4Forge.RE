@@ -1,10 +1,12 @@
 #ifndef CSTATEAOCAMPAIGNBONUS_H
 #define CSTATEAOCAMPAIGNBONUS_H
 
+#include "defines.h"
+
 class CStateAOCampaignBonus : public CGuiGameState {
 public:
     // address=[0x149f580]
-    static class CGameState * __cdecl DynamicCreateFunc(void *);
+    static class CGameState * __cdecl DynamicCreateFunc(void * a1);
 
     // address=[0x149f600]
      CStateAOCampaignBonus(void *);
@@ -16,7 +18,7 @@ public:
     virtual bool  Perform(void);
 
     // address=[0x149f7c0]
-    virtual bool  OnEvent(class CEvn_Event &);
+    virtual bool  OnEvent(class CEvn_Event & a2);
 
 };
 

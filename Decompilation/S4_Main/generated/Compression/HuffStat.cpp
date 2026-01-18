@@ -22,7 +22,7 @@
 
 // address=[0x2f2a9a0]
 // Decompiled from int __thiscall HuffStat::makeSortedTmp(HuffStat *this, struct HuffStatTmpStruct *a2)
-int  HuffStat::makeSortedTmp(struct HuffStatTmpStruct *) {
+int  HuffStat::makeSortedTmp(struct HuffStatTmpStruct * a2) {
   
   int v3; // [esp+4h] [ebp-Ch]
   int i; // [esp+Ch] [ebp-4h]

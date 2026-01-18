@@ -4,7 +4,7 @@
 
 // address=[0x140a800]
 // Decompiled from char __thiscall CAttackMsgList::SendAttackMessage(CAttackMsgList *this, int a2, int a3)
-void  CAttackMsgList::SendAttackMessage(int,int) {
+void  CAttackMsgList::SendAttackMessage(int a2, int a3) {
   
   char result; // al
   int LocalPlayerId; // eax

@@ -4,7 +4,7 @@
 
 // address=[0x2fd3800]
 // Decompiled from IA_ColorReduction_Node *__thiscall IA_ColorReduction_Node::IA_ColorReduction_Node(  IA_ColorReduction_Node *this,  int a2,  bool a3)
- IA_ColorReduction_Node::IA_ColorReduction_Node(int,bool) {
+ IA_ColorReduction_Node::IA_ColorReduction_Node(int a2, bool a3) {
   
   memset(this, 0, 0x6Cu);
   *(_DWORD *)this = a2;
@@ -31,7 +31,7 @@ unsigned long  IA_ColorReduction_Node::GetColorCount(void) {
 
 // address=[0x2fd3870]
 // Decompiled from IA_ColorReduction_Node *__thiscall IA_ColorReduction_Node::AddColor(  IA_ColorReduction_Node *this,  struct IA_ColorReduction_Color *a2)
-void  IA_ColorReduction_Node::AddColor(class IA_ColorReduction_Color &) {
+void  IA_ColorReduction_Node::AddColor(class IA_ColorReduction_Color & a2) {
   
   IA_ColorReduction_Node *result; // eax
 
@@ -47,7 +47,7 @@ void  IA_ColorReduction_Node::AddColor(class IA_ColorReduction_Color &) {
 
 // address=[0x2fd38f0]
 // Decompiled from _DWORD *__thiscall IA_ColorReduction_Node::GetColor(_DWORD *this, _DWORD *a2)
-class IA_ColorReduction_Color  IA_ColorReduction_Node::GetColor(void) {
+class IA_ColorReduction_Color  IA_ColorReduction_Node::GetColor(void a2) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
   _DWORD *v4; // [esp+4h] [ebp-4h]
@@ -65,7 +65,7 @@ class IA_ColorReduction_Color  IA_ColorReduction_Node::GetColor(void) {
 
 // address=[0x2fd3970]
 // Decompiled from IA_ColorReduction_Node *__thiscall IA_ColorReduction_Node::SetColorIndex(IA_ColorReduction_Node *this, int a2)
-void  IA_ColorReduction_Node::SetColorIndex(int) {
+void  IA_ColorReduction_Node::SetColorIndex(int a2) {
   
   IA_ColorReduction_Node *result; // eax
 
@@ -85,7 +85,7 @@ int  IA_ColorReduction_Node::GetColorIndex(void) {
 
 // address=[0x2fd39b0]
 // Decompiled from IA_ColorReduction_Node *__thiscall IA_ColorReduction_Node::SetNext(  IA_ColorReduction_Node *this,  struct IA_ColorReduction_Node *a2)
-void  IA_ColorReduction_Node::SetNext(class IA_ColorReduction_Node *) {
+void  IA_ColorReduction_Node::SetNext(class IA_ColorReduction_Node * a2) {
   
   IA_ColorReduction_Node *result; // eax
 
@@ -105,7 +105,7 @@ class IA_ColorReduction_Node *  IA_ColorReduction_Node::GetNext(void) {
 
 // address=[0x2fd39f0]
 // Decompiled from IA_ColorReduction_Node *__thiscall IA_ColorReduction_Node::SetPrev(  IA_ColorReduction_Node *this,  struct IA_ColorReduction_Node *a2)
-void  IA_ColorReduction_Node::SetPrev(class IA_ColorReduction_Node *) {
+void  IA_ColorReduction_Node::SetPrev(class IA_ColorReduction_Node * a2) {
   
   IA_ColorReduction_Node *result; // eax
 
@@ -133,7 +133,7 @@ int  IA_ColorReduction_Node::GetNumChild(void) {
 
 // address=[0x2fd3a50]
 // Decompiled from int __thiscall IA_ColorReduction_Node::SetChild(  IA_ColorReduction_Node *this,  int a2,  struct IA_ColorReduction_Node *a3)
-void  IA_ColorReduction_Node::SetChild(int,class IA_ColorReduction_Node *) {
+void  IA_ColorReduction_Node::SetChild(int a2, class IA_ColorReduction_Node * a3) {
   
   int result; // eax
 
@@ -145,7 +145,7 @@ void  IA_ColorReduction_Node::SetChild(int,class IA_ColorReduction_Node *) {
 
 // address=[0x2fd3a70]
 // Decompiled from int __thiscall IA_ColorReduction_Node::GetChild(IA_ColorReduction_Node *this, int a2)
-class IA_ColorReduction_Node *  IA_ColorReduction_Node::GetChild(int) {
+class IA_ColorReduction_Node *  IA_ColorReduction_Node::GetChild(int a2) {
   
   return *((_DWORD *)this + a2 + 9);
 }
@@ -153,7 +153,7 @@ class IA_ColorReduction_Node *  IA_ColorReduction_Node::GetChild(int) {
 
 // address=[0x2fd3a90]
 // Decompiled from int __thiscall IA_ColorReduction_Node::FindChild(IA_ColorReduction_Node *this, struct IA_ColorReduction_Color *a2)
-int  IA_ColorReduction_Node::FindChild(class IA_ColorReduction_Color &) {
+int  IA_ColorReduction_Node::FindChild(class IA_ColorReduction_Color & a2) {
   
   char Red; // al
   int v3; // esi
@@ -216,7 +216,7 @@ int  IA_ColorReduction_Node::GetLevel(void) {
 
 // address=[0x2fd3b80]
 // Decompiled from IA_ColorReduction_Node *__thiscall IA_ColorReduction_Node::SetLeaf(IA_ColorReduction_Node *this, bool a2)
-void  IA_ColorReduction_Node::SetLeaf(bool) {
+void  IA_ColorReduction_Node::SetLeaf(bool a2) {
   
   IA_ColorReduction_Node *result; // eax
 
@@ -236,7 +236,7 @@ bool  IA_ColorReduction_Node::IsLeaf(void) {
 
 // address=[0x2fd3bc0]
 // Decompiled from IA_ColorReduction_Node *__thiscall IA_ColorReduction_Node::SetReducible(IA_ColorReduction_Node *this, bool a2)
-void  IA_ColorReduction_Node::SetReducible(bool) {
+void  IA_ColorReduction_Node::SetReducible(bool a2) {
   
   IA_ColorReduction_Node *result; // eax
 
@@ -256,7 +256,7 @@ bool  IA_ColorReduction_Node::IsReducible(void) {
 
 // address=[0x2fd3c00]
 // Decompiled from BOOL __thiscall IA_ColorReduction_Node::TestBit(IA_ColorReduction_Node *this, unsigned __int8 a2, int a3)
-int  IA_ColorReduction_Node::TestBit(unsigned char,int) {
+int  IA_ColorReduction_Node::TestBit(unsigned char a2, int a3) {
   
   return ((1 << a3) & a2) > a3;
 }

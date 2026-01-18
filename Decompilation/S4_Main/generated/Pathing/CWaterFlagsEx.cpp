@@ -4,7 +4,7 @@
 
 // address=[0x15fd780]
 // Decompiled from int __cdecl CWaterFlagsEx::BlockRowPrimary(unsigned __int8 *a1, int a2)
-static void __cdecl CWaterFlagsEx::BlockRowPrimary(unsigned char *,int) {
+void __cdecl CWaterFlagsEx::BlockRowPrimary(unsigned char * a1, int a2) {
   
   int v2; // ecx
   int result; // eax
@@ -30,7 +30,7 @@ static void __cdecl CWaterFlagsEx::BlockRowPrimary(unsigned char *,int) {
 
 // address=[0x15fd7f0]
 // Decompiled from int __cdecl CWaterFlagsEx::BlockColPrimary(unsigned __int8 *a1, int a2)
-static void __cdecl CWaterFlagsEx::BlockColPrimary(unsigned char *,int) {
+void __cdecl CWaterFlagsEx::BlockColPrimary(unsigned char * a1, int a2) {
   
   int v2; // ecx
   int result; // eax
@@ -55,7 +55,7 @@ static void __cdecl CWaterFlagsEx::BlockColPrimary(unsigned char *,int) {
 
 // address=[0x15fd870]
 // Decompiled from int CWaterFlagsEx::CalcWaterFlags()
-static void __cdecl CWaterFlagsEx::CalcWaterFlags(void) {
+void __cdecl CWaterFlagsEx::CalcWaterFlags(void) {
   
   int v0; // ecx
   int v1; // esi

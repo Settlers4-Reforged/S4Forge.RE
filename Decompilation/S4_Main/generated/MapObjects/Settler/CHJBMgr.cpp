@@ -32,7 +32,7 @@ bool  CHJBMgr::StaticCheckHJBCommand(char const *) {
 
 // address=[0x1574630]
 // Decompiled from char __stdcall CHJBMgr::StaticCheckHJBPlayerName(int a1)
-bool  CHJBMgr::StaticCheckHJBPlayerName(std::wstring const &) {
+bool  CHJBMgr::StaticCheckHJBPlayerName(std::wstring const & a1) {
   
   int v2; // [esp+4h] [ebp-28h]
   char v3; // [esp+Bh] [ebp-21h]
@@ -47,7 +47,7 @@ bool  CHJBMgr::StaticCheckHJBPlayerName(std::wstring const &) {
 
 // address=[0x1574690]
 // Decompiled from void __thiscall CHJBMgr::ProcessHJBRequest(CHJBMgr *this, int a2)
-void  CHJBMgr::ProcessHJBRequest(int) {
+void  CHJBMgr::ProcessHJBRequest(int a2) {
   
   int v2; // [esp+0h] [ebp-10h]
   unsigned int v3; // [esp+0h] [ebp-10h]
@@ -66,7 +66,7 @@ void  CHJBMgr::ProcessHJBRequest(int) {
 
 // address=[0x1574720]
 // Decompiled from void __thiscall CHJBMgr::ProcessHJBAcknowledgement(CHJBMgr *this, int a2, int a3)
-void  CHJBMgr::ProcessHJBAcknowledgement(int,int) {
+void  CHJBMgr::ProcessHJBAcknowledgement(int a2, int a3) {
   
   int PlayerId; // [esp+0h] [ebp-10h]
   int i; // [esp+4h] [ebp-Ch]
@@ -153,7 +153,7 @@ bool  CHJBMgr::LocalIsHJBAllowedEx(void) {
 
 // address=[0x15748f0]
 // Decompiled from void __thiscall CHJBMgr::ActivateHJB(CHJBMgr *this, int a2)
-void  CHJBMgr::ActivateHJB(int) {
+void  CHJBMgr::ActivateHJB(int a2) {
   
   if ( a2 >= 1 && a2 <= 8 && !IHJBMgr::m_iHJBPlayerId )
   {

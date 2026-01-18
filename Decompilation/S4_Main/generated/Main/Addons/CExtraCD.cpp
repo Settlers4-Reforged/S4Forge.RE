@@ -45,7 +45,7 @@ bool  CExtraCD::IsExtraInstalled(void) {
 
 // address=[0x14817e0]
 // Decompiled from char __thiscall CExtraCD::EnsureMainGUI(CExtraCD *this, int a2, bool (__cdecl *a3)(int, int, int))
-void  CExtraCD::EnsureMainGUI(int,bool (__cdecl*)(int,int,int)) {
+void  CExtraCD::EnsureMainGUI(int a2, bool (__cdecl*)(int,int,int) a3) {
   
   return CExtraCD::EnsureGuiEngineHasGfxFileLoaded(this, 0, (int)g_pDialogData, a2, a3, 0);
 }
@@ -53,7 +53,7 @@ void  CExtraCD::EnsureMainGUI(int,bool (__cdecl*)(int,int,int)) {
 
 // address=[0x1481810]
 // Decompiled from char __thiscall CExtraCD::EnsureGuiEngineHasGfxFileLoaded(  CExtraCD *this,  unsigned int a2,  int a3,  int a4,  bool (__cdecl *a5)(int, int, int),  bool a6)
-void  CExtraCD::EnsureGuiEngineHasGfxFileLoaded(unsigned int,void *,int,bool (__cdecl*)(int,int,int),bool) {
+void  CExtraCD::EnsureGuiEngineHasGfxFileLoaded(unsigned int a2, void * a3, int a4, bool (__cdecl*)(int,int,int) a5, bool a6) {
   
   unsigned int ActiveGUIGFXFile; // eax
   CGUIWrapper *Instance; // [esp+4h] [ebp-4h]
@@ -84,7 +84,7 @@ void  CExtraCD::EnsureGuiEngineHasGfxFileLoaded(unsigned int,void *,int,bool (__
 
 // address=[0x14818e0]
 // Decompiled from char __cdecl CExtraCD::ExistsFile(wchar_t *FileName)
-static bool __cdecl CExtraCD::ExistsFile(wchar_t const *) {
+bool __cdecl CExtraCD::ExistsFile(wchar_t const * FileName) {
   
   int v2; // [esp+0h] [ebp-94h] BYREF
   char v3; // [esp+12h] [ebp-82h]
@@ -108,7 +108,7 @@ static bool __cdecl CExtraCD::ExistsFile(wchar_t const *) {
 
 // address=[0x14819b0]
 // Decompiled from char __cdecl CExtraCD::ExistsFiles(wchar_t **a1)
-static bool __cdecl CExtraCD::ExistsFiles(wchar_t const * *) {
+bool __cdecl CExtraCD::ExistsFiles(wchar_t const * * a1) {
   
   wchar_t **i; // [esp+0h] [ebp-4h]
   int v3; // [esp+0h] [ebp-4h]
@@ -126,7 +126,7 @@ static bool __cdecl CExtraCD::ExistsFiles(wchar_t const * *) {
 
 // address=[0x1481a00]
 // Decompiled from int __thiscall CExtraCD::LoadMenuData(void **this, wchar_t *FileName)
-void  CExtraCD::LoadMenuData(wchar_t const *) {
+void  CExtraCD::LoadMenuData(wchar_t const * FileName) {
   
   size_t v2; // eax
   int v3; // eax

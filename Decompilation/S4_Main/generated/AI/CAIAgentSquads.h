@@ -1,6 +1,8 @@
 #ifndef CAIAGENTSQUADS_H
 #define CAIAGENTSQUADS_H
 
+#include "defines.h"
+
 class CAIAgentSquads : public CAINormalSectorAgent {
 public:
     // address=[0x13071b0]
@@ -14,10 +16,10 @@ public:
 
 protected:
     // address=[0x13088d0]
-    void  SimpleSquadManagement(enum T_AI_WARRIOR_TYPE,enum T_AI_TASK_FORCE_TYPE,int);
+    void  SimpleSquadManagement(enum T_AI_WARRIOR_TYPE a2, enum T_AI_TASK_FORCE_TYPE a3, int a4);
 
     // address=[0x1308b30]
-    void  AssociateTaskForcesToSquads(enum T_AI_TASK_FORCE_CLASS);
+    void  AssociateTaskForcesToSquads(enum T_AI_TASK_FORCE_CLASS a2);
 
 };
 

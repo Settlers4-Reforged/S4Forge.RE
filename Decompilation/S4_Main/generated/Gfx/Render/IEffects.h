@@ -1,6 +1,8 @@
 #ifndef IEFFECTS_H
 #define IEFFECTS_H
 
+#include "defines.h"
+
 class IEffects : public IGfxEffects, public IS4ChunkObject {
 public:
     // address=[0x144a370]
@@ -10,7 +12,7 @@ public:
      IEffects(void);
 
     // address=[0x147e720]
-    void  DeleteMovingEffect(unsigned int);
+    void  DeleteMovingEffect(unsigned int a2);
 
 };
 

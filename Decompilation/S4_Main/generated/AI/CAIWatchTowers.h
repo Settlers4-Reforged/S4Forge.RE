@@ -1,6 +1,8 @@
 #ifndef CAIWATCHTOWERS_H
 #define CAIWATCHTOWERS_H
 
+#include "defines.h"
+
 class CAIWatchTowers : public IAIWatchTowers {
 public:
     // address=[0x132f0e0]
@@ -13,13 +15,13 @@ public:
     virtual void  Done(void);
 
     // address=[0x132f1c0]
-    virtual int  AddWatchTower(int,int,int);
+    virtual int  AddWatchTower(int a2, int a3, int a4);
 
     // address=[0x132f230]
-    virtual void  DelWatchTower(int);
+    virtual void  DelWatchTower(int a2);
 
     // address=[0x132f2c0]
-    virtual void  RegisterCallback(void (__cdecl*)(int,int));
+    virtual void  RegisterCallback(void (__cdecl*)(int,int) a2);
 
     // address=[0x132f320]
     virtual void  UnregisterCallback(void);
@@ -32,16 +34,16 @@ public:
 
 protected:
     // address=[0x132f480]
-    int  NextUsedWatchTower(int);
+    int  NextUsedWatchTower(int a2);
 
     // address=[0x132f540]
     int  PushUndef(void);
 
     // address=[0x132f580]
-    void  Remove(int);
+    void  Remove(int a2);
 
     // address=[0x132f5f0]
-    bool  ValidIndex(int)const;
+    bool  ValidIndex(int a2)const;
 
     // address=[0x132f620]
     static void __cdecl DefaultCallback(int,int);
@@ -56,13 +58,13 @@ protected:
     int  Last(void)const;
 
     // address=[0x132f980]
-    bool  ValidUsedWatchTower(int)const;
+    bool  ValidUsedWatchTower(int a2)const;
 
     // address=[0x132fa10]
-    class CAIWatchTowerEx &  WatchTower(int);
+    class CAIWatchTowerEx &  WatchTower(int a2);
 
     // address=[0x132fa30]
-    class CAIWatchTower const &  WatchTower(int)const;
+    class CAIWatchTower const &  WatchTower(int a2)const;
 
 };
 

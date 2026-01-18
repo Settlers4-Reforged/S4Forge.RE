@@ -1,6 +1,8 @@
 #ifndef CSAVEGAMECONTEXT_H
 #define CSAVEGAMECONTEXT_H
 
+#include "defines.h"
+
 class CSaveGameContext {
 public:
     // address=[0x14b6130]

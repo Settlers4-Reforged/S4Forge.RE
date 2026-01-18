@@ -4,7 +4,7 @@
 
 // address=[0x1401800]
 // Decompiled from int __cdecl CProductionBuildingRole::New(int a1)
-static class CPersistence * __cdecl CProductionBuildingRole::New(std::istream &) {
+class CPersistence * __cdecl CProductionBuildingRole::New(std::istream & a1) {
   
   if ( operator new(0x1B0u) )
     return CProductionBuildingRole::CProductionBuildingRole(a1);
@@ -55,7 +55,7 @@ int  CProductionBuildingRole::GetBuildingRole(void) {
 
 // address=[0x14fdb70]
 // Decompiled from int __cdecl CProductionBuildingRole::Load(int a1)
-static class CProductionBuildingRole * __cdecl CProductionBuildingRole::Load(std::istream &) {
+class CProductionBuildingRole * __cdecl CProductionBuildingRole::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
@@ -67,7 +67,7 @@ static class CProductionBuildingRole * __cdecl CProductionBuildingRole::Load(std
 
 // address=[0x1516150]
 // Decompiled from int __thiscall CProductionBuildingRole::LogicUpdate(_BYTE *this, _DWORD *a2)
-void  CProductionBuildingRole::LogicUpdate(class CBuilding *) {
+void  CProductionBuildingRole::LogicUpdate(class CBuilding * a2) {
   
   int result; // eax
   unsigned __int8 *v3; // eax
@@ -141,7 +141,7 @@ void  CProductionBuildingRole::LogicUpdate(class CBuilding *) {
 
 // address=[0x1516390]
 // Decompiled from unsigned int __thiscall CProductionBuildingRole::FillGfxInfo(  CProductionBuildingRole *this,  struct CBuilding *a2,  struct SGfxObjectInfo *a3)
-void  CProductionBuildingRole::FillGfxInfo(class CBuilding *,struct SGfxObjectInfo &) {
+void  CProductionBuildingRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo & a3) {
   
   int v3; // eax
   int v4; // eax
@@ -220,7 +220,7 @@ void  CProductionBuildingRole::FillGfxInfo(class CBuilding *,struct SGfxObjectIn
 
 // address=[0x15166b0]
 // Decompiled from int __thiscall CProductionBuildingRole::Init(CProductionBuildingRole *this, struct CBuilding *a2)
-void  CProductionBuildingRole::Init(class CBuilding *) {
+void  CProductionBuildingRole::Init(class CBuilding * a2) {
   
   int v2; // eax
   int v3; // esi
@@ -328,7 +328,7 @@ void  CProductionBuildingRole::Init(class CBuilding *) {
 
 // address=[0x15169a0]
 // Decompiled from int __thiscall CProductionBuildingRole::PostLoadInit(CProductionBuildingRole *this, struct CBuilding *a2)
-void  CProductionBuildingRole::PostLoadInit(class CBuilding *) {
+void  CProductionBuildingRole::PostLoadInit(class CBuilding * a2) {
   
   int v2; // eax
   int result; // eax
@@ -344,7 +344,7 @@ void  CProductionBuildingRole::PostLoadInit(class CBuilding *) {
 
 // address=[0x15169d0]
 // Decompiled from unsigned int __thiscall CProductionBuildingRole::LockPiles(  CProductionBuildingRole *this,  struct CBuilding *a2,  bool a3)
-void  CProductionBuildingRole::LockPiles(class CBuilding *,bool) {
+void  CProductionBuildingRole::LockPiles(class CBuilding * a2, bool a3) {
   
   unsigned __int16 *v3; // eax
   unsigned __int8 *v4; // eax
@@ -381,7 +381,7 @@ void  CProductionBuildingRole::LockPiles(class CBuilding *,bool) {
 
 // address=[0x1516af0]
 // Decompiled from char __thiscall CProductionBuildingRole::SettlerEnter(_DWORD *this, unsigned __int8 *a2, int a3)
-bool  CProductionBuildingRole::SettlerEnter(class CBuilding *,int) {
+bool  CProductionBuildingRole::SettlerEnter(class CBuilding * a2, int a3) {
   
   int v3; // eax
   int v4; // eax
@@ -493,7 +493,7 @@ bool  CProductionBuildingRole::SettlerEnter(class CBuilding *,int) {
 
 // address=[0x1516de0]
 // Decompiled from int __thiscall CProductionBuildingRole::GetBuildingNeed(CProductionBuildingRole *this, int a2)
-int  CProductionBuildingRole::GetBuildingNeed(int)const {
+int  CProductionBuildingRole::GetBuildingNeed(int a2)const {
   
   unsigned __int16 *v2; // eax
   unsigned __int8 *v3; // eax
@@ -513,7 +513,7 @@ int  CProductionBuildingRole::GetBuildingNeed(int)const {
 
 // address=[0x1516e80]
 // Decompiled from int __thiscall CProductionBuildingRole::GetPileIdWithGood(CProductionBuildingRole *this, int a2)
-int  CProductionBuildingRole::GetPileIdWithGood(int)const {
+int  CProductionBuildingRole::GetPileIdWithGood(int a2)const {
   
   unsigned __int16 *v2; // eax
   unsigned __int16 *v4; // eax
@@ -553,7 +553,7 @@ int  CProductionBuildingRole::GetPileIdWithGood(int)const {
 
 // address=[0x1516fc0]
 // Decompiled from void __thiscall CProductionBuildingRole::GoodArrive(CProductionBuildingRole *this, int a2)
-void  CProductionBuildingRole::GoodArrive(int) {
+void  CProductionBuildingRole::GoodArrive(int a2) {
   
   ;
 }
@@ -561,7 +561,7 @@ void  CProductionBuildingRole::GoodArrive(int) {
 
 // address=[0x1516fd0]
 // Decompiled from _DWORD *__thiscall CProductionBuildingRole::FillToolSideBar(  CProductionBuildingRole *this,  struct CAddToolSideBarInfo *a2,  bool a3)
-void  CProductionBuildingRole::FillToolSideBar(class CAddToolSideBarInfo *,bool) {
+void  CProductionBuildingRole::FillToolSideBar(class CAddToolSideBarInfo * a2, bool a3) {
   
   int v3; // eax
   int v4; // eax
@@ -625,7 +625,7 @@ void  CProductionBuildingRole::FillToolSideBar(class CAddToolSideBarInfo *,bool)
 
 // address=[0x1517210]
 // Decompiled from int __thiscall CProductionBuildingRole::FillWeaponSideBar(unsigned __int16 *this, int a2, char a3)
-void  CProductionBuildingRole::FillWeaponSideBar(class CWeaponSideBarInfo *,bool) {
+void  CProductionBuildingRole::FillWeaponSideBar(class CWeaponSideBarInfo * a2, bool a3) {
   
   int v3; // eax
   int v4; // eax
@@ -667,7 +667,7 @@ void  CProductionBuildingRole::FillWeaponSideBar(class CWeaponSideBarInfo *,bool
 
 // address=[0x15173c0]
 // Decompiled from char *__thiscall CProductionBuildingRole::CProductionBuildingRole(char *this, int a2)
- CProductionBuildingRole::CProductionBuildingRole(std::istream &) {
+ CProductionBuildingRole::CProductionBuildingRole(std::istream & a2) {
   
   int v3; // [esp+8h] [ebp-28h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-24h] BYREF
@@ -721,7 +721,7 @@ void  CProductionBuildingRole::FillWeaponSideBar(class CWeaponSideBarInfo *,bool
 
 // address=[0x15175c0]
 // Decompiled from int __thiscall CProductionBuildingRole::Store(struct IBuildingRole *this, struct std::ostream *a2)
-void  CProductionBuildingRole::Store(std::ostream &) {
+void  CProductionBuildingRole::Store(std::ostream & a2) {
   
   __int16 *v2; // eax
   __int16 *v3; // eax
@@ -793,7 +793,7 @@ bool  CProductionBuildingRole::TryCrushBuilding(void) {
 
 // address=[0x1517740]
 // Decompiled from char __thiscall CProductionBuildingRole::HaveMaterial(CProductionBuildingRole *this, struct CBuilding *a2)
-bool  CProductionBuildingRole::HaveMaterial(class CBuilding *) {
+bool  CProductionBuildingRole::HaveMaterial(class CBuilding * a2) {
   
   int v3; // [esp+0h] [ebp-10h]
   unsigned __int8 *v4; // [esp+4h] [ebp-Ch]
@@ -935,7 +935,7 @@ bool  CProductionBuildingRole::HaveProductionOrder(void) {
 
 // address=[0x1517bb0]
 // Decompiled from _DWORD *__thiscall CProductionBuildingRole::FillDialog(CProductionBuildingRole *this, struct CBuilding *a2, bool a3)
-void  CProductionBuildingRole::FillDialog(class CBuilding *,bool) {
+void  CProductionBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
   
   int v3; // eax
   int v4; // eax

@@ -4,7 +4,7 @@
 
 // address=[0x14812a0]
 // Decompiled from char *__thiscall CErrorMessages::GetErrorMessage(CErrorMessages *this, const struct CErrorMessageId *a2)
-char const *  CErrorMessages::GetErrorMessage(class CErrorMessageId const &)const {
+char const *  CErrorMessages::GetErrorMessage(class CErrorMessageId const & a2)const {
   
   int Id; // [esp+4h] [ebp-4h]
 

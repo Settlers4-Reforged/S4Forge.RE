@@ -60,7 +60,7 @@ int  CAISectorAI::HeadquarterId(void)const {
 
 // address=[0x1303990]
 // Decompiled from int __thiscall CAISectorAI::Reservoir(_DWORD *this, int a2)
-class CAITaskForce *  CAISectorAI::Reservoir(enum T_AI_WARRIOR_TYPE)const {
+class CAITaskForce *  CAISectorAI::Reservoir(enum T_AI_WARRIOR_TYPE a2)const {
   
   return this[a2 + 8];
 }
@@ -68,7 +68,7 @@ class CAITaskForce *  CAISectorAI::Reservoir(enum T_AI_WARRIOR_TYPE)const {
 
 // address=[0x13195d0]
 // Decompiled from int __cdecl CAISectorAI::CreateNormalSectorAI(pairNode *a1, int a2, int a3)
-static class CAISectorAI * __cdecl CAISectorAI::CreateNormalSectorAI(class CAIPlayerAI &,int,int) {
+class CAISectorAI * __cdecl CAISectorAI::CreateNormalSectorAI(class CAIPlayerAI & a1, int a2, int a3) {
   
   int v3; // eax
 
@@ -89,7 +89,7 @@ static class CAISectorAI * __cdecl CAISectorAI::CreateNormalSectorAI(class CAIPl
 
 // address=[0x1320030]
 // Decompiled from int __thiscall CAISectorAI::Load(CAISectorAI *this, struct IS4Chunk *a2)
-void  CAISectorAI::Load(class IS4Chunk &) {
+void  CAISectorAI::Load(class IS4Chunk & a2) {
   
   int v3; // [esp+0h] [ebp-14h]
   int v4; // [esp+4h] [ebp-10h]
@@ -121,7 +121,7 @@ void  CAISectorAI::Load(class IS4Chunk &) {
 
 // address=[0x1320160]
 // Decompiled from int __thiscall CAISectorAI::Save(CAISectorAI *this, struct IS4Chunk *a2)
-void  CAISectorAI::Save(class IS4Chunk &) {
+void  CAISectorAI::Save(class IS4Chunk & a2) {
   
   int v2; // eax
   int v4; // [esp+0h] [ebp-10h]
@@ -170,7 +170,7 @@ void  CAISectorAI::Release(void) {
 
 // address=[0x13202d0]
 // Decompiled from struct SAIExpansionInfo *__thiscall CAISectorAI::ExpansionCheck(  CAISectorAI *this,  int a2,  int a3,  int a4,  struct SAIExpansionInfo *a5)
-void  CAISectorAI::ExpansionCheck(int,int,int,struct SAIExpansionInfo &) {
+void  CAISectorAI::ExpansionCheck(int a2, int a3, int a4, struct SAIExpansionInfo & a5) {
   
   struct SAIExpansionInfo *result; // eax
 
@@ -183,7 +183,7 @@ void  CAISectorAI::ExpansionCheck(int,int,int,struct SAIExpansionInfo &) {
 
 // address=[0x13202f0]
 // Decompiled from int __stdcall CAISectorAI::RequestDivinePresent(int a1, int a2)
-enum T_AI_PRESENT_REQUEST_RESULT  CAISectorAI::RequestDivinePresent(int,enum T_AI_PRESENT_REQUEST_PRIORITY) {
+enum T_AI_PRESENT_REQUEST_RESULT  CAISectorAI::RequestDivinePresent(int a1, enum T_AI_PRESENT_REQUEST_PRIORITY a2) {
   
   return 0;
 }
@@ -191,7 +191,7 @@ enum T_AI_PRESENT_REQUEST_RESULT  CAISectorAI::RequestDivinePresent(int,enum T_A
 
 // address=[0x1320300]
 // Decompiled from int __cdecl CAISectorAI::CreateNormalSectorAI(pairNode *a1, int a2)
-static class CAISectorAI * __cdecl CAISectorAI::CreateNormalSectorAI(class CAIPlayerAI &,int) {
+class CAISectorAI * __cdecl CAISectorAI::CreateNormalSectorAI(class CAIPlayerAI & a1, int a2) {
   
   if ( CAIPlayerAI::Race(a1) == 3
     && BBSupportDbgReport(2, "AI\\AI_SectorAI.cpp", 204, "_rPlayerAI.Race() != RACE_DARK") == 1 )
@@ -207,7 +207,7 @@ static class CAISectorAI * __cdecl CAISectorAI::CreateNormalSectorAI(class CAIPl
 
 // address=[0x13203b0]
 // Decompiled from int __cdecl CAISectorAI::CreateDarkTribeSectorAI(pairNode *a1, int a2)
-static class CAISectorAI * __cdecl CAISectorAI::CreateDarkTribeSectorAI(class CAIPlayerAI &,int) {
+class CAISectorAI * __cdecl CAISectorAI::CreateDarkTribeSectorAI(class CAIPlayerAI & a1, int a2) {
   
   if ( CAIPlayerAI::Race(a1) != 3
     && BBSupportDbgReport(2, "AI\\AI_SectorAI.cpp", 216, "_rPlayerAI.Race() == RACE_DARK") == 1 )
@@ -262,7 +262,7 @@ void  CAISectorAI::CheckBasePosition(void) {
 
 // address=[0x13205c0]
 // Decompiled from char __thiscall CAISectorAI::EvaluateEnemyMilitaryBuilding(CAISectorAI *this, int a2, struct SAIEvalResults *a3)
-bool  CAISectorAI::EvaluateEnemyMilitaryBuilding(int,struct SAIEvalResults &) {
+bool  CAISectorAI::EvaluateEnemyMilitaryBuilding(int a2, struct SAIEvalResults & a3) {
   
   int v3; // eax
   const struct CAIResourceData *v5; // [esp+0h] [ebp-48h]
@@ -311,7 +311,7 @@ bool  CAISectorAI::EvaluateEnemyMilitaryBuilding(int,struct SAIEvalResults &) {
 
 // address=[0x1320740]
 // Decompiled from int __thiscall CAISectorAI::EvaluateOwnMilitaryBuilding(pairNode **this, int a2, struct SAIDefenceEvalResult *a3)
-void  CAISectorAI::EvaluateOwnMilitaryBuilding(int,struct SAIDefenceEvalResult &) {
+void  CAISectorAI::EvaluateOwnMilitaryBuilding(int a2, struct SAIDefenceEvalResult & a3) {
   
   unsigned int v3; // eax
   int v4; // eax
@@ -356,7 +356,7 @@ void  CAISectorAI::EvaluateOwnMilitaryBuilding(int,struct SAIDefenceEvalResult &
 
 // address=[0x1320890]
 // Decompiled from pairNode *__thiscall CAISectorAI::MoveOneDefendingFighterToReservoir(_DWORD *this, int a2, int a3, char a4)
-void  CAISectorAI::MoveOneDefendingFighterToReservoir(int,enum T_AI_WARRIOR_TYPE,bool) {
+void  CAISectorAI::MoveOneDefendingFighterToReservoir(int a2, enum T_AI_WARRIOR_TYPE a3, bool a4) {
   
   pairNode *result; // eax
   int v5; // eax
@@ -394,7 +394,7 @@ void  CAISectorAI::MoveOneDefendingFighterToReservoir(int,enum T_AI_WARRIOR_TYPE
 
 // address=[0x13209e0]
 // Decompiled from int __thiscall CAISectorAI::FindInnerPoint(pairNode **this, int a2)
-int  CAISectorAI::FindInnerPoint(int) {
+int  CAISectorAI::FindInnerPoint(int a2) {
   
   _BYTE v3[20]; // [esp+4h] [ebp-8Ch] BYREF
   int v4; // [esp+18h] [ebp-78h]
@@ -485,7 +485,7 @@ int  CAISectorAI::FindInnerPoint(int) {
 
 // address=[0x1320c90]
 // Decompiled from int __thiscall CAISectorAI::MoveFightersToReservoir(CAISectorAI *this, struct CAITaskForce *a2)
-void  CAISectorAI::MoveFightersToReservoir(class CAITaskForce *) {
+void  CAISectorAI::MoveFightersToReservoir(class CAITaskForce * a2) {
   
   int result; // eax
   int v3; // [esp+0h] [ebp-14h]
@@ -509,7 +509,7 @@ void  CAISectorAI::MoveFightersToReservoir(class CAITaskForce *) {
 
 // address=[0x1320d20]
 // Decompiled from int __thiscall CAISectorAI::RecruitNearestFighterForTaskForce(_DWORD *this, void *a2, int a3, int a4, int a5)
-int  CAISectorAI::RecruitNearestFighterForTaskForce(class CAITaskForce *,int,enum T_AI_WARRIOR_TYPE,int) {
+int  CAISectorAI::RecruitNearestFighterForTaskForce(class CAITaskForce * a2, int a3, enum T_AI_WARRIOR_TYPE a4, int a5) {
   
   int v5; // eax
   int v7; // [esp+Ch] [ebp-18h]
@@ -549,7 +549,7 @@ int  CAISectorAI::RecruitNearestFighterForTaskForce(class CAITaskForce *,int,enu
 
 // address=[0x1320e20]
 // Decompiled from void __thiscall CAISectorAI::RecruitFightersForSquad(_DWORD *this, void *a2, int a3, int a4, int a5)
-void  CAISectorAI::RecruitFightersForSquad(class CAITaskForce *,int,enum T_AI_WARRIOR_TYPE,int) {
+void  CAISectorAI::RecruitFightersForSquad(class CAITaskForce * a2, int a3, enum T_AI_WARRIOR_TYPE a4, int a5) {
   
   int v5; // eax
   struct CAITaskForce *v6; // [esp+Ch] [ebp-335Ch]
@@ -578,7 +578,7 @@ void  CAISectorAI::RecruitFightersForSquad(class CAITaskForce *,int,enum T_AI_WA
 
 // address=[0x1320f50]
 // Decompiled from void __thiscall CAISectorAI::AutoRecruitFightersForSquad(CAISectorAI *this, struct CAITaskForce *a2, int a3, int a4)
-void  CAISectorAI::AutoRecruitFightersForSquad(class CAITaskForce *,int,int) {
+void  CAISectorAI::AutoRecruitFightersForSquad(class CAITaskForce * a2, int a3, int a4) {
   
   pairNode *v4; // eax
   pairNode *v5; // eax
@@ -730,7 +730,7 @@ void  CAISectorAI::CalculateSectorIdAndEcoSectorIds(void) {
 
 // address=[0x1321300]
 // Decompiled from int __thiscall CAISectorAI::DeleteEmptyTaskForces(void *this, int a2)
-void  CAISectorAI::DeleteEmptyTaskForces(enum T_AI_TASK_FORCE_CLASS) {
+void  CAISectorAI::DeleteEmptyTaskForces(enum T_AI_TASK_FORCE_CLASS a2) {
   
   int v2; // eax
   int result; // eax
@@ -764,7 +764,7 @@ void  CAISectorAI::DeleteEmptyTaskForces(enum T_AI_TASK_FORCE_CLASS) {
 
 // address=[0x13213c0]
 // Decompiled from int __thiscall CAISectorAI::AddEntityToReservoir(CAISectorAI *this, int a2)
-void  CAISectorAI::AddEntityToReservoir(int) {
+void  CAISectorAI::AddEntityToReservoir(int a2) {
   
   unsigned int v2; // eax
 
@@ -777,7 +777,7 @@ void  CAISectorAI::AddEntityToReservoir(int) {
 
 // address=[0x1321410]
 // Decompiled from int __thiscall CAISectorAI::AddEntityToReservoir(void **this, int a2, int a3)
-void  CAISectorAI::AddEntityToReservoir(int,enum T_AI_WARRIOR_TYPE) {
+void  CAISectorAI::AddEntityToReservoir(int a2, enum T_AI_WARRIOR_TYPE a3) {
   
   int result; // eax
 
@@ -809,7 +809,7 @@ int  CAISectorAI::BaseWorldIdx(void)const {
 
 // address=[0x1321c50]
 // Decompiled from int __thiscall CAISectorAI::SetBasePosition(CAISectorAI *this, int a2, int a3)
-void  CAISectorAI::SetBasePosition(int,int) {
+void  CAISectorAI::SetBasePosition(int a2, int a3) {
   
   *((_DWORD *)this + 62) = a2;
   *((_DWORD *)this + 63) = a3;
@@ -830,7 +830,7 @@ void  CAISectorAI::SetBasePosition(int,int) {
 
 // address=[0x1321d00]
 // Decompiled from CAISectorAI *__thiscall CAISectorAI::SetHeadquarterId(CAISectorAI *this, int a2)
-void  CAISectorAI::SetHeadquarterId(int) {
+void  CAISectorAI::SetHeadquarterId(int a2) {
   
   CAISectorAI *result; // eax
 
@@ -842,7 +842,7 @@ void  CAISectorAI::SetHeadquarterId(int) {
 
 // address=[0x13260c0]
 // Decompiled from void __cdecl CAISectorAI::AwakeAgent(struct CAIAgent *a1)
-static void __cdecl CAISectorAI::AwakeAgent(class CAIAgent &) {
+void __cdecl CAISectorAI::AwakeAgent(class CAIAgent &) {
   
   int v1; // esi
   unsigned int v2; // eax
@@ -855,7 +855,7 @@ static void __cdecl CAISectorAI::AwakeAgent(class CAIAgent &) {
 
 // address=[0x131ff50]
 // Decompiled from CAISectorAI *__thiscall CAISectorAI::CAISectorAI(CAISectorAI *this, pairNode *a2)
- CAISectorAI::CAISectorAI(class CAIPlayerAI &) {
+ CAISectorAI::CAISectorAI(class CAIPlayerAI & a2) {
   
   int v2; // eax
 
@@ -890,7 +890,7 @@ void  CAISectorAI::ProcessEvents(void) {
 
 // address=[0x1321520]
 // Decompiled from char __thiscall CAISectorAI::ProcessEvent(CAISectorAI *this, const struct CAIEvent *a2)
-bool  CAISectorAI::ProcessEvent(class CAIEvent const *) {
+bool  CAISectorAI::ProcessEvent(class CAIEvent const * a2) {
   
   return 0;
 }

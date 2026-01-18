@@ -4,7 +4,7 @@
 
 // address=[0x13098e0]
 // Decompiled from CAIEcoSectorAIEx *__thiscall CAIEcoSectorAIEx::CAIEcoSectorAIEx(CAIEcoSectorAIEx *this, struct IAISectorAI *a2, int a3)
- CAIEcoSectorAIEx::CAIEcoSectorAIEx(class IAISectorAI *,int) {
+ CAIEcoSectorAIEx::CAIEcoSectorAIEx(class IAISectorAI * a2, int a3) {
   
   int v3; // eax
   CEcoSector *EcoSectorPtr; // [esp+4h] [ebp-14h]
@@ -62,7 +62,7 @@
 
 // address=[0x1309b30]
 // Decompiled from CAIEcoSectorAIEx *__cdecl CAIEcoSectorAIEx::CreateEcoSectorAIEx(struct IAISectorAI *a1, int a2)
-static class CAIEcoSectorAIEx * __cdecl CAIEcoSectorAIEx::CreateEcoSectorAIEx(class IAISectorAI *,int) {
+class CAIEcoSectorAIEx * __cdecl CAIEcoSectorAIEx::CreateEcoSectorAIEx(class IAISectorAI * a1, int a2) {
   
   void *Memory; // [esp+8h] [ebp-18h]
   CAIEcoSectorAIEx *v5; // [esp+10h] [ebp-10h]
@@ -163,7 +163,7 @@ int  CAIEcoSectorAIEx::EcoSectorId(void)const {
 
 // address=[0x13261b0]
 // Decompiled from void __thiscall CAIEcoSectorAIEx::PostAIEvent(CAIEcoSectorAIEx *this, int a2, int a3, int a4, int a5)
-void  CAIEcoSectorAIEx::PostAIEvent(int,int,int,int) {
+void  CAIEcoSectorAIEx::PostAIEvent(int a2, int a3, int a4, int a5) {
   
   CAIEventQueue::PostAIEvent((CAIEcoSectorAIEx *)((char *)this + 16), a2, a3, a4, a5);
 }

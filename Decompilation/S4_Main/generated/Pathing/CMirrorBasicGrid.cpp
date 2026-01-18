@@ -4,7 +4,7 @@
 
 // address=[0x2fc5fb0]
 // Decompiled from CMirrorBasicGrid *__thiscall CMirrorBasicGrid::CMirrorBasicGrid(CMirrorBasicGrid *this, int a2, int a3)
- CMirrorBasicGrid::CMirrorBasicGrid(int,int) {
+ CMirrorBasicGrid::CMirrorBasicGrid(int a2, int a3) {
   
   CBasicGrid::CBasicGrid(this, a2, a3);
   *(_DWORD *)this = &CMirrorBasicGrid::_vftable_;
@@ -145,7 +145,7 @@ void  CMirrorBasicGrid::initGrid(void) {
 
 // address=[0x2fc6600]
 // Decompiled from int *__thiscall CMirrorBasicGrid::getMirrorBasisPoint(CMirrorBasicGrid *this, unsigned int *a2, int *a3, bool a4)
-void  CMirrorBasicGrid::getMirrorBasisPoint(int &,int &,bool) {
+void  CMirrorBasicGrid::getMirrorBasisPoint(int & a2, int & a3, bool a4) {
   
   int *result; // eax
   unsigned int v5; // edx

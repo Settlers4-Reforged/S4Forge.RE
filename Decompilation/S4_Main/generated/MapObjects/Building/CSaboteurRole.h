@@ -1,22 +1,24 @@
 #ifndef CSABOTEURROLE_H
 #define CSABOTEURROLE_H
 
+#include "defines.h"
+
 class CSaboteurRole : public CSoldierRole {
 public:
     // address=[0x1401b20]
-    static class CPersistence * __cdecl New(std::istream &);
+    static class CPersistence * __cdecl New(std::istream & a1);
 
     // address=[0x157c490]
-    virtual void  Init(class CSettler *);
+    virtual void  Init(class CSettler * a2);
 
     // address=[0x157c4c0]
-    virtual void  LogicUpdate(class CSettler *);
+    virtual void  LogicUpdate(class CSettler * a2);
 
     // address=[0x157c5f0]
-     CSaboteurRole(std::istream &);
+     CSaboteurRole(std::istream & a2);
 
     // address=[0x157c6d0]
-    virtual void  Store(std::ostream &);
+    virtual void  Store(std::ostream & a2);
 
     // address=[0x157c8f0]
     virtual unsigned long  ClassID(void)const;
@@ -25,14 +27,14 @@ public:
     virtual int  GetSettlerRole(void)const;
 
     // address=[0x1588840]
-    static class CSaboteurRole * __cdecl Load(std::istream &);
+    static class CSaboteurRole * __cdecl Load(std::istream & a1);
 
     // address=[0x3d8bef8]
     static unsigned long m_iClassID;
 
 protected:
     // address=[0x157c720]
-    virtual void  WarriorTaskAttack(class IMovingEntity &,int,enum T_WARRIOR_ATTACK);
+    virtual void  WarriorTaskAttack(class IMovingEntity & a2, int a3, enum T_WARRIOR_ATTACK a4);
 
 private:
     // address=[0x157c780]

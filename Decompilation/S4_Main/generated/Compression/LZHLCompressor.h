@@ -1,6 +1,8 @@
 #ifndef LZHLCOMPRESSOR_H
 #define LZHLCOMPRESSOR_H
 
+#include "defines.h"
+
 class LZHLCompressor {
 public:
     // address=[0x2f02850]
@@ -13,11 +15,11 @@ public:
      ~LZHLCompressor(void);
 
     // address=[0x2f29750]
-    unsigned int  compress(unsigned char *,unsigned char const *,unsigned int);
+    unsigned int  compress(unsigned char * a2, unsigned char const * Src, unsigned int a4);
 
 private:
     // address=[0x2f2a790]
-    unsigned long  _updateTable(unsigned long,unsigned char const *,unsigned long,int);
+    unsigned long  _updateTable(unsigned long a2, unsigned char const * a3, unsigned long a4, int a5);
 
 };
 

@@ -4,7 +4,7 @@
 
 // address=[0x14b4790]
 // Decompiled from char IHJBMgr::LocalIsHJBAllowed()
-static bool __cdecl IHJBMgr::LocalIsHJBAllowed(void) {
+bool __cdecl IHJBMgr::LocalIsHJBAllowed(void) {
   
   if ( IHJBMgr::m_iLocalHJBAllowed < 0 )
     return (*(int (__thiscall **)(void *))(*(_DWORD *)g_pHJBMgr + 24))(g_pHJBMgr);
@@ -24,7 +24,7 @@ static bool __cdecl IHJBMgr::LocalIsHJBAllowed(void) {
 
 // address=[0x1575bd0]
 // Decompiled from int IHJBMgr::GetHJBEntityId()
-static int __cdecl IHJBMgr::GetHJBEntityId(void) {
+int __cdecl IHJBMgr::GetHJBEntityId(void) {
   
   return IHJBMgr::m_iHJBEntityId;
 }
@@ -32,7 +32,7 @@ static int __cdecl IHJBMgr::GetHJBEntityId(void) {
 
 // address=[0x1575be0]
 // Decompiled from int IHJBMgr::GetHJBPlayerId()
-static int __cdecl IHJBMgr::GetHJBPlayerId(void) {
+int __cdecl IHJBMgr::GetHJBPlayerId(void) {
   
   return IHJBMgr::m_iHJBPlayerId;
 }
@@ -40,7 +40,7 @@ static int __cdecl IHJBMgr::GetHJBPlayerId(void) {
 
 // address=[0x1580100]
 // Decompiled from bool IHJBMgr::LocalIsHJBGfxLoaded()
-static bool __cdecl IHJBMgr::LocalIsHJBGfxLoaded(void) {
+bool __cdecl IHJBMgr::LocalIsHJBGfxLoaded(void) {
   
   return IHJBMgr::m_iLocalHJBGfxLoaded > 0;
 }
@@ -48,7 +48,7 @@ static bool __cdecl IHJBMgr::LocalIsHJBGfxLoaded(void) {
 
 // address=[0x1575c30]
 // Decompiled from void __cdecl IHJBMgr::SetHJBEntityId(struct CFrameWnd *a1)
-static void __cdecl IHJBMgr::SetHJBEntityId(int) {
+void __cdecl IHJBMgr::SetHJBEntityId(int a1) {
   
   IHJBMgr::m_iHJBEntityId = (int)a1;
 }
@@ -56,7 +56,7 @@ static void __cdecl IHJBMgr::SetHJBEntityId(int) {
 
 // address=[0x1575c40]
 // Decompiled from void __cdecl IHJBMgr::SetHJBPlayerId(struct CFrameWnd *a1)
-static void __cdecl IHJBMgr::SetHJBPlayerId(int) {
+void __cdecl IHJBMgr::SetHJBPlayerId(int a1) {
   
   IHJBMgr::m_iHJBPlayerId = (int)a1;
 }

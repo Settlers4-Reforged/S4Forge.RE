@@ -234,7 +234,7 @@ unsigned int  CAIAgentDarkTribeSquadManager::Execute(unsigned int,unsigned int) 
 
 // address=[0x1302940]
 // Decompiled from struct CAITaskForce *__thiscall CAIAgentDarkTribeSquadManager::SimpleSquadManagement(  CAIDarkTribeSectorAgent *this,  int a2,  int a3,  int a4)
-void  CAIAgentDarkTribeSquadManager::SimpleSquadManagement(enum T_AI_WARRIOR_TYPE,enum T_AI_TASK_FORCE_TYPE,int) {
+void  CAIAgentDarkTribeSquadManager::SimpleSquadManagement(enum T_AI_WARRIOR_TYPE a2, enum T_AI_TASK_FORCE_TYPE a3, int a4) {
   
   struct CAIDarkTribeSectorAI *v4; // eax
   struct CAIDarkTribeSectorAI *v5; // eax
@@ -328,7 +328,7 @@ LABEL_16:
 
 // address=[0x1302bb0]
 // Decompiled from struct CAITaskForce *__thiscall CAIAgentDarkTribeSquadManager::AssociateSquads(CAIDarkTribeSectorAgent *this, int a2)
-void  CAIAgentDarkTribeSquadManager::AssociateSquads(enum T_AI_TASK_FORCE_CLASS) {
+void  CAIAgentDarkTribeSquadManager::AssociateSquads(enum T_AI_TASK_FORCE_CLASS a2) {
   
   struct CAIDarkTribeSectorAI *v2; // eax
   int v3; // eax
@@ -381,7 +381,7 @@ void  CAIAgentDarkTribeSquadManager::AssociateSquads(enum T_AI_TASK_FORCE_CLASS)
 
 // address=[0x1302cb0]
 // Decompiled from void *__thiscall CAIAgentDarkTribeSquadManager::CheckSettlers(CAIDarkTribeSectorAgent *this, int a2, int a3)
-void  CAIAgentDarkTribeSquadManager::CheckSettlers(int,enum T_AI_WARRIOR_TYPE) {
+void  CAIAgentDarkTribeSquadManager::CheckSettlers(int a2, enum T_AI_WARRIOR_TYPE a3) {
   
   struct CAIDarkTribeSectorAI *v3; // eax
   pairNode *v4; // eax

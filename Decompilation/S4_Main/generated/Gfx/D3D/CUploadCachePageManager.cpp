@@ -21,7 +21,7 @@
 
 // address=[0x2f89550]
 // Decompiled from int __thiscall CUploadCachePageManager::IsAlreadyStored(CUploadCachePageManager *this, int a2)
-int  CUploadCachePageManager::IsAlreadyStored(int) {
+int  CUploadCachePageManager::IsAlreadyStored(int a2) {
   
   int i; // [esp+4h] [ebp-4h]
 
@@ -38,7 +38,7 @@ int  CUploadCachePageManager::IsAlreadyStored(int) {
 
 // address=[0x2f99850]
 // Decompiled from int __thiscall CUploadCachePageManager::StoreGfxId(CUploadCachePageManager *this, int a2, int a3)
-void  CUploadCachePageManager::StoreGfxId(int,int) {
+void  CUploadCachePageManager::StoreGfxId(int a2, int a3) {
   
   int result; // eax
 

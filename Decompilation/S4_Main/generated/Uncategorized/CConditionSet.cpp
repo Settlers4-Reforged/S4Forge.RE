@@ -42,7 +42,7 @@ int  CConditionSet::size(void) {
 
 // address=[0x2f3ef20]
 // Decompiled from int __thiscall CConditionSet::elementAt(CDynList **this, int a2)
-class CCondition *  CConditionSet::elementAt(int) {
+class CCondition *  CConditionSet::elementAt(int a2) {
   
   return CDynList::elementAt(*this, a2);
 }
@@ -50,7 +50,7 @@ class CCondition *  CConditionSet::elementAt(int) {
 
 // address=[0x2f3ef40]
 // Decompiled from void __thiscall CConditionSet::NewMayProblem(CConditionSet *this, int a2, struct CParam *a3)
-void  CConditionSet::NewMayProblem(int,class CParam *) {
+void  CConditionSet::NewMayProblem(int a2, class CParam * a3) {
   
   COptimizeOptions *v4; // [esp+10h] [ebp-14h]
   COptimizeOptions *C; // [esp+14h] [ebp-10h]
@@ -67,7 +67,7 @@ void  CConditionSet::NewMayProblem(int,class CParam *) {
 
 // address=[0x2f3efe0]
 // Decompiled from void __thiscall CConditionSet::NewMayProblem_0(  CConditionSet *this,  int a2,  struct CParam *a3,  struct COptimizeOptions *a4)
-void  CConditionSet::NewMayProblem(int,class CParam *,class COptimizeOptions *) {
+void  CConditionSet::NewMayProblem(int a2, class CParam * a3, class COptimizeOptions * a4) {
   
   *((_DWORD *)a4 + 4) = 0;
   CConditionSet::NewProblem(this, a2, a3, a4);
@@ -76,7 +76,7 @@ void  CConditionSet::NewMayProblem(int,class CParam *,class COptimizeOptions *) 
 
 // address=[0x2f3f010]
 // Decompiled from void __thiscall CConditionSet::NewProblem(CConditionSet *this, int a2, struct CParam *a3)
-void  CConditionSet::NewProblem(int,class CParam *) {
+void  CConditionSet::NewProblem(int a2, class CParam * a3) {
   
   struct COptimizeOptions *v4; // [esp+10h] [ebp-14h]
   COptimizeOptions *C; // [esp+14h] [ebp-10h]
@@ -92,7 +92,7 @@ void  CConditionSet::NewProblem(int,class CParam *) {
 
 // address=[0x2f3f0a0]
 // Decompiled from int __thiscall CConditionSet::NewProblem(CDynList **this, int a2, struct CParam *a3, struct COptimizeOptions *a4)
-void  CConditionSet::NewProblem(int,class CParam *,class COptimizeOptions *) {
+void  CConditionSet::NewProblem(int a2, class CParam * a3, class COptimizeOptions * a4) {
   
   struct CDynListEntry *v5; // [esp+10h] [ebp-24h]
   CCondition *v6; // [esp+14h] [ebp-20h]

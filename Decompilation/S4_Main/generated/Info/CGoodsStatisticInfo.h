@@ -1,6 +1,8 @@
 #ifndef CGOODSSTATISTICINFO_H
 #define CGOODSSTATISTICINFO_H
 
+#include "defines.h"
+
 class CGoodsStatisticInfo : public CInfoExchange {
 public:
     // address=[0x1454620]

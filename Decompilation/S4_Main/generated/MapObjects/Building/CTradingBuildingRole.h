@@ -1,13 +1,15 @@
 #ifndef CTRADINGBUILDINGROLE_H
 #define CTRADINGBUILDINGROLE_H
 
+#include "defines.h"
+
 class CTradingBuildingRole : public IBuildingRole, public CAStarCallback {
 public:
     // address=[0x1402480]
-    static class CPersistence * __cdecl New(std::istream &);
+    static class CPersistence * __cdecl New(std::istream & a1);
 
     // address=[0x14fdcb0]
-    static class CTradingBuildingRole * __cdecl Load(std::istream &);
+    static class CTradingBuildingRole * __cdecl Load(std::istream & a1);
 
     // address=[0x151fb00]
      CTradingBuildingRole(void);
@@ -16,16 +18,16 @@ public:
     virtual  ~CTradingBuildingRole(void);
 
     // address=[0x151fd80]
-    virtual void  LogicUpdate(class CBuilding *);
+    virtual void  LogicUpdate(class CBuilding * a2);
 
     // address=[0x151ff10]
-    virtual void  FillGfxInfo(class CBuilding *,struct SGfxObjectInfo &);
+    virtual void  FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo & a3);
 
     // address=[0x1520000]
-    virtual void  Init(class CBuilding *);
+    virtual void  Init(class CBuilding * a2);
 
     // address=[0x15203b0]
-    virtual void  PostLoadInit(class CBuilding *);
+    virtual void  PostLoadInit(class CBuilding * a2);
 
     // address=[0x1520430]
     virtual void  Switch(void);
@@ -34,103 +36,103 @@ public:
     virtual void  NotifySelected(void);
 
     // address=[0x1520540]
-    virtual int  GetPileIdWithGood(int)const;
+    virtual int  GetPileIdWithGood(int a2)const;
 
     // address=[0x1520630]
     int  GetNumberOfFreePiles(void);
 
     // address=[0x15206b0]
-    virtual void  GoodArrive(int);
+    virtual void  GoodArrive(int a2);
 
     // address=[0x1520740]
-    void  GoodLeft(int);
+    void  GoodLeft(int a2);
 
     // address=[0x1520750]
-    void  ReservePileForGood(int,int);
+    void  ReservePileForGood(int a2, int a3);
 
     // address=[0x1520880]
-    int  GetGoodSpaceAmount(int);
+    int  GetGoodSpaceAmount(int a2);
 
     // address=[0x15209e0]
-    virtual bool  SettlerEnter(class CBuilding *,int);
+    virtual bool  SettlerEnter(class CBuilding * a2, int a3);
 
     // address=[0x1520a10]
-    void  VehicleArrived(int,int);
+    void  VehicleArrived(int a2, int a3);
 
     // address=[0x1520a60]
-    void  VehicleArrivedAtTarget(int,int);
+    void  VehicleArrivedAtTarget(int a2, int a3);
 
     // address=[0x1520ab0]
-    void  VehicleArriveCancel(int,int);
+    void  VehicleArriveCancel(int a2, int a3);
 
     // address=[0x1520b00]
-    bool  IsPossibleTradeTarget(int);
+    bool  IsPossibleTradeTarget(int a2);
 
     // address=[0x1520c90]
-    void  SetTradeTarget(int);
+    void  SetTradeTarget(int a2);
 
     // address=[0x1520e10]
     int  GetTradeTargetID(void);
 
     // address=[0x1520e30]
-    void  TransportGood(int,int);
+    void  TransportGood(int a2, int a3);
 
     // address=[0x1521050]
-    void  TradeWith(int);
+    void  TradeWith(int a2);
 
     // address=[0x1521100]
-    void  TradeGood(int);
+    void  TradeGood(int a2);
 
     // address=[0x15212b0]
     void  ShowTradeRoute(void);
 
     // address=[0x1521500]
-    void  ClearExpectedAmounts(int);
+    void  ClearExpectedAmounts(int a2);
 
     // address=[0x15215c0]
-    bool  IsRegisteredAsIncomingTrader(int,int);
+    bool  IsRegisteredAsIncomingTrader(int a2, int a3);
 
     // address=[0x1521680]
-    bool  RegisterIncomingTrader(int,int,bool);
+    bool  RegisterIncomingTrader(int a2, int a3, bool a4);
 
     // address=[0x15216d0]
-    bool  UnregisterIncomingTrader(int,int);
+    bool  UnregisterIncomingTrader(int a2, int a3);
 
     // address=[0x15217d0]
-    int  GetNrRegisteredIncomingTraders(int,bool);
+    int  GetNrRegisteredIncomingTraders(int a2, bool a3);
 
     // address=[0x1521860]
     int  GetNextFreePile(void);
 
     // address=[0x15218f0]
-    void  ExecuteUnforseenGoodTypeChange(int,int,int);
+    void  ExecuteUnforseenGoodTypeChange(int a2, int a3, int a4);
 
     // address=[0x1521990]
-    virtual void  FillDialog(class CBuilding *,bool);
+    virtual void  FillDialog(class CBuilding * a2, bool a3);
 
     // address=[0x1521d80]
-    void  FillTradeSideBar(class CPortGoodsTradeBarInfo *,bool);
+    void  FillTradeSideBar(class CPortGoodsTradeBarInfo * a2, bool a3);
 
     // address=[0x1521f70]
-    void  FillGoodsOutSideBar(class CPortGoodsOutBarInfo *,bool);
+    void  FillGoodsOutSideBar(class CPortGoodsOutBarInfo * a2, bool a3);
 
     // address=[0x15220a0]
-    void  ChangeTradeStatus(int,bool);
+    void  ChangeTradeStatus(int a2, bool a3);
 
     // address=[0x1522180]
-    static void __cdecl PathCallback(int,int);
+    static void __cdecl PathCallback(int a1, int a2);
 
     // address=[0x15221c0]
-     CTradingBuildingRole(std::istream &);
+     CTradingBuildingRole(std::istream & a2);
 
     // address=[0x1522660]
-    virtual void  Store(std::ostream &);
+    virtual void  Store(std::ostream & a2);
 
     // address=[0x152bcc0]
     virtual unsigned long  ClassID(void)const;
 
     // address=[0x152bd70]
-    virtual int  GetBuildingNeed(int)const;
+    virtual int  GetBuildingNeed(int a2)const;
 
     // address=[0x152bd90]
     virtual int  GetBuildingRole(void);
@@ -140,28 +142,28 @@ public:
 
 private:
     // address=[0x15229a0]
-    bool  CheckTransport(class CBuilding *,int);
+    bool  CheckTransport(class CBuilding * a2, int a3);
 
     // address=[0x1522fe0]
-    int  GetCurrentAmount(int);
+    int  GetCurrentAmount(int a2);
 
     // address=[0x15230e0]
-    int  GetRequestedAmount(int,bool);
+    int  GetRequestedAmount(int a2, bool a3);
 
     // address=[0x1523220]
-    int  GetExpectedAmount(int,bool);
+    int  GetExpectedAmount(int a2, bool a3);
 
     // address=[0x1523330]
-    int  GetExpectedAmountForAllPikes(int);
+    int  GetExpectedAmountForAllPikes(int a2);
 
     // address=[0x1523400]
-    int  GetGoodAmount(int);
+    int  GetGoodAmount(int a2);
 
     // address=[0x15234e0]
-    int  GetExportGoodAmount(int);
+    int  GetExportGoodAmount(int a2);
 
     // address=[0x15235f0]
-    int  GetExportResGoodAmount(int);
+    int  GetExportResGoodAmount(int a2);
 
     // address=[0x1523700]
     void  CheckTradingStatus(void);
@@ -170,19 +172,19 @@ private:
     void  CheckPiles(void);
 
     // address=[0x1523930]
-    void  SetNewTraderTarget(int);
+    void  SetNewTraderTarget(int a2);
 
     // address=[0x1523b20]
-    int  GetTargetBuildingAvailableSpace(int,int);
+    int  GetTargetBuildingAvailableSpace(int a2, int a3);
 
     // address=[0x1523b70]
-    bool  RequestVehicle(class CBuilding *,bool);
+    bool  RequestVehicle(class CBuilding * a2, bool a3);
 
     // address=[0x1523d60]
     bool  IsVehicleRequested(class CBuilding *,bool);
 
     // address=[0x1523e90]
-    bool  IsVehicleAtBuilding(class CBuilding *);
+    bool  IsVehicleAtBuilding(class CBuilding * a2);
 
     // address=[0x1523f50]
     void  LoadVehicle(void);
@@ -197,7 +199,7 @@ private:
     void  UnloadVehicle(void);
 
     // address=[0x1524510]
-    void  TransportHandling(class CBuilding *);
+    void  TransportHandling(class CBuilding * a2);
 
     // address=[0x1524690]
     void  CancelIncomingChargeTraders(void);
@@ -209,7 +211,7 @@ private:
     void  CancelLoadingVehicle(void);
 
     // address=[0x1524b40]
-    int  GetVehicleAtBuildingFreeSpaceGood(int);
+    int  GetVehicleAtBuildingFreeSpaceGood(int a2);
 
     // address=[0x1524c00]
     int  GetVehicleAtBuildingFreeSpace(void);
@@ -218,31 +220,31 @@ private:
     void  ClearRegisterTargetBuildings(void);
 
     // address=[0x1524d40]
-    void  DeteachTradingBuilding(int);
+    void  DeteachTradingBuilding(int a2);
 
     // address=[0x1524da0]
-    void  SetTradingBuildingID(int);
+    void  SetTradingBuildingID(int a2);
 
     // address=[0x1524ea0]
-    bool  RequestTradeShip(class CBuilding *,class CBuilding *,bool);
+    bool  RequestTradeShip(class CBuilding * a2, class CBuilding * a3, bool a4);
 
     // address=[0x15250e0]
-    int  GetShipIDInHarbour(class CBuilding *);
+    int  GetShipIDInHarbour(class CBuilding * a2);
 
     // address=[0x15251e0]
-    bool  IsShipInHarbour(class CBuilding *);
+    bool  IsShipInHarbour(class CBuilding * a2);
 
     // address=[0x15252d0]
     bool  IsTradeShipInHarbour(class CBuilding *);
 
     // address=[0x15253a0]
-    bool  IsShip(int);
+    bool  IsShip(int a2);
 
     // address=[0x15253d0]
-    void  StartLoadingShip(int);
+    void  StartLoadingShip(int a2);
 
     // address=[0x1525410]
-    void  StartUnloadingShip(int);
+    void  StartUnloadingShip(int a2);
 
     // address=[0x1525450]
     void  LoadShip(void);
@@ -254,31 +256,31 @@ private:
     void  UnloadShip(void);
 
     // address=[0x1525cc0]
-    void  ShipArrived(int);
+    void  ShipArrived(int a2);
 
     // address=[0x1525d90]
-    void  ShipArrivedAtTarget(int);
+    void  ShipArrivedAtTarget(int a2);
 
     // address=[0x1525da0]
-    void  ShipArriveCancel(int);
+    void  ShipArriveCancel(int a2);
 
     // address=[0x1525dc0]
     bool  IsShipRequested(void);
 
     // address=[0x1525df0]
-    bool  RequestDonkey(class CBuilding *,class CBuilding *,bool);
+    bool  RequestDonkey(class CBuilding * a2, class CBuilding * a3, bool a4);
 
     // address=[0x1525ff0]
     bool  IsDonkeyAtBuilding(class CBuilding *);
 
     // address=[0x15260d0]
-    int  GetDonkeyIDAtBuilding(class CBuilding *);
+    int  GetDonkeyIDAtBuilding(class CBuilding * a2);
 
     // address=[0x15261b0]
-    void  StartLoadingDonkey(int);
+    void  StartLoadingDonkey(int a2);
 
     // address=[0x1526230]
-    void  StartUnloadingDonkey(int);
+    void  StartUnloadingDonkey(int a2);
 
     // address=[0x15262b0]
     void  LoadDonkey(void);
@@ -290,28 +292,28 @@ private:
     void  UnloadDonkey(void);
 
     // address=[0x1526b20]
-    void  DonkeyArrived(int);
+    void  DonkeyArrived(int a2);
 
     // address=[0x1526c10]
-    void  DonkeyArrivedAtTarget(int);
+    void  DonkeyArrivedAtTarget(int a2);
 
     // address=[0x1526c20]
-    void  DonkeyArriveCancel(int);
+    void  DonkeyArriveCancel(int a2);
 
     // address=[0x1526c60]
-    bool  RequestCart(class CBuilding *,class CBuilding *,bool);
+    bool  RequestCart(class CBuilding * a2, class CBuilding * a3, bool a4);
 
     // address=[0x1526f10]
     bool  IsCartAtBuilding(class CBuilding *);
 
     // address=[0x1526f40]
-    int  GetCartIDAtBuilding(class CBuilding *);
+    int  GetCartIDAtBuilding(class CBuilding * a2);
 
     // address=[0x1527040]
-    void  StartLoadingCart(int);
+    void  StartLoadingCart(int a2);
 
     // address=[0x1527080]
-    void  StartUnloadingCart(int);
+    void  StartUnloadingCart(int a2);
 
     // address=[0x15270c0]
     void  LoadCart(void);
@@ -323,58 +325,58 @@ private:
     void  UnloadCart(void);
 
     // address=[0x1527720]
-    void  CartArrived(int);
+    void  CartArrived(int a2);
 
     // address=[0x15277c0]
-    void  CartArrivedAtTarget(int);
+    void  CartArrivedAtTarget(int a2);
 
     // address=[0x15277d0]
-    void  CartArriveCancel(int);
+    void  CartArriveCancel(int a2);
 
     // address=[0x15277f0]
-    int  AddGood(int,int,bool);
+    int  AddGood(int a2, int a3, bool a4);
 
     // address=[0x1527be0]
-    int  GetNrDeliveryPilesOfGood(int);
+    int  GetNrDeliveryPilesOfGood(int a2);
 
     // address=[0x1527cc0]
-    int  CalcNrExportGoods(bool);
+    int  CalcNrExportGoods(bool a2);
 
     // address=[0x1527df0]
     int  GetPileIDWithGoodToTransport(void);
 
     // address=[0x1527ec0]
-    int  CalcNrAvaibleGood(bool);
+    int  CalcNrAvaibleGood(bool a2);
 
     // address=[0x1527f20]
     virtual bool  CrushBuilding(void);
 
     // address=[0x1527fd0]
-    virtual void  ConvertEventIntoGoal(class CBuilding *,class CEntityEvent *);
+    virtual void  ConvertEventIntoGoal(class CBuilding * a2, class CEntityEvent * a3);
 
     // address=[0x1528020]
     int  DetermineTransportType(void);
 
     // address=[0x1528150]
-    int  GetTargetBuildingID(bool);
+    int  GetTargetBuildingID(bool a2);
 
     // address=[0x1528180]
-    void  StartLoadIntTraderDonkey(int);
+    void  StartLoadIntTraderDonkey(int a2);
 
     // address=[0x1528300]
-    void  StartLoadIntTraderShip(int);
+    void  StartLoadIntTraderShip(int a2);
 
     // address=[0x15283d0]
-    void  ReserveExportPile(int,int,int);
+    void  ReserveExportPile(int a2, int a3, int a4);
 
     // address=[0x15284b0]
-    void  ReserveImportPile(int);
+    void  ReserveImportPile(int a2);
 
     // address=[0x1528560]
     int  CalcExportedGoods(void);
 
     // address=[0x15285f0]
-    int  GetTotalExportedGoodAmount(class CBuilding *);
+    int  GetTotalExportedGoodAmount(class CBuilding * a2);
 
     // address=[0x15287e0]
     void  DisableTranding(void);
@@ -383,25 +385,25 @@ private:
     int const  GetMaxTradingGoodAmount(void);
 
     // address=[0x15289f0]
-    void  RequestTradingGood(enum PILE_TYPES);
+    void  RequestTradingGood(enum PILE_TYPES a2);
 
     // address=[0x1528ab0]
-    bool  CheckTradingTransport(class CBuilding *,int);
+    bool  CheckTradingTransport(class CBuilding * a2, int a3);
 
     // address=[0x1528d00]
-    void  ClearTradingPiles(int,enum TGOOD_STATUS);
+    void  ClearTradingPiles(int a2, enum TGOOD_STATUS a3);
 
     // address=[0x1528e30]
-    void  SetGoodState(int,enum TGOOD_STATUS);
+    void  SetGoodState(int a2, enum TGOOD_STATUS a3);
 
     // address=[0x1528e70]
-    void  ClearGoodState(int,enum TGOOD_STATUS);
+    void  ClearGoodState(int a2, enum TGOOD_STATUS a3);
 
     // address=[0x1528ea0]
-    bool  HasGoodState(int,enum TGOOD_STATUS);
+    bool  HasGoodState(int a2, enum TGOOD_STATUS a3);
 
     // address=[0x1528ee0]
-    enum TGOOD_STATUS  GetTradingStatus(int);
+    enum TGOOD_STATUS  GetTradingStatus(int a1);
 
     // address=[0x152bd30]
     int  GetBuildingID(void);

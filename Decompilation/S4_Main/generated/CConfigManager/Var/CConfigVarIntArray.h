@@ -1,6 +1,8 @@
 #ifndef CCONFIGVARINTARRAY_H
 #define CCONFIGVARINTARRAY_H
 
+#include "defines.h"
+
 class CConfigVarIntArray : public CDynamicConfigVar {
 public:
     // address=[0x2efa070]
@@ -11,7 +13,7 @@ public:
 
 private:
     // address=[0x2eeef30]
-     CConfigVarIntArray(int const *,int);
+     CConfigVarIntArray(int const * Src, int a3);
 
     // address=[0x2eef050]
     virtual  ~CConfigVarIntArray(void);

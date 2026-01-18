@@ -4,7 +4,7 @@
 
 // address=[0x149d9d0]
 // Decompiled from CStateAOBriefing *__cdecl CStateAOBriefing::DynamicCreateFunc(int a1)
-static class CGameState * __cdecl CStateAOBriefing::DynamicCreateFunc(void *) {
+class CGameState * __cdecl CStateAOBriefing::DynamicCreateFunc(void * a1) {
   
   CStateAOBriefing *C; // [esp+Ch] [ebp-10h]
 
@@ -18,7 +18,7 @@ static class CGameState * __cdecl CStateAOBriefing::DynamicCreateFunc(void *) {
 
 // address=[0x149da50]
 // Decompiled from CStateAOBriefing *__thiscall CStateAOBriefing::CStateAOBriefing(CStateAOBriefing *this, int a2)
- CStateAOBriefing::CStateAOBriefing(void *) {
+ CStateAOBriefing::CStateAOBriefing(void * a2) {
   
   const char *v2; // eax
   char *v3; // eax
@@ -224,7 +224,7 @@ bool  CStateAOBriefing::Perform(void) {
 
 // address=[0x149e0f0]
 // Decompiled from bool __thiscall CStateAOBriefing::OnEvent(CStateAOBriefing *this, struct CEvn_Event *a2)
-bool  CStateAOBriefing::OnEvent(class CEvn_Event &) {
+bool  CStateAOBriefing::OnEvent(class CEvn_Event & a2) {
   
   CGUIWrapper *Instance; // eax
   const char *v4; // eax
@@ -500,7 +500,7 @@ bool  CStateAOBriefing::OnEvent(class CEvn_Event &) {
 
 // address=[0x149e9b0]
 // Decompiled from void *__cdecl CStateAOBriefing::InitBriefingTexts(int a1, int a2)
-static void __cdecl CStateAOBriefing::InitBriefingTexts(int,int) {
+void __cdecl CStateAOBriefing::InitBriefingTexts(int a1, int a2) {
   
   char *v2; // eax
   char *v3; // eax

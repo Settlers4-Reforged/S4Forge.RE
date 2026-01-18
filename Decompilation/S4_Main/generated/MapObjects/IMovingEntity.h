@@ -1,6 +1,8 @@
 #ifndef IMOVINGENTITY_H
 #define IMOVINGENTITY_H
 
+#include "defines.h"
+
 class IMovingEntity : public IAnimatedEntity {
 public:
     // address=[0x130eb80]
@@ -19,7 +21,7 @@ public:
     int  GetJobPart(void)const;
 
     // address=[0x1470a80]
-    bool  IsFree(int);
+    bool  IsFree(int a2);
 
     // address=[0x14d86e0]
     virtual bool  IsUnEmployed(void)const;
@@ -28,62 +30,62 @@ public:
     void  IncToDoListIter(void);
 
     // address=[0x150b590]
-    void  SetDisplacementCosts(int);
+    void  SetDisplacementCosts(int a2);
 
     // address=[0x1513b10]
-    void  SetDirection(int);
+    void  SetDirection(int a2);
 
     // address=[0x15590a0]
-     IMovingEntity(int);
+     IMovingEntity(int a2);
 
     // address=[0x1559130]
     virtual  ~IMovingEntity(void);
 
     // address=[0x1559170]
-    void  WalkToXY(int,int);
+    void  WalkToXY(int a2, int a3);
 
     // address=[0x15591b0]
-    virtual void  NewToDoList(class std::list<class CEntityTask,class std::allocator<class CEntityTask> > *,int);
+    virtual void  NewToDoList(class std::list<class CEntityTask,class std::allocator<class CEntityTask> > * a2, int a3);
 
     // address=[0x1559260]
     void  ResetToDoList(void);
 
     // address=[0x1559340]
-    void  SetToDoList(class std::list<class CEntityTask,class std::allocator<class CEntityTask> > *);
+    void  SetToDoList(class std::list<class CEntityTask,class std::allocator<class CEntityTask> > * a2);
 
     // address=[0x1559400]
-    bool  IsNotOccupied(int);
+    bool  IsNotOccupied(int a2);
 
     // address=[0x1559430]
-    bool  IsNotBlocked(int);
+    bool  IsNotBlocked(int a2);
 
     // address=[0x1563870]
     bool  IsEndIter(void);
 
     // address=[0x1563980]
-    void  SetDistance(int);
+    void  SetDistance(int a2);
 
     // address=[0x1568790]
-    class std::_List_iterator<class std::_List_val<struct std::_List_simple_types<class CEntityTask> > > const  GetActualIter(void)const;
+    class std::_List_iterator<class std::_List_val<struct std::_List_simple_types<class CEntityTask> > > const  GetActualIter(void a2)const;
 
     // address=[0x15d6230]
     int  DisplacementCosts(void)const;
 
 protected:
     // address=[0x14d8840]
-    void  SetPositionAndDir(int,int);
+    void  SetPositionAndDir(int a2, int a3);
 
     // address=[0x1559460]
-     IMovingEntity(std::istream &);
+     IMovingEntity(std::istream & a2);
 
     // address=[0x15595e0]
-    virtual void  Store(std::ostream &);
+    virtual void  Store(std::ostream & a2);
 
     // address=[0x15596c0]
     void  InitDistance(void);
 
     // address=[0x15596e0]
-    void  DecDistance(unsigned int);
+    void  DecDistance(unsigned int a2);
 
     // Type information members
 private:

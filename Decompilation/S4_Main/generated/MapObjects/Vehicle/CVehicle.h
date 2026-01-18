@@ -1,6 +1,8 @@
 #ifndef CVEHICLE_H
 #define CVEHICLE_H
 
+#include "defines.h"
+
 class CVehicle : public IMovingEntity {
 public:
     // address=[0x1351ab0]
@@ -16,7 +18,7 @@ public:
     virtual void  SetSelectable(void);
 
     // address=[0x159e900]
-    virtual int const  GetMeetingPointXY(enum OBJ_TYPE,int);
+    virtual int const  GetMeetingPointXY(enum OBJ_TYPE a2, int a3);
 
     // address=[0x15a3c70]
     int  Loading(void)const;
@@ -28,25 +30,25 @@ public:
     virtual void  AddToWarMap(void);
 
     // address=[0x15a3d10]
-    virtual void  GoodIsComming(int,int);
+    virtual void  GoodIsComming(int a2, int a3);
 
     // address=[0x15a3d20]
-    virtual void  EntityOrderCanceled(int);
+    virtual void  EntityOrderCanceled(int a2);
 
     // address=[0x15a3d30]
-    virtual void  EntityEnter(int);
+    virtual void  EntityEnter(int a2);
 
     // address=[0x15a3d40]
-    virtual void  GoodArrived(int,int);
+    virtual void  GoodArrived(int a2, int a3);
 
     // address=[0x15a3d50]
-    virtual void  SupplyCanceled(int,int);
+    virtual void  SupplyCanceled(int a2, int a3);
 
     // address=[0x15a3d60]
     virtual void  Delete(void);
 
     // address=[0x15a3e80]
-    void  FireMissile(int,int);
+    void  FireMissile(int a2, int a3);
 
     // address=[0x15a4130]
     void  Update(void);
@@ -61,7 +63,7 @@ public:
     virtual bool  IsUnEmployed(void)const;
 
     // address=[0x15a4500]
-    virtual void  IncreaseAmmo(int);
+    virtual void  IncreaseAmmo(int a2);
 
     // address=[0x15a4560]
     int  BuildingProgress(void);
@@ -73,31 +75,31 @@ public:
     virtual void  OnBuildReady(void);
 
     // address=[0x15a4a20]
-    bool  NeedForBuildingMaterial(int);
+    bool  NeedForBuildingMaterial(int a2);
 
     // address=[0x15a4a70]
-    void  AddBuildingMaterial(int);
+    void  AddBuildingMaterial(int a2);
 
     // address=[0x15a4b30]
-    virtual void  Attach(int);
+    virtual void  Attach(int a2);
 
     // address=[0x15a4b60]
-    virtual void  Detach(int);
+    virtual void  Detach(int a2);
 
     // address=[0x15a4b90]
-    virtual void  Notify(class CEntityEvent const &)const;
+    virtual void  Notify(class CEntityEvent const & a2)const;
 
     // address=[0x15a4bb0]
-    virtual void  Decrease(int);
+    virtual void  Decrease(int a2);
 
     // address=[0x15a4c80]
     virtual int  GetGroupFlags(void)const;
 
     // address=[0x15a4ca0]
-    virtual int  SetGroupFlagBits(int);
+    virtual int  SetGroupFlagBits(int a2);
 
     // address=[0x15a4d00]
-    virtual int  ClearGroupFlagBits(int);
+    virtual int  ClearGroupFlagBits(int a2);
 
     // address=[0x15a7a40]
     virtual void  FillDialog(bool);
@@ -116,46 +118,46 @@ protected:
     bool  ReadyToFire(unsigned int)const;
 
     // address=[0x153fe40]
-    void  RegisterNewTask(unsigned int,unsigned int);
+    void  RegisterNewTask(unsigned int a2, unsigned int a3);
 
     // address=[0x153fe90]
     unsigned int  TurnCounter(void)const;
 
     // address=[0x15a4d60]
-     CVehicle(int,int,int,int,int,int,bool);
+     CVehicle(int a2, int a3, int a4, int a5, int a6, int a7, bool a8);
 
     // address=[0x15a5160]
     virtual  ~CVehicle(void);
 
     // address=[0x15a51a0]
-     CVehicle(std::istream &);
+     CVehicle(std::istream & a2);
 
     // address=[0x15a54a0]
-    virtual void  Store(std::ostream &);
+    virtual void  Store(std::ostream & a2);
 
     // address=[0x15a57a0]
     virtual void  GetTurnGfxInfo(void);
 
     // address=[0x15a5850]
-    unsigned int  InitTurn(int);
+    unsigned int  InitTurn(int a2);
 
     // address=[0x15a5960]
-    unsigned int  TurnVehicle(unsigned int);
+    unsigned int  TurnVehicle(unsigned int a2);
 
     // address=[0x15a5a00]
-    void  TakeJobPart(unsigned int);
+    void  TakeJobPart(unsigned int a2);
 
     // address=[0x15a5a80]
-    bool  NewDestination(int,int,int);
+    bool  NewDestination(int a2, int a3, int a4);
 
     // address=[0x15a5dc0]
     void  GetNextJob(void);
 
     // address=[0x15a5e30]
-    void  DetachWithoutNotify(int);
+    void  DetachWithoutNotify(int a2);
 
     // address=[0x15a5e50]
-    void  SetReadyToFireTick(unsigned int);
+    void  SetReadyToFireTick(unsigned int a2);
 
     // address=[0x15a5e70]
     virtual bool  EnoughAmmo(void)const;
@@ -167,19 +169,19 @@ protected:
     virtual void  DecreaseAmmo(void);
 
     // address=[0x15a5ef0]
-    void  AttackTarget(int);
+    void  AttackTarget(int a2);
 
     // address=[0x15a6040]
-    void  WalkDirAndRegister(int,bool);
+    void  WalkDirAndRegister(int a2, bool a3);
 
     // address=[0x15a61a0]
-    void  InitCommonTaskValues(class CEntityTask const *);
+    void  InitCommonTaskValues(class CEntityTask const * a2);
 
     // address=[0x15a6250]
-    virtual void  ConvertEventIntoGoal(class CEntityEvent *);
+    virtual void  ConvertEventIntoGoal(class CEntityEvent * a2);
 
     // address=[0x15a6300]
-    void  MoveTo(int,int,int);
+    void  MoveTo(int a2, int a3, int a4);
 
     // address=[0x15a7a20]
     static bool __cdecl CallTakeJob(void);
@@ -191,20 +193,20 @@ protected:
     bool  IsMoving(void)const;
 
     // address=[0x15a7b20]
-    static void __cdecl NotifyCallTakeJob(bool);
+    static void __cdecl NotifyCallTakeJob(bool a1);
 
     // address=[0x15a7b40]
-    void  RegisterNewTaskAndTakeJobPartIfNecessary(unsigned int,unsigned int,unsigned int);
+    void  RegisterNewTaskAndTakeJobPartIfNecessary(unsigned int a2, unsigned int a3, unsigned int a4);
 
     // address=[0x15a7be0]
-    void  TakeJobPartIfNecessary(unsigned int);
+    void  TakeJobPartIfNecessary(unsigned int a2);
 
     // address=[0x4158cfe]
     static bool m_bCallTakeJob;
 
 private:
     // address=[0x153a570]
-    virtual void  NotifyDetach(int);
+    virtual void  NotifyDetach(int a2);
 
 };
 

@@ -4,7 +4,7 @@
 
 // address=[0x1601e00]
 // Decompiled from CScriptManager *__thiscall CScriptManager::AllowRegisterFunction(CScriptManager *this, bool a2)
-void  CScriptManager::AllowRegisterFunction(bool) {
+void  CScriptManager::AllowRegisterFunction(bool a2) {
   
   CScriptManager *result; // eax
 
@@ -16,7 +16,7 @@ void  CScriptManager::AllowRegisterFunction(bool) {
 
 // address=[0x1601e50]
 // Decompiled from int __thiscall CScriptManager::Call(CScriptManager *this, unsigned int a2)
-void  CScriptManager::Call(int) {
+void  CScriptManager::Call(int a2) {
   
   unsigned int Ref; // eax
 
@@ -36,7 +36,7 @@ void  CScriptManager::Call(int) {
 
 // address=[0x1601ec0]
 // Decompiled from int __thiscall CScriptManager::Call(CScriptManager *this, unsigned int a2, int a3)
-void  CScriptManager::Call(int,int) {
+void  CScriptManager::Call(int a2, int a3) {
   
   unsigned int Ref; // eax
 
@@ -57,7 +57,7 @@ void  CScriptManager::Call(int,int) {
 
 // address=[0x1601f40]
 // Decompiled from int __thiscall CScriptManager::Call(CScriptManager *this, unsigned int a2, int a3, int a4)
-void  CScriptManager::Call(int,int,int) {
+void  CScriptManager::Call(int a2, int a3, int a4) {
   
   unsigned int Ref; // eax
 
@@ -79,7 +79,7 @@ void  CScriptManager::Call(int,int,int) {
 
 // address=[0x1601fe0]
 // Decompiled from int __thiscall CScriptManager::Call(CScriptManager *this, unsigned int a2, int a3, int a4, int a5)
-void  CScriptManager::Call(int,int,int,int) {
+void  CScriptManager::Call(int a2, int a3, int a4, int a5) {
   
   unsigned int Ref; // eax
 
@@ -102,7 +102,7 @@ void  CScriptManager::Call(int,int,int,int) {
 
 // address=[0x1602090]
 // Decompiled from int __thiscall CScriptManager::Call(CScriptManager *this, unsigned int a2, int a3, int a4, int a5, int a6)
-void  CScriptManager::Call(int,int,int,int,int) {
+void  CScriptManager::Call(int a2, int a3, int a4, int a5, int a6) {
   
   unsigned int Ref; // eax
 
@@ -159,7 +159,7 @@ void  CScriptManager::Call(int,int,int,int,int) {
 
 // address=[0x160df60]
 // Decompiled from int __thiscall CScriptManager::FindFunc(CScriptManager *this, unsigned int a2)
-int  CScriptManager::FindFunc(unsigned int) {
+int  CScriptManager::FindFunc(unsigned int a2) {
   
   unsigned int Ref; // eax
   int v4; // [esp+0h] [ebp-Ch]
@@ -250,7 +250,7 @@ void  CScriptManager::RegisterFunction(void) {
 
 // address=[0x160e140]
 // Decompiled from int CScriptManager::LuaRegisterFunction()
-static void __cdecl CScriptManager::LuaRegisterFunction(void) {
+void __cdecl CScriptManager::LuaRegisterFunction(void) {
   
   if ( CScriptManager::m_pScriptManager )
     return CScriptManager::RegisterFunction((CScriptManager *)CScriptManager::m_pScriptManager);

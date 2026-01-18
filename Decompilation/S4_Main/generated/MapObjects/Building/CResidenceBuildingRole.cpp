@@ -4,7 +4,7 @@
 
 // address=[0x1401940]
 // Decompiled from int __cdecl CResidenceBuildingRole::New(int a1)
-static class CPersistence * __cdecl CResidenceBuildingRole::New(std::istream &) {
+class CPersistence * __cdecl CResidenceBuildingRole::New(std::istream & a1) {
   
   if ( operator new(0x180u) )
     return CResidenceBuildingRole::CResidenceBuildingRole(a1);
@@ -41,7 +41,7 @@ unsigned long  CResidenceBuildingRole::ClassID(void)const {
 
 // address=[0x14fd3e0]
 // Decompiled from void *__thiscall CResidenceBuildingRole::GetBuildingNeed(std::_Ref_count_base *this, const struct type_info *a2)
-int  CResidenceBuildingRole::GetBuildingNeed(int)const {
+int  CResidenceBuildingRole::GetBuildingNeed(int a2)const {
   
   return 0;
 }
@@ -57,7 +57,7 @@ int  CResidenceBuildingRole::GetBuildingRole(void) {
 
 // address=[0x14fd680]
 // Decompiled from void *__thiscall CResidenceBuildingRole::GetPileIdWithGood(std::_Ref_count_base *this, const struct type_info *a2)
-int  CResidenceBuildingRole::GetPileIdWithGood(int)const {
+int  CResidenceBuildingRole::GetPileIdWithGood(int a2)const {
   
   return 0;
 }
@@ -65,7 +65,7 @@ int  CResidenceBuildingRole::GetPileIdWithGood(int)const {
 
 // address=[0x14fd740]
 // Decompiled from void __thiscall CResidenceBuildingRole::GoodArrive(CResidenceBuildingRole *this, int a2)
-void  CResidenceBuildingRole::GoodArrive(int) {
+void  CResidenceBuildingRole::GoodArrive(int a2) {
   
   ;
 }
@@ -73,7 +73,7 @@ void  CResidenceBuildingRole::GoodArrive(int) {
 
 // address=[0x14fdbb0]
 // Decompiled from int __cdecl CResidenceBuildingRole::Load(int a1)
-static class CResidenceBuildingRole * __cdecl CResidenceBuildingRole::Load(std::istream &) {
+class CResidenceBuildingRole * __cdecl CResidenceBuildingRole::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
@@ -85,7 +85,7 @@ static class CResidenceBuildingRole * __cdecl CResidenceBuildingRole::Load(std::
 
 // address=[0x1518780]
 // Decompiled from char __thiscall CResidenceBuildingRole::LogicUpdate(CResidenceBuildingRole *this, struct CBuilding *a2)
-void  CResidenceBuildingRole::LogicUpdate(class CBuilding *) {
+void  CResidenceBuildingRole::LogicUpdate(class CBuilding * a2) {
   
   int LocalPlayerId; // eax
   int v3; // eax
@@ -227,7 +227,7 @@ void  CResidenceBuildingRole::LogicUpdate(class CBuilding *) {
 
 // address=[0x1518af0]
 // Decompiled from int __thiscall CResidenceBuildingRole::FillGfxInfo(  CResidenceBuildingRole *this,  struct CBuilding *a2,  struct SGfxObjectInfo *a3)
-void  CResidenceBuildingRole::FillGfxInfo(class CBuilding *,struct SGfxObjectInfo &) {
+void  CResidenceBuildingRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo & a3) {
   
   int v3; // eax
   int v5; // [esp-Ch] [ebp-10h]
@@ -241,7 +241,7 @@ void  CResidenceBuildingRole::FillGfxInfo(class CBuilding *,struct SGfxObjectInf
 
 // address=[0x1518b40]
 // Decompiled from CResidenceBuildingRole *__thiscall CResidenceBuildingRole::Init(CResidenceBuildingRole *this, struct CBuilding *a2)
-void  CResidenceBuildingRole::Init(class CBuilding *) {
+void  CResidenceBuildingRole::Init(class CBuilding * a2) {
   
   int v2; // eax
   int v3; // eax
@@ -287,7 +287,7 @@ void  CResidenceBuildingRole::Init(class CBuilding *) {
 
 // address=[0x1518c80]
 // Decompiled from int __thiscall CResidenceBuildingRole::PostLoadInit(CResidenceBuildingRole *this, struct CBuilding *a2)
-void  CResidenceBuildingRole::PostLoadInit(class CBuilding *) {
+void  CResidenceBuildingRole::PostLoadInit(class CBuilding * a2) {
   
   int v2; // eax
   int result; // eax
@@ -303,7 +303,7 @@ void  CResidenceBuildingRole::PostLoadInit(class CBuilding *) {
 
 // address=[0x1518cb0]
 // Decompiled from _DWORD *__thiscall CResidenceBuildingRole::FillDialog(CResidenceBuildingRole *this, struct CBuilding *a2, bool a3)
-void  CResidenceBuildingRole::FillDialog(class CBuilding *,bool) {
+void  CResidenceBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
   
   int v3; // eax
   int v4; // eax
@@ -354,7 +354,7 @@ int  CResidenceBuildingRole::ReturnRemainingSettlers(void) {
 
 // address=[0x1518e50]
 // Decompiled from char *__thiscall CResidenceBuildingRole::CResidenceBuildingRole(char *this, int a2)
- CResidenceBuildingRole::CResidenceBuildingRole(std::istream &) {
+ CResidenceBuildingRole::CResidenceBuildingRole(std::istream & a2) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
@@ -381,7 +381,7 @@ int  CResidenceBuildingRole::ReturnRemainingSettlers(void) {
 
 // address=[0x1518f10]
 // Decompiled from int __thiscall CResidenceBuildingRole::Store(struct IBuildingRole *this, struct std::ostream *a2)
-void  CResidenceBuildingRole::Store(std::ostream &) {
+void  CResidenceBuildingRole::Store(std::ostream & a2) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
   struct IBuildingRole *v4; // [esp+4h] [ebp-4h]

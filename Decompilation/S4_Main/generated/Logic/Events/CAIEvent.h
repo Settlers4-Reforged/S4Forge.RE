@@ -1,19 +1,21 @@
 #ifndef CAIEVENT_H
 #define CAIEVENT_H
 
+#include "defines.h"
+
 class CAIEvent {
 public:
     // address=[0x13095e0]
-    static int __cdecl Pack(unsigned int,unsigned int);
+    static int __cdecl Pack(unsigned int a1, unsigned int a2);
 
     // address=[0x1310220]
-     CAIEvent(int,int,int,int);
+     CAIEvent(int a2, int a3, int a4, int a5);
 
     // address=[0x13140a0]
-    static unsigned int __cdecl UnpackA(int);
+    static unsigned int __cdecl UnpackA(int a1);
 
     // address=[0x13140b0]
-    static unsigned int __cdecl UnpackB(int);
+    static unsigned int __cdecl UnpackB(int a1);
 
     // address=[0x1319600]
     int  Data1(void)const;

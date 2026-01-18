@@ -4,7 +4,7 @@
 
 // address=[0x132b400]
 // Decompiled from char __thiscall CAITaskForcePriests::NewCommand(CAITaskForcePriests *this, unsigned int a2, int a3, int a4)
-bool  CAITaskForcePriests::NewCommand(int,int,int) {
+bool  CAITaskForcePriests::NewCommand(int a2, int a3, int a4) {
   
   CAITaskForceEx::SetCommandAndClearStuff(this, a2, a3, a4);
   *((_DWORD *)this + 24) = 0;
@@ -26,7 +26,7 @@ bool  CAITaskForcePriests::NewCommand(int,int,int) {
 
 // address=[0x132b480]
 // Decompiled from _DWORD *__thiscall CAITaskForcePriests::CAITaskForcePriests(_DWORD *this, int a2, int a3, int a4)
- CAITaskForcePriests::CAITaskForcePriests(int,enum T_AI_TASK_FORCE_TYPE,int) {
+ CAITaskForcePriests::CAITaskForcePriests(int a2, enum T_AI_TASK_FORCE_TYPE a3, int a4) {
   
   CAITaskForceEx::CAITaskForceEx(this, a2, 3, a3, a4);
   *this = CAITaskForcePriests::_vftable_;
@@ -37,7 +37,7 @@ bool  CAITaskForcePriests::NewCommand(int,int,int) {
 
 // address=[0x132b4c0]
 // Decompiled from char __thiscall CAITaskForcePriests::IsAddEntityOk(CAITaskForcePriests *this, int a2)
-bool  CAITaskForcePriests::IsAddEntityOk(int) {
+bool  CAITaskForcePriests::IsAddEntityOk(int a2) {
   
   if ( IAIEnvironment::EntityWarriorType(a2) == 6 )
     return 1;
@@ -124,7 +124,7 @@ void  CAITaskForcePriests::Execute(void) {
 
 // address=[0x132b6f0]
 // Decompiled from int __cdecl CAITaskForcePriests::CreatePriestsTaskForce(int a1, int a2, int a3, int a4)
-static class CAITaskForcePriests * __cdecl CAITaskForcePriests::CreatePriestsTaskForce(int,int,enum T_AI_TASK_FORCE_TYPE,int) {
+class CAITaskForcePriests * __cdecl CAITaskForcePriests::CreatePriestsTaskForce(int a1, int a2, enum T_AI_TASK_FORCE_TYPE a3, int a4) {
   
   int result; // eax
   int v5; // [esp+14h] [ebp-30h]

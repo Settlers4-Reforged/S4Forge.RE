@@ -1,10 +1,12 @@
 #ifndef CFILTERNEARCUSTOMER_H
 #define CFILTERNEARCUSTOMER_H
 
+#include "defines.h"
+
 class CFilterNearCustomer : public IFilterEntry {
 public:
     // address=[0x2f58ab0]
-     CFilterNearCustomer(int,int,enum T_BUILD_LEVEL,int);
+     CFilterNearCustomer(int a2, int a3, enum T_BUILD_LEVEL a4, int a5);
 
     // address=[0x2f58b00]
     virtual float  GetFilterValue(void);

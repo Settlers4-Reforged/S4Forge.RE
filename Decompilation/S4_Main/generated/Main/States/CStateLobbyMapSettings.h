@@ -1,10 +1,12 @@
 #ifndef CSTATELOBBYMAPSETTINGS_H
 #define CSTATELOBBYMAPSETTINGS_H
 
+#include "defines.h"
+
 class CStateLobbyMapSettings : public CGuiGameState {
 public:
     // address=[0x14bd6f0]
-    static class CGameState * __cdecl DynamicCreateFunc(void *);
+    static class CGameState * __cdecl DynamicCreateFunc(void * a1);
 
     // address=[0x14bd770]
      CStateLobbyMapSettings(void *);
@@ -16,11 +18,11 @@ public:
     virtual bool  Perform(void);
 
     // address=[0x14bdbb0]
-    virtual bool  OnEvent(class CEvn_Event &);
+    virtual bool  OnEvent(class CEvn_Event & a2);
 
 private:
     // address=[0x14be980]
-    void  AddMapList(std::wstring,std::wstring);
+    void  AddMapList(std::wstring a2, std::wstring a3);
 
     // address=[0x14bf100]
     int  RefreshMapList(void);
@@ -35,13 +37,13 @@ private:
     void  UpdateData(void);
 
     // address=[0x14bf490]
-    void  ApplyMapData(int);
+    void  ApplyMapData(int a2);
 
     // address=[0x14bf8c0]
     void  Sort(void);
 
     // address=[0x14bf970]
-    int  Compare(int,int);
+    int  Compare(int a2, int a3);
 
     // address=[0x4030938]
     static struct CLanLobbyMapSettings::SMapEntry * * m_stempMapPtr;

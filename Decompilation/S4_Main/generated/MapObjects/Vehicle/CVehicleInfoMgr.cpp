@@ -4,7 +4,7 @@
 
 // address=[0x15aae80]
 // Decompiled from void __thiscall CVehicleInfoMgr::InitializeVehicleProperties(CVehicleInfoMgr *this, bool a2, bool a3)
-void  CVehicleInfoMgr::InitializeVehicleProperties(bool,bool) {
+void  CVehicleInfoMgr::InitializeVehicleProperties(bool a2, bool a3) {
   
   char *v3; // eax
   unsigned int v5; // [esp+Ch] [ebp-10h]

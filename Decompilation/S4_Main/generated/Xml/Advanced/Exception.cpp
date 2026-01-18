@@ -25,7 +25,7 @@
 
 // address=[0x2f1c6b0]
 // Decompiled from boost::exception_detail::clone_base *__thiscall AdvXMLParser::Exception::Exception(  boost::exception_detail::clone_base *this,  const struct boost::exception_detail::clone_base *a2)
- AdvXMLParser::Exception::Exception(class AdvXMLParser::Exception const &) {
+ AdvXMLParser::Exception::Exception(class AdvXMLParser::Exception const & a2) {
   
   *(_DWORD *)this = &AdvXMLParser::Exception::_vftable_;
   return this;

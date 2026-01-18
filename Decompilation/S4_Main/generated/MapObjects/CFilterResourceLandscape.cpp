@@ -4,7 +4,7 @@
 
 // address=[0x2f527d0]
 // Decompiled from CFilterResourceLandscape *__thiscall CFilterResourceLandscape::CFilterResourceLandscape(  CFilterResourceLandscape *this,  int a2,  int a3,  int a4,  int a5,  int a6)
- CFilterResourceLandscape::CFilterResourceLandscape(int,int,int,int,int) {
+ CFilterResourceLandscape::CFilterResourceLandscape(int a2, int a3, int a4, int a5, int a6) {
   
   IFilterEntry::IFilterEntry(this);
   *(_DWORD *)this = &CFilterResourceLandscape::_vftable_;

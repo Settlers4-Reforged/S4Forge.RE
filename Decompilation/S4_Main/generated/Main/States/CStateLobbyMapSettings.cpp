@@ -4,7 +4,7 @@
 
 // address=[0x14bd6f0]
 // Decompiled from CStateLobbyMapSettings *__cdecl CStateLobbyMapSettings::DynamicCreateFunc(void *a1)
-static class CGameState * __cdecl CStateLobbyMapSettings::DynamicCreateFunc(void *) {
+class CGameState * __cdecl CStateLobbyMapSettings::DynamicCreateFunc(void * a1) {
   
   CStateLobbyMapSettings *C; // [esp+Ch] [ebp-10h]
 
@@ -130,7 +130,7 @@ bool  CStateLobbyMapSettings::Perform(void) {
 
 // address=[0x14bdbb0]
 // Decompiled from char __thiscall CStateLobbyMapSettings::OnEvent(CStateLobbyMapSettings *this, struct CEvn_Event *a2)
-bool  CStateLobbyMapSettings::OnEvent(class CEvn_Event &) {
+bool  CStateLobbyMapSettings::OnEvent(class CEvn_Event & a2) {
   
   char result; // al
   char *v3; // eax
@@ -530,7 +530,7 @@ LABEL_110:
 
 // address=[0x14be980]
 // Decompiled from void __thiscall CStateLobbyMapSettings::AddMapList(  _BYTE *this,  int a2,  int a3,  int a4,  int a5,  int a6,  int a7,  int a8,  char a9,  int a10,  int a11,  int a12,  int a13,  int a14,  int a15)
-void  CStateLobbyMapSettings::AddMapList(std::wstring,std::wstring) {
+void  CStateLobbyMapSettings::AddMapList(std::wstring a2, std::wstring a3) {
   
   const wchar_t *v15; // eax
   char v16; // [esp-40h] [ebp-570h] BYREF
@@ -847,7 +847,7 @@ void  CStateLobbyMapSettings::UpdateData(void) {
 
 // address=[0x14bf490]
 // Decompiled from void __thiscall CStateLobbyMapSettings::ApplyMapData(CStateLobbyMapSettings *this, int a2)
-void  CStateLobbyMapSettings::ApplyMapData(int) {
+void  CStateLobbyMapSettings::ApplyMapData(int a2) {
   
   int v2; // ecx
   char v3; // [esp-40h] [ebp-A0h] BYREF
@@ -1010,7 +1010,7 @@ void  CStateLobbyMapSettings::Sort(void) {
 
 // address=[0x14bf970]
 // Decompiled from int __thiscall CStateLobbyMapSettings::Compare(CStateLobbyMapSettings *this, int a2, int a3)
-int  CStateLobbyMapSettings::Compare(int,int) {
+int  CStateLobbyMapSettings::Compare(int a2, int a3) {
   
   const char *v3; // eax
   int result; // eax

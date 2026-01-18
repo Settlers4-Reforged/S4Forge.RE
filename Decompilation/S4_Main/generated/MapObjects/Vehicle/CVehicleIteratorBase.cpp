@@ -20,7 +20,7 @@ int  CVehicleIteratorBase::VehicleType(void)const {
 
 // address=[0x1317400]
 // Decompiled from CVehicleIteratorBase *__thiscall CVehicleIteratorBase::Init(CVehicleIteratorBase *this, int a2)
-void  CVehicleIteratorBase::Init(int) {
+void  CVehicleIteratorBase::Init(int a2) {
   
   CVehicleIteratorBase *result; // eax
 
@@ -33,7 +33,7 @@ void  CVehicleIteratorBase::Init(int) {
 
 // address=[0x1317540]
 // Decompiled from bool __thiscall CVehicleIteratorBase::VehicleValid(CVehicleIteratorBase *this, int a2)
-bool  CVehicleIteratorBase::VehicleValid(int) {
+bool  CVehicleIteratorBase::VehicleValid(int a2) {
   
   struct IEntity *v2; // eax
   bool v4; // [esp+4h] [ebp-4h]

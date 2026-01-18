@@ -4,7 +4,7 @@
 
 // address=[0x13ffc80]
 // Decompiled from int __cdecl CBuilderRole::New(int a1)
-static class CPersistence * __cdecl CBuilderRole::New(std::istream &) {
+class CPersistence * __cdecl CBuilderRole::New(std::istream & a1) {
   
   if ( operator new(0x30u) )
     return CBuilderRole::CBuilderRole(a1);
@@ -15,7 +15,7 @@ static class CPersistence * __cdecl CBuilderRole::New(std::istream &) {
 
 // address=[0x1562d90]
 // Decompiled from int __thiscall CBuilderRole::InitWalking(CBuilderRole *this, struct CSettler *a2)
-class CWalking *  CBuilderRole::InitWalking(class CSettler *) {
+class CWalking *  CBuilderRole::InitWalking(class CSettler * a2) {
   
   int v2; // eax
   int v4; // [esp+4h] [ebp-4h]
@@ -29,7 +29,7 @@ class CWalking *  CBuilderRole::InitWalking(class CSettler *) {
 
 // address=[0x1562dd0]
 // Decompiled from void __thiscall CBuilderRole::LogicUpdateJob(CBuilderRole *this, struct CSettler *a2)
-void  CBuilderRole::LogicUpdateJob(class CSettler *) {
+void  CBuilderRole::LogicUpdateJob(class CSettler * a2) {
   
   _DWORD *v2; // eax
   CBuildingSiteRole *v3; // [esp+0h] [ebp-Ch]
@@ -64,7 +64,7 @@ void  CBuilderRole::LogicUpdateJob(class CSettler *) {
 
 // address=[0x1562ec0]
 // Decompiled from int __stdcall CBuilderRole::PostLoadInit(CPropertySet *a1)
-void  CBuilderRole::PostLoadInit(class CSettler *) {
+void  CBuilderRole::PostLoadInit(class CSettler * a1) {
   
   return CWarMap::AddEntity(a1);
 }
@@ -72,7 +72,7 @@ void  CBuilderRole::PostLoadInit(class CSettler *) {
 
 // address=[0x1562ee0]
 // Decompiled from char __thiscall CBuilderRole::SetFree(CBuilderRole *this, struct CSettler *a2, int a3)
-bool  CBuilderRole::SetFree(class CSettler *,int) {
+bool  CBuilderRole::SetFree(class CSettler * a2, int a3) {
   
   int v3; // eax
   void **v4; // eax
@@ -121,7 +121,7 @@ bool  CBuilderRole::SetFree(class CSettler *,int) {
 
 // address=[0x1562ff0]
 // Decompiled from _DWORD *__thiscall CBuilderRole::CBuilderRole(char *this, int a2)
- CBuilderRole::CBuilderRole(std::istream &) {
+ CBuilderRole::CBuilderRole(std::istream & a2) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
@@ -149,7 +149,7 @@ bool  CBuilderRole::SetFree(class CSettler *,int) {
 
 // address=[0x15630c0]
 // Decompiled from int __thiscall CBuilderRole::Store(struct CPersistence *this, struct std::ostream *a2)
-void  CBuilderRole::Store(std::ostream &) {
+void  CBuilderRole::Store(std::ostream & a2) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
   struct CPersistence *v4; // [esp+4h] [ebp-4h]
@@ -181,7 +181,7 @@ int  CBuilderRole::GetSettlerRole(void)const {
 
 // address=[0x1563960]
 // Decompiled from CBuilderRole *__thiscall CBuilderRole::SetDir(CBuilderRole *this, char a2)
-void  CBuilderRole::SetDir(char) {
+void  CBuilderRole::SetDir(char a2) {
   
   CBuilderRole *result; // eax
 
@@ -193,7 +193,7 @@ void  CBuilderRole::SetDir(char) {
 
 // address=[0x1588440]
 // Decompiled from int __cdecl CBuilderRole::Load(int a1)
-static class CBuilderRole * __cdecl CBuilderRole::Load(std::istream &) {
+class CBuilderRole * __cdecl CBuilderRole::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
@@ -229,7 +229,7 @@ static class CBuilderRole * __cdecl CBuilderRole::Load(std::istream &) {
 
 // address=[0x1563170]
 // Decompiled from int __thiscall CBuilderRole::GetNextJob(CBuilderRole *this, struct CSettler *a2)
-void  CBuilderRole::GetNextJob(class CSettler *) {
+void  CBuilderRole::GetNextJob(class CSettler * a2) {
   
   CBuilderRole *v3; // [esp+0h] [ebp-4h]
 
@@ -243,7 +243,7 @@ void  CBuilderRole::GetNextJob(class CSettler *) {
 
 // address=[0x15631b0]
 // Decompiled from void __thiscall CBuilderRole::TakeJob(CBuilderRole *this, struct CSettler *a2)
-void  CBuilderRole::TakeJob(class CSettler *) {
+void  CBuilderRole::TakeJob(class CSettler * a2) {
   
   const struct CEntityTask *ActualTask; // eax
   CBuilding *v3; // eax
@@ -284,7 +284,7 @@ void  CBuilderRole::TakeJob(class CSettler *) {
 
 // address=[0x15632c0]
 // Decompiled from int __thiscall CBuilderRole::Init(int this, CPropertySet *a2)
-void  CBuilderRole::Init(class CSettler *) {
+void  CBuilderRole::Init(class CSettler * a2) {
   
   int result; // eax
 
@@ -310,7 +310,7 @@ void  CBuilderRole::Init(class CSettler *) {
 
 // address=[0x1563340]
 // Decompiled from CBuilderRole *__thiscall CBuilderRole::ConvertEventIntoGoal(  CBuilderRole *this,  struct CSettler *a2,  struct CEntityEvent *a3)
-void  CBuilderRole::ConvertEventIntoGoal(class CSettler *,class CEntityEvent *) {
+void  CBuilderRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent * a3) {
   
   int v3; // eax
   CBuilderRole *result; // eax

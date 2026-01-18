@@ -4,7 +4,7 @@
 
 // address=[0x1400040]
 // Decompiled from int __cdecl CCart::New(int a1)
-static class CPersistence * __cdecl CCart::New(std::istream &) {
+class CPersistence * __cdecl CCart::New(std::istream & a1) {
   
   if ( CCart::operator new(0x144u) )
     return CCart::CCart(a1);
@@ -71,7 +71,7 @@ bool  CCart::IsUnEmployed(void)const {
 
 // address=[0x1530c60]
 // Decompiled from int __thiscall CCart::Detach(CCart *this, int a2)
-void  CCart::Detach(int) {
+void  CCart::Detach(int a2) {
   
   (*(void (__thiscall **)(CCart *, int))(*(_DWORD *)this + 124))(this, a2);
   return CVehicle::Detach(this, a2);
@@ -80,7 +80,7 @@ void  CCart::Detach(int) {
 
 // address=[0x1530c90]
 // Decompiled from int __thiscall CCart::GetMeetingPointXY(int this, int a2, int a3)
-int const  CCart::GetMeetingPointXY(enum OBJ_TYPE,int) {
+int const  CCart::GetMeetingPointXY(enum OBJ_TYPE a2, int a3) {
   
   int v3; // esi
   int v4; // esi
@@ -117,7 +117,7 @@ int const  CCart::GetMeetingPointXY(enum OBJ_TYPE,int) {
 
 // address=[0x1530d90]
 // Decompiled from int __thiscall CCart::GetFrontMeetingPointXY(int this, int a2, int a3)
-int const  CCart::GetFrontMeetingPointXY(enum OBJ_TYPE,int) {
+int const  CCart::GetFrontMeetingPointXY(enum OBJ_TYPE a2, int a3) {
   
   int v3; // esi
   int v4; // esi
@@ -223,7 +223,7 @@ struct SGfxObjectInfo *  CCart::GetGfxInfos(void) {
 
 // address=[0x1531040]
 // Decompiled from _DWORD *__thiscall CCart::FillDialog(CCart *this, bool a2)
-void  CCart::FillDialog(bool) {
+void  CCart::FillDialog(bool a2) {
   
   int v2; // esi
   unsigned int v3; // eax
@@ -339,7 +339,7 @@ void  CCart::VehicleLogicUpdate(void) {
 
 // address=[0x15313e0]
 // Decompiled from void __thiscall CCart::EntityEnter(CCart *this, int a2)
-void  CCart::EntityEnter(int) {
+void  CCart::EntityEnter(int a2) {
   
   int v2; // eax
   int v3; // eax
@@ -403,7 +403,7 @@ void  CCart::EntityEnter(int) {
 
 // address=[0x1531620]
 // Decompiled from void __thiscall CCart::EntityOrderCanceled(CCart *this, unsigned int a2)
-void  CCart::EntityOrderCanceled(int) {
+void  CCart::EntityOrderCanceled(int a2) {
   
   _DWORD v2[4]; // [esp-Ch] [ebp-80h] BYREF
   _BYTE v3[12]; // [esp+4h] [ebp-70h] BYREF
@@ -473,7 +473,7 @@ void  CCart::EntityOrderCanceled(int) {
 
 // address=[0x1531810]
 // Decompiled from unsigned int __thiscall CCart::GoodIsComming(CCart *this, int a2, int a3)
-void  CCart::GoodIsComming(int,int) {
+void  CCart::GoodIsComming(int a2, int a3) {
   
   unsigned int result; // eax
   int v5; // [esp+4h] [ebp-8h]
@@ -509,7 +509,7 @@ void  CCart::GoodIsComming(int,int) {
 
 // address=[0x15318b0]
 // Decompiled from unsigned int __thiscall CCart::GoodArrived(CCart *this, int a2, int a3)
-void  CCart::GoodArrived(int,int) {
+void  CCart::GoodArrived(int a2, int a3) {
   
   unsigned int result; // eax
   unsigned int i; // [esp+0h] [ebp-Ch]
@@ -552,7 +552,7 @@ void  CCart::GoodArrived(int,int) {
 
 // address=[0x15319c0]
 // Decompiled from unsigned int __thiscall CCart::SupplyCanceled(CCart *this, int a2, int a3)
-void  CCart::SupplyCanceled(int,int) {
+void  CCart::SupplyCanceled(int a2, int a3) {
   
   unsigned int result; // eax
   int v4; // [esp+0h] [ebp-Ch]
@@ -832,7 +832,7 @@ void  CCart::ConvertEventIntoGoal(class CEntityEvent *) {
 
 // address=[0x15320b0]
 // Decompiled from void __thiscall CCart::Decrease(CCart *this, int a2)
-void  CCart::Decrease(int) {
+void  CCart::Decrease(int a2) {
   
   if ( *((_BYTE *)this + 216) )
   {
@@ -853,7 +853,7 @@ void  CCart::Decrease(int) {
 
 // address=[0x1532120]
 // Decompiled from int __thiscall CCart::GetGoodAmount(CCart *this, int a2)
-int  CCart::GetGoodAmount(int) {
+int  CCart::GetGoodAmount(int a2) {
   
   int v3; // [esp+4h] [ebp-8h]
   int i; // [esp+8h] [ebp-4h]
@@ -870,7 +870,7 @@ int  CCart::GetGoodAmount(int) {
 
 // address=[0x1532180]
 // Decompiled from int __thiscall CCart::AddGood(CCart *this, int a2, int a3)
-int  CCart::AddGood(int,int) {
+int  CCart::AddGood(int a2, int a3) {
   
   int v4; // [esp+0h] [ebp-18h]
   int v5; // [esp+4h] [ebp-14h]
@@ -919,7 +919,7 @@ int  CCart::AddGood(int,int) {
 
 // address=[0x1532340]
 // Decompiled from int __thiscall CCart::RemoveGood(CCart *this, int a2, int a3)
-int  CCart::RemoveGood(int,int) {
+int  CCart::RemoveGood(int a2, int a3) {
   
   int v4; // [esp+8h] [ebp-Ch]
   int i; // [esp+Ch] [ebp-8h]
@@ -948,7 +948,7 @@ int  CCart::RemoveGood(int,int) {
 
 // address=[0x1532450]
 // Decompiled from char __thiscall CCart::IsSpaceAvailable(CCart *this, int a2)
-bool  CCart::IsSpaceAvailable(int) {
+bool  CCart::IsSpaceAvailable(int a2) {
   
   int i; // [esp+4h] [ebp-4h]
 
@@ -965,7 +965,7 @@ bool  CCart::IsSpaceAvailable(int) {
 
 // address=[0x15324c0]
 // Decompiled from int __thiscall CCart::GetAvailableSpace(CCart *this, int a2)
-int  CCart::GetAvailableSpace(int) {
+int  CCart::GetAvailableSpace(int a2) {
   
   int v3; // [esp+0h] [ebp-Ch]
   int i; // [esp+8h] [ebp-4h]
@@ -1036,7 +1036,7 @@ bool  CCart::HasLoadedSomething(void) {
 
 // address=[0x15326f0]
 // Decompiled from void __thiscall CCart::SetTargetBuildingID(CMFCPopupMenu *this, struct CWnd *a2)
-void  CCart::SetTargetBuildingID(int) {
+void  CCart::SetTargetBuildingID(int a2) {
   
   *((_DWORD *)this + 77) = a2;
 }
@@ -1104,7 +1104,7 @@ void  CCart::TargetBuildingDestroyed(void) {
 
 // address=[0x1532860]
 // Decompiled from CCart *__thiscall CCart::SetDepartBuildingID(CCart *this, int a2)
-void  CCart::SetDepartBuildingID(int) {
+void  CCart::SetDepartBuildingID(int a2) {
   
   CCart *result; // eax
 
@@ -1268,7 +1268,7 @@ void  CCart::TryToGoHome(void) {
 
 // address=[0x1532bb0]
 // Decompiled from CCart *__thiscall CCart::SetJobType(CCart *this, int a2)
-void  CCart::SetJobType(int) {
+void  CCart::SetJobType(int a2) {
   
   CCart *result; // eax
 
@@ -1293,7 +1293,7 @@ int  CCart::GetJobType(void) {
 
 // address=[0x1532c10]
 // Decompiled from CCart *__thiscall CCart::SetGoToSource(CCart *this, bool a2)
-void  CCart::SetGoToSource(bool) {
+void  CCart::SetGoToSource(bool a2) {
   
   CCart *result; // eax
 
@@ -1305,7 +1305,7 @@ void  CCart::SetGoToSource(bool) {
 
 // address=[0x1532c30]
 // Decompiled from CCart *__thiscall CCart::SetGoToTarget(CCart *this, bool a2)
-void  CCart::SetGoToTarget(bool) {
+void  CCart::SetGoToTarget(bool a2) {
   
   CCart *result; // eax
 
@@ -1317,7 +1317,7 @@ void  CCart::SetGoToTarget(bool) {
 
 // address=[0x1532c50]
 // Decompiled from CCart *__thiscall CCart::SetNeutralTraderStatus(CCart *this, bool a2)
-void  CCart::SetNeutralTraderStatus(bool) {
+void  CCart::SetNeutralTraderStatus(bool a2) {
   
   CCart *result; // eax
 
@@ -1425,7 +1425,7 @@ void  CCart::OnBuildReady(void) {
 
 // address=[0x1532e30]
 // Decompiled from int __thiscall CCart::DonkeyArrived(CCart *this, unsigned int a2)
-void  CCart::DonkeyArrived(int) {
+void  CCart::DonkeyArrived(int a2) {
   
   int v2; // eax
   int v3; // eax
@@ -1502,7 +1502,7 @@ void  CCart::DeleteSelectable(void) {
 
 // address=[0x15335c0]
 // Decompiled from CCart *__thiscall CCart::CCart(CCart *this, int a2)
- CCart::CCart(std::istream &) {
+ CCart::CCart(std::istream & a2) {
   
   char v3; // [esp-10h] [ebp-B8h] BYREF
   int v4; // [esp-Ch] [ebp-B4h]
@@ -1636,7 +1636,7 @@ void  CCart::DeleteSelectable(void) {
 
 // address=[0x1533af0]
 // Decompiled from int __thiscall CCart::Store(char *this, struct std::ostream *a2)
-void  CCart::Store(std::ostream &) {
+void  CCart::Store(std::ostream & a2) {
   
   const struct CCart::CSettlerStatus *v2; // eax
   const struct CCart::CFoundationCardCargo *v3; // eax
@@ -1728,7 +1728,7 @@ unsigned long  CCart::ClassID(void)const {
 
 // address=[0x153a650]
 // Decompiled from int __thiscall CCart::UnloadToPosition(CPaneContainer *this, struct CPaneContainer *a2)
-void  CCart::UnloadToPosition(int) {
+void  CCart::UnloadToPosition(int a2) {
   
   IEntity::SetPosition(this, a2);
   (*(void (__thiscall **)(CPaneContainer *, struct CPaneContainer *))(*(_DWORD *)this + 196))(this, a2);
@@ -1743,7 +1743,7 @@ void  CCart::UnloadToPosition(int) {
 
 // address=[0x1533070]
 // Decompiled from CCart *__thiscall CCart::CCart(CCart *this, int a2, int a3, int a4, int a5, int a6, int a7, bool a8)
- CCart::CCart(int,int,int,int,int,int,bool) {
+ CCart::CCart(int a2, int a3, int a4, int a5, int a6, int a7, bool a8) {
   
   int i; // [esp+8h] [ebp-14h]
 
@@ -1924,7 +1924,7 @@ void  CCart::GetTurnGfxInfo(void) {
 
 // address=[0x1533560]
 // Decompiled from unsigned int __cdecl CCart::operator new(unsigned int a1)
-static void * __cdecl CCart::operator new(unsigned int) {
+void * __cdecl CCart::operator new(unsigned int a1) {
   
   return CVehicleMgr::Alloc((CVehicleMgr *)&g_cVehicleMgr, a1);
 }
@@ -1932,7 +1932,7 @@ static void * __cdecl CCart::operator new(unsigned int) {
 
 // address=[0x1533580]
 // Decompiled from void __cdecl CCart::operator delete(void *a1)
-static void __cdecl CCart::operator delete(void *) {
+void __cdecl CCart::operator delete(void * a1) {
   
   CVehicleMgr::Dealloc((CVehicleMgr *)&g_cVehicleMgr, a1);
 }
@@ -2532,7 +2532,7 @@ bool  CCart::HasEnoughGoodToCreateFoundationCart(void) {
 
 // address=[0x1534d80]
 // Decompiled from bool __thiscall CCart::WeAreWaitFor(CCart *this, int a2)
-bool  CCart::WeAreWaitFor(int) {
+bool  CCart::WeAreWaitFor(int a2) {
   
   unsigned int i; // [esp+Ch] [ebp-4h]
 
@@ -2552,7 +2552,7 @@ bool  CCart::WeAreWaitFor(int) {
 
 // address=[0x1534e50]
 // Decompiled from char __thiscall CCart::IsPioner(CCart *this, int a2)
-bool  CCart::IsPioner(int) {
+bool  CCart::IsPioner(int a2) {
   
   unsigned int i; // [esp+4h] [ebp-4h]
 
@@ -2570,7 +2570,7 @@ bool  CCart::IsPioner(int) {
 
 // address=[0x1534ec0]
 // Decompiled from char __thiscall CCart::IsCarrier(CCart *this, int a2)
-bool  CCart::IsCarrier(int) {
+bool  CCart::IsCarrier(int a2) {
   
   unsigned int i; // [esp+4h] [ebp-4h]
 

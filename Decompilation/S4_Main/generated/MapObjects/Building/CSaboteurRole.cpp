@@ -4,7 +4,7 @@
 
 // address=[0x1401b20]
 // Decompiled from int __cdecl CSaboteurRole::New(int a1)
-static class CPersistence * __cdecl CSaboteurRole::New(std::istream &) {
+class CPersistence * __cdecl CSaboteurRole::New(std::istream & a1) {
   
   if ( operator new(0x68u) )
     return CSaboteurRole::CSaboteurRole(a1);
@@ -15,7 +15,7 @@ static class CPersistence * __cdecl CSaboteurRole::New(std::istream &) {
 
 // address=[0x157c490]
 // Decompiled from int __thiscall CSaboteurRole::Init(_DWORD *this, CPropertySet *a2)
-void  CSaboteurRole::Init(class CSettler *) {
+void  CSaboteurRole::Init(class CSettler * a2) {
   
   int result; // eax
 
@@ -27,7 +27,7 @@ void  CSaboteurRole::Init(class CSettler *) {
 
 // address=[0x157c4c0]
 // Decompiled from int __thiscall CSaboteurRole::LogicUpdate(CSaboteurRole *this, struct CSettler *a2)
-void  CSaboteurRole::LogicUpdate(class CSettler *) {
+void  CSaboteurRole::LogicUpdate(class CSettler * a2) {
   
   int v2; // esi
   int v3; // eax
@@ -70,7 +70,7 @@ void  CSaboteurRole::LogicUpdate(class CSettler *) {
 
 // address=[0x157c5f0]
 // Decompiled from _DWORD *__thiscall CSaboteurRole::CSaboteurRole(_DWORD *this, int a2)
- CSaboteurRole::CSaboteurRole(std::istream &) {
+ CSaboteurRole::CSaboteurRole(std::istream & a2) {
   
   int pExceptionObject; // [esp+8h] [ebp-18h] BYREF
   int Version; // [esp+Ch] [ebp-14h]
@@ -104,7 +104,7 @@ void  CSaboteurRole::LogicUpdate(class CSettler *) {
 
 // address=[0x157c6d0]
 // Decompiled from int __thiscall CSaboteurRole::Store(int *this, struct std::ostream *a2)
-void  CSaboteurRole::Store(std::ostream &) {
+void  CSaboteurRole::Store(std::ostream & a2) {
   
   CSoldierRole::Store(a2);
   Serial::StoreVersion(a2, 3);
@@ -130,7 +130,7 @@ int  CSaboteurRole::GetSettlerRole(void)const {
 
 // address=[0x1588840]
 // Decompiled from int __cdecl CSaboteurRole::Load(int a1)
-static class CSaboteurRole * __cdecl CSaboteurRole::Load(std::istream &) {
+class CSaboteurRole * __cdecl CSaboteurRole::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
@@ -145,7 +145,7 @@ static class CSaboteurRole * __cdecl CSaboteurRole::Load(std::istream &) {
 
 // address=[0x157c720]
 // Decompiled from int __thiscall CSaboteurRole::WarriorTaskAttack(_DWORD *this, struct IEntity *a2, int a3, int a4)
-void  CSaboteurRole::WarriorTaskAttack(class IMovingEntity &,int,enum T_WARRIOR_ATTACK) {
+void  CSaboteurRole::WarriorTaskAttack(class IMovingEntity & a2, int a3, enum T_WARRIOR_ATTACK a4) {
   
   this[13] = CGameData::GetTickCounter(g_pGameData) + 45;
   if ( IEntity::FlagBits(a2, (EntityFlag)0x10000000u) )

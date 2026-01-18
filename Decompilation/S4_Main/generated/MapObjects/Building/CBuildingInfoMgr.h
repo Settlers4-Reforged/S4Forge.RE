@@ -1,10 +1,12 @@
 #ifndef CBUILDINGINFOMGR_H
 #define CBUILDINGINFOMGR_H
 
+#include "defines.h"
+
 class CBuildingInfoMgr {
 public:
     // address=[0x133ac00]
-    static struct SBuildingInfos const & __cdecl CBuildingInfoMgr::GetBuildingInfo(int,int);
+    static struct SBuildingInfos const & __cdecl CBuildingInfoMgr::GetBuildingInfo(int a1, int a2);
 
     // address=[0x1486f70]
     int  GetXMLVersion(void)const;
@@ -16,22 +18,22 @@ public:
      ~CBuildingInfoMgr(void);
 
     // address=[0x14eb930]
-    void  LoadInfo(bool);
+    void  LoadInfo(bool a2);
 
     // address=[0x14eb970]
-    bool  DbgCheckBuildingBits(int,int);
+    bool  DbgCheckBuildingBits(int a2, int a3);
 
     // address=[0x14ec5d0]
     void  DbgTraceProductionDelays(void);
 
     // address=[0x14f3cc0]
-    static bool __cdecl BuildingTypeExIsPort(int);
+    static bool __cdecl BuildingTypeExIsPort(int a1);
 
     // address=[0x14f3d00]
-    static bool __cdecl BuildingTypeExIsShipyard(int);
+    static bool __cdecl BuildingTypeExIsShipyard(int a1);
 
     // address=[0x1501110]
-    static struct STriggerInfos const & __cdecl CBuildingInfoMgr::GetTriggerInfo(int,int);
+    static struct STriggerInfos const & __cdecl CBuildingInfoMgr::GetTriggerInfo(int a1, int a2);
 
 private:
     // address=[0x14ec6c0]

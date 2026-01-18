@@ -1,6 +1,8 @@
 #ifndef ADVXMLPARSER_NODE_H
 #define ADVXMLPARSER_NODE_H
 
+#include "defines.h"
+
 namespace AdvXMLParser {
 
 class Node {
@@ -12,7 +14,7 @@ public:
     bool  IsNull(void)const;
 
     // address=[0x2f13420]
-     Node(class AdvXMLParser::NodeContainer &,std::string const &);
+     Node(class AdvXMLParser::NodeContainer & a2, std::string const & a3);
 
     // address=[0x2f13460]
     virtual  ~Node(void);
@@ -21,7 +23,7 @@ public:
     void  Delete(void);
 
     // address=[0x2f134a0]
-    virtual bool  IsKindOf(int)const;
+    virtual bool  IsKindOf(int a2)const;
 
     // address=[0x2f1e510]
     class AdvXMLParser::NodeContainer &  GetParent(void)const;

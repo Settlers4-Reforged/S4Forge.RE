@@ -4,7 +4,7 @@
 
 // address=[0x14011c0]
 // Decompiled from int __cdecl CManakopterHallRole::New(int a1)
-static class CPersistence * __cdecl CManakopterHallRole::New(std::istream &) {
+class CPersistence * __cdecl CManakopterHallRole::New(std::istream & a1) {
   
   if ( operator new(0x198u) )
     return CManakopterHallRole::CManakopterHallRole(a1);
@@ -15,7 +15,7 @@ static class CPersistence * __cdecl CManakopterHallRole::New(std::istream &) {
 
 // address=[0x14fdab0]
 // Decompiled from int __cdecl CManakopterHallRole::Load(int a1)
-static class CManakopterHallRole * __cdecl CManakopterHallRole::Load(std::istream &) {
+class CManakopterHallRole * __cdecl CManakopterHallRole::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
@@ -27,7 +27,7 @@ static class CManakopterHallRole * __cdecl CManakopterHallRole::Load(std::istrea
 
 // address=[0x150c8f0]
 // Decompiled from char *__thiscall CManakopterHallRole::CManakopterHallRole(char *this, int a2)
- CManakopterHallRole::CManakopterHallRole(std::istream &) {
+ CManakopterHallRole::CManakopterHallRole(std::istream & a2) {
   
   int v3; // [esp+4h] [ebp-1Ch] BYREF
   int pExceptionObject; // [esp+8h] [ebp-18h] BYREF
@@ -69,7 +69,7 @@ static class CManakopterHallRole * __cdecl CManakopterHallRole::Load(std::istrea
 
 // address=[0x150ca90]
 // Decompiled from int __thiscall CManakopterHallRole::Store(struct IBuildingRole *this, struct std::ostream *a2)
-void  CManakopterHallRole::Store(std::ostream &) {
+void  CManakopterHallRole::Store(std::ostream & a2) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
   int *v4; // [esp+4h] [ebp-4h]
@@ -116,7 +116,7 @@ void  CManakopterHallRole::Store(std::ostream &) {
 
 // address=[0x150cc60]
 // Decompiled from CManakopterHallRole *__thiscall CManakopterHallRole::LogicUpdate(CManakopterHallRole *this, struct CBuilding *a2)
-void  CManakopterHallRole::LogicUpdate(class CBuilding *) {
+void  CManakopterHallRole::LogicUpdate(class CBuilding * a2) {
   
   CManakopterHallRole *result; // eax
   unsigned int v3; // eax
@@ -223,7 +223,7 @@ void  CManakopterHallRole::LogicUpdate(class CBuilding *) {
 
 // address=[0x150d170]
 // Decompiled from int __thiscall CManakopterHallRole::FillGfxInfo(  CManakopterHallRole *this,  struct CBuilding *a2,  struct SGfxObjectInfo *a3)
-void  CManakopterHallRole::FillGfxInfo(class CBuilding *,struct SGfxObjectInfo &) {
+void  CManakopterHallRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo & a3) {
   
   int v3; // eax
   int v5; // [esp-Ch] [ebp-14h]
@@ -252,7 +252,7 @@ void  CManakopterHallRole::FillGfxInfo(class CBuilding *,struct SGfxObjectInfo &
 
 // address=[0x150d2b0]
 // Decompiled from int __thiscall CManakopterHallRole::PostLoadInit(CManakopterHallRole *this, struct CBuilding *a2)
-void  CManakopterHallRole::PostLoadInit(class CBuilding *) {
+void  CManakopterHallRole::PostLoadInit(class CBuilding * a2) {
   
   int v2; // eax
   int result; // eax
@@ -268,7 +268,7 @@ void  CManakopterHallRole::PostLoadInit(class CBuilding *) {
 
 // address=[0x150d2e0]
 // Decompiled from int __thiscall CManakopterHallRole::Init(CManakopterHallRole *this, struct CBuilding *a2)
-void  CManakopterHallRole::Init(class CBuilding *) {
+void  CManakopterHallRole::Init(class CBuilding * a2) {
   
   IBuildingRole::InitCommon((int)a2);
   *((_BYTE *)this + 4) = 2;
@@ -285,7 +285,7 @@ void  CManakopterHallRole::Init(class CBuilding *) {
 
 // address=[0x150d3b0]
 // Decompiled from char __thiscall CManakopterHallRole::SettlerEnter(CManakopterHallRole *this, struct CBuilding *a2, int a3)
-bool  CManakopterHallRole::SettlerEnter(class CBuilding *,int) {
+bool  CManakopterHallRole::SettlerEnter(class CBuilding * a2, int a3) {
   
   if ( BBSupportDbgReportF(
          2,
@@ -299,7 +299,7 @@ bool  CManakopterHallRole::SettlerEnter(class CBuilding *,int) {
 
 // address=[0x150d3f0]
 // Decompiled from int __thiscall CManakopterHallRole::GoodArrive(CManakopterHallRole *this, int a2)
-void  CManakopterHallRole::GoodArrive(int) {
+void  CManakopterHallRole::GoodArrive(int a2) {
   
   int result; // eax
 
@@ -366,7 +366,7 @@ int  CManakopterHallRole::GetMostRequiredGood(void) {
 
 // address=[0x150d570]
 // Decompiled from int __thiscall CManakopterHallRole::TeleportGoods(CManakopterHallRole *this, int a2, int a3)
-void  CManakopterHallRole::TeleportGoods(int,int) {
+void  CManakopterHallRole::TeleportGoods(int a2, int a3) {
   
   int result; // eax
 
@@ -400,7 +400,7 @@ void  CManakopterHallRole::TeleportGoods(int,int) {
 
 // address=[0x150d640]
 // Decompiled from char __thiscall CManakopterHallRole::TryMakingManakopter(CManakopterHallRole *this, struct CBuilding *a2)
-bool  CManakopterHallRole::TryMakingManakopter(class CBuilding *) {
+bool  CManakopterHallRole::TryMakingManakopter(class CBuilding * a2) {
   
   int v3; // eax
 
@@ -423,7 +423,7 @@ bool  CManakopterHallRole::TryMakingManakopter(class CBuilding *) {
 
 // address=[0x150d6f0]
 // Decompiled from char __thiscall CManakopterHallRole::CheatIfRequired(CManakopterHallRole *this, struct CBuilding *a2)
-bool  CManakopterHallRole::CheatIfRequired(class CBuilding *) {
+bool  CManakopterHallRole::CheatIfRequired(class CBuilding * a2) {
   
   int v2; // eax
   int v4; // eax
@@ -522,7 +522,7 @@ unsigned long  CManakopterHallRole::ClassID(void)const {
 
 // address=[0x150dd80]
 // Decompiled from void *__thiscall CManakopterHallRole::GetBuildingNeed(std::_Ref_count_base *this, const struct type_info *a2)
-int  CManakopterHallRole::GetBuildingNeed(int)const {
+int  CManakopterHallRole::GetBuildingNeed(int a2)const {
   
   return 0;
 }
@@ -538,7 +538,7 @@ int  CManakopterHallRole::GetBuildingRole(void) {
 
 // address=[0x150de40]
 // Decompiled from void *__thiscall CManakopterHallRole::GetPileIdWithGood(std::_Ref_count_base *this, const struct type_info *a2)
-int  CManakopterHallRole::GetPileIdWithGood(int)const {
+int  CManakopterHallRole::GetPileIdWithGood(int a2)const {
   
   return 0;
 }

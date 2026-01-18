@@ -4,7 +4,7 @@
 
 // address=[0x2f28860]
 // Decompiled from int __thiscall CConfigFile::CConfigFile(int this, wchar_t *FileName)
- CConfigFile::CConfigFile(wchar_t const *) {
+ CConfigFile::CConfigFile(wchar_t const * FileName) {
   
   _DWORD v4[26]; // [esp+Ch] [ebp-7Ch] BYREF
   int v5; // [esp+74h] [ebp-14h] BYREF

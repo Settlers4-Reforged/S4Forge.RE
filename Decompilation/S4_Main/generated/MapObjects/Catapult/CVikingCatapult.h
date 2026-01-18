@@ -1,22 +1,24 @@
 #ifndef CVIKINGCATAPULT_H
 #define CVIKINGCATAPULT_H
 
+#include "defines.h"
+
 class CVikingCatapult : public CCatapult {
 public:
     // address=[0x14027a0]
-    static class CPersistence * __cdecl New(std::istream &);
+    static class CPersistence * __cdecl New(std::istream & a1);
 
     // address=[0x153eeb0]
-    static void * __cdecl operator new(unsigned int);
+    static void * __cdecl operator new(unsigned int a1);
 
     // address=[0x153eed0]
-    static void __cdecl operator delete(void *);
+    static void __cdecl operator delete(void * a1);
 
     // address=[0x153ef10]
-     CVikingCatapult(std::istream &);
+     CVikingCatapult(std::istream & a2);
 
     // address=[0x153efd0]
-    virtual void  Store(std::ostream &);
+    virtual void  Store(std::ostream & a2);
 
     // address=[0x153fb00]
     virtual  ~CVikingCatapult(void);
@@ -25,14 +27,14 @@ public:
     virtual unsigned long  ClassID(void)const;
 
     // address=[0x153fdf0]
-    virtual void  IncreaseAmmo(int);
+    virtual void  IncreaseAmmo(int a2);
 
     // address=[0x3d8b874]
     static unsigned long m_iClassID;
 
 protected:
     // address=[0x153f010]
-     CVikingCatapult(int,int,int,int,int,int,bool);
+     CVikingCatapult(int a2, int a3, int a4, int a5, int a6, int a7, bool a8);
 
     // address=[0x153f060]
     virtual bool  EnoughAmmo(void)const;

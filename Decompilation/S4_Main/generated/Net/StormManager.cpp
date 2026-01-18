@@ -4,7 +4,7 @@
 
 // address=[0x164db60]
 // Decompiled from int StormManager::CreateInstance()
-static void __cdecl StormManager::CreateInstance(void) {
+void __cdecl StormManager::CreateInstance(void) {
   
   int result; // eax
   int v1; // [esp+8h] [ebp-14h]
@@ -29,7 +29,7 @@ static void __cdecl StormManager::CreateInstance(void) {
 
 // address=[0x164dc00]
 // Decompiled from void StormManager::DestroyInstance()
-static void __cdecl StormManager::DestroyInstance(void) {
+void __cdecl StormManager::DestroyInstance(void) {
   
   if ( StormManager::m_instance )
     delete (StormManager *)StormManager::m_instance;
@@ -38,7 +38,7 @@ static void __cdecl StormManager::DestroyInstance(void) {
 
 // address=[0x164dc40]
 // Decompiled from int StormManager::GetInstance()
-static class StormManager * __cdecl StormManager::GetInstance(void) {
+class StormManager * __cdecl StormManager::GetInstance(void) {
   
   return StormManager::m_instance;
 }
@@ -474,7 +474,7 @@ void  StormManager::LeaveSession(void) {
 
 // address=[0x164ef80]
 // Decompiled from void __thiscall StormManager::SetJoinAndDiscoveryOverride(StormManager *this, int a2)
-void  StormManager::SetJoinAndDiscoveryOverride(bool) {
+void  StormManager::SetJoinAndDiscoveryOverride(bool a2) {
   
   _DWORD *v2; // eax
   char v3; // [esp-A4h] [ebp-138h] BYREF
@@ -608,7 +608,7 @@ void  StormManager::DeleteSessionHandler(void) {
 
 // address=[0x164fc90]
 // Decompiled from void __thiscall StormManager::SetFreeSlotCount(StormManager *this, unsigned int a2)
-void  StormManager::SetFreeSlotCount(int) {
+void  StormManager::SetFreeSlotCount(int a2) {
   
   const struct storm::echo::SessionDescriptor *SessionDescriptor; // eax
   unsigned int v3; // [esp+4h] [ebp-340h] BYREF
@@ -657,7 +657,7 @@ int  StormManager::GetHostPeerId(void)const {
 
 // address=[0x164fdd0]
 // Decompiled from bool __thiscall StormManager::IsLocalPeerId(void *this, int a2)
-bool  StormManager::IsLocalPeerId(int)const {
+bool  StormManager::IsLocalPeerId(int a2)const {
   
   return StormManager::GetLocalPeerId(this) == a2;
 }

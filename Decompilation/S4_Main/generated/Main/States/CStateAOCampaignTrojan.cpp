@@ -4,7 +4,7 @@
 
 // address=[0x14a0fc0]
 // Decompiled from CStateAOCampaignTrojan *__cdecl CStateAOCampaignTrojan::DynamicCreateFunc(void *a1)
-static class CGameState * __cdecl CStateAOCampaignTrojan::DynamicCreateFunc(void *) {
+class CGameState * __cdecl CStateAOCampaignTrojan::DynamicCreateFunc(void * a1) {
   
   CStateAOCampaignTrojan *C; // [esp+Ch] [ebp-10h]
 
@@ -80,7 +80,7 @@ bool  CStateAOCampaignTrojan::Perform(void) {
 
 // address=[0x14a1240]
 // Decompiled from char __thiscall CStateAOCampaignTrojan::OnEvent(CStateAOCampaignTrojan *this, struct CEvn_Event *a2)
-bool  CStateAOCampaignTrojan::OnEvent(class CEvn_Event &) {
+bool  CStateAOCampaignTrojan::OnEvent(class CEvn_Event & a2) {
   
   CEvn_Event *v3; // [esp+8h] [ebp-3Ch]
   int wparam; // [esp+14h] [ebp-30h]

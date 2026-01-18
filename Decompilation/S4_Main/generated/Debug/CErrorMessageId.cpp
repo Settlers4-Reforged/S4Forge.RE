@@ -4,7 +4,7 @@
 
 // address=[0x14810b0]
 // Decompiled from int *__thiscall CErrorMessageId::CErrorMessageId(int *this, char *Str1)
- CErrorMessageId::CErrorMessageId(char const *) {
+ CErrorMessageId::CErrorMessageId(char const * Str1) {
   
   int i; // [esp+8h] [ebp-4h]
 

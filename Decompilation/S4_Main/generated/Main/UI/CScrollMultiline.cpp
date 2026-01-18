@@ -12,7 +12,7 @@
 
 // address=[0x13da4c0]
 // Decompiled from CScrollMultiline *__thiscall CScrollMultiline::CScrollMultiline(  CScrollMultiline *this,  int a2,  int a3,  int a4,  int a5,  int a6)
- CScrollMultiline::CScrollMultiline(int,int,int,int,int) {
+ CScrollMultiline::CScrollMultiline(int a2, int a3, int a4, int a5, int a6) {
   
   int i; // [esp+0h] [ebp-8h]
 
@@ -65,7 +65,7 @@ void  CScrollMultiline::ScrollDown(void) {
 
 // address=[0x13da610]
 // Decompiled from char __thiscall CScrollMultiline::SetText(_DWORD *this, int a2)
-void  CScrollMultiline::SetText(char const *) {
+void  CScrollMultiline::SetText(char const * a2) {
   
   this[507] = a2;
   CScrollMultiline::SplitText(this);
@@ -76,7 +76,7 @@ void  CScrollMultiline::SetText(char const *) {
 
 // address=[0x13da090]
 // Decompiled from unsigned __int8 *__thiscall CScrollMultiline::GetWrapPointer(int *this, char *Str)
-unsigned char *  CScrollMultiline::GetWrapPointer(unsigned char *) {
+unsigned char *  CScrollMultiline::GetWrapPointer(unsigned char * Str) {
   
   char *v3; // [esp+0h] [ebp-20h]
   int v4; // [esp+4h] [ebp-1Ch]

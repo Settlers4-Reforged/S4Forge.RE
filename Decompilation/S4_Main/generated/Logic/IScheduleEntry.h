@@ -1,6 +1,8 @@
 #ifndef ISCHEDULEENTRY_H
 #define ISCHEDULEENTRY_H
 
+#include "defines.h"
+
 class IScheduleEntry : public CDynListEntry {
 public:
     // address=[0x2f4f510]

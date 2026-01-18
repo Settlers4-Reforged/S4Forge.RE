@@ -14,7 +14,7 @@
 
 // address=[0x2f416d0]
 // Decompiled from CDynListEntry *__thiscall CReserveEntry::CReserveEntry(CDynListEntry *this, int a2, int a3, int a4)
- CReserveEntry::CReserveEntry(enum BUILDING_TYPES,int,int) {
+ CReserveEntry::CReserveEntry(enum BUILDING_TYPES a2, int a3, int a4) {
   
   CDynListEntry::CDynListEntry(this);
   *(_DWORD *)this = &CReserveEntry::_vftable_;

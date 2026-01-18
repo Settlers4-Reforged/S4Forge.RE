@@ -12,7 +12,7 @@ bool  CMissionCD::IsExtraInstalledEx(void) {
 
 // address=[0x1481b60]
 // Decompiled from char __thiscall CMissionCD::EnsureExtraGUI(CMissionCD *this, int a2, bool (__cdecl *a3)(int, int, int))
-void  CMissionCD::EnsureExtraGUI(int,bool (__cdecl*)(int,int,int)) {
+void  CMissionCD::EnsureExtraGUI(int a2, bool (__cdecl*)(int,int,int) a3) {
   
   if ( !*((_DWORD *)this + 1) )
     CExtraCD::LoadMenuData((wchar_t *)L"Menu\\GuiSetMDStartscreens.dat");

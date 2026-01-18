@@ -4,7 +4,7 @@
 
 // address=[0x2f14e80]
 // Decompiled from AdvXMLParser::EntityRef *__thiscall AdvXMLParser::EntityRef::EntityRef(AdvXMLParser::EntityRef *this, int a2)
- AdvXMLParser::EntityRef::EntityRef(std::string const &) {
+ AdvXMLParser::EntityRef::EntityRef(std::string const & a2) {
   
   _BYTE pExceptionObject[32]; // [esp+8h] [ebp-30h] BYREF
   int v5; // [esp+34h] [ebp-4h]
@@ -23,7 +23,7 @@
 
 // address=[0x2f14f30]
 // Decompiled from AdvXMLParser::EntityRef *__thiscall AdvXMLParser::EntityRef::EntityRef(AdvXMLParser::EntityRef *this, int a2, int a3)
- AdvXMLParser::EntityRef::EntityRef(class AdvXMLParser::NodeContainer &,std::string const &) {
+ AdvXMLParser::EntityRef::EntityRef(class AdvXMLParser::NodeContainer & a2, std::string const & a3) {
   
   AdvXMLParser::Reference::Reference(a2, a3);
   *(_DWORD *)this = &AdvXMLParser::EntityRef::_vftable_;
@@ -35,7 +35,7 @@
 
 // address=[0x2f14fa0]
 // Decompiled from int __thiscall AdvXMLParser::EntityRef::Clone(AdvXMLParser::EntityRef *this, struct AdvXMLParser::NodeContainer *a2)
-class AdvXMLParser::EntityRef *  AdvXMLParser::EntityRef::Clone(class AdvXMLParser::NodeContainer &)const {
+class AdvXMLParser::EntityRef *  AdvXMLParser::EntityRef::Clone(class AdvXMLParser::NodeContainer & a2)const {
   
   int Name; // eax
   int v4; // [esp+4h] [ebp-24h]
@@ -66,7 +66,7 @@ class AdvXMLParser::EntityRef *  AdvXMLParser::EntityRef::Clone(class AdvXMLPars
 
 // address=[0x2f15050]
 // Decompiled from int __thiscall AdvXMLParser::EntityRef::GetData(char *this, int a2)
-std::string  AdvXMLParser::EntityRef::GetData(void)const {
+std::string  AdvXMLParser::EntityRef::GetData(void a2)const {
   
   std::string::string(1u, this[36]);
   return a2;
@@ -75,7 +75,7 @@ std::string  AdvXMLParser::EntityRef::GetData(void)const {
 
 // address=[0x2f15090]
 // Decompiled from int __thiscall AdvXMLParser::EntityRef::GetValue(char *this, int a2)
-std::string  AdvXMLParser::EntityRef::GetValue(void)const {
+std::string  AdvXMLParser::EntityRef::GetValue(void a2)const {
   
   std::string::string(1u, this[36]);
   return a2;
@@ -84,7 +84,7 @@ std::string  AdvXMLParser::EntityRef::GetValue(void)const {
 
 // address=[0x2f150d0]
 // Decompiled from int __thiscall AdvXMLParser::EntityRef::CloneNode(  AdvXMLParser::EntityRef *this,  struct AdvXMLParser::NodeContainer *a2)
-class AdvXMLParser::Node *  AdvXMLParser::EntityRef::CloneNode(class AdvXMLParser::NodeContainer &)const {
+class AdvXMLParser::Node *  AdvXMLParser::EntityRef::CloneNode(class AdvXMLParser::NodeContainer & a2)const {
   
   return AdvXMLParser::EntityRef::Clone(this, a2);
 }
@@ -100,7 +100,7 @@ class AdvXMLParser::Node *  AdvXMLParser::EntityRef::CloneNode(class AdvXMLParse
 
 // address=[0x2f23b40]
 // Decompiled from int __cdecl AdvXMLParser::EntityRef::Parse(struct AdvXMLParser::Parser *a1, struct AdvXMLParser::NodeContainer *a2)
-static class AdvXMLParser::EntityRef * __cdecl AdvXMLParser::EntityRef::Parse(class AdvXMLParser::Parser &,class AdvXMLParser::NodeContainer &) {
+class AdvXMLParser::EntityRef * __cdecl AdvXMLParser::EntityRef::Parse(class AdvXMLParser::Parser & a1, class AdvXMLParser::NodeContainer & a2) {
   
   AdvXMLParser::EntityRef *v3; // eax
   int v4; // [esp+4h] [ebp-40h]
@@ -139,7 +139,7 @@ static class AdvXMLParser::EntityRef * __cdecl AdvXMLParser::EntityRef::Parse(cl
 
 // address=[0x2f2cfe0]
 // Decompiled from int __thiscall AdvXMLParser::EntityRef::GenerateXML(  AdvXMLParser::EntityRef *this,  struct AdvXMLParser::GenerateContext *a2)
-void  AdvXMLParser::EntityRef::GenerateXML(class AdvXMLParser::GenerateContext &)const {
+void  AdvXMLParser::EntityRef::GenerateXML(class AdvXMLParser::GenerateContext & a2)const {
   
   int Name; // eax
 

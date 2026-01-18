@@ -1,28 +1,30 @@
 #ifndef CGAMESCRIPTMANAGER_H
 #define CGAMESCRIPTMANAGER_H
 
+#include "defines.h"
+
 class CGameScriptManager : public IS4ChunkObject {
 public:
     // address=[0x131ec80]
     class CLua &  GetScriptEnv(void);
 
     // address=[0x1439ca0]
-    void  SendGameEvent(int,int);
+    void  SendGameEvent(int a2, int a3);
 
     // address=[0x1470c10]
-    void  SendGameEvent(int,int,int,int,int);
+    void  SendGameEvent(int a2, int a3, int a4, int a5, int a6);
 
     // address=[0x147e750]
-    void  SendGameEvent(int);
+    void  SendGameEvent(int a2);
 
     // address=[0x147e7c0]
-    void  SendGameEvent(int,int,int);
+    void  SendGameEvent(int a2, int a3, int a4);
 
     // address=[0x147e840]
-    void  SendGameEvent(int,int,int,int);
+    void  SendGameEvent(int a2, int a3, int a4, int a5);
 
     // address=[0x14875a0]
-    void  SetVictoryConditionHook(void (__cdecl*)(void));
+    void  SetVictoryConditionHook(void (__cdecl*)(void) a2);
 
     // address=[0x15feea0]
      CGameScriptManager(void);
@@ -34,41 +36,41 @@ public:
     void  Update(unsigned int);
 
     // address=[0x15ff140]
-    void  NewGame(char const *,unsigned int);
+    void  NewGame(char const * Src, unsigned int Size);
 
     // address=[0x15ff1f0]
-    void  NewGameEx(char const *,unsigned int,wchar_t const *,bool);
+    void  NewGameEx(char const * Src, unsigned int Size, wchar_t const * Source, bool a5);
 
     // address=[0x15ff6c0]
-    virtual void  Load(class IS4Chunk &);
+    virtual void  Load(class IS4Chunk & a2);
 
     // address=[0x15ff800]
-    virtual void  Save(class IS4Chunk &);
+    virtual void  Save(class IS4Chunk & a2);
 
     // address=[0x15ff890]
     void  StartScript(void);
 
     // address=[0x15ff960]
-    void  CreateStartResources(int,int,int,int,int);
+    void  CreateStartResources(int a2, int a3, int a4, int a5, int a6);
 
     // address=[0x15ffaf0]
-    void  SetGlobal(char const *,int);
+    void  SetGlobal(char const * Str, int a3);
 
     // address=[0x16026c0]
-    void  NewGame(class IScriptFile &);
+    void  NewGame(class IScriptFile & a2);
 
     // address=[0x1602700]
     void  NewGame(void);
 
 protected:
     // address=[0x15ffb30]
-    bool  LoadMapScript(char const *,unsigned int);
+    bool  LoadMapScript(char const * Src, unsigned int Size);
 
     // address=[0x15ffc30]
-    void  LoadState(class IS4Chunk &);
+    void  LoadState(class IS4Chunk & a2);
 
     // address=[0x15ffd30]
-    void  SaveState(class IS4Chunk &);
+    void  SaveState(class IS4Chunk & a2);
 
     // address=[0x15ffe00]
     void  ExecuteScript(void);
@@ -89,31 +91,31 @@ protected:
     void  Done(void);
 
     // address=[0x1600230]
-    void  SendGameEventCall(int);
+    void  SendGameEventCall(int a2);
 
     // address=[0x1600370]
-    void  SendGameEventCall(int,int);
+    void  SendGameEventCall(int a2, int a3);
 
     // address=[0x16004b0]
-    void  SendGameEventCall(int,int,int);
+    void  SendGameEventCall(int a2, int a3, int a4);
 
     // address=[0x16005f0]
-    void  SendGameEventCall(int,int,int,int);
+    void  SendGameEventCall(int a2, int a3, int a4, int a5);
 
     // address=[0x1600730]
-    void  SendGameEventCall(int,int,int,int,int);
+    void  SendGameEventCall(int a2, int a3, int a4, int a5, int a6);
 
     // address=[0x1600880]
-    void  GetSaveVarValues(double *,int);
+    void  GetSaveVarValues(double * a2, int a3);
 
     // address=[0x1600970]
-    void  SetSaveVarValues(double *,int);
+    void  SetSaveVarValues(double * a2, int a3);
 
     // address=[0x1600a60]
-    void  RequestEvent(int,int);
+    void  RequestEvent(int a2, int a3);
 
     // address=[0x1600ab0]
-    void  UnrequestEvent(int,int);
+    void  UnrequestEvent(int a2, int a3);
 
     // address=[0x1600b00]
     static void __cdecl LuaRequestEvent(void);

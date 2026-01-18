@@ -1,43 +1,45 @@
 #ifndef CDARKTEMPLEROLE_H
 #define CDARKTEMPLEROLE_H
 
+#include "defines.h"
+
 class CDarkTempleRole : public IBuildingRole {
 public:
     // address=[0x14002c0]
-    static class CPersistence * __cdecl New(std::istream &);
+    static class CPersistence * __cdecl New(std::istream & a1);
 
     // address=[0x14fd970]
-    static class CDarkTempleRole * __cdecl Load(std::istream &);
+    static class CDarkTempleRole * __cdecl Load(std::istream & a1);
 
     // address=[0x1508260]
      CDarkTempleRole(void);
 
     // address=[0x1508360]
-    virtual void  LogicUpdate(class CBuilding *);
+    virtual void  LogicUpdate(class CBuilding * a2);
 
     // address=[0x15084c0]
-    virtual void  FillGfxInfo(class CBuilding *,struct SGfxObjectInfo &);
+    virtual void  FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo & a3);
 
     // address=[0x1508510]
-    virtual void  Init(class CBuilding *);
+    virtual void  Init(class CBuilding * a2);
 
     // address=[0x1508610]
-    virtual void  PostLoadInit(class CBuilding *);
+    virtual void  PostLoadInit(class CBuilding * a2);
 
     // address=[0x1508690]
-    virtual bool  SettlerEnter(class CBuilding *,int);
+    virtual bool  SettlerEnter(class CBuilding * a2, int a3);
 
     // address=[0x1508820]
-    void  TakeOrder(int,int);
+    void  TakeOrder(int a2, int a3);
 
     // address=[0x15089c0]
-    int  ProduceMushroomFarmer(class CBuilding *);
+    int  ProduceMushroomFarmer(class CBuilding * a2);
 
     // address=[0x15089f0]
-     CDarkTempleRole(std::istream &);
+     CDarkTempleRole(std::istream & a2);
 
     // address=[0x1508bd0]
-    virtual void  Store(std::ostream &);
+    virtual void  Store(std::ostream & a2);
 
     // address=[0x1509b60]
     virtual  ~CDarkTempleRole(void);
@@ -49,35 +51,35 @@ public:
     virtual void  FillDialog(class CBuilding *,bool);
 
     // address=[0x1509f60]
-    virtual int  GetBuildingNeed(int)const;
+    virtual int  GetBuildingNeed(int a2)const;
 
     // address=[0x1509f80]
     virtual int  GetBuildingRole(void);
 
     // address=[0x1509fa0]
-    virtual int  GetPileIdWithGood(int)const;
+    virtual int  GetPileIdWithGood(int a2)const;
 
     // address=[0x1509fc0]
-    virtual void  GoodArrive(int);
+    virtual void  GoodArrive(int a2);
 
     // address=[0x3d8b128]
     static unsigned long m_iClassID;
 
 private:
     // address=[0x1508ce0]
-    void  Produce(class CBuilding *);
+    void  Produce(class CBuilding * a2);
 
     // address=[0x1508f70]
-    void  AttackEnemies(class CBuilding *);
+    void  AttackEnemies(class CBuilding * a2);
 
     // address=[0x1509350]
-    void  ShowFireRing(int,int,int,int);
+    void  ShowFireRing(int a2, int a3, int a4, int a5);
 
     // address=[0x1509450]
-    void  ServantManagement(class CBuilding *);
+    void  ServantManagement(class CBuilding * a2);
 
     // address=[0x15094f0]
-    int  AddSettlerToWorld(int,int,int);
+    int  AddSettlerToWorld(int a2, int a3, int a4);
 
     // address=[0x1509f10]
     virtual void  ConvertEventIntoGoal(class CBuilding *,class CEntityEvent *);

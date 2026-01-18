@@ -4,7 +4,7 @@
 
 // address=[0x15b1d30]
 // Decompiled from int __thiscall CClientList::GetPlayerIP(CClientList *this, int a2)
-long  CClientList::GetPlayerIP(int) {
+long  CClientList::GetPlayerIP(int a2) {
   
   CClient *v2; // eax
 
@@ -15,7 +15,7 @@ long  CClientList::GetPlayerIP(int) {
 
 // address=[0x15b1d60]
 // Decompiled from int __thiscall CClientList::GetPlayerPeerId(CClientList *this, int a2)
-unsigned int  CClientList::GetPlayerPeerId(int) {
+unsigned int  CClientList::GetPlayerPeerId(int a2) {
   
   pairNode *v2; // eax
 
@@ -26,7 +26,7 @@ unsigned int  CClientList::GetPlayerPeerId(int) {
 
 // address=[0x15b1d90]
 // Decompiled from char __thiscall CClientList::ContainsPeerId(CClientList *this, int a2)
-bool  CClientList::ContainsPeerId(unsigned int) {
+bool  CClientList::ContainsPeerId(unsigned int a2) {
   
   unsigned int v2; // eax
   const struct CClient *v3; // eax
@@ -61,7 +61,7 @@ bool  CClientList::ContainsPeerId(unsigned int) {
 
 // address=[0x15b1e50]
 // Decompiled from char __thiscall CClientList::Add(CClientList *this, int a2, int a3, unsigned int a4)
-bool  CClientList::Add(unsigned int,int,int) {
+bool  CClientList::Add(unsigned int a2, int a3, int a4) {
   
   char v5; // [esp-10h] [ebp-78h] BYREF
   int v6; // [esp-Ch] [ebp-74h]
@@ -103,7 +103,7 @@ bool  CClientList::Add(unsigned int,int,int) {
 
 // address=[0x15b1f30]
 // Decompiled from int __thiscall CClientList::GetPlayerPing(CDaoIndexFieldInfo *this, unsigned int a2)
-unsigned int  CClientList::GetPlayerPing(unsigned int) {
+unsigned int  CClientList::GetPlayerPing(unsigned int a2) {
   
   int v2; // eax
   CClient *v4; // [esp+0h] [ebp-8h]
@@ -147,7 +147,7 @@ int  CClientList::CreateNewPlayerID(void) {
 
 // address=[0x15b2000]
 // Decompiled from char __thiscall CClientList::RemoveClientAt(char *this, unsigned int a2)
-bool  CClientList::RemoveClientAt(int) {
+bool  CClientList::RemoveClientAt(int a2) {
   
   _DWORD v3[4]; // [esp-Ch] [ebp-48h] BYREF
   _BYTE v4[12]; // [esp+4h] [ebp-38h] BYREF
@@ -178,7 +178,7 @@ bool  CClientList::RemoveClientAt(int) {
 
 // address=[0x15b20c0]
 // Decompiled from char __thiscall CClientList::RemoveClientPeerId(CClientList *this, int a2)
-bool  CClientList::RemoveClientPeerId(unsigned int) {
+bool  CClientList::RemoveClientPeerId(unsigned int a2) {
   
   _DWORD *v2; // eax
   _DWORD v4[4]; // [esp-Ch] [ebp-5Ch] BYREF
@@ -245,7 +245,7 @@ bool  CClientList::AllClientsReady(void) {
 
 // address=[0x15b2220]
 // Decompiled from CClient *__thiscall CClientList::SetClientReadyFromPeerId(CClientList *this, int a2, bool a3)
-void  CClientList::SetClientReadyFromPeerId(unsigned int,bool) {
+void  CClientList::SetClientReadyFromPeerId(unsigned int a2, bool a3) {
   
   unsigned int v3; // eax
   const struct CClient *v4; // eax
@@ -282,7 +282,7 @@ void  CClientList::SetClientReadyFromPeerId(unsigned int,bool) {
 
 // address=[0x15b2320]
 // Decompiled from int __thiscall CClientList::GetClientIndexPerPeerId(CClientList *this, int a2)
-int  CClientList::GetClientIndexPerPeerId(unsigned int) {
+int  CClientList::GetClientIndexPerPeerId(unsigned int a2) {
   
   unsigned int v2; // eax
   const struct CClient *v3; // eax
@@ -325,7 +325,7 @@ int  CClientList::GetSize(void) {
 
 // address=[0x15c4d90]
 // Decompiled from CClient *__thiscall CClientList::SetClientLastAck(CClientList *this, unsigned int a2, unsigned int a3)
-void  CClientList::SetClientLastAck(unsigned int,unsigned int) {
+void  CClientList::SetClientLastAck(unsigned int a2, unsigned int a3) {
   
   CClient *v3; // eax
 

@@ -4,7 +4,7 @@
 
 // address=[0x1498520]
 // Decompiled from void *__thiscall CMapGeneratorHost::Init(void **this, int a2)
-void  CMapGeneratorHost::Init(int) {
+void  CMapGeneratorHost::Init(int a2) {
   
   void *result; // eax
   int i; // [esp+8h] [ebp-8h]
@@ -65,7 +65,7 @@ void  CMapGeneratorHost::UpdateGroundInformation(void) {
 
 // address=[0x1498720]
 // Decompiled from char __thiscall CMapGeneratorHost::SetObject(CMapGeneratorHost *this, Grid *a2, int a3, int a4)
-bool  CMapGeneratorHost::SetObject(int,int,int) {
+bool  CMapGeneratorHost::SetObject(int a2, int a3, int a4) {
   
   char *v5; // [esp+4h] [ebp-6Ch]
   int v6; // [esp+8h] [ebp-68h]
@@ -166,7 +166,7 @@ bool  CMapGeneratorHost::SetObject(int,int,int) {
 
 // address=[0x1498b10]
 // Decompiled from int __thiscall CMapGeneratorHost::SetPlayerStartPosition(CMapGeneratorHost *this, int a2, int a3, int a4)
-void  CMapGeneratorHost::SetPlayerStartPosition(int,int,int) {
+void  CMapGeneratorHost::SetPlayerStartPosition(int a2, int a3, int a4) {
   
   int result; // eax
 
@@ -268,7 +268,7 @@ void  CMapGeneratorHost::ClearRandomMapInfo(void) {
 
 // address=[0x1498d70]
 // Decompiled from int __thiscall CMapGeneratorHost::UploadChunks(void **this, struct S4::CMapFile *a2)
-void  CMapGeneratorHost::UploadChunks(class S4::CMapFile &) {
+void  CMapGeneratorHost::UploadChunks(class S4::CMapFile & a2) {
   
   S4::CMapFile::UploadBuffer(1, 0, this + 72, 0x18u, 0);
   S4::CMapFile::UploadBuffer(13, 0, this[78], 4 * (_DWORD)this[2], 0);
@@ -279,7 +279,7 @@ void  CMapGeneratorHost::UploadChunks(class S4::CMapFile &) {
 
 // address=[0x1498e00]
 // Decompiled from int __thiscall CMapGeneratorHost::RefreshShading(CMapGeneratorHost *this, int a2)
-void  CMapGeneratorHost::RefreshShading(int) {
+void  CMapGeneratorHost::RefreshShading(int a2) {
   
   int result; // eax
   int v3; // [esp+0h] [ebp-1Ch]

@@ -4,7 +4,7 @@
 
 // address=[0x1315360]
 // Decompiled from char __thiscall CGenericSettlerIterator::Init(CGenericSettlerIterator *this, int a2, int a3, int a4)
-bool  CGenericSettlerIterator::Init(int,int,int) {
+bool  CGenericSettlerIterator::Init(int a2, int a3, int a4) {
   
   CSettlerIteratorBase::Init((CGenericSettlerIterator *)((char *)this + 20), 0);
   if ( CPlayerIterator::Init(this, a2) )

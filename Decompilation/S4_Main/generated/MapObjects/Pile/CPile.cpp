@@ -12,7 +12,7 @@ bool  CPile::GoodAvailable(void)const {
 
 // address=[0x1401580]
 // Decompiled from int __cdecl CPile::New(int a1)
-static class CPersistence * __cdecl CPile::New(std::istream &) {
+class CPersistence * __cdecl CPile::New(std::istream & a1) {
   
   if ( CPile::operator new(0x7Cu) )
     return CPile::CPile(a1);
@@ -39,7 +39,7 @@ int  CPile::AmountLeaving(void)const {
 
 // address=[0x14708e0]
 // Decompiled from int __thiscall CPile::ChangeGoodTypeUnforseen(CPile *this, int a2)
-bool  CPile::ChangeGoodTypeUnforseen(int) {
+bool  CPile::ChangeGoodTypeUnforseen(int a2) {
   
   int v2; // eax
 
@@ -91,7 +91,7 @@ class IPileRole &  CPile::Role(void) {
 
 // address=[0x151fad0]
 // Decompiled from CPile *__thiscall CPile::SetGoodType(CPile *this, char a2)
-void  CPile::SetGoodType(int) {
+void  CPile::SetGoodType(int a2) {
   
   CPile *result; // eax
 
@@ -111,7 +111,7 @@ bool  CPile::HasSpace(void)const {
 
 // address=[0x155b300]
 // Decompiled from void __thiscall CPile::OfferCompletePileIfPossible(CPile *this, int a2)
-void  CPile::OfferCompletePileIfPossible(int) {
+void  CPile::OfferCompletePileIfPossible(int a2) {
   
   CPile::Offer(this, -1, a2);
 }
@@ -119,7 +119,7 @@ void  CPile::OfferCompletePileIfPossible(int) {
 
 // address=[0x155b340]
 // Decompiled from CPile *__thiscall CPile::SetOfferFlag(CPile *this, bool a2)
-void  CPile::SetOfferFlag(bool) {
+void  CPile::SetOfferFlag(bool a2) {
   
   CPile *result; // eax
 
@@ -131,7 +131,7 @@ void  CPile::SetOfferFlag(bool) {
 
 // address=[0x155b360]
 // Decompiled from CPile *__thiscall CPile::SetRoleType(CPile *this, char a2)
-void  CPile::SetRoleType(int) {
+void  CPile::SetRoleType(int a2) {
   
   CPile *result; // eax
 
@@ -259,7 +259,7 @@ struct SGfxObjectInfo *  CPile::GetGfxInfos(void) {
 
 // address=[0x155bfa0]
 // Decompiled from CPile *__thiscall CPile::GetPatchGfx(CPile *this, struct SGfxPatchObject *a2)
-void  CPile::GetPatchGfx(struct SGfxPatchObject &) {
+void  CPile::GetPatchGfx(struct SGfxPatchObject & a2) {
   
   CPile *result; // eax
 
@@ -286,7 +286,7 @@ void  CPile::GetPatchGfx(struct SGfxPatchObject &) {
 
 // address=[0x155c030]
 // Decompiled from int __thiscall CPile::ChangeRole(CPile *this, int a2)
-void  CPile::ChangeRole(int) {
+void  CPile::ChangeRole(int a2) {
   
   int v2; // eax
   struct IPileRole *PileRole; // [esp+4h] [ebp-20h]
@@ -321,7 +321,7 @@ void  CPile::ChangeRole(int) {
 
 // address=[0x155c130]
 // Decompiled from int __thiscall CPile::IncreaseUnforeseen(CPile *this, int a2)
-int  CPile::IncreaseUnforeseen(int) {
+int  CPile::IncreaseUnforeseen(int a2) {
   
   int v3; // eax
   int v4; // [esp+4h] [ebp-8h]
@@ -362,7 +362,7 @@ int  CPile::IncreaseUnforeseen(int) {
 
 // address=[0x155c2a0]
 // Decompiled from CPile *__thiscall CPile::DecreaseUnforeseen(CPile *this, int a2)
-void  CPile::DecreaseUnforeseen(int) {
+void  CPile::DecreaseUnforeseen(int a2) {
   
   CPile *result; // eax
   int v3; // [esp+0h] [ebp-10h]
@@ -416,7 +416,7 @@ void  CPile::DecreaseUnforeseen(int) {
 
 // address=[0x155c430]
 // Decompiled from int __thiscall CPile::ForceAmountLeaving(CPile *this, int a2, int a3)
-bool  CPile::ForceAmountLeaving(int,int) {
+bool  CPile::ForceAmountLeaving(int a2, int a3) {
   
   return CPile::GoodAvailable(this);
 }
@@ -424,7 +424,7 @@ bool  CPile::ForceAmountLeaving(int,int) {
 
 // address=[0x155c580]
 // Decompiled from CPile *__thiscall CPile::SetBuildingId(CPile *this, int a2)
-void  CPile::SetBuildingId(int) {
+void  CPile::SetBuildingId(int a2) {
   
   int v2; // eax
   CPile *result; // eax
@@ -452,7 +452,7 @@ void  CPile::SetBuildingId(int) {
 
 // address=[0x155c640]
 // Decompiled from void __thiscall CPile::Occupied(CPile *this, int a2)
-void  CPile::Occupied(int) {
+void  CPile::Occupied(int a2) {
   
   int v2; // eax
   int v3; // eax
@@ -477,7 +477,7 @@ void  CPile::Occupied(int) {
 
 // address=[0x155c700]
 // Decompiled from char __thiscall CPile::SetFree(CPile *this, int a2)
-bool  CPile::SetFree(int) {
+bool  CPile::SetFree(int a2) {
   
   int v3; // [esp+4h] [ebp-8h]
 
@@ -492,7 +492,7 @@ bool  CPile::SetFree(int) {
 
 // address=[0x155c780]
 // Decompiled from int __thiscall CPile::NotifyChangeEcoSector(CPile *this, int a2, int a3)
-void  CPile::NotifyChangeEcoSector(int,int) {
+void  CPile::NotifyChangeEcoSector(int a2, int a3) {
   
   int v4; // [esp+0h] [ebp-Ch]
   int v5; // [esp+4h] [ebp-8h]
@@ -516,7 +516,7 @@ void  CPile::NotifyChangeEcoSector(int,int) {
 
 // address=[0x155c860]
 // Decompiled from _DWORD *__thiscall CPile::Offer(CPile *this, int a2, int a3)
-void  CPile::Offer(int,int) {
+void  CPile::Offer(int a2, int a3) {
   
   _DWORD *result; // eax
   int v4; // eax
@@ -544,7 +544,7 @@ void  CPile::Offer(int,int) {
 
 // address=[0x155c8e0]
 // Decompiled from void __thiscall CPile::CancelOffer(CPile *this, int a2, int a3)
-void  CPile::CancelOffer(int,int) {
+void  CPile::CancelOffer(int a2, int a3) {
   
   int v3; // eax
   CEcoSector *v4; // eax
@@ -570,7 +570,7 @@ void  CPile::CancelOffer(int,int) {
 
 // address=[0x155c960]
 // Decompiled from void __thiscall CPile::CancelCompleteOfferIfInOfferList(CPile *this, int a2)
-void  CPile::CancelCompleteOfferIfInOfferList(int) {
+void  CPile::CancelCompleteOfferIfInOfferList(int a2) {
   
   if ( CPile::IsInOfferList(this) )
     CPile::CancelOffer(this, -1, a2);
@@ -579,7 +579,7 @@ void  CPile::CancelCompleteOfferIfInOfferList(int) {
 
 // address=[0x155c990]
 // Decompiled from void __thiscall CPile::ChangeNumberOfOfferedGoodsInEcoSector(CPile *this, int a2, int a3)
-void  CPile::ChangeNumberOfOfferedGoodsInEcoSector(int,int) {
+void  CPile::ChangeNumberOfOfferedGoodsInEcoSector(int a2, int a3) {
   
   ;
 }
@@ -632,7 +632,7 @@ void  CPile::NotifyTargetDieAndDetachAllObservers(void) {
 
 // address=[0x155cab0]
 // Decompiled from unsigned int __cdecl CPile::operator new(unsigned int a1)
-static void * __cdecl CPile::operator new(unsigned int) {
+void * __cdecl CPile::operator new(unsigned int a1) {
   
   return CPileMgr::Alloc((CPileMgr *)&g_cPileMgr, a1);
 }
@@ -640,7 +640,7 @@ static void * __cdecl CPile::operator new(unsigned int) {
 
 // address=[0x155cad0]
 // Decompiled from void __cdecl CPile::operator delete(void *a1)
-static void __cdecl CPile::operator delete(void *) {
+void __cdecl CPile::operator delete(void * a1) {
   
   CPileMgr::Dealloc((CPileMgr *)&g_cPileMgr, a1);
 }
@@ -648,7 +648,7 @@ static void __cdecl CPile::operator delete(void *) {
 
 // address=[0x155cb10]
 // Decompiled from void __thiscall CPile::Detach(CPile *this, int a2)
-void  CPile::Detach(int) {
+void  CPile::Detach(int a2) {
   
   int v3; // [esp+4h] [ebp-4h]
 
@@ -671,7 +671,7 @@ void  CPile::Detach(int) {
 
 // address=[0x155cb80]
 // Decompiled from void __thiscall CPile::ChangeAmountAndDetach(CPile *this, int a2)
-void  CPile::ChangeAmountAndDetach(int) {
+void  CPile::ChangeAmountAndDetach(int a2) {
   
   int v3; // [esp+4h] [ebp-4h]
 
@@ -694,7 +694,7 @@ void  CPile::ChangeAmountAndDetach(int) {
 
 // address=[0x155cbf0]
 // Decompiled from void __thiscall CPile::AttachAndIncAmountLeaving(unsigned __int16 *this, int a2, int a3, int a4)
-void  CPile::AttachAndIncAmountLeaving(int,int,enum T_OBSERVER_TARGET) {
+void  CPile::AttachAndIncAmountLeaving(int a2, int a3, enum T_OBSERVER_TARGET a4) {
   
   int v4; // eax
 
@@ -723,7 +723,7 @@ void  CPile::AttachAndIncAmountLeaving(int,int,enum T_OBSERVER_TARGET) {
 
 // address=[0x155cc90]
 // Decompiled from void __thiscall CPile::AttachAndIncAmountComing(CPile *this, int a2)
-void  CPile::AttachAndIncAmountComing(int) {
+void  CPile::AttachAndIncAmountComing(int a2) {
   
   int v2; // eax
 
@@ -735,7 +735,7 @@ void  CPile::AttachAndIncAmountComing(int) {
 
 // address=[0x155ccd0]
 // Decompiled from void __thiscall CPile::Notify(CPile *this, const struct CEntityEvent *a2)
-void  CPile::Notify(class CEntityEvent const &)const {
+void  CPile::Notify(class CEntityEvent const & a2)const {
   
   CPileObserverList::NotifyAllObservers((CPile *)((char *)this + 88), a2);
 }
@@ -743,7 +743,7 @@ void  CPile::Notify(class CEntityEvent const &)const {
 
 // address=[0x155ccf0]
 // Decompiled from int __thiscall CPile::SetObserverTarget(int this, int a2, int a3)
-void  CPile::SetObserverTarget(enum T_OBSERVER_TARGET,int) {
+void  CPile::SetObserverTarget(enum T_OBSERVER_TARGET a2, int a3) {
   
   int result; // eax
   int v4; // eax
@@ -797,7 +797,7 @@ void  CPile::SetObserverTarget(enum T_OBSERVER_TARGET,int) {
 
 // address=[0x155ce70]
 // Decompiled from int __thiscall CPile::GetObserverTarget(unsigned __int16 *this, int a2)
-int  CPile::GetObserverTarget(enum T_OBSERVER_TARGET) {
+int  CPile::GetObserverTarget(enum T_OBSERVER_TARGET a2) {
   
   if ( a2 )
     return 0;
@@ -831,7 +831,7 @@ void  CPile::RequestSpaceIfPossible(void) {
 
 // address=[0x155d7c0]
 // Decompiled from char *__thiscall CPile::CPile(char *this, int a2)
- CPile::CPile(std::istream &) {
+ CPile::CPile(std::istream & a2) {
   
   int PileRole; // [esp+4h] [ebp-24h]
   int v4; // [esp+Ch] [ebp-1Ch] BYREF
@@ -877,7 +877,7 @@ void  CPile::RequestSpaceIfPossible(void) {
 
 // address=[0x155d9a0]
 // Decompiled from int __thiscall CPile::Store(__int16 *this, struct std::ostream *a2)
-void  CPile::Store(std::ostream &) {
+void  CPile::Store(std::ostream & a2) {
   
   int v3; // [esp+0h] [ebp-Ch] BYREF
   int v4; // [esp+4h] [ebp-8h]
@@ -930,7 +930,7 @@ int  CPile::GetGoodType(void)const {
 
 // address=[0x15604c0]
 // Decompiled from int __thiscall CPile::ReassessDistance(CPile *this, int *a2)
-void  CPile::ReassessDistance(int &) {
+void  CPile::ReassessDistance(int & a2) {
   
   int v2; // eax
 
@@ -952,7 +952,7 @@ int  CPile::BuildingId(void)const {
 
 // address=[0x155cef0]
 // Decompiled from int __thiscall CPile::IncreaseEx(CPile *this, int a2)
-void  CPile::IncreaseEx(int) {
+void  CPile::IncreaseEx(int a2) {
   
   int result; // eax
   int v3; // eax
@@ -1023,7 +1023,7 @@ void  CPile::IncreaseEx(int) {
 
 // address=[0x155d180]
 // Decompiled from int __thiscall CPile::DecreaseEx(CPile *this, int a2)
-void  CPile::DecreaseEx(int) {
+void  CPile::DecreaseEx(int a2) {
   
   int v2; // eax
   int result; // eax
@@ -1078,7 +1078,7 @@ void  CPile::DecreaseEx(int) {
 
 // address=[0x155d370]
 // Decompiled from int __thiscall CPile::Increase(CPile *this, int a2)
-int  CPile::Increase(int) {
+int  CPile::Increase(int a2) {
   
   if ( BBSupportDbgReport(1, "MapObjects\\Pile\\Pile.cpp", 647, "CPile::Increase() called!") == 1 )
     __debugbreak();
@@ -1088,7 +1088,7 @@ int  CPile::Increase(int) {
 
 // address=[0x155d3a0]
 // Decompiled from int __thiscall CPile::Decrease(CPile *this, int a2)
-void  CPile::Decrease(int) {
+void  CPile::Decrease(int a2) {
   
   if ( BBSupportDbgReport(1, "MapObjects\\Pile\\Pile.cpp", 659, "CPile::Decrease() called!") == 1 )
     __debugbreak();
@@ -1098,7 +1098,7 @@ void  CPile::Decrease(int) {
 
 // address=[0x155d3d0]
 // Decompiled from CPile *__thiscall CPile::IncAmountLeaving(CPile *this, int a2)
-void  CPile::IncAmountLeaving(int) {
+void  CPile::IncAmountLeaving(int a2) {
   
   CPile *result; // eax
   int v3; // [esp+0h] [ebp-Ch]
@@ -1126,7 +1126,7 @@ void  CPile::IncAmountLeaving(int) {
 
 // address=[0x155d480]
 // Decompiled from int __thiscall CPile::DecAmountLeaving(CPile *this, int a2)
-void  CPile::DecAmountLeaving(int) {
+void  CPile::DecAmountLeaving(int a2) {
   
   int result; // eax
   int v3; // [esp+0h] [ebp-10h]
@@ -1194,7 +1194,7 @@ void  CPile::DecAmountComing(void) {
 
 // address=[0x155d620]
 // Decompiled from void __thiscall CPile::AdjustStatistic(CPile *this, int a2, int a3)
-void  CPile::AdjustStatistic(int,int) {
+void  CPile::AdjustStatistic(int a2, int a3) {
   
   int v3; // eax
   CEcoSector *v4; // [esp+0h] [ebp-Ch]
@@ -1234,7 +1234,7 @@ void  CPile::AdjustStatistic(int,int) {
 
 // address=[0x155d720]
 // Decompiled from char __thiscall CPile::ExecuteChangeGoodTypeUnforseen(CPile *this, int a2)
-bool  CPile::ExecuteChangeGoodTypeUnforseen(int) {
+bool  CPile::ExecuteChangeGoodTypeUnforseen(int a2) {
   
   int v3; // [esp+0h] [ebp-8h]
 
@@ -1256,7 +1256,7 @@ bool  CPile::ExecuteChangeGoodTypeUnforseen(int) {
 
 // address=[0x155dae0]
 // Decompiled from int __thiscall CPile::CPile(  int this,  int a2,  int a3,  unsigned int a4,  int a5,  char a6,  int a7,  char a8,  char a9,  __int16 a10,  __int16 a11)
- CPile::CPile(int,int,int,int,class std::auto_ptr<class IPileRole>,int,int,int,int,int) {
+ CPile::CPile(int a2, int a3, int a4, int a5, class std::auto_ptr<class IPileRole> a6, int a7, int a8, int a9, int a10, int a11) {
   
   int v11; // eax
   int v13; // [esp-4h] [ebp-20h]
@@ -1317,7 +1317,7 @@ bool  CPile::ExecuteChangeGoodTypeUnforseen(int) {
 
 // address=[0x155dcf0]
 // Decompiled from _DWORD *__thiscall CPile::ConvertEventIntoGoal(CPile *this, struct CEntityEvent *a2)
-void  CPile::ConvertEventIntoGoal(class CEntityEvent *) {
+void  CPile::ConvertEventIntoGoal(class CEntityEvent * a2) {
   
   int v2; // eax
   int v3; // eax

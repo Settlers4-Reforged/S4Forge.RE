@@ -4,7 +4,7 @@
 
 // address=[0x131e810]
 // Decompiled from CAIConfigIntEx *__thiscall CAIConfigIntEx::CAIConfigIntEx(CAIConfigIntEx *this, const char *a2, int a3, int a4, int a5)
- CAIConfigIntEx::CAIConfigIntEx(char const *,int,int,int) {
+ CAIConfigIntEx::CAIConfigIntEx(char const * a2, int a3, int a4, int a5) {
   
   int v6; // [esp+4h] [ebp-Ch]
   int v7; // [esp+8h] [ebp-8h]

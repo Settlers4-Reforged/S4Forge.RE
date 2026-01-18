@@ -1,6 +1,8 @@
 #ifndef CAIAGENTDARKTRIBEATTACK_H
 #define CAIAGENTDARKTRIBEATTACK_H
 
+#include "defines.h"
+
 class CAIAgentDarkTribeAttack : public CAIDarkTribeSectorAgent {
 public:
     // address=[0x12f9ea0]
@@ -10,13 +12,13 @@ public:
     virtual unsigned int  Execute(unsigned int,unsigned int);
 
     // address=[0x12fa500]
-    virtual void  Load(class IS4Chunk &);
+    virtual void  Load(class IS4Chunk & a2);
 
     // address=[0x12fa610]
-    virtual void  Save(class IS4Chunk &);
+    virtual void  Save(class IS4Chunk & a2);
 
     // address=[0x12fa700]
-    void  AttackWithShamans(int,int,bool);
+    void  AttackWithShamans(int a2, int a3, bool a4);
 
     // address=[0x12fc9c0]
     virtual  ~CAIAgentDarkTribeAttack(void);
@@ -29,16 +31,16 @@ protected:
     bool  ShamanAttackTaskForceAvailable(void)const;
 
     // address=[0x12fa900]
-    bool  ManakopterTaskForceAvailable(bool)const;
+    bool  ManakopterTaskForceAvailable(bool a2)const;
 
     // address=[0x12fa980]
     bool  CheckShamanAttackPosition(void);
 
     // address=[0x12fa9c0]
-    void  OrderShamanTaskForcesHome(enum T_AI_TASK_FORCE_CMD);
+    void  OrderShamanTaskForcesHome(enum T_AI_TASK_FORCE_CMD a2);
 
     // address=[0x12faa30]
-    int  OrderShamanTaskForcesToManakopter(bool,bool);
+    int  OrderShamanTaskForcesToManakopter(bool a2, bool a3);
 
     // address=[0x12facf0]
     int  OrderShamanTaskForcesToSneakUpPosition(void);
@@ -47,10 +49,10 @@ protected:
     int  OrderShamanTaskForcesToAttackPosition(void);
 
     // address=[0x12fae60]
-    int  OrderManakopterToPosition(bool);
+    int  OrderManakopterToPosition(bool a2);
 
     // address=[0x12fb1c0]
-    int  OrderManakopterUnload(bool);
+    int  OrderManakopterUnload(bool a2);
 
     // address=[0x12fb250]
     int  OrderShamansToImmediateAttack(void);
@@ -71,7 +73,7 @@ protected:
     bool  CheckIfReadyForReturn(void);
 
     // address=[0x12fba00]
-    void  SetMissionBit(enum T_AI_TASK_FORCE_CMD);
+    void  SetMissionBit(enum T_AI_TASK_FORCE_CMD a2);
 
     // address=[0x12fba70]
     void  RemoveMissionBit(void);

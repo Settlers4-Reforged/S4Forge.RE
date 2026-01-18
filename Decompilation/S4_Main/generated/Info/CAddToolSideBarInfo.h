@@ -1,6 +1,8 @@
 #ifndef CADDTOOLSIDEBARINFO_H
 #define CADDTOOLSIDEBARINFO_H
 
+#include "defines.h"
+
 class CAddToolSideBarInfo : public CInfoExchange {
 public:
     // address=[0x1454410]

@@ -4,7 +4,7 @@
 
 // address=[0x2f16980]
 // Decompiled from _DWORD *__thiscall AdvXMLParser::Pi::Pi(_DWORD *this, int a2, int a3)
- AdvXMLParser::Pi::Pi(std::string const &,std::string const &) {
+ AdvXMLParser::Pi::Pi(std::string const & a2, std::string const & a3) {
   
   AdvXMLParser::Node::Node(AdvXMLParser::Node::null, a2);
   *this = &AdvXMLParser::Pi::_vftable_;
@@ -15,7 +15,7 @@
 
 // address=[0x2f16a00]
 // Decompiled from _DWORD *__thiscall AdvXMLParser::Pi::Pi(_DWORD *this, int a2, int a3, int a4)
- AdvXMLParser::Pi::Pi(class AdvXMLParser::NodeContainer &,std::string const &,std::string const &) {
+ AdvXMLParser::Pi::Pi(class AdvXMLParser::NodeContainer & a2, std::string const & a3, std::string const & a4) {
   
   AdvXMLParser::Node::Node(a2, a3);
   *this = &AdvXMLParser::Pi::_vftable_;
@@ -26,7 +26,7 @@
 
 // address=[0x2f16a70]
 // Decompiled from _DWORD *__thiscall AdvXMLParser::Pi::Clone(AdvXMLParser::Pi *this, struct AdvXMLParser::NodeContainer *a2)
-class AdvXMLParser::Pi *  AdvXMLParser::Pi::Clone(class AdvXMLParser::NodeContainer &)const {
+class AdvXMLParser::Pi *  AdvXMLParser::Pi::Clone(class AdvXMLParser::NodeContainer & a2)const {
   
   int Name; // eax
   int v4; // [esp+Ch] [ebp-44h]
@@ -60,7 +60,7 @@ class AdvXMLParser::Pi *  AdvXMLParser::Pi::Clone(class AdvXMLParser::NodeContai
 
 // address=[0x2f16b60]
 // Decompiled from int __thiscall AdvXMLParser::Pi::GetData(char *this, int a2)
-std::string  AdvXMLParser::Pi::GetData(void)const {
+std::string  AdvXMLParser::Pi::GetData(void a2)const {
   
   std::string::string(this + 36);
   return a2;
@@ -69,7 +69,7 @@ std::string  AdvXMLParser::Pi::GetData(void)const {
 
 // address=[0x2f16ba0]
 // Decompiled from int __thiscall AdvXMLParser::Pi::GetValue(char *this, int a2)
-std::string  AdvXMLParser::Pi::GetValue(void)const {
+std::string  AdvXMLParser::Pi::GetValue(void a2)const {
   
   std::string::string(this + 36);
   return a2;
@@ -78,7 +78,7 @@ std::string  AdvXMLParser::Pi::GetValue(void)const {
 
 // address=[0x2f16be0]
 // Decompiled from bool __thiscall AdvXMLParser::Pi::IsKindOf(AdvXMLParser::Pi *this, int a2)
-bool  AdvXMLParser::Pi::IsKindOf(int)const {
+bool  AdvXMLParser::Pi::IsKindOf(int a2)const {
   
   return a2 == 7 || AdvXMLParser::Node::IsKindOf(this, a2);
 }
@@ -86,7 +86,7 @@ bool  AdvXMLParser::Pi::IsKindOf(int)const {
 
 // address=[0x2f16c10]
 // Decompiled from _DWORD *__thiscall AdvXMLParser::Pi::CloneNode(AdvXMLParser::Pi *this, struct AdvXMLParser::NodeContainer *a2)
-class AdvXMLParser::Node *  AdvXMLParser::Pi::CloneNode(class AdvXMLParser::NodeContainer &)const {
+class AdvXMLParser::Node *  AdvXMLParser::Pi::CloneNode(class AdvXMLParser::NodeContainer & a2)const {
   
   return AdvXMLParser::Pi::Clone(this, a2);
 }
@@ -103,7 +103,7 @@ class AdvXMLParser::Node *  AdvXMLParser::Pi::CloneNode(class AdvXMLParser::Node
 
 // address=[0x2f246a0]
 // Decompiled from _DWORD *__cdecl AdvXMLParser::Pi::Parse(struct AdvXMLParser::Parser *a1, struct AdvXMLParser::NodeContainer *a2)
-static class AdvXMLParser::Pi * __cdecl AdvXMLParser::Pi::Parse(class AdvXMLParser::Parser &,class AdvXMLParser::NodeContainer &) {
+class AdvXMLParser::Pi * __cdecl AdvXMLParser::Pi::Parse(class AdvXMLParser::Parser & a1, class AdvXMLParser::NodeContainer & a2) {
   
   unsigned __int8 Char; // al
   char v4[16]; // [esp+4h] [ebp-68h] BYREF
@@ -150,7 +150,7 @@ static class AdvXMLParser::Pi * __cdecl AdvXMLParser::Pi::Parse(class AdvXMLPars
 
 // address=[0x2f2d1e0]
 // Decompiled from void __thiscall AdvXMLParser::Pi::GenerateXML(AdvXMLParser::Pi *this, struct AdvXMLParser::GenerateContext *a2)
-void  AdvXMLParser::Pi::GenerateXML(class AdvXMLParser::GenerateContext &)const {
+void  AdvXMLParser::Pi::GenerateXML(class AdvXMLParser::GenerateContext & a2)const {
   
   int Name; // eax
 
@@ -174,7 +174,7 @@ void  AdvXMLParser::Pi::GenerateXML(class AdvXMLParser::GenerateContext &)const 
 
 // address=[0x2f24800]
 // Decompiled from char __cdecl AdvXMLParser::Pi::ParsePITarget(int a1, int a2)
-static bool __cdecl AdvXMLParser::Pi::ParsePITarget(class AdvXMLParser::Parser &,std::string &) {
+bool __cdecl AdvXMLParser::Pi::ParsePITarget(class AdvXMLParser::Parser & a1, std::string & a2) {
   
   unsigned __int8 *v3; // eax
   unsigned __int8 *v4; // eax

@@ -1,6 +1,8 @@
 #ifndef CTOOLTIPEXT_H
 #define CTOOLTIPEXT_H
 
+#include "defines.h"
+
 class CToolTipExt {
 public:
     // address=[0x2f9fe20]

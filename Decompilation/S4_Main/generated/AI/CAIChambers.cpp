@@ -4,7 +4,7 @@
 
 // address=[0x1314700]
 // Decompiled from CAIChambers *__thiscall CAIChambers::CAIChambers(CAIChambers *this, int a2)
- CAIChambers::CAIChambers(int) {
+ CAIChambers::CAIChambers(int a2) {
   
   *(_DWORD *)this = IAIEnvironment::UnpackXFast(a2);
   *((_DWORD *)this + 1) = IAIEnvironment::UnpackYFast(a2);
@@ -16,7 +16,7 @@
 
 // address=[0x1314770]
 // Decompiled from CAIChambers *__thiscall CAIChambers::Push(CAIChambers *this, int a2, int a3)
-void  CAIChambers::Push(int,int) {
+void  CAIChambers::Push(int a2, int a3) {
   
   int v3; // eax
   CAIChambers *result; // eax
@@ -52,7 +52,7 @@ void  CAIChambers::Push(int,int) {
 
 // address=[0x1314880]
 // Decompiled from int __thiscall CAIChambers::PushTaskForce(CAIChambers *this, struct CAITaskForce *a2)
-void  CAIChambers::PushTaskForce(class CAITaskForce &) {
+void  CAIChambers::PushTaskForce(class CAITaskForce & a2) {
   
   int result; // eax
   int v4; // [esp+4h] [ebp-Ch]
@@ -73,7 +73,7 @@ void  CAIChambers::PushTaskForce(class CAITaskForce &) {
 
 // address=[0x13148e0]
 // Decompiled from int __thiscall CAIChambers::PushTaskForceEx(CAIChambers *this, struct CAITaskForce *a2, int a3)
-void  CAIChambers::PushTaskForceEx(class CAITaskForce &,int) {
+void  CAIChambers::PushTaskForceEx(class CAITaskForce & a2, int a3) {
   
   int result; // eax
   int v5; // [esp+4h] [ebp-14h]

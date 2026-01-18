@@ -1,6 +1,8 @@
 #ifndef BBSUPPORTLIB_IBBSUPPORTTRACEFILE_H
 #define BBSUPPORTLIB_IBBSUPPORTTRACEFILE_H
 
+#include "defines.h"
+
 namespace BBSupportLib {
 
 class IBBSupportTraceFile {

@@ -12,7 +12,7 @@ bool  CAIRegion::Used(void)const {
 
 // address=[0x13115f0]
 // Decompiled from int __thiscall CAIRegion::Load(CAIRegion *this, struct IS4Chunk *a2)
-void  CAIRegion::Load(class IS4Chunk &) {
+void  CAIRegion::Load(class IS4Chunk & a2) {
   
   int result; // eax
 
@@ -26,7 +26,7 @@ void  CAIRegion::Load(class IS4Chunk &) {
 
 // address=[0x1311640]
 // Decompiled from int __thiscall CAIRegion::Save(CAIRegion *this, struct IS4Chunk *a2)
-void  CAIRegion::Save(class IS4Chunk &) {
+void  CAIRegion::Save(class IS4Chunk & a2) {
   
   (*(void (__thiscall **)(struct IS4Chunk *, _DWORD))(*(_DWORD *)a2 + 20))(a2, *(_DWORD *)this);
   (*(void (__thiscall **)(struct IS4Chunk *, _DWORD))(*(_DWORD *)a2 + 20))(a2, *((_DWORD *)this + 1));
@@ -44,7 +44,7 @@ void  CAIRegion::Clear(void) {
 
 // address=[0x1311ca0]
 // Decompiled from int __thiscall CAIRegion::DefineRegion(CAIRegion *this, int a2, int a3, int a4)
-void  CAIRegion::DefineRegion(int,int,int) {
+void  CAIRegion::DefineRegion(int a2, int a3, int a4) {
   
   int result; // eax
 

@@ -50,7 +50,7 @@ void  CAIWatchTowers::Done(void) {
 
 // address=[0x132f1c0]
 // Decompiled from int __thiscall CAIWatchTowers::AddWatchTower(CAIWatchTowers *this, int a2, int a3, int a4)
-int  CAIWatchTowers::AddWatchTower(int,int,int) {
+int  CAIWatchTowers::AddWatchTower(int a2, int a3, int a4) {
   
   CAIWatchTower *v4; // eax
   int v6; // [esp+0h] [ebp-8h]
@@ -66,7 +66,7 @@ int  CAIWatchTowers::AddWatchTower(int,int,int) {
 
 // address=[0x132f230]
 // Decompiled from void __thiscall CAIWatchTowers::DelWatchTower(CAIWatchTowers *this, int a2)
-void  CAIWatchTowers::DelWatchTower(int) {
+void  CAIWatchTowers::DelWatchTower(int a2) {
   
   if ( !*((_BYTE *)this + 4) && BBSupportDbgReport(2, "AI\\AI_WatchTower.cpp", 410, "m_bInitialized") == 1 )
     __debugbreak();
@@ -88,7 +88,7 @@ void  CAIWatchTowers::DelWatchTower(int) {
 
 // address=[0x132f2c0]
 // Decompiled from void (__cdecl **__thiscall CAIWatchTowers::RegisterCallback(  void (__cdecl **this)(int, int),  void (__cdecl *a2)(int, int)))(int, int)
-void  CAIWatchTowers::RegisterCallback(void (__cdecl*)(int,int)) {
+void  CAIWatchTowers::RegisterCallback(void (__cdecl*)(int,int) a2) {
   
   void (__cdecl **result)(int, int); // eax
 
@@ -181,7 +181,7 @@ void  CAIWatchTowers::CalculateAll(void) {
 
 // address=[0x132f480]
 // Decompiled from int __thiscall CAIWatchTowers::NextUsedWatchTower(CAIWatchTowers *this, int a2)
-int  CAIWatchTowers::NextUsedWatchTower(int) {
+int  CAIWatchTowers::NextUsedWatchTower(int a2) {
   
   CAIWatchTower *v2; // eax
   CAIWatchTower *v4; // eax
@@ -223,7 +223,7 @@ int  CAIWatchTowers::PushUndef(void) {
 
 // address=[0x132f580]
 // Decompiled from char __thiscall CAIWatchTowers::Remove(CAIWatchTowers *this, int a2)
-void  CAIWatchTowers::Remove(int) {
+void  CAIWatchTowers::Remove(int a2) {
   
   char result; // al
 
@@ -241,7 +241,7 @@ void  CAIWatchTowers::Remove(int) {
 
 // address=[0x132f5f0]
 // Decompiled from bool __thiscall CAIWatchTowers::ValidIndex(CAIWatchTowers *this, unsigned int a2)
-bool  CAIWatchTowers::ValidIndex(int)const {
+bool  CAIWatchTowers::ValidIndex(int a2)const {
   
   return a2 <= *((_DWORD *)this + 2);
 }
@@ -249,7 +249,7 @@ bool  CAIWatchTowers::ValidIndex(int)const {
 
 // address=[0x132f620]
 // Decompiled from void CAIWatchTowers::DefaultCallback()
-static void __cdecl CAIWatchTowers::DefaultCallback(int,int) {
+void __cdecl CAIWatchTowers::DefaultCallback(int,int) {
   
   ;
 }
@@ -281,7 +281,7 @@ int  CAIWatchTowers::Last(void)const {
 
 // address=[0x132f980]
 // Decompiled from bool __thiscall CAIWatchTowers::ValidUsedWatchTower(CAIWatchTowers *this, int a2)
-bool  CAIWatchTowers::ValidUsedWatchTower(int)const {
+bool  CAIWatchTowers::ValidUsedWatchTower(int a2)const {
   
   CAIWatchTower *v2; // eax
   char v4; // [esp+0h] [ebp-8h]
@@ -298,7 +298,7 @@ bool  CAIWatchTowers::ValidUsedWatchTower(int)const {
 
 // address=[0x132fa10]
 // Decompiled from char *__thiscall CAIWatchTowers::WatchTower(CAIWatchTowers *this, int a2)
-class CAIWatchTowerEx &  CAIWatchTowers::WatchTower(int) {
+class CAIWatchTowerEx &  CAIWatchTowers::WatchTower(int a2) {
   
   return (char *)this + 8 * a2 + 16;
 }
@@ -306,7 +306,7 @@ class CAIWatchTowerEx &  CAIWatchTowers::WatchTower(int) {
 
 // address=[0x132fa30]
 // Decompiled from char *__thiscall CAIWatchTowers::WatchTower(CAIWatchTowers *this, int a2)
-class CAIWatchTower const &  CAIWatchTowers::WatchTower(int)const {
+class CAIWatchTower const &  CAIWatchTowers::WatchTower(int a2)const {
   
   return (char *)this + 8 * a2 + 16;
 }

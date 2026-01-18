@@ -4,7 +4,7 @@
 
 // address=[0x2f4e360]
 // Decompiled from CSubProblemSolveEvent *__thiscall CSubProblemSolveEvent::CSubProblemSolveEvent(  CSubProblemSolveEvent *this,  struct CSiedlerAI *a2,  int a3,  int a4,  int a5,  int a6,  int a7,  int a8,  struct COptimizeOptions *a9)
- CSubProblemSolveEvent::CSubProblemSolveEvent(class CSiedlerAI *,int,int,int,int,int,int,class COptimizeOptions *) {
+ CSubProblemSolveEvent::CSubProblemSolveEvent(class CSiedlerAI * a2, int a3, int a4, int a5, int a6, int a7, int a8, class COptimizeOptions * a9) {
   
   int i; // [esp+4h] [ebp-14h]
 

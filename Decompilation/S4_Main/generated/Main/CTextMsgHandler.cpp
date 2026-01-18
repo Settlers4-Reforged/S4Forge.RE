@@ -4,7 +4,7 @@
 
 // address=[0x14cf8e0]
 // Decompiled from char CTextMsgHandler::Init()
-static void __cdecl CTextMsgHandler::Init(void) {
+void __cdecl CTextMsgHandler::Init(void) {
   
   return IEventEngine::RegisterHandle(g_pEvnEngine, (struct IEvn_Handle *)&g_cTextMsgHandler);
 }
@@ -12,7 +12,7 @@ static void __cdecl CTextMsgHandler::Init(void) {
 
 // address=[0x14cf900]
 // Decompiled from char __cdecl CTextMsgHandler::AddChatMsg(char *Str, int a2)
-static bool __cdecl CTextMsgHandler::AddChatMsg(char const *,int) {
+bool __cdecl CTextMsgHandler::AddChatMsg(char const * Str, int a2) {
   
   size_t v2; // eax
   int PlayerIcon; // [esp+4h] [ebp-Ch]
@@ -40,7 +40,7 @@ static bool __cdecl CTextMsgHandler::AddChatMsg(char const *,int) {
 
 // address=[0x14cf9f0]
 // Decompiled from char CTextMsgHandler::AddTextMsg(int a1, int a2, int a3, int a4, bool a5, bool a6, ...)
-static bool __cdecl CTextMsgHandler::AddTextMsg(int,int,int,int,bool,bool,...) {
+bool __cdecl CTextMsgHandler::AddTextMsg(int a1, int a2, int a3, int a4, bool a5, bool a6, ... a7) {
   
   char *Format; // [esp+10h] [ebp-18h]
   int v8; // [esp+14h] [ebp-14h] BYREF
@@ -107,7 +107,7 @@ static bool __cdecl CTextMsgHandler::AddTextMsg(int,int,int,int,bool,bool,...) {
 
 // address=[0x14cfbe0]
 // Decompiled from char CTextMsgHandler::AddTextMsg(int a1, int a2, bool a3, bool a4, ...)
-static bool __cdecl CTextMsgHandler::AddTextMsg(int,int,bool,bool,...) {
+bool __cdecl CTextMsgHandler::AddTextMsg(int a1, int a2, bool a3, bool a4, ... a5) {
   
   int v5; // eax
   char *Format; // [esp+10h] [ebp-10h]
@@ -161,7 +161,7 @@ static bool __cdecl CTextMsgHandler::AddTextMsg(int,int,bool,bool,...) {
 
 // address=[0x14cfd80]
 // Decompiled from char __cdecl CTextMsgHandler::AddTextMsg(int a1, int a2, bool a3)
-static bool __cdecl CTextMsgHandler::AddTextMsg(int,int,bool) {
+bool __cdecl CTextMsgHandler::AddTextMsg(int a1, int a2, bool a3) {
   
   const char *StringName; // [esp+Ch] [ebp-Ch]
   int *v5; // [esp+14h] [ebp-4h]
@@ -197,7 +197,7 @@ static bool __cdecl CTextMsgHandler::AddTextMsg(int,int,bool) {
 
 // address=[0x14cfe80]
 // Decompiled from char __cdecl CTextMsgHandler::AddTextMsg(char *Str, int a2, int a3, int a4, char a5)
-static bool __cdecl CTextMsgHandler::AddTextMsg(char const *,int,int,int,bool) {
+bool __cdecl CTextMsgHandler::AddTextMsg(char const * Str, int a2, int a3, int a4, bool a5) {
   
   size_t v5; // eax
   int PlayerIcon; // [esp+4h] [ebp-Ch]
@@ -225,7 +225,7 @@ static bool __cdecl CTextMsgHandler::AddTextMsg(char const *,int,int,int,bool) {
 
 // address=[0x14cff70]
 // Decompiled from char __cdecl CTextMsgHandler::AddWarningMsg(int a1, int a2, int a3, int a4)
-static bool __cdecl CTextMsgHandler::AddWarningMsg(int,int,int,int) {
+bool __cdecl CTextMsgHandler::AddWarningMsg(int a1, int a2, int a3, int a4) {
   
   int v5; // eax
   int v6; // [esp+4h] [ebp-14h] BYREF
@@ -271,7 +271,7 @@ static bool __cdecl CTextMsgHandler::AddWarningMsg(int,int,int,int) {
 
 // address=[0x14d00a0]
 // Decompiled from char __cdecl CTextMsgHandler::AddWarningMsg_0(int a1, int a2)
-static bool __cdecl CTextMsgHandler::AddWarningMsg(int,int) {
+bool __cdecl CTextMsgHandler::AddWarningMsg(int a1, int a2) {
   
   int v3; // eax
   int v4; // [esp+4h] [ebp-14h] BYREF
@@ -314,7 +314,7 @@ static bool __cdecl CTextMsgHandler::AddWarningMsg(int,int) {
 
 // address=[0x14d01c0]
 // Decompiled from void __cdecl CTextMsgHandler::ExecuteMsg(int a1)
-static void __cdecl CTextMsgHandler::ExecuteMsg(int) {
+void __cdecl CTextMsgHandler::ExecuteMsg(int a1) {
   
   CEvn_Event *v1; // [esp+4h] [ebp-40h]
   int v2; // [esp+Ch] [ebp-38h]
@@ -361,7 +361,7 @@ static void __cdecl CTextMsgHandler::ExecuteMsg(int) {
 
 // address=[0x14d0310]
 // Decompiled from void CTextMsgHandler::ExecuteLastMsg()
-static void __cdecl CTextMsgHandler::ExecuteLastMsg(void) {
+void __cdecl CTextMsgHandler::ExecuteLastMsg(void) {
   
   int v0; // [esp+0h] [ebp-Ch]
   int v1; // [esp+4h] [ebp-8h]
@@ -384,7 +384,7 @@ static void __cdecl CTextMsgHandler::ExecuteLastMsg(void) {
 
 // address=[0x14d0390]
 // Decompiled from int CTextMsgHandler::Update()
-static void __cdecl CTextMsgHandler::Update(void) {
+void __cdecl CTextMsgHandler::Update(void) {
   
   _DWORD v1[2]; // [esp-Ch] [ebp-6Ch] BYREF
   int v2; // [esp-4h] [ebp-64h]
@@ -459,7 +459,7 @@ static void __cdecl CTextMsgHandler::Update(void) {
 
 // address=[0x14d0530]
 // Decompiled from int __cdecl CTextMsgHandler::SendAllMessages(bool a1, bool a2, bool a3)
-static void __cdecl CTextMsgHandler::SendAllMessages(bool,bool,bool) {
+void __cdecl CTextMsgHandler::SendAllMessages(bool a1, bool a2, bool a3) {
   
   int v3; // eax
   int **v4; // eax
@@ -578,7 +578,7 @@ static void __cdecl CTextMsgHandler::SendAllMessages(bool,bool,bool) {
 
 // address=[0x14d0830]
 // Decompiled from int CTextMsgHandler::RefreshList()
-static void __cdecl CTextMsgHandler::RefreshList(void) {
+void __cdecl CTextMsgHandler::RefreshList(void) {
   
   int **v0; // eax
   _DWORD v2[2]; // [esp-Ch] [ebp-68h] BYREF
@@ -654,7 +654,7 @@ static void __cdecl CTextMsgHandler::RefreshList(void) {
 
 // address=[0x14d09f0]
 // Decompiled from int CTextMsgHandler::Kill()
-static void __cdecl CTextMsgHandler::Kill(void) {
+void __cdecl CTextMsgHandler::Kill(void) {
   
   int result; // eax
   _DWORD v1[2]; // [esp-Ch] [ebp-48h] BYREF
@@ -698,7 +698,7 @@ static void __cdecl CTextMsgHandler::Kill(void) {
 
 // address=[0x14d0ae0]
 // Decompiled from unsigned int __cdecl CTextMsgHandler::SetMaxMsgCount(int a1)
-static void __cdecl CTextMsgHandler::SetMaxMsgCount(int) {
+void __cdecl CTextMsgHandler::SetMaxMsgCount(int a1) {
   
   unsigned int result; // eax
   _DWORD v2[2]; // [esp-Ch] [ebp-6Ch] BYREF
@@ -801,7 +801,7 @@ void *  CTextMsgHandler::GetEventFunction(void) {
 
 // address=[0x14cf3e0]
 // Decompiled from bool __cdecl CTextMsgHandler::CheckWarning(const char *a1, int *a2)
-static bool __cdecl CTextMsgHandler::CheckWarning(char const *,int *) {
+bool __cdecl CTextMsgHandler::CheckWarning(char const *,int *) {
   
   int MsgLevelMask; // [esp+0h] [ebp-8h]
   unsigned int v4; // [esp+4h] [ebp-4h]
@@ -848,7 +848,7 @@ static bool __cdecl CTextMsgHandler::CheckWarning(char const *,int *) {
 
 // address=[0x14cf4d0]
 // Decompiled from char __cdecl CTextMsgHandler::CheckExists(struct STextMessage *a1)
-static bool __cdecl CTextMsgHandler::CheckExists(struct STextMessage *) {
+bool __cdecl CTextMsgHandler::CheckExists(struct STextMessage * a1) {
   
   _BYTE v2[12]; // [esp+4h] [ebp-3Ch] BYREF
   _BYTE v3[12]; // [esp+10h] [ebp-30h] BYREF
@@ -897,7 +897,7 @@ static bool __cdecl CTextMsgHandler::CheckExists(struct STextMessage *) {
 
 // address=[0x14cf600]
 // Decompiled from char __thiscall CTextMsgHandler::OnEvent(CTextMsgHandler *this, struct CEvn_Event *a2)
-bool  CTextMsgHandler::OnEvent(class CEvn_Event &) {
+bool  CTextMsgHandler::OnEvent(class CEvn_Event & a2) {
   
   unsigned int event; // [esp+8h] [ebp-8h]
 
@@ -931,7 +931,7 @@ bool  CTextMsgHandler::OnEvent(class CEvn_Event &) {
 
 // address=[0x14cf6d0]
 // Decompiled from void __cdecl CTextMsgHandler::AddMsgToVector(struct STextMessage *a1)
-static void __cdecl CTextMsgHandler::AddMsgToVector(struct STextMessage *) {
+void __cdecl CTextMsgHandler::AddMsgToVector(struct STextMessage * a1) {
   
   _DWORD v1[2]; // [esp-Ch] [ebp-4Ch] BYREF
   int v2; // [esp-4h] [ebp-44h]
@@ -979,7 +979,7 @@ static void __cdecl CTextMsgHandler::AddMsgToVector(struct STextMessage *) {
 
 // address=[0x14cf800]
 // Decompiled from int __cdecl CTextMsgHandler::GetPlayerIcon(int a1)
-static int __cdecl CTextMsgHandler::GetPlayerIcon(int) {
+int __cdecl CTextMsgHandler::GetPlayerIcon(int a1) {
   
   int result; // eax
 
@@ -1019,7 +1019,7 @@ static int __cdecl CTextMsgHandler::GetPlayerIcon(int) {
 
 // address=[0x14cf890]
 // Decompiled from int __cdecl CTextMsgHandler::GetSwitchMask(unsigned int a1)
-static unsigned int __cdecl CTextMsgHandler::GetSwitchMask(unsigned int) {
+unsigned int __cdecl CTextMsgHandler::GetSwitchMask(unsigned int a1) {
   
   if ( (_BYTE)a1 )
     return 1;

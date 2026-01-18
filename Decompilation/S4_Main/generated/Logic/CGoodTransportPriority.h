@@ -1,31 +1,33 @@
 #ifndef CGOODTRANSPORTPRIORITY_H
 #define CGOODTRANSPORTPRIORITY_H
 
+#include "defines.h"
+
 class CGoodTransportPriority : public CPersistence {
 public:
     // address=[0x1400d60]
-    static class CPersistence * __cdecl New(std::istream &);
+    static class CPersistence * __cdecl New(std::istream & a1);
 
     // address=[0x1439ae0]
     int  GetNumberOfPriorities(void);
 
     // address=[0x1439b40]
-    int  GetPriority(enum PILE_TYPES);
+    int  GetPriority(enum PILE_TYPES a2);
 
     // address=[0x1452ac0]
-     CGoodTransportPriority(std::istream &);
+     CGoodTransportPriority(std::istream & a2);
 
     // address=[0x1452b80]
-    virtual void  Store(std::ostream &);
+    virtual void  Store(std::ostream & a2);
 
     // address=[0x1452bf0]
      CGoodTransportPriority(unsigned char);
 
     // address=[0x1452c70]
-    void  ChangePriority(enum PILE_TYPES,int);
+    void  ChangePriority(enum PILE_TYPES a2, int a3);
 
     // address=[0x1452e30]
-    void  GetSortedGoods(int * const);
+    void  GetSortedGoods(int * const a2);
 
     // address=[0x1454260]
     virtual unsigned long  ClassID(void)const;

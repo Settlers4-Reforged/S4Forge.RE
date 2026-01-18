@@ -16,7 +16,7 @@
 
 // address=[0x147eb30]
 // Decompiled from int __thiscall CCDDrive::GetCDType(CCDDrive *this, char a2)
-enum T_S4_CDROM_TYPE  CCDDrive::GetCDType(char) {
+enum T_S4_CDROM_TYPE  CCDDrive::GetCDType(char a2) {
   
   int v3; // [esp+8h] [ebp-80Ch]
   int i; // [esp+Ch] [ebp-808h]
@@ -43,7 +43,7 @@ enum T_S4_CDROM_TYPE  CCDDrive::GetCDType(char) {
 
 // address=[0x147ec40]
 // Decompiled from char __thiscall CCDDrive::GetCDDrive(_BYTE *this, int a2)
-char  CCDDrive::GetCDDrive(enum T_S4_CDROM_TYPE) {
+char  CCDDrive::GetCDDrive(enum T_S4_CDROM_TYPE a2) {
   
   int v3; // eax
   int v4; // eax
@@ -82,7 +82,7 @@ char  CCDDrive::GetCDDrive(enum T_S4_CDROM_TYPE) {
 
 // address=[0x147ed00]
 // Decompiled from char __thiscall CCDDrive::GetCDPath(void *this, void *a2, LPCWSTR lpFileName, int a4)
-bool  CCDDrive::GetCDPath(std::wstring &,wchar_t const *,int) {
+bool  CCDDrive::GetCDPath(std::wstring & a2, wchar_t const * lpFileName, int a4) {
   
   int i; // [esp+0h] [ebp-1114h]
   int j; // [esp+4h] [ebp-1110h]
@@ -176,7 +176,7 @@ bool  CCDDrive::GetCDPath(std::wstring &,wchar_t const *,int) {
 
 // address=[0x147ea30]
 // Decompiled from char __cdecl CCDDrive::FindFile(LPCWSTR lpFileName)
-static bool __cdecl CCDDrive::FindFile(wchar_t const *) {
+bool __cdecl CCDDrive::FindFile(wchar_t const * lpFileName) {
   
   HANDLE hFindFile; // [esp+0h] [ebp-258h]
   struct _WIN32_FIND_DATAW FindFileData; // [esp+4h] [ebp-254h] BYREF
@@ -193,7 +193,7 @@ static bool __cdecl CCDDrive::FindFile(wchar_t const *) {
 
 // address=[0x147eab0]
 // Decompiled from UINT __thiscall CCDDrive::GetDriveTypeA(CCDDrive *this, CHAR a2)
-unsigned int  CCDDrive::GetDriveTypeA(char) {
+unsigned int  CCDDrive::GetDriveTypeA(char a2) {
   
   CHAR RootPathName[4]; // [esp+8h] [ebp-Ch] BYREF
   int v4; // [esp+Ch] [ebp-8h]
@@ -209,7 +209,7 @@ unsigned int  CCDDrive::GetDriveTypeA(char) {
 
 // address=[0x147f1f0]
 // Decompiled from bool __cdecl CCDDrive::AreCDTypesMatching(int a1, int a2)
-static bool __cdecl CCDDrive::AreCDTypesMatching(enum T_S4_CDROM_TYPE,enum T_S4_CDROM_TYPE) {
+bool __cdecl CCDDrive::AreCDTypesMatching(enum T_S4_CDROM_TYPE a1, enum T_S4_CDROM_TYPE a2) {
   
   bool v4; // [esp+6h] [ebp-2h]
   bool v5; // [esp+7h] [ebp-1h]

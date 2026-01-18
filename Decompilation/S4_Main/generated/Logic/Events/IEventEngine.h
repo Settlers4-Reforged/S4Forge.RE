@@ -1,6 +1,8 @@
 #ifndef IEVENTENGINE_H
 #define IEVENTENGINE_H
 
+#include "defines.h"
+
 class IEventEngine {
 public:
     // address=[0x1352c00]
@@ -13,55 +15,55 @@ public:
     void *  GetEventFunction(void);
 
     // address=[0x1352d80]
-    bool  OnEvent(class CEvn_Event &);
+    bool  OnEvent(class CEvn_Event & a2);
 
     // address=[0x1352f90]
-    bool  SendRawWindowEvent(unsigned int,unsigned int,unsigned int,unsigned int);
+    bool  SendRawWindowEvent(unsigned int a2, unsigned int a3, unsigned int a4, unsigned int a5);
 
     // address=[0x1353090]
-    bool  SendRawLogicEvent(unsigned int,unsigned int,unsigned int,unsigned int,unsigned int,unsigned int);
+    bool  SendRawLogicEvent(unsigned int a2, unsigned int a3, unsigned int a4, unsigned int a5, unsigned int a6, unsigned int a7);
 
     // address=[0x1353190]
-    bool  SendRawEvent(unsigned int,unsigned int,unsigned int);
+    bool  SendRawEvent(unsigned int a2, unsigned int a3, unsigned int a4);
 
     // address=[0x1353280]
-    bool  RegisterHandle(class IEvn_Handle *);
+    bool  RegisterHandle(class IEvn_Handle * a2);
 
     // address=[0x1353390]
-    bool  SendAMessage(class CEvn_Event &);
+    bool  SendAMessage(class CEvn_Event & a2);
 
     // address=[0x13533b0]
-    bool  UnRegisterHandle(class IEvn_Handle *);
+    bool  UnRegisterHandle(class IEvn_Handle * a2);
 
     // address=[0x1353500]
     bool  DispatchSystemMessages(void);
 
     // address=[0x13537d0]
-    void  SetOSParam(unsigned int);
+    void  SetOSParam(unsigned int a2);
 
     // address=[0x13537f0]
-    bool  PlayEvents(std::string const &,int);
+    bool  PlayEvents(std::string const & a2, int a3);
 
     // address=[0x1353a60]
-    bool  RecordEvents(std::string const &);
+    bool  RecordEvents(std::string const & a2);
 
     // address=[0x1353b60]
-    void  SetGuiEventProc(bool (__cdecl*)(struct SEventStruct &));
+    void  SetGuiEventProc(bool (__cdecl*)(struct SEventStruct &) a2);
 
     // address=[0x1355880]
     bool  IsEventEngineLocked(void);
 
     // address=[0x135e0f0]
-    void  SetOSParam1(unsigned int);
+    void  SetOSParam1(unsigned int a2);
 
     // address=[0x148fed0]
-    void  LockEventEngine(bool);
+    void  LockEventEngine(bool a2);
 
     // address=[0x14aaba0]
     unsigned int  GetCurrentTickCounter(void);
 
     // address=[0x14ab030]
-    void  SetTickPointer(unsigned int *);
+    void  SetTickPointer(unsigned int * a2);
 
     // address=[0x14b4720]
     bool  IsEventPlaying(void);

@@ -1,6 +1,8 @@
 #ifndef CAIGOAL_H
 #define CAIGOAL_H
 
+#include "defines.h"
+
 class CAIGoal {
 public:
     // address=[0x1301370]
@@ -16,7 +18,7 @@ public:
     void  Maximum(void);
 
     // address=[0x1314f00]
-    void  Set(int,int,int);
+    void  Set(int a2, int a3, int a4);
 
 };
 

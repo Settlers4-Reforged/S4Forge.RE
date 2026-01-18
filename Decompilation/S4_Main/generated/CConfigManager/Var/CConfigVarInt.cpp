@@ -20,7 +20,7 @@ int  CConfigVarInt::GetIntValue(void)const {
 
 // address=[0x2efa2d0]
 // Decompiled from CConfigVarInt *__thiscall CConfigVarInt::SetValue(CConfigVarInt *this, int a2)
-void  CConfigVarInt::SetValue(int) {
+void  CConfigVarInt::SetValue(int a2) {
   
   CConfigVarInt *result; // eax
 
@@ -32,7 +32,7 @@ void  CConfigVarInt::SetValue(int) {
 
 // address=[0x2efa2f0]
 // Decompiled from int __thiscall CConfigVarInt::SetValue(CConfigVarInt *this, float a2)
-void  CConfigVarInt::SetValue(float) {
+void  CConfigVarInt::SetValue(float a2) {
   
   int result; // eax
 
@@ -44,7 +44,7 @@ void  CConfigVarInt::SetValue(float) {
 
 // address=[0x2ef8730]
 // Decompiled from CConfigVarInt *__thiscall CConfigVarInt::CConfigVarInt(CConfigVarInt *this, int a2)
- CConfigVarInt::CConfigVarInt(int) {
+ CConfigVarInt::CConfigVarInt(int a2) {
   
   CDynamicConfigVar::CDynamicConfigVar(this, 1, 1);
   *(_DWORD *)this = &CConfigVarInt::_vftable_;

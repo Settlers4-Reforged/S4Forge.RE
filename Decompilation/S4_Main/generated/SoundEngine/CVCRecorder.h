@@ -1,6 +1,8 @@
 #ifndef CVCRECORDER_H
 #define CVCRECORDER_H
 
+#include "defines.h"
+
 class CVCRecorder {
 public:
     // address=[0x2fd71f0]
@@ -10,19 +12,19 @@ public:
     virtual  ~CVCRecorder(void);
 
     // address=[0x2fd7380]
-    bool  Start(int,char *,int,struct _DIG_DRIVER *);
+    bool  Start(int a2, char * a3, int a4, struct _DIG_DRIVER * a5);
 
     // address=[0x2fd7490]
-    static long __stdcall EncodeDataCB(unsigned long,void *,long,long);
+    static long __stdcall EncodeDataCB(unsigned long a1, void * a2, long a3, long a4);
 
     // address=[0x2fd74c0]
-    static void __stdcall RecordInputCB(void const *,long,unsigned long);
+    static void __stdcall RecordInputCB(void const * Src, long Size, unsigned long a3);
 
     // address=[0x2fd74e0]
-    long  CopyDataToEncoder(void *,long,long);
+    long  CopyDataToEncoder(void * a2, long a3, long a4);
 
     // address=[0x2fd75f0]
-    int  GetEncodedData(signed char *,int);
+    int  GetEncodedData(signed char * a2, int a3);
 
     // address=[0x2fd7660]
     void  Shutdown(void);
@@ -31,7 +33,7 @@ public:
     int  GetFrameSize(void);
 
     // address=[0x2fd76f0]
-    void  ToggleRecording(bool);
+    void  ToggleRecording(bool a2);
 
     // address=[0x2fd7870]
     bool  IsRecording(void);
@@ -46,23 +48,23 @@ public:
     void  CalcNoiseVol(void);
 
     // address=[0x2fd7910]
-    void  SetOperationMode(bool);
+    void  SetOperationMode(bool a2);
 
 private:
     // address=[0x2fd6990]
-    bool  InitEncoder(char *);
+    bool  InitEncoder(char * a2);
 
     // address=[0x2fd6b30]
-    void  RecordInput(void const *,long);
+    void  RecordInput(void const * Src, long Size);
 
     // address=[0x2fd6cf0]
-    bool  Downsample(void const *,int);
+    bool  Downsample(void const * a2, int a3);
 
     // address=[0x2fd6e60]
-    bool  InitInputDriver(int);
+    bool  InitInputDriver(int a2);
 
     // address=[0x2fd7090]
-    int  CalcInputBufferSize(int);
+    int  CalcInputBufferSize(int a2);
 
 };
 

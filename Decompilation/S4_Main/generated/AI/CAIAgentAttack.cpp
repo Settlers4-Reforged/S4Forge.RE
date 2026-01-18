@@ -111,7 +111,7 @@ LABEL_23:
 
 // address=[0x12ffd40]
 // Decompiled from int __thiscall CAIAgentAttack::Load(CAIAgentAttack *this, struct IS4Chunk *a2)
-void  CAIAgentAttack::Load(class IS4Chunk &) {
+void  CAIAgentAttack::Load(class IS4Chunk & a2) {
   
   CAIAgentAttack::ResetAttackState(this);
   (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 12))(a2, -1516290048);
@@ -134,7 +134,7 @@ void  CAIAgentAttack::Load(class IS4Chunk &) {
 
 // address=[0x12ffe70]
 // Decompiled from int __thiscall CAIAgentAttack::Save(CAIAgentAttack *this, struct IS4Chunk *a2)
-void  CAIAgentAttack::Save(class IS4Chunk &) {
+void  CAIAgentAttack::Save(class IS4Chunk & a2) {
   
   (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 24))(a2, -1516290048);
   (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 20))(a2, 1);
@@ -156,7 +156,7 @@ void  CAIAgentAttack::Save(class IS4Chunk &) {
 
 // address=[0x12fffa0]
 // Decompiled from int __thiscall CAIAgentAttack::SetOwnFighterNumberAndValue(CAIAgentAttack *this, int a2, int a3)
-void  CAIAgentAttack::SetOwnFighterNumberAndValue(int,int) {
+void  CAIAgentAttack::SetOwnFighterNumberAndValue(int a2, int a3) {
   
   int result; // eax
 
@@ -169,7 +169,7 @@ void  CAIAgentAttack::SetOwnFighterNumberAndValue(int,int) {
 
 // address=[0x12fffc0]
 // Decompiled from char __thiscall CAIAgentAttack::AttackNow(CAIAgentAttack *this, int a2, int a3)
-bool  CAIAgentAttack::AttackNow(int,int) {
+bool  CAIAgentAttack::AttackNow(int a2, int a3) {
   
   struct CAINormalSectorAI *v4; // eax
   pairNode *v5; // eax
@@ -239,7 +239,7 @@ void  CAIAgentAttack::ResetAttackTarget(void) {
 
 // address=[0x1300110]
 // Decompiled from char __thiscall CAIAgentAttack::SetAttackTarget(CAIAgentAttack *this, int a2)
-bool  CAIAgentAttack::SetAttackTarget(int) {
+bool  CAIAgentAttack::SetAttackTarget(int a2) {
   
   int v3; // [esp+0h] [ebp-Ch]
   int v4; // [esp+4h] [ebp-8h]
@@ -310,7 +310,7 @@ int  CAIAgentAttack::OrderSquadsToAttack(void) {
 
 // address=[0x1300280]
 // Decompiled from int __thiscall CAIAgentAttack::OrderSquadsHome(CAINormalSectorAgent *this, int a2)
-void  CAIAgentAttack::OrderSquadsHome(enum T_AI_TASK_FORCE_CMD) {
+void  CAIAgentAttack::OrderSquadsHome(enum T_AI_TASK_FORCE_CMD a2) {
   
   struct CAINormalSectorAI *v2; // eax
   struct CAINormalSectorAI *v3; // eax
@@ -343,7 +343,7 @@ void  CAIAgentAttack::OrderSquadsHome(enum T_AI_TASK_FORCE_CMD) {
 
 // address=[0x13002f0]
 // Decompiled from bool __stdcall CAIAgentAttack::CheckSquadTarget(CAITaskForce *a1)
-bool  CAIAgentAttack::CheckSquadTarget(class CAITaskForce *) {
+bool  CAIAgentAttack::CheckSquadTarget(class CAITaskForce * a1) {
   
   int v2; // [esp+4h] [ebp-8h]
   int v3; // [esp+8h] [ebp-4h]
@@ -383,7 +383,7 @@ int  CAIAgentAttack::CheckIfSneakUpPositionIsReached(void) {
 
 // address=[0x13003a0]
 // Decompiled from bool __thiscall CAIAgentAttack::CheckCurrentTarget(CAIAgentAttack *this, bool a2)
-bool  CAIAgentAttack::CheckCurrentTarget(bool) {
+bool  CAIAgentAttack::CheckCurrentTarget(bool a2) {
   
   struct CAINormalSectorAI *v2; // eax
   pairNode *v3; // eax
@@ -501,7 +501,7 @@ int  CAIAgentAttack::CheckSquadTargets(void) {
 
 // address=[0x1300630]
 // Decompiled from bool __fastcall CAIAgentAttack::FindNearTarget(CAIAgentAttack *this, int a2, struct CAITaskForce *a3, int a4, int *a5)
-bool  CAIAgentAttack::FindNearTarget(class CAITaskForce *,int,int &) {
+bool  CAIAgentAttack::FindNearTarget(class CAITaskForce * a2, int a3, int & a4) {
   
   int v6; // eax
   _DWORD v7[3]; // [esp+0h] [ebp-18h] BYREF
@@ -524,7 +524,7 @@ bool  CAIAgentAttack::FindNearTarget(class CAITaskForce *,int,int &) {
 
 // address=[0x13006e0]
 // Decompiled from char __thiscall CAIAgentAttack::CheckStrengthAndFindAnyTarget(CAIAgentAttack *this, int a2, int a3)
-bool  CAIAgentAttack::CheckStrengthAndFindAnyTarget(int,int) {
+bool  CAIAgentAttack::CheckStrengthAndFindAnyTarget(int a2, int a3) {
   
   pairNode *v3; // eax
   CAIGoal *v4; // eax
@@ -609,7 +609,7 @@ bool  CAIAgentAttack::CheckStrengthAndFindAnyTarget(int,int) {
 
 // address=[0x13008d0]
 // Decompiled from bool __thiscall CAIAgentAttack::OrderSquadsToSneakUpPosition(CAIAgentAttack *this, int a2)
-bool  CAIAgentAttack::OrderSquadsToSneakUpPosition(int) {
+bool  CAIAgentAttack::OrderSquadsToSneakUpPosition(int a2) {
   
   CAITaskForce *v3; // [esp+0h] [ebp-1D8h] BYREF
   int *v5; // [esp+8h] [ebp-1D0h]

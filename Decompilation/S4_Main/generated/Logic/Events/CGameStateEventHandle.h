@@ -1,6 +1,8 @@
 #ifndef CGAMESTATEEVENTHANDLE_H
 #define CGAMESTATEEVENTHANDLE_H
 
+#include "defines.h"
+
 class CGameStateEventHandle : public IEvn_Handle {
 public:
     // address=[0x1489f60]
@@ -10,7 +12,7 @@ public:
     virtual  ~CGameStateEventHandle(void);
 
     // address=[0x1489fa0]
-    virtual bool  OnEvent(class CEvn_Event &);
+    virtual bool  OnEvent(class CEvn_Event & a2);
 
 };
 

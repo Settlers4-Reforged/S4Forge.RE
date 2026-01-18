@@ -1,6 +1,8 @@
 #ifndef IANIMATEDENTITY_H
 #define IANIMATEDENTITY_H
 
+#include "defines.h"
+
 class IAnimatedEntity : public IEntity {
 public:
     // address=[0x1307150]
@@ -16,22 +18,22 @@ public:
     int  Previous(void)const;
 
     // address=[0x1439e10]
-    void  SetNext(int);
+    void  SetNext(int a2);
 
     // address=[0x1439eb0]
-    void  SetPrevious(int);
+    void  SetPrevious(int a2);
 
     // address=[0x14d87d0]
-    void  SetLastUpdateTick(unsigned int);
+    void  SetLastUpdateTick(unsigned int a2);
 
     // address=[0x14e31a0]
-    int  RegisterForLogicUpdate(int);
+    int  RegisterForLogicUpdate(int a2);
 
     // address=[0x14e31d0]
     void  UnRegisterFromLogicUpdate(void);
 
     // address=[0x14e3210]
-    virtual void  SetEvent(class CEntityEvent const &);
+    virtual void  SetEvent(class CEntityEvent const & a2);
 
     // address=[0x14e3270]
     virtual void  ClearAllQueuedEvents(void);
@@ -43,7 +45,7 @@ public:
     virtual  ~IAnimatedEntity(void);
 
     // address=[0x14eb000]
-     IAnimatedEntity(int);
+     IAnimatedEntity(int a2);
 
     // address=[0x14eb2a0]
     int  AttackerPlayerId(void)const;
@@ -55,29 +57,29 @@ public:
     int  JobPart(void)const;
 
     // address=[0x15639c0]
-    void  SetFrame(int);
+    void  SetFrame(int a2);
 
     // address=[0x15670a0]
     bool  EventQueueEmpty(void)const;
 
     // address=[0x1567140]
-    void  SetJobPart(int);
+    void  SetJobPart(int a2);
 
 protected:
     // address=[0x14e3460]
-     IAnimatedEntity(std::istream &);
+     IAnimatedEntity(std::istream & a2);
 
     // address=[0x14e35f0]
-    virtual void  Store(std::ostream &);
+    virtual void  Store(std::ostream & a2);
 
     // address=[0x14e3780]
     bool  ProcessAllEvents(void);
 
     // address=[0x14e4ae0]
-    virtual void  ConvertEventIntoGoal(class CEntityEvent *);
+    virtual void  ConvertEventIntoGoal(class CEntityEvent * a1);
 
     // address=[0x14e4b90]
-    int  SetLastLogicUpdate(int);
+    int  SetLastLogicUpdate(int a2);
 
     // Type information members
 private:

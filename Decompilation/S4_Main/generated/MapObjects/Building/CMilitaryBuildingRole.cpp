@@ -4,7 +4,7 @@
 
 // address=[0x14013a0]
 // Decompiled from int __cdecl CMilitaryBuildingRole::New(int a1)
-static class CPersistence * __cdecl CMilitaryBuildingRole::New(std::istream &) {
+class CPersistence * __cdecl CMilitaryBuildingRole::New(std::istream & a1) {
   
   if ( operator new(0x1B8u) )
     return CMilitaryBuildingRole::CMilitaryBuildingRole(a1);
@@ -45,7 +45,7 @@ unsigned long  CMilitaryBuildingRole::ClassID(void)const {
 
 // address=[0x14fd3c0]
 // Decompiled from void *__thiscall CMilitaryBuildingRole::GetBuildingNeed(std::_Ref_count_base *this, const struct type_info *a2)
-int  CMilitaryBuildingRole::GetBuildingNeed(int)const {
+int  CMilitaryBuildingRole::GetBuildingNeed(int a2)const {
   
   return 0;
 }
@@ -61,7 +61,7 @@ int  CMilitaryBuildingRole::GetBuildingRole(void) {
 
 // address=[0x14fd660]
 // Decompiled from void *__thiscall CMilitaryBuildingRole::GetPileIdWithGood(std::_Ref_count_base *this, const struct type_info *a2)
-int  CMilitaryBuildingRole::GetPileIdWithGood(int)const {
+int  CMilitaryBuildingRole::GetPileIdWithGood(int a2)const {
   
   return 0;
 }
@@ -69,7 +69,7 @@ int  CMilitaryBuildingRole::GetPileIdWithGood(int)const {
 
 // address=[0x14fd730]
 // Decompiled from void __thiscall CMilitaryBuildingRole::GoodArrive(CMilitaryBuildingRole *this, int a2)
-void  CMilitaryBuildingRole::GoodArrive(int) {
+void  CMilitaryBuildingRole::GoodArrive(int a2) {
   
   ;
 }
@@ -77,7 +77,7 @@ void  CMilitaryBuildingRole::GoodArrive(int) {
 
 // address=[0x14fdaf0]
 // Decompiled from int __cdecl CMilitaryBuildingRole::Load(int a1)
-static class CMilitaryBuildingRole * __cdecl CMilitaryBuildingRole::Load(std::istream &) {
+class CMilitaryBuildingRole * __cdecl CMilitaryBuildingRole::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
@@ -89,7 +89,7 @@ static class CMilitaryBuildingRole * __cdecl CMilitaryBuildingRole::Load(std::is
 
 // address=[0x150de70]
 // Decompiled from int __thiscall CMilitaryBuildingRole::LogicUpdate(CMilitaryBuildingRole *this, struct CBuilding *a2)
-void  CMilitaryBuildingRole::LogicUpdate(class CBuilding *) {
+void  CMilitaryBuildingRole::LogicUpdate(class CBuilding * a2) {
   
   unsigned int v2; // esi
   int v3; // eax
@@ -115,7 +115,7 @@ void  CMilitaryBuildingRole::LogicUpdate(class CBuilding *) {
 
 // address=[0x150df40]
 // Decompiled from int __thiscall CMilitaryBuildingRole::Update(int this, CMFCCaptionButton *a2)
-void  CMilitaryBuildingRole::Update(class CBuilding *) {
+void  CMilitaryBuildingRole::Update(class CBuilding * a2) {
   
   int result; // eax
 
@@ -133,7 +133,7 @@ void  CMilitaryBuildingRole::Update(class CBuilding *) {
 
 // address=[0x150dfa0]
 // Decompiled from int __thiscall CMilitaryBuildingRole::FillGfxInfo(_DWORD *this, unsigned __int16 *a2, int a3)
-void  CMilitaryBuildingRole::FillGfxInfo(class CBuilding *,struct SGfxObjectInfo &) {
+void  CMilitaryBuildingRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo & a3) {
   
   _DWORD *v3; // eax
   int v4; // eax
@@ -272,7 +272,7 @@ void  CMilitaryBuildingRole::FillGfxInfo(class CBuilding *,struct SGfxObjectInfo
 
 // address=[0x150e500]
 // Decompiled from int __thiscall CMilitaryBuildingRole::Init(_DWORD *this, _DWORD *a2)
-void  CMilitaryBuildingRole::Init(class CBuilding *) {
+void  CMilitaryBuildingRole::Init(class CBuilding * a2) {
   
   int v2; // eax
   int v3; // eax
@@ -348,7 +348,7 @@ void  CMilitaryBuildingRole::Init(class CBuilding *) {
 
 // address=[0x150e760]
 // Decompiled from int __thiscall CMilitaryBuildingRole::PostLoadInit(CMilitaryBuildingRole *this, struct CBuilding *a2)
-void  CMilitaryBuildingRole::PostLoadInit(class CBuilding *) {
+void  CMilitaryBuildingRole::PostLoadInit(class CBuilding * a2) {
   
   int v2; // eax
   int result; // eax
@@ -392,7 +392,7 @@ void  CMilitaryBuildingRole::PostLoadInit(class CBuilding *) {
 
 // address=[0x150e860]
 // Decompiled from _DWORD *__thiscall CMilitaryBuildingRole::FillDialog(CMilitaryBuildingRole *this, struct CBuilding *a2, bool a3)
-void  CMilitaryBuildingRole::FillDialog(class CBuilding *,bool) {
+void  CMilitaryBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
   
   int v3; // eax
   int v4; // eax
@@ -495,7 +495,7 @@ void  CMilitaryBuildingRole::FillDialog(class CBuilding *,bool) {
 
 // address=[0x150ebe0]
 // Decompiled from char __thiscall CMilitaryBuildingRole::IncWishAndOrder(CMilitaryBuildingRole *this, int a2, bool a3)
-bool  CMilitaryBuildingRole::IncWishAndOrder(int,bool) {
+bool  CMilitaryBuildingRole::IncWishAndOrder(int a2, bool a3) {
   
   if ( a2 == 2 )
   {
@@ -538,7 +538,7 @@ bool  CMilitaryBuildingRole::IncWishAndOrder(int,bool) {
 
 // address=[0x150ed30]
 // Decompiled from int __thiscall CMilitaryBuildingRole::GetWish(unsigned __int8 *this, int a2)
-int  CMilitaryBuildingRole::GetWish(int) {
+int  CMilitaryBuildingRole::GetWish(int a2) {
   
   if ( a2 == 2 )
     return this[385];
@@ -550,7 +550,7 @@ int  CMilitaryBuildingRole::GetWish(int) {
 
 // address=[0x150ed70]
 // Decompiled from int __thiscall CMilitaryBuildingRole::Decrease(CMilitaryBuildingRole *this, int a2)
-int  CMilitaryBuildingRole::Decrease(int) {
+int  CMilitaryBuildingRole::Decrease(int a2) {
   
   int v3; // [esp+0h] [ebp-Ch]
   IEntity *BuildingPtr; // [esp+8h] [ebp-4h]
@@ -571,7 +571,7 @@ int  CMilitaryBuildingRole::Decrease(int) {
 
 // address=[0x150edf0]
 // Decompiled from char __thiscall CMilitaryBuildingRole::HaveFreeSlots(CMilitaryBuildingRole *this, int a2)
-bool  CMilitaryBuildingRole::HaveFreeSlots(int) {
+bool  CMilitaryBuildingRole::HaveFreeSlots(int a2) {
   
   if ( a2 != 2 )
   {
@@ -609,7 +609,7 @@ bool  CMilitaryBuildingRole::HaveFreeSlots(int) {
 
 // address=[0x150ef80]
 // Decompiled from int __thiscall CMilitaryBuildingRole::RemoveInhabitant(CMilitaryBuildingRole *this, struct CBuilding *a2)
-void  CMilitaryBuildingRole::RemoveInhabitant(class CBuilding *) {
+void  CMilitaryBuildingRole::RemoveInhabitant(class CBuilding * a2) {
   
   int result; // eax
   _WORD *v3; // eax
@@ -648,7 +648,7 @@ void  CMilitaryBuildingRole::RemoveInhabitant(class CBuilding *) {
 
 // address=[0x150f070]
 // Decompiled from void __thiscall CMilitaryBuildingRole::InhabitantFlee(CMilitaryBuildingRole *this, int a2)
-void  CMilitaryBuildingRole::InhabitantFlee(int) {
+void  CMilitaryBuildingRole::InhabitantFlee(int a2) {
   
   int v2; // [esp+0h] [ebp-10h]
   signed int Slot; // [esp+8h] [ebp-8h]
@@ -727,7 +727,7 @@ void  CMilitaryBuildingRole::InhabitantFlee(int) {
 
 // address=[0x150f2c0]
 // Decompiled from CMilitaryBuildingRole *__thiscall CMilitaryBuildingRole::SetDoorInvincible(CMilitaryBuildingRole *this, int a2)
-void  CMilitaryBuildingRole::SetDoorInvincible(int) {
+void  CMilitaryBuildingRole::SetDoorInvincible(int a2) {
   
   CMilitaryBuildingRole *result; // eax
   int v3; // eax
@@ -753,7 +753,7 @@ void  CMilitaryBuildingRole::SetDoorInvincible(int) {
 
 // address=[0x150f340]
 // Decompiled from char *__thiscall CMilitaryBuildingRole::CMilitaryBuildingRole(char *this, int a2)
- CMilitaryBuildingRole::CMilitaryBuildingRole(std::istream &) {
+ CMilitaryBuildingRole::CMilitaryBuildingRole(std::istream & a2) {
   
   unsigned int v2; // eax
   int pExceptionObject; // [esp+4h] [ebp-24h] BYREF
@@ -814,7 +814,7 @@ void  CMilitaryBuildingRole::SetDoorInvincible(int) {
 
 // address=[0x150f5c0]
 // Decompiled from unsigned int __thiscall CMilitaryBuildingRole::Store(struct IBuildingRole *this, struct std::ostream *a2)
-void  CMilitaryBuildingRole::Store(std::ostream &) {
+void  CMilitaryBuildingRole::Store(std::ostream & a2) {
   
   __int16 *v2; // eax
   unsigned int result; // eax
@@ -933,7 +933,7 @@ bool  CMilitaryBuildingRole::CrushBuilding(void) {
 
 // address=[0x150f8d0]
 // Decompiled from char __thiscall CMilitaryBuildingRole::SettlerEnter(CMilitaryBuildingRole *this, struct CBuilding *a2, int a3)
-bool  CMilitaryBuildingRole::SettlerEnter(class CBuilding *,int) {
+bool  CMilitaryBuildingRole::SettlerEnter(class CBuilding * a2, int a3) {
   
   int v3; // esi
   unsigned __int8 *v4; // eax
@@ -1065,7 +1065,7 @@ bool  CMilitaryBuildingRole::SettlerEnter(class CBuilding *,int) {
 
 // address=[0x150fd20]
 // Decompiled from char __thiscall CMilitaryBuildingRole::FirstSettlerEnter(CMilitaryBuildingRole *this, struct CBuilding *a2, int a3)
-bool  CMilitaryBuildingRole::FirstSettlerEnter(class CBuilding *,int) {
+bool  CMilitaryBuildingRole::FirstSettlerEnter(class CBuilding * a2, int a3) {
   
   int v4; // esi
   int v5; // eax
@@ -1224,7 +1224,7 @@ bool  CMilitaryBuildingRole::FirstSettlerEnter(class CBuilding *,int) {
 
 // address=[0x1510190]
 // Decompiled from void __thiscall CMilitaryBuildingRole::TowerGuardEnter(CMilitaryBuildingRole *this, bool a2)
-void  CMilitaryBuildingRole::TowerGuardEnter(bool) {
+void  CMilitaryBuildingRole::TowerGuardEnter(bool a2) {
   
   int v2; // esi
   CMFCToolBarButton *v3; // [esp+4h] [ebp-Ch]
@@ -1266,7 +1266,7 @@ void  CMilitaryBuildingRole::TowerGuardEnter(bool) {
 
 // address=[0x15102d0]
 // Decompiled from int __thiscall CMilitaryBuildingRole::KillInhabitant(CMilitaryBuildingRole *this, struct CBuilding *a2)
-void  CMilitaryBuildingRole::KillInhabitant(class CBuilding *) {
+void  CMilitaryBuildingRole::KillInhabitant(class CBuilding * a2) {
   
   int v2; // eax
   int result; // eax
@@ -1312,7 +1312,7 @@ void  CMilitaryBuildingRole::KillInhabitant(class CBuilding *) {
 
 // address=[0x15103f0]
 // Decompiled from char __thiscall CMilitaryBuildingRole::SearchAttacker(CMilitaryBuildingRole *this, struct CBuilding *a2)
-bool  CMilitaryBuildingRole::SearchAttacker(class CBuilding *) {
+bool  CMilitaryBuildingRole::SearchAttacker(class CBuilding * a2) {
   
   int v2; // eax
   int v4; // [esp-10h] [ebp-14h]
@@ -1357,7 +1357,7 @@ void  CMilitaryBuildingRole::ThrowOut(class CBuilding *) {
 
 // address=[0x1510510]
 // Decompiled from void __thiscall CMilitaryBuildingRole::ThrowOutId(CMilitaryBuildingRole *this, struct CBuilding *a2)
-void  CMilitaryBuildingRole::ThrowOutId(class CBuilding *) {
+void  CMilitaryBuildingRole::ThrowOutId(class CBuilding * a2) {
   
   int v2; // eax
   int v3; // esi
@@ -1436,7 +1436,7 @@ void  CMilitaryBuildingRole::ThrowOutId(class CBuilding *) {
 
 // address=[0x1510780]
 // Decompiled from int __thiscall CMilitaryBuildingRole::ThrowOutSettler(CMilitaryBuildingRole *this, struct CBuilding *a2, signed int a3)
-void  CMilitaryBuildingRole::ThrowOutSettler(class CBuilding *,int) {
+void  CMilitaryBuildingRole::ThrowOutSettler(class CBuilding * a2, int a3) {
   
   int v3; // eax
   unsigned int v4; // eax
@@ -1527,7 +1527,7 @@ void  CMilitaryBuildingRole::FillAllSlots(void) {
 
 // address=[0x1510a70]
 // Decompiled from char __thiscall CMilitaryBuildingRole::OrderWarrior(CMilitaryBuildingRole *this, struct CBuilding *a2)
-void  CMilitaryBuildingRole::OrderWarrior(class CBuilding *) {
+void  CMilitaryBuildingRole::OrderWarrior(class CBuilding * a2) {
   
   int LocalPlayerId; // eax
   int v3; // esi
@@ -1734,7 +1734,7 @@ void  CMilitaryBuildingRole::MoveAfterWindow(void) {
 
 // address=[0x15112c0]
 // Decompiled from int __thiscall CMilitaryBuildingRole::InsertDoor(CMilitaryBuildingRole *this, struct CBuilding *a2, bool a3)
-void  CMilitaryBuildingRole::InsertDoor(class CBuilding *,bool) {
+void  CMilitaryBuildingRole::InsertDoor(class CBuilding * a2, bool a3) {
   
   int result; // eax
   int v4; // [esp+4h] [ebp-14h]
@@ -1793,7 +1793,7 @@ void  CMilitaryBuildingRole::InsertDoor(class CBuilding *,bool) {
 
 // address=[0x15114b0]
 // Decompiled from CMilitaryBuildingRole *__thiscall CMilitaryBuildingRole::RemoveDoorIfNecessary(  CMilitaryBuildingRole *this,  struct CBuilding *a2)
-void  CMilitaryBuildingRole::RemoveDoorIfNecessary(class CBuilding *) {
+void  CMilitaryBuildingRole::RemoveDoorIfNecessary(class CBuilding * a2) {
   
   CMilitaryBuildingRole *result; // eax
   CSettler *v3; // [esp+0h] [ebp-Ch]
@@ -1816,7 +1816,7 @@ void  CMilitaryBuildingRole::RemoveDoorIfNecessary(class CBuilding *) {
 
 // address=[0x1511550]
 // Decompiled from int __thiscall CMilitaryBuildingRole::MakeInvisibleDoorVisible(CMilitaryBuildingRole *this, struct CBuilding *a2)
-void  CMilitaryBuildingRole::MakeInvisibleDoorVisible(class CBuilding *) {
+void  CMilitaryBuildingRole::MakeInvisibleDoorVisible(class CBuilding * a2) {
   
   int result; // eax
   _DWORD *v3; // [esp+4h] [ebp-Ch]
@@ -2064,7 +2064,7 @@ void  CMilitaryBuildingRole::InsertTowerGuard(void) {
 
 // address=[0x1511c50]
 // Decompiled from int __thiscall CMilitaryBuildingRole::CancelAllOrders(CMilitaryBuildingRole *this, struct CBuilding *a2)
-void  CMilitaryBuildingRole::CancelAllOrders(class CBuilding *) {
+void  CMilitaryBuildingRole::CancelAllOrders(class CBuilding * a2) {
   
   int result; // eax
   _BYTE v3[24]; // [esp+4h] [ebp-30h] BYREF
@@ -2088,7 +2088,7 @@ void  CMilitaryBuildingRole::CancelAllOrders(class CBuilding *) {
 
 // address=[0x1511ce0]
 // Decompiled from int __thiscall CMilitaryBuildingRole::GetFirstFreeSlot(CMilitaryBuildingRole *this, bool a2)
-int  CMilitaryBuildingRole::GetFirstFreeSlot(bool) {
+int  CMilitaryBuildingRole::GetFirstFreeSlot(bool a2) {
   
   int v3; // [esp+0h] [ebp-Ch]
   signed int i; // [esp+8h] [ebp-4h]
@@ -2117,7 +2117,7 @@ int  CMilitaryBuildingRole::GetFirstFreeSlot(bool) {
 
 // address=[0x1511da0]
 // Decompiled from int __thiscall CMilitaryBuildingRole::GetLastUsedSlot(CMilitaryBuildingRole *this, bool a2, bool a3)
-int  CMilitaryBuildingRole::GetLastUsedSlot(bool,bool) {
+int  CMilitaryBuildingRole::GetLastUsedSlot(bool a2, bool a3) {
   
   _WORD *v3; // eax
   signed int i; // [esp+8h] [ebp-8h]
@@ -2149,7 +2149,7 @@ int  CMilitaryBuildingRole::GetLastUsedSlot(bool,bool) {
 
 // address=[0x1511e80]
 // Decompiled from int __thiscall CMilitaryBuildingRole::GetSlot(CMilitaryBuildingRole *this, int a2)
-int  CMilitaryBuildingRole::GetSlot(int) {
+int  CMilitaryBuildingRole::GetSlot(int a2) {
   
   int v3; // [esp+0h] [ebp-Ch]
   signed int i; // [esp+8h] [ebp-4h]
@@ -2177,7 +2177,7 @@ int  CMilitaryBuildingRole::GetSlot(int) {
 
 // address=[0x1511f30]
 // Decompiled from _DWORD *__thiscall CMilitaryBuildingRole::ConvertEventIntoGoal(  CMilitaryBuildingRole *this,  struct CBuilding *a2,  struct CEntityEvent *a3)
-void  CMilitaryBuildingRole::ConvertEventIntoGoal(class CBuilding *,class CEntityEvent *) {
+void  CMilitaryBuildingRole::ConvertEventIntoGoal(class CBuilding * a2, class CEntityEvent * a3) {
   
   int v4; // [esp+8h] [ebp-8h]
 
@@ -2230,7 +2230,7 @@ void  CMilitaryBuildingRole::ConvertEventIntoGoal(class CBuilding *,class CEntit
 
 // address=[0x15120d0]
 // Decompiled from int __thiscall CMilitaryBuildingRole::SetSettlerTowerInfo(  CMilitaryBuildingRole *this,  struct CSettler *a2,  signed int Slot,  int a4,  bool a5)
-void  CMilitaryBuildingRole::SetSettlerTowerInfo(class CSettler &,int,int,bool) {
+void  CMilitaryBuildingRole::SetSettlerTowerInfo(class CSettler & a2, int Slot, int a4, bool a5) {
   
   void **v5; // eax
   int v6; // esi
@@ -2326,7 +2326,7 @@ void  CMilitaryBuildingRole::SetSettlerTowerInfo(class CSettler &,int,int,bool) 
 
 // address=[0x1512380]
 // Decompiled from CMilitaryBuildingRole *__thiscall CMilitaryBuildingRole::SetEffectDisplay(CMilitaryBuildingRole *this, int a2, int a3)
-void  CMilitaryBuildingRole::SetEffectDisplay(int,int) {
+void  CMilitaryBuildingRole::SetEffectDisplay(int a2, int a3) {
   
   CMilitaryBuildingRole *result; // eax
   int v4; // [esp+0h] [ebp-18h]
@@ -2386,7 +2386,7 @@ void  CMilitaryBuildingRole::SetEffectDisplay(int,int) {
 
 // address=[0x1513a10]
 // Decompiled from char __thiscall CMilitaryBuildingRole::IsTopPosition(CMilitaryBuildingRole *this, int a2)
-bool  CMilitaryBuildingRole::IsTopPosition(int) {
+bool  CMilitaryBuildingRole::IsTopPosition(int a2) {
   
   return *(_BYTE *)(*((_DWORD *)this + 94) + 12 * a2 + 233);
 }
@@ -2394,7 +2394,7 @@ bool  CMilitaryBuildingRole::IsTopPosition(int) {
 
 // address=[0x1512500]
 // Decompiled from unsigned __int8 *__thiscall CMilitaryBuildingRole::NotifyDetach(  CMilitaryBuildingRole *this,  struct CBuilding *a2,  int a3)
-void  CMilitaryBuildingRole::NotifyDetach(class CBuilding *,int) {
+void  CMilitaryBuildingRole::NotifyDetach(class CBuilding * a2, int a3) {
   
   unsigned __int8 *result; // eax
   int v4; // esi

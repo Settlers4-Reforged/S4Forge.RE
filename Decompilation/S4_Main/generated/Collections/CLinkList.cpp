@@ -4,7 +4,7 @@
 
 // address=[0x1346460]
 // Decompiled from int __thiscall CLinkList::operator[](void *this, int a2)
-unsigned short const &  CLinkList::operator[](int)const {
+unsigned short const &  CLinkList::operator[](int a2)const {
   
   return (int)this + 2 * a2 + 4;
 }
@@ -52,7 +52,7 @@ void  CLinkList::DbgPrint(void)const {
 
 // address=[0x15e6e60]
 // Decompiled from _DWORD *__thiscall CLinkList::operator=(_DWORD *this, unsigned __int8 *a2)
-class CLinkList &  CLinkList::operator=(class CLinkList const &) {
+class CLinkList &  CLinkList::operator=(class CLinkList const & a2) {
   
   int v3; // [esp+4h] [ebp-Ch]
   int i; // [esp+Ch] [ebp-4h]
@@ -66,7 +66,7 @@ class CLinkList &  CLinkList::operator=(class CLinkList const &) {
 
 // address=[0x15e6ed0]
 // Decompiled from _BYTE *__thiscall CLinkList::operator=(_BYTE *this, CIntLinkList *a2)
-class CLinkList &  CLinkList::operator=(class CIntLinkList const &) {
+class CLinkList &  CLinkList::operator=(class CIntLinkList const & a2) {
   
   int v3; // [esp+0h] [ebp-Ch]
   int i; // [esp+8h] [ebp-4h]
@@ -83,7 +83,7 @@ class CLinkList &  CLinkList::operator=(class CIntLinkList const &) {
 
 // address=[0x15e7230]
 // Decompiled from char *__thiscall CLinkList::Link(CLinkList *this, int a2)
-class CLink const &  CLinkList::Link(int)const {
+class CLink const &  CLinkList::Link(int a2)const {
   
   return (char *)this + 2 * a2 + 4;
 }
@@ -99,7 +99,7 @@ int  CLinkList::OwnerTileId(void)const {
 
 // address=[0x15e7300]
 // Decompiled from char __thiscall CLinkList::SearchForLinkTileId(CLinkList *this, int a2)
-bool  CLinkList::SearchForLinkTileId(int)const {
+bool  CLinkList::SearchForLinkTileId(int a2)const {
   
   int i; // eax
   int v5; // [esp+4h] [ebp-4h]

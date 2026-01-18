@@ -60,7 +60,7 @@ void  CAIPlayerAI::Release(void) {
 
 // address=[0x1317680]
 // Decompiled from void __thiscall CAIPlayerAI::PostAIEvent(CAIPlayerAI *this, int a2, int a3, int a4, int a5)
-void  CAIPlayerAI::PostAIEvent(int,int,int,int) {
+void  CAIPlayerAI::PostAIEvent(int a2, int a3, int a4, int a5) {
   
   CAIEventQueue::PostAIEvent((CAIPlayerAI *)((char *)this + 108), a2, a3, a4, a5);
 }
@@ -68,7 +68,7 @@ void  CAIPlayerAI::PostAIEvent(int,int,int,int) {
 
 // address=[0x13176b0]
 // Decompiled from CAIPlayerAI *__thiscall CAIPlayerAI::CAIPlayerAI(CAIPlayerAI *this, int a2, bool a3)
- CAIPlayerAI::CAIPlayerAI(int,bool) {
+ CAIPlayerAI::CAIPlayerAI(int a2, bool a3) {
   
   IAIUnknown::IAIUnknown(this);
   IS4ChunkObject::IS4ChunkObject((CAIPlayerAI *)((char *)this + 4));
@@ -126,7 +126,7 @@ void  CAIPlayerAI::Init(void) {
 
 // address=[0x1317930]
 // Decompiled from CAIDarkTribePlayerAI *__cdecl CAIPlayerAI::CreatePlayerAI(int a1, struct IS4Chunk *a2)
-static class CAIPlayerAI * __cdecl CAIPlayerAI::CreatePlayerAI(int,class IS4Chunk *) {
+class CAIPlayerAI * __cdecl CAIPlayerAI::CreatePlayerAI(int a1, class IS4Chunk * a2) {
   
   void *Memory; // [esp+8h] [ebp-30h]
   void *v4; // [esp+10h] [ebp-28h]
@@ -188,7 +188,7 @@ void  CAIPlayerAI::DbgPrint(void) {
 
 // address=[0x1317ae0]
 // Decompiled from int __thiscall CAIPlayerAI::GetNumberOfOwnBuildings(pairNode *this, int a2, unsigned int a3)
-int  CAIPlayerAI::GetNumberOfOwnBuildings(int,int) {
+int  CAIPlayerAI::GetNumberOfOwnBuildings(int a2, int a3) {
   
   int v3; // eax
 
@@ -199,7 +199,7 @@ int  CAIPlayerAI::GetNumberOfOwnBuildings(int,int) {
 
 // address=[0x1317b10]
 // Decompiled from int __thiscall CAIPlayerAI::GetNumberOfOwnVehicles(pairNode *this, int a2, int a3)
-int  CAIPlayerAI::GetNumberOfOwnVehicles(int,int) {
+int  CAIPlayerAI::GetNumberOfOwnVehicles(int a2, int a3) {
   
   int v3; // eax
 
@@ -332,7 +332,7 @@ void  CAIPlayerAI::ScanForNewSectors(void) {
 
 // address=[0x1317e10]
 // Decompiled from int __thiscall CAIPlayerAI::Load(CAIPlayerAI *this, struct IS4Chunk *a2)
-void  CAIPlayerAI::Load(class IS4Chunk &) {
+void  CAIPlayerAI::Load(class IS4Chunk & a2) {
   
   unsigned int v3; // [esp+0h] [ebp-8h]
 
@@ -355,7 +355,7 @@ void  CAIPlayerAI::Load(class IS4Chunk &) {
 
 // address=[0x1317f40]
 // Decompiled from int __thiscall CAIPlayerAI::Save(CAIPlayerAI *this, struct IS4Chunk *a2)
-void  CAIPlayerAI::Save(class IS4Chunk &) {
+void  CAIPlayerAI::Save(class IS4Chunk & a2) {
   
   (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 24))(a2, -1517223936);
   (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 20))(a2, 2);
@@ -655,7 +655,7 @@ int  CAIPlayerAI::FillGeneralReservoir(void) {
 
 // address=[0x1318820]
 // Decompiled from int __thiscall CAIPlayerAI::AddEntityToSectorReservoir(char *this, int a2, int a3, int a4)
-void  CAIPlayerAI::AddEntityToSectorReservoir(int,enum T_AI_WARRIOR_TYPE,int) {
+void  CAIPlayerAI::AddEntityToSectorReservoir(int a2, enum T_AI_WARRIOR_TYPE a3, int a4) {
   
   int result; // eax
   int v5; // eax
@@ -691,7 +691,7 @@ void  CAIPlayerAI::AddEntityToSectorReservoir(int,enum T_AI_WARRIOR_TYPE,int) {
 
 // address=[0x1318920]
 // Decompiled from int __thiscall CAIPlayerAI::MoveNewWarShips(CAIPlayerAI *this, int a2, int a3, bool a4)
-void  CAIPlayerAI::MoveNewWarShips(int,int,bool) {
+void  CAIPlayerAI::MoveNewWarShips(int a2, int a3, bool a4) {
   
   int result; // eax
   int v5; // [esp+0h] [ebp-10h]
@@ -714,7 +714,7 @@ void  CAIPlayerAI::MoveNewWarShips(int,int,bool) {
 
 // address=[0x13189b0]
 // Decompiled from char __thiscall CAIPlayerAI::ExistsSectorAI(CAIPlayerAI *this, int a2)
-bool  CAIPlayerAI::ExistsSectorAI(int) {
+bool  CAIPlayerAI::ExistsSectorAI(int a2) {
   
   CAISectorAI *v3; // [esp+0h] [ebp-10h]
   int v4; // [esp+4h] [ebp-Ch]

@@ -1,6 +1,8 @@
 #ifndef CSOUNDSYSTEM_H
 #define CSOUNDSYSTEM_H
 
+#include "defines.h"
+
 class CSoundSystem {
 public:
     // address=[0x2fd9bc0]
@@ -10,7 +12,7 @@ public:
     virtual  ~CSoundSystem(void);
 
     // address=[0x2fd9d90]
-    bool  Init(char const *,int,bool,int,int,int);
+    bool  Init(char const * a2, int a3, bool a4, int a5, int a6, int a7);
 
     // address=[0x2fd9e60]
     void  StopPlayback(void);
@@ -25,37 +27,37 @@ public:
     int  GetCpuUsage(void);
 
     // address=[0x2fda060]
-    unsigned int  PlaySoundFile(char const *,int,int);
+    unsigned int  PlaySoundFile(char const * a2, int a3, int a4);
 
     // address=[0x2fda280]
-    unsigned int  PlayStream(char const *,int,int,bool,int);
+    unsigned int  PlayStream(char const * a2, int a3, int a4, bool a5, int a6);
 
     // address=[0x2fda4e0]
-    unsigned int  PlaySoundFromMemory(unsigned int *,char *,unsigned int,int,int,int,bool);
+    unsigned int  PlaySoundFromMemory(unsigned int * a2, char * a3, unsigned int a4, int a5, int a6, int a7, bool a8);
 
     // address=[0x2fda6a0]
-    bool  ChangeVolume(unsigned int,int);
+    bool  ChangeVolume(unsigned int a2, int a3);
 
     // address=[0x2fda7a0]
-    int  GetVolume(unsigned int);
+    int  GetVolume(unsigned int a2);
 
     // address=[0x2fda820]
-    bool  ChangePan(unsigned int,int);
+    bool  ChangePan(unsigned int a2, int a3);
 
     // address=[0x2fda8d0]
-    bool  Fade(unsigned int,int,int);
+    bool  Fade(unsigned int a2, int a3, int a4);
 
     // address=[0x2fdaa80]
-    void  SetTimerInterval(int);
+    void  SetTimerInterval(int a2);
 
     // address=[0x2fdaac0]
     void  Update(void);
 
     // address=[0x2fdab50]
-    void  StopSample(unsigned int);
+    void  StopSample(unsigned int a2);
 
     // address=[0x2fdac80]
-    int  GetSampleID(struct _SAMPLE *);
+    int  GetSampleID(struct _SAMPLE * a2);
 
     // address=[0x2fdace0]
     void  StopStreams(void);
@@ -70,37 +72,37 @@ public:
     void  ResumePlayback(void);
 
     // address=[0x2fdaf90]
-    void  InitPlaylist(int,int);
+    void  InitPlaylist(int a2, int a3);
 
     // address=[0x2fdaff0]
-    bool  AddTitleToPlaylist(int,std::string const *,int);
+    bool  AddTitleToPlaylist(int a2, std::string const * a3, int a4);
 
     // address=[0x2fdb060]
-    static void __stdcall LoopStreamCB(struct _STREAM *);
+    static void __stdcall LoopStreamCB(struct _STREAM * a1);
 
     // address=[0x2fdb080]
-    static void __stdcall LoopSampleCB(struct _SAMPLE *);
+    static void __stdcall LoopSampleCB(struct _SAMPLE * a1);
 
     // address=[0x2fdb0c0]
-    void  CreatePlaylists(int);
+    void  CreatePlaylists(int a2);
 
     // address=[0x2fdb200]
-    unsigned int  StartPlaylist(int,int);
+    unsigned int  StartPlaylist(int a2, int a3);
 
     // address=[0x2fdb280]
-    unsigned int  ChangePlaylist(int,int);
+    unsigned int  ChangePlaylist(int a2, int a3);
 
     // address=[0x2fdb440]
     void  PlaylistTitleEnded(struct _STREAM *);
 
     // address=[0x2fdb5b0]
-    void  SampleEnded(struct _SAMPLE *);
+    void  SampleEnded(struct _SAMPLE * a2);
 
     // address=[0x2fdb610]
-    void  ChangeStreamVolume(int);
+    void  ChangeStreamVolume(int a2);
 
     // address=[0x2fdb6e0]
-    void  ChangeSoundVolume(int);
+    void  ChangeSoundVolume(int a2);
 
     // address=[0x2fdb770]
     unsigned int  GetDigitalDriver(void);
@@ -118,13 +120,13 @@ public:
     int  EnumSoundCards(void);
 
     // address=[0x2fdb860]
-    std::string  GetSoundCardName(int);
+    std::string  GetSoundCardName(int a2);
 
     // address=[0x2fdb8d0]
-    void  SetSoundCard(int);
+    void  SetSoundCard(int a2);
 
     // address=[0x2fdb920]
-    void  AddSoundCard(struct _GUID *,char const *);
+    void  AddSoundCard(struct _GUID * a2, char const * Str);
 
     // address=[0x2fdba90]
     void  SkipTitle(void);
@@ -146,10 +148,10 @@ private:
     void  FreeMemory(void);
 
     // address=[0x2fd9850]
-    int  GetSoundIndex(unsigned int);
+    int  GetSoundIndex(unsigned int a2);
 
     // address=[0x2fd98c0]
-    int  GetStreamIndex(unsigned int);
+    int  GetStreamIndex(unsigned int a2);
 
     // address=[0x2fd9950]
     void  UpdateFades(void);

@@ -1,6 +1,8 @@
 #ifndef CAIAGENTMOVINGHOME_H
 #define CAIAGENTMOVINGHOME_H
 
+#include "defines.h"
+
 class CAIAgentMovingHome : public CAINormalSectorAgent {
 public:
     // address=[0x1304050]

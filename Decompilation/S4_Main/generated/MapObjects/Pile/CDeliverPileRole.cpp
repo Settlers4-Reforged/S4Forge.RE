@@ -4,7 +4,7 @@
 
 // address=[0x1400400]
 // Decompiled from void __cdecl CDeliverPileRole::New(struct std::_Facet_base *a1)
-static class CPersistence * __cdecl CDeliverPileRole::New(std::istream &) {
+class CPersistence * __cdecl CDeliverPileRole::New(std::istream & a1) {
   
   if ( operator new(8u) )
     CDeliverPileRole::CDeliverPileRole(a1);
@@ -13,7 +13,7 @@ static class CPersistence * __cdecl CDeliverPileRole::New(std::istream &) {
 
 // address=[0x155b880]
 // Decompiled from int __thiscall CDeliverPileRole::Init(CDeliverPileRole *this, struct CPile *a2)
-void  CDeliverPileRole::Init(class CPile *) {
+void  CDeliverPileRole::Init(class CPile * a2) {
   
   int v2; // eax
   int v3; // eax
@@ -49,7 +49,7 @@ void  CDeliverPileRole::Init(class CPile *) {
 
 // address=[0x155b920]
 // Decompiled from int __thiscall CDeliverPileRole::LogicUpdate(CDeliverPileRole *this, struct CPile *a2)
-void  CDeliverPileRole::LogicUpdate(class CPile *) {
+void  CDeliverPileRole::LogicUpdate(class CPile * a2) {
   
   int result; // eax
   int v3; // eax
@@ -97,7 +97,7 @@ void  CDeliverPileRole::LogicUpdate(class CPile *) {
 
 // address=[0x155ba20]
 // Decompiled from unsigned __int8 *__thiscall CDeliverPileRole::Increase(CDeliverPileRole *this, struct CPile *a2, int a3)
-void  CDeliverPileRole::Increase(class CPile *,int) {
+void  CDeliverPileRole::Increase(class CPile * a2, int a3) {
   
   int BuildingId; // eax
   unsigned __int8 *result; // eax
@@ -125,7 +125,7 @@ void  CDeliverPileRole::Increase(class CPile *,int) {
 
 // address=[0x155bae0]
 // Decompiled from void __thiscall CDeliverPileRole::SubjectStopped(CDeliverPileRole *this, struct CPile *a2)
-void  CDeliverPileRole::SubjectStopped(class CPile *) {
+void  CDeliverPileRole::SubjectStopped(class CPile * a2) {
   
   CPile::NotifyTargetDieAndDetachAllObservers(a2);
   CPile::SetOfferFlag(a2, 1);
@@ -135,7 +135,7 @@ void  CDeliverPileRole::SubjectStopped(class CPile *) {
 
 // address=[0x155bb10]
 // Decompiled from int __thiscall CDeliverPileRole::SubjectStarted(CDeliverPileRole *this, struct CPile *a2)
-void  CDeliverPileRole::SubjectStarted(class CPile *) {
+void  CDeliverPileRole::SubjectStarted(class CPile * a2) {
   
   CPile::NotifyTargetDieAndDetachAllObservers(a2);
   CPile::CancelCompleteOfferIfInOfferList(a2, 0);
@@ -146,7 +146,7 @@ void  CDeliverPileRole::SubjectStarted(class CPile *) {
 
 // address=[0x155bb50]
 // Decompiled from _DWORD *__thiscall CDeliverPileRole::CDeliverPileRole(_DWORD *this, int a2)
- CDeliverPileRole::CDeliverPileRole(std::istream &) {
+ CDeliverPileRole::CDeliverPileRole(std::istream & a2) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
@@ -172,7 +172,7 @@ void  CDeliverPileRole::SubjectStarted(class CPile *) {
 
 // address=[0x155bc00]
 // Decompiled from int __thiscall CDeliverPileRole::Store(void *this, struct std::ostream *a2)
-void  CDeliverPileRole::Store(std::ostream &) {
+void  CDeliverPileRole::Store(std::ostream & a2) {
   
   int v3[2]; // [esp+0h] [ebp-8h] BYREF
 
@@ -201,7 +201,7 @@ unsigned long  CDeliverPileRole::ClassID(void)const {
 
 // address=[0x15603c0]
 // Decompiled from int __cdecl CDeliverPileRole::Load(int a1)
-static class CDeliverPileRole * __cdecl CDeliverPileRole::Load(std::istream &) {
+class CDeliverPileRole * __cdecl CDeliverPileRole::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]

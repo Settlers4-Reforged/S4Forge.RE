@@ -1,34 +1,36 @@
 #ifndef CBUILDINGSUPPLYPRIORITY_H
 #define CBUILDINGSUPPLYPRIORITY_H
 
+#include "defines.h"
+
 class CBuildingSupplyPriority : public CPersistence {
 public:
     // address=[0x13fff00]
-    static class CPersistence * __cdecl New(std::istream &);
+    static class CPersistence * __cdecl New(std::istream & a1);
 
     // address=[0x140aae0]
-     CBuildingSupplyPriority(std::istream &);
+     CBuildingSupplyPriority(std::istream & a2);
 
     // address=[0x140aca0]
-    virtual void  Store(std::ostream &);
+    virtual void  Store(std::ostream & a2);
 
     // address=[0x140aea0]
-     CBuildingSupplyPriority(int);
+     CBuildingSupplyPriority(int a2);
 
     // address=[0x140af60]
-    int  GetPriority(enum BUILDING_TYPES,enum PILE_TYPES);
+    int  GetPriority(enum BUILDING_TYPES a2, enum PILE_TYPES a3);
 
     // address=[0x140b0f0]
-    int  GetNumberOfSupplyBuildings(enum PILE_TYPES,struct SDistributionInfo * const);
+    int  GetNumberOfSupplyBuildings(enum PILE_TYPES a2, struct SDistributionInfo * const a3);
 
     // address=[0x140b280]
-    int  GetNumberOfSupplyBuildings(enum PILE_TYPES);
+    int  GetNumberOfSupplyBuildings(enum PILE_TYPES a2);
 
     // address=[0x140b3d0]
-    void  ChangePriority(enum PILE_TYPES,struct SDistributionInfo * const);
+    void  ChangePriority(enum PILE_TYPES a2, struct SDistributionInfo * const a3);
 
     // address=[0x140b590]
-    void  ChangePriority(enum PILE_TYPES,enum BUILDING_TYPES,int);
+    void  ChangePriority(enum PILE_TYPES a2, enum BUILDING_TYPES a3, int a4);
 
     // address=[0x1417110]
     virtual unsigned long  ClassID(void)const;

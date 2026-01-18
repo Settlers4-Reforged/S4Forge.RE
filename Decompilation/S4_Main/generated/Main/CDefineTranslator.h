@@ -1,10 +1,12 @@
 #ifndef CDEFINETRANSLATOR_H
 #define CDEFINETRANSLATOR_H
 
+#include "defines.h"
+
 class CDefineTranslator {
 public:
     // address=[0x141dbe0]
-    int  GetValueOfDefine(std::string const &)const;
+    int  GetValueOfDefine(std::string const & a2)const;
 
     // address=[0x14f3f70]
     static class CDefineTranslator & __cdecl Instance(void);

@@ -1,6 +1,8 @@
 #ifndef CSOLUTIONSET_H
 #define CSOLUTIONSET_H
 
+#include "defines.h"
+
 class CSolutionSet : public CDynListEntry {
 public:
     // address=[0x2f3f250]
@@ -13,7 +15,7 @@ public:
     int  size(void);
 
     // address=[0x2f3f360]
-    void  NewSolution(int,class CParam *);
+    void  NewSolution(int a2, class CParam * a3);
 
 };
 

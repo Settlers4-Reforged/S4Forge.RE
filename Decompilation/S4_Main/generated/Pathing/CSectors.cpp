@@ -21,7 +21,7 @@ void  CSectors::Init(void) {
 
 // address=[0x15e7a20]
 // Decompiled from int __thiscall CSectors::NewSector(CSectors *this, unsigned __int8 a2)
-int  CSectors::NewSector(unsigned char) {
+int  CSectors::NewSector(unsigned char a2) {
   
   if ( *(int *)this >= 32766
     && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 5927, "m_iSectorCount < SECTORS_MAX - 2") == 1 )
@@ -39,7 +39,7 @@ int  CSectors::NewSector(unsigned char) {
 
 // address=[0x15e7ad0]
 // Decompiled from CSectors *__thiscall CSectors::DeleteSector(CSectors *this, CSectors *a2)
-void  CSectors::DeleteSector(int) {
+void  CSectors::DeleteSector(int a2) {
   
   CSectors *result; // eax
 
@@ -56,7 +56,7 @@ void  CSectors::DeleteSector(int) {
 
 // address=[0x15e7b40]
 // Decompiled from int __thiscall CSectors::CountSectors(_BYTE *this, unsigned __int8 a2)
-int  CSectors::CountSectors(unsigned char)const {
+int  CSectors::CountSectors(unsigned char a2)const {
   
   int v3; // [esp+8h] [ebp-8h]
   int i; // [esp+Ch] [ebp-4h]
@@ -79,7 +79,7 @@ int  CSectors::CountSectors(unsigned char)const {
 
 // address=[0x15f4620]
 // Decompiled from int __thiscall CSectors::IncSectorSize(CSectors *this, int a2)
-void  CSectors::IncSectorSize(int) {
+void  CSectors::IncSectorSize(int a2) {
   
   int result; // eax
 
@@ -91,7 +91,7 @@ void  CSectors::IncSectorSize(int) {
 
 // address=[0x15f5660]
 // Decompiled from int __thiscall CSectors::SectorSize(CSectors *this, int a2)
-int  CSectors::SectorSize(int)const {
+int  CSectors::SectorSize(int a2)const {
   
   return *((_DWORD *)this + a2 + 8193);
 }

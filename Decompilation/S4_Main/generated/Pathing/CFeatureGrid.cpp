@@ -12,7 +12,7 @@
 
 // address=[0x2fc6a40]
 // Decompiled from CFeatureGrid *__thiscall CFeatureGrid::CFeatureGrid(CFeatureGrid *this, int a2)
- CFeatureGrid::CFeatureGrid(int) {
+ CFeatureGrid::CFeatureGrid(int a2) {
   
   CGrid::CGrid(this, a2);
   *((_DWORD *)this + 5) = -1;
@@ -444,7 +444,7 @@ void  CFeatureGrid::initGrid(void) {
 
 // address=[0x2fc7a70]
 // Decompiled from char __thiscall CFeatureGrid::findNearestElement(CFeatureGrid *this, int *a2, int *a3, int a4, bool a5)
-bool  CFeatureGrid::findNearestElement(int &,int &,int,bool) {
+bool  CFeatureGrid::findNearestElement(int & a2, int & a3, int a4, bool a5) {
   
   int v5; // esi
   int v6; // esi

@@ -66,7 +66,7 @@ class S4::CMapFile *  CRandomMaps::GetRandomMapFile(void) {
 
 // address=[0x14993c0]
 // Decompiled from S4::CMapFile *__thiscall CRandomMaps::InitRandomMap(CRandomMaps *this, struct SRandomMapParams *a2)
-void  CRandomMaps::InitRandomMap(struct SRandomMapParams &) {
+void  CRandomMaps::InitRandomMap(struct SRandomMapParams & a2) {
   
   struct CMapFile *v3; // [esp+10h] [ebp-20h]
   CHandleMap *v4; // [esp+14h] [ebp-1Ch]
@@ -108,7 +108,7 @@ bool  CRandomMaps::GenerateRandomMap(void) {
 
 // address=[0x1499540]
 // Decompiled from int __thiscall CRandomMaps::GetParamsFromMapKey(void *this, int a2, _Cnd_internal_imp_t *a3)
-bool  CRandomMaps::GetParamsFromMapKey(struct SRandomMapParams *,std::wstring const &) {
+bool  CRandomMaps::GetParamsFromMapKey(struct SRandomMapParams * a2, std::wstring const & a3) {
   
   _DWORD *v3; // eax
 
@@ -119,7 +119,7 @@ bool  CRandomMaps::GetParamsFromMapKey(struct SRandomMapParams *,std::wstring co
 
 // address=[0x1499570]
 // Decompiled from char __stdcall CRandomMaps::GetParamsFromMapKey(void *a1, wchar_t *Source)
-bool  CRandomMaps::GetParamsFromMapKey(struct SRandomMapParams *,wchar_t const *) {
+bool  CRandomMaps::GetParamsFromMapKey(struct SRandomMapParams * a1, wchar_t const * Source) {
   
   wchar_t Destination[1024]; // [esp+Ch] [ebp-804h] BYREF
 
@@ -137,7 +137,7 @@ bool  CRandomMaps::GetParamsFromMapKey(struct SRandomMapParams *,wchar_t const *
 
 // address=[0x1499640]
 // Decompiled from void *__thiscall CRandomMaps::GetMapKeyFromParams(void *this, int a2, void *a3)
-void  CRandomMaps::GetMapKeyFromParams(struct SRandomMapParams *,std::wstring &) {
+void  CRandomMaps::GetMapKeyFromParams(struct SRandomMapParams * a2, std::wstring & a3) {
   
   wchar_t String[1024]; // [esp+8h] [ebp-804h] BYREF
 
@@ -163,7 +163,7 @@ void  CRandomMaps::GetMapKeyFromParams(struct SRandomMapParams *,wchar_t *) {
 
 // address=[0x1499710]
 // Decompiled from char __stdcall CRandomMaps::IsRandomMapFileName(wchar_t *String, void *a2)
-bool  CRandomMaps::IsRandomMapFileName(wchar_t const *,std::wstring *) {
+bool  CRandomMaps::IsRandomMapFileName(wchar_t const * String, std::wstring * a2) {
   
   int v3; // eax
   int v4; // eax
@@ -208,7 +208,7 @@ LABEL_21:
 
 // address=[0x1499870]
 // Decompiled from int __thiscall CRandomMaps::IsRandomMapFileName(void *this, void *a2, int a3)
-bool  CRandomMaps::IsRandomMapFileName(std::wstring const &,std::wstring *) {
+bool  CRandomMaps::IsRandomMapFileName(std::wstring const & a2, std::wstring * a3) {
   
   _DWORD *v5; // [esp+4h] [ebp-4h]
 
@@ -221,7 +221,7 @@ bool  CRandomMaps::IsRandomMapFileName(std::wstring const &,std::wstring *) {
 
 // address=[0x14998c0]
 // Decompiled from void __stdcall CRandomMaps::GenerateRandomMapFileName(int a1, wchar_t *String)
-void  CRandomMaps::GenerateRandomMapFileName(std::wstring &,wchar_t const *) {
+void  CRandomMaps::GenerateRandomMapFileName(std::wstring & a1, wchar_t const * String) {
   
   int v2; // [esp+8h] [ebp-78h]
   int v3; // [esp+Ch] [ebp-74h]
@@ -249,7 +249,7 @@ void  CRandomMaps::GenerateRandomMapFileName(std::wstring &,wchar_t const *) {
 
 // address=[0x14999b0]
 // Decompiled from void __stdcall CRandomMaps::GenerateRandomMapFileName(int a1, _Cnd_internal_imp_t *a2)
-void  CRandomMaps::GenerateRandomMapFileName(std::wstring &,std::wstring const &) {
+void  CRandomMaps::GenerateRandomMapFileName(std::wstring & a1, std::wstring const & a2) {
   
   void *v2; // [esp+8h] [ebp-54h]
   void *v3; // [esp+Ch] [ebp-50h]
@@ -269,7 +269,7 @@ void  CRandomMaps::GenerateRandomMapFileName(std::wstring &,std::wstring const &
 
 // address=[0x1499a50]
 // Decompiled from void __thiscall CRandomMaps::GenerateRandomMapFileName(void *this, int a2, const void *a3)
-void  CRandomMaps::GenerateRandomMapFileName(std::wstring &,struct SRandomMapParams const &) {
+void  CRandomMaps::GenerateRandomMapFileName(std::wstring & a2, struct SRandomMapParams const & a3) {
   
   _BYTE v4[184]; // [esp+10h] [ebp-E4h] BYREF
   _BYTE v5[28]; // [esp+C8h] [ebp-2Ch] BYREF
@@ -287,7 +287,7 @@ void  CRandomMaps::GenerateRandomMapFileName(std::wstring &,struct SRandomMapPar
 
 // address=[0x1499b10]
 // Decompiled from void __thiscall CRandomMaps::AdjustRandomMapFileName(void *this, void *a2)
-void  CRandomMaps::AdjustRandomMapFileName(std::wstring &) {
+void  CRandomMaps::AdjustRandomMapFileName(std::wstring & a2) {
   
   int v2; // [esp+4h] [ebp-11Ch]
   int v3; // [esp+8h] [ebp-118h]

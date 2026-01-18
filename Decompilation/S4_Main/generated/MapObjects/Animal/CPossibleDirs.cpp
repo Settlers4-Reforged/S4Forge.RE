@@ -17,7 +17,7 @@ void  CPossibleDirs::Init(void) {
 
 // address=[0x14e2750]
 // Decompiled from CPossibleDirs *__thiscall CPossibleDirs::PushDir(CPossibleDirs *this, unsigned int a2)
-void  CPossibleDirs::PushDir(int) {
+void  CPossibleDirs::PushDir(int a2) {
   
   CPossibleDirs *result; // eax
 
@@ -48,7 +48,7 @@ void  CPossibleDirs::PushDir(int) {
 
 // address=[0x14e2ff0]
 // Decompiled from bool __thiscall CPossibleDirs::Search(CPossibleDirs *this, char a2)
-bool  CPossibleDirs::Search(int) {
+bool  CPossibleDirs::Search(int a2) {
   
   return ((1 << a2) & *((_DWORD *)this + 1)) != 0;
 }

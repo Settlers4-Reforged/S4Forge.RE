@@ -4,7 +4,7 @@
 
 // address=[0x14022a0]
 // Decompiled from int __cdecl CThiefRole::New(int a1)
-static class CPersistence * __cdecl CThiefRole::New(std::istream &) {
+class CPersistence * __cdecl CThiefRole::New(std::istream & a1) {
   
   if ( operator new(0x44u) )
     return CThiefRole::CThiefRole(a1);
@@ -15,7 +15,7 @@ static class CPersistence * __cdecl CThiefRole::New(std::istream &) {
 
 // address=[0x1588940]
 // Decompiled from int __cdecl CThiefRole::Load(int a1)
-static class CThiefRole * __cdecl CThiefRole::Load(std::istream &) {
+class CThiefRole * __cdecl CThiefRole::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
@@ -27,7 +27,7 @@ static class CThiefRole * __cdecl CThiefRole::Load(std::istream &) {
 
 // address=[0x1592e30]
 // Decompiled from int __thiscall CThiefRole::InitWalking(CThiefRole *this, struct CSettler *a2)
-class CWalking *  CThiefRole::InitWalking(class CSettler *) {
+class CWalking *  CThiefRole::InitWalking(class CSettler * a2) {
   
   int v2; // eax
   int v4; // [esp+4h] [ebp-4h]
@@ -41,7 +41,7 @@ class CWalking *  CThiefRole::InitWalking(class CSettler *) {
 
 // address=[0x1592e70]
 // Decompiled from char __thiscall CThiefRole::LogicUpdateJob(CThiefRole *this, struct CSettler *a2)
-void  CThiefRole::LogicUpdateJob(class CSettler *) {
+void  CThiefRole::LogicUpdateJob(class CSettler * a2) {
   
   int v2; // eax
   char result; // al
@@ -113,7 +113,7 @@ LABEL_17:
 
 // address=[0x1593050]
 // Decompiled from int __thiscall CThiefRole::LogicUpdate(CThiefRole *this, struct CSettler *a2)
-void  CThiefRole::LogicUpdate(class CSettler *) {
+void  CThiefRole::LogicUpdate(class CSettler * a2) {
   
   unsigned int TickCounter; // [esp+4h] [ebp-8h]
 
@@ -126,7 +126,7 @@ void  CThiefRole::LogicUpdate(class CSettler *) {
 
 // address=[0x15930a0]
 // Decompiled from CThiefRole *__thiscall CThiefRole::UpdateJob(CThiefRole *this, struct CSettler *a2)
-void  CThiefRole::UpdateJob(class CSettler *) {
+void  CThiefRole::UpdateJob(class CSettler * a2) {
   
   CThiefRole *result; // eax
   char v3; // [esp+8h] [ebp-1Ch]
@@ -166,7 +166,7 @@ void  CThiefRole::UpdateJob(class CSettler *) {
 
 // address=[0x1593160]
 // Decompiled from int __thiscall CThiefRole::PostLoadInit(int this, CPropertySet *a2)
-void  CThiefRole::PostLoadInit(class CSettler *) {
+void  CThiefRole::PostLoadInit(class CSettler * a2) {
   
   int result; // eax
   int v4; // [esp+0h] [ebp-4h]
@@ -189,7 +189,7 @@ void  CThiefRole::PostLoadInit(class CSettler *) {
 
 // address=[0x15931e0]
 // Decompiled from char __thiscall CThiefRole::SetFree(CThiefRole *this, struct CSettler *a2, int a3)
-bool  CThiefRole::SetFree(class CSettler *,int) {
+bool  CThiefRole::SetFree(class CSettler * a2, int a3) {
   
   int v3; // eax
   int v5; // [esp-Ch] [ebp-10h]
@@ -210,7 +210,7 @@ bool  CThiefRole::SetFree(class CSettler *,int) {
 
 // address=[0x1593240]
 // Decompiled from _DWORD *__thiscall CThiefRole::CThiefRole(_DWORD *this, int a2)
- CThiefRole::CThiefRole(std::istream &) {
+ CThiefRole::CThiefRole(std::istream & a2) {
   
   int v2; // eax
   _DWORD v4[2]; // [esp+4h] [ebp-24h] BYREF
@@ -250,7 +250,7 @@ bool  CThiefRole::SetFree(class CSettler *,int) {
 
 // address=[0x1593370]
 // Decompiled from int __thiscall CThiefRole::Store(char *this, struct std::ostream *a2)
-void  CThiefRole::Store(std::ostream &) {
+void  CThiefRole::Store(std::ostream & a2) {
   
   unsigned int v2; // esi
   _BYTE v4[12]; // [esp+8h] [ebp-78h] BYREF
@@ -381,7 +381,7 @@ int  CThiefRole::GetSettlerRole(void)const {
 
 // address=[0x1593640]
 // Decompiled from int __thiscall CThiefRole::GetNextJob(CThiefRole *this, struct CSettler *a2)
-void  CThiefRole::GetNextJob(class CSettler *) {
+void  CThiefRole::GetNextJob(class CSettler * a2) {
   
   int result; // eax
 
@@ -396,7 +396,7 @@ void  CThiefRole::GetNextJob(class CSettler *) {
 
 // address=[0x1593680]
 // Decompiled from int __thiscall CThiefRole::TakeJob(int this, COleCmdUI *a2)
-void  CThiefRole::TakeJob(class CSettler *) {
+void  CThiefRole::TakeJob(class CSettler * a2) {
   
   int result; // eax
   const struct CEntityTask *ActualTask; // eax
@@ -542,7 +542,7 @@ void  CThiefRole::TakeJob(class CSettler *) {
 
 // address=[0x1593b40]
 // Decompiled from int __thiscall CThiefRole::Init(int this, CPropertySet *a2)
-void  CThiefRole::Init(class CSettler *) {
+void  CThiefRole::Init(class CSettler * a2) {
   
   int result; // eax
 
@@ -574,7 +574,7 @@ void  CThiefRole::Init(class CSettler *) {
 
 // address=[0x1593c00]
 // Decompiled from char __thiscall CThiefRole::CheckGoodInSurrounding(CThiefRole *this, struct CSettler *a2)
-bool  CThiefRole::CheckGoodInSurrounding(class CSettler *) {
+bool  CThiefRole::CheckGoodInSurrounding(class CSettler * a2) {
   
   int v2; // eax
   Grid *v3; // eax
@@ -636,7 +636,7 @@ bool  CThiefRole::CheckGoodInSurrounding(class CSettler *) {
 
 // address=[0x1593da0]
 // Decompiled from bool __thiscall CThiefRole::IsAllyOwner(CThiefRole *this, struct CSettler *a2, int a3)
-bool  CThiefRole::IsAllyOwner(class CSettler *,int) {
+bool  CThiefRole::IsAllyOwner(class CSettler * a2, int a3) {
   
   int v3; // eax
   int v4; // eax
@@ -653,7 +653,7 @@ bool  CThiefRole::IsAllyOwner(class CSettler *,int) {
 
 // address=[0x1593e10]
 // Decompiled from char __thiscall CThiefRole::ConvertEventIntoGoal(int this, CPropertySet *a2, const struct CEntityEvent *a3)
-void  CThiefRole::ConvertEventIntoGoal(class CSettler *,class CEntityEvent *) {
+void  CThiefRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent * a3) {
   
   int v3; // eax
   int v4; // eax

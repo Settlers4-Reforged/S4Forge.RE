@@ -4,7 +4,7 @@
 
 // address=[0x1315590]
 // Decompiled from int __thiscall COneVehicleTypeIterator::Init(COneVehicleTypeIterator *this, int a2, int a3)
-void  COneVehicleTypeIterator::Init(int,int) {
+void  COneVehicleTypeIterator::Init(int a2, int a3) {
   
   int result; // eax
 

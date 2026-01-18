@@ -1,43 +1,45 @@
 #ifndef CSLAVEROLE_H
 #define CSLAVEROLE_H
 
+#include "defines.h"
+
 class CSlaveRole : public ISettlerRole {
 public:
     // address=[0x1401e40]
-    static class CPersistence * __cdecl New(std::istream &);
+    static class CPersistence * __cdecl New(std::istream & a1);
 
     // address=[0x15888c0]
-    static class CSlaveRole * __cdecl Load(std::istream &);
+    static class CSlaveRole * __cdecl Load(std::istream & a1);
 
     // address=[0x158caa0]
-    virtual class CWalking *  InitWalking(class CSettler *);
+    virtual class CWalking *  InitWalking(class CSettler * a2);
 
     // address=[0x158cae0]
-    virtual void  LogicUpdateJob(class CSettler *);
+    virtual void  LogicUpdateJob(class CSettler * a2);
 
     // address=[0x158cbd0]
-    virtual void  UpdateJob(class CSettler *);
+    virtual void  UpdateJob(class CSettler * a2);
 
     // address=[0x158ccf0]
-    virtual void  PostLoadInit(class CSettler *);
+    virtual void  PostLoadInit(class CSettler * a1);
 
     // address=[0x158cd10]
-    void  InitFlee(class CSettler *,int);
+    void  InitFlee(class CSettler * a2, int a3);
 
     // address=[0x158cd20]
     virtual bool  IsUnEmployed(void)const;
 
     // address=[0x158cd60]
-    virtual bool  SetFree(class CSettler *,int);
+    virtual bool  SetFree(class CSettler * a2, int a3);
 
     // address=[0x158ce30]
-    virtual bool  ESChanged(class CSettler *);
+    virtual bool  ESChanged(class CSettler * a2);
 
     // address=[0x158ce40]
-     CSlaveRole(std::istream &);
+     CSlaveRole(std::istream & a2);
 
     // address=[0x158cf30]
-    virtual void  Store(std::ostream &);
+    virtual void  Store(std::ostream & a2);
 
     // address=[0x158e470]
     virtual unsigned long  ClassID(void)const;
@@ -56,28 +58,28 @@ private:
     virtual  ~CSlaveRole(void);
 
     // address=[0x158d000]
-    virtual void  GetNextJob(class CSettler *);
+    virtual void  GetNextJob(class CSettler * a2);
 
     // address=[0x158d040]
-    virtual void  TakeJob(class CSettler *);
+    virtual void  TakeJob(class CSettler * a2);
 
     // address=[0x158d3f0]
-    virtual void  Init(class CSettler *);
+    virtual void  Init(class CSettler * a2);
 
     // address=[0x158d430]
-    virtual bool  SearchPosition(class CSettler *);
+    virtual bool  SearchPosition(class CSettler * a2);
 
     // address=[0x158d700]
-    virtual void  ConvertEventIntoGoal(class CSettler *,class CEntityEvent *);
+    virtual void  ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent * a3);
 
     // address=[0x158dca0]
-    void  SetWorkPositionAndFlag(int,int);
+    void  SetWorkPositionAndFlag(int a2, int a3);
 
     // address=[0x158dd90]
     void  ClearWorkPositionAndFlagIfNecessary(void);
 
     // address=[0x158deb0]
-    void  FreeServant(class CSettler *);
+    void  FreeServant(class CSettler * a2);
 
     // address=[0x158e4d0]
     bool  WorkPositionValid(void);

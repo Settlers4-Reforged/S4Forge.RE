@@ -24,7 +24,7 @@ bool  AdvXMLParser::Node::IsNull(void)const {
 
 // address=[0x2f13420]
 // Decompiled from _DWORD *__thiscall AdvXMLParser::Node::Node(_DWORD *this, int a2, int a3)
- AdvXMLParser::Node::Node(class AdvXMLParser::NodeContainer &,std::string const &) {
+ AdvXMLParser::Node::Node(class AdvXMLParser::NodeContainer & a2, std::string const & a3) {
   
   *this = &AdvXMLParser::Node::_vftable_;
   std::string::string(a3);
@@ -54,7 +54,7 @@ void  AdvXMLParser::Node::Delete(void) {
 
 // address=[0x2f134a0]
 // Decompiled from char __thiscall AdvXMLParser::Node::IsKindOf(AdvXMLParser::Node *this, int a2)
-bool  AdvXMLParser::Node::IsKindOf(int)const {
+bool  AdvXMLParser::Node::IsKindOf(int a2)const {
   
   return 0;
 }

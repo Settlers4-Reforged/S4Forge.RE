@@ -1,6 +1,8 @@
 #ifndef IEXTRACD_H
 #define IEXTRACD_H
 
+#include "defines.h"
+
 class IExtraCD {
 public:
     // address=[0x1481500]

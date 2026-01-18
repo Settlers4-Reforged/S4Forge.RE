@@ -13,7 +13,7 @@
 
 // address=[0x2fc8910]
 // Decompiled from CBlob *__thiscall CBlob::CBlob(  CBlob *this,  int a2,  int a3,  int a4,  int a5,  int a6,  int a7,  int a8,  struct CCheckLayer *a9)
- CBlob::CBlob(int,int,int,int,int,int,int,class CCheckLayer *) {
+ CBlob::CBlob(int a2, int a3, int a4, int a5, int a6, int a7, int a8, class CCheckLayer * a9) {
   
   unsigned int v10; // [esp+4h] [ebp-Ch]
   unsigned int v11; // [esp+8h] [ebp-8h]
@@ -244,7 +244,7 @@ void  CBlob::drawBlob(void) {
 
 // address=[0x2fc9100]
 // Decompiled from int __thiscall CBlob::fillBlob(CBlob *this, int a2, int a3)
-void  CBlob::fillBlob(int,int) {
+void  CBlob::fillBlob(int a2, int a3) {
   
   int result; // eax
   _DWORD v4[2]; // [esp+0h] [ebp-830h] BYREF
@@ -325,7 +325,7 @@ void  CBlob::fillBlob(int,int) {
 
 // address=[0x2fc9490]
 // Decompiled from int __thiscall CBlob::getNextDirection(CBlob *this, int a2, int a3)
-int  CBlob::getNextDirection(int,int) {
+int  CBlob::getNextDirection(int a2, int a3) {
   
   signed int v4; // [esp+Ch] [ebp-Ch]
   int v5; // [esp+10h] [ebp-8h]
@@ -352,7 +352,7 @@ int  CBlob::getNextDirection(int,int) {
 
 // address=[0x2fc95d0]
 // Decompiled from int __thiscall CBlob::processPoint(CCheckLayer **this, int a2, int a3)
-void  CBlob::processPoint(int,int) {
+void  CBlob::processPoint(int a2, int a3) {
   
   return CCheckLayer::setPoint(this[8], a2 - (_DWORD)this[9], a3 - (_DWORD)this[10], 1u);
 }

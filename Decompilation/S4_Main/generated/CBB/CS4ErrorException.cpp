@@ -15,7 +15,7 @@
 
 // address=[0x1481200]
 // Decompiled from char __thiscall CS4ErrorException::GetErrorMessage(CS4ErrorException *this, char *a2, unsigned int a3)
-bool  CS4ErrorException::GetErrorMessage(char *,unsigned int) {
+bool  CS4ErrorException::GetErrorMessage(char * a2, unsigned int a3) {
   
   int v4; // [esp+4h] [ebp-8h]
   unsigned int i; // [esp+8h] [ebp-4h]

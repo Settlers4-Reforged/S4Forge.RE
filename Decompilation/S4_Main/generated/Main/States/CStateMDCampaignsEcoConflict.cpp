@@ -4,7 +4,7 @@
 
 // address=[0x14c76b0]
 // Decompiled from CStateMDCampaignsEcoConflict *__cdecl CStateMDCampaignsEcoConflict::DynamicCreateFunc(void *a1)
-static class CGameState * __cdecl CStateMDCampaignsEcoConflict::DynamicCreateFunc(void *) {
+class CGameState * __cdecl CStateMDCampaignsEcoConflict::DynamicCreateFunc(void * a1) {
   
   CStateMDCampaignsEcoConflict *C; // [esp+Ch] [ebp-10h]
 
@@ -82,7 +82,7 @@ bool  CStateMDCampaignsEcoConflict::Perform(void) {
 
 // address=[0x14c7960]
 // Decompiled from char __thiscall CStateMDCampaignsEcoConflict::OnEvent(CStateMDCampaignsEcoConflict *this, struct CEvn_Event *a2)
-bool  CStateMDCampaignsEcoConflict::OnEvent(class CEvn_Event &) {
+bool  CStateMDCampaignsEcoConflict::OnEvent(class CEvn_Event & a2) {
   
   CEvn_Event *v3; // [esp+10h] [ebp-38h]
   unsigned int event; // [esp+1Ch] [ebp-2Ch]

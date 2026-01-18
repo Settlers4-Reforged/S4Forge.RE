@@ -4,7 +4,7 @@
 
 // address=[0x13d8780]
 // Decompiled from void *CGUIWrapper::GetInstance()
-static class CGUIWrapper * __cdecl CGUIWrapper::GetInstance(void) {
+class CGUIWrapper * __cdecl CGUIWrapper::GetInstance(void) {
   
   if ( dword_3EFD61C <= *(_DWORD *)(*((_DWORD *)NtCurrentTeb()->ThreadLocalStoragePointer + _tls_index) + 20296) )
     return &unk_3EFD618;
@@ -31,7 +31,7 @@ void  CGUIWrapper::ReleaseGUIGFXFile(void) {
 
 // address=[0x13d8830]
 // Decompiled from char __thiscall CGUIWrapper::RebuildGuiEngineWithGfxFile(  CGUIWrapper *this,  unsigned int a2,  int a3,  int a4,  bool (__cdecl *a5)(int, int, int))
-bool  CGUIWrapper::RebuildGuiEngineWithGfxFile(unsigned int,void *,int,bool (__cdecl*)(int,int,int)) {
+bool  CGUIWrapper::RebuildGuiEngineWithGfxFile(unsigned int a2, void * a3, int a4, bool (__cdecl*)(int,int,int) a5) {
   
   int Language; // eax
   int DialogsRenderOffsetX; // [esp+18h] [ebp-2Ch]

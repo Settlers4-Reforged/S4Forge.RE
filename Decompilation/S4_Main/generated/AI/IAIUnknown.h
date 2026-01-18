@@ -1,6 +1,8 @@
 #ifndef IAIUNKNOWN_H
 #define IAIUNKNOWN_H
 
+#include "defines.h"
+
 class IAIUnknown {
 public:
     // address=[0x1309fb0]

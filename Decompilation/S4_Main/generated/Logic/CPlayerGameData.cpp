@@ -36,7 +36,7 @@ void  CPlayerGameData::Clear(void) {
 
 // address=[0x1473300]
 // Decompiled from int __thiscall CPlayerGameData::AddEcoSectorId(CPlayerGameData *this, __int16 a2)
-void  CPlayerGameData::AddEcoSectorId(int) {
+void  CPlayerGameData::AddEcoSectorId(int a2) {
   
   char v3; // [esp-20h] [ebp-78h] BYREF
   int v4; // [esp-1Ch] [ebp-74h]
@@ -117,7 +117,7 @@ void  CPlayerGameData::AddEcoSectorId(int) {
 
 // address=[0x1473470]
 // Decompiled from int __thiscall CPlayerGameData::DeleteEcoSectorId(CPlayerGameData *this, __int16 a2)
-void  CPlayerGameData::DeleteEcoSectorId(int) {
+void  CPlayerGameData::DeleteEcoSectorId(int a2) {
   
   __int16 v3; // [esp+6h] [ebp-2h] BYREF
 
@@ -199,7 +199,7 @@ int  CPlayerGameData::GetNextEcoSectorId(void)const {
 
 // address=[0x1473660]
 // Decompiled from void __thiscall CPlayerGameData::Load(CPlayerGameData *this, struct IS4Chunk *a2)
-void  CPlayerGameData::Load(class IS4Chunk &) {
+void  CPlayerGameData::Load(class IS4Chunk & a2) {
   
   (*(void (__thiscall **)(struct IS4Chunk *, int, int))(*(_DWORD *)a2 + 4))(a2, 1982022950, 1982022950);
   CPlayerGameData::LoadDataBlock(this, a2, (char *)this + 8, 0x70u);
@@ -209,7 +209,7 @@ void  CPlayerGameData::Load(class IS4Chunk &) {
 
 // address=[0x14736b0]
 // Decompiled from void __thiscall CPlayerGameData::Save(CPlayerGameData *this, struct IS4Chunk *a2)
-void  CPlayerGameData::Save(class IS4Chunk &) {
+void  CPlayerGameData::Save(class IS4Chunk & a2) {
   
   (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 20))(a2, 1982022950);
   CPlayerGameData::SaveDataBlock(this, a2, (char *)this + 8, 0x70u);
@@ -219,7 +219,7 @@ void  CPlayerGameData::Save(class IS4Chunk &) {
 
 // address=[0x1473700]
 // Decompiled from int __thiscall CPlayerGameData::PostLoadInit(CPlayerGameData *this, int a2)
-void  CPlayerGameData::PostLoadInit(int) {
+void  CPlayerGameData::PostLoadInit(int a2) {
   
   int result; // eax
   int i; // [esp+4h] [ebp-4h]
@@ -285,7 +285,7 @@ bool  CPlayerGameData::PlayerLost(void)const {
 
 // address=[0x1473760]
 // Decompiled from void *__thiscall CPlayerGameData::LoadDataBlock(CPlayerGameData *this, struct IS4Chunk *a2, char *a3, unsigned int a4)
-void  CPlayerGameData::LoadDataBlock(class IS4Chunk &,void *,unsigned int) {
+void  CPlayerGameData::LoadDataBlock(class IS4Chunk & a2, void * a3, unsigned int a4) {
   
   void *result; // eax
   unsigned int v5; // [esp+4h] [ebp-4h]
@@ -304,7 +304,7 @@ void  CPlayerGameData::LoadDataBlock(class IS4Chunk &,void *,unsigned int) {
 
 // address=[0x1473800]
 // Decompiled from int __thiscall CPlayerGameData::SaveDataBlock(CPlayerGameData *this, struct IS4Chunk *a2, void *a3, unsigned int a4)
-void  CPlayerGameData::SaveDataBlock(class IS4Chunk &,void *,unsigned int) {
+void  CPlayerGameData::SaveDataBlock(class IS4Chunk & a2, void * a3, unsigned int a4) {
   
   if ( !a3 && BBSupportDbgReport(2, "Logic\\PlayerGameData.cpp", 78, "_pData != 0") == 1 )
     __debugbreak();
@@ -317,7 +317,7 @@ void  CPlayerGameData::SaveDataBlock(class IS4Chunk &,void *,unsigned int) {
 
 // address=[0x1474ca0]
 // Decompiled from int __thiscall CPlayerGameData::SetFlags(CPlayerGameData *this, unsigned int a2)
-void  CPlayerGameData::SetFlags(unsigned int) {
+void  CPlayerGameData::SetFlags(unsigned int a2) {
   
   int result; // eax
 

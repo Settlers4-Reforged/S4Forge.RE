@@ -1,6 +1,8 @@
 #ifndef CPLAYERINFO_H
 #define CPLAYERINFO_H
 
+#include "defines.h"
+
 class CPlayerInfo : public IS4ChunkObject {
 public:
     // address=[0x1373730]
@@ -19,10 +21,10 @@ public:
     void  Clear(void);
 
     // address=[0x1497320]
-    virtual void  Load(class IS4Chunk &);
+    virtual void  Load(class IS4Chunk & a2);
 
     // address=[0x1497360]
-    virtual void  Save(class IS4Chunk &);
+    virtual void  Save(class IS4Chunk & a2);
 
     // address=[0x14980c0]
      CPlayerInfo(void);

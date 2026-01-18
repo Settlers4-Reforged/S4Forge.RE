@@ -1,10 +1,12 @@
 #ifndef CONEBUILDINGTYPEITERATOR_H
 #define CONEBUILDINGTYPEITERATOR_H
 
+#include "defines.h"
+
 class COneBuildingTypeIterator {
 public:
     // address=[0x1315a50]
-    void  Init(int,int);
+    void  Init(int a2, int a3);
 
     // address=[0x1315a80]
     int  FirstBuilding(void);

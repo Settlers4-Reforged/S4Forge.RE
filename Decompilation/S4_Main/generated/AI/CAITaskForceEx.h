@@ -1,6 +1,8 @@
 #ifndef CAITASKFORCEEX_H
 #define CAITASKFORCEEX_H
 
+#include "defines.h"
+
 class CAITaskForceEx : public CAITaskForce {
 public:
     // address=[0x132a540]
@@ -19,13 +21,13 @@ public:
     bool  FindWaypoints(void);
 
     // address=[0x132a990]
-    virtual bool  SetDestinationXY(int);
+    virtual bool  SetDestinationXY(int a2);
 
     // address=[0x132a9b0]
     virtual void  Execute(void);
 
     // address=[0x132ace0]
-    void  InitWalk(bool);
+    void  InitWalk(bool a2);
 
     // address=[0x132aef0]
     void  InitGroupWalk(void);
@@ -34,10 +36,10 @@ public:
     bool  FindSneakUpPosition(void);
 
     // address=[0x132b0f0]
-    virtual void  Load(class IS4Chunk &);
+    virtual void  Load(class IS4Chunk & a2);
 
     // address=[0x132b190]
-    virtual void  Save(class IS4Chunk &);
+    virtual void  Save(class IS4Chunk & a2);
 
     // address=[0x132e950]
     int  DestinationX(void)const;
@@ -65,13 +67,13 @@ protected:
     virtual  ~CAITaskForceEx(void);
 
     // address=[0x132a140]
-     CAITaskForceEx(int,enum T_AI_TASK_FORCE_CLASS,enum T_AI_TASK_FORCE_TYPE,int);
+     CAITaskForceEx(int a2, enum T_AI_TASK_FORCE_CLASS a3, enum T_AI_TASK_FORCE_TYPE a4, int a5);
 
     // address=[0x132b230]
     bool  EscortInitWalk(void);
 
     // address=[0x132eac0]
-    void  SetCommandAndClearStuff(int,int,int);
+    void  SetCommandAndClearStuff(int a2, int a3, int a4);
 
 };
 

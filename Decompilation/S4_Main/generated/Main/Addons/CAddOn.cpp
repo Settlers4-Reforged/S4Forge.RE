@@ -12,7 +12,7 @@ bool  CAddOn::IsExtraInstalledEx(void) {
 
 // address=[0x1481bc0]
 // Decompiled from char __thiscall CAddOn::EnsureExtraGUI(CAddOn *this, int a2, bool (__cdecl *a3)(int, int, int))
-void  CAddOn::EnsureExtraGUI(int,bool (__cdecl*)(int,int,int)) {
+void  CAddOn::EnsureExtraGUI(int a2, bool (__cdecl*)(int,int,int) a3) {
   
   CExtraCD::LoadMenuData((wchar_t *)L"Menu\\GuiSetAOStartscreens.dat");
   return CExtraCD::EnsureGuiEngineHasGfxFileLoaded(this, 0x1Cu, *((_DWORD *)this + 1), a2, a3, 1);

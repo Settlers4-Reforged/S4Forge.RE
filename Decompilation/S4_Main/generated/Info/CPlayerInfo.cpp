@@ -53,7 +53,7 @@ void  CPlayerInfo::Clear(void) {
 
 // address=[0x1497320]
 // Decompiled from int __thiscall CPlayerInfo::Load(CPlayerInfo *this, struct IS4Chunk *a2)
-void  CPlayerInfo::Load(class IS4Chunk &) {
+void  CPlayerInfo::Load(class IS4Chunk & a2) {
   
   (**(void (__thiscall ***)(struct IS4Chunk *, DWORD *, int))a2)(a2, &this->race, 4);
   return (**(int (__thiscall ***)(struct IS4Chunk *, DWORD *, int))a2)(a2, &this->unk_18, 4);
@@ -62,7 +62,7 @@ void  CPlayerInfo::Load(class IS4Chunk &) {
 
 // address=[0x1497360]
 // Decompiled from int __thiscall CPlayerInfo::Save(CPlayerInfo *this, struct IS4Chunk *a2)
-void  CPlayerInfo::Save(class IS4Chunk &) {
+void  CPlayerInfo::Save(class IS4Chunk & a2) {
   
   (*(void (__thiscall **)(struct IS4Chunk *, DWORD *, int))(*(_DWORD *)a2 + 16))(a2, &this->race, 4);
   return (*(int (__thiscall **)(struct IS4Chunk *, DWORD *, int))(*(_DWORD *)a2 + 16))(a2, &this->unk_18, 4);

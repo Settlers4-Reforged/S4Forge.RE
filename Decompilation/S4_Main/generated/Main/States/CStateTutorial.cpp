@@ -4,7 +4,7 @@
 
 // address=[0x14cadc0]
 // Decompiled from CStateTutorial *__cdecl CStateTutorial::DynamicCreateFunc(void *a1)
-static class CGameState * __cdecl CStateTutorial::DynamicCreateFunc(void *) {
+class CGameState * __cdecl CStateTutorial::DynamicCreateFunc(void * a1) {
   
   CStateTutorial *C; // [esp+Ch] [ebp-10h]
 
@@ -72,7 +72,7 @@ bool  CStateTutorial::Perform(void) {
 
 // address=[0x14caff0]
 // Decompiled from char __thiscall CStateTutorial::OnEvent(CStateTutorial *this, struct CEvn_Event *a2)
-bool  CStateTutorial::OnEvent(class CEvn_Event &) {
+bool  CStateTutorial::OnEvent(class CEvn_Event & a2) {
   
   char result; // al
   char *v3; // eax

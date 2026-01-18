@@ -46,7 +46,7 @@ void  CTutorial::RefreshGUIControlStatus(void) {
 
 // address=[0x147d7a0]
 // Decompiled from int __thiscall CTutorial::EnableGUIControl(CTutorial *this, int a2)
-void  CTutorial::EnableGUIControl(int) {
+void  CTutorial::EnableGUIControl(int a2) {
   
   return sub_147E0A0(a2);
 }
@@ -54,7 +54,7 @@ void  CTutorial::EnableGUIControl(int) {
 
 // address=[0x147d7c0]
 // Decompiled from int __thiscall CTutorial::DisableGUIControl(CTutorial *this, int a2)
-void  CTutorial::DisableGUIControl(int) {
+void  CTutorial::DisableGUIControl(int a2) {
   
   return sub_147E0A0(a2);
 }
@@ -102,7 +102,7 @@ void  CTutorial::DisableAllGUIControls(void) {
 
 // address=[0x147d910]
 // Decompiled from int __thiscall CTutorial::SetWorldTutorialCursor(CTutorial *this, int a2, int a3)
-void  CTutorial::SetWorldTutorialCursor(int,int) {
+void  CTutorial::SetWorldTutorialCursor(int a2, int a3) {
   
   IEffects *v3; // eax
   int v4; // eax
@@ -162,7 +162,7 @@ int  CTutorial::CurrentZoomFactor(void)const {
 
 // address=[0x147d9b0]
 // Decompiled from char __thiscall CTutorial::OnEvent(CTutorial *this, struct CEvn_Event *a2)
-bool  CTutorial::OnEvent(class CEvn_Event &) {
+bool  CTutorial::OnEvent(class CEvn_Event & a2) {
   
   char result; // al
   int v3; // eax

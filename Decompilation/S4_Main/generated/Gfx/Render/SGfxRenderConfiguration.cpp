@@ -4,7 +4,7 @@
 
 // address=[0x148fbd0]
 // Decompiled from SGfxRenderConfiguration *__thiscall SGfxRenderConfiguration::EnableFiltering(SGfxRenderConfiguration *this, bool a2)
-void  SGfxRenderConfiguration::EnableFiltering(bool) {
+void  SGfxRenderConfiguration::EnableFiltering(bool a2) {
   
   unsigned int v2; // edx
   SGfxRenderConfiguration *result; // eax
@@ -21,7 +21,7 @@ void  SGfxRenderConfiguration::EnableFiltering(bool) {
 
 // address=[0x148fc20]
 // Decompiled from SGfxRenderConfiguration *__thiscall SGfxRenderConfiguration::EnableHQTextureSet(SGfxRenderConfiguration *this, bool a2)
-void  SGfxRenderConfiguration::EnableHQTextureSet(bool) {
+void  SGfxRenderConfiguration::EnableHQTextureSet(bool a2) {
   
   unsigned int v2; // edx
   SGfxRenderConfiguration *result; // eax
@@ -38,7 +38,7 @@ void  SGfxRenderConfiguration::EnableHQTextureSet(bool) {
 
 // address=[0x148fc70]
 // Decompiled from SGfxRenderConfiguration *__thiscall SGfxRenderConfiguration::EnableHardwareLandscapeEngine(  SGfxRenderConfiguration *this,  bool a2)
-void  SGfxRenderConfiguration::EnableHardwareLandscapeEngine(bool) {
+void  SGfxRenderConfiguration::EnableHardwareLandscapeEngine(bool a2) {
   
   SGfxRenderConfiguration *result; // eax
 
@@ -52,7 +52,7 @@ void  SGfxRenderConfiguration::EnableHardwareLandscapeEngine(bool) {
 
 // address=[0x148fcc0]
 // Decompiled from SGfxRenderConfiguration *__thiscall SGfxRenderConfiguration::EnableHardwareObjectEngine(  SGfxRenderConfiguration *this,  bool a2)
-void  SGfxRenderConfiguration::EnableHardwareObjectEngine(bool) {
+void  SGfxRenderConfiguration::EnableHardwareObjectEngine(bool a2) {
   
   SGfxRenderConfiguration *result; // eax
 
@@ -66,7 +66,7 @@ void  SGfxRenderConfiguration::EnableHardwareObjectEngine(bool) {
 
 // address=[0x148fd10]
 // Decompiled from SGfxRenderConfiguration *__thiscall SGfxRenderConfiguration::ForceBlit(SGfxRenderConfiguration *this, bool a2)
-void  SGfxRenderConfiguration::ForceBlit(bool) {
+void  SGfxRenderConfiguration::ForceBlit(bool a2) {
   
   unsigned int v2; // edx
   SGfxRenderConfiguration *result; // eax
@@ -107,7 +107,7 @@ bool  SGfxRenderConfiguration::IsHardwareObjectEngine(void)const {
 
 // address=[0x148ffc0]
 // Decompiled from SGfxRenderConfiguration *__thiscall SGfxRenderConfiguration::SetPureSoftwareMode(  SGfxRenderConfiguration *this,  bool a2)
-void  SGfxRenderConfiguration::SetPureSoftwareMode(bool) {
+void  SGfxRenderConfiguration::SetPureSoftwareMode(bool a2) {
   
   SGfxRenderConfiguration *result; // eax
 

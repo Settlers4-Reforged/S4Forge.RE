@@ -4,7 +4,7 @@
 
 // address=[0x1402480]
 // Decompiled from int __cdecl CTradingBuildingRole::New(int a1)
-static class CPersistence * __cdecl CTradingBuildingRole::New(std::istream &) {
+class CPersistence * __cdecl CTradingBuildingRole::New(std::istream & a1) {
   
   if ( operator new(0x2B4u) )
     return CTradingBuildingRole::CTradingBuildingRole(a1);
@@ -15,7 +15,7 @@ static class CPersistence * __cdecl CTradingBuildingRole::New(std::istream &) {
 
 // address=[0x14fdcb0]
 // Decompiled from int __cdecl CTradingBuildingRole::Load(int a1)
-static class CTradingBuildingRole * __cdecl CTradingBuildingRole::Load(std::istream &) {
+class CTradingBuildingRole * __cdecl CTradingBuildingRole::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
@@ -87,7 +87,7 @@ static class CTradingBuildingRole * __cdecl CTradingBuildingRole::Load(std::istr
 
 // address=[0x151fd80]
 // Decompiled from void __thiscall CTradingBuildingRole::LogicUpdate(CInternationalTrader **this, struct CBuilding *a2)
-void  CTradingBuildingRole::LogicUpdate(class CBuilding *) {
+void  CTradingBuildingRole::LogicUpdate(class CBuilding * a2) {
   
   _DWORD *v2; // eax
   unsigned __int8 *BuildingPtr; // [esp+0h] [ebp-Ch]
@@ -152,7 +152,7 @@ void  CTradingBuildingRole::LogicUpdate(class CBuilding *) {
 
 // address=[0x151ff10]
 // Decompiled from unsigned int __thiscall CTradingBuildingRole::FillGfxInfo(  CTradingBuildingRole *this,  struct CBuilding *a2,  struct SGfxObjectInfo *a3)
-void  CTradingBuildingRole::FillGfxInfo(class CBuilding *,struct SGfxObjectInfo &) {
+void  CTradingBuildingRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo & a3) {
   
   int v3; // eax
   int v4; // eax
@@ -189,7 +189,7 @@ void  CTradingBuildingRole::FillGfxInfo(class CBuilding *,struct SGfxObjectInfo 
 
 // address=[0x1520000]
 // Decompiled from void __thiscall CTradingBuildingRole::Init(CTradingBuildingRole *this, struct CBuilding *a2)
-void  CTradingBuildingRole::Init(class CBuilding *) {
+void  CTradingBuildingRole::Init(class CBuilding * a2) {
   
   int v2; // eax
   int v3; // eax
@@ -286,7 +286,7 @@ void  CTradingBuildingRole::Init(class CBuilding *) {
 
 // address=[0x15203b0]
 // Decompiled from void __thiscall CTradingBuildingRole::PostLoadInit(CTradingBuildingRole *this, struct CBuilding *a2)
-void  CTradingBuildingRole::PostLoadInit(class CBuilding *) {
+void  CTradingBuildingRole::PostLoadInit(class CBuilding * a2) {
   
   int v2; // eax
   int v3; // [esp-4h] [ebp-8h]
@@ -357,7 +357,7 @@ void  CTradingBuildingRole::NotifySelected(void) {
 
 // address=[0x1520540]
 // Decompiled from int __thiscall CTradingBuildingRole::GetPileIdWithGood(CTradingBuildingRole *this, unsigned int a2)
-int  CTradingBuildingRole::GetPileIdWithGood(int)const {
+int  CTradingBuildingRole::GetPileIdWithGood(int a2)const {
   
   unsigned __int8 *v3; // eax
   int v4; // eax
@@ -413,7 +413,7 @@ int  CTradingBuildingRole::GetNumberOfFreePiles(void) {
 
 // address=[0x15206b0]
 // Decompiled from char __thiscall CTradingBuildingRole::GoodArrive(_BYTE *this, int a2)
-void  CTradingBuildingRole::GoodArrive(int) {
+void  CTradingBuildingRole::GoodArrive(int a2) {
   
   char result; // al
 
@@ -430,7 +430,7 @@ void  CTradingBuildingRole::GoodArrive(int) {
 
 // address=[0x1520740]
 // Decompiled from void __thiscall CTradingBuildingRole::GoodLeft(CTradingBuildingRole *this, int a2)
-void  CTradingBuildingRole::GoodLeft(int) {
+void  CTradingBuildingRole::GoodLeft(int a2) {
   
   ;
 }
@@ -438,7 +438,7 @@ void  CTradingBuildingRole::GoodLeft(int) {
 
 // address=[0x1520750]
 // Decompiled from signed int __thiscall CTradingBuildingRole::ReservePileForGood(_DWORD *this, int a2, char a3)
-void  CTradingBuildingRole::ReservePileForGood(int,int) {
+void  CTradingBuildingRole::ReservePileForGood(int a2, int a3) {
   
   signed int result; // eax
   unsigned __int16 *v4; // eax
@@ -489,7 +489,7 @@ void  CTradingBuildingRole::ReservePileForGood(int,int) {
 
 // address=[0x1520880]
 // Decompiled from int __thiscall CTradingBuildingRole::GetGoodSpaceAmount(CTradingBuildingRole *this, unsigned int a2)
-int  CTradingBuildingRole::GetGoodSpaceAmount(int) {
+int  CTradingBuildingRole::GetGoodSpaceAmount(int a2) {
   
   unsigned __int8 *v3; // eax
   int v4; // eax
@@ -538,7 +538,7 @@ int  CTradingBuildingRole::GetGoodSpaceAmount(int) {
 
 // address=[0x15209e0]
 // Decompiled from char __thiscall CTradingBuildingRole::SettlerEnter(CTradingBuildingRole *this, struct CBuilding *a2, __int16 a3)
-bool  CTradingBuildingRole::SettlerEnter(class CBuilding *,int) {
+bool  CTradingBuildingRole::SettlerEnter(class CBuilding * a2, int a3) {
   
   *((_WORD *)this + 4) = a3;
   *((_BYTE *)this + 29) = 1;
@@ -548,7 +548,7 @@ bool  CTradingBuildingRole::SettlerEnter(class CBuilding *,int) {
 
 // address=[0x1520a10]
 // Decompiled from void __thiscall CTradingBuildingRole::VehicleArrived(CTradingBuildingRole *this, int a2, int a3)
-void  CTradingBuildingRole::VehicleArrived(int,int) {
+void  CTradingBuildingRole::VehicleArrived(int a2, int a3) {
   
   if ( a3 == 1 )
     CTradingBuildingRole::ShipArrived(this, a2);
@@ -561,7 +561,7 @@ void  CTradingBuildingRole::VehicleArrived(int,int) {
 
 // address=[0x1520a60]
 // Decompiled from void __thiscall CTradingBuildingRole::VehicleArrivedAtTarget(CTradingBuildingRole *this, int a2, int a3)
-void  CTradingBuildingRole::VehicleArrivedAtTarget(int,int) {
+void  CTradingBuildingRole::VehicleArrivedAtTarget(int a2, int a3) {
   
   if ( a3 == 1 )
     CTradingBuildingRole::ShipArrivedAtTarget(this, a2);
@@ -574,7 +574,7 @@ void  CTradingBuildingRole::VehicleArrivedAtTarget(int,int) {
 
 // address=[0x1520ab0]
 // Decompiled from void __thiscall CTradingBuildingRole::VehicleArriveCancel(CTradingBuildingRole *this, int a2, int a3)
-void  CTradingBuildingRole::VehicleArriveCancel(int,int) {
+void  CTradingBuildingRole::VehicleArriveCancel(int a2, int a3) {
   
   if ( a3 == 1 )
     CTradingBuildingRole::ShipArriveCancel(this, a2);
@@ -587,7 +587,7 @@ void  CTradingBuildingRole::VehicleArriveCancel(int,int) {
 
 // address=[0x1520b00]
 // Decompiled from bool __thiscall CTradingBuildingRole::IsPossibleTradeTarget(CTradingBuildingRole *this, int a2)
-bool  CTradingBuildingRole::IsPossibleTradeTarget(int) {
+bool  CTradingBuildingRole::IsPossibleTradeTarget(int a2) {
   
   int v3; // eax
   int v4; // eax
@@ -639,7 +639,7 @@ bool  CTradingBuildingRole::IsPossibleTradeTarget(int) {
 
 // address=[0x1520c90]
 // Decompiled from void __thiscall CTradingBuildingRole::SetTradeTarget(CTradingBuildingRole *this, int a2)
-void  CTradingBuildingRole::SetTradeTarget(int) {
+void  CTradingBuildingRole::SetTradeTarget(int a2) {
   
   unsigned __int16 *v2; // eax
   unsigned __int16 *v3; // eax
@@ -696,7 +696,7 @@ int  CTradingBuildingRole::GetTradeTargetID(void) {
 
 // address=[0x1520e30]
 // Decompiled from void __thiscall CTradingBuildingRole::TransportGood(CTradingBuildingRole *this, int a2, int a3)
-void  CTradingBuildingRole::TransportGood(int,int) {
+void  CTradingBuildingRole::TransportGood(int a2, int a3) {
   
   _DWORD *v3; // eax
   _DWORD *v4; // eax
@@ -759,7 +759,7 @@ void  CTradingBuildingRole::TransportGood(int,int) {
 
 // address=[0x1521050]
 // Decompiled from void __thiscall CTradingBuildingRole::TradeWith(CInternationalTrader **this, unsigned int a2)
-void  CTradingBuildingRole::TradeWith(int) {
+void  CTradingBuildingRole::TradeWith(int a2) {
   
   int v2; // [esp+0h] [ebp-Ch]
   unsigned __int8 *BuildingPtr; // [esp+8h] [ebp-4h]
@@ -792,7 +792,7 @@ void  CTradingBuildingRole::TradeWith(int) {
 
 // address=[0x1521100]
 // Decompiled from unsigned __int8 *__thiscall CTradingBuildingRole::TradeGood(CTradingBuildingRole *this, int a2)
-void  CTradingBuildingRole::TradeGood(int) {
+void  CTradingBuildingRole::TradeGood(int a2) {
   
   unsigned __int8 *result; // eax
   int v3; // eax
@@ -952,7 +952,7 @@ void  CTradingBuildingRole::ShowTradeRoute(void) {
 
 // address=[0x1521500]
 // Decompiled from signed int __thiscall CTradingBuildingRole::ClearExpectedAmounts(CTradingBuildingRole *this, int a2)
-void  CTradingBuildingRole::ClearExpectedAmounts(int) {
+void  CTradingBuildingRole::ClearExpectedAmounts(int a2) {
   
   signed int result; // eax
   unsigned __int16 *v3; // eax
@@ -989,7 +989,7 @@ void  CTradingBuildingRole::ClearExpectedAmounts(int) {
 
 // address=[0x15215c0]
 // Decompiled from char __thiscall CTradingBuildingRole::IsRegisteredAsIncomingTrader(CTradingBuildingRole *this, int a2, int a3)
-bool  CTradingBuildingRole::IsRegisteredAsIncomingTrader(int,int) {
+bool  CTradingBuildingRole::IsRegisteredAsIncomingTrader(int a2, int a3) {
   
   unsigned int i; // [esp+4h] [ebp-4h]
 
@@ -1017,7 +1017,7 @@ bool  CTradingBuildingRole::IsRegisteredAsIncomingTrader(int,int) {
 
 // address=[0x1521680]
 // Decompiled from char __thiscall CTradingBuildingRole::RegisterIncomingTrader(CTradingBuildingRole *this, int a2, int a3, bool a4)
-bool  CTradingBuildingRole::RegisterIncomingTrader(int,int,bool) {
+bool  CTradingBuildingRole::RegisterIncomingTrader(int a2, int a3, bool a4) {
   
   _DWORD v5[2]; // [esp+0h] [ebp-10h] BYREF
   bool v6; // [esp+8h] [ebp-8h]
@@ -1036,7 +1036,7 @@ bool  CTradingBuildingRole::RegisterIncomingTrader(int,int,bool) {
 
 // address=[0x15216d0]
 // Decompiled from char __thiscall CTradingBuildingRole::UnregisterIncomingTrader(CTradingBuildingRole *this, int a2, int a3)
-bool  CTradingBuildingRole::UnregisterIncomingTrader(int,int) {
+bool  CTradingBuildingRole::UnregisterIncomingTrader(int a2, int a3) {
   
   int v4; // eax
   _DWORD *v5; // esi
@@ -1070,7 +1070,7 @@ bool  CTradingBuildingRole::UnregisterIncomingTrader(int,int) {
 
 // address=[0x15217d0]
 // Decompiled from int __thiscall CTradingBuildingRole::GetNrRegisteredIncomingTraders(CTradingBuildingRole *this, int a2, bool a3)
-int  CTradingBuildingRole::GetNrRegisteredIncomingTraders(int,bool) {
+int  CTradingBuildingRole::GetNrRegisteredIncomingTraders(int a2, bool a3) {
   
   int v4; // [esp+0h] [ebp-Ch]
   unsigned int i; // [esp+8h] [ebp-4h]
@@ -1111,7 +1111,7 @@ int  CTradingBuildingRole::GetNextFreePile(void) {
 
 // address=[0x15218f0]
 // Decompiled from void __thiscall CTradingBuildingRole::ExecuteUnforseenGoodTypeChange(  CTradingBuildingRole *this,  int a2,  int a3,  int a4)
-void  CTradingBuildingRole::ExecuteUnforseenGoodTypeChange(int,int,int) {
+void  CTradingBuildingRole::ExecuteUnforseenGoodTypeChange(int a2, int a3, int a4) {
   
   CPile *PilePtr; // [esp+4h] [ebp-8h]
   pairNode *v6; // [esp+8h] [ebp-4h]
@@ -1140,7 +1140,7 @@ void  CTradingBuildingRole::ExecuteUnforseenGoodTypeChange(int,int,int) {
 
 // address=[0x1521990]
 // Decompiled from _DWORD *__thiscall CTradingBuildingRole::FillDialog(int this, unsigned __int8 *a2, char a3)
-void  CTradingBuildingRole::FillDialog(class CBuilding *,bool) {
+void  CTradingBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
   
   int v3; // eax
   int v4; // eax
@@ -1235,7 +1235,7 @@ void  CTradingBuildingRole::FillDialog(class CBuilding *,bool) {
 
 // address=[0x1521d80]
 // Decompiled from CTradingBuildingRole *__thiscall CTradingBuildingRole::FillTradeSideBar(  CInternationalTrader **this,  struct CPortGoodsTradeBarInfo *a2,  bool a3)
-void  CTradingBuildingRole::FillTradeSideBar(class CPortGoodsTradeBarInfo *,bool) {
+void  CTradingBuildingRole::FillTradeSideBar(class CPortGoodsTradeBarInfo * a2, bool a3) {
   
   CTradingBuildingRole *result; // eax
   int v4; // eax
@@ -1297,7 +1297,7 @@ void  CTradingBuildingRole::FillTradeSideBar(class CPortGoodsTradeBarInfo *,bool
 
 // address=[0x1521f70]
 // Decompiled from _DWORD *__thiscall CTradingBuildingRole::FillGoodsOutSideBar(  CTradingBuildingRole *this,  struct CPortGoodsOutBarInfo *a2,  bool a3)
-void  CTradingBuildingRole::FillGoodsOutSideBar(class CPortGoodsOutBarInfo *,bool) {
+void  CTradingBuildingRole::FillGoodsOutSideBar(class CPortGoodsOutBarInfo * a2, bool a3) {
   
   unsigned int v4; // [esp+4h] [ebp-34h]
   int i; // [esp+Ch] [ebp-2Ch]
@@ -1330,7 +1330,7 @@ void  CTradingBuildingRole::FillGoodsOutSideBar(class CPortGoodsOutBarInfo *,boo
 
 // address=[0x15220a0]
 // Decompiled from unsigned __int8 *__thiscall CTradingBuildingRole::ChangeTradeStatus(  CTradingBuildingRole *this,  unsigned int a2,  bool a3)
-void  CTradingBuildingRole::ChangeTradeStatus(int,bool) {
+void  CTradingBuildingRole::ChangeTradeStatus(int a2, bool a3) {
   
   unsigned __int8 *result; // eax
   int v4; // [esp+0h] [ebp-Ch]
@@ -1372,7 +1372,7 @@ void  CTradingBuildingRole::ChangeTradeStatus(int,bool) {
 
 // address=[0x1522180]
 // Decompiled from int __cdecl CTradingBuildingRole::PathCallback(int a1, int a2)
-static void __cdecl CTradingBuildingRole::PathCallback(int,int) {
+void __cdecl CTradingBuildingRole::PathCallback(int a1, int a2) {
   
   int result; // eax
 
@@ -1385,7 +1385,7 @@ static void __cdecl CTradingBuildingRole::PathCallback(int,int) {
 
 // address=[0x15221c0]
 // Decompiled from char *__thiscall CTradingBuildingRole::CTradingBuildingRole(char *this, int a2)
- CTradingBuildingRole::CTradingBuildingRole(std::istream &) {
+ CTradingBuildingRole::CTradingBuildingRole(std::istream & a2) {
   
   char v3[4]; // [esp+4h] [ebp-54h] BYREF
   char v4[4]; // [esp+8h] [ebp-50h] BYREF
@@ -1504,7 +1504,7 @@ LABEL_23:
 
 // address=[0x1522660]
 // Decompiled from int __thiscall CTradingBuildingRole::Store(struct IBuildingRole *this, struct std::ostream *a2)
-void  CTradingBuildingRole::Store(std::ostream &) {
+void  CTradingBuildingRole::Store(std::ostream & a2) {
   
   __int16 *v2; // eax
   int *v3; // eax
@@ -1573,7 +1573,7 @@ unsigned long  CTradingBuildingRole::ClassID(void)const {
 
 // address=[0x152bd70]
 // Decompiled from void *__thiscall CTradingBuildingRole::GetBuildingNeed(std::_Ref_count_base *this, const struct type_info *a2)
-int  CTradingBuildingRole::GetBuildingNeed(int)const {
+int  CTradingBuildingRole::GetBuildingNeed(int a2)const {
   
   return 0;
 }
@@ -1592,7 +1592,7 @@ int  CTradingBuildingRole::GetBuildingRole(void) {
 
 // address=[0x15229a0]
 // Decompiled from char __thiscall CTradingBuildingRole::CheckTransport(CTradingBuildingRole *this, struct CBuilding *a2, unsigned int a3)
-bool  CTradingBuildingRole::CheckTransport(class CBuilding *,int) {
+bool  CTradingBuildingRole::CheckTransport(class CBuilding * a2, int a3) {
   
   unsigned __int16 *v4; // eax
   int v5; // eax
@@ -1782,7 +1782,7 @@ bool  CTradingBuildingRole::CheckTransport(class CBuilding *,int) {
 
 // address=[0x1522fe0]
 // Decompiled from int __thiscall CTradingBuildingRole::GetCurrentAmount(CTradingBuildingRole *this, unsigned int a2)
-int  CTradingBuildingRole::GetCurrentAmount(int) {
+int  CTradingBuildingRole::GetCurrentAmount(int a2) {
   
   unsigned __int16 *v3; // eax
   void *v4; // [esp+0h] [ebp-14h]
@@ -1819,7 +1819,7 @@ int  CTradingBuildingRole::GetCurrentAmount(int) {
 
 // address=[0x15230e0]
 // Decompiled from int __thiscall CTradingBuildingRole::GetRequestedAmount(CTradingBuildingRole *this, unsigned int a2, bool a3)
-int  CTradingBuildingRole::GetRequestedAmount(int,bool) {
+int  CTradingBuildingRole::GetRequestedAmount(int a2, bool a3) {
   
   unsigned __int16 *v4; // eax
   void *v5; // [esp+0h] [ebp-18h]
@@ -1860,7 +1860,7 @@ int  CTradingBuildingRole::GetRequestedAmount(int,bool) {
 
 // address=[0x1523220]
 // Decompiled from int __thiscall CTradingBuildingRole::GetExpectedAmount(CTradingBuildingRole *this, unsigned int a2, bool a3)
-int  CTradingBuildingRole::GetExpectedAmount(int,bool) {
+int  CTradingBuildingRole::GetExpectedAmount(int a2, bool a3) {
   
   unsigned __int16 *v4; // eax
   int v6; // [esp+4h] [ebp-14h]
@@ -1899,7 +1899,7 @@ int  CTradingBuildingRole::GetExpectedAmount(int,bool) {
 
 // address=[0x1523330]
 // Decompiled from int __thiscall CTradingBuildingRole::GetExpectedAmountForAllPikes(_DWORD *this, unsigned int a2)
-int  CTradingBuildingRole::GetExpectedAmountForAllPikes(int) {
+int  CTradingBuildingRole::GetExpectedAmountForAllPikes(int a2) {
   
   unsigned __int16 *v3; // eax
   pairNode *v4; // [esp+0h] [ebp-14h]
@@ -1933,7 +1933,7 @@ int  CTradingBuildingRole::GetExpectedAmountForAllPikes(int) {
 
 // address=[0x1523400]
 // Decompiled from int __thiscall CTradingBuildingRole::GetGoodAmount(_DWORD *this, unsigned int a2)
-int  CTradingBuildingRole::GetGoodAmount(int) {
+int  CTradingBuildingRole::GetGoodAmount(int a2) {
   
   unsigned __int16 *v3; // eax
   int v4; // eax
@@ -1967,7 +1967,7 @@ int  CTradingBuildingRole::GetGoodAmount(int) {
 
 // address=[0x15234e0]
 // Decompiled from int __thiscall CTradingBuildingRole::GetExportGoodAmount(CTradingBuildingRole *this, unsigned int a2)
-int  CTradingBuildingRole::GetExportGoodAmount(int) {
+int  CTradingBuildingRole::GetExportGoodAmount(int a2) {
   
   unsigned __int16 *v3; // eax
   void *v4; // [esp+0h] [ebp-18h]
@@ -2007,7 +2007,7 @@ int  CTradingBuildingRole::GetExportGoodAmount(int) {
 
 // address=[0x15235f0]
 // Decompiled from int __thiscall CTradingBuildingRole::GetExportResGoodAmount(CTradingBuildingRole *this, unsigned int a2)
-int  CTradingBuildingRole::GetExportResGoodAmount(int) {
+int  CTradingBuildingRole::GetExportResGoodAmount(int a2) {
   
   unsigned __int16 *v3; // eax
   void *v4; // [esp+0h] [ebp-18h]
@@ -2140,7 +2140,7 @@ void  CTradingBuildingRole::CheckPiles(void) {
 
 // address=[0x1523930]
 // Decompiled from void __thiscall CTradingBuildingRole::SetNewTraderTarget(int this, struct CWnd *a2)
-void  CTradingBuildingRole::SetNewTraderTarget(int) {
+void  CTradingBuildingRole::SetNewTraderTarget(int a2) {
   
   int *v2; // eax
   int v3; // [esp+0h] [ebp-34h]
@@ -2209,7 +2209,7 @@ void  CTradingBuildingRole::SetNewTraderTarget(int) {
 
 // address=[0x1523b20]
 // Decompiled from int __thiscall CTradingBuildingRole::GetTargetBuildingAvailableSpace(  CTradingBuildingRole *this,  int a2,  unsigned int a3)
-int  CTradingBuildingRole::GetTargetBuildingAvailableSpace(int,int) {
+int  CTradingBuildingRole::GetTargetBuildingAvailableSpace(int a2, int a3) {
   
   CTradingBuildingRole *v4; // [esp+4h] [ebp-8h]
   unsigned __int8 *BuildingPtr; // [esp+8h] [ebp-4h]
@@ -2224,7 +2224,7 @@ int  CTradingBuildingRole::GetTargetBuildingAvailableSpace(int,int) {
 
 // address=[0x1523b70]
 // Decompiled from char __thiscall CTradingBuildingRole::RequestVehicle(CTradingBuildingRole *this, struct CBuilding *a2, bool a3)
-bool  CTradingBuildingRole::RequestVehicle(class CBuilding *,bool) {
+bool  CTradingBuildingRole::RequestVehicle(class CBuilding * a2, bool a3) {
   
   int v4; // [esp+8h] [ebp-24h]
   int v5; // [esp+Ch] [ebp-20h]
@@ -2333,7 +2333,7 @@ bool  CTradingBuildingRole::IsVehicleRequested(class CBuilding *,bool) {
 
 // address=[0x1523e90]
 // Decompiled from bool __thiscall CTradingBuildingRole::IsVehicleAtBuilding(CTradingBuildingRole *this, unsigned __int16 *a2)
-bool  CTradingBuildingRole::IsVehicleAtBuilding(class CBuilding *) {
+bool  CTradingBuildingRole::IsVehicleAtBuilding(class CBuilding * a2) {
   
   unsigned __int8 *BuildingPtr; // [esp+0h] [ebp-14h]
   int v4; // [esp+4h] [ebp-10h]
@@ -2563,7 +2563,7 @@ void  CTradingBuildingRole::UnloadVehicle(void) {
 
 // address=[0x1524510]
 // Decompiled from unsigned __int8 *__thiscall CTradingBuildingRole::TransportHandling(CTradingBuildingRole *this, struct CBuilding *a2)
-void  CTradingBuildingRole::TransportHandling(class CBuilding *) {
+void  CTradingBuildingRole::TransportHandling(class CBuilding * a2) {
   
   unsigned __int8 *result; // eax
   _DWORD *v3; // eax
@@ -2826,7 +2826,7 @@ void  CTradingBuildingRole::CancelLoadingVehicle(void) {
 
 // address=[0x1524b40]
 // Decompiled from int __thiscall CTradingBuildingRole::GetVehicleAtBuildingFreeSpaceGood(int this, int a2)
-int  CTradingBuildingRole::GetVehicleAtBuildingFreeSpaceGood(int) {
+int  CTradingBuildingRole::GetVehicleAtBuildingFreeSpaceGood(int a2) {
   
   CDonkeyRole *v3; // eax
   CCart *v4; // [esp+0h] [ebp-14h]
@@ -2920,7 +2920,7 @@ void  CTradingBuildingRole::ClearRegisterTargetBuildings(void) {
 
 // address=[0x1524d40]
 // Decompiled from CTradingBuildingRole *__thiscall CTradingBuildingRole::DeteachTradingBuilding(CTradingBuildingRole *this, int a2)
-void  CTradingBuildingRole::DeteachTradingBuilding(int) {
+void  CTradingBuildingRole::DeteachTradingBuilding(int a2) {
   
   CTradingBuildingRole *result; // eax
 
@@ -2944,7 +2944,7 @@ void  CTradingBuildingRole::DeteachTradingBuilding(int) {
 
 // address=[0x1524da0]
 // Decompiled from void __thiscall CTradingBuildingRole::SetTradingBuildingID(CTradingBuildingRole *this, unsigned int a2)
-void  CTradingBuildingRole::SetTradingBuildingID(int) {
+void  CTradingBuildingRole::SetTradingBuildingID(int a2) {
   
   int v2; // eax
   int TickCounter; // [esp-4h] [ebp-10h]
@@ -2983,7 +2983,7 @@ void  CTradingBuildingRole::SetTradingBuildingID(int) {
 
 // address=[0x1524ea0]
 // Decompiled from char __thiscall CTradingBuildingRole::RequestTradeShip(  CTradingBuildingRole *this,  struct CBuilding *a2,  struct CBuilding *a3,  bool a4)
-bool  CTradingBuildingRole::RequestTradeShip(class CBuilding *,class CBuilding *,bool) {
+bool  CTradingBuildingRole::RequestTradeShip(class CBuilding * a2, class CBuilding * a3, bool a4) {
   
   int WorkingAreaPackedXY; // eax
   int v6; // eax
@@ -3065,7 +3065,7 @@ bool  CTradingBuildingRole::RequestTradeShip(class CBuilding *,class CBuilding *
 
 // address=[0x15250e0]
 // Decompiled from int __thiscall CTradingBuildingRole::GetShipIDInHarbour(CTradingBuildingRole *this, struct CBuilding *a2)
-int  CTradingBuildingRole::GetShipIDInHarbour(class CBuilding *) {
+int  CTradingBuildingRole::GetShipIDInHarbour(class CBuilding * a2) {
   
   Y16X16 *WorkingAreaPackedXY; // eax
   int v3; // eax
@@ -3103,7 +3103,7 @@ int  CTradingBuildingRole::GetShipIDInHarbour(class CBuilding *) {
 
 // address=[0x15251e0]
 // Decompiled from char __thiscall CTradingBuildingRole::IsShipInHarbour(CTradingBuildingRole *this, struct CBuilding *a2)
-bool  CTradingBuildingRole::IsShipInHarbour(class CBuilding *) {
+bool  CTradingBuildingRole::IsShipInHarbour(class CBuilding * a2) {
   
   Y16X16 *WorkingAreaPackedXY; // eax
   int v4; // eax
@@ -3159,7 +3159,7 @@ bool  CTradingBuildingRole::IsTradeShipInHarbour(class CBuilding *) {
 
 // address=[0x15253a0]
 // Decompiled from bool __thiscall CTradingBuildingRole::IsShip(CTradingBuildingRole *this, int a2)
-bool  CTradingBuildingRole::IsShip(int) {
+bool  CTradingBuildingRole::IsShip(int a2) {
   
   return a2 == 1 || a2 == 2 || a2 == 3;
 }
@@ -3167,7 +3167,7 @@ bool  CTradingBuildingRole::IsShip(int) {
 
 // address=[0x15253d0]
 // Decompiled from void __thiscall CTradingBuildingRole::StartLoadingShip(CTradingBuildingRole *this, int a2)
-void  CTradingBuildingRole::StartLoadingShip(int) {
+void  CTradingBuildingRole::StartLoadingShip(int a2) {
   
   CTransportShip *VehiclePtr; // [esp+0h] [ebp-8h]
 
@@ -3180,7 +3180,7 @@ void  CTradingBuildingRole::StartLoadingShip(int) {
 
 // address=[0x1525410]
 // Decompiled from void __thiscall CTradingBuildingRole::StartUnloadingShip(CTradingBuildingRole *this, int a2)
-void  CTradingBuildingRole::StartUnloadingShip(int) {
+void  CTradingBuildingRole::StartUnloadingShip(int a2) {
   
   CTransportShip *VehiclePtr; // [esp+0h] [ebp-8h]
 
@@ -3494,7 +3494,7 @@ void  CTradingBuildingRole::UnloadShip(void) {
 
 // address=[0x1525cc0]
 // Decompiled from void __thiscall CTradingBuildingRole::ShipArrived(CTradingBuildingRole *this, int a2)
-void  CTradingBuildingRole::ShipArrived(int) {
+void  CTradingBuildingRole::ShipArrived(int a2) {
   
   CMFCBaseTabCtrl *VehiclePtr; // [esp+4h] [ebp-8h]
 
@@ -3520,7 +3520,7 @@ void  CTradingBuildingRole::ShipArrived(int) {
 
 // address=[0x1525d90]
 // Decompiled from void __thiscall CTradingBuildingRole::ShipArrivedAtTarget(CTradingBuildingRole *this, int a2)
-void  CTradingBuildingRole::ShipArrivedAtTarget(int) {
+void  CTradingBuildingRole::ShipArrivedAtTarget(int a2) {
   
   ;
 }
@@ -3528,7 +3528,7 @@ void  CTradingBuildingRole::ShipArrivedAtTarget(int) {
 
 // address=[0x1525da0]
 // Decompiled from bool __thiscall CTradingBuildingRole::ShipArriveCancel(CTradingBuildingRole *this, int a2)
-void  CTradingBuildingRole::ShipArriveCancel(int) {
+void  CTradingBuildingRole::ShipArriveCancel(int a2) {
   
   return CTradingBuildingRole::UnregisterIncomingTrader(this, a2, 1);
 }
@@ -3544,7 +3544,7 @@ bool  CTradingBuildingRole::IsShipRequested(void) {
 
 // address=[0x1525df0]
 // Decompiled from char __thiscall CTradingBuildingRole::RequestDonkey(  CTradingBuildingRole *this,  struct CBuilding *a2,  struct CBuilding *a3,  bool a4)
-bool  CTradingBuildingRole::RequestDonkey(class CBuilding *,class CBuilding *,bool) {
+bool  CTradingBuildingRole::RequestDonkey(class CBuilding * a2, class CBuilding * a3, bool a4) {
   
   int v4; // eax
   int v5; // eax
@@ -3651,7 +3651,7 @@ bool  CTradingBuildingRole::IsDonkeyAtBuilding(class CBuilding *) {
 
 // address=[0x15260d0]
 // Decompiled from int __thiscall CTradingBuildingRole::GetDonkeyIDAtBuilding(CTradingBuildingRole *this, struct CBuilding *a2)
-int  CTradingBuildingRole::GetDonkeyIDAtBuilding(class CBuilding *) {
+int  CTradingBuildingRole::GetDonkeyIDAtBuilding(class CBuilding * a2) {
   
   Y16X16 *v2; // eax
   unsigned __int8 *v4; // [esp+4h] [ebp-14h]
@@ -3682,7 +3682,7 @@ int  CTradingBuildingRole::GetDonkeyIDAtBuilding(class CBuilding *) {
 
 // address=[0x15261b0]
 // Decompiled from void __thiscall CTradingBuildingRole::StartLoadingDonkey(CTradingBuildingRole *this, int a2)
-void  CTradingBuildingRole::StartLoadingDonkey(int) {
+void  CTradingBuildingRole::StartLoadingDonkey(int a2) {
   
   CDonkeyRole *v2; // [esp+0h] [ebp-Ch]
   unsigned __int8 *SettlerPtr; // [esp+4h] [ebp-8h]
@@ -3702,7 +3702,7 @@ void  CTradingBuildingRole::StartLoadingDonkey(int) {
 
 // address=[0x1526230]
 // Decompiled from void __thiscall CTradingBuildingRole::StartUnloadingDonkey(CTradingBuildingRole *this, int a2)
-void  CTradingBuildingRole::StartUnloadingDonkey(int) {
+void  CTradingBuildingRole::StartUnloadingDonkey(int a2) {
   
   CDonkeyRole *v2; // [esp+0h] [ebp-Ch]
   unsigned __int8 *SettlerPtr; // [esp+4h] [ebp-8h]
@@ -3999,7 +3999,7 @@ void  CTradingBuildingRole::UnloadDonkey(void) {
 
 // address=[0x1526b20]
 // Decompiled from void __thiscall CTradingBuildingRole::DonkeyArrived(CTradingBuildingRole *this, int a2)
-void  CTradingBuildingRole::DonkeyArrived(int) {
+void  CTradingBuildingRole::DonkeyArrived(int a2) {
   
   CDonkeyRole *v2; // [esp+4h] [ebp-10h]
   unsigned __int8 *BuildingPtr; // [esp+8h] [ebp-Ch]
@@ -4030,7 +4030,7 @@ void  CTradingBuildingRole::DonkeyArrived(int) {
 
 // address=[0x1526c10]
 // Decompiled from void __thiscall CTradingBuildingRole::DonkeyArrivedAtTarget(CTradingBuildingRole *this, int a2)
-void  CTradingBuildingRole::DonkeyArrivedAtTarget(int) {
+void  CTradingBuildingRole::DonkeyArrivedAtTarget(int a2) {
   
   ;
 }
@@ -4038,7 +4038,7 @@ void  CTradingBuildingRole::DonkeyArrivedAtTarget(int) {
 
 // address=[0x1526c20]
 // Decompiled from CTradingBuildingRole *__thiscall CTradingBuildingRole::DonkeyArriveCancel(CTradingBuildingRole *this, int a2)
-void  CTradingBuildingRole::DonkeyArriveCancel(int) {
+void  CTradingBuildingRole::DonkeyArriveCancel(int a2) {
   
   CTradingBuildingRole *result; // eax
 
@@ -4053,7 +4053,7 @@ void  CTradingBuildingRole::DonkeyArriveCancel(int) {
 
 // address=[0x1526c60]
 // Decompiled from char __thiscall CTradingBuildingRole::RequestCart(  CTradingBuildingRole *this,  struct CBuilding *a2,  struct CBuilding *a3,  bool a4)
-bool  CTradingBuildingRole::RequestCart(class CBuilding *,class CBuilding *,bool) {
+bool  CTradingBuildingRole::RequestCart(class CBuilding * a2, class CBuilding * a3, bool a4) {
   
   int v4; // eax
   int v5; // eax
@@ -4156,7 +4156,7 @@ bool  CTradingBuildingRole::IsCartAtBuilding(class CBuilding *) {
 
 // address=[0x1526f40]
 // Decompiled from int __thiscall CTradingBuildingRole::GetCartIDAtBuilding(CTradingBuildingRole *this, struct CBuilding *a2)
-int  CTradingBuildingRole::GetCartIDAtBuilding(class CBuilding *) {
+int  CTradingBuildingRole::GetCartIDAtBuilding(class CBuilding * a2) {
   
   Y16X16 *v3; // eax
   unsigned __int8 *v4; // [esp+0h] [ebp-18h]
@@ -4191,7 +4191,7 @@ int  CTradingBuildingRole::GetCartIDAtBuilding(class CBuilding *) {
 
 // address=[0x1527040]
 // Decompiled from void __thiscall CTradingBuildingRole::StartLoadingCart(CTradingBuildingRole *this, int a2)
-void  CTradingBuildingRole::StartLoadingCart(int) {
+void  CTradingBuildingRole::StartLoadingCart(int a2) {
   
   CCart *VehiclePtr; // [esp+0h] [ebp-8h]
 
@@ -4204,7 +4204,7 @@ void  CTradingBuildingRole::StartLoadingCart(int) {
 
 // address=[0x1527080]
 // Decompiled from void __thiscall CTradingBuildingRole::StartUnloadingCart(CTradingBuildingRole *this, int a2)
-void  CTradingBuildingRole::StartUnloadingCart(int) {
+void  CTradingBuildingRole::StartUnloadingCart(int a2) {
   
   CCart *VehiclePtr; // [esp+0h] [ebp-8h]
 
@@ -4431,7 +4431,7 @@ LABEL_27:
 
 // address=[0x1527720]
 // Decompiled from void __thiscall CTradingBuildingRole::CartArrived(CTradingBuildingRole *this, int a2)
-void  CTradingBuildingRole::CartArrived(int) {
+void  CTradingBuildingRole::CartArrived(int a2) {
   
   CCart *VehiclePtr; // [esp+4h] [ebp-8h]
 
@@ -4455,7 +4455,7 @@ void  CTradingBuildingRole::CartArrived(int) {
 
 // address=[0x15277c0]
 // Decompiled from void __thiscall CTradingBuildingRole::CartArrivedAtTarget(CTradingBuildingRole *this, int a2)
-void  CTradingBuildingRole::CartArrivedAtTarget(int) {
+void  CTradingBuildingRole::CartArrivedAtTarget(int a2) {
   
   ;
 }
@@ -4463,7 +4463,7 @@ void  CTradingBuildingRole::CartArrivedAtTarget(int) {
 
 // address=[0x15277d0]
 // Decompiled from bool __thiscall CTradingBuildingRole::CartArriveCancel(CTradingBuildingRole *this, int a2)
-void  CTradingBuildingRole::CartArriveCancel(int) {
+void  CTradingBuildingRole::CartArriveCancel(int a2) {
   
   return CTradingBuildingRole::UnregisterIncomingTrader(this, a2, 3);
 }
@@ -4471,7 +4471,7 @@ void  CTradingBuildingRole::CartArriveCancel(int) {
 
 // address=[0x15277f0]
 // Decompiled from int __thiscall CTradingBuildingRole::AddGood(CTradingBuildingRole *this, int a2, int a3, bool a4)
-int  CTradingBuildingRole::AddGood(int,int,bool) {
+int  CTradingBuildingRole::AddGood(int a2, int a3, bool a4) {
   
   unsigned __int8 *v4; // eax
   int v5; // eax
@@ -4583,7 +4583,7 @@ int  CTradingBuildingRole::AddGood(int,int,bool) {
 
 // address=[0x1527be0]
 // Decompiled from int __thiscall CTradingBuildingRole::GetNrDeliveryPilesOfGood(CTradingBuildingRole *this, int a2)
-int  CTradingBuildingRole::GetNrDeliveryPilesOfGood(int) {
+int  CTradingBuildingRole::GetNrDeliveryPilesOfGood(int a2) {
   
   unsigned __int16 *v2; // eax
   void *v4; // [esp+0h] [ebp-14h]
@@ -4618,7 +4618,7 @@ int  CTradingBuildingRole::GetNrDeliveryPilesOfGood(int) {
 
 // address=[0x1527cc0]
 // Decompiled from int __thiscall CTradingBuildingRole::CalcNrExportGoods(CTradingBuildingRole *this, bool a2)
-int  CTradingBuildingRole::CalcNrExportGoods(bool) {
+int  CTradingBuildingRole::CalcNrExportGoods(bool a2) {
   
   CTradingBuildingRole *v3; // [esp+0h] [ebp-18h]
   unsigned __int8 *BuildingPtr; // [esp+4h] [ebp-14h]
@@ -4701,7 +4701,7 @@ int  CTradingBuildingRole::GetPileIDWithGoodToTransport(void) {
 
 // address=[0x1527ec0]
 // Decompiled from int __thiscall CTradingBuildingRole::CalcNrAvaibleGood(char *this, int a2)
-int  CTradingBuildingRole::CalcNrAvaibleGood(bool) {
+int  CTradingBuildingRole::CalcNrAvaibleGood(bool a2) {
   
   int v3; // [esp+4h] [ebp-8h]
   int i; // [esp+8h] [ebp-4h]
@@ -4746,7 +4746,7 @@ bool  CTradingBuildingRole::CrushBuilding(void) {
 
 // address=[0x1527fd0]
 // Decompiled from int __thiscall CTradingBuildingRole::ConvertEventIntoGoal(  CTradingBuildingRole *this,  struct CBuilding *a2,  struct CEntityEvent *a3)
-void  CTradingBuildingRole::ConvertEventIntoGoal(class CBuilding *,class CEntityEvent *) {
+void  CTradingBuildingRole::ConvertEventIntoGoal(class CBuilding * a2, class CEntityEvent * a3) {
   
   if ( *((_DWORD *)a3 + 1) != 9 || *((_DWORD *)a3 + 3) != *((unsigned __int16 *)this + 190) )
     return IAnimatedEntity::RegisterForLogicUpdate(14);
@@ -4797,7 +4797,7 @@ int  CTradingBuildingRole::DetermineTransportType(void) {
 
 // address=[0x1528150]
 // Decompiled from int __thiscall CTradingBuildingRole::GetTargetBuildingID(CTradingBuildingRole *this, bool a2)
-int  CTradingBuildingRole::GetTargetBuildingID(bool) {
+int  CTradingBuildingRole::GetTargetBuildingID(bool a2) {
   
   if ( a2 )
     return *((unsigned __int16 *)this + 191);
@@ -4808,7 +4808,7 @@ int  CTradingBuildingRole::GetTargetBuildingID(bool) {
 
 // address=[0x1528180]
 // Decompiled from char __thiscall CTradingBuildingRole::StartLoadIntTraderDonkey(CTradingBuildingRole *this, unsigned int a2)
-void  CTradingBuildingRole::StartLoadIntTraderDonkey(int) {
+void  CTradingBuildingRole::StartLoadIntTraderDonkey(int a2) {
   
   int JobType; // eax
   int DepartBuildingID; // eax
@@ -4864,7 +4864,7 @@ void  CTradingBuildingRole::StartLoadIntTraderDonkey(int) {
 
 // address=[0x1528300]
 // Decompiled from void __thiscall CTradingBuildingRole::StartLoadIntTraderShip(CTradingBuildingRole *this, unsigned int a2)
-void  CTradingBuildingRole::StartLoadIntTraderShip(int) {
+void  CTradingBuildingRole::StartLoadIntTraderShip(int a2) {
   
   int DepartHarbourID; // eax
   int v3; // eax
@@ -4899,7 +4899,7 @@ void  CTradingBuildingRole::StartLoadIntTraderShip(int) {
 
 // address=[0x15283d0]
 // Decompiled from signed int __thiscall CTradingBuildingRole::ReserveExportPile(CTradingBuildingRole *this, int a2, int a3, int a4)
-void  CTradingBuildingRole::ReserveExportPile(int,int,int) {
+void  CTradingBuildingRole::ReserveExportPile(int a2, int a3, int a4) {
   
   signed int result; // eax
   unsigned __int16 *v5; // eax
@@ -4931,7 +4931,7 @@ void  CTradingBuildingRole::ReserveExportPile(int,int,int) {
 
 // address=[0x15284b0]
 // Decompiled from signed int __thiscall CTradingBuildingRole::ReserveImportPile(CTradingBuildingRole *this, int a2)
-void  CTradingBuildingRole::ReserveImportPile(int) {
+void  CTradingBuildingRole::ReserveImportPile(int a2) {
   
   signed int result; // eax
   unsigned __int16 *v3; // eax
@@ -4987,7 +4987,7 @@ int  CTradingBuildingRole::CalcExportedGoods(void) {
 
 // address=[0x15285f0]
 // Decompiled from int __thiscall CTradingBuildingRole::GetTotalExportedGoodAmount(CTradingBuildingRole *this, struct CBuilding *a2)
-int  CTradingBuildingRole::GetTotalExportedGoodAmount(class CBuilding *) {
+int  CTradingBuildingRole::GetTotalExportedGoodAmount(class CBuilding * a2) {
   
   int *v3; // eax
   int v4; // edx
@@ -5153,7 +5153,7 @@ int const  CTradingBuildingRole::GetMaxTradingGoodAmount(void) {
 
 // address=[0x15289f0]
 // Decompiled from int __thiscall CTradingBuildingRole::RequestTradingGood(CTradingBuildingRole *this, unsigned int a2)
-void  CTradingBuildingRole::RequestTradingGood(enum PILE_TYPES) {
+void  CTradingBuildingRole::RequestTradingGood(enum PILE_TYPES a2) {
   
   int result; // eax
   int v3; // esi
@@ -5185,7 +5185,7 @@ void  CTradingBuildingRole::RequestTradingGood(enum PILE_TYPES) {
 
 // address=[0x1528ab0]
 // Decompiled from char __thiscall CTradingBuildingRole::CheckTradingTransport(  CTradingBuildingRole *this,  struct CBuilding *a2,  unsigned int a3)
-bool  CTradingBuildingRole::CheckTradingTransport(class CBuilding *,int) {
+bool  CTradingBuildingRole::CheckTradingTransport(class CBuilding * a2, int a3) {
   
   unsigned __int16 *v4; // eax
   int v5; // eax
@@ -5266,7 +5266,7 @@ bool  CTradingBuildingRole::CheckTradingTransport(class CBuilding *,int) {
 
 // address=[0x1528d00]
 // Decompiled from int __thiscall CTradingBuildingRole::ClearTradingPiles(_DWORD *this, int a2, int a3)
-void  CTradingBuildingRole::ClearTradingPiles(int,enum TGOOD_STATUS) {
+void  CTradingBuildingRole::ClearTradingPiles(int a2, enum TGOOD_STATUS a3) {
   
   int result; // eax
   unsigned __int16 *v4; // eax
@@ -5323,7 +5323,7 @@ void  CTradingBuildingRole::ClearTradingPiles(int,enum TGOOD_STATUS) {
 
 // address=[0x1528e30]
 // Decompiled from char *__thiscall CTradingBuildingRole::SetGoodState(_BYTE *this, unsigned int a2, char a3)
-void  CTradingBuildingRole::SetGoodState(int,enum TGOOD_STATUS) {
+void  CTradingBuildingRole::SetGoodState(int a2, enum TGOOD_STATUS a3) {
   
   char *result; // eax
 
@@ -5337,7 +5337,7 @@ void  CTradingBuildingRole::SetGoodState(int,enum TGOOD_STATUS) {
 
 // address=[0x1528e70]
 // Decompiled from char *__thiscall CTradingBuildingRole::ClearGoodState(_BYTE *this, int a2, char a3)
-void  CTradingBuildingRole::ClearGoodState(int,enum TGOOD_STATUS) {
+void  CTradingBuildingRole::ClearGoodState(int a2, enum TGOOD_STATUS a3) {
   
   char *result; // eax
 
@@ -5349,7 +5349,7 @@ void  CTradingBuildingRole::ClearGoodState(int,enum TGOOD_STATUS) {
 
 // address=[0x1528ea0]
 // Decompiled from bool __thiscall CTradingBuildingRole::HasGoodState(char *this, int a2, int a3)
-bool  CTradingBuildingRole::HasGoodState(int,enum TGOOD_STATUS) {
+bool  CTradingBuildingRole::HasGoodState(int a2, enum TGOOD_STATUS a3) {
   
   return (a3 & this[a2 + 470]) != 0;
 }
@@ -5357,7 +5357,7 @@ bool  CTradingBuildingRole::HasGoodState(int,enum TGOOD_STATUS) {
 
 // address=[0x1528ee0]
 // Decompiled from int __stdcall CTradingBuildingRole::GetTradingStatus(char a1)
-enum TGOOD_STATUS  CTradingBuildingRole::GetTradingStatus(int) {
+enum TGOOD_STATUS  CTradingBuildingRole::GetTradingStatus(int a1) {
   
   char v2; // [esp+7h] [ebp-1h]
 

@@ -4,7 +4,7 @@
 
 // address=[0x2fbecd0]
 // Decompiled from BSTR **__thiscall _bstr_t::_bstr_t(BSTR **this, OLECHAR *psz)
- _bstr_t::_bstr_t(wchar_t const *) {
+ _bstr_t::_bstr_t(wchar_t const * psz) {
   
   BSTR *v3; // [esp+8h] [ebp-18h]
   BSTR *C; // [esp+Ch] [ebp-14h]

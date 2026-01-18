@@ -12,7 +12,7 @@ int  CScriptEventRequests::Size(void)const {
 
 // address=[0x15febd0]
 // Decompiled from int __thiscall CScriptEventRequests::FindFunction(CScriptEventRequests *this, unsigned int a2)
-int  CScriptEventRequests::FindFunction(int) {
+int  CScriptEventRequests::FindFunction(int a2) {
   
   int v3; // [esp+4h] [ebp-Ch]
   int i; // [esp+Ch] [ebp-4h]
@@ -38,7 +38,7 @@ int  CScriptEventRequests::FindFunction(int) {
 
 // address=[0x15fec50]
 // Decompiled from char *__thiscall CScriptEventRequests::AddFunction(CScriptEventRequests *this, unsigned int a2)
-void  CScriptEventRequests::AddFunction(int) {
+void  CScriptEventRequests::AddFunction(int a2) {
   
   char *result; // eax
   int v3; // [esp+0h] [ebp-10h]
@@ -96,7 +96,7 @@ LABEL_10:
 
 // address=[0x15fed50]
 // Decompiled from CScriptEventRequests *__thiscall CScriptEventRequests::RemoveFunction(CScriptEventRequests *this, unsigned int a2)
-void  CScriptEventRequests::RemoveFunction(int) {
+void  CScriptEventRequests::RemoveFunction(int a2) {
   
   CScriptEventRequests *result; // eax
   int i; // [esp+8h] [ebp-4h]
@@ -124,7 +124,7 @@ void  CScriptEventRequests::RemoveFunction(int) {
 
 // address=[0x15fede0]
 // Decompiled from int __thiscall CScriptEventRequests::Load(CScriptEventRequests *this, struct IS4Chunk *a2)
-void  CScriptEventRequests::Load(class IS4Chunk &) {
+void  CScriptEventRequests::Load(class IS4Chunk & a2) {
   
   (*(void (__thiscall **)(struct IS4Chunk *, void *))(*(_DWORD *)a2 + 12))(a2, &unk_4587050);
   (*(void (__thiscall **)(struct IS4Chunk *, int, int))(*(_DWORD *)a2 + 4))(a2, 64, 64);
@@ -135,7 +135,7 @@ void  CScriptEventRequests::Load(class IS4Chunk &) {
 
 // address=[0x15fee40]
 // Decompiled from int __thiscall CScriptEventRequests::Save(CScriptEventRequests *this, struct IS4Chunk *a2)
-void  CScriptEventRequests::Save(class IS4Chunk &) {
+void  CScriptEventRequests::Save(class IS4Chunk & a2) {
   
   (*(void (__thiscall **)(struct IS4Chunk *, void *))(*(_DWORD *)a2 + 24))(a2, &unk_4587050);
   (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 20))(a2, 64);
@@ -155,7 +155,7 @@ void  CScriptEventRequests::Save(class IS4Chunk &) {
 
 // address=[0x1601d30]
 // Decompiled from int __thiscall CScriptEventRequests::operator[](unsigned int *this, unsigned int a2)
-int  CScriptEventRequests::operator[](int)const {
+int  CScriptEventRequests::operator[](int a2)const {
   
   if ( a2 >= *this
     && BBSupportDbgReport(

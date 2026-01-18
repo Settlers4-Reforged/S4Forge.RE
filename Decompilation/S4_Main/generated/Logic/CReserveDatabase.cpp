@@ -4,7 +4,7 @@
 
 // address=[0x2f3bc30]
 // Decompiled from int __thiscall CReserveDatabase::PackPosition(CReserveDatabase *this, int a2, int a3)
-int  CReserveDatabase::PackPosition(int,int) {
+int  CReserveDatabase::PackPosition(int a2, int a3) {
   
   return a2 + (a3 << 16);
 }
@@ -12,7 +12,7 @@ int  CReserveDatabase::PackPosition(int,int) {
 
 // address=[0x2f3bc50]
 // Decompiled from int *__thiscall CReserveDatabase::UnpackPosition(CReserveDatabase *this, int a2, int *a3, int *a4)
-void  CReserveDatabase::UnpackPosition(int,int &,int &) {
+void  CReserveDatabase::UnpackPosition(int a2, int & a3, int & a4) {
   
   int *result; // eax
 
@@ -79,7 +79,7 @@ void  CReserveDatabase::UnpackPosition(int,int &,int &) {
 
 // address=[0x2f40700]
 // Decompiled from int __thiscall CReserveDatabase::ReserveBuilding(int this, int a2, int a3, int a4, int a5, char a6, int a7, int a8)
-int  CReserveDatabase::ReserveBuilding(enum BUILDING_TYPES,int,int,int,signed char,int,int) {
+int  CReserveDatabase::ReserveBuilding(enum BUILDING_TYPES a2, int a3, int a4, int a5, signed char a6, int a7, int a8) {
   
   struct CDynListEntry *v9; // [esp+14h] [ebp-38h]
   CRefGrpEntry *v10; // [esp+18h] [ebp-34h]
@@ -133,7 +133,7 @@ int  CReserveDatabase::ReserveBuilding(enum BUILDING_TYPES,int,int,int,signed ch
 
 // address=[0x2f408f0]
 // Decompiled from char __thiscall CReserveDatabase::RemoveBuilding(CDynList **this, int a2, int a3)
-bool  CReserveDatabase::RemoveBuilding(int,int) {
+bool  CReserveDatabase::RemoveBuilding(int a2, int a3) {
   
   struct CDynListEntry *v4; // [esp+0h] [ebp-Ch]
   int i; // [esp+8h] [ebp-4h]
@@ -156,7 +156,7 @@ bool  CReserveDatabase::RemoveBuilding(int,int) {
 
 // address=[0x2f40960]
 // Decompiled from int __thiscall CReserveDatabase::RemoveGrpEntry(CDynList **this, int a2, CDynList **a3)
-void  CReserveDatabase::RemoveGrpEntry(int,class CGrpReserveEntry *) {
+void  CReserveDatabase::RemoveGrpEntry(int a2, class CGrpReserveEntry * a3) {
   
   int result; // eax
   int v5; // [esp+4h] [ebp-8h]
@@ -202,7 +202,7 @@ void  CReserveDatabase::RemoveGrpEntry(int,class CGrpReserveEntry *) {
 
 // address=[0x2f40ab0]
 // Decompiled from char __thiscall CReserveDatabase::GetResPosition(CReserveDatabase *this, int a2, int *a3, int *a4)
-bool  CReserveDatabase::GetResPosition(int,int &,int &) {
+bool  CReserveDatabase::GetResPosition(int a2, int & a3, int & a4) {
   
   struct CGrpReserveEntry *GrpResBuilding; // [esp+4h] [ebp-4h]
 
@@ -224,7 +224,7 @@ bool  CReserveDatabase::GetResPosition(int,int &,int &) {
 
 // address=[0x2f40b10]
 // Decompiled from int __thiscall CReserveDatabase::GetReserveBuilding(void *this, int a2, int a3)
-int  CReserveDatabase::GetReserveBuilding(int,enum BUILDING_TYPES) {
+int  CReserveDatabase::GetReserveBuilding(int a2, enum BUILDING_TYPES a3) {
   
   _DWORD *v4; // [esp+4h] [ebp-4h] BYREF
 
@@ -245,7 +245,7 @@ int  CReserveDatabase::GetReserveBuilding(int,enum BUILDING_TYPES) {
 
 // address=[0x2f40b70]
 // Decompiled from int __thiscall CReserveDatabase::GetResGrpNr(CReserveDatabase *this, int a2)
-int  CReserveDatabase::GetResGrpNr(int) {
+int  CReserveDatabase::GetResGrpNr(int a2) {
   
   struct CGrpReserveEntry *GrpResBuilding; // [esp+4h] [ebp-4h]
 
@@ -259,7 +259,7 @@ int  CReserveDatabase::GetResGrpNr(int) {
 
 // address=[0x2f40ba0]
 // Decompiled from int __thiscall CReserveDatabase::CreateGrpNumber(CReserveDatabase *this, int a2, int a3)
-int  CReserveDatabase::CreateGrpNumber(int,int) {
+int  CReserveDatabase::CreateGrpNumber(int a2, int a3) {
   
   return a3 + 10 * a2;
 }
@@ -267,7 +267,7 @@ int  CReserveDatabase::CreateGrpNumber(int,int) {
 
 // address=[0x2f40bc0]
 // Decompiled from char __thiscall CReserveDatabase::NewSubReserveEntry(CDynList **this, struct CGrpReserveEntry *a2, int a3)
-bool  CReserveDatabase::NewSubReserveEntry(class CGrpReserveEntry *,int) {
+bool  CReserveDatabase::NewSubReserveEntry(class CGrpReserveEntry * a2, int a3) {
   
   int v5; // [esp+4h] [ebp-4h] BYREF
 
@@ -284,7 +284,7 @@ bool  CReserveDatabase::NewSubReserveEntry(class CGrpReserveEntry *,int) {
 
 // address=[0x2f40c20]
 // Decompiled from char __thiscall CReserveDatabase::GetSubReserveEntry(CDynList **this, int a2, int *a3, int a4)
-bool  CReserveDatabase::GetSubReserveEntry(int,class CGrpReserveEntry * &,enum BUILDING_TYPES) {
+bool  CReserveDatabase::GetSubReserveEntry(int a2, class CGrpReserveEntry * & a3, enum BUILDING_TYPES a4) {
   
   int i; // [esp+4h] [ebp-10h]
   int v7; // [esp+8h] [ebp-Ch]
@@ -334,7 +334,7 @@ bool  CReserveDatabase::GetSubReserveEntry(int,class CGrpReserveEntry * &,enum B
 
 // address=[0x2f40d70]
 // Decompiled from char __thiscall CReserveDatabase::GetResBuildingInGroup(CDynList **this, int a2, struct CReserveEntry *a3)
-bool  CReserveDatabase::GetResBuildingInGroup(int,class CReserveEntry *) {
+bool  CReserveDatabase::GetResBuildingInGroup(int a2, class CReserveEntry * a3) {
   
   int i; // [esp+4h] [ebp-18h]
   int v6; // [esp+8h] [ebp-14h]
@@ -396,7 +396,7 @@ bool  CReserveDatabase::GetResBuildingInGroup(int,class CReserveEntry *) {
 
 // address=[0x2f40f70]
 // Decompiled from int __thiscall CReserveDatabase::GetResBuildingType(CReserveDatabase *this, int a2)
-enum BUILDING_TYPES  CReserveDatabase::GetResBuildingType(int) {
+enum BUILDING_TYPES  CReserveDatabase::GetResBuildingType(int a2) {
   
   struct CGrpReserveEntry *GrpResBuilding; // [esp+4h] [ebp-Ch]
 
@@ -410,7 +410,7 @@ enum BUILDING_TYPES  CReserveDatabase::GetResBuildingType(int) {
 
 // address=[0x2f40ff0]
 // Decompiled from int __thiscall CReserveDatabase::GetGrpResBuilding(CReserveDatabase *this, int a2)
-class CGrpReserveEntry *  CReserveDatabase::GetGrpResBuilding(int) {
+class CGrpReserveEntry *  CReserveDatabase::GetGrpResBuilding(int a2) {
   
   int v3; // [esp+0h] [ebp-Ch]
   int v5; // [esp+8h] [ebp-4h]
@@ -432,7 +432,7 @@ class CGrpReserveEntry *  CReserveDatabase::GetGrpResBuilding(int) {
 
 // address=[0x2f410a0]
 // Decompiled from struct CGrpReserveEntry *__thiscall CReserveDatabase::GetGrpResBuilding(  CDynList **this,  int a2,  struct CGrpReserveEntry *a3)
-class CGrpReserveEntry *  CReserveDatabase::GetGrpResBuilding(int,class CGrpReserveEntry *) {
+class CGrpReserveEntry *  CReserveDatabase::GetGrpResBuilding(int a2, class CGrpReserveEntry * a3) {
   
   struct CGrpReserveEntry *v4; // [esp+0h] [ebp-10h]
   struct CGrpReserveEntry *v5; // [esp+0h] [ebp-10h]
@@ -469,7 +469,7 @@ class CGrpReserveEntry *  CReserveDatabase::GetGrpResBuilding(int,class CGrpRese
 
 // address=[0x2f41190]
 // Decompiled from char __thiscall CReserveDatabase::IsBuildingPlaceAvailable(CReserveDatabase *this, int a2, int a3, int a4, int a5)
-bool  CReserveDatabase::IsBuildingPlaceAvailable(class IAIEcoManager *,enum BUILDING_TYPES,int,class CReserveEntry *) {
+bool  CReserveDatabase::IsBuildingPlaceAvailable(class IAIEcoManager * a2, enum BUILDING_TYPES a3, int a4, class CReserveEntry * a5) {
   
   int i; // [esp+4h] [ebp-4h]
 
@@ -493,7 +493,7 @@ bool  CReserveDatabase::IsBuildingPlaceAvailable(class IAIEcoManager *,enum BUIL
 
 // address=[0x2f41240]
 // Decompiled from char __thiscall CReserveDatabase::IsBuildingTypeInGrp(CReserveDatabase *this, int a2, int a3)
-bool  CReserveDatabase::IsBuildingTypeInGrp(enum BUILDING_TYPES,int) {
+bool  CReserveDatabase::IsBuildingTypeInGrp(enum BUILDING_TYPES a2, int a3) {
   
   int i; // [esp+Ch] [ebp-11Ch]
   int j; // [esp+Ch] [ebp-11Ch]
@@ -524,7 +524,7 @@ bool  CReserveDatabase::IsBuildingTypeInGrp(enum BUILDING_TYPES,int) {
 
 // address=[0x2f413b0]
 // Decompiled from bool __thiscall CReserveDatabase::InSameGroup(CReserveDatabase *this, int a2, int a3)
-bool  CReserveDatabase::InSameGroup(int,int) {
+bool  CReserveDatabase::InSameGroup(int a2, int a3) {
   
   int v4; // [esp+4h] [ebp-4h]
   int v5; // [esp+4h] [ebp-4h]
@@ -554,7 +554,7 @@ bool  CReserveDatabase::InSameGroup(int,int) {
 
 // address=[0x2f41440]
 // Decompiled from char __thiscall CReserveDatabase::UnLockReserveDatabase(CReserveDatabase *this, int a2)
-bool  CReserveDatabase::UnLockReserveDatabase(int) {
+bool  CReserveDatabase::UnLockReserveDatabase(int a2) {
   
   if ( *((_DWORD *)this + 5) != a2 )
     return 0;
@@ -577,7 +577,7 @@ int  CReserveDatabase::GetLockedSchedNr(void) {
 
 // address=[0x2f414c0]
 // Decompiled from char __thiscall CReserveDatabase::LockReserveDatabase(CReserveDatabase *this, int a2)
-bool  CReserveDatabase::LockReserveDatabase(int) {
+bool  CReserveDatabase::LockReserveDatabase(int a2) {
   
   if ( *((_DWORD *)this + 5) )
     return 0;
@@ -591,7 +591,7 @@ bool  CReserveDatabase::LockReserveDatabase(int) {
 
 // address=[0x2f41510]
 // Decompiled from char __thiscall CReserveDatabase::ReserveLock(_DWORD *this, int a2)
-bool  CReserveDatabase::ReserveLock(int) {
+bool  CReserveDatabase::ReserveLock(int a2) {
   
   if ( this[6] )
     return 0;
@@ -602,7 +602,7 @@ bool  CReserveDatabase::ReserveLock(int) {
 
 // address=[0x2f41540]
 // Decompiled from void *__thiscall CReserveDatabase::UpdateReservedBuildingPlaces(std::_Ref_count_base *this, const struct type_info *a2)
-int  CReserveDatabase::UpdateReservedBuildingPlaces(enum BUILDING_TYPES) {
+int  CReserveDatabase::UpdateReservedBuildingPlaces(enum BUILDING_TYPES a2) {
   
   return 0;
 }
@@ -610,7 +610,7 @@ int  CReserveDatabase::UpdateReservedBuildingPlaces(enum BUILDING_TYPES) {
 
 // address=[0x2f41550]
 // Decompiled from struct CGrpReserveEntry *__thiscall CReserveDatabase::SetScoringData(CReserveDatabase *this, int a2, int a3)
-void  CReserveDatabase::SetScoringData(int,int) {
+void  CReserveDatabase::SetScoringData(int a2, int a3) {
   
   struct CGrpReserveEntry *result; // eax
 
@@ -623,7 +623,7 @@ void  CReserveDatabase::SetScoringData(int,int) {
 
 // address=[0x2f41580]
 // Decompiled from int __thiscall CReserveDatabase::GetScoringData(CReserveDatabase *this, int a2)
-int  CReserveDatabase::GetScoringData(int) {
+int  CReserveDatabase::GetScoringData(int a2) {
   
   struct CGrpReserveEntry *GrpResBuilding; // [esp+4h] [ebp-4h]
 
@@ -637,7 +637,7 @@ int  CReserveDatabase::GetScoringData(int) {
 
 // address=[0x2f415b0]
 // Decompiled from int __thiscall CReserveDatabase::GetPackWorldPosition(CReserveDatabase *this, int a2)
-int  CReserveDatabase::GetPackWorldPosition(int) {
+int  CReserveDatabase::GetPackWorldPosition(int a2) {
   
   struct CGrpReserveEntry *GrpResBuilding; // [esp+4h] [ebp-4h]
 
@@ -651,7 +651,7 @@ int  CReserveDatabase::GetPackWorldPosition(int) {
 
 // address=[0x2f415e0]
 // Decompiled from int __thiscall CReserveDatabase::GetPackWorldPosition_0(CReserveDatabase *this, int a2, int *a3, int *a4)
-int  CReserveDatabase::GetPackWorldPosition(int,int &,int &) {
+int  CReserveDatabase::GetPackWorldPosition(int a2, int & a3, int & a4) {
   
   struct CGrpReserveEntry *GrpResBuilding; // [esp+4h] [ebp-4h]
 
@@ -665,7 +665,7 @@ int  CReserveDatabase::GetPackWorldPosition(int,int &,int &) {
 
 // address=[0x2f41630]
 // Decompiled from bool __thiscall CReserveDatabase::InSameGrid8(CReserveDatabase *this, int a2, int a3)
-bool  CReserveDatabase::InSameGrid8(int,int) {
+bool  CReserveDatabase::InSameGrid8(int a2, int a3) {
   
   int v4; // [esp+0h] [ebp-14h] BYREF
   int v5; // [esp+4h] [ebp-10h] BYREF

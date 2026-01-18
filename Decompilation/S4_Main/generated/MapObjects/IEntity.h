@@ -1,10 +1,12 @@
 #ifndef IENTITY_H
 #define IENTITY_H
 
+#include "defines.h"
+
 class IEntity : public CPersistence {
 public:
     // address=[0x12fd110]
-    int  FlagBits(int)const;
+    int  FlagBits(int a2)const;
 
     // address=[0x12fd480]
     int  ObjType(void)const;
@@ -16,7 +18,7 @@ public:
     class CAIEntityInfo *  AIEntityInfoPtr(void)const;
 
     // address=[0x130ea10]
-    void  ClearFlagBits(int);
+    void  ClearFlagBits(int a2);
 
     // address=[0x130eb60]
     int  Flags(void)const;
@@ -28,7 +30,7 @@ public:
     int  OwnerId(void)const;
 
     // address=[0x130f390]
-    void  SetFlagBits(int);
+    void  SetFlagBits(int a2);
 
     // address=[0x130f420]
     int  Type(void)const;
@@ -61,7 +63,7 @@ public:
     int  Hitpoints(void)const;
 
     // address=[0x14d8640]
-    virtual int  ClearGroupFlagBits(int);
+    virtual int  ClearGroupFlagBits(int a2);
 
     // address=[0x14d8670]
     virtual int  GetGoodType(void)const;
@@ -73,43 +75,43 @@ public:
     bool  IsVisible(void)const;
 
     // address=[0x14d8790]
-    virtual int  SetGroupFlagBits(int);
+    virtual int  SetGroupFlagBits(int a2);
 
     // address=[0x14d87b0]
-    virtual int  SetGroupFlags(int);
+    virtual int  SetGroupFlags(int a2);
 
     // address=[0x14d8810]
-    void  SetPosition(int,int);
+    void  SetPosition(int x, int y);
 
     // address=[0x14e4af0]
     virtual void  Delete(void);
 
     // address=[0x14e4bf0]
-    virtual void  Take(int);
+    virtual void  Take(int a1);
 
     // address=[0x14eb780]
-    void  SetOwnerId(unsigned char);
+    void  SetOwnerId(unsigned char owner);
 
     // address=[0x14eb7e0]
-    void  SetRace(unsigned char);
+    void  SetRace(unsigned char a2);
 
     // address=[0x1508220]
-    void  SetPosition(int);
+    void  SetPosition(int a2);
 
     // address=[0x15191b0]
     bool  IsSelected(void)const;
 
     // address=[0x154b3d0]
-     IEntity(int);
+     IEntity(int id);
 
     // address=[0x154b4a0]
     virtual  ~IEntity(void);
 
     // address=[0x154b570]
-     IEntity(std::istream &);
+     IEntity(std::istream & inputFile);
 
     // address=[0x154b6e0]
-    virtual void  Store(std::ostream &);
+    virtual void  Store(std::ostream & a2);
 
     // address=[0x154b7b0]
     virtual void  PostLoadInit(void);
@@ -118,13 +120,13 @@ public:
     int  WorldIdx(void)const;
 
     // address=[0x154b800]
-    virtual int  Increase(int);
+    virtual int  Increase(int byAmount);
 
     // address=[0x154b850]
-    virtual void  Decrease(int);
+    virtual void  Decrease(int byAmount);
 
     // address=[0x154b8b0]
-    virtual void  Decrease(int,int);
+    virtual void  Decrease(int a2, int attackerId);
 
     // address=[0x154b8e0]
     virtual int  Amount(void)const;
@@ -133,13 +135,13 @@ public:
     virtual int  MaxHitpoints(void)const;
 
     // address=[0x154b910]
-    void  SetAIEntityInfoPtr(class CAIEntityInfo *);
+    void  SetAIEntityInfoPtr(class CAIEntityInfo * a2);
 
     // address=[0x154b960]
-    virtual void  DbgPrint(int,char const *);
+    virtual void  DbgPrint(int logLevel, char const * customMessage);
 
     // address=[0x154ba00]
-    virtual void  PlaceInMapObjectLayer(int);
+    virtual void  PlaceInMapObjectLayer(int packedXY);
 
     // address=[0x154bb50]
     virtual void  RemoveFromMapObjectLayer(void);
@@ -148,13 +150,13 @@ public:
     void  RemoveFromMapObjectLayerIfNecessary(void);
 
     // address=[0x154bd00]
-    virtual void  Detach(int);
+    virtual void  Detach(int a1);
 
     // address=[0x154bd30]
-    virtual void  SetObserverTarget(enum T_OBSERVER_TARGET,int);
+    virtual void  SetObserverTarget(enum T_OBSERVER_TARGET a1, int a2);
 
     // address=[0x154bd40]
-    virtual int  GetObserverTarget(enum T_OBSERVER_TARGET);
+    virtual int  GetObserverTarget(enum T_OBSERVER_TARGET a2);
 
     // address=[0x154bd50]
     virtual void  AddToWarMap(void);
@@ -163,13 +165,13 @@ public:
     void  RemoveFromAllGroups(void);
 
     // address=[0x154c100]
-    virtual void  SetEvent(class CEntityEvent const &);
+    virtual void  SetEvent(class CEntityEvent const & a1);
 
     // address=[0x1552650]
-    bool  CheckType(int,int)const;
+    bool  CheckType(int a2, int a3)const;
 
     // address=[0x156d340]
-    void  SetHitpoints(unsigned int);
+    void  SetHitpoints(unsigned int hp);
 
 protected:
     // address=[0x40fe240]

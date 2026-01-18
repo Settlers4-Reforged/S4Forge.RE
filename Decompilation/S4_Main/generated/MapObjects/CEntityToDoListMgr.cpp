@@ -858,7 +858,7 @@
 
 // address=[0x154e220]
 // Decompiled from int __thiscall CEntityToDoListMgr::SettlerJobList(_DWORD *this, unsigned int a2, unsigned int a3)
-class std::list<class CEntityTask,class std::allocator<class CEntityTask> > *  CEntityToDoListMgr::SettlerJobList(int,int) {
+class std::list<class CEntityTask,class std::allocator<class CEntityTask> > *  CEntityToDoListMgr::SettlerJobList(int a2, int a3) {
   
   if ( a2 > 4
     && BBSupportDbgReport(2, "MapObjects\\EntityToDoListMgr.cpp", 507, "_iRace >= 0 && _iRace < RACE_MAX") == 1 )
@@ -876,7 +876,7 @@ class std::list<class CEntityTask,class std::allocator<class CEntityTask> > *  C
 
 // address=[0x154e2a0]
 // Decompiled from char __cdecl CEntityToDoListMgr::GetJobSoundInfo(int a1, struct SJobSoundInfo *a2)
-static void __cdecl CEntityToDoListMgr::GetJobSoundInfo(int,struct SJobSoundInfo &) {
+void __cdecl CEntityToDoListMgr::GetJobSoundInfo(int a1, struct SJobSoundInfo & a2) {
   
   char result; // al
 

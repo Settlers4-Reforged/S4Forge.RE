@@ -4,7 +4,7 @@
 
 // address=[0x13039d0]
 // Decompiled from int __cdecl CAITaskForces::TaskForceClass(int a1)
-static enum T_AI_TASK_FORCE_CLASS __cdecl CAITaskForces::TaskForceClass(enum T_AI_TASK_FORCE_TYPE) {
+enum T_AI_TASK_FORCE_CLASS __cdecl CAITaskForces::TaskForceClass(enum T_AI_TASK_FORCE_TYPE a1) {
   
   return g_tAITaskForceTypeToClassMap[a1];
 }
@@ -12,7 +12,7 @@ static enum T_AI_TASK_FORCE_CLASS __cdecl CAITaskForces::TaskForceClass(enum T_A
 
 // address=[0x1328e40]
 // Decompiled from void *CAITaskForces::Init()
-static void __cdecl CAITaskForces::Init(void) {
+void __cdecl CAITaskForces::Init(void) {
   
   void *result; // eax
 
@@ -25,7 +25,7 @@ static void __cdecl CAITaskForces::Init(void) {
 
 // address=[0x1328e70]
 // Decompiled from void CAITaskForces::Done()
-static void __cdecl CAITaskForces::Done(void) {
+void __cdecl CAITaskForces::Done(void) {
   
   if ( dword_3ECCD24 )
   {
@@ -38,7 +38,7 @@ static void __cdecl CAITaskForces::Done(void) {
 
 // address=[0x1328ed0]
 // Decompiled from int CAITaskForces::Execute()
-static void __cdecl CAITaskForces::Execute(void) {
+void __cdecl CAITaskForces::Execute(void) {
   
   int result; // eax
   CAITaskForce *v1; // [esp+0h] [ebp-14h]
@@ -94,7 +94,7 @@ static void __cdecl CAITaskForces::Execute(void) {
 
 // address=[0x1328fd0]
 // Decompiled from void __cdecl CAITaskForces::RemoveEntityFromTaskForce(int a1)
-static void __cdecl CAITaskForces::RemoveEntityFromTaskForce(int) {
+void __cdecl CAITaskForces::RemoveEntityFromTaskForce(int a1) {
   
   int v1; // [esp+0h] [ebp-8h]
   int EntityInfo; // [esp+4h] [ebp-4h]
@@ -114,7 +114,7 @@ static void __cdecl CAITaskForces::RemoveEntityFromTaskForce(int) {
 
 // address=[0x1329020]
 // Decompiled from int __cdecl CAITaskForces::CreateTaskForce(int a1, int a2)
-static class CAITaskForce * __cdecl CAITaskForces::CreateTaskForce(int,enum T_AI_TASK_FORCE_TYPE) {
+class CAITaskForce * __cdecl CAITaskForces::CreateTaskForce(int a1, enum T_AI_TASK_FORCE_TYPE a2) {
   
   int result; // eax
   int v3; // [esp+18h] [ebp-64h]
@@ -269,7 +269,7 @@ void  CAITaskForces::DbgPrint(void) {
 
 // address=[0x1329460]
 // Decompiled from int CAITaskForces::TotalNumberOfTaskForces()
-static int __cdecl CAITaskForces::TotalNumberOfTaskForces(void) {
+int __cdecl CAITaskForces::TotalNumberOfTaskForces(void) {
   
   return dword_3ECCD28;
 }
@@ -277,7 +277,7 @@ static int __cdecl CAITaskForces::TotalNumberOfTaskForces(void) {
 
 // address=[0x1329470]
 // Decompiled from int __cdecl CAITaskForces::NumberOfTaskForces(int a1, int a2)
-static int __cdecl CAITaskForces::NumberOfTaskForces(int,int) {
+int __cdecl CAITaskForces::NumberOfTaskForces(int a1, int a2) {
   
   return dword_3ECCD38[14 * a1 + a2];
 }
@@ -285,7 +285,7 @@ static int __cdecl CAITaskForces::NumberOfTaskForces(int,int) {
 
 // address=[0x1329490]
 // Decompiled from int __cdecl CAITaskForces::AddTaskForce(struct CAITaskForce *a1)
-static void __cdecl CAITaskForces::AddTaskForce(class CAITaskForce *) {
+void __cdecl CAITaskForces::AddTaskForce(class CAITaskForce * a1) {
   
   if ( !a1 && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 1463, "_pTaskForce != 0") == 1 )
     __debugbreak();
@@ -325,7 +325,7 @@ static void __cdecl CAITaskForces::AddTaskForce(class CAITaskForce *) {
 
 // address=[0x1329590]
 // Decompiled from struct CAITaskForce *__cdecl CAITaskForces::RemoveTaskForce(struct CAITaskForce *a1)
-static void __cdecl CAITaskForces::RemoveTaskForce(class CAITaskForce *) {
+void __cdecl CAITaskForces::RemoveTaskForce(class CAITaskForce * a1) {
   
   struct CAITaskForce *result; // eax
 

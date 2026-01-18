@@ -20,7 +20,7 @@ int  CBuildingIteratorBase::BuildingType(void)const {
 
 // address=[0x1317340]
 // Decompiled from bool __thiscall CBuildingIteratorBase::BuildingValid(CBuildingIteratorBase *this, int a2)
-bool  CBuildingIteratorBase::BuildingValid(int) {
+bool  CBuildingIteratorBase::BuildingValid(int a2) {
   
   struct IEntity *v2; // eax
   bool v4; // [esp+4h] [ebp-4h]
@@ -37,7 +37,7 @@ bool  CBuildingIteratorBase::BuildingValid(int) {
 
 // address=[0x13173a0]
 // Decompiled from CBuildingIteratorBase *__thiscall CBuildingIteratorBase::Init(CBuildingIteratorBase *this, int a2)
-void  CBuildingIteratorBase::Init(int) {
+void  CBuildingIteratorBase::Init(int a2) {
   
   CBuildingIteratorBase *result; // eax
 

@@ -55,7 +55,7 @@ unsigned int  CInstallationInfo::GetGfxChecksum(void) {
 
 // address=[0x1494f40]
 // Decompiled from bool __thiscall CInstallationInfo::CheckInstallation(CInstallationInfo *this, int a2)
-bool  CInstallationInfo::CheckInstallation(int) {
+bool  CInstallationInfo::CheckInstallation(int a2) {
   
   bool v2; // bl
   bool v3; // bl
@@ -76,7 +76,7 @@ bool  CInstallationInfo::CheckInstallation(int) {
 
 // address=[0x1494ff0]
 // Decompiled from bool __stdcall CInstallationInfo::IsOptionalGameConfigFile(wchar_t *String2)
-bool  CInstallationInfo::IsOptionalGameConfigFile(wchar_t const *) {
+bool  CInstallationInfo::IsOptionalGameConfigFile(wchar_t const * String2) {
   
   wchar_t **i; // [esp+14h] [ebp-4h]
 
@@ -111,7 +111,7 @@ bool  CInstallationInfo::IsOptionalGameConfigFile(wchar_t const *) {
 
 // address=[0x1495090]
 // Decompiled from char __cdecl CInstallationInfo::GetFileProperties(wchar_t *String, int *a2)
-static bool __cdecl CInstallationInfo::GetFileProperties(wchar_t const *,struct SFileProperties &) {
+bool __cdecl CInstallationInfo::GetFileProperties(wchar_t const * String, struct SFileProperties & a2) {
   
   int v3; // [esp+0h] [ebp-98h] BYREF
   int v4; // [esp+10h] [ebp-88h]
@@ -153,7 +153,7 @@ static bool __cdecl CInstallationInfo::GetFileProperties(wchar_t const *,struct 
 
 // address=[0x14951f0]
 // Decompiled from unsigned int __cdecl CInstallationInfo::GetFileCRC(wchar_t *FileName, unsigned int a2)
-static unsigned int __cdecl CInstallationInfo::GetFileCRC(wchar_t const *,unsigned int) {
+unsigned int __cdecl CInstallationInfo::GetFileCRC(wchar_t const * FileName, unsigned int a2) {
   
   int v3; // [esp+0h] [ebp-B0h] BYREF
   unsigned int v4; // [esp+10h] [ebp-A0h]
@@ -213,7 +213,7 @@ static unsigned int __cdecl CInstallationInfo::GetFileCRC(wchar_t const *,unsign
 
 // address=[0x14953d0]
 // Decompiled from int __cdecl CInstallationInfo::GetConfigFileCRC(wchar_t *String, int a2)
-static unsigned int __cdecl CInstallationInfo::GetConfigFileCRC(wchar_t const *,unsigned int) {
+unsigned int __cdecl CInstallationInfo::GetConfigFileCRC(wchar_t const * String, unsigned int a2) {
   
   wchar_t *v3; // eax
   int FileCRC; // [esp+4h] [ebp-30h]
@@ -234,7 +234,7 @@ static unsigned int __cdecl CInstallationInfo::GetConfigFileCRC(wchar_t const *,
 
 // address=[0x1495480]
 // Decompiled from int __cdecl CInstallationInfo::GetGfxFileCRC(int a1, int a2)
-static unsigned int __cdecl CInstallationInfo::GetGfxFileCRC(int,unsigned int) {
+unsigned int __cdecl CInstallationInfo::GetGfxFileCRC(int a1, unsigned int a2) {
   
   char Buffer[2]; // [esp+8h] [ebp-404h] BYREF
   __int16 v4; // [esp+406h] [ebp-6h]
@@ -262,7 +262,7 @@ static unsigned int __cdecl CInstallationInfo::GetGfxFileCRC(int,unsigned int) {
 
 // address=[0x1495620]
 // Decompiled from bool __cdecl CInstallationInfo::CheckFile(const wchar_t *a1, int a2)
-static bool __cdecl CInstallationInfo::CheckFile(wchar_t const *,int) {
+bool __cdecl CInstallationInfo::CheckFile(wchar_t const * a1, int a2) {
   
   int v3; // [esp+0h] [ebp-10h] BYREF
   unsigned __int8 v4; // [esp+4h] [ebp-Ch]
@@ -311,7 +311,7 @@ static bool __cdecl CInstallationInfo::CheckFile(wchar_t const *,int) {
 
 // address=[0x1495730]
 // Decompiled from bool __cdecl CInstallationInfo::CheckConfigFile(wchar_t *String, int a2)
-static bool __cdecl CInstallationInfo::CheckConfigFile(wchar_t const *,int) {
+bool __cdecl CInstallationInfo::CheckConfigFile(wchar_t const * String, int a2) {
   
   const wchar_t *v2; // eax
   bool v4; // [esp+7h] [ebp-2Dh]
@@ -330,7 +330,7 @@ static bool __cdecl CInstallationInfo::CheckConfigFile(wchar_t const *,int) {
 
 // address=[0x14957c0]
 // Decompiled from bool __cdecl CInstallationInfo::CheckGfxFile(int a1, int a2)
-static bool __cdecl CInstallationInfo::CheckGfxFile(int,int) {
+bool __cdecl CInstallationInfo::CheckGfxFile(int a1, int a2) {
   
   char Buffer[2]; // [esp+10h] [ebp-404h] BYREF
   __int16 v4; // [esp+40Eh] [ebp-6h]
@@ -343,7 +343,7 @@ static bool __cdecl CInstallationInfo::CheckGfxFile(int,int) {
 
 // address=[0x1495870]
 // Decompiled from char __cdecl CInstallationInfo::CheckConfigFiles(int a1)
-static bool __cdecl CInstallationInfo::CheckConfigFiles(int) {
+bool __cdecl CInstallationInfo::CheckConfigFiles(int a1) {
   
   wchar_t **i; // [esp+4h] [ebp-8h]
   char v3; // [esp+Bh] [ebp-1h]
@@ -357,7 +357,7 @@ static bool __cdecl CInstallationInfo::CheckConfigFiles(int) {
 
 // address=[0x14958d0]
 // Decompiled from char __cdecl CInstallationInfo::CheckGfxFiles(int a1)
-static bool __cdecl CInstallationInfo::CheckGfxFiles(int) {
+bool __cdecl CInstallationInfo::CheckGfxFiles(int a1) {
   
   int *i; // [esp+4h] [ebp-8h]
   char v3; // [esp+Bh] [ebp-1h]
@@ -549,7 +549,7 @@ void  CInstallationInfo::CheckTrojanVehicleGfx(void) {
 
 // address=[0x1495e70]
 // Decompiled from char __cdecl CInstallationInfo::CheckWithLuaScript(int a1)
-static bool __cdecl CInstallationInfo::CheckWithLuaScript(int) {
+bool __cdecl CInstallationInfo::CheckWithLuaScript(int a1) {
   
   void *v2; // [esp+Ch] [ebp-14h] BYREF
   char v3; // [esp+13h] [ebp-Dh]
@@ -579,7 +579,7 @@ static bool __cdecl CInstallationInfo::CheckWithLuaScript(int) {
 
 // address=[0x1495fd0]
 // Decompiled from int CInstallationInfo::LuaCheckFile()
-static void __cdecl CInstallationInfo::LuaCheckFile(void) {
+void __cdecl CInstallationInfo::LuaCheckFile(void) {
   
   unsigned int v0; // eax
   unsigned int v1; // eax
@@ -623,7 +623,7 @@ static void __cdecl CInstallationInfo::LuaCheckFile(void) {
 
 // address=[0x1496110]
 // Decompiled from int CInstallationInfo::LuaCheckFiles()
-static void __cdecl CInstallationInfo::LuaCheckFiles(void) {
+void __cdecl CInstallationInfo::LuaCheckFiles(void) {
   
   unsigned int v0; // eax
   unsigned int v1; // eax
@@ -687,7 +687,7 @@ static void __cdecl CInstallationInfo::LuaCheckFiles(void) {
 
 // address=[0x1496980]
 // Decompiled from int __cdecl CInstallationInfo::LuaGetInteger(unsigned int a1)
-static int __cdecl CInstallationInfo::LuaGetInteger(unsigned int) {
+int __cdecl CInstallationInfo::LuaGetInteger(unsigned int a1) {
   
   if ( j__lua_isnumber(a1) )
     return (int)j__lua_getnumber(a1);
@@ -698,7 +698,7 @@ static int __cdecl CInstallationInfo::LuaGetInteger(unsigned int) {
 
 // address=[0x14969d0]
 // Decompiled from int __cdecl CInstallationInfo::LuaGetIntegerZeroIfNoObject(unsigned int a1)
-static int __cdecl CInstallationInfo::LuaGetIntegerZeroIfNoObject(unsigned int) {
+int __cdecl CInstallationInfo::LuaGetIntegerZeroIfNoObject(unsigned int a1) {
   
   if ( a1 )
     return CInstallationInfo::LuaGetInteger(a1);
@@ -709,7 +709,7 @@ static int __cdecl CInstallationInfo::LuaGetIntegerZeroIfNoObject(unsigned int) 
 
 // address=[0x1496a10]
 // Decompiled from int __cdecl CInstallationInfo::LuaGetString(unsigned int a1)
-static char const * __cdecl CInstallationInfo::LuaGetString(unsigned int) {
+char const * __cdecl CInstallationInfo::LuaGetString(unsigned int a1) {
   
   if ( j__lua_isstring(a1) )
     return j__lua_getstring(a1);

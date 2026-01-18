@@ -31,7 +31,7 @@ class CAIDarkTribeSectorAI *  CAIDarkTribeSectorAgent::SectorAI(void)const {
 
 // address=[0x1301910]
 // Decompiled from CAIDarkTribeSectorAgent *__thiscall CAIDarkTribeSectorAgent::AttachSectorAI(  CAIDarkTribeSectorAgent *this,  struct CAIDarkTribeSectorAI *a2)
-void  CAIDarkTribeSectorAgent::AttachSectorAI(class CAIDarkTribeSectorAI *) {
+void  CAIDarkTribeSectorAgent::AttachSectorAI(class CAIDarkTribeSectorAI * a2) {
   
   CAIDarkTribeSectorAgent *result; // eax
 

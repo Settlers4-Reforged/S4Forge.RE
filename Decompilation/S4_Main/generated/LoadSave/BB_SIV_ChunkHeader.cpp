@@ -13,7 +13,7 @@
 
 // address=[0x2fd2980]
 // Decompiled from bool __thiscall BB_SIV_ChunkHeader::Load(void *this, FILE *Stream)
-bool  BB_SIV_ChunkHeader::Load(struct _iobuf *) {
+bool  BB_SIV_ChunkHeader::Load(struct _iobuf * Stream) {
   
   return j__fread(this, 0x14u, 1u, Stream) == 1;
 }
@@ -21,7 +21,7 @@ bool  BB_SIV_ChunkHeader::Load(struct _iobuf *) {
 
 // address=[0x2fd29c0]
 // Decompiled from bool __thiscall BB_SIV_ChunkHeader::Save(const void *this, FILE *Stream)
-bool  BB_SIV_ChunkHeader::Save(struct _iobuf *) {
+bool  BB_SIV_ChunkHeader::Save(struct _iobuf * Stream) {
   
   return j__fwrite(this, 0x14u, 1u, Stream) == 1;
 }

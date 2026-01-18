@@ -1,6 +1,8 @@
 #ifndef IAIDARKTRIBEECOAI_H
 #define IAIDARKTRIBEECOAI_H
 
+#include "defines.h"
+
 class IAIDarkTribeEcoAI : public IAIUnknown {
 public:
     // address=[0x132fa50]

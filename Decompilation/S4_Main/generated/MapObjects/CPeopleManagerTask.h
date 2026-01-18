@@ -1,6 +1,8 @@
 #ifndef CPEOPLEMANAGERTASK_H
 #define CPEOPLEMANAGERTASK_H
 
+#include "defines.h"
+
 class CPeopleManagerTask : public IScheduleEntry {
 public:
     // address=[0x2f56aa0]
@@ -25,7 +27,7 @@ public:
     int  GetNeededCarierSettler(void);
 
     // address=[0x2f57010]
-    int  GetNeededBuildingSettler(int);
+    int  GetNeededBuildingSettler(int a2);
 
     // address=[0x2f57060]
     bool  DestroyResidenceBuildings(void);

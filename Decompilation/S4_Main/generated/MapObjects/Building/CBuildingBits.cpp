@@ -4,7 +4,7 @@
 
 // address=[0x14f1a80]
 // Decompiled from int __thiscall CBuildingBits::PrintToTraceFile(CBuildingBits *this, int a2)
-void  CBuildingBits::PrintToTraceFile(unsigned int) {
+void  CBuildingBits::PrintToTraceFile(unsigned int a2) {
   
   int result; // eax
   int i; // [esp+8h] [ebp-60h]

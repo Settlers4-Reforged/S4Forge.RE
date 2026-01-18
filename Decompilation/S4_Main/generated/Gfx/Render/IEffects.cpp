@@ -4,7 +4,7 @@
 
 // address=[0x144a370]
 // Decompiled from CEffects *IEffects::CreateEffects()
-static class IEffects * __cdecl IEffects::CreateEffects(void) {
+class IEffects * __cdecl IEffects::CreateEffects(void) {
   
   CEffects *C; // [esp+Ch] [ebp-10h]
 
@@ -30,7 +30,7 @@ static class IEffects * __cdecl IEffects::CreateEffects(void) {
 
 // address=[0x147e720]
 // Decompiled from int __thiscall IEffects::DeleteMovingEffect(IEffects *this, unsigned int a2)
-void  IEffects::DeleteMovingEffect(unsigned int) {
+void  IEffects::DeleteMovingEffect(unsigned int a2) {
   
   return (*(int (__thiscall **)(IEffects *, unsigned int))(*(_DWORD *)this + 36))(this, a2);
 }

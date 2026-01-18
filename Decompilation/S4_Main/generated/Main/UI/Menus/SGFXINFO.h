@@ -1,6 +1,8 @@
 #ifndef CGFXMANAGER_SGFXINFO_H
 #define CGFXMANAGER_SGFXINFO_H
 
+#include "defines.h"
+
 namespace CGfxManager {
 
 class SGFXINFO {

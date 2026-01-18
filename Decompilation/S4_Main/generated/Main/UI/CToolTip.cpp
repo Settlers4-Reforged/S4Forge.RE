@@ -48,7 +48,7 @@ void  CToolTip::Lock(void) {
 
 // address=[0x2f9fe50]
 // Decompiled from CToolTip *__thiscall CToolTip::SetSourceDialogSurfaceID(CToolTip *this, int a2)
-void  CToolTip::SetSourceDialogSurfaceID(int) {
+void  CToolTip::SetSourceDialogSurfaceID(int a2) {
   
   CToolTip *result; // eax
 
@@ -80,7 +80,7 @@ int  CToolTip::GetSourceDialogSurfaceID(void) {
 
 // address=[0x2fa2f70]
 // Decompiled from CToolTip *__thiscall CToolTip::SetEnableStatus(CToolTip *this, bool a2)
-void  CToolTip::SetEnableStatus(bool) {
+void  CToolTip::SetEnableStatus(bool a2) {
   
   CToolTip *result; // eax
 
@@ -107,7 +107,7 @@ void  CToolTip::SetEnableStatus(bool) {
 
 // address=[0x2fa30d0]
 // Decompiled from char *__thiscall CToolTip::SetTooltipText(char *this, char *Str)
-void  CToolTip::SetTooltipText(char const *) {
+void  CToolTip::SetTooltipText(char const * Str) {
   
   char *result; // eax
   int Count; // [esp+0h] [ebp-8h]
@@ -123,7 +123,7 @@ void  CToolTip::SetTooltipText(char const *) {
 
 // address=[0x2fa3130]
 // Decompiled from char __thiscall CToolTip::OpenTooltip(CToolTip *this, int a2, int a3)
-bool  CToolTip::OpenTooltip(int,int) {
+bool  CToolTip::OpenTooltip(int a2, int a3) {
   
   CToolTip *v4; // eax
   struct tagRECT v5; // [esp-10h] [ebp-80h]

@@ -4,7 +4,7 @@
 
 // address=[0x1315ce0]
 // Decompiled from char __thiscall CGenericBuildingIterator::Init(CGenericBuildingIterator *this, int a2, int a3, int a4)
-bool  CGenericBuildingIterator::Init(int,int,int) {
+bool  CGenericBuildingIterator::Init(int a2, int a3, int a4) {
   
   CBuildingIteratorBase::Init((CGenericBuildingIterator *)((char *)this + 20), 0);
   if ( CPlayerIterator::Init(this, a2) )

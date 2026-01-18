@@ -1,6 +1,8 @@
 #ifndef PAIRNODE_H
 #define PAIRNODE_H
 
+#include "defines.h"
+
 class pairNode : public DNameNode {
 public:
     // address=[0x3081380]
@@ -10,7 +12,7 @@ public:
     virtual char  getLastChar(void)const;
 
     // address=[0x308a6b0]
-    virtual char *  getString(char *,char *)const;
+    virtual char *  getString(char * a2, char * a3)const;
 
     // address=[0x308cff0]
     virtual int  length(void)const;

@@ -1,19 +1,21 @@
 #ifndef CTRANSPORTMGR_H
 #define CTRANSPORTMGR_H
 
+#include "defines.h"
+
 class CTransportMgr {
 public:
     // address=[0x147cd30]
-    static class IMovingEntity * __cdecl GetNearestEntity(int,int,int,int,int);
+    static class IMovingEntity * __cdecl GetNearestEntity(int a1, int a2, int a3, int a4, int a5);
 
     // address=[0x147d080]
-    static class IMovingEntity * __cdecl GetNearestTransportEntity(int,int,int,int,int,int,bool);
+    static class IMovingEntity * __cdecl GetNearestTransportEntity(int a1, int a2, int a3, int a4, int a5, int a6, bool a7);
 
     // address=[0x147d210]
-    static class CSettler * __cdecl GetNearestCarrier(int,int,int);
+    static class CSettler * __cdecl GetNearestCarrier(int a1, int a2, int a3);
 
     // address=[0x147d2a0]
-    static class IMovingEntity * __cdecl GetVehicleCargoLoader(int,int,int,int,int,int,int &);
+    static class IMovingEntity * __cdecl GetVehicleCargoLoader(int a1, int a2, int a3, int a4, int a5, int a6, int & a7);
 
 private:
     // address=[0x36bab38]

@@ -4,7 +4,7 @@
 
 // address=[0x2f3f700]
 // Decompiled from CHistorySolution *__thiscall CHistorySolution::CHistorySolution(CHistorySolution *this, int a2, struct CParam *a3)
- CHistorySolution::CHistorySolution(int,class CParam *) {
+ CHistorySolution::CHistorySolution(int a2, class CParam * a3) {
   
   CParam *v4; // [esp+8h] [ebp-18h]
   CParam *C; // [esp+Ch] [ebp-14h]

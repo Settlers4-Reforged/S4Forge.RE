@@ -4,7 +4,7 @@
 
 // address=[0x15d5f80]
 // Decompiled from _DWORD *__thiscall CTileIdRef::CTileIdRef(_DWORD *this, int a2, int a3)
- CTileIdRef::CTileIdRef(enum T_TILING_TYPE,int) {
+ CTileIdRef::CTileIdRef(enum T_TILING_TYPE a2, int a3) {
   
   *this = &(&ITiling::m_pTileIds)[a2][a3];
   return this;
@@ -13,7 +13,7 @@
 
 // address=[0x15d6e70]
 // Decompiled from int __thiscall CTileIdRef::TileId(CTileIdRef *this, int a2)
-int  CTileIdRef::TileId(int)const {
+int  CTileIdRef::TileId(int a2)const {
   
   return *(unsigned __int16 *)(*(_DWORD *)this + 2 * a2);
 }
@@ -30,7 +30,7 @@ class CTileIdRef &  CTileIdRef::operator++(void) {
 
 // address=[0x15f40b0]
 // Decompiled from _DWORD *__thiscall CTileIdRef::operator+=(_DWORD *this, int a2)
-class CTileIdRef &  CTileIdRef::operator+=(int) {
+class CTileIdRef &  CTileIdRef::operator+=(int a2) {
   
   *this += 2 * a2;
   return this;
@@ -39,7 +39,7 @@ class CTileIdRef &  CTileIdRef::operator+=(int) {
 
 // address=[0x15f5860]
 // Decompiled from CTileIdRef *__thiscall CTileIdRef::SetTileId(CTileIdRef *this, __int16 a2)
-void  CTileIdRef::SetTileId(int)const {
+void  CTileIdRef::SetTileId(int a2)const {
   
   CTileIdRef *result; // eax
 
@@ -51,7 +51,7 @@ void  CTileIdRef::SetTileId(int)const {
 
 // address=[0x15f5880]
 // Decompiled from __int16 __thiscall CTileIdRef::SetTileId(CTileIdRef *this, int a2, __int16 a3)
-void  CTileIdRef::SetTileId(int,int)const {
+void  CTileIdRef::SetTileId(int a2, int a3)const {
   
   __int16 result; // ax
 

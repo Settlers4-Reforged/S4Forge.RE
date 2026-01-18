@@ -1,13 +1,15 @@
 #ifndef CONESETTLERTYPEITERATOR_H
 #define CONESETTLERTYPEITERATOR_H
 
+#include "defines.h"
+
 class COneSettlerTypeIterator {
 public:
     // address=[0x13037c0]
-     COneSettlerTypeIterator(int,int);
+     COneSettlerTypeIterator(int a2, int a3);
 
     // address=[0x13150d0]
-    void  Init(int,int);
+    void  Init(int a2, int a3);
 
     // address=[0x1315100]
     int  FirstSettler(void);

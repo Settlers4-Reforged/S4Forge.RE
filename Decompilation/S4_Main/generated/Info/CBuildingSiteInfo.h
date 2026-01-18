@@ -1,6 +1,8 @@
 #ifndef CBUILDINGSITEINFO_H
 #define CBUILDINGSITEINFO_H
 
+#include "defines.h"
+
 class CBuildingSiteInfo : public CBuildingInfo {
 public:
     // address=[0x1454500]

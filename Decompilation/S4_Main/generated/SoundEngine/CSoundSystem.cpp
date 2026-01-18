@@ -64,7 +64,7 @@
 
 // address=[0x2fd9d90]
 // Decompiled from char __thiscall CSoundSystem::Init(CSoundSystem *this, const char *a2, int a3, bool a4, int a5, int a6, int a7)
-bool  CSoundSystem::Init(char const *,int,bool,int,int,int) {
+bool  CSoundSystem::Init(char const * a2, int a3, bool a4, int a5, int a6, int a7) {
   
   *((_DWORD *)this + 4) = a3;
   if ( a4 )
@@ -180,7 +180,7 @@ int  CSoundSystem::GetCpuUsage(void) {
 
 // address=[0x2fda060]
 // Decompiled from int __thiscall CSoundSystem::PlaySoundFile(CSoundSystem *this, const char *a2, unsigned int a3, unsigned int a4)
-unsigned int  CSoundSystem::PlaySoundFile(char const *,int,int) {
+unsigned int  CSoundSystem::PlaySoundFile(char const * a2, int a3, int a4) {
   
   const char *error; // eax
   int v6; // [esp+0h] [ebp-Ch]
@@ -244,7 +244,7 @@ unsigned int  CSoundSystem::PlaySoundFile(char const *,int,int) {
 
 // address=[0x2fda280]
 // Decompiled from int __thiscall sub_33DA280(_DWORD *this, const char *a2, unsigned int a3, unsigned int a4, char a5, int a6)
-unsigned int  CSoundSystem::PlayStream(char const *,int,int,bool,int) {
+unsigned int  CSoundSystem::PlayStream(char const * a2, int a3, int a4, bool a5, int a6) {
   
   const char *error; // eax
   int v8; // [esp+0h] [ebp-8h]
@@ -295,7 +295,7 @@ unsigned int  CSoundSystem::PlayStream(char const *,int,int,bool,int) {
 
 // address=[0x2fda4e0]
 // Decompiled from int __thiscall CSoundSystem::PlaySoundFromMemory(  CSoundSystem *this,  unsigned int *a2,  char *a3,  unsigned int a4,  int a5,  int a6,  int a7,  bool a8)
-unsigned int  CSoundSystem::PlaySoundFromMemory(unsigned int *,char *,unsigned int,int,int,int,bool) {
+unsigned int  CSoundSystem::PlaySoundFromMemory(unsigned int * a2, char * a3, unsigned int a4, int a5, int a6, int a7, bool a8) {
   
   int v9; // [esp+0h] [ebp-Ch]
   int FreeSoundHandle; // [esp+4h] [ebp-8h]
@@ -344,7 +344,7 @@ unsigned int  CSoundSystem::PlaySoundFromMemory(unsigned int *,char *,unsigned i
 
 // address=[0x2fda6a0]
 // Decompiled from char __thiscall CSoundSystem::ChangeVolume(CSoundSystem *this, unsigned int a2, unsigned int a3)
-bool  CSoundSystem::ChangeVolume(unsigned int,int) {
+bool  CSoundSystem::ChangeVolume(unsigned int a2, int a3) {
   
   int StreamIndex; // [esp+4h] [ebp-4h]
   int SoundIndex; // [esp+4h] [ebp-4h]
@@ -381,7 +381,7 @@ bool  CSoundSystem::ChangeVolume(unsigned int,int) {
 
 // address=[0x2fda7a0]
 // Decompiled from int __thiscall CSoundSystem::GetVolume(CSoundSystem *this, unsigned int a2)
-int  CSoundSystem::GetVolume(unsigned int) {
+int  CSoundSystem::GetVolume(unsigned int a2) {
   
   int StreamIndex; // [esp+4h] [ebp-4h]
   int SoundIndex; // [esp+4h] [ebp-4h]
@@ -399,7 +399,7 @@ int  CSoundSystem::GetVolume(unsigned int) {
 
 // address=[0x2fda820]
 // Decompiled from char __thiscall CSoundSystem::ChangePan(CSoundSystem *this, unsigned int a2, unsigned int a3)
-bool  CSoundSystem::ChangePan(unsigned int,int) {
+bool  CSoundSystem::ChangePan(unsigned int a2, int a3) {
   
   int StreamIndex; // [esp+4h] [ebp-4h]
   int SoundIndex; // [esp+4h] [ebp-4h]
@@ -430,7 +430,7 @@ bool  CSoundSystem::ChangePan(unsigned int,int) {
 
 // address=[0x2fda8d0]
 // Decompiled from char __thiscall CSoundSystem::Fade(CSoundSystem *this, unsigned int a2, int a3, int a4)
-bool  CSoundSystem::Fade(unsigned int,int,int) {
+bool  CSoundSystem::Fade(unsigned int a2, int a3, int a4) {
   
   double Volume; // [esp+8h] [ebp-1Ch]
   int v6; // [esp+14h] [ebp-10h]
@@ -482,7 +482,7 @@ bool  CSoundSystem::Fade(unsigned int,int,int) {
 
 // address=[0x2fdaa80]
 // Decompiled from int __thiscall CSoundSystem::SetTimerInterval(CSoundSystem *this, int a2)
-void  CSoundSystem::SetTimerInterval(int) {
+void  CSoundSystem::SetTimerInterval(int a2) {
   
   int result; // eax
 
@@ -517,7 +517,7 @@ void  CSoundSystem::Update(void) {
 
 // address=[0x2fdab50]
 // Decompiled from int __thiscall CSoundSystem::StopSample(CSoundSystem *this, unsigned int a2)
-void  CSoundSystem::StopSample(unsigned int) {
+void  CSoundSystem::StopSample(unsigned int a2) {
   
   int result; // eax
   int StreamIndex; // [esp+4h] [ebp-4h]
@@ -557,7 +557,7 @@ void  CSoundSystem::StopSample(unsigned int) {
 
 // address=[0x2fdac80]
 // Decompiled from int __thiscall CSoundSystem::GetSampleID(CSoundSystem *this, struct _SAMPLE *a2)
-int  CSoundSystem::GetSampleID(struct _SAMPLE *) {
+int  CSoundSystem::GetSampleID(struct _SAMPLE * a2) {
   
   int i; // [esp+4h] [ebp-4h]
 
@@ -694,7 +694,7 @@ void  CSoundSystem::ResumePlayback(void) {
 
 // address=[0x2fdaf90]
 // Decompiled from int __thiscall CSoundSystem::InitPlaylist(CSoundSystem *this, int a2, int a3)
-void  CSoundSystem::InitPlaylist(int,int) {
+void  CSoundSystem::InitPlaylist(int a2, int a3) {
   
   if ( (a3 < 0 || a2 >= *((_DWORD *)this + 15))
     && BBSupportDbgReport(2, "SoundSystem.cpp", 1150, "(_iTimesToPlay >= 0) && (_iListID < m_iPlaylistNumber)") == 1 )
@@ -707,7 +707,7 @@ void  CSoundSystem::InitPlaylist(int,int) {
 
 // address=[0x2fdaff0]
 // Decompiled from char __thiscall CSoundSystem::AddTitleToPlaylist(_DWORD *this, int a2, int a3, int a4)
-bool  CSoundSystem::AddTitleToPlaylist(int,std::string const *,int) {
+bool  CSoundSystem::AddTitleToPlaylist(int a2, std::string const * a3, int a4) {
   
   if ( !this[14] )
     return 0;
@@ -723,7 +723,7 @@ bool  CSoundSystem::AddTitleToPlaylist(int,std::string const *,int) {
 
 // address=[0x2fdb060]
 // Decompiled from int __stdcall CSoundSystem::LoopStreamCB(int a1)
-static void __stdcall CSoundSystem::LoopStreamCB(struct _STREAM *) {
+void __stdcall CSoundSystem::LoopStreamCB(struct _STREAM * a1) {
   
   return AIL_start_stream(a1);
 }
@@ -731,7 +731,7 @@ static void __stdcall CSoundSystem::LoopStreamCB(struct _STREAM *) {
 
 // address=[0x2fdb080]
 // Decompiled from int __stdcall CSoundSystem::LoopSampleCB(struct _SAMPLE *a1)
-static void __stdcall CSoundSystem::LoopSampleCB(struct _SAMPLE *) {
+void __stdcall CSoundSystem::LoopSampleCB(struct _SAMPLE * a1) {
   
   int result; // eax
 
@@ -746,7 +746,7 @@ static void __stdcall CSoundSystem::LoopSampleCB(struct _SAMPLE *) {
 
 // address=[0x2fdb0c0]
 // Decompiled from _DWORD *__thiscall CSoundSystem::CreatePlaylists(CSoundSystem *this, unsigned int a2)
-void  CSoundSystem::CreatePlaylists(int) {
+void  CSoundSystem::CreatePlaylists(int a2) {
   
   int v2; // ecx
   _DWORD *result; // eax
@@ -786,7 +786,7 @@ void  CSoundSystem::CreatePlaylists(int) {
 
 // address=[0x2fdb200]
 // Decompiled from int __thiscall CSoundSystem::StartPlaylist(CSoundSystem *this, int a2, unsigned int a3)
-unsigned int  CSoundSystem::StartPlaylist(int,int) {
+unsigned int  CSoundSystem::StartPlaylist(int a2, int a3) {
   
   const char *ActiveTitle; // eax
 
@@ -805,7 +805,7 @@ unsigned int  CSoundSystem::StartPlaylist(int,int) {
 
 // address=[0x2fdb280]
 // Decompiled from unsigned int __thiscall CSoundSystem::ChangePlaylist(CSoundSystem *this, int a2, int a3)
-unsigned int  CSoundSystem::ChangePlaylist(int,int) {
+unsigned int  CSoundSystem::ChangePlaylist(int a2, int a3) {
   
   int v4; // eax
   int v5; // [esp+0h] [ebp-20h]
@@ -924,7 +924,7 @@ void  CSoundSystem::PlaylistTitleEnded(struct _STREAM *) {
 
 // address=[0x2fdb5b0]
 // Decompiled from int __thiscall CSoundSystem::SampleEnded(CSoundSystem *this, struct _SAMPLE *a2)
-void  CSoundSystem::SampleEnded(struct _SAMPLE *) {
+void  CSoundSystem::SampleEnded(struct _SAMPLE * a2) {
   
   int result; // eax
   int i; // [esp+4h] [ebp-4h]
@@ -941,7 +941,7 @@ void  CSoundSystem::SampleEnded(struct _SAMPLE *) {
 
 // address=[0x2fdb610]
 // Decompiled from int __thiscall CSoundSystem::ChangeStreamVolume(CSoundSystem *this, int a2)
-void  CSoundSystem::ChangeStreamVolume(int) {
+void  CSoundSystem::ChangeStreamVolume(int a2) {
   
   int result; // eax
   int i; // [esp+4h] [ebp-4h]
@@ -970,7 +970,7 @@ void  CSoundSystem::ChangeStreamVolume(int) {
 
 // address=[0x2fdb6e0]
 // Decompiled from CSoundSystem *__thiscall CSoundSystem::ChangeSoundVolume(CSoundSystem *this, int a2)
-void  CSoundSystem::ChangeSoundVolume(int) {
+void  CSoundSystem::ChangeSoundVolume(int a2) {
   
   CSoundSystem *result; // eax
   int i; // [esp+4h] [ebp-4h]
@@ -1035,7 +1035,7 @@ int  CSoundSystem::EnumSoundCards(void) {
 
 // address=[0x2fdb860]
 // Decompiled from int __thiscall CSoundSystem::GetSoundCardName(_DWORD *this, int a2, int a3)
-std::string  CSoundSystem::GetSoundCardName(int) {
+std::string  CSoundSystem::GetSoundCardName(int a2) {
   
   if ( (a3 >= this[6] || a3 < 0)
     && BBSupportDbgReport(2, "SoundSystem.cpp", 1842, "(_iIdx<m_iSoundCards ) &&( _iIdx>=0 )") == 1 )
@@ -1049,7 +1049,7 @@ std::string  CSoundSystem::GetSoundCardName(int) {
 
 // address=[0x2fdb8d0]
 // Decompiled from CSoundSystem *__thiscall CSoundSystem::SetSoundCard(CSoundSystem *this, int a2)
-void  CSoundSystem::SetSoundCard(int) {
+void  CSoundSystem::SetSoundCard(int a2) {
   
   CSoundSystem *result; // eax
 
@@ -1066,7 +1066,7 @@ void  CSoundSystem::SetSoundCard(int) {
 
 // address=[0x2fdb920]
 // Decompiled from void *__thiscall CSoundSystem::AddSoundCard(CSoundSystem *this, struct _GUID *a2, char *Str)
-void  CSoundSystem::AddSoundCard(struct _GUID *,char const *) {
+void  CSoundSystem::AddSoundCard(struct _GUID * a2, char const * Str) {
   
   int v3; // ecx
   _DWORD *v5; // [esp+10h] [ebp-18h]
@@ -1303,7 +1303,7 @@ void  CSoundSystem::FreeMemory(void) {
 
 // address=[0x2fd9850]
 // Decompiled from int __thiscall CSoundSystem::GetSoundIndex(CSoundSystem *this, unsigned int a2)
-int  CSoundSystem::GetSoundIndex(unsigned int) {
+int  CSoundSystem::GetSoundIndex(unsigned int a2) {
   
   int i; // [esp+4h] [ebp-4h]
 
@@ -1321,7 +1321,7 @@ int  CSoundSystem::GetSoundIndex(unsigned int) {
 
 // address=[0x2fd98c0]
 // Decompiled from int __thiscall CSoundSystem::GetStreamIndex(CSoundSystem *this, unsigned int a2)
-int  CSoundSystem::GetStreamIndex(unsigned int) {
+int  CSoundSystem::GetStreamIndex(unsigned int a2) {
   
   int i; // [esp+4h] [ebp-4h]
 

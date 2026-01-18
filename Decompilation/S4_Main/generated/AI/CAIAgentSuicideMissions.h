@@ -1,6 +1,8 @@
 #ifndef CAIAGENTSUICIDEMISSIONS_H
 #define CAIAGENTSUICIDEMISSIONS_H
 
+#include "defines.h"
+
 class CAIAgentSuicideMissions : public CAINormalSectorAgent {
 public:
     // address=[0x1303ee0]

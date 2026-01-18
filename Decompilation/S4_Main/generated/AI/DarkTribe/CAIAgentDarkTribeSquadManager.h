@@ -1,6 +1,8 @@
 #ifndef CAIAGENTDARKTRIBESQUADMANAGER_H
 #define CAIAGENTDARKTRIBESQUADMANAGER_H
 
+#include "defines.h"
+
 class CAIAgentDarkTribeSquadManager : public CAIDarkTribeSectorAgent {
 public:
     // address=[0x1302430]
@@ -14,13 +16,13 @@ public:
 
 protected:
     // address=[0x1302940]
-    void  SimpleSquadManagement(enum T_AI_WARRIOR_TYPE,enum T_AI_TASK_FORCE_TYPE,int);
+    void  SimpleSquadManagement(enum T_AI_WARRIOR_TYPE a2, enum T_AI_TASK_FORCE_TYPE a3, int a4);
 
     // address=[0x1302bb0]
-    void  AssociateSquads(enum T_AI_TASK_FORCE_CLASS);
+    void  AssociateSquads(enum T_AI_TASK_FORCE_CLASS a2);
 
     // address=[0x1302cb0]
-    void  CheckSettlers(int,enum T_AI_WARRIOR_TYPE);
+    void  CheckSettlers(int a2, enum T_AI_WARRIOR_TYPE a3);
 
 };
 

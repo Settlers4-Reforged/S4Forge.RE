@@ -4,7 +4,7 @@
 
 // address=[0x14c6f90]
 // Decompiled from CStateMDCampaigns *__cdecl CStateMDCampaigns::DynamicCreateFunc(void *a1)
-static class CGameState * __cdecl CStateMDCampaigns::DynamicCreateFunc(void *) {
+class CGameState * __cdecl CStateMDCampaigns::DynamicCreateFunc(void * a1) {
   
   CStateMDCampaigns *C; // [esp+Ch] [ebp-10h]
 
@@ -87,7 +87,7 @@ bool  CStateMDCampaigns::Perform(void) {
 
 // address=[0x14c7260]
 // Decompiled from char __thiscall CStateMDCampaigns::OnEvent(CStateMDCampaigns *this, struct CEvn_Event *a2)
-bool  CStateMDCampaigns::OnEvent(class CEvn_Event &) {
+bool  CStateMDCampaigns::OnEvent(class CEvn_Event & a2) {
   
   char result; // al
   CEvn_Event *v3; // [esp+8h] [ebp-38h]

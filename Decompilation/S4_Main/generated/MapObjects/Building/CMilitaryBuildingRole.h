@@ -1,10 +1,12 @@
 #ifndef CMILITARYBUILDINGROLE_H
 #define CMILITARYBUILDINGROLE_H
 
+#include "defines.h"
+
 class CMilitaryBuildingRole : public IBuildingRole {
 public:
     // address=[0x14013a0]
-    static class CPersistence * __cdecl New(std::istream &);
+    static class CPersistence * __cdecl New(std::istream & a1);
 
     // address=[0x14fca30]
      CMilitaryBuildingRole(void);
@@ -16,64 +18,64 @@ public:
     virtual unsigned long  ClassID(void)const;
 
     // address=[0x14fd3c0]
-    virtual int  GetBuildingNeed(int)const;
+    virtual int  GetBuildingNeed(int a2)const;
 
     // address=[0x14fd500]
     virtual int  GetBuildingRole(void);
 
     // address=[0x14fd660]
-    virtual int  GetPileIdWithGood(int)const;
+    virtual int  GetPileIdWithGood(int a2)const;
 
     // address=[0x14fd730]
-    virtual void  GoodArrive(int);
+    virtual void  GoodArrive(int a2);
 
     // address=[0x14fdaf0]
-    static class CMilitaryBuildingRole * __cdecl Load(std::istream &);
+    static class CMilitaryBuildingRole * __cdecl Load(std::istream & a1);
 
     // address=[0x150de70]
-    virtual void  LogicUpdate(class CBuilding *);
+    virtual void  LogicUpdate(class CBuilding * a2);
 
     // address=[0x150df40]
-    virtual void  Update(class CBuilding *);
+    virtual void  Update(class CBuilding * a2);
 
     // address=[0x150dfa0]
-    virtual void  FillGfxInfo(class CBuilding *,struct SGfxObjectInfo &);
+    virtual void  FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo & a3);
 
     // address=[0x150e500]
-    virtual void  Init(class CBuilding *);
+    virtual void  Init(class CBuilding * a2);
 
     // address=[0x150e760]
-    virtual void  PostLoadInit(class CBuilding *);
+    virtual void  PostLoadInit(class CBuilding * a2);
 
     // address=[0x150e860]
-    virtual void  FillDialog(class CBuilding *,bool);
+    virtual void  FillDialog(class CBuilding * a2, bool a3);
 
     // address=[0x150ebe0]
-    bool  IncWishAndOrder(int,bool);
+    bool  IncWishAndOrder(int a2, bool a3);
 
     // address=[0x150ed30]
-    int  GetWish(int);
+    int  GetWish(int a2);
 
     // address=[0x150ed70]
-    virtual int  Decrease(int);
+    virtual int  Decrease(int a2);
 
     // address=[0x150edf0]
-    bool  HaveFreeSlots(int);
+    bool  HaveFreeSlots(int a2);
 
     // address=[0x150ef80]
-    virtual void  RemoveInhabitant(class CBuilding *);
+    virtual void  RemoveInhabitant(class CBuilding * a2);
 
     // address=[0x150f070]
-    virtual void  InhabitantFlee(int);
+    virtual void  InhabitantFlee(int a2);
 
     // address=[0x150f2c0]
-    void  SetDoorInvincible(int);
+    void  SetDoorInvincible(int a2);
 
     // address=[0x150f340]
-     CMilitaryBuildingRole(std::istream &);
+     CMilitaryBuildingRole(std::istream & a2);
 
     // address=[0x150f5c0]
-    virtual void  Store(std::ostream &);
+    virtual void  Store(std::ostream & a2);
 
     // address=[0x15e2cd0]
     class std::vector<unsigned short,class std::allocator<unsigned short> > const &  Inhabitants(void)const;
@@ -92,34 +94,34 @@ protected:
     virtual bool  CrushBuilding(void);
 
     // address=[0x150f8d0]
-    virtual bool  SettlerEnter(class CBuilding *,int);
+    virtual bool  SettlerEnter(class CBuilding * a2, int a3);
 
     // address=[0x150fd20]
-    bool  FirstSettlerEnter(class CBuilding *,int);
+    bool  FirstSettlerEnter(class CBuilding * a2, int a3);
 
     // address=[0x1510190]
-    void  TowerGuardEnter(bool);
+    void  TowerGuardEnter(bool a2);
 
     // address=[0x15102d0]
-    virtual void  KillInhabitant(class CBuilding *);
+    virtual void  KillInhabitant(class CBuilding * a2);
 
     // address=[0x15103f0]
-    bool  SearchAttacker(class CBuilding *);
+    bool  SearchAttacker(class CBuilding * a2);
 
     // address=[0x1510430]
     void  ThrowOut(class CBuilding *);
 
     // address=[0x1510510]
-    void  ThrowOutId(class CBuilding *);
+    void  ThrowOutId(class CBuilding * a2);
 
     // address=[0x1510780]
-    void  ThrowOutSettler(class CBuilding *,int);
+    void  ThrowOutSettler(class CBuilding * a2, int a3);
 
     // address=[0x1510a30]
     void  FillAllSlots(void);
 
     // address=[0x1510a70]
-    void  OrderWarrior(class CBuilding *);
+    void  OrderWarrior(class CBuilding * a2);
 
     // address=[0x1510f30]
     void  MoveAfterAboveDoor(void);
@@ -128,13 +130,13 @@ protected:
     void  MoveAfterWindow(void);
 
     // address=[0x15112c0]
-    void  InsertDoor(class CBuilding *,bool);
+    void  InsertDoor(class CBuilding * a2, bool a3);
 
     // address=[0x15114b0]
-    void  RemoveDoorIfNecessary(class CBuilding *);
+    void  RemoveDoorIfNecessary(class CBuilding * a2);
 
     // address=[0x1511550]
-    void  MakeInvisibleDoorVisible(class CBuilding *);
+    void  MakeInvisibleDoorVisible(class CBuilding * a2);
 
     // address=[0x15115e0]
     void  OnDoorKilled(void);
@@ -146,32 +148,32 @@ protected:
     void  InsertTowerGuard(void);
 
     // address=[0x1511c50]
-    void  CancelAllOrders(class CBuilding *);
+    void  CancelAllOrders(class CBuilding * a2);
 
     // address=[0x1511ce0]
-    int  GetFirstFreeSlot(bool);
+    int  GetFirstFreeSlot(bool a2);
 
     // address=[0x1511da0]
-    int  GetLastUsedSlot(bool,bool);
+    int  GetLastUsedSlot(bool a2, bool a3);
 
     // address=[0x1511e80]
-    int  GetSlot(int);
+    int  GetSlot(int a2);
 
     // address=[0x1511f30]
-    virtual void  ConvertEventIntoGoal(class CBuilding *,class CEntityEvent *);
+    virtual void  ConvertEventIntoGoal(class CBuilding * a2, class CEntityEvent * a3);
 
     // address=[0x15120d0]
-    void  SetSettlerTowerInfo(class CSettler &,int,int,bool);
+    void  SetSettlerTowerInfo(class CSettler & a2, int Slot, int a4, bool a5);
 
     // address=[0x1512380]
-    void  SetEffectDisplay(int,int);
+    void  SetEffectDisplay(int a2, int a3);
 
     // address=[0x1513a10]
-    bool  IsTopPosition(int);
+    bool  IsTopPosition(int a2);
 
 private:
     // address=[0x1512500]
-    virtual void  NotifyDetach(class CBuilding *,int);
+    virtual void  NotifyDetach(class CBuilding * a2, int a3);
 
 };
 

@@ -4,7 +4,7 @@
 
 // address=[0x1401120]
 // Decompiled from int __cdecl CManakopter::New(int a1)
-static class CPersistence * __cdecl CManakopter::New(std::istream &) {
+class CPersistence * __cdecl CManakopter::New(std::istream & a1) {
   
   if ( operator new(0x94u) )
     return CManakopter::CManakopter(a1);
@@ -15,7 +15,7 @@ static class CPersistence * __cdecl CManakopter::New(std::istream &) {
 
 // address=[0x1552980]
 // Decompiled from CManakopter *__thiscall CManakopter::CManakopter(CManakopter *this, int a2, __int64 a3, unsigned __int8 a4)
- CManakopter::CManakopter(int,int,int,int) {
+ CManakopter::CManakopter(int a2, int a3, int a4, int a4) {
   
   char v5; // [esp+30h] [ebp-28h]
   int v6; // [esp+34h] [ebp-24h]
@@ -257,7 +257,7 @@ void  CManakopter::LogicUpdate(void) {
 
 // address=[0x1553110]
 // Decompiled from char __thiscall CManakopter::SettlerEnter(CManakopter *this, int a2)
-bool  CManakopter::SettlerEnter(int) {
+bool  CManakopter::SettlerEnter(int a2) {
   
   int v3; // eax
   _BYTE v4[12]; // [esp+4h] [ebp-3Ch] BYREF
@@ -398,7 +398,7 @@ void  CManakopter::UnloadSettlers(void) {
 
 // address=[0x15534e0]
 // Decompiled from void __thiscall CManakopter::Attach(CManakopter *this, int a2)
-void  CManakopter::Attach(int) {
+void  CManakopter::Attach(int a2) {
   
   IFlyingEntity::SetFlyingFlagBits(this, 4);
   IFlyingEntity::ClearFlyingFlagBits(this, 2);
@@ -474,7 +474,7 @@ void  CManakopter::Delete(void) {
 
 // address=[0x1553670]
 // Decompiled from void __thiscall CManakopter::Decrease(CManakopter *this, int a2)
-void  CManakopter::Decrease(int) {
+void  CManakopter::Decrease(int a2) {
   
   int v3; // [esp+4h] [ebp-8h]
   int v4; // [esp+8h] [ebp-4h]
@@ -493,7 +493,7 @@ void  CManakopter::Decrease(int) {
 
 // address=[0x15536c0]
 // Decompiled from _DWORD *__thiscall CManakopter::CManakopter(_DWORD *this, int a2)
- CManakopter::CManakopter(std::istream &) {
+ CManakopter::CManakopter(std::istream & a2) {
   
   _BYTE v3[4]; // [esp+4h] [ebp-34h] BYREF
   _BYTE v4[4]; // [esp+8h] [ebp-30h] BYREF
@@ -550,7 +550,7 @@ void  CManakopter::Decrease(int) {
 
 // address=[0x15538c0]
 // Decompiled from int __thiscall CManakopter::Store(char *this, struct std::ostream *a2)
-void  CManakopter::Store(std::ostream &) {
+void  CManakopter::Store(std::ostream & a2) {
   
   const struct CManakopter::CSettlerStatus *v2; // eax
   int v4; // [esp+4h] [ebp-2Ch] BYREF

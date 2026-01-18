@@ -4,7 +4,7 @@
 
 // address=[0x1306520]
 // Decompiled from int __cdecl CInfluMap::EnemyValueVW(int a1, int a2, int a3)
-static int __cdecl CInfluMap::EnemyValueVW(int,int,int) {
+int __cdecl CInfluMap::EnemyValueVW(int a1, int a2, int a3) {
   
   return CInfluMap::m_uValues[576 * a2 + 576 + 9 * a1] - CInfluMap::m_uValues[576 * a2 + 576 + 9 * a1 + a3];
 }
@@ -12,7 +12,7 @@ static int __cdecl CInfluMap::EnemyValueVW(int,int,int) {
 
 // address=[0x1306580]
 // Decompiled from int __cdecl CInfluMap::EnemyValueXY(Squares *a1, Squares *a2, int a3)
-static int __cdecl CInfluMap::EnemyValueXY(int,int,int) {
+int __cdecl CInfluMap::EnemyValueXY(int a1, int a2, int a3) {
   
   int v3; // eax
   int v5; // [esp-8h] [ebp-8h]
@@ -25,7 +25,7 @@ static int __cdecl CInfluMap::EnemyValueXY(int,int,int) {
 
 // address=[0x130e900]
 // Decompiled from int __cdecl CInfluMap::AllyValueVW(int a1, int a2, int a3)
-static int __cdecl CInfluMap::AllyValueVW(int,int,int) {
+int __cdecl CInfluMap::AllyValueVW(int a1, int a2, int a3) {
   
   return CInfluMap::m_uValues[576 * a2 + 576 + 9 * a1 + a3];
 }
@@ -33,7 +33,7 @@ static int __cdecl CInfluMap::AllyValueVW(int,int,int) {
 
 // address=[0x13231c0]
 // Decompiled from int __cdecl CInfluMap::AllyValueXY(Squares *a1, Squares *a2, int a3)
-static int __cdecl CInfluMap::AllyValueXY(int,int,int) {
+int __cdecl CInfluMap::AllyValueXY(int a1, int a2, int a3) {
   
   int v3; // esi
 
@@ -44,7 +44,7 @@ static int __cdecl CInfluMap::AllyValueXY(int,int,int) {
 
 // address=[0x15ddd70]
 // Decompiled from void *CInfluMap::Init()
-static void __cdecl CInfluMap::Init(void) {
+void __cdecl CInfluMap::Init(void) {
   
   void *result; // eax
 
@@ -56,7 +56,7 @@ static void __cdecl CInfluMap::Init(void) {
 
 // address=[0x15ddda0]
 // Decompiled from void CInfluMap::Done()
-static void __cdecl CInfluMap::Done(void) {
+void __cdecl CInfluMap::Done(void) {
   
   CInfluMap::m_iInitialized = 0;
 }
@@ -64,7 +64,7 @@ static void __cdecl CInfluMap::Done(void) {
 
 // address=[0x15dddb0]
 // Decompiled from void __cdecl CInfluMap::ModifyInfluenceMapVW(int a1, int a2, int a3, int Number)
-static void __cdecl CInfluMap::ModifyInfluenceMapVW(int,int,int,int) {
+void __cdecl CInfluMap::ModifyInfluenceMapVW(int a1, int a2, int a3, int Number) {
   
   int v4; // [esp+4h] [ebp-8h]
   int v5; // [esp+8h] [ebp-4h]
@@ -109,7 +109,7 @@ static void __cdecl CInfluMap::ModifyInfluenceMapVW(int,int,int,int) {
 
 // address=[0x15ddff0]
 // Decompiled from unsigned __int16 *__cdecl CInfluMap::ModifyValueVW(int a1, int a2, int a3, __int16 a4)
-static void __cdecl CInfluMap::ModifyValueVW(int,int,int,int) {
+void __cdecl CInfluMap::ModifyValueVW(int a1, int a2, int a3, int a4) {
   
   unsigned __int16 *result; // eax
 

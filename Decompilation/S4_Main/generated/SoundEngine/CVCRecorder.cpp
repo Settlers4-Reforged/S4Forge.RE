@@ -54,7 +54,7 @@
 
 // address=[0x2fd7380]
 // Decompiled from char __thiscall CVCRecorder::Start(CVCRecorder *this, int a2, char *a3, int a4, struct _DIG_DRIVER *a5)
-bool  CVCRecorder::Start(int,char *,int,struct _DIG_DRIVER *) {
+bool  CVCRecorder::Start(int a2, char * a3, int a4, struct _DIG_DRIVER * a5) {
   
   int i; // [esp+8h] [ebp-8h]
 
@@ -77,7 +77,7 @@ bool  CVCRecorder::Start(int,char *,int,struct _DIG_DRIVER *) {
 
 // address=[0x2fd7490]
 // Decompiled from int __stdcall CVCRecorder::EncodeDataCB(int a1, void *a2, size_t a3, int a4)
-static long __stdcall CVCRecorder::EncodeDataCB(unsigned long,void *,long,long) {
+long __stdcall CVCRecorder::EncodeDataCB(unsigned long a1, void * a2, long a3, long a4) {
   
   return CVCRecorder::CopyDataToEncoder(a2, a3, a4);
 }
@@ -85,7 +85,7 @@ static long __stdcall CVCRecorder::EncodeDataCB(unsigned long,void *,long,long) 
 
 // address=[0x2fd74c0]
 // Decompiled from int __stdcall CVCRecorder::RecordInputCB(void *Src, size_t Size, int a3)
-static void __stdcall CVCRecorder::RecordInputCB(void const *,long,unsigned long) {
+void __stdcall CVCRecorder::RecordInputCB(void const * Src, long Size, unsigned long a3) {
   
   return CVCRecorder::RecordInput(Src, Size);
 }
@@ -93,7 +93,7 @@ static void __stdcall CVCRecorder::RecordInputCB(void const *,long,unsigned long
 
 // address=[0x2fd74e0]
 // Decompiled from int __thiscall CVCRecorder::CopyDataToEncoder(int this, void *a2, int a3, int a4)
-long  CVCRecorder::CopyDataToEncoder(void *,long,long) {
+long  CVCRecorder::CopyDataToEncoder(void * a2, long a3, long a4) {
   
   size_t v5; // [esp+4h] [ebp-Ch]
 
@@ -134,7 +134,7 @@ long  CVCRecorder::CopyDataToEncoder(void *,long,long) {
 
 // address=[0x2fd75f0]
 // Decompiled from int __thiscall CVCRecorder::GetEncodedData(CVCRecorder *this, signed __int8 *a2, int a3)
-int  CVCRecorder::GetEncodedData(signed char *,int) {
+int  CVCRecorder::GetEncodedData(signed char * a2, int a3) {
   
   if ( !*((_DWORD *)this + 20) && BBSupportDbgReport(2, "VCRecorder.cpp", 425, "m_hTransmitStream") == 1 )
     __debugbreak();
@@ -179,7 +179,7 @@ int  CVCRecorder::GetFrameSize(void) {
 
 // address=[0x2fd76f0]
 // Decompiled from CVCRecorder *__thiscall CVCRecorder::ToggleRecording(CVCRecorder *this, bool a2)
-void  CVCRecorder::ToggleRecording(bool) {
+void  CVCRecorder::ToggleRecording(bool a2) {
   
   CVCRecorder *result; // eax
 
@@ -279,7 +279,7 @@ void  CVCRecorder::CalcNoiseVol(void) {
 
 // address=[0x2fd7910]
 // Decompiled from CVCRecorder *__thiscall CVCRecorder::SetOperationMode(CVCRecorder *this, bool a2)
-void  CVCRecorder::SetOperationMode(bool) {
+void  CVCRecorder::SetOperationMode(bool a2) {
   
   CVCRecorder *result; // eax
 
@@ -291,7 +291,7 @@ void  CVCRecorder::SetOperationMode(bool) {
 
 // address=[0x2fd6990]
 // Decompiled from char __thiscall CVCRecorder::InitEncoder(CVCRecorder *this, char *a2)
-bool  CVCRecorder::InitEncoder(char *) {
+bool  CVCRecorder::InitEncoder(char * a2) {
   
   int v3; // eax
   int v4; // eax
@@ -368,7 +368,7 @@ bool  CVCRecorder::InitEncoder(char *) {
 
 // address=[0x2fd6b30]
 // Decompiled from char __thiscall CVCRecorder::RecordInput(int this, __int16 *Src, int Size)
-void  CVCRecorder::RecordInput(void const *,long) {
+void  CVCRecorder::RecordInput(void const * Src, long Size) {
   
   int v3; // eax
   void *v5; // [esp+0h] [ebp-18h]
@@ -442,7 +442,7 @@ LABEL_13:
 
 // address=[0x2fd6cf0]
 // Decompiled from char __thiscall CVCRecorder::Downsample(CVCRecorder *this, const void *a2, int a3)
-bool  CVCRecorder::Downsample(void const *,int) {
+bool  CVCRecorder::Downsample(void const * a2, int a3) {
   
   int v4; // [esp+4h] [ebp-88h]
   int v5; // [esp+8h] [ebp-84h]
@@ -492,7 +492,7 @@ bool  CVCRecorder::Downsample(void const *,int) {
 
 // address=[0x2fd6e60]
 // Decompiled from char __thiscall CVCRecorder::InitInputDriver(CVCRecorder *this, int a2)
-bool  CVCRecorder::InitInputDriver(int) {
+bool  CVCRecorder::InitInputDriver(int a2) {
   
   const char *error; // eax
 
@@ -577,7 +577,7 @@ bool  CVCRecorder::InitInputDriver(int) {
 
 // address=[0x2fd7090]
 // Decompiled from size_t __thiscall CVCRecorder::CalcInputBufferSize(CVCRecorder *this, int a2)
-int  CVCRecorder::CalcInputBufferSize(int) {
+int  CVCRecorder::CalcInputBufferSize(int a2) {
   
   void *v3; // [esp+10h] [ebp-8Ch]
   void *v4; // [esp+14h] [ebp-88h]

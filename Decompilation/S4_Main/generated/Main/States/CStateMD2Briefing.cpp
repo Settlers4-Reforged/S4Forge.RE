@@ -4,7 +4,7 @@
 
 // address=[0x14c30d0]
 // Decompiled from CStateMD2Briefing *__cdecl CStateMD2Briefing::DynamicCreateFunc(void *a1)
-static class CGameState * __cdecl CStateMD2Briefing::DynamicCreateFunc(void *) {
+class CGameState * __cdecl CStateMD2Briefing::DynamicCreateFunc(void * a1) {
   
   CStateMD2Briefing *C; // [esp+Ch] [ebp-10h]
 
@@ -140,7 +140,7 @@ bool  CStateMD2Briefing::Perform(void) {
 
 // address=[0x14c3560]
 // Decompiled from char __thiscall CStateMD2Briefing::OnEvent(CStateMD2Briefing *this, struct CEvn_Event *a2)
-bool  CStateMD2Briefing::OnEvent(class CEvn_Event &) {
+bool  CStateMD2Briefing::OnEvent(class CEvn_Event & a2) {
   
   char result; // al
   CGUIWrapper *Instance; // eax
@@ -404,7 +404,7 @@ bool  CStateMD2Briefing::OnEvent(class CEvn_Event &) {
 
 // address=[0x14c3e10]
 // Decompiled from void *__cdecl CStateMD2Briefing::InitBriefingTexts(int a1, int a2)
-static void __cdecl CStateMD2Briefing::InitBriefingTexts(int,int) {
+void __cdecl CStateMD2Briefing::InitBriefingTexts(int a1, int a2) {
   
   char *v2; // eax
   char *v3; // eax

@@ -12,7 +12,7 @@ int  CFsm::CurrentState(void)const {
 
 // address=[0x2f05d80]
 // Decompiled from CFsm *__thiscall CFsm::CFsm(CFsm *this, struct IEventHandler *a2, int a3, int a4)
- CFsm::CFsm(class IEventHandler *,int,int) {
+ CFsm::CFsm(class IEventHandler * a2, int a3, int a4) {
   
   *(_DWORD *)this = a3;
   std::list<CFsm::SEvent *>::list<CFsm::SEvent *>((char *)this + 12);
@@ -41,7 +41,7 @@ int  CFsm::CurrentState(void)const {
 
 // address=[0x2f05e80]
 // Decompiled from int __thiscall CFsm::DefineTransition(CFsm *this, int a2, int a3, int a4, int a5)
-int  CFsm::DefineTransition(int,int,int,int) {
+int  CFsm::DefineTransition(int a2, int a3, int a4, int a5) {
   
   int v7; // [esp+4h] [ebp-4h]
 
@@ -58,7 +58,7 @@ int  CFsm::DefineTransition(int,int,int,int) {
 
 // address=[0x2f05f00]
 // Decompiled from int __thiscall CFsm::Control(CFsm *this, int a2, int a3)
-int  CFsm::Control(int,void *) {
+int  CFsm::Control(int a2, void * a3) {
   
   void *C; // [esp+0h] [ebp-14h]
   int v5; // [esp+4h] [ebp-10h]
@@ -98,7 +98,7 @@ int  CFsm::Control(int,void *) {
 
 // address=[0x2f06060]
 // Decompiled from _DWORD *__stdcall CFsm::GenerateEvent(int a1, int a2)
-void  CFsm::GenerateEvent(int,void *) {
+void  CFsm::GenerateEvent(int a1, void * a2) {
   
   return CFsm::InsertInQueue(a1, a2);
 }
@@ -106,7 +106,7 @@ void  CFsm::GenerateEvent(int,void *) {
 
 // address=[0x2f06080]
 // Decompiled from _DWORD *__stdcall CFsm::InsertInQueue(int a1, int a2)
-void  CFsm::InsertInQueue(int,void *) {
+void  CFsm::InsertInQueue(int a1, void * a2) {
   
   _DWORD *result; // eax
   _DWORD *v3; // [esp+4h] [ebp-Ch]
@@ -136,7 +136,7 @@ void  CFsm::InsertInQueue(int,void *) {
 
 // address=[0x2f060f0]
 // Decompiled from int __thiscall CFsm::Hash(CFsm *this, int a2, int a3)
-int  CFsm::Hash(int,int) {
+int  CFsm::Hash(int a2, int a3) {
   
   int v4; // [esp+0h] [ebp-Ch]
   int v5; // [esp+8h] [ebp-4h]
@@ -154,7 +154,7 @@ int  CFsm::Hash(int,int) {
 
 // address=[0x2f06170]
 // Decompiled from int __thiscall CFsm::Hash(CFsm *this, int a2)
-int  CFsm::Hash(int) {
+int  CFsm::Hash(int a2) {
   
   int v3; // [esp+0h] [ebp-Ch]
   int v4; // [esp+4h] [ebp-8h]

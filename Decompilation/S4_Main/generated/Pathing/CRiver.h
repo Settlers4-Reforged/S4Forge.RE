@@ -1,13 +1,15 @@
 #ifndef CRIVER_H
 #define CRIVER_H
 
+#include "defines.h"
+
 class CRiver {
 public:
     // address=[0x2fcb5a0]
-     CRiver(int,int);
+     CRiver(int a2, int a3);
 
     // address=[0x2fcb760]
-     CRiver(int,int,int);
+     CRiver(int a2, int a3, int a4);
 
     // address=[0x2fcbbf0]
      ~CRiver(void);
@@ -17,10 +19,10 @@ public:
 
 protected:
     // address=[0x2fcbca0]
-    void  drawRiverPart(int,int,int,int);
+    void  drawRiverPart(int a2, int a3, int a4, int a4);
 
     // address=[0x2fcc380]
-    int  findBorder(int,int);
+    int  findBorder(int a2, int a3);
 
 };
 

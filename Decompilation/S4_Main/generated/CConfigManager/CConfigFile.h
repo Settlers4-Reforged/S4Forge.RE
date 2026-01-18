@@ -1,10 +1,12 @@
 #ifndef CCONFIGFILE_H
 #define CCONFIGFILE_H
 
+#include "defines.h"
+
 class CConfigFile {
 public:
     // address=[0x2f28860]
-     CConfigFile(wchar_t const *);
+     CConfigFile(wchar_t const * FileName);
 
     // address=[0x2f28980]
      ~CConfigFile(void);

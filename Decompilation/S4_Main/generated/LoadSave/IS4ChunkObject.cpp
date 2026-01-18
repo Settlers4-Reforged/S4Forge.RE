@@ -13,7 +13,7 @@
 
 // address=[0x14600c0]
 // Decompiled from IS4ChunkObject *__thiscall IS4ChunkObject::IS4ChunkObject(  IS4ChunkObject *this,  const struct boost::exception_detail::clone_base *a2)
- IS4ChunkObject::IS4ChunkObject(class IS4ChunkObject const &) {
+ IS4ChunkObject::IS4ChunkObject(class IS4ChunkObject const & a2) {
   
   *(_DWORD *)this = IS4ChunkObject::_vftable_;
   return this;
@@ -22,7 +22,7 @@
 
 // address=[0x1486c50]
 // Decompiled from void *__thiscall IS4ChunkObject::operator=(void *this, int a2)
-class IS4ChunkObject &  IS4ChunkObject::operator=(class IS4ChunkObject const &) {
+class IS4ChunkObject &  IS4ChunkObject::operator=(class IS4ChunkObject const & a2) {
   
   return this;
 }

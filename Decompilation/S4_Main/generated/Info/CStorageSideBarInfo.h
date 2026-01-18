@@ -1,6 +1,8 @@
 #ifndef CSTORAGESIDEBARINFO_H
 #define CSTORAGESIDEBARINFO_H
 
+#include "defines.h"
+
 class CStorageSideBarInfo : public CInfoExchange {
 public:
     // address=[0x1454950]

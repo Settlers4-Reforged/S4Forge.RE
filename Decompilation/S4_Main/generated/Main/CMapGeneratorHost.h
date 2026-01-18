@@ -1,19 +1,21 @@
 #ifndef CMAPGENERATORHOST_H
 #define CMAPGENERATORHOST_H
 
+#include "defines.h"
+
 class CMapGeneratorHost : public IMapGeneratorHost {
 public:
     // address=[0x1498520]
-    virtual void  Init(int);
+    virtual void  Init(int a2);
 
     // address=[0x1498680]
     virtual void  UpdateGroundInformation(void);
 
     // address=[0x1498720]
-    virtual bool  SetObject(int,int,int);
+    virtual bool  SetObject(int a2, int a3, int a4);
 
     // address=[0x1498b10]
-    virtual void  SetPlayerStartPosition(int,int,int);
+    virtual void  SetPlayerStartPosition(int a2, int a3, int a4);
 
     // address=[0x1498b50]
      CMapGeneratorHost(struct SRandomMapParams const &);
@@ -28,10 +30,10 @@ public:
     void  ClearRandomMapInfo(void);
 
     // address=[0x1498d70]
-    void  UploadChunks(class S4::CMapFile &);
+    void  UploadChunks(class S4::CMapFile & a2);
 
     // address=[0x1498e00]
-    void  RefreshShading(int);
+    void  RefreshShading(int a2);
 
     // address=[0x14991b0]
     virtual struct SEditorElementMap *  GetEditorLayer(void);

@@ -1,6 +1,8 @@
 #ifndef CAI_ECOSECTOR_GRID_ITERATOR_H
 #define CAI_ECOSECTOR_GRID_ITERATOR_H
 
+#include "defines.h"
+
 class CAI_Ecosector_Grid_Iterator {
 public:
     // address=[0x1339930]
@@ -10,7 +12,7 @@ public:
      ~CAI_Ecosector_Grid_Iterator(void);
 
     // address=[0x1339970]
-    void  Init(int);
+    void  Init(int a2);
 
     // address=[0x13399f0]
     bool  IsEnd(void);
@@ -23,13 +25,13 @@ private:
     void  FindStartPoint(void);
 
     // address=[0x1339d60]
-    bool  IsMyTile(int);
+    bool  IsMyTile(int a2);
 
     // address=[0x1339fe0]
-    bool  IsChecked(int,int);
+    bool  IsChecked(int a2, int a3);
 
     // address=[0x133a0f0]
-    void  SetChecked(int,int);
+    void  SetChecked(int a2, int a3);
 
 };
 

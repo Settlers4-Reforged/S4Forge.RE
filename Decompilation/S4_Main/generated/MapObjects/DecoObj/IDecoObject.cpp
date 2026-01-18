@@ -12,7 +12,7 @@ bool  IDecoObject::IsStaticInstance(void)const {
 
 // address=[0x15414c0]
 // Decompiled from IDecoObject *__thiscall IDecoObject::IDecoObject(IDecoObject *this, int a2, int a3, int a4, int a5, bool a6)
- IDecoObject::IDecoObject(int,int,int,int,bool) {
+ IDecoObject::IDecoObject(int a2, int a3, int a4, int a5, bool a6) {
   
   int v7; // [esp+4h] [ebp-1Ch]
   int v8; // [esp+8h] [ebp-18h]
@@ -75,7 +75,7 @@ bool  IDecoObject::IsStaticInstance(void)const {
 
 // address=[0x1541700]
 // Decompiled from IDecoObject *__thiscall IDecoObject::IDecoObject(  IDecoObject *this,  const struct IDecoObject *a2,  int a3,  int a4,  int a5)
- IDecoObject::IDecoObject(class IDecoObject const &,int,int,int) {
+ IDecoObject::IDecoObject(class IDecoObject const & a2, int a3, int a4, int a5) {
   
   int v5; // esi
 
@@ -169,7 +169,7 @@ bool  IDecoObject::IsStaticInstance(void)const {
 
 // address=[0x1541a00]
 // Decompiled from int __thiscall IDecoObject::ConvertToDarkOrGreen(IDecoObject *this, bool a2)
-int  IDecoObject::ConvertToDarkOrGreen(bool) {
+int  IDecoObject::ConvertToDarkOrGreen(bool a2) {
   
   int DarkObject; // [esp+Ch] [ebp-8h]
   int v5; // [esp+10h] [ebp-4h]
@@ -188,7 +188,7 @@ int  IDecoObject::ConvertToDarkOrGreen(bool) {
 
 // address=[0x1541a60]
 // Decompiled from _DWORD *__thiscall IDecoObject::IDecoObject(_DWORD *this, int a2)
- IDecoObject::IDecoObject(std::istream &) {
+ IDecoObject::IDecoObject(std::istream & a2) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
@@ -215,7 +215,7 @@ int  IDecoObject::ConvertToDarkOrGreen(bool) {
 
 // address=[0x1541b20]
 // Decompiled from int __thiscall IDecoObject::Store(void *this, struct std::ostream *a2)
-void  IDecoObject::Store(std::ostream &) {
+void  IDecoObject::Store(std::ostream & a2) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
   void *v4; // [esp+4h] [ebp-4h]

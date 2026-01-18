@@ -16,7 +16,7 @@
 
 // address=[0x13e56b0]
 // Decompiled from int __thiscall cdm_crc::CRCGenerator<16,32773,0,0,1,1>::CRCTable::operator[](_DWORD *this, int a2)
-unsigned long  cdm_crc::CRCGenerator<16,32773,0,0,1,1>::CRCTable::operator[](int)const {
+unsigned long  cdm_crc::CRCGenerator<16,32773,0,0,1,1>::CRCTable::operator[](int a2)const {
   
   return this[a2];
 }
@@ -24,7 +24,7 @@ unsigned long  cdm_crc::CRCGenerator<16,32773,0,0,1,1>::CRCTable::operator[](int
 
 // address=[0x13e6470]
 // Decompiled from int __stdcall cdm_crc::CRCGenerator<16,32773,0,0,1,1>::CRCTable::CalcTableEntry(int a1)
-unsigned long  cdm_crc::CRCGenerator<16,32773,0,0,1,1>::CRCTable::CalcTableEntry(int) {
+unsigned long  cdm_crc::CRCGenerator<16,32773,0,0,1,1>::CRCTable::CalcTableEntry(int a1) {
   
   int v2; // [esp+4h] [ebp-10h]
   int i; // [esp+8h] [ebp-Ch]

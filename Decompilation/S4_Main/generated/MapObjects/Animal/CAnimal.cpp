@@ -4,7 +4,7 @@
 
 // address=[0x14d60e0]
 // Decompiled from _DWORD *__thiscall CAnimal::CAnimal(_DWORD *this, int a2)
- CAnimal::CAnimal(std::istream &) {
+ CAnimal::CAnimal(std::istream & a2) {
   
   int pExceptionObject; // [esp+4h] [ebp-1Ch] BYREF
   unsigned int v4; // [esp+8h] [ebp-18h] BYREF
@@ -46,7 +46,7 @@
 
 // address=[0x14d6260]
 // Decompiled from void __thiscall CAnimal::Store(CAnimal *this, struct std::ostream *a1)
-void  CAnimal::Store(std::ostream &) {
+void  CAnimal::Store(std::ostream & a1) {
   
   int v2; // [esp+0h] [ebp-Ch] BYREF
   __int16 unk_64; // [esp+Ah] [ebp-2h] BYREF
@@ -129,7 +129,7 @@ struct SGfxObjectInfo *  CAnimal::GetGfxInfos(void) {
 
 // address=[0x14d64a0]
 // Decompiled from int __thiscall CAnimal::AddTask(CAnimal *this, struct CEntityTask *a2)
-void  CAnimal::AddTask(class CEntityTask &) {
+void  CAnimal::AddTask(class CEntityTask & a2) {
   
   return std::list<CEntityTask>::push_back(a2);
 }
@@ -137,7 +137,7 @@ void  CAnimal::AddTask(class CEntityTask &) {
 
 // address=[0x14d8660]
 // Decompiled from void __thiscall CAnimal::Decrease(CAnimal *this, int a2)
-void  CAnimal::Decrease(int) {
+void  CAnimal::Decrease(int a2) {
   
   ;
 }
@@ -145,7 +145,7 @@ void  CAnimal::Decrease(int) {
 
 // address=[0x14d8890]
 // Decompiled from void __thiscall CAnimal::Take(CAnimal *this, int a2)
-void  CAnimal::Take(int) {
+void  CAnimal::Take(int a2) {
   
   ;
 }
@@ -153,7 +153,7 @@ void  CAnimal::Take(int) {
 
 // address=[0x14d64c0]
 // Decompiled from CAnimal *__thiscall CAnimal::CAnimal(CAnimal *this, int a2, int a3, unsigned int a4, int a5)
- CAnimal::CAnimal(int,int,int,int) {
+ CAnimal::CAnimal(int a2, int a3, int a4, int a5) {
   
   IMovingEntity::IMovingEntity(this, a5);
   *(_DWORD *)this = &CAnimal::_vftable_;
@@ -299,7 +299,7 @@ void  CAnimal::Update(void) {
 
 // address=[0x14d6890]
 // Decompiled from int __thiscall CAnimal::NewToDoList(_DWORD *this, int a2)
-void  CAnimal::NewToDoList(class std::list<class CEntityTask,class std::allocator<class CEntityTask> > *) {
+void  CAnimal::NewToDoList(class std::list<class CEntityTask,class std::allocator<class CEntityTask> > * a2) {
   
   _BYTE v3[12]; // [esp+4h] [ebp-24h] BYREF
   int v4; // [esp+10h] [ebp-18h]
@@ -328,7 +328,7 @@ void  CAnimal::NewToDoList(class std::list<class CEntityTask,class std::allocato
 
 // address=[0x14d6980]
 // Decompiled from void __thiscall CAnimal::NewDestination(CAnimal *this, int a2, int a3, int a4)
-void  CAnimal::NewDestination(int,int,int) {
+void  CAnimal::NewDestination(int a2, int a3, int a4) {
   
   ;
 }
@@ -336,7 +336,7 @@ void  CAnimal::NewDestination(int,int,int) {
 
 // address=[0x14d6990]
 // Decompiled from CAnimal *__thiscall CAnimal::ConvertEventIntoGoal(CAnimal *this, struct CEntityEvent *a2)
-void  CAnimal::ConvertEventIntoGoal(class CEntityEvent *) {
+void  CAnimal::ConvertEventIntoGoal(class CEntityEvent * a2) {
   
   CAnimal *result; // eax
 
@@ -348,7 +348,7 @@ void  CAnimal::ConvertEventIntoGoal(class CEntityEvent *) {
 
 // address=[0x14d69b0]
 // Decompiled from int __thiscall CAnimal::TakeWaitJob(CAnimal *this, bool a2)
-void  CAnimal::TakeWaitJob(bool) {
+void  CAnimal::TakeWaitJob(bool a2) {
   
   _BYTE v3[12]; // [esp+4h] [ebp-1Ch] BYREF
   CAnimal *v4; // [esp+10h] [ebp-10h]
@@ -374,7 +374,7 @@ void  CAnimal::TakeWaitJob(bool) {
 
 // address=[0x14d6a70]
 // Decompiled from int __thiscall CAnimal::TakeEatJob(CAnimal *this, bool a2)
-void  CAnimal::TakeEatJob(bool) {
+void  CAnimal::TakeEatJob(bool a2) {
   
   int v2; // eax
   _BYTE v4[12]; // [esp+4h] [ebp-30h] BYREF
@@ -409,7 +409,7 @@ void  CAnimal::TakeEatJob(bool) {
 
 // address=[0x14d6b60]
 // Decompiled from int __thiscall CAnimal::TakeWalkJob(CAnimal *this, bool a2)
-void  CAnimal::TakeWalkJob(bool) {
+void  CAnimal::TakeWalkJob(bool a2) {
   
   int v2; // eax
   _BYTE v4[12]; // [esp+4h] [ebp-30h] BYREF
@@ -439,7 +439,7 @@ void  CAnimal::TakeWalkJob(bool) {
 
 // address=[0x14d6c50]
 // Decompiled from int __thiscall CAnimal::TakeFleeJob(CAnimal *this, bool a2)
-void  CAnimal::TakeFleeJob(bool) {
+void  CAnimal::TakeFleeJob(bool a2) {
   
   int v2; // eax
   _BYTE v4[12]; // [esp+4h] [ebp-30h] BYREF
@@ -519,7 +519,7 @@ void  CAnimal::TakeDeadJob(void) {
 
 // address=[0x14d6e70]
 // Decompiled from int __thiscall CAnimal::TakeWaitJobAndDoNothing(CAnimal *this, int a2)
-void  CAnimal::TakeWaitJobAndDoNothing(int) {
+void  CAnimal::TakeWaitJobAndDoNothing(int a2) {
   
   CAnimal::TakeWaitJob(this, 0);
   return IAnimatedEntity::RegisterForLogicUpdate(a2);
@@ -528,7 +528,7 @@ void  CAnimal::TakeWaitJobAndDoNothing(int) {
 
 // address=[0x14d6ea0]
 // Decompiled from void __thiscall CAnimal::TakeWalkJobAndWalkDir(CAnimal *this, int a2)
-void  CAnimal::TakeWalkJobAndWalkDir(int) {
+void  CAnimal::TakeWalkJobAndWalkDir(int a2) {
   
   CAnimal::TakeWalkJob(this, 0);
   CAnimal::WalkDirAndRegister(this, a2);
@@ -537,7 +537,7 @@ void  CAnimal::TakeWalkJobAndWalkDir(int) {
 
 // address=[0x14d6ed0]
 // Decompiled from int __thiscall CAnimal::TakeJob(int this, char a2)
-void  CAnimal::TakeJob(bool) {
+void  CAnimal::TakeJob(bool a2) {
   
   int result; // eax
   int v3; // [esp+4h] [ebp-10h]
@@ -585,7 +585,7 @@ void  CAnimal::TakeJob(bool) {
 
 // address=[0x14d7040]
 // Decompiled from char __thiscall CAnimal::WalkDir(CAnimal *this, char a2)
-void  CAnimal::WalkDir(int) {
+void  CAnimal::WalkDir(int a2) {
   
   int v2; // esi
   CWalking *v3; // eax
@@ -638,7 +638,7 @@ void  CAnimal::WalkDir(int) {
 
 // address=[0x14d7150]
 // Decompiled from int __thiscall CAnimal::WalkDirAndRegister(CAnimal *this, char a2)
-void  CAnimal::WalkDirAndRegister(int) {
+void  CAnimal::WalkDirAndRegister(int a2) {
   
   CAnimal::WalkDir(this, a2);
   if ( (*((_BYTE *)this + 120) & 0xFu) >= 6 )

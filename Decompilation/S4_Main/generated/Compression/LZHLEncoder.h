@@ -1,6 +1,8 @@
 #ifndef LZHLENCODER_H
 #define LZHLENCODER_H
 
+#include "defines.h"
+
 class LZHLEncoder {
 public:
     // address=[0x2f02870]
@@ -16,23 +18,23 @@ public:
     unsigned int  flush(void);
 
     // address=[0x2f2b140]
-    void  putRaw(unsigned char const *,unsigned int);
+    void  putRaw(unsigned char const * a2, unsigned int a3);
 
     // address=[0x2f2b180]
-    void  putMatch(unsigned char const *,unsigned int,unsigned int,unsigned int);
+    void  putMatch(unsigned char const * a2, unsigned int a3, unsigned int a4, unsigned int a5);
 
 private:
     // address=[0x2f2b3a0]
     void  _callStat(void);
 
     // address=[0x2f2c620]
-    void  _put(unsigned short);
+    void  _put(unsigned short a2);
 
     // address=[0x2f2c730]
-    void  _put(unsigned short,int,unsigned long);
+    void  _put(unsigned short a2, int a3, unsigned long a4);
 
     // address=[0x2f2c880]
-    void  _putBits(int,unsigned long);
+    void  _putBits(int a2, unsigned long a3);
 
 };
 

@@ -4,7 +4,7 @@
 
 // address=[0x2f02870]
 // Decompiled from unsigned int __cdecl LZHLEncoder::calcMaxBuf(unsigned int a1)
-static unsigned int __cdecl LZHLEncoder::calcMaxBuf(unsigned int) {
+unsigned int __cdecl LZHLEncoder::calcMaxBuf(unsigned int) {
   
   return a1 + (a1 >> 1) + 32;
 }
@@ -50,7 +50,7 @@ unsigned int  LZHLEncoder::flush(void) {
 
 // address=[0x2f2b140]
 // Decompiled from const unsigned __int8 *__thiscall LZHLEncoder::putRaw(LZHLEncoder *this, const unsigned __int8 *a2, unsigned int a3)
-void  LZHLEncoder::putRaw(unsigned char const *,unsigned int) {
+void  LZHLEncoder::putRaw(unsigned char const * a2, unsigned int a3) {
   
   const unsigned __int8 *result; // eax
   const unsigned __int8 *v5; // [esp+4h] [ebp-4h]
@@ -65,7 +65,7 @@ void  LZHLEncoder::putRaw(unsigned char const *,unsigned int) {
 
 // address=[0x2f2b180]
 // Decompiled from void __thiscall LZHLEncoder::putMatch(  LZHLEncoder *this,  const unsigned __int8 *a2,  unsigned int a3,  unsigned int a4,  unsigned int a5)
-void  LZHLEncoder::putMatch(unsigned char const *,unsigned int,unsigned int,unsigned int) {
+void  LZHLEncoder::putMatch(unsigned char const * a2, unsigned int a3, unsigned int a4, unsigned int a5) {
   
   unsigned int v5; // [esp+4h] [ebp-14h]
   int v6; // [esp+10h] [ebp-8h]
@@ -152,7 +152,7 @@ void  LZHLEncoder::_callStat(void) {
 
 // address=[0x2f2c620]
 // Decompiled from void __thiscall LZHLEncoder::_put(LZHLEncoder *this, unsigned __int16 a2)
-void  LZHLEncoder::_put(unsigned short) {
+void  LZHLEncoder::_put(unsigned short a2) {
   
   int v2; // ecx
   __int16 *v3; // [esp+4h] [ebp-8h]
@@ -187,7 +187,7 @@ void  LZHLEncoder::_put(unsigned short) {
 
 // address=[0x2f2c730]
 // Decompiled from void __thiscall LZHLEncoder::_put(LZHLEncoder *this, unsigned __int16 a2, int a3, unsigned int a4)
-void  LZHLEncoder::_put(unsigned short,int,unsigned long) {
+void  LZHLEncoder::_put(unsigned short a2, int a3, unsigned long a4) {
   
   int v4; // edx
   __int16 *v5; // [esp+8h] [ebp-8h]
@@ -231,7 +231,7 @@ void  LZHLEncoder::_put(unsigned short,int,unsigned long) {
 
 // address=[0x2f2c880]
 // Decompiled from LZHLEncoder *__thiscall LZHLEncoder::_putBits(LZHLEncoder *this, int a2, unsigned int a3)
-void  LZHLEncoder::_putBits(int,unsigned long) {
+void  LZHLEncoder::_putBits(int a2, unsigned long a3) {
   
   LZHLEncoder *result; // eax
 

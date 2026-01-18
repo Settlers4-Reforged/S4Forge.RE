@@ -1,6 +1,8 @@
 #ifndef T_GFX_MAP_ELEMENT_H
 #define T_GFX_MAP_ELEMENT_H
 
+#include "defines.h"
+
 class T_GFX_MAP_ELEMENT {
 public:
     // address=[0x151aa30]
@@ -13,7 +15,7 @@ public:
     int  GetOldFogging(void);
 
     // address=[0x2f90e30]
-    void  SetNewFogging(int);
+    void  SetNewFogging(int a2);
 
 };
 

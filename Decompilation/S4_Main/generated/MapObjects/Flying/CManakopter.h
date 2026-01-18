@@ -1,13 +1,15 @@
 #ifndef CMANAKOPTER_H
 #define CMANAKOPTER_H
 
+#include "defines.h"
+
 class CManakopter : public IFlyingEntity {
 public:
     // address=[0x1401120]
-    static class CPersistence * __cdecl New(std::istream &);
+    static class CPersistence * __cdecl New(std::istream & a1);
 
     // address=[0x1552980]
-     CManakopter(int,int,int,int);
+     CManakopter(int a2, int a3, int a4, int a4);
 
     // address=[0x1552c00]
     virtual struct SGfxObjectInfo *  GetGfxInfos(void);
@@ -16,25 +18,25 @@ public:
     virtual void  LogicUpdate(void);
 
     // address=[0x1553110]
-    bool  SettlerEnter(int);
+    bool  SettlerEnter(int a2);
 
     // address=[0x1553300]
     void  UnloadSettlers(void);
 
     // address=[0x15534e0]
-    virtual void  Attach(int);
+    virtual void  Attach(int a2);
 
     // address=[0x1553510]
     virtual void  Delete(void);
 
     // address=[0x1553670]
-    virtual void  Decrease(int);
+    virtual void  Decrease(int a2);
 
     // address=[0x15536c0]
-     CManakopter(std::istream &);
+     CManakopter(std::istream & a2);
 
     // address=[0x15538c0]
-    virtual void  Store(std::ostream &);
+    virtual void  Store(std::ostream & a2);
 
     // address=[0x1554b30]
     virtual  ~CManakopter(void);

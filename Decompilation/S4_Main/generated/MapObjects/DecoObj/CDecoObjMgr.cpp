@@ -4,7 +4,7 @@
 
 // address=[0x1326ec0]
 // Decompiled from unsigned __int8 *__cdecl CDecoObjMgr::GetDecoObjPtr(int a1)
-static class IDecoObject * __cdecl CDecoObjMgr::GetDecoObjPtr(int) {
+class IDecoObject * __cdecl CDecoObjMgr::GetDecoObjPtr(int a1) {
   
   unsigned __int8 *v3; // [esp+8h] [ebp-4h]
 
@@ -26,7 +26,7 @@ int  CDecoObjMgr::GetXMLVersion(void)const {
 
 // address=[0x15423a0]
 // Decompiled from unsigned int __thiscall CDecoObjMgr::Alloc(CDecoObjMgr *this, unsigned int a2)
-void *  CDecoObjMgr::Alloc(unsigned int) {
+void *  CDecoObjMgr::Alloc(unsigned int a2) {
   
   return MemoryAllocator::allocate((unsigned int *)this, a2);
 }
@@ -34,7 +34,7 @@ void *  CDecoObjMgr::Alloc(unsigned int) {
 
 // address=[0x1542400]
 // Decompiled from void __thiscall CDecoObjMgr::Dealloc(CDecoObjMgr *this, void *a2)
-void  CDecoObjMgr::Dealloc(void *) {
+void  CDecoObjMgr::Dealloc(void * a2) {
   
   MemoryAllocator::deallocate(this, a2);
 }
@@ -42,7 +42,7 @@ void  CDecoObjMgr::Dealloc(void *) {
 
 // address=[0x1542430]
 // Decompiled from int __thiscall CDecoObjMgr::GetTotalBuildingRings(CDecoObjMgr *this, int a2)
-int  CDecoObjMgr::GetTotalBuildingRings(int) {
+int  CDecoObjMgr::GetTotalBuildingRings(int a2) {
   
   return *((unsigned __int8 *)this + 8 * a2 + 38448);
 }
@@ -128,7 +128,7 @@ void  CDecoObjMgr::LoadInfo(void) {
 
 // address=[0x1542640]
 // Decompiled from char __thiscall CDecoObjMgr::IsAddDecoObjOk(CDecoObjMgr *this, int a2, int a3, int a4, bool a5, int a6)
-bool  CDecoObjMgr::IsAddDecoObjOk(int,int,int,bool,int) {
+bool  CDecoObjMgr::IsAddDecoObjOk(int a2, int a3, int a4, bool a5, int a6) {
   
   int v7; // [esp+0h] [ebp-3Ch]
   int v8; // [esp+4h] [ebp-38h]
@@ -203,7 +203,7 @@ bool  CDecoObjMgr::IsAddDecoObjOk(int,int,int,bool,int) {
 
 // address=[0x15428b0]
 // Decompiled from int __thiscall CDecoObjMgr::AddDecoObj(CDecoObjMgr *this, int a2, int a3, int a4, int a5, int a6)
-int  CDecoObjMgr::AddDecoObj(int,int,int,int,enum CDecoObjMgr::TGROWN_STATE) {
+int  CDecoObjMgr::AddDecoObj(int a2, int a3, int a4, int a5, enum CDecoObjMgr::TGROWN_STATE a6) {
   
   int v7; // [esp+4h] [ebp-8h]
 
@@ -225,7 +225,7 @@ int  CDecoObjMgr::AddDecoObj(int,int,int,int,enum CDecoObjMgr::TGROWN_STATE) {
 
 // address=[0x1542970]
 // Decompiled from int __thiscall CDecoObjMgr::AddReef(CDecoObjMgr *this, int a2, int a3, int a4, int a5, int a6)
-int  CDecoObjMgr::AddReef(int,int,int,int,enum CDecoObjMgr::TGROWN_STATE) {
+int  CDecoObjMgr::AddReef(int a2, int a3, int a4, int a5, enum CDecoObjMgr::TGROWN_STATE a6) {
   
   int v7; // [esp+0h] [ebp-14h]
   int v8; // [esp+4h] [ebp-10h]
@@ -260,7 +260,7 @@ int  CDecoObjMgr::AddReef(int,int,int,int,enum CDecoObjMgr::TGROWN_STATE) {
 
 // address=[0x1542a80]
 // Decompiled from int __stdcall CDecoObjMgr::AddDecoObjWithoutFlags(int a1, int a2, int a3, unsigned int a4, int a5)
-int  CDecoObjMgr::AddDecoObjWithoutFlags(int,int,int,int,enum CDecoObjMgr::TGROWN_STATE) {
+int  CDecoObjMgr::AddDecoObjWithoutFlags(int a2, int a3, int a4, int a5, enum CDecoObjMgr::TGROWN_STATE a6) {
   
   if ( !(unsigned __int8)CWorldManager::InWorld(a1, a2)
     && BBSupportDbgReport(2, "MapObjects\\DecoObj\\DecoObjMgr.cpp", 553, "g_cWorld.InWorld( _iX, _iY )") == 1 )
@@ -283,7 +283,7 @@ int  CDecoObjMgr::AddDecoObjWithoutFlags(int,int,int,int,enum CDecoObjMgr::TGROW
 
 // address=[0x1542b50]
 // Decompiled from int __stdcall CDecoObjMgr::AddLoadedDecoObj(int a1, int a2, int a3, unsigned int a4, int a5, char a6, int a7)
-int  CDecoObjMgr::AddLoadedDecoObj(int,int,int,int,int,bool,std::istream *) {
+int  CDecoObjMgr::AddLoadedDecoObj(int a2, int a3, int a4, int a5, int a6, bool a7, std::istream * a8) {
   
   if ( (a3 <= 0 || a3 >= 291)
     && BBSupportDbgReport(2, "MapObjects\\DecoObj\\DecoObjMgr.cpp", 584, "_iType>0 && _iType<OBJECT_MAX") == 1 )
@@ -304,7 +304,7 @@ int  CDecoObjMgr::AddLoadedDecoObj(int,int,int,int,int,bool,std::istream *) {
 
 // address=[0x1542c20]
 // Decompiled from void __thiscall CDecoObjMgr::Delete(CDecoObjMgr *this, int a2)
-void  CDecoObjMgr::Delete(int) {
+void  CDecoObjMgr::Delete(int a2) {
   
   IDecoObject *DecoObjPtr; // eax
   int v3; // eax
@@ -341,7 +341,7 @@ void  CDecoObjMgr::Delete(int) {
 
 // address=[0x1542cf0]
 // Decompiled from void __thiscall CDecoObjMgr::DeleteWithoutFlags(CDecoObjMgr *this, int a2)
-void  CDecoObjMgr::DeleteWithoutFlags(int) {
+void  CDecoObjMgr::DeleteWithoutFlags(int a2) {
   
   IDecoObject *DecoObjPtr; // [esp+8h] [ebp-4h]
 
@@ -366,7 +366,7 @@ void  CDecoObjMgr::DeleteWithoutFlags(int) {
 
 // address=[0x1542da0]
 // Decompiled from int __thiscall CDecoObjMgr::RemoveDecoObject(CDecoObjMgr *this, int a2, int a3, bool a4)
-int  CDecoObjMgr::RemoveDecoObject(int,int,bool) {
+int  CDecoObjMgr::RemoveDecoObject(int a2, int a3, bool a4) {
   
   int v4; // eax
   int v7; // [esp+4h] [ebp-Ch]
@@ -407,7 +407,7 @@ int  CDecoObjMgr::RemoveDecoObject(int,int,bool) {
 
 // address=[0x1542ed0]
 // Decompiled from int __thiscall CDecoObjMgr::RemoveReef(CDecoObjMgr *this, int a2, int a3, bool a4)
-int  CDecoObjMgr::RemoveReef(int,int,bool) {
+int  CDecoObjMgr::RemoveReef(int a2, int a3, bool a4) {
   
   int v4; // eax
   int v7; // [esp+4h] [ebp-Ch]
@@ -448,7 +448,7 @@ int  CDecoObjMgr::RemoveReef(int,int,bool) {
 
 // address=[0x1543000]
 // Decompiled from int __thiscall CDecoObjMgr::GetDecoObjectFlagsInfo(CDecoObjMgr *this, int a2, bool *a3, int *a4, int *a5)
-void  CDecoObjMgr::GetDecoObjectFlagsInfo(int,bool &,int &,int &) {
+void  CDecoObjMgr::GetDecoObjectFlagsInfo(int a2, bool & a3, int & a4, int & a5) {
   
   int result; // eax
 
@@ -467,7 +467,7 @@ void  CDecoObjMgr::GetDecoObjectFlagsInfo(int,bool &,int &,int &) {
 
 // address=[0x1543080]
 // Decompiled from int __thiscall CDecoObjMgr::SetFlagsForObject(CDecoObjMgr *this, int a2, int a3, int a4, bool a5)
-void  CDecoObjMgr::SetFlagsForObject(int,int,int,bool) {
+void  CDecoObjMgr::SetFlagsForObject(int a2, int a3, int a4, bool a5) {
   
   int result; // eax
   int v6; // [esp+0h] [ebp-48h]
@@ -614,7 +614,7 @@ void  CDecoObjMgr::SetFlagsForObject(int,int,int,bool) {
 
 // address=[0x15434b0]
 // Decompiled from int __thiscall CDecoObjMgr::ClearFlagsForObject(CDecoObjMgr *this, int a2, int a3, int a4, bool a5)
-void  CDecoObjMgr::ClearFlagsForObject(int,int,int,bool) {
+void  CDecoObjMgr::ClearFlagsForObject(int a2, int a3, int a4, bool a5) {
   
   int result; // eax
   int v6; // [esp+0h] [ebp-3Ch]
@@ -743,7 +743,7 @@ void  CDecoObjMgr::ClearFlagsForObject(int,int,int,bool) {
 
 // address=[0x15438a0]
 // Decompiled from unsigned int __thiscall CDecoObjMgr::GetObjectType(CDecoObjMgr *this, int a2, int a3, char a4)
-int  CDecoObjMgr::GetObjectType(int,int,int) {
+int  CDecoObjMgr::GetObjectType(int a2, int a3, int a4) {
   
   const char *v5; // [esp+4h] [ebp-18h]
   const char *v6; // [esp+8h] [ebp-14h]
@@ -805,7 +805,7 @@ int  CDecoObjMgr::GetObjectType(int,int,int) {
 
 // address=[0x1543a60]
 // Decompiled from int __thiscall CDecoObjMgr::ChangeToStaticInstance(CDecoObjMgr *this, int a2, int a3, int a4, int a5)
-void  CDecoObjMgr::ChangeToStaticInstance(int,int,int,int) {
+void  CDecoObjMgr::ChangeToStaticInstance(int a2, int a3, int a4, int a5) {
   
   IDecoObject *v5; // eax
   unsigned __int16 *v6; // eax
@@ -864,7 +864,7 @@ void  CDecoObjMgr::ChangeToStaticInstance(int,int,int,int) {
 
 // address=[0x1543c20]
 // Decompiled from int __stdcall CDecoObjMgr::ConvertGreenToDark(int a1)
-int  CDecoObjMgr::ConvertGreenToDark(int)const {
+int  CDecoObjMgr::ConvertGreenToDark(int a1)const {
   
   return 23;
 }
@@ -872,7 +872,7 @@ int  CDecoObjMgr::ConvertGreenToDark(int)const {
 
 // address=[0x1543c40]
 // Decompiled from int __stdcall CDecoObjMgr::ConvertDarkToGreen(int a1)
-int  CDecoObjMgr::ConvertDarkToGreen(int)const {
+int  CDecoObjMgr::ConvertDarkToGreen(int a1)const {
   
   return 23;
 }
@@ -880,7 +880,7 @@ int  CDecoObjMgr::ConvertDarkToGreen(int)const {
 
 // address=[0x1543c60]
 // Decompiled from int __stdcall CDecoObjMgr::GetThisDecoObj(int a1, int a2, int a3, int *a4, int *a5)
-int  CDecoObjMgr::GetThisDecoObj(int,int,int,int &,int &) {
+int  CDecoObjMgr::GetThisDecoObj(int a1, int a2, int a3, int & a4, int & a5) {
   
   unsigned __int16 *DecoObjPtr; // eax
   int v7; // [esp+4h] [ebp-14h]
@@ -934,7 +934,7 @@ int  CDecoObjMgr::GetThisDecoObj(int,int,int,int &,int &) {
 
 // address=[0x1543dd0]
 // Decompiled from bool __thiscall CDecoObjMgr::IsFlower(CDecoObjMgr *this, int a2)
-bool  CDecoObjMgr::IsFlower(int) {
+bool  CDecoObjMgr::IsFlower(int a2) {
   
   return a2 == 184 || a2 == 185 || a2 == 186 || a2 == 187 || a2 == 188;
 }
@@ -942,7 +942,7 @@ bool  CDecoObjMgr::IsFlower(int) {
 
 // address=[0x1543e20]
 // Decompiled from bool __thiscall CDecoObjMgr::IsGeologistSign(CDecoObjMgr *this, int a2)
-bool  CDecoObjMgr::IsGeologistSign(int) {
+bool  CDecoObjMgr::IsGeologistSign(int a2) {
   
   bool result; // al
   int v3; // [esp+4h] [ebp-8h]
@@ -965,7 +965,7 @@ bool  CDecoObjMgr::IsGeologistSign(int) {
 
 // address=[0x1543e90]
 // Decompiled from char __thiscall CDecoObjMgr::Rod(CDecoObjMgr *this, int a2, bool a3)
-void  CDecoObjMgr::Rod(int,bool) {
+void  CDecoObjMgr::Rod(int a2, bool a3) {
   
   int FreeSlot; // eax
   int v4; // eax
@@ -1310,7 +1310,7 @@ void  CDecoObjMgr::Load(class S4::CMapFile &) {
 
 // address=[0x1544b00]
 // Decompiled from int __thiscall CDecoObjMgr::Create(_BYTE *this, int a2, int a3, unsigned int a4, int a5, int a6, int a7, int a8)
-int  CDecoObjMgr::Create(int,int,int,int,enum CDecoObjMgr::TGROWN_STATE,int,std::istream *) {
+int  CDecoObjMgr::Create(int a2, int a3, int a4, int a5, enum CDecoObjMgr::TGROWN_STATE a6, int a7, std::istream * a8) {
   
   IDecoObject *DecoObjPtr; // eax
   int v9; // eax

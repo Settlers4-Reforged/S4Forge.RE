@@ -4,7 +4,7 @@
 
 // address=[0x2f41840]
 // Decompiled from CRefGrpEntry *__thiscall CRefGrpEntry::CRefGrpEntry(CRefGrpEntry *this, int a2, struct CGrpReserveEntry *a3)
- CRefGrpEntry::CRefGrpEntry(int,class CGrpReserveEntry *) {
+ CRefGrpEntry::CRefGrpEntry(int a2, class CGrpReserveEntry * a3) {
   
   CDynListEntry::CDynListEntry(this);
   *(_DWORD *)this = &CRefGrpEntry::_vftable_;

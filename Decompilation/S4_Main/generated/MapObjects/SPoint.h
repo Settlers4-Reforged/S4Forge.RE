@@ -1,16 +1,18 @@
 #ifndef SPOINT_H
 #define SPOINT_H
 
+#include "defines.h"
+
 class SPoint {
 public:
     // address=[0x15ddb00]
-    struct SPoint &  operator=(struct SPoint8 const &);
+    struct SPoint &  operator=(struct SPoint8 const & a2);
 
     // address=[0x15ddb40]
-    bool  operator==(struct SPoint const &)const;
+    bool  operator==(struct SPoint const & a2)const;
 
     // address=[0x15ddbb0]
-    int  operator*(struct SPoint const &)const;
+    int  operator*(struct SPoint const & a2)const;
 
     // address=[0x15ddce0]
     int  X(void)const;

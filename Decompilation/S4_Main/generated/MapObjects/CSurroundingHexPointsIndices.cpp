@@ -4,7 +4,7 @@
 
 // address=[0x1470630]
 // Decompiled from int __thiscall CSurroundingHexPointsIndices::operator[](_DWORD *this, int a2)
-int  CSurroundingHexPointsIndices::operator[](int)const {
+int  CSurroundingHexPointsIndices::operator[](int a2)const {
   
   return this[a2];
 }
@@ -12,7 +12,7 @@ int  CSurroundingHexPointsIndices::operator[](int)const {
 
 // address=[0x15dc440]
 // Decompiled from void __thiscall CSurroundingHexPointsIndices::Init(CSurroundingHexPointsIndices *this, int a2)
-void  CSurroundingHexPointsIndices::Init(int) {
+void  CSurroundingHexPointsIndices::Init(int a2) {
   
   int v3; // [esp+4h] [ebp-Ch]
   int i; // [esp+Ch] [ebp-4h]

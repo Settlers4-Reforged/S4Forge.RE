@@ -4,7 +4,7 @@
 
 // address=[0x1315820]
 // Decompiled from char __thiscall CGenericVehicleIterator::Init(CGenericVehicleIterator *this, int a2, int a3, int a4)
-bool  CGenericVehicleIterator::Init(int,int,int) {
+bool  CGenericVehicleIterator::Init(int a2, int a3, int a4) {
   
   CVehicleIteratorBase::Init((CGenericVehicleIterator *)((char *)this + 20), 0);
   if ( CPlayerIterator::Init(this, a2) )

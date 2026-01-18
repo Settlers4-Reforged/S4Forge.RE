@@ -42,7 +42,7 @@ void  CAIGoal::Maximum(void) {
 
 // address=[0x1314f00]
 // Decompiled from int __thiscall CAIGoal::Set(CAIGoal *this, int a2, int a3, int a4)
-void  CAIGoal::Set(int,int,int) {
+void  CAIGoal::Set(int a2, int a3, int a4) {
   
   int result; // eax
 

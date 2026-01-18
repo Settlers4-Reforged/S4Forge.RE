@@ -4,7 +4,7 @@
 
 // address=[0x130d470]
 // Decompiled from CAIEnemySettlerInSectorIterator *__thiscall CAIEnemySettlerInSectorIterator::CAIEnemySettlerInSectorIterator(  CAIEnemySettlerInSectorIterator *this,  int a2,  int a3,  int a4)
- CAIEnemySettlerInSectorIterator::CAIEnemySettlerInSectorIterator(int,int,int) {
+ CAIEnemySettlerInSectorIterator::CAIEnemySettlerInSectorIterator(int a2, int a3, int a4) {
   
   int v5; // [esp+0h] [ebp-Ch]
   int v6; // [esp+4h] [ebp-8h]
@@ -54,7 +54,7 @@
 
 // address=[0x130d5e0]
 // Decompiled from char __thiscall CAIEnemySettlerInSectorIterator::NextEnemySettler(_DWORD *this, int *a2)
-bool  CAIEnemySettlerInSectorIterator::NextEnemySettler(int &) {
+bool  CAIEnemySettlerInSectorIterator::NextEnemySettler(int & a2) {
   
   int v3; // [esp+4h] [ebp-28h]
   int v4; // [esp+8h] [ebp-24h]

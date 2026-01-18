@@ -4,7 +4,7 @@
 
 // address=[0x2f2c9d0]
 // Decompiled from _DWORD *__thiscall AdvXMLParser::GenerateContext::GenerateContext(_DWORD *this, int a2, const char *a3, int a4)
- AdvXMLParser::GenerateContext::GenerateContext(std::string &,char const *,unsigned long) {
+ AdvXMLParser::GenerateContext::GenerateContext(std::string & a2, char const * a3, unsigned long a4) {
   
   const char *v5; // [esp+0h] [ebp-8h]
 
@@ -24,7 +24,7 @@
 
 // address=[0x2f2ca30]
 // Decompiled from _DWORD *__thiscall AdvXMLParser::GenerateContext::GenerateContext_0(_DWORD *this, int a2)
- AdvXMLParser::GenerateContext::GenerateContext(class AdvXMLParser::GenerateContext const &) {
+ AdvXMLParser::GenerateContext::GenerateContext(class AdvXMLParser::GenerateContext const & a2) {
   
   *this = *(_DWORD *)a2;
   this[1] = *(_DWORD *)(a2 + 4);
@@ -38,7 +38,7 @@
 
 // address=[0x2f2ca90]
 // Decompiled from _DWORD *__thiscall AdvXMLParser::GenerateContext::operator_(_DWORD *this, int a2)
-void  AdvXMLParser::GenerateContext::operator=(class AdvXMLParser::GenerateContext const &) {
+void  AdvXMLParser::GenerateContext::operator=(class AdvXMLParser::GenerateContext const & a2) {
   
   _DWORD *result; // eax
 
@@ -128,7 +128,7 @@ void  AdvXMLParser::GenerateContext::GenerateNewLine(void) {
 
 // address=[0x2f2d730]
 // Decompiled from int __thiscall AdvXMLParser::GenerateContext::operator+=(_BYTE *this, int a2)
-void  AdvXMLParser::GenerateContext::operator+=(std::string const &) {
+void  AdvXMLParser::GenerateContext::operator+=(std::string const & a2) {
   
   this[17] = 0;
   return std::string::operator+=(a2);
@@ -137,7 +137,7 @@ void  AdvXMLParser::GenerateContext::operator+=(std::string const &) {
 
 // address=[0x2f2d760]
 // Decompiled from int __thiscall AdvXMLParser::GenerateContext::operator+=(_BYTE *this, char a2)
-void  AdvXMLParser::GenerateContext::operator+=(char) {
+void  AdvXMLParser::GenerateContext::operator+=(char a2) {
   
   this[17] = 0;
   return std::string::operator+=(a2);
@@ -146,7 +146,7 @@ void  AdvXMLParser::GenerateContext::operator+=(char) {
 
 // address=[0x2f2d790]
 // Decompiled from int __thiscall AdvXMLParser::GenerateContext::operator+=(_BYTE *this, char *Str)
-void  AdvXMLParser::GenerateContext::operator+=(char const *) {
+void  AdvXMLParser::GenerateContext::operator+=(char const * Str) {
   
   this[17] = 0;
   return std::string::operator+=(Str);

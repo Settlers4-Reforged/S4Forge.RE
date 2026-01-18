@@ -4,7 +4,7 @@
 
 // address=[0x130e490]
 // Decompiled from unsigned __int8 *__stdcall CSettlerMgr::operator[](int a1)
-class CSettler &  CSettlerMgr::operator[](int) {
+class CSettler &  CSettlerMgr::operator[](int a1) {
   
   unsigned __int8 *v2; // [esp+4h] [ebp-4h]
 
@@ -33,7 +33,7 @@ class CSettler &  CSettlerMgr::operator[](int) {
 
 // address=[0x130ecc0]
 // Decompiled from int __thiscall CSettlerMgr::GetNumberOfSettlers(CSettlerMgr *this, int a2, int a3)
-int  CSettlerMgr::GetNumberOfSettlers(int,int)const {
+int  CSettlerMgr::GetNumberOfSettlers(int a2, int a3)const {
   
   if ( (a2 < 1 || a2 > 8)
     && BBSupportDbgReport(
@@ -59,7 +59,7 @@ int  CSettlerMgr::GetNumberOfSettlers(int,int)const {
 
 // address=[0x130edf0]
 // Decompiled from CSettler *__thiscall CSettlerMgr::GetSettlerPtr(struct CSettlerMgr *this, int a1)
-class CSettler *  CSettlerMgr::GetSettlerPtr(int) {
+class CSettler *  CSettlerMgr::GetSettlerPtr(int a1) {
   
   CSettler *v4; // [esp+Ch] [ebp-4h]
 
@@ -73,7 +73,7 @@ class CSettler *  CSettlerMgr::GetSettlerPtr(int) {
 
 // address=[0x1311cd0]
 // Decompiled from int __thiscall CSettlerMgr::GetNumberOfOfferedSettlers(CSettlerMgr *this, int a2, int a3)
-int  CSettlerMgr::GetNumberOfOfferedSettlers(int,int)const {
+int  CSettlerMgr::GetNumberOfOfferedSettlers(int a2, int a3)const {
   
   if ( (a2 < 1 || a2 > 8)
     && BBSupportDbgReport(
@@ -99,7 +99,7 @@ int  CSettlerMgr::GetNumberOfOfferedSettlers(int,int)const {
 
 // address=[0x1439bb0]
 // Decompiled from CSettlerMgr::SSettlerInfos *__cdecl CSettlerMgr::GetSettlerInfo(int race, int type)
-static struct CSettlerMgr::SSettlerInfos const & __cdecl CSettlerMgr::GetSettlerInfo(int,int) {
+struct CSettlerMgr::SSettlerInfos const & __cdecl CSettlerMgr::GetSettlerInfo(int race, int type) {
   
   return &CSettlerMgr::m_vSettlerInfos[70 * race + type];
 }
@@ -107,7 +107,7 @@ static struct CSettlerMgr::SSettlerInfos const & __cdecl CSettlerMgr::GetSettler
 
 // address=[0x1439ed0]
 // Decompiled from int __cdecl CSettlerMgr::SettlerWarriorType(int a1)
-static int __cdecl CSettlerMgr::SettlerWarriorType(int) {
+int __cdecl CSettlerMgr::SettlerWarriorType(int a1) {
   
   if ( !CSettlerMgr::m_uSettlerWarriorTypes[29]
     && BBSupportDbgReport(
@@ -196,7 +196,7 @@ void  CSettlerMgr::Clear(void) {
 
 // address=[0x15804a0]
 // Decompiled from struct ISettlerRole *__thiscall CSettlerMgr::CreateSettlerRole(CSettlerMgr *this, unsigned int race, int type)
-class ISettlerRole *  CSettlerMgr::CreateSettlerRole(int,int) {
+class ISettlerRole *  CSettlerMgr::CreateSettlerRole(int race, int type) {
   
   struct ISettlerRole *result; // eax MAPDST
 
@@ -366,7 +366,7 @@ class ISettlerRole *  CSettlerMgr::CreateSettlerRole(int,int) {
 
 // address=[0x1580c20]
 // Decompiled from int __cdecl CSettlerMgr::LoadSettlerRole(int a1, int a2)
-static class ISettlerRole * __cdecl CSettlerMgr::LoadSettlerRole(std::istream &,int) {
+class ISettlerRole * __cdecl CSettlerMgr::LoadSettlerRole(std::istream & a1, int a2) {
   
   int result; // eax
 
@@ -453,7 +453,7 @@ static class ISettlerRole * __cdecl CSettlerMgr::LoadSettlerRole(std::istream &,
 
 // address=[0x1580eb0]
 // Decompiled from void __thiscall CSettlerMgr::LoadSettlerData(CSettlerMgr *this, struct S4::CMapFile *a2, unsigned __int16 a3)
-void  CSettlerMgr::LoadSettlerData(class S4::CMapFile &,int) {
+void  CSettlerMgr::LoadSettlerData(class S4::CMapFile & a2, int a3) {
   
   char *v4; // [esp+10h] [ebp-28h]
   int v5; // [esp+14h] [ebp-24h]
@@ -489,7 +489,7 @@ void  CSettlerMgr::LoadSettlerData(class S4::CMapFile &,int) {
 
 // address=[0x1580fe0]
 // Decompiled from void __thiscall CSettlerMgr::LoadInfo(struct CSettlerMgr *this, char isMP)
-void  CSettlerMgr::LoadInfo(bool) {
+void  CSettlerMgr::LoadInfo(bool isMP) {
   
   int v2; // eax
   int v3; // eax
@@ -1040,7 +1040,7 @@ void  CSettlerMgr::LoadInfo(bool) {
 
 // address=[0x1582460]
 // Decompiled from int __thiscall CSettlerMgr::AddSettler(CSettlerMgr *this, int posX, int posY, int player, int settlerType, int a6)
-int  CSettlerMgr::AddSettler(int,int,int,int,int) {
+int  CSettlerMgr::AddSettler(int posX, int posY, int player, int settlerType, int a6) {
   
   CPlayerInfo *playerInfo; // eax
   CSettler *getSettler; // eax
@@ -1144,7 +1144,7 @@ int  CSettlerMgr::AddSettler(int,int,int,int,int) {
 
 // address=[0x1582720]
 // Decompiled from bool __thiscall CSettlerMgr::IsAddSettlerOk(CSettlerMgr *this, int a2, int a3, int a4)
-bool  CSettlerMgr::IsAddSettlerOk(int,int,int) {
+bool  CSettlerMgr::IsAddSettlerOk(int a2, int a3, int a4) {
   
   int v5; // [esp+4h] [ebp-4h]
 
@@ -1161,7 +1161,7 @@ bool  CSettlerMgr::IsAddSettlerOk(int,int,int) {
 
 // address=[0x15827b0]
 // Decompiled from int __thiscall CSettlerMgr::AddSettlers(CSettlerMgr *this, int a2, int a3, int a4, int a5, int a6, int a7)
-void  CSettlerMgr::AddSettlers(int,int,int,int,int,int) {
+void  CSettlerMgr::AddSettlers(int a2, int a3, int a4, int a5, int a6, int a7) {
   
   int result; // eax
   int v9; // [esp+10h] [ebp-14h]
@@ -1213,7 +1213,7 @@ void  CSettlerMgr::AddSettlers(int,int,int,int,int,int) {
 
 // address=[0x1582970]
 // Decompiled from int __thiscall CSettlerMgr::AddGuardSettler(CSettlerMgr *this, int a2, int a3, int a4)
-int  CSettlerMgr::AddGuardSettler(int,int,int) {
+int  CSettlerMgr::AddGuardSettler(int a2, int a3, int a4) {
   
   int v5; // [esp-8h] [ebp-54h] BYREF
   int v6; // [esp-4h] [ebp-50h]
@@ -1290,7 +1290,7 @@ int  CSettlerMgr::AddGuardSettler(int,int,int) {
 
 // address=[0x1582b30]
 // Decompiled from int __thiscall CSettlerMgr::DeleteSettler(CSettlerMgr *this, int a2)
-void  CSettlerMgr::DeleteSettler(int) {
+void  CSettlerMgr::DeleteSettler(int a2) {
   
   unsigned __int8 *v2; // eax
 
@@ -1319,7 +1319,7 @@ void  CSettlerMgr::DeleteSettler(int) {
 
 // address=[0x1582bc0]
 // Decompiled from char __thiscall CSettlerMgr::SearchSpaceForSettler(CSettlerMgr *this, int a2, int a3, int a4)
-bool  CSettlerMgr::SearchSpaceForSettler(int,int,int) {
+bool  CSettlerMgr::SearchSpaceForSettler(int a2, int a3, int a4) {
   
   int v4; // eax
   int v5; // eax
@@ -1371,7 +1371,7 @@ bool  CSettlerMgr::SearchSpaceForSettler(int,int,int) {
 
 // address=[0x1582d50]
 // Decompiled from char __thiscall CSettlerMgr::SearchFreePositionInSector(CSettlerMgr *this, int *a2, int *a3, int a4, int a5)
-bool  CSettlerMgr::SearchFreePositionInSector(int &,int &,int,int) {
+bool  CSettlerMgr::SearchFreePositionInSector(int & a2, int & a3, int a4, int a5) {
   
   _DWORD v6[6]; // [esp+0h] [ebp-24h] BYREF
   int v7; // [esp+18h] [ebp-Ch] BYREF
@@ -1407,7 +1407,7 @@ bool  CSettlerMgr::SearchFreePositionInSector(int &,int &,int,int) {
 
 // address=[0x1582e60]
 // Decompiled from char __thiscall CSettlerMgr::SearchFreePositionInEcoSector(CSettlerMgr *this, int *a2, int *a3, int a4)
-bool  CSettlerMgr::SearchFreePositionInEcoSector(int &,int &,int) {
+bool  CSettlerMgr::SearchFreePositionInEcoSector(int & a2, int & a3, int a4) {
   
   _DWORD v5[6]; // [esp+0h] [ebp-24h] BYREF
   int v6; // [esp+18h] [ebp-Ch] BYREF
@@ -1435,7 +1435,7 @@ bool  CSettlerMgr::SearchFreePositionInEcoSector(int &,int &,int) {
 
 // address=[0x1582f20]
 // Decompiled from int __thiscall CSettlerMgr::GetFirstSettlerId(CSettlerMgr *this, int a2, int a3)
-int  CSettlerMgr::GetFirstSettlerId(int,int)const {
+int  CSettlerMgr::GetFirstSettlerId(int a2, int a3)const {
   
   if ( (a2 <= 0 || a2 >= 9)
     && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 792, "_iOwnerId>0 && _iOwnerId<PLAYER_MAX") == 1 )
@@ -1453,7 +1453,7 @@ int  CSettlerMgr::GetFirstSettlerId(int,int)const {
 
 // address=[0x1582fa0]
 // Decompiled from int __thiscall CSettlerMgr::OrderWarrior(CSettlerMgr *this, int a2, int a3, unsigned int a4)
-int  CSettlerMgr::OrderWarrior(int,int,int) {
+int  CSettlerMgr::OrderWarrior(int a2, int a3, int a4) {
   
   int v4; // eax
   int v5; // eax
@@ -1530,7 +1530,7 @@ int  CSettlerMgr::OrderWarrior(int,int,int) {
 
 // address=[0x1583190]
 // Decompiled from int __thiscall CSettlerMgr::OrderAIWarrior(CSettlerMgr *this, int a2, int a3)
-int  CSettlerMgr::OrderAIWarrior(int,int) {
+int  CSettlerMgr::OrderAIWarrior(int a2, int a3) {
   
   int v4; // eax
   int v5; // eax
@@ -1602,7 +1602,7 @@ LABEL_18:
 
 // address=[0x1583370]
 // Decompiled from int __thiscall CSettlerMgr::OrderSpecialist(CSettlerMgr *this, int a2, int a3)
-int  CSettlerMgr::OrderSpecialist(int,int) {
+int  CSettlerMgr::OrderSpecialist(int a2, int a3) {
   
   int v4; // eax
   int v5; // eax
@@ -1690,7 +1690,7 @@ int  CSettlerMgr::OrderSpecialist(int,int) {
 
 // address=[0x15835e0]
 // Decompiled from int __thiscall CSettlerMgr::OrderWarriorToTower(CSettlerMgr *this, int a2, int a3)
-void  CSettlerMgr::OrderWarriorToTower(int,int) {
+void  CSettlerMgr::OrderWarriorToTower(int a2, int a3) {
   
   int v3; // esi
   _BYTE v5[24]; // [esp+8h] [ebp-34h] BYREF
@@ -1725,7 +1725,7 @@ void  CSettlerMgr::OrderWarriorToTower(int,int) {
 
 // address=[0x1583730]
 // Decompiled from _DWORD *__cdecl CSettlerMgr::FillSettlerAmount(void **a1, char a2, char a3)
-static void __cdecl CSettlerMgr::FillSettlerAmount(class CInfoExchange *,bool,bool) {
+void __cdecl CSettlerMgr::FillSettlerAmount(class CInfoExchange * a1, bool a2, bool a3) {
   
   _DWORD *result; // eax
   int v4; // [esp+8h] [ebp-64h]
@@ -1894,7 +1894,7 @@ static void __cdecl CSettlerMgr::FillSettlerAmount(class CInfoExchange *,bool,bo
 
 // address=[0x1583c60]
 // Decompiled from _DWORD *__cdecl CSettlerMgr::FillFreeCarrier(void **a1, char a2)
-static void __cdecl CSettlerMgr::FillFreeCarrier(class CInfoExchange *,bool,bool) {
+void __cdecl CSettlerMgr::FillFreeCarrier(class CInfoExchange * a1, bool a2, bool a3) {
   
   int LocalPlayerId; // [esp+4h] [ebp-40h]
   unsigned int v4; // [esp+8h] [ebp-3Ch]
@@ -1969,7 +1969,7 @@ static void __cdecl CSettlerMgr::FillFreeCarrier(class CInfoExchange *,bool,bool
 
 // address=[0x1583f30]
 // Decompiled from _DWORD *__cdecl CSettlerMgr::FillSpecialistProduction(void **a1, char a2)
-static void __cdecl CSettlerMgr::FillSpecialistProduction(class CInfoExchange *,bool,bool) {
+void __cdecl CSettlerMgr::FillSpecialistProduction(class CInfoExchange * a1, bool a2, bool a3) {
   
   int v2; // esi
   int v3; // eax
@@ -2064,7 +2064,7 @@ static void __cdecl CSettlerMgr::FillSpecialistProduction(class CInfoExchange *,
 
 // address=[0x1584240]
 // Decompiled from _DWORD *__cdecl CSettlerMgr::FillSoldierMenu(void **a1, char a2)
-static void __cdecl CSettlerMgr::FillSoldierMenu(class CInfoExchange *,bool,bool) {
+void __cdecl CSettlerMgr::FillSoldierMenu(class CInfoExchange * a1, bool a2, bool a3) {
   
   int v3; // [esp+4h] [ebp-64h]
   int v4; // [esp+8h] [ebp-60h]
@@ -2180,7 +2180,7 @@ static void __cdecl CSettlerMgr::FillSoldierMenu(class CInfoExchange *,bool,bool
 
 // address=[0x15845d0]
 // Decompiled from _DWORD *__cdecl CSettlerMgr::FillSpecialistMenu(void **a1, char a2)
-static void __cdecl CSettlerMgr::FillSpecialistMenu(class CInfoExchange *,bool,bool) {
+void __cdecl CSettlerMgr::FillSpecialistMenu(class CInfoExchange * a1, bool a2, bool a3) {
   
   unsigned __int16 *v2; // eax
   int v4; // [esp+4h] [ebp-60h]
@@ -2425,7 +2425,7 @@ void  CSettlerMgr::Load(class S4::CMapFile &) {
 
 // address=[0x1584f70]
 // Decompiled from void __thiscall CSettlerMgr::IncNumberOfSettler(CSettlerMgr *this, int a2, int a3)
-void  CSettlerMgr::IncNumberOfSettler(int,int) {
+void  CSettlerMgr::IncNumberOfSettler(int a2, int a3) {
   
   if ( (a2 < 1 || a2 > 8)
     && BBSupportDbgReport(
@@ -2452,7 +2452,7 @@ void  CSettlerMgr::IncNumberOfSettler(int,int) {
 
 // address=[0x1585020]
 // Decompiled from void __thiscall CSettlerMgr::DecNumberOfSettler(CSettlerMgr *this, int a2, int a3)
-void  CSettlerMgr::DecNumberOfSettler(int,int) {
+void  CSettlerMgr::DecNumberOfSettler(int a2, int a3) {
   
   if ( (a2 < 1 || a2 > 8)
     && BBSupportDbgReport(
@@ -2489,7 +2489,7 @@ void  CSettlerMgr::DecNumberOfSettler(int,int) {
 
 // address=[0x15889c0]
 // Decompiled from unsigned __int8 *__thiscall CSettlerMgr::Settler(CSettlerMgr *this, int a2)
-class CSettler &  CSettlerMgr::Settler(int) {
+class CSettler &  CSettlerMgr::Settler(int a2) {
   
   unsigned __int8 *v3; // [esp+4h] [ebp-4h]
 
@@ -2518,7 +2518,7 @@ class CSettler &  CSettlerMgr::Settler(int) {
 
 // address=[0x1592200]
 // Decompiled from int __cdecl CSettlerMgr::GetSquadLeaderBonus256(int a1)
-static int __cdecl CSettlerMgr::GetSquadLeaderBonus256(int) {
+int __cdecl CSettlerMgr::GetSquadLeaderBonus256(int a1) {
   
   return CSettlerMgr::m_iSquadLeaderBoni256[a1];
 }
@@ -2526,7 +2526,7 @@ static int __cdecl CSettlerMgr::GetSquadLeaderBonus256(int) {
 
 // address=[0x15a7b80]
 // Decompiled from int __cdecl CSettlerMgr::SettlerWarriorLevel(int a1)
-static int __cdecl CSettlerMgr::SettlerWarriorLevel(int) {
+int __cdecl CSettlerMgr::SettlerWarriorLevel(int a1) {
   
   if ( !CSettlerMgr::m_uSettlerWarriorLevels[29]
     && BBSupportDbgReport(
@@ -2543,7 +2543,7 @@ static int __cdecl CSettlerMgr::SettlerWarriorLevel(int) {
 
 // address=[0x1585120]
 // Decompiled from IAnimatedEntity *__thiscall CSettlerMgr::AttachSettler(CSettlerMgr *this, CSettler *settler)
-void  CSettlerMgr::AttachSettler(class CSettler &) {
+void  CSettlerMgr::AttachSettler(class CSettler & settler) {
   
   IAnimatedEntity *result; // eax
   CSettler *SettlerPtr; // [esp+0h] [ebp-18h]
@@ -2625,7 +2625,7 @@ void  CSettlerMgr::AttachSettler(class CSettler &) {
 
 // address=[0x15853f0]
 // Decompiled from int __thiscall CSettlerMgr::DetachSettler(int *this, unsigned __int8 *a2)
-void  CSettlerMgr::DetachSettler(class CSettler &) {
+void  CSettlerMgr::DetachSettler(class CSettler & a2) {
   
   unsigned __int8 *v3; // [esp+0h] [ebp-20h]
   int v4; // [esp+4h] [ebp-1Ch]
@@ -2723,7 +2723,7 @@ void  CSettlerMgr::DetachSettler(class CSettler &) {
 
 // address=[0x157ff60]
 // Decompiled from unsigned int __thiscall CSettlerMgr::Alloc(CSettlerMgr *this, unsigned int a2)
-void *  CSettlerMgr::Alloc(unsigned int) {
+void *  CSettlerMgr::Alloc(unsigned int a2) {
   
   return MemoryAllocator::allocate((unsigned int *)this, a2);
 }
@@ -2731,7 +2731,7 @@ void *  CSettlerMgr::Alloc(unsigned int) {
 
 // address=[0x1580020]
 // Decompiled from void __thiscall CSettlerMgr::Dealloc(CSettlerMgr *this, void *a2)
-void  CSettlerMgr::Dealloc(void *) {
+void  CSettlerMgr::Dealloc(void * a2) {
   
   MemoryAllocator::deallocate(this, a2);
 }
@@ -2739,7 +2739,7 @@ void  CSettlerMgr::Dealloc(void *) {
 
 // address=[0x1585740]
 // Decompiled from void __thiscall CSettlerMgr::CheckOutSettler(CSettlerMgr *this, int a2)
-void  CSettlerMgr::CheckOutSettler(int) {
+void  CSettlerMgr::CheckOutSettler(int a2) {
   
   int v2; // eax
   int v3; // esi
@@ -2792,7 +2792,7 @@ void  CSettlerMgr::CheckOutSettler(int) {
 
 // address=[0x15858b0]
 // Decompiled from int CSettlerMgr::GetUserESInMiddleOfTheScreen()
-static int __cdecl CSettlerMgr::GetUserESInMiddleOfTheScreen(void) {
+int __cdecl CSettlerMgr::GetUserESInMiddleOfTheScreen(void) {
   
   int v0; // eax
   int v1; // eax

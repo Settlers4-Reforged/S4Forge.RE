@@ -14,7 +14,7 @@
 
 // address=[0x2f558e0]
 // Decompiled from CResourceManagerTask *__thiscall CResourceManagerTask::CResourceManagerTask(CResourceManagerTask *this, int a2)
- CResourceManagerTask::CResourceManagerTask(int) {
+ CResourceManagerTask::CResourceManagerTask(int a2) {
   
   IScheduleEntry::IScheduleEntry(this);
   *(_DWORD *)this = &CResourceManagerTask::_vftable_;
@@ -68,7 +68,7 @@ void  CResourceManagerTask::ClearBuildingPlaces(void) {
 
 // address=[0x2f55a80]
 // Decompiled from int __thiscall CResourceManagerTask::NewBuildingPlace(CDynList **this, int a2, int a3, int a4)
-void  CResourceManagerTask::NewBuildingPlace(int,int,int) {
+void  CResourceManagerTask::NewBuildingPlace(int a2, int a3, int a4) {
   
   int result; // eax
   struct CDynListEntry *v5; // [esp+8h] [ebp-24h]
@@ -117,7 +117,7 @@ void  CResourceManagerTask::UpdateBuildingPlaces(void) {
 
 // address=[0x2f55bd0]
 // Decompiled from char __thiscall CResourceManagerTask::AreaHasResource(CFilter **this, int a2, int a3)
-bool  CResourceManagerTask::AreaHasResource(int,int) {
+bool  CResourceManagerTask::AreaHasResource(int a2, int a3) {
   
   struct IFilterEntry *FilterEntry; // [esp+8h] [ebp-8h]
   int i; // [esp+Ch] [ebp-4h]
@@ -134,7 +134,7 @@ bool  CResourceManagerTask::AreaHasResource(int,int) {
 
 // address=[0x2f55c50]
 // Decompiled from int __thiscall CResourceManagerTask::FillRareBuildings(CDynList **this, struct CReserveEntry *a2, int a3)
-int  CResourceManagerTask::FillRareBuildings(class CReserveEntry *,int) {
+int  CResourceManagerTask::FillRareBuildings(class CReserveEntry * a2, int a3) {
   
   _DWORD *v5; // [esp+4h] [ebp-8h]
   int i; // [esp+8h] [ebp-4h]
@@ -152,7 +152,7 @@ int  CResourceManagerTask::FillRareBuildings(class CReserveEntry *,int) {
 
 // address=[0x2f55ce0]
 // Decompiled from char __thiscall CResourceManagerTask::IsShooting(CResourceManagerTask *this)
-bool  CResourceManagerTask::IsShooting(void) {
+bool  CResourceManagerTask::IsShooting(void a2) {
   
   int BuildingForResource; // eax
   int v2; // eax

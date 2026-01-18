@@ -1,6 +1,8 @@
 #ifndef SBUILDINGMENU_H
 #define SBUILDINGMENU_H
 
+#include "defines.h"
+
 class SBuildingMenu : public CInfoExchange {
 public:
     // address=[0x1454a80]

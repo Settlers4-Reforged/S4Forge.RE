@@ -4,7 +4,7 @@
 
 // address=[0x15de510]
 // Decompiled from int __cdecl COwnerMapExEx::CalculateOwnerBits1(int a1, int a2)
-static int __cdecl COwnerMapExEx::CalculateOwnerBits1(int,int) {
+int __cdecl COwnerMapExEx::CalculateOwnerBits1(int a1, int a2) {
   
   int v2; // eax
   struct CTile *v4; // [esp+0h] [ebp-Ch]
@@ -24,7 +24,7 @@ static int __cdecl COwnerMapExEx::CalculateOwnerBits1(int,int) {
 
 // address=[0x15de570]
 // Decompiled from int __cdecl COwnerMapExEx::CalculateOwnerBits9(int a1, int a2)
-static int __cdecl COwnerMapExEx::CalculateOwnerBits9(int,int) {
+int __cdecl COwnerMapExEx::CalculateOwnerBits9(int a1, int a2) {
   
   int v2; // esi
   int v3; // esi

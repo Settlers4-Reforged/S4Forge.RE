@@ -1,6 +1,8 @@
 #ifndef CCONFIGMANAGERPTR_H
 #define CCONFIGMANAGERPTR_H
 
+#include "defines.h"
+
 class CConfigManagerPtr {
 public:
     // address=[0x2eef110]

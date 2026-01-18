@@ -47,7 +47,7 @@ bool  CBuilding::HaveInhabitant(void)const {
 
 // address=[0x13466c0]
 // Decompiled from int __thiscall CBuilding::GetBuildingNeed(CBuilding *this, int a2)
-int  CBuilding::GetBuildingNeed(int)const {
+int  CBuilding::GetBuildingNeed(int a2)const {
   
   int v3; // [esp+4h] [ebp-4h]
 
@@ -58,7 +58,7 @@ int  CBuilding::GetBuildingNeed(int)const {
 
 // address=[0x1346700]
 // Decompiled from int __thiscall CBuilding::GetPileIdWithGood(CBuilding *this, int a2)
-int  CBuilding::GetPileIdWithGood(int)const {
+int  CBuilding::GetPileIdWithGood(int a2)const {
   
   int v3; // [esp+4h] [ebp-4h]
 
@@ -85,7 +85,7 @@ bool  CBuilding::IsBuildUp(void)const {
 
 // address=[0x13ffd20]
 // Decompiled from int __cdecl CBuilding::New(int a1)
-static class CPersistence * __cdecl CBuilding::New(std::istream &) {
+class CPersistence * __cdecl CBuilding::New(std::istream & a1) {
   
   if ( CBuilding::operator new(0x64u) )
     return CBuilding::CBuilding(a1);
@@ -96,7 +96,7 @@ static class CPersistence * __cdecl CBuilding::New(std::istream &) {
 
 // address=[0x1439b00]
 // Decompiled from int __thiscall CBuilding::GetPileIdWithNeedForGood(CBuilding *this, int a2)
-int  CBuilding::GetPileIdWithNeedForGood(int)const {
+int  CBuilding::GetPileIdWithNeedForGood(int a2)const {
   
   int v3; // [esp+4h] [ebp-4h]
 
@@ -129,7 +129,7 @@ void  CBuilding::NotifySelected(void) {
 
 // address=[0x1473110]
 // Decompiled from int __thiscall CBuilding::SetWorkingAreaPackedXY(CBuilding *this, int a2)
-void  CBuilding::SetWorkingAreaPackedXY(int) {
+void  CBuilding::SetWorkingAreaPackedXY(int a2) {
   
   int v2; // eax
 
@@ -425,7 +425,7 @@ void  CBuilding::CrushBuilding(void) {
 
 // address=[0x14e8fc0]
 // Decompiled from int __thiscall CBuilding::DestroyBuilding(CBuilding *this, int a2)
-void  CBuilding::DestroyBuilding(int) {
+void  CBuilding::DestroyBuilding(int a2) {
   
   unsigned int v2; // eax
   int v3; // eax
@@ -574,7 +574,7 @@ void  CBuilding::DestroyBuilding(int) {
 
 // address=[0x14e92f0]
 // Decompiled from int __thiscall CBuilding::GoodArrive(CBuilding *this, int a2)
-void  CBuilding::GoodArrive(int) {
+void  CBuilding::GoodArrive(int a2) {
   
   int v2; // eax
   int v3; // eax
@@ -800,7 +800,7 @@ void  CBuilding::SetToWorld(void) {
 
 // address=[0x14e9880]
 // Decompiled from int __thiscall CBuilding::Decrease(int this, int a2)
-void  CBuilding::Decrease(int) {
+void  CBuilding::Decrease(int a2) {
   
   int result; // eax
   int v3; // [esp+0h] [ebp-Ch]
@@ -856,7 +856,7 @@ void  CBuilding::Decrease(int) {
 
 // address=[0x14e9980]
 // Decompiled from unsigned int __cdecl CBuilding::operator_new(unsigned int a1)
-static void * __cdecl CBuilding::operator new(unsigned int) {
+void * __cdecl CBuilding::operator new(unsigned int a1) {
   
   return CBuildingMgr::Alloc(g_cBuildingMgr, a1);
 }
@@ -864,7 +864,7 @@ static void * __cdecl CBuilding::operator new(unsigned int) {
 
 // address=[0x14e99a0]
 // Decompiled from void __cdecl CBuilding::operator delete(void *a1)
-static void __cdecl CBuilding::operator delete(void *) {
+void __cdecl CBuilding::operator delete(void * a1) {
   
   CBuildingMgr::Dealloc((CBuildingMgr *)g_cBuildingMgr, a1);
 }
@@ -872,7 +872,7 @@ static void __cdecl CBuilding::operator delete(void *) {
 
 // address=[0x14e99e0]
 // Decompiled from void __thiscall CBuilding::Attach(CBuilding *this, int a2)
-void  CBuilding::Attach(int) {
+void  CBuilding::Attach(int a2) {
   
   int v2; // eax
 
@@ -883,7 +883,7 @@ void  CBuilding::Attach(int) {
 
 // address=[0x14e9a10]
 // Decompiled from int __thiscall CBuilding::Detach(CBuilding *this, int a2)
-void  CBuilding::Detach(int) {
+void  CBuilding::Detach(int a2) {
   
   int v3; // [esp+0h] [ebp-8h]
 
@@ -895,7 +895,7 @@ void  CBuilding::Detach(int) {
 
 // address=[0x14e9a50]
 // Decompiled from int __stdcall CBuilding::Notify(int a1)
-void  CBuilding::Notify(class CEntityEvent const &)const {
+void  CBuilding::Notify(class CEntityEvent const & a2)const {
   
   return CObserverList::NotifyAllObservers(a1);
 }
@@ -903,7 +903,7 @@ void  CBuilding::Notify(class CEntityEvent const &)const {
 
 // address=[0x14e9a70]
 // Decompiled from int __stdcall CBuilding::Notify_0(int a1, int a2)
-void  CBuilding::Notify(class CEntityEvent const &,class INotifyFilter &)const {
+void  CBuilding::Notify(class CEntityEvent const & a1, class INotifyFilter & a2)const {
   
   return CObserverList::NotifyAllObservers(a1, a2);
 }
@@ -911,7 +911,7 @@ void  CBuilding::Notify(class CEntityEvent const &,class INotifyFilter &)const {
 
 // address=[0x14e9a90]
 // Decompiled from int __thiscall CBuilding::SetObserverTarget(int this, int a2, int a3)
-void  CBuilding::SetObserverTarget(enum T_OBSERVER_TARGET,int) {
+void  CBuilding::SetObserverTarget(enum T_OBSERVER_TARGET a2, int a3) {
   
   int result; // eax
   unsigned int v4; // ecx
@@ -942,7 +942,7 @@ void  CBuilding::SetObserverTarget(enum T_OBSERVER_TARGET,int) {
 
 // address=[0x14e9b00]
 // Decompiled from int __thiscall CBuilding::GetObserverTarget(unsigned __int16 *this, int a2)
-int  CBuilding::GetObserverTarget(enum T_OBSERVER_TARGET) {
+int  CBuilding::GetObserverTarget(enum T_OBSERVER_TARGET a2) {
   
   if ( a2 )
     return 0;
@@ -953,7 +953,7 @@ int  CBuilding::GetObserverTarget(enum T_OBSERVER_TARGET) {
 
 // address=[0x14e9b30]
 // Decompiled from char *__thiscall CBuilding::CBuilding(char *this, int a2)
- CBuilding::CBuilding(std::istream &) {
+ CBuilding::CBuilding(std::istream & a2) {
   
   int BuildingRole; // [esp+4h] [ebp-28h]
   int v4; // [esp+Ch] [ebp-20h] BYREF
@@ -998,7 +998,7 @@ int  CBuilding::GetObserverTarget(enum T_OBSERVER_TARGET) {
 
 // address=[0x14e9cc0]
 // Decompiled from int __thiscall CBuilding::Store(void *this, struct std::ostream *a2)
-void  CBuilding::Store(std::ostream &) {
+void  CBuilding::Store(std::ostream & a2) {
   
   int v3; // [esp+0h] [ebp-14h] BYREF
   int v4; // [esp+4h] [ebp-10h]
@@ -1063,7 +1063,7 @@ void  CBuilding::Update(void) {
 
 // address=[0x14fddd0]
 // Decompiled from int __thiscall CBuilding::SettlerEnter(CBuilding *this, int a2)
-void  CBuilding::SettlerEnter(int) {
+void  CBuilding::SettlerEnter(int a2) {
   
   int v2; // eax
 
@@ -1090,7 +1090,7 @@ int  CBuilding::DoorY(void)const {
 
 // address=[0x15670e0]
 // Decompiled from int __thiscall CBuilding::InhabitantFlee(CBuilding *this, int a2)
-void  CBuilding::InhabitantFlee(int) {
+void  CBuilding::InhabitantFlee(int a2) {
   
   int v3; // [esp+4h] [ebp-4h]
 
@@ -1112,7 +1112,7 @@ void  CBuilding::DetachAllNonePileObservers(void) {
 
 // address=[0x1506610]
 // Decompiled from int __thiscall CBuilding::NotifyAllObservers(CBuilding *this, const struct CEntityEvent *a2)
-void  CBuilding::NotifyAllObservers(class CEntityEvent const &)const {
+void  CBuilding::NotifyAllObservers(class CEntityEvent const & a2)const {
   
   return CObserverList::NotifyAllObservers((char *)this + 88, (int)a2);
 }
@@ -1162,7 +1162,7 @@ void  CBuilding::CorrectBuildingBits(void) {
 
 // address=[0x14e9e40]
 // Decompiled from int __thiscall CBuilding::CBuilding_0(int this, int a2, int a3, int a4, int a5, int a6, int a7)
- CBuilding::CBuilding(int,int,int,int,class std::auto_ptr<class IBuildingRole>,int) {
+ CBuilding::CBuilding(int a2, int a3, int a4, int a5, class std::auto_ptr<class IBuildingRole> a6, int a7) {
   
   void *v7; // eax
   char v8; // al
@@ -1524,7 +1524,7 @@ void  CBuilding::RemoveBuildingBits(void) {
 
 // address=[0x14eb340]
 // Decompiled from int __thiscall CBuilding::ConvertEventIntoGoal(CBuilding *this, struct CEntityEvent *a2)
-void  CBuilding::ConvertEventIntoGoal(class CEntityEvent *) {
+void  CBuilding::ConvertEventIntoGoal(class CEntityEvent * a2) {
   
   int v2; // eax
 
@@ -1535,7 +1535,7 @@ void  CBuilding::ConvertEventIntoGoal(class CEntityEvent *) {
 
 // address=[0x14eb3e0]
 // Decompiled from void __thiscall CBuilding::DetachWithoutNotify(CBuilding *this, int a2)
-void  CBuilding::DetachWithoutNotify(int) {
+void  CBuilding::DetachWithoutNotify(int a2) {
   
   CObserverList::Detach((CBuilding *)((char *)this + 88), a2);
 }

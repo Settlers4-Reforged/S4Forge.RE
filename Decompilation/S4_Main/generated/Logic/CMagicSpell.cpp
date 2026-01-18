@@ -4,7 +4,7 @@
 
 // address=[0x146c970]
 // Decompiled from int __thiscall CMagicSpell::SettlerFlagBitChange(_DWORD *this, int a2, int a3, EntityFlag a4, int a5, int a6)
-int  CMagicSpell::SettlerFlagBitChange(int,int,int,int,enum SIV_SOUNDS) {
+int  CMagicSpell::SettlerFlagBitChange(int a2, int a3, int a4, int a5, enum SIV_SOUNDS a6) {
   
   int v6; // eax
   int v7; // eax
@@ -1749,7 +1749,7 @@ int  CMagicSpell::SpellSpecialOracle(void) {
 
 // address=[0x146f170]
 // Decompiled from int *__cdecl CMagicSpell::ShowSpellEffect(int a1, int a2, int a3, int a4)
-static void __cdecl CMagicSpell::ShowSpellEffect(int,int,int,int) {
+void __cdecl CMagicSpell::ShowSpellEffect(int a1, int a2, int a3, int a4) {
   
   int *result; // eax
   int v5; // [esp+4h] [ebp-10h]
@@ -1792,7 +1792,7 @@ static void __cdecl CMagicSpell::ShowSpellEffect(int,int,int,int) {
 
 // address=[0x14704b0]
 // Decompiled from CMagicSpell *__thiscall CMagicSpell::CMagicSpell(  CMagicSpell *this,  int a2,  int a3,  int a4,  int a5,  int a6,  int a7,  int a8,  int a9,  int a10)
- CMagicSpell::CMagicSpell(int,int,int,int,int,int,int,int,int) {
+ CMagicSpell::CMagicSpell(int a2, int a3, int a4, int a5, int a6, int a7, int a8, int a9, int a10) {
   
   *(_DWORD *)this = a2;
   *((_DWORD *)this + 1) = a3;
@@ -1809,7 +1809,7 @@ static void __cdecl CMagicSpell::ShowSpellEffect(int,int,int,int) {
 
 // address=[0x14708b0]
 // Decompiled from int __thiscall CMagicSpell::CastSpell(CMagicSpell *this, int a2, int a3)
-int  CMagicSpell::CastSpell(int,int) {
+int  CMagicSpell::CastSpell(int a2, int a3) {
   
   return ((int (__thiscall *)(CMagicSpell *, CMagicSpell *))*(&CMagicSpell::m_pSpellFuncs[8 * a2] + a3))(this, this);
 }
@@ -1817,7 +1817,7 @@ int  CMagicSpell::CastSpell(int,int) {
 
 // address=[0x14709e0]
 // Decompiled from int __cdecl CMagicSpell::InvisibleKill(struct IEntity *a1)
-static void __cdecl CMagicSpell::InvisibleKill(class IEntity *) {
+void __cdecl CMagicSpell::InvisibleKill(class IEntity * a1) {
   
   int v2; // [esp+0h] [ebp-4h]
 

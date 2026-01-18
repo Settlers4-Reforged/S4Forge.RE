@@ -4,7 +4,7 @@
 
 // address=[0x132a240]
 // Decompiled from _DWORD *__thiscall CTaskForceWarShips::CTaskForceWarShips(_DWORD *this, int a2, int a3, int a4)
- CTaskForceWarShips::CTaskForceWarShips(int,enum T_AI_TASK_FORCE_TYPE,int) {
+ CTaskForceWarShips::CTaskForceWarShips(int a2, enum T_AI_TASK_FORCE_TYPE a3, int a4) {
   
   CAITaskForceEx::CAITaskForceEx(this, a2, 5, a3, a4);
   *this = CTaskForceWarShips::_vftable_;
@@ -22,7 +22,7 @@
 
 // address=[0x132ce30]
 // Decompiled from char __thiscall CTaskForceWarShips::IsAddEntityOk(CTaskForceWarShips *this, int a2)
-bool  CTaskForceWarShips::IsAddEntityOk(int) {
+bool  CTaskForceWarShips::IsAddEntityOk(int a2) {
   
   if ( IAIEnvironment::EntityWarriorType(a2) == 10 )
     return 1;

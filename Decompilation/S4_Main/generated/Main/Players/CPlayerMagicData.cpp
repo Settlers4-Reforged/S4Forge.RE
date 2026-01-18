@@ -20,7 +20,7 @@ int  CPlayerMagicData::MaxNumberOfBigTemples(void)const {
 
 // address=[0x1470db0]
 // Decompiled from int __thiscall CPlayerMagicData::SpellCategoryCost(CPlayerMagicData *this, int a2)
-int  CPlayerMagicData::SpellCategoryCost(int)const {
+int  CPlayerMagicData::SpellCategoryCost(int a2)const {
   
   return *((_DWORD *)this + a2 + 4) ^ (-1824038075 * (a2 + 1));
 }
@@ -28,7 +28,7 @@ int  CPlayerMagicData::SpellCategoryCost(int)const {
 
 // address=[0x1470de0]
 // Decompiled from int __thiscall CPlayerMagicData::SpellCategoryCounter(CPlayerMagicData *this, int a2)
-int  CPlayerMagicData::SpellCategoryCounter(int)const {
+int  CPlayerMagicData::SpellCategoryCounter(int a2)const {
   
   return *((_DWORD *)this + a2 + 12) ^ (945190039 * (17 - a2));
 }
@@ -72,7 +72,7 @@ void  CPlayerMagicData::MarkMaxSpellCastNumbersAsInvalid(void) {
 
 // address=[0x1470b90]
 // Decompiled from int __thiscall CPlayerMagicData::MaxSpellCastNumber(CPlayerMagicData *this, int a2)
-int  CPlayerMagicData::MaxSpellCastNumber(int)const {
+int  CPlayerMagicData::MaxSpellCastNumber(int a2)const {
   
   return *((_DWORD *)this + a2 + 20);
 }
@@ -80,7 +80,7 @@ int  CPlayerMagicData::MaxSpellCastNumber(int)const {
 
 // address=[0x1470c90]
 // Decompiled from int __thiscall CPlayerMagicData::SetManaAmount(CPlayerMagicData *this, int a2)
-void  CPlayerMagicData::SetManaAmount(int) {
+void  CPlayerMagicData::SetManaAmount(int a2) {
   
   int result; // eax
 
@@ -105,7 +105,7 @@ void  CPlayerMagicData::SetManaAmountChangedFlag(void) {
 
 // address=[0x1470cf0]
 // Decompiled from int __thiscall CPlayerMagicData::SetMaxSpellCastNumber(CPlayerMagicData *this, int a2, int a3)
-void  CPlayerMagicData::SetMaxSpellCastNumber(int,int) {
+void  CPlayerMagicData::SetMaxSpellCastNumber(int a2, int a3) {
   
   int result; // eax
 
@@ -117,7 +117,7 @@ void  CPlayerMagicData::SetMaxSpellCastNumber(int,int) {
 
 // address=[0x1470d10]
 // Decompiled from CPlayerMagicData *__thiscall CPlayerMagicData::SetSpellCategoryCost(CPlayerMagicData *this, int a2, int a3)
-void  CPlayerMagicData::SetSpellCategoryCost(int,int) {
+void  CPlayerMagicData::SetSpellCategoryCost(int a2, int a3) {
   
   CPlayerMagicData *result; // eax
 
@@ -129,7 +129,7 @@ void  CPlayerMagicData::SetSpellCategoryCost(int,int) {
 
 // address=[0x1470d40]
 // Decompiled from CPlayerMagicData *__thiscall CPlayerMagicData::SetSpellCategoryCounter(CPlayerMagicData *this, int a2, int a3)
-void  CPlayerMagicData::SetSpellCategoryCounter(int,int) {
+void  CPlayerMagicData::SetSpellCategoryCounter(int a2, int a3) {
   
   CPlayerMagicData *result; // eax
 
@@ -141,7 +141,7 @@ void  CPlayerMagicData::SetSpellCategoryCounter(int,int) {
 
 // address=[0x1470d80]
 // Decompiled from int __thiscall CPlayerMagicData::SetTotalAmountOfCollectedMana(CPlayerMagicData *this, int a2)
-void  CPlayerMagicData::SetTotalAmountOfCollectedMana(int) {
+void  CPlayerMagicData::SetTotalAmountOfCollectedMana(int a2) {
   
   int result; // eax
 
@@ -172,7 +172,7 @@ void  CPlayerMagicData::Clear(void) {
 
 // address=[0x1474cd0]
 // Decompiled from unsigned int __thiscall CPlayerMagicData::SetMaxNumberOfBigTemples(CPlayerMagicData *this, int a2)
-void  CPlayerMagicData::SetMaxNumberOfBigTemples(int) {
+void  CPlayerMagicData::SetMaxNumberOfBigTemples(int a2) {
   
   unsigned int result; // eax
 

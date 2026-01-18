@@ -4,7 +4,7 @@
 
 // address=[0x131a8e0]
 // Decompiled from bool __cdecl CAIResourceMap::IsOfLandtype(int a1, Squares *a2, Squares *a3)
-static bool __cdecl CAIResourceMap::IsOfLandtype(enum T_RESOURCE_LANDTYPE,int,int) {
+bool __cdecl CAIResourceMap::IsOfLandtype(enum T_RESOURCE_LANDTYPE a1, int a2, int a3) {
   
   int v4; // eax
   int v5; // [esp+0h] [ebp-28h]
@@ -110,7 +110,7 @@ static bool __cdecl CAIResourceMap::IsOfLandtype(enum T_RESOURCE_LANDTYPE,int,in
 
 // address=[0x131abe0]
 // Decompiled from int __cdecl CAIResourceMap::GetNumberOfSquaresWithDarkLand(int a1)
-static int __cdecl CAIResourceMap::GetNumberOfSquaresWithDarkLand(int) {
+int __cdecl CAIResourceMap::GetNumberOfSquaresWithDarkLand(int a1) {
   
   CAIResourceData *v2; // eax
   int v3; // [esp+4h] [ebp-14h]
@@ -153,7 +153,7 @@ static int __cdecl CAIResourceMap::GetNumberOfSquaresWithDarkLand(int) {
 
 // address=[0x131ca20]
 // Decompiled from char *__cdecl CAIResourceMap::ResourceDataVW(int a1, int a2)
-static class CAIResourceData const & __cdecl CAIResourceMap::ResourceDataVW(int,int) {
+class CAIResourceData const & __cdecl CAIResourceMap::ResourceDataVW(int a1, int a2) {
   
   return (char *)&CAIResourceMap::m_cData + 2688 * a2 + 42 * a1 + 2688;
 }
@@ -161,7 +161,7 @@ static class CAIResourceData const & __cdecl CAIResourceMap::ResourceDataVW(int,
 
 // address=[0x1321c10]
 // Decompiled from char *__cdecl CAIResourceMap::ResourceDataXY(Squares *a1, Squares *a2)
-static class CAIResourceData const & __cdecl CAIResourceMap::ResourceDataXY(int,int) {
+class CAIResourceData const & __cdecl CAIResourceMap::ResourceDataXY(int a1, int a2) {
   
   int v2; // esi
 
@@ -172,7 +172,7 @@ static class CAIResourceData const & __cdecl CAIResourceMap::ResourceDataXY(int,
 
 // address=[0x131acf0]
 // Decompiled from void CAIResourceMap::Init()
-static void __cdecl CAIResourceMap::Init(void) {
+void __cdecl CAIResourceMap::Init(void) {
   
   int v0; // ecx
   int v1; // ecx
@@ -233,7 +233,7 @@ static void __cdecl CAIResourceMap::Init(void) {
 
 // address=[0x131af30]
 // Decompiled from void CAIResourceMap::Done()
-static void __cdecl CAIResourceMap::Done(void) {
+void __cdecl CAIResourceMap::Done(void) {
   
   CAIResourceMap::s_iInitialized = 0;
 }
@@ -241,7 +241,7 @@ static void __cdecl CAIResourceMap::Done(void) {
 
 // address=[0x131af40]
 // Decompiled from int __thiscall CAIResourceMap::Update(void *this)
-static void __cdecl CAIResourceMap::Update(void) {
+void __cdecl CAIResourceMap::Update(void) {
   
   int v1; // edx
   int v2; // ecx
@@ -297,7 +297,7 @@ static void __cdecl CAIResourceMap::Update(void) {
 
 // address=[0x131b070]
 // Decompiled from int __cdecl CAIResourceMap::NotifyChange(Squares *a1, Squares *a2)
-static void __cdecl CAIResourceMap::NotifyChange(int,int) {
+void __cdecl CAIResourceMap::NotifyChange(int a1, int a2) {
   
   int v2; // ecx
   int v3; // edx
@@ -328,7 +328,7 @@ static void __cdecl CAIResourceMap::NotifyChange(int,int) {
 
 // address=[0x131b190]
 // Decompiled from int __cdecl CAIResourceMap::NotifyResourceChange(Squares *a1, Squares *a2, int a3, int a4)
-static void __cdecl CAIResourceMap::NotifyResourceChange(int,int,int,int) {
+void __cdecl CAIResourceMap::NotifyResourceChange(int a1, int a2, int a3, int a4) {
   
   int v4; // ecx
   int v5; // edx
@@ -408,7 +408,7 @@ static void __cdecl CAIResourceMap::NotifyResourceChange(int,int,int,int) {
 
 // address=[0x131b420]
 // Decompiled from int __cdecl CAIResourceMap::NotifyDarkLandChange(Squares *a1, Squares *a2)
-static void __cdecl CAIResourceMap::NotifyDarkLandChange(int,int,bool) {
+void __cdecl CAIResourceMap::NotifyDarkLandChange(int a1, int a2, bool a3) {
   
   CAIResourceData *v2; // eax
   int result; // eax

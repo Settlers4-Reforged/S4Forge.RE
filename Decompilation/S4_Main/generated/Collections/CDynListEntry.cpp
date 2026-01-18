@@ -27,7 +27,7 @@
 
 // address=[0x2f3c7c0]
 // Decompiled from double __thiscall CDynListEntry::SortValue(CDynListEntry *this, int a2)
-float  CDynListEntry::SortValue(int) {
+float  CDynListEntry::SortValue(int a2) {
   
   return (float)*((int *)this + 2);
 }

@@ -4,7 +4,7 @@
 
 // address=[0x14a3fb0]
 // Decompiled from CStateCredits *__cdecl CStateCredits::DynamicCreateFunc(void *a1)
-static class CGameState * __cdecl CStateCredits::DynamicCreateFunc(void *) {
+class CGameState * __cdecl CStateCredits::DynamicCreateFunc(void * a1) {
   
   CStateCredits *C; // [esp+Ch] [ebp-10h]
 
@@ -87,7 +87,7 @@ bool  CStateCredits::Perform(void) {
 
 // address=[0x14a43b0]
 // Decompiled from char __thiscall CStateCredits::OnEvent(CStateCredits *this, struct CEvn_Event *a2)
-bool  CStateCredits::OnEvent(class CEvn_Event &) {
+bool  CStateCredits::OnEvent(class CEvn_Event & a2) {
   
   char result; // al
   CEvn_Event *v4; // [esp+8h] [ebp-58h]

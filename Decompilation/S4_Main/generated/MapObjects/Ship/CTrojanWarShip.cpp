@@ -4,7 +4,7 @@
 
 // address=[0x1402700]
 // Decompiled from int __cdecl CTrojanWarShip::New(int a1)
-static class CPersistence * __cdecl CTrojanWarShip::New(std::istream &) {
+class CPersistence * __cdecl CTrojanWarShip::New(std::istream & a1) {
   
   if ( CWarShip::operator new(0xC8u) )
     return CTrojanWarShip::CTrojanWarShip(a1);
@@ -15,7 +15,7 @@ static class CPersistence * __cdecl CTrojanWarShip::New(std::istream &) {
 
 // address=[0x15a1d70]
 // Decompiled from _DWORD *__thiscall CTrojanWarShip::CTrojanWarShip(_DWORD *this, int a2)
- CTrojanWarShip::CTrojanWarShip(std::istream &) {
+ CTrojanWarShip::CTrojanWarShip(std::istream & a2) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
@@ -42,7 +42,7 @@ static class CPersistence * __cdecl CTrojanWarShip::New(std::istream &) {
 
 // address=[0x15a1e30]
 // Decompiled from int __thiscall CTrojanWarShip::Store(void *this, struct std::ostream *a2)
-void  CTrojanWarShip::Store(std::ostream &) {
+void  CTrojanWarShip::Store(std::ostream & a2) {
   
   int v3[2]; // [esp+0h] [ebp-8h] BYREF
 
@@ -74,7 +74,7 @@ unsigned long  CTrojanWarShip::ClassID(void)const {
 
 // address=[0x15a1e70]
 // Decompiled from CTrojanWarShip *__thiscall CTrojanWarShip::CTrojanWarShip(  CTrojanWarShip *this,  int a2,  int a3,  int a4,  int a5,  int a6,  int a7,  bool a8)
- CTrojanWarShip::CTrojanWarShip(int,int,int,int,int,int,bool) {
+ CTrojanWarShip::CTrojanWarShip(int a2, int a3, int a4, int a5, int a6, int a7, bool a8) {
   
   CWarShip::CWarShip(this, a2, a3, a4, a5, a6, a7, a8);
   *(_DWORD *)this = &CTrojanWarShip::_vftable_;

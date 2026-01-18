@@ -4,7 +4,7 @@
 
 // address=[0x2f6ff70]
 // Decompiled from int __thiscall CColorGradient::SetupGradients(_WORD *this, int a2, int a3, int a4, int a5, int a6)
-void  CColorGradient::SetupGradients(int,struct SGfxColor,int) {
+void  CColorGradient::SetupGradients(int a2, struct SGfxColor a3, int a4) {
   
   int result; // eax
   int i; // [esp+8h] [ebp-1Ch]

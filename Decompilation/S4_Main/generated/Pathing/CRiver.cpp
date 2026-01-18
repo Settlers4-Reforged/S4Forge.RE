@@ -4,7 +4,7 @@
 
 // address=[0x2fcb5a0]
 // Decompiled from CRiver *__thiscall CRiver::CRiver(CRiver *this, int a2, int a3)
- CRiver::CRiver(int,int) {
+ CRiver::CRiver(int a2, int a3) {
   
   int v4; // [esp+8h] [ebp-18h] BYREF
   int v5; // [esp+Ch] [ebp-14h] BYREF
@@ -53,7 +53,7 @@
 
 // address=[0x2fcb760]
 // Decompiled from CRiver *__thiscall CRiver::CRiver(CRiver *this, int a2, int a3, int a4)
- CRiver::CRiver(int,int,int) {
+ CRiver::CRiver(int a2, int a3, int a4) {
   
   int Border; // eax
   int Size; // [esp+Ch] [ebp-18h]
@@ -183,7 +183,7 @@ void  CRiver::drawRiver(void) {
 
 // address=[0x2fcbca0]
 // Decompiled from void __thiscall CRiver::drawRiverPart(CRiver *this, __int64 a2, int a3, int a4)
-void  CRiver::drawRiverPart(int,int,int,int) {
+void  CRiver::drawRiverPart(int a2, int a3, int a4, int a4) {
   
   double X; // xmm0_8
   double v5; // [esp+10h] [ebp-ACh]
@@ -339,7 +339,7 @@ void  CRiver::drawRiverPart(int,int,int,int) {
 
 // address=[0x2fcc380]
 // Decompiled from int __thiscall CRiver::findBorder(CRiver *this, int a2, int a3)
-int  CRiver::findBorder(int,int) {
+int  CRiver::findBorder(int a2, int a3) {
   
   _DWORD v4[2]; // [esp+4h] [ebp-1028h] BYREF
   int i; // [esp+Ch] [ebp-1020h]

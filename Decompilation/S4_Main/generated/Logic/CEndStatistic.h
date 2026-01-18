@@ -1,6 +1,8 @@
 #ifndef CENDSTATISTIC_H
 #define CENDSTATISTIC_H
 
+#include "defines.h"
+
 class CEndStatistic : public CStatistic {
 public:
     // address=[0x144f850]
@@ -13,25 +15,25 @@ public:
     void  Init(void);
 
     // address=[0x144f9b0]
-    void  Update(class CStatistic);
+    void  Update(class CStatistic a1);
 
     // address=[0x144fb00]
     wchar_t const *  GetMapName(void);
 
     // address=[0x144fb20]
-    std::wstring  GetPlayerName(int);
+    std::wstring  GetPlayerName(int a2);
 
     // address=[0x144fb90]
     int  GetNumberOfPlayers(void);
 
     // address=[0x144fbb0]
-    int  GetPlayerRace(int);
+    int  GetPlayerRace(int a2);
 
     // address=[0x144fc00]
-    int  GetPlayerColor(int);
+    int  GetPlayerColor(int a2);
 
     // address=[0x144fc50]
-    int  GetPlayerAlliance(int);
+    int  GetPlayerAlliance(int a2);
 
     // address=[0x144fca0]
     bool  IsGameWone(void);

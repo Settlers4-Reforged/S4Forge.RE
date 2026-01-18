@@ -108,7 +108,7 @@ unsigned int  CAIAgentRecruitment::Execute(unsigned int,unsigned int) {
 
 // address=[0x1309670]
 // Decompiled from CAIAgentRecruitment *__thiscall CAIAgentRecruitment::SetUniqueFighterRecruitment(CAIAgentRecruitment *this, int a2)
-void  CAIAgentRecruitment::SetUniqueFighterRecruitment(int) {
+void  CAIAgentRecruitment::SetUniqueFighterRecruitment(int a2) {
   
   CAIAgentRecruitment *result; // eax
 

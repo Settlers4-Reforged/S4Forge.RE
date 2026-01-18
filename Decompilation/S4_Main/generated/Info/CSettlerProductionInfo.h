@@ -1,6 +1,8 @@
 #ifndef CSETTLERPRODUCTIONINFO_H
 #define CSETTLERPRODUCTIONINFO_H
 
+#include "defines.h"
+
 class CSettlerProductionInfo : public CInfoExchange {
 public:
     // address=[0x1454830]

@@ -4,7 +4,7 @@
 
 // address=[0x1345840]
 // Decompiled from _DWORD *__thiscall SBUILDINFODATA::SBUILDINFODATA(_DWORD *this, _DWORD *a2)
- SBUILDINFODATA::SBUILDINFODATA(struct SBUILDINFODATA &&) {
+ SBUILDINFODATA::SBUILDINFODATA(struct SBUILDINFODATA && a2) {
   
   *this = *a2;
   this[1] = a2[1];
@@ -49,7 +49,7 @@
 
 // address=[0x13461d0]
 // Decompiled from _DWORD *__thiscall SBUILDINFODATA::operator=(_DWORD *this, _DWORD *a2)
-struct SBUILDINFODATA &  SBUILDINFODATA::operator=(struct SBUILDINFODATA const &) {
+struct SBUILDINFODATA &  SBUILDINFODATA::operator=(struct SBUILDINFODATA const & a2) {
   
   unsigned int j; // [esp+4h] [ebp-Ch]
   unsigned int i; // [esp+8h] [ebp-8h]

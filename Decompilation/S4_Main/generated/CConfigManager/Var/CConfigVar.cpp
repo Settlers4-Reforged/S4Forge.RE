@@ -36,7 +36,7 @@ int  CConfigVar::GetIntValue(void)const {
 
 // address=[0x12fd250]
 // Decompiled from int __stdcall sub_16FD250(int a1)
-std::string  CConfigVar::GetStringValue(void)const {
+std::string  CConfigVar::GetStringValue(void a1)const {
   
   std::string::string((char *)&off_366DCF4);
   return a1;
@@ -45,7 +45,7 @@ std::string  CConfigVar::GetStringValue(void)const {
 
 // address=[0x12fd690]
 // Decompiled from void __stdcall CConfigVar::SetValue(int a1)
-void  CConfigVar::SetValue(std::string const &) {
+void  CConfigVar::SetValue(std::string const & a1) {
   
   ;
 }
@@ -53,7 +53,7 @@ void  CConfigVar::SetValue(std::string const &) {
 
 // address=[0x12fd6a0]
 // Decompiled from void __thiscall CConfigVar::SetValue(CConfigVar *this, int a2)
-void  CConfigVar::SetValue(int) {
+void  CConfigVar::SetValue(int a2) {
   
   ;
 }
@@ -113,7 +113,7 @@ bool  CConfigVar::Static(void)const {
 
 // address=[0x2ef86a0]
 // Decompiled from _BYTE *__thiscall CConfigVar::CConfigVar(_BYTE *this, char a2, char a3, char a4)
- CConfigVar::CConfigVar(bool,enum T_CFGVAR_TYPE,int) {
+ CConfigVar::CConfigVar(bool a2, enum T_CFGVAR_TYPE a3, int a4) {
   
   *(_DWORD *)this = &CConfigVar::_vftable_;
   this[4] = a2;

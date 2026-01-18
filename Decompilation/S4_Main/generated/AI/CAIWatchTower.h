@@ -1,10 +1,12 @@
 #ifndef CAIWATCHTOWER_H
 #define CAIWATCHTOWER_H
 
+#include "defines.h"
+
 class CAIWatchTower {
 public:
     // address=[0x132eec0]
-    void  Init(int,int,int);
+    void  Init(int a2, int a3, int a4);
 
     // address=[0x132ef30]
     void  Done(void);
@@ -23,11 +25,11 @@ public:
 
 protected:
     // address=[0x132ef50]
-    void  SetValue(int);
+    void  SetValue(int a2);
 
 private:
     // address=[0x132f8c0]
-    void  SetAllianceIdAndClearValue(int);
+    void  SetAllianceIdAndClearValue(int a2);
 
 };
 

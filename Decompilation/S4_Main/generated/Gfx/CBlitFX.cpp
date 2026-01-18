@@ -22,7 +22,7 @@ struct _DDBLTFX *  CBlitFX::GetBlitStructPtr(void) {
 
 // address=[0x2f86430]
 // Decompiled from CBlitFX *__thiscall CBlitFX::SetFillColor(CBlitFX *this, int a2, int a3, int a4, bool a5)
-void  CBlitFX::SetFillColor(int,int,int,bool) {
+void  CBlitFX::SetFillColor(int a2, int a3, int a4, bool a5) {
   
   int v5; // edx
   CBlitFX *result; // eax
@@ -41,7 +41,7 @@ void  CBlitFX::SetFillColor(int,int,int,bool) {
 
 // address=[0x2f864e0]
 // Decompiled from int __thiscall CBlitFX::SetFillColorAlpha(CBlitFX *this, int a2, int a3, int a4, int a5)
-void  CBlitFX::SetFillColorAlpha(int,int,int,int) {
+void  CBlitFX::SetFillColorAlpha(int a2, int a3, int a4, int a5) {
   
   int result; // eax
 

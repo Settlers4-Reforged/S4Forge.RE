@@ -1,6 +1,8 @@
 #ifndef CAIAGENTPIONEERS_H
 #define CAIAGENTPIONEERS_H
 
+#include "defines.h"
+
 class CAIAgentPioneers : public CAINormalSectorAgent {
 public:
     // address=[0x1304df0]
@@ -14,10 +16,10 @@ public:
 
 protected:
     // address=[0x13051a0]
-    bool  FindWorkPosition(int &,int &);
+    bool  FindWorkPosition(int & a2, int & a3);
 
     // address=[0x1305440]
-    bool  CheckSquare(int,int);
+    bool  CheckSquare(int a2, int a3);
 
 };
 

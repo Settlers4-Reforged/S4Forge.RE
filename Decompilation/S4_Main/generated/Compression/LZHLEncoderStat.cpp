@@ -25,7 +25,7 @@
 
 // address=[0x2f2ab00]
 // Decompiled from void __thiscall LZHLEncoderStat::calcStat(LZHLEncoderStat *this, int *a2)
-void  LZHLEncoderStat::calcStat(int *) {
+void  LZHLEncoderStat::calcStat(int * a2) {
   
   int v2; // esi
   int SortedTmp; // [esp+10h] [ebp-4BCh]
@@ -140,7 +140,7 @@ void  LZHLEncoderStat::calcStat(int *) {
 
 // address=[0x2f2c360]
 // Decompiled from int __cdecl LZHLEncoderStat::_addGroup(int *a1, int a2, int a3)
-static void __cdecl LZHLEncoderStat::_addGroup(int *,int,int) {
+void __cdecl LZHLEncoderStat::_addGroup(int * a1, int a2, int a3) {
   
   int result; // eax
 

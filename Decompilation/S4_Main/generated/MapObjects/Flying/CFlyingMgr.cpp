@@ -4,7 +4,7 @@
 
 // address=[0x1303860]
 // Decompiled from int __thiscall CFlyingMgr::GetNumberOfEntities(CFlyingMgr *this, int a2, int a3)
-int  CFlyingMgr::GetNumberOfEntities(int,int) {
+int  CFlyingMgr::GetNumberOfEntities(int a2, int a3) {
   
   return *((_DWORD *)this + 2 * a2 + a3 + 19);
 }
@@ -12,7 +12,7 @@ int  CFlyingMgr::GetNumberOfEntities(int,int) {
 
 // address=[0x150ddc0]
 // Decompiled from int __thiscall CFlyingMgr::GetFirstEntityId(CFlyingMgr *this, int a2, int a3)
-int  CFlyingMgr::GetFirstEntityId(int,int) {
+int  CFlyingMgr::GetFirstEntityId(int a2, int a3) {
   
   if ( a2 >= 9
     && BBSupportDbgReport(
@@ -47,7 +47,7 @@ int  CFlyingMgr::GetFirstEntityId(int,int) {
 
 // address=[0x154f4b0]
 // Decompiled from char __thiscall CFlyingMgr::AddFlyingEntity(CFlyingMgr *this, int a2, int a3, int a4, int a5, bool a6)
-bool  CFlyingMgr::AddFlyingEntity(int,int,int,int,bool) {
+bool  CFlyingMgr::AddFlyingEntity(int a2, int a3, int a4, int a5, bool a5) {
   
   CManakopter *C; // [esp+10h] [ebp-18h]
   int FreeSlot; // [esp+14h] [ebp-14h]
@@ -74,7 +74,7 @@ bool  CFlyingMgr::AddFlyingEntity(int,int,int,int,bool) {
 
 // address=[0x154f5c0]
 // Decompiled from int __thiscall CFlyingMgr::DeleteFlyingEntity(CFlyingMgr *this, int a2)
-void  CFlyingMgr::DeleteFlyingEntity(int) {
+void  CFlyingMgr::DeleteFlyingEntity(int a2) {
   
   unsigned __int8 *v2; // eax
   int v3; // eax
@@ -101,7 +101,7 @@ void  CFlyingMgr::DeleteFlyingEntity(int) {
 
 // address=[0x154f6a0]
 // Decompiled from unsigned __int8 *__thiscall CFlyingMgr::GetEntityPtr(CFlyingMgr *this, int a2)
-class IFlyingEntity *  CFlyingMgr::GetEntityPtr(int) {
+class IFlyingEntity *  CFlyingMgr::GetEntityPtr(int a2) {
   
   unsigned __int8 *v4; // [esp+Ch] [ebp-4h]
 
@@ -115,7 +115,7 @@ class IFlyingEntity *  CFlyingMgr::GetEntityPtr(int) {
 
 // address=[0x154f6f0]
 // Decompiled from unsigned __int8 *__thiscall CFlyingMgr::GetManakopterPtr(CFlyingMgr *this, int a2)
-class CManakopter *  CFlyingMgr::GetManakopterPtr(int) {
+class CManakopter *  CFlyingMgr::GetManakopterPtr(int a2) {
   
   unsigned __int8 *v4; // [esp+Ch] [ebp-4h]
 
@@ -129,7 +129,7 @@ class CManakopter *  CFlyingMgr::GetManakopterPtr(int) {
 
 // address=[0x154f740]
 // Decompiled from int __thiscall CFlyingMgr::AttachFlyingEntity(CFlyingMgr *this, int a2, int a3, int a4)
-void  CFlyingMgr::AttachFlyingEntity(int,int,int) {
+void  CFlyingMgr::AttachFlyingEntity(int a2, int a3, int a4) {
   
   IAnimatedEntity *v4; // eax
   IAnimatedEntity *v5; // eax
@@ -165,7 +165,7 @@ void  CFlyingMgr::AttachFlyingEntity(int,int,int) {
 
 // address=[0x154f820]
 // Decompiled from void __thiscall CFlyingMgr::DetachFlyingEntity(CFlyingMgr *this, int a2, int a3, int a4)
-void  CFlyingMgr::DetachFlyingEntity(int,int,int) {
+void  CFlyingMgr::DetachFlyingEntity(int a2, int a3, int a4) {
   
   int v4; // eax
   _WORD *v5; // eax
@@ -220,7 +220,7 @@ void  CFlyingMgr::DetachFlyingEntity(int,int,int) {
 
 // address=[0x154f960]
 // Decompiled from void __thiscall CFlyingMgr::CheckOutFlyingEntity(CFlyingMgr *this, int a2)
-void  CFlyingMgr::CheckOutFlyingEntity(int) {
+void  CFlyingMgr::CheckOutFlyingEntity(int a2) {
   
   unsigned __int8 *v2; // [esp+0h] [ebp-10h]
   int v4; // [esp+8h] [ebp-8h]
@@ -236,7 +236,7 @@ void  CFlyingMgr::CheckOutFlyingEntity(int) {
 
 // address=[0x154f9d0]
 // Decompiled from int __thiscall CFlyingMgr::GetNearestEntity(CFlyingMgr *this, int a2, int a3, int a4, int a5, int a6)
-int  CFlyingMgr::GetNearestEntity(int,int,int,int,int) {
+int  CFlyingMgr::GetNearestEntity(int a2, int a3, int a4, int a5, int a6) {
   
   int v6; // eax
   int v8; // [esp-4h] [ebp-1Ch]
@@ -456,7 +456,7 @@ void  CFlyingMgr::Clear(void) {
 
 // address=[0x15506f0]
 // Decompiled from int __stdcall CFlyingMgr::operator[](int a1)
-class IFlyingEntity &  CFlyingMgr::operator[](int) {
+class IFlyingEntity &  CFlyingMgr::operator[](int a1) {
   
   return CMapObjectMgr::EntityPtr(a1);
 }

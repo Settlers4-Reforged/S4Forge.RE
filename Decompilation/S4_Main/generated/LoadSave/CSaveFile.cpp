@@ -20,7 +20,7 @@ unsigned int  S4::CSaveFile::GetFilePos(void) {
 
 // address=[0x13eb4f0]
 // Decompiled from S4::CSaveFile *__thiscall S4::CSaveFile::CSaveFile(S4::CSaveFile *this, bool a2)
- S4::CSaveFile::CSaveFile(bool) {
+ S4::CSaveFile::CSaveFile(bool a2) {
   
   *(_BYTE *)this = a2;
   CFile::CFile((S4::CSaveFile *)((char *)this + 4));
@@ -31,7 +31,7 @@ unsigned int  S4::CSaveFile::GetFilePos(void) {
 
 // address=[0x13eb520]
 // Decompiled from char __stdcall S4::CSaveFile::Open(int a1, char a2)
-bool  S4::CSaveFile::Open(std::wstring const &,int) {
+bool  S4::CSaveFile::Open(std::wstring const & a1, int a2) {
   
   if ( (a2 & 2) != 0 )
   {
@@ -60,7 +60,7 @@ bool  S4::CSaveFile::Close(void) {
 
 // address=[0x13eb5b0]
 // Decompiled from size_t __thiscall S4::CSaveFile::Read(_DWORD *this, void *Buffer, size_t ElementSize)
-int  S4::CSaveFile::Read(void *,int) {
+int  S4::CSaveFile::Read(void * Buffer, int ElementSize) {
   
   int v4; // [esp+0h] [ebp-8h]
 
@@ -79,7 +79,7 @@ int  S4::CSaveFile::Read(void *,int) {
 
 // address=[0x13eb600]
 // Decompiled from int __stdcall S4::CSaveFile::Write(void *Buffer, size_t ElementSize)
-int  S4::CSaveFile::Write(void const *,int) {
+int  S4::CSaveFile::Write(void const * Buffer, int ElementSize) {
   
   return CFile::Write(
            Buffer,
@@ -92,7 +92,7 @@ int  S4::CSaveFile::Write(void const *,int) {
 
 // address=[0x13eb630]
 // Decompiled from int __stdcall S4::CSaveFile::SetFilePos(int Offset, int Origin)
-void  S4::CSaveFile::SetFilePos(int,int) {
+void  S4::CSaveFile::SetFilePos(int Offset, int Origin) {
   
   return CFile::Seek(Offset, Origin, (int)"d:\\projects\\tshe\\purplelamp\\s4\\source\\baselib\\include\\File.h", 0);
 }

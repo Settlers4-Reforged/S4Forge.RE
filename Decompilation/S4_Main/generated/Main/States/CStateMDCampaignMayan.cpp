@@ -4,7 +4,7 @@
 
 // address=[0x14c65f0]
 // Decompiled from CStateMDCampaignMayan *__cdecl CStateMDCampaignMayan::DynamicCreateFunc(void *a1)
-static class CGameState * __cdecl CStateMDCampaignMayan::DynamicCreateFunc(void *) {
+class CGameState * __cdecl CStateMDCampaignMayan::DynamicCreateFunc(void * a1) {
   
   CStateMDCampaignMayan *C; // [esp+Ch] [ebp-10h]
 
@@ -80,7 +80,7 @@ bool  CStateMDCampaignMayan::Perform(void) {
 
 // address=[0x14c6870]
 // Decompiled from char __thiscall CStateMDCampaignMayan::OnEvent(CStateMDCampaignMayan *this, struct CEvn_Event *a2)
-bool  CStateMDCampaignMayan::OnEvent(class CEvn_Event &) {
+bool  CStateMDCampaignMayan::OnEvent(class CEvn_Event & a2) {
   
   CEvn_Event *v3; // [esp+Ch] [ebp-38h]
   int event; // [esp+18h] [ebp-2Ch]

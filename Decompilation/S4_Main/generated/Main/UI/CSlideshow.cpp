@@ -4,7 +4,7 @@
 
 // address=[0x149ada0]
 // Decompiled from CSlideshow *__thiscall CSlideshow::CSlideshow(CSlideshow *this, int a2)
- CSlideshow::CSlideshow(int) {
+ CSlideshow::CSlideshow(int a2) {
   
   int OutputWidth; // [esp+0h] [ebp-3Ch]
   int OutputHeight; // [esp+4h] [ebp-38h]

@@ -4,7 +4,7 @@
 
 // address=[0x1306b10]
 // Decompiled from CAIAgentPlayerBase *__thiscall CAIAgentPlayerBase::AttachPlayerAI(CAIAgentPlayerBase *this, struct CAIPlayerAI *a2)
-void  CAIAgentPlayerBase::AttachPlayerAI(class CAIPlayerAI *) {
+void  CAIAgentPlayerBase::AttachPlayerAI(class CAIPlayerAI * a2) {
   
   CAIAgentPlayerBase *result; // eax
 

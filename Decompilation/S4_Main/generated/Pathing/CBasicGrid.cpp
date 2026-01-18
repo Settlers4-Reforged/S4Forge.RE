@@ -12,7 +12,7 @@
 
 // address=[0x2fc56e0]
 // Decompiled from CBasicGrid *__thiscall CBasicGrid::CBasicGrid(CBasicGrid *this, int a2, int a3)
- CBasicGrid::CBasicGrid(int,int) {
+ CBasicGrid::CBasicGrid(int a2, int a3) {
   
   CGrid::CGrid((CBasicGrid *)((char *)this + 4), a2);
   *(_DWORD *)this = &CBasicGrid::_vftable_;

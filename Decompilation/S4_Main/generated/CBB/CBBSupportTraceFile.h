@@ -1,6 +1,8 @@
 #ifndef BBSUPPORTLIB_CBBSUPPORTTRACEFILE_H
 #define BBSUPPORTLIB_CBBSUPPORTTRACEFILE_H
 
+#include "defines.h"
+
 namespace BBSupportLib {
 
 class CBBSupportTraceFile {
@@ -12,7 +14,7 @@ public:
     virtual  ~CBBSupportTraceFile(void);
 
     // address=[0x2f2f090]
-    virtual void __stdcall SetFilePath(wchar_t const *);
+    virtual void __stdcall SetFilePath(wchar_t const * a2);
 
     // address=[0x2f2f0d0]
     virtual void __stdcall PrintTime(void);

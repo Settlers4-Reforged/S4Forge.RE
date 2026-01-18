@@ -4,7 +4,7 @@
 
 // address=[0x1402660]
 // Decompiled from int __cdecl CTrojanCatapult::New(int a1)
-static class CPersistence * __cdecl CTrojanCatapult::New(std::istream &) {
+class CPersistence * __cdecl CTrojanCatapult::New(std::istream & a1) {
   
   if ( CTrojanCatapult::operator new(0xD8u) )
     return CTrojanCatapult::CTrojanCatapult(a1);
@@ -15,7 +15,7 @@ static class CPersistence * __cdecl CTrojanCatapult::New(std::istream &) {
 
 // address=[0x153f150]
 // Decompiled from unsigned int __cdecl CTrojanCatapult::operator new(unsigned int a1)
-static void * __cdecl CTrojanCatapult::operator new(unsigned int) {
+void * __cdecl CTrojanCatapult::operator new(unsigned int a1) {
   
   return CVehicleMgr::Alloc((CVehicleMgr *)&g_cVehicleMgr, a1);
 }
@@ -23,7 +23,7 @@ static void * __cdecl CTrojanCatapult::operator new(unsigned int) {
 
 // address=[0x153f170]
 // Decompiled from void __cdecl CTrojanCatapult::operator delete(void *a1)
-static void __cdecl CTrojanCatapult::operator delete(void *) {
+void __cdecl CTrojanCatapult::operator delete(void * a1) {
   
   CVehicleMgr::Dealloc((CVehicleMgr *)&g_cVehicleMgr, a1);
 }
@@ -31,7 +31,7 @@ static void __cdecl CTrojanCatapult::operator delete(void *) {
 
 // address=[0x153f1b0]
 // Decompiled from _DWORD *__thiscall CTrojanCatapult::CTrojanCatapult(_DWORD *this, int a2)
- CTrojanCatapult::CTrojanCatapult(std::istream &) {
+ CTrojanCatapult::CTrojanCatapult(std::istream & a2) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
@@ -58,7 +58,7 @@ static void __cdecl CTrojanCatapult::operator delete(void *) {
 
 // address=[0x153f270]
 // Decompiled from int __thiscall CTrojanCatapult::Store(void *this, struct std::ostream *a2)
-void  CTrojanCatapult::Store(std::ostream &) {
+void  CTrojanCatapult::Store(std::ostream & a2) {
   
   int v3[2]; // [esp+0h] [ebp-8h] BYREF
 
@@ -90,7 +90,7 @@ unsigned long  CTrojanCatapult::ClassID(void)const {
 
 // address=[0x153f2b0]
 // Decompiled from CTrojanCatapult *__thiscall CTrojanCatapult::CTrojanCatapult(  CTrojanCatapult *this,  int a2,  int a3,  int a4,  int a5,  int a6,  int a7,  bool a8)
- CTrojanCatapult::CTrojanCatapult(int,int,int,int,int,int,bool) {
+ CTrojanCatapult::CTrojanCatapult(int a2, int a3, int a4, int a5, int a6, int a7, bool a8) {
   
   CCatapult::CCatapult(this, a2, a3, a4, a5, a6, a7, a8);
   *(_DWORD *)this = &CTrojanCatapult::_vftable_;

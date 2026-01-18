@@ -4,7 +4,7 @@
 
 // address=[0x2f86560]
 // Decompiled from CSurfaceV7 *__cdecl CSurface::CreateSurfacePtr(bool a1)
-static class CSurface * __cdecl CSurface::CreateSurfacePtr(bool) {
+class CSurface * __cdecl CSurface::CreateSurfacePtr(bool a1) {
   
   CSurfaceV7 *v3; // [esp+10h] [ebp-18h]
   CSurfaceV3 *C; // [esp+18h] [ebp-10h]

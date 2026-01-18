@@ -43,7 +43,7 @@
 
 // address=[0x14d94c0]
 // Decompiled from char __thiscall CAnimalEffect::Update(  CAnimalEffect *this,  unsigned int a2,  unsigned int a3,  unsigned int a4,  unsigned int a5)
-void  CAnimalEffect::Update(unsigned int,unsigned int,unsigned int,unsigned int) {
+void  CAnimalEffect::Update(unsigned int a2, unsigned int a3, unsigned int a4, unsigned int a5) {
   
   struct SAnimalData *AnimalEffectDataPtr; // eax
   int OutputWidth; // eax
@@ -166,7 +166,7 @@ void  CAnimalEffect::Update(unsigned int,unsigned int,unsigned int,unsigned int)
 
 // address=[0x14d97b0]
 // Decompiled from void __thiscall CAnimalEffect::SetCurrentAmoutButterflies(CPaneContainer *this, struct CPaneDivider *a2)
-void  CAnimalEffect::SetCurrentAmoutButterflies(int) {
+void  CAnimalEffect::SetCurrentAmoutButterflies(int a2) {
   
   *((_DWORD *)this + 3) = a2;
 }
@@ -174,7 +174,7 @@ void  CAnimalEffect::SetCurrentAmoutButterflies(int) {
 
 // address=[0x14d97d0]
 // Decompiled from CAnimalEffect *__thiscall CAnimalEffect::SetMaxAmountButterflies(CAnimalEffect *this, int a2)
-void  CAnimalEffect::SetMaxAmountButterflies(int) {
+void  CAnimalEffect::SetMaxAmountButterflies(int a2) {
   
   CAnimalEffect *result; // eax
 
@@ -186,7 +186,7 @@ void  CAnimalEffect::SetMaxAmountButterflies(int) {
 
 // address=[0x14d97f0]
 // Decompiled from int __thiscall CAnimalEffect::AddButterfly(CRandom16 **this, int a2, int a3)
-int  CAnimalEffect::AddButterfly(int,int) {
+int  CAnimalEffect::AddButterfly(int a2, int a3) {
   
   int v3; // eax
   unsigned int v5; // [esp+0h] [ebp-10h]
@@ -206,7 +206,7 @@ int  CAnimalEffect::AddButterfly(int,int) {
 
 // address=[0x14d9880]
 // Decompiled from void __thiscall CAnimalEffect::SetCurrentAmoutBirds(CPaneContainer *this, struct CPaneContainer *a2)
-void  CAnimalEffect::SetCurrentAmoutBirds(int) {
+void  CAnimalEffect::SetCurrentAmoutBirds(int a2) {
   
   *((_DWORD *)this + 6) = a2;
 }
@@ -214,7 +214,7 @@ void  CAnimalEffect::SetCurrentAmoutBirds(int) {
 
 // address=[0x14d98a0]
 // Decompiled from void __thiscall CAnimalEffect::SetMaxAmountBirds(CBaseTransition *this, struct CAnimationVariable *a2)
-void  CAnimalEffect::SetMaxAmountBirds(int) {
+void  CAnimalEffect::SetMaxAmountBirds(int a2) {
   
   *((_DWORD *)this + 5) = a2;
 }
@@ -222,7 +222,7 @@ void  CAnimalEffect::SetMaxAmountBirds(int) {
 
 // address=[0x14d98c0]
 // Decompiled from int __thiscall CAnimalEffect::AddBird(CAnimalEffect *this, int a2, int a3)
-int  CAnimalEffect::AddBird(int,int) {
+int  CAnimalEffect::AddBird(int a2, int a3) {
   
   int v3; // eax
   int v5; // [esp+0h] [ebp-Ch]
@@ -239,7 +239,7 @@ int  CAnimalEffect::AddBird(int,int) {
 
 // address=[0x14d9930]
 // Decompiled from void __thiscall CAnimalEffect::SetCurrentAmoutSeagulls(CMFCToolBarButton *this, unsigned int a2)
-void  CAnimalEffect::SetCurrentAmoutSeagulls(int) {
+void  CAnimalEffect::SetCurrentAmoutSeagulls(int a2) {
   
   *((_DWORD *)this + 9) = a2;
 }
@@ -247,7 +247,7 @@ void  CAnimalEffect::SetCurrentAmoutSeagulls(int) {
 
 // address=[0x14d9950]
 // Decompiled from void __thiscall CAnimalEffect::SetMaxAmountSeagulls(CPaneContainer *this, int a2)
-void  CAnimalEffect::SetMaxAmountSeagulls(int) {
+void  CAnimalEffect::SetMaxAmountSeagulls(int a2) {
   
   *((_DWORD *)this + 8) = a2;
 }
@@ -255,7 +255,7 @@ void  CAnimalEffect::SetMaxAmountSeagulls(int) {
 
 // address=[0x14d9970]
 // Decompiled from int __thiscall CAnimalEffect::AddSeagull(CAnimalEffect *this, int a2, int a3)
-int  CAnimalEffect::AddSeagull(int,int) {
+int  CAnimalEffect::AddSeagull(int a2, int a3) {
   
   int v3; // eax
   int v5; // [esp+0h] [ebp-Ch]
@@ -272,7 +272,7 @@ int  CAnimalEffect::AddSeagull(int,int) {
 
 // address=[0x14d99e0]
 // Decompiled from _DWORD *__thiscall CAnimalEffect::SetCurrentAmoutDucks(_DWORD *this, int a2)
-void  CAnimalEffect::SetCurrentAmoutDucks(int) {
+void  CAnimalEffect::SetCurrentAmoutDucks(int a2) {
   
   _DWORD *result; // eax
 
@@ -284,7 +284,7 @@ void  CAnimalEffect::SetCurrentAmoutDucks(int) {
 
 // address=[0x14d9a00]
 // Decompiled from void __thiscall CAnimalEffect::SetMaxAmountDucks(CMFCCaptionButton *this, int a2)
-void  CAnimalEffect::SetMaxAmountDucks(int) {
+void  CAnimalEffect::SetMaxAmountDucks(int a2) {
   
   *((_DWORD *)this + 11) = a2;
 }
@@ -292,7 +292,7 @@ void  CAnimalEffect::SetMaxAmountDucks(int) {
 
 // address=[0x14d9a20]
 // Decompiled from int __thiscall CAnimalEffect::AddDuck(CAnimalEffect *this, int a2, int a3)
-int  CAnimalEffect::AddDuck(int,int) {
+int  CAnimalEffect::AddDuck(int a2, int a3) {
   
   int v3; // eax
   int v5; // [esp+0h] [ebp-Ch]
@@ -309,7 +309,7 @@ int  CAnimalEffect::AddDuck(int,int) {
 
 // address=[0x14d9a90]
 // Decompiled from char __thiscall CAnimalEffect::UpdateButterfly(  CAnimalEffect *this,  unsigned int a2,  int a3,  int a4,  int a5,  __int16 a6)
-bool  CAnimalEffect::UpdateButterfly(int,int,int,int,int) {
+bool  CAnimalEffect::UpdateButterfly(int a2, int a3, int a4, int a5, int a5) {
   
   IEffects *v6; // eax
   IEffects *v8; // eax
@@ -453,7 +453,7 @@ bool  CAnimalEffect::UpdateButterfly(int,int,int,int,int) {
 
 // address=[0x14d9ea0]
 // Decompiled from char __thiscall CAnimalEffect::UpdateBird(CAnimalEffect *this, unsigned int a2, int a3, int a4, int a5)
-bool  CAnimalEffect::UpdateBird(int,int,int,int) {
+bool  CAnimalEffect::UpdateBird(int a2, int a3, int a4, int a4) {
   
   IEffects *v5; // eax
   IEffects *v7; // eax
@@ -599,7 +599,7 @@ LABEL_3:
 
 // address=[0x14da2a0]
 // Decompiled from char __thiscall CAnimalEffect::UpdateSeagull(CAnimalEffect *this, unsigned int a2, int a3, int a4, int a5)
-bool  CAnimalEffect::UpdateSeagull(int,int,int,int) {
+bool  CAnimalEffect::UpdateSeagull(int a2, int a3, int a4, int a4) {
   
   IEffects *v5; // eax
   IEffects *v7; // eax
@@ -795,7 +795,7 @@ bool  CAnimalEffect::UpdateSeagull(int,int,int,int) {
 
 // address=[0x14da790]
 // Decompiled from char __thiscall CAnimalEffect::UpdateDuck(CAnimalEffect *this, int a2, int a3, int a4, int a5)
-bool  CAnimalEffect::UpdateDuck(int,int,int,int) {
+bool  CAnimalEffect::UpdateDuck(int a2, int a3, int a4, int a5) {
   
   return 1;
 }

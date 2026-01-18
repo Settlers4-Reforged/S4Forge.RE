@@ -4,7 +4,7 @@
 
 // address=[0x1402340]
 // Decompiled from int __cdecl CTowerSoldier::New(int a1)
-static class CPersistence * __cdecl CTowerSoldier::New(std::istream &) {
+class CPersistence * __cdecl CTowerSoldier::New(std::istream & a1) {
   
   if ( operator new(0x34u) )
     return CTowerSoldier::CTowerSoldier(a1);
@@ -23,7 +23,7 @@ int  CTowerSoldier::GetSlot(void)const {
 
 // address=[0x1588980]
 // Decompiled from int __cdecl CTowerSoldier::Load(int a1)
-static class CTowerSoldier * __cdecl CTowerSoldier::Load(std::istream &) {
+class CTowerSoldier * __cdecl CTowerSoldier::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
@@ -35,7 +35,7 @@ static class CTowerSoldier * __cdecl CTowerSoldier::Load(std::istream &) {
 
 // address=[0x15948d0]
 // Decompiled from int __thiscall CTowerSoldier::InitWalking(CTowerSoldier *this, struct CSettler *a2)
-class CWalking *  CTowerSoldier::InitWalking(class CSettler *) {
+class CWalking *  CTowerSoldier::InitWalking(class CSettler * a2) {
   
   int v2; // eax
   int v4; // [esp+4h] [ebp-4h]
@@ -49,7 +49,7 @@ class CWalking *  CTowerSoldier::InitWalking(class CSettler *) {
 
 // address=[0x1594910]
 // Decompiled from void __thiscall CTowerSoldier::LogicUpdate(CTowerSoldier *this, struct CSettler *a2)
-void  CTowerSoldier::LogicUpdate(class CSettler *) {
+void  CTowerSoldier::LogicUpdate(class CSettler * a2) {
   
   int v2; // eax
   int v3; // esi
@@ -298,7 +298,7 @@ void  CTowerSoldier::PostLoadInit(class CSettler *) {
 
 // address=[0x1594f00]
 // Decompiled from char __thiscall CTowerSoldier::SetFree(CTowerSoldier *this, struct CSettler *a2, int a3)
-bool  CTowerSoldier::SetFree(class CSettler *,int) {
+bool  CTowerSoldier::SetFree(class CSettler * a2, int a3) {
   
   CBuilding *v3; // eax
   int v5; // [esp-4h] [ebp-8h]
@@ -315,7 +315,7 @@ bool  CTowerSoldier::SetFree(class CSettler *,int) {
 
 // address=[0x1594f50]
 // Decompiled from int __thiscall CTowerSoldier::SetTowerInfo(int this, unsigned int a2, int a3, unsigned int a4)
-void  CTowerSoldier::SetTowerInfo(int,enum CTowerSoldier::T_TOWER_POSITION,int) {
+void  CTowerSoldier::SetTowerInfo(int a2, enum CTowerSoldier::T_TOWER_POSITION a3, int a4) {
   
   int result; // eax
 
@@ -356,7 +356,7 @@ void  CTowerSoldier::SetTowerInfo(int,enum CTowerSoldier::T_TOWER_POSITION,int) 
 
 // address=[0x1595000]
 // Decompiled from int __thiscall CTowerSoldier::Decrease(CTowerSoldier *this, int a2)
-int  CTowerSoldier::Decrease(int) {
+int  CTowerSoldier::Decrease(int a2) {
   
   *((_DWORD *)this + 12) = CStateGame::GetTickCounter(g_pGame);
   return a2;
@@ -365,7 +365,7 @@ int  CTowerSoldier::Decrease(int) {
 
 // address=[0x1595030]
 // Decompiled from char *__thiscall CTowerSoldier::CTowerSoldier(char *this, int a2)
- CTowerSoldier::CTowerSoldier(std::istream &) {
+ CTowerSoldier::CTowerSoldier(std::istream & a2) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
@@ -396,7 +396,7 @@ int  CTowerSoldier::Decrease(int) {
 
 // address=[0x1595140]
 // Decompiled from int __thiscall CTowerSoldier::Store(struct CPersistence *this, struct std::ostream *a2)
-void  CTowerSoldier::Store(std::ostream &) {
+void  CTowerSoldier::Store(std::ostream & a2) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
   struct CPersistence *v4; // [esp+4h] [ebp-4h]
@@ -442,7 +442,7 @@ void  CTowerSoldier::LogicUpdateJob(class CSettler *) {
 
 // address=[0x15951e0]
 // Decompiled from int __cdecl CTowerSoldier::SearchDoorGuardTarget(int a1, int a2)
-static int __cdecl CTowerSoldier::SearchDoorGuardTarget(int,int) {
+int __cdecl CTowerSoldier::SearchDoorGuardTarget(int a1, int a2) {
   
   int v2; // eax
   int v4; // [esp+8h] [ebp-40h]
@@ -505,7 +505,7 @@ static int __cdecl CTowerSoldier::SearchDoorGuardTarget(int,int) {
 
 // address=[0x15953a0]
 // Decompiled from int __cdecl CTowerSoldier::SearchBowmanTarget(int a1, int a2)
-static int __cdecl CTowerSoldier::SearchBowmanTarget(int,int) {
+int __cdecl CTowerSoldier::SearchBowmanTarget(int a1, int a2) {
   
   _DWORD *v3; // eax
   _DWORD *v4; // eax
@@ -642,7 +642,7 @@ static int __cdecl CTowerSoldier::SearchBowmanTarget(int,int) {
 
 // address=[0x1595710]
 // Decompiled from int __thiscall CTowerSoldier::GetNextJob(CTowerSoldier *this, struct CSettler *a2)
-void  CTowerSoldier::GetNextJob(class CSettler *) {
+void  CTowerSoldier::GetNextJob(class CSettler * a2) {
   
   CTowerSoldier *v3; // [esp+0h] [ebp-4h]
 
@@ -656,7 +656,7 @@ void  CTowerSoldier::GetNextJob(class CSettler *) {
 
 // address=[0x1595750]
 // Decompiled from int __thiscall CTowerSoldier::TakeJob(CTowerSoldier *this, struct CSettler *a2)
-void  CTowerSoldier::TakeJob(class CSettler *) {
+void  CTowerSoldier::TakeJob(class CSettler * a2) {
   
   const struct CEntityTask *ActualTask; // eax
   int result; // eax
@@ -700,7 +700,7 @@ void  CTowerSoldier::TakeJob(class CSettler *) {
 
 // address=[0x1595830]
 // Decompiled from CTowerSoldier *__thiscall CTowerSoldier::Init(CTowerSoldier *this, struct CSettler *a2)
-void  CTowerSoldier::Init(class CSettler *) {
+void  CTowerSoldier::Init(class CSettler * a2) {
   
   CTowerSoldier *result; // eax
 
@@ -730,7 +730,7 @@ void  CTowerSoldier::Init(class CSettler *) {
 
 // address=[0x15958d0]
 // Decompiled from void __thiscall CTowerSoldier::SearchEnemy(CTowerSoldier *this, struct CSettler *a2)
-void  CTowerSoldier::SearchEnemy(class CSettler *) {
+void  CTowerSoldier::SearchEnemy(class CSettler * a2) {
   
   int v2; // eax
 
@@ -744,7 +744,7 @@ void  CTowerSoldier::SearchEnemy(class CSettler *) {
 
 // address=[0x1595920]
 // Decompiled from char __thiscall CTowerSoldier::GetAttacker(CTowerSoldier *this, struct CSettler *a2, int a3)
-bool  CTowerSoldier::GetAttacker(class CSettler *,int) {
+bool  CTowerSoldier::GetAttacker(class CSettler * a2, int a3) {
   
   int v3; // eax
   int v4; // eax
@@ -779,7 +779,7 @@ bool  CTowerSoldier::GetAttacker(class CSettler *,int) {
 
 // address=[0x15959e0]
 // Decompiled from void __thiscall CTowerSoldier::WorkIsDone(CTowerSoldier *this, struct CSettler *a2)
-void  CTowerSoldier::WorkIsDone(class CSettler *) {
+void  CTowerSoldier::WorkIsDone(class CSettler * a2) {
   
   CBuilding *v2; // eax
   int v3; // [esp-4h] [ebp-8h]
@@ -793,7 +793,7 @@ void  CTowerSoldier::WorkIsDone(class CSettler *) {
 
 // address=[0x1595a20]
 // Decompiled from void __thiscall CTowerSoldier::ConvertEventIntoGoal(int this, CPropertySet *a2, int a3)
-void  CTowerSoldier::ConvertEventIntoGoal(class CSettler *,class CEntityEvent *) {
+void  CTowerSoldier::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent * a3) {
   
   int v3; // eax
   int v4; // eax

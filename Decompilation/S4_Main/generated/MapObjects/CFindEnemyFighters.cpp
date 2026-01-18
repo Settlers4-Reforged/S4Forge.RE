@@ -4,7 +4,7 @@
 
 // address=[0x15de990]
 // Decompiled from CVWList *__thiscall CFindEnemyFighters::CFindEnemyFighters(CVWList *this, int a2, int a3, int a4, int a5, int a6)
- CFindEnemyFighters::CFindEnemyFighters(int,int,int,int,int) {
+ CFindEnemyFighters::CFindEnemyFighters(int a2, int a3, int a4, int a5, int a6) {
   
   CVWList::CVWList(this, a2, a3, a4);
   *((_DWORD *)this + 56) = a2;

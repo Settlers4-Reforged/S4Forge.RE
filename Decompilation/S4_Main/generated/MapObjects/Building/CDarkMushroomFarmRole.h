@@ -1,10 +1,12 @@
 #ifndef CDARKMUSHROOMFARMROLE_H
 #define CDARKMUSHROOMFARMROLE_H
 
+#include "defines.h"
+
 class CDarkMushroomFarmRole : public IBuildingRole {
 public:
     // address=[0x1400220]
-    static class CPersistence * __cdecl New(std::istream &);
+    static class CPersistence * __cdecl New(std::istream & a1);
 
     // address=[0x141da00]
     int  NumberOfAssociatedServants(void)const;
@@ -19,58 +21,58 @@ public:
     virtual unsigned long  ClassID(void)const;
 
     // address=[0x14fd320]
-    virtual int  GetBuildingNeed(int)const;
+    virtual int  GetBuildingNeed(int a2)const;
 
     // address=[0x14fd460]
     virtual int  GetBuildingRole(void);
 
     // address=[0x14fd5c0]
-    virtual int  GetPileIdWithGood(int)const;
+    virtual int  GetPileIdWithGood(int a2)const;
 
     // address=[0x14fd6e0]
-    virtual void  GoodArrive(int);
+    virtual void  GoodArrive(int a2);
 
     // address=[0x14fd930]
-    static class CDarkMushroomFarmRole * __cdecl Load(std::istream &);
+    static class CDarkMushroomFarmRole * __cdecl Load(std::istream & a1);
 
     // address=[0x1506a60]
-    virtual void  LogicUpdate(class CBuilding *);
+    virtual void  LogicUpdate(class CBuilding * a2);
 
     // address=[0x1506f00]
-    virtual void  FillGfxInfo(class CBuilding *,struct SGfxObjectInfo &);
+    virtual void  FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo & a3);
 
     // address=[0x1506fe0]
-    virtual void  Init(class CBuilding *);
+    virtual void  Init(class CBuilding * a2);
 
     // address=[0x15070d0]
-    virtual void  PostLoadInit(class CBuilding *);
+    virtual void  PostLoadInit(class CBuilding * a2);
 
     // address=[0x1507130]
-    virtual bool  SettlerEnter(class CBuilding *,int);
+    virtual bool  SettlerEnter(class CBuilding * a2, int a3);
 
     // address=[0x1507180]
     virtual void  FillDialog(class CBuilding *,bool);
 
     // address=[0x1507190]
-    bool  HarvestMushroom(class CBuilding *);
+    bool  HarvestMushroom(class CBuilding * a2);
 
     // address=[0x15073a0]
-    bool  PlantMushroom(class CBuilding *);
+    bool  PlantMushroom(class CBuilding * a2);
 
     // address=[0x1507740]
-    void  AttachServant(class CBuilding *,int);
+    void  AttachServant(class CBuilding * a2, int a3);
 
     // address=[0x15077c0]
-    void  DetachServant(class CBuilding *,int);
+    void  DetachServant(class CBuilding * a2, int a3);
 
     // address=[0x1507870]
-    void  TellServantsToWork(class CBuilding *);
+    void  TellServantsToWork(class CBuilding * a2);
 
     // address=[0x1507a20]
-     CDarkMushroomFarmRole(std::istream &);
+     CDarkMushroomFarmRole(std::istream & a2);
 
     // address=[0x1507b70]
-    virtual void  Store(std::ostream &);
+    virtual void  Store(std::ostream & a2);
 
     // address=[0x158e490]
     struct CBuildingInfoMgr::SBuildingInfos const *  GetBuildingInfo(void);

@@ -1,6 +1,8 @@
 #ifndef CECOMANAGERLEAF_CEMLD_H
 #define CECOMANAGERLEAF_CEMLD_H
 
+#include "defines.h"
+
 namespace CEcoManagerLeaf {
 
 class CEMLD {

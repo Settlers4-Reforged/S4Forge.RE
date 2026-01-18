@@ -1,10 +1,12 @@
 #ifndef CTILESEX_H
 #define CTILESEX_H
 
+#include "defines.h"
+
 class CTilesEx {
 public:
     // address=[0x15e3040]
-    static void __cdecl InitTiles(class CLinkList &);
+    static void __cdecl InitTiles(class CLinkList & a1);
 
     // address=[0x15e31c0]
     static void __cdecl DeactivateTilesPushBackMode(void);
@@ -13,10 +15,10 @@ public:
     static void __cdecl CalculateOwnerBits(void);
 
     // address=[0x15e3260]
-    static void __cdecl InsertTileIntoSquareList(int);
+    static void __cdecl InsertTileIntoSquareList(int a1);
 
     // address=[0x15e34f0]
-    static void __cdecl DeleteTileFromSquareList(int);
+    static void __cdecl DeleteTileFromSquareList(int a1);
 
     // address=[0x15e36f0]
     static void __cdecl CalculateListOfFreeTiles(void);
@@ -28,22 +30,22 @@ public:
     static int __cdecl PushTileUndef(void);
 
     // address=[0x15e3a10]
-    static int __cdecl PushTilesBackUndef(int);
+    static int __cdecl PushTilesBackUndef(int a1);
 
     // address=[0x15e3ac0]
-    static int __cdecl PushTile(int,int);
+    static int __cdecl PushTile(int a1, int a2);
 
     // address=[0x15e3b30]
-    static int __cdecl DuplicateTile(int);
+    static int __cdecl DuplicateTile(int a1);
 
     // address=[0x15e3bb0]
-    static void __cdecl DeleteTile(int);
+    static void __cdecl DeleteTile(int a1);
 
     // address=[0x15e7050]
-    static bool __cdecl IsUsedRealTile(int);
+    static bool __cdecl IsUsedRealTile(int a1);
 
     // address=[0x15e71c0]
-    static bool __cdecl IsValidUsedTile(int);
+    static bool __cdecl IsValidUsedTile(int a1);
 
     // address=[0x15e7220]
     static int __cdecl LastUsedTileId(void);

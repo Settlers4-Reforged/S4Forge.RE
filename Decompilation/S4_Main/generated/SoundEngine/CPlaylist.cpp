@@ -31,7 +31,7 @@
 
 // address=[0x2fd8f20]
 // Decompiled from int __thiscall CPlaylist::Init(CPlaylist *this, int a2)
-void  CPlaylist::Init(int) {
+void  CPlaylist::Init(int a2) {
   
   int result; // eax
 
@@ -46,7 +46,7 @@ void  CPlaylist::Init(int) {
 
 // address=[0x2fd8f60]
 // Decompiled from int __thiscall CPlaylist::AddTitle(_DWORD *this, int a2, int a3)
-void  CPlaylist::AddTitle(std::string const *,int) {
+void  CPlaylist::AddTitle(std::string const * a2, int a3) {
   
   int result; // eax
   int v4; // [esp+0h] [ebp-10h]
@@ -101,7 +101,7 @@ int  CPlaylist::GetStreamPos(void) {
 
 // address=[0x2fd9070]
 // Decompiled from int __thiscall CPlaylist::SetStreamPos(_DWORD *this, int a2)
-void  CPlaylist::SetStreamPos(int) {
+void  CPlaylist::SetStreamPos(int a2) {
   
   return AIL_set_stream_position(this[11], a2);
 }
@@ -137,7 +137,7 @@ int  CPlaylist::GetPlayingTitleNum(void) {
 
 // address=[0x2fd90f0]
 // Decompiled from int __thiscall CPlaylist::GetTitle(_DWORD *this, int a2)
-char const *  CPlaylist::GetTitle(int) {
+char const *  CPlaylist::GetTitle(int a2) {
   
   void **v2; // eax
 
@@ -163,7 +163,7 @@ char const *  CPlaylist::GetActiveTitle(void) {
 
 // address=[0x2fd9170]
 // Decompiled from CPlaylist *__thiscall CPlaylist::SetTrackID(CPlaylist *this, unsigned int a2)
-void  CPlaylist::SetTrackID(unsigned int) {
+void  CPlaylist::SetTrackID(unsigned int a2) {
   
   CPlaylist *result; // eax
 
@@ -183,7 +183,7 @@ unsigned int  CPlaylist::GetTrackID(void) {
 
 // address=[0x2fd91b0]
 // Decompiled from CPlaylist *__thiscall CPlaylist::SetTitle(CPlaylist *this, int a2)
-void  CPlaylist::SetTitle(int) {
+void  CPlaylist::SetTitle(int a2) {
   
   CPlaylist *result; // eax
 
@@ -203,7 +203,7 @@ void  CPlaylist::SetTitle(int) {
 
 // address=[0x2fd91e0]
 // Decompiled from void __thiscall CPlaylist::SetHandle(CMFCCaptionButton *this, int a2)
-void  CPlaylist::SetHandle(struct _STREAM *) {
+void  CPlaylist::SetHandle(struct _STREAM * a2) {
   
   *((_DWORD *)this + 11) = a2;
 }
@@ -211,7 +211,7 @@ void  CPlaylist::SetHandle(struct _STREAM *) {
 
 // address=[0x2fd9200]
 // Decompiled from int __thiscall CPlaylist::GetFadeInTime(CPlaylist *this, int a2)
-int  CPlaylist::GetFadeInTime(int) {
+int  CPlaylist::GetFadeInTime(int a2) {
   
   if ( a2 < *((_DWORD *)this + 5) )
     return *(_DWORD *)(*(_DWORD *)std::vector<CPlaylist::SEntry *>::operator[](a2) + 28);

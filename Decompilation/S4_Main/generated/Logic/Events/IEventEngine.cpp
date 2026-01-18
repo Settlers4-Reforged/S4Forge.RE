@@ -74,7 +74,7 @@ void *  IEventEngine::GetEventFunction(void) {
 
 // address=[0x1352d80]
 // Decompiled from char __thiscall IEventEngine::OnEvent(_BYTE *this, _DWORD *a2)
-bool  IEventEngine::OnEvent(class CEvn_Event &) {
+bool  IEventEngine::OnEvent(class CEvn_Event & a2) {
   
   _BYTE v3[12]; // [esp+4h] [ebp-74h] BYREF
   _BYTE v4[12]; // [esp+10h] [ebp-68h] BYREF
@@ -144,7 +144,7 @@ bool  IEventEngine::OnEvent(class CEvn_Event &) {
 
 // address=[0x1352f90]
 // Decompiled from char __thiscall IEventEngine::SendRawWindowEvent(IEventEngine *this, int a2, int a3, int a4, int a5)
-bool  IEventEngine::SendRawWindowEvent(unsigned int,unsigned int,unsigned int,unsigned int) {
+bool  IEventEngine::SendRawWindowEvent(unsigned int a2, unsigned int a3, unsigned int a4, unsigned int a5) {
   
   if ( dword_3ECDA30 > *(_DWORD *)(*((_DWORD *)NtCurrentTeb()->ThreadLocalStoragePointer + _tls_index) + 20296) )
   {
@@ -169,7 +169,7 @@ bool  IEventEngine::SendRawWindowEvent(unsigned int,unsigned int,unsigned int,un
 
 // address=[0x1353090]
 // Decompiled from char __thiscall IEventEngine::SendRawLogicEvent(  IEventEngine *this,  int a2,  int a3,  int a4,  char a5,  int a6,  __int16 a7)
-bool  IEventEngine::SendRawLogicEvent(unsigned int,unsigned int,unsigned int,unsigned int,unsigned int,unsigned int) {
+bool  IEventEngine::SendRawLogicEvent(unsigned int a2, unsigned int a3, unsigned int a4, unsigned int a5, unsigned int a6, unsigned int a7) {
   
   if ( dword_3ECDA08 > *(_DWORD *)(*((_DWORD *)NtCurrentTeb()->ThreadLocalStoragePointer + _tls_index) + 20296) )
   {
@@ -196,7 +196,7 @@ bool  IEventEngine::SendRawLogicEvent(unsigned int,unsigned int,unsigned int,uns
 
 // address=[0x1353190]
 // Decompiled from char __thiscall IEventEngine::SendRawEvent(IEventEngine *this, int a2, int a3, int a4)
-bool  IEventEngine::SendRawEvent(unsigned int,unsigned int,unsigned int) {
+bool  IEventEngine::SendRawEvent(unsigned int a2, unsigned int a3, unsigned int a4) {
   
   if ( dword_3ECDA50 > *(_DWORD *)(*((_DWORD *)NtCurrentTeb()->ThreadLocalStoragePointer + _tls_index) + 20296) )
   {
@@ -220,7 +220,7 @@ bool  IEventEngine::SendRawEvent(unsigned int,unsigned int,unsigned int) {
 
 // address=[0x1353280]
 // Decompiled from char __thiscall IEventEngine::RegisterHandle(IEventEngine *this, struct IEvn_Handle *a2)
-bool  IEventEngine::RegisterHandle(class IEvn_Handle *) {
+bool  IEventEngine::RegisterHandle(class IEvn_Handle * a2) {
   
   _DWORD v3[3]; // [esp-10h] [ebp-5Ch] BYREF
   struct IEvn_Handle **v4; // [esp-4h] [ebp-50h]
@@ -270,7 +270,7 @@ bool  IEventEngine::RegisterHandle(class IEvn_Handle *) {
 
 // address=[0x1353390]
 // Decompiled from char __thiscall IEventEngine::SendAMessage(_BYTE *this, _DWORD *a2)
-bool  IEventEngine::SendAMessage(class CEvn_Event &) {
+bool  IEventEngine::SendAMessage(class CEvn_Event & a2) {
   
   return IEventEngine::OnEvent(this, a2);
 }
@@ -278,7 +278,7 @@ bool  IEventEngine::SendAMessage(class CEvn_Event &) {
 
 // address=[0x13533b0]
 // Decompiled from char __thiscall IEventEngine::UnRegisterHandle(IEventEngine *this, struct IEvn_Handle *a2)
-bool  IEventEngine::UnRegisterHandle(class IEvn_Handle *) {
+bool  IEventEngine::UnRegisterHandle(class IEvn_Handle * a2) {
   
   _BYTE v3[12]; // [esp+4h] [ebp-4Ch] BYREF
   _BYTE v4[12]; // [esp+10h] [ebp-40h] BYREF
@@ -437,7 +437,7 @@ bool  IEventEngine::DispatchSystemMessages(void) {
 
 // address=[0x13537d0]
 // Decompiled from IEventEngine *__thiscall IEventEngine::SetOSParam(IEventEngine *this, unsigned int a2)
-void  IEventEngine::SetOSParam(unsigned int) {
+void  IEventEngine::SetOSParam(unsigned int a2) {
   
   IEventEngine *result; // eax
 
@@ -449,7 +449,7 @@ void  IEventEngine::SetOSParam(unsigned int) {
 
 // address=[0x13537f0]
 // Decompiled from char __thiscall IEventEngine::PlayEvents(void *this, void *a2, int a3)
-bool  IEventEngine::PlayEvents(std::string const &,int) {
+bool  IEventEngine::PlayEvents(std::string const & a2, int a3) {
   
   const CHAR *v3; // eax
   const char *v4; // eax
@@ -532,7 +532,7 @@ bool  IEventEngine::PlayEvents(std::string const &,int) {
 
 // address=[0x1353a60]
 // Decompiled from char __thiscall IEventEngine::RecordEvents(void *this, void *a2)
-bool  IEventEngine::RecordEvents(std::string const &) {
+bool  IEventEngine::RecordEvents(std::string const & a2) {
   
   const CHAR *v3; // eax
   const char *v4; // eax
@@ -570,7 +570,7 @@ bool  IEventEngine::RecordEvents(std::string const &) {
 
 // address=[0x1353b60]
 // Decompiled from void __thiscall IEventEngine::SetGuiEventProc(IEventEngine *this, unsigned int a2)
-void  IEventEngine::SetGuiEventProc(bool (__cdecl*)(struct SEventStruct &)) {
+void  IEventEngine::SetGuiEventProc(bool (__cdecl*)(struct SEventStruct &) a2) {
   
   this->activePrimaryHandler = (unsigned __int8 (__cdecl *)(struct SEventStruct *))a2;
 }
@@ -586,7 +586,7 @@ bool  IEventEngine::IsEventEngineLocked(void) {
 
 // address=[0x135e0f0]
 // Decompiled from void __thiscall IEventEngine::SetOSParam1(IEventEngine *this, HWND a2)
-void  IEventEngine::SetOSParam1(unsigned int) {
+void  IEventEngine::SetOSParam1(unsigned int a2) {
   
   this->hwnd = a2;
 }
@@ -594,7 +594,7 @@ void  IEventEngine::SetOSParam1(unsigned int) {
 
 // address=[0x148fed0]
 // Decompiled from IEventEngine *__thiscall IEventEngine::LockEventEngine(IEventEngine *this, char a2)
-void  IEventEngine::LockEventEngine(bool) {
+void  IEventEngine::LockEventEngine(bool a2) {
   
   IEventEngine *result; // eax
 
@@ -617,7 +617,7 @@ unsigned int  IEventEngine::GetCurrentTickCounter(void) {
 
 // address=[0x14ab030]
 // Decompiled from void __thiscall IEventEngine::SetTickPointer(IEventEngine *this, struct CPaneContainer *a2)
-void  IEventEngine::SetTickPointer(unsigned int *) {
+void  IEventEngine::SetTickPointer(unsigned int * a2) {
   
   this->tick = (int)a2;
 }

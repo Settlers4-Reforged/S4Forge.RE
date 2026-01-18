@@ -13,7 +13,7 @@
 
 // address=[0x1326170]
 // Decompiled from char __thiscall CMilitaryBuildingIterator::Init(CMilitaryBuildingIterator *this, int a2)
-void  CMilitaryBuildingIterator::Init(int) {
+void  CMilitaryBuildingIterator::Init(int a2) {
   
   return CGenericBuildingIterator::Init(this, a2, 46, 48);
 }

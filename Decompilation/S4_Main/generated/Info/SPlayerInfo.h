@@ -1,6 +1,8 @@
 #ifndef SPLAYERINFO_H
 #define SPLAYERINFO_H
 
+#include "defines.h"
+
 class SPlayerInfo {
 public:
     // address=[0x14aa720]

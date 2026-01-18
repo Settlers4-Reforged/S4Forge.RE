@@ -4,7 +4,7 @@
 
 // address=[0x14ce700]
 // Decompiled from void *__cdecl CStringEngine::CreateStringEngine(int a1)
-static class CStringEngine * __cdecl CStringEngine::CreateStringEngine(int) {
+class CStringEngine * __cdecl CStringEngine::CreateStringEngine(int a1) {
   
   CStringEngineEx *C; // [esp+Ch] [ebp-10h]
 

@@ -4,7 +4,7 @@
 
 // address=[0x1401620]
 // Decompiled from int __cdecl CPioneerRole::New(int a1)
-static class CPersistence * __cdecl CPioneerRole::New(std::istream &) {
+class CPersistence * __cdecl CPioneerRole::New(std::istream & a1) {
   
   if ( operator new(0x4Cu) )
     return CPioneerRole::CPioneerRole(a1);
@@ -15,7 +15,7 @@ static class CPersistence * __cdecl CPioneerRole::New(std::istream &) {
 
 // address=[0x15796d0]
 // Decompiled from int __thiscall CPioneerRole::InitWalking(CPioneerRole *this, struct CSettler *a2)
-class CWalking *  CPioneerRole::InitWalking(class CSettler *) {
+class CWalking *  CPioneerRole::InitWalking(class CSettler * a2) {
   
   int v2; // eax
   int v4; // [esp+4h] [ebp-4h]
@@ -29,7 +29,7 @@ class CWalking *  CPioneerRole::InitWalking(class CSettler *) {
 
 // address=[0x1579710]
 // Decompiled from int __thiscall CPioneerRole::LogicUpdateJob(CPioneerRole *this, struct CSettler *a2)
-void  CPioneerRole::LogicUpdateJob(class CSettler *) {
+void  CPioneerRole::LogicUpdateJob(class CSettler * a2) {
   
   int v2; // ecx
   int result; // eax
@@ -74,7 +74,7 @@ void  CPioneerRole::LogicUpdateJob(class CSettler *) {
 
 // address=[0x1579880]
 // Decompiled from int __thiscall CPioneerRole::PostLoadInit(int this, CPropertySet *a2)
-void  CPioneerRole::PostLoadInit(class CSettler *) {
+void  CPioneerRole::PostLoadInit(class CSettler * a2) {
   
   int result; // eax
   int v4; // [esp+0h] [ebp-4h]
@@ -97,7 +97,7 @@ void  CPioneerRole::PostLoadInit(class CSettler *) {
 
 // address=[0x15798f0]
 // Decompiled from _DWORD *__thiscall CPioneerRole::CPioneerRole(_DWORD *this, int a2)
- CPioneerRole::CPioneerRole(std::istream &) {
+ CPioneerRole::CPioneerRole(std::istream & a2) {
   
   int v2; // eax
   _DWORD v4[2]; // [esp+4h] [ebp-24h] BYREF
@@ -140,7 +140,7 @@ void  CPioneerRole::PostLoadInit(class CSettler *) {
 
 // address=[0x1579a50]
 // Decompiled from int __thiscall CPioneerRole::Store(int *this, struct std::ostream *a2)
-void  CPioneerRole::Store(std::ostream &) {
+void  CPioneerRole::Store(std::ostream & a2) {
   
   unsigned int v2; // esi
   int v4; // [esp+0h] [ebp-80h]
@@ -250,7 +250,7 @@ int  CPioneerRole::GetSettlerRole(void)const {
 
 // address=[0x15887c0]
 // Decompiled from int __cdecl CPioneerRole::Load(int a1)
-static class CPioneerRole * __cdecl CPioneerRole::Load(std::istream &) {
+class CPioneerRole * __cdecl CPioneerRole::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
@@ -317,7 +317,7 @@ static class CPioneerRole * __cdecl CPioneerRole::Load(std::istream &) {
 
 // address=[0x1579e70]
 // Decompiled from int __thiscall CPioneerRole::GetNextJob(CPioneerRole *this, struct CSettler *a2)
-void  CPioneerRole::GetNextJob(class CSettler *) {
+void  CPioneerRole::GetNextJob(class CSettler * a2) {
   
   CPioneerRole *v3; // [esp+0h] [ebp-4h]
 
@@ -331,7 +331,7 @@ void  CPioneerRole::GetNextJob(class CSettler *) {
 
 // address=[0x1579eb0]
 // Decompiled from void __thiscall CPioneerRole::TakeJob(ISettlerRole *this, COleCmdUI *a2)
-void  CPioneerRole::TakeJob(class CSettler *) {
+void  CPioneerRole::TakeJob(class CSettler * a2) {
   
   const struct CEntityTask *ActualTask; // eax
   int v3; // eax
@@ -456,7 +456,7 @@ LABEL_13:
 
 // address=[0x157a330]
 // Decompiled from int __thiscall CPioneerRole::Init(_WORD *this, CPropertySet *a2)
-void  CPioneerRole::Init(class CSettler *) {
+void  CPioneerRole::Init(class CSettler * a2) {
   
   if ( IEntity::FlagBits(a2, Attached)
     && BBSupportDbgReport(
@@ -477,7 +477,7 @@ void  CPioneerRole::Init(class CSettler *) {
 
 // address=[0x157a3c0]
 // Decompiled from int __thiscall CPioneerRole::WorkIsDone(CPioneerRole *this, struct CSettler *a2)
-void  CPioneerRole::WorkIsDone(class CSettler *) {
+void  CPioneerRole::WorkIsDone(class CSettler * a2) {
   
   int v2; // eax
   int v3; // eax
@@ -494,7 +494,7 @@ void  CPioneerRole::WorkIsDone(class CSettler *) {
 
 // address=[0x157a410]
 // Decompiled from char __thiscall CPioneerRole::ConvertEventIntoGoal(int *this, CPropertySet *a2, const struct CEntityEvent *a3)
-void  CPioneerRole::ConvertEventIntoGoal(class CSettler *,class CEntityEvent *) {
+void  CPioneerRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent * a3) {
   
   int v3; // eax
   int v4; // eax
@@ -681,7 +681,7 @@ void  CPioneerRole::ConvertEventIntoGoal(class CSettler *,class CEntityEvent *) 
 
 // address=[0x157a8b0]
 // Decompiled from char __thiscall CPioneerRole::SearchPosition(CPioneerRole *this, struct CSettler *a2)
-bool  CPioneerRole::SearchPosition(class CSettler *) {
+bool  CPioneerRole::SearchPosition(class CSettler * a2) {
   
   int v2; // eax
   int v3; // esi
@@ -746,7 +746,7 @@ bool  CPioneerRole::SearchPosition(class CSettler *) {
 
 // address=[0x157aaa0]
 // Decompiled from bool __thiscall CPioneerRole::CheckLand(CPioneerRole *this, int a2, int a3, struct CSettler *a4, bool a5)
-bool  CPioneerRole::CheckLand(int,int,class CSettler *,bool) {
+bool  CPioneerRole::CheckLand(int a2, int a3, class CSettler * a4, bool a5) {
   
   int v5; // eax
   int v7; // eax
@@ -789,7 +789,7 @@ bool  CPioneerRole::CheckLand(int,int,class CSettler *,bool) {
 
 // address=[0x157abe0]
 // Decompiled from int __thiscall CPioneerRole::TakeLand(CPioneerRole *this, struct CSettler *a2)
-void  CPioneerRole::TakeLand(class CSettler *) {
+void  CPioneerRole::TakeLand(class CSettler * a2) {
   
   int v2; // esi
   int v3; // eax

@@ -4,7 +4,7 @@
 
 // address=[0x1549690]
 // Decompiled from CMushroom *__thiscall CMushroom::CMushroom(CMushroom *this, int a2, int a3, int a4, int a5, int a6)
- CMushroom::CMushroom(int,int,int,int,int) {
+ CMushroom::CMushroom(int a2, int a3, int a4, int a5, int a6) {
   
   IDecoObject::IDecoObject(this, a2, a3, a4, a5, a6 != 0);
   *(_DWORD *)this = &CMushroom::_vftable_;
@@ -36,7 +36,7 @@
 
 // address=[0x15497e0]
 // Decompiled from CMushroom *__thiscall CMushroom::CMushroom(CMushroom *this, const struct CMushroom *a2, int a3, int a4, int a5)
- CMushroom::CMushroom(class CMushroom const &,int,int,int) {
+ CMushroom::CMushroom(class CMushroom const & a2, int a3, int a4, int a5) {
   
   IDecoObject::IDecoObject(this, a2, a3, a4, a5);
   *(_DWORD *)this = &CMushroom::_vftable_;
@@ -149,7 +149,7 @@ struct SGfxObjectInfo *  CMushroom::GetGfxInfos(void) {
 
 // address=[0x1549b00]
 // Decompiled from int __thiscall CMushroom::Decrease(CMushroom *this, int a2)
-void  CMushroom::Decrease(int) {
+void  CMushroom::Decrease(int a2) {
   
   if ( IDecoObject::IsStaticInstance(this)
     && BBSupportDbgReport(2, "MapObjects\\DecoObj\\Mushroom.cpp", 335, "IsStaticInstance() == false") == 1 )
@@ -175,7 +175,7 @@ void  CMushroom::Decrease(int) {
 
 // address=[0x1549be0]
 // Decompiled from int __thiscall CMushroom::Increase(CMushroom *this, int a2)
-int  CMushroom::Increase(int) {
+int  CMushroom::Increase(int a2) {
   
   return 1;
 }
@@ -183,7 +183,7 @@ int  CMushroom::Increase(int) {
 
 // address=[0x1549c00]
 // Decompiled from unsigned int __cdecl CMushroom::operator new(unsigned int a1)
-static void * __cdecl CMushroom::operator new(unsigned int) {
+void * __cdecl CMushroom::operator new(unsigned int a1) {
   
   return CDecoObjMgr::Alloc((CDecoObjMgr *)&g_cDecoObjMgr, a1);
 }
@@ -191,7 +191,7 @@ static void * __cdecl CMushroom::operator new(unsigned int) {
 
 // address=[0x1549c20]
 // Decompiled from void __cdecl CMushroom::operator delete(void *a1)
-static void __cdecl CMushroom::operator delete(void *) {
+void __cdecl CMushroom::operator delete(void * a1) {
   
   CDecoObjMgr::Dealloc((CDecoObjMgr *)&g_cDecoObjMgr, a1);
 }
@@ -199,7 +199,7 @@ static void __cdecl CMushroom::operator delete(void *) {
 
 // address=[0x1549c60]
 // Decompiled from _DWORD *__thiscall CMushroom::CMushroom(_DWORD *this, int a2)
- CMushroom::CMushroom(std::istream &) {
+ CMushroom::CMushroom(std::istream & a2) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
@@ -229,7 +229,7 @@ static void __cdecl CMushroom::operator delete(void *) {
 
 // address=[0x1549d60]
 // Decompiled from int __thiscall CMushroom::Store(int *this, struct std::ostream *a2)
-void  CMushroom::Store(std::ostream &) {
+void  CMushroom::Store(std::ostream & a2) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
   int *v4; // [esp+4h] [ebp-4h]

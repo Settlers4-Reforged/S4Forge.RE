@@ -4,7 +4,7 @@
 
 // address=[0x13151c0]
 // Decompiled from int __thiscall CManySettlerTypesIterator::Init(CManySettlerTypesIterator *this, int a2, int a3, int a4)
-void  CManySettlerTypesIterator::Init(int,int,int) {
+void  CManySettlerTypesIterator::Init(int a2, int a3, int a4) {
   
   int result; // eax
 

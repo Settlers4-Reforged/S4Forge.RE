@@ -231,7 +231,7 @@ unsigned int  CAIAgentDarkTribeAttack::Execute(unsigned int,unsigned int) {
 
 // address=[0x12fa500]
 // Decompiled from int __thiscall CAIAgentDarkTribeAttack::Load(CAIAgentDarkTribeAttack *this, struct IS4Chunk *a2)
-void  CAIAgentDarkTribeAttack::Load(class IS4Chunk &) {
+void  CAIAgentDarkTribeAttack::Load(class IS4Chunk & a2) {
   
   unsigned int v3; // [esp+0h] [ebp-8h]
 
@@ -256,7 +256,7 @@ void  CAIAgentDarkTribeAttack::Load(class IS4Chunk &) {
 
 // address=[0x12fa610]
 // Decompiled from int __thiscall CAIAgentDarkTribeAttack::Save(CAIAgentDarkTribeAttack *this, struct IS4Chunk *a2)
-void  CAIAgentDarkTribeAttack::Save(class IS4Chunk &) {
+void  CAIAgentDarkTribeAttack::Save(class IS4Chunk & a2) {
   
   (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 24))(a2, -1516302336);
   (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 20))(a2, 2);
@@ -275,7 +275,7 @@ void  CAIAgentDarkTribeAttack::Save(class IS4Chunk &) {
 
 // address=[0x12fa700]
 // Decompiled from void __thiscall CAIAgentDarkTribeAttack::AttackWithShamans(CAIAgentDarkTribeAttack *this, int a2, int a3, bool a4)
-void  CAIAgentDarkTribeAttack::AttackWithShamans(int,int,bool) {
+void  CAIAgentDarkTribeAttack::AttackWithShamans(int a2, int a3, bool a4) {
   
   if ( a3 >= 0 )
   {
@@ -384,7 +384,7 @@ bool  CAIAgentDarkTribeAttack::ShamanAttackTaskForceAvailable(void)const {
 
 // address=[0x12fa900]
 // Decompiled from char __thiscall CAIAgentDarkTribeAttack::ManakopterTaskForceAvailable(CAIAgentDarkTribeAttack *this, bool a2)
-bool  CAIAgentDarkTribeAttack::ManakopterTaskForceAvailable(bool)const {
+bool  CAIAgentDarkTribeAttack::ManakopterTaskForceAvailable(bool a2)const {
   
   struct CAIDarkTribeSectorAI *v2; // eax
   int v3; // eax
@@ -423,7 +423,7 @@ bool  CAIAgentDarkTribeAttack::CheckShamanAttackPosition(void) {
 
 // address=[0x12fa9c0]
 // Decompiled from int __thiscall CAIAgentDarkTribeAttack::OrderShamanTaskForcesHome(CAIDarkTribeSectorAgent *this, int a2)
-void  CAIAgentDarkTribeAttack::OrderShamanTaskForcesHome(enum T_AI_TASK_FORCE_CMD) {
+void  CAIAgentDarkTribeAttack::OrderShamanTaskForcesHome(enum T_AI_TASK_FORCE_CMD a2) {
   
   struct CAIDarkTribeSectorAI *v2; // eax
   struct CAIDarkTribeSectorAI *v3; // eax
@@ -454,7 +454,7 @@ void  CAIAgentDarkTribeAttack::OrderShamanTaskForcesHome(enum T_AI_TASK_FORCE_CM
 
 // address=[0x12faa30]
 // Decompiled from int __thiscall CAIAgentDarkTribeAttack::OrderShamanTaskForcesToManakopter(  CAIDarkTribeSectorAgent *this,  bool a2,  char a3)
-int  CAIAgentDarkTribeAttack::OrderShamanTaskForcesToManakopter(bool,bool) {
+int  CAIAgentDarkTribeAttack::OrderShamanTaskForcesToManakopter(bool a2, bool a3) {
   
   struct CAIDarkTribeSectorAI *v3; // eax
   int v4; // eax
@@ -663,7 +663,7 @@ int  CAIAgentDarkTribeAttack::OrderShamanTaskForcesToAttackPosition(void) {
 
 // address=[0x12fae60]
 // Decompiled from int __thiscall CAIAgentDarkTribeAttack::OrderManakopterToPosition(CAIAgentDarkTribeAttack *this, bool a2)
-int  CAIAgentDarkTribeAttack::OrderManakopterToPosition(bool) {
+int  CAIAgentDarkTribeAttack::OrderManakopterToPosition(bool a2) {
   
   struct CAIDarkTribeSectorAI *v2; // eax
   int v3; // eax
@@ -786,7 +786,7 @@ int  CAIAgentDarkTribeAttack::OrderManakopterToPosition(bool) {
 
 // address=[0x12fb1c0]
 // Decompiled from int __thiscall CAIAgentDarkTribeAttack::OrderManakopterUnload(CAIAgentDarkTribeAttack *this, bool a2)
-int  CAIAgentDarkTribeAttack::OrderManakopterUnload(bool) {
+int  CAIAgentDarkTribeAttack::OrderManakopterUnload(bool a2) {
   
   struct CAIDarkTribeSectorAI *v2; // eax
   int v3; // eax
@@ -1194,7 +1194,7 @@ bool  CAIAgentDarkTribeAttack::CheckIfReadyForReturn(void) {
 
 // address=[0x12fba00]
 // Decompiled from int __thiscall CAIAgentDarkTribeAttack::SetMissionBit(CAIDarkTribeSectorAgent *this, int a2)
-void  CAIAgentDarkTribeAttack::SetMissionBit(enum T_AI_TASK_FORCE_CMD) {
+void  CAIAgentDarkTribeAttack::SetMissionBit(enum T_AI_TASK_FORCE_CMD a2) {
   
   struct CAIDarkTribeSectorAI *v2; // eax
   int v3; // eax

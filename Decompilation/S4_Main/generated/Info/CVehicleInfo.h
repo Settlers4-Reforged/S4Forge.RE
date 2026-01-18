@@ -1,6 +1,8 @@
 #ifndef CVEHICLEINFO_H
 #define CVEHICLEINFO_H
 
+#include "defines.h"
+
 class CVehicleInfo : public CInfoExchange {
 public:
     // address=[0x14549c0]

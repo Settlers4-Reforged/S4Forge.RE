@@ -4,7 +4,7 @@
 
 // address=[0x1400e00]
 // Decompiled from int __cdecl CHJBRole::New(int a1)
-static class CPersistence * __cdecl CHJBRole::New(std::istream &) {
+class CPersistence * __cdecl CHJBRole::New(std::istream & a1) {
   
   if ( operator new(0x80u) )
     return CHJBRole::CHJBRole(a1);
@@ -15,7 +15,7 @@ static class CPersistence * __cdecl CHJBRole::New(std::istream &) {
 
 // address=[0x1574e20]
 // Decompiled from _DWORD *__thiscall CHJBRole::CHJBRole(_DWORD *this, int a2)
- CHJBRole::CHJBRole(std::istream &) {
+ CHJBRole::CHJBRole(std::istream & a2) {
   
   int pExceptionObject; // [esp+8h] [ebp-14h] BYREF
   _DWORD *v4; // [esp+Ch] [ebp-10h]
@@ -43,7 +43,7 @@ static class CPersistence * __cdecl CHJBRole::New(std::istream &) {
 
 // address=[0x1574f10]
 // Decompiled from int __thiscall CHJBRole::Store(int *this, struct std::ostream *a2)
-void  CHJBRole::Store(std::ostream &) {
+void  CHJBRole::Store(std::ostream & a2) {
   
   CSquadLeaderRole::Store(a2);
   Serial::StoreVersion(a2, 1);
@@ -55,7 +55,7 @@ void  CHJBRole::Store(std::ostream &) {
 
 // address=[0x1575030]
 // Decompiled from void __thiscall CHJBRole::LogicUpdateJob(CHJBRole *this, struct CSettler *a2)
-void  CHJBRole::LogicUpdateJob(class CSettler *) {
+void  CHJBRole::LogicUpdateJob(class CSettler * a2) {
   
   int v2; // eax
   int v3; // eax
@@ -178,7 +178,7 @@ LABEL_13:
 
 // address=[0x1575310]
 // Decompiled from int __thiscall CHJBRole::Decrease(CHJBRole *this, int a2)
-int  CHJBRole::Decrease(int) {
+int  CHJBRole::Decrease(int a2) {
   
   int v4; // [esp+4h] [ebp-8h]
   IEntity *v5; // [esp+8h] [ebp-4h]
@@ -220,7 +220,7 @@ bool  CHJBRole::IsHJB(void) {
 
 // address=[0x15886c0]
 // Decompiled from int __cdecl CHJBRole::Load(int a1)
-static class CHJBRole * __cdecl CHJBRole::Load(std::istream &) {
+class CHJBRole * __cdecl CHJBRole::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
@@ -249,7 +249,7 @@ static class CHJBRole * __cdecl CHJBRole::Load(std::istream &) {
 
 // address=[0x1574f70]
 // Decompiled from void __thiscall CHJBRole::PostLoadInit(void *this, CPropertySet *a2)
-void  CHJBRole::PostLoadInit(class CSettler *) {
+void  CHJBRole::PostLoadInit(class CSettler * a2) {
   
   struct CFrameWnd *v2; // eax
   struct CFrameWnd *v3; // eax
@@ -285,7 +285,7 @@ void  CHJBRole::PostLoadInit(class CSettler *) {
 
 // address=[0x15753b0]
 // Decompiled from int __thiscall CHJBRole::FindNewHJBPosition(CHJBRole *this, struct CSettler *a2)
-int  CHJBRole::FindNewHJBPosition(class CSettler *) {
+int  CHJBRole::FindNewHJBPosition(class CSettler * a2) {
   
   int v2; // eax
   int v3; // eax
@@ -349,7 +349,7 @@ int  CHJBRole::FindNewHJBPosition(class CSettler *) {
 
 // address=[0x15755d0]
 // Decompiled from int __thiscall CHJBRole::FindNearFreePositionInSector(CHJBRole *this, int a2, int a3, int a4)
-int  CHJBRole::FindNearFreePositionInSector(int,int,int) {
+int  CHJBRole::FindNearFreePositionInSector(int a2, int a3, int a4) {
   
   _BYTE v5[20]; // [esp+0h] [ebp-2Ch] BYREF
   CHJBRole *v6; // [esp+14h] [ebp-18h]
@@ -390,7 +390,7 @@ int  CHJBRole::FindNearFreePositionInSector(int,int,int) {
 
 // address=[0x15756a0]
 // Decompiled from char __thiscall CHJBRole::ExecuteAttackSpell(CHJBRole *this, struct CSettler *a2, int a3, int a4)
-void  CHJBRole::ExecuteAttackSpell(class CSettler *,int,int) {
+void  CHJBRole::ExecuteAttackSpell(class CSettler * a2, int a3, int a4) {
   
   int v4; // eax
   char result; // al

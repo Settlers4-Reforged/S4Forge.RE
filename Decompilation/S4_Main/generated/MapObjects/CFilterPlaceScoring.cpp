@@ -14,7 +14,7 @@
 
 // address=[0x2f39720]
 // Decompiled from CFilterPlaceScoring *__thiscall CFilterPlaceScoring::CFilterPlaceScoring(  CFilterPlaceScoring *this,  struct CSchedule *a2,  struct SBUILDINFODATA *a3,  int a4,  int a5,  int a6)
- CFilterPlaceScoring::CFilterPlaceScoring(class CSchedule *,struct SBUILDINFODATA *,int,int,int) {
+ CFilterPlaceScoring::CFilterPlaceScoring(class CSchedule * a2, struct SBUILDINFODATA * a3, int a4, int a5, int a6) {
   
   IFilterEntry::IFilterEntry(this);
   *(_DWORD *)this = &CFilterPlaceScoring::_vftable_;

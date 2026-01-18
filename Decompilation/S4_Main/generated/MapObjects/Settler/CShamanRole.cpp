@@ -12,7 +12,7 @@ bool  CShamanRole::IsManaPoolEmpty(void) {
 
 // address=[0x1401d00]
 // Decompiled from int __cdecl CShamanRole::New(int a1)
-static class CPersistence * __cdecl CShamanRole::New(std::istream &) {
+class CPersistence * __cdecl CShamanRole::New(std::istream & a1) {
   
   if ( operator new(0x74u) )
     return CShamanRole::CShamanRole(a1);
@@ -23,7 +23,7 @@ static class CPersistence * __cdecl CShamanRole::New(std::istream &) {
 
 // address=[0x1588880]
 // Decompiled from int __cdecl CShamanRole::Load(int a1)
-static class CShamanRole * __cdecl CShamanRole::Load(std::istream &) {
+class CShamanRole * __cdecl CShamanRole::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
@@ -35,7 +35,7 @@ static class CShamanRole * __cdecl CShamanRole::Load(std::istream &) {
 
 // address=[0x158be00]
 // Decompiled from void __thiscall CShamanRole::LogicUpdateJob(CShamanRole *this, struct CSettler *a2)
-void  CShamanRole::LogicUpdateJob(class CSettler *) {
+void  CShamanRole::LogicUpdateJob(class CSettler * a2) {
   
   int v2; // eax
   int v3; // eax
@@ -151,7 +151,7 @@ void  CShamanRole::LogicUpdateJob(class CSettler *) {
 
 // address=[0x158c090]
 // Decompiled from _DWORD *__thiscall CShamanRole::WarriorTaskAttack(_DWORD *this, struct CSettler *a2, int a3, int a4)
-void  CShamanRole::WarriorTaskAttack(class IMovingEntity &,int,enum T_WARRIOR_ATTACK) {
+void  CShamanRole::WarriorTaskAttack(class IMovingEntity & a2, int a3, enum T_WARRIOR_ATTACK a4) {
   
   int v4; // eax
   int v5; // eax
@@ -257,7 +257,7 @@ void  CShamanRole::WarriorTaskAttack(class IMovingEntity &,int,enum T_WARRIOR_AT
 
 // address=[0x158c340]
 // Decompiled from int __thiscall CShamanRole::ConvertEventIntoGoal(int *this, CPropertySet *a2, int a3)
-void  CShamanRole::ConvertEventIntoGoal(class CSettler *,class CEntityEvent *) {
+void  CShamanRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent * a3) {
   
   int v3; // eax
   int v5; // [esp-8h] [ebp-18h]
@@ -296,7 +296,7 @@ void  CShamanRole::ConvertEventIntoGoal(class CSettler *,class CEntityEvent *) {
 
 // address=[0x158c430]
 // Decompiled from _DWORD *__thiscall CShamanRole::CShamanRole(_DWORD *this, int a2)
- CShamanRole::CShamanRole(std::istream &) {
+ CShamanRole::CShamanRole(std::istream & a2) {
   
   int v3; // [esp+4h] [ebp-1Ch] BYREF
   int pExceptionObject; // [esp+8h] [ebp-18h] BYREF
@@ -339,7 +339,7 @@ void  CShamanRole::ConvertEventIntoGoal(class CSettler *,class CEntityEvent *) {
 
 // address=[0x158c580]
 // Decompiled from int __thiscall CShamanRole::Store(int *this, struct std::ostream *a2)
-void  CShamanRole::Store(std::ostream &) {
+void  CShamanRole::Store(std::ostream & a2) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
   int *v4; // [esp+4h] [ebp-4h]
@@ -391,7 +391,7 @@ int  CShamanRole::GetSettlerRole(void)const {
 
 // address=[0x158c690]
 // Decompiled from int __thiscall CShamanRole::CheckForManakopter(CShamanRole *this, struct CSettler *a2)
-int  CShamanRole::CheckForManakopter(class CSettler *) {
+int  CShamanRole::CheckForManakopter(class CSettler * a2) {
   
   int v2; // eax
   int v3; // eax

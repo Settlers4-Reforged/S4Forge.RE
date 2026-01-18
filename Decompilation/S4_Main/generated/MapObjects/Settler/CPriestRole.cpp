@@ -4,7 +4,7 @@
 
 // address=[0x1401760]
 // Decompiled from int __cdecl CPriestRole::New(int a1)
-static class CPersistence * __cdecl CPriestRole::New(std::istream &) {
+class CPersistence * __cdecl CPriestRole::New(std::istream & a1) {
   
   if ( operator new(0x40u) )
     return CPriestRole::CPriestRole(a1);
@@ -15,7 +15,7 @@ static class CPersistence * __cdecl CPriestRole::New(std::istream &) {
 
 // address=[0x157b260]
 // Decompiled from int __thiscall CPriestRole::InitWalking(CPriestRole *this, struct CSettler *a2)
-class CWalking *  CPriestRole::InitWalking(class CSettler *) {
+class CWalking *  CPriestRole::InitWalking(class CSettler * a2) {
   
   int v2; // eax
   int v4; // [esp+4h] [ebp-4h]
@@ -29,7 +29,7 @@ class CWalking *  CPriestRole::InitWalking(class CSettler *) {
 
 // address=[0x157b2a0]
 // Decompiled from int __thiscall CPriestRole::LogicUpdateJob(CPriestRole *this, struct CSettler *a2)
-void  CPriestRole::LogicUpdateJob(class CSettler *) {
+void  CPriestRole::LogicUpdateJob(class CSettler * a2) {
   
   int v2; // eax
   int v3; // esi
@@ -82,7 +82,7 @@ void  CPriestRole::LogicUpdateJob(class CSettler *) {
 
 // address=[0x157b3c0]
 // Decompiled from int __stdcall CPriestRole::PostLoadInit(CPropertySet *a1)
-void  CPriestRole::PostLoadInit(class CSettler *) {
+void  CPriestRole::PostLoadInit(class CSettler * a1) {
   
   return CWarMap::AddEntity(a1);
 }
@@ -90,7 +90,7 @@ void  CPriestRole::PostLoadInit(class CSettler *) {
 
 // address=[0x157b3e0]
 // Decompiled from _DWORD *__thiscall CPriestRole::CPriestRole(_DWORD *this, int a2)
- CPriestRole::CPriestRole(std::istream &) {
+ CPriestRole::CPriestRole(std::istream & a2) {
   
   int v2; // eax
   unsigned int v4; // [esp+4h] [ebp-24h] BYREF
@@ -134,7 +134,7 @@ void  CPriestRole::PostLoadInit(class CSettler *) {
 
 // address=[0x157b500]
 // Decompiled from int __thiscall CPriestRole::Store(int *this, struct std::ostream *a2)
-void  CPriestRole::Store(std::ostream &) {
+void  CPriestRole::Store(std::ostream & a2) {
   
   int v3; // [esp+0h] [ebp-44h]
   _DWORD v4[3]; // [esp+4h] [ebp-40h] BYREF
@@ -194,7 +194,7 @@ int  CPriestRole::GetSettlerRole(void)const {
 
 // address=[0x1588800]
 // Decompiled from int __cdecl CPriestRole::Load(int a1)
-static class CPriestRole * __cdecl CPriestRole::Load(std::istream &) {
+class CPriestRole * __cdecl CPriestRole::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
@@ -209,7 +209,7 @@ static class CPriestRole * __cdecl CPriestRole::Load(std::istream &) {
 
 // address=[0x157b620]
 // Decompiled from int __thiscall CPriestRole::GetKindOfSelection(CPriestRole *this, struct CSettler *a2)
-int  CPriestRole::GetKindOfSelection(class CSettler *)const {
+int  CPriestRole::GetKindOfSelection(class CSettler * a2)const {
   
   return 94;
 }
@@ -245,7 +245,7 @@ int  CPriestRole::GetKindOfSelection(class CSettler *)const {
 
 // address=[0x157b730]
 // Decompiled from int __thiscall CPriestRole::GetNextJob(CPriestRole *this, struct CSettler *a2)
-void  CPriestRole::GetNextJob(class CSettler *) {
+void  CPriestRole::GetNextJob(class CSettler * a2) {
   
   CPriestRole *v3; // [esp+0h] [ebp-4h]
 
@@ -264,7 +264,7 @@ void  CPriestRole::GetNextJob(class CSettler *) {
 
 // address=[0x157b7a0]
 // Decompiled from void __thiscall CPriestRole::TakeJob(int this, COleCmdUI *a2)
-void  CPriestRole::TakeJob(class CSettler *) {
+void  CPriestRole::TakeJob(class CSettler * a2) {
   
   const struct CEntityTask *ActualTask; // eax
   unsigned int v3; // eax
@@ -403,7 +403,7 @@ void  CPriestRole::TakeJob(class CSettler *) {
 
 // address=[0x157bbc0]
 // Decompiled from int __thiscall CPriestRole::Init(int this, CPropertySet *a2)
-void  CPriestRole::Init(class CSettler *) {
+void  CPriestRole::Init(class CSettler * a2) {
   
   int result; // eax
 
@@ -418,7 +418,7 @@ void  CPriestRole::Init(class CSettler *) {
 
 // address=[0x157bc00]
 // Decompiled from int __thiscall CPriestRole::ConvertEventIntoGoal(int this, CPropertySet *a2, const struct CEntityEvent *a3)
-void  CPriestRole::ConvertEventIntoGoal(class CSettler *,class CEntityEvent *) {
+void  CPriestRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent * a3) {
   
   int result; // eax
   int v4; // eax

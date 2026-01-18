@@ -4,7 +4,7 @@
 
 // address=[0x1401300]
 // Decompiled from int __cdecl CMayaWarShip::New(int a1)
-static class CPersistence * __cdecl CMayaWarShip::New(std::istream &) {
+class CPersistence * __cdecl CMayaWarShip::New(std::istream & a1) {
   
   if ( CWarShip::operator new(0xC8u) )
     return CMayaWarShip::CMayaWarShip(a1);
@@ -15,7 +15,7 @@ static class CPersistence * __cdecl CMayaWarShip::New(std::istream &) {
 
 // address=[0x15a19e0]
 // Decompiled from _DWORD *__thiscall CMayaWarShip::CMayaWarShip(_DWORD *this, int a2)
- CMayaWarShip::CMayaWarShip(std::istream &) {
+ CMayaWarShip::CMayaWarShip(std::istream & a2) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
@@ -42,7 +42,7 @@ static class CPersistence * __cdecl CMayaWarShip::New(std::istream &) {
 
 // address=[0x15a1aa0]
 // Decompiled from int __thiscall CMayaWarShip::Store(void *this, struct std::ostream *a2)
-void  CMayaWarShip::Store(std::ostream &) {
+void  CMayaWarShip::Store(std::ostream & a2) {
   
   int v3[2]; // [esp+0h] [ebp-8h] BYREF
 
@@ -74,7 +74,7 @@ unsigned long  CMayaWarShip::ClassID(void)const {
 
 // address=[0x15a1ae0]
 // Decompiled from CMayaWarShip *__thiscall CMayaWarShip::CMayaWarShip(  CMayaWarShip *this,  int a2,  int a3,  int a4,  int a5,  int a6,  int a7,  bool a8)
- CMayaWarShip::CMayaWarShip(int,int,int,int,int,int,bool) {
+ CMayaWarShip::CMayaWarShip(int a2, int a3, int a4, int a5, int a6, int a7, bool a8) {
   
   CWarShip::CWarShip(this, a2, a3, a4, a5, a6, a7, a8);
   *(_DWORD *)this = &CMayaWarShip::_vftable_;

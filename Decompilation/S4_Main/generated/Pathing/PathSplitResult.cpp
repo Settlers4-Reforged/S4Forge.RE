@@ -16,7 +16,7 @@
 
 // address=[0x2eff700]
 // Decompiled from _BYTE *__thiscall FilePaths::PathSplitResult::PathSplitResult(_BYTE *this, _BYTE *a2)
- FilePaths::PathSplitResult::PathSplitResult(struct FilePaths::PathSplitResult &&) {
+ FilePaths::PathSplitResult::PathSplitResult(struct FilePaths::PathSplitResult && a2) {
   
   std::wstring::wstring(this, a2);
   std::vector<std::wstring>::vector<std::wstring>(a2 + 28);

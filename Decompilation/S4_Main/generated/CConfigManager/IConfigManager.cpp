@@ -4,7 +4,7 @@
 
 // address=[0x2eef090]
 // Decompiled from CConfigManager *IConfigManager::CreateConfigManger()
-static class IConfigManager * __cdecl IConfigManager::CreateConfigManger(void) {
+class IConfigManager * __cdecl IConfigManager::CreateConfigManger(void) {
   
   CConfigManager *C; // [esp+Ch] [ebp-10h]
 

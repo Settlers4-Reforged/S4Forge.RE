@@ -1,6 +1,8 @@
 #ifndef CPLAYERGAMEDATA_H
 #define CPLAYERGAMEDATA_H
 
+#include "defines.h"
+
 class CPlayerGameData {
 public:
     // address=[0x1470ac0]
@@ -10,10 +12,10 @@ public:
     void  Clear(void);
 
     // address=[0x1473300]
-    void  AddEcoSectorId(int);
+    void  AddEcoSectorId(int a2);
 
     // address=[0x1473470]
-    void  DeleteEcoSectorId(int);
+    void  DeleteEcoSectorId(int a2);
 
     // address=[0x14734a0]
     void  ResetIterator(void)const;
@@ -22,13 +24,13 @@ public:
     int  GetNextEcoSectorId(void)const;
 
     // address=[0x1473660]
-    virtual void  Load(class IS4Chunk &);
+    virtual void  Load(class IS4Chunk & a2);
 
     // address=[0x14736b0]
-    virtual void  Save(class IS4Chunk &);
+    virtual void  Save(class IS4Chunk & a2);
 
     // address=[0x1473700]
-    void  PostLoadInit(int);
+    void  PostLoadInit(int a2);
 
     // address=[0x1498020]
      CPlayerGameData(void);
@@ -47,13 +49,13 @@ public:
 
 protected:
     // address=[0x1473760]
-    void  LoadDataBlock(class IS4Chunk &,void *,unsigned int);
+    void  LoadDataBlock(class IS4Chunk & a2, void * a3, unsigned int a4);
 
     // address=[0x1473800]
-    void  SaveDataBlock(class IS4Chunk &,void *,unsigned int);
+    void  SaveDataBlock(class IS4Chunk & a2, void * a3, unsigned int a4);
 
     // address=[0x1474ca0]
-    void  SetFlags(unsigned int);
+    void  SetFlags(unsigned int a2);
 
     // address=[0x14eb410]
     unsigned int  Flags(void)const;

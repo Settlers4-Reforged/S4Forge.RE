@@ -1,10 +1,12 @@
 #ifndef CSTATEMDCAMPAIGNS_H
 #define CSTATEMDCAMPAIGNS_H
 
+#include "defines.h"
+
 class CStateMDCampaigns : public CGuiGameState {
 public:
     // address=[0x14c6f90]
-    static class CGameState * __cdecl DynamicCreateFunc(void *);
+    static class CGameState * __cdecl DynamicCreateFunc(void * a1);
 
     // address=[0x14c7010]
      CStateMDCampaigns(void *);
@@ -16,7 +18,7 @@ public:
     virtual bool  Perform(void);
 
     // address=[0x14c7260]
-    virtual bool  OnEvent(class CEvn_Event &);
+    virtual bool  OnEvent(class CEvn_Event & a2);
 
     // address=[0x14c76a0]
     virtual bool  CanProcessInvites(void);

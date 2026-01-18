@@ -4,7 +4,7 @@
 
 // address=[0x15d71d0]
 // Decompiled from unsigned int __thiscall CFogging::Load(CFogging *this, struct IS4Chunk *a2)
-void  CFogging::Load(class IS4Chunk &) {
+void  CFogging::Load(class IS4Chunk & a2) {
   
   unsigned int result; // eax
   bool v3; // [esp+Ch] [ebp-38h]
@@ -58,7 +58,7 @@ void  CFogging::Load(class IS4Chunk &) {
 
 // address=[0x15d7390]
 // Decompiled from int __thiscall CFogging::Save(CFogging *this, struct IS4Chunk *a2)
-void  CFogging::Save(class IS4Chunk &) {
+void  CFogging::Save(class IS4Chunk & a2) {
   
   _BYTE v3[12]; // [esp+4h] [ebp-74h] BYREF
   _BYTE v4[12]; // [esp+10h] [ebp-68h] BYREF
@@ -122,7 +122,7 @@ void  CFogging::Save(class IS4Chunk &) {
 
 // address=[0x15d7590]
 // Decompiled from void *__thiscall CFogging::Init(CFogging *this, struct T_GFX_MAP_ELEMENT *a2, unsigned __int8 *a3)
-void  CFogging::Init(struct T_GFX_MAP_ELEMENT *,unsigned char *) {
+void  CFogging::Init(struct T_GFX_MAP_ELEMENT * a2, unsigned char * a3) {
   
   if ( !a2 && BBSupportDbgReport(2, "Pathing\\Fogging.cpp", 1277, "_pGfxMapElements != 0") == 1 )
     __debugbreak();
@@ -377,7 +377,7 @@ void  CFogging::Update(void) {
 
 // address=[0x15d7ce0]
 // Decompiled from char __thiscall CFogging::ResetGfxFogLayer(CFogging *this, bool a2)
-void  CFogging::ResetGfxFogLayer(bool) {
+void  CFogging::ResetGfxFogLayer(bool a2) {
   
   int v2; // edx
   int v3; // ecx
@@ -408,7 +408,7 @@ void  CFogging::ResetGfxFogLayer(bool) {
 
 // address=[0x15d7da0]
 // Decompiled from void __thiscall CFogging::UpdateOwnerFogging(CFogging *this, int a2, int a3, int a4)
-void  CFogging::UpdateOwnerFogging(int,int,int) {
+void  CFogging::UpdateOwnerFogging(int a2, int a3, int a4) {
   
   int v4; // [esp+0h] [ebp-48h]
   int v5; // [esp+4h] [ebp-44h]
@@ -483,7 +483,7 @@ void  CFogging::UpdateOwnerFogging(int,int,int) {
 
 // address=[0x15d80d0]
 // Decompiled from bool __thiscall CFogging::IsPositionVisible(CFogging *this, int a2, int a3)
-bool  CFogging::IsPositionVisible(int,int)const {
+bool  CFogging::IsPositionVisible(int a2, int a3)const {
   
   int v4; // [esp+0h] [ebp-24h]
   int NewFogging; // [esp+4h] [ebp-20h]
@@ -532,7 +532,7 @@ bool  CFogging::RWM(void)const {
 
 // address=[0x15d8200]
 // Decompiled from CFogging *__thiscall CFogging::SetRWM(CFogging **this, bool a2)
-void  CFogging::SetRWM(bool) {
+void  CFogging::SetRWM(bool a2) {
   
   CFogging *result; // eax
   int v3; // esi
@@ -550,7 +550,7 @@ void  CFogging::SetRWM(bool) {
 
 // address=[0x15d8260]
 // Decompiled from CFogging *__thiscall CFogging::SetAlliesDontRevealFog(CFogging *this, bool a2)
-void  CFogging::SetAlliesDontRevealFog(bool) {
+void  CFogging::SetAlliesDontRevealFog(bool a2) {
   
   CFogging *result; // eax
 
@@ -577,7 +577,7 @@ void  CFogging::ResetFogging(void) {
 
 // address=[0x15d82d0]
 // Decompiled from CFogging *__thiscall CFogging::EnableOrDisableLandExploredCheck(CFogging *this, bool a2)
-void  CFogging::EnableOrDisableLandExploredCheck(bool) {
+void  CFogging::EnableOrDisableLandExploredCheck(bool a2) {
   
   CFogging *result; // eax
 
@@ -602,7 +602,7 @@ bool  CFogging::IsAlmostAllLandExplored(void) {
 
 // address=[0x15d8350]
 // Decompiled from char __thiscall CFogging::LiftFogAtSpot(CFogging *this, int a2, int a3, unsigned int a4, int a5)
-void  CFogging::LiftFogAtSpot(int,int,unsigned int,int) {
+void  CFogging::LiftFogAtSpot(int a2, int a3, unsigned int a4, int a5) {
   
   char result; // al
   int v7; // [esp+8h] [ebp-20h]
@@ -625,7 +625,7 @@ void  CFogging::LiftFogAtSpot(int,int,unsigned int,int) {
 
 // address=[0x15d83e0]
 // Decompiled from int __thiscall CFogging::DbgStaticFogValue(CFogging *this, int a2)
-int  CFogging::DbgStaticFogValue(int)const {
+int  CFogging::DbgStaticFogValue(int a2)const {
   
   return *(_BYTE *)(*((_DWORD *)this + 3) + a2) & 7;
 }
@@ -633,7 +633,7 @@ int  CFogging::DbgStaticFogValue(int)const {
 
 // address=[0x15d8400]
 // Decompiled from int __thiscall CFogging::DbgDynamicFogValue(CFogging *this, int a2)
-int  CFogging::DbgDynamicFogValue(int)const {
+int  CFogging::DbgDynamicFogValue(int a2)const {
   
   return (*(_BYTE *)(*((_DWORD *)this + 3) + a2) & 0x38) >> 3;
 }
@@ -641,7 +641,7 @@ int  CFogging::DbgDynamicFogValue(int)const {
 
 // address=[0x15d8420]
 // Decompiled from int __thiscall CFogging::DbgOldFogValue(CFogging *this, int a2)
-int  CFogging::DbgOldFogValue(int)const {
+int  CFogging::DbgOldFogValue(int a2)const {
   
   return T_GFX_MAP_ELEMENT::GetOldFogging((T_GFX_MAP_ELEMENT *)(*((_DWORD *)this + 2) + 4 * a2));
 }
@@ -649,7 +649,7 @@ int  CFogging::DbgOldFogValue(int)const {
 
 // address=[0x15d8440]
 // Decompiled from int __thiscall CFogging::DbgNewFogValue(CFogging *this, int a2)
-int  CFogging::DbgNewFogValue(int)const {
+int  CFogging::DbgNewFogValue(int a2)const {
   
   return T_GFX_MAP_ELEMENT::GetNewFogging((T_GFX_MAP_ELEMENT *)(*((_DWORD *)this + 2) + 4 * a2));
 }
@@ -814,7 +814,7 @@ void  CFogging::ClearDynamicFoggingAndCalcStatic(void) {
 
 // address=[0x15d8950]
 // Decompiled from int __thiscall CFogging::UpdateEntityFogging(CFogging *this, int a2, int a3, int a4)
-void  CFogging::UpdateEntityFogging(int,int,int) {
+void  CFogging::UpdateEntityFogging(int a2, int a3, int a4) {
   
   int result; // eax
   int v5; // [esp+4h] [ebp-3Ch]
@@ -881,7 +881,7 @@ void  CFogging::UpdateEntityFogging(int,int,int) {
 
 // address=[0x15d8b70]
 // Decompiled from unsigned int __thiscall CFogging::CalcYRange(  CFogging *this,  unsigned int a2,  unsigned int a3,  unsigned int *a4,  unsigned int *a5)
-void  CFogging::CalcYRange(unsigned int,unsigned int,int &,int &) {
+void  CFogging::CalcYRange(unsigned int a2, unsigned int a3, int & a4, int & a5) {
   
   unsigned int result; // eax
   unsigned int v6; // [esp+Ch] [ebp-8h]
@@ -902,7 +902,7 @@ void  CFogging::CalcYRange(unsigned int,unsigned int,int &,int &) {
 
 // address=[0x15d8bf0]
 // Decompiled from int __thiscall CFogging::InitializeDynamicLayer(CFogging *this, int a2, int a3)
-void  CFogging::InitializeDynamicLayer(int,int) {
+void  CFogging::InitializeDynamicLayer(int a2, int a3) {
   
   int result; // eax
   int v4; // [esp+0h] [ebp-14h]
@@ -926,7 +926,7 @@ void  CFogging::InitializeDynamicLayer(int,int) {
 
 // address=[0x15d8c90]
 // Decompiled from int __thiscall CFogging::SetDynamicLayerToFullBright(CFogging *this, int a2, int a3)
-void  CFogging::SetDynamicLayerToFullBright(int,int) {
+void  CFogging::SetDynamicLayerToFullBright(int a2, int a3) {
   
   int result; // eax
   int v4; // [esp+0h] [ebp-14h]
@@ -947,7 +947,7 @@ void  CFogging::SetDynamicLayerToFullBright(int,int) {
 
 // address=[0x15d8d00]
 // Decompiled from unsigned int __thiscall CFogging::CalculateDynamicLayer(CFogging *this, int a2)
-void  CFogging::CalculateDynamicLayer(int) {
+void  CFogging::CalculateDynamicLayer(int a2) {
   
   unsigned int result; // eax
   int v3; // [esp+0h] [ebp-64h]
@@ -1119,7 +1119,7 @@ CFogging__CalculateDynamicLayer___def_19D8EDA:
 
 // address=[0x15d9120]
 // Decompiled from signed int __thiscall CFogging::UpdateGfxLayerAndInitializeDynamicLayer(CFogging *this, int a2, unsigned int a3)
-void  CFogging::UpdateGfxLayerAndInitializeDynamicLayer(int,int) {
+void  CFogging::UpdateGfxLayerAndInitializeDynamicLayer(int a2, int a3) {
   
   int v3; // ecx
   __m64 *v4; // esi
@@ -1266,7 +1266,7 @@ void  CFogging::SetWholeGfxLayerAndInitializeDynamicLayer(void) {
 
 // address=[0x15d9490]
 // Decompiled from int __thiscall CFogging::SmoothFullBrightStaticFog(CFogging *this, int a2, int a3)
-void  CFogging::SmoothFullBrightStaticFog(int,int) {
+void  CFogging::SmoothFullBrightStaticFog(int a2, int a3) {
   
   int result; // eax
   int v4; // [esp+0h] [ebp-24h]
@@ -1332,7 +1332,7 @@ void  CFogging::UpdateLandExplorationState(void) {
 
 // address=[0x15d95f0]
 // Decompiled from char __thiscall CFogging::IsSquareLandExploredVW(CFogging *this, Squares *a2, Squares *a3)
-bool  CFogging::IsSquareLandExploredVW(int,int) {
+bool  CFogging::IsSquareLandExploredVW(int a2, int a3) {
   
   int v3; // ecx
   int v4; // eax

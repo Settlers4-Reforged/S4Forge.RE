@@ -4,7 +4,7 @@
 
 // address=[0x14020c0]
 // Decompiled from int __cdecl CStone::New(int a1)
-static class CPersistence * __cdecl CStone::New(std::istream &) {
+class CPersistence * __cdecl CStone::New(std::istream & a1) {
   
   if ( CStone::operator new(0x48u) )
     return CStone::CStone(a1);
@@ -15,7 +15,7 @@ static class CPersistence * __cdecl CStone::New(std::istream &) {
 
 // address=[0x15a2750]
 // Decompiled from CStone *__thiscall CStone::CStone(CStone *this, int a2, int a3, int a4, char a5, int a6)
- CStone::CStone(int,int,int,int,int) {
+ CStone::CStone(int a2, int a3, int a4, int a5, int a6) {
   
   IDecoObject::IDecoObject(this, a2, a3, a4, a6, 1);
   *(_DWORD *)this = &CStone::_vftable_;
@@ -37,7 +37,7 @@ static class CPersistence * __cdecl CStone::New(std::istream &) {
 
 // address=[0x15a2810]
 // Decompiled from CStone *__thiscall CStone::CStone(CStone *this, const struct CStone *a2, int a3, int a4, int a5)
- CStone::CStone(class CStone const &,int,int,int) {
+ CStone::CStone(class CStone const & a2, int a3, int a4, int a5) {
   
   IDecoObject::IDecoObject(this, a2, a3, a4, a5);
   *(_DWORD *)this = &CStone::_vftable_;
@@ -99,7 +99,7 @@ int  CStone::GetGoodType(void)const {
 
 // address=[0x15a2990]
 // Decompiled from void __thiscall CStone::Take(CStone *this, int a2)
-void  CStone::Take(int) {
+void  CStone::Take(int a2) {
   
   int v2; // eax
   int v3; // eax
@@ -148,7 +148,7 @@ void  CStone::Take(int) {
 
 // address=[0x15a2ad0]
 // Decompiled from int __thiscall CStone::ConvertToDarkOrGreen(CStone *this, bool a2)
-int  CStone::ConvertToDarkOrGreen(bool) {
+int  CStone::ConvertToDarkOrGreen(bool a2) {
   
   return IEntity::Type((unsigned __int16 *)this);
 }
@@ -156,7 +156,7 @@ int  CStone::ConvertToDarkOrGreen(bool) {
 
 // address=[0x15a2af0]
 // Decompiled from unsigned int __cdecl CStone::operator new(unsigned int a1)
-static void * __cdecl CStone::operator new(unsigned int) {
+void * __cdecl CStone::operator new(unsigned int a1) {
   
   return CDecoObjMgr::Alloc((CDecoObjMgr *)&g_cDecoObjMgr, a1);
 }
@@ -164,7 +164,7 @@ static void * __cdecl CStone::operator new(unsigned int) {
 
 // address=[0x15a2b10]
 // Decompiled from void __cdecl CStone::operator delete(void *a1)
-static void __cdecl CStone::operator delete(void *) {
+void __cdecl CStone::operator delete(void * a1) {
   
   CDecoObjMgr::Dealloc((CDecoObjMgr *)&g_cDecoObjMgr, a1);
 }
@@ -172,7 +172,7 @@ static void __cdecl CStone::operator delete(void *) {
 
 // address=[0x15a2b50]
 // Decompiled from _DWORD *__thiscall CStone::CStone(_DWORD *this, int a2)
- CStone::CStone(std::istream &) {
+ CStone::CStone(std::istream & a2) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
@@ -198,7 +198,7 @@ static void __cdecl CStone::operator delete(void *) {
 
 // address=[0x15a2c00]
 // Decompiled from int __thiscall CStone::Store(void *this, struct std::ostream *a2)
-void  CStone::Store(std::ostream &) {
+void  CStone::Store(std::ostream & a2) {
   
   int v3[2]; // [esp+0h] [ebp-8h] BYREF
 
@@ -219,7 +219,7 @@ unsigned long  CStone::ClassID(void)const {
 
 // address=[0x15a2df0]
 // Decompiled from void __stdcall CStone::Decrease(int a1)
-void  CStone::Decrease(int) {
+void  CStone::Decrease(int a1) {
   
   ;
 }

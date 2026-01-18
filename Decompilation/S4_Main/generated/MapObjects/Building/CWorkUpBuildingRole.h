@@ -1,10 +1,12 @@
 #ifndef CWORKUPBUILDINGROLE_H
 #define CWORKUPBUILDINGROLE_H
 
+#include "defines.h"
+
 class CWorkUpBuildingRole : public IBuildingRole {
 public:
     // address=[0x1402980]
-    static class CPersistence * __cdecl New(std::istream &);
+    static class CPersistence * __cdecl New(std::istream & a1);
 
     // address=[0x14e66b0]
     virtual  ~CWorkUpBuildingRole(void);
@@ -19,40 +21,40 @@ public:
     virtual int  GetBuildingRole(void);
 
     // address=[0x14fdcf0]
-    static class CWorkUpBuildingRole * __cdecl Load(std::istream &);
+    static class CWorkUpBuildingRole * __cdecl Load(std::istream & a1);
 
     // address=[0x152f370]
-    virtual void  LogicUpdate(class CBuilding *);
+    virtual void  LogicUpdate(class CBuilding * a2);
 
     // address=[0x152f610]
-    virtual void  FillGfxInfo(class CBuilding *,struct SGfxObjectInfo &);
+    virtual void  FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo & a3);
 
     // address=[0x152f8e0]
-    virtual void  Init(class CBuilding *);
+    virtual void  Init(class CBuilding * a2);
 
     // address=[0x152fb80]
-    virtual void  PostLoadInit(class CBuilding *);
+    virtual void  PostLoadInit(class CBuilding * a2);
 
     // address=[0x152fbe0]
-    virtual bool  SettlerEnter(class CBuilding *,int);
+    virtual bool  SettlerEnter(class CBuilding * a2, int a3);
 
     // address=[0x152feb0]
-    virtual int  GetBuildingNeed(int)const;
+    virtual int  GetBuildingNeed(int a2)const;
 
     // address=[0x152ff50]
-    virtual int  GetPileIdWithGood(int)const;
+    virtual int  GetPileIdWithGood(int a2)const;
 
     // address=[0x1530070]
-    virtual void  GoodArrive(int);
+    virtual void  GoodArrive(int a2);
 
     // address=[0x1530080]
-    virtual void  LockPiles(class CBuilding *,bool);
+    virtual void  LockPiles(class CBuilding * a2, bool a3);
 
     // address=[0x1530120]
-     CWorkUpBuildingRole(std::istream &);
+     CWorkUpBuildingRole(std::istream & a2);
 
     // address=[0x15302d0]
-    virtual void  Store(std::ostream &);
+    virtual void  Store(std::ostream & a2);
 
     // address=[0x3d8b830]
     static unsigned long m_iClassID;
@@ -68,10 +70,10 @@ protected:
     virtual bool  CrushBuilding(void);
 
     // address=[0x15303a0]
-    bool  HaveMaterial(class CBuilding *);
+    bool  HaveMaterial(class CBuilding * a2);
 
     // address=[0x1530410]
-    virtual void  FillDialog(class CBuilding *,bool);
+    virtual void  FillDialog(class CBuilding * a2, bool a3);
 
 };
 

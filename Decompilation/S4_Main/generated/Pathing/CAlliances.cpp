@@ -4,7 +4,7 @@
 
 // address=[0x1301120]
 // Decompiled from int __cdecl CAlliances::AllianceId(int a1)
-static int __cdecl CAlliances::AllianceId(int) {
+int __cdecl CAlliances::AllianceId(int a1) {
   
   return dword_415C3D4[a1];
 }
@@ -12,7 +12,7 @@ static int __cdecl CAlliances::AllianceId(int) {
 
 // address=[0x1301520]
 // Decompiled from bool __cdecl CAlliances::IsValidUsedPlayerId(int a1)
-static bool __cdecl CAlliances::IsValidUsedPlayerId(int) {
+bool __cdecl CAlliances::IsValidUsedPlayerId(int a1) {
   
   return (unsigned int)(a1 - 1) <= 7 && dword_415C3D4[a1] > 0;
 }
@@ -20,7 +20,7 @@ static bool __cdecl CAlliances::IsValidUsedPlayerId(int) {
 
 // address=[0x1301620]
 // Decompiled from int __cdecl CAlliances::PlayerAllyBits(int a1)
-static int __cdecl CAlliances::PlayerAllyBits(int) {
+int __cdecl CAlliances::PlayerAllyBits(int a1) {
   
   return dword_415C3F8[a1];
 }
@@ -28,7 +28,7 @@ static int __cdecl CAlliances::PlayerAllyBits(int) {
 
 // address=[0x1301640]
 // Decompiled from int __cdecl CAlliances::PlayerBit(char a1)
-static int __cdecl CAlliances::PlayerBit(int) {
+int __cdecl CAlliances::PlayerBit(int a1) {
   
   return 1 << a1 >> 1;
 }
@@ -36,7 +36,7 @@ static int __cdecl CAlliances::PlayerBit(int) {
 
 // address=[0x1301660]
 // Decompiled from int __cdecl CAlliances::PlayerEnemyBits(int a1)
-static int __cdecl CAlliances::PlayerEnemyBits(int) {
+int __cdecl CAlliances::PlayerEnemyBits(int a1) {
   
   return dword_415C41C[a1];
 }
@@ -44,7 +44,7 @@ static int __cdecl CAlliances::PlayerEnemyBits(int) {
 
 // address=[0x1303c80]
 // Decompiled from int CAlliances::LastPlayerId()
-static int __cdecl CAlliances::LastPlayerId(void) {
+int __cdecl CAlliances::LastPlayerId(void) {
   
   return dword_415C3C8;
 }
@@ -52,7 +52,7 @@ static int __cdecl CAlliances::LastPlayerId(void) {
 
 // address=[0x13094a0]
 // Decompiled from int *__cdecl CAlliances::EnemyPlayerIds(int a1)
-static int const * __cdecl CAlliances::EnemyPlayerIds(int) {
+int const * __cdecl CAlliances::EnemyPlayerIds(int a1) {
   
   return &dword_415C5A8[8 * a1];
 }
@@ -60,7 +60,7 @@ static int const * __cdecl CAlliances::EnemyPlayerIds(int) {
 
 // address=[0x130e8e0]
 // Decompiled from int *__cdecl CAlliances::AllyPlayerIds(int a1)
-static int const * __cdecl CAlliances::AllyPlayerIds(int) {
+int const * __cdecl CAlliances::AllyPlayerIds(int a1) {
   
   return &dword_415C488[8 * a1];
 }
@@ -68,7 +68,7 @@ static int const * __cdecl CAlliances::AllyPlayerIds(int) {
 
 // address=[0x13172d0]
 // Decompiled from int CAlliances::AllPlayersBits()
-static int __cdecl CAlliances::AllPlayersBits(void) {
+int __cdecl CAlliances::AllPlayersBits(void) {
   
   return dword_415C3D0;
 }
@@ -76,7 +76,7 @@ static int __cdecl CAlliances::AllPlayersBits(void) {
 
 // address=[0x1317430]
 // Decompiled from int CAlliances::LastAllianceId()
-static int __cdecl CAlliances::LastAllianceId(void) {
+int __cdecl CAlliances::LastAllianceId(void) {
   
   return dword_415C3CC;
 }
@@ -84,7 +84,7 @@ static int __cdecl CAlliances::LastAllianceId(void) {
 
 // address=[0x15d2fc0]
 // Decompiled from void *CAlliances::Init()
-static void __cdecl CAlliances::Init(void) {
+void __cdecl CAlliances::Init(void) {
   
   void *result; // eax
 
@@ -97,7 +97,7 @@ static void __cdecl CAlliances::Init(void) {
 
 // address=[0x15d3010]
 // Decompiled from void *CAlliances::Done()
-static void __cdecl CAlliances::Done(void) {
+void __cdecl CAlliances::Done(void) {
   
   void *result; // eax
 
@@ -110,7 +110,7 @@ static void __cdecl CAlliances::Done(void) {
 
 // address=[0x15d3040]
 // Decompiled from char __cdecl CAlliances::AddPlayer(int a1, int a2)
-static bool __cdecl CAlliances::AddPlayer(int,int) {
+bool __cdecl CAlliances::AddPlayer(int a1, int a2) {
   
   if ( CAlliances::m_iInitialized )
   {
@@ -167,7 +167,7 @@ static bool __cdecl CAlliances::AddPlayer(int,int) {
 
 // address=[0x15d31c0]
 // Decompiled from char CAlliances::Lock()
-static bool __cdecl CAlliances::Lock(void) {
+bool __cdecl CAlliances::Lock(void) {
   
   const int *v1; // esi
   const int *v2; // esi
@@ -339,7 +339,7 @@ static bool __cdecl CAlliances::Lock(void) {
 
 // address=[0x15d37e0]
 // Decompiled from int __cdecl CAlliances::NumberOfAllies(int a1)
-static int __cdecl CAlliances::NumberOfAllies(int) {
+int __cdecl CAlliances::NumberOfAllies(int a1) {
   
   return dword_415C440[a1];
 }
@@ -347,7 +347,7 @@ static int __cdecl CAlliances::NumberOfAllies(int) {
 
 // address=[0x15d3800]
 // Decompiled from int __cdecl CAlliances::NumberOfEnemies(int a1)
-static int __cdecl CAlliances::NumberOfEnemies(int) {
+int __cdecl CAlliances::NumberOfEnemies(int a1) {
   
   return dword_415C464[a1];
 }
@@ -355,7 +355,7 @@ static int __cdecl CAlliances::NumberOfEnemies(int) {
 
 // address=[0x15db1f0]
 // Decompiled from int CAlliances::NumberOfPlayers()
-static int __cdecl CAlliances::NumberOfPlayers(void) {
+int __cdecl CAlliances::NumberOfPlayers(void) {
   
   return CAlliances::m_sData;
 }
@@ -363,7 +363,7 @@ static int __cdecl CAlliances::NumberOfPlayers(void) {
 
 // address=[0x160dac0]
 // Decompiled from int CAlliances::NumberOfAlliances()
-static int __cdecl CAlliances::NumberOfAlliances(void) {
+int __cdecl CAlliances::NumberOfAlliances(void) {
   
   return dword_415C3C4;
 }

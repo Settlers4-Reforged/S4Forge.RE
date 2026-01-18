@@ -1,10 +1,12 @@
 #ifndef CSTATEECOSTATISTIC_H
 #define CSTATEECOSTATISTIC_H
 
+#include "defines.h"
+
 class CStateEcoStatistic : public CGuiGameState {
 public:
     // address=[0x14a47b0]
-    static class CGameState * __cdecl DynamicCreateFunc(void *);
+    static class CGameState * __cdecl DynamicCreateFunc(void * a1);
 
     // address=[0x14a4830]
      CStateEcoStatistic(void *);
@@ -16,7 +18,7 @@ public:
     virtual bool  Perform(void);
 
     // address=[0x14a49e0]
-    virtual bool  OnEvent(class CEvn_Event &);
+    virtual bool  OnEvent(class CEvn_Event & a2);
 
 };
 

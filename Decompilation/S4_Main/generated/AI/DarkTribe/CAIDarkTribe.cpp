@@ -4,7 +4,7 @@
 
 // address=[0x132fad0]
 // Decompiled from CAIDarkTribe *__thiscall CAIDarkTribe::CAIDarkTribe(CAIDarkTribe *this, int a2)
- CAIDarkTribe::CAIDarkTribe(int) {
+ CAIDarkTribe::CAIDarkTribe(int a2) {
   
   int v2; // ecx
   Squares *v3; // eax
@@ -40,7 +40,7 @@
 
 // address=[0x132fc00]
 // Decompiled from int CAIDarkTribe::CreateInstance()
-static class CAIDarkTribe * __cdecl CAIDarkTribe::CreateInstance(int) {
+class CAIDarkTribe * __cdecl CAIDarkTribe::CreateInstance(int) {
   
   std::bad_function_call *v2; // [esp+Ch] [ebp-10h]
 
@@ -77,7 +77,7 @@ void  CAIDarkTribe::Execute(void) {
 
 // address=[0x132fcf0]
 // Decompiled from Y16X16 *__thiscall CAIDarkTribe::GetNearGardenerWorkPosition(CAIDarkTribe *this, Y16X16 *a2)
-int  CAIDarkTribe::GetNearGardenerWorkPosition(int) {
+int  CAIDarkTribe::GetNearGardenerWorkPosition(int a2) {
   
   signed int NrLandConversionPositions; // eax
   unsigned int v3; // eax
@@ -231,7 +231,7 @@ int  CAIDarkTribe::GetNextGardenerWorkPosition(void) {
 
 // address=[0x13300e0]
 // Decompiled from bool __thiscall CAIDarkTribe::IsBuildingPositionAvailable(CAIDarkTribe *this, int a2)
-bool  CAIDarkTribe::IsBuildingPositionAvailable(enum BUILDING_TYPES) {
+bool  CAIDarkTribe::IsBuildingPositionAvailable(enum BUILDING_TYPES a2) {
   
   return a2 == 49 && (int)CAIDarkTribe::GetNrBuildingGrids(this) > 0;
 }
@@ -239,7 +239,7 @@ bool  CAIDarkTribe::IsBuildingPositionAvailable(enum BUILDING_TYPES) {
 
 // address=[0x1330120]
 // Decompiled from bool __thiscall CAIDarkTribe::InvokeBuilding(char *this, unsigned int a2)
-bool  CAIDarkTribe::InvokeBuilding(enum BUILDING_TYPES) {
+bool  CAIDarkTribe::InvokeBuilding(enum BUILDING_TYPES a2) {
   
   unsigned int NextBuildingPosition; // [esp+8h] [ebp-38h]
   _BYTE v5[32]; // [esp+10h] [ebp-30h] BYREF
@@ -261,7 +261,7 @@ bool  CAIDarkTribe::InvokeBuilding(enum BUILDING_TYPES) {
 
 // address=[0x13301f0]
 // Decompiled from void __thiscall CAIDarkTribe::UpdateLandChangement(CAIDarkTribe *this, Squares *a2, Squares *a3, bool a4)
-void  CAIDarkTribe::UpdateLandChangement(int,int,bool) {
+void  CAIDarkTribe::UpdateLandChangement(int a2, int a3, bool a4) {
   
   const struct CAIResourceData *v4; // [esp+0h] [ebp-24h]
   _DWORD *v5; // [esp+8h] [ebp-1Ch]
@@ -300,7 +300,7 @@ LABEL_10:
 
 // address=[0x1330350]
 // Decompiled from int __thiscall CAIDarkTribe::IsGardenerPosition(CAIDarkTribe *this, int a2, int a3)
-int  CAIDarkTribe::IsGardenerPosition(int,int) {
+int  CAIDarkTribe::IsGardenerPosition(int a2, int a3) {
   
   return 0;
 }
@@ -308,7 +308,7 @@ int  CAIDarkTribe::IsGardenerPosition(int,int) {
 
 // address=[0x1330360]
 // Decompiled from BOOL __thiscall CAIDarkTribe::IsBuildedPosition(CAIDarkTribe *this, Squares *a2, Squares *a3)
-int  CAIDarkTribe::IsBuildedPosition(int,int) {
+int  CAIDarkTribe::IsBuildedPosition(int a2, int a3) {
   
   int *OccupiedElement; // eax
   int v4; // edx
@@ -341,7 +341,7 @@ int  CAIDarkTribe::IsBuildedPosition(int,int) {
 
 // address=[0x1330420]
 // Decompiled from int __thiscall CAIDarkTribe::IsBuildingPosition(CAIDarkTribe *this, Squares *a2, Squares *a3)
-int  CAIDarkTribe::IsBuildingPosition(int,int) {
+int  CAIDarkTribe::IsBuildingPosition(int a2, int a3) {
   
   int v4; // [esp+0h] [ebp-10h]
   int v5; // [esp+4h] [ebp-Ch]
@@ -359,7 +359,7 @@ int  CAIDarkTribe::IsBuildingPosition(int,int) {
 
 // address=[0x1330490]
 // Decompiled from int __thiscall CAIDarkTribe::IsOccupiedPosition(CAIDarkTribe *this, Squares *a2, Squares *a3)
-int  CAIDarkTribe::IsOccupiedPosition(int,int) {
+int  CAIDarkTribe::IsOccupiedPosition(int a2, int a3) {
   
   int v4; // [esp+0h] [ebp-10h]
   int v5; // [esp+4h] [ebp-Ch]
@@ -377,7 +377,7 @@ int  CAIDarkTribe::IsOccupiedPosition(int,int) {
 
 // address=[0x1330500]
 // Decompiled from int __thiscall CAIDarkTribe::IsBorderPosition(CAIDarkTribe *this, Squares *a2, Squares *a3)
-int  CAIDarkTribe::IsBorderPosition(int,int) {
+int  CAIDarkTribe::IsBorderPosition(int a2, int a3) {
   
   int v4; // [esp+0h] [ebp-10h]
   int v5; // [esp+4h] [ebp-Ch]
@@ -395,7 +395,7 @@ int  CAIDarkTribe::IsBorderPosition(int,int) {
 
 // address=[0x1330570]
 // Decompiled from BOOL __thiscall CAIDarkTribe::IsReservedMushroomPosition(CAIDarkTribe *this, Squares *a2, Squares *a3)
-int  CAIDarkTribe::IsReservedMushroomPosition(int,int) {
+int  CAIDarkTribe::IsReservedMushroomPosition(int a2, int a3) {
   
   _DWORD *OccupiedElement; // eax
   int v4; // edx
@@ -557,7 +557,7 @@ void  CAIDarkTribe::UnInitDarkTribeElements(void) {
 
 // address=[0x13309a0]
 // Decompiled from void __thiscall CAIDarkTribe::UpdateDarkTribeElement(CAIDarkTribe *this, Y16X16 *a2, bool a3)
-void  CAIDarkTribe::UpdateDarkTribeElement(int,bool) {
+void  CAIDarkTribe::UpdateDarkTribeElement(int a2, bool a3) {
   
   int *OccupiedElement; // eax
   int v4; // edx
@@ -691,7 +691,7 @@ void  CAIDarkTribe::UpdateDarkTribeElement(int,bool) {
 
 // address=[0x1330d60]
 // Decompiled from void __thiscall CAIDarkTribe::AddToElementList(CAIDarkTribe *this, Y16X16 *a2)
-void  CAIDarkTribe::AddToElementList(int) {
+void  CAIDarkTribe::AddToElementList(int a2) {
   
   Y16X16 **OccupiedElement; // eax
   Y16X16 *v3; // edx
@@ -832,7 +832,7 @@ void  CAIDarkTribe::AddToElementList(int) {
 
 // address=[0x13310b0]
 // Decompiled from int __thiscall CAIDarkTribe::PushNewOccupiedElement(CAIDarkTribe *this, const struct SAIDTOCCUPIEDELEMENT *a2)
-void  CAIDarkTribe::PushNewOccupiedElement(struct SAIDTOCCUPIEDELEMENT const &) {
+void  CAIDarkTribe::PushNewOccupiedElement(struct SAIDTOCCUPIEDELEMENT const & a2) {
   
   int result; // eax
   Grid *v3; // [esp+0h] [ebp-10h]
@@ -883,7 +883,7 @@ void  CAIDarkTribe::PushNewOccupiedElement(struct SAIDTOCCUPIEDELEMENT const &) 
 
 // address=[0x1331200]
 // Decompiled from char __thiscall CAIDarkTribe::ReplaceOccupiedElement(CAIDarkTribe *this, int a2, const struct SAIDTOCCUPIEDELEMENT *a3)
-bool  CAIDarkTribe::ReplaceOccupiedElement(int,struct SAIDTOCCUPIEDELEMENT const &) {
+bool  CAIDarkTribe::ReplaceOccupiedElement(int a2, struct SAIDTOCCUPIEDELEMENT const & a3) {
   
   int v4; // [esp+0h] [ebp-18h]
   int v5; // [esp+4h] [ebp-14h]
@@ -935,7 +935,7 @@ bool  CAIDarkTribe::ReplaceOccupiedElement(int,struct SAIDTOCCUPIEDELEMENT const
 
 // address=[0x1331380]
 // Decompiled from char __thiscall CAIDarkTribe::RemoveOccupiedElement(CAIDarkTribe *this, int a2)
-void  CAIDarkTribe::RemoveOccupiedElement(int) {
+void  CAIDarkTribe::RemoveOccupiedElement(int a2) {
   
   int NrOccupiedElements; // eax
   int *v3; // eax
@@ -981,7 +981,7 @@ void  CAIDarkTribe::RemoveOccupiedElement(int) {
 
 // address=[0x1331470]
 // Decompiled from bool __thiscall CAIDarkTribe::IsInOccupiedElementList(CAIDarkTribe *this, int a2)
-bool  CAIDarkTribe::IsInOccupiedElementList(int) {
+bool  CAIDarkTribe::IsInOccupiedElementList(int a2) {
   
   return CAIDarkTribe::GetOccupiedElementListIndex(this, a2) != -1;
 }
@@ -989,7 +989,7 @@ bool  CAIDarkTribe::IsInOccupiedElementList(int) {
 
 // address=[0x13314a0]
 // Decompiled from int __thiscall CAIDarkTribe::GetOccupiedElementListIndex(CAIDarkTribe *this, int a2)
-int  CAIDarkTribe::GetOccupiedElementListIndex(int) {
+int  CAIDarkTribe::GetOccupiedElementListIndex(int a2) {
   
   Grid *v4; // [esp+4h] [ebp-8h]
   int v5; // [esp+8h] [ebp-4h]
@@ -1011,7 +1011,7 @@ int  CAIDarkTribe::GetOccupiedElementListIndex(int) {
 
 // address=[0x1331520]
 // Decompiled from void __thiscall CAIDarkTribe::RemoveBorderElement(CAIDarkTribe *this, int a2)
-void  CAIDarkTribe::RemoveBorderElement(int) {
+void  CAIDarkTribe::RemoveBorderElement(int a2) {
   
   int NrBorderElements; // eax
   _DWORD *v3; // esi
@@ -1037,7 +1037,7 @@ void  CAIDarkTribe::RemoveBorderElement(int) {
 
 // address=[0x1331600]
 // Decompiled from int __thiscall CAIDarkTribe::GetBorderElementListIndex(CAIDarkTribe *this, int a2)
-int  CAIDarkTribe::GetBorderElementListIndex(int)const {
+int  CAIDarkTribe::GetBorderElementListIndex(int a2)const {
   
   int NrBorderElements; // [esp+0h] [ebp-Ch]
   int i; // [esp+8h] [ebp-4h]
@@ -1054,7 +1054,7 @@ int  CAIDarkTribe::GetBorderElementListIndex(int)const {
 
 // address=[0x1331650]
 // Decompiled from void __thiscall CAIDarkTribe::RemoveBorderElementInWork(CAIDarkTribe *this, int a2)
-void  CAIDarkTribe::RemoveBorderElementInWork(int) {
+void  CAIDarkTribe::RemoveBorderElementInWork(int a2) {
   
   int NrBorderElementsInWork; // eax
   _DWORD *v3; // esi
@@ -1071,7 +1071,7 @@ void  CAIDarkTribe::RemoveBorderElementInWork(int) {
 
 // address=[0x13316c0]
 // Decompiled from int __thiscall CAIDarkTribe::GetBorderElementInWorkListIndex(CAIDarkTribe *this, int a2)
-int  CAIDarkTribe::GetBorderElementInWorkListIndex(int)const {
+int  CAIDarkTribe::GetBorderElementInWorkListIndex(int a2)const {
   
   int NrBorderElementsInWork; // [esp+0h] [ebp-Ch]
   int i; // [esp+8h] [ebp-4h]
@@ -1088,7 +1088,7 @@ int  CAIDarkTribe::GetBorderElementInWorkListIndex(int)const {
 
 // address=[0x1331710]
 // Decompiled from int __thiscall CAIDarkTribe::GetLandConversionPosition(CAIDarkTribe *this, int a2)
-int  CAIDarkTribe::GetLandConversionPosition(int)const {
+int  CAIDarkTribe::GetLandConversionPosition(int a2)const {
   
   _BYTE v3[12]; // [esp+4h] [ebp-48h] BYREF
   _BYTE v4[12]; // [esp+10h] [ebp-3Ch] BYREF
@@ -1136,7 +1136,7 @@ int  CAIDarkTribe::GetLandConversionPosition(int)const {
 
 // address=[0x1331810]
 // Decompiled from int __thiscall CAIDarkTribe::GetLandConversionPositionIndex(CAIDarkTribe *this, int a2)
-int  CAIDarkTribe::GetLandConversionPositionIndex(int)const {
+int  CAIDarkTribe::GetLandConversionPositionIndex(int a2)const {
   
   int NrLandConversionPositions; // [esp+0h] [ebp-Ch]
   int i; // [esp+8h] [ebp-4h]
@@ -1153,7 +1153,7 @@ int  CAIDarkTribe::GetLandConversionPositionIndex(int)const {
 
 // address=[0x1331860]
 // Decompiled from int __thiscall CAIDarkTribe::CleanLandConversionPositionsOfGrid(CAIDarkTribe *this, int a2)
-void  CAIDarkTribe::CleanLandConversionPositionsOfGrid(int) {
+void  CAIDarkTribe::CleanLandConversionPositionsOfGrid(int a2) {
   
   int result; // eax
   Squares *v3; // eax
@@ -1314,7 +1314,7 @@ int  CAIDarkTribe::GetNextCurrentUsedInWorkElementIndex(void) {
 
 // address=[0x1331c90]
 // Decompiled from bool __thiscall CAIDarkTribe::GetWorkingPosition(CAIDarkTribe *this, Squares *a2, Squares *a3, int a4, int a5)
-bool  CAIDarkTribe::GetWorkingPosition(int,int,class CAIResourceData const &,class std::vector<int,class std::allocator<int> > &) {
+bool  CAIDarkTribe::GetWorkingPosition(int a2, int a3, class CAIResourceData const & a4, class std::vector<int,class std::allocator<int> > & a5) {
   
   int v6; // [esp+0h] [ebp-2Ch] BYREF
   int v7; // [esp+4h] [ebp-28h] BYREF
@@ -1588,7 +1588,7 @@ bool  CAIDarkTribe::CheckBuildingGrids(void) {
 
 // address=[0x13323c0]
 // Decompiled from char __thiscall CAIDarkTribe::CheckOtherBuildingPositions(CAIDarkTribe *this, int a2, int a3)
-bool  CAIDarkTribe::CheckOtherBuildingPositions(int,int) {
+bool  CAIDarkTribe::CheckOtherBuildingPositions(int a2, int a3) {
   
   int v3; // eax
   int v4; // eax
@@ -1641,7 +1641,7 @@ bool  CAIDarkTribe::CheckOtherBuildingPositions(int,int) {
 
 // address=[0x13325c0]
 // Decompiled from char __thiscall CAIDarkTribe::IsPureDarkLandAround(CAIDarkTribe *this, int a2, int a3)
-bool  CAIDarkTribe::IsPureDarkLandAround(int,int) {
+bool  CAIDarkTribe::IsPureDarkLandAround(int a2, int a3) {
   
   CAIResourceData *v4; // [esp+0h] [ebp-14h]
   int v6; // [esp+8h] [ebp-Ch]
@@ -1680,7 +1680,7 @@ bool  CAIDarkTribe::HasChangeableLand(class CAIResourceData const &) {
 
 // address=[0x13326d0]
 // Decompiled from int __thiscall CAIDarkTribe::GetChangeableLandAmount(CAIDarkTribe *this, const struct CAIResourceData *a2)
-int  CAIDarkTribe::GetChangeableLandAmount(class CAIResourceData const &) {
+int  CAIDarkTribe::GetChangeableLandAmount(class CAIResourceData const & a2) {
   
   int v2; // esi
   int v3; // esi
@@ -1693,7 +1693,7 @@ int  CAIDarkTribe::GetChangeableLandAmount(class CAIResourceData const &) {
 
 // address=[0x1332710]
 // Decompiled from int __thiscall CAIDarkTribe::CountAdjacentDarkLand(CAIDarkTribe *this, int a2, int a3)
-int  CAIDarkTribe::CountAdjacentDarkLand(int,int) {
+int  CAIDarkTribe::CountAdjacentDarkLand(int a2, int a3) {
   
   int v4; // [esp+4h] [ebp-10h]
   int v5; // [esp+8h] [ebp-Ch]
@@ -1717,7 +1717,7 @@ int  CAIDarkTribe::CountAdjacentDarkLand(int,int) {
 
 // address=[0x13327a0]
 // Decompiled from char __thiscall CAIDarkTribe::IsAdjacent(CAIDarkTribe *this, int a2, int a3, int a4, int a5)
-bool  CAIDarkTribe::IsAdjacent(int,int,int,int) {
+bool  CAIDarkTribe::IsAdjacent(int a2, int a3, int a4, int a5) {
   
   int i; // [esp+Ch] [ebp-4h]
 
@@ -1772,7 +1772,7 @@ void  CAIDarkTribe::CheckManakopterHallExists(void) {
 
 // address=[0x1335fa0]
 // Decompiled from int __thiscall CAIDarkTribe::GetBorderElement(CAIDarkTribe *this, int a2)
-int  CAIDarkTribe::GetBorderElement(int)const {
+int  CAIDarkTribe::GetBorderElement(int a2)const {
   
   if ( a2 >= 0 && a2 < CAIDarkTribe::GetNrBorderElements(this) )
     return *(_DWORD *)std::vector<int>::operator[](a2);
@@ -1783,7 +1783,7 @@ int  CAIDarkTribe::GetBorderElement(int)const {
 
 // address=[0x1335ff0]
 // Decompiled from int __thiscall CAIDarkTribe::GetBorderElementInWork(CAIDarkTribe *this, int a2)
-int  CAIDarkTribe::GetBorderElementInWork(int)const {
+int  CAIDarkTribe::GetBorderElementInWork(int a2)const {
   
   if ( a2 >= 0 && a2 < CAIDarkTribe::GetNrBorderElementsInWork(this) )
     return *(_DWORD *)std::vector<int>::operator[](a2);
@@ -1794,7 +1794,7 @@ int  CAIDarkTribe::GetBorderElementInWork(int)const {
 
 // address=[0x1336040]
 // Decompiled from int __thiscall CAIDarkTribe::GetBuildingGrid(CAIDarkTribe *this, int a2)
-int  CAIDarkTribe::GetBuildingGrid(int)const {
+int  CAIDarkTribe::GetBuildingGrid(int a2)const {
   
   return CAIVWVector::At((CAIDarkTribe *)((char *)this + 8308), a2);
 }
@@ -1802,7 +1802,7 @@ int  CAIDarkTribe::GetBuildingGrid(int)const {
 
 // address=[0x1336070]
 // Decompiled from int __thiscall CAIDarkTribe::GetBuildingGridIndex(CAIDarkTribe *this, int a2)
-int  CAIDarkTribe::GetBuildingGridIndex(int)const {
+int  CAIDarkTribe::GetBuildingGridIndex(int a2)const {
   
   return CAIVWVector::Index((CAIDarkTribe *)((char *)this + 8308), a2);
 }
@@ -1850,7 +1850,7 @@ int  CAIDarkTribe::GetNrOccupiedElements(void)const {
 
 // address=[0x1336140]
 // Decompiled from SAIDTOCCUPIEDELEMENT *__thiscall CAIDarkTribe::GetOccupiedElement(CAIDarkTribe *this, SAIDTOCCUPIEDELEMENT *a2, int a3)
-struct SAIDTOCCUPIEDELEMENT  CAIDarkTribe::GetOccupiedElement(int)const {
+struct SAIDTOCCUPIEDELEMENT  CAIDarkTribe::GetOccupiedElement(int a2)const {
   
   _DWORD *v4; // eax
   int v5; // edx
@@ -1887,7 +1887,7 @@ void  CAIDarkTribe::IncreaseNextCurrentUsedInWorkElementIndex(void) {
 
 // address=[0x13362e0]
 // Decompiled from bool __thiscall CAIDarkTribe::IsInBorderElementInWorkList(CAIDarkTribe *this, int a2)
-bool  CAIDarkTribe::IsInBorderElementInWorkList(int)const {
+bool  CAIDarkTribe::IsInBorderElementInWorkList(int a2)const {
   
   return CAIDarkTribe::GetBorderElementInWorkListIndex(this, a2) != -1;
 }
@@ -1895,7 +1895,7 @@ bool  CAIDarkTribe::IsInBorderElementInWorkList(int)const {
 
 // address=[0x1336320]
 // Decompiled from bool __thiscall CAIDarkTribe::IsInBorderElementList(CAIDarkTribe *this, int a2)
-bool  CAIDarkTribe::IsInBorderElementList(int)const {
+bool  CAIDarkTribe::IsInBorderElementList(int a2)const {
   
   return CAIDarkTribe::GetBorderElementListIndex(this, a2) != -1;
 }
@@ -1903,7 +1903,7 @@ bool  CAIDarkTribe::IsInBorderElementList(int)const {
 
 // address=[0x1336360]
 // Decompiled from bool __thiscall CAIDarkTribe::IsInBuildingGridList(CAIDarkTribe *this, int a2)
-bool  CAIDarkTribe::IsInBuildingGridList(int)const {
+bool  CAIDarkTribe::IsInBuildingGridList(int a2)const {
   
   return CAIDarkTribe::GetBuildingGridIndex(this, a2) != -1;
 }
@@ -1911,7 +1911,7 @@ bool  CAIDarkTribe::IsInBuildingGridList(int)const {
 
 // address=[0x13363a0]
 // Decompiled from bool __thiscall CAIDarkTribe::IsInLandConversionPositionsList(CAIDarkTribe *this, int a2)
-bool  CAIDarkTribe::IsInLandConversionPositionsList(int)const {
+bool  CAIDarkTribe::IsInLandConversionPositionsList(int a2)const {
   
   return CAIDarkTribe::GetLandConversionPositionIndex(this, a2) != -1;
 }
@@ -1919,7 +1919,7 @@ bool  CAIDarkTribe::IsInLandConversionPositionsList(int)const {
 
 // address=[0x1336750]
 // Decompiled from void __thiscall CAIDarkTribe::RemoveBuildingGrid(CAIDarkTribe *this, int a2)
-void  CAIDarkTribe::RemoveBuildingGrid(int) {
+void  CAIDarkTribe::RemoveBuildingGrid(int a2) {
   
   CAIVWVector::Remove((CAIDarkTribe *)((char *)this + 8308), a2);
 }
@@ -1927,7 +1927,7 @@ void  CAIDarkTribe::RemoveBuildingGrid(int) {
 
 // address=[0x1336780]
 // Decompiled from int __thiscall CAIDarkTribe::RemoveLandConversionPosition(CAIDarkTribe *this, int a2)
-void  CAIDarkTribe::RemoveLandConversionPosition(int) {
+void  CAIDarkTribe::RemoveLandConversionPosition(int a2) {
   
   int result; // eax
 

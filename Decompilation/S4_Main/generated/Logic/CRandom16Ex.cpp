@@ -15,7 +15,7 @@
 
 // address=[0x1361420]
 // Decompiled from unsigned int __thiscall CRandom16Ex::Init(CRandom16Ex *this, unsigned int a2, unsigned int a3)
-void  CRandom16Ex::Init(unsigned int,unsigned int) {
+void  CRandom16Ex::Init(unsigned int a2, unsigned int a3) {
   
   unsigned int result; // eax
 

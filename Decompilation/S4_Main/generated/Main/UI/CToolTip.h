@@ -1,6 +1,8 @@
 #ifndef CTOOLTIP_H
 #define CTOOLTIP_H
 
+#include "defines.h"
+
 class CToolTip {
 public:
     // address=[0x2f9fd80]
@@ -19,7 +21,7 @@ public:
     void  Lock(void);
 
     // address=[0x2f9fe50]
-    void  SetSourceDialogSurfaceID(int);
+    void  SetSourceDialogSurfaceID(int a2);
 
     // address=[0x2f9fe70]
     void  Unlock(void);
@@ -28,16 +30,16 @@ public:
     int  GetSourceDialogSurfaceID(void);
 
     // address=[0x2fa2f70]
-    void  SetEnableStatus(bool);
+    void  SetEnableStatus(bool a2);
 
     // address=[0x2fa3070]
      CToolTip(void);
 
     // address=[0x2fa30d0]
-    void  SetTooltipText(char const *);
+    void  SetTooltipText(char const * Str);
 
     // address=[0x2fa3130]
-    bool  OpenTooltip(int,int);
+    bool  OpenTooltip(int a2, int a3);
 
     // address=[0x2fa3560]
     bool  CloseTooltip(void);

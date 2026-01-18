@@ -1,34 +1,36 @@
 #ifndef CFLEEROLE_H
 #define CFLEEROLE_H
 
+#include "defines.h"
+
 class CFleeRole : public ISettlerRole {
 public:
     // address=[0x1400a40]
-    static class CPersistence * __cdecl New(std::istream &);
+    static class CPersistence * __cdecl New(std::istream & a1);
 
     // address=[0x156d370]
-    virtual class CWalking *  InitWalking(class CSettler *);
+    virtual class CWalking *  InitWalking(class CSettler * a2);
 
     // address=[0x156d3b0]
-    virtual void  LogicUpdate(class CSettler *);
+    virtual void  LogicUpdate(class CSettler * a2);
 
     // address=[0x156d730]
     virtual void  UpdateJob(class CSettler *);
 
     // address=[0x156d740]
-    virtual void  PostLoadInit(class CSettler *);
+    virtual void  PostLoadInit(class CSettler * a1);
 
     // address=[0x156d760]
-    virtual bool  SetFree(class CSettler *,int);
+    virtual bool  SetFree(class CSettler * a2, int a3);
 
     // address=[0x156d770]
-    virtual bool  ESChanged(class CSettler *);
+    virtual bool  ESChanged(class CSettler * a2);
 
     // address=[0x156d780]
-     CFleeRole(std::istream &);
+     CFleeRole(std::istream & a2);
 
     // address=[0x156d830]
-    virtual void  Store(std::ostream &);
+    virtual void  Store(std::ostream & a2);
 
     // address=[0x156dbc0]
     virtual unsigned long  ClassID(void)const;
@@ -40,7 +42,7 @@ public:
     virtual void  LogicUpdateJob(class CSettler *);
 
     // address=[0x15885c0]
-    static class CFleeRole * __cdecl Load(std::istream &);
+    static class CFleeRole * __cdecl Load(std::istream & a1);
 
     // address=[0x3d8bebc]
     static unsigned long m_iClassID;
@@ -53,16 +55,16 @@ private:
     virtual  ~CFleeRole(void);
 
     // address=[0x156d8b0]
-    virtual void  GetNextJob(class CSettler *);
+    virtual void  GetNextJob(class CSettler * a2);
 
     // address=[0x156d8d0]
-    virtual void  TakeJob(class CSettler *);
+    virtual void  TakeJob(class CSettler * a2);
 
     // address=[0x156d910]
-    virtual void  Init(class CSettler *);
+    virtual void  Init(class CSettler * a2);
 
     // address=[0x156d9b0]
-    virtual void  ConvertEventIntoGoal(class CSettler *,class CEntityEvent *);
+    virtual void  ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent * a3);
 
 };
 

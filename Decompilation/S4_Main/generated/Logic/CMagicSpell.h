@@ -1,10 +1,12 @@
 #ifndef CMAGICSPELL_H
 #define CMAGICSPELL_H
 
+#include "defines.h"
+
 class CMagicSpell {
 public:
     // address=[0x146c970]
-    int  SettlerFlagBitChange(int,int,int,int,enum SIV_SOUNDS);
+    int  SettlerFlagBitChange(int a2, int a3, int a4, int a5, enum SIV_SOUNDS a6);
 
     // address=[0x146cac0]
     int  SpellDoNothing(void);
@@ -85,16 +87,16 @@ public:
     int  SpellSpecialOracle(void);
 
     // address=[0x146f170]
-    static void __cdecl ShowSpellEffect(int,int,int,int);
+    static void __cdecl ShowSpellEffect(int a1, int a2, int a3, int a4);
 
     // address=[0x14704b0]
-     CMagicSpell(int,int,int,int,int,int,int,int,int);
+     CMagicSpell(int a2, int a3, int a4, int a5, int a6, int a7, int a8, int a9, int a10);
 
     // address=[0x14708b0]
-    int  CastSpell(int,int);
+    int  CastSpell(int a2, int a3);
 
     // address=[0x14709e0]
-    static void __cdecl InvisibleKill(class IEntity *);
+    static void __cdecl InvisibleKill(class IEntity * a1);
 
 protected:
     // address=[0x36b72d8]

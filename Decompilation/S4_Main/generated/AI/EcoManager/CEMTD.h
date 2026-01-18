@@ -1,6 +1,8 @@
 #ifndef CECOMANAGERTREE_CEMTD_H
 #define CECOMANAGERTREE_CEMTD_H
 
+#include "defines.h"
+
 namespace CEcoManagerTree {
 
 class CEMTD {

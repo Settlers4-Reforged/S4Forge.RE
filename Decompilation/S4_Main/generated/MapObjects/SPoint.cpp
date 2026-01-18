@@ -4,7 +4,7 @@
 
 // address=[0x15ddb00]
 // Decompiled from _DWORD *__thiscall SPoint::operator=(_DWORD *this, char *a2)
-struct SPoint &  SPoint::operator=(struct SPoint8 const &) {
+struct SPoint &  SPoint::operator=(struct SPoint8 const & a2) {
   
   *this = *a2;
   this[1] = a2[1];
@@ -14,7 +14,7 @@ struct SPoint &  SPoint::operator=(struct SPoint8 const &) {
 
 // address=[0x15ddb40]
 // Decompiled from BOOL __thiscall SPoint::operator==(_DWORD *this, _DWORD *a2)
-bool  SPoint::operator==(struct SPoint const &)const {
+bool  SPoint::operator==(struct SPoint const & a2)const {
   
   return this[1] == a2[1] && *this == *a2;
 }
@@ -22,7 +22,7 @@ bool  SPoint::operator==(struct SPoint const &)const {
 
 // address=[0x15ddbb0]
 // Decompiled from int __thiscall SPoint::operator*(_DWORD *this, _DWORD *a2)
-int  SPoint::operator*(struct SPoint const &)const {
+int  SPoint::operator*(struct SPoint const & a2)const {
   
   return a2[1] * this[1] + *a2 * *this;
 }

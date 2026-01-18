@@ -4,7 +4,7 @@
 
 // address=[0x1313e80]
 // Decompiled from CBBException *__thiscall CBBException::CBBException(  CBBException *this,  const struct boost::exception_detail::clone_base *a2)
- CBBException::CBBException(class CBBException const &) {
+ CBBException::CBBException(class CBBException const & a2) {
   
   *(_DWORD *)this = &CBBException::_vftable_;
   return this;
@@ -34,7 +34,7 @@
 
 // address=[0x2f30970]
 // Decompiled from char __thiscall CBBException::GetErrorMessage(CBBException *this, char *a2, unsigned int a3)
-bool  CBBException::GetErrorMessage(char *,unsigned int) {
+bool  CBBException::GetErrorMessage(char * a2, unsigned int a3) {
   
   return 0;
 }

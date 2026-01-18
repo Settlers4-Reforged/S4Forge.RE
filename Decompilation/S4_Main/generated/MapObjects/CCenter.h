@@ -1,10 +1,12 @@
 #ifndef CCENTER_H
 #define CCENTER_H
 
+#include "defines.h"
+
 class CCenter {
 public:
     // address=[0x15f4100]
-    void  Add(int,int);
+    void  Add(int a2, int a3);
 
     // address=[0x15f4340]
     int  Count(void)const;

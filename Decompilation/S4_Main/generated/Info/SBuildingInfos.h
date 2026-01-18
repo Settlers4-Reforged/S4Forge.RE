@@ -1,6 +1,8 @@
 #ifndef CBUILDINGINFOMGR_SBUILDINGINFOS_H
 #define CBUILDINGINFOMGR_SBUILDINGINFOS_H
 
+#include "defines.h"
+
 namespace CBuildingInfoMgr {
 
 class SBuildingInfos {

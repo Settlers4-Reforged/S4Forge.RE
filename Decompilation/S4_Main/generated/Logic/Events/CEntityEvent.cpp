@@ -4,7 +4,7 @@
 
 // address=[0x130e350]
 // Decompiled from CEntityEvent *__thiscall CEntityEvent::CEntityEvent(  CEntityEvent *this,  unsigned __int8 a2,  int a3,  int a4,  int a5,  int a6)
- CEntityEvent::CEntityEvent(unsigned char,int,int,int,int) {
+ CEntityEvent::CEntityEvent(unsigned char a2, int a3, int a4, int a5, int a6) {
   
   CPersistence::CPersistence(this);
   *(_DWORD *)this = &CEntityEvent::_vftable_;
@@ -39,7 +39,7 @@ unsigned long  CEntityEvent::ClassID(void)const {
 
 // address=[0x1400720]
 // Decompiled from int __cdecl CEntityEvent::New(int a1)
-static class CPersistence * __cdecl CEntityEvent::New(std::istream &) {
+class CPersistence * __cdecl CEntityEvent::New(std::istream & a1) {
   
   if ( operator new(0x18u) )
     return CEntityEvent::CEntityEvent(a1);
@@ -50,7 +50,7 @@ static class CPersistence * __cdecl CEntityEvent::New(std::istream &) {
 
 // address=[0x14e44e0]
 // Decompiled from boost::exception_detail::clone_base *__thiscall CEntityEvent::CEntityEvent(  boost::exception_detail::clone_base *this,  struct boost::exception_detail::clone_base *a2)
- CEntityEvent::CEntityEvent(class CEntityEvent const &) {
+ CEntityEvent::CEntityEvent(class CEntityEvent const & a2) {
   
   CPersistence::CPersistence(this, a2);
   *(_DWORD *)this = &CEntityEvent::_vftable_;
@@ -65,7 +65,7 @@ static class CPersistence * __cdecl CEntityEvent::New(std::istream &) {
 
 // address=[0x14e46f0]
 // Decompiled from _DWORD *__thiscall CEntityEvent::operator=(_DWORD *this, _DWORD *a2)
-class CEntityEvent &  CEntityEvent::operator=(class CEntityEvent const &) {
+class CEntityEvent &  CEntityEvent::operator=(class CEntityEvent const & a2) {
   
   CPersistence::operator=(a2);
   this[1] = a2[1];
@@ -79,7 +79,7 @@ class CEntityEvent &  CEntityEvent::operator=(class CEntityEvent const &) {
 
 // address=[0x14e4b20]
 // Decompiled from int __cdecl CEntityEvent::Load(int a1)
-static class CEntityEvent * __cdecl CEntityEvent::Load(std::istream &) {
+class CEntityEvent * __cdecl CEntityEvent::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
@@ -91,7 +91,7 @@ static class CEntityEvent * __cdecl CEntityEvent::Load(std::istream &) {
 
 // address=[0x154c110]
 // Decompiled from _DWORD *__thiscall CEntityEvent::CEntityEvent(_DWORD *this, int a2)
- CEntityEvent::CEntityEvent(std::istream &) {
+ CEntityEvent::CEntityEvent(std::istream & a2) {
   
   int v3; // [esp+4h] [ebp-Ch] BYREF
   int pExceptionObject; // [esp+8h] [ebp-8h] BYREF
@@ -119,7 +119,7 @@ static class CEntityEvent * __cdecl CEntityEvent::Load(std::istream &) {
 
 // address=[0x154c1e0]
 // Decompiled from int __thiscall CEntityEvent::Store(struct CPersistence *this, struct std::ostream *a2)
-void  CEntityEvent::Store(std::ostream &) {
+void  CEntityEvent::Store(std::ostream & a2) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
   int *v4; // [esp+4h] [ebp-4h]

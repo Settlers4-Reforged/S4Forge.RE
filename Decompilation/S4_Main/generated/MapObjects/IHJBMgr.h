@@ -1,6 +1,8 @@
 #ifndef IHJBMGR_H
 #define IHJBMGR_H
 
+#include "defines.h"
+
 class IHJBMgr {
 public:
     // address=[0x14b4790]
@@ -20,10 +22,10 @@ public:
 
 protected:
     // address=[0x1575c30]
-    static void __cdecl SetHJBEntityId(int);
+    static void __cdecl SetHJBEntityId(int a1);
 
     // address=[0x1575c40]
-    static void __cdecl SetHJBPlayerId(int);
+    static void __cdecl SetHJBPlayerId(int a1);
 
     // address=[0x3d8bed0]
     static int m_iLocalHJBAllowed;

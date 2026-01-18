@@ -1,6 +1,8 @@
 #ifndef CPLAYERSTATISTICDATA_H
 #define CPLAYERSTATISTICDATA_H
 
+#include "defines.h"
+
 class CPlayerStatisticData {
 public:
     // address=[0x1508170]

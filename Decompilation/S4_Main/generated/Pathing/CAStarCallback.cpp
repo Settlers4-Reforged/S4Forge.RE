@@ -4,7 +4,7 @@
 
 // address=[0x15d4a90]
 // Decompiled from int __cdecl CAStarCallback::FindPath(int a1, int a2, void (__cdecl *a3)(int, int), int a4)
-static int __cdecl CAStarCallback::FindPath(int,int,void (__cdecl*)(int,int),int) {
+int __cdecl CAStarCallback::FindPath(int a1, int a2, void (__cdecl*)(int,int) a3, int a4) {
   
   int v5; // [esp+0h] [ebp-7Ch]
   int v6; // [esp+4h] [ebp-78h]

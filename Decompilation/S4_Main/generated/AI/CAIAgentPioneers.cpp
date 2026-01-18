@@ -176,7 +176,7 @@ unsigned int  CAIAgentPioneers::Execute(unsigned int,unsigned int) {
 
 // address=[0x13051a0]
 // Decompiled from char __thiscall CAIAgentPioneers::FindWorkPosition(CAIAgentPioneers *this, int *a2, int *a3)
-bool  CAIAgentPioneers::FindWorkPosition(int &,int &) {
+bool  CAIAgentPioneers::FindWorkPosition(int & a2, int & a3) {
   
   Squares *v4; // eax
   struct CAINormalSectorAI *v5; // eax
@@ -258,7 +258,7 @@ bool  CAIAgentPioneers::FindWorkPosition(int &,int &) {
 
 // address=[0x1305440]
 // Decompiled from char __thiscall CAIAgentPioneers::CheckSquare(CAIAgentPioneers *this, int a2, int a3)
-bool  CAIAgentPioneers::CheckSquare(int,int) {
+bool  CAIAgentPioneers::CheckSquare(int a2, int a3) {
   
   int v4; // [esp+8h] [ebp-10h]
   int i; // [esp+Ch] [ebp-Ch]

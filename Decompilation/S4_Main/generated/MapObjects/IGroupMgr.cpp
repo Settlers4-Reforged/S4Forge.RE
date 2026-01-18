@@ -4,7 +4,7 @@
 
 // address=[0x1550a40]
 // Decompiled from int __cdecl IGroupMgr::FillGroupSideBar(void **a1, char a2, int a3)
-static void __cdecl IGroupMgr::FillGroupSideBar(class CInfoExchange *,bool,int) {
+void __cdecl IGroupMgr::FillGroupSideBar(class CInfoExchange * a1, bool a2, int a3) {
   
   return CGroupMgr::FillGroupSideBarEx(a1, a2, a3);
 }
@@ -12,7 +12,7 @@ static void __cdecl IGroupMgr::FillGroupSideBar(class CInfoExchange *,bool,int) 
 
 // address=[0x1550a60]
 // Decompiled from int __cdecl IGroupMgr::FillMagicSideBar(void **a1, char a2, int a3)
-static void __cdecl IGroupMgr::FillMagicSideBar(class CInfoExchange *,bool,int) {
+void __cdecl IGroupMgr::FillMagicSideBar(class CInfoExchange * a1, bool a2, int a3) {
   
   return CGroupMgr::FillMagicSideBarEx(a1, a2, a3);
 }

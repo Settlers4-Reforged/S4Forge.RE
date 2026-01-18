@@ -1,6 +1,8 @@
 #ifndef IGFXENGINE_H
 #define IGFXENGINE_H
 
+#include "defines.h"
+
 class IGfxEngine {
 public:
     // address=[0x2f5a390]
@@ -10,181 +12,181 @@ public:
      ~IGfxEngine(void);
 
     // address=[0x2f5a500]
-    void  SetWindowPosition(int,int);
+    void  SetWindowPosition(int a2, int a3);
 
     // address=[0x2f5a520]
-    void  SetTickCounterAdress(unsigned int *);
+    void  SetTickCounterAdress(unsigned int * a2);
 
     // address=[0x2f5a540]
-    bool  SetTemporaryText(char *,int,int,int,int,int);
+    bool  SetTemporaryText(char * Str, int a2, int a3, int a4, int a5, int a6);
 
     // address=[0x2f5a5e0]
-    void  SetTriangleSize(int);
+    void  SetTriangleSize(int a2);
 
     // address=[0x2f5a6d0]
-    void  SetScrollOffsets(int,int);
+    void  SetScrollOffsets(int a2, int a3);
 
     // address=[0x2f5a770]
-    void  SetCameraMode(int);
+    void  SetCameraMode(int a2);
 
     // address=[0x2f5a7d0]
-    void  SetGfxLayerAccess(int,struct T_GFX_MAP_ELEMENT *);
+    void  SetGfxLayerAccess(int a2, struct T_GFX_MAP_ELEMENT * a3);
 
     // address=[0x2f5a860]
-    bool  SetPlayerColor(int,struct SGfxColor &);
+    bool  SetPlayerColor(int a1, struct SGfxColor & a2);
 
     // address=[0x2f5a8e0]
-    bool  GetPlayerColor(int,struct SGfxColor &);
+    bool  GetPlayerColor(int a2, struct SGfxColor & a3);
 
     // address=[0x2f5a930]
-    void  SetObjectLayerAccess(struct SGfxObjectInfo * (__cdecl*)(unsigned int,int),unsigned short *,unsigned short *);
+    void  SetObjectLayerAccess(struct SGfxObjectInfo * (__cdecl*)(unsigned int,int) a2, unsigned short * a3, unsigned short * a4);
 
     // address=[0x2f5a960]
-    void  SetOwnerIDCallback(int (__cdecl*)(int));
+    void  SetOwnerIDCallback(int (__cdecl*)(int) a2);
 
     // address=[0x2f5a980]
-    bool  PutLandscapeObject(int,void *,void *);
+    bool  PutLandscapeObject(int a2, void * a3, void * a4);
 
     // address=[0x2f5ae60]
-    void  SetReloadCallback(void * (__cdecl*)(int,bool,bool));
+    void  SetReloadCallback(void * (__cdecl*)(int,bool,bool) a2);
 
     // address=[0x2f5ae80]
-    void  SetGfxObject(struct SGfxObject *);
+    void  SetGfxObject(struct SGfxObject * Src);
 
     // address=[0x2f5aec0]
-    void  SetIndexWave1(int,int);
+    void  SetIndexWave1(int a2, int a3);
 
     // address=[0x2f5aef0]
-    void  SetIndexWave2(int,int);
+    void  SetIndexWave2(int a2, int a3);
 
     // address=[0x2f5af20]
-    void  SetIndexWave3(int,int);
+    void  SetIndexWave3(int a2, int a3);
 
     // address=[0x2f5af50]
-    void  SetIndexWave4(int,int);
+    void  SetIndexWave4(int a2, int a3);
 
     // address=[0x2f5af80]
-    void  SetIndexWave5(int,int);
+    void  SetIndexWave5(int a2, int a3);
 
     // address=[0x2f5afb0]
-    void  SetIndexWave6(int,int);
+    void  SetIndexWave6(int a2, int a3);
 
     // address=[0x2f5afe0]
-    void  SetIndexWave7(int,int);
+    void  SetIndexWave7(int a2, int a3);
 
     // address=[0x2f5b010]
-    void  SetIndexWave8(int,int);
+    void  SetIndexWave8(int a2, int a3);
 
     // address=[0x2f5b040]
-    void  SetIndexWave9(int,int);
+    void  SetIndexWave9(int a2, int a3);
 
     // address=[0x2f5b070]
-    void  SetIndexWave10(int,int);
+    void  SetIndexWave10(int a2, int a3);
 
     // address=[0x2f5b0a0]
-    void  SetIndexWave11(int,int);
+    void  SetIndexWave11(int a2, int a3);
 
     // address=[0x2f5b0d0]
-    void  SetIndexWave12(int,int);
+    void  SetIndexWave12(int a2, int a3);
 
     // address=[0x2f5b100]
-    void  SetIndexWave13(int,int);
+    void  SetIndexWave13(int a2, int a3);
 
     // address=[0x2f5b130]
-    void  SetIndexWave14(int,int);
+    void  SetIndexWave14(int a2, int a3);
 
     // address=[0x2f5b160]
-    void  SetIndexWave15(int,int);
+    void  SetIndexWave15(int a2, int a3);
 
     // address=[0x2f5b190]
-    void  SetIndexWave16(int,int);
+    void  SetIndexWave16(int a2, int a3);
 
     // address=[0x2f5b1c0]
-    void  SetIndexWave17(int,int);
+    void  SetIndexWave17(int a1, int a2);
 
     // address=[0x2f5b1f0]
-    void  SetIndexWave18(int,int);
+    void  SetIndexWave18(int a1, int a2);
 
     // address=[0x2f5b220]
-    void  SetIndexBorderstone(int,int);
+    void  SetIndexBorderstone(int a2, int a3);
 
     // address=[0x2f5b240]
-    bool  EnableMiniMap(bool,int,int,struct HWND__ *);
+    bool  EnableMiniMap(bool a2, int a3, int a4, struct HWND__ * a5);
 
     // address=[0x2f5b2f0]
-    void  SetMiniMapColorCallback(struct SGfxColor * (__cdecl*)(unsigned int));
+    void  SetMiniMapColorCallback(struct SGfxColor * (__cdecl*)(unsigned int) a2);
 
     // address=[0x2f5b310]
-    bool  EnableCameraWindow(bool,int,int,int,int);
+    bool  EnableCameraWindow(bool a2, int a3, int a4, int a5, int a6);
 
     // address=[0x2f5b390]
-    void  SetCameraViewPosition(int,int);
+    void  SetCameraViewPosition(int a2, int a3);
 
     // address=[0x2f5b420]
-    void  SetCameraTriangleSize(int);
+    void  SetCameraTriangleSize(int a2);
 
     // address=[0x2f5b4e0]
-    int  GetRenderHeight(int);
+    int  GetRenderHeight(int a2);
 
     // address=[0x2f5b510]
-    void  SetIconCallbacks(void (__cdecl*)(int),unsigned char (__cdecl*)(int));
+    void  SetIconCallbacks(void (__cdecl*)(int) a2, unsigned char (__cdecl*)(int) a3);
 
     // address=[0x2f5b530]
-    bool  PutAccessoryIcon(int,void *,void *);
+    bool  PutAccessoryIcon(int a2, void * a3, void * a4);
 
     // address=[0x2f5b570]
-    bool  InitEngine(struct SGfxRenderConfiguration,bool,int &,int &,int &);
+    bool  InitEngine(struct SGfxRenderConfiguration a2, bool a3, int & a4, int & a5, int & a6);
 
     // address=[0x2f5b7c0]
-    bool  RebuildRenderEnvironment(struct SGfxRenderConfiguration);
+    bool  RebuildRenderEnvironment(struct SGfxRenderConfiguration a2);
 
     // address=[0x2f5b8e0]
     struct SGfxRenderConfiguration const &  GetCurrentRenderConfiguration(void)const;
 
     // address=[0x2f5b8f0]
-    bool  RenderFrame(bool,bool);
+    bool  RenderFrame(bool a2, bool a3);
 
     // address=[0x2f5c400]
-    bool  BlitFrameToDIB(struct HBITMAP__ *);
+    bool  BlitFrameToDIB(struct HBITMAP__ * h);
 
     // address=[0x2f5c420]
     void  ForceMiniMapRefresh(void);
 
     // address=[0x2f5c440]
-    void  DrawRectangle(struct tagRECT *,unsigned short);
+    void  DrawRectangle(struct tagRECT * a2, unsigned short a3);
 
     // address=[0x2f5c460]
-    void  EnableIconLayer(bool);
+    void  EnableIconLayer(bool a2);
 
     // address=[0x2f5c480]
-    void  UpdateWorldPosition(int,int);
+    void  UpdateWorldPosition(int a2, int a2);
 
     // address=[0x2f5c540]
-    void  UpdateWorldPosition(int);
+    void  UpdateWorldPosition(int a2);
 
     // address=[0x2f5c5f0]
     void  RenderCursor(void);
 
     // address=[0x2f5c610]
-    void  ConvertMapPositionToWorldScreenOffsets(int,int,float &,float &);
+    void  ConvertMapPositionToWorldScreenOffsets(int a2, int a3, float & a4, float & a4);
 
     // address=[0x2f5c6d0]
-    void  ConvertMapPositionToWorldScreenOffsets(int,int,int &,int &);
+    void  ConvertMapPositionToWorldScreenOffsets(int a1, int a2, int & a3, int & a4);
 
     // address=[0x2f5c760]
-    bool  CanChangeGround(int,int,int);
+    bool  CanChangeGround(int a2, int a3, int a4);
 
     // address=[0x2f5c7a0]
-    void  SetDarkLand(int,int,bool);
+    void  SetDarkLand(int a2, int a3, bool a4);
 
     // address=[0x2f5c810]
-    void  SetFoggingFadingStep(int);
+    void  SetFoggingFadingStep(int a2);
 
     // address=[0x2f5c8a0]
-    void  SetFoggingUpdateMode(int);
+    void  SetFoggingUpdateMode(int a2);
 
     // address=[0x2f5c8c0]
-    void  SetFoggingRange(int,int);
+    void  SetFoggingRange(int a2, int a3);
 
     // address=[0x2f5c950]
     bool  IsInitialized(void);
@@ -205,7 +207,7 @@ public:
     int  GetGfxMode(void);
 
     // address=[0x2f5ca40]
-    static unsigned short __cdecl ConvertRgbToHicol(int,int,int);
+    static unsigned short __cdecl ConvertRgbToHicol(int a1, int a2, int a3);
 
     // address=[0x2f5cae0]
     int  GetOutputWidth(void);
@@ -214,34 +216,34 @@ public:
     int  GetOutputHeight(void);
 
     // address=[0x2f5cb00]
-    int  GetClosestMapPoint(int,int);
+    int  GetClosestMapPoint(int a2, int a3);
 
     // address=[0x2f5cb30]
-    int  GetClosestMapPoint(int,int,int &,int &);
+    int  GetClosestMapPoint(int a2, int a3, int & a4, int & a5);
 
     // address=[0x2f5cb60]
-    int  GetClosestMapPointOutsideMap(int,int,int &,int &);
+    int  GetClosestMapPointOutsideMap(int a1, int a2, int & a3, int & a4);
 
     // address=[0x2f5cb90]
-    static int __cdecl GetScreenOffsetsByMapIndices(int,int,int &,int &);
+    static int __cdecl GetScreenOffsetsByMapIndices(int a1, int a2, int & a3, int & a4);
 
     // address=[0x2f5cc10]
-    static int __cdecl GetScreenOffsetsByMapIndices(int,int &,int &);
+    static int __cdecl GetScreenOffsetsByMapIndices(int a1, int & a2, int & a3);
 
     // address=[0x2f5cca0]
     float  GetCurrentZoomFactor(void);
 
     // address=[0x2f5ccc0]
-    void  ShowCachePage(int,int);
+    void  ShowCachePage(int a2, int a3);
 
     // address=[0x2f5cd20]
-    void  SetWidthOfLeftGuiBorder(int);
+    void  SetWidthOfLeftGuiBorder(int a2);
 
     // address=[0x2f5f850]
-    void  LockCursorShape(bool);
+    void  LockCursorShape(bool a2);
 
     // address=[0x2f5f870]
-    void  SetCursorShape(bool,int);
+    void  SetCursorShape(bool a2, int a3);
 
     // address=[0x2f5f950]
     void  FixCursor(bool,bool);
@@ -256,73 +258,73 @@ public:
     bool  IsCursorFixed(void);
 
     // address=[0x2f5fac0]
-    bool  IsResolutionPossible(int);
+    bool  IsResolutionPossible(int a2);
 
     // address=[0x2f5fe60]
-    bool  CheckRenderConfiguration(struct SGfxRenderConfiguration);
+    bool  CheckRenderConfiguration(struct SGfxRenderConfiguration a2);
 
     // address=[0x2f601f0]
     bool  ShowFrame(void);
 
     // address=[0x2f60260]
-    bool  SolidColorFillGuiSurface(int,unsigned char,unsigned char,unsigned char);
+    bool  SolidColorFillGuiSurface(int a2, unsigned char a3, unsigned char a4, unsigned char a5);
 
     // address=[0x2f603b0]
-    bool  SolidColorFillGuiSurface(int,unsigned char,unsigned char,unsigned char,struct tagRECT);
+    bool  SolidColorFillGuiSurface(int a2, unsigned char a3, unsigned char a4, unsigned char a5, struct tagRECT a6);
 
     // address=[0x2f699c0]
-    bool  RenderObject(int,int,struct SGfxObjectInfo *,int,int);
+    bool  RenderObject(int a2, int a3, struct SGfxObjectInfo * a4, int a5, int a5);
 
     // address=[0x2f69c10]
-    bool  RenderResource(int,int,void *,void *,void *,int);
+    bool  RenderResource(int a2, int a3, void * a4, void * a5, void * a6, int a6);
 
     // address=[0x2f69ec0]
-    void  SetEffectSystemInterfacePtr(class IGfxEffects *);
+    void  SetEffectSystemInterfacePtr(class IGfxEffects * a2);
 
     // address=[0x2f72f10]
-    void  EnableDebugValueCallback(int (__cdecl*)(int,int));
+    void  EnableDebugValueCallback(int (__cdecl*)(int,int) a2);
 
     // address=[0x2f72f30]
-    void  EnableDebugStringCallback(char * (__cdecl*)(void));
+    void  EnableDebugStringCallback(char * (__cdecl*)(void) a2);
 
     // address=[0x2f72f50]
-    int  CreateGuiSurface(int,struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION *);
+    int  CreateGuiSurface(int a2, struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION * a3);
 
     // address=[0x2f73220]
-    int  CreateGuiSurface(struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION *);
+    int  CreateGuiSurface(struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION * a2);
 
     // address=[0x2f732a0]
-    bool  DestroyGuiSurface(int);
+    bool  DestroyGuiSurface(int a2);
 
     // address=[0x2f73390]
-    bool  SetVisibilityOfGuiSurface(int,bool);
+    bool  SetVisibilityOfGuiSurface(int a2, bool a3);
 
     // address=[0x2f733f0]
-    bool  SetGuiSurfaceDestinationPosition(int,int,int);
+    bool  SetGuiSurfaceDestinationPosition(int a2, int a3, int a4);
 
     // address=[0x2f73480]
-    bool  SetGuiSurfaceDestinationRect(int,struct tagRECT const &);
+    bool  SetGuiSurfaceDestinationRect(int a2, struct tagRECT const & a3);
 
     // address=[0x2f734f0]
-    bool  GetGuiSurfaceDestinationRect(int,struct tagRECT &);
+    bool  GetGuiSurfaceDestinationRect(int a1, struct tagRECT & a2);
 
     // address=[0x2f73570]
-    bool  GetGuiSurfaceDescription(int,struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION &);
+    bool  GetGuiSurfaceDescription(int a2, struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION & a3);
 
     // address=[0x2f735c0]
-    unsigned short *  BeginWriteToSurface(int,unsigned int &);
+    unsigned short *  BeginWriteToSurface(int a2, unsigned int & a3);
 
     // address=[0x2f73770]
-    bool  EndWriteToSurface(int);
+    bool  EndWriteToSurface(int a2);
 
     // address=[0x2f737f0]
-    bool  GetGuiSurfaceDC(int,struct HDC__ * *);
+    bool  GetGuiSurfaceDC(int a2, struct HDC__ * * a3);
 
     // address=[0x2f73980]
-    bool  ReleaseGuiSurfaceDC(int,struct HDC__ *);
+    bool  ReleaseGuiSurfaceDC(int a2, struct HDC__ * a3);
 
     // address=[0x2f73a10]
-    bool  SetGuiSurfaceClipRect(struct tagRECT const &);
+    bool  SetGuiSurfaceClipRect(struct tagRECT const & Src);
 
     // address=[0x2f73b20]
     void  ClearGuiSurfaceClipRect(void);

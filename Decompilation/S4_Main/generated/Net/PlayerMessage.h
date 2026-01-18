@@ -1,6 +1,8 @@
 #ifndef ONLINEMANAGER_PLAYERMESSAGE_H
 #define ONLINEMANAGER_PLAYERMESSAGE_H
 
+#include "defines.h"
+
 namespace OnlineManager {
 
 class PlayerMessage {
@@ -12,7 +14,7 @@ public:
      ~PlayerMessage(void);
 
     // address=[0x161de20]
-    struct OnlineManager::PlayerMessage &  operator=(struct OnlineManager::PlayerMessage const &);
+    struct OnlineManager::PlayerMessage &  operator=(struct OnlineManager::PlayerMessage const & a2);
 
 };
 

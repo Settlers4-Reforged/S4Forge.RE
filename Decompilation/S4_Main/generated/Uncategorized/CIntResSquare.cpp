@@ -21,7 +21,7 @@ int  CIntResSquare::Value(void) {
 
 // address=[0x131b5d0]
 // Decompiled from _DWORD *__thiscall CIntResSquare::operator__(_DWORD *this, CAIResourceData *a2)
-class CIntResSquare &  CIntResSquare::operator+=(class CAIResourceData const &) {
+class CIntResSquare &  CIntResSquare::operator+=(class CAIResourceData const & a2) {
   
   int i; // [esp+0h] [ebp-8h]
 
@@ -36,7 +36,7 @@ class CIntResSquare &  CIntResSquare::operator+=(class CAIResourceData const &) 
 
 // address=[0x131b660]
 // Decompiled from bool __thiscall CIntResSquare::operator___0(_DWORD *this, _DWORD *a2)
-bool  CIntResSquare::operator>=(class CIntResSquare const &) {
+bool  CIntResSquare::operator>=(class CIntResSquare const & a2) {
   
   int i; // [esp+14h] [ebp-4h]
 

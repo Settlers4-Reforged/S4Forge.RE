@@ -1,6 +1,8 @@
 #ifndef CSTORAGEINFO_H
 #define CSTORAGEINFO_H
 
+#include "defines.h"
+
 class CStorageInfo : public CBuildingInfo {
 public:
     // address=[0x1454920]

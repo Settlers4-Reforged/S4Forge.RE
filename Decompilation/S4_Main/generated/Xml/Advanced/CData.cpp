@@ -4,7 +4,7 @@
 
 // address=[0x2f16c30]
 // Decompiled from _DWORD *__thiscall AdvXMLParser::CData::CData(_DWORD *this, int a2)
- AdvXMLParser::CData::CData(std::string const &) {
+ AdvXMLParser::CData::CData(std::string const & a2) {
   
   _BYTE v4[28]; // [esp+8h] [ebp-2Ch] BYREF
   int v5; // [esp+30h] [ebp-4h]
@@ -22,7 +22,7 @@
 
 // address=[0x2f16cd0]
 // Decompiled from _DWORD *__thiscall AdvXMLParser::CData::CData(_DWORD *this, int a2, int a3)
- AdvXMLParser::CData::CData(class AdvXMLParser::NodeContainer &,std::string const &) {
+ AdvXMLParser::CData::CData(class AdvXMLParser::NodeContainer & a2, std::string const & a3) {
   
   _BYTE v5[28]; // [esp+8h] [ebp-2Ch] BYREF
   int v6; // [esp+30h] [ebp-4h]
@@ -40,7 +40,7 @@
 
 // address=[0x2f16d70]
 // Decompiled from int __thiscall AdvXMLParser::CData::Clone(AdvXMLParser::CData *this, struct AdvXMLParser::NodeContainer *a2)
-class AdvXMLParser::CData *  AdvXMLParser::CData::Clone(class AdvXMLParser::NodeContainer &)const {
+class AdvXMLParser::CData *  AdvXMLParser::CData::Clone(class AdvXMLParser::NodeContainer & a2)const {
   
   int v3; // [esp+Ch] [ebp-44h]
   int v4; // [esp+14h] [ebp-3Ch]
@@ -70,7 +70,7 @@ class AdvXMLParser::CData *  AdvXMLParser::CData::Clone(class AdvXMLParser::Node
 
 // address=[0x2f16e50]
 // Decompiled from int __thiscall AdvXMLParser::CData::GetData(char *this, int a2)
-std::string  AdvXMLParser::CData::GetData(void)const {
+std::string  AdvXMLParser::CData::GetData(void a2)const {
   
   std::string::string(this + 36);
   return a2;
@@ -79,7 +79,7 @@ std::string  AdvXMLParser::CData::GetData(void)const {
 
 // address=[0x2f16e90]
 // Decompiled from int __thiscall AdvXMLParser::CData::GetValue(char *this, int a2)
-std::string  AdvXMLParser::CData::GetValue(void)const {
+std::string  AdvXMLParser::CData::GetValue(void a2)const {
   
   std::string::string(this + 36);
   return a2;
@@ -88,7 +88,7 @@ std::string  AdvXMLParser::CData::GetValue(void)const {
 
 // address=[0x2f16ed0]
 // Decompiled from bool __thiscall AdvXMLParser::CData::IsKindOf(AdvXMLParser::CData *this, int a2)
-bool  AdvXMLParser::CData::IsKindOf(int)const {
+bool  AdvXMLParser::CData::IsKindOf(int a2)const {
   
   return a2 == 4 || AdvXMLParser::Node::IsKindOf(this, a2);
 }
@@ -96,7 +96,7 @@ bool  AdvXMLParser::CData::IsKindOf(int)const {
 
 // address=[0x2f16f00]
 // Decompiled from int __thiscall AdvXMLParser::CData::CloneNode(AdvXMLParser::CData *this, struct AdvXMLParser::NodeContainer *a2)
-class AdvXMLParser::Node *  AdvXMLParser::CData::CloneNode(class AdvXMLParser::NodeContainer &)const {
+class AdvXMLParser::Node *  AdvXMLParser::CData::CloneNode(class AdvXMLParser::NodeContainer & a2)const {
   
   return AdvXMLParser::CData::Clone(this, a2);
 }
@@ -113,7 +113,7 @@ class AdvXMLParser::Node *  AdvXMLParser::CData::CloneNode(class AdvXMLParser::N
 
 // address=[0x2f248a0]
 // Decompiled from int __cdecl AdvXMLParser::CData::Parse(struct AdvXMLParser::Parser *a1, struct AdvXMLParser::NodeContainer *a2)
-static class AdvXMLParser::CData * __cdecl AdvXMLParser::CData::Parse(class AdvXMLParser::Parser &,class AdvXMLParser::NodeContainer &) {
+class AdvXMLParser::CData * __cdecl AdvXMLParser::CData::Parse(class AdvXMLParser::Parser & a1, class AdvXMLParser::NodeContainer & a2) {
   
   unsigned __int8 Char; // al
   _BYTE v4[16]; // [esp+4h] [ebp-4Ch] BYREF
@@ -152,7 +152,7 @@ static class AdvXMLParser::CData * __cdecl AdvXMLParser::CData::Parse(class AdvX
 
 // address=[0x2f2d260]
 // Decompiled from void __thiscall AdvXMLParser::CData::GenerateXML(AdvXMLParser::CData *this, struct AdvXMLParser::GenerateContext *a2)
-void  AdvXMLParser::CData::GenerateXML(class AdvXMLParser::GenerateContext &)const {
+void  AdvXMLParser::CData::GenerateXML(class AdvXMLParser::GenerateContext & a2)const {
   
   AdvXMLParser::GenerateContext::GenerateStartTagIndentation(a2);
   AdvXMLParser::GenerateContext::operator+=("<![CDATA[");

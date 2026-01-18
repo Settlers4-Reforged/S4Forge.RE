@@ -4,7 +4,7 @@
 
 // address=[0x2f4dcc0]
 // Decompiled from CMainProblemSolveEvent *__thiscall CMainProblemSolveEvent::CMainProblemSolveEvent(  CMainProblemSolveEvent *this,  int a2,  int a3,  int a4,  int a5,  int a6,  int a7)
- CMainProblemSolveEvent::CMainProblemSolveEvent(int,int,int,int,int,int) {
+ CMainProblemSolveEvent::CMainProblemSolveEvent(int a2, int a3, int a4, int a5, int a6, int a7) {
   
   int i; // [esp+0h] [ebp-8h]
 

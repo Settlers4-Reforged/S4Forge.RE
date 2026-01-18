@@ -4,7 +4,7 @@
 
 // address=[0x14a1d50]
 // Decompiled from CStateBriefing *__cdecl CStateBriefing::DynamicCreateFunc(void *a1)
-static class CGameState * __cdecl CStateBriefing::DynamicCreateFunc(void *) {
+class CGameState * __cdecl CStateBriefing::DynamicCreateFunc(void * a1) {
   
   CStateBriefing *C; // [esp+Ch] [ebp-10h]
 
@@ -165,7 +165,7 @@ bool  CStateBriefing::Perform(void) {
 
 // address=[0x14a2390]
 // Decompiled from char __thiscall CStateBriefing::OnEvent(CStateBriefing *this, struct CEvn_Event *a2)
-bool  CStateBriefing::OnEvent(class CEvn_Event &) {
+bool  CStateBriefing::OnEvent(class CEvn_Event & a2) {
   
   char result; // al
   const char *v3; // eax
@@ -426,7 +426,7 @@ CStateBriefing__OnEvent___def_18A23F6:
 
 // address=[0x14a2c20]
 // Decompiled from void *__cdecl CStateBriefing::InitBriefingTexts(int a1, int a2)
-static void __cdecl CStateBriefing::InitBriefingTexts(int,int) {
+void __cdecl CStateBriefing::InitBriefingTexts(int a1, int a2) {
   
   char *v2; // eax
   char *v3; // eax
@@ -520,7 +520,7 @@ static void __cdecl CStateBriefing::InitBriefingTexts(int,int) {
 
 // address=[0x14a1dd0]
 // Decompiled from char __thiscall CStateBriefing::PaintMap(CStateBriefing *this, char a2)
-void  CStateBriefing::PaintMap(bool) {
+void  CStateBriefing::PaintMap(bool a2) {
   
   char result; // al
   unsigned int v3; // [esp+4h] [ebp-1Ch] BYREF

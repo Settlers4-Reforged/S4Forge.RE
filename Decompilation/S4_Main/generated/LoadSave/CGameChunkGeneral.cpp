@@ -40,7 +40,7 @@
 
 // address=[0x13eb9f0]
 // Decompiled from int __thiscall CGameChunkGeneral::Load(CGameChunkGeneral *this, struct IS4Chunk *a2)
-void  CGameChunkGeneral::Load(class IS4Chunk &) {
+void  CGameChunkGeneral::Load(class IS4Chunk & a2) {
   
   int result; // eax
   const wchar_t *v3; // eax
@@ -178,7 +178,7 @@ void  CGameChunkGeneral::Load(class IS4Chunk &) {
 
 // address=[0x13ec060]
 // Decompiled from int __thiscall CGameChunkGeneral::Save(CGameChunkGeneral *this, struct IS4Chunk *a2)
-void  CGameChunkGeneral::Save(class IS4Chunk &) {
+void  CGameChunkGeneral::Save(class IS4Chunk & a2) {
   
   int i; // [esp+0h] [ebp-Ch]
   char v5; // [esp+Bh] [ebp-1h] BYREF

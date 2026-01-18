@@ -39,7 +39,7 @@ void  CAIEventQueue::Clear(void) {
 
 // address=[0x130f7a0]
 // Decompiled from char __thiscall CAIEventQueue::PeekAIEvent(CAIEventQueue *this, struct CAIEvent *a2, bool a3)
-bool  CAIEventQueue::PeekAIEvent(class CAIEvent &,bool) {
+bool  CAIEventQueue::PeekAIEvent(class CAIEvent & a2, bool a3) {
   
   _DWORD *v3; // eax
   unsigned int v5; // [esp+0h] [ebp-8h]
@@ -60,7 +60,7 @@ bool  CAIEventQueue::PeekAIEvent(class CAIEvent &,bool) {
 
 // address=[0x130f830]
 // Decompiled from int __thiscall CAIEventQueue::PeekAIEvent(CAIEventQueue *this, bool a2)
-class CAIEvent const *  CAIEventQueue::PeekAIEvent(bool) {
+class CAIEvent const *  CAIEventQueue::PeekAIEvent(bool a2) {
   
   int v3; // [esp+0h] [ebp-Ch]
 
@@ -82,7 +82,7 @@ class CAIEvent const *  CAIEventQueue::PeekAIEvent(bool) {
 
 // address=[0x130f8a0]
 // Decompiled from int __thiscall CAIEventQueue::Load(CAIEventQueue *this, struct IS4Chunk *a2)
-void  CAIEventQueue::Load(class IS4Chunk &) {
+void  CAIEventQueue::Load(class IS4Chunk & a2) {
   
   int v2; // eax
   _BYTE v4[16]; // [esp+0h] [ebp-1Ch] BYREF
@@ -114,7 +114,7 @@ void  CAIEventQueue::Load(class IS4Chunk &) {
 
 // address=[0x130f9a0]
 // Decompiled from int __thiscall CAIEventQueue::Save(CAIEventQueue *this, struct IS4Chunk *a2)
-void  CAIEventQueue::Save(class IS4Chunk &) {
+void  CAIEventQueue::Save(class IS4Chunk & a2) {
   
   int v2; // eax
   int v4; // [esp+0h] [ebp-Ch]
@@ -136,7 +136,7 @@ void  CAIEventQueue::Save(class IS4Chunk &) {
 
 // address=[0x1319880]
 // Decompiled from int __thiscall CAIEventQueue::PostAIEvent(CAIEventQueue *this, int a2, int a3, int a4, int a5)
-void  CAIEventQueue::PostAIEvent(int,int,int,int) {
+void  CAIEventQueue::PostAIEvent(int a2, int a3, int a4, int a5) {
   
   CAIEvent *v5; // eax
   _BYTE v7[16]; // [esp+0h] [ebp-14h] BYREF

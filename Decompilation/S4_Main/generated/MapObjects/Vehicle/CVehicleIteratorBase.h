@@ -1,6 +1,8 @@
 #ifndef CVEHICLEITERATORBASE_H
 #define CVEHICLEITERATORBASE_H
 
+#include "defines.h"
+
 class CVehicleIteratorBase {
 public:
     // address=[0x1317500]
@@ -11,10 +13,10 @@ public:
 
 protected:
     // address=[0x1317400]
-    void  Init(int);
+    void  Init(int a2);
 
     // address=[0x1317540]
-    bool  VehicleValid(int);
+    bool  VehicleValid(int a2);
 
 };
 

@@ -4,7 +4,7 @@
 
 // address=[0x13ffdc0]
 // Decompiled from void __cdecl CBuildingSitePileRole::New(struct std::_Facet_base *a1)
-static class CPersistence * __cdecl CBuildingSitePileRole::New(std::istream &) {
+class CPersistence * __cdecl CBuildingSitePileRole::New(std::istream & a1) {
   
   if ( operator new(8u) )
     CBuildingSitePileRole::CBuildingSitePileRole(a1);
@@ -13,7 +13,7 @@ static class CPersistence * __cdecl CBuildingSitePileRole::New(std::istream &) {
 
 // address=[0x155b3b0]
 // Decompiled from CPile *__thiscall CBuildingSitePileRole::Init(CBuildingSitePileRole *this, struct CPile *a2)
-void  CBuildingSitePileRole::Init(class CPile *) {
+void  CBuildingSitePileRole::Init(class CPile * a2) {
   
   IPileRole::Init(this, a2);
   CPile::SetRoleType(a2, 5);
@@ -23,7 +23,7 @@ void  CBuildingSitePileRole::Init(class CPile *) {
 
 // address=[0x155b3e0]
 // Decompiled from int __thiscall CBuildingSitePileRole::Increase(CBuildingSitePileRole *this, struct CPile *a2, int a3)
-void  CBuildingSitePileRole::Increase(class CPile *,int) {
+void  CBuildingSitePileRole::Increase(class CPile * a2, int a3) {
   
   int BuildingId; // eax
   CBuilding *v4; // eax
@@ -72,7 +72,7 @@ void  CBuildingSitePileRole::SubjectStopped(class CPile *) {
 
 // address=[0x155b550]
 // Decompiled from CPile *__thiscall CBuildingSitePileRole::SubjectStarted(CBuildingSitePileRole *this, struct CPile *a2)
-void  CBuildingSitePileRole::SubjectStarted(class CPile *) {
+void  CBuildingSitePileRole::SubjectStarted(class CPile * a2) {
   
   if ( CPile::AmountComing(a2)
     && BBSupportDbgReport(2, "MapObjects\\Pile\\BuildingSitePileRole.cpp", 123, "_pPile->AmountComing() == 0") == 1 )
@@ -87,7 +87,7 @@ void  CBuildingSitePileRole::SubjectStarted(class CPile *) {
 
 // address=[0x155b5b0]
 // Decompiled from _DWORD *__thiscall CBuildingSitePileRole::CBuildingSitePileRole(_DWORD *this, int a2)
- CBuildingSitePileRole::CBuildingSitePileRole(std::istream &) {
+ CBuildingSitePileRole::CBuildingSitePileRole(std::istream & a2) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
@@ -113,7 +113,7 @@ void  CBuildingSitePileRole::SubjectStarted(class CPile *) {
 
 // address=[0x155b660]
 // Decompiled from int __thiscall CBuildingSitePileRole::Store(void *this, struct std::ostream *a2)
-void  CBuildingSitePileRole::Store(std::ostream &) {
+void  CBuildingSitePileRole::Store(std::ostream & a2) {
   
   int v3[2]; // [esp+0h] [ebp-8h] BYREF
 
@@ -142,7 +142,7 @@ unsigned long  CBuildingSitePileRole::ClassID(void)const {
 
 // address=[0x1560380]
 // Decompiled from int __cdecl CBuildingSitePileRole::Load(int a1)
-static class CBuildingSitePileRole * __cdecl CBuildingSitePileRole::Load(std::istream &) {
+class CBuildingSitePileRole * __cdecl CBuildingSitePileRole::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]

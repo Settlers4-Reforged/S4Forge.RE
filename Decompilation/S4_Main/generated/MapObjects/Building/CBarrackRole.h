@@ -1,46 +1,48 @@
 #ifndef CBARRACKROLE_H
 #define CBARRACKROLE_H
 
+#include "defines.h"
+
 class CBarrackRole : public IBuildingRole {
 public:
     // address=[0x13ffb40]
-    static class CPersistence * __cdecl New(std::istream &);
+    static class CPersistence * __cdecl New(std::istream & a1);
 
     // address=[0x14e6900]
      CBarrackRole(void);
 
     // address=[0x14e6940]
-    virtual void  LogicUpdate(class CBuilding *);
+    virtual void  LogicUpdate(class CBuilding * a2);
 
     // address=[0x14e6f50]
-    virtual void  FillGfxInfo(class CBuilding *,struct SGfxObjectInfo &);
+    virtual void  FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo & a3);
 
     // address=[0x14e7040]
-    virtual void  Init(class CBuilding *);
+    virtual void  Init(class CBuilding * a2);
 
     // address=[0x14e72e0]
-    virtual void  PostLoadInit(class CBuilding *);
+    virtual void  PostLoadInit(class CBuilding * a2);
 
     // address=[0x14e7310]
-    virtual bool  SettlerEnter(class CBuilding *,int);
+    virtual bool  SettlerEnter(class CBuilding * a2, int a3);
 
     // address=[0x14e7320]
-    virtual int  GetBuildingNeed(int)const;
+    virtual int  GetBuildingNeed(int a2)const;
 
     // address=[0x14e73c0]
-    virtual int  GetPileIdWithGood(int)const;
+    virtual int  GetPileIdWithGood(int a2)const;
 
     // address=[0x14e7450]
-    virtual void  InhabitantFlee(int);
+    virtual void  InhabitantFlee(int a2);
 
     // address=[0x14e7460]
-    void  FillAddSoldierSideBar(class CAddSoldierSideBarInfo *,bool);
+    void  FillAddSoldierSideBar(class CAddSoldierSideBarInfo * a2, bool a3);
 
     // address=[0x14e76c0]
-     CBarrackRole(std::istream &);
+     CBarrackRole(std::istream & a2);
 
     // address=[0x14e77f0]
-    virtual void  Store(std::ostream &);
+    virtual void  Store(std::ostream & a2);
 
     // address=[0x14e8030]
     virtual  ~CBarrackRole(void);
@@ -52,17 +54,17 @@ public:
     virtual int  GetBuildingRole(void);
 
     // address=[0x14e8140]
-    virtual void  GoodArrive(int);
+    virtual void  GoodArrive(int a2);
 
     // address=[0x14fd830]
-    static class CBarrackRole * __cdecl Load(std::istream &);
+    static class CBarrackRole * __cdecl Load(std::istream & a1);
 
     // address=[0x3d8af58]
     static unsigned long m_iClassID;
 
 private:
     // address=[0x14e78a0]
-    virtual void  FillDialog(class CBuilding *,bool);
+    virtual void  FillDialog(class CBuilding * a2, bool a3);
 
     // address=[0x14e80c0]
     virtual void  ConvertEventIntoGoal(class CBuilding *,class CEntityEvent *);

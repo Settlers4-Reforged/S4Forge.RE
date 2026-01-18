@@ -1,6 +1,8 @@
 #ifndef CLANLOBBYGAMESETTINGS_SPLAYERENTRY_H
 #define CLANLOBBYGAMESETTINGS_SPLAYERENTRY_H
 
+#include "defines.h"
+
 namespace CLanLobbyGameSettings {
 
 class SPlayerEntry {

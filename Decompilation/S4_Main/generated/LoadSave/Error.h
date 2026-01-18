@@ -1,12 +1,14 @@
 #ifndef CPERSISTENCE_ERROR_H
 #define CPERSISTENCE_ERROR_H
 
+#include "defines.h"
+
 namespace CPersistence {
 
 class Error {
 public:
     // address=[0x13f2550]
-     Error(class CPersistence::Error const &);
+     Error(class CPersistence::Error const & a2);
 
     // address=[0x13f2570]
      Error(void);

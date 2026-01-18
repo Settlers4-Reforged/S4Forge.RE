@@ -1,31 +1,33 @@
 #ifndef CSHAMANROLE_H
 #define CSHAMANROLE_H
 
+#include "defines.h"
+
 class CShamanRole : public CSoldierRole {
 public:
     // address=[0x130f0f0]
     bool  IsManaPoolEmpty(void);
 
     // address=[0x1401d00]
-    static class CPersistence * __cdecl New(std::istream &);
+    static class CPersistence * __cdecl New(std::istream & a1);
 
     // address=[0x1588880]
-    static class CShamanRole * __cdecl Load(std::istream &);
+    static class CShamanRole * __cdecl Load(std::istream & a1);
 
     // address=[0x158be00]
-    virtual void  LogicUpdateJob(class CSettler *);
+    virtual void  LogicUpdateJob(class CSettler * a2);
 
     // address=[0x158c090]
-    virtual void  WarriorTaskAttack(class IMovingEntity &,int,enum T_WARRIOR_ATTACK);
+    virtual void  WarriorTaskAttack(class IMovingEntity & a2, int a3, enum T_WARRIOR_ATTACK a4);
 
     // address=[0x158c340]
-    virtual void  ConvertEventIntoGoal(class CSettler *,class CEntityEvent *);
+    virtual void  ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent * a3);
 
     // address=[0x158c430]
-     CShamanRole(std::istream &);
+     CShamanRole(std::istream & a2);
 
     // address=[0x158c580]
-    virtual void  Store(std::ostream &);
+    virtual void  Store(std::ostream & a2);
 
     // address=[0x158ca60]
     virtual unsigned long  ClassID(void)const;
@@ -41,7 +43,7 @@ private:
      CShamanRole(void);
 
     // address=[0x158c690]
-    int  CheckForManakopter(class CSettler *);
+    int  CheckForManakopter(class CSettler * a2);
 
     // address=[0x158c9f0]
     virtual  ~CShamanRole(void);

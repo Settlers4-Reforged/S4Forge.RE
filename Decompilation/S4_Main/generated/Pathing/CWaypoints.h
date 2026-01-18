@@ -1,6 +1,8 @@
 #ifndef CWAYPOINTS_H
 #define CWAYPOINTS_H
 
+#include "defines.h"
+
 class CWaypoints {
 public:
     // address=[0x130efd0]
@@ -25,17 +27,17 @@ public:
     void  Init(void);
 
     // address=[0x15d6a20]
-    void  PushBack(int);
+    void  PushBack(int a2);
 
     // address=[0x15d6ad0]
-    void  PushGoal(int,int);
+    void  PushGoal(int a2, int a3);
 
 private:
     // address=[0x132e930]
-    static int __cdecl DecWrap(int);
+    static int __cdecl DecWrap(int a1);
 
     // address=[0x15d6620]
-    static int __cdecl IncWrap(int);
+    static int __cdecl IncWrap(int a1);
 
 };
 

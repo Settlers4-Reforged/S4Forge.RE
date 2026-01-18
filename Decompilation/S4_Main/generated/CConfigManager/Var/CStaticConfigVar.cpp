@@ -12,7 +12,7 @@
 
 // address=[0x2eeeea0]
 // Decompiled from _BYTE *__thiscall CStaticConfigVar::CStaticConfigVar(_BYTE *this, int a2, int a3, char a4, char a5)
- CStaticConfigVar::CStaticConfigVar(char const *,char const *,enum T_CFGVAR_TYPE,int) {
+ CStaticConfigVar::CStaticConfigVar(char const * a2, char const * a3, enum T_CFGVAR_TYPE a4, int a5) {
   
   CConfigManager *Instance; // [esp+4h] [ebp-14h]
 

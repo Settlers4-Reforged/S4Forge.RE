@@ -4,7 +4,7 @@
 
 // address=[0x1400ae0]
 // Decompiled from int __cdecl CFreeWorkerRole::New(int a1)
-static class CPersistence * __cdecl CFreeWorkerRole::New(std::istream &) {
+class CPersistence * __cdecl CFreeWorkerRole::New(std::istream & a1) {
   
   if ( operator new(0x38u) )
     return CFreeWorkerRole::CFreeWorkerRole(a1);
@@ -15,7 +15,7 @@ static class CPersistence * __cdecl CFreeWorkerRole::New(std::istream &) {
 
 // address=[0x156dc10]
 // Decompiled from int __thiscall CFreeWorkerRole::InitWalking(CFreeWorkerRole *this, struct CSettler *a2)
-class CWalking *  CFreeWorkerRole::InitWalking(class CSettler *) {
+class CWalking *  CFreeWorkerRole::InitWalking(class CSettler * a2) {
   
   int v2; // eax
   int v4; // [esp+4h] [ebp-4h]
@@ -29,7 +29,7 @@ class CWalking *  CFreeWorkerRole::InitWalking(class CSettler *) {
 
 // address=[0x156dc50]
 // Decompiled from void __thiscall CFreeWorkerRole::LogicUpdateJob(char *this, CMFCCaptionButton *a2)
-void  CFreeWorkerRole::LogicUpdateJob(class CSettler *) {
+void  CFreeWorkerRole::LogicUpdateJob(class CSettler * a2) {
   
   CBuilding *v2; // eax
   unsigned __int8 *v3; // eax
@@ -310,7 +310,7 @@ LABEL_3:
 
 // address=[0x156e4c0]
 // Decompiled from int __fastcall CFreeWorkerRole::UpdateJob(CFreeWorkerRole *this, int a2, struct CSettler *a3)
-void  CFreeWorkerRole::UpdateJob(class CSettler *) {
+void  CFreeWorkerRole::UpdateJob(class CSettler * a2) {
   
   int result; // eax
   int v4; // [esp+8h] [ebp-28h]
@@ -378,7 +378,7 @@ LABEL_18:
 
 // address=[0x156e690]
 // Decompiled from int __stdcall CFreeWorkerRole::PostLoadInit(CPropertySet *a1)
-void  CFreeWorkerRole::PostLoadInit(class CSettler *) {
+void  CFreeWorkerRole::PostLoadInit(class CSettler * a1) {
   
   return CWarMap::AddEntity(a1);
 }
@@ -386,7 +386,7 @@ void  CFreeWorkerRole::PostLoadInit(class CSettler *) {
 
 // address=[0x156e6b0]
 // Decompiled from char *__thiscall CFreeWorkerRole::CFreeWorkerRole(char *this, int a2)
- CFreeWorkerRole::CFreeWorkerRole(std::istream &) {
+ CFreeWorkerRole::CFreeWorkerRole(std::istream & a2) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
@@ -421,7 +421,7 @@ void  CFreeWorkerRole::PostLoadInit(class CSettler *) {
 
 // address=[0x156e7f0]
 // Decompiled from int __thiscall CFreeWorkerRole::Store(struct CPersistence *this, struct std::ostream *a2)
-void  CFreeWorkerRole::Store(std::ostream &) {
+void  CFreeWorkerRole::Store(std::ostream & a2) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
   struct CPersistence *v4; // [esp+4h] [ebp-4h]
@@ -456,7 +456,7 @@ int  CFreeWorkerRole::GetSettlerRole(void)const {
 
 // address=[0x1588600]
 // Decompiled from int __cdecl CFreeWorkerRole::Load(int a1)
-static class CFreeWorkerRole * __cdecl CFreeWorkerRole::Load(std::istream &) {
+class CFreeWorkerRole * __cdecl CFreeWorkerRole::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
@@ -495,7 +495,7 @@ static class CFreeWorkerRole * __cdecl CFreeWorkerRole::Load(std::istream &) {
 
 // address=[0x156e900]
 // Decompiled from int __thiscall CFreeWorkerRole::GetNextJob(CFreeWorkerRole *this, struct CSettler *a2)
-void  CFreeWorkerRole::GetNextJob(class CSettler *) {
+void  CFreeWorkerRole::GetNextJob(class CSettler * a2) {
   
   int result; // eax
 
@@ -510,7 +510,7 @@ void  CFreeWorkerRole::GetNextJob(class CSettler *) {
 
 // address=[0x156e940]
 // Decompiled from void __thiscall CFreeWorkerRole::TakeJob(ISettlerRole *this, CMFCCaptionButton *a2)
-void  CFreeWorkerRole::TakeJob(class CSettler *) {
+void  CFreeWorkerRole::TakeJob(class CSettler * a2) {
   
   int TickCounter; // eax
   int v3; // eax
@@ -784,7 +784,7 @@ LABEL_28:
 
 // address=[0x156f1e0]
 // Decompiled from int __thiscall CFreeWorkerRole::Init(int this, CPropertySet *a2)
-void  CFreeWorkerRole::Init(class CSettler *) {
+void  CFreeWorkerRole::Init(class CSettler * a2) {
   
   int result; // eax
 
@@ -800,7 +800,7 @@ void  CFreeWorkerRole::Init(class CSettler *) {
 
 // address=[0x156f220]
 // Decompiled from int __thiscall CFreeWorkerRole::ConvertEventIntoGoal(  CFreeWorkerRole *this,  struct CSettler *a2,  struct CEntityEvent *a3)
-void  CFreeWorkerRole::ConvertEventIntoGoal(class CSettler *,class CEntityEvent *) {
+void  CFreeWorkerRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent * a3) {
   
   int result; // eax
   int v4; // eax
@@ -904,7 +904,7 @@ void  CFreeWorkerRole::ConvertEventIntoGoal(class CSettler *,class CEntityEvent 
 
 // address=[0x156f520]
 // Decompiled from int __thiscall CFreeWorkerRole::CheckResource(CFreeWorkerRole *this, struct CSettler *a2, int a3)
-int  CFreeWorkerRole::CheckResource(class CSettler *,int) {
+int  CFreeWorkerRole::CheckResource(class CSettler * a2, int a3) {
   
   int v3; // eax
   int v5; // [esp-4h] [ebp-20h]
@@ -926,7 +926,7 @@ int  CFreeWorkerRole::CheckResource(class CSettler *,int) {
 
 // address=[0x156f5b0]
 // Decompiled from int __stdcall CFreeWorkerRole::CheckSpaceForPlant(unsigned __int16 *a1)
-int  CFreeWorkerRole::CheckSpaceForPlant(class CSettler *) {
+int  CFreeWorkerRole::CheckSpaceForPlant(class CSettler * a1) {
   
   int v1; // eax
   int v3; // [esp-4h] [ebp-20h]
@@ -953,7 +953,7 @@ int  CFreeWorkerRole::CheckSpaceForPlant(class CSettler *) {
 
 // address=[0x156f670]
 // Decompiled from char __thiscall CFreeWorkerRole::SetFree(CFreeWorkerRole *this, struct CSettler *a2, int a3)
-bool  CFreeWorkerRole::SetFree(class CSettler *,int) {
+bool  CFreeWorkerRole::SetFree(class CSettler * a2, int a3) {
   
   int v3; // eax
   int v4; // eax

@@ -1,6 +1,8 @@
 #ifndef CGROUPSIDEBARINFO_H
 #define CGROUPSIDEBARINFO_H
 
+#include "defines.h"
+
 class CGroupSideBarInfo : public CInfoExchange {
 public:
     // address=[0x1454650]

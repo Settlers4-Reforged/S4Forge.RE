@@ -1,6 +1,8 @@
 #ifndef CAIAGENTEVALOFFENCE_H
 #define CAIAGENTEVALOFFENCE_H
 
+#include "defines.h"
+
 class CAIAgentEvalOffence : public CAINormalSectorAgent {
 public:
     // address=[0x1304700]

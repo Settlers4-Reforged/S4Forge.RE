@@ -1,10 +1,12 @@
 #ifndef CCACHEPAGEMANAGER_H
 #define CCACHEPAGEMANAGER_H
 
+#include "defines.h"
+
 class CCachePageManager {
 public:
     // address=[0x2f5f420]
-    void  SetCurrentZoomFactor(float);
+    void  SetCurrentZoomFactor(float a2);
 
     // address=[0x2f69960]
     bool  IsSourceSurfaceLocked(void);
@@ -19,16 +21,16 @@ public:
      ~CCachePageManager(void);
 
     // address=[0x2f87940]
-    bool  GetPictureArea(float,float,int,int,int,int,int &,int &);
+    bool  GetPictureArea(float a2, float a3, int a4, int a5, int a6, int a7, int & a8, int & a9);
 
     // address=[0x2f87b30]
-    long  EraseExtensionAreas(int,int,int,int,int,bool);
+    long  EraseExtensionAreas(int a2, int a3, int a4, int a5, int a6, bool a7);
 
     // address=[0x2f87db0]
     bool  UploadData(long &);
 
     // address=[0x2f87ea0]
-    bool  UploadDataAndRender(long &);
+    bool  UploadDataAndRender(long & a2);
 
     // address=[0x2f88440]
     bool  ShowPageContent(long &);
@@ -37,13 +39,13 @@ public:
     void  ReleaseData(void);
 
     // address=[0x2f888f0]
-    long  RenderCacheObject(int,float,float,int,int,int,bool);
+    long  RenderCacheObject(int a2, float a3, float a4, int a5, int a6, int a7, bool a8);
 
     // address=[0x2f89350]
-    long  LockSourceSurface(int &,unsigned short * &);
+    long  LockSourceSurface(int & a2, unsigned short * & a3);
 
     // address=[0x2f89400]
-    long  LockVideoSurface(int &,unsigned short * &);
+    long  LockVideoSurface(int & a2, unsigned short * & a3);
 
     // address=[0x2f894b0]
     long  UnlockSourceSurface(void);

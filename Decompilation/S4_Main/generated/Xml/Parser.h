@@ -1,6 +1,8 @@
 #ifndef ADVXMLPARSER_PARSER_H
 #define ADVXMLPARSER_PARSER_H
 
+#include "defines.h"
+
 namespace AdvXMLParser {
 
 class Parser {
@@ -12,13 +14,13 @@ public:
     virtual  ~Parser(void);
 
     // address=[0x2f26770]
-    static char * __cdecl OpenXMLFile(wchar_t *,long &);
+    static char * __cdecl OpenXMLFile(wchar_t * FileName, long & a2);
 
     // address=[0x2f26860]
-    class AdvXMLParser::Document *  Parse(char const *,int);
+    class AdvXMLParser::Document *  Parse(char const * a2, int a3);
 
     // address=[0x2f268e0]
-    void  SyntaxError(enum AdvXMLParser::PARSER_ERROR);
+    void  SyntaxError(enum AdvXMLParser::PARSER_ERROR a2);
 
     // address=[0x2f26920]
     char  NextChar(void);
@@ -27,22 +29,22 @@ public:
     void  PreviousChar(void);
 
     // address=[0x2f26af0]
-    bool  ParseChar(char);
+    bool  ParseChar(char a2);
 
     // address=[0x2f26b20]
-    bool  ParseString(char const *);
+    bool  ParseString(char const * a2);
 
     // address=[0x2f26b80]
-    bool  ParseStringNoCase(char const *);
+    bool  ParseStringNoCase(char const * a2);
 
     // address=[0x2f26c00]
-    bool  ParseNumber(int &);
+    bool  ParseNumber(int & a2);
 
     // address=[0x2f26c80]
-    bool  ParseHexNumber(int &);
+    bool  ParseHexNumber(int & a2);
 
     // address=[0x2f26d10]
-    bool  ParseDeclBegining(char const *);
+    bool  ParseDeclBegining(char const * a2);
 
     // address=[0x2f26d80]
     bool  ParseSpaces(void);
@@ -51,10 +53,10 @@ public:
     bool  ParseEq(void);
 
     // address=[0x2f26e40]
-    bool  ParseName(std::string &);
+    bool  ParseName(std::string & a2);
 
     // address=[0x2f26ee0]
-    bool  ParseNmtoken(std::string &);
+    bool  ParseNmtoken(std::string & a2);
 
 };
 

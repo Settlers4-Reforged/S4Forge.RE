@@ -1,6 +1,8 @@
 #ifndef STORMMANAGER_H
 #define STORMMANAGER_H
 
+#include "defines.h"
+
 class StormManager {
 public:
     // address=[0x164db60]
@@ -34,13 +36,13 @@ public:
     void  LeaveSession(void);
 
     // address=[0x164ef80]
-    void  SetJoinAndDiscoveryOverride(bool);
+    void  SetJoinAndDiscoveryOverride(bool a2);
 
     // address=[0x164f240]
     void  DeleteSessionHandler(void);
 
     // address=[0x164fc90]
-    void  SetFreeSlotCount(int);
+    void  SetFreeSlotCount(int a2);
 
     // address=[0x164fd90]
     int  GetLocalPeerId(void)const;
@@ -49,7 +51,7 @@ public:
     int  GetHostPeerId(void)const;
 
     // address=[0x164fdd0]
-    bool  IsLocalPeerId(int)const;
+    bool  IsLocalPeerId(int a2)const;
 
     // address=[0x164fe00]
     bool  IsLoggedIn(void)const;

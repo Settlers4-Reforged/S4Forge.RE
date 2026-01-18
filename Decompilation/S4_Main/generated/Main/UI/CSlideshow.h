@@ -1,10 +1,12 @@
 #ifndef CSLIDESHOW_H
 #define CSLIDESHOW_H
 
+#include "defines.h"
+
 class CSlideshow {
 public:
     // address=[0x149ada0]
-     CSlideshow(int);
+     CSlideshow(int a2);
 
     // address=[0x149aec0]
      ~CSlideshow(void);

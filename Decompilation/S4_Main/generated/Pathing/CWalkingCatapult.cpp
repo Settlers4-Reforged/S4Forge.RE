@@ -31,7 +31,7 @@ enum T_WALKING_TYPE const  CWalkingCatapult::GetWalkingType(void) {
 
 // address=[0x15f91e0]
 // Decompiled from bool __thiscall CWalkingCatapult::IsNotBlocked(CWalkingCatapult *this, int a2)
-bool  CWalkingCatapult::IsNotBlocked(int) {
+bool  CWalkingCatapult::IsNotBlocked(int a2) {
   
   return (unsigned int)(CWorldManager::CatapultTileId(a2) - 1) < 0xBFFF;
 }
@@ -39,7 +39,7 @@ bool  CWalkingCatapult::IsNotBlocked(int) {
 
 // address=[0x15f9220]
 // Decompiled from bool __thiscall CWalkingCatapult::IsNotOccupied(CWalkingCatapult *this, int a2)
-bool  CWalkingCatapult::IsNotOccupied(int) {
+bool  CWalkingCatapult::IsNotOccupied(int a2) {
   
   int v3; // [esp+4h] [ebp-4h]
 
@@ -62,7 +62,7 @@ bool  CWalkingCatapult::IsNotOccupied(int) {
 
 // address=[0x15f9300]
 // Decompiled from char __thiscall CWalkingCatapult::FindPathAStar64(CWalkingCatapult *this, int a2, int a3, struct CDirCache *a4)
-bool  CWalkingCatapult::FindPathAStar64(int,int,class CDirCache &) {
+bool  CWalkingCatapult::FindPathAStar64(int a2, int a3, class CDirCache & a4) {
   
   int v5; // [esp+4h] [ebp-2Ch]
   int v6; // [esp+Ch] [ebp-24h]
@@ -103,7 +103,7 @@ bool  CWalkingCatapult::FindPathAStar64(int,int,class CDirCache &) {
 
 // address=[0x15f9420]
 // Decompiled from int __thiscall CWalkingCatapult::IdleWalk(_DWORD *this, Y16X16 *a2, int a3)
-int  CWalkingCatapult::IdleWalk(int,int) {
+int  CWalkingCatapult::IdleWalk(int a2, int a3) {
   
   int v4; // [esp+0h] [ebp-64h]
   int v5; // [esp+Ch] [ebp-58h]
@@ -224,7 +224,7 @@ int  CWalkingCatapult::IdleWalk(int,int) {
 
 // address=[0x15f9810]
 // Decompiled from int __thiscall CWalkingCatapult::SectorId(CWalkingCatapult *this, int a2)
-int  CWalkingCatapult::SectorId(int) {
+int  CWalkingCatapult::SectorId(int a2) {
   
   return ITiling::CatapultSectorId(a2);
 }
@@ -232,7 +232,7 @@ int  CWalkingCatapult::SectorId(int) {
 
 // address=[0x15f9830]
 // Decompiled from int __thiscall CWalkingCatapult::TileId(CWalkingCatapult *this, int a2)
-int  CWalkingCatapult::TileId(int) {
+int  CWalkingCatapult::TileId(int a2) {
   
   return ITiling::CatapultTileId(a2);
 }

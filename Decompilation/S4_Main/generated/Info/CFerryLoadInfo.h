@@ -1,6 +1,8 @@
 #ifndef CFERRYLOADINFO_H
 #define CFERRYLOADINFO_H
 
+#include "defines.h"
+
 class CFerryLoadInfo : public CInfoExchange {
 public:
     // address=[0x14545c0]

@@ -4,7 +4,7 @@
 
 // address=[0x15f0a60]
 // Decompiled from int __thiscall CSquare::InitAndFillTypeMapNormal(CSquare *this, int a2, int a3)
-void  CSquare::InitAndFillTypeMapNormal(int,int) {
+void  CSquare::InitAndFillTypeMapNormal(int a2, int a3) {
   
   int result; // eax
   int v4; // esi
@@ -72,7 +72,7 @@ void  CSquare::InitAndFillTypeMapNormal(int,int) {
 
 // address=[0x15f0c40]
 // Decompiled from int __thiscall CSquare::InitAndFillTypeMapCatapult(CSquare *this, int a2, int a3)
-void  CSquare::InitAndFillTypeMapCatapult(int,int) {
+void  CSquare::InitAndFillTypeMapCatapult(int a2, int a3) {
   
   int result; // eax
   int v4; // [esp+0h] [ebp-28h]
@@ -165,7 +165,7 @@ void  CSquare::InitAndFillTypeMapCatapult(int,int) {
 
 // address=[0x15f4660]
 // Decompiled from int __cdecl CSquare::Index(int a1, int a2)
-static int __cdecl CSquare::Index(int,int) {
+int __cdecl CSquare::Index(int a1, int a2) {
   
   return a1 + 16 * a2;
 }
@@ -181,7 +181,7 @@ bool  CSquare::IsPureWaterSquare(void)const {
 
 // address=[0x15f59e0]
 // Decompiled from int __cdecl CSquare::TileTypeXY(int a1, int a2)
-static int __cdecl CSquare::TileTypeXY(int,int) {
+int __cdecl CSquare::TileTypeXY(int a1, int a2) {
   
   return (((a2 >> 4) & 1) << 23) | (((a1 >> 4) & 1) << 22);
 }
@@ -197,7 +197,7 @@ int  CSquare::WaterCount(void)const {
 
 // address=[0x15f0e20]
 // Decompiled from void __thiscall CSquare::ConnectAreas(CSquare *this, int a2, int a3)
-void  CSquare::ConnectAreas(int,int) {
+void  CSquare::ConnectAreas(int a2, int a3) {
   
   int v3; // [esp+0h] [ebp-20h]
   int v4; // [esp+4h] [ebp-1Ch]
@@ -248,7 +248,7 @@ void  CSquare::ConnectAreas(int,int) {
 
 // address=[0x15f0f90]
 // Decompiled from int __thiscall CSquare::CalcComponentTileIndices(CSquare *this, int a2)
-void  CSquare::CalcComponentTileIndices(int) {
+void  CSquare::CalcComponentTileIndices(int a2) {
   
   int result; // eax
   int i; // [esp+0h] [ebp-8h]
@@ -275,7 +275,7 @@ void  CSquare::CalcComponentTileIndices(int) {
 
 // address=[0x15f4140]
 // Decompiled from void __thiscall CSquare::AddComponentIfNecessary(CSquare *this, int a2)
-void  CSquare::AddComponentIfNecessary(int) {
+void  CSquare::AddComponentIfNecessary(int a2) {
   
   if ( *((int *)this + a2 + 518) < 0 )
     CSquare::AddComponet(this, a2);
@@ -284,7 +284,7 @@ void  CSquare::AddComponentIfNecessary(int) {
 
 // address=[0x15f4180]
 // Decompiled from CSquare *__thiscall CSquare::AddComponet(CSquare *this, int a2)
-void  CSquare::AddComponet(int) {
+void  CSquare::AddComponet(int a2) {
   
   CSquare *result; // eax
 
@@ -298,7 +298,7 @@ void  CSquare::AddComponet(int) {
 
 // address=[0x15f4a00]
 // Decompiled from int __thiscall CSquare::NewArea(CSquare *this, int a2)
-int  CSquare::NewArea(int) {
+int  CSquare::NewArea(int a2) {
   
   int v2; // ecx
 
@@ -312,7 +312,7 @@ int  CSquare::NewArea(int) {
 
 // address=[0x15f47c0]
 // Decompiled from CSquare *__thiscall CSquare::Init(CSquare *this, int a2, int a3)
-void  CSquare::Init(int,int) {
+void  CSquare::Init(int a2, int a3) {
   
   CSquare *result; // eax
 

@@ -4,7 +4,7 @@
 
 // address=[0x1305850]
 // Decompiled from CQuickScan *__thiscall CQuickScan::CQuickScan(CQuickScan *this, int a2, int a3, unsigned int a4, unsigned int a5)
- CQuickScan::CQuickScan(int,int,unsigned int,unsigned int) {
+ CQuickScan::CQuickScan(int a2, int a3, unsigned int a4, unsigned int a5) {
   
   int v5; // eax
 
@@ -26,7 +26,7 @@
 
 // address=[0x1305900]
 // Decompiled from _DWORD *__thiscall sub_1705900(_DWORD *this, int a2, unsigned int a3, unsigned int a4)
- CQuickScan::CQuickScan(int,unsigned int,unsigned int) {
+ CQuickScan::CQuickScan(int a2, unsigned int a3, unsigned int a4) {
   
   int v4; // eax
 
@@ -48,7 +48,7 @@
 
 // address=[0x13059c0]
 // Decompiled from char __thiscall CQuickScan::NextPosition(CQuickScan *this, int *a2, int *a3)
-bool  CQuickScan::NextPosition(int &,int &) {
+bool  CQuickScan::NextPosition(int & a2, int & a3) {
   
   int v4; // [esp+0h] [ebp-10h]
   int v5; // [esp+4h] [ebp-Ch]

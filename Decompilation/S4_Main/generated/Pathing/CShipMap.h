@@ -1,13 +1,15 @@
 #ifndef CSHIPMAP_H
 #define CSHIPMAP_H
 
+#include "defines.h"
+
 class CShipMap {
 public:
     // address=[0x15fd4f0]
-    static bool __cdecl InShipList(int);
+    static bool __cdecl InShipList(int a1);
 
     // address=[0x15fe7e0]
-    static int (& __cdecl ShipListVW(int,int))[4];
+    static int (& __cdecl ShipListVW(int,int) a1)[4];
 
 protected:
     // address=[0x15fd1e0]
@@ -17,13 +19,13 @@ protected:
     static void __cdecl Done(void);
 
     // address=[0x15fd220]
-    static bool __cdecl PlaceShip(int);
+    static bool __cdecl PlaceShip(int a1);
 
     // address=[0x15fd280]
-    static int * __cdecl GetEntryForPlaceShip(int);
+    static int * __cdecl GetEntryForPlaceShip(int a1);
 
     // address=[0x15fd420]
-    static bool __cdecl RemoveShip(int);
+    static bool __cdecl RemoveShip(int a1);
 
 private:
     // address=[0x4617aac]

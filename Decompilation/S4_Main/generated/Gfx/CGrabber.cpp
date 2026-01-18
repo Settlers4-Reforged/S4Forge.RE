@@ -4,7 +4,7 @@
 
 // address=[0x14944f0]
 // Decompiled from void __cdecl CGrabber::DoGrab(char a1)
-static void __cdecl CGrabber::DoGrab(std::wstring) {
+void __cdecl CGrabber::DoGrab(std::wstring a1) {
   
   const WCHAR *v1; // eax
   int v2; // [esp+18h] [ebp-D8h]
@@ -69,7 +69,7 @@ static void __cdecl CGrabber::DoGrab(std::wstring) {
 
 // address=[0x14947b0]
 // Decompiled from LPVOID __cdecl CGrabber::GetScreenBits(LPVOID lpvBits, struct tagBITMAPINFO *a2, LONG *a3, UINT *a4, int a5, char a6)
-static void * __cdecl CGrabber::GetScreenBits(void *,void *,int *,int *,int,bool) {
+void * __cdecl CGrabber::GetScreenBits(void * lpvBits, void * a2, int * a3, int * a4, int a5, bool a6) {
   
   _BYTE pv[4]; // [esp+0h] [ebp-94h] BYREF
   LONG v8; // [esp+4h] [ebp-90h]

@@ -4,7 +4,7 @@
 
 // address=[0x1486a00]
 // Decompiled from CLogicRingBuffer *__thiscall CLogicRingBuffer::CLogicRingBuffer(CLogicRingBuffer *this, int a2)
- CLogicRingBuffer::CLogicRingBuffer(int) {
+ CLogicRingBuffer::CLogicRingBuffer(int a2) {
   
   CRingBuffer<CEvn_Logic>::CRingBuffer<CEvn_Logic>(a2);
   IS4ChunkObject::IS4ChunkObject((CLogicRingBuffer *)((char *)this + 24));
@@ -64,7 +64,7 @@ void  CLogicRingBuffer::Load(class IS4Chunk &) {
 
 // address=[0x14872e0]
 // Decompiled from int __thiscall CLogicRingBuffer::Save(CLogicRingBuffer *this, struct IS4Chunk *a2)
-void  CLogicRingBuffer::Save(class IS4Chunk &) {
+void  CLogicRingBuffer::Save(class IS4Chunk & a2) {
   
   int result; // eax
   int v3; // [esp+0h] [ebp-Ch]

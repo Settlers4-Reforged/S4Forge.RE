@@ -20,7 +20,7 @@ int const *  CConfigVarIntArray::GetIntArray(void)const {
 
 // address=[0x2eeef30]
 // Decompiled from void **__thiscall CConfigVarIntArray::CConfigVarIntArray(void **this, void *Src, int a3)
- CConfigVarIntArray::CConfigVarIntArray(int const *,int) {
+ CConfigVarIntArray::CConfigVarIntArray(int const * Src, int a3) {
   
   CDynamicConfigVar::CDynamicConfigVar(this, 2, a3);
   *this = &CConfigVarIntArray::_vftable_;

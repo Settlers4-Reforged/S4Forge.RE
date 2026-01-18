@@ -12,7 +12,7 @@ class CAITaskForce *  CAITaskForce::AssociatedTaskForce(void)const {
 
 // address=[0x12fcf20]
 // Decompiled from unsigned int __thiscall CAITaskForce::ClearFlagBit(CAITaskForce *this, unsigned int a2)
-void  CAITaskForce::ClearFlagBit(unsigned int) {
+void  CAITaskForce::ClearFlagBit(unsigned int a2) {
   
   unsigned int result; // eax
 
@@ -80,7 +80,7 @@ int  CAITaskForce::NumberOfEntities(void)const {
 
 // address=[0x12fd660]
 // Decompiled from CAITaskForce *__thiscall CAITaskForce::SetFlagBit(CAITaskForce *this, unsigned int a2)
-void  CAITaskForce::SetFlagBit(unsigned int) {
+void  CAITaskForce::SetFlagBit(unsigned int a2) {
   
   CAITaskForce *result; // eax
 
@@ -150,7 +150,7 @@ void  CAITaskForce::ClearEntityAddedFlag(void) {
 
 // address=[0x13039b0]
 // Decompiled from CAITaskForce *__thiscall CAITaskForce::SetTimeStamp(CAITaskForce *this, unsigned int a2)
-void  CAITaskForce::SetTimeStamp(unsigned int) {
+void  CAITaskForce::SetTimeStamp(unsigned int a2) {
   
   CAITaskForce *result; // eax
 
@@ -186,7 +186,7 @@ unsigned int  CAITaskForce::StatusTimeStamp(void)const {
 
 // address=[0x1319810]
 // Decompiled from char __thiscall CAITaskForce::NewCommand(CAITaskForce *this, int a2, int a3, int a4)
-bool  CAITaskForce::NewCommand(int,int,int) {
+bool  CAITaskForce::NewCommand(int a2, int a3, int a4) {
   
   return 0;
 }
@@ -194,7 +194,7 @@ bool  CAITaskForce::NewCommand(int,int,int) {
 
 // address=[0x1319830]
 // Decompiled from int __stdcall CAITaskForce::NumberOfEntities(int a1)
-int  CAITaskForce::NumberOfEntities(enum T_AI_WARRIOR_TYPE)const {
+int  CAITaskForce::NumberOfEntities(enum T_AI_WARRIOR_TYPE a1)const {
   
   return -1;
 }
@@ -236,7 +236,7 @@ void  CAITaskForce::Release(void) {
 
 // address=[0x1327180]
 // Decompiled from int __thiscall CAITaskForce::ChangeType(_DWORD *this, int a2)
-void  CAITaskForce::ChangeType(enum T_AI_TASK_FORCE_TYPE) {
+void  CAITaskForce::ChangeType(enum T_AI_TASK_FORCE_TYPE a2) {
   
   int result; // eax
 
@@ -274,7 +274,7 @@ void  CAITaskForce::ChangeType(enum T_AI_TASK_FORCE_TYPE) {
 
 // address=[0x1327260]
 // Decompiled from int __thiscall CAITaskForce::AddEntity(_DWORD *this, CAIEntityInfo *a2, int a3)
-enum CAITaskForce::T_RESULT  CAITaskForce::AddEntity(class CAIEntityInfo *,enum CAITaskForce::T_POSITION) {
+enum CAITaskForce::T_RESULT  CAITaskForce::AddEntity(class CAIEntityInfo * a2, enum CAITaskForce::T_POSITION a3) {
   
   if ( !a2 )
     return 0;
@@ -386,7 +386,7 @@ enum CAITaskForce::T_RESULT  CAITaskForce::AddEntity(class CAIEntityInfo *,enum 
 
 // address=[0x13275f0]
 // Decompiled from int __thiscall CAITaskForce::AddEntity(void *this, int a2, int a3)
-enum CAITaskForce::T_RESULT  CAITaskForce::AddEntity(int,enum CAITaskForce::T_POSITION) {
+enum CAITaskForce::T_RESULT  CAITaskForce::AddEntity(int a2, enum CAITaskForce::T_POSITION a3) {
   
   unsigned __int16 *EntityInfo; // [esp+4h] [ebp-4h]
 
@@ -411,7 +411,7 @@ enum CAITaskForce::T_RESULT  CAITaskForce::AddEntity(int,enum CAITaskForce::T_PO
 
 // address=[0x1327690]
 // Decompiled from int __thiscall CAITaskForce::RemoveEntity(int *this, _DWORD *a2)
-enum CAITaskForce::T_RESULT  CAITaskForce::RemoveEntity(class CAIEntityInfo *) {
+enum CAITaskForce::T_RESULT  CAITaskForce::RemoveEntity(class CAIEntityInfo * a2) {
   
   if ( !a2 )
     return 0;
@@ -520,7 +520,7 @@ enum CAITaskForce::T_RESULT  CAITaskForce::RemoveEntity(class CAIEntityInfo *) {
 
 // address=[0x13279f0]
 // Decompiled from int __thiscall CAITaskForce::RemoveEntity(void *this, int a2)
-enum CAITaskForce::T_RESULT  CAITaskForce::RemoveEntity(int) {
+enum CAITaskForce::T_RESULT  CAITaskForce::RemoveEntity(int a2) {
   
   int EntityInfo; // [esp+4h] [ebp-4h]
 
@@ -580,7 +580,7 @@ void  CAITaskForce::RemoveAllEntities(void) {
 
 // address=[0x1327b40]
 // Decompiled from CAITaskForce *__thiscall CAITaskForce::SetAssociatedTaskForce(CAITaskForce *this, struct CAITaskForce *a2)
-void  CAITaskForce::SetAssociatedTaskForce(class CAITaskForce *) {
+void  CAITaskForce::SetAssociatedTaskForce(class CAITaskForce * a2) {
   
   CAITaskForce *result; // eax
 
@@ -656,7 +656,7 @@ void  CAITaskForce::ClearAssociatedTaskForce(void) {
 
 // address=[0x1327cd0]
 // Decompiled from int __thiscall CAITaskForce::Load(CAITaskForce *this, struct IS4Chunk *a2)
-void  CAITaskForce::Load(class IS4Chunk &) {
+void  CAITaskForce::Load(class IS4Chunk & a2) {
   
   int v3; // [esp+0h] [ebp-10h]
   int v4; // [esp+4h] [ebp-Ch]
@@ -690,7 +690,7 @@ void  CAITaskForce::Load(class IS4Chunk &) {
 
 // address=[0x1327e60]
 // Decompiled from int __thiscall CAITaskForce::Save(CAITaskForce *this, struct IS4Chunk *a2)
-void  CAITaskForce::Save(class IS4Chunk &) {
+void  CAITaskForce::Save(class IS4Chunk & a2) {
   
   int v3; // [esp+0h] [ebp-10h]
   int v4; // [esp+4h] [ebp-Ch]
@@ -731,7 +731,7 @@ void  CAITaskForce::Save(class IS4Chunk &) {
 
 // address=[0x1328020]
 // Decompiled from bool __thiscall CAITaskForce::IsGoalValid(_DWORD *this, int a2)
-bool  CAITaskForce::IsGoalValid(enum CAITaskForce::T_GOAL_TYPE) {
+bool  CAITaskForce::IsGoalValid(enum CAITaskForce::T_GOAL_TYPE a2) {
   
   if ( !a2 )
     return 0;
@@ -752,7 +752,7 @@ char const *  CAITaskForce::ShortName(void)const {
 
 // address=[0x13280e0]
 // Decompiled from char __thiscall CAITaskForce::GetPositionOfFirstEntity(CAITaskForce *this, int *a2, int *a3)
-bool  CAITaskForce::GetPositionOfFirstEntity(int &,int &) {
+bool  CAITaskForce::GetPositionOfFirstEntity(int & a2, int & a3) {
   
   int v4; // [esp+4h] [ebp-8h]
   int Entity; // [esp+8h] [ebp-4h]
@@ -806,7 +806,7 @@ bool  CAITaskForce::GoalIsPosition(void)const {
 
 // address=[0x132ec90]
 // Decompiled from int __thiscall CAITaskForce::SetWaitCounter(CAITaskForce *this, unsigned int a2)
-void  CAITaskForce::SetWaitCounter(unsigned int) {
+void  CAITaskForce::SetWaitCounter(unsigned int a2) {
   
   int result; // eax
 
@@ -835,7 +835,7 @@ int  CAITaskForce::State(void)const {
 
 // address=[0x13197f0]
 // Decompiled from char __thiscall CAITaskForce::IsAddEntityOk(CAITaskForce *this, int a2)
-bool  CAITaskForce::IsAddEntityOk(int) {
+bool  CAITaskForce::IsAddEntityOk(int a2) {
   
   return 1;
 }
@@ -843,7 +843,7 @@ bool  CAITaskForce::IsAddEntityOk(int) {
 
 // address=[0x1326f40]
 // Decompiled from int __thiscall CAITaskForce::CAITaskForce(int this, int a2, int a3, int a4, int a5)
- CAITaskForce::CAITaskForce(int,enum T_AI_TASK_FORCE_CLASS,enum T_AI_TASK_FORCE_TYPE,int) {
+ CAITaskForce::CAITaskForce(int a2, enum T_AI_TASK_FORCE_CLASS a3, enum T_AI_TASK_FORCE_TYPE a4, int a5) {
   
   IS4ChunkObject::IS4ChunkObject((IS4ChunkObject *)this);
   *(_DWORD *)this = CAITaskForce::_vftable_;
@@ -894,7 +894,7 @@ bool  CAITaskForce::IsAddEntityOk(int) {
 
 // address=[0x13281a0]
 // Decompiled from int __thiscall CAITaskForce::SetCommand(CAITaskForce *this, unsigned int a2, int a3, int a4)
-void  CAITaskForce::SetCommand(int,int,int) {
+void  CAITaskForce::SetCommand(int a2, int a3, int a4) {
   
   int result; // eax
 
@@ -981,7 +981,7 @@ void  CAITaskForce::MarkGoalAsPosition(void) {
 
 // address=[0x132a4a0]
 // Decompiled from int __thiscall CAITaskForce::DecWaitCounter(CAITaskForce *this, unsigned int a2)
-unsigned int  CAITaskForce::DecWaitCounter(unsigned int) {
+unsigned int  CAITaskForce::DecWaitCounter(unsigned int a2) {
   
   char v3; // [esp+0h] [ebp-8h]
 
@@ -1008,7 +1008,7 @@ void  CAITaskForce::ActivateNextState(void) {
 
 // address=[0x132e870]
 // Decompiled from CAITaskForce *__thiscall CAITaskForce::ClearInternalFlagBit(CAITaskForce *this, unsigned int a2)
-void  CAITaskForce::ClearInternalFlagBit(unsigned int) {
+void  CAITaskForce::ClearInternalFlagBit(unsigned int a2) {
   
   CAITaskForce *result; // eax
 
@@ -1029,7 +1029,7 @@ void  CAITaskForce::ClearInternalFlagBit(unsigned int) {
 
 // address=[0x132e8d0]
 // Decompiled from CAITaskForce *__thiscall CAITaskForce::ClearStateFlagBit(CAITaskForce *this, unsigned int a2)
-void  CAITaskForce::ClearStateFlagBit(unsigned int) {
+void  CAITaskForce::ClearStateFlagBit(unsigned int a2) {
   
   CAITaskForce *result; // eax
 
@@ -1050,7 +1050,7 @@ void  CAITaskForce::ClearStateFlagBit(unsigned int) {
 
 // address=[0x132ea30]
 // Decompiled from bool __thiscall CAITaskForce::IsTaskForceExState(CAITaskForce *this, int a2)
-bool  CAITaskForce::IsTaskForceExState(int) {
+bool  CAITaskForce::IsTaskForceExState(int a2) {
   
   return (unsigned int)(a2 - 100) < 0xD;
 }
@@ -1058,7 +1058,7 @@ bool  CAITaskForce::IsTaskForceExState(int) {
 
 // address=[0x132eb20]
 // Decompiled from int __thiscall CAITaskForce::SetNewStatusAndState(CAITaskForce *this, int a2, char a3, int a4)
-void  CAITaskForce::SetNewStatusAndState(enum T_AI_TASK_FORCE_STATUS,int,int) {
+void  CAITaskForce::SetNewStatusAndState(enum T_AI_TASK_FORCE_STATUS a2, int a3, int a4) {
   
   CAITaskForce::SetStateEx(this, a3, a4);
   return CAITaskForce::SetStatus(this, a2);
@@ -1067,7 +1067,7 @@ void  CAITaskForce::SetNewStatusAndState(enum T_AI_TASK_FORCE_STATUS,int,int) {
 
 // address=[0x132eb60]
 // Decompiled from CAITaskForce *__thiscall CAITaskForce::SetState(CAITaskForce *this, char a2)
-void  CAITaskForce::SetState(int) {
+void  CAITaskForce::SetState(int a2) {
   
   CAITaskForce *result; // eax
 
@@ -1079,7 +1079,7 @@ void  CAITaskForce::SetState(int) {
 
 // address=[0x132eb80]
 // Decompiled from char __thiscall CAITaskForce::SetStateEx(CAITaskForce *this, char a2, int a3)
-void  CAITaskForce::SetStateEx(int,int) {
+void  CAITaskForce::SetStateEx(int a2, int a3) {
   
   char result; // al
 
@@ -1102,7 +1102,7 @@ void  CAITaskForce::SetStateEx(int,int) {
 
 // address=[0x132ebf0]
 // Decompiled from unsigned int __thiscall CAITaskForce::SetStateFlagBit(CAITaskForce *this, unsigned int a2)
-void  CAITaskForce::SetStateFlagBit(unsigned int) {
+void  CAITaskForce::SetStateFlagBit(unsigned int a2) {
   
   unsigned int result; // eax
 
@@ -1123,7 +1123,7 @@ void  CAITaskForce::SetStateFlagBit(unsigned int) {
 
 // address=[0x132ec50]
 // Decompiled from int __thiscall CAITaskForce::SetStatus(int this, int a2)
-void  CAITaskForce::SetStatus(enum T_AI_TASK_FORCE_STATUS) {
+void  CAITaskForce::SetStatus(enum T_AI_TASK_FORCE_STATUS a2) {
   
   int result; // eax
 

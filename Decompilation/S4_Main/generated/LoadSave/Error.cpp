@@ -4,7 +4,7 @@
 
 // address=[0x13f2550]
 // Decompiled from boost::exception_detail::clone_base *__thiscall CPersistence::Error::Error(  boost::exception_detail::clone_base *this,  const struct boost::exception_detail::clone_base *a2)
- CPersistence::Error::Error(class CPersistence::Error const &) {
+ CPersistence::Error::Error(class CPersistence::Error const & a2) {
   
   *(_DWORD *)this = &CPersistence::Error::_vftable_;
   return this;

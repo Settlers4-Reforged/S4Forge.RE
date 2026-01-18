@@ -4,7 +4,7 @@
 
 // address=[0x2f58ab0]
 // Decompiled from IFilterEntry *__thiscall CFilterNearCustomer::CFilterNearCustomer(IFilterEntry *this, int a2, int a3, int a4, int a5)
- CFilterNearCustomer::CFilterNearCustomer(int,int,enum T_BUILD_LEVEL,int) {
+ CFilterNearCustomer::CFilterNearCustomer(int a2, int a3, enum T_BUILD_LEVEL a4, int a5) {
   
   IFilterEntry::IFilterEntry(this);
   *(_DWORD *)this = &CFilterNearCustomer::_vftable_;

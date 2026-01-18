@@ -4,7 +4,7 @@
 
 // address=[0x15d3ea0]
 // Decompiled from bool __cdecl CAStar64Catapult::IsNotBlocked(int a1)
-static bool __cdecl CAStar64Catapult::IsNotBlocked(int) {
+bool __cdecl CAStar64Catapult::IsNotBlocked(int a1) {
   
   return (unsigned int)(CWorldManager::CatapultTileId(a1) - 1) < 0xBFFF;
 }
@@ -12,7 +12,7 @@ static bool __cdecl CAStar64Catapult::IsNotBlocked(int) {
 
 // address=[0x15d3ee0]
 // Decompiled from int __cdecl CAStar64Catapult::MoveCosts(int a1, int a2)
-static int __cdecl CAStar64Catapult::MoveCosts(int,int) {
+int __cdecl CAStar64Catapult::MoveCosts(int a1, int a2) {
   
   int v3; // [esp+4h] [ebp-14h]
   int v4; // [esp+8h] [ebp-10h]

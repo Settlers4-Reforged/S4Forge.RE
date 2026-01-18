@@ -4,7 +4,7 @@
 
 // address=[0x14c7c10]
 // Decompiled from CStateMDCampaignViking *__cdecl CStateMDCampaignViking::DynamicCreateFunc(void *a1)
-static class CGameState * __cdecl CStateMDCampaignViking::DynamicCreateFunc(void *) {
+class CGameState * __cdecl CStateMDCampaignViking::DynamicCreateFunc(void * a1) {
   
   CStateMDCampaignViking *C; // [esp+Ch] [ebp-10h]
 
@@ -80,7 +80,7 @@ bool  CStateMDCampaignViking::Perform(void) {
 
 // address=[0x14c7e90]
 // Decompiled from char __thiscall CStateMDCampaignViking::OnEvent(CStateMDCampaignViking *this, struct CEvn_Event *a2)
-bool  CStateMDCampaignViking::OnEvent(class CEvn_Event &) {
+bool  CStateMDCampaignViking::OnEvent(class CEvn_Event & a2) {
   
   CEvn_Event *v3; // [esp+Ch] [ebp-38h]
   int event; // [esp+18h] [ebp-2Ch]

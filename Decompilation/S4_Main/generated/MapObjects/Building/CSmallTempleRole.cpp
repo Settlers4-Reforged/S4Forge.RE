@@ -4,7 +4,7 @@
 
 // address=[0x1401ee0]
 // Decompiled from int __cdecl CSmallTempleRole::New(int a1)
-static class CPersistence * __cdecl CSmallTempleRole::New(std::istream &) {
+class CPersistence * __cdecl CSmallTempleRole::New(std::istream & a1) {
   
   if ( operator new(0x184u) )
     return CSmallTempleRole::CSmallTempleRole(a1);
@@ -41,7 +41,7 @@ unsigned long  CSmallTempleRole::ClassID(void)const {
 
 // address=[0x14fd420]
 // Decompiled from void *__thiscall CSmallTempleRole::GetBuildingNeed(std::_Ref_count_base *this, const struct type_info *a2)
-int  CSmallTempleRole::GetBuildingNeed(int)const {
+int  CSmallTempleRole::GetBuildingNeed(int a2)const {
   
   return 0;
 }
@@ -57,7 +57,7 @@ int  CSmallTempleRole::GetBuildingRole(void) {
 
 // address=[0x14fd6c0]
 // Decompiled from int __thiscall CSmallTempleRole::GetPileIdWithGood(CSmallTempleRole *this, int a2)
-int  CSmallTempleRole::GetPileIdWithGood(int)const {
+int  CSmallTempleRole::GetPileIdWithGood(int a2)const {
   
   return *((unsigned __int16 *)this + 190);
 }
@@ -65,7 +65,7 @@ int  CSmallTempleRole::GetPileIdWithGood(int)const {
 
 // address=[0x14fd760]
 // Decompiled from void __thiscall CSmallTempleRole::GoodArrive(CSmallTempleRole *this, int a2)
-void  CSmallTempleRole::GoodArrive(int) {
+void  CSmallTempleRole::GoodArrive(int a2) {
   
   ;
 }
@@ -73,7 +73,7 @@ void  CSmallTempleRole::GoodArrive(int) {
 
 // address=[0x14fdc30]
 // Decompiled from int __cdecl CSmallTempleRole::Load(int a1)
-static class CSmallTempleRole * __cdecl CSmallTempleRole::Load(std::istream &) {
+class CSmallTempleRole * __cdecl CSmallTempleRole::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
@@ -85,7 +85,7 @@ static class CSmallTempleRole * __cdecl CSmallTempleRole::Load(std::istream &) {
 
 // address=[0x151bf20]
 // Decompiled from int __thiscall CSmallTempleRole::LogicUpdate(CSmallTempleRole *this, struct CBuilding *a2)
-void  CSmallTempleRole::LogicUpdate(class CBuilding *) {
+void  CSmallTempleRole::LogicUpdate(class CBuilding * a2) {
   
   int result; // eax
   unsigned __int8 *v3; // eax
@@ -147,7 +147,7 @@ void  CSmallTempleRole::LogicUpdate(class CBuilding *) {
 
 // address=[0x151c130]
 // Decompiled from CPile *__thiscall CSmallTempleRole::FillGfxInfo(  CSmallTempleRole *this,  struct CBuilding *a2,  struct SGfxObjectInfo *a3)
-void  CSmallTempleRole::FillGfxInfo(class CBuilding *,struct SGfxObjectInfo &) {
+void  CSmallTempleRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo & a3) {
   
   int v3; // eax
   int v4; // eax
@@ -196,7 +196,7 @@ void  CSmallTempleRole::FillGfxInfo(class CBuilding *,struct SGfxObjectInfo &) {
 
 // address=[0x151c320]
 // Decompiled from int __thiscall CSmallTempleRole::Init(CSmallTempleRole *this, struct CBuilding *a2)
-void  CSmallTempleRole::Init(class CBuilding *) {
+void  CSmallTempleRole::Init(class CBuilding * a2) {
   
   int v2; // eax
   int v3; // eax
@@ -272,7 +272,7 @@ void  CSmallTempleRole::Init(class CBuilding *) {
 
 // address=[0x151c5b0]
 // Decompiled from int __thiscall CSmallTempleRole::PostLoadInit(CSmallTempleRole *this, struct CBuilding *a2)
-void  CSmallTempleRole::PostLoadInit(class CBuilding *) {
+void  CSmallTempleRole::PostLoadInit(class CBuilding * a2) {
   
   int v2; // eax
   int result; // eax
@@ -288,7 +288,7 @@ void  CSmallTempleRole::PostLoadInit(class CBuilding *) {
 
 // address=[0x151c5e0]
 // Decompiled from char __thiscall CSmallTempleRole::SettlerEnter(CSmallTempleRole *this, struct CBuilding *a2, int a3)
-bool  CSmallTempleRole::SettlerEnter(class CBuilding *,int) {
+bool  CSmallTempleRole::SettlerEnter(class CBuilding * a2, int a3) {
   
   int v3; // eax
   int v4; // eax
@@ -388,7 +388,7 @@ bool  CSmallTempleRole::SettlerEnter(class CBuilding *,int) {
 
 // address=[0x151c890]
 // Decompiled from _DWORD *__thiscall CSmallTempleRole::FillDialog(CSmallTempleRole *this, struct CBuilding *a2, bool a3)
-void  CSmallTempleRole::FillDialog(class CBuilding *,bool) {
+void  CSmallTempleRole::FillDialog(class CBuilding * a2, bool a3) {
   
   int v3; // eax
   int v4; // eax
@@ -435,7 +435,7 @@ void  CSmallTempleRole::FillDialog(class CBuilding *,bool) {
 
 // address=[0x151ca80]
 // Decompiled from _DWORD *__thiscall CSmallTempleRole::LockPiles(CSmallTempleRole *this, struct CBuilding *a2, bool a3)
-void  CSmallTempleRole::LockPiles(class CBuilding *,bool) {
+void  CSmallTempleRole::LockPiles(class CBuilding * a2, bool a3) {
   
   unsigned __int8 *v3; // eax
 
@@ -454,7 +454,7 @@ void  CSmallTempleRole::LockPiles(class CBuilding *,bool) {
 
 // address=[0x151cb10]
 // Decompiled from char *__thiscall CSmallTempleRole::CSmallTempleRole(char *this, int a2)
- CSmallTempleRole::CSmallTempleRole(std::istream &) {
+ CSmallTempleRole::CSmallTempleRole(std::istream & a2) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
@@ -482,7 +482,7 @@ void  CSmallTempleRole::LockPiles(class CBuilding *,bool) {
 
 // address=[0x151cbf0]
 // Decompiled from int __thiscall CSmallTempleRole::Store(struct IBuildingRole *this, struct std::ostream *a2)
-void  CSmallTempleRole::Store(std::ostream &) {
+void  CSmallTempleRole::Store(std::ostream & a2) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
   struct IBuildingRole *v4; // [esp+4h] [ebp-4h]

@@ -4,7 +4,7 @@
 
 // address=[0x1426a10]
 // Decompiled from int CDestructionManager::Instance()
-static class CDestructionManager & __cdecl CDestructionManager::Instance(void) {
+class CDestructionManager & __cdecl CDestructionManager::Instance(void) {
   
   _DWORD *Instance; // eax
 
@@ -15,7 +15,7 @@ static class CDestructionManager & __cdecl CDestructionManager::Instance(void) {
 
 // address=[0x1426a30]
 // Decompiled from int __thiscall CDestructionManager::RegisterDestructor(CDestructionManager *this, struct CDestructor *a2)
-void  CDestructionManager::RegisterDestructor(class CDestructor *) {
+void  CDestructionManager::RegisterDestructor(class CDestructor * a2) {
   
   return std::vector<CDestructor *>::push_back(&a2);
 }
@@ -68,7 +68,7 @@ void  CDestructionManager::DestroyObjects(void) {
 
 // address=[0x2f03a90]
 // Decompiled from void *CDestructionManager::GetInstance()
-static class std::auto_ptr<class CDestructionManager> & __cdecl CDestructionManager::GetInstance(void) {
+class std::auto_ptr<class CDestructionManager> & __cdecl CDestructionManager::GetInstance(void) {
   
   CDestructionManager *v1; // [esp+8h] [ebp-14h]
   CDestructionManager *C; // [esp+Ch] [ebp-10h]

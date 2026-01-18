@@ -1,6 +1,8 @@
 #ifndef CBARRACKSINFO_H
 #define CBARRACKSINFO_H
 
+#include "defines.h"
+
 class CBarracksInfo : public CBuildingInfo {
 public:
     // address=[0x1454470]

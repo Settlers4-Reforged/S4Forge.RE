@@ -4,7 +4,7 @@
 
 // address=[0x132a100]
 // Decompiled from CAITaskForceDarkGardeners *__thiscall CAITaskForceDarkGardeners::CAITaskForceDarkGardeners(  CAITaskForceDarkGardeners *this,  int a2,  int a3)
- CAITaskForceDarkGardeners::CAITaskForceDarkGardeners(int,int) {
+ CAITaskForceDarkGardeners::CAITaskForceDarkGardeners(int a2, int a3) {
   
   CAITaskForceEx::CAITaskForceEx(this, a2, 6, 11, a3);
   *(_DWORD *)this = CAITaskForceDarkGardeners::_vftable_;
@@ -47,7 +47,7 @@ void  CAITaskForceDarkGardeners::Execute(void) {
 
 // address=[0x132cee0]
 // Decompiled from char __thiscall CAITaskForceDarkGardeners::NewCommand(CAITaskForceDarkGardeners *this, unsigned int a2, int a3, int a4)
-bool  CAITaskForceDarkGardeners::NewCommand(int,int,int) {
+bool  CAITaskForceDarkGardeners::NewCommand(int a2, int a3, int a4) {
   
   CAITaskForceEx::SetCommandAndClearStuff(this, a2, a3, a4);
   if ( !a2 )

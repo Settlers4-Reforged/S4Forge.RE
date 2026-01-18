@@ -1,10 +1,12 @@
 #ifndef CBUILDINGFLAGSWALK_H
 #define CBUILDINGFLAGSWALK_H
 
+#include "defines.h"
+
 class CBuildingFlagsWalk {
 public:
     // address=[0x14eaf90]
-     CBuildingFlagsWalk(int,int,int,int,class std::vector<unsigned int,class std::allocator<unsigned int> > const &);
+     CBuildingFlagsWalk(int a2, int a3, int a4, int a5, class std::vector<unsigned int,class std::allocator<unsigned int> > const & a6);
 
     // address=[0x14eb380]
     int  CurrentX(void)const;

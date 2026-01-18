@@ -1,6 +1,8 @@
 #ifndef IVIDEOENGINE_H
 #define IVIDEOENGINE_H
 
+#include "defines.h"
+
 class IVideoEngine {
 public:
     // address=[0x16a20b0]
@@ -10,10 +12,10 @@ public:
      ~IVideoEngine(void);
 
     // address=[0x16a21e0]
-    bool  Init(unsigned int);
+    bool  Init(unsigned int a2);
 
     // address=[0x16a2230]
-    bool  StartVideo(char *,unsigned int,unsigned int);
+    bool  StartVideo(char * a2, unsigned int a3, unsigned int a4);
 
     // address=[0x16a2260]
     bool  StopVideo(void);
@@ -37,7 +39,7 @@ public:
     void  Set_565_GfxMode(void);
 
     // address=[0x16a23c0]
-    bool  RenderToSurface(unsigned short *,unsigned int);
+    bool  RenderToSurface(unsigned short * a2, unsigned int a3);
 
     // address=[0x16a2410]
     bool  IsReadyForNextFrame(void);

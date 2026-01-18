@@ -1,13 +1,15 @@
 #ifndef CSTATEAOSPLASH_H
 #define CSTATEAOSPLASH_H
 
+#include "defines.h"
+
 class CStateAOSplash : public CGuiGameState {
 public:
     // address=[0x14a1980]
-    static class CGameState * __cdecl DynamicCreateFunc(void *);
+    static class CGameState * __cdecl DynamicCreateFunc(void * a1);
 
     // address=[0x14a1a00]
-     CStateAOSplash(void *);
+     CStateAOSplash(void * a2);
 
     // address=[0x14a1aa0]
     virtual  ~CStateAOSplash(void);
@@ -16,7 +18,7 @@ public:
     virtual bool  Perform(void);
 
     // address=[0x14a1bd0]
-    virtual bool  OnEvent(class CEvn_Event &);
+    virtual bool  OnEvent(class CEvn_Event & a2);
 
 };
 

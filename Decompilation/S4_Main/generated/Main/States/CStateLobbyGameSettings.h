@@ -1,13 +1,15 @@
 #ifndef CSTATELOBBYGAMESETTINGS_H
 #define CSTATELOBBYGAMESETTINGS_H
 
+#include "defines.h"
+
 class CStateLobbyGameSettings : public CGuiGameState {
 public:
     // address=[0x14b7f10]
-    static class CGameState * __cdecl DynamicCreateFunc(void *);
+    static class CGameState * __cdecl DynamicCreateFunc(void * a1);
 
     // address=[0x14b7f90]
-     CStateLobbyGameSettings(void *);
+     CStateLobbyGameSettings(void * a2);
 
     // address=[0x14b84f0]
     virtual  ~CStateLobbyGameSettings(void);
@@ -16,13 +18,13 @@ public:
     virtual bool  Perform(void);
 
     // address=[0x14b8890]
-    virtual bool  OnEvent(class CEvn_Event &);
+    virtual bool  OnEvent(class CEvn_Event & a2);
 
     // address=[0x14b9490]
     virtual void  UpdatePlayerList(bool);
 
     // address=[0x14b9b30]
-    void  PrintChatLine(unsigned short const *,unsigned short const *);
+    void  PrintChatLine(unsigned short const * String, unsigned short const * Source);
 
     // address=[0x14b9ca0]
     static int __cdecl CompileUserFlags(void);
@@ -31,7 +33,7 @@ public:
     static bool __cdecl CopyDefaultUserFlags(void);
 
     // address=[0x14ba670]
-    static void __cdecl DrawMap(unsigned short *,unsigned short *,unsigned int,int,int);
+    static void __cdecl DrawMap(unsigned short * a1, unsigned short * a2, unsigned int a3, int a4, int a5);
 
     // address=[0x14babf0]
     void  PaintMap(void);
@@ -41,14 +43,14 @@ public:
 
 protected:
     // address=[0x14bae60]
-    virtual void  CreateLobbyGameInfo(class CLanLobbyGameSettings &,std::wstring &);
+    virtual void  CreateLobbyGameInfo(class CLanLobbyGameSettings & a2, std::wstring & a3);
 
 private:
     // address=[0x14baf80]
     void  CreateRandomGoods(void);
 
     // address=[0x14bb1c0]
-    bool  CheckDoubleEconomyGood(int);
+    bool  CheckDoubleEconomyGood(int a2);
 
     // address=[0x14bb220]
     bool  ReadUserflagFiles(void);
@@ -69,7 +71,7 @@ private:
     void  SetBackButtonState(void);
 
     // address=[0x14bb8f0]
-    void  UserflagChanged(int,int);
+    void  UserflagChanged(int a2, int a3);
 
     // address=[0x14bbbc0]
     void  SetRandomRaces(void);

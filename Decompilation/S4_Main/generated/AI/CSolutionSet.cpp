@@ -42,7 +42,7 @@ int  CSolutionSet::size(void) {
 
 // address=[0x2f3f360]
 // Decompiled from int __thiscall CSolutionSet::NewSolution(CDynList **this, int a2, struct CParam *a3)
-void  CSolutionSet::NewSolution(int,class CParam *) {
+void  CSolutionSet::NewSolution(int a2, class CParam * a3) {
   
   struct CDynListEntry *v5; // [esp+Ch] [ebp-14h]
   CSolution *C; // [esp+10h] [ebp-10h]

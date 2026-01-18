@@ -1,6 +1,8 @@
 #ifndef CEXTENDEDMENUINFO_H
 #define CEXTENDEDMENUINFO_H
 
+#include "defines.h"
+
 class CExtendedMenuInfo : public CInfoExchange {
 public:
     // address=[0x1454560]

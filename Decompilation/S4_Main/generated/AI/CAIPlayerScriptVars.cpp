@@ -4,7 +4,7 @@
 
 // address=[0x12fcaf0]
 // Decompiled from int __thiscall CAIPlayerScriptVars::operator[](_DWORD *this, unsigned int a2)
-int  CAIPlayerScriptVars::operator[](enum T_AI_PLAYER_SCRIPT_VAR_INDEX)const {
+int  CAIPlayerScriptVars::operator[](enum T_AI_PLAYER_SCRIPT_VAR_INDEX a2)const {
   
   if ( a2 > 0x16
     && BBSupportDbgReport(
@@ -37,7 +37,7 @@ enum T_AI_DIFFICULTY_LEVEL  CAIPlayerScriptVars::DifficultyLevel(void)const {
 
 // address=[0x1309800]
 // Decompiled from unsigned int *__thiscall CAIPlayerScriptVars::SetDifficultyLevel(unsigned int *this, unsigned int a2)
-void  CAIPlayerScriptVars::SetDifficultyLevel(enum T_AI_DIFFICULTY_LEVEL) {
+void  CAIPlayerScriptVars::SetDifficultyLevel(enum T_AI_DIFFICULTY_LEVEL a2) {
   
   unsigned int *result; // eax
 
@@ -82,7 +82,7 @@ void  CAIPlayerScriptVars::Init(void) {
 
 // address=[0x131cb50]
 // Decompiled from int __thiscall CAIPlayerScriptVars::Load(CAIPlayerScriptVars *this, struct IS4Chunk *a2)
-void  CAIPlayerScriptVars::Load(class IS4Chunk &) {
+void  CAIPlayerScriptVars::Load(class IS4Chunk & a2) {
   
   int result; // eax
   int v3; // [esp+4h] [ebp-18h]
@@ -118,7 +118,7 @@ void  CAIPlayerScriptVars::Load(class IS4Chunk &) {
 
 // address=[0x131cc40]
 // Decompiled from int __thiscall CAIPlayerScriptVars::Save(CAIPlayerScriptVars *this, struct IS4Chunk *a2)
-void  CAIPlayerScriptVars::Save(class IS4Chunk &) {
+void  CAIPlayerScriptVars::Save(class IS4Chunk & a2) {
   
   int result; // eax
   int j; // [esp+4h] [ebp-8h]
@@ -140,7 +140,7 @@ void  CAIPlayerScriptVars::Save(class IS4Chunk &) {
 
 // address=[0x131ed70]
 // Decompiled from CAIPlayerScriptVars *__thiscall CAIPlayerScriptVars::SetFlags(CAIPlayerScriptVars *this, int a2)
-void  CAIPlayerScriptVars::SetFlags(int) {
+void  CAIPlayerScriptVars::SetFlags(int a2) {
   
   CAIPlayerScriptVars *result; // eax
 

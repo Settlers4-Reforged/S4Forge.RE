@@ -1,6 +1,8 @@
 #ifndef CBRIEFINGSETTINGS_H
 #define CBRIEFINGSETTINGS_H
 
+#include "defines.h"
+
 class CBriefingSettings {
 public:
     // address=[0x14a3450]

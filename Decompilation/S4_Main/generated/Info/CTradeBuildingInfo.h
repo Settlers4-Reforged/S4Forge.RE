@@ -1,6 +1,8 @@
 #ifndef CINTERNATIONALTRADER_CTRADEBUILDINGINFO_H
 #define CINTERNATIONALTRADER_CTRADEBUILDINGINFO_H
 
+#include "defines.h"
+
 namespace CInternationalTrader {
 
 class CTradeBuildingInfo {

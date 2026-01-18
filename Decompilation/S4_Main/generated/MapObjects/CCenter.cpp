@@ -4,7 +4,7 @@
 
 // address=[0x15f4100]
 // Decompiled from int __thiscall CCenter::Add(CCenter *this, int a2, int a3)
-void  CCenter::Add(int,int) {
+void  CCenter::Add(int a2, int a3) {
   
   int result; // eax
 

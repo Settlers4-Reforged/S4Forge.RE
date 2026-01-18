@@ -4,7 +4,7 @@
 
 // address=[0x1401e40]
 // Decompiled from int __cdecl CSlaveRole::New(int a1)
-static class CPersistence * __cdecl CSlaveRole::New(std::istream &) {
+class CPersistence * __cdecl CSlaveRole::New(std::istream & a1) {
   
   if ( operator new(0x38u) )
     return CSlaveRole::CSlaveRole(a1);
@@ -15,7 +15,7 @@ static class CPersistence * __cdecl CSlaveRole::New(std::istream &) {
 
 // address=[0x15888c0]
 // Decompiled from int __cdecl CSlaveRole::Load(int a1)
-static class CSlaveRole * __cdecl CSlaveRole::Load(std::istream &) {
+class CSlaveRole * __cdecl CSlaveRole::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
@@ -27,7 +27,7 @@ static class CSlaveRole * __cdecl CSlaveRole::Load(std::istream &) {
 
 // address=[0x158caa0]
 // Decompiled from int __thiscall CSlaveRole::InitWalking(CSlaveRole *this, struct CSettler *a2)
-class CWalking *  CSlaveRole::InitWalking(class CSettler *) {
+class CWalking *  CSlaveRole::InitWalking(class CSettler * a2) {
   
   int v2; // eax
   int v4; // [esp+4h] [ebp-4h]
@@ -41,7 +41,7 @@ class CWalking *  CSlaveRole::InitWalking(class CSettler *) {
 
 // address=[0x158cae0]
 // Decompiled from CSlaveRole *__thiscall CSlaveRole::LogicUpdateJob(CSlaveRole *this, struct CSettler *a2)
-void  CSlaveRole::LogicUpdateJob(class CSettler *) {
+void  CSlaveRole::LogicUpdateJob(class CSettler * a2) {
   
   CSlaveRole *result; // eax
   int v3; // [esp+0h] [ebp-8h]
@@ -82,7 +82,7 @@ void  CSlaveRole::LogicUpdateJob(class CSettler *) {
 
 // address=[0x158cbd0]
 // Decompiled from int __thiscall CSlaveRole::UpdateJob(CSlaveRole *this, struct CSettler *a2)
-void  CSlaveRole::UpdateJob(class CSettler *) {
+void  CSlaveRole::UpdateJob(class CSettler * a2) {
   
   int v2; // ecx
   int result; // eax
@@ -122,7 +122,7 @@ void  CSlaveRole::UpdateJob(class CSettler *) {
 
 // address=[0x158ccf0]
 // Decompiled from int __stdcall CSlaveRole::PostLoadInit(CPropertySet *a1)
-void  CSlaveRole::PostLoadInit(class CSettler *) {
+void  CSlaveRole::PostLoadInit(class CSettler * a1) {
   
   return CWarMap::AddEntity(a1);
 }
@@ -130,7 +130,7 @@ void  CSlaveRole::PostLoadInit(class CSettler *) {
 
 // address=[0x158cd10]
 // Decompiled from void __thiscall CSlaveRole::InitFlee(CSlaveRole *this, struct CSettler *a2, int a3)
-void  CSlaveRole::InitFlee(class CSettler *,int) {
+void  CSlaveRole::InitFlee(class CSettler * a2, int a3) {
   
   ;
 }
@@ -146,7 +146,7 @@ bool  CSlaveRole::IsUnEmployed(void)const {
 
 // address=[0x158cd60]
 // Decompiled from char __thiscall CSlaveRole::SetFree(CSlaveRole *this, struct CSettler *a2, int a3)
-bool  CSlaveRole::SetFree(class CSettler *,int) {
+bool  CSlaveRole::SetFree(class CSettler * a2, int a3) {
   
   int v3; // eax
   int v4; // eax
@@ -180,7 +180,7 @@ bool  CSlaveRole::SetFree(class CSettler *,int) {
 
 // address=[0x158ce30]
 // Decompiled from char __thiscall CSlaveRole::ESChanged(CSlaveRole *this, struct CSettler *a2)
-bool  CSlaveRole::ESChanged(class CSettler *) {
+bool  CSlaveRole::ESChanged(class CSettler * a2) {
   
   return 0;
 }
@@ -188,7 +188,7 @@ bool  CSlaveRole::ESChanged(class CSettler *) {
 
 // address=[0x158ce40]
 // Decompiled from char *__thiscall CSlaveRole::CSlaveRole(char *this, int a2)
- CSlaveRole::CSlaveRole(std::istream &) {
+ CSlaveRole::CSlaveRole(std::istream & a2) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
@@ -217,7 +217,7 @@ bool  CSlaveRole::ESChanged(class CSettler *) {
 
 // address=[0x158cf30]
 // Decompiled from int __thiscall CSlaveRole::Store(struct CPersistence *this, struct std::ostream *a2)
-void  CSlaveRole::Store(std::ostream &) {
+void  CSlaveRole::Store(std::ostream & a2) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
   int *v4; // [esp+4h] [ebp-4h]
@@ -275,7 +275,7 @@ int  CSlaveRole::GetSettlerRole(void)const {
 
 // address=[0x158d000]
 // Decompiled from int __thiscall CSlaveRole::GetNextJob(CSlaveRole *this, struct CSettler *a2)
-void  CSlaveRole::GetNextJob(class CSettler *) {
+void  CSlaveRole::GetNextJob(class CSettler * a2) {
   
   CSlaveRole *v3; // [esp+0h] [ebp-4h]
 
@@ -289,7 +289,7 @@ void  CSlaveRole::GetNextJob(class CSettler *) {
 
 // address=[0x158d040]
 // Decompiled from void __thiscall CSlaveRole::TakeJob(int this, CPaneContainer *a2)
-void  CSlaveRole::TakeJob(class CSettler *) {
+void  CSlaveRole::TakeJob(class CSettler * a2) {
   
   const struct CEntityTask *ActualTask; // eax
   int v3; // eax
@@ -415,7 +415,7 @@ LABEL_21:
 
 // address=[0x158d3f0]
 // Decompiled from _DWORD *__thiscall CSlaveRole::Init(_DWORD *this, CPropertySet *a2)
-void  CSlaveRole::Init(class CSettler *) {
+void  CSlaveRole::Init(class CSettler * a2) {
   
   _DWORD *result; // eax
 
@@ -430,7 +430,7 @@ void  CSlaveRole::Init(class CSettler *) {
 
 // address=[0x158d430]
 // Decompiled from char __thiscall CSlaveRole::SearchPosition(CSlaveRole *this, struct CSettler *a2)
-bool  CSlaveRole::SearchPosition(class CSettler *) {
+bool  CSlaveRole::SearchPosition(class CSettler * a2) {
   
   int v3; // eax
   int WorkingAreaPackedXY; // eax
@@ -517,7 +517,7 @@ bool  CSlaveRole::SearchPosition(class CSettler *) {
 
 // address=[0x158d700]
 // Decompiled from void __thiscall CSlaveRole::ConvertEventIntoGoal(ISettlerRole *this, CPropertySet *a2, _DWORD *a3)
-void  CSlaveRole::ConvertEventIntoGoal(class CSettler *,class CEntityEvent *) {
+void  CSlaveRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent * a3) {
   
   int v3; // eax
   CEntityTask *v4; // eax
@@ -727,7 +727,7 @@ LABEL_15:
 
 // address=[0x158dca0]
 // Decompiled from int __thiscall CSlaveRole::SetWorkPositionAndFlag(CSlaveRole *this, int a2, int a3)
-void  CSlaveRole::SetWorkPositionAndFlag(int,int) {
+void  CSlaveRole::SetWorkPositionAndFlag(int a2, int a3) {
   
   if ( !(unsigned __int8)CWorldManager::InWorld(a2, a3)
     && BBSupportDbgReport(2, "MapObjects\\Settler\\SlaveRole.cpp", 995, "g_cWorld.InWorld(_iX, _iY)") == 1 )
@@ -801,7 +801,7 @@ void  CSlaveRole::ClearWorkPositionAndFlagIfNecessary(void) {
 
 // address=[0x158deb0]
 // Decompiled from int __thiscall CSlaveRole::FreeServant(CSlaveRole *this, struct CSettler *a2)
-void  CSlaveRole::FreeServant(class CSettler *) {
+void  CSlaveRole::FreeServant(class CSettler * a2) {
   
   int v2; // eax
   int v3; // esi

@@ -4,7 +4,7 @@
 
 // address=[0x12fd370]
 // Decompiled from int __cdecl IAIEnvironment::MinutesToTicks(int a1)
-static unsigned int __cdecl IAIEnvironment::MinutesToTicks(int) {
+unsigned int __cdecl IAIEnvironment::MinutesToTicks(int a1) {
   
   return 840 * a1;
 }
@@ -12,7 +12,7 @@ static unsigned int __cdecl IAIEnvironment::MinutesToTicks(int) {
 
 // address=[0x12fd4d0]
 // Decompiled from int __cdecl IAIEnvironment::PackXYFast(int a1, int a2)
-static int __cdecl IAIEnvironment::PackXYFast(int,int) {
+int __cdecl IAIEnvironment::PackXYFast(int a1, int a2) {
   
   return a1 + (a2 << 16);
 }
@@ -20,7 +20,7 @@ static int __cdecl IAIEnvironment::PackXYFast(int,int) {
 
 // address=[0x12fd580]
 // Decompiled from unsigned int IAIEnvironment::Rand()
-static unsigned int __cdecl IAIEnvironment::Rand(void) {
+unsigned int __cdecl IAIEnvironment::Rand(void) {
   
   return CRandom16::Rand((CRandom16 *)IAIEnvironment::m_pRandom);
 }
@@ -28,7 +28,7 @@ static unsigned int __cdecl IAIEnvironment::Rand(void) {
 
 // address=[0x12fd770]
 // Decompiled from int IAIEnvironment::TickCounter()
-static unsigned int __cdecl IAIEnvironment::TickCounter(void) {
+unsigned int __cdecl IAIEnvironment::TickCounter(void) {
   
   return IAIEnvironment::m_uTickCounter;
 }
@@ -36,7 +36,7 @@ static unsigned int __cdecl IAIEnvironment::TickCounter(void) {
 
 // address=[0x12fd7c0]
 // Decompiled from int __cdecl IAIEnvironment::UnpackXFast(unsigned __int16 a1)
-static int __cdecl IAIEnvironment::UnpackXFast(int) {
+int __cdecl IAIEnvironment::UnpackXFast(int a1) {
   
   return a1;
 }
@@ -44,7 +44,7 @@ static int __cdecl IAIEnvironment::UnpackXFast(int) {
 
 // address=[0x12fd7d0]
 // Decompiled from int __cdecl IAIEnvironment::UnpackYFast(int a1)
-static int __cdecl IAIEnvironment::UnpackYFast(int) {
+int __cdecl IAIEnvironment::UnpackYFast(int a1) {
   
   return a1 >> 16;
 }
@@ -52,7 +52,7 @@ static int __cdecl IAIEnvironment::UnpackYFast(int) {
 
 // address=[0x12fd890]
 // Decompiled from bool __cdecl IAIEnvironment::WorldInWorld(unsigned int a1, unsigned int a2)
-static bool __cdecl IAIEnvironment::WorldInWorld(int,int) {
+bool __cdecl IAIEnvironment::WorldInWorld(int a1, int a2) {
   
   int v3; // [esp+4h] [ebp-8h]
   int v4; // [esp+8h] [ebp-4h]
@@ -71,7 +71,7 @@ static bool __cdecl IAIEnvironment::WorldInWorld(int,int) {
 
 // address=[0x12fd910]
 // Decompiled from int __cdecl IAIEnvironment::WorldIndex(int a1, int a2)
-static int __cdecl IAIEnvironment::WorldIndex(int,int) {
+int __cdecl IAIEnvironment::WorldIndex(int a1, int a2) {
   
   return a1 + IAIEnvironment::m_iWorldWidthHeigth * a2;
 }
@@ -79,7 +79,7 @@ static int __cdecl IAIEnvironment::WorldIndex(int,int) {
 
 // address=[0x12fd930]
 // Decompiled from int __cdecl IAIEnvironment::WorldSectorId(int x, int y)
-static int __cdecl IAIEnvironment::WorldSectorId(int,int) {
+int __cdecl IAIEnvironment::WorldSectorId(int x, int y) {
   
   int v2; // eax
 
@@ -90,7 +90,7 @@ static int __cdecl IAIEnvironment::WorldSectorId(int,int) {
 
 // address=[0x1301140]
 // Decompiled from bool __cdecl IAIEnvironment::AlliancesAllied(int a1, int a2)
-static bool __cdecl IAIEnvironment::AlliancesAllied(int,int) {
+bool __cdecl IAIEnvironment::AlliancesAllied(int a1, int a2) {
   
   int v2; // esi
 
@@ -101,7 +101,7 @@ static bool __cdecl IAIEnvironment::AlliancesAllied(int,int) {
 
 // address=[0x1301190]
 // Decompiled from bool __cdecl IAIEnvironment::AlliancesIsValidUsedPlayerId(int a1)
-static bool __cdecl IAIEnvironment::AlliancesIsValidUsedPlayerId(int) {
+bool __cdecl IAIEnvironment::AlliancesIsValidUsedPlayerId(int a1) {
   
   return CAlliances::IsValidUsedPlayerId(a1);
 }
@@ -109,7 +109,7 @@ static bool __cdecl IAIEnvironment::AlliancesIsValidUsedPlayerId(int) {
 
 // address=[0x13011b0]
 // Decompiled from int __cdecl IAIEnvironment::AlliancesPlayerAllyBits(int a1)
-static int __cdecl IAIEnvironment::AlliancesPlayerAllyBits(int) {
+int __cdecl IAIEnvironment::AlliancesPlayerAllyBits(int a1) {
   
   return CAlliances::PlayerAllyBits(a1);
 }
@@ -117,7 +117,7 @@ static int __cdecl IAIEnvironment::AlliancesPlayerAllyBits(int) {
 
 // address=[0x13011d0]
 // Decompiled from int __cdecl IAIEnvironment::AlliancesPlayerBit(int a1)
-static int __cdecl IAIEnvironment::AlliancesPlayerBit(int) {
+int __cdecl IAIEnvironment::AlliancesPlayerBit(int a1) {
   
   return CAlliances::PlayerBit(a1);
 }
@@ -125,7 +125,7 @@ static int __cdecl IAIEnvironment::AlliancesPlayerBit(int) {
 
 // address=[0x13011f0]
 // Decompiled from int __cdecl IAIEnvironment::ClipMax(int a1, int a2)
-static int __cdecl IAIEnvironment::ClipMax(int,int) {
+int __cdecl IAIEnvironment::ClipMax(int a1, int a2) {
   
   if ( a1 > a2 )
     return a2;
@@ -136,7 +136,7 @@ static int __cdecl IAIEnvironment::ClipMax(int,int) {
 
 // address=[0x1303a10]
 // Decompiled from bool __cdecl IAIEnvironment::WorldInWorldPackedXY(int a1)
-static bool __cdecl IAIEnvironment::WorldInWorldPackedXY(int) {
+bool __cdecl IAIEnvironment::WorldInWorldPackedXY(int a1) {
   
   int v1; // eax
   int v3; // [esp-4h] [ebp-4h]
@@ -149,7 +149,7 @@ static bool __cdecl IAIEnvironment::WorldInWorldPackedXY(int) {
 
 // address=[0x1303c40]
 // Decompiled from int IAIEnvironment::AlliancesLastPlayerId()
-static int __cdecl IAIEnvironment::AlliancesLastPlayerId(void) {
+int __cdecl IAIEnvironment::AlliancesLastPlayerId(void) {
   
   return CAlliances::LastPlayerId();
 }
@@ -157,7 +157,7 @@ static int __cdecl IAIEnvironment::AlliancesLastPlayerId(void) {
 
 // address=[0x1306400]
 // Decompiled from int __cdecl IAIEnvironment::AlliancesAllianceId(int a1)
-static int __cdecl IAIEnvironment::AlliancesAllianceId(int) {
+int __cdecl IAIEnvironment::AlliancesAllianceId(int a1) {
   
   return CAlliances::AllianceId(a1);
 }
@@ -165,7 +165,7 @@ static int __cdecl IAIEnvironment::AlliancesAllianceId(int) {
 
 // address=[0x1306420]
 // Decompiled from int __cdecl IAIEnvironment::AlliancesPlayerEnemyBits(int a1)
-static int __cdecl IAIEnvironment::AlliancesPlayerEnemyBits(int) {
+int __cdecl IAIEnvironment::AlliancesPlayerEnemyBits(int a1) {
   
   return CAlliances::PlayerEnemyBits(a1);
 }
@@ -173,7 +173,7 @@ static int __cdecl IAIEnvironment::AlliancesPlayerEnemyBits(int) {
 
 // address=[0x1306440]
 // Decompiled from void __cdecl IAIEnvironment::BuildingGetEnsignPosition(int a1, int *a2, int *a3)
-static void __cdecl IAIEnvironment::BuildingGetEnsignPosition(int,int &,int &) {
+void __cdecl IAIEnvironment::BuildingGetEnsignPosition(int a1, int & a2, int & a3) {
   
   int v3; // eax
 
@@ -184,7 +184,7 @@ static void __cdecl IAIEnvironment::BuildingGetEnsignPosition(int,int &,int &) {
 
 // address=[0x13065c0]
 // Decompiled from void __cdecl IAIEnvironment::EntityGetPosition(int a1, int *a2, int *a3)
-static void __cdecl IAIEnvironment::EntityGetPosition(int,int &,int &) {
+void __cdecl IAIEnvironment::EntityGetPosition(int a1, int & a2, int & a3) {
   
   int v3; // eax
 
@@ -195,7 +195,7 @@ static void __cdecl IAIEnvironment::EntityGetPosition(int,int &,int &) {
 
 // address=[0x1306a20]
 // Decompiled from int *__cdecl IAIEnvironment::UnpackXYFast(int a1, int *a2, int *a3)
-static void __cdecl IAIEnvironment::UnpackXYFast(int,int &,int &) {
+void __cdecl IAIEnvironment::UnpackXYFast(int a1, int & a2, int & a3) {
   
   int *result; // eax
 
@@ -208,7 +208,7 @@ static void __cdecl IAIEnvironment::UnpackXYFast(int,int &,int &) {
 
 // address=[0x1306a50]
 // Decompiled from void __cdecl IAIEnvironment::WorldEcoSectorIdPackedXY(struct _iobuf *a1)
-static int __cdecl IAIEnvironment::WorldEcoSectorIdPackedXY(int) {
+int __cdecl IAIEnvironment::WorldEcoSectorIdPackedXY(int a1) {
   
   int v1; // eax
 
@@ -219,7 +219,7 @@ static int __cdecl IAIEnvironment::WorldEcoSectorIdPackedXY(int) {
 
 // address=[0x1306a70]
 // Decompiled from int IAIEnvironment::WorldHeight()
-static int __cdecl IAIEnvironment::WorldHeight(void) {
+int __cdecl IAIEnvironment::WorldHeight(void) {
   
   return IAIEnvironment::m_iWorldWidthHeigth;
 }
@@ -227,7 +227,7 @@ static int __cdecl IAIEnvironment::WorldHeight(void) {
 
 // address=[0x1306a80]
 // Decompiled from int __cdecl IAIEnvironment::WorldIndexPackedXY(int a1)
-static int __cdecl IAIEnvironment::WorldIndexPackedXY(int) {
+int __cdecl IAIEnvironment::WorldIndexPackedXY(int a1) {
   
   int v1; // esi
 
@@ -238,7 +238,7 @@ static int __cdecl IAIEnvironment::WorldIndexPackedXY(int) {
 
 // address=[0x1306ac0]
 // Decompiled from bool __cdecl IAIEnvironment::WorldIsScree(struct _Cnd_internal_imp_t *a1, struct _Mtx_internal_imp_t *a2)
-static bool __cdecl IAIEnvironment::WorldIsScree(int,int) {
+bool __cdecl IAIEnvironment::WorldIsScree(int a1, int a2) {
   
   int v2; // eax
 
@@ -249,7 +249,7 @@ static bool __cdecl IAIEnvironment::WorldIsScree(int,int) {
 
 // address=[0x1306af0]
 // Decompiled from int IAIEnvironment::WorldWidth()
-static int __cdecl IAIEnvironment::WorldWidth(void) {
+int __cdecl IAIEnvironment::WorldWidth(void) {
   
   return IAIEnvironment::m_iWorldWidthHeigth;
 }
@@ -257,7 +257,7 @@ static int __cdecl IAIEnvironment::WorldWidth(void) {
 
 // address=[0x13093c0]
 // Decompiled from const int *__cdecl IAIEnvironment::AlliancesEnemyPlayerIds(int a1)
-static int const * __cdecl IAIEnvironment::AlliancesEnemyPlayerIds(int) {
+int const * __cdecl IAIEnvironment::AlliancesEnemyPlayerIds(int a1) {
   
   return CAlliances::EnemyPlayerIds(a1);
 }
@@ -265,7 +265,7 @@ static int const * __cdecl IAIEnvironment::AlliancesEnemyPlayerIds(int) {
 
 // address=[0x1309420]
 // Decompiled from int __cdecl IAIEnvironment::Clip(int a1, int a2, int a3)
-static int __cdecl IAIEnvironment::Clip(int,int,int) {
+int __cdecl IAIEnvironment::Clip(int a1, int a2, int a3) {
   
   if ( a1 <= a2 )
     return a2;
@@ -278,7 +278,7 @@ static int __cdecl IAIEnvironment::Clip(int,int,int) {
 
 // address=[0x1309470]
 // Decompiled from int __cdecl IAIEnvironment::ClipMin(int a1, int a2)
-static int __cdecl IAIEnvironment::ClipMin(int,int) {
+int __cdecl IAIEnvironment::ClipMin(int a1, int a2) {
   
   if ( a1 < a2 )
     return a2;
@@ -289,7 +289,7 @@ static int __cdecl IAIEnvironment::ClipMin(int,int) {
 
 // address=[0x1309560]
 // Decompiled from int __cdecl IAIEnvironment::GridDistancePackedXY(int a1, int a2)
-static int __cdecl IAIEnvironment::GridDistancePackedXY(int,int) {
+int __cdecl IAIEnvironment::GridDistancePackedXY(int a1, int a2) {
   
   int v2; // esi
   int v3; // esi
@@ -306,7 +306,7 @@ static int __cdecl IAIEnvironment::GridDistancePackedXY(int,int) {
 
 // address=[0x130a4b0]
 // Decompiled from int IAIEnvironment::GlobalEcoAIFlags()
-static int __cdecl IAIEnvironment::GlobalEcoAIFlags(void) {
+int __cdecl IAIEnvironment::GlobalEcoAIFlags(void) {
   
   return IAIEnvironment::m_iGlobalEcoAIFlags;
 }
@@ -314,7 +314,7 @@ static int __cdecl IAIEnvironment::GlobalEcoAIFlags(void) {
 
 // address=[0x130a4e0]
 // Decompiled from int IAIEnvironment::RandomPtr()
-static class CRandom16 * __cdecl IAIEnvironment::RandomPtr(void) {
+class CRandom16 * __cdecl IAIEnvironment::RandomPtr(void) {
   
   return IAIEnvironment::m_pRandom;
 }
@@ -322,7 +322,7 @@ static class CRandom16 * __cdecl IAIEnvironment::RandomPtr(void) {
 
 // address=[0x130add0]
 // Decompiled from int __cdecl IAIEnvironment::GridDistance(Grid *a1, int a2)
-static int __cdecl IAIEnvironment::GridDistance(int,int) {
+int __cdecl IAIEnvironment::GridDistance(int a1, int a2) {
   
   return Grid::DistanceInline(a1, a2);
 }
@@ -330,7 +330,7 @@ static int __cdecl IAIEnvironment::GridDistance(int,int) {
 
 // address=[0x130adf0]
 // Decompiled from int __cdecl IAIEnvironment::WorldOwnerId(int a1)
-static int __cdecl IAIEnvironment::WorldOwnerId(int) {
+int __cdecl IAIEnvironment::WorldOwnerId(int a1) {
   
   return ITiling::OwnerId(a1);
 }
@@ -338,7 +338,7 @@ static int __cdecl IAIEnvironment::WorldOwnerId(int) {
 
 // address=[0x130ae10]
 // Decompiled from int __cdecl IAIEnvironment::WorldSectorId(int a1)
-static int __cdecl IAIEnvironment::WorldSectorId(int) {
+int __cdecl IAIEnvironment::WorldSectorId(int a1) {
   
   return ITiling::SectorId(a1);
 }
@@ -346,7 +346,7 @@ static int __cdecl IAIEnvironment::WorldSectorId(int) {
 
 // address=[0x130ae30]
 // Decompiled from int __cdecl IAIEnvironment::WorldCatapultSectorId(int a1)
-static int __cdecl IAIEnvironment::WorldCatapultSectorId(int) {
+int __cdecl IAIEnvironment::WorldCatapultSectorId(int a1) {
   
   return ITiling::CatapultSectorId(a1);
 }
@@ -354,7 +354,7 @@ static int __cdecl IAIEnvironment::WorldCatapultSectorId(int) {
 
 // address=[0x130ae50]
 // Decompiled from int __cdecl IAIEnvironment::WorldEcoSectorId(int a1)
-static int __cdecl IAIEnvironment::WorldEcoSectorId(int) {
+int __cdecl IAIEnvironment::WorldEcoSectorId(int a1) {
   
   return ITiling::EcoSectorId(a1);
 }
@@ -362,7 +362,7 @@ static int __cdecl IAIEnvironment::WorldEcoSectorId(int) {
 
 // address=[0x130ae70]
 // Decompiled from int __cdecl IAIEnvironment::WorldIsBlockedLand(int a1)
-static bool __cdecl IAIEnvironment::WorldIsBlockedLand(int) {
+bool __cdecl IAIEnvironment::WorldIsBlockedLand(int a1) {
   
   return CWorldManager::IsBlockedLand(a1);
 }
@@ -370,7 +370,7 @@ static bool __cdecl IAIEnvironment::WorldIsBlockedLand(int) {
 
 // address=[0x130ae90]
 // Decompiled from bool __cdecl IAIEnvironment::WorldIsScree(int a1)
-static bool __cdecl IAIEnvironment::WorldIsScree(int) {
+bool __cdecl IAIEnvironment::WorldIsScree(int a1) {
   
   return CWorldManager::Ground(a1) == 32;
 }
@@ -378,7 +378,7 @@ static bool __cdecl IAIEnvironment::WorldIsScree(int) {
 
 // address=[0x130aec0]
 // Decompiled from int __cdecl IAIEnvironment::EntityObjectType(int a1)
-static int __cdecl IAIEnvironment::EntityObjectType(int) {
+int __cdecl IAIEnvironment::EntityObjectType(int a1) {
   
   unsigned __int8 *v1; // eax
 
@@ -389,7 +389,7 @@ static int __cdecl IAIEnvironment::EntityObjectType(int) {
 
 // address=[0x130aee0]
 // Decompiled from int __cdecl IAIEnvironment::EntityType(int a1)
-static int __cdecl IAIEnvironment::EntityType(int) {
+int __cdecl IAIEnvironment::EntityType(int a1) {
   
   unsigned __int16 *v1; // eax
 
@@ -400,7 +400,7 @@ static int __cdecl IAIEnvironment::EntityType(int) {
 
 // address=[0x130af00]
 // Decompiled from int __cdecl IAIEnvironment::EntityPackedPosition(int a1)
-static int __cdecl IAIEnvironment::EntityPackedPosition(int) {
+int __cdecl IAIEnvironment::EntityPackedPosition(int a1) {
   
   struct IEntity *v1; // eax
 
@@ -411,7 +411,7 @@ static int __cdecl IAIEnvironment::EntityPackedPosition(int) {
 
 // address=[0x130af20]
 // Decompiled from int __cdecl IAIEnvironment::EntitySectorId(int a1)
-static int __cdecl IAIEnvironment::EntitySectorId(int) {
+int __cdecl IAIEnvironment::EntitySectorId(int a1) {
   
   int v1; // eax
   int v3; // [esp+0h] [ebp-Ch]
@@ -430,7 +430,7 @@ static int __cdecl IAIEnvironment::EntitySectorId(int) {
 
 // address=[0x130af70]
 // Decompiled from int __cdecl IAIEnvironment::EntityUniqueId(signed int a1)
-static int __cdecl IAIEnvironment::EntityUniqueId(int) {
+int __cdecl IAIEnvironment::EntityUniqueId(int a1) {
   
   int v2; // [esp+0h] [ebp-4h]
 
@@ -443,7 +443,7 @@ static int __cdecl IAIEnvironment::EntityUniqueId(int) {
 
 // address=[0x130afa0]
 // Decompiled from int __cdecl IAIEnvironment::EntityGetEntityInfo(int a1, unsigned __int8 a2)
-static class CAIEntityInfo * __cdecl IAIEnvironment::EntityGetEntityInfo(int,bool) {
+class CAIEntityInfo * __cdecl IAIEnvironment::EntityGetEntityInfo(int a1, bool a2) {
   
   int v3; // [esp+8h] [ebp-20h]
   int v4; // [esp+14h] [ebp-14h]
@@ -477,7 +477,7 @@ static class CAIEntityInfo * __cdecl IAIEnvironment::EntityGetEntityInfo(int,boo
 
 // address=[0x130b0e0]
 // Decompiled from int __cdecl IAIEnvironment::EntityFlags(int a1)
-static int __cdecl IAIEnvironment::EntityFlags(int) {
+int __cdecl IAIEnvironment::EntityFlags(int a1) {
   
   struct IEntity *v1; // eax
 
@@ -488,7 +488,7 @@ static int __cdecl IAIEnvironment::EntityFlags(int) {
 
 // address=[0x130b100]
 // Decompiled from int __cdecl IAIEnvironment::EntityOwnerId(int a1)
-static int __cdecl IAIEnvironment::EntityOwnerId(int) {
+int __cdecl IAIEnvironment::EntityOwnerId(int a1) {
   
   unsigned __int8 *v1; // eax
 
@@ -499,7 +499,7 @@ static int __cdecl IAIEnvironment::EntityOwnerId(int) {
 
 // address=[0x130b120]
 // Decompiled from _DWORD *__cdecl IAIEnvironment::EntitySetFlagBits(int a1, EntityFlag a2)
-static void __cdecl IAIEnvironment::EntitySetFlagBits(int,int) {
+void __cdecl IAIEnvironment::EntitySetFlagBits(int a1, int a2) {
   
   struct IEntity *v2; // eax
 
@@ -510,7 +510,7 @@ static void __cdecl IAIEnvironment::EntitySetFlagBits(int,int) {
 
 // address=[0x130b140]
 // Decompiled from int __cdecl IAIEnvironment::EntityClearFlagBits(int a1, EntityFlag a2)
-static void __cdecl IAIEnvironment::EntityClearFlagBits(int,int) {
+void __cdecl IAIEnvironment::EntityClearFlagBits(int a1, int a2) {
   
   _DWORD *v2; // eax
 
@@ -521,7 +521,7 @@ static void __cdecl IAIEnvironment::EntityClearFlagBits(int,int) {
 
 // address=[0x130b160]
 // Decompiled from int __cdecl IAIEnvironment::EntityGetEntityTypeAndPosition(int a1, int *a2, int *a3, int *a4)
-static void __cdecl IAIEnvironment::EntityGetEntityTypeAndPosition(int,int &,int &,int &) {
+void __cdecl IAIEnvironment::EntityGetEntityTypeAndPosition(int a1, int & a2, int & a3, int & a4) {
   
   int result; // eax
   unsigned __int8 *v5; // [esp+0h] [ebp-4h]
@@ -539,7 +539,7 @@ static void __cdecl IAIEnvironment::EntityGetEntityTypeAndPosition(int,int &,int
 
 // address=[0x130b1d0]
 // Decompiled from unsigned int __cdecl IAIEnvironment::EntityWarriorType(int a1)
-static enum T_AI_WARRIOR_TYPE __cdecl IAIEnvironment::EntityWarriorType(int) {
+enum T_AI_WARRIOR_TYPE __cdecl IAIEnvironment::EntityWarriorType(int a1) {
   
   unsigned int v2; // [esp+8h] [ebp-4h]
 
@@ -556,7 +556,7 @@ static enum T_AI_WARRIOR_TYPE __cdecl IAIEnvironment::EntityWarriorType(int) {
 
 // address=[0x130b230]
 // Decompiled from unsigned int __cdecl IAIEnvironment::EntityGetWarriorTypeAndSectorId(int a1, unsigned int *a2, _DWORD *a3)
-static void __cdecl IAIEnvironment::EntityGetWarriorTypeAndSectorId(int,enum T_AI_WARRIOR_TYPE &,int &) {
+void __cdecl IAIEnvironment::EntityGetWarriorTypeAndSectorId(int a1, enum T_AI_WARRIOR_TYPE & a2, int & a3) {
   
   unsigned int result; // eax
   int v4; // [esp+0h] [ebp-14h]
@@ -583,7 +583,7 @@ static void __cdecl IAIEnvironment::EntityGetWarriorTypeAndSectorId(int,enum T_A
 
 // address=[0x130b2d0]
 // Decompiled from int __cdecl IAIEnvironment::EntityGetWarriorTypeAndPosition(int a1, enum T_AI_WARRIOR_TYPE *a2, int *a3, int *a4)
-static void __cdecl IAIEnvironment::EntityGetWarriorTypeAndPosition(int,enum T_AI_WARRIOR_TYPE &,int &,int &) {
+void __cdecl IAIEnvironment::EntityGetWarriorTypeAndPosition(int a1, enum T_AI_WARRIOR_TYPE & a2, int & a3, int & a4) {
   
   int result; // eax
   unsigned int v5; // [esp+0h] [ebp-8h]
@@ -603,7 +603,7 @@ static void __cdecl IAIEnvironment::EntityGetWarriorTypeAndPosition(int,enum T_A
 
 // address=[0x130b340]
 // Decompiled from bool __cdecl IAIEnvironment::EntityIsAlive(int a1)
-static bool __cdecl IAIEnvironment::EntityIsAlive(int) {
+bool __cdecl IAIEnvironment::EntityIsAlive(int a1) {
   
   _DWORD *v2; // [esp+0h] [ebp-8h]
 
@@ -614,7 +614,7 @@ static bool __cdecl IAIEnvironment::EntityIsAlive(int) {
 
 // address=[0x130b390]
 // Decompiled from bool __cdecl IAIEnvironment::EntityIsReady(int a1)
-static bool __cdecl IAIEnvironment::EntityIsReady(int) {
+bool __cdecl IAIEnvironment::EntityIsReady(int a1) {
   
   _DWORD *v2; // [esp+0h] [ebp-8h]
 
@@ -625,7 +625,7 @@ static bool __cdecl IAIEnvironment::EntityIsReady(int) {
 
 // address=[0x130b3e0]
 // Decompiled from bool __cdecl IAIEnvironment::EntityIsAliveAndHasGivenUniqueId(int a1, int a2)
-static bool __cdecl IAIEnvironment::EntityIsAliveAndHasGivenUniqueId(int,int) {
+bool __cdecl IAIEnvironment::EntityIsAliveAndHasGivenUniqueId(int a1, int a2) {
   
   _DWORD *v3; // [esp+0h] [ebp-8h]
   bool v4; // [esp+5h] [ebp-3h]
@@ -640,7 +640,7 @@ static bool __cdecl IAIEnvironment::EntityIsAliveAndHasGivenUniqueId(int,int) {
 
 // address=[0x130b450]
 // Decompiled from bool __cdecl IAIEnvironment::EntityIsAliveAndOfGivenWarriorType(int a1, int a2)
-static bool __cdecl IAIEnvironment::EntityIsAliveAndOfGivenWarriorType(int,enum T_AI_WARRIOR_TYPE) {
+bool __cdecl IAIEnvironment::EntityIsAliveAndOfGivenWarriorType(int a1, enum T_AI_WARRIOR_TYPE a2) {
   
   _DWORD *v3; // [esp+0h] [ebp-8h]
   bool v4; // [esp+5h] [ebp-3h]
@@ -655,7 +655,7 @@ static bool __cdecl IAIEnvironment::EntityIsAliveAndOfGivenWarriorType(int,enum 
 
 // address=[0x130b4c0]
 // Decompiled from void **__cdecl IAIEnvironment::EntityGetEntityInfoTower(int a1)
-static class CAIEntityInfoTower * __cdecl IAIEnvironment::EntityGetEntityInfoTower(int) {
+class CAIEntityInfoTower * __cdecl IAIEnvironment::EntityGetEntityInfoTower(int a1) {
   
   int v2; // [esp+0h] [ebp-Ch]
   int EntityInfo; // [esp+4h] [ebp-8h]
@@ -684,7 +684,7 @@ static class CAIEntityInfoTower * __cdecl IAIEnvironment::EntityGetEntityInfoTow
 
 // address=[0x130b570]
 // Decompiled from unsigned __int16 *__cdecl IAIEnvironment::EntitySendCastSpellCommand(int a1, int a2, int a3)
-static void __cdecl IAIEnvironment::EntitySendCastSpellCommand(int,int,int) {
+void __cdecl IAIEnvironment::EntitySendCastSpellCommand(int a1, int a2, int a3) {
   
   unsigned __int16 *result; // eax
   int v4; // eax
@@ -716,7 +716,7 @@ static void __cdecl IAIEnvironment::EntitySendCastSpellCommand(int,int,int) {
 
 // address=[0x130b630]
 // Decompiled from int __cdecl IAIEnvironment::MovingEntitySendMoveCommand(int a1, int a2, int a3, bool a4)
-static void __cdecl IAIEnvironment::MovingEntitySendMoveCommand(int,int,int,bool) {
+void __cdecl IAIEnvironment::MovingEntitySendMoveCommand(int a1, int a2, int a3, bool a4) {
   
   int result; // eax
   int v5; // eax
@@ -751,7 +751,7 @@ static void __cdecl IAIEnvironment::MovingEntitySendMoveCommand(int,int,int,bool
 
 // address=[0x130b710]
 // Decompiled from bool __cdecl IAIEnvironment::MovingEntityIsWaiting(int a1)
-static bool __cdecl IAIEnvironment::MovingEntityIsWaiting(int) {
+bool __cdecl IAIEnvironment::MovingEntityIsWaiting(int a1) {
   
   void **v1; // eax
 
@@ -762,7 +762,7 @@ static bool __cdecl IAIEnvironment::MovingEntityIsWaiting(int) {
 
 // address=[0x130b750]
 // Decompiled from int __cdecl IAIEnvironment::MovingEntityWalkingState(int a1)
-static int __cdecl IAIEnvironment::MovingEntityWalkingState(int) {
+int __cdecl IAIEnvironment::MovingEntityWalkingState(int a1) {
   
   void **v2; // [esp+0h] [ebp-Ch]
   IMovingEntity *v3; // [esp+4h] [ebp-8h]
@@ -784,7 +784,7 @@ static int __cdecl IAIEnvironment::MovingEntityWalkingState(int) {
 
 // address=[0x130b7b0]
 // Decompiled from int __cdecl IAIEnvironment::EntityEnterManakopter(int a1, int a2)
-static void __cdecl IAIEnvironment::EntityEnterManakopter(int,int) {
+void __cdecl IAIEnvironment::EntityEnterManakopter(int a1, int a2) {
   
   int result; // eax
   _BYTE v3[24]; // [esp+4h] [ebp-34h] BYREF
@@ -810,7 +810,7 @@ static void __cdecl IAIEnvironment::EntityEnterManakopter(int,int) {
 
 // address=[0x130b860]
 // Decompiled from void __cdecl IAIEnvironment::EntityManakopterUnload(int a1)
-static void __cdecl IAIEnvironment::EntityManakopterUnload(int) {
+void __cdecl IAIEnvironment::EntityManakopterUnload(int a1) {
   
   CManakopter *ManakopterPtr; // [esp+0h] [ebp-4h]
 
@@ -822,7 +822,7 @@ static void __cdecl IAIEnvironment::EntityManakopterUnload(int) {
 
 // address=[0x130b890]
 // Decompiled from IFlyingEntity *__cdecl IAIEnvironment::EntityManakopterFlyTo(int a1, __int16 a2, __int16 a3)
-static void __cdecl IAIEnvironment::EntityManakopterFlyTo(int,int,int) {
+void __cdecl IAIEnvironment::EntityManakopterFlyTo(int a1, int a2, int a3) {
   
   IFlyingEntity *result; // eax
 
@@ -835,7 +835,7 @@ static void __cdecl IAIEnvironment::EntityManakopterFlyTo(int,int,int) {
 
 // address=[0x130b8c0]
 // Decompiled from bool __cdecl IAIEnvironment::EntityIsManakopterMoving(int a1)
-static bool __cdecl IAIEnvironment::EntityIsManakopterMoving(int) {
+bool __cdecl IAIEnvironment::EntityIsManakopterMoving(int a1) {
   
   IFlyingEntity *ManakopterPtr; // [esp+0h] [ebp-4h]
 
@@ -848,7 +848,7 @@ static bool __cdecl IAIEnvironment::EntityIsManakopterMoving(int) {
 
 // address=[0x130b920]
 // Decompiled from int __cdecl IAIEnvironment::EntityFindNearestManakopter(int a1, int a2, int a3, bool a4)
-static int __cdecl IAIEnvironment::EntityFindNearestManakopter(int,int,int,bool) {
+int __cdecl IAIEnvironment::EntityFindNearestManakopter(int a1, int a2, int a3, bool a4) {
   
   int v5; // [esp+0h] [ebp-4h]
 
@@ -861,7 +861,7 @@ static int __cdecl IAIEnvironment::EntityFindNearestManakopter(int,int,int,bool)
 
 // address=[0x130b960]
 // Decompiled from bool __cdecl IAIEnvironment::EntityIsShamanOutOfMana(int a1)
-static bool __cdecl IAIEnvironment::EntityIsShamanOutOfMana(int) {
+bool __cdecl IAIEnvironment::EntityIsShamanOutOfMana(int a1) {
   
   CShamanRole *v2; // [esp+0h] [ebp-8h]
   unsigned __int8 *SettlerPtr; // [esp+4h] [ebp-4h]
@@ -878,7 +878,7 @@ static bool __cdecl IAIEnvironment::EntityIsShamanOutOfMana(int) {
 
 // address=[0x130b9d0]
 // Decompiled from char __cdecl IAIEnvironment::EntitySendShamanWorkEvent(int a1, int a2)
-static bool __cdecl IAIEnvironment::EntitySendShamanWorkEvent(int,int) {
+bool __cdecl IAIEnvironment::EntitySendShamanWorkEvent(int a1, int a2) {
   
   _BYTE v3[24]; // [esp+4h] [ebp-34h] BYREF
   CEntityEvent *v4; // [esp+1Ch] [ebp-1Ch]
@@ -908,7 +908,7 @@ static bool __cdecl IAIEnvironment::EntitySendShamanWorkEvent(int,int) {
 
 // address=[0x130ba90]
 // Decompiled from int __cdecl IAIEnvironment::BuildingPackedEnsignPosition(int a1)
-static int __cdecl IAIEnvironment::BuildingPackedEnsignPosition(int) {
+int __cdecl IAIEnvironment::BuildingPackedEnsignPosition(int a1) {
   
   unsigned __int8 *BuildingPtr; // [esp+0h] [ebp-4h]
 
@@ -922,7 +922,7 @@ static int __cdecl IAIEnvironment::BuildingPackedEnsignPosition(int) {
 
 // address=[0x130bac0]
 // Decompiled from int __cdecl IAIEnvironment::BuildingGetNumberOfBuildings(int a1, int a2, unsigned int a3)
-static int __cdecl IAIEnvironment::BuildingGetNumberOfBuildings(int,int,int) {
+int __cdecl IAIEnvironment::BuildingGetNumberOfBuildings(int a1, int a2, int a3) {
   
   return CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, a1, a2, a3);
 }
@@ -930,7 +930,7 @@ static int __cdecl IAIEnvironment::BuildingGetNumberOfBuildings(int,int,int) {
 
 // address=[0x130bae0]
 // Decompiled from int __cdecl IAIEnvironment::BuildingGetNumberOfAllyBuildings(int a1, int a2, unsigned int a3)
-static int __cdecl IAIEnvironment::BuildingGetNumberOfAllyBuildings(int,int,int) {
+int __cdecl IAIEnvironment::BuildingGetNumberOfAllyBuildings(int a1, int a2, int a3) {
   
   int v4; // [esp+0h] [ebp-Ch]
   int v5; // [esp+4h] [ebp-8h]
@@ -946,7 +946,7 @@ static int __cdecl IAIEnvironment::BuildingGetNumberOfAllyBuildings(int,int,int)
 
 // address=[0x130bb50]
 // Decompiled from int __cdecl IAIEnvironment::BuildingGetNumberOfEnemyBuildings(int a1, int a2, unsigned int a3)
-static int __cdecl IAIEnvironment::BuildingGetNumberOfEnemyBuildings(int,int,int) {
+int __cdecl IAIEnvironment::BuildingGetNumberOfEnemyBuildings(int a1, int a2, int a3) {
   
   int v4; // [esp+0h] [ebp-Ch]
   int v5; // [esp+4h] [ebp-8h]
@@ -962,7 +962,7 @@ static int __cdecl IAIEnvironment::BuildingGetNumberOfEnemyBuildings(int,int,int
 
 // address=[0x130bbc0]
 // Decompiled from int __cdecl IAIEnvironment::BuildingGetFirstBuildingId(int a1, int a2)
-static int __cdecl IAIEnvironment::BuildingGetFirstBuildingId(int,int) {
+int __cdecl IAIEnvironment::BuildingGetFirstBuildingId(int a1, int a2) {
   
   return CBuildingMgr::GetFirstBuildingId((CBuildingMgr *)g_cBuildingMgr, a1, a2);
 }
@@ -970,7 +970,7 @@ static int __cdecl IAIEnvironment::BuildingGetFirstBuildingId(int,int) {
 
 // address=[0x130bbe0]
 // Decompiled from bool __cdecl IAIEnvironment::BuildingIsReadyAndInSector(int a1, int a2)
-static bool __cdecl IAIEnvironment::BuildingIsReadyAndInSector(int,int) {
+bool __cdecl IAIEnvironment::BuildingIsReadyAndInSector(int a1, int a2) {
   
   int v3; // eax
   int v4; // eax
@@ -989,7 +989,7 @@ static bool __cdecl IAIEnvironment::BuildingIsReadyAndInSector(int,int) {
 
 // address=[0x130bc70]
 // Decompiled from char __cdecl IAIEnvironment::BuildingSearchNearestBuildingInSector(  int a1,  int a2,  int a3,  int a4,  int a5,  struct SAIBuildingSearchResult *a6)
-static bool __cdecl IAIEnvironment::BuildingSearchNearestBuildingInSector(int,int,int,int,int,struct SAIBuildingSearchResult &) {
+bool __cdecl IAIEnvironment::BuildingSearchNearestBuildingInSector(int a1, int a2, int a3, int a4, int a5, struct SAIBuildingSearchResult & a6) {
   
   int v6; // eax
   int v7; // eax
@@ -1074,7 +1074,7 @@ static bool __cdecl IAIEnvironment::BuildingSearchNearestBuildingInSector(int,in
 
 // address=[0x130bf10]
 // Decompiled from int __cdecl IAIEnvironment::BuildingHasInhabitant(int a1)
-static int __cdecl IAIEnvironment::BuildingHasInhabitant(int) {
+int __cdecl IAIEnvironment::BuildingHasInhabitant(int a1) {
   
   if ( CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a1) )
     return (unsigned __int8)CBuilding::HaveInhabitant() != 0;
@@ -1085,7 +1085,7 @@ static int __cdecl IAIEnvironment::BuildingHasInhabitant(int) {
 
 // address=[0x130bf60]
 // Decompiled from int __cdecl IAIEnvironment::BuildingGetNextBuildingOfSameType(int a1)
-static int __cdecl IAIEnvironment::BuildingGetNextBuildingOfSameType(int) {
+int __cdecl IAIEnvironment::BuildingGetNextBuildingOfSameType(int a1) {
   
   unsigned __int8 *BuildingPtr; // [esp+8h] [ebp-4h]
 
@@ -1099,7 +1099,7 @@ static int __cdecl IAIEnvironment::BuildingGetNextBuildingOfSameType(int) {
 
 // address=[0x130bfa0]
 // Decompiled from int __cdecl IAIEnvironment::BuildingGetEnsignSectorId(int a1)
-static int __cdecl IAIEnvironment::BuildingGetEnsignSectorId(int) {
+int __cdecl IAIEnvironment::BuildingGetEnsignSectorId(int a1) {
   
   int v1; // eax
   int v2; // eax
@@ -1116,7 +1116,7 @@ static int __cdecl IAIEnvironment::BuildingGetEnsignSectorId(int) {
 
 // address=[0x130bff0]
 // Decompiled from int __cdecl IAIEnvironment::VehicleGetNumberOfVehicles(int a1, int a2, int a3)
-static int __cdecl IAIEnvironment::VehicleGetNumberOfVehicles(int,int,int) {
+int __cdecl IAIEnvironment::VehicleGetNumberOfVehicles(int a1, int a2, int a3) {
   
   return CVehicleMgr::GetNumberOfVehicles((CVehicleMgr *)&g_cVehicleMgr, a1, a2, a3);
 }
@@ -1124,7 +1124,7 @@ static int __cdecl IAIEnvironment::VehicleGetNumberOfVehicles(int,int,int) {
 
 // address=[0x130c010]
 // Decompiled from int __cdecl IAIEnvironment::VehicleGetNumberOfAllyVehicles(int a1, int a2, int a3)
-static int __cdecl IAIEnvironment::VehicleGetNumberOfAllyVehicles(int,int,int) {
+int __cdecl IAIEnvironment::VehicleGetNumberOfAllyVehicles(int a1, int a2, int a3) {
   
   int v4; // [esp+0h] [ebp-Ch]
   int v5; // [esp+4h] [ebp-8h]
@@ -1140,7 +1140,7 @@ static int __cdecl IAIEnvironment::VehicleGetNumberOfAllyVehicles(int,int,int) {
 
 // address=[0x130c080]
 // Decompiled from int __cdecl IAIEnvironment::VehicleGetNumberOfEnemyVehicles(int a1, int a2, int a3)
-static int __cdecl IAIEnvironment::VehicleGetNumberOfEnemyVehicles(int,int,int) {
+int __cdecl IAIEnvironment::VehicleGetNumberOfEnemyVehicles(int a1, int a2, int a3) {
   
   int v4; // [esp+0h] [ebp-Ch]
   int v5; // [esp+4h] [ebp-8h]
@@ -1156,7 +1156,7 @@ static int __cdecl IAIEnvironment::VehicleGetNumberOfEnemyVehicles(int,int,int) 
 
 // address=[0x130c0f0]
 // Decompiled from int __cdecl IAIEnvironment::VehicleGetFirstReadyAndCheckedOutVehicleId(int a1, int a2)
-static int __cdecl IAIEnvironment::VehicleGetFirstReadyAndCheckedOutVehicleId(int,int) {
+int __cdecl IAIEnvironment::VehicleGetFirstReadyAndCheckedOutVehicleId(int a1, int a2) {
   
   _DWORD *v3; // [esp+0h] [ebp-8h]
   int i; // [esp+4h] [ebp-4h]
@@ -1173,7 +1173,7 @@ static int __cdecl IAIEnvironment::VehicleGetFirstReadyAndCheckedOutVehicleId(in
 
 // address=[0x130c150]
 // Decompiled from int __cdecl IAIEnvironment::VehicleGetNextReadyAndCheckedOutVehicleId(int a1)
-static int __cdecl IAIEnvironment::VehicleGetNextReadyAndCheckedOutVehicleId(int) {
+int __cdecl IAIEnvironment::VehicleGetNextReadyAndCheckedOutVehicleId(int a1) {
   
   int v2; // [esp+0h] [ebp-Ch]
   _DWORD *v3; // [esp+4h] [ebp-8h]
@@ -1194,7 +1194,7 @@ static int __cdecl IAIEnvironment::VehicleGetNextReadyAndCheckedOutVehicleId(int
 
 // address=[0x130c1d0]
 // Decompiled from struct CVehicle *__cdecl IAIEnvironment::VehicleSendQueuedVanishCommand(int a1)
-static void __cdecl IAIEnvironment::VehicleSendQueuedVanishCommand(int) {
+void __cdecl IAIEnvironment::VehicleSendQueuedVanishCommand(int a1) {
   
   struct CVehicle *result; // eax
   _BYTE v2[24]; // [esp+4h] [ebp-30h] BYREF
@@ -1218,7 +1218,7 @@ static void __cdecl IAIEnvironment::VehicleSendQueuedVanishCommand(int) {
 
 // address=[0x130c260]
 // Decompiled from int __cdecl IAIEnvironment::SettlerGetNumberOfSettlers(int a1, int a2)
-static int __cdecl IAIEnvironment::SettlerGetNumberOfSettlers(int,int) {
+int __cdecl IAIEnvironment::SettlerGetNumberOfSettlers(int a1, int a2) {
   
   return CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, a1, a2);
 }
@@ -1226,7 +1226,7 @@ static int __cdecl IAIEnvironment::SettlerGetNumberOfSettlers(int,int) {
 
 // address=[0x130c280]
 // Decompiled from int __cdecl IAIEnvironment::SettlerGetFirstReadyAndCheckedOutSettlerId(int a1, int a2)
-static int __cdecl IAIEnvironment::SettlerGetFirstReadyAndCheckedOutSettlerId(int,int) {
+int __cdecl IAIEnvironment::SettlerGetFirstReadyAndCheckedOutSettlerId(int a1, int a2) {
   
   _DWORD *v3; // [esp+0h] [ebp-8h]
   int i; // [esp+4h] [ebp-4h]
@@ -1243,7 +1243,7 @@ static int __cdecl IAIEnvironment::SettlerGetFirstReadyAndCheckedOutSettlerId(in
 
 // address=[0x130c2e0]
 // Decompiled from int __cdecl IAIEnvironment::SettlerGetNextReadyAndCheckedOutSettlerId(int a1)
-static int __cdecl IAIEnvironment::SettlerGetNextReadyAndCheckedOutSettlerId(int) {
+int __cdecl IAIEnvironment::SettlerGetNextReadyAndCheckedOutSettlerId(int a1) {
   
   int v2; // [esp+0h] [ebp-Ch]
   _DWORD *v3; // [esp+4h] [ebp-8h]
@@ -1264,7 +1264,7 @@ static int __cdecl IAIEnvironment::SettlerGetNextReadyAndCheckedOutSettlerId(int
 
 // address=[0x130c360]
 // Decompiled from int __cdecl IAIEnvironment::MagicCurrentManaAmount(int a1)
-static int __cdecl IAIEnvironment::MagicCurrentManaAmount(int) {
+int __cdecl IAIEnvironment::MagicCurrentManaAmount(int a1) {
   
   return CMagic::GetCurrentManaAmount(a1);
 }
@@ -1272,7 +1272,7 @@ static int __cdecl IAIEnvironment::MagicCurrentManaAmount(int) {
 
 // address=[0x130c380]
 // Decompiled from void __cdecl IAIEnvironment::MagicIncreaseMana(int a1, int a2)
-static void __cdecl IAIEnvironment::MagicIncreaseMana(int,int) {
+void __cdecl IAIEnvironment::MagicIncreaseMana(int a1, int a2) {
   
   CMagic::IncreaseMana(a1, a2);
 }
@@ -1280,7 +1280,7 @@ static void __cdecl IAIEnvironment::MagicIncreaseMana(int,int) {
 
 // address=[0x130c3a0]
 // Decompiled from void __cdecl IAIEnvironment::MagicDecreaseMana(int a1, int a2)
-static void __cdecl IAIEnvironment::MagicDecreaseMana(int,int) {
+void __cdecl IAIEnvironment::MagicDecreaseMana(int a1, int a2) {
   
   CMagic::DecreaseMana(a1, a2);
 }
@@ -1288,7 +1288,7 @@ static void __cdecl IAIEnvironment::MagicDecreaseMana(int,int) {
 
 // address=[0x130c3c0]
 // Decompiled from int __cdecl IAIEnvironment::PlayerRace(int a1)
-static int __cdecl IAIEnvironment::PlayerRace(int) {
+int __cdecl IAIEnvironment::PlayerRace(int a1) {
   
   return CPlayerManager::Race(a1);
 }
@@ -1296,7 +1296,7 @@ static int __cdecl IAIEnvironment::PlayerRace(int) {
 
 // address=[0x130c3e0]
 // Decompiled from bool __cdecl IAIEnvironment::EcoSectorCheckId(int a1)
-static bool __cdecl IAIEnvironment::EcoSectorCheckId(int) {
+bool __cdecl IAIEnvironment::EcoSectorCheckId(int a1) {
   
   return CEcoSectorMgr::GetEcoSectorPtrEx((CEcoSectorMgr *)g_cESMgr, a1) != 0;
 }
@@ -1304,7 +1304,7 @@ static bool __cdecl IAIEnvironment::EcoSectorCheckId(int) {
 
 // address=[0x130c410]
 // Decompiled from bool __cdecl IAIEnvironment::EcoSectorCheckId(int a1, int a2)
-static bool __cdecl IAIEnvironment::EcoSectorCheckId(int,int) {
+bool __cdecl IAIEnvironment::EcoSectorCheckId(int a1, int a2) {
   
   return CEcoSectorMgr::GetEcoSectorPtrEx((CEcoSectorMgr *)g_cESMgr, a1, a2) != 0;
 }
@@ -1312,7 +1312,7 @@ static bool __cdecl IAIEnvironment::EcoSectorCheckId(int,int) {
 
 // address=[0x130c450]
 // Decompiled from int __cdecl IAIEnvironment::EcoSectorGetUniqueId(int a1)
-static int __cdecl IAIEnvironment::EcoSectorGetUniqueId(int) {
+int __cdecl IAIEnvironment::EcoSectorGetUniqueId(int a1) {
   
   struct CEcoSector *EcoSectorPtr; // [esp+4h] [ebp-4h]
 
@@ -1326,7 +1326,7 @@ static int __cdecl IAIEnvironment::EcoSectorGetUniqueId(int) {
 
 // address=[0x130c490]
 // Decompiled from int __cdecl IAIEnvironment::EcoSectorOwnerId(int a1)
-static int __cdecl IAIEnvironment::EcoSectorOwnerId(int) {
+int __cdecl IAIEnvironment::EcoSectorOwnerId(int a1) {
   
   struct CEcoSector *EcoSectorPtr; // [esp+4h] [ebp-4h]
 
@@ -1340,7 +1340,7 @@ static int __cdecl IAIEnvironment::EcoSectorOwnerId(int) {
 
 // address=[0x130c4d0]
 // Decompiled from int __cdecl IAIEnvironment::EcoSectorNumberOfPossibleCarriers(int a1)
-static int __cdecl IAIEnvironment::EcoSectorNumberOfPossibleCarriers(int) {
+int __cdecl IAIEnvironment::EcoSectorNumberOfPossibleCarriers(int a1) {
   
   CEcoSector *EcoSectorPtr; // [esp+4h] [ebp-4h]
 
@@ -1354,7 +1354,7 @@ static int __cdecl IAIEnvironment::EcoSectorNumberOfPossibleCarriers(int) {
 
 // address=[0x130c510]
 // Decompiled from char __cdecl IAIEnvironment::EcoSectorGetPosition(int a1, int *a2, int *a3)
-static bool __cdecl IAIEnvironment::EcoSectorGetPosition(int,int &,int &) {
+bool __cdecl IAIEnvironment::EcoSectorGetPosition(int a1, int & a2, int & a3) {
   
   int v3; // ecx
   int v5; // [esp+0h] [ebp-4h]
@@ -1378,7 +1378,7 @@ static bool __cdecl IAIEnvironment::EcoSectorGetPosition(int,int &,int &) {
 
 // address=[0x130c580]
 // Decompiled from int __cdecl IAIEnvironment::EcoSectorGetSectorId(int a1)
-static int __cdecl IAIEnvironment::EcoSectorGetSectorId(int) {
+int __cdecl IAIEnvironment::EcoSectorGetSectorId(int a1) {
   
   int v2; // [esp+0h] [ebp-8h] BYREF
   int v3; // [esp+4h] [ebp-4h] BYREF
@@ -1394,7 +1394,7 @@ static int __cdecl IAIEnvironment::EcoSectorGetSectorId(int) {
 
 // address=[0x130c5d0]
 // Decompiled from int __cdecl IAIEnvironment::EcoSectorGetNextEcoSectorInSector(int a1, int a2)
-static int __cdecl IAIEnvironment::EcoSectorGetNextEcoSectorInSector(int,int) {
+int __cdecl IAIEnvironment::EcoSectorGetNextEcoSectorInSector(int a1, int a2) {
   
   int v3; // [esp+0h] [ebp-1Ch]
   int v4; // [esp+4h] [ebp-18h]
@@ -1425,7 +1425,7 @@ static int __cdecl IAIEnvironment::EcoSectorGetNextEcoSectorInSector(int,int) {
 
 // address=[0x130c690]
 // Decompiled from bool __cdecl IAIEnvironment::EventSendDarkTribeProductionMsg(int a1, int a2, int a3, int a4)
-static void __cdecl IAIEnvironment::EventSendDarkTribeProductionMsg(int,int,int,int) {
+void __cdecl IAIEnvironment::EventSendDarkTribeProductionMsg(int a1, int a2, int a3, int a4) {
   
   if ( a4 < 0 && BBSupportDbgReport(2, "AI\\AI_Environment.cpp", 1710, "_iAmount >= 0") == 1 )
     __debugbreak();
@@ -1437,7 +1437,7 @@ static void __cdecl IAIEnvironment::EventSendDarkTribeProductionMsg(int,int,int,
 
 // address=[0x130c720]
 // Decompiled from bool __cdecl IAIEnvironment::EventSendSettlerProductionMsg(int a1, int a2, int a3, signed int a4)
-static void __cdecl IAIEnvironment::EventSendSettlerProductionMsg(int,int,int,int) {
+void __cdecl IAIEnvironment::EventSendSettlerProductionMsg(int a1, int a2, int a3, int a4) {
   
   bool result; // al
 
@@ -1452,7 +1452,7 @@ static void __cdecl IAIEnvironment::EventSendSettlerProductionMsg(int,int,int,in
 
 // address=[0x130c780]
 // Decompiled from int __cdecl IAIEnvironment::GetNearestGreenBorderElement(int *a1, int *a2, int a3)
-static int __cdecl IAIEnvironment::GetNearestGreenBorderElement(int &,int &,int) {
+int __cdecl IAIEnvironment::GetNearestGreenBorderElement(int & a1, int & a2, int a3) {
   
   int v4; // eax
   int v5; // [esp+4h] [ebp-54h]
@@ -1546,7 +1546,7 @@ static int __cdecl IAIEnvironment::GetNearestGreenBorderElement(int &,int &,int)
 
 // address=[0x130cab0]
 // Decompiled from int __cdecl IAIEnvironment::GetNearestNoneBlockedPosition(Grid **a1, int *a2)
-static int __cdecl IAIEnvironment::GetNearestNoneBlockedPosition(int &,int &) {
+int __cdecl IAIEnvironment::GetNearestNoneBlockedPosition(int & a1, int & a2) {
   
   int result; // eax
   int v3; // [esp+4h] [ebp-18h]
@@ -1580,7 +1580,7 @@ static int __cdecl IAIEnvironment::GetNearestNoneBlockedPosition(int &,int &) {
 
 // address=[0x130cb90]
 // Decompiled from char __cdecl IAIEnvironment::FindNearestSectorPosition(int *a1, int *a2, int a3, int a4)
-static bool __cdecl IAIEnvironment::FindNearestSectorPosition(int &,int &,int,int) {
+bool __cdecl IAIEnvironment::FindNearestSectorPosition(int & a1, int & a2, int a3, int a4) {
   
   _DWORD v5[4]; // [esp+0h] [ebp-20h] BYREF
   int v6; // [esp+10h] [ebp-10h]
@@ -1604,7 +1604,7 @@ static bool __cdecl IAIEnvironment::FindNearestSectorPosition(int &,int &,int,in
 
 // address=[0x130cc10]
 // Decompiled from int __cdecl IAIEnvironment::FindNearestCatapultSectorPosition(int a1, int a2, int a3, int a4)
-static int __cdecl IAIEnvironment::FindNearestCatapultSectorPosition(int,int,int,int) {
+int __cdecl IAIEnvironment::FindNearestCatapultSectorPosition(int a1, int a2, int a3, int a4) {
   
   _DWORD v5[4]; // [esp+0h] [ebp-20h] BYREF
   int v6; // [esp+10h] [ebp-10h]
@@ -1626,7 +1626,7 @@ static int __cdecl IAIEnvironment::FindNearestCatapultSectorPosition(int,int,int
 
 // address=[0x130cc90]
 // Decompiled from int __cdecl IAIEnvironment::CalculateRoughlyDistanceToEnemyPosition(int a1, int a2, int a3)
-static int __cdecl IAIEnvironment::CalculateRoughlyDistanceToEnemyPosition(int,int,int) {
+int __cdecl IAIEnvironment::CalculateRoughlyDistanceToEnemyPosition(int a1, int a2, int a3) {
   
   int v4; // [esp+4h] [ebp-64h]
   int v5; // [esp+8h] [ebp-60h]
@@ -1656,7 +1656,7 @@ static int __cdecl IAIEnvironment::CalculateRoughlyDistanceToEnemyPosition(int,i
 
 // address=[0x130cd90]
 // Decompiled from struct SAIEvalOwnerResults *__cdecl IAIEnvironment::EvaluateOwnerMap(  int a1,  Squares *a2,  Squares *a3,  struct SAIEvalOwnerResults *a4)
-static void __cdecl IAIEnvironment::EvaluateOwnerMap(int,int,int,struct SAIEvalOwnerResults &) {
+void __cdecl IAIEnvironment::EvaluateOwnerMap(int a1, int a2, int a3, struct SAIEvalOwnerResults & a4) {
   
   bool valid; // si
   bool v5; // si
@@ -1730,7 +1730,7 @@ static void __cdecl IAIEnvironment::EvaluateOwnerMap(int,int,int,struct SAIEvalO
 
 // address=[0x130d090]
 // Decompiled from _DWORD *__cdecl IAIEnvironment::EvaluateInfluenceMap(int a1, Squares *a2, Squares *a3, _DWORD *a4)
-static void __cdecl IAIEnvironment::EvaluateInfluenceMap(int,int,int,struct SAIEvalInfluResults &) {
+void __cdecl IAIEnvironment::EvaluateInfluenceMap(int a1, int a2, int a3, struct SAIEvalInfluResults & a4) {
   
   bool valid; // si
   _DWORD *result; // eax
@@ -1772,7 +1772,7 @@ static void __cdecl IAIEnvironment::EvaluateInfluenceMap(int,int,int,struct SAIE
 
 // address=[0x130d190]
 // Decompiled from void IAIEnvironment::DbgTracePrintF(char *Format, ...)
-static void __cdecl IAIEnvironment::DbgTracePrintF(char const *,...) {
+void __cdecl IAIEnvironment::DbgTracePrintF(char const * Format, ... a2) {
   
   char Source[2048]; // [esp+4h] [ebp-804h] BYREF
   va_list va; // [esp+814h] [ebp+Ch] BYREF
@@ -1786,7 +1786,7 @@ static void __cdecl IAIEnvironment::DbgTracePrintF(char const *,...) {
 
 // address=[0x130d200]
 // Decompiled from void IAIEnvironment::DbgEnableAITrace()
-static void __cdecl IAIEnvironment::DbgEnableAITrace(void) {
+void __cdecl IAIEnvironment::DbgEnableAITrace(void) {
   
   BBSupportEnableTraceLevel(0xBEu);
 }
@@ -1794,7 +1794,7 @@ static void __cdecl IAIEnvironment::DbgEnableAITrace(void) {
 
 // address=[0x130d210]
 // Decompiled from void IAIEnvironment::DbgEnableAITraceEx()
-static void __cdecl IAIEnvironment::DbgEnableAITraceEx(void) {
+void __cdecl IAIEnvironment::DbgEnableAITraceEx(void) {
   
   if ( BBSupportDevelopmentMachineId() == 1 )
     BBSupportEnableTraceLevel(0xBEu);
@@ -1805,7 +1805,7 @@ static void __cdecl IAIEnvironment::DbgEnableAITraceEx(void) {
 
 // address=[0x130d240]
 // Decompiled from void IAIEnvironment::DbgDisableAITrace()
-static void __cdecl IAIEnvironment::DbgDisableAITrace(void) {
+void __cdecl IAIEnvironment::DbgDisableAITrace(void) {
   
   BBSupportDisableTraceLevel(0xBEu);
 }
@@ -1813,7 +1813,7 @@ static void __cdecl IAIEnvironment::DbgDisableAITrace(void) {
 
 // address=[0x130e8c0]
 // Decompiled from const int *__cdecl IAIEnvironment::AlliancesAllyPlayerIds(int a1)
-static int const * __cdecl IAIEnvironment::AlliancesAllyPlayerIds(int) {
+int const * __cdecl IAIEnvironment::AlliancesAllyPlayerIds(int a1) {
   
   return CAlliances::AllyPlayerIds(a1);
 }
@@ -1821,7 +1821,7 @@ static int const * __cdecl IAIEnvironment::AlliancesAllyPlayerIds(int) {
 
 // address=[0x1314090]
 // Decompiled from void __cdecl IAIEnvironment::SetGlobalEcoAIFlags(struct CFrameWnd *a1)
-static void __cdecl IAIEnvironment::SetGlobalEcoAIFlags(int) {
+void __cdecl IAIEnvironment::SetGlobalEcoAIFlags(int a1) {
   
   IAIEnvironment::m_iGlobalEcoAIFlags = (int)a1;
 }
@@ -1829,7 +1829,7 @@ static void __cdecl IAIEnvironment::SetGlobalEcoAIFlags(int) {
 
 // address=[0x13172e0]
 // Decompiled from int IAIEnvironment::AlliancesAllPlayersBits()
-static int __cdecl IAIEnvironment::AlliancesAllPlayersBits(void) {
+int __cdecl IAIEnvironment::AlliancesAllPlayersBits(void) {
   
   return CAlliances::AllPlayersBits();
 }
@@ -1837,7 +1837,7 @@ static int __cdecl IAIEnvironment::AlliancesAllPlayersBits(void) {
 
 // address=[0x13172f0]
 // Decompiled from int IAIEnvironment::AlliancesLastAllianceId()
-static int __cdecl IAIEnvironment::AlliancesLastAllianceId(void) {
+int __cdecl IAIEnvironment::AlliancesLastAllianceId(void) {
   
   return CAlliances::LastAllianceId();
 }
@@ -1845,7 +1845,7 @@ static int __cdecl IAIEnvironment::AlliancesLastAllianceId(void) {
 
 // address=[0x1321d20]
 // Decompiled from int __cdecl IAIEnvironment::WorldOwnerId(struct _Cnd_internal_imp_t *a1, struct _Mtx_internal_imp_t *a2)
-static int __cdecl IAIEnvironment::WorldOwnerId(int,int) {
+int __cdecl IAIEnvironment::WorldOwnerId(int a1, int a2) {
   
   int v2; // eax
 
@@ -1856,7 +1856,7 @@ static int __cdecl IAIEnvironment::WorldOwnerId(int,int) {
 
 // address=[0x1326130]
 // Decompiled from void __cdecl IAIEnvironment::EcoSectorGetFirstEcoSectorInSector(void *a1)
-static int __cdecl IAIEnvironment::EcoSectorGetFirstEcoSectorInSector(int) {
+int __cdecl IAIEnvironment::EcoSectorGetFirstEcoSectorInSector(int a1) {
   
   IAIEnvironment::EcoSectorGetNextEcoSectorInSector((int)a1, -1);
 }
@@ -1864,7 +1864,7 @@ static int __cdecl IAIEnvironment::EcoSectorGetFirstEcoSectorInSector(int) {
 
 // address=[0x132edc0]
 // Decompiled from int __cdecl IAIEnvironment::WorldCatapultSectorId(struct _Cnd_internal_imp_t *a1, struct _Mtx_internal_imp_t *a2)
-static int __cdecl IAIEnvironment::WorldCatapultSectorId(int,int) {
+int __cdecl IAIEnvironment::WorldCatapultSectorId(int a1, int a2) {
   
   int v2; // eax
 
@@ -1875,7 +1875,7 @@ static int __cdecl IAIEnvironment::WorldCatapultSectorId(int,int) {
 
 // address=[0x132edf0]
 // Decompiled from void __cdecl IAIEnvironment::WorldCatapultSectorIdPackedXY(struct _iobuf *a1)
-static int __cdecl IAIEnvironment::WorldCatapultSectorIdPackedXY(int) {
+int __cdecl IAIEnvironment::WorldCatapultSectorIdPackedXY(int a1) {
   
   int v1; // eax
 
@@ -1886,7 +1886,7 @@ static int __cdecl IAIEnvironment::WorldCatapultSectorIdPackedXY(int) {
 
 // address=[0x132ee10]
 // Decompiled from bool __cdecl IAIEnvironment::WorldIsBlockedLand(struct _Cnd_internal_imp_t *a1, struct _Mtx_internal_imp_t *a2)
-static bool __cdecl IAIEnvironment::WorldIsBlockedLand(int,int) {
+bool __cdecl IAIEnvironment::WorldIsBlockedLand(int a1, int a2) {
   
   int v2; // eax
 
@@ -1897,7 +1897,7 @@ static bool __cdecl IAIEnvironment::WorldIsBlockedLand(int,int) {
 
 // address=[0x132ee40]
 // Decompiled from void __cdecl IAIEnvironment::WorldIsBlockedLandPackedXY(struct _iobuf *a1)
-static bool __cdecl IAIEnvironment::WorldIsBlockedLandPackedXY(int) {
+bool __cdecl IAIEnvironment::WorldIsBlockedLandPackedXY(int a1) {
   
   int v1; // eax
 
@@ -1908,7 +1908,7 @@ static bool __cdecl IAIEnvironment::WorldIsBlockedLandPackedXY(int) {
 
 // address=[0x132ee60]
 // Decompiled from void __cdecl IAIEnvironment::WorldOwnerIdPackedXY(struct _iobuf *a1)
-static int __cdecl IAIEnvironment::WorldOwnerIdPackedXY(int) {
+int __cdecl IAIEnvironment::WorldOwnerIdPackedXY(int a1) {
   
   int v1; // eax
 
@@ -1919,7 +1919,7 @@ static int __cdecl IAIEnvironment::WorldOwnerIdPackedXY(int) {
 
 // address=[0x130d250]
 // Decompiled from int IAIEnvironment::Init()
-static void __cdecl IAIEnvironment::Init(void) {
+void __cdecl IAIEnvironment::Init(void) {
   
   int v0; // ecx
   int result; // eax
@@ -1935,7 +1935,7 @@ static void __cdecl IAIEnvironment::Init(void) {
 
 // address=[0x130d340]
 // Decompiled from void IAIEnvironment::Done()
-static void __cdecl IAIEnvironment::Done(void) {
+void __cdecl IAIEnvironment::Done(void) {
   
   IAIEnvironment::m_pRandom = 0;
   IAIEnvironment::m_uTickCounter = 0;
@@ -1945,7 +1945,7 @@ static void __cdecl IAIEnvironment::Done(void) {
 
 // address=[0x130d370]
 // Decompiled from int IAIEnvironment::UpdateTickCounter()
-static void __cdecl IAIEnvironment::UpdateTickCounter(void) {
+void __cdecl IAIEnvironment::UpdateTickCounter(void) {
   
   int result; // eax
 

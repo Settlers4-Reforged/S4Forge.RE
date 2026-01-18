@@ -1,6 +1,8 @@
 #ifndef CECOMANAGER_CEMD_H
 #define CECOMANAGER_CEMD_H
 
+#include "defines.h"
+
 namespace CEcoManager {
 
 class CEMD {

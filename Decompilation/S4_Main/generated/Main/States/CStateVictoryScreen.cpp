@@ -4,7 +4,7 @@
 
 // address=[0x14cb770]
 // Decompiled from CStateVictoryScreen *__cdecl CStateVictoryScreen::DynamicCreateFunc(void *a1)
-static class CGameState * __cdecl CStateVictoryScreen::DynamicCreateFunc(void *) {
+class CGameState * __cdecl CStateVictoryScreen::DynamicCreateFunc(void * a1) {
   
   CStateVictoryScreen *C; // [esp+Ch] [ebp-10h]
 
@@ -18,7 +18,7 @@ static class CGameState * __cdecl CStateVictoryScreen::DynamicCreateFunc(void *)
 
 // address=[0x14cb7f0]
 // Decompiled from CStateVictoryScreen *__thiscall CStateVictoryScreen::CStateVictoryScreen(CStateVictoryScreen *this, int a2)
- CStateVictoryScreen::CStateVictoryScreen(void *) {
+ CStateVictoryScreen::CStateVictoryScreen(void * a2) {
   
   CGuiGameState::CGuiGameState(this);
   *(_DWORD *)this = &CStateVictoryScreen::_vftable_;
@@ -74,7 +74,7 @@ bool  CStateVictoryScreen::Perform(void) {
 
 // address=[0x14cb9c0]
 // Decompiled from char __thiscall CStateVictoryScreen::OnEvent(CStateVictoryScreen *this, struct CEvn_Event *a2)
-bool  CStateVictoryScreen::OnEvent(class CEvn_Event &) {
+bool  CStateVictoryScreen::OnEvent(class CEvn_Event & a2) {
   
   int event; // [esp+4h] [ebp-4h]
 

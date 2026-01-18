@@ -1,6 +1,8 @@
 #ifndef CINFOEXCHANGEEX_H
 #define CINFOEXCHANGEEX_H
 
+#include "defines.h"
+
 class CInfoExchangeEx : public CInfoExchange {
 public:
     // address=[0x1454680]

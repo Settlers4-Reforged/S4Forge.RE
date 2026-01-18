@@ -4,7 +4,7 @@
 
 // address=[0x2f3bbd0]
 // Decompiled from int __stdcall CProductionTab::GetProdBuildingByProdIndex(int a1, int a2, int a3)
-enum BUILDING_TYPES  CProductionTab::GetProdBuildingByProdIndex(int,int,int) {
+enum BUILDING_TYPES  CProductionTab::GetProdBuildingByProdIndex(int a1, int a2, int a3) {
   
   return CProductionTab::m_aProductionEntry[8 * a1 + 3 + a2];
 }
@@ -12,7 +12,7 @@ enum BUILDING_TYPES  CProductionTab::GetProdBuildingByProdIndex(int,int,int) {
 
 // address=[0x2f3bc00]
 // Decompiled from int __stdcall CProductionTab::GetProdIdForGoodType(int a1, int a2)
-int  CProductionTab::GetProdIdForGoodType(enum PILE_TYPES,int) {
+int  CProductionTab::GetProdIdForGoodType(enum PILE_TYPES a1, int a2) {
   
   return CProductionTab::m_aRaceAndGoodToProdIdMap[43 * a2 + a1];
 }
@@ -61,7 +61,7 @@ int  CProductionTab::GetProdIdForGoodType(enum PILE_TYPES,int) {
 
 // address=[0x2f53f90]
 // Decompiled from int __thiscall CProductionTab::GetAlternateProdForProdId(void *this, int a2, int a3)
-int  CProductionTab::GetAlternateProdForProdId(enum PILE_TYPES,int) {
+int  CProductionTab::GetAlternateProdForProdId(enum PILE_TYPES a2, int a3) {
   
   int ProdIdForGoodType; // [esp+4h] [ebp-8h]
 
@@ -89,7 +89,7 @@ int  CProductionTab::GetAlternateProdForProdId(enum PILE_TYPES,int) {
 
 // address=[0x2f53ff0]
 // Decompiled from int __stdcall CProductionTab::PT(int a1, int a2, int a3, int a4, int a5, int a6, int a7, int a8)
-void  CProductionTab::PT(char const *,int,enum PILE_TYPES,enum BUILDING_TYPES,enum BUILDING_TYPES,enum BUILDING_TYPES,enum BUILDING_TYPES,enum BUILDING_TYPES) {
+void  CProductionTab::PT(char const * a1, int a2, enum PILE_TYPES a3, enum BUILDING_TYPES a4, enum BUILDING_TYPES a5, enum BUILDING_TYPES a6, enum BUILDING_TYPES a7, enum BUILDING_TYPES a8) {
   
   int result; // eax
   int i; // [esp+4h] [ebp-4h]

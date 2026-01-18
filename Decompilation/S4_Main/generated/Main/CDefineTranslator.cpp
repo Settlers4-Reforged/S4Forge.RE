@@ -4,7 +4,7 @@
 
 // address=[0x141dbe0]
 // Decompiled from int __thiscall CDefineTranslator::GetValueOfDefine(struct CDefineTranslator *this, struct std::string *a2)
-int  CDefineTranslator::GetValueOfDefine(std::string const &)const {
+int  CDefineTranslator::GetValueOfDefine(std::string const & a2)const {
   
   _BYTE v3[12]; // [esp+4h] [ebp-54h] BYREF
   _BYTE v4[12]; // [esp+10h] [ebp-48h] BYREF
@@ -53,7 +53,7 @@ int  CDefineTranslator::GetValueOfDefine(std::string const &)const {
 
 // address=[0x14f3f70]
 // Decompiled from int CDefineTranslator::Instance()
-static class CDefineTranslator & __cdecl CDefineTranslator::Instance(void) {
+class CDefineTranslator & __cdecl CDefineTranslator::Instance(void) {
   
   _DWORD *Instance; // eax
 
@@ -64,7 +64,7 @@ static class CDefineTranslator & __cdecl CDefineTranslator::Instance(void) {
 
 // address=[0x141dcf0]
 // Decompiled from void *CDefineTranslator::GetInstance()
-static class std::auto_ptr<class CDefineTranslator> & __cdecl CDefineTranslator::GetInstance(void) {
+class std::auto_ptr<class CDefineTranslator> & __cdecl CDefineTranslator::GetInstance(void) {
   
   CDefineTranslator *v1; // [esp+8h] [ebp-14h]
   CDefineTranslator *C; // [esp+Ch] [ebp-10h]
@@ -1877,7 +1877,7 @@ bool  CDefineTranslator::Status(void) {
 
 // address=[0x14269c0]
 // Decompiled from CDefineTranslator *CDefineTranslator::DestroyInstance()
-static void __cdecl CDefineTranslator::DestroyInstance(void) {
+void __cdecl CDefineTranslator::DestroyInstance(void) {
   
   int Instance; // eax
   CDefineTranslator *result; // eax

@@ -1,6 +1,8 @@
 #ifndef CTUTORIAL_H
 #define CTUTORIAL_H
 
+#include "defines.h"
+
 class CTutorial : public IEvn_Handle {
 public:
     // address=[0x147d690]
@@ -13,10 +15,10 @@ public:
     void  RefreshGUIControlStatus(void);
 
     // address=[0x147d7a0]
-    void  EnableGUIControl(int);
+    void  EnableGUIControl(int a2);
 
     // address=[0x147d7c0]
-    void  DisableGUIControl(int);
+    void  DisableGUIControl(int a2);
 
     // address=[0x147d7e0]
     void  EnableAllGUIControls(void);
@@ -25,7 +27,7 @@ public:
     void  DisableAllGUIControls(void);
 
     // address=[0x147d910]
-    void  SetWorldTutorialCursor(int,int);
+    void  SetWorldTutorialCursor(int a2, int a3);
 
     // address=[0x147d970]
     void  DeleteWorldTutorialCursor(void);
@@ -38,7 +40,7 @@ public:
 
 protected:
     // address=[0x147d9b0]
-    virtual bool  OnEvent(class CEvn_Event &);
+    virtual bool  OnEvent(class CEvn_Event & a2);
 
     // address=[0x147de30]
     bool  IsWarriorSelected(void);

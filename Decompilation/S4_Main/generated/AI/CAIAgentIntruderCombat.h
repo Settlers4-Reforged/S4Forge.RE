@@ -1,6 +1,8 @@
 #ifndef CAIAGENTINTRUDERCOMBAT_H
 #define CAIAGENTINTRUDERCOMBAT_H
 
+#include "defines.h"
+
 class CAIAgentIntruderCombat : public CAINormalSectorAgent {
 public:
     // address=[0x1304730]
@@ -14,13 +16,13 @@ public:
 
 protected:
     // address=[0x1304940]
-    void  MoveHunterHome(int);
+    void  MoveHunterHome(int a2);
 
     // address=[0x13049f0]
     int  HuntNextIntruderType(void);
 
     // address=[0x1304a40]
-    int  HuntIntruders(int);
+    int  HuntIntruders(int a2);
 
 };
 

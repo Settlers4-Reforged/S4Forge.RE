@@ -1,10 +1,12 @@
 #ifndef CSTATELOBBYMULTIPLAYERTYPE_H
 #define CSTATELOBBYMULTIPLAYERTYPE_H
 
+#include "defines.h"
+
 class CStateLobbyMultiplayerType : public CGuiGameState {
 public:
     // address=[0x14c0800]
-    static class CGameState * __cdecl DynamicCreateFunc(void *);
+    static class CGameState * __cdecl DynamicCreateFunc(void * a1);
 
     // address=[0x14c0a50]
      CStateLobbyMultiplayerType(void *);
@@ -16,11 +18,11 @@ public:
     virtual bool  Perform(void);
 
     // address=[0x14c0be0]
-    virtual bool  OnEvent(class CEvn_Event &);
+    virtual bool  OnEvent(class CEvn_Event & a2);
 
 private:
     // address=[0x14c0880]
-    bool  LaunchWebLobby(std::string);
+    bool  LaunchWebLobby(std::string a2);
 
 };
 

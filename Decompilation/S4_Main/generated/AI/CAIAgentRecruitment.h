@@ -1,6 +1,8 @@
 #ifndef CAIAGENTRECRUITMENT_H
 #define CAIAGENTRECRUITMENT_H
 
+#include "defines.h"
+
 class CAIAgentRecruitment : public CAINormalSectorAgent {
 public:
     // address=[0x1305510]
@@ -13,7 +15,7 @@ public:
     virtual  ~CAIAgentRecruitment(void);
 
     // address=[0x1309670]
-    void  SetUniqueFighterRecruitment(int);
+    void  SetUniqueFighterRecruitment(int a2);
 
 };
 

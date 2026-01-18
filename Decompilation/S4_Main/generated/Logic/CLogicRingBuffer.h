@@ -1,10 +1,12 @@
 #ifndef CLOGICRINGBUFFER_H
 #define CLOGICRINGBUFFER_H
 
+#include "defines.h"
+
 class CLogicRingBuffer : public ?$CRingBuffer@VCEvn_Logic@@, public IS4ChunkObject {
 public:
     // address=[0x1486a00]
-     CLogicRingBuffer(int);
+     CLogicRingBuffer(int a2);
 
     // address=[0x1486b10]
     virtual  ~CLogicRingBuffer(void);
@@ -13,7 +15,7 @@ public:
     virtual void  Load(class IS4Chunk &);
 
     // address=[0x14872e0]
-    virtual void  Save(class IS4Chunk &);
+    virtual void  Save(class IS4Chunk & a2);
 
 };
 

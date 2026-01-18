@@ -4,7 +4,7 @@
 
 // address=[0x15e3cf0]
 // Decompiled from int CLinks::InitLinks()
-static void __cdecl CLinks::InitLinks(void) {
+void __cdecl CLinks::InitLinks(void) {
   
   int result; // eax
   int i; // [esp+0h] [ebp-4h]
@@ -29,7 +29,7 @@ static void __cdecl CLinks::InitLinks(void) {
 
 // address=[0x15e3db0]
 // Decompiled from int CLinks::DeactivateLinksPushBackMode()
-static void __cdecl CLinks::DeactivateLinksPushBackMode(void) {
+void __cdecl CLinks::DeactivateLinksPushBackMode(void) {
   
   if ( !CLinks::m_iLinksPushBackMode
     && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 674, "m_iLinksPushBackMode") == 1 )
@@ -44,7 +44,7 @@ static void __cdecl CLinks::DeactivateLinksPushBackMode(void) {
 
 // address=[0x15e3e00]
 // Decompiled from struct CLinkList *__cdecl CLinks::PushLinksBack(const struct CIntLinkList *a1)
-static class CLinkList & __cdecl CLinks::PushLinksBack(class CIntLinkList const &) {
+class CLinkList & __cdecl CLinks::PushLinksBack(class CIntLinkList const & a1) {
   
   int v1; // esi
   char v2; // al
@@ -68,7 +68,7 @@ static class CLinkList & __cdecl CLinks::PushLinksBack(class CIntLinkList const 
 
 // address=[0x15e3e90]
 // Decompiled from int __cdecl CLinks::PushLinksUndef(int a1)
-static int __cdecl CLinks::PushLinksUndef(int) {
+int __cdecl CLinks::PushLinksUndef(int a1) {
   
   CLink *v1; // eax
   int v3; // [esp+0h] [ebp-8h]
@@ -121,7 +121,7 @@ static int __cdecl CLinks::PushLinksUndef(int) {
 
 // address=[0x15e70b0]
 // Decompiled from BOOL __cdecl CLinks::IsValidRealLinkList(const struct CLinkList *a1)
-static bool __cdecl CLinks::IsValidRealLinkList(class CLinkList const &) {
+bool __cdecl CLinks::IsValidRealLinkList(class CLinkList const & a1) {
   
   return a1 <= (const struct CLinkList *)&CLinks::m_cLinks[262141]
       && a1 >= (const struct CLinkList *)&CLinks::m_cLinks[2];
@@ -130,7 +130,7 @@ static bool __cdecl CLinks::IsValidRealLinkList(class CLinkList const &) {
 
 // address=[0x15e7170]
 // Decompiled from int __cdecl CLinks::IsValidUsedLinkList(const struct CLinkList *a1)
-static bool __cdecl CLinks::IsValidUsedLinkList(class CLinkList const &) {
+bool __cdecl CLinks::IsValidUsedLinkList(class CLinkList const & a1) {
   
   bool v2; // [esp+0h] [ebp-4h]
 
@@ -141,7 +141,7 @@ static bool __cdecl CLinks::IsValidUsedLinkList(class CLinkList const &) {
 
 // address=[0x15e7250]
 // Decompiled from __int16 *__cdecl CLinks::Link(int a1)
-static class CLink const & __cdecl CLinks::Link(int) {
+class CLink const & __cdecl CLinks::Link(int a1) {
   
   return &CLinks::m_cLinks[a1];
 }
@@ -149,7 +149,7 @@ static class CLink const & __cdecl CLinks::Link(int) {
 
 // address=[0x15e7270]
 // Decompiled from __int16 *__cdecl CLinks::LinkList(int a1)
-static class CLinkList & __cdecl CLinks::LinkList(int) {
+class CLinkList & __cdecl CLinks::LinkList(int a1) {
   
   return &CLinks::m_cLinks[a1];
 }
@@ -157,7 +157,7 @@ static class CLinkList & __cdecl CLinks::LinkList(int) {
 
 // address=[0x15e4050]
 // Decompiled from int __cdecl CLinks::LinkListMarkAsUnused(struct CLinkList *a1)
-static void __cdecl CLinks::LinkListMarkAsUnused(class CLinkList &) {
+void __cdecl CLinks::LinkListMarkAsUnused(class CLinkList & a1) {
   
   int v1; // esi
   int v3; // [esp+4h] [ebp-18h]
@@ -188,7 +188,7 @@ static void __cdecl CLinks::LinkListMarkAsUnused(class CLinkList &) {
 
 // address=[0x15e4140]
 // Decompiled from int __cdecl CLinks::LinkListPushLinkTileId(struct CLinkList *a1, int a2)
-static void __cdecl CLinks::LinkListPushLinkTileId(class CLinkList &,int) {
+void __cdecl CLinks::LinkListPushLinkTileId(class CLinkList & a1, int a2) {
   
   CLink *v2; // eax
   CLink *v3; // eax
@@ -278,7 +278,7 @@ static void __cdecl CLinks::LinkListPushLinkTileId(class CLinkList &,int) {
 
 // address=[0x15e4410]
 // Decompiled from char __cdecl CLinks::LinkListRemoveLinkTileId(struct CLinkList *a1, int a2)
-static bool __cdecl CLinks::LinkListRemoveLinkTileId(class CLinkList &,int) {
+bool __cdecl CLinks::LinkListRemoveLinkTileId(class CLinkList & a1, int a2) {
   
   int v3; // [esp+4h] [ebp-10h]
   int v4; // [esp+8h] [ebp-Ch]
@@ -313,7 +313,7 @@ static bool __cdecl CLinks::LinkListRemoveLinkTileId(class CLinkList &,int) {
 
 // address=[0x15e44f0]
 // Decompiled from char __cdecl CLinks::LinkListReplaceLink(struct CLinkList *a1, int a2, __int16 a3)
-static bool __cdecl CLinks::LinkListReplaceLink(class CLinkList &,int,int) {
+bool __cdecl CLinks::LinkListReplaceLink(class CLinkList & a1, int a2, int a3) {
   
   int i; // [esp+4h] [ebp-4h]
 
@@ -331,7 +331,7 @@ static bool __cdecl CLinks::LinkListReplaceLink(class CLinkList &,int,int) {
 
 // address=[0x15e4550]
 // Decompiled from int __cdecl CLinks::SearchForUnusedLinkEntries(int a1)
-static int __cdecl CLinks::SearchForUnusedLinkEntries(int) {
+int __cdecl CLinks::SearchForUnusedLinkEntries(int a1) {
   
   CLink *v1; // eax
   CLink *v2; // eax
@@ -513,7 +513,7 @@ static int __cdecl CLinks::SearchForUnusedLinkEntries(int) {
 
 // address=[0x15e4b00]
 // Decompiled from int CLinks::CalculateLinksInfo()
-static void __cdecl CLinks::CalculateLinksInfo(void) {
+void __cdecl CLinks::CalculateLinksInfo(void) {
   
   CLink *v0; // eax
   CLink *v1; // eax
@@ -609,7 +609,7 @@ static void __cdecl CLinks::CalculateLinksInfo(void) {
 
 // address=[0x15e4dd0]
 // Decompiled from void CLinks::CheckLinksInfo()
-static void __cdecl CLinks::CheckLinksInfo(void) {
+void __cdecl CLinks::CheckLinksInfo(void) {
   
   ;
 }
@@ -617,7 +617,7 @@ static void __cdecl CLinks::CheckLinksInfo(void) {
 
 // address=[0x15e7290]
 // Decompiled from int __cdecl CLinks::LinksId(const struct CLinkList *a1)
-static int __cdecl CLinks::LinksId(class CLinkList const &) {
+int __cdecl CLinks::LinksId(class CLinkList const & a1) {
   
   return (a1 - (const struct CLinkList *)CLinks::m_cLinks) >> 1;
 }

@@ -31,7 +31,7 @@ class CDynListEntry *  CDynList::FirstEntry(void)const {
 
 // address=[0x2f3c850]
 // Decompiled from int __thiscall CDynList::addElement(CDynList *this, struct CDynListEntry *a2)
-int  CDynList::addElement(class CDynListEntry *) {
+int  CDynList::addElement(class CDynListEntry * a2) {
   
   int v3; // [esp+4h] [ebp-4h]
 
@@ -57,7 +57,7 @@ int  CDynList::addElement(class CDynListEntry *) {
 
 // address=[0x2f3c8d0]
 // Decompiled from int __thiscall CDynList::insertElementAt(CDynList *this, struct CDynListEntry *a2, int a3)
-int  CDynList::insertElementAt(class CDynListEntry *,int) {
+int  CDynList::insertElementAt(class CDynListEntry * a2, int a3) {
   
   int v4; // [esp+4h] [ebp-Ch]
   int v5; // [esp+8h] [ebp-8h]
@@ -95,7 +95,7 @@ int  CDynList::insertElementAt(class CDynListEntry *,int) {
 
 // address=[0x2f3c980]
 // Decompiled from int __thiscall CDynList::elementAt(CDynList *this, int a2)
-class CDynListEntry *  CDynList::elementAt(int) {
+class CDynListEntry *  CDynList::elementAt(int a2) {
   
   int v3; // [esp+4h] [ebp-4h]
 
@@ -139,7 +139,7 @@ int  CDynList::resize(void) {
 
 // address=[0x2f3ca60]
 // Decompiled from int __thiscall CDynList::delElement(CDynList *this, int a2)
-int  CDynList::delElement(int) {
+int  CDynList::delElement(int a2) {
   
   int v3; // [esp+18h] [ebp-Ch]
   int v4; // [esp+1Ch] [ebp-8h]
@@ -176,7 +176,7 @@ LABEL_3:
 
 // address=[0x2f3cb60]
 // Decompiled from int __thiscall CDynList::delElement(CDynList *this, struct CDynListEntry *a2)
-int  CDynList::delElement(class CDynListEntry *) {
+int  CDynList::delElement(class CDynListEntry * a2) {
   
   return CDynList::delElement(this, *((_DWORD *)a2 + 2));
 }
@@ -213,7 +213,7 @@ void  CDynList::ClearDynList(void) {
 
 // address=[0x2f3cc30]
 // Decompiled from int __thiscall CDynList::sort(CDynList *this, int a2)
-int  CDynList::sort(int) {
+int  CDynList::sort(int a2) {
   
   float v3; // [esp+0h] [ebp-20h]
   float v4; // [esp+8h] [ebp-18h]

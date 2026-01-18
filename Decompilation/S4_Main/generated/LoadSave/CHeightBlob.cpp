@@ -4,7 +4,7 @@
 
 // address=[0x2fccbb0]
 // Decompiled from CHeightBlob *__thiscall CHeightBlob::CHeightBlob(  CHeightBlob *this,  int a2,  int a3,  int a4,  int a5,  int a6,  int a7,  struct CCheckLayer *a8)
- CHeightBlob::CHeightBlob(int,int,int,int,int,int,class CCheckLayer *) {
+ CHeightBlob::CHeightBlob(int a2, int a3, int a4, int a5, int a6, int a7, class CCheckLayer * a8) {
   
   CBlob::CBlob(this, a2, a3, a4, a5, 0, a6, a7, a8);
   *(_DWORD *)this = &CHeightBlob::_vftable_;
@@ -26,7 +26,7 @@
 
 // address=[0x2fccce0]
 // Decompiled from __int16 __thiscall CHeightBlob::fillBlob(CCheckLayer **this, int a2, int a3)
-void  CHeightBlob::fillBlob(int,int) {
+void  CHeightBlob::fillBlob(int a2, int a3) {
   
   int v3; // eax
   int Point; // esi
@@ -152,7 +152,7 @@ void  CHeightBlob::fillBlob(int,int) {
 
 // address=[0x2fcd100]
 // Decompiled from int __thiscall CHeightBlob::processFillPoint(CHeightBlob *this, int a2, int a3)
-void  CHeightBlob::processFillPoint(int,int) {
+void  CHeightBlob::processFillPoint(int a2, int a3) {
   
   int result; // eax
   int v4; // [esp+8h] [ebp-Ch]

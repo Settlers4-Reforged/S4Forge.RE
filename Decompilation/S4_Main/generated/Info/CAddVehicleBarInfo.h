@@ -1,6 +1,8 @@
 #ifndef CADDVEHICLEBARINFO_H
 #define CADDVEHICLEBARINFO_H
 
+#include "defines.h"
+
 class CAddVehicleBarInfo : public CInfoExchange {
 public:
     // address=[0x1454440]

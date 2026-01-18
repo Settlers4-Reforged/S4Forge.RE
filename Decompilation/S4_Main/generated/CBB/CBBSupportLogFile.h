@@ -1,6 +1,8 @@
 #ifndef CBBSUPPORTLOGFILE_H
 #define CBBSUPPORTLOGFILE_H
 
+#include "defines.h"
+
 class CBBSupportLogFile {
 public:
     // address=[0x2f2fa50]
@@ -13,22 +15,22 @@ public:
     virtual  ~CBBSupportLogFile(void);
 
     // address=[0x2f33ea0]
-    virtual void __stdcall SetFileMode(int);
+    virtual void __stdcall SetFileMode(int a2);
 
     // address=[0x2f33ee0]
-    virtual void __stdcall SetFilePath(wchar_t const *);
+    virtual void __stdcall SetFilePath(wchar_t const * a2);
 
     // address=[0x2f33f50]
-    virtual void __stdcall SetFileModePathAndCreateOrDeleteIfDesired(int,wchar_t const *);
+    virtual void __stdcall SetFileModePathAndCreateOrDeleteIfDesired(int ecx0, wchar_t const * this);
 
     // address=[0x2f33fc0]
-    virtual void __stdcall Write(void const *,unsigned int);
+    virtual void __stdcall Write(void const * a1, unsigned int lpBuffer);
 
     // address=[0x2f34050]
-    virtual void __stdcall Print(char const *);
+    virtual void __stdcall Print(char const * a2);
 
     // address=[0x2f340a0]
-    virtual void __cdecl PrintF(char const *,...);
+    virtual void __cdecl PrintF(char const * a1, ... a2);
 
     // address=[0x2f34190]
     virtual void __cdecl PrintNewLine(void);
@@ -46,7 +48,7 @@ public:
     virtual void __stdcall Close(void);
 
     // address=[0x2f343e0]
-    virtual bool __stdcall GetFilePath(wchar_t *,unsigned int);
+    virtual bool __stdcall GetFilePath(wchar_t * a2, unsigned int a3);
 
     // address=[0x2f34670]
     bool __stdcall OpenIfNecessary(void);

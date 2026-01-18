@@ -75,7 +75,7 @@ bool  INetworkEngine::IsHost(void) {
 
 // address=[0x14ab0d0]
 // Decompiled from char __thiscall INetworkEngine::StartNewTick(CGameHost **this, bool a2)
-bool  INetworkEngine::StartNewTick(bool) {
+bool  INetworkEngine::StartNewTick(bool a2) {
   
   char started; // [esp+7h] [ebp-1h]
 
@@ -88,7 +88,7 @@ bool  INetworkEngine::StartNewTick(bool) {
 
 // address=[0x14b46a0]
 // Decompiled from int __stdcall INetworkEngine::ConvertIPAddress(int a1, int a2)
-std::string  INetworkEngine::ConvertIPAddress(unsigned int) {
+std::string  INetworkEngine::ConvertIPAddress(unsigned int a2) {
   
   CGameHost::ConvertIPAddress(a1, a2);
   return a1;
@@ -97,7 +97,7 @@ std::string  INetworkEngine::ConvertIPAddress(unsigned int) {
 
 // address=[0x14b46f0]
 // Decompiled from bool __thiscall INetworkEngine::EndGame(CGameHost **this, int a2)
-bool  INetworkEngine::EndGame(int) {
+bool  INetworkEngine::EndGame(int a2) {
   
   return CGameHost::OnEndGame(this[2], a2);
 }
@@ -105,7 +105,7 @@ bool  INetworkEngine::EndGame(int) {
 
 // address=[0x14b4760]
 // Decompiled from bool __thiscall INetworkEngine::KickPlayerPeerId(CGameHost **this, unsigned int a2)
-bool  INetworkEngine::KickPlayerPeerId(unsigned int) {
+bool  INetworkEngine::KickPlayerPeerId(unsigned int a2) {
   
   return CGameHost::RemovePlayerPeerId(this[2], a2);
 }
@@ -113,7 +113,7 @@ bool  INetworkEngine::KickPlayerPeerId(unsigned int) {
 
 // address=[0x14b4860]
 // Decompiled from bool __thiscall INetworkEngine::RemovePlayerPeerId(CGameHost **this, unsigned int a2)
-bool  INetworkEngine::RemovePlayerPeerId(unsigned int) {
+bool  INetworkEngine::RemovePlayerPeerId(unsigned int a2) {
   
   return CGameHost::RemovePlayerPeerId(this[2], a2);
 }
@@ -167,7 +167,7 @@ void  INetworkEngine::StormResetEnterSessionFlag(void) {
 
 // address=[0x15c8530]
 // Decompiled from char __thiscall INetworkEngine::SendNetMessage(INetworkEngine *this, struct CEvn_Logic *a2)
-bool  INetworkEngine::SendNetMessage(class CEvn_Logic &) {
+bool  INetworkEngine::SendNetMessage(class CEvn_Logic & a2) {
   
   _BYTE v4[32]; // [esp+Ch] [ebp-30h] BYREF
   int v5; // [esp+38h] [ebp-4h]
@@ -204,7 +204,7 @@ bool  INetworkEngine::SendNetMessage(class CEvn_Logic &) {
 
 // address=[0x15c8690]
 // Decompiled from char __thiscall INetworkEngine::SendNetMessage(  INetworkEngine *this,  unsigned int a2,  unsigned int a3,  unsigned int a4,  int a5)
-bool  INetworkEngine::SendNetMessage(unsigned int,unsigned int,unsigned int,int) {
+bool  INetworkEngine::SendNetMessage(unsigned int a2, unsigned int a3, unsigned int a4, int a5) {
   
   unsigned int CurrentTickCounter; // [esp+8h] [ebp-38h]
   _BYTE v8[32]; // [esp+10h] [ebp-30h] BYREF
@@ -242,7 +242,7 @@ bool  INetworkEngine::SendNetMessage(unsigned int,unsigned int,unsigned int,int)
 
 // address=[0x15c87e0]
 // Decompiled from char __thiscall INetworkEngine::SendAsyncNetMessage(INetworkEngine *this, struct CEvn_Logic *a2, char a3)
-bool  INetworkEngine::SendAsyncNetMessage(class CEvn_Logic &,unsigned char) {
+bool  INetworkEngine::SendAsyncNetMessage(class CEvn_Logic & a2, unsigned char a3) {
   
   _BYTE Src[32]; // [esp+Ch] [ebp-30h] BYREF
   int v5; // [esp+38h] [ebp-4h]
@@ -315,7 +315,7 @@ bool  INetworkEngine::CheckForMsg(void) {
 
 // address=[0x15c89c0]
 // Decompiled from char __thiscall INetworkEngine::Start(int this, char a2, unsigned int a3, int a4, wchar_t *Source)
-bool  INetworkEngine::Start(bool,unsigned int,unsigned int,wchar_t const *) {
+bool  INetworkEngine::Start(bool a2, unsigned int a3, unsigned int a4, wchar_t const * Source) {
   
   struct CMsgStacks *v6; // [esp+10h] [ebp-20h]
   int v7; // [esp+18h] [ebp-18h]
@@ -407,7 +407,7 @@ void  INetworkEngine::StormJoinSessionSucceeded(void) {
 
 // address=[0x15c8cb0]
 // Decompiled from int __thiscall INetworkEngine::StormHost_NewPlayerMessage(_DWORD *this, int a2, int a3, char a4)
-void  INetworkEngine::StormHost_NewPlayerMessage(unsigned int,std::wstring &,int) {
+void  INetworkEngine::StormHost_NewPlayerMessage(unsigned int a2, std::wstring & a3, int a4) {
   
   if ( !this[2] && BBSupportDbgReport(2, "Net\\INetworkEngine.cpp", 320, "m_pGameHost != NULL") == 1 )
     __debugbreak();
@@ -417,7 +417,7 @@ void  INetworkEngine::StormHost_NewPlayerMessage(unsigned int,std::wstring &,int
 
 // address=[0x15c8d00]
 // Decompiled from void __thiscall INetworkEngine::StormOnPeerGone(CGameHost **this, unsigned int a2)
-void  INetworkEngine::StormOnPeerGone(unsigned int) {
+void  INetworkEngine::StormOnPeerGone(unsigned int a2) {
   
   CGameHost::StormClientLeavesMyGame(this[2], a2);
 }
@@ -435,7 +435,7 @@ void  INetworkEngine::StormOnHost(void) {
 
 // address=[0x15c8d60]
 // Decompiled from void __thiscall INetworkEngine::OnQuickMatched(CGameHost **this, bool a2)
-void  INetworkEngine::OnQuickMatched(bool) {
+void  INetworkEngine::OnQuickMatched(bool a2) {
   
   CGameHost::OnQuickMatched(this[2], a2);
 }
@@ -463,7 +463,7 @@ void  INetworkEngine::StormEnteredSession(void) {
 
 // address=[0x15c9030]
 // Decompiled from int __thiscall INetworkEngine::PopMsg(_DWORD *this, int a2)
-class CNet_Event  INetworkEngine::PopMsg(void) {
+class CNet_Event  INetworkEngine::PopMsg(void a2) {
   
   CGameHost::PopMsg(this[2], a2);
   return a2;
@@ -472,7 +472,7 @@ class CNet_Event  INetworkEngine::PopMsg(void) {
 
 // address=[0x15c9070]
 // Decompiled from int __stdcall INetworkEngine::PushAsyncMsg(void *Src, char a2)
-void  INetworkEngine::PushAsyncMsg(class CNet_Event &,unsigned char) {
+void  INetworkEngine::PushAsyncMsg(class CNet_Event & Src, unsigned char a2) {
   
   return CGameHost::PushAsyncMsg(Src, a2);
 }
@@ -480,7 +480,7 @@ void  INetworkEngine::PushAsyncMsg(class CNet_Event &,unsigned char) {
 
 // address=[0x15c90a0]
 // Decompiled from bool __thiscall INetworkEngine::PushMsg(CGameHost **this, struct CNet_Event *a2)
-bool  INetworkEngine::PushMsg(class CNet_Event &) {
+bool  INetworkEngine::PushMsg(class CNet_Event & a2) {
   
   return CGameHost::PushMsg(this[2], a2);
 }

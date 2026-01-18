@@ -4,7 +4,7 @@
 
 // address=[0x149f580]
 // Decompiled from CStateAOCampaignBonus *__cdecl CStateAOCampaignBonus::DynamicCreateFunc(void *a1)
-static class CGameState * __cdecl CStateAOCampaignBonus::DynamicCreateFunc(void *) {
+class CGameState * __cdecl CStateAOCampaignBonus::DynamicCreateFunc(void * a1) {
   
   CStateAOCampaignBonus *C; // [esp+Ch] [ebp-10h]
 
@@ -70,7 +70,7 @@ bool  CStateAOCampaignBonus::Perform(void) {
 
 // address=[0x149f7c0]
 // Decompiled from char __thiscall CStateAOCampaignBonus::OnEvent(CStateAOCampaignBonus *this, struct CEvn_Event *a2)
-bool  CStateAOCampaignBonus::OnEvent(class CEvn_Event &) {
+bool  CStateAOCampaignBonus::OnEvent(class CEvn_Event & a2) {
   
   CEvn_Event *v3; // [esp+Ch] [ebp-38h]
   int event; // [esp+18h] [ebp-2Ch]

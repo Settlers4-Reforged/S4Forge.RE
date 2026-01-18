@@ -40,7 +40,7 @@
 
 // address=[0x2f51a50]
 // Decompiled from char __thiscall CExpandationManagerTask::GetExpandationPermission(  CExpandationManagerTask *this,  struct CExpandationEvent *a2)
-bool  CExpandationManagerTask::GetExpandationPermission(class CExpandationEvent *) {
+bool  CExpandationManagerTask::GetExpandationPermission(class CExpandationEvent * a2) {
   
   struct CDynListEntry *i; // [esp+8h] [ebp-8h]
 
@@ -60,7 +60,7 @@ bool  CExpandationManagerTask::GetExpandationPermission(class CExpandationEvent 
 
 // address=[0x2f51af0]
 // Decompiled from char __thiscall CExpandationManagerTask::IsBorderElement(CReserveDatabase ***this, int a2, int a3)
-bool  CExpandationManagerTask::IsBorderElement(int,int) {
+bool  CExpandationManagerTask::IsBorderElement(int a2, int a3) {
   
   int v4; // [esp+0h] [ebp-Ch]
   unsigned int i; // [esp+8h] [ebp-4h]

@@ -1,6 +1,8 @@
 #ifndef CWARMAPNODE_H
 #define CWARMAPNODE_H
 
+#include "defines.h"
+
 class CWarMapNode {
 public:
     // address=[0x13363e0]
@@ -20,13 +22,13 @@ public:
 
 protected:
     // address=[0x15fc750]
-    void  SetNext(int);
+    void  SetNext(int a2);
 
     // address=[0x15fc770]
-    void  SetPrev(int);
+    void  SetPrev(int a2);
 
     // address=[0x15fc790]
-    void  SetPrevNext(int,int);
+    void  SetPrevNext(int a2, int a3);
 
     // Type information members
 private:

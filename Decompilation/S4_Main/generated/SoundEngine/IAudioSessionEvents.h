@@ -1,6 +1,8 @@
 #ifndef IAUDIOSESSIONEVENTS_H
 #define IAUDIOSESSIONEVENTS_H
 
+#include "defines.h"
+
 class IAudioSessionEvents {
 public:
     // address=[0x26164e0]

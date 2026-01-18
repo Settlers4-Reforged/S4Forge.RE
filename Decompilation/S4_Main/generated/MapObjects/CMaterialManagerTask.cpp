@@ -4,7 +4,7 @@
 
 // address=[0x2f55020]
 // Decompiled from IScheduleEntry *__thiscall CMaterialManagerTask::CMaterialManagerTask(IScheduleEntry *this, int a2, int a3)
- CMaterialManagerTask::CMaterialManagerTask(enum PILE_TYPES,int) {
+ CMaterialManagerTask::CMaterialManagerTask(enum PILE_TYPES a2, int a3) {
   
   IScheduleEntry::IScheduleEntry(this);
   *(_DWORD *)this = &CMaterialManagerTask::_vftable_;
@@ -50,7 +50,7 @@ bool  CMaterialManagerTask::IsShooting(void) {
 
 // address=[0x2f55110]
 // Decompiled from char __thiscall CMaterialManagerTask::action(CMaterialManagerTask *this)
-bool  CMaterialManagerTask::action(void) {
+bool  CMaterialManagerTask::action(void a2) {
   
   CExpandationEvent *v2; // [esp+14h] [ebp-40h]
   CExpandationEvent *v3; // [esp+18h] [ebp-3Ch]
@@ -309,7 +309,7 @@ CMaterialManagerTask__WaitFor___def_33554A8:
 
 // address=[0x2f55790]
 // Decompiled from int __thiscall CMaterialManagerTask::MinDebitOutput(CSchedule **this, int a2)
-int  CMaterialManagerTask::MinDebitOutput(enum PILE_TYPES) {
+int  CMaterialManagerTask::MinDebitOutput(enum PILE_TYPES a2) {
   
   struct IAIEcoManager *EcoSector; // eax
   int v3; // eax
@@ -324,7 +324,7 @@ int  CMaterialManagerTask::MinDebitOutput(enum PILE_TYPES) {
 
 // address=[0x2f557e0]
 // Decompiled from int __thiscall CMaterialManagerTask::MinCreditOutput(_DWORD *this, int a2)
-int  CMaterialManagerTask::MinCreditOutput(enum PILE_TYPES) {
+int  CMaterialManagerTask::MinCreditOutput(enum PILE_TYPES a2) {
   
   int v3; // [esp+1Ch] [ebp-14h]
 
@@ -340,7 +340,7 @@ int  CMaterialManagerTask::MinCreditOutput(enum PILE_TYPES) {
 
 // address=[0x2f55890]
 // Decompiled from bool __stdcall CMaterialManagerTask::IsSingleChainProduction(int a1)
-bool  CMaterialManagerTask::IsSingleChainProduction(enum PILE_TYPES) {
+bool  CMaterialManagerTask::IsSingleChainProduction(enum PILE_TYPES a1) {
   
   return a1 == 11 || a1 == 32 || a1 == 37;
 }

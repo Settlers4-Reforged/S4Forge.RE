@@ -4,7 +4,7 @@
 
 // address=[0x1401da0]
 // Decompiled from int __cdecl CSimpleBuildingRole::New(int a1)
-static class CPersistence * __cdecl CSimpleBuildingRole::New(std::istream &) {
+class CPersistence * __cdecl CSimpleBuildingRole::New(std::istream & a1) {
   
   if ( operator new(0x180u) )
     return CSimpleBuildingRole::CSimpleBuildingRole(a1);
@@ -41,7 +41,7 @@ unsigned long  CSimpleBuildingRole::ClassID(void)const {
 
 // address=[0x14fd400]
 // Decompiled from void *__thiscall CSimpleBuildingRole::GetBuildingNeed(std::_Ref_count_base *this, const struct type_info *a2)
-int  CSimpleBuildingRole::GetBuildingNeed(int)const {
+int  CSimpleBuildingRole::GetBuildingNeed(int a2)const {
   
   return 0;
 }
@@ -57,7 +57,7 @@ int  CSimpleBuildingRole::GetBuildingRole(void) {
 
 // address=[0x14fd6a0]
 // Decompiled from void *__thiscall CSimpleBuildingRole::GetPileIdWithGood(std::_Ref_count_base *this, const struct type_info *a2)
-int  CSimpleBuildingRole::GetPileIdWithGood(int)const {
+int  CSimpleBuildingRole::GetPileIdWithGood(int a2)const {
   
   return 0;
 }
@@ -65,7 +65,7 @@ int  CSimpleBuildingRole::GetPileIdWithGood(int)const {
 
 // address=[0x14fd750]
 // Decompiled from void __thiscall CSimpleBuildingRole::GoodArrive(CSimpleBuildingRole *this, int a2)
-void  CSimpleBuildingRole::GoodArrive(int) {
+void  CSimpleBuildingRole::GoodArrive(int a2) {
   
   ;
 }
@@ -73,7 +73,7 @@ void  CSimpleBuildingRole::GoodArrive(int) {
 
 // address=[0x14fdbf0]
 // Decompiled from int __cdecl CSimpleBuildingRole::Load(int a1)
-static class CSimpleBuildingRole * __cdecl CSimpleBuildingRole::Load(std::istream &) {
+class CSimpleBuildingRole * __cdecl CSimpleBuildingRole::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
@@ -85,7 +85,7 @@ static class CSimpleBuildingRole * __cdecl CSimpleBuildingRole::Load(std::istrea
 
 // address=[0x151ab50]
 // Decompiled from int __thiscall CSimpleBuildingRole::LogicUpdate(unsigned __int8 *this, CMFCToolBarButton *a2)
-void  CSimpleBuildingRole::LogicUpdate(class CBuilding *) {
+void  CSimpleBuildingRole::LogicUpdate(class CBuilding * a2) {
   
   int result; // eax
   int v3; // eax
@@ -325,7 +325,7 @@ void  CSimpleBuildingRole::LogicUpdate(class CBuilding *) {
 
 // address=[0x151b270]
 // Decompiled from CSimpleBuildingRole *__thiscall CSimpleBuildingRole::FillGfxInfo(  CSimpleBuildingRole *this,  struct CBuilding *a2,  struct SGfxObjectInfo *a3)
-void  CSimpleBuildingRole::FillGfxInfo(class CBuilding *,struct SGfxObjectInfo &) {
+void  CSimpleBuildingRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo & a3) {
   
   int v3; // eax
   int v4; // eax
@@ -355,7 +355,7 @@ void  CSimpleBuildingRole::FillGfxInfo(class CBuilding *,struct SGfxObjectInfo &
 
 // address=[0x151b340]
 // Decompiled from int __thiscall CSimpleBuildingRole::Init(CSimpleBuildingRole *this, struct CBuilding *a2)
-void  CSimpleBuildingRole::Init(class CBuilding *) {
+void  CSimpleBuildingRole::Init(class CBuilding * a2) {
   
   int v2; // eax
   int result; // eax
@@ -394,7 +394,7 @@ void  CSimpleBuildingRole::Init(class CBuilding *) {
 
 // address=[0x151b420]
 // Decompiled from CSimpleBuildingRole *__thiscall CSimpleBuildingRole::PostLoadInit(CSimpleBuildingRole *this, struct CBuilding *a2)
-void  CSimpleBuildingRole::PostLoadInit(class CBuilding *) {
+void  CSimpleBuildingRole::PostLoadInit(class CBuilding * a2) {
   
   int v2; // eax
   CSimpleBuildingRole *result; // eax
@@ -434,7 +434,7 @@ void  CSimpleBuildingRole::PostLoadInit(class CBuilding *) {
 
 // address=[0x151b4d0]
 // Decompiled from char __thiscall CSimpleBuildingRole::SettlerEnter(CSimpleBuildingRole *this, struct CBuilding *a2, int a3)
-bool  CSimpleBuildingRole::SettlerEnter(class CBuilding *,int) {
+bool  CSimpleBuildingRole::SettlerEnter(class CBuilding * a2, int a3) {
   
   int v3; // eax
   int v4; // eax
@@ -525,7 +525,7 @@ bool  CSimpleBuildingRole::SettlerEnter(class CBuilding *,int) {
 
 // address=[0x151b740]
 // Decompiled from _DWORD *__thiscall CSimpleBuildingRole::FillDialog(CSimpleBuildingRole *this, struct CBuilding *a2, bool a3)
-void  CSimpleBuildingRole::FillDialog(class CBuilding *,bool) {
+void  CSimpleBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
   
   int v3; // eax
   int v4; // eax
@@ -600,7 +600,7 @@ void  CSimpleBuildingRole::FillDialog(class CBuilding *,bool) {
 
 // address=[0x151ba20]
 // Decompiled from char *__thiscall CSimpleBuildingRole::CSimpleBuildingRole(char *this, int a2)
- CSimpleBuildingRole::CSimpleBuildingRole(std::istream &) {
+ CSimpleBuildingRole::CSimpleBuildingRole(std::istream & a2) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
@@ -627,7 +627,7 @@ void  CSimpleBuildingRole::FillDialog(class CBuilding *,bool) {
 
 // address=[0x151bae0]
 // Decompiled from int __thiscall CSimpleBuildingRole::Store(struct IBuildingRole *this, struct std::ostream *a2)
-void  CSimpleBuildingRole::Store(std::ostream &) {
+void  CSimpleBuildingRole::Store(std::ostream & a2) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
   struct IBuildingRole *v4; // [esp+4h] [ebp-4h]

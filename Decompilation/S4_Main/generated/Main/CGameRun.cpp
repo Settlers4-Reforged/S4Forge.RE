@@ -4,7 +4,7 @@
 
 // address=[0x14821f0]
 // Decompiled from char CGameRun::Init()
-static bool __cdecl CGameRun::Init(void) {
+bool __cdecl CGameRun::Init(void) {
   
   char IsMultiplayerGame; // al
   int v2; // eax
@@ -162,7 +162,7 @@ static bool __cdecl CGameRun::Init(void) {
 
 // address=[0x14828c0]
 // Decompiled from char CGameRun::Run()
-static bool __cdecl CGameRun::Run(void) {
+bool __cdecl CGameRun::Run(void) {
   
   int TickCounter; // eax
   unsigned int v1; // eax
@@ -301,7 +301,7 @@ static bool __cdecl CGameRun::Run(void) {
 
 // address=[0x1482c40]
 // Decompiled from char CGameRun::Exit()
-static bool __cdecl CGameRun::Exit(void) {
+bool __cdecl CGameRun::Exit(void) {
   
   int v1; // [esp+0h] [ebp-3Ch]
 
@@ -347,7 +347,7 @@ static bool __cdecl CGameRun::Exit(void) {
 
 // address=[0x1482e30]
 // Decompiled from char __cdecl CGameRun::LoadGame(int a1)
-static bool __cdecl CGameRun::LoadGame(std::wstring &) {
+bool __cdecl CGameRun::LoadGame(std::wstring & a1) {
   
   const char *v1; // eax
   int v3; // [esp+0h] [ebp-E98h] BYREF
@@ -502,7 +502,7 @@ static bool __cdecl CGameRun::LoadGame(std::wstring &) {
 
 // address=[0x1483510]
 // Decompiled from char __cdecl CGameRun::SaveGame(_Cnd_internal_imp_t *a1)
-static bool __cdecl CGameRun::SaveGame(std::wstring &) {
+bool __cdecl CGameRun::SaveGame(std::wstring & a1) {
   
   const char *v1; // eax
   int v3; // [esp+0h] [ebp-504h] BYREF
@@ -612,7 +612,7 @@ static bool __cdecl CGameRun::SaveGame(std::wstring &) {
 
 // address=[0x1483ab0]
 // Decompiled from char __cdecl CGameRun::LoadGeneralInfo(struct S4::CMapFile *a1, struct CGameChunkGeneral *a2)
-static bool __cdecl CGameRun::LoadGeneralInfo(class S4::CMapFile &,class CGameChunkGeneral *) {
+bool __cdecl CGameRun::LoadGeneralInfo(class S4::CMapFile & a1, class CGameChunkGeneral * a2) {
   
   bool v3; // [esp+4h] [ebp-28h]
   bool v4; // [esp+8h] [ebp-24h]
@@ -688,7 +688,7 @@ static bool __cdecl CGameRun::LoadGeneralInfo(class S4::CMapFile &,class CGameCh
 
 // address=[0x1483d50]
 // Decompiled from char __cdecl CGameRun::LoadGeneralInfo(wchar_t *String, struct CGameChunkGeneral *a2)
-static bool __cdecl CGameRun::LoadGeneralInfo(wchar_t const *,class CGameChunkGeneral &) {
+bool __cdecl CGameRun::LoadGeneralInfo(wchar_t const * String, class CGameChunkGeneral & a2) {
   
   _DWORD v3[5]; // [esp+0h] [ebp-4FCh] BYREF
   char v4; // [esp+15h] [ebp-4E7h]
@@ -732,7 +732,7 @@ static bool __cdecl CGameRun::LoadGeneralInfo(wchar_t const *,class CGameChunkGe
 
 // address=[0x1483f20]
 // Decompiled from int __cdecl CGameRun::FillGameType(int a1, int a2, int a3)
-static void __cdecl CGameRun::FillGameType(std::wstring &,class CGameType &,class CGameChunkGeneral &) {
+void __cdecl CGameRun::FillGameType(std::wstring & a1, class CGameType & a2, class CGameChunkGeneral & a3) {
   
   OnlineManager *Instance; // eax
   void *v4; // ecx
@@ -871,7 +871,7 @@ static void __cdecl CGameRun::FillGameType(std::wstring &,class CGameType &,clas
 
 // address=[0x14845a0]
 // Decompiled from char __thiscall CGameRun::SetupPlayersAndAlliances(void *this)
-static void __cdecl CGameRun::SetupPlayersAndAlliances(void) {
+void __cdecl CGameRun::SetupPlayersAndAlliances(void) {
   
   char v2; // [esp-20h] [ebp-5Ch] BYREF
   int v3; // [esp-1Ch] [ebp-58h]
@@ -942,7 +942,7 @@ static void __cdecl CGameRun::SetupPlayersAndAlliances(void) {
 
 // address=[0x14847b0]
 // Decompiled from int __cdecl CGameRun::RemoveEmptyTeamSlot(int a1)
-static void __cdecl CGameRun::RemoveEmptyTeamSlot(int) {
+void __cdecl CGameRun::RemoveEmptyTeamSlot(int a1) {
   
   int result; // eax
   int i; // [esp+0h] [ebp-4h]
@@ -959,7 +959,7 @@ static void __cdecl CGameRun::RemoveEmptyTeamSlot(int) {
 
 // address=[0x1484820]
 // Decompiled from void *__cdecl CGameRun::GetUsedTeam(int a1, void *a2)
-static void __cdecl CGameRun::GetUsedTeam(int,int *) {
+void __cdecl CGameRun::GetUsedTeam(int a1, int * a2) {
   
   void *result; // eax
   int i; // [esp+4h] [ebp-4h]
@@ -976,7 +976,7 @@ static void __cdecl CGameRun::GetUsedTeam(int,int *) {
 
 // address=[0x1484890]
 // Decompiled from char __cdecl CGameRun::LoadGeneralEditorInfo(struct S4::CMapFile *a1)
-static bool __cdecl CGameRun::LoadGeneralEditorInfo(class S4::CMapFile &) {
+bool __cdecl CGameRun::LoadGeneralEditorInfo(class S4::CMapFile & a1) {
   
   int v2; // [esp+0h] [ebp-8h] BYREF
   void *v3; // [esp+4h] [ebp-4h]
@@ -991,7 +991,7 @@ static bool __cdecl CGameRun::LoadGeneralEditorInfo(class S4::CMapFile &) {
 
 // address=[0x14848f0]
 // Decompiled from char __cdecl CGameRun::SaveGeneralInfo(struct S4::CMapFile *a1)
-static bool __cdecl CGameRun::SaveGeneralInfo(class S4::CMapFile &) {
+bool __cdecl CGameRun::SaveGeneralInfo(class S4::CMapFile & a1) {
   
   const char *v1; // eax
   const wchar_t *v2; // eax
@@ -1139,7 +1139,7 @@ static bool __cdecl CGameRun::SaveGeneralInfo(class S4::CMapFile &) {
 
 // address=[0x1484e90]
 // Decompiled from char CGameRun::RandomMap()
-static bool __cdecl CGameRun::RandomMap(void) {
+bool __cdecl CGameRun::RandomMap(void) {
   
   _BYTE v1[1176]; // [esp+8h] [ebp-4A8h] BYREF
   int v2; // [esp+4ACh] [ebp-4h]
@@ -1158,7 +1158,7 @@ static bool __cdecl CGameRun::RandomMap(void) {
 
 // address=[0x1484f50]
 // Decompiled from char __cdecl CGameRun::LoadEditorMap(int a1, char a2)
-static bool __cdecl CGameRun::LoadEditorMap(std::wstring &,bool) {
+bool __cdecl CGameRun::LoadEditorMap(std::wstring & a1, bool a2) {
   
   char *v2; // eax
   wchar_t *v3; // eax
@@ -1227,7 +1227,7 @@ static bool __cdecl CGameRun::LoadEditorMap(std::wstring &,bool) {
 
 // address=[0x1485180]
 // Decompiled from int CGameRun::ActivateAIs()
-static void __cdecl CGameRun::ActivateAIs(void) {
+void __cdecl CGameRun::ActivateAIs(void) {
   
   int result; // eax
   int v1; // [esp+0h] [ebp-Ch]
@@ -1253,7 +1253,7 @@ static void __cdecl CGameRun::ActivateAIs(void) {
 
 // address=[0x1485210]
 // Decompiled from char __cdecl CGameRun::SaveCurrentData(struct S4::CMapFile *a1)
-static bool __cdecl CGameRun::SaveCurrentData(class S4::CMapFile &) {
+bool __cdecl CGameRun::SaveCurrentData(class S4::CMapFile & a1) {
   
   int v2; // [esp+4h] [ebp-4h]
 
@@ -1268,7 +1268,7 @@ static bool __cdecl CGameRun::SaveCurrentData(class S4::CMapFile &) {
 
 // address=[0x1485260]
 // Decompiled from void __cdecl CGameRun::SaveInfoAndUpdateGUI(struct S4::CMapFile *a1, const char *a2, const char *a3)
-static void __cdecl CGameRun::SaveInfoAndUpdateGUI(class S4::CMapFile &,char const *,char const *) {
+void __cdecl CGameRun::SaveInfoAndUpdateGUI(class S4::CMapFile &,char const *,char const *) {
   
   if ( !a3 )
     a3 = a2;
@@ -1293,7 +1293,7 @@ static void __cdecl CGameRun::SaveInfoAndUpdateGUI(class S4::CMapFile &,char con
 
 // address=[0x1485300]
 // Decompiled from void __cdecl CGameRun::SaveChunkObject(  struct S4::CMapFile *a1,  __int16 a2,  __int16 a3,  struct IS4ChunkObject *a4,  const char *a5,  const char *a6)
-static void __cdecl CGameRun::SaveChunkObject(class S4::CMapFile &,unsigned short,unsigned short,class IS4ChunkObject &,char const *,char const *) {
+void __cdecl CGameRun::SaveChunkObject(class S4::CMapFile & a1, unsigned short a2, unsigned short a3, class IS4ChunkObject & a4, char const * a5, char const * a6) {
   
   CGameRun::SaveInfoAndUpdateGUI(a1, a5, a6);
   S4::CMapFile::SaveChunkObject(a1, a2, a3, a4, 0);

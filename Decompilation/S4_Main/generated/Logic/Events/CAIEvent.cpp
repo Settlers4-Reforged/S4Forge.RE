@@ -4,7 +4,7 @@
 
 // address=[0x13095e0]
 // Decompiled from unsigned int __cdecl CAIEvent::Pack(unsigned int a1, unsigned int a2)
-static int __cdecl CAIEvent::Pack(unsigned int,unsigned int) {
+int __cdecl CAIEvent::Pack(unsigned int a1, unsigned int a2) {
   
   if ( a1 > 0xFFFF
     && BBSupportDbgReport(
@@ -30,7 +30,7 @@ static int __cdecl CAIEvent::Pack(unsigned int,unsigned int) {
 
 // address=[0x1310220]
 // Decompiled from CAIEvent *__thiscall CAIEvent::CAIEvent(CAIEvent *this, int a2, int a3, int a4, int a5)
- CAIEvent::CAIEvent(int,int,int,int) {
+ CAIEvent::CAIEvent(int a2, int a3, int a4, int a5) {
   
   *(_DWORD *)this = a2;
   *((_DWORD *)this + 1) = a3;
@@ -42,7 +42,7 @@ static int __cdecl CAIEvent::Pack(unsigned int,unsigned int) {
 
 // address=[0x13140a0]
 // Decompiled from int __cdecl CAIEvent::UnpackA(unsigned __int16 a1)
-static unsigned int __cdecl CAIEvent::UnpackA(int) {
+unsigned int __cdecl CAIEvent::UnpackA(int a1) {
   
   return a1;
 }
@@ -50,7 +50,7 @@ static unsigned int __cdecl CAIEvent::UnpackA(int) {
 
 // address=[0x13140b0]
 // Decompiled from int __cdecl CAIEvent::UnpackB(int a1)
-static unsigned int __cdecl CAIEvent::UnpackB(int) {
+unsigned int __cdecl CAIEvent::UnpackB(int a1) {
   
   return a1 >> 16;
 }

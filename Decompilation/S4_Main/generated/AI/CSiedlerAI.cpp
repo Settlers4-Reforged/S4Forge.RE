@@ -4,7 +4,7 @@
 
 // address=[0x2f34cd0]
 // Decompiled from void __thiscall CSiedlerAI::InitNetAI(CSiedlerAI *this, int a2)
-void  CSiedlerAI::InitNetAI(int) {
+void  CSiedlerAI::InitNetAI(int a2) {
   
   *((_DWORD *)this + 7) = a2;
   IAI_Module::NewSolutionEdge(this, 1, 1);
@@ -21,7 +21,7 @@ void  CSiedlerAI::InitNetAI(int) {
 
 // address=[0x2f34d60]
 // Decompiled from CSiedlerAI *__thiscall CSiedlerAI::CSiedlerAI(CSiedlerAI *this, struct CEcoSectorAI *a2, int a3)
- CSiedlerAI::CSiedlerAI(class CEcoSectorAI *,int) {
+ CSiedlerAI::CSiedlerAI(class CEcoSectorAI * a2, int a3) {
   
   int v3; // eax
   CSiedlerAI *v6; // [esp+8h] [ebp-10h]
@@ -53,7 +53,7 @@ void  CSiedlerAI::InitNetAI(int) {
 
 // address=[0x2f34e70]
 // Decompiled from CParameterSet *__thiscall CSiedlerAI::GenerateAlternatives(CSiedlerAI *this, int a2, struct CParam *a3)
-class CParameterSet *  CSiedlerAI::GenerateAlternatives(int,class CParam *) {
+class CParameterSet *  CSiedlerAI::GenerateAlternatives(int a2, class CParam * a3) {
   
   int ProdIdForGoodType; // eax
   int v4; // eax
@@ -1381,7 +1381,7 @@ CSiedlerAI__GenerateAlternatives___def_3335063:
 
 // address=[0x2f37a70]
 // Decompiled from CConditionSet *__thiscall CSiedlerAI::Condition(CSiedlerAI *this, int a2, struct CParam *a3)
-class CConditionSet *  CSiedlerAI::Condition(int,class CParam *) {
+class CConditionSet *  CSiedlerAI::Condition(int a2, class CParam * a3) {
   
   int v4; // [esp+8h] [ebp-18Ch]
   int v5; // [esp+14h] [ebp-180h]
@@ -1803,7 +1803,7 @@ class CConditionSet *  CSiedlerAI::Condition(int,class CParam *) {
 
 // address=[0x2f389f0]
 // Decompiled from double __thiscall CSiedlerAI::Valuation(CSiedlerAI *this, int a2, struct CParam *a3, int a4, int a5)
-double  CSiedlerAI::Valuation(int,class CParam *,int,int) {
+double  CSiedlerAI::Valuation(int a2, class CParam * a3, int a4, int a5) {
   
   double v6; // [esp+0h] [ebp-48h]
   float v7; // [esp+10h] [ebp-38h]
@@ -1896,7 +1896,7 @@ double  CSiedlerAI::Valuation(int,class CParam *,int,int) {
 
 // address=[0x2f38ca0]
 // Decompiled from int __thiscall CSiedlerAI::RepeatingBehaviour(CSiedlerAI *this, int a2, struct CParam *a3)
-int  CSiedlerAI::RepeatingBehaviour(int,class CParam *) {
+int  CSiedlerAI::RepeatingBehaviour(int a2, class CParam * a3) {
   
   int v4; // [esp+8h] [ebp-4h]
 
@@ -1909,7 +1909,7 @@ int  CSiedlerAI::RepeatingBehaviour(int,class CParam *) {
 
 // address=[0x2f38cd0]
 // Decompiled from int __thiscall CSiedlerAI::PreferExternSolution(CSiedlerAI *this, int a2, struct CParam *a3)
-int  CSiedlerAI::PreferExternSolution(int,class CParam *) {
+int  CSiedlerAI::PreferExternSolution(int a2, class CParam * a3) {
   
   int v4; // [esp+4h] [ebp-8h]
 
@@ -1922,7 +1922,7 @@ int  CSiedlerAI::PreferExternSolution(int,class CParam *) {
 
 // address=[0x2f38d10]
 // Decompiled from struct CSolutionTree *__thiscall CSiedlerAI::ImportSolution(CSchedule **this, int a2, struct CParam *a3)
-class CSolutionTree *  CSiedlerAI::ImportSolution(int,class CParam *) {
+class CSolutionTree *  CSiedlerAI::ImportSolution(int a2, class CParam * a3) {
   
   int v4; // [esp+0h] [ebp-10h]
   int v6; // [esp+8h] [ebp-8h]
@@ -1946,7 +1946,7 @@ class CSolutionTree *  CSiedlerAI::ImportSolution(int,class CParam *) {
 
 // address=[0x2f38da0]
 // Decompiled from void __thiscall CSiedlerAI::Consequence(CSiedlerAI *this, int a2, struct CParam *a3)
-void  CSiedlerAI::Consequence(int,class CParam *) {
+void  CSiedlerAI::Consequence(int a2, class CParam * a3) {
   
   ;
 }
@@ -1954,7 +1954,7 @@ void  CSiedlerAI::Consequence(int,class CParam *) {
 
 // address=[0x2f38db0]
 // Decompiled from int __thiscall CSiedlerAI::ExecuteAction(CSiedlerAI *this, int a2, struct CParam *a3)
-void  CSiedlerAI::ExecuteAction(int,class CParam *) {
+void  CSiedlerAI::ExecuteAction(int a2, class CParam * a3) {
   
   int result; // eax
   int v4; // [esp+4h] [ebp-44h] BYREF
@@ -2025,7 +2025,7 @@ void  CSiedlerAI::ExecuteAction(int,class CParam *) {
 
 // address=[0x2f38f70]
 // Decompiled from int __thiscall CSiedlerAI::PreExecuteAction(CSiedlerAI *this, int a2, struct CParam *a3)
-void  CSiedlerAI::PreExecuteAction(int,class CParam *) {
+void  CSiedlerAI::PreExecuteAction(int a2, class CParam * a3) {
   
   return a2;
 }
@@ -2033,7 +2033,7 @@ void  CSiedlerAI::PreExecuteAction(int,class CParam *) {
 
 // address=[0x2f38f90]
 // Decompiled from int __thiscall CSiedlerAI::GetInvokeBuildingType(CSiedlerAI *this, struct IScheduleEntry *a2, enum BUILDING_TYPES *a3)
-void  CSiedlerAI::GetInvokeBuildingType(class IScheduleEntry *,enum BUILDING_TYPES *) {
+void  CSiedlerAI::GetInvokeBuildingType(class IScheduleEntry * a2, enum BUILDING_TYPES * a3) {
   
   int result; // eax
   int v4; // [esp+4h] [ebp-1Ch]
@@ -2101,7 +2101,7 @@ void  CSiedlerAI::GetInvokeBuildingType(class IScheduleEntry *,enum BUILDING_TYP
 
 // address=[0x2f39150]
 // Decompiled from int __thiscall CSiedlerAI::GetInvokePosition(CSiedlerAI *this, int a2, int a3, int a4, int a5, int a6)
-int  CSiedlerAI::GetInvokePosition(int,int,int,int,int) {
+int  CSiedlerAI::GetInvokePosition(int a2, int a3, int a4, int a5, int a6) {
   
   int v7; // [esp+4h] [ebp-10h]
   int v8; // [esp+8h] [ebp-Ch] BYREF
@@ -2133,7 +2133,7 @@ int  CSiedlerAI::GetInvokePosition(int,int,int,int,int) {
 
 // address=[0x2f39260]
 // Decompiled from int __thiscall CSiedlerAI::GetBestBuilding(CSiedlerAI *this, int a2, int a3, _DWORD *a4)
-int  CSiedlerAI::GetBestBuilding(struct SBUILDINFODATA *,int,int &) {
+int  CSiedlerAI::GetBestBuilding(struct SBUILDINFODATA * a2, int a3, int & a4) {
   
   int v6; // [esp+8h] [ebp-10h]
   int v7; // [esp+10h] [ebp-8h]
@@ -2155,7 +2155,7 @@ int  CSiedlerAI::GetBestBuilding(struct SBUILDINFODATA *,int,int &) {
 
 // address=[0x2f392f0]
 // Decompiled from int __thiscall CSiedlerAI::ScoringBuilding(CSiedlerAI *this, struct SBUILDINFODATA *a2)
-int  CSiedlerAI::ScoringBuilding(struct SBUILDINFODATA *) {
+int  CSiedlerAI::ScoringBuilding(struct SBUILDINFODATA * a2) {
   
   return 500;
 }
@@ -2163,7 +2163,7 @@ int  CSiedlerAI::ScoringBuilding(struct SBUILDINFODATA *) {
 
 // address=[0x2f39310]
 // Decompiled from double __thiscall CSiedlerAI::GeneralValuation(int this, int a2, int a3, int a4, unsigned __int8 a5)
-double  CSiedlerAI::GeneralValuation(enum BUILDING_TYPES,int,int,bool) {
+double  CSiedlerAI::GeneralValuation(enum BUILDING_TYPES a2, int a3, int a4, bool a5) {
   
   int PackWorldPosition; // eax
   int v7; // [esp-Ch] [ebp-2Ch]

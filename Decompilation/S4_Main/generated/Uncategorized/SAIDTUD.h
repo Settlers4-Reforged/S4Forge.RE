@@ -1,6 +1,8 @@
 #ifndef CAIDARKTRIBE_SAIDTUD_H
 #define CAIDARKTRIBE_SAIDTUD_H
 
+#include "defines.h"
+
 namespace CAIDarkTribe {
 
 class SAIDTUD {

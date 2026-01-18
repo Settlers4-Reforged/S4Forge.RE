@@ -4,7 +4,7 @@
 
 // address=[0x2fd4fb0]
 // Decompiled from char __thiscall CVC_EventHandle::RegisterVC(CVC_EventHandle *this, struct CVoiceChat *a2)
-void  CVC_EventHandle::RegisterVC(class CVoiceChat *) {
+void  CVC_EventHandle::RegisterVC(class CVoiceChat * a2) {
   
   *((_DWORD *)this + 1) = a2;
   return IEventEngine::RegisterHandle(g_pEvnEngine, this);
@@ -21,7 +21,7 @@ void  CVC_EventHandle::UnregisterVC(void) {
 
 // address=[0x2fd5000]
 // Decompiled from char __thiscall CVC_EventHandle::OnEvent(CVoiceChat **this, struct CEvn_Event *a2)
-bool  CVC_EventHandle::OnEvent(class CEvn_Event &) {
+bool  CVC_EventHandle::OnEvent(class CEvn_Event & a2) {
   
   return CVoiceChat::OnEvent(this[1], a2);
 }

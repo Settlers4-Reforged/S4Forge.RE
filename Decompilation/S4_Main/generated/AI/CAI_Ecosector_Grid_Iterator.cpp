@@ -22,7 +22,7 @@
 
 // address=[0x1339970]
 // Decompiled from void *__thiscall CAI_Ecosector_Grid_Iterator::Init(CAI_Ecosector_Grid_Iterator *this, int a2)
-void  CAI_Ecosector_Grid_Iterator::Init(int) {
+void  CAI_Ecosector_Grid_Iterator::Init(int a2) {
   
   int v2; // ecx
 
@@ -158,7 +158,7 @@ void  CAI_Ecosector_Grid_Iterator::FindStartPoint(void) {
 
 // address=[0x1339d60]
 // Decompiled from bool __thiscall CAI_Ecosector_Grid_Iterator::IsMyTile(CAI_Ecosector_Grid_Iterator *this, int a2)
-bool  CAI_Ecosector_Grid_Iterator::IsMyTile(int) {
+bool  CAI_Ecosector_Grid_Iterator::IsMyTile(int a2) {
   
   int SquareTile; // [esp+4h] [ebp-8h]
   struct CTile *v5; // [esp+8h] [ebp-4h]
@@ -175,7 +175,7 @@ bool  CAI_Ecosector_Grid_Iterator::IsMyTile(int) {
 
 // address=[0x1339fe0]
 // Decompiled from bool __thiscall CAI_Ecosector_Grid_Iterator::IsChecked(CAI_Ecosector_Grid_Iterator *this, int a2, int a3)
-bool  CAI_Ecosector_Grid_Iterator::IsChecked(int,int) {
+bool  CAI_Ecosector_Grid_Iterator::IsChecked(int a2, int a3) {
   
   return ((1 << (a2 & 7)) & *((unsigned __int8 *)this + 8 * a3 + (a2 >> 3) + 8)) != 0;
 }
@@ -183,7 +183,7 @@ bool  CAI_Ecosector_Grid_Iterator::IsChecked(int,int) {
 
 // address=[0x133a0f0]
 // Decompiled from int __thiscall CAI_Ecosector_Grid_Iterator::SetChecked(CAI_Ecosector_Grid_Iterator *this, int a2, int a3)
-void  CAI_Ecosector_Grid_Iterator::SetChecked(int,int) {
+void  CAI_Ecosector_Grid_Iterator::SetChecked(int a2, int a3) {
   
   int result; // eax
 

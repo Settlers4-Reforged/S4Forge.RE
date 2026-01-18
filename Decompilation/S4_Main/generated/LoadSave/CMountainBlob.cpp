@@ -4,7 +4,7 @@
 
 // address=[0x2fc9ac0]
 // Decompiled from CMountainBlob *__thiscall CMountainBlob::CMountainBlob(  CMountainBlob *this,  int a2,  int a3,  int a4,  int a5,  int a6,  int a7,  struct CCheckLayer *a8)
- CMountainBlob::CMountainBlob(int,int,int,int,int,int,class CCheckLayer *) {
+ CMountainBlob::CMountainBlob(int a2, int a3, int a4, int a5, int a6, int a7, class CCheckLayer * a8) {
   
   CHeightBlob::CHeightBlob(this, a2, a3, a4, a5, a6, a7, a8);
   *(_DWORD *)this = CMountainBlob::_vftable_;
@@ -14,7 +14,7 @@
 
 // address=[0x2fc9b00]
 // Decompiled from CMountainBlob *__thiscall CMountainBlob::processFillPoint(CMountainBlob *this, int a2, int a3)
-void  CMountainBlob::processFillPoint(int,int) {
+void  CMountainBlob::processFillPoint(int a2, int a3) {
   
   CMountainBlob *result; // eax
   int v4; // [esp+8h] [ebp-Ch]
@@ -61,7 +61,7 @@ void  CMountainBlob::processFillPoint(int,int) {
 
 // address=[0x2fc9c90]
 // Decompiled from int __thiscall CMountainBlob::processPoint(CCheckLayer **this, int a2, int a3)
-void  CMountainBlob::processPoint(int,int) {
+void  CMountainBlob::processPoint(int a2, int a3) {
   
   if ( *(_BYTE *)(g_pMapElement + 4 * (a2 + (_DWORD)this[3] * a3) + 1) != 16
     && *(_BYTE *)(g_pMapElement + 4 * (a2 + (_DWORD)this[3] * a3) + 1) != 7 )

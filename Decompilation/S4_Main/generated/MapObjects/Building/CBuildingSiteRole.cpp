@@ -4,7 +4,7 @@
 
 // address=[0x13ffe60]
 // Decompiled from int __cdecl CBuildingSiteRole::New(int a1)
-static class CPersistence * __cdecl CBuildingSiteRole::New(std::istream &) {
+class CPersistence * __cdecl CBuildingSiteRole::New(std::istream & a1) {
   
   if ( operator new(0x1C8u) )
     return CBuildingSiteRole::CBuildingSiteRole(a1);
@@ -71,7 +71,7 @@ int  CBuildingSiteRole::MaxNeededDigger(void)const {
 
 // address=[0x14fd8b0]
 // Decompiled from int __cdecl CBuildingSiteRole::Load(int a1)
-static class CBuildingSiteRole * __cdecl CBuildingSiteRole::Load(std::istream &) {
+class CBuildingSiteRole * __cdecl CBuildingSiteRole::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
@@ -125,7 +125,7 @@ static class CBuildingSiteRole * __cdecl CBuildingSiteRole::Load(std::istream &)
 
 // address=[0x15013e0]
 // Decompiled from int __thiscall CBuildingSiteRole::Init(int this, unsigned __int8 *a2)
-void  CBuildingSiteRole::Init(class CBuilding *) {
+void  CBuildingSiteRole::Init(class CBuilding * a2) {
   
   int v2; // eax
   unsigned int v3; // eax
@@ -165,7 +165,7 @@ void  CBuildingSiteRole::Init(class CBuilding *) {
 
 // address=[0x1501570]
 // Decompiled from void __thiscall CBuildingSiteRole::LogicUpdate(CBuildingSiteRole *this, unsigned __int8 *a2)
-void  CBuildingSiteRole::LogicUpdate(class CBuilding *) {
+void  CBuildingSiteRole::LogicUpdate(class CBuilding * a2) {
   
   int v2; // eax
   _DWORD *v3; // eax
@@ -523,7 +523,7 @@ LABEL_57:
 
 // address=[0x1501eb0]
 // Decompiled from void __thiscall CBuildingSiteRole::PostLoadInit(CBuildingSiteRole *this, struct CBuilding *a2)
-void  CBuildingSiteRole::PostLoadInit(class CBuilding *) {
+void  CBuildingSiteRole::PostLoadInit(class CBuilding * a2) {
   
   int v2; // eax
   int v3; // [esp-4h] [ebp-8h]
@@ -545,7 +545,7 @@ void  CBuildingSiteRole::PostLoadInit(class CBuilding *) {
 
 // address=[0x1501f60]
 // Decompiled from int __thiscall CBuildingSiteRole::FillGfxInfo(CBuildingSiteRole *this, struct CBuilding *a2, struct SGfxObjectInfo *a3)
-void  CBuildingSiteRole::FillGfxInfo(class CBuilding *,struct SGfxObjectInfo &) {
+void  CBuildingSiteRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo & a3) {
   
   int v3; // eax
   int v5; // [esp-Ch] [ebp-14h]
@@ -600,7 +600,7 @@ void  CBuildingSiteRole::FillGfxInfo(class CBuilding *,struct SGfxObjectInfo &) 
 
 // address=[0x1502120]
 // Decompiled from int __thiscall CBuildingSiteRole::GoodArrive(CBuildingSiteRole *this, int a2)
-void  CBuildingSiteRole::GoodArrive(int) {
+void  CBuildingSiteRole::GoodArrive(int a2) {
   
   return a2;
 }
@@ -608,7 +608,7 @@ void  CBuildingSiteRole::GoodArrive(int) {
 
 // address=[0x1502140]
 // Decompiled from char __thiscall CBuildingSiteRole::SettlerEnter(CBuildingSiteRole *this, struct CBuilding *a2, int a3)
-bool  CBuildingSiteRole::SettlerEnter(class CBuilding *,int) {
+bool  CBuildingSiteRole::SettlerEnter(class CBuilding * a2, int a3) {
   
   unsigned __int16 *v3; // eax
 
@@ -620,7 +620,7 @@ bool  CBuildingSiteRole::SettlerEnter(class CBuilding *,int) {
 
 // address=[0x1502170]
 // Decompiled from int __thiscall CBuildingSiteRole::GetBuildingNeed(CBuildingSiteRole *this, int a2)
-int  CBuildingSiteRole::GetBuildingNeed(int)const {
+int  CBuildingSiteRole::GetBuildingNeed(int a2)const {
   
   switch ( a2 )
   {
@@ -637,7 +637,7 @@ int  CBuildingSiteRole::GetBuildingNeed(int)const {
 
 // address=[0x15021c0]
 // Decompiled from int __thiscall CBuildingSiteRole::GetPileIdWithGood(CBuildingSiteRole *this, int a2)
-int  CBuildingSiteRole::GetPileIdWithGood(int)const {
+int  CBuildingSiteRole::GetPileIdWithGood(int a2)const {
   
   switch ( a2 )
   {
@@ -685,7 +685,7 @@ int  CBuildingSiteRole::HaveBuildingMaterial(void) {
 
 // address=[0x15022d0]
 // Decompiled from CBuildingSiteRole *__thiscall CBuildingSiteRole::SetDiggingInfos(CBuildingSiteRole *this, int a2, int a3)
-void  CBuildingSiteRole::SetDiggingInfos(int,int) {
+void  CBuildingSiteRole::SetDiggingInfos(int a2, int a3) {
   
   CBuildingSiteRole *result; // eax
 
@@ -767,7 +767,7 @@ void  CBuildingSiteRole::SwitchPriority(void) {
 
 // address=[0x1502510]
 // Decompiled from _DWORD *__thiscall CBuildingSiteRole::FillDialog(CBuildingSiteRole *this, struct CBuilding *a2, bool a3)
-void  CBuildingSiteRole::FillDialog(class CBuilding *,bool) {
+void  CBuildingSiteRole::FillDialog(class CBuilding * a2, bool a3) {
   
   int v3; // eax
   int v4; // eax
@@ -932,7 +932,7 @@ void  CBuildingSiteRole::FillDialog(class CBuilding *,bool) {
 
 // address=[0x1502ac0]
 // Decompiled from char __thiscall CBuildingSiteRole::GetBuilderPos(CBuildingSiteRole *this, struct SBuilderPos *a2)
-void  CBuildingSiteRole::GetBuilderPos(struct SBuilderPos &) {
+void  CBuildingSiteRole::GetBuilderPos(struct SBuilderPos & a2) {
   
   _DWORD *v2; // eax
   void *v3; // eax
@@ -971,7 +971,7 @@ void  CBuildingSiteRole::GetBuilderPos(struct SBuilderPos &) {
 
 // address=[0x1502c30]
 // Decompiled from CBuildingSiteRole *__thiscall CBuildingSiteRole::AddWork(CBuildingSiteRole *this, int a2)
-void  CBuildingSiteRole::AddWork(int) {
+void  CBuildingSiteRole::AddWork(int a2) {
   
   CBuildingSiteRole *result; // eax
   unsigned __int8 *v3; // eax
@@ -1023,7 +1023,7 @@ void  CBuildingSiteRole::AddWork(int) {
 
 // address=[0x1502de0]
 // Decompiled from char *__thiscall CBuildingSiteRole::CBuildingSiteRole(char *this, int a2)
- CBuildingSiteRole::CBuildingSiteRole(std::istream &) {
+ CBuildingSiteRole::CBuildingSiteRole(std::istream & a2) {
   
   _DWORD v3[5]; // [esp+0h] [ebp-30h] BYREF
   int v4; // [esp+14h] [ebp-1Ch] BYREF
@@ -1084,7 +1084,7 @@ void  CBuildingSiteRole::AddWork(int) {
 
 // address=[0x1503150]
 // Decompiled from int __thiscall CBuildingSiteRole::Store(struct IBuildingRole *this, struct std::ostream *a2)
-void  CBuildingSiteRole::Store(std::ostream &) {
+void  CBuildingSiteRole::Store(std::ostream & a2) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
   struct IBuildingRole *v4; // [esp+4h] [ebp-4h]
@@ -1152,7 +1152,7 @@ int  CBuildingSiteRole::GetBuildingRole(void) {
 
 // address=[0x1506480]
 // Decompiled from void __thiscall CBuildingSiteRole::InhabitantFlee(CBuildingSiteRole *this, int a2)
-void  CBuildingSiteRole::InhabitantFlee(int) {
+void  CBuildingSiteRole::InhabitantFlee(int a2) {
   
   ;
 }
@@ -1277,7 +1277,7 @@ void  CBuildingSiteRole::Switch(void) {
 
 // address=[0x1503780]
 // Decompiled from void __thiscall CBuildingSiteRole::CheckDeactivateUrgentBoards(CBuildingSiteRole *this, int a2)
-void  CBuildingSiteRole::CheckDeactivateUrgentBoards(int) {
+void  CBuildingSiteRole::CheckDeactivateUrgentBoards(int a2) {
   
   CEcoSector *v2; // eax
 
@@ -1293,7 +1293,7 @@ void  CBuildingSiteRole::CheckDeactivateUrgentBoards(int) {
 
 // address=[0x15037d0]
 // Decompiled from void __thiscall CBuildingSiteRole::CheckDeactivateUrgentStones(CBuildingSiteRole *this, int a2)
-void  CBuildingSiteRole::CheckDeactivateUrgentStones(int) {
+void  CBuildingSiteRole::CheckDeactivateUrgentStones(int a2) {
   
   CEcoSector *v2; // eax
 
@@ -1309,7 +1309,7 @@ void  CBuildingSiteRole::CheckDeactivateUrgentStones(int) {
 
 // address=[0x1503820]
 // Decompiled from void __thiscall CBuildingSiteRole::CheckDeactivateUrgentBuilder(CBuildingSiteRole *this, int a2)
-void  CBuildingSiteRole::CheckDeactivateUrgentBuilder(int) {
+void  CBuildingSiteRole::CheckDeactivateUrgentBuilder(int a2) {
   
   CEcoSector *v2; // eax
   int v3; // [esp-4h] [ebp-8h]
@@ -1328,7 +1328,7 @@ void  CBuildingSiteRole::CheckDeactivateUrgentBuilder(int) {
 
 // address=[0x1503890]
 // Decompiled from void __thiscall CBuildingSiteRole::CheckDeactivateUrgentDigger(CBuildingSiteRole *this, int a2)
-void  CBuildingSiteRole::CheckDeactivateUrgentDigger(int) {
+void  CBuildingSiteRole::CheckDeactivateUrgentDigger(int a2) {
   
   CEcoSector *v2; // eax
   int v3; // [esp-4h] [ebp-8h]
@@ -1346,7 +1346,7 @@ void  CBuildingSiteRole::CheckDeactivateUrgentDigger(int) {
 
 // address=[0x15038f0]
 // Decompiled from void __thiscall CBuildingSiteRole::CheckDeactivatePriority(CBuildingSiteRole *this, int a2)
-void  CBuildingSiteRole::CheckDeactivatePriority(int) {
+void  CBuildingSiteRole::CheckDeactivatePriority(int a2) {
   
   CEcoSector *v2; // eax
   CEcoSector *v3; // eax
@@ -1372,7 +1372,7 @@ void  CBuildingSiteRole::CheckDeactivatePriority(int) {
 
 // address=[0x15039a0]
 // Decompiled from void __thiscall CBuildingSiteRole::CheckActivateUrgentBoards(CBuildingSiteRole *this, int a2)
-void  CBuildingSiteRole::CheckActivateUrgentBoards(int) {
+void  CBuildingSiteRole::CheckActivateUrgentBoards(int a2) {
   
   CEcoSector *v2; // eax
   _DWORD *v3; // eax
@@ -1406,7 +1406,7 @@ void  CBuildingSiteRole::CheckActivateUrgentBoards(int) {
 
 // address=[0x1503a80]
 // Decompiled from void __thiscall CBuildingSiteRole::CheckActivateUrgentStones(CBuildingSiteRole *this, int a2)
-void  CBuildingSiteRole::CheckActivateUrgentStones(int) {
+void  CBuildingSiteRole::CheckActivateUrgentStones(int a2) {
   
   CEcoSector *v2; // eax
   _DWORD *v3; // eax
@@ -1440,7 +1440,7 @@ void  CBuildingSiteRole::CheckActivateUrgentStones(int) {
 
 // address=[0x1503b60]
 // Decompiled from void __thiscall CBuildingSiteRole::CheckActivateUrgentBuilder(CBuildingSiteRole *this, int a2)
-void  CBuildingSiteRole::CheckActivateUrgentBuilder(int) {
+void  CBuildingSiteRole::CheckActivateUrgentBuilder(int a2) {
   
   CEcoSector *v2; // eax
   _DWORD *v3; // eax
@@ -1473,7 +1473,7 @@ void  CBuildingSiteRole::CheckActivateUrgentBuilder(int) {
 
 // address=[0x1503c40]
 // Decompiled from void __thiscall CBuildingSiteRole::CheckActivateUrgentDigger(CBuildingSiteRole *this, int a2)
-void  CBuildingSiteRole::CheckActivateUrgentDigger(int) {
+void  CBuildingSiteRole::CheckActivateUrgentDigger(int a2) {
   
   CEcoSector *v2; // eax
   _DWORD *v3; // eax
@@ -1509,7 +1509,7 @@ void  CBuildingSiteRole::CheckActivateUrgentDigger(int) {
 
 // address=[0x1503d50]
 // Decompiled from int __fastcall CBuildingSiteRole::OrderDigger(CBuildingSiteRole *this, int a2, struct CBuilding *a3)
-void  CBuildingSiteRole::OrderDigger(class CBuilding *) {
+void  CBuildingSiteRole::OrderDigger(class CBuilding * a2) {
   
   int result; // eax
   int v4; // esi
@@ -1551,7 +1551,7 @@ void  CBuildingSiteRole::OrderDigger(class CBuilding *) {
 
 // address=[0x1503e40]
 // Decompiled from void __thiscall CBuildingSiteRole::DiggingIsReady(CBuildingSiteRole *this, int a2)
-void  CBuildingSiteRole::DiggingIsReady(int) {
+void  CBuildingSiteRole::DiggingIsReady(int a2) {
   
   int EcoSectorId; // [esp+0h] [ebp-8h]
 
@@ -1586,7 +1586,7 @@ void  CBuildingSiteRole::TidyUp(class CEntityEvent &) {
 
 // address=[0x1503f10]
 // Decompiled from int __thiscall CBuildingSiteRole::NotifyDeliverPiles(unsigned __int16 *this, int a2)
-void  CBuildingSiteRole::NotifyDeliverPiles(class CEntityEvent &) {
+void  CBuildingSiteRole::NotifyDeliverPiles(class CEntityEvent & a2) {
   
   int result; // eax
   unsigned __int8 *v3; // eax
@@ -1613,7 +1613,7 @@ void  CBuildingSiteRole::NotifyDeliverPiles(class CEntityEvent &) {
 
 // address=[0x1503fd0]
 // Decompiled from int __thiscall CBuildingSiteRole::OrderBuilder(CBuildingSiteRole *this, struct CBuilding *a2)
-void  CBuildingSiteRole::OrderBuilder(class CBuilding *) {
+void  CBuildingSiteRole::OrderBuilder(class CBuilding * a2) {
   
   int result; // eax
   int v3; // esi
@@ -1655,7 +1655,7 @@ void  CBuildingSiteRole::OrderBuilder(class CBuilding *) {
 
 // address=[0x15040d0]
 // Decompiled from CBuildingSiteRole *__thiscall CBuildingSiteRole::OrderMaterial(CBuildingSiteRole *this, struct CBuilding *a2)
-void  CBuildingSiteRole::OrderMaterial(class CBuilding *) {
+void  CBuildingSiteRole::OrderMaterial(class CBuilding * a2) {
   
   CBuildingSiteRole *result; // eax
   int v3; // esi
@@ -1744,7 +1744,7 @@ void  CBuildingSiteRole::OrderMaterial(class CBuilding *) {
 
 // address=[0x1504360]
 // Decompiled from int __thiscall CBuildingSiteRole::BuildingDone(CBuildingSiteRole *this, struct CBuilding *a2)
-void  CBuildingSiteRole::BuildingDone(class CBuilding *) {
+void  CBuildingSiteRole::BuildingDone(class CBuilding * a2) {
   
   int v2; // eax
   int result; // eax
@@ -1795,7 +1795,7 @@ void  CBuildingSiteRole::BuildingDone(class CBuilding *) {
 
 // address=[0x1504510]
 // Decompiled from int __thiscall CBuildingSiteRole::DeleteStakes(CBuildingSiteRole *this, struct CBuilding *a2)
-void  CBuildingSiteRole::DeleteStakes(class CBuilding *) {
+void  CBuildingSiteRole::DeleteStakes(class CBuilding * a2) {
   
   _DWORD *v2; // eax
   int v3; // eax
@@ -1869,7 +1869,7 @@ void  CBuildingSiteRole::DeleteStakes(class CBuilding *) {
 
 // address=[0x15046e0]
 // Decompiled from CBuildingSiteRole *__thiscall CBuildingSiteRole::BuilderLeft(CBuildingSiteRole *this, int a2)
-void  CBuildingSiteRole::BuilderLeft(int) {
+void  CBuildingSiteRole::BuilderLeft(int a2) {
   
   unsigned __int16 *v2; // eax
   CBuildingSiteRole *result; // eax
@@ -1916,7 +1916,7 @@ void  CBuildingSiteRole::BuilderLeft(int) {
 
 // address=[0x15047d0]
 // Decompiled from int __thiscall CBuildingSiteRole::ReturnBuildingMaterial(CBuildingSiteRole *this, struct CBuilding *a2)
-void  CBuildingSiteRole::ReturnBuildingMaterial(class CBuilding *) {
+void  CBuildingSiteRole::ReturnBuildingMaterial(class CBuilding * a2) {
   
   int result; // eax
   int v3; // [esp+0h] [ebp-18h]
@@ -1985,7 +1985,7 @@ void  CBuildingSiteRole::ReturnBuildingMaterial(class CBuilding *) {
 
 // address=[0x1504960]
 // Decompiled from _DWORD *__thiscall CBuildingSiteRole::PrepareGround(_DWORD *this, unsigned __int16 *a2)
-void  CBuildingSiteRole::PrepareGround(class CBuilding *) {
+void  CBuildingSiteRole::PrepareGround(class CBuilding * a2) {
   
   _DWORD *v2; // eax
   int v3; // esi
@@ -2253,7 +2253,7 @@ void  CBuildingSiteRole::ConvertEventIntoGoal(class CBuilding *,class CEntityEve
 
 // address=[0x1506430]
 // Decompiled from int __thiscall CBuildingSiteRole::GetEcoSectorId(CBuildingSiteRole *this, struct CBuilding *a2)
-int  CBuildingSiteRole::GetEcoSectorId(class CBuilding *) {
+int  CBuildingSiteRole::GetEcoSectorId(class CBuilding * a2) {
   
   int v2; // eax
   int v3; // eax

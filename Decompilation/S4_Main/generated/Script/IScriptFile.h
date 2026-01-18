@@ -1,6 +1,8 @@
 #ifndef ISCRIPTFILE_H
 #define ISCRIPTFILE_H
 
+#include "defines.h"
+
 class IScriptFile {
 public:
     // address=[0x160ddf0]

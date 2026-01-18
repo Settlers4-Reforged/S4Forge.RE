@@ -4,7 +4,7 @@
 
 // address=[0x14025c0]
 // Decompiled from int __cdecl CTree::New(int a1)
-static class CPersistence * __cdecl CTree::New(std::istream &) {
+class CPersistence * __cdecl CTree::New(std::istream & a1) {
   
   if ( CTree::operator new(0x50u) )
     return CTree::CTree(a1);
@@ -15,7 +15,7 @@ static class CPersistence * __cdecl CTree::New(std::istream &) {
 
 // address=[0x15a2e10]
 // Decompiled from CTree *__thiscall CTree::CTree(CTree *this, int a2, int a3, int a4, int a5, int a6)
- CTree::CTree(int,int,int,int,int) {
+ CTree::CTree(int a2, int a3, int a4, int a5, int a6) {
   
   IDecoObject::IDecoObject(this, a2, a3, a4, a5, a6 != 0);
   *(_DWORD *)this = &CTree::_vftable_;
@@ -41,7 +41,7 @@ static class CPersistence * __cdecl CTree::New(std::istream &) {
 
 // address=[0x15a2f50]
 // Decompiled from CTree *__thiscall CTree::CTree(CTree *this, const struct CTree *a2, int a3, int a4, int a5)
- CTree::CTree(class CTree const &,int,int,int) {
+ CTree::CTree(class CTree const & a2, int a3, int a4, int a5) {
   
   IDecoObject::IDecoObject(this, a2, a3, a4, a5);
   *(_DWORD *)this = &CTree::_vftable_;
@@ -196,7 +196,7 @@ int  CTree::GetGoodType(void)const {
 
 // address=[0x15a33f0]
 // Decompiled from CTree *__thiscall CTree::Decrease(CTree *this, int a2)
-void  CTree::Decrease(int) {
+void  CTree::Decrease(int a2) {
   
   int v2; // eax
   CTree *result; // eax
@@ -233,7 +233,7 @@ void  CTree::Decrease(int) {
 
 // address=[0x15a3500]
 // Decompiled from int __thiscall CTree::Increase(CTree *this, int a2)
-int  CTree::Increase(int) {
+int  CTree::Increase(int a2) {
   
   return 1;
 }
@@ -241,7 +241,7 @@ int  CTree::Increase(int) {
 
 // address=[0x15a3520]
 // Decompiled from int __thiscall CTree::Take(CTree *this, int a2)
-void  CTree::Take(int) {
+void  CTree::Take(int a2) {
   
   return (*(int (__thiscall **)(CTree *, int))(*(_DWORD *)this + 32))(this, 1);
 }
@@ -249,7 +249,7 @@ void  CTree::Take(int) {
 
 // address=[0x15a3540]
 // Decompiled from int __thiscall CTree::ConvertToDarkOrGreen(CTree *this, bool a2)
-int  CTree::ConvertToDarkOrGreen(bool) {
+int  CTree::ConvertToDarkOrGreen(bool a2) {
   
   int v3; // [esp+0h] [ebp-Ch]
   int v4; // [esp+4h] [ebp-8h]
@@ -273,7 +273,7 @@ int  CTree::ConvertToDarkOrGreen(bool) {
 
 // address=[0x15a35d0]
 // Decompiled from unsigned int __cdecl CTree::operator new(unsigned int a1)
-static void * __cdecl CTree::operator new(unsigned int) {
+void * __cdecl CTree::operator new(unsigned int a1) {
   
   return CDecoObjMgr::Alloc((CDecoObjMgr *)&g_cDecoObjMgr, a1);
 }
@@ -281,7 +281,7 @@ static void * __cdecl CTree::operator new(unsigned int) {
 
 // address=[0x15a35f0]
 // Decompiled from void __cdecl CTree::operator delete(void *a1)
-static void __cdecl CTree::operator delete(void *) {
+void __cdecl CTree::operator delete(void * a1) {
   
   CDecoObjMgr::Dealloc((CDecoObjMgr *)&g_cDecoObjMgr, a1);
 }
@@ -289,7 +289,7 @@ static void __cdecl CTree::operator delete(void *) {
 
 // address=[0x15a3630]
 // Decompiled from _DWORD *__thiscall CTree::CTree(_DWORD *this, int a2)
- CTree::CTree(std::istream &) {
+ CTree::CTree(std::istream & a2) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
@@ -319,7 +319,7 @@ static void __cdecl CTree::operator delete(void *) {
 
 // address=[0x15a3730]
 // Decompiled from int __thiscall CTree::Store(int *this, struct std::ostream *a2)
-void  CTree::Store(std::ostream &) {
+void  CTree::Store(std::ostream & a2) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
   int *v4; // [esp+4h] [ebp-4h]

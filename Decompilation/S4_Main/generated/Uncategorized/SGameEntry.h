@@ -1,6 +1,8 @@
 #ifndef CLANLOBBYCONNECT_SGAMEENTRY_H
 #define CLANLOBBYCONNECT_SGAMEENTRY_H
 
+#include "defines.h"
+
 namespace CLanLobbyConnect {
 
 class SGameEntry {

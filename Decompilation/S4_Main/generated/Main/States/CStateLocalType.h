@@ -1,10 +1,12 @@
 #ifndef CSTATELOCALTYPE_H
 #define CSTATELOCALTYPE_H
 
+#include "defines.h"
+
 class CStateLocalType : public CGuiGameState {
 public:
     // address=[0x14c1100]
-    static class CGameState * __cdecl DynamicCreateFunc(void *);
+    static class CGameState * __cdecl DynamicCreateFunc(void * a1);
 
     // address=[0x14c1180]
      CStateLocalType(void *);
@@ -16,7 +18,7 @@ public:
     virtual bool  Perform(void);
 
     // address=[0x14c1320]
-    virtual bool  OnEvent(class CEvn_Event &);
+    virtual bool  OnEvent(class CEvn_Event & a2);
 
 };
 

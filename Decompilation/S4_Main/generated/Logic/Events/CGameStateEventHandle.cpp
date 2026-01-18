@@ -22,7 +22,7 @@
 
 // address=[0x1489fa0]
 // Decompiled from char __thiscall CGameStateEventHandle::OnEvent(CGameStateEventHandle *this, struct CEvn_Event *a2)
-bool  CGameStateEventHandle::OnEvent(class CEvn_Event &) {
+bool  CGameStateEventHandle::OnEvent(class CEvn_Event & a2) {
   
   char result; // al
   size_t v3; // eax

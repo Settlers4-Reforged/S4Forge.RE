@@ -33,7 +33,7 @@
 
 // address=[0x2f02a50]
 // Decompiled from void __thiscall Cryptor::Set_Key(_DWORD *this, int a2)
-void  Cryptor::Set_Key(std::string const &) {
+void  Cryptor::Set_Key(std::string const & a2) {
   
   char *v2; // eax
   int v3; // [esp+4h] [ebp-40h]
@@ -81,7 +81,7 @@ void  Cryptor::Set_Key(std::string const &) {
 
 // address=[0x2f02c10]
 // Decompiled from int __thiscall Cryptor::Transform_Char(Cryptor *this, unsigned __int8 *a2)
-void  Cryptor::Transform_Char(unsigned char &) {
+void  Cryptor::Transform_Char(unsigned char & a2) {
   
   int result; // eax
   int v3; // [esp+0h] [ebp-14h]
@@ -132,7 +132,7 @@ void  Cryptor::Transform_Char(unsigned char &) {
 
 // address=[0x2f02d60]
 // Decompiled from int __thiscall Cryptor::Transform_File(Cryptor *this, int a2, void *a3)
-void  Cryptor::Transform_File(std::string const &,std::string const &) {
+void  Cryptor::Transform_File(std::string const & a2, std::string const & a3) {
   
   char *v3; // eax
   int v4; // eax
@@ -180,7 +180,7 @@ void  Cryptor::Transform_File(std::string const &,std::string const &) {
 
 // address=[0x2f02e90]
 // Decompiled from int __thiscall Cryptor::Transform_String(Cryptor *this, int a2, int a3)
-void  Cryptor::Transform_String(std::string const &,std::string &) {
+void  Cryptor::Transform_String(std::string const & a2, std::string & a3) {
   
   int result; // eax
   unsigned __int8 *v4; // eax
@@ -201,7 +201,7 @@ void  Cryptor::Transform_String(std::string const &,std::string &) {
 
 // address=[0x2f02f00]
 // Decompiled from int __thiscall Cryptor::Weak_Transform_Char(_DWORD *this, _BYTE *a2)
-void  Cryptor::Weak_Transform_Char(unsigned char &) {
+void  Cryptor::Weak_Transform_Char(unsigned char & a2) {
   
   int result; // eax
   char v3; // [esp+0h] [ebp-10h]

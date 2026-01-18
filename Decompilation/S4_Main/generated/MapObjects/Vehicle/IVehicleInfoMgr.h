@@ -1,10 +1,12 @@
 #ifndef IVEHICLEINFOMGR_H
 #define IVEHICLEINFOMGR_H
 
+#include "defines.h"
+
 class IVehicleInfoMgr {
 public:
     // address=[0x152f270]
-    static struct SVehicleProperties const * __cdecl VehicleProperties(unsigned int,unsigned int);
+    static struct SVehicleProperties const * __cdecl VehicleProperties(unsigned int a1, unsigned int a2);
 
     // address=[0x15ac380]
      IVehicleInfoMgr(void);

@@ -1,6 +1,8 @@
 #ifndef CGAMEDATA_H
 #define CGAMEDATA_H
 
+#include "defines.h"
+
 class CGameData {
 public:
     // address=[0x1360fd0]
@@ -43,16 +45,16 @@ public:
      ~CGameData(void);
 
     // address=[0x14aac40]
-    std::string  GetModeString(void);
+    std::string  GetModeString(void a2);
 
     // address=[0x14aad60]
-    std::string  GetTypeString(void);
+    std::string  GetTypeString(void a2);
 
     // address=[0x14aaf30]
-    void  SetLastFrameRendered(bool);
+    void  SetLastFrameRendered(bool a2);
 
     // address=[0x14b4a60]
-    void  TeamWon(int);
+    void  TeamWon(int a2);
 
 };
 

@@ -4,7 +4,7 @@
 
 // address=[0x1306230]
 // Decompiled from CSpiralWalk *__thiscall CSpiralWalk::CSpiralWalk(CSpiralWalk *this, int a2, int a3, int a4)
- CSpiralWalk::CSpiralWalk(int,int,int) {
+ CSpiralWalk::CSpiralWalk(int a2, int a3, int a4) {
   
   *((_DWORD *)this + 1) = a2;
   *((_DWORD *)this + 2) = a3;
@@ -16,7 +16,7 @@
 
 // address=[0x1306800]
 // Decompiled from char __thiscall CSpiralWalk::NextXY(_DWORD *this, int *a2, int *a3)
-bool  CSpiralWalk::NextXY(int &,int &) {
+bool  CSpiralWalk::NextXY(int & a2, int & a3) {
   
   int v4; // [esp+0h] [ebp-Ch]
   int v5; // [esp+4h] [ebp-8h]

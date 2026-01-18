@@ -20,7 +20,7 @@ int  CAIResourceData::Flags9(void)const {
 
 // address=[0x131c990]
 // Decompiled from int __thiscall CAIResourceData::GroundInfo1(CAIResourceData *this, int a2)
-int  CAIResourceData::GroundInfo1(int)const {
+int  CAIResourceData::GroundInfo1(int a2)const {
   
   return *((unsigned __int8 *)this + a2 + 32);
 }
@@ -28,7 +28,7 @@ int  CAIResourceData::GroundInfo1(int)const {
 
 // address=[0x131c9e0]
 // Decompiled from int __thiscall CAIResourceData::ResourceAmount1(CAIResourceData *this, int a2)
-int  CAIResourceData::ResourceAmount1(int)const {
+int  CAIResourceData::ResourceAmount1(int a2)const {
   
   return *((unsigned __int16 *)this + a2);
 }
@@ -36,7 +36,7 @@ int  CAIResourceData::ResourceAmount1(int)const {
 
 // address=[0x131ca00]
 // Decompiled from int __thiscall CAIResourceData::ResourceAmount9(CAIResourceData *this, int a2)
-int  CAIResourceData::ResourceAmount9(int)const {
+int  CAIResourceData::ResourceAmount9(int a2)const {
   
   return *((unsigned __int16 *)this + a2 + 8);
 }

@@ -1,6 +1,8 @@
 #ifndef CONCURRENCY_SCHEDULEGROUP_H
 #define CONCURRENCY_SCHEDULEGROUP_H
 
+#include "defines.h"
+
 namespace Concurrency {
 
 class ScheduleGroup {

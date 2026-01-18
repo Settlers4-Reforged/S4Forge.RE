@@ -152,7 +152,7 @@ bool  CSoundManager::OpenSoundFiles(void) {
 
 // address=[0x149c410]
 // Decompiled from int __thiscall CSoundManager::PlaySoundFX(_DWORD *this, int a2)
-unsigned int  CSoundManager::PlaySoundFX(enum SIV_SOUNDS) {
+unsigned int  CSoundManager::PlaySoundFX(enum SIV_SOUNDS a2) {
   
   if ( a2 >= 109 && BBSupportDbgReport(2, "Main\\SoundManager.cpp", 240, "_iSoundID < SOUND_MAX") == 1 )
     __debugbreak();
@@ -165,7 +165,7 @@ unsigned int  CSoundManager::PlaySoundFX(enum SIV_SOUNDS) {
 
 // address=[0x149c470]
 // Decompiled from int __thiscall CSoundManager::PlaySoundFXLooped(_DWORD *this, int a2)
-unsigned int  CSoundManager::PlaySoundFXLooped(enum SIV_SOUNDS) {
+unsigned int  CSoundManager::PlaySoundFXLooped(enum SIV_SOUNDS a2) {
   
   if ( a2 >= 109 && BBSupportDbgReport(2, "Main\\SoundManager.cpp", 256, "_iSoundID < SOUND_MAX") == 1 )
     __debugbreak();
@@ -178,7 +178,7 @@ unsigned int  CSoundManager::PlaySoundFXLooped(enum SIV_SOUNDS) {
 
 // address=[0x149c4d0]
 // Decompiled from unsigned int __thiscall CSoundManager::PlaySoundFX(  CSoundManager *this,  unsigned int a2,  int a3,  int a4,  int a5,  bool a6)
-unsigned int  CSoundManager::PlaySoundFX(enum SIV_SOUNDS,int,int,int,bool) {
+unsigned int  CSoundManager::PlaySoundFX(enum SIV_SOUNDS a2, int a3, int a4, int a5, bool a6) {
   
   const char *v7; // eax
   const char *SoundName; // eax
@@ -262,7 +262,7 @@ unsigned int  CSoundManager::PlaySoundFX(enum SIV_SOUNDS,int,int,int,bool) {
 
 // address=[0x149c6b0]
 // Decompiled from int __thiscall CSoundManager::PlayEnvironmentSound(CSoundManager *this, int a2, int a3, int a4, unsigned __int8 a5)
-unsigned int  CSoundManager::PlayEnvironmentSound(enum SIV_SOUNDS,int,int,bool) {
+unsigned int  CSoundManager::PlayEnvironmentSound(enum SIV_SOUNDS a2, int a3, int a4, bool a5) {
   
   int v6; // [esp+0h] [ebp-Ch] BYREF
   int v7; // [esp+4h] [ebp-8h] BYREF
@@ -280,7 +280,7 @@ unsigned int  CSoundManager::PlayEnvironmentSound(enum SIV_SOUNDS,int,int,bool) 
 
 // address=[0x149c730]
 // Decompiled from unsigned int __thiscall CSoundManager::PlaySoundFile(CSoundManager *this, const wchar_t *a2, int a3, int a4)
-unsigned int  CSoundManager::PlaySoundFile(wchar_t const *,int,int) {
+unsigned int  CSoundManager::PlaySoundFile(wchar_t const * a2, int a3, int a4) {
   
   if ( g_pSoundEngine )
     return ISoundEngine::PlaySoundFile((ISoundEngine *)g_pSoundEngine, a2, a3, a4);
@@ -291,7 +291,7 @@ unsigned int  CSoundManager::PlaySoundFile(wchar_t const *,int,int) {
 
 // address=[0x149c770]
 // Decompiled from int __thiscall CSoundManager::PlayBackgroundMusic(CSoundManager *this, int a2, int a3, wchar_t *String)
-unsigned int  CSoundManager::PlayBackgroundMusic(int,enum SIV_MUSICSTYLES,wchar_t const *) {
+unsigned int  CSoundManager::PlayBackgroundMusic(int a2, enum SIV_MUSICSTYLES a3, wchar_t const * String) {
   
   if ( !g_pSoundEngine )
     return 0;
@@ -315,7 +315,7 @@ unsigned int  CSoundManager::PlayBackgroundMusic(int,enum SIV_MUSICSTYLES,wchar_
 
 // address=[0x149c810]
 // Decompiled from int __stdcall CSoundManager::PlayDirectory(wchar_t *String)
-unsigned int  CSoundManager::PlayDirectory(wchar_t const *) {
+unsigned int  CSoundManager::PlayDirectory(wchar_t const * String) {
   
   return CSoundManager::PlayBackgroundMusic(-1, 0, String);
 }
@@ -323,7 +323,7 @@ unsigned int  CSoundManager::PlayDirectory(wchar_t const *) {
 
 // address=[0x149c830]
 // Decompiled from unsigned int __thiscall CSoundManager::ChangeMusicStyle(_DWORD *this, int a2)
-unsigned int  CSoundManager::ChangeMusicStyle(enum SIV_MUSICSTYLES) {
+unsigned int  CSoundManager::ChangeMusicStyle(enum SIV_MUSICSTYLES a2) {
   
   if ( g_pSoundEngine )
     return ISoundEngine::ChangePlaylist((ISoundEngine *)g_pSoundEngine, a2, this[1]);
@@ -334,7 +334,7 @@ unsigned int  CSoundManager::ChangeMusicStyle(enum SIV_MUSICSTYLES) {
 
 // address=[0x149c860]
 // Decompiled from unsigned int __thiscall CSoundManager::FadeInSound(CSoundManager *this, signed int a2, int a3, int a4, int a5)
-unsigned int  CSoundManager::FadeInSound(enum SIV_SOUNDS,int,int,int) {
+unsigned int  CSoundManager::FadeInSound(enum SIV_SOUNDS a2, int a3, int a4, int a5) {
   
   const char *SoundName; // eax
   unsigned int v7; // [esp+0h] [ebp-Ch]
@@ -369,7 +369,7 @@ unsigned int  CSoundManager::FadeInSound(enum SIV_SOUNDS,int,int,int) {
 
 // address=[0x149c950]
 // Decompiled from unsigned int __thiscall CSoundManager::CrossFade(CSoundManager *this, unsigned int a2, int a3, int a4, int a5)
-unsigned int  CSoundManager::CrossFade(unsigned int,enum SIV_SOUNDS,int,int) {
+unsigned int  CSoundManager::CrossFade(unsigned int a2, enum SIV_SOUNDS a3, int a4, int a5) {
   
   int v6; // eax
   unsigned int v7; // [esp+0h] [ebp-Ch]
@@ -400,7 +400,7 @@ unsigned int  CSoundManager::CrossFade(unsigned int,enum SIV_SOUNDS,int,int) {
 
 // address=[0x149ca10]
 // Decompiled from bool __stdcall CSoundManager::FadeOutSound(unsigned int a1, int a2, int a3)
-bool  CSoundManager::FadeOutSound(unsigned int,int,int) {
+bool  CSoundManager::FadeOutSound(unsigned int a1, int a2, int a3) {
   
   return g_pSoundEngine && ISoundEngine::Fade((ISoundEngine *)g_pSoundEngine, a1, a2, a3);
 }
@@ -408,7 +408,7 @@ bool  CSoundManager::FadeOutSound(unsigned int,int,int) {
 
 // address=[0x149ca50]
 // Decompiled from void __thiscall CSoundManager::SetMusicVolume(CSoundManager *this, int a2)
-void  CSoundManager::SetMusicVolume(int) {
+void  CSoundManager::SetMusicVolume(int a2) {
   
   if ( g_pSoundEngine )
   {
@@ -430,7 +430,7 @@ void  CSoundManager::SetMusicVolume(int) {
 
 // address=[0x149cad0]
 // Decompiled from void __thiscall CSoundManager::SetSoundVolume(CSoundManager *this, int a2)
-void  CSoundManager::SetSoundVolume(int) {
+void  CSoundManager::SetSoundVolume(int a2) {
   
   if ( g_pSoundEngine )
   {
@@ -474,7 +474,7 @@ void  CSoundManager::Mute(bool) {
 
 // address=[0x149cbc0]
 // Decompiled from void __stdcall CSoundManager::PausePlayback(bool a1)
-void  CSoundManager::PausePlayback(bool) {
+void  CSoundManager::PausePlayback(bool a1) {
   
   if ( g_pSoundEngine )
     ISoundEngine::PausePlayback((ISoundEngine *)g_pSoundEngine, a1);
@@ -613,7 +613,7 @@ void  CSoundManager::Update(void) {
 
 // address=[0x149b280]
 // Decompiled from char __thiscall CSoundManager::CreatePlaylists(CSoundManager *this, int a2, const wchar_t *a3)
-bool  CSoundManager::CreatePlaylists(int,wchar_t const *) {
+bool  CSoundManager::CreatePlaylists(int a2, wchar_t const * a3) {
   
   int i; // [esp+4h] [ebp-4h]
 
@@ -637,7 +637,7 @@ bool  CSoundManager::CreatePlaylists(int,wchar_t const *) {
 
 // address=[0x149b310]
 // Decompiled from int __thiscall CSoundManager::CalcFinalVolume(CSoundManager *this, int a2, int a3, int a4)
-int  CSoundManager::CalcFinalVolume(int,int,int) {
+int  CSoundManager::CalcFinalVolume(int a2, int a3, int a4) {
   
   int v5; // [esp+4h] [ebp-4h]
 
@@ -652,7 +652,7 @@ int  CSoundManager::CalcFinalVolume(int,int,int) {
 
 // address=[0x149b370]
 // Decompiled from char __thiscall CSoundManager::LoadRaceTitles(CSoundManager *this, int a2, const wchar_t *a3)
-bool  CSoundManager::LoadRaceTitles(int,wchar_t const *) {
+bool  CSoundManager::LoadRaceTitles(int a2, wchar_t const * a3) {
   
   int v3; // eax
   int v4; // eax
@@ -832,7 +832,7 @@ bool  CSoundManager::LoadRaceTitles(int,wchar_t const *) {
 
 // address=[0x149b9f0]
 // Decompiled from char __thiscall CSoundManager::CreateDirPlaylist(_DWORD *this, wchar_t *String)
-bool  CSoundManager::CreateDirPlaylist(wchar_t const *) {
+bool  CSoundManager::CreateDirPlaylist(wchar_t const * String) {
   
   HANDLE hFindFile; // [esp+8h] [ebp-4A8h]
   struct _WIN32_FIND_DATAW FindFileData; // [esp+10h] [ebp-4A0h] BYREF
@@ -891,7 +891,7 @@ bool  CSoundManager::CreateDirPlaylist(wchar_t const *) {
 
 // address=[0x149bc00]
 // Decompiled from int __thiscall CSoundManager::CalcPanningAndVolume(CSoundManager *this, int a2, int a3, int *a4, int *a5)
-void  CSoundManager::CalcPanningAndVolume(int,int,int &,int &) {
+void  CSoundManager::CalcPanningAndVolume(int a2, int a3, int & a4, int & a4) {
   
   int result; // eax
   float ZoomFactor; // [esp+4h] [ebp-2Ch]

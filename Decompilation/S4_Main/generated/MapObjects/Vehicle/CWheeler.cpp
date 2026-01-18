@@ -20,7 +20,7 @@ void  CWheeler::FillDialog(bool) {
 
 // address=[0x153feb0]
 // Decompiled from void __thiscall CWheeler::UnloadToPosition(CWheeler *this, int a2)
-void  CWheeler::UnloadToPosition(int) {
+void  CWheeler::UnloadToPosition(int a2) {
   
   ;
 }
@@ -128,7 +128,7 @@ struct SGfxObjectInfo *  CWheeler::GetGfxInfos(void) {
 
 // address=[0x15b0110]
 // Decompiled from void __thiscall CWheeler::ConvertEventIntoGoal(CWheeler *this, struct CEntityEvent *a2)
-void  CWheeler::ConvertEventIntoGoal(class CEntityEvent *) {
+void  CWheeler::ConvertEventIntoGoal(class CEntityEvent * a2) {
   
   int v2; // eax
   void **v3; // eax
@@ -274,7 +274,7 @@ int  CWheeler::RepairBuildingInRange(void) {
 
 // address=[0x15b0560]
 // Decompiled from CWheeler *__thiscall CWheeler::RepairAt(CWheeler *this, int a2)
-void  CWheeler::RepairAt(int) {
+void  CWheeler::RepairAt(int a2) {
   
   CWheeler *result; // eax
   char v3; // dl
@@ -301,7 +301,7 @@ void  CWheeler::RepairAt(int) {
 
 // address=[0x15b0600]
 // Decompiled from _DWORD *__thiscall CWheeler::SetObserverTarget(_DWORD *this, int a2, int a3)
-void  CWheeler::SetObserverTarget(enum T_OBSERVER_TARGET,int) {
+void  CWheeler::SetObserverTarget(enum T_OBSERVER_TARGET a2, int a3) {
   
   _DWORD *result; // eax
   unsigned int v4; // ecx
@@ -328,7 +328,7 @@ void  CWheeler::SetObserverTarget(enum T_OBSERVER_TARGET,int) {
 
 // address=[0x15b0680]
 // Decompiled from int __thiscall CWheeler::GetObserverTarget(_DWORD *this, int a2)
-int  CWheeler::GetObserverTarget(enum T_OBSERVER_TARGET) {
+int  CWheeler::GetObserverTarget(enum T_OBSERVER_TARGET a2) {
   
   if ( a2 )
     return 0;
@@ -347,7 +347,7 @@ void  CWheeler::Unload(void) {
 
 // address=[0x15b06b0]
 // Decompiled from CWheeler *__thiscall CWheeler::CWheeler(  CWheeler *this,  int a2,  int a3,  int a4,  int a5,  __int16 a6,  unsigned int a7,  bool a8)
- CWheeler::CWheeler(int,int,int,int,int,int,bool) {
+ CWheeler::CWheeler(int a2, int a3, int a4, int a5, int a6, int a7, bool a8) {
   
   int v9; // [esp+8h] [ebp-14h]
 
@@ -384,7 +384,7 @@ void  CWheeler::Unload(void) {
 
 // address=[0x15b07e0]
 // Decompiled from _DWORD *__thiscall CWheeler::CWheeler(_DWORD *this, int a2)
- CWheeler::CWheeler(std::istream &) {
+ CWheeler::CWheeler(std::istream & a2) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
@@ -413,7 +413,7 @@ void  CWheeler::Unload(void) {
 
 // address=[0x15b08d0]
 // Decompiled from int __thiscall CWheeler::Store(int *this, struct std::ostream *a2)
-void  CWheeler::Store(std::ostream &) {
+void  CWheeler::Store(std::ostream & a2) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
   int *v4; // [esp+4h] [ebp-4h]
@@ -430,7 +430,7 @@ void  CWheeler::Store(std::ostream &) {
 
 // address=[0x15b0950]
 // Decompiled from char __thiscall CWheeler::WalkDir(CWheeler *this, char a2)
-void  CWheeler::WalkDir(int) {
+void  CWheeler::WalkDir(int a2) {
   
   int v2; // esi
   CWalking *v3; // eax
@@ -497,7 +497,7 @@ void  CWheeler::WalkDir(int) {
 
 // address=[0x15b0af0]
 // Decompiled from int __thiscall CWheeler::PlaceVehicle(CWheeler *this, int a2)
-void  CWheeler::PlaceVehicle(int) {
+void  CWheeler::PlaceVehicle(int a2) {
   
   int result; // eax
   __int16 v3; // [esp+0h] [ebp-14h]
@@ -549,7 +549,7 @@ void  CWheeler::PlaceVehicle(int) {
 
 // address=[0x15b0ca0]
 // Decompiled from int __thiscall CWheeler::RemoveVehicle(CWheeler *this, int a2)
-void  CWheeler::RemoveVehicle(int) {
+void  CWheeler::RemoveVehicle(int a2) {
   
   int result; // eax
   int v3; // [esp+8h] [ebp-Ch]
@@ -599,7 +599,7 @@ void  CWheeler::RemoveVehicle(int) {
 
 // address=[0x15b0e20]
 // Decompiled from int __thiscall CWheeler::OnComeToFerry(CWheeler *this, int a2)
-void  CWheeler::OnComeToFerry(int) {
+void  CWheeler::OnComeToFerry(int a2) {
   
   void **VehiclePtr; // eax
   int result; // eax

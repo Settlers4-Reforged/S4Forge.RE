@@ -24,7 +24,7 @@
 
 // address=[0x1689550]
 // Decompiled from int *GameSessionHandler::GetClassTypeName()
-static char const * __cdecl GameSessionHandler::GetClassTypeName(void) {
+char const * __cdecl GameSessionHandler::GetClassTypeName(void) {
   
   return &dword_3834C88[1];
 }
@@ -32,7 +32,7 @@ static char const * __cdecl GameSessionHandler::GetClassTypeName(void) {
 
 // address=[0x16895c0]
 // Decompiled from int GameSessionHandler::GetClassTypeStaticCrc()
-static unsigned long __cdecl GameSessionHandler::GetClassTypeStaticCrc(void) {
+unsigned long __cdecl GameSessionHandler::GetClassTypeStaticCrc(void) {
   
   return 1608834342;
 }

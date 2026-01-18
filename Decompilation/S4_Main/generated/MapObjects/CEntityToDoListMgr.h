@@ -1,6 +1,8 @@
 #ifndef CENTITYTODOLISTMGR_H
 #define CENTITYTODOLISTMGR_H
 
+#include "defines.h"
+
 class CEntityToDoListMgr {
 public:
     // address=[0x154c610]
@@ -10,10 +12,10 @@ public:
      ~CEntityToDoListMgr(void);
 
     // address=[0x154e220]
-    class std::list<class CEntityTask,class std::allocator<class CEntityTask> > *  SettlerJobList(int,int);
+    class std::list<class CEntityTask,class std::allocator<class CEntityTask> > *  SettlerJobList(int a2, int a3);
 
     // address=[0x154e2a0]
-    static void __cdecl GetJobSoundInfo(int,struct SJobSoundInfo &);
+    static void __cdecl GetJobSoundInfo(int a1, struct SJobSoundInfo & a2);
 
 private:
     // address=[0x40fe5b8]

@@ -4,7 +4,7 @@
 
 // address=[0x1400180]
 // Decompiled from int __cdecl CDarkGardenerRole::New(int a1)
-static class CPersistence * __cdecl CDarkGardenerRole::New(std::istream &) {
+class CPersistence * __cdecl CDarkGardenerRole::New(std::istream & a1) {
   
   if ( operator new(0x50u) )
     return CDarkGardenerRole::CDarkGardenerRole(a1);
@@ -15,7 +15,7 @@ static class CPersistence * __cdecl CDarkGardenerRole::New(std::istream &) {
 
 // address=[0x15671c0]
 // Decompiled from int __thiscall CDarkGardenerRole::InitWalking(CDarkGardenerRole *this, struct CSettler *a2)
-class CWalking *  CDarkGardenerRole::InitWalking(class CSettler *) {
+class CWalking *  CDarkGardenerRole::InitWalking(class CSettler * a2) {
   
   int v2; // eax
   int v4; // [esp+4h] [ebp-4h]
@@ -29,7 +29,7 @@ class CWalking *  CDarkGardenerRole::InitWalking(class CSettler *) {
 
 // address=[0x1567200]
 // Decompiled from int __thiscall CDarkGardenerRole::LogicUpdateJob(CDarkGardenerRole *this, struct CSettler *a2)
-void  CDarkGardenerRole::LogicUpdateJob(class CSettler *) {
+void  CDarkGardenerRole::LogicUpdateJob(class CSettler * a2) {
   
   int v2; // eax
   int v3; // eax
@@ -85,7 +85,7 @@ void  CDarkGardenerRole::LogicUpdateJob(class CSettler *) {
 
 // address=[0x1567360]
 // Decompiled from int __thiscall CDarkGardenerRole::PostLoadInit(int this, CPropertySet *a2)
-void  CDarkGardenerRole::PostLoadInit(class CSettler *) {
+void  CDarkGardenerRole::PostLoadInit(class CSettler * a2) {
   
   int result; // eax
   int v4; // [esp+0h] [ebp-4h]
@@ -108,7 +108,7 @@ void  CDarkGardenerRole::PostLoadInit(class CSettler *) {
 
 // address=[0x15673d0]
 // Decompiled from char *__thiscall CDarkGardenerRole::CDarkGardenerRole(char *this, int a2)
- CDarkGardenerRole::CDarkGardenerRole(std::istream &) {
+ CDarkGardenerRole::CDarkGardenerRole(std::istream & a2) {
   
   int v2; // eax
   _DWORD v4[2]; // [esp+4h] [ebp-24h] BYREF
@@ -153,7 +153,7 @@ void  CDarkGardenerRole::PostLoadInit(class CSettler *) {
 
 // address=[0x1567560]
 // Decompiled from int __thiscall CDarkGardenerRole::Store(struct CPersistence *this, struct std::ostream *a2)
-void  CDarkGardenerRole::Store(std::ostream &) {
+void  CDarkGardenerRole::Store(std::ostream & a2) {
   
   unsigned int v2; // esi
   int v4; // [esp+0h] [ebp-80h]
@@ -279,7 +279,7 @@ int  CDarkGardenerRole::GetSettlerRole(void)const {
 
 // address=[0x15687f0]
 // Decompiled from bool __cdecl CDarkGardenerRole::IsLandChangeable(char a1)
-static bool __cdecl CDarkGardenerRole::IsLandChangeable(int) {
+bool __cdecl CDarkGardenerRole::IsLandChangeable(int a1) {
   
   return (a1 & 0xF0) != 32;
 }
@@ -287,7 +287,7 @@ static bool __cdecl CDarkGardenerRole::IsLandChangeable(int) {
 
 // address=[0x15884c0]
 // Decompiled from int __cdecl CDarkGardenerRole::Load(int a1)
-static class CDarkGardenerRole * __cdecl CDarkGardenerRole::Load(std::istream &) {
+class CDarkGardenerRole * __cdecl CDarkGardenerRole::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
@@ -314,7 +314,7 @@ static class CDarkGardenerRole * __cdecl CDarkGardenerRole::Load(std::istream &)
 
 // address=[0x15678c0]
 // Decompiled from int __thiscall CDarkGardenerRole::GetNextJob(CDarkGardenerRole *this, struct CSettler *a2)
-void  CDarkGardenerRole::GetNextJob(class CSettler *) {
+void  CDarkGardenerRole::GetNextJob(class CSettler * a2) {
   
   CDarkGardenerRole *v3; // [esp+0h] [ebp-4h]
 
@@ -328,7 +328,7 @@ void  CDarkGardenerRole::GetNextJob(class CSettler *) {
 
 // address=[0x1567900]
 // Decompiled from void __thiscall CDarkGardenerRole::TakeJob(CDarkGardenerRole *this, struct CSettler *a2)
-void  CDarkGardenerRole::TakeJob(class CSettler *) {
+void  CDarkGardenerRole::TakeJob(class CSettler * a2) {
   
   const struct CEntityTask *ActualTask; // eax
   unsigned int v3; // eax
@@ -429,7 +429,7 @@ LABEL_15:
 
 // address=[0x1567c90]
 // Decompiled from int __thiscall CDarkGardenerRole::Init(int this, CPropertySet *a2)
-void  CDarkGardenerRole::Init(class CSettler *) {
+void  CDarkGardenerRole::Init(class CSettler * a2) {
   
   int result; // eax
 
@@ -450,7 +450,7 @@ void  CDarkGardenerRole::Init(class CSettler *) {
 
 // address=[0x1567d10]
 // Decompiled from int __thiscall CDarkGardenerRole::ConvertEventIntoGoal(  CDarkGardenerRole *this,  struct CSettler *a2,  struct CEntityEvent *a3)
-void  CDarkGardenerRole::ConvertEventIntoGoal(class CSettler *,class CEntityEvent *) {
+void  CDarkGardenerRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent * a3) {
   
   int v3; // eax
   int v4; // eax
@@ -530,7 +530,7 @@ void  CDarkGardenerRole::ConvertEventIntoGoal(class CSettler *,class CEntityEven
 
 // address=[0x1567ee0]
 // Decompiled from int __thiscall CDarkGardenerRole::WorkIsDone(CDarkGardenerRole *this, struct CSettler *a2)
-void  CDarkGardenerRole::WorkIsDone(class CSettler *) {
+void  CDarkGardenerRole::WorkIsDone(class CSettler * a2) {
   
   int v2; // eax
   int v3; // eax
@@ -547,7 +547,7 @@ void  CDarkGardenerRole::WorkIsDone(class CSettler *) {
 
 // address=[0x1567f30]
 // Decompiled from bool __thiscall CDarkGardenerRole::CheckPosition(CDarkGardenerRole *this, int a2, int a3, bool a4)
-bool  CDarkGardenerRole::CheckPosition(int,int,bool) {
+bool  CDarkGardenerRole::CheckPosition(int a2, int a3, bool a4) {
   
   char v5; // al
   int v6; // [esp+4h] [ebp-8h]
@@ -579,7 +579,7 @@ bool  CDarkGardenerRole::CheckPosition(int,int,bool) {
 
 // address=[0x1568020]
 // Decompiled from char __thiscall CDarkGardenerRole::SearchPosition(CDarkGardenerRole *this, struct CSettler *a2)
-bool  CDarkGardenerRole::SearchPosition(class CSettler *) {
+bool  CDarkGardenerRole::SearchPosition(class CSettler * a2) {
   
   int v2; // eax
   int v3; // esi

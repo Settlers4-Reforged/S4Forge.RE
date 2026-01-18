@@ -4,7 +4,7 @@
 
 // address=[0x1425d80]
 // Decompiled from int __thiscall CDestructor::CDestructor(int this, int a2)
- CDestructor::CDestructor(class CDestructionPhase) {
+ CDestructor::CDestructor(class CDestructionPhase a2) {
   
   CDestructionManager *v2; // eax
 
@@ -18,7 +18,7 @@
 
 // address=[0x2f055a0]
 // Decompiled from bool __thiscall CDestructor::operator>(_DWORD *this, int a2)
-bool  CDestructor::operator>(class CDestructor const &)const {
+bool  CDestructor::operator>(class CDestructor const & a2)const {
   
   return CDestructionPhase::operator>(this + 1, (_DWORD *)(a2 + 4));
 }

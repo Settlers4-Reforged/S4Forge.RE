@@ -1,13 +1,15 @@
 #ifndef CAITASKFORCE_H
 #define CAITASKFORCE_H
 
+#include "defines.h"
+
 class CAITaskForce : public IS4ChunkObject {
 public:
     // address=[0x12fce10]
     class CAITaskForce *  AssociatedTaskForce(void)const;
 
     // address=[0x12fcf20]
-    void  ClearFlagBit(unsigned int);
+    void  ClearFlagBit(unsigned int a2);
 
     // address=[0x12fcf50]
     int  CmdGoal(void)const;
@@ -31,7 +33,7 @@ public:
     int  NumberOfEntities(void)const;
 
     // address=[0x12fd660]
-    void  SetFlagBit(unsigned int);
+    void  SetFlagBit(unsigned int a2);
 
     // address=[0x12fd710]
     enum T_AI_TASK_FORCE_STATUS  Status(void)const;
@@ -52,7 +54,7 @@ public:
     void  ClearEntityAddedFlag(void);
 
     // address=[0x13039b0]
-    void  SetTimeStamp(unsigned int);
+    void  SetTimeStamp(unsigned int a2);
 
     // address=[0x13039f0]
     unsigned int  TimeStamp(void)const;
@@ -64,10 +66,10 @@ public:
     unsigned int  StatusTimeStamp(void)const;
 
     // address=[0x1319810]
-    virtual bool  NewCommand(int,int,int);
+    virtual bool  NewCommand(int a2, int a3, int a4);
 
     // address=[0x1319830]
-    virtual int  NumberOfEntities(enum T_AI_WARRIOR_TYPE)const;
+    virtual int  NumberOfEntities(enum T_AI_WARRIOR_TYPE a1)const;
 
     // address=[0x1321b40]
     enum T_AI_TASK_FORCE_CLASS  Class(void)const;
@@ -79,43 +81,43 @@ public:
     virtual void  Release(void);
 
     // address=[0x1327180]
-    void  ChangeType(enum T_AI_TASK_FORCE_TYPE);
+    void  ChangeType(enum T_AI_TASK_FORCE_TYPE a2);
 
     // address=[0x1327260]
-    virtual enum T_RESULT  CAITaskForce::AddEntity(class CAIEntityInfo *,enum CAITaskForce::T_POSITION);
+    virtual enum T_RESULT  CAITaskForce::AddEntity(class CAIEntityInfo * a2, enum CAITaskForce::T_POSITION a3);
 
     // address=[0x13275f0]
-    enum T_RESULT  CAITaskForce::AddEntity(int,enum CAITaskForce::T_POSITION);
+    enum T_RESULT  CAITaskForce::AddEntity(int a2, enum CAITaskForce::T_POSITION a3);
 
     // address=[0x1327690]
-    virtual enum T_RESULT  CAITaskForce::RemoveEntity(class CAIEntityInfo *);
+    virtual enum T_RESULT  CAITaskForce::RemoveEntity(class CAIEntityInfo * a2);
 
     // address=[0x13279f0]
-    enum T_RESULT  CAITaskForce::RemoveEntity(int);
+    enum T_RESULT  CAITaskForce::RemoveEntity(int a2);
 
     // address=[0x1327a30]
     virtual void  RemoveAllEntities(void);
 
     // address=[0x1327b40]
-    void  SetAssociatedTaskForce(class CAITaskForce *);
+    void  SetAssociatedTaskForce(class CAITaskForce * a2);
 
     // address=[0x1327c70]
     void  ClearAssociatedTaskForce(void);
 
     // address=[0x1327cd0]
-    virtual void  Load(class IS4Chunk &);
+    virtual void  Load(class IS4Chunk & a2);
 
     // address=[0x1327e60]
-    virtual void  Save(class IS4Chunk &);
+    virtual void  Save(class IS4Chunk & a2);
 
     // address=[0x1328020]
-    bool  IsGoalValid(enum CAITaskForce::T_GOAL_TYPE);
+    bool  IsGoalValid(enum CAITaskForce::T_GOAL_TYPE a2);
 
     // address=[0x13280c0]
     char const *  ShortName(void)const;
 
     // address=[0x13280e0]
-    bool  GetPositionOfFirstEntity(int &,int &);
+    bool  GetPositionOfFirstEntity(int & a2, int & a3);
 
     // address=[0x132a520]
     class CAITaskForceGroup const *  TaskForceGroup(void)const;
@@ -127,20 +129,20 @@ public:
     bool  GoalIsPosition(void)const;
 
     // address=[0x132ec90]
-    void  SetWaitCounter(unsigned int);
+    void  SetWaitCounter(unsigned int a2);
 
     // address=[0x132ece0]
     int  State(void)const;
 
 protected:
     // address=[0x13197f0]
-    virtual bool  IsAddEntityOk(int);
+    virtual bool  IsAddEntityOk(int a2);
 
     // address=[0x1326f40]
-     CAITaskForce(int,enum T_AI_TASK_FORCE_CLASS,enum T_AI_TASK_FORCE_TYPE,int);
+     CAITaskForce(int a2, enum T_AI_TASK_FORCE_CLASS a3, enum T_AI_TASK_FORCE_TYPE a4, int a5);
 
     // address=[0x13281a0]
-    void  SetCommand(int,int,int);
+    void  SetCommand(int a2, int a3, int a4);
 
     // address=[0x1328240]
     void  MarkGoalAsEntity(void);
@@ -149,34 +151,34 @@ protected:
     void  MarkGoalAsPosition(void);
 
     // address=[0x132a4a0]
-    unsigned int  DecWaitCounter(unsigned int);
+    unsigned int  DecWaitCounter(unsigned int a2);
 
     // address=[0x132e810]
     void  ActivateNextState(void);
 
     // address=[0x132e870]
-    void  ClearInternalFlagBit(unsigned int);
+    void  ClearInternalFlagBit(unsigned int a2);
 
     // address=[0x132e8d0]
-    void  ClearStateFlagBit(unsigned int);
+    void  ClearStateFlagBit(unsigned int a2);
 
     // address=[0x132ea30]
-    bool  IsTaskForceExState(int);
+    bool  IsTaskForceExState(int a2);
 
     // address=[0x132eb20]
-    void  SetNewStatusAndState(enum T_AI_TASK_FORCE_STATUS,int,int);
+    void  SetNewStatusAndState(enum T_AI_TASK_FORCE_STATUS a2, int a3, int a4);
 
     // address=[0x132eb60]
-    void  SetState(int);
+    void  SetState(int a2);
 
     // address=[0x132eb80]
-    void  SetStateEx(int,int);
+    void  SetStateEx(int a2, int a3);
 
     // address=[0x132ebf0]
-    void  SetStateFlagBit(unsigned int);
+    void  SetStateFlagBit(unsigned int a2);
 
     // address=[0x132ec50]
-    void  SetStatus(enum T_AI_TASK_FORCE_STATUS);
+    void  SetStatus(enum T_AI_TASK_FORCE_STATUS a2);
 
 };
 

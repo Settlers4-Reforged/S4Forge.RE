@@ -1,16 +1,18 @@
 #ifndef CAIECOSECTORAIEX_H
 #define CAIECOSECTORAIEX_H
 
+#include "defines.h"
+
 class CAIEcoSectorAIEx : public IAIUnknown {
 public:
     // address=[0x13098e0]
-     CAIEcoSectorAIEx(class IAISectorAI *,int);
+     CAIEcoSectorAIEx(class IAISectorAI * a2, int a3);
 
     // address=[0x1309a50]
      ~CAIEcoSectorAIEx(void);
 
     // address=[0x1309b30]
-    static class CAIEcoSectorAIEx * __cdecl CreateEcoSectorAIEx(class IAISectorAI *,int);
+    static class CAIEcoSectorAIEx * __cdecl CreateEcoSectorAIEx(class IAISectorAI * a1, int a2);
 
     // address=[0x1309bc0]
     virtual void  Execute(void);
@@ -31,7 +33,7 @@ public:
     int  EcoSectorId(void)const;
 
     // address=[0x13261b0]
-    void  PostAIEvent(int,int,int,int);
+    void  PostAIEvent(int a2, int a3, int a4, int a5);
 
 };
 

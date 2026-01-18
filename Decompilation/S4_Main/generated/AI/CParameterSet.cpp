@@ -42,7 +42,7 @@ int  CParameterSet::size(void) {
 
 // address=[0x2f3f610]
 // Decompiled from int __thiscall CParameterSet::elementAt(CDynList **this, int a2)
-class CParam *  CParameterSet::elementAt(int) {
+class CParam *  CParameterSet::elementAt(int a2) {
   
   return CDynList::elementAt(this[3], a2);
 }
@@ -50,7 +50,7 @@ class CParam *  CParameterSet::elementAt(int) {
 
 // address=[0x2f3f630]
 // Decompiled from int __thiscall CParameterSet::NewParameterSet(CDynList **this, struct CParam *a2)
-void  CParameterSet::NewParameterSet(class CParam *) {
+void  CParameterSet::NewParameterSet(class CParam * a2) {
   
   return CDynList::addElement(this[3], a2);
 }

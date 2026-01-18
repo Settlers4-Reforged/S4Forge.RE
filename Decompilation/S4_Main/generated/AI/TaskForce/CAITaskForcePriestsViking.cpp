@@ -4,7 +4,7 @@
 
 // address=[0x132ba20]
 // Decompiled from int __thiscall CAITaskForcePriestsViking::ChooseMilitarySpell(  CAITaskForcePriestsViking *this,  const struct SCountFightersResult *a2,  int a3)
-int  CAITaskForcePriestsViking::ChooseMilitarySpell(struct SCountFightersResult const &,int) {
+int  CAITaskForcePriestsViking::ChooseMilitarySpell(struct SCountFightersResult const & a2, int a3) {
   
   unsigned int v3; // esi
   unsigned int v4; // eax
@@ -52,7 +52,7 @@ int  CAITaskForcePriestsViking::ChooseMilitarySpell(struct SCountFightersResult 
 
 // address=[0x132bb20]
 // Decompiled from int __thiscall CAITaskForcePriestsViking::ChooseMilitarySpellDestination(  CAITaskForcePriestsViking *this,  int a2,  int a3,  int a4,  int a5)
-int  CAITaskForcePriestsViking::ChooseMilitarySpellDestination(int,int,int,int) {
+int  CAITaskForcePriestsViking::ChooseMilitarySpellDestination(int a2, int a3, int a4, int a5) {
   
   int v5; // eax
   int result; // eax
@@ -93,7 +93,7 @@ CAITaskForcePriestsViking__ChooseMilitarySpellDestination___def_172BB45:
 
 // address=[0x132e5a0]
 // Decompiled from _DWORD *__thiscall CAITaskForcePriestsViking::CAITaskForcePriestsViking(_DWORD *this, int a2, int a3, int a4)
- CAITaskForcePriestsViking::CAITaskForcePriestsViking(int,enum T_AI_TASK_FORCE_TYPE,int) {
+ CAITaskForcePriestsViking::CAITaskForcePriestsViking(int a2, enum T_AI_TASK_FORCE_TYPE a3, int a4) {
   
   CAITaskForcePriests::CAITaskForcePriests(this, a2, a3, a4);
   *this = CAITaskForcePriestsViking::_vftable_;

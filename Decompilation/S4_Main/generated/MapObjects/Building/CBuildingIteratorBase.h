@@ -1,6 +1,8 @@
 #ifndef CBUILDINGITERATORBASE_H
 #define CBUILDINGITERATORBASE_H
 
+#include "defines.h"
+
 class CBuildingIteratorBase {
 public:
     // address=[0x1317300]
@@ -11,10 +13,10 @@ public:
 
 protected:
     // address=[0x1317340]
-    bool  BuildingValid(int);
+    bool  BuildingValid(int a2);
 
     // address=[0x13173a0]
-    void  Init(int);
+    void  Init(int a2);
 
 };
 

@@ -1,6 +1,8 @@
 #ifndef CGROUPWALKING_H
 #define CGROUPWALKING_H
 
+#include "defines.h"
+
 class CGroupWalking {
 public:
     // address=[0x15f65e0]

@@ -4,7 +4,7 @@
 
 // address=[0x14cbb00]
 // Decompiled from CStateVideo *__cdecl CStateVideo::DynamicCreateFunc(void *a1)
-static class CGameState * __cdecl CStateVideo::DynamicCreateFunc(void *) {
+class CGameState * __cdecl CStateVideo::DynamicCreateFunc(void * a1) {
   
   CStateVideo *C; // [esp+Ch] [ebp-10h]
 
@@ -193,7 +193,7 @@ bool  CStateVideo::Perform(void) {
 
 // address=[0x14cc060]
 // Decompiled from char __thiscall CStateVideo::OnEvent(CStateVideo *this, struct CEvn_Event *a2)
-bool  CStateVideo::OnEvent(class CEvn_Event &) {
+bool  CStateVideo::OnEvent(class CEvn_Event & a2) {
   
   char result; // al
 
@@ -241,7 +241,7 @@ CStateVideo__OnEvent___def_18CC08F:
 
 // address=[0x14cc150]
 // Decompiled from char __thiscall CStateVideo::StartVideo(CStateVideo *this, void *a2)
-bool  CStateVideo::StartVideo(void *) {
+bool  CStateVideo::StartVideo(void * a2) {
   
   int CursorShape; // eax
   char *v4; // eax

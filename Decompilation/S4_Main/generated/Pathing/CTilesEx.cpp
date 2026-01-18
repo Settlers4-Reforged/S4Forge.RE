@@ -4,7 +4,7 @@
 
 // address=[0x15e3040]
 // Decompiled from int **__cdecl CTilesEx::InitTiles(struct CLinkList *a1)
-static void __cdecl CTilesEx::InitTiles(class CLinkList &) {
+void __cdecl CTilesEx::InitTiles(class CLinkList & a1) {
   
   int **v1; // eax
   int **v2; // eax
@@ -55,7 +55,7 @@ static void __cdecl CTilesEx::InitTiles(class CLinkList &) {
 
 // address=[0x15e31c0]
 // Decompiled from void __thiscall CTilesEx::DeactivateTilesPushBackMode(void *this)
-static void __cdecl CTilesEx::DeactivateTilesPushBackMode(void) {
+void __cdecl CTilesEx::DeactivateTilesPushBackMode(void) {
   
   int *v2; // [esp+0h] [ebp-4h]
 
@@ -85,7 +85,7 @@ static void __cdecl CTilesEx::DeactivateTilesPushBackMode(void) {
 
 // address=[0x15e3250]
 // Decompiled from int CTilesEx::CalculateOwnerBits()
-static void __cdecl CTilesEx::CalculateOwnerBits(void) {
+void __cdecl CTilesEx::CalculateOwnerBits(void) {
   
   return COwnerMapEx::CalculateOwnerBits();
 }
@@ -93,7 +93,7 @@ static void __cdecl CTilesEx::CalculateOwnerBits(void) {
 
 // address=[0x15e3260]
 // Decompiled from __int16 __cdecl CTilesEx::InsertTileIntoSquareList(int a1)
-static void __cdecl CTilesEx::InsertTileIntoSquareList(int) {
+void __cdecl CTilesEx::InsertTileIntoSquareList(int a1) {
   
   int **v1; // eax
   __int16 result; // ax
@@ -179,7 +179,7 @@ static void __cdecl CTilesEx::InsertTileIntoSquareList(int) {
 
 // address=[0x15e34f0]
 // Decompiled from int **__cdecl CTilesEx::DeleteTileFromSquareList(int a1)
-static void __cdecl CTilesEx::DeleteTileFromSquareList(int) {
+void __cdecl CTilesEx::DeleteTileFromSquareList(int a1) {
   
   int **v1; // eax
   int **v2; // eax
@@ -257,7 +257,7 @@ static void __cdecl CTilesEx::DeleteTileFromSquareList(int) {
 
 // address=[0x15e36f0]
 // Decompiled from int CTilesEx::CalculateListOfFreeTiles()
-static void __cdecl CTilesEx::CalculateListOfFreeTiles(void) {
+void __cdecl CTilesEx::CalculateListOfFreeTiles(void) {
   
   int **v0; // eax
   int v2; // [esp+0h] [ebp-10h]
@@ -297,7 +297,7 @@ static void __cdecl CTilesEx::CalculateListOfFreeTiles(void) {
 
 // address=[0x15e3810]
 // Decompiled from int CTilesEx::CalculateSquareTileLists()
-static void __cdecl CTilesEx::CalculateSquareTileLists(void) {
+void __cdecl CTilesEx::CalculateSquareTileLists(void) {
   
   int result; // eax
   int **v1; // eax
@@ -320,7 +320,7 @@ static void __cdecl CTilesEx::CalculateSquareTileLists(void) {
 
 // address=[0x15e3880]
 // Decompiled from int *CTilesEx::PushTileUndef()
-static int __cdecl CTilesEx::PushTileUndef(void) {
+int __cdecl CTilesEx::PushTileUndef(void) {
   
   int v0; // ecx
   int v2; // ecx
@@ -375,7 +375,7 @@ static int __cdecl CTilesEx::PushTileUndef(void) {
 
 // address=[0x15e3a10]
 // Decompiled from int __cdecl CTilesEx::PushTilesBackUndef(int a1)
-static int __cdecl CTilesEx::PushTilesBackUndef(int) {
+int __cdecl CTilesEx::PushTilesBackUndef(int a1) {
   
   int v2; // [esp+0h] [ebp-4h]
 
@@ -400,7 +400,7 @@ static int __cdecl CTilesEx::PushTilesBackUndef(int) {
 
 // address=[0x15e3ac0]
 // Decompiled from int *__cdecl CTilesEx::PushTile(DWORD a1, DWORD a2)
-static int __cdecl CTilesEx::PushTile(int,int) {
+int __cdecl CTilesEx::PushTile(int a1, int a2) {
   
   int **v2; // eax
   struct CLinkList *v4; // [esp-4h] [ebp-Ch]
@@ -419,7 +419,7 @@ static int __cdecl CTilesEx::PushTile(int,int) {
 
 // address=[0x15e3b30]
 // Decompiled from int *__cdecl CTilesEx::DuplicateTile(int a1)
-static int __cdecl CTilesEx::DuplicateTile(int) {
+int __cdecl CTilesEx::DuplicateTile(int a1) {
   
   int **v1; // eax
   struct CLinkList *v2; // eax
@@ -444,7 +444,7 @@ static int __cdecl CTilesEx::DuplicateTile(int) {
 
 // address=[0x15e3bb0]
 // Decompiled from int __cdecl CTilesEx::DeleteTile(int *a1)
-static void __cdecl CTilesEx::DeleteTile(int) {
+void __cdecl CTilesEx::DeleteTile(int a1) {
   
   int result; // eax
   int v2; // eax
@@ -499,7 +499,7 @@ static void __cdecl CTilesEx::DeleteTile(int) {
 
 // address=[0x15e7050]
 // Decompiled from bool __cdecl CTilesEx::IsUsedRealTile(int a1)
-static bool __cdecl CTilesEx::IsUsedRealTile(int) {
+bool __cdecl CTilesEx::IsUsedRealTile(int a1) {
   
   int **v1; // eax
   char v3; // [esp+0h] [ebp-4h]
@@ -516,7 +516,7 @@ static bool __cdecl CTilesEx::IsUsedRealTile(int) {
 
 // address=[0x15e71c0]
 // Decompiled from bool __cdecl CTilesEx::IsValidUsedTile(int a1)
-static bool __cdecl CTilesEx::IsValidUsedTile(int) {
+bool __cdecl CTilesEx::IsValidUsedTile(int a1) {
   
   int **v1; // eax
   char v3; // [esp+0h] [ebp-4h]
@@ -533,7 +533,7 @@ static bool __cdecl CTilesEx::IsValidUsedTile(int) {
 
 // address=[0x15e7220]
 // Decompiled from int CTilesEx::LastUsedTileId()
-static int __cdecl CTilesEx::LastUsedTileId(void) {
+int __cdecl CTilesEx::LastUsedTileId(void) {
   
   return CTilesEx::m_iLastUsedTileId;
 }
@@ -541,7 +541,7 @@ static int __cdecl CTilesEx::LastUsedTileId(void) {
 
 // address=[0x15f5230]
 // Decompiled from int CTilesEx::NumberOfUsedTiles()
-static int __cdecl CTilesEx::NumberOfUsedTiles(void) {
+int __cdecl CTilesEx::NumberOfUsedTiles(void) {
   
   return CTilesEx::m_iNumberOfUsedTiles;
 }

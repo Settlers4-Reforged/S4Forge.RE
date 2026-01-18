@@ -1,6 +1,8 @@
 #ifndef CMILITARYBUILDINGINFO_H
 #define CMILITARYBUILDINGINFO_H
 
+#include "defines.h"
+
 class CMilitaryBuildingInfo : public CBuildingInfo {
 public:
     // address=[0x1454710]

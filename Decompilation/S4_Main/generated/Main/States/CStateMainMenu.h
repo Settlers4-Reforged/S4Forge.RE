@@ -1,13 +1,15 @@
 #ifndef CSTATEMAINMENU_H
 #define CSTATEMAINMENU_H
 
+#include "defines.h"
+
 class CStateMainMenu : public CGuiGameState {
 public:
     // address=[0x14c16a0]
-    static class CGameState * __cdecl DynamicCreateFunc(void *);
+    static class CGameState * __cdecl DynamicCreateFunc(void * a1);
 
     // address=[0x14c1740]
-    static bool __cdecl PreLoadGame(std::wstring);
+    static bool __cdecl PreLoadGame(std::wstring a1);
 
     // address=[0x14c1bc0]
      CStateMainMenu(void *);
@@ -19,7 +21,7 @@ public:
     virtual bool  Perform(void);
 
     // address=[0x14c2420]
-    virtual bool  OnEvent(class CEvn_Event &);
+    virtual bool  OnEvent(class CEvn_Event & a2);
 
     // address=[0x14c2e20]
     virtual bool  CanProcessInvites(void);

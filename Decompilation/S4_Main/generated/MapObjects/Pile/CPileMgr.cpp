@@ -4,7 +4,7 @@
 
 // address=[0x12fd1f0]
 // Decompiled from unsigned __int8 *__cdecl CPileMgr::GetPilePtr(int a1)
-static class CPile * __cdecl CPileMgr::GetPilePtr(int) {
+class CPile * __cdecl CPileMgr::GetPilePtr(int a1) {
   
   unsigned __int8 *v3; // [esp+8h] [ebp-4h]
 
@@ -18,7 +18,7 @@ static class CPile * __cdecl CPileMgr::GetPilePtr(int) {
 
 // address=[0x1438a40]
 // Decompiled from IEntity *__stdcall CPileMgr::operator[](int a1)
-class CPile &  CPileMgr::operator[](int) {
+class CPile &  CPileMgr::operator[](int a1) {
   
   IEntity *v2; // [esp+4h] [ebp-4h]
 
@@ -78,7 +78,7 @@ void  CPileMgr::Clear(void) {
 
 // address=[0x155e970]
 // Decompiled from char *__thiscall CPileMgr::LoadPileData(CPileMgr *this, struct S4::CMapFile *a2, int a3)
-void  CPileMgr::LoadPileData(class S4::CMapFile &,int) {
+void  CPileMgr::LoadPileData(class S4::CMapFile & a2, int a3) {
   
   char *result; // eax
   char *v5; // [esp+8h] [ebp-14h]
@@ -115,7 +115,7 @@ void  CPileMgr::LoadPileData(class S4::CMapFile &,int) {
 
 // address=[0x155ea20]
 // Decompiled from int __thiscall CPileMgr::AddPile(  CPileMgr *this,  int a2,  int a3,  unsigned int a4,  unsigned int a5,  unsigned int a6,  int a7,  int a8,  int a9,  int a10)
-int  CPileMgr::AddPile(int,int,int,int,int,int,int,int,int) {
+int  CPileMgr::AddPile(int a2, int a3, int a4, int a5, int a6, int a7, int a8, int a9, int a10) {
   
   int v11; // [esp-18h] [ebp-54h] BYREF
   int v12; // [esp-14h] [ebp-50h]
@@ -195,7 +195,7 @@ int  CPileMgr::AddPile(int,int,int,int,int,int,int,int,int) {
 
 // address=[0x155ec40]
 // Decompiled from void __thiscall CPileMgr::DeletePile(CPileMgr *this, int a2)
-void  CPileMgr::DeletePile(int) {
+void  CPileMgr::DeletePile(int a2) {
   
   unsigned __int8 *v2; // eax
   unsigned __int8 *v3; // eax
@@ -229,7 +229,7 @@ void  CPileMgr::DeletePile(int) {
 
 // address=[0x155ed50]
 // Decompiled from void __thiscall CPileMgr::DeletePileUnforeseen(CPileMgr *this, int a2)
-void  CPileMgr::DeletePileUnforeseen(int) {
+void  CPileMgr::DeletePileUnforeseen(int a2) {
   
   if ( a2 <= 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\PileMgr.cpp", 538, "_iPileId>0") == 1 )
     __debugbreak();
@@ -248,7 +248,7 @@ void  CPileMgr::DeletePileUnforeseen(int) {
 
 // address=[0x155ede0]
 // Decompiled from int __thiscall CPileMgr::GetNearestPile(CPileMgr *this, int a2, int a3, int a4)
-int  CPileMgr::GetNearestPile(int,int,int) {
+int  CPileMgr::GetNearestPile(int a2, int a3, int a4) {
   
   int v5; // esi
   int v6; // eax
@@ -295,7 +295,7 @@ int  CPileMgr::GetNearestPile(int,int,int) {
 
 // address=[0x155eef0]
 // Decompiled from int __thiscall CPileMgr::SearchSpaceForGoods(CPileMgr *this, int a2, int a3, unsigned int a4, unsigned int a5)
-void  CPileMgr::SearchSpaceForGoods(int,int,int,int) {
+void  CPileMgr::SearchSpaceForGoods(int a2, int a3, int a4, int a5) {
   
   int result; // eax
   int v6; // esi
@@ -561,7 +561,7 @@ void  CPileMgr::Load(class S4::CMapFile &) {
 
 // address=[0x155f670]
 // Decompiled from int __thiscall CPileMgr::DbgCheckPiles(_DWORD *this, int a2)
-int  CPileMgr::DbgCheckPiles(int) {
+int  CPileMgr::DbgCheckPiles(int a2) {
   
   int UsedId; // [esp+0h] [ebp-1Ch]
   struct CPile *PilePtr; // [esp+8h] [ebp-14h]
@@ -598,7 +598,7 @@ int  CPileMgr::DbgCheckPiles(int) {
 
 // address=[0x155f760]
 // Decompiled from int __thiscall CPileMgr::ConvertGoodType(CPileMgr *this, int a2, int a3)
-int  CPileMgr::ConvertGoodType(int,int) {
+int  CPileMgr::ConvertGoodType(int a2, int a3) {
   
   int v4; // [esp+4h] [ebp-Ch]
   int v5; // [esp+8h] [ebp-8h]
@@ -629,7 +629,7 @@ int  CPileMgr::ConvertGoodType(int,int) {
 
 // address=[0x155f820]
 // Decompiled from CProductionPileRole *__cdecl CPileMgr::CreatePileRole(int a1)
-static class IPileRole * __cdecl CPileMgr::CreatePileRole(int) {
+class IPileRole * __cdecl CPileMgr::CreatePileRole(int a1) {
   
   CProductionPileRole *result; // eax
   CBuildingSitePileRole *v2; // [esp+1Ch] [ebp-40h]
@@ -717,7 +717,7 @@ static class IPileRole * __cdecl CPileMgr::CreatePileRole(int) {
 
 // address=[0x155e750]
 // Decompiled from unsigned int __thiscall CPileMgr::Alloc(CPileMgr *this, unsigned int a2)
-void *  CPileMgr::Alloc(unsigned int) {
+void *  CPileMgr::Alloc(unsigned int a2) {
   
   return MemoryAllocator::allocate((unsigned int *)this, a2);
 }
@@ -725,7 +725,7 @@ void *  CPileMgr::Alloc(unsigned int) {
 
 // address=[0x155e7b0]
 // Decompiled from void __thiscall CPileMgr::Dealloc(CPileMgr *this, void *a2)
-void  CPileMgr::Dealloc(void *) {
+void  CPileMgr::Dealloc(void * a2) {
   
   MemoryAllocator::deallocate(this, a2);
 }
@@ -733,7 +733,7 @@ void  CPileMgr::Dealloc(void *) {
 
 // address=[0x155fa90]
 // Decompiled from int __thiscall CPileMgr::TracePile(CPileMgr *this, int a2)
-void  CPileMgr::TracePile(int) {
+void  CPileMgr::TracePile(int a2) {
   
   int v2; // eax
   int v3; // eax
@@ -788,7 +788,7 @@ void  CPileMgr::TracePile(int) {
 
 // address=[0x155fb30]
 // Decompiled from int __cdecl CPileMgr::LoadPileRole(int a1, int a2)
-static class IPileRole * __cdecl CPileMgr::LoadPileRole(std::istream &,int) {
+class IPileRole * __cdecl CPileMgr::LoadPileRole(std::istream & a1, int a2) {
   
   int result; // eax
   _DWORD pExceptionObject[2]; // [esp+0h] [ebp-8h] BYREF
@@ -831,7 +831,7 @@ static class IPileRole * __cdecl CPileMgr::LoadPileRole(std::istream &,int) {
 
 // address=[0x155fc30]
 // Decompiled from void __thiscall CPileMgr::CheckOutPile(CPileMgr *this, int a2)
-void  CPileMgr::CheckOutPile(int) {
+void  CPileMgr::CheckOutPile(int a2) {
   
   ;
 }

@@ -15,7 +15,7 @@ char  DNameStatusNode::getLastChar(void)const {
 
 // address=[0x308a5e0]
 // Decompiled from char *__thiscall DNameStatusNode::getString(DNameStatusNode *this, char *a2, char *a3)
-char *  DNameStatusNode::getString(char *,char *)const {
+char *  DNameStatusNode::getString(char * a2, char * a3)const {
   
   if ( *((_DWORD *)this + 1) == 1 )
     return (char *)getStringHelper(a2, (int)a3, " ?? ", 4u);
@@ -34,7 +34,7 @@ int  DNameStatusNode::length(void)const {
 
 // address=[0x308d0a0]
 // Decompiled from char *__cdecl DNameStatusNode::make(unsigned int a1)
-static class DNameStatusNode * __cdecl DNameStatusNode::make(enum DNameStatus) {
+class DNameStatusNode * __cdecl DNameStatusNode::make(enum DNameStatus a1) {
   
   if ( (DNameStatusNode::make_::_2_::_local_static_guard_ & 1) == 0 )
   {
@@ -53,7 +53,7 @@ static class DNameStatusNode * __cdecl DNameStatusNode::make(enum DNameStatus) {
 
 // address=[0x3081170]
 // Decompiled from DNameNode *__thiscall DNameStatusNode::DNameStatusNode(DNameNode *this, int a2)
- DNameStatusNode::DNameStatusNode(enum DNameStatus) {
+ DNameStatusNode::DNameStatusNode(enum DNameStatus a2) {
   
   int v3; // [esp+0h] [ebp-8h]
 

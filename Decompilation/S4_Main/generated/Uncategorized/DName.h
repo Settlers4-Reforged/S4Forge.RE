@@ -1,82 +1,84 @@
 #ifndef DNAME_H
 #define DNAME_H
 
+#include "defines.h"
+
 class DName {
 public:
     // address=[0x3080430]
-     DName(char const * &,char);
+     DName(char const * & a2, char a3);
 
     // address=[0x30807a0]
      DName(class DName const &);
 
     // address=[0x30807d0]
-     DName(char);
+     DName(char a2);
 
     // address=[0x30808e0]
-     DName(class DName *);
+     DName(class DName * a2);
 
     // address=[0x3080a60]
-     DName(char const *);
+     DName(char const * a2);
 
     // address=[0x3080b90]
-     DName(enum DNameStatus);
+     DName(enum DNameStatus a2);
 
     // address=[0x3080cf0]
      DName(void);
 
     // address=[0x3080de0]
-     DName(__int64);
+     DName(__int64 a2);
 
     // address=[0x3080fc0]
-     DName(unsigned __int64);
+     DName(unsigned __int64 a2);
 
     // address=[0x30814b0]
-    class DName &  operator=(class DName const &);
+    class DName &  operator=(class DName const & a2);
 
     // address=[0x30814e0]
-    class DName &  operator=(char);
+    class DName &  operator=(char a2);
 
     // address=[0x30815f0]
-    class DName &  operator=(class DName *);
+    class DName &  operator=(class DName * a2);
 
     // address=[0x3081770]
-    class DName &  operator=(char const *);
+    class DName &  operator=(char const * a2);
 
     // address=[0x3081880]
-    class DName &  operator=(enum DNameStatus);
+    class DName &  operator=(enum DNameStatus a2);
 
     // address=[0x3081e50]
-    class DName  operator+(class DName const &)const;
+    class DName  operator+(class DName const & a2)const;
 
     // address=[0x3081ea0]
-    class DName  operator+(char)const;
+    class DName  operator+(char a2)const;
 
     // address=[0x3081ef0]
-    class DName  operator+(class DName *)const;
+    class DName  operator+(class DName * a2)const;
 
     // address=[0x3081f40]
-    class DName  operator+(char const *)const;
+    class DName  operator+(char const * a2)const;
 
     // address=[0x3081f90]
-    class DName  operator+(enum DNameStatus)const;
+    class DName  operator+(enum DNameStatus a2)const;
 
     // address=[0x3081fe0]
-    class DName &  operator+=(class DName const &);
+    class DName &  operator+=(class DName const & a2);
 
     // address=[0x3082060]
-    class DName &  operator+=(char);
+    class DName &  operator+=(char a2);
 
     // address=[0x3082100]
-    class DName &  operator+=(class DName *);
+    class DName &  operator+=(class DName * a2);
 
     // address=[0x30821e0]
-    class DName &  operator+=(char const *);
+    class DName &  operator+=(char const * a2);
 
     // address=[0x30822a0]
-    class DName &  operator+=(enum DNameStatus);
+    class DName &  operator+=(enum DNameStatus a2);
 
     // address=[0x30823d0]
-    class DName &  operator|=(class DName const &);
+    class DName &  operator|=(class DName const & a2);
 
     // address=[0x30849a0]
     char *  dbGetString(void)const;
@@ -85,10 +87,10 @@ public:
     char  getLastChar(void)const;
 
     // address=[0x308a4d0]
-    char *  getString(char *,char *)const;
+    char *  getString(char * a2, char * a3)const;
 
     // address=[0x308a530]
-    char *  getString(char *,int)const;
+    char *  getString(char * a2, int a3)const;
 
     // address=[0x308cd00]
     int  isArray(void)const;
@@ -149,10 +151,10 @@ public:
 
 private:
     // address=[0x3082540]
-    void  append(class DNameNode *);
+    void  append(class DNameNode * a2);
 
     // address=[0x3084b90]
-    void  doPchar(char const *,int);
+    void  doPchar(char const * a2, int a3);
 
 };
 

@@ -4,7 +4,7 @@
 
 // address=[0x1303d00]
 // Decompiled from int __thiscall CAIAgentTaskScheduler::Execute(CAINormalSectorAgent *this, int a2, int a3)
-unsigned int  CAIAgentTaskScheduler::Execute(unsigned int,unsigned int) {
+unsigned int  CAIAgentTaskScheduler::Execute(unsigned int a2, unsigned int a3) {
   
   struct CAINormalSectorAI *v3; // eax
 

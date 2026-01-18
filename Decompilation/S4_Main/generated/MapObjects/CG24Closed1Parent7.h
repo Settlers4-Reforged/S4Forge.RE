@@ -1,6 +1,8 @@
 #ifndef CG24CLOSED1PARENT7_H
 #define CG24CLOSED1PARENT7_H
 
+#include "defines.h"
+
 class CG24Closed1Parent7 {
 public:
     // address=[0x15d61d0]
@@ -13,7 +15,7 @@ public:
     int  Parent(void)const;
 
     // address=[0x15d6cf0]
-    void  Set(int,bool,int);
+    void  Set(int a2, bool a3, int a4);
 
     // address=[0x15d6db0]
     void  SetClosedFlag(void);

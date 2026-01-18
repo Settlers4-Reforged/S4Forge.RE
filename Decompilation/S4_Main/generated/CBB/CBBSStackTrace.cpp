@@ -4,7 +4,7 @@
 
 // address=[0x2f30fa0]
 // Decompiled from BBSupportLib::CBBSStackTrace *__thiscall BBSupportLib::CBBSStackTrace::CBBSStackTrace(  BBSupportLib::CBBSStackTrace *this,  void *a2,  void *a3,  const struct _CONTEXT *a4)
- BBSupportLib::CBBSStackTrace::CBBSStackTrace(void *,void *,struct _CONTEXT const &) {
+ BBSupportLib::CBBSStackTrace::CBBSStackTrace(void * a2, void * a3, struct _CONTEXT const & a4) {
   
   *(_DWORD *)this = a2;
   *((_DWORD *)this + 1) = a3;

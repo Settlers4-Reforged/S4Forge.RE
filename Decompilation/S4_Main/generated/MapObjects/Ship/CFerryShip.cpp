@@ -4,7 +4,7 @@
 
 // address=[0x14009a0]
 // Decompiled from int __cdecl CFerryShip::New(int a1)
-static class CPersistence * __cdecl CFerryShip::New(std::istream &) {
+class CPersistence * __cdecl CFerryShip::New(std::istream & a1) {
   
   if ( CFerryShip::operator new(0xD8u) )
     return CFerryShip::CFerryShip(a1);
@@ -96,7 +96,7 @@ void  CFerryShip::Delete(void) {
 
 // address=[0x1596500]
 // Decompiled from int __thiscall CFerryShip::GetMeetingPointXY(CFerryShip *this, int a2, unsigned int a3)
-int const  CFerryShip::GetMeetingPointXY(enum OBJ_TYPE,int) {
+int const  CFerryShip::GetMeetingPointXY(enum OBJ_TYPE a2, int a3) {
   
   int v3; // esi
   int v4; // esi
@@ -137,7 +137,7 @@ int const  CFerryShip::GetMeetingPointXY(enum OBJ_TYPE,int) {
 
 // address=[0x15965f0]
 // Decompiled from int __thiscall CFerryShip::Request(CPropertySheet *this, int a2)
-enum CFerryShip::TFerryRequestResult  CFerryShip::Request(int) {
+enum CFerryShip::TFerryRequestResult  CFerryShip::Request(int a2) {
   
   void **VehiclePtr; // eax
   int v4; // eax
@@ -291,7 +291,7 @@ enum CFerryShip::TFerryRequestResult  CFerryShip::Request(int) {
 
 // address=[0x15969f0]
 // Decompiled from _DWORD *__thiscall CFerryShip::FillDialog(CFerryShip *this, bool a2)
-void  CFerryShip::FillDialog(bool) {
+void  CFerryShip::FillDialog(bool a2) {
   
   unsigned int v2; // eax
   const struct CFerryShip::CCargo *v3; // eax
@@ -591,7 +591,7 @@ void  CFerryShip::Unload(void) {
 
 // address=[0x1597330]
 // Decompiled from char __thiscall CFerryShip::EmergencyReload(IEntity *this, int a2)
-bool  CFerryShip::EmergencyReload(int) {
+bool  CFerryShip::EmergencyReload(int a2) {
   
   int v2; // eax
   unsigned int v3; // eax
@@ -660,7 +660,7 @@ bool  CFerryShip::EmergencyReload(int) {
 
 // address=[0x1597530]
 // Decompiled from unsigned int __thiscall CFerryShip::EntityOrderCanceled(CFerryShip *this, int a2)
-void  CFerryShip::EntityOrderCanceled(int) {
+void  CFerryShip::EntityOrderCanceled(int a2) {
   
   unsigned int result; // eax
   int v3; // eax
@@ -745,7 +745,7 @@ void  CFerryShip::EntityOrderCanceled(int) {
 
 // address=[0x1597760]
 // Decompiled from void __thiscall CFerryShip::EntityEnter(CFerryShip *this, int a2)
-void  CFerryShip::EntityEnter(int) {
+void  CFerryShip::EntityEnter(int a2) {
   
   int v2; // [esp+0h] [ebp-Ch]
   unsigned int i; // [esp+4h] [ebp-8h]
@@ -772,7 +772,7 @@ void  CFerryShip::EntityEnter(int) {
 
 // address=[0x1597840]
 // Decompiled from bool __thiscall CFerryShip::CanLoad(CFerryShip *this, int a2, int a3)
-bool  CFerryShip::CanLoad(int,int) {
+bool  CFerryShip::CanLoad(int a2, int a3) {
   
   int CargoSize; // [esp+4h] [ebp-8h]
 
@@ -788,7 +788,7 @@ bool  CFerryShip::CanLoad(int,int) {
 
 // address=[0x15978d0]
 // Decompiled from char __thiscall CFerryShip::AddEntityToFerry(CFerryShip *this, int a2)
-bool  CFerryShip::AddEntityToFerry(int) {
+bool  CFerryShip::AddEntityToFerry(int a2) {
   
   int v3; // eax
   int v4; // eax
@@ -855,7 +855,7 @@ bool  CFerryShip::AddEntityToFerry(int) {
 
 // address=[0x1597aa0]
 // Decompiled from int __thiscall CFerryShip::CountCargo(CFerryShip *this, struct ICargoCounter *a2)
-void  CFerryShip::CountCargo(class ICargoCounter &) {
+void  CFerryShip::CountCargo(class ICargoCounter & a2) {
   
   int result; // eax
   int v3; // [esp+0h] [ebp-1Ch]
@@ -888,7 +888,7 @@ void  CFerryShip::CountCargo(class ICargoCounter &) {
 
 // address=[0x1597b50]
 // Decompiled from unsigned int __cdecl CFerryShip::operator new(unsigned int a1)
-static void * __cdecl CFerryShip::operator new(unsigned int) {
+void * __cdecl CFerryShip::operator new(unsigned int a1) {
   
   return CVehicleMgr::Alloc((CVehicleMgr *)&g_cVehicleMgr, a1);
 }
@@ -896,7 +896,7 @@ static void * __cdecl CFerryShip::operator new(unsigned int) {
 
 // address=[0x1597b70]
 // Decompiled from void __cdecl CFerryShip::operator delete(void *a1)
-static void __cdecl CFerryShip::operator delete(void *) {
+void __cdecl CFerryShip::operator delete(void * a1) {
   
   CVehicleMgr::Dealloc((CVehicleMgr *)&g_cVehicleMgr, a1);
 }
@@ -915,7 +915,7 @@ struct SGfxObjectInfo *  CFerryShip::GetGfxInfos(void) {
 
 // address=[0x1597bf0]
 // Decompiled from _DWORD *__thiscall CFerryShip::CFerryShip(_DWORD *this, int a2)
- CFerryShip::CFerryShip(std::istream &) {
+ CFerryShip::CFerryShip(std::istream & a2) {
   
   char v3; // [esp-10h] [ebp-7Ch] BYREF
   int v4; // [esp-Ch] [ebp-78h]
@@ -998,7 +998,7 @@ struct SGfxObjectInfo *  CFerryShip::GetGfxInfos(void) {
 
 // address=[0x1597e50]
 // Decompiled from int __thiscall CFerryShip::Store(int *this, struct std::ostream *a2)
-void  CFerryShip::Store(std::ostream &) {
+void  CFerryShip::Store(std::ostream & a2) {
   
   int result; // eax
   int v3; // eax
@@ -1054,7 +1054,7 @@ unsigned long  CFerryShip::ClassID(void)const {
 
 // address=[0x159bae0]
 // Decompiled from int __cdecl CFerryShip::GetCargoSize(int a1, int a2)
-static int __cdecl CFerryShip::GetCargoSize(int,int) {
+int __cdecl CFerryShip::GetCargoSize(int a1, int a2) {
   
   if ( a1 == 4 && (a2 == 5 || a2 == 4) )
     return 5;
@@ -1068,7 +1068,7 @@ static int __cdecl CFerryShip::GetCargoSize(int,int) {
 
 // address=[0x1598010]
 // Decompiled from CFerryShip *__thiscall CFerryShip::CFerryShip(  CFerryShip *this,  int a2,  int a3,  int a4,  int a5,  int a6,  int a7,  bool a8)
- CFerryShip::CFerryShip(int,int,int,int,int,int,bool) {
+ CFerryShip::CFerryShip(int a2, int a3, int a4, int a5, int a6, int a7, bool a8) {
   
   int v10; // [esp+0h] [ebp-4h]
 
@@ -1192,7 +1192,7 @@ bool  CFerryShip::OnLoad(void) {
 
 // address=[0x1598330]
 // Decompiled from int __thiscall CFerryShip::CalcDistanceToLand(CFerryShip *this, int *a2, int *a3)
-int  CFerryShip::CalcDistanceToLand(int &,int &) {
+int  CFerryShip::CalcDistanceToLand(int & a2, int & a3) {
   
   int v3; // esi
   int v4; // esi
@@ -1232,7 +1232,7 @@ int  CFerryShip::CalcDistanceToLand(int &,int &) {
 
 // address=[0x1598440]
 // Decompiled from char __thiscall CFerryShip::FindLoadPosition(CFerryShip *this, unsigned int a2, int *a3, int *a4)
-bool  CFerryShip::FindLoadPosition(int,int &,int &) {
+bool  CFerryShip::FindLoadPosition(int a2, int & a3, int & a4) {
   
   int v5; // eax
   int v6; // eax
@@ -1299,7 +1299,7 @@ bool  CFerryShip::FindLoadPosition(int,int &,int &) {
 
 // address=[0x15986b0]
 // Decompiled from char __thiscall CFerryShip::FindUnLoadPosition(CFerryShip *this, int a2, int *a3, int *a4)
-bool  CFerryShip::FindUnLoadPosition(int,int &,int &) {
+bool  CFerryShip::FindUnLoadPosition(int a2, int & a3, int & a4) {
   
   int v4; // eax
   int v5; // eax
@@ -1362,7 +1362,7 @@ bool  CFerryShip::FindUnLoadPosition(int,int &,int &) {
 
 // address=[0x15988e0]
 // Decompiled from char __thiscall CFerryShip::UnloadAt(CFerryShip *this, int a2, int a3, int a4)
-bool  CFerryShip::UnloadAt(int,int,int) {
+bool  CFerryShip::UnloadAt(int a2, int a3, int a4) {
   
   void **VehiclePtr; // eax
   int v5; // eax
@@ -1482,7 +1482,7 @@ void  CFerryShip::ClearCargo(void) {
 
 // address=[0x1598b80]
 // Decompiled from int __thiscall CFerryShip::DeleteCargo(CFerryShip *this, struct CFerryShip::CCargo *a2)
-void  CFerryShip::DeleteCargo(class CFerryShip::CCargo &) {
+void  CFerryShip::DeleteCargo(class CFerryShip::CCargo & a2) {
   
   _DWORD v3[4]; // [esp-Ch] [ebp-74h] BYREF
   _BYTE v4[12]; // [esp+4h] [ebp-64h] BYREF
@@ -1542,7 +1542,7 @@ void  CFerryShip::DeleteCargo(class CFerryShip::CCargo &) {
 
 // address=[0x1598cf0]
 // Decompiled from char __thiscall CFerryShip::HasRegisterdCargo(CFerryShip *this, int a2)
-bool  CFerryShip::HasRegisterdCargo(int) {
+bool  CFerryShip::HasRegisterdCargo(int a2) {
   
   unsigned int i; // [esp+4h] [ebp-4h]
 
@@ -1557,7 +1557,7 @@ bool  CFerryShip::HasRegisterdCargo(int) {
 
 // address=[0x1598d50]
 // Decompiled from _DWORD *__thiscall CFerryShip::NotifyDetach(CFerryShip *this, int a2)
-void  CFerryShip::NotifyDetach(int) {
+void  CFerryShip::NotifyDetach(int a2) {
   
   _DWORD *result; // eax
 
@@ -1581,7 +1581,7 @@ enum CFerryShip::TFerryJob  CFerryShip::GetFerryJob(void) {
 
 // address=[0x159bb70]
 // Decompiled from void __thiscall CFerryShip::SetFerryJob(CPropertySheet *this, int a2)
-void  CFerryShip::SetFerryJob(enum CFerryShip::TFerryJob) {
+void  CFerryShip::SetFerryJob(enum CFerryShip::TFerryJob a2) {
   
   *((_DWORD *)this + 52) = a2;
 }

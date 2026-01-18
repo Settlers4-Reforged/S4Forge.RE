@@ -1,28 +1,30 @@
 #ifndef CDECOOBJECT_H
 #define CDECOOBJECT_H
 
+#include "defines.h"
+
 class CDecoObject : public IDecoObject {
 public:
     // address=[0x1400360]
-    static class CPersistence * __cdecl New(std::istream &);
+    static class CPersistence * __cdecl New(std::istream & a1);
 
     // address=[0x1541b70]
-     CDecoObject(int,int,int,int,int,int);
+     CDecoObject(int a2, int a3, int a4, int a5, int a6, int a7);
 
     // address=[0x1541c80]
     virtual struct SGfxObjectInfo *  GetGfxInfos(void);
 
     // address=[0x1541e20]
-    static void * __cdecl operator new(unsigned int);
+    static void * __cdecl operator new(unsigned int a1);
 
     // address=[0x1541e40]
-    static void __cdecl operator delete(void *);
+    static void __cdecl operator delete(void * a1);
 
     // address=[0x1541e80]
-     CDecoObject(std::istream &);
+     CDecoObject(std::istream & a2);
 
     // address=[0x1541f80]
-    virtual void  Store(std::ostream &);
+    virtual void  Store(std::ostream & a2);
 
     // address=[0x15422d0]
     virtual  ~CDecoObject(void);
@@ -34,10 +36,10 @@ public:
     virtual unsigned long  ClassID(void)const;
 
     // address=[0x1542420]
-    virtual void  Decrease(int);
+    virtual void  Decrease(int a2);
 
     // address=[0x1542460]
-    virtual int  Increase(int);
+    virtual int  Increase(int a2);
 
     // address=[0x1542480]
     virtual void  LogicUpdate(void);

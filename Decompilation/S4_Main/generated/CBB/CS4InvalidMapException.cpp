@@ -4,7 +4,7 @@
 
 // address=[0x1313ec0]
 // Decompiled from boost::exception_detail::clone_base *__thiscall CS4InvalidMapException::CS4InvalidMapException(  boost::exception_detail::clone_base *this,  struct boost::exception_detail::clone_base *a2)
- CS4InvalidMapException::CS4InvalidMapException(class CS4InvalidMapException const &) {
+ CS4InvalidMapException::CS4InvalidMapException(class CS4InvalidMapException const & a2) {
   
   CBBException::CBBException(this, a2);
   *(_DWORD *)this = &CS4InvalidMapException::_vftable_;

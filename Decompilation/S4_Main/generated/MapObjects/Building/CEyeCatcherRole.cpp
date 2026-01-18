@@ -4,7 +4,7 @@
 
 // address=[0x1400860]
 // Decompiled from int __cdecl CEyeCatcherRole::New(int a1)
-static class CPersistence * __cdecl CEyeCatcherRole::New(std::istream &) {
+class CPersistence * __cdecl CEyeCatcherRole::New(std::istream & a1) {
   
   if ( operator new(0x17Cu) )
     return CEyeCatcherRole::CEyeCatcherRole(a1);
@@ -41,7 +41,7 @@ unsigned long  CEyeCatcherRole::ClassID(void)const {
 
 // address=[0x14fd340]
 // Decompiled from void *__thiscall CEyeCatcherRole::GetBuildingNeed(std::_Ref_count_base *this, const struct type_info *a2)
-int  CEyeCatcherRole::GetBuildingNeed(int)const {
+int  CEyeCatcherRole::GetBuildingNeed(int a2)const {
   
   return 0;
 }
@@ -57,7 +57,7 @@ int  CEyeCatcherRole::GetBuildingRole(void) {
 
 // address=[0x14fd5e0]
 // Decompiled from void *__thiscall CEyeCatcherRole::GetPileIdWithGood(std::_Ref_count_base *this, const struct type_info *a2)
-int  CEyeCatcherRole::GetPileIdWithGood(int)const {
+int  CEyeCatcherRole::GetPileIdWithGood(int a2)const {
   
   return 0;
 }
@@ -65,7 +65,7 @@ int  CEyeCatcherRole::GetPileIdWithGood(int)const {
 
 // address=[0x14fd6f0]
 // Decompiled from void __thiscall CEyeCatcherRole::GoodArrive(CEyeCatcherRole *this, int a2)
-void  CEyeCatcherRole::GoodArrive(int) {
+void  CEyeCatcherRole::GoodArrive(int a2) {
   
   ;
 }
@@ -73,7 +73,7 @@ void  CEyeCatcherRole::GoodArrive(int) {
 
 // address=[0x14fd9b0]
 // Decompiled from int __cdecl CEyeCatcherRole::Load(int a1)
-static class CEyeCatcherRole * __cdecl CEyeCatcherRole::Load(std::istream &) {
+class CEyeCatcherRole * __cdecl CEyeCatcherRole::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
@@ -93,7 +93,7 @@ void  CEyeCatcherRole::LogicUpdate(class CBuilding *) {
 
 // address=[0x150a120]
 // Decompiled from CEyeCatcherRole *__thiscall CEyeCatcherRole::FillGfxInfo(  CEyeCatcherRole *this,  struct CBuilding *a2,  struct SGfxObjectInfo *a3)
-void  CEyeCatcherRole::FillGfxInfo(class CBuilding *,struct SGfxObjectInfo &) {
+void  CEyeCatcherRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo & a3) {
   
   int v3; // eax
   CEyeCatcherRole *result; // eax
@@ -124,7 +124,7 @@ void  CEyeCatcherRole::FillGfxInfo(class CBuilding *,struct SGfxObjectInfo &) {
 
 // address=[0x150a240]
 // Decompiled from int __thiscall CEyeCatcherRole::Init(CEyeCatcherRole *this, struct CBuilding *a2)
-void  CEyeCatcherRole::Init(class CBuilding *) {
+void  CEyeCatcherRole::Init(class CBuilding * a2) {
   
   int result; // eax
 
@@ -138,7 +138,7 @@ void  CEyeCatcherRole::Init(class CBuilding *) {
 
 // address=[0x150a280]
 // Decompiled from int __thiscall CEyeCatcherRole::PostLoadInit(CEyeCatcherRole *this, struct CBuilding *a2)
-void  CEyeCatcherRole::PostLoadInit(class CBuilding *) {
+void  CEyeCatcherRole::PostLoadInit(class CBuilding * a2) {
   
   int v2; // eax
   int result; // eax
@@ -154,7 +154,7 @@ void  CEyeCatcherRole::PostLoadInit(class CBuilding *) {
 
 // address=[0x150a2b0]
 // Decompiled from _DWORD *__thiscall CEyeCatcherRole::FillDialog(CEyeCatcherRole *this, struct CBuilding *a2, bool a3)
-void  CEyeCatcherRole::FillDialog(class CBuilding *,bool) {
+void  CEyeCatcherRole::FillDialog(class CBuilding * a2, bool a3) {
   
   int v3; // eax
   int v4; // eax
@@ -191,7 +191,7 @@ void  CEyeCatcherRole::FillDialog(class CBuilding *,bool) {
 
 // address=[0x150a400]
 // Decompiled from char *__thiscall CEyeCatcherRole::CEyeCatcherRole(char *this, int a2)
- CEyeCatcherRole::CEyeCatcherRole(std::istream &) {
+ CEyeCatcherRole::CEyeCatcherRole(std::istream & a2) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
@@ -217,7 +217,7 @@ void  CEyeCatcherRole::FillDialog(class CBuilding *,bool) {
 
 // address=[0x150a4b0]
 // Decompiled from int __thiscall CEyeCatcherRole::Store(struct IBuildingRole *this, struct std::ostream *a2)
-void  CEyeCatcherRole::Store(std::ostream &) {
+void  CEyeCatcherRole::Store(std::ostream & a2) {
   
   int v3[2]; // [esp+0h] [ebp-8h] BYREF
 

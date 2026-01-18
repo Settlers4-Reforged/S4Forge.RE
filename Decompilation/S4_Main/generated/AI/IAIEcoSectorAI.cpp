@@ -4,7 +4,7 @@
 
 // address=[0x2f346f0]
 // Decompiled from int IAIEcoSectorAI::InterfaceVersion()
-static int __cdecl IAIEcoSectorAI::InterfaceVersion(void) {
+int __cdecl IAIEcoSectorAI::InterfaceVersion(void) {
   
   return 2;
 }
@@ -12,7 +12,7 @@ static int __cdecl IAIEcoSectorAI::InterfaceVersion(void) {
 
 // address=[0x2f34700]
 // Decompiled from CEcoSectorAI *__cdecl IAIEcoSectorAI::CreateEcoSectorAI(struct IAIEcoManager *a1)
-static class IAIEcoSectorAI * __cdecl IAIEcoSectorAI::CreateEcoSectorAI(class IAIEcoManager *) {
+class IAIEcoSectorAI * __cdecl IAIEcoSectorAI::CreateEcoSectorAI(class IAIEcoManager * a1) {
   
   int v2; // [esp+8h] [ebp-20h]
   CEcoSectorAI *C; // [esp+10h] [ebp-18h]

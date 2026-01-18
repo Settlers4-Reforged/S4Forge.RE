@@ -33,7 +33,7 @@
 
 // address=[0x133a250]
 // Decompiled from int CAIEcoSpecialBuildingInfos::TheObject()
-static class CAIEcoSpecialBuildingInfos * __cdecl CAIEcoSpecialBuildingInfos::TheObject(void) {
+class CAIEcoSpecialBuildingInfos * __cdecl CAIEcoSpecialBuildingInfos::TheObject(void) {
   
   CAIEcoSpecialBuildingInfos *C; // [esp+Ch] [ebp-10h]
 
@@ -48,7 +48,7 @@ static class CAIEcoSpecialBuildingInfos * __cdecl CAIEcoSpecialBuildingInfos::Th
 
 // address=[0x133a2d0]
 // Decompiled from int __thiscall CAIEcoSpecialBuildingInfos::GetBoundingBoxInfo(void *this, int a2, int a3)
-struct SAIESBIBoundingInfos const *  CAIEcoSpecialBuildingInfos::GetBoundingBoxInfo(int,enum BUILDING_TYPES) {
+struct SAIESBIBoundingInfos const *  CAIEcoSpecialBuildingInfos::GetBoundingBoxInfo(int a2, enum BUILDING_TYPES a3) {
   
   if ( a2 < 5 )
     return (int)this + 415 * a2 + 5 * a3;
@@ -59,7 +59,7 @@ struct SAIESBIBoundingInfos const *  CAIEcoSpecialBuildingInfos::GetBoundingBoxI
 
 // address=[0x133a300]
 // Decompiled from int __thiscall CAIEcoSpecialBuildingInfos::GetBlockingBitAmount(unsigned __int16 *this, int a2, int a3)
-int  CAIEcoSpecialBuildingInfos::GetBlockingBitAmount(int,enum BUILDING_TYPES) {
+int  CAIEcoSpecialBuildingInfos::GetBlockingBitAmount(int a2, enum BUILDING_TYPES a3) {
   
   if ( a2 < 5 )
     return this[83 * a2 + 1038 + a3];
@@ -70,7 +70,7 @@ int  CAIEcoSpecialBuildingInfos::GetBlockingBitAmount(int,enum BUILDING_TYPES) {
 
 // address=[0x133a330]
 // Decompiled from int __thiscall CAIEcoSpecialBuildingInfos::GetNrNeededBoards(unsigned __int8 *this, int a2, int a3)
-int  CAIEcoSpecialBuildingInfos::GetNrNeededBoards(int,enum BUILDING_TYPES) {
+int  CAIEcoSpecialBuildingInfos::GetNrNeededBoards(int a2, enum BUILDING_TYPES a3) {
   
   if ( a2 < 5 )
     return this[83 * a2 + 2906 + a3];
@@ -81,7 +81,7 @@ int  CAIEcoSpecialBuildingInfos::GetNrNeededBoards(int,enum BUILDING_TYPES) {
 
 // address=[0x133a360]
 // Decompiled from int __thiscall CAIEcoSpecialBuildingInfos::GetNrNeededStones(unsigned __int8 *this, int a2, int a3)
-int  CAIEcoSpecialBuildingInfos::GetNrNeededStones(int,enum BUILDING_TYPES) {
+int  CAIEcoSpecialBuildingInfos::GetNrNeededStones(int a2, enum BUILDING_TYPES a3) {
   
   if ( a2 < 5 )
     return this[83 * a2 + 3321 + a3];
@@ -92,7 +92,7 @@ int  CAIEcoSpecialBuildingInfos::GetNrNeededStones(int,enum BUILDING_TYPES) {
 
 // address=[0x133a390]
 // Decompiled from int __thiscall CAIEcoSpecialBuildingInfos::GetNrNeededGold(unsigned __int8 *this, int a2, int a3)
-int  CAIEcoSpecialBuildingInfos::GetNrNeededGold(int,enum BUILDING_TYPES) {
+int  CAIEcoSpecialBuildingInfos::GetNrNeededGold(int a2, enum BUILDING_TYPES a3) {
   
   if ( a2 < 5 )
     return this[83 * a2 + 3736 + a3];

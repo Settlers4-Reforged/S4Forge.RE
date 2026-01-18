@@ -1,12 +1,14 @@
 #ifndef CPERSISTENCE_BADCLASSID_H
 #define CPERSISTENCE_BADCLASSID_H
 
+#include "defines.h"
+
 namespace CPersistence {
 
 class BadClassID {
 public:
     // address=[0x13f24f0]
-     BadClassID(class CPersistence::BadClassID const &);
+     BadClassID(class CPersistence::BadClassID const & a2);
 
     // address=[0x13f2520]
      BadClassID(void);

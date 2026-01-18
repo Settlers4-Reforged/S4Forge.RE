@@ -25,7 +25,7 @@
 
 // address=[0x1588360]
 // Decompiled from CSettlerMgr::SSettlerInfos *__thiscall CSettlerMgr::SSettlerInfos::operator=(  CSettlerMgr::SSettlerInfos *this,  CSettlerMgr::SSettlerInfos *a2)
-struct CSettlerMgr::SSettlerInfos &  CSettlerMgr::SSettlerInfos::operator=(struct CSettlerMgr::SSettlerInfos const &) {
+struct CSettlerMgr::SSettlerInfos &  CSettlerMgr::SSettlerInfos::operator=(struct CSettlerMgr::SSettlerInfos const & a2) {
   
   this->m_uRole = a2->m_uRole;
   this->m_bSpeed = a2->m_bSpeed;

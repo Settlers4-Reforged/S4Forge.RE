@@ -1,7 +1,9 @@
 import ida_hexrays
 import ida_bytes
 import ida_typeinf
+import ida_funcs
 import idautils
+import ida_nalt
 import idc
 import os
 import re
@@ -1029,8 +1031,10 @@ FOLDER_MAP =  {
 WORKING_DIR="K:/Projekte/Siedler4/S4Forge.RE/Decompilation/"
 
 OUTPUT_DIR = WORKING_DIR + "S4_Main/generated/"
+IMPL_DIR = WORKING_DIR + "S4_Main/src/"
 GLOBAL_HEADER = "globals.h"
 AGGREGATE_HEADER = "all_headers.h"
+DEFINES_HEADER = "defines.h"
 
 ADDRESS_OFFSET = 0x40_0000
 
@@ -1136,6 +1140,90 @@ def get_class_members(class_name: str):
         members.append((type_str, member_name))
 
     return members
+
+def get_function_info_from_address(address: int) -> bool:
+    func = ida_funcs.get_func(address)
+    if not func:
+        return None
+
+    tif = ida_typeinf.tinfo_t()
+
+    if not ida_nalt.get_tinfo(tif, func.start_ea):
+        return None
+
+    if not tif.is_func():
+        return None
+
+    ftd = ida_typeinf.func_type_data_t()
+    if not tif.get_func_details(ftd):
+        return None
+    
+    return ftd
+    
+def get_arguments_from_function_info(ftd):
+    args = []
+    for i, arg in enumerate(ftd):
+        if arg.name == "this" and i == 0:
+            continue  # skip 'this' pointer
+
+        args.append({
+            "index": i,
+            "name": arg.name or f"a{i+1}",
+        })
+
+    return args
+
+def split_params(param_str):
+    params = []
+    depth = {'<': 0, '(': 0, '[': 0}
+    start = 0
+
+    for i, ch in enumerate(param_str):
+        if ch == '<':
+            depth['<'] += 1
+        elif ch == '>':
+            depth['<'] -= 1
+        elif ch == '(':
+            depth['('] += 1
+        elif ch == ')':
+            depth['('] -= 1
+        elif ch == '[':
+            depth['['] += 1
+        elif ch == ']':
+            depth['['] -= 1
+        elif ch == ',' and all(v == 0 for v in depth.values()):
+            params.append(param_str[start:i].strip())
+            start = i + 1
+
+    params.append(param_str[start:].strip())
+    return params
+
+
+def append_names(func_decl, args: list = None) -> str:
+    open_paren = func_decl.find('(')
+    close_paren = func_decl.rfind(')')
+
+    before = func_decl[:open_paren+1]
+    after = func_decl[close_paren:]
+    inside = func_decl[open_paren+1:close_paren]
+
+    params = split_params(inside)
+
+    new_params = []
+    arg_index = 1
+
+    for p in params:
+        if not p:
+            new_params.append(p)
+        else:
+            if args and arg_index <= len(args):
+                new_params.append(f"{p} {args[arg_index-1]['name']}")
+            else:
+                new_params.append(f"{p} a{arg_index}")
+            arg_index += 1
+
+    return before + ', '.join(new_params) + after
+
 
 # --------------------------------------------
 seen_destructors = set()
@@ -1317,6 +1405,8 @@ def write_class_headers(classes, generated_headers):
         with open(abs_path, "w", encoding="utf-8") as f:
             f.write(f"#ifndef {guard}\n#define {guard}\n\n")
 
+            f.write(f"#include \"{DEFINES_HEADER}\"\n\n")
+
             open_namespaces(f, namespaces)
 
             f.write(f"class {class_name}")
@@ -1341,6 +1431,11 @@ def write_class_headers(classes, generated_headers):
                             namespaces,
                             class_name
                         )
+
+                        ftd = get_function_info_from_address(int(entry['address'], 16) - ADDRESS_OFFSET)
+                        decl_arguments = get_arguments_from_function_info(ftd) if ftd else None 
+                        if decl_arguments:
+                            clean_decl = append_names(clean_decl, decl_arguments)
 
                         f.write(f"    {clean_decl};\n\n")
 
@@ -1373,10 +1468,16 @@ def create_class_file_paths(class_name):
     abs_path = os.path.join(OUTPUT_DIR, rel_path)
     return rel_path, abs_path
 
+def is_implementation_available(rel_path: str) -> bool:
+    impl_path = os.path.join(IMPL_DIR, rel_path)
+    return os.path.isfile(impl_path)
+
 def strip_for_decompilation(method_name: str) -> str:
     """Strips unnecessary parts from method name for decompilation"""
     # Remove virtual specifier
     method_name = method_name.replace("virtual ", "")
+    # Remove static specifier
+    method_name = method_name.replace("static ", "")
     
     return method_name
 
@@ -1412,7 +1513,11 @@ def write_class_definitions(classes):
         rel_path += ".cpp"
         abs_path += ".cpp"
 
+        impl_exists = is_implementation_available(rel_path)
+
         with open(abs_path, "w", encoding="utf-8") as f:
+            if impl_exists:
+               f.write(f"#if FALSE\n")
             f.write(f"#include \"{class_name}.h\"\n\n")
 
             f.write(f"// Definitions for class {class_name}\n\n")
@@ -1431,18 +1536,27 @@ def write_class_definitions(classes):
                         f.write(f"// [Decompilation failed for {entry['declaration']}]\n\n")
                         continue
                         
-                    [func_name, func_without_declaration] = func.split("{", 1)
-                    func = strip_for_decompilation(entry["declaration"]) + " {\n  " + func_without_declaration
+                    func_name = strip_for_decompilation(entry["declaration"])
 
-                    commented_func_name = func_name.split("\n")
+                    ftd = get_function_info_from_address(int(entry['address'], 16) - ADDRESS_OFFSET)
+                    decl_arguments = get_arguments_from_function_info(ftd) if ftd else None
+                    if decl_arguments:
+                        func_name = append_names(func_name, decl_arguments)
+
+                    [ida_func_name, func_without_declaration] = func.split("{", 1)
+                    func = func_name + " {\n  " + func_without_declaration
+
+                    commented_func_name = ida_func_name.split("\n")
                     commented_func_name = [line.strip() for line in commented_func_name if line.strip() != '' and not line.strip().startswith("//")]
-                    func_name = "\n ".join(commented_func_name)
+                    ida_func_name = "\n ".join(commented_func_name)
 
-                    func_name = func_name.strip().replace("\n", " ")
-                    f.write(f"// Decompiled from {func_name}\n")
+                    ida_func_name = ida_func_name.strip().replace("\n", " ")
+                    f.write(f"// Decompiled from {ida_func_name}\n")
                     
                     func = strip_destructor(func)
                     f.write(f"{func}\n\n")
+            if impl_exists:
+                f.write(f"#endif // Already implemented\n")
 
 
 def write_aggregate_header(generated_headers):

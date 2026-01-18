@@ -1,13 +1,15 @@
 #ifndef CASTAR64WORKER_H
 #define CASTAR64WORKER_H
 
+#include "defines.h"
+
 class CAStar64Worker : public CAStar64Normal {
 public:
     // address=[0x15d3dc0]
-    static bool __cdecl IsNotBlocked(int);
+    static bool __cdecl IsNotBlocked(int a1);
 
     // address=[0x15d3e20]
-    static int __cdecl MoveCosts(int,int);
+    static int __cdecl MoveCosts(int a1, int a2);
 
     // address=[0x15d5f50]
      CAStar64Worker(void);

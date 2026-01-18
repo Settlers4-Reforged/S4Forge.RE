@@ -1,6 +1,8 @@
 #ifndef CLANLOBBYMAPSETTINGS_SMAPENTRY_H
 #define CLANLOBBYMAPSETTINGS_SMAPENTRY_H
 
+#include "defines.h"
+
 namespace CLanLobbyMapSettings {
 
 class SMapEntry {

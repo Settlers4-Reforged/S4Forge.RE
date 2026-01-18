@@ -4,7 +4,7 @@
 
 // address=[0x1334ec0]
 // Decompiled from CVWList *__thiscall CVWList::CVWList(CVWList *this, int a2, int a3, int a4)
- CVWList::CVWList(int,int,int) {
+ CVWList::CVWList(int a2, int a3, int a4) {
   
   CVWList::CalculateOverlappingSquares(this, a2, a3, a4);
   return this;
@@ -13,7 +13,7 @@
 
 // address=[0x1335b10]
 // Decompiled from int __thiscall CVWList::operator[](void *this, int a2)
-struct CVWList::SVW const &  CVWList::operator[](int)const {
+struct CVWList::SVW const &  CVWList::operator[](int a2)const {
   
   return (int)this + 8 * a2 + 8;
 }
@@ -29,7 +29,7 @@ int  CVWList::Size(void)const {
 
 // address=[0x15de830]
 // Decompiled from CVWList *__thiscall CVWList::CalculateOverlappingSquares(CVWList *this, int a2, int a3, unsigned int a4)
-void  CVWList::CalculateOverlappingSquares(int,int,int) {
+void  CVWList::CalculateOverlappingSquares(int a2, int a3, int a4) {
   
   CVWList *result; // eax
   int v5; // [esp+8h] [ebp-18h]
@@ -68,7 +68,7 @@ void  CVWList::CalculateOverlappingSquares(int,int,int) {
 
 // address=[0x15e2cf0]
 // Decompiled from int __thiscall CVWList::PushEx(CVWList *this, int *a2, int a3, int a4)
-void  CVWList::PushEx(int &,int,int) {
+void  CVWList::PushEx(int & a2, int a3, int a4) {
   
   int result; // eax
 

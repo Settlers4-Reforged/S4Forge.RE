@@ -4,7 +4,7 @@
 
 // address=[0x1402980]
 // Decompiled from int __cdecl CWorkUpBuildingRole::New(int a1)
-static class CPersistence * __cdecl CWorkUpBuildingRole::New(std::istream &) {
+class CPersistence * __cdecl CWorkUpBuildingRole::New(std::istream & a1) {
   
   if ( operator new(0x190u) )
     return CWorkUpBuildingRole::CWorkUpBuildingRole(a1);
@@ -51,7 +51,7 @@ int  CWorkUpBuildingRole::GetBuildingRole(void) {
 
 // address=[0x14fdcf0]
 // Decompiled from int __cdecl CWorkUpBuildingRole::Load(int a1)
-static class CWorkUpBuildingRole * __cdecl CWorkUpBuildingRole::Load(std::istream &) {
+class CWorkUpBuildingRole * __cdecl CWorkUpBuildingRole::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
@@ -63,7 +63,7 @@ static class CWorkUpBuildingRole * __cdecl CWorkUpBuildingRole::Load(std::istrea
 
 // address=[0x152f370]
 // Decompiled from int __thiscall CWorkUpBuildingRole::LogicUpdate(CWorkUpBuildingRole *this, struct CBuilding *a2)
-void  CWorkUpBuildingRole::LogicUpdate(class CBuilding *) {
+void  CWorkUpBuildingRole::LogicUpdate(class CBuilding * a2) {
   
   int result; // eax
   unsigned __int16 *v3; // eax
@@ -156,7 +156,7 @@ void  CWorkUpBuildingRole::LogicUpdate(class CBuilding *) {
 
 // address=[0x152f610]
 // Decompiled from unsigned int __thiscall CWorkUpBuildingRole::FillGfxInfo(  CWorkUpBuildingRole *this,  struct CBuilding *a2,  struct SGfxObjectInfo *a3)
-void  CWorkUpBuildingRole::FillGfxInfo(class CBuilding *,struct SGfxObjectInfo &) {
+void  CWorkUpBuildingRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo & a3) {
   
   int v3; // eax
   int v4; // eax
@@ -228,7 +228,7 @@ void  CWorkUpBuildingRole::FillGfxInfo(class CBuilding *,struct SGfxObjectInfo &
 
 // address=[0x152f8e0]
 // Decompiled from int __thiscall CWorkUpBuildingRole::Init(CWorkUpBuildingRole *this, struct CBuilding *a2)
-void  CWorkUpBuildingRole::Init(class CBuilding *) {
+void  CWorkUpBuildingRole::Init(class CBuilding * a2) {
   
   int v2; // eax
   int v3; // eax
@@ -311,7 +311,7 @@ void  CWorkUpBuildingRole::Init(class CBuilding *) {
 
 // address=[0x152fb80]
 // Decompiled from int __thiscall CWorkUpBuildingRole::PostLoadInit(CWorkUpBuildingRole *this, struct CBuilding *a2)
-void  CWorkUpBuildingRole::PostLoadInit(class CBuilding *) {
+void  CWorkUpBuildingRole::PostLoadInit(class CBuilding * a2) {
   
   int result; // eax
   int v3; // eax
@@ -332,7 +332,7 @@ void  CWorkUpBuildingRole::PostLoadInit(class CBuilding *) {
 
 // address=[0x152fbe0]
 // Decompiled from char __thiscall CWorkUpBuildingRole::SettlerEnter(_DWORD *this, unsigned __int8 *a2, int a3)
-bool  CWorkUpBuildingRole::SettlerEnter(class CBuilding *,int) {
+bool  CWorkUpBuildingRole::SettlerEnter(class CBuilding * a2, int a3) {
   
   int v3; // eax
   int v4; // eax
@@ -438,7 +438,7 @@ bool  CWorkUpBuildingRole::SettlerEnter(class CBuilding *,int) {
 
 // address=[0x152feb0]
 // Decompiled from int __thiscall CWorkUpBuildingRole::GetBuildingNeed(CWorkUpBuildingRole *this, int a2)
-int  CWorkUpBuildingRole::GetBuildingNeed(int)const {
+int  CWorkUpBuildingRole::GetBuildingNeed(int a2)const {
   
   unsigned __int16 *v2; // eax
   unsigned __int8 *v3; // eax
@@ -458,7 +458,7 @@ int  CWorkUpBuildingRole::GetBuildingNeed(int)const {
 
 // address=[0x152ff50]
 // Decompiled from int __thiscall CWorkUpBuildingRole::GetPileIdWithGood(CWorkUpBuildingRole *this, int a2)
-int  CWorkUpBuildingRole::GetPileIdWithGood(int)const {
+int  CWorkUpBuildingRole::GetPileIdWithGood(int a2)const {
   
   unsigned __int16 *v2; // eax
   unsigned __int8 *v4; // eax
@@ -495,7 +495,7 @@ int  CWorkUpBuildingRole::GetPileIdWithGood(int)const {
 
 // address=[0x1530070]
 // Decompiled from void __thiscall CWorkUpBuildingRole::GoodArrive(CWorkUpBuildingRole *this, int a2)
-void  CWorkUpBuildingRole::GoodArrive(int) {
+void  CWorkUpBuildingRole::GoodArrive(int a2) {
   
   ;
 }
@@ -503,7 +503,7 @@ void  CWorkUpBuildingRole::GoodArrive(int) {
 
 // address=[0x1530080]
 // Decompiled from unsigned int __thiscall CWorkUpBuildingRole::LockPiles(CWorkUpBuildingRole *this, struct CBuilding *a2, bool a3)
-void  CWorkUpBuildingRole::LockPiles(class CBuilding *,bool) {
+void  CWorkUpBuildingRole::LockPiles(class CBuilding * a2, bool a3) {
   
   unsigned int result; // eax
   unsigned __int16 *v4; // eax
@@ -528,7 +528,7 @@ void  CWorkUpBuildingRole::LockPiles(class CBuilding *,bool) {
 
 // address=[0x1530120]
 // Decompiled from char *__thiscall CWorkUpBuildingRole::CWorkUpBuildingRole(char *this, int a2)
- CWorkUpBuildingRole::CWorkUpBuildingRole(std::istream &) {
+ CWorkUpBuildingRole::CWorkUpBuildingRole(std::istream & a2) {
   
   unsigned int v3; // [esp+4h] [ebp-34h] BYREF
   unsigned int v4; // [esp+8h] [ebp-30h] BYREF
@@ -585,7 +585,7 @@ void  CWorkUpBuildingRole::LockPiles(class CBuilding *,bool) {
 
 // address=[0x15302d0]
 // Decompiled from int __thiscall CWorkUpBuildingRole::Store(struct IBuildingRole *this, struct std::ostream *a2)
-void  CWorkUpBuildingRole::Store(std::ostream &) {
+void  CWorkUpBuildingRole::Store(std::ostream & a2) {
   
   int result; // eax
   __int16 *v3; // eax
@@ -641,7 +641,7 @@ bool  CWorkUpBuildingRole::CrushBuilding(void) {
 
 // address=[0x15303a0]
 // Decompiled from char __thiscall CWorkUpBuildingRole::HaveMaterial(CWorkUpBuildingRole *this, struct CBuilding *a2)
-bool  CWorkUpBuildingRole::HaveMaterial(class CBuilding *) {
+bool  CWorkUpBuildingRole::HaveMaterial(class CBuilding * a2) {
   
   unsigned __int16 *v2; // eax
   unsigned __int8 *v3; // eax
@@ -662,7 +662,7 @@ bool  CWorkUpBuildingRole::HaveMaterial(class CBuilding *) {
 
 // address=[0x1530410]
 // Decompiled from _DWORD *__thiscall CWorkUpBuildingRole::FillDialog(CWorkUpBuildingRole *this, struct CBuilding *a2, bool a3)
-void  CWorkUpBuildingRole::FillDialog(class CBuilding *,bool) {
+void  CWorkUpBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
   
   int v3; // eax
   int v4; // eax

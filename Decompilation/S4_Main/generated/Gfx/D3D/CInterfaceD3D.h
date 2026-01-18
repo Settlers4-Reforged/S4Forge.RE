@@ -1,6 +1,8 @@
 #ifndef CINTERFACED3D_H
 #define CINTERFACED3D_H
 
+#include "defines.h"
+
 class CInterfaceD3D {
 public:
     // address=[0x2f5f250]
@@ -28,31 +30,31 @@ public:
     bool  InitSoftware(void);
 
     // address=[0x2f667c0]
-    bool  BlitSurfaceToDIB(struct HWND__ *,struct HBITMAP__ *);
+    bool  BlitSurfaceToDIB(struct HWND__ * hWnd, struct HBITMAP__ * h);
 
     // address=[0x2f668c0]
     bool  BlitSurfaceToWindow(void);
 
     // address=[0x2f66d00]
-    void  BlitDIBToSurface(struct HWND__ *,int,int,struct IDirectDrawSurface4 *);
+    void  BlitDIBToSurface(struct HWND__ * hWnd, int a2, int cy, struct IDirectDrawSurface4 * a4);
 
     // address=[0x2f66dc0]
     int  GetGradientFormat(void);
 
     // address=[0x2f66e00]
-    static long __stdcall EnumModesCallback(struct _DDSURFACEDESC2 *,void *);
+    static long __stdcall EnumModesCallback(struct _DDSURFACEDESC2 * a1, void * a2);
 
     // address=[0x2f66f40]
-    static long __stdcall EnumModesCallbackOld(struct _DDSURFACEDESC *,void *);
+    static long __stdcall EnumModesCallbackOld(struct _DDSURFACEDESC * a1, void * a2);
 
     // address=[0x2f67080]
     bool  LoadTexturePageContents(void);
 
     // address=[0x2f67190]
-    void  SetupViewport(int,int,int,int);
+    void  SetupViewport(int a2, int a3, int a4, int a5);
 
     // address=[0x2f67250]
-    long  SetCustomClipper(class SurfaceClipper &);
+    long  SetCustomClipper(class SurfaceClipper & a2);
 
     // address=[0x2f672a0]
     long  ClearCustomClipper(void);
@@ -73,55 +75,55 @@ public:
     long  EndObjectScene(void);
 
     // address=[0x2f67570]
-    bool  CreateCameraWindowSurface(int,int);
+    bool  CreateCameraWindowSurface(int a2, int a3);
 
     // address=[0x2f67660]
     void  DestroyCameraWindowSurface(void);
 
     // address=[0x2f676f0]
-    long  SwitchLandscapeRenderTarget(bool);
+    long  SwitchLandscapeRenderTarget(bool a2);
 
     // address=[0x2f74fc0]
     int  GetGuiMemorySize(void);
 
     // address=[0x2f74fe0]
-    void  SetGuiMemorySize(int);
+    void  SetGuiMemorySize(int a2);
 
     // address=[0x2f81fe0]
     void  InitTexturedLandscapeModule(void);
 
     // address=[0x2f82050]
-    void  PreCalcTextureVertices(int);
+    void  PreCalcTextureVertices(int a2);
 
     // address=[0x2f82260]
     void  InitTexturePtr(void);
 
     // address=[0x2f822a0]
-    void  CalcTilingVerticesType1(int);
+    void  CalcTilingVerticesType1(int a2);
 
     // address=[0x2f823f0]
-    void  CalcTilingVerticesType2(int);
+    void  CalcTilingVerticesType2(int a2);
 
     // address=[0x2f82540]
-    int  AllocateEngineData(int);
+    int  AllocateEngineData(int a2);
 
     // address=[0x2f85f40]
-    void  ChangeCurrentTexturePage(int);
+    void  ChangeCurrentTexturePage(int a2);
 
     // address=[0x2f860c0]
     class CSurface *  GetLandscapeRenderTargetSurface(void);
 
     // address=[0x2f86180]
-    void  RenderScene(bool);
+    void  RenderScene(bool a2);
 
     // address=[0x2f8a910]
-    int  IsInterface7Available(bool &,struct HWND__ *);
+    int  IsInterface7Available(bool & a2, struct HWND__ * a3);
 
     // address=[0x2f8b530]
-    int  IsInterface3Available(struct HWND__ *);
+    int  IsInterface3Available(struct HWND__ * a2);
 
     // address=[0x2f8bba0]
-    bool  CanCreateEngine(bool);
+    bool  CanCreateEngine(bool a2);
 
     // address=[0x2f8bcc0]
     void  CleanUpCheckObjects(void);

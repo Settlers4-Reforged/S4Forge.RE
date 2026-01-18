@@ -4,7 +4,7 @@
 
 // address=[0x2fd2a20]
 // Decompiled from SM_SIV_PaletteBlock *__thiscall SM_SIV_PaletteBlock::SM_SIV_PaletteBlock(SM_SIV_PaletteBlock *this, int a2, bool a3)
- SM_SIV_PaletteBlock::SM_SIV_PaletteBlock(int,bool) {
+ SM_SIV_PaletteBlock::SM_SIV_PaletteBlock(int a2, bool a3) {
   
   memset(this, 0, 0x1005u);
   *(_DWORD *)this = a2;
@@ -23,7 +23,7 @@
 
 // address=[0x2fd2a70]
 // Decompiled from int __thiscall SM_SIV_PaletteBlock::FillPalette(  _BYTE *this,  int a2,  _DWORD *a3,  unsigned __int8 a4,  unsigned __int16 a5)
-int  SM_SIV_PaletteBlock::FillPalette(enum SM_SIV_PALETTETYPE,unsigned char * * const,unsigned char,unsigned short) {
+int  SM_SIV_PaletteBlock::FillPalette(enum SM_SIV_PALETTETYPE a2, unsigned char * * const a3, unsigned char a4, unsigned short a5) {
   
   unsigned int v5; // eax
   int v6; // esi
@@ -135,7 +135,7 @@ int  SM_SIV_PaletteBlock::FillPalette(enum SM_SIV_PALETTETYPE,unsigned char * * 
 
 // address=[0x2fd30f0]
 // Decompiled from int __thiscall SM_SIV_PaletteBlock::Save(_BYTE *this, FILE *a2, FILE *Stream, int Buffer, char a5, char a6)
-unsigned int  SM_SIV_PaletteBlock::Save(struct _iobuf *,struct _iobuf *,unsigned int,bool,bool) {
+unsigned int  SM_SIV_PaletteBlock::Save(struct _iobuf * a2, struct _iobuf * Stream, unsigned int Buffer, bool a5, bool a6) {
   
   unsigned int v8; // [esp+4h] [ebp-14h]
   unsigned int v9; // [esp+8h] [ebp-10h]
@@ -168,7 +168,7 @@ unsigned int  SM_SIV_PaletteBlock::Save(struct _iobuf *,struct _iobuf *,unsigned
 
 // address=[0x2fd33c0]
 // Decompiled from unsigned int __cdecl SM_SIV_PaletteBlock::Convert4444(  unsigned int a1,  unsigned int a2,  unsigned int a3,  unsigned int a4,  float a5)
-static unsigned short __cdecl SM_SIV_PaletteBlock::Convert4444(unsigned int,unsigned int,unsigned int,unsigned int,float) {
+unsigned short __cdecl SM_SIV_PaletteBlock::Convert4444(unsigned int a1, unsigned int a2, unsigned int a3, unsigned int a4, float a5) {
   
   float v5; // xmm0_4
   unsigned int v6; // eax
@@ -187,7 +187,7 @@ static unsigned short __cdecl SM_SIV_PaletteBlock::Convert4444(unsigned int,unsi
 
 // address=[0x2fd34a0]
 // Decompiled from int __cdecl SM_SIV_PaletteBlock::Convert555(unsigned int a1, unsigned int a2, unsigned int a3, float a4)
-static unsigned short __cdecl SM_SIV_PaletteBlock::Convert555(unsigned int,unsigned int,unsigned int,float) {
+unsigned short __cdecl SM_SIV_PaletteBlock::Convert555(unsigned int a1, unsigned int a2, unsigned int a3, float a4) {
   
   float v4; // xmm0_4
   int v5; // eax
@@ -206,7 +206,7 @@ static unsigned short __cdecl SM_SIV_PaletteBlock::Convert555(unsigned int,unsig
 
 // address=[0x2fd3570]
 // Decompiled from int __cdecl SM_SIV_PaletteBlock::Convert565(unsigned int a1, unsigned int a2, unsigned int a3, float a4)
-static unsigned short __cdecl SM_SIV_PaletteBlock::Convert565(unsigned int,unsigned int,unsigned int,float) {
+unsigned short __cdecl SM_SIV_PaletteBlock::Convert565(unsigned int a1, unsigned int a2, unsigned int a3, float a4) {
   
   float v4; // xmm0_4
   int v5; // eax

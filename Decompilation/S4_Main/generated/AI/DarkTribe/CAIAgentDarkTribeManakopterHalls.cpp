@@ -63,7 +63,7 @@ unsigned int  CAIAgentDarkTribeManakopterHalls::Execute(unsigned int,unsigned in
 
 // address=[0x1302f80]
 // Decompiled from int __thiscall CAIAgentDarkTribeManakopterHalls::Load(CAIAgentDarkTribeManakopterHalls *this, struct IS4Chunk *a2)
-void  CAIAgentDarkTribeManakopterHalls::Load(class IS4Chunk &) {
+void  CAIAgentDarkTribeManakopterHalls::Load(class IS4Chunk & a2) {
   
   (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 12))(a2, -1516302333);
   (*(void (__thiscall **)(struct IS4Chunk *, int, int))(*(_DWORD *)a2 + 4))(a2, 1, 1);
@@ -76,7 +76,7 @@ void  CAIAgentDarkTribeManakopterHalls::Load(class IS4Chunk &) {
 
 // address=[0x1303000]
 // Decompiled from int __thiscall CAIAgentDarkTribeManakopterHalls::Save(CAIAgentDarkTribeManakopterHalls *this, struct IS4Chunk *a2)
-void  CAIAgentDarkTribeManakopterHalls::Save(class IS4Chunk &) {
+void  CAIAgentDarkTribeManakopterHalls::Save(class IS4Chunk & a2) {
   
   (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 24))(a2, -1516302333);
   (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 20))(a2, 1);

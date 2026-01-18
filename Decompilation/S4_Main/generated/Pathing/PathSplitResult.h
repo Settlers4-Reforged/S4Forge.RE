@@ -1,6 +1,8 @@
 #ifndef FILEPATHS_PATHSPLITRESULT_H
 #define FILEPATHS_PATHSPLITRESULT_H
 
+#include "defines.h"
+
 namespace FilePaths {
 
 class PathSplitResult {
@@ -9,7 +11,7 @@ public:
      ~PathSplitResult(void);
 
     // address=[0x2eff700]
-     PathSplitResult(struct FilePaths::PathSplitResult &&);
+     PathSplitResult(struct FilePaths::PathSplitResult && a2);
 
     // address=[0x2eff760]
      PathSplitResult(void);

@@ -1,10 +1,12 @@
 #ifndef CSTATEAOCAMPAIGNMAYAN_H
 #define CSTATEAOCAMPAIGNMAYAN_H
 
+#include "defines.h"
+
 class CStateAOCampaignMayan : public CGuiGameState {
 public:
     // address=[0x149f9f0]
-    static class CGameState * __cdecl DynamicCreateFunc(void *);
+    static class CGameState * __cdecl DynamicCreateFunc(void * a1);
 
     // address=[0x149fa70]
      CStateAOCampaignMayan(void *);
@@ -16,7 +18,7 @@ public:
     virtual bool  Perform(void);
 
     // address=[0x149fc70]
-    virtual bool  OnEvent(class CEvn_Event &);
+    virtual bool  OnEvent(class CEvn_Event & a2);
 
     // address=[0x149feb0]
     virtual bool  CanProcessInvites(void);

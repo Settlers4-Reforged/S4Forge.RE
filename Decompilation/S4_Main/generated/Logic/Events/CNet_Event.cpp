@@ -4,7 +4,7 @@
 
 // address=[0x15c38b0]
 // Decompiled from _DWORD *__thiscall CNet_Event::CNet_Event(_DWORD *this, struct boost::exception_detail::clone_base *a2)
- CNet_Event::CNet_Event(class CNet_Event const &) {
+ CNet_Event::CNet_Event(class CNet_Event const & a2) {
   
   CEvn_Logic::CEvn_Logic(a2);
   *this = CNet_Event::_vftable_;
@@ -34,7 +34,7 @@
 
 // address=[0x15cad30]
 // Decompiled from bool __thiscall CNet_Event::operator<(unsigned __int8 *this, int a2)
-bool  CNet_Event::operator<(class CNet_Event const &) {
+bool  CNet_Event::operator<(class CNet_Event const & a2) {
   
   return this[20] < (int)*(unsigned __int8 *)(a2 + 20);
 }

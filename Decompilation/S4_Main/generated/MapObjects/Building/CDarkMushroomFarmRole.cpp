@@ -4,7 +4,7 @@
 
 // address=[0x1400220]
 // Decompiled from int __cdecl CDarkMushroomFarmRole::New(int a1)
-static class CPersistence * __cdecl CDarkMushroomFarmRole::New(std::istream &) {
+class CPersistence * __cdecl CDarkMushroomFarmRole::New(std::istream & a1) {
   
   if ( operator new(0x19Cu) )
     return CDarkMushroomFarmRole::CDarkMushroomFarmRole(a1);
@@ -49,7 +49,7 @@ unsigned long  CDarkMushroomFarmRole::ClassID(void)const {
 
 // address=[0x14fd320]
 // Decompiled from void *__thiscall CDarkMushroomFarmRole::GetBuildingNeed(std::_Ref_count_base *this, const struct type_info *a2)
-int  CDarkMushroomFarmRole::GetBuildingNeed(int)const {
+int  CDarkMushroomFarmRole::GetBuildingNeed(int a2)const {
   
   return 0;
 }
@@ -65,7 +65,7 @@ int  CDarkMushroomFarmRole::GetBuildingRole(void) {
 
 // address=[0x14fd5c0]
 // Decompiled from void *__thiscall CDarkMushroomFarmRole::GetPileIdWithGood(std::_Ref_count_base *this, const struct type_info *a2)
-int  CDarkMushroomFarmRole::GetPileIdWithGood(int)const {
+int  CDarkMushroomFarmRole::GetPileIdWithGood(int a2)const {
   
   return 0;
 }
@@ -73,7 +73,7 @@ int  CDarkMushroomFarmRole::GetPileIdWithGood(int)const {
 
 // address=[0x14fd6e0]
 // Decompiled from void __thiscall CDarkMushroomFarmRole::GoodArrive(CDarkMushroomFarmRole *this, int a2)
-void  CDarkMushroomFarmRole::GoodArrive(int) {
+void  CDarkMushroomFarmRole::GoodArrive(int a2) {
   
   ;
 }
@@ -81,7 +81,7 @@ void  CDarkMushroomFarmRole::GoodArrive(int) {
 
 // address=[0x14fd930]
 // Decompiled from int __cdecl CDarkMushroomFarmRole::Load(int a1)
-static class CDarkMushroomFarmRole * __cdecl CDarkMushroomFarmRole::Load(std::istream &) {
+class CDarkMushroomFarmRole * __cdecl CDarkMushroomFarmRole::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
@@ -93,7 +93,7 @@ static class CDarkMushroomFarmRole * __cdecl CDarkMushroomFarmRole::Load(std::is
 
 // address=[0x1506a60]
 // Decompiled from int __thiscall CDarkMushroomFarmRole::LogicUpdate(unsigned int *this, CMFCToolBarButton *a2)
-void  CDarkMushroomFarmRole::LogicUpdate(class CBuilding *) {
+void  CDarkMushroomFarmRole::LogicUpdate(class CBuilding * a2) {
   
   int result; // eax
   unsigned int v3; // eax
@@ -227,7 +227,7 @@ LABEL_31:
 
 // address=[0x1506f00]
 // Decompiled from int __thiscall CDarkMushroomFarmRole::FillGfxInfo(  CDarkMushroomFarmRole *this,  struct CBuilding *a2,  struct SGfxObjectInfo *a3)
-void  CDarkMushroomFarmRole::FillGfxInfo(class CBuilding *,struct SGfxObjectInfo &) {
+void  CDarkMushroomFarmRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo & a3) {
   
   int v3; // eax
   int v5; // [esp-Ch] [ebp-14h]
@@ -253,7 +253,7 @@ void  CDarkMushroomFarmRole::FillGfxInfo(class CBuilding *,struct SGfxObjectInfo
 
 // address=[0x1506fe0]
 // Decompiled from int __thiscall CDarkMushroomFarmRole::Init(CDarkMushroomFarmRole *this, struct CBuilding *a2)
-void  CDarkMushroomFarmRole::Init(class CBuilding *) {
+void  CDarkMushroomFarmRole::Init(class CBuilding * a2) {
   
   int v2; // eax
   unsigned int v3; // eax
@@ -289,7 +289,7 @@ void  CDarkMushroomFarmRole::Init(class CBuilding *) {
 
 // address=[0x15070d0]
 // Decompiled from unsigned int __thiscall CDarkMushroomFarmRole::PostLoadInit(CDarkMushroomFarmRole *this, struct CBuilding *a2)
-void  CDarkMushroomFarmRole::PostLoadInit(class CBuilding *) {
+void  CDarkMushroomFarmRole::PostLoadInit(class CBuilding * a2) {
   
   int v2; // eax
   unsigned int v3; // eax
@@ -310,7 +310,7 @@ void  CDarkMushroomFarmRole::PostLoadInit(class CBuilding *) {
 
 // address=[0x1507130]
 // Decompiled from char __thiscall CDarkMushroomFarmRole::SettlerEnter(CDarkMushroomFarmRole *this, struct CBuilding *a2, int a3)
-bool  CDarkMushroomFarmRole::SettlerEnter(class CBuilding *,int) {
+bool  CDarkMushroomFarmRole::SettlerEnter(class CBuilding * a2, int a3) {
   
   _DWORD *v4; // [esp+0h] [ebp-8h]
 
@@ -332,7 +332,7 @@ void  CDarkMushroomFarmRole::FillDialog(class CBuilding *,bool) {
 
 // address=[0x1507190]
 // Decompiled from char __thiscall CDarkMushroomFarmRole::HarvestMushroom(CDarkMushroomFarmRole *this, struct CBuilding *a2)
-bool  CDarkMushroomFarmRole::HarvestMushroom(class CBuilding *) {
+bool  CDarkMushroomFarmRole::HarvestMushroom(class CBuilding * a2) {
   
   int WorkingAreaPackedXY; // eax
   int v3; // eax
@@ -402,7 +402,7 @@ bool  CDarkMushroomFarmRole::HarvestMushroom(class CBuilding *) {
 
 // address=[0x15073a0]
 // Decompiled from char __thiscall CDarkMushroomFarmRole::PlantMushroom(_DWORD *this, CMFCToolBarButton *a2)
-bool  CDarkMushroomFarmRole::PlantMushroom(class CBuilding *) {
+bool  CDarkMushroomFarmRole::PlantMushroom(class CBuilding * a2) {
   
   int WorkingAreaPackedXY; // eax
   int v3; // eax
@@ -518,7 +518,7 @@ bool  CDarkMushroomFarmRole::PlantMushroom(class CBuilding *) {
 
 // address=[0x1507740]
 // Decompiled from CDarkMushroomFarmRole *__thiscall CDarkMushroomFarmRole::AttachServant(  CDarkMushroomFarmRole *this,  struct CBuilding *a2,  int a3)
-void  CDarkMushroomFarmRole::AttachServant(class CBuilding *,int) {
+void  CDarkMushroomFarmRole::AttachServant(class CBuilding * a2, int a3) {
   
   CDarkMushroomFarmRole *result; // eax
 
@@ -535,7 +535,7 @@ void  CDarkMushroomFarmRole::AttachServant(class CBuilding *,int) {
 
 // address=[0x15077c0]
 // Decompiled from int __thiscall CDarkMushroomFarmRole::DetachServant(_DWORD *this, int a2, int a3)
-void  CDarkMushroomFarmRole::DetachServant(class CBuilding *,int) {
+void  CDarkMushroomFarmRole::DetachServant(class CBuilding * a2, int a3) {
   
   int result; // eax
 
@@ -565,7 +565,7 @@ void  CDarkMushroomFarmRole::DetachServant(class CBuilding *,int) {
 
 // address=[0x1507870]
 // Decompiled from int __thiscall CDarkMushroomFarmRole::TellServantsToWork(CDarkMushroomFarmRole *this, struct CBuilding *a2)
-void  CDarkMushroomFarmRole::TellServantsToWork(class CBuilding *) {
+void  CDarkMushroomFarmRole::TellServantsToWork(class CBuilding * a2) {
   
   int result; // eax
   CNotifyExceptMushroomfarmer *v3; // [esp-4h] [ebp-3Ch]
@@ -598,7 +598,7 @@ void  CDarkMushroomFarmRole::TellServantsToWork(class CBuilding *) {
 
 // address=[0x1507a20]
 // Decompiled from char *__thiscall CDarkMushroomFarmRole::CDarkMushroomFarmRole(char *this, int a2)
- CDarkMushroomFarmRole::CDarkMushroomFarmRole(std::istream &) {
+ CDarkMushroomFarmRole::CDarkMushroomFarmRole(std::istream & a2) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
@@ -631,7 +631,7 @@ void  CDarkMushroomFarmRole::TellServantsToWork(class CBuilding *) {
 
 // address=[0x1507b70]
 // Decompiled from int __thiscall CDarkMushroomFarmRole::Store(struct IBuildingRole *this, struct std::ostream *a2)
-void  CDarkMushroomFarmRole::Store(std::ostream &) {
+void  CDarkMushroomFarmRole::Store(std::ostream & a2) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
   int *v4; // [esp+4h] [ebp-4h]

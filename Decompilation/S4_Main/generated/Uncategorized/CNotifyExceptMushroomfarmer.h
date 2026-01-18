@@ -1,6 +1,8 @@
 #ifndef CNOTIFYEXCEPTMUSHROOMFARMER_H
 #define CNOTIFYEXCEPTMUSHROOMFARMER_H
 
+#include "defines.h"
+
 class CNotifyExceptMushroomfarmer : public INotifyFilter {
 public:
     // address=[0x1508120]

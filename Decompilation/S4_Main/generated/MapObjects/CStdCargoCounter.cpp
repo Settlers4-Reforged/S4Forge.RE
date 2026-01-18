@@ -12,7 +12,7 @@ void  CStdCargoCounter::Clear(void) {
 
 // address=[0x15a3af0]
 // Decompiled from CStdCargoCounter *__thiscall CStdCargoCounter::CountEntity(CStdCargoCounter *this, int a2, int a3)
-void  CStdCargoCounter::CountEntity(int,int) {
+void  CStdCargoCounter::CountEntity(int a2, int a3) {
   
   CStdCargoCounter *result; // eax
   int v4; // [esp+0h] [ebp-Ch]

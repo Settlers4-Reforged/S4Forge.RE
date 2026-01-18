@@ -1,13 +1,15 @@
 #ifndef CPILEMGR_H
 #define CPILEMGR_H
 
+#include "defines.h"
+
 class CPileMgr {
 public:
     // address=[0x12fd1f0]
-    static class CPile * __cdecl GetPilePtr(int);
+    static class CPile * __cdecl GetPilePtr(int a1);
 
     // address=[0x1438a40]
-    class CPile &  operator[](int);
+    class CPile &  operator[](int a1);
 
     // address=[0x155e900]
      CPileMgr(void);
@@ -19,22 +21,22 @@ public:
     void  Clear(void);
 
     // address=[0x155e970]
-    void  LoadPileData(class S4::CMapFile &,int);
+    void  LoadPileData(class S4::CMapFile & a2, int a3);
 
     // address=[0x155ea20]
-    int  AddPile(int,int,int,int,int,int,int,int,int);
+    int  AddPile(int a2, int a3, int a4, int a5, int a6, int a7, int a8, int a9, int a10);
 
     // address=[0x155ec40]
-    void  DeletePile(int);
+    void  DeletePile(int a2);
 
     // address=[0x155ed50]
-    void  DeletePileUnforeseen(int);
+    void  DeletePileUnforeseen(int a2);
 
     // address=[0x155ede0]
-    int  GetNearestPile(int,int,int);
+    int  GetNearestPile(int a2, int a3, int a4);
 
     // address=[0x155eef0]
-    void  SearchSpaceForGoods(int,int,int,int);
+    void  SearchSpaceForGoods(int a2, int a3, int a4, int a5);
 
     // address=[0x155f280]
     void  Store(class S4::CMapFile &);
@@ -43,29 +45,29 @@ public:
     void  Load(class S4::CMapFile &);
 
     // address=[0x155f670]
-    int  DbgCheckPiles(int);
+    int  DbgCheckPiles(int a2);
 
     // address=[0x155f760]
-    int  ConvertGoodType(int,int);
+    int  ConvertGoodType(int a2, int a3);
 
     // address=[0x155f820]
-    static class IPileRole * __cdecl CreatePileRole(int);
+    static class IPileRole * __cdecl CreatePileRole(int a1);
 
 private:
     // address=[0x155e750]
-    void *  Alloc(unsigned int);
+    void *  Alloc(unsigned int a2);
 
     // address=[0x155e7b0]
-    void  Dealloc(void *);
+    void  Dealloc(void * a2);
 
     // address=[0x155fa90]
-    void  TracePile(int);
+    void  TracePile(int a2);
 
     // address=[0x155fb30]
-    static class IPileRole * __cdecl LoadPileRole(std::istream &,int);
+    static class IPileRole * __cdecl LoadPileRole(std::istream & a1, int a2);
 
     // address=[0x155fc30]
-    void  CheckOutPile(int);
+    void  CheckOutPile(int a2);
 
 };
 

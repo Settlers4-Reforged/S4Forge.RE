@@ -4,7 +4,7 @@
 
 // address=[0x2f1e530]
 // Decompiled from void __thiscall AdvXMLParser::Bookmark::GetSubString(void **this, void *a2, int a3)
-void  AdvXMLParser::Bookmark::GetSubString(std::string &,int) {
+void  AdvXMLParser::Bookmark::GetSubString(std::string & a2, int a3) {
   
   void *v3; // [esp+0h] [ebp-28h]
   _BYTE v5[28]; // [esp+8h] [ebp-20h] BYREF
@@ -40,7 +40,7 @@ void  AdvXMLParser::Bookmark::Reset(void) {
 
 // address=[0x2f27ea0]
 // Decompiled from AdvXMLParser::Bookmark *__thiscall AdvXMLParser::Bookmark::Bookmark(  AdvXMLParser::Bookmark *this,  struct AdvXMLParser::Parser *a2)
- AdvXMLParser::Bookmark::Bookmark(class AdvXMLParser::Parser &) {
+ AdvXMLParser::Bookmark::Bookmark(class AdvXMLParser::Parser & a2) {
   
   *(_DWORD *)this = a2;
   *((_DWORD *)this + 1) = *((_DWORD *)a2 + 2);

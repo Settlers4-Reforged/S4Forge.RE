@@ -1,6 +1,8 @@
 #ifndef CBUILDINGMANAGERTASK_H
 #define CBUILDINGMANAGERTASK_H
 
+#include "defines.h"
+
 class CBuildingManagerTask : public IScheduleEntry {
 public:
     // address=[0x2f4f710]
@@ -22,31 +24,31 @@ public:
     virtual bool  WaitFor(void);
 
     // address=[0x2f4ff10]
-    void  UpdateRequireGoods(bool);
+    void  UpdateRequireGoods(bool a2);
 
     // address=[0x2f50810]
-    int  GetToolRequireIndex(enum PILE_TYPES);
+    int  GetToolRequireIndex(enum PILE_TYPES a2);
 
     // address=[0x2f50860]
-    bool  GetBuildingPermission(class CBuildingEvent *);
+    bool  GetBuildingPermission(class CBuildingEvent * a2);
 
     // address=[0x2f50b50]
-    bool  GetSeperateBuildingPermission(class CBuildingEvent *);
+    bool  GetSeperateBuildingPermission(class CBuildingEvent * a2);
 
     // address=[0x2f50db0]
-    void  SetRejectedBuilding(enum BUILDING_TYPES);
+    void  SetRejectedBuilding(enum BUILDING_TYPES a2);
 
     // address=[0x2f50e00]
-    bool  IsRejectedBuilding(enum BUILDING_TYPES,bool);
+    bool  IsRejectedBuilding(enum BUILDING_TYPES a2, bool a3);
 
     // address=[0x2f50e60]
-    bool  SetBuildingAtPlanning(enum BUILDING_TYPES);
+    bool  SetBuildingAtPlanning(enum BUILDING_TYPES a2);
 
     // address=[0x2f50eb0]
-    bool  IsBuildingAtPlanning(enum BUILDING_TYPES);
+    bool  IsBuildingAtPlanning(enum BUILDING_TYPES a2);
 
     // address=[0x2f50f00]
-    bool  RemoveBuildingAtPlanning(enum BUILDING_TYPES);
+    bool  RemoveBuildingAtPlanning(enum BUILDING_TYPES a2);
 
     // address=[0x2f50f60]
     bool  AlertLevelZero(void);

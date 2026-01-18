@@ -4,7 +4,7 @@
 
 // address=[0x135df30]
 // Decompiled from void *__thiscall IFSNode::Adopt(std::_Ref_count_base *this, const struct type_info *a2)
-class IFSNode *  IFSNode::Adopt(class IFSNode *) {
+class IFSNode *  IFSNode::Adopt(class IFSNode * a2) {
   
   return 0;
 }
@@ -12,7 +12,7 @@ class IFSNode *  IFSNode::Adopt(class IFSNode *) {
 
 // address=[0x135df50]
 // Decompiled from void *__thiscall IFSNode::GetChild(std::_Ref_count_base *this, const struct type_info *a2)
-class IFSNode *  IFSNode::GetChild(int) {
+class IFSNode *  IFSNode::GetChild(int a2) {
   
   return 0;
 }

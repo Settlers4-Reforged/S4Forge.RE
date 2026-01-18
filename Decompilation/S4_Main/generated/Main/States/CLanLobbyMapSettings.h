@@ -1,6 +1,8 @@
 #ifndef CLANLOBBYMAPSETTINGS_H
 #define CLANLOBBYMAPSETTINGS_H
 
+#include "defines.h"
+
 class CLanLobbyMapSettings {
 public:
     // address=[0x14c0630]

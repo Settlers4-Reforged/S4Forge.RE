@@ -1,6 +1,8 @@
 #ifndef CLINK_H
 #define CLINK_H
 
+#include "defines.h"
+
 class CLink {
 public:
     // address=[0x15e7010]

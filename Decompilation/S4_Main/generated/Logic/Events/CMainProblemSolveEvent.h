@@ -1,10 +1,12 @@
 #ifndef CMAINPROBLEMSOLVEEVENT_H
 #define CMAINPROBLEMSOLVEEVENT_H
 
+#include "defines.h"
+
 class CMainProblemSolveEvent : public IScheduleEntry {
 public:
     // address=[0x2f4dcc0]
-     CMainProblemSolveEvent(int,int,int,int,int,int);
+     CMainProblemSolveEvent(int a2, int a3, int a4, int a5, int a6, int a7);
 
     // address=[0x2f4dd90]
     virtual  ~CMainProblemSolveEvent(void);

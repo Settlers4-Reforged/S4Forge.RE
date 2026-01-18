@@ -1,10 +1,12 @@
 #ifndef CSTATICCONFIGVARINT_H
 #define CSTATICCONFIGVARINT_H
 
+#include "defines.h"
+
 class CStaticConfigVarInt : public CStaticConfigVar {
 public:
     // address=[0x12fc830]
-     CStaticConfigVarInt(char const *,char const *,int);
+     CStaticConfigVarInt(char const * a2, char const * a3, int a4);
 
     // address=[0x12fca60]
     virtual  ~CStaticConfigVarInt(void);
@@ -19,13 +21,13 @@ public:
     virtual int  GetIntValue(void)const;
 
     // address=[0x12fd6d0]
-    virtual void  SetValue(int);
+    virtual void  SetValue(int a2);
 
     // address=[0x12fd6f0]
-    virtual void  SetValue(float);
+    virtual void  SetValue(float a2);
 
     // address=[0x1355250]
-    class CStaticConfigVarInt &  operator=(int);
+    class CStaticConfigVarInt &  operator=(int a2);
 
 };
 

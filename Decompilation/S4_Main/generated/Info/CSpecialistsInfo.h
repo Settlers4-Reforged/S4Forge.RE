@@ -1,6 +1,8 @@
 #ifndef CSPECIALISTSINFO_H
 #define CSPECIALISTSINFO_H
 
+#include "defines.h"
+
 class CSpecialistsInfo : public CInfoExchange {
 public:
     // address=[0x14548f0]

@@ -1,6 +1,8 @@
 #ifndef CCATAPULT_H
 #define CCATAPULT_H
 
+#include "defines.h"
+
 class CCatapult : public CWheeler, public CWarriorBehavior {
 public:
     // address=[0x153d480]
@@ -10,50 +12,50 @@ public:
     virtual void  VehicleLogicUpdate(void);
 
     // address=[0x153d590]
-    virtual void  ConvertEventIntoGoal(class CEntityEvent *);
+    virtual void  ConvertEventIntoGoal(class CEntityEvent * a2);
 
     // address=[0x153d840]
-    virtual int  WarriorTaskWalkOneStep(class IMovingEntity &);
+    virtual int  WarriorTaskWalkOneStep(class IMovingEntity & a2);
 
     // address=[0x153d8a0]
-    virtual void  WarriorTaskAttack(class IMovingEntity &,int,enum T_WARRIOR_ATTACK);
+    virtual void  WarriorTaskAttack(class IMovingEntity & a2, int a3, enum T_WARRIOR_ATTACK a4);
 
     // address=[0x153d900]
-    virtual void  WarriorTaskFinished(class IMovingEntity &);
+    virtual void  WarriorTaskFinished(class IMovingEntity & a2);
 
     // address=[0x153da20]
-    virtual int  WarriorTaskIdleWalk(class IMovingEntity &);
+    virtual int  WarriorTaskIdleWalk(class IMovingEntity & a2);
 
     // address=[0x153dae0]
-    virtual void  EntityOrderCanceled(int);
+    virtual void  EntityOrderCanceled(int a2);
 
     // address=[0x153db30]
-    virtual void  GoodArrived(int,int);
+    virtual void  GoodArrived(int a2, int a3);
 
     // address=[0x153dba0]
-     CCatapult(std::istream &);
+     CCatapult(std::istream & a2);
 
     // address=[0x153dcb0]
-    virtual void  Store(std::ostream &);
+    virtual void  Store(std::ostream & a2);
 
     // address=[0x153dd30]
     void  RequestAmmoDonkey(void);
 
     // address=[0x153dd70]
-    virtual int const  GetMeetingPointXY(enum OBJ_TYPE,int);
+    virtual int const  GetMeetingPointXY(enum OBJ_TYPE a2, int a3);
 
     // address=[0x153de60]
-    virtual void  SupplyCanceled(int,int);
+    virtual void  SupplyCanceled(int a2, int a3);
 
     // address=[0x153de80]
     virtual void  PostLoadInit(void);
 
 protected:
     // address=[0x153dee0]
-    virtual void  OnComeToFerry(int);
+    virtual void  OnComeToFerry(int a2);
 
     // address=[0x153e000]
-     CCatapult(int,int,int,int,int,int,bool);
+     CCatapult(int a2, int a3, int a4, int a5, int a6, int a7, bool a8);
 
     // address=[0x153e110]
     virtual  ~CCatapult(void);
@@ -78,7 +80,7 @@ private:
     int  GetHealthDisplayID(void);
 
     // address=[0x153e800]
-    bool  AttackTargetAt(int,int);
+    bool  AttackTargetAt(int a2, int a3);
 
     // address=[0x153e920]
     int  RequestDonkey(void);

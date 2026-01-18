@@ -1,6 +1,8 @@
 #ifndef CAIDARKTRIBESECTORAGENT_H
 #define CAIDARKTRIBESECTORAGENT_H
 
+#include "defines.h"
+
 class CAIDarkTribeSectorAgent : public CAIAgent {
 public:
     // address=[0x12fc7f0]
@@ -13,7 +15,7 @@ public:
     class CAIDarkTribeSectorAI *  SectorAI(void)const;
 
     // address=[0x1301910]
-    void  AttachSectorAI(class CAIDarkTribeSectorAI *);
+    void  AttachSectorAI(class CAIDarkTribeSectorAI * a2);
 
 };
 

@@ -1,6 +1,8 @@
 #ifndef CADDSOLDIERSIDEBARINFO_H
 #define CADDSOLDIERSIDEBARINFO_H
 
+#include "defines.h"
+
 class CAddSoldierSideBarInfo : public CInfoExchange {
 public:
     // address=[0x14543e0]

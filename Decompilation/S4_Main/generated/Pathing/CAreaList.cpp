@@ -13,7 +13,7 @@
 
 // address=[0x15f4860]
 // Decompiled from int __thiscall CAreaList::InitOne(CAreaList *this, int a2)
-void  CAreaList::InitOne(int) {
+void  CAreaList::InitOne(int a2) {
   
   int result; // eax
 
@@ -26,7 +26,7 @@ void  CAreaList::InitOne(int) {
 
 // address=[0x15f55c0]
 // Decompiled from int __thiscall CAreaList::PushBack(CAreaList *this, int a2)
-void  CAreaList::PushBack(int) {
+void  CAreaList::PushBack(int a2) {
   
   if ( *(int *)this >= 63 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 575, "m_iSize < AREA_LIST_MAX") == 1 )
     __debugbreak();

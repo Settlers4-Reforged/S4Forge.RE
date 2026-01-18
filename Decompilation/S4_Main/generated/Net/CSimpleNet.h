@@ -1,6 +1,8 @@
 #ifndef CSIMPLENET_H
 #define CSIMPLENET_H
 
+#include "defines.h"
+
 class CSimpleNet : public ISimpleNet {
 public:
     // address=[0x15ccbf0]
@@ -10,25 +12,25 @@ public:
      ~CSimpleNet(void);
 
     // address=[0x15cce40]
-    virtual std::string  GetCurrentLocalIPString(void);
+    virtual std::string  GetCurrentLocalIPString(void a2);
 
     // address=[0x15cce80]
     virtual bool  Run(void);
 
     // address=[0x15ccf90]
-    virtual bool  IsMessage(int);
+    virtual bool  IsMessage(int a2);
 
     // address=[0x15ccfd0]
-    virtual bool  PopMessage(void * &,unsigned int &,unsigned int &);
+    virtual bool  PopMessage(void * & a2, unsigned int & a3, unsigned int & a4);
 
     // address=[0x15cd190]
-    virtual bool  PushMessage(unsigned int,unsigned int,unsigned short,void *,unsigned int,bool,bool);
+    virtual bool  PushMessage(unsigned int a2, unsigned int a3, unsigned short a4, void * Src, unsigned int Size, bool a7, bool a8);
 
     // address=[0x15cd490]
-    virtual char *  GetIPString(unsigned int);
+    virtual char *  GetIPString(unsigned int a2);
 
     // address=[0x15cd4d0]
-    virtual void  RemoveMsgsForIP(unsigned int);
+    virtual void  RemoveMsgsForIP(unsigned int a2);
 
     // address=[0x15cd6a0]
     virtual bool  IsLocalIP(unsigned int);
@@ -43,13 +45,13 @@ public:
     virtual long  GetCurrentLocalIPLong(void);
 
     // address=[0x15d1320]
-    virtual unsigned int  GetIPLong(std::string);
+    virtual unsigned int  GetIPLong(std::string a1);
 
     // address=[0x15d13a0]
     virtual unsigned int  GetLastDataLength(void);
 
     // address=[0x15d13c0]
-    virtual std::string  GetLastErrorString(void);
+    virtual std::string  GetLastErrorString(void a2);
 
     // address=[0x15d1400]
     virtual long  GetLastSenderIP(void);
@@ -61,7 +63,7 @@ public:
     virtual void  RemoveAllResendMsgs(void);
 
     // address=[0x15d1490]
-    virtual void  SetAdditionalLocalAddress(unsigned int);
+    virtual void  SetAdditionalLocalAddress(unsigned int a2);
 
     // address=[0x15d1520]
     virtual bool  WasError(void);
@@ -71,10 +73,10 @@ protected:
     virtual bool  SendMessageA(unsigned int,struct SMessage &);
 
     // address=[0x15cdc40]
-    virtual bool  RealSendMessage(unsigned int,struct SMessage &);
+    virtual bool  RealSendMessage(unsigned int a2, struct SMessage & a3);
 
     // address=[0x15cdd50]
-    virtual bool  RemoveMsgFromResendList(unsigned short);
+    virtual bool  RemoveMsgFromResendList(unsigned short a2);
 
     // address=[0x15cdea0]
     virtual bool  LaunchWinsock(void);
@@ -89,7 +91,7 @@ protected:
     virtual void  ClearErrorString(void);
 
     // address=[0x15d14b0]
-    virtual void  SetErrorString(char const *,bool);
+    virtual void  SetErrorString(char const * Str, bool a3);
 
 };
 

@@ -4,7 +4,7 @@
 
 // address=[0x134f2a0]
 // Decompiled from char __cdecl CDebugFkt::SetDebugFuncKey(char *String2, char a2)
-static bool __cdecl CDebugFkt::SetDebugFuncKey(char const *,char) {
+bool __cdecl CDebugFkt::SetDebugFuncKey(char const * String2, char a2) {
   
   int *i; // [esp+0h] [ebp-4h]
 
@@ -25,7 +25,7 @@ static bool __cdecl CDebugFkt::SetDebugFuncKey(char const *,char) {
 
 // address=[0x134f330]
 // Decompiled from int __cdecl CDebugFkt::SelectDebugFunc(char a1)
-static int (__cdecl*__cdecl CDebugFkt::SelectDebugFunc(char))(int,int) {
+int (__cdecl*__cdecl CDebugFkt::SelectDebugFunc(char))(int a1, int a2) {
   
   int v2; // [esp+4h] [ebp-410h]
   int *v3; // [esp+8h] [ebp-40Ch]
@@ -97,7 +97,7 @@ static int (__cdecl*__cdecl CDebugFkt::SelectDebugFunc(char))(int,int) {
 
 // address=[0x134f540]
 // Decompiled from const char *CDebugFkt::DebugString()
-static char * __cdecl CDebugFkt::DebugString(void) {
+char * __cdecl CDebugFkt::DebugString(void) {
   
   return String::c_str((String *)&CDebugFkt::m_sInfo);
 }
@@ -105,7 +105,7 @@ static char * __cdecl CDebugFkt::DebugString(void) {
 
 // address=[0x134f550]
 // Decompiled from void *__cdecl CDebugFkt::SetDebugString(const struct String *a1)
-static void __cdecl CDebugFkt::SetDebugString(class String const &) {
+void __cdecl CDebugFkt::SetDebugString(class String const & a1) {
   
   return String::operator=(&CDebugFkt::m_sInfoText, (int)a1);
 }
@@ -113,7 +113,7 @@ static void __cdecl CDebugFkt::SetDebugString(class String const &) {
 
 // address=[0x134f570]
 // Decompiled from void __cdecl CDebugFkt::SetFrameCounter(  float a1,  float a2,  float a3,  float a4,  float a5,  float a6,  float a7,  unsigned int a8)
-static void __cdecl CDebugFkt::SetFrameCounter(float,float,float,float,float,float,float,unsigned int) {
+void __cdecl CDebugFkt::SetFrameCounter(float,float,float,float,float,float,float,unsigned int) {
   
   int v8; // [esp+40h] [ebp-458h]
   int v9; // [esp+48h] [ebp-450h]

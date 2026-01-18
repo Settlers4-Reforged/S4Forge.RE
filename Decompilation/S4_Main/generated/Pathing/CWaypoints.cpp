@@ -76,7 +76,7 @@ void  CWaypoints::Init(void) {
 
 // address=[0x15d6a20]
 // Decompiled from int __thiscall CWaypoints::PushBack(CWaypoints *this, int a2)
-void  CWaypoints::PushBack(int) {
+void  CWaypoints::PushBack(int a2) {
   
   int result; // eax
 
@@ -92,7 +92,7 @@ void  CWaypoints::PushBack(int) {
 
 // address=[0x15d6ad0]
 // Decompiled from int __thiscall CWaypoints::PushGoal(CWaypoints *this, int a2, int a3)
-void  CWaypoints::PushGoal(int,int) {
+void  CWaypoints::PushGoal(int a2, int a3) {
   
   int result; // eax
 
@@ -119,7 +119,7 @@ void  CWaypoints::PushGoal(int,int) {
 
 // address=[0x132e930]
 // Decompiled from int __cdecl CWaypoints::DecWrap(char a1)
-static int __cdecl CWaypoints::DecWrap(int) {
+int __cdecl CWaypoints::DecWrap(int a1) {
   
   return (a1 - 1) & 0xF;
 }
@@ -127,7 +127,7 @@ static int __cdecl CWaypoints::DecWrap(int) {
 
 // address=[0x15d6620]
 // Decompiled from int __cdecl CWaypoints::IncWrap(char a1)
-static int __cdecl CWaypoints::IncWrap(int) {
+int __cdecl CWaypoints::IncWrap(int a1) {
   
   return (a1 + 1) & 0xF;
 }

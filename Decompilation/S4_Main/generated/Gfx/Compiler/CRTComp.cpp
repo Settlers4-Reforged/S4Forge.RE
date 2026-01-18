@@ -27,7 +27,7 @@
 
 // address=[0x2fcd540]
 // Decompiled from int __thiscall CRTComp::SetWorkPath(void **this, wchar_t *String)
-enum RTCOMP_ERROR  CRTComp::SetWorkPath(wchar_t *) {
+enum RTCOMP_ERROR  CRTComp::SetWorkPath(wchar_t * String) {
   
   size_t v3; // [esp+8h] [ebp-80Ch]
   WCHAR Buffer[1024]; // [esp+10h] [ebp-804h] BYREF
@@ -51,7 +51,7 @@ enum RTCOMP_ERROR  CRTComp::SetWorkPath(wchar_t *) {
 
 // address=[0x2fcd650]
 // Decompiled from int __thiscall CRTComp::SetPlayerColors(_BYTE *this, int a2)
-enum RTCOMP_ERROR  CRTComp::SetPlayerColors(struct SCOLOR * const) {
+enum RTCOMP_ERROR  CRTComp::SetPlayerColors(struct SCOLOR * const a2) {
   
   int v2; // ecx
   int v3; // edx
@@ -71,7 +71,7 @@ enum RTCOMP_ERROR  CRTComp::SetPlayerColors(struct SCOLOR * const) {
 
 // address=[0x2fcd6a0]
 // Decompiled from int __thiscall CRTComp::Compile(CRTComp *this, int a2)
-enum RTCOMP_ERROR  CRTComp::Compile(int) {
+enum RTCOMP_ERROR  CRTComp::Compile(int a2) {
   
   FILE *v3; // eax
   FILE *v4; // eax
@@ -731,7 +731,7 @@ wchar_t *  CRTComp::GetErrorFileName(void) {
 
 // address=[0x2fceed0]
 // Decompiled from char __stdcall CRTComp::GetPictureInfos(wchar_t *FileName, _DWORD *a2, _DWORD *a3, _DWORD *a4)
-bool  CRTComp::GetPictureInfos(wchar_t *,int &,int &,int &) {
+bool  CRTComp::GetPictureInfos(wchar_t * FileName, int & a2, int & a3, int & a4) {
   
   FILE *Stream; // [esp+4h] [ebp-Ch]
   int info_struct; // [esp+8h] [ebp-8h] BYREF
@@ -762,7 +762,7 @@ bool  CRTComp::GetPictureInfos(wchar_t *,int &,int &,int &) {
 
 // address=[0x2fcefd0]
 // Decompiled from char *__thiscall CRTComp::CreateCurFilename(CRTComp *this, char a2)
-wchar_t *  CRTComp::CreateCurFilename(int) {
+wchar_t *  CRTComp::CreateCurFilename(int a2) {
   
   char *Buffer; // [esp+8h] [ebp-4h]
 
@@ -774,7 +774,7 @@ wchar_t *  CRTComp::CreateCurFilename(int) {
 
 // address=[0x2fcf010]
 // Decompiled from int __thiscall CRTComp::DeleteCurFilename(CRTComp *this, wchar_t *a2)
-void  CRTComp::DeleteCurFilename(wchar_t *) {
+void  CRTComp::DeleteCurFilename(wchar_t * a2) {
   
   int result; // eax
 
@@ -786,7 +786,7 @@ void  CRTComp::DeleteCurFilename(wchar_t *) {
 
 // address=[0x2fcf040]
 // Decompiled from wchar_t *__thiscall CRTComp::SetErrorFilename(void **this, wchar_t *String)
-void  CRTComp::SetErrorFilename(wchar_t *) {
+void  CRTComp::SetErrorFilename(wchar_t * String) {
   
   wchar_t *result; // eax
   size_t v3; // [esp+4h] [ebp-Ch]
@@ -805,7 +805,7 @@ void  CRTComp::SetErrorFilename(wchar_t *) {
 
 // address=[0x2fcf0d0]
 // Decompiled from int __thiscall CRTComp::LoadPng(CRTComp *this, wchar_t *FileName, int a3)
-enum RTCOMP_ERROR  CRTComp::LoadPng(wchar_t *,struct SM_S_BF_BITMAP_DATA *) {
+enum RTCOMP_ERROR  CRTComp::LoadPng(wchar_t * FileName, struct SM_S_BF_BITMAP_DATA * a3) {
   
   int v4; // [esp+24h] [ebp-54h]
   int rowbytes; // [esp+28h] [ebp-50h]
@@ -953,7 +953,7 @@ enum RTCOMP_ERROR  CRTComp::LoadPng(wchar_t *,struct SM_S_BF_BITMAP_DATA *) {
 
 // address=[0x2fcf5a0]
 // Decompiled from int __thiscall CRTComp::Decompose24(CRTComp *this, struct SM_S_BF_BITMAP_DATA *a2, unsigned __int8 *a3)
-void  CRTComp::Decompose24(struct SM_S_BF_BITMAP_DATA *,unsigned char *) {
+void  CRTComp::Decompose24(struct SM_S_BF_BITMAP_DATA * a2, unsigned char * a3) {
   
   int result; // eax
   int Size; // [esp+4h] [ebp-Ch]
@@ -977,7 +977,7 @@ void  CRTComp::Decompose24(struct SM_S_BF_BITMAP_DATA *,unsigned char *) {
 
 // address=[0x2fcf660]
 // Decompiled from int __thiscall CRTComp::Decompose8(CRTComp *this, struct SM_S_BF_BITMAP_DATA *a2, unsigned __int8 *a3, char *a4)
-void  CRTComp::Decompose8(struct SM_S_BF_BITMAP_DATA *,unsigned char *,char *) {
+void  CRTComp::Decompose8(struct SM_S_BF_BITMAP_DATA * a2, unsigned char * a3, char * a4) {
   
   int result; // eax
   int Size; // [esp+8h] [ebp-10h]
@@ -1000,7 +1000,7 @@ void  CRTComp::Decompose8(struct SM_S_BF_BITMAP_DATA *,unsigned char *,char *) {
 
 // address=[0x2fcf730]
 // Decompiled from void __thiscall CRTComp::DestroyContent(CRTComp *this, struct SM_S_BF_BITMAP_DATA *a2)
-void  CRTComp::DestroyContent(struct SM_S_BF_BITMAP_DATA *) {
+void  CRTComp::DestroyContent(struct SM_S_BF_BITMAP_DATA * a2) {
   
   if ( a2 )
   {
@@ -1013,7 +1013,7 @@ void  CRTComp::DestroyContent(struct SM_S_BF_BITMAP_DATA *) {
 
 // address=[0x2fcf780]
 // Decompiled from unsigned int __thiscall CRTComp::CreateBoundingBox(CRTComp *this, struct SM_S_BF_BITMAP_DATA *a2)
-void  CRTComp::CreateBoundingBox(struct SM_S_BF_BITMAP_DATA *) {
+void  CRTComp::CreateBoundingBox(struct SM_S_BF_BITMAP_DATA * a2) {
   
   unsigned int result; // eax
   unsigned int i; // [esp+4h] [ebp-Ch]
@@ -1051,7 +1051,7 @@ void  CRTComp::CreateBoundingBox(struct SM_S_BF_BITMAP_DATA *) {
 
 // address=[0x2fcf8e0]
 // Decompiled from void __stdcall CRTComp::CreateColorField(int a1, size_t Size)
-void  CRTComp::CreateColorField(unsigned char * * const,int) {
+void  CRTComp::CreateColorField(unsigned char * * const a1, int Size) {
   
   int i; // [esp+8h] [ebp-4h]
 
@@ -1065,7 +1065,7 @@ void  CRTComp::CreateColorField(unsigned char * * const,int) {
 
 // address=[0x2fcf940]
 // Decompiled from int __thiscall CRTComp::DestroyColorField(CRTComp *this, unsigned __int8 **const a2)
-void  CRTComp::DestroyColorField(unsigned char * * const) {
+void  CRTComp::DestroyColorField(unsigned char * * const a2) {
   
   int result; // eax
   int i; // [esp+8h] [ebp-4h]
@@ -1082,7 +1082,7 @@ void  CRTComp::DestroyColorField(unsigned char * * const) {
 
 // address=[0x2fcf990]
 // Decompiled from int __thiscall CRTComp::ConvertTo555(CRTComp *this, unsigned __int8 **const a2, int a3)
-void  CRTComp::ConvertTo555(unsigned char * * const,int) {
+void  CRTComp::ConvertTo555(unsigned char * * const a2, int a3) {
   
   int result; // eax
   int i; // [esp+4h] [ebp-8h]
@@ -1112,7 +1112,7 @@ void  CRTComp::ConvertTo555(unsigned char * * const,int) {
 
 // address=[0x2fcfad0]
 // Decompiled from unsigned __int8 __thiscall CRTComp::PutBitmapColorKeyToFront(  CRTComp *this,  unsigned __int8 *a2,  unsigned int a3,  unsigned __int8 a4)
-void  CRTComp::PutBitmapColorKeyToFront(unsigned char *,unsigned int,unsigned char) {
+void  CRTComp::PutBitmapColorKeyToFront(unsigned char * a2, unsigned int a3, unsigned char a4) {
   
   unsigned __int8 result; // al
   unsigned int i; // [esp+4h] [ebp-4h]
@@ -1152,7 +1152,7 @@ void  CRTComp::PutBitmapColorKeyToFront(unsigned char *,unsigned int,unsigned ch
 
 // address=[0x2fcfb70]
 // Decompiled from int __thiscall CRTComp::PutColorMapColorKeyToFront(CRTComp *this, unsigned __int8 **const a2)
-int  CRTComp::PutColorMapColorKeyToFront(unsigned char * * const) {
+int  CRTComp::PutColorMapColorKeyToFront(unsigned char * * const a2) {
   
   int v3; // [esp+8h] [ebp-Ch]
   int i; // [esp+Ch] [ebp-8h]
@@ -1190,7 +1190,7 @@ int  CRTComp::PutColorMapColorKeyToFront(unsigned char * * const) {
 
 // address=[0x2fcfe70]
 // Decompiled from int __thiscall CRTComp::FreeColormapShadowColor(CRTComp *this, unsigned __int8 **const a2)
-void  CRTComp::FreeColormapShadowColor(unsigned char * * const) {
+void  CRTComp::FreeColormapShadowColor(unsigned char * * const a2) {
   
   int result; // eax
   int i; // [esp+8h] [ebp-4h]
@@ -1213,7 +1213,7 @@ void  CRTComp::FreeColormapShadowColor(unsigned char * * const) {
 
 // address=[0x2fcffb0]
 // Decompiled from unsigned int __thiscall CRTComp::FreeBitmapShadowColor(CRTComp *this, unsigned __int8 *a2, unsigned int a3)
-void  CRTComp::FreeBitmapShadowColor(unsigned char *,unsigned int) {
+void  CRTComp::FreeBitmapShadowColor(unsigned char * a2, unsigned int a3) {
   
   unsigned int result; // eax
   unsigned int i; // [esp+4h] [ebp-4h]
@@ -1230,7 +1230,7 @@ void  CRTComp::FreeBitmapShadowColor(unsigned char *,unsigned int) {
 
 // address=[0x2fd0000]
 // Decompiled from int __thiscall CRTComp::FreeColormapPlayerColor(CRTComp *this, unsigned __int8 **const a2)
-void  CRTComp::FreeColormapPlayerColor(unsigned char * * const) {
+void  CRTComp::FreeColormapPlayerColor(unsigned char * * const a2) {
   
   int result; // eax
   unsigned int i; // [esp+8h] [ebp-4h]
@@ -1253,7 +1253,7 @@ void  CRTComp::FreeColormapPlayerColor(unsigned char * * const) {
 
 // address=[0x2fd0140]
 // Decompiled from unsigned int __thiscall CRTComp::FreeBitmapPlayerColor(CRTComp *this, unsigned __int8 *a2, unsigned int a3)
-void  CRTComp::FreeBitmapPlayerColor(unsigned char *,unsigned int) {
+void  CRTComp::FreeBitmapPlayerColor(unsigned char * a2, unsigned int a3) {
   
   unsigned int result; // eax
   unsigned int i; // [esp+4h] [ebp-4h]
@@ -1273,7 +1273,7 @@ void  CRTComp::FreeBitmapPlayerColor(unsigned char *,unsigned int) {
 
 // address=[0x2fd01a0]
 // Decompiled from struct SM_S_BF_BITMAP_DATA *__thiscall CRTComp::CenterBitmap(CRTComp *this, struct SM_S_BF_BITMAP_DATA *a2)
-void  CRTComp::CenterBitmap(struct SM_S_BF_BITMAP_DATA *) {
+void  CRTComp::CenterBitmap(struct SM_S_BF_BITMAP_DATA * a2) {
   
   struct SM_S_BF_BITMAP_DATA *result; // eax
   void *Src; // [esp+1Ch] [ebp-14h]
@@ -1304,7 +1304,7 @@ void  CRTComp::CenterBitmap(struct SM_S_BF_BITMAP_DATA *) {
 
 // address=[0x2fd0300]
 // Decompiled from void *__thiscall CRTComp::CreateMagBorder(CRTComp *this, struct SM_S_BF_BITMAP_DATA *a2)
-void  CRTComp::CreateMagBorder(struct SM_S_BF_BITMAP_DATA *) {
+void  CRTComp::CreateMagBorder(struct SM_S_BF_BITMAP_DATA * a2) {
   
   void *result; // eax
   void *v3; // [esp+14h] [ebp-Ch]
@@ -1329,7 +1329,7 @@ void  CRTComp::CreateMagBorder(struct SM_S_BF_BITMAP_DATA *) {
 
 // address=[0x2fd03d0]
 // Decompiled from void __thiscall CRTComp::AddPlayerColor(CRTComp *this, int a2)
-void  CRTComp::AddPlayerColor(struct SM_S_BF_BITMAP_DATA *) {
+void  CRTComp::AddPlayerColor(struct SM_S_BF_BITMAP_DATA * a2) {
   
   void *v3; // [esp+14h] [ebp-24h]
   int v4; // [esp+18h] [ebp-20h]
@@ -1417,7 +1417,7 @@ void  CRTComp::AddPlayerColor(struct SM_S_BF_BITMAP_DATA *) {
 
 // address=[0x2fd06d0]
 // Decompiled from void *__stdcall CRTComp::MakePanel(_DWORD *a1, char a2)
-unsigned char *  CRTComp::MakePanel(struct SM_S_BF_BITMAP_DATA *,bool) {
+unsigned char *  CRTComp::MakePanel(struct SM_S_BF_BITMAP_DATA * a1, bool a2) {
   
   int v3; // [esp+8h] [ebp-20h]
   void *v4; // [esp+14h] [ebp-14h]
@@ -1469,7 +1469,7 @@ unsigned char *  CRTComp::MakePanel(struct SM_S_BF_BITMAP_DATA *,bool) {
 
 // address=[0x2fd0870]
 // Decompiled from int __stdcall CRTComp::HalfColorMap(int a1)
-void  CRTComp::HalfColorMap(unsigned char * * const) {
+void  CRTComp::HalfColorMap(unsigned char * * const a1) {
   
   int result; // eax
   int i; // [esp+4h] [ebp-8h]
@@ -1488,7 +1488,7 @@ void  CRTComp::HalfColorMap(unsigned char * * const) {
 
 // address=[0x2fd08f0]
 // Decompiled from int __thiscall CRTComp::EncodeImage(CRTComp *this, unsigned __int8 *a2, unsigned __int8 *a3, int a4, int a5)
-int  CRTComp::EncodeImage(unsigned char *,unsigned char *,int,int) {
+int  CRTComp::EncodeImage(unsigned char * a2, unsigned char * a3, int a4, int a5) {
   
   unsigned __int8 *v7; // [esp+8h] [ebp-20h]
   int v8; // [esp+10h] [ebp-18h]
@@ -1577,7 +1577,7 @@ int  CRTComp::EncodeImage(unsigned char *,unsigned char *,int,int) {
 
 // address=[0x2fd0b30]
 // Decompiled from FILE *__stdcall CRTComp::Save8Bitmap(size_t ElementCount, unsigned int a2, int a3, _DWORD *a4)
-void  CRTComp::Save8Bitmap(unsigned int,unsigned int,unsigned char *,unsigned char * * const) {
+void  CRTComp::Save8Bitmap(unsigned int ElementCount, unsigned int a2, unsigned char * a3, unsigned char * * const a4) {
   
   FILE *result; // eax
   size_t j; // [esp+4h] [ebp-50h]

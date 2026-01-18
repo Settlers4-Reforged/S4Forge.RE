@@ -4,7 +4,7 @@
 
 // address=[0x13068b0]
 // Decompiled from int __cdecl COwnerMap::OwnerBits1VW(int a1, int a2)
-static int __cdecl COwnerMap::OwnerBits1VW(int,int) {
+int __cdecl COwnerMap::OwnerBits1VW(int a1, int a2) {
   
   return (unsigned __int8)COwnerMap::m_sOwnerBits[128 * a2 + 128 + 2 * a1];
 }
@@ -12,7 +12,7 @@ static int __cdecl COwnerMap::OwnerBits1VW(int,int) {
 
 // address=[0x13068d0]
 // Decompiled from int __cdecl COwnerMap::OwnerBits9VW(int a1, int a2)
-static int __cdecl COwnerMap::OwnerBits9VW(int,int) {
+int __cdecl COwnerMap::OwnerBits9VW(int a1, int a2) {
   
   return (unsigned __int8)byte_418FE61[128 * a2 + 128 + 2 * a1];
 }
@@ -20,7 +20,7 @@ static int __cdecl COwnerMap::OwnerBits9VW(int,int) {
 
 // address=[0x133a050]
 // Decompiled from int __cdecl COwnerMap::OwnerBit(char a1)
-static int __cdecl COwnerMap::OwnerBit(int) {
+int __cdecl COwnerMap::OwnerBit(int a1) {
   
   return 1 << a1 >> 1;
 }
@@ -28,7 +28,7 @@ static int __cdecl COwnerMap::OwnerBit(int) {
 
 // address=[0x1351d30]
 // Decompiled from int __cdecl COwnerMap::OwnerBits1XY(Squares *a1, Squares *a2)
-static int __cdecl COwnerMap::OwnerBits1XY(int,int) {
+int __cdecl COwnerMap::OwnerBits1XY(int a1, int a2) {
   
   int v2; // esi
 
@@ -39,7 +39,7 @@ static int __cdecl COwnerMap::OwnerBits1XY(int,int) {
 
 // address=[0x15afa20]
 // Decompiled from int __cdecl COwnerMap::OwnerBits9XY(Squares *a1, Squares *a2)
-static int __cdecl COwnerMap::OwnerBits9XY(int,int) {
+int __cdecl COwnerMap::OwnerBits9XY(int a1, int a2) {
   
   int v2; // esi
 
@@ -50,7 +50,7 @@ static int __cdecl COwnerMap::OwnerBits9XY(int,int) {
 
 // address=[0x15de7d0]
 // Decompiled from void *COwnerMap::ClearOwnerBits()
-static void __cdecl COwnerMap::ClearOwnerBits(void) {
+void __cdecl COwnerMap::ClearOwnerBits(void) {
   
   return memset(COwnerMap::m_sOwnerBits, 0, 0x2100u);
 }
@@ -58,7 +58,7 @@ static void __cdecl COwnerMap::ClearOwnerBits(void) {
 
 // address=[0x15de7f0]
 // Decompiled from char *__cdecl COwnerMap::OwnerBits1VWRef(int a1, int a2)
-static unsigned char & __cdecl COwnerMap::OwnerBits1VWRef(int,int) {
+unsigned char & __cdecl COwnerMap::OwnerBits1VWRef(int a1, int a2) {
   
   return &COwnerMap::m_sOwnerBits[128 * a2 + 128 + 2 * a1];
 }
@@ -66,7 +66,7 @@ static unsigned char & __cdecl COwnerMap::OwnerBits1VWRef(int,int) {
 
 // address=[0x15de810]
 // Decompiled from char *__cdecl COwnerMap::OwnerBits9VWRef(int a1, int a2)
-static unsigned char & __cdecl COwnerMap::OwnerBits9VWRef(int,int) {
+unsigned char & __cdecl COwnerMap::OwnerBits9VWRef(int a1, int a2) {
   
   return &byte_418FE61[128 * a2 + 128 + 2 * a1];
 }

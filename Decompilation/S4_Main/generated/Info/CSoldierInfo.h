@@ -1,6 +1,8 @@
 #ifndef CSOLDIERINFO_H
 #define CSOLDIERINFO_H
 
+#include "defines.h"
+
 class CSoldierInfo : public CInfoExchange {
 public:
     // address=[0x14548c0]

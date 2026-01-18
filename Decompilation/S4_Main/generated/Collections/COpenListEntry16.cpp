@@ -4,7 +4,7 @@
 
 // address=[0x15d6090]
 // Decompiled from bool __thiscall COpenListEntry16::operator<(_DWORD *this, _DWORD *a2)
-bool  COpenListEntry16::operator<(class COpenListEntry16 const &)const {
+bool  COpenListEntry16::operator<(class COpenListEntry16 const & a2)const {
   
   return *this > *a2;
 }
@@ -36,7 +36,7 @@ void  COpenListEntry16::MaxItem(void) {
 
 // address=[0x15d6d20]
 // Decompiled from int __thiscall COpenListEntry16::Set(COpenListEntry16 *this, int a2, int a3, int a4)
-void  COpenListEntry16::Set(int,int,int) {
+void  COpenListEntry16::Set(int a2, int a3, int a4) {
   
   int result; // eax
 

@@ -1,6 +1,8 @@
 #ifndef CMAGICSPELLSIDEBARINFO_H
 #define CMAGICSPELLSIDEBARINFO_H
 
+#include "defines.h"
+
 class CMagicSpellSideBarInfo : public CInfoExchange {
 public:
     // address=[0x14546e0]

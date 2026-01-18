@@ -1,6 +1,8 @@
 #ifndef CTRANSPORTPRIORITYINFO_H
 #define CTRANSPORTPRIORITYINFO_H
 
+#include "defines.h"
+
 class CTransportpriorityInfo : public CInfoExchange {
 public:
     // address=[0x1454980]

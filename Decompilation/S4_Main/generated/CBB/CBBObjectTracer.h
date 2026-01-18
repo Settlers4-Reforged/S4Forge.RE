@@ -1,16 +1,18 @@
 #ifndef CBBOBJECTTRACER_H
 #define CBBOBJECTTRACER_H
 
+#include "defines.h"
+
 class CBBObjectTracer {
 public:
     // address=[0x2f33a90]
     static void __cdecl Enter(void);
 
     // address=[0x2f33ad0]
-    static void __cdecl InitObject(class CBBObject &,char const *,bool);
+    static void __cdecl InitObject(class CBBObject & a1, char const * a2, bool a3);
 
     // address=[0x2f33b70]
-    static bool __cdecl IsObjectInList(unsigned int,class CBBObject * &);
+    static bool __cdecl IsObjectInList(unsigned int a1, class CBBObject * & a2);
 
     // address=[0x2f33bd0]
     static void __cdecl DumpObjects(void);

@@ -1,6 +1,8 @@
 #ifndef CAIAGENTGEOLOGISTS_H
 #define CAIAGENTGEOLOGISTS_H
 
+#include "defines.h"
+
 class CAIAgentGeologists : public CAINormalSectorAgent {
 public:
     // address=[0x1304250]

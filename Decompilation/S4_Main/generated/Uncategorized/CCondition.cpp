@@ -27,7 +27,7 @@
 
 // address=[0x2f3ee00]
 // Decompiled from CCondition *__thiscall CCondition::CCondition(CCondition *this, int a2, struct CParam *a3, struct COptimizeOptions *a4)
- CCondition::CCondition(int,class CParam *,class COptimizeOptions *) {
+ CCondition::CCondition(int a2, class CParam * a3, class COptimizeOptions * a4) {
   
   CDynListEntry::CDynListEntry(this);
   *(_DWORD *)this = &CCondition::_vftable_;

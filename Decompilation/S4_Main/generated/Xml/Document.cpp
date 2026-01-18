@@ -39,7 +39,7 @@ class AdvXMLParser::Element &  AdvXMLParser::Document::GetRoot(void)const {
 
 // address=[0x2f17000]
 // Decompiled from int __thiscall AdvXMLParser::Document::Document(int this, char *Str)
- AdvXMLParser::Document::Document(char const *) {
+ AdvXMLParser::Document::Document(char const * Str) {
   
   int v3; // [esp+8h] [ebp-58h]
   _DWORD *C; // [esp+Ch] [ebp-54h]
@@ -113,7 +113,7 @@ class AdvXMLParser::Document *  AdvXMLParser::Document::Clone(void)const {
 
 // address=[0x2f17220]
 // Decompiled from void *__stdcall AdvXMLParser::Document::GetData(void *a1)
-std::string  AdvXMLParser::Document::GetData(void)const {
+std::string  AdvXMLParser::Document::GetData(void a1)const {
   
   std::string::string(a1, (char *)byte_3AB75C2);
   return a1;
@@ -122,7 +122,7 @@ std::string  AdvXMLParser::Document::GetData(void)const {
 
 // address=[0x2f17250]
 // Decompiled from int __thiscall AdvXMLParser::Document::GetValue(void *this, int a2)
-std::string  AdvXMLParser::Document::GetValue(void)const {
+std::string  AdvXMLParser::Document::GetValue(void a2)const {
   
   _BYTE v3[12]; // [esp+4h] [ebp-80h] BYREF
   _BYTE v4[12]; // [esp+10h] [ebp-74h] BYREF
@@ -177,7 +177,7 @@ std::string  AdvXMLParser::Document::GetValue(void)const {
 
 // address=[0x2f173a0]
 // Decompiled from bool __thiscall AdvXMLParser::Document::IsKindOf(AdvXMLParser::Document *this, int a2)
-bool  AdvXMLParser::Document::IsKindOf(int)const {
+bool  AdvXMLParser::Document::IsKindOf(int a2)const {
   
   return a2 == 9 || AdvXMLParser::Node::IsKindOf(this, a2);
 }
@@ -185,7 +185,7 @@ bool  AdvXMLParser::Document::IsKindOf(int)const {
 
 // address=[0x2f173d0]
 // Decompiled from int __thiscall AdvXMLParser::Document::CloneNode(AdvXMLParser::Document *this, struct AdvXMLParser::NodeContainer *a2)
-class AdvXMLParser::Node *  AdvXMLParser::Document::CloneNode(class AdvXMLParser::NodeContainer &)const {
+class AdvXMLParser::Node *  AdvXMLParser::Document::CloneNode(class AdvXMLParser::NodeContainer & a2)const {
   
   if ( !AdvXMLParser::Node::IsNull(a2)
     && BBSupportDbgReport(2, "Source\\Xml\\elements.cpp", 1107, "parent.IsNull()") == 1 )
@@ -208,7 +208,7 @@ class AdvXMLParser::Node *  AdvXMLParser::Document::CloneNode(class AdvXMLParser
 
 // address=[0x2f25fc0]
 // Decompiled from int __cdecl AdvXMLParser::Document::Parse(struct AdvXMLParser::Parser *a1)
-static class AdvXMLParser::Document * __cdecl AdvXMLParser::Document::Parse(class AdvXMLParser::Parser &) {
+class AdvXMLParser::Document * __cdecl AdvXMLParser::Document::Parse(class AdvXMLParser::Parser & a1) {
   
   AdvXMLParser::Document *v1; // eax
   AdvXMLParser::Document *v2; // eax
@@ -247,7 +247,7 @@ static class AdvXMLParser::Document * __cdecl AdvXMLParser::Document::Parse(clas
 
 // address=[0x2f260c0]
 // Decompiled from void __thiscall AdvXMLParser::Document::ParseProlog(AdvXMLParser::Document *this, struct AdvXMLParser::Parser *a2)
-void  AdvXMLParser::Document::ParseProlog(class AdvXMLParser::Parser &) {
+void  AdvXMLParser::Document::ParseProlog(class AdvXMLParser::Parser & a2) {
   
   AdvXMLParser::Document::ParseXMLDecl(this, a2);
   AdvXMLParser::Document::ParseMiscs(this, a2);
@@ -258,7 +258,7 @@ void  AdvXMLParser::Document::ParseProlog(class AdvXMLParser::Parser &) {
 
 // address=[0x2f26110]
 // Decompiled from char __thiscall AdvXMLParser::Document::ParseXMLDecl(AdvXMLParser::Document *this, struct AdvXMLParser::Parser *a2)
-bool  AdvXMLParser::Document::ParseXMLDecl(class AdvXMLParser::Parser &) {
+bool  AdvXMLParser::Document::ParseXMLDecl(class AdvXMLParser::Parser & a2) {
   
   if ( !AdvXMLParser::Parser::ParseString(a2, "<?xml") )
     return 0;
@@ -275,7 +275,7 @@ bool  AdvXMLParser::Document::ParseXMLDecl(class AdvXMLParser::Parser &) {
 
 // address=[0x2f261b0]
 // Decompiled from char __stdcall AdvXMLParser::Document::ParseVersionInfo(AdvXMLParser::Parser *a1, int a2)
-bool  AdvXMLParser::Document::ParseVersionInfo(class AdvXMLParser::Parser &,std::string &) {
+bool  AdvXMLParser::Document::ParseVersionInfo(class AdvXMLParser::Parser & a2, std::string & a3) {
   
   char Char; // [esp+7h] [ebp-1h]
 
@@ -292,7 +292,7 @@ bool  AdvXMLParser::Document::ParseVersionInfo(class AdvXMLParser::Parser &,std:
 
 // address=[0x2f26240]
 // Decompiled from char __thiscall AdvXMLParser::Document::ParseVersionNum(void *this, struct AdvXMLParser::Parser *a2, int a3)
-bool  AdvXMLParser::Document::ParseVersionNum(class AdvXMLParser::Parser &,std::string &) {
+bool  AdvXMLParser::Document::ParseVersionNum(class AdvXMLParser::Parser & a2, std::string & a3) {
   
   char v4[16]; // [esp+0h] [ebp-18h] BYREF
   void *v5; // [esp+10h] [ebp-8h]
@@ -324,7 +324,7 @@ bool  AdvXMLParser::Document::ParseVersionNum(class AdvXMLParser::Parser &,std::
 
 // address=[0x2f26320]
 // Decompiled from char __stdcall AdvXMLParser::Document::ParseEncodingDecl(AdvXMLParser::Parser *a1, int a2)
-bool  AdvXMLParser::Document::ParseEncodingDecl(class AdvXMLParser::Parser &,std::string &) {
+bool  AdvXMLParser::Document::ParseEncodingDecl(class AdvXMLParser::Parser & a2, std::string & a3) {
   
   char Char; // [esp+7h] [ebp-1h]
 
@@ -341,7 +341,7 @@ bool  AdvXMLParser::Document::ParseEncodingDecl(class AdvXMLParser::Parser &,std
 
 // address=[0x2f263b0]
 // Decompiled from char __thiscall AdvXMLParser::Document::ParseEncName(void *this, struct AdvXMLParser::Parser *a2, int a3)
-bool  AdvXMLParser::Document::ParseEncName(class AdvXMLParser::Parser &,std::string &) {
+bool  AdvXMLParser::Document::ParseEncName(class AdvXMLParser::Parser & a2, std::string & a3) {
   
   char v4[16]; // [esp+0h] [ebp-18h] BYREF
   void *v5; // [esp+10h] [ebp-8h]
@@ -373,7 +373,7 @@ bool  AdvXMLParser::Document::ParseEncName(class AdvXMLParser::Parser &,std::str
 
 // address=[0x2f26460]
 // Decompiled from char __thiscall AdvXMLParser::Document::ParseSDDecl(  AdvXMLParser::Document *this,  struct AdvXMLParser::Parser *a2,  bool *a3)
-bool  AdvXMLParser::Document::ParseSDDecl(class AdvXMLParser::Parser &,bool &) {
+bool  AdvXMLParser::Document::ParseSDDecl(class AdvXMLParser::Parser & a2, bool & a3) {
   
   char Char; // [esp+7h] [ebp-1h]
 
@@ -400,7 +400,7 @@ bool  AdvXMLParser::Document::ParseSDDecl(class AdvXMLParser::Parser &,bool &) {
 
 // address=[0x2f26520]
 // Decompiled from char __thiscall AdvXMLParser::Document::ParseMisc(AdvXMLParser::Document *this, struct AdvXMLParser::Parser *a2)
-bool  AdvXMLParser::Document::ParseMisc(class AdvXMLParser::Parser &) {
+bool  AdvXMLParser::Document::ParseMisc(class AdvXMLParser::Parser & a2) {
   
   struct AdvXMLParser::Comment *v2; // eax
   struct Node *v3; // eax
@@ -458,7 +458,7 @@ bool  AdvXMLParser::Document::ParseMisc(class AdvXMLParser::Parser &) {
 
 // address=[0x2f26640]
 // Decompiled from char __thiscall AdvXMLParser::Document::ParseMiscs(AdvXMLParser::Document *this, struct AdvXMLParser::Parser *a2)
-void  AdvXMLParser::Document::ParseMiscs(class AdvXMLParser::Parser &) {
+void  AdvXMLParser::Document::ParseMiscs(class AdvXMLParser::Parser & a2) {
   
   char result; // al
 
@@ -471,7 +471,7 @@ void  AdvXMLParser::Document::ParseMiscs(class AdvXMLParser::Parser &) {
 
 // address=[0x2f2d2b0]
 // Decompiled from void __thiscall AdvXMLParser::Document::GenerateXML(  AdvXMLParser::Document *this,  struct AdvXMLParser::GenerateContext *a2)
-void  AdvXMLParser::Document::GenerateXML(class AdvXMLParser::GenerateContext &)const {
+void  AdvXMLParser::Document::GenerateXML(class AdvXMLParser::GenerateContext & a2)const {
   
   AdvXMLParser::GenerateContext::operator+=("<?xml version=\"");
   AdvXMLParser::GenerateContext::operator+=((char *)this + 56);
@@ -485,7 +485,7 @@ void  AdvXMLParser::Document::GenerateXML(class AdvXMLParser::GenerateContext &)
 
 // address=[0x2f26670]
 // Decompiled from int __thiscall AdvXMLParser::Document::ParseRootElement(AdvXMLParser::Document *this, struct AdvXMLParser::Parser *a2)
-void  AdvXMLParser::Document::ParseRootElement(class AdvXMLParser::Parser &) {
+void  AdvXMLParser::Document::ParseRootElement(class AdvXMLParser::Parser & a2) {
   
   int v2; // eax
   struct Node *v3; // eax

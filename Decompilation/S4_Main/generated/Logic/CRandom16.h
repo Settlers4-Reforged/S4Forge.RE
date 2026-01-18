@@ -1,6 +1,8 @@
 #ifndef CRANDOM16_H
 #define CRANDOM16_H
 
+#include "defines.h"
+
 class CRandom16 {
 public:
     // address=[0x12fd540]

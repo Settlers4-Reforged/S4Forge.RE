@@ -1,10 +1,12 @@
 #ifndef CERRORMESSAGEID_H
 #define CERRORMESSAGEID_H
 
+#include "defines.h"
+
 class CErrorMessageId {
 public:
     // address=[0x14810b0]
-     CErrorMessageId(char const *);
+     CErrorMessageId(char const * Str1);
 
     // address=[0x1481160]
      CErrorMessageId(class CErrorMessageId const &);

@@ -1,6 +1,8 @@
 #ifndef IINSTALLATIONINFO_H
 #define IINSTALLATIONINFO_H
 
+#include "defines.h"
+
 class IInstallationInfo {
 public:
     // address=[0x1496890]

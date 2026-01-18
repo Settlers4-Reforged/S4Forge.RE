@@ -4,7 +4,7 @@
 
 // address=[0x2f71cc0]
 // Decompiled from int __thiscall CHeightAndTypeTable::GetObjectFog(CHeightAndTypeTable *this, int a2, int a3, int a4)
-int  CHeightAndTypeTable::GetObjectFog(int,int,int) {
+int  CHeightAndTypeTable::GetObjectFog(int a2, int a3, int a4) {
   
   return (unsigned __int8)*((_DWORD *)this + 2048 * a2 + 16 * a3 + 2 * a4 + 2577);
 }
@@ -533,7 +533,7 @@ void  CHeightAndTypeTable::InitShadeTables(void) {
 
 // address=[0x2f85c90]
 // Decompiled from int __thiscall CHeightAndTypeTable::CalcFogging(  CHeightAndTypeTable *this,  int a2,  int a3,  int a4,  int a5,  unsigned int *a6,  unsigned int *a7)
-void  CHeightAndTypeTable::CalcFogging(int,int,int,int,unsigned int &,unsigned int &) {
+void  CHeightAndTypeTable::CalcFogging(int a2, int a3, int a4, int a5, unsigned int & a6, unsigned int & a7) {
   
   int result; // eax
   float v8; // xmm0_4
@@ -565,7 +565,7 @@ void  CHeightAndTypeTable::CalcFogging(int,int,int,int,unsigned int &,unsigned i
 
 // address=[0x2f86020]
 // Decompiled from int __thiscall CHeightAndTypeTable::GetAverageShadingValue(CHeightAndTypeTable *this, int a2, int a3)
-int  CHeightAndTypeTable::GetAverageShadingValue(int,int) {
+int  CHeightAndTypeTable::GetAverageShadingValue(int a2, int a3) {
   
   return ((unsigned __int8)a3 + (unsigned __int8)a2) / 2
        + (((BYTE2(a3) + BYTE2(a2)) / 2) << 16)
@@ -575,7 +575,7 @@ int  CHeightAndTypeTable::GetAverageShadingValue(int,int) {
 
 // address=[0x2f860e0]
 // Decompiled from int __thiscall CHeightAndTypeTable::GetLightFog(CHeightAndTypeTable *this, int a2, int a3, int a4, int a5)
-int  CHeightAndTypeTable::GetLightFog(int,int,int,int) {
+int  CHeightAndTypeTable::GetLightFog(int a2, int a3, int a4, int a5) {
   
   return *((_DWORD *)this + 2048 * a2 + 128 * a3 + 16 * a4 + 2 * a5 + 1554);
 }
@@ -583,7 +583,7 @@ int  CHeightAndTypeTable::GetLightFog(int,int,int,int) {
 
 // address=[0x2f86130]
 // Decompiled from int __thiscall CHeightAndTypeTable::GetShadowFog(CHeightAndTypeTable *this, int a2, int a3, int a4, int a5)
-int  CHeightAndTypeTable::GetShadowFog(int,int,int,int) {
+int  CHeightAndTypeTable::GetShadowFog(int a2, int a3, int a4, int a5) {
   
   return *((_DWORD *)this + 2048 * a2 + 128 * a3 + 16 * a4 + 2 * a5 + 1553);
 }

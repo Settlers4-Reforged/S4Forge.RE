@@ -1,6 +1,8 @@
 #ifndef IUNKNOWN_H
 #define IUNKNOWN_H
 
+#include "defines.h"
+
 class IUnknown {
 public:
     // address=[0x2616650]

@@ -4,7 +4,7 @@
 
 // address=[0x1402200]
 // Decompiled from void __cdecl CStoragePileRole::New(struct std::_Facet_base *a1)
-static class CPersistence * __cdecl CStoragePileRole::New(std::istream &) {
+class CPersistence * __cdecl CStoragePileRole::New(std::istream & a1) {
   
   if ( operator new(8u) )
     CStoragePileRole::CStoragePileRole(a1);
@@ -29,7 +29,7 @@ unsigned long  CStoragePileRole::ClassID(void)const {
 
 // address=[0x1560440]
 // Decompiled from int __cdecl CStoragePileRole::Load(int a1)
-static class CStoragePileRole * __cdecl CStoragePileRole::Load(std::istream &) {
+class CStoragePileRole * __cdecl CStoragePileRole::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
@@ -52,7 +52,7 @@ void  CStoragePileRole::Init(class CPile *) {
 
 // address=[0x1561940]
 // Decompiled from _DWORD *__thiscall CStoragePileRole::CStoragePileRole(_DWORD *this, int a2)
- CStoragePileRole::CStoragePileRole(std::istream &) {
+ CStoragePileRole::CStoragePileRole(std::istream & a2) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
@@ -78,7 +78,7 @@ void  CStoragePileRole::Init(class CPile *) {
 
 // address=[0x15619f0]
 // Decompiled from int __thiscall CStoragePileRole::Store(void *this, struct std::ostream *a2)
-void  CStoragePileRole::Store(std::ostream &) {
+void  CStoragePileRole::Store(std::ostream & a2) {
   
   int v3[2]; // [esp+0h] [ebp-8h] BYREF
 

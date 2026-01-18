@@ -4,7 +4,7 @@
 
 // address=[0x15fd4f0]
 // Decompiled from char __cdecl CShipMap::InShipList(int a1)
-static bool __cdecl CShipMap::InShipList(int) {
+bool __cdecl CShipMap::InShipList(int a1) {
   
   Squares *v1; // eax
   Squares *v2; // eax
@@ -36,7 +36,7 @@ static bool __cdecl CShipMap::InShipList(int) {
 
 // address=[0x15fe7e0]
 // Decompiled from char *__cdecl CShipMap::ShipListVW(int a1, int a2)
-static int (& __cdecl CShipMap::ShipListVW(int,int))[4] {
+int (& __cdecl CShipMap::ShipListVW(int,int) a1)[4] {
   
   return (char *)&CShipMap::m_tShipLists + 1024 * a2 + 16 * a1 + 1024;
 }
@@ -44,7 +44,7 @@ static int (& __cdecl CShipMap::ShipListVW(int,int))[4] {
 
 // address=[0x15fd1e0]
 // Decompiled from void *CShipMap::Init()
-static void __cdecl CShipMap::Init(void) {
+void __cdecl CShipMap::Init(void) {
   
   void *result; // eax
 
@@ -56,7 +56,7 @@ static void __cdecl CShipMap::Init(void) {
 
 // address=[0x15fd210]
 // Decompiled from void CShipMap::Done()
-static void __cdecl CShipMap::Done(void) {
+void __cdecl CShipMap::Done(void) {
   
   CShipMap::m_iInitialized = 0;
 }
@@ -64,7 +64,7 @@ static void __cdecl CShipMap::Done(void) {
 
 // address=[0x15fd220]
 // Decompiled from char __cdecl CShipMap::PlaceShip(int a1)
-static bool __cdecl CShipMap::PlaceShip(int) {
+bool __cdecl CShipMap::PlaceShip(int a1) {
   
   int *EntryForPlaceShip; // [esp+0h] [ebp-4h]
 
@@ -83,7 +83,7 @@ static bool __cdecl CShipMap::PlaceShip(int) {
 
 // address=[0x15fd280]
 // Decompiled from int *__cdecl CShipMap::GetEntryForPlaceShip(int a1)
-static int * __cdecl CShipMap::GetEntryForPlaceShip(int) {
+int * __cdecl CShipMap::GetEntryForPlaceShip(int a1) {
   
   Squares *v1; // eax
   Squares *v2; // eax
@@ -128,7 +128,7 @@ static int * __cdecl CShipMap::GetEntryForPlaceShip(int) {
 
 // address=[0x15fd420]
 // Decompiled from char __cdecl CShipMap::RemoveShip(int a1)
-static bool __cdecl CShipMap::RemoveShip(int) {
+bool __cdecl CShipMap::RemoveShip(int a1) {
   
   Squares *v1; // eax
   Squares *v2; // eax

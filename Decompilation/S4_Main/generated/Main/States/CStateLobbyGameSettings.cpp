@@ -4,7 +4,7 @@
 
 // address=[0x14b7f10]
 // Decompiled from int __cdecl sub_18B7F10(int a1)
-static class CGameState * __cdecl CStateLobbyGameSettings::DynamicCreateFunc(void *) {
+class CGameState * __cdecl CStateLobbyGameSettings::DynamicCreateFunc(void * a1) {
   
   if ( operator new(0xAF9Cu) )
     return CStateLobbyGameSettings::CStateLobbyGameSettings(a1);
@@ -15,7 +15,7 @@ static class CGameState * __cdecl CStateLobbyGameSettings::DynamicCreateFunc(voi
 
 // address=[0x14b7f90]
 // Decompiled from CStateLobbyGameSettings *__thiscall CStateLobbyGameSettings::CStateLobbyGameSettings(  CStateLobbyGameSettings *this,  int a2)
- CStateLobbyGameSettings::CStateLobbyGameSettings(void *) {
+ CStateLobbyGameSettings::CStateLobbyGameSettings(void * a2) {
   
   const WCHAR *v2; // eax
   const char *v3; // eax
@@ -250,7 +250,7 @@ bool  CStateLobbyGameSettings::Perform(void) {
 
 // address=[0x14b8890]
 // Decompiled from char __thiscall CStateLobbyGameSettings::OnEvent(CStateLobbyGameSettings *this, struct CEvn_Event *a2)
-bool  CStateLobbyGameSettings::OnEvent(class CEvn_Event &) {
+bool  CStateLobbyGameSettings::OnEvent(class CEvn_Event & a2) {
   
   char result; // al
   void *v3; // eax
@@ -719,7 +719,7 @@ void  CStateLobbyGameSettings::UpdatePlayerList(bool) {
 
 // address=[0x14b9b30]
 // Decompiled from int __stdcall CStateLobbyGameSettings::PrintChatLine(wchar_t *String, wchar_t *Source)
-void  CStateLobbyGameSettings::PrintChatLine(unsigned short const *,unsigned short const *) {
+void  CStateLobbyGameSettings::PrintChatLine(unsigned short const * String, unsigned short const * Source) {
   
   size_t v2; // eax
   size_t v3; // eax
@@ -749,7 +749,7 @@ void  CStateLobbyGameSettings::PrintChatLine(unsigned short const *,unsigned sho
 
 // address=[0x14b9ca0]
 // Decompiled from int CStateLobbyGameSettings::CompileUserFlags()
-static int __cdecl CStateLobbyGameSettings::CompileUserFlags(void) {
+int __cdecl CStateLobbyGameSettings::CompileUserFlags(void) {
   
   int v1; // eax
   const char *v2; // eax
@@ -955,7 +955,7 @@ static int __cdecl CStateLobbyGameSettings::CompileUserFlags(void) {
 
 // address=[0x14ba340]
 // Decompiled from char CStateLobbyGameSettings::CopyDefaultUserFlags()
-static bool __cdecl CStateLobbyGameSettings::CopyDefaultUserFlags(void) {
+bool __cdecl CStateLobbyGameSettings::CopyDefaultUserFlags(void) {
   
   const WCHAR *v0; // eax
   const char *v1; // eax
@@ -1058,7 +1058,7 @@ static bool __cdecl CStateLobbyGameSettings::CopyDefaultUserFlags(void) {
 
 // address=[0x14ba670]
 // Decompiled from int __cdecl CStateLobbyGameSettings::DrawMap(  unsigned __int16 *a1,  unsigned __int16 *a2,  unsigned int a3,  int a4,  int a5)
-static void __cdecl CStateLobbyGameSettings::DrawMap(unsigned short *,unsigned short *,unsigned int,int,int) {
+void __cdecl CStateLobbyGameSettings::DrawMap(unsigned short * a1, unsigned short * a2, unsigned int a3, int a4, int a5) {
   
   int result; // eax
   int v6; // [esp+1Ch] [ebp-31Ch]
@@ -1252,7 +1252,7 @@ void  CStateLobbyGameSettings::TransitionToHost(void) {
 
 // address=[0x14bae60]
 // Decompiled from int __thiscall CStateLobbyGameSettings::CreateLobbyGameInfo(_BYTE *this, int a2, int a3)
-void  CStateLobbyGameSettings::CreateLobbyGameInfo(class CLanLobbyGameSettings &,std::wstring &) {
+void  CStateLobbyGameSettings::CreateLobbyGameInfo(class CLanLobbyGameSettings & a2, std::wstring & a3) {
   
   *(_BYTE *)(a2 + 140) = CGameType::IsWebGame(g_pGameType);
   std::wstring::operator=(a3);
@@ -1322,7 +1322,7 @@ void  CStateLobbyGameSettings::CreateRandomGoods(void) {
 
 // address=[0x14bb1c0]
 // Decompiled from char __thiscall CStateLobbyGameSettings::CheckDoubleEconomyGood(CStateLobbyGameSettings *this, int a2)
-bool  CStateLobbyGameSettings::CheckDoubleEconomyGood(int) {
+bool  CStateLobbyGameSettings::CheckDoubleEconomyGood(int a2) {
   
   int i; // [esp+4h] [ebp-4h]
 
@@ -1546,7 +1546,7 @@ void  CStateLobbyGameSettings::SetBackButtonState(void) {
 
 // address=[0x14bb8f0]
 // Decompiled from void __thiscall CStateLobbyGameSettings::UserflagChanged(CStateLobbyGameSettings *this, int a2, int a3)
-void  CStateLobbyGameSettings::UserflagChanged(int,int) {
+void  CStateLobbyGameSettings::UserflagChanged(int a2, int a3) {
   
   const WCHAR *v3; // eax
   const char *v4; // eax

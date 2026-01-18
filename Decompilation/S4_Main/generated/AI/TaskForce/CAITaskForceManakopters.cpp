@@ -4,7 +4,7 @@
 
 // address=[0x132a180]
 // Decompiled from CAITaskForceManakopters *__thiscall CAITaskForceManakopters::CAITaskForceManakopters(  CAITaskForceManakopters *this,  int a2,  int a3)
- CAITaskForceManakopters::CAITaskForceManakopters(int,int) {
+ CAITaskForceManakopters::CAITaskForceManakopters(int a2, int a3) {
   
   CAITaskForceEx::CAITaskForceEx(this, a2, 8, 13, a3);
   *(_DWORD *)this = CAITaskForceManakopters::_vftable_;
@@ -99,7 +99,7 @@ void  CAITaskForceManakopters::Execute(void) {
 
 // address=[0x132d480]
 // Decompiled from char __thiscall CAITaskForceManakopters::NewCommand(CAITaskForceManakopters *this, unsigned int a2, int a3, int a4)
-bool  CAITaskForceManakopters::NewCommand(int,int,int) {
+bool  CAITaskForceManakopters::NewCommand(int a2, int a3, int a4) {
   
   char result; // al
 

@@ -1,6 +1,8 @@
 #ifndef COPTIMIZEOPTIONS_H
 #define COPTIMIZEOPTIONS_H
 
+#include "defines.h"
+
 class COptimizeOptions {
 public:
     // address=[0x2f3ed00]

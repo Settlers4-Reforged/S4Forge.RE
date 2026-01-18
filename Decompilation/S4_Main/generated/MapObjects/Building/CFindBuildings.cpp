@@ -12,7 +12,7 @@ class CBuilding *  CFindBuildings::BuildingPtr(void)const {
 
 // address=[0x15dec30]
 // Decompiled from CFindBuildings *__thiscall CFindBuildings::CFindBuildings(CFindBuildings *this, int a2, int a3, int a4)
- CFindBuildings::CFindBuildings(int,int,int) {
+ CFindBuildings::CFindBuildings(int a2, int a3, int a4) {
   
   CVWList::CVWList(this, a2, a3, a4);
   *((_DWORD *)this + 56) = a2;

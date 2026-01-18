@@ -4,7 +4,7 @@
 
 // address=[0x2f589d0]
 // Decompiled from CFilterCustomer *__thiscall CFilterCustomer::CFilterCustomer(  CFilterCustomer *this,  CSchedule **a2,  struct CProductivityControll *a3)
- CFilterCustomer::CFilterCustomer(class CProductivityControll *,class CProductivityControll *) {
+ CFilterCustomer::CFilterCustomer(class CProductivityControll * a2, class CProductivityControll * a3) {
   
   IFilterEntry::IFilterEntry(this);
   *(_DWORD *)this = &CFilterCustomer::_vftable_;

@@ -1,6 +1,8 @@
 #ifndef CAISCRIPTING_H
 #define CAISCRIPTING_H
 
+#include "defines.h"
+
 class CAIScripting : public IAIScripting {
 public:
     // address=[0x131d980]

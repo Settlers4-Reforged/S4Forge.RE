@@ -1,6 +1,8 @@
 #ifndef CVEHICLEPRODUCTIONINFO_H
 #define CVEHICLEPRODUCTIONINFO_H
 
+#include "defines.h"
+
 class CVehicleProductionInfo : public CBuildingInfo {
 public:
     // address=[0x1454a20]

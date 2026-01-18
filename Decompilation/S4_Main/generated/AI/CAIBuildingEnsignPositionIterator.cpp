@@ -4,7 +4,7 @@
 
 // address=[0x130d390]
 // Decompiled from CAIBuildingEnsignPositionIterator *__thiscall CAIBuildingEnsignPositionIterator::CAIBuildingEnsignPositionIterator(  CAIBuildingEnsignPositionIterator *this,  int a2,  int a3)
- CAIBuildingEnsignPositionIterator::CAIBuildingEnsignPositionIterator(int,int) {
+ CAIBuildingEnsignPositionIterator::CAIBuildingEnsignPositionIterator(int a2, int a3) {
   
   *(_DWORD *)this = CBuildingMgr::GetFirstBuildingId((CBuildingMgr *)g_cBuildingMgr, a2, a3);
   return this;
@@ -13,7 +13,7 @@
 
 // address=[0x130d3c0]
 // Decompiled from char __thiscall CAIBuildingEnsignPositionIterator::NextXY(CAIBuildingEnsignPositionIterator *this, int *a2, int *a3)
-bool  CAIBuildingEnsignPositionIterator::NextXY(int &,int &) {
+bool  CAIBuildingEnsignPositionIterator::NextXY(int & a2, int & a3) {
   
   Y16X16 *v3; // eax
   unsigned __int8 *BuildingPtr; // [esp+0h] [ebp-8h]
@@ -30,7 +30,7 @@ bool  CAIBuildingEnsignPositionIterator::NextXY(int &,int &) {
 
 // address=[0x130d420]
 // Decompiled from char __thiscall CAIBuildingEnsignPositionIterator::NextWorldIdx(int *this, _DWORD *a2)
-bool  CAIBuildingEnsignPositionIterator::NextWorldIdx(int &) {
+bool  CAIBuildingEnsignPositionIterator::NextWorldIdx(int & a2) {
   
   unsigned __int8 *BuildingPtr; // [esp+0h] [ebp-8h]
 

@@ -1,6 +1,8 @@
 #ifndef STORMSAMPLEFRAMEWORK_H
 #define STORMSAMPLEFRAMEWORK_H
 
+#include "defines.h"
+
 class StormSampleFramework : public SampleFrameworkApplication {
 public:
     // address=[0x1683070]

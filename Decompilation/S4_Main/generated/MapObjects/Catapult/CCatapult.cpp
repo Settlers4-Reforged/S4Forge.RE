@@ -40,7 +40,7 @@ void  CCatapult::VehicleLogicUpdate(void) {
 
 // address=[0x153d590]
 // Decompiled from void __thiscall CCatapult::ConvertEventIntoGoal(CCatapult *this, struct CEntityEvent *a2)
-void  CCatapult::ConvertEventIntoGoal(class CEntityEvent *) {
+void  CCatapult::ConvertEventIntoGoal(class CEntityEvent * a2) {
   
   int v2; // eax
   int v3; // eax
@@ -136,7 +136,7 @@ void  CCatapult::ConvertEventIntoGoal(class CEntityEvent *) {
 
 // address=[0x153d840]
 // Decompiled from int __thiscall CCatapult::WarriorTaskWalkOneStep(CCatapult *this, struct IMovingEntity *a2)
-int  CCatapult::WarriorTaskWalkOneStep(class IMovingEntity &) {
+int  CCatapult::WarriorTaskWalkOneStep(class IMovingEntity & a2) {
   
   int v2; // eax
   int v3; // eax
@@ -152,7 +152,7 @@ int  CCatapult::WarriorTaskWalkOneStep(class IMovingEntity &) {
 
 // address=[0x153d8a0]
 // Decompiled from int __thiscall CCatapult::WarriorTaskAttack(char *this, int a2, int a3, int a4)
-void  CCatapult::WarriorTaskAttack(class IMovingEntity &,int,enum T_WARRIOR_ATTACK) {
+void  CCatapult::WarriorTaskAttack(class IMovingEntity & a2, int a3, enum T_WARRIOR_ATTACK a4) {
   
   int v4; // eax
 
@@ -165,7 +165,7 @@ void  CCatapult::WarriorTaskAttack(class IMovingEntity &,int,enum T_WARRIOR_ATTA
 
 // address=[0x153d900]
 // Decompiled from int __thiscall CCatapult::WarriorTaskFinished(CCatapult *this, struct IMovingEntity *a2)
-void  CCatapult::WarriorTaskFinished(class IMovingEntity &) {
+void  CCatapult::WarriorTaskFinished(class IMovingEntity & a2) {
   
   int v2; // eax
   int v3; // eax
@@ -206,7 +206,7 @@ void  CCatapult::WarriorTaskFinished(class IMovingEntity &) {
 
 // address=[0x153da20]
 // Decompiled from int __thiscall CCatapult::WarriorTaskIdleWalk(CCatapult *this, struct IMovingEntity *a2)
-int  CCatapult::WarriorTaskIdleWalk(class IMovingEntity &) {
+int  CCatapult::WarriorTaskIdleWalk(class IMovingEntity & a2) {
   
   int v2; // eax
   int v3; // eax
@@ -233,7 +233,7 @@ int  CCatapult::WarriorTaskIdleWalk(class IMovingEntity &) {
 
 // address=[0x153dae0]
 // Decompiled from CCatapult *__thiscall CCatapult::EntityOrderCanceled(CCatapult *this, int a2)
-void  CCatapult::EntityOrderCanceled(int) {
+void  CCatapult::EntityOrderCanceled(int a2) {
   
   CCatapult *result; // eax
 
@@ -251,7 +251,7 @@ void  CCatapult::EntityOrderCanceled(int) {
 
 // address=[0x153db30]
 // Decompiled from CCatapult *__thiscall CCatapult::GoodArrived(CCatapult *this, int a2, int a3)
-void  CCatapult::GoodArrived(int,int) {
+void  CCatapult::GoodArrived(int a2, int a3) {
   
   int v3; // edx
   CCatapult *result; // eax
@@ -271,7 +271,7 @@ void  CCatapult::GoodArrived(int,int) {
 
 // address=[0x153dba0]
 // Decompiled from _DWORD *__thiscall CCatapult::CCatapult(_DWORD *this, int a2)
- CCatapult::CCatapult(std::istream &) {
+ CCatapult::CCatapult(std::istream & a2) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
@@ -302,7 +302,7 @@ void  CCatapult::GoodArrived(int,int) {
 
 // address=[0x153dcb0]
 // Decompiled from int __thiscall CCatapult::Store(int *this, struct std::ostream *a2)
-void  CCatapult::Store(std::ostream &) {
+void  CCatapult::Store(std::ostream & a2) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
   int *v4; // [esp+4h] [ebp-4h]
@@ -337,7 +337,7 @@ void  CCatapult::RequestAmmoDonkey(void) {
 
 // address=[0x153dd70]
 // Decompiled from int __thiscall CCatapult::GetMeetingPointXY(int this, int a2, int a3)
-int const  CCatapult::GetMeetingPointXY(enum OBJ_TYPE,int) {
+int const  CCatapult::GetMeetingPointXY(enum OBJ_TYPE a2, int a3) {
   
   int v3; // esi
   int v4; // esi
@@ -371,7 +371,7 @@ int const  CCatapult::GetMeetingPointXY(enum OBJ_TYPE,int) {
 
 // address=[0x153de60]
 // Decompiled from CCatapult *__thiscall CCatapult::SupplyCanceled(CCatapult *this, int a2, int a3)
-void  CCatapult::SupplyCanceled(int,int) {
+void  CCatapult::SupplyCanceled(int a2, int a3) {
   
   CCatapult *result; // eax
 
@@ -401,7 +401,7 @@ void  CCatapult::PostLoadInit(void) {
 
 // address=[0x153dee0]
 // Decompiled from unsigned __int8 *__thiscall CCatapult::OnComeToFerry(CCatapult *this, int a2)
-void  CCatapult::OnComeToFerry(int) {
+void  CCatapult::OnComeToFerry(int a2) {
   
   unsigned __int8 *result; // eax
   int v3; // eax
@@ -446,7 +446,7 @@ void  CCatapult::OnComeToFerry(int) {
 
 // address=[0x153e000]
 // Decompiled from CCatapult *__thiscall CCatapult::CCatapult(CCatapult *this, int a2, int a3, int a4, int a5, int a6, int a7, bool a8)
- CCatapult::CCatapult(int,int,int,int,int,int,bool) {
+ CCatapult::CCatapult(int a2, int a3, int a4, int a5, int a6, int a7, bool a8) {
   
   CWheeler::CWheeler(this, a2, a3, a4, a5, a6, a7, a8);
   CWarriorBehavior::CWarriorBehavior((CCatapult *)((char *)this + 180));
@@ -747,7 +747,7 @@ int  CCatapult::GetHealthDisplayID(void) {
 
 // address=[0x153e800]
 // Decompiled from char __thiscall CCatapult::AttackTargetAt(CCatapult *this, int a2, int a3)
-bool  CCatapult::AttackTargetAt(int,int) {
+bool  CCatapult::AttackTargetAt(int a2, int a3) {
   
   const struct IEntity *v4; // [esp+0h] [ebp-1Ch]
   int v5; // [esp+4h] [ebp-18h]

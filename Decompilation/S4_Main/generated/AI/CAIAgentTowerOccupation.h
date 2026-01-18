@@ -1,6 +1,8 @@
 #ifndef CAIAGENTTOWEROCCUPATION_H
 #define CAIAGENTTOWEROCCUPATION_H
 
+#include "defines.h"
+
 class CAIAgentTowerOccupation : public CAINormalSectorAgent {
 public:
     // address=[0x1303df0]

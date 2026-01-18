@@ -4,7 +4,7 @@
 
 // address=[0x1400360]
 // Decompiled from int __cdecl CDecoObject::New(int a1)
-static class CPersistence * __cdecl CDecoObject::New(std::istream &) {
+class CPersistence * __cdecl CDecoObject::New(std::istream & a1) {
   
   if ( CDecoObject::operator new(0x50u) )
     return CDecoObject::CDecoObject(a1);
@@ -15,7 +15,7 @@ static class CPersistence * __cdecl CDecoObject::New(std::istream &) {
 
 // address=[0x1541b70]
 // Decompiled from CDecoObject *__thiscall CDecoObject::CDecoObject(  CDecoObject *this,  int a2,  int a3,  unsigned int a4,  int a5,  int a6,  int a7)
- CDecoObject::CDecoObject(int,int,int,int,int,int) {
+ CDecoObject::CDecoObject(int a2, int a3, int a4, int a5, int a6, int a7) {
   
   IDecoObject::IDecoObject(this, a2, a3, a4, a5, 1);
   *(_DWORD *)this = &CDecoObject::_vftable_;
@@ -86,7 +86,7 @@ struct SGfxObjectInfo *  CDecoObject::GetGfxInfos(void) {
 
 // address=[0x1541e20]
 // Decompiled from unsigned int __cdecl CDecoObject::operator new(unsigned int a1)
-static void * __cdecl CDecoObject::operator new(unsigned int) {
+void * __cdecl CDecoObject::operator new(unsigned int a1) {
   
   return CDecoObjMgr::Alloc((CDecoObjMgr *)&g_cDecoObjMgr, a1);
 }
@@ -94,7 +94,7 @@ static void * __cdecl CDecoObject::operator new(unsigned int) {
 
 // address=[0x1541e40]
 // Decompiled from void __cdecl CDecoObject::operator delete(void *a1)
-static void __cdecl CDecoObject::operator delete(void *) {
+void __cdecl CDecoObject::operator delete(void * a1) {
   
   CDecoObjMgr::Dealloc((CDecoObjMgr *)&g_cDecoObjMgr, a1);
 }
@@ -102,7 +102,7 @@ static void __cdecl CDecoObject::operator delete(void *) {
 
 // address=[0x1541e80]
 // Decompiled from _DWORD *__thiscall CDecoObject::CDecoObject(_DWORD *this, int a2)
- CDecoObject::CDecoObject(std::istream &) {
+ CDecoObject::CDecoObject(std::istream & a2) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
@@ -132,7 +132,7 @@ static void __cdecl CDecoObject::operator delete(void *) {
 
 // address=[0x1541f80]
 // Decompiled from int __thiscall CDecoObject::Store(__int16 *this, struct std::ostream *a2)
-void  CDecoObject::Store(std::ostream &) {
+void  CDecoObject::Store(std::ostream & a2) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
   __int16 *v4; // [esp+4h] [ebp-4h]
@@ -175,7 +175,7 @@ unsigned long  CDecoObject::ClassID(void)const {
 
 // address=[0x1542420]
 // Decompiled from void __thiscall CDecoObject::Decrease(CDecoObject *this, int a2)
-void  CDecoObject::Decrease(int) {
+void  CDecoObject::Decrease(int a2) {
   
   ;
 }
@@ -183,7 +183,7 @@ void  CDecoObject::Decrease(int) {
 
 // address=[0x1542460]
 // Decompiled from int __thiscall CDecoObject::Increase(CDecoObject *this, int a2)
-int  CDecoObject::Increase(int) {
+int  CDecoObject::Increase(int a2) {
   
   return 1;
 }

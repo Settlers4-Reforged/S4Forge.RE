@@ -37,7 +37,7 @@
 
 // address=[0x16a21e0]
 // Decompiled from char __thiscall IVideoEngine::Init(IVideoEngine *this, unsigned int a2)
-bool  IVideoEngine::Init(unsigned int) {
+bool  IVideoEngine::Init(unsigned int a2) {
   
   if ( !g_pVideo && BBSupportDbgReport(2, "VideoEngine\\VideoEngineInterface.cpp", 59, "g_pVideo") == 1 )
     __debugbreak();
@@ -50,7 +50,7 @@ bool  IVideoEngine::Init(unsigned int) {
 
 // address=[0x16a2230]
 // Decompiled from char __thiscall IVideoEngine::StartVideo(IVideoEngine *this, char *a2, unsigned int a3, unsigned int a4)
-bool  IVideoEngine::StartVideo(char *,unsigned int,unsigned int) {
+bool  IVideoEngine::StartVideo(char * a2, unsigned int a3, unsigned int a4) {
   
   return CBinkInterface::OpenVideo((CBinkInterface *)g_pVideo, a2, a3, a4);
 }
@@ -123,7 +123,7 @@ void  IVideoEngine::Set_565_GfxMode(void) {
 
 // address=[0x16a23c0]
 // Decompiled from char __thiscall IVideoEngine::RenderToSurface(IVideoEngine *this, unsigned __int16 *a2, unsigned int a3)
-bool  IVideoEngine::RenderToSurface(unsigned short *,unsigned int) {
+bool  IVideoEngine::RenderToSurface(unsigned short * a2, unsigned int a3) {
   
   if ( !g_pVideo && BBSupportDbgReport(2, "VideoEngine\\VideoEngineInterface.cpp", 136, "g_pVideo") == 1 )
     __debugbreak();

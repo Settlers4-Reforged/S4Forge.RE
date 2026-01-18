@@ -4,7 +4,7 @@
 
 // address=[0x2f3e7e0]
 // Decompiled from CSolutionEdge *__thiscall CSolutionEdge::CSolutionEdge(CSolutionEdge *this, int a2, int a3)
- CSolutionEdge::CSolutionEdge(int,int) {
+ CSolutionEdge::CSolutionEdge(int a2, int a3) {
   
   CDynListEntry::CDynListEntry(this);
   *(_DWORD *)this = &CSolutionEdge::_vftable_;

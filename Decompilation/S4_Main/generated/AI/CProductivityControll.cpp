@@ -17,7 +17,7 @@
 
 // address=[0x2f575b0]
 // Decompiled from IScheduleEntry *__thiscall CProductivityControll::CProductivityControll(  IScheduleEntry *this,  int a2,  int a3,  int a4,  int a5,  int a6)
- CProductivityControll::CProductivityControll(struct SBuildId,enum BUILDING_TYPES,int,int) {
+ CProductivityControll::CProductivityControll(struct SBuildId a2, enum BUILDING_TYPES a3, int a4, int a5) {
   
   _BYTE v7[112]; // [esp+4h] [ebp-80h] BYREF
   IScheduleEntry *v8; // [esp+74h] [ebp-10h]
@@ -35,7 +35,7 @@
 
 // address=[0x2f57630]
 // Decompiled from int __thiscall CProductivityControll::CProductivityControll(int this, int a2, int a3, int a4, int a5, int a6)
- CProductivityControll::CProductivityControll(int,enum T_BUILD_LEVEL,enum BUILDING_TYPES,int,int) {
+ CProductivityControll::CProductivityControll(int a2, enum T_BUILD_LEVEL a3, enum BUILDING_TYPES a4, int a5, int a6) {
   
   IScheduleEntry::IScheduleEntry((IScheduleEntry *)this);
   *(_DWORD *)this = &CProductivityControll::_vftable_;
@@ -770,7 +770,7 @@ bool  CProductivityControll::PileDistribution(void) {
 
 // address=[0x2f588c0]
 // Decompiled from int __stdcall CProductivityControll::GetFoodBuilding(int a1)
-enum BUILDING_TYPES  CProductivityControll::GetFoodBuilding(enum BUILDING_TYPES) {
+enum BUILDING_TYPES  CProductivityControll::GetFoodBuilding(enum BUILDING_TYPES a1) {
   
   int result; // eax
 

@@ -4,7 +4,7 @@
 
 // address=[0x135e070]
 // Decompiled from bool CDebugInfo::IsMMX()
-static bool __cdecl CDebugInfo::IsMMX(void) {
+bool __cdecl CDebugInfo::IsMMX(void) {
   
   return byte_3F44EC0 == 1;
 }
@@ -12,7 +12,7 @@ static bool __cdecl CDebugInfo::IsMMX(void) {
 
 // address=[0x1480a00]
 // Decompiled from char __cdecl CDebugInfo::CheckEnvironment(bool a1)
-static bool __cdecl CDebugInfo::CheckEnvironment(bool) {
+bool __cdecl CDebugInfo::CheckEnvironment(bool a1) {
   
   DWORD LastError; // eax
   DWORD v2; // eax
@@ -62,7 +62,7 @@ static bool __cdecl CDebugInfo::CheckEnvironment(bool) {
 
 // address=[0x1480b10]
 // Decompiled from bool CDebugInfo::IsTargetPlatform()
-static bool __cdecl CDebugInfo::IsTargetPlatform(void) {
+bool __cdecl CDebugInfo::IsTargetPlatform(void) {
   
   if ( dword_3F44E94 == 2 )
     return dword_3F44E98 >= 4;
@@ -74,7 +74,7 @@ static bool __cdecl CDebugInfo::IsTargetPlatform(void) {
 
 // address=[0x1481080]
 // Decompiled from bool CDebugInfo::IsWindowsNT40()
-static bool __cdecl CDebugInfo::IsWindowsNT40(void) {
+bool __cdecl CDebugInfo::IsWindowsNT40(void) {
   
   return CDebugInfo::m_EnvInfo == 10;
 }
@@ -82,7 +82,7 @@ static bool __cdecl CDebugInfo::IsWindowsNT40(void) {
 
 // address=[0x14c2e70]
 // Decompiled from char CDebugInfo::IsNetworkAvailable()
-static bool __cdecl CDebugInfo::IsNetworkAvailable(void) {
+bool __cdecl CDebugInfo::IsNetworkAvailable(void) {
   
   return byte_3F44F00;
 }
@@ -90,7 +90,7 @@ static bool __cdecl CDebugInfo::IsNetworkAvailable(void) {
 
 // address=[0x147f840]
 // Decompiled from int CDebugInfo::LogEnvironment()
-static void __cdecl CDebugInfo::LogEnvironment(void) {
+void __cdecl CDebugInfo::LogEnvironment(void) {
   
   const char *v0; // eax
   const char *v1; // eax
@@ -130,7 +130,7 @@ static void __cdecl CDebugInfo::LogEnvironment(void) {
 
 // address=[0x147fa70]
 // Decompiled from char CDebugInfo::CheckOS()
-static bool __cdecl CDebugInfo::CheckOS(void) {
+bool __cdecl CDebugInfo::CheckOS(void) {
   
   _OSVERSIONINFOA VersionInformation; // [esp+8h] [ebp-98h] BYREF
 
@@ -195,7 +195,7 @@ static bool __cdecl CDebugInfo::CheckOS(void) {
 
 // address=[0x147fc10]
 // Decompiled from char CDebugInfo::CheckCPU()
-static bool __cdecl CDebugInfo::CheckCPU(void) {
+bool __cdecl CDebugInfo::CheckCPU(void) {
   
   int *v0; // eax
   _BYTE v2[16]; // [esp+0h] [ebp-7Ch] BYREF
@@ -237,7 +237,7 @@ static bool __cdecl CDebugInfo::CheckCPU(void) {
 
 // address=[0x147fd80]
 // Decompiled from char CDebugInfo::CheckGraphicsAdapter()
-static bool __cdecl CDebugInfo::CheckGraphicsAdapter(void) {
+bool __cdecl CDebugInfo::CheckGraphicsAdapter(void) {
   
   return 1;
 }
@@ -245,7 +245,7 @@ static bool __cdecl CDebugInfo::CheckGraphicsAdapter(void) {
 
 // address=[0x147fd90]
 // Decompiled from _DWORD *__cdecl CDebugInfo::CPUSpeed(_DWORD *a1, int a2)
-static struct SFreqInfo __cdecl CDebugInfo::CPUSpeed(int) {
+struct SFreqInfo __cdecl CDebugInfo::CPUSpeed(int a1) {
   
   int *RDTSCCpuSpeed; // eax
   int *CmosCpuSpeed; // eax
@@ -343,7 +343,7 @@ static struct SFreqInfo __cdecl CDebugInfo::CPUSpeed(int) {
 
 // address=[0x147ff20]
 // Decompiled from char CDebugInfo::CheckMemory()
-static bool __cdecl CDebugInfo::CheckMemory(void) {
+bool __cdecl CDebugInfo::CheckMemory(void) {
   
   _MEMORYSTATUS Buffer; // [esp+0h] [ebp-24h] BYREF
 
@@ -359,7 +359,7 @@ static bool __cdecl CDebugInfo::CheckMemory(void) {
 
 // address=[0x147ff80]
 // Decompiled from _DWORD *__cdecl CDebugInfo::GetBSFCpuSpeed(_DWORD *a1, unsigned int a2)
-static struct SFreqInfo __cdecl CDebugInfo::GetBSFCpuSpeed(unsigned int) {
+struct SFreqInfo __cdecl CDebugInfo::GetBSFCpuSpeed(unsigned int a1) {
   
   __int16 v3; // bx
   LARGE_INTEGER PerformanceCount; // [esp+4h] [ebp-40h] BYREF
@@ -418,7 +418,7 @@ static struct SFreqInfo __cdecl CDebugInfo::GetBSFCpuSpeed(unsigned int) {
 
 // address=[0x14800f0]
 // Decompiled from _DWORD *__cdecl CDebugInfo::GetRDTSCCpuSpeed(_DWORD *a1)
-static struct SFreqInfo __cdecl CDebugInfo::GetRDTSCCpuSpeed(void) {
+struct SFreqInfo __cdecl CDebugInfo::GetRDTSCCpuSpeed(void a1) {
   
   unsigned __int64 v2; // rax
   unsigned __int64 v3; // rax
@@ -516,7 +516,7 @@ static struct SFreqInfo __cdecl CDebugInfo::GetRDTSCCpuSpeed(void) {
 
 // address=[0x14803b0]
 // Decompiled from __int16 __thiscall CDebugInfo::wincpuid(void *this)
-static unsigned short __cdecl CDebugInfo::wincpuid(void) {
+unsigned short __cdecl CDebugInfo::wincpuid(void) {
   
   __int16 v2; // [esp+0h] [ebp-4h]
 
@@ -547,7 +547,7 @@ static unsigned short __cdecl CDebugInfo::wincpuid(void) {
 
 // address=[0x1480450]
 // Decompiled from int CDebugInfo::wincpufeatures()
-static unsigned int __cdecl CDebugInfo::wincpufeatures(void) {
+unsigned int __cdecl CDebugInfo::wincpufeatures(void) {
   
   int v11; // [esp+10h] [ebp-8h]
   int i; // [esp+14h] [ebp-4h]
@@ -575,7 +575,7 @@ static unsigned int __cdecl CDebugInfo::wincpufeatures(void) {
 
 // address=[0x14804f0]
 // Decompiled from _DWORD *__cdecl CDebugInfo::GetCmosCpuSpeed(_DWORD *a1)
-static struct SFreqInfo __cdecl CDebugInfo::GetCmosCpuSpeed(void) {
+struct SFreqInfo __cdecl CDebugInfo::GetCmosCpuSpeed(void a1) {
   
   unsigned int v2[2]; // [esp+4h] [ebp-5Ch] BYREF
   unsigned int v3; // [esp+Ch] [ebp-54h] BYREF
@@ -660,7 +660,7 @@ static struct SFreqInfo __cdecl CDebugInfo::GetCmosCpuSpeed(void) {
 
 // address=[0x1480700]
 // Decompiled from _BOOL2 CDebugInfo::wincpuidsupport()
-static unsigned short __cdecl CDebugInfo::wincpuidsupport(void) {
+unsigned short __cdecl CDebugInfo::wincpuidsupport(void) {
   
   unsigned int v0; // kr00_4
   unsigned int v1; // kr04_4
@@ -674,7 +674,7 @@ static unsigned short __cdecl CDebugInfo::wincpuidsupport(void) {
 
 // address=[0x1480730]
 // Decompiled from __int16 CDebugInfo::check_8086()
-static unsigned short __cdecl CDebugInfo::check_8086(void) {
+unsigned short __cdecl CDebugInfo::check_8086(void) {
   
   return -1;
 }
@@ -682,7 +682,7 @@ static unsigned short __cdecl CDebugInfo::check_8086(void) {
 
 // address=[0x1480780]
 // Decompiled from __int16 CDebugInfo::check_80286()
-static unsigned short __cdecl CDebugInfo::check_80286(void) {
+unsigned short __cdecl CDebugInfo::check_80286(void) {
   
   return -1;
 }
@@ -690,7 +690,7 @@ static unsigned short __cdecl CDebugInfo::check_80286(void) {
 
 // address=[0x14807d0]
 // Decompiled from int CDebugInfo::check_80386()
-static unsigned short __cdecl CDebugInfo::check_80386(void) {
+unsigned short __cdecl CDebugInfo::check_80386(void) {
   
   unsigned int v0; // kr00_4
   unsigned int v1; // kr04_4
@@ -709,7 +709,7 @@ static unsigned short __cdecl CDebugInfo::check_80386(void) {
 
 // address=[0x1480820]
 // Decompiled from __int16 CDebugInfo::check_IDProc()
-static unsigned short __cdecl CDebugInfo::check_IDProc(void) {
+unsigned short __cdecl CDebugInfo::check_IDProc(void) {
   
   int i; // [esp+10h] [ebp-28h]
   char v12[16]; // [esp+14h] [ebp-24h] BYREF
@@ -742,7 +742,7 @@ static unsigned short __cdecl CDebugInfo::check_IDProc(void) {
 
 // address=[0x1480920]
 // Decompiled from _BOOL2 CDebugInfo::check_clone()
-static unsigned short __cdecl CDebugInfo::check_clone(void) {
+unsigned short __cdecl CDebugInfo::check_clone(void) {
   
   char v5; // [esp-2h] [ebp-6h]
 
@@ -754,7 +754,7 @@ static unsigned short __cdecl CDebugInfo::check_clone(void) {
 
 // address=[0x1480960]
 // Decompiled from int CDebugInfo::GetCmosTick()
-static int __cdecl CDebugInfo::GetCmosTick(void) {
+int __cdecl CDebugInfo::GetCmosTick(void) {
   
   int result; // eax
 
@@ -766,7 +766,7 @@ static int __cdecl CDebugInfo::GetCmosTick(void) {
 
 // address=[0x1480980]
 // Decompiled from int __cdecl CDebugInfo::cpuTimeStamp(unsigned int *a1, unsigned int *a2)
-static unsigned int __cdecl CDebugInfo::cpuTimeStamp(unsigned long *,unsigned long *) {
+unsigned int __cdecl CDebugInfo::cpuTimeStamp(unsigned long * a1, unsigned long * a2) {
   
   unsigned __int64 v2; // kr00_8
 
@@ -779,7 +779,7 @@ static unsigned int __cdecl CDebugInfo::cpuTimeStamp(unsigned long *,unsigned lo
 
 // address=[0x14809c0]
 // Decompiled from int __cdecl CDebugInfo::diffTime64(  unsigned int a1,  unsigned int a2,  unsigned int a3,  unsigned int a4,  unsigned int *a5,  unsigned int *a6)
-static unsigned int __cdecl CDebugInfo::diffTime64(unsigned long,unsigned long,unsigned long,unsigned long,unsigned long *,unsigned long *) {
+unsigned int __cdecl CDebugInfo::diffTime64(unsigned long a1, unsigned long a2, unsigned long a3, unsigned long a4, unsigned long * a5, unsigned long * a6) {
   
   *a6 = a4 - a2;
   *a5 = (__PAIR64__(a3, a4) - __PAIR64__(a1, a2)) >> 32;

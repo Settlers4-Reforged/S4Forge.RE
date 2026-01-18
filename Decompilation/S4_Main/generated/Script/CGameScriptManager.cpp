@@ -21,7 +21,7 @@ class CLua &  CGameScriptManager::GetScriptEnv(void) {
 
 // address=[0x1439ca0]
 // Decompiled from void __thiscall CGameScriptManager::SendGameEvent(CGameScriptManager *this, unsigned int a2, int a3)
-void  CGameScriptManager::SendGameEvent(int,int) {
+void  CGameScriptManager::SendGameEvent(int a2, int a3) {
   
   if ( a2 >= 0x17
     && BBSupportDbgReport(
@@ -39,7 +39,7 @@ void  CGameScriptManager::SendGameEvent(int,int) {
 
 // address=[0x1470c10]
 // Decompiled from void __thiscall CGameScriptManager::SendGameEvent(  CGameScriptManager *this,  unsigned int a2,  int a3,  int a4,  int a5,  int a6)
-void  CGameScriptManager::SendGameEvent(int,int,int,int,int) {
+void  CGameScriptManager::SendGameEvent(int a2, int a3, int a4, int a5, int a6) {
   
   if ( a2 >= 0x17
     && BBSupportDbgReport(
@@ -57,7 +57,7 @@ void  CGameScriptManager::SendGameEvent(int,int,int,int,int) {
 
 // address=[0x147e750]
 // Decompiled from void __thiscall CGameScriptManager::SendGameEvent(CGameScriptManager *this, unsigned int a2)
-void  CGameScriptManager::SendGameEvent(int) {
+void  CGameScriptManager::SendGameEvent(int a2) {
   
   if ( a2 >= 0x17
     && BBSupportDbgReport(
@@ -75,7 +75,7 @@ void  CGameScriptManager::SendGameEvent(int) {
 
 // address=[0x147e7c0]
 // Decompiled from void __thiscall CGameScriptManager::SendGameEvent(CGameScriptManager *this, unsigned int a2, int a3, int a4)
-void  CGameScriptManager::SendGameEvent(int,int,int) {
+void  CGameScriptManager::SendGameEvent(int a2, int a3, int a4) {
   
   if ( a2 >= 0x17
     && BBSupportDbgReport(
@@ -93,7 +93,7 @@ void  CGameScriptManager::SendGameEvent(int,int,int) {
 
 // address=[0x147e840]
 // Decompiled from void __thiscall CGameScriptManager::SendGameEvent(CGameScriptManager *this, unsigned int a2, int a3, int a4, int a5)
-void  CGameScriptManager::SendGameEvent(int,int,int,int) {
+void  CGameScriptManager::SendGameEvent(int a2, int a3, int a4, int a5) {
   
   if ( a2 >= 0x17
     && BBSupportDbgReport(
@@ -111,7 +111,7 @@ void  CGameScriptManager::SendGameEvent(int,int,int,int) {
 
 // address=[0x14875a0]
 // Decompiled from CGameScriptManager *__thiscall CGameScriptManager::SetVictoryConditionHook(  CGameScriptManager *this,  void (__cdecl *a2)())
-void  CGameScriptManager::SetVictoryConditionHook(void (__cdecl*)(void)) {
+void  CGameScriptManager::SetVictoryConditionHook(void (__cdecl*)(void) a2) {
   
   CGameScriptManager *result; // eax
 
@@ -213,7 +213,7 @@ void  CGameScriptManager::Update(unsigned int) {
 
 // address=[0x15ff140]
 // Decompiled from int __thiscall CGameScriptManager::NewGame(CGameScriptManager *this, void *Src, size_t Size)
-void  CGameScriptManager::NewGame(char const *,unsigned int) {
+void  CGameScriptManager::NewGame(char const * Src, unsigned int Size) {
   
   int result; // eax
 
@@ -238,7 +238,7 @@ void  CGameScriptManager::NewGame(char const *,unsigned int) {
 
 // address=[0x15ff1f0]
 // Decompiled from void __thiscall CGameScriptManager::NewGameEx(  CGameScriptManager *this,  _BYTE *Src,  unsigned int Size,  wchar_t *Source,  char a5)
-void  CGameScriptManager::NewGameEx(char const *,unsigned int,wchar_t const *,bool) {
+void  CGameScriptManager::NewGameEx(char const * Src, unsigned int Size, wchar_t const * Source, bool a5) {
   
   wchar_t *v5; // eax
   const char *v6; // eax
@@ -357,7 +357,7 @@ LABEL_22:
 
 // address=[0x15ff6c0]
 // Decompiled from CGameScriptManager *__thiscall CGameScriptManager::Load(CGameScriptManager *this, struct IS4Chunk *a2)
-void  CGameScriptManager::Load(class IS4Chunk &) {
+void  CGameScriptManager::Load(class IS4Chunk & a2) {
   
   CGameScriptManager *result; // eax
 
@@ -392,7 +392,7 @@ void  CGameScriptManager::Load(class IS4Chunk &) {
 
 // address=[0x15ff800]
 // Decompiled from int __thiscall CGameScriptManager::Save(CGameScriptManager *this, struct IS4Chunk *a2)
-void  CGameScriptManager::Save(class IS4Chunk &) {
+void  CGameScriptManager::Save(class IS4Chunk & a2) {
   
   (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 24))(a2, 1093785866);
   (*(void (__thiscall **)(struct IS4Chunk *, _DWORD))(*(_DWORD *)a2 + 20))(a2, *((_DWORD *)this + 6));
@@ -446,7 +446,7 @@ void  CGameScriptManager::StartScript(void) {
 
 // address=[0x15ff960]
 // Decompiled from int __thiscall CGameScriptManager::CreateStartResources(void ***this, int a2, int a3, int a4, int a5, int a6)
-void  CGameScriptManager::CreateStartResources(int,int,int,int,int) {
+void  CGameScriptManager::CreateStartResources(int a2, int a3, int a4, int a5, int a6) {
   
   int result; // eax
   struct IScriptFile *v7; // [esp+18h] [ebp-24h]
@@ -496,7 +496,7 @@ void  CGameScriptManager::CreateStartResources(int,int,int,int,int) {
 
 // address=[0x15ffaf0]
 // Decompiled from int __thiscall CGameScriptManager::SetGlobal(CGameScriptManager *this, char *Str, int a3)
-void  CGameScriptManager::SetGlobal(char const *,int) {
+void  CGameScriptManager::SetGlobal(char const * Str, int a3) {
   
   void **ScriptEnv; // [esp+4h] [ebp-4h]
 
@@ -508,7 +508,7 @@ void  CGameScriptManager::SetGlobal(char const *,int) {
 
 // address=[0x16026c0]
 // Decompiled from int __thiscall CGameScriptManager::NewGame(CGameScriptManager *this, struct IScriptFile *a2)
-void  CGameScriptManager::NewGame(class IScriptFile &) {
+void  CGameScriptManager::NewGame(class IScriptFile & a2) {
   
   void *v2; // eax
   size_t v4; // [esp-4h] [ebp-8h]
@@ -529,7 +529,7 @@ void  CGameScriptManager::NewGame(void) {
 
 // address=[0x15ffb30]
 // Decompiled from bool __thiscall CGameScriptManager::LoadMapScript(int this, void *Src, size_t Size)
-bool  CGameScriptManager::LoadMapScript(char const *,unsigned int) {
+bool  CGameScriptManager::LoadMapScript(char const * Src, unsigned int Size) {
   
   if ( *(_DWORD *)(this + 20)
     && BBSupportDbgReport(2, "Script\\GameScriptManager.cpp", 362, "m_pMapScriptData == 0") == 1 )
@@ -559,7 +559,7 @@ bool  CGameScriptManager::LoadMapScript(char const *,unsigned int) {
 
 // address=[0x15ffc30]
 // Decompiled from int __thiscall CGameScriptManager::LoadState(CGameScriptManager *this, struct IS4Chunk *a2)
-void  CGameScriptManager::LoadState(class IS4Chunk &) {
+void  CGameScriptManager::LoadState(class IS4Chunk & a2) {
   
   int v3; // [esp+0h] [ebp-58h]
   int i; // [esp+8h] [ebp-50h]
@@ -581,7 +581,7 @@ void  CGameScriptManager::LoadState(class IS4Chunk &) {
 
 // address=[0x15ffd30]
 // Decompiled from int __thiscall CGameScriptManager::SaveState(CGameScriptManager *this, struct IS4Chunk *a2)
-void  CGameScriptManager::SaveState(class IS4Chunk &) {
+void  CGameScriptManager::SaveState(class IS4Chunk & a2) {
   
   int i; // [esp+4h] [ebp-50h]
   double v5[9]; // [esp+8h] [ebp-4Ch] BYREF
@@ -744,7 +744,7 @@ void  CGameScriptManager::Done(void) {
 
 // address=[0x1600230]
 // Decompiled from int __thiscall CGameScriptManager::SendGameEventCall(CGameScriptManager *this, unsigned int a2)
-void  CGameScriptManager::SendGameEventCall(int) {
+void  CGameScriptManager::SendGameEventCall(int a2) {
   
   int v3; // [esp+4h] [ebp-14h]
   int v4; // [esp+8h] [ebp-10h]
@@ -787,7 +787,7 @@ void  CGameScriptManager::SendGameEventCall(int) {
 
 // address=[0x1600370]
 // Decompiled from int __thiscall CGameScriptManager::SendGameEventCall(CGameScriptManager *this, unsigned int a2, int a3)
-void  CGameScriptManager::SendGameEventCall(int,int) {
+void  CGameScriptManager::SendGameEventCall(int a2, int a3) {
   
   int v3; // eax
   int v5; // [esp+8h] [ebp-10h]
@@ -830,7 +830,7 @@ void  CGameScriptManager::SendGameEventCall(int,int) {
 
 // address=[0x16004b0]
 // Decompiled from int __thiscall CGameScriptManager::SendGameEventCall(CGameScriptManager *this, unsigned int a2, int a3, int a4)
-void  CGameScriptManager::SendGameEventCall(int,int,int) {
+void  CGameScriptManager::SendGameEventCall(int a2, int a3, int a4) {
   
   int v5; // [esp+4h] [ebp-14h]
   int v6; // [esp+8h] [ebp-10h]
@@ -873,7 +873,7 @@ void  CGameScriptManager::SendGameEventCall(int,int,int) {
 
 // address=[0x16005f0]
 // Decompiled from int __thiscall CGameScriptManager::SendGameEventCall(CGameScriptManager *this, unsigned int a2, int a3, int a4, int a5)
-void  CGameScriptManager::SendGameEventCall(int,int,int,int) {
+void  CGameScriptManager::SendGameEventCall(int a2, int a3, int a4, int a5) {
   
   int v6; // [esp+4h] [ebp-14h]
   int v7; // [esp+8h] [ebp-10h]
@@ -916,7 +916,7 @@ void  CGameScriptManager::SendGameEventCall(int,int,int,int) {
 
 // address=[0x1600730]
 // Decompiled from int __thiscall CGameScriptManager::SendGameEventCall(  CGameScriptManager *this,  unsigned int a2,  int a3,  int a4,  int a5,  int a6)
-void  CGameScriptManager::SendGameEventCall(int,int,int,int,int) {
+void  CGameScriptManager::SendGameEventCall(int a2, int a3, int a4, int a5, int a6) {
   
   int v6; // eax
   int v8; // [esp+8h] [ebp-10h]
@@ -959,7 +959,7 @@ void  CGameScriptManager::SendGameEventCall(int,int,int,int,int) {
 
 // address=[0x1600880]
 // Decompiled from double *__thiscall CGameScriptManager::GetSaveVarValues(CGameScriptManager *this, double *a2, unsigned int a3)
-void  CGameScriptManager::GetSaveVarValues(double *,int) {
+void  CGameScriptManager::GetSaveVarValues(double * a2, int a3) {
   
   double *result; // eax
   double v4; // st7
@@ -997,7 +997,7 @@ void  CGameScriptManager::GetSaveVarValues(double *,int) {
 
 // address=[0x1600970]
 // Decompiled from int __thiscall CGameScriptManager::SetSaveVarValues(CGameScriptManager *this, double *a2, unsigned int a3)
-void  CGameScriptManager::SetSaveVarValues(double *,int) {
+void  CGameScriptManager::SetSaveVarValues(double * a2, int a3) {
   
   int result; // eax
   int v4; // [esp+8h] [ebp-24h]
@@ -1031,7 +1031,7 @@ void  CGameScriptManager::SetSaveVarValues(double *,int) {
 
 // address=[0x1600a60]
 // Decompiled from void __thiscall CGameScriptManager::RequestEvent(char *this, int a2, unsigned int a3)
-void  CGameScriptManager::RequestEvent(int,int) {
+void  CGameScriptManager::RequestEvent(int a2, int a3) {
   
   if ( a3 >= 0x17
     && BBSupportDbgReport(
@@ -1048,7 +1048,7 @@ void  CGameScriptManager::RequestEvent(int,int) {
 
 // address=[0x1600ab0]
 // Decompiled from void __thiscall CGameScriptManager::UnrequestEvent(char *this, int a2, unsigned int a3)
-void  CGameScriptManager::UnrequestEvent(int,int) {
+void  CGameScriptManager::UnrequestEvent(int a2, int a3) {
   
   if ( a3 >= 0x17
     && BBSupportDbgReport(
@@ -1065,7 +1065,7 @@ void  CGameScriptManager::UnrequestEvent(int,int) {
 
 // address=[0x1600b00]
 // Decompiled from void CGameScriptManager::LuaRequestEvent()
-static void __cdecl CGameScriptManager::LuaRequestEvent(void) {
+void __cdecl CGameScriptManager::LuaRequestEvent(void) {
   
   CScriptManager *ScriptManager; // [esp+0h] [ebp-1Ch]
   unsigned int Param; // [esp+4h] [ebp-18h]
@@ -1104,7 +1104,7 @@ static void __cdecl CGameScriptManager::LuaRequestEvent(void) {
 
 // address=[0x1600bf0]
 // Decompiled from void CGameScriptManager::LuaRequestEvents()
-static void __cdecl CGameScriptManager::LuaRequestEvents(void) {
+void __cdecl CGameScriptManager::LuaRequestEvents(void) {
   
   CScriptManager *ScriptManager; // [esp+0h] [ebp-20h]
   unsigned int Param; // [esp+4h] [ebp-1Ch]
@@ -1147,7 +1147,7 @@ static void __cdecl CGameScriptManager::LuaRequestEvents(void) {
 
 // address=[0x1600d20]
 // Decompiled from void CGameScriptManager::LuaUnrequestEvent()
-static void __cdecl CGameScriptManager::LuaUnrequestEvent(void) {
+void __cdecl CGameScriptManager::LuaUnrequestEvent(void) {
   
   CScriptManager *ScriptManager; // [esp+0h] [ebp-1Ch]
   unsigned int Param; // [esp+4h] [ebp-18h]
@@ -1186,7 +1186,7 @@ static void __cdecl CGameScriptManager::LuaUnrequestEvent(void) {
 
 // address=[0x1600e10]
 // Decompiled from void CGameScriptManager::LuaUnrequestEvents()
-static void __cdecl CGameScriptManager::LuaUnrequestEvents(void) {
+void __cdecl CGameScriptManager::LuaUnrequestEvents(void) {
   
   CScriptManager *ScriptManager; // [esp+0h] [ebp-20h]
   unsigned int Param; // [esp+4h] [ebp-1Ch]
@@ -1229,7 +1229,7 @@ static void __cdecl CGameScriptManager::LuaUnrequestEvents(void) {
 
 // address=[0x1600f40]
 // Decompiled from void CGameScriptManager::LuaErrorToTrace()
-static void __cdecl CGameScriptManager::LuaErrorToTrace(void) {
+void __cdecl CGameScriptManager::LuaErrorToTrace(void) {
   
   const char *v0; // eax
   int v1; // [esp+4h] [ebp-474h] BYREF

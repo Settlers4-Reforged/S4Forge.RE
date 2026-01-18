@@ -27,7 +27,7 @@
 
 // address=[0x2f3eb60]
 // Decompiled from CSolutionTree *__thiscall CSolutionTree::CSolutionTree(CSolutionTree *this, int a2, struct CParam *a3)
- CSolutionTree::CSolutionTree(int,class CParam *) {
+ CSolutionTree::CSolutionTree(int a2, class CParam * a3) {
   
   CDynList *v4; // [esp+Ch] [ebp-20h]
   CDynList *v5; // [esp+10h] [ebp-1Ch]
@@ -55,7 +55,7 @@
 
 // address=[0x2f3ec50]
 // Decompiled from int __thiscall CSolutionTree::NewSubSolution(CDynList **this, int a2, struct CParam *a3)
-void  CSolutionTree::NewSubSolution(int,class CParam *) {
+void  CSolutionTree::NewSubSolution(int a2, class CParam * a3) {
   
   struct CDynListEntry *v5; // [esp+Ch] [ebp-14h]
   CSolutionTree *C; // [esp+10h] [ebp-10h]
@@ -71,7 +71,7 @@ void  CSolutionTree::NewSubSolution(int,class CParam *) {
 
 // address=[0x2f3ece0]
 // Decompiled from int __thiscall CSolutionTree::NewSubSolution(CDynList **this, struct CSolutionTree *a2)
-void  CSolutionTree::NewSubSolution(class CSolutionTree *) {
+void  CSolutionTree::NewSubSolution(class CSolutionTree * a2) {
   
   return CDynList::addElement(this[5], a2);
 }

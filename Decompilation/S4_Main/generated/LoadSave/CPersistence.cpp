@@ -12,7 +12,7 @@ unsigned long  CPersistence::ClassID(void)const {
 
 // address=[0x13ed840]
 // Decompiled from struct std::ostream *__thiscall CPersistence::Store(struct CPersistence *this, struct std::ostream *a2)
-void  CPersistence::Store(std::ostream &) {
+void  CPersistence::Store(std::ostream & a2) {
   
   unsigned int v3[2]; // [esp+0h] [ebp-8h] BYREF
 
@@ -24,7 +24,7 @@ void  CPersistence::Store(std::ostream &) {
 
 // address=[0x13ed870]
 // Decompiled from _DWORD *__cdecl CPersistence::RegisterClassWhithId(int *a1, int a2, int a3)
-static void __cdecl CPersistence::RegisterClassWhithId(unsigned long &,class CPersistence * (__cdecl*)(std::istream &),unsigned long) {
+void __cdecl CPersistence::RegisterClassWhithId(unsigned long & a1, class CPersistence * (__cdecl*)(std::istream &) a2, unsigned long a3) {
   
   _DWORD *result; // eax
 
@@ -39,7 +39,7 @@ static void __cdecl CPersistence::RegisterClassWhithId(unsigned long &,class CPe
 
 // address=[0x13ed8b0]
 // Decompiled from int __cdecl CPersistence::New(int a1)
-static class CPersistence * __cdecl CPersistence::New(std::istream &) {
+class CPersistence * __cdecl CPersistence::New(std::istream & a1) {
   
   _BYTE v2[12]; // [esp+4h] [ebp-44h] BYREF
   _BYTE v3[12]; // [esp+10h] [ebp-38h] BYREF
@@ -87,7 +87,7 @@ static class CPersistence * __cdecl CPersistence::New(std::istream &) {
 
 // address=[0x13ed9d0]
 // Decompiled from int __cdecl CPersistence::New_HACK_VERSION(int a1)
-static class CPersistence * __cdecl CPersistence::New_HACK_VERSION(std::istream &) {
+class CPersistence * __cdecl CPersistence::New_HACK_VERSION(std::istream & a1) {
   
   _BYTE v2[4]; // [esp+4h] [ebp-20h] BYREF
   void *C; // [esp+10h] [ebp-14h]
@@ -120,7 +120,7 @@ static class CPersistence * __cdecl CPersistence::New_HACK_VERSION(std::istream 
 
 // address=[0x14e4760]
 // Decompiled from void *__thiscall CPersistence::operator=(void *this, int a2)
-class CPersistence &  CPersistence::operator=(class CPersistence const &) {
+class CPersistence &  CPersistence::operator=(class CPersistence const & a2) {
   
   return this;
 }
@@ -128,7 +128,7 @@ class CPersistence &  CPersistence::operator=(class CPersistence const &) {
 
 // address=[0x154edd0]
 // Decompiled from CPersistence *__thiscall CPersistence::CPersistence(  CPersistence *this,  const struct boost::exception_detail::clone_base *a2)
- CPersistence::CPersistence(class CPersistence &&) {
+ CPersistence::CPersistence(class CPersistence && a2) {
   
   *(_DWORD *)this = &CPersistence::_vftable_;
   return this;
@@ -146,7 +146,7 @@ class CPersistence &  CPersistence::operator=(class CPersistence const &) {
 
 // address=[0x13eda90]
 // Decompiled from char __cdecl CPersistence::LOAD_UINT8(int a1)
-static unsigned char __cdecl CPersistence::LOAD_UINT8(std::istream &) {
+unsigned char __cdecl CPersistence::LOAD_UINT8(std::istream & a1) {
   
   int pExceptionObject; // [esp+0h] [ebp-8h] BYREF
   char v3; // [esp+7h] [ebp-1h] BYREF
@@ -163,7 +163,7 @@ static unsigned char __cdecl CPersistence::LOAD_UINT8(std::istream &) {
 
 // address=[0x13edae0]
 // Decompiled from __int16 __cdecl CPersistence::LOAD_UINT16(int a1)
-static unsigned short __cdecl CPersistence::LOAD_UINT16(std::istream &) {
+unsigned short __cdecl CPersistence::LOAD_UINT16(std::istream & a1) {
   
   int pExceptionObject; // [esp+0h] [ebp-8h] BYREF
   __int16 v3; // [esp+4h] [ebp-4h] BYREF
@@ -180,7 +180,7 @@ static unsigned short __cdecl CPersistence::LOAD_UINT16(std::istream &) {
 
 // address=[0x13edb30]
 // Decompiled from int __cdecl CPersistence::LOAD_UINT32(int a1)
-static unsigned int __cdecl CPersistence::LOAD_UINT32(std::istream &) {
+unsigned int __cdecl CPersistence::LOAD_UINT32(std::istream & a1) {
   
   int v2; // [esp+0h] [ebp-8h] BYREF
   int pExceptionObject; // [esp+4h] [ebp-4h] BYREF
@@ -197,7 +197,7 @@ static unsigned int __cdecl CPersistence::LOAD_UINT32(std::istream &) {
 
 // address=[0x13edb80]
 // Decompiled from char __cdecl CPersistence::LOAD_INT8(int a1)
-static signed char __cdecl CPersistence::LOAD_INT8(std::istream &) {
+signed char __cdecl CPersistence::LOAD_INT8(std::istream & a1) {
   
   int pExceptionObject; // [esp+0h] [ebp-8h] BYREF
   char v3; // [esp+7h] [ebp-1h] BYREF
@@ -214,7 +214,7 @@ static signed char __cdecl CPersistence::LOAD_INT8(std::istream &) {
 
 // address=[0x13edbd0]
 // Decompiled from __int16 __cdecl CPersistence::LOAD_INT16(int a1)
-static short __cdecl CPersistence::LOAD_INT16(std::istream &) {
+short __cdecl CPersistence::LOAD_INT16(std::istream & a1) {
   
   int pExceptionObject; // [esp+0h] [ebp-8h] BYREF
   __int16 v3; // [esp+4h] [ebp-4h] BYREF
@@ -231,7 +231,7 @@ static short __cdecl CPersistence::LOAD_INT16(std::istream &) {
 
 // address=[0x13edc20]
 // Decompiled from int __cdecl CPersistence::LOAD_INT32(int a1)
-static int __cdecl CPersistence::LOAD_INT32(std::istream &) {
+int __cdecl CPersistence::LOAD_INT32(std::istream & a1) {
   
   int v2; // [esp+0h] [ebp-8h] BYREF
   int pExceptionObject; // [esp+4h] [ebp-4h] BYREF
@@ -248,7 +248,7 @@ static int __cdecl CPersistence::LOAD_INT32(std::istream &) {
 
 // address=[0x13edc70]
 // Decompiled from int __cdecl CPersistence::LOAD_ID(int a1)
-static unsigned long __cdecl CPersistence::LOAD_ID(std::istream &) {
+unsigned long __cdecl CPersistence::LOAD_ID(std::istream & a1) {
   
   int v2; // [esp+0h] [ebp-8h] BYREF
   int pExceptionObject; // [esp+4h] [ebp-4h] BYREF
@@ -265,7 +265,7 @@ static unsigned long __cdecl CPersistence::LOAD_ID(std::istream &) {
 
 // address=[0x13edcc0]
 // Decompiled from double __cdecl CPersistence::LOAD_FLOAT64(int a1)
-static double __cdecl CPersistence::LOAD_FLOAT64(std::istream &) {
+double __cdecl CPersistence::LOAD_FLOAT64(std::istream & a1) {
   
   double v2; // [esp+0h] [ebp-Ch] BYREF
   int pExceptionObject; // [esp+8h] [ebp-4h] BYREF
@@ -282,7 +282,7 @@ static double __cdecl CPersistence::LOAD_FLOAT64(std::istream &) {
 
 // address=[0x13edd10]
 // Decompiled from double __cdecl CPersistence::LOAD_FLOAT32(int a1)
-static float __cdecl CPersistence::LOAD_FLOAT32(std::istream &) {
+float __cdecl CPersistence::LOAD_FLOAT32(std::istream & a1) {
   
   float v2; // [esp+0h] [ebp-8h] BYREF
   int pExceptionObject; // [esp+4h] [ebp-4h] BYREF
@@ -299,7 +299,7 @@ static float __cdecl CPersistence::LOAD_FLOAT32(std::istream &) {
 
 // address=[0x13edd60]
 // Decompiled from char __cdecl CPersistence::LOAD_char(int a1)
-static char __cdecl CPersistence::LOAD_char(std::istream &) {
+char __cdecl CPersistence::LOAD_char(std::istream & a1) {
   
   int pExceptionObject; // [esp+0h] [ebp-8h] BYREF
   char v3; // [esp+7h] [ebp-1h] BYREF
@@ -316,7 +316,7 @@ static char __cdecl CPersistence::LOAD_char(std::istream &) {
 
 // address=[0x13eddb0]
 // Decompiled from int __cdecl CPersistence::LOAD_string(int a1, int a2)
-static std::string __cdecl CPersistence::LOAD_string(std::istream &) {
+std::string __cdecl CPersistence::LOAD_string(std::istream & a1) {
   
   int pExceptionObject; // [esp+8h] [ebp-30h] BYREF
   _BYTE v4[28]; // [esp+Ch] [ebp-2Ch] BYREF
@@ -340,7 +340,7 @@ static std::string __cdecl CPersistence::LOAD_string(std::istream &) {
 
 // address=[0x13ede70]
 // Decompiled from char __cdecl CPersistence::LOAD_bool(int a1)
-static bool __cdecl CPersistence::LOAD_bool(std::istream &) {
+bool __cdecl CPersistence::LOAD_bool(std::istream & a1) {
   
   int pExceptionObject; // [esp+0h] [ebp-8h] BYREF
   char v3; // [esp+7h] [ebp-1h] BYREF

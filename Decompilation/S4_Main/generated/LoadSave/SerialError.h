@@ -1,12 +1,14 @@
 #ifndef CPERSISTENCE_SERIALERROR_H
 #define CPERSISTENCE_SERIALERROR_H
 
+#include "defines.h"
+
 namespace CPersistence {
 
 class SerialError {
 public:
     // address=[0x13f2590]
-     SerialError(class CPersistence::SerialError const &);
+     SerialError(class CPersistence::SerialError const & a2);
 
     // address=[0x13f25c0]
      SerialError(void);

@@ -4,7 +4,7 @@
 
 // address=[0x12fc7b0]
 // Decompiled from CAIConfigInt *__thiscall CAIConfigInt::CAIConfigInt(CAIConfigInt *this, const char *a2, int a3)
- CAIConfigInt::CAIConfigInt(char const *,int) {
+ CAIConfigInt::CAIConfigInt(char const * a2, int a3) {
   
   CStaticConfigVarInt::CStaticConfigVarInt(this, (const char *)off_366E0C8, a2, a3);
   *(_DWORD *)this = &CAIConfigInt::_vftable_;

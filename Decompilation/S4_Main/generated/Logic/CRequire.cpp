@@ -4,7 +4,7 @@
 
 // address=[0x2f4f6b0]
 // Decompiled from _DWORD *__thiscall CRequire::CRequire(_DWORD *this, int a2)
- CRequire::CRequire(enum PILE_TYPES) {
+ CRequire::CRequire(enum PILE_TYPES a2) {
   
   *this = a2;
   this[1] = 0;

@@ -1,6 +1,8 @@
 #ifndef CSETTLERITERATORBASE_H
 #define CSETTLERITERATORBASE_H
 
+#include "defines.h"
+
 class CSettlerIteratorBase {
 public:
     // address=[0x1317460]
@@ -11,10 +13,10 @@ public:
 
 protected:
     // address=[0x13173d0]
-    void  Init(int);
+    void  Init(int a2);
 
     // address=[0x13174a0]
-    bool  SettlerValid(int);
+    bool  SettlerValid(int a2);
 
 };
 

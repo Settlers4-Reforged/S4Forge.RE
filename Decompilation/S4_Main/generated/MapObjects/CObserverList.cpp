@@ -21,7 +21,7 @@
 
 // address=[0x14eb6c0]
 // Decompiled from void __thiscall CObserverList::NotifyAndDetachAllObservers(CObserverList *this, const struct CEntityEvent *a2)
-void  CObserverList::NotifyAndDetachAllObservers(class CEntityEvent const &) {
+void  CObserverList::NotifyAndDetachAllObservers(class CEntityEvent const & a2) {
   
   CObserverList::NotifyAllObservers(this, (int)a2);
   CObserverList::DetachAllObservers(this);
@@ -30,7 +30,7 @@ void  CObserverList::NotifyAndDetachAllObservers(class CEntityEvent const &) {
 
 // address=[0x1559aa0]
 // Decompiled from int __thiscall CObserverList::Attach(CObserverList *this, int a2, int a3)
-void  CObserverList::Attach(int,int) {
+void  CObserverList::Attach(int a2, int a3) {
   
   int result; // eax
   _DWORD *v5; // [esp+4h] [ebp-8h]
@@ -84,7 +84,7 @@ void  CObserverList::Attach(int,int) {
 
 // address=[0x1559c20]
 // Decompiled from int __thiscall CObserverList::Detach(CObserverList *this, int a2)
-void  CObserverList::Detach(int) {
+void  CObserverList::Detach(int a2) {
   
   int result; // eax
   _DWORD *v4; // [esp+4h] [ebp-8h]
@@ -132,7 +132,7 @@ void  CObserverList::Detach(int) {
 
 // address=[0x1559d80]
 // Decompiled from int __thiscall CObserverList::NotifyAllObservers(void *this, int a2)
-void  CObserverList::NotifyAllObservers(class CEntityEvent const &)const {
+void  CObserverList::NotifyAllObservers(class CEntityEvent const & a2)const {
   
   _BYTE v3[12]; // [esp+4h] [ebp-3Ch] BYREF
   _BYTE v4[12]; // [esp+10h] [ebp-30h] BYREF
@@ -169,7 +169,7 @@ void  CObserverList::NotifyAllObservers(class CEntityEvent const &)const {
 
 // address=[0x1559e90]
 // Decompiled from int __thiscall CObserverList::NotifyAllObservers(  CObserverList *this,  const struct CEntityEvent *a2,  struct INotifyFilter *a3)
-void  CObserverList::NotifyAllObservers(class CEntityEvent const &,class INotifyFilter &)const {
+void  CObserverList::NotifyAllObservers(class CEntityEvent const & a2, class INotifyFilter & a3)const {
   
   _BYTE v4[12]; // [esp+4h] [ebp-3Ch] BYREF
   _BYTE v5[12]; // [esp+10h] [ebp-30h] BYREF
@@ -408,7 +408,7 @@ void  CObserverList::DetachAllNonePileObservers(void) {
 
 // address=[0x155a420]
 // Decompiled from char __thiscall CObserverList::IsInList(CObserverList *this, int a2)
-bool  CObserverList::IsInList(int)const {
+bool  CObserverList::IsInList(int a2)const {
   
   _BYTE v3[12]; // [esp+4h] [ebp-3Ch] BYREF
   _BYTE v4[12]; // [esp+10h] [ebp-30h] BYREF
@@ -459,7 +459,7 @@ bool  CObserverList::IsInList(int)const {
 
 // address=[0x155a6b0]
 // Decompiled from void *__thiscall CObserverList::CObserverList(void *this, int a2)
- CObserverList::CObserverList(std::istream &) {
+ CObserverList::CObserverList(std::istream & a2) {
   
   _DWORD v3[2]; // [esp+4h] [ebp-28h] BYREF
   int Version; // [esp+Ch] [ebp-20h]
@@ -495,7 +495,7 @@ bool  CObserverList::IsInList(int)const {
 
 // address=[0x155a7a0]
 // Decompiled from int __thiscall CObserverList::Store(void *this, struct std::ostream *a2)
-void  CObserverList::Store(std::ostream &) {
+void  CObserverList::Store(std::ostream & a2) {
   
   _BYTE v3[12]; // [esp+4h] [ebp-64h] BYREF
   _BYTE v4[12]; // [esp+10h] [ebp-58h] BYREF
@@ -546,7 +546,7 @@ void  CObserverList::Store(std::ostream &) {
 
 // address=[0x155a570]
 // Decompiled from char __thiscall CObserverList::Remove(CObserverList *this, int a2)
-bool  CObserverList::Remove(int) {
+bool  CObserverList::Remove(int a2) {
   
   int v2; // edx
   char v4; // [esp-Ch] [ebp-64h] BYREF

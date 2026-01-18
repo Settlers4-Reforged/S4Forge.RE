@@ -4,7 +4,7 @@
 
 // address=[0x1400540]
 // Decompiled from int __cdecl CDonkeyRole::New(int a1)
-static class CPersistence * __cdecl CDonkeyRole::New(std::istream &) {
+class CPersistence * __cdecl CDonkeyRole::New(std::istream & a1) {
   
   if ( operator new(0x7Cu) )
     return CDonkeyRole::CDonkeyRole(a1);
@@ -45,7 +45,7 @@ void  CDonkeyRole::MemHomePosition(void) {
 
 // address=[0x1569d40]
 // Decompiled from int __thiscall CDonkeyRole::InitWalking(CDonkeyRole *this, struct CSettler *a2)
-class CWalking *  CDonkeyRole::InitWalking(class CSettler *) {
+class CWalking *  CDonkeyRole::InitWalking(class CSettler * a2) {
   
   int v2; // eax
   int v4; // [esp+4h] [ebp-4h]
@@ -59,7 +59,7 @@ class CWalking *  CDonkeyRole::InitWalking(class CSettler *) {
 
 // address=[0x1569d80]
 // Decompiled from CDonkeyRole *__thiscall CDonkeyRole::LogicUpdateJob(CDonkeyRole *this, struct CSettler *a2)
-void  CDonkeyRole::LogicUpdateJob(class CSettler *) {
+void  CDonkeyRole::LogicUpdateJob(class CSettler * a2) {
   
   int v2; // eax
   unsigned __int8 *v3; // eax
@@ -162,7 +162,7 @@ LABEL_28:
 
 // address=[0x156a0d0]
 // Decompiled from CDonkeyRole *__fastcall CDonkeyRole::UpdateJob(CDonkeyRole *this, int a2, struct CSettler *a3)
-void  CDonkeyRole::UpdateJob(class CSettler *) {
+void  CDonkeyRole::UpdateJob(class CSettler * a2) {
   
   CDonkeyRole *result; // eax
   char v4; // al
@@ -181,7 +181,7 @@ void  CDonkeyRole::UpdateJob(class CSettler *) {
 
 // address=[0x156a130]
 // Decompiled from int __stdcall CDonkeyRole::PostLoadInit(CPropertySet *a1)
-void  CDonkeyRole::PostLoadInit(class CSettler *) {
+void  CDonkeyRole::PostLoadInit(class CSettler * a1) {
   
   return CWarMap::AddEntity(a1);
 }
@@ -189,7 +189,7 @@ void  CDonkeyRole::PostLoadInit(class CSettler *) {
 
 // address=[0x156a150]
 // Decompiled from void __thiscall CDonkeyRole::InitFlee(CDonkeyRole *this, struct CSettler *a2, int a3)
-void  CDonkeyRole::InitFlee(class CSettler *,int) {
+void  CDonkeyRole::InitFlee(class CSettler * a2, int a3) {
   
   ;
 }
@@ -197,7 +197,7 @@ void  CDonkeyRole::InitFlee(class CSettler *,int) {
 
 // address=[0x156a160]
 // Decompiled from int __thiscall CDonkeyRole::Decrease(CDonkeyRole *this, int a2)
-int  CDonkeyRole::Decrease(int) {
+int  CDonkeyRole::Decrease(int a2) {
   
   int v2; // eax
   int v3; // eax
@@ -229,7 +229,7 @@ void  CDonkeyRole::NextStep(void) {
 
 // address=[0x156a220]
 // Decompiled from int __thiscall CDonkeyRole::GetGoodAmount(CDonkeyRole *this, int a2)
-int  CDonkeyRole::GetGoodAmount(int) {
+int  CDonkeyRole::GetGoodAmount(int a2) {
   
   int v3; // [esp+4h] [ebp-8h]
   int i; // [esp+8h] [ebp-4h]
@@ -246,7 +246,7 @@ int  CDonkeyRole::GetGoodAmount(int) {
 
 // address=[0x156a280]
 // Decompiled from int __thiscall CDonkeyRole::AddGood(CDonkeyRole *this, int a2, int a3)
-int  CDonkeyRole::AddGood(int,int) {
+int  CDonkeyRole::AddGood(int a2, int a3) {
   
   unsigned __int8 *SettlerPtr; // [esp+0h] [ebp-1Ch]
   int v5; // [esp+4h] [ebp-18h]
@@ -292,7 +292,7 @@ int  CDonkeyRole::AddGood(int,int) {
 
 // address=[0x156a400]
 // Decompiled from int __thiscall CDonkeyRole::RemoveGood(CDonkeyRole *this, int a2, int a3)
-int  CDonkeyRole::RemoveGood(int,int) {
+int  CDonkeyRole::RemoveGood(int a2, int a3) {
   
   unsigned __int8 *SettlerPtr; // [esp+4h] [ebp-14h]
   int v5; // [esp+8h] [ebp-10h]
@@ -324,7 +324,7 @@ int  CDonkeyRole::RemoveGood(int,int) {
 
 // address=[0x156a520]
 // Decompiled from char __thiscall CDonkeyRole::IsSpaceAvailable(CDonkeyRole *this, int a2)
-bool  CDonkeyRole::IsSpaceAvailable(int) {
+bool  CDonkeyRole::IsSpaceAvailable(int a2) {
   
   int i; // [esp+4h] [ebp-4h]
 
@@ -341,7 +341,7 @@ bool  CDonkeyRole::IsSpaceAvailable(int) {
 
 // address=[0x156a590]
 // Decompiled from int __thiscall CDonkeyRole::GetAvailableSpace(CDonkeyRole *this, int a2)
-int  CDonkeyRole::GetAvailableSpace(int) {
+int  CDonkeyRole::GetAvailableSpace(int a2) {
   
   int v3; // [esp+0h] [ebp-Ch]
   int i; // [esp+8h] [ebp-4h]
@@ -423,7 +423,7 @@ bool  CDonkeyRole::HasLoadedSomething(void) {
 
 // address=[0x156a740]
 // Decompiled from int __thiscall CDonkeyRole::DropGoods(CDonkeyRole *this, struct CSettler *a2)
-void  CDonkeyRole::DropGoods(class CSettler *) {
+void  CDonkeyRole::DropGoods(class CSettler * a2) {
   
   int v2; // eax
   int v4; // [esp-Ch] [ebp-20h]
@@ -475,7 +475,7 @@ bool  CDonkeyRole::SetFree(void) {
 
 // address=[0x156a870]
 // Decompiled from char __thiscall CDonkeyRole::HasLoadGood(int *this, int a2)
-bool  CDonkeyRole::HasLoadGood(enum PILE_TYPES) {
+bool  CDonkeyRole::HasLoadGood(enum PILE_TYPES a2) {
   
   int i; // [esp+4h] [ebp-4h]
 
@@ -490,7 +490,7 @@ bool  CDonkeyRole::HasLoadGood(enum PILE_TYPES) {
 
 // address=[0x156a8c0]
 // Decompiled from CDonkeyRole *__thiscall CDonkeyRole::SetTargetBuildingID(CDonkeyRole *this, int a2)
-void  CDonkeyRole::SetTargetBuildingID(int) {
+void  CDonkeyRole::SetTargetBuildingID(int a2) {
   
   CDonkeyRole *result; // eax
 
@@ -551,7 +551,7 @@ void  CDonkeyRole::TargetBuildingDestroyed(void) {
 
 // address=[0x156aa30]
 // Decompiled from void __thiscall CDonkeyRole::SetDepartBuildingID(CMFCToolBarImages *this, int a2)
-void  CDonkeyRole::SetDepartBuildingID(int) {
+void  CDonkeyRole::SetDepartBuildingID(int a2) {
   
   *((_DWORD *)this + 14) = a2;
 }
@@ -702,7 +702,7 @@ void  CDonkeyRole::DonkeyArrived(void) {
 
 // address=[0x156ae00]
 // Decompiled from void __thiscall CDonkeyRole::MoveToTarget(CDonkeyRole *this, int a2, int a3)
-void  CDonkeyRole::MoveToTarget(int,int) {
+void  CDonkeyRole::MoveToTarget(int a2, int a3) {
   
   unsigned __int8 *SettlerPtr; // [esp+0h] [ebp-8h]
 
@@ -738,7 +738,7 @@ int  CDonkeyRole::OwnerId(void) {
 
 // address=[0x156aed0]
 // Decompiled from CDonkeyRole *__thiscall CDonkeyRole::UpdateCatapultPosition(CDonkeyRole *this, int a2)
-void  CDonkeyRole::UpdateCatapultPosition(int) {
+void  CDonkeyRole::UpdateCatapultPosition(int a2) {
   
   CDonkeyRole *result; // eax
   unsigned __int8 *SettlerPtr; // [esp+0h] [ebp-8h]
@@ -760,7 +760,7 @@ void  CDonkeyRole::UpdateCatapultPosition(int) {
 
 // address=[0x156af40]
 // Decompiled from unsigned int __thiscall CDonkeyRole::ComeToBuildUpCart(CDonkeyRole *this, int a2, unsigned int a3)
-void  CDonkeyRole::ComeToBuildUpCart(int,int) {
+void  CDonkeyRole::ComeToBuildUpCart(int a2, int a3) {
   
   int v3; // eax
   int v4; // eax
@@ -787,7 +787,7 @@ void  CDonkeyRole::ComeToBuildUpCart(int,int) {
 
 // address=[0x156b000]
 // Decompiled from int __thiscall CDonkeyRole::SetJobType(CDonkeyRole *this, int a2)
-void  CDonkeyRole::SetJobType(int) {
+void  CDonkeyRole::SetJobType(int a2) {
   
   int result; // eax
 
@@ -822,7 +822,7 @@ int  CDonkeyRole::GetJobType(void) {
 
 // address=[0x156b0a0]
 // Decompiled from _BYTE *__thiscall CDonkeyRole::SetGoToSource(_BYTE *this, char a2)
-void  CDonkeyRole::SetGoToSource(bool) {
+void  CDonkeyRole::SetGoToSource(bool a2) {
   
   _BYTE *result; // eax
 
@@ -834,7 +834,7 @@ void  CDonkeyRole::SetGoToSource(bool) {
 
 // address=[0x156b0c0]
 // Decompiled from _BYTE *__thiscall CDonkeyRole::SetGoToTarget(_BYTE *this, char a2)
-void  CDonkeyRole::SetGoToTarget(bool) {
+void  CDonkeyRole::SetGoToTarget(bool a2) {
   
   _BYTE *result; // eax
 
@@ -846,7 +846,7 @@ void  CDonkeyRole::SetGoToTarget(bool) {
 
 // address=[0x156b0e0]
 // Decompiled from char __thiscall CDonkeyRole::GetNextJob(CDonkeyRole *this, struct CSettler *a2)
-void  CDonkeyRole::GetNextJob(class CSettler *) {
+void  CDonkeyRole::GetNextJob(class CSettler * a2) {
   
   IMovingEntity::IncToDoListIter(a2);
   if ( IMovingEntity::IsEndIter(a2) )
@@ -858,7 +858,7 @@ void  CDonkeyRole::GetNextJob(class CSettler *) {
 
 // address=[0x156b120]
 // Decompiled from _DWORD *__thiscall CDonkeyRole::FillDialog(CDonkeyRole *this, bool a2)
-void  CDonkeyRole::FillDialog(bool) {
+void  CDonkeyRole::FillDialog(bool a2) {
   
   unsigned int v3; // [esp+4h] [ebp-34h]
   int i; // [esp+Ch] [ebp-2Ch]
@@ -885,7 +885,7 @@ void  CDonkeyRole::FillDialog(bool) {
 
 // address=[0x156b210]
 // Decompiled from char __thiscall CDonkeyRole::SetNeutralTraderStatus(CDonkeyRole *this, bool a2)
-void  CDonkeyRole::SetNeutralTraderStatus(bool) {
+void  CDonkeyRole::SetNeutralTraderStatus(bool a2) {
   
   unsigned __int8 *SettlerPtr; // eax
   unsigned __int8 *v4; // [esp+0h] [ebp-8h]
@@ -1025,7 +1025,7 @@ void  CDonkeyRole::GoToHomeTradingBuilding(void) {
 
 // address=[0x156b4b0]
 // Decompiled from char *__thiscall CDonkeyRole::CDonkeyRole(char *this, int a2)
- CDonkeyRole::CDonkeyRole(std::istream &) {
+ CDonkeyRole::CDonkeyRole(std::istream & a2) {
   
   int v3; // [esp+4h] [ebp-20h] BYREF
   int pExceptionObject; // [esp+8h] [ebp-1Ch] BYREF
@@ -1089,7 +1089,7 @@ void  CDonkeyRole::GoToHomeTradingBuilding(void) {
 
 // address=[0x156b770]
 // Decompiled from int __thiscall CDonkeyRole::Store(struct CPersistence *this, struct std::ostream *a2)
-void  CDonkeyRole::Store(std::ostream &) {
+void  CDonkeyRole::Store(std::ostream & a2) {
   
   int v3; // [esp+0h] [ebp-10h] BYREF
   int v4; // [esp+4h] [ebp-Ch] BYREF
@@ -1153,7 +1153,7 @@ bool  CDonkeyRole::IsUnEmployed(void)const {
 
 // address=[0x1588540]
 // Decompiled from int __cdecl CDonkeyRole::Load(int a1)
-static class CDonkeyRole * __cdecl CDonkeyRole::Load(std::istream &) {
+class CDonkeyRole * __cdecl CDonkeyRole::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
@@ -1209,7 +1209,7 @@ static class CDonkeyRole * __cdecl CDonkeyRole::Load(std::istream &) {
 
 // address=[0x156ba50]
 // Decompiled from void __thiscall CDonkeyRole::TakeJob(CDonkeyRole *this, struct CSettler *a2)
-void  CDonkeyRole::TakeJob(class CSettler *) {
+void  CDonkeyRole::TakeJob(class CSettler * a2) {
   
   const struct CEntityTask *ActualTask; // eax
   unsigned int v3; // eax
@@ -1320,7 +1320,7 @@ void  CDonkeyRole::TakeJob(class CSettler *) {
 
 // address=[0x156bdd0]
 // Decompiled from int __thiscall CDonkeyRole::Init(int this, CPropertySet *a2)
-void  CDonkeyRole::Init(class CSettler *) {
+void  CDonkeyRole::Init(class CSettler * a2) {
   
   int result; // eax
 
@@ -1348,7 +1348,7 @@ void  CDonkeyRole::Init(class CSettler *) {
 
 // address=[0x156be90]
 // Decompiled from int __thiscall CDonkeyRole::ConvertEventIntoGoal(CDonkeyRole *this, struct CSettler *a2, struct CEntityEvent *a3)
-void  CDonkeyRole::ConvertEventIntoGoal(class CSettler *,class CEntityEvent *) {
+void  CDonkeyRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent * a3) {
   
   int v3; // eax
   int v4; // eax

@@ -4,7 +4,7 @@
 
 // address=[0x132a1c0]
 // Decompiled from CAITaskForceShamans *__thiscall CAITaskForceShamans::CAITaskForceShamans(CAITaskForceShamans *this, int a2, int a3)
- CAITaskForceShamans::CAITaskForceShamans(int,int) {
+ CAITaskForceShamans::CAITaskForceShamans(int a2, int a3) {
   
   CAITaskForceEx::CAITaskForceEx(this, a2, 7, 12, a3);
   *(_DWORD *)this = CAITaskForceShamans::_vftable_;
@@ -131,7 +131,7 @@ void  CAITaskForceShamans::Execute(void) {
 
 // address=[0x132d170]
 // Decompiled from char __thiscall CAITaskForceShamans::NewCommand(CAITaskForceShamans *this, unsigned int a2, int a3, int a4)
-bool  CAITaskForceShamans::NewCommand(int,int,int) {
+bool  CAITaskForceShamans::NewCommand(int a2, int a3, int a4) {
   
   char result; // al
   char SneakUpPosition; // [esp+Bh] [ebp-1h]

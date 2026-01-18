@@ -30,7 +30,7 @@ char  pairNode::getLastChar(void)const {
 
 // address=[0x308a6b0]
 // Decompiled from char *__thiscall pairNode::getString(pairNode *this, char *a2, char *a3)
-char *  pairNode::getString(char *,char *)const {
+char *  pairNode::getString(char * a2, char * a3)const {
   
   unsigned int v4; // [esp+Ch] [ebp-8h]
 

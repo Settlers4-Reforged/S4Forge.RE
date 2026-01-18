@@ -1,16 +1,18 @@
 #ifndef CGAMESETTINGS_H
 #define CGAMESETTINGS_H
 
+#include "defines.h"
+
 class CGameSettings {
 public:
     // address=[0x13558a0]
     static void __cdecl Save(void);
 
     // address=[0x1355980]
-    static void __cdecl SetGfxFullscreenEnabled(bool);
+    static void __cdecl SetGfxFullscreenEnabled(bool a1);
 
     // address=[0x13559a0]
-    static void __cdecl SetWindowsDimensions(int,int,int,int);
+    static void __cdecl SetWindowsDimensions(int a1, int a2, int a3, int a4);
 
     // address=[0x135df70]
     static int __cdecl GetGfxFullscreenEnabled(void);
@@ -43,25 +45,25 @@ public:
     static void __cdecl DetermineHighestResolution(void);
 
     // address=[0x1488560]
-    static std::wstring __cdecl GetUserConfigDirectory(void);
+    static std::wstring __cdecl GetUserConfigDirectory(void a1);
 
     // address=[0x1488600]
-    static std::wstring __cdecl GetConfigFilePath(wchar_t const *,bool);
+    static std::wstring __cdecl GetConfigFilePath(wchar_t const * a1, bool String);
 
     // address=[0x14887b0]
-    static void __cdecl SetPlayerName(std::wstring);
+    static void __cdecl SetPlayerName(std::wstring a1);
 
     // address=[0x14888f0]
-    static std::string __cdecl GetManualURL(void);
+    static std::string __cdecl GetManualURL(void a1);
 
     // address=[0x1488970]
-    static std::string __cdecl GetTipsURL(void);
+    static std::string __cdecl GetTipsURL(void a1);
 
     // address=[0x14889f0]
-    static int __cdecl GetCampaignStatus(int);
+    static int __cdecl GetCampaignStatus(int a1);
 
     // address=[0x1488dc0]
-    static void __cdecl SetCampaignStatus(int,int);
+    static void __cdecl SetCampaignStatus(int a1, int a2);
 
     // address=[0x1489530]
     static void __cdecl Cryption(unsigned char *,unsigned long);
@@ -73,7 +75,7 @@ public:
     static int __cdecl GetWebHelpMode(void);
 
     // address=[0x148abf0]
-    static void __cdecl SetWebHelpMode(int);
+    static void __cdecl SetWebHelpMode(int a1);
 
     // address=[0x148fd60]
     static bool __cdecl GetGfxFiltering(void);
@@ -97,28 +99,28 @@ public:
     static bool __cdecl GetShowVideos(void);
 
     // address=[0x148ff20]
-    static void __cdecl SetAlwaysHardwareImpossible(bool);
+    static void __cdecl SetAlwaysHardwareImpossible(bool a1);
 
     // address=[0x148ff40]
-    static void __cdecl SetAlwaysHardwareObjectImpossible(bool);
+    static void __cdecl SetAlwaysHardwareObjectImpossible(bool a1);
 
     // address=[0x148ff60]
-    static void __cdecl SetGfxFiltering(bool);
+    static void __cdecl SetGfxFiltering(bool a1);
 
     // address=[0x148ffa0]
-    static void __cdecl SetGfxTextureQuality(int);
+    static void __cdecl SetGfxTextureQuality(int a1);
 
     // address=[0x1494480]
-    static std::wstring __cdecl GetAIName(int);
+    static std::wstring __cdecl GetAIName(int a1);
 
     // address=[0x149f540]
-    static std::wstring __cdecl GetPlayerName(void);
+    static std::wstring __cdecl GetPlayerName(void a1);
 
     // address=[0x14a0ab0]
     static int __cdecl GetAIDifficulty(void);
 
     // address=[0x14a0ad0]
-    static void __cdecl SetAIDifficulty(int);
+    static void __cdecl SetAIDifficulty(int a1);
 
     // address=[0x14aaa90]
     static bool __cdecl GetAlwaysUrgentMsg(void);
@@ -169,61 +171,61 @@ public:
     static int __cdecl GetVoiceChatVolume(void);
 
     // address=[0x14aaeb0]
-    static void __cdecl SetAlwaysUrgentMsg(bool);
+    static void __cdecl SetAlwaysUrgentMsg(bool a1);
 
     // address=[0x14aaed0]
-    static void __cdecl SetBorderScrollEnabled(bool);
+    static void __cdecl SetBorderScrollEnabled(bool a1);
 
     // address=[0x14aaef0]
-    static void __cdecl SetChatMessageFilter(int);
+    static void __cdecl SetChatMessageFilter(int a1);
 
     // address=[0x14aaf10]
-    static void __cdecl SetExtendedTooltip(int);
+    static void __cdecl SetExtendedTooltip(int a1);
 
     // address=[0x14aaf50]
-    static void __cdecl SetMsgHistory(int);
+    static void __cdecl SetMsgHistory(int a1);
 
     // address=[0x14aaf70]
-    static void __cdecl SetMsgLevelMask(int);
+    static void __cdecl SetMsgLevelMask(int a1);
 
     // address=[0x14aaf90]
-    static void __cdecl SetMusicOn(int);
+    static void __cdecl SetMusicOn(int a1);
 
     // address=[0x14aafb0]
-    static void __cdecl SetMusicVolume(int);
+    static void __cdecl SetMusicVolume(int a1);
 
     // address=[0x14aafd0]
-    static void __cdecl SetScrollStepValue(int);
+    static void __cdecl SetScrollStepValue(int a1);
 
     // address=[0x14aaff0]
-    static void __cdecl SetSoundFXOn(int);
+    static void __cdecl SetSoundFXOn(int a1);
 
     // address=[0x14ab010]
-    static void __cdecl SetSoundFXVolume(int);
+    static void __cdecl SetSoundFXVolume(int a1);
 
     // address=[0x14ab050]
-    static void __cdecl SetUserMP3(int);
+    static void __cdecl SetUserMP3(int a1);
 
     // address=[0x14ab070]
-    static void __cdecl SetVoiceChatMicro(int);
+    static void __cdecl SetVoiceChatMicro(int a1);
 
     // address=[0x14ab090]
-    static void __cdecl SetVoiceChatOn(int);
+    static void __cdecl SetVoiceChatOn(int a1);
 
     // address=[0x14ab0b0]
-    static void __cdecl SetVoiceChatVolume(int);
+    static void __cdecl SetVoiceChatVolume(int a1);
 
     // address=[0x14c1000]
-    static std::string __cdecl GetHelpURLenglish(void);
+    static std::string __cdecl GetHelpURLenglish(void a1);
 
     // address=[0x14c1040]
-    static std::string __cdecl GetHelpURLgerman(void);
+    static std::string __cdecl GetHelpURLgerman(void a1);
 
     // address=[0x14c1080]
-    static std::string __cdecl GetNormURLenglish(void);
+    static std::string __cdecl GetNormURLenglish(void a1);
 
     // address=[0x14c10c0]
-    static std::string __cdecl GetNormURLgerman(void);
+    static std::string __cdecl GetNormURLgerman(void a1);
 
     // address=[0x14cb750]
     static int __cdecl GetTutorialStatus(void);

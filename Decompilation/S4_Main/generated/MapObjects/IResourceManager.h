@@ -1,6 +1,8 @@
 #ifndef CONCURRENCY_IRESOURCEMANAGER_H
 #define CONCURRENCY_IRESOURCEMANAGER_H
 
+#include "defines.h"
+
 namespace Concurrency {
 
 class IResourceManager {

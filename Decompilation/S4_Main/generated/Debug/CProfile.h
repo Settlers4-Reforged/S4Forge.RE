@@ -1,6 +1,8 @@
 #ifndef CPROFILE_H
 #define CPROFILE_H
 
+#include "defines.h"
+
 class CProfile {
 public:
     // address=[0x2efd820]

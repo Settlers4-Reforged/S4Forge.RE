@@ -13,7 +13,7 @@
 
 // address=[0x132bfc0]
 // Decompiled from _DWORD *__thiscall CAITaskForceSquad::CAITaskForceSquad(_DWORD *this, int a2, int a3, int a4)
- CAITaskForceSquad::CAITaskForceSquad(int,enum T_AI_TASK_FORCE_TYPE,int) {
+ CAITaskForceSquad::CAITaskForceSquad(int a2, enum T_AI_TASK_FORCE_TYPE a3, int a4) {
   
   CAITaskForceEx::CAITaskForceEx(this, a2, 2, a3, a4);
   *this = CAITaskForceSquad::_vftable_;
@@ -157,7 +157,7 @@ LABEL_21:
 
 // address=[0x132c3c0]
 // Decompiled from char __thiscall CAITaskForceSquad::NewCommand(CAITaskForceSquad *this, unsigned int a2, int a3, int a4)
-bool  CAITaskForceSquad::NewCommand(int,int,int) {
+bool  CAITaskForceSquad::NewCommand(int a2, int a3, int a4) {
   
   char result; // al
   char SneakUpPosition; // [esp+Bh] [ebp-1h]
@@ -229,7 +229,7 @@ bool  CAITaskForceSquad::NewCommand(int,int,int) {
 
 // address=[0x132c580]
 // Decompiled from int __thiscall CAITaskForceSquad::AddEntity(_DWORD *this, CAIEntityInfo *a2, int a3)
-enum CAITaskForce::T_RESULT  CAITaskForceSquad::AddEntity(class CAIEntityInfo *,enum CAITaskForce::T_POSITION) {
+enum CAITaskForce::T_RESULT  CAITaskForceSquad::AddEntity(class CAIEntityInfo * a2, enum CAITaskForce::T_POSITION a3) {
   
   int v4; // [esp+4h] [ebp-10h]
   int v5; // [esp+8h] [ebp-Ch]
@@ -263,7 +263,7 @@ enum CAITaskForce::T_RESULT  CAITaskForceSquad::AddEntity(class CAIEntityInfo *,
 
 // address=[0x132c660]
 // Decompiled from int __thiscall CAITaskForceSquad::RemoveEntity(int *this, _DWORD *a2)
-enum CAITaskForce::T_RESULT  CAITaskForceSquad::RemoveEntity(class CAIEntityInfo *) {
+enum CAITaskForce::T_RESULT  CAITaskForceSquad::RemoveEntity(class CAIEntityInfo * a2) {
   
   int v3; // [esp+4h] [ebp-10h]
   int v4; // [esp+8h] [ebp-Ch]
@@ -320,7 +320,7 @@ void  CAITaskForceSquad::RemoveAllEntities(void) {
 
 // address=[0x132c830]
 // Decompiled from int __thiscall CAITaskForceSquad::NumberOfEntities(int *this, int a2)
-int  CAITaskForceSquad::NumberOfEntities(enum T_AI_WARRIOR_TYPE)const {
+int  CAITaskForceSquad::NumberOfEntities(enum T_AI_WARRIOR_TYPE a2)const {
   
   int result; // eax
 

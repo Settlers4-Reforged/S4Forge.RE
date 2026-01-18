@@ -1,6 +1,8 @@
 #ifndef _SSAVEDATA_H
 #define _SSAVEDATA_H
 
+#include "defines.h"
+
 namespace  {
 
 class SSaveData {

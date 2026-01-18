@@ -4,7 +4,7 @@
 
 // address=[0x1402840]
 // Decompiled from int __cdecl CVikingWarShip::New(int a1)
-static class CPersistence * __cdecl CVikingWarShip::New(std::istream &) {
+class CPersistence * __cdecl CVikingWarShip::New(std::istream & a1) {
   
   if ( CWarShip::operator new(0xC8u) )
     return CVikingWarShip::CVikingWarShip(a1);
@@ -15,7 +15,7 @@ static class CPersistence * __cdecl CVikingWarShip::New(std::istream &) {
 
 // address=[0x15a1b30]
 // Decompiled from _DWORD *__thiscall CVikingWarShip::CVikingWarShip(_DWORD *this, int a2)
- CVikingWarShip::CVikingWarShip(std::istream &) {
+ CVikingWarShip::CVikingWarShip(std::istream & a2) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
@@ -42,7 +42,7 @@ static class CPersistence * __cdecl CVikingWarShip::New(std::istream &) {
 
 // address=[0x15a1bf0]
 // Decompiled from int __thiscall CVikingWarShip::Store(void *this, struct std::ostream *a2)
-void  CVikingWarShip::Store(std::ostream &) {
+void  CVikingWarShip::Store(std::ostream & a2) {
   
   int v3[2]; // [esp+0h] [ebp-8h] BYREF
 
@@ -71,7 +71,7 @@ unsigned long  CVikingWarShip::ClassID(void)const {
 
 // address=[0x15a2740]
 // Decompiled from void __thiscall CVikingWarShip::IncreaseAmmo(CVikingWarShip *this, int a2)
-void  CVikingWarShip::IncreaseAmmo(int) {
+void  CVikingWarShip::IncreaseAmmo(int a2) {
   
   ;
 }
@@ -82,7 +82,7 @@ void  CVikingWarShip::IncreaseAmmo(int) {
 
 // address=[0x15a1c30]
 // Decompiled from CVikingWarShip *__thiscall CVikingWarShip::CVikingWarShip(  CVikingWarShip *this,  int a2,  int a3,  int a4,  int a5,  int a6,  int a7,  bool a8)
- CVikingWarShip::CVikingWarShip(int,int,int,int,int,int,bool) {
+ CVikingWarShip::CVikingWarShip(int a2, int a3, int a4, int a5, int a6, int a7, bool a8) {
   
   CWarShip::CWarShip(this, a2, a3, a4, a5, a6, a7, a8);
   *(_DWORD *)this = &CVikingWarShip::_vftable_;

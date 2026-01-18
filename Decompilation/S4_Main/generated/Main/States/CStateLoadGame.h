@@ -1,13 +1,15 @@
 #ifndef CSTATELOADGAME_H
 #define CSTATELOADGAME_H
 
+#include "defines.h"
+
 class CStateLoadGame : public CGuiGameState {
 public:
     // address=[0x148fe10]
     static void __cdecl InitSaveList(void);
 
     // address=[0x14b52b0]
-    static class CGameState * __cdecl DynamicCreateFunc(void *);
+    static class CGameState * __cdecl DynamicCreateFunc(void * a1);
 
     // address=[0x14b5680]
      CStateLoadGame(void *);
@@ -19,10 +21,10 @@ public:
     virtual bool  Perform(void);
 
     // address=[0x14b58e0]
-    virtual bool  OnEvent(class CEvn_Event &);
+    virtual bool  OnEvent(class CEvn_Event & a2);
 
     // address=[0x14b5a30]
-    static void __cdecl BuildSaveList(enum TGAME_TYPE,enum CAMPAIGN_TYPE);
+    static void __cdecl BuildSaveList(enum TGAME_TYPE a1, enum CAMPAIGN_TYPE a2);
 
     // address=[0x14b5dd0]
     static void __cdecl DestroySaveList(void);
@@ -32,7 +34,7 @@ public:
 
 private:
     // address=[0x14b5330]
-    static bool __cdecl FileMatch(wchar_t const *,enum TGAME_TYPE,enum CAMPAIGN_TYPE,std::string &);
+    static bool __cdecl FileMatch(wchar_t const * String, enum TGAME_TYPE a2, enum CAMPAIGN_TYPE a3, std::string & a4);
 
 };
 

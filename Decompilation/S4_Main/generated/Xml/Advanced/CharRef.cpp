@@ -4,7 +4,7 @@
 
 // address=[0x2f14c20]
 // Decompiled from AdvXMLParser::CharRef *__thiscall AdvXMLParser::CharRef::CharRef(AdvXMLParser::CharRef *this, char a2)
- AdvXMLParser::CharRef::CharRef(int) {
+ AdvXMLParser::CharRef::CharRef(int a2) {
   
   _BYTE v4[28]; // [esp+8h] [ebp-2Ch] BYREF
   int v5; // [esp+30h] [ebp-4h]
@@ -22,7 +22,7 @@
 
 // address=[0x2f14cc0]
 // Decompiled from AdvXMLParser::CharRef *__thiscall AdvXMLParser::CharRef::CharRef(  AdvXMLParser::CharRef *this,  struct AdvXMLParser::NodeContainer *a2,  char a3)
- AdvXMLParser::CharRef::CharRef(class AdvXMLParser::NodeContainer &,int) {
+ AdvXMLParser::CharRef::CharRef(class AdvXMLParser::NodeContainer & a2, int a3) {
   
   _BYTE v5[28]; // [esp+8h] [ebp-2Ch] BYREF
   int v6; // [esp+30h] [ebp-4h]
@@ -40,7 +40,7 @@
 
 // address=[0x2f14d50]
 // Decompiled from int __thiscall AdvXMLParser::CharRef::Clone(AdvXMLParser::CharRef *this, struct AdvXMLParser::NodeContainer *a2)
-class AdvXMLParser::CharRef *  AdvXMLParser::CharRef::Clone(class AdvXMLParser::NodeContainer &)const {
+class AdvXMLParser::CharRef *  AdvXMLParser::CharRef::Clone(class AdvXMLParser::NodeContainer & a2)const {
   
   AdvXMLParser::CharRef *C; // [esp+10h] [ebp-10h]
 
@@ -54,7 +54,7 @@ class AdvXMLParser::CharRef *  AdvXMLParser::CharRef::Clone(class AdvXMLParser::
 
 // address=[0x2f14de0]
 // Decompiled from int __thiscall AdvXMLParser::CharRef::GetData(char *this, int a2)
-std::string  AdvXMLParser::CharRef::GetData(void)const {
+std::string  AdvXMLParser::CharRef::GetData(void a2)const {
   
   std::string::string(1u, this[36]);
   return a2;
@@ -63,7 +63,7 @@ std::string  AdvXMLParser::CharRef::GetData(void)const {
 
 // address=[0x2f14e20]
 // Decompiled from int __thiscall AdvXMLParser::CharRef::GetValue(char *this, int a2)
-std::string  AdvXMLParser::CharRef::GetValue(void)const {
+std::string  AdvXMLParser::CharRef::GetValue(void a2)const {
   
   std::string::string(1u, this[36]);
   return a2;
@@ -72,7 +72,7 @@ std::string  AdvXMLParser::CharRef::GetValue(void)const {
 
 // address=[0x2f14e60]
 // Decompiled from int __thiscall AdvXMLParser::CharRef::CloneNode(AdvXMLParser::CharRef *this, struct AdvXMLParser::NodeContainer *a2)
-class AdvXMLParser::Node *  AdvXMLParser::CharRef::CloneNode(class AdvXMLParser::NodeContainer &)const {
+class AdvXMLParser::Node *  AdvXMLParser::CharRef::CloneNode(class AdvXMLParser::NodeContainer & a2)const {
   
   return AdvXMLParser::CharRef::Clone(this, a2);
 }
@@ -88,7 +88,7 @@ class AdvXMLParser::Node *  AdvXMLParser::CharRef::CloneNode(class AdvXMLParser:
 
 // address=[0x2f23a10]
 // Decompiled from int __cdecl AdvXMLParser::CharRef::Parse(struct AdvXMLParser::Parser *a1, struct AdvXMLParser::NodeContainer *a2)
-static class AdvXMLParser::CharRef * __cdecl AdvXMLParser::CharRef::Parse(class AdvXMLParser::Parser &,class AdvXMLParser::NodeContainer &) {
+class AdvXMLParser::CharRef * __cdecl AdvXMLParser::CharRef::Parse(class AdvXMLParser::Parser & a1, class AdvXMLParser::NodeContainer & a2) {
   
   AdvXMLParser::CharRef *C; // [esp+Ch] [ebp-18h]
   int v5; // [esp+10h] [ebp-14h] BYREF
@@ -125,7 +125,7 @@ static class AdvXMLParser::CharRef * __cdecl AdvXMLParser::CharRef::Parse(class 
 
 // address=[0x2f2cf80]
 // Decompiled from int __thiscall AdvXMLParser::CharRef::GenerateXML(  AdvXMLParser::CharRef *this,  struct AdvXMLParser::GenerateContext *a2)
-void  AdvXMLParser::CharRef::GenerateXML(class AdvXMLParser::GenerateContext &)const {
+void  AdvXMLParser::CharRef::GenerateXML(class AdvXMLParser::GenerateContext & a2)const {
   
   char *v2; // eax
   _BYTE v5[12]; // [esp+4h] [ebp-10h] BYREF

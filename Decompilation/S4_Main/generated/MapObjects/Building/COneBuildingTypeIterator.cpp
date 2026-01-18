@@ -4,7 +4,7 @@
 
 // address=[0x1315a50]
 // Decompiled from int __thiscall COneBuildingTypeIterator::Init(COneBuildingTypeIterator *this, int a2, int a3)
-void  COneBuildingTypeIterator::Init(int,int) {
+void  COneBuildingTypeIterator::Init(int a2, int a3) {
   
   int result; // eax
 

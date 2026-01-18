@@ -1,10 +1,12 @@
 #ifndef CWALKINGWORKER_H
 #define CWALKINGWORKER_H
 
+#include "defines.h"
+
 class CWalkingWorker : public CWalkingBase {
 public:
     // address=[0x15f90b0]
-     CWalkingWorker(int);
+     CWalkingWorker(int a2);
 
     // address=[0x15fafd0]
     virtual  ~CWalkingWorker(void);
@@ -14,13 +16,13 @@ public:
 
 protected:
     // address=[0x15f90f0]
-    virtual bool  IsNotBlocked(int);
+    virtual bool  IsNotBlocked(int a2);
 
     // address=[0x15f9150]
-    virtual int  SectorId(int);
+    virtual int  SectorId(int a2);
 
     // address=[0x15f9170]
-    virtual bool  FindPathAStar64(int,int,class CDirCache &);
+    virtual bool  FindPathAStar64(int a2, int a3, class CDirCache & a4);
 
 };
 

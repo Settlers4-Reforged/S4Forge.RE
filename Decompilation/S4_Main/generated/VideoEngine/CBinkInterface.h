@@ -1,6 +1,8 @@
 #ifndef CBINKINTERFACE_H
 #define CBINKINTERFACE_H
 
+#include "defines.h"
+
 class CBinkInterface {
 public:
     // address=[0x16a1c40]
@@ -10,7 +12,7 @@ public:
      ~CBinkInterface(void);
 
     // address=[0x16a1cb0]
-    bool  OpenVideo(char *,unsigned int,unsigned int);
+    bool  OpenVideo(char * a2, unsigned int a3, unsigned int a4);
 
     // address=[0x16a1d40]
     void  StartPause(void);
@@ -25,13 +27,13 @@ public:
     int  GetWidth(void);
 
     // address=[0x16a1e40]
-    void  UseMiles(unsigned long);
+    void  UseMiles(unsigned long a2);
 
     // address=[0x16a1e60]
     void  CloseBink(void);
 
     // address=[0x16a1e90]
-    bool  RenderToSurface(unsigned short *,unsigned int);
+    bool  RenderToSurface(unsigned short * a2, unsigned int a3);
 
     // address=[0x16a1f50]
     void  Set_555_GfxMode(void);

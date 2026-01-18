@@ -1,6 +1,8 @@
 #ifndef CAIAGENTEVALUATION_H
 #define CAIAGENTEVALUATION_H
 
+#include "defines.h"
+
 class CAIAgentEvaluation : public CAIAgent {
 public:
     // address=[0x1303a40]

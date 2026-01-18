@@ -1,10 +1,12 @@
 #ifndef CGENERICSETTLERITERATOR_H
 #define CGENERICSETTLERITERATOR_H
 
+#include "defines.h"
+
 class CGenericSettlerIterator {
 public:
     // address=[0x1315360]
-    bool  Init(int,int,int);
+    bool  Init(int a2, int a3, int a4);
 
     // address=[0x13153d0]
     int  FirstSettler(void);

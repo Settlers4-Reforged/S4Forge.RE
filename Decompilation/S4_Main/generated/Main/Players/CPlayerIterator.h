@@ -1,10 +1,12 @@
 #ifndef CPLAYERITERATOR_H
 #define CPLAYERITERATOR_H
 
+#include "defines.h"
+
 class CPlayerIterator {
 public:
     // address=[0x1314f30]
-    bool  Init(int);
+    bool  Init(int a2);
 
     // address=[0x1315000]
     int  FirstPlayer(void);

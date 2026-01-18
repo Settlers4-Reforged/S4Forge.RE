@@ -16,7 +16,7 @@
 
 // address=[0x139fef0]
 // Decompiled from char __thiscall CGuiChatMsgList::AddListItem(int *this, char *Str)
-bool  CGuiChatMsgList::AddListItem(char const *) {
+bool  CGuiChatMsgList::AddListItem(char const * Str) {
   
   if ( this[10031] >= 200 )
     CGuiChatMsgList::RemoveListItem((CGuiChatMsgList *)this, 0);
@@ -29,7 +29,7 @@ bool  CGuiChatMsgList::AddListItem(char const *) {
 
 // address=[0x139ff70]
 // Decompiled from char __thiscall CGuiChatMsgList::SetListindex(_DWORD *this, int a2)
-bool  CGuiChatMsgList::SetListindex(int) {
+bool  CGuiChatMsgList::SetListindex(int a2) {
   
   if ( a2 >= this[10031] )
     this[10030] = this[10031] - 1;
@@ -41,7 +41,7 @@ bool  CGuiChatMsgList::SetListindex(int) {
 
 // address=[0x139ffb0]
 // Decompiled from char __thiscall CGuiChatMsgList::SetTopindex(CGuiChatMsgList *this, int a2)
-bool  CGuiChatMsgList::SetTopindex(int) {
+bool  CGuiChatMsgList::SetTopindex(int a2) {
   
   int j; // [esp+0h] [ebp-10h]
   int v4; // [esp+4h] [ebp-Ch]
@@ -68,7 +68,7 @@ bool  CGuiChatMsgList::SetTopindex(int) {
 
 // address=[0x13a0090]
 // Decompiled from char __thiscall CGuiChatMsgList::RemoveListItem(CGuiChatMsgList *this, int a2)
-bool  CGuiChatMsgList::RemoveListItem(int) {
+bool  CGuiChatMsgList::RemoveListItem(int a2) {
   
   int v3; // [esp+0h] [ebp-Ch]
   int i; // [esp+4h] [ebp-8h]
@@ -106,7 +106,7 @@ bool  CGuiChatMsgList::Clear(void) {
 
 // address=[0x13a01d0]
 // Decompiled from char __thiscall CGuiChatMsgList::SetOutputControls(CGuiChatMsgList *this, int a2, struct CGuiChatMsgList::SControl *a3)
-bool  CGuiChatMsgList::SetOutputControls(int,struct CGuiChatMsgList::SControl *) {
+bool  CGuiChatMsgList::SetOutputControls(int a2, struct CGuiChatMsgList::SControl * a3) {
   
   _DWORD *v3; // edx
   _DWORD *v4; // eax
@@ -130,7 +130,7 @@ bool  CGuiChatMsgList::SetOutputControls(int,struct CGuiChatMsgList::SControl *)
 
 // address=[0x13a0270]
 // Decompiled from int __thiscall CGuiChatMsgList::SetListentry(CGuiChatMsgList *this, int a2, int a3)
-int  CGuiChatMsgList::SetListentry(int,int) {
+int  CGuiChatMsgList::SetListentry(int a2, int a3) {
   
   signed int Count; // [esp+0h] [ebp-E0h]
   size_t Counta; // [esp+0h] [ebp-E0h]

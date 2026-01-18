@@ -96,7 +96,7 @@ void  CStatisticArchive::TriggerStatistic(void) {
 
 // address=[0x147a7d0]
 // Decompiled from int __thiscall CStatisticArchive::GetAreaSizeData(CStatisticArchive *this, int a2)
-void  CStatisticArchive::GetAreaSizeData(int) {
+void  CStatisticArchive::GetAreaSizeData(int a2) {
   
   int result; // eax
 
@@ -110,7 +110,7 @@ void  CStatisticArchive::GetAreaSizeData(int) {
 
 // address=[0x147a870]
 // Decompiled from int __thiscall CStatisticArchive::GetPopulationData(CStatisticArchive *this, int a2)
-void  CStatisticArchive::GetPopulationData(int) {
+void  CStatisticArchive::GetPopulationData(int a2) {
   
   int result; // eax
 
@@ -124,7 +124,7 @@ void  CStatisticArchive::GetPopulationData(int) {
 
 // address=[0x147a900]
 // Decompiled from int __thiscall CStatisticArchive::GetRessourcesData(CStatisticArchive *this, int a2)
-void  CStatisticArchive::GetRessourcesData(int) {
+void  CStatisticArchive::GetRessourcesData(int a2) {
   
   int result; // eax
 
@@ -138,7 +138,7 @@ void  CStatisticArchive::GetRessourcesData(int) {
 
 // address=[0x147a9a0]
 // Decompiled from int __thiscall CStatisticArchive::GetSoldierData(CStatisticArchive *this, int a2)
-void  CStatisticArchive::GetSoldierData(int) {
+void  CStatisticArchive::GetSoldierData(int a2) {
   
   int result; // eax
 
@@ -152,7 +152,7 @@ void  CStatisticArchive::GetSoldierData(int) {
 
 // address=[0x147aa40]
 // Decompiled from int __thiscall CStatisticArchive::GetBeatenEnemiesData(CStatisticArchive *this, int a2)
-void  CStatisticArchive::GetBeatenEnemiesData(int) {
+void  CStatisticArchive::GetBeatenEnemiesData(int a2) {
   
   int result; // eax
 
@@ -166,7 +166,7 @@ void  CStatisticArchive::GetBeatenEnemiesData(int) {
 
 // address=[0x147aae0]
 // Decompiled from int __thiscall CStatisticArchive::GetLostWarriorsData(CStatisticArchive *this, int a2)
-void  CStatisticArchive::GetLostWarriorsData(int) {
+void  CStatisticArchive::GetLostWarriorsData(int a2) {
   
   int result; // eax
 
@@ -180,7 +180,7 @@ void  CStatisticArchive::GetLostWarriorsData(int) {
 
 // address=[0x147ab80]
 // Decompiled from int __thiscall CStatisticArchive::GetDestroyedBuildingsData(CStatisticArchive *this, int a2)
-void  CStatisticArchive::GetDestroyedBuildingsData(int) {
+void  CStatisticArchive::GetDestroyedBuildingsData(int a2) {
   
   int result; // eax
 
@@ -194,7 +194,7 @@ void  CStatisticArchive::GetDestroyedBuildingsData(int) {
 
 // address=[0x147ac20]
 // Decompiled from int __thiscall CStatisticArchive::GetGoodData(CStatisticArchive *this, int a2)
-void  CStatisticArchive::GetGoodData(int) {
+void  CStatisticArchive::GetGoodData(int a2) {
   
   int Good; // eax
   int v3; // eax
@@ -415,7 +415,7 @@ void  CStatisticArchive::GetGoodData(int) {
 
 // address=[0x147c210]
 // Decompiled from int __thiscall CStatisticArchive::Load(CStatisticArchive *this, struct IS4Chunk *a2)
-void  CStatisticArchive::Load(class IS4Chunk &) {
+void  CStatisticArchive::Load(class IS4Chunk & a2) {
   
   int result; // eax
   int v3; // [esp+0h] [ebp-1Ch] BYREF
@@ -462,7 +462,7 @@ void  CStatisticArchive::Load(class IS4Chunk &) {
 
 // address=[0x147c3d0]
 // Decompiled from int __thiscall CStatisticArchive::Save(CStatisticArchive *this, struct IS4Chunk *a2)
-void  CStatisticArchive::Save(class IS4Chunk &) {
+void  CStatisticArchive::Save(class IS4Chunk & a2) {
   
   int v3; // [esp+0h] [ebp-1Ch] BYREF
   int v4; // [esp+4h] [ebp-18h] BYREF

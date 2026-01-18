@@ -1,10 +1,12 @@
 #ifndef CATTACKMSGLIST_H
 #define CATTACKMSGLIST_H
 
+#include "defines.h"
+
 class CAttackMsgList {
 public:
     // address=[0x140a800]
-    void  SendAttackMessage(int,int);
+    void  SendAttackMessage(int a2, int a3);
 
     // address=[0x140a9c0]
      CAttackMsgList(void);

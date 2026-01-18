@@ -20,7 +20,7 @@ int  CConfigVarFloat::GetIntValue(void)const {
 
 // address=[0x2efa290]
 // Decompiled from CConfigVarFloat *__thiscall CConfigVarFloat::SetValue(CConfigVarFloat *this, int a2)
-void  CConfigVarFloat::SetValue(int) {
+void  CConfigVarFloat::SetValue(int a2) {
   
   CConfigVarFloat *result; // eax
 
@@ -32,7 +32,7 @@ void  CConfigVarFloat::SetValue(int) {
 
 // address=[0x2efa2b0]
 // Decompiled from CConfigVarFloat *__thiscall CConfigVarFloat::SetValue(CConfigVarFloat *this, float a2)
-void  CConfigVarFloat::SetValue(float) {
+void  CConfigVarFloat::SetValue(float a2) {
   
   CConfigVarFloat *result; // eax
 

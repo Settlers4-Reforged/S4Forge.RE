@@ -4,7 +4,7 @@
 
 // address=[0x2f134b0]
 // Decompiled from _DWORD *__thiscall AdvXMLParser::Text::Text(_DWORD *this, int a2)
- AdvXMLParser::Text::Text(std::string const &) {
+ AdvXMLParser::Text::Text(std::string const & a2) {
   
   _BYTE v4[28]; // [esp+8h] [ebp-2Ch] BYREF
   int v5; // [esp+30h] [ebp-4h]
@@ -22,7 +22,7 @@
 
 // address=[0x2f13550]
 // Decompiled from _DWORD *__thiscall AdvXMLParser::Text::Text(_DWORD *this, int a2, int a3)
- AdvXMLParser::Text::Text(class AdvXMLParser::NodeContainer &,std::string const &) {
+ AdvXMLParser::Text::Text(class AdvXMLParser::NodeContainer & a2, std::string const & a3) {
   
   _BYTE v5[28]; // [esp+8h] [ebp-2Ch] BYREF
   int v6; // [esp+30h] [ebp-4h]
@@ -40,7 +40,7 @@
 
 // address=[0x2f135f0]
 // Decompiled from int __thiscall AdvXMLParser::Text::Clone(AdvXMLParser::Text *this, struct AdvXMLParser::NodeContainer *a2)
-class AdvXMLParser::Text *  AdvXMLParser::Text::Clone(class AdvXMLParser::NodeContainer &)const {
+class AdvXMLParser::Text *  AdvXMLParser::Text::Clone(class AdvXMLParser::NodeContainer & a2)const {
   
   if ( operator new(0x40u) )
     return AdvXMLParser::Text::Text(a2, (char *)this + 36);
@@ -51,7 +51,7 @@ class AdvXMLParser::Text *  AdvXMLParser::Text::Clone(class AdvXMLParser::NodeCo
 
 // address=[0x2f13680]
 // Decompiled from int __thiscall AdvXMLParser::Text::GetData(char *this, int a2)
-std::string  AdvXMLParser::Text::GetData(void)const {
+std::string  AdvXMLParser::Text::GetData(void a2)const {
   
   std::string::string(this + 36);
   return a2;
@@ -60,7 +60,7 @@ std::string  AdvXMLParser::Text::GetData(void)const {
 
 // address=[0x2f136c0]
 // Decompiled from int __thiscall AdvXMLParser::Text::GetValue(char *this, int a2)
-std::string  AdvXMLParser::Text::GetValue(void)const {
+std::string  AdvXMLParser::Text::GetValue(void a2)const {
   
   std::string::string(this + 36);
   return a2;
@@ -69,7 +69,7 @@ std::string  AdvXMLParser::Text::GetValue(void)const {
 
 // address=[0x2f13700]
 // Decompiled from bool __thiscall AdvXMLParser::Text::IsKindOf(AdvXMLParser::Text *this, int a2)
-bool  AdvXMLParser::Text::IsKindOf(int)const {
+bool  AdvXMLParser::Text::IsKindOf(int a2)const {
   
   return a2 == 3 || AdvXMLParser::Node::IsKindOf(this, a2);
 }
@@ -77,7 +77,7 @@ bool  AdvXMLParser::Text::IsKindOf(int)const {
 
 // address=[0x2f13730]
 // Decompiled from int __thiscall AdvXMLParser::Text::CloneNode(AdvXMLParser::Text *this, struct AdvXMLParser::NodeContainer *a2)
-class AdvXMLParser::Node *  AdvXMLParser::Text::CloneNode(class AdvXMLParser::NodeContainer &)const {
+class AdvXMLParser::Node *  AdvXMLParser::Text::CloneNode(class AdvXMLParser::NodeContainer & a2)const {
   
   return AdvXMLParser::Text::Clone(this, a2);
 }
@@ -94,7 +94,7 @@ class AdvXMLParser::Node *  AdvXMLParser::Text::CloneNode(class AdvXMLParser::No
 
 // address=[0x2f1e480]
 // Decompiled from int __stdcall AdvXMLParser::Text::Concatenate(int a1)
-void  AdvXMLParser::Text::Concatenate(std::string const &) {
+void  AdvXMLParser::Text::Concatenate(std::string const & a1) {
   
   return std::string::operator+=(a1);
 }

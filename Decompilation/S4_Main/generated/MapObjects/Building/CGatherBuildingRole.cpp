@@ -4,7 +4,7 @@
 
 // address=[0x1400c20]
 // Decompiled from int __cdecl CGatherBuildingRole::New(int a1)
-static class CPersistence * __cdecl CGatherBuildingRole::New(std::istream &) {
+class CPersistence * __cdecl CGatherBuildingRole::New(std::istream & a1) {
   
   if ( operator new(0x180u) )
     return CGatherBuildingRole::CGatherBuildingRole(a1);
@@ -41,7 +41,7 @@ unsigned long  CGatherBuildingRole::ClassID(void)const {
 
 // address=[0x14fd380]
 // Decompiled from void *__thiscall CGatherBuildingRole::GetBuildingNeed(std::_Ref_count_base *this, const struct type_info *a2)
-int  CGatherBuildingRole::GetBuildingNeed(int)const {
+int  CGatherBuildingRole::GetBuildingNeed(int a2)const {
   
   return 0;
 }
@@ -57,7 +57,7 @@ int  CGatherBuildingRole::GetBuildingRole(void) {
 
 // address=[0x14fd620]
 // Decompiled from int __thiscall CGatherBuildingRole::GetPileIdWithGood(CGatherBuildingRole *this, int a2)
-int  CGatherBuildingRole::GetPileIdWithGood(int)const {
+int  CGatherBuildingRole::GetPileIdWithGood(int a2)const {
   
   return *((unsigned __int16 *)this + 190);
 }
@@ -65,7 +65,7 @@ int  CGatherBuildingRole::GetPileIdWithGood(int)const {
 
 // address=[0x14fd710]
 // Decompiled from void __thiscall CGatherBuildingRole::GoodArrive(CGatherBuildingRole *this, int a2)
-void  CGatherBuildingRole::GoodArrive(int) {
+void  CGatherBuildingRole::GoodArrive(int a2) {
   
   ;
 }
@@ -73,7 +73,7 @@ void  CGatherBuildingRole::GoodArrive(int) {
 
 // address=[0x14fda30]
 // Decompiled from int __cdecl CGatherBuildingRole::Load(int a1)
-static class CGatherBuildingRole * __cdecl CGatherBuildingRole::Load(std::istream &) {
+class CGatherBuildingRole * __cdecl CGatherBuildingRole::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
@@ -85,7 +85,7 @@ static class CGatherBuildingRole * __cdecl CGatherBuildingRole::Load(std::istrea
 
 // address=[0x150b5b0]
 // Decompiled from int __thiscall CGatherBuildingRole::LogicUpdate(CGatherBuildingRole *this, struct CBuilding *a2)
-void  CGatherBuildingRole::LogicUpdate(class CBuilding *) {
+void  CGatherBuildingRole::LogicUpdate(class CBuilding * a2) {
   
   int result; // eax
   int WorkingAreaPackedXY; // eax
@@ -225,7 +225,7 @@ void  CGatherBuildingRole::LogicUpdate(class CBuilding *) {
 
 // address=[0x150b910]
 // Decompiled from CPile *__thiscall CGatherBuildingRole::FillGfxInfo(  CGatherBuildingRole *this,  struct CBuilding *a2,  struct SGfxObjectInfo *a3)
-void  CGatherBuildingRole::FillGfxInfo(class CBuilding *,struct SGfxObjectInfo &) {
+void  CGatherBuildingRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo & a3) {
   
   int v3; // eax
   int v4; // eax
@@ -251,7 +251,7 @@ void  CGatherBuildingRole::FillGfxInfo(class CBuilding *,struct SGfxObjectInfo &
 
 // address=[0x150b9c0]
 // Decompiled from int __thiscall CGatherBuildingRole::Init(CGatherBuildingRole *this, struct CBuilding *a2)
-void  CGatherBuildingRole::Init(class CBuilding *) {
+void  CGatherBuildingRole::Init(class CBuilding * a2) {
   
   int v2; // eax
   int v3; // eax
@@ -317,7 +317,7 @@ void  CGatherBuildingRole::Init(class CBuilding *) {
 
 // address=[0x150bbc0]
 // Decompiled from int __thiscall CGatherBuildingRole::PostLoadInit(CGatherBuildingRole *this, struct CBuilding *a2)
-void  CGatherBuildingRole::PostLoadInit(class CBuilding *) {
+void  CGatherBuildingRole::PostLoadInit(class CBuilding * a2) {
   
   int v2; // eax
   int v3; // eax
@@ -344,7 +344,7 @@ void  CGatherBuildingRole::PostLoadInit(class CBuilding *) {
 
 // address=[0x150bc50]
 // Decompiled from char __thiscall CGatherBuildingRole::SettlerEnter(CGatherBuildingRole *this, struct CBuilding *a2, int a3)
-bool  CGatherBuildingRole::SettlerEnter(class CBuilding *,int) {
+bool  CGatherBuildingRole::SettlerEnter(class CBuilding * a2, int a3) {
   
   int v3; // eax
   void *v4; // eax
@@ -386,7 +386,7 @@ bool  CGatherBuildingRole::SettlerEnter(class CBuilding *,int) {
 
 // address=[0x150bd10]
 // Decompiled from _DWORD *__thiscall CGatherBuildingRole::FillDialog(CGatherBuildingRole *this, struct CBuilding *a2, bool a3)
-void  CGatherBuildingRole::FillDialog(class CBuilding *,bool) {
+void  CGatherBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
   
   int v3; // eax
   int v4; // eax
@@ -431,7 +431,7 @@ void  CGatherBuildingRole::FillDialog(class CBuilding *,bool) {
 
 // address=[0x150bed0]
 // Decompiled from char *__thiscall CGatherBuildingRole::CGatherBuildingRole(char *this, int a2)
- CGatherBuildingRole::CGatherBuildingRole(std::istream &) {
+ CGatherBuildingRole::CGatherBuildingRole(std::istream & a2) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
@@ -458,7 +458,7 @@ void  CGatherBuildingRole::FillDialog(class CBuilding *,bool) {
 
 // address=[0x150bf90]
 // Decompiled from int __thiscall CGatherBuildingRole::Store(struct IBuildingRole *this, struct std::ostream *a2)
-void  CGatherBuildingRole::Store(std::ostream &) {
+void  CGatherBuildingRole::Store(std::ostream & a2) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
   struct IBuildingRole *v4; // [esp+4h] [ebp-4h]

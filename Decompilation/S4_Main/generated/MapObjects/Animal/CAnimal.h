@@ -1,13 +1,15 @@
 #ifndef CANIMAL_H
 #define CANIMAL_H
 
+#include "defines.h"
+
 class CAnimal : public IMovingEntity {
 public:
     // address=[0x14d60e0]
-     CAnimal(std::istream &);
+     CAnimal(std::istream & a2);
 
     // address=[0x14d6260]
-    virtual void  Store(std::ostream &);
+    virtual void  Store(std::ostream & a1);
 
     // address=[0x14d6350]
     virtual void  LogicUpdate(void);
@@ -16,17 +18,17 @@ public:
     virtual struct SGfxObjectInfo *  GetGfxInfos(void);
 
     // address=[0x14d64a0]
-    void  AddTask(class CEntityTask &);
+    void  AddTask(class CEntityTask & a2);
 
     // address=[0x14d8660]
-    virtual void  Decrease(int);
+    virtual void  Decrease(int a2);
 
     // address=[0x14d8890]
-    virtual void  Take(int);
+    virtual void  Take(int a2);
 
 protected:
     // address=[0x14d64c0]
-     CAnimal(int,int,int,int);
+     CAnimal(int a2, int a3, int a4, int a5);
 
     // address=[0x14d65a0]
     virtual void  Delete(void);
@@ -35,25 +37,25 @@ protected:
     virtual void  Update(void);
 
     // address=[0x14d6890]
-    void  NewToDoList(class std::list<class CEntityTask,class std::allocator<class CEntityTask> > *);
+    void  NewToDoList(class std::list<class CEntityTask,class std::allocator<class CEntityTask> > * a2);
 
     // address=[0x14d6980]
-    void  NewDestination(int,int,int);
+    void  NewDestination(int a2, int a3, int a4);
 
     // address=[0x14d6990]
-    virtual void  ConvertEventIntoGoal(class CEntityEvent *);
+    virtual void  ConvertEventIntoGoal(class CEntityEvent * a2);
 
     // address=[0x14d69b0]
-    void  TakeWaitJob(bool);
+    void  TakeWaitJob(bool a2);
 
     // address=[0x14d6a70]
-    void  TakeEatJob(bool);
+    void  TakeEatJob(bool a2);
 
     // address=[0x14d6b60]
-    void  TakeWalkJob(bool);
+    void  TakeWalkJob(bool a2);
 
     // address=[0x14d6c50]
-    void  TakeFleeJob(bool);
+    void  TakeFleeJob(bool a2);
 
     // address=[0x14d6d40]
     void  TakeDieJob(void);
@@ -62,19 +64,19 @@ protected:
     void  TakeDeadJob(void);
 
     // address=[0x14d6e70]
-    void  TakeWaitJobAndDoNothing(int);
+    void  TakeWaitJobAndDoNothing(int a2);
 
     // address=[0x14d6ea0]
-    void  TakeWalkJobAndWalkDir(int);
+    void  TakeWalkJobAndWalkDir(int a2);
 
     // address=[0x14d6ed0]
-    virtual void  TakeJob(bool);
+    virtual void  TakeJob(bool a2);
 
     // address=[0x14d7040]
-    void  WalkDir(int);
+    void  WalkDir(int a2);
 
     // address=[0x14d7150]
-    void  WalkDirAndRegister(int);
+    void  WalkDirAndRegister(int a2);
 
     // address=[0x14d8150]
     virtual  ~CAnimal(void);

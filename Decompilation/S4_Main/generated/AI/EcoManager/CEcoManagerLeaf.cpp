@@ -4,7 +4,7 @@
 
 // address=[0x134b270]
 // Decompiled from CEcoManagerLeaf::CEMLD *__thiscall CEcoManagerLeaf::CEcoManagerLeaf(  CEcoManagerLeaf::CEMLD *this,  int a2,  int a3,  int a4,  int a5)
- CEcoManagerLeaf::CEcoManagerLeaf(enum IECONOMANAGERGRIDRESOLUTION,enum BUILDING_TYPES,int,int) {
+ CEcoManagerLeaf::CEcoManagerLeaf(enum IECONOMANAGERGRIDRESOLUTION a2, enum BUILDING_TYPES a3, int a4, int a5) {
   
   CEcoManagerLeaf::CEMLD::CEMLD(this);
   memset(this, 0, 0x68u);
@@ -36,7 +36,7 @@
 
 // address=[0x134b340]
 // Decompiled from int *__thiscall CEcoManagerLeaf::GetPosition(CEcoManagerLeaf *this, int *a2, int *a3)
-void  CEcoManagerLeaf::GetPosition(int &,int &) {
+void  CEcoManagerLeaf::GetPosition(int & a2, int & a3) {
   
   int *result; // eax
 
@@ -113,7 +113,7 @@ bool  CEcoManagerLeaf::Update(void) {
 
 // address=[0x134b580]
 // Decompiled from int __thiscall CEcoManagerLeaf::GetResourceAmount(CEcoManagerLeaf *this, int a2)
-int  CEcoManagerLeaf::GetResourceAmount(int) {
+int  CEcoManagerLeaf::GetResourceAmount(int a2) {
   
   return *((unsigned __int16 *)this + (a2 >> 4) + 22);
 }
@@ -121,7 +121,7 @@ int  CEcoManagerLeaf::GetResourceAmount(int) {
 
 // address=[0x134b5a0]
 // Decompiled from int __thiscall CEcoManagerLeaf::GetUndergroundAmount(_DWORD *this, int a2)
-int  CEcoManagerLeaf::GetUndergroundAmount(int) {
+int  CEcoManagerLeaf::GetUndergroundAmount(int a2) {
   
   return this[a2 + 4];
 }
@@ -129,7 +129,7 @@ int  CEcoManagerLeaf::GetUndergroundAmount(int) {
 
 // address=[0x134b5c0]
 // Decompiled from char __thiscall CEcoManagerLeaf::AddPosition(CEcoManagerLeaf *this, int a2, int a3, int a4)
-bool  CEcoManagerLeaf::AddPosition(int,int,class std::vector<struct SPOSS_BUILD_PLACE,class std::allocator<struct SPOSS_BUILD_PLACE> > *) {
+bool  CEcoManagerLeaf::AddPosition(int a2, int a3, class std::vector<struct SPOSS_BUILD_PLACE,class std::allocator<struct SPOSS_BUILD_PLACE> > * a4) {
   
   int v4; // eax
   int Child; // eax
@@ -276,7 +276,7 @@ int  CEcoManagerLeaf::GetNrValidOfAllSubChilds(void) {
 
 // address=[0x134b8b0]
 // Decompiled from int __thiscall CEcoManagerLeaf::GetChild(CEcoManagerLeaf *this, int a2)
-class CEcoManagerLeaf *  CEcoManagerLeaf::GetChild(int) {
+class CEcoManagerLeaf *  CEcoManagerLeaf::GetChild(int a2) {
   
   if ( a2 < CEcoManagerLeaf::GetNrChilds(this) && a2 >= 0 )
     return *((_DWORD *)this + a2 + 19);
@@ -287,7 +287,7 @@ class CEcoManagerLeaf *  CEcoManagerLeaf::GetChild(int) {
 
 // address=[0x134b8e0]
 // Decompiled from int __thiscall CEcoManagerLeaf::GetChild(CEcoManagerLeaf *this, int a2, int a3)
-int  CEcoManagerLeaf::GetChild(int,int) {
+int  CEcoManagerLeaf::GetChild(int a2, int a3) {
   
   int NrChilds; // eax
   int v5; // [esp+0h] [ebp-14h] BYREF
@@ -316,7 +316,7 @@ int  CEcoManagerLeaf::GetChild(int,int) {
 
 // address=[0x134b950]
 // Decompiled from char __thiscall CEcoManagerLeaf::RemoveChild(CEcoManagerLeaf *this, int a2)
-bool  CEcoManagerLeaf::RemoveChild(int) {
+bool  CEcoManagerLeaf::RemoveChild(int a2) {
   
   if ( !CEcoManagerLeaf::GetChild(this, a2) )
     return 0;

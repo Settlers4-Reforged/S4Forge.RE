@@ -22,7 +22,7 @@ void  CAIDefenceGoals::Clear(void) {
 
 // address=[0x1309540]
 // Decompiled from char *__thiscall CAIDefenceGoals::Goal(CAIDefenceGoals *this, int a2)
-class CAIDefenceGoal &  CAIDefenceGoals::Goal(int) {
+class CAIDefenceGoal &  CAIDefenceGoals::Goal(int a2) {
   
   return (char *)this + 20 * a2 + 4;
 }
@@ -38,7 +38,7 @@ int  CAIDefenceGoals::NumberOfGoals(void)const {
 
 // address=[0x1314a30]
 // Decompiled from int __thiscall CAIDefenceGoals::Search(CAIDefenceGoals *this, int a2)
-int  CAIDefenceGoals::Search(int) {
+int  CAIDefenceGoals::Search(int a2) {
   
   int i; // [esp+4h] [ebp-4h]
 
@@ -53,7 +53,7 @@ int  CAIDefenceGoals::Search(int) {
 
 // address=[0x1314a80]
 // Decompiled from int __thiscall CAIDefenceGoals::SetFlagBitsId(CAIDefenceGoals *this, int a2, char a3)
-int  CAIDefenceGoals::SetFlagBitsId(int,int) {
+int  CAIDefenceGoals::SetFlagBitsId(int a2, int a3) {
   
   int v5; // [esp+4h] [ebp-4h]
 
@@ -66,7 +66,7 @@ int  CAIDefenceGoals::SetFlagBitsId(int,int) {
 
 // address=[0x1314ad0]
 // Decompiled from int __thiscall CAIDefenceGoals::Insert(CAIDefenceGoals *this, int a2, int a3, int a4, int a5)
-void  CAIDefenceGoals::Insert(int,int,int,int) {
+void  CAIDefenceGoals::Insert(int a2, int a3, int a4, int a5) {
   
   int result; // eax
   int v6; // [esp+0h] [ebp-10h]
@@ -109,7 +109,7 @@ void  CAIDefenceGoals::Insert(int,int,int,int) {
 
 // address=[0x1314bb0]
 // Decompiled from int __thiscall CAIDefenceGoals::NextUnprotectedGoalIdx(CAIDefenceGoals *this, int a2)
-int  CAIDefenceGoals::NextUnprotectedGoalIdx(int) {
+int  CAIDefenceGoals::NextUnprotectedGoalIdx(int a2) {
   
   while ( a2 < *(_DWORD *)this )
   {

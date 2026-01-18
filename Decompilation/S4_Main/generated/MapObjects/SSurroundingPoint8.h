@@ -1,6 +1,8 @@
 #ifndef SSURROUNDINGPOINT8_H
 #define SSURROUNDINGPOINT8_H
 
+#include "defines.h"
+
 class SSurroundingPoint8 {
 public:
     // address=[0x132ee80]

@@ -4,7 +4,7 @@
 
 // address=[0x1311690]
 // Decompiled from void __thiscall CAIRegions::DefineRegion(CAIRegions *this, int a2, int a3, int a4, int a5)
-void  CAIRegions::DefineRegion(int,int,int,int) {
+void  CAIRegions::DefineRegion(int a2, int a3, int a4, int a5) {
   
   if ( a5 <= 0 )
   {
@@ -21,7 +21,7 @@ void  CAIRegions::DefineRegion(int,int,int,int) {
 
 // address=[0x1311700]
 // Decompiled from void __thiscall CAIRegions::ClearRegion(CAIRegions *this, int a2)
-void  CAIRegions::ClearRegion(int) {
+void  CAIRegions::ClearRegion(int a2) {
   
   if ( CAIRegions::IsValidRegionId(a2) )
   {
@@ -70,7 +70,7 @@ void  CAIRegions::ClearAllPlayerRegionFlags(void) {
 
 // address=[0x1311810]
 // Decompiled from void __thiscall CAIRegions::Load(CAIRegions *this, struct IS4Chunk *a2)
-void  CAIRegions::Load(class IS4Chunk &) {
+void  CAIRegions::Load(class IS4Chunk & a2) {
   
   int i; // [esp+8h] [ebp-4h]
 
@@ -88,7 +88,7 @@ void  CAIRegions::Load(class IS4Chunk &) {
 
 // address=[0x13118b0]
 // Decompiled from int __thiscall CAIRegions::Save(CAIRegions *this, struct IS4Chunk *a2)
-void  CAIRegions::Save(class IS4Chunk &) {
+void  CAIRegions::Save(class IS4Chunk & a2) {
   
   int i; // [esp+4h] [ebp-4h]
 
@@ -101,7 +101,7 @@ void  CAIRegions::Save(class IS4Chunk &) {
 
 // address=[0x1311d90]
 // Decompiled from bool __cdecl CAIRegions::IsValidRegionId(int a1)
-static bool __cdecl CAIRegions::IsValidRegionId(int) {
+bool __cdecl CAIRegions::IsValidRegionId(int a1) {
   
   return (unsigned int)(a1 - 1) < 0xF;
 }
@@ -109,7 +109,7 @@ static bool __cdecl CAIRegions::IsValidRegionId(int) {
 
 // address=[0x131ee40]
 // Decompiled from int __thiscall CAIRegions::SetPlayerRegionFlagBits(CAIRegions *this, unsigned int a2, unsigned int a3, int a4)
-void  CAIRegions::SetPlayerRegionFlagBits(int,int,int) {
+void  CAIRegions::SetPlayerRegionFlagBits(int a2, int a3, int a4) {
   
   int result; // eax
 

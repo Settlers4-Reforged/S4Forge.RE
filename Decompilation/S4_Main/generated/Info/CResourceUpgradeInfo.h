@@ -1,6 +1,8 @@
 #ifndef CRESOURCEUPGRADEINFO_H
 #define CRESOURCEUPGRADEINFO_H
 
+#include "defines.h"
+
 class CResourceUpgradeInfo : public CBuildingInfo {
 public:
     // address=[0x1454800]

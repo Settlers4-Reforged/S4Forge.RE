@@ -4,7 +4,7 @@
 
 // address=[0x14c1100]
 // Decompiled from CStateLocalType *__cdecl CStateLocalType::DynamicCreateFunc(void *a1)
-static class CGameState * __cdecl CStateLocalType::DynamicCreateFunc(void *) {
+class CGameState * __cdecl CStateLocalType::DynamicCreateFunc(void * a1) {
   
   CStateLocalType *C; // [esp+Ch] [ebp-10h]
 
@@ -71,7 +71,7 @@ bool  CStateLocalType::Perform(void) {
 
 // address=[0x14c1320]
 // Decompiled from char __thiscall CStateLocalType::OnEvent(CStateLocalType *this, struct CEvn_Event *a2)
-bool  CStateLocalType::OnEvent(class CEvn_Event &) {
+bool  CStateLocalType::OnEvent(class CEvn_Event & a2) {
   
   char result; // al
   CEvn_Event *v3; // [esp+8h] [ebp-38h]

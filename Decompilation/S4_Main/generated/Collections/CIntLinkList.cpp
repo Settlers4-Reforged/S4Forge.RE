@@ -4,7 +4,7 @@
 
 // address=[0x15e2e50]
 // Decompiled from CIntLinkList *__thiscall CIntLinkList::Init(CIntLinkList *this, int a2)
-void  CIntLinkList::Init(int) {
+void  CIntLinkList::Init(int a2) {
   
   CIntLinkList *result; // eax
 
@@ -17,7 +17,7 @@ void  CIntLinkList::Init(int) {
 
 // address=[0x15e2e70]
 // Decompiled from char __thiscall CIntLinkList::SearchBackwards(CIntLinkList *this, int a2)
-bool  CIntLinkList::SearchBackwards(int) {
+bool  CIntLinkList::SearchBackwards(int a2) {
   
   int i; // [esp+8h] [ebp-4h]
 
@@ -32,7 +32,7 @@ bool  CIntLinkList::SearchBackwards(int) {
 
 // address=[0x15e6f60]
 // Decompiled from int __thiscall CIntLinkList::operator[](void *this, int a2)
-int const &  CIntLinkList::operator[](int)const {
+int const &  CIntLinkList::operator[](int a2)const {
   
   return (int)this + 4 * a2 + 8;
 }
@@ -56,7 +56,7 @@ int  CIntLinkList::Size(void)const {
 
 // address=[0x15f3ea0]
 // Decompiled from CIntLinkList *__thiscall CIntLinkList::CIntLinkList(CIntLinkList *this, int a2)
- CIntLinkList::CIntLinkList(int) {
+ CIntLinkList::CIntLinkList(int a2) {
   
   CIntLinkList::Init(this, a2);
   return this;
@@ -65,7 +65,7 @@ int  CIntLinkList::Size(void)const {
 
 // address=[0x15f4010]
 // Decompiled from int __thiscall CIntLinkList::operator[](void *this, int a2)
-int &  CIntLinkList::operator[](int) {
+int &  CIntLinkList::operator[](int a2) {
   
   return (int)this + 4 * a2 + 8;
 }
@@ -81,7 +81,7 @@ void  CIntLinkList::`default constructor closure'(void) {
 
 // address=[0x15f5620]
 // Decompiled from CIntLinkList *__thiscall CIntLinkList::PushBack(CIntLinkList *this, int a2)
-void  CIntLinkList::PushBack(int) {
+void  CIntLinkList::PushBack(int a2) {
   
   CIntLinkList *result; // eax
 
@@ -94,7 +94,7 @@ void  CIntLinkList::PushBack(int) {
 
 // address=[0x15f5820]
 // Decompiled from CIntLinkList *__thiscall CIntLinkList::SetOwnerTileId(CIntLinkList *this, int a2)
-void  CIntLinkList::SetOwnerTileId(int) {
+void  CIntLinkList::SetOwnerTileId(int a2) {
   
   CIntLinkList *result; // eax
 

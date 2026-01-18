@@ -4,7 +4,7 @@
 
 // address=[0x13fff00]
 // Decompiled from int __cdecl CBuildingSupplyPriority::New(int a1)
-static class CPersistence * __cdecl CBuildingSupplyPriority::New(std::istream &) {
+class CPersistence * __cdecl CBuildingSupplyPriority::New(std::istream & a1) {
   
   if ( operator new(0x10u) )
     return CBuildingSupplyPriority::CBuildingSupplyPriority(a1);
@@ -15,7 +15,7 @@ static class CPersistence * __cdecl CBuildingSupplyPriority::New(std::istream &)
 
 // address=[0x140aae0]
 // Decompiled from _DWORD *__thiscall CBuildingSupplyPriority::CBuildingSupplyPriority(_DWORD *this, int a2)
- CBuildingSupplyPriority::CBuildingSupplyPriority(std::istream &) {
+ CBuildingSupplyPriority::CBuildingSupplyPriority(std::istream & a2) {
   
   _DWORD *v2; // eax
   _BYTE v4[12]; // [esp+4h] [ebp-48h] BYREF
@@ -79,7 +79,7 @@ static class CPersistence * __cdecl CBuildingSupplyPriority::New(std::istream &)
 
 // address=[0x140aca0]
 // Decompiled from int __thiscall CBuildingSupplyPriority::Store(struct CPersistence *this, struct std::ostream *a2)
-void  CBuildingSupplyPriority::Store(std::ostream &) {
+void  CBuildingSupplyPriority::Store(std::ostream & a2) {
   
   _BYTE v3[12]; // [esp+4h] [ebp-88h] BYREF
   _BYTE v4[12]; // [esp+10h] [ebp-7Ch] BYREF
@@ -159,7 +159,7 @@ void  CBuildingSupplyPriority::Store(std::ostream &) {
 
 // address=[0x140aea0]
 // Decompiled from CBuildingSupplyPriority *__thiscall CBuildingSupplyPriority::CBuildingSupplyPriority(  CBuildingSupplyPriority *this,  int a2)
- CBuildingSupplyPriority::CBuildingSupplyPriority(int) {
+ CBuildingSupplyPriority::CBuildingSupplyPriority(int a2) {
   
   CPersistence::CPersistence(this);
   *(_DWORD *)this = &CBuildingSupplyPriority::_vftable_;
@@ -187,7 +187,7 @@ void  CBuildingSupplyPriority::Store(std::ostream &) {
 
 // address=[0x140af60]
 // Decompiled from int __thiscall CBuildingSupplyPriority::GetPriority(void *this, int a2, int a3)
-int  CBuildingSupplyPriority::GetPriority(enum BUILDING_TYPES,enum PILE_TYPES) {
+int  CBuildingSupplyPriority::GetPriority(enum BUILDING_TYPES a2, enum PILE_TYPES a3) {
   
   _BYTE v4[12]; // [esp+4h] [ebp-68h] BYREF
   _BYTE v5[12]; // [esp+10h] [ebp-5Ch] BYREF
@@ -258,7 +258,7 @@ int  CBuildingSupplyPriority::GetPriority(enum BUILDING_TYPES,enum PILE_TYPES) {
 
 // address=[0x140b0f0]
 // Decompiled from int __thiscall CBuildingSupplyPriority::GetNumberOfSupplyBuildings(void *this, int a2, int a3)
-int  CBuildingSupplyPriority::GetNumberOfSupplyBuildings(enum PILE_TYPES,struct SDistributionInfo * const) {
+int  CBuildingSupplyPriority::GetNumberOfSupplyBuildings(enum PILE_TYPES a2, struct SDistributionInfo * const a3) {
   
   _DWORD *v3; // eax
   _DWORD *v4; // eax
@@ -335,7 +335,7 @@ int  CBuildingSupplyPriority::GetNumberOfSupplyBuildings(enum PILE_TYPES,struct 
 
 // address=[0x140b280]
 // Decompiled from int __thiscall CBuildingSupplyPriority::GetNumberOfSupplyBuildings(void *this, int a2)
-int  CBuildingSupplyPriority::GetNumberOfSupplyBuildings(enum PILE_TYPES) {
+int  CBuildingSupplyPriority::GetNumberOfSupplyBuildings(enum PILE_TYPES a2) {
   
   std::_Iterator_base12 *v3; // [esp-4h] [ebp-80h]
   _BYTE v4[12]; // [esp+4h] [ebp-78h] BYREF
@@ -404,7 +404,7 @@ int  CBuildingSupplyPriority::GetNumberOfSupplyBuildings(enum PILE_TYPES) {
 
 // address=[0x140b3d0]
 // Decompiled from int __thiscall CBuildingSupplyPriority::ChangePriority(void *this, int a2, int a3)
-void  CBuildingSupplyPriority::ChangePriority(enum PILE_TYPES,struct SDistributionInfo * const) {
+void  CBuildingSupplyPriority::ChangePriority(enum PILE_TYPES a2, struct SDistributionInfo * const a3) {
   
   int v3; // eax
   std::_Iterator_base12 *v5; // [esp-4h] [ebp-94h]
@@ -486,7 +486,7 @@ void  CBuildingSupplyPriority::ChangePriority(enum PILE_TYPES,struct SDistributi
 
 // address=[0x140b590]
 // Decompiled from int __thiscall CBuildingSupplyPriority::ChangePriority(void *this, int a2, int a3, int a4)
-void  CBuildingSupplyPriority::ChangePriority(enum PILE_TYPES,enum BUILDING_TYPES,int) {
+void  CBuildingSupplyPriority::ChangePriority(enum PILE_TYPES a2, enum BUILDING_TYPES a3, int a4) {
   
   int *v4; // eax
   _BYTE v6[12]; // [esp+4h] [ebp-6Ch] BYREF

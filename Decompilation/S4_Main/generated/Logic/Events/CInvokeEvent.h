@@ -1,22 +1,24 @@
 #ifndef CINVOKEEVENT_H
 #define CINVOKEEVENT_H
 
+#include "defines.h"
+
 class CInvokeEvent : public IScheduleEntry {
 public:
     // address=[0x2f4e930]
      CInvokeEvent(void);
 
     // address=[0x2f4e960]
-     CInvokeEvent(enum BUILDING_TYPES);
+     CInvokeEvent(enum BUILDING_TYPES a2);
 
     // address=[0x2f4e9e0]
-    bool  AddInvokePosition(int,int);
+    bool  AddInvokePosition(int a2, int a3);
 
     // address=[0x2f4ea20]
-    bool  AddInvokePosition(int);
+    bool  AddInvokePosition(int a2);
 
     // address=[0x2f4ea50]
-    int  AddInvokePositionAroundResource(enum BUILDING_TYPES,int);
+    int  AddInvokePositionAroundResource(enum BUILDING_TYPES a2, int a3);
 
     // address=[0x2f4ed40]
     virtual  ~CInvokeEvent(void);

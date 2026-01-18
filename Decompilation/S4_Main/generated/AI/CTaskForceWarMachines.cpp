@@ -4,7 +4,7 @@
 
 // address=[0x132a200]
 // Decompiled from _DWORD *__thiscall CTaskForceWarMachines::CTaskForceWarMachines(_DWORD *this, int a2, int a3, int a4)
- CTaskForceWarMachines::CTaskForceWarMachines(int,enum T_AI_TASK_FORCE_TYPE,int) {
+ CTaskForceWarMachines::CTaskForceWarMachines(int a2, enum T_AI_TASK_FORCE_TYPE a3, int a4) {
   
   CAITaskForceEx::CAITaskForceEx(this, a2, 4, a3, a4);
   *this = CTaskForceWarMachines::_vftable_;
@@ -22,7 +22,7 @@
 
 // address=[0x132c940]
 // Decompiled from char __thiscall CTaskForceWarMachines::IsAddEntityOk(CTaskForceWarMachines *this, int a2)
-bool  CTaskForceWarMachines::IsAddEntityOk(int) {
+bool  CTaskForceWarMachines::IsAddEntityOk(int a2) {
   
   if ( IAIEnvironment::EntityWarriorType(a2) == 8 )
   {
@@ -46,7 +46,7 @@ bool  CTaskForceWarMachines::IsAddEntityOk(int) {
 
 // address=[0x132c9a0]
 // Decompiled from int __thiscall CTaskForceWarMachines::InitWarMachineWalk(CTaskForceWarMachines *this, bool a2)
-void  CTaskForceWarMachines::InitWarMachineWalk(bool) {
+void  CTaskForceWarMachines::InitWarMachineWalk(bool a2) {
   
   int result; // eax
   int v3; // eax
@@ -95,7 +95,7 @@ int  CTaskForceWarMachines::CatapultSectorId(void)const {
 
 // address=[0x132caa0]
 // Decompiled from int __thiscall CTaskForceWarMachines::CalculateBuildingDestination(CTaskForceWarMachines *this, int a2)
-int  CTaskForceWarMachines::CalculateBuildingDestination(int) {
+int  CTaskForceWarMachines::CalculateBuildingDestination(int a2) {
   
   int v3; // [esp+0h] [ebp-14h] BYREF
   int v4; // [esp+4h] [ebp-10h] BYREF

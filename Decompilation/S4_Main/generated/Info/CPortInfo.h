@@ -1,6 +1,8 @@
 #ifndef CPORTINFO_H
 #define CPORTINFO_H
 
+#include "defines.h"
+
 class CPortInfo : public CBuildingInfo {
 public:
     // address=[0x14547a0]

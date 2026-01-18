@@ -4,7 +4,7 @@
 
 // address=[0x1439c90]
 // Decompiled from void *CInputProcessor::Selection()
-static class std::vector<unsigned short,class std::allocator<unsigned short> > const & __cdecl CInputProcessor::Selection(void) {
+class std::vector<unsigned short,class std::allocator<unsigned short> > const & __cdecl CInputProcessor::Selection(void) {
   
   return &CInputProcessor::m_vSelection;
 }
@@ -144,7 +144,7 @@ void  CInputProcessor::DeSelectAllEx(void) {
 
 // address=[0x14552b0]
 // Decompiled from void __thiscall CInputProcessor::DeSelectEntity(CInputProcessor *this, int a2)
-void  CInputProcessor::DeSelectEntity(int) {
+void  CInputProcessor::DeSelectEntity(int a2) {
   
   _DWORD v2[4]; // [esp-Ch] [ebp-78h] BYREF
   _DWORD v3[3]; // [esp+4h] [ebp-68h] BYREF
@@ -216,7 +216,7 @@ void  CInputProcessor::DeSelectEntity(int) {
 
 // address=[0x1455440]
 // Decompiled from void __stdcall CInputProcessor::AddToSelection(int a1)
-void  CInputProcessor::AddToSelection(int) {
+void  CInputProcessor::AddToSelection(int a1) {
   
   _DWORD *v1; // [esp+4h] [ebp-8h]
   __int16 v2; // [esp+Ah] [ebp-2h] BYREF
@@ -257,7 +257,7 @@ int  CInputProcessor::GetSelectionTypeOfCurrentSelection(void)const {
 
 // address=[0x1455520]
 // Decompiled from int __cdecl CInputProcessor::GetEntitySelectionType(int a1, int a2, int a3)
-static int __cdecl CInputProcessor::GetEntitySelectionType(int,int,int) {
+int __cdecl CInputProcessor::GetEntitySelectionType(int a1, int a2, int a3) {
   
   int result; // eax
 
@@ -299,7 +299,7 @@ static int __cdecl CInputProcessor::GetEntitySelectionType(int,int,int) {
 
 // address=[0x14555b0]
 // Decompiled from int __cdecl CInputProcessor::GetEntitySelectionType(struct IEntity *a1)
-static int __cdecl CInputProcessor::GetEntitySelectionType(class IEntity const *) {
+int __cdecl CInputProcessor::GetEntitySelectionType(class IEntity const * a1) {
   
   int v2; // [esp+0h] [ebp-Ch]
   int v3; // [esp+4h] [ebp-8h]
@@ -316,7 +316,7 @@ static int __cdecl CInputProcessor::GetEntitySelectionType(class IEntity const *
 
 // address=[0x1455600]
 // Decompiled from int __cdecl CInputProcessor::GetEntitySelectionType(int a1)
-static int __cdecl CInputProcessor::GetEntitySelectionType(int) {
+int __cdecl CInputProcessor::GetEntitySelectionType(int a1) {
   
   const struct IEntity *v1; // eax
 
@@ -651,7 +651,7 @@ void  CInputProcessor::FillHandlersArray(void) {
 
 // address=[0x1456ac0]
 // Decompiled from char __thiscall CInputProcessor::HandleInternalError(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::HandleInternalError(class CEvn_Logic *) {
+bool  CInputProcessor::HandleInternalError(class CEvn_Logic * a2) {
   
   OutputDebugStringA("Handle internal error in InputProcessor\n");
   return 0;
@@ -660,7 +660,7 @@ bool  CInputProcessor::HandleInternalError(class CEvn_Logic *) {
 
 // address=[0x1456ae0]
 // Decompiled from char __thiscall CInputProcessor::Default(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::Default(class CEvn_Logic *) {
+bool  CInputProcessor::Default(class CEvn_Logic * a2) {
   
   CEvn_Event v4; // [esp+Ch] [ebp-40h] BYREF
   CEvn_Event v5; // [esp+24h] [ebp-28h] BYREF
@@ -690,7 +690,7 @@ bool  CInputProcessor::Default(class CEvn_Logic *) {
 
 // address=[0x1456c10]
 // Decompiled from char __thiscall CInputProcessor::NewDialogClear(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::NewDialogClear(class CEvn_Logic *) {
+bool  CInputProcessor::NewDialogClear(class CEvn_Logic * a2) {
   
   CInputProcessor::DeSelectAll(this);
   CLogic::SetFillDialogInfos(g_pLogic, 0, 0, 0);
@@ -701,7 +701,7 @@ bool  CInputProcessor::NewDialogClear(class CEvn_Logic *) {
 
 // address=[0x1456c50]
 // Decompiled from char __thiscall CInputProcessor::ClearDialog(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::ClearDialog(class CEvn_Logic *) {
+bool  CInputProcessor::ClearDialog(class CEvn_Logic * a2) {
   
   CInputProcessor::Clear(this);
   return 0;
@@ -710,7 +710,7 @@ bool  CInputProcessor::ClearDialog(class CEvn_Logic *) {
 
 // address=[0x1456c70]
 // Decompiled from char __thiscall CInputProcessor::TryBuild(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::TryBuild(class CEvn_Logic *) {
+bool  CInputProcessor::TryBuild(class CEvn_Logic * a2) {
   
   int LocalPlayerId; // eax
   int v4; // [esp+0h] [ebp-4h]
@@ -730,7 +730,7 @@ bool  CInputProcessor::TryBuild(class CEvn_Logic *) {
 
 // address=[0x1456ce0]
 // Decompiled from char __thiscall CInputProcessor::Build(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::Build(class CEvn_Logic *) {
+bool  CInputProcessor::Build(class CEvn_Logic * a2) {
   
   int LocalPlayerId; // eax
   char v3; // al
@@ -766,7 +766,7 @@ bool  CInputProcessor::Build(class CEvn_Logic *) {
 
 // address=[0x1456e30]
 // Decompiled from char __thiscall CInputProcessor::ShowWorkingArea(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::ShowWorkingArea(class CEvn_Logic *) {
+bool  CInputProcessor::ShowWorkingArea(class CEvn_Logic * a2) {
   
   unsigned __int16 *v2; // eax
   unsigned __int8 *v3; // eax
@@ -794,7 +794,7 @@ bool  CInputProcessor::ShowWorkingArea(class CEvn_Logic *) {
 
 // address=[0x1456ed0]
 // Decompiled from char __thiscall CInputProcessor::SetWorkingArea(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::SetWorkingArea(class CEvn_Logic *) {
+bool  CInputProcessor::SetWorkingArea(class CEvn_Logic * a2) {
   
   unsigned __int16 *v2; // eax
   unsigned __int16 *v3; // eax
@@ -832,7 +832,7 @@ bool  CInputProcessor::SetWorkingArea(class CEvn_Logic *) {
 
 // address=[0x1457020]
 // Decompiled from char __thiscall CInputProcessor::TryCrushBuilding(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::TryCrushBuilding(class CEvn_Logic *) {
+bool  CInputProcessor::TryCrushBuilding(class CEvn_Logic * a2) {
   
   unsigned __int16 *v2; // eax
   unsigned __int8 *v3; // eax
@@ -862,7 +862,7 @@ bool  CInputProcessor::TryCrushBuilding(class CEvn_Logic *) {
 
 // address=[0x14570a0]
 // Decompiled from char __thiscall CInputProcessor::CrushBuilding(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::CrushBuilding(class CEvn_Logic *) {
+bool  CInputProcessor::CrushBuilding(class CEvn_Logic * a2) {
   
   unsigned __int16 *v2; // eax
   char LocalPlayerId; // [esp-Ch] [ebp-44h]
@@ -895,7 +895,7 @@ bool  CInputProcessor::CrushBuilding(class CEvn_Logic *) {
 
 // address=[0x14571a0]
 // Decompiled from char __thiscall CInputProcessor::SwitchBuilding(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::SwitchBuilding(class CEvn_Logic *) {
+bool  CInputProcessor::SwitchBuilding(class CEvn_Logic * a2) {
   
   unsigned __int16 *v2; // eax
   char LocalPlayerId; // [esp-Ch] [ebp-48h]
@@ -919,7 +919,7 @@ bool  CInputProcessor::SwitchBuilding(class CEvn_Logic *) {
 
 // address=[0x1457270]
 // Decompiled from char __thiscall CInputProcessor::PrioBuildingSite(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::PrioBuildingSite(class CEvn_Logic *) {
+bool  CInputProcessor::PrioBuildingSite(class CEvn_Logic * a2) {
   
   unsigned __int16 *v2; // eax
   char LocalPlayerId; // [esp-Ch] [ebp-48h]
@@ -943,7 +943,7 @@ bool  CInputProcessor::PrioBuildingSite(class CEvn_Logic *) {
 
 // address=[0x1457340]
 // Decompiled from char __thiscall CInputProcessor::SelectNextBuilding(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::SelectNextBuilding(class CEvn_Logic *) {
+bool  CInputProcessor::SelectNextBuilding(class CEvn_Logic * a2) {
   
   unsigned __int16 *v3; // eax
   unsigned __int16 *v4; // eax
@@ -1016,7 +1016,7 @@ bool  CInputProcessor::SelectNextBuilding(class CEvn_Logic *) {
 
 // address=[0x1457550]
 // Decompiled from char __thiscall CInputProcessor::SelectBuilding(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::SelectBuilding(class CEvn_Logic *) {
+bool  CInputProcessor::SelectBuilding(class CEvn_Logic * a2) {
   
   unsigned __int16 *v3; // eax
   unsigned __int16 *v4; // eax
@@ -1089,7 +1089,7 @@ bool  CInputProcessor::SelectBuilding(class CEvn_Logic *) {
 
 // address=[0x1457760]
 // Decompiled from char __thiscall CInputProcessor::MarkNextBuilding(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::MarkNextBuilding(class CEvn_Logic *) {
+bool  CInputProcessor::MarkNextBuilding(class CEvn_Logic * a2) {
   
   int LocalPlayerId; // eax
   unsigned int v3; // eax
@@ -1119,7 +1119,7 @@ bool  CInputProcessor::MarkNextBuilding(class CEvn_Logic *) {
 
 // address=[0x1457850]
 // Decompiled from char __thiscall CInputProcessor::InitExtraMenu(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::InitExtraMenu(class CEvn_Logic *) {
+bool  CInputProcessor::InitExtraMenu(class CEvn_Logic * a2) {
   
   CLogic::SwitchExtraInfoMenu(g_pLogic, *((_DWORD *)a2 + 2) == 1);
   CStatistic::FillExtraInfo((CStatistic *)&g_cStatistic);
@@ -1129,7 +1129,7 @@ bool  CInputProcessor::InitExtraMenu(class CEvn_Logic *) {
 
 // address=[0x1457890]
 // Decompiled from char __thiscall CInputProcessor::SelectNextVehicle(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::SelectNextVehicle(class CEvn_Logic *) {
+bool  CInputProcessor::SelectNextVehicle(class CEvn_Logic * a2) {
   
   unsigned __int16 *v3; // eax
   int LocalPlayerId; // eax
@@ -1223,7 +1223,7 @@ bool  CInputProcessor::SelectNextVehicle(class CEvn_Logic *) {
 
 // address=[0x1457b80]
 // Decompiled from char __thiscall CInputProcessor::BuildingAmount(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::BuildingAmount(class CEvn_Logic *) {
+bool  CInputProcessor::BuildingAmount(class CEvn_Logic * a2) {
   
   void **v3; // [esp+0h] [ebp-Ch]
   int v5; // [esp+8h] [ebp-4h]
@@ -1244,7 +1244,7 @@ bool  CInputProcessor::BuildingAmount(class CEvn_Logic *) {
 
 // address=[0x1457bf0]
 // Decompiled from char __thiscall CInputProcessor::DestroyBuildupVehicle(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::DestroyBuildupVehicle(class CEvn_Logic *) {
+bool  CInputProcessor::DestroyBuildupVehicle(class CEvn_Logic * a2) {
   
   unsigned __int16 *v2; // eax
   char LocalPlayerId; // al
@@ -1281,7 +1281,7 @@ bool  CInputProcessor::DestroyBuildupVehicle(class CEvn_Logic *) {
 
 // address=[0x1457d40]
 // Decompiled from char __thiscall CInputProcessor::FillTower(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::FillTower(class CEvn_Logic *) {
+bool  CInputProcessor::FillTower(class CEvn_Logic * a2) {
   
   unsigned __int16 *v2; // eax
   unsigned int v4; // [esp-10h] [ebp-4Ch]
@@ -1307,7 +1307,7 @@ bool  CInputProcessor::FillTower(class CEvn_Logic *) {
 
 // address=[0x1457e20]
 // Decompiled from char __thiscall CInputProcessor::EmptyTower(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::EmptyTower(class CEvn_Logic *) {
+bool  CInputProcessor::EmptyTower(class CEvn_Logic * a2) {
   
   int v2; // esi
   char LocalPlayerId; // al
@@ -1333,7 +1333,7 @@ bool  CInputProcessor::EmptyTower(class CEvn_Logic *) {
 
 // address=[0x1457f10]
 // Decompiled from char __thiscall CInputProcessor::ChooseTradeDest(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::ChooseTradeDest(class CEvn_Logic *) {
+bool  CInputProcessor::ChooseTradeDest(class CEvn_Logic * a2) {
   
   *((_DWORD *)this + 20) = 7;
   *((_DWORD *)this + 4) = *((_DWORD *)a2 + 3);
@@ -1345,7 +1345,7 @@ bool  CInputProcessor::ChooseTradeDest(class CEvn_Logic *) {
 
 // address=[0x1457f60]
 // Decompiled from char __thiscall CInputProcessor::SelectTradeDest(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::SelectTradeDest(class CEvn_Logic *) {
+bool  CInputProcessor::SelectTradeDest(class CEvn_Logic * a2) {
   
   unsigned __int16 *v2; // eax
   int v3; // eax
@@ -1415,7 +1415,7 @@ bool  CInputProcessor::SelectTradeDest(class CEvn_Logic *) {
 
 // address=[0x1458160]
 // Decompiled from char __thiscall CInputProcessor::TransportGoods(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::TransportGoods(class CEvn_Logic *) {
+bool  CInputProcessor::TransportGoods(class CEvn_Logic * a2) {
   
   int v2; // esi
   char LocalPlayerId; // al
@@ -1441,7 +1441,7 @@ bool  CInputProcessor::TransportGoods(class CEvn_Logic *) {
 
 // address=[0x1458250]
 // Decompiled from char __thiscall CInputProcessor::TradeWith(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::TradeWith(class CEvn_Logic *) {
+bool  CInputProcessor::TradeWith(class CEvn_Logic * a2) {
   
   int v2; // esi
   char LocalPlayerId; // al
@@ -1467,7 +1467,7 @@ bool  CInputProcessor::TradeWith(class CEvn_Logic *) {
 
 // address=[0x1458340]
 // Decompiled from char __thiscall CInputProcessor::TradeGoods(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::TradeGoods(class CEvn_Logic *) {
+bool  CInputProcessor::TradeGoods(class CEvn_Logic * a2) {
   
   unsigned __int16 *v2; // eax
   unsigned int v4; // [esp-10h] [ebp-4Ch]
@@ -1493,7 +1493,7 @@ bool  CInputProcessor::TradeGoods(class CEvn_Logic *) {
 
 // address=[0x1458420]
 // Decompiled from char __thiscall CInputProcessor::SetTradePlayerStatus(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::SetTradePlayerStatus(class CEvn_Logic *) {
+bool  CInputProcessor::SetTradePlayerStatus(class CEvn_Logic * a2) {
   
   char LocalPlayerId; // al
   unsigned int v4; // [esp-8h] [ebp-48h]
@@ -1529,7 +1529,7 @@ bool  CInputProcessor::SetTradePlayerStatus(class CEvn_Logic *) {
 
 // address=[0x1458540]
 // Decompiled from char __thiscall CInputProcessor::ChooseSpellDest(_DWORD *this, int a2)
-bool  CInputProcessor::ChooseSpellDest(class CEvn_Logic *) {
+bool  CInputProcessor::ChooseSpellDest(class CEvn_Logic * a2) {
   
   this[5] = *(_DWORD *)(a2 + 8);
   return 1;
@@ -1538,7 +1538,7 @@ bool  CInputProcessor::ChooseSpellDest(class CEvn_Logic *) {
 
 // address=[0x1458560]
 // Decompiled from char __thiscall CInputProcessor::SelectSpellDest(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::SelectSpellDest(class CEvn_Logic *) {
+bool  CInputProcessor::SelectSpellDest(class CEvn_Logic * a2) {
   
   unsigned __int16 *v3; // eax
   int v4; // eax
@@ -1606,7 +1606,7 @@ bool  CInputProcessor::SelectSpellDest(class CEvn_Logic *) {
 
 // address=[0x1458770]
 // Decompiled from char __thiscall CInputProcessor::InitSettlerAmount(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::InitSettlerAmount(class CEvn_Logic *) {
+bool  CInputProcessor::InitSettlerAmount(class CEvn_Logic * a2) {
   
   CSettlerMgr::FillSettlerAmount(&g_cSettlerStatisticInfo, 0, *((unsigned __int8 *)this + 105));
   CLogic::SetFillDialogInfos(
@@ -1620,7 +1620,7 @@ bool  CInputProcessor::InitSettlerAmount(class CEvn_Logic *) {
 
 // address=[0x14587c0]
 // Decompiled from char __thiscall CInputProcessor::InitFreeCarrier(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::InitFreeCarrier(class CEvn_Logic *) {
+bool  CInputProcessor::InitFreeCarrier(class CEvn_Logic * a2) {
   
   CSettlerMgr::FillFreeCarrier(&g_cFreeCarrierInfo, 0);
   CLogic::SetFillDialogInfos(
@@ -1634,7 +1634,7 @@ bool  CInputProcessor::InitFreeCarrier(class CEvn_Logic *) {
 
 // address=[0x1458810]
 // Decompiled from char __thiscall CInputProcessor::InitSettlerProduction(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::InitSettlerProduction(class CEvn_Logic *) {
+bool  CInputProcessor::InitSettlerProduction(class CEvn_Logic * a2) {
   
   CSettlerMgr::FillSpecialistProduction(&g_cSettlerProductionInfo, 0);
   CLogic::SetFillDialogInfos(
@@ -1648,7 +1648,7 @@ bool  CInputProcessor::InitSettlerProduction(class CEvn_Logic *) {
 
 // address=[0x1458860]
 // Decompiled from char __thiscall CInputProcessor::InitSettlerSearch(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::InitSettlerSearch(class CEvn_Logic *) {
+bool  CInputProcessor::InitSettlerSearch(class CEvn_Logic * a2) {
   
   CEvn_Event v3; // [esp+Ch] [ebp-28h] BYREF
   int v4; // [esp+30h] [ebp-4h]
@@ -1667,7 +1667,7 @@ bool  CInputProcessor::InitSettlerSearch(class CEvn_Logic *) {
 
 // address=[0x1458920]
 // Decompiled from char __thiscall CInputProcessor::InitGoodAmount(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::InitGoodAmount(class CEvn_Logic *) {
+bool  CInputProcessor::InitGoodAmount(class CEvn_Logic * a2) {
   
   CEcoSectorMgr::FillGoodAmount(&g_cGoodsStatisticInfo, 0, *((unsigned __int8 *)this + 105));
   CLogic::SetFillDialogInfos(
@@ -1681,7 +1681,7 @@ bool  CInputProcessor::InitGoodAmount(class CEvn_Logic *) {
 
 // address=[0x1458970]
 // Decompiled from char __thiscall CInputProcessor::InitTransportPrio(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::InitTransportPrio(class CEvn_Logic *) {
+bool  CInputProcessor::InitTransportPrio(class CEvn_Logic * a2) {
   
   CEcoSectorMgr::FillTransportPrio((struct CInfoExchange *)&g_cTransportpriorityInfo, 0);
   CLogic::SetFillDialogInfos(
@@ -1695,7 +1695,7 @@ bool  CInputProcessor::InitTransportPrio(class CEvn_Logic *) {
 
 // address=[0x14589c0]
 // Decompiled from char __thiscall CInputProcessor::InitGoodDistribution(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::InitGoodDistribution(class CEvn_Logic *) {
+bool  CInputProcessor::InitGoodDistribution(class CEvn_Logic * a2) {
   
   dword_3F1EE64 = *((_DWORD *)a2 + 2);
   CEcoSectorMgr::FillGoodDistribution((struct CInfoExchange *)&g_cGoodDistributionInfo);
@@ -1710,7 +1710,7 @@ bool  CInputProcessor::InitGoodDistribution(class CEvn_Logic *) {
 
 // address=[0x1458a10]
 // Decompiled from char __thiscall CInputProcessor::GoodDeliveringChanged(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::GoodDeliveringChanged(class CEvn_Logic *) {
+bool  CInputProcessor::GoodDeliveringChanged(class CEvn_Logic * a2) {
   
   char LocalPlayerId; // al
   unsigned int v4; // [esp+10h] [ebp-B4h]
@@ -1789,7 +1789,7 @@ bool  CInputProcessor::GoodDeliveringChanged(class CEvn_Logic *) {
 
 // address=[0x1458d90]
 // Decompiled from char __thiscall CInputProcessor::TransportPrioChanged(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::TransportPrioChanged(class CEvn_Logic *) {
+bool  CInputProcessor::TransportPrioChanged(class CEvn_Logic * a2) {
   
   char LocalPlayerId; // al
   unsigned int v4; // [esp-8h] [ebp-50h]
@@ -1822,7 +1822,7 @@ bool  CInputProcessor::TransportPrioChanged(class CEvn_Logic *) {
 
 // address=[0x1458ec0]
 // Decompiled from char __thiscall CInputProcessor::UnitProduction(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::UnitProduction(class CEvn_Logic *) {
+bool  CInputProcessor::UnitProduction(class CEvn_Logic * a2) {
   
   int v2; // esi
   char LocalPlayerId; // al
@@ -1848,7 +1848,7 @@ bool  CInputProcessor::UnitProduction(class CEvn_Logic *) {
 
 // address=[0x1458fb0]
 // Decompiled from char __thiscall CInputProcessor::UrgentProduction(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::UrgentProduction(class CEvn_Logic *) {
+bool  CInputProcessor::UrgentProduction(class CEvn_Logic * a2) {
   
   int v2; // esi
   char LocalPlayerId; // al
@@ -1874,7 +1874,7 @@ bool  CInputProcessor::UrgentProduction(class CEvn_Logic *) {
 
 // address=[0x14590a0]
 // Decompiled from char __thiscall CInputProcessor::WeaponPercent(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::WeaponPercent(class CEvn_Logic *) {
+bool  CInputProcessor::WeaponPercent(class CEvn_Logic * a2) {
   
   unsigned __int16 *v2; // eax
   unsigned int v4; // [esp-10h] [ebp-4Ch]
@@ -1900,7 +1900,7 @@ bool  CInputProcessor::WeaponPercent(class CEvn_Logic *) {
 
 // address=[0x1459180]
 // Decompiled from char __thiscall CInputProcessor::WeaponAutoproduction(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::WeaponAutoproduction(class CEvn_Logic *) {
+bool  CInputProcessor::WeaponAutoproduction(class CEvn_Logic * a2) {
   
   unsigned __int16 *v2; // eax
   unsigned int v4; // [esp-10h] [ebp-4Ch]
@@ -1926,7 +1926,7 @@ bool  CInputProcessor::WeaponAutoproduction(class CEvn_Logic *) {
 
 // address=[0x1459260]
 // Decompiled from char __thiscall CInputProcessor::StorageGoodSwitch(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::StorageGoodSwitch(class CEvn_Logic *) {
+bool  CInputProcessor::StorageGoodSwitch(class CEvn_Logic * a2) {
   
   int v2; // esi
   char LocalPlayerId; // al
@@ -1952,7 +1952,7 @@ bool  CInputProcessor::StorageGoodSwitch(class CEvn_Logic *) {
 
 // address=[0x1459350]
 // Decompiled from char __thiscall CInputProcessor::VehicleProduction(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::VehicleProduction(class CEvn_Logic *) {
+bool  CInputProcessor::VehicleProduction(class CEvn_Logic * a2) {
   
   int v2; // esi
   char LocalPlayerId; // al
@@ -1978,7 +1978,7 @@ bool  CInputProcessor::VehicleProduction(class CEvn_Logic *) {
 
 // address=[0x1459440]
 // Decompiled from char __thiscall CInputProcessor::GotoVehicleGroupMenu(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::GotoVehicleGroupMenu(class CEvn_Logic *) {
+bool  CInputProcessor::GotoVehicleGroupMenu(class CEvn_Logic * a2) {
   
   CEvn_Event v4; // [esp+Ch] [ebp-28h] BYREF
   int v5; // [esp+30h] [ebp-4h]
@@ -2004,7 +2004,7 @@ bool  CInputProcessor::GotoVehicleGroupMenu(class CEvn_Logic *) {
 
 // address=[0x1459540]
 // Decompiled from char __thiscall CInputProcessor::SwitchLocalGlobal(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::SwitchLocalGlobal(class CEvn_Logic *) {
+bool  CInputProcessor::SwitchLocalGlobal(class CEvn_Logic * a2) {
   
   *((_BYTE *)this + 105) = *((_BYTE *)this + 105) == 0;
   CLogic::SetLocalGlobalSwitch(g_pLogic, *((_BYTE *)this + 105));
@@ -2014,7 +2014,7 @@ bool  CInputProcessor::SwitchLocalGlobal(class CEvn_Logic *) {
 
 // address=[0x1459590]
 // Decompiled from char __thiscall CInputProcessor::SpecialistProduction(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::SpecialistProduction(class CEvn_Logic *) {
+bool  CInputProcessor::SpecialistProduction(class CEvn_Logic * a2) {
   
   char LocalPlayerId; // al
   unsigned int v4; // [esp-8h] [ebp-4Ch]
@@ -2042,7 +2042,7 @@ bool  CInputProcessor::SpecialistProduction(class CEvn_Logic *) {
 
 // address=[0x1459690]
 // Decompiled from char __thiscall CInputProcessor::PrepareBoxSelection(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::PrepareBoxSelection(class CEvn_Logic *) {
+bool  CInputProcessor::PrepareBoxSelection(class CEvn_Logic * a2) {
   
   _DWORD *v2; // eax
   _DWORD *v3; // eax
@@ -2110,7 +2110,7 @@ bool  CInputProcessor::PrepareBoxSelection(class CEvn_Logic *) {
 
 // address=[0x1459860]
 // Decompiled from char __thiscall CInputProcessor::DotSelection(void *this, CEvn_Event *a2)
-bool  CInputProcessor::DotSelection(class CEvn_Logic *) {
+bool  CInputProcessor::DotSelection(class CEvn_Logic * a2) {
   
   unsigned __int16 *v2; // eax
   const struct IEntity *v3; // eax
@@ -2212,7 +2212,7 @@ bool  CInputProcessor::DotSelection(class CEvn_Logic *) {
 
 // address=[0x1459b70]
 // Decompiled from char __thiscall CInputProcessor::SelectTypeInSurrounding(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::SelectTypeInSurrounding(class CEvn_Logic *) {
+bool  CInputProcessor::SelectTypeInSurrounding(class CEvn_Logic * a2) {
   
   int v2; // eax
   int v4; // [esp-4h] [ebp-18h]
@@ -2247,7 +2247,7 @@ bool  CInputProcessor::SelectTypeInSurrounding(class CEvn_Logic *) {
 
 // address=[0x1459c50]
 // Decompiled from char __thiscall CInputProcessor::SelectGroup(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::SelectGroup(class CEvn_Logic *) {
+bool  CInputProcessor::SelectGroup(class CEvn_Logic * a2) {
   
   int v3; // [esp+0h] [ebp-34h]
   int SelectionTypeOfCurrentSelection; // [esp+4h] [ebp-30h]
@@ -2303,7 +2303,7 @@ bool  CInputProcessor::SelectGroup(class CEvn_Logic *) {
 
 // address=[0x1459df0]
 // Decompiled from char __stdcall CInputProcessor::GroupToSelection(int a1)
-bool  CInputProcessor::GroupToSelection(class CEvn_Logic *) {
+bool  CInputProcessor::GroupToSelection(class CEvn_Logic * a1) {
   
   return 0;
 }
@@ -2311,7 +2311,7 @@ bool  CInputProcessor::GroupToSelection(class CEvn_Logic *) {
 
 // address=[0x1459e00]
 // Decompiled from char __thiscall CInputProcessor::DefineGroup(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::DefineGroup(class CEvn_Logic *) {
+bool  CInputProcessor::DefineGroup(class CEvn_Logic * a2) {
   
   char LocalPlayerId; // al
   unsigned int v4; // [esp-8h] [ebp-58h]
@@ -2358,7 +2358,7 @@ bool  CInputProcessor::DefineGroup(class CEvn_Logic *) {
 
 // address=[0x1459fd0]
 // Decompiled from char __thiscall CInputProcessor::FocusGroup(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::FocusGroup(class CEvn_Logic *) {
+bool  CInputProcessor::FocusGroup(class CEvn_Logic * a2) {
   
   unsigned __int16 *v2; // eax
   unsigned __int8 *v3; // eax
@@ -2416,7 +2416,7 @@ bool  CInputProcessor::FocusGroup(class CEvn_Logic *) {
 
 // address=[0x145a1a0]
 // Decompiled from char __thiscall CInputProcessor::SendTo(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::SendTo(class CEvn_Logic *) {
+bool  CInputProcessor::SendTo(class CEvn_Logic * a2) {
   
   unsigned __int16 *v3; // eax
   unsigned __int8 *v4; // eax
@@ -2492,7 +2492,7 @@ bool  CInputProcessor::SendTo(class CEvn_Logic *) {
 
 // address=[0x145a410]
 // Decompiled from char __thiscall CInputProcessor::ForceGoto(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::ForceGoto(class CEvn_Logic *) {
+bool  CInputProcessor::ForceGoto(class CEvn_Logic * a2) {
   
   return 0;
 }
@@ -2500,7 +2500,7 @@ bool  CInputProcessor::ForceGoto(class CEvn_Logic *) {
 
 // address=[0x145a420]
 // Decompiled from bool __thiscall CInputProcessor::StandGround(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::StandGround(class CEvn_Logic *) {
+bool  CInputProcessor::StandGround(class CEvn_Logic * a2) {
   
   *((_DWORD *)a2 + 3) = -1;
   return CInputProcessor::SendTo(this, a2);
@@ -2509,7 +2509,7 @@ bool  CInputProcessor::StandGround(class CEvn_Logic *) {
 
 // address=[0x145a450]
 // Decompiled from char __thiscall CInputProcessor::ChooseSecondPatrolPos(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::ChooseSecondPatrolPos(class CEvn_Logic *) {
+bool  CInputProcessor::ChooseSecondPatrolPos(class CEvn_Logic * a2) {
   
   *((_DWORD *)this + 20) = 9;
   IGfxEngine::EnableIconLayer((IGfxEngine *)g_pGfxEngine, 1);
@@ -2519,7 +2519,7 @@ bool  CInputProcessor::ChooseSecondPatrolPos(class CEvn_Logic *) {
 
 // address=[0x145a480]
 // Decompiled from char __thiscall CInputProcessor::SelectSecondPatrolPos(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::SelectSecondPatrolPos(class CEvn_Logic *) {
+bool  CInputProcessor::SelectSecondPatrolPos(class CEvn_Logic * a2) {
   
   *((_DWORD *)a2 + 2) = 0;
   *((_DWORD *)a2 + 2) |= 8u;
@@ -2532,7 +2532,7 @@ bool  CInputProcessor::SelectSecondPatrolPos(class CEvn_Logic *) {
 
 // address=[0x145a4e0]
 // Decompiled from char __thiscall CInputProcessor::InjuredOut(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::InjuredOut(class CEvn_Logic *) {
+bool  CInputProcessor::InjuredOut(class CEvn_Logic * a2) {
   
   _DWORD v3[4]; // [esp-Ch] [ebp-88h] BYREF
   _BYTE v4[12]; // [esp+4h] [ebp-78h] BYREF
@@ -2623,7 +2623,7 @@ bool  CInputProcessor::InjuredOut(class CEvn_Logic *) {
 
 // address=[0x145a6e0]
 // Decompiled from char __thiscall CInputProcessor::MorphToCarrier(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::MorphToCarrier(class CEvn_Logic *) {
+bool  CInputProcessor::MorphToCarrier(class CEvn_Logic * a2) {
   
   char LocalPlayerId; // al
   unsigned int v4; // [esp-8h] [ebp-54h]
@@ -2659,7 +2659,7 @@ bool  CInputProcessor::MorphToCarrier(class CEvn_Logic *) {
 
 // address=[0x145a860]
 // Decompiled from char __thiscall CInputProcessor::SearchUnit(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::SearchUnit(class CEvn_Logic *) {
+bool  CInputProcessor::SearchUnit(class CEvn_Logic * a2) {
   
   int LocalPlayerId; // eax
   unsigned __int16 *v4; // eax
@@ -2912,7 +2912,7 @@ CInputProcessor__SearchUnit___def_185AC66:
 
 // address=[0x145af70]
 // Decompiled from char __thiscall CInputProcessor::UnitReservation(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::UnitReservation(class CEvn_Logic *) {
+bool  CInputProcessor::UnitReservation(class CEvn_Logic * a2) {
   
   char LocalPlayerId; // al
   unsigned int v4; // [esp-8h] [ebp-4Ch]
@@ -2940,7 +2940,7 @@ bool  CInputProcessor::UnitReservation(class CEvn_Logic *) {
 
 // address=[0x145b070]
 // Decompiled from char __thiscall CInputProcessor::InitEconomyGameMenu(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::InitEconomyGameMenu(class CEvn_Logic *) {
+bool  CInputProcessor::InitEconomyGameMenu(class CEvn_Logic * a2) {
   
   CStatistic::FillEconomyGameMenu();
   CLogic::SetFillDialogInfos(
@@ -2954,7 +2954,7 @@ bool  CInputProcessor::InitEconomyGameMenu(class CEvn_Logic *) {
 
 // address=[0x145b0b0]
 // Decompiled from char __thiscall CInputProcessor::InitMagicSideBar(_DWORD *this, int a2)
-bool  CInputProcessor::InitMagicSideBar(class CEvn_Logic *) {
+bool  CInputProcessor::InitMagicSideBar(class CEvn_Logic * a2) {
   
   this[5] = -1;
   IGroupMgr::FillMagicSideBar(&g_cMagicSpellSideBarInfo, 0, 0);
@@ -2969,7 +2969,7 @@ bool  CInputProcessor::InitMagicSideBar(class CEvn_Logic *) {
 
 // address=[0x145b100]
 // Decompiled from char __thiscall CInputProcessor::InitGroupSideBar(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::InitGroupSideBar(class CEvn_Logic *) {
+bool  CInputProcessor::InitGroupSideBar(class CEvn_Logic * a2) {
   
   IGroupMgr::FillGroupSideBar(&g_cGroupSideBarInfo, 0, 0);
   CLogic::SetFillSideBarInfos(
@@ -2983,7 +2983,7 @@ bool  CInputProcessor::InitGroupSideBar(class CEvn_Logic *) {
 
 // address=[0x145b140]
 // Decompiled from char __thiscall CInputProcessor::InitAddSoldierSideBar(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::InitAddSoldierSideBar(class CEvn_Logic *) {
+bool  CInputProcessor::InitAddSoldierSideBar(class CEvn_Logic * a2) {
   
   unsigned __int16 *v2; // eax
   unsigned __int16 *v3; // eax
@@ -3002,7 +3002,7 @@ bool  CInputProcessor::InitAddSoldierSideBar(class CEvn_Logic *) {
 
 // address=[0x145b1a0]
 // Decompiled from char __thiscall CInputProcessor::InitToolSideBar(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::InitToolSideBar(class CEvn_Logic *) {
+bool  CInputProcessor::InitToolSideBar(class CEvn_Logic * a2) {
   
   unsigned __int16 *v2; // eax
   unsigned __int16 *v3; // eax
@@ -3021,7 +3021,7 @@ bool  CInputProcessor::InitToolSideBar(class CEvn_Logic *) {
 
 // address=[0x145b200]
 // Decompiled from char __thiscall CInputProcessor::InitWeaponSideBar(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::InitWeaponSideBar(class CEvn_Logic *) {
+bool  CInputProcessor::InitWeaponSideBar(class CEvn_Logic * a2) {
   
   unsigned __int16 *v2; // eax
   unsigned __int16 *v3; // eax
@@ -3040,7 +3040,7 @@ bool  CInputProcessor::InitWeaponSideBar(class CEvn_Logic *) {
 
 // address=[0x145b260]
 // Decompiled from char __thiscall CInputProcessor::InitGoodsOutSideBar(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::InitGoodsOutSideBar(class CEvn_Logic *) {
+bool  CInputProcessor::InitGoodsOutSideBar(class CEvn_Logic * a2) {
   
   unsigned __int16 *v2; // eax
   unsigned __int16 *v3; // eax
@@ -3059,7 +3059,7 @@ bool  CInputProcessor::InitGoodsOutSideBar(class CEvn_Logic *) {
 
 // address=[0x145b2c0]
 // Decompiled from char __thiscall CInputProcessor::InitTradeSideBar(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::InitTradeSideBar(class CEvn_Logic *) {
+bool  CInputProcessor::InitTradeSideBar(class CEvn_Logic * a2) {
   
   unsigned __int16 *v2; // eax
   unsigned __int16 *v3; // eax
@@ -3078,7 +3078,7 @@ bool  CInputProcessor::InitTradeSideBar(class CEvn_Logic *) {
 
 // address=[0x145b320]
 // Decompiled from char __thiscall CInputProcessor::InitStorageSideBar(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::InitStorageSideBar(class CEvn_Logic *) {
+bool  CInputProcessor::InitStorageSideBar(class CEvn_Logic * a2) {
   
   unsigned __int16 *v2; // eax
   unsigned __int16 *v3; // eax
@@ -3097,7 +3097,7 @@ bool  CInputProcessor::InitStorageSideBar(class CEvn_Logic *) {
 
 // address=[0x145b380]
 // Decompiled from char __thiscall CInputProcessor::InitEyeCatcherSideBar(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::InitEyeCatcherSideBar(class CEvn_Logic *) {
+bool  CInputProcessor::InitEyeCatcherSideBar(class CEvn_Logic * a2) {
   
   CWorldManager::ClearHelperObject(this);
   CBuildingMgr::FillEyeCatcherSideBar((struct CInfoExchange *)&g_cEyeCatcherBarInfo, 0);
@@ -3112,7 +3112,7 @@ bool  CInputProcessor::InitEyeCatcherSideBar(class CEvn_Logic *) {
 
 // address=[0x145b3c0]
 // Decompiled from char __thiscall CInputProcessor::InitAddVehicleSideBar(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::InitAddVehicleSideBar(class CEvn_Logic *) {
+bool  CInputProcessor::InitAddVehicleSideBar(class CEvn_Logic * a2) {
   
   unsigned __int16 *v2; // eax
   unsigned __int16 *v3; // eax
@@ -3131,7 +3131,7 @@ bool  CInputProcessor::InitAddVehicleSideBar(class CEvn_Logic *) {
 
 // address=[0x145b420]
 // Decompiled from char __stdcall CInputProcessor::CloseSideBar(int a1)
-bool  CInputProcessor::CloseSideBar(class CEvn_Logic *) {
+bool  CInputProcessor::CloseSideBar(class CEvn_Logic * a1) {
   
   CLogic::SetFillSideBarInfos(g_pLogic, 0, 0, 0);
   return 0;
@@ -3140,7 +3140,7 @@ bool  CInputProcessor::CloseSideBar(class CEvn_Logic *) {
 
 // address=[0x145b440]
 // Decompiled from char __thiscall CInputProcessor::Morph2FoundationCart(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::Morph2FoundationCart(class CEvn_Logic *) {
+bool  CInputProcessor::Morph2FoundationCart(class CEvn_Logic * a2) {
   
   unsigned __int16 *v2; // eax
   char LocalPlayerId; // [esp-Ch] [ebp-48h]
@@ -3172,7 +3172,7 @@ bool  CInputProcessor::Morph2FoundationCart(class CEvn_Logic *) {
 
 // address=[0x145b540]
 // Decompiled from char __thiscall CInputProcessor::CreateSettlement(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::CreateSettlement(class CEvn_Logic *) {
+bool  CInputProcessor::CreateSettlement(class CEvn_Logic * a2) {
   
   unsigned __int16 *v2; // eax
   char LocalPlayerId; // [esp-Ch] [ebp-44h]
@@ -3199,7 +3199,7 @@ bool  CInputProcessor::CreateSettlement(class CEvn_Logic *) {
 
 // address=[0x145b630]
 // Decompiled from char __thiscall CInputProcessor::Morph2Cart(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::Morph2Cart(class CEvn_Logic *) {
+bool  CInputProcessor::Morph2Cart(class CEvn_Logic * a2) {
   
   unsigned __int16 *v2; // eax
   char LocalPlayerId; // [esp-Ch] [ebp-48h]
@@ -3232,7 +3232,7 @@ bool  CInputProcessor::Morph2Cart(class CEvn_Logic *) {
 
 // address=[0x145b740]
 // Decompiled from char __thiscall CInputProcessor::VehicleUnload(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::VehicleUnload(class CEvn_Logic *) {
+bool  CInputProcessor::VehicleUnload(class CEvn_Logic * a2) {
   
   char LocalPlayerId; // al
   unsigned int v4; // [esp-8h] [ebp-7Ch]
@@ -3295,7 +3295,7 @@ bool  CInputProcessor::VehicleUnload(class CEvn_Logic *) {
 
 // address=[0x145b8f0]
 // Decompiled from char __thiscall CInputProcessor::CatapultLoad(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::CatapultLoad(class CEvn_Logic *) {
+bool  CInputProcessor::CatapultLoad(class CEvn_Logic * a2) {
   
   char LocalPlayerId; // al
   unsigned int v4; // [esp-8h] [ebp-7Ch]
@@ -3358,7 +3358,7 @@ bool  CInputProcessor::CatapultLoad(class CEvn_Logic *) {
 
 // address=[0x145baa0]
 // Decompiled from char __thiscall CInputProcessor::DestroyWarMachine(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::DestroyWarMachine(class CEvn_Logic *) {
+bool  CInputProcessor::DestroyWarMachine(class CEvn_Logic * a2) {
   
   char LocalPlayerId; // al
   unsigned int v4; // [esp-8h] [ebp-48h]
@@ -3387,7 +3387,7 @@ bool  CInputProcessor::DestroyWarMachine(class CEvn_Logic *) {
 
 // address=[0x145bbb0]
 // Decompiled from char __thiscall CInputProcessor::ZoomAreaState(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::ZoomAreaState(class CEvn_Logic *) {
+bool  CInputProcessor::ZoomAreaState(class CEvn_Logic * a2) {
   
   *((_DWORD *)this + 20) = 10;
   return 1;
@@ -3396,7 +3396,7 @@ bool  CInputProcessor::ZoomAreaState(class CEvn_Logic *) {
 
 // address=[0x145bbd0]
 // Decompiled from char __thiscall CInputProcessor::CamSelection(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::CamSelection(class CEvn_Logic *) {
+bool  CInputProcessor::CamSelection(class CEvn_Logic * a2) {
   
   int v2; // eax
   int v3; // eax
@@ -3484,7 +3484,7 @@ bool  CInputProcessor::CamSelection(class CEvn_Logic *) {
 
 // address=[0x145be00]
 // Decompiled from int __thiscall CInputProcessor::TraceStates(CFsm **this, int a2)
-void  CInputProcessor::TraceStates(class CEvn_Logic const &) {
+void  CInputProcessor::TraceStates(class CEvn_Logic const & a2) {
   
   int v2; // eax
   unsigned int v4; // [esp+4h] [ebp-4h]
@@ -3567,7 +3567,7 @@ void  CInputProcessor::BoxSelection(void) {
 
 // address=[0x145c080]
 // Decompiled from int __thiscall CInputProcessor::SelectOne(void *this, int x, int y)
-int  CInputProcessor::SelectOne(int,int) {
+int  CInputProcessor::SelectOne(int x, int y) {
   
   int v3; // esi
   int v5; // esi
@@ -3688,7 +3688,7 @@ LABEL_13:
 
 // address=[0x145c390]
 // Decompiled from int __stdcall CInputProcessor::GetTheBestEntity(void *a1, int a2, int a3)
-int  CInputProcessor::GetTheBestEntity(class std::vector<unsigned short,class std::allocator<unsigned short> > &,int,int) {
+int  CInputProcessor::GetTheBestEntity(class std::vector<unsigned short,class std::allocator<unsigned short> > & a1, int a2, int a3) {
   
   unsigned int v3; // eax
   unsigned __int16 *v4; // eax
@@ -3776,7 +3776,7 @@ int  CInputProcessor::GetTheBestEntity(class std::vector<unsigned short,class st
 
 // address=[0x145c590]
 // Decompiled from int __thiscall CInputProcessor::SelectAllInSurrounding(CInputProcessor *this, int a2, int a3)
-int  CInputProcessor::SelectAllInSurrounding(int,int) {
+int  CInputProcessor::SelectAllInSurrounding(int a2, int a3) {
   
   int v4; // eax
   int v5; // [esp-4h] [ebp-38h]
@@ -3841,7 +3841,7 @@ int  CInputProcessor::SelectAllInSurrounding(int,int) {
 
 // address=[0x145c790]
 // Decompiled from char __stdcall CInputProcessor::SelectAtSector(int a1, int a2)
-bool  CInputProcessor::SelectAtSector(enum SETTLER_TYPES,int) {
+bool  CInputProcessor::SelectAtSector(enum SETTLER_TYPES a1, int a2) {
   
   int LocalPlayerId; // eax
   int v4; // eax
@@ -3943,7 +3943,7 @@ int  CInputProcessor::GetUserESInMiddleOfTheScreen(void) {
 
 // address=[0x145c9d0]
 // Decompiled from void __thiscall CInputProcessor::RemoveActiveSettler(CInputProcessor *this, int a2, int a3)
-void  CInputProcessor::RemoveActiveSettler(int,int) {
+void  CInputProcessor::RemoveActiveSettler(int a2, int a3) {
   
   ;
 }
@@ -3951,7 +3951,7 @@ void  CInputProcessor::RemoveActiveSettler(int,int) {
 
 // address=[0x145c9e0]
 // Decompiled from int __stdcall CInputProcessor::ActivateSpecialist(int a1, int a2)
-void  CInputProcessor::ActivateSpecialist(int,int) {
+void  CInputProcessor::ActivateSpecialist(int a1, int a2) {
   
   if ( (a2 < 1 || a2 > 3) && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 3030, "_iArea>=1 && _iArea<=3") == 1 )
     __debugbreak();
@@ -4006,7 +4006,7 @@ LABEL_11:
 
 // address=[0x145cb30]
 // Decompiled from char __thiscall CInputProcessor::GetPossibleBuildingSites(CInputProcessor *this, int a2, int a3, bool a4)
-bool  CInputProcessor::GetPossibleBuildingSites(int,int,bool) {
+bool  CInputProcessor::GetPossibleBuildingSites(int a2, int a3, bool a4) {
   
   int v5; // [esp+0h] [ebp-48h]
   int OutputWidth; // [esp+Ch] [ebp-3Ch]
@@ -4093,7 +4093,7 @@ bool  CInputProcessor::GetPossibleBuildingSites(int,int,bool) {
 
 // address=[0x145cdd0]
 // Decompiled from char __thiscall CInputProcessor::UpdateScreenPossibleBuildingSites(CInputProcessor *this, int a2, int a3, int a4)
-bool  CInputProcessor::UpdateScreenPossibleBuildingSites(int,int,int) {
+bool  CInputProcessor::UpdateScreenPossibleBuildingSites(int a2, int a3, int a4) {
   
   int v5; // [esp+0h] [ebp-2Ch]
   int OutputWidth; // [esp+8h] [ebp-24h]
@@ -4521,7 +4521,7 @@ void  CInputProcessor::SelectAllVisible(void) {
 
 // address=[0x14604b0]
 // Decompiled from char __thiscall CInputProcessor::EmptyFunct(CInputProcessor *this, struct CEvn_Logic *a2)
-bool  CInputProcessor::EmptyFunct(class CEvn_Logic *) {
+bool  CInputProcessor::EmptyFunct(class CEvn_Logic * a2) {
   
   return 1;
 }
@@ -4537,7 +4537,7 @@ int  CInputProcessor::GetSelectionType(void)const {
 
 // address=[0x14e4b60]
 // Decompiled from int __thiscall CInputProcessor::NewCandidate(CInputProcessor *this, __int16 a2)
-void  CInputProcessor::NewCandidate(int) {
+void  CInputProcessor::NewCandidate(int a2) {
   
   __int16 v3; // [esp+6h] [ebp-2h] BYREF
 
@@ -4548,7 +4548,7 @@ void  CInputProcessor::NewCandidate(int) {
 
 // address=[0x14e4bb0]
 // Decompiled from CInputProcessor *__thiscall CInputProcessor::SetSelectionType(CInputProcessor *this, int a2)
-void  CInputProcessor::SetSelectionType(int) {
+void  CInputProcessor::SetSelectionType(int a2) {
   
   CInputProcessor *result; // eax
 

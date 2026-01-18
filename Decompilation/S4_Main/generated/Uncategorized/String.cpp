@@ -4,7 +4,7 @@
 
 // address=[0x13512a0]
 // Decompiled from void *__thiscall String::String(void *this, int a2)
- String::String(std::string const &) {
+ String::String(std::string const & a2) {
   
   std::string::string(a2);
   return this;
@@ -13,7 +13,7 @@
 
 // address=[0x13512d0]
 // Decompiled from void *__thiscall String::String(void *this, char *Str, size_t Size)
- String::String(char const *,unsigned int) {
+ String::String(char const * Str, unsigned int Size) {
   
   void *v4; // [esp+4h] [ebp-58h]
   void *v5; // [esp+8h] [ebp-54h]
@@ -47,7 +47,7 @@
 
 // address=[0x13516d0]
 // Decompiled from void *__thiscall String::operator=(void *this, int a2)
-class String &  String::operator=(class String const &) {
+class String &  String::operator=(class String const & a2) {
   
   std::string::operator=(a2);
   return this;
@@ -56,7 +56,7 @@ class String &  String::operator=(class String const &) {
 
 // address=[0x1351700]
 // Decompiled from void *__thiscall String::operator=(void *this, char *Str)
-class String &  String::operator=(char const *) {
+class String &  String::operator=(char const * Str) {
   
   void *v3; // [esp+0h] [ebp-28h]
   _BYTE v5[28]; // [esp+8h] [ebp-20h] BYREF
@@ -85,7 +85,7 @@ char const *  String::c_str(void)const {
 
 // address=[0x1369f20]
 // Decompiled from String *__thiscall String::String(String *this, const struct String *a2, int a3, size_t Size)
- String::String(class String const &,unsigned int,unsigned int) {
+ String::String(class String const & a2, unsigned int a3, unsigned int Size) {
   
   std::string::string((int)a2, a3, Size);
   return this;
@@ -103,7 +103,7 @@ char const *  String::c_str(void)const {
 
 // address=[0x136a1b0]
 // Decompiled from void *__thiscall String::operator+=(void *this, char *Str)
-class String &  String::operator+=(char const *) {
+class String &  String::operator+=(char const * Str) {
   
   if ( Str )
     std::string::operator+=(Str);

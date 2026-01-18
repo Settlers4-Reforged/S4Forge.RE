@@ -4,7 +4,7 @@
 
 // address=[0x132eec0]
 // Decompiled from void __thiscall CAIWatchTower::Init(CAIWatchTower *this, int a2, int a3, int a4)
-void  CAIWatchTower::Init(int,int,int) {
+void  CAIWatchTower::Init(int a2, int a3, int a4) {
   
   if ( !IAIEnvironment::WorldInWorld(a2, a3)
     && BBSupportDbgReport(2, "AI\\AI_WatchTower.cpp", 196, "g_pAIEnv->WorldInWorld(_iX, _iY)") == 1 )
@@ -62,7 +62,7 @@ int  CAIWatchTower::Value(void)const {
 
 // address=[0x132ef50]
 // Decompiled from unsigned int __thiscall CAIWatchTower::SetValue(CAIWatchTower *this, int a2)
-void  CAIWatchTower::SetValue(int) {
+void  CAIWatchTower::SetValue(int a2) {
   
   unsigned int result; // eax
 
@@ -76,7 +76,7 @@ void  CAIWatchTower::SetValue(int) {
 
 // address=[0x132f8c0]
 // Decompiled from CAIWatchTower *__thiscall CAIWatchTower::SetAllianceIdAndClearValue(CAIWatchTower *this, int a2)
-void  CAIWatchTower::SetAllianceIdAndClearValue(int) {
+void  CAIWatchTower::SetAllianceIdAndClearValue(int a2) {
   
   CAIWatchTower *result; // eax
 

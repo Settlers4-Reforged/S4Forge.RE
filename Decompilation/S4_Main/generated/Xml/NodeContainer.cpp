@@ -4,7 +4,7 @@
 
 // address=[0x14f3c60]
 // Decompiled from _DWORD *__thiscall AdvXMLParser::NodeContainer::Begin(void *this, _DWORD *a2)
-struct AdvXMLParser::Node::ConstIteratorRef  AdvXMLParser::NodeContainer::Begin(void)const {
+struct AdvXMLParser::Node::ConstIteratorRef  AdvXMLParser::NodeContainer::Begin(void a2)const {
   
   char v3; // [esp-Ch] [ebp-20h] BYREF
   int v4; // [esp-8h] [ebp-1Ch]
@@ -25,7 +25,7 @@ struct AdvXMLParser::Node::ConstIteratorRef  AdvXMLParser::NodeContainer::Begin(
 
 // address=[0x14f3d40]
 // Decompiled from _DWORD *__thiscall AdvXMLParser::NodeContainer::End(void *this, _DWORD *a2)
-struct AdvXMLParser::Node::ConstIteratorRef  AdvXMLParser::NodeContainer::End(void)const {
+struct AdvXMLParser::Node::ConstIteratorRef  AdvXMLParser::NodeContainer::End(void a2)const {
   
   char v3; // [esp-Ch] [ebp-20h] BYREF
   int v4; // [esp-8h] [ebp-1Ch]
@@ -46,7 +46,7 @@ struct AdvXMLParser::Node::ConstIteratorRef  AdvXMLParser::NodeContainer::End(vo
 
 // address=[0x2f13750]
 // Decompiled from int __thiscall AdvXMLParser::NodeContainer::NodeContainer(_DWORD *this, int a2, int a3)
- AdvXMLParser::NodeContainer::NodeContainer(class AdvXMLParser::NodeContainer &,std::string const &) {
+ AdvXMLParser::NodeContainer::NodeContainer(class AdvXMLParser::NodeContainer & a2, std::string const & a3) {
   
   int v5; // [esp+0h] [ebp-4h]
 
@@ -105,7 +105,7 @@ bool  AdvXMLParser::NodeContainer::IsEmpty(void)const {
 
 // address=[0x2f13890]
 // Decompiled from void __thiscall AdvXMLParser::NodeContainer::AddText(AdvXMLParser::NodeContainer *this, int a2)
-void  AdvXMLParser::NodeContainer::AddText(std::string const &) {
+void  AdvXMLParser::NodeContainer::AddText(std::string const & a2) {
   
   struct Node *v2; // [esp+8h] [ebp-18h]
 
@@ -126,7 +126,7 @@ void  AdvXMLParser::NodeContainer::AddText(std::string const &) {
 
 // address=[0x2f13940]
 // Decompiled from void __thiscall AdvXMLParser::NodeContainer::AddText(  AdvXMLParser::NodeContainer *this,  struct AdvXMLParser::Bookmark *a2,  int a3)
-void  AdvXMLParser::NodeContainer::AddText(class AdvXMLParser::Bookmark &,int) {
+void  AdvXMLParser::NodeContainer::AddText(class AdvXMLParser::Bookmark & a2, int a3) {
   
   _BYTE v4[28]; // [esp+8h] [ebp-2Ch] BYREF
   int v5; // [esp+30h] [ebp-4h]
@@ -185,7 +185,7 @@ void  AdvXMLParser::NodeContainer::DeleteChildren(void) {
 
 // address=[0x2f13ac0]
 // Decompiled from int __thiscall AdvXMLParser::NodeContainer::DeleteChild(AdvXMLParser::NodeContainer *this, const struct Node *a2)
-void  AdvXMLParser::NodeContainer::DeleteChild(class AdvXMLParser::Node const &) {
+void  AdvXMLParser::NodeContainer::DeleteChild(class AdvXMLParser::Node const & a2) {
   
   char v3; // [esp-Ch] [ebp-34h] BYREF
   int v4; // [esp-8h] [ebp-30h]
@@ -219,7 +219,7 @@ void  AdvXMLParser::NodeContainer::DeleteChild(class AdvXMLParser::Node const &)
 
 // address=[0x2f13b90]
 // Decompiled from void *__thiscall AdvXMLParser::NodeContainer::GetChild(char *this, int a2)
-class AdvXMLParser::Node &  AdvXMLParser::NodeContainer::GetChild(int)const {
+class AdvXMLParser::Node &  AdvXMLParser::NodeContainer::GetChild(int a2)const {
   
   if ( a2 >= 0 && a2 < (unsigned int)std::vector<AdvXMLParser::Node *>::size(this + 36) )
     return *(void **)std::vector<AdvXMLParser::Node *>::operator[](a2);
@@ -230,7 +230,7 @@ class AdvXMLParser::Node &  AdvXMLParser::NodeContainer::GetChild(int)const {
 
 // address=[0x2f13bd0]
 // Decompiled from void *__thiscall AdvXMLParser::NodeContainer::GetChild(AdvXMLParser::NodeContainer *this, int a2, int a3)
-class AdvXMLParser::Node &  AdvXMLParser::NodeContainer::GetChild(int,int)const {
+class AdvXMLParser::Node &  AdvXMLParser::NodeContainer::GetChild(int a2, int a3)const {
   
   _BYTE v4[12]; // [esp+4h] [ebp-2Ch] BYREF
   int v5; // [esp+10h] [ebp-20h]
@@ -273,7 +273,7 @@ class AdvXMLParser::Node &  AdvXMLParser::NodeContainer::GetChild(int,int)const 
 
 // address=[0x2f13cd0]
 // Decompiled from void *__thiscall AdvXMLParser::NodeContainer::GetChild(AdvXMLParser::NodeContainer *this, char *a2, int a3, int a4)
-class AdvXMLParser::Node &  AdvXMLParser::NodeContainer::GetChild(char const *,int,int)const {
+class AdvXMLParser::Node &  AdvXMLParser::NodeContainer::GetChild(char const * a2, int a3, int a4)const {
   
   _BYTE v5[12]; // [esp+4h] [ebp-2Ch] BYREF
   int v6; // [esp+10h] [ebp-20h]
@@ -316,7 +316,7 @@ class AdvXMLParser::Node &  AdvXMLParser::NodeContainer::GetChild(char const *,i
 
 // address=[0x2f13de0]
 // Decompiled from int __thiscall AdvXMLParser::NodeContainer::Add(AdvXMLParser::NodeContainer *this, struct Node *a2)
-void  AdvXMLParser::NodeContainer::Add(class AdvXMLParser::Node *) {
+void  AdvXMLParser::NodeContainer::Add(class AdvXMLParser::Node * a2) {
   
   int result; // eax
 
@@ -335,7 +335,7 @@ void  AdvXMLParser::NodeContainer::Add(class AdvXMLParser::Node *) {
 
 // address=[0x2f13e50]
 // Decompiled from int __thiscall AdvXMLParser::NodeContainer::InsertBefore(  AdvXMLParser::NodeContainer *this,  const struct Node *a2,  struct Node *a3)
-void  AdvXMLParser::NodeContainer::InsertBefore(class AdvXMLParser::Node const &,class AdvXMLParser::Node *) {
+void  AdvXMLParser::NodeContainer::InsertBefore(class AdvXMLParser::Node const & a2, class AdvXMLParser::Node * a3) {
   
   char v4; // [esp-10h] [ebp-48h] BYREF
   int v5; // [esp-Ch] [ebp-44h]
@@ -374,7 +374,7 @@ void  AdvXMLParser::NodeContainer::InsertBefore(class AdvXMLParser::Node const &
 
 // address=[0x2f13f40]
 // Decompiled from int __thiscall AdvXMLParser::NodeContainer::InsertAfter(  AdvXMLParser::NodeContainer *this,  const struct Node *a2,  struct Node *a3)
-void  AdvXMLParser::NodeContainer::InsertAfter(class AdvXMLParser::Node const &,class AdvXMLParser::Node *) {
+void  AdvXMLParser::NodeContainer::InsertAfter(class AdvXMLParser::Node const & a2, class AdvXMLParser::Node * a3) {
   
   struct std::_Iterator_base12 *v4; // eax
   char v5; // [esp-10h] [ebp-68h] BYREF
@@ -437,7 +437,7 @@ void  AdvXMLParser::NodeContainer::InsertAfter(class AdvXMLParser::Node const &,
 
 // address=[0x2f140d0]
 // Decompiled from int __thiscall AdvXMLParser::NodeContainer::CloneChildren(  AdvXMLParser::NodeContainer *this,  struct AdvXMLParser::NodeContainer *a2)
-void  AdvXMLParser::NodeContainer::CloneChildren(class AdvXMLParser::NodeContainer &)const {
+void  AdvXMLParser::NodeContainer::CloneChildren(class AdvXMLParser::NodeContainer & a2)const {
   
   struct Node *v2; // eax
   _BYTE v4[12]; // [esp+4h] [ebp-38h] BYREF
@@ -474,7 +474,7 @@ void  AdvXMLParser::NodeContainer::CloneChildren(class AdvXMLParser::NodeContain
 
 // address=[0x2f141a0]
 // Decompiled from int __thiscall AdvXMLParser::NodeContainer::DeleteChild(void *this, char a2, int a3, int a4)
-void  AdvXMLParser::NodeContainer::DeleteChild(class std::_Vector_iterator<class std::_Vector_val<struct std::_Simple_types<class AdvXMLParser::Node *> > >) {
+void  AdvXMLParser::NodeContainer::DeleteChild(class std::_Vector_iterator<class std::_Vector_val<struct std::_Simple_types<class AdvXMLParser::Node *> > > a2) {
   
   _DWORD v5[4]; // [esp-Ch] [ebp-64h] BYREF
   _BYTE v6[12]; // [esp+4h] [ebp-54h] BYREF
@@ -528,7 +528,7 @@ void  AdvXMLParser::NodeContainer::DeleteChild(class std::_Vector_iterator<class
 
 // address=[0x2f142f0]
 // Decompiled from char __thiscall AdvXMLParser::NodeContainer::FindChild(void *this, int a2, int a3)
-bool  AdvXMLParser::NodeContainer::FindChild(int,class std::_Vector_iterator<class std::_Vector_val<struct std::_Simple_types<class AdvXMLParser::Node *> > > &)const {
+bool  AdvXMLParser::NodeContainer::FindChild(int a2, class std::_Vector_iterator<class std::_Vector_val<struct std::_Simple_types<class AdvXMLParser::Node *> > > & a3)const {
   
   _BYTE v4[12]; // [esp+4h] [ebp-2Ch] BYREF
   std::_Iterator_base12 *v5; // [esp+10h] [ebp-20h]
@@ -560,7 +560,7 @@ bool  AdvXMLParser::NodeContainer::FindChild(int,class std::_Vector_iterator<cla
 
 // address=[0x2f143b0]
 // Decompiled from char __thiscall AdvXMLParser::NodeContainer::FindChild(void *this, char *Str, int a3)
-bool  AdvXMLParser::NodeContainer::FindChild(char const *,class std::_Vector_iterator<class std::_Vector_val<struct std::_Simple_types<class AdvXMLParser::Node *> > > &)const {
+bool  AdvXMLParser::NodeContainer::FindChild(char const * Str, class std::_Vector_iterator<class std::_Vector_val<struct std::_Simple_types<class AdvXMLParser::Node *> > > & a3)const {
   
   _DWORD *v3; // eax
   int Name; // eax
@@ -594,7 +594,7 @@ bool  AdvXMLParser::NodeContainer::FindChild(char const *,class std::_Vector_ite
 
 // address=[0x2f14470]
 // Decompiled from char __thiscall AdvXMLParser::NodeContainer::FindChild(void *this, char *Str, int a3, int a4)
-bool  AdvXMLParser::NodeContainer::FindChild(char const *,int,class std::_Vector_iterator<class std::_Vector_val<struct std::_Simple_types<class AdvXMLParser::Node *> > > &)const {
+bool  AdvXMLParser::NodeContainer::FindChild(char const * Str, int a3, class std::_Vector_iterator<class std::_Vector_val<struct std::_Simple_types<class AdvXMLParser::Node *> > > & a4)const {
   
   _DWORD *v4; // eax
   int Name; // eax
@@ -633,7 +633,7 @@ bool  AdvXMLParser::NodeContainer::FindChild(char const *,int,class std::_Vector
 
 // address=[0x2f14550]
 // Decompiled from char __thiscall AdvXMLParser::NodeContainer::FindChild(void *this, int a2, int a3)
-bool  AdvXMLParser::NodeContainer::FindChild(class AdvXMLParser::Node const &,class std::_Vector_iterator<class std::_Vector_val<struct std::_Simple_types<class AdvXMLParser::Node *> > > &)const {
+bool  AdvXMLParser::NodeContainer::FindChild(class AdvXMLParser::Node const & a2, class std::_Vector_iterator<class std::_Vector_val<struct std::_Simple_types<class AdvXMLParser::Node *> > > & a3)const {
   
   _BYTE v4[12]; // [esp+4h] [ebp-28h] BYREF
   std::_Iterator_base12 *v5; // [esp+10h] [ebp-1Ch]
@@ -663,7 +663,7 @@ bool  AdvXMLParser::NodeContainer::FindChild(class AdvXMLParser::Node const &,cl
 
 // address=[0x2f145f0]
 // Decompiled from char __thiscall AdvXMLParser::NodeContainer::FindChild(void *this, int a2, int a3)
-bool  AdvXMLParser::NodeContainer::FindChild(int,class std::_Vector_const_iterator<class std::_Vector_val<struct std::_Simple_types<class AdvXMLParser::Node *> > > &)const {
+bool  AdvXMLParser::NodeContainer::FindChild(int a2, class std::_Vector_const_iterator<class std::_Vector_val<struct std::_Simple_types<class AdvXMLParser::Node *> > > & a3)const {
   
   _BYTE v4[12]; // [esp+4h] [ebp-2Ch] BYREF
   std::_Iterator_base12 *v5; // [esp+10h] [ebp-20h]
@@ -695,7 +695,7 @@ bool  AdvXMLParser::NodeContainer::FindChild(int,class std::_Vector_const_iterat
 
 // address=[0x2f146b0]
 // Decompiled from char __thiscall AdvXMLParser::NodeContainer::FindChild(void *this, char *Str, int a3)
-bool  AdvXMLParser::NodeContainer::FindChild(char const *,class std::_Vector_const_iterator<class std::_Vector_val<struct std::_Simple_types<class AdvXMLParser::Node *> > > &)const {
+bool  AdvXMLParser::NodeContainer::FindChild(char const * Str, class std::_Vector_const_iterator<class std::_Vector_val<struct std::_Simple_types<class AdvXMLParser::Node *> > > & a3)const {
   
   _DWORD *v3; // eax
   int Name; // eax
@@ -729,7 +729,7 @@ bool  AdvXMLParser::NodeContainer::FindChild(char const *,class std::_Vector_con
 
 // address=[0x2f14770]
 // Decompiled from char __thiscall AdvXMLParser::NodeContainer::FindChild(void *this, char *Str, int a3, int a4)
-bool  AdvXMLParser::NodeContainer::FindChild(char const *,int,class std::_Vector_const_iterator<class std::_Vector_val<struct std::_Simple_types<class AdvXMLParser::Node *> > > &)const {
+bool  AdvXMLParser::NodeContainer::FindChild(char const * Str, int a3, class std::_Vector_const_iterator<class std::_Vector_val<struct std::_Simple_types<class AdvXMLParser::Node *> > > & a4)const {
   
   _DWORD *v4; // eax
   int Name; // eax
@@ -768,7 +768,7 @@ bool  AdvXMLParser::NodeContainer::FindChild(char const *,int,class std::_Vector
 
 // address=[0x2f14850]
 // Decompiled from char __thiscall AdvXMLParser::NodeContainer::FindChild(void *this, int a2, int a3)
-bool  AdvXMLParser::NodeContainer::FindChild(class AdvXMLParser::Node const &,class std::_Vector_const_iterator<class std::_Vector_val<struct std::_Simple_types<class AdvXMLParser::Node *> > > &)const {
+bool  AdvXMLParser::NodeContainer::FindChild(class AdvXMLParser::Node const & a2, class std::_Vector_const_iterator<class std::_Vector_val<struct std::_Simple_types<class AdvXMLParser::Node *> > > & a3)const {
   
   _BYTE v4[12]; // [esp+4h] [ebp-28h] BYREF
   std::_Iterator_base12 *v5; // [esp+10h] [ebp-1Ch]
@@ -798,7 +798,7 @@ bool  AdvXMLParser::NodeContainer::FindChild(class AdvXMLParser::Node const &,cl
 
 // address=[0x2f2ce60]
 // Decompiled from int __thiscall AdvXMLParser::NodeContainer::GenerateXML(  AdvXMLParser::NodeContainer *this,  struct AdvXMLParser::GenerateContext *a2)
-void  AdvXMLParser::NodeContainer::GenerateXML(class AdvXMLParser::GenerateContext &)const {
+void  AdvXMLParser::NodeContainer::GenerateXML(class AdvXMLParser::GenerateContext & a2)const {
   
   _BYTE v3[12]; // [esp+4h] [ebp-38h] BYREF
   _BYTE v4[12]; // [esp+10h] [ebp-2Ch] BYREF

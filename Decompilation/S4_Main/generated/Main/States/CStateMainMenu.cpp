@@ -4,7 +4,7 @@
 
 // address=[0x14c16a0]
 // Decompiled from CStateMainMenu *__cdecl CStateMainMenu::DynamicCreateFunc(void *a1)
-static class CGameState * __cdecl CStateMainMenu::DynamicCreateFunc(void *) {
+class CGameState * __cdecl CStateMainMenu::DynamicCreateFunc(void * a1) {
   
   CStateMainMenu *C; // [esp+Ch] [ebp-10h]
 
@@ -18,7 +18,7 @@ static class CGameState * __cdecl CStateMainMenu::DynamicCreateFunc(void *) {
 
 // address=[0x14c1740]
 // Decompiled from char __cdecl CStateMainMenu::PreLoadGame(char a1)
-static bool __cdecl CStateMainMenu::PreLoadGame(std::wstring) {
+bool __cdecl CStateMainMenu::PreLoadGame(std::wstring a1) {
   
   OnlineManager *Instance; // eax
   char IsMultiplayerGame; // al
@@ -394,7 +394,7 @@ bool  CStateMainMenu::Perform(void) {
 
 // address=[0x14c2420]
 // Decompiled from char __thiscall CStateMainMenu::OnEvent(CStateMainMenu *this, struct CEvn_Event *a2)
-bool  CStateMainMenu::OnEvent(class CEvn_Event &) {
+bool  CStateMainMenu::OnEvent(class CEvn_Event & a2) {
   
   char result; // al
   OnlineManager *Instance; // eax

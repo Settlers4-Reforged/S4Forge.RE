@@ -4,7 +4,7 @@
 
 // address=[0x2f3f3f0]
 // Decompiled from CSolution *__thiscall CSolution::CSolution(CSolution *this, int a2, struct CParam *a3)
- CSolution::CSolution(int,class CParam *) {
+ CSolution::CSolution(int a2, class CParam * a3) {
   
   CParam *v4; // [esp+8h] [ebp-18h]
   CParam *C; // [esp+Ch] [ebp-14h]

@@ -36,7 +36,7 @@ class CAIEntityInfo *  CAIEntityInfo::Prev(void)const {
 
 // address=[0x13069a0]
 // Decompiled from void __thiscall CAIEntityInfo::SetTargetId(CPropertySet *this, unsigned __int16 a2)
-void  CAIEntityInfo::SetTargetId(int) {
+void  CAIEntityInfo::SetTargetId(int a2) {
   
   *((_WORD *)this + 1) = a2;
 }
@@ -44,7 +44,7 @@ void  CAIEntityInfo::SetTargetId(int) {
 
 // address=[0x13069c0]
 // Decompiled from CAIEntityInfo *__thiscall CAIEntityInfo::SetTimeStamp(CAIEntityInfo *this, unsigned int a2)
-void  CAIEntityInfo::SetTimeStamp(unsigned int) {
+void  CAIEntityInfo::SetTimeStamp(unsigned int a2) {
   
   CAIEntityInfo *result; // eax
 
@@ -72,7 +72,7 @@ unsigned int  CAIEntityInfo::TimeStamp(void)const {
 
 // address=[0x130a880]
 // Decompiled from CAIEntityInfo *__thiscall CAIEntityInfo::CAIEntityInfo(CAIEntityInfo *this, __int16 a2)
- CAIEntityInfo::CAIEntityInfo(int) {
+ CAIEntityInfo::CAIEntityInfo(int a2) {
   
   *(_WORD *)this = a2;
   *((_WORD *)this + 1) = 0;
@@ -117,7 +117,7 @@ unsigned int  CAIEntityInfo::TimeStamp(void)const {
 
 // address=[0x130aa00]
 // Decompiled from int __thiscall CAIEntityInfo::ExtendedInfo(_DWORD *this, int a2)
-class CAIEntityInfoEx *  CAIEntityInfo::ExtendedInfo(enum T_AI_ENTITY_INFO_EX_CLASS) {
+class CAIEntityInfoEx *  CAIEntityInfo::ExtendedInfo(enum T_AI_ENTITY_INFO_EX_CLASS a2) {
   
   void (__thiscall ***v3)(_DWORD, int); // [esp+8h] [ebp-8h]
 

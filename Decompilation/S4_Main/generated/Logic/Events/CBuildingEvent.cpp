@@ -4,7 +4,7 @@
 
 // address=[0x2f51210]
 // Decompiled from int __thiscall CBuildingEvent::CBuildingEvent(int this, int a2, int a3, int a4, int a5, int a6, int a7, int a8)
- CBuildingEvent::CBuildingEvent(enum BUILDING_TYPES,int,int,int,int,int,enum T_BUILD_LEVEL) {
+ CBuildingEvent::CBuildingEvent(enum BUILDING_TYPES a2, int a3, int a4, int a5, int a6, int a7, enum T_BUILD_LEVEL a8) {
   
   IScheduleEntry::IScheduleEntry((IScheduleEntry *)this);
   *(_DWORD *)this = &CBuildingEvent::_vftable_;

@@ -152,7 +152,7 @@ unsigned char *  CGameData::GetEconomyGoodsArray(void) {
 
 // address=[0x14aac40]
 // Decompiled from int __thiscall CGameData::GetModeString(char *this, int a2)
-std::string  CGameData::GetModeString(void) {
+std::string  CGameData::GetModeString(void a2) {
   
   std::string::string(this + 96);
   return a2;
@@ -161,7 +161,7 @@ std::string  CGameData::GetModeString(void) {
 
 // address=[0x14aad60]
 // Decompiled from int __thiscall CGameData::GetTypeString(char *this, int a2)
-std::string  CGameData::GetTypeString(void) {
+std::string  CGameData::GetTypeString(void a2) {
   
   std::string::string(this + 64);
   return a2;
@@ -170,7 +170,7 @@ std::string  CGameData::GetTypeString(void) {
 
 // address=[0x14aaf30]
 // Decompiled from CGameData *__thiscall CGameData::SetLastFrameRendered(CGameData *this, bool a2)
-void  CGameData::SetLastFrameRendered(bool) {
+void  CGameData::SetLastFrameRendered(bool a2) {
   
   CGameData *result; // eax
 
@@ -182,7 +182,7 @@ void  CGameData::SetLastFrameRendered(bool) {
 
 // address=[0x14b4a60]
 // Decompiled from CGameData *__thiscall CGameData::TeamWon(CGameData *this, int a2)
-void  CGameData::TeamWon(int) {
+void  CGameData::TeamWon(int a2) {
   
   CGameData *result; // eax
 

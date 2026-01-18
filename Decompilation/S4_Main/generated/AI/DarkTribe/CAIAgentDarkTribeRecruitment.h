@@ -1,6 +1,8 @@
 #ifndef CAIAGENTDARKTRIBERECRUITMENT_H
 #define CAIAGENTDARKTRIBERECRUITMENT_H
 
+#include "defines.h"
+
 class CAIAgentDarkTribeRecruitment : public CAIDarkTribeSectorAgent {
 public:
     // address=[0x1301f00]

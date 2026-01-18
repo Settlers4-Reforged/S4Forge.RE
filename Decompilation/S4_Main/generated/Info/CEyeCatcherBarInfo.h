@@ -1,6 +1,8 @@
 #ifndef CEYECATCHERBARINFO_H
 #define CEYECATCHERBARINFO_H
 
+#include "defines.h"
+
 class CEyeCatcherBarInfo : public CInfoExchange {
 public:
     // address=[0x1454590]

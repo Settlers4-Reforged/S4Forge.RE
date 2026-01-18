@@ -84,7 +84,7 @@ int  CTile::CenterXY(void)const {
 
 // address=[0x15d6e90]
 // Decompiled from int __cdecl CTile::TileTypeOwnerCheckMask(char a1, int a2)
-static int __cdecl CTile::TileTypeOwnerCheckMask(int,int) {
+int __cdecl CTile::TileTypeOwnerCheckMask(int a1, int a2) {
   
   int v3; // [esp+0h] [ebp-4h]
 
@@ -97,7 +97,7 @@ static int __cdecl CTile::TileTypeOwnerCheckMask(int,int) {
 
 // address=[0x15d6ed0]
 // Decompiled from int __cdecl CTile::TileTypeOwnerCheckMaskFromPlayerBits(int a1)
-static int __cdecl CTile::TileTypeOwnerCheckMaskFromPlayerBits(int) {
+int __cdecl CTile::TileTypeOwnerCheckMaskFromPlayerBits(int a1) {
   
   if ( ((32 * a1) & 0xFFFFE00F) != 0
     && BBSupportDbgReport(
@@ -114,7 +114,7 @@ static int __cdecl CTile::TileTypeOwnerCheckMaskFromPlayerBits(int) {
 
 // address=[0x15e7360]
 // Decompiled from CTile *__thiscall CTile::SetLinkList(CTile *this, struct CLinkList *a2)
-void  CTile::SetLinkList(class CLinkList &) {
+void  CTile::SetLinkList(class CLinkList & a2) {
   
   CTile *result; // eax
 
@@ -126,7 +126,7 @@ void  CTile::SetLinkList(class CLinkList &) {
 
 // address=[0x15e7380]
 // Decompiled from DWORD __thiscall CTile::SetSize(CTile *this, int a2)
-void  CTile::SetSize(int) {
+void  CTile::SetSize(int a2) {
   
   DWORD result; // eax
 
@@ -156,7 +156,7 @@ void  CTile::SetSize(int) {
 
 // address=[0x15e7410]
 // Decompiled from CTile *__thiscall CTile::SetType(CTile *this, DWORD a2)
-void  CTile::SetType(int) {
+void  CTile::SetType(int a2) {
   
   CTile *result; // eax
 
@@ -168,7 +168,7 @@ void  CTile::SetType(int) {
 
 // address=[0x15e74b0]
 // Decompiled from int __cdecl CTile::TileType(int a1)
-static int __cdecl CTile::TileType(int) {
+int __cdecl CTile::TileType(int a1) {
   
   return a1 | (16 << a1);
 }
@@ -192,7 +192,7 @@ bool  CTile::Used(void)const {
 
 // address=[0x15f4220]
 // Decompiled from void __thiscall CTile::ChangeSize(CTile *this, int a2)
-void  CTile::ChangeSize(int) {
+void  CTile::ChangeSize(int a2) {
   
   int v2; // eax
 
@@ -219,7 +219,7 @@ int  CTile::PrevFree(void)const {
 
 // address=[0x15f56f0]
 // Decompiled from CTile *__thiscall CTile::SetCenterXY(CTile *this, DWORD a2)
-void  CTile::SetCenterXY(int) {
+void  CTile::SetCenterXY(int a2) {
   
   CTile *result; // eax
 
@@ -231,7 +231,7 @@ void  CTile::SetCenterXY(int) {
 
 // address=[0x15f5710]
 // Decompiled from CTile *__thiscall CTile::SetEcoSectorId(CTile *this, __int16 a2)
-void  CTile::SetEcoSectorId(int) {
+void  CTile::SetEcoSectorId(int a2) {
   
   CTile *result; // eax
 
@@ -243,7 +243,7 @@ void  CTile::SetEcoSectorId(int) {
 
 // address=[0x15f5840]
 // Decompiled from CTile *__thiscall CTile::SetSectorId(CTile *this, __int16 a2)
-void  CTile::SetSectorId(int) {
+void  CTile::SetSectorId(int a2) {
   
   CTile *result; // eax
 
@@ -263,7 +263,7 @@ int  CTile::Size(void)const {
 
 // address=[0x15f59d0]
 // Decompiled from int __cdecl CTile::TileTypeToOwnerId(char a1)
-static int __cdecl CTile::TileTypeToOwnerId(int) {
+int __cdecl CTile::TileTypeToOwnerId(int a1) {
   
   return a1 & 0xF;
 }
@@ -271,7 +271,7 @@ static int __cdecl CTile::TileTypeToOwnerId(int) {
 
 // address=[0x15e6f80]
 // Decompiled from CTile *__thiscall CTile::Init(CTile *this, DWORD a2, DWORD a3, struct CLinkList *a4)
-void  CTile::Init(int,int,class CLinkList &) {
+void  CTile::Init(int a2, int a3, class CLinkList & a4) {
   
   CTile *result; // eax
 
@@ -286,7 +286,7 @@ void  CTile::Init(int,int,class CLinkList &) {
 
 // address=[0x15e6fc0]
 // Decompiled from CTile *__thiscall CTile::InitPseudoTile(CTile *this, int a2, struct CLinkList *a3)
-void  CTile::InitPseudoTile(int,class CLinkList &) {
+void  CTile::InitPseudoTile(int a2, class CLinkList & a3) {
   
   CTile *result; // eax
 
