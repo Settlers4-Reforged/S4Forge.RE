@@ -8,7 +8,7 @@
 #include "World/CWorldManager.h"
 #include "World/helper.h"
 #include "../MapObjects/CMapObjectMgr.h"
-#include "MapObjects/CGroupMgr.h"
+#include "CGroupMgr.h"
 #include "Pathing/CWarMap.h"
 
 // Definitions for class IEntity
