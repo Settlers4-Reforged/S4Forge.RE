@@ -208,6 +208,8 @@ protected:
 
     // Type information members
 private:
+    friend class CMapObjectMgr;
+
     int m_iUniqueId;
     WORD m_nEntityId;
     enum IEntity::EntityType m_objType;

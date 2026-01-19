@@ -2,6 +2,12 @@
 #define CMAPOBJECTMGR_H
 
 #include "defines.h"
+#include <deque>
+
+#include "LoadSave/CMapFile.h"
+#include "IEntity.h"
+
+extern class CMapObjectMgr *g_cMapObjectMgr;
 
 class CMapObjectMgr {
 public:
@@ -98,15 +104,19 @@ private:
 
     // address=[0x4105388]
     static class IEntity * * m_vEntities;
+    
+
+    static const int MAX_ENTRIES = 0xFFFF;
+    static const int MAX_LOGIC_UPDATE_SLOTS = 32;
+    static const int fileFormatVersion = 1;
 
     // Type information members
 private:
-    struct vector_of_deque_ushort * m_vLogicUpdateSlots;
-    DWORD unk_4;
-    DWORD unk_8;
-    DWORD unk_C;
-    DWORD m_vLogicUpdateListItem;
-    struct vector_ushort * unk_14;
+    std::vector<std::deque<unsigned short>> *m_vLogicUpdateSlots;
+    
+    DWORD m_iCurrentLogicTick;
+    
+    std::vector<std::deque<unsigned short>> *m_vKilledEntities;
 
 };
 

@@ -157,7 +157,7 @@ unsigned int __cdecl CMapObjectMgr::CRCLogicUpdate(void) {
     CSettler::CSettler(v8, 0x44u, v6);
   }
   std::vector<std::deque<unsigned short>>::resize((void **)&this->m_vLogicUpdateSlots, (_DWORD *)0x20);
-  this->m_vLogicUpdateListItem = 0;
+  this->m_iCurrentLogicTick = 0;
   std::vector<std::deque<unsigned short>>::resize((void **)&this->unk_14, (_DWORD *)0x20);
   CMapObjectMgr::m_uCRCLogicUpdate = 1;
   return this;
@@ -416,7 +416,7 @@ void  CMapObjectMgr::Kill(int _iEntityId, int _iAttackerId) {
         __debugbreak();
       }
     }
-    v7 = (this->m_vLogicUpdateListItem + 31) % 0x20;
+    v7 = (this->m_iCurrentLogicTick + 31) % 0x20;
     v15 = _iEntityId;
     v4 = (void *)std::vector<std::deque<unsigned short>>::operator[](&this->unk_14, v7);
     std::deque<unsigned short>::push_front(v4, (int)&v15);
@@ -496,7 +496,7 @@ void  CMapObjectMgr::LogicUpdate(void) {
   _DWORD v23[32]; // [esp+58h] [ebp-884h] BYREF
   _WORD v24[1024]; // [esp+D8h] [ebp-804h] BYREF
 
-  q = (void *)std::vector<std::deque<unsigned short>>::operator[](this, this->m_vLogicUpdateListItem);
+  q = (void *)std::vector<std::deque<unsigned short>>::operator[](this, this->m_iCurrentLogicTick);
   crc1 = CMapObjectMgr::m_uCRCLogicUpdate;
   crc2 = CMapObjectMgr::m_uCRCLogicUpdate;
   crc3 = CMapObjectMgr::m_uCRCLogicUpdate;
@@ -575,19 +575,19 @@ void  CMapObjectMgr::LogicUpdate(void) {
         3,
         "### CMapObjectMgr::LogicUpdate(): EntityPtr for entity id %i in list %i is NULL! ###",
         iEntity,
-        this->m_vLogicUpdateListItem);
+        this->m_iCurrentLogicTick);
     }
   }
-  v12 = (void *)std::vector<std::deque<unsigned short>>::operator[](&this->unk_14, this->m_vLogicUpdateListItem);
+  v12 = (void *)std::vector<std::deque<unsigned short>>::operator[](&this->unk_14, this->m_iCurrentLogicTick);
   while ( !(unsigned __int8)std::deque<unsigned short>::empty(v12) )
   {
     v6 = *(unsigned __int16 *)std::deque<unsigned short>::front(v12);
     std::deque<unsigned short>::pop_front(v12);
     CMapObjectMgr::Destroy(this, v6);
   }
-  v8 = this->m_vLogicUpdateListItem + 1;
-  this->m_vLogicUpdateListItem = v8;
-  this->m_vLogicUpdateListItem = v8 % 32;
+  v8 = this->m_iCurrentLogicTick + 1;
+  this->m_iCurrentLogicTick = v8;
+  this->m_iCurrentLogicTick = v8 % 32;
 }
 
 
@@ -623,7 +623,7 @@ int  CMapObjectMgr::RegisterForLogicUpdate(int iDeltaTicks, int _iEntityId) {
   {
     iDeltaTicks = 1;
   }
-  logicUpdateSlot = (iDeltaTicks + this->m_vLogicUpdateListItem) % 0x20;
+  logicUpdateSlot = (iDeltaTicks + this->m_iCurrentLogicTick) % 0x20;
   pEntity = (IAnimatedEntity *)CMapObjectMgr::EntityPtr(_iEntityId);
   if ( IMessageTracer::RemoveCurrentMsgIfEqual(
          (const char **)g_pMsgTracer,
@@ -658,7 +658,7 @@ int  CMapObjectMgr::RegisterForLogicUpdate(int iDeltaTicks, int _iEntityId) {
     __debugbreak();
   }
   if ( IAnimatedEntity::GetLastLogicUpdateTick(pEntity) != -1
-    && IAnimatedEntity::GetLastLogicUpdateTick(pEntity) != this->m_vLogicUpdateListItem )
+    && IAnimatedEntity::GetLastLogicUpdateTick(pEntity) != this->m_iCurrentLogicTick )
   {
     LastLogicUpdateTick = IAnimatedEntity::GetLastLogicUpdateTick(pEntity);
     CMapObjectMgr::UnRegisterFromLogicUpdate(this, LastLogicUpdateTick, _iEntityId);
