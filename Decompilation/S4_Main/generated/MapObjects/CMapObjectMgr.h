@@ -105,7 +105,7 @@ private:
     DWORD unk_4;
     DWORD unk_8;
     DWORD unk_C;
-    DWORD m_iCurrentLogicTick;
+    DWORD m_vLogicUpdateListItem;
     struct vector_ushort * unk_14;
 
 };

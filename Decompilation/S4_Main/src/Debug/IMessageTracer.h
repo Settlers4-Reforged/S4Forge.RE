@@ -3,6 +3,8 @@
 
 #include "defines.h"
 
+const IMessageTracer *g_pMsgTracer;
+
 class IMessageTracer {
 public:
     // address=[0x1301740]
@@ -38,16 +40,26 @@ public:
     // address=[0x1558d30]
     bool  RemoveCurrentMsgIfEqual(char const * a2, int a3);
 
-protected:
-    // address=[0x1301410]
-    struct STraceMsg *  IMessageTracer::GetNextTraceMsg(void);
 
     // Type information members
 private:
+
     int m_iCurrentMessage;
     int m_iMaxMessage;
-    IMessageTracer::STraceMsg[16384] m_aMessages;
 
+    struct STraceMsg
+    {
+    const char * message;
+    DWORD arg1;
+    DWORD arg2;
+    DWORD arg3;
+    DWORD arg4;
+    DWORD arg5;
+    } m_aMessages[0x4000];
+
+protected:
+    // address=[0x1301410]
+    STraceMsg *IMessageTracer::GetNextTraceMsg(void);
 };
 
 

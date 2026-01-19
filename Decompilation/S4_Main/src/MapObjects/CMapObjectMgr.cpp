@@ -5,7 +5,7 @@
 
 #include "CBB/CBBSupport.h"
 #include "CBB/CS4InvalidMapException.h"
-#include "Debug/IMessageTracer.h"
+#include "../Debug/IMessageTracer.h"
 #include "Debug/CTrace.h"
 
 #include "AI/CAIEntityInfo.h"

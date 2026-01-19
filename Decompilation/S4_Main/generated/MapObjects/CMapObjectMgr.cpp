@@ -1,3 +1,4 @@
+#if FALSE
 #include "CMapObjectMgr.h"
 
 // Definitions for class CMapObjectMgr
@@ -157,7 +158,7 @@ unsigned int __cdecl CMapObjectMgr::CRCLogicUpdate(void) {
     CSettler::CSettler(v8, 0x44u, v6);
   }
   std::vector<std::deque<unsigned short>>::resize((void **)&this->m_vLogicUpdateSlots, (_DWORD *)0x20);
-  this->m_iCurrentLogicTick = 0;
+  this->m_vLogicUpdateListItem = 0;
   std::vector<std::deque<unsigned short>>::resize((void **)&this->unk_14, (_DWORD *)0x20);
   CMapObjectMgr::m_uCRCLogicUpdate = 1;
   return this;
@@ -416,7 +417,7 @@ void  CMapObjectMgr::Kill(int _iEntityId, int _iAttackerId) {
         __debugbreak();
       }
     }
-    v7 = (this->m_iCurrentLogicTick + 31) % 0x20;
+    v7 = (this->m_vLogicUpdateListItem + 31) % 0x20;
     v15 = _iEntityId;
     v4 = (void *)std::vector<std::deque<unsigned short>>::operator[](&this->unk_14, v7);
     std::deque<unsigned short>::push_front(v4, (int)&v15);
@@ -489,14 +490,16 @@ void  CMapObjectMgr::LogicUpdate(void) {
   int iEntity; // [esp+38h] [ebp-8A4h]
   int k; // [esp+3Ch] [ebp-8A0h]
   int j; // [esp+40h] [ebp-89Ch]
-  signed int m; // [esp+44h] [ebp-898h]
+  int a2; // [esp+44h] [ebp-898h]
   IAnimatedEntity *pEntity; // [esp+48h] [ebp-894h]
-  int v20; // [esp+4Ch] [ebp-890h]
+  unsigned int v20; // [esp+4Ch] [ebp-890h]
   void *q; // [esp+54h] [ebp-888h]
   _DWORD v23[32]; // [esp+58h] [ebp-884h] BYREF
   _WORD v24[1024]; // [esp+D8h] [ebp-804h] BYREF
 
-  q = (void *)std::vector<std::deque<unsigned short>>::operator[](this, this->m_iCurrentLogicTick);
+  q = (void *)std::vector<std::deque<unsigned short>>::operator[](
+                (void **)&this->m_vLogicUpdateSlots,
+                this->m_vLogicUpdateListItem);
   crc1 = CMapObjectMgr::m_uCRCLogicUpdate;
   crc2 = CMapObjectMgr::m_uCRCLogicUpdate;
   crc3 = CMapObjectMgr::m_uCRCLogicUpdate;
@@ -507,7 +510,7 @@ void  CMapObjectMgr::LogicUpdate(void) {
     for ( i = 0; i < v11 / 1024; ++i )
     {
       for ( j = 0; j < 1024; ++j )
-        v24[j] = *(_WORD *)std::deque<unsigned short>::operator[](v20++);
+        v24[j] = *(_WORD *)std::deque<unsigned short>::operator[](q, v20++);
       CMapObjectMgr::m_uCRCLogicUpdate = Adler32((unsigned __int8 *)v24, 0x800u, CMapObjectMgr::m_uCRCLogicUpdate);
     }
     crc2 = CMapObjectMgr::m_uCRCLogicUpdate;
@@ -515,15 +518,15 @@ void  CMapObjectMgr::LogicUpdate(void) {
     if ( v11 % 1024 > 0 )
     {
       for ( k = 0; k < v13; ++k )
-        v24[k] = *(_WORD *)std::deque<unsigned short>::operator[](v20++);
+        v24[k] = *(_WORD *)std::deque<unsigned short>::operator[](q, v20++);
       CMapObjectMgr::m_uCRCLogicUpdate = Adler32((unsigned __int8 *)v24, 2 * v13, CMapObjectMgr::m_uCRCLogicUpdate);
     }
     crc3 = CMapObjectMgr::m_uCRCLogicUpdate;
   }
-  for ( m = 0; m < 32; ++m )
+  for ( a2 = 0; a2 < 32; ++a2 )
   {
-    v1 = std::vector<std::deque<unsigned short>>::operator[](this, m);
-    v23[m] = std::deque<unsigned short>::size(v1);
+    v1 = std::vector<std::deque<unsigned short>>::operator[]((void **)&this->m_vLogicUpdateSlots, a2);
+    v23[a2] = std::deque<unsigned short>::size(v1);
   }
   CMapObjectMgr::m_uCRCLogicUpdate = Adler32((unsigned __int8 *)v23, 0x80u, CMapObjectMgr::m_uCRCLogicUpdate);
   v4 = CMapObjectMgr::m_uCRCLogicUpdate;
@@ -575,19 +578,21 @@ void  CMapObjectMgr::LogicUpdate(void) {
         3,
         "### CMapObjectMgr::LogicUpdate(): EntityPtr for entity id %i in list %i is NULL! ###",
         iEntity,
-        this->m_iCurrentLogicTick);
+        this->m_vLogicUpdateListItem);
     }
   }
-  v12 = (void *)std::vector<std::deque<unsigned short>>::operator[](&this->unk_14, this->m_iCurrentLogicTick);
+  v12 = (void *)std::vector<std::deque<unsigned short>>::operator[](
+                  (void **)&this->unk_14,
+                  this->m_vLogicUpdateListItem);
   while ( !(unsigned __int8)std::deque<unsigned short>::empty(v12) )
   {
     v6 = *(unsigned __int16 *)std::deque<unsigned short>::front(v12);
     std::deque<unsigned short>::pop_front(v12);
     CMapObjectMgr::Destroy(this, v6);
   }
-  v8 = this->m_iCurrentLogicTick + 1;
-  this->m_iCurrentLogicTick = v8;
-  this->m_iCurrentLogicTick = v8 % 32;
+  v8 = this->m_vLogicUpdateListItem + 1;
+  this->m_vLogicUpdateListItem = v8;
+  this->m_vLogicUpdateListItem = v8 % 32;
 }
 
 
@@ -623,7 +628,7 @@ int  CMapObjectMgr::RegisterForLogicUpdate(int iDeltaTicks, int _iEntityId) {
   {
     iDeltaTicks = 1;
   }
-  logicUpdateSlot = (iDeltaTicks + this->m_iCurrentLogicTick) % 0x20;
+  logicUpdateSlot = (iDeltaTicks + this->m_vLogicUpdateListItem) % 0x20;
   pEntity = (IAnimatedEntity *)CMapObjectMgr::EntityPtr(_iEntityId);
   if ( IMessageTracer::RemoveCurrentMsgIfEqual(
          (const char **)g_pMsgTracer,
@@ -658,7 +663,7 @@ int  CMapObjectMgr::RegisterForLogicUpdate(int iDeltaTicks, int _iEntityId) {
     __debugbreak();
   }
   if ( IAnimatedEntity::GetLastLogicUpdateTick(pEntity) != -1
-    && IAnimatedEntity::GetLastLogicUpdateTick(pEntity) != this->m_iCurrentLogicTick )
+    && IAnimatedEntity::GetLastLogicUpdateTick(pEntity) != this->m_vLogicUpdateListItem )
   {
     LastLogicUpdateTick = IAnimatedEntity::GetLastLogicUpdateTick(pEntity);
     CMapObjectMgr::UnRegisterFromLogicUpdate(this, LastLogicUpdateTick, _iEntityId);
@@ -781,7 +786,7 @@ void  CMapObjectMgr::Store(class S4::CMapFile & a2) {
 
   v37 = &v3;
   p_m_vLogicUpdateSlots = (void **)&this->m_vLogicUpdateSlots;
-  v7 = 262400;
+  v7 = 0x40100;
   std::ostrstream::ostrstream((DWORD *)stringStream, 0, 262400LL, 2, 1);
   v38 = 0;
   v10 = std::ios_base::exceptions(&stringStream[*(_DWORD *)(*(_DWORD *)stringStream + 4)]);
@@ -880,26 +885,24 @@ void  CMapObjectMgr::Load(class S4::CMapFile & a2) {
   int v8; // [esp+D0h] [ebp-5Ch] BYREF
   int v9; // [esp+D4h] [ebp-58h] BYREF
   int pExceptionObject; // [esp+D8h] [ebp-54h] BYREF
-  char *Str; // [esp+DCh] [ebp-50h]
+  void *Str; // [esp+DCh] [ebp-50h]
   unsigned int j; // [esp+E0h] [ebp-4Ch]
   unsigned int v13; // [esp+E4h] [ebp-48h] BYREF
   unsigned int i; // [esp+E8h] [ebp-44h]
   _BYTE v15[4]; // [esp+ECh] [ebp-40h] BYREF
   _BYTE v16[4]; // [esp+F0h] [ebp-3Ch] BYREF
-  void **p_m_vLogicUpdateSlots; // [esp+F4h] [ebp-38h]
   unsigned int a2; // [esp+F8h] [ebp-34h]
   _BYTE v19[28]; // [esp+FCh] [ebp-30h] BYREF
   int *v20; // [esp+11Ch] [ebp-10h]
   int v21; // [esp+128h] [ebp-4h]
 
   v20 = &v2;
-  p_m_vLogicUpdateSlots = (void **)&this->m_vLogicUpdateSlots;
   CTrace::Print("CMapObjectMgr load");
   v9 = 0;
-  Str = (char *)S4::CMapFile::LoadChunk(arg0, 0xAAu, 0, &v9, 0);
+  Str = S4::CMapFile::LoadChunk(arg0, 0xAAu, 0, &v9, 0);
   if ( Str )
   {
-    std::string::string((struct std::string *)v19, Str);
+    std::string::string((struct std::string *)v19, (char *)Str);
     v21 = 0;
     std::istringstream::istringstream(v19, 1, 1);
     LOBYTE(v21) = 1;
@@ -915,15 +918,15 @@ void  CMapObjectMgr::Load(class S4::CMapFile & a2) {
       CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
       _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
     }
-    std::vector<std::deque<unsigned short>>::resize(p_m_vLogicUpdateSlots, (_DWORD *)0x20);
-    p_m_vLogicUpdateSlots[4] = 0;
-    std::vector<std::deque<unsigned short>>::resize(p_m_vLogicUpdateSlots + 5, (_DWORD *)0x20);
+    std::vector<std::deque<unsigned short>>::resize((void **)&this->m_vLogicUpdateSlots, (_DWORD *)0x20);
+    this->m_vLogicUpdateListItem = 0;
+    std::vector<std::deque<unsigned short>>::resize((void **)&this->unk_14, (_DWORD *)0x20);
     operator^<int>((struct std::istream *)v3, &CMapObjectMgr::m_iMinFreeId);
     operator^<int>((struct std::istream *)v3, &CMapObjectMgr::m_iLastUsedId);
     operator^<int>((struct std::istream *)v3, &CMapObjectMgr::m_iMaxLastUsedId);
     operator^<int>((struct std::istream *)v3, &CMapObjectMgr::m_iCurrentUniqueId);
     operator^<unsigned int>(v3, &CMapObjectMgr::m_uCRCLogicUpdate);
-    operator^<unsigned int>(v3, p_m_vLogicUpdateSlots + 4);
+    operator^<unsigned int>(v3, &this->m_vLogicUpdateListItem);
     operator^<unsigned int>(v3, &v13);
     for ( a2 = 0; a2 < v13; ++a2 )
     {
@@ -931,7 +934,7 @@ void  CMapObjectMgr::Load(class S4::CMapFile & a2) {
       for ( i = 0; i < v7[0]; ++i )
       {
         operator^<unsigned short>(v3, v16);
-        v6[1] = std::vector<std::deque<unsigned short>>::operator[](p_m_vLogicUpdateSlots, a2);
+        v6[1] = std::vector<std::deque<unsigned short>>::operator[]((void **)&this->m_vLogicUpdateSlots, a2);
         std::deque<unsigned short>::push_back(v16);
       }
     }
@@ -942,7 +945,7 @@ void  CMapObjectMgr::Load(class S4::CMapFile & a2) {
       for ( j = 0; j < v6[0]; ++j )
       {
         operator^<unsigned short>(v3, v15);
-        v5 = std::vector<std::deque<unsigned short>>::operator[](p_m_vLogicUpdateSlots + 5, a2);
+        v5 = std::vector<std::deque<unsigned short>>::operator[]((void **)&this->unk_14, a2);
         std::deque<unsigned short>::push_back(v15);
       }
     }
@@ -1180,3 +1183,4 @@ struct SGfxObjectInfo *  CMapObjectMgr::GetGfxInfo(int _iId, int a3) {
 // address=[0x4105388]
 // [Decompilation failed for static class IEntity * * CMapObjectMgr::m_vEntities]
 
+#endif // Already implemented
