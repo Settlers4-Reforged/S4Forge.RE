@@ -200,7 +200,7 @@ int  CFileEx::MapFile(wchar_t const * lpFileName, char * a3, int a4) {
     if ( hFileMappingObject == (HANDLE)-1 )
     {
       LastError = GetLastError();
-      j___snprintf(Buffer, 0x80u, "Unable map file . LastError was: %d", LastError);
+      snprintf(Buffer, 0x80u, "Unable map file . LastError was: %d", LastError);
       sub_2F02260(Buffer, a3, a4);
       CloseHandle(hFile);
       return 0;
@@ -218,7 +218,7 @@ int  CFileEx::MapFile(wchar_t const * lpFileName, char * a3, int a4) {
       else
       {
         v6 = GetLastError();
-        j___snprintf(v12, 0x80u, "Unable map view of file. LastError was: %d", v6);
+        snprintf(v12, 0x80u, "Unable map view of file. LastError was: %d", v6);
         sub_2F02260(v12, a3, a4);
         CloseHandle(hFileMappingObject);
         CloseHandle(hFile);

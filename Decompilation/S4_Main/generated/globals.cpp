@@ -10507,7 +10507,7 @@ void __cdecl UpdateGuiDlgClock(unsigned int a1) {
     if ( v3 < 60 )
     {
       IGuiEngine::SetFontTemplate((IGuiEngine *)g_pGUIEngine, 74, 139, 2);
-      j___snprintf(Str, 0x32u, "%d", v3);
+      snprintf(Str, 0x32u, "%d", v3);
       return IGuiEngine::SetText((void *)g_pGUIEngine, 74, 139, Str);
     }
   }
@@ -10515,7 +10515,7 @@ void __cdecl UpdateGuiDlgClock(unsigned int a1) {
   {
     v3 = (int)(float)((float)a1 * v2);
   }
-  j___snprintf(Str, 0x32u, "%02u:%02u:%02u", v3 / 3600, v3 / 60 % 60, v3 % 60);
+  snprintf(Str, 0x32u, "%02u:%02u:%02u", v3 / 3600, v3 / 60 % 60, v3 % 60);
   return IGuiEngine::SetText((void *)g_pGUIEngine, 74, 139, Str);
 }
 
@@ -16024,7 +16024,7 @@ void __cdecl UpdateGuiDlgMainDetailStatistic(int a1) {
     if ( !PlayerExitTime )
       PlayerExitTime = CEndStatistic::GetTickCounter((CEndStatistic *)&g_cEndStatistic);
     v175 = (float)(unsigned int)(71 * PlayerExitTime);
-    j___snprintf(
+    snprintf(
       Str,
       0x32u,
       "%02u:%02u:%02u",
@@ -19432,7 +19432,7 @@ void __cdecl InitGuiDlgMainStatistic(void) {
   if ( g_pStringEngine )
   {
     v0 = (float)(unsigned int)(71 * CEndStatistic::GetTickCounter((CEndStatistic *)&g_cEndStatistic));
-    j___snprintf(
+    snprintf(
       Str,
       0x32u,
       "%02u:%02u:%02u",
@@ -19953,7 +19953,7 @@ void __cdecl InitGuiDlgMainStatisticEcoDisplayMode(void) {
   if ( g_pStringEngine )
   {
     v0 = (float)(unsigned int)(71 * CEndStatistic::GetTickCounter((CEndStatistic *)&g_cEndStatistic));
-    j___snprintf(
+    snprintf(
       Str,
       0x32u,
       "%02u:%02u:%02u",
@@ -41577,9 +41577,9 @@ int __stdcall BBSupportDbgReport(int a1, char const * a2, unsigned int a3, char 
     else
       v8 = (const char *)&unk_3AB990F;
     if ( v16 )
-      j___snprintf(Source, 0x7FFu, "%s%s%s%s: %s", "CRT ", off_3AB9960[v28], v8, v25, v13);
+      snprintf(Source, 0x7FFu, "%s%s%s%s: %s", "CRT ", off_3AB9960[v28], v8, v25, v13);
     else
-      j___snprintf(Source, 0x7FFu, "%s%s%s%s: %s", (const char *)&unk_3AB9921, off_3AB9960[v28], v8, v25, v13);
+      snprintf(Source, 0x7FFu, "%s%s%s%s: %s", (const char *)&unk_3AB9921, off_3AB9960[v28], v8, v25, v13);
     Source[2047] = 0;
     BBSupportTracePrint(dword_3AB98E0[v28], Source);
     BBSupportTracePrint(dword_3AB98E0[v28], v24);
@@ -41620,15 +41620,15 @@ int __stdcall BBSupportDbgReport(int a1, char const * a2, unsigned int a3, char 
       memset(Str, 0, sizeof(Str));
       if ( v16 )
       {
-        j___snprintf(Str, 0xFFFu, "%s\n%s\n", v13, v14);
+        snprintf(Str, 0xFFFu, "%s\n%s\n", v13, v14);
       }
       else if ( a2 )
       {
-        j___snprintf(Str, 0xFFFu, "%s: %s%s%s\n\n%s\n", off_3AB98F0[v28], v13, "\nLocation: ", v25, v14);
+        snprintf(Str, 0xFFFu, "%s: %s%s%s\n\n%s\n", off_3AB98F0[v28], v13, "\nLocation: ", v25, v14);
       }
       else
       {
-        j___snprintf(Str, 0xFFFu, "%s: %s%s%s\n\n%s\n", off_3AB98F0[v28], v13, byte_3AB9922, v25, v14);
+        snprintf(Str, 0xFFFu, "%s: %s%s%s\n\n%s\n", off_3AB98F0[v28], v13, byte_3AB9922, v25, v14);
       }
       LastActivePopup = 0;
       hWnd = GetActiveWindow();

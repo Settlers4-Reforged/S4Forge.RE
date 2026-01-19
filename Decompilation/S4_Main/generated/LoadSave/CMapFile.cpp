@@ -602,17 +602,17 @@ void  S4::CMapFile::UploadBuffer(unsigned int a2, unsigned int a3, void const * 
 
 
 // address=[0x13db820]
-// Decompiled from int __thiscall S4::CMapFile::SaveChunk(  S4::CMapFile *this,  __int16 a2,  __int16 a3,  size_t Size,  void *Src,  unsigned __int8 a6)
-void  S4::CMapFile::SaveChunk(unsigned short a2, unsigned short a3, unsigned int Size, void const * Src, bool a6) {
+// Decompiled from int __thiscall S4::CMapFile::SaveChunk(  S4::CMapFile *this,  unsigned __int16 a2,  unsigned __int16 a3,  unsigned int Size,  const void *Src,  bool a6)
+void  S4::CMapFile::SaveChunk(unsigned short a2, unsigned short a3, unsigned int a4, void const * a5, bool a6) {
   
   unsigned int v6; // eax
   int v8; // [esp+10h] [ebp-34h]
-  size_t v9; // [esp+14h] [ebp-30h]
+  unsigned int v9; // [esp+14h] [ebp-30h]
   size_t ElementSize; // [esp+18h] [ebp-2Ch]
   void *v12; // [esp+20h] [ebp-24h]
   _WORD Buffer[2]; // [esp+28h] [ebp-1Ch] BYREF
   size_t v14; // [esp+2Ch] [ebp-18h]
-  size_t v15; // [esp+30h] [ebp-14h]
+  unsigned int v15; // [esp+30h] [ebp-14h]
   unsigned int v16; // [esp+34h] [ebp-10h]
   int v17; // [esp+38h] [ebp-Ch]
 
@@ -625,7 +625,7 @@ void  S4::CMapFile::SaveChunk(unsigned short a2, unsigned short a3, unsigned int
   {
     v8 = j__LZHLCompressorCalcMaxBuf(Size) + 32;
     v12 = operator new[](v8);
-    ElementSize = sub_13DBDF0((int)v12, Src, Size);
+    ElementSize = sub_13DBDF0((int)v12, (void *)Src, Size);
     v9 = Size;
     v6 = S4::CMapFile::Crc(this, v12, ElementSize);
   }
@@ -643,7 +643,7 @@ void  S4::CMapFile::SaveChunk(unsigned short a2, unsigned short a3, unsigned int
   v15 = v9;
   v16 = v6;
   v17 = 0;
-  S4::CMapFile::Cryption(this, Buffer, 0x18u);
+  S4::CMapFile::Cryption(this, (unsigned __int8 *)Buffer, 0x18u);
   S4::CSaveFile::SetFilePos(0, 2);
   S4::CSaveFile::Write(Buffer, 0x18u);
   S4::CSaveFile::Write(v12, ElementSize);

@@ -674,8 +674,8 @@ bool  CGameType::LoadMapData(std::wstring a2, bool a3, unsigned int a4, bool a5,
             j____report_rangecheckfailure();
           Str[v45] = 0;
         }
-        j___snprintf(v94, 0x90u, "%s_DESC", Str);
-        j___snprintf(v95, 0x90u, "%s_TIPS", Str);
+        snprintf(v94, 0x90u, "%s_DESC", Str);
+        snprintf(v95, 0x90u, "%s_TIPS", Str);
         StringId = CS4DefineNames::GetStringId(v94);
         v43 = CS4DefineNames::GetStringId(v95);
         if ( StringId >= 0 )

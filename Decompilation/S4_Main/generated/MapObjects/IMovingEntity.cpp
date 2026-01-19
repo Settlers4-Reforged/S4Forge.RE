@@ -96,15 +96,16 @@ void  IMovingEntity::SetDirection(int a2) {
 
 
 // address=[0x15590a0]
-// Decompiled from IMovingEntity *__thiscall IMovingEntity::IMovingEntity(IMovingEntity *this, int a2)
- IMovingEntity::IMovingEntity(int a2) {
+// Decompiled from IMovingEntity *__thiscall IMovingEntity::IMovingEntity(IMovingEntity *this, int id)
+ IMovingEntity::IMovingEntity(int id) {
   
-  IAnimatedEntity::IAnimatedEntity(this, a2);
+  IAnimatedEntity::IAnimatedEntity(this, id);
   this->__vftable = (IMovingEntity_vtbl *)&IMovingEntity::_vftable_;
   std::auto_ptr<CWalking>::auto_ptr<CWalking>(&this->walking, 0);
   std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(&this->unk_58);
-  this->someRandomNumber = 0;
-  LOBYTE(this->displacementCosts) = 0;
+  this->m_cDirection = 0;
+  this->unk_45 = 0;
+  this->displacementCosts = 0;
   return this;
 }
 
@@ -371,7 +372,7 @@ void  IMovingEntity::Store(std::ostream & a2) {
   IAnimatedEntity::Store(this, a1);
   v3 = 1;
   operator^<unsigned int>(a1, &v3);
-  operator^<signed char>(a1, &this->someRandomNumber);
+  operator^<signed char>(a1, &this->m_cDirection);
   operator^<unsigned char>(a1, &this->unk_45);
   operator^<unsigned char>(a1, &this->displacementCosts);
   operator^<int>(a1, (int *)&this->unk_4c);

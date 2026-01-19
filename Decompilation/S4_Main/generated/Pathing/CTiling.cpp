@@ -4438,12 +4438,12 @@ void __cdecl CTiling::DbgPrintLinkList(class CLinkList const & a1) {
   if ( CLinkList::Size((unsigned __int8 *)a1) > 0 )
   {
     v1 = (unsigned __int16 *)CLinkList::operator[](a1, 0);
-    j___snprintf(Source, 0x1000u, ", links: %i", *v1);
+    snprintf(Source, 0x1000u, ", links: %i", *v1);
     for ( i = 1; i < CLinkList::Size((unsigned __int8 *)a1); ++i )
     {
       j__strncpy(Destination, Source, 0x1000u);
       v2 = (unsigned __int16 *)CLinkList::operator[](a1, i);
-      j___snprintf(Source, 0x1000u, "%s, %i", Destination, *v2);
+      snprintf(Source, 0x1000u, "%s, %i", Destination, *v2);
     }
   }
   v7 = CLinkList::OwnerTileId(a1);

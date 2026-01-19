@@ -45,7 +45,7 @@ public:
     virtual  ~IAnimatedEntity(void);
 
     // address=[0x14eb000]
-     IAnimatedEntity(int a2);
+     IAnimatedEntity(int id);
 
     // address=[0x14eb2a0]
     int  AttackerPlayerId(void)const;

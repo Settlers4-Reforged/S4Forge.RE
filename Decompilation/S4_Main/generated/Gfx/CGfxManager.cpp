@@ -551,39 +551,40 @@ unsigned int  CGfxManager::GetVehicleFirstJob(unsigned int a2, unsigned int a3) 
 
 
 // address=[0x1362dc0]
-// Decompiled from void __thiscall CGfxManager::GetAnimalGfxInfo(  CGfxManager *this,  struct SGfxObjectInfo *a2,  unsigned int a3,  int a4,  unsigned int a5)
+// Decompiled from void __thiscall CGfxManager::GetAnimalGfxInfo(  CGfxManager *this,  struct SGfxObjectInfo *a2,  uint _iJob,  uint _iDirection,  uint _iFrame)
 void  CGfxManager::GetAnimalGfxInfo(struct SGfxObjectInfo & a2, unsigned int a3, unsigned int a4, unsigned int a5) {
   
-  unsigned int v6; // [esp+28h] [ebp+Ch]
-  unsigned int v7; // [esp+30h] [ebp+14h]
+  unsigned int job; // [esp+28h] [ebp+Ch]
+  uint frame; // [esp+30h] [ebp+14h]
 
   if ( !*((_DWORD *)this + 395)
     && BBSupportDbgReport(2, "GfxManager.cpp", 1593, "m_pFileGfxJobs[ iGfxFile ].pItem") == 1 )
   {
     __debugbreak();
   }
-  if ( a3 >= *((_DWORD *)this + 396)
+  if ( _iJob >= *((_DWORD *)this + 396)
     && BBSupportDbgReport(2, "GfxManager.cpp", 1594, "_iJob < m_pFileGfxJobs[ iGfxFile ].iCount") == 1 )
   {
     __debugbreak();
   }
-  v6 = a3 >= *((_DWORD *)this + 396) ? 0 : a3;
-  if ( a5 >= CGfxManager::GetAnimalFrameCount(this, v6)
+  job = _iJob >= *((_DWORD *)this + 396) ? 0 : _iJob;
+  if ( _iFrame >= CGfxManager::GetAnimalFrameCount(this, job)
     && BBSupportDbgReport(2, "GfxManager.cpp", 1598, "_iFrame < GetAnimalFrameCount( _iJob )") == 1 )
   {
     __debugbreak();
   }
-  v7 = a5 >= CGfxManager::GetAnimalFrameCount(this, v6) ? 0 : a5;
-  if ( v6 > *((_DWORD *)this + 396) )
+  frame = _iFrame >= CGfxManager::GetAnimalFrameCount(this, job) ? 0 : _iFrame;
+  if ( job > *((_DWORD *)this + 396) )
   {
-    BBSupportTracePrintF(2, "GfxManager: Invalid Animal Job#%d for Direction#%d, Frame#%d", v6, a4, v7);
-    v6 = 0;
+    BBSupportTracePrintF(2, "GfxManager: Invalid Animal Job#%d for Direction#%d, Frame#%d", job, _iDirection, frame);
+    job = 0;
   }
-  *(_DWORD *)a2 = *(_DWORD *)(*(_DWORD *)(*(_DWORD *)(*((_DWORD *)this + 395) + 4 * v6 + 20) + 4 * a4) + 4 * v7);
+  *(_DWORD *)a2 = *(_DWORD *)(*(_DWORD *)(*(_DWORD *)(*((_DWORD *)this + 395) + 4 * job + 20) + 4 * _iDirection)
+                            + 4 * frame);
   if ( !*((_DWORD *)this + 177) && BBSupportDbgReport(2, "GfxManager.cpp", 1616, "m_pFilePalIndex[ iGfxFile ]") == 1 )
     __debugbreak();
-  *((_DWORD *)a2 + 1) = *(_DWORD *)(*((_DWORD *)this + 177) + 4 * v6 + 20);
-  j__sprintf(byte_3ECDC20, "Animal %u, Direction: %u, Frame: %u", v6, a4, v7);
+  *((_DWORD *)a2 + 1) = *(_DWORD *)(*((_DWORD *)this + 177) + 4 * job + 20);
+  j__sprintf(byte_3ECDC20, "Animal %u, Direction: %u, Frame: %u", job, _iDirection, frame);
   CGfxManager::Debug_Check_LayerBlock(this, 8u, a2);
 }
 

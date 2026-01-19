@@ -19,18 +19,18 @@ int  IAnimatedEntity::Frame(void)const {
 
 
 // address=[0x1351b30]
-// Decompiled from int __thiscall IAnimatedEntity::GetLastLogicUpdateTick(CPaneContainer *this)
+// Decompiled from int __thiscall IAnimatedEntity::GetLastLogicUpdateTick(IAnimatedEntity *this)
 int  IAnimatedEntity::GetLastLogicUpdateTick(void)const {
   
-  return *((_DWORD *)this + 12);
+  return this->m_uLastLogicUpdate;
 }
 
 
 // address=[0x1439c70]
-// Decompiled from int __thiscall IAnimatedEntity::Previous(unsigned __int16 *this)
+// Decompiled from int __thiscall IAnimatedEntity::Previous(IAnimatedEntity *this)
 int  IAnimatedEntity::Previous(void)const {
   
-  return this[20];
+  return this->m_wPrevEntity;
 }
 
 
@@ -212,22 +212,22 @@ void  IAnimatedEntity::BoxSelection(void) {
 
 
 // address=[0x14eb000]
-// Decompiled from IAnimatedEntity *__thiscall IAnimatedEntity::IAnimatedEntity(IAnimatedEntity *this, int a2)
- IAnimatedEntity::IAnimatedEntity(int a2) {
+// Decompiled from IAnimatedEntity *__thiscall IAnimatedEntity::IAnimatedEntity(IAnimatedEntity *this, int id)
+ IAnimatedEntity::IAnimatedEntity(int id) {
   
   std::bad_function_call *v4; // [esp+0h] [ebp-4h]
 
-  IEntity::IEntity((IEntity *)this, a2);
-  *(_DWORD *)this = &IAnimatedEntity::_vftable_;
-  *((_BYTE *)this + 36) = 0;
-  *((_BYTE *)this + 37) = 0;
-  *((_WORD *)this + 19) = 0;
-  *((_WORD *)this + 20) = 0;
-  *((_WORD *)this + 21) = 0;
-  *((_DWORD *)this + 11) = 0;
-  *((_DWORD *)this + 12) = -1;
+  IEntity::IEntity(this, id);
+  this->__vftable = (IAnimatedEntity_vtbl *)&IAnimatedEntity::_vftable_;
+  this->m_cFrame = 0;
+  this->m_cAttackerPlayerId = 0;
+  this->m_wJobPart = 0;
+  this->m_wPrevEntity = 0;
+  this->m_wNextEntity = 0;
+  this->m_uLastUpdateTick = 0;
+  this->m_uLastLogicUpdate = -1;
   std::vector<CEntityEvent>::vector<CEntityEvent>(this);
-  return v4;
+  return (IAnimatedEntity *)v4;
 }
 
 

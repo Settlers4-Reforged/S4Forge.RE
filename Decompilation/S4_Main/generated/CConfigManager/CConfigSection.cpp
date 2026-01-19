@@ -302,7 +302,7 @@ bool  CConfigSection::Save(wchar_t const * FileName) {
   v2 = j__strlen(Str);
   CFile::Write(Str, ElementSize, v2, (int)"D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\BaseLib\\Include\\File.h", 0);
   v3 = (const char *)std::string::c_str(v34);
-  j___snprintf(Str, 0x1FFu, "[%s]\r\n{\r\n", v3);
+  snprintf(Str, 0x1FFu, "[%s]\r\n{\r\n", v3);
   v4 = j__strlen(Str);
   CFile::Write(Str, ElementSize, v4, (int)"D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\BaseLib\\Include\\File.h", 0);
   std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,CConfigVar *>>>>::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,CConfigVar *>>>>(v32);

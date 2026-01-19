@@ -659,7 +659,7 @@ void __cdecl CInstallationInfo::LuaCheckFiles(void) {
       result = i;
       if ( i > v9 )
         break;
-      j___snprintf(Str, 0x1FFu, Format, i);
+      snprintf(Str, 0x1FFu, Format, i);
       std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v13);
       v16 = 0;
       std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::from_bytes(

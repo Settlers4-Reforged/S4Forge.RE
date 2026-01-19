@@ -83,7 +83,7 @@ int (__cdecl*__cdecl CDebugFkt::SelectDebugFunc(char))(int a1, int a2) {
     if ( v4[3] > 0 )
     {
       memset(Str, 0, sizeof(Str));
-      j___snprintf(Str, 0x3FFu, "%s (%i)", (const char *)v4[2], dword_3ECD9D0);
+      snprintf(Str, 0x3FFu, "%s (%i)", (const char *)v4[2], dword_3ECD9D0);
       String::operator=(Str);
     }
     else

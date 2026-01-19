@@ -36,7 +36,7 @@ public:
     void  SetDirection(int a2);
 
     // address=[0x15590a0]
-     IMovingEntity(int a2);
+     IMovingEntity(int id);
 
     // address=[0x1559130]
     virtual  ~IMovingEntity(void);
@@ -94,7 +94,7 @@ private:
     BYTE unk_41;
     BYTE unk_42;
     BYTE pad_43;
-    BYTE someRandomNumber;
+    BYTE m_cDirection;
     BYTE unk_45;
     BYTE displacementCosts;
     BYTE pad;

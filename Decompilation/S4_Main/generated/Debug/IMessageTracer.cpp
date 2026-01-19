@@ -199,7 +199,7 @@ void  IMessageTracer::PrintMessages(unsigned int a2, unsigned int a3) {
       v14 = (int)v13 + 24 * j + 8;
       if ( *(_DWORD *)v14 )
       {
-        j___snprintf(
+        snprintf(
           Source,
           0x3FFu,
           *(const char *const *)v14,

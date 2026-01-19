@@ -827,7 +827,7 @@ void  CSettlerMgr::LoadInfo(bool isMP) {
           v103 = v104;
           LOBYTE(v192) = 18;
           v16 = (char *)std::string::c_str(v104);
-          v36[11] = std::string::string(v188, v16);
+          v36[11] = std::string::string((struct std::string *)v188, v16);
           LOBYTE(v192) = 19;
           v102 = CDefineTranslator::GetValueOfDefine(defineTranslator, (struct std::string *)v188);
           settlerInfo->m_uOther = v102;
@@ -890,7 +890,7 @@ void  CSettlerMgr::LoadInfo(bool isMP) {
             v81 = v82;
             LOBYTE(v192) = 27;
             v20 = (char *)std::string::c_str(v82);
-            v36[15] = std::string::string(v189, v20);
+            v36[15] = std::string::string((struct std::string *)v189, v20);
             LOBYTE(v192) = 29;
             std::string::~string(v182);
             v80 = CDefineTranslator::GetValueOfDefine(defineTranslator, (struct std::string *)v189);
@@ -905,7 +905,7 @@ void  CSettlerMgr::LoadInfo(bool isMP) {
             v149 = v41;
             v150 = v42;
             v151 = 0;
-            std::vector<CSettlerMgr::SSearchInfos>::push_back((int)&v147);
+            std::vector<CSettlerMgr::SSearchInfos>::push_back(&v147);
             LOBYTE(v192) = 26;
             std::string::~string(v189);
             AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator++(v37);
@@ -934,7 +934,7 @@ void  CSettlerMgr::LoadInfo(bool isMP) {
             v68 = v69;
             LOBYTE(v192) = 36;
             v21 = (char *)std::string::c_str(v69);
-            v36[12] = std::string::string(v190, v21);
+            v36[12] = std::string::string((struct std::string *)v190, v21);
             LOBYTE(v192) = 38;
             std::string::~string(v183);
             configManager = CConfigManagerPtr::GetInstance();
@@ -947,7 +947,7 @@ void  CSettlerMgr::LoadInfo(bool isMP) {
                 __debugbreak();
             }
             v162 = iAnimList;
-            std::vector<unsigned short>::push_back((int)&v162);
+            std::vector<unsigned short>::push_back(&v162);
             LOBYTE(v192) = 35;
             std::string::~string(v190);
             AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator++(v38);

@@ -38,7 +38,7 @@ public:
     void  UploadBuffer(unsigned int a2, unsigned int a3, void const * Src, unsigned int Size, int a6);
 
     // address=[0x13db820]
-    void  SaveChunk(unsigned short a2, unsigned short a3, unsigned int Size, void const * Src, bool a6);
+    void  SaveChunk(unsigned short a2, unsigned short a3, unsigned int a4, void const * a5, bool a6);
 
     // address=[0x13db990]
     bool  LoadChunkObject(unsigned short a2, unsigned short a3, class IS4ChunkObject & a4, enum T_S4_MAP_CHUNK_STATUS a5);

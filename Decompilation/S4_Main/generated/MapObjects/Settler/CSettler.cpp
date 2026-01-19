@@ -1276,7 +1276,7 @@ int  CSettler::SetGroupFlags(int a2) {
   IEntity::SetPosition(this, posX, posY);
   this->m_objType = Settler;
   this->m_nType = settlerType;
-  this->someRandomNumber = (unsigned int)CGameData::Rand(g_pGameData) % 6;
+  this->m_cDirection = (unsigned int)CGameData::Rand(g_pGameData) % 6;
   IEntity::SetOwnerId(this, player);
   playerInfo = CPlayerManager::PlayerInfo(player);
   race = CPlayerInfo::Race(playerInfo);
@@ -1325,18 +1325,18 @@ int  CSettler::SetGroupFlags(int a2) {
 
 
 // address=[0x157eec0]
-// Decompiled from CSettler *__thiscall CSettler::CSettler(CSettler *this, __int16 a2, int a3)
- CSettler::CSettler(int a2, int a3) {
+// Decompiled from CSettler *__thiscall CSettler::CSettler(CSettler *this, WORD type, int id)
+ CSettler::CSettler(int type, int id) {
   
-  IMovingEntity::IMovingEntity(this, a3);
-  *(_DWORD *)this = &CSettler::_vftable_;
-  std::auto_ptr<ISettlerRole>::auto_ptr<ISettlerRole>(0);
-  *((_BYTE *)this + 69) = 0;
-  *((_BYTE *)this + 10) = 0;
-  *((_WORD *)this + 6) = a2;
+  IMovingEntity::IMovingEntity(this, id);
+  this->__vftable = (CSettler_vtbl *)&CSettler::_vftable_;
+  std::auto_ptr<ISettlerRole>::auto_ptr<ISettlerRole>((auto_ptr_ISettlerRole *)&this->role, 0);
+  this->unk_45 = 0;
+  this->m_objType = 0;
+  this->m_nType = type;
   IEntity::ClearFlagBits(this, EntityFlag_VulnerableMask|EntityFlag_Selectable|EntityFlag_Visible|0x800);
-  *((_DWORD *)this + 5) = *((_DWORD *)this + 5);
-  *((_BYTE *)this + 70) = 5;
+  this->m_iFlags = this->m_iFlags;
+  this->displacementCosts = 5;
   return this;
 }
 

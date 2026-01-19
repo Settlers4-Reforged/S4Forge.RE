@@ -6,7 +6,7 @@
 // Decompiled from char CGameRun::Init()
 bool __cdecl CGameRun::Init(void) {
   
-  char IsMultiplayerGame; // al
+  char bIsMultiplayerGame; // al
   int v2; // eax
   signed __int8 LocalSlot; // al
   int MapObjectXMLVersion; // [esp+1Ch] [ebp-854h]
@@ -17,71 +17,69 @@ bool __cdecl CGameRun::Init(void) {
   CLogic *v9; // [esp+30h] [ebp-840h]
   CGameScriptManager *v10; // [esp+34h] [ebp-83Ch]
   CGameScriptManager *v11; // [esp+38h] [ebp-838h]
-  CMapObjectMgr *v12; // [esp+3Ch] [ebp-834h]
-  CMapObjectMgr *C; // [esp+40h] [ebp-830h]
-  _DWORD *v14; // [esp+44h] [ebp-82Ch]
-  _DWORD *v15; // [esp+48h] [ebp-828h]
+  CMapObjectMgr *pMapObjectMgr; // [esp+40h] [ebp-830h] MAPDST
+  CEntityToDoListMgr *pEntityToDoListMgr; // [esp+44h] [ebp-82Ch] MAPDST
   int v16; // [esp+4Ch] [ebp-824h]
   int XMLVersion; // [esp+50h] [ebp-820h]
   char v18; // [esp+5Fh] [ebp-811h]
   char Buffer[1024]; // [esp+60h] [ebp-810h] BYREF
   char v20[1024]; // [esp+460h] [ebp-410h] BYREF
-  int v21; // [esp+86Ch] [ebp-4h]
+  int exceptionBlock; // [esp+86Ch] [ebp-4h]
 
   IMessageTracer::Init(g_pMsgTracer);
   IMessageTracer::Init(g_pMsgTracer2);
   IMessageTracer::PushStaticText(g_pMsgTracer, "==> CGameRun::Init()...");
   if ( CGameRun::m_bInitialized && BBSupportDbgReport(2, "main\\GameRun.cpp", 149, "!m_bInitialized") == 1 )
     __debugbreak();
-  v15 = operator new(0x14DCu);
-  v21 = 0;
-  if ( v15 )
-    v14 = CEntityToDoListMgr::CEntityToDoListMgr(v15);
+  pEntityToDoListMgr = (CEntityToDoListMgr *)operator new(0x14DCu);
+  exceptionBlock = 0;
+  if ( pEntityToDoListMgr )
+    pEntityToDoListMgr = CEntityToDoListMgr::CEntityToDoListMgr(pEntityToDoListMgr);
   else
-    v14 = 0;
-  g_pEntityToDoListMgr = (int)v14;
-  C = (CMapObjectMgr *)operator new(0x24u);
-  v21 = 1;
-  if ( C )
-    v12 = CMapObjectMgr::CMapObjectMgr(C);
+    pEntityToDoListMgr = 0;
+  g_pEntityToDoListMgr = pEntityToDoListMgr;
+  pMapObjectMgr = (CMapObjectMgr *)operator new(0x24u);
+  exceptionBlock = 1;
+  if ( pMapObjectMgr )
+    pMapObjectMgr = CMapObjectMgr::CMapObjectMgr(pMapObjectMgr);
   else
-    v12 = 0;
-  g_pMapObjectMgr = v12;
-  IsMultiplayerGame = CGameType::IsMultiplayerGame(g_pGameType);
-  CSettlerMgr::LoadInfo(g_cSettlerMgr, IsMultiplayerGame);
+    pMapObjectMgr = 0;
+  g_pMapObjectMgr = pMapObjectMgr;
+  bIsMultiplayerGame = CGameType::IsMultiplayerGame(g_pGameType);
+  CSettlerMgr::LoadInfo((struct CSettlerMgr *)g_cSettlerMgr, bIsMultiplayerGame);
   CBuildingMgr::LoadInfo((CBuildingMgr *)g_cBuildingMgr);
   CDecoObjMgr::LoadInfo((CDecoObjMgr *)&g_cDecoObjMgr);
   CVehicleMgr::LoadInfo((CVehicleMgr *)&g_cVehicleMgr);
   v11 = (CGameScriptManager *)operator new(0x63Cu);
-  v21 = 2;
+  exceptionBlock = 2;
   if ( v11 )
     v10 = CGameScriptManager::CGameScriptManager(v11);
   else
     v10 = 0;
-  v21 = -1;
-  g_pScriptMgr = (int)v10;
+  exceptionBlock = -1;
+  g_pScriptMgr = v10;
   if ( CGameData::GetMode(g_pGameData) == 3 )
     CGameScriptManager::SetVictoryConditionHook(
-      (CGameScriptManager *)g_pScriptMgr,
-      ScriptEconomyModeVictoryConditionCheck);
+      g_pScriptMgr,
+      (void (__cdecl *)())ScriptEconomyModeVictoryConditionCheck);
   (*(void (__thiscall **)(void *))(*(_DWORD *)g_pAI + 8))(g_pAI);
   v9 = (CLogic *)operator new(0x48u);
-  v21 = 3;
+  exceptionBlock = 3;
   if ( v9 )
     v8 = CLogic::CLogic(v9);
   else
     v8 = 0;
-  v21 = -1;
+  exceptionBlock = -1;
   g_pLogic = v8;
   ((void (__thiscall *)(CGroupMgr *))g_pGroupMgr->j_?Clear@CGroupMgr@@UAEXXZ)(g_pGroupMgr);
   CInputProcessor::Reset((CFsm **)&g_cInputProcessor);
   v7 = (CLogicRingBuffer *)operator new(0x1Cu);
-  v21 = 4;
+  exceptionBlock = 4;
   if ( v7 )
     v6 = CLogicRingBuffer::CLogicRingBuffer(v7, 1024);
   else
     v6 = 0;
-  v21 = -1;
+  exceptionBlock = -1;
   *(_DWORD *)(g_pGame + 252) = v6;
   CGameRun::SetupPlayersAndAlliances();
   CStatistic::Init((CStatistic *)&g_cStatistic);
@@ -120,7 +118,7 @@ bool __cdecl CGameRun::Init(void) {
     memset(Buffer, 0, sizeof(Buffer));
     memset(v20, 0, sizeof(v20));
     if ( MapBuildingXMLVersion && MapBuildingXMLVersion != 298 && MapBuildingXMLVersion != XMLVersion )
-      j___snprintf(
+      snprintf(
         Buffer,
         0x400u,
         "Invalid version of building info! Version used for map is %i, should be %i (original) or %i (current).",
@@ -128,7 +126,7 @@ bool __cdecl CGameRun::Init(void) {
         298,
         XMLVersion);
     if ( MapObjectXMLVersion && MapObjectXMLVersion != 355 && MapObjectXMLVersion != v16 && MapObjectXMLVersion != 1000 )
-      j___snprintf(
+      snprintf(
         v20,
         0x400u,
         "Invalid version of object info! Version used for map is %i, should be %i (original) or %i (current).",
@@ -153,7 +151,7 @@ bool __cdecl CGameRun::Init(void) {
   }
   LocalSlot = CPlayerManager::GetLocalSlot();
   CGameType::SetLocalSlot((CGameType *)g_pGameType, LocalSlot);
-  CGameScriptManager::StartScript((CGameScriptManager *)g_pScriptMgr);
+  CGameScriptManager::StartScript(g_pScriptMgr);
   CAnimalMgr::Init((CAnimalEffect **)&g_cAnimalMgr);
   CGameRun::m_bInitialized = 1;
   return 1;

@@ -28,7 +28,7 @@ void  CLinkList::DbgPrint(void)const {
   char Source[2048]; // [esp+80Ch] [ebp-804h] BYREF
 
   memset(Source, 0, sizeof(Source));
-  j___snprintf(
+  snprintf(
     Source,
     0x800u,
     "LinkList %08x: Cnt %2i M %02x Own %4i",
@@ -39,12 +39,12 @@ void  CLinkList::DbgPrint(void)const {
   if ( !*(_BYTE *)this )
     return CTrace::Print(Source);
   j__strcpy_0(Destination, Source);
-  j___snprintf(Source, 0x800u, "%s; %i", Destination, *((unsigned __int16 *)this + 2));
+  snprintf(Source, 0x800u, "%s; %i", Destination, *((unsigned __int16 *)this + 2));
   v2 = *(unsigned __int8 *)this;
   for ( i = 1; i < v2; ++i )
   {
     j__strcpy_0(Destination, Source);
-    j___snprintf(Source, 0x800u, "%s,%i", Destination, *((unsigned __int16 *)this + i + 2));
+    snprintf(Source, 0x800u, "%s,%i", Destination, *((unsigned __int16 *)this + i + 2));
   }
   return CTrace::Print(Source);
 }

@@ -1286,7 +1286,7 @@ void __cdecl CGameScriptManager::LuaErrorToTrace(void) {
     CurrentLine = CLua::GetCurrentLine(ScriptEnv, j);
     if ( v10 )
       std::string::operator+=(",");
-    j___snprintf(Buffer, 0x1Fu, "%u", CurrentLine);
+    snprintf(Buffer, 0x1Fu, "%u", CurrentLine);
     std::string::operator+=(Buffer);
     std::string::operator+=(" ");
     ++v6;

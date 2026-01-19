@@ -110,18 +110,19 @@ void  CAnimal::LogicUpdate(void) {
 
 
 // address=[0x14d6420]
-// Decompiled from void *__thiscall CAnimal::GetGfxInfos(_BYTE *this)
+// Decompiled from void *__thiscall CAnimal::GetGfxInfos(struct CAnimal *this)
 struct SGfxObjectInfo *  CAnimal::GetGfxInfos(void) {
   
-  (*(void (__thiscall **)(_BYTE *))(*(_DWORD *)this + 120))(this);
+  this->Update();
   CGfxManager::GetAnimalGfxInfo(
-    (int)&IEntity::m_sGfxInfo,
-    *((unsigned __int16 *)this + 19),
-    (char)this[68],
-    (unsigned __int8)this[36]);
-  byte_40FE51D = this[68];
-  byte_40FE51C = this[69];
-  byte_40FE518 = this[10];
+    g_pGfxManager,
+    (struct SGfxObjectInfo *)&IEntity::m_sGfxInfo,
+    this->m_wJobPart,
+    (char)this->m_cDirection,
+    this->m_cFrame);
+  byte_40FE51D = this->m_cDirection;
+  byte_40FE51C = this->unk_45;
+  byte_40FE518 = this->m_objType;
   byte_40FE51A = IEntity::IsVisible(this);
   return &IEntity::m_sGfxInfo;
 }

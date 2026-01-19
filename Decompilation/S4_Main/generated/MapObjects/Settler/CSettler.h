@@ -124,7 +124,7 @@ protected:
      CSettler(int posX, int posY, int settlerType, int player, class std::auto_ptr<class ISettlerRole> settlerRole, int id);
 
     // address=[0x157eec0]
-     CSettler(int a2, int a3);
+     CSettler(int type, int id);
 
     // address=[0x157ef70]
      CSettler(int a2, int a3, int a4, class std::auto_ptr<class ISettlerRole> a5, int a6);

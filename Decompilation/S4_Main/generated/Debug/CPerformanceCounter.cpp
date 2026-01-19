@@ -62,13 +62,13 @@ char const *  CPerformanceCounter::TimeMsStr(int a2, int a2)const {
   if ( HIDWORD(a2) == 3 && (_DWORD)a2 == 0 )
   {
     v2 = CPerformanceCounter::TimeMs(this);
-    j___snprintf(byte_46851CC, 0x20u, "%.3f", v2);
+    snprintf(byte_46851CC, 0x20u, "%.3f", v2);
   }
   else
   {
-    j___snprintf(Buffer, 0x20u, "%%%i.%if", (_DWORD)a2, HIDWORD(a2));
+    snprintf(Buffer, 0x20u, "%%%i.%if", (_DWORD)a2, HIDWORD(a2));
     v3 = CPerformanceCounter::TimeMs(this);
-    j___snprintf(byte_46851CC, 0x20u, Buffer, v3);
+    snprintf(byte_46851CC, 0x20u, Buffer, v3);
   }
   return byte_46851CC;
 }

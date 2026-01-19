@@ -82,7 +82,7 @@ char const *  CProfile::InfoStr(void)const {
   v4 = (double)*((__int64 *)v7 + 1) / (double)v6 * 100.0;
   v3 = (double)*((__int64 *)v7 + 1) * *(double *)&qword_46851C0;
   v1 = CProfile::TimeMs(v7);
-  j___snprintf(byte_46851F8, 0x40u, "%5i x %6.3f ms = %9.1f ms, %5.2f%%", *((_DWORD *)v7 + 40), v1, v3, v4);
+  snprintf(byte_46851F8, 0x40u, "%5i x %6.3f ms = %9.1f ms, %5.2f%%", *((_DWORD *)v7 + 40), v1, v3, v4);
   return byte_46851F8;
 }
 
@@ -139,7 +139,7 @@ char const *  CProfile::TraceStr(void)const {
   v4 = (double)*((__int64 *)v23 + 1) / (double)v22 * 100.0;
   v3 = (double)*((__int64 *)v23 + 1) * *(double *)&qword_46851C0;
   v1 = CProfile::TimeMs(v23);
-  j___snprintf(
+  snprintf(
     byte_4685248,
     0x100u,
     "%i x %.3f ms = %.1f ms, %5.2f%% (%.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f)",
