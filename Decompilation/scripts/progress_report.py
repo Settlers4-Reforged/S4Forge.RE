@@ -175,7 +175,7 @@ def main():
     )
     parser.add_argument(
         'header_image',
-        default='./report/logo.png'
+        default='./report/logo.png',
         help='Path to the header image to use'
     )
     parser.add_argument(
