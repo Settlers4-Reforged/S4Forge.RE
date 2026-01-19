@@ -114,7 +114,7 @@ CMapObjectMgr::CMapObjectMgr(void)
 
   this->m_vLogicUpdateSlots = new std::vector<std::deque<unsigned short>>();
   this->m_vKilledEntities = new std::vector<std::deque<unsigned short>>();
-  memset(m_vEntities, 0, 0x40000u);
+  memset(m_vEntities, 0, sizeof(IEntity*) * (MAX_ENTRIES + 1));
   m_iMinFreeId = 1;
   m_iLastUsedId = 0;
   m_iMaxLastUsedId = 0;
