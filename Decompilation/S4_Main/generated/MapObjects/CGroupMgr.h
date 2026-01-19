@@ -39,18 +39,18 @@ public:
     virtual void  Save(class IS4Chunk & a2);
 
     // address=[0x1551ae0]
-    void  FillGroupSideBarEx(class CInfoExchange * a2, bool a3, int a4);
+    void  FillGroupSideBarEx(class CInfoExchange * _pInfoExchange, bool a3, int a4);
 
     // address=[0x1551d50]
-    void  FillMagicSideBarEx(class CInfoExchange * a1, bool a2, int a3);
+    void  FillMagicSideBarEx(class CInfoExchange * _pInfoExchange, bool _bSpecialSidebar, int unused);
 
     // address=[0x1552590]
      CGroupMgr(void);
 
     // Type information members
-private:
-    BYTE[100] groupFlags;
-    struct CGroupMgr::TStaticArray100short[99] entries;
+public:
+    BYTE[99] m_bGroupFlags;
+    struct CGroupMgr::TStaticArray100short[99] m_vEntries;
 
 };
 

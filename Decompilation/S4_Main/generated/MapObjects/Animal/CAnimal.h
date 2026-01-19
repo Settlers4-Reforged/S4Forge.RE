@@ -82,7 +82,7 @@ protected:
     virtual  ~CAnimal(void);
 
     // Type information members
-private:
+public:
     __int16 unk_64;
     BYTE[14] unk_66;
     BYTE unk_74;

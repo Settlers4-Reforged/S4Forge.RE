@@ -24,7 +24,7 @@ public:
     struct SPoint &  Zero(void);
 
     // Type information members
-private:
+public:
     int x;
     int y;
 

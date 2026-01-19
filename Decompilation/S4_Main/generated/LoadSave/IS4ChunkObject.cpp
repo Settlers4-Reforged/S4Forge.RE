@@ -1,3 +1,4 @@
+#if FALSE
 #include "IS4ChunkObject.h"
 
 // Definitions for class IS4ChunkObject
@@ -15,7 +16,7 @@
 // Decompiled from IS4ChunkObject *__thiscall IS4ChunkObject::IS4ChunkObject(  IS4ChunkObject *this,  const struct boost::exception_detail::clone_base *a2)
  IS4ChunkObject::IS4ChunkObject(class IS4ChunkObject const & a2) {
   
-  *(_DWORD *)this = IS4ChunkObject::_vftable_;
+  this->__vftable = (IS4ChunkObject_vtbl *)IS4ChunkObject::_vftable_;
   return this;
 }
 
@@ -28,3 +29,4 @@ class IS4ChunkObject &  IS4ChunkObject::operator=(class IS4ChunkObject const & a
 }
 
 
+#endif // Already implemented

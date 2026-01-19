@@ -85,7 +85,7 @@ protected:
     bool  IsSettlerAroundTile(int a2);
 
     // Type information members
-private:
+public:
     DWORD unk_7c;
     DWORD unk_80;
     DWORD unk_84;

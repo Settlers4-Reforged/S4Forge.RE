@@ -91,7 +91,7 @@ protected:
     void  InitPseudoTile(int a2, class CLinkList & a3);
 
     // Type information members
-private:
+public:
     DWORD type;
     DWORD ecoSectorId;
     DWORD center;

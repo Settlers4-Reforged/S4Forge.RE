@@ -9,7 +9,7 @@ public:
      IAudioSessionEvents(void);
 
     // Type information members
-private:
+public:
     struct IAudioSessionEventsVtbl * lpVtbl;
 
 };

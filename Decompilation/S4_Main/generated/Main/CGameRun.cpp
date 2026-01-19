@@ -71,7 +71,7 @@ bool __cdecl CGameRun::Init(void) {
     v8 = 0;
   exceptionBlock = -1;
   g_pLogic = v8;
-  ((void (__thiscall *)(CGroupMgr *))g_pGroupMgr->j_?Clear@CGroupMgr@@UAEXXZ)(g_pGroupMgr);
+  ((void (__thiscall *)(CGroupMgr *))g_pGroupMgr->Clear)(g_pGroupMgr);
   CInputProcessor::Reset((CFsm **)&g_cInputProcessor);
   v7 = (CLogicRingBuffer *)operator new(0x1Cu);
   exceptionBlock = 4;

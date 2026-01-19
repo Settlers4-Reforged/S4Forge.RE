@@ -14,7 +14,7 @@ public:
      Error(void);
 
     // Type information members
-private:
+public:
     struct ErrorVtbl * lpVtbl;
 
 };

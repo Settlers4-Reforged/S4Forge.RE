@@ -1,3 +1,4 @@
+#if FALSE
 #include "CGroupMgr.h"
 
 // Definitions for class CGroupMgr
@@ -9,11 +10,11 @@ void  CGroupMgr::Clear(void) {
   int j; // [esp+4h] [ebp-8h]
   int i; // [esp+8h] [ebp-4h]
 
-  memset(this->groupFlags, 0, 99u);
+  memset(this->m_bGroupFlags, 0, sizeof(this->m_bGroupFlags));
   for ( i = 0; i < 9; ++i )
   {
     for ( j = 0; j < 11; ++j )
-      TStaticArray<unsigned short,100>::Init(&this->entries[0xB * i + j]);
+      TStaticArray<unsigned short,100>::Init(&this->m_vEntries[11 * i + j]);
   }
 }
 
@@ -36,7 +37,7 @@ int  CGroupMgr::GetGroupSize(int playerId, int groupId)const {
   {
     __debugbreak();
   }
-  return TStaticArray<unsigned short,100>::Size(&this->entries[11 * playerId + groupId]);
+  return TStaticArray<unsigned short,100>::Size(&this->m_vEntries[11 * playerId + groupId]);
 }
 
 
@@ -58,7 +59,7 @@ unsigned short const *  CGroupMgr::GetGroupEntityIds(int playerId, int groupId)c
   {
     __debugbreak();
   }
-  return TStaticArray<unsigned short,100>::operator[](&this->entries[11 * playerId + groupId], 0);
+  return TStaticArray<unsigned short,100>::operator[](&this->m_vEntries[11 * playerId + groupId], 0);
 }
 
 
@@ -102,10 +103,10 @@ bool  CGroupMgr::AttachEntity(int playerId, int groupId, int entityIdToAttach) {
   if ( ownerId != playerId )
     return 0;
   groupFlagBits = 1 << groupId;
-  v13 = entityToAttach->GetGroupFlags(entityToAttach);
+  v13 = entityToAttach->GetGroupFlags();
   if ( ((1 << groupId) & v13) != 0 )
     return 0;
-  groupList = &this->entries[11 * ownerId + groupId];
+  groupList = &this->m_vEntries[11 * ownerId + groupId];
   a1 = entityIdToAttach;
   if ( TStaticArray<unsigned short,100>::FindEntry(groupList, &a1) >= 0
     && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 267, "rGroupArray.FindEntry(_iEntityId) < 0") == 1 )
@@ -116,13 +117,13 @@ bool  CGroupMgr::AttachEntity(int playerId, int groupId, int entityIdToAttach) {
     return 0;
   if ( !IEntity::CheckType(entityToAttach, 1, 44) )
   {
-    if ( (groupFlagBits & (int)entityToAttach->SetGroupFlagBits(entityToAttach, groupFlagBits)) == 0 )
+    if ( (groupFlagBits & (unsigned int)entityToAttach->SetGroupFlagBits(groupFlagBits)) == 0 )
       return 0;
     v16 = entityIdToAttach;
     TStaticArray<unsigned short,100>::PushBack(groupList, &v16);
     return 1;
   }
-  if ( (this->groupFlags[11 * playerId + groupId] & 1) != 0 )
+  if ( (this->m_bGroupFlags[11 * playerId + groupId] & 1) != 0 )
     return 0;
   if ( v13 )
     return 0;
@@ -137,9 +138,9 @@ bool  CGroupMgr::AttachEntity(int playerId, int groupId, int entityIdToAttach) {
     v5 = *TStaticArray<unsigned short,100>::operator[](groupList, i);
     v8 = CMapObjectMgr::EntityPtr(v5);
     if ( v8 )
-      v8->SetGroupFlagBits(v8, 0x800);
+      ((void (__thiscall *)(IEntity *, int))v8->SetGroupFlagBits)(v8, 0x800);
   }
-  this->groupFlags[11 * playerId + groupId] |= 1u;
+  this->m_bGroupFlags[11 * playerId + groupId] |= 1u;
   v15 = entityIdToAttach;
   TStaticArray<unsigned short,100>::PushBack(groupList, &v15);
   return 1;
@@ -184,7 +185,7 @@ bool  CGroupMgr::DetachEntity(int playerId, int groupId, int entityId) {
   owner = IEntity::OwnerId(entity);
   if ( owner != playerId )
     return 0;
-  v10 = &this->entries[11 * owner + groupId];
+  v10 = &this->m_vEntries[11 * owner + groupId];
   groupFlags = 1 << groupId;
   if ( ((1 << groupId) & entity->GetGroupFlags(entity)) == 0 )
   {
@@ -203,7 +204,7 @@ bool  CGroupMgr::DetachEntity(int playerId, int groupId, int entityId) {
   if ( IEntity::CheckType(entity, 1, 44) )
   {
     entity->SetGroupFlags(entity, 0);
-    if ( (this->groupFlags[11 * playerId + groupId] & 1) == 0
+    if ( (this->m_bGroupFlags[11 * playerId + groupId] & 1) == 0
       && BBSupportDbgReport(
            2,
            "MapObjects\\GroupMgr.cpp",
@@ -212,7 +213,7 @@ bool  CGroupMgr::DetachEntity(int playerId, int groupId, int entityId) {
     {
       __debugbreak();
     }
-    this->groupFlags[11 * playerId + groupId] &= ~1u;
+    this->m_bGroupFlags[11 * playerId + groupId] &= ~1u;
     v6 = TStaticArray<unsigned short,100>::Size(v10);
     for ( i = 0; i < v6; ++i )
     {
@@ -293,7 +294,7 @@ void  CGroupMgr::DetachAllEntitiesFromGroup(int playerId, int groupId) {
   {
     __debugbreak();
   }
-  v7 = &this->entries[11 * playerId + groupId];
+  v7 = &this->m_vEntries[11 * playerId + groupId];
   while ( 1 )
   {
     result = TStaticArray<unsigned short,100>::Size(v7);
@@ -314,7 +315,7 @@ void  CGroupMgr::DetachAllEntitiesFromGroup(int playerId, int groupId) {
       {
         __debugbreak();
       }
-      TStaticArray<unsigned short,100>::PopBack(v7, 0);
+      TStaticArray<unsigned short,100>::PopBack(v7);
     }
     if ( TStaticArray<unsigned short,100>::Size(v7) != v6 - 1
       && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 470, "rGroupArray.Size() == (iOldSize - 1)") == 1 )
@@ -344,7 +345,7 @@ bool  CGroupMgr::HasSquadLeader(int a2, int a3) {
   {
     __debugbreak();
   }
-  return (this->groupFlags[11 * a2 + a3] & 1) != 0;
+  return (this->m_bGroupFlags[11 * a2 + a3] & 1) != 0;
 }
 
 
@@ -454,227 +455,208 @@ void  CGroupMgr::SendGroupCommand(int groupSize, unsigned short const * group, i
 
 
 // address=[0x1551850]
-// Decompiled from int __thiscall CGroupMgr::Load(CGroupMgr::TStaticArray100short *this, struct IS4Chunk *a2)
+// Decompiled from void __thiscall CGroupMgr::Load(CGroupMgr *this, struct IS4Chunk *a2)
 void  CGroupMgr::Load(class IS4Chunk & a2) {
   
-  int v3; // [esp+8h] [ebp-18h]
-  int k; // [esp+Ch] [ebp-14h]
+  signed int v2; // [esp+8h] [ebp-18h]
+  signed int k; // [esp+Ch] [ebp-14h]
   int j; // [esp+14h] [ebp-Ch]
   int i; // [esp+18h] [ebp-8h]
-  __int16 v8; // [esp+1Eh] [ebp-2h] BYREF
+  __int16 a1; // [esp+1Eh] [ebp-2h] BYREF
 
-  (*(void (__thiscall **)(CGroupMgr::TStaticArray100short *))(*(_DWORD *)this + 8))(this);
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 12))(a2, 844624217);
-  (*(void (__thiscall **)(struct IS4Chunk *, int, int))(*(_DWORD *)a2 + 4))(a2, 1, 1);
-  (*(void (__thiscall **)(struct IS4Chunk *, int, int))(*(_DWORD *)a2 + 4))(a2, 10, 10);
-  (*(void (__thiscall **)(struct IS4Chunk *, int, int))(*(_DWORD *)a2 + 4))(a2, 100, 100);
+  this->Clear();
+  a2->LoadSignature(0x3257F159);
+  a2->LoadUnsigned32(1, 1);
+  a2->LoadUnsigned32(10, 10);
+  a2->LoadUnsigned32(100, 100);
   for ( i = 0; i < 9; ++i )
   {
     for ( j = 0; j < 11; ++j )
     {
-      *((_BYTE *)this + 11 * i + j + 4) = (*(int (__thiscall **)(struct IS4Chunk *, _DWORD, int))(*(_DWORD *)a2 + 4))(
-                                            a2,
-                                            0,
-                                            255);
-      v3 = (*(int (__thiscall **)(struct IS4Chunk *, _DWORD, int))(*(_DWORD *)a2 + 4))(a2, 0, 100);
-      for ( k = 0; k < v3; ++k )
+      this->m_bGroupFlags[11 * i + j] = a2->LoadUnsigned32(0, 255);
+      v2 = a2->LoadUnsigned32(0, 100);
+      for ( k = 0; k < v2; ++k )
       {
-        v8 = (*(int (__thiscall **)(struct IS4Chunk *, _DWORD, int))(*(_DWORD *)a2 + 4))(a2, 0, 0xFFFF);
-        TStaticArray<unsigned short,100>::PushBack(&v8);
+        a1 = a2->LoadUnsigned32(0, 0xFFFF);
+        TStaticArray<unsigned short,100>::PushBack(&this->m_vEntries[11 * i + j], &a1);
       }
     }
   }
-  return (*(int (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 12))(a2, 844624209);
+  a2->LoadSignature(0x3257F151);
 }
 
 
 // address=[0x15519a0]
-// Decompiled from int __thiscall CGroupMgr::Save(CGroupMgr::TStaticArray100short *this, struct IS4Chunk *a2)
+// Decompiled from void __thiscall CGroupMgr::Save(CGroupMgr *this, struct IS4Chunk *a2)
 void  CGroupMgr::Save(class IS4Chunk & a2) {
   
   unsigned __int16 *v2; // eax
-  int v4; // [esp+0h] [ebp-14h]
-  int k; // [esp+8h] [ebp-Ch]
+  int v3; // [esp+0h] [ebp-14h]
+  int a1; // [esp+8h] [ebp-Ch]
   int j; // [esp+Ch] [ebp-8h]
   int i; // [esp+10h] [ebp-4h]
 
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 24))(a2, 844624217);
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 20))(a2, 1);
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 20))(a2, 10);
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 20))(a2, 100);
+  a2->SaveSignature(844624217);
+  a2->SaveUnsigned32(1);
+  a2->SaveUnsigned32(10);
+  a2->SaveUnsigned32(100);
   for ( i = 0; i < 9; ++i )
   {
     for ( j = 0; j < 11; ++j )
     {
-      (*(void (__thiscall **)(struct IS4Chunk *, _DWORD))(*(_DWORD *)a2 + 20))(
-        a2,
-        *((unsigned __int8 *)&this[1].size + 11 * i + j));
-      v4 = TStaticArray<unsigned short,100>::Size(&this[561 * i + 26 + 51 * j]);
-      (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 20))(a2, v4);
-      for ( k = 0; k < v4; ++k )
+      a2->SaveUnsigned32(this->m_bGroupFlags[11 * i + j]);
+      v3 = TStaticArray<unsigned short,100>::Size(&this->m_vEntries[11 * i + j]);
+      a2->SaveUnsigned32(v3);
+      for ( a1 = 0; a1 < v3; ++a1 )
       {
-        v2 = (unsigned __int16 *)TStaticArray<unsigned short,100>::operator[](k);
-        (*(void (__thiscall **)(struct IS4Chunk *, _DWORD))(*(_DWORD *)a2 + 20))(a2, *v2);
+        v2 = TStaticArray<unsigned short,100>::operator[](&this->m_vEntries[11 * i + j], a1);
+        a2->SaveUnsigned32(*v2);
       }
     }
   }
-  return (*(int (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 24))(a2, 844624209);
+  a2->SaveSignature(844624209);
 }
 
 
 // address=[0x1551ae0]
-// Decompiled from _DWORD *__thiscall CGroupMgr::FillGroupSideBarEx(char *this, void **a2, char a3, int a4)
-void  CGroupMgr::FillGroupSideBarEx(class CInfoExchange * a2, bool a3, int a4) {
+// Decompiled from void __thiscall CGroupMgr::FillGroupSideBarEx(CGroupMgr *this, struct CInfoExchange *_pInfoExchange, bool a3, int a4)
+void  CGroupMgr::FillGroupSideBarEx(class CInfoExchange * _pInfoExchange, bool a3, int a4) {
   
-  _DWORD *result; // eax
-  unsigned __int16 *v5; // eax
-  int v6; // [esp+0h] [ebp-64h]
-  CEvn_Event *v7; // [esp+4h] [ebp-60h]
+  unsigned __int16 *v4; // eax
+  CEvn_Event *v5; // [esp+4h] [ebp-60h]
   int LocalPlayerId; // [esp+1Ch] [ebp-48h]
-  unsigned int v10; // [esp+20h] [ebp-44h]
-  int v11; // [esp+24h] [ebp-40h]
+  unsigned int v8; // [esp+20h] [ebp-44h]
+  int v9; // [esp+24h] [ebp-40h]
+  IEntity *v10; // [esp+28h] [ebp-3Ch]
   int i; // [esp+34h] [ebp-30h]
-  unsigned int v13; // [esp+38h] [ebp-2Ch]
-  CEvn_Event v14; // [esp+3Ch] [ebp-28h] BYREF
-  int v15; // [esp+60h] [ebp-4h]
+  CInfoExchange *pGroupSideBarInfo; // [esp+38h] [ebp-2Ch]
+  CEvn_Event v13; // [esp+3Ch] [ebp-28h] BYREF
+  int v14; // [esp+60h] [ebp-4h]
 
-  if ( !a2 && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 494, "_pInfoExchange != 0") == 1 )
+  if ( !_pInfoExchange && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 494, "_pInfoExchange != 0") == 1 )
     __debugbreak();
-  result = (_DWORD *)j____RTDynamicCast(
-                       a2,
-                       0,
-                       &CInfoExchange__RTTI_Type_Descriptor_,
-                       &CGroupSideBarInfo__RTTI_Type_Descriptor_,
-                       0);
-  v13 = (unsigned int)result;
-  if ( !result )
+  pGroupSideBarInfo = (CInfoExchange *)j____RTDynamicCast(
+                                         (void **)&_pInfoExchange->__vftable,
+                                         0,
+                                         &CInfoExchange__RTTI_Type_Descriptor_,
+                                         &CGroupSideBarInfo__RTTI_Type_Descriptor_,
+                                         0);
+  if ( !pGroupSideBarInfo && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 498, "pGroupSideBar != 0") == 1 )
+    __debugbreak();
+  if ( pGroupSideBarInfo )
   {
-    result = (_DWORD *)BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 498, "pGroupSideBar != 0");
-    if ( result == (_DWORD *)1 )
-      __debugbreak();
-  }
-  if ( !v13 )
-    return result;
-  (**(void (__thiscall ***)(unsigned int))v13)(v13);
-  LocalPlayerId = CPlayerManager::GetLocalPlayerId(v6);
-  for ( i = 1; i <= 10; ++i )
-  {
-    if ( TStaticArray<unsigned short,100>::Size(&this[2244 * LocalPlayerId + 104 + 204 * i]) > 0 )
+    pGroupSideBarInfo->Clear(pGroupSideBarInfo);
+    LocalPlayerId = CPlayerManager::GetLocalPlayerId();
+    for ( i = 1; i <= 10; ++i )
     {
-      v5 = (unsigned __int16 *)TStaticArray<unsigned short,100>::operator[](0);
-      if ( CMapObjectMgr::EntityPtr(*v5) )
-        v11 = IEntity::WarriorType();
-      else
-        v11 = 0;
-      switch ( v11 )
+      if ( TStaticArray<unsigned short,100>::Size(&this->m_vEntries[11 * LocalPlayerId + i]) > 0 )
       {
-        case 2:
-        case 3:
-        case 4:
-        case 5:
-        case 6:
-          *(_DWORD *)(v13 + 4 * i + 4) = 1;
-          break;
-        case 7:
-          *(_DWORD *)(v13 + 4 * i + 4) = 2;
-          break;
-        case 10:
-        case 11:
-          *(_DWORD *)(v13 + 4 * i + 4) = 3;
-          break;
-        default:
-          continue;
+        v4 = TStaticArray<unsigned short,100>::operator[](&this->m_vEntries[11 * LocalPlayerId + i], 0);
+        v10 = CMapObjectMgr::EntityPtr(*v4);
+        if ( v10 )
+          v9 = IEntity::WarriorType(v10);
+        else
+          v9 = 0;
+        switch ( v9 )
+        {
+          case 2:
+          case 3:
+          case 4:
+          case 5:
+          case 6:
+            pGroupSideBarInfo->m_iUnknown[i] = 1;
+            break;
+          case 7:
+            pGroupSideBarInfo->m_iUnknown[i] = 2;
+            break;
+          case 10:
+          case 11:
+            pGroupSideBarInfo->m_iUnknown[i] = 3;
+            break;
+          default:
+            continue;
+        }
       }
     }
+    pGroupSideBarInfo->m_iUnknown[0] = 25;
+    if ( a3 )
+      v8 = 606;
+    else
+      v8 = 607;
+    if ( !g_pEvnEngine && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 564, "g_pEvnEngine != 0") == 1 )
+      __debugbreak();
+    if ( g_pEvnEngine )
+    {
+      v5 = CEvn_Event::CEvn_Event(&v13, v8, 0, (unsigned int)pGroupSideBarInfo, 0);
+      v14 = 0;
+      IEventEngine::SendAMessage(g_pEvnEngine, v5);
+      v14 = -1;
+      CEvn_Event::~CEvn_Event(&v13);
+    }
   }
-  *(_DWORD *)(v13 + 4) = 25;
-  if ( a3 )
-    v10 = 606;
-  else
-    v10 = 607;
-  if ( !g_pEvnEngine && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 564, "g_pEvnEngine != 0") == 1 )
-    __debugbreak();
-  result = 0;
-  if ( !g_pEvnEngine )
-    return result;
-  v7 = CEvn_Event::CEvn_Event(&v14, v10, 0, v13, 0);
-  v15 = 0;
-  IEventEngine::SendAMessage(g_pEvnEngine, v7);
-  v15 = -1;
-  return CEvn_Event::~CEvn_Event(&v14);
 }
 
 
 // address=[0x1551d50]
-// Decompiled from unsigned int __stdcall CGroupMgr::FillMagicSideBarEx(void **a1, unsigned __int8 a2, int a3)
-void  CGroupMgr::FillMagicSideBarEx(class CInfoExchange * a1, bool a2, int a3) {
+// Decompiled from void __stdcall CGroupMgr::FillMagicSideBarEx(struct CInfoExchange *_pInfoExchange, bool _bSpecialSidebar, int unused)
+void  CGroupMgr::FillMagicSideBarEx(class CInfoExchange * _pInfoExchange, bool _bSpecialSidebar, int unused) {
   
-  unsigned int result; // eax
-  int v4; // [esp+0h] [ebp-60h]
-  CEvn_Event *v5; // [esp+8h] [ebp-58h]
-  int v6; // [esp+18h] [ebp-48h]
-  unsigned int v7; // [esp+1Ch] [ebp-44h]
+  CEvn_Event *v3; // [esp+8h] [ebp-58h]
+  int v4; // [esp+18h] [ebp-48h]
+  unsigned int v5; // [esp+1Ch] [ebp-44h]
   int CurrentSpellCategoryCost; // [esp+20h] [ebp-40h]
-  int v9; // [esp+24h] [ebp-3Ch]
+  int v7; // [esp+24h] [ebp-3Ch]
   int CurrentManaAmount; // [esp+28h] [ebp-38h]
   int LocalPlayerId; // [esp+2Ch] [ebp-34h]
-  unsigned int v12; // [esp+30h] [ebp-30h]
+  unsigned int pMagicSpellSideBarInfo; // [esp+30h] [ebp-30h]
   int i; // [esp+34h] [ebp-2Ch]
-  CEvn_Event v14; // [esp+38h] [ebp-28h] BYREF
-  int v15; // [esp+5Ch] [ebp-4h]
+  CEvn_Event v12; // [esp+38h] [ebp-28h] BYREF
+  int v13; // [esp+5Ch] [ebp-4h]
 
-  if ( !a1 && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 587, "_pInfoExchange != 0") == 1 )
+  if ( !_pInfoExchange && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 587, "_pInfoExchange != 0") == 1 )
     __debugbreak();
-  result = j____RTDynamicCast(
-             a1,
-             0,
-             &CInfoExchange__RTTI_Type_Descriptor_,
-             &CMagicSpellSideBarInfo__RTTI_Type_Descriptor_,
-             0);
-  v12 = result;
-  if ( !result )
+  pMagicSpellSideBarInfo = j____RTDynamicCast(
+                             (void **)_pInfoExchange,
+                             0,
+                             &CInfoExchange__RTTI_Type_Descriptor_,
+                             &CMagicSpellSideBarInfo__RTTI_Type_Descriptor_,
+                             0);
+  if ( !pMagicSpellSideBarInfo && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 591, "pMagicSpellSideBar != 0") == 1 )
+    __debugbreak();
+  if ( pMagicSpellSideBarInfo )
   {
-    result = BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 591, "pMagicSpellSideBar != 0");
-    if ( result == 1 )
-      __debugbreak();
-  }
-  if ( !v12 )
-    return result;
-  (**(void (__thiscall ***)(unsigned int))v12)(v12);
-  LocalPlayerId = CPlayerManager::GetLocalPlayerId(v4);
-  for ( i = 0; i < 8; ++i )
-  {
-    v6 = CMagic::CalculatePossibleNumberOfCastSpell(LocalPlayerId, i, 0);
-    CurrentSpellCategoryCost = CMagic::GetCurrentSpellCategoryCost(LocalPlayerId, i);
-    CurrentManaAmount = CMagic::GetCurrentManaAmount(LocalPlayerId);
-    if ( CurrentManaAmount <= 0 )
-      v9 = 0;
+    (**(void (__thiscall ***)(unsigned int))pMagicSpellSideBarInfo)(pMagicSpellSideBarInfo);
+    LocalPlayerId = CPlayerManager::GetLocalPlayerId();
+    for ( i = 0; i < 8; ++i )
+    {
+      v4 = CMagic::CalculatePossibleNumberOfCastSpell(LocalPlayerId, i, 0);
+      CurrentSpellCategoryCost = CMagic::GetCurrentSpellCategoryCost(LocalPlayerId, i);
+      CurrentManaAmount = CMagic::GetCurrentManaAmount(LocalPlayerId);
+      if ( CurrentManaAmount <= 0 )
+        v7 = 0;
+      else
+        v7 = 100 * CurrentSpellCategoryCost / CurrentManaAmount;
+      *(_DWORD *)(pMagicSpellSideBarInfo + 16 * i + 12) = v4;
+      *(_DWORD *)(pMagicSpellSideBarInfo + 16 * i + 16) = v7;
+      *(_DWORD *)(pMagicSpellSideBarInfo + 16 * i + 20) = CurrentSpellCategoryCost;
+      *(_DWORD *)(pMagicSpellSideBarInfo + 16 * i + 8) = i;
+    }
+    *(_DWORD *)(pMagicSpellSideBarInfo + 4) = 26;
+    if ( _bSpecialSidebar )
+      v5 = 606;
     else
-      v9 = 100 * CurrentSpellCategoryCost / CurrentManaAmount;
-    *(_DWORD *)(v12 + 16 * i + 12) = v6;
-    *(_DWORD *)(v12 + 16 * i + 16) = v9;
-    *(_DWORD *)(v12 + 16 * i + 20) = CurrentSpellCategoryCost;
-    *(_DWORD *)(v12 + 16 * i + 8) = i;
-  }
-  *(_DWORD *)(v12 + 4) = 26;
-  result = a2;
-  if ( a2 )
-    v7 = 606;
-  else
-    v7 = 607;
-  if ( !g_pEvnEngine )
-  {
-    result = BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 620, "g_pEvnEngine != 0");
-    if ( result == 1 )
+      v5 = 607;
+    if ( !g_pEvnEngine && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 620, "g_pEvnEngine != 0") == 1 )
       __debugbreak();
+    if ( g_pEvnEngine )
+    {
+      v3 = CEvn_Event::CEvn_Event(&v12, v5, 0, pMagicSpellSideBarInfo, 0);
+      v13 = 0;
+      IEventEngine::SendAMessage(g_pEvnEngine, v3);
+      v13 = -1;
+      CEvn_Event::~CEvn_Event(&v12);
+    }
   }
-  if ( !g_pEvnEngine )
-    return result;
-  v5 = CEvn_Event::CEvn_Event(&v14, v7, 0, v12, 0);
-  v15 = 0;
-  IEventEngine::SendAMessage(g_pEvnEngine, v5);
-  v15 = -1;
-  return (unsigned int)CEvn_Event::~CEvn_Event(&v14);
 }
 
 
@@ -684,8 +666,13 @@ void  CGroupMgr::FillMagicSideBarEx(class CInfoExchange * a1, bool a2, int a3) {
   
   IGroupMgr::IGroupMgr(this);
   this->__vftable = (CGroupMgr_vtbl *)CGroupMgr::_vftable_;
-  _vec_ctor_no(this->entries, 204u, 99u, TStaticArray<unsigned short,100>::TStaticArray<unsigned short,100>);
+  _vec_ctor_no(
+    this->m_vEntries,
+    204u,
+    99u,
+    (void *(__thiscall *)(void *))TStaticArray<unsigned short,100>::TStaticArray<unsigned short,100>);
   return this;
 }
 
 
+#endif // Already implemented

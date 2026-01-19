@@ -145,7 +145,7 @@ protected:
     virtual void  ConvertEventIntoGoal(class CEntityEvent * a2);
 
     // Type information members
-private:
+public:
     ISettlerRole * role;
 
 };

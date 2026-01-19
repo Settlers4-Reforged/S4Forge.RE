@@ -1465,7 +1465,7 @@ def write_class_headers(classes, generated_headers):
             type_members = get_class_members(class_name)
             if type_members:
                 f.write("    // Type information members\n")
-                f.write("private:\n")
+                f.write("public:\n")
                 for type_str, member_name in type_members:
                     f.write(f"    {type_str} {member_name};\n")
                 f.write("\n")

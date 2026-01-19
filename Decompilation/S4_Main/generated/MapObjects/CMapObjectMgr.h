@@ -100,7 +100,7 @@ private:
     static class IEntity * * m_vEntities;
 
     // Type information members
-private:
+public:
     struct vector_of_deque_ushort * m_vLogicUpdateSlots;
     DWORD unk_4;
     DWORD unk_8;

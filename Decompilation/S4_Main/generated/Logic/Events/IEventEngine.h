@@ -72,7 +72,7 @@ public:
     bool  IsEventRecording(void);
 
     // Type information members
-private:
+public:
     struct CEvn_HandleList * EventHandleList;
     _BYTE[4] gap_8;
     _DWORD hwnd;

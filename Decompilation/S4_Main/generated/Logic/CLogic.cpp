@@ -25,16 +25,12 @@ void  CLogic::SetFillDialogInfos(void (__cdecl*)(class CInfoExchange *,bool,bool
 
 
 // address=[0x14609e0]
-// Decompiled from struct CInfoExchange *__thiscall CLogic::SetFillSideBarInfos(  CLogic *this,  void (__cdecl *a2)(struct CInfoExchange *, bool, int),  struct CInfoExchange *a3,  int a4)
+// Decompiled from void __thiscall CLogic::SetFillSideBarInfos(  CLogic *this,  void (__cdecl *a2)(struct CInfoExchange *, bool, int),  struct CInfoExchange *a3,  int a4)
 void  CLogic::SetFillSideBarInfos(void (__cdecl*)(class CInfoExchange *,bool,int) a2, class CInfoExchange * a3, int a4) {
   
-  struct CInfoExchange *result; // eax
-
   *((_DWORD *)this + 7) = a2;
-  result = a3;
   *((_DWORD *)this + 8) = a3;
   *((_DWORD *)this + 9) = a4;
-  return result;
 }
 
 

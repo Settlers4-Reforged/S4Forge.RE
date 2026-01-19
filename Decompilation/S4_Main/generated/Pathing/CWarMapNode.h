@@ -31,7 +31,7 @@ protected:
     void  SetPrevNext(int a2, int a3);
 
     // Type information members
-private:
+public:
     BYTE prev;
     BYTE unk_1d;
     WORD next;

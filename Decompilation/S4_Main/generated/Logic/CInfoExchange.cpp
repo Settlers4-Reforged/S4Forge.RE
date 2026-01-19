@@ -23,8 +23,8 @@ void  CInfoExchange::Clear(void) {
 // Decompiled from CInfoExchange *__thiscall CInfoExchange::CInfoExchange(CInfoExchange *this)
  CInfoExchange::CInfoExchange(void) {
   
-  *(_DWORD *)this = &CInfoExchange::_vftable_;
-  *((_DWORD *)this + 1) = 0;
+  this->__vftable = (CInfoExchange_vtbl *)&CInfoExchange::_vftable_;
+  this->m_iUnknown[0] = 0;
   return this;
 }
 

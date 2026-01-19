@@ -1,3 +1,4 @@
+#if FALSE
 #include "IMessageTracer.h"
 
 // Definitions for class IMessageTracer
@@ -218,3 +219,4 @@ struct IMessageTracer::STraceMsg *  IMessageTracer::GetNextTraceMsg(void) {
 }
 
 
+#endif // Already implemented

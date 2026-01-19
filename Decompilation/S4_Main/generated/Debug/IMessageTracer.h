@@ -43,7 +43,7 @@ protected:
     struct STraceMsg *  IMessageTracer::GetNextTraceMsg(void);
 
     // Type information members
-private:
+public:
     int m_iCurrentMessage;
     int m_iMaxMessage;
     IMessageTracer::STraceMsg[16384] m_aMessages;

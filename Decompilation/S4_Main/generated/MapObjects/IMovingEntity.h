@@ -88,7 +88,7 @@ protected:
     void  DecDistance(unsigned int a2);
 
     // Type information members
-private:
+public:
     DWORD unk_3c;
     CHAR unk_40;
     BYTE unk_41;

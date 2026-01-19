@@ -1,3 +1,4 @@
+#if FALSE
 #include "IS4Chunk.h"
 
 // Definitions for class IS4Chunk
@@ -6,8 +7,9 @@
 // Decompiled from IS4Chunk *__thiscall IS4Chunk::IS4Chunk(IS4Chunk *this)
  IS4Chunk::IS4Chunk(void) {
   
-  *(_DWORD *)this = IS4Chunk::_vftable_;
+  this->__vftable = (struct IS4Chunk_vtbl *)IS4Chunk::_vftable_;
   return this;
 }
 
 
+#endif // Already implemented

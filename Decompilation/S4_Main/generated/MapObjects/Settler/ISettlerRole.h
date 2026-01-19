@@ -118,7 +118,7 @@ protected:
     virtual void  NewDestinationEx(class CSettler * a2, class std::list<class CEntityTask,class std::allocator<class CEntityTask> > & a3, int a4, int a5, int a6);
 
     // Type information members
-private:
+public:
     CHAR task;
     BYTE settlerWalk;
     BYTE walkspeed;

@@ -6,10 +6,10 @@
 class IGroupMgr : public IS4ChunkObject {
 public:
     // address=[0x1550a40]
-    static void __cdecl FillGroupSideBar(class CInfoExchange * a1, bool a2, int a3);
+    static void __cdecl FillGroupSideBar(class CInfoExchange * pInfoExchange, bool a2, int a3);
 
     // address=[0x1550a60]
-    static void __cdecl FillMagicSideBar(class CInfoExchange * a1, bool a2, int a3);
+    static void __cdecl FillMagicSideBar(class CInfoExchange * _pInfoExchange, bool _bSpecialSidebar, int unused);
 
     // address=[0x15525e0]
      IGroupMgr(void);

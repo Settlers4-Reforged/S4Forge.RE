@@ -181,7 +181,7 @@ protected:
     static struct SGfxObjectInfo m_sGfxInfo;
 
     // Type information members
-private:
+public:
     int m_iUniqueId;
     WORD m_nEntityId;
     enum IEntity::EntityType m_objType;

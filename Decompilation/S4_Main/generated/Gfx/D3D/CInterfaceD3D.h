@@ -135,7 +135,7 @@ public:
     int  GetCacheRetrys(void);
 
     // Type information members
-private:
+public:
     _DWORD field_0;
     IDirectDraw7 * DDraw;
     struct SurfaceClipper * Clipper1;

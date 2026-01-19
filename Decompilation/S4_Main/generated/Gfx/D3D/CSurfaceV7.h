@@ -78,7 +78,7 @@ public:
     virtual  ~CSurfaceV7(void);
 
     // Type information members
-private:
+public:
     LPDIRECTDRAWSURFACE7 innerSurface;
     int field_8;
     char field_C;

@@ -25,7 +25,7 @@ private:
     void  CreateTextForEmptyStrings(void);
 
     // Type information members
-private:
+public:
     wchar_t ** strings;
 
 };

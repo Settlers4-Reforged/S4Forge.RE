@@ -9,7 +9,7 @@ public:
      IUnknown(void);
 
     // Type information members
-private:
+public:
     struct IUnknownVtbl * lpVtbl;
 
 };

@@ -12,6 +12,10 @@ protected:
     // address=[0x1415220]
      CInfoExchange(void);
 
+    // Type information members
+public:
+    DWORD[] m_iUnknown;
+
 };
 
 

@@ -82,7 +82,7 @@ protected:
     int  SetLastLogicUpdate(int a2);
 
     // Type information members
-private:
+public:
     BYTE m_cFrame;
     BYTE m_cAttackerPlayerId;
     WORD m_wJobPart;

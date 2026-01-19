@@ -72,7 +72,7 @@ private:
     void  ParseRootElement(class AdvXMLParser::Parser & a2);
 
     // Type information members
-private:
+public:
     struct DocumentVtbl * lpVtbl;
 
 };

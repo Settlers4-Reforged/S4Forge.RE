@@ -36,7 +36,7 @@ int __cdecl CPlayerManager::LastPlayerId(void) {
 
 
 // address=[0x13736c0]
-// Decompiled from int sub_17736C0()
+// Decompiled from int CPlayerManager::GetLocalPlayerId()
 int __cdecl CPlayerManager::GetLocalPlayerId(void) {
   
   return CPlayerManager::m_iLocalPlayer;

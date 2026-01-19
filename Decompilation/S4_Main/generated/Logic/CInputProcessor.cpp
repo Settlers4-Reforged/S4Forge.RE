@@ -2971,12 +2971,8 @@ bool  CInputProcessor::InitMagicSideBar(class CEvn_Logic * a2) {
 // Decompiled from char __thiscall CInputProcessor::InitGroupSideBar(CInputProcessor *this, struct CEvn_Logic *a2)
 bool  CInputProcessor::InitGroupSideBar(class CEvn_Logic * a2) {
   
-  IGroupMgr::FillGroupSideBar(&g_cGroupSideBarInfo, 0, 0);
-  CLogic::SetFillSideBarInfos(
-    g_pLogic,
-    (void (__cdecl *)(struct CInfoExchange *, bool, int))IGroupMgr::FillGroupSideBar,
-    (struct CInfoExchange *)&g_cGroupSideBarInfo,
-    0);
+  IGroupMgr::FillGroupSideBar((struct CInfoExchange *)&g_cGroupSideBarInfo, 0, 0);
+  CLogic::SetFillSideBarInfos(g_pLogic, IGroupMgr::FillGroupSideBar, (struct CInfoExchange *)&g_cGroupSideBarInfo, 0);
   return 0;
 }
 

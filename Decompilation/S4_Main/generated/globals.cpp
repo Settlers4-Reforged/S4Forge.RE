@@ -37795,7 +37795,7 @@ public: class TArgv<unsigned int,class std::vector<unsigned int,class std::alloc
 
 
 // address=[0x1552570]
-// Decompiled from void *__thiscall TStaticArray<unsigned short,100>::TStaticArray<unsigned short,100>(void *this)
+// Decompiled from void *__thiscall TStaticArray<unsigned short,100>::TStaticArray<unsigned short,100>(  CGroupMgr::TStaticArray100short *this)
 public: __thiscall TStaticArray<unsigned short,100>::TStaticArray<unsigned short,100>(void) {
   
   TStaticArray<unsigned short,100>::Init(this);
@@ -37835,20 +37835,18 @@ public: int __thiscall TStaticArray<unsigned short,100>::FindEntry(unsigned shor
 
 
 // address=[0x1552770]
-// Decompiled from void __thiscall TStaticArray<unsigned short,100>::Init(void *this)
+// Decompiled from void __thiscall TStaticArray<unsigned short,100>::Init(CGroupMgr::TStaticArray100short *this)
 public: void __thiscall TStaticArray<unsigned short,100>::Init(void) {
   
-  *(_DWORD *)this = 0;
+  this->size = 0;
 }
 
 
 // address=[0x1552790]
-// Decompiled from int __thiscall TStaticArray<unsigned short,100>::PopBack(int *this)
+// Decompiled from void __thiscall TStaticArray<unsigned short,100>::PopBack(CGroupMgr::TStaticArray100short *this)
 public: void __thiscall TStaticArray<unsigned short,100>::PopBack(void) {
   
-  int result; // eax
-
-  if ( *this <= 0
+  if ( (int)this->size <= 0
     && BBSupportDbgReport(
          2,
          "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\BaseLib\\Include\\Misc\\Templates.h",
@@ -37857,18 +37855,14 @@ public: void __thiscall TStaticArray<unsigned short,100>::PopBack(void) {
   {
     __debugbreak();
   }
-  result = *this - 1;
-  *this = result;
-  return result;
+  --this->size;
 }
 
 
 // address=[0x15527e0]
-// Decompiled from int *__thiscall TStaticArray<unsigned short,100>::PushBack(struct CGroupMgr::TStaticArray100short *this, _WORD *a2)
+// Decompiled from void __thiscall TStaticArray<unsigned short,100>::PushBack(struct CGroupMgr::TStaticArray100short *this, _WORD *a2)
 public: void __thiscall TStaticArray<unsigned short,100>::PushBack(unsigned short const & a2) {
   
-  int *result; // eax
-
   if ( (int)this->size >= 100
     && BBSupportDbgReport(
          2,
@@ -37878,10 +37872,7 @@ public: void __thiscall TStaticArray<unsigned short,100>::PushBack(unsigned shor
   {
     __debugbreak();
   }
-  this->entry[this->size] = *a2;
-  result = (int *)this;
-  ++this->size;
-  return result;
+  this->entry[this->size++] = *a2;
 }
 
 
@@ -37900,12 +37891,10 @@ public: bool __thiscall TStaticArray<unsigned short,100>::RemoveEntry(unsigned s
 
 
 // address=[0x15528a0]
-// Decompiled from _DWORD *__thiscall TStaticArray<unsigned short,100>::RemoveIndex(_DWORD *this, int a2)
+// Decompiled from void __thiscall TStaticArray<unsigned short,100>::RemoveIndex(CGroupMgr::TStaticArray100short *this, int a2)
 public: void __thiscall TStaticArray<unsigned short,100>::RemoveIndex(int a2) {
   
-  _DWORD *result; // eax
-
-  if ( (a2 >= *this || a2 < 0)
+  if ( (a2 >= (signed int)this->size || a2 < 0)
     && BBSupportDbgReport(
          2,
          "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\BaseLib\\Include\\Misc\\Templates.h",
@@ -37914,12 +37903,8 @@ public: void __thiscall TStaticArray<unsigned short,100>::RemoveIndex(int a2) {
   {
     __debugbreak();
   }
-  result = this;
-  if ( a2 >= --*this )
-    return result;
-  result = this;
-  *((_WORD *)this + a2 + 2) = *((_WORD *)this + *this + 2);
-  return result;
+  if ( a2 < (signed int)--this->size )
+    this->entry[a2] = this->entry[this->size];
 }
 
 

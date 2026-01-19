@@ -32,7 +32,7 @@ public:
     static class AdvXMLParser::NodeContainer & null;
 
     // Type information members
-private:
+public:
     struct NodeVtbl * lpVtbl;
 
 };

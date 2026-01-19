@@ -92,7 +92,7 @@ int  IEntity::UniqueId(void)const {
 
 
 // address=[0x130f520]
-// Decompiled from DWORD __thiscall IEntity::WarriorType(IEntity *this)
+// Decompiled from int __thiscall IEntity::WarriorType(IEntity *this)
 int  IEntity::WarriorType(void)const {
   
   return this->m_iFlags & 0xF;
@@ -188,7 +188,7 @@ bool  IEntity::IsVisible(void)const {
 
 
 // address=[0x14d8790]
-// Decompiled from void *__thiscall IEntity::SetGroupFlagBits(std::_Ref_count_base *this, const struct type_info *a2)
+// Decompiled from int __thiscall IEntity::SetGroupFlagBits(std::_Ref_count_base *this, const struct type_info *a2)
 int  IEntity::SetGroupFlagBits(int a2) {
   
   return 0;

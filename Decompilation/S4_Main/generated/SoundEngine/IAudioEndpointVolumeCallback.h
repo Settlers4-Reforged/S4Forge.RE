@@ -9,7 +9,7 @@ public:
      IAudioEndpointVolumeCallback(void);
 
     // Type information members
-private:
+public:
     struct IAudioEndpointVolumeCallbackVtbl * lpVtbl;
 
 };

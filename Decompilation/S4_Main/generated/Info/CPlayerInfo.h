@@ -33,7 +33,7 @@ public:
      ~CPlayerInfo(void);
 
     // Type information members
-private:
+public:
     DWORD race;
     DWORD startX;
     DWORD startY;
