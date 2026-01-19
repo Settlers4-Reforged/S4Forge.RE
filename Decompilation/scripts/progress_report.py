@@ -175,12 +175,13 @@ def main():
     )
     parser.add_argument(
         'header_image',
+        default='./report/logo.png'
         help='Path to the header image to use'
     )
     parser.add_argument(
         '-o', '--output',
-        default='progress_report.png',
-        help='Output image path (default: progress_report.png)'
+        default='./report/report.png',
+        help='Output image path (default: ./report/report.png)'
     )
     parser.add_argument(
         '--generated-dir',
