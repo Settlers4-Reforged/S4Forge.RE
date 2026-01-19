@@ -7,7 +7,7 @@
 #include "LoadSave/CMapFile.h"
 #include "IEntity.h"
 
-extern class CMapObjectMgr *g_cMapObjectMgr;
+extern class CMapObjectMgr *g_pMapObjectMgr;
 
 class CMapObjectMgr {
 public:

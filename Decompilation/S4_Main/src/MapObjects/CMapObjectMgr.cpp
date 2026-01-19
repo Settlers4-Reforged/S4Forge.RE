@@ -16,6 +16,8 @@
 
 // Definitions for class CMapObjectMgr
 
+CMapObjectMgr *g_cMapObjectMgr;
+
 // address=[0x12fd030]
 // Decompiled from IEntity *__cdecl CMapObjectMgr::EntityPtr(int a1)
 class IEntity *__cdecl CMapObjectMgr::EntityPtr(int a1)

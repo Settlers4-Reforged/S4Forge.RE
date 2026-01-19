@@ -4,6 +4,8 @@
 
 // Definitions for class IMessageTracer
 
+IMessageTracer *g_pMsgTracer;
+
 // address=[0x1301740]
 // Decompiled from void __thiscall IMessageTracer::PushFormatedInts(IMessageTracer *this, const char *message, DWORD arg1)
 void IMessageTracer::PushFormatedInts(char const *message, int arg1)
