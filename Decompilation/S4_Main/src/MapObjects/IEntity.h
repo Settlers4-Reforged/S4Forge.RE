@@ -2,6 +2,7 @@
 #define IENTITY_H
 
 #include "LoadSave/CPersistence.h"
+#include "Pathing/CWarMapNode.h"
 
 #include "defines.h"
 
@@ -19,10 +20,12 @@ enum EntityFlag : int
   EntityFlag_Ready = 0x2000000,
   EntityFlag_AliveMask = 0x3000000,
   EntityFlag_Died = 0x4000000,
-  EntityFlag_Registered = 0x20000000,
+  EntityFlag_Registered = 0x20000000, // aka. registered for logic update in x ticks - see CMapObjectMgr
   EntityFlag_GlobalOffered = 0x40000000,
 };
 
+/// @brief Current entity attacker id for damage handling
+extern int g_CurrentEntityAttacker;
 
 class IEntity : public CPersistence {
 public:
@@ -82,6 +85,8 @@ public:
 
     // address=[0x1460630]
     int  Hitpoints(void)const;
+
+    virtual struct SGfxObjectInfo * __thiscall GetGfxInfos(void) = 0;
 
     // address=[0x14d8640]
     virtual int  ClearGroupFlagBits(int a2);
@@ -211,7 +216,7 @@ private:
     BYTE unk_e;
     BYTE unk_f;
     struct CAIEntityInfo * m_psAIEntityInfo;
-    int m_iFlags;
+    int m_iFlags; //EntityFlag
     int m_uPackedXY;
     CWarMapNode m_warMapNode;
     union {

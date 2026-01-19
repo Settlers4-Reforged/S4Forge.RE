@@ -361,6 +361,8 @@ void IEntity::Decrease(int byAmount)
   }
 }
 
+int g_CurrentEntityAttacker;
+
 // address=[0x154b8b0]
 // Decompiled from void __thiscall IEntity::Decrease(IEntity *this, int a2, int attackerId)
 void IEntity::Decrease(int a2, int attackerId)

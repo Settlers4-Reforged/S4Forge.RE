@@ -1,4 +1,4 @@
-#include "MapObjects/SPoint.h"
+#include "../MapObjects/SPoint.h"
 
 namespace Y16X16
 {

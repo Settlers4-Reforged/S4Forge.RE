@@ -1,6 +1,5 @@
 #include "helper.h"
 #include "defines.h"
-#include "MapObjects/SPoint.h"
 
 // address=[0x13066c0]
 bool __cdecl Grid::InQuadrat(int grid, int a2, int a3)
