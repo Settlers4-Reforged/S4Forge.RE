@@ -1,0 +1,64 @@
+name: Update Progress Report
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  update-report:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install Pillow
+      
+      - name: Run progress report script
+        id: progress
+        working-directory: Decompilation/scripts
+        run: |
+          python progress_report.py report/logo.png -o report/report.png | tee output.txt
+          
+          # Extract progress numbers from output
+          PROGRESS_LINE=$(grep "Progress:" output.txt)
+          echo "progress_info=$PROGRESS_LINE" >> $GITHUB_OUTPUT
+          
+          # Extract just the numbers for the commit message
+          COMPLETED=$(echo "$PROGRESS_LINE" | grep -oP '\d+(?=/)')
+          TOTAL=$(echo "$PROGRESS_LINE" | grep -oP '(?<=/)\d+')
+          PERCENTAGE=$(echo "$PROGRESS_LINE" | grep -oP '\d+\.\d+(?=%)')
+          
+          echo "completed=$COMPLETED" >> $GITHUB_OUTPUT
+          echo "total=$TOTAL" >> $GITHUB_OUTPUT
+          echo "percentage=$PERCENTAGE" >> $GITHUB_OUTPUT
+      
+      - name: Check for changes
+        id: check_changes
+        run: |
+          if git diff --quiet Decompilation/scripts/report/report.png; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Commit and push changes
+        if: steps.check_changes.outputs.changed == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add Decompilation/scripts/report/report.png
+          git commit -m "Update progress report: ${{ steps.progress.outputs.completed }}/${{ steps.progress.outputs.total }} files (${{ steps.progress.outputs.percentage }}%)"
+          git push
