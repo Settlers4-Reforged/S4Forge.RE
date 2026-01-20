@@ -224,7 +224,7 @@ bool  CStateMDBriefing::OnEvent(class CEvn_Event & a2) {
   int v58; // [esp+2D8h] [ebp-4h]
 
   v51 = this;
-  event = a2->event;
+  event = a2->m_iEventId;
   if ( event <= 0x78 )
   {
     switch ( event )
@@ -233,7 +233,7 @@ bool  CStateMDBriefing::OnEvent(class CEvn_Event & a2) {
         *((_BYTE *)v51 + 12) = 0;
         return 1;
       case 0xBu:
-        if ( (unsigned __int16)a2->wparam == 27 )
+        if ( (unsigned __int16)a2->m_wParam == 27 )
         {
           v37 = CEvn_Event::CEvn_Event(&v55, 0x1B75u, 0, 0, 0);
           v58 = 0;

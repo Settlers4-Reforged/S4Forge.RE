@@ -220,7 +220,7 @@ bool  CStateMDRandomMapParameters::OnEvent(class CEvn_Event & a2) {
   int v65; // [esp+114h] [ebp-4h]
 
   v57 = this;
-  event = a2->event;
+  event = a2->m_iEventId;
   if ( event > 0x1B6A )
   {
     event -= 7019;
@@ -368,12 +368,12 @@ bool  CStateMDRandomMapParameters::OnEvent(class CEvn_Event & a2) {
           g_pMissionCD,
           0,
           GuiDlgMainscreenProc);
-        dword_403191C = a2->wparam;
+        dword_403191C = a2->m_wParam;
         CGameStateHandler::Switch((int)CStateLobbyMapSettings::DynamicCreateFunc, *((unsigned __int8 *)v57 + 4));
         result = 1;
         break;
       case 2u:
-        if ( a2->wparam )
+        if ( a2->m_wParam )
         {
           if ( dword_4031F88 < 1024 )
             dword_4031F88 += 64;
@@ -384,7 +384,7 @@ bool  CStateMDRandomMapParameters::OnEvent(class CEvn_Event & a2) {
         }
         goto LABEL_134;
       case 3u:
-        if ( a2->wparam )
+        if ( a2->m_wParam )
         {
           if ( (dword_4031F94 & 3u) < 3 )
             ++dword_4031F94;
@@ -395,7 +395,7 @@ bool  CStateMDRandomMapParameters::OnEvent(class CEvn_Event & a2) {
         }
         goto LABEL_134;
       case 4u:
-        if ( a2->wparam )
+        if ( a2->m_wParam )
         {
           if ( dword_4031F8C < 90 )
             dword_4031F8C += 10;
@@ -406,7 +406,7 @@ bool  CStateMDRandomMapParameters::OnEvent(class CEvn_Event & a2) {
         }
         goto LABEL_134;
       case 5u:
-        if ( a2->wparam )
+        if ( a2->m_wParam )
         {
           if ( dword_4031F90 < 15 )
             dword_4031F90 += 5;
@@ -497,7 +497,7 @@ CStateMDRandomMapParameters__OnEvent___def_18C873C:
     switch ( event )
     {
       case 0u:
-        if ( (unsigned __int16)a2->wparam != 27 )
+        if ( (unsigned __int16)a2->m_wParam != 27 )
           goto CStateMDRandomMapParameters__OnEvent___def_18C873C;
         if ( byte_403206C )
         {
@@ -517,7 +517,7 @@ CStateMDRandomMapParameters__OnEvent___def_18C873C:
         }
         return 1;
       case 0x38u:
-        if ( a2->wparam )
+        if ( a2->m_wParam )
         {
           if ( dword_4031928 == dword_4031924 )
             return 1;
@@ -540,7 +540,7 @@ CStateMDRandomMapParameters__OnEvent___def_18C873C:
         }
         break;
       case 0x39u:
-        if ( a2->wparam )
+        if ( a2->m_wParam )
         {
           if ( dword_4031924 < 8 )
             ++dword_4031924;
@@ -554,7 +554,7 @@ CStateMDRandomMapParameters__OnEvent___def_18C873C:
         v60 = 0;
         do
         {
-          if ( a2->wparam )
+          if ( a2->m_wParam )
           {
             if ( ++dword_4031934 > 6 )
               dword_4031934 = 1;
@@ -605,7 +605,7 @@ CStateMDRandomMapParameters__OnEvent___def_18C873C:
         while ( !v60 );
         break;
       case 0x3Bu:
-        if ( a2->wparam )
+        if ( a2->m_wParam )
         {
           if ( dword_4031930 == 3 )
             return 1;
@@ -619,14 +619,14 @@ CStateMDRandomMapParameters__OnEvent___def_18C873C:
         }
         break;
       case 0x40u:
-        if ( a2->wparam )
+        if ( a2->m_wParam )
           byte_403199C |= 1u;
         else
           byte_403199C &= ~1u;
         v53 = byte_403199C;
         return 1;
       case 0x41u:
-        if ( a2->wparam )
+        if ( a2->m_wParam )
         {
           byte_403199D = 1;
           v52 = 1;

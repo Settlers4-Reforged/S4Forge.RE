@@ -197,7 +197,7 @@ bool  CStateVideo::OnEvent(class CEvn_Event & a2) {
   
   char result; // al
 
-  switch ( a2->event )
+  switch ( a2->m_iEventId )
   {
     case 3:
       if ( *((_BYTE *)this + 8) )
@@ -210,7 +210,7 @@ bool  CStateVideo::OnEvent(class CEvn_Event & a2) {
       result = 1;
       break;
     case 0xD:
-      if ( a2->wparam == 27 )
+      if ( a2->m_wParam == 27 )
       {
         if ( *((_BYTE *)this + 8) )
           CStateVideo::EndVideo(this);
@@ -224,7 +224,7 @@ bool  CStateVideo::OnEvent(class CEvn_Event & a2) {
     case 0x16:
       if ( *((_BYTE *)this + 8) )
       {
-        if ( a2->wparam )
+        if ( a2->m_wParam )
           CStateVideo::UnPauseVideo(this);
         else
           CStateVideo::PauseVideo(this);

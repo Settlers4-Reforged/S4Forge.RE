@@ -79,7 +79,7 @@ public:
     int logFileHandle;
     BYTE loggingEnabled;
     _BYTE[3] pad_15;
-    int tick;
+    int * m_pTick;
     char m_bLocked;
     _BYTE[3] gap_1D;
     int field_20;

@@ -258,7 +258,7 @@ bool  CStateXMD3Briefing::OnEvent(class CEvn_Event & a2) {
   CEvn_Event v14; // [esp+70h] [ebp-28h] BYREF
   int v15; // [esp+94h] [ebp-4h]
 
-  event = a2->event;
+  event = a2->m_iEventId;
   if ( event <= 0x78 )
   {
     switch ( event )
@@ -267,7 +267,7 @@ bool  CStateXMD3Briefing::OnEvent(class CEvn_Event & a2) {
         *((_BYTE *)this + 12) = 0;
         return 1;
       case 0xBu:
-        if ( (unsigned __int16)a2->wparam == 27 )
+        if ( (unsigned __int16)a2->m_wParam == 27 )
         {
           v6 = CEvn_Event::CEvn_Event(&v14, 0x2523u, 0, 0, 0);
           v15 = 0;

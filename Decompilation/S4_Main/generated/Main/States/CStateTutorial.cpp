@@ -118,11 +118,11 @@ bool  CStateTutorial::OnEvent(class CEvn_Event & a2) {
   int v43; // [esp+27Ch] [ebp-4h]
 
   v29 = this;
-  v37 = a2->event - 13;
+  v37 = a2->m_iEventId - 13;
   switch ( v37 )
   {
     case 0:
-      if ( a2->wparam == 27 )
+      if ( a2->m_wParam == 27 )
       {
         v28 = CEvn_Event::CEvn_Event(&v41, 0x69u, 0, 0, 0);
         v43 = 0;
@@ -133,7 +133,7 @@ bool  CStateTutorial::OnEvent(class CEvn_Event & a2) {
       result = 1;
       break;
     case 91:
-      if ( a2->wparam >= 0xCu
+      if ( a2->m_wParam >= 0xCu
         && BBSupportDbgReport(
              2,
              "main\\states\\StateTutorial.cpp",
@@ -142,7 +142,7 @@ bool  CStateTutorial::OnEvent(class CEvn_Event & a2) {
       {
         __debugbreak();
       }
-      v21 = a2->wparam + 1;
+      v21 = a2->m_wParam + 1;
       v3 = (char *)std::wstring::c_str((_Cnd_internal_imp_t *)&unk_40320F4);
       swprintf((char *)Buffer, v3, v21);
       C = operator new(0x620u);

@@ -6,7 +6,7 @@
 // Decompiled from int __thiscall CGuiGameState::OnEvent(CGuiGameState *this, struct CEvn_Event *a2)
 bool  CGuiGameState::OnEvent(class CEvn_Event & a2) {
   
-  if ( a2->event == 3 )
+  if ( a2->m_iEventId == 3 )
     CGuiGameState::AlignDialogsInScreenCenter(this);
   return CGameState::OnEvent((int)a2);
 }

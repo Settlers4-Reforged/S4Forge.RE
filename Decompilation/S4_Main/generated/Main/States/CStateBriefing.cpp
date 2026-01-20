@@ -229,11 +229,11 @@ bool  CStateBriefing::OnEvent(class CEvn_Event & a2) {
   int v61; // [esp+2ECh] [ebp-4h]
 
   v54 = this;
-  v50 = a2->event - 11;
+  v50 = a2->m_iEventId - 11;
   switch ( v50 )
   {
     case 0:
-      if ( (unsigned __int16)a2->wparam != 27 )
+      if ( (unsigned __int16)a2->m_wParam != 27 )
         goto CStateBriefing__OnEvent___def_18A23F6;
       v26 = CEvn_Event::CEvn_Event(&v58, 0x70u, 0, 0, 0);
       v61 = 0;

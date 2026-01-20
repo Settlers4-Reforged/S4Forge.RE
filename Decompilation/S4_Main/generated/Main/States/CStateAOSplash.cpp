@@ -82,10 +82,10 @@ bool  CStateAOSplash::OnEvent(class CEvn_Event & a2) {
   
   int event; // [esp+8h] [ebp-4h]
 
-  event = a2->event;
+  event = a2->m_iEventId;
   if ( event == 11 )
   {
-    if ( (unsigned __int16)a2->wparam == 27 )
+    if ( (unsigned __int16)a2->m_wParam == 27 )
     {
       g_bGuiSplashInitDone = 0;
       CSoundManager::StopMusic(g_pSoundManager);

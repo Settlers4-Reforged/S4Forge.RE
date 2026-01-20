@@ -262,15 +262,15 @@ bool  CVoiceChat::OnEvent(class CEvn_Event & a2) {
   
   int event; // [esp+8h] [ebp-8h]
 
-  event = a2->event;
+  event = a2->m_iEventId;
   if ( event == 107 )
   {
-    CVoiceChat::ToggleRecording(this, a2->wparam != 0);
+    CVoiceChat::ToggleRecording(this, a2->m_wParam != 0);
     return 1;
   }
   else if ( event == 4004 )
   {
-    CVoiceChat::ReceivePacket(a2[1].__vftable, BYTE2(a2[1].event));
+    CVoiceChat::ReceivePacket(a2[1].__vftable, BYTE2(a2[1].m_iEventId));
     return 1;
   }
   else

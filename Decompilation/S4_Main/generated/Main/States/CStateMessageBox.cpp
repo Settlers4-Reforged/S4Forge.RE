@@ -90,10 +90,10 @@ bool  CStateMessageBox::OnEvent(class CEvn_Event & a2) {
   CEvn_Event v6; // [esp+18h] [ebp-28h] BYREF
   int v7; // [esp+3Ch] [ebp-4h]
 
-  event = a2->event;
+  event = a2->m_iEventId;
   if ( event == 11 )
   {
-    wparam = (unsigned __int16)a2->wparam;
+    wparam = (unsigned __int16)a2->m_wParam;
     if ( wparam == 27 || wparam == 32 )
     {
       v3 = CEvn_Event::CEvn_Event(&v6, 0x72u, 0, 0, 0);

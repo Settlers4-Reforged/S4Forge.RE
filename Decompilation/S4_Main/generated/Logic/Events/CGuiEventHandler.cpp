@@ -106,7 +106,7 @@ bool  CGuiEventHandler::OnEvent(class CEvn_Event & a2) {
   int v32; // [esp+148h] [ebp-4h]
 
   v23 = this;
-  switch ( a2->event )
+  switch ( a2->m_iEventId )
   {
     case 0x15:
       if ( g_pGfxEngine )
@@ -171,14 +171,14 @@ bool  CGuiEventHandler::OnEvent(class CEvn_Event & a2) {
       CGuiEventHandler::RecalcDialogPos(v23, 1);
       return 0;
     default:
-      if ( a2->event >= 0x258u && a2->event <= 0x27Bu )
+      if ( a2->m_iEventId >= 0x258u && a2->m_iEventId <= 0x27Bu )
       {
-        if ( a2->event == 626 )
+        if ( a2->m_iEventId == 626 )
         {
           CGuiEventHandler::RecalcDialogPos(v23, 0);
           return 1;
         }
-        else if ( a2->event == 609 )
+        else if ( a2->m_iEventId == 609 )
         {
           if ( *((_DWORD *)v23 + 7) != -1 )
             return 1;
@@ -188,12 +188,12 @@ bool  CGuiEventHandler::OnEvent(class CEvn_Event & a2) {
           v5 = v31[2] - v31[0] + 1;
           OutputWidth = IGfxEngine::GetOutputWidth((IGfxEngine *)g_pGfxEngine);
           IGuiEngine::SetDialogRenderPos((IGuiEngine *)g_pGUIEngine, 72, (OutputWidth - 210) / 2 - v5 / 2 + 210, 10);
-          UpdateGuiDlgWinLoss(a2->wparam);
+          UpdateGuiDlgWinLoss(a2->m_wParam);
           return 1;
         }
         else
         {
-          v21 = a2->event - 601;
+          v21 = a2->m_iEventId - 601;
           switch ( v21 )
           {
             case 0:
@@ -257,7 +257,7 @@ bool  CGuiEventHandler::OnEvent(class CEvn_Event & a2) {
               return 1;
             case 4:
               if ( *((_DWORD *)v23 + 5) != -1 )
-                IGuiEngine::SetSliderPosition((IGuiEngine *)g_pGUIEngine, *((_DWORD *)v23 + 5), 613, a2->lparam);
+                IGuiEngine::SetSliderPosition((IGuiEngine *)g_pGUIEngine, *((_DWORD *)v23 + 5), 613, a2->m_lParam);
               return 1;
             case 5:
               if ( *((_DWORD *)v23 + 4) != -1 )
@@ -283,12 +283,12 @@ bool  CGuiEventHandler::OnEvent(class CEvn_Event & a2) {
                 CEvn_Event::~CEvn_Event(&v27);
               }
               PlayGuiSound(1);
-              if ( a2->lparam )
+              if ( a2->m_lParam )
                 v16 = 1712;
               else
                 v16 = 1711;
               v12 = v16;
-              v4 = g_pStringEngine->GetString(g_pStringEngine, a2->wparam);
+              v4 = g_pStringEngine->GetString(g_pStringEngine, a2->m_wParam);
               IGuiEngine::SetText((void *)g_pGUIEngine, *((_DWORD *)v23 + 10), v16, v4);
               return 1;
             case 11:
@@ -354,10 +354,10 @@ CGuiEventHandler__OnEvent___def_179DF97:
               }
               else
               {
-                if ( a2->event != 633 )
+                if ( a2->m_iEventId != 633 )
                   PlayGuiSound(5);
 LABEL_134:
-                if ( (unsigned __int16)a2->lparam )
+                if ( (unsigned __int16)a2->m_lParam )
                   *((_BYTE *)v23 + 65) = 1;
                 if ( *((_BYTE *)v23 + 64) )
                 {
@@ -365,11 +365,11 @@ LABEL_134:
                 }
                 else
                 {
-                  if ( a2->event != 616 && a2->event != 633 )
+                  if ( a2->m_iEventId != 616 && a2->m_iEventId != 633 )
                   {
-                    if ( HIWORD(a2->lparam) )
+                    if ( HIWORD(a2->m_lParam) )
                     {
-                      if ( a2->event != 634 )
+                      if ( a2->m_iEventId != 634 )
                         PlayGuiSound(4);
                     }
                   }
@@ -379,7 +379,7 @@ LABEL_134:
                   }
                   else
                   {
-                    if ( a2->event != 633 && a2->event != 634 )
+                    if ( a2->m_iEventId != 633 && a2->m_iEventId != 634 )
                       PlayGuiSound(1);
                     UpdateGuiDlgMessages(a2);
                     result = 1;
@@ -401,7 +401,7 @@ LABEL_134:
               IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, v8[0], (bool (__cdecl *)(int, int, int))v8[1]);
               if ( !*((_BYTE *)v23 + 64) )
               {
-                v18 = a2->wparam != 0;
+                v18 = a2->m_wParam != 0;
                 v22 = v18;
                 v17 = v18;
                 CEvn_Event::CEvn_Event(&v30, 0x1773u, v17, 0, 0);
@@ -437,7 +437,7 @@ LABEL_134:
             case 21:
               if ( !*((_BYTE *)v23 + 64) )
                 return 1;
-              if ( a2->lparam == 1 )
+              if ( a2->m_lParam == 1 )
               {
                 if ( *((_DWORD *)v23 + 14) == -1 )
                 {
@@ -447,8 +447,8 @@ LABEL_134:
                 IGuiEngine::MoveDialogTo(
                   (IGuiEngine *)g_pGUIEngine,
                   57,
-                  HIWORD(a2->wparam),
-                  (unsigned __int16)a2->wparam);
+                  HIWORD(a2->m_wParam),
+                  (unsigned __int16)a2->m_wParam);
               }
               else if ( *((_DWORD *)v23 + 14) == 57 )
               {
@@ -458,7 +458,7 @@ LABEL_134:
               return 1;
             case 22:
               if ( *((_DWORD *)v23 + 5) != -1 )
-                UpdateGuiDlgMinimap(a2->wparam);
+                UpdateGuiDlgMinimap(a2->m_wParam);
               return 1;
             case 26:
               if ( *((_DWORD *)v23 + 15) != -1 )
@@ -655,7 +655,11 @@ bool  CGuiEventHandler::HandleMsgKeyPress(class CEvn_Event & a2) {
   CEvn_Event v8; // [esp+5Ch] [ebp-28h] BYREF
   int v9; // [esp+80h] [ebp-4h]
 
-  if ( a2->wparam != 13 || (a2->lparam & 4) != 0 || (a2->lparam & 8) != 0 || *((_BYTE *)this + 64) || !g_pEvnEngine )
+  if ( a2->m_wParam != 13
+    || (a2->m_lParam & 4) != 0
+    || (a2->m_lParam & 8) != 0
+    || *((_BYTE *)this + 64)
+    || !g_pEvnEngine )
   {
     if ( *((_BYTE *)this + 64) )
     {
@@ -663,7 +667,7 @@ bool  CGuiEventHandler::HandleMsgKeyPress(class CEvn_Event & a2) {
     }
     else
     {
-      switch ( a2->wparam )
+      switch ( a2->m_wParam )
       {
         case 'A':
         case 'a':
@@ -710,7 +714,7 @@ bool  CGuiEventHandler::HandleMsgKeyPress(class CEvn_Event & a2) {
           break;
         case 'Q':
         case 'q':
-          if ( (a2->lparam & 0x10) != 0 )
+          if ( (a2->m_lParam & 0x10) != 0 )
           {
             IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 0, 611, 1);
             IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 8, 930, 1);
@@ -803,7 +807,7 @@ bool  CGuiEventHandler::HandleMsgKeyDown(class CEvn_Event & a2) {
   CEvn_Event v7; // [esp+34h] [ebp-28h] BYREF
   int v8; // [esp+58h] [ebp-4h]
 
-  wparam = a2->wparam;
+  wparam = a2->m_wParam;
   switch ( wparam )
   {
     case 27:
@@ -851,7 +855,7 @@ void  CGuiEventHandler::HandleMsgNewDialog(class CEvn_Event & a2) {
   int lparam; // [esp+Ch] [ebp-8h]
 
   result = (char)a2;
-  lparam = a2->lparam;
+  lparam = a2->m_lParam;
   if ( !lparam )
     return result;
   if ( *((_DWORD *)this + 3) != -1 )
@@ -1022,7 +1026,7 @@ void  CGuiEventHandler::HandleMsgOpenSettings(class CEvn_Event & a2) {
   _DWORD *lparam; // [esp+4h] [ebp-8h]
 
   result = (char)a2;
-  lparam = (_DWORD *)a2->lparam;
+  lparam = (_DWORD *)a2->m_lParam;
   if ( !lparam )
     return result;
   if ( *((_DWORD *)this + 3) != -1 )
@@ -1074,7 +1078,7 @@ void  CGuiEventHandler::HandleMsgOpenSidebar(class CEvn_Event & a2) {
   int lparam; // [esp+0h] [ebp-Ch]
 
   LOBYTE(v2) = (_BYTE)a2;
-  lparam = a2->lparam;
+  lparam = a2->m_lParam;
   if ( !lparam )
     return v2;
   if ( *((_DWORD *)this + 4) != -1 )
@@ -1226,7 +1230,7 @@ void  CGuiEventHandler::HandleMsgRefreshDialog(class CEvn_Event & a2) {
   
   int lparam; // [esp+10h] [ebp-4h]
 
-  lparam = a2->lparam;
+  lparam = a2->m_lParam;
   if ( lparam )
   {
     switch ( *(_DWORD *)(lparam + 4) )
@@ -1368,7 +1372,7 @@ void  CGuiEventHandler::HandleMsgRefreshSettingsDialog(class CEvn_Event & a2) {
   
   _DWORD *lparam; // [esp+8h] [ebp-4h]
 
-  lparam = (_DWORD *)a2->lparam;
+  lparam = (_DWORD *)a2->m_lParam;
   if ( lparam )
   {
     switch ( *lparam )

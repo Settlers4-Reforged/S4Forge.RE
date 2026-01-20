@@ -291,14 +291,14 @@ bool  CStateLobbyGameSettings::OnEvent(class CEvn_Event & a2) {
   wchar_t Dest[256]; // [esp+190h] [ebp-210h] BYREF
   int v41; // [esp+39Ch] [ebp-4h]
 
-  event = a2->event;
+  event = a2->m_iEventId;
   if ( event > 0xFA1 )
   {
     if ( event == 8024 )
     {
-      v39[0] = a2->wparam;
+      v39[0] = a2->m_wParam;
       v39[1] = 9;
-      v39[2] = a2->lparam;
+      v39[2] = a2->m_lParam;
       CLanLobby::ChangeData(v39);
       return 1;
     }
@@ -318,7 +318,7 @@ bool  CStateLobbyGameSettings::OnEvent(class CEvn_Event & a2) {
     switch ( event )
     {
       case 0xDu:
-        if ( a2->wparam == 27 )
+        if ( a2->m_wParam == 27 )
         {
           if ( !byte_4030854 )
           {
@@ -356,7 +356,7 @@ bool  CStateLobbyGameSettings::OnEvent(class CEvn_Event & a2) {
         result = 1;
         break;
       case 0x26u:
-        Str = (char *)a2->wparam;
+        Str = (char *)a2->m_wParam;
         v9 = j__strlen(Str);
         v20 = j__mbstowcs(Dest, Str, v9);
         if ( v20 >= 256 )
@@ -425,7 +425,7 @@ bool  CStateLobbyGameSettings::OnEvent(class CEvn_Event & a2) {
         result = 1;
         break;
       case 0x50u:
-        if ( a2->wparam )
+        if ( a2->m_wParam )
         {
           IGfxEngine::SetCursorShape((IGfxEngine *)g_pGfxEngine, 1, 4);
           IGuiEngine::EnableEventInput((IGuiEngine *)g_pGUIEngine, 0);
@@ -438,16 +438,16 @@ bool  CStateLobbyGameSettings::OnEvent(class CEvn_Event & a2) {
         result = 1;
         break;
       case 0x51u:
-        v33[0] = a2->wparam;
+        v33[0] = a2->m_wParam;
         v33[1] = -1;
-        v33[2] = a2->lparam;
+        v33[2] = a2->m_lParam;
         CLanLobby::ChangeSlots(v33);
         result = 1;
         break;
       case 0x52u:
-        v36[0] = a2->lparam;
+        v36[0] = a2->m_lParam;
         v36[1] = 2;
-        if ( a2->wparam )
+        if ( a2->m_wParam )
           v18 = 7;
         else
           v18 = 6;
@@ -456,9 +456,9 @@ bool  CStateLobbyGameSettings::OnEvent(class CEvn_Event & a2) {
         result = 1;
         break;
       case 0x53u:
-        v38[0] = a2->lparam;
+        v38[0] = a2->m_lParam;
         v38[1] = 1;
-        if ( a2->wparam )
+        if ( a2->m_wParam )
           v16 = 7;
         else
           v16 = 6;
@@ -467,9 +467,9 @@ bool  CStateLobbyGameSettings::OnEvent(class CEvn_Event & a2) {
         result = 1;
         break;
       case 0x54u:
-        v35[0] = a2->lparam;
+        v35[0] = a2->m_lParam;
         v35[1] = 0;
-        if ( a2->wparam )
+        if ( a2->m_wParam )
           v17 = 7;
         else
           v17 = 6;
@@ -478,9 +478,9 @@ bool  CStateLobbyGameSettings::OnEvent(class CEvn_Event & a2) {
         result = 1;
         break;
       case 0x55u:
-        Src[0] = a2->lparam;
+        Src[0] = a2->m_lParam;
         Src[1] = 4;
-        if ( a2->wparam )
+        if ( a2->m_wParam )
           v15 = 7;
         else
           v15 = 6;
@@ -491,12 +491,12 @@ bool  CStateLobbyGameSettings::OnEvent(class CEvn_Event & a2) {
       case 0x56u:
         v37[0] = (char)CPlayerManager::GetLocalSlot();
         v37[1] = 5;
-        v37[2] = a2->wparam;
+        v37[2] = a2->m_wParam;
         CLanLobby::ChangeData(v37);
         result = 1;
         break;
       case 0x57u:
-        wparam = a2->wparam;
+        wparam = a2->m_wParam;
         if ( *(_BYTE *)(wparam + g_pGameType + 998) )
         {
           if ( *(_BYTE *)(wparam + g_pGameType + 440)
@@ -556,7 +556,7 @@ bool  CStateLobbyGameSettings::OnEvent(class CEvn_Event & a2) {
         result = 1;
         break;
       case 0x58u:
-        CLanLobby::Communicate(1053, (void *)a2->wparam);
+        CLanLobby::Communicate(1053, (void *)a2->m_wParam);
         result = 1;
         break;
       case 0x78u:

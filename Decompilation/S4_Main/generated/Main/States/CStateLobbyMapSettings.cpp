@@ -195,7 +195,7 @@ bool  CStateLobbyMapSettings::OnEvent(class CEvn_Event & a2) {
   int v62; // [esp+110h] [ebp-4h]
 
   v56 = this;
-  event = a2->event;
+  event = a2->m_iEventId;
   if ( event > 0x1B69 )
     return CGuiGameState::OnEvent(v56, a2);
   if ( event == 7017 )
@@ -207,7 +207,7 @@ bool  CStateLobbyMapSettings::OnEvent(class CEvn_Event & a2) {
   switch ( event )
   {
     case 0u:
-      if ( a2->wparam != 27 )
+      if ( a2->m_wParam != 27 )
         return 1;
       if ( byte_403190C )
       {
@@ -350,11 +350,11 @@ bool  CStateLobbyMapSettings::OnEvent(class CEvn_Event & a2) {
       }
     case 0x34u:
       dword_4031938 = 0;
-      dword_403191C = a2->wparam;
+      dword_403191C = a2->m_wParam;
       dword_4031918 = CStateLobbyMapSettings::RefreshMapList(v56);
       return 1;
     case 0x35u:
-      if ( a2->wparam )
+      if ( a2->m_wParam )
       {
         if ( dword_4031938 == *(_DWORD *)(CStateLobbyMapSettings::m_stempMapPtr[dword_403192C] + 88) - 1 )
           dword_4031938 = 0;
@@ -372,7 +372,7 @@ bool  CStateLobbyMapSettings::OnEvent(class CEvn_Event & a2) {
       CStateLobbyMapSettings::ApplyMapData(v56, dword_403192C);
       return 1;
     case 0x36u:
-      if ( a2->wparam )
+      if ( a2->m_wParam )
       {
         if ( dword_4031928 == dword_4031924 )
           return 1;
@@ -387,7 +387,7 @@ bool  CStateLobbyMapSettings::OnEvent(class CEvn_Event & a2) {
       }
       goto LABEL_110;
     case 0x37u:
-      if ( a2->wparam )
+      if ( a2->m_wParam )
       {
         if ( dword_4031924 == *(_DWORD *)(CStateLobbyMapSettings::m_stempMapPtr[dword_403192C] + 56) )
           return 1;
@@ -405,7 +405,7 @@ bool  CStateLobbyMapSettings::OnEvent(class CEvn_Event & a2) {
       v57 = 0;
       do
       {
-        if ( a2->wparam )
+        if ( a2->m_wParam )
         {
           if ( ++dword_4031934 > 6 )
             dword_4031934 = 1;
@@ -471,7 +471,7 @@ bool  CStateLobbyMapSettings::OnEvent(class CEvn_Event & a2) {
       while ( !v57 );
       goto LABEL_110;
     case 0x39u:
-      if ( a2->wparam )
+      if ( a2->m_wParam )
       {
         if ( dword_4031930 == 3 )
           return 1;
@@ -489,11 +489,11 @@ LABEL_110:
       break;
     case 0x3Au:
       dword_4031938 = 0;
-      dword_403192C = a2->wparam;
+      dword_403192C = a2->m_wParam;
       CStateLobbyMapSettings::ApplyMapData(v56, dword_403192C);
       return 1;
     case 0x3Bu:
-      wparam = a2->wparam;
+      wparam = a2->m_wParam;
       if ( wparam == *((_DWORD *)v56 + 2) )
       {
         *((_BYTE *)v56 + 12) = *((_BYTE *)v56 + 12) == 0;
@@ -505,7 +505,7 @@ LABEL_110:
       }
       goto LABEL_110;
     case 0x3Eu:
-      if ( a2->wparam )
+      if ( a2->m_wParam )
         byte_403199C |= 1u;
       else
         byte_403199C &= ~1u;

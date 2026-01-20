@@ -100,11 +100,11 @@ bool  CStateLobbyMultiplayerType::OnEvent(class CEvn_Event & a2) {
   int v27; // [esp+64h] [ebp-4h]
 
   v20 = this;
-  v19 = a2->event - 11;
+  v19 = a2->m_iEventId - 11;
   switch ( v19 )
   {
     case 0:
-      if ( (unsigned __int16)a2->wparam != 27 )
+      if ( (unsigned __int16)a2->m_wParam != 27 )
         goto CStateLobbyMultiplayerType__OnEvent___def_18C0C31;
       v18 = CEvn_Event::CEvn_Event(&v26, 0x36u, 0, 0, 0);
       v27 = 0;

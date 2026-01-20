@@ -96,7 +96,7 @@ bool  CStateCredits::OnEvent(class CEvn_Event & a2) {
   CEvn_Event v7; // [esp+38h] [ebp-28h] BYREF
   int v8; // [esp+5Ch] [ebp-4h]
 
-  switch ( a2->event )
+  switch ( a2->m_iEventId )
   {
     case 3:
       sub_14A4570();
@@ -110,7 +110,7 @@ bool  CStateCredits::OnEvent(class CEvn_Event & a2) {
       CEvn_Event::~CEvn_Event(&v7);
       return 1;
     case 0xB:
-      if ( (unsigned __int16)a2->wparam != 27 )
+      if ( (unsigned __int16)a2->m_wParam != 27 )
         goto CStateCredits__OnEvent___def_18A4401;
       v4 = CEvn_Event::CEvn_Event(&v6, 0x6Du, 0, 0, 0);
       v8 = 1;

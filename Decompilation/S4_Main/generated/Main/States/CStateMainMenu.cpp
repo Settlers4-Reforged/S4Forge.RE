@@ -428,7 +428,7 @@ bool  CStateMainMenu::OnEvent(class CEvn_Event & a2) {
   int v32; // [esp+50h] [ebp-4h]
 
   v25 = this;
-  event = a2->event;
+  event = a2->m_iEventId;
   if ( event > 0x1B59 )
   {
     switch ( event )
@@ -457,8 +457,8 @@ bool  CStateMainMenu::OnEvent(class CEvn_Event & a2) {
     switch ( event )
     {
       case 0u:
-        wparam = a2->wparam;
-        v31 = (a2->lparam & 0xC) == 12;
+        wparam = a2->m_wParam;
+        v31 = (a2->m_lParam & 0xC) == 12;
         v30 = v31;
         if ( *((int *)v25 + 3) < 2 )
         {
@@ -467,7 +467,7 @@ bool  CStateMainMenu::OnEvent(class CEvn_Event & a2) {
           else
             *((_DWORD *)v25 + 3) = 0;
         }
-        v22 = a2->wparam;
+        v22 = a2->m_wParam;
         if ( v22 == 3 && *((_DWORD *)v25 + 3) == 2 && v30 )
         {
           if ( (*(unsigned __int8 (__thiscall **)(void *, _DWORD))(*(_DWORD *)g_pInstallationInfo + 16))(

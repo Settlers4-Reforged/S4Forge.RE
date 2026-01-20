@@ -119,11 +119,11 @@ bool  CStateLoadGame::OnEvent(class CEvn_Event & a2) {
   int v12; // [esp+48h] [ebp-4h]
 
   v7 = this;
-  event = a2->event;
+  event = a2->m_iEventId;
   switch ( event )
   {
     case 13:
-      if ( a2->wparam != 27 )
+      if ( a2->m_wParam != 27 )
         return 1;
       v8 = CEvn_Event::CEvn_Event(&v11, 0x5Eu, 0, 0, 0);
       v12 = 0;

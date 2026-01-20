@@ -87,11 +87,11 @@ bool  CStateMDCampaignViking::OnEvent(class CEvn_Event & a2) {
   CEvn_Event v5; // [esp+1Ch] [ebp-28h] BYREF
   int v6; // [esp+40h] [ebp-4h]
 
-  event = a2->event;
+  event = a2->m_iEventId;
   switch ( event )
   {
     case 11:
-      if ( (unsigned __int16)a2->wparam == 27 )
+      if ( (unsigned __int16)a2->m_wParam == 27 )
       {
         v3 = CEvn_Event::CEvn_Event(&v5, 0x1B65u, 0, 0, 0);
         v6 = 0;
@@ -102,7 +102,7 @@ bool  CStateMDCampaignViking::OnEvent(class CEvn_Event & a2) {
       }
       break;
     case 7012:
-      CGameStateHandler::Switch((int)CStateMDBriefing::DynamicCreateFunc, (a2->wparam << 16) | 6);
+      CGameStateHandler::Switch((int)CStateMDBriefing::DynamicCreateFunc, (a2->m_wParam << 16) | 6);
       return 1;
     case 7013:
       CGameStateHandler::Switch((int)CStateMDCampaigns::DynamicCreateFunc, 1);

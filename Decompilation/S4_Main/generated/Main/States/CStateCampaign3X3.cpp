@@ -85,10 +85,10 @@ bool  CStateCampaign3X3::OnEvent(class CEvn_Event & a2) {
   CEvn_Event v7; // [esp+24h] [ebp-28h] BYREF
   int v8; // [esp+48h] [ebp-4h]
 
-  event = a2->event;
+  event = a2->m_iEventId;
   if ( event == 11 )
   {
-    if ( (unsigned __int16)a2->wparam != 27 )
+    if ( (unsigned __int16)a2->m_wParam != 27 )
       return CGuiGameState::OnEvent(this, a2);
     v3 = CEvn_Event::CEvn_Event(&v7, 0x67u, 0, 0, 0);
     v8 = 0;
@@ -105,7 +105,7 @@ bool  CStateCampaign3X3::OnEvent(class CEvn_Event & a2) {
     return 1;
   }
   v6 = 1;
-  lparam = a2->lparam;
+  lparam = a2->m_lParam;
   if ( lparam )
   {
     if ( lparam == 1 )
@@ -121,7 +121,7 @@ bool  CStateCampaign3X3::OnEvent(class CEvn_Event & a2) {
                 "main\\states\\StateCampaign3X3.cpp",
                 130,
                 "Unkown Race for Camapaign %d",
-                a2->lparam) == 1 )
+                a2->m_lParam) == 1 )
     {
       __debugbreak();
     }
@@ -130,7 +130,7 @@ bool  CStateCampaign3X3::OnEvent(class CEvn_Event & a2) {
   {
     v6 = 1;
   }
-  CGameStateHandler::Switch((int)CStateBriefing::DynamicCreateFunc, v6 | (a2->wparam << 16));
+  CGameStateHandler::Switch((int)CStateBriefing::DynamicCreateFunc, v6 | (a2->m_wParam << 16));
   return 1;
 }
 

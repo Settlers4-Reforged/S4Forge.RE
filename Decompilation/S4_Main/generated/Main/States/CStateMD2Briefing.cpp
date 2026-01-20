@@ -202,7 +202,7 @@ bool  CStateMD2Briefing::OnEvent(class CEvn_Event & a2) {
   int v59; // [esp+2DCh] [ebp-4h]
 
   v52 = this;
-  event = a2->event;
+  event = a2->m_iEventId;
   if ( event <= 0x78 )
   {
     switch ( event )
@@ -211,7 +211,7 @@ bool  CStateMD2Briefing::OnEvent(class CEvn_Event & a2) {
         *((_BYTE *)v52 + 12) = 0;
         return 1;
       case 0xBu:
-        if ( (unsigned __int16)a2->wparam == 27 )
+        if ( (unsigned __int16)a2->m_wParam == 27 )
         {
           v28 = CEvn_Event::CEvn_Event(&v56, 0x2330u, 0, 0, 0);
           v59 = 0;
@@ -245,7 +245,7 @@ bool  CStateMD2Briefing::OnEvent(class CEvn_Event & a2) {
       v37 = delete (CGameType *)g_pGameType;
       g_pGameType = 0;
     }
-    wparam = a2->wparam;
+    wparam = a2->m_wParam;
     switch ( *((_DWORD *)v52 + 1) )
     {
       case 0x11:

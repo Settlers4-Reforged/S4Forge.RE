@@ -616,7 +616,7 @@ void  CGroupMgr::FillMagicSideBarEx(class CInfoExchange * _pInfoExchange, bool _
   if ( !_pInfoExchange && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 587, "_pInfoExchange != 0") == 1 )
     __debugbreak();
   pMagicSpellSideBarInfo = j____RTDynamicCast(
-                             (void **)_pInfoExchange,
+                             (void **)&_pInfoExchange->__vftable,
                              0,
                              &CInfoExchange__RTTI_Type_Descriptor_,
                              &CMagicSpellSideBarInfo__RTTI_Type_Descriptor_,

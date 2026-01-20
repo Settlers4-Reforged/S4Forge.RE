@@ -94,7 +94,7 @@ bool  CStateAOCampaigns::OnEvent(class CEvn_Event & a2) {
   CEvn_Event v5; // [esp+18h] [ebp-28h] BYREF
   int v6; // [esp+3Ch] [ebp-4h]
 
-  event = a2->event;
+  event = a2->m_iEventId;
   if ( event > 0x1F42 )
   {
     switch ( event )
@@ -147,7 +147,7 @@ bool  CStateAOCampaigns::OnEvent(class CEvn_Event & a2) {
     CGameStateHandler::Switch((int)CStateMainMenu::DynamicCreateFunc, 0);
     return 1;
   }
-  else if ( event == 11 && (unsigned __int16)a2->wparam == 27 )
+  else if ( event == 11 && (unsigned __int16)a2->m_wParam == 27 )
   {
     v3 = CEvn_Event::CEvn_Event(&v5, 0x1F42u, 0, 0, 0);
     v6 = 0;

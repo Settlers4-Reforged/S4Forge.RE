@@ -101,7 +101,7 @@ bool  CStateXMD3Campaigns::OnEvent(class CEvn_Event & a2) {
   CEvn_Event v5; // [esp+28h] [ebp-28h] BYREF
   int v6; // [esp+4Ch] [ebp-4h]
 
-  event = a2->event;
+  event = a2->m_iEventId;
   if ( event > 0x251E )
   {
     switch ( event )
@@ -109,19 +109,19 @@ bool  CStateXMD3Campaigns::OnEvent(class CEvn_Event & a2) {
       case 0x251Fu:
         if ( dword_4031CFC != CGameSettings::GetAIDifficulty() )
           CGameSettings::SetAIDifficulty(dword_4031CFC);
-        CGameStateHandler::Switch((int)CStateXMD3Briefing::DynamicCreateFunc, (a2->wparam << 16) | 0x16);
+        CGameStateHandler::Switch((int)CStateXMD3Briefing::DynamicCreateFunc, (a2->m_wParam << 16) | 0x16);
         result = 1;
         break;
       case 0x2520u:
         if ( dword_4031CFC != CGameSettings::GetAIDifficulty() )
           CGameSettings::SetAIDifficulty(dword_4031CFC);
-        CGameStateHandler::Switch((int)CStateXMD3Briefing::DynamicCreateFunc, (a2->wparam << 16) | 0x17);
+        CGameStateHandler::Switch((int)CStateXMD3Briefing::DynamicCreateFunc, (a2->m_wParam << 16) | 0x17);
         result = 1;
         break;
       case 0x2521u:
         if ( dword_4031CFC != CGameSettings::GetAIDifficulty() )
           CGameSettings::SetAIDifficulty(dword_4031CFC);
-        CGameStateHandler::Switch((int)CStateXMD3Briefing::DynamicCreateFunc, (a2->wparam << 16) | 0x18);
+        CGameStateHandler::Switch((int)CStateXMD3Briefing::DynamicCreateFunc, (a2->m_wParam << 16) | 0x18);
         result = 1;
         break;
       case 0x2522u:
@@ -146,10 +146,10 @@ bool  CStateXMD3Campaigns::OnEvent(class CEvn_Event & a2) {
   {
     if ( dword_4031CFC != CGameSettings::GetAIDifficulty() )
       CGameSettings::SetAIDifficulty(dword_4031CFC);
-    CGameStateHandler::Switch((int)CStateXMD3Briefing::DynamicCreateFunc, (a2->wparam << 16) | 0x15);
+    CGameStateHandler::Switch((int)CStateXMD3Briefing::DynamicCreateFunc, (a2->m_wParam << 16) | 0x15);
     return 1;
   }
-  else if ( event == 11 && (unsigned __int16)a2->wparam == 27 )
+  else if ( event == 11 && (unsigned __int16)a2->m_wParam == 27 )
   {
     v3 = CEvn_Event::CEvn_Event(&v5, 0x2522u, 0, 0, 0);
     v6 = 0;

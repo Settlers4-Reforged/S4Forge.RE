@@ -172,7 +172,7 @@ bool  CTutorial::OnEvent(class CEvn_Event & a2) {
   int v7; // eax
   unsigned int event; // [esp+4h] [ebp-4h]
 
-  event = a2->event;
+  event = a2->m_iEventId;
   if ( event > 0x192 )
   {
     if ( event > 0x1389 )
@@ -193,7 +193,7 @@ bool  CTutorial::OnEvent(class CEvn_Event & a2) {
             CGameScriptManager::SendGameEvent((CGameScriptManager *)g_pScriptMgr, 14, v7);
             return 0;
           case 0x195u:
-            if ( !a2->wparam )
+            if ( !a2->m_wParam )
               return 0;
             v4 = CTutorial::GetSelectedBuilding(this);
             CGameScriptManager::SendGameEvent((CGameScriptManager *)g_pScriptMgr, 10, v4);
@@ -213,7 +213,7 @@ LABEL_32:
             CGameScriptManager::SetGlobal(
               (CGameScriptManager *)g_pScriptMgr,
               "gActiveMenu",
-              byte_3F1E908 + 8 * a2->event);
+              byte_3F1E908 + 8 * a2->m_iEventId);
             return 0;
           case 0x1ADu:
           case 0x1AEu:
@@ -232,26 +232,26 @@ LABEL_32:
           case 0x1C9u:
           case 0x1CAu:
           case 0x1CBu:
-            CGameScriptManager::SetGlobal((CGameScriptManager *)g_pScriptMgr, "gActiveMenu", 8 * a2->event);
+            CGameScriptManager::SetGlobal((CGameScriptManager *)g_pScriptMgr, "gActiveMenu", 8 * a2->m_iEventId);
             CGameScriptManager::SendGameEvent(
               (CGameScriptManager *)g_pScriptMgr,
               19,
-              8 * a2->event,
-              a2->wparam,
-              a2->lparam);
+              8 * a2->m_iEventId,
+              a2->m_wParam,
+              a2->m_lParam);
             return 0;
           case 0x1B5u:
-            CGameScriptManager::SendGameEvent((CGameScriptManager *)g_pScriptMgr, 8, a2->lparam);
+            CGameScriptManager::SendGameEvent((CGameScriptManager *)g_pScriptMgr, 8, a2->m_lParam);
             return 0;
           case 0x1CEu:
-            CGameScriptManager::SendGameEvent((CGameScriptManager *)g_pScriptMgr, 0x15u, a2->wparam, a2->lparam);
+            CGameScriptManager::SendGameEvent((CGameScriptManager *)g_pScriptMgr, 0x15u, a2->m_wParam, a2->m_lParam);
             return 0;
           case 0x25Au:
             goto LABEL_35;
           case 0x25Du:
 LABEL_30:
-            *((_DWORD *)this + 1) = a2->lparam;
-            CGameScriptManager::SendGameEvent((CGameScriptManager *)g_pScriptMgr, 15, a2->lparam);
+            *((_DWORD *)this + 1) = a2->m_lParam;
+            CGameScriptManager::SendGameEvent((CGameScriptManager *)g_pScriptMgr, 15, a2->m_lParam);
             return 0;
           case 0x275u:
             CGameScriptManager::SendGameEvent((CGameScriptManager *)g_pScriptMgr, 16, 1712);
@@ -281,7 +281,7 @@ LABEL_35:
         CGameScriptManager::SendGameEvent((CGameScriptManager *)g_pScriptMgr, 9u);
       return 0;
     case 0xBu:
-      if ( a2->wparam != 32 || byte_3F44E66 )
+      if ( a2->m_wParam != 32 || byte_3F44E66 )
         return 0;
       byte_3F44E66 = 1;
       CGameScriptManager::SendGameEvent((CGameScriptManager *)g_pScriptMgr, 7u);
@@ -290,13 +290,13 @@ LABEL_35:
     case 0x12u:
       goto LABEL_30;
     case 0x14u:
-      if ( a2->wparam != 32 )
+      if ( a2->m_wParam != 32 )
         return 0;
       byte_3F44E66 = 0;
       result = 0;
       break;
     case 0x6Au:
-      CGameScriptManager::SendGameEvent((CGameScriptManager *)g_pScriptMgr, 16, a2->wparam);
+      CGameScriptManager::SendGameEvent((CGameScriptManager *)g_pScriptMgr, 16, a2->m_wParam);
       goto LABEL_32;
     default:
       return 0;

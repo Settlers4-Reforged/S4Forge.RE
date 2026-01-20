@@ -124,9 +124,9 @@ bool  CGame_InitNetwork::Perform(void) {
 // Decompiled from char __thiscall CGame_InitNetwork::OnEvent(CGame_InitNetwork *this, struct CEvn_Event *a2)
 bool  CGame_InitNetwork::OnEvent(class CEvn_Event & a2) {
   
-  if ( a2->event == 4001 )
+  if ( a2->m_iEventId == 4001 )
     return 1;
-  if ( a2->event != 24 )
+  if ( a2->m_iEventId != 24 )
     return 0;
   CGameStateHandler::Switch((int)CStateGame::DynamicCreateFunc, 0);
   return 1;

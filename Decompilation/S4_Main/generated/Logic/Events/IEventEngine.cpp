@@ -14,7 +14,7 @@
   this->logFileHandle = 0;
   this->pad_15[0] = 0;
   this->loggingEnabled = 0;
-  this->tick = 0;
+  this->m_pTick = 0;
   this->m_bLocked = 0;
   this->activePrimaryHandler = 0;
   this->field_20 = 0;
@@ -161,8 +161,8 @@ bool  IEventEngine::SendRawWindowEvent(unsigned int a2, unsigned int a3, unsigne
   dword_3ECDA10 = a3;
   dword_3ECDA14 = a4;
   byte_3ECDA20 = 0;
-  if ( this->tick )
-    dword_3ECDA1C = *(_DWORD *)this->tick;
+  if ( this->m_pTick )
+    dword_3ECDA1C = *(_DWORD *)this->m_pTick;
   return IEventEngine::OnEvent(this, &dword_3ECDA0C);
 }
 
@@ -188,8 +188,8 @@ bool  IEventEngine::SendRawLogicEvent(unsigned int a2, unsigned int a3, unsigned
   dword_3ECD9E4 = a2;
   dword_3ECD9E8 = a3;
   byte_3ECD9F4 = 0;
-  if ( this->tick )
-    dword_3ECD9F0 = *(_DWORD *)this->tick;
+  if ( this->m_pTick )
+    dword_3ECD9F0 = *(_DWORD *)this->m_pTick;
   return IEventEngine::OnEvent(this, &dword_3ECD9E0);
 }
 
@@ -212,8 +212,8 @@ bool  IEventEngine::SendRawEvent(unsigned int a2, unsigned int a3, unsigned int 
   dword_3ECDA38 = a2;
   dword_3ECDA3C = a3;
   byte_3ECDA48 = 0;
-  if ( this->tick )
-    dword_3ECDA44 = *(_DWORD *)this->tick;
+  if ( this->m_pTick )
+    dword_3ECDA44 = *(_DWORD *)this->m_pTick;
   return IEventEngine::OnEvent(this, &unk_3ECDA34);
 }
 
@@ -377,9 +377,9 @@ bool  IEventEngine::DispatchSystemMessages(void) {
     CEvn_Window::~CEvn_Window(&v12);
     return v10;
   }
-  if ( v11->tick )
+  if ( v11->m_pTick )
   {
-    if ( *(_DWORD *)v11->tick > v11->field_20 )
+    if ( *(_DWORD *)v11->m_pTick > v11->field_20 )
     {
       v11->pad_15[0] = 0;
       CloseHandle((HANDLE)v11->logFileHandle);
@@ -395,7 +395,7 @@ bool  IEventEngine::DispatchSystemMessages(void) {
       CEvn_Window::~CEvn_Window(&v12);
       return v9;
     }
-    while ( Buffer <= *(_DWORD *)v11->tick )
+    while ( Buffer <= *(_DWORD *)v11->m_pTick )
     {
       ReadFile((HANDLE)v11->logFileHandle, &v12, 0x1Cu, &NumberOfBytesRead, 0);
       if ( NumberOfBytesRead != 28 )
@@ -608,8 +608,8 @@ void  IEventEngine::LockEventEngine(bool a2) {
 // Decompiled from int __thiscall IEventEngine::GetCurrentTickCounter(IEventEngine *this)
 unsigned int  IEventEngine::GetCurrentTickCounter(void) {
   
-  if ( this->tick )
-    return *(_DWORD *)this->tick;
+  if ( this->m_pTick )
+    return *(_DWORD *)this->m_pTick;
   else
     return 0;
 }
@@ -619,7 +619,7 @@ unsigned int  IEventEngine::GetCurrentTickCounter(void) {
 // Decompiled from void __thiscall IEventEngine::SetTickPointer(IEventEngine *this, struct CPaneContainer *a2)
 void  IEventEngine::SetTickPointer(unsigned int * a2) {
   
-  this->tick = (int)a2;
+  this->m_pTick = (int)a2;
 }
 
 

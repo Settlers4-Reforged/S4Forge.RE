@@ -901,7 +901,7 @@ bool  CTextMsgHandler::OnEvent(class CEvn_Event & a2) {
   
   unsigned int event; // [esp+8h] [ebp-8h]
 
-  event = a2->event;
+  event = a2->m_iEventId;
   if ( event > 0x1773 )
   {
     if ( event != 6004 )
@@ -911,14 +911,14 @@ bool  CTextMsgHandler::OnEvent(class CEvn_Event & a2) {
   }
   if ( event == 6003 )
   {
-    CTextMsgHandler::SendAllMessages(0, 0, a2->wparam != 0);
+    CTextMsgHandler::SendAllMessages(0, 0, a2->m_wParam != 0);
     return 1;
   }
   if ( event != 21 )
   {
     if ( event != 6001 )
       return 0;
-    CTextMsgHandler::ExecuteMsg(a2->wparam);
+    CTextMsgHandler::ExecuteMsg(a2->m_wParam);
     return 1;
   }
   if ( ++CTextMsgHandler::m_iUpdateTrigger < 20 )

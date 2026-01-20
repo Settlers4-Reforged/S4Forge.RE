@@ -115,7 +115,7 @@ bool  CStateSlideshow::OnEvent(class CEvn_Event & a2) {
   CEvn_Event v5; // [esp+18h] [ebp-28h] BYREF
   int v6; // [esp+3Ch] [ebp-4h]
 
-  event = a2->event;
+  event = a2->m_iEventId;
   if ( event == 7 )
   {
     v3 = CEvn_Event::CEvn_Event(&v5, 0xDu, 0x20u, 0, 0);
@@ -127,7 +127,7 @@ bool  CStateSlideshow::OnEvent(class CEvn_Event & a2) {
   }
   else if ( event == 13 )
   {
-    if ( a2->wparam == 32 )
+    if ( a2->m_wParam == 32 )
     {
       if ( !CSlideshow::Advance((CStateSlideshow *)((char *)this + 12)) )
         CGameStateHandler::Next();

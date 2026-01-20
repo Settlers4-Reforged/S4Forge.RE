@@ -78,10 +78,10 @@ bool  CStateLocalType::OnEvent(class CEvn_Event & a2) {
   CEvn_Event v4; // [esp+18h] [ebp-28h] BYREF
   int v5; // [esp+3Ch] [ebp-4h]
 
-  switch ( a2->event )
+  switch ( a2->m_iEventId )
   {
     case 0xD:
-      if ( a2->wparam == 27 )
+      if ( a2->m_wParam == 27 )
       {
         v3 = CEvn_Event::CEvn_Event(&v4, 0x63u, 0, 0, 0);
         v5 = 0;

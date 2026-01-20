@@ -2134,9 +2134,9 @@ bool  CInputProcessor::DotSelection(class CEvn_Logic * a2) {
   CEvn_Event v26; // [esp+44h] [ebp-28h] BYREF
   int v27; // [esp+68h] [ebp-4h]
 
-  x = Y16X16::UnpackXFast(a2->lparam);
-  y = Y16X16::UnpackYFast(a2->lparam);
-  appendToSelection = (a2->wparam & 8) != 0;
+  x = Y16X16::UnpackXFast(a2->m_lParam);
+  y = Y16X16::UnpackYFast(a2->m_lParam);
+  appendToSelection = (a2->m_wParam & 8) != 0;
   foundEntityId = CInputProcessor::SelectOne(this, x, y);
   if ( foundEntityId <= 0 )
     entity = 0;

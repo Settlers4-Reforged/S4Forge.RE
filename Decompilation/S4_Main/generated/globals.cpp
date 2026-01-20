@@ -23061,24 +23061,24 @@ void __cdecl UpdateGuiDlgMessages(class CEvn_Event * a1) {
 
   if ( a1 )
   {
-    lparam = (unsigned __int16)a1->lparam;
-    switch ( a1->event )
+    lparam = (unsigned __int16)a1->m_lParam;
+    switch ( a1->m_iEventId )
     {
       case 0x264:
       case 0x265:
-        CGuiMsgList::AddListItem(a1->lparam, (char *)a1->wparam);
+        CGuiMsgList::AddListItem(a1->m_lParam, (char *)a1->m_wParam);
         v1 = CGuiMsgList::Listcount((CGuiMsgList *)&s_cMsgLst_0);
         CGuiMsgList::SetTopindex((CGuiMsgList *)&s_cMsgLst_0, v1 - 1);
         break;
       case 0x266:
-        CGuiMsgList::RemoveListItem((CGuiMsgList *)&s_cMsgLst_0, a1->wparam);
+        CGuiMsgList::RemoveListItem((CGuiMsgList *)&s_cMsgLst_0, a1->m_wParam);
         break;
       case 0x267:
       case 0x268:
       case 0x279:
       case 0x27A:
         CGuiMsgList::Clear((CGuiMsgList *)&s_cMsgLst_0);
-        wparam = a1->wparam;
+        wparam = a1->m_wParam;
         if ( wparam )
         {
           for ( i = 0; i < lparam; ++i )

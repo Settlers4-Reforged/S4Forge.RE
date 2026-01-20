@@ -80,10 +80,10 @@ bool  CStateEcoStatistic::OnEvent(class CEvn_Event & a2) {
   CEvn_Event v7; // [esp+3Ch] [ebp-28h] BYREF
   int v8; // [esp+60h] [ebp-4h]
 
-  event = a2->event;
+  event = a2->m_iEventId;
   if ( event == 11 )
   {
-    if ( (unsigned __int16)a2->wparam != 27 )
+    if ( (unsigned __int16)a2->m_wParam != 27 )
       return CGuiGameState::OnEvent(this, a2);
     v4 = CEvn_Event::CEvn_Event(&v7, 0x5Du, 0, 0, 0);
     v8 = 0;
@@ -99,7 +99,7 @@ bool  CStateEcoStatistic::OnEvent(class CEvn_Event & a2) {
     CGameStateHandler::Next();
     return 1;
   }
-  if ( a2->wparam != 27 )
+  if ( a2->m_wParam != 27 )
     return 1;
   v3 = CEvn_Event::CEvn_Event(&v6, 0x77u, 0, 0, 0);
   v8 = 1;

@@ -113,10 +113,10 @@ bool  IGuiEngine::OpenDialog(int a2, bool (__cdecl*)(int,int,int) a3) {
     v14 = (struct SGuiControl *)((char *)v14 + 36);
   }
   UpdateGui(*v12);
-  v21.event = 5;
-  v21.lparam = qword_471F794 + (HIDWORD(qword_471F794) << 16);
-  v21.wparam = 0;
-  v21.tick = 0;
+  v21.m_iEventId = 5;
+  v21.m_lParam = qword_471F794 + (HIDWORD(qword_471F794) << 16);
+  v21.m_wParam = 0;
+  v21.m_iTick = 0;
   GuiEngine2_EventProc(&v21);
   return 1;
 }

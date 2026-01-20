@@ -261,11 +261,11 @@ bool  CStateLobbyConnect::OnEvent(class CEvn_Event & a2) {
   int v65; // [esp+114h] [ebp-4h]
 
   v60 = this;
-  v58 = a2->event - 13;
+  v58 = a2->m_iEventId - 13;
   switch ( v58 )
   {
     case 0:
-      if ( a2->wparam == 27 )
+      if ( a2->m_wParam == 27 )
       {
         if ( byte_4030758 )
         {

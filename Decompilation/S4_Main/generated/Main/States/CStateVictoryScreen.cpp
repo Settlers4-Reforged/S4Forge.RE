@@ -78,7 +78,7 @@ bool  CStateVictoryScreen::OnEvent(class CEvn_Event & a2) {
   
   int event; // [esp+4h] [ebp-4h]
 
-  event = a2->event;
+  event = a2->m_iEventId;
   if ( event != 8 && event != 10 && event != 11 )
     return CGuiGameState::OnEvent(this, a2);
   CGameStateHandler::Next();

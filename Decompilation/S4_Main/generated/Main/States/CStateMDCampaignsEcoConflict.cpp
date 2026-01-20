@@ -89,7 +89,7 @@ bool  CStateMDCampaignsEcoConflict::OnEvent(class CEvn_Event & a2) {
   CEvn_Event v5; // [esp+20h] [ebp-28h] BYREF
   int v6; // [esp+44h] [ebp-4h]
 
-  event = a2->event;
+  event = a2->m_iEventId;
   if ( event > 0x1B67 )
   {
     if ( event == 7016 )
@@ -103,10 +103,10 @@ bool  CStateMDCampaignsEcoConflict::OnEvent(class CEvn_Event & a2) {
     switch ( event )
     {
       case 0x1B67u:
-        CGameStateHandler::Switch((int)CStateMDBriefing::DynamicCreateFunc, (a2->wparam << 16) | 9);
+        CGameStateHandler::Switch((int)CStateMDBriefing::DynamicCreateFunc, (a2->m_wParam << 16) | 9);
         return 1;
       case 0xBu:
-        if ( (unsigned __int16)a2->wparam == 27 )
+        if ( (unsigned __int16)a2->m_wParam == 27 )
         {
           v3 = CEvn_Event::CEvn_Event(&v5, 0x1B68u, 0, 0, 0);
           v6 = 0;
@@ -117,7 +117,7 @@ bool  CStateMDCampaignsEcoConflict::OnEvent(class CEvn_Event & a2) {
         }
         break;
       case 0x1B66u:
-        CGameStateHandler::Switch((int)CStateMDBriefing::DynamicCreateFunc, (a2->wparam << 16) | 8);
+        CGameStateHandler::Switch((int)CStateMDBriefing::DynamicCreateFunc, (a2->m_wParam << 16) | 8);
         return 1;
     }
   }

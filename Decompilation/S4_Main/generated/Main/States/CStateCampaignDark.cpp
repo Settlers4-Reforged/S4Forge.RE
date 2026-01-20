@@ -80,10 +80,10 @@ bool  CStateCampaignDark::OnEvent(class CEvn_Event & a2) {
   CEvn_Event v6; // [esp+1Ch] [ebp-28h] BYREF
   int v7; // [esp+40h] [ebp-4h]
 
-  event = a2->event;
+  event = a2->m_iEventId;
   if ( event == 11 )
   {
-    if ( (unsigned __int16)a2->wparam != 27 )
+    if ( (unsigned __int16)a2->m_wParam != 27 )
       return CGuiGameState::OnEvent(this, a2);
     v3 = CEvn_Event::CEvn_Event(&v6, 0x65u, 0, 0, 0);
     v7 = 0;
@@ -99,7 +99,7 @@ bool  CStateCampaignDark::OnEvent(class CEvn_Event & a2) {
     CGameStateHandler::Switch((int)CStateLocalType::DynamicCreateFunc, 0);
     return 1;
   }
-  wparam = a2->wparam;
+  wparam = a2->m_wParam;
   if ( (unsigned __int8)CGameSettings::GetShowVideos() )
   {
     if ( wparam )

@@ -107,10 +107,10 @@ bool  CStateEndStatistic::OnEvent(class CEvn_Event & a2) {
   CEvn_Event v8; // [esp+5Ch] [ebp-28h] BYREF
   int v9; // [esp+80h] [ebp-4h]
 
-  switch ( a2->event )
+  switch ( a2->m_iEventId )
   {
     case 0xB:
-      if ( (unsigned __int16)a2->wparam != 27 )
+      if ( (unsigned __int16)a2->m_wParam != 27 )
         goto CStateEndStatistic__OnEvent___def_18A4F31;
       v5 = CEvn_Event::CEvn_Event(&v8, 0x5Du, 0, 0, 0);
       v9 = 0;
@@ -120,7 +120,7 @@ bool  CStateEndStatistic::OnEvent(class CEvn_Event & a2) {
       result = 1;
       break;
     case 0xD:
-      if ( a2->wparam == 27 )
+      if ( a2->m_wParam == 27 )
       {
         if ( iScreenFlag == 1 )
         {
@@ -148,7 +148,7 @@ bool  CStateEndStatistic::OnEvent(class CEvn_Event & a2) {
     case 0x73:
       IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 13);
       IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 21, GuiDlgMainDetailStatisticProc);
-      UpdateGuiDlgMainDetailStatistic(a2->wparam);
+      UpdateGuiDlgMainDetailStatistic(a2->m_wParam);
       iScreenFlag = 1;
       result = 1;
       break;
