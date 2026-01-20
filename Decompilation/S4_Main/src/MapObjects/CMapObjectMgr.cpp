@@ -16,7 +16,7 @@
 
 // Definitions for class CMapObjectMgr
 
-CMapObjectMgr *g_cMapObjectMgr;
+CMapObjectMgr *g_pMapObjectMgr;
 
 // address=[0x12fd030]
 // Decompiled from IEntity *__cdecl CMapObjectMgr::EntityPtr(int a1)
@@ -189,7 +189,7 @@ int __cdecl CMapObjectMgr::GetFreeSlot(void)
     if (!m_vEntities[i])
     {
       m_iMinFreeId = i;
-      g_pMsgTracer->PushFormatedInts("CMapObjectMgr::GetFreeSlot(): New free slot %i", (char *)i);
+      g_pMsgTracer->PushFormatedInts("CMapObjectMgr::GetFreeSlot(): New free slot %i", i);
       return i;
     }
   }
@@ -287,12 +287,11 @@ void CMapObjectMgr::Kill(int _iEntityId, int _iAttackerId)
   type = entity->Type();
   v5 = entity->ObjType();
   g_pMsgTracer->PushFormatedInts(
-
       "CMapObjectMgr::Kill(): id %u, type %u / %u, attacker %i",
       _iEntityId,
       v5,
       type,
-      (char *)_iAttackerId);
+      _iAttackerId);
 
   if ((entity->m_iUniqueId & 0x20000000) != 0)
   {
@@ -549,7 +548,7 @@ int CMapObjectMgr::RegisterForLogicUpdate(int iDeltaTicks, int _iEntityId)
         _iEntityId,
         pEntity->ObjType(),
         pEntity->Type(),
-        (char *)iDeltaTicks);
+        iDeltaTicks);
   }
   else
   {
@@ -559,7 +558,7 @@ int CMapObjectMgr::RegisterForLogicUpdate(int iDeltaTicks, int _iEntityId)
         _iEntityId,
         pEntity->ObjType(),
         pEntity->Type(),
-        (char *)iDeltaTicks);
+        iDeltaTicks);
   }
   if (pEntity->FlagBits(EntityFlag_Died) && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 874, "pEntity->FlagBits(ENTITY_FLAG_DIED) == 0") == 1)
   {

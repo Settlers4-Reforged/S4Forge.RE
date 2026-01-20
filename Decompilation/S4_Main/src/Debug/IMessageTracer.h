@@ -3,7 +3,7 @@
 
 #include "defines.h"
 
-const IMessageTracer *g_pMsgTracer;
+extern class IMessageTracer *g_pMsgTracer;
 
 class IMessageTracer {
 public:

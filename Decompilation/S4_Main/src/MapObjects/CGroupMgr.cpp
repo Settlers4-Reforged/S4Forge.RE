@@ -37,11 +37,7 @@ void CGroupMgr::Clear(void)
 int CGroupMgr::GetGroupSize(int playerId, int groupId) const
 {
 
-  if ((playerId < PLAYER_FIRST || playerId > PLAYER_LAST) && BBSupportDbgReport(
-                                                                 2,
-                                                                 "MapObjects\\GroupMgr.cpp",
-                                                                 220,
-                                                                 "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1)
+  if ((playerId < PLAYER_FIRST || playerId > PLAYER_LAST) && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 220, "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1)
   {
     __debugbreak();
   }
@@ -57,11 +53,7 @@ int CGroupMgr::GetGroupSize(int playerId, int groupId) const
 unsigned short const *CGroupMgr::GetGroupEntityIds(int playerId, int groupId) const
 {
 
-  if ((playerId < PLAYER_FIRST || playerId > PLAYER_LAST) && BBSupportDbgReport(
-                                                                 2,
-                                                                 "MapObjects\\GroupMgr.cpp",
-                                                                 233,
-                                                                 "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1)
+  if ((playerId < PLAYER_FIRST || playerId > PLAYER_LAST) && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 233, "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1)
   {
     __debugbreak();
   }
@@ -177,11 +169,7 @@ bool CGroupMgr::DetachEntity(int _iPlayerId, int _iGroupId, int _iEntityId)
   unsigned short _entityId;                            // [esp+2Ch] [ebp-4h] BYREF
   char entityFound;                                    // [esp+2Fh] [ebp-1h]
 
-  if ((_iPlayerId < PLAYER_FIRST || _iPlayerId > PLAYER_LAST) && BBSupportDbgReport(
-                                                                     2,
-                                                                     "MapObjects\\GroupMgr.cpp",
-                                                                     339,
-                                                                     "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1)
+  if ((_iPlayerId < PLAYER_FIRST || _iPlayerId > PLAYER_LAST) && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 339, "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1)
   {
     __debugbreak();
   }
@@ -216,10 +204,10 @@ bool CGroupMgr::DetachEntity(int _iPlayerId, int _iGroupId, int _iEntityId)
   {
     entity->SetGroupFlags(0);
     if ((this->m_bGroupFlags[11 * _iPlayerId + _iGroupId] & 1) == 0 && BBSupportDbgReport(
-                                                                        2,
-                                                                        "MapObjects\\GroupMgr.cpp",
-                                                                        376,
-                                                                        "(m_uPlayersGroupsFlags[_iPlayerId][_iGroupId] & PLAYER_GROUP_FLAG_HAS_SQUAD_LEADER) != 0") == 1)
+                                                                           2,
+                                                                           "MapObjects\\GroupMgr.cpp",
+                                                                           376,
+                                                                           "(m_uPlayersGroupsFlags[_iPlayerId][_iGroupId] & PLAYER_GROUP_FLAG_HAS_SQUAD_LEADER) != 0") == 1)
     {
       __debugbreak();
     }
@@ -411,7 +399,7 @@ void CGroupMgr::SendGroupCommand(int groupSize, unsigned short const *group, int
             {
               __debugbreak();
             }
-            CEntityEvent v13 = CEntityEvent( 0x11u, 13, sendFlags, NextDestination, packedXY);
+            CEntityEvent v13 = CEntityEvent(0x11u, 13, sendFlags, NextDestination, packedXY);
             groupMember->SetEvent(v13);
           }
           ++i;
@@ -432,13 +420,13 @@ void CGroupMgr::Load(IS4Chunk &a2)
   a2.LoadUnsigned32(10, 10);
   a2.LoadUnsigned32(100, 100);
 
-  for (int i = 0; i < MAX_PLAYERS; ++i )
+  for (int i = 0; i < MAX_PLAYERS; ++i)
   {
-    for ( int j = 0; j < MAX_GROUPS_PER_PLAYER; ++j )
+    for (int j = 0; j < MAX_GROUPS_PER_PLAYER; ++j)
     {
       this->m_bGroupFlags[MAX_GROUPS_PER_PLAYER * i + j] = a2.LoadUnsigned32(0, 255);
       int iSavedGroupSize = a2.LoadUnsigned32(0, MAX_GROUP_SIZE);
-      for (int k = 0; k < iSavedGroupSize; ++k )
+      for (int k = 0; k < iSavedGroupSize; ++k)
       {
         unsigned short sSavedEntityIdInGroup = a2.LoadUnsigned32(0, 0xFFFF);
         this->m_vEntries[MAX_GROUPS_PER_PLAYER * i + j].PushBack(&sSavedEntityIdInGroup);
@@ -458,14 +446,14 @@ void CGroupMgr::Save(class IS4Chunk &a2)
   a2.SaveUnsigned32(1);
   a2.SaveUnsigned32(10);
   a2.SaveUnsigned32(100);
-  for ( int i = 0; i < MAX_PLAYERS; ++i )
+  for (int i = 0; i < MAX_PLAYERS; ++i)
   {
-    for ( int j = 0; j < MAX_GROUPS_PER_PLAYER; ++j )
+    for (int j = 0; j < MAX_GROUPS_PER_PLAYER; ++j)
     {
       a2.SaveUnsigned32(this->m_bGroupFlags[MAX_GROUPS_PER_PLAYER * i + j]);
       int v3 = this->m_vEntries[MAX_GROUPS_PER_PLAYER * i + j].Size();
       a2.SaveUnsigned32(v3);
-      for ( int a1 = 0; a1 < v3; ++a1 )
+      for (int a1 = 0; a1 < v3; ++a1)
       {
         unsigned short v2 = this->m_vEntries[MAX_GROUPS_PER_PLAYER * i + j][a1];
         a2.SaveUnsigned32(*v2);
@@ -479,63 +467,63 @@ void CGroupMgr::Save(class IS4Chunk &a2)
 // Decompiled from _DWORD *__thiscall CGroupMgr::FillGroupSideBarEx(char *this, void **a2, char a3, int a4)
 void CGroupMgr::FillGroupSideBarEx(class CInfoExchange *_pInfoExchange, bool a3, int a4)
 {
-  unsigned __int16 *v4; // eax
-  int LocalPlayerId; // [esp+1Ch] [ebp-48h]
-  unsigned int v8; // [esp+20h] [ebp-44h]
-  int warriorType; // [esp+24h] [ebp-40h]
-  IEntity *pEntity; // [esp+28h] [ebp-3Ch]
-  int i; // [esp+34h] [ebp-30h]
+  unsigned __int16 *v4;                 // eax
+  int LocalPlayerId;                    // [esp+1Ch] [ebp-48h]
+  unsigned int v8;                      // [esp+20h] [ebp-44h]
+  int warriorType;                      // [esp+24h] [ebp-40h]
+  IEntity *pEntity;                     // [esp+28h] [ebp-3Ch]
+  int i;                                // [esp+34h] [ebp-30h]
   CGroupSideBarInfo *pGroupSideBarInfo; // [esp+38h] [ebp-2Ch]
-  int v14; // [esp+60h] [ebp-4h]
+  int v14;                              // [esp+60h] [ebp-4h]
 
-  if ( !_pInfoExchange && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 494, "_pInfoExchange != 0") == 1 )
+  if (!_pInfoExchange && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 494, "_pInfoExchange != 0") == 1)
     __debugbreak();
   pGroupSideBarInfo = dynamic_cast<CGroupSideBarInfo *>(_pInfoExchange);
-  if ( !pGroupSideBarInfo && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 498, "pGroupSideBar != 0") == 1 )
+  if (!pGroupSideBarInfo && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 498, "pGroupSideBar != 0") == 1)
     __debugbreak();
-  if ( pGroupSideBarInfo )
+  if (pGroupSideBarInfo)
   {
     pGroupSideBarInfo->Clear();
     LocalPlayerId = CPlayerManager::GetLocalPlayerId();
-    for ( i = 1; i <= 10; ++i )
+    for (i = 1; i <= 10; ++i)
     {
-      if ( this->m_vEntries[11 * LocalPlayerId + i].Size() > 0 )
+      if (this->m_vEntries[11 * LocalPlayerId + i].Size() > 0)
       {
         unsigned short sFirst = this->m_vEntries[11 * LocalPlayerId + i][0];
         pEntity = CMapObjectMgr::EntityPtr(sFirst);
-        if ( pEntity )
+        if (pEntity)
           warriorType = pEntity->WarriorType();
         else
           warriorType = 0;
-        switch ( warriorType )
+        switch (warriorType)
         {
-          case 2:
-          case 3:
-          case 4:
-          case 5:
-          case 6:
-            pGroupSideBarInfo->m_iUnknown[i] = 1;
-            break;
-          case 7:
-            pGroupSideBarInfo->m_iUnknown[i] = 2;
-            break;
-          case 10:
-          case 11:
-            pGroupSideBarInfo->m_iUnknown[i] = 3;
-            break;
-          default:
-            continue;
+        case 2:
+        case 3:
+        case 4:
+        case 5:
+        case 6:
+          pGroupSideBarInfo->m_iUnknown[i] = 1;
+          break;
+        case 7:
+          pGroupSideBarInfo->m_iUnknown[i] = 2;
+          break;
+        case 10:
+        case 11:
+          pGroupSideBarInfo->m_iUnknown[i] = 3;
+          break;
+        default:
+          continue;
         }
       }
     }
     pGroupSideBarInfo->m_iUnknown[0] = 25;
-    if ( a3 )
+    if (a3)
       v8 = 606;
     else
       v8 = 607;
-    if ( !g_pEvnEngine && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 564, "g_pEvnEngine != 0") == 1 )
+    if (!g_pEvnEngine && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 564, "g_pEvnEngine != 0") == 1)
       __debugbreak();
-    if ( g_pEvnEngine )
+    if (g_pEvnEngine)
     {
       CEvn_Event v5 = CEvn_Event(v8, 0, (unsigned int)pGroupSideBarInfo, 0);
       g_pEvnEngine->SendAMessage(&v5);
@@ -547,31 +535,31 @@ void CGroupMgr::FillGroupSideBarEx(class CInfoExchange *_pInfoExchange, bool a3,
 // Decompiled from unsigned int __stdcall CGroupMgr::FillMagicSideBarEx(void **a1, unsigned __int8 a2, int a3)
 void CGroupMgr::FillMagicSideBarEx(class CInfoExchange *_pInfoExchange, bool _bSpecialSidebar, int unused)
 {
-  int v4; // [esp+18h] [ebp-48h]
-  unsigned int v5; // [esp+1Ch] [ebp-44h]
-  int CurrentSpellCategoryCost; // [esp+20h] [ebp-40h]
-  int v7; // [esp+24h] [ebp-3Ch]
-  int CurrentManaAmount; // [esp+28h] [ebp-38h]
-  int LocalPlayerId; // [esp+2Ch] [ebp-34h]
+  int v4;                                         // [esp+18h] [ebp-48h]
+  unsigned int v5;                                // [esp+1Ch] [ebp-44h]
+  int CurrentSpellCategoryCost;                   // [esp+20h] [ebp-40h]
+  int v7;                                         // [esp+24h] [ebp-3Ch]
+  int CurrentManaAmount;                          // [esp+28h] [ebp-38h]
+  int LocalPlayerId;                              // [esp+2Ch] [ebp-34h]
   CMagicSpellSideBarInfo *pMagicSpellSideBarInfo; // [esp+30h] [ebp-30h]
-  int i; // [esp+34h] [ebp-2Ch]
-  int v13; // [esp+5Ch] [ebp-4h]
+  int i;                                          // [esp+34h] [ebp-2Ch]
+  int v13;                                        // [esp+5Ch] [ebp-4h]
 
-  if ( !_pInfoExchange && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 587, "_pInfoExchange != 0") == 1 )
+  if (!_pInfoExchange && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 587, "_pInfoExchange != 0") == 1)
     __debugbreak();
   pMagicSpellSideBarInfo = dynamic_cast<CMagicSpellSideBarInfo *>(_pInfoExchange);
-  if ( !pMagicSpellSideBarInfo && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 591, "pMagicSpellSideBar != 0") == 1 )
+  if (!pMagicSpellSideBarInfo && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 591, "pMagicSpellSideBar != 0") == 1)
     __debugbreak();
-  if ( pMagicSpellSideBarInfo )
+  if (pMagicSpellSideBarInfo)
   {
     pMagicSpellSideBarInfo->Clear();
     LocalPlayerId = CPlayerManager::GetLocalPlayerId();
-    for ( i = 0; i < 8; ++i )
+    for (i = 0; i < 8; ++i)
     {
       v4 = CMagic::CalculatePossibleNumberOfCastSpell(LocalPlayerId, i, 0);
       CurrentSpellCategoryCost = CMagic::GetCurrentSpellCategoryCost(LocalPlayerId, i);
       CurrentManaAmount = CMagic::GetCurrentManaAmount(LocalPlayerId);
-      if ( CurrentManaAmount <= 0 )
+      if (CurrentManaAmount <= 0)
         v7 = 0;
       else
         v7 = 100 * CurrentSpellCategoryCost / CurrentManaAmount;
@@ -581,13 +569,13 @@ void CGroupMgr::FillMagicSideBarEx(class CInfoExchange *_pInfoExchange, bool _bS
       *(_DWORD *)(pMagicSpellSideBarInfo + 16 * i + 8) = i;
     }
     *(_DWORD *)(pMagicSpellSideBarInfo + 4) = 26;
-    if ( _bSpecialSidebar )
+    if (_bSpecialSidebar)
       v5 = 606;
     else
       v5 = 607;
-    if ( !g_pEvnEngine && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 620, "g_pEvnEngine != 0") == 1 )
+    if (!g_pEvnEngine && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 620, "g_pEvnEngine != 0") == 1)
       __debugbreak();
-    if ( g_pEvnEngine )
+    if (g_pEvnEngine)
     {
       CEvn_Event v3 = CEvn_Event(v5, 0, pMagicSpellSideBarInfo, 0);
       g_pEvnEngine->SendAMessage(v3);
@@ -599,6 +587,6 @@ void CGroupMgr::FillMagicSideBarEx(class CInfoExchange *_pInfoExchange, bool _bS
 // Decompiled from CGroupMgr *__thiscall CGroupMgr::CGroupMgr(CGroupMgr *this)
 CGroupMgr::CGroupMgr(void)
 {
-  //TODO: Check if needed...
+  // TODO: Check if needed...
   //_vec_ctor_no(this->m_vEntries, 204u, 99u, TStaticArray<unsigned short, 100>::TStaticArray<unsigned short, 100>);
 }
