@@ -16,7 +16,6 @@ public:
 
     virtual void Load(class IS4Chunk &) = 0;
     virtual void Save(class IS4Chunk &) = 0;
-    virtual void Clear(void) = 0;
 };
 
 

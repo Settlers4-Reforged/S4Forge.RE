@@ -5,7 +5,7 @@
 #include "Main/Players/CPlayerManager.h"
 #include "MapObjects/CGroupDestinations.h"
 #include "Logic/Events/CEntityEvent.h"
-#include "Logic/Events/CEvn_Event.h"
+#include "../Logic/Events/CEvn_Event.h"
 #include "Logic/CInfoExchange.h"
 #include "Logic/CMagic.h"
 #include "Info/CGroupSideBarInfo.h"
@@ -81,11 +81,7 @@ bool CGroupMgr::AttachEntity(int playerId, int groupId, int _entityIdToAttach)
   unsigned short v16;                           // [esp+2Eh] [ebp-6h] BYREF
   unsigned short a1;                            // [esp+30h] [ebp-4h] BYREF
 
-  if ((playerId < PLAYER_FIRST || playerId > PLAYER_LAST) && BBSupportDbgReport(
-                                                                 2,
-                                                                 "MapObjects\\GroupMgr.cpp",
-                                                                 246,
-                                                                 "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1)
+  if ((playerId < PLAYER_FIRST || playerId > PLAYER_LAST) && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 246, "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1)
   {
     __debugbreak();
   }
@@ -254,11 +250,7 @@ void CGroupMgr::DetachEntityFromAllGroups(int entityId)
       if (((1 << i) & groupFlags) != 0)
         this->DetachEntity(owner, i, entityId);
     }
-    if ((v6->GetGroupFlags() & 0xFFFFF7FF) != 0 && BBSupportDbgReport(
-                                                       2,
-                                                       "MapObjects\\GroupMgr.cpp",
-                                                       436,
-                                                       "(pEntity->GetGroupFlags() & ~GROUP_FLAG_IN_GROUP_WITH_SQUAD_LEADER) == 0") == 1)
+    if ((v6->GetGroupFlags() & 0xFFFFF7FF) != 0 && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 436, "(pEntity->GetGroupFlags() & ~GROUP_FLAG_IN_GROUP_WITH_SQUAD_LEADER) == 0") == 1)
     {
       __debugbreak();
     }
@@ -577,7 +569,7 @@ void CGroupMgr::FillMagicSideBarEx(class CInfoExchange *_pInfoExchange, bool _bS
       __debugbreak();
     if (g_pEvnEngine)
     {
-      CEvn_Event v3 = CEvn_Event(v5, 0, pMagicSpellSideBarInfo, 0);
+      CEvn_Event v3 = CEvn_Event(v5, 0, reinterpret_cast<unsigned int>(pMagicSpellSideBarInfo), 0);
       g_pEvnEngine->SendAMessage(v3);
     }
   }

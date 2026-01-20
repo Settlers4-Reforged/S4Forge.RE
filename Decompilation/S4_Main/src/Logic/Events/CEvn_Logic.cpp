@@ -59,7 +59,7 @@ void CEvn_Logic::Save(class IS4Chunk &a2)
   a2.Save(&this->m_wParam, 4);
   if (this->m_iDataSize)
   {
-    if (!this->m_iData && BBSupportDbgReportF(2,"EventEngine\\Evn_HandleLogic.cpp",27,"m_iData != 0: m_iOwner: 0x%x, m_lParam: 0x%x, m_Message: 0x%x, m_wParam: 0x%x, m_iDataSize: 0x%x",this->m_iOwner,this->m_lParam,this->m_iEventId,this->m_wParam,this->m_iDataSize) == 1)
+    if (!this->m_iData && BBSupportDbgReportF(2, "EventEngine\\Evn_HandleLogic.cpp", 27, "m_iData != 0: m_iOwner: 0x%x, m_lParam: 0x%x, m_Message: 0x%x, m_wParam: 0x%x, m_iDataSize: 0x%x", this->m_iOwner, this->m_lParam, this->m_iEventId, this->m_wParam, this->m_iDataSize) == 1)
     {
       __debugbreak();
     }
