@@ -1,3 +1,4 @@
+#if FALSE
 #include "CEvn_Event.h"
 
 // Definitions for class CEvn_Event
@@ -91,3 +92,4 @@ class CEvn_Event &  CEvn_Event::operator=(class CEvn_Event const & a2) {
 }
 
 
+#endif // Already implemented

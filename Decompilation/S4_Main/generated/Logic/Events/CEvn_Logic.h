@@ -26,6 +26,13 @@ public:
     // address=[0x1486be0]
     class CEvn_Logic &  operator=(class CEvn_Logic const & a2);
 
+    // Type information members
+public:
+    BYTE * m_iData;
+    WORD m_iDataSize;
+    BYTE m_iOwner;
+    BYTE m_iUnknown;
+
 };
 
 

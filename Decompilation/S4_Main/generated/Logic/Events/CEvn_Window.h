@@ -11,6 +11,10 @@ public:
     // address=[0x1355160]
     virtual  ~CEvn_Window(void);
 
+    // Type information members
+public:
+    struct HNWD * m_hWnd;
+
 };
 
 

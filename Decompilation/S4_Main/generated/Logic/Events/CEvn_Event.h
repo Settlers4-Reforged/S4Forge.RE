@@ -3,7 +3,7 @@
 
 #include "defines.h"
 
-class CEvn_Event : public SEventStruct, public IS4ChunkObject {
+class CEvn_Event : public .?AUSEventStruct@@, public IS4ChunkObject {
 public:
     // address=[0x130e450]
     virtual  ~CEvn_Event(void);
