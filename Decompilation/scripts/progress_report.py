@@ -127,13 +127,25 @@ def create_progress_image(header_image_path, completed, total, output_path,
     progress_text = f"{completed}/{total} ({percentage:.1f}%)"
     
     # Try to load a nice font, fall back to default if not available
-    try:
-        font = ImageFont.truetype("consola.ttf", 32)
-    except:
+    font = None
+    font_candidates = [
+        "consola.ttf",  # Windows Consolas
+        "Consola.ttf",  # Windows Consolas (alt case)
+        "/usr/share/fonts/truetype/inconsolata/Inconsolata-Regular.ttf",  # Linux Inconsolata
+        "/usr/share/fonts/truetype/liberation/LiberationMono-Regular.ttf",  # Linux Liberation Mono
+        "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",  # Linux DejaVu Sans Mono
+        "Arial.ttf",  # Generic fallback
+    ]
+    
+    for font_path in font_candidates:
         try:
-            font = ImageFont.truetype("Consola.ttf", 32)
+            font = ImageFont.truetype(font_path, 32)
+            break
         except:
-            font = ImageFont.load_default(32)
+            continue
+    
+    if font is None:
+        font = ImageFont.load_default(32)
     
     # Get text bounding box for centering
     bbox = draw.textbbox((0, 0), progress_text, font=font)
