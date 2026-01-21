@@ -35657,84 +35657,309 @@ void __cdecl RegisterClasses(void) {
   
   if ( !s_bSetPersistenceClasses )
   {
-    CPersistence::RegisterClassWhithId(&CBuilding::m_iClassID, (int)CBuilding::New, 0);
-    CPersistence::RegisterClassWhithId(&CSettler::m_iClassID, (int)CSettler::New, 0);
-    CPersistence::RegisterClassWhithId(&CPile::m_iClassID, (int)CPile::New, 0);
-    CPersistence::RegisterClassWhithId(&CLandAnimal::m_iClassID, (int)CLandAnimal::New, 0);
-    CPersistence::RegisterClassWhithId(&CPlant::m_iClassID, (int)CPlant::New, 0);
-    CPersistence::RegisterClassWhithId(&CStone::m_iClassID, (int)CStone::New, 0);
-    CPersistence::RegisterClassWhithId(&CTree::m_iClassID, (int)CTree::New, 0);
-    CPersistence::RegisterClassWhithId(&CShadowHerb::m_iClassID, (int)CShadowHerb::New, 0);
-    CPersistence::RegisterClassWhithId(&CDecoObject::m_iClassID, (int)CDecoObject::New, 0);
-    CPersistence::RegisterClassWhithId(&CAnyWherePileRole::m_iClassID, (int)CAnyWherePileRole::New, 0);
-    CPersistence::RegisterClassWhithId(&CBuildingSitePileRole::m_iClassID, (int)CBuildingSitePileRole::New, 0);
-    CPersistence::RegisterClassWhithId(&CDeliverPileRole::m_iClassID, (int)CDeliverPileRole::New, 0);
-    CPersistence::RegisterClassWhithId(&CProductionPileRole::m_iClassID, (int)CProductionPileRole::New, 0);
-    CPersistence::RegisterClassWhithId(&CStoragePileRole::m_iClassID, (int)CStoragePileRole::New, 0);
-    CPersistence::RegisterClassWhithId(&CTradePileRole::m_iClassID, (int)CTradePileRole::New, 0);
-    CPersistence::RegisterClassWhithId(&CAnimalRanchRole::m_iClassID, (int)CAnimalRanchRole::New, 0);
-    CPersistence::RegisterClassWhithId(&CBarrackRole::m_iClassID, (int)CBarrackRole::New, 0);
-    CPersistence::RegisterClassWhithId(&CBigTempleRole::m_iClassID, (int)CBigTempleRole::New, 0);
-    CPersistence::RegisterClassWhithId(&CBuildingSiteRole::m_iClassID, (int)CBuildingSiteRole::New, 0);
-    CPersistence::RegisterClassWhithId(&CCastleRole::m_iClassID, (int)CCastleRole::New, 0);
-    CPersistence::RegisterClassWhithId(&CDarkTempleRole::m_iClassID, (int)CDarkTempleRole::New, 0);
-    CPersistence::RegisterClassWhithId(&CEyeCatcherRole::m_iClassID, (int)CEyeCatcherRole::New, 0);
-    CPersistence::RegisterClassWhithId(&CFarmBuildingRole::m_iClassID, (int)CFarmBuildingRole::New, 0);
-    CPersistence::RegisterClassWhithId(&CGatherBuildingRole::m_iClassID, (int)CGatherBuildingRole::New, 0);
-    CPersistence::RegisterClassWhithId(&CLookoutTowerRole::m_iClassID, (int)CLookoutTowerRole::New, 0);
-    CPersistence::RegisterClassWhithId(&CMilitaryBuildingRole::m_iClassID, (int)CMilitaryBuildingRole::New, 0);
-    CPersistence::RegisterClassWhithId(&CMineRole::m_iClassID, (int)CMineRole::New, 0);
-    CPersistence::RegisterClassWhithId(&CProductionBuildingRole::m_iClassID, (int)CProductionBuildingRole::New, 0);
-    CPersistence::RegisterClassWhithId(&CResidenceBuildingRole::m_iClassID, (int)CResidenceBuildingRole::New, 0);
-    CPersistence::RegisterClassWhithId(&CSimpleBuildingRole::m_iClassID, (int)CSimpleBuildingRole::New, 0);
-    CPersistence::RegisterClassWhithId(&CSmallTempleRole::m_iClassID, (int)CSmallTempleRole::New, 0);
-    CPersistence::RegisterClassWhithId(&CStorageBuildingRole::m_iClassID, (int)CStorageBuildingRole::New, 0);
-    CPersistence::RegisterClassWhithId(&CTradingBuildingRole::m_iClassID, (int)CTradingBuildingRole::New, 0);
-    CPersistence::RegisterClassWhithId(&CWorkshopBuildingRole::m_iClassID, (int)CWorkshopBuildingRole::New, 0);
-    CPersistence::RegisterClassWhithId(&CWorkUpBuildingRole::m_iClassID, (int)CWorkUpBuildingRole::New, 0);
-    CPersistence::RegisterClassWhithId(&CBuilderRole::m_iClassID, (int)CBuilderRole::New, 0);
-    CPersistence::RegisterClassWhithId(&CCarrierRole::m_iClassID, (int)CCarrierRole::New, 0);
-    CPersistence::RegisterClassWhithId(&CDarkGardenerRole::m_iClassID, (int)CDarkGardenerRole::New, 0);
-    CPersistence::RegisterClassWhithId(&CDiggerRole::m_iClassID, (int)CDiggerRole::New, 0);
-    CPersistence::RegisterClassWhithId(&CHunterRole::m_iClassID, (int)CHunterRole::New, 0);
-    CPersistence::RegisterClassWhithId(&CDonkeyRole::m_iClassID, (int)CDonkeyRole::New, 0);
-    CPersistence::RegisterClassWhithId(&CDoorRole::m_iClassID, (int)CDoorRole::New, 0);
-    CPersistence::RegisterClassWhithId(&CFleeRole::m_iClassID, (int)CFleeRole::New, 0);
-    CPersistence::RegisterClassWhithId(&CFreeWorkerRole::m_iClassID, (int)CFreeWorkerRole::New, 0);
-    CPersistence::RegisterClassWhithId(&CGardenerRole::m_iClassID, (int)CGardenerRole::New, 0);
-    CPersistence::RegisterClassWhithId(&CGeologistRole::m_iClassID, (int)CGeologistRole::New, 0);
-    CPersistence::RegisterClassWhithId(&CHouseWorkerRole::m_iClassID, (int)CHouseWorkerRole::New, 0);
-    CPersistence::RegisterClassWhithId(&CMushroomFarmerRole::m_iClassID, (int)CMushroomFarmerRole::New, 0);
-    CPersistence::RegisterClassWhithId(&CPioneerRole::m_iClassID, (int)CPioneerRole::New, 0);
-    CPersistence::RegisterClassWhithId(&CPriestRole::m_iClassID, (int)CPriestRole::New, 0);
-    CPersistence::RegisterClassWhithId(&CSaboteurRole::m_iClassID, (int)CSaboteurRole::New, 0);
-    CPersistence::RegisterClassWhithId(&CShamanRole::m_iClassID, (int)CShamanRole::New, 0);
-    CPersistence::RegisterClassWhithId(&CSlaveRole::m_iClassID, (int)CSlaveRole::New, 0);
-    CPersistence::RegisterClassWhithId(&CSoldierRole::m_iClassID, (int)CSoldierRole::New, 0);
-    CPersistence::RegisterClassWhithId(&CThiefRole::m_iClassID, (int)CThiefRole::New, 0);
-    CPersistence::RegisterClassWhithId(&CTowerSoldier::m_iClassID, (int)CTowerSoldier::New, 0);
-    CPersistence::RegisterClassWhithId(&CCart::m_iClassID, (int)CCart::New, 0);
-    CPersistence::RegisterClassWhithId(&CRomanCatapult::m_iClassID, (int)CRomanCatapult::New, 0);
-    CPersistence::RegisterClassWhithId(&CMayaCatapult::m_iClassID, (int)CMayaCatapult::New, 0);
-    CPersistence::RegisterClassWhithId(&CVikingCatapult::m_iClassID, (int)CVikingCatapult::New, 0);
-    CPersistence::RegisterClassWhithId(&CTrojanCatapult::m_iClassID, (int)CTrojanCatapult::New, 0);
-    CPersistence::RegisterClassWhithId(&CFerryShip::m_iClassID, (int)CFerryShip::New, 0);
-    CPersistence::RegisterClassWhithId(&CTransportShip::m_iClassID, (int)CTransportShip::New, 0);
-    CPersistence::RegisterClassWhithId(&CWarShip::m_iClassID, (int)CWarShip::New, 0);
-    CPersistence::RegisterClassWhithId(&CEntityTask::m_iClassID, (int)CEntityTask::New, 0);
-    CPersistence::RegisterClassWhithId(&CEntityEvent::m_iClassID, (int)CEntityEvent::New, 0);
-    CPersistence::RegisterClassWhithId(&CEcoSector::m_iClassID, (int)CEcoSector::New, 0);
-    CPersistence::RegisterClassWhithId(&CGoodTransportPriority::m_iClassID, (int)CGoodTransportPriority::New, 0);
-    CPersistence::RegisterClassWhithId(&CBuildingSupplyPriority::m_iClassID, (int)CBuildingSupplyPriority::New, 0);
-    CPersistence::RegisterClassWhithId(&CDarkMushroomFarmRole::m_iClassID, (int)CDarkMushroomFarmRole::New, 0);
-    CPersistence::RegisterClassWhithId(&CRomanWarShip::m_iClassID, (int)CRomanWarShip::New, 0);
-    CPersistence::RegisterClassWhithId(&CMayaWarShip::m_iClassID, (int)CMayaWarShip::New, 0);
-    CPersistence::RegisterClassWhithId(&CVikingWarShip::m_iClassID, (int)CVikingWarShip::New, 0);
-    CPersistence::RegisterClassWhithId(&CTrojanWarShip::m_iClassID, (int)CTrojanWarShip::New, 0);
-    CPersistence::RegisterClassWhithId(&CSquadLeaderRole::m_iClassID, (int)CSquadLeaderRole::New, 0);
-    CPersistence::RegisterClassWhithId(&CManakopter::m_iClassID, (int)CManakopter::New, 0);
-    CPersistence::RegisterClassWhithId(&CManakopterHallRole::m_iClassID, (int)CManakopterHallRole::New, 0);
-    CPersistence::RegisterClassWhithId(&CHJBRole::m_iClassID, (int)CHJBRole::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CBuilding::m_iClassID, CBuilding::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CSettler::m_iClassID, CSettler::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CPile::m_iClassID, CPile::New, 0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CLandAnimal::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CLandAnimal::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CPlant::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CPlant::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CStone::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CStone::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CTree::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CTree::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CShadowHerb::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CShadowHerb::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CDecoObject::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CDecoObject::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CAnyWherePileRole::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CAnyWherePileRole::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CBuildingSitePileRole::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CBuildingSitePileRole::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CDeliverPileRole::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CDeliverPileRole::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CProductionPileRole::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CProductionPileRole::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CStoragePileRole::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CStoragePileRole::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CTradePileRole::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CTradePileRole::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CAnimalRanchRole::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CAnimalRanchRole::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      CBarrackRole::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CBarrackRole::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CBigTempleRole::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CBigTempleRole::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CBuildingSiteRole::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CBuildingSiteRole::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CCastleRole::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CCastleRole::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CDarkTempleRole::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CDarkTempleRole::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CEyeCatcherRole::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CEyeCatcherRole::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CFarmBuildingRole::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CFarmBuildingRole::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CGatherBuildingRole::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CGatherBuildingRole::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CLookoutTowerRole::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CLookoutTowerRole::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CMilitaryBuildingRole::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CMilitaryBuildingRole::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CMineRole::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CMineRole::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CProductionBuildingRole::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CProductionBuildingRole::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CResidenceBuildingRole::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CResidenceBuildingRole::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CSimpleBuildingRole::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CSimpleBuildingRole::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CSmallTempleRole::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CSmallTempleRole::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CStorageBuildingRole::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CStorageBuildingRole::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CTradingBuildingRole::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CTradingBuildingRole::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      CWorkshopBuildingRole::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CWorkshopBuildingRole::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CWorkUpBuildingRole::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CWorkUpBuildingRole::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CBuilderRole::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CBuilderRole::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CCarrierRole::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CCarrierRole::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CDarkGardenerRole::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CDarkGardenerRole::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CDiggerRole::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CDiggerRole::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CHunterRole::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CHunterRole::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CDonkeyRole::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CDonkeyRole::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CDoorRole::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CDoorRole::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CFleeRole::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CFleeRole::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CFreeWorkerRole::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CFreeWorkerRole::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CGardenerRole::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CGardenerRole::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CGeologistRole::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CGeologistRole::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CHouseWorkerRole::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CHouseWorkerRole::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CMushroomFarmerRole::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CMushroomFarmerRole::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CPioneerRole::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CPioneerRole::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CPriestRole::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CPriestRole::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CSaboteurRole::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CSaboteurRole::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CShamanRole::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CShamanRole::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CSlaveRole::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CSlaveRole::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CSoldierRole::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CSoldierRole::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CThiefRole::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CThiefRole::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CTowerSoldier::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CTowerSoldier::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CCart::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CCart::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CRomanCatapult::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CRomanCatapult::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CMayaCatapult::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CMayaCatapult::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CVikingCatapult::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CVikingCatapult::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      CTrojanCatapult::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CTrojanCatapult::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CFerryShip::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CFerryShip::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CTransportShip::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CTransportShip::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CWarShip::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CWarShip::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CEntityTask::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CEntityTask::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CEntityEvent::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CEntityEvent::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CEcoSector::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CEcoSector::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CGoodTransportPriority::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CGoodTransportPriority::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CBuildingSupplyPriority::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CBuildingSupplyPriority::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CDarkMushroomFarmRole::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CDarkMushroomFarmRole::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CRomanWarShip::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CRomanWarShip::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CMayaWarShip::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CMayaWarShip::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CVikingWarShip::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CVikingWarShip::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CTrojanWarShip::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CTrojanWarShip::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CSquadLeaderRole::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CSquadLeaderRole::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CManakopter::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CManakopter::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CManakopterHallRole::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CManakopterHallRole::New,
+      0);
+    CPersistence::RegisterClassWhithId(
+      (unsigned int *)&CHJBRole::m_iClassID,
+      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CHJBRole::New,
+      0);
     s_bSetPersistenceClasses = 1;
   }
 }

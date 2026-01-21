@@ -18,10 +18,10 @@ public:
     int  DefineTransition(int a2, int a3, int a4, int a5);
 
     // address=[0x2f05f00]
-    int  Control(int a2, void * a3);
+    int  Control(int _iEventId, void * _pEvent);
 
     // address=[0x2f06060]
-    void  GenerateEvent(int a1, void * a2);
+    void  GenerateEvent(int a2, void * a3);
 
 private:
     // address=[0x2f06080]
@@ -32,6 +32,16 @@ private:
 
     // address=[0x2f06170]
     int  Hash(int a2);
+
+    // Type information members
+public:
+    int m_iSize;
+    CFsm::Transition * m_pTransitions;
+    DWORD m_iCurrentState;
+    DWORD m_pEventQueue;
+    DWORD unk_10;
+    DWORD unk_14;
+    struct IEventHandler * m_pEventHandler;
 
 };
 
