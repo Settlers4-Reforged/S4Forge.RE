@@ -86,29 +86,29 @@ void  CSquadLeaderRole::WarriorInit(class IMovingEntity & a2, int a3, int a4) {
 
 
 // address=[0x15929d0]
-// Decompiled from _DWORD *__thiscall CSquadLeaderRole::CSquadLeaderRole(_DWORD *this, int a2)
+// Decompiled from CSquadLeaderRole *__thiscall CSquadLeaderRole::CSquadLeaderRole(CSquadLeaderRole *this, struct std::istream *a1)
  CSquadLeaderRole::CSquadLeaderRole(std::istream & a2) {
   
   int pExceptionObject; // [esp+8h] [ebp-14h] BYREF
-  _DWORD *v4; // [esp+Ch] [ebp-10h]
+  CSquadLeaderRole *v4; // [esp+Ch] [ebp-10h]
   int v5; // [esp+18h] [ebp-4h]
 
   v4 = this;
-  CSoldierRole::CSoldierRole(a2);
+  CSoldierRole::CSoldierRole(this, (int)a1);
   v5 = 0;
-  *v4 = &CSquadLeaderRole::_vftable_;
-  v4[12] = &CSquadLeaderRole::`vftable';
-  if ( Serial::LoadVersion(a2) != 2 )
+  *(_DWORD *)v4 = &CSquadLeaderRole::_vftable_;
+  *((_DWORD *)v4 + 12) = &CSquadLeaderRole::`vftable';
+  if ( Serial::LoadVersion((int)a1) != 2 )
   {
     BBSupportTracePrintF(3, "Unknown file format version for CSquadLeaderRole!");
     pExceptionObject = 0;
     CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
     _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
   }
-  operator^<unsigned int>(a2, v4 + 25);
-  operator^<int>(a2, (int)(v4 + 26));
-  operator^<int>(a2, (int)(v4 + 27));
-  v4[28] = -1;
+  operator^<unsigned int>(a1, (char *)v4 + 100);
+  operator^<int>(a1, (int *)v4 + 26);
+  operator^<int>(a1, (int *)v4 + 27);
+  *((_DWORD *)v4 + 28) = -1;
   v5 = -1;
   return v4;
 }
@@ -337,13 +337,18 @@ void  CSquadLeaderRole::CommandGroupMembers(class IMovingEntity & a2) {
 
 
 // address=[0x1592b20]
-// Decompiled from int __cdecl CSquadLeaderRole::Load_HACK_VERSION(int a1)
+// Decompiled from int __cdecl CSquadLeaderRole::Load_HACK_VERSION(struct std::istream *a1)
 class CSquadLeaderRole * __cdecl CSquadLeaderRole::Load_HACK_VERSION(std::istream & a1) {
   
-  void **v1; // eax
+  struct CPersistence *v1; // eax
 
-  v1 = (void **)CPersistence::New_HACK_VERSION(a1);
-  return j____RTDynamicCast(v1, 0, &CPersistence__RTTI_Type_Descriptor_, &CSquadLeaderRole__RTTI_Type_Descriptor_, 1);
+  v1 = CPersistence::New_HACK_VERSION(a1);
+  return j____RTDynamicCast(
+           (void **)&v1->__vftable,
+           0,
+           &CPersistence__RTTI_Type_Descriptor_,
+           &CSquadLeaderRole__RTTI_Type_Descriptor_,
+           1);
 }
 
 

@@ -404,6 +404,7 @@ FOLDER_MAP =  {
     ],
 
     "LoadSave/": [
+        "BadClassID",
         "IS4Chunk",
         "IS4ChunkObject",
         "BB_SIV_ChunkHeader",
@@ -723,7 +724,6 @@ FOLDER_MAP =  {
         "CSearchRoutines",
         "CSimpleBuildingRole",
         "CSmallTempleRole",
-        "CSquadLeaderRole",
         "CStorageBuildingRole",
         "CStoragePileRole",
         "CTradingBuildingRole",
@@ -790,6 +790,7 @@ FOLDER_MAP =  {
         "CSettlerMgr",
         "CSettlerSpiralWalk",
         "CSettlerStatus",
+        "CSquadLeaderRole",
         "CWarriorBehavior",
         "CShamanRole",
         "CSlaveRole",
@@ -911,7 +912,6 @@ FOLDER_MAP =  {
     ],
 
     "Uncategorized/": [
-        "BadClassID",
         "CBriefingSettings",
         "CCheckLayer",
         "CClassNetGameIniBuffer",
