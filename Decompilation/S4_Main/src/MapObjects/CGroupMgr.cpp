@@ -6,6 +6,7 @@
 #include "MapObjects/CGroupDestinations.h"
 #include "Logic/Events/CEntityEvent.h"
 #include "../Logic/Events/CEvn_Event.h"
+#include "../Logic/Events/IEventEngine.h"
 #include "Logic/CInfoExchange.h"
 #include "Logic/CMagic.h"
 #include "Info/CGroupSideBarInfo.h"
@@ -448,7 +449,7 @@ void CGroupMgr::Save(class IS4Chunk &a2)
       for (int a1 = 0; a1 < v3; ++a1)
       {
         unsigned short v2 = this->m_vEntries[MAX_GROUPS_PER_PLAYER * i + j][a1];
-        a2.SaveUnsigned32(*v2);
+        a2.SaveUnsigned32(v2);
       }
     }
   }

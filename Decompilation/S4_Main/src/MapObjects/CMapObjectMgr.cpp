@@ -7,7 +7,8 @@
 #include "CBB/CS4InvalidMapException.h"
 #include "../Debug/IMessageTracer.h"
 #include "Debug/CTrace.h"
-
+#include "CGroupMgr.h"
+#include "../Logic/Events/IEventEngine.h"
 #include "AI/CAIEntityInfo.h"
 #include "MapObjects/Settler/CSettler.h"
 #include "MapObjects/IAnimatedEntity.h"
@@ -116,7 +117,7 @@ CMapObjectMgr::CMapObjectMgr(void)
 
   this->m_vLogicUpdateSlots = new std::vector<std::deque<unsigned short>>();
   this->m_vKilledEntities = new std::vector<std::deque<unsigned short>>();
-  memset(m_vEntities, 0, sizeof(IEntity*) * (MAX_ENTRIES + 1));
+  memset(m_vEntities, 0, sizeof(IEntity *) * (MAX_ENTRIES + 1));
   m_iMinFreeId = 1;
   m_iLastUsedId = 0;
   m_iMaxLastUsedId = 0;
@@ -538,12 +539,9 @@ int CMapObjectMgr::RegisterForLogicUpdate(int iDeltaTicks, int _iEntityId)
 
   logicUpdateSlot = (iDeltaTicks + this->m_iCurrentLogicTick) % MAX_LOGIC_UPDATE_SLOTS;
   pEntity = (IAnimatedEntity *)CMapObjectMgr::EntityPtr(_iEntityId);
-  if (g_pMsgTracer->RemoveCurrentMsgIfEqual(
-          (const char **)"LogicUpdate(): id %u, type %u / %u",
-          (const char *)_iEntityId))
+  if (g_pMsgTracer->RemoveCurrentMsgIfEqual("LogicUpdate(): id %u, type %u / %u", _iEntityId))
   {
     g_pMsgTracer->PushFormatedInts(
-
         "LogicUpdate() + RegisterForLogicUpdate(): id %u, type %u / %u, delta ticks %u",
         _iEntityId,
         pEntity->ObjType(),
@@ -553,7 +551,6 @@ int CMapObjectMgr::RegisterForLogicUpdate(int iDeltaTicks, int _iEntityId)
   else
   {
     g_pMsgTracer->PushFormatedInts(
-
         "RegisterForLogicUpdate(): id %u, type %u / %u, delta ticks %u",
         _iEntityId,
         pEntity->ObjType(),
@@ -650,9 +647,9 @@ void CMapObjectMgr::Store(class S4::CMapFile &arg0)
       stringStream << queueItem;
     }
   }
-  
+
   stringStream.put(0);
-  
+
   // EXCEPTION HANDLING
   arg0.SaveChunk(0xAAu, 0, stringStream.gcount(), stringStream.str().c_str(), 0);
 }
@@ -663,12 +660,12 @@ void CMapObjectMgr::Load(class S4::CMapFile &arg0)
 {
   CTrace::Print("CMapObjectMgr load");
   int unknown = 0;
-  void *chunk = arg0.LoadChunk(0xAAu, 0, unknown, nullptr);
+  const void *chunk = arg0.LoadChunk(0xAAu, 0, unknown, nullptr);
   if (chunk)
   {
-    std::istringstream chunkStream = std::istringstream(static_cast<char *>(chunk));
+    std::istringstream chunkStream = std::istringstream(static_cast<const char *>(chunk));
     // EXCEPTION HANDLING
-    
+
     // EXCEPTION HANDLING
     int version = 0;
     chunkStream >> version;
@@ -772,8 +769,8 @@ void CMapObjectMgr::PrintAllEntities(int _iLogLevel)
     }
   }
 
-  BYTE entitySlotList[MAX_ENTRIES+1]; // [esp+98h] [ebp-20030h] BYREF
-  BYTE entityList[MAX_ENTRIES+1]; // [esp+10098h] [ebp-10030h] BYREF
+  BYTE entitySlotList[MAX_ENTRIES + 1]; // [esp+98h] [ebp-20030h] BYREF
+  BYTE entityList[MAX_ENTRIES + 1];     // [esp+10098h] [ebp-10030h] BYREF
   memset(entitySlotList, 255, sizeof(entitySlotList));
   memset(entityList, 0, sizeof(entityList));
 
@@ -781,7 +778,7 @@ void CMapObjectMgr::PrintAllEntities(int _iLogLevel)
   {
     auto &updateQueue = this->m_vLogicUpdateSlots->at(slot);
 
-    for(auto entityId : updateQueue)
+    for (auto entityId : updateQueue)
     {
       if ((char)entitySlotList[entityId] != -1)
         entityList[entityId] = 1;
