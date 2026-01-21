@@ -5,6 +5,8 @@
 
 typedef class CPersistence *(__cdecl *DeserializerFunc)(std::istream &);
 
+extern void RegisterClasses();
+
 class CPersistence
 {
 public:
