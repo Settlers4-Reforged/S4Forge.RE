@@ -6,7 +6,7 @@
 // Decompiled from int __thiscall IAnimatedEntity::Next(IAnimatedEntity *this)
 int  IAnimatedEntity::Next(void)const {
   
-  return *((unsigned __int16 *)this + 21);
+  return this->m_wNextEntity;
 }
 
 
@@ -14,7 +14,7 @@ int  IAnimatedEntity::Next(void)const {
 // Decompiled from int __thiscall IAnimatedEntity::Frame(IAnimatedEntity *this)
 int  IAnimatedEntity::Frame(void)const {
   
-  return *((unsigned __int8 *)this + 36);
+  return this->m_cFrame;
 }
 
 
@@ -35,162 +35,152 @@ int  IAnimatedEntity::Previous(void)const {
 
 
 // address=[0x1439e10]
-// Decompiled from int __thiscall IAnimatedEntity::SetNext(_WORD *this, int a2)
+// Decompiled from void __thiscall IAnimatedEntity::SetNext(IAnimatedEntity *this, int a2)
 void  IAnimatedEntity::SetNext(int a2) {
   
-  int result; // eax
-
-  if ( IEntity::ID() == a2
+  if ( IEntity::ID(this) == a2
     && BBSupportDbgReport(
          2,
-         (int)"D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\MapObjects\\AnimatedEntity.h",
+         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\MapObjects\\AnimatedEntity.h",
          93,
-         (int)"ID() != _id") == 1 )
+         "ID() != _id") == 1 )
   {
     __debugbreak();
   }
-  result = 0;
-  this[21] = a2;
-  return result;
+  this->m_wNextEntity = a2;
 }
 
 
 // address=[0x1439eb0]
-// Decompiled from IAnimatedEntity *__thiscall IAnimatedEntity::SetPrevious(IAnimatedEntity *this, WORD a2)
+// Decompiled from void __thiscall IAnimatedEntity::SetPrevious(IAnimatedEntity *this, WORD a2)
 void  IAnimatedEntity::SetPrevious(int a2) {
   
-  IAnimatedEntity *result; // eax
-
-  result = this;
   this->m_wPrevEntity = a2;
-  return result;
 }
 
 
 // address=[0x14d87d0]
-// Decompiled from void __thiscall IAnimatedEntity::SetLastUpdateTick(CMFCCaptionButton *this, int a2)
+// Decompiled from void __thiscall IAnimatedEntity::SetLastUpdateTick(IAnimatedEntity *this, DWORD a2)
 void  IAnimatedEntity::SetLastUpdateTick(unsigned int a2) {
   
-  *((_DWORD *)this + 11) = a2;
+  this->m_uLastUpdateTick = a2;
 }
 
 
 // address=[0x14e31a0]
-// Decompiled from int __thiscall IAnimatedEntity::RegisterForLogicUpdate(IAnimatedEntity *this, int a2)
-int  IAnimatedEntity::RegisterForLogicUpdate(int a2) {
+// Decompiled from int __thiscall IAnimatedEntity::RegisterForLogicUpdate(IAnimatedEntity *this, int _iDeltaTicks)
+int  IAnimatedEntity::RegisterForLogicUpdate(int _iDeltaTicks) {
   
-  const char *id; // eax
-  unsigned int v3; // eax
+  int id; // eax
+  int v3; // eax
 
-  id = (const char *)IEntity::ID(this);
-  v3 = CMapObjectMgr::RegisterForLogicUpdate(g_pMapObjectMgr, a2, id);
+  id = IEntity::ID(this);
+  v3 = CMapObjectMgr::RegisterForLogicUpdate(g_pMapObjectMgr, _iDeltaTicks, id);
   return IAnimatedEntity::SetLastLogicUpdate(v3);
 }
 
 
 // address=[0x14e31d0]
-// Decompiled from int __thiscall IAnimatedEntity::UnRegisterFromLogicUpdate(IAnimatedEntity *this)
+// Decompiled from void __thiscall IAnimatedEntity::UnRegisterFromLogicUpdate(IAnimatedEntity *this)
 void  IAnimatedEntity::UnRegisterFromLogicUpdate(void) {
   
-  int LastLogicUpdateTick; // eax
-  int v3; // [esp-4h] [ebp-8h]
+  unsigned int iLastLogicUpdateTick; // eax
+  int iEntityId; // [esp-4h] [ebp-8h]
 
-  v3 = IEntity::ID();
-  LastLogicUpdateTick = IAnimatedEntity::GetLastLogicUpdateTick(this);
-  CMapObjectMgr::UnRegisterFromLogicUpdate(g_pMapObjectMgr, LastLogicUpdateTick, v3);
-  return IAnimatedEntity::SetLastLogicUpdate(-1);
+  iEntityId = IEntity::ID(this);
+  iLastLogicUpdateTick = IAnimatedEntity::GetLastLogicUpdateTick(this);
+  CMapObjectMgr::UnRegisterFromLogicUpdate(g_pMapObjectMgr, iLastLogicUpdateTick, iEntityId);
+  IAnimatedEntity::SetLastLogicUpdate(-1);
 }
 
 
 // address=[0x14e3210]
-// Decompiled from int __thiscall IAnimatedEntity::SetEvent(unsigned __int16 *this, int a2)
+// Decompiled from int __thiscall IAnimatedEntity::SetEvent(IAnimatedEntity *this, const struct CEntityEvent *a2)
 void  IAnimatedEntity::SetEvent(class CEntityEvent const & a2) {
   
-  int v2; // eax
-  int v4; // [esp-8h] [ebp-Ch]
-  int v5; // [esp-4h] [ebp-8h]
+  DWORD v2; // eax
+  DWORD m_iEvent; // [esp-8h] [ebp-Ch]
+  DWORD m_iType; // [esp-4h] [ebp-8h]
 
-  v5 = *(_DWORD *)(a2 + 8);
-  v4 = *(_DWORD *)(a2 + 4);
+  m_iType = a2->m_iType;
+  m_iEvent = a2->m_iEvent;
   v2 = IEntity::EntityId(this);
-  IMessageTracer::PushFormatedInts(g_pMsgTracer, "SetEvent(): id %u, event %u, type %u", v2, v4, v5);
+  IMessageTracer::PushFormatedInts(g_pMsgTracer, "SetEvent(): id %u, event %u, type %u", v2, m_iEvent, m_iType);
   if ( !IEntity::FlagBits(this, EntityFlag_Registered) )
-    IAnimatedEntity::RegisterForLogicUpdate(1);
+    IAnimatedEntity::RegisterForLogicUpdate(this, 1);
   return std::vector<CEntityEvent>::push_back(a2);
 }
 
 
 // address=[0x14e3270]
-// Decompiled from void __thiscall IAnimatedEntity::ClearAllQueuedEvents(COleCmdUI *this)
+// Decompiled from void __thiscall IAnimatedEntity::ClearAllQueuedEvents(IAnimatedEntity *this)
 void  IAnimatedEntity::ClearAllQueuedEvents(void) {
   
-  std::vector<CEntityEvent>::clear((char *)this + 52);
+  std::vector<CEntityEvent>::clear(&this->m_iEventQueue);
 }
 
 
 // address=[0x14e3290]
-// Decompiled from void __thiscall IAnimatedEntity::BoxSelection(struct IEntity *this)
+// Decompiled from void __thiscall IAnimatedEntity::BoxSelection(IAnimatedEntity *this)
 void  IAnimatedEntity::BoxSelection(void) {
   
-  int v1; // eax
-  int v2; // eax
-  int v3; // [esp-Ch] [ebp-48h]
-  int ScreenOffsetsByMapIndices; // [esp+0h] [ebp-3Ch]
-  int v5; // [esp+1Ch] [ebp-20h] BYREF
-  int v6; // [esp+20h] [ebp-1Ch] BYREF
+  __int16 v1; // ax
+  __int64 packedXY; // [esp-10h] [ebp-4Ch]
+  int yScreenOffset; // [esp+1Ch] [ebp-20h] BYREF
+  int xScreenOffset; // [esp+20h] [ebp-1Ch] BYREF
   int SelectionType; // [esp+24h] [ebp-18h]
-  int v8; // [esp+28h] [ebp-14h]
+  int v6; // [esp+28h] [ebp-14h]
   int EntitySelectionType; // [esp+2Ch] [ebp-10h]
-  int v10; // [esp+30h] [ebp-Ch]
-  struct IEntity *v11; // [esp+34h] [ebp-8h]
-  bool v12; // [esp+3Bh] [ebp-1h]
+  int mask; // [esp+30h] [ebp-Ch]
+  bool v10; // [esp+3Bh] [ebp-1h]
 
-  v11 = this;
-  if ( IEntity::OwnerId((unsigned __int8 *)this) == dword_3F1F680 )
+  if ( IEntity::OwnerId(this) == g_cInputProcessor.m_iSelectionLocalPlayerId )
   {
-    v8 = CInputProcessor::StrictSelection(&g_cInputProcessor);
-    v10 = 16711680;
-    if ( v8 == 1 )
+    v6 = CInputProcessor::StrictSelection(&g_cInputProcessor);
+    mask = 0xFF0000;
+    if ( v6 == 1 )
     {
-      v10 = 16776960;
+      mask = 0xFFFF00;
     }
-    else if ( v8 == 2 )
+    else if ( v6 == 2 )
     {
-      v10 = 0xFFFFFF;
+      mask = 0xFFFFFF;
     }
-    EntitySelectionType = CInputProcessor::GetEntitySelectionType(v11);
+    EntitySelectionType = CInputProcessor::GetEntitySelectionType(this);
     SelectionType = CInputProcessor::GetSelectionType(&g_cInputProcessor);
-    if ( IEntity::FlagBits(v11, EntityFlag_Selectable) || IEntity::ObjType((unsigned __int8 *)v11) == 8 )
+    if ( IEntity::FlagBits(this, EntityFlag_Selectable) || IEntity::ObjType(this) == 8 )
     {
-      v12 = 0;
-      if ( v8 )
+      v10 = 0;
+      if ( v6 )
       {
-        v12 = (v10 & EntitySelectionType) == (v10 & SelectionType);
+        v10 = (mask & EntitySelectionType) == (mask & SelectionType);
       }
       else if ( (EntitySelectionType & 0xFF0000) <= (SelectionType & 0xFF0000) )
       {
         if ( (EntitySelectionType & 0xFF0000) == (SelectionType & 0xFF0000) )
-          v12 = (EntitySelectionType & 0xFF00) == (SelectionType & 0xFF00);
+          v10 = (EntitySelectionType & 0xFF00) == (SelectionType & 0xFF00);
       }
       else
       {
-        v12 = 1;
+        v10 = 1;
       }
-      if ( v12 )
+      if ( v10 )
       {
-        v6 = -1;
-        v5 = -1;
-        v3 = IEntity::Y(v11);
-        v1 = IEntity::X(v11);
-        ScreenOffsetsByMapIndices = IGfxEngine::GetScreenOffsetsByMapIndices(v1, v3, &v6, &v5);
-        if ( ScreenOffsetsByMapIndices )
+        xScreenOffset = -1;
+        yScreenOffset = -1;
+        HIDWORD(packedXY) = IEntity::Y(this);
+        LODWORD(packedXY) = IEntity::X(this);
+        if ( IGfxEngine::GetScreenOffsetsByMapIndices(packedXY, &xScreenOffset, &yScreenOffset) )
         {
-          if ( dword_3F1F684 <= v6 && dword_3F1F68C >= v6 && dword_3F1F688 <= v5 && dword_3F1F690 >= v5 )
+          if ( (int)g_cInputProcessor.m_iSelectionXStart <= xScreenOffset
+            && (int)g_cInputProcessor.m_iSelectionXEnd >= xScreenOffset
+            && (int)g_cInputProcessor.m_iSelectionYStart <= yScreenOffset
+            && (int)g_cInputProcessor.m_iSelectionYEnd >= yScreenOffset )
           {
-            if ( !(unsigned __int8)CInputProcessor::BoxSelectAllSettler(&g_cInputProcessor, ScreenOffsetsByMapIndices) )
-              CInputProcessor::SetSelectionType((CInputProcessor *)&g_cInputProcessor, EntitySelectionType);
-            v2 = IEntity::EntityId((unsigned __int16 *)v11);
-            CInputProcessor::NewCandidate((CInputProcessor *)&g_cInputProcessor, v2);
+            if ( !CInputProcessor::BoxSelectAllSettler(&g_cInputProcessor) )
+              CInputProcessor::SetSelectionType(&g_cInputProcessor, EntitySelectionType);
+            v1 = IEntity::EntityId(this);
+            CInputProcessor::NewCandidate(&g_cInputProcessor, v1);
           }
         }
       }

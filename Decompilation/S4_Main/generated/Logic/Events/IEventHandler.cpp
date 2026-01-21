@@ -6,8 +6,8 @@
 // Decompiled from IEventHandler *__thiscall IEventHandler::IEventHandler(IEventHandler *this, int a2)
  IEventHandler::IEventHandler(int a2) {
   
-  *(_DWORD *)this = &IEventHandler::_vftable_;
-  *((_DWORD *)this + 1) = operator new[](4 * a2);
+  this->__vftable = (IEventHandler_vtbl *)&IEventHandler::_vftable_;
+  this->m_pHandlers = (DWORD *)operator new[](4 * a2);
   return this;
 }
 

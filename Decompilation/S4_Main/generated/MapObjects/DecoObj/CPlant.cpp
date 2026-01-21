@@ -3,11 +3,14 @@
 // Definitions for class CPlant
 
 // address=[0x14016c0]
-// Decompiled from int __cdecl CPlant::New(int a1)
+// Decompiled from CPlant *__cdecl CPlant::New(int a1)
 class CPersistence * __cdecl CPlant::New(std::istream & a1) {
   
-  if ( CPlant::operator new(0x50u) )
-    return CPlant::CPlant(a1);
+  CPlant *v3; // [esp+Ch] [ebp-10h]
+
+  v3 = (CPlant *)CPlant::operator new(0x50u);
+  if ( v3 )
+    return CPlant::CPlant(v3, a1);
   else
     return 0;
 }

@@ -18,7 +18,7 @@ public:
     bool  IsMessage(void);
 
     // address=[0x14607a0]
-    class CEvn_Logic  PopMessage(void a2);
+    class CEvn_Logic  PopMessage(void retstr);
 
     // address=[0x1486df0]
     class CGameData &  GameData(void);

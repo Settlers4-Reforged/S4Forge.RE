@@ -27,13 +27,13 @@ public:
     void  DeSelectEntity(int a2);
 
     // address=[0x1455440]
-    void  AddToSelection(int a1);
+    void  AddToSelection(int _iEntityId);
 
     // address=[0x14554d0]
     int  GetSelectionTypeOfCurrentSelection(void)const;
 
     // address=[0x1455520]
-    static int __cdecl GetEntitySelectionType(int a1, int a2, int a3);
+    static int __cdecl GetEntitySelectionType(int _iObjType, int _iType, int _iWarriorType);
 
     // address=[0x14555b0]
     static int __cdecl GetEntitySelectionType(class IEntity const * a1);
@@ -331,7 +331,7 @@ protected:
     int  SelectOne(int x, int y);
 
     // address=[0x145c390]
-    int  GetTheBestEntity(class std::vector<unsigned short,class std::allocator<unsigned short> > & a1, int a2, int a3);
+    int  GetTheBestEntity(class std::vector<unsigned short,class std::allocator<unsigned short> > & a1, int x, int y);
 
     // address=[0x145c590]
     int  SelectAllInSurrounding(int a2, int a3);
@@ -346,7 +346,7 @@ protected:
     void  RemoveActiveSettler(int a2, int a3);
 
     // address=[0x145c9e0]
-    void  ActivateSpecialist(int a1, int a2);
+    void  ActivateSpecialist(int a1, int _iArea);
 
     // address=[0x145ca50]
     void  WorkOnBuildingSites(void);
@@ -355,7 +355,7 @@ protected:
     bool  GetPossibleBuildingSites(int a2, int a3, bool a4);
 
     // address=[0x145cdd0]
-    bool  UpdateScreenPossibleBuildingSites(int a2, int a3, int a4);
+    bool  UpdateScreenPossibleBuildingSites(int _iOwner, int _iBuildingType, int a4);
 
     // address=[0x145d060]
     void  ShowPossibleBuildingType(void);
@@ -392,6 +392,37 @@ protected:
 
     // address=[0x3f1f328]
     static struct SGfxObject m_sGfxObj;
+
+    // Type information members
+public:
+    CFsm * m_pFSM;
+    DWORD unk_C;
+    DWORD m_iBuildBuildingType;
+    DWORD unk_14;
+    DWORD unk_18;
+    DWORD unk_1C;
+    DWORD unk_20;
+    DWORD unk_24;
+    DWORD unk_28;
+    DWORD unk_2C;
+    DWORD unk_30;
+    BYTE m_bBoxSelectAllSettler;
+    DWORD m_iSelectionLocalPlayerId;
+    DWORD m_iSelectionXStart;
+    DWORD m_iSelectionYStart;
+    DWORD m_iSelectionXEnd;
+    DWORD m_iSelectionYEnd;
+    DWORD m_iSelectionType;
+    DWORD m_iViewState;
+    DWORD m_pEntityCandidates;
+    DWORD unk_58;
+    DWORD unk_5C;
+    DWORD unk_60;
+    DWORD m_iSelectionStrict;
+    BYTE unk_68;
+    BYTE unk_69;
+    BYTE m_iSelectionMode;
+    BYTE unk_6B;
 
 };
 

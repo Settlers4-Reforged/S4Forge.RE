@@ -3,11 +3,14 @@
 // Definitions for class CLandAnimal
 
 // address=[0x1400fe0]
-// Decompiled from int __cdecl CLandAnimal::New(int a1)
+// Decompiled from CLandAnimal *__cdecl CLandAnimal::New(int a1)
 class CPersistence * __cdecl CLandAnimal::New(std::istream & a1) {
   
-  if ( CLandAnimal::operator new(0xB0u) )
-    return CLandAnimal::CLandAnimal(a1);
+  CLandAnimal *v3; // [esp+Ch] [ebp-10h]
+
+  v3 = (CLandAnimal *)CLandAnimal::operator new(0xB0u);
+  if ( v3 )
+    return CLandAnimal::CLandAnimal(v3, a1);
   else
     return 0;
 }

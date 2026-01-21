@@ -27,7 +27,7 @@ unsigned int  CStateGame::Rand(void) {
 
 
 // address=[0x14606d0]
-// Decompiled from int __thiscall CStateGame::IsMessage(CStateGame *this)
+// Decompiled from bool __thiscall CStateGame::IsMessage(CStateGame *this)
 bool  CStateGame::IsMessage(void) {
   
   return (*(int (__thiscall **)(_DWORD, CStateGame *))(**((_DWORD **)this + 63) + 12))(*((_DWORD *)this + 63), this);
@@ -35,14 +35,14 @@ bool  CStateGame::IsMessage(void) {
 
 
 // address=[0x14607a0]
-// Decompiled from int __thiscall CStateGame::PopMessage(_DWORD **this, int a2)
-class CEvn_Logic  CStateGame::PopMessage(void a2) {
+// Decompiled from CEvn_Logic *__thiscall CStateGame::PopMessage(_DWORD **this, CEvn_Logic *__return_ptr retstr)
+class CEvn_Logic  CStateGame::PopMessage(void retstr) {
   
-  struct boost::exception_detail::clone_base *v2; // eax
+  CEvn_Logic *v2; // eax
 
-  v2 = (struct boost::exception_detail::clone_base *)(*(int (__thiscall **)(_DWORD *))(*this[63] + 8))(this[63]);
-  CEvn_Logic::CEvn_Logic(v2);
-  return a2;
+  v2 = (CEvn_Logic *)(*(int (__thiscall **)(_DWORD *))(*this[63] + 8))(this[63]);
+  CEvn_Logic::CEvn_Logic(retstr, v2);
+  return retstr;
 }
 
 

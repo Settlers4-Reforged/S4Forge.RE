@@ -27,7 +27,7 @@ public:
     void  SetLastUpdateTick(unsigned int a2);
 
     // address=[0x14e31a0]
-    int  RegisterForLogicUpdate(int a2);
+    int  RegisterForLogicUpdate(int _iDeltaTicks);
 
     // address=[0x14e31d0]
     void  UnRegisterFromLogicUpdate(void);

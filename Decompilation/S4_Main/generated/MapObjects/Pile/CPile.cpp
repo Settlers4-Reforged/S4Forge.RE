@@ -11,11 +11,14 @@ bool  CPile::GoodAvailable(void)const {
 
 
 // address=[0x1401580]
-// Decompiled from int __cdecl CPile::New(int a1)
+// Decompiled from CPile *__cdecl CPile::New(struct std::istream *a1)
 class CPersistence * __cdecl CPile::New(std::istream & a1) {
   
-  if ( CPile::operator new(0x7Cu) )
-    return CPile::CPile(a1);
+  CPile *v3; // [esp+Ch] [ebp-10h]
+
+  v3 = (CPile *)CPile::operator new(0x7Cu);
+  if ( v3 )
+    return CPile::CPile(v3, a1);
   else
     return 0;
 }

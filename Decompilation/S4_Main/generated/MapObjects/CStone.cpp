@@ -3,11 +3,14 @@
 // Definitions for class CStone
 
 // address=[0x14020c0]
-// Decompiled from int __cdecl CStone::New(int a1)
+// Decompiled from CStone *__cdecl CStone::New(int a1)
 class CPersistence * __cdecl CStone::New(std::istream & a1) {
   
-  if ( CStone::operator new(0x48u) )
-    return CStone::CStone(a1);
+  CStone *v3; // [esp+Ch] [ebp-10h]
+
+  v3 = (CStone *)CStone::operator new(0x48u);
+  if ( v3 )
+    return CStone::CStone(v3, a1);
   else
     return 0;
 }

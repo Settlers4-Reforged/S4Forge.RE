@@ -35,6 +35,14 @@ public:
     // address=[0x3d8bb20]
     static unsigned long m_iClassID;
 
+    // Type information members
+public:
+    int m_iEvent;
+    int m_iType;
+    int unk_C;
+    int unk_10;
+    int unk_14;
+
 };
 
 

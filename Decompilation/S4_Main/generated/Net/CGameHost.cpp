@@ -241,7 +241,7 @@ bool  CGameHost::InitAsHost(unsigned int a2) {
   _BYTE v10[28]; // [esp+28h] [ebp-2Ch] BYREF
   int v11; // [esp+50h] [ebp-4h]
 
-  IEventHandler::IEventHandler(this, 2000);
+  IEventHandler::IEventHandler((IEventHandler *)this, 2000);
   v11 = 0;
   *(_DWORD *)this = &CGameHost::_vftable_;
   *((_BYTE *)this + 8) = 0;
@@ -278,7 +278,7 @@ bool  CGameHost::InitAsHost(unsigned int a2) {
   C = (CFsm *)operator new(0x1Cu);
   LOBYTE(v11) = 3;
   if ( C )
-    v7 = CFsm::CFsm(C, this, 1500, 34);
+    v7 = CFsm::CFsm(C, (struct IEventHandler *)this, 1500, 34);
   else
     v7 = 0;
   LOBYTE(v11) = 2;

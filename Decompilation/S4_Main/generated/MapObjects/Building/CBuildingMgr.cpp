@@ -606,19 +606,19 @@ int  CBuildingMgr::GetFirstBuildingId(int a2, int a3)const {
 
 
 // address=[0x14f4fe0]
-// Decompiled from int __thiscall CBuildingMgr::GetNextBuilding(CBuildingMgr *this, int a2, int a3)
-class CBuilding *  CBuildingMgr::GetNextBuilding(int a2, int a3)const {
+// Decompiled from CBuilding *__thiscall CBuildingMgr::GetNextBuilding(CBuildingMgr *this, int iOwnerId, int _iBuildingType)
+class CBuilding *  CBuildingMgr::GetNextBuilding(int iOwnerId, int _iBuildingType)const {
   
   int v5; // [esp+4h] [ebp-Ch]
-  unsigned __int8 *BuildingPtr; // [esp+8h] [ebp-8h]
+  IEntity *BuildingPtr; // [esp+8h] [ebp-8h]
   int *v7; // [esp+Ch] [ebp-4h]
 
-  if ( (a2 <= 0 || a2 >= 9)
+  if ( (iOwnerId <= 0 || iOwnerId >= 9)
     && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1176, "_iOwnerId>0 && _iOwnerId<PLAYER_MAX") == 1 )
   {
     __debugbreak();
   }
-  if ( (a3 <= 0 || a3 >= 83)
+  if ( (_iBuildingType <= 0 || _iBuildingType >= 83)
     && BBSupportDbgReport(
          2,
          "MapObjects\\Building\\BuildingMgr.cpp",
@@ -627,7 +627,7 @@ class CBuilding *  CBuildingMgr::GetNextBuilding(int a2, int a3)const {
   {
     __debugbreak();
   }
-  v7 = (int *)((char *)this + 332 * a2 + 4 * a3 + 8992);
+  v7 = (int *)((char *)this + 332 * iOwnerId + 4 * _iBuildingType + 8992);
   BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *v7);
   if ( BuildingPtr )
     v5 = IAnimatedEntity::Next(BuildingPtr);
@@ -635,7 +635,7 @@ class CBuilding *  CBuildingMgr::GetNextBuilding(int a2, int a3)const {
     v5 = 0;
   *v7 = v5;
   if ( !*v7 )
-    *v7 = *((_DWORD *)this + 83 * a2 + a3 + 7);
+    *v7 = *((_DWORD *)this + 83 * iOwnerId + _iBuildingType + 7);
   if ( *v7 )
     return CBuildingMgr::operator[](*v7);
   else
@@ -1619,7 +1619,7 @@ bool  CBuildingMgr::IsGoodWorkingAreaCenter(int a2, int & a3, int & a4)const {
 
 
 // address=[0x14f6ad0]
-// Decompiled from _DWORD *__cdecl CBuildingMgr::FillBuildingAmount(void **a1, char a2, char a3)
+// Decompiled from _DWORD *__cdecl CBuildingMgr::FillBuildingAmount(struct CInfoExchange *a1, bool a2, bool a3)
 void __cdecl CBuildingMgr::FillBuildingAmount(class CInfoExchange * a1, bool a2, bool a3) {
   
   int v4; // [esp+8h] [ebp-5Ch]
@@ -1627,9 +1627,9 @@ void __cdecl CBuildingMgr::FillBuildingAmount(class CInfoExchange * a1, bool a2,
   int LocalPlayerEcoSectorIdAtCenter; // [esp+14h] [ebp-50h]
   int v7; // [esp+18h] [ebp-4Ch] BYREF
   int NumberOfBuildings; // [esp+1Ch] [ebp-48h] BYREF
-  _BYTE *BuildingInfo; // [esp+20h] [ebp-44h]
+  char *BuildingInfo; // [esp+20h] [ebp-44h]
   int v10; // [esp+24h] [ebp-40h]
-  void **v11; // [esp+28h] [ebp-3Ch]
+  struct CInfoExchange *v11; // [esp+28h] [ebp-3Ch]
   int LocalPlayerId; // [esp+2Ch] [ebp-38h]
   int i; // [esp+30h] [ebp-34h]
   unsigned int v14; // [esp+34h] [ebp-30h]
@@ -1639,7 +1639,12 @@ void __cdecl CBuildingMgr::FillBuildingAmount(class CInfoExchange * a1, bool a2,
 
   if ( !a1 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1581, "_pInfoExchange != 0") == 1 )
     __debugbreak();
-  if ( !j____RTDynamicCast(a1, 0, &CInfoExchange__RTTI_Type_Descriptor_, &SBuildingMenu__RTTI_Type_Descriptor_, 0)
+  if ( !j____RTDynamicCast(
+          (void **)&a1->__vftable,
+          0,
+          &CInfoExchange__RTTI_Type_Descriptor_,
+          &SBuildingMenu__RTTI_Type_Descriptor_,
+          0)
     && BBSupportDbgReport(
          2,
          "MapObjects\\Building\\BuildingMgr.cpp",
@@ -1651,7 +1656,7 @@ void __cdecl CBuildingMgr::FillBuildingAmount(class CInfoExchange * a1, bool a2,
   LocalPlayerId = CPlayerManager::GetLocalPlayerId();
   v4 = CPlayerManager::Race(LocalPlayerId);
   v11 = a1;
-  *((_BYTE *)a1 + 9) = a3;
+  BYTE1(a1->m_iUnknown[1]) = a3;
   if ( a3 )
     LocalPlayerEcoSectorIdAtCenter = CEcoSectorMgr::GetLocalPlayerEcoSectorIdAtCenter();
   else
@@ -1659,7 +1664,7 @@ void __cdecl CBuildingMgr::FillBuildingAmount(class CInfoExchange * a1, bool a2,
   v10 = LocalPlayerEcoSectorIdAtCenter;
   for ( i = 0; i < 10; ++i )
   {
-    v14 = (unsigned int)&v11[4 * i + 3];
+    v14 = (unsigned int)&v11->m_iUnknown[4 * i + 2];
     v15 = *(_DWORD *)v14;
     NumberOfBuildings = 0;
     v7 = 0;
@@ -1694,7 +1699,7 @@ void __cdecl CBuildingMgr::FillBuildingAmount(class CInfoExchange * a1, bool a2,
       {
         v15 = 52;
       }
-      BuildingInfo = (_BYTE *)CBuildingInfoMgr::GetBuildingInfo(v4, v15);
+      BuildingInfo = CBuildingInfoMgr::GetBuildingInfo(v4, v15);
       *(_BYTE *)(v14 + 12) = BuildingInfo[3];
       *(_BYTE *)(v14 + 13) = BuildingInfo[2];
       *(_BYTE *)(v14 + 14) = BuildingInfo[4];
@@ -1702,7 +1707,7 @@ void __cdecl CBuildingMgr::FillBuildingAmount(class CInfoExchange * a1, bool a2,
     *(_DWORD *)(v14 + 8) = NumberOfBuildings;
     *(_DWORD *)(v14 + 4) = v7;
   }
-  v11[1] = (void *)28;
+  v11->m_iUnknown[0] = 28;
   if ( a2 )
     v5 = 604;
   else

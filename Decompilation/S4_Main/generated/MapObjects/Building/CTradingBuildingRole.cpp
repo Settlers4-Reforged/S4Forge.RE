@@ -600,19 +600,19 @@ bool  CTradingBuildingRole::IsPossibleTradeTarget(int a2) {
   int v11; // [esp+Ch] [ebp-1Ch] BYREF
   int v12; // [esp+10h] [ebp-18h] BYREF
   int v13; // [esp+14h] [ebp-14h] BYREF
-  CTradingBuildingRole *v14; // [esp+18h] [ebp-10h]
   unsigned __int8 *v15; // [esp+1Ch] [ebp-Ch]
   unsigned __int8 *BuildingPtr; // [esp+20h] [ebp-8h]
   unsigned __int8 *v17; // [esp+24h] [ebp-4h]
 
-  v14 = this;
   v17 = (unsigned __int8 *)CMapObjectMgr::EntityPtr(a2);
-  if ( IEntity::ObjType(v17) != 8 )
+  if ( IEntity::ObjType((IEntity *)v17) != 8 )
     return 0;
-  BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)v14 + 3));
-  v15 = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a2);
-  if ( !IEntity::FlagBits(v15, (EntityFlag)((char *)&loc_1FFFFFF + 1))
-    || !IEntity::FlagBits(BuildingPtr, (EntityFlag)((char *)&loc_1FFFFFF + 1)) )
+  BuildingPtr = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr(
+                                     (CBuildingMgr *)g_cBuildingMgr,
+                                     *((unsigned __int16 *)this + 3));
+  v15 = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a2);
+  if ( !IEntity::FlagBits((IEntity *)v15, (EntityFlag)((char *)&loc_1FFFFFF + 1))
+    || !IEntity::FlagBits((IEntity *)BuildingPtr, (EntityFlag)((char *)&loc_1FFFFFF + 1)) )
   {
     return 0;
   }
@@ -624,14 +624,14 @@ bool  CTradingBuildingRole::IsPossibleTradeTarget(int a2) {
   v4 = IEntity::X(v17);
   if ( !(*(unsigned __int8 (__thiscall **)(void *, int, int))(*(_DWORD *)g_pFogging + 32))(g_pFogging, v4, v8) )
     return 0;
-  if ( IEntity::Type((unsigned __int16 *)v17) == 32 && IEntity::Type((unsigned __int16 *)BuildingPtr) == 32 )
+  if ( IEntity::Type((IEntity *)v17) == 32 && IEntity::Type((IEntity *)BuildingPtr) == 32 )
     return 1;
-  if ( IEntity::Type((unsigned __int16 *)v17) != 32 && IEntity::Type((unsigned __int16 *)v17) != 33 )
+  if ( IEntity::Type((IEntity *)v17) != 32 && IEntity::Type((IEntity *)v17) != 33 )
     return 0;
   v5 = (Y16X16 *)CBuilding::EnsignPackedXY(BuildingPtr);
-  Y16X16::UnpackXYFast(v5, &v12, &v13);
+  Y16X16::UnpackXYFast((int)v5, &v12, &v13);
   v6 = (Y16X16 *)CBuilding::EnsignPackedXY(v15);
-  Y16X16::UnpackXYFast(v6, &v10, &v11);
+  Y16X16::UnpackXYFast((int)v6, &v10, &v11);
   v9 = CWorldManager::SectorId(v12, v13);
   return v9 == CWorldManager::SectorId(v10, v11);
 }

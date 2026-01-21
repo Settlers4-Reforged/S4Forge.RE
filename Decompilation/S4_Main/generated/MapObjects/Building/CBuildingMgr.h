@@ -51,7 +51,7 @@ public:
     int  GetFirstBuildingId(int a2, int a3)const;
 
     // address=[0x14f4fe0]
-    class CBuilding *  GetNextBuilding(int a2, int a3)const;
+    class CBuilding *  GetNextBuilding(int iOwnerId, int _iBuildingType)const;
 
     // address=[0x14f50e0]
     class CBuilding *  GetBuilding(int a2, int a3)const;

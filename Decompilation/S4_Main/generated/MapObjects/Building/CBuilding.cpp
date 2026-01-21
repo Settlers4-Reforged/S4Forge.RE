@@ -84,11 +84,14 @@ bool  CBuilding::IsBuildUp(void)const {
 
 
 // address=[0x13ffd20]
-// Decompiled from int __cdecl CBuilding::New(int a1)
+// Decompiled from CBuilding *__cdecl CBuilding::New(struct std::istream *a1)
 class CPersistence * __cdecl CBuilding::New(std::istream & a1) {
   
-  if ( CBuilding::operator new(0x64u) )
-    return CBuilding::CBuilding(a1);
+  CBuilding *v3; // [esp+Ch] [ebp-10h]
+
+  v3 = (CBuilding *)CBuilding::operator new(0x64u);
+  if ( v3 )
+    return CBuilding::CBuilding(v3, a1);
   else
     return 0;
 }

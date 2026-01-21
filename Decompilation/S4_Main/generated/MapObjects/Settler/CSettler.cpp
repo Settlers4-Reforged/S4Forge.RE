@@ -11,11 +11,14 @@ class ISettlerRole &  CSettler::Role(void) {
 
 
 // address=[0x1401bc0]
-// Decompiled from int __cdecl CSettler::New(int a1)
+// Decompiled from CSettler *__cdecl CSettler::New(int a1)
 class CPersistence * __cdecl CSettler::New(std::istream & a1) {
   
-  if ( CSettler::operator new(0x68u) )
-    return CSettler::CSettler(a1);
+  CSettler *v3; // [esp+Ch] [ebp-10h]
+
+  v3 = (CSettler *)CSettler::operator new(0x68u);
+  if ( v3 )
+    return CSettler::CSettler(v3, a1);
   else
     return 0;
 }
