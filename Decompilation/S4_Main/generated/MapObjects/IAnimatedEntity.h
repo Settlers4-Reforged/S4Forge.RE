@@ -67,7 +67,7 @@ public:
 
 protected:
     // address=[0x14e3460]
-     IAnimatedEntity(std::istream & a2);
+     IAnimatedEntity(std::istream & a1);
 
     // address=[0x14e35f0]
     virtual void  Store(std::ostream & a2);
@@ -89,7 +89,7 @@ public:
     WORD m_wPrevEntity;
     WORD m_wNextEntity;
     DWORD m_uLastUpdateTick;
-    DWORD m_uLastLogicUpdate;
+    int m_uLastLogicUpdate;
     INT m_iEventQueue;
     INT m_iUnk_38;
 

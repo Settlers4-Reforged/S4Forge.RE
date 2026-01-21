@@ -1,3 +1,4 @@
+#if FALSE
 #include "SerialError.h"
 
 // Definitions for class SerialError
@@ -30,3 +31,4 @@ char const *  CPersistence::SerialError::What(void)const {
 }
 
 
+#endif // Already implemented

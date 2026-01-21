@@ -1330,7 +1330,7 @@ void __cdecl SaveWindowsPositionAndSize(struct HWND__ * hwnd) {
 
 
 // address=[0x1353c30]
-// Decompiled from int __stdcall WndMsgProc(HWND hWnd, MACRO_WM Msg, WPARAM wParam, LPARAM lParam)
+// Decompiled from int __stdcall WndMsgProc(HWND hWnd, unsigned int Msg, WPARAM wParam, LPARAM lParam)
 long __stdcall WndMsgProc(struct HWND__ * hWnd, unsigned int Msg, unsigned int wParam, long lParam) {
   
   int result; // eax
@@ -1341,53 +1341,53 @@ long __stdcall WndMsgProc(struct HWND__ * hWnd, unsigned int Msg, unsigned int w
   v5 = Msg;
   v6 = wParam;
   v7 = lParam;
-  if ( (unsigned int)Msg <= WM_CLOSE )
+  if ( Msg <= 0x10 )
   {
-    if ( Msg != WM_CLOSE )
+    if ( Msg != 16 )
     {
       switch ( Msg )
       {
-        case WM_DESTROY:
-          Msg = WM_SIZEWAIT;
+        case 2u:
+          Msg = 4;
           goto LABEL_78;
-        case WM_MOVE:
-          Msg = WM_DESTROY;
+        case 3u:
+          Msg = 2;
           SaveWindowsPositionAndSize(hWnd);
           goto LABEL_78;
-        case WM_SIZE:
-          Msg = WM_MOVE;
+        case 5u:
+          Msg = 3;
           SaveWindowsPositionAndSize(hWnd);
           goto LABEL_78;
-        case WM_KILLFOCUS:
-          Msg = WM_SYSCOPYDATA|WM_GETTEXT;
+        case 8u:
+          Msg = 111;
           goto LABEL_78;
         default:
           goto DontHandleEvent;
       }
     }
-    Msg = WM_FINALDESTROY|WM_ACTIVATE;
+    Msg = 118;
 LABEL_78:
     if ( !g_pEvnEngine )
       return 0;
     if ( IEventEngine::IsEventEngineLocked(g_pEvnEngine) )
       return 0;
-    if ( IEventEngine::SendRawWindowEvent(g_pEvnEngine, (struct HNWD *)hWnd, Msg, wParam, lParam) )
+    if ( IEventEngine::SendRawWindowEvent(g_pEvnEngine, hWnd, Msg, wParam, lParam) )
       return 0;
     return DefWindowProcA(hWnd, v5, v6, v7);
   }
-  if ( Msg <= (unsigned int)WM_MOUSEMOVE )
+  if ( Msg <= WM_MOUSEMOVE )
   {
-    if ( Msg != WM_MOUSEFIRST )
+    if ( Msg != 512 )
     {
       switch ( Msg )
       {
-        case WM_ACTIVATEAPP:
+        case 0x1Cu:
           Msg = 22;
           goto LABEL_78;
-        case WM_NCMOUSEMOVE:
+        case 0xA0u:
           Msg = 6;
           goto LABEL_78;
-        case WM_KEYDOWN:
+        case 0x100u:
           Msg = 11;
           lParam = 0;
           if ( (GetKeyState(KEYMODIFIER_MENU|KEYMODIFIER_ALTGR) & 0x8000000) != 0 )
@@ -1399,7 +1399,7 @@ LABEL_78:
           if ( lParam == 24 )
             lParam = 16;
           goto LABEL_78;
-        case WM_KEYUP:
+        case 0x101u:
           Msg = 20;
           lParam = 0;
           if ( (GetKeyState(KEYMODIFIER_MENU|KEYMODIFIER_ALTGR) & 0x8000000) != 0 )
@@ -1411,7 +1411,7 @@ LABEL_78:
           if ( lParam == 24 )
             lParam = 16;
           goto LABEL_78;
-        case WM_CHAR:
+        case 0x102u:
           Msg = 13;
           lParam = 0;
           if ( (GetKeyState(KEYMODIFIER_MENU|KEYMODIFIER_ALTGR) & 0x8000000) != 0 )
@@ -1423,7 +1423,7 @@ LABEL_78:
           if ( lParam == 24 )
             lParam = 16;
           goto LABEL_78;
-        case WM_SYSKEYDOWN:
+        case 0x104u:
           Msg = 12;
           lParam = 0;
           if ( (GetKeyState(KEYMODIFIER_MENU|KEYMODIFIER_ALTGR) & 0x8000000) != 0 )
@@ -1435,14 +1435,14 @@ LABEL_78:
           if ( lParam == 24 )
             lParam = 16;
           goto LABEL_78;
-        case WM_COMMAND:
+        case 0x111u:
           Msg = 0;
           goto LABEL_78;
         default:
           goto DontHandleEvent;
       }
     }
-    Msg = WM_SIZE;
+    Msg = 5;
     goto LABEL_78;
   }
   switch ( Msg )
@@ -35652,94 +35652,91 @@ void __cdecl Serial::Serialize(std::ostream & a1, unsigned long const & a2) {
 
 
 // address=[0x13ff240]
-// Decompiled from int RegisterClasses()
+// Decompiled from void RegisterClasses()
 void __cdecl RegisterClasses(void) {
   
-  int result; // eax
-
-  result = (unsigned __int8)byte_3EFE4A8;
-  if ( byte_3EFE4A8 )
-    return result;
-  CPersistence::RegisterClassWhithId(&CBuilding::m_iClassID, CBuilding::New, 0);
-  CPersistence::RegisterClassWhithId(&CSettler::m_iClassID, CSettler::New, 0);
-  CPersistence::RegisterClassWhithId(&CPile::m_iClassID, CPile::New, 0);
-  CPersistence::RegisterClassWhithId(&CLandAnimal::m_iClassID, CLandAnimal::New, 0);
-  CPersistence::RegisterClassWhithId(&CPlant::m_iClassID, CPlant::New, 0);
-  CPersistence::RegisterClassWhithId(&CStone::m_iClassID, CStone::New, 0);
-  CPersistence::RegisterClassWhithId(&CTree::m_iClassID, CTree::New, 0);
-  CPersistence::RegisterClassWhithId(&CShadowHerb::m_iClassID, CShadowHerb::New, 0);
-  CPersistence::RegisterClassWhithId(&CDecoObject::m_iClassID, CDecoObject::New, 0);
-  CPersistence::RegisterClassWhithId(&CAnyWherePileRole::m_iClassID, CAnyWherePileRole::New, 0);
-  CPersistence::RegisterClassWhithId(&CBuildingSitePileRole::m_iClassID, CBuildingSitePileRole::New, 0);
-  CPersistence::RegisterClassWhithId(&CDeliverPileRole::m_iClassID, CDeliverPileRole::New, 0);
-  CPersistence::RegisterClassWhithId(&CProductionPileRole::m_iClassID, CProductionPileRole::New, 0);
-  CPersistence::RegisterClassWhithId(&CStoragePileRole::m_iClassID, CStoragePileRole::New, 0);
-  CPersistence::RegisterClassWhithId(&CTradePileRole::m_iClassID, CTradePileRole::New, 0);
-  CPersistence::RegisterClassWhithId(&CAnimalRanchRole::m_iClassID, CAnimalRanchRole::New, 0);
-  CPersistence::RegisterClassWhithId(&CBarrackRole::m_iClassID, CBarrackRole::New, 0);
-  CPersistence::RegisterClassWhithId(&CBigTempleRole::m_iClassID, CBigTempleRole::New, 0);
-  CPersistence::RegisterClassWhithId(&CBuildingSiteRole::m_iClassID, CBuildingSiteRole::New, 0);
-  CPersistence::RegisterClassWhithId(&CCastleRole::m_iClassID, CCastleRole::New, 0);
-  CPersistence::RegisterClassWhithId(&CDarkTempleRole::m_iClassID, CDarkTempleRole::New, 0);
-  CPersistence::RegisterClassWhithId(&CEyeCatcherRole::m_iClassID, CEyeCatcherRole::New, 0);
-  CPersistence::RegisterClassWhithId(&CFarmBuildingRole::m_iClassID, CFarmBuildingRole::New, 0);
-  CPersistence::RegisterClassWhithId(&CGatherBuildingRole::m_iClassID, CGatherBuildingRole::New, 0);
-  CPersistence::RegisterClassWhithId(&CLookoutTowerRole::m_iClassID, CLookoutTowerRole::New, 0);
-  CPersistence::RegisterClassWhithId(&CMilitaryBuildingRole::m_iClassID, CMilitaryBuildingRole::New, 0);
-  CPersistence::RegisterClassWhithId(&CMineRole::m_iClassID, CMineRole::New, 0);
-  CPersistence::RegisterClassWhithId(&CProductionBuildingRole::m_iClassID, CProductionBuildingRole::New, 0);
-  CPersistence::RegisterClassWhithId(&CResidenceBuildingRole::m_iClassID, CResidenceBuildingRole::New, 0);
-  CPersistence::RegisterClassWhithId(&CSimpleBuildingRole::m_iClassID, CSimpleBuildingRole::New, 0);
-  CPersistence::RegisterClassWhithId(&CSmallTempleRole::m_iClassID, CSmallTempleRole::New, 0);
-  CPersistence::RegisterClassWhithId(&CStorageBuildingRole::m_iClassID, CStorageBuildingRole::New, 0);
-  CPersistence::RegisterClassWhithId(&CTradingBuildingRole::m_iClassID, CTradingBuildingRole::New, 0);
-  CPersistence::RegisterClassWhithId(&CWorkshopBuildingRole::m_iClassID, CWorkshopBuildingRole::New, 0);
-  CPersistence::RegisterClassWhithId(&CWorkUpBuildingRole::m_iClassID, CWorkUpBuildingRole::New, 0);
-  CPersistence::RegisterClassWhithId(&CBuilderRole::m_iClassID, CBuilderRole::New, 0);
-  CPersistence::RegisterClassWhithId(&CCarrierRole::m_iClassID, CCarrierRole::New, 0);
-  CPersistence::RegisterClassWhithId(&CDarkGardenerRole::m_iClassID, CDarkGardenerRole::New, 0);
-  CPersistence::RegisterClassWhithId(&CDiggerRole::m_iClassID, CDiggerRole::New, 0);
-  CPersistence::RegisterClassWhithId(&CHunterRole::m_iClassID, CHunterRole::New, 0);
-  CPersistence::RegisterClassWhithId(&CDonkeyRole::m_iClassID, CDonkeyRole::New, 0);
-  CPersistence::RegisterClassWhithId(&CDoorRole::m_iClassID, CDoorRole::New, 0);
-  CPersistence::RegisterClassWhithId(&CFleeRole::m_iClassID, CFleeRole::New, 0);
-  CPersistence::RegisterClassWhithId(&CFreeWorkerRole::m_iClassID, CFreeWorkerRole::New, 0);
-  CPersistence::RegisterClassWhithId(&CGardenerRole::m_iClassID, CGardenerRole::New, 0);
-  CPersistence::RegisterClassWhithId(&CGeologistRole::m_iClassID, CGeologistRole::New, 0);
-  CPersistence::RegisterClassWhithId(&CHouseWorkerRole::m_iClassID, CHouseWorkerRole::New, 0);
-  CPersistence::RegisterClassWhithId(&CMushroomFarmerRole::m_iClassID, CMushroomFarmerRole::New, 0);
-  CPersistence::RegisterClassWhithId(&CPioneerRole::m_iClassID, CPioneerRole::New, 0);
-  CPersistence::RegisterClassWhithId(&CPriestRole::m_iClassID, CPriestRole::New, 0);
-  CPersistence::RegisterClassWhithId(&CSaboteurRole::m_iClassID, CSaboteurRole::New, 0);
-  CPersistence::RegisterClassWhithId(&CShamanRole::m_iClassID, CShamanRole::New, 0);
-  CPersistence::RegisterClassWhithId(&CSlaveRole::m_iClassID, CSlaveRole::New, 0);
-  CPersistence::RegisterClassWhithId(&CSoldierRole::m_iClassID, CSoldierRole::New, 0);
-  CPersistence::RegisterClassWhithId(&CThiefRole::m_iClassID, CThiefRole::New, 0);
-  CPersistence::RegisterClassWhithId(&CTowerSoldier::m_iClassID, CTowerSoldier::New, 0);
-  CPersistence::RegisterClassWhithId(&CCart::m_iClassID, CCart::New, 0);
-  CPersistence::RegisterClassWhithId(&CRomanCatapult::m_iClassID, CRomanCatapult::New, 0);
-  CPersistence::RegisterClassWhithId(&CMayaCatapult::m_iClassID, CMayaCatapult::New, 0);
-  CPersistence::RegisterClassWhithId(&CVikingCatapult::m_iClassID, CVikingCatapult::New, 0);
-  CPersistence::RegisterClassWhithId(&CTrojanCatapult::m_iClassID, CTrojanCatapult::New, 0);
-  CPersistence::RegisterClassWhithId(&CFerryShip::m_iClassID, CFerryShip::New, 0);
-  CPersistence::RegisterClassWhithId(&CTransportShip::m_iClassID, CTransportShip::New, 0);
-  CPersistence::RegisterClassWhithId(&CWarShip::m_iClassID, CWarShip::New, 0);
-  CPersistence::RegisterClassWhithId(&CEntityTask::m_iClassID, CEntityTask::New, 0);
-  CPersistence::RegisterClassWhithId(&CEntityEvent::m_iClassID, CEntityEvent::New, 0);
-  CPersistence::RegisterClassWhithId(&CEcoSector::m_iClassID, CEcoSector::New, 0);
-  CPersistence::RegisterClassWhithId(&CGoodTransportPriority::m_iClassID, CGoodTransportPriority::New, 0);
-  CPersistence::RegisterClassWhithId(&CBuildingSupplyPriority::m_iClassID, CBuildingSupplyPriority::New, 0);
-  CPersistence::RegisterClassWhithId(&CDarkMushroomFarmRole::m_iClassID, CDarkMushroomFarmRole::New, 0);
-  CPersistence::RegisterClassWhithId(&CRomanWarShip::m_iClassID, CRomanWarShip::New, 0);
-  CPersistence::RegisterClassWhithId(&CMayaWarShip::m_iClassID, CMayaWarShip::New, 0);
-  CPersistence::RegisterClassWhithId(&CVikingWarShip::m_iClassID, CVikingWarShip::New, 0);
-  CPersistence::RegisterClassWhithId(&CTrojanWarShip::m_iClassID, CTrojanWarShip::New, 0);
-  CPersistence::RegisterClassWhithId(&CSquadLeaderRole::m_iClassID, CSquadLeaderRole::New, 0);
-  CPersistence::RegisterClassWhithId(&CManakopter::m_iClassID, CManakopter::New, 0);
-  CPersistence::RegisterClassWhithId(&CManakopterHallRole::m_iClassID, CManakopterHallRole::New, 0);
-  result = CPersistence::RegisterClassWhithId(&CHJBRole::m_iClassID, CHJBRole::New, 0);
-  byte_3EFE4A8 = 1;
-  return result;
+  if ( !s_bSetPersistenceClasses )
+  {
+    CPersistence::RegisterClassWhithId(&CBuilding::m_iClassID, (int)CBuilding::New, 0);
+    CPersistence::RegisterClassWhithId(&CSettler::m_iClassID, (int)CSettler::New, 0);
+    CPersistence::RegisterClassWhithId(&CPile::m_iClassID, (int)CPile::New, 0);
+    CPersistence::RegisterClassWhithId(&CLandAnimal::m_iClassID, (int)CLandAnimal::New, 0);
+    CPersistence::RegisterClassWhithId(&CPlant::m_iClassID, (int)CPlant::New, 0);
+    CPersistence::RegisterClassWhithId(&CStone::m_iClassID, (int)CStone::New, 0);
+    CPersistence::RegisterClassWhithId(&CTree::m_iClassID, (int)CTree::New, 0);
+    CPersistence::RegisterClassWhithId(&CShadowHerb::m_iClassID, (int)CShadowHerb::New, 0);
+    CPersistence::RegisterClassWhithId(&CDecoObject::m_iClassID, (int)CDecoObject::New, 0);
+    CPersistence::RegisterClassWhithId(&CAnyWherePileRole::m_iClassID, (int)CAnyWherePileRole::New, 0);
+    CPersistence::RegisterClassWhithId(&CBuildingSitePileRole::m_iClassID, (int)CBuildingSitePileRole::New, 0);
+    CPersistence::RegisterClassWhithId(&CDeliverPileRole::m_iClassID, (int)CDeliverPileRole::New, 0);
+    CPersistence::RegisterClassWhithId(&CProductionPileRole::m_iClassID, (int)CProductionPileRole::New, 0);
+    CPersistence::RegisterClassWhithId(&CStoragePileRole::m_iClassID, (int)CStoragePileRole::New, 0);
+    CPersistence::RegisterClassWhithId(&CTradePileRole::m_iClassID, (int)CTradePileRole::New, 0);
+    CPersistence::RegisterClassWhithId(&CAnimalRanchRole::m_iClassID, (int)CAnimalRanchRole::New, 0);
+    CPersistence::RegisterClassWhithId(&CBarrackRole::m_iClassID, (int)CBarrackRole::New, 0);
+    CPersistence::RegisterClassWhithId(&CBigTempleRole::m_iClassID, (int)CBigTempleRole::New, 0);
+    CPersistence::RegisterClassWhithId(&CBuildingSiteRole::m_iClassID, (int)CBuildingSiteRole::New, 0);
+    CPersistence::RegisterClassWhithId(&CCastleRole::m_iClassID, (int)CCastleRole::New, 0);
+    CPersistence::RegisterClassWhithId(&CDarkTempleRole::m_iClassID, (int)CDarkTempleRole::New, 0);
+    CPersistence::RegisterClassWhithId(&CEyeCatcherRole::m_iClassID, (int)CEyeCatcherRole::New, 0);
+    CPersistence::RegisterClassWhithId(&CFarmBuildingRole::m_iClassID, (int)CFarmBuildingRole::New, 0);
+    CPersistence::RegisterClassWhithId(&CGatherBuildingRole::m_iClassID, (int)CGatherBuildingRole::New, 0);
+    CPersistence::RegisterClassWhithId(&CLookoutTowerRole::m_iClassID, (int)CLookoutTowerRole::New, 0);
+    CPersistence::RegisterClassWhithId(&CMilitaryBuildingRole::m_iClassID, (int)CMilitaryBuildingRole::New, 0);
+    CPersistence::RegisterClassWhithId(&CMineRole::m_iClassID, (int)CMineRole::New, 0);
+    CPersistence::RegisterClassWhithId(&CProductionBuildingRole::m_iClassID, (int)CProductionBuildingRole::New, 0);
+    CPersistence::RegisterClassWhithId(&CResidenceBuildingRole::m_iClassID, (int)CResidenceBuildingRole::New, 0);
+    CPersistence::RegisterClassWhithId(&CSimpleBuildingRole::m_iClassID, (int)CSimpleBuildingRole::New, 0);
+    CPersistence::RegisterClassWhithId(&CSmallTempleRole::m_iClassID, (int)CSmallTempleRole::New, 0);
+    CPersistence::RegisterClassWhithId(&CStorageBuildingRole::m_iClassID, (int)CStorageBuildingRole::New, 0);
+    CPersistence::RegisterClassWhithId(&CTradingBuildingRole::m_iClassID, (int)CTradingBuildingRole::New, 0);
+    CPersistence::RegisterClassWhithId(&CWorkshopBuildingRole::m_iClassID, (int)CWorkshopBuildingRole::New, 0);
+    CPersistence::RegisterClassWhithId(&CWorkUpBuildingRole::m_iClassID, (int)CWorkUpBuildingRole::New, 0);
+    CPersistence::RegisterClassWhithId(&CBuilderRole::m_iClassID, (int)CBuilderRole::New, 0);
+    CPersistence::RegisterClassWhithId(&CCarrierRole::m_iClassID, (int)CCarrierRole::New, 0);
+    CPersistence::RegisterClassWhithId(&CDarkGardenerRole::m_iClassID, (int)CDarkGardenerRole::New, 0);
+    CPersistence::RegisterClassWhithId(&CDiggerRole::m_iClassID, (int)CDiggerRole::New, 0);
+    CPersistence::RegisterClassWhithId(&CHunterRole::m_iClassID, (int)CHunterRole::New, 0);
+    CPersistence::RegisterClassWhithId(&CDonkeyRole::m_iClassID, (int)CDonkeyRole::New, 0);
+    CPersistence::RegisterClassWhithId(&CDoorRole::m_iClassID, (int)CDoorRole::New, 0);
+    CPersistence::RegisterClassWhithId(&CFleeRole::m_iClassID, (int)CFleeRole::New, 0);
+    CPersistence::RegisterClassWhithId(&CFreeWorkerRole::m_iClassID, (int)CFreeWorkerRole::New, 0);
+    CPersistence::RegisterClassWhithId(&CGardenerRole::m_iClassID, (int)CGardenerRole::New, 0);
+    CPersistence::RegisterClassWhithId(&CGeologistRole::m_iClassID, (int)CGeologistRole::New, 0);
+    CPersistence::RegisterClassWhithId(&CHouseWorkerRole::m_iClassID, (int)CHouseWorkerRole::New, 0);
+    CPersistence::RegisterClassWhithId(&CMushroomFarmerRole::m_iClassID, (int)CMushroomFarmerRole::New, 0);
+    CPersistence::RegisterClassWhithId(&CPioneerRole::m_iClassID, (int)CPioneerRole::New, 0);
+    CPersistence::RegisterClassWhithId(&CPriestRole::m_iClassID, (int)CPriestRole::New, 0);
+    CPersistence::RegisterClassWhithId(&CSaboteurRole::m_iClassID, (int)CSaboteurRole::New, 0);
+    CPersistence::RegisterClassWhithId(&CShamanRole::m_iClassID, (int)CShamanRole::New, 0);
+    CPersistence::RegisterClassWhithId(&CSlaveRole::m_iClassID, (int)CSlaveRole::New, 0);
+    CPersistence::RegisterClassWhithId(&CSoldierRole::m_iClassID, (int)CSoldierRole::New, 0);
+    CPersistence::RegisterClassWhithId(&CThiefRole::m_iClassID, (int)CThiefRole::New, 0);
+    CPersistence::RegisterClassWhithId(&CTowerSoldier::m_iClassID, (int)CTowerSoldier::New, 0);
+    CPersistence::RegisterClassWhithId(&CCart::m_iClassID, (int)CCart::New, 0);
+    CPersistence::RegisterClassWhithId(&CRomanCatapult::m_iClassID, (int)CRomanCatapult::New, 0);
+    CPersistence::RegisterClassWhithId(&CMayaCatapult::m_iClassID, (int)CMayaCatapult::New, 0);
+    CPersistence::RegisterClassWhithId(&CVikingCatapult::m_iClassID, (int)CVikingCatapult::New, 0);
+    CPersistence::RegisterClassWhithId(&CTrojanCatapult::m_iClassID, (int)CTrojanCatapult::New, 0);
+    CPersistence::RegisterClassWhithId(&CFerryShip::m_iClassID, (int)CFerryShip::New, 0);
+    CPersistence::RegisterClassWhithId(&CTransportShip::m_iClassID, (int)CTransportShip::New, 0);
+    CPersistence::RegisterClassWhithId(&CWarShip::m_iClassID, (int)CWarShip::New, 0);
+    CPersistence::RegisterClassWhithId(&CEntityTask::m_iClassID, (int)CEntityTask::New, 0);
+    CPersistence::RegisterClassWhithId(&CEntityEvent::m_iClassID, (int)CEntityEvent::New, 0);
+    CPersistence::RegisterClassWhithId(&CEcoSector::m_iClassID, (int)CEcoSector::New, 0);
+    CPersistence::RegisterClassWhithId(&CGoodTransportPriority::m_iClassID, (int)CGoodTransportPriority::New, 0);
+    CPersistence::RegisterClassWhithId(&CBuildingSupplyPriority::m_iClassID, (int)CBuildingSupplyPriority::New, 0);
+    CPersistence::RegisterClassWhithId(&CDarkMushroomFarmRole::m_iClassID, (int)CDarkMushroomFarmRole::New, 0);
+    CPersistence::RegisterClassWhithId(&CRomanWarShip::m_iClassID, (int)CRomanWarShip::New, 0);
+    CPersistence::RegisterClassWhithId(&CMayaWarShip::m_iClassID, (int)CMayaWarShip::New, 0);
+    CPersistence::RegisterClassWhithId(&CVikingWarShip::m_iClassID, (int)CVikingWarShip::New, 0);
+    CPersistence::RegisterClassWhithId(&CTrojanWarShip::m_iClassID, (int)CTrojanWarShip::New, 0);
+    CPersistence::RegisterClassWhithId(&CSquadLeaderRole::m_iClassID, (int)CSquadLeaderRole::New, 0);
+    CPersistence::RegisterClassWhithId(&CManakopter::m_iClassID, (int)CManakopter::New, 0);
+    CPersistence::RegisterClassWhithId(&CManakopterHallRole::m_iClassID, (int)CManakopterHallRole::New, 0);
+    CPersistence::RegisterClassWhithId(&CHJBRole::m_iClassID, (int)CHJBRole::New, 0);
+    s_bSetPersistenceClasses = 1;
+  }
 }
 
 

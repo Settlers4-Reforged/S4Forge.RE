@@ -1,3 +1,4 @@
+#if FALSE
 #include "BadClassID.h"
 
 // Definitions for class BadClassID
@@ -30,3 +31,4 @@ char const *  CPersistence::BadClassID::What(void)const {
 }
 
 
+#endif // Already implemented

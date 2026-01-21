@@ -12,13 +12,13 @@ public:
     virtual void  Store(std::ostream & a2);
 
     // address=[0x13ed870]
-    static void __cdecl RegisterClassWhithId(unsigned long & a1, class CPersistence * (__cdecl*)(std::istream &) a2, unsigned long a3);
+    static void __cdecl RegisterClassWhithId(unsigned long & _rClassId, class CPersistence * (__cdecl*)(std::istream &) _rClassDeserializer, unsigned long _iOverrideClassId);
 
     // address=[0x13ed8b0]
-    static class CPersistence * __cdecl New(std::istream & a1);
+    static class CPersistence * __cdecl New(std::istream & stream);
 
     // address=[0x13ed9d0]
-    static class CPersistence * __cdecl New_HACK_VERSION(std::istream & a1);
+    static class CPersistence * __cdecl New_HACK_VERSION(std::istream & stream);
 
     // address=[0x14d7f80]
      CPersistence(class CPersistence const &);

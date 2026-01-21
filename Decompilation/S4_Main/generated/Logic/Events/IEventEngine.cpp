@@ -1,3 +1,4 @@
+#if FALSE
 #include "IEventEngine.h"
 
 // Definitions for class IEventEngine
@@ -37,9 +38,9 @@
   {
     while ( !(unsigned __int8)std::list<IEvn_Handle *>::empty((char *)this->m_pEventHandleList + 4) )
     {
-      std::list<IEvn_Handle *>::begin(v1);
-      v4 = *(_DWORD *)std::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::operator*(v1);
-      std::list<IEvn_Handle *>::remove(&v4);
+      std::list<IEvn_Handle *>::begin((char *)this->m_pEventHandleList + 4, (int)v1);
+      v4 = *(_DWORD *)std::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::operator*((std::_Iterator_base12 *)v1);
+      std::list<IEvn_Handle *>::remove((char *)this->m_pEventHandleList + 4, &v4);
       std::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::~_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>(v1);
     }
     pEventHandleList = this->m_pEventHandleList;
@@ -132,7 +133,7 @@ bool  IEventEngine::OnEvent(class CEvn_Event & a2) {
 
 
 // address=[0x1352f90]
-// Decompiled from char __thiscall IEventEngine::SendRawWindowEvent(IEventEngine *this, struct HNWD *a2, int a3, int a4, int a5)
+// Decompiled from char __thiscall IEventEngine::SendRawWindowEvent(IEventEngine *this, HWND a2, int a3, int a4, int a5)
 bool  IEventEngine::SendRawWindowEvent(unsigned int a2, unsigned int a3, unsigned int a4, unsigned int a5) {
   
   if ( dword_3ECDA30 > *(_DWORD *)(*((_DWORD *)NtCurrentTeb()->ThreadLocalStoragePointer + _tls_index) + 20296) )
@@ -145,7 +146,7 @@ bool  IEventEngine::SendRawWindowEvent(unsigned int a2, unsigned int a3, unsigne
       j___Init_thread_footer(&dword_3ECDA30);
     }
   }
-  s_sRawWindowEvent.m_hWnd = a2;
+  s_sRawWindowEvent.m_hWnd = (struct HNWD *)a2;
   s_sRawWindowEvent.m_lParam = a5;
   s_sRawWindowEvent.m_iEventId = a3;
   s_sRawWindowEvent.m_wParam = a4;
@@ -216,20 +217,18 @@ bool  IEventEngine::RegisterHandle(class IEvn_Handle * a2) {
   _BYTE v5[12]; // [esp+4h] [ebp-48h] BYREF
   _BYTE v6[12]; // [esp+10h] [ebp-3Ch] BYREF
   int v7; // [esp+1Ch] [ebp-30h]
-  int v8; // [esp+20h] [ebp-2Ch]
+  _DWORD *v8; // [esp+20h] [ebp-2Ch]
   _DWORD *v9; // [esp+24h] [ebp-28h]
-  int v10; // [esp+28h] [ebp-24h]
-  int v11; // [esp+2Ch] [ebp-20h]
-  CDaoIndexFieldInfo *v12; // [esp+30h] [ebp-1Ch]
-  CDaoIndexFieldInfo *v13; // [esp+34h] [ebp-18h]
+  struct std::_Iterator_base12 *v10; // [esp+28h] [ebp-24h]
+  struct std::_Iterator_base12 *v11; // [esp+2Ch] [ebp-20h]
+  struct CEvn_HandleList *v12; // [esp+30h] [ebp-1Ch]
+  struct CEvn_HandleList *v13; // [esp+34h] [ebp-18h]
   CDaoIndexFieldInfo *v14; // [esp+38h] [ebp-14h]
-  IEventEngine *v15; // [esp+3Ch] [ebp-10h]
   int v16; // [esp+48h] [ebp-4h]
 
-  v15 = this;
   if ( !a2 )
     return 0;
-  if ( !v15->m_pEventHandleList )
+  if ( !this->m_pEventHandleList )
   {
     v14 = (CDaoIndexFieldInfo *)operator new(0x10u);
     v16 = 0;
@@ -239,16 +238,18 @@ bool  IEventEngine::RegisterHandle(class IEvn_Handle * a2) {
       v13 = 0;
     v12 = v13;
     v16 = -1;
-    v15->m_pEventHandleList = v13;
+    this->m_pEventHandleList = v13;
   }
-  if ( !v15->m_pEventHandleList )
+  if ( !this->m_pEventHandleList )
     return 0;
   v4 = &a2;
-  v11 = std::list<IEvn_Handle *>::begin(v5);
+  v11 = (struct std::_Iterator_base12 *)std::list<IEvn_Handle *>::begin((char *)this->m_pEventHandleList + 4, (int)v5);
   v10 = v11;
   v16 = 1;
   v9 = v3;
-  v8 = std::_List_const_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::_List_const_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>(v11);
+  v8 = std::_List_const_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::_List_const_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>(
+         v3,
+         v11);
   v7 = std::list<IEvn_Handle *>::insert(v6, v3[0], v3[1], v3[2], v4);
   std::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::~_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>(v6);
   v16 = -1;
@@ -614,3 +615,4 @@ bool  IEventEngine::IsEventRecording(void) {
 }
 
 
+#endif // Already implemented

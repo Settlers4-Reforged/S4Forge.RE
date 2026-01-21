@@ -288,48 +288,44 @@ void  IAnimatedEntity::SetJobPart(int a2) {
 
 
 // address=[0x14e3460]
-// Decompiled from struct IEntity *__thiscall IAnimatedEntity::IAnimatedEntity(struct IEntity *this, struct std::istream *a2)
- IAnimatedEntity::IAnimatedEntity(std::istream & a2) {
+// Decompiled from IAnimatedEntity *__thiscall IAnimatedEntity::IAnimatedEntity(IAnimatedEntity *this, struct std::istream *a1)
+ IAnimatedEntity::IAnimatedEntity(std::istream & a1) {
   
   int v2; // eax
-  int v4; // [esp+0h] [ebp-28h]
-  _DWORD v5[2]; // [esp+4h] [ebp-24h] BYREF
-  int v6; // [esp+Ch] [ebp-1Ch] BYREF
+  unsigned int v4; // [esp+4h] [ebp-24h] BYREF
+  int fileVersion; // [esp+Ch] [ebp-1Ch] MAPDST BYREF
   int pExceptionObject; // [esp+10h] [ebp-18h] BYREF
   unsigned int i; // [esp+14h] [ebp-14h]
-  struct IEntity *v9; // [esp+18h] [ebp-10h]
-  int v10; // [esp+24h] [ebp-4h]
+  int ExceptionBlock; // [esp+24h] [ebp-4h]
 
-  v9 = this;
-  IEntity::IEntity(this, a2);
-  v10 = 0;
-  v9->CPersistence = (struct IEntityVtbl *)&IAnimatedEntity::_vftable_;
-  std::vector<CEntityEvent>::vector<CEntityEvent>(v4);
-  LOBYTE(v10) = 1;
-  operator^<unsigned int>(a2, &v6);
-  v5[1] = v6;
-  if ( v6 != 1 )
+  IEntity::IEntity(this, a1);
+  ExceptionBlock = 0;
+  this->__vftable = (IAnimatedEntity_vtbl *)&IAnimatedEntity::_vftable_;
+  std::vector<CEntityEvent>::vector<CEntityEvent>(&this->m_iEventQueue);
+  LOBYTE(ExceptionBlock) = 1;
+  operator^<unsigned int>(a1, &fileVersion);
+  if ( fileVersion != 1 )
   {
     BBSupportTracePrintF(3, "load output defect IAnimatedEntity::IAnimatedEntity");
     pExceptionObject = 0;
     CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
     _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
   }
-  operator^<unsigned char>(a2, &v9[9]);
-  operator^<unsigned char>(a2, (char *)&v9[9].CPersistence + 1);
-  operator^<unsigned short>(a2, (char *)&v9[9].CPersistence + 2);
-  operator^<unsigned short>(a2, &v9[10]);
-  operator^<unsigned short>(a2, (char *)&v9[10].CPersistence + 2);
-  operator^<unsigned int>(a2, &v9[11]);
-  operator^<int>((int)a2, (int)&v9[12]);
-  operator^<unsigned int>(a2, v5);
-  for ( i = 0; i < v5[0]; ++i )
+  operator^<unsigned char>(a1, &this->m_cFrame);
+  operator^<unsigned char>(a1, &this->m_cAttackerPlayerId);
+  operator^<unsigned short>(a1, &this->m_wJobPart);
+  operator^<unsigned short>(a1, &this->m_wPrevEntity);
+  operator^<unsigned short>(a1, &this->m_wNextEntity);
+  operator^<unsigned int>(a1, &this->m_uLastUpdateTick);
+  operator^<int>(a1, &this->m_uLastLogicUpdate);
+  operator^<unsigned int>(a1, &v4);
+  for ( i = 0; i < v4; ++i )
   {
-    v2 = CEntityEvent::Load(a2);
+    v2 = CEntityEvent::Load(a1);
     std::vector<CEntityEvent>::push_back(v2);
   }
-  v10 = -1;
-  return v9;
+  ExceptionBlock = -1;
+  return this;
 }
 
 

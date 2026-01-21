@@ -1,3 +1,4 @@
+#if FALSE
 #include "Error.h"
 
 // Definitions for class Error
@@ -20,3 +21,4 @@
 }
 
 
+#endif // Already implemented

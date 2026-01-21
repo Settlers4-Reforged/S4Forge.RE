@@ -1,3 +1,4 @@
+#if FALSE
 #include "CPersistence.h"
 
 // Definitions for class CPersistence
@@ -11,60 +12,60 @@ unsigned long  CPersistence::ClassID(void)const {
 
 
 // address=[0x13ed840]
-// Decompiled from struct std::ostream *__thiscall CPersistence::Store(struct CPersistence *this, struct std::ostream *a2)
+// Decompiled from void __thiscall CPersistence::Store(struct CPersistence *this, struct std::ostream *a2)
 void  CPersistence::Store(std::ostream & a2) {
   
-  unsigned int v3[2]; // [esp+0h] [ebp-8h] BYREF
+  unsigned int classId; // [esp+0h] [ebp-8h] BYREF
 
-  v3[1] = (unsigned int)this;
-  v3[0] = (**(int (__thiscall ***)(struct CPersistence *))this)(this);
-  return operator^<unsigned long>(a2, v3);
+  classId = this->ClassID();
+  operator^<unsigned long>(a2, &classId);
 }
 
 
 // address=[0x13ed870]
-// Decompiled from _DWORD *__cdecl CPersistence::RegisterClassWhithId(int *a1, int a2, int a3)
-void __cdecl CPersistence::RegisterClassWhithId(unsigned long & a1, class CPersistence * (__cdecl*)(std::istream &) a2, unsigned long a3) {
+// Decompiled from void __cdecl CPersistence::RegisterClassWhithId(  unsigned int *_rClassId,  struct CPersistence *(__cdecl *_rClassDeserializer)(struct std::istrstream *),  unsigned int _iOverrideClassId)
+void __cdecl CPersistence::RegisterClassWhithId(unsigned long & _rClassId, class CPersistence * (__cdecl*)(std::istream &) _rClassDeserializer, unsigned long _iOverrideClassId) {
   
-  _DWORD *result; // eax
-
-  if ( !a3 )
-    a3 = CPersistence::m_iNextClassID++;
-  *a1 = a3;
-  result = (_DWORD *)std::map<unsigned long,CPersistence * (__cdecl *)(std::istream &),std::less<unsigned long>,std::allocator<std::pair<unsigned long const,CPersistence * (__cdecl *)(std::istream &)>>>::operator[](&a3);
-  *result = a2;
-  return result;
+  if ( !_iOverrideClassId )
+    _iOverrideClassId = CPersistence::m_iNextClassID++;
+  *_rClassId = _iOverrideClassId;
+  *(_DWORD *)std::map<unsigned long,CPersistence * (__cdecl *)(std::istream &),std::less<unsigned long>,std::allocator<std::pair<unsigned long const,CPersistence * (__cdecl *)(std::istream &)>>>::operator[](
+               &g_mPersistenceClassDeserializer,
+               (int)&_iOverrideClassId) = _rClassDeserializer;
 }
 
 
 // address=[0x13ed8b0]
-// Decompiled from int __cdecl CPersistence::New(int a1)
-class CPersistence * __cdecl CPersistence::New(std::istream & a1) {
+// Decompiled from int __cdecl CPersistence::New(struct std::istream *stream)
+class CPersistence * __cdecl CPersistence::New(std::istream & stream) {
   
   _BYTE v2[12]; // [esp+4h] [ebp-44h] BYREF
   _BYTE v3[12]; // [esp+10h] [ebp-38h] BYREF
   int v4; // [esp+1Ch] [ebp-2Ch]
-  int (__cdecl *v5)(int); // [esp+20h] [ebp-28h]
+  int (__cdecl *v5)(struct std::istream *); // [esp+20h] [ebp-28h]
   std::_Iterator_base12 *v6; // [esp+24h] [ebp-24h]
   std::_Iterator_base12 *v7; // [esp+28h] [ebp-20h]
-  _BYTE v8[4]; // [esp+2Ch] [ebp-1Ch] BYREF
+  int classId; // [esp+2Ch] [ebp-1Ch] BYREF
   int v9; // [esp+30h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+34h] [ebp-14h] BYREF
   char v11; // [esp+3Bh] [ebp-Dh]
   int v12; // [esp+44h] [ebp-4h]
 
-  operator^<unsigned long>(a1, v8);
-  if ( (unsigned __int8)std::ios_base::operator!(*(_DWORD *)(*(_DWORD *)a1 + 4) + a1) )
+  operator^<unsigned long>(stream, &classId);
+  if ( (unsigned __int8)std::ios_base::operator!((char *)stream + *(_DWORD *)(*(_DWORD *)stream + 4)) )
   {
     pExceptionObject = 0;
     CPersistence::SerialError::SerialError((CPersistence::SerialError *)&pExceptionObject);
     _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVSerialError_CPersistence__);
   }
   std::_Tree<std::_Tmap_traits<unsigned long,CPersistence * (__cdecl *)(std::istream &),std::less<unsigned long>,std::allocator<std::pair<unsigned long const,CPersistence * (__cdecl *)(std::istream &)>>,0>>::find(
-    v3,
-    v8);
+    &g_mPersistenceClassDeserializer,
+    (int)v3,
+    (int)&classId);
   v12 = 0;
-  v7 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<unsigned long,CPersistence * (__cdecl *)(std::istream &),std::less<unsigned long>,std::allocator<std::pair<unsigned long const,CPersistence * (__cdecl *)(std::istream &)>>,0>>::end(v2);
+  v7 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<unsigned long,CPersistence * (__cdecl *)(std::istream &),std::less<unsigned long>,std::allocator<std::pair<unsigned long const,CPersistence * (__cdecl *)(std::istream &)>>,0>>::end(
+                                  &g_mPersistenceClassDeserializer,
+                                  (int)v2);
   v6 = v7;
   LOBYTE(v12) = 1;
   v11 = std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned long const,CPersistence * (__cdecl *)(std::istream &)>>>>::operator==(v7);
@@ -76,9 +77,9 @@ class CPersistence * __cdecl CPersistence::New(std::istream & a1) {
     CPersistence::BadClassID::BadClassID((CPersistence::BadClassID *)&v9);
     _CxxThrowException(&v9, (_ThrowInfo *)&_TI2_AVBadClassID_CPersistence__);
   }
-  v5 = *(int (__cdecl **)(int))(std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned long const,CPersistence * (__cdecl *)(std::istream &)>>>>::operator*(v3)
-                              + 4);
-  v4 = v5(a1);
+  v5 = *(int (__cdecl **)(struct std::istream *))(std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned long const,CPersistence * (__cdecl *)(std::istream &)>>>>::operator*(v3)
+                                                + 4);
+  v4 = v5(stream);
   v12 = -1;
   std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned long const,CPersistence * (__cdecl *)(std::istream &)>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned long const,CPersistence * (__cdecl *)(std::istream &)>>>>(v3);
   return v4;
@@ -86,15 +87,15 @@ class CPersistence * __cdecl CPersistence::New(std::istream & a1) {
 
 
 // address=[0x13ed9d0]
-// Decompiled from int __cdecl CPersistence::New_HACK_VERSION(int a1)
-class CPersistence * __cdecl CPersistence::New_HACK_VERSION(std::istream & a1) {
+// Decompiled from struct CPersistence *__cdecl CPersistence::New_HACK_VERSION(struct std::istream *stream)
+class CPersistence * __cdecl CPersistence::New_HACK_VERSION(std::istream & stream) {
   
-  _BYTE v2[4]; // [esp+4h] [ebp-20h] BYREF
+  _BYTE classId[4]; // [esp+4h] [ebp-20h] BYREF
   void *C; // [esp+10h] [ebp-14h]
   _DWORD pExceptionObject[4]; // [esp+14h] [ebp-10h] BYREF
 
-  operator^<unsigned long>(a1, v2);
-  if ( (unsigned __int8)std::ios_base::operator!(*(_DWORD *)(*(_DWORD *)a1 + 4) + a1) )
+  operator^<unsigned long>(stream, classId);
+  if ( (unsigned __int8)std::ios_base::operator!((char *)stream + *(_DWORD *)(*(_DWORD *)stream + 4)) )
   {
     pExceptionObject[0] = 0;
     CPersistence::SerialError::SerialError((CPersistence::SerialError *)pExceptionObject);
@@ -103,7 +104,7 @@ class CPersistence * __cdecl CPersistence::New_HACK_VERSION(std::istream & a1) {
   C = operator new(0x74u);
   pExceptionObject[3] = 0;
   if ( C )
-    return CSquadLeaderRole::CSquadLeaderRole(a1);
+    return (struct CPersistence *)CSquadLeaderRole::CSquadLeaderRole((CSquadLeaderRole *)C, (int)stream);
   else
     return 0;
 }
@@ -130,7 +131,7 @@ class CPersistence &  CPersistence::operator=(class CPersistence const & a2) {
 // Decompiled from CPersistence *__thiscall CPersistence::CPersistence(  CPersistence *this,  const struct boost::exception_detail::clone_base *a2)
  CPersistence::CPersistence(class CPersistence && a2) {
   
-  *(_DWORD *)this = &CPersistence::_vftable_;
+  this->__vftable = (CPersistence_vtbl *)&CPersistence::_vftable_;
   return this;
 }
 
@@ -361,3 +362,4 @@ bool __cdecl CPersistence::LOAD_bool(std::istream & a1) {
 // address=[0x3efe474]
 // [Decompilation failed for static unsigned long CPersistence::m_iClassID]
 
+#endif // Already implemented

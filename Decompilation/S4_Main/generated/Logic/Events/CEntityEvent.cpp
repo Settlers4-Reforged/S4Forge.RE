@@ -78,14 +78,13 @@ class CEntityEvent &  CEntityEvent::operator=(class CEntityEvent const & a2) {
 
 
 // address=[0x14e4b20]
-// Decompiled from int __cdecl CEntityEvent::Load(int a1)
+// Decompiled from int __cdecl CEntityEvent::Load(struct std::istream *a1)
 class CEntityEvent * __cdecl CEntityEvent::Load(std::istream & a1) {
   
   void **v1; // eax
-  struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
 
-  v1 = (void **)CPersistence::New(a1, &CPersistence__RTTI_Type_Descriptor_);
-  return j____RTDynamicCast(v1, 0, v3, &CEntityEvent__RTTI_Type_Descriptor_, 1);
+  v1 = (void **)CPersistence::New(a1);
+  return j____RTDynamicCast(v1, 0, &CPersistence__RTTI_Type_Descriptor_, &CEntityEvent__RTTI_Type_Descriptor_, 1);
 }
 
 
