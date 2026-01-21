@@ -1330,7 +1330,7 @@ void __cdecl SaveWindowsPositionAndSize(struct HWND__ * hwnd) {
 
 
 // address=[0x1353c30]
-// Decompiled from int __stdcall WndMsgProc(HWND hWnd, unsigned int Msg, WPARAM wParam, LPARAM lParam)
+// Decompiled from int __stdcall WndMsgProc(HWND hWnd, MACRO_WM Msg, WPARAM wParam, LPARAM lParam)
 long __stdcall WndMsgProc(struct HWND__ * hWnd, unsigned int Msg, unsigned int wParam, long lParam) {
   
   int result; // eax
@@ -1341,53 +1341,53 @@ long __stdcall WndMsgProc(struct HWND__ * hWnd, unsigned int Msg, unsigned int w
   v5 = Msg;
   v6 = wParam;
   v7 = lParam;
-  if ( Msg <= 0x10 )
+  if ( (unsigned int)Msg <= WM_CLOSE )
   {
-    if ( Msg != 16 )
+    if ( Msg != WM_CLOSE )
     {
       switch ( Msg )
       {
-        case 2u:
-          Msg = 4;
+        case WM_DESTROY:
+          Msg = WM_SIZEWAIT;
           goto LABEL_78;
-        case 3u:
-          Msg = 2;
+        case WM_MOVE:
+          Msg = WM_DESTROY;
           SaveWindowsPositionAndSize(hWnd);
           goto LABEL_78;
-        case 5u:
-          Msg = 3;
+        case WM_SIZE:
+          Msg = WM_MOVE;
           SaveWindowsPositionAndSize(hWnd);
           goto LABEL_78;
-        case 8u:
-          Msg = 111;
+        case WM_KILLFOCUS:
+          Msg = WM_SYSCOPYDATA|WM_GETTEXT;
           goto LABEL_78;
         default:
           goto DontHandleEvent;
       }
     }
-    Msg = 118;
+    Msg = WM_FINALDESTROY|WM_ACTIVATE;
 LABEL_78:
     if ( !g_pEvnEngine )
       return 0;
     if ( IEventEngine::IsEventEngineLocked(g_pEvnEngine) )
       return 0;
-    if ( IEventEngine::SendRawWindowEvent(g_pEvnEngine, (int)hWnd, Msg, wParam, lParam) )
+    if ( IEventEngine::SendRawWindowEvent(g_pEvnEngine, (struct HNWD *)hWnd, Msg, wParam, lParam) )
       return 0;
     return DefWindowProcA(hWnd, v5, v6, v7);
   }
-  if ( Msg <= WM_MOUSEMOVE )
+  if ( Msg <= (unsigned int)WM_MOUSEMOVE )
   {
-    if ( Msg != 512 )
+    if ( Msg != WM_MOUSEFIRST )
     {
       switch ( Msg )
       {
-        case 0x1Cu:
+        case WM_ACTIVATEAPP:
           Msg = 22;
           goto LABEL_78;
-        case 0xA0u:
+        case WM_NCMOUSEMOVE:
           Msg = 6;
           goto LABEL_78;
-        case 0x100u:
+        case WM_KEYDOWN:
           Msg = 11;
           lParam = 0;
           if ( (GetKeyState(KEYMODIFIER_MENU|KEYMODIFIER_ALTGR) & 0x8000000) != 0 )
@@ -1399,7 +1399,7 @@ LABEL_78:
           if ( lParam == 24 )
             lParam = 16;
           goto LABEL_78;
-        case 0x101u:
+        case WM_KEYUP:
           Msg = 20;
           lParam = 0;
           if ( (GetKeyState(KEYMODIFIER_MENU|KEYMODIFIER_ALTGR) & 0x8000000) != 0 )
@@ -1411,7 +1411,7 @@ LABEL_78:
           if ( lParam == 24 )
             lParam = 16;
           goto LABEL_78;
-        case 0x102u:
+        case WM_CHAR:
           Msg = 13;
           lParam = 0;
           if ( (GetKeyState(KEYMODIFIER_MENU|KEYMODIFIER_ALTGR) & 0x8000000) != 0 )
@@ -1423,7 +1423,7 @@ LABEL_78:
           if ( lParam == 24 )
             lParam = 16;
           goto LABEL_78;
-        case 0x104u:
+        case WM_SYSKEYDOWN:
           Msg = 12;
           lParam = 0;
           if ( (GetKeyState(KEYMODIFIER_MENU|KEYMODIFIER_ALTGR) & 0x8000000) != 0 )
@@ -1435,14 +1435,14 @@ LABEL_78:
           if ( lParam == 24 )
             lParam = 16;
           goto LABEL_78;
-        case 0x111u:
+        case WM_COMMAND:
           Msg = 0;
           goto LABEL_78;
         default:
           goto DontHandleEvent;
       }
     }
-    Msg = 5;
+    Msg = WM_SIZE;
     goto LABEL_78;
   }
   switch ( Msg )
@@ -52510,7 +52510,7 @@ bool __cdecl GuiEngine2_EventProc(struct SEventStruct & a1) {
   int v82; // [esp+C0h] [ebp-40h]
   int v83; // [esp+C4h] [ebp-3Ch]
   struct GUI_MENU_DIALOG_HEADER *v84; // [esp+C8h] [ebp-38h] BYREF
-  int v85; // [esp+CCh] [ebp-34h]
+  int m_wParam; // [esp+CCh] [ebp-34h]
   int v86; // [esp+D0h] [ebp-30h]
   unsigned __int16 *v87; // [esp+D4h] [ebp-2Ch]
   unsigned __int16 *v88; // [esp+D8h] [ebp-28h]
@@ -52520,9 +52520,9 @@ bool __cdecl GuiEngine2_EventProc(struct SEventStruct & a1) {
   int showTexture; // [esp+E8h] [ebp-18h]
   int v93; // [esp+ECh] [ebp-14h]
   int v94; // [esp+F0h] [ebp-10h]
-  bool v95; // [esp+F5h] [ebp-Bh]
-  bool ControlUnderCursor; // [esp+F6h] [ebp-Ah]
-  bool v97; // [esp+F7h] [ebp-9h]
+  char v95; // [esp+F5h] [ebp-Bh]
+  char ControlUnderCursor; // [esp+F6h] [ebp-Ah]
+  char v97; // [esp+F7h] [ebp-9h]
   struct SGuiControl *v98; // [esp+F8h] [ebp-8h] BYREF
   char v99; // [esp+FEh] [ebp-2h]
   char v100; // [esp+FFh] [ebp-1h]
@@ -52534,18 +52534,18 @@ bool __cdecl GuiEngine2_EventProc(struct SEventStruct & a1) {
     BBSupportTracePrintF(0, "GUI ENGINE: Refreshing surfaces!");
     IGuiEngine::RefreshAllSurfaces(g_pGUIEngine);
   }
-  if ( g_bDisableEvents && *(_DWORD *)a1 != 21 )
+  if ( g_bDisableEvents && a1->m_iEventId != 21 )
     return 0;
   v100 = 0;
   v99 = 0;
-  v91 = *(_DWORD *)a1 - 5;
+  v91 = a1->m_iEventId - 5;
   switch ( v91 )
   {
     case 0:
       goto GuiEngine2_EventProc___def_339AC41;
     case 2:
-      v77 = sub_2F9E860(*((_DWORD *)a1 + 2));
-      if ( !IsNonTransparentGuiArea(v77, HIDWORD(v77)) )
+      v77 = sub_2F9E860(a1->m_lParam);
+      if ( !IsNonTransparentGuiArea(v77, SHIDWORD(v77)) )
         goto GuiEngine2_EventProc___def_3399920;
       v99 = 1;
       currentTickCount = GetTickCount();
@@ -52554,7 +52554,7 @@ bool __cdecl GuiEngine2_EventProc(struct SEventStruct & a1) {
         CToolTip::CloseTooltip((CToolTip *)&g_cToolTip);
         CToolTip::Lock((CToolTip *)&g_cToolTip);
       }
-      ControlUnderCursor = FindControlUnderCursor(v77, HIDWORD(v77), &v98, &v70, &v71);
+      ControlUnderCursor = FindControlUnderCursor(v77, SHIDWORD(v77), &v98, &v70, &v71);
       if ( !ControlUnderCursor || v98->controlType != 16 )
         goto LABEL_95;
       v98 = (struct SGuiControl *)((char *)v98 + 36);
@@ -52617,7 +52617,7 @@ LABEL_95:
                   v100 = SetControlState((struct SGuiControl *)g_pCurrentSelectedControl, 1, 0) | v17;
                 else
                   v100 = SetControlState((struct SGuiControl *)g_pCurrentSelectedControl, 1, 1) | v17;
-                v56 = AddKeyStates(*((_DWORD *)a1 + 1));
+                v56 = AddKeyStates(a1->m_wParam);
                 v44 = (*(unsigned __int8 *)(g_pCurrentSelectedControl + 27) << 16)
                     + *(unsigned __int16 *)(g_pCurrentSelectedControl + 10);
                 v18 = GetSurfaceID((struct SGuiControl *)g_pCurrentSelectedControl);
@@ -52652,7 +52652,7 @@ LABEL_95:
                 }
                 g_pCurrentRepeatControl = g_pCurrentSelectedControl;
                 dword_4726EBC = GetTickCount() + 300;
-                v57 = AddKeyStates(*((_DWORD *)a1 + 1));
+                v57 = AddKeyStates(a1->m_wParam);
                 v45 = (*(unsigned __int8 *)(g_pCurrentSelectedControl + 27) << 16)
                     + *(unsigned __int16 *)(g_pCurrentSelectedControl + 10);
                 v20 = GetSurfaceID((struct SGuiControl *)g_pCurrentSelectedControl);
@@ -52675,8 +52675,8 @@ LABEL_95:
         v100 |= SetControlState((struct SGuiControl *)g_pCurrentRepeatControl, 1, 0);
         g_pCurrentRepeatControl = 0;
       }
-      v67 = sub_2F9E860(*((_DWORD *)a1 + 2));
-      if ( !IsNonTransparentGuiArea(v67, HIDWORD(v67)) && !g_pCurrentDragControl )
+      v67 = sub_2F9E860(a1->m_lParam);
+      if ( !IsNonTransparentGuiArea(v67, SHIDWORD(v67)) && !g_pCurrentDragControl )
         goto GuiEngine2_EventProc___def_3399920;
       v99 = 1;
       currentTickCount = GetTickCount();
@@ -52697,7 +52697,7 @@ LABEL_95:
               v88[2] + *v88 + *(unsigned __int16 *)(v73 + 2) - *(unsigned __int16 *)(g_pCurrentDragControl + 4),
               *(unsigned __int16 *)g_pCurrentDragControl,
               0);
-      v59 = AddKeyStates(*((_DWORD *)a1 + 1)) + v22;
+      v59 = AddKeyStates(a1->m_wParam) + v22;
       v47 = (*(unsigned __int8 *)(g_pCurrentDragControl + 27) << 16) + *(unsigned __int16 *)(g_pCurrentDragControl + 10);
       v23 = GetSurfaceID((struct SGuiControl *)g_pCurrentDragControl);
       ((void (__cdecl *)(int, int, int))g_pfDialogCallbacks[v23])(3, v47, v59);
@@ -52719,7 +52719,7 @@ LABEL_146:
             if ( (*(_BYTE *)(g_pCurrentSelectedControl + 27) & 1) != 0 )
             {
               v100 |= SetControlState((struct SGuiControl *)g_pCurrentSelectedControl, 1, 0);
-              v60 = AddKeyStates(*((_DWORD *)a1 + 1));
+              v60 = AddKeyStates(a1->m_wParam);
               v48 = (*(unsigned __int8 *)(g_pCurrentSelectedControl + 27) << 16)
                   + *(unsigned __int16 *)(g_pCurrentSelectedControl + 10);
               v24 = GetSurfaceID((struct SGuiControl *)g_pCurrentSelectedControl);
@@ -52736,10 +52736,10 @@ LABEL_146:
         }
       }
 GuiEngine2_EventProc___def_339AC41:
-      v66 = sub_2F9E860(*((_DWORD *)a1 + 2));
-      qword_471F794 = sub_2F9E830(*((_DWORD *)a1 + 2));
+      v66 = sub_2F9E860(a1->m_lParam);
+      qword_471F794 = sub_2F9E830(a1->m_lParam);
       currentTickCount = GetTickCount();
-      v97 = FindControlUnderCursor(v66, HIDWORD(v66), &v98, &v70, &v71);
+      v97 = FindControlUnderCursor(v66, SHIDWORD(v66), &v98, &v70, &v71);
       if ( g_pCurrentDragControl
         && (*(_BYTE *)(g_pCurrentDragControl + 24) == 7 || *(_BYTE *)(g_pCurrentDragControl + 24) == 8) )
       {
@@ -52875,10 +52875,10 @@ GuiEngine2_EventProc___def_3399920:
       result = v99;
       break;
     case 4:
-      v68 = sub_2F9E860(*((_DWORD *)a1 + 2));
-      if ( !IsNonTransparentGuiArea(v68, HIDWORD(v68)) )
+      v68 = sub_2F9E860(a1->m_lParam);
+      if ( !IsNonTransparentGuiArea(v68, SHIDWORD(v68)) )
         goto GuiEngine2_EventProc___def_3399920;
-      v95 = FindControlUnderCursor(v68, HIDWORD(v68), &v98, &v70, &v71);
+      v95 = FindControlUnderCursor(v68, SHIDWORD(v68), &v98, &v70, &v71);
       if ( (struct SGuiControl *)g_pCurrentSelectedControl != v98 || (struct SGuiControl *)g_pCurrentDragControl == v98 )
         goto LABEL_127;
       if ( !v95
@@ -52912,8 +52912,8 @@ LABEL_127:
       }
       goto GuiEngine2_EventProc___def_3399920;
     case 5:
-      v64 = sub_2F9E860(*((_DWORD *)a1 + 2));
-      if ( IsNonTransparentGuiArea(v64, HIDWORD(v64)) || g_pCurrentDragControl )
+      v64 = sub_2F9E860(a1->m_lParam);
+      if ( IsNonTransparentGuiArea(v64, SHIDWORD(v64)) || g_pCurrentDragControl )
       {
         v99 = 1;
         currentTickCount = GetTickCount();
@@ -52934,7 +52934,7 @@ LABEL_127:
             case 13:
             case 19:
             case 20:
-              v58 = AddKeyStates(*((_DWORD *)a1 + 1));
+              v58 = AddKeyStates(a1->m_wParam);
               v46 = (*(unsigned __int8 *)(g_pCurrentSelectedControl + 27) << 16)
                   + *(unsigned __int16 *)(g_pCurrentSelectedControl + 10);
               v21 = GetSurfaceID((struct SGuiControl *)g_pCurrentSelectedControl);
@@ -52950,7 +52950,7 @@ LABEL_127:
       if ( g_pCurrentEditControl )
       {
         v99 = 1;
-        v90 = *((_DWORD *)a1 + 1) - 35;
+        v90 = a1->m_wParam - 35;
         switch ( v90 )
         {
           case 0:
@@ -53021,7 +53021,7 @@ LABEL_127:
             {
               dword_3E2F124 = 3;
               SetControlState((struct SGuiControl *)g_pCurrentEditControl, 128, 1);
-              CalcCharWidths((struct SGuiControl *)g_pCurrentEditControl);
+              CalcCharWidths(g_pCurrentEditControl);
               v100 = 1;
               *(_BYTE *)(g_pCurrentEditControl + 35) = 1;
               v39 = (*(unsigned __int8 *)(g_pCurrentEditControl + 27) << 16)
@@ -53039,8 +53039,8 @@ LABEL_127:
       if ( g_pCurrentEditControl )
       {
         v99 = 1;
-        v85 = *((_DWORD *)a1 + 1);
-        switch ( v85 )
+        m_wParam = a1->m_wParam;
+        switch ( m_wParam )
         {
           case 8:
             v99 = 1;
@@ -53052,7 +53052,7 @@ LABEL_127:
               dword_3E2F124 = 3;
               v100 |= SetControlState((struct SGuiControl *)g_pCurrentEditControl, 128, 1);
               --*(_BYTE *)(g_pCurrentEditControl + 33);
-              CalcCharWidths((struct SGuiControl *)g_pCurrentEditControl);
+              CalcCharWidths(g_pCurrentEditControl);
               v100 = 1;
               *(_BYTE *)(g_pCurrentEditControl + 35) = 1;
               DoScrolling((struct SGuiControl *)g_pCurrentEditControl, 0);
@@ -53083,7 +53083,7 @@ LABEL_127:
               g_pCurrentEditControl = 0;
             break;
           default:
-            if ( IsValidInput(*((_DWORD *)a1 + 1), *(unsigned __int8 *)(g_pCurrentEditControl + 13)) )
+            if ( IsValidInput(a1->m_wParam, *(_BYTE *)(g_pCurrentEditControl + 13)) )
             {
               v99 = 1;
               if ( *(unsigned __int8 *)(g_pCurrentEditControl + 12) >= 0x7Du
@@ -53091,17 +53091,17 @@ LABEL_127:
                      (char *)&g_mbstrTextTable[75 * *(char *)(g_pCurrentEditControl + 25)],
                      125,
                      *(unsigned __int8 *)(g_pCurrentEditControl + 33),
-                     *((_DWORD *)a1 + 1))
+                     a1->m_wParam)
                  : (unsigned __int8)InsertCharacter(
                                       (char *)&g_mbstrTextTable[75 * *(char *)(g_pCurrentEditControl + 25)],
                                       *(unsigned __int8 *)(g_pCurrentEditControl + 12),
                                       *(unsigned __int8 *)(g_pCurrentEditControl + 33),
-                                      *((_DWORD *)a1 + 1)) )
+                                      a1->m_wParam) )
               {
                 dword_3E2F124 = 3;
                 v100 |= SetControlState((struct SGuiControl *)g_pCurrentEditControl, 128, 1);
                 ++*(_BYTE *)(g_pCurrentEditControl + 33);
-                CalcCharWidths((struct SGuiControl *)g_pCurrentEditControl);
+                CalcCharWidths(g_pCurrentEditControl);
                 v100 = 1;
                 *(_BYTE *)(g_pCurrentEditControl + 35) = 1;
                 DoScrolling((struct SGuiControl *)g_pCurrentEditControl, 1);
@@ -53116,25 +53116,25 @@ LABEL_127:
       }
       goto GuiEngine2_EventProc___def_3399920;
     case 9:
-      v69 = sub_2F9E860(*((_DWORD *)a1 + 2));
-      if ( IsNonTransparentGuiArea(v69, HIDWORD(v69)) )
+      v69 = sub_2F9E860(a1->m_lParam);
+      if ( IsNonTransparentGuiArea(v69, SHIDWORD(v69)) )
       {
         v84 = 0;
-        FindDialogUnderCursor(v69, HIDWORD(v69), &v84);
+        FindDialogUnderCursor(v69, SHIDWORD(v69), &v84);
         if ( v84 )
         {
           v99 = 1;
-          ((void (__cdecl *)(int, _DWORD, _DWORD))g_pfDialogCallbacks[*(unsigned __int16 *)v84])(
+          ((void (__cdecl *)(int, int, int))g_pfDialogCallbacks[*(unsigned __int16 *)v84])(
             10,
-            *((_DWORD *)a1 + 1),
-            *((_DWORD *)a1 + 2));
+            a1->m_wParam,
+            a1->m_lParam);
         }
       }
       goto GuiEngine2_EventProc___def_3399920;
     case 16:
       if ( g_pCurrentRepeatControl && GetTickCount() > dword_4726EBC )
       {
-        v52 = AddKeyStates(*((_DWORD *)a1 + 1));
+        v52 = AddKeyStates(a1->m_wParam);
         v40 = (*(unsigned __int8 *)(g_pCurrentRepeatControl + 27) << 16)
             + *(unsigned __int16 *)(g_pCurrentRepeatControl + 10);
         v11 = GetSurfaceID((struct SGuiControl *)g_pCurrentRepeatControl);
@@ -53175,8 +53175,8 @@ LABEL_127:
               + *(unsigned __int16 *)(g_pCurrentSelectedControl + 10);
           v12 = GetSurfaceID((struct SGuiControl *)g_pCurrentSelectedControl);
           ((void (__cdecl *)(int, int, int))g_pfDialogCallbacks[v12])(8, v41, v53);
-          v65 = sub_2F9E830(*((_DWORD *)a1 + 2));
-          CToolTip::OpenTooltip((CToolTip *)&g_cToolTip, v65, HIDWORD(v65));
+          v65 = sub_2F9E830(a1->m_lParam);
+          CToolTip::OpenTooltip((CToolTip *)&g_cToolTip, v65, SHIDWORD(v65));
           dword_4726EC4 = GetTickCount();
         }
       }

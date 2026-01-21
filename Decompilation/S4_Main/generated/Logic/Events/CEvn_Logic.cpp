@@ -1,3 +1,4 @@
+#if FALSE
 #include "CEvn_Logic.h"
 
 // Definitions for class CEvn_Logic
@@ -110,3 +111,4 @@ class CEvn_Logic &  CEvn_Logic::operator=(class CEvn_Logic const & a2) {
 }
 
 
+#endif // Already implemented

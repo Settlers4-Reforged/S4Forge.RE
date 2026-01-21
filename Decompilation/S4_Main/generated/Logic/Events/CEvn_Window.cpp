@@ -1,3 +1,4 @@
+#if FALSE
 #include "CEvn_Window.h"
 
 // Definitions for class CEvn_Window
@@ -21,3 +22,4 @@
 }
 
 
+#endif // Already implemented

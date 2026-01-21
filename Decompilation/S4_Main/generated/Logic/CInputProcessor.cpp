@@ -798,34 +798,33 @@ bool  CInputProcessor::SetWorkingArea(class CEvn_Logic * a2) {
   
   unsigned __int16 *v2; // eax
   unsigned __int16 *v3; // eax
-  char LocalPlayerId; // [esp-Ch] [ebp-54h]
-  unsigned int v6; // [esp-8h] [ebp-50h]
-  unsigned int v7; // [esp+4h] [ebp-44h]
-  int v9; // [esp+Ch] [ebp-3Ch] BYREF
-  int v10; // [esp+10h] [ebp-38h] BYREF
-  int v11; // [esp+14h] [ebp-34h]
-  _BYTE v12[32]; // [esp+18h] [ebp-30h] BYREF
-  int v13; // [esp+44h] [ebp-4h]
+  uchar LocalPlayerId; // [esp-Ch] [ebp-54h]
+  uint v6; // [esp+4h] [ebp-44h]
+  int v8; // [esp+Ch] [ebp-3Ch] BYREF
+  int v9; // [esp+10h] [ebp-38h] BYREF
+  int m_lParam; // [esp+14h] [ebp-34h]
+  CEvn_Logic v11; // [esp+18h] [ebp-30h] BYREF
+  int v12; // [esp+44h] [ebp-4h]
 
-  v11 = *((_DWORD *)a2 + 3);
-  v9 = Y16X16::UnpackXFast(v11);
-  v10 = Y16X16::UnpackYFast(v11);
+  m_lParam = a2->m_lParam;
+  v8 = Y16X16::UnpackXFast(m_lParam);
+  v9 = Y16X16::UnpackYFast(m_lParam);
   v2 = (unsigned __int16 *)std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
-  if ( !CBuildingMgr::IsGoodWorkingAreaCenter((CBuildingMgr *)g_cBuildingMgr, *v2, &v9, &v10) )
+  if ( !CBuildingMgr::IsGoodWorkingAreaCenter((CBuildingMgr *)g_cBuildingMgr, *v2, &v8, &v9) )
     return 1;
-  v7 = Y16X16::PackXYFast(v9, v10);
-  LocalPlayerId = CPlayerManager::GetLocalPlayerId(0);
+  v6 = Y16X16::PackXYFast(v8, v9);
+  LocalPlayerId = CPlayerManager::GetLocalPlayerId();
   v3 = (unsigned __int16 *)std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
-  CEvn_Logic::CEvn_Logic((CEvn_Logic *)v12, 0x1389u, *v3, v7, LocalPlayerId, v6, 0);
-  v13 = 0;
+  CEvn_Logic::CEvn_Logic(&v11, 0x1389u, *v3, v6, LocalPlayerId, 0, 0);
+  v12 = 0;
   if ( !g_pNetworkEngine && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1742, "g_pNetworkEngine != NULL") == 1 )
     __debugbreak();
   if ( g_pNetworkEngine )
-    INetworkEngine::SendNetMessage((INetworkEngine *)g_pNetworkEngine, (struct CEvn_Logic *)v12);
+    INetworkEngine::SendNetMessage((INetworkEngine *)g_pNetworkEngine, &v11);
   CInputProcessor::Default(this, a2);
   CFsm::GenerateEvent(401, 0);
-  v13 = -1;
-  CEvn_Logic::~CEvn_Logic(v12);
+  v12 = -1;
+  CEvn_Logic::~CEvn_Logic(&v11);
   return 1;
 }
 
@@ -1284,23 +1283,22 @@ bool  CInputProcessor::DestroyBuildupVehicle(class CEvn_Logic * a2) {
 bool  CInputProcessor::FillTower(class CEvn_Logic * a2) {
   
   unsigned __int16 *v2; // eax
-  unsigned int v4; // [esp-10h] [ebp-4Ch]
-  char LocalPlayerId; // [esp-Ch] [ebp-48h]
-  unsigned int v6; // [esp-8h] [ebp-44h]
-  _BYTE v7[32]; // [esp+Ch] [ebp-30h] BYREF
-  int v8; // [esp+38h] [ebp-4h]
+  uint m_lParam; // [esp-10h] [ebp-4Ch]
+  uchar LocalPlayerId; // [esp-Ch] [ebp-48h]
+  CEvn_Logic v6; // [esp+Ch] [ebp-30h] BYREF
+  int v7; // [esp+38h] [ebp-4h]
 
-  LocalPlayerId = CPlayerManager::GetLocalPlayerId(0);
-  v4 = *((_DWORD *)a2 + 3);
+  LocalPlayerId = CPlayerManager::GetLocalPlayerId();
+  m_lParam = a2->m_lParam;
   v2 = (unsigned __int16 *)std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
-  CEvn_Logic::CEvn_Logic((CEvn_Logic *)v7, 0x13A7u, *v2, v4, LocalPlayerId, v6, 0);
-  v8 = 0;
+  CEvn_Logic::CEvn_Logic(&v6, 0x13A7u, *v2, m_lParam, LocalPlayerId, 0, 0);
+  v7 = 0;
   if ( !g_pNetworkEngine && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1772, "g_pNetworkEngine != NULL") == 1 )
     __debugbreak();
   if ( g_pNetworkEngine )
-    INetworkEngine::SendNetMessage((INetworkEngine *)g_pNetworkEngine, (struct CEvn_Logic *)v7);
-  v8 = -1;
-  CEvn_Logic::~CEvn_Logic(v7);
+    INetworkEngine::SendNetMessage((INetworkEngine *)g_pNetworkEngine, &v6);
+  v7 = -1;
+  CEvn_Logic::~CEvn_Logic(&v6);
   return 1;
 }
 
@@ -1470,23 +1468,22 @@ bool  CInputProcessor::TradeWith(class CEvn_Logic * a2) {
 bool  CInputProcessor::TradeGoods(class CEvn_Logic * a2) {
   
   unsigned __int16 *v2; // eax
-  unsigned int v4; // [esp-10h] [ebp-4Ch]
-  char LocalPlayerId; // [esp-Ch] [ebp-48h]
-  unsigned int v6; // [esp-8h] [ebp-44h]
-  _BYTE v7[32]; // [esp+Ch] [ebp-30h] BYREF
-  int v8; // [esp+38h] [ebp-4h]
+  uint m_wParam; // [esp-10h] [ebp-4Ch]
+  uchar LocalPlayerId; // [esp-Ch] [ebp-48h]
+  CEvn_Logic v6; // [esp+Ch] [ebp-30h] BYREF
+  int v7; // [esp+38h] [ebp-4h]
 
-  LocalPlayerId = CPlayerManager::GetLocalPlayerId(0);
-  v4 = *((_DWORD *)a2 + 2);
+  LocalPlayerId = CPlayerManager::GetLocalPlayerId();
+  m_wParam = a2->m_wParam;
   v2 = (unsigned __int16 *)std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
-  CEvn_Logic::CEvn_Logic((CEvn_Logic *)v7, 0x1390u, *v2, v4, LocalPlayerId, v6, 0);
-  v8 = 0;
+  CEvn_Logic::CEvn_Logic(&v6, 0x1390u, *v2, m_wParam, LocalPlayerId, 0, 0);
+  v7 = 0;
   if ( !g_pNetworkEngine && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1967, "g_pNetworkEngine != NULL") == 1 )
     __debugbreak();
   if ( g_pNetworkEngine )
-    INetworkEngine::SendNetMessage((INetworkEngine *)g_pNetworkEngine, (struct CEvn_Logic *)v7);
-  v8 = -1;
-  CEvn_Logic::~CEvn_Logic(v7);
+    INetworkEngine::SendNetMessage((INetworkEngine *)g_pNetworkEngine, &v6);
+  v7 = -1;
+  CEvn_Logic::~CEvn_Logic(&v6);
   return 1;
 }
 
@@ -2313,45 +2310,44 @@ bool  CInputProcessor::GroupToSelection(class CEvn_Logic * a1) {
 // Decompiled from char __thiscall CInputProcessor::DefineGroup(CInputProcessor *this, struct CEvn_Logic *a2)
 bool  CInputProcessor::DefineGroup(class CEvn_Logic * a2) {
   
-  char LocalPlayerId; // al
-  unsigned int v4; // [esp-8h] [ebp-58h]
-  _WORD *v5; // [esp+Ch] [ebp-44h]
-  signed int v6; // [esp+10h] [ebp-40h]
+  uchar LocalPlayerId; // al
+  _WORD *v4; // [esp+Ch] [ebp-44h]
+  signed int m_wParam; // [esp+10h] [ebp-40h]
   signed int i; // [esp+14h] [ebp-3Ch]
-  int v8; // [esp+18h] [ebp-38h]
-  _BYTE v9[32]; // [esp+20h] [ebp-30h] BYREF
-  int v10; // [esp+4Ch] [ebp-4h]
+  int v7; // [esp+18h] [ebp-38h]
+  CEvn_Logic v8; // [esp+20h] [ebp-30h] BYREF
+  int v9; // [esp+4Ch] [ebp-4h]
 
-  v6 = *((_DWORD *)a2 + 2);
-  if ( (v6 < 1 || v6 > 10)
+  m_wParam = a2->m_wParam;
+  if ( (m_wParam < 1 || m_wParam > 10)
     && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 3088, "(iGroupId >= GROUP_FIRST) && (iGroupId <= GROUP_LAST)") == 1 )
   {
     __debugbreak();
   }
-  if ( v6 < 1 || v6 > 10 )
+  if ( m_wParam < 1 || m_wParam > 10 )
     return 0;
-  v8 = std::vector<unsigned short>::size(&CInputProcessor::m_vSelection);
-  if ( v8 <= 0 )
+  v7 = std::vector<unsigned short>::size(&CInputProcessor::m_vSelection);
+  if ( v7 <= 0 )
     return 0;
-  if ( v8 > 100
+  if ( v7 > 100
     && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 3102, "iSelectionSize <= MAX_SELECTED_ENTITIES") == 1 )
   {
     __debugbreak();
   }
-  if ( v8 > 100 )
-    v8 = 100;
-  v5 = operator new[](2 * v8);
-  for ( i = 0; i < v8; ++i )
-    v5[i] = *(_WORD *)std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, i);
-  LocalPlayerId = CPlayerManager::GetLocalPlayerId(v5);
-  CEvn_Logic::CEvn_Logic((CEvn_Logic *)v9, 0x13B1u, v6, 0, LocalPlayerId, v4, (unsigned __int8)(2 * v8));
-  v10 = 0;
+  if ( v7 > 100 )
+    v7 = 100;
+  v4 = operator new[](2 * v7);
+  for ( i = 0; i < v7; ++i )
+    v4[i] = *(_WORD *)std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, i);
+  LocalPlayerId = CPlayerManager::GetLocalPlayerId();
+  CEvn_Logic::CEvn_Logic(&v8, 0x13B1u, m_wParam, 0, LocalPlayerId, (uint)v4, (unsigned __int8)(2 * v7));
+  v9 = 0;
   if ( !g_pNetworkEngine && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 3131, "g_pNetworkEngine != NULL") == 1 )
     __debugbreak();
   if ( g_pNetworkEngine )
-    INetworkEngine::SendNetMessage((INetworkEngine *)g_pNetworkEngine, (struct CEvn_Logic *)v9);
-  v10 = -1;
-  CEvn_Logic::~CEvn_Logic(v9);
+    INetworkEngine::SendNetMessage((INetworkEngine *)g_pNetworkEngine, &v8);
+  v9 = -1;
+  CEvn_Logic::~CEvn_Logic(&v8);
   return 0;
 }
 

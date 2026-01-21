@@ -1,3 +1,4 @@
+#if FALSE
 #include "IEvn_Handle.h"
 
 // Definitions for class IEvn_Handle
@@ -11,3 +12,4 @@
 }
 
 
+#endif // Already implemented

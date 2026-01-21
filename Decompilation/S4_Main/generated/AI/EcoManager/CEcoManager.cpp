@@ -881,13 +881,13 @@ enum AI_ECOMANAGER_ERROR  CEcoManager::ConstructBuilding(enum BUILDING_TYPES a2,
 
 
 // address=[0x133cbf0]
-// Decompiled from int __thiscall CEcoManager::DestroyBuilding(int *this, unsigned int a2)
+// Decompiled from int __thiscall CEcoManager::DestroyBuilding(int *this, DWORD a2)
 enum AI_ECOMANAGER_ERROR  CEcoManager::DestroyBuilding(int a2) {
   
-  char v2; // al
-  _BYTE v5[32]; // [esp+Ch] [ebp-30h] BYREF
-  unsigned int v6; // [esp+30h] [ebp-Ch]
-  unsigned __int16 v7; // [esp+34h] [ebp-8h]
+  uchar v2; // al
+  CEvn_Logic v5; // [esp+Ch] [ebp-30h] BYREF
+  uint v6; // [esp+30h] [ebp-Ch]
+  ushort v7; // [esp+34h] [ebp-8h]
   int v8; // [esp+38h] [ebp-4h]
 
   IMessageTracer::PushFormatedInts(
@@ -896,17 +896,17 @@ enum AI_ECOMANAGER_ERROR  CEcoManager::DestroyBuilding(int a2) {
     this[2],
     this[1],
     a2);
-  if ( !(*(unsigned __int8 (__thiscall **)(int *, unsigned int))(*this + 304))(this, a2)
+  if ( !(*(unsigned __int8 (__thiscall **)(int *, DWORD))(*this + 304))(this, a2)
     && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 1080, "CheckBuildingId(_iBuildingID)") == 1 )
   {
     __debugbreak();
   }
   v2 = (*(int (__thiscall **)(int *, _DWORD, _DWORD))(*this + 128))(this, 0, 0);
-  CEvn_Logic::CEvn_Logic((CEvn_Logic *)v5, 0x138Au, a2, 0, v2, v6, v7);
+  CEvn_Logic::CEvn_Logic(&v5, 0x138Au, a2, 0, v2, v6, v7);
   v8 = 0;
-  INetworkEngine::SendNetMessage((INetworkEngine *)g_pNetworkEngine, (struct CEvn_Logic *)v5);
+  INetworkEngine::SendNetMessage((INetworkEngine *)g_pNetworkEngine, &v5);
   v8 = -1;
-  CEvn_Logic::~CEvn_Logic(v5);
+  CEvn_Logic::~CEvn_Logic(&v5);
   return 0;
 }
 

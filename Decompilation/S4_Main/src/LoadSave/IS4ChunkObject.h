@@ -3,6 +3,8 @@
 
 #include "defines.h"
 
+#include "IS4Chunk.h"
+
 class IS4ChunkObject {
 public:
     // address=[0x1310290]
@@ -14,8 +16,8 @@ public:
     // address=[0x1486c50]
     class IS4ChunkObject &  operator=(class IS4ChunkObject const & a2) = default;
 
-    virtual void Load(class IS4Chunk &) = 0;
-    virtual void Save(class IS4Chunk &) = 0;
+    virtual void Load(IS4Chunk &) = 0;
+    virtual void Save(IS4Chunk &) = 0;
 };
 
 

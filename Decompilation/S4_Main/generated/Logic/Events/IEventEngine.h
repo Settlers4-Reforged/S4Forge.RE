@@ -30,7 +30,7 @@ public:
     bool  RegisterHandle(class IEvn_Handle * a2);
 
     // address=[0x1353390]
-    bool  SendAMessage(class CEvn_Event & a2);
+    bool  SendAMessage(class CEvn_Event & _rEvent);
 
     // address=[0x13533b0]
     bool  UnRegisterHandle(class IEvn_Handle * a2);
@@ -42,10 +42,10 @@ public:
     void  SetOSParam(unsigned int a2);
 
     // address=[0x13537f0]
-    bool  PlayEvents(std::string const & a2, int a3);
+    bool  PlayEvents(std::string const & _pReplayFile, int a3);
 
     // address=[0x1353a60]
-    bool  RecordEvents(std::string const & a2);
+    bool  RecordEvents(std::string const & _pTargetFile);
 
     // address=[0x1353b60]
     void  SetGuiEventProc(bool (__cdecl*)(struct SEventStruct &) a2);
@@ -73,17 +73,18 @@ public:
 
     // Type information members
 public:
-    struct CEvn_HandleList * EventHandleList;
-    _BYTE[4] gap_8;
-    _DWORD hwnd;
-    int logFileHandle;
-    BYTE loggingEnabled;
-    _BYTE[3] pad_15;
+    struct CEvn_HandleList * m_pEventHandleList;
+    DWORD m_pOSParam;
+    struct HNWD * m_hWnd;
+    HANDLE m_hReplayFile;
+    BYTE m_bIsEventRecording;
+    BYTE m_bIsEventPlaying;
+    _BYTE[2] pad_16;
     int * m_pTick;
     char m_bLocked;
     _BYTE[3] gap_1D;
     int field_20;
-    unsigned __int8 (__cdecl *)(struct SEventStruct *) activePrimaryHandler;
+    bool (__cdecl *)(struct SEventStruct *) m_pGuiEventProc;
 
 };
 

@@ -2,6 +2,7 @@
 #define CEVN_WINDOW_H
 
 #include "defines.h"
+#include <windef.h>
 #include "CEvn_Event.h"
 
 class CEvn_Window : public CEvn_Event
@@ -15,7 +16,7 @@ public:
 
     // Type information members
 public:
-    struct HWND *m_hWnd;
+    HWND m_hWnd;
 };
 
 #endif // CEVN_WINDOW_H

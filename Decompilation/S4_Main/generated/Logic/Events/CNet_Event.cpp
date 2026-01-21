@@ -1,3 +1,4 @@
+#if FALSE
 #include "CNet_Event.h"
 
 // Definitions for class CNet_Event
@@ -40,3 +41,4 @@ bool  CNet_Event::operator<(class CNet_Event const & a2) {
 }
 
 
+#endif // Already implemented

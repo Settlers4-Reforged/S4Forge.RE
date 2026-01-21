@@ -1,3 +1,4 @@
+#if FALSE
 #include "CEvn_HandleList.h"
 
 // Definitions for class CEvn_HandleList
@@ -36,3 +37,4 @@
 }
 
 
+#endif // Already implemented

@@ -7,60 +7,48 @@
  IEventEngine::IEventEngine(void) {
   
   this->__vftable = &IEventEngine::_vftable_;
-  this->EventHandleList = 0;
+  this->m_pEventHandleList = 0;
   if ( g_pEvnEngine && BBSupportDbgReport(2, "EventEngine\\EventEngine.cpp", 336, "g_pEvnEngine == 0") == 1 )
     __debugbreak();
   g_pEvnEngine = this;
-  this->logFileHandle = 0;
-  this->pad_15[0] = 0;
-  this->loggingEnabled = 0;
+  this->m_hReplayFile = 0;
+  this->m_bIsEventPlaying = 0;
+  this->m_bIsEventRecording = 0;
   this->m_pTick = 0;
   this->m_bLocked = 0;
-  this->activePrimaryHandler = 0;
+  this->m_pGuiEventProc = 0;
   this->field_20 = 0;
   return this;
 }
 
 
 // address=[0x1352c90]
-// Decompiled from IEventEngine *__thiscall IEventEngine::~IEventEngine(IEventEngine *this)
+// Decompiled from void __thiscall IEventEngine::~IEventEngine(IEventEngine *this)
  IEventEngine::~IEventEngine(void) {
   
-  IEventEngine *result; // eax
-  _BYTE v2[12]; // [esp+4h] [ebp-2Ch] BYREF
-  IEventEngine *v3; // [esp+10h] [ebp-20h]
-  struct CEvn_HandleList *EventHandleList; // [esp+14h] [ebp-1Ch]
-  int v5; // [esp+18h] [ebp-18h] BYREF
-  struct CEvn_HandleList *v6; // [esp+1Ch] [ebp-14h]
-  IEventEngine *v7; // [esp+20h] [ebp-10h]
+  _BYTE v1[12]; // [esp+4h] [ebp-2Ch] BYREF
+  int v2; // [esp+10h] [ebp-20h]
+  struct CEvn_HandleList *pEventHandleList; // [esp+14h] [ebp-1Ch] MAPDST
+  int v4; // [esp+18h] [ebp-18h] BYREF
 
-  v7 = this;
-  result = this;
   this->__vftable = &IEventEngine::_vftable_;
   g_pEvnEngine = 0;
-  if ( !v7->EventHandleList )
-    return result;
-  while ( !(unsigned __int8)std::list<IEvn_Handle *>::empty((char *)v7->EventHandleList + 4) )
+  if ( this->m_pEventHandleList )
   {
-    std::list<IEvn_Handle *>::begin(v2);
-    v5 = *(_DWORD *)std::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::operator*(v2);
-    std::list<IEvn_Handle *>::remove(&v5);
-    std::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::~_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>(v2);
+    while ( !(unsigned __int8)std::list<IEvn_Handle *>::empty((char *)this->m_pEventHandleList + 4) )
+    {
+      std::list<IEvn_Handle *>::begin(v1);
+      v4 = *(_DWORD *)std::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::operator*(v1);
+      std::list<IEvn_Handle *>::remove(&v4);
+      std::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::~_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>(v1);
+    }
+    pEventHandleList = this->m_pEventHandleList;
+    if ( pEventHandleList )
+      v2 = (**(int (__thiscall ***)(struct CEvn_HandleList *, int))pEventHandleList)(pEventHandleList, 1);
+    else
+      v2 = 0;
+    this->m_pEventHandleList = 0;
   }
-  result = v7;
-  EventHandleList = v7->EventHandleList;
-  v6 = EventHandleList;
-  if ( EventHandleList )
-  {
-    result = (IEventEngine *)(**(int (__thiscall ***)(struct CEvn_HandleList *, int))v6)(v6, 1);
-    v3 = result;
-  }
-  else
-  {
-    v3 = 0;
-  }
-  v7->EventHandleList = 0;
-  return result;
 }
 
 
@@ -73,7 +61,7 @@ void *  IEventEngine::GetEventFunction(void) {
 
 
 // address=[0x1352d80]
-// Decompiled from char __thiscall IEventEngine::OnEvent(_BYTE *this, _DWORD *a2)
+// Decompiled from char __thiscall IEventEngine::OnEvent(IEventEngine *this, struct CEvn_Event *a2)
 bool  IEventEngine::OnEvent(class CEvn_Event & a2) {
   
   _BYTE v3[12]; // [esp+4h] [ebp-74h] BYREF
@@ -84,30 +72,31 @@ bool  IEventEngine::OnEvent(class CEvn_Event & a2) {
   int v8; // [esp+28h] [ebp-50h]
   DWORD NumberOfBytesWritten; // [esp+2Ch] [ebp-4Ch] BYREF
   _BYTE v10[12]; // [esp+30h] [ebp-48h] BYREF
-  unsigned __int8 (__thiscall ***v11)(_DWORD, _DWORD *); // [esp+3Ch] [ebp-3Ch]
-  _DWORD *v12; // [esp+40h] [ebp-38h]
+  unsigned __int8 (__thiscall ***v11)(_DWORD, struct CEvn_Event *); // [esp+3Ch] [ebp-3Ch]
+  struct SEventStruct *v12; // [esp+40h] [ebp-38h]
   char v13; // [esp+46h] [ebp-32h]
   char v14; // [esp+47h] [ebp-31h]
-  _BYTE *v15; // [esp+48h] [ebp-30h]
-  _BYTE Buffer[28]; // [esp+4Ch] [ebp-2Ch] BYREF
+  CEvn_Window Buffer; // [esp+4Ch] [ebp-2Ch] BYREF
   int v17; // [esp+74h] [ebp-4h]
 
-  v15 = this;
-  if ( this[20] && a2[1] < 0x7Au && a2[1] != 1 && *((_DWORD *)v15 + 6) )
+  if ( this->m_bIsEventRecording && a2->m_iEventId < 0x7Au && a2->m_iEventId != 1 && this->m_pTick )
   {
-    CEvn_Window::CEvn_Window((CEvn_Window *)Buffer, 0, a2[1], a2[2], a2[3]);
-    WriteFile(*((HANDLE *)v15 + 4), *((LPCVOID *)v15 + 6), 4u, &NumberOfBytesWritten, 0);
-    WriteFile(*((HANDLE *)v15 + 4), Buffer, 0x1Cu, &NumberOfBytesWritten, 0);
-    CEvn_Window::~CEvn_Window(Buffer);
+    CEvn_Window::CEvn_Window(&Buffer, 0, a2->m_iEventId, a2->m_wParam, a2->m_lParam);
+    WriteFile(this->m_hReplayFile, this->m_pTick, 4u, &NumberOfBytesWritten, 0);
+    WriteFile(this->m_hReplayFile, &Buffer, 0x1Cu, &NumberOfBytesWritten, 0);
+    CEvn_Window::~CEvn_Window(&Buffer);
   }
-  if ( *((_DWORD *)v15 + 9) )
+  if ( this->m_pGuiEventProc )
   {
-    v12 = a2 ? a2 + 1 : 0;
-    if ( (*((unsigned __int8 (__cdecl **)(_DWORD *))v15 + 9))(v12) )
+    v12 = a2 ? &a2->SEventStruct : 0;
+    if ( this->m_pGuiEventProc(v12) )
       return 1;
   }
-  if ( !*((_DWORD *)v15 + 1) || (unsigned __int8)std::list<IEvn_Handle *>::empty(*((_DWORD *)v15 + 1) + 4) )
+  if ( !this->m_pEventHandleList
+    || (unsigned __int8)std::list<IEvn_Handle *>::empty((char *)this->m_pEventHandleList + 4) )
+  {
     return 0;
+  }
   std::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>(v10);
   v17 = 0;
   v8 = std::list<IEvn_Handle *>::begin(v4);
@@ -126,7 +115,7 @@ bool  IEventEngine::OnEvent(class CEvn_Event & a2) {
     std::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::~_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>(v3);
     if ( !v14 )
       break;
-    v11 = *(unsigned __int8 (__thiscall ****)(_DWORD, _DWORD *))std::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::operator*(v10);
+    v11 = *(unsigned __int8 (__thiscall ****)(_DWORD, struct CEvn_Event *))std::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::operator*(v10);
     if ( (**v11)(v11, a2) )
     {
       v13 = 1;
@@ -143,7 +132,7 @@ bool  IEventEngine::OnEvent(class CEvn_Event & a2) {
 
 
 // address=[0x1352f90]
-// Decompiled from char __thiscall IEventEngine::SendRawWindowEvent(IEventEngine *this, int a2, int a3, int a4, int a5)
+// Decompiled from char __thiscall IEventEngine::SendRawWindowEvent(IEventEngine *this, struct HNWD *a2, int a3, int a4, int a5)
 bool  IEventEngine::SendRawWindowEvent(unsigned int a2, unsigned int a3, unsigned int a4, unsigned int a5) {
   
   if ( dword_3ECDA30 > *(_DWORD *)(*((_DWORD *)NtCurrentTeb()->ThreadLocalStoragePointer + _tls_index) + 20296) )
@@ -151,24 +140,24 @@ bool  IEventEngine::SendRawWindowEvent(unsigned int a2, unsigned int a3, unsigne
     j___Init_thread_header(&dword_3ECDA30);
     if ( dword_3ECDA30 == -1 )
     {
-      CEvn_Window::CEvn_Window((CEvn_Window *)&dword_3ECDA0C, 0, 0, 0, 0);
+      CEvn_Window::CEvn_Window(&s_sRawWindowEvent, 0, 0, 0, 0);
       j__atexit(sub_3663A90);
       j___Init_thread_footer(&dword_3ECDA30);
     }
   }
-  dword_3ECDA24 = a2;
-  dword_3ECDA18 = a5;
-  dword_3ECDA10 = a3;
-  dword_3ECDA14 = a4;
-  byte_3ECDA20 = 0;
+  s_sRawWindowEvent.m_hWnd = a2;
+  s_sRawWindowEvent.m_lParam = a5;
+  s_sRawWindowEvent.m_iEventId = a3;
+  s_sRawWindowEvent.m_wParam = a4;
+  s_sRawWindowEvent.m_iFlags = 0;
   if ( this->m_pTick )
-    dword_3ECDA1C = *(_DWORD *)this->m_pTick;
-  return IEventEngine::OnEvent(this, &dword_3ECDA0C);
+    s_sRawWindowEvent.m_iTick = *this->m_pTick;
+  return IEventEngine::OnEvent(this, &s_sRawWindowEvent);
 }
 
 
 // address=[0x1353090]
-// Decompiled from char __thiscall IEventEngine::SendRawLogicEvent(  IEventEngine *this,  int a2,  int a3,  int a4,  char a5,  int a6,  __int16 a7)
+// Decompiled from char __thiscall IEventEngine::SendRawLogicEvent(IEventEngine *this, int a2, int a3, int a4, BYTE a5, BYTE *a6, WORD a7)
 bool  IEventEngine::SendRawLogicEvent(unsigned int a2, unsigned int a3, unsigned int a4, unsigned int a5, unsigned int a6, unsigned int a7) {
   
   if ( dword_3ECDA08 > *(_DWORD *)(*((_DWORD *)NtCurrentTeb()->ThreadLocalStoragePointer + _tls_index) + 20296) )
@@ -176,21 +165,21 @@ bool  IEventEngine::SendRawLogicEvent(unsigned int a2, unsigned int a3, unsigned
     j___Init_thread_header(&dword_3ECDA08);
     if ( dword_3ECDA08 == -1 )
     {
-      CEvn_Logic::CEvn_Logic(&dword_3ECD9E0);
+      CEvn_Logic::CEvn_Logic(&s_sRawLogicEvent);
       j__atexit(sub_3663A70);
       j___Init_thread_footer(&dword_3ECDA08);
     }
   }
-  dword_3ECD9F8 = a6;
-  word_3ECD9FC = a7;
-  byte_3ECD9FE = a5;
-  dword_3ECD9EC = a4;
-  dword_3ECD9E4 = a2;
-  dword_3ECD9E8 = a3;
-  byte_3ECD9F4 = 0;
+  s_sRawLogicEvent.m_iData = a6;
+  s_sRawLogicEvent.m_iDataSize = a7;
+  s_sRawLogicEvent.m_iOwner = a5;
+  s_sRawLogicEvent.m_lParam = a4;
+  s_sRawLogicEvent.m_iEventId = a2;
+  s_sRawLogicEvent.m_wParam = a3;
+  s_sRawLogicEvent.m_iFlags = 0;
   if ( this->m_pTick )
-    dword_3ECD9F0 = *(_DWORD *)this->m_pTick;
-  return IEventEngine::OnEvent(this, &dword_3ECD9E0);
+    s_sRawLogicEvent.m_iTick = *this->m_pTick;
+  return IEventEngine::OnEvent(this, &s_sRawLogicEvent);
 }
 
 
@@ -203,18 +192,18 @@ bool  IEventEngine::SendRawEvent(unsigned int a2, unsigned int a3, unsigned int 
     j___Init_thread_header(&dword_3ECDA50);
     if ( dword_3ECDA50 == -1 )
     {
-      CEvn_Event::CEvn_Event((CEvn_Event *)&unk_3ECDA34, 0, 0, 0, 0);
+      CEvn_Event::CEvn_Event(&s_sRawEvent, 0, 0, 0, 0);
       j__atexit(sub_3663A50);
       j___Init_thread_footer(&dword_3ECDA50);
     }
   }
-  dword_3ECDA40 = a4;
-  dword_3ECDA38 = a2;
-  dword_3ECDA3C = a3;
-  byte_3ECDA48 = 0;
+  s_sRawEvent.m_lParam = a4;
+  s_sRawEvent.m_iEventId = a2;
+  s_sRawEvent.m_wParam = a3;
+  s_sRawEvent.m_iFlags = 0;
   if ( this->m_pTick )
-    dword_3ECDA44 = *(_DWORD *)this->m_pTick;
-  return IEventEngine::OnEvent(this, &unk_3ECDA34);
+    s_sRawEvent.m_iTick = *this->m_pTick;
+  return IEventEngine::OnEvent(this, &s_sRawEvent);
 }
 
 
@@ -240,7 +229,7 @@ bool  IEventEngine::RegisterHandle(class IEvn_Handle * a2) {
   v15 = this;
   if ( !a2 )
     return 0;
-  if ( !v15->EventHandleList )
+  if ( !v15->m_pEventHandleList )
   {
     v14 = (CDaoIndexFieldInfo *)operator new(0x10u);
     v16 = 0;
@@ -250,9 +239,9 @@ bool  IEventEngine::RegisterHandle(class IEvn_Handle * a2) {
       v13 = 0;
     v12 = v13;
     v16 = -1;
-    v15->EventHandleList = v13;
+    v15->m_pEventHandleList = v13;
   }
-  if ( !v15->EventHandleList )
+  if ( !v15->m_pEventHandleList )
     return 0;
   v4 = &a2;
   v11 = std::list<IEvn_Handle *>::begin(v5);
@@ -269,10 +258,10 @@ bool  IEventEngine::RegisterHandle(class IEvn_Handle * a2) {
 
 
 // address=[0x1353390]
-// Decompiled from char __thiscall IEventEngine::SendAMessage(_BYTE *this, _DWORD *a2)
-bool  IEventEngine::SendAMessage(class CEvn_Event & a2) {
+// Decompiled from char __thiscall IEventEngine::SendAMessage(IEventEngine *this, struct CEvn_Event *_rEvent)
+bool  IEventEngine::SendAMessage(class CEvn_Event & _rEvent) {
   
-  return IEventEngine::OnEvent(this, a2);
+  return IEventEngine::OnEvent(this, _rEvent);
 }
 
 
@@ -288,13 +277,11 @@ bool  IEventEngine::UnRegisterHandle(class IEvn_Handle * a2) {
   int v8; // [esp+30h] [ebp-20h]
   int v9; // [esp+34h] [ebp-1Ch]
   struct IEvn_Handle *v10; // [esp+38h] [ebp-18h] BYREF
-  IEventEngine *v11; // [esp+3Ch] [ebp-14h]
   char v12; // [esp+42h] [ebp-Eh]
   char v13; // [esp+43h] [ebp-Dh]
   int v14; // [esp+4Ch] [ebp-4h]
 
-  v11 = this;
-  if ( !a2 || (unsigned __int8)std::list<IEvn_Handle *>::empty((char *)v11->EventHandleList + 4) )
+  if ( !a2 || (unsigned __int8)std::list<IEvn_Handle *>::empty((char *)this->m_pEventHandleList + 4) )
     return 0;
   std::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>(v5);
   v14 = 0;
@@ -336,7 +323,7 @@ bool  IEventEngine::UnRegisterHandle(class IEvn_Handle * a2) {
 bool  IEventEngine::DispatchSystemMessages(void) {
   
   tagMSG Msg; // [esp+4h] [ebp-80h] BYREF
-  CEvn_Event *v3; // [esp+20h] [ebp-64h]
+  _DWORD *v3; // [esp+20h] [ebp-64h]
   CEvn_Event *v4; // [esp+24h] [ebp-60h]
   struct tagPOINT Point; // [esp+28h] [ebp-5Ch] BYREF
   unsigned int Buffer; // [esp+30h] [ebp-54h] BYREF
@@ -344,17 +331,11 @@ bool  IEventEngine::DispatchSystemMessages(void) {
   char v8; // [esp+39h] [ebp-4Bh]
   char v9; // [esp+3Ah] [ebp-4Ah]
   char v10; // [esp+3Bh] [ebp-49h]
-  IEventEngine *v11; // [esp+3Ch] [ebp-48h]
-  int v12; // [esp+40h] [ebp-44h] BYREF
-  int v13; // [esp+44h] [ebp-40h]
-  unsigned __int16 v14; // [esp+4Ch] [ebp-38h]
-  unsigned __int16 v15; // [esp+4Eh] [ebp-36h]
-  int hwnd; // [esp+58h] [ebp-2Ch]
-  CEvn_Event v17; // [esp+5Ch] [ebp-28h] BYREF
-  int v18; // [esp+80h] [ebp-4h]
+  CEvn_Window v12; // [esp+40h] [ebp-44h] BYREF
+  CEvn_Event v13; // [esp+5Ch] [ebp-28h] BYREF
+  int ExceptionBlock; // [esp+80h] [ebp-4h]
 
-  v11 = this;
-  Msg.hwnd = (HWND)this->hwnd;
+  Msg.hwnd = (HWND)this->m_hWnd;
   while ( PeekMessageA(&Msg, 0, 0, 0, 0) )
   {
     if ( !GetMessageA(&Msg, 0, 0, 0) )
@@ -362,94 +343,94 @@ bool  IEventEngine::DispatchSystemMessages(void) {
     TranslateMessage(&Msg);
     DispatchMessageA(&Msg);
   }
-  if ( !v11->pad_15[0] )
+  if ( !this->m_bIsEventPlaying )
     return 1;
-  CEvn_Window::CEvn_Window((CEvn_Window *)&v12, 0, 0, 0, 0);
-  v18 = 0;
-  ReadFile((HANDLE)v11->logFileHandle, &Buffer, 4u, &NumberOfBytesRead, 0);
+  CEvn_Window::CEvn_Window(&v12, 0, 0, 0, 0);
+  ExceptionBlock = 0;
+  ReadFile(this->m_hReplayFile, &Buffer, 4u, &NumberOfBytesRead, 0);
   if ( NumberOfBytesRead != 4 )
   {
-    v11->pad_15[0] = 0;
-    CloseHandle((HANDLE)v11->logFileHandle);
-    v11->logFileHandle = 0;
+    this->m_bIsEventPlaying = 0;
+    CloseHandle(this->m_hReplayFile);
+    this->m_hReplayFile = 0;
     v10 = 1;
-    v18 = -1;
+    ExceptionBlock = -1;
     CEvn_Window::~CEvn_Window(&v12);
     return v10;
   }
-  if ( v11->m_pTick )
+  if ( this->m_pTick )
   {
-    if ( *(_DWORD *)v11->m_pTick > v11->field_20 )
+    if ( *this->m_pTick > (unsigned int)this->field_20 )
     {
-      v11->pad_15[0] = 0;
-      CloseHandle((HANDLE)v11->logFileHandle);
-      v11->logFileHandle = 0;
-      v4 = CEvn_Event::CEvn_Event(&v17, 0xBu, 0x6Eu, 0, 0);
-      v3 = v4;
-      LOBYTE(v18) = 1;
-      IEventEngine::SendAMessage(v11, v4);
-      LOBYTE(v18) = 0;
-      CEvn_Event::~CEvn_Event(&v17);
+      this->m_bIsEventPlaying = 0;
+      CloseHandle(this->m_hReplayFile);
+      this->m_hReplayFile = 0;
+      v4 = CEvn_Event::CEvn_Event(&v13, 0xBu, 0x6Eu, 0, 0);
+      v3 = &v4->__vftable;
+      LOBYTE(ExceptionBlock) = 1;
+      IEventEngine::SendAMessage(this, v4);
+      LOBYTE(ExceptionBlock) = 0;
+      CEvn_Event::~CEvn_Event(&v13);
       v9 = 1;
-      v18 = -1;
+      ExceptionBlock = -1;
       CEvn_Window::~CEvn_Window(&v12);
       return v9;
     }
-    while ( Buffer <= *(_DWORD *)v11->m_pTick )
+    while ( Buffer <= *this->m_pTick )
     {
-      ReadFile((HANDLE)v11->logFileHandle, &v12, 0x1Cu, &NumberOfBytesRead, 0);
+      ReadFile(this->m_hReplayFile, &v12, 0x1Cu, &NumberOfBytesRead, 0);
       if ( NumberOfBytesRead != 28 )
       {
-        v11->pad_15[0] = 0;
-        CloseHandle((HANDLE)v11->logFileHandle);
-        v11->logFileHandle = 0;
+        this->m_bIsEventPlaying = 0;
+        CloseHandle(this->m_hReplayFile);
+        this->m_hReplayFile = 0;
         v8 = 1;
-        v18 = -1;
+        ExceptionBlock = -1;
         CEvn_Window::~CEvn_Window(&v12);
         return v8;
       }
-      hwnd = v11->hwnd;
-      if ( v13 != 3 && v13 != 2 )
+      v12.m_hWnd = this->m_hWnd;
+      if ( v12.m_iEventId != 3 && v12.m_iEventId != 2 )
       {
-        if ( v13 == 5 )
+        if ( v12.m_iEventId == 5 )
         {
-          Point.x = v14;
-          Point.y = v15;
-          ClientToScreen((HWND)v11->hwnd, &Point);
+          Point.x = LOWORD(v12.m_lParam);
+          Point.y = HIWORD(v12.m_lParam);
+          ClientToScreen((HWND)this->m_hWnd, &Point);
           SetCursorPos(Point.x, Point.y);
         }
-        IEventEngine::SendAMessage(v11, &v12);
+        IEventEngine::SendAMessage(this, &v12);
       }
-      ReadFile((HANDLE)v11->logFileHandle, &Buffer, 4u, &NumberOfBytesRead, 0);
+      ReadFile(this->m_hReplayFile, &Buffer, 4u, &NumberOfBytesRead, 0);
       if ( NumberOfBytesRead != 4 )
       {
-        v11->pad_15[0] = 0;
+        this->m_bIsEventPlaying = 0;
         break;
       }
     }
   }
-  SetFilePointer((HANDLE)v11->logFileHandle, -4, 0, 1u);
-  v18 = -1;
+  SetFilePointer(this->m_hReplayFile, -4, 0, FILE_CURRENT);
+  ExceptionBlock = -1;
   CEvn_Window::~CEvn_Window(&v12);
   return 1;
 }
 
 
 // address=[0x13537d0]
-// Decompiled from IEventEngine *__thiscall IEventEngine::SetOSParam(IEventEngine *this, unsigned int a2)
+// Decompiled from IEventEngine *__thiscall IEventEngine::SetOSParam(IEventEngine *this, DWORD a2)
 void  IEventEngine::SetOSParam(unsigned int a2) {
   
   IEventEngine *result; // eax
 
   result = this;
-  *(_DWORD *)this->gap_8 = a2;
+  this->m_pOSParam = a2;
   return result;
 }
 
 
 // address=[0x13537f0]
-// Decompiled from char __thiscall IEventEngine::PlayEvents(void *this, void *a2, int a3)
-bool  IEventEngine::PlayEvents(std::string const & a2, int a3) {
+// Decompiled from char __thiscall IEventEngine::PlayEvents(IEventEngine *this, void *_pReplayFile, int a3)
+bool  IEventEngine::PlayEvents(std::string const & _pReplayFile, int a3) {
   
   const CHAR *v3; // eax
   const char *v4; // eax
@@ -459,59 +440,57 @@ bool  IEventEngine::PlayEvents(std::string const & a2, int a3) {
   const char *v8; // eax
   DWORD lDistanceToMove; // [esp+0h] [ebp-118h]
   int v11; // [esp+4h] [ebp-114h] BYREF
-  int v12; // [esp+8h] [ebp-110h] BYREF
+  int replayFileVersion; // [esp+8h] [ebp-110h] BYREF
   DWORD NumberOfBytesRead; // [esp+Ch] [ebp-10Ch] BYREF
-  void *v14; // [esp+10h] [ebp-108h]
   char Buffer[256]; // [esp+14h] [ebp-104h] BYREF
 
-  v14 = this;
-  if ( std::string::length(a2) && !*((_DWORD *)v14 + 4) )
+  if ( std::string::length(_pReplayFile) && !this->m_hReplayFile )
   {
-    v3 = (const CHAR *)std::string::c_str(a2);
-    *((_DWORD *)v14 + 4) = CreateFileA(v3, 0x80000000, 0, 0, 3u, 0x80u, 0);
-    if ( *((_DWORD *)v14 + 4) == -1 )
+    v3 = (const CHAR *)std::string::c_str(_pReplayFile);
+    this->m_hReplayFile = CreateFileA(v3, 0x80000000, 0, 0, 3u, 0x80u, 0);
+    if ( this->m_hReplayFile == (HANDLE)-1 )
     {
-      v4 = (const char *)std::string::c_str(a2);
+      v4 = (const char *)std::string::c_str(_pReplayFile);
       BBSupportTracePrintF(2, "Could not open Event Recorder Slot File \"%s\"!", v4);
       return 0;
     }
     else
     {
-      ReadFile(*((HANDLE *)v14 + 4), Buffer, 0x13u, &NumberOfBytesRead, 0);
+      ReadFile(this->m_hReplayFile, Buffer, 19u, &NumberOfBytesRead, 0);
       if ( strstr(Buffer, "RECORDED S4 EVENTS") && NumberOfBytesRead == 19 )
       {
-        ReadFile(*((HANDLE *)v14 + 4), &v12, 4u, &NumberOfBytesRead, 0);
-        if ( v12 == 28 )
+        ReadFile(this->m_hReplayFile, &replayFileVersion, 4u, &NumberOfBytesRead, 0);
+        if ( replayFileVersion == 0x1C )
         {
-          lDistanceToMove = SetFilePointer(*((HANDLE *)v14 + 4), 0, 0, 1u);
-          SetFilePointer(*((HANDLE *)v14 + 4), -32, 0, 2u);
-          ReadFile(*((HANDLE *)v14 + 4), &v11, 4u, &NumberOfBytesRead, 0);
+          lDistanceToMove = SetFilePointer(this->m_hReplayFile, 0, 0, FILE_CURRENT);
+          SetFilePointer(this->m_hReplayFile, -32, 0, FILE_END);
+          ReadFile(this->m_hReplayFile, &v11, 4u, &NumberOfBytesRead, 0);
           if ( NumberOfBytesRead == 4 )
           {
-            *((_DWORD *)v14 + 8) = v11 - a3;
-            SetFilePointer(*((HANDLE *)v14 + 4), lDistanceToMove, 0, 0);
-            *((_BYTE *)v14 + 21) = 1;
-            v8 = (const char *)std::string::c_str(a2);
+            this->field_20 = v11 - a3;
+            SetFilePointer(this->m_hReplayFile, lDistanceToMove, 0, FILE_BEGIN);
+            this->m_bIsEventPlaying = 1;
+            v8 = (const char *)std::string::c_str(_pReplayFile);
             BBSupportTracePrintF(2, "Playing event from file \"%s\"!", v8);
             return 1;
           }
           else
           {
-            v7 = (const char *)std::string::c_str(a2);
+            v7 = (const char *)std::string::c_str(_pReplayFile);
             BBSupportTracePrintF(2, "-3- Incompatible Event Recorder Slot File \"%s\"!", v7);
             return 0;
           }
         }
         else
         {
-          v6 = (const char *)std::string::c_str(a2);
+          v6 = (const char *)std::string::c_str(_pReplayFile);
           BBSupportTracePrintF(2, "-2- Incompatible Event Recorder Slot File \"%s\"!", v6);
           return 0;
         }
       }
       else
       {
-        v5 = (const char *)std::string::c_str(a2);
+        v5 = (const char *)std::string::c_str(_pReplayFile);
         BBSupportTracePrintF(2, "-1- Incompatible Event Recorder Slot File \"%s\"!", v5);
         return 0;
       }
@@ -519,11 +498,11 @@ bool  IEventEngine::PlayEvents(std::string const & a2, int a3) {
   }
   else
   {
-    *((_BYTE *)v14 + 21) = 0;
-    if ( !*((_DWORD *)v14 + 4) )
+    this->m_bIsEventPlaying = 0;
+    if ( !this->m_hReplayFile )
       return 1;
-    CloseHandle(*((HANDLE *)v14 + 4));
-    *((_DWORD *)v14 + 4) = 0;
+    CloseHandle(this->m_hReplayFile);
+    this->m_hReplayFile = 0;
     BBSupportTracePrintF(2, "EventEngine.cpp: Replay of events stopped!", 0);
     return 1;
   }
@@ -531,48 +510,48 @@ bool  IEventEngine::PlayEvents(std::string const & a2, int a3) {
 
 
 // address=[0x1353a60]
-// Decompiled from char __thiscall IEventEngine::RecordEvents(void *this, void *a2)
-bool  IEventEngine::RecordEvents(std::string const & a2) {
+// Decompiled from char __thiscall IEventEngine::RecordEvents(IEventEngine *this, void *_pTargetFile)
+bool  IEventEngine::RecordEvents(std::string const & _pTargetFile) {
   
   const CHAR *v3; // eax
   const char *v4; // eax
-  int Buffer; // [esp+0h] [ebp-Ch] BYREF
+  int replayFileVersion; // [esp+0h] [ebp-Ch] BYREF
   DWORD NumberOfBytesWritten; // [esp+4h] [ebp-8h] BYREF
 
-  if ( std::string::length(a2) && !*((_DWORD *)this + 4) )
+  if ( std::string::length(_pTargetFile) && !this->m_hReplayFile )
   {
-    v3 = (const CHAR *)std::string::c_str(a2);
-    *((_DWORD *)this + 4) = CreateFileA(v3, 0x40000000u, 0, 0, 2u, 0x80u, 0);
-    if ( *((_DWORD *)this + 4) == -1 )
+    v3 = (const CHAR *)std::string::c_str(_pTargetFile);
+    this->m_hReplayFile = CreateFileA(v3, 0x40000000u, 0, 0, 2u, 0x80u, 0);
+    if ( this->m_hReplayFile == (HANDLE)-1 )
     {
       BBSupportTracePrint(2, "Could not open Event Recorder Slot File!");
       return 0;
     }
-    WriteFile(*((HANDLE *)this + 4), "RECORDED S4 EVENTS", 0x13u, &NumberOfBytesWritten, 0);
-    Buffer = 28;
-    WriteFile(*((HANDLE *)this + 4), &Buffer, 4u, &NumberOfBytesWritten, 0);
-    *((_BYTE *)this + 20) = 1;
+    WriteFile(this->m_hReplayFile, "RECORDED S4 EVENTS", 0x13u, &NumberOfBytesWritten, 0);
+    replayFileVersion = 0x1C;
+    WriteFile(this->m_hReplayFile, &replayFileVersion, 4u, &NumberOfBytesWritten, 0);
+    this->m_bIsEventRecording = 1;
   }
   else
   {
-    *((_BYTE *)this + 20) = 0;
-    if ( !*((_DWORD *)this + 4) )
+    this->m_bIsEventRecording = 0;
+    if ( !this->m_hReplayFile )
       return 1;
-    CloseHandle(*((HANDLE *)this + 4));
-    *((_DWORD *)this + 4) = 0;
+    CloseHandle(this->m_hReplayFile);
+    this->m_hReplayFile = 0;
     BBSupportTracePrint(2, "EventEngine.cpp: Event recording stopped!");
   }
-  v4 = (const char *)std::string::c_str(a2);
+  v4 = (const char *)std::string::c_str(_pTargetFile);
   BBSupportTracePrintF(2, "Recording successfully started into file \"%s\"!", v4);
   return 1;
 }
 
 
 // address=[0x1353b60]
-// Decompiled from void __thiscall IEventEngine::SetGuiEventProc(IEventEngine *this, unsigned int a2)
+// Decompiled from void __thiscall IEventEngine::SetGuiEventProc(IEventEngine *this, bool (__cdecl *a2)(struct SEventStruct *))
 void  IEventEngine::SetGuiEventProc(bool (__cdecl*)(struct SEventStruct &) a2) {
   
-  this->activePrimaryHandler = (unsigned __int8 (__cdecl *)(struct SEventStruct *))a2;
+  this->m_pGuiEventProc = a2;
 }
 
 
@@ -588,19 +567,15 @@ bool  IEventEngine::IsEventEngineLocked(void) {
 // Decompiled from void __thiscall IEventEngine::SetOSParam1(IEventEngine *this, HWND a2)
 void  IEventEngine::SetOSParam1(unsigned int a2) {
   
-  this->hwnd = a2;
+  this->m_hWnd = (struct HNWD *)a2;
 }
 
 
 // address=[0x148fed0]
-// Decompiled from IEventEngine *__thiscall IEventEngine::LockEventEngine(IEventEngine *this, char a2)
+// Decompiled from void __thiscall IEventEngine::LockEventEngine(IEventEngine *this, char a2)
 void  IEventEngine::LockEventEngine(bool a2) {
   
-  IEventEngine *result; // eax
-
-  result = this;
   this->m_bLocked = a2;
-  return result;
 }
 
 
@@ -624,18 +599,18 @@ void  IEventEngine::SetTickPointer(unsigned int * a2) {
 
 
 // address=[0x14b4720]
-// Decompiled from char __thiscall IEventEngine::IsEventPlaying(IEventEngine *this)
+// Decompiled from bool __thiscall IEventEngine::IsEventPlaying(IEventEngine *this)
 bool  IEventEngine::IsEventPlaying(void) {
   
-  return this->pad_15[0];
+  return this->m_bIsEventPlaying;
 }
 
 
 // address=[0x14b4740]
-// Decompiled from char __thiscall IEventEngine::IsEventRecording(IEventEngine *this)
+// Decompiled from BYTE __thiscall IEventEngine::IsEventRecording(IEventEngine *this)
 bool  IEventEngine::IsEventRecording(void) {
   
-  return *((_BYTE *)this + 20);
+  return this->m_bIsEventRecording;
 }
 
 
