@@ -149,13 +149,13 @@ int  CFsm::Hash(int a2) {
   int v4; // [esp+4h] [ebp-8h]
 
   v4 = 0;
-  v3 = (*((_DWORD *)this + 2) + (a2 << 8)) % *(_DWORD *)this;
-  while ( (*(_DWORD *)(*((_DWORD *)this + 1) + 16 * ((v4 + v3) % *(_DWORD *)this)) != *((_DWORD *)this + 2)
-        || *(_DWORD *)(*((_DWORD *)this + 1) + 16 * ((v4 + v3) % *(_DWORD *)this) + 8) != a2)
-       && v4 < *(_DWORD *)this )
+  v3 = (signed int)(this->m_iCurrentState + (a2 << 8)) % this->m_iSize;
+  while ( (this->m_pTransitions[(v4 + v3) % this->m_iSize].unk_0 != this->m_iCurrentState
+        || this->m_pTransitions[(v4 + v3) % this->m_iSize].unk_8 != a2)
+       && v4 < this->m_iSize )
     ++v4;
-  if ( v4 < *(_DWORD *)this )
-    return (v4 + v3) % *(_DWORD *)this;
+  if ( v4 < this->m_iSize )
+    return (v4 + v3) % this->m_iSize;
   else
     return -1;
 }

@@ -1,3 +1,4 @@
+#if FALSE
 #include "IEventHandler.h"
 
 // Definitions for class IEventHandler
@@ -21,3 +22,4 @@
 }
 
 
+#endif // Already implemented

@@ -1,5 +1,7 @@
 #include "CEvn_Event.h"
 
+#include "IEventEngine.h"
+
 // Definitions for class CEvn_Event
 
 // address=[0x130e450]

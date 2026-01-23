@@ -1,3 +1,4 @@
+#if FALSE
 #include "CEntityEvent.h"
 
 // Definitions for class CEntityEvent
@@ -132,3 +133,4 @@ void  CEntityEvent::Store(std::ostream & a2) {
 // address=[0x3d8bb20]
 // [Decompilation failed for static unsigned long CEntityEvent::m_iClassID]
 
+#endif // Already implemented

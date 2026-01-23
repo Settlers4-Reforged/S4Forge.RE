@@ -3644,7 +3644,7 @@ int  CInputProcessor::GetTheBestEntity(class std::vector<unsigned short,class st
   unsigned int v5; // eax
   unsigned int v6; // eax
   unsigned int v7; // eax
-  unsigned __int16 *iEntityId; // eax
+  unsigned __int16 *v8; // eax
   int iEntityY; // eax
   __int64 v11; // [esp-10h] [ebp-88h]
   unsigned int v12; // [esp-8h] [ebp-80h]
@@ -3657,7 +3657,7 @@ int  CInputProcessor::GetTheBestEntity(class std::vector<unsigned short,class st
   int v19; // [esp+30h] [ebp-48h]
   int v20; // [esp+34h] [ebp-44h]
   int iPrevEntityY; // [esp+38h] [ebp-40h]
-  IEntity *pEntity; // [esp+3Ch] [ebp-3Ch]
+  IEntity *v22; // [esp+3Ch] [ebp-3Ch]
   int screenY; // [esp+40h] [ebp-38h] BYREF
   int screenX; // [esp+44h] [ebp-34h] BYREF
   int v25; // [esp+48h] [ebp-30h] BYREF
@@ -3706,12 +3706,12 @@ int  CInputProcessor::GetTheBestEntity(class std::vector<unsigned short,class st
     v7 = std::vector<unsigned short>::size(v14);
     if ( i >= v7 )
       break;
-    iEntityId = (unsigned __int16 *)std::vector<unsigned short>::operator[](v14, i);
-    pEntity = CMapObjectMgr::EntityPtr(*iEntityId);
-    iEntityY = IEntity::Y(pEntity);
+    v8 = (unsigned __int16 *)std::vector<unsigned short>::operator[](v14, i);
+    v22 = CMapObjectMgr::EntityPtr(*v8);
+    iEntityY = IEntity::Y(v22);
     if ( iEntityY > iPrevEntityY )
     {
-      iPrevEntityY = IEntity::Y(pEntity);
+      iPrevEntityY = IEntity::Y(v22);
       v20 = *(unsigned __int16 *)std::vector<unsigned short>::operator[](v14, i);
     }
   }
