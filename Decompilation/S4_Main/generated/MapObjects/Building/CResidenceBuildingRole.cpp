@@ -297,7 +297,7 @@ void  CResidenceBuildingRole::PostLoadInit(class CBuilding * a2) {
 
 
 // address=[0x1518cb0]
-// Decompiled from _DWORD *__thiscall CResidenceBuildingRole::FillDialog(CResidenceBuildingRole *this, struct CBuilding *a2, bool a3)
+// Decompiled from _DWORD *__thiscall CResidenceBuildingRole::FillDialog(CResidenceBuildingRole *this, IEntity *a2, bool a3)
 void  CResidenceBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
   
   int v3; // eax
@@ -308,21 +308,21 @@ void  CResidenceBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
   CEvn_Event v10; // [esp+10h] [ebp-28h] BYREF
   int v11; // [esp+34h] [ebp-4h]
 
-  dword_3F1E4B0 = 0;
-  byte_3F1E4B5 = IEntity::Race(a2);
-  byte_3F1E4B4 = IEntity::Type((unsigned __int16 *)a2);
-  byte_3F1E4CC = IEntity::FlagBits(a2, (EntityFlag)0x1000u) != 0;
-  byte_3F1E4B7 = 0;
-  byte_3F1E4B9 = 0;
-  byte_3F1E4B6 = 0;
-  byte_3F1E4BA = -1;
-  byte_3F1E4BF = CResidenceBuildingRole::ReturnRemainingSettlers(this);
-  v6 = IEntity::Type((unsigned __int16 *)a2);
-  v3 = IEntity::OwnerId((unsigned __int8 *)a2);
-  byte_3F1E4BB = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v3, v6, 0);
-  v7 = IEntity::Type((unsigned __int16 *)a2);
-  v4 = IEntity::OwnerId((unsigned __int8 *)a2);
-  byte_3F1E4BC = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v4, v7, 1u);
+  g_cBuildingInfo.m_iUnknown = 0;
+  g_cBuildingInfo.? = IEntity::Race(a2);
+  g_cBuildingInfo.? = IEntity::Type(a2);
+  MEMORY[0x3F1E4CC] = IEntity::FlagBits(a2, (EntityFlag)4096) != 0;
+  g_cBuildingInfo.? = 0;
+  g_cBuildingInfo.? = 0;
+  g_cBuildingInfo.? = 0;
+  g_cBuildingInfo.? = -1;
+  g_cBuildingInfo.? = CResidenceBuildingRole::ReturnRemainingSettlers(this);
+  v6 = IEntity::Type(a2);
+  v3 = IEntity::OwnerId(a2);
+  g_cBuildingInfo.? = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v3, v6, 0);
+  v7 = IEntity::Type(a2);
+  v4 = IEntity::OwnerId(a2);
+  g_cBuildingInfo.? = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v4, v7, 1u);
   v9 = 604;
   if ( !a3 )
     v9 = 602;

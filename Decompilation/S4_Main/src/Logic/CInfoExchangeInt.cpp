@@ -1,24 +1,16 @@
-#if FALSE
 #include "CInfoExchangeInt.h"
+
+CInfoExchangeInt g_cInfoExchangeInt{};
 
 // Definitions for class CInfoExchangeInt
 
 // address=[0x14546b0]
 // Decompiled from CInfoExchangeInt *__thiscall CInfoExchangeInt::CInfoExchangeInt(CInfoExchangeInt *this)
- CInfoExchangeInt::CInfoExchangeInt(void) {
-  
-  CInfoExchange::CInfoExchange(this);
-  this->__vftable = (CInfoExchange_vtbl *)&CInfoExchangeInt::_vftable_;
-  return this;
-}
-
+CInfoExchangeInt::CInfoExchangeInt(void) : CInfoExchange() {}
 
 // address=[0x1454c70]
 // Decompiled from int __thiscall CInfoExchangeInt::Size(CInfoExchangeInt *this)
-unsigned int  CInfoExchangeInt::Size(void)const {
-  
+unsigned int CInfoExchangeInt::Size(void) const
+{
   return 12;
 }
-
-
-#endif // Already implemented

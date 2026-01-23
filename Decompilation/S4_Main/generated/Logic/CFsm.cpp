@@ -1,3 +1,4 @@
+#if FALSE
 #include "CFsm.h"
 
 // Definitions for class CFsm
@@ -26,12 +27,12 @@ int  CFsm::CurrentState(void)const {
 
 
 // address=[0x2f05e40]
-// Decompiled from int __thiscall CFsm::~CFsm(void **this)
+// Decompiled from int __thiscall CFsm::~CFsm(CFsm *this)
  CFsm::~CFsm(void) {
   
-  if ( this[1] )
-    operator delete[](this[1]);
-  return std::list<CFsm::SEvent *>::~list<CFsm::SEvent *>(this + 3);
+  if ( this->m_pTransitions )
+    operator delete[](this->m_pTransitions);
+  return std::list<CFsm::SEvent *>::~list<CFsm::SEvent *>(&this->m_pEventQueue);
 }
 
 
@@ -161,3 +162,4 @@ int  CFsm::Hash(int a2) {
 }
 
 
+#endif // Already implemented

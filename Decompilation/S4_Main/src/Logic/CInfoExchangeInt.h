@@ -2,6 +2,7 @@
 #define CINFOEXCHANGEINT_H
 
 #include "defines.h"
+#include "CInfoExchange.h"
 
 class CInfoExchangeInt : public CInfoExchange {
 public:
@@ -11,11 +12,9 @@ public:
     // address=[0x1454c70]
     virtual unsigned int  Size(void)const;
 
-    // Type information members
-public:
-    unsigned int m_uData;
-
+    uint32_t m_uData;
 };
 
+extern CInfoExchangeInt g_cInfoExchangeInt;
 
 #endif // CINFOEXCHANGEINT_H

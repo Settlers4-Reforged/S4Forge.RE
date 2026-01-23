@@ -57,7 +57,7 @@ public:
     class CBuilding *  GetBuilding(int a2, int a3)const;
 
     // address=[0x14f51a0]
-    int  GetNumberOfBuildings(int a2, int a3, int a4)const;
+    int  GetNumberOfBuildings(int a2, int a3, int _iPeriod)const;
 
     // address=[0x14f52f0]
     void  ChangeNumberOfBuildings(int a2, int a3, int a4, int a5);

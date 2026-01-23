@@ -21,7 +21,7 @@ public:
     static class CPersistence * __cdecl New(std::istream & a1);
 
     // address=[0x14299b0]
-    int  NrOfSettler(int a2)const;
+    int  NrOfSettler(int _iSettlerType)const;
 
     // address=[0x1429a00]
     void  ChangeNrOfSettler(int a2, int a3);

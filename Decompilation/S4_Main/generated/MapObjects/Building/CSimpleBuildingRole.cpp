@@ -524,7 +524,7 @@ bool  CSimpleBuildingRole::SettlerEnter(class CBuilding * a2, int a3) {
 
 
 // address=[0x151b740]
-// Decompiled from _DWORD *__thiscall CSimpleBuildingRole::FillDialog(CSimpleBuildingRole *this, struct CBuilding *a2, bool a3)
+// Decompiled from _DWORD *__thiscall CSimpleBuildingRole::FillDialog(CSimpleBuildingRole *this, IEntity *a2, bool a3)
 void  CSimpleBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
   
   int v3; // eax
@@ -541,23 +541,23 @@ void  CSimpleBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
   CEvn_Event v16; // [esp+30h] [ebp-28h] BYREF
   int v17; // [esp+54h] [ebp-4h]
 
-  if ( IEntity::Type((unsigned __int16 *)a2) == 27 )
+  if ( IEntity::Type(a2) == 27 )
   {
-    dword_3F1E4B0 = 0;
-    byte_3F1E4B5 = IEntity::Race(a2);
-    byte_3F1E4B4 = IEntity::Type((unsigned __int16 *)a2);
-    byte_3F1E4B7 = 1;
-    byte_3F1E4B8 = IEntity::FlagBits(a2, (EntityFlag)0x1000u) != 0;
-    byte_3F1E4B9 = *(_DWORD *)(*((_DWORD *)this + 94) + 492) > 0;
-    v8 = IEntity::Type((unsigned __int16 *)a2);
-    v3 = IEntity::OwnerId((unsigned __int8 *)a2);
-    byte_3F1E4BB = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v3, v8, 0);
-    v9 = IEntity::Type((unsigned __int16 *)a2);
-    v4 = IEntity::OwnerId((unsigned __int8 *)a2);
-    byte_3F1E4BC = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v4, v9, 1u);
-    byte_3F1E4B6 = *((_BYTE *)this + 29);
+    g_cBuildingInfo.m_iUnknown = 0;
+    g_cBuildingInfo.? = IEntity::Race(a2);
+    g_cBuildingInfo.? = IEntity::Type(a2);
+    g_cBuildingInfo.? = 1;
+    g_cBuildingInfo.? = IEntity::FlagBits(a2, (EntityFlag)4096) != 0;
+    g_cBuildingInfo.? = *(_DWORD *)(*((_DWORD *)this + 94) + 492) > 0;
+    v8 = IEntity::Type(a2);
+    v3 = IEntity::OwnerId(a2);
+    g_cBuildingInfo.? = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v3, v8, 0);
+    v9 = IEntity::Type(a2);
+    v4 = IEntity::OwnerId(a2);
+    g_cBuildingInfo.? = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v4, v9, 1u);
+    g_cBuildingInfo.? = *((_BYTE *)this + 29);
     if ( *((_BYTE *)this + 29) )
-      byte_3F1E4BD = *(_BYTE *)(*((_DWORD *)this + 94) + 478);
+      g_cBuildingInfo.? = *(_BYTE *)(*((_DWORD *)this + 94) + 478);
     v13 = 604;
     if ( !a3 )
       v13 = 602;
@@ -571,15 +571,15 @@ void  CSimpleBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
   {
     dword_3F1E4E8 = 2;
     byte_3F1E4ED = IEntity::Race(a2);
-    byte_3F1E4EC = IEntity::Type((unsigned __int16 *)a2);
+    byte_3F1E4EC = IEntity::Type(a2);
     byte_3F1E4EF = 1;
-    byte_3F1E4F0 = IEntity::FlagBits(a2, (EntityFlag)0x1000u) != 0;
+    byte_3F1E4F0 = IEntity::FlagBits(a2, (EntityFlag)4096) != 0;
     byte_3F1E4F1 = *(_DWORD *)(*((_DWORD *)this + 94) + 492) > 0;
-    v10 = IEntity::Type((unsigned __int16 *)a2);
-    v6 = IEntity::OwnerId((unsigned __int8 *)a2);
+    v10 = IEntity::Type(a2);
+    v6 = IEntity::OwnerId(a2);
     byte_3F1E4F3 = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v6, v10, 0);
-    v11 = IEntity::Type((unsigned __int16 *)a2);
-    v7 = IEntity::OwnerId((unsigned __int8 *)a2);
+    v11 = IEntity::Type(a2);
+    v7 = IEntity::OwnerId(a2);
     byte_3F1E4F4 = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v7, v11, 1u);
     byte_3F1E4EE = *((_BYTE *)this + 29);
     byte_3F1E4F9 = 0;

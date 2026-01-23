@@ -6,7 +6,7 @@
 // Decompiled from CGoodDistributionInfo *__thiscall CGoodDistributionInfo::CGoodDistributionInfo(CGoodDistributionInfo *this)
  CGoodDistributionInfo::CGoodDistributionInfo(void) {
   
-  CInfoExchange::CInfoExchange(this);
+  CInfoExchange::CInfoExchange((CInfoExchange *)this);
   *(_DWORD *)this = &CGoodDistributionInfo::_vftable_;
   *((_BYTE *)this + 56) = 0;
   *((_DWORD *)this + 16) = -1;

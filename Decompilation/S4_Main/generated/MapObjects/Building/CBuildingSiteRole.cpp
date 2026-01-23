@@ -766,12 +766,12 @@ void  CBuildingSiteRole::SwitchPriority(void) {
 
 
 // address=[0x1502510]
-// Decompiled from _DWORD *__thiscall CBuildingSiteRole::FillDialog(CBuildingSiteRole *this, struct CBuilding *a2, bool a3)
+// Decompiled from _DWORD *__thiscall CBuildingSiteRole::FillDialog(CBuildingSiteRole *this, IEntity *a2, bool a3)
 void  CBuildingSiteRole::FillDialog(class CBuilding * a2, bool a3) {
   
-  int v3; // eax
+  CBuilding *v3; // eax
   int v4; // eax
-  _DWORD *v5; // eax
+  CBuilding *v5; // eax
   CEcoSector *v6; // eax
   CEcoSector *v7; // eax
   int v8; // eax
@@ -782,142 +782,146 @@ void  CBuildingSiteRole::FillDialog(class CBuilding * a2, bool a3) {
   int v14; // [esp-8h] [ebp-70h]
   int v15; // [esp-8h] [ebp-70h]
   unsigned int v16; // [esp+4h] [ebp-64h]
-  unsigned __int8 *v17; // [esp+8h] [ebp-60h]
-  unsigned __int8 *v18; // [esp+Ch] [ebp-5Ch]
-  unsigned __int8 *v19; // [esp+10h] [ebp-58h]
-  unsigned __int8 *v20; // [esp+14h] [ebp-54h]
-  unsigned __int8 *v21; // [esp+18h] [ebp-50h]
-  unsigned __int8 *v22; // [esp+1Ch] [ebp-4Ch]
-  int v23; // [esp+24h] [ebp-44h]
+  IEntity *v17; // [esp+8h] [ebp-60h]
+  IEntity *v18; // [esp+Ch] [ebp-5Ch]
+  IEntity *v19; // [esp+10h] [ebp-58h]
+  IEntity *v20; // [esp+14h] [ebp-54h]
+  IEntity *v21; // [esp+18h] [ebp-50h]
+  IEntity *v22; // [esp+1Ch] [ebp-4Ch]
+  unsigned int v23; // [esp+24h] [ebp-44h]
   int v24; // [esp+28h] [ebp-40h]
-  int v25; // [esp+2Ch] [ebp-3Ch]
+  int bBuildingNeedsGold; // [esp+2Ch] [ebp-3Ch]
   int v26; // [esp+30h] [ebp-38h]
   int v27; // [esp+34h] [ebp-34h]
-  int v28; // [esp+38h] [ebp-30h]
+  int iESId; // [esp+38h] [ebp-30h]
   CEvn_Event v30; // [esp+40h] [ebp-28h] BYREF
   int v31; // [esp+64h] [ebp-4h]
 
   v3 = CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
   v4 = CBuilding::EnsignWorldIdx(v3);
-  v28 = CWorldManager::EcoSectorId(v4);
-  if ( !v28 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingSite.cpp", 2208, "iESId > 0") == 1 )
+  iESId = CWorldManager::EcoSectorId(v4);
+  if ( !iESId && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingSite.cpp", 2208, "iESId > 0") == 1 )
     __debugbreak();
-  dword_3F1E4C4 = 1;
-  byte_3F1E4C8 = IEntity::Type((unsigned __int16 *)a2);
-  byte_3F1E4C9 = IEntity::Race(a2);
-  byte_3F1E4CB = 1;
-  v5 = (_DWORD *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
-  byte_3F1E4CC = IEntity::FlagBits(v5, (EntityFlag)0x1000u) != 0;
-  byte_3F1E4E0 = *((_BYTE *)this + 440);
+  g_cBuildingSiteInfo.m_iUnknown = 1;
+  g_cBuildingSiteInfo.m_cType = IEntity::Type(a2);
+  g_cBuildingSiteInfo.m_cRace = IEntity::Race(a2);
+  g_cBuildingSiteInfo.m_unknownB = 1;
+  v5 = CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
+  g_cBuildingSiteInfo.m_bSomeFlagBits = IEntity::FlagBits((IEntity *)v5, (EntityFlag)0x1000) != 0;
+  g_cBuildingSiteInfo.m_unknown20 = *((_BYTE *)this + 440);
   v24 = *(char *)(*((_DWORD *)this + 94) + 479);
   if ( *(_BYTE *)(*((_DWORD *)this + 94) + 479) )
   {
-    v6 = (CEcoSector *)CEcoSectorMgr::operator[](v28);
-    if ( (int)CEcoSector::NrOfGoods(v6, v24) <= 0 )
-      byte_3F1E4D2 = -(char)v24;
+    v6 = (CEcoSector *)CEcoSectorMgr::operator[](g_cESMgr, iESId);
+    if ( CEcoSector::NrOfGoods(v6, v24) <= 0 )
+      g_cBuildingSiteInfo.m_unknown12 = -(char)v24;
     else
-      byte_3F1E4D2 = v24;
+      g_cBuildingSiteInfo.m_unknown12 = v24;
   }
   v23 = *(char *)(*((_DWORD *)this + 94) + 478);
   if ( *(_BYTE *)(*((_DWORD *)this + 94) + 478) )
   {
-    v7 = (CEcoSector *)CEcoSectorMgr::operator[](v28);
-    if ( (int)CEcoSector::NrOfSettler(v7, v23) <= 0 )
-      byte_3F1E4D1 = -(char)v23;
+    v7 = (CEcoSector *)CEcoSectorMgr::operator[](g_cESMgr, iESId);
+    if ( CEcoSector::NrOfSettler(v7, v23) <= 0 )
+      g_cBuildingSiteInfo.m_iSettlerCount = -(char)v23;
     else
-      byte_3F1E4D1 = v23;
+      g_cBuildingSiteInfo.m_iSettlerCount = v23;
   }
-  byte_3F1E4CD = *(_DWORD *)(*((_DWORD *)this + 94) + 492) > 0;
-  v14 = IEntity::Type((unsigned __int16 *)a2);
-  v8 = IEntity::OwnerId((unsigned __int8 *)a2);
-  byte_3F1E4CF = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v8, v14, 0);
-  v15 = IEntity::Type((unsigned __int16 *)a2);
-  v9 = IEntity::OwnerId((unsigned __int8 *)a2);
-  byte_3F1E4D0 = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v9, v15, 1u);
-  byte_3F1E4CE = CBuildingSiteRole::BuildingProgress(this);
+  g_cBuildingSiteInfo.m_unknownD = *(_DWORD *)(*((_DWORD *)this + 94) + 492) > 0;
+  v14 = IEntity::Type(a2);
+  v8 = IEntity::OwnerId(a2);
+  g_cBuildingSiteInfo.m_cTotalCount = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v8, v14, 0);
+  v15 = IEntity::Type(a2);
+  v9 = IEntity::OwnerId(a2);
+  g_cBuildingSiteInfo.m_cTotalBuiltCount = CBuildingMgr::GetNumberOfBuildings(
+                                             (CBuildingMgr *)g_cBuildingMgr,
+                                             v9,
+                                             v15,
+                                             1u);
+  g_cBuildingSiteInfo.m_unknownE = CBuildingSiteRole::BuildingProgress(this);
   if ( *((_WORD *)this + 216) )
   {
     v27 = CBuildingSiteRole::NeedBoards(this);
-    v10 = (CEcoSector *)CEcoSectorMgr::operator[](v28);
+    v10 = (CEcoSector *)CEcoSectorMgr::operator[](g_cESMgr, iESId);
     if ( CEcoSector::NrOfGoods(v10, 7) < v27 )
       v27 = -v27;
-    byte_3F1E4D5[0] = v27;
+    g_cBuildingSiteInfo.m_sRequiredRessources[0].m_cAmount = v27;
     if ( v27 )
-      byte_3F1E4D4 = 7;
+      g_cBuildingSiteInfo.m_sRequiredRessources[0].m_cType = 7;
     else
-      byte_3F1E4D4 = 0;
+      g_cBuildingSiteInfo.m_sRequiredRessources[0].m_cType = 0;
   }
   else
   {
-    byte_3F1E4D4 = 0;
+    g_cBuildingSiteInfo.m_sRequiredRessources[0].m_cType = 0;
   }
   if ( *((_WORD *)this + 217) )
   {
     v26 = CBuildingSiteRole::NeedStone(this);
-    v11 = (CEcoSector *)CEcoSectorMgr::operator[](v28);
+    v11 = (CEcoSector *)CEcoSectorMgr::operator[](g_cESMgr, iESId);
     if ( CEcoSector::NrOfGoods(v11, 32) < v26 )
       v26 = -v26;
-    byte_3F1E4D5[2] = v26;
+    g_cBuildingSiteInfo.m_sRequiredRessources[1].m_cAmount = v26;
     if ( v26 )
-      *(&byte_3F1E4D4 + 2) = 32;
+      g_cBuildingSiteInfo.m_sRequiredRessources[1].m_cType = 32;
     else
-      *(&byte_3F1E4D4 + 2) = 0;
+      g_cBuildingSiteInfo.m_sRequiredRessources[1].m_cType = 0;
   }
   else
   {
-    *(&byte_3F1E4D4 + 2) = 0;
+    g_cBuildingSiteInfo.m_sRequiredRessources[1].m_cType = 0;
   }
   if ( *((_WORD *)this + 218) )
   {
-    v25 = CBuildingSiteRole::NeedGold(this);
-    v12 = (CEcoSector *)CEcoSectorMgr::operator[](v28);
-    if ( CEcoSector::NrOfGoods(v12, 14) < v25 )
-      v25 = -v25;
-    byte_3F1E4D5[4] = v25;
-    if ( v25 )
-      *(&byte_3F1E4D4 + 4) = 14;
+    bBuildingNeedsGold = CBuildingSiteRole::NeedGold(this);
+    v12 = (CEcoSector *)CEcoSectorMgr::operator[](g_cESMgr, iESId);
+    if ( CEcoSector::NrOfGoods(v12, 14) < bBuildingNeedsGold )
+      bBuildingNeedsGold = -bBuildingNeedsGold;
+    g_cBuildingSiteInfo.m_sRequiredRessources[2].m_cAmount = bBuildingNeedsGold;
+    if ( bBuildingNeedsGold )
+      g_cBuildingSiteInfo.m_sRequiredRessources[2].m_cType = 14;
     else
-      *(&byte_3F1E4D4 + 4) = 0;
+      g_cBuildingSiteInfo.m_sRequiredRessources[2].m_cType = 0;
   }
   else
   {
-    *(&byte_3F1E4D4 + 4) = 0;
+    g_cBuildingSiteInfo.m_sRequiredRessources[2].m_cType = 0;
   }
   if ( *((_WORD *)this + 216) )
   {
     v22 = CPileMgr::operator[](*((unsigned __int16 *)this + 216));
-    byte_3F1E4DB = (*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)v22 + 40))(v22);
+    g_cBuildingSiteInfo.m_sOtherRessources[0].m_cAmount = v22->Amount();
     v21 = CPileMgr::operator[](*((unsigned __int16 *)this + 216));
-    byte_3F1E4DA = (*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)v21 + 60))(v21);
+    g_cBuildingSiteInfo.m_sOtherRessources[0].m_cType = v21->GetGoodType();
   }
   else
   {
-    byte_3F1E4DB = 0;
-    byte_3F1E4DA = 0;
+    g_cBuildingSiteInfo.m_sOtherRessources[0].m_cAmount = 0;
+    g_cBuildingSiteInfo.m_sOtherRessources[0].m_cType = 0;
   }
   if ( *((_WORD *)this + 217) )
   {
     v20 = CPileMgr::operator[](*((unsigned __int16 *)this + 217));
-    *(&byte_3F1E4DB + 2) = (*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)v20 + 40))(v20);
+    g_cBuildingSiteInfo.m_sOtherRessources[1].m_cAmount = v20->Amount();
     v19 = CPileMgr::operator[](*((unsigned __int16 *)this + 217));
-    *(&byte_3F1E4DA + 2) = (*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)v19 + 60))(v19);
+    g_cBuildingSiteInfo.m_sOtherRessources[1].m_cType = v19->GetGoodType();
   }
   else
   {
-    *(&byte_3F1E4DB + 2) = 0;
-    *(&byte_3F1E4DA + 2) = 0;
+    g_cBuildingSiteInfo.m_sOtherRessources[1].m_cAmount = 0;
+    g_cBuildingSiteInfo.m_sOtherRessources[1].m_cType = 0;
   }
   if ( *((_WORD *)this + 218) )
   {
     v18 = CPileMgr::operator[](*((unsigned __int16 *)this + 218));
-    *(&byte_3F1E4DB + 4) = (*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)v18 + 40))(v18);
+    g_cBuildingSiteInfo.m_sOtherRessources[2].m_cAmount = v18->Amount();
     v17 = CPileMgr::operator[](*((unsigned __int16 *)this + 218));
-    *(&byte_3F1E4DA + 4) = (*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)v17 + 60))(v17);
+    g_cBuildingSiteInfo.m_sOtherRessources[2].m_cType = v17->GetGoodType();
   }
   else
   {
-    *(&byte_3F1E4DB + 4) = 0;
-    *(&byte_3F1E4DA + 4) = 0;
+    g_cBuildingSiteInfo.m_sOtherRessources[2].m_cAmount = 0;
+    g_cBuildingSiteInfo.m_sOtherRessources[2].m_cType = 0;
   }
   v16 = 604;
   if ( !a3 )
@@ -2270,14 +2274,14 @@ int  CBuildingSiteRole::GetEcoSectorId(class CBuilding * a2) {
 // Decompiled from int __thiscall CBuildingSiteRole::NeedBoards(CBuildingSiteRole *this)
 int  CBuildingSiteRole::NeedBoards(void)const {
   
-  unsigned __int8 *v1; // eax
+  IEntity *v1; // eax
   int v2; // esi
 
   if ( !*((_BYTE *)this + 403) )
     return 0;
   v1 = CPileMgr::operator[](*((unsigned __int16 *)this + 216));
   v2 = *((unsigned __int8 *)this + 404);
-  return *((unsigned __int8 *)this + 403) - (*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)v1 + 40))(v1) - v2;
+  return *((unsigned __int8 *)this + 403) - ((int (__thiscall *)(IEntity *))v1->Amount)(v1) - v2;
 }
 
 

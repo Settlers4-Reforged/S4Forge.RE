@@ -1,3 +1,4 @@
+#if FALSE
 #include "CBuildingSiteInfo.h"
 
 // Definitions for class CBuildingSiteInfo
@@ -6,7 +7,7 @@
 // Decompiled from CBuildingSiteInfo *__thiscall CBuildingSiteInfo::CBuildingSiteInfo(CBuildingSiteInfo *this)
  CBuildingSiteInfo::CBuildingSiteInfo(void) {
   
-  CBuildingInfo::CBuildingInfo(this);
+  CBuildingInfo::CBuildingInfo((CBuildingInfo *)this);
   *(_DWORD *)this = &CBuildingSiteInfo::_vftable_;
   return this;
 }
@@ -16,7 +17,8 @@
 // Decompiled from int __thiscall CBuildingSiteInfo::Size(CBuildingSiteInfo *this)
 unsigned int  CBuildingSiteInfo::Size(void)const {
   
-  return 36;
+  return 0x24;
 }
 
 
+#endif // Already implemented

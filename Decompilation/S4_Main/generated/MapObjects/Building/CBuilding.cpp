@@ -309,7 +309,7 @@ int  CBuilding::EcoSectorId(void)const {
 
 
 // address=[0x14e8ce0]
-// Decompiled from _DWORD *__thiscall CBuilding::TryCrushBuilding(CBuilding *this)
+// Decompiled from _DWORD *__thiscall CBuilding::TryCrushBuilding(IEntity *this)
 void  CBuilding::TryCrushBuilding(void) {
   
   _DWORD *result; // eax
@@ -319,18 +319,18 @@ void  CBuilding::TryCrushBuilding(void) {
   CEvn_Event v6; // [esp+10h] [ebp-28h] BYREF
   int v7; // [esp+34h] [ebp-4h]
 
-  v4 = std::auto_ptr<IBuildingRole>::operator->((_DWORD *)this + 21);
+  v4 = std::auto_ptr<IBuildingRole>::operator->(&this[2].m_nType);
   result = (_DWORD *)(*(int (__thiscall **)(int))(*(_DWORD *)v4 + 40))(v4);
   if ( !(_BYTE)result )
     return result;
-  dword_3F1E4A4 = 10;
-  dword_3F1E4A8 = 0;
-  v2 = IEntity::Type((unsigned __int16 *)this);
+  g_cInfoExchangeInt.m_iUnknown = 10;
+  g_cInfoExchangeInt.m_uData = 0;
+  v2 = IEntity::Type(this);
   if ( CBuildingMgr::IsMilitaryBuildingEx(v2) && CBuilding::IsOccupied(this) )
   {
-    v3 = IEntity::OwnerId((unsigned __int8 *)this);
+    v3 = IEntity::OwnerId(this);
     if ( !CBuildingMgr::CheckNumberOfOccupiedMilitaryBuildings((CBuildingMgr *)g_cBuildingMgr, v3, 2) )
-      dword_3F1E4A8 = 1;
+      g_cInfoExchangeInt.m_uData = 1;
   }
   CEvn_Event::CEvn_Event(&v6, 0x25Au, 0, (unsigned int)&g_cInfoExchangeInt, 0);
   v7 = 0;

@@ -6167,64 +6167,64 @@ void __cdecl UpdateGuiDlgBuildContext(void) {
   if ( g_pGUIEngine )
   {
     byte_3ECF2AA = 1;
-    GuiHouseImageID = GetGuiHouseImageID(byte_3F1E4C9, byte_3F1E4C8, 1);
+    GuiHouseImageID = GetGuiHouseImageID((char)g_cBuildingSiteInfo.m_cRace, (char)g_cBuildingSiteInfo.m_cType, 1);
     IGuiEngine::SetImages((void *)g_pGUIEngine, 14, 420, GuiHouseImageID, 0);
-    GuiHouseString = (char *)GetGuiHouseString(byte_3F1E4C9, byte_3F1E4C8);
+    GuiHouseString = (char *)GetGuiHouseString((char)g_cBuildingSiteInfo.m_cRace, (char)g_cBuildingSiteInfo.m_cType);
     IGuiEngine::SetText((void *)g_pGUIEngine, 14, 408, GuiHouseString);
-    _wsprintfA(Str, "%u", byte_3F1E4D0);
+    _wsprintfA(Str, "%u", (char)g_cBuildingSiteInfo.m_cTotalBuiltCount);
     IGuiEngine::SetText((void *)g_pGUIEngine, 14, 409, Str);
-    if ( byte_3F1E4CF <= 0 )
+    if ( (char)g_cBuildingSiteInfo.m_cTotalCount <= 0 )
     {
       IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 14, 410, 0);
     }
     else
     {
-      _wsprintfA(Str, "+%u", byte_3F1E4CF);
+      _wsprintfA(Str, "+%u", (char)g_cBuildingSiteInfo.m_cTotalCount);
       IGuiEngine::SetText((void *)g_pGUIEngine, 14, 410, Str);
       IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 14, 410, 1);
     }
     for ( i = 0; i < 3; ++i )
     {
-      if ( byte_3F1E4D4[2 * i] )
+      if ( g_cBuildingSiteInfo.m_sRequiredRessources[i].m_cType )
       {
-        Number = byte_3F1E4D5[2 * i];
+        Number = (char)g_cBuildingSiteInfo.m_sRequiredRessources[i].m_cAmount;
         v2 = j__abs(Number);
         _wsprintfA(Str, "%u", v2);
-        IGuiEngine::SetText((void *)g_pGUIEngine, 14, dword_368AA14[2 * i], Str);
-        GuiGoodImageID = GetGuiGoodImageID(byte_3F1E4D4[2 * i]);
-        IGuiEngine::SetImages((void *)g_pGUIEngine, 14, dword_368AA14[2 * i + 1], GuiGoodImageID, 0);
+        IGuiEngine::SetText((void *)g_pGUIEngine, 14, byte_368AA14[2 * i], Str);
+        GuiGoodImageID = GetGuiGoodImageID((char)g_cBuildingSiteInfo.m_sRequiredRessources[i].m_cType);
+        IGuiEngine::SetImages((void *)g_pGUIEngine, 14, byte_368AA14[2 * i + 1], GuiGoodImageID, 0);
         IGuiEngine::SetTooltipID(
           (IGuiEngine *)g_pGUIEngine,
           14,
-          dword_368AA14[2 * i + 1],
-          dword_368A6B8[5 * byte_3F1E4D4[2 * i] + 3],
-          dword_368A6B8[5 * byte_3F1E4D4[2 * i] + 4]);
-        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 14, dword_368AA14[2 * i], 1);
-        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 14, dword_368AA14[2 * i + 1], 1);
+          byte_368AA14[2 * i + 1],
+          dword_368A6B8[5 * (char)g_cBuildingSiteInfo.m_sRequiredRessources[i].m_cType + 3],
+          dword_368A6B8[5 * (char)g_cBuildingSiteInfo.m_sRequiredRessources[i].m_cType + 4]);
+        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 14, byte_368AA14[2 * i], 1);
+        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 14, byte_368AA14[2 * i + 1], 1);
         if ( Number < 0 )
-          IGuiEngine::SetFontTemplate((IGuiEngine *)g_pGUIEngine, 14, dword_368AA14[2 * i], 2);
+          IGuiEngine::SetFontTemplate((IGuiEngine *)g_pGUIEngine, 14, byte_368AA14[2 * i], 2);
         else
-          IGuiEngine::SetFontTemplate((IGuiEngine *)g_pGUIEngine, 14, dword_368AA14[2 * i], 1);
+          IGuiEngine::SetFontTemplate((IGuiEngine *)g_pGUIEngine, 14, byte_368AA14[2 * i], 1);
       }
       else
       {
-        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 14, dword_368AA14[2 * i], 0);
-        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 14, dword_368AA14[2 * i + 1], 0);
+        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 14, byte_368AA14[2 * i], 0);
+        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 14, byte_368AA14[2 * i + 1], 0);
       }
-      if ( byte_3F1E4DA[2 * i] )
+      if ( g_cBuildingSiteInfo.m_sOtherRessources[i].m_cType )
       {
-        Numbera = byte_3F1E4DB[2 * i];
+        Numbera = (char)g_cBuildingSiteInfo.m_sOtherRessources[i].m_cAmount;
         v4 = j__abs(Numbera);
         _wsprintfA(Str, "%u", v4);
         IGuiEngine::SetText((void *)g_pGUIEngine, 14, dword_368AA2C[2 * i], Str);
-        v5 = GetGuiGoodImageID(byte_3F1E4DA[2 * i]);
+        v5 = GetGuiGoodImageID((char)g_cBuildingSiteInfo.m_sOtherRessources[i].m_cType);
         IGuiEngine::SetImages((void *)g_pGUIEngine, 14, dword_368AA2C[2 * i + 1], v5, 0);
         IGuiEngine::SetTooltipID(
           (IGuiEngine *)g_pGUIEngine,
           14,
-          dword_368AA14[2 * i + 1],
-          dword_368A6B8[5 * byte_3F1E4DA[2 * i] + 3],
-          dword_368A6B8[5 * byte_3F1E4DA[2 * i] + 4]);
+          byte_368AA14[2 * i + 1],
+          dword_368A6B8[5 * (char)g_cBuildingSiteInfo.m_sOtherRessources[i].m_cType + 3],
+          dword_368A6B8[5 * (char)g_cBuildingSiteInfo.m_sOtherRessources[i].m_cType + 4]);
         IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 14, dword_368AA2C[2 * i], 1);
         IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 14, dword_368AA2C[2 * i + 1], 1);
         if ( Numbera < 0 )
@@ -6238,10 +6238,10 @@ void __cdecl UpdateGuiDlgBuildContext(void) {
         IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 14, dword_368AA2C[2 * i + 1], 0);
       }
     }
-    IGuiEngine::SetSliderPosition((IGuiEngine *)g_pGUIEngine, 14, 418, byte_3F1E4CE);
-    IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 14, 405, byte_3F1E4CD);
-    IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 14, 407, byte_3F1E4CC == 0);
-    IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 14, 417, byte_3F1E4E0);
+    IGuiEngine::SetSliderPosition((IGuiEngine *)g_pGUIEngine, 14, 418, (char)g_cBuildingSiteInfo.m_unknownE);
+    IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 14, 405, g_cBuildingSiteInfo.m_unknownD);
+    IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 14, 407, g_cBuildingSiteInfo.m_bSomeFlagBits == 0);
+    IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 14, 417, g_cBuildingSiteInfo.m_unknown20);
     byte_3ECF2AA = 0;
   }
 }
@@ -7898,26 +7898,26 @@ void __cdecl UpdateGuiDlgBuildingContext(void) {
 
   if ( g_pGUIEngine )
   {
-    GuiHouseImageID = GetGuiHouseImageID(byte_3F1E4B5, byte_3F1E4B4, 0);
+    GuiHouseImageID = GetGuiHouseImageID((char)g_cBuildingInfo.?, (char)g_cBuildingInfo.?, 0);
     IGuiEngine::SetImages((void *)g_pGUIEngine, 15, 470, GuiHouseImageID, 0);
-    GuiHouseString = (char *)GetGuiHouseString(byte_3F1E4B5, byte_3F1E4B4);
+    GuiHouseString = (char *)GetGuiHouseString((char)g_cBuildingInfo.?, (char)g_cBuildingInfo.?);
     IGuiEngine::SetText((void *)g_pGUIEngine, 15, 467, GuiHouseString);
-    _wsprintfA(Str, "%u", byte_3F1E4BC);
+    _wsprintfA(Str, "%u", (char)g_cBuildingInfo.?);
     IGuiEngine::SetText((void *)g_pGUIEngine, 15, 468, Str);
-    if ( byte_3F1E4BB <= 0 )
+    if ( (char)g_cBuildingInfo.? <= 0 )
     {
       IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 15, 469, 0);
     }
     else
     {
-      _wsprintfA(Str, "+%u", byte_3F1E4BB);
+      _wsprintfA(Str, "+%u", (char)g_cBuildingInfo.?);
       IGuiEngine::SetText((void *)g_pGUIEngine, 15, 469, Str);
       IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 15, 469, 1);
     }
-    IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 15, 471, byte_3F1E4B6);
-    if ( byte_3F1E4B4 == 40 || byte_3F1E4B4 == 41 || byte_3F1E4B4 == 42 )
+    IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 15, 471, g_cBuildingInfo.?);
+    if ( g_cBuildingInfo.? == 40 || g_cBuildingInfo.? == 41 || g_cBuildingInfo.? == 42 )
     {
-      _wsprintfA(Str, "%u", (unsigned __int8)byte_3F1E4BF);
+      _wsprintfA(Str, "%u", g_cBuildingInfo.?);
       IGuiEngine::SetText((void *)g_pGUIEngine, 15, 472, Str);
     }
   }
@@ -7932,8 +7932,8 @@ bool __cdecl GuiDlgBuildingContextProc(int a1, int a2, int a3) {
   char *v5; // eax
   CEvn_Logic *v6; // [esp+4h] [ebp-68h]
   CEvn_Logic *v7; // [esp+Ch] [ebp-60h]
-  _BYTE v8[32]; // [esp+1Ch] [ebp-50h] BYREF
-  _BYTE v9[32]; // [esp+3Ch] [ebp-30h] BYREF
+  CEvn_Logic v8; // [esp+1Ch] [ebp-50h] BYREF
+  CEvn_Logic v9; // [esp+3Ch] [ebp-30h] BYREF
   int v10; // [esp+68h] [ebp-4h]
 
   if ( !g_pEvnEngine )
@@ -7941,7 +7941,7 @@ bool __cdecl GuiDlgBuildingContextProc(int a1, int a2, int a3) {
   switch ( a1 )
   {
     case 0:
-      if ( byte_3F1E4B4 == 40 || byte_3F1E4B4 == 41 || byte_3F1E4B4 == 42 )
+      if ( g_cBuildingInfo.? == 40 || g_cBuildingInfo.? == 41 || g_cBuildingInfo.? == 42 )
         IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 15, 473, 1);
       else
         IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 15, 473, 0);
@@ -7949,28 +7949,28 @@ bool __cdecl GuiDlgBuildingContextProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a3 & 0x10000) != 0 )
-        PlayGuiSound(1);
+        PlayGuiSound(1u);
       else
         PlayGuiSound(0);
       break;
     case 3:
       if ( a2 == 465 )
       {
-        v7 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v9, 0x198u, 0, 0, 0, 0, 0);
+        v7 = CEvn_Logic::CEvn_Logic(&v9, 0x198u, 0, 0, 0, 0, 0);
         v10 = 0;
         IEventEngine::SendAMessage(g_pEvnEngine, v7);
         v10 = -1;
-        CEvn_Logic::~CEvn_Logic(v9);
-        PlayGuiSound(2);
+        CEvn_Logic::~CEvn_Logic(&v9);
+        PlayGuiSound(2u);
       }
       else if ( a2 == 466 )
       {
-        v6 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v8, 0x194u, 0, 0, 0, 0, 0);
+        v6 = CEvn_Logic::CEvn_Logic(&v8, 0x194u, 0, 0, 0, 0, 0);
         v10 = 1;
         IEventEngine::SendAMessage(g_pEvnEngine, v6);
         v10 = -1;
-        CEvn_Logic::~CEvn_Logic(v8);
-        PlayGuiSound(2);
+        CEvn_Logic::~CEvn_Logic(&v8);
+        PlayGuiSound(2u);
       }
       break;
     case 8:
@@ -25219,7 +25219,7 @@ void __cdecl UpdateGuiDlgResourceCollectorContext(void) {
     IGuiEngine::SetText((void *)g_pGUIEngine, 18, 1087, GuiHouseString);
     _wsprintfA(Str, "%u", byte_3F1E4F4);
     IGuiEngine::SetText((void *)g_pGUIEngine, 18, 1088, Str);
-    if ( byte_3F1E4BB <= 0 )
+    if ( (char)g_cBuildingInfo.? <= 0 )
     {
       IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 18, 1089, 0);
     }
@@ -35213,7 +35213,7 @@ void __cdecl InitGuiDlgYesNo(void) {
 
   if ( g_pStringEngine )
   {
-    if ( dword_3F1E4A8 == 1 )
+    if ( g_cInfoExchangeInt.m_uData == 1 )
       v0 = g_pStringEngine->GetString(g_pStringEngine, 2550);
     else
       v0 = g_pStringEngine->GetString(g_pStringEngine, 1971);

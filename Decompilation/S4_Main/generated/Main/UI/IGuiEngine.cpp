@@ -686,7 +686,7 @@ bool  IGuiEngine::SetTooltipExt(char const * Str) {
   
   if ( !sub_2FA28C0() || !Str )
     return 0;
-  CToolTip::SetTooltipText(Str);
+  CToolTip::SetTooltipText(g_cToolTipExt, Str);
   return 1;
 }
 

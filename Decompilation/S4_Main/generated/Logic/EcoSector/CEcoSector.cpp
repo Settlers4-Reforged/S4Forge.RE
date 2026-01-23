@@ -46,15 +46,15 @@ class CPersistence * __cdecl CEcoSector::New(std::istream & a1) {
 
 
 // address=[0x14299b0]
-// Decompiled from int __thiscall CEcoSector::NrOfSettler(CEcoSector *this, unsigned int a2)
-int  CEcoSector::NrOfSettler(int a2)const {
+// Decompiled from int __thiscall CEcoSector::NrOfSettler(CEcoSector *this, unsigned int _iSettlerType)
+int  CEcoSector::NrOfSettler(int _iSettlerType)const {
   
-  if ( a2 > 0x42
+  if ( _iSettlerType > 0x42
     && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 1130, "0<=_iSettlerType && _iSettlerType<SETTLER_MAX") == 1 )
   {
     __debugbreak();
   }
-  return *((unsigned __int16 *)this + a2 + 18);
+  return *((unsigned __int16 *)this + _iSettlerType + 18);
 }
 
 

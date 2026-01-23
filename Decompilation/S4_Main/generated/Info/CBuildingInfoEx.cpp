@@ -1,3 +1,4 @@
+#if FALSE
 #include "CBuildingInfoEx.h"
 
 // Definitions for class CBuildingInfoEx
@@ -7,7 +8,7 @@
  CBuildingInfoEx::CBuildingInfoEx(void) {
   
   CBuildingInfo::CBuildingInfo(this);
-  *(_DWORD *)this = &CBuildingInfoEx::_vftable_;
+  this->__vftable = (CInfoExchange_vtbl *)&CBuildingInfoEx::_vftable_;
   return this;
 }
 
@@ -16,7 +17,8 @@
 // Decompiled from int __thiscall CBuildingInfoEx::Size(CBuildingInfoEx *this)
 unsigned int  CBuildingInfoEx::Size(void)const {
   
-  return 20;
+  return 0x14;
 }
 
 
+#endif // Already implemented

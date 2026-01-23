@@ -232,10 +232,10 @@ void  CLookoutTowerRole::FillDialog(class CBuilding * a2, bool a3) {
   CEvn_Event v10; // [esp+Ch] [ebp-28h] BYREF
   int v11; // [esp+30h] [ebp-4h]
 
-  dword_3F1E4B0 = 0;
-  byte_3F1E4B5 = IEntity::Race(a2);
-  byte_3F1E4B4 = IEntity::Type((unsigned __int16 *)a2);
-  byte_3F1E4B7 = 0;
+  MEMORY[0x3F1E4B0] = 0;
+  MEMORY[0x3F1E4B5] = IEntity::Race(a2);
+  MEMORY[0x3F1E4B4] = IEntity::Type((unsigned __int16 *)a2);
+  MEMORY[0x3F1E4B7] = 0;
   byte_3F1E4B9 = 0;
   v6 = IEntity::Type((unsigned __int16 *)a2);
   v3 = IEntity::OwnerId((unsigned __int8 *)a2);
@@ -243,7 +243,7 @@ void  CLookoutTowerRole::FillDialog(class CBuilding * a2, bool a3) {
   v7 = IEntity::Type((unsigned __int16 *)a2);
   v4 = IEntity::OwnerId((unsigned __int8 *)a2);
   byte_3F1E4BC = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v4, v7, 1u);
-  byte_3F1E4B6 = *((_BYTE *)this + 29);
+  MEMORY[0x3F1E4B6] = *((_BYTE *)this + 29);
   if ( *((_BYTE *)this + 29) )
     byte_3F1E4BD = *(_BYTE *)(*((_DWORD *)this + 94) + 478);
   v8 = 604;
