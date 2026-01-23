@@ -96,10 +96,10 @@ public:
     static void __cdecl FillBuildingAmount(class CInfoExchange * a1, bool a2, bool a3);
 
     // address=[0x14f6d90]
-    static void __cdecl FillAddSoldierSideBar(class CInfoExchange * a1, bool a2, int a3);
+    static void __cdecl FillAddSoldierSideBar(class CInfoExchange * arg0, bool a2, int a3);
 
     // address=[0x14f6e20]
-    static void __cdecl FillToolSideBar(class CInfoExchange * a1, bool a2, int a3);
+    static void __cdecl FillToolSideBar(class CInfoExchange * arg0, bool a2, int a3);
 
     // address=[0x14f6eb0]
     static void __cdecl FillWeaponSideBar(class CInfoExchange * a1, bool a2, int a3);

@@ -1,3 +1,4 @@
+#if FALSE
 #include "CAddSoldierSideBarInfo.h"
 
 // Definitions for class CAddSoldierSideBarInfo
@@ -6,7 +7,7 @@
 // Decompiled from CAddSoldierSideBarInfo *__thiscall CAddSoldierSideBarInfo::CAddSoldierSideBarInfo(CAddSoldierSideBarInfo *this)
  CAddSoldierSideBarInfo::CAddSoldierSideBarInfo(void) {
   
-  CInfoExchange::CInfoExchange(this);
+  CInfoExchange::CInfoExchange((CInfoExchange *)this);
   *(_DWORD *)this = &CAddSoldierSideBarInfo::_vftable_;
   return this;
 }
@@ -16,7 +17,8 @@
 // Decompiled from int __thiscall CAddSoldierSideBarInfo::Size(CAddSoldierSideBarInfo *this)
 unsigned int  CAddSoldierSideBarInfo::Size(void)const {
   
-  return 24;
+  return 0x18;
 }
 
 
+#endif // Already implemented

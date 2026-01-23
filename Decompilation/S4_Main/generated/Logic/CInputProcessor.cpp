@@ -2945,13 +2945,9 @@ bool  CInputProcessor::InitAddSoldierSideBar(class CEvn_Logic * a2) {
   unsigned __int16 *v3; // eax
 
   v2 = (unsigned __int16 *)std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
-  CBuildingMgr::FillAddSoldierSideBar((struct CInfoExchange *)&g_cAddSoldierSideBarInfo, 0, *v2);
+  CBuildingMgr::FillAddSoldierSideBar(&g_cAddSoldierSideBarInfo, 0, *v2);
   v3 = (unsigned __int16 *)std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
-  CLogic::SetFillSideBarInfos(
-    g_pLogic,
-    CBuildingMgr::FillAddSoldierSideBar,
-    (struct CInfoExchange *)&g_cAddSoldierSideBarInfo,
-    *v3);
+  CLogic::SetFillSideBarInfos(g_pLogic, CBuildingMgr::FillAddSoldierSideBar, &g_cAddSoldierSideBarInfo, *v3);
   return 0;
 }
 
@@ -2964,13 +2960,9 @@ bool  CInputProcessor::InitToolSideBar(class CEvn_Logic * a2) {
   unsigned __int16 *v3; // eax
 
   v2 = (unsigned __int16 *)std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
-  CBuildingMgr::FillToolSideBar((struct CInfoExchange *)&g_cAddToolSideBarInfo, 0, *v2);
+  CBuildingMgr::FillToolSideBar(&g_cAddToolSideBarInfo, 0, *v2);
   v3 = (unsigned __int16 *)std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
-  CLogic::SetFillSideBarInfos(
-    g_pLogic,
-    CBuildingMgr::FillToolSideBar,
-    (struct CInfoExchange *)&g_cAddToolSideBarInfo,
-    *v3);
+  CLogic::SetFillSideBarInfos(g_pLogic, CBuildingMgr::FillToolSideBar, &g_cAddToolSideBarInfo, *v3);
   return 0;
 }
 

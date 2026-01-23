@@ -1727,36 +1727,36 @@ void __cdecl CBuildingMgr::FillBuildingAmount(class CInfoExchange * a1, bool a2,
 
 
 // address=[0x14f6d90]
-// Decompiled from void __cdecl CBuildingMgr::FillAddSoldierSideBar(struct CInfoExchange *a1, bool a2, int a3)
-void __cdecl CBuildingMgr::FillAddSoldierSideBar(class CInfoExchange * a1, bool a2, int a3) {
+// Decompiled from void __cdecl CBuildingMgr::FillAddSoldierSideBar(struct CAddSoldierSideBarInfo *arg0, bool a2, int a1)
+void __cdecl CBuildingMgr::FillAddSoldierSideBar(class CInfoExchange * arg0, bool a2, int a3) {
   
   CBarrackRole *v3; // [esp+0h] [ebp-Ch]
-  _DWORD *v4; // [esp+8h] [ebp-4h]
+  CBuilding *v4; // [esp+8h] [ebp-4h]
 
-  if ( !a1 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1680, "_pInfoExchange != 0") == 1 )
+  if ( !arg0 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1680, "_pInfoExchange != 0") == 1 )
     __debugbreak();
-  if ( !a3 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1681, "_iEntityId != 0") == 1 )
+  if ( !a1 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1681, "_iEntityId != 0") == 1 )
     __debugbreak();
-  v4 = (_DWORD *)CBuildingMgr::operator[](a3);
+  v4 = CBuildingMgr::operator[](a1);
   v3 = (CBarrackRole *)CBuilding::Role(v4);
-  CBarrackRole::FillAddSoldierSideBar(v3, a1, a2);
+  CBarrackRole::FillAddSoldierSideBar(v3, arg0, a2);
 }
 
 
 // address=[0x14f6e20]
-// Decompiled from void __cdecl CBuildingMgr::FillToolSideBar(struct CInfoExchange *a1, bool a2, int a3)
-void __cdecl CBuildingMgr::FillToolSideBar(class CInfoExchange * a1, bool a2, int a3) {
+// Decompiled from void __cdecl CBuildingMgr::FillToolSideBar(struct CAddToolSideBarInfo *arg0, bool a2, int a1)
+void __cdecl CBuildingMgr::FillToolSideBar(class CInfoExchange * arg0, bool a2, int a3) {
   
   CProductionBuildingRole *v3; // [esp+0h] [ebp-Ch]
-  _DWORD *v4; // [esp+8h] [ebp-4h]
+  CBuilding *v4; // [esp+8h] [ebp-4h]
 
-  if ( !a1 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1704, "_pInfoExchange != 0") == 1 )
+  if ( !arg0 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1704, "_pInfoExchange != 0") == 1 )
     __debugbreak();
-  if ( !a3 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1705, "_iEntityId != 0") == 1 )
+  if ( !a1 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1705, "_iEntityId != 0") == 1 )
     __debugbreak();
-  v4 = (_DWORD *)CBuildingMgr::operator[](a3);
+  v4 = CBuildingMgr::operator[](a1);
   v3 = (CProductionBuildingRole *)CBuilding::Role(v4);
-  CProductionBuildingRole::FillToolSideBar(v3, a1, a2);
+  CProductionBuildingRole::FillToolSideBar(v3, arg0, a2);
 }
 
 

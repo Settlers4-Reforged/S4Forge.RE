@@ -11,6 +11,17 @@ public:
     // address=[0x1454ad0]
     virtual unsigned int  Size(void)const;
 
+    // Type information members
+public:
+    BYTE m_cAxeCount;
+    BYTE m_cHammerCount;
+    BYTE m_cPickaxeCount;
+    BYTE m_cRodCount;
+    BYTE m_cScytheCount;
+    BYTE m_cShovelCount;
+    BYTE m_cSawCount;
+    BYTE m_cUnknownF;
+
 };
 
 

@@ -563,10 +563,10 @@ void  CProductionBuildingRole::GoodArrive(int a2) {
 // Decompiled from _DWORD *__thiscall CProductionBuildingRole::FillToolSideBar(  CProductionBuildingRole *this,  struct CAddToolSideBarInfo *a2,  bool a3)
 void  CProductionBuildingRole::FillToolSideBar(class CAddToolSideBarInfo * a2, bool a3) {
   
-  int v3; // eax
+  CBuilding *v3; // eax
   int v4; // eax
   int v6; // [esp+4h] [ebp-40h]
-  unsigned int v7; // [esp+8h] [ebp-3Ch]
+  unsigned int iEventId; // [esp+8h] [ebp-3Ch]
   CEcoSector *v9; // [esp+14h] [ebp-30h]
   unsigned int i; // [esp+18h] [ebp-2Ch]
   CEvn_Event v11; // [esp+1Ch] [ebp-28h] BYREF
@@ -575,41 +575,41 @@ void  CProductionBuildingRole::FillToolSideBar(class CAddToolSideBarInfo * a2, b
   v3 = CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
   v4 = CBuilding::EnsignWorldIdx(v3);
   v6 = CWorldManager::EcoSectorId(v4);
-  v9 = (CEcoSector *)CEcoSectorMgr::operator[](v6);
-  *((_DWORD *)a2 + 1) = 12;
+  v9 = (CEcoSector *)CEcoSectorMgr::operator[](g_cESMgr, v6);
+  a2->m_iUnknown = 12;
   for ( i = 0; i < std::vector<unsigned char>::size((char *)this + 416); ++i )
   {
     switch ( *(_BYTE *)std::vector<unsigned char>::operator[](i) )
     {
       case 4:
-        *((_BYTE *)a2 + 8) = CEcoSector::GetNrOfToolOrder(v9, i);
+        a2->m_cAxeCount = CEcoSector::GetNrOfToolOrder(v9, i);
         break;
       case 0x12:
-        *((_BYTE *)a2 + 9) = CEcoSector::GetNrOfToolOrder(v9, i);
+        a2->m_cHammerCount = CEcoSector::GetNrOfToolOrder(v9, i);
         break;
       case 0x19:
-        *((_BYTE *)a2 + 10) = CEcoSector::GetNrOfToolOrder(v9, i);
+        a2->m_cPickaxeCount = CEcoSector::GetNrOfToolOrder(v9, i);
         break;
       case 0x1B:
-        *((_BYTE *)a2 + 11) = CEcoSector::GetNrOfToolOrder(v9, i);
+        a2->m_cRodCount = CEcoSector::GetNrOfToolOrder(v9, i);
         break;
       case 0x1C:
-        *((_BYTE *)a2 + 14) = CEcoSector::GetNrOfToolOrder(v9, i);
+        a2->m_cSawCount = CEcoSector::GetNrOfToolOrder(v9, i);
         break;
       case 0x1D:
-        *((_BYTE *)a2 + 12) = CEcoSector::GetNrOfToolOrder(v9, i);
+        a2->m_cScytheCount = CEcoSector::GetNrOfToolOrder(v9, i);
         break;
       case 0x1F:
-        *((_BYTE *)a2 + 13) = CEcoSector::GetNrOfToolOrder(v9, i);
+        a2->m_cShovelCount = CEcoSector::GetNrOfToolOrder(v9, i);
         break;
       default:
         continue;
     }
   }
-  v7 = 606;
+  iEventId = 606;
   if ( !a3 )
-    v7 = 607;
-  CEvn_Event::CEvn_Event(&v11, v7, 0, (unsigned int)a2, 0);
+    iEventId = 607;
+  CEvn_Event::CEvn_Event(&v11, iEventId, 0, (unsigned int)a2, 0);
   v12 = 0;
   if ( !g_pEvnEngine
     && BBSupportDbgReport(2, "MapObjects\\Building\\ProductionBuilding.cpp", 818, "g_pEvnEngine != NULL") == 1 )

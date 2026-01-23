@@ -729,79 +729,79 @@ bool  IGuiEngine::DisableDialogControls(int a2) {
 
 
 // address=[0x2fa1520]
-// Decompiled from char __thiscall IGuiEngine::SetText(void *this, int a2, int a3, char *Str)
+// Decompiled from char __thiscall IGuiEngine::SetText(struct IGuiEngine *this, int a2, int a3, char *Str)
 bool  IGuiEngine::SetText(int a2, int a3, char const * Str) {
   
-  unsigned int v5; // [esp+4h] [ebp-14h]
+  unsigned int id; // [esp+4h] [ebp-14h]
   unsigned int v6; // [esp+8h] [ebp-10h]
   int i; // [esp+Ch] [ebp-Ch]
   int Count; // [esp+10h] [ebp-8h]
   struct SGuiControl *ControlPtr; // [esp+14h] [ebp-4h]
 
-  if ( !(unsigned __int8)sub_2FA28C0(this) || !Str )
+  if ( !sub_2FA28C0() || !Str )
     return 0;
   ControlPtr = GetControlPtr(a2, a3);
   if ( !ControlPtr )
     return 0;
   Count = j__strlen(Str);
-  if ( *((_BYTE *)ControlPtr + 24) == 21 )
+  if ( ControlPtr->controlType == 21 )
   {
-    *((_DWORD *)ControlPtr + 4) = Str;
+    ControlPtr->textOffset = (DWORD)Str;
     if ( !Count )
-      *((_DWORD *)ControlPtr + 4) = 0;
-    *((_BYTE *)ControlPtr + 35) = 1;
+      ControlPtr->textOffset = 0;
+    HIBYTE(ControlPtr->unknownData[1]) = 1;
     g_bGuiIsDirty = 1;
     return 1;
   }
   else
   {
-    if ( *((char *)ControlPtr + 25) >= 0 )
+    if ( (ControlPtr->id & 0x80u) == 0 )
       goto LABEL_41;
     for ( i = 0; i < 80; ++i )
     {
       if ( !g_bUsedTexts[i] )
       {
-        *((_BYTE *)ControlPtr + 25) = i;
+        ControlPtr->id = i;
         g_bUsedTexts[i] = 1;
         break;
       }
     }
-    if ( *((char *)ControlPtr + 25) < 0 )
+    if ( (ControlPtr->id & 0x80u) != 0 )
       return 0;
     if ( Count )
     {
 LABEL_41:
       if ( j___mbscmp(
              (const unsigned __int8 *)Str,
-             (const unsigned __int8 *)&g_mbstrTextTable[300 * *((char *)ControlPtr + 25)]) )
+             (const unsigned __int8 *)&g_mbstrTextTable[75 * (char)ControlPtr->id]) )
       {
         if ( Count )
         {
           if ( Count >= 299 )
             Count = 299;
-          j__strncpy(&g_mbstrTextTable[300 * *((char *)ControlPtr + 25)], Str, Count);
-          g_mbstrTextTable[300 * *((char *)ControlPtr + 25) + Count] = 0;
+          j__strncpy((char *)&g_mbstrTextTable[75 * (char)ControlPtr->id], Str, Count);
+          *((_BYTE *)&g_mbstrTextTable[75 * (char)ControlPtr->id] + Count) = 0;
           g_bGuiIsDirty = 1;
-          *((_BYTE *)ControlPtr + 35) = 1;
+          HIBYTE(ControlPtr->unknownData[1]) = 1;
           return 1;
         }
         else
         {
-          if ( *((_BYTE *)ControlPtr + 24) == 5 || *((_BYTE *)ControlPtr + 24) == 20 )
+          if ( ControlPtr->controlType == 5 || ControlPtr->controlType == 20 )
           {
-            g_mbstrTextTable[300 * *((char *)ControlPtr + 25)] = 0;
+            LOBYTE(g_mbstrTextTable[75 * (char)ControlPtr->id]) = 0;
           }
           else
           {
-            g_mbstrTextTable[300 * *((char *)ControlPtr + 25)] = 0;
-            v5 = *((char *)ControlPtr + 25);
-            if ( v5 >= 0x50 )
+            LOBYTE(g_mbstrTextTable[75 * (char)ControlPtr->id]) = 0;
+            id = (char)ControlPtr->id;
+            if ( id >= 0x50 )
               j____report_rangecheckfailure();
-            g_bUsedTexts[v5] = 0;
-            *((_BYTE *)ControlPtr + 25) = -1;
+            g_bUsedTexts[id] = 0;
+            ControlPtr->id = -1;
           }
           g_bGuiIsDirty = 1;
-          *((_BYTE *)ControlPtr + 35) = 1;
+          HIBYTE(ControlPtr->unknownData[1]) = 1;
           return 1;
         }
       }
@@ -812,18 +812,18 @@ LABEL_41:
     }
     else
     {
-      if ( *((_BYTE *)ControlPtr + 24) == 5 || *((_BYTE *)ControlPtr + 24) == 20 )
+      if ( ControlPtr->controlType == 5 || ControlPtr->controlType == 20 )
       {
-        g_mbstrTextTable[300 * *((char *)ControlPtr + 25)] = 0;
+        LOBYTE(g_mbstrTextTable[75 * (char)ControlPtr->id]) = 0;
       }
       else
       {
-        g_mbstrTextTable[300 * *((char *)ControlPtr + 25)] = 0;
-        v6 = *((char *)ControlPtr + 25);
+        LOBYTE(g_mbstrTextTable[75 * (char)ControlPtr->id]) = 0;
+        v6 = (char)ControlPtr->id;
         if ( v6 >= 0x50 )
           j____report_rangecheckfailure();
         g_bUsedTexts[v6] = 0;
-        *((_BYTE *)ControlPtr + 25) = -1;
+        ControlPtr->id = -1;
       }
       return 1;
     }
@@ -1045,12 +1045,12 @@ bool  IGuiEngine::EnableControl(int a2, int a3, bool a4) {
 
 
 // address=[0x2fa1da0]
-// Decompiled from char __thiscall IGuiEngine::SetControlVisibility(void *this, int a2, int a3, char a4)
+// Decompiled from char __thiscall IGuiEngine::SetControlVisibility(struct IGuiEngine *this, int a2, int a3, char a4)
 bool  IGuiEngine::SetControlVisibility(int a2, int a3, bool a4) {
   
-  int ControlPtr; // [esp+4h] [ebp-8h]
+  struct SGuiControl *ControlPtr; // [esp+4h] [ebp-8h]
 
-  if ( !(unsigned __int8)sub_2FA28C0(this) )
+  if ( !sub_2FA28C0() )
     return 0;
   ControlPtr = GetControlPtr(a2, a3);
   if ( ControlPtr )

@@ -1997,9 +1997,9 @@ void __cdecl UpdateGuiDlgAddSoldierBar(void) {
 
   for ( i = 0; i < 3; ++i )
   {
-    if ( byte_3F1EF70[i] <= 0 || byte_3F1EF70[i] >= 100 )
+    if ( g_cAddSoldierSideBarInfo.m_cLvl1SoldierCount[i] <= 0 || g_cAddSoldierSideBarInfo.m_cLvl1SoldierCount[i] >= 100 )
     {
-      if ( byte_3F1EF70[i] <= 0 )
+      if ( g_cAddSoldierSideBarInfo.m_cLvl1SoldierCount[i] <= 0 )
       {
         j__strncpy(&Destination, "0", 1u);
         v7 = 0;
@@ -2014,14 +2014,14 @@ void __cdecl UpdateGuiDlgAddSoldierBar(void) {
     }
     else
     {
-      _wsprintfA(&Destination, "%u", byte_3F1EF70[i]);
+      _wsprintfA(&Destination, "%u", g_cAddSoldierSideBarInfo.m_cLvl1SoldierCount[i]);
       v2 = 1;
     }
-    IGuiEngine::SetText((void *)g_pGUIEngine, 48, dword_3689FC4[2 * i], &Destination);
-    IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 48, dword_3689FC4[2 * i], v2);
-    if ( byte_3F1EF73[i] <= 0 || byte_3F1EF73[i] >= 100 )
+    IGuiEngine::SetText(g_pGUIEngine, 48, dword_3689FC4[2 * i], &Destination);
+    IGuiEngine::SetControlVisibility(g_pGUIEngine, 48, dword_3689FC4[2 * i], v2);
+    if ( g_cAddSoldierSideBarInfo.m_cLvl2SoldierCount[i] <= 0 || g_cAddSoldierSideBarInfo.m_cLvl2SoldierCount[i] >= 100 )
     {
-      if ( byte_3F1EF73[i] <= 0 )
+      if ( g_cAddSoldierSideBarInfo.m_cLvl2SoldierCount[i] <= 0 )
       {
         j__strncpy(&Destination, "0", 1u);
         v7 = 0;
@@ -2036,14 +2036,15 @@ void __cdecl UpdateGuiDlgAddSoldierBar(void) {
     }
     else
     {
-      _wsprintfA(&Destination, "%u", byte_3F1EF73[i]);
+      _wsprintfA(&Destination, "%u", g_cAddSoldierSideBarInfo.m_cLvl2SoldierCount[i]);
       v3 = 1;
     }
-    IGuiEngine::SetText((void *)g_pGUIEngine, 48, dword_3689FDC[2 * i], &Destination);
-    IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 48, dword_3689FDC[2 * i], v3);
-    if ( byte_3F1EF76[i] <= 0 || byte_3F1EF76[i] >= 100 )
+    IGuiEngine::SetText(g_pGUIEngine, 48, dword_3689FDC[2 * i], &Destination);
+    IGuiEngine::SetControlVisibility(g_pGUIEngine, 48, dword_3689FDC[2 * i], v3);
+    if ( (char)g_cAddSoldierSideBarInfo.m_cLvl3SoldierCount[i] <= 0
+      || (char)g_cAddSoldierSideBarInfo.m_cLvl3SoldierCount[i] >= 100 )
     {
-      if ( byte_3F1EF76[i] <= 0 )
+      if ( (char)g_cAddSoldierSideBarInfo.m_cLvl3SoldierCount[i] <= 0 )
       {
         j__strncpy(&Destination, "0", 1u);
         v7 = 0;
@@ -2058,15 +2059,16 @@ void __cdecl UpdateGuiDlgAddSoldierBar(void) {
     }
     else
     {
-      _wsprintfA(&Destination, "%u", byte_3F1EF76[i]);
+      _wsprintfA(&Destination, "%u", (char)g_cAddSoldierSideBarInfo.m_cLvl3SoldierCount[i]);
       v4 = 1;
     }
-    IGuiEngine::SetText((void *)g_pGUIEngine, 48, dword_3689FF4[2 * i], &Destination);
-    IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 48, dword_3689FF4[2 * i], v4);
+    IGuiEngine::SetText(g_pGUIEngine, 48, dword_3689FF4[2 * i], &Destination);
+    IGuiEngine::SetControlVisibility(g_pGUIEngine, 48, dword_3689FF4[2 * i], v4);
   }
-  if ( byte_3F1EF79 <= 0 || byte_3F1EF79 >= 100 )
+  if ( (char)g_cAddSoldierSideBarInfo.m_cSpecialSoldierCount <= 0
+    || (char)g_cAddSoldierSideBarInfo.m_cSpecialSoldierCount >= 100 )
   {
-    if ( byte_3F1EF79 <= 0 )
+    if ( (char)g_cAddSoldierSideBarInfo.m_cSpecialSoldierCount <= 0 )
     {
       j__strncpy(&Destination, "0", 1u);
       v7 = 0;
@@ -2081,13 +2083,13 @@ void __cdecl UpdateGuiDlgAddSoldierBar(void) {
   }
   else
   {
-    _wsprintfA(&Destination, "%u", byte_3F1EF79);
+    _wsprintfA(&Destination, "%u", (char)g_cAddSoldierSideBarInfo.m_cSpecialSoldierCount);
     v5 = 1;
   }
-  IGuiEngine::SetText((void *)g_pGUIEngine, 48, 159, &Destination);
-  IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 48, 159, v5);
-  _wsprintfA(&Destination, "%u", dword_3F1EF7C);
-  return IGuiEngine::SetText((void *)g_pGUIEngine, 48, 167, &Destination);
+  IGuiEngine::SetText(g_pGUIEngine, 48, 159, &Destination);
+  IGuiEngine::SetControlVisibility(g_pGUIEngine, 48, 159, v5);
+  _wsprintfA(&Destination, "%u", g_cAddSoldierSideBarInfo.m_uMinCarrier);
+  return IGuiEngine::SetText(g_pGUIEngine, 48, 167, &Destination);
 }
 
 
@@ -3065,10 +3067,10 @@ unsigned int __cdecl S4LoWord(unsigned int a1) {
 
 
 // address=[0x1375ea0]
-// Decompiled from char __cdecl SetAmountToolBar(int a1, int a2)
+// Decompiled from void __cdecl SetAmountToolBar(int a1, int a2)
 void __cdecl SetAmountToolBar(int a1, int a2) {
   
-  char v3; // [esp+3h] [ebp-39h]
+  char v2; // [esp+3h] [ebp-39h]
   CHAR Str[52]; // [esp+4h] [ebp-38h] BYREF
 
   if ( a2 <= 0 || a2 >= 100 )
@@ -3076,35 +3078,35 @@ void __cdecl SetAmountToolBar(int a1, int a2) {
     if ( a2 <= 0 )
     {
       _wsprintfA(Str, "%s", "0");
-      v3 = 0;
+      v2 = 0;
     }
     else
     {
       _wsprintfA(Str, "%s", "E");
-      v3 = 1;
+      v2 = 1;
     }
   }
   else
   {
     _wsprintfA(Str, "%u", a2);
-    v3 = 1;
+    v2 = 1;
   }
-  IGuiEngine::SetText((void *)g_pGUIEngine, 47, a1, Str);
-  return IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 47, a1, v3);
+  IGuiEngine::SetText(g_pGUIEngine, 47, a1, Str);
+  IGuiEngine::SetControlVisibility(g_pGUIEngine, 47, a1, v2);
 }
 
 
 // address=[0x1375f60]
-// Decompiled from char UpdateGuiDlgAddToolBar()
+// Decompiled from void UpdateGuiDlgAddToolBar()
 void __cdecl UpdateGuiDlgAddToolBar(void) {
   
-  SetAmountToolBar(234, byte_3F1EF89);
-  SetAmountToolBar(235, byte_3F1EF8D);
-  SetAmountToolBar(236, byte_3F1EF88);
-  SetAmountToolBar(237, byte_3F1EF8E);
-  SetAmountToolBar(238, byte_3F1EF8C);
-  SetAmountToolBar(239, byte_3F1EF8A);
-  return SetAmountToolBar(240, byte_3F1EF8B);
+  SetAmountToolBar(0xEA, (char)g_cAddToolSideBarInfo.m_cHammerCount);
+  SetAmountToolBar(0xEB, (char)g_cAddToolSideBarInfo.m_cShovelCount);
+  SetAmountToolBar(0xEC, (char)g_cAddToolSideBarInfo.m_cAxeCount);
+  SetAmountToolBar(0xED, (char)g_cAddToolSideBarInfo.m_cSawCount);
+  SetAmountToolBar(0xEE, (char)g_cAddToolSideBarInfo.m_cScytheCount);
+  SetAmountToolBar(0xEF, (char)g_cAddToolSideBarInfo.m_cPickaxeCount);
+  SetAmountToolBar(0xF0, (char)g_cAddToolSideBarInfo.m_cRodCount);
 }
 
 

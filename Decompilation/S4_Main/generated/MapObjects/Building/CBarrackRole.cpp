@@ -414,9 +414,9 @@ void  CBarrackRole::InhabitantFlee(int a2) {
 // Decompiled from _DWORD *__thiscall CBarrackRole::FillAddSoldierSideBar(CBarrackRole *this, struct CAddSoldierSideBarInfo *a2, bool a3)
 void  CBarrackRole::FillAddSoldierSideBar(class CAddSoldierSideBarInfo * a2, bool a3) {
   
-  int v3; // eax
+  CBuilding *v3; // eax
   int v4; // eax
-  int v5; // eax
+  CBuilding *v5; // eax
   int v6; // eax
   CEcoSector *v7; // eax
   int v8; // esi
@@ -424,38 +424,38 @@ void  CBarrackRole::FillAddSoldierSideBar(class CAddSoldierSideBarInfo * a2, boo
   int v11; // [esp+1Ch] [ebp-48h]
   unsigned int v12; // [esp+20h] [ebp-44h]
   int v13; // [esp+24h] [ebp-40h]
-  int v15; // [esp+2Ch] [ebp-38h]
-  CEcoSector *v16; // [esp+30h] [ebp-34h]
-  int v17; // [esp+34h] [ebp-30h]
+  signed int v15; // [esp+2Ch] [ebp-38h]
+  CEcoSector *pEcoSector; // [esp+30h] [ebp-34h]
+  int soldierType; // [esp+34h] [ebp-30h]
   int i; // [esp+38h] [ebp-2Ch]
   int j; // [esp+38h] [ebp-2Ch]
   int k; // [esp+38h] [ebp-2Ch]
   CEvn_Event v21; // [esp+3Ch] [ebp-28h] BYREF
   int v22; // [esp+60h] [ebp-4h]
 
-  *((_DWORD *)a2 + 1) = 16;
+  a2->m_iUnknown = 16;
   v3 = CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
   v4 = CBuilding::EnsignWorldIdx(v3);
   v11 = CWorldManager::EcoSectorId(v4);
-  v16 = (CEcoSector *)CEcoSectorMgr::operator[](v11);
-  v17 = 0;
+  pEcoSector = (CEcoSector *)CEcoSectorMgr::operator[](g_cESMgr, v11);
+  soldierType = 0;
   for ( i = 0; i < 3; ++i )
-    *((_BYTE *)a2 + i + 8) = CEcoSector::GetNrOfSoldierOrder(v16, v17++);
+    a2->m_cLvl1SoldierCount[i] = CEcoSector::GetNrOfSoldierOrder(pEcoSector, soldierType++);
   for ( j = 0; j < 3; ++j )
-    *((_BYTE *)a2 + j + 11) = CEcoSector::GetNrOfSoldierOrder(v16, v17++);
+    a2->m_cLvl2SoldierCount[j] = CEcoSector::GetNrOfSoldierOrder(pEcoSector, soldierType++);
   for ( k = 0; k < 3; ++k )
-    *((_BYTE *)a2 + k + 14) = CEcoSector::GetNrOfSoldierOrder(v16, v17++);
-  *((_BYTE *)a2 + 17) = CEcoSector::GetNrOfSoldierOrder(v16, v17);
+    a2->m_cLvl3SoldierCount[k] = CEcoSector::GetNrOfSoldierOrder(pEcoSector, soldierType++);
+  a2->m_cSpecialSoldierCount = CEcoSector::GetNrOfSoldierOrder(pEcoSector, soldierType);
   v5 = CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
   v6 = CBuilding::EnsignWorldIdx(v5);
   v13 = CWorldManager::EcoSectorId(v6);
-  v7 = (CEcoSector *)CEcoSectorMgr::operator[](v13);
-  v8 = CEcoSector::NrOfSettler(v7, 1);
-  v9 = (CEcoSector *)CEcoSectorMgr::operator[](v13);
+  v7 = (CEcoSector *)CEcoSectorMgr::operator[](g_cESMgr, v13);
+  v8 = CEcoSector::NrOfSettler(v7, 1u);
+  v9 = (CEcoSector *)CEcoSectorMgr::operator[](g_cESMgr, v13);
   v15 = v8 - CEcoSector::MinCarrier(v9);
   if ( v15 <= 0 )
     v15 = 0;
-  *((_DWORD *)a2 + 5) = v15;
+  a2->m_uMinCarrier = v15;
   v12 = 606;
   if ( !a3 )
     v12 = 607;

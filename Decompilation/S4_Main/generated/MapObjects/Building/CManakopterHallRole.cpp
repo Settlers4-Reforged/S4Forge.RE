@@ -324,7 +324,7 @@ void  CManakopterHallRole::GoodArrive(int a2) {
     return BBSupportTracePrintF(
              1,
              "Shaman teleported invalid good %s to ManakopterHall.",
-             (const char *)dword_3786468[2 * a2]);
+             (const char *)off_3786468[a2].id);
   }
   return result;
 }
@@ -392,7 +392,7 @@ void  CManakopterHallRole::TeleportGoods(int a2, int a3) {
              1,
              "Shaman teleported %d invalid goods %s to ManakopterHall.",
              a3,
-             (const char *)dword_3786468[2 * a2]);
+             (const char *)off_3786468[2 * a2]);
   }
   return result;
 }
