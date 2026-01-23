@@ -589,7 +589,7 @@ class CBarrackRole * __cdecl CBarrackRole::Load(std::istream & a1) {
 // [Decompilation failed for static unsigned long CBarrackRole::m_iClassID]
 
 // address=[0x14e78a0]
-// Decompiled from _DWORD *__thiscall CBarrackRole::FillDialog(CBarrackRole *this, struct CBuilding *a2, bool a3)
+// Decompiled from _DWORD *__thiscall CBarrackRole::FillDialog(CBarrackRole *this, IEntity *a2, bool a3)
 void  CBarrackRole::FillDialog(class CBuilding * a2, bool a3) {
   
   int v3; // eax
@@ -599,35 +599,35 @@ void  CBarrackRole::FillDialog(class CBuilding * a2, bool a3) {
   int v8; // [esp-8h] [ebp-4Ch]
   int v9; // [esp-8h] [ebp-4Ch]
   unsigned int v10; // [esp+4h] [ebp-40h]
-  unsigned __int8 *v11; // [esp+8h] [ebp-3Ch]
-  unsigned __int8 *v12; // [esp+Ch] [ebp-38h]
+  IEntity *v11; // [esp+8h] [ebp-3Ch]
+  IEntity *v12; // [esp+Ch] [ebp-38h]
   unsigned int i; // [esp+18h] [ebp-2Ch]
   CEvn_Event v15; // [esp+1Ch] [ebp-28h] BYREF
   int v16; // [esp+40h] [ebp-4h]
 
-  dword_3F1E5E8 = 7;
-  byte_3F1E5ED = IEntity::Race(a2);
-  byte_3F1E5EC = IEntity::Type((unsigned __int16 *)a2);
-  byte_3F1E5EF = 1;
-  byte_3F1E5F0 = IEntity::FlagBits(a2, (EntityFlag)0x1000u) != 0;
-  byte_3F1E5F1 = 0;
-  v8 = IEntity::Type((unsigned __int16 *)a2);
-  v3 = IEntity::OwnerId((unsigned __int8 *)a2);
-  byte_3F1E5F3 = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v3, v8, 0);
-  v9 = IEntity::Type((unsigned __int16 *)a2);
-  v4 = IEntity::OwnerId((unsigned __int8 *)a2);
-  byte_3F1E5F4 = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v4, v9, 1u);
-  byte_3F1E5EE = *((_BYTE *)this + 29);
+  g_cBarracksInfo.m_iUnknown = 7;
+  g_cBarracksInfo.m_cRace = IEntity::Race(a2);
+  g_cBarracksInfo.m_cType = IEntity::Type(a2);
+  g_cBarracksInfo.m_unknownB = 1;
+  g_cBarracksInfo.m_bSomeFlagBits = IEntity::FlagBits(a2, (EntityFlag)4096) != 0;
+  g_cBarracksInfo.m_unknownD = 0;
+  v8 = IEntity::Type(a2);
+  v3 = IEntity::OwnerId(a2);
+  g_cBarracksInfo.m_cTotalCount = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v3, v8, 0);
+  v9 = IEntity::Type(a2);
+  v4 = IEntity::OwnerId(a2);
+  g_cBarracksInfo.m_cTotalBuiltCount = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v4, v9, 1u);
+  g_cBarracksInfo.m_unknownA = *((_BYTE *)this + 29);
   if ( *((_BYTE *)this + 29) )
-    byte_3F1E5F5 = *(_BYTE *)(*((_DWORD *)this + 94) + 478);
+    g_cBarracksInfo.m_iSettlerCount = *(_BYTE *)(*((_DWORD *)this + 94) + 478);
   for ( i = 0; i < std::vector<unsigned short>::size((char *)this + 384); ++i )
   {
     v5 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 384, i);
     v12 = CPileMgr::operator[](*v5);
-    byte_3F1E5F9[2 * i] = (*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)v12 + 40))(v12);
+    g_cBarracksInfo.m_sPairs[i].m_cPileAmount = v12->Amount();
     v6 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 384, i);
     v11 = CPileMgr::operator[](*v6);
-    byte_3F1E5F8[2 * i] = (*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)v11 + 60))(v11);
+    g_cBarracksInfo.m_sPairs[i].m_mPileGoodType = v11->GetGoodType();
   }
   v10 = 604;
   if ( !a3 )

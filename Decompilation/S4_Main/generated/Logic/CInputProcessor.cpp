@@ -3066,13 +3066,9 @@ bool  CInputProcessor::InitAddVehicleSideBar(class CEvn_Logic * a2) {
   unsigned __int16 *v3; // eax
 
   v2 = (unsigned __int16 *)std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
-  CBuildingMgr::FillAddVehicleSideBar((struct CInfoExchange *)&g_cVehicleSideBarInfo, 0, *v2);
+  CBuildingMgr::FillAddVehicleSideBar(&g_cVehicleSideBarInfo, 0, *v2);
   v3 = (unsigned __int16 *)std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
-  CLogic::SetFillSideBarInfos(
-    g_pLogic,
-    CBuildingMgr::FillAddVehicleSideBar,
-    (struct CInfoExchange *)&g_cVehicleSideBarInfo,
-    *v3);
+  CLogic::SetFillSideBarInfos(g_pLogic, CBuildingMgr::FillAddVehicleSideBar, &g_cVehicleSideBarInfo, *v3);
   return 0;
 }
 

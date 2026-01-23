@@ -1884,19 +1884,19 @@ void __cdecl CBuildingMgr::FillEyeCatcherSideBar(class CInfoExchange * a1, bool 
 
 
 // address=[0x14f72c0]
-// Decompiled from void __cdecl CBuildingMgr::FillAddVehicleSideBar(struct CInfoExchange *a1, bool a2, int a3)
+// Decompiled from void __cdecl CBuildingMgr::FillAddVehicleSideBar(struct CInfoExchange *arg0, bool a2, int a1)
 void __cdecl CBuildingMgr::FillAddVehicleSideBar(class CInfoExchange * a1, bool a2, int a3) {
   
   CWorkshopBuildingRole *v3; // [esp+4h] [ebp-8h]
-  _DWORD *v4; // [esp+8h] [ebp-4h]
+  CBuilding *v4; // [esp+8h] [ebp-4h]
 
-  if ( !a1 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1895, "_pInfoExchange != 0") == 1 )
+  if ( !arg0 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1895, "_pInfoExchange != 0") == 1 )
     __debugbreak();
-  if ( !a3 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1896, "_iEntityId != 0") == 1 )
+  if ( !a1 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1896, "_iEntityId != 0") == 1 )
     __debugbreak();
-  v4 = (_DWORD *)CBuildingMgr::operator[](a3);
+  v4 = CBuildingMgr::operator[](a1);
   v3 = (CWorkshopBuildingRole *)CBuilding::Role(v4);
-  CWorkshopBuildingRole::FillAddVehicleSideBar(v3, (struct CAddVehicleBarInfo *)&g_cVehicleSideBarInfo, a2);
+  CWorkshopBuildingRole::FillAddVehicleSideBar(v3, &g_cVehicleSideBarInfo, a2);
 }
 
 

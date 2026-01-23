@@ -652,47 +652,47 @@ void  CWorkshopBuildingRole::TakeOrder(int a2, int a3) {
 // Decompiled from _DWORD *__thiscall CWorkshopBuildingRole::FillAddVehicleSideBar(  CWorkshopBuildingRole *this,  struct CAddVehicleBarInfo *a2,  bool a3)
 void  CWorkshopBuildingRole::FillAddVehicleSideBar(class CAddVehicleBarInfo * a2, bool a3) {
   
-  unsigned __int16 *v3; // eax
+  CBuilding *v3; // eax
   int LocalPlayerId; // eax
   unsigned int v5; // eax
   int v6; // eax
   unsigned int v7; // eax
-  unsigned int v9; // [esp+4h] [ebp-3Ch]
+  unsigned int iEventId; // [esp+4h] [ebp-3Ch]
   int j; // [esp+Ch] [ebp-34h]
-  unsigned int v12; // [esp+10h] [ebp-30h]
+  int cVehicleType; // [esp+10h] [ebp-30h]
   int i; // [esp+14h] [ebp-2Ch]
   CEvn_Event v14; // [esp+18h] [ebp-28h] BYREF
   int v15; // [esp+3Ch] [ebp-4h]
 
   for ( i = 0; i < 3; ++i )
   {
-    v3 = (unsigned __int16 *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
-    if ( IEntity::Type(v3) == 23 )
-      v12 = dword_3D8B7EC[i];
+    v3 = CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
+    if ( IEntity::Type((IEntity *)v3) == 23 )
+      cVehicleType = dword_3D8B7EC[i];
     else
-      v12 = dword_3D8B7D8[i];
-    for ( j = 0; dword_3D8B7A8[2 * j] && dword_3D8B7A8[2 * j] != v12; ++j )
+      cVehicleType = dword_3D8B7D8[i];
+    for ( j = 0; dword_3D8B7A8[2 * j] && dword_3D8B7A8[2 * j] != cVehicleType; ++j )
       ;
     if ( dword_3D8B7A8[2 * j] != -1 )
     {
-      *((_BYTE *)a2 + 4 * i + 8) = v12;
-      *((_BYTE *)a2 + 4 * i + 9) = *((_BYTE *)this + j + 404);
-      if ( v12 )
+      a2->m_aVehicleInfos[i].vehicleType = cVehicleType;
+      a2->m_aVehicleInfos[i].m_cVehicleAmountBar = *((_BYTE *)this + j + 404);
+      if ( cVehicleType )
       {
         LocalPlayerId = CPlayerManager::GetLocalPlayerId();
         v5 = CPlayerManager::Race(LocalPlayerId);
-        *((_BYTE *)a2 + 4 * i + 10) = *(_BYTE *)IVehicleInfoMgr::VehicleProperties(v5, v12);
+        a2->m_aVehicleInfos[i].m_cVehicleProperties1 = *IVehicleInfoMgr::VehicleProperties(v5, cVehicleType);
         v6 = CPlayerManager::GetLocalPlayerId();
         v7 = CPlayerManager::Race(v6);
-        *((_BYTE *)a2 + 4 * i + 11) = *((_BYTE *)IVehicleInfoMgr::VehicleProperties(v7, v12) + 4);
+        a2->m_aVehicleInfos[i].m_cVehicleProperties2 = IVehicleInfoMgr::VehicleProperties(v7, cVehicleType)[4];
       }
     }
   }
-  *((_DWORD *)a2 + 1) = 17;
-  v9 = 606;
+  a2->m_iUnknown = 17;
+  iEventId = 606;
   if ( !a3 )
-    v9 = 607;
-  CEvn_Event::CEvn_Event(&v14, v9, 0, (unsigned int)a2, 0);
+    iEventId = 607;
+  CEvn_Event::CEvn_Event(&v14, iEventId, 0, (unsigned int)a2, 0);
   v15 = 0;
   if ( !g_pEvnEngine
     && BBSupportDbgReport(2, "MapObjects\\Building\\WorkshopBuildingRole.cpp", 1171, "g_pEvnEngine != NULL") == 1 )

@@ -11,6 +11,10 @@ public:
     // address=[0x1454af0]
     virtual unsigned int  Size(void)const;
 
+    // Type information members
+public:
+    CAddVehicleBarInfo::Info[3] m_aVehicleInfos;
+
 };
 
 

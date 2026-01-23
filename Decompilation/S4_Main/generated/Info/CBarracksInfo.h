@@ -11,6 +11,10 @@ public:
     // address=[0x1454b10]
     virtual unsigned int  Size(void)const;
 
+    // Type information members
+public:
+    CBarracksInfo::Pair[6] m_sPairs;
+
 };
 
 

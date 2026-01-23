@@ -1,3 +1,4 @@
+#if FALSE
 #include "CAddVehicleBarInfo.h"
 
 // Definitions for class CAddVehicleBarInfo
@@ -16,7 +17,8 @@
 // Decompiled from int __thiscall CAddVehicleBarInfo::Size(CAddVehicleBarInfo *this)
 unsigned int  CAddVehicleBarInfo::Size(void)const {
   
-  return 20;
+  return 0x14;
 }
 
 
+#endif // Already implemented

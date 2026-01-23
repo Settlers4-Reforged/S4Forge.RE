@@ -3295,21 +3295,21 @@ LABEL_36:
 // Decompiled from char __cdecl SetVehicleBuildCosts(int a1, bool a2)
 void __cdecl SetVehicleBuildCosts(int a1, bool a2) {
   
-  int v3; // [esp+0h] [ebp-40h]
-  int v4; // [esp+4h] [ebp-3Ch]
+  int m_cVehicleProperties2; // [esp+0h] [ebp-40h]
+  int m_cVehicleProperties1; // [esp+4h] [ebp-3Ch]
   CHAR Str[52]; // [esp+8h] [ebp-38h] BYREF
 
-  v4 = 0;
-  v3 = 0;
+  m_cVehicleProperties1 = 0;
+  m_cVehicleProperties2 = 0;
   if ( !a2 )
   {
-    v4 = byte_3F1EE76[4 * dword_3ECDE7C[a1]];
-    v3 = byte_3F1EE77[4 * dword_3ECDE7C[a1]];
+    m_cVehicleProperties1 = (char)g_cVehicleSideBarInfo.m_aVehicleInfos[dword_3ECDE7C[a1]].m_cVehicleProperties1;
+    m_cVehicleProperties2 = (char)g_cVehicleSideBarInfo.m_aVehicleInfos[dword_3ECDE7C[a1]].m_cVehicleProperties2;
   }
-  _wsprintfA(Str, "%u", v4);
-  IGuiEngine::SetText((void *)g_pGUIEngine, 51, 258, Str);
-  _wsprintfA(Str, "%u", v3);
-  return IGuiEngine::SetText((void *)g_pGUIEngine, 51, 259, Str);
+  _wsprintfA(Str, "%u", m_cVehicleProperties1);
+  IGuiEngine::SetText(g_pGUIEngine, 51, 258, Str);
+  _wsprintfA(Str, "%u", m_cVehicleProperties2);
+  return IGuiEngine::SetText(g_pGUIEngine, 51, 259, Str);
 }
 
 
@@ -3347,65 +3347,61 @@ void __cdecl SetAmountVehicleBar(int a1, int a2) {
 
 
 // address=[0x13769a0]
-// Decompiled from char __usercall UpdateGuiDlgAddVehicleBar@<al>(char result@<al>)
+// Decompiled from void __usercall UpdateGuiDlgAddVehicleBar(char result@<al>)
 void __cdecl UpdateGuiDlgAddVehicleBar(void result) {
   
-  char v1; // [esp+0h] [ebp-10h]
+  BYTE v1; // [esp+0h] [ebp-10h]
+  BYTE vehicleType; // [esp+4h] [ebp-Ch]
   int j; // [esp+8h] [ebp-8h]
   int i; // [esp+Ch] [ebp-4h]
 
-  if ( !g_pGUIEngine )
-    return result;
-  result = byte_3ECDE78;
-  if ( byte_3ECDE78 )
+  if ( g_pGUIEngine )
   {
-    for ( i = 0; i < 3; ++i )
+    if ( byte_3ECDE78 )
     {
-      result = byte_3F1EE74[4 * i];
-      switch ( result )
+      for ( i = 0; i < 3; ++i )
       {
-        case 1:
-          SetAmountVehicleBar(243, byte_3F1EE75[4 * i]);
-          result = 4;
-          dword_3ECDE7C[0] = i;
-          break;
-        case 2:
-          SetAmountVehicleBar(252, byte_3F1EE75[4 * i]);
-          result = 8;
-          dword_3ECDE7C[2] = i;
-          break;
-        case 3:
-          SetAmountVehicleBar(251, byte_3F1EE75[4 * i]);
-          result = i;
-          dword_3ECDE7C[1] = i;
-          break;
+        vehicleType = g_cVehicleSideBarInfo.m_aVehicleInfos[i].vehicleType;
+        switch ( vehicleType )
+        {
+          case 1u:
+            SetAmountVehicleBar(243, (char)g_cVehicleSideBarInfo.m_aVehicleInfos[i].m_cVehicleAmountBar);
+            dword_3ECDE7C[0] = i;
+            break;
+          case 2u:
+            SetAmountVehicleBar(252, (char)g_cVehicleSideBarInfo.m_aVehicleInfos[i].m_cVehicleAmountBar);
+            dword_3ECDE7C[2] = i;
+            break;
+          case 3u:
+            SetAmountVehicleBar(251, (char)g_cVehicleSideBarInfo.m_aVehicleInfos[i].m_cVehicleAmountBar);
+            dword_3ECDE7C[1] = i;
+            break;
+        }
+      }
+    }
+    else
+    {
+      dword_3ECDE7C[1] = 0;
+      for ( j = 0; j < 3; ++j )
+      {
+        v1 = g_cVehicleSideBarInfo.m_aVehicleInfos[j].vehicleType;
+        if ( v1 == 4 )
+        {
+          SetAmountVehicleBar(243, (char)g_cVehicleSideBarInfo.m_aVehicleInfos[j].m_cVehicleAmountBar);
+          dword_3ECDE7C[1] = j;
+        }
+        else if ( v1 == 5 )
+        {
+          SetAmountVehicleBar(251, (char)g_cVehicleSideBarInfo.m_aVehicleInfos[j].m_cVehicleAmountBar);
+          dword_3ECDE7C[2] = j;
+        }
+        else
+        {
+          SetAmountVehicleBar(252, 0);
+        }
       }
     }
   }
-  else
-  {
-    dword_3ECDE7C[1] = 0;
-    for ( j = 0; j < 3; ++j )
-    {
-      v1 = byte_3F1EE74[4 * j];
-      if ( v1 == 4 )
-      {
-        SetAmountVehicleBar(243, byte_3F1EE75[4 * j]);
-        result = j;
-        dword_3ECDE7C[1] = j;
-      }
-      else if ( v1 == 5 )
-      {
-        result = SetAmountVehicleBar(251, byte_3F1EE75[4 * j]);
-        dword_3ECDE7C[2] = j;
-      }
-      else
-      {
-        result = SetAmountVehicleBar(252, 0);
-      }
-    }
-  }
-  return result;
 }
 
 
@@ -3417,82 +3413,56 @@ bool __cdecl GuiDlgAddVehicleBarProc(int a1, int a2, int a3) {
   char v5; // al
   char *v6; // eax
   char *v7; // eax
-  int v8; // [esp+0h] [ebp-114h]
-  CEvn_Logic *v9; // [esp+4h] [ebp-110h]
-  CEvn_Logic *v10; // [esp+Ch] [ebp-108h]
-  CEvn_Logic *v11; // [esp+14h] [ebp-100h]
-  CEvn_Logic *v12; // [esp+1Ch] [ebp-F8h]
-  CEvn_Logic *v13; // [esp+24h] [ebp-F0h]
-  CEvn_Logic *v14; // [esp+2Ch] [ebp-E8h]
-  int v15; // [esp+40h] [ebp-D4h]
-  _BYTE v16[32]; // [esp+44h] [ebp-D0h] BYREF
-  _BYTE v17[32]; // [esp+64h] [ebp-B0h] BYREF
-  _BYTE v18[32]; // [esp+84h] [ebp-90h] BYREF
-  _BYTE v19[32]; // [esp+A4h] [ebp-70h] BYREF
-  _BYTE v20[32]; // [esp+C4h] [ebp-50h] BYREF
-  _BYTE v21[32]; // [esp+E4h] [ebp-30h] BYREF
-  int v22; // [esp+110h] [ebp-4h]
+  CEvn_Logic *v8; // [esp+4h] [ebp-110h]
+  CEvn_Logic *v9; // [esp+Ch] [ebp-108h]
+  CEvn_Logic *v10; // [esp+14h] [ebp-100h]
+  CEvn_Logic *v11; // [esp+1Ch] [ebp-F8h]
+  CEvn_Logic *v12; // [esp+24h] [ebp-F0h]
+  CEvn_Logic *v13; // [esp+2Ch] [ebp-E8h]
+  int v14; // [esp+40h] [ebp-D4h]
+  CEvn_Logic v15; // [esp+44h] [ebp-D0h] BYREF
+  CEvn_Logic v16; // [esp+64h] [ebp-B0h] BYREF
+  CEvn_Logic v17; // [esp+84h] [ebp-90h] BYREF
+  CEvn_Logic v18; // [esp+A4h] [ebp-70h] BYREF
+  CEvn_Logic v19; // [esp+C4h] [ebp-50h] BYREF
+  CEvn_Logic v20; // [esp+E4h] [ebp-30h] BYREF
+  int v21; // [esp+110h] [ebp-4h]
 
   if ( !g_pEvnEngine )
     return 0;
   switch ( a1 )
   {
     case 0:
-      LocalPlayerId = CPlayerManager::GetLocalPlayerId(v8);
-      v15 = CPlayerManager::Race(LocalPlayerId);
+      LocalPlayerId = CPlayerManager::GetLocalPlayerId();
+      v14 = CPlayerManager::Race(LocalPlayerId);
       dword_3ECDE74 = 0;
-      if ( byte_3F1EE74[0] == 4 || byte_3F1EE74[0] == 5 )
+      if ( g_cVehicleSideBarInfo.m_aVehicleInfos == 4 || g_cVehicleSideBarInfo.m_aVehicleInfos == 5 )
       {
         byte_3ECDE78 = 0;
-        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 51, 255, 0);
-        IGuiEngine::SetImages((void *)g_pGUIEngine, 51, 253, dword_368A0C8[35 * v15 + 21], dword_368A0C8[35 * v15 + 22]);
-        IGuiEngine::SetTooltipID(
-          (IGuiEngine *)g_pGUIEngine,
-          51,
-          253,
-          dword_368A0C8[35 * v15 + 23],
-          dword_368A0C8[35 * v15 + 24]);
-        IGuiEngine::SetImages((void *)g_pGUIEngine, 51, 254, dword_368A0C8[35 * v15 + 26], dword_368A0C8[35 * v15 + 27]);
-        IGuiEngine::SetTooltipID(
-          (IGuiEngine *)g_pGUIEngine,
-          51,
-          254,
-          dword_368A0C8[35 * v15 + 28],
-          dword_368A0C8[35 * v15 + 29]);
+        IGuiEngine::SetControlVisibility(g_pGUIEngine, 51, 255, 0);
+        IGuiEngine::SetImages(g_pGUIEngine, 51, 253, dword_368A0C8[35 * v14 + 21], dword_368A0C8[35 * v14 + 22]);
+        IGuiEngine::SetTooltipID(g_pGUIEngine, 51, 253, dword_368A0C8[35 * v14 + 23], dword_368A0C8[35 * v14 + 24]);
+        IGuiEngine::SetImages(g_pGUIEngine, 51, 254, dword_368A0C8[35 * v14 + 26], dword_368A0C8[35 * v14 + 27]);
+        IGuiEngine::SetTooltipID(g_pGUIEngine, 51, 254, dword_368A0C8[35 * v14 + 28], dword_368A0C8[35 * v14 + 29]);
       }
       else
       {
         byte_3ECDE78 = 1;
-        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 51, 255, 1);
-        IGuiEngine::SetImages((void *)g_pGUIEngine, 51, 253, dword_368A0C8[35 * v15 + 6], dword_368A0C8[35 * v15 + 7]);
-        IGuiEngine::SetTooltipID(
-          (IGuiEngine *)g_pGUIEngine,
-          51,
-          253,
-          dword_368A0C8[35 * v15 + 8],
-          dword_368A0C8[35 * v15 + 9]);
-        IGuiEngine::SetImages((void *)g_pGUIEngine, 51, 254, dword_368A0C8[35 * v15 + 16], dword_368A0C8[35 * v15 + 17]);
-        IGuiEngine::SetTooltipID(
-          (IGuiEngine *)g_pGUIEngine,
-          51,
-          254,
-          dword_368A0C8[35 * v15 + 18],
-          dword_368A0C8[35 * v15 + 19]);
-        IGuiEngine::SetImages((void *)g_pGUIEngine, 51, 255, dword_368A0C8[35 * v15 + 11], dword_368A0C8[35 * v15 + 12]);
-        IGuiEngine::SetTooltipID(
-          (IGuiEngine *)g_pGUIEngine,
-          51,
-          255,
-          dword_368A0C8[35 * v15 + 13],
-          dword_368A0C8[35 * v15 + 14]);
+        IGuiEngine::SetControlVisibility(g_pGUIEngine, 51, 255, 1);
+        IGuiEngine::SetImages(g_pGUIEngine, 51, 253, dword_368A0C8[35 * v14 + 6], dword_368A0C8[35 * v14 + 7]);
+        IGuiEngine::SetTooltipID(g_pGUIEngine, 51, 253, dword_368A0C8[35 * v14 + 8], dword_368A0C8[35 * v14 + 9]);
+        IGuiEngine::SetImages(g_pGUIEngine, 51, 254, dword_368A0C8[35 * v14 + 16], dword_368A0C8[35 * v14 + 17]);
+        IGuiEngine::SetTooltipID(g_pGUIEngine, 51, 254, dword_368A0C8[35 * v14 + 18], dword_368A0C8[35 * v14 + 19]);
+        IGuiEngine::SetImages(g_pGUIEngine, 51, 255, dword_368A0C8[35 * v14 + 11], dword_368A0C8[35 * v14 + 12]);
+        IGuiEngine::SetTooltipID(g_pGUIEngine, 51, 255, dword_368A0C8[35 * v14 + 13], dword_368A0C8[35 * v14 + 14]);
       }
-      v5 = IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 51, 253, 1);
+      v5 = IGuiEngine::SelectControl(g_pGUIEngine, 51, 253, 1);
       UpdateGuiDlgAddVehicleBar(v5);
       SetVehicleBuildCosts(-1, 1);
       break;
     case 1:
       if ( (a2 & 0x10000) != 0 )
-        PlayGuiSound(1);
+        PlayGuiSound(1u);
       else
         PlayGuiSound(0);
       break;
@@ -3502,68 +3472,68 @@ bool __cdecl GuiDlgAddVehicleBarProc(int a1, int a2, int a3) {
         case 244:
           if ( dword_3ECDE74 )
           {
-            v14 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v21, 0x1D5u, dword_3ECDE74, 0x64u, 0, 0, 0);
-            v22 = 0;
-            IEventEngine::SendAMessage(g_pEvnEngine, v14);
-            v22 = -1;
-            CEvn_Logic::~CEvn_Logic(v21);
+            v13 = CEvn_Logic::CEvn_Logic(&v20, 0x1D5u, dword_3ECDE74, 0x64u, 0, 0, 0);
+            v21 = 0;
+            IEventEngine::SendAMessage(g_pEvnEngine, v13);
+            v21 = -1;
+            CEvn_Logic::~CEvn_Logic(&v20);
           }
-          PlayGuiSound(2);
+          PlayGuiSound(2u);
           return 1;
         case 245:
           if ( dword_3ECDE74 )
           {
-            v13 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v20, 0x1D5u, dword_3ECDE74, 0, 0, 0, 0);
-            v22 = 1;
-            IEventEngine::SendAMessage(g_pEvnEngine, v13);
-            v22 = -1;
-            CEvn_Logic::~CEvn_Logic(v20);
+            v12 = CEvn_Logic::CEvn_Logic(&v19, 0x1D5u, dword_3ECDE74, 0, 0, 0, 0);
+            v21 = 1;
+            IEventEngine::SendAMessage(g_pEvnEngine, v12);
+            v21 = -1;
+            CEvn_Logic::~CEvn_Logic(&v19);
           }
-          PlayGuiSound(2);
+          PlayGuiSound(2u);
           return 1;
         case 246:
           if ( dword_3ECDE74 )
           {
-            v12 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v19, 0x1D5u, dword_3ECDE74, 5u, 0, 0, 0);
-            v22 = 2;
-            IEventEngine::SendAMessage(g_pEvnEngine, v12);
-            v22 = -1;
-            CEvn_Logic::~CEvn_Logic(v19);
+            v11 = CEvn_Logic::CEvn_Logic(&v18, 0x1D5u, dword_3ECDE74, 5u, 0, 0, 0);
+            v21 = 2;
+            IEventEngine::SendAMessage(g_pEvnEngine, v11);
+            v21 = -1;
+            CEvn_Logic::~CEvn_Logic(&v18);
           }
-          PlayGuiSound(2);
+          PlayGuiSound(2u);
           return 1;
         case 247:
           if ( dword_3ECDE74 )
           {
-            v11 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v18, 0x1D5u, dword_3ECDE74, 0xFFFFFFFB, 0, 0, 0);
-            v22 = 3;
-            IEventEngine::SendAMessage(g_pEvnEngine, v11);
-            v22 = -1;
-            CEvn_Logic::~CEvn_Logic(v18);
+            v10 = CEvn_Logic::CEvn_Logic(&v17, 0x1D5u, dword_3ECDE74, 0xFFFFFFFB, 0, 0, 0);
+            v21 = 3;
+            IEventEngine::SendAMessage(g_pEvnEngine, v10);
+            v21 = -1;
+            CEvn_Logic::~CEvn_Logic(&v17);
           }
-          PlayGuiSound(2);
+          PlayGuiSound(2u);
           return 1;
         case 248:
           if ( dword_3ECDE74 )
           {
-            v10 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v17, 0x1D5u, dword_3ECDE74, 1u, 0, 0, 0);
-            v22 = 4;
-            IEventEngine::SendAMessage(g_pEvnEngine, v10);
-            v22 = -1;
-            CEvn_Logic::~CEvn_Logic(v17);
+            v9 = CEvn_Logic::CEvn_Logic(&v16, 0x1D5u, dword_3ECDE74, 1u, 0, 0, 0);
+            v21 = 4;
+            IEventEngine::SendAMessage(g_pEvnEngine, v9);
+            v21 = -1;
+            CEvn_Logic::~CEvn_Logic(&v16);
           }
-          PlayGuiSound(2);
+          PlayGuiSound(2u);
           return 1;
         case 249:
           if ( dword_3ECDE74 )
           {
-            v9 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v16, 0x1D5u, dword_3ECDE74, 0xFFFFFFFF, 0, 0, 0);
-            v22 = 5;
-            IEventEngine::SendAMessage(g_pEvnEngine, v9);
-            v22 = -1;
-            CEvn_Logic::~CEvn_Logic(v16);
+            v8 = CEvn_Logic::CEvn_Logic(&v15, 0x1D5u, dword_3ECDE74, 0xFFFFFFFF, 0, 0, 0);
+            v21 = 5;
+            IEventEngine::SendAMessage(g_pEvnEngine, v8);
+            v21 = -1;
+            CEvn_Logic::~CEvn_Logic(&v15);
           }
-          PlayGuiSound(2);
+          PlayGuiSound(2u);
           return 1;
         case 253:
           if ( (a2 & 0x10000) != 0 )
@@ -3604,7 +3574,7 @@ bool __cdecl GuiDlgAddVehicleBarProc(int a1, int a2, int a3) {
             dword_3ECDE74 = 0;
           }
 LABEL_41:
-          PlayGuiSound(2);
+          PlayGuiSound(2u);
           break;
         default:
           return 1;
@@ -5232,45 +5202,45 @@ void __cdecl UpdateGuiDlgBarracksContext(void) {
   if ( g_pGUIEngine )
   {
     byte_3ECF2A8 = 1;
-    GuiHouseImageID = GetGuiHouseImageID(byte_3F1E5ED, byte_3F1E5EC, 0);
-    IGuiEngine::SetImages((void *)g_pGUIEngine, 22, 337, GuiHouseImageID, 0);
-    GuiHouseString = (char *)GetGuiHouseString(byte_3F1E5ED, byte_3F1E5EC);
-    IGuiEngine::SetText((void *)g_pGUIEngine, 22, 331, GuiHouseString);
-    _wsprintfA(Str, "%u", byte_3F1E5F4);
-    IGuiEngine::SetText((void *)g_pGUIEngine, 22, 332, Str);
-    if ( byte_3F1E5F3 <= 0 )
+    GuiHouseImageID = GetGuiHouseImageID((char)g_cBarracksInfo.m_cRace, (char)g_cBarracksInfo.m_cType, 0);
+    IGuiEngine::SetImages(g_pGUIEngine, 22, 337, GuiHouseImageID, 0);
+    GuiHouseString = (char *)GetGuiHouseString((char)g_cBarracksInfo.m_cRace, (char)g_cBarracksInfo.m_cType);
+    IGuiEngine::SetText(g_pGUIEngine, 22, 331, GuiHouseString);
+    _wsprintfA(Str, "%u", (char)g_cBarracksInfo.m_cTotalBuiltCount);
+    IGuiEngine::SetText(g_pGUIEngine, 22, 332, Str);
+    if ( (char)g_cBarracksInfo.m_cTotalCount <= 0 )
     {
-      IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 22, 333, 0);
+      IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, 333, 0);
     }
     else
     {
-      _wsprintfA(Str, "+%u", byte_3F1E5F3);
-      IGuiEngine::SetText((void *)g_pGUIEngine, 22, 333, Str);
-      IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 22, 333, 1);
+      _wsprintfA(Str, "+%u", (char)g_cBarracksInfo.m_cTotalCount);
+      IGuiEngine::SetText(g_pGUIEngine, 22, 333, Str);
+      IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, 333, 1);
     }
-    IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 22, 330, byte_3F1E5F0 == 0);
-    IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 22, 330, byte_3F1E5EF);
-    IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 22, dword_368A65C[4], 0);
-    IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 22, dword_368A65C[5], 0);
+    IGuiEngine::SelectControl(g_pGUIEngine, 22, 330, g_cBarracksInfo.m_bSomeFlagBits == 0);
+    IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, 330, g_cBarracksInfo.m_unknownB);
+    IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, dword_368A65C[4], 0);
+    IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, dword_368A65C[5], 0);
     for ( i = 0; i < 5; ++i )
     {
-      switch ( byte_3F1E5F8[2 * i] )
+      switch ( g_cBarracksInfo.m_sPairs[i].m_mPileGoodType )
       {
-        case 3:
+        case 3u:
           v6 = 3;
           break;
-        case 5:
-        case 6:
-        case 38:
+        case 5u:
+        case 6u:
+        case 0x26u:
           v6 = 2;
           break;
-        case 8:
+        case 8u:
           v6 = 1;
           break;
-        case 14:
+        case 0xEu:
           v6 = 4;
           break;
-        case 34:
+        case 0x22u:
           v6 = 0;
           break;
         default:
@@ -5279,24 +5249,24 @@ void __cdecl UpdateGuiDlgBarracksContext(void) {
       }
       if ( v6 >= 0 )
       {
-        Number = byte_3F1E5F9[2 * i];
+        Number = (char)g_cBarracksInfo.m_sPairs[i].m_cPileAmount;
         v2 = j__abs(Number);
         _wsprintfA(Str, "%u", v2);
-        IGuiEngine::SetText((void *)g_pGUIEngine, 22, dword_368A65C[2 * v6], Str);
-        GuiGoodImageID = GetGuiGoodImageID(byte_3F1E5F8[2 * i]);
-        IGuiEngine::SetImages((void *)g_pGUIEngine, 22, dword_368A65C[2 * v6 + 1], GuiGoodImageID, 0);
-        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 22, dword_368A65C[2 * v6], 1);
-        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 22, dword_368A65C[2 * v6 + 1], 1);
+        IGuiEngine::SetText(g_pGUIEngine, 22, dword_368A65C[2 * v6], Str);
+        GuiGoodImageID = GetGuiGoodImageID((char)g_cBarracksInfo.m_sPairs[i].m_mPileGoodType);
+        IGuiEngine::SetImages(g_pGUIEngine, 22, dword_368A65C[2 * v6 + 1], GuiGoodImageID, 0);
+        IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, dword_368A65C[2 * v6], 1);
+        IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, dword_368A65C[2 * v6 + 1], 1);
         if ( Number < 0 )
-          IGuiEngine::SetFontTemplate((IGuiEngine *)g_pGUIEngine, 14, dword_368A65C[2 * v6], 2);
+          IGuiEngine::SetFontTemplate(g_pGUIEngine, 14, dword_368A65C[2 * v6], 2);
         else
-          IGuiEngine::SetFontTemplate((IGuiEngine *)g_pGUIEngine, 14, dword_368A65C[2 * v6], 1);
+          IGuiEngine::SetFontTemplate(g_pGUIEngine, 14, dword_368A65C[2 * v6], 1);
       }
     }
     byte_3ECF2A8 = 0;
     if ( g_bOpenSidebar )
     {
-      IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 22, 344, 1);
+      IGuiEngine::SelectControl(g_pGUIEngine, 22, 344, 1);
       g_bOpenSidebar = 0;
     }
   }
@@ -5390,7 +5360,7 @@ bool __cdecl GuiDlgBarracksContextProc(int a1, int a2, int a3) {
         case 344:
           if ( (a2 & 0x10000) != 0 )
           {
-            if ( byte_3F1E5EC == 24 )
+            if ( MEMORY[0x3F1E5EC] == 24 )
             {
               v9 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v17, 0x1C3u, 0, 0, 0, 0, 0);
               v24 = 5;
