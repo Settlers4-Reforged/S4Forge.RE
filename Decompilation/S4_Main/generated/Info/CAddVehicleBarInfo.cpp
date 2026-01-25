@@ -17,7 +17,7 @@
 // Decompiled from int __thiscall CAddVehicleBarInfo::Size(CAddVehicleBarInfo *this)
 unsigned int  CAddVehicleBarInfo::Size(void)const {
   
-  return 0x14;
+  return 20;
 }
 
 

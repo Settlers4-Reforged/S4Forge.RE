@@ -17,7 +17,7 @@
 // Decompiled from int __thiscall CAddToolSideBarInfo::Size(CAddToolSideBarInfo *this)
 unsigned int  CAddToolSideBarInfo::Size(void)const {
   
-  return 0x10;
+  return 16;
 }
 
 

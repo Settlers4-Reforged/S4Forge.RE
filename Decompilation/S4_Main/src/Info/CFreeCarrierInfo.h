@@ -2,19 +2,21 @@
 #define CFREECARRIERINFO_H
 
 #include "defines.h"
+#include "CInfoExchange.h"
 
-class CFreeCarrierInfo : public CInfoExchange {
+class CFreeCarrierInfo : public CInfoExchange
+{
 public:
     // address=[0x14545f0]
-     CFreeCarrierInfo(void);
+    CFreeCarrierInfo(void);
 
     // address=[0x1454bf0]
-    virtual unsigned int  Size(void)const;
+    virtual unsigned int Size(void) const;
 
     // Type information members
 public:
-    _DWORD m_uNrOfSettlers;
-    _DWORD m_uNrOfCarriers;
+    int m_uNrOfSettlers;
+    int m_uNrOfCarriers;
     int m_uNrOfNonCarriers;
     int m_uNrOfDigger;
     int m_uNrOfFreeDigger;
@@ -25,8 +27,6 @@ public:
     bool m_bHasHammers;
     int m_uNrOfHammers;
     char m_bLooksAtEcoSector;
-
 };
-
 
 #endif // CFREECARRIERINFO_H

@@ -4,12 +4,7 @@
 
 // address=[0x14545c0]
 // Decompiled from CFerryLoadInfo *__thiscall CFerryLoadInfo::CFerryLoadInfo(CFerryLoadInfo *this)
- CFerryLoadInfo::CFerryLoadInfo(void) {
-  
-  CInfoExchange::CInfoExchange((CInfoExchange *)this);
-  *(_DWORD *)this = &CFerryLoadInfo::_vftable_;
-  return this;
-}
+ CFerryLoadInfo::CFerryLoadInfo(void) : CInfoExchange() {}
 
 
 // address=[0x1454bd0]

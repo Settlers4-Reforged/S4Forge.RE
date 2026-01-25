@@ -1335,72 +1335,82 @@ void  CStatistic::FillExtraInfo(void) {
   int v24; // esi
   int v25; // esi
   int v27; // [esp+Ch] [ebp-48h]
-  int v28; // [esp+10h] [ebp-44h]
+  DWORD v28; // [esp+10h] [ebp-44h]
   int i; // [esp+14h] [ebp-40h]
-  CPlayerGameData *v30; // [esp+18h] [ebp-3Ch]
+  char *v30; // [esp+18h] [ebp-3Ch]
   CEcoSector *EcoSectorPtr; // [esp+1Ch] [ebp-38h]
   int LocalPlayerId; // [esp+28h] [ebp-2Ch]
   CEvn_Event v34; // [esp+2Ch] [ebp-28h] BYREF
   int v35; // [esp+50h] [ebp-4h]
 
-  ((void (__thiscall *)(void *))*g_cExtendedMenuInfo)(&g_cExtendedMenuInfo);
+  g_cExtendedMenuInfo.Clear(&g_cExtendedMenuInfo);
   LocalPlayerId = CPlayerManager::GetLocalPlayerId();
   v28 = 0;
   v30 = CPlayerManager::PlayerGameData(LocalPlayerId);
-  CPlayerGameData::ResetIterator(v30);
-  for ( i = CPlayerGameData::GetNextEcoSectorId(v30); i; i = CPlayerGameData::GetNextEcoSectorId(v30) )
+  CPlayerGameData::ResetIterator((CPlayerGameData *)v30);
+  for ( i = CPlayerGameData::GetNextEcoSectorId((CPlayerGameData *)v30);
+        i;
+        i = CPlayerGameData::GetNextEcoSectorId((CPlayerGameData *)v30) )
   {
-    EcoSectorPtr = CEcoSectorMgr::GetEcoSectorPtr((CEcoSectorMgr *)g_cESMgr, i);
+    EcoSectorPtr = (CEcoSector *)CEcoSectorMgr::GetEcoSectorPtr((CEcoSectorMgr *)g_cESMgr, i);
     if ( EcoSectorPtr && CEcoSector::Owner(EcoSectorPtr) == LocalPlayerId )
     {
-      v1 = CEcoSector::NrOfSettler(EcoSectorPtr, 1);
+      v1 = CEcoSector::NrOfSettler(EcoSectorPtr, 1u);
       v27 = v1 - CEcoSector::MinCarrier(EcoSectorPtr);
       if ( v27 > 0 )
         v28 += v27;
     }
   }
-  *((_DWORD *)&g_cExtendedMenuInfo + 2) = v28;
-  *((_DWORD *)&g_cExtendedMenuInfo + 3) = CEcoSectorMgr::GetNrOfCurrentTotalBeds(
-                                            (CEcoSectorMgr *)g_cESMgr,
-                                            LocalPlayerId);
-  *((_DWORD *)&g_cExtendedMenuInfo + 4) = CStatistic::GetGood(this, LocalPlayerId, 7);
-  *((_DWORD *)&g_cExtendedMenuInfo + 5) = CStatistic::GetGood(this, LocalPlayerId, 32);
-  *((_DWORD *)&g_cExtendedMenuInfo + 6) = CStatistic::GetGood(this, LocalPlayerId, 14);
-  Good = CStatistic::GetGood(this, LocalPlayerId, 8);
-  v3 = CStatistic::GetGood(this, LocalPlayerId, 34) + Good;
-  v4 = CStatistic::GetGood(this, LocalPlayerId, 5) + v3;
-  v5 = CStatistic::GetGood(this, LocalPlayerId, 6) + v4;
-  *((_DWORD *)&g_cExtendedMenuInfo + 7) = CStatistic::GetGood(this, LocalPlayerId, 38) + v5;
-  v6 = CStatistic::GetGood(this, LocalPlayerId, 9);
-  v7 = CStatistic::GetGood(this, LocalPlayerId, 24) + v6;
-  *((_DWORD *)&g_cExtendedMenuInfo + 8) = CStatistic::GetGood(this, LocalPlayerId, 11) + v7;
-  NumberOfSettlers = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, 29);
-  v9 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, 30) + NumberOfSettlers;
-  v10 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, 31) + v9;
-  v11 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, 32) + v10;
-  v12 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, 33) + v11;
-  v13 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, 34) + v12;
-  v14 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, 38) + v13;
-  v15 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, 39) + v14;
-  v16 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, 40) + v15;
-  v17 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, 41) + v16;
-  v18 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, 42) + v17;
-  v19 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, 43) + v18;
-  v20 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, 35) + v19;
-  v21 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, 36) + v20;
-  v22 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, 37) + v21;
-  v23 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, 61) + v22;
-  v24 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, 62) + v23;
-  v25 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, 63) + v24;
-  *((_DWORD *)&g_cExtendedMenuInfo + 9) = CSettlerMgr::GetNumberOfSettlers(
-                                            (CSettlerMgr *)g_cSettlerMgr,
-                                            LocalPlayerId,
-                                            44)
-                                        + v25;
-  *((_DWORD *)&g_cExtendedMenuInfo + 10) = CStatistic::OffenceStrength100(this, LocalPlayerId);
-  *((_DWORD *)&g_cExtendedMenuInfo + 11) = CStatistic::DefenceStrength100(this, LocalPlayerId);
-  *((_DWORD *)&g_cExtendedMenuInfo + 12) = CStatistic::GetMana(this, LocalPlayerId);
-  *((_DWORD *)&g_cExtendedMenuInfo + 1) = 37;
+  g_cExtendedMenuInfo.m_uCarriers = v28;
+  g_cExtendedMenuInfo.m_uNrTotalBeds = CEcoSectorMgr::GetNrOfCurrentTotalBeds((CEcoSectorMgr *)g_cESMgr, LocalPlayerId);
+  g_cExtendedMenuInfo.m_uGoodsBoards = CStatistic::GetGood(this, LocalPlayerId, S4_GOOD_BOARD);
+  g_cExtendedMenuInfo.m_uGoodsStone = CStatistic::GetGood(this, LocalPlayerId, S4_GOOD_STONE);
+  g_cExtendedMenuInfo.m_uGoodsGoldbars = CStatistic::GetGood(this, LocalPlayerId, S4_GOOD_GOLDBAR);
+  Good = CStatistic::GetGood(this, LocalPlayerId, S4_GOOD_BOW);
+  v3 = CStatistic::GetGood(this, LocalPlayerId, S4_GOOD_SWORD) + Good;
+  v4 = CStatistic::GetGood(this, LocalPlayerId, S4_GOOD_BATTLEAXE) + v3;
+  v5 = CStatistic::GetGood(this, LocalPlayerId, S4_GOOD_BLOWGUN) + v4;
+  g_cExtendedMenuInfo.m_uGoodsWeapons = CStatistic::GetGood(this, LocalPlayerId, S4_GOOD_BACKPACKCATAPULT) + v5;
+  v6 = CStatistic::GetGood(this, LocalPlayerId, S4_GOOD_BREAD);
+  v7 = CStatistic::GetGood(this, LocalPlayerId, S4_GOOD_MEAT) + v6;
+  g_cExtendedMenuInfo.m_uGoodsFood = CStatistic::GetGood(this, LocalPlayerId, S4_GOOD_FISH) + v7;
+  NumberOfSettlers = CSettlerMgr::GetNumberOfSettlers(
+                       (CSettlerMgr *)g_cSettlerMgr,
+                       LocalPlayerId,
+                       S4_SETTLER_SWORDSMAN_01);
+  v9 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, S4_SETTLER_SWORDSMAN_02)
+     + NumberOfSettlers;
+  v10 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, S4_SETTLER_SWORDSMAN_03) + v9;
+  v11 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, S4_SETTLER_BOWMAN_01) + v10;
+  v12 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, S4_SETTLER_BOWMAN_02) + v11;
+  v13 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, S4_SETTLER_BOWMAN_03) + v12;
+  v14 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, S4_SETTLER_AXEWARRIOR_01) + v13;
+  v15 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, S4_SETTLER_AXEWARRIOR_02) + v14;
+  v16 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, S4_SETTLER_AXEWARRIOR_03) + v15;
+  v17 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, S4_SETTLER_BLOWGUNWARRIOR_01)
+      + v16;
+  v18 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, S4_SETTLER_BLOWGUNWARRIOR_02)
+      + v17;
+  v19 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, S4_SETTLER_BLOWGUNWARRIOR_03)
+      + v18;
+  v20 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, S4_SETTLER_MEDIC_01) + v19;
+  v21 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, S4_SETTLER_MEDIC_02) + v20;
+  v22 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, S4_SETTLER_MEDIC_03) + v21;
+  v23 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, S4_SETTLER_BACKPACKCATAPULTIST_01)
+      + v22;
+  v24 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, S4_SETTLER_BACKPACKCATAPULTIST_02)
+      + v23;
+  v25 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, S4_SETTLER_BACKPACKCATAPULTIST_03)
+      + v24;
+  g_cExtendedMenuInfo.m_uSoldierCount = CSettlerMgr::GetNumberOfSettlers(
+                                          (CSettlerMgr *)g_cSettlerMgr,
+                                          LocalPlayerId,
+                                          S4_SETTLER_SQUADLEADER)
+                                      + v25;
+  g_cExtendedMenuInfo.m_uOffenseStrength = CStatistic::OffenceStrength100(this, LocalPlayerId);
+  g_cExtendedMenuInfo.m_uDefenceStrength = CStatistic::DefenceStrength100(this, LocalPlayerId);
+  g_cExtendedMenuInfo.m_uMana = CStatistic::GetMana(this, LocalPlayerId);
+  g_cExtendedMenuInfo.m_iUnknown = 0x25;
   CEvn_Event::CEvn_Event(&v34, 0x25Cu, 0, (unsigned int)&g_cExtendedMenuInfo, 0);
   v35 = 0;
   if ( !g_pEvnEngine && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 1701, "g_pEvnEngine != NULL") == 1 )
@@ -1413,35 +1423,35 @@ void  CStatistic::FillExtraInfo(void) {
 
 
 // address=[0x1478720]
-// Decompiled from _DWORD *CStatistic::FillEconomyGameMenu()
-void __cdecl CStatistic::FillEconomyGameMenu(class CInfoExchange *,bool,bool) {
+// Decompiled from void CStatistic::FillEconomyGameMenu(struct CInfoExchange *a1, bool a2, bool a3)
+void __cdecl CStatistic::FillEconomyGameMenu(class CInfoExchange * a1, bool a2, bool a3) {
   
-  CEvn_Event *v1; // [esp+8h] [ebp-40h]
-  int v2; // [esp+14h] [ebp-34h]
+  CEvn_Event *v3; // [esp+8h] [ebp-40h]
+  DWORD v4; // [esp+14h] [ebp-34h]
   int j; // [esp+18h] [ebp-30h]
   int i; // [esp+1Ch] [ebp-2Ch]
-  CEvn_Event v5; // [esp+20h] [ebp-28h] BYREF
-  int v6; // [esp+44h] [ebp-4h]
+  CEvn_Event v7; // [esp+20h] [ebp-28h] BYREF
+  int v8; // [esp+44h] [ebp-4h]
 
   CInfoExchange::Clear(&g_cEconomyGameInfo);
-  dword_3F1EE84 = 36;
+  g_cEconomyGameInfo.m_iUnknown = 36;
   for ( i = 0; i < 7; ++i )
   {
-    v2 = (unsigned __int8)CGameData::GetEconomyGoodsArray(g_pGameData)[i];
-    dword_3F1EE88[3 * i] = v2;
+    v4 = (unsigned __int8)CGameData::GetEconomyGoodsArray(g_pGameData)[i];
+    g_cEconomyGameInfo.m_sStats[i].m_uEconomyGood = v4;
     for ( j = 1; j <= CPlayerManager::LastPlayerId(); ++j )
     {
       if ( CAlliances::AllianceId(j) == 1 )
-        dword_3F1EE8C[3 * i] += CStatistic::GetWinGood((CStatistic *)&g_cStatistic, j, v2);
+        g_cEconomyGameInfo.m_sStats[i].m_uWinGoodsAllies += CStatistic::GetWinGood((CStatistic *)&g_cStatistic, j, v4);
       else
-        dword_3F1EE90[3 * i] += CStatistic::GetWinGood((CStatistic *)&g_cStatistic, j, v2);
+        g_cEconomyGameInfo.m_sStats[i].m_uWinGoodsOther += CStatistic::GetWinGood((CStatistic *)&g_cStatistic, j, v4);
     }
   }
-  v1 = CEvn_Event::CEvn_Event(&v5, 0x25Au, 0, (unsigned int)&g_cEconomyGameInfo, 0);
-  v6 = 0;
-  IEventEngine::SendAMessage(g_pEvnEngine, v1);
-  v6 = -1;
-  return CEvn_Event::~CEvn_Event(&v5);
+  v3 = CEvn_Event::CEvn_Event(&v7, 0x25Au, 0, (unsigned int)&g_cEconomyGameInfo, 0);
+  v8 = 0;
+  IEventEngine::SendAMessage(g_pEvnEngine, v3);
+  v8 = -1;
+  CEvn_Event::~CEvn_Event(&v7);
 }
 
 

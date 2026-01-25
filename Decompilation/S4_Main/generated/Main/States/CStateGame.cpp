@@ -771,7 +771,7 @@ int  CStateGame::GetModifierState(void) {
 // Decompiled from CStateGame *__thiscall CStateGame::CStateGame(CStateGame *this, void *a2)
  CStateGame::CStateGame(void * a2) {
   
-  bool IsMCD2TextureSet; // al
+  char IsMCD2TextureSet; // al
   int VirtualTick; // esi
   int ValidTick; // esi
   int LocalPlayerId; // eax
@@ -792,9 +792,9 @@ int  CStateGame::GetModifierState(void) {
   void *TypeString; // [esp+14h] [ebp-2B0h]
   int v22; // [esp+1Ch] [ebp-2A8h]
   int v23; // [esp+24h] [ebp-2A0h]
-  void *v24; // [esp+30h] [ebp-294h]
+  struct std::string *v24; // [esp+30h] [ebp-294h]
   int v25; // [esp+34h] [ebp-290h]
-  int v26; // [esp+3Ch] [ebp-288h]
+  void *v26; // [esp+3Ch] [ebp-288h]
   CEvn_Event *v27; // [esp+4Ch] [ebp-278h]
   CEvn_Event *v28; // [esp+50h] [ebp-274h]
   CEvn_Event *v29; // [esp+58h] [ebp-26Ch]
@@ -811,9 +811,9 @@ int  CStateGame::GetModifierState(void) {
   _BYTE v41[28]; // [esp+18Ch] [ebp-138h] BYREF
   _BYTE v42[28]; // [esp+1A8h] [ebp-11Ch] BYREF
   _BYTE v43[28]; // [esp+1C4h] [ebp-100h] BYREF
-  _DWORD v44[6]; // [esp+1E0h] [ebp-E4h] BYREF
-  _DWORD v45[6]; // [esp+1F8h] [ebp-CCh] BYREF
-  _DWORD v46[6]; // [esp+210h] [ebp-B4h] BYREF
+  CEvn_Event v44; // [esp+1E0h] [ebp-E4h] BYREF
+  CEvn_Event v45; // [esp+1F8h] [ebp-CCh] BYREF
+  CEvn_Event v46; // [esp+210h] [ebp-B4h] BYREF
   _BYTE v47[28]; // [esp+228h] [ebp-9Ch] BYREF
   _BYTE v48[28]; // [esp+244h] [ebp-80h] BYREF
   _BYTE v49[28]; // [esp+260h] [ebp-64h] BYREF
@@ -871,11 +871,11 @@ int  CStateGame::GetModifierState(void) {
     (*(void (__thiscall **)(int, int))(*(_DWORD *)v31 + 52))(v31, 4);
   }
   IsMCD2TextureSet = CGameType::IsMCD2TextureSet((CGameType *)g_pGameType);
-  CGfxManager::EnableMCD2Textures((CGfxManager *)g_pGfxManager, IsMCD2TextureSet);
+  CGfxManager::EnableMCD2Textures(g_pGfxManager, IsMCD2TextureSet);
   g_uDbgTickCounter = 0;
   g_iGameSpeed = 1;
   if ( g_pGfxEngine )
-    IGfxEngine::SetCursorShape((IGfxEngine *)g_pGfxEngine, 1, 4);
+    IGfxEngine::SetCursorShape(g_pGfxEngine, 1, 4u);
   *((_DWORD *)this + 1) = 0;
   *((_DWORD *)this + 2) = 0;
   *((_DWORD *)this + 3) = 0;
@@ -885,7 +885,7 @@ int  CStateGame::GetModifierState(void) {
   *((_DWORD *)this + 15) = 0;
   *((_DWORD *)this + 16) = 0;
   *((_BYTE *)this + 68) = 0;
-  std::string::string(v51, "none");
+  std::string::string((struct std::string *)v51, "none");
   LOBYTE(v52) = 5;
   v22 = g_pCfgMgr->GetStringValue((int)v38, "COMMANDLINE", "events", (int)v51);
   LOBYTE(v52) = 6;
@@ -894,7 +894,7 @@ int  CStateGame::GetModifierState(void) {
   std::string::~string(v38);
   LOBYTE(v52) = 4;
   std::string::~string(v51);
-  std::string::string(v47, "none");
+  std::string::string((struct std::string *)v47, "none");
   LOBYTE(v52) = 7;
   v23 = g_pCfgMgr->GetStringValue((int)v43, "COMMANDLINE", "events", (int)v47);
   LOBYTE(v52) = 8;
@@ -906,11 +906,11 @@ int  CStateGame::GetModifierState(void) {
   v25 = g_pCfgMgr->GetIntValue("COMMANDLINE", "stopevent", 0);
   if ( v34 )
   {
-    std::string::string(v48, "slot0.rec");
+    std::string::string((struct std::string *)v48, "slot0.rec");
     LOBYTE(v52) = 10;
-    v26 = g_pCfgMgr->GetStringValue((int)v40, "COMMANDLINE", "eventfile", (int)v48);
+    v26 = (void *)g_pCfgMgr->GetStringValue((int)v40, "COMMANDLINE", "eventfile", (int)v48);
     LOBYTE(v52) = 11;
-    IEventEngine::PlayEvents(v26, v25);
+    IEventEngine::PlayEvents(g_pEvnEngine, v26, v25);
     LOBYTE(v52) = 10;
     std::string::~string(v40);
     LOBYTE(v52) = 4;
@@ -918,13 +918,13 @@ int  CStateGame::GetModifierState(void) {
   }
   else
   {
-    v24 = std::string::string(v39, "slot0.rec");
+    v24 = std::string::string((struct std::string *)v39, "slot0.rec");
     LOBYTE(v52) = 9;
     IEventEngine::RecordEvents(g_pEvnEngine, v24);
     LOBYTE(v52) = 4;
     std::string::~string(v39);
   }
-  g_pGame = (int)this;
+  g_pGame = (_DWORD **)this;
   g_pGameData = (CStateGame *)((char *)this + 76);
   if ( a2 && BBSupportDbgReport(2, "Main\\States\\StateGame.cpp", 246, "!_pvParam") == 1 )
     __debugbreak();
@@ -955,11 +955,11 @@ int  CStateGame::GetModifierState(void) {
   *((_BYTE *)this + 294) = 0;
   *((_BYTE *)this + 294) = 1;
   *((_BYTE *)this + 72) = 1;
-  VirtualTick = INetworkEngine::GetVirtualTick((INetworkEngine *)g_pNetworkEngine);
+  VirtualTick = INetworkEngine::GetVirtualTick((CGameHost **)g_pNetworkEngine);
   *((_DWORD *)CStateGame::GameData((CStateGame *)g_pGame) + 1) = VirtualTick;
   ValidTick = INetworkEngine::GetValidTick((INetworkEngine *)g_pNetworkEngine);
   *(_DWORD *)CStateGame::GameData((CStateGame *)g_pGame) = ValidTick;
-  IGfxEngine::SetTickCounterAdress((IGfxEngine *)g_pGfxEngine, (unsigned int *)this + 20);
+  IGfxEngine::SetTickCounterAdress(g_pGfxEngine, (unsigned int *)this + 20);
   IEventEngine::SetTickPointer(g_pEvnEngine, (CStateGame *)((char *)this + 80));
   CTextMsgHandler::Init();
   *((_DWORD *)this + 22) = *(_DWORD *)(g_pGameType + 56);
@@ -970,7 +970,7 @@ int  CStateGame::GetModifierState(void) {
   {
     CMinimapHandler::Init();
     CGameStateHandler::RebuildGfxEngine(1);
-    IGfxEngine::SetCursorShape((IGfxEngine *)g_pGfxEngine, 1, 4);
+    IGfxEngine::SetCursorShape(g_pGfxEngine, 1, 4u);
     CGameSettings::SetChatMessageFilter(-1);
     CStateGame::UpdateToGuiInfoStruct(this);
     CStateGame::UpdateMusicSettings(this);
@@ -979,20 +979,20 @@ int  CStateGame::GetModifierState(void) {
       CTutorial::Init((CTutorial *)&g_cTutorial);
     CStateGame::NotifyGfxEngine(this);
     CStateGame::UpdateClientSize(this);
-    CGfxManager::DisableGfxFile((CGfxManager *)g_pGfxManager, 1);
-    CGfxManager::EnableGfxFile((CGfxManager *)g_pGfxManager, 1u, 8, 1, 0xFFFFFFFF);
-    if ( !*(_BYTE *)(g_pGame + 117) )
+    CGfxManager::DisableGfxFile(g_pGfxManager, 1);
+    CGfxManager::EnableGfxFile(g_pGfxManager, 1u, 8, 1, 0xFFFFFFFF);
+    if ( !*((_BYTE *)g_pGame + 117) )
     {
       v20 = *(_DWORD *)(g_pGameType + 4 * CPlayerManager::GetLocalPlayerId() + 292);
       LocalPlayerId = CPlayerManager::GetLocalPlayerId();
       CStateGame::SetViewPos(this, *(_DWORD *)(g_pGameType + 4 * LocalPlayerId + 256), v20);
     }
     v6 = (float)(unsigned int)(*((_DWORD *)this + 26) - 917504);
-    v27 = CEvn_Event::CEvn_Event((CEvn_Event *)v44, 0x25Du, 0, (int)(float)((float)(v6 * 100.0) / 3801088.0), 0);
+    v27 = CEvn_Event::CEvn_Event(&v44, 0x25Du, 0, (int)(float)((float)(v6 * 100.0) / 3801088.0), 0);
     LOBYTE(v52) = 12;
     IEventEngine::SendAMessage(g_pEvnEngine, v27);
     LOBYTE(v52) = 4;
-    CEvn_Event::~CEvn_Event(v44);
+    CEvn_Event::~CEvn_Event(&v44);
     CStateGame::EnableOrDisableDebugString(this, 0);
     BBSupportTracePrintF(1, "GameInfo:");
     BBSupportTracePrintF(1, "--------------------------------------------------");
@@ -1009,13 +1009,13 @@ int  CStateGame::GetModifierState(void) {
     std::string::~string(v49);
     LOBYTE(v52) = 4;
     std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::~wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v37);
-    TypeString = (void *)CGameData::GetTypeString(v41);
+    TypeString = (void *)CGameData::GetTypeString((char *)this + 76, (int)v41);
     LOBYTE(v52) = 15;
     v8 = (const char *)std::string::c_str(TypeString);
     BBSupportTracePrintF(1, "GameType:       %s", v8);
     LOBYTE(v52) = 4;
     std::string::~string(v41);
-    ModeString = (void *)CGameData::GetModeString(v42);
+    ModeString = (void *)CGameData::GetModeString((char *)this + 76, (int)v42);
     LOBYTE(v52) = 16;
     v9 = (const char *)std::string::c_str(ModeString);
     BBSupportTracePrintF(1, "GameMode:       %s", v9);
@@ -1056,11 +1056,11 @@ int  CStateGame::GetModifierState(void) {
       v13 = CPlayerManager::GetLocalPlayerId();
       if ( v12 == CAlliances::AllianceId(v13) )
       {
-        v29 = CEvn_Event::CEvn_Event((CEvn_Event *)v45, 0x261u, 1u, 0, 0);
+        v29 = CEvn_Event::CEvn_Event(&v45, 0x261u, 1u, 0, 0);
         LOBYTE(v52) = 19;
         IEventEngine::SendAMessage(g_pEvnEngine, v29);
         LOBYTE(v52) = 4;
-        CEvn_Event::~CEvn_Event(v45);
+        CEvn_Event::~CEvn_Event(&v45);
         v14 = CPlayerManager::GetLocalPlayerId();
         v15 = CPlayerManager::Color(v14);
         CTextMsgHandler::AddTextMsg(2255, v15, 1);
@@ -1070,11 +1070,11 @@ int  CStateGame::GetModifierState(void) {
       {
         if ( CGameData::IsNetworkGame((CStateGame *)((char *)this + 76)) )
           (*(void (__thiscall **)(void *, int))(*(_DWORD *)g_pFogging + 40))(g_pFogging, 1);
-        v28 = CEvn_Event::CEvn_Event((CEvn_Event *)v46, 0x261u, 0, 0, 0);
+        v28 = CEvn_Event::CEvn_Event(&v46, 0x261u, 0, 0, 0);
         LOBYTE(v52) = 20;
         IEventEngine::SendAMessage(g_pEvnEngine, v28);
         LOBYTE(v52) = 4;
-        CEvn_Event::~CEvn_Event(v46);
+        CEvn_Event::~CEvn_Event(&v46);
         v16 = CPlayerManager::GetLocalPlayerId();
         v17 = CPlayerManager::Color(v16);
         CTextMsgHandler::AddTextMsg(2254, v17, 1);

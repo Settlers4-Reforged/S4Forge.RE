@@ -1,3 +1,4 @@
+#if FALSE
 #include "CBarracksInfo.h"
 
 // Definitions for class CBarracksInfo
@@ -20,3 +21,4 @@ unsigned int  CBarracksInfo::Size(void)const {
 }
 
 
+#endif // Already implemented

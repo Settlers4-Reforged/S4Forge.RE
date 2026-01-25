@@ -17,7 +17,7 @@
 // Decompiled from int __thiscall CAddSoldierSideBarInfo::Size(CAddSoldierSideBarInfo *this)
 unsigned int  CAddSoldierSideBarInfo::Size(void)const {
   
-  return 0x18;
+  return 24;
 }
 
 

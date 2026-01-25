@@ -6388,9 +6388,9 @@ void __cdecl SetEyecatcherBuildCosts(int a1, bool a2) {
   v3 = 0;
   if ( !a2 )
   {
-    v5 = byte_3F1EFA4[16 * a1];
-    v4 = byte_3F1EFA5[16 * a1];
-    v3 = byte_3F1EFA6[16 * a1];
+    v5 = MEMORY[0x3F1EFA4][16 * a1];
+    v4 = MEMORY[0x3F1EFA5][16 * a1];
+    v3 = MEMORY[0x3F1EFA6][16 * a1];
   }
   _wsprintfA(Str, "%u", v5);
   IGuiEngine::SetText((void *)g_pGUIEngine, 52, 702, Str);
@@ -6402,65 +6402,62 @@ void __cdecl SetEyecatcherBuildCosts(int a1, bool a2) {
 
 
 // address=[0x137f360]
-// Decompiled from int UpdateGuiDlgBuildEyecatcher()
+// Decompiled from void UpdateGuiDlgBuildEyecatcher()
 void __cdecl UpdateGuiDlgBuildEyecatcher(void) {
   
-  int result; // eax
   int i; // [esp+4h] [ebp-Ch]
-  int v2; // [esp+8h] [ebp-8h]
-  int v3; // [esp+Ch] [ebp-4h]
+  DWORD m_uCountBuilt; // [esp+8h] [ebp-8h]
+  DWORD m_uCountTotal; // [esp+Ch] [ebp-4h]
 
   if ( g_pGUIEngine )
   {
     for ( i = 0; i < 12; ++i )
     {
-      v3 = dword_3F1EFA0[4 * i];
-      v2 = dword_3F1EF9C[4 * i];
-      switch ( dword_3F1EF98[4 * i] )
+      m_uCountTotal = g_cEyeCatcherBarInfo.m_sEyeCatcher[i].m_uCountTotal;
+      m_uCountBuilt = g_cEyeCatcherBarInfo.m_sEyeCatcher[i].m_uCountBuilt;
+      switch ( g_cEyeCatcherBarInfo.m_sEyeCatcher[i].m_uBuildingId )
       {
         case '@':
-          SetEyecatcherProperties(v2, v3, 677, 686);
+          SetEyecatcherProperties(m_uCountBuilt, m_uCountTotal, 677, 686);
           break;
         case 'A':
-          SetEyecatcherProperties(v2, v3, 675, 685);
+          SetEyecatcherProperties(m_uCountBuilt, m_uCountTotal, 675, 685);
           break;
         case 'B':
-          SetEyecatcherProperties(v2, v3, 673, 684);
+          SetEyecatcherProperties(m_uCountBuilt, m_uCountTotal, 673, 684);
           break;
         case 'C':
-          SetEyecatcherProperties(v2, v3, 693, 694);
+          SetEyecatcherProperties(m_uCountBuilt, m_uCountTotal, 693, 694);
           break;
         case 'D':
-          SetEyecatcherProperties(v2, v3, 683, 689);
+          SetEyecatcherProperties(m_uCountBuilt, m_uCountTotal, 683, 689);
           break;
         case 'E':
-          SetEyecatcherProperties(v2, v3, 681, 687);
+          SetEyecatcherProperties(m_uCountBuilt, m_uCountTotal, 681, 687);
           break;
         case 'F':
-          SetEyecatcherProperties(v2, v3, 682, 688);
+          SetEyecatcherProperties(m_uCountBuilt, m_uCountTotal, 682, 688);
           break;
         case 'G':
-          SetEyecatcherProperties(v2, v3, 691, 692);
+          SetEyecatcherProperties(m_uCountBuilt, m_uCountTotal, 691, 692);
           break;
         case 'H':
-          SetEyecatcherProperties(v2, v3, 696, 697);
+          SetEyecatcherProperties(m_uCountBuilt, m_uCountTotal, 696, 697);
           break;
         case 'I':
-          SetEyecatcherProperties(v2, v3, 708, 709);
+          SetEyecatcherProperties(m_uCountBuilt, m_uCountTotal, 708, 709);
           break;
         case 'J':
-          SetEyecatcherProperties(v2, v3, 710, 711);
+          SetEyecatcherProperties(m_uCountBuilt, m_uCountTotal, 710, 711);
           break;
         case 'K':
-          SetEyecatcherProperties(v2, v3, 712, 713);
+          SetEyecatcherProperties(m_uCountBuilt, m_uCountTotal, 712, 713);
           break;
         default:
-          break;
+          continue;
       }
-      result = i + 1;
     }
   }
-  return result;
 }
 
 
@@ -9842,19 +9839,19 @@ bool __cdecl GuiDlgBuildTownProc(int a1, int a2, int a3) {
         case 548:
           if ( (a2 & 0x10000) != 0 )
           {
-            dword_3F1EF94 = 27;
-            dword_3F1EF98[0] = 64;
-            dword_3F1EF98[4] = 65;
-            dword_3F1EF98[8] = 66;
-            dword_3F1EF98[12] = 67;
-            dword_3F1EF98[16] = 68;
-            dword_3F1EF98[20] = 69;
-            dword_3F1EF98[24] = 70;
-            dword_3F1EF98[28] = 71;
-            dword_3F1EF98[32] = 72;
-            dword_3F1EF98[36] = 73;
-            dword_3F1EF98[40] = 74;
-            dword_3F1EF98[44] = 75;
+            MEMORY[0x3F1EF94] = 27;
+            MEMORY[0x3F1EF98][0] = 64;
+            MEMORY[0x3F1EF98][4] = 65;
+            MEMORY[0x3F1EF98][8] = 66;
+            MEMORY[0x3F1EF98][12] = 67;
+            MEMORY[0x3F1EF98][16] = 68;
+            MEMORY[0x3F1EF98][20] = 69;
+            MEMORY[0x3F1EF98][24] = 70;
+            MEMORY[0x3F1EF98][28] = 71;
+            MEMORY[0x3F1EF98][32] = 72;
+            MEMORY[0x3F1EF98][36] = 73;
+            MEMORY[0x3F1EF98][40] = 74;
+            MEMORY[0x3F1EF98][44] = 75;
             v48 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v64, 0x1CAu, 0, (unsigned int)&g_cEyeCatcherBarInfo, 0, 0, 0);
             v106 = 32;
             IEventEngine::SendAMessage(g_pEvnEngine, v48);
@@ -10540,8 +10537,8 @@ void __cdecl InitGuiDlgEconomy(void) {
 void __cdecl UpdateGuiDlgEconomy(void) {
   
   int GuiGoodImageID; // eax
-  int v1; // [esp+0h] [ebp-4Ch]
-  int v2; // [esp+4h] [ebp-48h]
+  signed int m_uWinGoodsOther; // [esp+0h] [ebp-4Ch]
+  signed int m_uWinGoodsAllies; // [esp+4h] [ebp-48h]
   int v3; // [esp+8h] [ebp-44h]
   int v4; // [esp+Ch] [ebp-40h]
   int i; // [esp+10h] [ebp-3Ch]
@@ -10549,35 +10546,35 @@ void __cdecl UpdateGuiDlgEconomy(void) {
 
   for ( i = 0; i < 7; ++i )
   {
-    v2 = dword_3F1EE8C[3 * i];
-    v1 = dword_3F1EE90[3 * i];
-    if ( v2 >= v1 )
+    m_uWinGoodsAllies = g_cEconomyGameInfo.m_sStats[i].m_uWinGoodsAllies;
+    m_uWinGoodsOther = g_cEconomyGameInfo.m_sStats[i].m_uWinGoodsOther;
+    if ( m_uWinGoodsAllies >= m_uWinGoodsOther )
     {
-      if ( v2 <= v1 )
+      if ( m_uWinGoodsAllies <= m_uWinGoodsOther )
         v4 = 2;
       else
         v4 = 1;
       v3 = 2;
-      IGuiEngine::SetFontTemplate((IGuiEngine *)g_pGUIEngine, 77, dword_368AF18[3 * i], v4);
+      IGuiEngine::SetFontTemplate(g_pGUIEngine, 77, dword_368AF18[3 * i], v4);
     }
     else
     {
       v3 = 1;
-      IGuiEngine::SetFontTemplate((IGuiEngine *)g_pGUIEngine, 77, dword_368AF18[3 * i], 2);
+      IGuiEngine::SetFontTemplate(g_pGUIEngine, 77, dword_368AF18[3 * i], 2);
     }
-    IGuiEngine::SetFontTemplate((IGuiEngine *)g_pGUIEngine, 77, dword_368AF18[3 * i + 1], v3);
-    _wsprintfA(Str, "%u", v2);
-    IGuiEngine::SetText((void *)g_pGUIEngine, 77, dword_368AF18[3 * i], Str);
-    _wsprintfA(Str, "%u", v1);
-    IGuiEngine::SetText((void *)g_pGUIEngine, 77, dword_368AF18[3 * i + 1], Str);
-    GuiGoodImageID = GetGuiGoodImageID(dword_3F1EE88[3 * i]);
-    IGuiEngine::SetImages((void *)g_pGUIEngine, 77, dword_368AF18[3 * i + 2], GuiGoodImageID, 0);
+    IGuiEngine::SetFontTemplate(g_pGUIEngine, 77, dword_368AF18[3 * i + 1], v3);
+    _wsprintfA(Str, "%u", m_uWinGoodsAllies);
+    IGuiEngine::SetText(g_pGUIEngine, 77, dword_368AF18[3 * i], Str);
+    _wsprintfA(Str, "%u", m_uWinGoodsOther);
+    IGuiEngine::SetText(g_pGUIEngine, 77, dword_368AF18[3 * i + 1], Str);
+    GuiGoodImageID = GetGuiGoodImageID(g_cEconomyGameInfo.m_sStats[i].m_uEconomyGood);
+    IGuiEngine::SetImages(g_pGUIEngine, 77, dword_368AF18[3 * i + 2], GuiGoodImageID, 0);
     IGuiEngine::SetTooltipID(
-      (IGuiEngine *)g_pGUIEngine,
+      g_pGUIEngine,
       77,
       dword_368AF18[3 * i + 2],
-      dword_368ABB8[5 * dword_3F1EE88[3 * i] + 3],
-      dword_368ABB8[5 * dword_3F1EE88[3 * i] + 4]);
+      dword_368ABB8[5 * g_cEconomyGameInfo.m_sStats[i].m_uEconomyGood + 3],
+      dword_368ABB8[5 * g_cEconomyGameInfo.m_sStats[i].m_uEconomyGood + 4]);
   }
 }
 
@@ -10645,21 +10642,21 @@ void __cdecl UpdateGuiDlgFerryLoadContext(void) {
   if ( g_pGUIEngine )
   {
     v0 = g_pStringEngine->GetString(g_pStringEngine, 1287);
-    IGuiEngine::SetText((void *)g_pGUIEngine, 42, 715, v0);
+    IGuiEngine::SetText(g_pGUIEngine, 42, 715, v0);
     for ( i = 0; i < 5; ++i )
     {
-      _wsprintfA(Str, "%u", dword_3F1E894[i]);
-      IGuiEngine::SetText((void *)g_pGUIEngine, 42, dword_368B060[2 * i], Str);
+      _wsprintfA(Str, "%u", g_cFerryLoadInfo.m_uCargpCount3[i]);
+      IGuiEngine::SetText(g_pGUIEngine, 42, dword_368B060[2 * i], Str);
     }
     for ( j = 0; j < 5; ++j )
     {
-      _wsprintfA(Str, "%u", dword_3F1E8A8[j]);
-      IGuiEngine::SetText((void *)g_pGUIEngine, 42, dword_368B038[2 * j], Str);
+      _wsprintfA(Str, "%u", g_cFerryLoadInfo.m_uCargpCount2[j]);
+      IGuiEngine::SetText(g_pGUIEngine, 42, dword_368B038[2 * j], Str);
     }
     for ( k = 0; k < 2; ++k )
     {
-      _wsprintfA(Str, "%u", dword_3F1E8BC[k]);
-      IGuiEngine::SetText((void *)g_pGUIEngine, 42, dword_368B088[2 * k], Str);
+      _wsprintfA(Str, "%u", g_cFerryLoadInfo.m_uCargpCount1[k]);
+      IGuiEngine::SetText(g_pGUIEngine, 42, dword_368B088[2 * k], Str);
     }
   }
 }
@@ -10954,71 +10951,71 @@ void __cdecl UpdateGuiDlgFreeCarrierMenu(void) {
 
   if ( !g_pGUIEngine )
     return result;
-  IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 32, 755, byte_3F1EBFC);
-  IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 32, 756, byte_3F1EBFC);
-  IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 32, 757, byte_3F1EBFC);
-  IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 32, 758, byte_3F1EBFC);
-  IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 32, 759, byte_3F1EBFC);
-  if ( dword_3F1EBD8 <= 0 )
+  IGuiEngine::EnableControl(g_pGUIEngine, 32, 755, g_cFreeCarrierInfo.m_bLooksAtEcoSector);
+  IGuiEngine::EnableControl(g_pGUIEngine, 32, 756, g_cFreeCarrierInfo.m_bLooksAtEcoSector);
+  IGuiEngine::EnableControl(g_pGUIEngine, 32, 757, g_cFreeCarrierInfo.m_bLooksAtEcoSector);
+  IGuiEngine::EnableControl(g_pGUIEngine, 32, 758, g_cFreeCarrierInfo.m_bLooksAtEcoSector);
+  IGuiEngine::EnableControl(g_pGUIEngine, 32, 759, g_cFreeCarrierInfo.m_bLooksAtEcoSector);
+  if ( g_cFreeCarrierInfo.m_uNrOfNonCarriers <= 0 )
   {
-    IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 32, 752, 0);
+    IGuiEngine::SetControlVisibility(g_pGUIEngine, 32, 752, 0);
   }
   else
   {
-    IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 32, 752, 1);
-    _wsprintfA(Str, "%u", dword_3F1EBD8);
-    IGuiEngine::SetText((void *)g_pGUIEngine, 32, 752, Str);
+    IGuiEngine::SetControlVisibility(g_pGUIEngine, 32, 752, 1);
+    _wsprintfA(Str, "%u", g_cFreeCarrierInfo.m_uNrOfNonCarriers);
+    IGuiEngine::SetText(g_pGUIEngine, 32, 752, Str);
   }
-  IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 32, 762, 1);
-  _wsprintfA(Str, "%u", dword_3F1EBDC);
-  IGuiEngine::SetText((void *)g_pGUIEngine, 32, 762, Str);
-  IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 32, 772, 1);
-  if ( dword_3F1EBE0 >= 0 )
-    _wsprintfA(Str, "+%d", dword_3F1EBE0);
+  IGuiEngine::SetControlVisibility(g_pGUIEngine, 32, 762, 1);
+  _wsprintfA(Str, "%u", g_cFreeCarrierInfo.m_uNrOfDigger);
+  IGuiEngine::SetText(g_pGUIEngine, 32, 762, Str);
+  IGuiEngine::SetControlVisibility(g_pGUIEngine, 32, 772, 1);
+  if ( g_cFreeCarrierInfo.m_uNrOfFreeDigger >= 0 )
+    _wsprintfA(Str, "+%d", g_cFreeCarrierInfo.m_uNrOfFreeDigger);
   else
-    _wsprintfA(Str, "%d", dword_3F1EBE0);
-  IGuiEngine::SetText((void *)g_pGUIEngine, 32, 772, Str);
-  _wsprintfA(Str, "%d", dword_3F1EBE8);
-  IGuiEngine::SetText((void *)g_pGUIEngine, 32, 775, Str);
-  IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 32, 763, 1);
-  _wsprintfA(Str, "%u", dword_3F1EBEC);
-  IGuiEngine::SetText((void *)g_pGUIEngine, 32, 763, Str);
-  IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 32, 773, 1);
-  if ( dword_3F1EBF0 >= 0 )
-    _wsprintfA(Str, "+%d", dword_3F1EBF0);
+    _wsprintfA(Str, "%d", g_cFreeCarrierInfo.m_uNrOfFreeDigger);
+  IGuiEngine::SetText(g_pGUIEngine, 32, 772, Str);
+  _wsprintfA(Str, "%d", g_cFreeCarrierInfo.m_uNrOfShovels);
+  IGuiEngine::SetText(g_pGUIEngine, 32, 775, Str);
+  IGuiEngine::SetControlVisibility(g_pGUIEngine, 32, 763, 1);
+  _wsprintfA(Str, "%u", g_cFreeCarrierInfo.m_uNrOfBuilders);
+  IGuiEngine::SetText(g_pGUIEngine, 32, 763, Str);
+  IGuiEngine::SetControlVisibility(g_pGUIEngine, 32, 773, 1);
+  if ( g_cFreeCarrierInfo.m_uNrOfFreeBuilders >= 0 )
+    _wsprintfA(Str, "+%d", g_cFreeCarrierInfo.m_uNrOfFreeBuilders);
   else
-    _wsprintfA(Str, "%d", dword_3F1EBF0);
-  IGuiEngine::SetText((void *)g_pGUIEngine, 32, 773, Str);
-  _wsprintfA(Str, "%d", dword_3F1EBF8);
-  IGuiEngine::SetText((void *)g_pGUIEngine, 32, 774, Str);
-  if ( dword_3F1EBD0 <= 0 )
+    _wsprintfA(Str, "%d", g_cFreeCarrierInfo.m_uNrOfFreeBuilders);
+  IGuiEngine::SetText(g_pGUIEngine, 32, 773, Str);
+  _wsprintfA(Str, "%d", g_cFreeCarrierInfo.m_uNrOfHammers);
+  IGuiEngine::SetText(g_pGUIEngine, 32, 774, Str);
+  if ( (int)g_cFreeCarrierInfo.m_uNrOfSettlers <= 0 )
   {
-    IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 32, 766, 0);
-  }
-  else
-  {
-    IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 32, 766, 1);
-    _wsprintfA(Str, "%u", dword_3F1EBD0);
-    IGuiEngine::SetText((void *)g_pGUIEngine, 32, 766, Str);
-  }
-  if ( dword_3F1EBD4 <= 0 )
-  {
-    IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 32, 767, 0);
+    IGuiEngine::SetControlVisibility(g_pGUIEngine, 32, 766, 0);
   }
   else
   {
-    IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 32, 767, 1);
-    _wsprintfA(Str, "%u", dword_3F1EBD4);
-    IGuiEngine::SetText((void *)g_pGUIEngine, 32, 767, Str);
+    IGuiEngine::SetControlVisibility(g_pGUIEngine, 32, 766, 1);
+    _wsprintfA(Str, "%u", g_cFreeCarrierInfo.m_uNrOfSettlers);
+    IGuiEngine::SetText(g_pGUIEngine, 32, 766, Str);
   }
-  if ( byte_3F1EBF4 )
-    IGuiEngine::SetImages((void *)g_pGUIEngine, 32, 753, 443, 0);
+  if ( (int)g_cFreeCarrierInfo.m_uNrOfCarriers <= 0 )
+  {
+    IGuiEngine::SetControlVisibility(g_pGUIEngine, 32, 767, 0);
+  }
   else
-    IGuiEngine::SetImages((void *)g_pGUIEngine, 32, 753, 502, 0);
-  if ( byte_3F1EBE4 )
-    return IGuiEngine::SetImages((void *)g_pGUIEngine, 32, 754, 437, 0);
+  {
+    IGuiEngine::SetControlVisibility(g_pGUIEngine, 32, 767, 1);
+    _wsprintfA(Str, "%u", g_cFreeCarrierInfo.m_uNrOfCarriers);
+    IGuiEngine::SetText(g_pGUIEngine, 32, 767, Str);
+  }
+  if ( g_cFreeCarrierInfo.m_bHasHammers )
+    IGuiEngine::SetImages(g_pGUIEngine, 32, 753, 443, 0);
   else
-    return IGuiEngine::SetImages((void *)g_pGUIEngine, 32, 754, 500, 0);
+    IGuiEngine::SetImages(g_pGUIEngine, 32, 753, 502, 0);
+  if ( g_cFreeCarrierInfo.m_bHasShovels )
+    return IGuiEngine::SetImages(g_pGUIEngine, 32, 754, 437, 0);
+  else
+    return IGuiEngine::SetImages(g_pGUIEngine, 32, 754, 500, 0);
   return result;
 }
 
@@ -14324,28 +14321,28 @@ void __cdecl UpdateGuiDlgMainBarExt1(void) {
   
   CHAR Str[52]; // [esp+0h] [ebp-38h] BYREF
 
-  _wsprintfA(Str, "%u", dword_3F1E63C);
-  IGuiEngine::SetText((void *)g_pGUIEngine, 1, 622, Str);
-  _wsprintfA(Str, "%u", dword_3F1E640);
-  IGuiEngine::SetText((void *)g_pGUIEngine, 1, 623, Str);
-  _wsprintfA(Str, "%u", dword_3F1E648);
-  IGuiEngine::SetText((void *)g_pGUIEngine, 1, 624, Str);
-  _wsprintfA(Str, "%u", dword_3F1E644);
-  IGuiEngine::SetText((void *)g_pGUIEngine, 1, 625, Str);
-  _wsprintfA(Str, "%u", dword_3F1E64C);
-  IGuiEngine::SetText((void *)g_pGUIEngine, 1, 630, Str);
-  _wsprintfA(Str, "%u", dword_3F1E634);
-  IGuiEngine::SetText((void *)g_pGUIEngine, 1, 631, Str);
-  _wsprintfA(Str, "%u", dword_3F1E638);
-  IGuiEngine::SetText((void *)g_pGUIEngine, 1, 632, Str);
-  _wsprintfA(Str, "%u", dword_3F1E650);
-  IGuiEngine::SetText((void *)g_pGUIEngine, 1, 633, Str);
-  _wsprintfA(Str, "%u%%", dword_3F1E654);
-  IGuiEngine::SetText((void *)g_pGUIEngine, 1, 637, Str);
-  _wsprintfA(Str, "%u%%", dword_3F1E658);
-  IGuiEngine::SetText((void *)g_pGUIEngine, 1, 638, Str);
-  _wsprintfA(Str, "%u", dword_3F1E65C);
-  return IGuiEngine::SetText((void *)g_pGUIEngine, 1, 639, Str);
+  _wsprintfA(Str, "%u", g_cExtendedMenuInfo.m_uGoodsBoards);
+  IGuiEngine::SetText(g_pGUIEngine, 1, 622, Str);
+  _wsprintfA(Str, "%u", g_cExtendedMenuInfo.m_uGoodsStone);
+  IGuiEngine::SetText(g_pGUIEngine, 1, 623, Str);
+  _wsprintfA(Str, "%u", g_cExtendedMenuInfo.m_uGoodsWeapons);
+  IGuiEngine::SetText(g_pGUIEngine, 1, 624, Str);
+  _wsprintfA(Str, "%u", g_cExtendedMenuInfo.m_uGoodsGoldbars);
+  IGuiEngine::SetText(g_pGUIEngine, 1, 625, Str);
+  _wsprintfA(Str, "%u", g_cExtendedMenuInfo.m_uGoodsFood);
+  IGuiEngine::SetText(g_pGUIEngine, 1, 630, Str);
+  _wsprintfA(Str, "%u", g_cExtendedMenuInfo.m_uCarriers);
+  IGuiEngine::SetText(g_pGUIEngine, 1, 631, Str);
+  _wsprintfA(Str, "%u", g_cExtendedMenuInfo.m_uNrTotalBeds);
+  IGuiEngine::SetText(g_pGUIEngine, 1, 632, Str);
+  _wsprintfA(Str, "%u", g_cExtendedMenuInfo.m_uSoldierCount);
+  IGuiEngine::SetText(g_pGUIEngine, 1, 633, Str);
+  _wsprintfA(Str, "%u%%", g_cExtendedMenuInfo.m_uOffenseStrength);
+  IGuiEngine::SetText(g_pGUIEngine, 1, 637, Str);
+  _wsprintfA(Str, "%u%%", g_cExtendedMenuInfo.m_uDefenceStrength);
+  IGuiEngine::SetText(g_pGUIEngine, 1, 638, Str);
+  _wsprintfA(Str, "%u", g_cExtendedMenuInfo.m_uMana);
+  return IGuiEngine::SetText(g_pGUIEngine, 1, 639, Str);
 }
 
 
@@ -19879,29 +19876,28 @@ void __cdecl InitGuiDlgMainStatisticEcoDisplayMode(void) {
   char *v5; // eax
   int GuiGoodImage; // eax
   int v7; // eax
-  int v8; // eax
-  const wchar_t *v9; // eax
+  const wchar_t *v8; // eax
   int PlayerColor; // eax
   int PlayerRace; // eax
   int PlayerAlliance; // eax
-  int v13; // esi
+  int v12; // esi
+  int v13; // eax
   int v14; // eax
-  int v15; // eax
-  int v16; // esi
-  size_t v17; // [esp-4h] [ebp-A28h]
-  void *v18; // [esp+14h] [ebp-A10h]
-  unsigned int v19; // [esp+24h] [ebp-A00h]
+  int v15; // esi
+  size_t v16; // [esp-4h] [ebp-A28h]
+  void *v17; // [esp+14h] [ebp-A10h]
+  unsigned int v18; // [esp+24h] [ebp-A00h]
   int Good; // [esp+2Ch] [ebp-9F8h]
-  int v21; // [esp+30h] [ebp-9F4h]
-  int v22; // [esp+34h] [ebp-9F0h]
-  int v23; // [esp+40h] [ebp-9E4h]
+  int v20; // [esp+30h] [ebp-9F4h]
+  int v21; // [esp+34h] [ebp-9F0h]
+  int v22; // [esp+40h] [ebp-9E4h]
   int n; // [esp+44h] [ebp-9E0h]
-  int v25; // [esp+48h] [ebp-9DCh]
-  int v26; // [esp+4Ch] [ebp-9D8h]
+  signed int m_uWinGoodsOther; // [esp+48h] [ebp-9DCh]
+  int v25; // [esp+4Ch] [ebp-9D8h]
   int nn; // [esp+50h] [ebp-9D4h]
   char *Dest; // [esp+54h] [ebp-9D0h]
-  int v29; // [esp+58h] [ebp-9CCh]
-  int v30; // [esp+5Ch] [ebp-9C8h]
+  int v28; // [esp+58h] [ebp-9CCh]
+  signed int m_uWinGoodsAllies; // [esp+5Ch] [ebp-9C8h]
   int m; // [esp+60h] [ebp-9C4h]
   int ii; // [esp+64h] [ebp-9C0h]
   int k; // [esp+68h] [ebp-9BCh]
@@ -19912,15 +19908,15 @@ void __cdecl InitGuiDlgMainStatisticEcoDisplayMode(void) {
   int mm; // [esp+78h] [ebp-9ACh]
   int jj; // [esp+7Ch] [ebp-9A8h]
   int j; // [esp+80h] [ebp-9A4h]
-  char v41[88]; // [esp+84h] [ebp-9A0h] BYREF
-  _BYTE v42[28]; // [esp+DCh] [ebp-948h] BYREF
-  _BYTE v43[28]; // [esp+F8h] [ebp-92Ch] BYREF
+  char v40[88]; // [esp+84h] [ebp-9A0h] BYREF
+  _BYTE v41[28]; // [esp+DCh] [ebp-948h] BYREF
+  _BYTE v42[28]; // [esp+F8h] [ebp-92Ch] BYREF
   wchar_t Destination[1024]; // [esp+114h] [ebp-910h] BYREF
   char Buffer[100]; // [esp+914h] [ebp-110h] BYREF
-  CHAR v46[52]; // [esp+978h] [ebp-ACh] BYREF
+  CHAR v45[52]; // [esp+978h] [ebp-ACh] BYREF
   char Str[52]; // [esp+9ACh] [ebp-78h] BYREF
-  CHAR v48[52]; // [esp+9E0h] [ebp-44h] BYREF
-  int v49; // [esp+A20h] [ebp-4h]
+  CHAR v47[52]; // [esp+9E0h] [ebp-44h] BYREF
+  int v48; // [esp+A20h] [ebp-4h]
 
   if ( g_pStringEngine )
   {
@@ -19932,19 +19928,19 @@ void __cdecl InitGuiDlgMainStatisticEcoDisplayMode(void) {
       (unsigned int)(float)(v0 / 1000.0) / 0xE10,
       (unsigned int)(float)(v0 / 1000.0) / 0x3C % 0x3C,
       (unsigned int)(float)(v0 / 1000.0) % 0x3C);
-    IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 22, 2690, 0);
-    IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 22, 2690, 0);
-    IGuiEngine::SetTooltipID((IGuiEngine *)g_pGUIEngine, 22, 2680, 851, 0);
-    IGuiEngine::SetTooltipID((IGuiEngine *)g_pGUIEngine, 22, 2767, 861, 0);
-    IGuiEngine::SetTooltipID((IGuiEngine *)g_pGUIEngine, 22, 2763, 875, 0);
-    IGuiEngine::SetText((void *)g_pGUIEngine, 22, 2767, Str);
+    IGuiEngine::EnableControl(g_pGUIEngine, 22, 2690, 0);
+    IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, 2690, 0);
+    IGuiEngine::SetTooltipID(g_pGUIEngine, 22, 2680, 851, 0);
+    IGuiEngine::SetTooltipID(g_pGUIEngine, 22, 2767, 861, 0);
+    IGuiEngine::SetTooltipID(g_pGUIEngine, 22, 2763, 875, 0);
+    IGuiEngine::SetText(g_pGUIEngine, 22, 2767, Str);
     v1 = g_pStringEngine->GetString(g_pStringEngine, 875);
-    IGuiEngine::SetText((void *)g_pGUIEngine, 22, 2763, v1);
+    IGuiEngine::SetText(g_pGUIEngine, 22, 2763, v1);
     v2 = g_pStringEngine->GetString(g_pStringEngine, 864);
-    IGuiEngine::SetText((void *)g_pGUIEngine, 22, 2764, v2);
+    IGuiEngine::SetText(g_pGUIEngine, 22, 2764, v2);
     v3 = g_pStringEngine->GetString(g_pStringEngine, 861);
-    IGuiEngine::SetText((void *)g_pGUIEngine, 22, 2765, v3);
-    IGuiEngine::SetTooltipID((IGuiEngine *)g_pGUIEngine, 22, 2766, 864, 0);
+    IGuiEngine::SetText(g_pGUIEngine, 22, 2765, v3);
+    IGuiEngine::SetTooltipID(g_pGUIEngine, 22, 2766, 864, 0);
     if ( CEndStatistic::GetMapName((CEndStatistic *)&g_cEndStatistic) )
     {
       MapName = (const wchar_t *)CEndStatistic::GetMapName((CEndStatistic *)&g_cEndStatistic);
@@ -19953,129 +19949,132 @@ void __cdecl InitGuiDlgMainStatisticEcoDisplayMode(void) {
       if ( String )
       {
         Stringa = String + 1;
-        v29 = wcschr(Stringa, 46);
-        if ( !v29 )
-          v29 = (int)&Stringa[j__wcslen(Stringa)];
-        j__wcsncpy(Destination, Stringa, (v29 - (int)Stringa) >> 1);
-        v19 = (v29 - (int)Stringa) >> 1;
-        if ( v19 >= 1024 )
+        v28 = wcschr(Stringa, 46);
+        if ( !v28 )
+          v28 = (int)&Stringa[j__wcslen(Stringa)];
+        j__wcsncpy(Destination, Stringa, (v28 - (int)Stringa) >> 1);
+        v18 = (v28 - (int)Stringa) >> 1;
+        if ( v18 >= 1024 )
           j____report_rangecheckfailure();
-        Destination[v19] = 0;
+        Destination[v18] = 0;
       }
     }
     else
     {
       Destination[0] = 0;
     }
-    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v41);
-    v49 = 0;
+    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v40);
+    v48 = 0;
     std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(
-      v42,
+      v41,
       Destination);
-    LOBYTE(v49) = 1;
-    v5 = (char *)std::string::c_str(v42);
-    IGuiEngine::SetText((void *)g_pGUIEngine, 22, 2766, v5);
+    LOBYTE(v48) = 1;
+    v5 = (char *)std::string::c_str(v41);
+    IGuiEngine::SetText(g_pGUIEngine, 22, 2766, v5);
     if ( !(*(unsigned __int8 (__thiscall **)(void *, wchar_t *, _DWORD))(*(_DWORD *)g_pRandomMaps + 36))(
             g_pRandomMaps,
             Destination,
             0) )
-      IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 22, 2795, 0);
+      IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, 2795, 0);
     for ( i = 0; i <= 7; ++i )
     {
-      IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 22, dword_3694CBC[i], 1);
-      GuiGoodImage = GetGuiGoodImage(dword_3F1EE88[3 * i]);
-      IGuiEngine::SetImages((void *)g_pGUIEngine, 22, dword_3694CBC[i], GuiGoodImage, 0);
+      IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, dword_3694CBC[i], 1);
+      GuiGoodImage = GetGuiGoodImage(g_cEconomyGameInfo.m_sStats[i].m_uEconomyGood);
+      IGuiEngine::SetImages(g_pGUIEngine, 22, dword_3694CBC[i], GuiGoodImage, 0);
       IGuiEngine::SetTooltipID(
-        (IGuiEngine *)g_pGUIEngine,
+        g_pGUIEngine,
         22,
         dword_3694CBC[i],
-        dword_36945F0[5 * dword_3F1EE88[3 * i] + 3],
-        dword_36945F0[5 * dword_3F1EE88[3 * i] + 4]);
+        dword_36945F0[5 * g_cEconomyGameInfo.m_sStats[i].m_uEconomyGood + 3],
+        dword_36945F0[5 * g_cEconomyGameInfo.m_sStats[i].m_uEconomyGood + 4]);
     }
-    v18 = operator new[](0x10u);
+    v17 = operator new[](0x10u);
     if ( byte_3EDE7FA )
     {
       for ( j = 1; j <= 8; ++j )
       {
         if ( byte_3EDE7FA && j <= CEndStatistic::GetNumberOfPlayers((CEndStatistic *)&g_cEndStatistic) )
         {
-          IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 22, dword_3694BF0[j], 1);
-          IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 22, dword_3694C18[j], 1);
-          IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 22, dword_3694C68[j], 1);
-          IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 22, dword_3694C40[j], 1);
-          IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 22, dword_3694C90[j], 1);
-          IGuiEngine::SetTooltipID((IGuiEngine *)g_pGUIEngine, 22, dword_3694BF0[j], 872, 0);
-          IGuiEngine::SetTooltipID((IGuiEngine *)g_pGUIEngine, 22, dword_3694C18[j], 853, 0);
-          IGuiEngine::SetTooltipID((IGuiEngine *)g_pGUIEngine, 22, dword_3694C68[j], 873, 0);
-          IGuiEngine::SetTooltipID((IGuiEngine *)g_pGUIEngine, 22, dword_3694C40[j], 874, 0);
-          CEndStatistic::GetPlayerName(&g_cEndStatistic, (int)v43, j);
-          LOBYTE(v49) = 2;
-          v7 = std::wstring::length(v43);
+          IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, dword_3694BF0[j], 1);
+          IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, dword_3694C18[j], 1);
+          IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, dword_3694C68[j], 1);
+          IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, dword_3694C40[j], 1);
+          IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, dword_3694C90[j], 1);
+          IGuiEngine::SetTooltipID(g_pGUIEngine, 22, dword_3694BF0[j], 872, 0);
+          IGuiEngine::SetTooltipID(g_pGUIEngine, 22, dword_3694C18[j], 853, 0);
+          IGuiEngine::SetTooltipID(g_pGUIEngine, 22, dword_3694C68[j], 873, 0);
+          IGuiEngine::SetTooltipID(g_pGUIEngine, 22, dword_3694C40[j], 874, 0);
+          CEndStatistic::GetPlayerName(&g_cEndStatistic, (int)v42, j);
+          LOBYTE(v48) = 2;
+          v7 = std::wstring::length(v42);
           Dest = (char *)operator new[](v7 + 1);
-          v8 = std::wstring::length(v43);
-          v9 = (const wchar_t *)std::wstring::data(v8);
-          j__wcstombs(Dest, v9, v17);
-          Dest[std::wstring::length(v43)] = 0;
-          IGuiEngine::SetText((void *)g_pGUIEngine, 22, dword_3694BF0[j], Dest);
+          v16 = std::wstring::length(v42);
+          v8 = (const wchar_t *)std::wstring::data((_Cnd_internal_imp_t *)v42);
+          j__wcstombs(Dest, v8, v16);
+          Dest[std::wstring::length(v42)] = 0;
+          IGuiEngine::SetText(g_pGUIEngine, 22, dword_3694BF0[j], Dest);
           operator delete(Dest);
           PlayerColor = CEndStatistic::GetPlayerColor((CEndStatistic *)&g_cEndStatistic, j);
-          IGuiEngine::SetImages((void *)g_pGUIEngine, 22, dword_3694C18[j], dword_3694B8C[PlayerColor], 0);
+          IGuiEngine::SetImages(g_pGUIEngine, 22, dword_3694C18[j], dword_3694B8C[PlayerColor], 0);
           PlayerRace = CEndStatistic::GetPlayerRace((CEndStatistic *)&g_cEndStatistic, j);
-          IGuiEngine::SetImages((void *)g_pGUIEngine, 22, dword_3694C68[j], dword_3694BDC[PlayerRace], 0);
+          IGuiEngine::SetImages(g_pGUIEngine, 22, dword_3694C68[j], dword_3694BDC[PlayerRace], 0);
           PlayerAlliance = CEndStatistic::GetPlayerAlliance((CEndStatistic *)&g_cEndStatistic, j);
-          IGuiEngine::SetImages((void *)g_pGUIEngine, 22, dword_3694C40[j], dword_3694BB0[PlayerAlliance], 0);
+          IGuiEngine::SetImages(g_pGUIEngine, 22, dword_3694C40[j], dword_3694BB0[PlayerAlliance], 0);
           if ( CEndStatistic::IsGameWone((CEndStatistic *)&g_cEndStatistic) )
           {
-            v13 = CEndStatistic::GetPlayerAlliance((CEndStatistic *)&g_cEndStatistic, j);
-            if ( v13 == CEndStatistic::GetWonAlliance((CEndStatistic *)&g_cEndStatistic) )
+            v12 = CEndStatistic::GetPlayerAlliance((CEndStatistic *)&g_cEndStatistic, j);
+            if ( v12 == CEndStatistic::GetWonAlliance((CEndStatistic *)&g_cEndStatistic) )
             {
-              IGuiEngine::SetImages((void *)g_pGUIEngine, 22, dword_3694C90[j], 253, 0);
-              IGuiEngine::SetTooltipID((IGuiEngine *)g_pGUIEngine, 22, dword_3694C90[j], 876, 0);
+              IGuiEngine::SetImages(g_pGUIEngine, 22, dword_3694C90[j], 253, 0);
+              IGuiEngine::SetTooltipID(g_pGUIEngine, 22, dword_3694C90[j], 876, 0);
             }
             else
             {
-              IGuiEngine::SetImages((void *)g_pGUIEngine, 22, dword_3694C90[j], 252, 0);
-              IGuiEngine::SetTooltipID((IGuiEngine *)g_pGUIEngine, 22, dword_3694C90[j], 863, 0);
+              IGuiEngine::SetImages(g_pGUIEngine, 22, dword_3694C90[j], 252, 0);
+              IGuiEngine::SetTooltipID(g_pGUIEngine, 22, dword_3694C90[j], 863, 0);
             }
           }
           else
           {
-            IGuiEngine::SetImages((void *)g_pGUIEngine, 22, dword_3694C90[j], 251, 0);
-            IGuiEngine::SetTooltipID((IGuiEngine *)g_pGUIEngine, 22, dword_3694C90[j], 862, 0);
+            IGuiEngine::SetImages(g_pGUIEngine, 22, dword_3694C90[j], 251, 0);
+            IGuiEngine::SetTooltipID(g_pGUIEngine, 22, dword_3694C90[j], 862, 0);
           }
           for ( k = 0; k < 7; ++k )
           {
-            v21 = 2;
-            Good = CStatistic::GetGood((CStatistic *)&g_cEndStatistic, j, dword_3F1EE88[3 * k]);
-            v23 = -1;
+            v20 = 2;
+            Good = CStatistic::GetGood((CStatistic *)&g_cEndStatistic, j, g_cEconomyGameInfo.m_sStats[k].m_uEconomyGood);
+            v22 = -1;
             for ( m = 1; m <= CEndStatistic::GetNumberOfPlayers((CEndStatistic *)&g_cEndStatistic); ++m )
             {
               if ( m != j )
               {
-                v22 = CStatistic::GetGood((CStatistic *)&g_cEndStatistic, m, dword_3F1EE88[3 * k]);
-                if ( v22 > v23 )
-                  v23 = v22;
+                v21 = CStatistic::GetGood(
+                        (CStatistic *)&g_cEndStatistic,
+                        m,
+                        g_cEconomyGameInfo.m_sStats[k].m_uEconomyGood);
+                if ( v21 > v22 )
+                  v22 = v21;
               }
             }
-            if ( v23 == Good )
-              v21 = 1;
-            IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 22, dword_3694A80[7 * j - 7 + k], 1);
-            IGuiEngine::SetFontTemplate((IGuiEngine *)g_pGUIEngine, 22, dword_3694A80[7 * j - 7 + k], v21);
-            _wsprintfA(v48, "%u", Good);
-            IGuiEngine::SetText((void *)g_pGUIEngine, 22, dword_3694A80[7 * j - 7 + k], v48);
+            if ( v22 == Good )
+              v20 = 1;
+            IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, dword_3694A80[7 * j - 7 + k], 1);
+            IGuiEngine::SetFontTemplate(g_pGUIEngine, 22, dword_3694A80[7 * j - 7 + k], v20);
+            _wsprintfA(v47, "%u", Good);
+            IGuiEngine::SetText(g_pGUIEngine, 22, dword_3694A80[7 * j - 7 + k], v47);
           }
-          LOBYTE(v49) = 1;
-          std::wstring::~wstring(v43);
+          LOBYTE(v48) = 1;
+          std::wstring::~wstring(v42);
         }
         else
         {
-          IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 22, dword_3694BF0[j], 0);
-          IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 22, dword_3694C18[j], 0);
-          IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 22, dword_3694C68[j], 0);
-          IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 22, dword_3694C40[j], 0);
-          IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 22, dword_3694C90[j], 0);
+          IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, dword_3694BF0[j], 0);
+          IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, dword_3694C18[j], 0);
+          IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, dword_3694C68[j], 0);
+          IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, dword_3694C40[j], 0);
+          IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, dword_3694C90[j], 0);
           for ( n = 0; n < 7; ++n )
-            IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 22, dword_3694A80[7 * j - 7 + n], 0);
+            IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, dword_3694A80[7 * j - 7 + n], 0);
         }
       }
     }
@@ -20087,76 +20086,76 @@ void __cdecl InitGuiDlgMainStatisticEcoDisplayMode(void) {
           ;
         if ( jj <= 8 )
         {
-          IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 22, dword_3694BF0[jj], 1);
-          IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 22, dword_3694C18[jj], 0);
-          IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 22, dword_3694C68[jj], 0);
-          IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 22, dword_3694C40[jj], 1);
-          IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 22, dword_3694C90[jj], 1);
+          IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, dword_3694BF0[jj], 1);
+          IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, dword_3694C18[jj], 0);
+          IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, dword_3694C68[jj], 0);
+          IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, dword_3694C40[jj], 1);
+          IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, dword_3694C90[jj], 1);
           j__sprintf(Buffer, "Team %d", ii);
-          IGuiEngine::SetText((void *)g_pGUIEngine, 22, dword_3694BF0[jj], Buffer);
-          v14 = CEndStatistic::GetPlayerColor((CEndStatistic *)&g_cEndStatistic, jj);
-          IGuiEngine::SetImages((void *)g_pGUIEngine, 22, dword_3694C18[jj], dword_3694B8C[v14], 0);
-          v15 = CEndStatistic::GetPlayerAlliance((CEndStatistic *)&g_cEndStatistic, jj);
-          IGuiEngine::SetImages((void *)g_pGUIEngine, 22, dword_3694C40[jj], dword_3694BB0[v15], 0);
+          IGuiEngine::SetText(g_pGUIEngine, 22, dword_3694BF0[jj], Buffer);
+          v13 = CEndStatistic::GetPlayerColor((CEndStatistic *)&g_cEndStatistic, jj);
+          IGuiEngine::SetImages(g_pGUIEngine, 22, dword_3694C18[jj], dword_3694B8C[v13], 0);
+          v14 = CEndStatistic::GetPlayerAlliance((CEndStatistic *)&g_cEndStatistic, jj);
+          IGuiEngine::SetImages(g_pGUIEngine, 22, dword_3694C40[jj], dword_3694BB0[v14], 0);
           if ( CEndStatistic::IsGameWone((CEndStatistic *)&g_cEndStatistic) )
           {
-            v16 = CEndStatistic::GetPlayerAlliance((CEndStatistic *)&g_cEndStatistic, jj);
-            if ( v16 == CEndStatistic::GetWonAlliance((CEndStatistic *)&g_cEndStatistic) )
+            v15 = CEndStatistic::GetPlayerAlliance((CEndStatistic *)&g_cEndStatistic, jj);
+            if ( v15 == CEndStatistic::GetWonAlliance((CEndStatistic *)&g_cEndStatistic) )
             {
-              IGuiEngine::SetImages((void *)g_pGUIEngine, 22, dword_3694C90[jj], 253, 0);
-              IGuiEngine::SetTooltipID((IGuiEngine *)g_pGUIEngine, 22, dword_3694C90[jj], 876, 0);
+              IGuiEngine::SetImages(g_pGUIEngine, 22, dword_3694C90[jj], 253, 0);
+              IGuiEngine::SetTooltipID(g_pGUIEngine, 22, dword_3694C90[jj], 876, 0);
             }
             else
             {
-              IGuiEngine::SetImages((void *)g_pGUIEngine, 22, dword_3694C90[jj], 252, 0);
-              IGuiEngine::SetTooltipID((IGuiEngine *)g_pGUIEngine, 22, dword_3694C90[jj], 863, 0);
+              IGuiEngine::SetImages(g_pGUIEngine, 22, dword_3694C90[jj], 252, 0);
+              IGuiEngine::SetTooltipID(g_pGUIEngine, 22, dword_3694C90[jj], 863, 0);
             }
           }
           else
           {
-            IGuiEngine::SetImages((void *)g_pGUIEngine, 22, dword_3694C90[jj], 251, 0);
-            IGuiEngine::SetTooltipID((IGuiEngine *)g_pGUIEngine, 22, dword_3694C90[jj], 862, 0);
+            IGuiEngine::SetImages(g_pGUIEngine, 22, dword_3694C90[jj], 251, 0);
+            IGuiEngine::SetTooltipID(g_pGUIEngine, 22, dword_3694C90[jj], 862, 0);
           }
           for ( kk = 0; kk < 7; ++kk )
           {
             if ( ii == 1 )
             {
-              v30 = dword_3F1EE8C[3 * kk];
-              v25 = dword_3F1EE90[3 * kk];
+              m_uWinGoodsAllies = g_cEconomyGameInfo.m_sStats[kk].m_uWinGoodsAllies;
+              m_uWinGoodsOther = g_cEconomyGameInfo.m_sStats[kk].m_uWinGoodsOther;
             }
             else
             {
-              v25 = dword_3F1EE8C[3 * kk];
-              v30 = dword_3F1EE90[3 * kk];
+              m_uWinGoodsOther = g_cEconomyGameInfo.m_sStats[kk].m_uWinGoodsAllies;
+              m_uWinGoodsAllies = g_cEconomyGameInfo.m_sStats[kk].m_uWinGoodsOther;
             }
-            if ( v30 >= v25 )
-              v26 = 1;
+            if ( m_uWinGoodsAllies >= m_uWinGoodsOther )
+              v25 = 1;
             else
-              v26 = 2;
-            IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 22, dword_3694A80[7 * jj - 7 + kk], 1);
-            IGuiEngine::SetFontTemplate((IGuiEngine *)g_pGUIEngine, 22, dword_3694A80[7 * jj - 7 + kk], v26);
-            _wsprintfA(v46, "%u", v30);
-            IGuiEngine::SetText((void *)g_pGUIEngine, 22, dword_3694A80[7 * jj - 7 + kk], v46);
+              v25 = 2;
+            IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, dword_3694A80[7 * jj - 7 + kk], 1);
+            IGuiEngine::SetFontTemplate(g_pGUIEngine, 22, dword_3694A80[7 * jj - 7 + kk], v25);
+            _wsprintfA(v45, "%u", m_uWinGoodsAllies);
+            IGuiEngine::SetText(g_pGUIEngine, 22, dword_3694A80[7 * jj - 7 + kk], v45);
           }
         }
       }
       for ( mm = ii; mm <= 8; ++mm )
       {
-        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 22, dword_3694BF0[mm], 0);
-        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 22, dword_3694C18[mm], 0);
-        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 22, dword_3694C68[mm], 0);
-        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 22, dword_3694C40[mm], 0);
-        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 22, dword_3694C90[mm], 0);
-        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 22, dword_3694A80[7 * mm - 7 + mm], 0);
+        IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, dword_3694BF0[mm], 0);
+        IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, dword_3694C18[mm], 0);
+        IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, dword_3694C68[mm], 0);
+        IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, dword_3694C40[mm], 0);
+        IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, dword_3694C90[mm], 0);
+        IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, dword_3694A80[7 * mm - 7 + mm], 0);
         for ( nn = 0; nn < 7; ++nn )
-          IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 22, dword_3694A80[7 * mm - 7 + nn], 0);
+          IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, dword_3694A80[7 * mm - 7 + nn], 0);
       }
     }
-    operator delete(v18);
-    LOBYTE(v49) = 0;
-    std::string::~string(v42);
-    v49 = -1;
-    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::~wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v41);
+    operator delete(v17);
+    LOBYTE(v48) = 0;
+    std::string::~string(v41);
+    v48 = -1;
+    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::~wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v40);
   }
 }
 

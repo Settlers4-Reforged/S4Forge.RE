@@ -4,12 +4,7 @@
 
 // address=[0x14545f0]
 // Decompiled from CFreeCarrierInfo *__thiscall CFreeCarrierInfo::CFreeCarrierInfo(CFreeCarrierInfo *this)
- CFreeCarrierInfo::CFreeCarrierInfo(void) {
-  
-  CInfoExchange::CInfoExchange(this);
-  *(_DWORD *)this = &CFreeCarrierInfo::_vftable_;
-  return this;
-}
+ CFreeCarrierInfo::CFreeCarrierInfo(void) : CInfoExchange() {}
 
 
 // address=[0x1454bf0]

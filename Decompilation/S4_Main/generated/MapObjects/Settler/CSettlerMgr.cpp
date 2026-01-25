@@ -1888,20 +1888,25 @@ void __cdecl CSettlerMgr::FillSettlerAmount(class CInfoExchange * a1, bool a2, b
 
 
 // address=[0x1583c60]
-// Decompiled from _DWORD *__cdecl CSettlerMgr::FillFreeCarrier(void **a1, char a2)
+// Decompiled from void __cdecl CSettlerMgr::FillFreeCarrier(CFreeCarrierInfo *a1, char a2)
 void __cdecl CSettlerMgr::FillFreeCarrier(class CInfoExchange * a1, bool a2, bool a3) {
   
   int LocalPlayerId; // [esp+4h] [ebp-40h]
-  unsigned int v4; // [esp+8h] [ebp-3Ch]
+  unsigned int v3; // [esp+8h] [ebp-3Ch]
   int UserESInMiddleOfTheScreen; // [esp+Ch] [ebp-38h]
-  CEcoSector *v6; // [esp+10h] [ebp-34h]
-  char v7; // [esp+15h] [ebp-2Fh]
-  CEvn_Event v8; // [esp+1Ch] [ebp-28h] BYREF
-  int v9; // [esp+40h] [ebp-4h]
+  CEcoSector *v5; // [esp+10h] [ebp-34h]
+  char v6; // [esp+15h] [ebp-2Fh]
+  CEvn_Event v7; // [esp+1Ch] [ebp-28h] BYREF
+  int v8; // [esp+40h] [ebp-4h]
 
   if ( !a1 && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 2304, "_pInfoExchange != 0") == 1 )
     __debugbreak();
-  if ( !j____RTDynamicCast(a1, 0, &CInfoExchange__RTTI_Type_Descriptor_, &CFreeCarrierInfo__RTTI_Type_Descriptor_, 0)
+  if ( !j____RTDynamicCast(
+          (void **)&a1->__vftable,
+          0,
+          &CInfoExchange__RTTI_Type_Descriptor_,
+          &CFreeCarrierInfo__RTTI_Type_Descriptor_,
+          0)
     && BBSupportDbgReport(
          2,
          "MapObjects\\Settler\\SettlerMgr.cpp",
@@ -1910,55 +1915,55 @@ void __cdecl CSettlerMgr::FillFreeCarrier(class CInfoExchange * a1, bool a2, boo
   {
     __debugbreak();
   }
-  (*(void (__thiscall **)(void **))*a1)(a1);
-  v7 = 0;
+  a1->Clear(a1);
+  v6 = 0;
   UserESInMiddleOfTheScreen = CSettlerMgr::GetUserESInMiddleOfTheScreen();
   if ( UserESInMiddleOfTheScreen )
   {
-    v6 = (CEcoSector *)CEcoSectorMgr::operator[](UserESInMiddleOfTheScreen);
+    v5 = (CEcoSector *)CEcoSectorMgr::operator[](g_cESMgr, UserESInMiddleOfTheScreen);
     LocalPlayerId = CPlayerManager::GetLocalPlayerId();
-    if ( CEcoSector::Owner(v6) == LocalPlayerId )
+    if ( CEcoSector::Owner(v5) == LocalPlayerId )
     {
-      a1[2] = (void *)CEcoSector::NrOfSettler(v6, 1);
-      a1[3] = (void *)CEcoSector::MinCarrier(v6);
-      a1[4] = (void *)((_BYTE *)a1[2] - (_BYTE *)a1[3]);
-      a1[5] = (void *)CEcoSector::NrOfSettler(v6, 2);
-      a1[6] = (void *)CEcoSector::WorkerDeltaAmount(v6, 2);
-      *((_BYTE *)a1 + 28) = CEcoSector::NrOfGoods(v6, 31) > 0;
-      a1[8] = (void *)CEcoSector::NrOfGoods(v6, 31);
-      a1[9] = (void *)CEcoSector::NrOfSettler(v6, 3);
-      a1[10] = (void *)CEcoSector::WorkerDeltaAmount(v6, 3);
-      *((_BYTE *)a1 + 44) = CEcoSector::NrOfGoods(v6, 18) > 0;
-      a1[12] = (void *)CEcoSector::NrOfGoods(v6, 18);
-      *((_BYTE *)a1 + 52) = 1;
-      v7 = 1;
+      a1->m_uNrOfSettlers = CEcoSector::NrOfSettler(v5, S4_SETTLER_CARRIER);
+      a1->m_uNrOfCarriers = CEcoSector::MinCarrier(v5);
+      a1->m_uNrOfNonCarriers = a1->m_uNrOfSettlers - a1->m_uNrOfCarriers;
+      a1->m_uNrOfDigger = CEcoSector::NrOfSettler(v5, S4_SETTLER_DIGGER);
+      a1->m_uNrOfFreeDigger = CEcoSector::WorkerDeltaAmount(v5, S4_SETTLER_DIGGER);
+      a1->m_bHasShovels = CEcoSector::NrOfGoods(v5, S4_GOOD_SHOVEL) > 0;
+      a1->m_uNrOfShovels = CEcoSector::NrOfGoods(v5, S4_GOOD_SHOVEL);
+      a1->m_uNrOfBuilders = CEcoSector::NrOfSettler(v5, S4_SETTLER_BUILDER);
+      a1->m_uNrOfFreeBuilders = CEcoSector::WorkerDeltaAmount(v5, S4_SETTLER_BUILDER);
+      a1->m_bHasHammers = CEcoSector::NrOfGoods(v5, S4_GOOD_HAMMER) > 0;
+      a1->m_uNrOfHammers = CEcoSector::NrOfGoods(v5, S4_GOOD_HAMMER);
+      a1->m_bLooksAtEcoSector = 1;
+      v6 = 1;
     }
   }
-  if ( !v7 )
+  if ( !v6 )
   {
-    a1[2] = 0;
-    a1[3] = 0;
-    a1[4] = 0;
-    a1[5] = 0;
-    a1[6] = 0;
-    *((_BYTE *)a1 + 28) = 0;
-    a1[9] = 0;
-    a1[10] = 0;
-    *((_BYTE *)a1 + 44) = 0;
-    *((_BYTE *)a1 + 52) = 0;
+    a1->m_uNrOfSettlers = 0;
+    a1->m_uNrOfCarriers = 0;
+    a1->m_uNrOfNonCarriers = 0;
+    a1->m_uNrOfDigger = 0;
+    a1->m_uNrOfFreeDigger = 0;
+    a1->m_bHasShovels = 0;
+    a1->m_uNrOfBuilders = 0;
+    a1->m_uNrOfFreeBuilders = 0;
+    a1->m_bHasHammers = 0;
+    a1->m_bLooksAtEcoSector = 0;
   }
-  a1[1] = (void *)31;
-  v4 = 604;
+  a1->m_iUnknown = 31;
+  v3 = 604;
   if ( !a2 )
-    v4 = 602;
-  CEvn_Event::CEvn_Event(&v8, v4, 0, (unsigned int)a1, 0);
-  v9 = 0;
+    v3 = 602;
+  CEvn_Event::CEvn_Event(&v7, v3, 0, (unsigned int)a1, 0);
+  v8 = 0;
   if ( !g_pEvnEngine && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 2377, "g_pEvnEngine != NULL") == 1 )
     __debugbreak();
   if ( g_pEvnEngine )
-    IEventEngine::SendAMessage(g_pEvnEngine, &v8);
-  v9 = -1;
-  return CEvn_Event::~CEvn_Event(&v8);
+    IEventEngine::SendAMessage(g_pEvnEngine, &v7);
+  v8 = -1;
+  CEvn_Event::~CEvn_Event(&v7);
 }
 
 

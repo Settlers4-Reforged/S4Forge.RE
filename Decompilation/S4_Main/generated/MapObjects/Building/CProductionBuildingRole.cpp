@@ -584,22 +584,22 @@ void  CProductionBuildingRole::FillToolSideBar(class CAddToolSideBarInfo * a2, b
       case 4:
         a2->m_cAxeCount = CEcoSector::GetNrOfToolOrder(v9, i);
         break;
-      case 0x12:
+      case 18:
         a2->m_cHammerCount = CEcoSector::GetNrOfToolOrder(v9, i);
         break;
-      case 0x19:
+      case 25:
         a2->m_cPickaxeCount = CEcoSector::GetNrOfToolOrder(v9, i);
         break;
-      case 0x1B:
+      case 27:
         a2->m_cRodCount = CEcoSector::GetNrOfToolOrder(v9, i);
         break;
-      case 0x1C:
+      case 28:
         a2->m_cSawCount = CEcoSector::GetNrOfToolOrder(v9, i);
         break;
-      case 0x1D:
+      case 29:
         a2->m_cScytheCount = CEcoSector::GetNrOfToolOrder(v9, i);
         break;
-      case 0x1F:
+      case 31:
         a2->m_cShovelCount = CEcoSector::GetNrOfToolOrder(v9, i);
         break;
       default:

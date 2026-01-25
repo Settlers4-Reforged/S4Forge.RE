@@ -11,6 +11,10 @@ public:
     // address=[0x1454b70]
     virtual unsigned int  Size(void)const;
 
+    // Type information members
+public:
+    CEconomyGameInfo::Stat[7] m_sStats;
+
 };
 
 

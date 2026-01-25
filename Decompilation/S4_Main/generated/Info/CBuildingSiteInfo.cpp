@@ -17,7 +17,7 @@
 // Decompiled from int __thiscall CBuildingSiteInfo::Size(CBuildingSiteInfo *this)
 unsigned int  CBuildingSiteInfo::Size(void)const {
   
-  return 0x24;
+  return 36;
 }
 
 

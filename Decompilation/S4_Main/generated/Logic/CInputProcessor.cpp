@@ -2902,12 +2902,8 @@ bool  CInputProcessor::UnitReservation(class CEvn_Logic * a2) {
 // Decompiled from char __thiscall CInputProcessor::InitEconomyGameMenu(CInputProcessor *this, struct CEvn_Logic *a2)
 bool  CInputProcessor::InitEconomyGameMenu(class CEvn_Logic * a2) {
   
-  CStatistic::FillEconomyGameMenu();
-  CLogic::SetFillDialogInfos(
-    g_pLogic,
-    (void (__cdecl *)(struct CInfoExchange *, bool, bool))CStatistic::FillEconomyGameMenu,
-    (struct CInfoExchange *)&g_cEconomyGameInfo,
-    1);
+  CStatistic::FillEconomyGameMenu(&g_cEconomyGameInfo, 0, 1);
+  CLogic::SetFillDialogInfos(g_pLogic, CStatistic::FillEconomyGameMenu, &g_cEconomyGameInfo, 1);
   return 1;
 }
 
@@ -3047,12 +3043,12 @@ bool  CInputProcessor::InitStorageSideBar(class CEvn_Logic * a2) {
 // Decompiled from char __thiscall CInputProcessor::InitEyeCatcherSideBar(CInputProcessor *this, struct CEvn_Logic *a2)
 bool  CInputProcessor::InitEyeCatcherSideBar(class CEvn_Logic * a2) {
   
-  CWorldManager::ClearHelperObject(this);
-  CBuildingMgr::FillEyeCatcherSideBar((struct CInfoExchange *)&g_cEyeCatcherBarInfo, 0);
+  CWorldManager::ClearHelperObject();
+  CBuildingMgr::FillEyeCatcherSideBar(&g_cEyeCatcherBarInfo, 0);
   CLogic::SetFillSideBarInfos(
     g_pLogic,
     (void (__cdecl *)(struct CInfoExchange *, bool, int))CBuildingMgr::FillEyeCatcherSideBar,
-    (struct CInfoExchange *)&g_cEyeCatcherBarInfo,
+    &g_cEyeCatcherBarInfo,
     0);
   return 0;
 }

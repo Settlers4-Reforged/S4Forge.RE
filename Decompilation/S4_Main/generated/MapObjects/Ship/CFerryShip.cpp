@@ -290,64 +290,62 @@ enum CFerryShip::TFerryRequestResult  CFerryShip::Request(int a2) {
 
 
 // address=[0x15969f0]
-// Decompiled from _DWORD *__thiscall CFerryShip::FillDialog(CFerryShip *this, bool a2)
+// Decompiled from void __thiscall CFerryShip::FillDialog(CFerryShip *this, bool a2)
 void  CFerryShip::FillDialog(bool a2) {
   
   unsigned int v2; // eax
   const struct CFerryShip::CCargo *v3; // eax
-  _BYTE v5[4]; // [esp+4h] [ebp-50h] BYREF
-  int v6; // [esp+8h] [ebp-4Ch]
-  int v7; // [esp+Ch] [ebp-48h]
-  char v8; // [esp+19h] [ebp-3Bh]
-  unsigned int v9; // [esp+1Ch] [ebp-38h]
-  CFerryShip *v10; // [esp+20h] [ebp-34h]
-  int v11; // [esp+24h] [ebp-30h]
+  CFerryShip::CCargo *v4; // [esp+4h] [ebp-50h] BYREF
+  int v5; // [esp+8h] [ebp-4Ch]
+  int v6; // [esp+Ch] [ebp-48h]
+  char v7; // [esp+19h] [ebp-3Bh]
+  unsigned int v8; // [esp+1Ch] [ebp-38h]
+  int v10; // [esp+24h] [ebp-30h]
   unsigned int i; // [esp+28h] [ebp-2Ch]
-  CEvn_Event v13; // [esp+2Ch] [ebp-28h] BYREF
-  int v14; // [esp+50h] [ebp-4h]
+  CEvn_Event v12; // [esp+2Ch] [ebp-28h] BYREF
+  int v13; // [esp+50h] [ebp-4h]
 
-  v10 = this;
-  dword_3F1E8BC = 0;
-  *(&dword_3F1E8BC + 1) = 0;
-  dword_3F1E894[0] = 0;
-  dword_3F1E894[1] = 0;
-  dword_3F1E894[2] = 0;
-  dword_3F1E894[3] = 0;
-  dword_3F1E894[4] = 0;
-  dword_3F1E8A8[4] = 0;
-  dword_3F1E8A8[0] = 0;
-  dword_3F1E8A8[1] = 0;
-  dword_3F1E8A8[3] = 0;
-  dword_3F1E8A8[2] = 0;
-  dword_3F1E8A8[4] = 0;
-  dword_3F1E890 = 23;
+  g_cFerryLoadInfo.m_uCargpCount1[0] = 0;
+  g_cFerryLoadInfo.m_uCargpCount1[1] = 0;
+  g_cFerryLoadInfo.m_uCargpCount3[0] = 0;
+  g_cFerryLoadInfo.m_uCargpCount3[1] = 0;
+  g_cFerryLoadInfo.m_uCargpCount3[2] = 0;
+  g_cFerryLoadInfo.m_uCargpCount3[3] = 0;
+  g_cFerryLoadInfo.m_uCargpCount3[4] = 0;
+  g_cFerryLoadInfo.m_uCargpCount2[4] = 0;
+  g_cFerryLoadInfo.m_uCargpCount2[0] = 0;
+  g_cFerryLoadInfo.m_uCargpCount2[1] = 0;
+  g_cFerryLoadInfo.m_uCargpCount2[3] = 0;
+  g_cFerryLoadInfo.m_uCargpCount2[2] = 0;
+  g_cFerryLoadInfo.m_uCargpCount2[4] = 0;
+  g_cFerryLoadInfo.m_iUnknown = 23;
   for ( i = 0; ; ++i )
   {
-    v2 = std::vector<CFerryShip::CCargo>::size((char *)v10 + 180);
+    v2 = std::vector<CFerryShip::CCargo>::size((char *)this + 180);
     if ( i >= v2 )
       break;
-    v3 = (const struct CFerryShip::CCargo *)std::vector<CFerryShip::CCargo>::operator[](i);
-    CFerryShip::CCargo::CCargo((CFerryShip::CCargo *)v5, v3);
-    if ( v8 )
+    v3 = (const struct CFerryShip::CCargo *)std::vector<CFerryShip::CCargo>::operator[]((char *)this + 180, i);
+    CFerryShip::CCargo::CCargo((CFerryShip::CCargo *)&v4, v3);
+    if ( v7 )
     {
-      v11 = v6 - 4;
-      switch ( v6 )
+      v10 = v5 - 4;
+      switch ( v5 )
       {
         case 4:
-          dword_3F1E8BC += v7;
+          g_cFerryLoadInfo.m_uCargpCount1[0] += v6;
           break;
         case 5:
-          *(&dword_3F1E8BC + 1) += v7;
+          g_cFerryLoadInfo.m_uCargpCount1[1] += v6;
           break;
         case 29:
         case 30:
         case 31:
-          dword_3F1E8A8[0] += v7;
+          g_cFerryLoadInfo.m_uCargpCount2[0] += v6;
           break;
         case 32:
         case 33:
         case 34:
-          dword_3F1E8A8[1] += v7;
+          g_cFerryLoadInfo.m_uCargpCount2[1] += v6;
           break;
         case 35:
         case 36:
@@ -361,42 +359,42 @@ void  CFerryShip::FillDialog(bool a2) {
         case 61:
         case 62:
         case 63:
-          dword_3F1E8A8[2] += v7;
+          g_cFerryLoadInfo.m_uCargpCount2[2] += v6;
           break;
         case 44:
-          dword_3F1E8A8[3] += v7;
+          g_cFerryLoadInfo.m_uCargpCount2[3] += v6;
           break;
         case 45:
-          dword_3F1E8A8[4] += v7;
+          g_cFerryLoadInfo.m_uCargpCount2[4] += v6;
           break;
         case 46:
-          dword_3F1E894[4] += v7;
+          g_cFerryLoadInfo.m_uCargpCount3[4] += v6;
           break;
         case 47:
-          dword_3F1E894[3] += v7;
+          g_cFerryLoadInfo.m_uCargpCount3[3] += v6;
           break;
         case 48:
-          dword_3F1E894[2] += v7;
+          g_cFerryLoadInfo.m_uCargpCount3[2] += v6;
           break;
         case 49:
-          dword_3F1E894[1] += v7;
+          g_cFerryLoadInfo.m_uCargpCount3[1] += v6;
           break;
         case 50:
-          dword_3F1E894[0] += v7;
+          g_cFerryLoadInfo.m_uCargpCount3[0] += v6;
           break;
         default:
           continue;
       }
     }
   }
-  v9 = 604;
+  v8 = 604;
   if ( !a2 )
-    v9 = 602;
-  CEvn_Event::CEvn_Event(&v13, v9, 0, (unsigned int)&g_cFerryLoadInfo, 0);
-  v14 = 0;
-  IEventEngine::SendAMessage(g_pEvnEngine, &v13);
-  v14 = -1;
-  return CEvn_Event::~CEvn_Event(&v13);
+    v8 = 602;
+  CEvn_Event::CEvn_Event(&v12, v8, 0, (unsigned int)&g_cFerryLoadInfo, 0);
+  v13 = 0;
+  IEventEngine::SendAMessage(g_pEvnEngine, &v12);
+  v13 = -1;
+  CEvn_Event::~CEvn_Event(&v12);
 }
 
 

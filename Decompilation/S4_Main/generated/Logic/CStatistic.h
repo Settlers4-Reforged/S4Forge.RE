@@ -261,7 +261,7 @@ public:
     void  FillExtraInfo(void);
 
     // address=[0x1478720]
-    static void __cdecl FillEconomyGameMenu(class CInfoExchange *,bool,bool);
+    static void __cdecl FillEconomyGameMenu(class CInfoExchange * a1, bool a2, bool a3);
 
     // address=[0x1478890]
     void  FreezeEcoStatistic(void);

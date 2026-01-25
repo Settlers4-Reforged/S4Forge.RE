@@ -1828,16 +1828,16 @@ void __cdecl CBuildingMgr::FillStorageSideBar(class CInfoExchange * a1, bool a2,
 
 
 // address=[0x14f70f0]
-// Decompiled from _DWORD *__cdecl CBuildingMgr::FillEyeCatcherSideBar(struct CInfoExchange *a1, bool a2)
+// Decompiled from _DWORD *__cdecl CBuildingMgr::FillEyeCatcherSideBar(CEyeCatcherBarInfo *a1, bool a2)
 void __cdecl CBuildingMgr::FillEyeCatcherSideBar(class CInfoExchange * a1, bool a2, int a3) {
   
   int LocalPlayerId; // eax
   int v3; // eax
   int v4; // eax
   int v5; // eax
-  unsigned int v7; // [esp+4h] [ebp-3Ch]
-  _BYTE *BuildingInfo; // [esp+8h] [ebp-38h]
-  int v9; // [esp+Ch] [ebp-34h]
+  BYTE *BuildingInfo; // eax
+  unsigned int v8; // [esp+4h] [ebp-3Ch]
+  DWORD m_uBuildingId; // [esp+Ch] [ebp-34h]
   int i; // [esp+14h] [ebp-2Ch]
   CEvn_Event v11; // [esp+18h] [ebp-28h] BYREF
   int v12; // [esp+3Ch] [ebp-4h]
@@ -1846,30 +1846,34 @@ void __cdecl CBuildingMgr::FillEyeCatcherSideBar(class CInfoExchange * a1, bool 
     __debugbreak();
   for ( i = 0; i < 12; ++i )
   {
-    v9 = *((_DWORD *)a1 + 4 * i + 2);
-    if ( v9 )
+    m_uBuildingId = a1->m_sEyeCatcher[i].m_uBuildingId;
+    if ( m_uBuildingId )
     {
       LocalPlayerId = CPlayerManager::GetLocalPlayerId();
-      *((_DWORD *)a1 + 4 * i + 3) = CBuildingMgr::GetNumberOfBuildings(
-                                      (CBuildingMgr *)g_cBuildingMgr,
-                                      LocalPlayerId,
-                                      v9,
-                                      1u);
+      a1->m_sEyeCatcher[i].m_uCountBuilt = CBuildingMgr::GetNumberOfBuildings(
+                                             (CBuildingMgr *)g_cBuildingMgr,
+                                             LocalPlayerId,
+                                             m_uBuildingId,
+                                             1u);
       v3 = CPlayerManager::GetLocalPlayerId();
-      *((_DWORD *)a1 + 4 * i + 4) = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v3, v9, 0);
+      a1->m_sEyeCatcher[i].m_uCountTotal = CBuildingMgr::GetNumberOfBuildings(
+                                             (CBuildingMgr *)g_cBuildingMgr,
+                                             v3,
+                                             m_uBuildingId,
+                                             0);
       v4 = CPlayerManager::GetLocalPlayerId();
       v5 = CPlayerManager::Race(v4);
-      BuildingInfo = (_BYTE *)CBuildingInfoMgr::GetBuildingInfo(v5, v9);
-      *((_BYTE *)a1 + 16 * i + 20) = BuildingInfo[3];
-      *((_BYTE *)a1 + 16 * i + 21) = BuildingInfo[2];
-      *((_BYTE *)a1 + 16 * i + 22) = BuildingInfo[4];
+      BuildingInfo = (BYTE *)CBuildingInfoMgr::GetBuildingInfo(v5, m_uBuildingId);
+      a1->m_sEyeCatcher[i].m_cBuildingInfo1 = BuildingInfo[3];
+      a1->m_sEyeCatcher[i].m_cBuildingInfo2 = BuildingInfo[2];
+      a1->m_sEyeCatcher[i].m_cBuildingInfo3 = BuildingInfo[4];
     }
   }
-  *((_DWORD *)a1 + 1) = 27;
-  v7 = 606;
+  a1->m_iUnknown = 27;
+  v8 = 606;
   if ( !a2 )
-    v7 = 607;
-  CEvn_Event::CEvn_Event(&v11, v7, 0, (unsigned int)a1, 0);
+    v8 = 607;
+  CEvn_Event::CEvn_Event(&v11, v8, 0, (unsigned int)a1, 0);
   v12 = 0;
   if ( !g_pEvnEngine
     && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1874, "g_pEvnEngine != NULL") == 1 )
