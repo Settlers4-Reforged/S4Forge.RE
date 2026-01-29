@@ -1,15 +1,8 @@
-#if FALSE
 #include "IClipboard.h"
 
 // Definitions for class IClipboard
 
 // address=[0x147f820]
 // Decompiled from IClipboard *__thiscall IClipboard::IClipboard(IClipboard *this)
- IClipboard::IClipboard(void) {
-  
-  *(_DWORD *)this = IClipboard::_vftable_;
-  return this;
-}
+ IClipboard::IClipboard(void) = default;
 
-
-#endif // Already implemented

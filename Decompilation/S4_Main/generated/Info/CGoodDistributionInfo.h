@@ -16,7 +16,7 @@ public:
     int m_uSupplyBuildings;
     DWORD m_uPlayerRace;
     CGoodDistributionInfo::Good[5] m_aSupplyPriorities;
-    DWORD m_uU4;
+    BYTE m_bU4;
     DWORD m_uU5;
     DWORD m_uEcoSectorId;
 

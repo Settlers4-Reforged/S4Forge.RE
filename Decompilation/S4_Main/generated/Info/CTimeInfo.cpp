@@ -39,7 +39,7 @@ std::string __cdecl CTimeInfo::GetDateTimeString(int a1) {
       v7[1],
       Destination);
   }
-  v4 = j__strlen(Str);
+  v4 = strlen(Str);
   std::string::string(a1, Str);
   return a1;
 }

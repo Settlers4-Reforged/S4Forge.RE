@@ -1698,7 +1698,7 @@ void __cdecl WriteIniFile(void) {
       Str[v5++] = v8[2 * v4];
     ++v4;
   }
-  v0 = j__strlen(Str);
+  v0 = strlen(Str);
   CFile::Write(Str, v0, 1u, UNUSED_ARG(), UNUSED_ARG());
   CFile::Close((CFile *)&v6, UNUSED_ARG(), UNUSED_ARG());
   exceptionBlock = 0;
@@ -13463,7 +13463,7 @@ bool __cdecl GuiDlgLoadSaveProc(int a1, int a2, int a3) {
       {
         PlayGuiSound(2);
         Str = (char *)IGuiEngine::GetText((IGuiEngine *)g_pGUIEngine, 33, 914);
-        if ( j__strlen(Str) )
+        if ( strlen(Str) )
         {
           IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 33, 912, 1);
           std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v9);
@@ -22609,7 +22609,7 @@ bool __cdecl GuiDlgMDRandomMapParametersProc(int a1, int a2, int a3) {
           String = (char *)IGuiEngine::GetText((IGuiEngine *)g_pGUIEngine, dword_4031998, 1972);
           if ( String )
           {
-            byte_4031FA4 = j__strlen(String) == 0;
+            byte_4031FA4 = strlen(String) == 0;
             dword_4031F84 = j__atoi(String);
           }
           else
@@ -22625,7 +22625,7 @@ bool __cdecl GuiDlgMDRandomMapParametersProc(int a1, int a2, int a3) {
           Source = (char *)IGuiEngine::GetText((IGuiEngine *)g_pGUIEngine, dword_4031998, 1983);
           if ( Source )
           {
-            if ( j__strlen(Source) >= 8 )
+            if ( strlen(Source) >= 8 )
             {
               j__strcpy_0(v72, Source);
               std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v40);
@@ -22914,7 +22914,7 @@ bool __cdecl GuiDlgMDRandomMapParametersProc(int a1, int a2, int a3) {
           Str = (char *)std::string::c_str(v70);
           if ( !Str )
             goto LABEL_76;
-          if ( j__strlen(Str) >= 8 )
+          if ( strlen(Str) >= 8 )
           {
             j__strcpy_0(Destination, Str);
             std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v41);
@@ -42117,7 +42117,7 @@ void __stdcall BBSupportTracePrint(unsigned int a1, char const * Source) {
     EnterCriticalSection(&CriticalSection);
     j__strncpy(OutputString, Source, 0x7FFu);
     OutputString[2047] = 0;
-    for ( i = j__strlen(OutputString); i > 0 && (unsigned __int8)OutputString[i - 1] - 1 <= 31; OutputString[i] = 0 )
+    for ( i = strlen(OutputString); i > 0 && (unsigned __int8)OutputString[i - 1] - 1 <= 31; OutputString[i] = 0 )
     {
       if ( (unsigned int)--i >= 0x800 )
         j____report_rangecheckfailure();
@@ -42628,7 +42628,7 @@ void __stdcall BBSupportLib::BBSCopyTextToClipboard(char const * Src) {
   HGLOBAL hMem; // [esp+4h] [ebp-8h]
   unsigned int v4; // [esp+8h] [ebp-4h]
 
-  result = j__strlen(Src);
+  result = strlen(Src);
   v4 = result;
   if ( !result )
     return result;
@@ -43389,9 +43389,9 @@ void __cdecl RenderTmpText(void) {
   SetTextAlign(hdc, 0x18u);
   h = CreateFontA(g_iTextTmpWidth, g_iTextTmpHeight, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0x20u, 0);
   v3 = SelectObject(hdc, h);
-  v1 = j__strlen(g_cTextTmp);
+  v1 = strlen(g_cTextTmp);
   TextOutA(hdc, g_iTextTmpPosX, g_iTextTmpPosY, g_cTextTmp, v1);
-  v2 = j__strlen("Hallo");
+  v2 = strlen("Hallo");
   TextOutA(hdc, 50, 50, "Hallo", v2);
   SelectObject(hdc, v3);
   ((void (__thiscall *)(CSurfaceV7 *, HDC))D3DObjectPtr->FinalRenderSurface->j_?ReleaseDC@CSurfaceV7@@UAEJPAUHDC__@@@Z)(
@@ -47258,11 +47258,11 @@ void __cdecl AddDebugStrings(int a1) {
     if ( dword_468DF9C )
     {
       v1 = (const char *)dword_468DF9C();
-      v5 = j__strlen(v1);
+      v5 = strlen(v1);
       v2 = (const CHAR *)dword_468DF9C();
       TextOutA(hdc, OutputWidth / 2, 16, v2, v5);
       j__sprintf(String, "RndTime: %.3f sec/frame", (float)((float)a1 / 1000.0));
-      v3 = j__strlen(String);
+      v3 = strlen(String);
       TextOutA(hdc, OutputWidth / 2, 32, String, v3);
     }
     SelectObject(hdc, ho);
@@ -47303,7 +47303,7 @@ void __cdecl AddDebugStrings(int a1) {
               if ( v16 > 0 )
               {
                 j__sprintf(Str, "%d", v16);
-                v4 = j__strlen(Str);
+                v4 = strlen(Str);
                 TextOutA(hdc, v20 >> 16, ((v18 - v7) >> 16) + 5, Str, v4);
               }
             }
@@ -53656,7 +53656,7 @@ bool __cdecl InsertCharacter(unsigned char * Str, int a2, int Count, int a4) {
   char Source[4]; // [esp+10h] [ebp-134h] BYREF
   char Destination[300]; // [esp+14h] [ebp-130h] BYREF
 
-  if ( (int)j__strlen(Str) >= a2 )
+  if ( (int)strlen(Str) >= a2 )
     return 0;
   if ( Count < 0 || Count >= j___mbstrlen(Str) + 1 )
     return 0;

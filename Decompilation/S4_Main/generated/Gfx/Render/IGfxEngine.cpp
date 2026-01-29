@@ -72,7 +72,7 @@ bool  IGfxEngine::SetTemporaryText(char * Str, int a2, int a3, int a4, int a5, i
   
   if ( Str )
   {
-    if ( j__strlen(Str) > 0xFF )
+    if ( strlen(Str) > 0xFF )
       return 0;
     j__strcpy_0(&g_cTextTmp, Str);
     g_iTextTmpWidth = a4;

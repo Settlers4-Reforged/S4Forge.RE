@@ -139,7 +139,7 @@ bool  CGameStateEventHandle::OnEvent(class CEvn_Event & a2) {
               v16 = 0;
               v15 = "d:\\projects\\tshe\\purplelamp\\s4\\source\\baselib\\include\\File.h";
               v14 = 1;
-              v3 = j__strlen(g_szBugReportText);
+              v3 = strlen(g_szBugReportText);
               CFile::Write(
                 g_szBugReportText,
                 v3,

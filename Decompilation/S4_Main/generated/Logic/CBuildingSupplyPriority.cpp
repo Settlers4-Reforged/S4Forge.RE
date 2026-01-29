@@ -1310,14 +1310,13 @@ void  CBuildingSupplyPriority::CreateAllRacesPriorities(void) {
   int v50; // [esp+C4h] [ebp-64h] BYREF
   int v51; // [esp+C8h] [ebp-60h]
   int i; // [esp+CCh] [ebp-5Ch]
-  CBuildingSupplyPriority *v53; // [esp+D0h] [ebp-58h]
-  _BYTE v54[16]; // [esp+D4h] [ebp-54h] BYREF
-  _BYTE v55[52]; // [esp+E4h] [ebp-44h] BYREF
-  int v56; // [esp+124h] [ebp-4h]
+  void *v53; // [esp+D0h] [ebp-58h]
+  CGoodDistributionInfo v54; // [esp+D4h] [ebp-54h] BYREF
+  int v55; // [esp+124h] [ebp-4h]
 
   v53 = this;
   std::map<int,int>::map<int,int>(v26);
-  v56 = 0;
+  v55 = 0;
   v50 = 9;
   IntArray = (_DWORD *)TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_BREAD_COALMINE);
   *(_DWORD *)std::map<int,int>::operator[](&v50) = *IntArray;
@@ -1330,10 +1329,10 @@ void  CBuildingSupplyPriority::CreateAllRacesPriorities(void) {
   v47 = 17;
   std::map<int,std::map<int,int>>::operator[](&v47);
   std::map<int,int>::operator=(v26);
-  v56 = -1;
+  v55 = -1;
   std::map<int,int>::~map<int,int>(v26);
   std::map<int,int>::map<int,int>(v25);
-  v56 = 1;
+  v55 = 1;
   v46 = 9;
   v4 = (_DWORD *)TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_BREAD_IRONMINE);
   *(_DWORD *)std::map<int,int>::operator[](&v46) = *v4;
@@ -1346,10 +1345,10 @@ void  CBuildingSupplyPriority::CreateAllRacesPriorities(void) {
   v43 = 15;
   std::map<int,std::map<int,int>>::operator[](&v43);
   std::map<int,int>::operator=(v25);
-  v56 = -1;
+  v55 = -1;
   std::map<int,int>::~map<int,int>(v25);
   std::map<int,int>::map<int,int>(v24);
-  v56 = 2;
+  v55 = 2;
   v42 = 9;
   v7 = (_DWORD *)TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_BREAD_GOLDMINE);
   *(_DWORD *)std::map<int,int>::operator[](&v42) = *v7;
@@ -1362,10 +1361,10 @@ void  CBuildingSupplyPriority::CreateAllRacesPriorities(void) {
   v39 = 16;
   std::map<int,std::map<int,int>>::operator[](&v39);
   std::map<int,int>::operator=(v24);
-  v56 = -1;
+  v55 = -1;
   std::map<int,int>::~map<int,int>(v24);
   std::map<int,int>::map<int,int>(v23);
-  v56 = 3;
+  v55 = 3;
   v38 = 9;
   v10 = (_DWORD *)TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_BREAD_STONEMINE);
   *(_DWORD *)std::map<int,int>::operator[](&v38) = *v10;
@@ -1378,10 +1377,10 @@ void  CBuildingSupplyPriority::CreateAllRacesPriorities(void) {
   v21 = 14;
   std::map<int,std::map<int,int>>::operator[](&v21);
   std::map<int,int>::operator=(v23);
-  v56 = -1;
+  v55 = -1;
   std::map<int,int>::~map<int,int>(v23);
   std::map<int,int>::map<int,int>(v22);
-  v56 = 4;
+  v55 = 4;
   v35 = 9;
   v13 = (_DWORD *)TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_BREAD_SULFURMINE);
   *(_DWORD *)std::map<int,int>::operator[](&v35) = *v13;
@@ -1394,33 +1393,33 @@ void  CBuildingSupplyPriority::CreateAllRacesPriorities(void) {
   v32 = 18;
   std::map<int,std::map<int,int>>::operator[](&v32);
   std::map<int,int>::operator=(v22);
-  v56 = -1;
+  v55 = -1;
   std::map<int,int>::~map<int,int>(v22);
   std::map<int,int>::map<int,int>(v20);
-  v56 = 5;
+  v55 = 5;
   v31 = 16;
   v16 = (_DWORD *)TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_GRAIN_MILL);
   *(_DWORD *)std::map<int,int>::operator[](&v31) = *v16;
   v30 = 9;
   std::map<int,std::map<int,int>>::operator[](&v30);
   std::map<int,int>::operator=(v20);
-  v56 = -1;
+  v55 = -1;
   std::map<int,int>::~map<int,int>(v20);
   std::map<int,int>::map<int,int>(v19);
-  v56 = 6;
+  v55 = 6;
   v29 = 20;
   v17 = (_DWORD *)TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_IRONBAR_VEHICLEHALL);
   *(_DWORD *)std::map<int,int>::operator[](&v29) = *v17;
   v28 = 23;
   std::map<int,std::map<int,int>>::operator[](&v28);
   std::map<int,int>::operator=(v19);
-  v56 = -1;
+  v55 = -1;
   std::map<int,int>::~map<int,int>(v19);
-  CGoodDistributionInfo::CGoodDistributionInfo((CGoodDistributionInfo *)v54);
-  NumberOfSupplyBuildings = CBuildingSupplyPriority::GetNumberOfSupplyBuildings(v53, 9, v55);
+  CGoodDistributionInfo::CGoodDistributionInfo(&v54);
+  NumberOfSupplyBuildings = CBuildingSupplyPriority::GetNumberOfSupplyBuildings(v53, 9, (int)v54.m_aSupplyPriorities);
   v51 = 0;
   for ( i = 0; i < NumberOfSupplyBuildings; ++i )
-    v51 += *(_DWORD *)&v55[8 * i + 4];
+    v51 += v54.m_aSupplyPriorities[i].m_uPriority;
   if ( v51 != 100 && BBSupportDbgReport(2, "Logic\\BuildingSupplyPriority.cpp", 299, "Result == 100") == 1 )
     __debugbreak();
   return 0;

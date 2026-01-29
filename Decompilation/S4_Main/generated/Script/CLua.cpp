@@ -527,13 +527,13 @@ void  CLua::ExportTableTypes(char const * a1, char const * Str, struct SConfigTy
   v7 = 0;
   if ( Str )
   {
-    result = j__strlen(Str);
+    result = strlen(Str);
     v7 = result;
   }
   for ( i = 0; i < a4; ++i )
   {
     v5 = (char *)a3[1];
-    result = j__strlen(v5);
+    result = strlen(v5);
     if ( result > v7 )
       result = CLua::ExportTableVar(a1, &v5[v7], COERCE__INT64((double)*a3));
     a3 += 2;
@@ -839,7 +839,7 @@ void __cdecl CLua::scrDbgDumpTableEntry(void a1) {
 
   Str = (char *)CLua::GetString((CLua *)CLua::s_pLua, 1);
   CLua::GetDouble((CLua *)CLua::s_pLua, 2);
-  j__strlen(Str);
+  strlen(Str);
   return BBSupportTracePrintF(0, "%s %f", Str, a1);
 }
 

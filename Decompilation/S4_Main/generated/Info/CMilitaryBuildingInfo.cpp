@@ -1,3 +1,4 @@
+#if FALSE
 #include "CMilitaryBuildingInfo.h"
 
 // Definitions for class CMilitaryBuildingInfo
@@ -20,3 +21,4 @@ unsigned int  CMilitaryBuildingInfo::Size(void)const {
 }
 
 
+#endif // Already implemented

@@ -299,11 +299,11 @@ bool  CConfigSection::Save(wchar_t const * FileName) {
   CFile::Open(FileName, 10, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\BaseLib\\Include\\File.h", 0);
   v47 = 0;
   j__sprintf(Str, "//\r\n// Automatically generated file. Do not edit!\r\n// \r\n\r\n");
-  v2 = j__strlen(Str);
+  v2 = strlen(Str);
   CFile::Write(Str, ElementSize, v2, (int)"D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\BaseLib\\Include\\File.h", 0);
   v3 = (const char *)std::string::c_str(v34);
   snprintf(Str, 0x1FFu, "[%s]\r\n{\r\n", v3);
-  v4 = j__strlen(Str);
+  v4 = strlen(Str);
   CFile::Write(Str, ElementSize, v4, (int)"D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\BaseLib\\Include\\File.h", 0);
   std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,CConfigVar *>>>>::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,CConfigVar *>>>>(v32);
   LOBYTE(v47) = 3;
@@ -346,7 +346,7 @@ bool  CConfigSection::Save(wchar_t const * FileName) {
           v8 = (void *)std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,CConfigVar *>>>>::operator*(v32);
           v9 = (const char *)std::string::c_str(v8);
           j__sprintf(Str, "    %s[%d] = ", v9, v21);
-          v10 = j__strlen(Str);
+          v10 = strlen(Str);
           CFile::Write(
             Str,
             ElementSize,
@@ -356,7 +356,7 @@ bool  CConfigSection::Save(wchar_t const * FileName) {
           for ( i = 0; i < v35 - 1; ++i )
           {
             j__sprintf(Str, "%d,", *(_DWORD *)(v33 + 4 * i));
-            v11 = j__strlen(Str);
+            v11 = strlen(Str);
             CFile::Write(
               Str,
               ElementSize,
@@ -365,7 +365,7 @@ bool  CConfigSection::Save(wchar_t const * FileName) {
               0);
           }
           j__sprintf(Str, "%d", *(_DWORD *)(v33 + 4 * v35 - 4));
-          v12 = j__strlen(Str);
+          v12 = strlen(Str);
           CFile::Write(
             Str,
             ElementSize,
@@ -394,7 +394,7 @@ bool  CConfigSection::Save(wchar_t const * FileName) {
         j__sprintf(Str, &byte_3AB2CAF);
         break;
     }
-    v17 = j__strlen(Str);
+    v17 = strlen(Str);
     CFile::Write(Str, ElementSize, v17, (int)"D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\BaseLib\\Include\\File.h", 0);
     std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,CConfigVar *>>>>::operator++(
       v24,

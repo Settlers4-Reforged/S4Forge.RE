@@ -357,7 +357,7 @@ bool  CStateLobbyGameSettings::OnEvent(class CEvn_Event & a2) {
         break;
       case 0x26u:
         Str = (char *)a2->m_wParam;
-        v9 = j__strlen(Str);
+        v9 = strlen(Str);
         v20 = j__mbstowcs(Dest, Str, v9);
         if ( v20 >= 256 )
           j____report_rangecheckfailure();

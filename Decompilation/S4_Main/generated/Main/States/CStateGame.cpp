@@ -2154,9 +2154,9 @@ bool  CStateGame::OnEvent(class CEvn_Event & a2) {
             }
             Str[v276++] = 58;
             Str[v276++] = 32;
-            v200 = 512 - j__strlen(Str);
+            v200 = 512 - strlen(Str);
             Source = (char *)v249[6];
-            if ( j__strlen(Source) > v200 )
+            if ( strlen(Source) > v200 )
               Source[v200] = 0;
             j__strcpy_0(&Str[v276], Source);
             v51 = CPlayerManager::Color(*((unsigned __int8 *)v249 + 30));
@@ -3343,7 +3343,7 @@ CStateGame__OnEvent___def_18B0CD2:
 LABEL_354:
                 v45 = (const char *)std::string::c_str(v277[2]);
                 j__strcpy_0(Destination, v45);
-                LOWORD(v68) = j__strlen(Destination) + 1;
+                LOWORD(v68) = strlen(Destination) + 1;
                 v46 = CPlayerManager::GetLocalPlayerId();
                 CEvn_Logic::CEvn_Logic((CEvn_Logic *)v313, 0xFA5u, 0, 0, v46, (unsigned int)Destination, v68);
                 v323 = 26;

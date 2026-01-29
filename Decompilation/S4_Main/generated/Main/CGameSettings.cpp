@@ -291,7 +291,7 @@ void __cdecl CGameSettings::LoadCommandLineValues(void) {
     memset(Buffer, 0, sizeof(Buffer));
     pcbBuffer = 256;
     GetUserNameA(Buffer, &pcbBuffer);
-    if ( j__strlen(Buffer) )
+    if ( strlen(Buffer) )
       std::string::operator=(v111, Buffer);
   }
   v53 = (void *)(*(int (__thiscall **)(int, _BYTE *, const char *, const char *, _BYTE *))(*(_DWORD *)g_pCfgMgr + 20))(
@@ -303,7 +303,7 @@ void __cdecl CGameSettings::LoadCommandLineValues(void) {
   std::string::operator=(v111, v53);
   std::string::~string(v98);
   v14 = (const char *)std::string::c_str(v111);
-  v18 = j__strlen(v14);
+  v18 = strlen(v14);
   v15 = (const char *)std::string::c_str(v111);
   v52 = j__mbstowcs(Dest, v15, v18);
   v67 = 2 * v52;
@@ -1506,13 +1506,13 @@ void __cdecl CGameSettings::LoadAINames(void) {
     std::string::operator=(v13, v6);
     std::string::~string(v11);
     v1 = (const char *)std::string::c_str(v13);
-    if ( j__strlen(v1) >= 0x20
+    if ( strlen(v1) >= 0x20
       && BBSupportDbgReport(2, "main\\GameSettings.cpp", 275, "strlen( strTemp.c_str() ) < MAX_PLAYERNAME_LENGTH") == 1 )
     {
       __debugbreak();
     }
     v2 = (const char *)std::string::c_str(v13);
-    v4 = j__strlen(v2);
+    v4 = strlen(v2);
     v3 = (const char *)std::string::c_str(v13);
     v8 = j__mbstowcs(Dest, v3, v4);
     if ( v8 >= 64 )

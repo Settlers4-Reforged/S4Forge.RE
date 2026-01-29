@@ -1,3 +1,4 @@
+#if FALSE
 #include "CGoodDistributionInfo.h"
 
 // Definitions for class CGoodDistributionInfo
@@ -6,10 +7,10 @@
 // Decompiled from CGoodDistributionInfo *__thiscall CGoodDistributionInfo::CGoodDistributionInfo(CGoodDistributionInfo *this)
  CGoodDistributionInfo::CGoodDistributionInfo(void) {
   
-  CInfoExchange::CInfoExchange((CInfoExchange *)this);
-  *(_DWORD *)this = &CGoodDistributionInfo::_vftable_;
-  *((_BYTE *)this + 56) = 0;
-  *((_DWORD *)this + 16) = -1;
+  CInfoExchange::CInfoExchange(this);
+  this->__vftable = (CInfoExchange_vtbl *)&CGoodDistributionInfo::_vftable_;
+  this->m_bU4 = 0;
+  this->m_uEcoSectorId = -1;
   return this;
 }
 
@@ -22,3 +23,4 @@ unsigned int  CGoodDistributionInfo::Size(void)const {
 }
 
 
+#endif // Already implemented

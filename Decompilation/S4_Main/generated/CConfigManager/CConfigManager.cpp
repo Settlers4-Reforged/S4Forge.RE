@@ -114,7 +114,7 @@ bool  CConfigManager::AddCommandLine(char const * groupName, int argc, char * * 
   std::string::operator+=("}");
   std::string::operator+=((int)v10);
   Str = (char *)std::string::c_str(v11);
-  v4 = j__strlen(Str);
+  v4 = strlen(Str);
   v9 = CConfigManager::ParseData(this, Str, v4);
   LOBYTE(v12) = 0;
   std::string::~string(v10);

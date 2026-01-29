@@ -256,7 +256,7 @@ void  CStringEngineEx::CreateTextForEmptyStrings(void) {
       StringName = (const char *)CS4DefineNames::GetStringName(i);
       snprintf(Src, 0x3FFu, "<%s>", StringName);
       Src[1023] = 0;
-      v3 = j__strlen(Src);
+      v3 = strlen(Src);
       *(_DWORD *)(this[1] + 4 * i) = operator new[](v3 + 1);
       j__memcpy(*(void **)(this[1] + 4 * i), Src, v3 + 1);
       ++v4;

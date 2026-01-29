@@ -1198,7 +1198,7 @@ bool __cdecl CGameRun::LoadEditorMap(std::wstring & a1, bool a2) {
   Str = (char *)S4::CMapFile::LoadChunk(v9, 0x10u, 0, &v8, 0);
   if ( Str )
   {
-    v8 = j__strlen(Str);
+    v8 = strlen(Str);
     if ( v8 < 4 )
     {
       v8 = 0;

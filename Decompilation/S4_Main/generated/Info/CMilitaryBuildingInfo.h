@@ -13,8 +13,8 @@ public:
 
     // Type information members
 public:
-    CMilitaryBuildingInfo::Pair[10] m_aStationedArchers;
-    CMilitaryBuildingInfo::Pair[10] m_aStationedSoldiers;
+    CMilitaryBuildingInfo::Stationed[10] m_aStationedArchers;
+    CMilitaryBuildingInfo::Stationed[10] m_aStationedSoldiers;
 
 };
 

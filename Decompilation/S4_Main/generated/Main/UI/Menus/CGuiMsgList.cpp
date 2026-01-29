@@ -21,7 +21,7 @@ bool  CGuiMsgList::AddListItem(int a2, char const * Str) {
   if ( this[25217] >= 200 )
     return 0;
   this[this[25217] + 25016] = a2;
-  if ( j__strlen(Str) > 0x1F4 )
+  if ( strlen(Str) > 0x1F4 )
     return 0;
   j__strcpy_0((char *)&this[125 * this[25217]++ + 16], Str);
   return 1;

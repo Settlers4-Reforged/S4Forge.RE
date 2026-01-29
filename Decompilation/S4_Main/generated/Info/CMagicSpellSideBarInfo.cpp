@@ -1,3 +1,4 @@
+#if FALSE
 #include "CMagicSpellSideBarInfo.h"
 
 // Definitions for class CMagicSpellSideBarInfo
@@ -20,3 +21,4 @@ unsigned int  CMagicSpellSideBarInfo::Size(void)const {
 }
 
 
+#endif // Already implemented

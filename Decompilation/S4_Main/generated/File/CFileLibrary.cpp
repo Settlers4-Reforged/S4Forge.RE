@@ -1752,9 +1752,9 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * a3, in
       v104[2] = 0;
       v104[5] = v60;
       v104[4] = 0;
-      v12 = j__strlen(Str);
+      v12 = strlen(Str);
       WriteFile(hObject, Str, v12 + 1, &NumberOfBytesWritten, 0);
-      v70 = j__strlen(Str) + 1;
+      v70 = strlen(Str) + 1;
       n = v89[7];
       v50 = v60;
       v62 = operator new[](24 * v60);

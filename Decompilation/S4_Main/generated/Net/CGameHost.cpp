@@ -1186,7 +1186,7 @@ bool  CGameHost::StartIniFileGame(wchar_t const * Source) {
         __debugbreak();
     }
     *v76 = 0;
-    v6 = j__strlen("PlayerIP%d=");
+    v6 = strlen("PlayerIP%d=");
     v37 = &v25;
     v36 = std::string::string(&v25, &Str[v6 - 1]);
     v42 = (*(int (__thiscall **)(_DWORD, int, int, int, int, int, char **, size_t))(**((_DWORD **)v73 + 49) + 68))(
@@ -1218,8 +1218,8 @@ bool  CGameHost::StartIniFileGame(wchar_t const * Source) {
       if ( BBSupportDbgReport(1, "Net\\GameHost.cpp", 1599, aErrorI13Readin) == 1 )
         __debugbreak();
     }
-    v31 = v76 - &Str[j__strlen("PlayerName%d=") - 1];
-    v7 = j__strlen("PlayerName%d=");
+    v31 = v76 - &Str[strlen("PlayerName%d=") - 1];
+    v7 = strlen("PlayerName%d=");
     v52 = j__mbstowcs(Dest, &Str[v7 - 1], v31);
     Dest[v52] = 0;
     std::wstring::wstring(v87, Dest);
@@ -1235,7 +1235,7 @@ bool  CGameHost::StartIniFileGame(wchar_t const * Source) {
     }
     v31 = 10;
     p_EndPtr = &EndPtr;
-    v8 = j__strlen("PlayerID%d=");
+    v8 = strlen("PlayerID%d=");
     v51 = j__strtol(&Str[v8 - 1], &EndPtr, 10);
     *(_DWORD *)(g_pGameType + 4 * i + 224) = v51;
     if ( *(_DWORD *)(g_pGameType + 4 * i + 152) >= *(_DWORD *)(g_pGameType + 72) )
@@ -1257,8 +1257,8 @@ bool  CGameHost::StartIniFileGame(wchar_t const * Source) {
         if ( BBSupportDbgReport(1, "Net\\GameHost.cpp", 1639, aErrorI11Readin_0) == 1 )
           __debugbreak();
       }
-      v31 = v76 - &Str[j__strlen("ClanShortcut%d=") - 1];
-      v9 = j__strlen("ClanShortcut%d=");
+      v31 = v76 - &Str[strlen("ClanShortcut%d=") - 1];
+      v9 = strlen("ClanShortcut%d=");
       v50 = j__mbstowcs(Dest, &Str[v9 - 1], v31);
       Dest[v50] = 0;
       std::wstring::wstring(v85, Dest);
@@ -1376,7 +1376,7 @@ bool  CGameHost::StartIniFileGame(wchar_t const * Source) {
     {
       v32 = 10;
       v31 = (size_t)&EndPtr;
-      v12 = j__strlen((const char *)Dest);
+      v12 = strlen((const char *)Dest);
       v59 = j__strtol(&Str[v12], &EndPtr, 10);
       if ( v59 >= 0 )
         *(_DWORD *)(g_pGameType + 4 * j + 152) = v59;

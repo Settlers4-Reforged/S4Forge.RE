@@ -1,3 +1,4 @@
+#if FALSE
 #include "CGroupSideBarInfo.h"
 
 // Definitions for class CGroupSideBarInfo
@@ -20,3 +21,4 @@ unsigned int  CGroupSideBarInfo::Size(void)const {
 }
 
 
+#endif // Already implemented

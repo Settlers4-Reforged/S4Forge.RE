@@ -743,7 +743,7 @@ bool  IGuiEngine::SetText(int a2, int a3, char const * Str) {
   ControlPtr = GetControlPtr(a2, a3);
   if ( !ControlPtr )
     return 0;
-  Count = j__strlen(Str);
+  Count = strlen(Str);
   if ( ControlPtr->controlType == 21 )
   {
     ControlPtr->textOffset = (DWORD)Str;

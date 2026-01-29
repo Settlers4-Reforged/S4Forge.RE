@@ -1,3 +1,4 @@
+#if FALSE
 #include "CGoodsStatisticInfo.h"
 
 // Definitions for class CGoodsStatisticInfo
@@ -20,3 +21,4 @@ unsigned int  CGoodsStatisticInfo::Size(void)const {
 }
 
 
+#endif // Already implemented

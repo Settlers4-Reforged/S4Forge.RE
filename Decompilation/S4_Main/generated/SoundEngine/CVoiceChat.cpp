@@ -85,7 +85,7 @@ bool  CVoiceChat::Init(int a2, unsigned int a3, char * Str) {
 
   *this = a2;
   this[1] = a3;
-  v4 = j__strlen(Str);
+  v4 = strlen(Str);
   this[4] = (int)operator new[](v4 + 1);
   j__strcpy_0((char *)this[4], Str);
   if ( !CVoiceChat::GetWindowsMicVolume((CVoiceChat *)this, this + 40) )

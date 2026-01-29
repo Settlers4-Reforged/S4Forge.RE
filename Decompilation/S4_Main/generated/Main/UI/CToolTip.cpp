@@ -112,7 +112,7 @@ void  CToolTip::SetTooltipText(char const * Str) {
   char *result; // eax
   int Count; // [esp+0h] [ebp-8h]
 
-  Count = j__strlen(Str);
+  Count = strlen(Str);
   if ( Count >= CToolTip::GetMaxLengthOfTooltip((CToolTip *)this) - 1 )
     Count = CToolTip::GetMaxLengthOfTooltip((CToolTip *)this) - 1;
   result = j__strncpy(this + 8, Str, Count);

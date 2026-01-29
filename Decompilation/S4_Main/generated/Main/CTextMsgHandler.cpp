@@ -29,7 +29,7 @@ bool __cdecl CTextMsgHandler::AddChatMsg(char const * Str, int a2) {
   v5[6] = PlayerIcon;
   v5[4] = 0;
   v5[5] = 0;
-  v2 = j__strlen(Str);
+  v2 = strlen(Str);
   v5[8] = operator new[](v2 + 1);
   j__strcpy_0((char *)v5[8], Str);
   CTextMsgHandler::AddMsgToVector((char)v5);
@@ -214,7 +214,7 @@ bool __cdecl CTextMsgHandler::AddTextMsg(char const * Str, int a2, int a3, int a
   v8[6] = PlayerIcon;
   v8[4] = a3;
   v8[5] = a4;
-  v5 = j__strlen(Str);
+  v5 = strlen(Str);
   v8[8] = operator new[](v5 + 1);
   j__strcpy_0((char *)v8[8], Str);
   CTextMsgHandler::AddMsgToVector((char)v8);

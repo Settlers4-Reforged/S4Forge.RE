@@ -666,7 +666,7 @@ bool  CGameType::LoadMapData(std::wstring a2, bool a3, unsigned int a4, bool a5,
       }
       if ( v81 )
       {
-        v56 = j__strlen(Str);
+        v56 = strlen(Str);
         if ( v56 > 5 && !j__strcmp(&v95[v56 + 139], "_DESC") && CS4DefineNames::GetStringId(Str) >= 0 )
         {
           v45 = v56 - 5;

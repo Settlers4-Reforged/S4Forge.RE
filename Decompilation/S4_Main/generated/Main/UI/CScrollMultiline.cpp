@@ -97,7 +97,7 @@ unsigned char *  CScrollMultiline::GetWrapPointer(unsigned char * Str) {
   {
     if ( Count )
     {
-      v5 = &Str[j__strlen(Str)];
+      v5 = &Str[strlen(Str)];
       Ptr = j___mbsninc((const unsigned __int8 *)Str, Count);
       if ( j___mbsncmp(Ptr, "\n", 1u) && j___mbsncmp(Ptr, " ", 1u) )
       {
@@ -126,7 +126,7 @@ unsigned char *  CScrollMultiline::GetWrapPointer(unsigned char * Str) {
     }
     else
     {
-      v3 = &Str[j__strlen(Str)];
+      v3 = &Str[strlen(Str)];
       Pos = j___mbsninc((const unsigned __int8 *)Str, Counta);
       if ( !j___mbsncmp(Pos, "\n", 1u) || !j___mbsncmp(Pos, " ", 1u) )
         goto LABEL_20;

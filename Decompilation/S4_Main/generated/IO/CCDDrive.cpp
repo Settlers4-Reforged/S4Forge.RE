@@ -1,3 +1,4 @@
+#if FALSE
 #include "CCDDrive.h"
 
 // Definitions for class CCDDrive
@@ -6,16 +7,16 @@
 // Decompiled from CCDDrive *__thiscall CCDDrive::CCDDrive(CCDDrive *this)
  CCDDrive::CCDDrive(void) {
   
-  ICDDrive::ICDDrive(this);
-  *(_DWORD *)this = &CCDDrive::_vftable_;
-  *((_DWORD *)this + 1) = 0;
-  memset((char *)this + 8, 0, 9u);
+  ICDDrive::ICDDrive((ICDDrive *)this);
+  this->__vftable = (CCDDrive_vtbl *)&CCDDrive::_vftable_;
+  this->m_uDriveType = 0;
+  memset(this->m_aU2, 0, sizeof(this->m_aU2));
   return this;
 }
 
 
 // address=[0x147eb30]
-// Decompiled from int __thiscall CCDDrive::GetCDType(CCDDrive *this, char a2)
+// Decompiled from int __thiscall CCDDrive::GetCDType(CCDDrive *this, CHAR a2)
 enum T_S4_CDROM_TYPE  CCDDrive::GetCDType(char a2) {
   
   int v3; // [esp+8h] [ebp-80Ch]
@@ -42,21 +43,21 @@ enum T_S4_CDROM_TYPE  CCDDrive::GetCDType(char a2) {
 
 
 // address=[0x147ec40]
-// Decompiled from char __thiscall CCDDrive::GetCDDrive(_BYTE *this, int a2)
+// Decompiled from char __thiscall CCDDrive::GetCDDrive(CCDDrive *this, int a2)
 char  CCDDrive::GetCDDrive(enum T_S4_CDROM_TYPE a2) {
   
   int v3; // eax
   int v4; // eax
-  char v6; // [esp+5h] [ebp-3h]
+  BYTE v6; // [esp+5h] [ebp-3h]
   char v7; // [esp+6h] [ebp-2h]
   char i; // [esp+7h] [ebp-1h]
 
   if ( a2 <= 0 || a2 >= 9 )
     return 0;
   v7 = 0;
-  v6 = this[a2 + 8];
-  v3 = (**(int (__thiscall ***)(void *, _DWORD))this)(this, (unsigned __int8)v6);
-  if ( (unsigned __int8)CCDDrive::AreCDTypesMatching(v3) )
+  v6 = this->m_aU2[a2];
+  v3 = ((int (__thiscall *)(CCDDrive *, _DWORD))this->GetCDType)(this, v6);
+  if ( CCDDrive::AreCDTypesMatching(v3, a2) )
   {
     v7 = v6;
   }
@@ -64,10 +65,10 @@ char  CCDDrive::GetCDDrive(enum T_S4_CDROM_TYPE a2) {
   {
     for ( i = 65; i <= 90; ++i )
     {
-      if ( i != v6 )
+      if ( i != (char)v6 )
       {
-        v4 = (**(int (__thiscall ***)(void *, _DWORD))this)(this, (unsigned __int8)i);
-        if ( (unsigned __int8)CCDDrive::AreCDTypesMatching(v4) )
+        v4 = ((int (__thiscall *)(CCDDrive *, _DWORD))this->GetCDType)(this, (unsigned __int8)i);
+        if ( CCDDrive::AreCDTypesMatching(v4, a2) )
         {
           v7 = i;
           break;
@@ -75,13 +76,13 @@ char  CCDDrive::GetCDDrive(enum T_S4_CDROM_TYPE a2) {
       }
     }
   }
-  this[a2 + 8] = v7;
+  this->m_aU2[a2] = v7;
   return v7;
 }
 
 
 // address=[0x147ed00]
-// Decompiled from char __thiscall CCDDrive::GetCDPath(void *this, void *a2, LPCWSTR lpFileName, int a4)
+// Decompiled from bool __thiscall CCDDrive::GetCDPath(CCDDrive *this, void *a2, LPCWSTR lpFileName, int a4)
 bool  CCDDrive::GetCDPath(std::wstring & a2, wchar_t const * lpFileName, int a4) {
   
   int i; // [esp+0h] [ebp-1114h]
@@ -97,9 +98,9 @@ bool  CCDDrive::GetCDPath(std::wstring & a2, wchar_t const * lpFileName, int a4)
   if ( (a4 & 0x200000) != 0 )
     a4 |= 0x10000u;
   if ( !lpFileName )
-    lpFileName = (LPCWSTR)&unk_36BB364;
+    lpFileName = (LPCWSTR)&word_36BB364;
   v9 = 0;
-  if ( (a4 & 1) != 0 && (unsigned __int8)CCDDrive::FindFile(lpFileName) )
+  if ( (a4 & 1) != 0 && CCDDrive::FindFile(lpFileName) )
     v9 = 64;
   if ( !v9 )
   {
@@ -109,7 +110,7 @@ bool  CCDDrive::GetCDPath(std::wstring & a2, wchar_t const * lpFileName, int a4)
       memset(v12, 0, sizeof(v12));
       for ( i = 1; i < 9; ++i )
       {
-        v8 = (*(int (__thiscall **)(void *, int))(*(_DWORD *)this + 4))(this, i);
+        v8 = this->GetCDDrive(this, i);
         if ( v8 )
         {
           if ( !v12[v8] )
@@ -117,7 +118,7 @@ bool  CCDDrive::GetCDPath(std::wstring & a2, wchar_t const * lpFileName, int a4)
             v12[v8] = 1;
             _wsprintfW(Source, L"%c:\\%s\\%s", v8, L"S4", lpFileName);
             BBSupportTracePrint(1, Source);
-            if ( (unsigned __int8)CCDDrive::FindFile(Source) )
+            if ( CCDDrive::FindFile(Source) )
             {
               v9 = v8;
               break;
@@ -128,7 +129,7 @@ bool  CCDDrive::GetCDPath(std::wstring & a2, wchar_t const * lpFileName, int a4)
     }
     else if ( (a4 & 2) != 0 )
     {
-      v9 = (*(int (__thiscall **)(void *, int))(*(_DWORD *)this + 4))(this, 1);
+      v9 = this->GetCDDrive(this, 1);
     }
     else
     {
@@ -136,7 +137,7 @@ bool  CCDDrive::GetCDPath(std::wstring & a2, wchar_t const * lpFileName, int a4)
       {
         if ( (a4 & (1 << j)) != 0 )
         {
-          v9 = (*(int (__thiscall **)(void *, int))(*(_DWORD *)this + 4))(this, j);
+          v9 = this->GetCDDrive(this, j);
           if ( v9 )
             break;
         }
@@ -192,17 +193,17 @@ bool __cdecl CCDDrive::FindFile(wchar_t const * lpFileName) {
 
 
 // address=[0x147eab0]
-// Decompiled from UINT __thiscall CCDDrive::GetDriveTypeA(CCDDrive *this, CHAR a2)
-unsigned int  CCDDrive::GetDriveTypeA(char a2) {
+// Decompiled from UINT __thiscall CCDDrive::GetDriveTypeA(CCDDrive *this, CHAR _cDrive)
+unsigned int  CCDDrive::GetDriveTypeA(char _cDrive) {
   
   CHAR RootPathName[4]; // [esp+8h] [ebp-Ch] BYREF
   int v4; // [esp+Ch] [ebp-8h]
 
-  if ( !*((_DWORD *)this + 1) )
-    *((_DWORD *)this + 1) = CCDDrive::DriveTypeExCheck(this);
-  *(_DWORD *)RootPathName = (char *)&dword_589680[59632] + 3;
+  if ( !this->m_uDriveType )
+    this->m_uDriveType = CCDDrive::DriveTypeExCheck(this);
+  strcpy(RootPathName, "C:\\");
   v4 = 0;
-  RootPathName[0] = a2;
+  RootPathName[0] = _cDrive;
   return GetDriveTypeA(RootPathName);
 }
 
@@ -236,3 +237,4 @@ int  CCDDrive::DriveTypeExCheck(void) {
 }
 
 
+#endif // Already implemented

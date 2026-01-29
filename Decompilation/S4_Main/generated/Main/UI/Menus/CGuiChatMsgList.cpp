@@ -20,7 +20,7 @@ bool  CGuiChatMsgList::AddListItem(char const * Str) {
   
   if ( this[10031] >= 200 )
     CGuiChatMsgList::RemoveListItem((CGuiChatMsgList *)this, 0);
-  if ( j__strlen(Str) > 0xC8 )
+  if ( strlen(Str) > 0xC8 )
     return 0;
   j__strcpy_0((char *)&this[50 * this[10031]++ + 30], Str);
   return 1;
