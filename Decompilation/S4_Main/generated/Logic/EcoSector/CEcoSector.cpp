@@ -2136,36 +2136,28 @@ void  CEcoSector::RecruiteWorker(void) {
 
 
 // address=[0x142d120]
-// Decompiled from int __thiscall CEcoSector::FillGoodDistribution(CEcoSector *this, struct CGoodDistributionInfo *a2)
+// Decompiled from void __thiscall CEcoSector::FillGoodDistribution(CEcoSector *this, struct CGoodDistributionInfo *a2)
 void  CEcoSector::FillGoodDistribution(class CGoodDistributionInfo * a2) {
   
-  int result; // eax
-  int v4; // [esp+8h] [ebp-Ch]
+  signed int NumberOfSupplyBuildings; // [esp+8h] [ebp-Ch]
   int sum; // [esp+Ch] [ebp-8h]
-  int i; // [esp+10h] [ebp-4h]
+  signed int i; // [esp+10h] [ebp-4h]
 
   if ( !a2 && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 2844, "_pInfoExchange!=NULL") == 1 )
     __debugbreak();
-  result = 0;
-  if ( !a2 )
-    return result;
-  result = CBuildingSupplyPriority::GetNumberOfSupplyBuildings(
-             (char *)this + 556,
-             *((_DWORD *)a2 + 15),
-             (char *)a2 + 16);
-  v4 = result;
-  *((_DWORD *)a2 + 2) = result;
-  sum = 0;
-  for ( i = 0; i < v4; ++i )
+  if ( a2 )
   {
-    result = i;
-    sum += *((_DWORD *)a2 + 2 * i + 5);
+    NumberOfSupplyBuildings = CBuildingSupplyPriority::GetNumberOfSupplyBuildings(
+                                (char *)this + 556,
+                                a2->m_uU5,
+                                (int)a2->m_aSupplyPriorities);
+    a2->m_uSupplyBuildings = NumberOfSupplyBuildings;
+    sum = 0;
+    for ( i = 0; i < NumberOfSupplyBuildings; ++i )
+      sum += a2->m_aSupplyPriorities[i].m_uPriority;
+    if ( sum != 100 && BBSupportDbgReportF(0, "Logic\\EcoSector.cpp", 2860, "sum!=100") == 1 )
+      __debugbreak();
   }
-  if ( sum == 100 )
-    return result;
-  if ( BBSupportDbgReportF(0, "Logic\\EcoSector.cpp", 2860, "sum!=100") == 1 )
-    __debugbreak();
-  return 0;
 }
 
 

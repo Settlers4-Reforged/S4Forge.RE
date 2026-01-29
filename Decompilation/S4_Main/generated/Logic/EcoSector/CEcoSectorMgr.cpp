@@ -1117,87 +1117,83 @@ void  CEcoSectorMgr::RecruiteWorker(void) {
 
 
 // address=[0x1443530]
-// Decompiled from unsigned int __cdecl CEcoSectorMgr::FillGoodAmount(void **a1, unsigned __int8 a2, char a3)
+// Decompiled from void __cdecl CEcoSectorMgr::FillGoodAmount(CGoodsStatisticInfo *a1, bool a2, bool a3)
 void __cdecl CEcoSectorMgr::FillGoodAmount(class CInfoExchange * a1, bool a2, bool a3) {
   
-  unsigned int result; // eax
-  CEvn_Event *v4; // [esp+4h] [ebp-50h]
+  CEvn_Event *v3; // [esp+4h] [ebp-50h]
   int LocalPlayerId; // [esp+10h] [ebp-44h]
-  unsigned int v6; // [esp+14h] [ebp-40h]
+  unsigned int v5; // [esp+14h] [ebp-40h]
   int LocalPlayerEcoSectorPtrAtCenter; // [esp+18h] [ebp-3Ch]
   int j; // [esp+1Ch] [ebp-38h]
   int i; // [esp+20h] [ebp-34h]
   int k; // [esp+24h] [ebp-30h]
-  unsigned int v11; // [esp+28h] [ebp-2Ch]
-  CEvn_Event v12; // [esp+2Ch] [ebp-28h] BYREF
-  int v13; // [esp+50h] [ebp-4h]
+  CEvn_Event v11; // [esp+2Ch] [ebp-28h] BYREF
+  int v12; // [esp+50h] [ebp-4h]
 
   if ( !a1 && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 1676, "_pInfoExchange != 0") == 1 )
     __debugbreak();
-  result = j____RTDynamicCast(
-             a1,
-             0,
-             &CInfoExchange__RTTI_Type_Descriptor_,
-             &CGoodsStatisticInfo__RTTI_Type_Descriptor_,
-             0);
-  v11 = result;
-  if ( !result )
+  a1 = (CGoodsStatisticInfo *)j____RTDynamicCast(
+                                (void **)&a1->__vftable,
+                                0,
+                                &CInfoExchange__RTTI_Type_Descriptor_,
+                                &CGoodsStatisticInfo__RTTI_Type_Descriptor_,
+                                0);
+  if ( !a1 && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 1680, "pMenu != 0") == 1 )
+    __debugbreak();
+  if ( a1 )
   {
-    result = BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 1680, "pMenu != 0");
-    if ( result == 1 )
-      __debugbreak();
-  }
-  if ( !v11 )
-    return result;
-  *(_BYTE *)(v11 + 8) = a3;
-  if ( a3 )
-  {
-    LocalPlayerEcoSectorPtrAtCenter = CEcoSectorMgr::GetLocalPlayerEcoSectorPtrAtCenter();
-    if ( LocalPlayerEcoSectorPtrAtCenter )
+    a1->m_bOverEcoSector = a3;
+    if ( a3 )
     {
-      for ( i = 1; i < 43; ++i )
+      LocalPlayerEcoSectorPtrAtCenter = CEcoSectorMgr::GetLocalPlayerEcoSectorPtrAtCenter();
+      if ( LocalPlayerEcoSectorPtrAtCenter )
       {
-        *(_DWORD *)(v11 + 8 * i + 4) = i;
-        *(_DWORD *)(v11 + 8 * i + 8) = CEcoSector::GetNumberOfGoods(LocalPlayerEcoSectorPtrAtCenter, i, 2);
+        for ( i = 1; i < 43; ++i )
+        {
+          *(&a1->m_iUnknown + 2 * i) = i;
+          *((_DWORD *)&a1->m_bOverEcoSector + 2 * i) = CEcoSector::GetNumberOfGoods(
+                                                         LocalPlayerEcoSectorPtrAtCenter,
+                                                         i,
+                                                         2);
+        }
+      }
+      else
+      {
+        for ( j = 1; j < 43; ++j )
+        {
+          *(&a1->m_iUnknown + 2 * j) = j;
+          *((_DWORD *)&a1->m_bOverEcoSector + 2 * j) = 0;
+        }
       }
     }
     else
     {
-      for ( j = 1; j < 43; ++j )
+      LocalPlayerId = CPlayerManager::GetLocalPlayerId();
+      for ( k = 1; k < 43; ++k )
       {
-        *(_DWORD *)(v11 + 8 * j + 4) = j;
-        *(_DWORD *)(v11 + 8 * j + 8) = 0;
+        *(&a1->m_iUnknown + 2 * k) = k;
+        *((_DWORD *)&a1->m_bOverEcoSector + 2 * k) = CStatistic::GetGood(
+                                                       (CStatistic *)&g_cStatistic,
+                                                       LocalPlayerId,
+                                                       (S4_GOOD_ENUM)k);
       }
     }
-  }
-  else
-  {
-    LocalPlayerId = CPlayerManager::GetLocalPlayerId();
-    for ( k = 1; k < 43; ++k )
+    a1->m_iUnknown = 32;
+    if ( a2 )
+      v5 = 604;
+    else
+      v5 = 602;
+    if ( !g_pEvnEngine && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 1725, "g_pEvnEngine != NULL") == 1 )
+      __debugbreak();
+    if ( g_pEvnEngine )
     {
-      *(_DWORD *)(v11 + 8 * k + 4) = k;
-      *(_DWORD *)(v11 + 8 * k + 8) = CStatistic::GetGood((CStatistic *)&g_cStatistic, LocalPlayerId, k);
+      v3 = CEvn_Event::CEvn_Event(&v11, v5, 0, (unsigned int)a1, 0);
+      v12 = 0;
+      IEventEngine::SendAMessage(g_pEvnEngine, v3);
+      v12 = -1;
+      CEvn_Event::~CEvn_Event(&v11);
     }
   }
-  *(_DWORD *)(v11 + 4) = 32;
-  result = a2;
-  if ( a2 )
-    v6 = 604;
-  else
-    v6 = 602;
-  if ( !g_pEvnEngine )
-  {
-    result = BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 1725, "g_pEvnEngine != NULL");
-    if ( result == 1 )
-      __debugbreak();
-  }
-  if ( !g_pEvnEngine )
-    return result;
-  v4 = CEvn_Event::CEvn_Event(&v12, v6, 0, v11, 0);
-  v13 = 0;
-  IEventEngine::SendAMessage(g_pEvnEngine, v4);
-  v13 = -1;
-  return (unsigned int)CEvn_Event::~CEvn_Event(&v12);
 }
 
 
@@ -1294,50 +1290,50 @@ void __cdecl CEcoSectorMgr::ChangeTransportPrio(enum PILE_TYPES a1, int a2, int 
 
 
 // address=[0x1443a90]
-// Decompiled from void __cdecl CEcoSectorMgr::FillGoodDistribution(struct CInfoExchange *a1)
-void __cdecl CEcoSectorMgr::FillGoodDistribution(class CInfoExchange * a1, bool a2, bool a3) {
+// Decompiled from void __cdecl CEcoSectorMgr::FillGoodDistribution(struct CGoodDistributionInfo *_pInfoExchange, bool a2, bool a3)
+void __cdecl CEcoSectorMgr::FillGoodDistribution(class CInfoExchange * _pInfoExchange, bool a2, bool a3) {
   
   int LocalPlayerId; // [esp+8h] [ebp-38h]
-  int v2; // [esp+Ch] [ebp-34h]
+  DWORD ecoSectorId; // [esp+Ch] [ebp-34h]
   CEcoSector *LocalPlayerEcoSectorPtrAtCenter; // [esp+10h] [ebp-30h]
-  _DWORD v4[6]; // [esp+18h] [ebp-28h] BYREF
-  int v5; // [esp+3Ch] [ebp-4h]
+  CEvn_Event v6; // [esp+18h] [ebp-28h] BYREF
+  int exceptionBlock; // [esp+3Ch] [ebp-4h]
 
-  if ( !a1 && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 1870, "_pInfoExchange != NULL") == 1 )
+  if ( !_pInfoExchange && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 1870, "_pInfoExchange != NULL") == 1 )
     __debugbreak();
-  if ( a1 )
+  if ( _pInfoExchange )
   {
-    v2 = -1;
+    ecoSectorId = -1;
     LocalPlayerId = CPlayerManager::GetLocalPlayerId();
-    *((_DWORD *)a1 + 1) = 34;
-    *((_DWORD *)a1 + 3) = CPlayerManager::Race(LocalPlayerId);
+    _pInfoExchange->m_iUnknown = 34;
+    _pInfoExchange->m_uPlayerRace = CPlayerManager::Race(LocalPlayerId);
     LocalPlayerEcoSectorPtrAtCenter = (CEcoSector *)CEcoSectorMgr::GetLocalPlayerEcoSectorPtrAtCenter();
     if ( LocalPlayerEcoSectorPtrAtCenter )
     {
-      v2 = CEcoSector::EcoSectorId(LocalPlayerEcoSectorPtrAtCenter);
-      if ( v2 != *((_DWORD *)a1 + 16) )
+      ecoSectorId = CEcoSector::EcoSectorId(LocalPlayerEcoSectorPtrAtCenter);
+      if ( ecoSectorId != _pInfoExchange->m_uEcoSectorId )
       {
         if ( CEcoSector::Owner(LocalPlayerEcoSectorPtrAtCenter) == LocalPlayerId )
-          CEcoSector::FillGoodDistribution(LocalPlayerEcoSectorPtrAtCenter, a1);
+          CEcoSector::FillGoodDistribution(LocalPlayerEcoSectorPtrAtCenter, _pInfoExchange);
         else
-          *((_DWORD *)a1 + 2) = 0;
+          _pInfoExchange->m_uSupplyBuildings = 0;
       }
     }
     else
     {
-      *((_DWORD *)a1 + 2) = 0;
+      _pInfoExchange->m_uSupplyBuildings = 0;
     }
-    if ( *((_DWORD *)a1 + 16) != v2 )
+    if ( _pInfoExchange->m_uEcoSectorId != ecoSectorId )
     {
-      *((_DWORD *)a1 + 16) = v2;
-      CEvn_Event::CEvn_Event((CEvn_Event *)v4, 0x25Cu, 0, (unsigned int)a1, 0);
-      v5 = 0;
+      _pInfoExchange->m_uEcoSectorId = ecoSectorId;
+      CEvn_Event::CEvn_Event(&v6, 0x25Cu, 0, (unsigned int)_pInfoExchange, 0);
+      exceptionBlock = 0;
       if ( !g_pEvnEngine && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 1911, "g_pEvnEngine != NULL") == 1 )
         __debugbreak();
       if ( g_pEvnEngine )
-        IEventEngine::SendAMessage(g_pEvnEngine, v4);
-      v5 = -1;
-      CEvn_Event::~CEvn_Event(v4);
+        IEventEngine::SendAMessage(g_pEvnEngine, &v6);
+      exceptionBlock = -1;
+      CEvn_Event::~CEvn_Event(&v6);
     }
   }
 }

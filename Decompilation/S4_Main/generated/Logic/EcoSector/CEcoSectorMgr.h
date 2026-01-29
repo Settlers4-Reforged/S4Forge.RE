@@ -105,7 +105,7 @@ public:
     static void __cdecl ChangeTransportPrio(enum PILE_TYPES a1, int a2, int a3);
 
     // address=[0x1443a90]
-    static void __cdecl FillGoodDistribution(class CInfoExchange * a1, bool a2, bool a3);
+    static void __cdecl FillGoodDistribution(class CInfoExchange * _pInfoExchange, bool a2, bool a3);
 
     // address=[0x1443c10]
     static void __cdecl ChangeGoodDistributionPrio(enum PILE_TYPES a1, enum BUILDING_TYPES a2, int a3, signed char a4);

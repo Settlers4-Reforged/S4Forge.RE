@@ -1,3 +1,4 @@
+#if FALSE
 #include "CFreeCarrierInfo.h"
 
 // Definitions for class CFreeCarrierInfo
@@ -16,7 +17,8 @@
 // Decompiled from int __thiscall CFreeCarrierInfo::Size(CFreeCarrierInfo *this)
 unsigned int  CFreeCarrierInfo::Size(void)const {
   
-  return 0x38;
+  return 56;
 }
 
 
+#endif // Already implemented

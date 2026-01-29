@@ -9,8 +9,8 @@
 #include "../Logic/Events/IEventEngine.h"
 #include "Logic/CInfoExchange.h"
 #include "Logic/CMagic.h"
-#include "Info/CGroupSideBarInfo.h"
-#include "Info/CMagicSpellSideBarInfo.h"
+#include "../Info/CGroupSideBarInfo.h"
+#include "../Info/CMagicSpellSideBarInfo.h"
 #include "../LoadSave/IS4Chunk.h"
 #include "CMapObjectMgr.h"
 #include "IEntity.h"
@@ -495,21 +495,21 @@ void CGroupMgr::FillGroupSideBarEx(class CInfoExchange *_pInfoExchange, bool a3,
         case 4:
         case 5:
         case 6:
-          pGroupSideBarInfo->m_iUnknown[i] = 1;
+          pGroupSideBarInfo->m_aGroupLevel[i - 1] = 1;
           break;
         case 7:
-          pGroupSideBarInfo->m_iUnknown[i] = 2;
+          pGroupSideBarInfo->m_aGroupLevel[i - 1] = 2;
           break;
         case 10:
         case 11:
-          pGroupSideBarInfo->m_iUnknown[i] = 3;
+          pGroupSideBarInfo->m_aGroupLevel[i - 1] = 3;
           break;
         default:
           continue;
         }
       }
     }
-    pGroupSideBarInfo->m_iUnknown[0] = 25;
+    pGroupSideBarInfo->m_iUnknown = 25;
     if (a3)
       v8 = 606;
     else
@@ -555,13 +555,13 @@ void CGroupMgr::FillMagicSideBarEx(class CInfoExchange *_pInfoExchange, bool _bS
       if (CurrentManaAmount <= 0)
         v7 = 0;
       else
-        v7 = 100 * CurrentSpellCategoryCost / CurrentManaAmount;
-      *(_DWORD *)(pMagicSpellSideBarInfo + 16 * i + 12) = v4;
-      *(_DWORD *)(pMagicSpellSideBarInfo + 16 * i + 16) = v7;
-      *(_DWORD *)(pMagicSpellSideBarInfo + 16 * i + 20) = CurrentSpellCategoryCost;
-      *(_DWORD *)(pMagicSpellSideBarInfo + 16 * i + 8) = i;
+        v7 = (int)(100 * CurrentSpellCategoryCost) / CurrentManaAmount;
+      pMagicSpellSideBarInfo->m_aSpells[i].m_uPossibleNumberOfCasts = v4;
+      pMagicSpellSideBarInfo->m_aSpells[i].m_uAvailableCastsPercent = v7;
+      pMagicSpellSideBarInfo->m_aSpells[i].m_uCost = CurrentSpellCategoryCost;
+      pMagicSpellSideBarInfo->m_aSpells[i].m_uSpellId = i;
     }
-    *(_DWORD *)(pMagicSpellSideBarInfo + 4) = 26;
+    pMagicSpellSideBarInfo->m_iUnknown = 26;
     if (_bSpecialSidebar)
       v5 = 606;
     else

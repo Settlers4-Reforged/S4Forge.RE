@@ -11,6 +11,11 @@ public:
     // address=[0x1454c10]
     virtual unsigned int  Size(void)const;
 
+    // Type information members
+public:
+    bool m_bOverEcoSector;
+    CGoodsStatisticInfo::Statistic[43] m_aStatistics;
+
 };
 
 

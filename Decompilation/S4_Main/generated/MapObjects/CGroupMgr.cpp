@@ -529,18 +529,18 @@ void  CGroupMgr::FillGroupSideBarEx(class CInfoExchange * _pInfoExchange, bool a
   int v9; // [esp+24h] [ebp-40h]
   IEntity *v10; // [esp+28h] [ebp-3Ch]
   int i; // [esp+34h] [ebp-30h]
-  CInfoExchange *pGroupSideBarInfo; // [esp+38h] [ebp-2Ch]
+  CGroupSideBarInfo *pGroupSideBarInfo; // [esp+38h] [ebp-2Ch]
   CEvn_Event v13; // [esp+3Ch] [ebp-28h] BYREF
   int v14; // [esp+60h] [ebp-4h]
 
   if ( !_pInfoExchange && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 494, "_pInfoExchange != 0") == 1 )
     __debugbreak();
-  pGroupSideBarInfo = (CInfoExchange *)j____RTDynamicCast(
-                                         (void **)&_pInfoExchange->__vftable,
-                                         0,
-                                         &CInfoExchange__RTTI_Type_Descriptor_,
-                                         &CGroupSideBarInfo__RTTI_Type_Descriptor_,
-                                         0);
+  pGroupSideBarInfo = (CGroupSideBarInfo *)j____RTDynamicCast(
+                                             (void **)&_pInfoExchange->__vftable,
+                                             0,
+                                             &CInfoExchange__RTTI_Type_Descriptor_,
+                                             &CGroupSideBarInfo__RTTI_Type_Descriptor_,
+                                             0);
   if ( !pGroupSideBarInfo && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 498, "pGroupSideBar != 0") == 1 )
     __debugbreak();
   if ( pGroupSideBarInfo )
@@ -564,21 +564,21 @@ void  CGroupMgr::FillGroupSideBarEx(class CInfoExchange * _pInfoExchange, bool a
           case 4:
           case 5:
           case 6:
-            pGroupSideBarInfo->m_iUnknown[i] = 1;
+            *(&pGroupSideBarInfo->m_iUnknown + i) = 1;// Stupid loops starts at 1.. Thanks compiler
             break;
           case 7:
-            pGroupSideBarInfo->m_iUnknown[i] = 2;
+            *(&pGroupSideBarInfo->m_iUnknown + i) = 2;
             break;
           case 10:
           case 11:
-            pGroupSideBarInfo->m_iUnknown[i] = 3;
+            *(&pGroupSideBarInfo->m_iUnknown + i) = 3;
             break;
           default:
             continue;
         }
       }
     }
-    pGroupSideBarInfo->m_iUnknown[0] = 25;
+    pGroupSideBarInfo->m_iUnknown = 25;
     if ( a3 )
       v8 = 606;
     else
@@ -602,30 +602,30 @@ void  CGroupMgr::FillGroupSideBarEx(class CInfoExchange * _pInfoExchange, bool a
 void  CGroupMgr::FillMagicSideBarEx(class CInfoExchange * _pInfoExchange, bool _bSpecialSidebar, int unused) {
   
   CEvn_Event *v3; // [esp+8h] [ebp-58h]
-  int v4; // [esp+18h] [ebp-48h]
+  DWORD v4; // [esp+18h] [ebp-48h]
   unsigned int v5; // [esp+1Ch] [ebp-44h]
-  int CurrentSpellCategoryCost; // [esp+20h] [ebp-40h]
-  int v7; // [esp+24h] [ebp-3Ch]
+  DWORD CurrentSpellCategoryCost; // [esp+20h] [ebp-40h]
+  DWORD v7; // [esp+24h] [ebp-3Ch]
   int CurrentManaAmount; // [esp+28h] [ebp-38h]
   int LocalPlayerId; // [esp+2Ch] [ebp-34h]
-  unsigned int pMagicSpellSideBarInfo; // [esp+30h] [ebp-30h]
+  CMagicSpellSideBarInfo *pMagicSpellSideBarInfo; // [esp+30h] [ebp-30h]
   int i; // [esp+34h] [ebp-2Ch]
   CEvn_Event v12; // [esp+38h] [ebp-28h] BYREF
   int v13; // [esp+5Ch] [ebp-4h]
 
   if ( !_pInfoExchange && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 587, "_pInfoExchange != 0") == 1 )
     __debugbreak();
-  pMagicSpellSideBarInfo = j____RTDynamicCast(
-                             (void **)&_pInfoExchange->__vftable,
-                             0,
-                             &CInfoExchange__RTTI_Type_Descriptor_,
-                             &CMagicSpellSideBarInfo__RTTI_Type_Descriptor_,
-                             0);
+  pMagicSpellSideBarInfo = (CMagicSpellSideBarInfo *)j____RTDynamicCast(
+                                                       (void **)&_pInfoExchange->__vftable,
+                                                       0,
+                                                       &CInfoExchange__RTTI_Type_Descriptor_,
+                                                       &CMagicSpellSideBarInfo__RTTI_Type_Descriptor_,
+                                                       0);
   if ( !pMagicSpellSideBarInfo && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 591, "pMagicSpellSideBar != 0") == 1 )
     __debugbreak();
   if ( pMagicSpellSideBarInfo )
   {
-    (**(void (__thiscall ***)(unsigned int))pMagicSpellSideBarInfo)(pMagicSpellSideBarInfo);
+    pMagicSpellSideBarInfo->Clear(pMagicSpellSideBarInfo);
     LocalPlayerId = CPlayerManager::GetLocalPlayerId();
     for ( i = 0; i < 8; ++i )
     {
@@ -635,13 +635,13 @@ void  CGroupMgr::FillMagicSideBarEx(class CInfoExchange * _pInfoExchange, bool _
       if ( CurrentManaAmount <= 0 )
         v7 = 0;
       else
-        v7 = 100 * CurrentSpellCategoryCost / CurrentManaAmount;
-      *(_DWORD *)(pMagicSpellSideBarInfo + 16 * i + 12) = v4;
-      *(_DWORD *)(pMagicSpellSideBarInfo + 16 * i + 16) = v7;
-      *(_DWORD *)(pMagicSpellSideBarInfo + 16 * i + 20) = CurrentSpellCategoryCost;
-      *(_DWORD *)(pMagicSpellSideBarInfo + 16 * i + 8) = i;
+        v7 = (int)(100 * CurrentSpellCategoryCost) / CurrentManaAmount;
+      pMagicSpellSideBarInfo->m_aSpells[i].m_uPossibleNumberOfCasts = v4;
+      pMagicSpellSideBarInfo->m_aSpells[i].m_uAvailableCastsPercent = v7;
+      pMagicSpellSideBarInfo->m_aSpells[i].m_uCost = CurrentSpellCategoryCost;
+      pMagicSpellSideBarInfo->m_aSpells[i].m_uSpellId = i;
     }
-    *(_DWORD *)(pMagicSpellSideBarInfo + 4) = 26;
+    pMagicSpellSideBarInfo->m_iUnknown = 26;
     if ( _bSpecialSidebar )
       v5 = 606;
     else
@@ -650,7 +650,7 @@ void  CGroupMgr::FillMagicSideBarEx(class CInfoExchange * _pInfoExchange, bool _
       __debugbreak();
     if ( g_pEvnEngine )
     {
-      v3 = CEvn_Event::CEvn_Event(&v12, v5, 0, pMagicSpellSideBarInfo, 0);
+      v3 = CEvn_Event::CEvn_Event(&v12, v5, 0, (unsigned int)pMagicSpellSideBarInfo, 0);
       v13 = 0;
       IEventEngine::SendAMessage(g_pEvnEngine, v3);
       v13 = -1;

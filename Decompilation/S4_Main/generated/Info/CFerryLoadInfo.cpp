@@ -1,3 +1,4 @@
+#if FALSE
 #include "CFerryLoadInfo.h"
 
 // Definitions for class CFerryLoadInfo
@@ -16,7 +17,8 @@
 // Decompiled from int __thiscall CFerryLoadInfo::Size(CFerryLoadInfo *this)
 unsigned int  CFerryLoadInfo::Size(void)const {
   
-  return 0x38;
+  return 56;
 }
 
 
+#endif // Already implemented

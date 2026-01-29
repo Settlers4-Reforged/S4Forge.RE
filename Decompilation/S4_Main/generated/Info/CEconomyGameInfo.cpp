@@ -1,3 +1,4 @@
+#if FALSE
 #include "CEconomyGameInfo.h"
 
 // Definitions for class CEconomyGameInfo
@@ -20,3 +21,4 @@ unsigned int  CEconomyGameInfo::Size(void)const {
 }
 
 
+#endif // Already implemented

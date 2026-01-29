@@ -5031,22 +5031,24 @@ LABEL_9:
 
 
 // address=[0x137b4a0]
-// Decompiled from char UpdateGuiDlgAvailableGoods()
+// Decompiled from void UpdateGuiDlgAvailableGoods()
 void __cdecl UpdateGuiDlgAvailableGoods(void) {
   
-  char result; // al
   int i; // [esp+0h] [ebp-40h]
   CHAR Str[52]; // [esp+8h] [ebp-38h] BYREF
 
-  byte_3ECF1D0 = 1;
-  result = IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 27, 323, byte_3F1EC08 == 0);
+  s_bUpdatingAvailableGoodsGui = 1;
+  IGuiEngine::SelectControl(g_pGUIEngine, 27, 323, !g_cGoodsStatisticInfo.m_bOverEcoSector);
   for ( i = 0; i < 43; ++i )
   {
-    _wsprintfA(Str, "%u", dword_3F1EC10[2 * i]);
-    result = IGuiEngine::SetText((void *)g_pGUIEngine, 27, dword_3ECF1D8[dword_3F1EC0C[2 * i]], Str);
+    _wsprintfA(Str, "%u", g_cGoodsStatisticInfo.m_aStatistics[i].m_uGoodCount);
+    IGuiEngine::SetText(
+      g_pGUIEngine,
+      27,
+      auAvailableGoodsTextGuiIds[g_cGoodsStatisticInfo.m_aStatistics[i].m_uGoodId],
+      Str);
   }
-  byte_3ECF1D0 = 0;
-  return result;
+  s_bUpdatingAvailableGoodsGui = 0;
 }
 
 
@@ -5058,49 +5060,49 @@ void __cdecl InitGuiDlgAvailableGoods(void) {
 
   if ( !g_pStringEngine )
     return result;
-  dword_3ECF1D8[22] = 293;
-  dword_3ECF1D8[7] = 294;
-  dword_3ECF1D8[32] = 295;
-  dword_3ECF1D8[10] = 296;
-  dword_3ECF1D8[21] = 297;
-  dword_3ECF1D8[20] = 298;
-  dword_3ECF1D8[15] = 299;
-  dword_3ECF1D8[14] = 300;
-  dword_3ECF1D8[4] = 301;
-  dword_3ECF1D8[18] = 302;
-  dword_3ECF1D8[25] = 303;
-  dword_3ECF1D8[27] = 304;
-  dword_3ECF1D8[29] = 305;
-  dword_3ECF1D8[31] = 306;
-  dword_3ECF1D8[28] = 307;
-  dword_3ECF1D8[2] = 308;
-  dword_3ECF1D8[3] = 309;
-  dword_3ECF1D8[5] = 2893;
-  dword_3ECF1D8[34] = 310;
-  dword_3ECF1D8[8] = 311;
-  dword_3ECF1D8[6] = 312;
-  dword_3ECF1D8[17] = 313;
-  dword_3ECF1D8[33] = 314;
-  dword_3ECF1D8[1] = 315;
-  dword_3ECF1D8[9] = 316;
-  dword_3ECF1D8[11] = 317;
-  dword_3ECF1D8[12] = 318;
-  dword_3ECF1D8[16] = 319;
-  dword_3ECF1D8[19] = 2894;
-  dword_3ECF1D8[23] = 2895;
-  dword_3ECF1D8[24] = 320;
-  dword_3ECF1D8[35] = 321;
-  dword_3ECF1D8[36] = 322;
-  dword_3ECF1D8[37] = 2028;
-  dword_3ECF1D8[13] = 325;
-  dword_3ECF1D8[26] = 327;
-  dword_3ECF1D8[30] = 2030;
-  dword_3ECF1D8[39] = 2032;
-  dword_3ECF1D8[40] = 2866;
-  dword_3ECF1D8[38] = 2870;
+  auAvailableGoodsTextGuiIds[22] = 293;
+  auAvailableGoodsTextGuiIds[7] = 294;
+  auAvailableGoodsTextGuiIds[32] = 295;
+  auAvailableGoodsTextGuiIds[10] = 296;
+  auAvailableGoodsTextGuiIds[21] = 297;
+  auAvailableGoodsTextGuiIds[20] = 298;
+  auAvailableGoodsTextGuiIds[15] = 299;
+  auAvailableGoodsTextGuiIds[14] = 300;
+  auAvailableGoodsTextGuiIds[4] = 301;
+  auAvailableGoodsTextGuiIds[18] = 302;
+  auAvailableGoodsTextGuiIds[25] = 303;
+  auAvailableGoodsTextGuiIds[27] = 304;
+  auAvailableGoodsTextGuiIds[29] = 305;
+  auAvailableGoodsTextGuiIds[31] = 306;
+  auAvailableGoodsTextGuiIds[28] = 307;
+  auAvailableGoodsTextGuiIds[2] = 308;
+  auAvailableGoodsTextGuiIds[3] = 309;
+  auAvailableGoodsTextGuiIds[5] = 2893;
+  auAvailableGoodsTextGuiIds[34] = 310;
+  auAvailableGoodsTextGuiIds[8] = 311;
+  auAvailableGoodsTextGuiIds[6] = 312;
+  auAvailableGoodsTextGuiIds[17] = 313;
+  auAvailableGoodsTextGuiIds[33] = 314;
+  auAvailableGoodsTextGuiIds[1] = 315;
+  auAvailableGoodsTextGuiIds[9] = 316;
+  auAvailableGoodsTextGuiIds[11] = 317;
+  auAvailableGoodsTextGuiIds[12] = 318;
+  auAvailableGoodsTextGuiIds[16] = 319;
+  auAvailableGoodsTextGuiIds[19] = 2894;
+  auAvailableGoodsTextGuiIds[23] = 2895;
+  auAvailableGoodsTextGuiIds[24] = 320;
+  auAvailableGoodsTextGuiIds[35] = 321;
+  auAvailableGoodsTextGuiIds[36] = 322;
+  auAvailableGoodsTextGuiIds[37] = 2028;
+  auAvailableGoodsTextGuiIds[13] = 325;
+  auAvailableGoodsTextGuiIds[26] = 327;
+  auAvailableGoodsTextGuiIds[30] = 2030;
+  auAvailableGoodsTextGuiIds[39] = 2032;
+  auAvailableGoodsTextGuiIds[40] = 2866;
+  auAvailableGoodsTextGuiIds[38] = 2870;
   result = 164;
-  dword_3ECF1D8[41] = 2871;
-  dword_3ECF1D8[42] = 2872;
+  auAvailableGoodsTextGuiIds[41] = 2871;
+  auAvailableGoodsTextGuiIds[42] = 2872;
   return result;
 }
 
@@ -5113,8 +5115,8 @@ bool __cdecl GuiDlgAvailableGoodsProc(int a1, int a2, int a3) {
   char *v5; // eax
   CEvn_Logic *v6; // [esp+4h] [ebp-68h]
   CEvn_Logic *v7; // [esp+Ch] [ebp-60h]
-  _BYTE v8[32]; // [esp+1Ch] [ebp-50h] BYREF
-  _BYTE v9[32]; // [esp+3Ch] [ebp-30h] BYREF
+  CEvn_Logic v8; // [esp+1Ch] [ebp-50h] BYREF
+  CEvn_Logic v9; // [esp+3Ch] [ebp-30h] BYREF
   int v10; // [esp+68h] [ebp-4h]
 
   if ( !g_pEvnEngine )
@@ -5122,39 +5124,39 @@ bool __cdecl GuiDlgAvailableGoodsProc(int a1, int a2, int a3) {
   switch ( a1 )
   {
     case 0:
-      byte_3ECF1D0 = 0;
+      s_bUpdatingAvailableGoodsGui = 0;
       InitGuiDlgAvailableGoods();
       UpdateGuiDlgAvailableGoods();
       break;
     case 1:
-      if ( !byte_3ECF1D0 )
+      if ( !s_bUpdatingAvailableGoodsGui )
       {
         if ( (a2 & 0x10000) != 0 )
-          PlayGuiSound(1);
+          PlayGuiSound(1u);
         else
           PlayGuiSound(0);
       }
       break;
     case 3:
-      if ( !byte_3ECF1D0 && (unsigned __int16)a2 == 323 )
+      if ( !s_bUpdatingAvailableGoodsGui && (unsigned __int16)a2 == 323 )
       {
         if ( (a2 & 0x10000) != 0 )
         {
-          v7 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v9, 0x1B8u, 0, 1u, 0, 0, 0);
+          v7 = CEvn_Logic::CEvn_Logic(&v9, 0x1B8u, 0, 1u, 0, 0, 0);
           v10 = 0;
           IEventEngine::SendAMessage(g_pEvnEngine, v7);
           v10 = -1;
-          CEvn_Logic::~CEvn_Logic(v9);
+          CEvn_Logic::~CEvn_Logic(&v9);
         }
         else
         {
-          v6 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v8, 0x1B8u, 0, 0, 0, 0, 0);
+          v6 = CEvn_Logic::CEvn_Logic(&v8, 0x1B8u, 0, 0, 0, 0, 0);
           v10 = 1;
           IEventEngine::SendAMessage(g_pEvnEngine, v6);
           v10 = -1;
-          CEvn_Logic::~CEvn_Logic(v8);
+          CEvn_Logic::~CEvn_Logic(&v8);
         }
-        PlayGuiSound(2);
+        PlayGuiSound(2u);
       }
       break;
     case 8:
@@ -11147,14 +11149,14 @@ void __cdecl GetGoodSliderVals(void) {
   int i; // [esp+4h] [ebp-3Ch]
   CHAR Str[52]; // [esp+8h] [ebp-38h] BYREF
 
-  for ( i = 0; i < dword_3F1EE30; ++i )
+  for ( i = 0; i < g_cGoodDistributionInfo.m_uSupplyBuildings; ++i )
   {
-    SliderPosition = IGuiEngine::GetSliderPosition((IGuiEngine *)g_pGUIEngine, 26, dword_3D8844C[i]);
+    SliderPosition = IGuiEngine::GetSliderPosition(g_pGUIEngine, 26, auPrioritySliderIds[i]);
     if ( SliderPosition < 0 )
       SliderPosition = 0;
     dword_3ECF2C0[i] = SliderPosition;
     _wsprintfA(Str, "%u%%", SliderPosition);
-    IGuiEngine::SetText((void *)g_pGUIEngine, 26, dword_3D88438[i], Str);
+    IGuiEngine::SetText(g_pGUIEngine, 26, auPriotritySliderTextIds[i], Str);
   }
 }
 
@@ -11166,41 +11168,49 @@ void __cdecl UpdateGuiDlgGoodDistribution(void) {
   int GuiHouseButtonID; // eax
   char *GuiHouseString; // eax
   int i; // [esp+4h] [ebp-8h]
-  bool v3; // [esp+Bh] [ebp-1h]
+  bool bSupplyBuildingsVisible; // [esp+Bh] [ebp-1h]
 
   if ( g_pGUIEngine )
   {
-    v3 = dword_3F1EE30 > 0;
-    IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 26, 776, dword_3F1EE30 > 0);
-    IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 26, 777, v3);
-    IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 26, 2880, v3);
-    IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 26, 778, v3);
-    IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 26, 779, v3);
-    IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 26, 780, v3);
-    IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 26, 781, v3);
-    IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 26, 782, v3);
+    bSupplyBuildingsVisible = (signed int)g_cGoodDistributionInfo.m_uSupplyBuildings > 0;
+    IGuiEngine::EnableControl(g_pGUIEngine, 26, 776, (signed int)g_cGoodDistributionInfo.m_uSupplyBuildings > 0);
+    IGuiEngine::EnableControl(g_pGUIEngine, 26, 777, bSupplyBuildingsVisible);
+    IGuiEngine::EnableControl(g_pGUIEngine, 26, 2880, bSupplyBuildingsVisible);
+    IGuiEngine::EnableControl(g_pGUIEngine, 26, 778, bSupplyBuildingsVisible);
+    IGuiEngine::EnableControl(g_pGUIEngine, 26, 779, bSupplyBuildingsVisible);
+    IGuiEngine::EnableControl(g_pGUIEngine, 26, 780, bSupplyBuildingsVisible);
+    IGuiEngine::EnableControl(g_pGUIEngine, 26, 781, bSupplyBuildingsVisible);
+    IGuiEngine::EnableControl(g_pGUIEngine, 26, 782, bSupplyBuildingsVisible);
     for ( i = 0; i < 5; ++i )
     {
-      if ( i >= dword_3F1EE30 )
+      if ( i >= (int)g_cGoodDistributionInfo.m_uSupplyBuildings )
       {
-        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 26, dword_3D88474[i], 0);
-        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 26, dword_3D88438[i], 0);
-        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 26, dword_3D8844C[i], 0);
-        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 26, dword_3D88460[i], 0);
-        IGuiEngine::SetSliderPosition((IGuiEngine *)g_pGUIEngine, 26, dword_3D8844C[i], 0);
+        IGuiEngine::SetControlVisibility(g_pGUIEngine, 26, auPrioritySliderHouseIds[i], 0);
+        IGuiEngine::SetControlVisibility(g_pGUIEngine, 26, auPriotritySliderTextIds[i], 0);
+        IGuiEngine::SetControlVisibility(g_pGUIEngine, 26, auPrioritySliderIds[i], 0);
+        IGuiEngine::SetControlVisibility(g_pGUIEngine, 26, dword_3D88460[i], 0);
+        IGuiEngine::SetSliderPosition(g_pGUIEngine, 26, auPrioritySliderIds[i], 0);
       }
       else
       {
-        dword_3ECF2C0[i] = dword_3F1EE3C[2 * i];
-        GuiHouseButtonID = GetGuiHouseButtonID(dword_3F1EE34, dword_3F1EE38[2 * i]);
-        IGuiEngine::SetImages((void *)g_pGUIEngine, 26, dword_3D88474[i], GuiHouseButtonID, 0);
-        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 26, dword_3D88474[i], 1);
-        GuiHouseString = (char *)GetGuiHouseString(dword_3F1EE34, dword_3F1EE38[2 * i]);
-        IGuiEngine::SetText((void *)g_pGUIEngine, 26, dword_3D88438[i], GuiHouseString);
-        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 26, dword_3D88438[i], 1);
-        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 26, dword_3D88460[i], 1);
-        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 26, dword_3D8844C[i], 1);
-        IGuiEngine::SetSliderPosition((IGuiEngine *)g_pGUIEngine, 26, dword_3D8844C[i], dword_3F1EE3C[2 * i]);
+        dword_3ECF2C0[i] = g_cGoodDistributionInfo.m_aSupplyPriorities[i].m_uPriority;
+        GuiHouseButtonID = GetGuiHouseButtonID(
+                             g_cGoodDistributionInfo.m_uPlayerRace,
+                             g_cGoodDistributionInfo.m_aSupplyPriorities[i].m_uBuildingId);
+        IGuiEngine::SetImages(g_pGUIEngine, 26, auPrioritySliderHouseIds[i], GuiHouseButtonID, 0);
+        IGuiEngine::SetControlVisibility(g_pGUIEngine, 26, auPrioritySliderHouseIds[i], 1);
+        GuiHouseString = GetGuiHouseString(
+                           g_cGoodDistributionInfo.m_uPlayerRace,
+                           g_cGoodDistributionInfo.m_aSupplyPriorities[i].m_uBuildingId);
+        IGuiEngine::SetText(g_pGUIEngine, 26, auPriotritySliderTextIds[i], GuiHouseString);
+        IGuiEngine::SetControlVisibility(g_pGUIEngine, 26, auPriotritySliderTextIds[i], 1);
+        IGuiEngine::SetControlVisibility(g_pGUIEngine, 26, dword_3D88460[i], 1);
+        IGuiEngine::SetControlVisibility(g_pGUIEngine, 26, auPrioritySliderIds[i], 1);
+        IGuiEngine::SetSliderPosition(
+          g_pGUIEngine,
+          26,
+          auPrioritySliderIds[i],
+          g_cGoodDistributionInfo.m_aSupplyPriorities[i].m_uPriority);
       }
     }
   }
@@ -11219,7 +11229,7 @@ void __cdecl InitGuiDlgGoodDistribution(void) {
   for ( i = 0; i < 5; ++i )
   {
     dword_3ECF2C0[i] = 0;
-    IGuiEngine::SetImages((void *)g_pGUIEngine, 26, dword_3D8844C[i], 287, 337);
+    IGuiEngine::SetImages((void *)g_pGUIEngine, 26, auPrioritySliderIds[i], 287, 337);
   }
   return IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 26, 776, 1);
 }
@@ -11241,15 +11251,15 @@ bool __cdecl GuiDlgGoodDistributionProc(int a1, int a2, int a3) {
   CEvn_Logic *v13; // [esp+3Ch] [ebp-14Ch]
   CEvn_Logic *v14; // [esp+44h] [ebp-144h]
   int i; // [esp+50h] [ebp-138h]
-  _BYTE v16[32]; // [esp+58h] [ebp-130h] BYREF
-  _BYTE v17[32]; // [esp+78h] [ebp-110h] BYREF
-  _BYTE v18[32]; // [esp+98h] [ebp-F0h] BYREF
-  _BYTE v19[32]; // [esp+B8h] [ebp-D0h] BYREF
-  _BYTE v20[32]; // [esp+D8h] [ebp-B0h] BYREF
-  _BYTE v21[32]; // [esp+F8h] [ebp-90h] BYREF
-  _BYTE v22[32]; // [esp+118h] [ebp-70h] BYREF
-  _BYTE v23[32]; // [esp+138h] [ebp-50h] BYREF
-  _BYTE v24[32]; // [esp+158h] [ebp-30h] BYREF
+  CEvn_Logic v16; // [esp+58h] [ebp-130h] BYREF
+  CEvn_Logic v17; // [esp+78h] [ebp-110h] BYREF
+  CEvn_Logic v18; // [esp+98h] [ebp-F0h] BYREF
+  CEvn_Logic v19; // [esp+B8h] [ebp-D0h] BYREF
+  CEvn_Logic v20; // [esp+D8h] [ebp-B0h] BYREF
+  CEvn_Logic v21; // [esp+F8h] [ebp-90h] BYREF
+  CEvn_Logic v22; // [esp+118h] [ebp-70h] BYREF
+  CEvn_Logic v23; // [esp+138h] [ebp-50h] BYREF
+  CEvn_Logic v24; // [esp+158h] [ebp-30h] BYREF
   int v25; // [esp+184h] [ebp-4h]
 
   if ( !g_pEvnEngine )
@@ -11261,7 +11271,7 @@ bool __cdecl GuiDlgGoodDistributionProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a2 & 0x10000) != 0 )
-        PlayGuiSound(1);
+        PlayGuiSound(1u);
       else
         PlayGuiSound(0);
       break;
@@ -11273,25 +11283,25 @@ bool __cdecl GuiDlgGoodDistributionProc(int a1, int a2, int a3) {
       {
         if ( (unsigned __int16)a2 == 2880 )
         {
-          dword_3F1EE68 = -1;
-          v12 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v22, 0x1B2u, 0x16u, 0, 0, 0, 0);
+          g_cGoodDistributionInfo.m_uEcoSectorId = -1;
+          v12 = CEvn_Logic::CEvn_Logic(&v22, 0x1B2u, 0x16u, 0, 0, 0, 0);
           v25 = 2;
           IEventEngine::SendAMessage(g_pEvnEngine, v12);
           v25 = -1;
-          CEvn_Logic::~CEvn_Logic(v22);
-          PlayGuiSound(2);
+          CEvn_Logic::~CEvn_Logic(&v22);
+          PlayGuiSound(2u);
         }
       }
       else if ( (unsigned __int16)a2 >= 0x31Bu )
       {
         GetGoodSliderVals();
-        for ( i = 0; i < dword_3F1EE30; ++i )
-          dword_3F1EE3C[2 * i] = dword_3ECF2C0[i];
-        v6 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v16, 0x1BDu, 0, 0, 0, 0, 0);
+        for ( i = 0; i < g_cGoodDistributionInfo.m_uSupplyBuildings; ++i )
+          g_cGoodDistributionInfo.m_aSupplyPriorities[i].m_uPriority = dword_3ECF2C0[i];
+        v6 = CEvn_Logic::CEvn_Logic(&v16, 0x1BDu, 0, 0, 0, 0, 0);
         v25 = 8;
         IEventEngine::SendAMessage(g_pEvnEngine, v6);
         v25 = -1;
-        CEvn_Logic::~CEvn_Logic(v16);
+        CEvn_Logic::~CEvn_Logic(&v16);
         UpdateGuiDlgGoodDistribution();
       }
       else
@@ -11299,67 +11309,67 @@ bool __cdecl GuiDlgGoodDistributionProc(int a1, int a2, int a3) {
         switch ( (__int16)a2 )
         {
           case 776:
-            dword_3F1EE68 = -1;
-            v14 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v24, 0x1B2u, 0xAu, 0, 0, 0, 0);
+            g_cGoodDistributionInfo.m_uEcoSectorId = -1;
+            v14 = CEvn_Logic::CEvn_Logic(&v24, 0x1B2u, 0xAu, 0, 0, 0, 0);
             v25 = 0;
             IEventEngine::SendAMessage(g_pEvnEngine, v14);
             v25 = -1;
-            CEvn_Logic::~CEvn_Logic(v24);
-            PlayGuiSound(2);
+            CEvn_Logic::~CEvn_Logic(&v24);
+            PlayGuiSound(2u);
             break;
           case 777:
-            dword_3F1EE68 = -1;
-            v13 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v23, 0x1B2u, 0x14u, 0, 0, 0, 0);
+            g_cGoodDistributionInfo.m_uEcoSectorId = -1;
+            v13 = CEvn_Logic::CEvn_Logic(&v23, 0x1B2u, 0x14u, 0, 0, 0, 0);
             v25 = 1;
             IEventEngine::SendAMessage(g_pEvnEngine, v13);
             v25 = -1;
-            CEvn_Logic::~CEvn_Logic(v23);
-            PlayGuiSound(2);
+            CEvn_Logic::~CEvn_Logic(&v23);
+            PlayGuiSound(2u);
             break;
           case 778:
-            dword_3F1EE68 = -1;
-            v11 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v21, 0x1B2u, 0x10u, 0, 0, 0, 0);
+            g_cGoodDistributionInfo.m_uEcoSectorId = -1;
+            v11 = CEvn_Logic::CEvn_Logic(&v21, 0x1B2u, 0x10u, 0, 0, 0, 0);
             v25 = 3;
             IEventEngine::SendAMessage(g_pEvnEngine, v11);
             v25 = -1;
-            CEvn_Logic::~CEvn_Logic(v21);
-            PlayGuiSound(2);
+            CEvn_Logic::~CEvn_Logic(&v21);
+            PlayGuiSound(2u);
             break;
           case 779:
-            dword_3F1EE68 = -1;
-            v10 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v20, 0x1B2u, 0x24u, 0, 0, 0, 0);
+            g_cGoodDistributionInfo.m_uEcoSectorId = -1;
+            v10 = CEvn_Logic::CEvn_Logic(&v20, 0x1B2u, 0x24u, 0, 0, 0, 0);
             v25 = 4;
             IEventEngine::SendAMessage(g_pEvnEngine, v10);
             v25 = -1;
-            CEvn_Logic::~CEvn_Logic(v20);
-            PlayGuiSound(2);
+            CEvn_Logic::~CEvn_Logic(&v20);
+            PlayGuiSound(2u);
             break;
           case 780:
-            dword_3F1EE68 = -1;
-            v9 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v19, 0x1B2u, 9u, 0, 0, 0, 0);
+            g_cGoodDistributionInfo.m_uEcoSectorId = -1;
+            v9 = CEvn_Logic::CEvn_Logic(&v19, 0x1B2u, 9u, 0, 0, 0, 0);
             v25 = 5;
             IEventEngine::SendAMessage(g_pEvnEngine, v9);
             v25 = -1;
-            CEvn_Logic::~CEvn_Logic(v19);
-            PlayGuiSound(2);
+            CEvn_Logic::~CEvn_Logic(&v19);
+            PlayGuiSound(2u);
             break;
           case 781:
-            dword_3F1EE68 = -1;
-            v8 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v18, 0x1B2u, 0x18u, 0, 0, 0, 0);
+            g_cGoodDistributionInfo.m_uEcoSectorId = -1;
+            v8 = CEvn_Logic::CEvn_Logic(&v18, 0x1B2u, 0x18u, 0, 0, 0, 0);
             v25 = 6;
             IEventEngine::SendAMessage(g_pEvnEngine, v8);
             v25 = -1;
-            CEvn_Logic::~CEvn_Logic(v18);
-            PlayGuiSound(2);
+            CEvn_Logic::~CEvn_Logic(&v18);
+            PlayGuiSound(2u);
             break;
           case 782:
-            dword_3F1EE68 = -1;
-            v7 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v17, 0x1B2u, 0xBu, 0, 0, 0, 0);
+            g_cGoodDistributionInfo.m_uEcoSectorId = -1;
+            v7 = CEvn_Logic::CEvn_Logic(&v17, 0x1B2u, 0xBu, 0, 0, 0, 0);
             v25 = 7;
             IEventEngine::SendAMessage(g_pEvnEngine, v7);
             v25 = -1;
-            CEvn_Logic::~CEvn_Logic(v17);
-            PlayGuiSound(2);
+            CEvn_Logic::~CEvn_Logic(&v17);
+            PlayGuiSound(2u);
             break;
           default:
             return 1;
@@ -12481,23 +12491,23 @@ void __cdecl UpdateGuiDlgGroup(void) {
   {
     for ( i = 0; i < 9; ++i )
     {
-      switch ( dword_3F1E764[i] )
+      switch ( g_cGroupSideBarInfo.m_aGroupLevel[i] )
       {
-        case 0:
-          IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 55, dword_368B91C[i], 0);
+        case 0u:
+          IGuiEngine::SetControlVisibility(g_pGUIEngine, 55, dword_368B91C[i], 0);
           break;
-        case 1:
-          IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 55, dword_368B91C[i], 1);
-          IGuiEngine::SetImages((void *)g_pGUIEngine, 55, dword_368B91C[i], 355, 0);
+        case 1u:
+          IGuiEngine::SetControlVisibility(g_pGUIEngine, 55, dword_368B91C[i], 1);
+          IGuiEngine::SetImages(g_pGUIEngine, 55, dword_368B91C[i], 355, 0);
           break;
-        case 2:
-          IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 55, dword_368B91C[i], 1);
-          IGuiEngine::SetImages((void *)g_pGUIEngine, 55, dword_368B91C[i], 354, 0);
+        case 2u:
+          IGuiEngine::SetControlVisibility(g_pGUIEngine, 55, dword_368B91C[i], 1);
+          IGuiEngine::SetImages(g_pGUIEngine, 55, dword_368B91C[i], 354, 0);
           break;
-        case 3:
-        case 4:
-          IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 55, dword_368B91C[i], 1);
-          IGuiEngine::SetImages((void *)g_pGUIEngine, 55, dword_368B91C[i], 356, 0);
+        case 3u:
+        case 4u:
+          IGuiEngine::SetControlVisibility(g_pGUIEngine, 55, dword_368B91C[i], 1);
+          IGuiEngine::SetImages(g_pGUIEngine, 55, dword_368B91C[i], 356, 0);
           break;
         default:
           break;
@@ -13765,41 +13775,41 @@ void __cdecl UpdateGuiDlgMagicSpellBar(void) {
   {
     for ( i = 0; i < 8; ++i )
     {
-      _wsprintfA(Str, "%u", dword_3F1EEEC[4 * i]);
-      _wsprintfA(v2, "%u", dword_3F1EEF4[4 * i]);
-      switch ( dword_3F1EEE8[4 * i] )
+      _wsprintfA(Str, "%u", g_cMagicSpellSideBarInfo.m_aSpells[i].m_uPossibleNumberOfCasts);
+      _wsprintfA(v2, "%u", g_cMagicSpellSideBarInfo.m_aSpells[i].m_uCost);
+      switch ( g_cMagicSpellSideBarInfo.m_aSpells[i].m_uSpellId )
       {
-        case 0:
-          IGuiEngine::SetText((void *)g_pGUIEngine, 56, 940, Str);
-          IGuiEngine::SetText((void *)g_pGUIEngine, 56, 948, v2);
+        case 0u:
+          IGuiEngine::SetText(g_pGUIEngine, 56, 940, Str);
+          IGuiEngine::SetText(g_pGUIEngine, 56, 948, v2);
           break;
-        case 1:
-          IGuiEngine::SetText((void *)g_pGUIEngine, 56, 941, Str);
-          IGuiEngine::SetText((void *)g_pGUIEngine, 56, 949, v2);
+        case 1u:
+          IGuiEngine::SetText(g_pGUIEngine, 56, 941, Str);
+          IGuiEngine::SetText(g_pGUIEngine, 56, 949, v2);
           break;
-        case 2:
-          IGuiEngine::SetText((void *)g_pGUIEngine, 56, 942, Str);
-          IGuiEngine::SetText((void *)g_pGUIEngine, 56, 950, v2);
+        case 2u:
+          IGuiEngine::SetText(g_pGUIEngine, 56, 942, Str);
+          IGuiEngine::SetText(g_pGUIEngine, 56, 950, v2);
           break;
-        case 3:
-          IGuiEngine::SetText((void *)g_pGUIEngine, 56, 943, Str);
-          IGuiEngine::SetText((void *)g_pGUIEngine, 56, 951, v2);
+        case 3u:
+          IGuiEngine::SetText(g_pGUIEngine, 56, 943, Str);
+          IGuiEngine::SetText(g_pGUIEngine, 56, 951, v2);
           break;
-        case 4:
-          IGuiEngine::SetText((void *)g_pGUIEngine, 56, 944, Str);
-          IGuiEngine::SetText((void *)g_pGUIEngine, 56, 952, v2);
+        case 4u:
+          IGuiEngine::SetText(g_pGUIEngine, 56, 944, Str);
+          IGuiEngine::SetText(g_pGUIEngine, 56, 952, v2);
           break;
-        case 5:
-          IGuiEngine::SetText((void *)g_pGUIEngine, 56, 945, Str);
-          IGuiEngine::SetText((void *)g_pGUIEngine, 56, 953, v2);
+        case 5u:
+          IGuiEngine::SetText(g_pGUIEngine, 56, 945, Str);
+          IGuiEngine::SetText(g_pGUIEngine, 56, 953, v2);
           break;
-        case 6:
-          IGuiEngine::SetText((void *)g_pGUIEngine, 56, 946, Str);
-          IGuiEngine::SetText((void *)g_pGUIEngine, 56, 954, v2);
+        case 6u:
+          IGuiEngine::SetText(g_pGUIEngine, 56, 946, Str);
+          IGuiEngine::SetText(g_pGUIEngine, 56, 954, v2);
           break;
-        case 7:
-          IGuiEngine::SetText((void *)g_pGUIEngine, 56, 947, Str);
-          IGuiEngine::SetText((void *)g_pGUIEngine, 56, 955, v2);
+        case 7u:
+          IGuiEngine::SetText(g_pGUIEngine, 56, 947, Str);
+          IGuiEngine::SetText(g_pGUIEngine, 56, 955, v2);
           break;
         default:
           break;
@@ -23418,187 +23428,195 @@ void __cdecl UpdateGuiDlgMilitaryBuildingContext(void) {
   if ( g_pGUIEngine )
   {
     byte_3EFD430 = 1;
-    GuiHouseImageID = GetGuiHouseImageID(dword_3EFD434, byte_3F1E538, 0);
-    IGuiEngine::SetImages((void *)g_pGUIEngine, 16, 976, GuiHouseImageID, 0);
-    GuiHouseString = (char *)GetGuiHouseString(dword_3EFD434, byte_3F1E538);
-    IGuiEngine::SetText((void *)g_pGUIEngine, 16, 973, GuiHouseString);
-    _wsprintfA(Str, "%u", byte_3F1E540);
-    IGuiEngine::SetText((void *)g_pGUIEngine, 16, 974, Str);
-    if ( byte_3F1E53F <= 0 )
+    GuiHouseImageID = GetGuiHouseImageID(dword_3EFD434, (char)g_cMilitaryBuildingInfo.m_cType, 0);
+    IGuiEngine::SetImages(g_pGUIEngine, 16, 976, GuiHouseImageID, 0);
+    GuiHouseString = GetGuiHouseString(dword_3EFD434, (char)g_cMilitaryBuildingInfo.m_cType);
+    IGuiEngine::SetText(g_pGUIEngine, 16, 973, GuiHouseString);
+    _wsprintfA(Str, "%u", (char)g_cMilitaryBuildingInfo.m_cTotalBuiltCount);
+    IGuiEngine::SetText(g_pGUIEngine, 16, 974, Str);
+    if ( (char)g_cMilitaryBuildingInfo.m_cTotalCount <= 0 )
     {
-      IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 16, 975, 0);
+      IGuiEngine::SetControlVisibility(g_pGUIEngine, 16, 975, 0);
     }
     else
     {
-      _wsprintfA(Str, "+%u", byte_3F1E53F);
-      IGuiEngine::SetText((void *)g_pGUIEngine, 16, 975, Str);
-      IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 16, 975, 1);
+      _wsprintfA(Str, "+%u", (char)g_cMilitaryBuildingInfo.m_cTotalCount);
+      IGuiEngine::SetText(g_pGUIEngine, 16, 975, Str);
+      IGuiEngine::SetControlVisibility(g_pGUIEngine, 16, 975, 1);
     }
-    IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 16, 972, byte_3F1E53C == 0);
-    IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 16, 972, byte_3F1E53B);
+    IGuiEngine::SelectControl(g_pGUIEngine, 16, 972, g_cMilitaryBuildingInfo.m_bSomeFlagBits == 0);
+    IGuiEngine::SetControlVisibility(g_pGUIEngine, 16, 972, g_cMilitaryBuildingInfo.m_unknownB);
     for ( i = 0; i < 10; ++i )
     {
-      if ( byte_3F1E544[2 * i] == -2 )
+      if ( g_cMilitaryBuildingInfo.m_aStationedArchers[i].m_cUnitType == -2 )
       {
-        IGuiEngine::SetImages((void *)g_pGUIEngine, 16, dword_36971D8[2 * i], 158, 0);
-        IGuiEngine::SetSliderPosition((IGuiEngine *)g_pGUIEngine, 16, dword_36971D8[2 * i + 1], byte_3F1E545[2 * i]);
-        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 16, dword_36971D8[2 * i], 1);
-        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 16, dword_36971D8[2 * i + 1], 0);
+        IGuiEngine::SetImages(g_pGUIEngine, 16, dword_36971D8[2 * i], 158, 0);
+        IGuiEngine::SetSliderPosition(
+          g_pGUIEngine,
+          16,
+          dword_36971D8[2 * i + 1],
+          (char)g_cMilitaryBuildingInfo.m_aStationedArchers[i].m_cUnitHealth);
+        IGuiEngine::SetControlVisibility(g_pGUIEngine, 16, dword_36971D8[2 * i], 1);
+        IGuiEngine::SetControlVisibility(g_pGUIEngine, 16, dword_36971D8[2 * i + 1], 0);
       }
-      else if ( byte_3F1E544[2 * i] == -1 )
+      else if ( g_cMilitaryBuildingInfo.m_aStationedArchers[i].m_cUnitType == -1 )
       {
-        IGuiEngine::SetImages((void *)g_pGUIEngine, 16, dword_36971D8[2 * i], 159, 0);
-        IGuiEngine::SetSliderPosition((IGuiEngine *)g_pGUIEngine, 16, dword_36971D8[2 * i + 1], byte_3F1E545[2 * i]);
-        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 16, dword_36971D8[2 * i], 1);
-        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 16, dword_36971D8[2 * i + 1], 0);
+        IGuiEngine::SetImages(g_pGUIEngine, 16, dword_36971D8[2 * i], 159, 0);
+        IGuiEngine::SetSliderPosition(
+          g_pGUIEngine,
+          16,
+          dword_36971D8[2 * i + 1],
+          (char)g_cMilitaryBuildingInfo.m_aStationedArchers[i].m_cUnitHealth);
+        IGuiEngine::SetControlVisibility(g_pGUIEngine, 16, dword_36971D8[2 * i], 1);
+        IGuiEngine::SetControlVisibility(g_pGUIEngine, 16, dword_36971D8[2 * i + 1], 0);
       }
-      else if ( byte_3F1E544[2 * i] <= 0 )
+      else if ( g_cMilitaryBuildingInfo.m_aStationedArchers[i].m_cUnitType <= 0 )
       {
-        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 16, dword_36971D8[2 * i], 0);
-        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 16, dword_36971D8[2 * i + 1], 0);
+        IGuiEngine::SetControlVisibility(g_pGUIEngine, 16, dword_36971D8[2 * i], 0);
+        IGuiEngine::SetControlVisibility(g_pGUIEngine, 16, dword_36971D8[2 * i + 1], 0);
       }
       else
       {
-        switch ( byte_3F1E544[2 * i] )
+        switch ( g_cMilitaryBuildingInfo.m_aStationedArchers[i].m_cUnitType )
         {
-          case 29:
+          case 0x1D:
             IGuiEngine::SetImages(
-              (void *)g_pGUIEngine,
+              g_pGUIEngine,
               16,
               dword_36971D8[2 * i],
               dword_3696DF0[50 * dword_3EFD434 + 1],
               dword_3696DF0[50 * dword_3EFD434 + 2]);
             IGuiEngine::SetTooltipID(
-              (IGuiEngine *)g_pGUIEngine,
+              g_pGUIEngine,
               16,
               dword_36971D8[2 * i],
               dword_3696DF0[50 * dword_3EFD434 + 3],
               dword_3696DF0[50 * dword_3EFD434 + 4]);
             break;
-          case 30:
+          case 0x1E:
             IGuiEngine::SetImages(
-              (void *)g_pGUIEngine,
+              g_pGUIEngine,
               16,
               dword_36971D8[2 * i],
               dword_3696DF0[50 * dword_3EFD434 + 6],
               dword_3696DF0[50 * dword_3EFD434 + 7]);
             IGuiEngine::SetTooltipID(
-              (IGuiEngine *)g_pGUIEngine,
+              g_pGUIEngine,
               16,
               dword_36971D8[2 * i],
               dword_3696DF0[50 * dword_3EFD434 + 8],
               dword_3696DF0[50 * dword_3EFD434 + 9]);
             break;
-          case 31:
+          case 0x1F:
             IGuiEngine::SetImages(
-              (void *)g_pGUIEngine,
+              g_pGUIEngine,
               16,
               dword_36971D8[2 * i],
               dword_3696DF0[50 * dword_3EFD434 + 11],
               dword_3696DF0[50 * dword_3EFD434 + 12]);
             IGuiEngine::SetTooltipID(
-              (IGuiEngine *)g_pGUIEngine,
+              g_pGUIEngine,
               16,
               dword_36971D8[2 * i],
               dword_3696DF0[50 * dword_3EFD434 + 13],
               dword_3696DF0[50 * dword_3EFD434 + 14]);
             break;
-          case 32:
+          case 0x20:
             IGuiEngine::SetImages(
-              (void *)g_pGUIEngine,
+              g_pGUIEngine,
               16,
               dword_36971D8[2 * i],
               dword_3696DF0[50 * dword_3EFD434 + 16],
               dword_3696DF0[50 * dword_3EFD434 + 17]);
             IGuiEngine::SetTooltipID(
-              (IGuiEngine *)g_pGUIEngine,
+              g_pGUIEngine,
               16,
               dword_36971D8[2 * i],
               dword_3696DF0[50 * dword_3EFD434 + 18],
               dword_3696DF0[50 * dword_3EFD434 + 19]);
             break;
-          case 33:
+          case 0x21:
             IGuiEngine::SetImages(
-              (void *)g_pGUIEngine,
+              g_pGUIEngine,
               16,
               dword_36971D8[2 * i],
               dword_3696DF0[50 * dword_3EFD434 + 21],
               dword_3696DF0[50 * dword_3EFD434 + 22]);
             IGuiEngine::SetTooltipID(
-              (IGuiEngine *)g_pGUIEngine,
+              g_pGUIEngine,
               16,
               dword_36971D8[2 * i],
               dword_3696DF0[50 * dword_3EFD434 + 23],
               dword_3696DF0[50 * dword_3EFD434 + 24]);
             break;
-          case 34:
+          case 0x22:
             IGuiEngine::SetImages(
-              (void *)g_pGUIEngine,
+              g_pGUIEngine,
               16,
               dword_36971D8[2 * i],
               dword_3696DF0[50 * dword_3EFD434 + 26],
               dword_3696DF0[50 * dword_3EFD434 + 27]);
             IGuiEngine::SetTooltipID(
-              (IGuiEngine *)g_pGUIEngine,
+              g_pGUIEngine,
               16,
               dword_36971D8[2 * i],
               dword_3696DF0[50 * dword_3EFD434 + 28],
               dword_3696DF0[50 * dword_3EFD434 + 29]);
             break;
-          case 38:
-          case 41:
+          case 0x26:
+          case 0x29:
             IGuiEngine::SetImages(
-              (void *)g_pGUIEngine,
+              g_pGUIEngine,
               16,
               dword_36971D8[2 * i],
               dword_3696DF0[50 * dword_3EFD434 + 31],
               dword_3696DF0[50 * dword_3EFD434 + 32]);
             IGuiEngine::SetTooltipID(
-              (IGuiEngine *)g_pGUIEngine,
+              g_pGUIEngine,
               16,
               dword_36971D8[2 * i],
               dword_3696DF0[50 * dword_3EFD434 + 33],
               dword_3696DF0[50 * dword_3EFD434 + 34]);
             break;
-          case 39:
-          case 42:
+          case 0x27:
+          case 0x2A:
             IGuiEngine::SetImages(
-              (void *)g_pGUIEngine,
+              g_pGUIEngine,
               16,
               dword_36971D8[2 * i],
               dword_3696DF0[50 * dword_3EFD434 + 36],
               dword_3696DF0[50 * dword_3EFD434 + 37]);
             IGuiEngine::SetTooltipID(
-              (IGuiEngine *)g_pGUIEngine,
+              g_pGUIEngine,
               16,
               dword_36971D8[2 * i],
               dword_3696DF0[50 * dword_3EFD434 + 38],
               dword_3696DF0[50 * dword_3EFD434 + 39]);
             break;
-          case 40:
-          case 43:
+          case 0x28:
+          case 0x2B:
             IGuiEngine::SetImages(
-              (void *)g_pGUIEngine,
+              g_pGUIEngine,
               16,
               dword_36971D8[2 * i],
               dword_3696DF0[50 * dword_3EFD434 + 41],
               dword_3696DF0[50 * dword_3EFD434 + 42]);
             IGuiEngine::SetTooltipID(
-              (IGuiEngine *)g_pGUIEngine,
+              g_pGUIEngine,
               16,
               dword_36971D8[2 * i],
               dword_3696DF0[50 * dword_3EFD434 + 43],
               dword_3696DF0[50 * dword_3EFD434 + 44]);
             break;
-          case 44:
+          case 0x2C:
             IGuiEngine::SetImages(
-              (void *)g_pGUIEngine,
+              g_pGUIEngine,
               16,
               dword_36971D8[2 * i],
               dword_3696DF0[50 * dword_3EFD434 + 46],
               dword_3696DF0[50 * dword_3EFD434 + 47]);
             IGuiEngine::SetTooltipID(
-              (IGuiEngine *)g_pGUIEngine,
+              g_pGUIEngine,
               16,
               dword_36971D8[2 * i],
               dword_3696DF0[50 * dword_3EFD434 + 48],
@@ -23607,171 +23625,183 @@ void __cdecl UpdateGuiDlgMilitaryBuildingContext(void) {
           default:
             break;
         }
-        IGuiEngine::SetSliderPosition((IGuiEngine *)g_pGUIEngine, 16, dword_36971D8[2 * i + 1], byte_3F1E545[2 * i]);
-        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 16, dword_36971D8[2 * i], 1);
-        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 16, dword_36971D8[2 * i + 1], 1);
+        IGuiEngine::SetSliderPosition(
+          g_pGUIEngine,
+          16,
+          dword_36971D8[2 * i + 1],
+          (char)g_cMilitaryBuildingInfo.m_aStationedArchers[i].m_cUnitHealth);
+        IGuiEngine::SetControlVisibility(g_pGUIEngine, 16, dword_36971D8[2 * i], 1);
+        IGuiEngine::SetControlVisibility(g_pGUIEngine, 16, dword_36971D8[2 * i + 1], 1);
       }
-      if ( byte_3F1E558[2 * i] == -2 )
+      if ( g_cMilitaryBuildingInfo.m_aStationedSoldiers[i].m_cUnitType == -2 )
       {
-        IGuiEngine::SetImages((void *)g_pGUIEngine, 16, dword_3697228[2 * i], 158, 0);
-        IGuiEngine::SetSliderPosition((IGuiEngine *)g_pGUIEngine, 16, dword_3697228[2 * i + 1], byte_3F1E559[2 * i]);
-        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 16, dword_3697228[2 * i], 1);
-        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 16, dword_3697228[2 * i + 1], 0);
+        IGuiEngine::SetImages(g_pGUIEngine, 16, dword_3697228[2 * i], 158, 0);
+        IGuiEngine::SetSliderPosition(
+          g_pGUIEngine,
+          16,
+          dword_3697228[2 * i + 1],
+          (char)g_cMilitaryBuildingInfo.m_aStationedSoldiers[i].m_cUnitHealth);
+        IGuiEngine::SetControlVisibility(g_pGUIEngine, 16, dword_3697228[2 * i], 1);
+        IGuiEngine::SetControlVisibility(g_pGUIEngine, 16, dword_3697228[2 * i + 1], 0);
       }
-      else if ( byte_3F1E558[2 * i] == -1 )
+      else if ( g_cMilitaryBuildingInfo.m_aStationedSoldiers[i].m_cUnitType == -1 )
       {
-        IGuiEngine::SetImages((void *)g_pGUIEngine, 16, dword_3697228[2 * i], 159, 0);
-        IGuiEngine::SetSliderPosition((IGuiEngine *)g_pGUIEngine, 16, dword_3697228[2 * i + 1], byte_3F1E559[2 * i]);
-        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 16, dword_3697228[2 * i], 1);
-        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 16, dword_3697228[2 * i + 1], 0);
+        IGuiEngine::SetImages(g_pGUIEngine, 16, dword_3697228[2 * i], 159, 0);
+        IGuiEngine::SetSliderPosition(
+          g_pGUIEngine,
+          16,
+          dword_3697228[2 * i + 1],
+          (char)g_cMilitaryBuildingInfo.m_aStationedSoldiers[i].m_cUnitHealth);
+        IGuiEngine::SetControlVisibility(g_pGUIEngine, 16, dword_3697228[2 * i], 1);
+        IGuiEngine::SetControlVisibility(g_pGUIEngine, 16, dword_3697228[2 * i + 1], 0);
       }
-      else if ( byte_3F1E558[2 * i] <= 0 )
+      else if ( g_cMilitaryBuildingInfo.m_aStationedSoldiers[i].m_cUnitType <= 0 )
       {
-        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 16, dword_3697228[2 * i], 0);
-        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 16, dword_3697228[2 * i + 1], 0);
+        IGuiEngine::SetControlVisibility(g_pGUIEngine, 16, dword_3697228[2 * i], 0);
+        IGuiEngine::SetControlVisibility(g_pGUIEngine, 16, dword_3697228[2 * i + 1], 0);
       }
       else
       {
-        switch ( byte_3F1E558[2 * i] )
+        switch ( g_cMilitaryBuildingInfo.m_aStationedSoldiers[i].m_cUnitType )
         {
-          case 29:
+          case 0x1D:
             IGuiEngine::SetImages(
-              (void *)g_pGUIEngine,
+              g_pGUIEngine,
               16,
               dword_3697228[2 * i],
               dword_3696DF0[50 * dword_3EFD434 + 1],
               dword_3696DF0[50 * dword_3EFD434 + 2]);
             IGuiEngine::SetTooltipID(
-              (IGuiEngine *)g_pGUIEngine,
+              g_pGUIEngine,
               16,
               dword_3697228[2 * i],
               dword_3696DF0[50 * dword_3EFD434 + 3],
               dword_3696DF0[50 * dword_3EFD434 + 4]);
             break;
-          case 30:
+          case 0x1E:
             IGuiEngine::SetImages(
-              (void *)g_pGUIEngine,
+              g_pGUIEngine,
               16,
               dword_3697228[2 * i],
               dword_3696DF0[50 * dword_3EFD434 + 6],
               dword_3696DF0[50 * dword_3EFD434 + 7]);
             IGuiEngine::SetTooltipID(
-              (IGuiEngine *)g_pGUIEngine,
+              g_pGUIEngine,
               16,
               dword_3697228[2 * i],
               dword_3696DF0[50 * dword_3EFD434 + 8],
               dword_3696DF0[50 * dword_3EFD434 + 9]);
             break;
-          case 31:
+          case 0x1F:
             IGuiEngine::SetImages(
-              (void *)g_pGUIEngine,
+              g_pGUIEngine,
               16,
               dword_3697228[2 * i],
               dword_3696DF0[50 * dword_3EFD434 + 11],
               dword_3696DF0[50 * dword_3EFD434 + 12]);
             IGuiEngine::SetTooltipID(
-              (IGuiEngine *)g_pGUIEngine,
+              g_pGUIEngine,
               16,
               dword_3697228[2 * i],
               dword_3696DF0[50 * dword_3EFD434 + 13],
               dword_3696DF0[50 * dword_3EFD434 + 14]);
             break;
-          case 32:
+          case 0x20:
             IGuiEngine::SetImages(
-              (void *)g_pGUIEngine,
+              g_pGUIEngine,
               16,
               dword_3697228[2 * i],
               dword_3696DF0[50 * dword_3EFD434 + 16],
               dword_3696DF0[50 * dword_3EFD434 + 17]);
             IGuiEngine::SetTooltipID(
-              (IGuiEngine *)g_pGUIEngine,
+              g_pGUIEngine,
               16,
               dword_3697228[2 * i],
               dword_3696DF0[50 * dword_3EFD434 + 18],
               dword_3696DF0[50 * dword_3EFD434 + 19]);
             break;
-          case 33:
+          case 0x21:
             IGuiEngine::SetImages(
-              (void *)g_pGUIEngine,
+              g_pGUIEngine,
               16,
               dword_3697228[2 * i],
               dword_3696DF0[50 * dword_3EFD434 + 21],
               dword_3696DF0[50 * dword_3EFD434 + 22]);
             IGuiEngine::SetTooltipID(
-              (IGuiEngine *)g_pGUIEngine,
+              g_pGUIEngine,
               16,
               dword_3697228[2 * i],
               dword_3696DF0[50 * dword_3EFD434 + 23],
               dword_3696DF0[50 * dword_3EFD434 + 24]);
             break;
-          case 34:
+          case 0x22:
             IGuiEngine::SetImages(
-              (void *)g_pGUIEngine,
+              g_pGUIEngine,
               16,
               dword_3697228[2 * i],
               dword_3696DF0[50 * dword_3EFD434 + 26],
               dword_3696DF0[50 * dword_3EFD434 + 27]);
             IGuiEngine::SetTooltipID(
-              (IGuiEngine *)g_pGUIEngine,
+              g_pGUIEngine,
               16,
               dword_3697228[2 * i],
               dword_3696DF0[50 * dword_3EFD434 + 28],
               dword_3696DF0[50 * dword_3EFD434 + 29]);
             break;
-          case 38:
-          case 41:
+          case 0x26:
+          case 0x29:
             IGuiEngine::SetImages(
-              (void *)g_pGUIEngine,
+              g_pGUIEngine,
               16,
               dword_3697228[2 * i],
               dword_3696DF0[50 * dword_3EFD434 + 31],
               dword_3696DF0[50 * dword_3EFD434 + 32]);
             IGuiEngine::SetTooltipID(
-              (IGuiEngine *)g_pGUIEngine,
+              g_pGUIEngine,
               16,
               dword_3697228[2 * i],
               dword_3696DF0[50 * dword_3EFD434 + 33],
               dword_3696DF0[50 * dword_3EFD434 + 34]);
             break;
-          case 39:
-          case 42:
+          case 0x27:
+          case 0x2A:
             IGuiEngine::SetImages(
-              (void *)g_pGUIEngine,
+              g_pGUIEngine,
               16,
               dword_3697228[2 * i],
               dword_3696DF0[50 * dword_3EFD434 + 36],
               dword_3696DF0[50 * dword_3EFD434 + 37]);
             IGuiEngine::SetTooltipID(
-              (IGuiEngine *)g_pGUIEngine,
+              g_pGUIEngine,
               16,
               dword_3697228[2 * i],
               dword_3696DF0[50 * dword_3EFD434 + 38],
               dword_3696DF0[50 * dword_3EFD434 + 39]);
             break;
-          case 40:
-          case 43:
+          case 0x28:
+          case 0x2B:
             IGuiEngine::SetImages(
-              (void *)g_pGUIEngine,
+              g_pGUIEngine,
               16,
               dword_3697228[2 * i],
               dword_3696DF0[50 * dword_3EFD434 + 41],
               dword_3696DF0[50 * dword_3EFD434 + 42]);
             IGuiEngine::SetTooltipID(
-              (IGuiEngine *)g_pGUIEngine,
+              g_pGUIEngine,
               16,
               dword_3697228[2 * i],
               dword_3696DF0[50 * dword_3EFD434 + 43],
               dword_3696DF0[50 * dword_3EFD434 + 44]);
             break;
-          case 44:
+          case 0x2C:
             IGuiEngine::SetImages(
-              (void *)g_pGUIEngine,
+              g_pGUIEngine,
               16,
               dword_3697228[2 * i],
               dword_3696DF0[50 * dword_3EFD434 + 46],
               dword_3696DF0[50 * dword_3EFD434 + 47]);
             IGuiEngine::SetTooltipID(
-              (IGuiEngine *)g_pGUIEngine,
+              g_pGUIEngine,
               16,
               dword_3697228[2 * i],
               dword_3696DF0[50 * dword_3EFD434 + 48],
@@ -23780,9 +23810,13 @@ void __cdecl UpdateGuiDlgMilitaryBuildingContext(void) {
           default:
             break;
         }
-        IGuiEngine::SetSliderPosition((IGuiEngine *)g_pGUIEngine, 16, dword_3697228[2 * i + 1], byte_3F1E559[2 * i]);
-        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 16, dword_3697228[2 * i], 1);
-        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 16, dword_3697228[2 * i + 1], 1);
+        IGuiEngine::SetSliderPosition(
+          g_pGUIEngine,
+          16,
+          dword_3697228[2 * i + 1],
+          (char)g_cMilitaryBuildingInfo.m_aStationedSoldiers[i].m_cUnitHealth);
+        IGuiEngine::SetControlVisibility(g_pGUIEngine, 16, dword_3697228[2 * i], 1);
+        IGuiEngine::SetControlVisibility(g_pGUIEngine, 16, dword_3697228[2 * i + 1], 1);
       }
     }
     byte_3EFD430 = 0;
@@ -27779,7 +27813,7 @@ char const * __cdecl GetGuiHouseString(int a1, enum BUILDING_TYPES a2) {
   int v3; // [esp+38h] [ebp-4h]
 
   if ( !g_pStringEngine )
-    return (char *)&unk_3697D2E;
+    return &sNoStringEngine;
   switch ( a2 )
   {
     case 1:
@@ -28184,7 +28218,7 @@ char const * __cdecl GetGuiHouseString(int a1, enum BUILDING_TYPES a2) {
       break;
   }
   if ( v3 == 3837 )
-    return (char *)&unk_3697D2F;
+    return &sHouseStringNotFound;
   else
     return g_pStringEngine->GetString(g_pStringEngine, v3);
 }

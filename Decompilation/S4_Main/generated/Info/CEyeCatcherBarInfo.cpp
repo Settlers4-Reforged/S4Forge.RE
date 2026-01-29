@@ -1,3 +1,4 @@
+#if FALSE
 #include "CEyeCatcherBarInfo.h"
 
 // Definitions for class CEyeCatcherBarInfo
@@ -20,3 +21,4 @@ unsigned int  CEyeCatcherBarInfo::Size(void)const {
 }
 
 
+#endif // Already implemented

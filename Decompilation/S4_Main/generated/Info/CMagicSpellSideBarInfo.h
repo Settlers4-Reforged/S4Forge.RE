@@ -11,6 +11,10 @@ public:
     // address=[0x1454c90]
     virtual unsigned int  Size(void)const;
 
+    // Type information members
+public:
+    CMagicSpellSideBarInfo::SpellInfo[8] m_aSpells;
+
 };
 
 

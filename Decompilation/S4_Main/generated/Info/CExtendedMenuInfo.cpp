@@ -1,3 +1,4 @@
+#if FALSE
 #include "CExtendedMenuInfo.h"
 
 // Definitions for class CExtendedMenuInfo
@@ -16,7 +17,8 @@
 // Decompiled from int __thiscall CExtendedMenuInfo::Size(CExtendedMenuInfo *this)
 unsigned int  CExtendedMenuInfo::Size(void)const {
   
-  return 0x34;
+  return 52;
 }
 
 
+#endif // Already implemented

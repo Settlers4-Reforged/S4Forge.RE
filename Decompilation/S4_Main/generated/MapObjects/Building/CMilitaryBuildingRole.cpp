@@ -391,24 +391,22 @@ void  CMilitaryBuildingRole::PostLoadInit(class CBuilding * a2) {
 
 
 // address=[0x150e860]
-// Decompiled from _DWORD *__thiscall CMilitaryBuildingRole::FillDialog(CMilitaryBuildingRole *this, struct CBuilding *a2, bool a3)
+// Decompiled from _DWORD *__thiscall CMilitaryBuildingRole::FillDialog(CMilitaryBuildingRole *this, IEntity *a2, bool a3)
 void  CMilitaryBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
   
-  int v3; // eax
-  int v4; // eax
+  int cOwnerId; // eax MAPDST
   _WORD *v5; // eax
   int v6; // eax
-  int v8; // [esp-8h] [ebp-68h]
-  int v9; // [esp-8h] [ebp-68h]
+  int cType; // [esp-8h] [ebp-68h] MAPDST
   int v10; // [esp-4h] [ebp-64h]
-  int SettlerInfo; // [esp+8h] [ebp-58h]
+  CSettlerMgr::SSettlerInfos *SettlerInfo; // [esp+8h] [ebp-58h]
   unsigned int v12; // [esp+Ch] [ebp-54h]
   int v13; // [esp+10h] [ebp-50h]
   int v14; // [esp+1Ch] [ebp-44h]
-  int v15; // [esp+20h] [ebp-40h]
+  int m_bHealth; // [esp+20h] [ebp-40h]
   int v16; // [esp+24h] [ebp-3Ch]
   int v17; // [esp+28h] [ebp-38h]
-  unsigned __int16 *v18; // [esp+2Ch] [ebp-34h]
+  IEntity *v18; // [esp+2Ch] [ebp-34h]
   int i; // [esp+34h] [ebp-2Ch]
   int j; // [esp+34h] [ebp-2Ch]
   unsigned int k; // [esp+34h] [ebp-2Ch]
@@ -418,28 +416,36 @@ void  CMilitaryBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
   int v26; // [esp+5Ch] [ebp-4h]
 
   CInfoExchange::Clear(&g_cMilitaryBuildingInfo);
-  dword_3F1E534 = 4;
-  byte_3F1E539 = IEntity::Race(a2);
-  byte_3F1E538 = IEntity::Type((unsigned __int16 *)a2);
-  byte_3F1E53B = 0;
-  byte_3F1E53C = IEntity::FlagBits(a2, (EntityFlag)0x1000u) != 0;
-  byte_3F1E53D = 0;
-  v8 = IEntity::Type((unsigned __int16 *)a2);
-  v3 = IEntity::OwnerId((unsigned __int8 *)a2);
-  byte_3F1E53F = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v3, v8, 0);
-  v9 = IEntity::Type((unsigned __int16 *)a2);
-  v4 = IEntity::OwnerId((unsigned __int8 *)a2);
-  byte_3F1E540 = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v4, v9, 1u);
-  byte_3F1E53A = *((_BYTE *)this + 29);
+  g_cMilitaryBuildingInfo.m_iUnknown = 4;
+  g_cMilitaryBuildingInfo.m_cRace = IEntity::Race(a2);
+  g_cMilitaryBuildingInfo.m_cType = IEntity::Type(a2);
+  g_cMilitaryBuildingInfo.m_unknownB = 0;
+  g_cMilitaryBuildingInfo.m_bSomeFlagBits = IEntity::FlagBits(a2, (EntityFlag)0x1000) != 0;
+  g_cMilitaryBuildingInfo.m_unknownD = 0;
+  cType = IEntity::Type(a2);
+  cOwnerId = IEntity::OwnerId(a2);
+  g_cMilitaryBuildingInfo.m_cTotalCount = CBuildingMgr::GetNumberOfBuildings(
+                                            (CBuildingMgr *)g_cBuildingMgr,
+                                            cOwnerId,
+                                            cType,
+                                            0);
+  cType = IEntity::Type(a2);
+  cOwnerId = IEntity::OwnerId(a2);
+  g_cMilitaryBuildingInfo.m_cTotalBuiltCount = CBuildingMgr::GetNumberOfBuildings(
+                                                 (CBuildingMgr *)g_cBuildingMgr,
+                                                 cOwnerId,
+                                                 cType,
+                                                 1u);
+  g_cMilitaryBuildingInfo.m_unknownA = *((_BYTE *)this + 29);
   for ( i = 0; i < *((unsigned __int8 *)this + 385); ++i )
   {
-    byte_3F1E558[2 * i] = -2;
-    byte_3F1E559[2 * i] = 0;
+    g_cMilitaryBuildingInfo.m_aStationedSoldiers[i].m_cUnitType = -2;
+    g_cMilitaryBuildingInfo.m_aStationedSoldiers[i].m_cUnitHealth = 0;
   }
   for ( j = 0; j < *((unsigned __int8 *)this + 384); ++j )
   {
-    byte_3F1E544[2 * j] = -2;
-    byte_3F1E545[2 * j] = 0;
+    g_cMilitaryBuildingInfo.m_aStationedArchers[j].m_cUnitType = -2;
+    g_cMilitaryBuildingInfo.m_aStationedArchers[j].m_cUnitHealth = 0;
   }
   v17 = 0;
   v16 = 0;
@@ -448,39 +454,39 @@ void  CMilitaryBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
     v5 = (_WORD *)std::vector<unsigned short>::operator[]((char *)this + 424, k);
     if ( *v5 )
     {
-      v18 = (unsigned __int16 *)CSettlerMgr::operator[]((unsigned __int16)*v5);
+      v18 = CSettlerMgr::operator[]((unsigned __int16)*v5);
       v10 = IEntity::Type(v18);
       v6 = IEntity::Race(v18);
       SettlerInfo = CSettlerMgr::GetSettlerInfo(v6, v10);
       LOBYTE(v14) = 100;
-      v15 = *(unsigned __int8 *)(SettlerInfo + 2);
-      if ( *(_BYTE *)(SettlerInfo + 2) )
+      m_bHealth = SettlerInfo->m_bHealth;
+      if ( SettlerInfo->m_bHealth )
       {
-        v13 = (*(int (__thiscall **)(unsigned __int16 *))(*(_DWORD *)v18 + 40))(v18);
-        if ( v13 < v15 )
-          v14 = 100 * v13 / v15;
+        v13 = ((int (__thiscall *)(IEntity *))v18->Amount)(v18);
+        if ( v13 < m_bHealth )
+          v14 = 100 * v13 / m_bHealth;
       }
       if ( *(_BYTE *)(*((_DWORD *)this + 94) + 12 * k + 233) )
       {
-        byte_3F1E544[2 * v16] = IEntity::Type(v18);
-        byte_3F1E545[2 * v16++] = v14;
+        g_cMilitaryBuildingInfo.m_aStationedArchers[v16].m_cUnitType = IEntity::Type(v18);
+        g_cMilitaryBuildingInfo.m_aStationedArchers[v16++].m_cUnitHealth = v14;
       }
       else
       {
-        byte_3F1E558[2 * v17] = IEntity::Type(v18);
-        byte_3F1E559[2 * v17++] = v14;
+        g_cMilitaryBuildingInfo.m_aStationedSoldiers[v17].m_cUnitType = IEntity::Type(v18);
+        g_cMilitaryBuildingInfo.m_aStationedSoldiers[v17++].m_cUnitHealth = v14;
       }
     }
   }
   for ( m = v17; m < *((unsigned __int8 *)this + 383) + *((unsigned __int8 *)this + 381); ++m )
   {
-    byte_3F1E558[2 * m] = -1;
-    byte_3F1E559[2 * m] = 0;
+    g_cMilitaryBuildingInfo.m_aStationedSoldiers[m].m_cUnitType = -1;
+    g_cMilitaryBuildingInfo.m_aStationedSoldiers[m].m_cUnitHealth = 0;
   }
   for ( n = v16; n < *((unsigned __int8 *)this + 382) + *((unsigned __int8 *)this + 380); ++n )
   {
-    byte_3F1E544[2 * n] = -1;
-    byte_3F1E545[2 * n] = 0;
+    g_cMilitaryBuildingInfo.m_aStationedArchers[n].m_cUnitType = -1;
+    g_cMilitaryBuildingInfo.m_aStationedArchers[n].m_cUnitHealth = 0;
   }
   v12 = 604;
   if ( !a3 )

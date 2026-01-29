@@ -1641,12 +1641,12 @@ bool  CInputProcessor::InitSettlerSearch(class CEvn_Logic * a2) {
 // Decompiled from char __thiscall CInputProcessor::InitGoodAmount(CInputProcessor *this, struct CEvn_Logic *a2)
 bool  CInputProcessor::InitGoodAmount(class CEvn_Logic * a2) {
   
-  CEcoSectorMgr::FillGoodAmount(&g_cGoodsStatisticInfo, 0, *((unsigned __int8 *)this + 105));
+  CEcoSectorMgr::FillGoodAmount(&g_cGoodsStatisticInfo, 0, this->unk_69);
   CLogic::SetFillDialogInfos(
     g_pLogic,
     (void (__cdecl *)(struct CInfoExchange *, bool, bool))CEcoSectorMgr::FillGoodAmount,
-    (struct CInfoExchange *)&g_cGoodsStatisticInfo,
-    *((_BYTE *)this + 105));
+    &g_cGoodsStatisticInfo,
+    this->unk_69);
   return 0;
 }
 
@@ -1669,13 +1669,9 @@ bool  CInputProcessor::InitTransportPrio(class CEvn_Logic * a2) {
 // Decompiled from char __thiscall CInputProcessor::InitGoodDistribution(CInputProcessor *this, struct CEvn_Logic *a2)
 bool  CInputProcessor::InitGoodDistribution(class CEvn_Logic * a2) {
   
-  dword_3F1EE64 = *((_DWORD *)a2 + 2);
-  CEcoSectorMgr::FillGoodDistribution((struct CInfoExchange *)&g_cGoodDistributionInfo);
-  CLogic::SetFillDialogInfos(
-    g_pLogic,
-    (void (__cdecl *)(struct CInfoExchange *, bool, bool))CEcoSectorMgr::FillGoodDistribution,
-    (struct CInfoExchange *)&g_cGoodDistributionInfo,
-    *((_BYTE *)this + 105));
+  g_cGoodDistributionInfo.m_uU5 = a2->m_wParam;
+  CEcoSectorMgr::FillGoodDistribution(&g_cGoodDistributionInfo, 0, this->unk_69);
+  CLogic::SetFillDialogInfos(g_pLogic, CEcoSectorMgr::FillGoodDistribution, &g_cGoodDistributionInfo, this->unk_69);
   return 0;
 }
 
@@ -1684,11 +1680,11 @@ bool  CInputProcessor::InitGoodDistribution(class CEvn_Logic * a2) {
 // Decompiled from char __thiscall CInputProcessor::GoodDeliveringChanged(CInputProcessor *this, struct CEvn_Logic *a2)
 bool  CInputProcessor::GoodDeliveringChanged(class CEvn_Logic * a2) {
   
-  char LocalPlayerId; // al
-  unsigned int v4; // [esp+10h] [ebp-B4h]
-  unsigned int v5; // [esp+14h] [ebp-B0h]
+  uchar LocalPlayerId; // al
+  uint v4; // [esp+10h] [ebp-B4h]
+  uint v5; // [esp+14h] [ebp-B0h]
   CEcoSector *v6; // [esp+24h] [ebp-A0h]
-  int v7; // [esp+2Ch] [ebp-98h]
+  DWORD m_uU5; // [esp+2Ch] [ebp-98h]
   int sum; // [esp+30h] [ebp-94h]
   int UserESInMiddleOfTheScreen; // [esp+34h] [ebp-90h]
   int v10; // [esp+38h] [ebp-8Ch]
@@ -1698,27 +1694,26 @@ bool  CInputProcessor::GoodDeliveringChanged(class CEvn_Logic * a2) {
   int v14; // [esp+48h] [ebp-7Ch]
   int i; // [esp+4Ch] [ebp-78h]
   int j; // [esp+4Ch] [ebp-78h]
-  _BYTE v17[60]; // [esp+50h] [ebp-74h] BYREF
-  int v18; // [esp+8Ch] [ebp-38h]
-  _BYTE v19[32]; // [esp+94h] [ebp-30h] BYREF
-  int v20; // [esp+C0h] [ebp-4h]
+  CGoodDistributionInfo v17; // [esp+50h] [ebp-74h] BYREF
+  CEvn_Logic v18; // [esp+94h] [ebp-30h] BYREF
+  int v19; // [esp+C0h] [ebp-4h]
 
-  v7 = dword_3F1EE64;
+  m_uU5 = g_cGoodDistributionInfo.m_uU5;
   UserESInMiddleOfTheScreen = CInputProcessor::GetUserESInMiddleOfTheScreen(this);
   sum = 0;
   if ( UserESInMiddleOfTheScreen )
   {
-    v6 = (CEcoSector *)CEcoSectorMgr::operator[](UserESInMiddleOfTheScreen);
-    CGoodDistributionInfo::CGoodDistributionInfo((CGoodDistributionInfo *)v17);
-    v18 = v7;
-    CEcoSector::FillGoodDistribution(v6, (struct CGoodDistributionInfo *)v17);
-    v11 = operator new[](4 * dword_3F1EE30);
-    v13 = operator new[](4 * dword_3F1EE30);
+    v6 = (CEcoSector *)CEcoSectorMgr::operator[](g_cESMgr, UserESInMiddleOfTheScreen);
+    CGoodDistributionInfo::CGoodDistributionInfo(&v17);
+    v17.m_uU5 = m_uU5;
+    CEcoSector::FillGoodDistribution(v6, &v17);
+    v11 = operator new[](4 * g_cGoodDistributionInfo.m_uSupplyBuildings);
+    v13 = operator new[](4 * g_cGoodDistributionInfo.m_uSupplyBuildings);
     v10 = 0;
-    for ( i = 0; i < dword_3F1EE30; ++i )
+    for ( i = 0; i < (int)g_cGoodDistributionInfo.m_uSupplyBuildings; ++i )
     {
-      v13[i] = dword_3F1EE3C[2 * i] - *(_DWORD *)&v17[8 * i + 20];
-      v11[i] = v13[i] + *(_DWORD *)&v17[8 * i + 20];
+      v13[i] = g_cGoodDistributionInfo.m_aSupplyPriorities[i].m_uPriority - v17.m_aSupplyPriorities[i].m_uPriority;
+      v11[i] = v13[i] + v17.m_aSupplyPriorities[i].m_uPriority;
       v10 += v11[i];
     }
     v12 = 100 - v10;
@@ -1730,26 +1725,26 @@ bool  CInputProcessor::GoodDeliveringChanged(class CEvn_Logic * a2) {
         v13[v14] += sign(v12);
         v12 -= sign(v12);
       }
-      if ( ++v14 >= dword_3F1EE30 )
+      if ( ++v14 >= (int)g_cGoodDistributionInfo.m_uSupplyBuildings )
         v14 = 0;
     }
-    for ( j = 0; j < dword_3F1EE30; ++j )
+    for ( j = 0; j < (int)g_cGoodDistributionInfo.m_uSupplyBuildings; ++j )
     {
-      v4 = (unsigned __int16)dword_3F1EE38[2 * j] | ((unsigned __int16)v7 << 16);
+      v4 = (unsigned __int16)g_cGoodDistributionInfo.m_aSupplyPriorities[j].m_uBuildingId | ((unsigned __int16)m_uU5 << 16);
       v5 = LOWORD(v13[j]) | ((unsigned __int16)UserESInMiddleOfTheScreen << 16);
-      sum += v13[j] + *(_DWORD *)&v17[8 * j + 20];
+      sum += v13[j] + v17.m_aSupplyPriorities[j].m_uPriority;
       LocalPlayerId = CPlayerManager::GetLocalPlayerId();
-      CEvn_Logic::CEvn_Logic((CEvn_Logic *)v19, 5028u, v4, v5, LocalPlayerId, 0, 0);
-      v20 = 0;
+      CEvn_Logic::CEvn_Logic(&v18, 5028u, v4, v5, LocalPlayerId, 0, 0);
+      v19 = 0;
       if ( !g_pNetworkEngine
         && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 2685, "g_pNetworkEngine != NULL") == 1 )
       {
         __debugbreak();
       }
       if ( g_pNetworkEngine )
-        INetworkEngine::SendNetMessage((INetworkEngine *)g_pNetworkEngine, (struct CEvn_Logic *)v19);
-      v20 = -1;
-      CEvn_Logic::~CEvn_Logic(v19);
+        INetworkEngine::SendNetMessage((INetworkEngine *)g_pNetworkEngine, &v18);
+      v19 = -1;
+      CEvn_Logic::~CEvn_Logic(&v18);
     }
     operator delete[](v11);
     operator delete[](v13);
@@ -2917,7 +2912,7 @@ bool  CInputProcessor::InitMagicSideBar(class CEvn_Logic * a2) {
   CLogic::SetFillSideBarInfos(
     g_pLogic,
     (void (__cdecl *)(struct CInfoExchange *, bool, int))IGroupMgr::FillMagicSideBar,
-    (struct CInfoExchange *)&g_cMagicSpellSideBarInfo,
+    &g_cMagicSpellSideBarInfo,
     0);
   return 0;
 }
@@ -2927,8 +2922,8 @@ bool  CInputProcessor::InitMagicSideBar(class CEvn_Logic * a2) {
 // Decompiled from char __thiscall CInputProcessor::InitGroupSideBar(CInputProcessor *this, struct CEvn_Logic *a2)
 bool  CInputProcessor::InitGroupSideBar(class CEvn_Logic * a2) {
   
-  IGroupMgr::FillGroupSideBar((struct CInfoExchange *)&g_cGroupSideBarInfo, 0, 0);
-  CLogic::SetFillSideBarInfos(g_pLogic, IGroupMgr::FillGroupSideBar, (struct CInfoExchange *)&g_cGroupSideBarInfo, 0);
+  IGroupMgr::FillGroupSideBar(&g_cGroupSideBarInfo, 0, 0);
+  CLogic::SetFillSideBarInfos(g_pLogic, IGroupMgr::FillGroupSideBar, &g_cGroupSideBarInfo, 0);
   return 0;
 }
 
