@@ -4,6 +4,8 @@
 
 // Definitions for class CRegistry
 
+CRegistry *g_pRegistry = new CRegistry();
+
 // address=[0x149aa80]
 // Decompiled from char __stdcall CRegistry::ExistsHLMKey(LPCSTR lpSubKey)
 bool CRegistry::ExistsHLMKey(char const *lpSubKey)

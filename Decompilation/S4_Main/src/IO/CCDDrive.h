@@ -4,6 +4,8 @@
 #include "defines.h"
 #include "ICDDrive.h"
 
+extern class CCDDrive *g_pCDDrive;
+
 class CCDDrive : public ICDDrive
 {
 public:

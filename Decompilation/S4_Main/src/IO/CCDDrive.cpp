@@ -3,6 +3,10 @@
 #include <windows.h>
 
 #include "CBB/CBBSupport.h"
+
+// Technically this should be pointing to a static variable, as per the original code...
+CCDDrive *g_pCDDrive = new CCDDrive();
+
 // Definitions for class CCDDrive
 
 // address=[0x147e9f0]

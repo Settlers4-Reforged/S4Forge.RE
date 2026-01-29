@@ -4,6 +4,8 @@
 
 // Definitions for class CClipboard
 
+CClipboard *g_pClipboard = new CClipboard();
+
 // address=[0x147f5e0]
 // Decompiled from int __stdcall CClipboard::CopyTextToClipboard(char *Str)
 void CClipboard::CopyTextToClipboard(char const *Str)

@@ -4,6 +4,8 @@
 #include "defines.h"
 #include "IRegistry.h"
 
+extern class CRegistry *g_pRegistry;
+
 class CRegistry : public IRegistry
 {
 public:

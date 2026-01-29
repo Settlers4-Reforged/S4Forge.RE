@@ -4,6 +4,8 @@
 #include "defines.h"
 #include "IClipboard.h"
 
+extern class CClipboard *g_pClipboard;
+
 class CClipboard : public IClipboard {
 public:
     // address=[0x147f5e0]
