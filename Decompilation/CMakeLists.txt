@@ -9,11 +9,10 @@ if (NOT bits EQUAL 32)
   message(WARNING "Only 32-bit executables are supported at this time!")
 endif()
 
-file(GLOB_RECURSE GENERATED_SOURCES S4_Main/generated/*.cpp)
+file(GLOB_RECURSE CUSTOM_SOURCES S4_Main/src/*.cpp)
 
 set(SOURCE_LIST
-    S4_Main/main.cpp
-    ${GENERATED_SOURCES}
+    ${CUSTOM_SOURCES}
 )
 
 add_executable(S4_Main ${SOURCE_LIST})
@@ -21,6 +20,9 @@ add_executable(S4_Main ${SOURCE_LIST})
 
 target_compile_features(S4_Main PRIVATE cxx_std_17)
 target_compile_options(S4_Main PRIVATE /W4 /WX /permissive-)
+set(CMAKE_C_FLAGS "-m32")
+set(CMAKE_CXX_FLAGS "-m32")
+set(CMAKE_EXE_LINKER_FLAGS "-m32")
 
 target_include_directories(S4_Main PRIVATE S4_Main/generated)
 target_include_directories(S4_Main PRIVATE S4_Main/src)
