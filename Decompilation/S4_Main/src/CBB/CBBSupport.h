@@ -37,6 +37,36 @@ void __stdcall BBSupportEnableTraceLevel(unsigned int);
 // address=[0x2f2ee20]
 void __stdcall BBSupportDisableTraceLevel(unsigned int);
 
+// address=[0x2f2faa0]
+void __stdcall BBSupportSetErrorHandlingMode(int);
+
+// address=[0x2f32390]
+void __stdcall BBSupportActivateUnhandledExceptionFilter(void);
+
+// address=[0x2f323b0]
+void __stdcall BBSupportActivateSETranslator(void);
+
+// address=[0x2f33610]
+void __stdcall BBSupportActivateNewHandler(void);
+
+// address=[0x2f30da0]
+int __stdcall BBSupportLoadDbgHelpDll(int);
+
+// address=[0x2f30e00]
+void __stdcall BBSupportTraceDumpModules(void);
+
+// address=[0x2f2fb40]
+bool __stdcall BBSupportIsDevelopmentMachine(void);
+
+// address=[0x2f2fca0]
+unsigned int __stdcall BBSupportDevelopmentMachineId(void);
+
+// address=[0x2f2fe10]
+unsigned int __stdcall BBSupportGetModuleTimeDateStamp(void *);
+
+// address=[0x2f2fa90]
+char const * __cdecl BBSupportDllVersionString(void);
+
 namespace BBSupportLib {
     // address=[0x2f2f800]
     void __stdcall BBSCopyString(wchar_t *,wchar_t const *,unsigned int);

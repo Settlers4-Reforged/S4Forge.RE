@@ -16,7 +16,6 @@ public:
 
     // Type information members
 public:
-    void * vtable;
     int m_uSerialNumber;
     char * m_spType;
     CBBObject *m_pFirst;
