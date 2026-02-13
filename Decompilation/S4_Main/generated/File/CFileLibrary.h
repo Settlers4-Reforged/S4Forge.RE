@@ -51,7 +51,7 @@ public:
     void  C_AddPath(wchar_t const * _swpPath, int a3, wchar_t const * Source, wchar_t const * a5);
 
     // address=[0x2f0bfc0]
-    int  C_CreateFileLibrary(wchar_t const * lpFileName, char * a3, int a4, int nNumberOfBytesToRead);
+    int  C_CreateFileLibrary(wchar_t const * lpFileName, char * _spCommentFile, int a4, int nNumberOfBytesToRead);
 
     // address=[0x2f0d650]
      CFileLibrary(int a2);

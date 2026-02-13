@@ -1201,8 +1201,8 @@ void  CFileLibrary::C_AddPath(wchar_t const * _swpPath, int a3, wchar_t const * 
 
 
 // address=[0x2f0bfc0]
-// Decompiled from int __thiscall CFileLibrary::C_CreateFileLibrary(  CFileLibrary *this,  LPCWSTR lpFileName,  CHAR *a3,  char a4,  DWORD nNumberOfBytesToRead)
-int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * a3, int a4, int nNumberOfBytesToRead) {
+// Decompiled from int __thiscall CFileLibrary::C_CreateFileLibrary(  CFileLibrary *this,  WCHAR *lpFileName,  CHAR *_spCommentFile,  char a4,  DWORD nNumberOfBytesToRead)
+int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * _spCommentFile, int a4, int nNumberOfBytesToRead) {
   
   size_t v6; // eax
   size_t v7; // eax
@@ -1217,19 +1217,18 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * a3, in
   const char *v16; // [esp-Ch] [ebp-2D48h]
   const char *v17; // [esp-8h] [ebp-2D44h]
   const char *v18; // [esp-4h] [ebp-2D40h]
-  FLDirListStruct *v19; // [esp+18h] [ebp-2D24h]
   DWORD NumberOfBytesRead; // [esp+24h] [ebp-2D18h] BYREF
-  void *v21; // [esp+28h] [ebp-2D14h]
+  WCHAR *v21; // [esp+28h] [ebp-2D14h]
   FLDirListStruct *v22; // [esp+2Ch] [ebp-2D10h]
   FLDirListStruct *v23; // [esp+30h] [ebp-2D0Ch]
   FLDirListStruct *v24; // [esp+34h] [ebp-2D08h]
   BOOL NextFileW; // [esp+38h] [ebp-2D04h]
-  void *v26; // [esp+3Ch] [ebp-2D00h]
+  wchar_t *v26; // [esp+3Ch] [ebp-2D00h]
   int v28; // [esp+44h] [ebp-2CF8h]
-  void *v29; // [esp+48h] [ebp-2CF4h]
+  WCHAR *v29; // [esp+48h] [ebp-2CF4h]
   FLDirListStruct *v30; // [esp+4Ch] [ebp-2CF0h]
   void *v31; // [esp+50h] [ebp-2CECh]
-  FLDirListStruct *v32; // [esp+54h] [ebp-2CE8h]
+  FLDirListStruct *v33; // [esp+58h] [ebp-2CE4h]
   int v35; // [esp+60h] [ebp-2CDCh]
   unsigned int v36; // [esp+64h] [ebp-2CD8h]
   FLDirListStruct *v37; // [esp+68h] [ebp-2CD4h] MAPDST
@@ -1240,14 +1239,12 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * a3, in
   FLDirListStruct *v43; // [esp+80h] [ebp-2CBCh]
   FLDirListStruct *v44; // [esp+84h] [ebp-2CB8h]
   BOOL v45; // [esp+88h] [ebp-2CB4h]
-  FLDirListStruct *v47; // [esp+90h] [ebp-2CACh] MAPDST
-  FLDirListStruct *v48; // [esp+94h] [ebp-2CA8h]
   unsigned int m_iFileHeaderCount; // [esp+9Ch] [ebp-2CA0h]
   DWORD v51; // [esp+A0h] [ebp-2C9Ch]
   CHAR *v52; // [esp+A4h] [ebp-2C98h]
   int v53; // [esp+A8h] [ebp-2C94h]
   FLDirListStruct *v54; // [esp+ACh] [ebp-2C90h]
-  FLDirListStruct *v55; // [esp+B0h] [ebp-2C8Ch]
+  FLFileListStruct *v55; // [esp+B0h] [ebp-2C8Ch] MAPDST
   FLFileListStruct *v56; // [esp+B4h] [ebp-2C88h]
   FLHeaderStruct v57; // [esp+B8h] [ebp-2C84h] BYREF
   int v58; // [esp+D0h] [ebp-2C6Ch]
@@ -1271,19 +1268,20 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * a3, in
   FLDirListStruct *m_pDirList; // [esp+11Ch] [ebp-2C20h]
   int v78; // [esp+120h] [ebp-2C1Ch]
   int i; // [esp+124h] [ebp-2C18h] MAPDST
-  int v80; // [esp+128h] [ebp-2C14h]
-  FLDirListStruct *v81; // [esp+12Ch] [ebp-2C10h]
+  int uFailReason; // [esp+128h] [ebp-2C14h]
+  FLDirListStruct *pDirList; // [esp+12Ch] [ebp-2C10h] MAPDST
   FLDirListStruct *j; // [esp+134h] [ebp-2C08h]
   HANDLE hObject; // [esp+138h] [ebp-2C04h]
   FLDirListStruct *m; // [esp+13Ch] [ebp-2C00h]
   FLDirListStruct *v87; // [esp+144h] [ebp-2BF8h]
   FLPathListStruct *m_pPathList; // [esp+148h] [ebp-2BF4h]
+  FLDirListStruct *pDirListIterator; // [esp+14Ch] [ebp-2BF0h] MAPDST
   FLFileListStruct *k; // [esp+150h] [ebp-2BECh]
   FLFileListStruct *n; // [esp+154h] [ebp-2BE8h]
-  char v92; // [esp+15Bh] [ebp-2BE1h]
+  char bCanceled; // [esp+15Bh] [ebp-2BE1h]
   struct _WIN32_FIND_DATAW FindFileData; // [esp+15Ch] [ebp-2BE0h] BYREF
-  char v94[88]; // [esp+3ACh] [ebp-2990h] BYREF
-  char v95[88]; // [esp+404h] [ebp-2938h] BYREF
+  _DWORD v94[22]; // [esp+3ACh] [ebp-2990h] BYREF
+  _DWORD v95[22]; // [esp+404h] [ebp-2938h] BYREF
   _BYTE v96[28]; // [esp+45Ch] [ebp-28E0h] BYREF
   _BYTE v97[28]; // [esp+478h] [ebp-28C4h] BYREF
   _BYTE v98[28]; // [esp+494h] [ebp-28A8h] BYREF
@@ -1304,22 +1302,23 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * a3, in
     return 1;
   m_pPathList = this->m_pPathList;
   v65 = 0;
-  v81 = 0;
+  pDirList = 0;
   pPrevFileList = 0;
   v71 = 0;
-  v80 = 0;
-  v92 = 0;
-  while ( m_pPathList && !v92 )
+  uFailReason = 0;
+  bCanceled = 0;
+  while ( m_pPathList && !bCanceled )
   {
-    v47 = (FLDirListStruct *)operator new(0x10u);
+    pDirListIterator = (FLDirListStruct *)operator new(0x10u);
     exceptionBlock = 0;
-    if ( v47 )
-      v47 = FLDirListStruct::FLDirListStruct(v47);
+    if ( pDirListIterator )
+      pDirListIterator = FLDirListStruct::FLDirListStruct(pDirListIterator);
     else
-      v47 = 0;
+      pDirListIterator = 0;
+    v33 = pDirListIterator;
     exceptionBlock = -1;
     v74 = m_pPathList->field_C;
-    while ( v47 )
+    while ( pDirListIterator )
     {
       v35 = 0;
       Destination[0] = 0;
@@ -1340,33 +1339,38 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * a3, in
       }
       for ( i = 0; i < 2; ++i )
       {
-        if ( !v92 )
+        if ( !bCanceled )
         {
           v75 = -1;
           if ( i )
           {
             if ( i == 1 )
             {
-              if ( v47->m_swpPath )
+              if ( pDirListIterator->m_swpPath )
               {
-                swprintf((char *)Buffer, (char *)L"%s\\%s\\%s", (char)m_pPathList->m_swpPath);
+                swprintf(
+                  Buffer,
+                  L"%s\\%s\\%s",
+                  m_pPathList->m_swpPath,
+                  pDirListIterator->m_swpPath,
+                  m_pPathList->m_swpSearch);
                 v78 = 0;
               }
               else
               {
-                swprintf((char *)Buffer, (char *)L"%s\\%s", (char)m_pPathList->m_swpPath);
+                swprintf(Buffer, L"%s\\%s", m_pPathList->m_swpPath, m_pPathList->m_swpSearch);
                 v78 = 1;
               }
             }
           }
-          else if ( v47->m_swpPath )
+          else if ( pDirListIterator->m_swpPath )
           {
-            swprintf((char *)Buffer, (char *)L"%s\\%s\\*", (char)m_pPathList->m_swpPath);
+            swprintf(Buffer, L"%s\\%s\\*", m_pPathList->m_swpPath, pDirListIterator->m_swpPath);
             v78 = 0;
           }
           else
           {
-            swprintf((char *)Buffer, (char *)L"%s\\*", (char)m_pPathList->m_swpPath);
+            swprintf(Buffer, L"%s\\*", m_pPathList->m_swpPath);
             v78 = 1;
           }
           if ( Destination[0] )
@@ -1374,10 +1378,10 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * a3, in
           hFindFile = FindFirstFileW(Buffer, &FindFileData);
           if ( hFindFile != (HANDLE)-1 )
           {
-            if ( v47->m_swpPath )
-              swprintf((char *)String, (char *)L"%s\\%s", (char)m_pPathList->m_swpPath);
+            if ( pDirListIterator->m_swpPath )
+              swprintf(String, L"%s\\%s", m_pPathList->m_swpPath, pDirListIterator->m_swpPath);
             else
-              swprintf((char *)String, (char *)L"%s", (char)m_pPathList->m_swpPath);
+              swprintf(String, L"%s", m_pPathList->m_swpPath);
             v37 = (FLDirListStruct *)operator new(0x10u);
             exceptionBlock = 1;
             if ( v37 )
@@ -1387,34 +1391,39 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * a3, in
             exceptionBlock = -1;
             v87 = v37;
             v6 = wcslen(String);
-            v37->m_swpPath = (int)operator new[](2 * (v6 + 1));
-            wcscpy((wchar_t *)v87->m_swpPath, String);
-            if ( v47->m_swpPath )
-              swprintf((char *)String, (char *)L"Root: \"%s\"\n  Directory: \"\\%s\\%s\"", (char)m_pPathList->m_swpPath);
+            v37->m_swpPath = (WCHAR *)operator new[](2 * (v6 + 1));
+            wcscpy(v87->m_swpPath, String);
+            if ( pDirListIterator->m_swpPath )
+              swprintf(
+                String,
+                L"Root: \"%s\"\n  Directory: \"\\%s\\%s\"",
+                m_pPathList->m_swpPath,
+                Destination,
+                pDirListIterator->m_swpPath);
             else
-              swprintf((char *)String, (char *)L"Root: \"%s\"\n  Directory: \"\\%s\\\"", (char)m_pPathList->m_swpPath);
+              swprintf(String, L"Root: \"%s\"\n  Directory: \"\\%s\\\"", m_pPathList->m_swpPath, Destination);
             v7 = wcslen(String);
-            v87->field_4 = (int)operator new[](2 * (v7 + 1));
+            v87->field_4 = (char *)operator new[](2 * (v7 + 1));
             wcscpy((wchar_t *)v87->field_4, String);
-            v87->m_pNext = v81;
-            v81 = v87;
+            v87->m_pNext = pDirList;
+            pDirList = v87;
             if ( !v78 )
             {
               m_pDirList = this->m_pDirList;
-              if ( v47->m_swpPath )
+              if ( pDirListIterator->m_swpPath )
               {
                 if ( Destination[0] )
-                  swprintf((char *)String, (char *)L"%s\\%s", (char)Destination);
+                  swprintf(String, L"%s\\%s", Destination, pDirListIterator->m_swpPath);
                 else
-                  swprintf((char *)String, (char *)L"%s", v47->m_swpPath);
+                  swprintf(String, L"%s", pDirListIterator->m_swpPath);
               }
               else
               {
-                swprintf((char *)String, (char *)L"%s", (char)Destination);
+                swprintf(String, L"%s", Destination);
               }
               while ( m_pDirList )
               {
-                if ( !wcsicmp(String, (const wchar_t *)m_pDirList->m_swpPath) )
+                if ( !wcsicmp(String, m_pDirList->m_swpPath) )
                 {
                   v75 = m_pDirList->field_8;
                   break;
@@ -1433,10 +1442,10 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * a3, in
                 exceptionBlock = -1;
                 v87 = v41;
                 v8 = wcslen(String);
-                v21 = operator new[](2 * (v8 + 1));
-                v41->m_swpPath = (int)v21;
+                v21 = (WCHAR *)operator new[](2 * (v8 + 1));
+                v41->m_swpPath = v21;
                 v87->field_8 = v71;
-                wcscpy((wchar_t *)v87->m_swpPath, String);
+                wcscpy(v87->m_swpPath, String);
                 if ( v65 )
                   v65->m_pNext = v87;
                 else
@@ -1461,12 +1470,12 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * a3, in
                     v76 = 1;
                   if ( !v76 )
                   {
-                    for ( j = v47; j->m_pNext; j = j->m_pNext )
+                    for ( j = pDirListIterator; j->m_pNext; j = j->m_pNext )
                       ;
-                    if ( v47->m_swpPath )
-                      swprintf((char *)String, (char *)L"%s\\%s", v47->m_swpPath);
+                    if ( pDirListIterator->m_swpPath )
+                      swprintf(String, L"%s\\%s", pDirListIterator->m_swpPath, FindFileData.cFileName);
                     else
-                      swprintf((char *)String, (char *)L"%s", (char)FindFileData.cFileName);
+                      swprintf(String, L"%s", FindFileData.cFileName);
                     v43 = (FLDirListStruct *)operator new(0x10u);
                     exceptionBlock = 3;
                     if ( v43 )
@@ -1478,9 +1487,9 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * a3, in
                     j->m_pNext = v44;
                     j = j->m_pNext;
                     v9 = wcslen(String);
-                    v29 = operator new[](2 * (v9 + 1));
-                    j->m_swpPath = (int)v29;
-                    wcscpy((wchar_t *)j->m_swpPath, String);
+                    v29 = (WCHAR *)operator new[](2 * (v9 + 1));
+                    j->m_swpPath = v29;
+                    wcscpy(j->m_swpPath, String);
                   }
                 }
               }
@@ -1488,37 +1497,41 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * a3, in
               {
                 v45 = 0;
                 if ( (v74 & 2) != 0 )
-                  v45 = FindFileData.cFileName[0] == 33;
+                  v45 = FindFileData.cFileName[0] == '!';
                 if ( !v45 )
                 {
                   for ( k = this->m_FileList; k; k = k->m_pNext )
                   {
                     if ( !wcsicmp(k->m_swpFileName, FindFileData.cFileName) && k->m_uU4 == v75 )
                     {
-                      v80 = 4;
+                      uFailReason = 4;
                       m_pContainingDir = k->m_pContainingDir;
-                      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v95);
+                      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>((char *)v95);
                       exceptionBlock = 4;
                       std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(
-                        v98,
+                        v95,
+                        (int)v98,
                         m_pContainingDir->field_4);
                       LOBYTE(exceptionBlock) = 5;
                       std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(
-                        v97,
-                        m_pContainingDir->m_swpPath);
+                        v95,
+                        (int)v97,
+                        (char *)m_pContainingDir->m_swpPath);
                       LOBYTE(exceptionBlock) = 6;
                       std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(
-                        v100,
-                        v81->field_4);
+                        v95,
+                        (int)v100,
+                        pDirList->field_4);
                       LOBYTE(exceptionBlock) = 7;
                       std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(
-                        v99,
-                        FindFileData.cFileName);
+                        v95,
+                        (int)v99,
+                        (char *)FindFileData.cFileName);
                       v18 = (const char *)std::string::c_str(v99);
                       v17 = (const char *)std::string::c_str(v100);
                       v16 = (const char *)std::string::c_str(v97);
                       v10 = (const char *)std::string::c_str(v98);
-                      j__sprintf(
+                      sprintf(
                         Text,
                         "The same file names were found:\n\n%s\n  File: \"%s\"\n\n%s\n  File: \"%s\"\n",
                         v10,
@@ -1527,7 +1540,7 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * a3, in
                         v18);
                       v28 = MessageBoxA(0, Text, "Error Creating File Library", 0x31u);
                       if ( v28 == 2 )
-                        v92 = 1;
+                        bCanceled = 1;
                       std::string::~string(v99);
                       LOBYTE(exceptionBlock) = 6;
                       std::string::~string(v100);
@@ -1543,15 +1556,14 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * a3, in
                   v56 = (FLFileListStruct *)operator new(0x18u);
                   exceptionBlock = 8;
                   if ( v56 )
-                    v55 = (FLDirListStruct *)FLFileListStruct::FLFileListStruct(v56);
+                    v55 = FLFileListStruct::FLFileListStruct(v56);
                   else
                     v55 = 0;
-                  v47 = v55;
                   exceptionBlock = -1;
-                  k = (FLFileListStruct *)v55;
+                  k = v55;
                   v11 = wcslen(FindFileData.cFileName);
-                  v26 = operator new[](2 * (v11 + 1));
-                  v55->m_swpPath = (int)v26;
+                  v26 = (wchar_t *)operator new[](2 * (v11 + 1));
+                  v55->m_swpFileName = v26;
                   wcscpy(k->m_swpFileName, FindFileData.cFileName);
                   k->m_uU4 = v75;
                   k->m_uFileSize = FindFileData.nFileSizeLow;
@@ -1559,7 +1571,7 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * a3, in
                     k->m_uFlags = FLFF_Compressed;
                   if ( (v74 & 8) != 0 )
                     k->m_uFlags |= FLFF_Encrypted;
-                  k->m_pContainingDir = v81;
+                  k->m_pContainingDir = pDirList;
                   if ( pPrevFileList )
                     pPrevFileList->m_pNext = k;
                   else
@@ -1569,13 +1581,13 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * a3, in
               }
               NextFileW = FindNextFileW(hFindFile, &FindFileData);
             }
-            while ( NextFileW && !v92 );
+            while ( NextFileW && !bCanceled );
             FindClose(hFindFile);
           }
         }
       }
-      v24 = v47;
-      v47 = v47->m_pNext;
+      v24 = pDirListIterator;
+      pDirListIterator = pDirListIterator->m_pNext;
       v23 = v24;
 
       v54 = v24;
@@ -1584,20 +1596,21 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * a3, in
     }
     m_pPathList = (FLPathListStruct *)m_pPathList->field_10;
   }
-  if ( !v80 && !v92 )
+  if ( !uFailReason && !bCanceled )
   {
     hObject = CreateFileW(lpFileName, 0xC0000000, 0, 0, 2u, 0x80u, 0);
     if ( hObject == (HANDLE)-1 )
     {
-      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v94);
+      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>((char *)v94);
       exceptionBlock = 10;
       std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(
-        v96,
-        lpFileName);
+        v94,
+        (int)v96,
+        (char *)lpFileName);
       v15 = (const char *)std::string::c_str(v96);
-      j__sprintf(v104, "Error Creating File Library file: \"%s\"", v15);
+      sprintf(v104, "Error Creating File Library file: \"%s\"", v15);
       MessageBoxA(0, v104, "Error Creating File Library", 0x10u);
-      v80 = 3;
+      uFailReason = 3;
       std::string::~string(v96);
       exceptionBlock = -1;
       std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::~wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v94);
@@ -1608,15 +1621,15 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * a3, in
       v57.m_iVersion = 4097;
       v53 = 0;
       v105[0] = 0;
-      if ( a3 )
-        v52 = a3;
+      if ( _spCommentFile )
+        v52 = _spCommentFile;
       else
         v52 = v105;
       Str = v52;
       if ( (a4 & 1) != 0 )
       {
         Str = v105;
-        hFile = CreateFileA(a3, 0x80000000, 0, 0, 3u, 0x80u, 0);
+        hFile = CreateFileA(_spCommentFile, 0x80000000, 0, 0, 3u, 0x80u, 0);
         if ( hFile == (HANDLE)-1 )
         {
           j__strcpy_0(v105, "\n\nComment File Not Found !!!!\n\n");
@@ -1636,7 +1649,7 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * a3, in
       for ( m = this->m_pDirList; m; m = m->m_pNext )
       {
         ++v57.m_iDirectoryNameCount;
-        v69 += wcslen((const wchar_t *)m->m_swpPath) + 1;
+        v69 += wcslen(m->m_swpPath) + 1;
       }
       v70 = 0;
       v57.m_iFileHeaderCount = 0;
@@ -1677,7 +1690,7 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * a3, in
         pFileHeaders->field_0 = v67;
         pFileHeaders->field_C = n->m_uU4;
         pFileHeaders->m_uFlags = n->m_uFlags;
-        swprintf((char *)FileName, (char *)L"%s\\%s", n->m_pContainingDir->m_swpPath);
+        swprintf(FileName, L"%s\\%s", n->m_pContainingDir->m_swpPath, n->m_swpFileName);
         pCopyProgress.m_uExpectedFileSize = n->m_uFileSize;
         pCopyProgress.m_uFlags = n->m_uFlags;
         v58 = CFileLibrary::pC_CopyFile(this, FileName, hObject, nNumberOfBytesToRead, &pCopyProgress);
@@ -1685,10 +1698,10 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * a3, in
         {
           if ( v58 == 5 )
           {
-            j__sprintf(v103, "Error copying file data into a file library.\nThere is not enough space on the disk !!!!");
+            sprintf(v103, "Error copying file data into a file library.\nThere is not enough space on the disk !!!!");
             MessageBoxA(0, v103, "Error Creating File Library", 0x10u);
           }
-          v80 = v58;
+          uFailReason = v58;
           break;
         }
         pFileHeaders->field_8 = n->m_uFileSize;
@@ -1701,8 +1714,8 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * a3, in
       WriteFile(hObject, &v57, 0x18u, &NumberOfBytesWritten, 0);
       for ( m = this->m_pDirList; m; m = m->m_pNext )
       {
-        v13 = wcslen((const wchar_t *)m->m_swpPath);
-        WriteFile(hObject, (LPCVOID)m->m_swpPath, v13 + 1, &NumberOfBytesWritten, 0);
+        v13 = wcslen(m->m_swpPath);
+        WriteFile(hObject, m->m_swpPath, v13 + 1, &NumberOfBytesWritten, 0);
       }
       for ( n = this->m_FileList; n; n = n->m_pNext )
       {
@@ -1715,27 +1728,24 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * a3, in
       CloseHandle(hObject);
     }
   }
-  while ( v81 )
+  while ( pDirList )
   {
-    v19 = v81;
-    v81 = v81->m_pNext;
-    v32 = v19;
-    v48 = v19;
-    v31 = delete v19;
+    pDirList = pDirList->m_pNext;
+    v31 = delete pDirList;
   }
-  if ( v92 )
+  if ( bCanceled )
   {
     BBSupportTracePrintF(3, "CFileLibrary::C_CreateFileLibrary\t:\tFailed to create lib %s", (const char *)lpFileName);
     return 2;
   }
-  else if ( v80 )
+  else if ( uFailReason )
   {
     BBSupportTracePrintF(
       3,
       "CFileLibrary::C_CreateFileLibrary\t:\tFailed to create lib %s, %i",
       (const char *)lpFileName,
-      v80);
-    return v80;
+      uFailReason);
+    return uFailReason;
   }
   else
   {
@@ -2030,12 +2040,12 @@ int  CFileLibrary::pC_PackFile(void * a2, void * hFile, unsigned int * _pCRC, bo
   char *pWriteBuffer; // [esp+10h] [ebp-24h] MAPDST
   size_t uCompressedSize; // [esp+14h] [ebp-20h]
   LPVOID pReadBuffer; // [esp+18h] [ebp-1Ch] MAPDST
-  int pCompressor; // [esp+1Ch] [ebp-18h]
+  LZHLCompressor *pCompressor; // [esp+1Ch] [ebp-18h]
   DWORD uAcutallyReadSize; // [esp+20h] [ebp-14h] BYREF
   DWORD uReadSize; // [esp+28h] [ebp-Ch]
   DWORD nNumberOfBytesToWrite; // [esp+30h] [ebp-4h]
 
-  pCompressor = j__LZHLCreateCompressor(this);
+  pCompressor = j__LZHLCreateCompressor();
   nNumberOfBytesToWrite = 0;
   uReadSize = GetFileSize(hFile, 0);
   uCompressedSize = j__LZHLCompressorCalcMaxBuf(uReadSize);
@@ -2136,7 +2146,7 @@ void  CFileLibrary::pFreeFLData(void) {
   int k; // [esp+30h] [ebp-20h]
   FLIntHandleStruct *o; // [esp+34h] [ebp-1Ch] MAPDST
   struct FLFHandleStruct *m; // [esp+38h] [ebp-18h]
-  void **m_pFiles; // [esp+3Ch] [ebp-14h]
+  FLMemFileStruct *m_pFiles; // [esp+3Ch] [ebp-14h]
   struct FLMemDirStruct *m_pDirectories; // [esp+40h] [ebp-10h]
   FLLibraryFileStruct *m_pLibraryFiles; // [esp+44h] [ebp-Ch]
   int i; // [esp+48h] [ebp-8h]
@@ -2168,17 +2178,17 @@ void  CFileLibrary::pFreeFLData(void) {
   {
     if ( m_pDirectories->m_swpDirectoryName )
       operator delete[]((void *)m_pDirectories->m_swpDirectoryName);
-    m_pFiles = (void **)m_pDirectories->m_pFiles;
+    m_pFiles = m_pDirectories->m_pFiles;
     for ( k = 0; k < m_pDirectories->m_iFileCount; ++k )
     {
-      if ( *m_pFiles )
-        operator delete[](*m_pFiles);
-      if ( m_pFiles[7] )
+      if ( m_pFiles->m_pswName )
+        operator delete[]((void *)m_pFiles->m_pswName);
+      if ( m_pFiles->m_pFileData )
       {
-        operator delete[](m_pFiles[7]);
-        m_pFiles[7] = 0;
+        operator delete[](m_pFiles->m_pFileData);
+        m_pFiles->m_pFileData = 0;
       }
-      m_pFiles += 8;
+      ++m_pFiles;
     }
     if ( m_pDirectories->m_pFiles )
       operator delete[](m_pDirectories->m_pFiles);

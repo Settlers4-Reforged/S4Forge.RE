@@ -742,7 +742,7 @@ void  CStateLobbyGameSettings::PrintChatLine(unsigned short const * String, unsi
   v8[v5] = 0;
   if ( Dest[12] )
     strcpy(&Dest[12], ".");
-  j__sprintf(Buffer, "%s: %s", Dest, v8);
+  sprintf(Buffer, "%s: %s", Dest, v8);
   return GuiDlgMainGameSettingsAddChatline(Buffer);
 }
 
@@ -847,7 +847,7 @@ int __cdecl CStateLobbyGameSettings::CompileUserFlags(void) {
     v19 = (*(int (__thiscall **)(int, int))(*(_DWORD *)g_pRTComp + 8))(g_pRTComp, 8);
     if ( v19 )
     {
-      j__sprintf(Buffer, "RTComp Reported Error %d!", v19);
+      sprintf(Buffer, "RTComp Reported Error %d!", v19);
       BBSupportTracePrintF(3, Buffer);
       std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v25);
       LOBYTE(v48) = 13;
@@ -857,7 +857,7 @@ int __cdecl CStateLobbyGameSettings::CompileUserFlags(void) {
         v1);
       LOBYTE(v48) = 14;
       v2 = (const char *)std::string::c_str(v28);
-      j__sprintf(Buffer, "RTComp Error loading file %s!", v2);
+      sprintf(Buffer, "RTComp Error loading file %s!", v2);
       BBSupportTracePrintF(3, Buffer);
       for ( j = 0; ; ++j )
       {

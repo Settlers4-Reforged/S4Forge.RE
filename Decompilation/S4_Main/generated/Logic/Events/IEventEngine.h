@@ -75,7 +75,7 @@ public:
 public:
     struct CEvn_HandleList * m_pEventHandleList;
     DWORD m_pOSParam;
-    struct HNWD * m_hWnd;
+    struct IEventEngine::HNWD * m_hWnd;
     HANDLE m_hReplayFile;
     BYTE m_bIsEventRecording;
     BYTE m_bIsEventPlaying;

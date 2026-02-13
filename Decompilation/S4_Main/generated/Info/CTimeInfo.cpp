@@ -19,7 +19,7 @@ std::string __cdecl CTimeInfo::GetDateTimeString(int a1) {
   v7 = (_DWORD *)sub_14D33F0(&Time);
   if ( a2 )
   {
-    j__sprintf(Str, "%d. %s, %d, %02i:%02i", v7[3], &g_aszMonthNamesDe[6 * v7[4]], v7[5] + 1900, v7[2], v7[1]);
+    sprintf(Str, "%d. %s, %d, %02i:%02i", v7[3], &g_aszMonthNamesDe[6 * v7[4]], v7[5] + 1900, v7[2], v7[1]);
   }
   else
   {
@@ -29,7 +29,7 @@ std::string __cdecl CTimeInfo::GetDateTimeString(int a1) {
       v7[2] -= 12;
     if ( !v7[2] )
       v7[2] = 12;
-    j__sprintf(
+    sprintf(
       Str,
       "%s %dth, %d, %02i:%02i%s",
       &g_aszMonthNamesEn[6 * v7[4]],

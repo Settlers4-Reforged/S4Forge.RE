@@ -147,7 +147,7 @@ bool  CSimpleNet::PopMessage(void * & a2, unsigned int & a3, unsigned int & a4) 
   else
   {
     Error = WSAGetLastError();
-    j__sprintf((char *const)v10 + 432, "::recvfrom() failed: LastWSAError: %d!", Error);
+    sprintf((char *const)v10 + 432, "::recvfrom() failed: LastWSAError: %d!", Error);
     (*(void (__thiscall **)(CSimpleNet *, int, int))(*(_DWORD *)v10 + 88))(v10, (int)v10 + 432, 1);
     return 0;
   }
@@ -674,7 +674,7 @@ bool  CSimpleNet::ConnectSocket(void) {
         {
           Error = WSAGetLastError();
           v2 = std::_List_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>::operator*(v22);
-          j__sprintf(
+          sprintf(
             (char *const)v24 + 432,
             "SimpleNet: ::bind() to %s failed: LastWSAError: %d!",
             (const char *)(v2 + 4),

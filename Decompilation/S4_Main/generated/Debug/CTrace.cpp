@@ -1,3 +1,4 @@
+#if FALSE
 #include "CTrace.h"
 
 // Definitions for class CTrace
@@ -33,10 +34,10 @@
 
 
 // address=[0x14d3580]
-// Decompiled from _DWORD *__thiscall CTrace::operator_(_DWORD *this, int a2)
+// Decompiled from CTrace *__thiscall CTrace::operator_(CTrace *this, CTrace *a2)
 class CTrace &  CTrace::operator=(class CTrace const & a2) {
   
-  this[2] = *(_DWORD *)(a2 + 8);
+  this->spType = a2->spType;
   return this;
 }
 
@@ -87,42 +88,44 @@ void  CTrace::TracePrintHeader(void) {
   
   void *v1; // eax
   struct std::ostream *v2; // eax
-  int v3; // eax
-  struct std::ostream *v4; // eax
-  int v5; // eax
-  int v6; // eax
-  int v7; // eax
+  char *v3; // eax
+  char *v4; // eax
+  struct std::ostream *v5; // eax
+  char *v6; // eax
+  char *v7; // eax
+  int v8; // eax
+  int v9; // eax
   DWORD Time; // [esp-28h] [ebp-6Ch]
-  void *v10; // [esp-20h] [ebp-64h]
+  void *v12; // [esp-20h] [ebp-64h]
   unsigned int uThreadId; // [esp-1Ch] [ebp-60h]
-  void *v12; // [esp-14h] [ebp-58h]
+  void *v14; // [esp-14h] [ebp-58h]
   int iId; // [esp-10h] [ebp-54h]
-  void *v14; // [esp-Ch] [ebp-50h]
+  void *v16; // [esp-Ch] [ebp-50h]
   int uTraces; // [esp-8h] [ebp-4Ch]
-  _BYTE v16[16]; // [esp+0h] [ebp-44h] BYREF
-  _BYTE v17[16]; // [esp+10h] [ebp-34h] BYREF
-  _BYTE v18[16]; // [esp+20h] [ebp-24h] BYREF
-  _BYTE v19[16]; // [esp+30h] [ebp-14h] BYREF
+  _BYTE v18[16]; // [esp+0h] [ebp-44h] BYREF
+  _BYTE v19[16]; // [esp+10h] [ebp-34h] BYREF
+  _BYTE v20[16]; // [esp+20h] [ebp-24h] BYREF
+  _BYTE v21[16]; // [esp+30h] [ebp-14h] BYREF
 
   uTraces = s_uTraces;
-  v14 = std::setw(v19, 6LL);
+  v16 = std::setw(v21, 6LL);
   iId = this->m_iId;
-  v12 = std::setw(v18, 6LL);
+  v14 = std::setw(v20, 6LL);
   uThreadId = j____threadid();
-  v10 = std::setw(v17, 9LL);
+  v12 = std::setw(v19, 9LL);
   Time = timeGetTime();
-  v1 = std::setw(v16, 8LL);
-  v2 = (struct std::ostream *)std::operator<<<char,std::char_traits<char>,__int64>(byte_40329E0, v1);
-  std::ostream::operator<<(v2, Time);
-  v3 = std::ostream::operator<<(std::hex);
-  v4 = (struct std::ostream *)std::operator<<<char,std::char_traits<char>,__int64>(v3, v10);
-  std::ostream::operator<<(v4, uThreadId);
-  v5 = std::ostream::operator<<(std::dec);
-  std::operator<<<char,std::char_traits<char>,__int64>(v5, v12);
-  v6 = std::ostream::operator<<(iId);
-  std::operator<<<char,std::char_traits<char>,__int64>(v6, v14);
-  v7 = std::ostream::operator<<(uTraces);
-  std::operator<<<std::char_traits<char>>(v7, "  ");
+  v1 = std::setw(v18, 8LL);
+  v2 = (struct std::ostream *)std::operator<<<char,std::char_traits<char>,__int64>((int)byte_40329E0, (int)v1);
+  v3 = (char *)std::ostream::operator<<(v2, Time);
+  v4 = std::ostream::operator<<(v3, (void (__cdecl *)(char *))std::hex);
+  v5 = (struct std::ostream *)std::operator<<<char,std::char_traits<char>,__int64>((int)v4, (int)v12);
+  v6 = (char *)std::ostream::operator<<(v5, uThreadId);
+  v7 = std::ostream::operator<<(v6, (void (__cdecl *)(char *))std::dec);
+  std::operator<<<char,std::char_traits<char>,__int64>((int)v7, (int)v14);
+  v8 = std::ostream::operator<<(iId);
+  std::operator<<<char,std::char_traits<char>,__int64>(v8, (int)v16);
+  v9 = std::ostream::operator<<(uTraces);
+  std::operator<<<std::char_traits<char>>(v9, "  ");
   if ( this->spType )
     return std::operator<<<std::char_traits<char>>((int)byte_40329E0, this->spType);
   else
@@ -130,3 +133,4 @@ void  CTrace::TracePrintHeader(void) {
 }
 
 
+#endif // Already implemented

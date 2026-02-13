@@ -517,7 +517,6 @@ FOLDER_MAP =  {
         "CGameType",
         "CMapGeneratorHost",
         "CSoundManager",
-        "CStringEngineEx",
         "CTextMsgHandler",
         "CS4DefineNames",
         "CDefineTranslator",
@@ -596,6 +595,7 @@ FOLDER_MAP =  {
         "CSlideshow",
         "CScrollMultiline",
         "CStringEngine",
+        "CStringEngineEx",
     ],
 
     "Main/UI/Menus/": [

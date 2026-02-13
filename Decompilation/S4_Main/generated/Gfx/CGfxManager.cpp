@@ -107,7 +107,7 @@ void  CGfxManager::GetGuiGfxInfo(struct SGfxObjectInfo & a2, unsigned int a3) {
   {
     *(_DWORD *)a2 = *(_DWORD *)(*((_DWORD *)this + 2 * v3 + 211) + 4 * a3 + 20);
     *((_DWORD *)a2 + 1) = *(_DWORD *)(*((_DWORD *)this + v3 + 169) + 4 * a3 + 20);
-    j__sprintf(byte_3ECDC20, "Gui Element: %u", a3);
+    sprintf(byte_3ECDC20, "Gui Element: %u", a3);
     CGfxManager::Debug_Check_LayerBlock(this, v3, a2);
   }
   else
@@ -135,7 +135,7 @@ void  CGfxManager::GetUserLogoGfxInfo(struct SGfxObjectInfo & userLogoGfxInfo, u
   logoIndex = logoNr - 1;
   *(_DWORD *)userLogoGfxInfo = *(_DWORD *)(*((_DWORD *)this + 0xD5) + 8 * logoIndex + 20);
   *((_DWORD *)userLogoGfxInfo + 1) = *(_DWORD *)(*((_DWORD *)this + 0xAA) + 8 * logoIndex + 20);
-  j__sprintf(byte_3ECDC20, "Logo Player Nr: %u, Direction: %u", logoIndex, 0);
+  sprintf(byte_3ECDC20, "Logo Player Nr: %u, Direction: %u", logoIndex, 0);
   CGfxManager::Debug_Check_LayerBlock(this, 1u, userLogoGfxInfo);
 }
 
@@ -230,7 +230,7 @@ void  CGfxManager::GetBuildingGfxInfo(struct SGfxObjectInfo & a2, unsigned int a
   if ( !*((_DWORD *)this + v7 + 169) && BBSupportDbgReportF(2, "GfxManager.cpp", 1407, "m_pFilePalIndex[ %u ]", v7) == 1 )
     __debugbreak();
   *((_DWORD *)a2 + 1) = *(_DWORD *)(*((_DWORD *)this + v7 + 169) + 4 * v9 + 20);
-  j__sprintf(byte_3ECDC20, "Building Race: %u, Building: %u, Flags: 0x%x", a3, v9, a5);
+  sprintf(byte_3ECDC20, "Building Race: %u, Building: %u, Flags: 0x%x", a3, v9, a5);
   CGfxManager::Debug_Check_LayerBlock(this, v7, a2);
 }
 
@@ -289,7 +289,7 @@ void  CGfxManager::GetObjectGfxInfo(struct SGfxObjectInfo & a2, unsigned int a3,
     __debugbreak();
   }
   *((_DWORD *)a2 + 1) = *(_DWORD *)(*((_DWORD *)this + dword_3D7AB18 + 169) + 4 * v6 + 20);
-  j__sprintf(byte_3ECDC20, "Object: %u, Frame: %u, Amount: %u", v6, v7, v8);
+  sprintf(byte_3ECDC20, "Object: %u, Frame: %u, Amount: %u", v6, v7, v8);
   CGfxManager::Debug_Check_LayerBlock(this, dword_3D7AB18, a2);
 }
 
@@ -337,7 +337,7 @@ void  CGfxManager::GetSettlerGfxInfo(struct SGfxObjectInfo & a2, unsigned int a3
   if ( !*((_DWORD *)this + v7 + 169) && BBSupportDbgReportF(2, "GfxManager.cpp", 985, "m_pFilePalIndex[ %u ]", v7) == 1 )
     __debugbreak();
   *((_DWORD *)a2 + 1) = *(_DWORD *)(*((_DWORD *)this + v7 + 169) + 4 * v8 + 20);
-  j__sprintf(byte_3ECDC20, "Settler Race: %u, Job: %u, Frame: %u, Direction: %u", a3, v8, v9, a6);
+  sprintf(byte_3ECDC20, "Settler Race: %u, Job: %u, Frame: %u, Direction: %u", a3, v8, v9, a6);
   CGfxManager::Debug_Check_LayerBlock(this, v7, a2);
 }
 
@@ -393,7 +393,7 @@ void  CGfxManager::GetPatchSettlerGfxInfo(struct SGfxPatchObject & a2, unsigned 
   if ( !*((_DWORD *)this + v7 + 169) && BBSupportDbgReportF(2, "GfxManager.cpp", 1025, "m_pFilePalIndex[ %u ]", v7) == 1 )
     __debugbreak();
   *((_DWORD *)a2 + 1) = *(_DWORD *)(*((_DWORD *)this + v7 + 169) + 4 * a4 + 20);
-  j__sprintf(byte_3ECDC20, "Patch Settler Race: %u, Job: %u, Frame: %u, Direction: %u", a3, a4, a5, a6);
+  sprintf(byte_3ECDC20, "Patch Settler Race: %u, Job: %u, Frame: %u, Direction: %u", a3, a4, a5, a6);
   CGfxManager::Debug_Check_PatchLayerBlock(this, v7, a2);
 }
 
@@ -431,7 +431,7 @@ void  CGfxManager::GetPileGfxInfo(struct SGfxObjectInfo & a2, unsigned int a3, u
     __debugbreak();
   }
   *((_DWORD *)a2 + 1) = *(_DWORD *)(*((_DWORD *)this + dword_3D7AB1C + 169) + 4 * a3 + 20);
-  j__sprintf(byte_3ECDC20, "Pile: %u, Amount: %u, Frame: %u", a3, v7, v8);
+  sprintf(byte_3ECDC20, "Pile: %u, Amount: %u, Frame: %u", a3, v7, v8);
   CGfxManager::Debug_Check_LayerBlock(this, dword_3D7AB1C, a2);
 }
 
@@ -467,7 +467,7 @@ void  CGfxManager::GetPatchPileGfxInfo(struct SGfxPatchObject & a2, unsigned int
     __debugbreak();
   }
   *((_DWORD *)a2 + 1) = *(_DWORD *)(*((_DWORD *)this + dword_3D7AB20 + 169) + 4 * a3 + 20);
-  j__sprintf(byte_3ECDC20, "PatchPile: %u, Amount: %u, Frame: %u", a3, v6, v7);
+  sprintf(byte_3ECDC20, "PatchPile: %u, Amount: %u, Frame: %u", a3, v6, v7);
   CGfxManager::Debug_Check_PatchLayerBlock(this, dword_3D7AB20, a2);
 }
 
@@ -521,7 +521,7 @@ void  CGfxManager::GetVehicleGfxInfo(struct SGfxObjectInfo & a2, unsigned int a3
                                     + 4 * a8);
     *((_DWORD *)a2 + 4) = *(_DWORD *)(*((_DWORD *)this + v9 + 169) + 4 * a7 + 20);
   }
-  j__sprintf(
+  sprintf(
     byte_3ECDC20,
     "Vehicle Race: %u, Job: %u, Direction: %u, Frame: %u, JobPatch: %u, FramePatch: %u",
     a3,
@@ -584,7 +584,7 @@ void  CGfxManager::GetAnimalGfxInfo(struct SGfxObjectInfo & a2, unsigned int a3,
   if ( !*((_DWORD *)this + 177) && BBSupportDbgReport(2, "GfxManager.cpp", 1616, "m_pFilePalIndex[ iGfxFile ]") == 1 )
     __debugbreak();
   *((_DWORD *)a2 + 1) = *(_DWORD *)(*((_DWORD *)this + 177) + 4 * job + 20);
-  j__sprintf(byte_3ECDC20, "Animal %u, Direction: %u, Frame: %u", job, _iDirection, frame);
+  sprintf(byte_3ECDC20, "Animal %u, Direction: %u, Frame: %u", job, _iDirection, frame);
   CGfxManager::Debug_Check_LayerBlock(this, 8u, a2);
 }
 
@@ -672,7 +672,7 @@ void  CGfxManager::GetEffectGfxInfo(struct SGfxObjectInfo & a2, unsigned int a3,
     __debugbreak();
   }
   *((_DWORD *)a2 + 1) = *(_DWORD *)(*((_DWORD *)this + v9 + 169) + 4 * v5 + 20);
-  j__sprintf(byte_3ECDC20, "Effect: %u, Direction: %u, Frame: %u", v11, a4, v12);
+  sprintf(byte_3ECDC20, "Effect: %u, Direction: %u, Frame: %u", v11, a4, v12);
   CGfxManager::Debug_Check_LayerBlock(this, v9, a2);
 }
 
@@ -698,7 +698,7 @@ void  CGfxManager::GetAccessoryGfxInfo(struct SGfxObjectInfo & a2, unsigned int 
     __debugbreak();
   }
   *((_DWORD *)a2 + 1) = *(_DWORD *)(*((_DWORD *)this + dword_3D7AB24 + 169) + 4 * v4 + 20);
-  j__sprintf(byte_3ECDC20, "Accessory: %u", v4);
+  sprintf(byte_3ECDC20, "Accessory: %u", v4);
   CGfxManager::Debug_Check_LayerBlock(this, dword_3D7AB24, a2);
 }
 

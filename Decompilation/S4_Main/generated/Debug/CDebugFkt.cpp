@@ -122,7 +122,7 @@ void __cdecl CDebugFkt::SetFrameCounter(float a1, float a2, float a3, float a4, 
   char Buffer[1024]; // [esp+88h] [ebp-410h] BYREF
   int v13; // [esp+494h] [ebp-4h]
 
-  j__sprintf(
+  sprintf(
     Buffer,
     " - FPS: %3.2f Total: %3.0f%% Logic: %3.0f%% AI: %3.0f%% Script: %3.0f%% Tiling: %3.0f%% Animals: %3.0f%% NetSent: %d",
     a1,

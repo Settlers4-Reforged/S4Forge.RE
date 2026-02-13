@@ -1,3 +1,4 @@
+#if FALSE
 #include "CStringEngine.h"
 
 // Definitions for class CStringEngine
@@ -37,3 +38,4 @@ class CStringEngine * __cdecl CStringEngine::CreateStringEngine(int a1) {
 }
 
 
+#endif // Already implemented

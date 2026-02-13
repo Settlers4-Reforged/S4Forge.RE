@@ -74,15 +74,15 @@ bool  CBBFileException::GetErrorMessage(char * a2, unsigned int a3) {
   if ( v6 == 2 )
   {
     v3 = (const char *)std::string::c_str(v9);
-    j__sprintf(Buffer, "File \"%s\" not found!", v3);
+    sprintf(Buffer, "File \"%s\" not found!", v3);
   }
   else
   {
     v4 = (const char *)std::string::c_str(v9);
     if ( v6 == 3 )
-      j__sprintf(Buffer, "Error reading file \"%s\"!", v4);
+      sprintf(Buffer, "Error reading file \"%s\"!", v4);
     else
-      j__sprintf(Buffer, "An file error occurred (\"%s\")!", v4);
+      sprintf(Buffer, "An file error occurred (\"%s\")!", v4);
   }
   BBSupportLib::BBSCopyString<char>(a2, Buffer, a3);
   LOBYTE(v11) = 0;

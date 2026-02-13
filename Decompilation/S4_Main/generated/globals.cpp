@@ -20095,7 +20095,7 @@ void __cdecl InitGuiDlgMainStatisticEcoDisplayMode(void) {
           IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, dword_3694C68[jj], 0);
           IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, dword_3694C40[jj], 1);
           IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, dword_3694C90[jj], 1);
-          j__sprintf(Buffer, "Team %d", ii);
+          sprintf(Buffer, "Team %d", ii);
           IGuiEngine::SetText(g_pGUIEngine, 22, dword_3694BF0[jj], Buffer);
           v13 = CEndStatistic::GetPlayerColor((CEndStatistic *)&g_cEndStatistic, jj);
           IGuiEngine::SetImages(g_pGUIEngine, 22, dword_3694C18[jj], dword_3694B8C[v13], 0);
@@ -22309,7 +22309,7 @@ LABEL_62:
   if ( byte_4031FA4 )
     Dest[0] = 0;
   else
-    j__sprintf(Dest, "%i", dword_4031F84);
+    sprintf(Dest, "%i", dword_4031F84);
   IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 1972, Dest);
   if ( dword_4031F90 == 5 )
   {
@@ -43673,73 +43673,73 @@ void __cdecl WriteError(int a1, char * a2) {
         switch ( a1 )
         {
           case -2005530622:
-            j__sprintf(Buffer, "D3DERR_COLORKEYATTACHED");
+            sprintf(Buffer, "D3DERR_COLORKEYATTACHED");
             break;
           case -2005530612:
-            j__sprintf(Buffer, "D3DERR_VERTEXBUFFEROPTIMIZED");
+            sprintf(Buffer, "D3DERR_VERTEXBUFFEROPTIMIZED");
             break;
           case -2005530611:
-            j__sprintf(Buffer, "D3DERR_VBUF_CREATE_FAILED");
+            sprintf(Buffer, "D3DERR_VBUF_CREATE_FAILED");
             break;
           case -2005530610:
-            j__sprintf(Buffer, "D3DERR_VERTEXBUFFERLOCKED");
+            sprintf(Buffer, "D3DERR_VERTEXBUFFERLOCKED");
             break;
           case -2005530609:
-            j__sprintf(Buffer, "D3DERR_VERTEXBUFFERUNLOCKFAILED");
+            sprintf(Buffer, "D3DERR_VERTEXBUFFERUNLOCKFAILED");
             break;
           case -2005530602:
-            j__sprintf(Buffer, "D3DERR_ZBUFFER_NOTPRESENT");
+            sprintf(Buffer, "D3DERR_ZBUFFER_NOTPRESENT");
             break;
           case -2005530601:
-            j__sprintf(Buffer, "D3DERR_STENCILBUFFER_NOTPRESENT");
+            sprintf(Buffer, "D3DERR_STENCILBUFFER_NOTPRESENT");
             break;
           case -2005530600:
-            j__sprintf(Buffer, "D3DERR_WRONGTEXTUREFORMAT");
+            sprintf(Buffer, "D3DERR_WRONGTEXTUREFORMAT");
             break;
           case -2005530599:
-            j__sprintf(Buffer, "D3DERR_UNSUPPORTEDCOLOROPERATION");
+            sprintf(Buffer, "D3DERR_UNSUPPORTEDCOLOROPERATION");
             break;
           case -2005530598:
-            j__sprintf(Buffer, "D3DERR_UNSUPPORTEDCOLORARG");
+            sprintf(Buffer, "D3DERR_UNSUPPORTEDCOLORARG");
             break;
           case -2005530597:
-            j__sprintf(Buffer, "D3DERR_UNSUPPORTEDALPHAOPERATION");
+            sprintf(Buffer, "D3DERR_UNSUPPORTEDALPHAOPERATION");
             break;
           case -2005530596:
-            j__sprintf(Buffer, "D3DERR_UNSUPPORTEDALPHAARG");
+            sprintf(Buffer, "D3DERR_UNSUPPORTEDALPHAARG");
             break;
           case -2005530595:
-            j__sprintf(Buffer, "D3DERR_TOOMANYOPERATIONS");
+            sprintf(Buffer, "D3DERR_TOOMANYOPERATIONS");
             break;
           case -2005530594:
-            j__sprintf(Buffer, "D3DERR_CONFLICTINGTEXTUREFILTER");
+            sprintf(Buffer, "D3DERR_CONFLICTINGTEXTUREFILTER");
             break;
           case -2005530593:
-            j__sprintf(Buffer, "D3DERR_UNSUPPORTEDFACTORVALUE");
+            sprintf(Buffer, "D3DERR_UNSUPPORTEDFACTORVALUE");
             break;
           case -2005530591:
-            j__sprintf(Buffer, "D3DERR_CONFLICTINGRENDERSTATE");
+            sprintf(Buffer, "D3DERR_CONFLICTINGRENDERSTATE");
             break;
           case -2005530590:
-            j__sprintf(Buffer, "D3DERR_UNSUPPORTEDTEXTUREFILTER");
+            sprintf(Buffer, "D3DERR_UNSUPPORTEDTEXTUREFILTER");
             break;
           case -2005530589:
-            j__sprintf(Buffer, "D3DERR_TOOMANYPRIMITIVES");
+            sprintf(Buffer, "D3DERR_TOOMANYPRIMITIVES");
             break;
           case -2005530588:
-            j__sprintf(Buffer, "D3DERR_INVALIDMATRIX");
+            sprintf(Buffer, "D3DERR_INVALIDMATRIX");
             break;
           case -2005530586:
-            j__sprintf(Buffer, "D3DERR_CONFLICTINGTEXTUREPALETTE");
+            sprintf(Buffer, "D3DERR_CONFLICTINGTEXTUREPALETTE");
             break;
           case -2005530572:
-            j__sprintf(Buffer, "D3DERR_INVALIDSTATEBLOCK");
+            sprintf(Buffer, "D3DERR_INVALIDSTATEBLOCK");
             break;
           case -2005530571:
-            j__sprintf(Buffer, "D3DERR_INBEGINSTATEBLOCK");
+            sprintf(Buffer, "D3DERR_INBEGINSTATEBLOCK");
             break;
           case -2005530570:
-            j__sprintf(Buffer, "D3DERR_NOTINBEGINSTATEBLOCK");
+            sprintf(Buffer, "D3DERR_NOTINBEGINSTATEBLOCK");
             break;
           default:
             goto WriteError___def_33609C9;
@@ -43747,295 +43747,295 @@ void __cdecl WriteError(int a1, char * a2) {
       }
       else
       {
-        j__sprintf(Buffer, "DD_OK");
+        sprintf(Buffer, "DD_OK");
       }
     }
     else if ( a1 == -2005530624 )
     {
-      j__sprintf(Buffer, "D3DERR_INVALIDVERTEXFORMAT");
+      sprintf(Buffer, "D3DERR_INVALIDVERTEXFORMAT");
     }
     else
     {
       switch ( a1 )
       {
         case -2005532151:
-          j__sprintf(Buffer, "DDERR_INVALIDSTREAM");
+          sprintf(Buffer, "DDERR_INVALIDSTREAM");
           break;
         case -2005532135:
-          j__sprintf(Buffer, "DDERR_VERTICALBLANKINPROGRESS");
+          sprintf(Buffer, "DDERR_VERTICALBLANKINPROGRESS");
           break;
         case -2005532132:
-          j__sprintf(Buffer, "DDERR_WASSTILLDRAWING");
+          sprintf(Buffer, "DDERR_WASSTILLDRAWING");
           break;
         case -2005532112:
-          j__sprintf(Buffer, "DDERR_XALIGN");
+          sprintf(Buffer, "DDERR_XALIGN");
           break;
         case -2005532111:
-          j__sprintf(Buffer, "DDERR_INVALIDDIRECTDRAWGUID");
+          sprintf(Buffer, "DDERR_INVALIDDIRECTDRAWGUID");
           break;
         case -2005532110:
-          j__sprintf(Buffer, "DDERR_DIRECTDRAWALREADYCREATED");
+          sprintf(Buffer, "DDERR_DIRECTDRAWALREADYCREATED");
           break;
         case -2005532109:
-          j__sprintf(Buffer, "DDERR_NODIRECTDRAWHW");
+          sprintf(Buffer, "DDERR_NODIRECTDRAWHW");
           break;
         case -2005532108:
-          j__sprintf(Buffer, "DDERR_PRIMARYSURFACEALREADYEXISTS");
+          sprintf(Buffer, "DDERR_PRIMARYSURFACEALREADYEXISTS");
           break;
         case -2005532107:
-          j__sprintf(Buffer, "DDERR_NOEMULATION");
+          sprintf(Buffer, "DDERR_NOEMULATION");
           break;
         case -2005532106:
-          j__sprintf(Buffer, "DDERR_REGIONTOOSMALL");
+          sprintf(Buffer, "DDERR_REGIONTOOSMALL");
           break;
         case -2005532105:
-          j__sprintf(Buffer, "DDERR_CLIPPERISUSINGHWND");
+          sprintf(Buffer, "DDERR_CLIPPERISUSINGHWND");
           break;
         case -2005532104:
-          j__sprintf(Buffer, "DDERR_NOCLIPPERATTACHED");
+          sprintf(Buffer, "DDERR_NOCLIPPERATTACHED");
           break;
         case -2005532103:
-          j__sprintf(Buffer, "DDERR_NOHWND");
+          sprintf(Buffer, "DDERR_NOHWND");
           break;
         case -2005532102:
-          j__sprintf(Buffer, "DDERR_HWNDSUBCLASSED");
+          sprintf(Buffer, "DDERR_HWNDSUBCLASSED");
           break;
         case -2005532101:
-          j__sprintf(Buffer, "DDERR_HWNDALREADYSET");
+          sprintf(Buffer, "DDERR_HWNDALREADYSET");
           break;
         case -2005532100:
-          j__sprintf(Buffer, "DDERR_NOPALETTEATTACHED");
+          sprintf(Buffer, "DDERR_NOPALETTEATTACHED");
           break;
         case -2005532099:
-          j__sprintf(Buffer, "DDERR_NOPALETTEHW");
+          sprintf(Buffer, "DDERR_NOPALETTEHW");
           break;
         case -2005532098:
-          j__sprintf(Buffer, "DDERR_BLTFASTCANTCLIP");
+          sprintf(Buffer, "DDERR_BLTFASTCANTCLIP");
           break;
         case -2005532097:
-          j__sprintf(Buffer, "DDERR_NOBLTHW");
+          sprintf(Buffer, "DDERR_NOBLTHW");
           break;
         case -2005532096:
-          j__sprintf(Buffer, "DDERR_NODDROPSHW");
+          sprintf(Buffer, "DDERR_NODDROPSHW");
           break;
         case -2005532095:
-          j__sprintf(Buffer, "DDERR_OVERLAYNOTVISIBLE");
+          sprintf(Buffer, "DDERR_OVERLAYNOTVISIBLE");
           break;
         case -2005532093:
-          j__sprintf(Buffer, "DDERR_INVALIDPOSITION");
+          sprintf(Buffer, "DDERR_INVALIDPOSITION");
           break;
         case -2005532092:
-          j__sprintf(Buffer, "DDERR_NOTAOVERLAYSURFACE");
+          sprintf(Buffer, "DDERR_NOTAOVERLAYSURFACE");
           break;
         case -2005532091:
-          j__sprintf(Buffer, "DDERR_EXCLUSIVEMODEALREADYSET");
+          sprintf(Buffer, "DDERR_EXCLUSIVEMODEALREADYSET");
           break;
         case -2005532090:
-          j__sprintf(Buffer, "DDERR_NOTFLIPPABLE");
+          sprintf(Buffer, "DDERR_NOTFLIPPABLE");
           break;
         case -2005532089:
-          j__sprintf(Buffer, "DDERR_CANTDUPLICATE");
+          sprintf(Buffer, "DDERR_CANTDUPLICATE");
           break;
         case -2005532088:
-          j__sprintf(Buffer, "DDERR_NOTLOCKED");
+          sprintf(Buffer, "DDERR_NOTLOCKED");
           break;
         case -2005532087:
-          j__sprintf(Buffer, "DDERR_CANTCREATEDC");
+          sprintf(Buffer, "DDERR_CANTCREATEDC");
           break;
         case -2005532086:
-          j__sprintf(Buffer, "DDERR_NODC");
+          sprintf(Buffer, "DDERR_NODC");
           break;
         case -2005532085:
-          j__sprintf(Buffer, "DDERR_WRONGMODE");
+          sprintf(Buffer, "DDERR_WRONGMODE");
           break;
         case -2005532084:
-          j__sprintf(Buffer, "DDERR_IMPLICITLYCREATED");
+          sprintf(Buffer, "DDERR_IMPLICITLYCREATED");
           break;
         case -2005532083:
-          j__sprintf(Buffer, "DDERR_NOTPALETTIZED");
+          sprintf(Buffer, "DDERR_NOTPALETTIZED");
           break;
         case -2005532082:
-          j__sprintf(Buffer, "DDERR_UNSUPPORTEDMODE");
+          sprintf(Buffer, "DDERR_UNSUPPORTEDMODE");
           break;
         case -2005532081:
-          j__sprintf(Buffer, "DDERR_NOMIPMAPHW");
+          sprintf(Buffer, "DDERR_NOMIPMAPHW");
           break;
         case -2005532080:
-          j__sprintf(Buffer, "DDERR_INVALIDSURFACETYPE");
+          sprintf(Buffer, "DDERR_INVALIDSURFACETYPE");
           break;
         case -2005532072:
-          j__sprintf(Buffer, "DDERR_NOOPTIMIZEHW");
+          sprintf(Buffer, "DDERR_NOOPTIMIZEHW");
           break;
         case -2005532071:
-          j__sprintf(Buffer, "DDERR_NOTLOADED");
+          sprintf(Buffer, "DDERR_NOTLOADED");
           break;
         case -2005532070:
-          j__sprintf(Buffer, "DDERR_NOFOCUSWINDOW");
+          sprintf(Buffer, "DDERR_NOFOCUSWINDOW");
           break;
         case -2005532052:
-          j__sprintf(Buffer, "DDERR_DCALREADYCREATED");
+          sprintf(Buffer, "DDERR_DCALREADYCREATED");
           break;
         case -2005532042:
-          j__sprintf(Buffer, "DDERR_NONONLOCALVIDMEM");
+          sprintf(Buffer, "DDERR_NONONLOCALVIDMEM");
           break;
         case -2005532032:
-          j__sprintf(Buffer, "DDERR_CANTPAGELOCK");
+          sprintf(Buffer, "DDERR_CANTPAGELOCK");
           break;
         case -2005532012:
-          j__sprintf(Buffer, "DDERR_CANTPAGEUNLOCK");
+          sprintf(Buffer, "DDERR_CANTPAGEUNLOCK");
           break;
         case -2005531992:
-          j__sprintf(Buffer, "DDERR_NOTPAGELOCKED");
+          sprintf(Buffer, "DDERR_NOTPAGELOCKED");
           break;
         case -2005531982:
-          j__sprintf(Buffer, "DDERR_MOREDATA");
+          sprintf(Buffer, "DDERR_MOREDATA");
           break;
         case -2005531981:
-          j__sprintf(Buffer, "DDERR_EXPIRED");
+          sprintf(Buffer, "DDERR_EXPIRED");
           break;
         case -2005531977:
-          j__sprintf(Buffer, "DDERR_VIDEONOTACTIVE");
+          sprintf(Buffer, "DDERR_VIDEONOTACTIVE");
           break;
         case -2005531973:
-          j__sprintf(Buffer, "DDERR_DEVICEDOESNTOWNSURFACE");
+          sprintf(Buffer, "DDERR_DEVICEDOESNTOWNSURFACE");
           break;
         case -2005531972:
-          j__sprintf(Buffer, "D3DERR_BADMAJORVERSION");
+          sprintf(Buffer, "D3DERR_BADMAJORVERSION");
           break;
         case -2005531971:
-          j__sprintf(Buffer, "D3DERR_BADMINORVERSION");
+          sprintf(Buffer, "D3DERR_BADMINORVERSION");
           break;
         case -2005531967:
-          j__sprintf(Buffer, "D3DERR_INVALID_DEVICE");
+          sprintf(Buffer, "D3DERR_INVALID_DEVICE");
           break;
         case -2005531966:
-          j__sprintf(Buffer, "D3DERR_INITFAILED");
+          sprintf(Buffer, "D3DERR_INITFAILED");
           break;
         case -2005531965:
-          j__sprintf(Buffer, "D3DERR_DEVICEAGGREGATED");
+          sprintf(Buffer, "D3DERR_DEVICEAGGREGATED");
           break;
         case -2005531952:
-          j__sprintf(Buffer, "D3DERR_TEXTURE_NO_SUPPORT");
+          sprintf(Buffer, "D3DERR_TEXTURE_NO_SUPPORT");
           break;
         case -2005531951:
-          j__sprintf(Buffer, "D3DERR_TEXTURE_CREATE_FAILED");
+          sprintf(Buffer, "D3DERR_TEXTURE_CREATE_FAILED");
           break;
         case -2005531950:
-          j__sprintf(Buffer, "D3DERR_TEXTURE_DESTROY_FAILED");
+          sprintf(Buffer, "D3DERR_TEXTURE_DESTROY_FAILED");
           break;
         case -2005531949:
-          j__sprintf(Buffer, "D3DERR_TEXTURE_LOCK_FAILED");
+          sprintf(Buffer, "D3DERR_TEXTURE_LOCK_FAILED");
           break;
         case -2005531948:
-          j__sprintf(Buffer, "D3DERR_TEXTURE_UNLOCK_FAILED");
+          sprintf(Buffer, "D3DERR_TEXTURE_UNLOCK_FAILED");
           break;
         case -2005531947:
-          j__sprintf(Buffer, "D3DERR_TEXTURE_LOAD_FAILED");
+          sprintf(Buffer, "D3DERR_TEXTURE_LOAD_FAILED");
           break;
         case -2005531946:
-          j__sprintf(Buffer, "D3DERR_TEXTURE_SWAP_FAILED");
+          sprintf(Buffer, "D3DERR_TEXTURE_SWAP_FAILED");
           break;
         case -2005531945:
-          j__sprintf(Buffer, "D3DERR_TEXTURE_LOCKED");
+          sprintf(Buffer, "D3DERR_TEXTURE_LOCKED");
           break;
         case -2005531944:
-          j__sprintf(Buffer, "D3DERR_TEXTURE_NOT_LOCKED");
+          sprintf(Buffer, "D3DERR_TEXTURE_NOT_LOCKED");
           break;
         case -2005531943:
-          j__sprintf(Buffer, "D3DERR_TEXTURE_GETSURF_FAILED");
+          sprintf(Buffer, "D3DERR_TEXTURE_GETSURF_FAILED");
           break;
         case -2005531942:
-          j__sprintf(Buffer, "D3DERR_MATRIX_CREATE_FAILED");
+          sprintf(Buffer, "D3DERR_MATRIX_CREATE_FAILED");
           break;
         case -2005531941:
-          j__sprintf(Buffer, "D3DERR_MATRIX_DESTROY_FAILED");
+          sprintf(Buffer, "D3DERR_MATRIX_DESTROY_FAILED");
           break;
         case -2005531940:
-          j__sprintf(Buffer, "D3DERR_MATRIX_SETDATA_FAILED");
+          sprintf(Buffer, "D3DERR_MATRIX_SETDATA_FAILED");
           break;
         case -2005531939:
-          j__sprintf(Buffer, "D3DERR_MATRIX_GETDATA_FAILED");
+          sprintf(Buffer, "D3DERR_MATRIX_GETDATA_FAILED");
           break;
         case -2005531938:
-          j__sprintf(Buffer, "D3DERR_SETVIEWPORTDATA_FAILED");
+          sprintf(Buffer, "D3DERR_SETVIEWPORTDATA_FAILED");
           break;
         case -2005531937:
-          j__sprintf(Buffer, "D3DERR_INVALIDCURRENTVIEWPORT");
+          sprintf(Buffer, "D3DERR_INVALIDCURRENTVIEWPORT");
           break;
         case -2005531936:
-          j__sprintf(Buffer, "D3DERR_INVALIDPRIMITIVETYPE");
+          sprintf(Buffer, "D3DERR_INVALIDPRIMITIVETYPE");
           break;
         case -2005531935:
-          j__sprintf(Buffer, "D3DERR_INVALIDVERTEXTYPE");
+          sprintf(Buffer, "D3DERR_INVALIDVERTEXTYPE");
           break;
         case -2005531934:
-          j__sprintf(Buffer, "D3DERR_TEXTURE_BADSIZE");
+          sprintf(Buffer, "D3DERR_TEXTURE_BADSIZE");
           break;
         case -2005531933:
-          j__sprintf(Buffer, "D3DERR_INVALIDRAMPTEXTURE");
+          sprintf(Buffer, "D3DERR_INVALIDRAMPTEXTURE");
           break;
         case -2005531932:
-          j__sprintf(Buffer, "D3DERR_MATERIAL_CREATE_FAILED");
+          sprintf(Buffer, "D3DERR_MATERIAL_CREATE_FAILED");
           break;
         case -2005531931:
-          j__sprintf(Buffer, "D3DERR_MATERIAL_DESTROY_FAILED");
+          sprintf(Buffer, "D3DERR_MATERIAL_DESTROY_FAILED");
           break;
         case -2005531930:
-          j__sprintf(Buffer, "D3DERR_MATERIAL_SETDATA_FAILED");
+          sprintf(Buffer, "D3DERR_MATERIAL_SETDATA_FAILED");
           break;
         case -2005531929:
-          j__sprintf(Buffer, "D3DERR_MATERIAL_GETDATA_FAILED");
+          sprintf(Buffer, "D3DERR_MATERIAL_GETDATA_FAILED");
           break;
         case -2005531928:
-          j__sprintf(Buffer, "D3DERR_INVALIDPALETTE");
+          sprintf(Buffer, "D3DERR_INVALIDPALETTE");
           break;
         case -2005531927:
-          j__sprintf(Buffer, "D3DERR_ZBUFF_NEEDS_SYSTEMMEMORY");
+          sprintf(Buffer, "D3DERR_ZBUFF_NEEDS_SYSTEMMEMORY");
           break;
         case -2005531926:
-          j__sprintf(Buffer, "D3DERR_ZBUFF_NEEDS_VIDEOMEMORY");
+          sprintf(Buffer, "D3DERR_ZBUFF_NEEDS_VIDEOMEMORY");
           break;
         case -2005531925:
-          j__sprintf(Buffer, "D3DERR_SURFACENOTINVIDMEM");
+          sprintf(Buffer, "D3DERR_SURFACENOTINVIDMEM");
           break;
         case -2005531922:
-          j__sprintf(Buffer, "D3DERR_LIGHT_SET_FAILED");
+          sprintf(Buffer, "D3DERR_LIGHT_SET_FAILED");
           break;
         case -2005531921:
-          j__sprintf(Buffer, "D3DERR_LIGHTHASVIEWPORT");
+          sprintf(Buffer, "D3DERR_LIGHTHASVIEWPORT");
           break;
         case -2005531920:
-          j__sprintf(Buffer, "D3DERR_LIGHTNOTINTHISVIEWPORT");
+          sprintf(Buffer, "D3DERR_LIGHTNOTINTHISVIEWPORT");
           break;
         case -2005531912:
-          j__sprintf(Buffer, "D3DERR_SCENE_IN_SCENE");
+          sprintf(Buffer, "D3DERR_SCENE_IN_SCENE");
           break;
         case -2005531911:
-          j__sprintf(Buffer, "D3DERR_SCENE_NOT_IN_SCENE");
+          sprintf(Buffer, "D3DERR_SCENE_NOT_IN_SCENE");
           break;
         case -2005531910:
-          j__sprintf(Buffer, "D3DERR_SCENE_BEGIN_FAILED");
+          sprintf(Buffer, "D3DERR_SCENE_BEGIN_FAILED");
           break;
         case -2005531909:
-          j__sprintf(Buffer, "D3DERR_SCENE_END_FAILED");
+          sprintf(Buffer, "D3DERR_SCENE_END_FAILED");
           break;
         case -2005531902:
-          j__sprintf(Buffer, "D3DERR_INBEGIN");
+          sprintf(Buffer, "D3DERR_INBEGIN");
           break;
         case -2005531901:
-          j__sprintf(Buffer, "D3DERR_NOTINBEGIN");
+          sprintf(Buffer, "D3DERR_NOTINBEGIN");
           break;
         case -2005531900:
-          j__sprintf(Buffer, "D3DERR_NOVIEWPORTS");
+          sprintf(Buffer, "D3DERR_NOVIEWPORTS");
           break;
         case -2005531899:
-          j__sprintf(Buffer, "D3DERR_VIEWPORTDATANOTSET");
+          sprintf(Buffer, "D3DERR_VIEWPORTDATANOTSET");
           break;
         case -2005531898:
-          j__sprintf(Buffer, "D3DERR_VIEWPORTHASNODEVICE");
+          sprintf(Buffer, "D3DERR_VIEWPORTHASNODEVICE");
           break;
         case -2005531897:
-          j__sprintf(Buffer, "D3DERR_NOCURRENTVIEWPORT");
+          sprintf(Buffer, "D3DERR_NOCURRENTVIEWPORT");
           break;
         default:
           goto WriteError___def_33609C9;
@@ -44044,7 +44044,7 @@ void __cdecl WriteError(int a1, char * a2) {
   }
   else if ( a1 == -2005532152 )
   {
-    j__sprintf(Buffer, "DDERR_UNSUPPORTEDMASK");
+    sprintf(Buffer, "DDERR_UNSUPPORTEDMASK");
   }
   else if ( a1 > -2005532667 )
   {
@@ -44053,85 +44053,85 @@ void __cdecl WriteError(int a1, char * a2) {
       switch ( a1 )
       {
         case -2005532392:
-          j__sprintf(Buffer, "DDERR_NORASTEROPHW");
+          sprintf(Buffer, "DDERR_NORASTEROPHW");
           break;
         case -2005532382:
-          j__sprintf(Buffer, "DDERR_NOROTATIONHW");
+          sprintf(Buffer, "DDERR_NOROTATIONHW");
           break;
         case -2005532362:
-          j__sprintf(Buffer, "DDERR_NOSTRETCHHW");
+          sprintf(Buffer, "DDERR_NOSTRETCHHW");
           break;
         case -2005532356:
-          j__sprintf(Buffer, "DDERR_NOT4BITCOLOR");
+          sprintf(Buffer, "DDERR_NOT4BITCOLOR");
           break;
         case -2005532355:
-          j__sprintf(Buffer, "DDERR_NOT4BITCOLORINDEX");
+          sprintf(Buffer, "DDERR_NOT4BITCOLORINDEX");
           break;
         case -2005532352:
-          j__sprintf(Buffer, "DDERR_NOT8BITCOLOR");
+          sprintf(Buffer, "DDERR_NOT8BITCOLOR");
           break;
         case -2005532342:
-          j__sprintf(Buffer, "DDERR_NOTEXTUREHW");
+          sprintf(Buffer, "DDERR_NOTEXTUREHW");
           break;
         case -2005532337:
-          j__sprintf(Buffer, "DDERR_NOVSYNCHW");
+          sprintf(Buffer, "DDERR_NOVSYNCHW");
           break;
         case -2005532332:
-          j__sprintf(Buffer, "DDERR_NOZBUFFERHW");
+          sprintf(Buffer, "DDERR_NOZBUFFERHW");
           break;
         case -2005532322:
-          j__sprintf(Buffer, "DDERR_NOZOVERLAYHW");
+          sprintf(Buffer, "DDERR_NOZOVERLAYHW");
           break;
         case -2005532312:
-          j__sprintf(Buffer, "DDERR_OUTOFCAPS");
+          sprintf(Buffer, "DDERR_OUTOFCAPS");
           break;
         case -2005532292:
-          j__sprintf(Buffer, "DDERR_OUTOFVIDEOMEMORY");
+          sprintf(Buffer, "DDERR_OUTOFVIDEOMEMORY");
           break;
         case -2005532290:
-          j__sprintf(Buffer, "DDERR_OVERLAYCANTCLIP");
+          sprintf(Buffer, "DDERR_OVERLAYCANTCLIP");
           break;
         case -2005532288:
-          j__sprintf(Buffer, "DDERR_OVERLAYCOLORKEYONLYONEACTIVE");
+          sprintf(Buffer, "DDERR_OVERLAYCOLORKEYONLYONEACTIVE");
           break;
         case -2005532285:
-          j__sprintf(Buffer, "DDERR_PALETTEBUSY");
+          sprintf(Buffer, "DDERR_PALETTEBUSY");
           break;
         case -2005532272:
-          j__sprintf(Buffer, "DDERR_COLORKEYNOTSET");
+          sprintf(Buffer, "DDERR_COLORKEYNOTSET");
           break;
         case -2005532262:
-          j__sprintf(Buffer, "DDERR_SURFACEALREADYATTACHED");
+          sprintf(Buffer, "DDERR_SURFACEALREADYATTACHED");
           break;
         case -2005532252:
-          j__sprintf(Buffer, "DDERR_SURFACEALREADYDEPENDENT");
+          sprintf(Buffer, "DDERR_SURFACEALREADYDEPENDENT");
           break;
         case -2005532242:
-          j__sprintf(Buffer, "DDERR_SURFACEBUSY");
+          sprintf(Buffer, "DDERR_SURFACEBUSY");
           break;
         case -2005532237:
-          j__sprintf(Buffer, "DDERR_CANTLOCKSURFACE");
+          sprintf(Buffer, "DDERR_CANTLOCKSURFACE");
           break;
         case -2005532232:
-          j__sprintf(Buffer, "DDERR_SURFACEISOBSCURED");
+          sprintf(Buffer, "DDERR_SURFACEISOBSCURED");
           break;
         case -2005532222:
-          j__sprintf(Buffer, "DDERR_SURFACELOST");
+          sprintf(Buffer, "DDERR_SURFACELOST");
           break;
         case -2005532212:
-          j__sprintf(Buffer, "DDERR_SURFACENOTATTACHED");
+          sprintf(Buffer, "DDERR_SURFACENOTATTACHED");
           break;
         case -2005532202:
-          j__sprintf(Buffer, "DDERR_TOOBIGHEIGHT");
+          sprintf(Buffer, "DDERR_TOOBIGHEIGHT");
           break;
         case -2005532192:
-          j__sprintf(Buffer, "DDERR_TOOBIGSIZE");
+          sprintf(Buffer, "DDERR_TOOBIGSIZE");
           break;
         case -2005532182:
-          j__sprintf(Buffer, "DDERR_TOOBIGWIDTH");
+          sprintf(Buffer, "DDERR_TOOBIGWIDTH");
           break;
         case -2005532162:
-          j__sprintf(Buffer, "DDERR_UNSUPPORTEDFORMAT");
+          sprintf(Buffer, "DDERR_UNSUPPORTEDFORMAT");
           break;
         default:
           goto WriteError___def_33609C9;
@@ -44139,98 +44139,98 @@ void __cdecl WriteError(int a1, char * a2) {
     }
     else if ( a1 == -2005532402 )
     {
-      j__sprintf(Buffer, "DDERR_OVERLAPPINGRECTS");
+      sprintf(Buffer, "DDERR_OVERLAPPINGRECTS");
     }
     else
     {
       switch ( a1 )
       {
         case -2005532662:
-          j__sprintf(Buffer, "DDERR_CANNOTATTACHSURFACE");
+          sprintf(Buffer, "DDERR_CANNOTATTACHSURFACE");
           break;
         case -2005532652:
-          j__sprintf(Buffer, "DDERR_CANNOTDETACHSURFACE");
+          sprintf(Buffer, "DDERR_CANNOTDETACHSURFACE");
           break;
         case -2005532632:
-          j__sprintf(Buffer, "DDERR_CURRENTLYNOTAVAIL");
+          sprintf(Buffer, "DDERR_CURRENTLYNOTAVAIL");
           break;
         case -2005532617:
-          j__sprintf(Buffer, "DDERR_EXCEPTION");
+          sprintf(Buffer, "DDERR_EXCEPTION");
           break;
         case -2005532582:
-          j__sprintf(Buffer, "DDERR_HEIGHTALIGN");
+          sprintf(Buffer, "DDERR_HEIGHTALIGN");
           break;
         case -2005532577:
-          j__sprintf(Buffer, "DDERR_INCOMPATIBLEPRIMARY");
+          sprintf(Buffer, "DDERR_INCOMPATIBLEPRIMARY");
           break;
         case -2005532572:
-          j__sprintf(Buffer, "DDERR_INVALIDCAPS");
+          sprintf(Buffer, "DDERR_INVALIDCAPS");
           break;
         case -2005532562:
-          j__sprintf(Buffer, "DDERR_INVALIDCLIPLIST");
+          sprintf(Buffer, "DDERR_INVALIDCLIPLIST");
           break;
         case -2005532552:
-          j__sprintf(Buffer, "DDERR_INVALIDMODE");
+          sprintf(Buffer, "DDERR_INVALIDMODE");
           break;
         case -2005532542:
-          j__sprintf(Buffer, "DDERR_INVALIDOBJECT");
+          sprintf(Buffer, "DDERR_INVALIDOBJECT");
           break;
         case -2005532527:
-          j__sprintf(Buffer, "DDERR_INVALIDPIXELFORMAT");
+          sprintf(Buffer, "DDERR_INVALIDPIXELFORMAT");
           break;
         case -2005532522:
-          j__sprintf(Buffer, "DDERR_INVALIDRECT");
+          sprintf(Buffer, "DDERR_INVALIDRECT");
           break;
         case -2005532512:
-          j__sprintf(Buffer, "DDERR_LOCKEDSURFACES");
+          sprintf(Buffer, "DDERR_LOCKEDSURFACES");
           break;
         case -2005532502:
-          j__sprintf(Buffer, "DDERR_NO3D");
+          sprintf(Buffer, "DDERR_NO3D");
           break;
         case -2005532492:
-          j__sprintf(Buffer, "DDERR_NOALPHAHW");
+          sprintf(Buffer, "DDERR_NOALPHAHW");
           break;
         case -2005532491:
-          j__sprintf(Buffer, "DDERR_NOSTEREOHARDWARE");
+          sprintf(Buffer, "DDERR_NOSTEREOHARDWARE");
           break;
         case -2005532490:
-          j__sprintf(Buffer, "DDERR_NOSURFACELEFT");
+          sprintf(Buffer, "DDERR_NOSURFACELEFT");
           break;
         case -2005532467:
-          j__sprintf(Buffer, "DDERR_NOCLIPLIST");
+          sprintf(Buffer, "DDERR_NOCLIPLIST");
           break;
         case -2005532462:
-          j__sprintf(Buffer, "DDERR_NOCOLORCONVHW");
+          sprintf(Buffer, "DDERR_NOCOLORCONVHW");
           break;
         case -2005532460:
-          j__sprintf(Buffer, "DDERR_NOCOOPERATIVELEVELSET");
+          sprintf(Buffer, "DDERR_NOCOOPERATIVELEVELSET");
           break;
         case -2005532457:
-          j__sprintf(Buffer, "DDERR_NOCOLORKEY");
+          sprintf(Buffer, "DDERR_NOCOLORKEY");
           break;
         case -2005532452:
-          j__sprintf(Buffer, "DDERR_NOCOLORKEYHW");
+          sprintf(Buffer, "DDERR_NOCOLORKEYHW");
           break;
         case -2005532450:
-          j__sprintf(Buffer, "DDERR_NODIRECTDRAWSUPPORT");
+          sprintf(Buffer, "DDERR_NODIRECTDRAWSUPPORT");
           break;
         case -2005532447:
-          j__sprintf(Buffer, "DDERR_NOEXCLUSIVEMODE");
+          sprintf(Buffer, "DDERR_NOEXCLUSIVEMODE");
           break;
         case -2005532442:
-          j__sprintf(Buffer, "DDERR_NOFLIPHW");
+          sprintf(Buffer, "DDERR_NOFLIPHW");
           break;
         case -2005532432:
-          j__sprintf(Buffer, "DDERR_NOGDI");
+          sprintf(Buffer, "DDERR_NOGDI");
           break;
         case -2005532422:
-          j__sprintf(Buffer, "DDERR_NOMIRRORHW");
+          sprintf(Buffer, "DDERR_NOMIRRORHW");
           break;
         case -2005532417:
-          j__sprintf(Buffer, "DDERR_NOTFOUND");
+          sprintf(Buffer, "DDERR_NOTFOUND");
           break;
         case -2005532412:
-          j__sprintf(Buffer, "DDERR_NOOVERLAYHW");
+          sprintf(Buffer, "DDERR_NOOVERLAYHW");
           break;
         default:
           goto WriteError___def_33609C9;
@@ -44239,19 +44239,19 @@ void __cdecl WriteError(int a1, char * a2) {
   }
   else if ( a1 == -2005532667 )
   {
-    j__sprintf(Buffer, "DDERR_ALREADYINITIALIZED");
+    sprintf(Buffer, "DDERR_ALREADYINITIALIZED");
   }
   else if ( a1 > -2147221008 )
   {
     if ( a1 == -2147024882 )
     {
-      j__sprintf(Buffer, "DDERR_OUTOFMEMORY");
+      sprintf(Buffer, "DDERR_OUTOFMEMORY");
     }
     else
     {
       if ( a1 != -2147024809 )
         goto WriteError___def_33609C9;
-      j__sprintf(Buffer, "DDERR_INVALIDPARAMS");
+      sprintf(Buffer, "DDERR_INVALIDPARAMS");
     }
   }
   else
@@ -44259,17 +44259,17 @@ void __cdecl WriteError(int a1, char * a2) {
     switch ( a1 )
     {
       case -2147221008:
-        j__sprintf(Buffer, "DDERR_NOTINITIALIZED");
+        sprintf(Buffer, "DDERR_NOTINITIALIZED");
         break;
       case -2147467263:
-        j__sprintf(Buffer, "DDERR_UNSUPPORTED");
+        sprintf(Buffer, "DDERR_UNSUPPORTED");
         break;
       case -2147467259:
-        j__sprintf(Buffer, "DDERR_GENERIC");
+        sprintf(Buffer, "DDERR_GENERIC");
         break;
       default:
 WriteError___def_33609C9:
-        j__sprintf(Buffer, "UNKNOWN ERROR!");
+        sprintf(Buffer, "UNKNOWN ERROR!");
         return BBSupportTracePrintF(1, "GFX ENGINE: %s: %s", a2, Buffer);
     }
   }
@@ -47260,7 +47260,7 @@ void __cdecl AddDebugStrings(int a1) {
       v5 = strlen(v1);
       v2 = (const CHAR *)dword_468DF9C();
       TextOutA(hdc, OutputWidth / 2, 16, v2, v5);
-      j__sprintf(String, "RndTime: %.3f sec/frame", (float)((float)a1 / 1000.0));
+      sprintf(String, "RndTime: %.3f sec/frame", (float)((float)a1 / 1000.0));
       v3 = strlen(String);
       TextOutA(hdc, OutputWidth / 2, 32, String, v3);
     }
@@ -47301,7 +47301,7 @@ void __cdecl AddDebugStrings(int a1) {
               v16 = dword_468DF98(v21 + j, i);
               if ( v16 > 0 )
               {
-                j__sprintf(Str, "%d", v16);
+                sprintf(Str, "%d", v16);
                 v4 = strlen(Str);
                 TextOutA(hdc, v20 >> 16, ((v18 - v7) >> 16) + 5, Str, v4);
               }

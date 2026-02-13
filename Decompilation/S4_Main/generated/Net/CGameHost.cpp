@@ -658,7 +658,7 @@ bool  CGameHost::Run(void) {
           if ( *((int *)this + i + 58) > 20 )
           {
             v17 = (float)*((int *)this + i + 50) / (float)*((int *)this + i + 58);
-            j__sprintf(OutputString, "fAverageSync %f\n", v17);
+            sprintf(OutputString, "fAverageSync %f\n", v17);
             OutputDebugStringA(OutputString);
             if ( v17 >= 3.0 )
             {
@@ -1170,7 +1170,7 @@ bool  CGameHost::StartIniFileGame(wchar_t const * Source) {
   memset(v92, 0, sizeof(v92));
   for ( i = 0; (int)i < v62; ++i )
   {
-    j__sprintf((char *const)Dest, "PlayerIP%d=", i);
+    sprintf((char *const)Dest, "PlayerIP%d=", i);
     Str = (char *)strstr((char *)Buffer, (char *)Dest);
     if ( !Str )
     {
@@ -1203,7 +1203,7 @@ bool  CGameHost::StartIniFileGame(wchar_t const * Source) {
     if ( !(unsigned __int8)CGameType::IsSaveGame((void *)g_pGameType) )
       *(_DWORD *)(g_pGameType + 4 * i + 188) = v58;
     *v76 = 10;
-    j__sprintf((char *const)Dest, "PlayerName%d=", i);
+    sprintf((char *const)Dest, "PlayerName%d=", i);
     Str = (char *)strstr((char *)Buffer, (char *)Dest);
     if ( !Str )
     {
@@ -1225,7 +1225,7 @@ bool  CGameHost::StartIniFileGame(wchar_t const * Source) {
     std::wstring::wstring(v87, Dest);
     LOBYTE(v101) = 10;
     std::wstring::operator=((int)v87);
-    j__sprintf((char *const)Dest, "PlayerID%d=", i);
+    sprintf((char *const)Dest, "PlayerID%d=", i);
     Str = (char *)strstr((char *)Buffer, (char *)Dest);
     if ( !Str )
     {
@@ -1242,7 +1242,7 @@ bool  CGameHost::StartIniFileGame(wchar_t const * Source) {
       *(_DWORD *)(g_pGameType + 4 * i + 152) = i % *(_DWORD *)(g_pGameType + 72);
     if ( (unsigned __int8)CGameType::IsClanGame(g_pGameType) )
     {
-      j__sprintf((char *const)Dest, "ClanShortcut%d=", i);
+      sprintf((char *const)Dest, "ClanShortcut%d=", i);
       Str = (char *)strstr((char *)Buffer, (char *)Dest);
       if ( !Str )
       {
@@ -1370,7 +1370,7 @@ bool  CGameHost::StartIniFileGame(wchar_t const * Source) {
   v49 = *(_DWORD *)(g_pGameType + 112);
   for ( j = 0; j < v49; ++j )
   {
-    j__sprintf((char *const)Dest, "PlayerTeam%d=", j);
+    sprintf((char *const)Dest, "PlayerTeam%d=", j);
     Str = (char *)strstr((char *)Buffer, (char *)Dest);
     if ( Str )
     {
@@ -3365,7 +3365,7 @@ bool  CGameHost::HostPressedStart(void * a1) {
   v4 = *(_DWORD *)(g_pGameType + 4 * i + 404);
   v3 = *(_DWORD *)(g_pGameType + 4 * i + 224);
   MultiPlayerGameID = CGameType::GetMultiPlayerGameID(g_pGameType);
-  j__sprintf(
+  sprintf(
     Buffer,
     "{ ? = CALL proc_addtogame_playerclan( %d, %d, %d, 1, '%s', %d, '' ) }",
     MultiPlayerGameID,
@@ -4146,7 +4146,7 @@ bool  CGameHost::WaitingForGameConnect(void * Src) {
           v9 = *(_DWORD *)(g_pGameType + 4 * j + 404);
           v8 = *(_DWORD *)(g_pGameType + 4 * j + 224);
           MultiPlayerGameID = CGameType::GetMultiPlayerGameID(g_pGameType);
-          j__sprintf(
+          sprintf(
             Buffer,
             "{ ? = CALL proc_addtogame_playerclan( %d, %d, %d, 0, '%s', %d, '' ) }",
             MultiPlayerGameID,

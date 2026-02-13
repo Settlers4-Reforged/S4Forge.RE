@@ -1491,7 +1491,7 @@ void __cdecl CGameSettings::LoadAINames(void) {
   strcpy(Format, "Player%d");
   for ( i = 0; i < 9; ++i )
   {
-    j__sprintf(Buffer, Format, i + 1);
+    sprintf(Buffer, Format, i + 1);
     v7 = std::string::string(v12, "AI Player");
     v17 = 0;
     ((void (__thiscall *)(CConfigManager *, int *, const char *, char *, void *))g_pCfgMgr->GetStringValue)(

@@ -298,7 +298,7 @@ bool  CConfigSection::Save(wchar_t const * FileName) {
   ElementSize = 1;
   CFile::Open(FileName, 10, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\BaseLib\\Include\\File.h", 0);
   v47 = 0;
-  j__sprintf(Str, "//\r\n// Automatically generated file. Do not edit!\r\n// \r\n\r\n");
+  sprintf(Str, "//\r\n// Automatically generated file. Do not edit!\r\n// \r\n\r\n");
   v2 = strlen(Str);
   CFile::Write(Str, ElementSize, v2, (int)"D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\BaseLib\\Include\\File.h", 0);
   v3 = (const char *)std::string::c_str(v34);
@@ -335,7 +335,7 @@ bool  CConfigSection::Save(wchar_t const * FileName) {
         v20 = (**(int (__thiscall ***)(CConfigVar *))v41)(v41);
         v6 = (void *)std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,CConfigVar *>>>>::operator*(v32);
         v7 = (const char *)std::string::c_str(v6);
-        j__sprintf(Str, "    %s = %d\r\n", v7, v20);
+        sprintf(Str, "    %s = %d\r\n", v7, v20);
         break;
       case 2:
         v33 = (*(int (__thiscall **)(CConfigVar *))(*(_DWORD *)v41 + 16))(v41);
@@ -345,7 +345,7 @@ bool  CConfigSection::Save(wchar_t const * FileName) {
           v21 = v35;
           v8 = (void *)std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,CConfigVar *>>>>::operator*(v32);
           v9 = (const char *)std::string::c_str(v8);
-          j__sprintf(Str, "    %s[%d] = ", v9, v21);
+          sprintf(Str, "    %s[%d] = ", v9, v21);
           v10 = strlen(Str);
           CFile::Write(
             Str,
@@ -355,7 +355,7 @@ bool  CConfigSection::Save(wchar_t const * FileName) {
             0);
           for ( i = 0; i < v35 - 1; ++i )
           {
-            j__sprintf(Str, "%d,", *(_DWORD *)(v33 + 4 * i));
+            sprintf(Str, "%d,", *(_DWORD *)(v33 + 4 * i));
             v11 = strlen(Str);
             CFile::Write(
               Str,
@@ -364,7 +364,7 @@ bool  CConfigSection::Save(wchar_t const * FileName) {
               (int)"D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\BaseLib\\Include\\File.h",
               0);
           }
-          j__sprintf(Str, "%d", *(_DWORD *)(v33 + 4 * v35 - 4));
+          sprintf(Str, "%d", *(_DWORD *)(v33 + 4 * v35 - 4));
           v12 = strlen(Str);
           CFile::Write(
             Str,
@@ -372,14 +372,14 @@ bool  CConfigSection::Save(wchar_t const * FileName) {
             v12,
             (int)"D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\BaseLib\\Include\\File.h",
             0);
-          j__sprintf(Str, "\r\n");
+          sprintf(Str, "\r\n");
         }
         break;
       case 3:
         v19 = ((double (__thiscall *)(CConfigVar *))*(_DWORD *)(*(_DWORD *)v41 + 4))(v41);
         v13 = (void *)std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,CConfigVar *>>>>::operator*(v32);
         v14 = (const char *)std::string::c_str(v13);
-        j__sprintf(Str, "    %s = %f\r\n", v14, v19);
+        sprintf(Str, "    %s = %f\r\n", v14, v19);
         break;
       case 4:
         v27 = (void *)(*(int (__thiscall **)(CConfigVar *, _BYTE *))(*(_DWORD *)v41 + 8))(v41, v42);
@@ -388,10 +388,10 @@ bool  CConfigSection::Save(wchar_t const * FileName) {
         v22 = (const char *)std::string::c_str(v43);
         v15 = (void *)std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,CConfigVar *>>>>::operator*(v32);
         v16 = (const char *)std::string::c_str(v15);
-        j__sprintf(Str, "    %s = \"%s\"\r\n", v16, v22);
+        sprintf(Str, "    %s = \"%s\"\r\n", v16, v22);
         break;
       default:
-        j__sprintf(Str, &byte_3AB2CAF);
+        sprintf(Str, &byte_3AB2CAF);
         break;
     }
     v17 = strlen(Str);

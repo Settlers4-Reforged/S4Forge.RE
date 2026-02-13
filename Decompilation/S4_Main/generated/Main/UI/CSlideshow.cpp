@@ -90,9 +90,9 @@ bool  CSlideshow::ShowPicture(void) {
   while ( *((int *)v9 + 1) < 10 )
   {
     if ( *(_DWORD *)v9 )
-      j__sprintf(name, "downsell%d.bmp", *((_DWORD *)v9 + 1));
+      sprintf(name, "downsell%d.bmp", *((_DWORD *)v9 + 1));
     else
-      j__sprintf(name, "upsell%d.bmp", *((_DWORD *)v9 + 1));
+      sprintf(name, "upsell%d.bmp", *((_DWORD *)v9 + 1));
     h = LoadImageA(0, name, 0, 0, 0, 0x10u);
     if ( h )
       break;

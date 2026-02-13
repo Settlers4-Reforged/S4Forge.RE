@@ -768,7 +768,7 @@ bool  CSoundManager::LoadRaceTitles(int a2, wchar_t const * a3) {
         ISoundEngine::InitPlaylist((ISoundEngine *)g_pSoundEngine, i, 0);
         for ( j = 0; j < v19; ++j )
         {
-          j__sprintf(Str, "%d", j);
+          sprintf(Str, "%d", j);
           v12 = (void *)std::operator+<char>((int)v27, (int)v40, Str);
           std::string::operator=(v37, v12);
           std::string::~string(v27);
