@@ -2,6 +2,8 @@
 
 #include "Main/UI/CStringEngineEx.h"
 
+CStringEngine *g_pStringEngine;
+
 // Definitions for class CStringEngine
 
 // address=[0x14ce700]

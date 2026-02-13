@@ -3,6 +3,8 @@
 
 #include "defines.h"
 
+extern class CStringEngine *g_pStringEngine;
+
 class CStringEngine {
 public:
     // address=[0x14ce700]
