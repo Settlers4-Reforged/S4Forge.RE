@@ -277,7 +277,7 @@ bool  CStateMD2Briefing::OnEvent(class CEvn_Event & a2) {
       v46 = 0;
       v19 = 256;
       v16 = *((_DWORD *)v45 + 2) + 1;
-      v4 = (const char *)std::wstring::c_str((_Cnd_internal_imp_t *)((char *)&unk_4031D98
+      v4 = (const char *)std::wstring::c_str((_Cnd_internal_imp_t *)((char *)&stru_4031D98
                                                                    + 28 * *((_DWORD *)v45 + 1)
                                                                    - 476));
       snwprintf(Buffer, 0xFFu, v4, v16);

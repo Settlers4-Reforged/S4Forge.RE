@@ -1195,11 +1195,11 @@ std::wstring __cdecl Bugreport::BuildAutoReporterCmdLineArgsForUserReports(void 
 
 
 // address=[0x134df60]
-// Decompiled from void *__cdecl Bugreport::BuildTraceFilePath(void *a1, int a2)
+// Decompiled from void *__cdecl Bugreport::BuildTraceFilePath(void *a1, wstring *a2)
 std::wstring __cdecl Bugreport::BuildTraceFilePath(std::wstring const & a1) {
   
   void *BugReportsDirectoryPath; // [esp+4h] [ebp-84h]
-  _BYTE v4[44]; // [esp+10h] [ebp-78h] BYREF
+  int v4[11]; // [esp+10h] [ebp-78h] BYREF
   _BYTE v5[32]; // [esp+3Ch] [ebp-4Ch] BYREF
   _BYTE v6[28]; // [esp+5Ch] [ebp-2Ch] BYREF
   int v7; // [esp+84h] [ebp-4h]
@@ -1225,10 +1225,10 @@ std::wstring __cdecl Bugreport::BuildTraceFilePath(std::wstring const & a1) {
 
 
 // address=[0x134e050]
-// Decompiled from int __cdecl Bugreport::LaunchAutoreport(char a1, void *a2)
+// Decompiled from int __cdecl Bugreport::LaunchAutoreport(char a1, wstring *a2)
 void __cdecl Bugreport::LaunchAutoreport(bool a1, std::wstring const & a2) {
   
-  _DWORD *v2; // eax
+  wchar_t *v2; // eax
   int result; // eax
   _STARTUPINFOW StartupInfo; // [esp+0h] [ebp-264h] BYREF
   _PROCESS_INFORMATION ProcessInformation; // [esp+44h] [ebp-220h] BYREF
@@ -1240,7 +1240,7 @@ void __cdecl Bugreport::LaunchAutoreport(bool a1, std::wstring const & a2) {
   memset(&ProcessInformation, 0, sizeof(ProcessInformation));
   if ( (unsigned int)std::wstring::size(a2) >= 0x104 )
     j___wassert(L"commandLineArgs.size() < MAX_PATH", L"Bugreport.cpp", 0x41u);
-  v2 = std::wstring::c_str((_Cnd_internal_imp_t *)a2);
+  v2 = std::wstring::c_str(a2);
   snwprintf((char *const)CommandLine, 0x104u, L"%s", v2);
   result = CreateProcessW(L"Exe\\Autoreport.exe", CommandLine, 0, 0, 0, 0, 0, 0, &StartupInfo, &ProcessInformation);
   if ( result )
@@ -39861,7 +39861,7 @@ std::wstring __cdecl SaveFilePath::BuildSaveFilePath(std::wstring const & a1) {
   v7 = 0;
   UserDirectoryPath = FilePaths::GetUserDirectoryPath(v4);
   LOBYTE(v7) = 1;
-  std::operator+<wchar_t>(v5, UserDirectoryPath, (_Cnd_internal_imp_t *)&unk_462B800);
+  std::operator+<wchar_t>(v5, UserDirectoryPath, (_Cnd_internal_imp_t *)&stru_462B800);
   LOBYTE(v7) = 3;
   std::wstring::~wstring(v4);
   if ( std::wstring::find(v5, 0) )
@@ -39904,7 +39904,7 @@ std::wstring __cdecl SaveFilePath::GetSaveFileMapPattern(void a1) {
 
   UserDirectoryPath = FilePaths::GetUserDirectoryPath(v3);
   v5 = 0;
-  std::operator+<wchar_t>(v4, UserDirectoryPath, (_Cnd_internal_imp_t *)&unk_462B800);
+  std::operator+<wchar_t>(v4, UserDirectoryPath, (_Cnd_internal_imp_t *)&stru_462B800);
   LOBYTE(v5) = 2;
   std::wstring::~wstring(v3);
   std::wstring::operator+=(v4, (wchar_t *)L"*");
@@ -41070,7 +41070,7 @@ struct FilePaths::PathSplitResult __cdecl FilePaths::SplitPath(std::wstring cons
       LOBYTE(v15) = 0;
       std::wstring::~wstring(v11);
     }
-    if ( !(unsigned __int8)sub_2EFE900(a2, 92) && !(unsigned __int8)sub_2EFE900(a2, 47) )
+    if ( !(unsigned __int8)CheckPathRoot(a2, 92) && !(unsigned __int8)CheckPathRoot(a2, 47) )
     {
       v5 = std::vector<std::wstring>::back();
       std::wstring::operator=(v5);
@@ -41085,7 +41085,7 @@ struct FilePaths::PathSplitResult __cdecl FilePaths::SplitPath(std::wstring cons
 
 
 // address=[0x2efe3b0]
-// Decompiled from void *__cdecl FilePaths::GetCurrentWorkingDirectory(void *a1)
+// Decompiled from wstring *__cdecl FilePaths::GetCurrentWorkingDirectory(wstring *a1)
 std::wstring __cdecl FilePaths::GetCurrentWorkingDirectory(void a1) {
   
   std::wstring::wstring(a1, (wchar_t *)&word_3AB4660);
@@ -41094,38 +41094,38 @@ std::wstring __cdecl FilePaths::GetCurrentWorkingDirectory(void a1) {
 
 
 // address=[0x2efe3e0]
-// Decompiled from void *__cdecl FilePaths::GetUserDirectoryPath(void *a1)
-std::wstring __cdecl FilePaths::GetUserDirectoryPath(void a1) {
+// Decompiled from wstring *__cdecl FilePaths::GetUserDirectoryPath(wstring *_swpUserDirectory)
+std::wstring __cdecl FilePaths::GetUserDirectoryPath(void _swpUserDirectory) {
   
   void *v2; // [esp+4h] [ebp-284h]
-  void *v3; // [esp+Ch] [ebp-27Ch]
-  _BYTE v4[28]; // [esp+1Ch] [ebp-26Ch] BYREF
-  _BYTE v5[28]; // [esp+38h] [ebp-250h] BYREF
-  _BYTE v6[28]; // [esp+54h] [ebp-234h] BYREF
+  wstring *v3; // [esp+Ch] [ebp-27Ch]
+  wstring v4; // [esp+1Ch] [ebp-26Ch] BYREF
+  wstring v5; // [esp+38h] [ebp-250h] BYREF
+  wstring v6; // [esp+54h] [ebp-234h] BYREF
   WCHAR pszPath[260]; // [esp+70h] [ebp-218h] BYREF
-  int v8; // [esp+284h] [ebp-4h]
+  int exceptionBlock; // [esp+284h] [ebp-4h]
 
-  if ( SHGetFolderPathW(0, 5, 0, 0, pszPath) )
+  if ( SHGetFolderPathW(0, CSIDL_MYDOCUMENTS, 0, 0, pszPath) )
   {
-    FilePaths::GetCurrentWorkingDirectory(a1);
+    FilePaths::GetCurrentWorkingDirectory(_swpUserDirectory);
   }
   else
   {
-    std::wstring::wstring(v6, pszPath);
-    v8 = 0;
-    v3 = (void *)sub_2EFE950(v4, v6);
-    LOBYTE(v8) = 1;
-    v2 = std::operator+<wchar_t>(v5, v3, (_Cnd_internal_imp_t *)&unk_4685398);
-    LOBYTE(v8) = 2;
-    std::operator+<wchar_t>(a1, v2, (_Cnd_internal_imp_t *)&unk_468537C);
-    LOBYTE(v8) = 1;
-    std::wstring::~wstring(v5);
-    LOBYTE(v8) = 0;
-    std::wstring::~wstring(v4);
-    v8 = -1;
-    std::wstring::~wstring(v6);
+    std::wstring::wstring(&v6, pszPath);
+    exceptionBlock = 0;
+    v3 = AddBasePathIfNeeded(&v4, &v6);
+    LOBYTE(exceptionBlock) = 1;
+    v2 = std::operator+<wchar_t>(&v5, v3, &sDocumentsFolderName);
+    LOBYTE(exceptionBlock) = 2;
+    std::operator+<wchar_t>(_swpUserDirectory, v2, &sBasePath);
+    LOBYTE(exceptionBlock) = 1;
+    std::wstring::~wstring(&v5);
+    LOBYTE(exceptionBlock) = 0;
+    std::wstring::~wstring(&v4);
+    exceptionBlock = -1;
+    std::wstring::~wstring(&v6);
   }
-  return a1;
+  return _swpUserDirectory;
 }
 
 
@@ -41141,9 +41141,9 @@ void __cdecl FilePaths::EnsurePathExists(std::wstring const & a1) {
   int v7; // [esp+24h] [ebp-154h]
   int v8; // [esp+28h] [ebp-150h]
   int v9; // [esp+2Ch] [ebp-14Ch]
-  int v10; // [esp+30h] [ebp-148h]
-  void *v11; // [esp+34h] [ebp-144h]
-  void *CurrentWorkingDirectory; // [esp+38h] [ebp-140h]
+  wstring *v10; // [esp+30h] [ebp-148h]
+  wstring *v11; // [esp+34h] [ebp-144h]
+  wstring *CurrentWorkingDirectory; // [esp+38h] [ebp-140h]
   int v13; // [esp+3Ch] [ebp-13Ch]
   BOOL DirectoryW; // [esp+40h] [ebp-138h]
   int v15; // [esp+44h] [ebp-134h]
@@ -41153,36 +41153,36 @@ void __cdecl FilePaths::EnsurePathExists(std::wstring const & a1) {
   int v19; // [esp+54h] [ebp-124h]
   int v20[7]; // [esp+58h] [ebp-120h] BYREF
   _BYTE v21[48]; // [esp+74h] [ebp-104h] BYREF
-  _BYTE v22[28]; // [esp+A4h] [ebp-D4h] BYREF
-  _BYTE v23[28]; // [esp+C0h] [ebp-B8h] BYREF
-  _BYTE v24[28]; // [esp+DCh] [ebp-9Ch] BYREF
-  _BYTE v25[28]; // [esp+F8h] [ebp-80h] BYREF
-  _BYTE v26[28]; // [esp+114h] [ebp-64h] BYREF
-  wstring v27[28]; // [esp+130h] [ebp-48h] BYREF
+  wstring v22; // [esp+A4h] [ebp-D4h] BYREF
+  wstring v23; // [esp+C0h] [ebp-B8h] BYREF
+  wstring v24; // [esp+DCh] [ebp-9Ch] BYREF
+  wstring v25; // [esp+F8h] [ebp-80h] BYREF
+  wstring v26; // [esp+114h] [ebp-64h] BYREF
+  wstring v27; // [esp+130h] [ebp-48h] BYREF
   wstring v28; // [esp+14Ch] [ebp-2Ch] BYREF
   int v29; // [esp+174h] [ebp-4h]
 
   v19 = 0;
   FilePaths::SplitPath((int)v20, a1);
   v29 = 0;
-  std::wstring::wstring(v27);
+  std::wstring::wstring(&v27);
   LOBYTE(v29) = 1;
   if ( v21[44] )
   {
-    v13 = std::operator+<wchar_t>(v26, v20, &unk_468537C);
+    v13 = std::operator+<wchar_t>(&v26, v20, &sBasePath);
     std::wstring::operator=(v13);
-    std::wstring::~wstring(v26);
+    std::wstring::~wstring(&v26);
   }
   else
   {
-    CurrentWorkingDirectory = FilePaths::GetCurrentWorkingDirectory(v24);
+    CurrentWorkingDirectory = FilePaths::GetCurrentWorkingDirectory(&v24);
     v11 = CurrentWorkingDirectory;
     LOBYTE(v29) = 2;
-    v10 = sub_2EFE950(v25, CurrentWorkingDirectory);
+    v10 = AddBasePathIfNeeded(&v25, CurrentWorkingDirectory);
     std::wstring::operator=(v10);
-    std::wstring::~wstring(v25);
+    std::wstring::~wstring(&v25);
     LOBYTE(v29) = 1;
-    std::wstring::~wstring(v24);
+    std::wstring::~wstring(&v24);
   }
   std::wstring::wstring(&v28);
   LOBYTE(v29) = 3;
@@ -41194,9 +41194,9 @@ void __cdecl FilePaths::EnsurePathExists(std::wstring const & a1) {
   while ( (unsigned __int8)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<std::wstring>>>::operator!=((std::_Iterator_base12 *)v3) )
   {
     v16 = std::_Vector_iterator<std::_Vector_val<std::_Simple_types<std::wstring>>>::operator*(v4);
-    if ( (unsigned __int8)std::wstring::empty(&v28) )
+    if ( std::wstring::empty(&v28) )
     {
-      v9 = std::operator+<wchar_t>(v22, v27, v16);
+      v9 = std::operator+<wchar_t>(&v22, &v27, v16);
       v8 = v9;
       LOBYTE(v29) = 6;
       v19 |= 1u;
@@ -41204,7 +41204,7 @@ void __cdecl FilePaths::EnsurePathExists(std::wstring const & a1) {
     }
     else
     {
-      v7 = std::operator+<wchar_t>(v23, &unk_468537C, v16);
+      v7 = std::operator+<wchar_t>(&v23, &sBasePath, v16);
       v6 = v7;
       v29 = 7;
       v19 |= 2u;
@@ -41216,15 +41216,15 @@ void __cdecl FilePaths::EnsurePathExists(std::wstring const & a1) {
     if ( (v19 & 2) != 0 )
     {
       v19 &= ~2u;
-      std::wstring::~wstring(v23);
+      std::wstring::~wstring(&v23);
     }
     v29 = 5;
     if ( (v19 & 1) != 0 )
     {
       v19 &= ~1u;
-      std::wstring::~wstring(v22);
+      std::wstring::~wstring(&v22);
     }
-    if ( !(unsigned __int8)std::wstring::empty(&v28) && !(unsigned __int8)sub_2EFE9F0(&v28) )
+    if ( !std::wstring::empty(&v28) && !(unsigned __int8)sub_2EFE9F0(&v28) )
     {
       v1 = std::wstring::c_str(&v28);
       DirectoryW = CreateDirectoryW(v1, 0);
@@ -41241,7 +41241,7 @@ void __cdecl FilePaths::EnsurePathExists(std::wstring const & a1) {
   LOBYTE(v29) = 1;
   std::wstring::~wstring(&v28);
   LOBYTE(v29) = 0;
-  std::wstring::~wstring(v27);
+  std::wstring::~wstring(&v27);
   v29 = -1;
   return FilePaths::PathSplitResult::~PathSplitResult(v20);
 }
@@ -42071,7 +42071,7 @@ void __stdcall BBSupportSmartOpenTraceFile(wchar_t const * a1, wchar_t const * a
 
 
 // address=[0x2f2e770]
-// Decompiled from char __stdcall BBSupportGetTraceFilePath(wchar_t *a1, unsigned int a2)
+// Decompiled from char __stdcall BBSupportGetTraceFilePath(wchar_t *a1, int a2)
 bool __stdcall BBSupportGetTraceFilePath(wchar_t * a1, unsigned int a2) {
   
   int v3; // [esp+0h] [ebp-4h]
@@ -42079,11 +42079,11 @@ bool __stdcall BBSupportGetTraceFilePath(wchar_t * a1, unsigned int a2) {
   if ( BBSupportLib::CBBSupportTraceFilePtr::operator BBSupportLib::IBBSupportTraceFile *(&BBSupportLib::g_pBBSTraceFile) )
   {
     v3 = BBSupportLib::CBBSupportTraceFilePtr::operator->(&BBSupportLib::g_pBBSTraceFile);
-    return (*(int (__stdcall **)(int, wchar_t *, unsigned int))(*(_DWORD *)v3 + 48))(v3, a1, a2);
+    return (*(int (__stdcall **)(int, wchar_t *, int))(*(_DWORD *)v3 + 48))(v3, a1, a2);
   }
   else
   {
-    BBSupportLib::BBSCopyString<wchar_t>(a1, &unk_3AB9BBC, a2);
+    BBSupportLib::BBSCopyString<wchar_t>((int)a1, word_3AB9BBC, a2);
     return 0;
   }
 }

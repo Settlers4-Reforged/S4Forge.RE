@@ -1,3 +1,4 @@
+#if FALSE
 #include "CBBObject.h"
 
 // Definitions for class CBBObject
@@ -33,22 +34,20 @@
 
 
 // address=[0x2f33860]
-// Decompiled from _DWORD *__thiscall CBBObject::CBBObject_0(_DWORD *this, int a2)
+// Decompiled from CBBObject *__thiscall CBBObject::CBBObject_0(CBBObject *this, const struct CBBObject *a2)
  CBBObject::CBBObject(class CBBObject const & a2) {
   
-  int v2; // ecx
-
-  *this = &CBBObject::_vftable_;
+  this->vtable = &CBBObject::_vftable_;
   CBBObjectTracer::Enter();
-  CBBObjectTracer::InitObject((int)this, *(_DWORD *)(a2 + 8), *(_DWORD *)(a2 + 4) != -1);
+  CBBObjectTracer::InitObject(this, (int)a2->m_spType, a2->m_uSerialNumber != -1);
   if ( CBBObjectTracer::m_iNumberOfObjects == 1 )
     BBSupportTracePrintF(
       0,
       "%06x-%08x: %s created as copy of %06x-%08x (%i object%s).",
-      this[1],
+      this->m_uSerialNumber,
       this,
-      (const char *)this[2],
-      *(_DWORD *)(a2 + 4),
+      this->m_spType,
+      a2->m_uSerialNumber,
       a2,
       1,
       (const char *)&unk_3ABA812);
@@ -56,82 +55,78 @@
     BBSupportTracePrintF(
       0,
       "%06x-%08x: %s created as copy of %06x-%08x (%i object%s).",
-      this[1],
+      this->m_uSerialNumber,
       this,
-      (const char *)this[2],
-      *(_DWORD *)(a2 + 4),
+      this->m_spType,
+      a2->m_uSerialNumber,
       a2,
       CBBObjectTracer::m_iNumberOfObjects,
       "s");
-  CBBObjectTracer::Leave(v2);
+  CBBObjectTracer::Leave();
   return this;
 }
 
 
 // address=[0x2f33900]
-// Decompiled from CBBObject *__thiscall CBBObject::~CBBObject(CBBObject *this)
+// Decompiled from void __thiscall CBBObject::~CBBObject(CBBObject *this)
  CBBObject::~CBBObject(void) {
   
-  CBBObject *result; // eax
-  int v2; // ecx
-  struct CBBObject *v3; // [esp+8h] [ebp-18h] BYREF
-  CBBObject *v4; // [esp+Ch] [ebp-14h]
+  struct CBBObject *v1; // [esp+8h] [ebp-18h] BYREF
 
-  v4 = this;
-  result = this;
-  *(_DWORD *)this = &CBBObject::_vftable_;
-  if ( *((_DWORD *)v4 + 1) == -1 )
-    return result;
-  CBBObjectTracer::Enter();
-  v3 = 0;
-  if ( CBBObjectTracer::IsObjectInList(*((_DWORD *)v4 + 1), &v3) )
+  this->vtable = &CBBObject::_vftable_;
+  if ( this->m_uSerialNumber != -1 )
   {
-    if ( v3 )
-      *((_DWORD *)v3 + 3) = *((_DWORD *)v4 + 3);
-    else
-      CBBObjectTracer::m_pObjectFirst = *((_DWORD *)v4 + 3);
-    if ( --CBBObjectTracer::m_iNumberOfObjects == 1 )
-      BBSupportTracePrintF(
-        0,
-        "%06x-%08x: %s deleted (%i object%s remaining).",
-        *((_DWORD *)v4 + 1),
-        v4,
-        *((const char **)v4 + 2),
-        1,
-        (const char *)&unk_3ABA813);
-    else
-      BBSupportTracePrintF(
-        0,
-        "%06x-%08x: %s deleted (%i object%s remaining).",
-        *((_DWORD *)v4 + 1),
-        v4,
-        *((const char **)v4 + 2),
-        CBBObjectTracer::m_iNumberOfObjects,
-        "s");
-    if ( !*((_DWORD *)v4 + 1) )
+    CBBObjectTracer::Enter();
+    v1 = 0;
+    if ( CBBObjectTracer::IsObjectInList(this->m_uSerialNumber, &v1) )
     {
-      if ( CBBObjectTracer::m_iNumberOfObjects )
-      {
-        BBSupportTracePrint(0, (char *)&byte_3ABA823);
-        BBSupportTracePrint(0, "Warning: Missing delete!");
-        BBSupportTracePrint(0, (char *)&byte_3ABA826);
-        CBBObjectTracer::DumpObjects();
-        BBSupportTracePrint(0, (char *)&byte_3ABA827);
-      }
+      if ( v1 )
+        v1->m_pFirst = this->m_pFirst;
       else
+        CBBObjectTracer::m_pObjectFirst = this->m_pFirst;
+      if ( --CBBObjectTracer::m_iNumberOfObjects == 1 )
+        BBSupportTracePrintF(
+          0,
+          "%06x-%08x: %s deleted (%i object%s remaining).",
+          this->m_uSerialNumber,
+          this,
+          this->m_spType,
+          1,
+          (const char *)&unk_3ABA813);
+      else
+        BBSupportTracePrintF(
+          0,
+          "%06x-%08x: %s deleted (%i object%s remaining).",
+          this->m_uSerialNumber,
+          this,
+          this->m_spType,
+          CBBObjectTracer::m_iNumberOfObjects,
+          "s");
+      if ( !this->m_uSerialNumber )
       {
-        BBSupportTracePrint(0, "Object balance ok.");
+        if ( CBBObjectTracer::m_iNumberOfObjects )
+        {
+          BBSupportTracePrint(0, (char *)&byte_3ABA823);
+          BBSupportTracePrint(0, "Warning: Missing delete!");
+          BBSupportTracePrint(0, (char *)&byte_3ABA826);
+          CBBObjectTracer::DumpObjects();
+          BBSupportTracePrint(0, (char *)&byte_3ABA827);
+        }
+        else
+        {
+          BBSupportTracePrint(0, "Object balance ok.");
+        }
       }
     }
+    else
+    {
+      BBSupportTracePrintF(0, "%06x-%08x: Illegal object delete!", this->m_uSerialNumber, this);
+      if ( BBSupportDbgReport(1, "ObjectTracer.cpp", 251, "Somebody tried to delete a none existing object!") == 1 )
+        __debugbreak();
+    }
+    CBBObjectTracer::Leave();
   }
-  else
-  {
-    BBSupportTracePrintF(0, "%06x-%08x: Illegal object delete!", *((_DWORD *)v4 + 1), v4);
-    if ( BBSupportDbgReport(1, "ObjectTracer.cpp", 251, "Somebody tried to delete a none existing object!") == 1 )
-      __debugbreak();
-    v2 = 0;
-  }
-  return (CBBObject *)CBBObjectTracer::Leave(v2);
 }
 
 
+#endif // Already implemented

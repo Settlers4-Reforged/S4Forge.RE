@@ -113,7 +113,7 @@ class CGameState * __cdecl CStateXMD3Briefing::DynamicCreateFunc(void * a1) {
   v35 = 0;
   v25 = 256;
   v22 = v36[2] + 1;
-  v2 = (const char *)std::wstring::c_str((_Cnd_internal_imp_t *)((char *)&unk_4032170 + 28 * v36[1] - 588));
+  v2 = (const char *)std::wstring::c_str((_Cnd_internal_imp_t *)((char *)&stru_4032170 + 28 * v36[1] - 588));
   snwprintf(Buffer, 0xFFu, v2, v22);
   std::wstring::wstring(v37);
   LOBYTE(v39) = 2;

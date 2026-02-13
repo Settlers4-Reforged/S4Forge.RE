@@ -18,10 +18,10 @@ public:
     class CTrace &  operator=(class CTrace const & a2);
 
     // address=[0x14d35a0]
-    static void __cdecl Print(char const * Format, ... a2);
+    static void __cdecl Print(char const * Format, ...);
 
     // address=[0x14d3610]
-    static void __cdecl TextEinfuegen(char const * Format, ... a2);
+    static void __cdecl TextEinfuegen(char const * Format, ...);
 
 private:
     // address=[0x14d3680]
@@ -32,11 +32,9 @@ private:
 
     // Type information members
 public:
-    void * vftable;
     int m_iId;
-    char * spType;
+    char const * spType;
     CTrace * m_pPrev;
-
 };
 
 

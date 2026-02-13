@@ -24,7 +24,7 @@ public:
      CFile(wchar_t const * FileName, unsigned int a3);
 
     // address=[0x2f011c0]
-    void  Open(std::wstring const & a1, unsigned int a2, char * Str, int a4);
+    void  Open(std::wstring const & a2, unsigned int a3, char * Str, int a5);
 
     // address=[0x2f011f0]
     void  Open(wchar_t const * FileName, unsigned int a3, char * Str, int a5);
@@ -33,7 +33,7 @@ public:
     unsigned int  Read(void * Buffer, int ElementSize, int ElementCount, char * a5, int a6);
 
     // address=[0x2f01300]
-    unsigned int  Write(void const * Buffer, int ElementSize, int ElementCount, char * a5, int a6);
+    unsigned int  Write(void const * a1, int a2, int a3, char * a4, int a5);
 
     // address=[0x2f01330]
     int  Seek(int Offset, int Origin, char * a4, int a5);

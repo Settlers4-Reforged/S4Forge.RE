@@ -86,7 +86,7 @@ class CGameState * __cdecl CStateBriefing::DynamicCreateFunc(void * a1) {
   else
     v8 = L"EN";
   v7 = *((_DWORD *)this + 2) + 1;
-  v2 = (const char *)std::wstring::c_str((_Cnd_internal_imp_t *)((char *)&unk_402CAA0 + 28 * *((_DWORD *)this + 1) - 28));
+  v2 = (const char *)std::wstring::c_str((_Cnd_internal_imp_t *)((char *)&stru_402CAA0 + 28 * *((_DWORD *)this + 1) - 28));
   snwprintf(Buffer, 0xFFu, v2, v8, v7);
   std::wstring::wstring(v10);
   LOBYTE(v12) = 1;
@@ -304,7 +304,7 @@ bool  CStateBriefing::OnEvent(class CEvn_Event & a2) {
           v56 = 0;
           v23 = 256;
           v21 = *((_DWORD *)v54 + 2) + 1;
-          v3 = (const char *)std::wstring::c_str((_Cnd_internal_imp_t *)((char *)&unk_402C9F8
+          v3 = (const char *)std::wstring::c_str((_Cnd_internal_imp_t *)((char *)&stru_402C9F8
                                                                        + 28 * *((_DWORD *)v54 + 1)
                                                                        - 28));
           snwprintf(Buffer, 0xFFu, v3, v21);

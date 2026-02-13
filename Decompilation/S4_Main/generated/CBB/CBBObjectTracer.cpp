@@ -1,3 +1,4 @@
+#if FALSE
 #include "CBBObjectTracer.h"
 
 // Definitions for class CBBObjectTracer
@@ -16,8 +17,8 @@ void __cdecl CBBObjectTracer::Enter(void) {
 
 
 // address=[0x2f33ad0]
-// Decompiled from void __cdecl CBBObjectTracer::InitObject(CBBObject *this, char *_sType, bool _bFirst)
-void __cdecl CBBObjectTracer::InitObject(class CBBObject & _sType, char const * _bFirst, bool a3) {
+// Decompiled from void __cdecl CBBObjectTracer::InitObject(CBBObject *target, char *_sType, bool _bFirst)
+void __cdecl CBBObjectTracer::InitObject(class CBBObject & target, char const * _sType, bool _bFirst) {
   
   char *type; // [esp+0h] [ebp-4h]
 
@@ -25,43 +26,43 @@ void __cdecl CBBObjectTracer::InitObject(class CBBObject & _sType, char const * 
     type = _sType;
   else
     type = "Object of unknown type";
-  this->m_spType = type;
+  target->m_spType = type;
   if ( _bFirst )
   {
-    this->m_uSerialNumber = CBBObjectTracer::m_uCurrentSerialNumber;
-    this->m_pFirst = CBBObjectTracer::m_pObjectFirst;
+    target->m_uSerialNumber = CBBObjectTracer::m_uCurrentSerialNumber;
+    target->m_pFirst = CBBObjectTracer::m_pObjectFirst;
     ++CBBObjectTracer::m_uCurrentSerialNumber;
     ++CBBObjectTracer::m_iNumberOfObjects;
-    CBBObjectTracer::m_pObjectFirst = this;
+    CBBObjectTracer::m_pObjectFirst = target;
   }
   else
   {
-    this->m_uSerialNumber = -1;
-    this->m_pFirst = 0;
+    target->m_uSerialNumber = -1;
+    target->m_pFirst = 0;
   }
 }
 
 
 // address=[0x2f33b70]
-// Decompiled from char __cdecl CBBObjectTracer::IsObjectInList(unsigned int a1, struct CBBObject **a2)
-bool __cdecl CBBObjectTracer::IsObjectInList(unsigned int a1, class CBBObject * & a2) {
+// Decompiled from bool __cdecl CBBObjectTracer::IsObjectInList(unsigned int _uSerialNumber, struct CBBObject **_pObject)
+bool __cdecl CBBObjectTracer::IsObjectInList(unsigned int _uSerialNumber, class CBBObject * & _pObject) {
   
   struct CBBObject *v3; // [esp+0h] [ebp-8h]
-  int v4; // [esp+4h] [ebp-4h]
+  CBBObject *pIterator; // [esp+4h] [ebp-4h]
 
-  v4 = CBBObjectTracer::m_pObjectFirst;
+  pIterator = CBBObjectTracer::m_pObjectFirst;
   v3 = 0;
-  while ( v4 )
+  while ( pIterator )
   {
-    if ( *(_DWORD *)(v4 + 4) == a1 )
+    if ( pIterator->m_uSerialNumber == _uSerialNumber )
     {
-      *a2 = v3;
+      *_pObject = v3;
       return 1;
     }
-    v3 = (struct CBBObject *)v4;
-    v4 = *(_DWORD *)(v4 + 12);
+    v3 = pIterator;
+    pIterator = pIterator->m_pFirst;
   }
-  *a2 = 0;
+  *_pObject = 0;
   return 0;
 }
 
@@ -70,21 +71,21 @@ bool __cdecl CBBObjectTracer::IsObjectInList(unsigned int a1, class CBBObject * 
 // Decompiled from void CBBObjectTracer::DumpObjects()
 void __cdecl CBBObjectTracer::DumpObjects(void) {
   
-  const char *v0; // [esp+4h] [ebp-8h]
-  _DWORD *i; // [esp+8h] [ebp-4h]
+  const char *m_spType; // [esp+4h] [ebp-8h]
+  CBBObject *i; // [esp+8h] [ebp-4h]
 
   if ( CBBObjectTracer::m_iNumberOfObjects == 1 )
     BBSupportTracePrint(0, "Object list (1 entry):");
   else
     BBSupportTracePrintF(0, "Object list (%i entries):", CBBObjectTracer::m_iNumberOfObjects);
-  BBSupportTracePrint(0, (char *)&byte_3ABA7DF);
-  for ( i = (_DWORD *)CBBObjectTracer::m_pObjectFirst; i; i = (_DWORD *)i[3] )
+  BBSupportTracePrint(0, (char *)&sEmpty7);
+  for ( i = CBBObjectTracer::m_pObjectFirst; i; i = i->m_pFirst )
   {
-    if ( i[2] )
-      v0 = (const char *)i[2];
+    if ( i->m_spType )
+      m_spType = i->m_spType;
     else
-      v0 = "Object of unknown type";
-    BBSupportTracePrintF(0, "  %06x-%08x %s", i[1], i, v0);
+      m_spType = "Object of unknown type";
+    BBSupportTracePrintF(0, "  %06x-%08x %s", i->m_uSerialNumber, i, m_spType);
   }
 }
 
@@ -109,3 +110,4 @@ void __cdecl CBBObjectTracer::Leave(void) {
 // address=[0x468717c]
 // [Decompilation failed for static struct _RTL_CRITICAL_SECTION CBBObjectTracer::m_sCriticalSection]
 
+#endif // Already implemented

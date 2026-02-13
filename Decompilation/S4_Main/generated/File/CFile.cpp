@@ -94,13 +94,13 @@ std::string const &  CFile::GetName(void) {
 
 
 // address=[0x2f011c0]
-// Decompiled from int __stdcall CFile::Open(_Cnd_internal_imp_t *a1, int a2, char *Str, int a4)
-void  CFile::Open(std::wstring const & a1, unsigned int a2, char * Str, int a4) {
+// Decompiled from void __thiscall CFile::Open(_DWORD *this, wstring *a1, char a2, char *Str, int a4)
+void  CFile::Open(std::wstring const & a2, unsigned int a3, char * Str, int a5) {
   
-  wchar_t *v4; // eax
+  wchar_t *v5; // eax
 
-  v4 = (wchar_t *)std::wstring::c_str(a1);
-  return CFile::Open(v4, a2, Str, a4);
+  v5 = std::wstring::c_str(a1);
+  CFile::Open(this, v5, a2, UNUSED_ARG(), UNUSED_ARG());
 }
 
 
@@ -129,18 +129,18 @@ void  CFile::Open(wchar_t const * FileName, unsigned int a3, char * Str, int a5)
 
 
 // address=[0x2f012d0]
-// Decompiled from size_t __thiscall CFile::Read(FILE **this, void *Buffer, size_t ElementSize, size_t ElementCount, int a5, int a6)
+// Decompiled from size_t __thiscall CFile::Read(  struct CFile *this,  void *Buffer,  size_t ElementSize,  size_t ElementCount,  int a5,  int a6)
 unsigned int  CFile::Read(void * Buffer, int ElementSize, int ElementCount, char * a5, int a6) {
   
-  return j__fread(Buffer, ElementSize, ElementCount, this[17]);
+  return j__fread(Buffer, ElementSize, ElementCount, *((FILE **)this + 17));
 }
 
 
 // address=[0x2f01300]
-// Decompiled from size_t __thiscall CFile::Write(FILE **this, void *Buffer, size_t ElementSize, size_t ElementCount, int a5, int a6)
-unsigned int  CFile::Write(void const * Buffer, int ElementSize, int ElementCount, char * a5, int a6) {
+// Decompiled from unsigned int __thiscall CFile::Write(  struct CFile *this,  const void *Buffer,  int ElementSize,  int ElementCount,  char *a5,  int a6)
+unsigned int  CFile::Write(void const * a1, int a2, int a3, char * a4, int a5) {
   
-  return j__fwrite(Buffer, ElementSize, ElementCount, this[17]);
+  return j__fwrite(Buffer, ElementSize, ElementCount, *((FILE **)this + 17));
 }
 
 

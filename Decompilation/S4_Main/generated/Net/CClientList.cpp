@@ -316,10 +316,10 @@ int  CClientList::GetClientIndexPerPeerId(unsigned int a2) {
 
 
 // address=[0x15b3b90]
-// Decompiled from void __thiscall CClientList::GetSize(CDaoIndexFieldInfo *this)
+// Decompiled from int __thiscall CClientList::GetSize(CDaoIndexFieldInfo *this)
 int  CClientList::GetSize(void) {
   
-  std::vector<CClient>::size((char *)this + 4);
+  return std::vector<CClient>::size((char *)this + 4);
 }
 
 

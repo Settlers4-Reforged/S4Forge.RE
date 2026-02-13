@@ -4236,72 +4236,77 @@ bool  CGameHost::HostStartTick(void * a2) {
 bool  CGameHost::RegClientConnect(void * a2) {
   
   int Instance; // eax
-  const wchar_t *v3; // eax
+  wchar_t *v3; // eax
   int v5; // eax
-  int v6; // eax
-  const char *v7; // eax
-  int v8; // [esp+0h] [ebp-98h]
-  _Cnd_internal_imp_t *PlayerName; // [esp+4h] [ebp-94h]
+  const char *v6; // eax
+  int v7; // [esp+0h] [ebp-98h]
+  wstring *PlayerName; // [esp+4h] [ebp-94h]
   int i; // [esp+Ch] [ebp-8Ch]
   int j; // [esp+Ch] [ebp-8Ch]
-  _BYTE v13[28]; // [esp+10h] [ebp-88h] BYREF
+  _BYTE v12[28]; // [esp+10h] [ebp-88h] BYREF
   wchar_t Destination[32]; // [esp+2Ch] [ebp-6Ch] BYREF
-  char v15; // [esp+6Ch] [ebp-2Ch]
+  char v14; // [esp+6Ch] [ebp-2Ch]
   int LocalPeerId; // [esp+6Dh] [ebp-2Bh]
-  int v17; // [esp+71h] [ebp-27h]
-  int v18; // [esp+75h] [ebp-23h]
-  int v19; // [esp+79h] [ebp-1Fh]
-  int v20; // [esp+7Dh] [ebp-1Bh]
-  int v21; // [esp+81h] [ebp-17h]
+  int v16; // [esp+71h] [ebp-27h]
+  int v17; // [esp+75h] [ebp-23h]
+  int v18; // [esp+79h] [ebp-1Fh]
+  int v19; // [esp+7Dh] [ebp-1Bh]
+  int v20; // [esp+81h] [ebp-17h]
   char IsWebGame; // [esp+89h] [ebp-Fh]
 
   if ( a2 == 1 )
   {
-    v15 = 1;
+    v14 = 1;
     Instance = StormManager::GetInstance();
     LocalPeerId = StormManager::GetLocalPeerId(Instance);
-    v17 = g_iFileVersionMS;
-    v18 = g_iFileVersionLS;
-    v19 = g_iConfigVersion;
-    v20 = g_iScriptVersion;
-    v21 = g_iGfxVersion;
+    v16 = g_iFileVersionMS;
+    v17 = g_iFileVersionLS;
+    v18 = g_iConfigVersion;
+    v19 = g_iScriptVersion;
+    v20 = g_iGfxVersion;
     IsWebGame = CGameType::IsWebGame(g_pGameType);
-    PlayerName = (_Cnd_internal_imp_t *)CGameSettings::GetPlayerName((int)v13);
-    v3 = (const wchar_t *)std::wstring::c_str(PlayerName);
+    PlayerName = (wstring *)CGameSettings::GetPlayerName((int)v12);
+    v3 = std::wstring::c_str(PlayerName);
     wcsncpy(Destination, v3, 0x1Fu);
-    std::wstring::~wstring(v13);
+    std::wstring::~wstring(v12);
     Destination[31] = 0;
     CGameHost::SendToHost(1013, Destination, 0x65u, 0, 0, 1);
     return 1;
   }
   else
   {
-    v8 = *(_DWORD *)(g_pGameType + 68);
+    v7 = *(_DWORD *)&g_pGameType[68];
     if ( (*(int (__thiscall **)(_DWORD))(**(_DWORD **)(this + 196) + 36))(*(_DWORD *)(this + 196)) )
     {
-      *(_DWORD *)(g_pGameType + 68) = (*(int (__thiscall **)(_DWORD))(**(_DWORD **)(this + 196) + 36))(*(_DWORD *)(this + 196));
+      *(_DWORD *)&g_pGameType[68] = (*(int (__thiscall **)(_DWORD))(**(_DWORD **)(this + 196) + 36))(*(_DWORD *)(this + 196));
       for ( i = 0; i < 9; ++i )
       {
-        if ( *(_DWORD *)(g_pGameType + 4 * i + 188) == v8 )
-          *(_DWORD *)(g_pGameType + 4 * i + 188) = (*(int (__thiscall **)(_DWORD))(**(_DWORD **)(this + 196) + 36))(*(_DWORD *)(this + 196));
+        if ( *(_DWORD *)&g_pGameType[4 * i + 188] == v7 )
+          *(_DWORD *)&g_pGameType[4 * i + 188] = (*(int (__thiscall **)(_DWORD))(**(_DWORD **)(this + 196) + 36))(*(_DWORD *)(this + 196));
       }
     }
-    CClientList::GetSize(*(CDaoIndexFieldInfo **)(this + 16));
-    if ( v5 && BBSupportDbgReport(2, "Net\\GameHost.cpp", 4254, "m_pClientList->GetSize() == 0") == 1 )
+    if ( CClientList::GetSize(*(CDaoIndexFieldInfo **)(this + 16))
+      && BBSupportDbgReport(2, "Net\\GameHost.cpp", 4254, "m_pClientList->GetSize() == 0") == 1 )
+    {
       __debugbreak();
+    }
     CTrace::Print("GameHost.cpp: Filling client list !!");
     for ( j = 0; j < 9; ++j )
     {
-      if ( *(_DWORD *)(g_pGameType + 4 * j + 224) != -1 )
+      if ( *(_DWORD *)&g_pGameType[4 * j + 224] != -1 )
       {
-        v6 = StormManager::GetInstance();
-        if ( *(_DWORD *)(g_pGameType + 4 * j + 224) != StormManager::GetLocalPeerId(v6) )
+        v5 = StormManager::GetInstance();
+        if ( *(_DWORD *)&g_pGameType[4 * j + 224] != StormManager::GetLocalPeerId(v5) )
         {
-          CClientList::Add(*(CClientList **)(this + 16), *(_DWORD *)(g_pGameType + 4 * j + 188));
-          v7 = (const char *)(*(int (__thiscall **)(_DWORD, _DWORD))(**(_DWORD **)(this + 196) + 48))(
+          CClientList::Add(
+            *(CClientList **)(this + 16),
+            *(_DWORD *)&g_pGameType[4 * j + 188],
+            j,
+            *(_DWORD *)&g_pGameType[4 * j + 224]);
+          v6 = (const char *)(*(int (__thiscall **)(_DWORD, _DWORD))(**(_DWORD **)(this + 196) + 48))(
                                *(_DWORD *)(this + 196),
-                               *(_DWORD *)(g_pGameType + 4 * j + 188));
-          CTrace::Print("GameHost.cpp: Adding client %s to list !", v7);
+                               *(_DWORD *)&g_pGameType[4 * j + 188]);
+          CTrace::Print("GameHost.cpp: Adding client %s to list !", v6);
         }
       }
     }
