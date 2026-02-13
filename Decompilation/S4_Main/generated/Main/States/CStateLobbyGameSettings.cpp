@@ -360,7 +360,7 @@ bool  CStateLobbyGameSettings::OnEvent(class CEvn_Event & a2) {
         v9 = strlen(Str);
         v20 = j__mbstowcs(Dest, Str, v9);
         if ( v20 >= 256 )
-          j____report_rangecheckfailure();
+          report_rangecheckfailure();
         Dest[v20] = 0;
         CLanLobby::Communicate(1050, Dest);
         result = 1;
@@ -517,7 +517,7 @@ bool  CStateLobbyGameSettings::OnEvent(class CEvn_Event & a2) {
               v29 = *(_BYTE *)(g_pGameType + 696);
               AIName = (_Cnd_internal_imp_t *)CGameSettings::GetAIName((int)v31, wparam);
               v6 = (const wchar_t *)std::wstring::c_str(AIName);
-              j__wcscpy(Destination, v6);
+              wcscpy(Destination, v6);
               std::wstring::~wstring(v31);
               CLanLobby::ConnectPlayer(Destination, wparam);
             }
@@ -730,15 +730,15 @@ void  CStateLobbyGameSettings::PrintChatLine(unsigned short const * String, unsi
   char Dest[256]; // [esp+214h] [ebp-104h] BYREF
 
   memset(Dest, 0, sizeof(Dest));
-  v2 = j__wcslen(String);
+  v2 = wcslen(String);
   v6 = j__wcstombs(Dest, String, v2);
   if ( v6 >= 0x100 )
-    j____report_rangecheckfailure();
+    report_rangecheckfailure();
   Dest[v6] = 0;
-  v3 = j__wcslen(Source);
+  v3 = wcslen(Source);
   v5 = j__wcstombs(v8, Source, v3);
   if ( v5 >= 0x100 )
-    j____report_rangecheckfailure();
+    report_rangecheckfailure();
   v8[v5] = 0;
   if ( Dest[12] )
     strcpy(&Dest[12], ".");

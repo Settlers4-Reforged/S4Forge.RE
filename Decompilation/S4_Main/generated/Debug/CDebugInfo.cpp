@@ -6,12 +6,12 @@
 // Decompiled from bool CDebugInfo::IsMMX()
 bool __cdecl CDebugInfo::IsMMX(void) {
   
-  return byte_3F44EC0 == 1;
+  return bIsMMX == 1;
 }
 
 
 // address=[0x1480a00]
-// Decompiled from char __cdecl CDebugInfo::CheckEnvironment(bool a1)
+// Decompiled from bool __cdecl CDebugInfo::CheckEnvironment(bool a1)
 bool __cdecl CDebugInfo::CheckEnvironment(bool a1) {
   
   DWORD LastError; // eax
@@ -65,9 +65,9 @@ bool __cdecl CDebugInfo::CheckEnvironment(bool a1) {
 bool __cdecl CDebugInfo::IsTargetPlatform(void) {
   
   if ( dword_3F44E94 == 2 )
-    return dword_3F44E98 >= 4;
+    return sOSVersionMajor >= 4;
   if ( dword_3F44E94 == 1 )
-    return dword_3F44E98 >= 4;
+    return sOSVersionMajor >= 4;
   return dword_3F44E94 != 0;
 }
 
@@ -104,26 +104,26 @@ void __cdecl CDebugInfo::LogEnvironment(void) {
   BBSupportTracePrintF(1, "CPU Steppg: %d", (unsigned __int8)byte_3F44E8C);
   BBSupportTracePrintF(1, "# of CPUs : %d", dword_3F44EC4);
   BBSupportTracePrintF(1, "CPU Speed : %d", dword_3F44EC8);
-  if ( byte_3F44EC0 )
+  if ( bIsMMX )
     BBSupportTracePrintF(1, "MMX Ext.  : %s", "Yes");
   else
     BBSupportTracePrintF(1, "MMX Ext.  : %s", "No");
-  BBSupportTracePrintF(1, (char *)&byte_36BE55A);
+  BBSupportTracePrintF(1, (char *)&sEmpty4);
   BBSupportTracePrintF(1, "OPERATING SYSTEM INFORMATION");
   BBSupportTracePrintF(1, "---------------------------------------------------------------------");
   v0 = (const char *)std::string::c_str((char *)&CDebugInfo::m_strOS + 28 * CDebugInfo::m_EnvInfo);
   BBSupportTracePrintF(1, "Detected OS: %s", v0);
-  BBSupportTracePrintF(1, "VersionMajor: %d", dword_3F44E98);
-  BBSupportTracePrintF(1, "VersionMinor: %d", dword_3F44E9C);
-  v1 = (const char *)std::string::c_str(&unk_3F44EA0);
+  BBSupportTracePrintF(1, "VersionMajor: %d", sOSVersionMajor);
+  BBSupportTracePrintF(1, "VersionMinor: %d", sOSVersionMinor);
+  v1 = (const char *)std::string::c_str(&sOSAdditionalInfo);
   BBSupportTracePrintF(1, "Additional Info: %s", v1);
-  BBSupportTracePrintF(1, (char *)&byte_36BE55B);
+  BBSupportTracePrintF(1, (char *)&sEmpty5);
   BBSupportTracePrintF(1, "MEMORY INFORMATION");
   BBSupportTracePrintF(1, "---------------------------------------------------------------------");
-  BBSupportTracePrintF(1, "Total Physical Memory: %d MBytes", ((unsigned int)dword_3F44ECC >> 20) + 1);
-  BBSupportTracePrintF(1, "Free  Physical Memory: %d MBytes", (unsigned int)dword_3F44ED4 >> 20);
-  BBSupportTracePrintF(1, "Total Virtual  Memory: %d MBytes", (unsigned int)dword_3F44ED0 >> 20);
-  BBSupportTracePrintF(1, "Free  Virtual  Memory: %d MBytes", (unsigned int)dword_3F44ED8 >> 20);
+  BBSupportTracePrintF(1, "Total Physical Memory: %d MBytes", ((unsigned int)uTotalPhyMemory >> 20) + 1);
+  BBSupportTracePrintF(1, "Free  Physical Memory: %d MBytes", (unsigned int)uFreePhyMemory >> 20);
+  BBSupportTracePrintF(1, "Total Virtual  Memory: %d MBytes", (unsigned int)uTotalVirMemory >> 20);
+  BBSupportTracePrintF(1, "Free  Virtual  Memory: %d MBytes", (unsigned int)uFreeVirMemory >> 20);
   return BBSupportTracePrintF(1, "=====================================================================");
 }
 
@@ -139,21 +139,21 @@ bool __cdecl CDebugInfo::CheckOS(void) {
   if ( GetVersionExA(&VersionInformation) )
   {
     dword_3F44E94 = VersionInformation.dwPlatformId;
-    dword_3F44E98 = VersionInformation.dwMajorVersion;
-    dword_3F44E9C = VersionInformation.dwMinorVersion;
-    std::string::operator=(&unk_3F44EA0, VersionInformation.szCSDVersion);
+    sOSVersionMajor = VersionInformation.dwMajorVersion;
+    sOSVersionMinor = VersionInformation.dwMinorVersion;
+    std::string::operator=(&sOSAdditionalInfo, VersionInformation.szCSDVersion);
     if ( dword_3F44E94 )
     {
       if ( dword_3F44E94 == 1 )
       {
-        if ( dword_3F44E98 > 4 || dword_3F44E98 == 4 && dword_3F44E9C > 0 )
+        if ( sOSVersionMajor > 4 || sOSVersionMajor == 4 && sOSVersionMinor > 0 )
           CDebugInfo::m_EnvInfo = 4;
         else
           CDebugInfo::m_EnvInfo = 3;
       }
       else if ( dword_3F44E94 == 2 )
       {
-        switch ( dword_3F44E98 )
+        switch ( sOSVersionMajor )
         {
           case 3:
             CDebugInfo::m_EnvInfo = 9;
@@ -165,7 +165,7 @@ bool __cdecl CDebugInfo::CheckOS(void) {
             CDebugInfo::m_EnvInfo = 8;
             break;
           default:
-            if ( dword_3F44E98 <= 5 )
+            if ( sOSVersionMajor <= 5 )
               CDebugInfo::m_EnvInfo = 0;
             else
               CDebugInfo::m_EnvInfo = 7;
@@ -186,8 +186,8 @@ bool __cdecl CDebugInfo::CheckOS(void) {
   else
   {
     dword_3F44E94 = -1;
-    dword_3F44E98 = -1;
-    dword_3F44E9C = -1;
+    sOSVersionMajor = -1;
+    sOSVersionMinor = -1;
     return 0;
   }
 }
@@ -230,7 +230,7 @@ bool __cdecl CDebugInfo::CheckCPU(void) {
   memset(&SystemInfo, 0, sizeof(SystemInfo));
   GetSystemInfo(&SystemInfo);
   dword_3F44EC4 = SystemInfo.dwNumberOfProcessors;
-  byte_3F44EC0 = ((unsigned int)dword_800000 & CDebugInfo::wincpufeatures()) != 0;
+  bIsMMX = ((unsigned int)dword_800000 & CDebugInfo::wincpufeatures()) != 0;
   return 1;
 }
 
@@ -349,10 +349,10 @@ bool __cdecl CDebugInfo::CheckMemory(void) {
 
   memset(&Buffer, 0, sizeof(Buffer));
   GlobalMemoryStatus(&Buffer);
-  dword_3F44ECC = Buffer.dwTotalPhys;
-  dword_3F44ED0 = Buffer.dwTotalPageFile;
-  dword_3F44ED4 = Buffer.dwAvailPhys;
-  dword_3F44ED8 = Buffer.dwAvailPageFile;
+  uTotalPhyMemory = Buffer.dwTotalPhys;
+  uTotalVirMemory = Buffer.dwTotalPageFile;
+  uFreePhyMemory = Buffer.dwAvailPhys;
+  uFreeVirMemory = Buffer.dwAvailPageFile;
   return 1;
 }
 

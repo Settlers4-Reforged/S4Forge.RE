@@ -317,7 +317,7 @@ bool  CStateMDBriefing::OnEvent(class CEvn_Event & a2) {
       v4 = (const char *)std::wstring::c_str((_Cnd_internal_imp_t *)((char *)&unk_4031E78
                                                                    + 28 * *((_DWORD *)v51 + 1)
                                                                    - 140));
-      j___snwprintf(Buffer, 0xFFu, v4, v22);
+      snwprintf(Buffer, 0xFFu, v4, v22);
       std::wstring::wstring(v56);
       v58 = 2;
       if ( (*(unsigned __int8 (__thiscall **)(void *, char *, char *, int))(*(_DWORD *)g_pCDDrive + 8))(

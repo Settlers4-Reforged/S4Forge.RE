@@ -1,28 +1,29 @@
+#if FALSE
 #include "CFileLibrary.h"
 
 // Definitions for class CFileLibrary
 
 // address=[0x2f099d0]
-// Decompiled from int __stdcall CFileLibrary::FileSize(wchar_t *String)
+// Decompiled from int __thiscall CFileLibrary::FileSize(CFileLibrary *this, wchar_t *String)
 unsigned int  CFileLibrary::FileSize(wchar_t const * String) {
   
-  int Directory; // [esp+0h] [ebp-420h]
-  int File; // [esp+8h] [ebp-418h]
+  struct FLMemDirStruct *a2; // [esp+0h] [ebp-420h]
+  FLMemFileStruct *File; // [esp+8h] [ebp-418h]
   wchar_t String1[260]; // [esp+Ch] [ebp-414h] BYREF
   wchar_t Destination[260]; // [esp+214h] [ebp-20Ch] BYREF
 
-  if ( (unsigned __int8)CFileLibrary::pCutPathAndFilename(String, Destination, String1) )
+  if ( CFileLibrary::pCutPathAndFilename(String, Destination, String1) )
   {
     File = 0;
-    Directory = CFileLibrary::pFindDirectory(Destination);
-    if ( Directory )
-      File = CFileLibrary::pFindFile(String1, Directory);
-    if ( File && *(__int16 *)(File + 20) != -4 )
+    a2 = CFileLibrary::pFindDirectory(this, Destination);
+    if ( a2 )
+      File = CFileLibrary::pFindFile(String1, a2);
+    if ( File && File->m_iLibraryIndex != -4 )
     {
-      if ( (*(_WORD *)(File + 4) & 1) != 0 )
-        return *(_DWORD *)(File + 16);
+      if ( (File->m_iFlags & 1) != 0 )
+        return File->m_iDecompressedSize;
       else
-        return *(_DWORD *)(File + 12);
+        return File->m_iFileSize;
     }
     else
     {
@@ -42,15 +43,15 @@ unsigned int  CFileLibrary::FileSize(wchar_t const * String) {
 // Decompiled from int __thiscall CFileLibrary::FileSize(CFileLibrary *this, unsigned int a2)
 unsigned int  CFileLibrary::FileSize(unsigned int a2) {
   
-  struct FLIntHandleStruct *IntHandlePtr; // [esp+4h] [ebp-4h]
+  FLIntHandleStruct *IntHandlePtr; // [esp+4h] [ebp-4h]
 
   IntHandlePtr = CFileLibrary::pGetIntHandlePtr(this, a2);
   if ( IntHandlePtr )
   {
-    if ( (*(_WORD *)(*((_DWORD *)IntHandlePtr + 5) + 4) & 1) != 0 )
-      return *(_DWORD *)(*((_DWORD *)IntHandlePtr + 5) + 16);
+    if ( (IntHandlePtr->m_pLibraryFile->m_iFlags & FLFF_Compressed) != 0 )
+      return IntHandlePtr->m_pLibraryFile->m_iDecompressedSize;
     else
-      return *(_DWORD *)(*((_DWORD *)IntHandlePtr + 5) + 12);
+      return IntHandlePtr->m_pLibraryFile->m_iFileSize;
   }
   else
   {
@@ -61,99 +62,93 @@ unsigned int  CFileLibrary::FileSize(unsigned int a2) {
 
 
 // address=[0x2f09b40]
-// Decompiled from CFileLibrary *__thiscall CFileLibrary::UnmapFile(CFileLibrary *this, unsigned int a2)
+// Decompiled from void __thiscall CFileLibrary::UnmapFile(CFileLibrary *this, void *a2)
 void  CFileLibrary::UnmapFile(void * a2) {
   
-  CFileLibrary *result; // eax
-  unsigned int v3; // [esp+8h] [ebp-Ch]
+  char *m_pFileData; // [esp+8h] [ebp-Ch]
   int i; // [esp+10h] [ebp-4h]
 
-  for ( i = 0; ; ++i )
+  for ( i = 0; i < this->m_iLibraryFilesCount; ++i )
   {
-    result = (CFileLibrary *)i;
-    if ( i >= *((_DWORD *)this + 10) )
-      break;
-    v3 = *(_DWORD *)(*((_DWORD *)this + 116) + 24 * i + 8);
-    if ( a2 >= v3
-      && a2 < *(_DWORD *)(*((_DWORD *)this + 116) + 24 * i + 20) + v3
-      && !--*(_DWORD *)(*((_DWORD *)this + 116) + 24 * i + 16) )
+    m_pFileData = (char *)this->m_pLibraryFiles[i].m_pFileData;
+    if ( a2 >= m_pFileData
+      && a2 < &m_pFileData[this->m_pLibraryFiles[i].m_uFileSize]
+      && !--this->m_pLibraryFiles[i].m_bFileMapped )
     {
-      UnmapViewOfFile(*(LPCVOID *)(*((_DWORD *)this + 116) + 24 * i + 8));
-      *(_DWORD *)(*((_DWORD *)this + 116) + 24 * i + 8) = 0;
-      CloseHandle(*(HANDLE *)(*((_DWORD *)this + 116) + 24 * i + 12));
-      result = this;
-      *(_DWORD *)(*((_DWORD *)this + 116) + 24 * i + 12) = 0;
-      return result;
+      UnmapViewOfFile(this->m_pLibraryFiles[i].m_pFileData);
+      this->m_pLibraryFiles[i].m_pFileData = 0;
+      CloseHandle(this->m_pLibraryFiles[i].m_hFileMap);
+      this->m_pLibraryFiles[i].m_hFileMap = 0;
+      return;
     }
   }
-  return result;
 }
 
 
 // address=[0x2f09c70]
-// Decompiled from bool __stdcall CFileLibrary::DoesFileExistInLib(wchar_t *String)
+// Decompiled from bool __thiscall CFileLibrary::DoesFileExistInLib(CFileLibrary *this, wchar_t *String)
 bool  CFileLibrary::DoesFileExistInLib(wchar_t const * String) {
   
-  int Directory; // [esp+0h] [ebp-420h]
-  int File; // [esp+4h] [ebp-41Ch]
+  struct FLMemDirStruct *a2; // [esp+0h] [ebp-420h]
+  FLMemFileStruct *File; // [esp+4h] [ebp-41Ch]
   wchar_t String1[260]; // [esp+Ch] [ebp-414h] BYREF
   wchar_t Destination[260]; // [esp+214h] [ebp-20Ch] BYREF
 
-  if ( !(unsigned __int8)CFileLibrary::pCutPathAndFilename(String, Destination, String1) )
+  if ( !CFileLibrary::pCutPathAndFilename(String, Destination, String1) )
     return 0;
   File = 0;
-  Directory = CFileLibrary::pFindDirectory(Destination);
-  if ( Directory )
-    File = CFileLibrary::pFindFile(String1, Directory);
-  return File && *(__int16 *)(File + 20) != -4;
+  a2 = CFileLibrary::pFindDirectory(this, Destination);
+  if ( a2 )
+    File = CFileLibrary::pFindFile(String1, a2);
+  return File && File->m_iLibraryIndex != 0xFFFFFFFC;
 }
 
 
 // address=[0x2f09d30]
-// Decompiled from int __thiscall CFileLibrary::MapFile(CFileLibrary *this, unsigned int a2)
+// Decompiled from void *__thiscall CFileLibrary::MapFile(CFileLibrary *this, unsigned int a2)
 void *  CFileLibrary::MapFile(unsigned int a2) {
   
   DWORD LastError; // eax
   DWORD v4; // eax
   HANDLE hFile; // [esp+0h] [ebp-14h]
   HANDLE hFileMappingObject; // [esp+4h] [ebp-10h]
-  LPVOID v7; // [esp+8h] [ebp-Ch]
-  struct FLIntHandleStruct *IntHandlePtr; // [esp+Ch] [ebp-8h]
+  BYTE *pFileData; // [esp+8h] [ebp-Ch]
+  FLIntHandleStruct *IntHandlePtr; // [esp+Ch] [ebp-8h]
 
   IntHandlePtr = CFileLibrary::pGetIntHandlePtr(this, a2);
   if ( !IntHandlePtr )
     return 0;
-  if ( *(_DWORD *)(*((_DWORD *)this + 116) + 24 * *(__int16 *)(*((_DWORD *)IntHandlePtr + 5) + 20) + 12) )
+  if ( this->m_pLibraryFiles[IntHandlePtr->m_pLibraryFile->m_iLibraryIndex].m_hFileMap )
   {
-    ++*(_DWORD *)(*((_DWORD *)this + 116) + 24 * *(__int16 *)(*((_DWORD *)IntHandlePtr + 5) + 20) + 16);
-    return *(_DWORD *)(*((_DWORD *)IntHandlePtr + 5) + 8)
-         + *(_DWORD *)(*((_DWORD *)this + 116) + 24 * *(__int16 *)(*((_DWORD *)IntHandlePtr + 5) + 20) + 8);
+    ++this->m_pLibraryFiles[IntHandlePtr->m_pLibraryFile->m_iLibraryIndex].m_bFileMapped;
+    return (char *)this->m_pLibraryFiles[IntHandlePtr->m_pLibraryFile->m_iLibraryIndex].m_pFileData
+         + IntHandlePtr->m_pLibraryFile->m_iFileOffset;
   }
   else
   {
-    hFile = CFileLibrary::pGetFileLibraryHandle(this, *(__int16 *)(*((_DWORD *)IntHandlePtr + 5) + 20));
+    hFile = (HANDLE)CFileLibrary::pGetFileLibraryHandle(this, IntHandlePtr->m_pLibraryFile->m_iLibraryIndex);
     hFileMappingObject = CreateFileMappingA(hFile, 0, 2u, 0, 0, 0);
     if ( hFileMappingObject == (HANDLE)-1 )
     {
       LastError = GetLastError();
-      j__printf("Unable map file . LastError was: %d", LastError);
+      printf("Unable map file . LastError was: %d", LastError);
       CFileLibrary::FileClose(this, a2);
       return 0;
     }
     else
     {
-      v7 = MapViewOfFile(hFileMappingObject, 4u, 0, 0, 0);
-      if ( v7 )
+      pFileData = (BYTE *)MapViewOfFile(hFileMappingObject, 4u, 0, 0, 0);
+      if ( pFileData )
       {
-        *(_DWORD *)(*((_DWORD *)this + 116) + 24 * *(__int16 *)(*((_DWORD *)IntHandlePtr + 5) + 20) + 8) = v7;
-        *(_DWORD *)(*((_DWORD *)this + 116) + 24 * *(__int16 *)(*((_DWORD *)IntHandlePtr + 5) + 20) + 12) = hFileMappingObject;
-        *(_DWORD *)(*((_DWORD *)this + 116) + 24 * *(__int16 *)(*((_DWORD *)IntHandlePtr + 5) + 20) + 16) = 1;
-        return (int)v7 + *(_DWORD *)(*((_DWORD *)IntHandlePtr + 5) + 8);
+        this->m_pLibraryFiles[IntHandlePtr->m_pLibraryFile->m_iLibraryIndex].m_pFileData = pFileData;
+        this->m_pLibraryFiles[IntHandlePtr->m_pLibraryFile->m_iLibraryIndex].m_hFileMap = hFileMappingObject;
+        this->m_pLibraryFiles[IntHandlePtr->m_pLibraryFile->m_iLibraryIndex].m_bFileMapped = 1;
+        return &pFileData[IntHandlePtr->m_pLibraryFile->m_iFileOffset];
       }
       else
       {
         v4 = GetLastError();
-        j__printf("Unable map view of file . LastError was: %d", v4);
+        printf("Unable map view of file . LastError was: %d", v4);
         CloseHandle(hFileMappingObject);
         CFileLibrary::FileClose(this, a2);
         return 0;
@@ -164,172 +159,165 @@ void *  CFileLibrary::MapFile(unsigned int a2) {
 
 
 // address=[0x2f09ef0]
-// Decompiled from unsigned int __thiscall CFileLibrary::FileOpen(_DWORD *this, wchar_t *String, int Size)
-unsigned int  CFileLibrary::FileOpen(wchar_t const * String, int Size) {
+// Decompiled from unsigned int __thiscall CFileLibrary::FileOpen(CFileLibrary *this, wchar_t *_swpName, int Size)
+unsigned int  CFileLibrary::FileOpen(wchar_t const * _swpName, int Size) {
   
-  FLIntHandleStruct *v4; // [esp+10h] [ebp-44Ch]
+  FLIntHandleStruct *pHandle; // [esp+10h] [ebp-44Ch] MAPDST
   FLIntHandleStruct *v5; // [esp+14h] [ebp-448h]
-  FLIntHandleStruct *v6; // [esp+1Ch] [ebp-440h]
   FLIntHandleStruct *C; // [esp+20h] [ebp-43Ch]
-  int v8; // [esp+24h] [ebp-438h]
-  int Directory; // [esp+28h] [ebp-434h]
-  int File; // [esp+2Ch] [ebp-430h]
+  int bFoundHandle; // [esp+24h] [ebp-438h]
+  struct FLMemDirStruct *a2; // [esp+28h] [ebp-434h]
+  FLMemFileStruct *File; // [esp+2Ch] [ebp-430h]
   unsigned int v11; // [esp+30h] [ebp-42Ch]
-  int i; // [esp+38h] [ebp-424h]
-  FLIntHandleStruct *v14; // [esp+38h] [ebp-424h]
-  wchar_t String1[260]; // [esp+3Ch] [ebp-420h] BYREF
-  wchar_t Destination[260]; // [esp+244h] [ebp-218h] BYREF
-  int v17; // [esp+458h] [ebp-4h]
+  FLIntHandleStruct *i; // [esp+38h] [ebp-424h]
+  FLIntHandleStruct *pHandlesEnd; // [esp+38h] [ebp-424h]
+  wchar_t swpFileName[260]; // [esp+3Ch] [ebp-420h] BYREF
+  wchar_t swpPath[260]; // [esp+244h] [ebp-218h] BYREF
+  int exceptionBlock; // [esp+458h] [ebp-4h]
 
-  if ( !(unsigned __int8)CFileLibrary::pCutPathAndFilename(String, Destination, String1) )
+  if ( !CFileLibrary::pCutPathAndFilename(_swpName, swpPath, swpFileName) )
     return -1;
   File = 0;
-  Directory = CFileLibrary::pFindDirectory(Destination);
-  if ( Directory )
-    File = CFileLibrary::pFindFile(String1, Directory);
-  if ( !File || *(__int16 *)(File + 20) == -4 )
+  a2 = CFileLibrary::pFindDirectory(this, swpPath);
+  if ( a2 )
+    File = CFileLibrary::pFindFile(swpFileName, a2);
+  if ( !File || File->m_iLibraryIndex == 0xFFFFFFFC )
     return -1;
-  ++*this;
-  v8 = 0;
+  ++this->m_iRefCount;
+  bFoundHandle = 0;
   do
   {
-    v11 = this[8];
-    this[8] = v11 + 1;
+    v11 = this->m_uHandleCount;
+    this->m_uHandleCount = v11 + 1;
     if ( v11 == -1 )
     {
-      v11 = this[8];
-      this[8] = v11 + 1;
+      v11 = this->m_uHandleCount;
+      this->m_uHandleCount = v11 + 1;
     }
-    for ( i = this[v11 % 0x64 + 14]; i && *(_DWORD *)(i + 16) != v11; i = *(_DWORD *)(i + 24) )
+    for ( i = this->m_pFLIntHandle[v11 % 0x64]; i && i->m_iLibraryIndex != v11; i = i->m_pNextHandle )
     {
-      if ( !*(_DWORD *)(i + 24) )
+      if ( !i->m_pNextHandle )
       {
-        v8 = 1;
+        bFoundHandle = 1;
         break;
       }
     }
   }
-  while ( !v8 && i );
+  while ( !bFoundHandle && i );
   if ( i )
   {
     v5 = (FLIntHandleStruct *)operator new(0x1Cu);
-    v17 = 1;
+    exceptionBlock = 1;
     if ( v5 )
-      v4 = FLIntHandleStruct::FLIntHandleStruct(v5);
+      pHandle = FLIntHandleStruct::FLIntHandleStruct(v5);
     else
-      v4 = 0;
-    v17 = -1;
-    *(_DWORD *)(i + 24) = v4;
-    v14 = *(FLIntHandleStruct **)(i + 24);
+      pHandle = 0;
+    exceptionBlock = -1;
+    i->m_pNextHandle = pHandle;
+    pHandlesEnd = i->m_pNextHandle;
   }
   else
   {
     C = (FLIntHandleStruct *)operator new(0x1Cu);
-    v17 = 0;
+    exceptionBlock = 0;
     if ( C )
-      v6 = FLIntHandleStruct::FLIntHandleStruct(C);
+      pHandle = FLIntHandleStruct::FLIntHandleStruct(C);
     else
-      v6 = 0;
-    v17 = -1;
-    v14 = v6;
-    this[v11 % 0x64 + 14] = v6;
+      pHandle = 0;
+    exceptionBlock = -1;
+    pHandlesEnd = pHandle;
+    this->m_pFLIntHandle[v11 % 0x64] = pHandle;
   }
   if ( Size > 0 )
   {
-    *((_DWORD *)v14 + 3) = operator new[](Size);
-    *((_WORD *)v14 + 2) = Size;
+    pHandlesEnd->m_pData = (int)operator new[](Size);
+    pHandlesEnd->m_iDataSize = Size;
   }
   else
   {
-    *((_WORD *)v14 + 2) = 0;
+    pHandlesEnd->m_iDataSize = 0;
   }
-  *((_DWORD *)v14 + 5) = File;
-  *((_DWORD *)v14 + 4) = v11;
+  pHandlesEnd->m_pLibraryFile = File;
+  pHandlesEnd->m_iLibraryIndex = v11;
   return v11;
 }
 
 
 // address=[0x2f0a220]
-// Decompiled from CFileLibrary *__thiscall CFileLibrary::FileClose(CFileLibrary *this, unsigned int a2)
-void  CFileLibrary::FileClose(unsigned int a2) {
+// Decompiled from void __thiscall CFileLibrary::FileClose(CFileLibrary *this, unsigned int _iId)
+void  CFileLibrary::FileClose(unsigned int _iId) {
   
-  CFileLibrary *result; // eax
-  FLIntHandleStruct *v3; // [esp+10h] [ebp-Ch]
-  FLIntHandleStruct *v4; // [esp+18h] [ebp-4h]
+  FLIntHandleStruct *i; // [esp+18h] [ebp-4h] MAPDST
 
-  ++*((_DWORD *)this + 1);
-  result = this;
-  v4 = (FLIntHandleStruct *)*((_DWORD *)this + a2 % 0x64 + 14);
-  if ( !v4 )
-    return result;
-  v3 = 0;
-  while ( v4 )
+  ++this->m_iFileInteractions;
+  i = this->m_pFLIntHandle[_iId % 0x64];
+  if ( i )
   {
-    if ( *((_DWORD *)v4 + 4) == a2 )
+    for ( i = 0; i; i = i->m_pNextHandle )
     {
-      if ( v3 )
-        *((_DWORD *)v3 + 6) = *((_DWORD *)v4 + 6);
-      else
-        *((_DWORD *)this + a2 % 0x64 + 14) = *((_DWORD *)v4 + 6);
-      return (CFileLibrary *)delete v4;
+      if ( i->m_iLibraryIndex == _iId )
+      {
+        if ( i )
+          i->m_pNextHandle = i->m_pNextHandle;
+        else
+          this->m_pFLIntHandle[_iId % 0x64] = i->m_pNextHandle;
+        delete i;
+        return;
+      }
     }
-    result = v4;
-    v3 = v4;
-    v4 = (FLIntHandleStruct *)*((_DWORD *)v4 + 6);
   }
-  return result;
 }
 
 
 // address=[0x2f0a2e0]
-// Decompiled from int __thiscall CFileLibrary::FileSeek(CFileLibrary *this, unsigned int a2, int a3, int a4)
-unsigned int  CFileLibrary::FileSeek(unsigned int a2, long a3, int a4) {
+// Decompiled from int __thiscall CFileLibrary::FileSeek(CFileLibrary *this, unsigned int _iLibraryIndex, int _iOffset, int _iSeekStart)
+unsigned int  CFileLibrary::FileSeek(unsigned int _iLibraryIndex, long _iOffset, int _iSeekStart) {
   
-  int v5; // [esp+10h] [ebp-Ch]
-  int v6; // [esp+14h] [ebp-8h]
-  int *v7; // [esp+18h] [ebp-4h]
+  int iTotalSize; // [esp+10h] [ebp-Ch]
+  int filePosition; // [esp+14h] [ebp-8h]
+  FLIntHandleStruct *pHandle; // [esp+18h] [ebp-4h]
 
-  ++*((_DWORD *)this + 2);
-  v7 = (int *)*((_DWORD *)this + a2 % 0x64 + 14);
-  if ( v7 )
+  ++this->m_iFileSeeks;
+  pHandle = this->m_pFLIntHandle[_iLibraryIndex % 0x64];
+  if ( pHandle )
   {
     while ( 1 )
     {
-      if ( !v7 )
+      if ( !pHandle )
       {
-        BBSupportTracePrintF(3, "CFileLibrary::FileSeek\t:\tFailed to seek in %s", (const char *)*MEMORY[0x14]);
+        BBSupportTracePrintF(3, "CFileLibrary::FileSeek\t:\tFailed to seek in %s", *MEMORY[0x14]);// Hm.. is handle->m_pLibraryFile->m_pswName
         return -1;
       }
-      if ( v7[4] == a2 )
+      if ( pHandle->m_iLibraryIndex == _iLibraryIndex )
         break;
-      v7 = (int *)v7[6];
+      pHandle = pHandle->m_pNextHandle;
     }
-    v6 = *v7;
-    if ( (*(_WORD *)(v7[5] + 4) & 1) != 0 )
-      v5 = *(_DWORD *)(v7[5] + 16);
+    filePosition = pHandle->m_iSeekPosition;
+    if ( (pHandle->m_pLibraryFile->m_iFlags & FLFF_Compressed) != 0 )
+      iTotalSize = pHandle->m_pLibraryFile->m_iDecompressedSize;
     else
-      v5 = *(_DWORD *)(v7[5] + 12);
-    if ( a4 )
+      iTotalSize = pHandle->m_pLibraryFile->m_iFileSize;
+    if ( _iSeekStart )
     {
-      if ( a4 == 1 )
+      if ( _iSeekStart == 1 )                   // From beginning
       {
-        v6 += a3;
+        filePosition += _iOffset;
       }
-      else if ( a4 == 2 )
+      else if ( _iSeekStart == 2 )              // From end and then negative offset
       {
-        v6 = a3 + v5;
+        filePosition = _iOffset + iTotalSize;
       }
     }
     else
     {
-      v6 = a3;
+      filePosition = _iOffset;
     }
-    if ( v6 < 0 )
-      v6 = 0;
-    if ( v6 > v5 )
-      v6 = v5;
-    *v7 = v6;
-    return v6;
+    if ( filePosition < 0 )
+      filePosition = 0;
+    if ( filePosition > iTotalSize )
+      filePosition = iTotalSize;
+    pHandle->m_iSeekPosition = filePosition;
+    return filePosition;
   }
   else
   {
@@ -340,15 +328,14 @@ unsigned int  CFileLibrary::FileSeek(unsigned int a2, long a3, int a4) {
 
 
 // address=[0x2f0a420]
-// Decompiled from size_t __thiscall CFileLibrary::FileRead(_DWORD *this, int a2, char *lpBuffer, size_t Size)
-unsigned int  CFileLibrary::FileRead(unsigned int a2, void * lpBuffer, unsigned int Size) {
+// Decompiled from size_t __thiscall CFileLibrary::FileRead(CFileLibrary *this, unsigned int a2, char *_pData, size_t Size)
+unsigned int  CFileLibrary::FileRead(unsigned int a2, void * _pData, unsigned int Size) {
   
   DWORD v5; // [esp+4h] [ebp-48h] BYREF
   LONG lDistanceToMove; // [esp+8h] [ebp-44h]
   unsigned int v7; // [esp+Ch] [ebp-40h]
-  void *v8; // [esp+10h] [ebp-3Ch]
-  size_t v9; // [esp+14h] [ebp-38h]
-  char *v10; // [esp+18h] [ebp-34h]
+  BYTE *v8; // [esp+10h] [ebp-3Ch]
+  size_t m_iDecompressedSize; // [esp+14h] [ebp-38h]
   signed int v11; // [esp+1Ch] [ebp-30h]
   int v12; // [esp+20h] [ebp-2Ch]
   DWORD NumberOfBytesRead; // [esp+24h] [ebp-28h] BYREF
@@ -356,47 +343,42 @@ unsigned int  CFileLibrary::FileRead(unsigned int a2, void * lpBuffer, unsigned 
   size_t v15; // [esp+2Ch] [ebp-20h]
   unsigned int v16; // [esp+30h] [ebp-1Ch]
   DWORD v17; // [esp+34h] [ebp-18h] BYREF
-  _DWORD *v18; // [esp+38h] [ebp-14h]
   HANDLE hFile; // [esp+3Ch] [ebp-10h]
   int v20; // [esp+40h] [ebp-Ch]
   DWORD nNumberOfBytesToRead; // [esp+44h] [ebp-8h]
-  int IntHandlePtr; // [esp+48h] [ebp-4h]
+  FLIntHandleStruct *IntHandlePtr; // [esp+48h] [ebp-4h]
 
-  v18 = this;
-  v10 = lpBuffer;
-  ++this[3];
-  v18[4] += Size;
-  IntHandlePtr = CFileLibrary::pGetIntHandlePtr(a2);
+  ++this->field_C;
+  this->m_iDecompressedBytesRead += Size;
+  IntHandlePtr = CFileLibrary::pGetIntHandlePtr(this, a2);
   if ( !IntHandlePtr )
     return -1;
-  hFile = (HANDLE)CFileLibrary::pGetFileLibraryHandle(*(__int16 *)(*(_DWORD *)(IntHandlePtr + 20) + 20));
+  hFile = CFileLibrary::pGetFileLibraryHandle(this, IntHandlePtr->m_pLibraryFile->m_iLibraryIndex);
   if ( hFile == (HANDLE)-1 )
   {
     BBSupportTracePrintF(3, "CFileLibrary::FileRead\t:\tfailed to get lib handle");
     return -1;
   }
-  if ( (*(_WORD *)(*(_DWORD *)(IntHandlePtr + 20) + 4) & 1) != 0 )
+  if ( (IntHandlePtr->m_pLibraryFile->m_iFlags & FLFF_Compressed) != 0 )
   {
-    nNumberOfBytesToRead = *(_DWORD *)(*(_DWORD *)(IntHandlePtr + 20) + 16) - *(_DWORD *)IntHandlePtr;
+    nNumberOfBytesToRead = IntHandlePtr->m_pLibraryFile->m_iDecompressedSize - IntHandlePtr->m_iSeekPosition;
     if ( nNumberOfBytesToRead )
     {
       if ( nNumberOfBytesToRead >= Size )
       {
-        if ( *(_DWORD *)(*(_DWORD *)(IntHandlePtr + 20) + 28)
-          || (v9 = *(_DWORD *)(*(_DWORD *)(IntHandlePtr + 20) + 16),
-              v8 = operator new[](v9),
-              *(_DWORD *)(*(_DWORD *)(IntHandlePtr + 20) + 28) = v8,
+        if ( IntHandlePtr->m_pLibraryFile->m_pFileData
+          || (m_iDecompressedSize = IntHandlePtr->m_pLibraryFile->m_iDecompressedSize,
+              v8 = (BYTE *)operator new[](m_iDecompressedSize),
+              IntHandlePtr->m_pLibraryFile->m_pFileData = v8,
               CFileLibrary::LoadEntireFile(
+                this,
                 a2,
-                *(LPVOID *)(*(_DWORD *)(IntHandlePtr + 20) + 28),
-                *(_DWORD *)(*(_DWORD *)(IntHandlePtr + 20) + 24),
+                (char *)IntHandlePtr->m_pLibraryFile->m_pFileData,
+                IntHandlePtr->m_pLibraryFile->m_iCRC,
                 0) != -1) )
         {
-          j__memcpy(
-            lpBuffer,
-            (const void *)(*(_DWORD *)IntHandlePtr + *(_DWORD *)(*(_DWORD *)(IntHandlePtr + 20) + 28)),
-            Size);
-          *(_DWORD *)IntHandlePtr += Size;
+          memcpy(_pData, &IntHandlePtr->m_pLibraryFile->m_pFileData[IntHandlePtr->m_iSeekPosition], Size);
+          IntHandlePtr->m_iSeekPosition += Size;
           return Size;
         }
         else
@@ -404,7 +386,7 @@ unsigned int  CFileLibrary::FileRead(unsigned int a2, void * lpBuffer, unsigned 
           BBSupportTracePrintF(
             3,
             "CFileLibrary::FileRead\t:\tUnable to load entire file %s ",
-            **(const char ***)(IntHandlePtr + 20));
+            IntHandlePtr->m_pLibraryFile->m_pswName);
           return -1;
         }
       }
@@ -422,86 +404,89 @@ unsigned int  CFileLibrary::FileRead(unsigned int a2, void * lpBuffer, unsigned 
   }
   else
   {
-    nNumberOfBytesToRead = *(_DWORD *)(*(_DWORD *)(IntHandlePtr + 20) + 12) - *(_DWORD *)IntHandlePtr;
+    nNumberOfBytesToRead = IntHandlePtr->m_pLibraryFile->m_iFileSize - IntHandlePtr->m_iSeekPosition;
     if ( nNumberOfBytesToRead > Size )
       nNumberOfBytesToRead = Size;
     if ( !nNumberOfBytesToRead )
       return -2;
-    if ( *(_WORD *)(IntHandlePtr + 4) )
+    if ( IntHandlePtr->m_iDataSize )
     {
       v20 = 0;
-      v16 = *(_DWORD *)IntHandlePtr / (unsigned int)*(unsigned __int16 *)(IntHandlePtr + 4);
-      v7 = *(_DWORD *)IntHandlePtr % (unsigned int)*(unsigned __int16 *)(IntHandlePtr + 4);
-      if ( v16 != *(_DWORD *)(IntHandlePtr + 8) && v7 )
+      v16 = IntHandlePtr->m_iSeekPosition / (unsigned int)IntHandlePtr->m_iDataSize;
+      v7 = IntHandlePtr->m_iSeekPosition % (unsigned int)IntHandlePtr->m_iDataSize;
+      if ( v16 != IntHandlePtr->field_8 && v7 )
       {
-        lDistanceToMove = *(_DWORD *)(*(_DWORD *)(IntHandlePtr + 20) + 8)
-                        + v16 * *(unsigned __int16 *)(IntHandlePtr + 4);
-        v14 = SetFilePointer(hFile, lDistanceToMove, 0, 0);
+        lDistanceToMove = IntHandlePtr->m_pLibraryFile->m_iFileOffset + v16 * IntHandlePtr->m_iDataSize;
+        v14 = SetFilePointer(hFile, lDistanceToMove, 0, FILE_BEGIN);
         if ( v14 == -1 )
         {
           BBSupportTracePrintF(
             3,
             "CFileLibrary::FileRead\t:\tfailed set file pointer on FILE_BEGIN, %s ",
-            **(const char ***)(IntHandlePtr + 20));
+            IntHandlePtr->m_pLibraryFile->m_pswName);
           return -1;
         }
-        ReadFile(hFile, *(LPVOID *)(IntHandlePtr + 12), *(unsigned __int16 *)(IntHandlePtr + 4), &v5, 0);
-        if ( v5 != *(unsigned __int16 *)(IntHandlePtr + 4) )
+        ReadFile(hFile, (LPVOID)IntHandlePtr->m_pData, IntHandlePtr->m_iDataSize, &v5, 0);
+        if ( v5 != IntHandlePtr->m_iDataSize )
         {
           BBSupportTracePrintF(
             3,
             "CFileLibrary::FileRead\t:\tfailed to read file%s ",
-            **(const char ***)(IntHandlePtr + 20));
+            IntHandlePtr->m_pLibraryFile->m_pswName);
           return -1;
         }
-        *(_DWORD *)(IntHandlePtr + 8) = v16;
+        IntHandlePtr->field_8 = v16;
       }
-      if ( v16 == *(_DWORD *)(IntHandlePtr + 8) )
+      if ( v16 == IntHandlePtr->field_8 )
       {
-        v12 = *(_DWORD *)IntHandlePtr - v16 * *(unsigned __int16 *)(IntHandlePtr + 4);
-        v15 = *(unsigned __int16 *)(IntHandlePtr + 4) - v12;
+        v12 = IntHandlePtr->m_iSeekPosition - v16 * IntHandlePtr->m_iDataSize;
+        v15 = IntHandlePtr->m_iDataSize - v12;
         if ( v15 >= nNumberOfBytesToRead )
         {
-          j__memmove(lpBuffer, (const void *)(v12 + *(_DWORD *)(IntHandlePtr + 12)), nNumberOfBytesToRead);
-          *(_DWORD *)IntHandlePtr += nNumberOfBytesToRead;
+          memmove(_pData, (const void *)(v12 + IntHandlePtr->m_pData), nNumberOfBytesToRead);
+          IntHandlePtr->m_iSeekPosition += nNumberOfBytesToRead;
           return nNumberOfBytesToRead;
         }
         if ( (int)v15 > 0 )
         {
-          j__memmove(lpBuffer, (const void *)(v12 + *(_DWORD *)(IntHandlePtr + 12)), v15);
+          memmove(_pData, (const void *)(v12 + IntHandlePtr->m_pData), v15);
           v20 += v15;
           nNumberOfBytesToRead -= v15;
         }
       }
-      v11 = nNumberOfBytesToRead / *(unsigned __int16 *)(IntHandlePtr + 4);
-      v14 = SetFilePointer(hFile, *(_DWORD *)(*(_DWORD *)(IntHandlePtr + 20) + 8) + v20 + *(_DWORD *)IntHandlePtr, 0, 0);
+      v11 = nNumberOfBytesToRead / IntHandlePtr->m_iDataSize;
+      v14 = SetFilePointer(
+              hFile,
+              IntHandlePtr->m_pLibraryFile->m_iFileOffset + v20 + IntHandlePtr->m_iSeekPosition,
+              0,
+              FILE_BEGIN);
       if ( v14 == -1 )
       {
         BBSupportTracePrintF(
           3,
           "CFileLibrary::FileRead\t:\tfailed set file pointer on FILE_BEGIN, %s ",
-          **(const char ***)(IntHandlePtr + 20));
+          IntHandlePtr->m_pLibraryFile->m_pswName);
         return -1;
       }
       if ( v11 > 0 )
       {
-        ReadFile(hFile, &v10[v20], v11 * *(unsigned __int16 *)(IntHandlePtr + 4), &v17, 0);
-        if ( v17 != v11 * *(unsigned __int16 *)(IntHandlePtr + 4) )
+        ReadFile(hFile, &_pData[v20], v11 * IntHandlePtr->m_iDataSize, &v17, 0);
+        if ( v17 != v11 * IntHandlePtr->m_iDataSize )
           return -1;
         nNumberOfBytesToRead -= v17;
         v20 += v17;
       }
-      v16 = (v20 + *(_DWORD *)IntHandlePtr) / (unsigned int)*(unsigned __int16 *)(IntHandlePtr + 4);
-      ReadFile(hFile, *(LPVOID *)(IntHandlePtr + 12), *(unsigned __int16 *)(IntHandlePtr + 4), &v17, 0);
-      if ( v17 == *(unsigned __int16 *)(IntHandlePtr + 4) )
+      v16 = (v20 + IntHandlePtr->m_iSeekPosition) / (unsigned int)IntHandlePtr->m_iDataSize;
+      ReadFile(hFile, (LPVOID)IntHandlePtr->m_pData, IntHandlePtr->m_iDataSize, &v17, 0);
+      if ( v17 == IntHandlePtr->m_iDataSize )
       {
-        ReadFile(hFile, *(LPVOID *)(IntHandlePtr + 12), *(unsigned __int16 *)(IntHandlePtr + 4), &v17, 0);
-        if ( v17 == *(unsigned __int16 *)(IntHandlePtr + 4) )
+        ReadFile(hFile, (LPVOID)IntHandlePtr->m_pData, IntHandlePtr->m_iDataSize, &v17, 0);
+        if ( v17 == IntHandlePtr->m_iDataSize )
         {
-          j__memmove(&v10[v20], *(const void **)(IntHandlePtr + 12), nNumberOfBytesToRead);
+          memmove(&_pData[v20], (const void *)IntHandlePtr->m_pData, nNumberOfBytesToRead);
           v20 += nNumberOfBytesToRead;
-          *(_DWORD *)(IntHandlePtr + 8) = v16;
-          *(_DWORD *)IntHandlePtr += v20;
+          IntHandlePtr->field_8 = v16;
+          IntHandlePtr->m_iSeekPosition += v20;
           return v20;
         }
         else
@@ -509,7 +494,7 @@ unsigned int  CFileLibrary::FileRead(unsigned int a2, void * lpBuffer, unsigned 
           BBSupportTracePrintF(
             3,
             "CFileLibrary::FileRead\t:\tfailed to read file%s ",
-            **(const char ***)(IntHandlePtr + 20));
+            IntHandlePtr->m_pLibraryFile->m_pswName);
           return -1;
         }
       }
@@ -518,27 +503,31 @@ unsigned int  CFileLibrary::FileRead(unsigned int a2, void * lpBuffer, unsigned 
         BBSupportTracePrintF(
           3,
           "CFileLibrary::FileRead\t:\tfailed to read file%s ",
-          **(const char ***)(IntHandlePtr + 20));
+          IntHandlePtr->m_pLibraryFile->m_pswName);
         return -1;
       }
     }
     else
     {
-      v14 = SetFilePointer(hFile, *(_DWORD *)IntHandlePtr + *(_DWORD *)(*(_DWORD *)(IntHandlePtr + 20) + 8), 0, 0);
+      v14 = SetFilePointer(
+              hFile,
+              IntHandlePtr->m_iSeekPosition + IntHandlePtr->m_pLibraryFile->m_iFileOffset,
+              0,
+              FILE_BEGIN);
       if ( v14 == -1 )
       {
         BBSupportTracePrintF(
           3,
           "CFileLibrary::FileRead\t:\tfailed set file pointer on FILE_BEGIN, %s ",
-          **(const char ***)(IntHandlePtr + 20));
+          IntHandlePtr->m_pLibraryFile->m_pswName);
         return -1;
       }
       else
       {
-        ReadFile(hFile, lpBuffer, nNumberOfBytesToRead, &NumberOfBytesRead, 0);
+        ReadFile(hFile, _pData, nNumberOfBytesToRead, &NumberOfBytesRead, 0);
         if ( nNumberOfBytesToRead == NumberOfBytesRead )
         {
-          *(_DWORD *)IntHandlePtr += NumberOfBytesRead;
+          IntHandlePtr->m_iSeekPosition += NumberOfBytesRead;
           return NumberOfBytesRead;
         }
         else
@@ -546,7 +535,7 @@ unsigned int  CFileLibrary::FileRead(unsigned int a2, void * lpBuffer, unsigned 
           BBSupportTracePrintF(
             3,
             "CFileLibrary::FileRead\t:\tfailed to read file%s ",
-            **(const char ***)(IntHandlePtr + 20));
+            IntHandlePtr->m_pLibraryFile->m_pswName);
           return -1;
         }
       }
@@ -556,374 +545,308 @@ unsigned int  CFileLibrary::FileRead(unsigned int a2, void * lpBuffer, unsigned 
 
 
 // address=[0x2f0a9d0]
-// Decompiled from int __thiscall CFileLibrary::AddFileLibrary(CFileLibrary *this, LPCWSTR lpFileName, int a3)
-int  CFileLibrary::AddFileLibrary(wchar_t const * lpFileName, int a3) {
+// Decompiled from int __thiscall CFileLibrary::AddFileLibrary(CFileLibrary *this, LPCWSTR sFileName, int a3)
+int  CFileLibrary::AddFileLibrary(wchar_t const * sFileName, int a3) {
   
-  size_t v4; // eax
+  size_t iFileNameLength; // eax
   wchar_t *v5; // eax
   wchar_t *v6; // eax
   wchar_t *v7; // eax
   int v8; // eax
-  int v9; // [esp-Ch] [ebp-294h]
-  int v10; // [esp-Ch] [ebp-294h]
   __int16 v11; // [esp-8h] [ebp-290h]
   __int16 v12; // [esp-8h] [ebp-290h]
-  int v13; // [esp-4h] [ebp-28Ch]
   int v14; // [esp-4h] [ebp-28Ch]
   char v15[8]; // [esp+8h] [ebp-280h] BYREF
   wchar_t *v16; // [esp+10h] [ebp-278h]
-  void *v17; // [esp+14h] [ebp-274h]
-  void *v18; // [esp+18h] [ebp-270h]
-  void *v19; // [esp+1Ch] [ebp-26Ch]
-  void *C; // [esp+20h] [ebp-268h]
-  wchar_t *v21; // [esp+24h] [ebp-264h]
+  wchar_t *swFileName; // [esp+24h] [ebp-264h]
   int v22; // [esp+28h] [ebp-260h]
-  void *v23; // [esp+2Ch] [ebp-25Ch]
-  void *v24; // [esp+30h] [ebp-258h]
-  void *v25; // [esp+34h] [ebp-254h]
-  void *v26; // [esp+38h] [ebp-250h]
-  void *v27; // [esp+3Ch] [ebp-24Ch]
-  void *v28; // [esp+40h] [ebp-248h]
   LONG Buffer; // [esp+44h] [ebp-244h] BYREF
   wchar_t *String; // [esp+48h] [ebp-240h]
   wchar_t *v31; // [esp+4Ch] [ebp-23Ch]
-  _DWORD *v32; // [esp+50h] [ebp-238h]
-  _DWORD *v33; // [esp+54h] [ebp-234h]
-  void *v34; // [esp+58h] [ebp-230h]
-  void *v35; // [esp+5Ch] [ebp-22Ch]
-  void *v36; // [esp+60h] [ebp-228h]
-  void *v37; // [esp+64h] [ebp-224h]
-  void *v38; // [esp+68h] [ebp-220h]
-  void *v39; // [esp+6Ch] [ebp-21Ch]
-  void *v40; // [esp+70h] [ebp-218h]
-  void *v41; // [esp+74h] [ebp-214h]
-  void *v42; // [esp+78h] [ebp-210h]
-  unsigned int v43; // [esp+7Ch] [ebp-20Ch]
-  void *v44; // [esp+80h] [ebp-208h]
-  wchar_t **v45; // [esp+84h] [ebp-204h]
-  void *v46; // [esp+88h] [ebp-200h]
+  const char *pswFileNames; // [esp+50h] [ebp-238h] MAPDST
+  const char *pswDirectoryNames; // [esp+54h] [ebp-234h] MAPDST
+  unsigned int iHeaderCount; // [esp+7Ch] [ebp-20Ch]
+  FLLibraryFileStruct *v45; // [esp+84h] [ebp-204h]
   unsigned int v47; // [esp+8Ch] [ebp-1FCh]
-  char v48[4]; // [esp+90h] [ebp-1F8h] BYREF
-  int v49; // [esp+94h] [ebp-1F4h]
-  size_t Size; // [esp+98h] [ebp-1F0h]
-  signed int v51; // [esp+9Ch] [ebp-1ECh]
-  size_t v52; // [esp+A0h] [ebp-1E8h]
-  signed int v53; // [esp+A4h] [ebp-1E4h]
-  void *v54; // [esp+A8h] [ebp-1E0h]
-  DWORD v55; // [esp+ACh] [ebp-1DCh]
-  void *v56; // [esp+B0h] [ebp-1D8h]
-  void *v57; // [esp+B4h] [ebp-1D4h]
-  _DWORD *v58; // [esp+B8h] [ebp-1D0h]
-  __int16 v59[2]; // [esp+BCh] [ebp-1CCh] BYREF
-  int v60; // [esp+C0h] [ebp-1C8h]
-  int v61; // [esp+C4h] [ebp-1C4h]
-  signed int j; // [esp+C8h] [ebp-1C0h]
-  int v63; // [esp+CCh] [ebp-1BCh]
-  LPVOID v64; // [esp+D0h] [ebp-1B8h]
-  LPVOID lpBuffer; // [esp+D4h] [ebp-1B4h]
-  _DWORD *v66; // [esp+D8h] [ebp-1B0h]
-  LPVOID v67; // [esp+DCh] [ebp-1ACh]
+  FLHeaderStruct sHeader; // [esp+90h] [ebp-1F8h] BYREF
+  FLHeaderFileStruct *pFileHeaders; // [esp+A8h] [ebp-1E0h] MAPDST
+  DWORD hError; // [esp+ACh] [ebp-1DCh]
+  FLLibraryFileStruct *pFLLibraryFileList; // [esp+B4h] [ebp-1D4h] MAPDST
+  DWORD v54; // [esp+BCh] [ebp-1CCh] BYREF
+  struct FLMemDirStruct *pDir; // [esp+C4h] [ebp-1C4h]
+  int j; // [esp+C8h] [ebp-1C0h]
+  LPVOID pFileNames; // [esp+D0h] [ebp-1B8h] MAPDST
+  LPVOID pDirectoryNames; // [esp+D4h] [ebp-1B4h] MAPDST
   DWORD NumberOfBytesRead; // [esp+E0h] [ebp-1A8h] BYREF
   DWORD nNumberOfBytesToRead; // [esp+E4h] [ebp-1A4h]
-  BOOL v70; // [esp+E8h] [ebp-1A0h]
-  _BYTE *v71; // [esp+ECh] [ebp-19Ch]
+  BOOL bSucceeded; // [esp+E8h] [ebp-1A0h]
+  _BYTE *pCopyBuffer; // [esp+ECh] [ebp-19Ch]
   HANDLE hFile; // [esp+F0h] [ebp-198h]
-  signed int i; // [esp+F4h] [ebp-194h]
-  CFileLibrary *v74; // [esp+F8h] [ebp-190h]
-  char v75[88]; // [esp+FCh] [ebp-18Ch] BYREF
-  char v76[88]; // [esp+154h] [ebp-134h] BYREF
-  char v77[88]; // [esp+1ACh] [ebp-DCh] BYREF
-  _BYTE v78[32]; // [esp+204h] [ebp-84h] BYREF
-  int v79[7]; // [esp+224h] [ebp-64h] BYREF
-  int v80[7]; // [esp+240h] [ebp-48h] BYREF
-  int v81[7]; // [esp+25Ch] [ebp-2Ch] BYREF
-  int v82; // [esp+284h] [ebp-4h]
+  int i; // [esp+F4h] [ebp-194h]
+  char v70[88]; // [esp+FCh] [ebp-18Ch] BYREF
+  char v71[88]; // [esp+154h] [ebp-134h] BYREF
+  char v72[88]; // [esp+1ACh] [ebp-DCh] BYREF
+  int v73[8]; // [esp+204h] [ebp-84h] BYREF
+  int v74[7]; // [esp+224h] [ebp-64h] BYREF
+  int v75[7]; // [esp+240h] [ebp-48h] BYREF
+  int v76[7]; // [esp+25Ch] [ebp-2Ch] BYREF
+  int exceptionBlock; // [esp+284h] [ebp-4h]
 
-  v74 = this;
-  hFile = CreateFileW(lpFileName, 0x80000000, 1u, 0, 3u, 0x80u, 0);
+  hFile = CreateFileW(sFileName, 0x80000000, 1u, 0, 3u, 0x80u, 0);
   if ( hFile == (HANDLE)-1 )
   {
-    BBSupportTracePrintF(3, "CFileLibrary::AddFileLibrary\t:\tFailed to add %s to library.", (const char *)lpFileName);
+    BBSupportTracePrintF(3, "CFileLibrary::AddFileLibrary\t:\tFailed to add %s to library.", (const char *)sFileName);
     return 6;
   }
   else
   {
-    if ( *((_DWORD *)v74 + 10) == *((_DWORD *)v74 + 11) )
+    if ( this->m_iLibraryFilesCount == this->m_iLibraryFilesCapacity )
     {
-      v47 = *((_DWORD *)v74 + 11) + 8;
-      v57 = operator new[](24 * v47);
-      v82 = 0;
-      if ( v57 )
-      {
-        _vec_ctor_no(v57, 0x18u, v47, (void *(__thiscall *)(void *))FLLibraryFileStruct::FLLibraryFileStruct);
-        v46 = v57;
-      }
+      v47 = this->m_iLibraryFilesCapacity + 8;
+      pFLLibraryFileList = (FLLibraryFileStruct *)operator new[](0x18 * v47);
+      exceptionBlock = 0;
+      if ( pFLLibraryFileList )
+        _vec_ctor_no(
+          pFLLibraryFileList,
+          0x18u,
+          v47,
+          (void *(__thiscall *)(void *))FLLibraryFileStruct::FLLibraryFileStruct);
       else
+        pFLLibraryFileList = 0;
+      exceptionBlock = -1;
+      memset(pFLLibraryFileList, 0, 24 * (this->m_iLibraryFilesCapacity + 8));
+      if ( this->m_iLibraryFilesCapacity > 0 )
       {
-        v46 = 0;
+        memmove(pFLLibraryFileList, this->m_pLibraryFiles, 24 * this->m_iLibraryFilesCapacity);
+        pswFileNames = (const char *)this->m_pLibraryFiles;
+        operator delete[]((void *)pswFileNames);
       }
-      v19 = v46;
-      v82 = -1;
-      v56 = v46;
-      memset(v46, 0, 24 * (*((_DWORD *)v74 + 11) + 8));
-      if ( *((int *)v74 + 11) > 0 )
-      {
-        j__memmove(v56, *((const void **)v74 + 116), 24 * *((_DWORD *)v74 + 11));
-        C = (void *)*((_DWORD *)v74 + 116);
-        operator delete[](C);
-      }
-      *((_DWORD *)v74 + 11) += 8;
-      *((_DWORD *)v74 + 116) = v56;
+      this->m_iLibraryFilesCapacity += 8;
+      this->m_pLibraryFiles = pFLLibraryFileList;
     }
-    v45 = (wchar_t **)(*((_DWORD *)v74 + 116) + 24 * (*((_DWORD *)v74 + 10))++);
-    v4 = j__wcslen(lpFileName);
-    v21 = (wchar_t *)operator new[](2 * (v4 + 1));
-    *v45 = v21;
-    j__wcscpy(*v45, lpFileName);
+    v45 = &this->m_pLibraryFiles[this->m_iLibraryFilesCount++];
+    iFileNameLength = wcslen(sFileName);
+    swFileName = (wchar_t *)operator new[](2 * (iFileNameLength + 1));
+    v45->m_swpFileName = swFileName;
+    wcscpy(v45->m_swpFileName, sFileName);
     v22 = 4;
-    v55 = SetFilePointer(hFile, -4, 0, 2u);
-    if ( v55 == -1 )
+    hError = SetFilePointer(hFile, -4, 0, FILE_END);
+    if ( hError == -1 )
     {
       CloseHandle(hFile);
       BBSupportTracePrintF(
         3,
         "CFileLibrary::AddFileLibrary\t:\tFailed to set file ptr on FILE_END, %s",
-        (const char *)lpFileName);
+        (const char *)sFileName);
       return 6;
     }
     else
     {
-      v70 = ReadFile(hFile, &Buffer, 4u, &NumberOfBytesRead, 0);
-      if ( v70 )
+      bSucceeded = ReadFile(hFile, &Buffer, 4u, &NumberOfBytesRead, 0);
+      if ( bSucceeded )
       {
-        v55 = SetFilePointer(hFile, Buffer, 0, 0);
-        if ( v55 == -1 )
+        hError = SetFilePointer(hFile, Buffer, 0, FILE_BEGIN);
+        if ( hError == -1 )
         {
           CloseHandle(hFile);
           BBSupportTracePrintF(
             3,
             "CFileLibrary::AddFileLibrary\t:\tFailed to set file ptr on FILE_BEGIN, %s",
-            (const char *)lpFileName);
+            (const char *)sFileName);
           return 6;
         }
         else
         {
-          FLHeaderStruct::FLHeaderStruct((FLHeaderStruct *)v48);
-          v70 = ReadFile(hFile, v48, 0x18u, &NumberOfBytesRead, 0);
-          if ( v70 )
+          FLHeaderStruct::FLHeaderStruct(&sHeader);
+          bSucceeded = ReadFile(hFile, &sHeader, 0x18u, &NumberOfBytesRead, 0);
+          if ( bSucceeded )
           {
-            if ( v49 == 4097 || v49 == 256 )
+            if ( sHeader.m_iVersion == 4097 || sHeader.m_iVersion == 256 )
             {
-              v23 = operator new[](Size);
-              lpBuffer = v23;
-              v18 = operator new[](v52);
-              v64 = v18;
-              v43 = v53;
-              v54 = operator new[](24 * v53);
-              v82 = 1;
-              if ( v54 )
-              {
-                _vec_ctor_no(v54, 0x18u, v43, (void *(__thiscall *)(void *))FLHeaderFileStruct::FLHeaderFileStruct);
-                v44 = v54;
-              }
+              pDirectoryNames = operator new[](sHeader.m_iDirectoryNamesSize);
+              pFileNames = operator new[](sHeader.m_iFileNamesSize);
+              iHeaderCount = sHeader.m_iFileHeaderCount;
+              pFileHeaders = (FLHeaderFileStruct *)operator new[](24 * sHeader.m_iFileHeaderCount);
+              exceptionBlock = 1;
+              if ( pFileHeaders )
+                _vec_ctor_no(
+                  pFileHeaders,
+                  0x18u,
+                  iHeaderCount,
+                  (void *(__thiscall *)(void *))FLHeaderFileStruct::FLHeaderFileStruct);
               else
+                pFileHeaders = 0;
+              exceptionBlock = -1;
+              nNumberOfBytesToRead = sHeader.m_iDirectoryNamesSize;
+              bSucceeded = ReadFile(hFile, pDirectoryNames, sHeader.m_iDirectoryNamesSize, &NumberOfBytesRead, 0);
+              if ( bSucceeded && NumberOfBytesRead == nNumberOfBytesToRead )
               {
-                v44 = 0;
-              }
-              v17 = v44;
-              v82 = -1;
-              v67 = v44;
-              nNumberOfBytesToRead = Size;
-              v70 = ReadFile(hFile, lpBuffer, Size, &NumberOfBytesRead, 0);
-              if ( v70 && NumberOfBytesRead == nNumberOfBytesToRead )
-              {
-                nNumberOfBytesToRead = v52;
-                v70 = ReadFile(hFile, v64, v52, &NumberOfBytesRead, 0);
-                if ( v70 && NumberOfBytesRead == nNumberOfBytesToRead )
+                nNumberOfBytesToRead = sHeader.m_iFileNamesSize;
+                bSucceeded = ReadFile(hFile, pFileNames, sHeader.m_iFileNamesSize, &NumberOfBytesRead, 0);
+                if ( bSucceeded && NumberOfBytesRead == nNumberOfBytesToRead )
                 {
-                  nNumberOfBytesToRead = 24 * v53;
-                  v70 = ReadFile(hFile, v67, 24 * v53, &NumberOfBytesRead, 0);
-                  if ( v70 && NumberOfBytesRead == nNumberOfBytesToRead )
+                  nNumberOfBytesToRead = 24 * sHeader.m_iFileHeaderCount;
+                  bSucceeded = ReadFile(hFile, pFileHeaders, 24 * sHeader.m_iFileHeaderCount, &NumberOfBytesRead, 0);
+                  if ( bSucceeded && NumberOfBytesRead == nNumberOfBytesToRead )
                   {
-                    *(_DWORD *)v59 = *((_DWORD *)v74 + 10) - 1;
-                    v33 = operator new[](4 * v51);
-                    v58 = v33;
-                    v71 = lpBuffer;
-                    for ( i = 0; i < v51; ++i )
+                    v54 = this->m_iLibraryFilesCount - 1;
+                    pswDirectoryNames = (const char *)operator new[](4 * sHeader.m_iDirectoryNameCount);
+                    pCopyBuffer = pDirectoryNames;
+                    for ( i = 0; i < sHeader.m_iDirectoryNameCount; ++i )
                     {
-                      v58[i] = v71;
-                      while ( *v71 )
-                        ++v71;
-                      ++v71;
+                      *(_DWORD *)&pswDirectoryNames[4 * i] = pCopyBuffer;
+                      while ( *pCopyBuffer )
+                        ++pCopyBuffer;
+                      ++pCopyBuffer;
                     }
-                    v32 = operator new[](4 * v53);
-                    v66 = v32;
-                    v71 = v64;
-                    for ( i = 0; i < v53; ++i )
+                    pswFileNames = (const char *)operator new[](4 * sHeader.m_iFileHeaderCount);
+                    pCopyBuffer = pFileNames;
+                    for ( i = 0; i < sHeader.m_iFileHeaderCount; ++i )
                     {
-                      v66[i] = v71;
-                      while ( *v71 )
-                        ++v71;
-                      ++v71;
+                      *(_DWORD *)&pswFileNames[4 * i] = pCopyBuffer;
+                      while ( *pCopyBuffer )
+                        ++pCopyBuffer;
+                      ++pCopyBuffer;
                     }
-                    v61 = CFileLibrary::pAddDirectory(0);
-                    v63 = (int)v67;
-                    for ( i = 0; i < v53; ++i )
+                    pDir = CFileLibrary::pAddDirectory(this, 0);
+                    for ( i = 0; i < sHeader.m_iFileHeaderCount; ++i )
                     {
-                      if ( *(__int16 *)(v63 + 12) == -1 )
+                      if ( pFileHeaders->field_C == -1 )
                       {
-                        if ( v49 == 256 )
+                        if ( sHeader.m_iVersion == 256 )
                         {
-                          std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v75);
-                          v82 = 2;
+                          std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v70);
+                          exceptionBlock = 2;
                           std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::from_bytes(
-                            (int)v80,
-                            (char *)v66[i]);
-                          LOBYTE(v82) = 3;
-                          v13 = a3;
-                          v11 = v59[0];
-                          v9 = v63;
-                          v5 = (wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)v80);
-                          CFileLibrary::pAddFile(v61, v5, v9, v11, v13);
-                          LOBYTE(v82) = 2;
-                          std::wstring::~wstring(v80);
-                          v82 = -1;
-                          std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::~wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v75);
+                            (int)v75,
+                            *(char **)&pswFileNames[4 * i]);
+                          LOBYTE(exceptionBlock) = 3;
+                          v11 = v54;
+                          v5 = (wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)v75);
+                          CFileLibrary::pAddFile(pDir, v5, pFileHeaders, v11, a3);
+                          LOBYTE(exceptionBlock) = 2;
+                          std::wstring::~wstring(v75);
+                          exceptionBlock = -1;
+                          std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::~wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v70);
                         }
                         else
                         {
-                          v31 = (wchar_t *)v66[i];
-                          CFileLibrary::pAddFile(v61, v31, v63, v59[0], a3);
+                          v31 = *(wchar_t **)&pswFileNames[4 * i];
+                          CFileLibrary::pAddFile(pDir, v31, pFileHeaders, v54, a3);
                         }
                       }
-                      v63 += 24;
+                      ++pFileHeaders;
                     }
-                    for ( i = 0; i < v51; ++i )
+                    for ( i = 0; i < sHeader.m_iDirectoryNameCount; ++i )
                     {
-                      if ( v49 == 256 )
+                      if ( sHeader.m_iVersion == 256 )
                       {
-                        std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v76);
-                        v82 = 4;
+                        std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v71);
+                        exceptionBlock = 4;
                         std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::from_bytes(
-                          (int)v81,
-                          (char *)v58[i]);
-                        LOBYTE(v82) = 5;
-                        v6 = (wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)v81);
-                        CFileLibrary::pAddDirectory(v6);
-                        LOBYTE(v82) = 4;
-                        std::wstring::~wstring(v81);
-                        v82 = -1;
-                        std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::~wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v76);
+                          (int)v76,
+                          *(char **)&pswDirectoryNames[4 * i]);
+                        LOBYTE(exceptionBlock) = 5;
+                        v6 = (wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)v76);
+                        CFileLibrary::pAddDirectory(this, v6);
+                        LOBYTE(exceptionBlock) = 4;
+                        std::wstring::~wstring(v76);
+                        exceptionBlock = -1;
+                        std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::~wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v71);
                       }
                       else
                       {
-                        String = (wchar_t *)v58[i];
-                        v61 = CFileLibrary::pAddDirectory(String);
+                        String = *(wchar_t **)&pswDirectoryNames[4 * i];
+                        pDir = CFileLibrary::pAddDirectory(this, String);
                       }
-                      v60 = (int)v67;
-                      for ( j = 0; j < v53; ++j )
+                      for ( j = 0; j < sHeader.m_iFileHeaderCount; ++j )
                       {
-                        if ( *(__int16 *)(v60 + 12) == i )
+                        if ( pFileHeaders->field_C == i )
                         {
-                          if ( v49 == 256 )
+                          if ( sHeader.m_iVersion == 256 )
                           {
-                            std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v77);
-                            v82 = 6;
+                            std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v72);
+                            exceptionBlock = 6;
                             std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::from_bytes(
-                              (int)v79,
-                              (char *)v66[j]);
-                            LOBYTE(v82) = 7;
+                              (int)v74,
+                              *(char **)&pswFileNames[4 * j]);
+                            LOBYTE(exceptionBlock) = 7;
                             v14 = a3;
-                            v12 = v59[0];
-                            v10 = v60;
-                            v7 = (wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)v79);
-                            CFileLibrary::pAddFile(v61, v7, v10, v12, v14);
-                            LOBYTE(v82) = 6;
-                            std::wstring::~wstring(v79);
-                            v82 = -1;
-                            std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::~wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v77);
+                            v12 = v54;
+                            v7 = (wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)v74);
+                            CFileLibrary::pAddFile(pDir, v7, pFileHeaders, v12, v14);
+                            LOBYTE(exceptionBlock) = 6;
+                            std::wstring::~wstring(v74);
+                            exceptionBlock = -1;
+                            std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::~wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v72);
                           }
                           else
                           {
-                            v16 = (wchar_t *)v66[j];
-                            CFileLibrary::pAddFile(v61, v16, v60, v59[0], a3);
+                            v16 = *(wchar_t **)&pswFileNames[4 * j];
+                            CFileLibrary::pAddFile(pDir, v16, pFileHeaders, v54, a3);
                           }
                         }
-                        v60 += 24;
+                        ++pFileHeaders;
                       }
                     }
-                    v8 = std::make_pair<wchar_t const * &,int &>(v15, &lpFileName, v59);
-                    std::pair<std::wstring,int>::pair<std::wstring,int>(v8);
-                    v82 = 8;
-                    std::vector<std::pair<std::wstring,int>>::push_back(v78);
-                    v82 = -1;
-                    std::pair<std::wstring,int>::~pair<std::wstring,int>(v78);
-                    v28 = v66;
-                    operator delete[](v66);
-                    v27 = v58;
-                    operator delete[](v58);
-                    v26 = lpBuffer;
-                    operator delete[](lpBuffer);
-                    v25 = v64;
-                    operator delete[](v64);
-                    v24 = v67;
-                    operator delete[](v67);
+                    v8 = std::make_pair<wchar_t const * &,int &>(v15, &sFileName, &v54);
+                    std::pair<std::wstring,int>::pair<std::wstring,int>(v73, v8);
+                    exceptionBlock = 8;
+                    std::vector<std::pair<std::wstring,int>>::push_back(&this->m_vFileIdPairs, (int)v73);
+                    exceptionBlock = -1;
+                    std::pair<std::wstring,int>::~pair<std::wstring,int>(v73);
+                    operator delete[]((void *)pswFileNames);
+                    operator delete[]((void *)pswDirectoryNames);
+                    operator delete[](pDirectoryNames);
+                    operator delete[](pFileNames);
+                    operator delete[](pFileHeaders);
                     CloseHandle(hFile);
-                    CFileLibrary::pOptimize(v74);
+                    CFileLibrary::pOptimize(this);
                     return 1;
                   }
                   else
                   {
                     CloseHandle(hFile);
-                    v36 = lpBuffer;
-                    operator delete[](lpBuffer);
-                    v35 = v64;
-                    operator delete[](v64);
-                    v34 = v67;
-                    operator delete[](v67);
+                    operator delete[](pDirectoryNames);
+                    operator delete[](pFileNames);
+                    operator delete[](pFileHeaders);
                     BBSupportTracePrintF(
                       3,
                       "CFileLibrary::AddFileLibrary\t:\tFailed to read file info, %s",
-                      (const char *)lpFileName);
+                      (const char *)sFileName);
                     return 6;
                   }
                 }
                 else
                 {
                   CloseHandle(hFile);
-                  v39 = lpBuffer;
-                  operator delete[](lpBuffer);
-                  v38 = v64;
-                  operator delete[](v64);
-                  v37 = v67;
-                  operator delete[](v67);
+                  operator delete[](pDirectoryNames);
+                  operator delete[](pFileNames);
+                  operator delete[](pFileHeaders);
                   BBSupportTracePrintF(
                     3,
                     "CFileLibrary::AddFileLibrary\t:\tFailed to read file names, %s",
-                    (const char *)lpFileName);
+                    (const char *)sFileName);
                   return 6;
                 }
               }
               else
               {
                 CloseHandle(hFile);
-                v42 = lpBuffer;
-                operator delete[](lpBuffer);
-                v41 = v64;
-                operator delete[](v64);
-                v40 = v67;
-                operator delete[](v67);
+                operator delete[](pDirectoryNames);
+                operator delete[](pFileNames);
+                operator delete[](pFileHeaders);
                 BBSupportTracePrintF(
                   3,
                   "CFileLibrary::AddFileLibrary\t:\tFailed to read directory names, %s",
-                  (const char *)lpFileName);
+                  (const char *)sFileName);
                 return 6;
               }
             }
             else
             {
               CloseHandle(hFile);
-              BBSupportTracePrintF(3, "CFileLibrary::AddFileLibrary\t:\tWrong version, %s", (const char *)lpFileName);
+              BBSupportTracePrintF(3, "CFileLibrary::AddFileLibrary\t:\tWrong version, %s", (const char *)sFileName);
               return 7;
             }
           }
@@ -933,7 +856,7 @@ int  CFileLibrary::AddFileLibrary(wchar_t const * lpFileName, int a3) {
             BBSupportTracePrintF(
               3,
               "CFileLibrary::AddFileLibrary\t:\tFailed to read file data, %s",
-              (const char *)lpFileName);
+              (const char *)sFileName);
             return 6;
           }
         }
@@ -944,7 +867,7 @@ int  CFileLibrary::AddFileLibrary(wchar_t const * lpFileName, int a3) {
         BBSupportTracePrintF(
           3,
           "CFileLibrary::AddFileLibrary\t:\tFailed to read file data, %s",
-          (const char *)lpFileName);
+          (const char *)sFileName);
         return 6;
       }
     }
@@ -953,102 +876,107 @@ int  CFileLibrary::AddFileLibrary(wchar_t const * lpFileName, int a3) {
 
 
 // address=[0x2f0b6c0]
-// Decompiled from int __thiscall CFileLibrary::ListFilesInLib(_DWORD *this, int a2, char a3)
+// Decompiled from int __thiscall CFileLibrary::ListFilesInLib(CFileLibrary *this, const wchar_t *a2)
 class std::vector<struct std::pair<std::wstring,std::wstring >,class std::allocator<struct std::pair<std::wstring,std::wstring > > >  CFileLibrary::ListFilesInLib(wchar_t const * a2) {
   
-  char v4; // [esp-1Ch] [ebp-94h] BYREF
-  int v5; // [esp-18h] [ebp-90h]
-  int v6; // [esp-14h] [ebp-8Ch]
-  _DWORD v7[3]; // [esp-10h] [ebp-88h] BYREF
-  int v8; // [esp-4h] [ebp-7Ch]
-  int v9; // [esp+0h] [ebp-78h]
-  int v10[4]; // [esp+4h] [ebp-74h] BYREF
-  _BYTE v11[12]; // [esp+14h] [ebp-64h] BYREF
-  _BYTE v12[12]; // [esp+20h] [ebp-58h] BYREF
-  int v13; // [esp+2Ch] [ebp-4Ch]
-  int v14; // [esp+30h] [ebp-48h]
-  char *v15; // [esp+34h] [ebp-44h]
-  int v16; // [esp+38h] [ebp-40h]
-  _DWORD *v17; // [esp+3Ch] [ebp-3Ch]
-  int v18; // [esp+44h] [ebp-34h]
-  std::_Iterator_base12 *v19; // [esp+48h] [ebp-30h]
-  std::_Iterator_base12 *v20; // [esp+4Ch] [ebp-2Ch]
+  char v3; // [esp-1Ch] [ebp-94h] BYREF
+  int v4; // [esp-18h] [ebp-90h]
+  int v5; // [esp-14h] [ebp-8Ch]
+  _DWORD v6[3]; // [esp-10h] [ebp-88h] BYREF
+  int v7; // [esp-4h] [ebp-7Ch]
+  int v8[4]; // [esp+4h] [ebp-74h] BYREF
+  _BYTE v9[12]; // [esp+14h] [ebp-64h] BYREF
+  _BYTE v10[12]; // [esp+20h] [ebp-58h] BYREF
+  int v11; // [esp+2Ch] [ebp-4Ch]
+  int v12; // [esp+30h] [ebp-48h]
+  char *v13; // [esp+34h] [ebp-44h]
+  int v14; // [esp+38h] [ebp-40h]
+  _DWORD *v15; // [esp+3Ch] [ebp-3Ch]
+  int v16; // [esp+44h] [ebp-34h]
+  std::_Iterator_base12 *v17; // [esp+48h] [ebp-30h]
+  std::_Iterator_base12 *v18; // [esp+4Ch] [ebp-2Ch]
   int j; // [esp+50h] [ebp-28h]
   int i; // [esp+54h] [ebp-24h]
-  int v23; // [esp+58h] [ebp-20h]
-  int v24; // [esp+5Ch] [ebp-1Ch]
-  _DWORD *v25; // [esp+60h] [ebp-18h]
-  int v26; // [esp+64h] [ebp-14h]
-  char v27; // [esp+6Bh] [ebp-Dh]
-  int v28; // [esp+74h] [ebp-4h]
+  int v21; // [esp+58h] [ebp-20h]
+  FLMemFileStruct *m_pFiles; // [esp+5Ch] [ebp-1Ch]
+  struct FLMemDirStruct *m_pDirectories; // [esp+64h] [ebp-14h]
+  char v25; // [esp+6Bh] [ebp-Dh]
+  int v26; // [esp+74h] [ebp-4h]
+  char v27; // [esp+84h] [ebp+Ch] BYREF
 
-  v25 = this;
-  v23 = 0;
+  v21 = 0;
   BBSupportTracePrintF(1, "Starting listing");
-  v8 = *(_DWORD *)std::_Iterator_base12::operator=(&a3);
-  v17 = v7;
-  v16 = std::vector<std::pair<std::wstring,int>>::end(v7);
-  v15 = &v4;
-  v14 = std::vector<std::pair<std::wstring,int>>::begin(&v4);
-  v13 = std::find_if<std::_Vector_iterator<std::_Vector_val<std::_Simple_types<std::pair<std::wstring,int>>>>,_lambda_2ccfe65c9d4fa599f75d5b3f0ed0c104_>(
-          v12,
+  v7 = *(_DWORD *)std::_Iterator_base12::operator=(&v27);
+  v15 = v6;
+  v14 = std::vector<std::pair<std::wstring,int>>::end(v6);
+  v13 = &v3;
+  v12 = std::vector<std::pair<std::wstring,int>>::begin(&v3);
+  v11 = std::find_if<std::_Vector_iterator<std::_Vector_val<std::_Simple_types<std::pair<std::wstring,int>>>>,_lambda_2ccfe65c9d4fa599f75d5b3f0ed0c104_>(
+          v10,
+          v3,
           v4,
           v5,
-          v6,
-          v7[0],
-          v7[1],
-          v7[2],
-          v8);
-  v28 = 0;
-  v20 = (std::_Iterator_base12 *)std::vector<std::pair<std::wstring,int>>::end(v11);
-  v19 = v20;
-  LOBYTE(v28) = 1;
-  v27 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<std::pair<std::wstring,int>>>>::operator==(v20);
-  LOBYTE(v28) = 0;
-  std::_Vector_iterator<std::_Vector_val<std::_Simple_types<std::pair<std::wstring,int>>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<std::pair<std::wstring,int>>>>(v11);
-  if ( v27 )
+          v6[0],
+          v6[1],
+          v6[2],
+          v7);
+  v26 = 0;
+  v18 = (std::_Iterator_base12 *)std::vector<std::pair<std::wstring,int>>::end(v9);
+  v17 = v18;
+  LOBYTE(v26) = 1;
+  v25 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<std::pair<std::wstring,int>>>>::operator==(v18);
+  LOBYTE(v26) = 0;
+  std::_Vector_iterator<std::_Vector_val<std::_Simple_types<std::pair<std::wstring,int>>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<std::pair<std::wstring,int>>>>(v9);
+  if ( v25 )
   {
-    std::vector<std::pair<std::wstring,std::wstring>>::vector<std::pair<std::wstring,std::wstring>>(v9, v10[0]);
-    v23 |= 1u;
-    v28 = -1;
-    std::_Vector_iterator<std::_Vector_val<std::_Simple_types<std::pair<std::wstring,int>>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<std::pair<std::wstring,int>>>>(v12);
-    return a2;
+    std::vector<std::pair<std::wstring,std::wstring>>::vector<std::pair<std::wstring,std::wstring>>((void *)a2);
+    v21 |= 1u;
+    v26 = -1;
+    std::_Vector_iterator<std::_Vector_val<std::_Simple_types<std::pair<std::wstring,int>>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<std::pair<std::wstring,int>>>>(v10);
+    return (int)a2;
   }
   else
   {
-    v18 = *(_DWORD *)(std::_Vector_iterator<std::_Vector_val<std::_Simple_types<std::pair<std::wstring,int>>>>::operator->(v12)
+    v16 = *(_DWORD *)(std::_Vector_iterator<std::_Vector_val<std::_Simple_types<std::pair<std::wstring,int>>>>::operator->(v10)
                     + 28);
-    v26 = v25[117];
-    std::vector<std::pair<std::wstring,std::wstring>>::vector<std::pair<std::wstring,std::wstring>>(v9, v10[0]);
-    LOBYTE(v28) = 2;
-    for ( i = 0; i < v25[13]; ++i )
+    m_pDirectories = this->m_pDirectories;
+    std::vector<std::pair<std::wstring,std::wstring>>::vector<std::pair<std::wstring,std::wstring>>(v8);
+    LOBYTE(v26) = 2;
+    for ( i = 0; i < this->m_iDirectoryCount; ++i )
     {
-      v24 = *(_DWORD *)(v26 + 12);
-      for ( j = 0; j < *(__int16 *)(v26 + 6); ++j )
+      m_pFiles = m_pDirectories->m_pFiles;
+      for ( j = 0; j < m_pDirectories->m_iFileCount; ++j )
       {
-        if ( *(__int16 *)(v24 + 20) == v18 )
+        if ( m_pFiles->m_iLibraryIndex == v16 )
         {
-          std::vector<std::pair<std::wstring,std::wstring>>::emplace_back<wchar_t * &,wchar_t * &>(v26, v24);
-          BBSupportTracePrintF(1, "File: %s\\%s", *(const char **)v26, *(const char **)v24);
+          std::vector<std::pair<std::wstring,std::wstring>>::emplace_back<wchar_t * &,wchar_t * &>(
+            v8,
+            (int)m_pDirectories,
+            (int)m_pFiles);
+          BBSupportTracePrintF(
+            1,
+            "File: %s\\%s",
+            (const char *)m_pDirectories->m_swpDirectoryName,
+            (const char *)m_pFiles->m_pswName);
         }
-        v24 += 32;
+        ++m_pFiles;
       }
-      v26 += 16;
+      ++m_pDirectories;
     }
-    std::vector<std::pair<std::wstring,std::wstring>>::vector<std::pair<std::wstring,std::wstring>>(v10);
-    v23 |= 1u;
-    LOBYTE(v28) = 0;
-    std::vector<std::pair<std::wstring,std::wstring>>::~vector<std::pair<std::wstring,std::wstring>>(v9, v10[0]);
-    v28 = -1;
-    std::_Vector_iterator<std::_Vector_val<std::_Simple_types<std::pair<std::wstring,int>>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<std::pair<std::wstring,int>>>>(v12);
-    return a2;
+    std::vector<std::pair<std::wstring,std::wstring>>::vector<std::pair<std::wstring,std::wstring>>(v8);
+    v21 |= 1u;
+    LOBYTE(v26) = 0;
+    std::vector<std::pair<std::wstring,std::wstring>>::~vector<std::pair<std::wstring,std::wstring>>();
+    v26 = -1;
+    std::_Vector_iterator<std::_Vector_val<std::_Simple_types<std::pair<std::wstring,int>>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<std::pair<std::wstring,int>>>>(v10);
+    return (int)a2;
   }
 }
 
 
 // address=[0x2f0b8c0]
-// Decompiled from int __thiscall CFileLibrary::DumpFilesInLib(CFileLibrary *this, const wchar_t *a2, wchar_t *String)
-void  CFileLibrary::DumpFilesInLib(wchar_t const * a2, wchar_t const * String) {
+// Decompiled from int __thiscall CFileLibrary::DumpFilesInLib(CFileLibrary *this, const wchar_t *a3, wchar_t *String)
+void  CFileLibrary::DumpFilesInLib(wchar_t const * a3, wchar_t const * String) {
   
   wchar_t *v4; // eax
   const char *v5; // eax
@@ -1059,10 +987,10 @@ void  CFileLibrary::DumpFilesInLib(wchar_t const * a2, wchar_t const * String) {
   _Cnd_internal_imp_t *v10; // [esp-4h] [ebp-18Ch]
   _Cnd_internal_imp_t *v11; // [esp-4h] [ebp-18Ch]
   _BYTE v12[12]; // [esp+4h] [ebp-184h] BYREF
-  _BYTE v13[16]; // [esp+10h] [ebp-178h] BYREF
+  wchar_t a2[8]; // [esp+10h] [ebp-178h] BYREF
   _BYTE v14[12]; // [esp+20h] [ebp-168h] BYREF
   void *C; // [esp+2Ch] [ebp-15Ch]
-  signed int v16; // [esp+30h] [ebp-158h]
+  int v16; // [esp+30h] [ebp-158h]
   void *v17; // [esp+34h] [ebp-154h]
   void *v18; // [esp+38h] [ebp-150h]
   int v19; // [esp+3Ch] [ebp-14Ch]
@@ -1071,8 +999,7 @@ void  CFileLibrary::DumpFilesInLib(wchar_t const * a2, wchar_t const * String) {
   void *v22; // [esp+48h] [ebp-140h]
   void *v23; // [esp+4Ch] [ebp-13Ch]
   void *v24; // [esp+50h] [ebp-138h]
-  CFileLibrary *v25; // [esp+54h] [ebp-134h]
-  _BYTE *v26; // [esp+58h] [ebp-130h]
+  int *v26; // [esp+58h] [ebp-130h]
   int v27; // [esp+5Ch] [ebp-12Ch]
   void *Buffer; // [esp+60h] [ebp-128h]
   int v29; // [esp+64h] [ebp-124h]
@@ -1087,10 +1014,9 @@ void  CFileLibrary::DumpFilesInLib(wchar_t const * a2, wchar_t const * String) {
   _BYTE v38[28]; // [esp+15Ch] [ebp-2Ch] BYREF
   int v39; // [esp+184h] [ebp-4h]
 
-  v25 = this;
-  CFileLibrary::ListFilesInLib(this, (int)v13, (char)a2);
+  CFileLibrary::ListFilesInLib(this, a2);
   v39 = 0;
-  if ( (unsigned __int8)std::vector<std::pair<std::wstring,std::wstring>>::empty(v13) )
+  if ( (unsigned __int8)std::vector<std::pair<std::wstring,std::wstring>>::empty(a2) )
   {
     v39 = -1;
     return std::vector<std::pair<std::wstring,std::wstring>>::~vector<std::pair<std::wstring,std::wstring>>();
@@ -1101,7 +1027,7 @@ void  CFileLibrary::DumpFilesInLib(wchar_t const * a2, wchar_t const * String) {
     LOBYTE(v39) = 1;
     if ( !(unsigned __int8)sub_2F0D990(v36) )
       sub_2F0D9D0(v36);
-    v26 = v13;
+    v26 = (int *)a2;
     std::vector<std::pair<std::wstring,std::wstring>>::begin(v14);
     LOBYTE(v39) = 2;
     std::vector<std::pair<std::wstring,std::wstring>>::end(v12);
@@ -1126,7 +1052,7 @@ void  CFileLibrary::DumpFilesInLib(wchar_t const * a2, wchar_t const * String) {
       LOBYTE(v39) = 9;
       std::wstring::~wstring(v33);
       v4 = (wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)v38);
-      v27 = CFileLibrary::FileOpen(v4, 0);
+      v27 = CFileLibrary::FileOpen(&g_cFileLibrary, v4, 0);
       Size = 0;
       if ( v27 == -1 )
       {
@@ -1135,12 +1061,12 @@ void  CFileLibrary::DumpFilesInLib(wchar_t const * a2, wchar_t const * String) {
       }
       else
       {
-        Size = CFileLibrary::FileSize((CFileLibrary *)&g_cFileLibrary, v27);
+        Size = CFileLibrary::FileSize(&g_cFileLibrary, v27);
       }
       v20 = operator new[](Size);
       Buffer = v20;
       memset(v20, 0, Size);
-      v19 = CFileLibrary::FileRead(v27, Buffer, Size);
+      v19 = CFileLibrary::FileRead(&g_cFileLibrary, v27, (char *)Buffer, Size);
       if ( v19 == -1 )
       {
         v6 = (const char *)std::wstring::c_str((_Cnd_internal_imp_t *)v38);
@@ -1159,18 +1085,13 @@ void  CFileLibrary::DumpFilesInLib(wchar_t const * a2, wchar_t const * String) {
         LOBYTE(v39) = 13;
         v7 = (wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)v35);
         CFile::Open(v7, 10, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\BaseLib\\Include\\File.h", 0);
-        v16 = CFile::Write(
-                Buffer,
-                1u,
-                Size,
-                (int)"D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\BaseLib\\Include\\File.h",
-                0);
+        v16 = CFile::Write(Buffer, 1u, Size, UNUSED_ARG(), UNUSED_ARG());
         if ( v16 < (int)Size )
         {
           v8 = (const char *)std::wstring::c_str((_Cnd_internal_imp_t *)v35);
           BBSupportTracePrintF(1, "short write `%s'", v8);
         }
-        CFile::Close((CFile *)v31, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\BaseLib\\Include\\File.h", 0);
+        CFile::Close((CFile *)v31, UNUSED_ARG(), UNUSED_ARG());
         LOBYTE(v39) = 12;
         CFile::~CFile();
         LOBYTE(v39) = 9;
@@ -1178,7 +1099,7 @@ void  CFileLibrary::DumpFilesInLib(wchar_t const * a2, wchar_t const * String) {
       }
       C = Buffer;
       operator delete[](Buffer);
-      CFileLibrary::FileClose((CFileLibrary *)&g_cFileLibrary, v27);
+      CFileLibrary::FileClose(&g_cFileLibrary, v27);
       LOBYTE(v39) = 6;
       std::wstring::~wstring(v38);
       LOBYTE(v39) = 3;
@@ -1214,72 +1135,73 @@ void  CFileLibrary::C_Init(void) {
 
 
 // address=[0x2f0bd70]
-// Decompiled from wchar_t *__thiscall CFileLibrary::C_AddPath(_DWORD *this, wchar_t *String, int a3, wchar_t *Source, wchar_t *a5)
-void  CFileLibrary::C_AddPath(wchar_t const * String, int a3, wchar_t const * Source, wchar_t const * a5) {
+// Decompiled from void __thiscall CFileLibrary::C_AddPath(CFileLibrary *this, wchar_t *_swpPath, int a3, wchar_t *Source, wchar_t *a5)
+void  CFileLibrary::C_AddPath(wchar_t const * _swpPath, int a3, wchar_t const * Source, wchar_t const * a5) {
   
-  wchar_t *result; // eax
+  size_t v5; // eax
   size_t v6; // eax
-  size_t v7; // eax
-  FLPathListStruct *v8; // [esp+1Ch] [ebp-24h]
+  FLPathListStruct *v7; // [esp+1Ch] [ebp-24h]
   FLPathListStruct *C; // [esp+20h] [ebp-20h]
-  int i; // [esp+28h] [ebp-18h]
+  FLPathListStruct *i; // [esp+28h] [ebp-18h]
   size_t Count; // [esp+2Ch] [ebp-14h]
 
   C = (FLPathListStruct *)operator new(0x14u);
   if ( C )
-    v8 = FLPathListStruct::FLPathListStruct(C);
+    v7 = FLPathListStruct::FLPathListStruct(C);
   else
-    v8 = 0;
-  Count = j__wcslen(String);
-  if ( !Count )
-    return (wchar_t *)BBSupportTracePrintF(3, "CFileLibrary::C_AddPath : No path specified.");
-  if ( String[Count - 1] == 92 )
+    v7 = 0;
+  Count = wcslen(_swpPath);
+  if ( Count )
   {
-    *(_DWORD *)v8 = operator new[](2 * Count);
-    j__wcsncpy(*(wchar_t **)v8, String, Count);
-    *(_WORD *)(*(_DWORD *)v8 + 2 * Count - 2) = 0;
+    if ( _swpPath[Count - 1] == '\\' )
+    {
+      v7->m_swpPath = (wchar_t *)operator new[](2 * Count);
+      wcsncpy(v7->m_swpPath, _swpPath, Count);
+      v7->m_swpPath[Count - 1] = 0;
+    }
+    else
+    {
+      v7->m_swpPath = (wchar_t *)operator new[](2 * (Count + 1));
+      wcscpy(v7->m_swpPath, _swpPath);
+    }
+    if ( Source )
+    {
+      v5 = wcslen(Source);
+      v7->m_swpSearch = (wchar_t *)operator new[](2 * (v5 + 1));
+      wcscpy(v7->m_swpSearch, Source);
+    }
+    else
+    {
+      v7->m_swpSearch = (wchar_t *)operator new[](4u);
+      wcscpy(v7->m_swpSearch, asc_3AB57EC);
+    }
+    v7->field_C = a3;
+    if ( a5 )
+    {
+      v6 = wcslen(a5);
+      v7->m_swpUnknown = (wchar_t *)operator new[](2 * (v6 + 1));
+      wcscpy(v7->m_swpUnknown, a5);
+    }
+    if ( this->m_pPathList )
+    {
+      for ( i = this->m_pPathList; i->field_10; i = (FLPathListStruct *)i->field_10 )
+        ;
+      i->field_10 = (int)v7;
+    }
+    else
+    {
+      this->m_pPathList = v7;
+    }
   }
   else
   {
-    *(_DWORD *)v8 = operator new[](2 * (Count + 1));
-    j__wcscpy(*(wchar_t **)v8, String);
+    BBSupportTracePrintF(3, "CFileLibrary::C_AddPath : No path specified.");
   }
-  if ( Source )
-  {
-    v6 = j__wcslen(Source);
-    *((_DWORD *)v8 + 1) = operator new[](2 * (v6 + 1));
-    j__wcscpy(*((wchar_t **)v8 + 1), Source);
-  }
-  else
-  {
-    *((_DWORD *)v8 + 1) = operator new[](4u);
-    j__wcscpy(*((wchar_t **)v8 + 1), asc_3AB57EC);
-  }
-  result = (wchar_t *)v8;
-  *((_DWORD *)v8 + 3) = a3;
-  if ( a5 )
-  {
-    v7 = j__wcslen(a5);
-    *((_DWORD *)v8 + 2) = operator new[](2 * (v7 + 1));
-    result = j__wcscpy(*((wchar_t **)v8 + 2), a5);
-  }
-  if ( this[5] )
-  {
-    for ( i = this[5]; *(_DWORD *)(i + 16); i = *(_DWORD *)(i + 16) )
-      ;
-    result = (wchar_t *)v8;
-    *(_DWORD *)(i + 16) = v8;
-  }
-  else
-  {
-    this[5] = v8;
-  }
-  return result;
 }
 
 
 // address=[0x2f0bfc0]
-// Decompiled from int __thiscall CFileLibrary::C_CreateFileLibrary(  _DWORD *this,  LPCWSTR lpFileName,  CHAR *a3,  char a4,  DWORD nNumberOfBytesToRead)
+// Decompiled from int __thiscall CFileLibrary::C_CreateFileLibrary(  CFileLibrary *this,  LPCWSTR lpFileName,  CHAR *a3,  char a4,  DWORD nNumberOfBytesToRead)
 int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * a3, int a4, int nNumberOfBytesToRead) {
   
   size_t v6; // eax
@@ -1303,243 +1225,224 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * a3, in
   FLDirListStruct *v24; // [esp+34h] [ebp-2D08h]
   BOOL NextFileW; // [esp+38h] [ebp-2D04h]
   void *v26; // [esp+3Ch] [ebp-2D00h]
-  FLFileListStruct *v27; // [esp+40h] [ebp-2CFCh]
   int v28; // [esp+44h] [ebp-2CF8h]
   void *v29; // [esp+48h] [ebp-2CF4h]
   FLDirListStruct *v30; // [esp+4Ch] [ebp-2CF0h]
   void *v31; // [esp+50h] [ebp-2CECh]
   FLDirListStruct *v32; // [esp+54h] [ebp-2CE8h]
-  FLDirListStruct *v33; // [esp+58h] [ebp-2CE4h]
-  FLDirListStruct *v34; // [esp+5Ch] [ebp-2CE0h]
   int v35; // [esp+60h] [ebp-2CDCh]
   unsigned int v36; // [esp+64h] [ebp-2CD8h]
-  FLDirListStruct *v37; // [esp+68h] [ebp-2CD4h]
-  FLDirListStruct *v38; // [esp+6Ch] [ebp-2CD0h]
+  FLDirListStruct *v37; // [esp+68h] [ebp-2CD4h] MAPDST
   FLDirListStruct *v39; // [esp+70h] [ebp-2CCCh]
-  _DWORD *v40; // [esp+74h] [ebp-2CC8h]
+  FLDirListStruct *m_pContainingDir; // [esp+74h] [ebp-2CC8h]
   FLDirListStruct *v41; // [esp+78h] [ebp-2CC4h]
   signed int v42; // [esp+7Ch] [ebp-2CC0h]
   FLDirListStruct *v43; // [esp+80h] [ebp-2CBCh]
   FLDirListStruct *v44; // [esp+84h] [ebp-2CB8h]
   BOOL v45; // [esp+88h] [ebp-2CB4h]
-  int v46; // [esp+8Ch] [ebp-2CB0h]
-  FLDirListStruct *v47; // [esp+90h] [ebp-2CACh]
+  FLDirListStruct *v47; // [esp+90h] [ebp-2CACh] MAPDST
   FLDirListStruct *v48; // [esp+94h] [ebp-2CA8h]
-  const void *v49; // [esp+98h] [ebp-2CA4h]
-  unsigned int v50; // [esp+9Ch] [ebp-2CA0h]
+  unsigned int m_iFileHeaderCount; // [esp+9Ch] [ebp-2CA0h]
   DWORD v51; // [esp+A0h] [ebp-2C9Ch]
   CHAR *v52; // [esp+A4h] [ebp-2C98h]
   int v53; // [esp+A8h] [ebp-2C94h]
   FLDirListStruct *v54; // [esp+ACh] [ebp-2C90h]
-  FLFileListStruct *v55; // [esp+B0h] [ebp-2C8Ch]
+  FLDirListStruct *v55; // [esp+B0h] [ebp-2C8Ch]
   FLFileListStruct *v56; // [esp+B4h] [ebp-2C88h]
-  _DWORD v57[3]; // [esp+B8h] [ebp-2C84h] BYREF
-  int v58; // [esp+C4h] [ebp-2C78h]
-  int v59; // [esp+C8h] [ebp-2C74h]
-  int v60; // [esp+CCh] [ebp-2C70h]
-  int v61; // [esp+D0h] [ebp-2C6Ch]
-  void *v62; // [esp+D4h] [ebp-2C68h]
-  LPCVOID lpBuffer; // [esp+D8h] [ebp-2C64h]
-  int v64; // [esp+DCh] [ebp-2C60h]
+  FLHeaderStruct v57; // [esp+B8h] [ebp-2C84h] BYREF
+  int v58; // [esp+D0h] [ebp-2C6Ch]
+  FLHeaderFileStruct *pFileHeaders; // [esp+D8h] [ebp-2C64h] MAPDST
+  int v61; // [esp+DCh] [ebp-2C60h]
   HANDLE hFile; // [esp+E0h] [ebp-2C5Ch]
   HANDLE hFindFile; // [esp+E4h] [ebp-2C58h]
-  FLFileListStruct *v67; // [esp+E8h] [ebp-2C54h]
-  FLDirListStruct *v68; // [esp+ECh] [ebp-2C50h]
-  signed int v69; // [esp+F0h] [ebp-2C4Ch]
-  size_t v70; // [esp+F4h] [ebp-2C48h] BYREF
+  FLFileListStruct *pPrevFileList; // [esp+E8h] [ebp-2C54h]
+  FLDirListStruct *v65; // [esp+ECh] [ebp-2C50h]
+  signed int iUnknownLength; // [esp+F0h] [ebp-2C4Ch]
+  int v67; // [esp+F4h] [ebp-2C48h] BYREF
   char *Str; // [esp+F8h] [ebp-2C44h]
-  int v72; // [esp+FCh] [ebp-2C40h]
-  int v73; // [esp+100h] [ebp-2C3Ch]
-  int v74; // [esp+104h] [ebp-2C38h]
+  int v69; // [esp+FCh] [ebp-2C40h]
+  int v70; // [esp+100h] [ebp-2C3Ch]
+  int v71; // [esp+104h] [ebp-2C38h]
   wchar_t *Source; // [esp+108h] [ebp-2C34h]
   DWORD NumberOfBytesWritten; // [esp+10Ch] [ebp-2C30h] BYREF
-  int v77; // [esp+110h] [ebp-2C2Ch]
-  int v78; // [esp+114h] [ebp-2C28h]
-  BOOL v79; // [esp+118h] [ebp-2C24h]
-  int v80; // [esp+11Ch] [ebp-2C20h]
-  int v81; // [esp+120h] [ebp-2C1Ch]
-  int i; // [esp+124h] [ebp-2C18h]
-  int v83; // [esp+128h] [ebp-2C14h]
-  FLDirListStruct *v84; // [esp+12Ch] [ebp-2C10h]
-  _WORD *v85; // [esp+130h] [ebp-2C0Ch]
+  int v74; // [esp+110h] [ebp-2C2Ch]
+  int v75; // [esp+114h] [ebp-2C28h]
+  BOOL v76; // [esp+118h] [ebp-2C24h]
+  FLDirListStruct *m_pDirList; // [esp+11Ch] [ebp-2C20h]
+  int v78; // [esp+120h] [ebp-2C1Ch]
+  int i; // [esp+124h] [ebp-2C18h] MAPDST
+  int v80; // [esp+128h] [ebp-2C14h]
+  FLDirListStruct *v81; // [esp+12Ch] [ebp-2C10h]
   FLDirListStruct *j; // [esp+134h] [ebp-2C08h]
   HANDLE hObject; // [esp+138h] [ebp-2C04h]
-  int m; // [esp+13Ch] [ebp-2C00h]
-  _DWORD *v89; // [esp+140h] [ebp-2BFCh]
-  FLDirListStruct *v90; // [esp+144h] [ebp-2BF8h]
-  int v91; // [esp+148h] [ebp-2BF4h]
-  FLDirListStruct *v92; // [esp+14Ch] [ebp-2BF0h]
+  FLDirListStruct *m; // [esp+13Ch] [ebp-2C00h]
+  FLDirListStruct *v87; // [esp+144h] [ebp-2BF8h]
+  FLPathListStruct *m_pPathList; // [esp+148h] [ebp-2BF4h]
   FLFileListStruct *k; // [esp+150h] [ebp-2BECh]
-  int n; // [esp+154h] [ebp-2BE8h]
-  char v95; // [esp+15Bh] [ebp-2BE1h]
+  FLFileListStruct *n; // [esp+154h] [ebp-2BE8h]
+  char v92; // [esp+15Bh] [ebp-2BE1h]
   struct _WIN32_FIND_DATAW FindFileData; // [esp+15Ch] [ebp-2BE0h] BYREF
-  char v97[88]; // [esp+3ACh] [ebp-2990h] BYREF
-  char v98[88]; // [esp+404h] [ebp-2938h] BYREF
-  _BYTE v99[28]; // [esp+45Ch] [ebp-28E0h] BYREF
-  _BYTE v100[28]; // [esp+478h] [ebp-28C4h] BYREF
-  _BYTE v101[28]; // [esp+494h] [ebp-28A8h] BYREF
-  _BYTE v102[28]; // [esp+4B0h] [ebp-288Ch] BYREF
-  _BYTE v103[28]; // [esp+4CCh] [ebp-2870h] BYREF
-  int v104[7]; // [esp+4E8h] [ebp-2854h] BYREF
-  int v105; // [esp+504h] [ebp-2838h]
-  int v106; // [esp+508h] [ebp-2834h]
+  char v94[88]; // [esp+3ACh] [ebp-2990h] BYREF
+  char v95[88]; // [esp+404h] [ebp-2938h] BYREF
+  _BYTE v96[28]; // [esp+45Ch] [ebp-28E0h] BYREF
+  _BYTE v97[28]; // [esp+478h] [ebp-28C4h] BYREF
+  _BYTE v98[28]; // [esp+494h] [ebp-28A8h] BYREF
+  _BYTE v99[28]; // [esp+4B0h] [ebp-288Ch] BYREF
+  _BYTE v100[28]; // [esp+4CCh] [ebp-2870h] BYREF
+  struct FLCopyProgressStruct pCopyProgress; // [esp+4E8h] [ebp-2854h] BYREF
   CHAR Text[2048]; // [esp+50Ch] [ebp-2830h] BYREF
-  CHAR v108[1024]; // [esp+D0Ch] [ebp-2030h] BYREF
-  CHAR v109[1024]; // [esp+110Ch] [ebp-1C30h] BYREF
-  char v110[4096]; // [esp+150Ch] [ebp-1830h] BYREF
+  CHAR v103[1024]; // [esp+D0Ch] [ebp-2030h] BYREF
+  CHAR v104[1024]; // [esp+110Ch] [ebp-1C30h] BYREF
+  char v105[4096]; // [esp+150Ch] [ebp-1830h] BYREF
   WCHAR FileName[260]; // [esp+250Ch] [ebp-830h] BYREF
   WCHAR Buffer[260]; // [esp+2714h] [ebp-628h] BYREF
   wchar_t Destination[260]; // [esp+291Ch] [ebp-420h] BYREF
   wchar_t String[260]; // [esp+2B24h] [ebp-218h] BYREF
-  int v115; // [esp+2D38h] [ebp-4h]
+  int exceptionBlock; // [esp+2D38h] [ebp-4h]
 
-  v89 = this;
-  if ( !this[5] )
+  if ( !this->m_pPathList )
     return 1;
-  v91 = v89[5];
-  v68 = 0;
-  v84 = 0;
-  v67 = 0;
-  v74 = 0;
-  v83 = 0;
-  v95 = 0;
-  while ( v91 && !v95 )
+  m_pPathList = this->m_pPathList;
+  v65 = 0;
+  v81 = 0;
+  pPrevFileList = 0;
+  v71 = 0;
+  v80 = 0;
+  v92 = 0;
+  while ( m_pPathList && !v92 )
   {
     v47 = (FLDirListStruct *)operator new(0x10u);
-    v115 = 0;
+    exceptionBlock = 0;
     if ( v47 )
-      v34 = FLDirListStruct::FLDirListStruct(v47);
+      v47 = FLDirListStruct::FLDirListStruct(v47);
     else
-      v34 = 0;
-    v33 = v34;
-    v115 = -1;
-    v92 = v34;
-    v77 = *(_DWORD *)(v91 + 12);
-    while ( v92 )
+      v47 = 0;
+    exceptionBlock = -1;
+    v74 = m_pPathList->field_C;
+    while ( v47 )
     {
       v35 = 0;
       Destination[0] = 0;
-      if ( *(_DWORD *)(v91 + 8) )
+      if ( m_pPathList->m_swpUnknown )
       {
-        Source = *(wchar_t **)(v91 + 8);
-        if ( *Source == 92 )
+        Source = m_pPathList->m_swpUnknown;
+        if ( *Source == '\\' )
           ++Source;
-        j__wcscpy(Destination, Source);
-        v69 = j__wcslen(Destination) - 1;
-        if ( v69 > 0 && Destination[v69] == 92 )
+        wcscpy(Destination, Source);
+        iUnknownLength = wcslen(Destination) - 1;
+        if ( iUnknownLength > 0 && Destination[iUnknownLength] == '\\' )
         {
-          v36 = 2 * v69;
-          if ( (unsigned int)(2 * v69) >= 0x208 )
-            j____report_rangecheckfailure();
+          v36 = 2 * iUnknownLength;
+          if ( (unsigned int)(2 * iUnknownLength) >= 520 )
+            report_rangecheckfailure();
           Destination[v36 / 2] = 0;
         }
       }
       for ( i = 0; i < 2; ++i )
       {
-        if ( !v95 )
+        if ( !v92 )
         {
-          v78 = -1;
-          v46 = i;
+          v75 = -1;
           if ( i )
           {
-            if ( v46 == 1 )
+            if ( i == 1 )
             {
-              if ( *(_DWORD *)v92 )
+              if ( v47->m_swpPath )
               {
-                swprintf((char *)Buffer, (char *)L"%s\\%s\\%s", *(_DWORD *)v91);
-                v81 = 0;
+                swprintf((char *)Buffer, (char *)L"%s\\%s\\%s", (char)m_pPathList->m_swpPath);
+                v78 = 0;
               }
               else
               {
-                swprintf((char *)Buffer, (char *)L"%s\\%s", *(_DWORD *)v91);
-                v81 = 1;
+                swprintf((char *)Buffer, (char *)L"%s\\%s", (char)m_pPathList->m_swpPath);
+                v78 = 1;
               }
             }
           }
-          else if ( *(_DWORD *)v92 )
+          else if ( v47->m_swpPath )
           {
-            swprintf((char *)Buffer, (char *)L"%s\\%s\\*", *(_DWORD *)v91);
-            v81 = 0;
+            swprintf((char *)Buffer, (char *)L"%s\\%s\\*", (char)m_pPathList->m_swpPath);
+            v78 = 0;
           }
           else
           {
-            swprintf((char *)Buffer, (char *)L"%s\\*", *(_DWORD *)v91);
-            v81 = 1;
+            swprintf((char *)Buffer, (char *)L"%s\\*", (char)m_pPathList->m_swpPath);
+            v78 = 1;
           }
           if ( Destination[0] )
-            v81 = 0;
+            v78 = 0;
           hFindFile = FindFirstFileW(Buffer, &FindFileData);
           if ( hFindFile != (HANDLE)-1 )
           {
-            if ( *(_DWORD *)v92 )
-              swprintf((char *)String, (char *)L"%s\\%s", *(_DWORD *)v91);
+            if ( v47->m_swpPath )
+              swprintf((char *)String, (char *)L"%s\\%s", (char)m_pPathList->m_swpPath);
             else
-              swprintf((char *)String, (char *)L"%s", *(_DWORD *)v91);
+              swprintf((char *)String, (char *)L"%s", (char)m_pPathList->m_swpPath);
             v37 = (FLDirListStruct *)operator new(0x10u);
-            v115 = 1;
+            exceptionBlock = 1;
             if ( v37 )
-              v38 = FLDirListStruct::FLDirListStruct(v37);
+              v37 = FLDirListStruct::FLDirListStruct(v37);
             else
-              v38 = 0;
-            v115 = -1;
-            v90 = v38;
-            v6 = j__wcslen(String);
-            *(_DWORD *)v38 = operator new[](2 * (v6 + 1));
-            j__wcscpy(*(wchar_t **)v90, String);
-            if ( *(_DWORD *)v92 )
-              swprintf((char *)String, (char *)L"Root: \"%s\"\n  Directory: \"\\%s\\%s\"", *(_DWORD *)v91);
+              v37 = 0;
+            exceptionBlock = -1;
+            v87 = v37;
+            v6 = wcslen(String);
+            v37->m_swpPath = (int)operator new[](2 * (v6 + 1));
+            wcscpy((wchar_t *)v87->m_swpPath, String);
+            if ( v47->m_swpPath )
+              swprintf((char *)String, (char *)L"Root: \"%s\"\n  Directory: \"\\%s\\%s\"", (char)m_pPathList->m_swpPath);
             else
-              swprintf((char *)String, (char *)L"Root: \"%s\"\n  Directory: \"\\%s\\\"", *(_DWORD *)v91);
-            v7 = j__wcslen(String);
-            *((_DWORD *)v90 + 1) = operator new[](2 * (v7 + 1));
-            j__wcscpy(*((wchar_t **)v90 + 1), String);
-            *((_DWORD *)v90 + 3) = v84;
-            v84 = v90;
-            if ( !v81 )
+              swprintf((char *)String, (char *)L"Root: \"%s\"\n  Directory: \"\\%s\\\"", (char)m_pPathList->m_swpPath);
+            v7 = wcslen(String);
+            v87->field_4 = (int)operator new[](2 * (v7 + 1));
+            wcscpy((wchar_t *)v87->field_4, String);
+            v87->m_pNext = v81;
+            v81 = v87;
+            if ( !v78 )
             {
-              v80 = v89[6];
-              if ( *(_DWORD *)v92 )
+              m_pDirList = this->m_pDirList;
+              if ( v47->m_swpPath )
               {
                 if ( Destination[0] )
                   swprintf((char *)String, (char *)L"%s\\%s", (char)Destination);
                 else
-                  swprintf((char *)String, (char *)L"%s", *(_DWORD *)v92);
+                  swprintf((char *)String, (char *)L"%s", v47->m_swpPath);
               }
               else
               {
                 swprintf((char *)String, (char *)L"%s", (char)Destination);
               }
-              while ( v80 )
+              while ( m_pDirList )
               {
-                if ( !j___wcsicmp(String, *(const wchar_t **)v80) )
+                if ( !wcsicmp(String, (const wchar_t *)m_pDirList->m_swpPath) )
                 {
-                  v78 = *(_DWORD *)(v80 + 8);
+                  v75 = m_pDirList->field_8;
                   break;
                 }
-                v80 = *(_DWORD *)(v80 + 12);
+                m_pDirList = m_pDirList->m_pNext;
               }
-              if ( v78 == -1 )
+              if ( v75 == -1 )
               {
                 v39 = (FLDirListStruct *)operator new(0x10u);
-                v115 = 2;
+                exceptionBlock = 2;
                 if ( v39 )
                   v41 = FLDirListStruct::FLDirListStruct(v39);
                 else
                   v41 = 0;
                 v30 = v41;
-                v115 = -1;
-                v90 = v41;
-                v8 = j__wcslen(String);
+                exceptionBlock = -1;
+                v87 = v41;
+                v8 = wcslen(String);
                 v21 = operator new[](2 * (v8 + 1));
-                *(_DWORD *)v41 = v21;
-                *((_DWORD *)v90 + 2) = v74;
-                j__wcscpy(*(wchar_t **)v90, String);
-                if ( v68 )
-                  *((_DWORD *)v68 + 3) = v90;
+                v41->m_swpPath = (int)v21;
+                v87->field_8 = v71;
+                wcscpy((wchar_t *)v87->m_swpPath, String);
+                if ( v65 )
+                  v65->m_pNext = v87;
                 else
-                  v89[6] = v90;
-                v68 = v90;
-                v78 = v74++;
+                  this->m_pDirList = v87;
+                v65 = v87;
+                v75 = v71++;
               }
             }
             do
@@ -1548,73 +1451,73 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * a3, in
               {
                 if ( !i )
                 {
-                  v79 = (v77 & 1) != 0;
-                  if ( (v77 & 2) != 0 && FindFileData.cFileName[0] == 33 )
-                    v79 = 1;
-                  v42 = j__wcslen(FindFileData.cFileName);
-                  if ( v42 >= 6 && !j___wcsicmp((const wchar_t *)&FindFileData.nFileSizeLow + v42 + 1, L".work") )
-                    v79 = 1;
+                  v76 = (v74 & 1) != 0;
+                  if ( (v74 & 2) != 0 && FindFileData.cFileName[0] == 33 )
+                    v76 = 1;
+                  v42 = wcslen(FindFileData.cFileName);
+                  if ( v42 >= 6 && !wcsicmp((const wchar_t *)&FindFileData.nFileSizeLow + v42 + 1, L".work") )
+                    v76 = 1;
                   if ( !j__wcscmp(FindFileData.cFileName, L".") || !j__wcscmp(FindFileData.cFileName, L"..") )
-                    v79 = 1;
-                  if ( !v79 )
+                    v76 = 1;
+                  if ( !v76 )
                   {
-                    for ( j = v92; *((_DWORD *)j + 3); j = (FLDirListStruct *)*((_DWORD *)j + 3) )
+                    for ( j = v47; j->m_pNext; j = j->m_pNext )
                       ;
-                    if ( *(_DWORD *)v92 )
-                      swprintf((char *)String, (char *)L"%s\\%s", *(_DWORD *)v92);
+                    if ( v47->m_swpPath )
+                      swprintf((char *)String, (char *)L"%s\\%s", v47->m_swpPath);
                     else
                       swprintf((char *)String, (char *)L"%s", (char)FindFileData.cFileName);
                     v43 = (FLDirListStruct *)operator new(0x10u);
-                    v115 = 3;
+                    exceptionBlock = 3;
                     if ( v43 )
                       v44 = FLDirListStruct::FLDirListStruct(v43);
                     else
                       v44 = 0;
                     v22 = v44;
-                    v115 = -1;
-                    *((_DWORD *)j + 3) = v44;
-                    j = (FLDirListStruct *)*((_DWORD *)j + 3);
-                    v9 = j__wcslen(String);
+                    exceptionBlock = -1;
+                    j->m_pNext = v44;
+                    j = j->m_pNext;
+                    v9 = wcslen(String);
                     v29 = operator new[](2 * (v9 + 1));
-                    *(_DWORD *)j = v29;
-                    j__wcscpy(*(wchar_t **)j, String);
+                    j->m_swpPath = (int)v29;
+                    wcscpy((wchar_t *)j->m_swpPath, String);
                   }
                 }
               }
               else if ( i == 1 )
               {
                 v45 = 0;
-                if ( (v77 & 2) != 0 )
+                if ( (v74 & 2) != 0 )
                   v45 = FindFileData.cFileName[0] == 33;
                 if ( !v45 )
                 {
-                  for ( k = (FLFileListStruct *)v89[7]; k; k = (FLFileListStruct *)*((_DWORD *)k + 5) )
+                  for ( k = this->m_FileList; k; k = k->m_pNext )
                   {
-                    if ( !j___wcsicmp(*(const wchar_t **)k, FindFileData.cFileName) && *((_DWORD *)k + 1) == v78 )
+                    if ( !wcsicmp(k->m_swpFileName, FindFileData.cFileName) && k->m_uU4 == v75 )
                     {
-                      v83 = 4;
-                      v40 = (_DWORD *)*((_DWORD *)k + 4);
-                      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v98);
-                      v115 = 4;
+                      v80 = 4;
+                      m_pContainingDir = k->m_pContainingDir;
+                      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v95);
+                      exceptionBlock = 4;
                       std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(
-                        v101,
-                        v40[1]);
-                      LOBYTE(v115) = 5;
+                        v98,
+                        m_pContainingDir->field_4);
+                      LOBYTE(exceptionBlock) = 5;
+                      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(
+                        v97,
+                        m_pContainingDir->m_swpPath);
+                      LOBYTE(exceptionBlock) = 6;
                       std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(
                         v100,
-                        *v40);
-                      LOBYTE(v115) = 6;
+                        v81->field_4);
+                      LOBYTE(exceptionBlock) = 7;
                       std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(
-                        v103,
-                        *((_DWORD *)v84 + 1));
-                      LOBYTE(v115) = 7;
-                      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(
-                        v102,
+                        v99,
                         FindFileData.cFileName);
-                      v18 = (const char *)std::string::c_str(v102);
-                      v17 = (const char *)std::string::c_str(v103);
-                      v16 = (const char *)std::string::c_str(v100);
-                      v10 = (const char *)std::string::c_str(v101);
+                      v18 = (const char *)std::string::c_str(v99);
+                      v17 = (const char *)std::string::c_str(v100);
+                      v16 = (const char *)std::string::c_str(v97);
+                      v10 = (const char *)std::string::c_str(v98);
                       j__sprintf(
                         Text,
                         "The same file names were found:\n\n%s\n  File: \"%s\"\n\n%s\n  File: \"%s\"\n",
@@ -1624,217 +1527,215 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * a3, in
                         v18);
                       v28 = MessageBoxA(0, Text, "Error Creating File Library", 0x31u);
                       if ( v28 == 2 )
-                        v95 = 1;
-                      std::string::~string(v102);
-                      LOBYTE(v115) = 6;
-                      std::string::~string(v103);
-                      LOBYTE(v115) = 5;
+                        v92 = 1;
+                      std::string::~string(v99);
+                      LOBYTE(exceptionBlock) = 6;
                       std::string::~string(v100);
-                      LOBYTE(v115) = 4;
-                      std::string::~string(v101);
-                      v115 = -1;
-                      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::~wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v98);
+                      LOBYTE(exceptionBlock) = 5;
+                      std::string::~string(v97);
+                      LOBYTE(exceptionBlock) = 4;
+                      std::string::~string(v98);
+                      exceptionBlock = -1;
+                      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::~wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v95);
                       break;
                     }
                   }
                   v56 = (FLFileListStruct *)operator new(0x18u);
-                  v115 = 8;
+                  exceptionBlock = 8;
                   if ( v56 )
-                    v55 = FLFileListStruct::FLFileListStruct(v56);
+                    v55 = (FLDirListStruct *)FLFileListStruct::FLFileListStruct(v56);
                   else
                     v55 = 0;
-                  v27 = v55;
-                  v115 = -1;
-                  k = v55;
-                  v11 = j__wcslen(FindFileData.cFileName);
+                  v47 = v55;
+                  exceptionBlock = -1;
+                  k = (FLFileListStruct *)v55;
+                  v11 = wcslen(FindFileData.cFileName);
                   v26 = operator new[](2 * (v11 + 1));
-                  *(_DWORD *)v55 = v26;
-                  j__wcscpy(*(wchar_t **)k, FindFileData.cFileName);
-                  *((_DWORD *)k + 1) = v78;
-                  *((_DWORD *)k + 3) = FindFileData.nFileSizeLow;
-                  if ( (v77 & 4) != 0 )
-                    *((_DWORD *)k + 2) = 1;
-                  if ( (v77 & 8) != 0 )
-                    *((_DWORD *)k + 2) |= 2u;
-                  *((_DWORD *)k + 4) = v84;
-                  if ( v67 )
-                    *((_DWORD *)v67 + 5) = k;
+                  v55->m_swpPath = (int)v26;
+                  wcscpy(k->m_swpFileName, FindFileData.cFileName);
+                  k->m_uU4 = v75;
+                  k->m_uFileSize = FindFileData.nFileSizeLow;
+                  if ( (v74 & 4) != 0 )
+                    k->m_uFlags = FLFF_Compressed;
+                  if ( (v74 & 8) != 0 )
+                    k->m_uFlags |= FLFF_Encrypted;
+                  k->m_pContainingDir = v81;
+                  if ( pPrevFileList )
+                    pPrevFileList->m_pNext = k;
                   else
-                    v89[7] = k;
-                  v67 = k;
+                    this->m_FileList = k;
+                  pPrevFileList = k;
                 }
               }
               NextFileW = FindNextFileW(hFindFile, &FindFileData);
             }
-            while ( NextFileW && !v95 );
+            while ( NextFileW && !v92 );
             FindClose(hFindFile);
           }
         }
       }
-      v24 = v92;
-      v92 = (FLDirListStruct *)*((_DWORD *)v92 + 3);
+      v24 = v47;
+      v47 = v47->m_pNext;
       v23 = v24;
+
       v54 = v24;
       if ( v24 )
         delete v54;
     }
-    v91 = *(_DWORD *)(v91 + 16);
+    m_pPathList = (FLPathListStruct *)m_pPathList->field_10;
   }
-  if ( !v83 && !v95 )
+  if ( !v80 && !v92 )
   {
     hObject = CreateFileW(lpFileName, 0xC0000000, 0, 0, 2u, 0x80u, 0);
     if ( hObject == (HANDLE)-1 )
     {
-      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v97);
-      v115 = 10;
+      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v94);
+      exceptionBlock = 10;
       std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(
-        v99,
+        v96,
         lpFileName);
-      v15 = (const char *)std::string::c_str(v99);
-      j__sprintf(v109, "Error Creating File Library file: \"%s\"", v15);
-      MessageBoxA(0, v109, "Error Creating File Library", 0x10u);
-      v83 = 3;
-      std::string::~string(v99);
-      v115 = -1;
-      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::~wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v97);
+      v15 = (const char *)std::string::c_str(v96);
+      j__sprintf(v104, "Error Creating File Library file: \"%s\"", v15);
+      MessageBoxA(0, v104, "Error Creating File Library", 0x10u);
+      v80 = 3;
+      std::string::~string(v96);
+      exceptionBlock = -1;
+      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::~wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v94);
     }
     else
     {
-      FLHeaderStruct::FLHeaderStruct((FLHeaderStruct *)v57);
-      v57[1] = 4097;
+      FLHeaderStruct::FLHeaderStruct(&v57);
+      v57.m_iVersion = 4097;
       v53 = 0;
-      v110[0] = 0;
+      v105[0] = 0;
       if ( a3 )
         v52 = a3;
       else
-        v52 = v110;
+        v52 = v105;
       Str = v52;
       if ( (a4 & 1) != 0 )
       {
-        Str = v110;
+        Str = v105;
         hFile = CreateFileA(a3, 0x80000000, 0, 0, 3u, 0x80u, 0);
         if ( hFile == (HANDLE)-1 )
         {
-          j__strcpy_0(v110, "\n\nComment File Not Found !!!!\n\n");
+          j__strcpy_0(v105, "\n\nComment File Not Found !!!!\n\n");
         }
         else
         {
-          ReadFile(hFile, v110, 0xFFFu, &NumberOfBytesRead, 0);
+          ReadFile(hFile, v105, 0xFFFu, &NumberOfBytesRead, 0);
           v51 = NumberOfBytesRead;
           if ( NumberOfBytesRead >= 0x1000 )
-            j____report_rangecheckfailure();
-          v110[v51] = 0;
+            report_rangecheckfailure();
+          v105[v51] = 0;
           CloseHandle(hFile);
         }
       }
-      v72 = 0;
-      v58 = 0;
-      for ( m = v89[6]; m; m = *(_DWORD *)(m + 12) )
+      v69 = 0;
+      v57.m_iDirectoryNameCount = 0;
+      for ( m = this->m_pDirList; m; m = m->m_pNext )
       {
-        ++v58;
-        v72 += j__wcslen(*(const wchar_t **)m) + 1;
+        ++v57.m_iDirectoryNameCount;
+        v69 += wcslen((const wchar_t *)m->m_swpPath) + 1;
       }
-      v73 = 0;
-      v60 = 0;
-      for ( n = v89[7]; n; n = *(_DWORD *)(n + 20) )
+      v70 = 0;
+      v57.m_iFileHeaderCount = 0;
+      for ( n = this->m_FileList; n; n = n->m_pNext )
       {
-        ++v60;
-        v73 += j__wcslen(*(const wchar_t **)n) + 1;
+        ++v57.m_iFileHeaderCount;
+        v70 += wcslen(n->m_swpFileName) + 1;
       }
-      v64 = 0;
-      for ( n = v89[7]; n; n = *(_DWORD *)(n + 20) )
-        v64 += *(_DWORD *)(n + 12);
-      v57[0] = v73 + v72 + 24;
-      v57[0] += 24 * v60;
-      v59 = v73;
-      v57[2] = v72;
-      v104[3] = v64;
-      v104[2] = 0;
-      v104[5] = v60;
-      v104[4] = 0;
+      v61 = 0;
+      for ( n = this->m_FileList; n; n = n->m_pNext )
+        v61 += n->m_uFileSize;
+      v57.field_0 = v70 + v69 + 24;
+      v57.field_0 += 24 * v57.m_iFileHeaderCount;
+      v57.m_iFileNamesSize = v70;
+      v57.m_iDirectoryNamesSize = v69;
+      pCopyProgress.m_uFileSize = v61;
+      pCopyProgress.m_uU8 = 0;
+      pCopyProgress.m_uHeaderCount = v57.m_iFileHeaderCount;
+      pCopyProgress.m_uU10 = 0;
       v12 = strlen(Str);
       WriteFile(hObject, Str, v12 + 1, &NumberOfBytesWritten, 0);
-      v70 = strlen(Str) + 1;
-      n = v89[7];
-      v50 = v60;
-      v62 = operator new[](24 * v60);
-      v115 = 9;
-      if ( v62 )
-      {
-        _vec_ctor_no(v62, 0x18u, v50, (void *(__thiscall *)(void *))FLHeaderFileStruct::FLHeaderFileStruct);
-        v49 = v62;
-      }
+      v67 = strlen(Str) + 1;
+      n = this->m_FileList;
+      m_iFileHeaderCount = v57.m_iFileHeaderCount;
+      pFileHeaders = (FLHeaderFileStruct *)operator new[](0x18 * v57.m_iFileHeaderCount);
+      exceptionBlock = 9;
+      if ( pFileHeaders )
+        _vec_ctor_no(
+          pFileHeaders,
+          0x18u,
+          m_iFileHeaderCount,
+          (void *(__thiscall *)(void *))FLHeaderFileStruct::FLHeaderFileStruct);
       else
-      {
-        v49 = 0;
-      }
-      v115 = -1;
-      lpBuffer = v49;
-      v85 = v49;
+        pFileHeaders = 0;
+      exceptionBlock = -1;
       while ( n )
       {
-        *(_DWORD *)v85 = v70;
-        v85[6] = *(_WORD *)(n + 4);
-        *((_DWORD *)v85 + 4) = *(_DWORD *)(n + 8);
-        swprintf((char *)FileName, (char *)L"%s\\%s", **(_DWORD **)(n + 16));
-        v104[1] = *(_DWORD *)(n + 12);
-        v104[6] = *(_DWORD *)(n + 8);
-        v61 = CFileLibrary::pC_CopyFile(FileName, (int)hObject, nNumberOfBytesToRead, (int)v104);
-        if ( v61 )
+        pFileHeaders->field_0 = v67;
+        pFileHeaders->field_C = n->m_uU4;
+        pFileHeaders->m_uFlags = n->m_uFlags;
+        swprintf((char *)FileName, (char *)L"%s\\%s", n->m_pContainingDir->m_swpPath);
+        pCopyProgress.m_uExpectedFileSize = n->m_uFileSize;
+        pCopyProgress.m_uFlags = n->m_uFlags;
+        v58 = CFileLibrary::pC_CopyFile(this, FileName, hObject, nNumberOfBytesToRead, &pCopyProgress);
+        if ( v58 )
         {
-          if ( v61 == 5 )
+          if ( v58 == 5 )
           {
-            j__sprintf(v108, "Error copying file data into a file library.\nThere is not enough space on the disk !!!!");
-            MessageBoxA(0, v108, "Error Creating File Library", 0x10u);
+            j__sprintf(v103, "Error copying file data into a file library.\nThere is not enough space on the disk !!!!");
+            MessageBoxA(0, v103, "Error Creating File Library", 0x10u);
           }
-          v83 = v61;
+          v80 = v58;
           break;
         }
-        *((_DWORD *)v85 + 2) = *(_DWORD *)(n + 12);
-        *((_DWORD *)v85 + 1) = v105;
-        *((_DWORD *)v85 + 5) = v106;
-        v70 += v105;
-        n = *(_DWORD *)(n + 20);
-        v85 += 12;
+        pFileHeaders->field_8 = n->m_uFileSize;
+        pFileHeaders->field_4 = pCopyProgress.m_uU1C;
+        pFileHeaders->field_14 = pCopyProgress.m_uCRC;
+        v67 += pCopyProgress.m_uU1C;
+        n = n->m_pNext;
+        ++pFileHeaders;
       }
-      WriteFile(hObject, v57, 0x18u, &NumberOfBytesWritten, 0);
-      for ( m = v89[6]; m; m = *(_DWORD *)(m + 12) )
+      WriteFile(hObject, &v57, 0x18u, &NumberOfBytesWritten, 0);
+      for ( m = this->m_pDirList; m; m = m->m_pNext )
       {
-        v13 = j__wcslen(*(const wchar_t **)m);
-        WriteFile(hObject, *(LPCVOID *)m, v13 + 1, &NumberOfBytesWritten, 0);
+        v13 = wcslen((const wchar_t *)m->m_swpPath);
+        WriteFile(hObject, (LPCVOID)m->m_swpPath, v13 + 1, &NumberOfBytesWritten, 0);
       }
-      for ( n = v89[7]; n; n = *(_DWORD *)(n + 20) )
+      for ( n = this->m_FileList; n; n = n->m_pNext )
       {
-        v14 = j__wcslen(*(const wchar_t **)n);
-        WriteFile(hObject, *(LPCVOID *)n, v14 + 1, &NumberOfBytesWritten, 0);
+        v14 = wcslen(n->m_swpFileName);
+        WriteFile(hObject, n->m_swpFileName, v14 + 1, &NumberOfBytesWritten, 0);
       }
-      WriteFile(hObject, lpBuffer, 24 * v60, &NumberOfBytesWritten, 0);
-      operator delete[]((void *)lpBuffer);
-      WriteFile(hObject, &v70, 4u, &NumberOfBytesWritten, 0);
+      WriteFile(hObject, pFileHeaders, 24 * v57.m_iFileHeaderCount, &NumberOfBytesWritten, 0);
+      operator delete[](pFileHeaders);
+      WriteFile(hObject, &v67, 4u, &NumberOfBytesWritten, 0);
       CloseHandle(hObject);
     }
   }
-  while ( v84 )
+  while ( v81 )
   {
-    v19 = v84;
-    v84 = (FLDirListStruct *)*((_DWORD *)v84 + 3);
+    v19 = v81;
+    v81 = v81->m_pNext;
     v32 = v19;
     v48 = v19;
     v31 = delete v19;
   }
-  if ( v95 )
+  if ( v92 )
   {
     BBSupportTracePrintF(3, "CFileLibrary::C_CreateFileLibrary\t:\tFailed to create lib %s", (const char *)lpFileName);
     return 2;
   }
-  else if ( v83 )
+  else if ( v80 )
   {
     BBSupportTracePrintF(
       3,
       "CFileLibrary::C_CreateFileLibrary\t:\tFailed to create lib %s, %i",
       (const char *)lpFileName,
-      v83);
-    return v83;
+      v80);
+    return v80;
   }
   else
   {
@@ -1849,42 +1750,41 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * a3, in
   
   FLFHandleStruct *v3; // [esp+Ch] [ebp-28h]
   FLFHandleStruct *v4; // [esp+10h] [ebp-24h]
-  FLFHandleStruct *v5; // [esp+14h] [ebp-20h]
+  struct FLFHandleStruct *v5; // [esp+14h] [ebp-20h]
   FLFHandleStruct *C; // [esp+18h] [ebp-1Ch]
-  int v7; // [esp+1Ch] [ebp-18h]
-  int i; // [esp+1Ch] [ebp-18h]
-  int v9; // [esp+20h] [ebp-14h]
+  int i; // [esp+1Ch] [ebp-18h] MAPDST
+  struct FLFHandleStruct *pFLFHandle; // [esp+20h] [ebp-14h]
 
-  std::vector<std::pair<std::wstring,int>>::vector<std::pair<std::wstring,int>>();
-  *((_DWORD *)this + 5) = 0;
-  *((_DWORD *)this + 6) = 0;
-  *((_DWORD *)this + 7) = 0;
-  *((_DWORD *)this + 10) = 0;
-  *((_DWORD *)this + 11) = 0;
-  *((_DWORD *)this + 116) = 0;
-  *((_DWORD *)this + 117) = 0;
-  *((_DWORD *)this + 13) = 0;
-  *((_DWORD *)this + 12) = 0;
-  *((_DWORD *)this + 118) = 0;
-  *((_DWORD *)this + 8) = 0;
+  std::vector<std::pair<std::wstring,int>>::vector<std::pair<std::wstring,int>>(&this->m_vFileIdPairs);
+  this->m_pPathList = 0;
+  this->m_pDirList = 0;
+  this->m_FileList = 0;
+  this->m_iLibraryFilesCount = 0;
+  this->m_iLibraryFilesCapacity = 0;
+  this->m_pLibraryFiles = 0;
+  this->m_pDirectories = 0;
+  this->m_iDirectoryCount = 0;
+  this->field_30 = 0;
+  this->field_1D8 = 0;
+  this->m_uHandleCount = 0;
   if ( a2 >= 2 )
-    *((_DWORD *)this + 9) = a2;
+    this->m_iFLFHandleCount = a2;
   else
-    *((_DWORD *)this + 9) = 4;
-  v7 = a2;
-  v9 = 0;
-  while ( v7 )
+    this->m_iFLFHandleCount = 4;
+  i = a2;
+  pFLFHandle = 0;
+  while ( i )
   {
-    if ( v9 )
+    if ( pFLFHandle )
     {
       v4 = (FLFHandleStruct *)operator new(0xCu);
       if ( v4 )
         v3 = FLFHandleStruct::FLFHandleStruct(v4);
       else
         v3 = 0;
-      *(_DWORD *)(v9 + 8) = v3;
-      *(_DWORD *)(*(_DWORD *)(v9 + 8) + 4) = v9;
-      v9 = *(_DWORD *)(v9 + 8);
+      pFLFHandle->m_pNext = v3;
+      pFLFHandle->m_pNext->m_pFileHandle = pFLFHandle;
+      pFLFHandle = pFLFHandle->m_pNext;
     }
     else
     {
@@ -1893,19 +1793,19 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * a3, in
         v5 = FLFHandleStruct::FLFHandleStruct(C);
       else
         v5 = 0;
-      *((_DWORD *)this + 115) = v5;
-      v9 = *((_DWORD *)this + 115);
+      this->m_pFLFHandleStart = v5;
+      pFLFHandle = this->m_pFLFHandleStart;
     }
-    --v7;
+    --i;
   }
-  *((_DWORD *)this + 114) = v9;
+  this->m_pFLFHandleEnd = pFLFHandle;
   for ( i = 0; i < 100; ++i )
-    *((_DWORD *)this + i + 14) = 0;
-  *(_DWORD *)this = 0;
-  *((_DWORD *)this + 1) = 0;
-  *((_DWORD *)this + 2) = 0;
-  *((_DWORD *)this + 3) = 0;
-  *((_DWORD *)this + 4) = 0;
+    this->m_pFLIntHandle[i] = 0;
+  this->m_iRefCount = 0;
+  this->m_iFileInteractions = 0;
+  this->m_iFileSeeks = 0;
+  this->field_C = 0;
+  this->m_iDecompressedBytesRead = 0;
   CFileLibrary::InitFileLibraries(this);
   return this;
 }
@@ -1915,58 +1815,58 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * a3, in
 // Decompiled from int __thiscall CFileLibrary::~CFileLibrary(CFileLibrary *this)
  CFileLibrary::~CFileLibrary(void) {
   
-  _DWORD *v2; // [esp+8h] [ebp-18h]
+  struct FLFHandleStruct **m_pFLFHandleStart; // [esp+8h] [ebp-18h]
   int i; // [esp+Ch] [ebp-14h]
 
-  for ( i = 0; i < *((_DWORD *)this + 10); ++i )
+  for ( i = 0; i < this->m_iLibraryFilesCount; ++i )
   {
-    if ( *(_DWORD *)(*((_DWORD *)this + 116) + 24 * i + 8) )
+    if ( this->m_pLibraryFiles[i].m_pFileData )
     {
-      UnmapViewOfFile(*(LPCVOID *)(*((_DWORD *)this + 116) + 24 * i + 8));
-      CloseHandle(*(HANDLE *)(*((_DWORD *)this + 116) + 24 * i + 12));
-      *(_DWORD *)(*((_DWORD *)this + 116) + 24 * i + 8) = 0;
+      UnmapViewOfFile(this->m_pLibraryFiles[i].m_pFileData);
+      CloseHandle(this->m_pLibraryFiles[i].m_hFileMap);
+      this->m_pLibraryFiles[i].m_pFileData = 0;
     }
   }
   CFileLibrary::pFreeFLCreationData(this);
   CFileLibrary::pFreeFLData(this);
-  while ( *((_DWORD *)this + 115) )
+  while ( this->m_pFLFHandleStart )
   {
-    v2 = (_DWORD *)*((_DWORD *)this + 115);
-    *((_DWORD *)this + 115) = v2[2];
-    operator delete(v2);
+    m_pFLFHandleStart = (struct FLFHandleStruct **)this->m_pFLFHandleStart;
+    this->m_pFLFHandleStart = m_pFLFHandleStart[2];
+    operator delete(m_pFLFHandleStart);
   }
   return std::vector<std::pair<std::wstring,int>>::~vector<std::pair<std::wstring,int>>();
 }
 
 
 // address=[0x2f08050]
-// Decompiled from char __stdcall CFileLibrary::pCutPathAndFilename(wchar_t *String, wchar_t *Destination, wchar_t *a3)
-bool  CFileLibrary::pCutPathAndFilename(wchar_t const * String, wchar_t * Destination, wchar_t * a3) {
+// Decompiled from bool __stdcall CFileLibrary::pCutPathAndFilename(wchar_t *String, wchar_t *_swpPath, wchar_t *_swpName)
+bool  CFileLibrary::pCutPathAndFilename(wchar_t const * String, wchar_t * _swpPath, wchar_t * _swpName) {
   
   int v4; // [esp+8h] [ebp-8h]
   signed int i; // [esp+Ch] [ebp-4h]
   int v6; // [esp+Ch] [ebp-4h]
 
-  j__wcslen(String);
-  if ( *String == 92 )
-    j__wcscpy(Destination, String + 1);
+  wcslen(String);
+  if ( *String == '\\' )
+    wcscpy(_swpPath, String + 1);
   else
-    j__wcscpy(Destination, String);
+    wcscpy(_swpPath, String);
   v4 = 0;
-  for ( i = j__wcslen(Destination) - 1; i >= 0 && Destination[i] != 92; --i )
+  for ( i = wcslen(_swpPath) - 1; i >= 0 && _swpPath[i] != 92; --i )
     ++v4;
   if ( v4 )
   {
-    v6 = j__wcslen(Destination) - v4;
+    v6 = wcslen(_swpPath) - v4;
     if ( v6 > 1 )
     {
-      j__memmove(a3, &Destination[v6], v4 + 1);
-      Destination[v6 - 1] = 0;
+      memmove(_swpName, &_swpPath[v6], v4 + 1);
+      _swpPath[v6 - 1] = 0;
     }
     else
     {
-      j__wcscpy(a3, Destination);
-      *Destination = 0;
+      wcscpy(_swpName, _swpPath);
+      *_swpPath = 0;
     }
     return 1;
   }
@@ -1979,82 +1879,78 @@ bool  CFileLibrary::pCutPathAndFilename(wchar_t const * String, wchar_t * Destin
 
 
 // address=[0x2f08230]
-// Decompiled from int __thiscall CFileLibrary::pGetFileLibraryHandle(CFileLibrary *this, int a2)
+// Decompiled from void *__thiscall CFileLibrary::pGetFileLibraryHandle(CFileLibrary *this, int a2)
 void *  CFileLibrary::pGetFileLibraryHandle(int a2) {
   
   struct FLFHandleStruct *j; // [esp+4h] [ebp-10h]
-  int *i; // [esp+8h] [ebp-Ch]
-  int hFile; // [esp+Ch] [ebp-8h]
+  struct FLFHandleStruct *i; // [esp+8h] [ebp-Ch]
+  void *hFile; // [esp+Ch] [ebp-8h]
   HANDLE hFilea; // [esp+Ch] [ebp-8h]
   HANDLE hFileb; // [esp+Ch] [ebp-8h]
 
-  if ( a2 < 0 || a2 >= *((_DWORD *)this + 10) )
-    return -1;
-  if ( *(_DWORD *)(*((_DWORD *)this + 116) + 24 * a2 + 4) )
-    hFile = *(_DWORD *)(*((_DWORD *)this + 116) + 24 * a2 + 4);
+  if ( a2 < 0 || a2 >= this->m_iLibraryFilesCount )
+    return (void *)-1;
+  if ( this->m_pLibraryFiles[a2].m_hFile )
+    hFile = this->m_pLibraryFiles[a2].m_hFile;
   else
-    hFile = -1;
-  if ( hFile == -1 )
+    hFile = (void *)-1;
+  if ( hFile == (void *)-1 )
   {
-    if ( *((_DWORD *)this + 9) )
+    if ( this->m_iFLFHandleCount )
     {
-      for ( i = (int *)*((_DWORD *)this + 115); i && *i != -1; i = (int *)i[2] )
+      for ( i = this->m_pFLFHandleStart; i && i->m_uId != -1; i = i->m_pNext )
         ;
-      if ( *i == -1 )
+      if ( i->m_uId == -1 )
       {
-        hFilea = CreateFileW(*(LPCWSTR *)(*((_DWORD *)this + 116) + 24 * a2), 0x80000000, 1u, 0, 3u, 0x80u, 0);
+        hFilea = CreateFileW(this->m_pLibraryFiles[a2].m_swpFileName, 0x80000000, 1u, 0, 3u, 0x80u, 0);
         if ( hFilea == (HANDLE)-1 )
         {
           BBSupportTracePrintF(
             3,
             "CFileLibrary::pGetFileLibraryHandle\t:\tFailed to open lib file %s ",
-            *(const char **)(*((_DWORD *)this + 116) + 24 * a2));
-          return -1;
+            (const char *)this->m_pLibraryFiles[a2].m_swpFileName);
+          return (void *)-1;
         }
         else
         {
-          *(_DWORD *)(*((_DWORD *)this + 116) + 24 * a2 + 4) = hFilea;
-          *(_DWORD *)(*((_DWORD *)this + 116) + 24 * a2 + 20) = GetFileSize(hFilea, 0);
-          *i = a2;
-          --*((_DWORD *)this + 9);
-          CFileLibrary::pMoveHandleToBeginning(this, (struct FLFHandleStruct *)i);
-          return (int)hFilea;
+          this->m_pLibraryFiles[a2].m_hFile = hFilea;
+          this->m_pLibraryFiles[a2].m_uFileSize = GetFileSize(hFilea, 0);
+          i->m_uId = a2;
+          --this->m_iFLFHandleCount;
+          CFileLibrary::pMoveHandleToBeginning(this, i);
+          return hFilea;
         }
       }
       else
       {
-        return -1;
+        return (void *)-1;
       }
     }
     else
     {
-      hFileb = CreateFileW(*(LPCWSTR *)(*((_DWORD *)this + 116) + 24 * a2), 0x80000000, 1u, 0, 3u, 0x80u, 0);
+      hFileb = CreateFileW(this->m_pLibraryFiles[a2].m_swpFileName, 0x80000000, 1u, 0, 3u, 0x80u, 0);
       if ( hFileb == (HANDLE)-1 )
       {
         BBSupportTracePrintF(
           3,
           "CFileLibrary::pGetFileLibraryHandle\t:\tFailed to open lib file %s ",
-          *(const char **)(*((_DWORD *)this + 116) + 24 * a2));
-        return -1;
+          (const char *)this->m_pLibraryFiles[a2].m_swpFileName);
+        return (void *)-1;
       }
       else
       {
-        CloseHandle(*(HANDLE *)(*((_DWORD *)this + 116) + 24 * **((_DWORD **)this + 114) + 4));
-        **((_DWORD **)this + 114) = a2;
-        *(_DWORD *)(*((_DWORD *)this + 116) + 24 * a2 + 4) = hFileb;
-        CFileLibrary::pMoveHandleToBeginning(this, *((struct FLFHandleStruct **)this + 114));
-        return (int)hFileb;
+        CloseHandle(this->m_pLibraryFiles[this->m_pFLFHandleEnd->m_uId].m_hFile);
+        this->m_pFLFHandleEnd->m_uId = a2;
+        this->m_pLibraryFiles[a2].m_hFile = hFileb;
+        CFileLibrary::pMoveHandleToBeginning(this, this->m_pFLFHandleEnd);
+        return hFileb;
       }
     }
   }
   else
   {
-    for ( j = (struct FLFHandleStruct *)*((_DWORD *)this + 115);
-          j && *(_DWORD *)j != a2;
-          j = (struct FLFHandleStruct *)*((_DWORD *)j + 2) )
-    {
+    for ( j = this->m_pFLFHandleStart; j && j->m_uId != a2; j = j->m_pNext )
       ;
-    }
     CFileLibrary::pMoveHandleToBeginning(this, j);
     return hFile;
   }
@@ -2062,11 +1958,11 @@ void *  CFileLibrary::pGetFileLibraryHandle(int a2) {
 
 
 // address=[0x2f08480]
-// Decompiled from int __stdcall CFileLibrary::pC_CopyFile(LPCWSTR lpFileName, HANDLE a2, signed int nNumberOfBytesToRead, DWORD *a4)
-int  CFileLibrary::pC_CopyFile(wchar_t const * lpFileName, void * a2, int nNumberOfBytesToRead, struct FLCopyProgressStruct * a4) {
+// Decompiled from int __thiscall CFileLibrary::pC_CopyFile(  CFileLibrary *this,  LPCWSTR lpFileName,  HANDLE a2,  signed int nNumberOfBytesToRead,  struct FLCopyProgressStruct *_pCopyProgress)
+int  CFileLibrary::pC_CopyFile(wchar_t const * lpFileName, void * a2, int nNumberOfBytesToRead, struct FLCopyProgressStruct * _pCopyProgress) {
   
   DWORD NumberOfBytesRead; // [esp+14h] [ebp-14h] BYREF
-  int v6; // [esp+18h] [ebp-10h]
+  int success; // [esp+18h] [ebp-10h]
   LPVOID lpBuffer; // [esp+1Ch] [ebp-Ch]
   HANDLE hFile; // [esp+20h] [ebp-8h]
   DWORD NumberOfBytesWritten; // [esp+24h] [ebp-4h] BYREF
@@ -2077,94 +1973,88 @@ int  CFileLibrary::pC_CopyFile(wchar_t const * lpFileName, void * a2, int nNumbe
     BBSupportTracePrintF(3, "CFileLibrary::pC_CopyFile\t:\tFile not found %s", (const char *)lpFileName);
     return 6;
   }
-  v6 = 6;
-  if ( (a4[6] & 1) != 0 )
-  {
-    if ( (a4[6] & 2) != 0 )
-      NumberOfBytesWritten = CFileLibrary::pC_PackFile(a2, hFile, (int)(a4 + 8), 1);
+  success = 6;
+  if ( (_pCopyProgress->m_uFlags & FLFF_Compressed) != 0 )
+  {                                             // Compression
+    if ( (_pCopyProgress->m_uFlags & FLFF_Encrypted) != 0 )
+      NumberOfBytesWritten = CFileLibrary::pC_PackFile(this, a2, hFile, &_pCopyProgress->m_uCRC, 1);
     else
-      NumberOfBytesWritten = CFileLibrary::pC_PackFile(a2, hFile, (int)(a4 + 8), 0);
+      NumberOfBytesWritten = CFileLibrary::pC_PackFile(this, a2, hFile, &_pCopyProgress->m_uCRC, 0);
     if ( !NumberOfBytesWritten )
       return 6;
-    a4[7] = NumberOfBytesWritten;
-    *a4 = NumberOfBytesWritten;
-    a4[2] += NumberOfBytesWritten;
-    ++a4[4];
-    v6 = 0;
+    _pCopyProgress->m_uU1C = NumberOfBytesWritten;
+    _pCopyProgress->m_uU0 = NumberOfBytesWritten;
+    _pCopyProgress->m_uU8 += NumberOfBytesWritten;
+    ++_pCopyProgress->m_uU10;
+    success = 0;
   }
   else
-  {
+  {                                             // Straight copy over buffer
     if ( nNumberOfBytesToRead >= 0x4000 )
       lpBuffer = operator new[](nNumberOfBytesToRead);
     else
       lpBuffer = operator new[](0x4000u);
-    *a4 = 0;
-    a4[7] = 0;
+    _pCopyProgress->m_uU0 = 0;
+    _pCopyProgress->m_uU1C = 0;
     while ( ReadFile(hFile, lpBuffer, nNumberOfBytesToRead, &NumberOfBytesRead, 0) )
     {
       if ( !NumberOfBytesRead )
       {
-        ++a4[4];
-        v6 = 0;
+        ++_pCopyProgress->m_uU10;
+        success = 0;
         break;
       }
       WriteFile(a2, lpBuffer, NumberOfBytesRead, &NumberOfBytesWritten, 0);
       if ( NumberOfBytesWritten < NumberOfBytesRead )
       {
-        v6 = 5;
+        success = 5;
         break;
       }
-      a4[7] += NumberOfBytesWritten;
-      *a4 += NumberOfBytesWritten;
-      a4[2] += NumberOfBytesWritten;
+      _pCopyProgress->m_uU1C += NumberOfBytesWritten;
+      _pCopyProgress->m_uU0 += NumberOfBytesWritten;
+      _pCopyProgress->m_uU8 += NumberOfBytesWritten;
     }
-    a4[8] = 0;
+    _pCopyProgress->m_uCRC = 0;
     operator delete[](lpBuffer);
   }
   CloseHandle(hFile);
-  return v6;
+  return success;
 }
 
 
 // address=[0x2f08690]
-// Decompiled from DWORD __thiscall CFileLibrary::pC_PackFile(CFileLibrary *this, HANDLE a2, HANDLE hFile, _DWORD *a4, char a5)
-int  CFileLibrary::pC_PackFile(void * a2, void * hFile, unsigned int * a4, bool a5) {
+// Decompiled from DWORD __thiscall CFileLibrary::pC_PackFile(CFileLibrary *this, HANDLE a2, HANDLE hFile, unsigned int *_pCRC, char a5)
+int  CFileLibrary::pC_PackFile(void * a2, void * hFile, unsigned int * _pCRC, bool a5) {
   
   DWORD NumberOfBytesWritten; // [esp+8h] [ebp-2Ch] BYREF
-  CFileLibrary *v7; // [esp+Ch] [ebp-28h]
-  void *v8; // [esp+10h] [ebp-24h]
-  size_t Size; // [esp+14h] [ebp-20h]
-  LPVOID v10; // [esp+18h] [ebp-1Ch]
-  int v11; // [esp+1Ch] [ebp-18h]
-  DWORD NumberOfBytesRead; // [esp+20h] [ebp-14h] BYREF
-  LPVOID lpBuffer; // [esp+24h] [ebp-10h]
-  DWORD nNumberOfBytesToRead; // [esp+28h] [ebp-Ch]
-  LPCVOID v15; // [esp+2Ch] [ebp-8h]
+  char *pWriteBuffer; // [esp+10h] [ebp-24h] MAPDST
+  size_t uCompressedSize; // [esp+14h] [ebp-20h]
+  LPVOID pReadBuffer; // [esp+18h] [ebp-1Ch] MAPDST
+  int pCompressor; // [esp+1Ch] [ebp-18h]
+  DWORD uAcutallyReadSize; // [esp+20h] [ebp-14h] BYREF
+  DWORD uReadSize; // [esp+28h] [ebp-Ch]
   DWORD nNumberOfBytesToWrite; // [esp+30h] [ebp-4h]
 
-  v7 = this;
-  v11 = j__LZHLCreateCompressor(this);
+  pCompressor = j__LZHLCreateCompressor(this);
   nNumberOfBytesToWrite = 0;
-  nNumberOfBytesToRead = GetFileSize(hFile, 0);
-  Size = j__LZHLCompressorCalcMaxBuf(nNumberOfBytesToRead);
-  v10 = operator new[](nNumberOfBytesToRead);
-  lpBuffer = v10;
-  v8 = operator new[](Size);
-  v15 = v8;
-  ReadFile(hFile, v10, nNumberOfBytesToRead, &NumberOfBytesRead, 0);
-  if ( NumberOfBytesRead == nNumberOfBytesToRead )
+  uReadSize = GetFileSize(hFile, 0);
+  uCompressedSize = j__LZHLCompressorCalcMaxBuf(uReadSize);
+  pReadBuffer = operator new[](uReadSize);
+  pWriteBuffer = (char *)operator new[](uCompressedSize);
+  ReadFile(hFile, pReadBuffer, uReadSize, &uAcutallyReadSize, 0);
+  if ( uAcutallyReadSize == uReadSize )
   {
     nNumberOfBytesToWrite = 0;
-    nNumberOfBytesToWrite = j__LZHLCompress(v11, v15, lpBuffer, NumberOfBytesRead);
+    nNumberOfBytesToWrite = j__LZHLCompress(pCompressor, pWriteBuffer, pReadBuffer, uAcutallyReadSize);
     if ( a5 )
-      CFileLibrary::DataCryptor((void *)v15, nNumberOfBytesToWrite);
-    *a4 = CFileLibrary::CRC(v7, (void *)v15, nNumberOfBytesToWrite);
-    WriteFile(a2, v15, nNumberOfBytesToWrite, &NumberOfBytesWritten, 0);
+      CFileLibrary::DataCryptor(pWriteBuffer, nNumberOfBytesToWrite);
+    *_pCRC = CFileLibrary::CRC(this, pWriteBuffer, nNumberOfBytesToWrite);
+    WriteFile(a2, pWriteBuffer, nNumberOfBytesToWrite, &NumberOfBytesWritten, 0);
     if ( NumberOfBytesWritten == nNumberOfBytesToWrite )
     {
-      j__LZHLDestroyCompressor(v11);
-      operator delete[](lpBuffer);
-      operator delete[]((void *)v15);
+      j__LZHLDestroyCompressor(pCompressor);
+      operator delete[](pReadBuffer);
+      operator delete[](pWriteBuffer);
       return nNumberOfBytesToWrite;
     }
     else
@@ -2182,287 +2072,260 @@ int  CFileLibrary::pC_PackFile(void * a2, void * hFile, unsigned int * a4, bool 
 
 
 // address=[0x2f087f0]
-// Decompiled from int __thiscall CFileLibrary::UnpackData(CFileLibrary *this, char *a2, int a3, char *a4, int a5, bool a6)
-int  CFileLibrary::UnpackData(char * a2, int a3, char * a4, int a5, bool a6) {
+// Decompiled from int __thiscall CFileLibrary::UnpackData(  CFileLibrary *this,  char *_pDst,  int _uDstSize,  char *_pSrc,  int _uSrcSize,  bool isEncrypted)
+int  CFileLibrary::UnpackData(char * _pDst, int _uDstSize, char * _pSrc, int _uSrcSize, bool isEncrypted) {
   
-  _DWORD v7[5]; // [esp+0h] [ebp-38h] BYREF
-  int v8; // [esp+14h] [ebp-24h]
-  int v9; // [esp+1Ch] [ebp-1Ch] BYREF
-  int v10; // [esp+20h] [ebp-18h] BYREF
-  int v11; // [esp+24h] [ebp-14h]
-  _DWORD *v12; // [esp+28h] [ebp-10h]
-  int v13; // [esp+34h] [ebp-4h]
+  DWORD v7; // [esp+0h] [ebp-38h] BYREF
+  int bSucceeded; // [esp+14h] [ebp-24h]
+  int pDecompressor; // [esp+24h] [ebp-14h]
+  DWORD *v13; // [esp+28h] [ebp-10h]
+  int exceptionBlock; // [esp+34h] [ebp-4h]
 
-  v12 = v7;
-  v7[4] = this;
-  if ( a6 )
-    CFileLibrary::DataCryptor(a4, a5);
-  v10 = a5;
-  v9 = a3;
-  v11 = j__LZHLCreateDecompressor(v7[0], v7[1]);
-  v13 = 0;
-  v8 = j__LZHLDecompress(v11, a2, &v9, a4, &v10);
-  v13 = -1;
-  j__LZHLDestroyDecompressor(v11);
-  if ( v8 )
-    return a3;
+  v13 = &v7;
+  if ( isEncrypted )
+    CFileLibrary::DataCryptor(_pSrc, _uSrcSize);
+  pDecompressor = j__LZHLCreateDecompressor();
+  exceptionBlock = 0;
+  bSucceeded = j__LZHLDecompress(pDecompressor, _pDst, &_uDstSize, _pSrc, &_uSrcSize);
+  exceptionBlock = -1;
+  j__LZHLDestroyDecompressor(pDecompressor);
+  if ( bSucceeded )
+    return _uDstSize;
   BBSupportTracePrintF(3, "CStringEngine::ImportFile : Error during decompressing text file. No strings loaded. ");
   return 0;
 }
 
 
 // address=[0x2f08fb0]
-// Decompiled from CFileLibrary *__thiscall CFileLibrary::pFreeFLCreationData(CFileLibrary *this)
+// Decompiled from void __thiscall CFileLibrary::pFreeFLCreationData(CFileLibrary *this)
 void  CFileLibrary::pFreeFLCreationData(void) {
   
-  CFileLibrary *result; // eax
-  FLFileListStruct *v2; // [esp+8h] [ebp-2Ch]
-  FLDirListStruct *v3; // [esp+14h] [ebp-20h]
-  FLPathListStruct *v4; // [esp+20h] [ebp-14h]
+  FLFileListStruct *m_FileList; // [esp+8h] [ebp-2Ch]
+  FLDirListStruct *m_pDirList; // [esp+14h] [ebp-20h]
+  FLPathListStruct *m_pPathList; // [esp+20h] [ebp-14h]
 
-  while ( *((_DWORD *)this + 5) )
+  while ( this->m_pPathList )
   {
-    v4 = (FLPathListStruct *)*((_DWORD *)this + 5);
-    *((_DWORD *)this + 5) = *((_DWORD *)v4 + 4);
-    if ( v4 )
-      delete v4;
+    m_pPathList = this->m_pPathList;
+    this->m_pPathList = (FLPathListStruct *)m_pPathList->field_10;
+    if ( m_pPathList )
+      delete m_pPathList;
   }
-  while ( *((_DWORD *)this + 6) )
+  while ( this->m_pDirList )
   {
-    v3 = (FLDirListStruct *)*((_DWORD *)this + 6);
-    *((_DWORD *)this + 6) = *((_DWORD *)v3 + 3);
-    if ( v3 )
-      delete v3;
+    m_pDirList = this->m_pDirList;
+    this->m_pDirList = m_pDirList->m_pNext;
+    if ( m_pDirList )
+      delete m_pDirList;
   }
-  while ( 1 )
+  while ( this->m_FileList )
   {
-    result = this;
-    if ( !*((_DWORD *)this + 7) )
-      break;
-    v2 = (FLFileListStruct *)*((_DWORD *)this + 7);
-    *((_DWORD *)this + 7) = *((_DWORD *)v2 + 5);
-    if ( v2 )
-      delete v2;
+    m_FileList = this->m_FileList;
+    this->m_FileList = m_FileList->m_pNext;
+    if ( m_FileList )
+      delete m_FileList;
   }
-  return result;
 }
 
 
 // address=[0x2f090a0]
-// Decompiled from CFileLibrary *__thiscall CFileLibrary::pFreeFLData(CFileLibrary *this)
+// Decompiled from void __thiscall CFileLibrary::pFreeFLData(CFileLibrary *this)
 void  CFileLibrary::pFreeFLData(void) {
   
-  CFileLibrary *result; // eax
-  FLIntHandleStruct *v2; // [esp+8h] [ebp-48h]
   HANDLE hObject; // [esp+2Ch] [ebp-24h]
   int k; // [esp+30h] [ebp-20h]
-  FLIntHandleStruct *v5; // [esp+34h] [ebp-1Ch]
-  _DWORD *m; // [esp+38h] [ebp-18h]
-  void **v7; // [esp+3Ch] [ebp-14h]
-  int v8; // [esp+40h] [ebp-10h]
-  int v9; // [esp+44h] [ebp-Ch]
+  FLIntHandleStruct *o; // [esp+34h] [ebp-1Ch] MAPDST
+  struct FLFHandleStruct *m; // [esp+38h] [ebp-18h]
+  void **m_pFiles; // [esp+3Ch] [ebp-14h]
+  struct FLMemDirStruct *m_pDirectories; // [esp+40h] [ebp-10h]
+  FLLibraryFileStruct *m_pLibraryFiles; // [esp+44h] [ebp-Ch]
   int i; // [esp+48h] [ebp-8h]
   int j; // [esp+48h] [ebp-8h]
   int n; // [esp+48h] [ebp-8h]
 
-  v9 = *((_DWORD *)this + 116);
-  for ( i = 0; i < *((_DWORD *)this + 10); ++i )
+  m_pLibraryFiles = this->m_pLibraryFiles;
+  for ( i = 0; i < this->m_iLibraryFilesCount; ++i )
   {
-    if ( *(_DWORD *)v9 )
-      operator delete(*(void **)v9);
-    *(_DWORD *)v9 = 0;
-    if ( *(_DWORD *)(v9 + 4) )
+    if ( m_pLibraryFiles->m_swpFileName )
+      operator delete(m_pLibraryFiles->m_swpFileName);
+    m_pLibraryFiles->m_swpFileName = 0;
+    if ( m_pLibraryFiles->m_hFile )
     {
-      hObject = *(HANDLE *)(v9 + 4);
+      hObject = m_pLibraryFiles->m_hFile;
       if ( hObject != (HANDLE)-1 )
         CloseHandle(hObject);
-      *(_DWORD *)(v9 + 4) = -1;
+      m_pLibraryFiles->m_hFile = (void *)-1;
     }
-    v9 += 24;
+    ++m_pLibraryFiles;
   }
-  if ( *((_DWORD *)this + 116) )
-    operator delete[](*((void **)this + 116));
-  *((_DWORD *)this + 116) = 0;
-  *((_DWORD *)this + 11) = 0;
-  *((_DWORD *)this + 10) = 0;
-  v8 = *((_DWORD *)this + 117);
-  for ( j = 0; j < *((_DWORD *)this + 13); ++j )
+  if ( this->m_pLibraryFiles )
+    operator delete[](this->m_pLibraryFiles);
+  this->m_pLibraryFiles = 0;
+  this->m_iLibraryFilesCapacity = 0;
+  this->m_iLibraryFilesCount = 0;
+  m_pDirectories = this->m_pDirectories;
+  for ( j = 0; j < this->m_iDirectoryCount; ++j )
   {
-    if ( *(_DWORD *)v8 )
-      operator delete[](*(void **)v8);
-    v7 = *(void ***)(v8 + 12);
-    for ( k = 0; k < *(__int16 *)(v8 + 6); ++k )
+    if ( m_pDirectories->m_swpDirectoryName )
+      operator delete[]((void *)m_pDirectories->m_swpDirectoryName);
+    m_pFiles = (void **)m_pDirectories->m_pFiles;
+    for ( k = 0; k < m_pDirectories->m_iFileCount; ++k )
     {
-      if ( *v7 )
-        operator delete[](*v7);
-      if ( v7[7] )
+      if ( *m_pFiles )
+        operator delete[](*m_pFiles);
+      if ( m_pFiles[7] )
       {
-        operator delete[](v7[7]);
-        v7[7] = 0;
+        operator delete[](m_pFiles[7]);
+        m_pFiles[7] = 0;
       }
-      v7 += 8;
+      m_pFiles += 8;
     }
-    if ( *(_DWORD *)(v8 + 12) )
-      operator delete[](*(void **)(v8 + 12));
-    v8 += 16;
+    if ( m_pDirectories->m_pFiles )
+      operator delete[](m_pDirectories->m_pFiles);
+    ++m_pDirectories;
   }
-  if ( *((_DWORD *)this + 117) )
-    operator delete[](*((void **)this + 117));
-  *((_DWORD *)this + 117) = 0;
-  *((_DWORD *)this + 13) = 0;
-  *((_DWORD *)this + 12) = 0;
-  for ( m = (_DWORD *)*((_DWORD *)this + 115); m; m = (_DWORD *)m[2] )
-    *m = -1;
+  if ( this->m_pDirectories )
+    operator delete[](this->m_pDirectories);
+  this->m_pDirectories = 0;
+  this->m_iDirectoryCount = 0;
+  this->field_30 = 0;
+  for ( m = this->m_pFLFHandleStart; m; m = m->m_pNext )
+    m->m_uId = -1;
   for ( n = 0; n < 100; ++n )
   {
-    v5 = (FLIntHandleStruct *)*((_DWORD *)this + n + 14);
-    while ( v5 )
-    {
-      v2 = v5;
-      v5 = (FLIntHandleStruct *)*((_DWORD *)v5 + 6);
-      delete v2;
-    }
-    *((_DWORD *)this + n + 14) = 0;
+    for ( o = this->m_pFLIntHandle[n]; o; delete o
+      o = o->m_pNextHandle;
+    this->m_pFLIntHandle[n] = 0;
   }
-  result = this;
-  *((_DWORD *)this + 8) = 0;
-  return result;
+  this->m_uHandleCount = 0;
 }
 
 
 // address=[0x2f09350]
-// Decompiled from CFileLibrary *__thiscall CFileLibrary::pOptimize(CFileLibrary *this)
+// Decompiled from void __thiscall CFileLibrary::pOptimize(CFileLibrary *this)
 void  CFileLibrary::pOptimize(void) {
   
-  CFileLibrary *result; // eax
-  void *v2; // [esp+20h] [ebp-34h]
-  unsigned int v3; // [esp+24h] [ebp-30h]
-  void *v4; // [esp+2Ch] [ebp-28h]
-  unsigned int v5; // [esp+30h] [ebp-24h]
-  void *v6; // [esp+34h] [ebp-20h]
+  unsigned int m_iFileCount; // [esp+24h] [ebp-30h]
+  struct FLMemDirStruct *v3; // [esp+2Ch] [ebp-28h]
+  unsigned int m_iDirectoryCount; // [esp+30h] [ebp-24h]
+  FLMemFileStruct *pMemFiles; // [esp+34h] [ebp-20h] MAPDST
   int i; // [esp+38h] [ebp-1Ch]
-  void *v8; // [esp+3Ch] [ebp-18h]
-  int v9; // [esp+40h] [ebp-14h]
+  struct FLMemDirStruct *v7; // [esp+3Ch] [ebp-18h]
+  struct FLMemDirStruct *m_pDirectories; // [esp+40h] [ebp-14h]
 
-  result = this;
-  if ( !*((_DWORD *)this + 117) )
-    return result;
-  if ( *((_DWORD *)this + 13) != *((_DWORD *)this + 12) )
+  if ( this->m_pDirectories )
   {
-    v5 = *((_DWORD *)this + 13);
-    v8 = operator new[](16 * v5);
-    if ( v8 )
+    if ( this->m_iDirectoryCount != this->field_30 )
     {
-      _vec_ctor_no(v8, 0x10u, v5, (void *(__thiscall *)(void *))FLMemDirStruct::FLMemDirStruct);
-      v4 = v8;
-    }
-    else
-    {
-      v4 = 0;
-    }
-    j__memmove(v4, *((const void **)this + 117), 16 * *((_DWORD *)this + 13));
-    operator delete[](*((void **)this + 117));
-    *((_DWORD *)this + 117) = v4;
-    *((_DWORD *)this + 12) = *((_DWORD *)this + 13);
-  }
-  j__qsort(*((void **)this + 117), *((_DWORD *)this + 13), 0x10u, CFileLibrary::sDirCompare_qsort);
-  result = this;
-  *((_DWORD *)this + 118) |= 1u;
-  v9 = *((_DWORD *)this + 117);
-  for ( i = 0; i < *((_DWORD *)this + 13); ++i )
-  {
-    if ( *(_DWORD *)(v9 + 12) )
-    {
-      if ( *(__int16 *)(v9 + 8) != *(__int16 *)(v9 + 6) )
+      m_iDirectoryCount = this->m_iDirectoryCount;
+      v7 = (struct FLMemDirStruct *)operator new[](16 * m_iDirectoryCount);
+      if ( v7 )
       {
-        v3 = *(__int16 *)(v9 + 6);
-        v6 = operator new[](32 * v3);
-        if ( v6 )
-        {
-          _vec_ctor_no(v6, 0x20u, v3, (void *(__thiscall *)(void *))FLMemFileStruct::FLMemFileStruct);
-          v2 = v6;
-        }
-        else
-        {
-          v2 = 0;
-        }
-        j__memmove(v2, *(const void **)(v9 + 12), 32 * *(__int16 *)(v9 + 6));
-        operator delete[](*(void **)(v9 + 12));
-        *(_DWORD *)(v9 + 12) = v2;
-        *(_WORD *)(v9 + 8) = *(_WORD *)(v9 + 6);
+        _vec_ctor_no(v7, 0x10u, m_iDirectoryCount, (void *(__thiscall *)(void *))FLMemDirStruct::FLMemDirStruct);
+        v3 = v7;
       }
-      j__qsort(*(void **)(v9 + 12), *(__int16 *)(v9 + 6), 0x20u, CFileLibrary::sFileCompare_qsort);
-      *(_WORD *)(v9 + 4) |= 1u;
+      else
+      {
+        v3 = 0;
+      }
+      memmove(v3, this->m_pDirectories, 16 * this->m_iDirectoryCount);
+      operator delete[](this->m_pDirectories);
+      this->m_pDirectories = v3;
+      this->field_30 = this->m_iDirectoryCount;
     }
-    v9 += 16;
-    result = (CFileLibrary *)(i + 1);
+    qsort(
+      this->m_pDirectories,
+      this->m_iDirectoryCount,
+      0x10u,
+      (_CoreCrtNonSecureSearchSortCompareFunction)CFileLibrary::sDirCompare_qsort);
+    this->field_1D8 |= 1u;
+    m_pDirectories = this->m_pDirectories;
+    for ( i = 0; i < this->m_iDirectoryCount; ++i )
+    {
+      if ( m_pDirectories->m_pFiles )
+      {
+        if ( m_pDirectories->m_iReadFileCount != m_pDirectories->m_iFileCount )
+        {
+          m_iFileCount = m_pDirectories->m_iFileCount;
+          pMemFiles = (FLMemFileStruct *)operator new[](32 * m_iFileCount);
+          if ( pMemFiles )
+            _vec_ctor_no(pMemFiles, 0x20u, m_iFileCount, (void *(__thiscall *)(void *))FLMemFileStruct::FLMemFileStruct);
+          else
+            pMemFiles = 0;
+          memmove(pMemFiles, m_pDirectories->m_pFiles, 32 * m_pDirectories->m_iFileCount);
+          operator delete[](m_pDirectories->m_pFiles);
+          m_pDirectories->m_pFiles = pMemFiles;
+          m_pDirectories->m_iReadFileCount = m_pDirectories->m_iFileCount;
+        }
+        qsort(m_pDirectories->m_pFiles, m_pDirectories->m_iFileCount, 0x20u, CFileLibrary::sFileCompare_qsort);
+        m_pDirectories->m_uFlags |= FLFF_Compressed;
+      }
+      ++m_pDirectories;
+    }
   }
-  return result;
 }
 
 
 // address=[0x2f095f0]
-// Decompiled from DWORD __thiscall CFileLibrary::LoadEntireFile(CFileLibrary *this, unsigned int a2, char *a3, int a4, char a5)
-int  CFileLibrary::LoadEntireFile(unsigned int a2, void * a3, unsigned int a4, int a5) {
+// Decompiled from DWORD __thiscall CFileLibrary::LoadEntireFile(  CFileLibrary *this,  unsigned int a2,  char *_pData,  int _iCRC,  bool _bDisableEncryption)
+int  CFileLibrary::LoadEntireFile(unsigned int a2, void * _pData, unsigned int _iCRC, int _bDisableEncryption) {
   
-  __int16 v6; // [esp+14h] [ebp-1Ch]
+  FLMemFileStruct::FileFlags m_iFlags; // [esp+14h] [ebp-1Ch]
   HANDLE hFile; // [esp+18h] [ebp-18h]
   int v8; // [esp+1Ch] [ebp-14h]
   DWORD NumberOfBytesRead; // [esp+20h] [ebp-10h] BYREF
-  LPVOID lpBuffer; // [esp+24h] [ebp-Ch]
-  CFileLibrary *v11; // [esp+28h] [ebp-8h]
-  struct FLIntHandleStruct *IntHandlePtr; // [esp+2Ch] [ebp-4h]
+  LPVOID compressedData; // [esp+24h] [ebp-Ch]
+  FLIntHandleStruct *IntHandlePtr; // [esp+2Ch] [ebp-4h]
 
-  v11 = this;
-  ++*(_DWORD *)this;
-  ++*((_DWORD *)v11 + 1);
-  IntHandlePtr = CFileLibrary::pGetIntHandlePtr(v11, a2);
+  ++this->m_iRefCount;
+  ++this->m_iFileInteractions;
+  IntHandlePtr = CFileLibrary::pGetIntHandlePtr(this, a2);
   if ( IntHandlePtr )
   {
-    hFile = CFileLibrary::pGetFileLibraryHandle(v11, *(__int16 *)(*((_DWORD *)IntHandlePtr + 5) + 20));
+    hFile = CFileLibrary::pGetFileLibraryHandle(this, IntHandlePtr->m_pLibraryFile->m_iLibraryIndex);
     if ( hFile == (HANDLE)-1 )
     {
       BBSupportTracePrintF(3, "CFileLibrary::LoadEntireFile\t:\tInvalid lib file handle");
       return -1;
     }
-    else if ( SetFilePointer(hFile, *(_DWORD *)(*((_DWORD *)IntHandlePtr + 5) + 8), 0, 0) == -1 )
+    else if ( SetFilePointer(hFile, IntHandlePtr->m_pLibraryFile->m_iFileOffset, 0, FILE_BEGIN) == -1 )
     {
       BBSupportTracePrintF(3, "CFileLibrary::LoadEntireFile\t:\tfailed to set file ptr");
       return -1;
     }
     else
     {
-      v6 = *(_WORD *)(*((_DWORD *)IntHandlePtr + 5) + 4);
-      if ( (a5 & 1) != 0 )
-        LOBYTE(v6) = 0;
-      if ( (v6 & 1) != 0 )
+      m_iFlags = IntHandlePtr->m_pLibraryFile->m_iFlags;
+      if ( _bDisableEncryption )
+        LOBYTE(m_iFlags) = 0;
+      if ( (m_iFlags & FLFF_Compressed) != 0 )
       {
-        lpBuffer = operator new[](*(_DWORD *)(*((_DWORD *)IntHandlePtr + 5) + 12));
-        ReadFile(hFile, lpBuffer, *(_DWORD *)(*((_DWORD *)IntHandlePtr + 5) + 12), &NumberOfBytesRead, 0);
-        if ( *(_DWORD *)(*((_DWORD *)IntHandlePtr + 5) + 12) == NumberOfBytesRead )
+        compressedData = operator new[](IntHandlePtr->m_pLibraryFile->m_iFileSize);
+        ReadFile(hFile, compressedData, IntHandlePtr->m_pLibraryFile->m_iFileSize, &NumberOfBytesRead, 0);
+        if ( IntHandlePtr->m_pLibraryFile->m_iFileSize == NumberOfBytesRead )
         {
-          if ( CFileLibrary::CRC(v11, lpBuffer, *(_DWORD *)(*((_DWORD *)IntHandlePtr + 5) + 12)) == a4 )
+          if ( CFileLibrary::CRC(this, compressedData, IntHandlePtr->m_pLibraryFile->m_iFileSize) == _iCRC )
           {
-            if ( (v6 & 2) != 0 )
+            if ( (m_iFlags & FLFF_Encrypted) != 0 )
               v8 = CFileLibrary::UnpackData(
-                     v11,
-                     a3,
-                     *(_DWORD *)(*((_DWORD *)IntHandlePtr + 5) + 16),
-                     (char *)lpBuffer,
+                     this,
+                     _pData,
+                     IntHandlePtr->m_pLibraryFile->m_iDecompressedSize,
+                     (char *)compressedData,
                      NumberOfBytesRead,
                      1);
             else
               v8 = CFileLibrary::UnpackData(
-                     v11,
-                     a3,
-                     *(_DWORD *)(*((_DWORD *)IntHandlePtr + 5) + 16),
-                     (char *)lpBuffer,
+                     this,
+                     _pData,
+                     IntHandlePtr->m_pLibraryFile->m_iDecompressedSize,
+                     (char *)compressedData,
                      NumberOfBytesRead,
                      0);
-            operator delete[](lpBuffer);
+            operator delete[](compressedData);
             if ( v8 )
             {
-              *((_DWORD *)v11 + 4) += v8;
+              this->m_iDecompressedBytesRead += v8;
               return v8;
             }
             else
@@ -2473,27 +2336,27 @@ int  CFileLibrary::LoadEntireFile(unsigned int a2, void * a3, unsigned int a4, i
           }
           else
           {
-            operator delete[](lpBuffer);
+            operator delete[](compressedData);
             BBSupportTracePrintF(
               3,
               "CFileLibrary::LoadEntireFile\t:\tCRC error in %s",
-              **((const char ***)IntHandlePtr + 5));
+              IntHandlePtr->m_pLibraryFile->m_pswName);
             return -1;
           }
         }
         else
         {
-          operator delete[](lpBuffer);
+          operator delete[](compressedData);
           BBSupportTracePrintF(3, "CFileLibrary::LoadEntireFile\t:\tFailed to read file for decompressing");
           return -1;
         }
       }
       else
       {
-        ReadFile(hFile, a3, *(_DWORD *)(*((_DWORD *)IntHandlePtr + 5) + 12), &NumberOfBytesRead, 0);
-        if ( (v6 & 2) != 0 )
-          CFileLibrary::DataCryptor(a3, *(_DWORD *)(*((_DWORD *)IntHandlePtr + 5) + 12));
-        *((_DWORD *)v11 + 4) += NumberOfBytesRead;
+        ReadFile(hFile, _pData, IntHandlePtr->m_pLibraryFile->m_iFileSize, &NumberOfBytesRead, 0);
+        if ( (m_iFlags & FLFF_Encrypted) != 0 )
+          CFileLibrary::DataCryptor(_pData, IntHandlePtr->m_pLibraryFile->m_iFileSize);
+        this->m_iDecompressedBytesRead += NumberOfBytesRead;
         return NumberOfBytesRead;
       }
     }
@@ -2507,24 +2370,24 @@ int  CFileLibrary::LoadEntireFile(unsigned int a2, void * a3, unsigned int a4, i
 
 
 // address=[0x2f09890]
-// Decompiled from void __cdecl CFileLibrary::DataCryptor(unsigned __int8 *a1, int a2)
-void __cdecl CFileLibrary::DataCryptor(void * a1, int a2) {
+// Decompiled from void __cdecl CFileLibrary::DataCryptor(char *_pData, int _iDataSize)
+void __cdecl CFileLibrary::DataCryptor(void * _pData, int _iDataSize) {
   
   int i; // [esp+8h] [ebp-7Ch]
-  _BYTE v3[76]; // [esp+Ch] [ebp-78h] BYREF
+  _DWORD v3[19]; // [esp+Ch] [ebp-78h] BYREF
   _BYTE v4[28]; // [esp+58h] [ebp-2Ch] BYREF
-  int v5; // [esp+80h] [ebp-4h]
+  int exceptionBlock; // [esp+80h] [ebp-4h]
 
   Cryptor::Cryptor((Cryptor *)v3);
-  v5 = 0;
-  std::string::string(v4, "01234567890123456789");
-  LOBYTE(v5) = 1;
-  Cryptor::Set_Key(v4);
-  for ( i = 0; i < a2; ++i )
-    Cryptor::Transform_Char((Cryptor *)v3, &a1[i]);
-  LOBYTE(v5) = 0;
+  exceptionBlock = 0;
+  std::string::string((struct std::string *)v4, "01234567890123456789");
+  LOBYTE(exceptionBlock) = 1;
+  Cryptor::Set_Key(v3, (int)v4);
+  for ( i = 0; i < _iDataSize; ++i )
+    Cryptor::Transform_Char((Cryptor *)v3, (unsigned __int8 *)&_pData[i]);
+  LOBYTE(exceptionBlock) = 0;
   std::string::~string(v4);
-  v5 = -1;
+  exceptionBlock = -1;
   Cryptor::~Cryptor((Cryptor *)v3);
 }
 
@@ -2534,15 +2397,16 @@ void __cdecl CFileLibrary::DataCryptor(void * a1, int a2) {
 unsigned int  CFileLibrary::CRC(void * a2, int a3) {
   
   unsigned int NormalCRC; // [esp+Ch] [ebp-Ch]
-  _BYTE v5[4]; // [esp+10h] [ebp-8h] BYREF
+  int v5; // [esp+10h] [ebp-8h] BYREF
   int i; // [esp+14h] [ebp-4h]
 
-  cdm_crc::CRCGenerator<16,32773,0,0,1,1>::CRCGenerator<16,32773,0,0,1,1>(v5);
-  cdm_crc::CRCGenerator<16,32773,0,0,1,1>::Reset((std::_Basic_container_proxy_ptr12 *)v5);
+  cdm_crc::CRCGenerator<16,32773,0,0,1,1>::CRCGenerator<16,32773,0,0,1,1>(&v5);
+  cdm_crc::CRCGenerator<16,32773,0,0,1,1>::Reset((std::_Basic_container_proxy_ptr12 *)&v5);
   for ( i = 0; i < a3; ++i )
-    cdm_crc::CRCGenerator<16,32773,0,0,1,1>::Process(a2[i]);
-  NormalCRC = cdm_crc::CRCGenerator<16,32773,0,0,1,1>::GetNormalCRC(v5);
-  return NormalCRC >> (32 - cdm_crc::CRCGenerator<16,32773,0,0,1,1>::GetWidth(v5));
+    cdm_crc::CRCGenerator<16,32773,0,0,1,1>::Process(&v5, a2[i]);
+  NormalCRC = cdm_crc::CRCGenerator<16,32773,0,0,1,1>::GetNormalCRC(&v5);
+  return NormalCRC >> (32 - cdm_crc::CRCGenerator<16,32773,0,0,1,1>::GetWidth(&v5));
 }
 
 
+#endif // Already implemented

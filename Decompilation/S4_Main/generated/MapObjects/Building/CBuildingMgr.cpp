@@ -2015,9 +2015,9 @@ void  CBuildingMgr::Store(class S4::CMapFile & a2) {
   v23 = v6;
   *v6 = 13379;
   *((_WORD *)v23 + 139400) = 20757;
-  j__memcpy((char *)v23 + 2, (char *)v24 + 288731, 0x400u);
-  j__memcpy((char *)v23 + 1026, (char *)v24 + 289755, 0x400u);
-  j__memcpy((char *)v23 + 2050, (char *)v24 + 11981, 0x4390Eu);
+  memcpy((char *)v23 + 2, (char *)v24 + 288731, 0x400u);
+  memcpy((char *)v23 + 1026, (char *)v24 + 289755, 0x400u);
+  memcpy((char *)v23 + 2050, (char *)v24 + 11981, 0x4390Eu);
   S4::CMapFile::SaveChunk(182, 0, 0x44112u, v23, 0);
   v5[42] = v23;
   operator delete(v23);
@@ -2129,9 +2129,9 @@ void  CBuildingMgr::Load(class S4::CMapFile & a2) {
     {
       __debugbreak();
     }
-    j__memcpy((char *)v17 + 288731, v15 + 1, 0x400u);
-    j__memcpy((char *)v17 + 289755, v15 + 513, 0x400u);
-    j__memcpy((char *)v17 + 11981, v15 + 1025, 0x4390Eu);
+    memcpy((char *)v17 + 288731, v15 + 1, 0x400u);
+    memcpy((char *)v17 + 289755, v15 + 513, 0x400u);
+    memcpy((char *)v17 + 11981, v15 + 1025, 0x4390Eu);
     S4::CMapFile::CloseChunk(a2, 0xB6u, 0);
     LOBYTE(v21) = 0;
     std::istringstream::`vbase destructor'(v3);

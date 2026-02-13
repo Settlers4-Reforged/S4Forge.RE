@@ -14,6 +14,14 @@ public:
     // address=[0x2f33900]
     virtual  ~CBBObject(void);
 
+    // Type information members
+public:
+    void * vtable;
+    int m_uSerialNumber;
+    char * m_spType;
+    CBBObject * m_pFirst;
+    __int16 m_uU10;
+
 };
 
 

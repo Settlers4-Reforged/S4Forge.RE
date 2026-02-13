@@ -16,32 +16,29 @@ void __cdecl CBBObjectTracer::Enter(void) {
 
 
 // address=[0x2f33ad0]
-// Decompiled from _DWORD *__cdecl CBBObjectTracer::InitObject(_DWORD *a1, const char *a2, char a3)
-void __cdecl CBBObjectTracer::InitObject(class CBBObject & a1, char const * a2, bool a3) {
+// Decompiled from void __cdecl CBBObjectTracer::InitObject(CBBObject *this, char *_sType, bool _bFirst)
+void __cdecl CBBObjectTracer::InitObject(class CBBObject & _sType, char const * _bFirst, bool a3) {
   
-  _DWORD *result; // eax
-  const char *v4; // [esp+0h] [ebp-4h]
+  char *type; // [esp+0h] [ebp-4h]
 
-  if ( a2 && *a2 )
-    v4 = a2;
+  if ( _sType && *_sType )
+    type = _sType;
   else
-    v4 = "Object of unknown type";
-  a1[2] = v4;
-  if ( a3 )
+    type = "Object of unknown type";
+  this->m_spType = type;
+  if ( _bFirst )
   {
-    a1[1] = CBBObjectTracer::m_uCurrentSerialNumber;
-    a1[3] = CBBObjectTracer::m_pObjectFirst;
-    result = (_DWORD *)++CBBObjectTracer::m_uCurrentSerialNumber;
+    this->m_uSerialNumber = CBBObjectTracer::m_uCurrentSerialNumber;
+    this->m_pFirst = CBBObjectTracer::m_pObjectFirst;
+    ++CBBObjectTracer::m_uCurrentSerialNumber;
     ++CBBObjectTracer::m_iNumberOfObjects;
-    CBBObjectTracer::m_pObjectFirst = (int)a1;
+    CBBObjectTracer::m_pObjectFirst = this;
   }
   else
   {
-    result = a1;
-    a1[1] = -1;
-    a1[3] = 0;
+    this->m_uSerialNumber = -1;
+    this->m_pFirst = 0;
   }
-  return result;
 }
 
 

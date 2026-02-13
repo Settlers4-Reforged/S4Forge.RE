@@ -16,24 +16,24 @@
 
 
 // address=[0x147eb30]
-// Decompiled from int __thiscall CCDDrive::GetCDType(CCDDrive *this, CHAR a2)
-enum T_S4_CDROM_TYPE  CCDDrive::GetCDType(char a2) {
+// Decompiled from int __thiscall CCDDrive::GetCDType(CCDDrive *this, CHAR driveName)
+enum T_S4_CDROM_TYPE  CCDDrive::GetCDType(char driveName) {
   
   int v3; // [esp+8h] [ebp-80Ch]
   int i; // [esp+Ch] [ebp-808h]
   WCHAR FileName[1024]; // [esp+10h] [ebp-804h] BYREF
 
-  if ( a2 >= 97 && a2 <= 122 )
-    a2 -= 32;
-  if ( a2 >= 65 && a2 <= 90 && CCDDrive::GetDriveTypeA(this, a2) == 5 )
+  if ( driveName >= 'a' && driveName <= 'z' )
+    driveName -= 32;
+  if ( driveName >= 'A' && driveName <= 'Z' && CCDDrive::GetDriveTypeA(this, driveName) == 5 )
   {
     for ( i = 0; i < 9; ++i )
     {
       v3 = dword_36BB280[i];
       if ( v3 )
       {
-        _wsprintfW(FileName, L"%c:\\%s", a2, v3);
-        if ( (unsigned __int8)CCDDrive::FindFile(FileName) )
+        _wsprintfW(FileName, L"%c:\\%s", driveName, v3);
+        if ( CCDDrive::FindFile(FileName) )
           return i;
       }
     }
@@ -196,13 +196,12 @@ bool __cdecl CCDDrive::FindFile(wchar_t const * lpFileName) {
 // Decompiled from UINT __thiscall CCDDrive::GetDriveTypeA(CCDDrive *this, CHAR _cDrive)
 unsigned int  CCDDrive::GetDriveTypeA(char _cDrive) {
   
-  CHAR RootPathName[4]; // [esp+8h] [ebp-Ch] BYREF
-  int v4; // [esp+Ch] [ebp-8h]
+  char RootPathName[8]; // [esp+8h] [ebp-Ch] BYREF
 
   if ( !this->m_uDriveType )
     this->m_uDriveType = CCDDrive::DriveTypeExCheck(this);
   strcpy(RootPathName, "C:\\");
-  v4 = 0;
+  *(_DWORD *)&RootPathName[4] = 0;
   RootPathName[0] = _cDrive;
   return GetDriveTypeA(RootPathName);
 }

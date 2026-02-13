@@ -84,7 +84,7 @@ bool  CWalkingCatapult::FindPathAStar64(int a2, int a3, class CDirCache & a4) {
     else
     {
       if ( (unsigned int)i >= 6 )
-        j____report_rangecheckfailure();
+        report_rangecheckfailure();
       v11[i] = 0;
     }
   }

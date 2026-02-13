@@ -143,7 +143,7 @@ bool  CStateTutorial::OnEvent(class CEvn_Event & a2) {
         __debugbreak();
       }
       v21 = a2->m_wParam + 1;
-      v3 = (char *)std::wstring::c_str((_Cnd_internal_imp_t *)&unk_40320F4);
+      v3 = (char *)std::wstring::c_str((_Cnd_internal_imp_t *)&stru_40320F4);
       swprintf((char *)Buffer, v3, v21);
       C = operator new(0x620u);
       v43 = 1;

@@ -71,13 +71,13 @@ bool  CGameHost::AllSend(void) {
       *((_BYTE *)Src + 21) = 0;
       *((_BYTE *)Src + 22) = 0;
       *((_BYTE *)Src + 23) = 0;
-      j__memcpy(v18, Src, 0x20u);
+      memcpy(v18, Src, 0x20u);
       v18 = (char *)v18 + 32;
       if ( *((_DWORD *)Src + 6) )
       {
         if ( !*((_WORD *)Src + 14) && BBSupportDbgReport(2, "Net\\GameHost.cpp", 3805, "evn.m_iDataSize") == 1 )
           __debugbreak();
-        j__memcpy(v18, *((const void **)Src + 6), *((unsigned __int16 *)Src + 14));
+        memcpy(v18, *((const void **)Src + 6), *((unsigned __int16 *)Src + 14));
         v18 = (char *)v18 + *((unsigned __int16 *)Src + 14);
         *((_DWORD *)Src + 6) = 0;
       }
@@ -511,8 +511,8 @@ void  CGameHost::PushAsyncMsg(class CNet_Event & Src, unsigned char a3) {
       if ( !CPlayerManager::IsAI(i) && CPlayerManager::GetLocalPlayerId(v6) != i && ((1 << (i - 1)) & a3) != 0 )
       {
         v9 = 1039;
-        j__memcpy(v10, Src, sizeof(v10));
-        j__memcpy(v11, *((const void **)Src + 6), Src[14]);
+        memcpy(v10, Src, sizeof(v10));
+        memcpy(v11, *((const void **)Src + 6), Src[14]);
         v5 = Src[14] + 34;
         v4 = CPlayerManager::IP(i);
         v3 = CPlayerManager::PeerId(i);
@@ -667,7 +667,7 @@ bool  CGameHost::Run(void) {
                 CurrentTickCounter = IEventEngine::GetCurrentTickCounter(g_pEvnEngine);
                 CNet_Event::CNet_Event((CNet_Event *)v25, 0xFA7u, 0x23u, 0, 0, 0, 0, CurrentTickCounter);
                 v28 = 2;
-                j__memcpy(v20, v25, sizeof(v20));
+                memcpy(v20, v25, sizeof(v20));
                 v7 = (const char *)(*(int (__thiscall **)(_DWORD, _DWORD))(**((_DWORD **)this + 49) + 48))(
                                      *((_DWORD *)this + 49),
                                      *(_DWORD *)(g_pGameType + 4 * i + 188));
@@ -682,7 +682,7 @@ bool  CGameHost::Run(void) {
               CNet_Event::CNet_Event((CNet_Event *)Src, 0xFA7u, 0xFFFFFFDD, 0, 0, 0, 0, v4);
               v28 = 1;
               v21 = 1039;
-              j__memcpy(v22, Src, sizeof(v22));
+              memcpy(v22, Src, sizeof(v22));
               v5 = (const char *)(*(int (__thiscall **)(_DWORD, _DWORD))(**((_DWORD **)this + 49) + 48))(
                                    *((_DWORD *)this + 49),
                                    *(_DWORD *)(g_pGameType + 4 * i + 188));
@@ -941,10 +941,10 @@ bool  CGameHost::StartIniFileGame(wchar_t const * Source) {
   }
   i = j__mbstowcs(Dest, Str, v76 - Str);
   Dest[i] = 0;
-  j__memcpy(v96, Str, v76 - Str);
+  memcpy(v96, Str, v76 - Str);
   v54 = i;
   if ( i >= 0x100 )
-    j____report_rangecheckfailure();
+    report_rangecheckfailure();
   v96[v54] = 0;
   std::wstring::wstring(v88, Dest);
   LOBYTE(v101) = 4;
@@ -1775,7 +1775,7 @@ void  CGameHost::StormHost_NewPlayerMessage(unsigned int a1, std::wstring & a2, 
 
   v6 = a1;
   v3 = (const wchar_t *)std::wstring::c_str(a2);
-  j__wcscpy(Destination, v3);
+  wcscpy(Destination, v3);
   v7 = *(_BYTE *)(g_pGameType + 696);
   v8 = a3;
   return CGameHost::ClientJoins(Destination);
@@ -1857,7 +1857,7 @@ void  CGameHost::OnQuickMatchedHosted(void) {
   {
     PlayerName = (_Cnd_internal_imp_t *)CGameSettings::GetPlayerName((int)v9);
     v1 = (const wchar_t *)std::wstring::c_str(PlayerName);
-    j__wcsncpy(Destination, v1, 0x1Fu);
+    wcsncpy(Destination, v1, 0x1Fu);
     std::wstring::~wstring(v9);
     v11 = 0;
     v12 = 0;
@@ -1873,7 +1873,7 @@ void  CGameHost::OnQuickMatchedHosted(void) {
       v12 = -1;
       v4 = (_Cnd_internal_imp_t *)CGameType::GetPlayerName((void *)g_pGameType, v8, i);
       v2 = (const wchar_t *)std::wstring::c_str(v4);
-      j__wcsncpy(Destination, v2, 0x1Fu);
+      wcsncpy(Destination, v2, 0x1Fu);
       std::wstring::~wstring(v8);
       v11 = 0;
       CLanLobby::ConnectPlayer(Destination, i);
@@ -1938,7 +1938,7 @@ void  CGameHost::OnJoinedFromOnlineFlow(void) {
   Instance = StormManager::GetInstance();
   CurrentSession = (CDaoIndexFieldInfo *)StormManager::GetCurrentSession(Instance);
   v28 = &v17;
-  v27 = std::wstring::wstring((int)&unk_4030720);
+  v27 = std::wstring::wstring((int)&stru_4030720);
   CGameSettings::SetPlayerName(v17, v18);
   std::basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>::basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>(
     v24,
@@ -2253,7 +2253,7 @@ void  CGameHost::ProcessPlayerData(struct SLobbyPlayerData & a1) {
   *(_DWORD *)(g_pGameType + 4 * *(unsigned __int8 *)(a1 + 3) + 564) = *(_DWORD *)(a1 + 105);
   *(_DWORD *)(g_pGameType + 660) = *(unsigned __int16 *)(a1 + 109);
   CGameType::SetMultiPlayerGameID((CGameType *)g_pGameType, *(_DWORD *)(a1 + 111));
-  j__memcpy((void *)(g_pGameType + 784), (const void *)(a1 + 98), 7u);
+  memcpy((void *)(g_pGameType + 784), (const void *)(a1 + 98), 7u);
   CLanLobby::RedrawPlayerList();
   result = v5;
   if ( !v5 )
@@ -2312,7 +2312,7 @@ void  CGameHost::SendPlayerData(unsigned int a2) {
     v12 = -1;
     std::wstring::~wstring(v10);
     Src[96] = *(_BYTE *)(g_pGameType + 64);
-    j__memcpy(&Src[98], (const void *)(g_pGameType + 784), 7u);
+    memcpy(&Src[98], (const void *)(g_pGameType + 784), 7u);
     Src[97] = *(_BYTE *)(g_pGameType + 864);
     *(_DWORD *)&Src[115] = *(unsigned __int8 *)(g_pGameType + 560);
     *(_DWORD *)&Src[105] = *(_DWORD *)(g_pGameType + 4 * i + 564);
@@ -2371,7 +2371,7 @@ void  CGameHost::SendToAll(unsigned int a2, short * Src, unsigned int Size, shor
       v13 = a2;
       if ( Src )
       {
-        j__memcpy(v14, Src, Size);
+        memcpy(v14, Src, Size);
       }
       else if ( Size && BBSupportDbgReport(2, "Net\\GameHost.cpp", 4637, "!_uiDataLength0") == 1 )
       {
@@ -2381,7 +2381,7 @@ void  CGameHost::SendToAll(unsigned int a2, short * Src, unsigned int Size, shor
       {
         if ( !Src && BBSupportDbgReport(2, "Net\\GameHost.cpp", 4642, "_pvData0") == 1 )
           __debugbreak();
-        j__memcpy(&v14[Size], a5, a6);
+        memcpy(&v14[Size], a5, a6);
       }
       else if ( a6 && BBSupportDbgReport(2, "Net\\GameHost.cpp", 4647, "!_uiDataLength1") == 1 )
       {
@@ -2442,7 +2442,7 @@ void  CGameHost::SendToHost(unsigned int a2, short * Src, unsigned int Size, sho
   v13 = a2;
   if ( Src )
   {
-    j__memcpy(v14, Src, Size);
+    memcpy(v14, Src, Size);
   }
   else if ( Size && BBSupportDbgReport(2, "Net\\GameHost.cpp", 4687, "!_uiDataLength0") == 1 )
   {
@@ -2452,7 +2452,7 @@ void  CGameHost::SendToHost(unsigned int a2, short * Src, unsigned int Size, sho
   {
     if ( !Src && BBSupportDbgReport(2, "Net\\GameHost.cpp", 4692, "_pvData0") == 1 )
       __debugbreak();
-    j__memcpy(&v14[Size], a5, a6);
+    memcpy(&v14[Size], a5, a6);
   }
   else if ( a6 && BBSupportDbgReport(2, "Net\\GameHost.cpp", 4697, "!_uiDataLength1") == 1 )
   {
@@ -2717,7 +2717,7 @@ void  CGameHost::NotifyClients(unsigned int a2) {
             PlayerName = (_Cnd_internal_imp_t *)CGameType::GetPlayerName((void *)g_pGameType, v20, i);
             v24 = 2;
             v4 = (const wchar_t *)std::wstring::c_str(PlayerName);
-            v6 = j__wcslen(v4);
+            v6 = wcslen(v4);
             v8 = (_Cnd_internal_imp_t *)CGameType::GetPlayerName((void *)g_pGameType, v21, i);
             v5 = (const wchar_t *)std::wstring::c_str(v8);
             v7 = j__wcstombs(Dest, v5, v6);
@@ -2725,7 +2725,7 @@ void  CGameHost::NotifyClients(unsigned int a2) {
             v24 = -1;
             std::wstring::~wstring(v20);
             if ( v7 >= 0x21 )
-              j____report_rangecheckfailure();
+              report_rangecheckfailure();
             Dest[v7] = 0;
             CTextMsgHandler::AddTextMsg(2261, i + 1, 0, 1, Dest);
             v18 = 1;
@@ -2807,7 +2807,7 @@ bool  CGameHost::HostChoseMap(void * a2) {
   {
     PlayerName = (_Cnd_internal_imp_t *)CGameSettings::GetPlayerName((int)v12);
     v2 = (const wchar_t *)std::wstring::c_str(PlayerName);
-    j__wcsncpy(Destination, v2, 0x1Fu);
+    wcsncpy(Destination, v2, 0x1Fu);
     std::wstring::~wstring(v12);
     v14 = 0;
     v15 = 0;
@@ -2823,7 +2823,7 @@ bool  CGameHost::HostChoseMap(void * a2) {
       v15 = -1;
       v7 = (_Cnd_internal_imp_t *)CGameType::GetPlayerName((void *)g_pGameType, v11, i);
       v3 = (const wchar_t *)std::wstring::c_str(v7);
-      j__wcsncpy(Destination, v3, 0x1Fu);
+      wcsncpy(Destination, v3, 0x1Fu);
       std::wstring::~wstring(v11);
       v14 = 0;
       CLanLobby::ConnectPlayer(Destination, i);
@@ -3010,7 +3010,7 @@ bool  CGameHost::ClientReceivesGameInfo(void * Src) {
     return 1;
   v9 = (*(int (__thiscall **)(_DWORD *))(*this[49] + 36))(this[49]);
   MessageLength = CGameHost::GetMessageLength(this);
-  j__memcpy(v12, Src, MessageLength);
+  memcpy(v12, Src, MessageLength);
   v7 = std::wstring::wstring(v16, String);
   v18 = 0;
   MapFilePaths::GetFilePathForMapName(v17, v7);
@@ -3168,7 +3168,7 @@ bool  CGameHost::ClientJoins(void * Src) {
   int i; // [esp+14h] [ebp-74h]
   wchar_t v11[52]; // [esp+1Ch] [ebp-6Ch] BYREF
 
-  j__memcpy(v11, Src, 0x65u);
+  memcpy(v11, Src, 0x65u);
   v8 = *(_DWORD *)((char *)&v11[32] + 1);
   if ( CClientList::ContainsPeerId(*(CClientList **)(this + 16), *(unsigned int *)((char *)&v11[32] + 1)) )
     return 1;
@@ -3248,7 +3248,7 @@ bool  CGameHost::ClientReceivePlayerData(void * Src) {
   int v8; // [esp+B4h] [ebp-4h]
 
   MessageLength = CGameHost::GetMessageLength((void *)this);
-  j__memcpy(v6, Src, MessageLength);
+  memcpy(v6, Src, MessageLength);
   if ( v6[0] && BBSupportDbgReport(2, "Net\\GameHost.cpp", 2685, "data.m_iFinal == PLAYERDATA_UPDATE") == 1 )
     __debugbreak();
   CGameHost::ProcessPlayerData((int)v6);
@@ -3295,7 +3295,7 @@ bool  CGameHost::ClientReceivePlayerPing(void * Src) {
 
   v6 = this;
   MessageLength = CGameHost::GetMessageLength(this);
-  j__memcpy(&v4, Src, MessageLength);
+  memcpy(&v4, Src, MessageLength);
   *(_DWORD *)(g_pGameType + 4 * v4 + 624) = v5;
   CLanLobby::RedrawPlayerList();
   return 1;
@@ -3399,7 +3399,7 @@ bool  CGameHost::InitGameStruct(void * Src) {
   if ( Src )
   {
     v3 = CGameHost::GetMessageLength((void *)this);
-    j__memcpy(v6, Src, v3);
+    memcpy(v6, Src, v3);
     if ( v6[0] != 1
       && BBSupportDbgReport(2, (int)"Net\\GameHost.cpp", 3163, (int)"data.m_iFinal == PLAYERDATA_FINAL") == 1 )
     {
@@ -3458,7 +3458,7 @@ bool  CGameHost::ChatLine(void * Src) {
   wchar_t Source[96]; // [esp+44h] [ebp-C4h] BYREF
 
   MessageLength = CGameHost::GetMessageLength(this);
-  j__memcpy(String, Src, MessageLength);
+  memcpy(String, Src, MessageLength);
   if ( this[8] )
     CGameHost::SendToAll((int)this, 1036, String, 0x100u, 0, 0, 1u);
   CLanLobby::PrintChatLine(String, Source);
@@ -3587,9 +3587,9 @@ bool  CGameHost::SendMapToClient(void * a2) {
           v13 = *(_DWORD *)(this + 4 * i + 88);
           v8 = 768 * *(_DWORD *)(this + 4 * i + 88);
           if ( (unsigned int)(v8 + 768) <= *(_DWORD *)(g_pGameType + 856) )
-            j__memcpy(v14, (const void *)(v8 + *(_DWORD *)(this + 4 * i + 152)), 0x300u);
+            memcpy(v14, (const void *)(v8 + *(_DWORD *)(this + 4 * i + 152)), 0x300u);
           else
-            j__memcpy(v14, (const void *)(v8 + *(_DWORD *)(this + 4 * i + 152)), *(_DWORD *)(g_pGameType + 856) - v8);
+            memcpy(v14, (const void *)(v8 + *(_DWORD *)(this + 4 * i + 152)), *(_DWORD *)(g_pGameType + 856) - v8);
           (*(void (__thiscall **)(_DWORD, int, int, int, __int16 *, int, int, int))(**(_DWORD **)(this + 196) + 32))(
             *(_DWORD *)(this + 196),
             v5,
@@ -3656,11 +3656,11 @@ bool  CGameHost::ClientReceiveMap(void * Src) {
   if ( *((_BYTE *)this + 76) )
   {
     MessageLength = CGameHost::GetMessageLength(v32);
-    j__memcpy(&v33, Src, MessageLength);
+    memcpy(&v33, Src, MessageLength);
     if ( !v33[(_DWORD)v32[18]] )
     {
       Size = v33 == (char *)v32[21] - 1 ? *(_DWORD *)(g_pGameType + 856) % 0x300u : 768;
-      j__memcpy((char *)v32[17] + 768 * (_DWORD)v33, v34, Size);
+      memcpy((char *)v32[17] + 768 * (_DWORD)v33, v34, Size);
       v33[(_DWORD)v32[18]] = 1;
       v32[20] = (char *)v32[20] + 1;
       CTrace::Print("GameHost.cpp: Map block arrived. Got block %d, count is %d/%d!", v33, v32[20], v32[21]);
@@ -3732,7 +3732,7 @@ bool  CGameHost::ClientReceiveMap(void * Src) {
   else
   {
     v5 = CGameHost::GetMessageLength(v32);
-    j__memcpy(v35, Src, v5);
+    memcpy(v35, Src, v5);
     CTrace::Print("GameHost.cpp: Mapdata block %d without request got !!", v35[0]);
   }
   return 1;
@@ -4087,7 +4087,7 @@ bool  CGameHost::WaitingForGameConnect(void * Src) {
     {
       v12 = (*(int (__thiscall **)(_DWORD))(**((_DWORD **)v16 + 49) + 40))(*((_DWORD *)v16 + 49));
       MessageLength = CGameHost::GetMessageLength(v16);
-      j__memcpy(v18, Src, MessageLength);
+      memcpy(v18, Src, MessageLength);
       v17 = 1;
       if ( v19 != g_iFileVersionMS || v20 != g_iFileVersionLS )
         v17 = 0;
@@ -4268,7 +4268,7 @@ bool  CGameHost::RegClientConnect(void * a2) {
     IsWebGame = CGameType::IsWebGame(g_pGameType);
     PlayerName = (_Cnd_internal_imp_t *)CGameSettings::GetPlayerName((int)v13);
     v3 = (const wchar_t *)std::wstring::c_str(PlayerName);
-    j__wcsncpy(Destination, v3, 0x1Fu);
+    wcsncpy(Destination, v3, 0x1Fu);
     std::wstring::~wstring(v13);
     Destination[31] = 0;
     CGameHost::SendToHost(1013, Destination, 0x65u, 0, 0, 1);
@@ -4475,7 +4475,7 @@ bool  CGameHost::GameInGameMsgGot(void * Src) {
   unsigned __int16 MessageLength; // ax
 
   MessageLength = CGameHost::GetMessageLength(this);
-  j__memcpy(&unk_415AD98, Src, MessageLength);
+  memcpy(&unk_415AD98, Src, MessageLength);
   if ( *((_DWORD *)&unk_415AD98 + 6) )
   {
     if ( *((unsigned __int16 *)&unk_415AD98 + 14) >= 0x400u
@@ -4484,7 +4484,7 @@ bool  CGameHost::GameInGameMsgGot(void * Src) {
       __debugbreak();
     }
     *((_DWORD *)&unk_415AD98 + 6) = operator new[](*((unsigned __int16 *)&unk_415AD98 + 14));
-    j__memcpy(*((void **)&unk_415AD98 + 6), &unk_415ADB8, *((unsigned __int16 *)&unk_415AD98 + 14));
+    memcpy(*((void **)&unk_415AD98 + 6), &unk_415ADB8, *((unsigned __int16 *)&unk_415AD98 + 14));
   }
   if ( !CMsgStacks::IsInStack(this[5], (struct CNet_Event *)&unk_415AD98)
     || CMsgStacks::IsStackAI(this[5], *((unsigned __int8 *)&unk_415AD98 + 30) - 1) )
@@ -4504,7 +4504,7 @@ bool  CGameHost::GameAsyncMsgGot(void * Src) {
   int v5; // [esp+3Ch] [ebp-4h]
 
   MessageLength = CGameHost::GetMessageLength(this);
-  j__memcpy(&unk_415B290, Src, MessageLength);
+  memcpy(&unk_415B290, Src, MessageLength);
   if ( *((_DWORD *)&unk_415B290 + 6) )
   {
     if ( *((unsigned __int16 *)&unk_415B290 + 14) >= 0x400u
@@ -4544,7 +4544,7 @@ bool  CGameHost::AmIStillAlive(void * a2) {
   v6 = this;
   v7 = 1041;
   Src = CPlayerManager::GetLocalPlayerId() - 1;
-  j__memcpy(v8, &Src, 4u);
+  memcpy(v8, &Src, 4u);
   v2 = (*(int (__thiscall **)(_DWORD *, int, __int16 *, int, _DWORD, int))(*v6[49] + 36))(v6[49], 3105, &v7, 6, 0, 1);
   v3 = (*(int (__thiscall **)(_DWORD *, int))(*v6[49] + 40))(v6[49], v2);
   (*(void (__thiscall **)(_DWORD *, int))(*v6[49] + 32))(v6[49], v3);
@@ -4592,7 +4592,7 @@ bool  CGameHost::GameInGamePackedGot(void * a2) {
     if ( *((_WORD *)v8 + 14) )
     {
       *((_DWORD *)v8 + 6) = operator new[](*((unsigned __int16 *)v8 + 14));
-      j__memcpy(*((void **)v8 + 6), Src, *((unsigned __int16 *)v8 + 14));
+      memcpy(*((void **)v8 + 6), Src, *((unsigned __int16 *)v8 + 14));
       Src += *((unsigned __int16 *)v8 + 14);
     }
     if ( !CMsgStacks::IsStackAI((CMsgStacks *)this[5], (unsigned __int8)v8[30] - 1) )

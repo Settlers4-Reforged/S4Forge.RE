@@ -9,7 +9,7 @@ public:
      CCDDrive(void);
 
     // address=[0x147eb30]
-    virtual enum T_S4_CDROM_TYPE  GetCDType(char a2);
+    virtual enum T_S4_CDROM_TYPE  GetCDType(char driveName);
 
     // address=[0x147ec40]
     virtual char  GetCDDrive(enum T_S4_CDROM_TYPE a2);

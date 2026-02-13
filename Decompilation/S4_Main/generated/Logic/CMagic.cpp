@@ -18,8 +18,8 @@ void __cdecl CMagic::InitPlayerMagicData(int a1) {
     v4 = (CPlayerMagicData *)CPlayerGameData::MagicData(v1);
     CPlayerMagicData::Clear(v4);
     CPlayerMagicData::SetManaAmountChangedFlag(v4);
-    v3 = sub_146C560(a1);
-    if ( (unsigned __int8)sub_146C530(v3) )
+    v3 = CPlayerManager::Race(a1);
+    if ( (unsigned __int8)MagicIsValidRace(v3) )
     {
       for ( i = 0; i < 8; ++i )
       {
@@ -90,20 +90,20 @@ int __cdecl CMagic::CastSpell(int a1, int a2, int a3, int a4, int a5, int a6) {
       __debugbreak();
     return 0;
   }
-  if ( !(unsigned __int8)sub_146C500(a2) )
+  if ( !(unsigned __int8)MagicIsValidSpellCategory(a2) )
   {
     if ( BBSupportDbgReport(1, "Logic\\Magic.cpp", 3031, "CMagic::CastSpell(): Invalid spell category!") == 1 )
       __debugbreak();
     return 0;
   }
-  v31 = sub_146C560(a1);
+  v31 = CPlayerManager::Race(a1);
   if ( (a5 & 0x8000000) != 0 )
   {
     v31 = (int)(a5 & 0x7000000) >> 24;
     a5 = a5 & 0xEFFFFFF8 | 5;
     a6 = 0;
   }
-  if ( !(unsigned __int8)sub_146C530(v31) )
+  if ( !(unsigned __int8)MagicIsValidRace(v31) )
   {
     if ( BBSupportDbgReport(1, "Logic\\Magic.cpp", 3025, "CMagic::CastSpell(): Invalid race!") == 1 )
       __debugbreak();
@@ -173,7 +173,7 @@ LABEL_32:
     v14 = sub_146C8C0(v31, a2);
     v13 = sub_146C7D0(v31, a2);
     v8 = (_DWORD *)TStaticConfigIntArrayBase<8>::operator[](a2);
-    v9 = sub_146C4C0(*v8, 0, 30);
+    v9 = MagicMax(*v8, 0, 30);
     CMagicSpell::CMagicSpell((CMagicSpell *)v15, a1, v31, a3, a4, v9, v13, v14, a5, a6);
     v27 = CMagicSpell::CastSpell((CMagicSpell *)v15, v31, a2);
   }
@@ -213,7 +213,7 @@ int __cdecl CMagic::CheckManaForCastSpell(int a1, int a2, int a3) {
   {
     __debugbreak();
   }
-  if ( !(unsigned __int8)sub_146C500(a2)
+  if ( !(unsigned __int8)MagicIsValidSpellCategory(a2)
     && BBSupportDbgReport(2, "Logic\\Magic.cpp", 3053, "MagicIsValidSpellCategory(_iSpellCategory)") == 1 )
   {
     __debugbreak();
@@ -239,12 +239,12 @@ int __cdecl CMagic::GetSpellRange(int a1, int a2) {
   {
     __debugbreak();
   }
-  if ( !(unsigned __int8)sub_146C500(a2)
+  if ( !(unsigned __int8)MagicIsValidSpellCategory(a2)
     && BBSupportDbgReport(2, "Logic\\Magic.cpp", 3073, "MagicIsValidSpellCategory(_iSpellCategory)") == 1 )
   {
     __debugbreak();
   }
-  v3 = sub_146C560(a1);
+  v3 = CPlayerManager::Race(a1);
   return CMagic::MagicGetSpellRange(v3, a2);
 }
 
@@ -278,7 +278,7 @@ int __cdecl CMagic::GetCurrentSpellCategoryCost(int a1, int a2) {
   v5 = 1;
   if ( CPlayerManager::ValidUsedPlayerId(a1) )
   {
-    if ( (unsigned __int8)sub_146C500(a2) )
+    if ( (unsigned __int8)MagicIsValidSpellCategory(a2) )
     {
       v2 = CPlayerManager::PlayerGameData(a1);
       v3 = (CPlayerMagicData *)CPlayerGameData::MagicData(v2);
@@ -314,7 +314,7 @@ int __cdecl CMagic::GetCurrentSpellCategoryCounter(int a1, int a2) {
   v5 = 0;
   if ( CPlayerManager::ValidUsedPlayerId(a1) )
   {
-    if ( (unsigned __int8)sub_146C500(a2) )
+    if ( (unsigned __int8)MagicIsValidSpellCategory(a2) )
     {
       v2 = CPlayerManager::PlayerGameData(a1);
       v3 = (CPlayerMagicData *)CPlayerGameData::MagicData(v2);
@@ -342,79 +342,81 @@ int __cdecl CMagic::GetCurrentSpellCategoryCounter(int a1, int a2) {
 
 
 // address=[0x146b8a0]
-// Decompiled from int __cdecl CMagic::CalculatePossibleNumberOfCastSpell(int a1, int a2, int a3)
-int __cdecl CMagic::CalculatePossibleNumberOfCastSpell(int a1, int a2, int a3) {
+// Decompiled from int __cdecl CMagic::CalculatePossibleNumberOfCastSpell(int _uPlayerId, unsigned int _uSpellId, char a3)
+int __cdecl CMagic::CalculatePossibleNumberOfCastSpell(int _uPlayerId, int _uSpellId, int a3) {
   
-  type_info *v4; // eax
-  type_info *v5; // eax
+  char *v4; // eax
+  char *v5; // eax
   CPlayerMagicData *v6; // eax
-  type_info *v7; // eax
+  char *v7; // eax
   CPlayerMagicData *v8; // eax
   int v9; // [esp+0h] [ebp-3Ch]
   int v10; // [esp+Ch] [ebp-30h]
-  int v11; // [esp+18h] [ebp-24h]
+  unsigned int v11; // [esp+18h] [ebp-24h]
   int v12; // [esp+1Ch] [ebp-20h]
-  int i; // [esp+20h] [ebp-1Ch]
-  int j; // [esp+28h] [ebp-14h]
+  int iActualCost; // [esp+20h] [ebp-1Ch]
+  int i; // [esp+28h] [ebp-14h]
   CPlayerMagicData *v15; // [esp+2Ch] [ebp-10h]
-  int v16; // [esp+30h] [ebp-Ch]
-  int v17; // [esp+34h] [ebp-8h]
-  int v18; // [esp+38h] [ebp-4h]
+  int iManaAmount; // [esp+30h] [ebp-Ch]
+  int categoryCost; // [esp+34h] [ebp-8h]
+  int iMaxCastNumber; // [esp+38h] [ebp-4h]
 
-  if ( !CPlayerManager::ValidUsedPlayerId(a1) )
+  if ( !CPlayerManager::ValidUsedPlayerId(_uPlayerId) )
     return 0;
-  v11 = sub_146C560(a1);
-  if ( !(unsigned __int8)sub_146C530(v11) || !(unsigned __int8)sub_146C500(a2) )
+  v11 = CPlayerManager::Race(_uPlayerId);
+  if ( !MagicIsValidRace(v11) || !MagicIsValidSpellCategory(_uSpellId) )
     return 0;
   if ( (a3 & 1) != 0 )
     return 99;
-  v4 = CPlayerManager::PlayerGameData(a1);
-  v15 = (CPlayerMagicData *)CPlayerGameData::MagicData(v4);
+  v4 = CPlayerManager::PlayerGameData(_uPlayerId);
+  v15 = (CPlayerMagicData *)CPlayerGameData::MagicData((type_info *)v4);
   if ( CPlayerMagicData::ManaAmountChanged(v15) )
   {
     CPlayerMagicData::ClearManaAmountChangedFlag(v15);
     CPlayerMagicData::MarkMaxSpellCastNumbersAsInvalid(v15);
   }
-  v18 = CPlayerMagicData::MaxSpellCastNumber(v15, a2);
-  if ( v18 >= 0 )
-    return v18;
+  iMaxCastNumber = CPlayerMagicData::MaxSpellCastNumber(v15, _uSpellId);
+  if ( iMaxCastNumber >= 0 )
+    return iMaxCastNumber;
   if ( (a3 & 2) != 0 )
     v12 = 2;
   else
     v12 = 0;
   v10 = sub_146C620(v12);
-  v9 = sub_146C670(v11, a2);
-  v18 = 0;
-  v5 = CPlayerManager::PlayerGameData(a1);
-  v6 = (CPlayerMagicData *)CPlayerGameData::MagicData(v5);
-  v16 = CPlayerMagicData::ManaAmount(v6);
-  v7 = CPlayerManager::PlayerGameData(a1);
-  v8 = (CPlayerMagicData *)CPlayerGameData::MagicData(v7);
-  v17 = CPlayerMagicData::SpellCategoryCost(v8, a2);
+  v9 = sub_146C670(v11, _uSpellId);
+  iMaxCastNumber = 0;
+  v5 = CPlayerManager::PlayerGameData(_uPlayerId);
+  v6 = (CPlayerMagicData *)CPlayerGameData::MagicData((type_info *)v5);
+  iManaAmount = CPlayerMagicData::ManaAmount(v6);
+  v7 = CPlayerManager::PlayerGameData(_uPlayerId);
+  v8 = (CPlayerMagicData *)CPlayerGameData::MagicData((type_info *)v7);
+  categoryCost = CPlayerMagicData::SpellCategoryCost(v8, _uSpellId);
   if ( v10 <= 0 )
   {
-    for ( i = sub_146C710(v17, v12); v18 < 99 && v16 >= i; i = sub_146C710(v17, v12) )
+    for ( iActualCost = sub_146C710(categoryCost, v12);
+          iMaxCastNumber < 99 && iManaAmount >= iActualCost;
+          iActualCost = sub_146C710(categoryCost, v12) )
     {
-      if ( i <= 0 && BBSupportDbgReport(2, "Logic\\Magic.cpp", 3308, "iActualCosts > 0") == 1 )
+      if ( iActualCost <= 0 && BBSupportDbgReport(2, "Logic\\Magic.cpp", 3308, "iActualCosts > 0") == 1 )
         __debugbreak();
-      v16 -= i;
-      ++v18;
-      v17 = sub_146C6B0(v17, 0, v9);
+      iManaAmount -= iActualCost;
+      ++iMaxCastNumber;
+      categoryCost = sub_146C6B0(categoryCost, 0, v9);
     }
   }
   else
   {
-    for ( j = sub_146C710(v17, a3); v18 < 99 && v16 >= j; j = sub_146C710(v17, v12) )
+    for ( i = sub_146C710(categoryCost, a3); iMaxCastNumber < 99 && iManaAmount >= i; i = sub_146C710(categoryCost, v12) )
     {
-      if ( j <= 0 && BBSupportDbgReport(2, "Logic\\Magic.cpp", 3293, "iActualCosts > 0") == 1 )
+      if ( i <= 0 && BBSupportDbgReport(2, "Logic\\Magic.cpp", 3293, "iActualCosts > 0") == 1 )
         __debugbreak();
-      v16 -= j;
-      ++v18;
-      v17 = sub_146C6B0(v17, v10, v9);
+      iManaAmount -= i;
+      ++iMaxCastNumber;
+      categoryCost = sub_146C6B0(categoryCost, v10, v9);
     }
   }
-  CPlayerMagicData::SetMaxSpellCastNumber(v15, a2, v18);
-  return v18;
+  CPlayerMagicData::SetMaxSpellCastNumber(v15, _uSpellId, iMaxCastNumber);
+  return iMaxCastNumber;
 }
 
 
@@ -426,7 +428,7 @@ void __cdecl CMagic::GetConvertGoodInfo(int a1, int & a2, int & a3) {
 
   if ( CPlayerManager::ValidUsedPlayerId(a1) )
   {
-    v4 = sub_146C560(a1);
+    v4 = CPlayerManager::Race(a1);
     return sub_146C750(v4, a2, a3);
   }
   else
@@ -454,7 +456,7 @@ void __cdecl CMagic::IncreaseManaByDonation(int a1) {
     __debugbreak();
   }
   v1 = CStaticConfigVarInt::operator int(&unk_3F2011C);
-  v5 = sub_146C4C0(v1, 1, 99);
+  v5 = MagicMax(v1, 1, 99);
   CMagic::IncreaseMana(a1, v5);
   v2 = CPlayerManager::PlayerGameData(a1);
   v4 = (CPlayerMagicData *)CPlayerGameData::MagicData(v2);
@@ -479,7 +481,7 @@ void __cdecl CMagic::IncreaseManaByBigTemple(int a1) {
     __debugbreak();
   }
   v1 = CStaticConfigVarInt::operator int(&unk_3F20128);
-  v5 = sub_146C4C0(v1, 0, 999);
+  v5 = MagicMax(v1, 0, 999);
   CMagic::IncreaseMana(a1, v5);
   v2 = CPlayerManager::PlayerGameData(a1);
   v4 = (CPlayerMagicData *)CPlayerGameData::MagicData(v2);
@@ -519,7 +521,7 @@ void __cdecl CMagic::DecreaseManaAfterWarmachineShot(int a1) {
   int v2; // [esp+0h] [ebp-4h]
 
   v1 = CStaticConfigVarInt::operator int(&unk_3F200F8);
-  v2 = sub_146C4C0(v1, 1, 999);
+  v2 = MagicMax(v1, 1, 999);
   CMagic::DecreaseMana(a1, v2);
 }
 
@@ -715,12 +717,12 @@ int __cdecl CMagic::MagicGetSpellRange(int a1, int a2) {
   
   int v3; // eax
 
-  if ( !(unsigned __int8)sub_146C530(a1)
+  if ( !(unsigned __int8)MagicIsValidRace(a1)
     && BBSupportDbgReport(2, "Logic\\Magic.cpp", 2811, "MagicIsValidRace(_iRace)") == 1 )
   {
     __debugbreak();
   }
-  if ( !(unsigned __int8)sub_146C500(a2)
+  if ( !(unsigned __int8)MagicIsValidSpellCategory(a2)
     && BBSupportDbgReport(2, "Logic\\Magic.cpp", 2812, "MagicIsValidSpellCategory(_iSpellCategory)") == 1 )
   {
     __debugbreak();
@@ -728,7 +730,7 @@ int __cdecl CMagic::MagicGetSpellRange(int a1, int a2) {
   if ( a2 == 4 && a1 == 2 || a2 == 7 && a1 == 4 )
     return 2048;
   v3 = CStaticConfigVarInt::operator int(&unk_3F20134);
-  return sub_146C4C0(v3, 5, 50);
+  return MagicMax(v3, 5, 50);
 }
 
 
@@ -755,13 +757,13 @@ void __cdecl CMagic::ExecuteCastSpell(unsigned int a1, unsigned int a2, unsigned
   v8 = HIWORD(a3);
   if ( CPlayerManager::ValidUsedPlayerId((unsigned __int8)a2) )
   {
-    v13 = sub_146C560(v11);
-    if ( !(unsigned __int8)sub_146C530(v13)
+    v13 = CPlayerManager::Race(v11);
+    if ( !(unsigned __int8)MagicIsValidRace(v13)
       && BBSupportDbgReport(2, "Logic\\Magic.cpp", 3431, "MagicIsValidRace(iRace)") == 1 )
     {
       __debugbreak();
     }
-    if ( !(unsigned __int8)sub_146C500(v12)
+    if ( !(unsigned __int8)MagicIsValidSpellCategory(v12)
       && BBSupportDbgReport(2, "Logic\\Magic.cpp", 3432, "MagicIsValidSpellCategory(iSpellCategory)") == 1 )
     {
       __debugbreak();
@@ -774,7 +776,7 @@ void __cdecl CMagic::ExecuteCastSpell(unsigned int a1, unsigned int a2, unsigned
     v6 = sub_146C8C0(v13, v12);
     v5 = sub_146C7D0(v13, v12);
     v3 = (_DWORD *)TStaticConfigIntArrayBase<8>::operator[](v12);
-    v4 = sub_146C4C0(*v3, 0, 30);
+    v4 = MagicMax(*v3, 0, 30);
     CMagicSpell::CMagicSpell((CMagicSpell *)v7, v11, v13, v9, v10, v4, v5, v6, v8, a1);
     CMagicSpell::CastSpell((CMagicSpell *)v7, v13, v12);
     CMagicSpell::ShowSpellEffect(v13, v12, v9, v10);

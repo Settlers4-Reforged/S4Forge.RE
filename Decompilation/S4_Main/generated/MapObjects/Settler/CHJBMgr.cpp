@@ -175,7 +175,7 @@ bool  CHJBMgr::CheckHJBDatFile(void) {
   
   wchar_t *v2; // eax
   _DWORD v3[11]; // [esp+0h] [ebp-CCh] BYREF
-  unsigned int v4; // [esp+2Ch] [ebp-A0h]
+  int v4; // [esp+2Ch] [ebp-A0h]
   void *v5; // [esp+30h] [ebp-9Ch]
   void *Buffer; // [esp+34h] [ebp-98h]
   char v7; // [esp+39h] [ebp-93h]
@@ -199,7 +199,7 @@ bool  CHJBMgr::CheckHJBDatFile(void) {
   v3[5] = -1293418438;
   std::wstring::wstring(v11);
   v13 = 0;
-  (*(void (__thiscall **)(void *, _BYTE *, _DWORD *, int))(*(_DWORD *)g_pCDDrive + 8))(g_pCDDrive, v11, v12, 1048592);
+  g_pCDDrive->GetCDPath(g_pCDDrive, v11, (char *)v12, 1048592);
   if ( std::wstring::length(v11) )
   {
     v9 = 1;
@@ -213,8 +213,8 @@ bool  CHJBMgr::CheckHJBDatFile(void) {
     CFile::Open(v2, 6, "d:\\projects\\tshe\\purplelamp\\s4\\source\\baselib\\include\\File.h", 0);
     CFile::Seek(0x400000, 0, (int)"d:\\projects\\tshe\\purplelamp\\s4\\source\\baselib\\include\\File.h", 0);
     CFile::Read(Buffer, 1u, 0x4000u, (int)"d:\\projects\\tshe\\purplelamp\\s4\\source\\baselib\\include\\File.h", 0);
-    CFile::Close((CFile *)v10, "d:\\projects\\tshe\\purplelamp\\s4\\source\\baselib\\include\\File.h", 0);
-    v4 = Adler32(Buffer, 0x4000u, 1u);
+    CFile::Close((CFile *)v10, UNUSED_ARG(), UNUSED_ARG());
+    v4 = Adler32((unsigned __int8 *)Buffer, 0x4000u, 1u);
     v3[10] = v4;
     if ( v4 != -1293418438 )
       v9 = 0;

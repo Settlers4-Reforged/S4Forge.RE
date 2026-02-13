@@ -1241,7 +1241,7 @@ void __cdecl Bugreport::LaunchAutoreport(bool a1, std::wstring const & a2) {
   if ( (unsigned int)std::wstring::size(a2) >= 0x104 )
     j___wassert(L"commandLineArgs.size() < MAX_PATH", L"Bugreport.cpp", 0x41u);
   v2 = std::wstring::c_str((_Cnd_internal_imp_t *)a2);
-  j___snwprintf((char *const)CommandLine, 0x104u, L"%s", v2);
+  snwprintf((char *const)CommandLine, 0x104u, L"%s", v2);
   result = CreateProcessW(L"Exe\\Autoreport.exe", CommandLine, 0, 0, 0, 0, 0, 0, &StartupInfo, &ProcessInformation);
   if ( result )
   {
@@ -1593,15 +1593,15 @@ bool __cdecl ExistsExtractCommand(void) {
     *(char **)g_pArgv);
   LOBYTE(v21) = 1;
   v4 = (const wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)v18);
-  j__wcsncpy(Src, v4, 0x7Fu);
+  wcsncpy(Src, v4, 0x7Fu);
   j__wcsupr(Src);
   if ( wcsstr(Src, (wchar_t *)L"EXTRACT:\"") )
   {
-    v5 = j__wcslen(Src);
-    j__memcpy(Src, &Src[9], v5 - 9);
-    v9 = 2 * j__wcslen(Src) - 20;
+    v5 = wcslen(Src);
+    memcpy(Src, &Src[9], v5 - 9);
+    v9 = 2 * wcslen(Src) - 20;
     if ( v9 >= 0x100 )
-      j____report_rangecheckfailure();
+      report_rangecheckfailure();
     *(wchar_t *)((char *)Src + v9) = 0;
     v14 = 1;
     ElementCount = 0;
@@ -1709,36 +1709,34 @@ void __cdecl WriteIniFile(void) {
 
 
 // address=[0x1359be0]
-// Decompiled from int ShowFingerprint()
+// Decompiled from void __cdecl ShowFingerprint()
 void __cdecl ShowFingerprint(void) {
   
-  int v1; // [esp+0h] [ebp-F8h] BYREF
-  int v2; // [esp+10h] [ebp-E8h]
-  signed int v3; // [esp+14h] [ebp-E4h]
-  size_t ElementSize; // [esp+18h] [ebp-E0h]
-  _BYTE v5[72]; // [esp+1Ch] [ebp-DCh] BYREF
+  int v0; // [esp+0h] [ebp-F8h] BYREF
+  int v1; // [esp+10h] [ebp-E8h]
+  signed int iSize; // [esp+14h] [ebp-E4h] MAPDST
+  FILE *sVersionFile[18]; // [esp+1Ch] [ebp-DCh] BYREF
   CHAR Text[128]; // [esp+64h] [ebp-94h] BYREF
-  int *v7; // [esp+E8h] [ebp-10h]
-  int v8; // [esp+F4h] [ebp-4h]
+  int *v6; // [esp+E8h] [ebp-10h]
+  int exceptionBlock; // [esp+F4h] [ebp-4h]
 
-  v7 = &v1;
-  CFile::CFile((CFile *)v5);
-  v8 = 1;
-  CFile::Open((wchar_t *)L"Version.txt", 5, "d:\\projects\\tshe\\purplelamp\\s4\\source\\baselib\\include\\File.h", 0);
-  v3 = CFile::Size(v5);
-  ElementSize = v3;
-  if ( v3 >= 128 )
+  v6 = &v0;
+  CFile::CFile((CFile *)sVersionFile);
+  exceptionBlock = 1;
+  CFile::Open(sVersionFile, (wchar_t *)L"Version.txt", 5, UNUSED_ARG(), UNUSED_ARG());
+  iSize = CFile::Size(sVersionFile);
+  if ( iSize >= 128 )
   {
-    v2 = BBSupportDbgReport(2, "FrameWork.cpp", 770, "iSize < MAX_FINGERPRINT_LENGTH");
-    if ( v2 == 1 )
+    v1 = BBSupportDbgReport(2, "FrameWork.cpp", 770, "iSize < MAX_FINGERPRINT_LENGTH");
+    if ( v1 == 1 )
       __debugbreak();
   }
   memset(Text, 0, sizeof(Text));
-  CFile::Read(Text, ElementSize, 1u, (int)"d:\\projects\\tshe\\purplelamp\\s4\\source\\baselib\\include\\File.h", 0);
-  CFile::Close((CFile *)v5, "d:\\projects\\tshe\\purplelamp\\s4\\source\\baselib\\include\\File.h", 0);
-  MessageBoxA(g_hWnd, Text, "S4", 0x30u);
-  v8 = -1;
-  return CFile::~CFile();
+  CFile::Read(sVersionFile, Text, iSize, 1u, UNUSED_ARG(), UNUSED_ARG());
+  CFile::Close((CFile *)sVersionFile, UNUSED_ARG(), UNUSED_ARG());
+  MessageBoxA(g_hWnd, Text, "S4", MB_ICONEXCLAMATION);
+  exceptionBlock = -1;
+  CFile::~CFile();
 }
 
 
@@ -4841,39 +4839,39 @@ void __cdecl InitGuiDlgAOSplash(void) {
 
   if ( !g_bGuiSplashInitDone )
   {
-    CSoundManager::StopMusic(g_pSoundManager);
-    IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 8, 129, 0);
+    CSoundManager::StopMusic((CSoundManager *)g_pSoundManager);
+    IGuiEngine::SetControlVisibility(g_pGUIEngine, 8, 129, 0);
     if ( g_pStringEngine )
     {
       switch ( g_iAOSplashType )
       {
         case -1:
-          IGuiEngine::SetImages((void *)g_pGUIEngine, 8, 127, 146, 0);
+          IGuiEngine::SetImages(g_pGUIEngine, 8, 127, 146, 0);
           v4 = g_pStringEngine->GetString(g_pStringEngine, 508);
           CScrollMultiline::SetText(s_cAOSplashScrolltext, (int)v4);
           break;
         case 1:
-          IGuiEngine::SetImages((void *)g_pGUIEngine, 8, 127, 143, 0);
+          IGuiEngine::SetImages(g_pGUIEngine, 8, 127, 143, 0);
           v0 = g_pStringEngine->GetString(g_pStringEngine, 503);
           CScrollMultiline::SetText(s_cAOSplashScrolltext, (int)v0);
           break;
         case 3:
-          IGuiEngine::SetImages((void *)g_pGUIEngine, 8, 127, 144, 0);
+          IGuiEngine::SetImages(g_pGUIEngine, 8, 127, 144, 0);
           v1 = g_pStringEngine->GetString(g_pStringEngine, 504);
           CScrollMultiline::SetText(s_cAOSplashScrolltext, (int)v1);
           break;
         case 6:
-          IGuiEngine::SetImages((void *)g_pGUIEngine, 8, 127, 145, 0);
+          IGuiEngine::SetImages(g_pGUIEngine, 8, 127, 145, 0);
           v2 = g_pStringEngine->GetString(g_pStringEngine, 505);
           CScrollMultiline::SetText(s_cAOSplashScrolltext, (int)v2);
           break;
         case 8:
-          IGuiEngine::SetImages((void *)g_pGUIEngine, 8, 127, 146, 0);
+          IGuiEngine::SetImages(g_pGUIEngine, 8, 127, 146, 0);
           v3 = g_pStringEngine->GetString(g_pStringEngine, 506);
           CScrollMultiline::SetText(s_cAOSplashScrolltext, (int)v3);
           break;
         case 9:
-          IGuiEngine::SetImages((void *)g_pGUIEngine, 8, 127, 147, 0);
+          IGuiEngine::SetImages(g_pGUIEngine, 8, 127, 147, 0);
           v5 = g_pStringEngine->GetString(g_pStringEngine, 507);
           CScrollMultiline::SetText(s_cAOSplashScrolltext, (int)v5);
           break;
@@ -4906,8 +4904,8 @@ void __cdecl InitGuiDlgAOSplash(void) {
       }
       if ( v11 )
       {
-        v6 = (const char *)std::wstring::c_str((_Cnd_internal_imp_t *)&unk_3ECF010);
-        j___snwprintf(Buffer, 0xFFu, v6, v11);
+        v6 = (const char *)std::wstring::c_str((_Cnd_internal_imp_t *)&stru_3ECF010);
+        snwprintf(Buffer, 0xFFu, v6, v11);
       }
       else
       {
@@ -4915,11 +4913,7 @@ void __cdecl InitGuiDlgAOSplash(void) {
       }
       std::wstring::wstring(v12);
       v14 = 0;
-      if ( (*(unsigned __int8 (__thiscall **)(void *, char *, char *, int))(*(_DWORD *)g_pCDDrive + 8))(
-             g_pCDDrive,
-             v12,
-             Buffer,
-             3145744) )
+      if ( g_pCDDrive->GetCDPath(g_pCDDrive, v12, Buffer, 3145744) )
       {
         v8 = (const wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)v12);
         if ( !CSoundManager::PlaySoundFile((CSoundManager *)g_pSoundManager, v8, 100, 64) )
@@ -4935,8 +4929,8 @@ void __cdecl InitGuiDlgAOSplash(void) {
       {
         v7 = g_pStringEngine->GetString(g_pStringEngine, 388);
         std::string::operator=(&g_iMessageBoxStringID, v7);
-        IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 10);
-        IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 20, GuiDlgMainMessageBoxProc);
+        IGuiEngine::CloseDialog(g_pGUIEngine, 10);
+        IGuiEngine::OpenDialog(g_pGUIEngine, 20, (bool (__cdecl *)(int, int, int))GuiDlgMainMessageBoxProc);
         v14 = -1;
         std::wstring::~wstring(v12);
       }
@@ -11168,19 +11162,19 @@ void __cdecl UpdateGuiDlgGoodDistribution(void) {
   int GuiHouseButtonID; // eax
   char *GuiHouseString; // eax
   int i; // [esp+4h] [ebp-8h]
-  bool bSupplyBuildingsVisible; // [esp+Bh] [ebp-1h]
+  bool v3; // [esp+Bh] [ebp-1h]
 
   if ( g_pGUIEngine )
   {
-    bSupplyBuildingsVisible = (signed int)g_cGoodDistributionInfo.m_uSupplyBuildings > 0;
+    v3 = (signed int)g_cGoodDistributionInfo.m_uSupplyBuildings > 0;
     IGuiEngine::EnableControl(g_pGUIEngine, 26, 776, (signed int)g_cGoodDistributionInfo.m_uSupplyBuildings > 0);
-    IGuiEngine::EnableControl(g_pGUIEngine, 26, 777, bSupplyBuildingsVisible);
-    IGuiEngine::EnableControl(g_pGUIEngine, 26, 2880, bSupplyBuildingsVisible);
-    IGuiEngine::EnableControl(g_pGUIEngine, 26, 778, bSupplyBuildingsVisible);
-    IGuiEngine::EnableControl(g_pGUIEngine, 26, 779, bSupplyBuildingsVisible);
-    IGuiEngine::EnableControl(g_pGUIEngine, 26, 780, bSupplyBuildingsVisible);
-    IGuiEngine::EnableControl(g_pGUIEngine, 26, 781, bSupplyBuildingsVisible);
-    IGuiEngine::EnableControl(g_pGUIEngine, 26, 782, bSupplyBuildingsVisible);
+    IGuiEngine::EnableControl(g_pGUIEngine, 26, 777, v3);
+    IGuiEngine::EnableControl(g_pGUIEngine, 26, 2880, v3);
+    IGuiEngine::EnableControl(g_pGUIEngine, 26, 778, v3);
+    IGuiEngine::EnableControl(g_pGUIEngine, 26, 779, v3);
+    IGuiEngine::EnableControl(g_pGUIEngine, 26, 780, v3);
+    IGuiEngine::EnableControl(g_pGUIEngine, 26, 781, v3);
+    IGuiEngine::EnableControl(g_pGUIEngine, 26, 782, v3);
     for ( i = 0; i < 5; ++i )
     {
       if ( i >= (int)g_cGoodDistributionInfo.m_uSupplyBuildings )
@@ -13072,7 +13066,7 @@ void __cdecl GuiDlgLanLobbyConnectUpdate(void) {
   v6 = 0;
   if ( dword_403071C )
   {
-    v0 = (const wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)&unk_4030720);
+    v0 = (const wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)&stru_4030720);
     j__wcstombs(Dest, v0, 0x100u);
     IGuiEngine::SetTypeAsText((IGuiEngine *)g_pGUIEngine, 2, 2312);
     Instance = UPlay::UPlayManager::GetInstance();
@@ -13159,7 +13153,7 @@ bool __cdecl GuiDlgLanLobbyConnectMenuProc(int a1, int a2, int a3) {
         {
           j__mbstowcs(Dest, Source, 0x100u);
           Dest[31] = 0;
-          std::wstring::operator=(&unk_4030720, Dest);
+          std::wstring::operator=(&stru_4030720, Dest);
           PlayGuiSound(2);
         }
       }
@@ -13293,7 +13287,7 @@ void __cdecl InitGuiDlgLoadSave(void) {
     IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 33, 927, 0);
     IGuiEngine::SetText((void *)g_pGUIEngine, 33, 914, (char *)&byte_368D8B0);
     if ( !byte_4030398 )
-      std::wstring::operator=(&unk_403037C, (wchar_t *)&word_368D8B4);
+      std::wstring::operator=(&stru_403037C, (wchar_t *)&word_368D8B4);
     IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 33, 912, 0);
     IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 33, 913, 0);
     dword_3ECFA2C = 0;
@@ -13306,7 +13300,7 @@ void __cdecl InitGuiDlgLoadSave(void) {
       v5 = 0;
       std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(
         v4,
-        &unk_403037C);
+        &stru_403037C);
       LOBYTE(v5) = 1;
       v0 = (char *)std::string::c_str(v4);
       IGuiEngine::SetText((void *)g_pGUIEngine, 33, 914, v0);
@@ -13367,7 +13361,7 @@ void __cdecl GuiDlgLoadSaveNameSelected(int a1) {
   v2 = (char *)std::string::c_str(v6);
   IGuiEngine::SetText((void *)g_pGUIEngine, 33, 914, v2);
   v3 = (wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)(*(_DWORD *)(dword_4030374 + 4 * v4) + 28));
-  std::wstring::operator=(&unk_403037C, v3);
+  std::wstring::operator=(&stru_403037C, v3);
   IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 33, 912, 1);
   LOBYTE(v7) = 0;
   std::string::~string(v6);
@@ -13481,7 +13475,7 @@ bool __cdecl GuiDlgLoadSaveProc(int a1, int a2, int a3) {
         else
         {
           IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 33, 912, 0);
-          std::wstring::operator=(&unk_403037C, (wchar_t *)&word_368D8C4);
+          std::wstring::operator=(&stru_403037C, (wchar_t *)&word_368D8C4);
         }
       }
       break;
@@ -13490,8 +13484,8 @@ bool __cdecl GuiDlgLoadSaveProc(int a1, int a2, int a3) {
       {
         case 912:
         case 914:
-          if ( (unsigned __int8)std::operator!=<wchar_t>(&unk_403037C, word_368D8B8)
-            && (unsigned __int8)std::operator!=<wchar_t>(&unk_403037C, word_368D8BC) )
+          if ( (unsigned __int8)std::operator!=<wchar_t>(&stru_403037C, word_368D8B8)
+            && (unsigned __int8)std::operator!=<wchar_t>(&stru_403037C, word_368D8BC) )
           {
             if ( byte_4030398 )
             {
@@ -13510,7 +13504,7 @@ bool __cdecl GuiDlgLoadSaveProc(int a1, int a2, int a3) {
           PlayGuiSound(2);
           break;
         case 913:
-          if ( (unsigned __int8)std::operator!=<wchar_t>(&unk_403037C, word_368D8C0) )
+          if ( (unsigned __int8)std::operator!=<wchar_t>(&stru_403037C, word_368D8C0) )
           {
             v6 = CEvn_Event::CEvn_Event(&v10, 0x2Au, 0, 0, 0);
             v13 = 1;
@@ -16266,7 +16260,7 @@ void __cdecl GuiDlgMainGameSettingstUpdate(void) {
   IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, dword_403089C, 2142, byte_403088C);
   if ( !byte_4030852 )
     IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, dword_403089C, 2141, byte_4030854 != 1);
-  v0 = (const wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)&unk_40307CC);
+  v0 = (const wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)&stru_40307CC);
   j__wcstombs(Destination, v0, 0x100u);
   IGuiEngine::SetText((void *)g_pGUIEngine, dword_403089C, 2145, Destination);
   std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v14);
@@ -17805,7 +17799,7 @@ void __cdecl GuiDlgMapSettingsUpdate(void) {
   char *v10; // eax
   char Dest[256]; // [esp+14h] [ebp-104h] BYREF
 
-  v0 = (const wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)&unk_4031960);
+  v0 = (const wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)&stru_4031960);
   j__wcstombs(Dest, v0, 0x100u);
   IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 2452, Dest);
   switch ( dword_403191C )
@@ -18112,7 +18106,7 @@ bool __cdecl GuiDlgMainMapSettingsProc(int a1, int a2, int a3) {
         if ( Source )
         {
           j__mbstowcs(Dest, Source, 0x100u);
-          std::wstring::operator=(&unk_4031960, Dest);
+          std::wstring::operator=(&stru_4031960, Dest);
           PlayGuiSound(2);
         }
       }
@@ -18188,11 +18182,11 @@ bool __cdecl GuiDlgMainMapSettingsProc(int a1, int a2, int a3) {
           byte_403199C = g_uiExtrasAllowed;
           if ( g_uiExtrasAllowed && byte_4031914 )
           {
-            v18 = std::operator+<wchar_t>((int)v37, (wchar_t *)L"(Troja) ", (int)&unk_4031960);
+            v18 = std::operator+<wchar_t>((int)v37, (wchar_t *)L"(Troja) ", (int)&stru_4031960);
             std::wstring::operator=(v18);
             std::wstring::~wstring(v37);
           }
-          if ( (unsigned int)std::wstring::length(&unk_4031960) >= 0x1F )
+          if ( (unsigned int)std::wstring::length(&stru_4031960) >= 0x1F )
             std::wstring::resize(32, 0);
           PlayGuiSound(2);
           v17 = CEvn_Event::CEvn_Event(&v51, 0x40u, 0, 0, 0);
@@ -19434,18 +19428,18 @@ void __cdecl InitGuiDlgMainStatistic(void) {
     if ( CEndStatistic::GetMapName((CEndStatistic *)&g_cEndStatistic) )
     {
       MapName = (const wchar_t *)CEndStatistic::GetMapName((CEndStatistic *)&g_cEndStatistic);
-      j__wcscpy(Destination, MapName);
+      wcscpy(Destination, MapName);
       String = (wchar_t *)wcschr(Destination, 92);
       if ( String )
       {
         Stringa = String + 1;
         v17 = wcschr(Stringa, 46);
         if ( !v17 )
-          v17 = (int)&Stringa[j__wcslen(Stringa)];
-        j__wcsncpy(Destination, Stringa, (v17 - (int)Stringa) >> 1);
+          v17 = (int)&Stringa[wcslen(Stringa)];
+        wcsncpy(Destination, Stringa, (v17 - (int)Stringa) >> 1);
         v15 = (v17 - (int)Stringa) >> 1;
         if ( v15 >= 1024 )
-          j____report_rangecheckfailure();
+          report_rangecheckfailure();
         Destination[v15] = 0;
       }
     }
@@ -19728,7 +19722,7 @@ bool __cdecl GuiDlgMainStatisticProc(int a1, int a2, int a3) {
 // Decompiled from wchar_t *__cdecl wcschr(wchar_t *Str, wchar_t a2)
 wchar_t * __cdecl wcschr(wchar_t * Str, wchar_t a2) {
   
-  return j__wcschr(Str, a2);
+  return wcschr(Str, a2);
 }
 
 
@@ -19954,18 +19948,18 @@ void __cdecl InitGuiDlgMainStatisticEcoDisplayMode(void) {
     if ( CEndStatistic::GetMapName((CEndStatistic *)&g_cEndStatistic) )
     {
       MapName = (const wchar_t *)CEndStatistic::GetMapName((CEndStatistic *)&g_cEndStatistic);
-      j__wcscpy(Destination, MapName);
+      wcscpy(Destination, MapName);
       String = (wchar_t *)wcsrchr(Destination, 92);
       if ( String )
       {
         Stringa = String + 1;
         v28 = wcschr(Stringa, 46);
         if ( !v28 )
-          v28 = (int)&Stringa[j__wcslen(Stringa)];
-        j__wcsncpy(Destination, Stringa, (v28 - (int)Stringa) >> 1);
+          v28 = (int)&Stringa[wcslen(Stringa)];
+        wcsncpy(Destination, Stringa, (v28 - (int)Stringa) >> 1);
         v18 = (v28 - (int)Stringa) >> 1;
         if ( v18 >= 1024 )
-          j____report_rangecheckfailure();
+          report_rangecheckfailure();
         Destination[v18] = 0;
       }
     }
@@ -22153,7 +22147,7 @@ void __cdecl GuiDlgMDRandomMapParametersUpdate(void) {
   IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, dword_4031998, 2006, byte_3EDFB45);
   v8 = (char *)std::string::c_str(&unk_403197C);
   IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 2003, v8);
-  v9 = (const wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)&unk_4031960);
+  v9 = (const wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)&stru_4031960);
   j__wcstombs(Dest, v9, 0x100u);
   IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 1985, Dest);
   if ( dword_4031F88 > 640 )
@@ -22667,7 +22661,7 @@ bool __cdecl GuiDlgMDRandomMapParametersProc(int a1, int a2, int a3) {
           if ( Text )
           {
             j__mbstowcs(Dest, Text, 0x100u);
-            std::wstring::operator=(&unk_4031960, Dest);
+            std::wstring::operator=(&stru_4031960, Dest);
             PlayGuiSound(2);
           }
           break;
@@ -22844,11 +22838,11 @@ bool __cdecl GuiDlgMDRandomMapParametersProc(int a1, int a2, int a3) {
           byte_403199C = g_uiExtrasAllowed;
           if ( g_uiExtrasAllowed && byte_4031914 )
           {
-            v11 = std::operator+<wchar_t>((int)v42, (wchar_t *)L"(Troja) ", (int)&unk_4031960);
+            v11 = std::operator+<wchar_t>((int)v42, (wchar_t *)L"(Troja) ", (int)&stru_4031960);
             std::wstring::operator=(v11);
             std::wstring::~wstring(v42);
           }
-          if ( (unsigned int)std::wstring::length(&unk_4031960) >= 0x1F )
+          if ( (unsigned int)std::wstring::length(&stru_4031960) >= 0x1F )
             std::wstring::resize(32, 0);
           PlayGuiSound(2);
           v12 = CEvn_Event::CEvn_Event(&v67, 0x1B6Bu, 0, 0, 0);
@@ -32023,7 +32017,7 @@ void __cdecl InitGuiDlgStatisticLand(void) {
     for ( i = 0; i < 8; ++i )
     {
       if ( (unsigned int)i >= 8 )
-        j____report_rangecheckfailure();
+        report_rangecheckfailure();
       byte_3EFD494[i] = 0;
       dword_3EFD49C[i] = -1;
     }
@@ -32841,7 +32835,7 @@ void __cdecl InitGuiDlgStatisticWarrior(void) {
     for ( i = 0; i < 8; ++i )
     {
       if ( (unsigned int)i >= 8 )
-        j____report_rangecheckfailure();
+        report_rangecheckfailure();
       byte_3EFD4F4[i] = 0;
       dword_3EFD4FC[i] = -1;
     }
@@ -38341,9 +38335,9 @@ class ISimpleNet * __cdecl CreateSimpleNet(void) {
 bool __cdecl ImportWSAFunctions(void) {
   
   hLibModule = LoadLibraryA("WS2_32.DLL");
-  j___controlfp(0xA031Fu, (unsigned int)&loc_30F031E + 1);
+  controlfp(0xA031Fu, (unsigned int)&loc_30F031E + 1);
   if ( hLibModule
-    || (hLibModule = LoadLibraryA("wsock32.DLL"), j___controlfp(0xA031Fu, (unsigned int)&loc_30F031E + 1), hLibModule) )
+    || (hLibModule = LoadLibraryA("wsock32.DLL"), controlfp(0xA031Fu, (unsigned int)&loc_30F031E + 1), hLibModule) )
   {
     WSACleanup = GetProcAddress(hLibModule, "WSACleanup");
     if ( WSACleanup )
@@ -40741,7 +40735,7 @@ void __cdecl SimplFree(void * a1) {
         "Memory corruption found from %s, at %u",
         "Unknown Location",
         *(_DWORD *)(v4 + 28));
-    j__printf(OutputString);
+    printf(OutputString);
     OutputDebugStringA(OutputString);
   }
   j__free(*(void **)(v4 + 4));
@@ -41002,10 +40996,10 @@ int __cdecl strncpy_s<1024>(char (&)[1024] Destination, char const * Source, uns
 
 
 // address=[0x2efe0d0]
-// Decompiled from _BYTE *__cdecl FilePaths::SplitPath(_BYTE *a1, _Cnd_internal_imp_t *a2)
+// Decompiled from _BYTE *__cdecl FilePaths::SplitPath(_BYTE *a1, wstring *a2)
 struct FilePaths::PathSplitResult __cdecl FilePaths::SplitPath(std::wstring const & a1) {
   
-  _DWORD *v3; // esi
+  wchar_t *v3; // esi
   int v4; // eax
   int v5; // eax
   wchar_t *v6; // [esp+8h] [ebp-ACh]
@@ -41030,10 +41024,10 @@ struct FilePaths::PathSplitResult __cdecl FilePaths::SplitPath(std::wstring cons
   }
   else
   {
-    Str = (wchar_t *)std::wstring::c_str(a2);
-    if ( j__wcschr(Str, 0x3Au) )
+    Str = std::wstring::c_str(a2);
+    if ( wcschr(Str, 0x3Au) )
     {
-      v7 = j__wcschr(Str, 0x3Au) + 1;
+      v7 = wcschr(Str, 0x3Au) + 1;
       std::wstring::assign(Str, (int)v7);
       Str = v7;
     }
@@ -41044,8 +41038,8 @@ struct FilePaths::PathSplitResult __cdecl FilePaths::SplitPath(std::wstring cons
     }
     while ( *Str )
     {
-      v6 = j__wcschr(Str, 0x2Fu);
-      v8 = j__wcschr(Str, 0x5Cu);
+      v6 = wcschr(Str, 0x2Fu);
+      v8 = wcschr(Str, 0x5Cu);
       v9 = (int)v6;
       if ( v6 )
       {
@@ -41062,7 +41056,7 @@ struct FilePaths::PathSplitResult __cdecl FilePaths::SplitPath(std::wstring cons
         LOBYTE(v15) = 2;
         v3 = std::wstring::c_str(a2);
         v4 = std::wstring::size(a2);
-        std::wstring::assign(Str, (int)v3 + 2 * v4);
+        std::wstring::assign(Str, (int)&v3[v4]);
         std::vector<std::wstring>::push_back(v14);
         LOBYTE(v15) = 0;
         std::wstring::~wstring(v14);
@@ -41136,10 +41130,10 @@ std::wstring __cdecl FilePaths::GetUserDirectoryPath(void a1) {
 
 
 // address=[0x2efe550]
-// Decompiled from int __cdecl FilePaths::EnsurePathExists(int a1)
+// Decompiled from int __cdecl FilePaths::EnsurePathExists(wstring *a1)
 void __cdecl FilePaths::EnsurePathExists(std::wstring const & a1) {
   
-  const WCHAR *v1; // eax
+  wchar_t *v1; // eax
   _BYTE v3[12]; // [esp+4h] [ebp-174h] BYREF
   _BYTE v4[12]; // [esp+10h] [ebp-168h] BYREF
   int v5; // [esp+1Ch] [ebp-15Ch]
@@ -41157,15 +41151,15 @@ void __cdecl FilePaths::EnsurePathExists(std::wstring const & a1) {
   _BYTE *v17; // [esp+4Ch] [ebp-12Ch]
   bool v18; // [esp+53h] [ebp-125h]
   int v19; // [esp+54h] [ebp-124h]
-  _BYTE v20[28]; // [esp+58h] [ebp-120h] BYREF
+  int v20[7]; // [esp+58h] [ebp-120h] BYREF
   _BYTE v21[48]; // [esp+74h] [ebp-104h] BYREF
   _BYTE v22[28]; // [esp+A4h] [ebp-D4h] BYREF
   _BYTE v23[28]; // [esp+C0h] [ebp-B8h] BYREF
   _BYTE v24[28]; // [esp+DCh] [ebp-9Ch] BYREF
   _BYTE v25[28]; // [esp+F8h] [ebp-80h] BYREF
   _BYTE v26[28]; // [esp+114h] [ebp-64h] BYREF
-  _BYTE v27[28]; // [esp+130h] [ebp-48h] BYREF
-  _BYTE v28[28]; // [esp+14Ch] [ebp-2Ch] BYREF
+  wstring v27[28]; // [esp+130h] [ebp-48h] BYREF
+  wstring v28; // [esp+14Ch] [ebp-2Ch] BYREF
   int v29; // [esp+174h] [ebp-4h]
 
   v19 = 0;
@@ -41190,7 +41184,7 @@ void __cdecl FilePaths::EnsurePathExists(std::wstring const & a1) {
     LOBYTE(v29) = 1;
     std::wstring::~wstring(v24);
   }
-  std::wstring::wstring(v28);
+  std::wstring::wstring(&v28);
   LOBYTE(v29) = 3;
   v17 = v21;
   std::vector<std::wstring>::begin(v4);
@@ -41200,7 +41194,7 @@ void __cdecl FilePaths::EnsurePathExists(std::wstring const & a1) {
   while ( (unsigned __int8)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<std::wstring>>>::operator!=((std::_Iterator_base12 *)v3) )
   {
     v16 = std::_Vector_iterator<std::_Vector_val<std::_Simple_types<std::wstring>>>::operator*(v4);
-    if ( (unsigned __int8)std::wstring::empty(v28) )
+    if ( (unsigned __int8)std::wstring::empty(&v28) )
     {
       v9 = std::operator+<wchar_t>(v22, v27, v16);
       v8 = v9;
@@ -41230,9 +41224,9 @@ void __cdecl FilePaths::EnsurePathExists(std::wstring const & a1) {
       v19 &= ~1u;
       std::wstring::~wstring(v22);
     }
-    if ( !(unsigned __int8)std::wstring::empty(v28) && !(unsigned __int8)sub_2EFE9F0(v28) )
+    if ( !(unsigned __int8)std::wstring::empty(&v28) && !(unsigned __int8)sub_2EFE9F0(&v28) )
     {
-      v1 = (const WCHAR *)std::wstring::c_str((_Cnd_internal_imp_t *)v28);
+      v1 = std::wstring::c_str(&v28);
       DirectoryW = CreateDirectoryW(v1, 0);
       v18 = DirectoryW;
       if ( !DirectoryW )
@@ -41245,7 +41239,7 @@ void __cdecl FilePaths::EnsurePathExists(std::wstring const & a1) {
   LOBYTE(v29) = 3;
   std::_Vector_iterator<std::_Vector_val<std::_Simple_types<std::wstring>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<std::wstring>>>(v4);
   LOBYTE(v29) = 1;
-  std::wstring::~wstring(v28);
+  std::wstring::~wstring(&v28);
   LOBYTE(v29) = 0;
   std::wstring::~wstring(v27);
   v29 = -1;
@@ -42003,13 +41997,13 @@ void __stdcall BBSupportSmartOpenTraceFile(wchar_t const * a1, wchar_t const * a
   memset(v27, 0, sizeof(v27));
   memset(FileName, 0, sizeof(FileName));
   _wsprintfW(FileName, L"%s%s???.txt", lpFileName, v8);
-  v7 = j__wcslen(v8) + 7;
+  v7 = wcslen(v8) + 7;
   hFindFile = FindFirstFileW(FileName, &FindFileData);
   if ( hFindFile != (HANDLE)-1 )
   {
     do
     {
-      if ( j__wcslen(FindFileData.cFileName) == v7 )
+      if ( wcslen(FindFileData.cFileName) == v7 )
       {
         v17 = sub_2F2F240((char *)&FindFileData.nFileSizeHigh + 2 * v7 + 2, v4);
         if ( v17 >= 1 && v17 <= 999 )
@@ -42045,7 +42039,7 @@ void __stdcall BBSupportSmartOpenTraceFile(wchar_t const * a1, wchar_t const * a
       if ( DeleteFileA(v26) )
       {
         if ( i >= 0x3E8 )
-          j____report_rangecheckfailure();
+          report_rangecheckfailure();
         v27[i] = 0;
         ++v10;
       }
@@ -42120,7 +42114,7 @@ void __stdcall BBSupportTracePrint(unsigned int a1, char const * Source) {
     for ( i = strlen(OutputString); i > 0 && (unsigned __int8)OutputString[i - 1] - 1 <= 31; OutputString[i] = 0 )
     {
       if ( (unsigned int)--i >= 0x800 )
-        j____report_rangecheckfailure();
+        report_rangecheckfailure();
     }
     if ( a1 < 0 || (BBSupportLib::BBSGetDevelopmentFlags() & 1) != 0 )
     {
@@ -42141,7 +42135,7 @@ void __stdcall BBSupportTracePrint(unsigned int a1, char const * Source) {
     }
     OutputString[i++] = 10;
     if ( (unsigned int)i >= 0x800 )
-      j____report_rangecheckfailure();
+      report_rangecheckfailure();
     OutputString[i] = 0;
     OutputDebugStringA(OutputString);
     LeaveCriticalSection(&CriticalSection);
@@ -42169,13 +42163,13 @@ void __stdcall BBSupportTracePrint(unsigned int a1, wchar_t const * Source) {
     && (unsigned __int8)byte_4686FAC[v6] >= 4u )
   {
     EnterCriticalSection(&CriticalSection);
-    j__wcsncpy(Destination, Source, 0x7FFu);
+    wcsncpy(Destination, Source, 0x7FFu);
     Destination[2047] = 0;
-    for ( i = j__wcslen(Destination); i > 0 && LOBYTE(Destination[i - 1]) - 1 <= 31; Destination[i] = 0 )
+    for ( i = wcslen(Destination); i > 0 && LOBYTE(Destination[i - 1]) - 1 <= 31; Destination[i] = 0 )
     {
       --i;
       if ( (unsigned int)(2 * i) >= 0x1000 )
-        j____report_rangecheckfailure();
+        report_rangecheckfailure();
     }
     if ( a1 < 0 || (BBSupportLib::BBSGetDevelopmentFlags() & 1) != 0 )
     {
@@ -42196,7 +42190,7 @@ void __stdcall BBSupportTracePrint(unsigned int a1, wchar_t const * Source) {
     }
     Destination[i++] = 10;
     if ( (unsigned int)(2 * i) >= 0x1000 )
-      j____report_rangecheckfailure();
+      report_rangecheckfailure();
     Destination[i] = 0;
     OutputDebugStringW(Destination);
     LeaveCriticalSection(&CriticalSection);
@@ -42407,15 +42401,15 @@ unsigned int __stdcall BBSupportDevelopmentMachineId(void) {
 
 
 // address=[0x2f2fe10]
-// Decompiled from int __thiscall BBSupportGetModuleTimeDateStamp(ATL::CComCriticalSection *this, int a2)
-unsigned int __stdcall BBSupportGetModuleTimeDateStamp(void * a2) {
+// Decompiled from unsigned int __stdcall BBSupportGetModuleTimeDateStamp(void *a1)
+unsigned int __stdcall BBSupportGetModuleTimeDateStamp(void * a1) {
   
-  int v3; // [esp+14h] [ebp-20h]
+  unsigned int v2; // [esp+14h] [ebp-20h]
 
-  v3 = 0;
-  if ( a2 && *(_WORD *)a2 == 23117 )
-    return *(_DWORD *)(*(_DWORD *)(a2 + 60) + a2 + 8);
-  return v3;
+  v2 = 0;
+  if ( a1 && *(_WORD *)a1 == 23117 )
+    return *(_DWORD *)((char *)a1 + *((_DWORD *)a1 + 15) + 8);
+  return v2;
 }
 
 
@@ -42496,12 +42490,12 @@ unsigned int __stdcall BBSupportLib::BBSGetModuleFileName(struct HINSTANCE__ * h
   Src = BBSupportLib::BBSGetFileNameFromFilePath((BBSupportLib *)Filename, 0);
   if ( !Src )
     return v4;
-  v6 = j__wcslen(Src);
+  v6 = wcslen(Src);
   if ( !v6 )
     return v4;
   if ( v6 + 1 >= a3 )
     return v4;
-  j__memcpy(a2, Src, v6 + 1);
+  memcpy(a2, Src, v6 + 1);
   return v6;
 }
 
@@ -42642,7 +42636,7 @@ void __stdcall BBSupportLib::BBSCopyTextToClipboard(char const * Src) {
   if ( !hMem )
     return CloseClipboard();
   v2 = GlobalLock(hMem);
-  j__memcpy(v2, Src, v4 + 1);
+  memcpy(v2, Src, v4 + 1);
   GlobalUnlock(hMem);
   SetClipboardData(1u, hMem);
   return CloseClipboard();
@@ -42709,14 +42703,13 @@ int __stdcall BBSupportLoadDbgHelpDll(int a1) {
 // Decompiled from int BBSupportTraceDumpModules()
 void __stdcall BBSupportTraceDumpModules(void) {
   
-  ATL::CComCriticalSection *v0; // ecx
-  int ModuleTimeDateStamp; // eax
+  unsigned int ModuleTimeDateStamp; // eax
   BOOL (__stdcall *Module32Next)(HANDLE, LPMODULEENTRY32); // [esp+0h] [ebp-23Ch]
   BOOL (__stdcall *Module32First)(HANDLE, LPMODULEENTRY32); // [esp+4h] [ebp-238h]
   HANDLE (__stdcall *CreateToolhelp32Snapshot)(DWORD, DWORD); // [esp+8h] [ebp-234h]
   HANDLE hObject; // [esp+Ch] [ebp-230h]
   HMODULE hModule; // [esp+10h] [ebp-22Ch]
-  _DWORD v8[137]; // [esp+14h] [ebp-228h] BYREF
+  MODULEENTRY32 sModule; // [esp+14h] [ebp-228h] BYREF
 
   CreateToolhelp32Snapshot = 0;
   Module32First = 0;
@@ -42733,16 +42726,22 @@ void __stdcall BBSupportTraceDumpModules(void) {
   hObject = CreateToolhelp32Snapshot(8, 0);
   if ( !hObject )
     return BBSupportTracePrintF(2, "Failed to get module snapshot!");
-  memset(v8, 0, sizeof(v8));
-  v8[0] = 548;
-  if ( Module32First(hObject, (LPMODULEENTRY32)v8) )
+  memset(&sModule, 0, sizeof(sModule));
+  sModule.dwSize = 548;
+  if ( Module32First(hObject, &sModule) )
   {
     do
     {
-      ModuleTimeDateStamp = BBSupportGetModuleTimeDateStamp(v0);
-      BBSupportTracePrintF(1, "0x%08x (0x%08x) %s (0x%08x)", v8[5], v8[6], (const char *)&v8[8], ModuleTimeDateStamp);
+      ModuleTimeDateStamp = BBSupportGetModuleTimeDateStamp(sModule.hModule);
+      BBSupportTracePrintF(
+        1,
+        "0x%08x (0x%08x) %s (0x%08x)",
+        sModule.modBaseAddr,
+        sModule.modBaseSize,
+        sModule.szModule,
+        ModuleTimeDateStamp);
     }
-    while ( Module32Next(hObject, (LPMODULEENTRY32)v8) );
+    while ( Module32Next(hObject, &sModule) );
   }
   return CloseHandle(hObject);
 }
@@ -43181,7 +43180,7 @@ int __cdecl SearchMapPoint(int a1, int a2, int & a3, int & a4, bool a5) {
 
   if ( dword_3E2E2A0 )
   {
-    NewValue = j___controlfp(0x300u, 0x300u);
+    NewValue = controlfp(0x300u, 0x300u);
     v27 = a2;
     v26 = a1;
     v38 = a1 + dword_3E2E2B0 + (dword_3E2E28C >> 17);
@@ -43246,7 +43245,7 @@ int __cdecl SearchMapPoint(int a1, int a2, int & a3, int & a4, bool a5) {
           BBSupportTracePrintF(1, "GFX ENGINE: Error while calculating coordinates!");
           *a4 = 0;
           *a3 = 0;
-          j___controlfp(NewValue, 0x300u);
+          controlfp(NewValue, 0x300u);
           return -1;
         }
       }
@@ -43312,7 +43311,7 @@ int __cdecl SearchMapPoint(int a1, int a2, int & a3, int & a4, bool a5) {
         default:
           break;
       }
-      j___controlfp(NewValue, 0x300u);
+      controlfp(NewValue, 0x300u);
       return *a3 + Size * *a4;
     }
     else
@@ -43322,7 +43321,7 @@ int __cdecl SearchMapPoint(int a1, int a2, int & a3, int & a4, bool a5) {
         *a4 = 0;
         *a3 = 0;
       }
-      j___controlfp(NewValue, 0x300u);
+      controlfp(NewValue, 0x300u);
       return -1;
     }
   }
@@ -43497,9 +43496,9 @@ bool __cdecl ReadTextureBitmap(int a1, void * Src, bool a3, bool a4) {
       return 0;
     }
     if ( a4 )
-      j__memcpy(v6, Src, 0x20000u);
+      memcpy(v6, Src, 0x20000u);
     else
-      j__memcpy(v6, Src, 0x8000u);
+      memcpy(v6, Src, 0x8000u);
     v7 = ((int (__thiscall *)(CSurfaceV7 *))D3DObjectPtr->LandscapeTextureTable[a1]->Unlock)(D3DObjectPtr->LandscapeTextureTable[a1]);
     if ( v7 )
     {
@@ -43509,8 +43508,8 @@ bool __cdecl ReadTextureBitmap(int a1, void * Src, bool a3, bool a4) {
   }
   else
   {
-    j__memcpy((void *)(g_pSoftwareTexturePages + (a1 << 16)), Src, 0x10000u);
-    j__memcpy((char *)&g_uColorPalettes + 768 * a1, Src + 0x10000, 0x300u);
+    memcpy((void *)(g_pSoftwareTexturePages + (a1 << 16)), Src, 0x10000u);
+    memcpy((char *)&g_uColorPalettes + 768 * a1, Src + 0x10000, 0x300u);
   }
   return 1;
 }
@@ -44346,9 +44345,9 @@ bool __cdecl BlitSettler(int a1, int a2, int a3, struct SGfxObjectInfo * a4) {
   *(_DWORD *)a4 = 0;
   if ( v10 )
   {
-    j__memcpy(&g_uColorPalette, *((const void **)a4 + 1), 0x180u);
-    j__memcpy(&unk_468A760, (char *)&g_cColorGradient + 64 * *((unsigned __int8 *)a4 + 715), 0x40u);
-    j__memcpy(&unk_468A7A0, (const void *)(*((_DWORD *)a4 + 1) + (*((unsigned __int8 *)a4 + 715) << 6) + 512), 0x40u);
+    memcpy(&g_uColorPalette, *((const void **)a4 + 1), 0x180u);
+    memcpy(&unk_468A760, (char *)&g_cColorGradient + 64 * *((unsigned __int8 *)a4 + 715), 0x40u);
+    memcpy(&unk_468A7A0, (const void *)(*((_DWORD *)a4 + 1) + (*((unsigned __int8 *)a4 + 715) << 6) + 512), 0x40u);
     v12 = *v10;
     v11 = v10[1];
     v10 += 2;
@@ -44555,9 +44554,9 @@ bool __cdecl BlitVehicle(int a1, int a2, int a3, struct SGfxObjectInfo * a4) {
   *((_DWORD *)a4 + 23) = 0;
   if ( v19 )
   {
-    j__memcpy(&g_uColorPalette, *((const void **)a4 + 1), 0x180u);
-    j__memcpy(&unk_468A760, (char *)&g_cColorGradient + 64 * *((unsigned __int8 *)a4 + 715), 0x40u);
-    j__memcpy(&unk_468A7A0, (const void *)(*((_DWORD *)a4 + 1) + (*((unsigned __int8 *)a4 + 715) << 6) + 512), 0x40u);
+    memcpy(&g_uColorPalette, *((const void **)a4 + 1), 0x180u);
+    memcpy(&unk_468A760, (char *)&g_cColorGradient + 64 * *((unsigned __int8 *)a4 + 715), 0x40u);
+    memcpy(&unk_468A7A0, (const void *)(*((_DWORD *)a4 + 1) + (*((unsigned __int8 *)a4 + 715) << 6) + 512), 0x40u);
     v10 = &g_uColorPalette;
     sub_2F6FD80(&v10, a1);
     v15 = *v19++;
@@ -44751,7 +44750,7 @@ bool __cdecl BlitBuilding(int a1, int a2, int a3, struct SGfxObjectInfo * a4, in
   if ( a1 < 255 )
   {
     sub_2F6FD80(&Src, a1);
-    j__memcpy(v45, Src, sizeof(v45));
+    memcpy(v45, Src, sizeof(v45));
     Src = v45;
   }
   if ( *((_DWORD *)a4 + 22) )
@@ -44878,9 +44877,9 @@ bool __cdecl BlitBuilding(int a1, int a2, int a3, struct SGfxObjectInfo * a4, in
             {
               v24 = (a2 - (int)(float)((float)((*v38++ - *((_DWORD *)a4 + 4 * j + 52)) << 16) * *(float *)&dword_3E2E2F4)) >> 16;
               v25 = (a3 - (int)(float)((float)((*v38 - *((_DWORD *)a4 + 4 * j + 53)) << 16) * *(float *)&dword_3E2E2F4)) >> 16;
-              j__memcpy(&g_uColorPalette, *((const void **)a4 + 4 * j + 51), 0x180u);
-              j__memcpy(&unk_468A760, (char *)&g_cColorGradient + 64 * *((unsigned __int8 *)a4 + 715), 0x40u);
-              j__memcpy(
+              memcpy(&g_uColorPalette, *((const void **)a4 + 4 * j + 51), 0x180u);
+              memcpy(&unk_468A760, (char *)&g_cColorGradient + 64 * *((unsigned __int8 *)a4 + 715), 0x40u);
+              memcpy(
                 &unk_468A7A0,
                 (const void *)(*((_DWORD *)a4 + 4 * j + 51) + (*((unsigned __int8 *)a4 + 715) << 6) + 512),
                 0x40u);
@@ -45725,9 +45724,9 @@ RenderObjectLayer___def_336D47A:
     {
       v61 = (unsigned __int8 *)*((_DWORD *)&v102[768] + 6 * j + 3);
       v47 = *((int *)&v102[769] + 6 * j + 1) >> 16;
-      j__memcpy(&g_uColorPalette, *((const void **)&v102[769] + 6 * j), 0x180u);
-      j__memcpy(&unk_468A760, (char *)&g_cColorGradient + 64 * v47, 0x40u);
-      j__memcpy(&unk_468A7A0, (const void *)(*((_DWORD *)&v102[769] + 6 * j) + (v47 << 6) + 512), 0x40u);
+      memcpy(&g_uColorPalette, *((const void **)&v102[769] + 6 * j), 0x180u);
+      memcpy(&unk_468A760, (char *)&g_cColorGradient + 64 * v47, 0x40u);
+      memcpy(&unk_468A7A0, (const void *)(*((_DWORD *)&v102[769] + 6 * j) + (v47 << 6) + 512), 0x40u);
       v52 = &g_uColorPalette;
       v45 = *v61++;
       v46 = *v61;
@@ -45966,7 +45965,7 @@ RenderObjectLayer___def_336D47A:
       g_iRenderPitch = v59;
       g_iScanlineLength = 2 * OutputWidth;
     }
-    j__memcpy(&dword_468DCEC, Src, 0x10u);
+    memcpy(&dword_468DCEC, Src, 0x10u);
     if ( dword_468DCEC > dword_468DCF4 )
     {
       v25 = dword_468DCEC;
@@ -50139,7 +50138,7 @@ bool __cdecl DrawMiniMapLandscapeLayer(void) {
   }
   else
   {
-    NewValue = j___controlfp(0x300u, 0x300u);
+    NewValue = controlfp(0x300u, 0x300u);
     v15 = (_WORD *)(v6 + 2 * ((v8 * dword_46C7E4C) >> 1));
     v15 += dword_46C7E48 + 80 - dword_46C7E4C % 8 / 2;
     v4 = 8 * (v8 >> 1) - 160;
@@ -50209,7 +50208,7 @@ bool __cdecl DrawMiniMapLandscapeLayer(void) {
       }
       v15 += v4 - 4;
     }
-    j___controlfp(NewValue, 0x300u);
+    controlfp(NewValue, 0x300u);
     v13 = ((int (__thiscall *)(CSurfaceV7 *))D3DObjectPtr->MiniMapSurface->Unlock)(D3DObjectPtr->MiniMapSurface);
     if ( v13 )
     {
@@ -50263,7 +50262,7 @@ bool __cdecl DrawMiniMapObjectLayer(void) {
   else
   {
     v9 = v6;
-    NewValue = j___controlfp(0x300u, 0x300u);
+    NewValue = controlfp(0x300u, 0x300u);
     v9 += 160;
     v4 = v5 >> 1;
     for ( i = dword_46C7E4C; i < (int)Size; i += 8 )
@@ -50306,7 +50305,7 @@ bool __cdecl DrawMiniMapObjectLayer(void) {
         v15 += 8;
       }
     }
-    j___controlfp(NewValue, 0x300u);
+    controlfp(NewValue, 0x300u);
     v12 = ((int (__thiscall *)(CSurfaceV7 *))D3DObjectPtr->MiniMapSurface->Unlock)(D3DObjectPtr->MiniMapSurface);
     if ( v12 )
     {
@@ -50365,7 +50364,7 @@ bool __cdecl MarkCurrentArea(void) {
     }
     else
     {
-      NewValue = j___controlfp(0x300u, 0x300u);
+      NewValue = controlfp(0x300u, 0x300u);
       v7 = v2 >> 1;
       v4 = (int)(float)((float)dword_3E2E2AC * *(float *)&dword_3E2E718);
       v12 = (int)(float)((float)dword_3E2E2A8 * *(float *)&dword_3E2E718);
@@ -50431,7 +50430,7 @@ bool __cdecl MarkCurrentArea(void) {
           ++v10;
         }
       }
-      j___controlfp(NewValue, 0x300u);
+      controlfp(NewValue, 0x300u);
       v8 = ((int (__thiscall *)(CSurfaceV7 *))D3DObjectPtr->MiniMapAreaSurface->Unlock)(D3DObjectPtr->MiniMapAreaSurface);
       if ( v8 )
       {
@@ -50495,7 +50494,7 @@ bool __cdecl DrawCompleteMiniMap(void) {
   }
   else
   {
-    NewValue = j___controlfp(0x300u, 0x300u);
+    NewValue = controlfp(0x300u, 0x300u);
     v26 = (_WORD *)(v10 + 160);
     v6 = (v9 >> 1) - 160;
     for ( i = 0; i < 160; ++i )
@@ -50600,7 +50599,7 @@ bool __cdecl DrawCompleteMiniMap(void) {
         }
       }
     }
-    j___controlfp(NewValue, 0x300u);
+    controlfp(NewValue, 0x300u);
     v19 = ((int (__thiscall *)(CSurfaceV7 *))D3DObjectPtr->MiniMapSurface->Unlock)(D3DObjectPtr->MiniMapSurface);
     if ( v19 )
     {
@@ -50961,9 +50960,9 @@ bool __cdecl BlitSettlerHardware(int a1, int a2, int a3, struct SGfxObjectInfo *
   *(_DWORD *)a4 = 0;
   if ( v20 )
   {
-    j__memcpy(&g_uColorPalette, *((const void **)a4 + 1), 0x180u);
-    j__memcpy(&unk_468A760, (char *)&g_cColorGradient + 64 * *((unsigned __int8 *)a4 + 715), 0x40u);
-    j__memcpy(&unk_468A7A0, (const void *)(*((_DWORD *)a4 + 1) + (*((unsigned __int8 *)a4 + 715) << 6) + 512), 0x40u);
+    memcpy(&g_uColorPalette, *((const void **)a4 + 1), 0x180u);
+    memcpy(&unk_468A760, (char *)&g_cColorGradient + 64 * *((unsigned __int8 *)a4 + 715), 0x40u);
+    memcpy(&unk_468A7A0, (const void *)(*((_DWORD *)a4 + 1) + (*((unsigned __int8 *)a4 + 715) << 6) + 512), 0x40u);
     v11 = *v20;
     v21 = v20 + 1;
     v7 = *v21++;
@@ -51583,9 +51582,9 @@ bool __cdecl BlitBuildingHardware(int a1, int a2, int a3, struct SGfxObjectInfo 
                                   - (float)((float)(v26 - *((_DWORD *)a4 + 4 * n + 52)) * *(float *)&dword_3E2E2F4));
                   v7 = (int)(float)((float)v118
                                   - (float)((float)(v27 - *((_DWORD *)a4 + 4 * n + 53)) * *(float *)&dword_3E2E2F4));
-                  j__memcpy(&g_uColorPalette, *((const void **)a4 + 4 * n + 51), 0x180u);
-                  j__memcpy(&unk_468A760, (char *)&g_cColorGradient + 64 * *((unsigned __int8 *)a4 + 715), 0x40u);
-                  j__memcpy(
+                  memcpy(&g_uColorPalette, *((const void **)a4 + 4 * n + 51), 0x180u);
+                  memcpy(&unk_468A760, (char *)&g_cColorGradient + 64 * *((unsigned __int8 *)a4 + 715), 0x40u);
+                  memcpy(
                     &unk_468A7A0,
                     (const void *)(*((_DWORD *)a4 + 4 * n + 51) + (*((unsigned __int8 *)a4 + 715) << 6) + 512),
                     0x40u);
@@ -52132,12 +52131,9 @@ bool __cdecl BlitVehicleHardware(int a1, int a2, int a3, struct SGfxObjectInfo *
         *(_DWORD *)a4 = 0;
         if ( v29 )
         {
-          j__memcpy(&g_uColorPalette, *((const void **)a4 + 1), 0x180u);
-          j__memcpy(&unk_468A760, (char *)&g_cColorGradient + 64 * *((unsigned __int8 *)a4 + 715), 0x40u);
-          j__memcpy(
-            &unk_468A7A0,
-            (const void *)(*((_DWORD *)a4 + 1) + (*((unsigned __int8 *)a4 + 715) << 6) + 512),
-            0x40u);
+          memcpy(&g_uColorPalette, *((const void **)a4 + 1), 0x180u);
+          memcpy(&unk_468A760, (char *)&g_cColorGradient + 64 * *((unsigned __int8 *)a4 + 715), 0x40u);
+          memcpy(&unk_468A7A0, (const void *)(*((_DWORD *)a4 + 1) + (*((unsigned __int8 *)a4 + 715) << 6) + 512), 0x40u);
           if ( (float)OutputWidth >= v46
             && (float)OutputHeight >= v42
             && (float)((float)*(int *)(g_pDestSizeTable + 4 * v32) + v46) >= (float)dword_3E2E2BC
@@ -53792,7 +53788,7 @@ bool __cdecl DrawControl(void * a1, unsigned int a2, int a3, int a4, struct SGui
       }
       else
       {
-        j__memcpy(v22, v21, sizeof(v22));
+        memcpy(v22, v21, sizeof(v22));
         v22[1] = 31;
         v22[0] = 31;
         FastBlit8Bit(v20 + 6, v14[3], a5->x, a5->y, a5->width, a5->height, a1, a2, a5->x, a5->y, v22);
@@ -54586,7 +54582,7 @@ void __cdecl UpdateGui(int surfaceToDraw) {
           v12 = 1;
           if ( (v11[7] & 1) != 0 )
           {
-            j__memcpy(v15, Src, sizeof(v15));
+            memcpy(v15, Src, sizeof(v15));
             v15[1] = 31;
             v15[0] = 31;
             FastBlit8Bit(v13 + 6, *v9, 0, 0, *v9, v9[1], v8, v5, 0, 0, v15);
@@ -56367,7 +56363,7 @@ LABEL_19:
               case 1:
                 TeamData = ReadFile(hFile, lpBuffer, nNumberOfBytesToRead, &NumberOfBytesRead, 0);
                 ReadChunk(lpBuffer, nNumberOfBytesToRead, Size);
-                j__memcpy(&g_sGeneralMapData, lpBuffer, 0x18u);
+                memcpy(&g_sGeneralMapData, lpBuffer, 0x18u);
                 if ( !TeamData )
                   goto LABEL_46;
                 goto LABEL_72;
@@ -56435,28 +56431,28 @@ LABEL_75:
                 ReadChunk(lpBuffer, nNumberOfBytesToRead, Size);
                 if ( !TeamData )
                   goto LABEL_59;
-                j__memcpy(g_pTextDescription, lpBuffer, Size);
+                memcpy(g_pTextDescription, lpBuffer, Size);
                 goto LABEL_72;
               case 12:
                 TeamData = ReadFile(hFile, lpBuffer, nNumberOfBytesToRead, &NumberOfBytesRead, 0);
                 ReadChunk(lpBuffer, nNumberOfBytesToRead, Size);
                 if ( !TeamData )
                   goto LABEL_59;
-                j__memcpy(g_pTextTandT, lpBuffer, Size);
+                memcpy(g_pTextTandT, lpBuffer, Size);
                 goto LABEL_72;
               case 14:
                 TeamData = ReadFile(hFile, lpBuffer, nNumberOfBytesToRead, &NumberOfBytesRead, 0);
                 ReadChunk(lpBuffer, nNumberOfBytesToRead, Size);
                 if ( !TeamData )
                   goto LABEL_59;
-                j__memcpy(g_pTextEnglishDescription, lpBuffer, Size);
+                memcpy(g_pTextEnglishDescription, lpBuffer, Size);
                 goto LABEL_72;
               case 15:
                 TeamData = ReadFile(hFile, lpBuffer, nNumberOfBytesToRead, &NumberOfBytesRead, 0);
                 ReadChunk(lpBuffer, nNumberOfBytesToRead, Size);
                 if ( !TeamData )
                   goto LABEL_59;
-                j__memcpy(g_pTextEnglishTandT, lpBuffer, Size);
+                memcpy(g_pTextEnglishTandT, lpBuffer, Size);
                 goto LABEL_72;
               case 64:
                 g_bEditorMap = 1;
@@ -56471,7 +56467,7 @@ LABEL_75:
               case 66:
                 TeamData = ReadFile(hFile, lpBuffer, nNumberOfBytesToRead, &NumberOfBytesRead, 0);
                 ReadChunk(lpBuffer, nNumberOfBytesToRead, Size);
-                j__memcpy(&g_sEditorInfo, lpBuffer, 0x14u);
+                memcpy(&g_sEditorInfo, lpBuffer, 0x14u);
                 if ( !TeamData )
                   goto LABEL_46;
                 goto LABEL_72;
@@ -56934,9 +56930,9 @@ bool __cdecl ReadChunk(void * Src, int a2, int a3) {
   if ( !v4 )
     return 0;
   if ( a2 <= a3 )
-    j__memcpy(v4, Src, a3);
+    memcpy(v4, Src, a3);
   else
-    j__memcpy(v4, Src, a2);
+    memcpy(v4, Src, a2);
   v8 = j__LZHLCreateDecompressor();
   v5 = &Src[a3];
   v6 = &v9[a2];
@@ -56984,7 +56980,7 @@ void __cdecl InitRandomMap(class IMapGeneratorHost * a1, struct SRandomMapParams
   int v23; // [esp+9Ch] [ebp-10h]
   int v24; // [esp+A8h] [ebp-4h]
 
-  NewValue = j___controlfp(0xA031Fu, 0x30F031Fu);
+  NewValue = controlfp(0xA031Fu, 0x30F031Fu);
   if ( g_pBasicGrid )
   {
     v19 = g_pBasicGrid;
@@ -57103,7 +57099,7 @@ void __cdecl InitRandomMap(class IMapGeneratorHost * a1, struct SRandomMapParams
     CPlayerData::setStartPos_Real(*(CPlayerData **)(g_pPlayerData + 4 * k), v4, v5);
     (*(void (__thiscall **)(int, int, int, int))(*(_DWORD *)g_pHost + 28))(g_pHost, k + 1, v4, v5);
   }
-  return j___controlfp(NewValue, 0x30F031Fu);
+  return controlfp(NewValue, 0x30F031Fu);
 }
 
 
@@ -57160,7 +57156,7 @@ void __cdecl CreatePreview(class IMapGeneratorHost * a1, unsigned short * a2, in
   _BYTE v50[1280]; // [esp+270h] [ebp-510h] BYREF
   int v51; // [esp+77Ch] [ebp-4h]
 
-  NewValue = j___controlfp(0xA031Fu, 0x30F031Fu);
+  NewValue = controlfp(0xA031Fu, 0x30F031Fu);
   CRandom16Ex::Init((CRandom16Ex *)g_pRand, g_iRandomSeed, 0);
   g_iPreviewImageSize = a3;
   v48 = 2 * a3;
@@ -57363,7 +57359,7 @@ void __cdecl CreatePreview(class IMapGeneratorHost * a1, unsigned short * a2, in
     v19 = 0;
   C = (void *)g_pPreviewImage;
   operator delete[]((void *)g_pPreviewImage);
-  return j___controlfp(NewValue, 0x30F031Fu);
+  return controlfp(NewValue, 0x30F031Fu);
 }
 
 
@@ -57498,7 +57494,7 @@ bool __cdecl GenerateRandomMap(class IMapGeneratorHost * a1) {
 
   if ( !g_pMapElement )
     return 0;
-  NewValue = j___controlfp(0xA031Fu, 0x30F031Fu);
+  NewValue = controlfp(0xA031Fu, 0x30F031Fu);
   CRandom16Ex::Init((CRandom16Ex *)g_pRand, g_iRandomSeed, 0);
   g_pHost = (int)a1;
   v72 = (CCheckLayer *)operator new(0xCu);
@@ -58152,7 +58148,7 @@ bool __cdecl GenerateRandomMap(class IMapGeneratorHost * a1) {
   g_pMapElement = 0;
   g_pEditorLayer = 0;
   g_pHost = 0;
-  j___controlfp(NewValue, 0x30F031Fu);
+  controlfp(NewValue, 0x30F031Fu);
   return 1;
 }
 
@@ -59373,7 +59369,7 @@ char * __stdcall _com_util::ConvertBSTRToString(wchar_t * lpWideCharStr) {
   v6[10] = v6;
   if ( !lpWideCharStr )
     return 0;
-  v6[9] = j__wcslen(lpWideCharStr) + 1;
+  v6[9] = wcslen(lpWideCharStr) + 1;
   v6[8] = WideCharToMultiByte(0, 0, lpWideCharStr, v6[9], 0, 0, 0, 0);
   if ( !v6[8] )
   {
@@ -59509,7 +59505,7 @@ long __cdecl _com_invoke_helper(struct IDispatch * a1, long a2, unsigned short a
   v49 = 0;
   if ( String )
   {
-    v45 = j__wcslen(String);
+    v45 = wcslen(String);
     v48 = v45;
   }
   v44 = -3;

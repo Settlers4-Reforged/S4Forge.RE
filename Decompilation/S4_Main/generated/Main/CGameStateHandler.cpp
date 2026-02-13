@@ -365,7 +365,7 @@ void __cdecl CGameStateHandler::Kill(void) {
   }
   if ( g_pStringEngine )
   {
-    ((void (__thiscall *)(CStringEngineEx *, int))g_pStringEngine->j_??_GCStringEngineEx@@UAEPAXI@Z)(g_pStringEngine, 1);
+    ((void (__thiscall *)(CStringEngineEx *, int))g_pStringEngine->dtor)(g_pStringEngine, 1);
     g_pStringEngine = 0;
   }
   v0 = (CDestructionManager *)CDestructionManager::Instance();
@@ -401,7 +401,7 @@ bool __cdecl CGameStateHandler::InitGfxEngine(void) {
   else
     v1 = 0;
   g_pGfxEngine = (int)v1;
-  j___controlfp(0xA031Fu, (unsigned int)&loc_30F031E + 1);
+  controlfp(0xA031Fu, (unsigned int)&loc_30F031E + 1);
   IGfxEngine::SetTriangleSize((IGfxEngine *)g_pGfxEngine, 1572864);
   IGfxEngine::SetCameraMode((IGfxEngine *)g_pGfxEngine, 1);
   IGfxEngine::SetScrollOffsets((IGfxEngine *)g_pGfxEngine, 0, 0);
@@ -592,7 +592,7 @@ bool __cdecl CGameStateHandler::InitFileLibrary(void) {
 // Decompiled from char CGameStateHandler::InitGfxCompiler()
 bool __cdecl CGameStateHandler::InitGfxCompiler(void) {
   
-  j___controlfp(0xA031Fu, (unsigned int)&loc_30F031E + 1);
+  controlfp(0xA031Fu, (unsigned int)&loc_30F031E + 1);
   if ( GetLibVersion() == _crt_argv_unexpanded_arguments )
   {
     g_pRTComp = GetLibInstance();

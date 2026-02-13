@@ -612,7 +612,7 @@ bool  CConfigManager::Parse(class CConfigFile * a2, char const * String2) {
     std::string::~string(v12);
     if ( std::string::length(v13) )
     {
-      if ( !String2 || (v4 = (const char *)std::string::c_str(v13), !j___stricmp(v4, String2)) )
+      if ( !String2 || (v4 = (const char *)std::string::c_str(v13), !stricmp(v4, String2)) )
       {
         v7 = (struct CConfigSection *)CConfigManager::GetSection(v13, 1);
         if ( v7 )

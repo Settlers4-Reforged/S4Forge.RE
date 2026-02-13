@@ -17,7 +17,7 @@ void  TMap<unsigned char>::LoadMap(class S4::CMapFile & a2, int a3, int a4) {
   {
     __debugbreak();
   }
-  j__memcpy(*v5, Src, a4 * a4);
+  memcpy(*v5, Src, a4 * a4);
   S4::CMapFile::CloseChunk(a2, a3, 0);
 }
 
@@ -37,7 +37,7 @@ void  TMap<unsigned short>::LoadMap(class S4::CMapFile & a2, int a3, int a4) {
   {
     __debugbreak();
   }
-  j__memcpy(*v5, Src, 2 * a4 * a4);
+  memcpy(*v5, Src, 2 * a4 * a4);
   S4::CMapFile::CloseChunk(a2, a3, 0);
 }
 
@@ -57,7 +57,7 @@ void  TMap<struct T_GFX_MAP_ELEMENT>::LoadMap(class S4::CMapFile & a2, int a3, i
   {
     __debugbreak();
   }
-  j__memcpy(*v5, Src, 4 * a4 * a4);
+  memcpy(*v5, Src, 4 * a4 * a4);
   S4::CMapFile::CloseChunk(a2, a3, 0);
 }
 

@@ -802,7 +802,7 @@ void __cdecl CGameRun::FillGameType(std::wstring & a1, class CGameType & a2, cla
     *(_DWORD *)(a2 + 752) = *(_DWORD *)(a3 + 2360);
   }
   *(_DWORD *)(a2 + 864) = *(unsigned __int8 *)(a3 + 2356);
-  j__memcpy((void *)(a2 + 784), (const void *)(a3 + 2349), 7u);
+  memcpy((void *)(a2 + 784), (const void *)(a3 + 2349), 7u);
   *(_DWORD *)(a2 + 692) = *(_DWORD *)(a3 + 16);
   *(_DWORD *)(a2 + 740) = *(_DWORD *)(a3 + 8);
   *(_DWORD *)(a2 + 744) = *(_DWORD *)(a3 + 12);
@@ -1095,15 +1095,15 @@ bool __cdecl CGameRun::SaveGeneralInfo(class S4::CMapFile & a1) {
   v36 = *(_DWORD *)(g_pGameType + 660);
   memset(v23, 0, sizeof(v23));
   v2 = (const wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)(g_pGameType + 28));
-  j__wcscpy(v23, v2);
+  wcscpy(v23, v2);
   v17 = *(_DWORD *)(g_pGameType + 692);
   v15 = *(_DWORD *)(g_pGameType + 740);
   v16 = *(_DWORD *)(g_pGameType + 744);
   memset(v22, 0, sizeof(v22));
   v3 = (const wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)g_pGameType);
-  j__wcscpy(v22, v3);
+  wcscpy(v22, v3);
   v25 = *(_DWORD *)(g_pGameType + 112);
-  j__memcpy(v30, (const void *)(g_pGameType + 784), 7u);
+  memcpy(v30, (const void *)(g_pGameType + 784), 7u);
   v30[7] = *(_BYTE *)(g_pGameType + 864);
   v29[1024] = 7;
   PlayerId = CPlayerManager::LastPlayerId();
@@ -1115,7 +1115,7 @@ bool __cdecl CGameRun::SaveGeneralInfo(class S4::CMapFile & a1) {
     memset(&v28[21 * j], 0, 0x40u);
     RealPlayerName = (_Cnd_internal_imp_t *)CGameType::GetRealPlayerName((void *)g_pGameType, j);
     v6 = (const wchar_t *)std::wstring::c_str(RealPlayerName);
-    j__wcscpy((wchar_t *)&v28[21 * j], v6);
+    wcscpy((wchar_t *)&v28[21 * j], v6);
     v28[21 * j + 16] = *(_DWORD *)(g_pGameType + 4 * j + 332);
     v28[21 * j + 17] = *(_DWORD *)(g_pGameType + 4 * j + 260);
     v28[21 * j + 18] = *(_DWORD *)(g_pGameType + 4 * j + 296);

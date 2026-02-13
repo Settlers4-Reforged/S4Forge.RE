@@ -91,7 +91,7 @@ void  CGameChunkGeneral::Load(class IS4Chunk & a2) {
         (int)v15,
         Str);
       v3 = (const wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)v15);
-      j__wcscpy((wchar_t *)v13 + 50, v3);
+      wcscpy((wchar_t *)v13 + 50, v3);
       std::wstring::~wstring(v15);
       v17 = -1;
       std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::~wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v14);

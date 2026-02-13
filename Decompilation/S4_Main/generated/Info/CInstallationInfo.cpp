@@ -3,10 +3,10 @@
 // Definitions for class CInstallationInfo
 
 // address=[0x1494e20]
-// Decompiled from unsigned int __thiscall CInstallationInfo::GetConfigChecksum(CInstallationInfo *this)
+// Decompiled from int __thiscall CInstallationInfo::GetConfigChecksum(CInstallationInfo *this)
 unsigned int  CInstallationInfo::GetConfigChecksum(void) {
   
-  unsigned int ConfigFileCRC; // [esp+4h] [ebp-8h]
+  int ConfigFileCRC; // [esp+4h] [ebp-8h]
   wchar_t **i; // [esp+8h] [ebp-4h]
 
   ConfigFileCRC = 1;
@@ -32,21 +32,19 @@ unsigned int  CInstallationInfo::GetScriptChecksum(void) {
 unsigned int  CInstallationInfo::GetGfxChecksum(void) {
   
   double v1; // st7
-  _BYTE v3[24]; // [esp+8h] [ebp-24h] BYREF
-  CInstallationInfo *v4; // [esp+20h] [ebp-Ch]
+  LARGE_INTEGER v3[3]; // [esp+8h] [ebp-24h] BYREF
   unsigned int GfxFileCRC; // [esp+24h] [ebp-8h]
   int *i; // [esp+28h] [ebp-4h]
 
-  v4 = this;
   CPerformanceCounter::CPerformanceCounter((CPerformanceCounter *)v3);
-  CPerformanceCounter::Start((CPerformanceCounter *)v3);
+  CPerformanceCounter::Start(v3);
   GfxFileCRC = 1;
-  for ( i = (int *)&unk_3700A60; *i >= 0; i += 3 )
+  for ( i = &dword_3700A60; *i >= 0; i += 3 )
   {
     if ( *((_BYTE *)i + 4) )
       GfxFileCRC = CInstallationInfo::GetGfxFileCRC(*i, GfxFileCRC);
   }
-  CPerformanceCounter::Measure((CPerformanceCounter *)v3);
+  CPerformanceCounter::Measure(v3);
   v1 = CPerformanceCounter::TimeMs((CPerformanceCounter *)v3);
   BBSupportTracePrintF(0, "GetGfxChecksum(): %.0f ms", v1);
   return GfxFileCRC;
@@ -95,8 +93,8 @@ bool  CInstallationInfo::IsOptionalGameConfigFile(wchar_t const * String2) {
 // Decompiled from CInstallationInfo *__thiscall CInstallationInfo::CInstallationInfo(CInstallationInfo *this)
  CInstallationInfo::CInstallationInfo(void) {
   
-  IInstallationInfo::IInstallationInfo(this);
-  *(_DWORD *)this = &CInstallationInfo::_vftable_;
+  IInstallationInfo::IInstallationInfo((IInstallationInfo *)this);
+  this->__vftable = (CInstallationInfo_vtbl *)&CInstallationInfo::_vftable_;
   return this;
 }
 
@@ -185,13 +183,7 @@ unsigned int __cdecl CInstallationInfo::GetFileCRC(wchar_t const * FileName, uns
     v6 = v7;
     Buffer = v7;
     memset(v7, 0, ElementCount + 8);
-    CFileEx::Read(
-      v13,
-      Buffer,
-      1,
-      ElementCount,
-      "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\BaseLib\\Include\\FileEx.h",
-      110);
+    CFileEx::Read(v13, Buffer, 1, ElementCount, UNUSED_ARG(), UNUSED_ARG());
   }
   v14 = 0;
   CFileEx::Close((CFileEx *)v13, UNUSED_ARG(), UNUSED_ARG());
@@ -199,7 +191,7 @@ unsigned int __cdecl CInstallationInfo::GetFileCRC(wchar_t const * FileName, uns
   {
     if ( Buffer )
     {
-      a2 = Adler32(Buffer, ElementCount, a2);
+      a2 = Adler32((unsigned __int8 *)Buffer, ElementCount, a2);
       C = Buffer;
       operator delete[](Buffer);
     }
@@ -233,10 +225,10 @@ unsigned int __cdecl CInstallationInfo::GetConfigFileCRC(wchar_t const * String,
 
 
 // address=[0x1495480]
-// Decompiled from int __cdecl CInstallationInfo::GetGfxFileCRC(int a1, int a2)
+// Decompiled from unsigned int __cdecl CInstallationInfo::GetGfxFileCRC(int a1, unsigned int a2)
 unsigned int __cdecl CInstallationInfo::GetGfxFileCRC(int a1, unsigned int a2) {
   
-  char Buffer[2]; // [esp+8h] [ebp-404h] BYREF
+  wchar_t Buffer[511]; // [esp+8h] [ebp-404h] BYREF
   __int16 v4; // [esp+406h] [ebp-6h]
   int FileCRC; // [esp+418h] [ebp+Ch]
   int v6; // [esp+418h] [ebp+Ch]
@@ -245,18 +237,18 @@ unsigned int __cdecl CInstallationInfo::GetGfxFileCRC(int a1, unsigned int a2) {
   int v9; // [esp+418h] [ebp+Ch]
 
   v4 = 0;
-  j___snwprintf(Buffer, 0x1FFu, L"Gfx\\%i.dil", a1);
-  FileCRC = CInstallationInfo::GetFileCRC((wchar_t *)Buffer, a2);
-  j___snwprintf(Buffer, 0x1FFu, L"Gfx\\%i.gil", a1);
-  v6 = CInstallationInfo::GetFileCRC((wchar_t *)Buffer, FileCRC);
-  j___snwprintf(Buffer, 0x1FFu, L"Gfx\\%i.jil", a1);
-  v7 = CInstallationInfo::GetFileCRC((wchar_t *)Buffer, v6);
-  j___snwprintf(Buffer, 0x1FFu, L"Gfx\\%i.pi2", a1);
-  v8 = CInstallationInfo::GetFileCRC((wchar_t *)Buffer, v7);
-  j___snwprintf(Buffer, 0x1FFu, L"Gfx\\%i.pi4", a1);
-  v9 = CInstallationInfo::GetFileCRC((wchar_t *)Buffer, v8);
-  j___snwprintf(Buffer, 0x1FFu, L"Gfx\\%i.sil", a1);
-  return CInstallationInfo::GetFileCRC((wchar_t *)Buffer, v9);
+  snwprintf((char *const)Buffer, 0x1FFu, L"Gfx\\%i.dil", a1);
+  FileCRC = CInstallationInfo::GetFileCRC(Buffer, a2);
+  snwprintf((char *const)Buffer, 0x1FFu, L"Gfx\\%i.gil", a1);
+  v6 = CInstallationInfo::GetFileCRC(Buffer, FileCRC);
+  snwprintf((char *const)Buffer, 0x1FFu, L"Gfx\\%i.jil", a1);
+  v7 = CInstallationInfo::GetFileCRC(Buffer, v6);
+  snwprintf((char *const)Buffer, 0x1FFu, L"Gfx\\%i.pi2", a1);
+  v8 = CInstallationInfo::GetFileCRC(Buffer, v7);
+  snwprintf((char *const)Buffer, 0x1FFu, L"Gfx\\%i.pi4", a1);
+  v9 = CInstallationInfo::GetFileCRC(Buffer, v8);
+  snwprintf((char *const)Buffer, 0x1FFu, L"Gfx\\%i.sil", a1);
+  return CInstallationInfo::GetFileCRC(Buffer, v9);
 }
 
 
@@ -336,7 +328,7 @@ bool __cdecl CInstallationInfo::CheckGfxFile(int a1, int a2) {
   __int16 v4; // [esp+40Eh] [ebp-6h]
 
   v4 = 0;
-  j___snwprintf(Buffer, 0x1FFu, L"Gfx\\%i.gfx", a1);
+  snwprintf(Buffer, 0x1FFu, L"Gfx\\%i.gfx", a1);
   return CInstallationInfo::CheckFile((const wchar_t *)Buffer, a2);
 }
 
@@ -363,7 +355,7 @@ bool __cdecl CInstallationInfo::CheckGfxFiles(int a1) {
   char v3; // [esp+Bh] [ebp-1h]
 
   v3 = 1;
-  for ( i = (int *)&unk_3700A60; *i >= 0; i += 3 )
+  for ( i = (int *)&dword_3700A60; *i >= 0; i += 3 )
     v3 &= CInstallationInfo::CheckGfxFile(*i, i[2] | a1);
   return v3;
 }

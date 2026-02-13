@@ -21,25 +21,25 @@ public:
     void *  MapFile(unsigned int a2);
 
     // address=[0x2f09ef0]
-    unsigned int  FileOpen(wchar_t const * String, int Size);
+    unsigned int  FileOpen(wchar_t const * _swpName, int Size);
 
     // address=[0x2f0a220]
-    void  FileClose(unsigned int a2);
+    void  FileClose(unsigned int _iId);
 
     // address=[0x2f0a2e0]
-    unsigned int  FileSeek(unsigned int a2, long a3, int a4);
+    unsigned int  FileSeek(unsigned int _iLibraryIndex, long _iOffset, int _iSeekStart);
 
     // address=[0x2f0a420]
-    unsigned int  FileRead(unsigned int a2, void * lpBuffer, unsigned int Size);
+    unsigned int  FileRead(unsigned int a2, void * _pData, unsigned int Size);
 
     // address=[0x2f0a9d0]
-    int  AddFileLibrary(wchar_t const * lpFileName, int a3);
+    int  AddFileLibrary(wchar_t const * sFileName, int a3);
 
     // address=[0x2f0b6c0]
     class std::vector<struct std::pair<std::wstring,std::wstring >,class std::allocator<struct std::pair<std::wstring,std::wstring > > >  ListFilesInLib(wchar_t const * a2);
 
     // address=[0x2f0b8c0]
-    void  DumpFilesInLib(wchar_t const * a2, wchar_t const * String);
+    void  DumpFilesInLib(wchar_t const * a3, wchar_t const * String);
 
     // address=[0x2f0bd30]
     void  InitFileLibraries(void);
@@ -48,7 +48,7 @@ public:
     void  C_Init(void);
 
     // address=[0x2f0bd70]
-    void  C_AddPath(wchar_t const * String, int a3, wchar_t const * Source, wchar_t const * a5);
+    void  C_AddPath(wchar_t const * _swpPath, int a3, wchar_t const * Source, wchar_t const * a5);
 
     // address=[0x2f0bfc0]
     int  C_CreateFileLibrary(wchar_t const * lpFileName, char * a3, int a4, int nNumberOfBytesToRead);
@@ -61,19 +61,19 @@ public:
 
 private:
     // address=[0x2f08050]
-    bool  pCutPathAndFilename(wchar_t const * String, wchar_t * Destination, wchar_t * a3);
+    bool  pCutPathAndFilename(wchar_t const * String, wchar_t * _swpPath, wchar_t * _swpName);
 
     // address=[0x2f08230]
     void *  pGetFileLibraryHandle(int a2);
 
     // address=[0x2f08480]
-    int  pC_CopyFile(wchar_t const * lpFileName, void * a2, int nNumberOfBytesToRead, struct FLCopyProgressStruct * a4);
+    int  pC_CopyFile(wchar_t const * lpFileName, void * a2, int nNumberOfBytesToRead, struct FLCopyProgressStruct * _pCopyProgress);
 
     // address=[0x2f08690]
-    int  pC_PackFile(void * a2, void * hFile, unsigned int * a4, bool a5);
+    int  pC_PackFile(void * a2, void * hFile, unsigned int * _pCRC, bool a5);
 
     // address=[0x2f087f0]
-    int  UnpackData(char * a2, int a3, char * a4, int a5, bool a6);
+    int  UnpackData(char * _pDst, int _uDstSize, char * _pSrc, int _uSrcSize, bool isEncrypted);
 
     // address=[0x2f08fb0]
     void  pFreeFLCreationData(void);
@@ -85,13 +85,37 @@ private:
     void  pOptimize(void);
 
     // address=[0x2f095f0]
-    int  LoadEntireFile(unsigned int a2, void * a3, unsigned int a4, int a5);
+    int  LoadEntireFile(unsigned int a2, void * _pData, unsigned int _iCRC, int _bDisableEncryption);
 
     // address=[0x2f09890]
-    static void __cdecl DataCryptor(void * a1, int a2);
+    static void __cdecl DataCryptor(void * _pData, int _iDataSize);
 
     // address=[0x2f09950]
     unsigned int  CRC(void * a2, int a3);
+
+    // Type information members
+public:
+    int m_iRefCount;
+    int m_iFileInteractions;
+    int m_iFileSeeks;
+    int field_C;
+    int m_iDecompressedBytesRead;
+    FLPathListStruct * m_pPathList;
+    FLDirListStruct * m_pDirList;
+    FLFileListStruct * m_FileList;
+    int m_uHandleCount;
+    int m_iFLFHandleCount;
+    int m_iLibraryFilesCount;
+    int m_iLibraryFilesCapacity;
+    int field_30;
+    int m_iDirectoryCount;
+    FLIntHandleStruct *[100] m_pFLIntHandle;
+    struct FLFHandleStruct * m_pFLFHandleEnd;
+    struct FLFHandleStruct * m_pFLFHandleStart;
+    FLLibraryFileStruct * m_pLibraryFiles;
+    struct FLMemDirStruct * m_pDirectories;
+    int field_1D8;
+    struct vector * m_vFileIdPairs;
 
 };
 

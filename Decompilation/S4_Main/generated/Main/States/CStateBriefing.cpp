@@ -87,7 +87,7 @@ class CGameState * __cdecl CStateBriefing::DynamicCreateFunc(void * a1) {
     v8 = L"EN";
   v7 = *((_DWORD *)this + 2) + 1;
   v2 = (const char *)std::wstring::c_str((_Cnd_internal_imp_t *)((char *)&unk_402CAA0 + 28 * *((_DWORD *)this + 1) - 28));
-  j___snwprintf(Buffer, 0xFFu, v2, v8, v7);
+  snwprintf(Buffer, 0xFFu, v2, v8, v7);
   std::wstring::wstring(v10);
   LOBYTE(v12) = 1;
   if ( (*(unsigned __int8 (__thiscall **)(void *, char *, char *, int))(*(_DWORD *)g_pCDDrive + 8))(
@@ -307,7 +307,7 @@ bool  CStateBriefing::OnEvent(class CEvn_Event & a2) {
           v3 = (const char *)std::wstring::c_str((_Cnd_internal_imp_t *)((char *)&unk_402C9F8
                                                                        + 28 * *((_DWORD *)v54 + 1)
                                                                        - 28));
-          j___snwprintf(Buffer, 0xFFu, v3, v21);
+          snwprintf(Buffer, 0xFFu, v3, v21);
           std::wstring::wstring(v59);
           v61 = 3;
           if ( (*(unsigned __int8 (__thiscall **)(void *, char *, char *, int))(*(_DWORD *)g_pCDDrive + 8))(

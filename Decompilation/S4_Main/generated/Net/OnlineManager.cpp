@@ -474,7 +474,7 @@ void  OnlineManager::UpdateDiscoveredSessions(class std::list<struct SGameInfo,c
       v4 = (const wchar_t *)std::basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>::c_str(
                               v14,
                               v20[0]);
-      j__wcscpy((wchar_t *)Destination, v4);
+      wcscpy((wchar_t *)Destination, v4);
       std::basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>::basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>(
         v15,
         v20[0]);
@@ -485,7 +485,7 @@ void  OnlineManager::UpdateDiscoveredSessions(class std::list<struct SGameInfo,c
       v5 = (const wchar_t *)std::basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>::c_str(
                               v16,
                               v20[0]);
-      j__wcscpy(v39, v5);
+      wcscpy(v39, v5);
       SaveId = GameSessionDescriptor::GetSaveId(v29);
       v37 = 0;
       v33 = 0;
@@ -545,7 +545,7 @@ void  OnlineManager::OnHost(void) {
 
   *((_BYTE *)this + 82) = 1;
   INetworkEngine::StormOnHost((CGameHost **)g_pNetworkEngine);
-  v1 = std::wstring::c_str((_Cnd_internal_imp_t *)&unk_4030720);
+  v1 = std::wstring::c_str((_Cnd_internal_imp_t *)&stru_4030720);
   v2 = storm::CStringConvertToUtf8(v3, (int)v1);
   v4 = 0;
   StormManager::GetInstance();
@@ -821,7 +821,7 @@ bool  OnlineManager::Receive(void * a2, int & a3, unsigned int & a4) {
     Src = storm::DataBuffer::Get(v7);
     *a3 = storm::DataBuffer::GetBufferSizeInByte(v7);
     *a4 = *((_DWORD *)v7 + 8);
-    j__memcpy(a2, Src, *a3);
+    memcpy(a2, Src, *a3);
     std::queue<OnlineManager::GameMessage>::pop(this + 12);
     std::unique_lock<std::mutex>::~unique_lock<std::mutex>(v5);
     return 1;

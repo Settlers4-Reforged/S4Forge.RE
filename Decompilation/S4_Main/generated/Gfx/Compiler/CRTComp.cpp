@@ -34,7 +34,7 @@ enum RTCOMP_ERROR  CRTComp::SetWorkPath(wchar_t * String) {
 
   if ( !String )
     return 1;
-  v3 = j__wcslen(String);
+  v3 = wcslen(String);
   if ( !v3 )
     return 1;
   GetCurrentDirectoryW(0x400u, Buffer);
@@ -44,7 +44,7 @@ enum RTCOMP_ERROR  CRTComp::SetWorkPath(wchar_t * String) {
   if ( this[1] )
     operator delete[](this[1]);
   this[1] = operator new[](2 * (v3 + 1));
-  j__wcscpy((wchar_t *)this[1], String);
+  wcscpy((wchar_t *)this[1], String);
   return 0;
 }
 
@@ -797,9 +797,9 @@ void  CRTComp::SetErrorFilename(wchar_t * String) {
   this[2] = 0;
   if ( !String )
     return result;
-  v3 = j__wcslen(String);
+  v3 = wcslen(String);
   this[2] = operator new[](2 * (v3 + 1));
-  return j__wcscpy((wchar_t *)this[2], String);
+  return wcscpy((wchar_t *)this[2], String);
 }
 
 
@@ -1297,7 +1297,7 @@ void  CRTComp::CenterBitmap(struct SM_S_BF_BITMAP_DATA * a2) {
                                                                                        + i
                                                                                        + *((_DWORD *)a2 + 5));
   }
-  j__memcpy(*((void **)a2 + 4), Src, 0x191u);
+  memcpy(*((void **)a2 + 4), Src, 0x191u);
   return (struct SM_S_BF_BITMAP_DATA *)operator delete[](Src);
 }
 

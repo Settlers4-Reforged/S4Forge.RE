@@ -1757,12 +1757,12 @@ void __cdecl CMagicSpell::ShowSpellEffect(int a1, int a2, int a3, int a4) {
   int v7; // [esp+Ch] [ebp-8h]
   int v8; // [esp+10h] [ebp-4h]
 
-  if ( !(unsigned __int8)sub_146C530(a1)
+  if ( !(unsigned __int8)MagicIsValidRace(a1)
     && BBSupportDbgReport(2, "Logic\\Magic.cpp", 1015, "MagicIsValidRace(_iRace)") == 1 )
   {
     __debugbreak();
   }
-  if ( !(unsigned __int8)sub_146C500(a2)
+  if ( !(unsigned __int8)MagicIsValidSpellCategory(a2)
     && BBSupportDbgReport(2, "Logic\\Magic.cpp", 1016, "MagicIsValidSpellCategory(_iSpellCategory)") == 1 )
   {
     __debugbreak();

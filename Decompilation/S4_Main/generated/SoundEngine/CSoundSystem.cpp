@@ -26,7 +26,7 @@
   *((_DWORD *)this + 15) = 0;
   *((_DWORD *)this + 8) = 1;
   v1 = sub_2FD8D10(0);
-  j__srand(v1);
+  srand(v1);
   return this;
 }
 

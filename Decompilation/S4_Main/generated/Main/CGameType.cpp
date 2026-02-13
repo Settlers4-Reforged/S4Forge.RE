@@ -671,7 +671,7 @@ bool  CGameType::LoadMapData(std::wstring a2, bool a3, unsigned int a4, bool a5,
         {
           v45 = v56 - 5;
           if ( (unsigned int)(v56 - 5) >= 0x80 )
-            j____report_rangecheckfailure();
+            report_rangecheckfailure();
           Str[v45] = 0;
         }
         snprintf(v94, 0x90u, "%s_DESC", Str);
@@ -777,7 +777,7 @@ bool  CGameType::LoadMapData(std::wstring a2, bool a3, unsigned int a4, bool a5,
       v34 = j__wcstombs(v93, v38, 0x100u);
       v40 = v34;
       if ( v34 >= 0x100 )
-        j____report_rangecheckfailure();
+        report_rangecheckfailure();
       v93[v40] = 0;
       v29 = std::string::string(v87, v93);
       std::string::operator=((char *)v83 + 756, v29);
@@ -881,7 +881,7 @@ bool  CGameType::LoadMapData(std::wstring a2, bool a3, unsigned int a4, bool a5,
       {
         v31 = operator new[](2 * *((_DWORD *)v83 + 256) * *((_DWORD *)v83 + 255));
         *((_DWORD *)v83 + 254) = v31;
-        j__memcpy(*((void **)v83 + 254), v24.bstrVal, 2 * *((_DWORD *)v83 + 256) * *((_DWORD *)v83 + 255));
+        memcpy(*((void **)v83 + 254), v24.bstrVal, 2 * *((_DWORD *)v83 + 256) * *((_DWORD *)v83 + 255));
       }
     }
     MA_CloseMapFile();
@@ -940,7 +940,7 @@ bool  CGameType::LoadMapData(std::wstring a2, bool a3, unsigned int a4, bool a5,
   *((_DWORD *)v83 + 154) = v20;
   v25 = 1024;
   v21 = std::wstring::c_str((_Cnd_internal_imp_t *)&a2);
-  j___snwprintf(Buffer, 0x400u, L"\"%s\",", v21);
+  snwprintf(Buffer, 0x400u, L"\"%s\",", v21);
   BBSupportTracePrintF(
     1,
     "Map info: %-53s  0x%08x, %8i, %4i / %4i",
@@ -1195,7 +1195,7 @@ std::wstring __cdecl CGameType::ConvertMapNameToMPGameName(std::wstring & a1) {
   wchar_t Drive[4]; // [esp+80Ch] [ebp-Ch] BYREF
 
   v2 = (const wchar_t *)std::wstring::c_str(a2);
-  j__wcscpy(Destination, v2);
+  wcscpy(Destination, v2);
   j___wsplitpath(Destination, Drive, Dir, Filename, Ext);
   std::wstring::wstring(a1, Filename);
   return a1;

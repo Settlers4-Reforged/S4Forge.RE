@@ -6,7 +6,7 @@
 // Decompiled from Cryptor *__thiscall Cryptor::Cryptor(Cryptor *this)
  Cryptor::Cryptor(void) {
   
-  std::string::string();
+  std::string::string(this);
   *((_DWORD *)this + 7) = 324508639;
   *((_DWORD *)this + 8) = 610839776;
   *((_DWORD *)this + 9) = -38177487;

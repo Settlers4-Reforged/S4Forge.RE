@@ -281,7 +281,7 @@ void __cdecl CLanLobby::RedrawGameList(void) {
     v7 = std::_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>::operator*(v20);
     *(_BYTE *)(v22 + 140 * v23 + 110) = *(_BYTE *)(v7 + 632);
     v8 = std::_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>::operator*(v20);
-    j__wcscpy(Destination, (const wchar_t *)(v8 + 80));
+    wcscpy(Destination, (const wchar_t *)(v8 + 80));
     j___wsplitpath(Destination, Drive, Dir, Filename, Ext);
     std::wstring::operator=((void *)(v22 + 140 * v23 + 32), Filename);
     v9 = std::_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>::operator*(v20);

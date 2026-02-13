@@ -30,7 +30,7 @@ public:
     static int __cdecl GetCurrentSpellCategoryCounter(int a1, int a2);
 
     // address=[0x146b8a0]
-    static int __cdecl CalculatePossibleNumberOfCastSpell(int a1, int a2, int a3);
+    static int __cdecl CalculatePossibleNumberOfCastSpell(int _uPlayerId, int _uSpellId, int a3);
 
     // address=[0x146bb70]
     static void __cdecl GetConvertGoodInfo(int a1, int & a2, int & a3);

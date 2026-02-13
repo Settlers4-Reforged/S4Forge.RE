@@ -115,7 +115,7 @@ long  CVCRecorder::CopyDataToEncoder(void * a2, long a3, long a4) {
       v5 = *(_DWORD *)(this + 16) - *(_DWORD *)(this + 20);
     else
       v5 = a3;
-    j__memcpy(
+    memcpy(
       a2,
       (const void *)(*(_DWORD *)(this + 20) + *(_DWORD *)(*(_DWORD *)(this + 4) + 4 * *(_DWORD *)(this + 8))),
       v5);
@@ -414,7 +414,7 @@ LABEL_13:
     if ( v10 )
       memset(v5, 0, Size);
     else
-      j__memcpy(v5, Src, Size);
+      memcpy(v5, Src, Size);
     LOBYTE(v3) = this;
     if ( *(_DWORD *)(this + 12) == *(_DWORD *)(this + 36) - 1 )
     {

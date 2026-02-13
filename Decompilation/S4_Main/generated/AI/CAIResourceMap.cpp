@@ -140,7 +140,7 @@ int __cdecl CAIResourceMap::GetNumberOfSquaresWithDarkLand(int a1) {
       if ( !v4 )
       {
         if ( i >= 0x42 )
-          j____report_rangecheckfailure();
+          report_rangecheckfailure();
         byte_3EC2CD8[i] = 0;
       }
     }

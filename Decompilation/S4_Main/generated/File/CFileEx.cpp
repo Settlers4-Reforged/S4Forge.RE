@@ -147,14 +147,14 @@ void  CFileEx::Open(wchar_t const * FileName, unsigned int a3, bool a4, char * S
     *(this - 9) = CFileMgr::Open(FileName, v6, Str, a6);
     if ( !*(this - 9) )
     {
-      *(this - 5) = CFileLibrary::FileOpen(FileName, 0);
+      *(this - 5) = CFileLibrary::FileOpen(&g_cFileLibrary, FileName, 0);
       if ( *(this - 5) == -1 )
       {
         CBBFileException::CBBFileException((CBBFileException *)pExceptionObject, 2, FileName);
         _CxxThrowException(pExceptionObject, (_ThrowInfo *)&_TI2_AVCBBFileException__);
       }
       *((_BYTE *)this - 24) = 1;
-      *(this - 4) = CFileLibrary::FileSize((CFileLibrary *)&g_cFileLibrary, *(this - 5));
+      *(this - 4) = CFileLibrary::FileSize(&g_cFileLibrary, *(this - 5));
     }
     v10 = -1;
     std::wstring::~wstring(v9);
@@ -179,16 +179,16 @@ int  CFileEx::MapFile(wchar_t const * lpFileName, char * a3, int a4) {
   hFile = CreateFileW(lpFileName, 0x80000000, 1u, 0, 3u, 0, 0);
   if ( hFile == (HANDLE)-1 )
   {
-    v7 = CFileLibrary::FileOpen(lpFileName, 0);
+    v7 = CFileLibrary::FileOpen(&g_cFileLibrary, lpFileName, 0);
     if ( v7 == -1 )
     {
       sub_2F02260("CFile::MapFile can't open file `%s'", a3, a4, lpFileName);
       CBBFileException::CBBFileException((CBBFileException *)pExceptionObject, 2, lpFileName);
       _CxxThrowException(pExceptionObject, (_ThrowInfo *)&_TI2_AVCBBFileException__);
     }
-    *(this - 4) = CFileLibrary::FileSize((CFileLibrary *)&g_cFileLibrary, v7);
-    *(this - 2) = CFileLibrary::MapFile((CFileLibrary *)&g_cFileLibrary, v7);
-    CFileLibrary::FileClose((CFileLibrary *)&g_cFileLibrary, v7);
+    *(this - 4) = CFileLibrary::FileSize(&g_cFileLibrary, v7);
+    *(this - 2) = CFileLibrary::MapFile(&g_cFileLibrary, v7);
+    CFileLibrary::FileClose(&g_cFileLibrary, v7);
     *((_BYTE *)this - 24) = 1;
     *((_BYTE *)this - 23) = 1;
     return 1;
@@ -260,7 +260,7 @@ unsigned int  CFileEx::Read(void * Buffer, int ElementSize, int ElementCount, ch
       Size = *(this - 4) - *(this - 7);
       ElementCount = Size / ElementSize;
     }
-    j__memcpy(Buffer, (const void *)(*(this - 7) + *(this - 2)), Size);
+    memcpy(Buffer, (const void *)(*(this - 7) + *(this - 2)), Size);
     *(this - 7) += Size;
   }
   if ( !*((_BYTE *)this - 24) )
@@ -357,7 +357,7 @@ int  CFileEx::Seek(int Offset, int Origin, char * a4, int a5) {
   }
   else if ( *((_BYTE *)this - 24) )
   {
-    return CFileLibrary::FileSeek((CFileLibrary *)&g_cFileLibrary, *(this - 5), Offset, Origin);
+    return CFileLibrary::FileSeek(&g_cFileLibrary, *(this - 5), Offset, Origin);
   }
   else
   {

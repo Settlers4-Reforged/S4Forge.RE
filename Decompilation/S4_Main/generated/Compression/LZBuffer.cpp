@@ -101,12 +101,12 @@ void  LZBuffer::_toBuf(unsigned char const * Src, unsigned int a3) {
   v4 = LZBuffer::_wrap(*(_DWORD *)(this + 4));
   if ( (int)(a3 + v4) <= 0x10000 )
   {
-    j__memcpy((void *)(v4 + *(_DWORD *)this), Src, a3);
+    memcpy((void *)(v4 + *(_DWORD *)this), Src, a3);
   }
   else
   {
-    j__memcpy((void *)(v4 + *(_DWORD *)this), Src, 0x10000 - v4);
-    j__memcpy(*(void **)this, &Src[0x10000 - v4], a3 - (0x10000 - v4));
+    memcpy((void *)(v4 + *(_DWORD *)this), Src, 0x10000 - v4);
+    memcpy(*(void **)this, &Src[0x10000 - v4], a3 - (0x10000 - v4));
   }
   result = a3 + *(_DWORD *)(this + 4);
   *(_DWORD *)(this + 4) = result;
@@ -139,9 +139,9 @@ void  LZBuffer::_bufCpy(unsigned char * a2, int a3, unsigned int a4) {
   }
   v6 = LZBuffer::_wrap(a3);
   if ( (int)(a4 + v6) <= 0x10000 )
-    return j__memcpy(a2, (char *)*this + v6, a4);
-  j__memcpy(a2, (char *)*this + v6, 0x10000 - v6);
-  return j__memcpy(&a2[0x10000 - v6], *this, a4 - (0x10000 - v6));
+    return memcpy(a2, (char *)*this + v6, a4);
+  memcpy(a2, (char *)*this + v6, 0x10000 - v6);
+  return memcpy(&a2[0x10000 - v6], *this, a4 - (0x10000 - v6));
 }
 
 

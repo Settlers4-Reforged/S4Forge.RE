@@ -100,7 +100,7 @@ class CGameState * __cdecl CStateMDRandomMapParameters::DynamicCreateFunc(void *
     v3 = g_pStringEngine->GetString(g_pStringEngine, 789);
     j__mbstowcs(Dest, v3, 0x200u);
     if ( !j__wcscmp(Dest, L"dummy") )
-      j__wcscpy(Dest, L"%s's Game");
+      wcscpy(Dest, L"%s's Game");
     PlayerName = (_Cnd_internal_imp_t *)CGameSettings::GetPlayerName((int)v13);
     v4 = (const char *)std::wstring::c_str(PlayerName);
     j__swprintf(Buffer, 0x100u, v4);
@@ -285,7 +285,7 @@ bool  CStateMDRandomMapParameters::OnEvent(class CEvn_Event & a2) {
           *(_DWORD *)(g_pGameType + 64) = dword_4031930;
           *(_DWORD *)(g_pGameType + 864) = dword_4031934;
           *(_DWORD *)(g_pGameType + 112) = dword_4031924;
-          std::wstring::operator=((int)&unk_4031960);
+          std::wstring::operator=((int)&stru_4031960);
           if ( *((_BYTE *)v57 + 4) )
             v37 = 2;
           else

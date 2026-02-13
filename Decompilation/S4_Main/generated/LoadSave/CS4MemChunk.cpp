@@ -157,7 +157,7 @@ void  CS4MemChunk::Load(void * a2, unsigned int Size) {
     CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
     _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
   }
-  j__memcpy(a2, *(const void **)(v5 + 16), Size);
+  memcpy(a2, *(const void **)(v5 + 16), Size);
   result = v5;
   *(_DWORD *)(v5 + 16) += Size;
   return result;
@@ -348,7 +348,7 @@ void __fastcall CS4MemChunk::SaveFuncSaveData(void const * a1, unsigned int a2) 
   {
     __debugbreak();
   }
-  j__memcpy(*(void **)(a1 + 16), a2, Size);
+  memcpy(*(void **)(a1 + 16), a2, Size);
   result = Size + *(_DWORD *)(a1 + 16);
   *(_DWORD *)(a1 + 16) = result;
   return result;

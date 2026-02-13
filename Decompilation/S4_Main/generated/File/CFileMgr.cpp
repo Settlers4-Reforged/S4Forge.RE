@@ -168,7 +168,7 @@ void __cdecl CFileMgr::CheckOpenMode(int a1, int a2, char * a3, wchar_t const * 
 
   for ( i = 0; (&CFileMgr::m_sModes)[2 * i]; ++i )
   {
-    v6 = j__wcslen((&CFileMgr::m_sModes)[2 * i]);
+    v6 = wcslen((&CFileMgr::m_sModes)[2 * i]);
     if ( !j__wcsncmp(String2, (&CFileMgr::m_sModes)[2 * i], v6) )
       break;
   }

@@ -257,7 +257,7 @@ LABEL_15:
   v16 = (const wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)&a7);
   v17 = j__wcstombs(Dest, v16, 0x100u);
   if ( v17 >= 0x100 )
-    j____report_rangecheckfailure();
+    report_rangecheckfailure();
   Dest[v17] = 0;
   CTrace::Print(
     "PlayerManager.cpp: Adding player %s at %d/%d, with race %d, color %d, IP %d!",

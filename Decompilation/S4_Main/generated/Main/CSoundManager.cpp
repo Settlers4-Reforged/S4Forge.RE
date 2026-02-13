@@ -851,8 +851,8 @@ bool  CSoundManager::CreateDirPlaylist(wchar_t const * String) {
   v8 = 0;
   std::wstring::wstring(v5, String);
   LOBYTE(v8) = 1;
-  j__wcscpy(FileName, String);
-  if ( String[j__wcslen(String) - 1] == 92 )
+  wcscpy(FileName, String);
+  if ( String[wcslen(String) - 1] == 92 )
   {
     j__wcscat(FileName, L"*.mp3");
   }

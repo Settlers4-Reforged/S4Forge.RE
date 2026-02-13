@@ -6,25 +6,25 @@
 // Decompiled from CBBObject *__thiscall CBBObject::CBBObject(CBBObject *this, int a2, char a3)
  CBBObject::CBBObject(char const * a2, bool a3) {
   
-  *(_DWORD *)this = &CBBObject::_vftable_;
+  this->vtable = &CBBObject::_vftable_;
   CBBObjectTracer::Enter();
-  CBBObjectTracer::InitObject((int)this, a2, a3);
+  CBBObjectTracer::InitObject(this, a2, a3);
   if ( CBBObjectTracer::m_iNumberOfObjects == 1 )
     BBSupportTracePrintF(
       0,
       "%06x-%08x: %s created (%i object%s).",
-      *((_DWORD *)this + 1),
+      this->m_uSerialNumber,
       this,
-      *((const char **)this + 2),
+      this->m_spType,
       1,
-      (const char *)&unk_3ABA7F7);
+      (const char *)&sEmpty6);
   else
     BBSupportTracePrintF(
       0,
       "%06x-%08x: %s created (%i object%s).",
-      *((_DWORD *)this + 1),
+      this->m_uSerialNumber,
       this,
-      *((const char **)this + 2),
+      this->m_spType,
       CBBObjectTracer::m_iNumberOfObjects,
       "s");
   CBBObjectTracer::Leave();

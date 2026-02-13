@@ -81,7 +81,7 @@ void  CColorGradient::SetupGradients(int a2, struct SGfxColor a3, int a4) {
 // Decompiled from CColorGradient *__thiscall CColorGradient::CColorGradient(CColorGradient *this)
  CColorGradient::CColorGradient(void) {
   
-  j__memcpy((char *)this + 524, &unk_3ACC190, 0x6Cu);
+  memcpy((char *)this + 524, &unk_3ACC190, 0x6Cu);
   return this;
 }
 

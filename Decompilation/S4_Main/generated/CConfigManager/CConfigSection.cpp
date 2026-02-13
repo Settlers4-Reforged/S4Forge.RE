@@ -110,7 +110,7 @@ void  CConfigSection::AddVar(std::string const & a2, int const * Src, int a4) {
       if ( v5 )
       {
         if ( Src )
-          return (int *)j__memcpy(v5, Src, 4 * a3);
+          return (int *)memcpy(v5, Src, 4 * a3);
         else
           return (int *)memset(v5, 0, 4 * a3);
       }

@@ -137,7 +137,7 @@ bool  CStateLoadGame::OnEvent(class CEvn_Event & a2) {
     case 95:
       IGfxEngine::SetCursorShape((IGfxEngine *)g_pGfxEngine, 1, 4);
       v6 = &v3;
-      v5 = std::wstring::wstring((int)&unk_403037C);
+      v5 = std::wstring::wstring((int)&stru_403037C);
       if ( (unsigned __int8)CStateMainMenu::PreLoadGame(v3, v4) )
         return 1;
       CGameStateHandler::Queue((int)CStateMessageBox::DynamicCreateFunc, 2400);
@@ -227,7 +227,7 @@ void __cdecl CStateLoadGame::BuildSaveList(enum TGAME_TYPE a1, enum CAMPAIGN_TYP
         }
         CStateLoadGame::m_stempSavePtr[v12] = (int)v9;
         std::wstring::operator=((void *)CStateLoadGame::m_stempSavePtr[v12], FindData.name);
-        j__wcscpy(Destination, FindData.name);
+        wcscpy(Destination, FindData.name);
         v8 = (_WORD *)wcsstr(Destination, (wchar_t *)L".sav");
         if ( v8 )
           *v8 = 0;

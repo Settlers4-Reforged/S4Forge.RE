@@ -308,7 +308,7 @@ void __cdecl CGameSettings::LoadCommandLineValues(void) {
   v52 = j__mbstowcs(Dest, v15, v18);
   v67 = 2 * v52;
   if ( 2 * v52 >= 0x200 )
-    j____report_rangecheckfailure();
+    report_rangecheckfailure();
   Dest[v67 / 2] = 0;
   v20 = &v16;
   v19 = std::wstring::wstring(&v16, Dest);
@@ -534,7 +534,7 @@ void __cdecl CGameSettings::DetermineHighestResolution(void) {
 
 
 // address=[0x1488560]
-// Decompiled from int __cdecl CGameSettings::GetUserConfigDirectory(int a1)
+// Decompiled from wstring *__cdecl CGameSettings::GetUserConfigDirectory(void *a1)
 std::wstring __cdecl CGameSettings::GetUserConfigDirectory(void a1) {
   
   void *UserDirectoryPath; // [esp+4h] [ebp-38h]
@@ -543,10 +543,10 @@ std::wstring __cdecl CGameSettings::GetUserConfigDirectory(void a1) {
 
   UserDirectoryPath = FilePaths::GetUserDirectoryPath(v3);
   v4 = 0;
-  std::operator+<wchar_t>(a1, (int)UserDirectoryPath, (wchar_t *)L"Config\\");
+  std::operator+<wchar_t>(a1, UserDirectoryPath, (wchar_t *)L"Config\\");
   v4 = -1;
   std::wstring::~wstring(v3);
-  return a1;
+  return (wstring *)a1;
 }
 
 
@@ -613,11 +613,11 @@ void __cdecl CGameSettings::SetPlayerName(std::wstring a1) {
   v9 = 0;
   std::wstring::operator=((int)&a1);
   v1 = (const wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)&a1);
-  v3 = j__wcslen(v1);
+  v3 = wcslen(v1);
   v2 = (const wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)&a1);
   v6 = j__wcstombs(Dest, v2, v3);
   if ( v6 >= 0x100 )
-    j____report_rangecheckfailure();
+    report_rangecheckfailure();
   Dest[v6] = 0;
   v5 = ((int (__thiscall *)(CConfigManager *, const char *))g_pCfgMgr->GetConfigVar)(g_pCfgMgr, "GAMESETTINGS");
   v4 = std::string::string(v7, Dest);
@@ -1516,7 +1516,7 @@ void __cdecl CGameSettings::LoadAINames(void) {
     v3 = (const char *)std::string::c_str(v13);
     v8 = j__mbstowcs(Dest, v3, v4);
     if ( v8 >= 64 )
-      j____report_rangecheckfailure();
+      report_rangecheckfailure();
     Dest[v8] = 0;
     v5 = std::wstring::wstring(v10, Dest);
     std::wstring::operator=(v5);

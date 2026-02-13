@@ -74,7 +74,7 @@ class CGameState * __cdecl CStateLobbyConnect::DynamicCreateFunc(void * a1) {
     j__mbstowcs(Dest, Source, 0x100u);
     Dest[31] = 0;
   }
-  std::wstring::operator=(&unk_4030720, Dest);
+  std::wstring::operator=(&stru_4030720, Dest);
   CGuiGameState::OpenDialog(this, 2, (bool (__cdecl *)(int, int, int))GuiDlgLanLobbyConnectMenuProc);
   IGfxEngine::SetCursorShape((IGfxEngine *)g_pGfxEngine, 1, 0);
   return this;
@@ -308,7 +308,7 @@ bool  CStateLobbyConnect::OnEvent(class CEvn_Event & a2) {
       break;
     case 47:
       v22 = &v14;
-      v28 = std::wstring::wstring((int)&unk_4030720);
+      v28 = std::wstring::wstring((int)&stru_4030720);
       CGameSettings::SetPlayerName(v14, v15);
       if ( g_pNetworkEngine
         || ((C = operator new(0x18u), v65 = 2, !C)
@@ -405,7 +405,7 @@ bool  CStateLobbyConnect::OnEvent(class CEvn_Event & a2) {
         g_pGameType = 0;
       }
       v25 = &v14;
-      v24 = std::wstring::wstring((int)&unk_4030720);
+      v24 = std::wstring::wstring((int)&stru_4030720);
       CGameSettings::SetPlayerName(v14, v15);
       if ( g_pNetworkEngine )
       {
@@ -427,7 +427,7 @@ bool  CStateLobbyConnect::OnEvent(class CEvn_Event & a2) {
         g_pGameType = 0;
       }
       v27 = &v14;
-      v23 = std::wstring::wstring((int)&unk_4030720);
+      v23 = std::wstring::wstring((int)&stru_4030720);
       CGameSettings::SetPlayerName(v14, v15);
       if ( g_pNetworkEngine )
       {

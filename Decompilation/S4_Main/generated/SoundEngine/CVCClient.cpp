@@ -141,7 +141,7 @@ bool  CVCClient::ReceivePackage(signed char * Src) {
   
   if ( *(_BYTE *)(this[15] + this[21]) )
     return 1;
-  j__memcpy(*(void **)(this[17] + 4 * this[21]), Src, this[23]);
+  memcpy(*(void **)(this[17] + 4 * this[21]), Src, this[23]);
   *(_BYTE *)(this[15] + this[21]) = 1;
   if ( this[20] == -1 )
     this[20] = 0;
@@ -169,7 +169,7 @@ void  CVCClient::PlayStream(void) {
     return result;
   if ( *(_BYTE *)(this[16] + this[19]) )
   {
-    j__memcpy((void *)this[(_DWORD)result + 12], *(const void **)(this[26] + 4 * this[19]), this[14]);
+    memcpy((void *)this[(_DWORD)result + 12], *(const void **)(this[26] + 4 * this[19]), this[14]);
     *(_BYTE *)(this[16] + this[19]) = 0;
     if ( this[19] == this[25] - 1 )
       this[19] = 0;
@@ -207,7 +207,7 @@ long  CVCClient::CopyDataToDecoder(void * a2, long a3, long a4) {
   else
     v5 = a3;
   Size = v5;
-  j__memcpy(a2, (const void *)(this[22] + *(_DWORD *)(this[17] + 4 * this[20])), v5);
+  memcpy(a2, (const void *)(this[22] + *(_DWORD *)(this[17] + 4 * this[20])), v5);
   this[22] += v5;
   if ( this[22] == this[23] )
   {

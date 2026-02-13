@@ -168,11 +168,11 @@ void  IGfxEngine::SetGfxLayerAccess(int a2, struct T_GFX_MAP_ELEMENT * a3) {
   byte_3E2E2FE = 1;
   byte_3E2E2FF = 1;
   SetCrossingSystemMapAccess(a2, a3);
-  NewValue = j___controlfp(0x300u, 0x300u);
+  NewValue = controlfp(0x300u, 0x300u);
   CalcMaxHeights(a3, a2);
   SetMiniMapGradient();
   CalcMaxTimeStamps();
-  return j___controlfp(NewValue, 0x300u);
+  return controlfp(NewValue, 0x300u);
 }
 
 
@@ -381,7 +381,7 @@ void  IGfxEngine::SetGfxObject(struct SGfxObject * Src) {
   void *result; // eax
 
   if ( Src )
-    return j__memcpy(&g_sGfxObjectCursorBuilding, Src, 0x2E0u);
+    return memcpy(&g_sGfxObjectCursorBuilding, Src, 0x2E0u);
   g_sGfxObjectCursorBuilding = -65535;
   return result;
 }

@@ -49,7 +49,7 @@ bool __cdecl CMapCheck::StrStrLo(wchar_t const * Source, wchar_t const * SubStr)
     return 0;
   if ( !SubStr || !*SubStr )
     return 1;
-  j__wcsncpy(Destination, Source, 0x3FFu);
+  wcsncpy(Destination, Source, 0x3FFu);
   Destination[1023] = 0;
   j___wcslwr(Destination);
   return wcsstr(Destination, SubStr) != 0;

@@ -155,7 +155,7 @@ bool  CStringEngineEx::ExtractStrings(char * buffer, int size, int a4) {
     {
       this->strings[readTxtIndex] = (wchar_t *)operator new[](Size + 1);
       if ( Size > 0 )
-        j__memcpy(this->strings[readTxtIndex], (char *)buffer + pointera, Size);
+        memcpy(this->strings[readTxtIndex], (char *)buffer + pointera, Size);
       *((_BYTE *)this->strings[readTxtIndex] + Size) = 0;
     }
     pointer = Size + pointera;
@@ -258,7 +258,7 @@ void  CStringEngineEx::CreateTextForEmptyStrings(void) {
       Src[1023] = 0;
       v3 = strlen(Src);
       *(_DWORD *)(this[1] + 4 * i) = operator new[](v3 + 1);
-      j__memcpy(*(void **)(this[1] + 4 * i), Src, v3 + 1);
+      memcpy(*(void **)(this[1] + 4 * i), Src, v3 + 1);
       ++v4;
     }
   }

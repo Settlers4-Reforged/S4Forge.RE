@@ -9,7 +9,7 @@ public:
     static void __cdecl Enter(void);
 
     // address=[0x2f33ad0]
-    static void __cdecl InitObject(class CBBObject & a1, char const * a2, bool a3);
+    static void __cdecl InitObject(class CBBObject & _sType, char const * _bFirst, bool a3);
 
     // address=[0x2f33b70]
     static bool __cdecl IsObjectInList(unsigned int a1, class CBBObject * & a2);

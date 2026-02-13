@@ -269,7 +269,7 @@ void  CGameScriptManager::NewGameEx(char const * Src, unsigned int Size, wchar_t
   v28 = &v7;
   v16 = this;
   memset(String, 0, sizeof(String));
-  j__wcscpy(String, L"Script\\");
+  wcscpy(String, L"Script\\");
   if ( Src && *Src && Size >= 2 )
   {
     v20 = Src;
@@ -286,7 +286,7 @@ void  CGameScriptManager::NewGameEx(char const * Src, unsigned int Size, wchar_t
       i -= 2;
       if ( i < 0x40 && v20[i - 1] == 92 )
       {
-        v15 = &String[j__wcslen(String)];
+        v15 = &String[wcslen(String)];
         for ( j = 0; j < i; ++j )
           v15[j] = (char)v20[j];
       }
@@ -301,14 +301,14 @@ void  CGameScriptManager::NewGameEx(char const * Src, unsigned int Size, wchar_t
   {
     if ( *Source )
     {
-      if ( j__wcslen(Source) < 0x400 )
+      if ( wcslen(Source) < 0x400 )
       {
-        j__wcscpy(Destination, Source);
+        wcscpy(Destination, Source);
         v19 = (wchar_t *)sub_1601260(Destination);
         if ( v19 )
         {
-          v18 = j__wcslen(v19);
-          if ( v18 > 4 && (!j___wcsicmp(L".edm", &v19[v18 - 4]) || !j___wcsicmp(L".map", &v19[v18 - 4])) )
+          v18 = wcslen(v19);
+          if ( v18 > 4 && (!wcsicmp(L".edm", &v19[v18 - 4]) || !wcsicmp(L".map", &v19[v18 - 4])) )
           {
             v19[v18 - 3] = 116;
             v19[v18 - 2] = 120;
@@ -545,7 +545,7 @@ bool  CGameScriptManager::LoadMapScript(char const * Src, unsigned int Size) {
   {
     *(_DWORD *)(this + 20) = operator new[](Size);
     *(_DWORD *)(this + 24) = Size;
-    j__memcpy(*(void **)(this + 20), Src, Size);
+    memcpy(*(void **)(this + 20), Src, Size);
     CLua::ExecuteScript(*(CLua **)(this + 12), *(void **)(this + 20), *(_DWORD *)(this + 24), 0);
   }
   else

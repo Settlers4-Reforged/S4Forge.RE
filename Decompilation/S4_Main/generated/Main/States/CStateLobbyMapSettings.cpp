@@ -72,7 +72,7 @@ class CGameState * __cdecl CStateLobbyMapSettings::DynamicCreateFunc(void * a1) 
     v2 = g_pStringEngine->GetString(g_pStringEngine, 789);
     j__mbstowcs(Dest, v2, 0x200u);
     if ( !j__wcscmp(Dest, L"dummy") )
-      j__wcscpy(Dest, L"%s's Game");
+      wcscpy(Dest, L"%s's Game");
     PlayerName = (_Cnd_internal_imp_t *)CGameSettings::GetPlayerName((int)v11);
     v3 = (const char *)std::wstring::c_str(PlayerName);
     j__swprintf(Buffer, 0x100u, v3);
@@ -294,7 +294,7 @@ bool  CStateLobbyMapSettings::OnEvent(class CEvn_Event & a2) {
         *(_DWORD *)(g_pGameType + 64) = dword_4031930;
         *(_DWORD *)(g_pGameType + 864) = dword_4031934;
         *(_DWORD *)(g_pGameType + 112) = dword_4031924;
-        std::wstring::operator=((int)&unk_4031960);
+        std::wstring::operator=((int)&stru_4031960);
         if ( *((_BYTE *)v56 + 4) )
           v37 = 2;
         else
@@ -674,10 +674,10 @@ LABEL_29:
         *(_BYTE *)(CStateLobbyMapSettings::m_stempMapPtr[*v52] + 81) = v40;
         *(_DWORD *)(CStateLobbyMapSettings::m_stempMapPtr[*v52] + 88) = *(_DWORD *)(g_pGameType + 880);
         std::string::operator=(g_pGameType + 756);
-        j__wcscpy(String, FindData.name);
+        wcscpy(String, FindData.name);
         j__wcsupr(String);
         v37 = (_WORD *)wcsstr(String, MAP_FILE_EXTENSION);
-        j__wcscpy(String, FindData.name);
+        wcscpy(String, FindData.name);
         *v37 = 0;
         std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v55);
         LOBYTE(v59) = 3;
@@ -1039,7 +1039,7 @@ int  CStateLobbyMapSettings::Compare(int a2, int a3) {
       case 0:
         v5 = (const char *)std::string::c_str((void *)CStateLobbyMapSettings::m_stempMapPtr[a3]);
         v3 = (const char *)std::string::c_str((void *)CStateLobbyMapSettings::m_stempMapPtr[a2]);
-        v18 = j___stricmp(v3, v5);
+        v18 = stricmp(v3, v5);
         if ( !v18 )
           goto CStateLobbyMapSettings__Compare___def_18BF9AD;
         if ( *((_BYTE *)this + 12) )

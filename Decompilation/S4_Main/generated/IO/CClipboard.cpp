@@ -19,7 +19,7 @@ void  CClipboard::CopyTextToClipboard(char const * Str) {
     if ( hMem )
     {
       v1 = GlobalLock(hMem);
-      j__memcpy(v1, Str, v3 + 1);
+      memcpy(v1, Str, v3 + 1);
       GlobalUnlock(hMem);
       SetClipboardData(1u, hMem);
     }

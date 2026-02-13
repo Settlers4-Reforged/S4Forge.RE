@@ -70,7 +70,7 @@ void  CScrollMultiline::SetText(char const * a2) {
   this[507] = a2;
   CScrollMultiline::SplitText(this);
   this[501] = 0;
-  return IGuiEngine::SetText((void *)g_pGUIEngine, this[504], this[505], (char *)this[this[501]]);
+  return IGuiEngine::SetText(g_pGUIEngine, this[504], this[505], (char *)this[this[501]]);
 }
 
 

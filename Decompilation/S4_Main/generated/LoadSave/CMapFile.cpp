@@ -390,7 +390,7 @@ void const *  S4::CMapFile::LoadChunk(unsigned short a2, unsigned short a3, int 
       Size = ElementSize;
       v18 = operator new[](ElementSize);
       v49 = v18;
-      j__memcpy(v18, Src, Size);
+      memcpy(v18, Src, Size);
     }
     else
     {
@@ -554,7 +554,7 @@ void  S4::CMapFile::UploadBuffer(unsigned int a2, unsigned int a3, void const * 
   v23 = a2 + (a3 << 16);
   v20 = operator new[](Size);
   v22 = v20;
-  j__memcpy(v20, Src, Size);
+  memcpy(v20, Src, Size);
   v19 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<unsigned int,int,std::less<unsigned int>,std::allocator<std::pair<unsigned int const,int>>,0>>::end(v12);
   v18 = v19;
   v26 = 0;
@@ -632,7 +632,7 @@ void  S4::CMapFile::SaveChunk(unsigned short a2, unsigned short a3, unsigned int
   else
   {
     v12 = operator new[](Size);
-    j__memcpy(v12, Src, Size);
+    memcpy(v12, Src, Size);
     ElementSize = Size;
     v9 = -1;
     v6 = S4::CMapFile::Crc(this, v12, Size);

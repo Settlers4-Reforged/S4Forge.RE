@@ -81,7 +81,7 @@ long  SurfaceClipper::SetClipRect(struct tagRECT const & Src) {
   v4[5] = Src[1];
   v4[6] = Src[2];
   v4[7] = Src[3];
-  j__memcpy(v4 + 8, Src, 0x10u);
+  memcpy(v4 + 8, Src, 0x10u);
   return (*(int (__stdcall **)(_DWORD, _DWORD *, _DWORD))(*(_DWORD *)*this + 28))(*this, v4, 0);
 }
 

@@ -126,7 +126,7 @@ bool  CRandomMaps::GetParamsFromMapKey(struct SRandomMapParams * a1, wchar_t con
   if ( !a1 )
     return 0;
   memset(a1, 0, 0xB8u);
-  j__wcsncpy(Destination, Source, 0x3FFu);
+  wcsncpy(Destination, Source, 0x3FFu);
   Destination[1023] = 0;
   if ( !(unsigned __int8)IsValidMapKey(Destination) )
     return 0;
@@ -171,7 +171,7 @@ bool  CRandomMaps::IsRandomMapFileName(wchar_t const * String, std::wstring * a2
 
   if ( !String )
     goto LABEL_21;
-  v5 = j__wcslen(String);
+  v5 = wcslen(String);
   if ( v5 >= 3 && *String == 82 && String[1] == 68 && String[2] == 95 )
   {
     if ( a2 )

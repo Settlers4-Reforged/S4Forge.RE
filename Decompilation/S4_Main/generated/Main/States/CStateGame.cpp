@@ -146,7 +146,7 @@ void  CStateGame::UpdateToGuiInfoStruct(void) {
     v9 = (_Cnd_internal_imp_t *)CPlayerManager::Name(v16, i);
     v19 = 0;
     v2 = (const wchar_t *)std::wstring::c_str(v9);
-    v5 = j__wcslen(v2);
+    v5 = wcslen(v2);
     v8 = (_Cnd_internal_imp_t *)CPlayerManager::Name(v17, i);
     v3 = (const wchar_t *)std::wstring::c_str(v8);
     v7 = j__wcstombs(Dest, v3, v5);
@@ -154,7 +154,7 @@ void  CStateGame::UpdateToGuiInfoStruct(void) {
     v19 = -1;
     std::wstring::~wstring(v16);
     if ( v7 >= 0x100 )
-      j____report_rangecheckfailure();
+      report_rangecheckfailure();
     Dest[v7] = 0;
     v6 = std::string::string(v15, Dest);
     std::string::operator=((char *)this + 40 * i + 364, v6);
@@ -1370,10 +1370,10 @@ bool  CStateGame::Perform(void) {
             LocalPlayerId = CPlayerManager::GetLocalPlayerId();
             CEvn_Logic::CEvn_Logic((CEvn_Logic *)v56, 0xFA8u, *((_DWORD *)v50 + 76), 0, LocalPlayerId, 0, 0);
             v59 = 3;
-            if ( std::wstring::length(&unk_403037C) )
+            if ( std::wstring::length(&stru_403037C) )
             {
-              v57 = std::wstring::c_str((_Cnd_internal_imp_t *)&unk_403037C);
-              v58 = 2 * std::wstring::size(&unk_403037C);
+              v57 = std::wstring::c_str((_Cnd_internal_imp_t *)&stru_403037C);
+              v58 = 2 * std::wstring::size(&stru_403037C);
             }
             INetworkEngine::SendNetMessage((INetworkEngine *)g_pNetworkEngine, (struct CEvn_Logic *)v56);
             *((_DWORD *)v50 + 74) = ValidTick;
@@ -2283,7 +2283,7 @@ LABEL_269:
               }
               else
               {
-                v183 = std::operator+<wchar_t>((int)v288, (int)&unk_403037C, (wchar_t *)L".sav");
+                v183 = std::operator+<wchar_t>((int)v288, (int)&stru_403037C, (wchar_t *)L".sav");
                 std::wstring::operator=(v183);
                 std::wstring::~wstring(v288);
               }
@@ -3501,7 +3501,7 @@ LABEL_61:
               v110 = v109;
               v323 = 2;
               v13 = (const wchar_t *)std::wstring::c_str(v109);
-              v68 = j__wcslen(v13);
+              v68 = wcslen(v13);
               v111 = (_Cnd_internal_imp_t *)CPlayerManager::Name((int)v287, a2->m_wParam);
               v14 = (const wchar_t *)std::wstring::c_str(v111);
               v112 = j__wcstombs(Dest, v14, v68);
@@ -3510,7 +3510,7 @@ LABEL_61:
               std::wstring::~wstring(v285);
               v190 = v112;
               if ( v112 >= 0x21 )
-                j____report_rangecheckfailure();
+                report_rangecheckfailure();
               Dest[v190] = 0;
               v68 = (size_t)Dest;
               v67 = 1;
@@ -3543,7 +3543,7 @@ LABEL_61:
             v115 = v114;
             v323 = 3;
             v17 = (const wchar_t *)std::wstring::c_str(v114);
-            v68 = j__wcslen(v17);
+            v68 = wcslen(v17);
             v116 = (_Cnd_internal_imp_t *)CPlayerManager::Name((int)v286, (int)v277[2]);
             v18 = (const wchar_t *)std::wstring::c_str(v116);
             v117 = j__wcstombs(v321, v18, v68);
@@ -3552,7 +3552,7 @@ LABEL_61:
             std::wstring::~wstring(v284);
             v189 = v117;
             if ( v117 >= 0x21 )
-              j____report_rangecheckfailure();
+              report_rangecheckfailure();
             v321[v189] = 0;
             CPlayerManager::SetPlayerControl((int)v277[2], 2);
             v68 = (size_t)v321;

@@ -47,7 +47,7 @@
   *((_WORD *)this + 62) = *(_BYTE *)(g_pGameType + 732) == 0;
   *((_BYTE *)this + 52) = *(_BYTE *)(g_pGameType + 748);
   *((_DWORD *)this + 14) = *(_DWORD *)(g_pGameType + 752);
-  j__memcpy((char *)this + 128, (const void *)(g_pGameType + 784), 7u);
+  memcpy((char *)this + 128, (const void *)(g_pGameType + 784), 7u);
   *((_BYTE *)this + 127) = CGameType::IsLadderGame(g_pGameType);
   return this;
 }

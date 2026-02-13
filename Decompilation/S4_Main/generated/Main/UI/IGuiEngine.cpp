@@ -436,7 +436,7 @@ bool  IGuiEngine::CloseDialog(int a2) {
       LOBYTE(g_mbstrTextTable[75 * *((char *)v4 + 25)]) = 0;
       v3 = *((char *)v4 + 25);
       if ( v3 >= 0x50 )
-        j____report_rangecheckfailure();
+        report_rangecheckfailure();
       g_bUsedTexts[v3] = 0;
     }
     *((_BYTE *)v4 + 25) = -1;
@@ -796,7 +796,7 @@ LABEL_41:
             LOBYTE(g_mbstrTextTable[75 * (char)ControlPtr->id]) = 0;
             id = (char)ControlPtr->id;
             if ( id >= 0x50 )
-              j____report_rangecheckfailure();
+              report_rangecheckfailure();
             g_bUsedTexts[id] = 0;
             ControlPtr->id = -1;
           }
@@ -821,7 +821,7 @@ LABEL_41:
         LOBYTE(g_mbstrTextTable[75 * (char)ControlPtr->id]) = 0;
         v6 = (char)ControlPtr->id;
         if ( v6 >= 0x50 )
-          j____report_rangecheckfailure();
+          report_rangecheckfailure();
         g_bUsedTexts[v6] = 0;
         ControlPtr->id = -1;
       }
@@ -1064,19 +1064,19 @@ bool  IGuiEngine::SetControlVisibility(int a2, int a3, bool a4) {
 // Decompiled from char __thiscall IGuiEngine::SetImages(void *this, int a2, int a3, int a4, int a5)
 bool  IGuiEngine::SetImages(int a2, int a3, int a4, int a5) {
   
-  int ControlPtr; // [esp+4h] [ebp-4h]
+  struct SGuiControl *ControlPtr; // [esp+4h] [ebp-4h]
 
-  if ( !(unsigned __int8)sub_2FA28C0(this) )
+  if ( !sub_2FA28C0() )
     return 0;
   ControlPtr = GetControlPtr(a2, a3);
   if ( !ControlPtr )
     return 0;
-  if ( *(unsigned __int16 *)(ControlPtr + 8) == a4 && *(unsigned __int16 *)(ControlPtr + 14) == a5 )
+  if ( ControlPtr->mainTexture == a4 && ControlPtr->buttonPressedTexture == a5 )
     return 1;
-  *(_WORD *)(ControlPtr + 8) = a4;
-  *(_WORD *)(ControlPtr + 14) = a5;
+  ControlPtr->mainTexture = a4;
+  ControlPtr->buttonPressedTexture = a5;
   g_bGuiIsDirty = 1;
-  *(_BYTE *)(ControlPtr + 35) = 1;
+  HIBYTE(ControlPtr->unknownData[1]) = 1;
   return 1;
 }
 

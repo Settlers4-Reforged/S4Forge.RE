@@ -34,7 +34,7 @@ int const *  CConfigVarIntArray::GetIntArray(void)const {
               "Source\\ConfigManager\\ConfigManager.cpp",
               1355);
   if ( Src )
-    j__memcpy(this[2], Src, 4 * a3);
+    memcpy(this[2], Src, 4 * a3);
   else
     memset(this[2], 0, 4 * a3);
   return this;

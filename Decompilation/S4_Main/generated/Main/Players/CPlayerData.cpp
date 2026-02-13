@@ -328,7 +328,7 @@ int  CPlayerData::Save(unsigned char * a2) {
   int NumberOfPlayers; // eax
 
   NumberOfPlayers = CPlayerData::GetNumberOfPlayers(this);
-  j__memcpy(a2, (const void *)(this + 330), 45 * NumberOfPlayers);
+  memcpy(a2, (const void *)(this + 330), 45 * NumberOfPlayers);
   return 45 * CPlayerData::GetNumberOfPlayers(this);
 }
 
@@ -339,9 +339,9 @@ int  CPlayerData::SaveTeamData(unsigned char * a2, int a3) {
   
   int NumberOfPlayers; // eax
 
-  j__memcpy(a2, &this[33 * a3], 0x21u);
+  memcpy(a2, &this[33 * a3], 0x21u);
   NumberOfPlayers = CPlayerData::GetNumberOfPlayers(this);
-  j__memcpy(a2 + 33, &this[16 * a3 + 690], 2 * NumberOfPlayers);
+  memcpy(a2 + 33, &this[16 * a3 + 690], 2 * NumberOfPlayers);
   return 2 * CPlayerData::GetNumberOfPlayers(this) + 33;
 }
 
@@ -358,7 +358,7 @@ int  CPlayerData::Load(unsigned char * lpBuffer, void * hFile, struct SMapChunkH
   this[213] = a9;
   v11 = ReadFile(hFile, lpBuffer, nNumberOfBytesToRead, &NumberOfBytesRead, 0);
   ReadChunk(lpBuffer, nNumberOfBytesToRead, a6);
-  j__memcpy((char *)v12 + 330, lpBuffer, 45 * v12[213]);
+  memcpy((char *)v12 + 330, lpBuffer, 45 * v12[213]);
   return v11;
 }
 
@@ -379,11 +379,11 @@ int  CPlayerData::LoadTeamData(unsigned char * lpBuffer, void * hFile, struct SM
     return 0;
   v12 = ReadFile(hFile, lpBuffer, nNumberOfBytesToRead, &NumberOfBytesRead, 0);
   ReadChunk(lpBuffer, nNumberOfBytesToRead, a6);
-  j__memcpy((char *)v13 + 33 * v14, lpBuffer, 0x21u);
+  memcpy((char *)v13 + 33 * v14, lpBuffer, 0x21u);
   if ( v14 + 1 > v13[214] )
     v13[214] = v14 + 1;
   NumberOfPlayers = CPlayerData::GetNumberOfPlayers(v13);
-  j__memcpy((char *)&v13[4 * v14 + 172] + 2, lpBuffer + 33, 2 * NumberOfPlayers);
+  memcpy((char *)&v13[4 * v14 + 172] + 2, lpBuffer + 33, 2 * NumberOfPlayers);
   return v12;
 }
 

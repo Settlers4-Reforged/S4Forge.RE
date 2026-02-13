@@ -171,7 +171,7 @@ bool  CSimpleNet::PushMessage(unsigned int a2, unsigned int a3, unsigned short a
   {
     if ( Size > 0x400 )
       Size = 1024;
-    j__memcpy(v11, Src, Size);
+    memcpy(v11, Src, Size);
     memset(&v11[Size], 0, 0x20u);
     if ( j__LZHLCompressorCalcMaxBuf(Size) >= 0x800u
       && BBSupportDbgReport(2, "net\\SimpleNet.cpp", 999, "iBufferLen < sizeof( sMessage.m_sMessage.m_cDataBuffer )") == 1 )
@@ -187,7 +187,7 @@ bool  CSimpleNet::PushMessage(unsigned int a2, unsigned int a3, unsigned short a
   }
   else
   {
-    j__memcpy(&unk_415B9FA, Src, Size);
+    memcpy(&unk_415B9FA, Src, Size);
     dword_415B9F6 = ((Size & 0x3FF) << 22) | dword_415B9F6 & 0x3FFFFF;
     dword_415B9F6 &= 0xFFC00FFF;
   }

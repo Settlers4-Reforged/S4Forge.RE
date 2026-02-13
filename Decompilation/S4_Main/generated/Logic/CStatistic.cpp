@@ -92,7 +92,7 @@ void  CStatistic::Update(void) {
     return result;
   CStatistic::m_bWonStateSaved = 1;
   for ( i = 0; i < 9; ++i )
-    result = j__memcpy((char *)this + 4392 * i + 4220, (char *)this + 4392 * i + 2568, 0xACu);
+    result = memcpy((char *)this + 4392 * i + 4220, (char *)this + 4392 * i + 2568, 0xACu);
   return result;
 }
 
@@ -104,7 +104,7 @@ void  CStatistic::Update(class CStatistic & a2) {
   struct CStatistic *result; // eax
 
   CStatistic::Update(a2);
-  j__memcpy((char *)this + 4, (char *)a2 + 4, 0x9A68u);
+  memcpy((char *)this + 4, (char *)a2 + 4, 0x9A68u);
   result = a2;
   *((_DWORD *)this + 9883) = *((_DWORD *)a2 + 9883);
   return result;
@@ -1467,7 +1467,7 @@ void  CStatistic::FreezeEcoStatistic(void) {
     return result;
   CStatistic::m_bWonStateSaved = 1;
   for ( i = 0; i < 9; ++i )
-    result = j__memcpy((char *)this + 4392 * i + 4220, (char *)this + 4392 * i + 2568, 0xACu);
+    result = memcpy((char *)this + 4392 * i + 4220, (char *)this + 4392 * i + 2568, 0xACu);
   return result;
 }
 
@@ -1512,7 +1512,7 @@ int  CStatistic::OffenceStrength100(int a2)const {
   
   IS4ChunkObject::IS4ChunkObject((boost::exception_detail::clone_base *)this, a2);
   *(_DWORD *)this = CStatistic::_vftable_;
-  j__memcpy((void *)(this + 4), (char *)a2 + 4, 0x9A6Cu);
+  memcpy((void *)(this + 4), (char *)a2 + 4, 0x9A6Cu);
   return this;
 }
 
