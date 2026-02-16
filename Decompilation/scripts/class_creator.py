@@ -318,6 +318,7 @@ FOLDER_MAP =  {
         "CFileMgr",
         "IFSNode",
         "IFileEx",
+        "PathSplitResult",
     ],
 
     "Gfx/": [
@@ -856,7 +857,6 @@ FOLDER_MAP =  {
         "CSquareVisited",
         "CSectorSpiralWalk",
         "CSpiralWalk",
-        "PathSplitResult",
         "CTilesAndLinks",
         "CTilesEx",
         "CTiling",
