@@ -5,6 +5,7 @@
 
 enum T_CFGVAR_TYPE : __int8
 {
+    T_CFGVAR_TYPE_UNKNOWN = 0x0,
     T_CFGVAR_TYPE_INT = 0x1,
     T_CFGVAR_TYPE_INT_ARRAY = 0x2,
     T_CFGVAR_TYPE_FLOAT = 0x3,
