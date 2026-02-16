@@ -534,7 +534,7 @@ void __cdecl CGameSettings::DetermineHighestResolution(void) {
 
 
 // address=[0x1488560]
-// Decompiled from wstring *__cdecl CGameSettings::GetUserConfigDirectory(void *a1)
+// Decompiled from std::wstring *__cdecl CGameSettings::GetUserConfigDirectory(void *a1)
 std::wstring __cdecl CGameSettings::GetUserConfigDirectory(void a1) {
   
   void *UserDirectoryPath; // [esp+4h] [ebp-38h]
@@ -546,7 +546,7 @@ std::wstring __cdecl CGameSettings::GetUserConfigDirectory(void a1) {
   std::operator+<wchar_t>(a1, UserDirectoryPath, (wchar_t *)L"Config\\");
   v4 = -1;
   std::wstring::~wstring(v3);
-  return (wstring *)a1;
+  return (std::wstring *)a1;
 }
 
 
@@ -1469,60 +1469,60 @@ int __cdecl CGameSettings::GetTutorialStatus(void) {
 void __cdecl CGameSettings::LoadAINames(void) {
   
   int result; // eax
-  const char *v1; // eax
-  const char *v2; // eax
-  const char *v3; // eax
+  char *v1; // eax
+  char *v2; // eax
+  char *v3; // eax
   size_t v4; // [esp-4h] [ebp-170h]
   int v5; // [esp+4h] [ebp-168h]
   void *v6; // [esp+Ch] [ebp-160h]
-  void *v7; // [esp+10h] [ebp-15Ch]
+  struct std::string *v7; // [esp+10h] [ebp-15Ch]
   size_t v8; // [esp+18h] [ebp-154h]
   int i; // [esp+1Ch] [ebp-150h]
-  _BYTE v10[28]; // [esp+20h] [ebp-14Ch] BYREF
+  std::wstring v10; // [esp+20h] [ebp-14Ch] BYREF
   int v11[7]; // [esp+3Ch] [ebp-130h] BYREF
-  _BYTE v12[28]; // [esp+58h] [ebp-114h] BYREF
-  int v13[7]; // [esp+74h] [ebp-F8h] BYREF
+  struct std::string v12; // [esp+58h] [ebp-114h] BYREF
+  std::string v13; // [esp+74h] [ebp-F8h] BYREF
   wchar_t Dest[64]; // [esp+90h] [ebp-DCh] BYREF
   char Buffer[64]; // [esp+110h] [ebp-5Ch] BYREF
   char Format[12]; // [esp+150h] [ebp-1Ch] BYREF
   int v17; // [esp+168h] [ebp-4h]
 
-  result = 2036427856;
+  result = 'yalP';
   strcpy(Format, "Player%d");
   for ( i = 0; i < 9; ++i )
   {
     sprintf(Buffer, Format, i + 1);
-    v7 = std::string::string(v12, "AI Player");
+    v7 = std::string::string(&v12, "AI Player");
     v17 = 0;
-    ((void (__thiscall *)(CConfigManager *, int *, const char *, char *, void *))g_pCfgMgr->GetStringValue)(
+    ((void (__thiscall *)(CConfigManager *, std::string *, const char *, char *, struct std::string *))g_pCfgMgr->GetStringValue)(
       g_pCfgMgr,
-      v13,
+      &v13,
       "AINAMES",
       Buffer,
       v7);
     LOBYTE(v17) = 2;
-    std::string::~string(v12);
-    v6 = (void *)std::operator+<char>((int)v11, "(AI) ", (int)v13);
-    std::string::operator=(v13, v6);
+    std::string::~string(&v12);
+    v6 = (void *)std::operator+<char>((int)v11, "(AI) ", (int)&v13);
+    std::string::operator=(&v13, v6);
     std::string::~string(v11);
-    v1 = (const char *)std::string::c_str(v13);
-    if ( strlen(v1) >= 0x20
+    v1 = std::string::c_str(&v13);
+    if ( strlen(v1) >= 32
       && BBSupportDbgReport(2, "main\\GameSettings.cpp", 275, "strlen( strTemp.c_str() ) < MAX_PLAYERNAME_LENGTH") == 1 )
     {
       __debugbreak();
     }
-    v2 = (const char *)std::string::c_str(v13);
+    v2 = std::string::c_str(&v13);
     v4 = strlen(v2);
-    v3 = (const char *)std::string::c_str(v13);
+    v3 = std::string::c_str(&v13);
     v8 = j__mbstowcs(Dest, v3, v4);
     if ( v8 >= 64 )
       report_rangecheckfailure();
     Dest[v8] = 0;
-    v5 = std::wstring::wstring(v10, Dest);
+    v5 = std::wstring::wstring(&v10, Dest);
     std::wstring::operator=(v5);
-    std::wstring::~wstring(v10);
+    std::wstring::~wstring(&v10);
     v17 = -1;
-    std::string::~string(v13);
+    std::string::~string(&v13);
     result = i + 1;
   }
   return result;

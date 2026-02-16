@@ -124,7 +124,7 @@ void  CFileEx::Open(wchar_t const * FileName, unsigned int a3, bool a4, char * S
   
   wchar_t *v6; // eax
   _BYTE pExceptionObject[552]; // [esp+8h] [ebp-254h] BYREF
-  wstring v9; // [esp+230h] [ebp-2Ch] BYREF
+  std::wstring v9; // [esp+230h] [ebp-2Ch] BYREF
   int v10; // [esp+258h] [ebp-4h]
 
   *((_BYTE *)this - 24) = 0;

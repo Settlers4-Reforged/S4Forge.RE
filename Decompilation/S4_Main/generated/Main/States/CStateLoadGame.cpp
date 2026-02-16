@@ -150,28 +150,28 @@ bool  CStateLoadGame::OnEvent(class CEvn_Event & a2) {
 
 
 // address=[0x14b5a30]
-// Decompiled from void __cdecl CStateLoadGame::BuildSaveList(int a1, int a2)
+// Decompiled from void __cdecl CStateLoadGame::BuildSaveList(int a1, int arg4)
 void __cdecl CStateLoadGame::BuildSaveList(enum TGAME_TYPE a1, enum CAMPAIGN_TYPE a2) {
   
   int v2; // eax
-  const wchar_t *v3; // eax
+  wchar_t *v3; // eax
   wchar_t *v4; // eax
   int v5; // [esp+4h] [ebp-52Ch]
   int v6; // [esp+8h] [ebp-528h]
   intptr_t FindHandle; // [esp+Ch] [ebp-524h]
-  _WORD *v8; // [esp+10h] [ebp-520h]
+  wchar_t *v8; // [esp+10h] [ebp-520h]
   SSaveEntry *v9; // [esp+14h] [ebp-51Ch]
   void *v10; // [esp+18h] [ebp-518h]
   int N; // [esp+1Ch] [ebp-514h]
   int v12; // [esp+20h] [ebp-510h]
   _wfinddata64i32_t FindData; // [esp+24h] [ebp-50Ch] BYREF
-  int v14[7]; // [esp+254h] [ebp-2DCh] BYREF
-  int v15[7]; // [esp+270h] [ebp-2C0h] BYREF
-  _BYTE v16[28]; // [esp+28Ch] [ebp-2A4h] BYREF
-  _BYTE v17[28]; // [esp+2A8h] [ebp-288h] BYREF
-  _BYTE v18[28]; // [esp+2C4h] [ebp-26Ch] BYREF
-  _BYTE v19[28]; // [esp+2E0h] [ebp-250h] BYREF
-  _BYTE v20[28]; // [esp+2FCh] [ebp-234h] BYREF
+  std::wstring v14; // [esp+254h] [ebp-2DCh] BYREF
+  std::wstring v15; // [esp+270h] [ebp-2C0h] BYREF
+  std::wstring v16; // [esp+28Ch] [ebp-2A4h] BYREF
+  std::wstring v17; // [esp+2A8h] [ebp-288h] BYREF
+  std::wstring v18; // [esp+2C4h] [ebp-26Ch] BYREF
+  std::string v19; // [esp+2E0h] [ebp-250h] BYREF
+  std::wstring a2; // [esp+2FCh] [ebp-234h] BYREF
   wchar_t Destination[260]; // [esp+318h] [ebp-218h] BYREF
   int v22; // [esp+52Ch] [ebp-4h]
 
@@ -181,39 +181,39 @@ void __cdecl CStateLoadGame::BuildSaveList(enum TGAME_TYPE a1, enum CAMPAIGN_TYP
     byte_4030398 = CGameType::IsMultiplayerGame(g_pGameType);
     if ( (unsigned __int8)CGameType::IsMultiplayerGame(g_pGameType) )
     {
-      std::wstring::wstring(g_pGameType + 28);
+      std::wstring::wstring(&a2, &g_pGameType[1]);
       v22 = 0;
       v2 = std::wstring::rfind((wchar_t *)asc_3743A6C, -1);
-      v6 = std::wstring::substr((int)v15, v2 + 1, 0xFFFFFFFF);
+      v6 = std::wstring::substr((int)&v15, v2 + 1, 0xFFFFFFFF);
       std::wstring::operator=(v6);
-      std::wstring::~wstring(v15);
+      std::wstring::~wstring(&v15);
       N = std::wstring::rfind((wchar_t *)L".map", -1);
-      v5 = std::wstring::substr((int)v14, 0, N);
+      v5 = std::wstring::substr((int)&v14, 0, N);
       std::wstring::operator=(v5);
-      std::wstring::~wstring(v14);
-      std::wstring::operator=((int)v20);
+      std::wstring::~wstring(&v14);
+      std::wstring::operator=(&stru_403037C, &a2);
       v22 = -1;
-      std::wstring::~wstring(v20);
+      std::wstring::~wstring(&a2);
     }
   }
   v12 = 0;
-  SaveFilePath::GetSaveFileMapPattern(v16);
+  SaveFilePath::GetSaveFileMapPattern(&v16);
   v22 = 1;
-  v3 = (const wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)v16);
+  v3 = std::wstring::c_str(&v16);
   FindHandle = j___wfindfirst64i32(v3, &FindData);
   if ( FindHandle != -1 )
   {
     do
     {
-      std::wstring::wstring(v18, FindData.name);
+      std::wstring::wstring(&v18, FindData.name);
       LOBYTE(v22) = 2;
-      SaveFilePath::BuildSaveFilePath(v17, (int)v18);
+      SaveFilePath::BuildSaveFilePath(&v17, (int)&v18);
       LOBYTE(v22) = 4;
-      std::wstring::~wstring(v18);
-      std::string::string();
+      std::wstring::~wstring(&v18);
+      std::string::string(&v19);
       LOBYTE(v22) = 5;
-      v4 = (wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)v17);
-      if ( (unsigned __int8)CStateLoadGame::FileMatch(v4, a1, a2, v19) )
+      v4 = std::wstring::c_str(&v17);
+      if ( CStateLoadGame::FileMatch(v4, a1, arg4, &v19) )
       {
         v10 = operator new(0x54u);
         if ( v10 )
@@ -228,24 +228,24 @@ void __cdecl CStateLoadGame::BuildSaveList(enum TGAME_TYPE a1, enum CAMPAIGN_TYP
         CStateLoadGame::m_stempSavePtr[v12] = (int)v9;
         std::wstring::operator=((void *)CStateLoadGame::m_stempSavePtr[v12], FindData.name);
         wcscpy(Destination, FindData.name);
-        v8 = (_WORD *)wcsstr(Destination, (wchar_t *)L".sav");
+        v8 = wcsstr(Destination, (wchar_t *)L".sav");
         if ( v8 )
           *v8 = 0;
         std::wstring::operator=((void *)(CStateLoadGame::m_stempSavePtr[v12] + 28), Destination);
-        std::string::operator=((int)v19);
+        std::string::operator=((int)&v19);
         ++v12;
       }
       LOBYTE(v22) = 4;
-      std::string::~string(v19);
+      std::string::~string(&v19);
       LOBYTE(v22) = 1;
-      std::wstring::~wstring(v17);
+      std::wstring::~wstring(&v17);
     }
     while ( j___wfindnext64i32(FindHandle, &FindData) != -1 );
   }
   dword_4030378 = v12;
   dword_4030374 = (int)CStateLoadGame::m_stempSavePtr;
   v22 = -1;
-  std::wstring::~wstring(v16);
+  std::wstring::~wstring(&v16);
 }
 
 

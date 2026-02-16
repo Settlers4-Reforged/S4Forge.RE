@@ -259,47 +259,47 @@ float  CConfigManager::GetFloatValueNoAdd(char const * Str, char const * a3, flo
 
 
 // address=[0x2ef1990]
-// Decompiled from int __stdcall CConfigManager::GetStringValue(int a1, char *Str, char *a3, int a4)
+// Decompiled from int __thiscall CConfigManager::GetStringValue(void *this, int a2, char *Str, char *a4, int a5)
 std::string  CConfigManager::GetStringValue(char const * a2, char const * Str, std::string const & a4) {
   
-  int Section; // [esp+8h] [ebp-70h]
+  CConfigSection *Section; // [esp+8h] [ebp-70h]
   int Var; // [esp+Ch] [ebp-6Ch]
-  _BYTE v7[28]; // [esp+14h] [ebp-64h] BYREF
-  _BYTE v8[28]; // [esp+30h] [ebp-48h] BYREF
-  _BYTE v9[28]; // [esp+4Ch] [ebp-2Ch] BYREF
-  int v10; // [esp+74h] [ebp-4h]
+  struct std::string v9; // [esp+14h] [ebp-64h] BYREF
+  struct std::string v10; // [esp+30h] [ebp-48h] BYREF
+  struct std::string v11; // [esp+4Ch] [ebp-2Ch] BYREF
+  int v12; // [esp+74h] [ebp-4h]
 
-  std::string::string(v9, Str);
-  v10 = 0;
-  Section = CConfigManager::GetSection(v9, 1);
-  v10 = -1;
-  std::string::~string(v9);
+  std::string::string(&v11, Str);
+  v12 = 0;
+  Section = CConfigManager::GetSection(this, (int)&v11, 1);
+  v12 = -1;
+  std::string::~string(&v11);
   if ( Section )
   {
-    std::string::string(v8, a3);
-    v10 = 1;
-    Var = CConfigSection::GetVar(v8);
-    v10 = -1;
-    std::string::~string(v8);
+    std::string::string(&v10, a4);
+    v12 = 1;
+    Var = CConfigSection::GetVar(Section, (int)&v10);
+    v12 = -1;
+    std::string::~string(&v10);
     if ( Var )
     {
-      (*(void (__thiscall **)(int, int))(*(_DWORD *)Var + 8))(Var, a1);
+      (*(void (__thiscall **)(int, int))(*(_DWORD *)Var + 8))(Var, a2);
     }
     else
     {
-      std::string::string(v7, a3);
-      v10 = 2;
-      CConfigSection::AddVar((int)v7, a4);
-      v10 = -1;
-      std::string::~string(v7);
-      std::string::string(a4);
+      std::string::string(&v9, a4);
+      v12 = 2;
+      CConfigSection::AddVar(Section, (int)&v9, a5);
+      v12 = -1;
+      std::string::~string(&v9);
+      std::string::string(a5);
     }
-    return a1;
+    return a2;
   }
   else
   {
-    std::string::string(a4);
-    return a1;
+    std::string::string(a5);
+    return a2;
   }
 }
 
@@ -1082,7 +1082,7 @@ void  CConfigManager::AddDefineVar(std::string const & a1, int a2) {
 
 
 // address=[0x2ef10c0]
-// Decompiled from char *__thiscall CConfigManager::GetSection(void *this, int a2, char a3)
+// Decompiled from CConfigSection *__thiscall CConfigManager::GetSection(void *this, int a2, char a3)
 class CConfigSection *  CConfigManager::GetSection(std::string const & a2, bool a3) {
   
   void *v3; // eax
@@ -1091,15 +1091,15 @@ class CConfigSection *  CConfigManager::GetSection(std::string const & a2, bool 
   _BYTE v7[12]; // [esp+10h] [ebp-5Ch] BYREF
   _BYTE v8[12]; // [esp+1Ch] [ebp-50h] BYREF
   int v9; // [esp+28h] [ebp-44h]
-  char *v10; // [esp+2Ch] [ebp-40h]
-  char *v11; // [esp+30h] [ebp-3Ch]
+  CConfigSection *v10; // [esp+2Ch] [ebp-40h]
+  CConfigSection *v11; // [esp+30h] [ebp-3Ch]
   void *v12; // [esp+34h] [ebp-38h]
   std::_Iterator_base12 *v13; // [esp+38h] [ebp-34h]
   std::_Iterator_base12 *v14; // [esp+3Ch] [ebp-30h]
   int v15; // [esp+40h] [ebp-2Ch]
   int v16; // [esp+44h] [ebp-28h]
-  char *v17; // [esp+48h] [ebp-24h] BYREF
-  char *v18; // [esp+4Ch] [ebp-20h]
+  CConfigSection *v17; // [esp+48h] [ebp-24h] BYREF
+  CConfigSection *v18; // [esp+4Ch] [ebp-20h]
   int C; // [esp+50h] [ebp-1Ch]
   void *v20; // [esp+54h] [ebp-18h]
   void *v21; // [esp+58h] [ebp-14h]
@@ -1136,7 +1136,7 @@ class CConfigSection *  CConfigManager::GetSection(std::string const & a2, bool 
       std::_List_const_iterator<std::_List_val<std::_List_simple_types<CConfigSection *>>>::~_List_const_iterator<std::_List_val<std::_List_simple_types<CConfigSection *>>>(
         v8,
         v5);
-      return (char *)v12;
+      return (CConfigSection *)v12;
     }
     std::_List_const_iterator<std::_List_val<std::_List_simple_types<CConfigSection *>>>::operator++(v8);
   }
@@ -1145,7 +1145,7 @@ class CConfigSection *  CConfigManager::GetSection(std::string const & a2, bool 
     C = (int)operator new(0x28u, 1, "Source\\ConfigManager\\ConfigManager.cpp", 1058);
     LOBYTE(v23) = 3;
     if ( C )
-      v18 = CConfigSection::CConfigSection((char *)C, a2);
+      v18 = CConfigSection::CConfigSection((CConfigSection *)C, a2);
     else
       v18 = 0;
     v11 = v18;
@@ -1166,7 +1166,7 @@ class CConfigSection *  CConfigManager::GetSection(std::string const & a2, bool 
     std::_List_const_iterator<std::_List_val<std::_List_simple_types<CConfigSection *>>>::~_List_const_iterator<std::_List_val<std::_List_simple_types<CConfigSection *>>>(
       v8,
       v5);
-    return (char *)v9;
+    return (CConfigSection *)v9;
   }
 }
 

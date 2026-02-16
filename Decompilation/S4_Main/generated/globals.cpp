@@ -1098,111 +1098,108 @@ int __cdecl GetAvailableSection(void) {
 
 
 // address=[0x134dbe0]
-// Decompiled from int __cdecl Bugreport::GetBugReportsDirectoryPath(int a1)
+// Decompiled from std::wstring *__cdecl Bugreport::GetBugReportsDirectoryPath(std::wstring *a1)
 std::wstring __cdecl Bugreport::GetBugReportsDirectoryPath(void a1) {
   
-  void *UserDirectoryPath; // [esp+4h] [ebp-38h]
-  _BYTE v3[28]; // [esp+10h] [ebp-2Ch] BYREF
+  std::wstring *a2; // [esp+4h] [ebp-38h]
+  std::wstring v3; // [esp+10h] [ebp-2Ch] BYREF
   int v4; // [esp+38h] [ebp-4h]
 
-  UserDirectoryPath = FilePaths::GetUserDirectoryPath(v3);
+  a2 = FilePaths::GetUserDirectoryPath(&v3);
   v4 = 0;
-  std::operator+<wchar_t>(a1, (int)UserDirectoryPath, (wchar_t *)L"Bugreport\\");
+  std::operator+<wchar_t>(a1, a2, (wchar_t *)L"Bugreport\\");
   v4 = -1;
-  std::wstring::~wstring(v3);
+  std::wstring::~wstring(&v3);
   return a1;
 }
 
 
 // address=[0x134dc80]
-// Decompiled from int __cdecl Bugreport::GetBugReportScreenshotPath(int a1)
+// Decompiled from std::wstring *__cdecl Bugreport::GetBugReportScreenshotPath(std::wstring *a1)
 std::wstring __cdecl Bugreport::GetBugReportScreenshotPath(void a1) {
   
-  void *UserDirectoryPath; // [esp+4h] [ebp-38h]
-  _BYTE v3[28]; // [esp+10h] [ebp-2Ch] BYREF
+  std::wstring *a2; // [esp+4h] [ebp-38h]
+  std::wstring v3; // [esp+10h] [ebp-2Ch] BYREF
   int v4; // [esp+38h] [ebp-4h]
 
-  UserDirectoryPath = FilePaths::GetUserDirectoryPath(v3);
+  a2 = FilePaths::GetUserDirectoryPath(&v3);
   v4 = 0;
-  std::operator+<wchar_t>(a1, (int)UserDirectoryPath, (wchar_t *)L"Bugreport\\screenshot%2d.bmp");
+  std::operator+<wchar_t>(a1, a2, (wchar_t *)L"Bugreport\\screenshot%2d.bmp");
   v4 = -1;
-  std::wstring::~wstring(v3);
+  std::wstring::~wstring(&v3);
   return a1;
 }
 
 
 // address=[0x134dd20]
-// Decompiled from int __cdecl Bugreport::GetBugReportMessageFilePath(int a1)
+// Decompiled from std::wstring *__cdecl Bugreport::GetBugReportMessageFilePath(std::wstring *a1)
 std::wstring __cdecl Bugreport::GetBugReportMessageFilePath(void a1) {
   
-  void *UserDirectoryPath; // [esp+4h] [ebp-38h]
-  _BYTE v3[28]; // [esp+10h] [ebp-2Ch] BYREF
+  std::wstring *a2; // [esp+4h] [ebp-38h]
+  std::wstring v3; // [esp+10h] [ebp-2Ch] BYREF
   int v4; // [esp+38h] [ebp-4h]
 
-  UserDirectoryPath = FilePaths::GetUserDirectoryPath(v3);
+  a2 = FilePaths::GetUserDirectoryPath(&v3);
   v4 = 0;
-  std::operator+<wchar_t>(a1, (int)UserDirectoryPath, (wchar_t *)L"Bugreport\\Message.txt");
+  std::operator+<wchar_t>(a1, a2, (wchar_t *)L"Bugreport\\Message.txt");
   v4 = -1;
-  std::wstring::~wstring(v3);
+  std::wstring::~wstring(&v3);
   return a1;
 }
 
 
 // address=[0x134ddc0]
-// Decompiled from int __cdecl Bugreport::BuildAutoReporterCmdLineArgsForDebugReports(int a1)
+// Decompiled from std::wstring *__cdecl Bugreport::BuildAutoReporterCmdLineArgsForDebugReports(std::wstring *a1)
 std::wstring __cdecl Bugreport::BuildAutoReporterCmdLineArgsForDebugReports(void a1) {
   
-  int v2; // [esp+4h] [ebp-5Ch]
-  void *UserDirectoryPath; // [esp+Ch] [ebp-54h]
-  _BYTE v4[28]; // [esp+18h] [ebp-48h] BYREF
-  int v5[7]; // [esp+34h] [ebp-2Ch] BYREF
-  int v6; // [esp+5Ch] [ebp-4h]
+  std::wstring *a2; // [esp+4h] [ebp-5Ch]
+  std::wstring v3; // [esp+18h] [ebp-48h] BYREF
+  std::wstring v4; // [esp+34h] [ebp-2Ch] BYREF
+  int v5; // [esp+5Ch] [ebp-4h]
 
-  UserDirectoryPath = FilePaths::GetUserDirectoryPath(v4);
-  v6 = 0;
-  v2 = std::operator+<wchar_t>((int)v5, (wchar_t *)L" Settlers4,", (int)UserDirectoryPath);
-  LOBYTE(v6) = 1;
-  std::operator+<wchar_t>(a1, v2, (wchar_t *)L"Bugreport,Message.txt,0");
-  LOBYTE(v6) = 0;
-  std::wstring::~wstring(v5);
-  v6 = -1;
-  std::wstring::~wstring(v4);
+  FilePaths::GetUserDirectoryPath(&v3);
+  v5 = 0;
+  a2 = std::operator+<wchar_t>(&v4, (wchar_t *)L" Settlers4,");
+  LOBYTE(v5) = 1;
+  std::operator+<wchar_t>(a1, a2, (wchar_t *)L"Bugreport,Message.txt,0");
+  LOBYTE(v5) = 0;
+  std::wstring::~wstring(&v4);
+  v5 = -1;
+  std::wstring::~wstring(&v3);
   return a1;
 }
 
 
 // address=[0x134de90]
-// Decompiled from int __cdecl Bugreport::BuildAutoReporterCmdLineArgsForUserReports(int a1)
+// Decompiled from std::wstring *__cdecl Bugreport::BuildAutoReporterCmdLineArgsForUserReports(std::wstring *a1)
 std::wstring __cdecl Bugreport::BuildAutoReporterCmdLineArgsForUserReports(void a1) {
   
-  int v2; // [esp+4h] [ebp-5Ch]
-  void *UserDirectoryPath; // [esp+Ch] [ebp-54h]
-  _BYTE v4[28]; // [esp+18h] [ebp-48h] BYREF
-  int v5[7]; // [esp+34h] [ebp-2Ch] BYREF
-  int v6; // [esp+5Ch] [ebp-4h]
+  std::wstring *a2; // [esp+4h] [ebp-5Ch]
+  std::wstring v3; // [esp+18h] [ebp-48h] BYREF
+  std::wstring v4; // [esp+34h] [ebp-2Ch] BYREF
+  int v5; // [esp+5Ch] [ebp-4h]
 
-  UserDirectoryPath = FilePaths::GetUserDirectoryPath(v4);
-  v6 = 0;
-  v2 = std::operator+<wchar_t>((int)v5, (wchar_t *)L" Settlers4,", (int)UserDirectoryPath);
-  LOBYTE(v6) = 1;
-  std::operator+<wchar_t>(a1, v2, (wchar_t *)L"Bugreport,Message.txt,1,0");
-  LOBYTE(v6) = 0;
-  std::wstring::~wstring(v5);
-  v6 = -1;
-  std::wstring::~wstring(v4);
+  FilePaths::GetUserDirectoryPath(&v3);
+  v5 = 0;
+  a2 = std::operator+<wchar_t>(&v4, (wchar_t *)L" Settlers4,");
+  LOBYTE(v5) = 1;
+  std::operator+<wchar_t>(a1, a2, (wchar_t *)L"Bugreport,Message.txt,1,0");
+  LOBYTE(v5) = 0;
+  std::wstring::~wstring(&v4);
+  v5 = -1;
+  std::wstring::~wstring(&v3);
   return a1;
 }
 
 
 // address=[0x134df60]
-// Decompiled from wstring *__cdecl Bugreport::BuildTraceFilePath(wstring *a1, wstring *a2)
+// Decompiled from std::wstring *__cdecl Bugreport::BuildTraceFilePath(std::wstring *a1, std::wstring *a2)
 std::wstring __cdecl Bugreport::BuildTraceFilePath(std::wstring const & a1) {
   
-  void *BugReportsDirectoryPath; // [esp+4h] [ebp-84h]
-  int v4[11]; // [esp+10h] [ebp-78h] BYREF
-  wstring v5; // [esp+3Ch] [ebp-4Ch] BYREF
-  wstring v6; // [esp+5Ch] [ebp-2Ch] BYREF
-  int v7; // [esp+84h] [ebp-4h]
+  std::wstring *BugReportsDirectoryPath; // [esp+4h] [ebp-84h]
+  std::wstring v4; // [esp+10h] [ebp-78h] BYREF
+  std::wstring v5; // [esp+3Ch] [ebp-4Ch] BYREF
+  int v6; // [esp+84h] [ebp-4h]
 
   if ( std::wstring::empty(a2) )
   {
@@ -1210,22 +1207,22 @@ std::wstring __cdecl Bugreport::BuildTraceFilePath(std::wstring const & a1) {
   }
   else
   {
-    FilePaths::SplitPath((int)v4, a2);
-    v7 = 0;
-    BugReportsDirectoryPath = (void *)Bugreport::GetBugReportsDirectoryPath((int)&v6);
-    LOBYTE(v7) = 1;
+    FilePaths::SplitPath((int)&v4, a2);
+    v6 = 0;
+    BugReportsDirectoryPath = Bugreport::GetBugReportsDirectoryPath((std::wstring *)&v5.m_u[8]);
+    LOBYTE(v6) = 1;
     std::operator+<wchar_t>(a1, BugReportsDirectoryPath, &v5);
-    LOBYTE(v7) = 0;
-    std::wstring::~wstring(&v6);
-    v7 = -1;
-    FilePaths::PathSplitResult::~PathSplitResult(v4);
+    LOBYTE(v6) = 0;
+    std::wstring::~wstring((std::wstring *)&v5.m_u[8]);
+    v6 = -1;
+    FilePaths::PathSplitResult::~PathSplitResult(&v4);
   }
   return a1;
 }
 
 
 // address=[0x134e050]
-// Decompiled from int __cdecl Bugreport::LaunchAutoreport(char a1, wstring *a2)
+// Decompiled from int __cdecl Bugreport::LaunchAutoreport(char a1, std::wstring *a2)
 void __cdecl Bugreport::LaunchAutoreport(bool a1, std::wstring const & a2) {
   
   wchar_t *v2; // eax
@@ -1576,7 +1573,7 @@ bool __cdecl ExistsExtractCommand(void) {
   char v12[88]; // [esp+34h] [ebp-1F4h] BYREF
   _DWORD v13[26]; // [esp+8Ch] [ebp-19Ch] BYREF
   int v14; // [esp+F4h] [ebp-134h] BYREF
-  wstring v15; // [esp+F8h] [ebp-130h] BYREF
+  std::wstring v15; // [esp+F8h] [ebp-130h] BYREF
   wchar_t Src[128]; // [esp+114h] [ebp-114h] BYREF
   _DWORD *v17; // [esp+218h] [ebp-10h]
   int v18; // [esp+224h] [ebp-4h]
@@ -17122,7 +17119,7 @@ void __cdecl GuiDlgLoadFillList(void) {
   int v4; // [esp+10h] [ebp-8Ch]
   int i; // [esp+14h] [ebp-88h]
   char v6[88]; // [esp+18h] [ebp-84h] BYREF
-  _BYTE v7[28]; // [esp+70h] [ebp-2Ch] BYREF
+  std::string v7; // [esp+70h] [ebp-2Ch] BYREF
   int v8; // [esp+98h] [ebp-4h]
 
   for ( i = 0; i < 18; ++i )
@@ -17142,26 +17139,26 @@ void __cdecl GuiDlgLoadFillList(void) {
       std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v6);
       v8 = 0;
       std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(
-        v7,
-        *(_DWORD *)(dword_4030374 + 4 * v4) + 28);
+        &v7,
+        (std::wstring *)(*(_DWORD *)(dword_4030374 + 4 * v4) + 28));
       LOBYTE(v8) = 1;
-      v0 = (char *)std::string::c_str(v7);
-      IGuiEngine::SetText((void *)g_pGUIEngine, 6, dword_3691FA0[2 * i], v0);
-      v1 = (char *)std::string::c_str((void *)(*(_DWORD *)(dword_4030374 + 4 * v4) + 56));
-      IGuiEngine::SetText((void *)g_pGUIEngine, 6, dword_3691FA0[2 * i + 1], v1);
-      IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 6, dword_3691FA0[2 * i], 1);
-      IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 6, dword_3691FA0[2 * i + 1], 1);
-      IGuiEngine::SetFontTemplate((IGuiEngine *)g_pGUIEngine, 6, dword_3691FA0[2 * i], v2);
-      IGuiEngine::SetFontTemplate((IGuiEngine *)g_pGUIEngine, 6, dword_3691FA0[2 * i + 1], 12);
+      v0 = std::string::c_str(&v7);
+      IGuiEngine::SetText(g_pGUIEngine, 6, dword_3691FA0[2 * i], v0);
+      v1 = std::string::c_str((std::string *)(*(_DWORD *)(dword_4030374 + 4 * v4) + 56));
+      IGuiEngine::SetText(g_pGUIEngine, 6, dword_3691FA0[2 * i + 1], v1);
+      IGuiEngine::SetControlVisibility(g_pGUIEngine, 6, dword_3691FA0[2 * i], 1);
+      IGuiEngine::SetControlVisibility(g_pGUIEngine, 6, dword_3691FA0[2 * i + 1], 1);
+      IGuiEngine::SetFontTemplate(g_pGUIEngine, 6, dword_3691FA0[2 * i], v2);
+      IGuiEngine::SetFontTemplate(g_pGUIEngine, 6, dword_3691FA0[2 * i + 1], 12);
       LOBYTE(v8) = 0;
-      std::string::~string(v7);
+      std::string::~string(&v7);
       v8 = -1;
       std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::~wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v6);
     }
     else
     {
       for ( j = 0; j < 2; ++j )
-        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 6, dword_3691FA0[2 * i + j], 0);
+        IGuiEngine::SetControlVisibility(g_pGUIEngine, 6, dword_3691FA0[2 * i + j], 0);
     }
   }
 }
@@ -40995,96 +40992,95 @@ int __cdecl strncpy_s<1024>(char (&)[1024] Destination, char const * Source, uns
 
 
 // address=[0x2efe0d0]
-// Decompiled from _BYTE *__cdecl FilePaths::SplitPath(_BYTE *a1, wstring *a2)
+// Decompiled from _BYTE *__cdecl FilePaths::SplitPath(FilePaths::PathSplitResult *a1, std::wstring *_swpPath)
 struct FilePaths::PathSplitResult __cdecl FilePaths::SplitPath(std::wstring const & a1) {
   
   wchar_t *v3; // esi
   int v4; // eax
-  int v5; // eax
-  wchar_t *v6; // [esp+8h] [ebp-ACh]
-  wchar_t *v7; // [esp+Ch] [ebp-A8h]
-  wchar_t *v8; // [esp+14h] [ebp-A0h]
-  int v9; // [esp+18h] [ebp-9Ch]
-  wchar_t *Str; // [esp+1Ch] [ebp-98h]
-  _BYTE v11[28]; // [esp+20h] [ebp-94h] BYREF
-  _BYTE v12[28]; // [esp+3Ch] [ebp-78h] BYREF
-  _BYTE v13[48]; // [esp+58h] [ebp-5Ch] BYREF
-  _BYTE v14[28]; // [esp+88h] [ebp-2Ch] BYREF
-  int v15; // [esp+B0h] [ebp-4h]
+  std::wstring *v5; // eax
+  wchar_t *uPosForwardSlash; // [esp+8h] [ebp-ACh]
+  wchar_t *pEndOfDrive; // [esp+Ch] [ebp-A8h]
+  wchar_t *uPosBackwardSlash; // [esp+14h] [ebp-A0h]
+  int uPosNextSlash; // [esp+18h] [ebp-9Ch]
+  wchar_t *swpPath; // [esp+1Ch] [ebp-98h]
+  std::wstring v11; // [esp+20h] [ebp-94h] BYREF
+  FilePaths::PathSplitResult v12; // [esp+3Ch] [ebp-78h] BYREF
+  std::wstring v13; // [esp+88h] [ebp-2Ch] BYREF
+  int v14; // [esp+B0h] [ebp-4h]
 
-  FilePaths::PathSplitResult::PathSplitResult(v12);
-  v15 = 0;
-  if ( (unsigned __int8)std::wstring::empty(a2) )
+  FilePaths::PathSplitResult::PathSplitResult(&v12);
+  v14 = 0;
+  if ( std::wstring::empty(_swpPath) )
   {
-    FilePaths::PathSplitResult::PathSplitResult(a1, v12);
-    v15 = -1;
-    FilePaths::PathSplitResult::~PathSplitResult(v12);
+    FilePaths::PathSplitResult::PathSplitResult(a1, &v12);
+    v14 = -1;
+    FilePaths::PathSplitResult::~PathSplitResult(&v12);
     return a1;
   }
   else
   {
-    Str = std::wstring::c_str(a2);
-    if ( wcschr(Str, 0x3Au) )
+    swpPath = std::wstring::c_str(_swpPath);
+    if ( wcschr(swpPath, ':') )
     {
-      v7 = wcschr(Str, 0x3Au) + 1;
-      std::wstring::assign(Str, (int)v7);
-      Str = v7;
+      pEndOfDrive = wcschr(swpPath, ':') + 1;
+      std::wstring::assign(&v12.m_swpDrive, swpPath, (int)pEndOfDrive);
+      swpPath = pEndOfDrive;
     }
-    if ( *Str == 92 || *Str == 47 )
+    if ( *swpPath == '\\' || *swpPath == '/' )
     {
-      v13[44] = 1;
-      ++Str;
+      v12.m_bSplit = 1;
+      ++swpPath;
     }
-    while ( *Str )
+    while ( *swpPath )
     {
-      v6 = wcschr(Str, 0x2Fu);
-      v8 = wcschr(Str, 0x5Cu);
-      v9 = (int)v6;
-      if ( v6 )
+      uPosForwardSlash = wcschr(swpPath, '/');
+      uPosBackwardSlash = wcschr(swpPath, '\\');
+      uPosNextSlash = (int)uPosForwardSlash;
+      if ( uPosForwardSlash )
       {
-        if ( v8 && v8 < v6 )
-          v9 = (int)v8;
+        if ( uPosBackwardSlash && uPosBackwardSlash < uPosForwardSlash )
+          uPosNextSlash = (int)uPosBackwardSlash;
       }
       else
       {
-        v9 = (int)v8;
+        uPosNextSlash = (int)uPosBackwardSlash;
       }
-      if ( !v9 )
+      if ( !uPosNextSlash )
       {
-        std::wstring::wstring(v14);
-        LOBYTE(v15) = 2;
-        v3 = std::wstring::c_str(a2);
-        v4 = std::wstring::size(a2);
-        std::wstring::assign(Str, (int)&v3[v4]);
-        std::vector<std::wstring>::push_back(v14);
-        LOBYTE(v15) = 0;
-        std::wstring::~wstring(v14);
+        std::wstring::wstring(&v13);
+        LOBYTE(v14) = 2;
+        v3 = std::wstring::c_str(_swpPath);
+        v4 = std::wstring::size(_swpPath);
+        std::wstring::assign(&v13, swpPath, (int)&v3[v4]);
+        std::vector<std::wstring>::push_back(&v12.m_vSplits, (int)&v13);
+        LOBYTE(v14) = 0;
+        std::wstring::~wstring(&v13);
         break;
       }
-      std::wstring::wstring(v11);
-      LOBYTE(v15) = 1;
-      std::wstring::assign(Str, v9);
-      std::vector<std::wstring>::push_back(v11);
-      Str = (wchar_t *)(v9 + 2);
-      LOBYTE(v15) = 0;
-      std::wstring::~wstring(v11);
+      std::wstring::wstring(&v11);
+      LOBYTE(v14) = 1;
+      std::wstring::assign(&v11, swpPath, uPosNextSlash);
+      std::vector<std::wstring>::push_back(&v12.m_vSplits, (int)&v11);
+      swpPath = (wchar_t *)(uPosNextSlash + 2);
+      LOBYTE(v14) = 0;
+      std::wstring::~wstring(&v11);
     }
-    if ( !(unsigned __int8)CheckPathRoot(a2, 92) && !(unsigned __int8)CheckPathRoot(a2, 47) )
+    if ( !CheckPathRoot(_swpPath, '\\') && !CheckPathRoot(_swpPath, '/') )
     {
-      v5 = std::vector<std::wstring>::back();
-      std::wstring::operator=(v5);
-      std::vector<std::wstring>::pop_back(v13);
+      v5 = (std::wstring *)std::vector<std::wstring>::back();
+      std::wstring::operator=(&v12.m_swpOut, v5);
+      std::vector<std::wstring>::pop_back(&v12.m_vSplits);
     }
-    FilePaths::PathSplitResult::PathSplitResult(a1, v12);
-    v15 = -1;
-    FilePaths::PathSplitResult::~PathSplitResult(v12);
+    FilePaths::PathSplitResult::PathSplitResult(a1, &v12);
+    v14 = -1;
+    FilePaths::PathSplitResult::~PathSplitResult(&v12);
     return a1;
   }
 }
 
 
 // address=[0x2efe3b0]
-// Decompiled from wstring *__cdecl FilePaths::GetCurrentWorkingDirectory(wstring *a1)
+// Decompiled from std::wstring *__cdecl FilePaths::GetCurrentWorkingDirectory(std::wstring *a1)
 std::wstring __cdecl FilePaths::GetCurrentWorkingDirectory(void a1) {
   
   std::wstring::wstring(a1, (wchar_t *)&word_3AB4660);
@@ -41093,14 +41089,14 @@ std::wstring __cdecl FilePaths::GetCurrentWorkingDirectory(void a1) {
 
 
 // address=[0x2efe3e0]
-// Decompiled from wstring *__cdecl FilePaths::GetUserDirectoryPath(wstring *_swpUserDirectory)
+// Decompiled from std::wstring *__cdecl FilePaths::GetUserDirectoryPath(std::wstring *_swpUserDirectory)
 std::wstring __cdecl FilePaths::GetUserDirectoryPath(void _swpUserDirectory) {
   
   void *v2; // [esp+4h] [ebp-284h]
-  wstring *v3; // [esp+Ch] [ebp-27Ch]
-  wstring v4; // [esp+1Ch] [ebp-26Ch] BYREF
-  wstring v5; // [esp+38h] [ebp-250h] BYREF
-  wstring v6; // [esp+54h] [ebp-234h] BYREF
+  std::wstring *v3; // [esp+Ch] [ebp-27Ch]
+  std::wstring v4; // [esp+1Ch] [ebp-26Ch] BYREF
+  std::wstring v5; // [esp+38h] [ebp-250h] BYREF
+  std::wstring v6; // [esp+54h] [ebp-234h] BYREF
   WCHAR pszPath[260]; // [esp+70h] [ebp-218h] BYREF
   int exceptionBlock; // [esp+284h] [ebp-4h]
 
@@ -41129,7 +41125,7 @@ std::wstring __cdecl FilePaths::GetUserDirectoryPath(void _swpUserDirectory) {
 
 
 // address=[0x2efe550]
-// Decompiled from int __cdecl FilePaths::EnsurePathExists(wstring *a1)
+// Decompiled from int __cdecl FilePaths::EnsurePathExists(std::wstring *a1)
 void __cdecl FilePaths::EnsurePathExists(std::wstring const & a1) {
   
   wchar_t *v1; // eax
@@ -41140,9 +41136,9 @@ void __cdecl FilePaths::EnsurePathExists(std::wstring const & a1) {
   int v7; // [esp+24h] [ebp-154h]
   int v8; // [esp+28h] [ebp-150h]
   int v9; // [esp+2Ch] [ebp-14Ch]
-  wstring *v10; // [esp+30h] [ebp-148h]
-  wstring *v11; // [esp+34h] [ebp-144h]
-  wstring *CurrentWorkingDirectory; // [esp+38h] [ebp-140h]
+  std::wstring *v10; // [esp+30h] [ebp-148h]
+  std::wstring *v11; // [esp+34h] [ebp-144h]
+  std::wstring *CurrentWorkingDirectory; // [esp+38h] [ebp-140h]
   int v13; // [esp+3Ch] [ebp-13Ch]
   BOOL DirectoryW; // [esp+40h] [ebp-138h]
   int v15; // [esp+44h] [ebp-134h]
@@ -41152,13 +41148,13 @@ void __cdecl FilePaths::EnsurePathExists(std::wstring const & a1) {
   int v19; // [esp+54h] [ebp-124h]
   int v20[7]; // [esp+58h] [ebp-120h] BYREF
   _BYTE v21[48]; // [esp+74h] [ebp-104h] BYREF
-  wstring v22; // [esp+A4h] [ebp-D4h] BYREF
-  wstring v23; // [esp+C0h] [ebp-B8h] BYREF
-  wstring v24; // [esp+DCh] [ebp-9Ch] BYREF
-  wstring v25; // [esp+F8h] [ebp-80h] BYREF
-  wstring v26; // [esp+114h] [ebp-64h] BYREF
-  wstring v27; // [esp+130h] [ebp-48h] BYREF
-  wstring v28; // [esp+14Ch] [ebp-2Ch] BYREF
+  std::wstring v22; // [esp+A4h] [ebp-D4h] BYREF
+  std::wstring v23; // [esp+C0h] [ebp-B8h] BYREF
+  std::wstring v24; // [esp+DCh] [ebp-9Ch] BYREF
+  std::wstring v25; // [esp+F8h] [ebp-80h] BYREF
+  std::wstring v26; // [esp+114h] [ebp-64h] BYREF
+  std::wstring v27; // [esp+130h] [ebp-48h] BYREF
+  std::wstring v28; // [esp+14Ch] [ebp-2Ch] BYREF
   int v29; // [esp+174h] [ebp-4h]
 
   v19 = 0;

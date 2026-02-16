@@ -430,15 +430,15 @@ void  IEventEngine::SetOSParam(unsigned int a2) {
 
 
 // address=[0x13537f0]
-// Decompiled from char __thiscall IEventEngine::PlayEvents(IEventEngine *this, void *_pReplayFile, int a3)
+// Decompiled from char __thiscall IEventEngine::PlayEvents(IEventEngine *this, std::string *_pReplayFile, int a3)
 bool  IEventEngine::PlayEvents(std::string const & _pReplayFile, int a3) {
   
-  const CHAR *v3; // eax
-  const char *v4; // eax
-  const char *v5; // eax
-  const char *v6; // eax
-  const char *v7; // eax
-  const char *v8; // eax
+  char *v3; // eax
+  char *v4; // eax
+  char *v5; // eax
+  char *v6; // eax
+  char *v7; // eax
+  char *v8; // eax
   DWORD lDistanceToMove; // [esp+0h] [ebp-118h]
   int v11; // [esp+4h] [ebp-114h] BYREF
   int replayFileVersion; // [esp+8h] [ebp-110h] BYREF
@@ -447,11 +447,11 @@ bool  IEventEngine::PlayEvents(std::string const & _pReplayFile, int a3) {
 
   if ( std::string::length(_pReplayFile) && !this->m_hReplayFile )
   {
-    v3 = (const CHAR *)std::string::c_str(_pReplayFile);
+    v3 = std::string::c_str(_pReplayFile);
     this->m_hReplayFile = CreateFileA(v3, 0x80000000, 0, 0, 3u, 0x80u, 0);
     if ( this->m_hReplayFile == (HANDLE)-1 )
     {
-      v4 = (const char *)std::string::c_str(_pReplayFile);
+      v4 = std::string::c_str(_pReplayFile);
       BBSupportTracePrintF(2, "Could not open Event Recorder Slot File \"%s\"!", v4);
       return 0;
     }
@@ -471,27 +471,27 @@ bool  IEventEngine::PlayEvents(std::string const & _pReplayFile, int a3) {
             this->field_20 = v11 - a3;
             SetFilePointer(this->m_hReplayFile, lDistanceToMove, 0, FILE_BEGIN);
             this->m_bIsEventPlaying = 1;
-            v8 = (const char *)std::string::c_str(_pReplayFile);
+            v8 = std::string::c_str(_pReplayFile);
             BBSupportTracePrintF(2, "Playing event from file \"%s\"!", v8);
             return 1;
           }
           else
           {
-            v7 = (const char *)std::string::c_str(_pReplayFile);
+            v7 = std::string::c_str(_pReplayFile);
             BBSupportTracePrintF(2, "-3- Incompatible Event Recorder Slot File \"%s\"!", v7);
             return 0;
           }
         }
         else
         {
-          v6 = (const char *)std::string::c_str(_pReplayFile);
+          v6 = std::string::c_str(_pReplayFile);
           BBSupportTracePrintF(2, "-2- Incompatible Event Recorder Slot File \"%s\"!", v6);
           return 0;
         }
       }
       else
       {
-        v5 = (const char *)std::string::c_str(_pReplayFile);
+        v5 = std::string::c_str(_pReplayFile);
         BBSupportTracePrintF(2, "-1- Incompatible Event Recorder Slot File \"%s\"!", v5);
         return 0;
       }
