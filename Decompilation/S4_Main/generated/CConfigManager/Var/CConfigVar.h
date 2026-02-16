@@ -51,7 +51,7 @@ private:
     // Type information members
 public:
     bool m_bIsStatic;
-    CONFIGVAR_TYPE m_cType;
+    T_CFGVAR_TYPE m_cType;
     char m_cSize;
     char m_cU7;
 

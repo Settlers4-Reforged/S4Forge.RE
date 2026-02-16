@@ -37102,7 +37102,7 @@ bool __cdecl ExtraCD::IsGermanOnlyContentEnabled(void) {
   if ( dword_3F450B4 != -1 )
     return byte_3F450B3 || CGameSettings::GetLanguage() == 1;
   Instance = CConfigManagerPtr::GetInstance();
-  byte_3F450B3 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))Instance->GetIntValueNoAdd)(
+  byte_3F450B3 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))Instance->?)(
                    Instance,
                    "GAMESETTINGS",
                    "EnableGermanOnlyContent",
@@ -37566,7 +37566,7 @@ int __stdcall DlgProc(struct HWND__ * hDlg, unsigned int a2, unsigned int a3, lo
   
   if ( a2 == 272 )
   {
-    if ( ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValue)(
+    if ( ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->?)(
            g_pCfgMgr,
            "GAMESETTINGS",
            "Language",
@@ -38244,7 +38244,7 @@ public: __thiscall TStaticConfigIntArray<4>::TStaticConfigIntArray<4>(char const
 // Decompiled from TStaticConfigIntArrayBase<4> *__thiscall TStaticConfigIntArrayBase<4>::TStaticConfigIntArrayBase<4>(  TStaticConfigIntArrayBase<4> *this,  int a2,  int a3)
 private: __thiscall TStaticConfigIntArrayBase<4>::TStaticConfigIntArrayBase<4>(char const * a2, char const * a3) {
   
-  CStaticConfigVar::CStaticConfigVar((CStaticConfigVar *)this, a2, a3, CONFIGVAR_TYPE_INT_ARRAY, 4);
+  CStaticConfigVar::CStaticConfigVar((CStaticConfigVar *)this, a2, a3, 2, 4);
   *(_DWORD *)this = &TStaticConfigIntArrayBase_4_::_vftable_;
   return this;
 }

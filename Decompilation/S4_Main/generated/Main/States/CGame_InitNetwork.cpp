@@ -67,7 +67,7 @@ class CGameState * __cdecl CGame_InitNetwork::DynamicCreateFunc(void * a1) {
     LOBYTE(v17) = 3;
     v4 = std::string::string(v15, "normal");
     LOBYTE(v17) = 4;
-    v3 = ((int (__thiscall *)(CConfigManager *, _BYTE *, const char *, const char *, void *))g_pCfgMgr->GetStringValue)(
+    v3 = ((int (__thiscall *)(CConfigManager *, _BYTE *, const char *, const char *, void *))g_pCfgMgr->?)(
            g_pCfgMgr,
            v16,
            "COMMANDLINE",

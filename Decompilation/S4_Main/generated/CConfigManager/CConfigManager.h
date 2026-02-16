@@ -30,7 +30,7 @@ public:
     virtual float  GetFloatValueNoAdd(char const * Str, char const * a3, float a4);
 
     // address=[0x2ef1990]
-    virtual std::string  GetStringValue(char const * a2, char const * Str, std::string const & a4);
+    virtual std::string  GetStringValue(char const * arg0, char const * Str, std::string const & a4);
 
     // address=[0x2ef1ae0]
     virtual std::string  GetStringValueNoAdd(char const * a2, char const * Str, std::string const & a4);
@@ -42,7 +42,7 @@ public:
     virtual void  AddDefines(struct SConfigTypeString const * a2, int a3);
 
     // address=[0x2ef1d70]
-    virtual int  GetDefineValue(char const * Str);
+    virtual int  GetDefineValue(char const * _spDefineName);
 
     // address=[0x2ef1eb0]
     virtual void  AddStaticConfigVar(char const * Str, char const * a3, class CConfigVar & a4);
@@ -70,7 +70,7 @@ protected:
     std::string  ParseFindSection(char * a1, int & a2, int const & a3);
 
     // address=[0x2ef0270]
-    void  ParseAddSectionVars(class CConfigSection * a2, char * a3, int & a4, int const & a5);
+    void  ParseAddSectionVars(class CConfigSection * a2, char * pSection, int & a4, int const & a5);
 
     // address=[0x2ef07d0]
     std::string  ParseGetLine(char * a1, int & a2, int const & a3);
@@ -89,6 +89,13 @@ protected:
 
     // address=[0x2ef10c0]
     class CConfigSection *  GetSection(std::string const & a2, bool a3);
+
+    // Type information members
+public:
+    std::map * m_mSectionIdMap;
+    int m_uU8;
+    int m_uUC;
+    std::list * m_lSections;
 
 };
 

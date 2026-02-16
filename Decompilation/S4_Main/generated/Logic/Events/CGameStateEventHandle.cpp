@@ -277,7 +277,7 @@ bool  CGameStateEventHandle::OnEvent(class CEvn_Event & a2) {
       v21 = std::string::string(v40, "???");
       v22 = v21;
       LOBYTE(v49) = 11;
-      v24 = ((int (__thiscall *)(CConfigManager *, _BYTE *, const char *, const char *, void *))g_pCfgMgr->GetStringValue)(
+      v24 = ((int (__thiscall *)(CConfigManager *, _BYTE *, const char *, const char *, void *))g_pCfgMgr->?)(
               g_pCfgMgr,
               v44,
               "COMMANDLINE",

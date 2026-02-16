@@ -73,21 +73,21 @@ class CGameState * __cdecl CStateGame::DynamicCreateFunc(void * a1) {
 void  CStateGame::UpdateToGuiInfoStruct(void) {
   
   int LocalPlayerId; // eax
-  const wchar_t *v2; // eax
-  const wchar_t *v3; // eax
+  wchar_t *v2; // eax
+  wchar_t *v3; // eax
   int result; // eax
   size_t v5; // [esp-4h] [ebp-1ACh]
-  void *v6; // [esp+4h] [ebp-1A4h]
+  struct std::string *v6; // [esp+4h] [ebp-1A4h]
   size_t v7; // [esp+8h] [ebp-1A0h]
-  _Cnd_internal_imp_t *v8; // [esp+Ch] [ebp-19Ch]
-  _Cnd_internal_imp_t *v9; // [esp+10h] [ebp-198h]
+  std::wstring *v8; // [esp+Ch] [ebp-19Ch]
+  std::wstring *v9; // [esp+10h] [ebp-198h]
   int v10; // [esp+18h] [ebp-190h]
   int ChatMessageFilter; // [esp+1Ch] [ebp-18Ch]
   int v12; // [esp+34h] [ebp-174h]
   int i; // [esp+3Ch] [ebp-16Ch]
-  _BYTE v15[28]; // [esp+44h] [ebp-164h] BYREF
-  _BYTE v16[28]; // [esp+60h] [ebp-148h] BYREF
-  char v17[28]; // [esp+7Ch] [ebp-12Ch] BYREF
+  struct std::string v15; // [esp+44h] [ebp-164h] BYREF
+  std::wstring v16; // [esp+60h] [ebp-148h] BYREF
+  std::wstring v17; // [esp+7Ch] [ebp-12Ch] BYREF
   char Dest[256]; // [esp+98h] [ebp-110h] BYREF
   int v19; // [esp+1A4h] [ebp-4h]
 
@@ -97,7 +97,7 @@ void  CStateGame::UpdateToGuiInfoStruct(void) {
   *((_BYTE *)this + 321) = 1;
   *((_DWORD *)this + 77) = 0;
   *((_DWORD *)this + 79) = CGameSettings::GetGfxTextureQuality();
-  *((_DWORD *)this + 81) = (unsigned __int8)CGameSettings::GetGfxFiltering();
+  *((_DWORD *)this + 81) = CGameSettings::GetGfxFiltering();
   *((_DWORD *)this + 78) = CGameSettings::GetGfxHighestResolution();
   *((_DWORD *)this + 94) = 3;
   *((_DWORD *)this + 96) = CGameSettings::GetMsgHistory();
@@ -120,7 +120,7 @@ void  CStateGame::UpdateToGuiInfoStruct(void) {
   *((_DWORD *)this + 92) = CGameSettings::GetScrollStepValue();
   *((_BYTE *)this + 372) = CGameSettings::GetAlwaysUrgentMsg();
   *((_DWORD *)this + 97) = 4;
-  *((_DWORD *)this + 99) = *(_DWORD *)(g_pGameType + 112);
+  *((_DWORD *)this + 99) = g_pGameType[4].m_u[0];
   *((_DWORD *)this + 100) = CPlayerManager::GetLocalPlayerId() - 1;
   ChatMessageFilter = CGameSettings::GetChatMessageFilter();
   v12 = 0;
@@ -143,22 +143,22 @@ void  CStateGame::UpdateToGuiInfoStruct(void) {
     }
     *((_DWORD *)this + 10 * i + 98) = CPlayerManager::Color(i);
     *((_BYTE *)this + 40 * i + 401) = CAlliances::AllianceId(i) != v10;
-    v9 = (_Cnd_internal_imp_t *)CPlayerManager::Name(v16, i);
+    v9 = (std::wstring *)CPlayerManager::Name((int)&v16, i);
     v19 = 0;
-    v2 = (const wchar_t *)std::wstring::c_str(v9);
+    v2 = std::wstring::c_str(v9);
     v5 = wcslen(v2);
-    v8 = (_Cnd_internal_imp_t *)CPlayerManager::Name(v17, i);
-    v3 = (const wchar_t *)std::wstring::c_str(v8);
+    v8 = (std::wstring *)CPlayerManager::Name((int)&v17, i);
+    v3 = std::wstring::c_str(v8);
     v7 = j__wcstombs(Dest, v3, v5);
-    std::wstring::~wstring(v17);
+    std::wstring::~wstring(&v17);
     v19 = -1;
-    std::wstring::~wstring(v16);
+    std::wstring::~wstring(&v16);
     if ( v7 >= 0x100 )
       report_rangecheckfailure();
     Dest[v7] = 0;
-    v6 = std::string::string(v15, Dest);
+    v6 = std::string::string(&v15, Dest);
     std::string::operator=((char *)this + 40 * i + 364, v6);
-    std::string::~string(v15);
+    std::string::~string(&v15);
     if ( *((_BYTE *)this + 40 * i + 400) )
       v12 |= 1 << (i - 1);
   }
@@ -887,7 +887,7 @@ int  CStateGame::GetModifierState(void) {
   *((_BYTE *)this + 68) = 0;
   std::string::string((struct std::string *)v51, "none");
   LOBYTE(v52) = 5;
-  v22 = g_pCfgMgr->GetStringValue((int)v38, "COMMANDLINE", "events", (int)v51);
+  v22 = g_pCfgMgr->?((int)v38, "COMMANDLINE", "events", (int)v51);
   LOBYTE(v52) = 6;
   std::operator==<char>(v22, "record");
   LOBYTE(v52) = 5;
@@ -896,19 +896,19 @@ int  CStateGame::GetModifierState(void) {
   std::string::~string(v51);
   std::string::string((struct std::string *)v47, "none");
   LOBYTE(v52) = 7;
-  v23 = g_pCfgMgr->GetStringValue((int)v43, "COMMANDLINE", "events", (int)v47);
+  v23 = g_pCfgMgr->?((int)v43, "COMMANDLINE", "events", (int)v47);
   LOBYTE(v52) = 8;
   v34 = std::operator==<char>(v23, "play");
   LOBYTE(v52) = 7;
   std::string::~string(v43);
   LOBYTE(v52) = 4;
   std::string::~string(v47);
-  v25 = g_pCfgMgr->GetIntValue("COMMANDLINE", "stopevent", 0);
+  v25 = g_pCfgMgr->?("COMMANDLINE", "stopevent", 0);
   if ( v34 )
   {
     std::string::string((struct std::string *)v48, "slot0.rec");
     LOBYTE(v52) = 10;
-    v26 = (void *)g_pCfgMgr->GetStringValue((int)v40, "COMMANDLINE", "eventfile", (int)v48);
+    v26 = (void *)g_pCfgMgr->?((int)v40, "COMMANDLINE", "eventfile", (int)v48);
     LOBYTE(v52) = 11;
     IEventEngine::PlayEvents(g_pEvnEngine, v26, v25);
     LOBYTE(v52) = 10;
@@ -3761,7 +3761,7 @@ void  CStateGame::CheckAutosaveTimer(void) {
   int v7; // [esp+10h] [ebp-Ch]
 
   Instance = CConfigManagerPtr::GetInstance();
-  TickCounter = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))Instance->GetIntValueNoAdd)(
+  TickCounter = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))Instance->?)(
                   Instance,
                   "GAMESETTINGS",
                   "IsAutosaveEnabled",

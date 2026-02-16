@@ -741,7 +741,7 @@ void  CSettlerMgr::LoadInfo(bool isMP) {
           LOBYTE(v192) = 16;
           configManager = CConfigManagerPtr::GetInstance();
           v3 = std::string::c_str(v186);
-          settlerInfoId = ((int (__thiscall *)(CConfigManager *, int))configManager->GetDefineValue)(configManager, v3);
+          settlerInfoId = ((int (__thiscall *)(CConfigManager *, int))configManager->?)(configManager, v3);
           if ( settlerInfoId == -1 )
           {
             v129 = BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 1791, "index != -1");
@@ -846,7 +846,7 @@ void  CSettlerMgr::LoadInfo(bool isMP) {
           v97 = v98;
           LOBYTE(v192) = 20;
           v17 = std::string::c_str(v98);
-          v96 = ((int (__thiscall *)(CConfigManager *, int))v152->GetDefineValue)(v152, v17);
+          v96 = ((int (__thiscall *)(CConfigManager *, int))v152->?)(v152, v17);
           settlerInfo->m_uTool = v96;
           LOBYTE(v192) = 17;
           std::string::~string(v180);
@@ -939,7 +939,7 @@ void  CSettlerMgr::LoadInfo(bool isMP) {
             std::string::~string(v183);
             configManager = CConfigManagerPtr::GetInstance();
             v22 = std::string::c_str(v190);
-            iAnimList = ((int (__thiscall *)(CConfigManager *, int))configManager->GetDefineValue)(configManager, v22);
+            iAnimList = ((int (__thiscall *)(CConfigManager *, int))configManager->?)(configManager, v22);
             if ( iAnimList == -1 )
             {
               v65 = BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 1842, "iAnimList != -1");

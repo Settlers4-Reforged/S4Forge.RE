@@ -806,12 +806,12 @@ bool __cdecl CTextMsgHandler::CheckWarning(char const * a1, int * a2) {
   int MsgLevelMask; // [esp+0h] [ebp-8h]
   unsigned int v4; // [esp+4h] [ebp-4h]
 
-  if ( ((unsigned __int8 (__thiscall *)(CConfigManager *, const char *, const char *))g_pCfgMgr->j_?DoesExist@CConfigManager@@UAE_NPBD0@Z)(
+  if ( ((unsigned __int8 (__thiscall *)(CConfigManager *, const char *, const char *))g_pCfgMgr->?)(
          g_pCfgMgr,
          "WARNINGMSG_CLASSIFICATION",
          a1) )
   {
-    v4 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValue)(
+    v4 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->?)(
            g_pCfgMgr,
            "WARNINGMSG_CLASSIFICATION",
            a1,

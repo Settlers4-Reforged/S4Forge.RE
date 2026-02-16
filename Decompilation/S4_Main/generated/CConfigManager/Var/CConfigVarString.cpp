@@ -1,3 +1,4 @@
+#if FALSE
 #include "CConfigVarString.h"
 
 // Definitions for class CConfigVarString
@@ -31,7 +32,7 @@ void  CConfigVarString::SetValue(char const * Str) {
 // Decompiled from CConfigVarString *__thiscall CConfigVarString::CConfigVarString(CConfigVarString *this, int a2)
  CConfigVarString::CConfigVarString(std::string const & a2) {
   
-  CDynamicConfigVar::CDynamicConfigVar(this, CONFIGVAR_TYPE_STRING, 1);
+  CDynamicConfigVar::CDynamicConfigVar(this, 4, 1);
   this->__vftable = (CConfigVar_vtbl *)&CConfigVarString::_vftable_;
   std::string::string(&this->value, a2);
   return this;
@@ -48,3 +49,4 @@ void  CConfigVarString::SetValue(char const * Str) {
 }
 
 
+#endif // Already implemented

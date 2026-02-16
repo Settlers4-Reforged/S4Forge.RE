@@ -106,7 +106,7 @@ void  CAnimalMgr::Init(void) {
   if ( v27 < (int)v37[64] )
     v37[64] = (CAnimalEffect *)v27;
   v20 = 100
-      - ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->GetIntValueNoAdd)(
+      - ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->?)(
           g_pCfgMgr,
           "ANIMAL_DATA",
           "HUNT_PERCENT",
@@ -1030,57 +1030,57 @@ void  CAnimalMgr::LoadAnimalData(void) {
 
   memset(CAnimalMgr::m_asAnimalData, 0, 0x2D0u);
   memset(CAnimalMgr::m_asAnimalEffectData, 0, 0x140u);
-  *((_DWORD *)this + 64) = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->GetIntValueNoAdd)(
+  *((_DWORD *)this + 64) = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->?)(
                              g_pCfgMgr,
                              "ANIMAL_DATA",
                              "MAX_ANIMALS",
                              1000);
-  *((_DWORD *)this + 66) = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->GetIntValueNoAdd)(
+  *((_DWORD *)this + 66) = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->?)(
                              g_pCfgMgr,
                              "ANIMAL_DATA",
                              "MAX_MYSTIC",
                              4);
-  *((_DWORD *)this + 94) = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->GetIntValueNoAdd)(
+  *((_DWORD *)this + 94) = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->?)(
                              g_pCfgMgr,
                              "ANIMAL_DATA",
                              "FISH_MIN",
                              2);
-  *((_DWORD *)this + 58) = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->GetIntValueNoAdd)(
+  *((_DWORD *)this + 58) = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->?)(
                              g_pCfgMgr,
                              "ANIMAL_DATA",
                              "PLAIN_TREES",
                              1);
-  *((_DWORD *)this + 59) = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->GetIntValueNoAdd)(
+  *((_DWORD *)this + 59) = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->?)(
                              g_pCfgMgr,
                              "ANIMAL_DATA",
                              "LIGHT_TREES",
                              4);
-  *((_DWORD *)this + 60) = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->GetIntValueNoAdd)(
+  *((_DWORD *)this + 60) = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->?)(
                              g_pCfgMgr,
                              "ANIMAL_DATA",
                              "DEEP_TREES",
                              8);
-  *((_DWORD *)this + 61) = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->GetIntValueNoAdd)(
+  *((_DWORD *)this + 61) = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->?)(
                              g_pCfgMgr,
                              "ANIMAL_DATA",
                              "LAND_POP",
                              8);
-  *((_DWORD *)this + 67) = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValueNoAdd)(
+  *((_DWORD *)this + 67) = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->?)(
                              g_pCfgMgr,
                              "ANIMAL_DATA",
                              "AMOUNT_BUTTERFLY",
                              0);
-  *((_DWORD *)this + 68) = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValueNoAdd)(
+  *((_DWORD *)this + 68) = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->?)(
                              g_pCfgMgr,
                              "ANIMAL_DATA",
                              "AMOUNT_BIRDS",
                              0);
-  *((_DWORD *)this + 69) = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValueNoAdd)(
+  *((_DWORD *)this + 69) = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->?)(
                              g_pCfgMgr,
                              "ANIMAL_DATA",
                              "AMOUNT_SEAGULL",
                              0);
-  *((_DWORD *)this + 70) = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValueNoAdd)(
+  *((_DWORD *)this + 70) = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->?)(
                              g_pCfgMgr,
                              "ANIMAL_DATA",
                              "AMOUNT_DUCK",
@@ -1091,7 +1091,7 @@ void  CAnimalMgr::LoadAnimalData(void) {
   *((_DWORD *)this + 67) *= v25;
   *((_DWORD *)this + 68) *= v25;
   *((_DWORD *)this + 69) *= v25;
-  result = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->GetIntValueNoAdd)(
+  result = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->?)(
              g_pCfgMgr,
              "ANIMAL_DATA",
              "SEARCH_RAD",
@@ -1116,13 +1116,13 @@ void  CAnimalMgr::LoadAnimalData(void) {
   for ( i = 1; i < 18; ++i )
   {
     AnimalName = CS4DefineNames::GetAnimalName(i);
-    if ( ((unsigned __int8 (__thiscall *)(CConfigManager *, const char *, _DWORD))g_pCfgMgr->j_?DoesExist@CConfigManager@@UAE_NPBD0@Z)(
+    if ( ((unsigned __int8 (__thiscall *)(CConfigManager *, const char *, _DWORD))g_pCfgMgr->?)(
            g_pCfgMgr,
            AnimalName,
            0) )
     {
       memset(&CAnimalMgr::m_asAnimalData[10 * i], 0, 0x28u);
-      v2 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->GetIntValueNoAdd)(
+      v2 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->?)(
              g_pCfgMgr,
              AnimalName,
              "RACE",
@@ -1144,31 +1144,31 @@ void  CAnimalMgr::LoadAnimalData(void) {
       if ( v31 )
       {
 LABEL_23:
-        v3 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValueNoAdd)(
+        v3 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->?)(
                g_pCfgMgr,
                AnimalName,
                "LAND_TYPE",
                0);
         CAnimalMgr::m_asAnimalData[10 * i] = v3;
-        v16 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValueNoAdd)(
+        v16 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->?)(
                 g_pCfgMgr,
                 AnimalName,
                 "HUNTABLE",
                 0) != 0;
         byte_4032AD4[40 * i] = v16;
-        v15 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValueNoAdd)(
+        v15 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->?)(
                 g_pCfgMgr,
                 AnimalName,
                 "RUNAWAY",
                 0) != 0;
         byte_4032AD5[40 * i] = v15;
-        v4 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValueNoAdd)(
+        v4 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->?)(
                g_pCfgMgr,
                AnimalName,
                "SPEED_DIVIDER",
                0);
         dword_4032AE0[10 * i] = v4;
-        v5 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValueNoAdd)(
+        v5 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->?)(
                g_pCfgMgr,
                AnimalName,
                "SOUND",
@@ -1176,7 +1176,7 @@ LABEL_23:
         dword_4032AF0[10 * i] = v5;
         if ( dword_4032AF0[10 * i] == -1 )
           dword_4032AF0[10 * i] = 0;
-        v6 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->GetIntValueNoAdd)(
+        v6 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->?)(
                g_pCfgMgr,
                AnimalName,
                "SOUND_INTERVAL",
@@ -1218,13 +1218,10 @@ LABEL_23:
   for ( i = 0; i < 8; ++i )
   {
     v27 = (&off_3775B54)[2 * i];
-    if ( ((unsigned __int8 (__thiscall *)(CConfigManager *, const char *, _DWORD))g_pCfgMgr->j_?DoesExist@CConfigManager@@UAE_NPBD0@Z)(
-           g_pCfgMgr,
-           v27,
-           0) )
+    if ( ((unsigned __int8 (__thiscall *)(CConfigManager *, const char *, _DWORD))g_pCfgMgr->?)(g_pCfgMgr, v27, 0) )
     {
       memset(&CAnimalMgr::m_asAnimalEffectData[10 * i], 0, 0x28u);
-      v7 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->GetIntValueNoAdd)(
+      v7 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->?)(
              g_pCfgMgr,
              v27,
              "RACE",
@@ -1246,31 +1243,31 @@ LABEL_23:
       if ( v30 )
       {
 LABEL_44:
-        v8 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValueNoAdd)(
+        v8 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->?)(
                g_pCfgMgr,
                v27,
                "LAND_TYPE",
                0);
         CAnimalMgr::m_asAnimalEffectData[10 * i] = v8;
-        v14 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValueNoAdd)(
+        v14 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->?)(
                 g_pCfgMgr,
                 v27,
                 "HUNTABLE",
                 0) != 0;
         byte_4032DA4[40 * i] = v14;
-        v13 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValueNoAdd)(
+        v13 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->?)(
                 g_pCfgMgr,
                 v27,
                 "RUNAWAY",
                 0) != 0;
         byte_4032DA5[40 * i] = v13;
-        v9 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValueNoAdd)(
+        v9 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->?)(
                g_pCfgMgr,
                v27,
                "SPEED_DIVIDER",
                0);
         dword_4032DB0[10 * i] = v9;
-        v10 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValueNoAdd)(
+        v10 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->?)(
                 g_pCfgMgr,
                 v27,
                 "SOUND",
@@ -1278,7 +1275,7 @@ LABEL_44:
         dword_4032DC0[10 * i] = v10;
         if ( dword_4032DC0[10 * i] == -1 )
           dword_4032DC0[10 * i] = 0;
-        v11 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->GetIntValueNoAdd)(
+        v11 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->?)(
                 g_pCfgMgr,
                 v27,
                 "SOUND_INTERVAL",

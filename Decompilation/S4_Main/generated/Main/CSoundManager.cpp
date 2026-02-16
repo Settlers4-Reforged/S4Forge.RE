@@ -136,7 +136,7 @@ bool  CSoundManager::OpenSoundFiles(void) {
     else
       *(_DWORD *)(*((_DWORD *)v18 + 7) + 4 * i) = 0;
     SoundName = CS4DefineNames::GetSoundName(i);
-    v3 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->GetIntValue)(
+    v3 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->?)(
            g_pCfgMgr,
            "SOUND_VOLUMES",
            SoundName,
@@ -381,7 +381,7 @@ unsigned int  CSoundManager::CrossFade(unsigned int a2, enum SIV_SOUNDS a3, int 
   if ( v7 )
   {
     ISoundEngine::Fade((ISoundEngine *)g_pSoundEngine, a2, 0, a5);
-    v6 = ((int (__thiscall *)(CConfigManager *, const char *, char *, _DWORD))g_pCfgMgr->GetIntValue)(
+    v6 = ((int (__thiscall *)(CConfigManager *, const char *, char *, _DWORD))g_pCfgMgr->?)(
            g_pCfgMgr,
            "SOUND_VOLUMES",
            (&off_3737164)[2 * a2],
@@ -760,9 +760,7 @@ bool  CSoundManager::LoadRaceTitles(int a2, wchar_t const * a3) {
       std::string::operator=(v36, v13);
       std::string::~string(v28);
       v3 = std::string::c_str(v38);
-      v19 = ((int (__thiscall *)(CConfigManager *, int))g_pCfgMgr->j_?GetSectionEntryCount@CConfigManager@@UAEHPBD@Z)(
-              g_pCfgMgr,
-              v3);
+      v19 = ((int (__thiscall *)(CConfigManager *, int))g_pCfgMgr->?)(g_pCfgMgr, v3);
       if ( v19 > 0 )
       {
         ISoundEngine::InitPlaylist((ISoundEngine *)g_pSoundEngine, i, 0);
@@ -774,12 +772,7 @@ bool  CSoundManager::LoadRaceTitles(int a2, wchar_t const * a3) {
           std::string::~string(v27);
           v7 = std::string::c_str(v37);
           v4 = std::string::c_str(v38);
-          ((void (__thiscall *)(CConfigManager *, _BYTE *, int, int, _BYTE *))g_pCfgMgr->GetStringValue)(
-            g_pCfgMgr,
-            v34,
-            v4,
-            v7,
-            v33);
+          ((void (__thiscall *)(CConfigManager *, _BYTE *, int, int, _BYTE *))g_pCfgMgr->?)(g_pCfgMgr, v34, v4, v7, v33);
           LOBYTE(v43) = 8;
           std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v25);
           LOBYTE(v43) = 9;
@@ -798,7 +791,7 @@ bool  CSoundManager::LoadRaceTitles(int a2, wchar_t const * a3) {
             v43 = 10;
             v8 = std::string::c_str(v37);
             v5 = std::string::c_str(v36);
-            v10 = ((int (__thiscall *)(CConfigManager *, int, int, _DWORD))g_pCfgMgr->GetIntValue)(g_pCfgMgr, v5, v8, 0);
+            v10 = ((int (__thiscall *)(CConfigManager *, int, int, _DWORD))g_pCfgMgr->?)(g_pCfgMgr, v5, v8, 0);
             ISoundEngine::AddTitleToPlaylist(i, v39, v10);
             LOBYTE(v43) = 9;
             CFile::~CFile();

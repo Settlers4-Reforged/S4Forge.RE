@@ -3,24 +3,24 @@
 // Definitions for class CConfigFile
 
 // address=[0x2f28860]
-// Decompiled from int __thiscall CConfigFile::CConfigFile(int this, wchar_t *FileName)
+// Decompiled from CConfigFile *__thiscall CConfigFile::CConfigFile(CConfigFile *this, wchar_t *FileName)
  CConfigFile::CConfigFile(wchar_t const * FileName) {
   
   _DWORD v4[26]; // [esp+Ch] [ebp-7Ch] BYREF
   int v5; // [esp+74h] [ebp-14h] BYREF
   int v6; // [esp+84h] [ebp-4h]
 
-  std::wstring::wstring((void *)this);
+  std::wstring::wstring(this);
   v6 = 0;
-  std::wstring::operator=((void *)this, FileName);
-  *(_DWORD *)(this + 28) = 0;
+  std::wstring::operator=(this, FileName);
+  *((_DWORD *)this + 7) = 0;
   CFileEx::CFileEx((CFileEx *)v4, 1);
   LOBYTE(v6) = 1;
   CFileEx::Open(&v5, FileName, 6, 0, UNUSED_ARG(), UNUSED_ARG());
-  *(_DWORD *)(this + 32) = CFileEx::Size(v4);
-  *(_DWORD *)(this + 28) = operator new[](*(_DWORD *)(this + 32) + 1);
-  *(_BYTE *)(*(_DWORD *)(this + 28) + *(_DWORD *)(this + 32)) = 0;
-  CFileEx::Read(&v5, *(void **)(this + 28), 1, *(_DWORD *)(this + 32), "Source\\ConfigManager\\ConfigFile.cpp", 32);
+  *((_DWORD *)this + 8) = CFileEx::Size(v4);
+  *((_DWORD *)this + 7) = operator new[](*((_DWORD *)this + 8) + 1);
+  *(_BYTE *)(*((_DWORD *)this + 7) + *((_DWORD *)this + 8)) = 0;
+  CFileEx::Read(&v5, *((void **)this + 7), 1, *((_DWORD *)this + 8), UNUSED_ARG(), UNUSED_ARG());
   CFileEx::Close((CFileEx *)&v5, UNUSED_ARG(), UNUSED_ARG());
   LOBYTE(v6) = 0;
   CFileEx::~CFileEx(v4);

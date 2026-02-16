@@ -60,7 +60,7 @@ public:
     static std::string __cdecl GetTipsURL(void a1);
 
     // address=[0x14889f0]
-    static int __cdecl GetCampaignStatus(int a1);
+    static int __cdecl GetCampaignStatus(int _iCampaignType);
 
     // address=[0x1488dc0]
     static void __cdecl SetCampaignStatus(int a1, int a2);

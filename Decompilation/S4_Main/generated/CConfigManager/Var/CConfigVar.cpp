@@ -1,3 +1,4 @@
+#if FALSE
 #include "CConfigVar.h"
 
 // Definitions for class CConfigVar
@@ -114,7 +115,7 @@ bool  CConfigVar::Static(void)const {
 
 
 // address=[0x2ef86a0]
-// Decompiled from CConfigVar *__thiscall CConfigVar::CConfigVar(CConfigVar *this, bool _bIsStatic, CONFIGVAR_TYPE _eType, char _iSize)
+// Decompiled from CConfigVar *__thiscall CConfigVar::CConfigVar(CConfigVar *this, bool _bIsStatic, T_CFGVAR_TYPE _eType, char _iSize)
  CConfigVar::CConfigVar(bool _bIsStatic, enum T_CFGVAR_TYPE _eType, int _iSize) {
   
   this->__vftable = (CConfigVar_vtbl *)&CConfigVar::_vftable_;
@@ -126,3 +127,4 @@ bool  CConfigVar::Static(void)const {
 }
 
 
+#endif // Already implemented

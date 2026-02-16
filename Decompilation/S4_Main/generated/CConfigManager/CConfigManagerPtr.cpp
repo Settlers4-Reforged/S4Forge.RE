@@ -10,7 +10,7 @@ class IConfigManager * __cdecl CConfigManagerPtr::GetInstance(void) {
   CConfigManager *C; // [esp+Ch] [ebp-10h]
 
   if ( CConfigManagerPtr::m_pConfigManager )
-    return (CConfigManager *)CConfigManagerPtr::m_pConfigManager;
+    return CConfigManagerPtr::m_pConfigManager;
   if ( CConfigManagerPtr::m_bWasDeleted
     && BBSupportDbgReport(2, "Source\\ConfigManager\\ConfigManager.cpp", 1435, "!m_bWasDeleted") == 1 )
   {
@@ -21,7 +21,7 @@ class IConfigManager * __cdecl CConfigManagerPtr::GetInstance(void) {
     v1 = CConfigManager::CConfigManager(C);
   else
     v1 = 0;
-  CConfigManagerPtr::m_pConfigManager = (int)v1;
+  CConfigManagerPtr::m_pConfigManager = v1;
   return v1;
 }
 

@@ -41,6 +41,11 @@ public:
     // address=[0x2efa270]
     int  NumberOfEntries(void);
 
+    // Type information members
+public:
+    std::string m_spName;
+    std::map m_mConfigs;
+
 };
 
 

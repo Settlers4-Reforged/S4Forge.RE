@@ -1,3 +1,4 @@
+#if FALSE
 #include "CGameSettings.h"
 
 // Definitions for class CGameSettings
@@ -18,7 +19,7 @@ void __cdecl CGameSettings::Save(void) {
   ConfigFilePath = CGameSettings::GetConfigFilePath(&ret, L"GameSettings", 1);
   LOBYTE(exceptionBlock) = 1;
   v0 = std::wstring::c_str(&ret);
-  g_pCfgMgr->SaveSection(g_pCfgMgr, "GAMESETTINGS", v0);
+  g_pCfgMgr->?(g_pCfgMgr, "GAMESETTINGS", v0);
   LOBYTE(exceptionBlock) = 0;
   std::wstring::~wstring(&ret);
 }
@@ -28,7 +29,7 @@ void __cdecl CGameSettings::Save(void) {
 // Decompiled from int __cdecl CGameSettings::SetGfxFullscreenEnabled(bool a1)
 void __cdecl CGameSettings::SetGfxFullscreenEnabled(bool a1) {
   
-  CStaticConfigVarInt::operator=(CGameSettings::m_iFullscreenEnabled, a1);
+  CStaticConfigVarInt::operator=(&CGameSettings::m_iFullscreenEnabled, a1);
   return CGameSettings::Save();
 }
 
@@ -37,10 +38,10 @@ void __cdecl CGameSettings::SetGfxFullscreenEnabled(bool a1) {
 // Decompiled from int __cdecl CGameSettings::SetWindowsDimensions(int a1, int a2, int a3, int a4)
 void __cdecl CGameSettings::SetWindowsDimensions(int a1, int a2, int a3, int a4) {
   
-  CStaticConfigVarInt::operator=(CGameSettings::m_iWindowPosX, a1);
-  CStaticConfigVarInt::operator=(CGameSettings::m_iWindowPosY, a2);
-  CStaticConfigVarInt::operator=(CGameSettings::m_iWindowWidth, a3);
-  CStaticConfigVarInt::operator=(CGameSettings::m_iWindowHeight, a4);
+  CStaticConfigVarInt::operator=(&CGameSettings::m_iWindowPosX, a1);
+  CStaticConfigVarInt::operator=(&CGameSettings::m_iWindowPosY, a2);
+  CStaticConfigVarInt::operator=(&CGameSettings::m_iWindowWidth, a3);
+  CStaticConfigVarInt::operator=(&CGameSettings::m_iWindowHeight, a4);
   return CGameSettings::Save();
 }
 
@@ -121,54 +122,54 @@ void __cdecl CGameSettings::LoadCommandLineValues(void) {
   int v13; // eax
   char *v14; // eax
   char *v15; // eax
-  std::wstring v16; // [esp-1Ch] [ebp-7B8h] SPLIT BYREF
-  size_t v17; // [esp-4h] [ebp-7A0h]
+  std::wstring v16; // [esp-1Ch] [ebp-7B8h]
+  std::wstring v17; // [esp-1Ch] [ebp-7B8h] SPLIT BYREF
   int v18; // [esp+4h] [ebp-798h]
   std::wstring *v19; // [esp+8h] [ebp-794h]
-  struct std::string *v20; // [esp+Ch] [ebp-790h]
-  struct std::string *v21; // [esp+10h] [ebp-78Ch]
+  std::string *v20; // [esp+Ch] [ebp-790h]
+  std::string *v21; // [esp+10h] [ebp-78Ch]
   struct std::string *v22; // [esp+14h] [ebp-788h]
-  std::string *v23; // [esp+18h] [ebp-784h]
-  struct std::string *v24; // [esp+1Ch] [ebp-780h]
-  struct std::string *v25; // [esp+20h] [ebp-77Ch]
+  void *v23; // [esp+18h] [ebp-784h]
+  std::string *v24; // [esp+1Ch] [ebp-780h]
+  std::string *v25; // [esp+20h] [ebp-77Ch]
   struct std::string *v26; // [esp+24h] [ebp-778h]
-  std::string *v27; // [esp+28h] [ebp-774h]
-  struct std::string *v28; // [esp+2Ch] [ebp-770h]
-  struct std::string *v29; // [esp+30h] [ebp-76Ch]
+  void *v27; // [esp+28h] [ebp-774h]
+  std::string *v28; // [esp+2Ch] [ebp-770h]
+  std::string *v29; // [esp+30h] [ebp-76Ch]
   struct std::string *v30; // [esp+34h] [ebp-768h]
-  std::string *v31; // [esp+38h] [ebp-764h]
-  std::string *v32; // [esp+3Ch] [ebp-760h]
-  struct std::string *v33; // [esp+40h] [ebp-75Ch]
-  struct std::string *v34; // [esp+44h] [ebp-758h]
+  void *v31; // [esp+38h] [ebp-764h]
+  void *v32; // [esp+3Ch] [ebp-760h]
+  std::string *v33; // [esp+40h] [ebp-75Ch]
+  std::string *v34; // [esp+44h] [ebp-758h]
   struct std::string *v35; // [esp+48h] [ebp-754h]
-  std::string *v36; // [esp+4Ch] [ebp-750h]
-  struct std::string *v37; // [esp+50h] [ebp-74Ch]
-  struct std::string *v38; // [esp+54h] [ebp-748h]
+  void *v36; // [esp+4Ch] [ebp-750h]
+  std::string *v37; // [esp+50h] [ebp-74Ch]
+  std::string *v38; // [esp+54h] [ebp-748h]
   struct std::string *v39; // [esp+58h] [ebp-744h]
-  std::string *v40; // [esp+5Ch] [ebp-740h]
-  struct std::string *v41; // [esp+60h] [ebp-73Ch]
-  struct std::string *v42; // [esp+64h] [ebp-738h]
+  void *v40; // [esp+5Ch] [ebp-740h]
+  std::string *v41; // [esp+60h] [ebp-73Ch]
+  std::string *v42; // [esp+64h] [ebp-738h]
   struct std::string *v43; // [esp+68h] [ebp-734h]
-  std::string *v44; // [esp+6Ch] [ebp-730h]
-  struct std::string *v45; // [esp+70h] [ebp-72Ch]
-  struct std::string *v46; // [esp+74h] [ebp-728h]
+  void *v44; // [esp+6Ch] [ebp-730h]
+  std::string *v45; // [esp+70h] [ebp-72Ch]
+  std::string *v46; // [esp+74h] [ebp-728h]
   struct std::string *v47; // [esp+78h] [ebp-724h]
   std::string *v48; // [esp+7Ch] [ebp-720h]
   struct std::string *v49; // [esp+80h] [ebp-71Ch]
   struct std::string *v50; // [esp+84h] [ebp-718h]
   size_t v51; // [esp+88h] [ebp-714h]
-  std::string *v52; // [esp+8Ch] [ebp-710h]
+  void *v52; // [esp+8Ch] [ebp-710h]
   DWORD pcbBuffer; // [esp+90h] [ebp-70Ch] BYREF
   std::string *v54; // [esp+94h] [ebp-708h]
   struct std::string *v55; // [esp+98h] [ebp-704h]
   struct std::string *v56; // [esp+9Ch] [ebp-700h]
-  std::string *v57; // [esp+A0h] [ebp-6FCh]
-  struct std::string *v58; // [esp+A4h] [ebp-6F8h]
-  struct std::string *v59; // [esp+A8h] [ebp-6F4h]
+  void *v57; // [esp+A0h] [ebp-6FCh]
+  std::string *v58; // [esp+A4h] [ebp-6F8h]
+  std::string *v59; // [esp+A8h] [ebp-6F4h]
   struct std::string *v60; // [esp+ACh] [ebp-6F0h]
-  std::string *v61; // [esp+B0h] [ebp-6ECh]
-  struct std::string *v62; // [esp+B4h] [ebp-6E8h]
-  struct std::string *v63; // [esp+B8h] [ebp-6E4h]
+  void *v61; // [esp+B0h] [ebp-6ECh]
+  std::string *v62; // [esp+B4h] [ebp-6E8h]
+  std::string *v63; // [esp+B8h] [ebp-6E4h]
   struct std::string *v64; // [esp+BCh] [ebp-6E0h]
   struct std::string *v65; // [esp+C0h] [ebp-6DCh]
   unsigned int v66; // [esp+C4h] [ebp-6D8h]
@@ -201,10 +202,10 @@ void __cdecl CGameSettings::LoadCommandLineValues(void) {
   _BYTE v93[28]; // [esp+294h] [ebp-508h] BYREF
   struct std::string v94; // [esp+2B0h] [ebp-4ECh] BYREF
   struct std::string v95; // [esp+2CCh] [ebp-4D0h] BYREF
-  _BYTE v96[28]; // [esp+2E8h] [ebp-4B4h] BYREF
-  _BYTE v97[28]; // [esp+304h] [ebp-498h] BYREF
+  std::string v96; // [esp+2E8h] [ebp-4B4h] BYREF
+  std::string v97; // [esp+304h] [ebp-498h] BYREF
   struct std::string v98; // [esp+320h] [ebp-47Ch] BYREF
-  _BYTE v99[28]; // [esp+33Ch] [ebp-460h] BYREF
+  std::string v99; // [esp+33Ch] [ebp-460h] BYREF
   _BYTE v100[28]; // [esp+358h] [ebp-444h] BYREF
   struct std::string v101; // [esp+374h] [ebp-428h] BYREF
   struct std::string v102; // [esp+390h] [ebp-40Ch] BYREF
@@ -220,35 +221,35 @@ void __cdecl CGameSettings::LoadCommandLineValues(void) {
   CHAR Buffer[256]; // [esp+68Ch] [ebp-110h] BYREF
   int v113; // [esp+798h] [ebp-4h]
 
-  v0 = CStaticConfigVarInt::operator int(CGameSettings::m_iWindowWidth);
-  gfxwidth = g_pCfgMgr->GetIntValue(g_pCfgMgr, "COMMANDLINE", "gfxwidth", v0);
-  CStaticConfigVarInt::operator=(CGameSettings::m_iWindowWidth, gfxwidth);
-  v2 = CStaticConfigVarInt::operator int(CGameSettings::m_iWindowHeight);
-  gfxheight = g_pCfgMgr->GetIntValue(g_pCfgMgr, "COMMANDLINE", "gfxheight", v2);
-  CStaticConfigVarInt::operator=(CGameSettings::m_iWindowHeight, gfxheight);
-  v4 = CStaticConfigVarInt::operator int(CGameSettings::m_iWindowPosX);
-  WindowPosX = g_pCfgMgr->GetIntValue(g_pCfgMgr, "COMMANDLINE", "WindowPosX", v4);
-  CStaticConfigVarInt::operator=(CGameSettings::m_iWindowPosX, WindowPosX);
-  v6 = CStaticConfigVarInt::operator int(CGameSettings::m_iWindowPosY);
-  WindowPosY = g_pCfgMgr->GetIntValue(g_pCfgMgr, "COMMANDLINE", "WindowPosY", v6);
-  CStaticConfigVarInt::operator=(CGameSettings::m_iWindowPosY, WindowPosY);
-  v8 = CStaticConfigVarInt::operator int(CGameSettings::m_iFullscreenEnabled);
-  v9 = g_pCfgMgr->GetIntValue(g_pCfgMgr, "COMMANDLINE", "Fullscreen", v8);
-  CStaticConfigVarInt::operator=(CGameSettings::m_iFullscreenEnabled, v9);
-  v10 = CStaticConfigVarInt::operator int(CGameSettings::m_iBorderScroll);
-  v11 = g_pCfgMgr->GetIntValue(g_pCfgMgr, "COMMANDLINE", "borderscroll", v10);
-  CStaticConfigVarInt::operator=(CGameSettings::m_iBorderScroll, v11);
-  v12 = CStaticConfigVarInt::operator int(CGameSettings::m_iScrollStepValue);
-  v13 = g_pCfgMgr->GetIntValue(g_pCfgMgr, "COMMANDLINE", "scrollstepvalue", v12);
-  CStaticConfigVarInt::operator=(CGameSettings::m_iScrollStepValue, v13);
+  v0 = CStaticConfigVarInt::operator int(&CGameSettings::m_iWindowWidth);
+  gfxwidth = g_pCfgMgr->?(g_pCfgMgr, "COMMANDLINE", "gfxwidth", v0);
+  CStaticConfigVarInt::operator=(&CGameSettings::m_iWindowWidth, gfxwidth);
+  v2 = CStaticConfigVarInt::operator int(&CGameSettings::m_iWindowHeight);
+  gfxheight = g_pCfgMgr->?(g_pCfgMgr, "COMMANDLINE", "gfxheight", v2);
+  CStaticConfigVarInt::operator=(&CGameSettings::m_iWindowHeight, gfxheight);
+  v4 = CStaticConfigVarInt::operator int(&CGameSettings::m_iWindowPosX);
+  WindowPosX = g_pCfgMgr->?(g_pCfgMgr, "COMMANDLINE", "WindowPosX", v4);
+  CStaticConfigVarInt::operator=(&CGameSettings::m_iWindowPosX, WindowPosX);
+  v6 = CStaticConfigVarInt::operator int(&CGameSettings::m_iWindowPosY);
+  WindowPosY = g_pCfgMgr->?(g_pCfgMgr, "COMMANDLINE", "WindowPosY", v6);
+  CStaticConfigVarInt::operator=(&CGameSettings::m_iWindowPosY, WindowPosY);
+  v8 = CStaticConfigVarInt::operator int(&CGameSettings::m_iFullscreenEnabled);
+  v9 = g_pCfgMgr->?(g_pCfgMgr, "COMMANDLINE", "Fullscreen", v8);
+  CStaticConfigVarInt::operator=(&CGameSettings::m_iFullscreenEnabled, v9);
+  v10 = CStaticConfigVarInt::operator int(&CGameSettings::m_iBorderScroll);
+  v11 = g_pCfgMgr->?(g_pCfgMgr, "COMMANDLINE", "borderscroll", v10);
+  CStaticConfigVarInt::operator=(&CGameSettings::m_iBorderScroll, v11);
+  v12 = CStaticConfigVarInt::operator int(&CGameSettings::m_iScrollStepValue);
+  v13 = g_pCfgMgr->?(g_pCfgMgr, "COMMANDLINE", "scrollstepvalue", v12);
+  CStaticConfigVarInt::operator=(&CGameSettings::m_iScrollStepValue, v13);
   std::string::string(&v110);
   v113 = 0;
   v65 = std::string::string(&v98, "Player1");
   v55 = v65;
   LOBYTE(v113) = 1;
-  v54 = g_pCfgMgr->GetStringValue(g_pCfgMgr, v99, "GAMESETTINGS", "PlayerName", v65);
+  v54 = (std::string *)g_pCfgMgr->?(g_pCfgMgr, &v99, "GAMESETTINGS", "PlayerName", v65);
   std::string::operator=(&v110, v54);
-  std::string::~string(v99);
+  std::string::~string(&v99);
   LOBYTE(v113) = 0;
   std::string::~string(&v98);
   if ( !std::string::compare(&v110, "Player1") )
@@ -259,27 +260,27 @@ void __cdecl CGameSettings::LoadCommandLineValues(void) {
     if ( strlen(Buffer) )
       std::string::operator=(&v110, Buffer);
   }
-  v52 = g_pCfgMgr->GetStringValue(g_pCfgMgr, v97, "COMMANDLINE", "playername", &v110);
+  v52 = (void *)g_pCfgMgr->?(g_pCfgMgr, &v97, "COMMANDLINE", "playername", &v110);
   std::string::operator=(&v110, v52);
-  std::string::~string(v97);
+  std::string::~string(&v97);
   v14 = std::string::c_str(&v110);
-  v17 = strlen(v14);
+  v16.m_u[6] = strlen(v14);
   v15 = std::string::c_str(&v110);
-  v51 = j__mbstowcs(Dest, v15, v17);
+  v51 = j__mbstowcs(Dest, v15, v16.m_u[6]);
   v66 = 2 * v51;
   if ( 2 * v51 >= 0x200 )
     report_rangecheckfailure();
   Dest[v66 / 2] = 0;
-  v19 = &v16;
-  v18 = std::wstring::wstring(&v16, Dest);
-  CGameSettings::SetPlayerName(v16.m_u[0]);
+  v19 = &v17;
+  v18 = std::wstring::wstring(&v17, Dest);
+  CGameSettings::SetPlayerName(v17);
   CGameSettings::LoadAINames();
   v50 = std::string::string(&v95, (char *)&byte_36C2633);
   v49 = v50;
   LOBYTE(v113) = 2;
-  v48 = g_pCfgMgr->GetStringValue(g_pCfgMgr, v96, "WEB", "HelpURLenglish", v50);
+  v48 = (std::string *)g_pCfgMgr->?(g_pCfgMgr, &v96, "WEB", "HelpURLenglish", v50);
   std::string::operator=(&CGameSettings::m_strHelpURLenglish, v48);
-  std::string::~string(v96);
+  std::string::~string(&v96);
   LOBYTE(v113) = 0;
   std::string::~string(&v95);
   v47 = std::string::string(&v94, (char *)&byte_36C2641);
@@ -290,7 +291,7 @@ void __cdecl CGameSettings::LoadCommandLineValues(void) {
   v46 = std::string::string(&v92, (char *)&byte_36C2642);
   v45 = v46;
   LOBYTE(v113) = 3;
-  v44 = g_pCfgMgr->GetStringValue(g_pCfgMgr, v93, "WEB", "NormURLenglish", v46);
+  v44 = (void *)g_pCfgMgr->?(g_pCfgMgr, (std::string *)v93, "WEB", "NormURLenglish", v46);
   std::string::operator=(&CGameSettings::m_strNormURLenglish, v44);
   std::string::~string(v93);
   LOBYTE(v113) = 0;
@@ -303,7 +304,7 @@ void __cdecl CGameSettings::LoadCommandLineValues(void) {
   v42 = std::string::string(&v104, (char *)&byte_36C264A);
   v41 = v42;
   LOBYTE(v113) = 4;
-  v40 = g_pCfgMgr->GetStringValue(g_pCfgMgr, v90, "WEB", "HelpURLgerman", v42);
+  v40 = (void *)g_pCfgMgr->?(g_pCfgMgr, (std::string *)v90, "WEB", "HelpURLgerman", v42);
   std::string::operator=(&CGameSettings::m_strHelpURLgerman, v40);
   std::string::~string(v90);
   LOBYTE(v113) = 0;
@@ -316,7 +317,7 @@ void __cdecl CGameSettings::LoadCommandLineValues(void) {
   v38 = std::string::string(&v87, (char *)&byte_36C2672);
   v37 = v38;
   LOBYTE(v113) = 5;
-  v36 = g_pCfgMgr->GetStringValue(g_pCfgMgr, v100, "WEB", "NormURLgerman", v38);
+  v36 = (void *)g_pCfgMgr->?(g_pCfgMgr, (std::string *)v100, "WEB", "NormURLgerman", v38);
   std::string::operator=(&CGameSettings::m_strNormURLgerman, v36);
   std::string::~string(v100);
   LOBYTE(v113) = 0;
@@ -329,7 +330,7 @@ void __cdecl CGameSettings::LoadCommandLineValues(void) {
   v34 = std::string::string(&v84, (char *)&byte_36C267D);
   v33 = v34;
   LOBYTE(v113) = 6;
-  v32 = g_pCfgMgr->GetStringValue(g_pCfgMgr, v85, "MISCDATA1", "ManualURL_DE", v34);
+  v32 = (void *)g_pCfgMgr->?(g_pCfgMgr, (std::string *)v85, "MISCDATA1", "ManualURL_DE", v34);
   std::string::operator=(&CGameSettings::m_strManualURL_DE, v32);
   std::string::~string(v85);
   LOBYTE(v113) = 0;
@@ -342,7 +343,7 @@ void __cdecl CGameSettings::LoadCommandLineValues(void) {
   v29 = std::string::string(&v81, (char *)&byte_36C267F);
   v28 = v29;
   LOBYTE(v113) = 7;
-  v27 = g_pCfgMgr->GetStringValue(g_pCfgMgr, v82, "MISCDATA1", "ManualURL_FR", v29);
+  v27 = (void *)g_pCfgMgr->?(g_pCfgMgr, (std::string *)v82, "MISCDATA1", "ManualURL_FR", v29);
   std::string::operator=(&CGameSettings::m_strManualURL_FR, v27);
   std::string::~string(v82);
   LOBYTE(v113) = 0;
@@ -355,7 +356,7 @@ void __cdecl CGameSettings::LoadCommandLineValues(void) {
   v25 = std::string::string(&v78, (char *)&byte_36C268B);
   v24 = v25;
   LOBYTE(v113) = 8;
-  v23 = g_pCfgMgr->GetStringValue(g_pCfgMgr, v79, "MISCDATA1", "ManualURL_EN", v25);
+  v23 = (void *)g_pCfgMgr->?(g_pCfgMgr, (std::string *)v79, "MISCDATA1", "ManualURL_EN", v25);
   std::string::operator=(&CGameSettings::m_strManualURL_EN, v23);
   std::string::~string(v79);
   LOBYTE(v113) = 0;
@@ -368,7 +369,7 @@ void __cdecl CGameSettings::LoadCommandLineValues(void) {
   v21 = std::string::string(&v109, (char *)&byte_36C269B);
   v20 = v21;
   LOBYTE(v113) = 9;
-  v31 = g_pCfgMgr->GetStringValue(g_pCfgMgr, v77, "MISCDATA1", "TipsURL_DE", v21);
+  v31 = (void *)g_pCfgMgr->?(g_pCfgMgr, (std::string *)v77, "MISCDATA1", "TipsURL_DE", v21);
   std::string::operator=(&CGameSettings::m_strTipsURL_DE, v31);
   std::string::~string(v77);
   LOBYTE(v113) = 0;
@@ -381,7 +382,7 @@ void __cdecl CGameSettings::LoadCommandLineValues(void) {
   v63 = std::string::string(&v106, (char *)&byte_36C26CF);
   v62 = v63;
   LOBYTE(v113) = 10;
-  v61 = g_pCfgMgr->GetStringValue(g_pCfgMgr, v107, "MISCDATA1", "TipsURL_FR", v63);
+  v61 = (void *)g_pCfgMgr->?(g_pCfgMgr, (std::string *)v107, "MISCDATA1", "TipsURL_FR", v63);
   std::string::operator=(&CGameSettings::m_strTipsURL_FR, v61);
   std::string::~string(v107);
   LOBYTE(v113) = 0;
@@ -394,7 +395,7 @@ void __cdecl CGameSettings::LoadCommandLineValues(void) {
   v59 = std::string::string(&v103, (char *)&byte_36C26E7);
   v58 = v59;
   LOBYTE(v113) = 11;
-  v57 = g_pCfgMgr->GetStringValue(g_pCfgMgr, v105, "MISCDATA1", "TipsURL_EN", v59);
+  v57 = (void *)g_pCfgMgr->?(g_pCfgMgr, (std::string *)v105, "MISCDATA1", "TipsURL_EN", v59);
   std::string::operator=(&CGameSettings::m_strTipsURL_EN, v57);
   std::string::~string(v105);
   LOBYTE(v113) = 0;
@@ -507,7 +508,7 @@ void __cdecl CGameSettings::SetPlayerName(std::wstring a1) {
   wchar_t *v2; // eax
   size_t v3; // [esp-4h] [ebp-148h]
   struct std::string *v4; // [esp+4h] [ebp-140h]
-  int v5; // [esp+10h] [ebp-134h]
+  CConfigVar *v5; // [esp+10h] [ebp-134h]
   size_t v6; // [esp+14h] [ebp-130h]
   struct std::string v7; // [esp+18h] [ebp-12Ch] BYREF
   char Dest[256]; // [esp+34h] [ebp-110h] BYREF
@@ -522,10 +523,10 @@ void __cdecl CGameSettings::SetPlayerName(std::wstring a1) {
   if ( v6 >= 0x100 )
     report_rangecheckfailure();
   Dest[v6] = 0;
-  v5 = g_pCfgMgr->GetConfigVar(g_pCfgMgr, "GAMESETTINGS");
+  v5 = g_pCfgMgr->?(g_pCfgMgr, "GAMESETTINGS");
   v4 = std::string::string(&v7, Dest);
   LOBYTE(v9) = 1;
-  (*(void (__thiscall **)(int, struct std::string *))(*(_DWORD *)v5 + 20))(v5, v4);
+  v5->SetValue(v5, v4);
   LOBYTE(v9) = 0;
   std::string::~string(&v7);
   CGameSettings::Save();
@@ -581,24 +582,24 @@ std::string __cdecl CGameSettings::GetTipsURL(void a1) {
 
 
 // address=[0x14889f0]
-// Decompiled from int __cdecl CGameSettings::GetCampaignStatus(int a1)
-int __cdecl CGameSettings::GetCampaignStatus(int a1) {
+// Decompiled from int __cdecl CGameSettings::GetCampaignStatus(int _iCampaignType)
+int __cdecl CGameSettings::GetCampaignStatus(int _iCampaignType) {
   
   unsigned int v2; // eax
   _DWORD v3[7]; // [esp+1Ch] [ebp-24h] BYREF
   unsigned int i; // [esp+38h] [ebp-8h]
   char v5; // [esp+3Fh] [ebp-1h]
-  int v6; // [esp+48h] [ebp+8h]
+  int _iCampaignTypea; // [esp+48h] [ebp+8h]
 
-  if ( a1 < 5 || a1 >= 11 )
+  if ( _iCampaignType < 5 || _iCampaignType >= 11 )
   {
-    if ( a1 < 11 || a1 >= 17 )
+    if ( _iCampaignType < 11 || _iCampaignType >= 17 )
     {
-      if ( a1 < 17 || a1 >= 21 )
+      if ( _iCampaignType < 17 || _iCampaignType >= 21 )
       {
-        if ( a1 < 21 || a1 >= 25 )
+        if ( _iCampaignType < 21 || _iCampaignType >= 25 )
         {
-          if ( (!a1 || a1 >= 5)
+          if ( (!_iCampaignType || _iCampaignType >= 5)
             && BBSupportDbgReport(
                  2,
                  "main\\GameSettings.cpp",
@@ -607,27 +608,11 @@ int __cdecl CGameSettings::GetCampaignStatus(int a1) {
           {
             __debugbreak();
           }
-          v6 = a1 - 1;
-          CGameSettings::m_uiCampaignSave[0] = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValue)(
-                                                 g_pCfgMgr,
-                                                 "MISCDATA2",
-                                                 "Data01",
-                                                 0);
-          CGameSettings::m_uiCampaignSave[1] = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValue)(
-                                                 g_pCfgMgr,
-                                                 "MISCDATA2",
-                                                 "Data02",
-                                                 0);
-          CGameSettings::m_uiCampaignSave[2] = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValue)(
-                                                 g_pCfgMgr,
-                                                 "MISCDATA2",
-                                                 "Data03",
-                                                 0);
-          CGameSettings::m_uiCampaignSave[3] = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValue)(
-                                                 g_pCfgMgr,
-                                                 "MISCDATA2",
-                                                 "Data04",
-                                                 0);
+          _iCampaignTypea = _iCampaignType - 1;
+          CGameSettings::m_uiCampaignSave[0] = g_pCfgMgr->?(g_pCfgMgr, "MISCDATA2", "Data01", 0);
+          CGameSettings::m_uiCampaignSave[1] = g_pCfgMgr->?(g_pCfgMgr, "MISCDATA2", "Data02", 0);
+          CGameSettings::m_uiCampaignSave[2] = g_pCfgMgr->?(g_pCfgMgr, "MISCDATA2", "Data03", 0);
+          CGameSettings::m_uiCampaignSave[3] = g_pCfgMgr->?(g_pCfgMgr, "MISCDATA2", "Data04", 0);
           v5 = 0;
           for ( i = 0; i < 0x10; ++i )
             v5 |= *((_BYTE *)CGameSettings::m_uiCampaignSave + i);
@@ -648,10 +633,10 @@ int __cdecl CGameSettings::GetCampaignStatus(int a1) {
             BYTE1(CGameSettings::m_uiCampaignSave[2]) = 0;
             v3[1] = 14;
             BYTE2(CGameSettings::m_uiCampaignSave[3]) = 0;
-            v2 = CGameSettings::Crc((unsigned __int8 *)CGameSettings::m_uiCampaignSave, 0x10u);
+            v2 = CGameSettings::Crc((char *)CGameSettings::m_uiCampaignSave, 16);
             if ( v3[0] == v2 )
             {
-              return LOBYTE(CGameSettings::m_uiCampaignSave[v6]);
+              return LOBYTE(CGameSettings::m_uiCampaignSave[_iCampaignTypea]);
             }
             else
             {
@@ -671,35 +656,23 @@ int __cdecl CGameSettings::GetCampaignStatus(int a1) {
       }
       else
       {
-        CGameSettings::m_uiMD2CampaignSave = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValue)(
-                                               g_pCfgMgr,
-                                               "MISCDATA2",
-                                               "Data07",
-                                               0);
-        return ((unsigned int)CGameSettings::m_uiMD2CampaignSave >> (4 * a1 - 68)) & 0xF;
+        CGameSettings::m_uiMD2CampaignSave = g_pCfgMgr->?(g_pCfgMgr, "MISCDATA2", "Data07", 0);
+        return ((unsigned int)CGameSettings::m_uiMD2CampaignSave >> (4 * _iCampaignType - 68)) & 0xF;
       }
     }
     else
     {
-      CGameSettings::m_uiAOCampaignSave = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValue)(
-                                            g_pCfgMgr,
-                                            "MISCDATA2",
-                                            "Data06",
-                                            0);
-      return ((unsigned int)CGameSettings::m_uiAOCampaignSave >> (4 * a1 - 44)) & 0xF;
+      CGameSettings::m_uiAOCampaignSave = g_pCfgMgr->?(g_pCfgMgr, "MISCDATA2", "Data06", 0);
+      return ((unsigned int)CGameSettings::m_uiAOCampaignSave >> (4 * _iCampaignType - 44)) & 0xF;
     }
   }
   else
   {
-    CGameSettings::m_uiMDCampaignSave = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValue)(
-                                          g_pCfgMgr,
-                                          "MISCDATA2",
-                                          "Data05",
-                                          0);
-    if ( a1 == 10 )
+    CGameSettings::m_uiMDCampaignSave = g_pCfgMgr->?(g_pCfgMgr, "MISCDATA2", "Data05", 0);
+    if ( _iCampaignType == 10 )
       return CGameSettings::m_uiMDCampaignSave < 0;
     else
-      return ((unsigned int)CGameSettings::m_uiMDCampaignSave >> (4 * a1 - 20)) & 0xF;
+      return ((unsigned int)CGameSettings::m_uiMDCampaignSave >> (4 * _iCampaignType - 20)) & 0xF;
   }
 }
 
@@ -708,39 +681,39 @@ int __cdecl CGameSettings::GetCampaignStatus(int a1) {
 // Decompiled from void __cdecl CGameSettings::SetCampaignStatus(int a1, int a2)
 void __cdecl CGameSettings::SetCampaignStatus(int a1, int a2) {
   
-  _DWORD *v2; // eax
-  _DWORD *v3; // eax
-  _DWORD *v4; // eax
-  _DWORD *v5; // eax
-  _DWORD *v6; // eax
-  _Cnd_internal_imp_t *v7; // [esp+Ch] [ebp-108h]
-  _Cnd_internal_imp_t *ConfigFilePath; // [esp+14h] [ebp-100h]
+  wchar_t *v2; // eax
+  wchar_t *v3; // eax
+  wchar_t *v4; // eax
+  wchar_t *v5; // eax
+  wchar_t *v6; // eax
+  std::wstring *v7; // [esp+Ch] [ebp-108h]
+  std::wstring *ConfigFilePath; // [esp+14h] [ebp-100h]
   _DWORD v9[3]; // [esp+1Ch] [ebp-F8h] BYREF
-  _Cnd_internal_imp_t *v10; // [esp+28h] [ebp-ECh]
+  std::wstring *v10; // [esp+28h] [ebp-ECh]
   int v11; // [esp+2Ch] [ebp-E8h]
-  _Cnd_internal_imp_t *v12; // [esp+30h] [ebp-E4h]
-  _Cnd_internal_imp_t *v13; // [esp+34h] [ebp-E0h]
+  std::wstring *v12; // [esp+30h] [ebp-E4h]
+  std::wstring *v13; // [esp+34h] [ebp-E0h]
   int v14; // [esp+38h] [ebp-DCh]
-  _Cnd_internal_imp_t *v15; // [esp+3Ch] [ebp-D8h]
-  int v16; // [esp+40h] [ebp-D4h]
-  int v17; // [esp+44h] [ebp-D0h]
-  int v18; // [esp+48h] [ebp-CCh]
-  int v19; // [esp+4Ch] [ebp-C8h]
+  std::wstring *v15; // [esp+3Ch] [ebp-D8h]
+  CConfigVar *v16; // [esp+40h] [ebp-D4h]
+  CConfigVar *v17; // [esp+44h] [ebp-D0h]
+  CConfigVar *v18; // [esp+48h] [ebp-CCh]
+  CConfigVar *v19; // [esp+4Ch] [ebp-C8h]
   int v20; // [esp+50h] [ebp-C4h]
   int v21; // [esp+54h] [ebp-C0h]
   int v22; // [esp+58h] [ebp-BCh]
   int v23; // [esp+5Ch] [ebp-B8h]
-  int v24; // [esp+60h] [ebp-B4h]
-  int v25; // [esp+64h] [ebp-B0h]
-  int v26; // [esp+68h] [ebp-ACh]
-  int v27; // [esp+6Ch] [ebp-A8h]
+  CConfigVar *v24; // [esp+60h] [ebp-B4h]
+  CConfigVar *v25; // [esp+64h] [ebp-B0h]
+  CConfigVar *v26; // [esp+68h] [ebp-ACh]
+  CConfigVar *v27; // [esp+6Ch] [ebp-A8h]
   int CampaignStatus; // [esp+70h] [ebp-A4h]
   _BYTE *v29; // [esp+74h] [ebp-A0h]
-  int v30[7]; // [esp+78h] [ebp-9Ch] BYREF
-  int v31[7]; // [esp+94h] [ebp-80h] BYREF
-  int v32[7]; // [esp+B0h] [ebp-64h] BYREF
-  int v33[7]; // [esp+CCh] [ebp-48h] BYREF
-  int v34[7]; // [esp+E8h] [ebp-2Ch] BYREF
+  std::wstring ret; // [esp+78h] [ebp-9Ch] BYREF
+  std::wstring v31; // [esp+94h] [ebp-80h] BYREF
+  std::wstring v32; // [esp+B0h] [ebp-64h] BYREF
+  std::wstring v33; // [esp+CCh] [ebp-48h] BYREF
+  std::wstring v34; // [esp+E8h] [ebp-2Ch] BYREF
   int v35; // [esp+110h] [ebp-4h]
 
   CampaignStatus = CGameSettings::GetCampaignStatus(a1);
@@ -767,7 +740,7 @@ void __cdecl CGameSettings::SetCampaignStatus(int a1, int a2) {
         }
         v9[1] = 3;
         LOBYTE(CGameSettings::m_uiCampaignSave[a1 - 1]) = a2;
-        v9[0] = CGameSettings::Crc((unsigned __int8 *)CGameSettings::m_uiCampaignSave, 0x10u);
+        v9[0] = CGameSettings::Crc((char *)CGameSettings::m_uiCampaignSave, 16);
         v23 = 3;
         HIBYTE(CGameSettings::m_uiCampaignSave[0]) = 0;
         v22 = 6;
@@ -782,41 +755,35 @@ void __cdecl CGameSettings::SetCampaignStatus(int a1, int a2) {
         BYTE1(CGameSettings::m_uiCampaignSave[2]) = v29[2];
         BYTE2(CGameSettings::m_uiCampaignSave[3]) = v29[3];
         CGameSettings::Cryption((unsigned __int8 *)CGameSettings::m_uiCampaignSave, 0x10u);
-        v19 = g_pCfgMgr->GetConfigVar(g_pCfgMgr, "MISCDATA2", "Data01");
-        (*(void (__thiscall **)(int, int))(*(_DWORD *)v19 + 32))(v19, CGameSettings::m_uiCampaignSave[0]);
-        v18 = g_pCfgMgr->GetConfigVar(g_pCfgMgr, "MISCDATA2", "Data02");
-        (*(void (__thiscall **)(int, int))(*(_DWORD *)v18 + 32))(v18, CGameSettings::m_uiCampaignSave[1]);
-        v17 = g_pCfgMgr->GetConfigVar(g_pCfgMgr, "MISCDATA2", "Data03");
-        (*(void (__thiscall **)(int, int))(*(_DWORD *)v17 + 32))(v17, CGameSettings::m_uiCampaignSave[2]);
-        v16 = g_pCfgMgr->GetConfigVar(g_pCfgMgr, "MISCDATA2", "Data04");
-        (*(void (__thiscall **)(int, int))(*(_DWORD *)v16 + 32))(v16, CGameSettings::m_uiCampaignSave[3]);
-        ConfigFilePath = (_Cnd_internal_imp_t *)CGameSettings::GetConfigFilePath((int)v34, (wchar_t *)L"MiscData2", 1);
+        v19 = g_pCfgMgr->?(g_pCfgMgr, "MISCDATA2");
+        v19->SetValueI(v19, CGameSettings::m_uiCampaignSave[0]);
+        v18 = g_pCfgMgr->?(g_pCfgMgr, "MISCDATA2");
+        v18->SetValueI(v18, CGameSettings::m_uiCampaignSave[1]);
+        v17 = g_pCfgMgr->?(g_pCfgMgr, "MISCDATA2");
+        v17->SetValueI(v17, CGameSettings::m_uiCampaignSave[2]);
+        v16 = g_pCfgMgr->?(g_pCfgMgr, "MISCDATA2");
+        v16->SetValueI(v16, CGameSettings::m_uiCampaignSave[3]);
+        ConfigFilePath = CGameSettings::GetConfigFilePath(&v34, L"MiscData2", 1);
         v35 = 4;
         v6 = std::wstring::c_str(ConfigFilePath);
-        ((void (__thiscall *)(CConfigManager *, const char *, _DWORD *))g_pCfgMgr->SaveSection)(
-          g_pCfgMgr,
-          "MISCDATA2",
-          v6);
+        g_pCfgMgr->?(g_pCfgMgr, "MISCDATA2", v6);
         v35 = -1;
-        std::wstring::~wstring(v34);
+        std::wstring::~wstring(&v34);
       }
       else
       {
         v11 = 15 << (4 * a1 - 68);
         CGameSettings::m_uiMD2CampaignSave &= ~v11;
         CGameSettings::m_uiMD2CampaignSave |= a2 << (4 * a1 - 68);
-        v24 = g_pCfgMgr->GetConfigVar(g_pCfgMgr, "MISCDATA2", "Data07");
-        (*(void (__thiscall **)(int, int))(*(_DWORD *)v24 + 32))(v24, CGameSettings::m_uiMD2CampaignSave);
-        v10 = (_Cnd_internal_imp_t *)CGameSettings::GetConfigFilePath((int)v33, (wchar_t *)L"MiscData2", 1);
+        v24 = g_pCfgMgr->?(g_pCfgMgr, "MISCDATA2");
+        v24->SetValueI(v24, CGameSettings::m_uiMD2CampaignSave);
+        v10 = CGameSettings::GetConfigFilePath(&v33, L"MiscData2", 1);
         v9[2] = v10;
         v35 = 3;
         v5 = std::wstring::c_str(v10);
-        ((void (__thiscall *)(CConfigManager *, const char *, _DWORD *))g_pCfgMgr->SaveSection)(
-          g_pCfgMgr,
-          "MISCDATA2",
-          v5);
+        g_pCfgMgr->?(g_pCfgMgr, "MISCDATA2", v5);
         v35 = -1;
-        std::wstring::~wstring(v33);
+        std::wstring::~wstring(&v33);
       }
     }
     else
@@ -824,18 +791,15 @@ void __cdecl CGameSettings::SetCampaignStatus(int a1, int a2) {
       v14 = 15 << (4 * a1 - 44);
       CGameSettings::m_uiAOCampaignSave &= ~v14;
       CGameSettings::m_uiAOCampaignSave |= a2 << (4 * a1 - 44);
-      v25 = g_pCfgMgr->GetConfigVar(g_pCfgMgr, "MISCDATA2", "Data06");
-      (*(void (__thiscall **)(int, int))(*(_DWORD *)v25 + 32))(v25, CGameSettings::m_uiAOCampaignSave);
-      v13 = (_Cnd_internal_imp_t *)CGameSettings::GetConfigFilePath((int)v32, (wchar_t *)L"MiscData2", 1);
+      v25 = g_pCfgMgr->?(g_pCfgMgr, "MISCDATA2");
+      v25->SetValueI(v25, CGameSettings::m_uiAOCampaignSave);
+      v13 = CGameSettings::GetConfigFilePath(&v32, L"MiscData2", 1);
       v12 = v13;
       v35 = 2;
       v4 = std::wstring::c_str(v13);
-      ((void (__thiscall *)(CConfigManager *, const char *, _DWORD *))g_pCfgMgr->SaveSection)(
-        g_pCfgMgr,
-        "MISCDATA2",
-        v4);
+      g_pCfgMgr->?(g_pCfgMgr, "MISCDATA2", v4);
       v35 = -1;
-      std::wstring::~wstring(v32);
+      std::wstring::~wstring(&v32);
     }
   }
   else if ( a1 == 10 )
@@ -843,31 +807,28 @@ void __cdecl CGameSettings::SetCampaignStatus(int a1, int a2) {
     if ( a2 )
     {
       CGameSettings::m_uiMDCampaignSave |= 0x80000000;
-      v27 = g_pCfgMgr->GetConfigVar(g_pCfgMgr, "MISCDATA2", "Data05");
-      (*(void (__thiscall **)(int, int))(*(_DWORD *)v27 + 32))(v27, CGameSettings::m_uiMDCampaignSave);
-      v7 = (_Cnd_internal_imp_t *)CGameSettings::GetConfigFilePath((int)v30, (wchar_t *)L"MiscData2", 1);
+      v27 = g_pCfgMgr->?(g_pCfgMgr, "MISCDATA2");
+      v27->SetValueI(v27, CGameSettings::m_uiMDCampaignSave);
+      v7 = CGameSettings::GetConfigFilePath(&ret, L"MiscData2", 1);
       v35 = 0;
       v2 = std::wstring::c_str(v7);
-      ((void (__thiscall *)(CConfigManager *, const char *, _DWORD *))g_pCfgMgr->SaveSection)(
-        g_pCfgMgr,
-        "MISCDATA2",
-        v2);
+      g_pCfgMgr->?(g_pCfgMgr, "MISCDATA2", v2);
       v35 = -1;
-      std::wstring::~wstring(v30);
+      std::wstring::~wstring(&ret);
     }
   }
   else
   {
     CGameSettings::m_uiMDCampaignSave &= ~(15 << (4 * a1 - 20));
     CGameSettings::m_uiMDCampaignSave |= a2 << (4 * a1 - 20);
-    v26 = g_pCfgMgr->GetConfigVar(g_pCfgMgr, "MISCDATA2", "Data05");
-    (*(void (__thiscall **)(int, int))(*(_DWORD *)v26 + 32))(v26, CGameSettings::m_uiMDCampaignSave);
-    v15 = (_Cnd_internal_imp_t *)CGameSettings::GetConfigFilePath((int)v31, (wchar_t *)L"MiscData2", 1);
+    v26 = g_pCfgMgr->?(g_pCfgMgr, "MISCDATA2");
+    v26->SetValueI(v26, CGameSettings::m_uiMDCampaignSave);
+    v15 = CGameSettings::GetConfigFilePath(&v31, L"MiscData2", 1);
     v35 = 1;
     v3 = std::wstring::c_str(v15);
-    ((void (__thiscall *)(CConfigManager *, const char *, _DWORD *))g_pCfgMgr->SaveSection)(g_pCfgMgr, "MISCDATA2", v3);
+    g_pCfgMgr->?(g_pCfgMgr, "MISCDATA2", v3);
     v35 = -1;
-    std::wstring::~wstring(v31);
+    std::wstring::~wstring(&v31);
     if ( (CGameSettings::m_uiMDCampaignSave & 0x7FFFFFFF) == 0x33555 )
       CGameSettings::SetCampaignStatus(10, 1);
   }
@@ -920,11 +881,11 @@ int __cdecl CGameSettings::GetWebHelpMode(void) {
 
 
 // address=[0x148abf0]
-// Decompiled from int __cdecl CGameSettings::SetWebHelpMode(int a1)
+// Decompiled from void __cdecl CGameSettings::SetWebHelpMode(int a1)
 void __cdecl CGameSettings::SetWebHelpMode(int a1) {
   
-  CStaticConfigVarInt::operator=(CGameSettings::m_iWebHelpMode, a1);
-  return CGameSettings::Save();
+  CStaticConfigVarInt::operator=(&CGameSettings::m_iWebHelpMode, a1);
+  CGameSettings::Save();
 }
 
 
@@ -1009,20 +970,20 @@ void __cdecl CGameSettings::SetAlwaysHardwareObjectImpossible(bool a1) {
 
 
 // address=[0x148ff60]
-// Decompiled from int __cdecl CGameSettings::SetGfxFiltering(bool a1)
+// Decompiled from void __cdecl CGameSettings::SetGfxFiltering(bool a1)
 void __cdecl CGameSettings::SetGfxFiltering(bool a1) {
   
-  CStaticConfigVarInt::operator=(CGameSettings::m_iFiltering, a1);
-  return CGameSettings::Save();
+  CStaticConfigVarInt::operator=(&CGameSettings::m_iFiltering, a1);
+  CGameSettings::Save();
 }
 
 
 // address=[0x148ffa0]
-// Decompiled from int __cdecl CGameSettings::SetGfxTextureQuality(int a1)
+// Decompiled from void __cdecl CGameSettings::SetGfxTextureQuality(int a1)
 void __cdecl CGameSettings::SetGfxTextureQuality(int a1) {
   
-  CStaticConfigVarInt::operator=(CGameSettings::m_iTextureQuality, a1);
-  return CGameSettings::Save();
+  CStaticConfigVarInt::operator=(&CGameSettings::m_iTextureQuality, a1);
+  CGameSettings::Save();
 }
 
 
@@ -1053,11 +1014,11 @@ int __cdecl CGameSettings::GetAIDifficulty(void) {
 
 
 // address=[0x14a0ad0]
-// Decompiled from int __cdecl CGameSettings::SetAIDifficulty(int a1)
+// Decompiled from void __cdecl CGameSettings::SetAIDifficulty(int a1)
 void __cdecl CGameSettings::SetAIDifficulty(int a1) {
   
-  CStaticConfigVarInt::operator=(CGameSettings::m_iAIDifficulty, a1);
-  return CGameSettings::Save();
+  CStaticConfigVarInt::operator=(&CGameSettings::m_iAIDifficulty, a1);
+  CGameSettings::Save();
 }
 
 
@@ -1190,10 +1151,10 @@ int __cdecl CGameSettings::GetVoiceChatVolume(void) {
 
 
 // address=[0x14aaeb0]
-// Decompiled from _DWORD *__cdecl CGameSettings::SetAlwaysUrgentMsg(bool a1)
+// Decompiled from void __cdecl CGameSettings::SetAlwaysUrgentMsg(bool a1)
 void __cdecl CGameSettings::SetAlwaysUrgentMsg(bool a1) {
   
-  return CStaticConfigVarInt::operator=(CGameSettings::m_iAlwaysUrgentMsg, a1);
+  CStaticConfigVarInt::operator=(&CGameSettings::m_iAlwaysUrgentMsg, a1);
 }
 
 
@@ -1374,12 +1335,12 @@ void __cdecl CGameSettings::LoadAINames(void) {
   char *v3; // eax
   size_t v4; // [esp-4h] [ebp-170h]
   int v5; // [esp+4h] [ebp-168h]
-  void *v6; // [esp+Ch] [ebp-160h]
-  struct std::string *v7; // [esp+10h] [ebp-15Ch]
+  std::string *v6; // [esp+Ch] [ebp-160h]
+  std::string *v7; // [esp+10h] [ebp-15Ch]
   size_t v8; // [esp+18h] [ebp-154h]
   int i; // [esp+1Ch] [ebp-150h]
   std::wstring v10; // [esp+20h] [ebp-14Ch] BYREF
-  int v11[7]; // [esp+3Ch] [ebp-130h] BYREF
+  std::string v11; // [esp+3Ch] [ebp-130h] BYREF
   struct std::string v12; // [esp+58h] [ebp-114h] BYREF
   std::string v13; // [esp+74h] [ebp-F8h] BYREF
   wchar_t Dest[64]; // [esp+90h] [ebp-DCh] BYREF
@@ -1394,12 +1355,12 @@ void __cdecl CGameSettings::LoadAINames(void) {
     sprintf(Buffer, Format, i + 1);
     v7 = std::string::string(&v12, "AI Player");
     v17 = 0;
-    g_pCfgMgr->GetStringValue(g_pCfgMgr, (_BYTE *)&v13, "AINAMES", Buffer, v7);
+    g_pCfgMgr->?(g_pCfgMgr, &v13, "AINAMES", Buffer, v7);
     LOBYTE(v17) = 2;
     std::string::~string(&v12);
-    v6 = (void *)std::operator+<char>((int)v11, "(AI) ", (int)&v13);
+    v6 = std::operator+<char>(&v11, "(AI) ", &v13);
     std::string::operator=(&v13, v6);
-    std::string::~string(v11);
+    std::string::~string(&v11);
     v1 = std::string::c_str(&v13);
     if ( strlen(v1) >= 32
       && BBSupportDbgReport(2, "main\\GameSettings.cpp", 275, "strlen( strTemp.c_str() ) < MAX_PLAYERNAME_LENGTH") == 1 )
@@ -1568,3 +1529,4 @@ void __cdecl CGameSettings::LoadAINames(void) {
 // address=[0x3f454c0]
 // [Decompilation failed for static class CStaticConfigVarInt CGameSettings::m_uiTutorialSave]
 
+#endif // Already implemented

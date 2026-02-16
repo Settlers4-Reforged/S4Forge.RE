@@ -1,3 +1,4 @@
+#if FALSE
 #include "CConfigVarFloat.h"
 
 // Definitions for class CConfigVarFloat
@@ -53,3 +54,4 @@ void  CConfigVarFloat::SetValue(float a2) {
 }
 
 
+#endif // Already implemented

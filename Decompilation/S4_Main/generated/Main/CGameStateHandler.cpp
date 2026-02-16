@@ -34,7 +34,7 @@ bool __cdecl CGameStateHandler::Init(void) {
   CGameStateHandler::InitStringEngine();
   std::string::string(nettestDefault, "none");
   v20 = 0;
-  v2 = ((int (__thiscall *)(CConfigManager *, _BYTE *, const char *, const char *, _BYTE *))g_pCfgMgr->GetStringValue)(
+  v2 = ((int (__thiscall *)(CConfigManager *, _BYTE *, const char *, const char *, _BYTE *))g_pCfgMgr->?)(
          g_pCfgMgr,
          v16,
          "COMMANDLINE",
@@ -48,7 +48,7 @@ bool __cdecl CGameStateHandler::Init(void) {
   std::string::~string(nettestDefault);
   std::string::string(v19, "none");
   v20 = 2;
-  v1 = ((int (__thiscall *)(CConfigManager *, _BYTE *, const char *, const char *, _BYTE *))g_pCfgMgr->GetStringValue)(
+  v1 = ((int (__thiscall *)(CConfigManager *, _BYTE *, const char *, const char *, _BYTE *))g_pCfgMgr->?)(
          g_pCfgMgr,
          v13,
          "COMMANDLINE",
@@ -60,7 +60,7 @@ bool __cdecl CGameStateHandler::Init(void) {
   std::string::~string(v13);
   v20 = -1;
   std::string::~string(v19);
-  ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValue)(
+  ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->?)(
     g_pCfgMgr,
     "COMMANDLINE",
     "videoplay",
@@ -97,7 +97,7 @@ bool __cdecl CGameStateHandler::Init(void) {
         dword_3F45674 = (int)v10;
         IEventEngine::RegisterHandle(g_pEvnEngine, v10);
         CStateLoadGame::InitSaveList();
-        if ( ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValue)(
+        if ( ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->?)(
                g_pCfgMgr,
                "COMMANDLINE",
                "netgame",
@@ -112,7 +112,7 @@ bool __cdecl CGameStateHandler::Init(void) {
           v20 = 5;
           v4 = std::string::string(v15, "normal");
           LOBYTE(v20) = 6;
-          v3 = ((int (__thiscall *)(CConfigManager *, _BYTE *, const char *, const char *, void *))g_pCfgMgr->GetStringValue)(
+          v3 = ((int (__thiscall *)(CConfigManager *, _BYTE *, const char *, const char *, void *))g_pCfgMgr->?)(
                  g_pCfgMgr,
                  v14,
                  "COMMANDLINE",
@@ -541,26 +541,22 @@ bool __cdecl CGameStateHandler::InitSoundManager(void) {
 bool __cdecl CGameStateHandler::InitConfigManager(void) {
   
   g_pCfgMgr = CConfigManagerPtr::GetInstance();
-  ((void (__thiscall *)(CConfigManager *, void *, int))g_pCfgMgr->AddDefines)(g_pCfgMgr, &unk_36E65B0, 379);
-  ((void (__thiscall *)(CConfigManager *, void *, int))g_pCfgMgr->AddDefines)(g_pCfgMgr, &unk_36C6610, 291);
-  ((void (__thiscall *)(CConfigManager *, void *, int))g_pCfgMgr->AddDefines)(g_pCfgMgr, &unk_36F31A8, 96);
-  ((void (__thiscall *)(CConfigManager *, void *, int))g_pCfgMgr->AddDefines)(g_pCfgMgr, &unk_36C8268, 18);
-  ((void (__thiscall *)(CConfigManager *, void *, int))g_pCfgMgr->AddDefines)(g_pCfgMgr, &unk_36EEA90, 43);
-  ((void (__thiscall *)(CConfigManager *, void *, int))g_pCfgMgr->AddDefines)(g_pCfgMgr, &unk_36ECFB0, 86);
-  ((void (__thiscall *)(CConfigManager *, void *, int))g_pCfgMgr->AddDefines)(g_pCfgMgr, &unk_36F0A18, 434);
-  ((void (__thiscall *)(CConfigManager *, void *, int))g_pCfgMgr->AddDefines)(g_pCfgMgr, &unk_36D2128, 6);
-  ((void (__thiscall *)(CConfigManager *, void *, int))g_pCfgMgr->AddDefines)(g_pCfgMgr, &asWarningTypeStrings, 14);
-  ((void (__thiscall *)(CConfigManager *, void *, int))g_pCfgMgr->AddDefines)(g_pCfgMgr, &unk_36D3EB8, 109);
-  ((void (__thiscall *)(CConfigManager *, void *, int))g_pCfgMgr->AddDefines)(g_pCfgMgr, &unk_36E32A0, 66);
-  ((void (__thiscall *)(CConfigManager *, void *, int))g_pCfgMgr->AddDefines)(g_pCfgMgr, &unk_36D6370, 134);
-  ((void (__thiscall *)(CConfigManager *, void *, int))g_pCfgMgr->AddDefines)(g_pCfgMgr, &unk_36D8690, 3837);
-  ((void (__thiscall *)(CConfigManager *, void *, int))g_pCfgMgr->AddDefines)(g_pCfgMgr, &unk_36D5DE0, 17);
+  g_pCfgMgr->AddDefines(g_pCfgMgr, BuildingConfigDefines, 379);
+  g_pCfgMgr->AddDefines(g_pCfgMgr, ObjectConfigDefines, 291);
+  g_pCfgMgr->AddDefines(g_pCfgMgr, AccessoryConfigDefines, 96);
+  g_pCfgMgr->AddDefines(g_pCfgMgr, AnimalConfigDefines, 18);
+  g_pCfgMgr->AddDefines(g_pCfgMgr, GoodConfigDefines, 43);
+  g_pCfgMgr->AddDefines(g_pCfgMgr, EffectConfigDefines, 86);
+  g_pCfgMgr->AddDefines(g_pCfgMgr, SettlerConfigDefines, 434);
+  g_pCfgMgr->AddDefines(g_pCfgMgr, VehicleConfigDefines, 6);
+  g_pCfgMgr->AddDefines(g_pCfgMgr, WarningConfigDefines, 14);
+  g_pCfgMgr->AddDefines(g_pCfgMgr, SoundConfigDefines, 109);
+  g_pCfgMgr->AddDefines(g_pCfgMgr, JobCheckinConfigDefines, 66);
+  g_pCfgMgr->AddDefines(g_pCfgMgr, JobWorkConfigDefines, 134);
+  g_pCfgMgr->AddDefines(g_pCfgMgr, GuiConfigDefines, 3837);
+  g_pCfgMgr->AddDefines(g_pCfgMgr, AnimalLandConfigDefines, 17);
   CGameStateHandler::LoadAllConfigFiles();
-  ((void (__thiscall *)(CConfigManager *, const char *, int, int))g_pCfgMgr->AddCommandLine)(
-    g_pCfgMgr,
-    "COMMANDLINE",
-    g_iArgc,
-    g_pArgv);
+  g_pCfgMgr->AddCommandLine(g_pCfgMgr, "COMMANDLINE", g_iArgc, g_pArgv);
   return 1;
 }
 
@@ -571,7 +567,7 @@ bool __cdecl CGameStateHandler::InitStringEngine(void) {
   
   int v0; // eax
 
-  v0 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValue)(
+  v0 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->?)(
          g_pCfgMgr,
          "GAMESETTINGS",
          "Language",
@@ -625,11 +621,11 @@ void __cdecl CGameStateHandler::DietmarsGameSettingsDefaults(void) {
 
   if ( g_pCfgMgr )
   {
-    v2 = g_pCfgMgr->GetConfigVar(g_pCfgMgr, "GAMESETTINGS", "Fullscreen");
+    v2 = g_pCfgMgr->?(g_pCfgMgr, "GAMESETTINGS", "Fullscreen");
     (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)v2 + 32))(v2, 0);
-    v1 = g_pCfgMgr->GetConfigVar(g_pCfgMgr, "GAMESETTINGS", "MusicEnabled");
+    v1 = g_pCfgMgr->?(g_pCfgMgr, "GAMESETTINGS", "MusicEnabled");
     (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)v1 + 32))(v1, 0);
-    v0 = g_pCfgMgr->GetConfigVar(g_pCfgMgr, "ADVGAMESETTINGS", "ShowVideos");
+    v0 = g_pCfgMgr->?(g_pCfgMgr, "ADVGAMESETTINGS", "ShowVideos");
     (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)v0 + 32))(v0, 0);
   }
 }
@@ -668,10 +664,7 @@ void __cdecl CGameStateHandler::LoadAllConfigFiles(void) {
          1048578) )
   {
     v0 = std::wstring::c_str((_Cnd_internal_imp_t *)v1);
-    ((void (__thiscall *)(CConfigManager *, _DWORD *, const char *))g_pCfgMgr->j_?AddConfigFileEx@CConfigManager@@UAE_NPB_WPBD@Z)(
-      g_pCfgMgr,
-      v0,
-      "MISCDATA1");
+    ((void (__thiscall *)(CConfigManager *, _DWORD *, const char *))g_pCfgMgr->?)(g_pCfgMgr, v0, "MISCDATA1");
   }
   v2 = -1;
   std::wstring::~wstring(v1);
@@ -999,10 +992,7 @@ void __cdecl CGameStateHandler::LoadConfigFile(wchar_t const * String, char cons
   CGameSettings::GetConfigFilePath((int)v7, String, 0);
   v8 = 0;
   v2 = std::wstring::c_str((_Cnd_internal_imp_t *)v7);
-  if ( !((unsigned __int8 (__thiscall *)(CConfigManager *, _DWORD *, const char *))g_pCfgMgr->j_?AddConfigFileEx@CConfigManager@@UAE_NPB_WPBD@Z)(
-          g_pCfgMgr,
-          v2,
-          a2) )
+  if ( !((unsigned __int8 (__thiscall *)(CConfigManager *, _DWORD *, const char *))g_pCfgMgr->?)(g_pCfgMgr, v2, a2) )
   {
     v3 = (const char *)std::wstring::c_str((_Cnd_internal_imp_t *)v7);
     BBSupportTracePrintF(0, "Couldn't find '%s'", v3);
@@ -1015,10 +1005,7 @@ void __cdecl CGameStateHandler::LoadConfigFile(wchar_t const * String, char cons
     std::wstring::operator=(ConfigFilePath);
     std::wstring::~wstring(v6);
     v4 = std::wstring::c_str((_Cnd_internal_imp_t *)v7);
-    ((void (__thiscall *)(CConfigManager *, _DWORD *, const char *))g_pCfgMgr->j_?AddConfigFileEx@CConfigManager@@UAE_NPB_WPBD@Z)(
-      g_pCfgMgr,
-      v4,
-      a2);
+    ((void (__thiscall *)(CConfigManager *, _DWORD *, const char *))g_pCfgMgr->?)(g_pCfgMgr, v4, a2);
   }
   v8 = -1;
   std::wstring::~wstring(v7);
@@ -1073,7 +1060,7 @@ bool __cdecl CGameStateHandler::StartDummyGame(void) {
   v39 = 0;
   std::string::string(v35, "NewMapTest.edm");
   LOBYTE(v39) = 1;
-  ((void (__thiscall *)(CConfigManager *, _BYTE *, const char *, const char *, _BYTE *))g_pCfgMgr->GetStringValue)(
+  ((void (__thiscall *)(CConfigManager *, _BYTE *, const char *, const char *, _BYTE *))g_pCfgMgr->?)(
     g_pCfgMgr,
     v36,
     "COMMANDLINE",
