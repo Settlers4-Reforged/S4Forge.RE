@@ -19,7 +19,7 @@ namespace FilePaths
 
         std::wstring m_swpDrive;
         std::vector<std::wstring> m_vSplits;
-        std::wstring m_swpOut;
+        std::wstring m_swpDirectoryName;
         bool m_bSplit;
     };
 
