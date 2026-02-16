@@ -2,6 +2,7 @@
 #define CSTATICCONFIGVARINT_H
 
 #include "defines.h"
+#include "CStaticConfigVar.h"
 
 class CStaticConfigVarInt : public CStaticConfigVar {
 public:

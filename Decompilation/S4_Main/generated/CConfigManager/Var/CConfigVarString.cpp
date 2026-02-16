@@ -12,39 +12,39 @@ std::string  CConfigVarString::GetStringValue(void a2)const {
 
 
 // address=[0x2efa310]
-// Decompiled from int __stdcall CConfigVarString::SetValue(int a1)
+// Decompiled from void __thiscall CConfigVarString::SetValue(CConfigVarString *this, void *a1)
 void  CConfigVarString::SetValue(std::string const & a1) {
   
-  return std::string::operator=(a1);
+  std::string::operator=(&this->value, a1);
 }
 
 
 // address=[0x2efa340]
-// Decompiled from void *__thiscall CConfigVarString::SetValue(CConfigVarString *this, char *Str)
+// Decompiled from void __thiscall CConfigVarString::SetValue(CConfigVarString *this, char *Str)
 void  CConfigVarString::SetValue(char const * Str) {
   
-  return std::string::operator=((char *)this + 8, Str);
+  std::string::operator=(&this->value, Str);
 }
 
 
 // address=[0x2ef8770]
-// Decompiled from _DWORD *__thiscall CConfigVarString::CConfigVarString(_DWORD *this, int a2)
+// Decompiled from CConfigVarString *__thiscall CConfigVarString::CConfigVarString(CConfigVarString *this, int a2)
  CConfigVarString::CConfigVarString(std::string const & a2) {
   
-  CDynamicConfigVar::CDynamicConfigVar(this, 4, 1);
-  *this = &CConfigVarString::_vftable_;
-  std::string::string(a2);
+  CDynamicConfigVar::CDynamicConfigVar(this, CONFIGVAR_TYPE_STRING, 1);
+  this->__vftable = (CConfigVar_vtbl *)&CConfigVarString::_vftable_;
+  std::string::string(&this->value, a2);
   return this;
 }
 
 
 // address=[0x2ef8c80]
-// Decompiled from void __thiscall CConfigVarString::~CConfigVarString(CConfigVarString *this)
+// Decompiled from CConfigVar *__thiscall CConfigVarString::~CConfigVarString(CConfigVarString *this)
  CConfigVarString::~CConfigVarString(void) {
   
-  *(_DWORD *)this = &CConfigVarString::_vftable_;
-  std::string::~string((char *)this + 8);
-  CDynamicConfigVar::~CDynamicConfigVar(this);
+  this->__vftable = (CConfigVar_vtbl *)&CConfigVarString::_vftable_;
+  std::string::~string(&this->value);
+  return CDynamicConfigVar::~CDynamicConfigVar(this);
 }
 
 

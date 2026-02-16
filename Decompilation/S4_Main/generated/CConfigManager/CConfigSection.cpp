@@ -217,12 +217,12 @@ void  CConfigSection::AddVar(std::string const & a2, std::string const & a3) {
 
 
 // address=[0x2eef880]
-// Decompiled from _DWORD *__stdcall CConfigSection::AddStaticConfigVar(int a1, int a2)
+// Decompiled from _DWORD *__thiscall CConfigSection::AddStaticConfigVar(void *this, int a2, int a3)
 void  CConfigSection::AddStaticConfigVar(std::string const & a2, class CConfigVar & a3) {
   
   _DWORD *result; // eax
 
-  if ( CConfigSection::GetVar(a1) )
+  if ( CConfigSection::GetVar(this, a2) )
   {
     if ( BBSupportDbgReport(
            1,
@@ -234,8 +234,8 @@ void  CConfigSection::AddStaticConfigVar(std::string const & a2, class CConfigVa
   }
   else
   {
-    result = (_DWORD *)std::map<std::string,CConfigVar *>::operator[](a1);
-    *result = a2;
+    result = (_DWORD *)std::map<std::string,CConfigVar *>::operator[](a2);
+    *result = a3;
   }
   return result;
 }

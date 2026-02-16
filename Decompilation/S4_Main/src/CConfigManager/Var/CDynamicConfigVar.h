@@ -2,6 +2,7 @@
 #define CDYNAMICCONFIGVAR_H
 
 #include "defines.h"
+#include "CConfigVar.h"
 
 class CDynamicConfigVar : public CConfigVar {
 public:

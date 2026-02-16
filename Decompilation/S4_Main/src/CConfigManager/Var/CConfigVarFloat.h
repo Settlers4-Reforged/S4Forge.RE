@@ -2,6 +2,7 @@
 #define CCONFIGVARFLOAT_H
 
 #include "defines.h"
+#include "CDynamicConfigVar.h"
 
 class CConfigVarFloat : public CDynamicConfigVar {
 public:

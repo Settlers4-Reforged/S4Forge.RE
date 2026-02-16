@@ -443,26 +443,26 @@ int  CConfigManager::GetDefineValue(char const * Str) {
 
 
 // address=[0x2ef1eb0]
-// Decompiled from void __stdcall CConfigManager::AddStaticConfigVar(char *Str, char *a2, int a3)
+// Decompiled from void __thiscall CConfigManager::AddStaticConfigVar(void *this, char *Str, char *a3, int a4)
 void  CConfigManager::AddStaticConfigVar(char const * Str, char const * a3, class CConfigVar & a4) {
   
-  int Section; // [esp+8h] [ebp-4Ch]
-  _BYTE v4[28]; // [esp+Ch] [ebp-48h] BYREF
-  _BYTE v5[28]; // [esp+28h] [ebp-2Ch] BYREF
-  int v6; // [esp+50h] [ebp-4h]
+  CConfigSection *Section; // [esp+8h] [ebp-4Ch]
+  struct std::string v6; // [esp+Ch] [ebp-48h] BYREF
+  struct std::string v7; // [esp+28h] [ebp-2Ch] BYREF
+  int v8; // [esp+50h] [ebp-4h]
 
-  std::string::string(v5, Str);
-  v6 = 0;
-  Section = CConfigManager::GetSection(v5, 1);
-  v6 = -1;
-  std::string::~string(v5);
+  std::string::string(&v7, Str);
+  v8 = 0;
+  Section = CConfigManager::GetSection(this, (int)&v7, 1);
+  v8 = -1;
+  std::string::~string(&v7);
   if ( Section )
   {
-    std::string::string(v4, a2);
-    v6 = 1;
-    CConfigSection::AddStaticConfigVar((int)v4, a3);
-    v6 = -1;
-    std::string::~string(v4);
+    std::string::string(&v6, a3);
+    v8 = 1;
+    CConfigSection::AddStaticConfigVar(Section, (int)&v6, a4);
+    v8 = -1;
+    std::string::~string(&v6);
   }
 }
 

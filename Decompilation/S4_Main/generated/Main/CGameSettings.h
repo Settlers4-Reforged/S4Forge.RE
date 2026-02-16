@@ -45,10 +45,10 @@ public:
     static void __cdecl DetermineHighestResolution(void);
 
     // address=[0x1488560]
-    static std::wstring __cdecl GetUserConfigDirectory(void a1);
+    static std::wstring __cdecl GetUserConfigDirectory(void);
 
     // address=[0x1488600]
-    static std::wstring __cdecl GetConfigFilePath(wchar_t const * a1, bool String);
+    static std::wstring __cdecl GetConfigFilePath(wchar_t const * ret, bool swpConfig);
 
     // address=[0x14887b0]
     static void __cdecl SetPlayerName(std::wstring a1);

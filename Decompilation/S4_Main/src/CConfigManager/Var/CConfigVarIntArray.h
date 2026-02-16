@@ -2,6 +2,7 @@
 #define CCONFIGVARINTARRAY_H
 
 #include "defines.h"
+#include "CDynamicConfigVar.h"
 
 class CConfigVarIntArray : public CDynamicConfigVar {
 public:

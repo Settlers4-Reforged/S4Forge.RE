@@ -36,21 +36,11 @@ void  CConfigVarInt::SetValue(float a2) {
 
 // address=[0x2ef8730]
 // Decompiled from CConfigVarInt *__thiscall CConfigVarInt::CConfigVarInt(CConfigVarInt *this, int a2)
- CConfigVarInt::CConfigVarInt(int a2) {
-  
-  CDynamicConfigVar::CDynamicConfigVar(this, CONFIGVAR_TYPE_INT, 1);
-  this->__vftable = (CConfigVar_vtbl *)&CConfigVarInt::_vftable_;
-  this->value = a2;
-  return this;
-}
+ CConfigVarInt::CConfigVarInt(int a2) : CDynamicConfigVar(T_CFGVAR_TYPE_INT, 1), value(a2) {}
 
 
 // address=[0x2ef8c50]
 // Decompiled from void __thiscall CConfigVarInt::~CConfigVarInt(CConfigVarInt *this)
- CConfigVarInt::~CConfigVarInt(void) {
-  
-  *(_DWORD *)this = &CConfigVarInt::_vftable_;
-  CDynamicConfigVar::~CDynamicConfigVar(this);
-}
+ CConfigVarInt::~CConfigVarInt(void) = default;
 
 

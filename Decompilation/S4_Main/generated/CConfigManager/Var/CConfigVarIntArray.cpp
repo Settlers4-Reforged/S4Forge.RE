@@ -3,40 +3,40 @@
 // Definitions for class CConfigVarIntArray
 
 // address=[0x2efa070]
-// Decompiled from int __thiscall CConfigVarIntArray::GetIntArray(CConfigVarIntArray *this)
+// Decompiled from int *__thiscall CConfigVarIntArray::GetIntArray(CConfigVarIntArray *this)
 int *  CConfigVarIntArray::GetIntArray(void) {
   
-  return *((_DWORD *)this + 2);
+  return this->value;
 }
 
 
 // address=[0x2efa090]
-// Decompiled from int __thiscall CConfigVarIntArray::GetIntArray(CConfigVarIntArray *this)
+// Decompiled from int *__thiscall CConfigVarIntArray::GetIntArray(CConfigVarIntArray *this)
 int const *  CConfigVarIntArray::GetIntArray(void)const {
   
-  return *((_DWORD *)this + 2);
+  return this->value;
 }
 
 
 // address=[0x2eeef30]
-// Decompiled from void **__thiscall CConfigVarIntArray::CConfigVarIntArray(void **this, void *Src, int a3)
- CConfigVarIntArray::CConfigVarIntArray(int const * Src, int a3) {
+// Decompiled from CConfigVarIntArray *__thiscall CConfigVarIntArray::CConfigVarIntArray(CConfigVarIntArray *this, void *Src, int _iSize)
+ CConfigVarIntArray::CConfigVarIntArray(int const * Src, int _iSize) {
   
-  CDynamicConfigVar::CDynamicConfigVar(this, 2, a3);
-  *this = &CConfigVarIntArray::_vftable_;
-  if ( a3 <= 0 && BBSupportDbgReport(2, "Source\\ConfigManager\\ConfigManager.cpp", 1352, "_iSize > 0") == 1 )
+  CDynamicConfigVar::CDynamicConfigVar(this, CONFIGVAR_TYPE_INT_ARRAY, _iSize);
+  this->__vftable = (CConfigVar_vtbl *)&CConfigVarIntArray::_vftable_;
+  if ( _iSize <= 0 && BBSupportDbgReport(2, "Source\\ConfigManager\\ConfigManager.cpp", 1352, "_iSize > 0") == 1 )
     __debugbreak();
-  if ( a3 >= 256 && BBSupportDbgReport(2, "Source\\ConfigManager\\ConfigManager.cpp", 1353, "_iSize < 256") == 1 )
+  if ( _iSize >= 256 && BBSupportDbgReport(2, "Source\\ConfigManager\\ConfigManager.cpp", 1353, "_iSize < 256") == 1 )
     __debugbreak();
-  this[2] = operator new[](
-              (unsigned __int64)(unsigned int)a3 >> 30 != 0 ? -1 : 4 * a3,
-              1,
-              "Source\\ConfigManager\\ConfigManager.cpp",
-              1355);
+  this->value = (int *)operator new[](
+                         (unsigned __int64)(unsigned int)_iSize >> 0x1E != 0 ? -1 : 4 * _iSize,
+                         1,
+                         "Source\\ConfigManager\\ConfigManager.cpp",
+                         1355);
   if ( Src )
-    memcpy(this[2], Src, 4 * a3);
+    memcpy(this->value, Src, 4 * _iSize);
   else
-    memset(this[2], 0, 4 * a3);
+    memset(this->value, 0, 4 * _iSize);
   return this;
 }
 

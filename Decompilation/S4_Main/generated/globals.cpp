@@ -38241,11 +38241,11 @@ public: __thiscall TStaticConfigIntArray<4>::TStaticConfigIntArray<4>(char const
 
 
 // address=[0x15b19a0]
-// Decompiled from _DWORD *__thiscall TStaticConfigIntArrayBase<4>::TStaticConfigIntArrayBase<4>(_DWORD *this, int a2, int a3)
+// Decompiled from TStaticConfigIntArrayBase<4> *__thiscall TStaticConfigIntArrayBase<4>::TStaticConfigIntArrayBase<4>(  TStaticConfigIntArrayBase<4> *this,  int a2,  int a3)
 private: __thiscall TStaticConfigIntArrayBase<4>::TStaticConfigIntArrayBase<4>(char const * a2, char const * a3) {
   
-  CStaticConfigVar::CStaticConfigVar(this, a2, a3, 2, 4);
-  *this = &TStaticConfigIntArrayBase_4_::_vftable_;
+  CStaticConfigVar::CStaticConfigVar((CStaticConfigVar *)this, a2, a3, CONFIGVAR_TYPE_INT_ARRAY, 4);
+  *(_DWORD *)this = &TStaticConfigIntArrayBase_4_::_vftable_;
   return this;
 }
 

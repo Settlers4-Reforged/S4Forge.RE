@@ -2,11 +2,12 @@
 #define CCONFIGVARSTRING_H
 
 #include "defines.h"
+#include "CDynamicConfigVar.h"
 
 class CConfigVarString : public CDynamicConfigVar {
 public:
     // address=[0x2efa0f0]
-    virtual std::string  GetStringValue(void a2)const;
+    virtual std::string  GetStringValue(void)const;
 
     // address=[0x2efa310]
     virtual void  SetValue(std::string const & a1);

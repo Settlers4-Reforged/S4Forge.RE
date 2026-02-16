@@ -18,7 +18,7 @@ public:
     virtual int  GetIntValue(void)const;
 
     // address=[0x12fd250]
-    virtual std::string  GetStringValue(void a1)const;
+    virtual std::string  GetStringValue(void)const;
 
     // address=[0x12fd690]
     virtual void  SetValue(std::string const & a1);
@@ -46,7 +46,14 @@ private:
     virtual  ~CConfigVar(void);
 
     // address=[0x2ef86a0]
-     CConfigVar(bool a2, enum T_CFGVAR_TYPE a3, int a4);
+     CConfigVar(bool _bIsStatic, enum T_CFGVAR_TYPE _eType, int _iSize);
+
+    // Type information members
+public:
+    bool m_bIsStatic;
+    CONFIGVAR_TYPE m_cType;
+    char m_cSize;
+    char m_cU7;
 
 };
 
