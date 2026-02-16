@@ -74,7 +74,6 @@ struct FLIntHandleStruct
   FLIntHandleStruct *m_pNextHandle;
 };
 
-static_assert(sizeof(FLLibraryFileStruct) == 0x18, "sizeof(FLLibraryFileStruct) != 0x18");
 struct FLLibraryFileStruct
 {
   wchar_t *m_swpFileName;
@@ -84,8 +83,8 @@ struct FLLibraryFileStruct
   int m_bFileMapped;
   int m_uFileSize;
 };
+static_assert(sizeof(FLLibraryFileStruct) == 0x18, "sizeof(FLLibraryFileStruct) != 0x18");
 
-static_assert(sizeof(FLHeaderStruct) == 0x18, "sizeof(FLHeaderStruct) != 0x18");
 struct FLHeaderStruct
 {
   int field_0;
@@ -95,8 +94,8 @@ struct FLHeaderStruct
   int m_iFileNamesSize;
   int m_iFileHeaderCount;
 };
+static_assert(sizeof(FLHeaderStruct) == 0x18, "sizeof(FLHeaderStruct) != 0x18");
 
-static_assert(sizeof(FLHeaderFileStruct) == 0x18, "sizeof(FLHeaderFileStruct) != 0x18");
 struct FLHeaderFileStruct
 {
   int field_0;
@@ -106,6 +105,7 @@ struct FLHeaderFileStruct
   int m_uFlags;
   int field_14;
 };
+static_assert(sizeof(FLHeaderFileStruct) == 0x18, "sizeof(FLHeaderFileStruct) != 0x18");
 
 struct FLCopyProgressStruct
 {

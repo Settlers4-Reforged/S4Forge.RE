@@ -59,7 +59,7 @@ private:
 
 protected:
     // address=[0x1301410]
-    STraceMsg *IMessageTracer::GetNextTraceMsg(void);
+    STraceMsg *GetNextTraceMsg(void);
 };
 
 

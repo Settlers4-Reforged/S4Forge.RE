@@ -2,7 +2,7 @@
 #define IGROUPMGR_H
 
 #include "defines.h"
-#include "LoadSave/IS4ChunkObject.h"
+#include "../LoadSave/IS4ChunkObject.h"
 
 class IGroupMgr : public IS4ChunkObject
 {

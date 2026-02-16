@@ -2,7 +2,7 @@
 #define CGOODSSTATISTICINFO_H
 
 #include "defines.h"
-#include "CInfoExchange.h"
+#include "Logic/CInfoExchange.h"
 
 class CGoodsStatisticInfo : public CInfoExchange
 {

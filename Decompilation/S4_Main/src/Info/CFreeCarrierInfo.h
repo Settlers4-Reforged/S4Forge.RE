@@ -2,7 +2,7 @@
 #define CFREECARRIERINFO_H
 
 #include "defines.h"
-#include "CInfoExchange.h"
+#include "Logic/CInfoExchange.h"
 
 class CFreeCarrierInfo : public CInfoExchange
 {

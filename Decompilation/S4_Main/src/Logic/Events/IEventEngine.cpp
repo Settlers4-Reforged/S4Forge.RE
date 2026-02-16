@@ -7,6 +7,7 @@
 #include "./CEvn_Logic.h"
 #include "./CEvn_Window.h"
 #include "./IEvn_Handle.h"
+#include "Framework.h"
 
 // Definitions for class IEventEngine
 
@@ -81,7 +82,7 @@ bool IEventEngine::OnEvent(class CEvn_Event &_rEvent)
 {
   if (this->m_bIsEventRecording && _rEvent.m_iEventId < 0x7Au && _rEvent.m_iEventId != 1 && this->m_pTick)
   {
-    int NumberOfBytesWritten = 0;
+    DWORD NumberOfBytesWritten = 0;
     CEvn_Window windowEvent = CEvn_Window(0, _rEvent.m_iEventId, _rEvent.m_wParam, _rEvent.m_lParam);
     WriteFile(this->m_hReplayFile, this->m_pTick, 4u, &NumberOfBytesWritten, 0);
     WriteFile(this->m_hReplayFile, &windowEvent, 0x1Cu, &NumberOfBytesWritten, 0);

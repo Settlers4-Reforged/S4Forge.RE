@@ -2,7 +2,7 @@
 #define CECONOMYGAMEINFO_H
 
 #include "defines.h"
-#include "CInfoExchange.h"
+#include "Logic/CInfoExchange.h"
 
 class CEconomyGameInfo : public CInfoExchange
 {
@@ -14,7 +14,7 @@ public:
     virtual unsigned int Size(void) const;
 
 private:
-    struct CEconomyGameInfo::Stat
+    struct Stat
     {
         DWORD m_uEconomyGood;
         DWORD m_uWinGoodsAllies;

@@ -4,15 +4,17 @@
 #include "defines.h"
 
 class SPoint {
+    typedef SPoint SPoint8;
+
 public:
     // address=[0x15ddb00]
-    struct SPoint &  operator=(struct SPoint8 const & a2);
+    SPoint &operator=(SPoint8 const & a2);
 
     // address=[0x15ddb40]
-    bool  operator==(struct SPoint const & a2)const;
+    bool  operator==(SPoint const & a2)const;
 
     // address=[0x15ddbb0]
-    int  operator*(struct SPoint const & a2)const;
+    int  operator*(SPoint const & a2)const;
 
     // address=[0x15ddce0]
     int  X(void)const;
@@ -21,7 +23,7 @@ public:
     int  Y(void)const;
 
     // address=[0x15ddd20]
-    struct SPoint &  Zero(void);
+    SPoint &  Zero(void);
 
     // Type information members
 public:

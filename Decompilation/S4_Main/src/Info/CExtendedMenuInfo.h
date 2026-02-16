@@ -2,7 +2,7 @@
 #define CEXTENDEDMENUINFO_H
 
 #include "defines.h"
-#include "CInfoExchange.h"
+#include "Logic/CInfoExchange.h"
 
 class CExtendedMenuInfo : public CInfoExchange {
 public:

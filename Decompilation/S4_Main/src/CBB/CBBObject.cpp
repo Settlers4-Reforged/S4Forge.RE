@@ -67,7 +67,7 @@ CBBObject::CBBObject(class CBBObject const &a2)
 // Decompiled from CBBObject *__thiscall CBBObject::~CBBObject(CBBObject *this)
 CBBObject::~CBBObject(void)
 {
-  struct CBBObject *pInList; // [esp+8h] [ebp-18h] BYREF
+  CBBObject *pInList; // [esp+8h] [ebp-18h] BYREF
 
   if (this->m_uSerialNumber == -1)
     return;

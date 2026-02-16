@@ -436,7 +436,7 @@ unsigned short __cdecl RegisterWindowClass(HINSTANCE hInstance)
     WNDCLASSEXA sWindowsClass{};
     sWindowsClass.cbSize = 48;
     sWindowsClass.style = 3;
-    sWindowsClass.lpfnWndProc = g_pEvnEngine->GetEventFunction();
+    sWindowsClass.lpfnWndProc = (WNDPROC)g_pEvnEngine->GetEventFunction();
     sWindowsClass.cbClsExtra = 0;
     sWindowsClass.cbWndExtra = 0;
     sWindowsClass.hInstance = hInstance;

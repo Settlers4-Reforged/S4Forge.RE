@@ -1611,16 +1611,10 @@ def write_default_header():
 
         f.write("// Default includes for IDA types\n\n")
 
-        f.write("typedef unsigned char BYTE;\n")
-        f.write("typedef unsigned char _BYTE;\n\n")
-        
-        f.write("typedef unsigned short WORD;\n")
-        f.write("typedef unsigned short _WORD;\n\n")
-
-        f.write("typedef unsigned int DWORD;\n")
-        f.write("typedef unsigned int _DWORD;\n\n")
-
-        f.write("typedef unsigned long long QWORD;\n\n")
+        f.write("#include <windows.h>\n\n")
+        f.write("typedef unsigned char _BYTE;\n")
+        f.write("typedef unsigned short _WORD;\n")
+        f.write("typedef unsigned int _DWORD;\n")
 
         f.write(f"#endif // {guard}\n")
 

@@ -10,15 +10,9 @@
 #include <map>
 // Default includes for IDA types
 
-typedef unsigned char BYTE;
+#include <windows.h>
+
 typedef unsigned char _BYTE;
-
-typedef unsigned short WORD;
 typedef unsigned short _WORD;
-
-typedef unsigned int DWORD;
 typedef unsigned int _DWORD;
-
-typedef unsigned long long QWORD;
-
 #endif // DEFINES_H

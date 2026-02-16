@@ -213,7 +213,7 @@ unsigned int CCDDrive::GetDriveTypeA(char _cDrive)
 
   if (!this->m_uDriveType)
     this->m_uDriveType = CCDDrive::DriveTypeExCheck();
-  strcpy(RootPathName, "C:\\");
+  strcpy_s(RootPathName, sizeof(RootPathName), "C:\\");
   RootPathName[4] = 0;
   RootPathName[0] = _cDrive;
   return ::GetDriveTypeA(RootPathName);

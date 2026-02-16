@@ -48,10 +48,10 @@ namespace Grid
     float __cdecl Distance(float, float);
 
     // address=[0x15ddbe0]
-    int __cdecl Distance(struct SPoint const &, struct SPoint const &);
+    int __cdecl Distance(class SPoint const &, class SPoint const &);
 
     // address=[0x15ddc10]
-    int __cdecl Distance(struct SPoint const &);
+    int __cdecl Distance(class SPoint const &);
 
     // address=[0x130ea40]
     int __cdecl Distance(int, int, int, int);

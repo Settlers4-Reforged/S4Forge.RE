@@ -1,6 +1,8 @@
 #ifndef TSTATICARRAY_H
 #define TSTATICARRAY_H
 
+#include "CBB/CBBSupport.h"
+
 template <typename T, int MAX_SIZE>
 class TStaticArray
 {

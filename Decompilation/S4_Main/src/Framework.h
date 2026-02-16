@@ -59,7 +59,7 @@ extern void SetRootCWD();
 extern void ReadSerial();
 
 // address=[0x01358EC0]
-bool __fastcall GetFileVersion(const WCHAR *_spFilePath, _DWORD *a2, _DWORD *a3);
+bool __fastcall GetFileVersion(const WCHAR *_spFilePath, DWORD *a2, DWORD *a3);
 
 // address=[0x01358760]
 extern BOOL __stdcall KillGame(HWND hWnd);

@@ -14,7 +14,7 @@ void CInfoExchange::Clear(void)
   if (uSize < 8 && BBSupportDbgReport(2, "Logic\\InfoExchange.cpp", 86, "uSize >= 8") == 1)
     __debugbreak();
   if (uSize > 4)
-    memset(this->m_iUnknown, 0, uSize - 4);
+    memset((void*)this->m_iUnknown, 0, uSize - 4);
 }
 
 // address=[0x1415220]

@@ -2,7 +2,7 @@
 #define CEYECATCHERBARINFO_H
 
 #include "defines.h"
-#include "CInfoExchange.h"
+#include "Logic/CInfoExchange.h"
 
 class CEyeCatcherBarInfo : public CInfoExchange
 {
@@ -14,7 +14,7 @@ public:
     virtual unsigned int Size(void) const;
 
 private:
-    struct CEyeCatcherBarInfo::EyeCatcher
+    struct EyeCatcher
     {
         DWORD m_uBuildingId;
         DWORD m_uCountBuilt;

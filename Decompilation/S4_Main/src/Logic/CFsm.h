@@ -38,7 +38,7 @@ private:
     {
         DWORD unk_0;
         DWORD m_iState;
-        DWORD unk_8;
+        int unk_8;
         DWORD m_iHandlerId;
     };
 
@@ -56,7 +56,7 @@ public:
     std::list<CFsm::SEvent *> m_pEventQueue;
     //DWORD unk_10; Probably static members of std::list...
     //DWORD unk_14;
-    struct IEventHandler *m_pEventHandler;
+    IEventHandler *m_pEventHandler;
 };
 
 #endif // CFSM_H

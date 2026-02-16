@@ -2,7 +2,7 @@
 #define CFERRYLOADINFO_H
 
 #include "defines.h"
-#include "CInfoExchange.h"
+#include "Logic/CInfoExchange.h"
 
 class CFerryLoadInfo : public CInfoExchange
 {

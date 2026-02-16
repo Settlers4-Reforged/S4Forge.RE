@@ -2,7 +2,7 @@
 #define CGROUPSIDEBARINFO_H
 
 #include "defines.h"
-#include "CInfoExchange.h"
+#include "Logic/CInfoExchange.h"
 
 class CGroupSideBarInfo : public CInfoExchange
 {

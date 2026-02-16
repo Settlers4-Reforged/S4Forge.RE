@@ -2,7 +2,7 @@
 #define CMAGICSPELLSIDEBARINFO_H
 
 #include "defines.h"
-#include "CInfoExchange.h"
+#include "Logic/CInfoExchange.h"
 
 class CMagicSpellSideBarInfo : public CInfoExchange
 {

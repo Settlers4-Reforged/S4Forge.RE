@@ -124,39 +124,39 @@ void IMessageTracer::Done(void)
 
 // address=[0x1496dd0]
 // Decompiled from void __thiscall IMessageTracer::PrintMessages(IMessageTracer *this, int a2, unsigned int a3)
-void IMessageTracer::PrintMessages(unsigned int a2, unsigned int a3)
+void IMessageTracer::PrintMessages(unsigned int a2, unsigned int)
 {
 
   int v3;                             // [esp+0h] [ebp-430h]
   int v5;                             // [esp+8h] [ebp-428h]
-  int m_iCurrentMessage;              // [esp+14h] [ebp-41Ch] MAPDST
+  int iCurrentMessage;              // [esp+14h] [ebp-41Ch] MAPDST
   int j;                              // [esp+18h] [ebp-418h]
   int i;                              // [esp+20h] [ebp-410h]
   IMessageTracer::STraceMsg *message; // [esp+28h] [ebp-408h]
   char buffer[1024];                  // [esp+2Ch] [ebp-404h] BYREF
 
   if (this->m_iMaxMessage < 0)
-    m_iCurrentMessage = this->m_iCurrentMessage;
+    iCurrentMessage = this->m_iCurrentMessage;
   else
-    m_iCurrentMessage = this->m_iMaxMessage;
-  if (m_iCurrentMessage >= 0 && this->m_aMessages[0].message)
+    iCurrentMessage = this->m_iMaxMessage;
+  if (iCurrentMessage >= 0 && this->m_aMessages[0].message)
   {
     memset(buffer, 0, sizeof(buffer));
     if (this->m_aMessages[0x3FFF].message)
     {
-      m_iCurrentMessage = 0x4000;
+      iCurrentMessage = 0x4000;
       v5 = 0;
     }
     else
     {
-      m_iCurrentMessage = 0;
+      iCurrentMessage = 0;
       v5 = 0;
-      m_iCurrentMessage = 0;
+      iCurrentMessage = 0;
     }
     for (i = 0; i < 2; ++i)
     {
-      v3 = *(&m_iCurrentMessage + i);
-      for (j = *(&m_iCurrentMessage + i); j < v3; ++j)
+      v3 = *(&iCurrentMessage + i);
+      for (j = *(&iCurrentMessage + i); j < v3; ++j)
       {
         message = &this->m_aMessages[j];
         if (message->message)

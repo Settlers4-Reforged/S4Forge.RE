@@ -46,10 +46,10 @@ int __cdecl Grid::Direction(float x, float y)
     sum = y + x;
     v3 = y + x < 0.0 || x - y < 0.0 && y + x == 0.0;
     if (!v3)
-        return 3.0 * v3 + (2.0 * dx <= -sum) + (2.0 * dx <= sum);
+        return 3.0f * v3 + (2.0f * dx <= -sum) + (2.0f * dx <= sum);
     dx = y - x;
     sum = -sum;
-    return 3.0 * v3 + (2.0 * dx <= -sum) + (2.0 * dx <= sum);
+    return 3.0f * v3 + (2.0f * dx <= -sum) + (2.0f * dx <= sum);
 }
 
 const int DIRECTION_LUT[8] = {
@@ -109,7 +109,7 @@ int __cdecl Grid::Distance(int a1, int a2)
     if (v3 < 0)
         return v6 + Number;
     else
-        return std::max(Number, v6);
+        return max(Number, v6);
 }
 
 // address=[0x15dc700]

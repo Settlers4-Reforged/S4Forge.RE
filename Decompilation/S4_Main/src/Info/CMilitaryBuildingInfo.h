@@ -3,6 +3,7 @@
 
 #include "defines.h"
 #include "CBuildingInfo.h"
+#include "Logic/CInfoExchange.h"
 
 class CMilitaryBuildingInfo : public CBuildingInfo
 {
@@ -14,7 +15,7 @@ public:
     virtual unsigned int Size(void) const;
 
 private:
-    struct CMilitaryBuildingInfo::Stationed
+    struct Stationed
     {
         char m_cUnitType;
         BYTE m_cUnitHealth;

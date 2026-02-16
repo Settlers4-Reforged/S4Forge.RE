@@ -7,7 +7,7 @@
 
 #include <windef.h>
 
-extern IEventEngine *g_pEvnEngine;
+extern class IEventEngine *g_pEvnEngine;
 
 
 class IEventEngine
@@ -84,7 +84,7 @@ public:
 
     // Type information members
 public:
-    struct CEvn_HandleList *m_pEventHandleList;
+    CEvn_HandleList *m_pEventHandleList;
     int m_pOSParam;
     unsigned int m_hWnd;
     HANDLE m_hReplayFile;

@@ -7,7 +7,7 @@
 CGoodDistributionInfo::CGoodDistributionInfo(void) : CInfoExchange()
 {
   this->m_bU4 = 0;
-  this->m_uEcoSectorId = -1;
+  this->m_uEcoSectorId = (unsigned int)-1;
 }
 
 // address=[0x1417170]

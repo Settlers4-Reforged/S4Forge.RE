@@ -157,7 +157,7 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdL
         }
         if (DoesDirectoryExist(L"Gfx"))
         {
-            UserConfigDirectory = CGameSettings::GetUserConfigDirectory(v87);
+            UserConfigDirectory = CGameSettings::GetUserConfigDirectory();
             // EXCEPTION HANDLING
             FilePaths::EnsurePathExists(UserConfigDirectory);
             // EXCEPTION HANDLING

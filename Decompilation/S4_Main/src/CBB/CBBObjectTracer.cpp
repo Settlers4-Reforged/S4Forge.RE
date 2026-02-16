@@ -21,14 +21,15 @@ void __cdecl CBBObjectTracer::Enter(void) {
 
 // address=[0x2f33ad0]
 // Decompiled from void __cdecl CBBObjectTracer::InitObject(CBBObject *this, char *_sType, bool _bFirst)
-void __cdecl CBBObjectTracer::InitObject(class CBBObject & _pTarget, char const * _bFirst, bool a3) {
+void __cdecl CBBObjectTracer::InitObject(class CBBObject & _pTarget, char const * _sType, bool _bFirst) {
   
-  char *type; // [esp+0h] [ebp-4h]
+  const char *type; // [esp+0h] [ebp-4h]
 
-  if ( _pTarget.m_spType)
-    type = _pTarget.m_spType;
+  if ( _sType)
+    type = _sType;
   else
     type = "Object of unknown type";
+
   _pTarget.m_spType = type;
   if ( _bFirst )
   {
@@ -50,7 +51,7 @@ void __cdecl CBBObjectTracer::InitObject(class CBBObject & _pTarget, char const 
 // Decompiled from bool __cdecl CBBObjectTracer::IsObjectInList(unsigned int _uSerialNumber, struct CBBObject **_pObject)
 bool __cdecl CBBObjectTracer::IsObjectInList(unsigned int _uSerialNumber, class CBBObject * & _pObject) {
   
-  struct CBBObject *v3; // [esp+0h] [ebp-8h]
+  CBBObject *v3; // [esp+0h] [ebp-8h]
   CBBObject *pIterator; // [esp+4h] [ebp-4h]
 
   pIterator = CBBObjectTracer::m_pObjectFirst;

@@ -12,7 +12,7 @@ namespace FilePaths
         ~PathSplitResult(void);
 
         // address=[0x2eff700]
-        PathSplitResult(struct FilePaths::PathSplitResult &&a2);
+        PathSplitResult(PathSplitResult &&a2);
 
         // address=[0x2eff760]
         PathSplitResult(void);

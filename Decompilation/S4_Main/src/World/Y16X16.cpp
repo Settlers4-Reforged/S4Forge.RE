@@ -28,10 +28,12 @@ void __cdecl Y16X16::UnpackXYFast(int packed, int &x, int &y)
 // address=[0x15d7190]
 int __cdecl Y16X16::XYNotNegative(int packed)
 {
-    int x = UnpackXFast(packed);
-    int y = UnpackYFast(packed);
-    if (x < 0 || y < 0)
-    {
-        return -1;
-    }
+    return (packed & 0x80008000) == 0;
+    // int x = UnpackXFast(packed);
+    // int y = UnpackYFast(packed);
+    // if (x < 0 || y < 0)
+    // {
+    //     return FALSE;
+    // }
+    // return TRUE;
 }

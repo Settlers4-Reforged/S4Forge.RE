@@ -190,33 +190,32 @@ bool __cdecl CGameStateHandler::Init(void) {
 
 
 // address=[0x148b240]
-// Decompiled from char CGameStateHandler::Perform()
+// Decompiled from bool CGameStateHandler::Perform()
 bool __cdecl CGameStateHandler::Perform(void) {
   
   OnlineManager *v1; // eax
-  StormManager *v2; // eax
-  char v3; // [esp-1Ch] [ebp-88h] BYREF
-  int v4; // [esp-18h] [ebp-84h]
-  int v5; // [esp+0h] [ebp-6Ch]
-  _DWORD v6[5]; // [esp+4h] [ebp-68h] BYREF
+  storm::SimpleConnectivityFacade **v2; // eax
+  std::wstring v3; // [esp-1Ch] [ebp-88h] BYREF
+  int v4; // [esp+0h] [ebp-6Ch]
+  _DWORD v5[5]; // [esp+4h] [ebp-68h] BYREF
   struct tagPOINT Point; // [esp+18h] [ebp-54h] BYREF
-  int v8; // [esp+20h] [ebp-4Ch]
-  int v9; // [esp+24h] [ebp-48h]
-  int v10; // [esp+28h] [ebp-44h]
-  int v11; // [esp+2Ch] [ebp-40h]
-  int v12; // [esp+30h] [ebp-3Ch]
+  int v7; // [esp+20h] [ebp-4Ch]
+  int v8; // [esp+24h] [ebp-48h]
+  int v9; // [esp+28h] [ebp-44h]
+  int v10; // [esp+2Ch] [ebp-40h]
+  int v11; // [esp+30h] [ebp-3Ch]
   int Instance; // [esp+34h] [ebp-38h]
-  int v14; // [esp+38h] [ebp-34h]
-  int (__thiscall ***v15)(_DWORD, int); // [esp+3Ch] [ebp-30h]
+  int v13; // [esp+38h] [ebp-34h]
+  int (__thiscall ***v14)(_DWORD, int); // [esp+3Ch] [ebp-30h]
   DWORD Time; // [esp+40h] [ebp-2Ch]
-  CEvn_Event v17; // [esp+44h] [ebp-28h] BYREF
-  int v18; // [esp+68h] [ebp-4h]
+  CEvn_Event v16; // [esp+44h] [ebp-28h] BYREF
+  int v17; // [esp+68h] [ebp-4h]
 
   if ( CGameStateHandler::m_bGrab )
   {
-    v6[4] = &v3;
-    v6[3] = std::wstring::wstring(&v3, (wchar_t *)&word_36EB218);
-    CGrabber::DoGrab(v3, v4);
+    v5[4] = &v3;
+    v5[3] = std::wstring::wstring(&v3, (wchar_t *)&word_36EB218);
+    CGrabber::DoGrab(v3.m_u[0]);
   }
   if ( CGameStateHandler::m_uiLastTime )
   {
@@ -225,15 +224,15 @@ bool __cdecl CGameStateHandler::Perform(void) {
     {
       GetCursorPos(&Point);
       ScreenToClient(g_hWnd, &Point);
-      CEvn_Event::CEvn_Event(&v17, 0x15u, 0, Point.x + (Point.y << 16), 0);
-      v18 = 0;
-      IEventEngine::SendAMessage(g_pEvnEngine, &v17);
+      CEvn_Event::CEvn_Event(&v16, 0x15u, 0, Point.x + (Point.y << 16), 0);
+      v17 = 0;
+      IEventEngine::SendAMessage(g_pEvnEngine, &v16);
       if ( Time - CGameStateHandler::m_uiLastTime - 100 >= 0xA )
         CGameStateHandler::m_uiLastTime = Time - 10;
       else
         CGameStateHandler::m_uiLastTime += 100;
-      v18 = -1;
-      CEvn_Event::~CEvn_Event(&v17);
+      v17 = -1;
+      CEvn_Event::~CEvn_Event(&v16);
     }
   }
   else
@@ -246,21 +245,21 @@ bool __cdecl CGameStateHandler::Perform(void) {
     IEventEngine::LockEventEngine(g_pEvnEngine, 1);
     if ( CGameStateHandler::m_s_pCurrentState )
     {
-      v11 = CGameStateHandler::m_s_pCurrentState;
-      v15 = (int (__thiscall ***)(_DWORD, int))CGameStateHandler::m_s_pCurrentState;
-      v10 = (**v15)(v15, 1);
+      v10 = CGameStateHandler::m_s_pCurrentState;
+      v14 = (int (__thiscall ***)(_DWORD, int))CGameStateHandler::m_s_pCurrentState;
+      v9 = (**v14)(v14, 1);
       CGameStateHandler::m_s_pCurrentState = 0;
     }
     if ( !std::list<SStateCommand>::size(&CGameStateHandler::m_listQueuedStates) )
       return 0;
-    v9 = std::list<SStateCommand>::begin(v6);
-    v8 = v9;
-    v18 = 1;
-    v14 = std::_List_iterator<std::_List_val<std::_List_simple_types<SStateCommand>>>::operator*(v9);
-    v18 = -1;
-    std::_List_iterator<std::_List_val<std::_List_simple_types<SStateCommand>>>::~_List_iterator<std::_List_val<std::_List_simple_types<SStateCommand>>>(v6);
-    CGameStateHandler::m_s_pCurrentState = (*(int (__cdecl **)(_DWORD))v14)(*(_DWORD *)(v14 + 4));
-    std::list<SStateCommand>::pop_front(v5, v6[0]);
+    v8 = std::list<SStateCommand>::begin(v5);
+    v7 = v8;
+    v17 = 1;
+    v13 = std::_List_iterator<std::_List_val<std::_List_simple_types<SStateCommand>>>::operator*(v8);
+    v17 = -1;
+    std::_List_iterator<std::_List_val<std::_List_simple_types<SStateCommand>>>::~_List_iterator<std::_List_val<std::_List_simple_types<SStateCommand>>>(v5);
+    CGameStateHandler::m_s_pCurrentState = (*(int (__cdecl **)(_DWORD))v13)(*(_DWORD *)(v13 + 4));
+    std::list<SStateCommand>::pop_front(v4, v5[0]);
     if ( !CGameStateHandler::m_s_pCurrentState )
       return 0;
     IEventEngine::LockEventEngine(g_pEvnEngine, 0);
@@ -269,12 +268,12 @@ bool __cdecl CGameStateHandler::Perform(void) {
     return 0;
   Instance = UPlay::UPlayManager::GetInstance();
   (*(void (__thiscall **)(int))(*(_DWORD *)Instance + 4))(Instance);
-  v12 = UPlay::UPlayManager::GetInstance();
-  if ( !(*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)v12 + 32))(v12) )
+  v11 = UPlay::UPlayManager::GetInstance();
+  if ( !(*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)v11 + 32))(v11) )
   {
     v1 = (OnlineManager *)OnlineManager::GetInstance();
     OnlineManager::Update(v1);
-    v2 = (StormManager *)StormManager::GetInstance();
+    v2 = (storm::SimpleConnectivityFacade **)StormManager::GetInstance();
     StormManager::Update(v2);
   }
   if ( CGameStateHandler::m_bQuitApplication )
@@ -283,7 +282,9 @@ bool __cdecl CGameStateHandler::Perform(void) {
     ISoundEngine::Perform((ISoundEngine *)g_pSoundEngine);
   if ( !CGameStateHandler::m_s_pCurrentState )
     return 1;
-  if ( g_pGfxEngine && g_pGUIEngine && IGfxEngine::IsGfxEngineRebuilded((IGfxEngine *)g_pGfxEngine) )
+  if ( !g_pGfxEngine || !g_pGUIEngine )
+    return (*(int (__thiscall **)(int))(*(_DWORD *)CGameStateHandler::m_s_pCurrentState + 4))(CGameStateHandler::m_s_pCurrentState);
+  if ( IGfxEngine::IsGfxEngineRebuilded(g_pGfxEngine) )
     IGuiEngine::RefreshAllSurfaces(g_pGUIEngine);
   return (*(int (__thiscall **)(int))(*(_DWORD *)CGameStateHandler::m_s_pCurrentState + 4))(CGameStateHandler::m_s_pCurrentState);
 }

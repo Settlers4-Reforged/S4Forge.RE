@@ -8,7 +8,7 @@
 
 #include <windows.h>
 
-#include "CBBSupport.h"
+#include "CBB/CBBSupport.h"
 
 // Definitions for class CTrace
 
@@ -41,7 +41,7 @@ void __cdecl CTrace::Print(char const *Format, ...)
   va_list va;        // [esp+814h] [ebp+Ch] BYREF
 
   va_start(va, Format);
-  _vsnprintf(Source, 0x7FFu, Format, va);
+  _vsnprintf_s(Source, 0x7FFu, Format, va);
   BBSupportTracePrint(0, Source);
 }
 
@@ -54,7 +54,7 @@ void __cdecl CTrace::TextEinfuegen(char const *Format, ...)
   va_list va;        // [esp+814h] [ebp+Ch] BYREF
 
   va_start(va, Format);
-  _vsnprintf(Buffer, 0x7FFu, Format, va);
+  _vsnprintf_s(Buffer, 0x7FFu, Format, va);
   BBSupportTracePrint(0, Buffer);
 }
 

@@ -241,7 +241,7 @@ IEntity::IEntity(int id)
 {
   this->m_iUniqueId = -1;
   this->m_nEntityId = id;
-  this->m_objType = 0;
+  this->m_objType = (EntityType)0;
   this->m_nType = 0;
   this->m_psAIEntityInfo = 0;
   this->m_iFlags = 0;
@@ -290,7 +290,7 @@ IEntity::IEntity(std::istream &inputFile)
   inputFile >> this->m_nType;
   inputFile >> this->m_uPackedXY;
   inputFile >> this->m_cHealth;
-  inputFile >> this->m_objType;
+  inputFile >> (int8_t&)this->m_objType;
   inputFile >> this->m_packedTribePlayer.m_cPacked;
   inputFile >> this->m_iFlags;
   inputFile >> this->m_iUniqueId;

@@ -8,196 +8,209 @@
 
 enum EntityFlag : int
 {
-  EntityFlag_Attached = 0x20,
-  EntityFlag_Offered = 0x40,
-  EntityFlag_Visible = 0x100,
-  EntityFlag_Selected = 0x200,
-  EntityFlag_Selectable = 0x2000,
-  EntityFlag_OnBoard = 0x8000,
-  EntityFlag_VulnerableMask = 0x30000,
-  EntityFlag_MagicInvisible = 0x80000,
-  EntityFlag_Birth = 0x1000000,
-  EntityFlag_Ready = 0x2000000,
-  EntityFlag_AliveMask = 0x3000000,
-  EntityFlag_Died = 0x4000000,
-  EntityFlag_Registered = 0x20000000, // aka. registered for logic update in x ticks - see CMapObjectMgr
-  EntityFlag_GlobalOffered = 0x40000000,
+    EntityFlag_Attached = 0x20,
+    EntityFlag_Offered = 0x40,
+    EntityFlag_Visible = 0x100,
+    EntityFlag_Selected = 0x200,
+    EntityFlag_Selectable = 0x2000,
+    EntityFlag_OnBoard = 0x8000,
+    EntityFlag_VulnerableMask = 0x30000,
+    EntityFlag_MagicInvisible = 0x80000,
+    EntityFlag_Birth = 0x1000000,
+    EntityFlag_Ready = 0x2000000,
+    EntityFlag_AliveMask = 0x3000000,
+    EntityFlag_Died = 0x4000000,
+    EntityFlag_Registered = 0x20000000, // aka. registered for logic update in x ticks - see CMapObjectMgr
+    EntityFlag_GlobalOffered = 0x40000000,
 };
 
 /// @brief Current entity attacker id for damage handling
 extern int g_CurrentEntityAttacker;
 
-class IEntity : public CPersistence {
+class IEntity : public CPersistence
+{
 public:
     // address=[0x12fd110]
-    int  FlagBits(int a2)const;
+    int FlagBits(int a2) const;
 
     // address=[0x12fd480]
-    int  ObjType(void)const;
+    int ObjType(void) const;
 
     // address=[0x1309650]
-    int  PackedXY(void)const;
+    int PackedXY(void) const;
 
     // address=[0x130e8a0]
-    class CAIEntityInfo *  AIEntityInfoPtr(void)const;
+    class CAIEntityInfo *AIEntityInfoPtr(void) const;
 
     // address=[0x130ea10]
-    void  ClearFlagBits(int a2);
+    void ClearFlagBits(int a2);
 
     // address=[0x130eb60]
-    int  Flags(void)const;
+    int Flags(void) const;
 
     // address=[0x130f060]
-    int  ID(void)const;
+    int ID(void) const;
 
     // address=[0x130f250]
-    int  OwnerId(void)const;
+    int OwnerId(void) const;
 
     // address=[0x130f390]
-    void  SetFlagBits(int a2);
+    void SetFlagBits(int a2);
 
     // address=[0x130f420]
-    int  Type(void)const;
+    int Type(void) const;
 
     // address=[0x130f440]
-    int  UniqueId(void)const;
+    int UniqueId(void) const;
 
     // address=[0x130f520]
-    int  WarriorType(void)const;
+    int WarriorType(void) const;
 
     // address=[0x130f550]
-    int  X(void)const;
+    int X(void) const;
 
     // address=[0x130f570]
-    int  Y(void)const;
+    int Y(void) const;
 
     // address=[0x1336860]
-    class CWarMapNode const *WarMapNode(void)const;
+    class CWarMapNode const *WarMapNode(void) const;
 
     // address=[0x13469e0]
     class CWarMapNode *WarMapNode(void);
 
     // address=[0x141d8b0]
-    int  EntityId(void)const;
+    int EntityId(void) const;
 
     // address=[0x141da20]
-    int  Race(void)const;
+    int Race(void) const;
 
     // address=[0x1460630]
-    int  Hitpoints(void)const;
+    int Hitpoints(void) const;
 
-    virtual struct SGfxObjectInfo * __thiscall GetGfxInfos(void) = 0;
+    virtual struct SGfxObjectInfo *__thiscall GetGfxInfos(void) = 0;
 
     // address=[0x14d8640]
-    virtual int  ClearGroupFlagBits(int a2);
+    virtual int ClearGroupFlagBits(int a2);
 
     // address=[0x14d8670]
-    virtual int  GetGoodType(void)const;
+    virtual int GetGoodType(void) const;
 
     // address=[0x14d8680]
-    virtual int  GetGroupFlags(void)const;
+    virtual int GetGroupFlags(void) const;
 
     // address=[0x14d8720]
-    bool  IsVisible(void)const;
+    bool IsVisible(void) const;
 
     // address=[0x14d8790]
-    virtual int  SetGroupFlagBits(int a2);
+    virtual int SetGroupFlagBits(int a2);
 
     // address=[0x14d87b0]
-    virtual int  SetGroupFlags(int a2);
+    virtual int SetGroupFlags(int a2);
 
     // address=[0x14d8810]
-    void  SetPosition(int x, int y);
+    void SetPosition(int x, int y);
 
     // address=[0x14e4af0]
-    virtual void  Delete(void);
+    virtual void Delete(void);
 
     // address=[0x14e4bf0]
-    virtual void  Take(int a1);
+    virtual void Take(int a1);
 
     // address=[0x14eb780]
-    void  SetOwnerId(unsigned char owner);
+    void SetOwnerId(unsigned char owner);
 
     // address=[0x14eb7e0]
-    void  SetRace(unsigned char a2);
+    void SetRace(unsigned char a2);
 
     // address=[0x1508220]
-    void  SetPosition(int a2);
+    void SetPosition(int a2);
 
     // address=[0x15191b0]
-    bool  IsSelected(void)const;
+    bool IsSelected(void) const;
 
     // address=[0x154b3d0]
-     IEntity(int id);
+    IEntity(int id);
 
     // address=[0x154b4a0]
-    virtual  ~IEntity(void);
+    virtual ~IEntity(void);
 
     // address=[0x154b570]
-     IEntity(std::istream & inputFile);
+    IEntity(std::istream &inputFile);
 
     // address=[0x154b6e0]
-    virtual void  Store(std::ostream & a2);
+    virtual void Store(std::ostream &a2);
 
     // address=[0x154b7b0]
-    virtual void  PostLoadInit(void);
+    virtual void PostLoadInit(void);
 
     // address=[0x154b7e0]
-    int  WorldIdx(void)const;
+    int WorldIdx(void) const;
 
     // address=[0x154b800]
-    virtual int  Increase(int byAmount);
+    virtual int Increase(int byAmount);
 
     // address=[0x154b850]
-    virtual void  Decrease(int byAmount);
+    virtual void Decrease(int byAmount);
 
     // address=[0x154b8b0]
-    virtual void  Decrease(int a2, int attackerId);
+    virtual void Decrease(int a2, int attackerId);
 
     // address=[0x154b8e0]
-    virtual int  Amount(void)const;
+    virtual int Amount(void) const;
 
     // address=[0x154b900]
-    virtual int  MaxHitpoints(void)const;
+    virtual int MaxHitpoints(void) const;
 
     // address=[0x154b910]
-    void  SetAIEntityInfoPtr(class CAIEntityInfo * a2);
+    void SetAIEntityInfoPtr(class CAIEntityInfo *a2);
 
     // address=[0x154b960]
-    virtual void  DbgPrint(int logLevel, char const * customMessage);
+    virtual void DbgPrint(int logLevel, char const *customMessage);
 
     // address=[0x154ba00]
-    virtual void  PlaceInMapObjectLayer(int packedXY);
+    virtual void PlaceInMapObjectLayer(int packedXY);
 
     // address=[0x154bb50]
-    virtual void  RemoveFromMapObjectLayer(void);
+    virtual void RemoveFromMapObjectLayer(void);
 
     // address=[0x154bc60]
-    void  RemoveFromMapObjectLayerIfNecessary(void);
+    void RemoveFromMapObjectLayerIfNecessary(void);
 
     // address=[0x154bd00]
-    virtual void  Detach(int a1);
+    virtual void Detach(int a1);
 
     // address=[0x154bd30]
-    virtual void  SetObserverTarget(enum T_OBSERVER_TARGET a1, int a2);
+    virtual void SetObserverTarget(enum T_OBSERVER_TARGET a1, int a2);
 
     // address=[0x154bd40]
-    virtual int  GetObserverTarget(enum T_OBSERVER_TARGET a2);
+    virtual int GetObserverTarget(enum T_OBSERVER_TARGET a2);
 
     // address=[0x154bd50]
-    virtual void  AddToWarMap(void);
+    virtual void AddToWarMap(void);
 
     // address=[0x154bd80]
-    void  RemoveFromAllGroups(void);
+    void RemoveFromAllGroups(void);
 
     // address=[0x154c100]
-    virtual void  SetEvent(class CEntityEvent const & a1);
+    virtual void SetEvent(class CEntityEvent const &a1);
 
     // address=[0x1552650]
-    bool  CheckType(int a2, int a3)const;
+    bool CheckType(int a2, int a3) const;
 
     // address=[0x156d340]
-    void  SetHitpoints(unsigned int hp);
+    void SetHitpoints(unsigned int hp);
+
+    enum EntityType : int8_t
+    {
+        Settler = 0x1,
+        Ship = 0x2,
+        Landvehicle = 0x4,
+        Building = 0x8,
+        Good = 0x10,
+        Plant = 0x20,
+        Unknown = 0x40,
+        Animal = 0x80,
+    };
 
 protected:
     // address=[0x40fe240]
@@ -212,17 +225,19 @@ private:
 
     int m_iUniqueId;
     WORD m_nEntityId;
-    enum IEntity::EntityType m_objType;
+    EntityType m_objType;
     BYTE pad_b;
     WORD m_nType;
     BYTE unk_e;
     BYTE unk_f;
-    struct CAIEntityInfo * m_psAIEntityInfo;
-    int m_iFlags; //EntityFlag
+    struct CAIEntityInfo *m_psAIEntityInfo;
+    int m_iFlags; // EntityFlag
     int m_uPackedXY;
     CWarMapNode m_warMapNode;
-    union {
-        struct {
+    union
+    {
+        struct
+        {
             BYTE m_cRace : 4;
             BYTE m_cPlayer : 4;
         };
@@ -232,9 +247,7 @@ private:
     BYTE pad_22;
     BYTE pad_23;
 
-
     static int const FILE_FORMAT_VERSION = 0x2;
 };
-
 
 #endif // IENTITY_H

@@ -17,7 +17,7 @@ public:
     // Type information members
 public:
     int m_uSerialNumber;
-    char * m_spType;
+    const char * m_spType;
     CBBObject *m_pFirst;
     int16_t m_uU10;
 

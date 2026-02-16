@@ -56,11 +56,11 @@ bool  CAStar64::FindPath(int a2, int a3, class CDirCache & a4) {
         __debugbreak();
       if ( !dword_415C770 && BBSupportDbgReport(2, "Pathing\\AStar.cpp", 2000, "s_pMoveCost != 0") == 1 )
         __debugbreak();
-      v5 = (_DWORD *)TPriorityQueue<COpenListEntry24,8192>::Top(&unk_415C788);
+      v5 = (_DWORD *)TPriorityQueue<COpenListEntry24,8192>::Top(&dword_415C788);
       v6 = v5[1];
       v21[0] = *v5;
       v21[1] = v6;
-      TPriorityQueue<COpenListEntry24,8192>::Pop(&unk_415C788);
+      TPriorityQueue<COpenListEntry24,8192>::Pop(&dword_415C788);
       v26 = COpenListEntry24::Index((COpenListEntry24 *)v21);
       for ( i = 0; i < 6; ++i )
       {
@@ -90,13 +90,13 @@ bool  CAStar64::FindPath(int a2, int a3, class CDirCache & a4) {
         }
       }
       v35 = 3;
-      while ( !(unsigned __int8)TPriorityQueue<COpenListEntry24,8192>::Empty(&unk_415C788) )
+      while ( !(unsigned __int8)TPriorityQueue<COpenListEntry24,8192>::Empty(&dword_415C788) )
       {
-        v10 = (_DWORD *)TPriorityQueue<COpenListEntry24,8192>::Top(&unk_415C788);
+        v10 = (_DWORD *)TPriorityQueue<COpenListEntry24,8192>::Top(&dword_415C788);
         v11 = v10[1];
         v22[0] = *v10;
         v22[1] = v11;
-        TPriorityQueue<COpenListEntry24,8192>::Pop(&unk_415C788);
+        TPriorityQueue<COpenListEntry24,8192>::Pop(&dword_415C788);
         v34 = COpenListEntry24::Index((COpenListEntry24 *)v22);
         CG24Closed1Parent7::SetClosedFlag((CG24Closed1Parent7 *)((char *)&unk_416CBC0 + 4 * v34));
         v30 = CG24Closed1Parent7::Parent((CG24Closed1Parent7 *)((char *)&unk_416CBC0 + 4 * v34));
