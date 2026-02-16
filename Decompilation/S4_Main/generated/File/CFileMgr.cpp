@@ -46,9 +46,9 @@ struct _iobuf * __cdecl CFileMgr::Open(wchar_t const * FileName, wchar_t const *
   _DWORD *IsFileOpen; // [esp+8h] [ebp-4h]
 
   if ( !FileName )
-    sub_2F292E0("Filename argument to fopen is NULL", Str, a4, v5);
+    sub_2F292E0("Filename argument to fopen is NULL", Str, a4);
   if ( !Mode )
-    sub_2F292E0("Mode argument to fopen is NULL", Str, a4, v5);
+    sub_2F292E0("Mode argument to fopen is NULL", Str, a4);
   CFileMgr::CheckOpenMode(0, a4, (int)Str, (int)FileName, Mode, (int)&v5);
   IsFileOpen = (_DWORD *)CFileMgr::IsFileOpen(FileName);
   if ( IsFileOpen )

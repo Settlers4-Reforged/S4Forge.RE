@@ -119,12 +119,12 @@ void  CFileEx::Open(std::wstring const & a2, unsigned int a3, bool a4, char * a5
 
 
 // address=[0x2f01950]
-// Decompiled from void __thiscall CFileEx::Open(_DWORD *this, wchar_t *FileName, char a3, char a4, char *Str, int a6)
+// Decompiled from void __thiscall CFileEx::Open(_DWORD *this, wchar_t *FileName, CFile::Mode a3, char a4, char *Str, int a6)
 void  CFileEx::Open(wchar_t const * FileName, unsigned int a3, bool a4, char * Str, int a6) {
   
   wchar_t *v6; // eax
   _BYTE pExceptionObject[552]; // [esp+8h] [ebp-254h] BYREF
-  _BYTE v9[28]; // [esp+230h] [ebp-2Ch] BYREF
+  wstring v9; // [esp+230h] [ebp-2Ch] BYREF
   int v10; // [esp+258h] [ebp-4h]
 
   *((_BYTE *)this - 24) = 0;
@@ -140,10 +140,10 @@ void  CFileEx::Open(wchar_t const * FileName, unsigned int a3, bool a4, char * S
   }
   else
   {
-    std::wstring::wstring(v9);
+    std::wstring::wstring(&v9);
     v10 = 0;
-    CFile::OpenMaskToCWStr(this - 26, a3, (int)v9);
-    v6 = (wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)v9);
+    CFile::OpenMaskToCWStr((CFile *)(this - 26), a3, (char *)&v9);
+    v6 = std::wstring::c_str(&v9);
     *(this - 9) = CFileMgr::Open(FileName, v6, Str, a6);
     if ( !*(this - 9) )
     {
@@ -157,7 +157,7 @@ void  CFileEx::Open(wchar_t const * FileName, unsigned int a3, bool a4, char * S
       *(this - 4) = CFileLibrary::FileSize(&g_cFileLibrary, *(this - 5));
     }
     v10 = -1;
-    std::wstring::~wstring(v9);
+    std::wstring::~wstring(&v9);
   }
 }
 

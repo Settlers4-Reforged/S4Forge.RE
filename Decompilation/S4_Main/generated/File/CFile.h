@@ -61,7 +61,15 @@ public:
 
 protected:
     // address=[0x2f014c0]
-    void  OpenMaskToCWStr(unsigned int a2, std::wstring & a3);
+    void  OpenMaskToCWStr(unsigned int a2, std::wstring & _spFileMode);
+
+    // Type information members
+public:
+    std::string m_spName;
+    BOOL m_bTextMode;
+    std::string m_spU24;
+    int m_uU40;
+    FILE * m_hFile;
 
 };
 

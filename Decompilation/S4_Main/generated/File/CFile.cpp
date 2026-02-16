@@ -1,3 +1,4 @@
+#if FALSE
 #include "CFile.h"
 
 // Definitions for class CFile
@@ -7,25 +8,25 @@
  CFile::CFile(void) {
   
   IFSNode::IFSNode(this);
-  *(_DWORD *)this = CFile::_vftable_;
-  std::string::string((CFile *)((char *)this + 4), (char *)&dword_3686924[1]);
-  std::string::string((char *)this + 36);
-  *((_DWORD *)this + 17) = 0;
-  *((_DWORD *)this + 8) = 1;
-  std::string::operator=((char *)this + 36, " /\n\r\t");
+  this->__vftable = (IFSNode_vtbl *)CFile::_vftable_;
+  std::string::string((struct std::string *)&this->m_spName, "test");
+  std::string::string(&this->m_spU24);
+  this->m_hFile = 0;
+  this->m_bTextMode = 1;
+  std::string::operator=(&this->m_spU24, " /\n\r\t");
   return this;
 }
 
 
 // address=[0x135d3a0]
-// Decompiled from void __thiscall CFile::~CFile(CFile *this)
+// Decompiled from IFSNode *__thiscall CFile::~CFile(CFile *this)
  CFile::~CFile(void) {
   
-  *(_DWORD *)this = CFile::_vftable_;
-  CFile::Close(this, "d:\\projects\\tshe\\purplelamp\\s4\\source\\baselib\\include\\File.h", 0);
-  std::string::~string((char *)this + 36);
-  std::string::~string((char *)this + 4);
-  IFSNode::~IFSNode(this);
+  this->__vftable = (IFSNode_vtbl *)&CFile::_vftable_;
+  CFile::Close(this, UNUSED_ARG(), UNUSED_ARG());
+  std::string::~string(&this->m_spU24);
+  std::string::~string(&this->m_spName);
+  return IFSNode::~IFSNode(this);
 }
 
 
@@ -38,93 +39,97 @@ void  CFile::Accept(class IFSVisitor & a2) {
 
 
 // address=[0x135dff0]
-// Decompiled from char *__thiscall CFile::GetName(char *this)
+// Decompiled from std::string **__thiscall CFile::GetName(CFile *this)
 std::string const &  CFile::GetName(void) {
   
-  return this + 4;
+  return &this->m_spName;
 }
 
 
 // address=[0x2f01020]
-// Decompiled from _DWORD *__thiscall CFile::CFile(_DWORD *this, _Cnd_internal_imp_t *a2, int a3)
+// Decompiled from CFile *__thiscall CFile::CFile(CFile *this, std::wstring *a2, int a3)
  CFile::CFile(std::wstring const & a2, unsigned int a3) {
   
   wchar_t *v3; // eax
+  CFile v6; // [esp+8h] [ebp-58h] BYREF
+  int exceptionBlock; // [esp+5Ch] [ebp-4h]
 
   IFSNode::IFSNode(this);
-  *this = CFile::_vftable_;
-  std::string::string();
-  std::string::string();
-  v3 = (wchar_t *)std::wstring::c_str(a2);
+  exceptionBlock = 0;
+  this->__vftable = (IFSNode_vtbl *)&CFile::_vftable_;
+  std::string::string(&this->m_spName);
+  std::string::string(&this->m_spU24);
+  LOBYTE(exceptionBlock) = 2;
+  v3 = std::wstring::c_str(a2);
   CFile::CFile(v3, a3);
-  CFile::~CFile();
+  CFile::~CFile(&v6);
   return this;
 }
 
 
 // address=[0x2f010d0]
-// Decompiled from _DWORD *__thiscall CFile::CFile(_DWORD *this, wchar_t *FileName, int a3)
+// Decompiled from CFile *__thiscall CFile::CFile(CFile *this, wchar_t *FileName, int a3)
  CFile::CFile(wchar_t const * FileName, unsigned int a3) {
   
   CFile *v4; // [esp+4h] [ebp-64h]
-  _BYTE v6[72]; // [esp+10h] [ebp-58h] BYREF
+  CFile v6; // [esp+10h] [ebp-58h] BYREF
   int v7; // [esp+64h] [ebp-4h]
 
   IFSNode::IFSNode(this);
   v7 = 0;
-  *this = CFile::_vftable_;
-  std::string::string();
-  std::string::string();
+  this->__vftable = (IFSNode_vtbl *)&CFile::_vftable_;
+  std::string::string(&this->m_spName);
+  std::string::string(&this->m_spU24);
   LOBYTE(v7) = 2;
   if ( a3 )
   {
-    std::string::operator=(this + 9, " /\n\r\t");
-    CFile::Open(FileName, a3, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\BaseLib\\Include\\File.h", 0);
+    std::string::operator=(&this->m_spU24, " /\n\r\t");
+    CFile::Open(this, FileName, (CFile::Mode)a3, UNUSED_ARG(), UNUSED_ARG());
   }
   else
   {
-    v4 = CFile::CFile((CFile *)v6);
+    v4 = CFile::CFile(&v6);
     LOBYTE(v7) = 3;
     CFile::operator=(v4);
     LOBYTE(v7) = 2;
-    CFile::~CFile();
+    CFile::~CFile(&v6);
   }
   return this;
 }
 
 
 // address=[0x2f011c0]
-// Decompiled from void __thiscall CFile::Open(_DWORD *this, wstring *a1, char a2, char *Str, int a4)
+// Decompiled from void __thiscall CFile::Open(CFile *this, std::wstring *a2, CFile::Mode a3, char *Str, int a5)
 void  CFile::Open(std::wstring const & a2, unsigned int a3, char * Str, int a5) {
   
   wchar_t *v5; // eax
 
-  v5 = std::wstring::c_str(a1);
-  CFile::Open(this, v5, a2, UNUSED_ARG(), UNUSED_ARG());
+  v5 = std::wstring::c_str(a2);
+  CFile::Open(this, v5, a3, UNUSED_ARG(), UNUSED_ARG());
 }
 
 
 // address=[0x2f011f0]
-// Decompiled from void __thiscall CFile::Open(_DWORD *this, wchar_t *FileName, char a3, char *Str, int a5)
+// Decompiled from void __thiscall CFile::Open(CFile *this, wchar_t *FileName, CFile::Mode a3, char *Str, int a5)
 void  CFile::Open(wchar_t const * FileName, unsigned int a3, char * Str, int a5) {
   
   wchar_t *v5; // eax
   _BYTE pExceptionObject[552]; // [esp+8h] [ebp-254h] BYREF
-  _BYTE v8[28]; // [esp+230h] [ebp-2Ch] BYREF
+  std::wstring v8; // [esp+230h] [ebp-2Ch] BYREF
   int v9; // [esp+258h] [ebp-4h]
 
-  std::wstring::wstring(v8);
+  std::wstring::wstring(&v8);
   v9 = 0;
-  CFile::OpenMaskToCWStr(this, a3, (int)v8);
-  v5 = (wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)v8);
-  this[17] = CFileMgr::Open(FileName, v5, Str, a5);
-  if ( !this[17] )
+  CFile::OpenMaskToCWStr(this, a3, (char *)&v8);
+  v5 = std::wstring::c_str(&v8);
+  this->m_hFile = (FILE *)CFileMgr::Open(FileName, v5, Str, a5);
+  if ( !this->m_hFile )
   {
     CBBFileException::CBBFileException((CBBFileException *)pExceptionObject, 2, FileName);
     _CxxThrowException(pExceptionObject, (_ThrowInfo *)&_TI2_AVCBBFileException__);
   }
   v9 = -1;
-  std::wstring::~wstring(v8);
+  std::wstring::~wstring(&v8);
 }
 
 
@@ -132,7 +137,7 @@ void  CFile::Open(wchar_t const * FileName, unsigned int a3, char * Str, int a5)
 // Decompiled from size_t __thiscall CFile::Read(  struct CFile *this,  void *Buffer,  size_t ElementSize,  size_t ElementCount,  int a5,  int a6)
 unsigned int  CFile::Read(void * Buffer, int ElementSize, int ElementCount, char * a5, int a6) {
   
-  return j__fread(Buffer, ElementSize, ElementCount, *((FILE **)this + 17));
+  return j__fread(Buffer, ElementSize, ElementCount, this->m_hFile);
 }
 
 
@@ -140,59 +145,59 @@ unsigned int  CFile::Read(void * Buffer, int ElementSize, int ElementCount, char
 // Decompiled from unsigned int __thiscall CFile::Write(  struct CFile *this,  const void *Buffer,  int ElementSize,  int ElementCount,  char *a5,  int a6)
 unsigned int  CFile::Write(void const * a1, int a2, int a3, char * a4, int a5) {
   
-  return j__fwrite(Buffer, ElementSize, ElementCount, *((FILE **)this + 17));
+  return j__fwrite(Buffer, ElementSize, ElementCount, this->m_hFile);
 }
 
 
 // address=[0x2f01330]
-// Decompiled from int __thiscall CFile::Seek(FILE **this, int Offset, int Origin, int a4, int a5)
+// Decompiled from int __thiscall CFile::Seek(CFile *this, int Offset, int Origin, int a4, int a5)
 int  CFile::Seek(int Offset, int Origin, char * a4, int a5) {
   
   int v6; // [esp+4h] [ebp-8h]
 
-  v6 = j__fseek(this[17], Offset, Origin);
+  v6 = j__fseek(this->m_hFile, Offset, Origin);
   if ( Origin == 1 )
-    j__ftell(this[17]);
+    j__ftell(this->m_hFile);
   return v6;
 }
 
 
 // address=[0x2f01380]
-// Decompiled from int __thiscall CFile::Size(FILE **this)
+// Decompiled from int __thiscall CFile::Size(CFile *this)
 int  CFile::Size(void)const {
   
   int v2; // [esp+0h] [ebp-Ch]
   int Offset; // [esp+4h] [ebp-8h]
 
-  Offset = j__ftell(this[17]);
-  j__fseek(this[17], 0, 2);
-  v2 = j__ftell(this[17]);
-  j__fseek(this[17], Offset, 0);
+  Offset = j__ftell(this->m_hFile);
+  j__fseek(this->m_hFile, 0, 2);
+  v2 = j__ftell(this->m_hFile);
+  j__fseek(this->m_hFile, Offset, 0);
   return v2;
 }
 
 
 // address=[0x2f013e0]
-// Decompiled from int __thiscall CFile::Tell(FILE **this, char *a2, int a3)
+// Decompiled from int __thiscall CFile::Tell(CFile *this, char *a2, int a3)
 int  CFile::Tell(char * a2, int a3)const {
   
-  return j__ftell(this[17]);
+  return j__ftell(this->m_hFile);
 }
 
 
 // address=[0x2f01400]
-// Decompiled from int __thiscall CFile::Eof(FILE **this)
+// Decompiled from int __thiscall CFile::Eof(CFile *this)
 int  CFile::Eof(void) {
   
-  return j__feof(this[17]);
+  return j__feof(this->m_hFile);
 }
 
 
 // address=[0x2f01420]
-// Decompiled from int __thiscall CFile::Error(FILE **this)
+// Decompiled from int __thiscall CFile::Error(CFile *this)
 int  CFile::Error(void) {
   
-  return j__ferror(this[17]);
+  return j__ferror(this->m_hFile);
 }
 
 
@@ -201,62 +206,60 @@ int  CFile::Error(void) {
 int  CFile::Close(char * a2, int a3) {
   
   int result; // eax
-  struct SFileDesc *v4; // [esp+0h] [ebp-Ch]
+  void **v4; // [esp+0h] [ebp-Ch]
 
-  if ( !*((_DWORD *)this + 17) )
+  if ( !this->m_hFile )
     return 0;
-  v4 = CFileMgr::CheckValidFilePtr(*((struct _iobuf **)this + 17), "CFile::Close", a2, a3);
+  v4 = (void **)CFileMgr::CheckValidFilePtr(this->m_hFile, "CFile::Close", a2, a3);
   if ( v4 )
     CFileMgr::RemoveFromList(v4);
-  result = j__fclose(*((FILE **)this + 17));
-  *((_DWORD *)this + 17) = 0;
+  result = j__fclose(this->m_hFile);
+  this->m_hFile = 0;
   return result;
 }
 
 
 // address=[0x2f016b0]
-// Decompiled from FILE **__thiscall CFile::operator=(FILE **this, CDockState *a2)
+// Decompiled from CFile *__thiscall CFile::operator=(CFile *this, CFile *a2)
 class CFile &  CFile::operator=(class CFile & a2) {
   
-  j__fclose(this[17]);
-  this[17] = (FILE *)CFile::GetFile(a2);
+  j__fclose(this->m_hFile);
+  this->m_hFile = CFile::GetFile(a2);
   return this;
 }
 
 
 // address=[0x2f016f0]
-// Decompiled from unsigned int __thiscall CFile::GetFile(CDockState *this)
+// Decompiled from FILE *__thiscall CFile::GetFile(CFile *this)
 struct _iobuf *  CFile::GetFile(void) {
   
-  return *((_DWORD *)this + 17);
+  return this->m_hFile;
 }
 
 
 // address=[0x2f014c0]
-// Decompiled from int __thiscall CFile::OpenMaskToCWStr(_DWORD *this, char a2, int a3)
-void  CFile::OpenMaskToCWStr(unsigned int a2, std::wstring & a3) {
+// Decompiled from void __thiscall CFile::OpenMaskToCWStr(CFile *this, CFile::Mode a2, char *_spFileMode)
+void  CFile::OpenMaskToCWStr(unsigned int a2, std::wstring & _spFileMode) {
   
-  int result; // eax
-
-  if ( (a2 & 0x20) != 0 )
-    std::wstring::operator+=((wchar_t *)L"a");
-  if ( (a2 & 4) != 0 )
-    std::wstring::operator+=((wchar_t *)L"r");
-  if ( (a2 & 8) != 0 )
-    std::wstring::operator+=((wchar_t *)L"w");
-  if ( (a2 & 0x10) != 0 )
-    std::wstring::operator+=((wchar_t *)L"+");
-  if ( (a2 & 1) != 0 )
+  if ( (a2 & CFile_APPEND) != 0 )
+    std::wstring::operator+=(_spFileMode, (wchar_t *)L"a");
+  if ( (a2 & CFile_READ) != 0 )
+    std::wstring::operator+=(_spFileMode, (wchar_t *)L"r");
+  if ( (a2 & CFile_WRITE) != 0 )
+    std::wstring::operator+=(_spFileMode, (wchar_t *)L"w");
+  if ( (a2 & CFile_SPECIAL) != 0 )
+    std::wstring::operator+=(_spFileMode, (wchar_t *)L"+");
+  if ( (a2 & CFile_TEXT) != 0 )
   {
-    std::wstring::operator+=((wchar_t *)L"t");
-    this[8] = 1;
+    std::wstring::operator+=(_spFileMode, (wchar_t *)L"t");
+    this->m_bTextMode = 1;
   }
-  result = a2 & 2;
-  if ( (a2 & 2) == 0 )
-    return result;
-  result = std::wstring::operator+=((wchar_t *)L"b");
-  this[8] = 0;
-  return result;
+  if ( (a2 & CFile_BINARY) != 0 )
+  {
+    std::wstring::operator+=(_spFileMode, (wchar_t *)L"b");
+    this->m_bTextMode = 0;
+  }
 }
 
 
+#endif // Already implemented

@@ -1,4 +1,3 @@
-#if FALSE
 #include "IFSNode.h"
 
 // Definitions for class IFSNode
@@ -48,4 +47,3 @@ void  IFSNode::Orphan(class IFSNode * a2) {
 }
 
 
-#endif // Already implemented

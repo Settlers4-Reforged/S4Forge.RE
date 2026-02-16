@@ -1195,16 +1195,16 @@ std::wstring __cdecl Bugreport::BuildAutoReporterCmdLineArgsForUserReports(void 
 
 
 // address=[0x134df60]
-// Decompiled from void *__cdecl Bugreport::BuildTraceFilePath(void *a1, wstring *a2)
+// Decompiled from wstring *__cdecl Bugreport::BuildTraceFilePath(wstring *a1, wstring *a2)
 std::wstring __cdecl Bugreport::BuildTraceFilePath(std::wstring const & a1) {
   
   void *BugReportsDirectoryPath; // [esp+4h] [ebp-84h]
   int v4[11]; // [esp+10h] [ebp-78h] BYREF
-  _BYTE v5[32]; // [esp+3Ch] [ebp-4Ch] BYREF
-  _BYTE v6[28]; // [esp+5Ch] [ebp-2Ch] BYREF
+  wstring v5; // [esp+3Ch] [ebp-4Ch] BYREF
+  wstring v6; // [esp+5Ch] [ebp-2Ch] BYREF
   int v7; // [esp+84h] [ebp-4h]
 
-  if ( (unsigned __int8)std::wstring::empty(a2) )
+  if ( std::wstring::empty(a2) )
   {
     std::wstring::wstring(a1, (wchar_t *)&word_36823E0);
   }
@@ -1212,11 +1212,11 @@ std::wstring __cdecl Bugreport::BuildTraceFilePath(std::wstring const & a1) {
   {
     FilePaths::SplitPath((int)v4, a2);
     v7 = 0;
-    BugReportsDirectoryPath = (void *)Bugreport::GetBugReportsDirectoryPath((int)v6);
+    BugReportsDirectoryPath = (void *)Bugreport::GetBugReportsDirectoryPath((int)&v6);
     LOBYTE(v7) = 1;
-    std::operator+<wchar_t>(a1, BugReportsDirectoryPath, (_Cnd_internal_imp_t *)v5);
+    std::operator+<wchar_t>(a1, BugReportsDirectoryPath, &v5);
     LOBYTE(v7) = 0;
-    std::wstring::~wstring(v6);
+    std::wstring::~wstring(&v6);
     v7 = -1;
     FilePaths::PathSplitResult::~PathSplitResult(v4);
   }
@@ -1549,7 +1549,7 @@ unsigned short __cdecl RegisterWindowClass(struct HINSTANCE__ * hInstance) {
   v2.cbWndExtra = 0;
   v2.hInstance = hInstance;
   v2.hIcon = LoadIconA(hInstance, (LPCSTR)0x72);
-  v2.hCursor = LoadCursorA(0, (LPCSTR)&_enc_textbss_begin[7104]);
+  v2.hCursor = LoadCursorA(0, byte_7F00);
   v2.hbrBackground = CreateSolidBrush(0);
   v2.lpszMenuName = 0;
   v2.lpszClassName = "S4";
@@ -1562,95 +1562,95 @@ unsigned short __cdecl RegisterWindowClass(struct HINSTANCE__ * hInstance) {
 // Decompiled from char ExistsExtractCommand()
 bool __cdecl ExistsExtractCommand(void) {
   
-  const wchar_t *v4; // eax
-  size_t v5; // eax
-  _DWORD v6[7]; // [esp+0h] [ebp-228h] BYREF
-  void *v7; // [esp+1Ch] [ebp-20Ch]
-  size_t v8; // [esp+20h] [ebp-208h]
-  size_t v9; // [esp+24h] [ebp-204h]
+  wchar_t *v1; // eax
+  size_t v2; // eax
+  _DWORD v3[7]; // [esp+0h] [ebp-228h] BYREF
+  void *v4; // [esp+1Ch] [ebp-20Ch]
+  size_t v5; // [esp+20h] [ebp-208h]
+  size_t v6; // [esp+24h] [ebp-204h]
   void *Buffer; // [esp+28h] [ebp-200h]
   size_t ElementCount; // [esp+2Ch] [ebp-1FCh]
-  char v12; // [esp+31h] [ebp-1F7h]
-  char v13; // [esp+32h] [ebp-1F6h]
-  char v14; // [esp+33h] [ebp-1F5h]
-  char v15[88]; // [esp+34h] [ebp-1F4h] BYREF
-  _DWORD v16[26]; // [esp+8Ch] [ebp-19Ch] BYREF
-  int v17; // [esp+F4h] [ebp-134h] BYREF
-  int v18[7]; // [esp+F8h] [ebp-130h] BYREF
+  char v9; // [esp+31h] [ebp-1F7h]
+  char v10; // [esp+32h] [ebp-1F6h]
+  char v11; // [esp+33h] [ebp-1F5h]
+  char v12[88]; // [esp+34h] [ebp-1F4h] BYREF
+  _DWORD v13[26]; // [esp+8Ch] [ebp-19Ch] BYREF
+  int v14; // [esp+F4h] [ebp-134h] BYREF
+  wstring v15; // [esp+F8h] [ebp-130h] BYREF
   wchar_t Src[128]; // [esp+114h] [ebp-114h] BYREF
-  _DWORD *v20; // [esp+218h] [ebp-10h]
-  int v21; // [esp+224h] [ebp-4h]
+  _DWORD *v17; // [esp+218h] [ebp-10h]
+  int v18; // [esp+224h] [ebp-4h]
 
-  v20 = v6;
-  v6[4] = 128;
+  v17 = v3;
+  v3[4] = 128;
   if ( !g_iArgc )
     return 0;
   memset(Src, 0, sizeof(Src));
-  std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v15);
-  v21 = 0;
+  std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v12);
+  v18 = 0;
   std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::from_bytes(
-    (int)v18,
-    *(char **)g_pArgv);
-  LOBYTE(v21) = 1;
-  v4 = (const wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)v18);
-  wcsncpy(Src, v4, 0x7Fu);
+    (int)&v15,
+    *g_pArgv);
+  LOBYTE(v18) = 1;
+  v1 = std::wstring::c_str(&v15);
+  wcsncpy(Src, v1, 0x7Fu);
   j__wcsupr(Src);
   if ( wcsstr(Src, (wchar_t *)L"EXTRACT:\"") )
   {
-    v5 = wcslen(Src);
-    memcpy(Src, &Src[9], v5 - 9);
-    v9 = 2 * wcslen(Src) - 20;
-    if ( v9 >= 0x100 )
+    v2 = wcslen(Src);
+    memcpy(Src, &Src[9], v2 - 9);
+    v6 = 2 * wcslen(Src) - 20;
+    if ( v6 >= 0x100 )
       report_rangecheckfailure();
-    *(wchar_t *)((char *)Src + v9) = 0;
-    v14 = 1;
+    *(wchar_t *)((char *)Src + v6) = 0;
+    v11 = 1;
     ElementCount = 0;
     Buffer = 0;
-    CFileEx::CFileEx((CFileEx *)v16, 1);
-    LOBYTE(v21) = 3;
-    CFileEx::Open(&v17, Src, 6, 0, UNUSED_ARG(), UNUSED_ARG());
-    v8 = CFileEx::Size(v16);
-    ElementCount = v8;
-    if ( v8 )
+    CFileEx::CFileEx((CFileEx *)v13, 1);
+    LOBYTE(v18) = 3;
+    CFileEx::Open(&v14, Src, 6, 0, UNUSED_ARG(), UNUSED_ARG());
+    v5 = CFileEx::Size(v13);
+    ElementCount = v5;
+    if ( v5 )
     {
-      v7 = operator new[](ElementCount + 8);
-      v6[6] = v7;
-      Buffer = v7;
-      memset(v7, 0, ElementCount + 8);
-      CFileEx::Read(&v17, Buffer, 1, ElementCount, UNUSED_ARG(), 110);
+      v4 = operator new[](ElementCount + 8);
+      v3[6] = v4;
+      Buffer = v4;
+      memset(v4, 0, ElementCount + 8);
+      CFileEx::Read(&v14, Buffer, 1, ElementCount, UNUSED_ARG(), 110);
     }
-    v21 = 2;
-    CFileEx::Close((CFileEx *)&v17, UNUSED_ARG(), UNUSED_ARG());
-    if ( v14 && Buffer )
+    v18 = 2;
+    CFileEx::Close((CFileEx *)&v14, UNUSED_ARG(), UNUSED_ARG());
+    if ( v11 && Buffer )
     {
-      CFileEx::Open(&v17, (wchar_t *)L"Extract", 8, 0, UNUSED_ARG(), UNUSED_ARG());
+      CFileEx::Open(&v14, (wchar_t *)L"Extract", 8, 0, UNUSED_ARG(), UNUSED_ARG());
       CFileEx::Write(Buffer, 1u, ElementCount, UNUSED_ARG(), UNUSED_ARG());
-      CFileEx::Close((CFileEx *)&v17, UNUSED_ARG(), UNUSED_ARG());
+      CFileEx::Close((CFileEx *)&v14, UNUSED_ARG(), UNUSED_ARG());
       MessageBoxA(0, "File successfully extracted!", &byte_36833EB, 0);
-      v6[5] = Buffer;
+      v3[5] = Buffer;
       operator delete[](Buffer);
     }
     else
     {
       MessageBoxA(0, "Error while reading file!", &byte_368342B, 0);
     }
-    v13 = 1;
-    LOBYTE(v21) = 1;
-    CFileEx::~CFileEx(v16);
-    LOBYTE(v21) = 0;
-    std::wstring::~wstring(v18);
-    v21 = -1;
-    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::~wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v15);
-    return v13;
+    v10 = 1;
+    LOBYTE(v18) = 1;
+    CFileEx::~CFileEx(v13);
+    LOBYTE(v18) = 0;
+    std::wstring::~wstring(&v15);
+    v18 = -1;
+    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::~wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v12);
+    return v10;
   }
   else
   {
-    v12 = 0;
-    LOBYTE(v21) = 0;
-    std::wstring::~wstring(v18);
-    v21 = -1;
-    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::~wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v15);
-    return v12;
+    v9 = 0;
+    LOBYTE(v18) = 0;
+    std::wstring::~wstring(&v15);
+    v18 = -1;
+    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::~wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v12);
+    return v9;
   }
 }
 
@@ -1758,68 +1758,67 @@ void __cdecl ErrorMessageBox(char const * lpText) {
 unsigned long __cdecl GetSystemLanguage(void) {
   
   unsigned int i; // [esp+8h] [ebp-4D8h]
-  char *Str1; // [esp+Ch] [ebp-4D4h]
-  _DWORD v3[51]; // [esp+10h] [ebp-4D0h]
+  SLanguagePair sAvailableLanguages[26]; // [esp+Ch] [ebp-4D4h]
   CHAR LCData[1024]; // [esp+DCh] [ebp-404h] BYREF
 
-  Str1 = "DE";
-  v3[0] = 1;
-  v3[1] = "GE";
-  v3[2] = 1;
-  v3[3] = "EN";
-  v3[4] = 0;
-  v3[5] = "CH";
-  v3[6] = 7;
-  v3[7] = "ZH";
-  v3[8] = 7;
-  v3[9] = "CZ";
-  v3[10] = 13;
-  v3[11] = "CE";
-  v3[12] = 13;
-  v3[13] = "CS";
-  v3[14] = 13;
-  v3[15] = "DA";
-  v3[16] = 9;
-  v3[17] = "FI";
-  v3[18] = 14;
-  v3[19] = "FR";
-  v3[20] = 2;
-  v3[21] = "HE";
-  v3[22] = 12;
-  v3[23] = "HU";
-  v3[24] = 11;
-  v3[25] = "IT";
-  v3[26] = 4;
-  v3[27] = "JP";
-  v3[28] = 18;
-  v3[29] = "JA";
-  v3[30] = 18;
-  v3[31] = "KO";
-  v3[32] = 6;
-  v3[33] = "NO";
-  v3[34] = 10;
-  v3[35] = "PO";
-  v3[36] = 5;
-  v3[37] = "PL";
-  v3[38] = 5;
-  v3[39] = "RU";
-  v3[40] = 16;
-  v3[41] = "SP";
-  v3[42] = 3;
-  v3[43] = "ES";
-  v3[44] = 3;
-  v3[45] = "SW";
-  v3[46] = 8;
-  v3[47] = "SV";
-  v3[48] = 8;
-  v3[49] = "TH";
-  v3[50] = 17;
+  sAvailableLanguages[0].m_spName = "DE";
+  sAvailableLanguages[0].m_iId = 1;
+  sAvailableLanguages[1].m_spName = "GE";
+  sAvailableLanguages[1].m_iId = 1;
+  sAvailableLanguages[2].m_spName = "EN";
+  sAvailableLanguages[2].m_iId = 0;
+  sAvailableLanguages[3].m_spName = "CH";
+  sAvailableLanguages[3].m_iId = 7;
+  sAvailableLanguages[4].m_spName = "ZH";
+  sAvailableLanguages[4].m_iId = 7;
+  sAvailableLanguages[5].m_spName = "CZ";
+  sAvailableLanguages[5].m_iId = 13;
+  sAvailableLanguages[6].m_spName = "CE";
+  sAvailableLanguages[6].m_iId = 13;
+  sAvailableLanguages[7].m_spName = "CS";
+  sAvailableLanguages[7].m_iId = 13;
+  sAvailableLanguages[8].m_spName = "DA";
+  sAvailableLanguages[8].m_iId = 9;
+  sAvailableLanguages[9].m_spName = "FI";
+  sAvailableLanguages[9].m_iId = 14;
+  sAvailableLanguages[10].m_spName = "FR";
+  sAvailableLanguages[10].m_iId = 2;
+  sAvailableLanguages[11].m_spName = "HE";
+  sAvailableLanguages[11].m_iId = 12;
+  sAvailableLanguages[12].m_spName = "HU";
+  sAvailableLanguages[12].m_iId = 11;
+  sAvailableLanguages[13].m_spName = "IT";
+  sAvailableLanguages[13].m_iId = 4;
+  sAvailableLanguages[14].m_spName = "JP";
+  sAvailableLanguages[14].m_iId = 18;
+  sAvailableLanguages[15].m_spName = "JA";
+  sAvailableLanguages[15].m_iId = 18;
+  sAvailableLanguages[16].m_spName = "KO";
+  sAvailableLanguages[16].m_iId = 6;
+  sAvailableLanguages[17].m_spName = "NO";
+  sAvailableLanguages[17].m_iId = 10;
+  sAvailableLanguages[18].m_spName = "PO";
+  sAvailableLanguages[18].m_iId = 5;
+  sAvailableLanguages[19].m_spName = "PL";
+  sAvailableLanguages[19].m_iId = 5;
+  sAvailableLanguages[20].m_spName = "RU";
+  sAvailableLanguages[20].m_iId = 16;
+  sAvailableLanguages[21].m_spName = "SP";
+  sAvailableLanguages[21].m_iId = 3;
+  sAvailableLanguages[22].m_spName = "ES";
+  sAvailableLanguages[22].m_iId = 3;
+  sAvailableLanguages[23].m_spName = "SW";
+  sAvailableLanguages[23].m_iId = 8;
+  sAvailableLanguages[24].m_spName = "SV";
+  sAvailableLanguages[24].m_iId = 8;
+  sAvailableLanguages[25].m_spName = "TH";
+  sAvailableLanguages[25].m_iId = 17;
   GetLocaleInfoA(0x800u, 3u, LCData, 1024);
   LCData[2] = 0;
   for ( i = 0; i < 0x1A; ++i )
   {
-    if ( !j__strcmp((const char *)v3[2 * i - 1], LCData) )
-      return v3[2 * i];
+    if ( !j__strcmp(sAvailableLanguages[i].m_spName, LCData) )
+      return sAvailableLanguages[i].m_iId;
   }
   return 0;
 }
