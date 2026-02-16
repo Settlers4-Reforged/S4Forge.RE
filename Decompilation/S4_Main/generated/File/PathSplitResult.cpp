@@ -1,3 +1,4 @@
+#if FALSE
 #include "PathSplitResult.h"
 
 // Definitions for class PathSplitResult
@@ -6,7 +7,7 @@
 // Decompiled from void __thiscall FilePaths::PathSplitResult::~PathSplitResult(FilePaths::PathSplitResult *this)
  FilePaths::PathSplitResult::~PathSplitResult(void) {
   
-  std::wstring::~wstring(&this->m_swpOut);
+  std::wstring::~wstring(&this->m_swpDirectoryName);
   std::vector<std::wstring>::~vector<std::wstring>(&this->m_vSplits);
   std::wstring::~wstring(&this->m_swpDrive);
 }
@@ -18,7 +19,7 @@
   
   std::wstring::wstring(&this->m_swpDrive, &a2->m_swpDrive);
   std::vector<std::wstring>::vector<std::wstring>(&this->m_vSplits, (int)&a2->m_vSplits);
-  std::wstring::wstring(&this->m_swpOut, &a2->m_swpOut);
+  std::wstring::wstring(&this->m_swpDirectoryName, &a2->m_swpDirectoryName);
   this->m_bSplit = a2->m_bSplit;
   return this;
 }
@@ -30,9 +31,10 @@
   
   std::wstring::wstring(this);
   std::vector<std::wstring>::vector<std::wstring>(&this->m_vSplits);
-  std::wstring::wstring(&this->m_swpOut);
+  std::wstring::wstring(&this->m_swpDirectoryName);
   this->m_bSplit = 0;
   return this;
 }
 
 
+#endif // Already implemented

@@ -2,6 +2,7 @@
 #define FRAMEWORK_H
 
 #include <windows.h>
+#include <string>
 
 // address=[0x03ECDADC]
 extern unsigned int g_iFileVersionMS;
@@ -34,10 +35,19 @@ extern HWND g_hWnd;
 extern HINSTANCE *g_hInstance;
 
 // address=[0x3ecda78]
-extern char * g_strTitleEx;
+extern char *g_strTitleEx;
 
 // address=[0x3ecdae0]
-extern char * g_strSerial;
+extern char *g_strSerial;
+
+// address=[0x3ECDB4C]
+extern int g_iArgc;
+
+// address=[0x3ECDB48]
+extern char **g_pArgv;
+
+// address=[0x3ECDB50]
+extern HANDLE hObject;
 
 // address=[0x13589F0]
 extern bool __cdecl DoesDirectoryExist(LPCWSTR lpFileName);
@@ -58,6 +68,33 @@ extern BOOL __stdcall KillGame(HWND hWnd);
 extern void __cdecl ShowFingerprint(void);
 
 // address=[0x01358A50]
-void __cdecl GetInstanceTimestamp(char *Buffer, size_t Size, void *a3);
+extern void __cdecl GetInstanceTimestamp(char *Buffer, size_t Size, void *a3);
+
+// address=[0x1358F70]
+extern void __cdecl PrintCommandline(bool _bKeepFirstArg);
+
+// address=[0x013593E0]
+extern void __cdecl PreloadGfx();
+
+// address=[0x1359db0]
+unsigned long __cdecl GetSystemLanguage(void);
+
+// address=[0x1359410]
+extern unsigned short __cdecl RegisterWindowClass(HINSTANCE hInstance);
+
+// address=[0x13594d0]
+extern bool __cdecl ExistsExtractCommand(void);
+
+// address=[0x013585F0]
+extern std::wstring GetCrashlogFilename();
+
+// address=[0x01358B00]
+extern int CheckForCrashlog();
+
+// address=[0x01358D80]
+extern void AppendTracefileToCrashlog();
+
+// address=[0x01359180]
+extern void CleanupArgs();
 
 #endif // FRAMEWORK_H

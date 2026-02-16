@@ -14,6 +14,8 @@
 #include "Main/CGameSettings.h"
 #include "Debug/CTrace.h"
 
+
+// address=[0x01357310]
 int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
     _DWORD *v5;                             // eax
@@ -336,8 +338,7 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdL
                                         OnlineManager::Destroy();
                                         // /*UPlAY*/UPlay::UPlayManager::Release();
                                         CleanupArgs();
-                                        GetCrashlogFilename(&sCrashlogFilename);
-                                        DeleteFileW(sCrashlogFilename.c_str());
+                                        DeleteFileW(GetCrashlogFilename().c_str());
                                         if (hObject)
                                             CloseHandle(hObject);
                                         return 0;

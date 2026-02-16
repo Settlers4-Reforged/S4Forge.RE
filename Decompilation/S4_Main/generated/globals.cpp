@@ -1197,8 +1197,8 @@ std::wstring __cdecl Bugreport::BuildAutoReporterCmdLineArgsForUserReports(void 
 std::wstring __cdecl Bugreport::BuildTraceFilePath(std::wstring const & a1) {
   
   std::wstring *BugReportsDirectoryPath; // [esp+4h] [ebp-84h]
-  std::wstring v4; // [esp+10h] [ebp-78h] BYREF
-  std::wstring v5; // [esp+3Ch] [ebp-4Ch] BYREF
+  FilePaths::PathSplitResult sPathSplits; // [esp+10h] [ebp-78h] BYREF
+  std::wstring v5; // [esp+5Ch] [ebp-2Ch] BYREF
   int v6; // [esp+84h] [ebp-4h]
 
   if ( std::wstring::empty(a2) )
@@ -1207,26 +1207,25 @@ std::wstring __cdecl Bugreport::BuildTraceFilePath(std::wstring const & a1) {
   }
   else
   {
-    FilePaths::SplitPath((int)&v4, a2);
+    FilePaths::SplitPath(&sPathSplits, a2);
     v6 = 0;
-    BugReportsDirectoryPath = Bugreport::GetBugReportsDirectoryPath((std::wstring *)&v5.m_u[8]);
+    BugReportsDirectoryPath = Bugreport::GetBugReportsDirectoryPath(&v5);
     LOBYTE(v6) = 1;
-    std::operator+<wchar_t>(a1, BugReportsDirectoryPath, &v5);
+    std::operator+<wchar_t>(a1, BugReportsDirectoryPath, &sPathSplits.m_swpDirectoryName);
     LOBYTE(v6) = 0;
-    std::wstring::~wstring((std::wstring *)&v5.m_u[8]);
+    std::wstring::~wstring(&v5);
     v6 = -1;
-    FilePaths::PathSplitResult::~PathSplitResult(&v4);
+    FilePaths::PathSplitResult::~PathSplitResult(&sPathSplits);
   }
   return a1;
 }
 
 
 // address=[0x134e050]
-// Decompiled from int __cdecl Bugreport::LaunchAutoreport(char a1, std::wstring *a2)
+// Decompiled from void __cdecl Bugreport::LaunchAutoreport(char a1, std::wstring *a2)
 void __cdecl Bugreport::LaunchAutoreport(bool a1, std::wstring const & a2) {
   
   wchar_t *v2; // eax
-  int result; // eax
   _STARTUPINFOW StartupInfo; // [esp+0h] [ebp-264h] BYREF
   _PROCESS_INFORMATION ProcessInformation; // [esp+44h] [ebp-220h] BYREF
   DWORD ExitCode; // [esp+54h] [ebp-210h] BYREF
@@ -1239,17 +1238,15 @@ void __cdecl Bugreport::LaunchAutoreport(bool a1, std::wstring const & a2) {
     j___wassert(L"commandLineArgs.size() < MAX_PATH", L"Bugreport.cpp", 0x41u);
   v2 = std::wstring::c_str(a2);
   snwprintf((char *const)CommandLine, 0x104u, L"%s", v2);
-  result = CreateProcessW(L"Exe\\Autoreport.exe", CommandLine, 0, 0, 0, 0, 0, 0, &StartupInfo, &ProcessInformation);
-  if ( result )
+  if ( CreateProcessW(L"Exe\\Autoreport.exe", CommandLine, 0, 0, 0, 0, 0, 0, &StartupInfo, &ProcessInformation) )
   {
-    for ( ExitCode = 259; ExitCode == 259; result = GetExitCodeProcess(ProcessInformation.hProcess, &ExitCode) )
+    for ( ExitCode = 259; ExitCode == 259; GetExitCodeProcess(ProcessInformation.hProcess, &ExitCode) )
       ;
   }
   else if ( a1 )
   {
-    return MessageBoxA(g_hWnd, "Unable to launch Autoreport.exe!", "S4", 0x30u);
+    MessageBoxA(g_hWnd, "Unable to launch Autoreport.exe!", "S4", 0x30u);
   }
-  return result;
 }
 
 
@@ -41068,7 +41065,7 @@ struct FilePaths::PathSplitResult __cdecl FilePaths::SplitPath(std::wstring cons
     if ( !CheckPathRoot(_swpPath, '\\') && !CheckPathRoot(_swpPath, '/') )
     {
       v5 = (std::wstring *)std::vector<std::wstring>::back();
-      std::wstring::operator=(&v12.m_swpOut, v5);
+      std::wstring::operator=(&v12.m_swpDirectoryName, v5);
       std::vector<std::wstring>::pop_back(&v12.m_vSplits);
     }
     FilePaths::PathSplitResult::PathSplitResult(a1, &v12);
