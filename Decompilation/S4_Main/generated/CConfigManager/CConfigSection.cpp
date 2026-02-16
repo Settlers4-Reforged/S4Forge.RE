@@ -1,3 +1,4 @@
+#if FALSE
 #include "CConfigSection.h"
 
 // Definitions for class CConfigSection
@@ -331,7 +332,7 @@ bool  CConfigSection::Save(wchar_t const * FileName) {
     switch ( v5 )
     {
       case 1:
-        v20 = ((int (__thiscall *)(CConfigVar *))v41->j_?GetIntValue@CConfigVar@@UBEHXZ)(v41);
+        v20 = ((int (__thiscall *)(CConfigVar *))v41->GetIntValue)(v41);
         v6 = (std::string *)std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,CConfigVar *>>>>::operator*((std::_Iterator_base12 *)v32);
         v7 = std::string::c_str(v6);
         sprintf(spFileContentBuffer, "    %s = %d\r\n", v7, v20);
@@ -360,7 +361,7 @@ bool  CConfigSection::Save(wchar_t const * FileName) {
         }
         break;
       case 3:
-        v19 = ((double (__thiscall *)(CConfigVar *))v41->j_?GetFloatValue@CConfigVar@@UBEMXZ)(v41);
+        v19 = ((double (__thiscall *)(CConfigVar *))v41->GetFloatValue)(v41);
         v13 = (std::string *)std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,CConfigVar *>>>>::operator*((std::_Iterator_base12 *)v32);
         v14 = std::string::c_str(v13);
         sprintf(spFileContentBuffer, "    %s = %f\r\n", v14, v19);
@@ -459,3 +460,4 @@ int  CConfigSection::NumberOfEntries(void) {
 }
 
 
+#endif // Already implemented

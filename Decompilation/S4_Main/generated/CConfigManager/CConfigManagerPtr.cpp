@@ -1,3 +1,4 @@
+#if FALSE
 #include "CConfigManagerPtr.h"
 
 // Definitions for class CConfigManagerPtr
@@ -38,7 +39,9 @@ void __cdecl CConfigManagerPtr::DeleteConfigManager(void) {
       __debugbreak();
     }
     if ( CConfigManagerPtr::m_pConfigManager )
-      (**(void (__thiscall ***)(int, int))CConfigManagerPtr::m_pConfigManager)(CConfigManagerPtr::m_pConfigManager, 1);
+      ((void (__thiscall *)(CConfigManager *, int))CConfigManagerPtr::m_pConfigManager->dtor)(
+        CConfigManagerPtr::m_pConfigManager,
+        1);
     CConfigManagerPtr::m_pConfigManager = 0;
   }
   CConfigManagerPtr::m_bWasDeleted = 1;
@@ -51,3 +54,4 @@ void __cdecl CConfigManagerPtr::DeleteConfigManager(void) {
 // address=[0x46851a8]
 // [Decompilation failed for static bool CConfigManagerPtr::m_bWasDeleted]
 
+#endif // Already implemented

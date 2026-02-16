@@ -6,7 +6,7 @@
 class CFileEx : public CFile, public IFileEx {
 public:
     // address=[0x135cb10]
-     CFileEx(void a2);
+     CFileEx(void);
 
     // address=[0x135d430]
     virtual  ~CFileEx(void);

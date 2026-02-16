@@ -21,7 +21,7 @@ public:
     virtual int  GetIntValue(char const * Str, char const * a3, int a4);
 
     // address=[0x2ef16d0]
-    virtual int  GetIntValueNoAdd(char const * Str, char const * a3, int a4);
+    virtual int  GetIntValueNoAdd(char const * _spSection, char const * _spVarName, int _iDefault);
 
     // address=[0x2ef17a0]
     virtual float  GetFloatValue(char const * Str, char const * a3, float a4);
@@ -70,19 +70,19 @@ protected:
     std::string  ParseFindSection(char * a1, int & a2, int const & a3);
 
     // address=[0x2ef0270]
-    void  ParseAddSectionVars(class CConfigSection * a2, char * pSection, int & a4, int const & a5);
+    void  ParseAddSectionVars(class CConfigSection * pSection, char * a4, int & a5, int const & a6);
 
     // address=[0x2ef07d0]
     std::string  ParseGetLine(char * a1, int & a2, int const & a3);
 
     // address=[0x2ef0960]
-    enum T_CFGVAR_TYPE  ParseGetVar(std::string & a1, std::string & a2, std::string & a3);
+    enum T_CFGVAR_TYPE  ParseGetVar(std::string & arg0, std::string & a2, std::string & arg8);
 
     // address=[0x2ef0ea0]
-    void  ParseGetArrayVars(std::string & a2, int * a3, int & a4, int & a5);
+    void  ParseGetArrayVars(std::string & a1, int * a3, int & a4, int & a5);
 
     // address=[0x2ef1010]
-    int  ParseGetDefineVar(std::string & a2);
+    int  ParseGetDefineVar(std::string & a1);
 
     // address=[0x2ef1090]
     void  AddDefineVar(std::string const & a1, int a2);

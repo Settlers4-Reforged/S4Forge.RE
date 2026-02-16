@@ -496,7 +496,7 @@ void  CGroupMgr::Save(class IS4Chunk & a2) {
   int j; // [esp+Ch] [ebp-8h]
   int i; // [esp+10h] [ebp-4h]
 
-  a2->SaveSignature(844624217);
+  a2->SaveSignature(0x3257F159);
   a2->SaveUnsigned32(1);
   a2->SaveUnsigned32(10);
   a2->SaveUnsigned32(100);
@@ -514,7 +514,7 @@ void  CGroupMgr::Save(class IS4Chunk & a2) {
       }
     }
   }
-  a2->SaveSignature(844624209);
+  a2->SaveSignature(0x3257F151);
 }
 
 

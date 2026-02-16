@@ -22,7 +22,7 @@ public:
 
     // Type information members
 public:
-    std::string m_sFileName;
+    std::wstring m_sFileName;
     char * m_pConfig;
     int m_iSize;
 

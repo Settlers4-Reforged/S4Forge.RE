@@ -1,3 +1,4 @@
+#if FALSE
 #include "IConfigManager.h"
 
 // Definitions for class IConfigManager
@@ -37,3 +38,4 @@ class IConfigManager * __cdecl IConfigManager::CreateConfigManger(void) {
 }
 
 
+#endif // Already implemented
