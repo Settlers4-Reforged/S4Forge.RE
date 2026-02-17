@@ -58,6 +58,8 @@ protected:
     // address=[0x2ef86a0]
     CConfigVar(bool _bIsStatic, enum T_CFGVAR_TYPE _eType, int _iSize);
 
+    friend class CConfigSection;
+
     // Type information members
 public:
     bool m_bIsStatic;

@@ -25,6 +25,8 @@ private:
     // address=[0x2ef8c50]
     virtual  ~CConfigVarInt(void);
 
+    friend class CConfigSection;
+
     // Type information members
 public:
     int value;

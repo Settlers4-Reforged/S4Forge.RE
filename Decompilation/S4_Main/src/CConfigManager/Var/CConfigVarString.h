@@ -22,6 +22,8 @@ private:
     // address=[0x2ef8c80]
     virtual  ~CConfigVarString(void);
 
+    friend class CConfigSection;
+
     // Type information members
 public:
     std::string value;
