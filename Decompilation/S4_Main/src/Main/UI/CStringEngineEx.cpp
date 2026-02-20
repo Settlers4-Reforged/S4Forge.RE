@@ -184,8 +184,7 @@ bool CStringEngineEx::ExtractStrings(char *sdTextFileData, int size, int _bFillE
   {
     for (i = readTxtIndex; i < STRINGID_MAX; ++i)
     {
-      this->m_swpTexts[i] = (wchar_t *)operator new[](1u);
-      *(_BYTE *)this->m_swpTexts[i] = 0;
+      this->m_swpTexts[i] = new char[1] {0};
     }
   }
   if (!v11 && BBSupportDbgReportF(2, "Main\\StringEngine.cpp", 230, "Invalid text dat file!") == 1)
@@ -200,7 +199,6 @@ bool CStringEngineEx::ImportFile(wchar_t const *FileName, int a3)
 
   int v4;                // [esp+0h] [ebp-B4h] BYREF
   int uReadBytes;        // [esp+18h] [ebp-9Ch]
-  wchar_t **v9;          // [esp+20h] [ebp-94h]
   char *pLangFileBuffer; // [esp+24h] [ebp-90h] MAPDST
   size_t uLangFileSize;  // [esp+2Ch] [ebp-88h]
   char Strings;          // [esp+31h] [ebp-83h] MAPDST
@@ -213,9 +211,8 @@ bool CStringEngineEx::ImportFile(wchar_t const *FileName, int a3)
   
   if (!this->m_swpTexts)
   {
-    v9 = (wchar_t **)operator new[](15348u); // 3837 entries
-    this->m_swpTexts = v9;
-    memset(this->m_swpTexts, 0, 15348u);
+    this->m_swpTexts = new char*[STRINGID_MAX];// 3837 entries;
+    memset(this->m_swpTexts, 0, STRINGID_MAX * sizeof(char *));
   }
   uLangFileSize = pFile.Size();
   pLangFileBuffer = new char[uLangFileSize];
@@ -261,7 +258,7 @@ void CStringEngineEx::CreateTextForEmptyStrings(void)
         snprintf(Src, 0x3FFu, "<%s>", StringName);
         Src[1023] = 0;
         v2 = strlen(Src);
-        this->m_swpTexts[i] = (wchar_t *)operator new[](v2 + 1);
+        this->m_swpTexts[i] = new char[v2 + 1];
         memcpy(this->m_swpTexts[i], Src, v2 + 1);
         ++v3;
       }

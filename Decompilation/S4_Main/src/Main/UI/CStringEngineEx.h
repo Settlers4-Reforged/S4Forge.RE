@@ -27,7 +27,7 @@ private:
 
     // Type information members
 public:
-    wchar_t ** m_swpTexts;
+    char ** m_swpTexts;
 
 };
 
