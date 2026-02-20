@@ -28,22 +28,9 @@ void  IFSNode::Orphan(class IFSNode * a2) {
 
 // address=[0x135cc00]
 // Decompiled from IFSNode *__thiscall IFSNode::IFSNode(IFSNode *this)
- IFSNode::IFSNode(void) {
-  
-  this->__vftable = (IFSNode_vtbl *)IFSNode::_vftable_;
-  return this;
-}
-
+ IFSNode::IFSNode(void) = default;
 
 // address=[0x135d4e0]
 // Decompiled from IFSNode *__thiscall IFSNode::~IFSNode(IFSNode *this)
- IFSNode::~IFSNode(void) {
-  
-  IFSNode *result; // eax
-
-  result = this;
-  *(_DWORD *)this = IFSNode::_vftable_;
-  return result;
-}
-
+ IFSNode::~IFSNode(void) = default;
 

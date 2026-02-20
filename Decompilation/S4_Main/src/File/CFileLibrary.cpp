@@ -22,6 +22,9 @@ namespace
   };
 }
 
+// int address=[0x12F5FC0]
+CFileLibrary *g_cFileLibrary = new CFileLibrary(4);
+
 // Definitions for class CFileLibrary
 
 // address=[0x2f099d0]

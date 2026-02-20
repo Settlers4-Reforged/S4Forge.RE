@@ -13,6 +13,12 @@ public:
 
     // address=[0x135e0c0]
     virtual void  Orphan(class IFSNode * a2);
+    
+    virtual std::string const &GetName(void) = 0;
+    
+    virtual int Size(void) const = 0;
+    
+    virtual void Accept(class IFSVisitor &a2) = 0;
 
 protected:
     // address=[0x135cc00]

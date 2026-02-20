@@ -72,13 +72,13 @@ protected:
     bool ParseData(char *a2, int a3);
 
     // address=[0x2eeffe0]
-    bool Parse(CConfigFile *a2, char const *String2);
+    bool Parse(class CConfigFile *a2, char const *String2);
 
     // address=[0x2ef0120]
     std::string ParseFindSection(char *a1, int &a2, int const &a3);
 
     // address=[0x2ef0270]
-    void ParseAddSectionVars(CConfigSection *a2, char *pSection, int &a4, int const &a5);
+    void ParseAddSectionVars(class CConfigSection *a2, char *pSection, int &a4, int const &a5);
 
     // address=[0x2ef07d0]
     std::string ParseGetLine(char *a1, int &a2, int const &a3);
@@ -96,12 +96,12 @@ protected:
     void AddDefineVar(std::string const &a1, int a2);
 
     // address=[0x2ef10c0]
-    CConfigSection *GetSection(std::string const &a2, bool a3);
+    class CConfigSection *GetSection(std::string const &a2, bool a3);
 
     // Type information members
 public:
     std::map<std::string, int> m_mSectionIdMap;
-    std::list<CConfigSection *> m_lSections;
+    std::list<class CConfigSection *> m_lSections;
 };
 
 #endif // CCONFIGMANAGER_H
