@@ -72,9 +72,9 @@ void  CVehicleInfoMgr::ReadXMLFile(void) {
   int v18; // [esp+0h] [ebp-594h] BYREF
   _BYTE v19[28]; // [esp+10h] [ebp-584h] BYREF
   _BYTE v20[16]; // [esp+2Ch] [ebp-568h] BYREF
-  _BYTE v21[16]; // [esp+3Ch] [ebp-558h] BYREF
+  _DWORD v21[4]; // [esp+3Ch] [ebp-558h] BYREF
   _BYTE v22[16]; // [esp+4Ch] [ebp-548h] BYREF
-  _BYTE v23[16]; // [esp+5Ch] [ebp-538h] BYREF
+  _DWORD v23[4]; // [esp+5Ch] [ebp-538h] BYREF
   _BYTE v24[16]; // [esp+6Ch] [ebp-528h] BYREF
   _BYTE v25[16]; // [esp+7Ch] [ebp-518h] BYREF
   int v26; // [esp+8Ch] [ebp-508h]
@@ -177,23 +177,23 @@ void  CVehicleInfoMgr::ReadXMLFile(void) {
   bool v125; // [esp+23Ah] [ebp-35Ah]
   bool v126; // [esp+23Bh] [ebp-359h]
   char *v127; // [esp+23Ch] [ebp-358h]
-  _BYTE v128[28]; // [esp+468h] [ebp-12Ch] BYREF
+  std::string v128; // [esp+468h] [ebp-12Ch] BYREF
   _BYTE v129[28]; // [esp+484h] [ebp-110h] BYREF
-  _BYTE v130[28]; // [esp+4A0h] [ebp-F4h] BYREF
-  _BYTE v131[28]; // [esp+4BCh] [ebp-D8h] BYREF
-  _BYTE v132[28]; // [esp+4D8h] [ebp-BCh] BYREF
-  _BYTE v133[28]; // [esp+4F4h] [ebp-A0h] BYREF
-  _BYTE v134[28]; // [esp+510h] [ebp-84h] BYREF
-  _BYTE v135[28]; // [esp+52Ch] [ebp-68h] BYREF
-  _BYTE v136[28]; // [esp+548h] [ebp-4Ch] BYREF
-  _BYTE v137[28]; // [esp+564h] [ebp-30h] BYREF
+  std::string v130; // [esp+4A0h] [ebp-F4h] BYREF
+  std::string v131; // [esp+4BCh] [ebp-D8h] BYREF
+  std::string v132; // [esp+4D8h] [ebp-BCh] BYREF
+  std::string v133; // [esp+4F4h] [ebp-A0h] BYREF
+  std::string v134; // [esp+510h] [ebp-84h] BYREF
+  std::string v135; // [esp+52Ch] [ebp-68h] BYREF
+  std::string v136; // [esp+548h] [ebp-4Ch] BYREF
+  std::string v137; // [esp+564h] [ebp-30h] BYREF
   int *v138; // [esp+584h] [ebp-10h]
   int v139; // [esp+590h] [ebp-4h]
 
   v138 = &v18;
   v31 = this;
   v104 = 0;
-  result = AdvXMLParser::Parser::OpenXMLFile(aGamedataVehicl, &v104);
+  result = (char *)AdvXMLParser::Parser::OpenXMLFile(aGamedataVehicl, &v104);
   v119 = result;
   if ( !result )
     return result;
@@ -202,7 +202,7 @@ void  CVehicleInfoMgr::ReadXMLFile(void) {
   v139 = 0;
   v37 = AdvXMLParser::Parser::Parser(v19);
   LOBYTE(v139) = 1;
-  v54 = AdvXMLParser::Parser::Parse((AdvXMLParser::Parser *)v19, v119, v104);
+  v54 = (struct Document *)AdvXMLParser::Parser::Parse((AdvXMLParser::Parser *)v19, v119, v104);
   v121 = v54;
   if ( !v54 )
   {
@@ -215,23 +215,23 @@ void  CVehicleInfoMgr::ReadXMLFile(void) {
   v51 = AdvXMLParser::NodeContainer::Begin(Root, v20);
   v50 = v51;
   LOBYTE(v139) = 2;
-  v35 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v51);
+  v35 = ((int (__stdcall *)(int))AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>)(v51);
   LOBYTE(v139) = 4;
   AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v20);
-  v49 = AdvXMLParser::NodeContainer::End(v105, v23);
+  v49 = (int)AdvXMLParser::NodeContainer::End((void *)v105, v23);
   v48 = v49;
   LOBYTE(v139) = 5;
-  v34 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v49);
+  v34 = ((int (__stdcall *)(int))AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>)(v49);
   LOBYTE(v139) = 7;
   AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v23);
-  while ( (unsigned __int8)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator<(v24) )
+  while ( (unsigned __int8)((_DWORD (__stdcall *)(_BYTE *))AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator<)(v24) )
   {
     v47 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v42);
-    v46 = AdvXMLParser::Element::operator[]("id");
+    v46 = ((int (__stdcall *)(const char *))AdvXMLParser::Element::operator[])("id");
     v106 = v46;
     v33 = (*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v46 + 8))(v46, v129);
     LOBYTE(v139) = 8;
-    ValueOfDefine = CDefineTranslator::GetValueOfDefine(v129);
+    ValueOfDefine = ((int (__stdcall *)(_BYTE *))CDefineTranslator::GetValueOfDefine)(v129);
     v120 = ValueOfDefine;
     if ( ValueOfDefine < 0 || v120 >= 5 )
     {
@@ -243,27 +243,27 @@ void  CVehicleInfoMgr::ReadXMLFile(void) {
     v101 = AdvXMLParser::NodeContainer::Begin(v102, v22);
     v100 = v101;
     LOBYTE(v139) = 9;
-    v32 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v101);
+    v32 = ((int (__stdcall *)(int))AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>)(v101);
     LOBYTE(v139) = 11;
     AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v22);
     v99 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v42);
-    v98 = AdvXMLParser::NodeContainer::End(v99, v21);
+    v98 = (int)AdvXMLParser::NodeContainer::End((void *)v99, v21);
     v97 = v98;
     LOBYTE(v139) = 12;
-    v36 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v98);
+    v36 = ((int (__stdcall *)(int))AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>)(v98);
     LOBYTE(v139) = 14;
     AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v21);
-    while ( (unsigned __int8)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator<(v25) )
+    while ( (unsigned __int8)((_DWORD (__stdcall *)(_BYTE *))AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator<)(v25) )
     {
       v96 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v116);
-      v95 = AdvXMLParser::Element::operator[]("id");
+      v95 = ((int (__stdcall *)(const char *))AdvXMLParser::Element::operator[])("id");
       v107 = v95;
-      v30 = (*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v95 + 8))(v95, v128);
+      v30 = (*(int (__thiscall **)(int, std::string *))(*(_DWORD *)v95 + 8))(v95, &v128);
       LOBYTE(v139) = 15;
       Instance = CConfigManagerPtr::GetInstance();
       v108 = Instance;
-      v2 = std::string::c_str(v128);
-      v93 = ((int (__thiscall *)(CConfigManager *, int))v108->?)(v108, v2);
+      v2 = (int)std::string::c_str(&v128);
+      v93 = v108->GetDefineValue(v108, (char *)v2);
       v122 = v93;
       if ( v93 <= 0 || v122 >= 6 )
       {
@@ -285,13 +285,13 @@ void  CVehicleInfoMgr::ReadXMLFile(void) {
           __debugbreak();
       }
       v90 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v116);
-      v89 = AdvXMLParser::Element::operator()("Boards", 0);
+      v89 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("Boards", 0);
       v109 = v89;
-      v29 = (*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v89 + 8))(v89, v133);
+      v29 = (*(int (__thiscall **)(int, std::string *))(*(_DWORD *)v89 + 8))(v89, &v133);
       LOBYTE(v139) = 16;
-      if ( std::string::length(v133) )
+      if ( std::string::length(&v133) )
       {
-        v3 = (const char *)std::string::c_str(v133);
+        v3 = std::string::c_str(&v133);
         v4 = j__atoi(v3);
         *(_DWORD *)v127 = v4;
         if ( *(_DWORD *)v127 > 0x10u )
@@ -302,15 +302,15 @@ void  CVehicleInfoMgr::ReadXMLFile(void) {
         }
       }
       LOBYTE(v139) = 15;
-      std::string::~string(v133);
+      std::string::~string(&v133);
       v87 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v116);
-      v86 = AdvXMLParser::Element::operator()("Ironbars", 0);
+      v86 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("Ironbars", 0);
       v110 = v86;
-      v28 = (*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v86 + 8))(v86, v134);
+      v28 = (*(int (__thiscall **)(int, std::string *))(*(_DWORD *)v86 + 8))(v86, &v134);
       LOBYTE(v139) = 17;
-      if ( std::string::length(v134) )
+      if ( std::string::length(&v134) )
       {
-        v5 = (const char *)std::string::c_str(v134);
+        v5 = std::string::c_str(&v134);
         v6 = j__atoi(v5);
         *((_DWORD *)v127 + 1) = v6;
         if ( *((_DWORD *)v127 + 1) > 0x10u )
@@ -321,7 +321,7 @@ void  CVehicleInfoMgr::ReadXMLFile(void) {
         }
       }
       LOBYTE(v139) = 15;
-      std::string::~string(v134);
+      std::string::~string(&v134);
       if ( !(*((_DWORD *)v127 + 1) + *(_DWORD *)v127) )
       {
         v84 = BBSupportDbgReport(
@@ -333,13 +333,13 @@ void  CVehicleInfoMgr::ReadXMLFile(void) {
           __debugbreak();
       }
       v83 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v116);
-      v82 = AdvXMLParser::Element::operator()("Hitpoints", 0);
+      v82 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("Hitpoints", 0);
       v103 = v82;
-      v27 = (*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v82 + 8))(v82, v135);
+      v27 = (*(int (__thiscall **)(int, std::string *))(*(_DWORD *)v82 + 8))(v82, &v135);
       LOBYTE(v139) = 18;
-      if ( std::string::length(v135) )
+      if ( std::string::length(&v135) )
       {
-        v7 = (const char *)std::string::c_str(v135);
+        v7 = std::string::c_str(&v135);
         v8 = j__atoi(v7);
         *((_DWORD *)v127 + 12) = v8 / 2;
         if ( !*((_DWORD *)v127 + 12) )
@@ -356,15 +356,15 @@ void  CVehicleInfoMgr::ReadXMLFile(void) {
         }
       }
       LOBYTE(v139) = 15;
-      std::string::~string(v135);
+      std::string::~string(&v135);
       v79 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v116);
-      v78 = AdvXMLParser::Element::operator()("Armor", 0);
+      v78 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("Armor", 0);
       v115 = v78;
-      v26 = (*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v78 + 8))(v78, v136);
+      v26 = (*(int (__thiscall **)(int, std::string *))(*(_DWORD *)v78 + 8))(v78, &v136);
       LOBYTE(v139) = 19;
-      if ( std::string::length(v136) )
+      if ( std::string::length(&v136) )
       {
-        v9 = (const char *)std::string::c_str(v136);
+        v9 = std::string::c_str(&v136);
         v10 = j__atoi(v9);
         *((_DWORD *)v127 + 13) = v10;
         if ( *((_DWORD *)v127 + 13) >= 0x100u )
@@ -375,15 +375,15 @@ void  CVehicleInfoMgr::ReadXMLFile(void) {
         }
       }
       LOBYTE(v139) = 15;
-      std::string::~string(v136);
+      std::string::~string(&v136);
       v76 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v116);
-      v75 = AdvXMLParser::Element::operator()("Damage", 0);
+      v75 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("Damage", 0);
       v114 = v75;
-      v41 = (*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v75 + 8))(v75, v137);
+      v41 = (*(int (__thiscall **)(int, std::string *))(*(_DWORD *)v75 + 8))(v75, &v137);
       LOBYTE(v139) = 20;
-      if ( std::string::length(v137) )
+      if ( std::string::length(&v137) )
       {
-        v11 = (const char *)std::string::c_str(v137);
+        v11 = std::string::c_str(&v137);
         v12 = j__atoi(v11);
         *((_DWORD *)v127 + 14) = v12;
         if ( v126 )
@@ -409,15 +409,15 @@ void  CVehicleInfoMgr::ReadXMLFile(void) {
         }
       }
       LOBYTE(v139) = 15;
-      std::string::~string(v137);
+      std::string::~string(&v137);
       v71 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v116);
-      v70 = AdvXMLParser::Element::operator()("ReadyToFireDelay", 0);
+      v70 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("ReadyToFireDelay", 0);
       v113 = v70;
-      v40 = (*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v70 + 8))(v70, v130);
+      v40 = (*(int (__thiscall **)(int, std::string *))(*(_DWORD *)v70 + 8))(v70, &v130);
       LOBYTE(v139) = 21;
-      if ( std::string::length(v130) )
+      if ( std::string::length(&v130) )
       {
-        v13 = (const char *)std::string::c_str(v130);
+        v13 = std::string::c_str(&v130);
         v14 = j__atoi(v13);
         *((_DWORD *)v127 + 19) = v14;
         if ( v126 )
@@ -447,15 +447,15 @@ void  CVehicleInfoMgr::ReadXMLFile(void) {
         }
       }
       LOBYTE(v139) = 15;
-      std::string::~string(v130);
+      std::string::~string(&v130);
       v66 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v116);
-      v65 = AdvXMLParser::Element::operator()("MaxAmmo", 0);
+      v65 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("MaxAmmo", 0);
       v112 = v65;
-      v39 = (*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v65 + 8))(v65, v131);
+      v39 = (*(int (__thiscall **)(int, std::string *))(*(_DWORD *)v65 + 8))(v65, &v131);
       LOBYTE(v139) = 22;
-      if ( std::string::length(v131) )
+      if ( std::string::length(&v131) )
       {
-        v15 = (const char *)std::string::c_str(v131);
+        v15 = std::string::c_str(&v131);
         v16 = j__atoi(v15);
         *((_DWORD *)v127 + 21) = v16;
         if ( v126 )
@@ -481,15 +481,15 @@ void  CVehicleInfoMgr::ReadXMLFile(void) {
         }
       }
       LOBYTE(v139) = 15;
-      std::string::~string(v131);
+      std::string::~string(&v131);
       v61 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v116);
-      v60 = AdvXMLParser::Element::operator()("WalkSteps", 0);
+      v60 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("WalkSteps", 0);
       v111 = v60;
-      v38 = (*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v60 + 8))(v60, v132);
+      v38 = (*(int (__thiscall **)(int, std::string *))(*(_DWORD *)v60 + 8))(v60, &v132);
       LOBYTE(v139) = 23;
-      if ( std::string::length(v132) )
+      if ( std::string::length(&v132) )
       {
-        v17 = (const char *)std::string::c_str(v132);
+        v17 = std::string::c_str(&v132);
         v117 = j__atoi(v17);
         if ( v117 <= 0 )
         {
@@ -506,9 +506,9 @@ void  CVehicleInfoMgr::ReadXMLFile(void) {
         *((_DWORD *)v127 + 11) = v117;
       }
       LOBYTE(v139) = 15;
-      std::string::~string(v132);
+      std::string::~string(&v132);
       LOBYTE(v139) = 14;
-      std::string::~string(v128);
+      std::string::~string(&v128);
       AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator++(v116);
     }
     LOBYTE(v139) = 11;

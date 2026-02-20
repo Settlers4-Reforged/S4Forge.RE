@@ -555,8 +555,8 @@ void  CSettlerMgr::LoadInfo(bool isMP) {
   void *C; // [esp+1D0h] [ebp-5C4h]
   int v65; // [esp+1D4h] [ebp-5C0h]
   int iAnimList; // [esp+1D8h] [ebp-5BCh] MAPDST
-  void *v68; // [esp+1E0h] [ebp-5B4h]
-  void *v69; // [esp+1E4h] [ebp-5B0h]
+  std::string *v68; // [esp+1E0h] [ebp-5B4h]
+  std::string *v69; // [esp+1E4h] [ebp-5B0h]
   int v70; // [esp+1E8h] [ebp-5ACh]
   _DWORD *v71; // [esp+1ECh] [ebp-5A8h]
   _DWORD *v72; // [esp+1F0h] [ebp-5A4h]
@@ -568,8 +568,8 @@ void  CSettlerMgr::LoadInfo(bool isMP) {
   AdvXMLParser::Element *v78; // [esp+208h] [ebp-58Ch]
   char *SearchData; // [esp+20Ch] [ebp-588h]
   int v80; // [esp+210h] [ebp-584h]
-  void *v81; // [esp+214h] [ebp-580h]
-  void *v82; // [esp+218h] [ebp-57Ch]
+  std::string *v81; // [esp+214h] [ebp-580h]
+  std::string *v82; // [esp+218h] [ebp-57Ch]
   int v83; // [esp+21Ch] [ebp-578h]
   _DWORD *v84; // [esp+220h] [ebp-574h]
   _DWORD *v85; // [esp+224h] [ebp-570h]
@@ -579,36 +579,36 @@ void  CSettlerMgr::LoadInfo(bool isMP) {
   _DWORD *v89; // [esp+234h] [ebp-560h]
   const struct AdvXMLParser::Element *v90; // [esp+238h] [ebp-55Ch]
   AdvXMLParser::Element *v91; // [esp+23Ch] [ebp-558h]
-  void *v92; // [esp+240h] [ebp-554h]
+  std::string *v92; // [esp+240h] [ebp-554h]
   const struct AdvXMLParser::Element *v93; // [esp+244h] [ebp-550h]
   AdvXMLParser::Element *v94; // [esp+248h] [ebp-54Ch]
   int v95; // [esp+24Ch] [ebp-548h]
   int v96; // [esp+250h] [ebp-544h]
-  void *v97; // [esp+254h] [ebp-540h]
-  void *v98; // [esp+258h] [ebp-53Ch]
+  std::string *v97; // [esp+254h] [ebp-540h]
+  std::string *v98; // [esp+258h] [ebp-53Ch]
   const struct AdvXMLParser::Element *v100; // [esp+260h] [ebp-534h]
   AdvXMLParser::Element *v101; // [esp+264h] [ebp-530h]
   int v102; // [esp+268h] [ebp-52Ch]
-  void *v103; // [esp+26Ch] [ebp-528h]
-  void *v104; // [esp+270h] [ebp-524h]
+  std::string *v103; // [esp+26Ch] [ebp-528h]
+  std::string *v104; // [esp+270h] [ebp-524h]
   const struct AdvXMLParser::Element *v105; // [esp+274h] [ebp-520h]
   AdvXMLParser::Element *v106; // [esp+278h] [ebp-51Ch]
-  void *v107; // [esp+27Ch] [ebp-518h]
+  std::string *v107; // [esp+27Ch] [ebp-518h]
   const struct AdvXMLParser::Element *v108; // [esp+280h] [ebp-514h]
   AdvXMLParser::Element *v109; // [esp+284h] [ebp-510h]
-  void *v110; // [esp+288h] [ebp-50Ch]
+  std::string *v110; // [esp+288h] [ebp-50Ch]
   const struct AdvXMLParser::Element *v111; // [esp+28Ch] [ebp-508h]
   AdvXMLParser::Element *v112; // [esp+290h] [ebp-504h]
-  void *v113; // [esp+294h] [ebp-500h]
+  std::string *v113; // [esp+294h] [ebp-500h]
   const struct AdvXMLParser::Element *v114; // [esp+298h] [ebp-4FCh]
   AdvXMLParser::Element *v115; // [esp+29Ch] [ebp-4F8h]
-  void *v116; // [esp+2A0h] [ebp-4F4h]
+  std::string *v116; // [esp+2A0h] [ebp-4F4h]
   const struct AdvXMLParser::Element *v117; // [esp+2A4h] [ebp-4F0h]
   AdvXMLParser::Element *v118; // [esp+2A8h] [ebp-4ECh]
-  void *v119; // [esp+2ACh] [ebp-4E8h]
+  std::string *v119; // [esp+2ACh] [ebp-4E8h]
   const struct AdvXMLParser::Element *v120; // [esp+2B0h] [ebp-4E4h]
   AdvXMLParser::Element *v121; // [esp+2B4h] [ebp-4E0h]
-  void *v122; // [esp+2B8h] [ebp-4DCh]
+  std::string *v122; // [esp+2B8h] [ebp-4DCh]
   const struct AdvXMLParser::Element *v123; // [esp+2BCh] [ebp-4D8h]
   AdvXMLParser::Element *v124; // [esp+2C0h] [ebp-4D4h]
   int v125; // [esp+2C4h] [ebp-4D0h]
@@ -661,11 +661,11 @@ void  CSettlerMgr::LoadInfo(bool isMP) {
   _BYTE v182[28]; // [esp+684h] [ebp-110h] BYREF
   _BYTE v183[28]; // [esp+6A0h] [ebp-F4h] BYREF
   _BYTE v184[28]; // [esp+6BCh] [ebp-D8h] BYREF
-  _BYTE v185[28]; // [esp+6D8h] [ebp-BCh] BYREF
-  _BYTE v186[28]; // [esp+6F4h] [ebp-A0h] BYREF
-  _BYTE v187[28]; // [esp+710h] [ebp-84h] BYREF
-  _BYTE v188[28]; // [esp+72Ch] [ebp-68h] BYREF
-  char v189[28]; // [esp+748h] [ebp-4Ch] BYREF
+  struct std::string v185; // [esp+6D8h] [ebp-BCh] BYREF
+  std::string v186; // [esp+6F4h] [ebp-A0h] BYREF
+  struct std::string v187; // [esp+710h] [ebp-84h] BYREF
+  struct std::string v188; // [esp+72Ch] [ebp-68h] BYREF
+  struct std::string v189; // [esp+748h] [ebp-4Ch] BYREF
   char v190[28]; // [esp+764h] [ebp-30h] BYREF
   int *v191; // [esp+784h] [ebp-10h]
   int v192; // [esp+790h] [ebp-4h]
@@ -708,11 +708,11 @@ void  CSettlerMgr::LoadInfo(bool isMP) {
         v55 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v43);
         v54 = AdvXMLParser::Element::operator[](v55, "id");
         v133 = v54;
-        v36[7] = (*(int (__thiscall **)(const struct AdvXMLParser::Attribute *, _BYTE *))(*(_DWORD *)v54 + 8))(
+        v36[7] = (*(int (__thiscall **)(const struct AdvXMLParser::Attribute *, struct std::string *))(*(_DWORD *)v54 + 8))(
                    v54,
-                   v187);
+                   &v187);
         LOBYTE(v192) = 9;
-        ValueOfDefine = CDefineTranslator::GetValueOfDefine(defineTranslator, (struct std::string *)v187);
+        ValueOfDefine = CDefineTranslator::GetValueOfDefine(defineTranslator, &v187);
         tribeId = ValueOfDefine;
         v52 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v43);
         v51 = (_DWORD *)AdvXMLParser::NodeContainer::Begin(v52, v30);
@@ -735,13 +735,13 @@ void  CSettlerMgr::LoadInfo(bool isMP) {
           v45 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v163);
           v44 = AdvXMLParser::Element::operator[](v45, "id");
           v134 = v44;
-          v36[20] = (*(int (__thiscall **)(const struct AdvXMLParser::Attribute *, _BYTE *))(*(_DWORD *)v44 + 8))(
+          v36[20] = (*(int (__thiscall **)(const struct AdvXMLParser::Attribute *, std::string *))(*(_DWORD *)v44 + 8))(
                       v44,
-                      v186);
+                      &v186);
           LOBYTE(v192) = 16;
           configManager = CConfigManagerPtr::GetInstance();
-          v3 = std::string::c_str(v186);
-          settlerInfoId = ((int (__thiscall *)(CConfigManager *, int))configManager->?)(configManager, v3);
+          v3 = (int)std::string::c_str(&v186);
+          settlerInfoId = configManager->GetDefineValue(configManager, (char *)v3);
           if ( settlerInfoId == -1 )
           {
             v129 = BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 1791, "index != -1");
@@ -752,87 +752,87 @@ void  CSettlerMgr::LoadInfo(bool isMP) {
           v127 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v163);
           v126 = AdvXMLParser::Element::operator()(v127, "role", 0);
           v138 = v126;
-          v36[19] = (*(int (__thiscall **)(const struct AdvXMLParser::Element *, _BYTE *))(*(_DWORD *)v126 + 8))(
+          v36[19] = (*(int (__thiscall **)(const struct AdvXMLParser::Element *, struct std::string *))(*(_DWORD *)v126 + 8))(
                       v126,
-                      v185);
+                      &v185);
           LOBYTE(v192) = 17;
-          v125 = CDefineTranslator::GetValueOfDefine(defineTranslator, (struct std::string *)v185);
+          v125 = CDefineTranslator::GetValueOfDefine(defineTranslator, &v185);
           settlerInfo->m_uRole = v125;
           v124 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v163);
           v123 = AdvXMLParser::Element::operator()(v124, "speed", 0);
           v139 = v123;
-          v122 = (void *)(*(int (__thiscall **)(const struct AdvXMLParser::Element *, _BYTE *))(*(_DWORD *)v123 + 8))(
-                           v123,
-                           v174);
-          v4 = (const char *)std::string::c_str(v122);
+          v122 = (std::string *)(*(int (__thiscall **)(const struct AdvXMLParser::Element *, _BYTE *))(*(_DWORD *)v123 + 8))(
+                                  v123,
+                                  v174);
+          v4 = std::string::c_str(v122);
           v5 = j__atoi(v4);
           settlerInfo->m_bSpeed = v5;
           std::string::~string(v174);
           v121 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v163);
           v120 = AdvXMLParser::Element::operator()(v121, "health", 0);
           v140 = v120;
-          v119 = (void *)(*(int (__thiscall **)(const struct AdvXMLParser::Element *, _BYTE *))(*(_DWORD *)v120 + 8))(
-                           v120,
-                           v175);
-          v6 = (const char *)std::string::c_str(v119);
+          v119 = (std::string *)(*(int (__thiscall **)(const struct AdvXMLParser::Element *, _BYTE *))(*(_DWORD *)v120 + 8))(
+                                  v120,
+                                  v175);
+          v6 = std::string::c_str(v119);
           v7 = j__atoi(v6);
           settlerInfo->m_bHealth = v7;
           std::string::~string(v175);
           v118 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v163);
           v117 = AdvXMLParser::Element::operator()(v118, "armor", 0);
           v141 = v117;
-          v116 = (void *)(*(int (__thiscall **)(const struct AdvXMLParser::Element *, _BYTE *))(*(_DWORD *)v117 + 8))(
-                           v117,
-                           v176);
-          v8 = (const char *)std::string::c_str(v116);
+          v116 = (std::string *)(*(int (__thiscall **)(const struct AdvXMLParser::Element *, _BYTE *))(*(_DWORD *)v117 + 8))(
+                                  v117,
+                                  v176);
+          v8 = std::string::c_str(v116);
           v9 = j__atoi(v8);
           settlerInfo->m_bArmor = v9;
           std::string::~string(v176);
           v115 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v163);
           v114 = AdvXMLParser::Element::operator()(v115, "damage", 0);
           v142 = v114;
-          v113 = (void *)(*(int (__thiscall **)(const struct AdvXMLParser::Element *, _BYTE *))(*(_DWORD *)v114 + 8))(
-                           v114,
-                           v184);
-          v10 = (const char *)std::string::c_str(v113);
+          v113 = (std::string *)(*(int (__thiscall **)(const struct AdvXMLParser::Element *, _BYTE *))(*(_DWORD *)v114 + 8))(
+                                  v114,
+                                  v184);
+          v10 = std::string::c_str(v113);
           v11 = j__atoi(v10);
           settlerInfo->m_bDamage = v11;
           std::string::~string(v184);
           v112 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v163);
           v111 = AdvXMLParser::Element::operator()(v112, "damage2", 0);
           v143 = v111;
-          v110 = (void *)(*(int (__thiscall **)(const struct AdvXMLParser::Element *, _BYTE *))(*(_DWORD *)v111 + 8))(
-                           v111,
-                           v177);
-          v12 = (const char *)std::string::c_str(v110);
+          v110 = (std::string *)(*(int (__thiscall **)(const struct AdvXMLParser::Element *, _BYTE *))(*(_DWORD *)v111 + 8))(
+                                  v111,
+                                  v177);
+          v12 = std::string::c_str(v110);
           v13 = j__atoi(v12);
           settlerInfo->m_bDamage2 = v13;
           std::string::~string(v177);
           v109 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v163);
           v108 = AdvXMLParser::Element::operator()(v109, "damage3", 0);
           v144 = v108;
-          v107 = (void *)(*(int (__thiscall **)(const struct AdvXMLParser::Element *, _BYTE *))(*(_DWORD *)v108 + 8))(
-                           v108,
-                           v178);
-          v14 = (const char *)std::string::c_str(v107);
+          v107 = (std::string *)(*(int (__thiscall **)(const struct AdvXMLParser::Element *, _BYTE *))(*(_DWORD *)v108 + 8))(
+                                  v108,
+                                  v178);
+          v14 = std::string::c_str(v107);
           v15 = j__atoi(v14);
           settlerInfo->m_bDamage3 = v15;
           std::string::~string(v178);
           v106 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v163);
           v105 = AdvXMLParser::Element::operator()(v106, "other", 0);
           v145 = v105;
-          v104 = (void *)(*(int (__thiscall **)(const struct AdvXMLParser::Element *, _BYTE *))(*(_DWORD *)v105 + 8))(
-                           v105,
-                           v179);
+          v104 = (std::string *)(*(int (__thiscall **)(const struct AdvXMLParser::Element *, _BYTE *))(*(_DWORD *)v105 + 8))(
+                                  v105,
+                                  v179);
           v103 = v104;
           LOBYTE(v192) = 18;
-          v16 = (char *)std::string::c_str(v104);
-          v36[11] = std::string::string((struct std::string *)v188, v16);
+          v16 = std::string::c_str(v104);
+          v36[11] = std::string::string(&v188, v16);
           LOBYTE(v192) = 19;
-          v102 = CDefineTranslator::GetValueOfDefine(defineTranslator, (struct std::string *)v188);
+          v102 = CDefineTranslator::GetValueOfDefine(defineTranslator, &v188);
           settlerInfo->m_uOther = v102;
           LOBYTE(v192) = 18;
-          std::string::~string(v188);
+          std::string::~string(&v188);
           LOBYTE(v192) = 17;
           std::string::~string(v179);
           v101 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v163);
@@ -840,13 +840,13 @@ void  CSettlerMgr::LoadInfo(bool isMP) {
           v146 = v100;
           configManager = CConfigManagerPtr::GetInstance();
           v152 = configManager;
-          v98 = (void *)(*(int (__thiscall **)(const struct AdvXMLParser::Element *, _BYTE *))(*(_DWORD *)v146 + 8))(
-                          v146,
-                          v180);
+          v98 = (std::string *)(*(int (__thiscall **)(const struct AdvXMLParser::Element *, _BYTE *))(*(_DWORD *)v146 + 8))(
+                                 v146,
+                                 v180);
           v97 = v98;
           LOBYTE(v192) = 20;
-          v17 = std::string::c_str(v98);
-          v96 = ((int (__thiscall *)(CConfigManager *, int))v152->?)(v152, v17);
+          v17 = (int)std::string::c_str(v98);
+          v96 = v152->GetDefineValue(v152, (char *)v17);
           settlerInfo->m_uTool = v96;
           LOBYTE(v192) = 17;
           std::string::~string(v180);
@@ -859,10 +859,10 @@ void  CSettlerMgr::LoadInfo(bool isMP) {
           v94 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v163);
           v93 = AdvXMLParser::Element::operator()(v94, "misc", 0);
           v137 = v93;
-          v92 = (void *)(*(int (__thiscall **)(const struct AdvXMLParser::Element *, _BYTE *))(*(_DWORD *)v93 + 8))(
-                          v93,
-                          v181);
-          v18 = (const char *)std::string::c_str(v92);
+          v92 = (std::string *)(*(int (__thiscall **)(const struct AdvXMLParser::Element *, _BYTE *))(*(_DWORD *)v93 + 8))(
+                                 v93,
+                                 v181);
+          v18 = std::string::c_str(v92);
           v19 = j__atoi(v18);
           settlerInfo->m_bMisc = v19;
           std::string::~string(v181);
@@ -886,14 +886,14 @@ void  CSettlerMgr::LoadInfo(bool isMP) {
           {
             v83 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v37);
             v159 = v83;
-            v82 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v83 + 8))(v83, v182);
+            v82 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v83 + 8))(v83, v182);
             v81 = v82;
             LOBYTE(v192) = 27;
-            v20 = (char *)std::string::c_str(v82);
-            v36[15] = std::string::string((struct std::string *)v189, v20);
+            v20 = std::string::c_str(v82);
+            v36[15] = std::string::string(&v189, v20);
             LOBYTE(v192) = 29;
             std::string::~string(v182);
-            v80 = CDefineTranslator::GetValueOfDefine(defineTranslator, (struct std::string *)v189);
+            v80 = CDefineTranslator::GetValueOfDefine(defineTranslator, &v189);
             v158 = v80;
             SearchData = CSearchRoutines::GetSearchData(v80);
             v39 = *(_DWORD *)SearchData;
@@ -905,9 +905,9 @@ void  CSettlerMgr::LoadInfo(bool isMP) {
             v149 = v41;
             v150 = v42;
             v151 = 0;
-            std::vector<CSettlerMgr::SSearchInfos>::push_back(&v147);
+            std::vector<CSettlerMgr::SSearchInfos>::push_back((int)&v147);
             LOBYTE(v192) = 26;
-            std::string::~string(v189);
+            std::string::~string(&v189);
             AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator++(v37);
           }
           v78 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v163);
@@ -930,16 +930,16 @@ void  CSettlerMgr::LoadInfo(bool isMP) {
           {
             v70 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v38);
             v157 = v70;
-            v69 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v70 + 8))(v70, v183);
+            v69 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v70 + 8))(v70, v183);
             v68 = v69;
             LOBYTE(v192) = 36;
-            v21 = (char *)std::string::c_str(v69);
+            v21 = std::string::c_str(v69);
             v36[12] = std::string::string((struct std::string *)v190, v21);
             LOBYTE(v192) = 38;
             std::string::~string(v183);
             configManager = CConfigManagerPtr::GetInstance();
-            v22 = std::string::c_str(v190);
-            iAnimList = ((int (__thiscall *)(CConfigManager *, int))configManager->?)(configManager, v22);
+            v22 = (int)std::string::c_str((std::string *)v190);
+            iAnimList = configManager->GetDefineValue(configManager, (char *)v22);
             if ( iAnimList == -1 )
             {
               v65 = BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 1842, "iAnimList != -1");
@@ -947,7 +947,7 @@ void  CSettlerMgr::LoadInfo(bool isMP) {
                 __debugbreak();
             }
             v162 = iAnimList;
-            std::vector<unsigned short>::push_back(&v162);
+            ((void (__stdcall *)(__int16 *))std::vector<unsigned short>::push_back)(&v162);
             LOBYTE(v192) = 35;
             std::string::~string(v190);
             AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator++(v38);
@@ -961,9 +961,9 @@ void  CSettlerMgr::LoadInfo(bool isMP) {
           LOBYTE(v192) = 17;
           AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>((CDaoIndexFieldInfo *)v37);
           LOBYTE(v192) = 16;
-          std::string::~string(v185);
+          std::string::~string(&v185);
           LOBYTE(v192) = 15;
-          std::string::~string(v186);
+          std::string::~string(&v186);
           AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator++(v163);
         }
         LOBYTE(v192) = 12;
@@ -971,7 +971,7 @@ void  CSettlerMgr::LoadInfo(bool isMP) {
         LOBYTE(v192) = 9;
         AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>((CDaoIndexFieldInfo *)v163);
         LOBYTE(v192) = 8;
-        std::string::~string(v187);
+        std::string::~string(&v187);
         AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator++(v43);
       }
       LOBYTE(v192) = 5;

@@ -6,7 +6,7 @@
 class CFileEx : public CFile, public IFileEx {
 public:
     // address=[0x135cb10]
-     CFileEx(void);
+     CFileEx(void a2);
 
     // address=[0x135d430]
     virtual  ~CFileEx(void);
@@ -24,7 +24,7 @@ public:
     virtual void  Open(std::wstring const & a2, unsigned int a3, bool a4, char * a5, int a6);
 
     // address=[0x2f01950]
-    virtual void  Open(wchar_t const * FileName, unsigned int a3, bool a4, char * Str, int a6);
+    virtual void  Open(wchar_t const * FileName, unsigned int _uFileMask, bool a4, char * Str, int a6);
 
     // address=[0x2f01ad0]
     virtual int  MapFile(wchar_t const * lpFileName, char * a3, int a4);
@@ -49,6 +49,20 @@ public:
 
     // address=[0x2f02220]
     virtual void  Release(void);
+
+    // Type information members
+public:
+    CFile CFile;
+    vbtable * m_pVbtable;
+    int m_uReadOffset;
+    bool m_bFileLibraryHandled;
+    bool m_bMemoryMapped;
+    int m_uFileLibraryHandle;
+    int m_uSize;
+    int m_hFileMemoryHandle;
+    char * m_pFileMemoryMap;
+    int m_uU64;
+    IFileEx IFileEx;
 
 };
 

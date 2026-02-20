@@ -31,7 +31,7 @@ void  IFSNode::Orphan(class IFSNode * a2) {
 // Decompiled from IFSNode *__thiscall IFSNode::IFSNode(IFSNode *this)
  IFSNode::IFSNode(void) {
   
-  this->__vftable = (IFSNode_vtbl *)IFSNode::_vftable_;
+  this->__vftable = (IFSNode_vtbl *)&IFSNode::_vftable_;
   return this;
 }
 

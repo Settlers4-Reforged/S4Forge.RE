@@ -7,7 +7,7 @@
 // Decompiled from CStaticConfigVarInt *__thiscall CStaticConfigVarInt::CStaticConfigVarInt(  CStaticConfigVarInt *this,  const char *a2,  const char *a3,  int a4)
  CStaticConfigVarInt::CStaticConfigVarInt(char const * a2, char const * a3, int a4) {
   
-  CStaticConfigVar::CStaticConfigVar(this, (int)a2, (int)a3, 1, 1);
+  CStaticConfigVar::CStaticConfigVar(this, (int)a2, (int)a3, CONFIGVAR_TYPE_INT, 1);
   this->__vftable = (CConfigVar_vtbl *)&CStaticConfigVarInt::_vftable_;
   this->value = a4;
   return this;

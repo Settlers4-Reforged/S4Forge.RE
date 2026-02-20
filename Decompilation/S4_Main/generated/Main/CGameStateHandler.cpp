@@ -9,8 +9,8 @@ bool __cdecl CGameStateHandler::Init(void) {
   int v1; // [esp+4h] [ebp-128h]
   int v2; // [esp+Ch] [ebp-120h]
   int v3; // [esp+1Ch] [ebp-110h]
-  void *v4; // [esp+20h] [ebp-10Ch]
-  void *v5; // [esp+28h] [ebp-104h]
+  std::string *v4; // [esp+20h] [ebp-10Ch]
+  struct std::string *v5; // [esp+28h] [ebp-104h]
   CGameType *v6; // [esp+38h] [ebp-F4h]
   INetworkEngine *v7; // [esp+3Ch] [ebp-F0h]
   INetworkEngine *v8; // [esp+40h] [ebp-ECh]
@@ -23,8 +23,8 @@ bool __cdecl CGameStateHandler::Init(void) {
   _BYTE v15[28]; // [esp+90h] [ebp-9Ch] BYREF
   _BYTE v16[28]; // [esp+ACh] [ebp-80h] BYREF
   _BYTE v17[28]; // [esp+C8h] [ebp-64h] BYREF
-  _BYTE nettestDefault[28]; // [esp+E4h] [ebp-48h] BYREF
-  _BYTE v19[28]; // [esp+100h] [ebp-2Ch] BYREF
+  std::string nettestDefault; // [esp+E4h] [ebp-48h] BYREF
+  std::string v19; // [esp+100h] [ebp-2Ch] BYREF
   int v20; // [esp+128h] [ebp-4h]
 
   std::list<SStateCommand>::clear(&CGameStateHandler::m_listQueuedStates);
@@ -32,39 +32,25 @@ bool __cdecl CGameStateHandler::Init(void) {
   if ( !g_pEvnEngine && BBSupportDbgReport(2, "Main\\GameStateHandler.cpp", 487, "g_pEvnEngine") == 1 )
     __debugbreak();
   CGameStateHandler::InitStringEngine();
-  std::string::string(nettestDefault, "none");
+  std::string::string(&nettestDefault, "none");
   v20 = 0;
-  v2 = ((int (__thiscall *)(CConfigManager *, _BYTE *, const char *, const char *, _BYTE *))g_pCfgMgr->?)(
-         g_pCfgMgr,
-         v16,
-         "COMMANDLINE",
-         "nettest",
-         nettestDefault);
+  v2 = g_pCfgMgr->GetStringValue(g_pCfgMgr, (std::string *)v16, "COMMANDLINE", "nettest", &nettestDefault);
   LOBYTE(v20) = 1;
   std::operator==<char>(v2, "host");
   LOBYTE(v20) = 0;
   std::string::~string(v16);
   v20 = -1;
-  std::string::~string(nettestDefault);
-  std::string::string(v19, "none");
+  std::string::~string(&nettestDefault);
+  std::string::string(&v19, "none");
   v20 = 2;
-  v1 = ((int (__thiscall *)(CConfigManager *, _BYTE *, const char *, const char *, _BYTE *))g_pCfgMgr->?)(
-         g_pCfgMgr,
-         v13,
-         "COMMANDLINE",
-         "nettest",
-         v19);
+  v1 = g_pCfgMgr->GetStringValue(g_pCfgMgr, (std::string *)v13, "COMMANDLINE", "nettest", &v19);
   LOBYTE(v20) = 3;
   std::operator==<char>(v1, "client");
   LOBYTE(v20) = 2;
   std::string::~string(v13);
   v20 = -1;
-  std::string::~string(v19);
-  ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->?)(
-    g_pCfgMgr,
-    "COMMANDLINE",
-    "videoplay",
-    0);
+  std::string::~string(&v19);
+  g_pCfgMgr->GetIntValue(g_pCfgMgr, "COMMANDLINE", "videoplay", 0);
   g_pMissionCD = IExtraCD::CreateMissionCDObject();
   g_pAddOn = IExtraCD::CreateAddOnCDObject();
   g_pMissionCD2 = IExtraCD::CreateMissionCD2Object();
@@ -80,7 +66,7 @@ bool __cdecl CGameStateHandler::Init(void) {
     if ( (unsigned __int8)CGameStateHandler::InitGfxManager() )
     {
       CTrace::Print("INIT GFX-MANAGER COMPLETE");
-      if ( (unsigned __int8)CGameStateHandler::InitGfxCompiler() )
+      if ( CGameStateHandler::InitGfxCompiler() )
       {
         CTrace::Print("INIT GFX-RTCompiler COMPLETE");
         if ( (unsigned __int8)CGameStateHandler::InitSoundManager() )
@@ -97,28 +83,19 @@ bool __cdecl CGameStateHandler::Init(void) {
         dword_3F45674 = (int)v10;
         IEventEngine::RegisterHandle(g_pEvnEngine, v10);
         CStateLoadGame::InitSaveList();
-        if ( ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->?)(
-               g_pCfgMgr,
-               "COMMANDLINE",
-               "netgame",
-               0) )
+        if ( g_pCfgMgr->GetIntValue(g_pCfgMgr, "COMMANDLINE", "netgame", 0) )
         {
           CGameStateHandler::Switch((int)CStateMainMenu::DynamicCreateFunc, 5);
           return 1;
         }
         else
         {
-          v5 = std::string::string(v17, "normal");
+          v5 = std::string::string((std::string *)v17, "normal");
           v20 = 5;
-          v4 = std::string::string(v15, "normal");
+          v4 = std::string::string((std::string *)v15, "normal");
           LOBYTE(v20) = 6;
-          v3 = ((int (__thiscall *)(CConfigManager *, _BYTE *, const char *, const char *, void *))g_pCfgMgr->?)(
-                 g_pCfgMgr,
-                 v14,
-                 "COMMANDLINE",
-                 "gamemode",
-                 v4);
-          v12 = std::operator==<char>(v3, v5);
+          v3 = g_pCfgMgr->GetStringValue(g_pCfgMgr, (std::string *)v14, "COMMANDLINE", "gamemode", v4);
+          v12 = std::operator==<char>(v3, (int)v5);
           std::string::~string(v14);
           LOBYTE(v20) = 5;
           std::string::~string(v15);
@@ -145,7 +122,7 @@ bool __cdecl CGameStateHandler::Init(void) {
             else
               v6 = 0;
             v20 = -1;
-            g_pGameType = (int)v6;
+            g_pGameType = (std::wstring *)v6;
             if ( (unsigned __int8)CGameStateHandler::StartDummyGame() )
             {
               v7 = (INetworkEngine *)operator new(0x18u);
@@ -156,7 +133,7 @@ bool __cdecl CGameStateHandler::Init(void) {
                 v8 = 0;
               v20 = -1;
               g_pNetworkEngine = (int)v8;
-              INetworkEngine::Start(1, 1, *(_DWORD *)(g_pGameType + 112), 0);
+              INetworkEngine::Start(1, 1, g_pGameType[4].m_u[0], 0);
               CGameStateHandler::Switch((int)CStateGame::DynamicCreateFunc, 0);
               timeBeginPeriod(1u);
               CTrace::Print(" MAIN INIT COMPLETE (CGameStateHandler::Init) ");
@@ -567,11 +544,7 @@ bool __cdecl CGameStateHandler::InitStringEngine(void) {
   
   int v0; // eax
 
-  v0 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->?)(
-         g_pCfgMgr,
-         "GAMESETTINGS",
-         "Language",
-         0);
+  v0 = g_pCfgMgr->GetIntValue(g_pCfgMgr, "GAMESETTINGS", "Language", 0);
   g_pStringEngine = (CStringEngineEx *)CStringEngine::CreateStringEngine(v0);
   return 1;
 }
@@ -621,11 +594,20 @@ void __cdecl CGameStateHandler::DietmarsGameSettingsDefaults(void) {
 
   if ( g_pCfgMgr )
   {
-    v2 = g_pCfgMgr->?(g_pCfgMgr, "GAMESETTINGS", "Fullscreen");
+    v2 = ((int (__thiscall *)(CConfigManager *, const char *, const char *))g_pCfgMgr->GetConfigVar)(
+           g_pCfgMgr,
+           "GAMESETTINGS",
+           "Fullscreen");
     (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)v2 + 32))(v2, 0);
-    v1 = g_pCfgMgr->?(g_pCfgMgr, "GAMESETTINGS", "MusicEnabled");
+    v1 = ((int (__thiscall *)(CConfigManager *, const char *, const char *))g_pCfgMgr->GetConfigVar)(
+           g_pCfgMgr,
+           "GAMESETTINGS",
+           "MusicEnabled");
     (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)v1 + 32))(v1, 0);
-    v0 = g_pCfgMgr->?(g_pCfgMgr, "ADVGAMESETTINGS", "ShowVideos");
+    v0 = ((int (__thiscall *)(CConfigManager *, const char *, const char *))g_pCfgMgr->GetConfigVar)(
+           g_pCfgMgr,
+           "ADVGAMESETTINGS",
+           "ShowVideos");
     (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)v0 + 32))(v0, 0);
   }
 }
@@ -635,8 +617,8 @@ void __cdecl CGameStateHandler::DietmarsGameSettingsDefaults(void) {
 // Decompiled from void CGameStateHandler::LoadAllConfigFiles()
 void __cdecl CGameStateHandler::LoadAllConfigFiles(void) {
   
-  _DWORD *v0; // eax
-  _BYTE v1[28]; // [esp+8h] [ebp-2Ch] BYREF
+  wchar_t *v0; // eax
+  std::wstring v1; // [esp+8h] [ebp-2Ch] BYREF
   int v2; // [esp+30h] [ebp-4h]
 
   if ( (BBSupportDevelopmentMachineId() & 1) != 0 )
@@ -655,19 +637,15 @@ void __cdecl CGameStateHandler::LoadAllConfigFiles(void) {
   CGameStateHandler::LoadConfigFile(L"GameSettings", "GAMESETTINGS");
   CGameStateHandler::LoadConfigFile(L"MiscData2", "MISCDATA2");
   CGameStateHandler::LoadConfigFile(L"Video", "ADVGAMESETTINGS");
-  std::wstring::wstring(v1);
+  std::wstring::wstring(&v1);
   v2 = 0;
-  if ( (*(unsigned __int8 (__thiscall **)(void *, _BYTE *, const wchar_t *, int))(*(_DWORD *)g_pCDDrive + 8))(
-         g_pCDDrive,
-         v1,
-         L"Config\\MiscData1.cfg",
-         1048578) )
+  if ( g_pCDDrive->GetCDPath(g_pCDDrive, (char *)&v1, (char *)L"Config\\MiscData1.cfg", 1048578) )
   {
-    v0 = std::wstring::c_str((_Cnd_internal_imp_t *)v1);
-    ((void (__thiscall *)(CConfigManager *, _DWORD *, const char *))g_pCfgMgr->?)(g_pCfgMgr, v0, "MISCDATA1");
+    v0 = std::wstring::c_str(&v1);
+    g_pCfgMgr->AddConfigFileEx(g_pCfgMgr, v0, "MISCDATA1");
   }
   v2 = -1;
-  std::wstring::~wstring(v1);
+  std::wstring::~wstring(&v1);
 }
 
 
@@ -981,34 +959,32 @@ class CGameState * __cdecl CGameStateHandler::GetCurrentState(void) {
 // Decompiled from void __cdecl CGameStateHandler::LoadConfigFile(wchar_t *String, const char *a2)
 void __cdecl CGameStateHandler::LoadConfigFile(wchar_t const * String, char const * a2) {
   
-  _DWORD *v2; // eax
+  wchar_t *v2; // eax
   const char *v3; // eax
-  _DWORD *v4; // eax
+  wchar_t *v4; // eax
   int ConfigFilePath; // [esp+4h] [ebp-50h]
   int v6[7]; // [esp+Ch] [ebp-48h] BYREF
   int v7[7]; // [esp+28h] [ebp-2Ch] BYREF
   int v8; // [esp+50h] [ebp-4h]
 
-  CGameSettings::GetConfigFilePath((int)v7, String, 0);
+  CGameSettings::GetConfigFilePath((std::wstring *)v7, String, 0);
   v8 = 0;
-  v2 = std::wstring::c_str((_Cnd_internal_imp_t *)v7);
-  if ( !((unsigned __int8 (__thiscall *)(CConfigManager *, _DWORD *, const char *))g_pCfgMgr->?)(g_pCfgMgr, v2, a2) )
+  v2 = std::wstring::c_str((std::wstring *)v7);
+  if ( !(unsigned __int8)g_pCfgMgr->AddConfigFileEx(g_pCfgMgr, v2, a2) )
   {
-    v3 = (const char *)std::wstring::c_str((_Cnd_internal_imp_t *)v7);
+    v3 = (const char *)std::wstring::c_str((std::wstring *)v7);
     BBSupportTracePrintF(0, "Couldn't find '%s'", v3);
   }
-  if ( (*(unsigned __int8 (__thiscall **)(void *, wchar_t *))(*(_DWORD *)g_pInstallationInfo + 20))(
-         g_pInstallationInfo,
-         String) )
+  if ( g_pInstallationInfo->IsOptionalGameConfigFile(g_pInstallationInfo, String) )
   {
-    ConfigFilePath = CGameSettings::GetConfigFilePath((int)v6, String, 1);
+    ConfigFilePath = (int)CGameSettings::GetConfigFilePath((std::wstring *)v6, String, 1);
     std::wstring::operator=(ConfigFilePath);
-    std::wstring::~wstring(v6);
-    v4 = std::wstring::c_str((_Cnd_internal_imp_t *)v7);
-    ((void (__thiscall *)(CConfigManager *, _DWORD *, const char *))g_pCfgMgr->?)(g_pCfgMgr, v4, a2);
+    std::wstring::~wstring((std::wstring *)v6);
+    v4 = std::wstring::c_str((std::wstring *)v7);
+    g_pCfgMgr->AddConfigFileEx(g_pCfgMgr, v4, a2);
   }
   v8 = -1;
-  std::wstring::~wstring(v7);
+  std::wstring::~wstring((std::wstring *)v7);
 }
 
 
@@ -1045,35 +1021,30 @@ bool __cdecl CGameStateHandler::StartDummyGame(void) {
   char v27; // [esp+5Fh] [ebp-B31h]
   unsigned int i; // [esp+60h] [ebp-B30h]
   char v29[88]; // [esp+64h] [ebp-B2Ch] BYREF
-  _BYTE v30[28]; // [esp+BCh] [ebp-AD4h] BYREF
-  _BYTE v31[28]; // [esp+D8h] [ebp-AB8h] BYREF
-  _BYTE v32[28]; // [esp+F4h] [ebp-A9Ch] BYREF
-  _BYTE v33[28]; // [esp+110h] [ebp-A80h] BYREF
-  _BYTE v34[28]; // [esp+12Ch] [ebp-A64h] BYREF
-  _BYTE v35[28]; // [esp+148h] [ebp-A48h] BYREF
-  _BYTE v36[28]; // [esp+164h] [ebp-A2Ch] BYREF
+  std::wstring v30; // [esp+BCh] [ebp-AD4h] BYREF
+  std::wstring v31; // [esp+D8h] [ebp-AB8h] BYREF
+  std::wstring v32; // [esp+F4h] [ebp-A9Ch] BYREF
+  std::wstring v33; // [esp+110h] [ebp-A80h] BYREF
+  std::wstring v34; // [esp+12Ch] [ebp-A64h] BYREF
+  std::string v35; // [esp+148h] [ebp-A48h] BYREF
+  std::string v36; // [esp+164h] [ebp-A2Ch] BYREF
   WCHAR WideCharStr[1024]; // [esp+180h] [ebp-A10h] BYREF
   wchar_t Buffer[256]; // [esp+980h] [ebp-210h] BYREF
   int v39; // [esp+B8Ch] [ebp-4h]
 
   std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v29);
   v39 = 0;
-  std::string::string(v35, "NewMapTest.edm");
+  std::string::string(&v35, "NewMapTest.edm");
   LOBYTE(v39) = 1;
-  ((void (__thiscall *)(CConfigManager *, _BYTE *, const char *, const char *, _BYTE *))g_pCfgMgr->?)(
-    g_pCfgMgr,
-    v36,
-    "COMMANDLINE",
-    "map",
-    v35);
+  g_pCfgMgr->GetStringValue(g_pCfgMgr, &v36, "COMMANDLINE", "map", &v35);
   LOBYTE(v39) = 3;
-  std::string::~string(v35);
+  std::string::~string(&v35);
   v9 = std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::from_bytes(
-         v30,
-         v36);
+         (int)&v30,
+         (int)&v36);
   std::wstring::operator=(v9);
-  std::wstring::~wstring(v30);
-  v0 = (const CHAR *)std::string::c_str(v36);
+  std::wstring::~wstring(&v30);
+  v0 = std::string::c_str(&v36);
   MultiByteToWideChar(0, 1u, v0, -1, WideCharStr, 1024);
   MA_OpenMapFile(WideCharStr, (int)&v7, (int)&v21, 0);
   if ( v21 )
@@ -1082,108 +1053,108 @@ bool __cdecl CGameStateHandler::StartDummyGame(void) {
     MessageBoxA(g_hWnd, "Unable to open map file!", "S4", 0x30u);
     v25 = 0;
     LOBYTE(v39) = 0;
-    std::string::~string(v36);
+    std::string::~string(&v36);
     v39 = -1;
     std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::~wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v29);
     return v25;
   }
   else
   {
-    MA_GetMapData(g_pGameType + 56, (int)v5, (int)v6, g_pGameType + 64, g_pGameType + 60);
+    MA_GetMapData((int)g_pGameType[2].m_u, (int)v5, (int)v6, (int)&g_pGameType[2].m_u[2], (int)&g_pGameType[2].m_u[1]);
     MA_GetNumberOfPlayers((int)&v24);
-    *(_DWORD *)(g_pGameType + 852) = v24;
+    g_pGameType[30].m_u[3] = v24;
     v22 = 0;
     for ( i = 0; (int)i < v24; ++i )
     {
       MA_GetPlayerData(
         i + 1,
         0,
-        (int *)(g_pGameType + 4 * i + 404),
-        (int *)(g_pGameType + 4 * i + 260),
-        (int *)(g_pGameType + 4 * i + 296),
+        &g_pGameType[14].m_u[i + 3],
+        &g_pGameType[9].m_u[i + 2],
+        &g_pGameType[10].m_u[i + 4],
         &String,
         &bstrString,
         &v10,
         &v4,
-        (int *)(g_pGameType + 4 * i + 152));
-      if ( *(_DWORD *)(g_pGameType + 4 * i + 404) == 255 )
-        *(_DWORD *)(g_pGameType + 4 * i + 404) = 5;
-      if ( *(_DWORD *)(g_pGameType + 4 * i + 152) > v22 )
-        v22 = *(_DWORD *)(g_pGameType + 4 * i + 152);
+        &g_pGameType[5].m_u[i + 3]);
+      if ( g_pGameType[14].m_u[i + 3] == 255 )
+        g_pGameType[14].m_u[i + 3] = 5;
+      if ( g_pGameType[5].m_u[i + 3] > v22 )
+        v22 = g_pGameType[5].m_u[i + 3];
       if ( v10 == 2 )
       {
-        v11 = std::wstring::wstring(v31, String);
+        v11 = std::wstring::wstring(&v31, String);
         v12 = v11;
         LOBYTE(v39) = 4;
         CGameType::SetPlayerName(i, v11);
         LOBYTE(v39) = 3;
-        std::wstring::~wstring(v31);
+        std::wstring::~wstring(&v31);
       }
-      *(_DWORD *)(g_pGameType + 4 * i + 116) = 1;
-      *(_BYTE *)(i + g_pGameType + 440) = 0;
+      g_pGameType[4].m_u[i + 1] = 1;
+      *((_BYTE *)&g_pGameType[15].m_u[5] + i) = 0;
       SysFreeString(bstrString);
       SysFreeString(String);
     }
-    *(_BYTE *)(g_pGameType + 732) = 1;
-    *(_DWORD *)(g_pGameType + 68) = (char *)&dword_F29144[220110] + 3;
-    *(_DWORD *)(g_pGameType + 736) = 0;
-    *(_DWORD *)(g_pGameType + 72) = v22 + 1;
-    *(_DWORD *)(g_pGameType + 864) = 1;
-    *(_DWORD *)(g_pGameType + 692) = 1;
+    LOBYTE(g_pGameType[26].m_u[1]) = 1;
+    g_pGameType[2].m_u[3] = (int)&dword_F29144[220110] + 3;
+    g_pGameType[26].m_u[2] = 0;
+    g_pGameType[2].m_u[4] = v22 + 1;
+    g_pGameType[30].m_u[6] = 1;
+    g_pGameType[24].m_u[5] = 1;
     CGameType::SetMCD2TextureSet((CGameType *)g_pGameType, 1);
-    for ( i = 0; i < *(_DWORD *)(g_pGameType + 112); ++i )
-      ++*(_DWORD *)(g_pGameType + 4 * *(_DWORD *)(g_pGameType + 4 * i + 152) + 76);
-    *(_DWORD *)(g_pGameType + 112) = v24;
-    if ( *(_DWORD *)(g_pGameType + 112) > (unsigned int)v24 )
+    for ( i = 0; i < g_pGameType[4].m_u[0]; ++i )
+      ++g_pGameType[2].m_u[g_pGameType[5].m_u[i + 3] + 5];
+    g_pGameType[4].m_u[0] = v24;
+    if ( g_pGameType[4].m_u[0] > (unsigned int)v24 )
     {
       MessageBoxA(g_hWnd, "Too many players given for map.\nPlayercount reduced!!", "S4", 0x30u);
-      *(_DWORD *)(g_pGameType + 112) = v24;
+      g_pGameType[4].m_u[0] = v24;
     }
-    for ( i = 0; i < *(_DWORD *)(g_pGameType + 112); ++i )
+    for ( i = 0; i < g_pGameType[4].m_u[0]; ++i )
     {
-      v14 = std::wstring::wstring(v33, (wchar_t *)&word_36D068C);
+      v14 = std::wstring::wstring(&v33, (wchar_t *)&word_36D068C);
       v15 = v14;
       LOBYTE(v39) = 5;
       v3 = v14;
-      PlayerName = CGameType::GetPlayerName((void *)g_pGameType, v32, i);
-      v27 = std::operator==<wchar_t>(PlayerName, v3);
-      std::wstring::~wstring(v32);
+      PlayerName = CGameType::GetPlayerName(g_pGameType, &v32, i);
+      v27 = std::operator==<wchar_t>((int)PlayerName, v3);
+      std::wstring::~wstring(&v32);
       LOBYTE(v39) = 3;
-      std::wstring::~wstring(v33);
+      std::wstring::~wstring(&v33);
       if ( v27 )
         break;
-      if ( *(_DWORD *)(g_pGameType + 4 * i + 116) == 1 )
+      if ( g_pGameType[4].m_u[i + 1] == 1 )
         *(_DWORD *)v20 = "HUMAN";
       else
         *(_DWORD *)v20 = "AI";
-      swprintf((char *)Buffer, "[%s] Player ID %d", v20[0]);
-      v17 = std::wstring::wstring(v34, Buffer);
+      swprintf(Buffer, "[%s] Player ID %d", (WCHAR *)v20[0]);
+      v17 = std::wstring::wstring(&v34, Buffer);
       v16 = v17;
       LOBYTE(v39) = 6;
       CGameType::SetPlayerName(i, v17);
       LOBYTE(v39) = 3;
-      std::wstring::~wstring(v34);
+      std::wstring::~wstring(&v34);
     }
-    for ( i = 0; i < *(_DWORD *)(g_pGameType + 112); ++i )
+    for ( i = 0; i < g_pGameType[4].m_u[0]; ++i )
     {
       if ( i )
         v18 = 0;
       else
         v18 = (char *)&dword_F29144[220110] + 3;
-      *(_DWORD *)(g_pGameType + 4 * i + 188) = v18;
+      g_pGameType[6].m_u[i + 5] = (int)v18;
     }
-    for ( i = 0; i < *(_DWORD *)(g_pGameType + 112); ++i )
-      *(_DWORD *)(g_pGameType + 4 * i + 332) = i;
-    for ( i = 0; i < *(_DWORD *)(g_pGameType + 112); ++i )
-      *(_DWORD *)(g_pGameType + 4 * i + 368) = 0;
+    for ( i = 0; i < g_pGameType[4].m_u[0]; ++i )
+      g_pGameType[11].m_u[i + 6] = i;
+    for ( i = 0; i < g_pGameType[4].m_u[0]; ++i )
+      g_pGameType[13].m_u[i + 1] = 0;
     MA_CloseMapFile();
-    v2 = (const CHAR *)std::string::c_str(v36);
+    v2 = std::string::c_str(&v36);
     hFile = CreateFileA(v2, 0x80000000, 0, 0, 3u, 0, 0);
-    *(_DWORD *)(g_pGameType + 856) = GetFileSize(hFile, 0);
+    g_pGameType[30].m_u[4] = GetFileSize(hFile, 0);
     CloseHandle(hFile);
     v26 = 1;
     LOBYTE(v39) = 0;
-    std::string::~string(v36);
+    std::string::~string(&v36);
     v39 = -1;
     std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::~wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v29);
     return v26;

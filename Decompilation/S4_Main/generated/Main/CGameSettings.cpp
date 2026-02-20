@@ -19,7 +19,7 @@ void __cdecl CGameSettings::Save(void) {
   ConfigFilePath = CGameSettings::GetConfigFilePath(&ret, L"GameSettings", 1);
   LOBYTE(exceptionBlock) = 1;
   v0 = std::wstring::c_str(&ret);
-  g_pCfgMgr->?(g_pCfgMgr, "GAMESETTINGS", v0);
+  g_pCfgMgr->SaveSection(g_pCfgMgr, "GAMESETTINGS", v0);
   LOBYTE(exceptionBlock) = 0;
   std::wstring::~wstring(&ret);
 }
@@ -222,32 +222,32 @@ void __cdecl CGameSettings::LoadCommandLineValues(void) {
   int v113; // [esp+798h] [ebp-4h]
 
   v0 = CStaticConfigVarInt::operator int(&CGameSettings::m_iWindowWidth);
-  gfxwidth = g_pCfgMgr->?(g_pCfgMgr, "COMMANDLINE", "gfxwidth", v0);
+  gfxwidth = g_pCfgMgr->GetIntValue(g_pCfgMgr, "COMMANDLINE", "gfxwidth", v0);
   CStaticConfigVarInt::operator=(&CGameSettings::m_iWindowWidth, gfxwidth);
   v2 = CStaticConfigVarInt::operator int(&CGameSettings::m_iWindowHeight);
-  gfxheight = g_pCfgMgr->?(g_pCfgMgr, "COMMANDLINE", "gfxheight", v2);
+  gfxheight = g_pCfgMgr->GetIntValue(g_pCfgMgr, "COMMANDLINE", "gfxheight", v2);
   CStaticConfigVarInt::operator=(&CGameSettings::m_iWindowHeight, gfxheight);
   v4 = CStaticConfigVarInt::operator int(&CGameSettings::m_iWindowPosX);
-  WindowPosX = g_pCfgMgr->?(g_pCfgMgr, "COMMANDLINE", "WindowPosX", v4);
+  WindowPosX = g_pCfgMgr->GetIntValue(g_pCfgMgr, "COMMANDLINE", "WindowPosX", v4);
   CStaticConfigVarInt::operator=(&CGameSettings::m_iWindowPosX, WindowPosX);
   v6 = CStaticConfigVarInt::operator int(&CGameSettings::m_iWindowPosY);
-  WindowPosY = g_pCfgMgr->?(g_pCfgMgr, "COMMANDLINE", "WindowPosY", v6);
+  WindowPosY = g_pCfgMgr->GetIntValue(g_pCfgMgr, "COMMANDLINE", "WindowPosY", v6);
   CStaticConfigVarInt::operator=(&CGameSettings::m_iWindowPosY, WindowPosY);
   v8 = CStaticConfigVarInt::operator int(&CGameSettings::m_iFullscreenEnabled);
-  v9 = g_pCfgMgr->?(g_pCfgMgr, "COMMANDLINE", "Fullscreen", v8);
+  v9 = g_pCfgMgr->GetIntValue(g_pCfgMgr, "COMMANDLINE", "Fullscreen", v8);
   CStaticConfigVarInt::operator=(&CGameSettings::m_iFullscreenEnabled, v9);
   v10 = CStaticConfigVarInt::operator int(&CGameSettings::m_iBorderScroll);
-  v11 = g_pCfgMgr->?(g_pCfgMgr, "COMMANDLINE", "borderscroll", v10);
+  v11 = g_pCfgMgr->GetIntValue(g_pCfgMgr, "COMMANDLINE", "borderscroll", v10);
   CStaticConfigVarInt::operator=(&CGameSettings::m_iBorderScroll, v11);
   v12 = CStaticConfigVarInt::operator int(&CGameSettings::m_iScrollStepValue);
-  v13 = g_pCfgMgr->?(g_pCfgMgr, "COMMANDLINE", "scrollstepvalue", v12);
+  v13 = g_pCfgMgr->GetIntValue(g_pCfgMgr, "COMMANDLINE", "scrollstepvalue", v12);
   CStaticConfigVarInt::operator=(&CGameSettings::m_iScrollStepValue, v13);
   std::string::string(&v110);
   v113 = 0;
   v65 = std::string::string(&v98, "Player1");
   v55 = v65;
   LOBYTE(v113) = 1;
-  v54 = (std::string *)g_pCfgMgr->?(g_pCfgMgr, &v99, "GAMESETTINGS", "PlayerName", v65);
+  v54 = (std::string *)g_pCfgMgr->GetStringValue(g_pCfgMgr, &v99, "GAMESETTINGS", "PlayerName", v65);
   std::string::operator=(&v110, v54);
   std::string::~string(&v99);
   LOBYTE(v113) = 0;
@@ -260,7 +260,7 @@ void __cdecl CGameSettings::LoadCommandLineValues(void) {
     if ( strlen(Buffer) )
       std::string::operator=(&v110, Buffer);
   }
-  v52 = (void *)g_pCfgMgr->?(g_pCfgMgr, &v97, "COMMANDLINE", "playername", &v110);
+  v52 = (void *)g_pCfgMgr->GetStringValue(g_pCfgMgr, &v97, "COMMANDLINE", "playername", &v110);
   std::string::operator=(&v110, v52);
   std::string::~string(&v97);
   v14 = std::string::c_str(&v110);
@@ -278,130 +278,130 @@ void __cdecl CGameSettings::LoadCommandLineValues(void) {
   v50 = std::string::string(&v95, (char *)&byte_36C2633);
   v49 = v50;
   LOBYTE(v113) = 2;
-  v48 = (std::string *)g_pCfgMgr->?(g_pCfgMgr, &v96, "WEB", "HelpURLenglish", v50);
+  v48 = (std::string *)g_pCfgMgr->GetStringValue(g_pCfgMgr, &v96, "WEB", "HelpURLenglish", v50);
   std::string::operator=(&CGameSettings::m_strHelpURLenglish, v48);
   std::string::~string(&v96);
   LOBYTE(v113) = 0;
   std::string::~string(&v95);
   v47 = std::string::string(&v94, (char *)&byte_36C2641);
-  v76 = std::operator==<char>(&CGameSettings::m_strHelpURLenglish, v47);
+  v76 = std::operator==<char>((int)&CGameSettings::m_strHelpURLenglish, (int)v47);
   std::string::~string(&v94);
   if ( v76 )
     CTrace::Print("GameSettings.cpp: No 'HelpURLenglish' given! Check 'Web.cfg'!");
   v46 = std::string::string(&v92, (char *)&byte_36C2642);
   v45 = v46;
   LOBYTE(v113) = 3;
-  v44 = (void *)g_pCfgMgr->?(g_pCfgMgr, (std::string *)v93, "WEB", "NormURLenglish", v46);
+  v44 = (void *)g_pCfgMgr->GetStringValue(g_pCfgMgr, (std::string *)v93, "WEB", "NormURLenglish", v46);
   std::string::operator=(&CGameSettings::m_strNormURLenglish, v44);
   std::string::~string(v93);
   LOBYTE(v113) = 0;
   std::string::~string(&v92);
   v43 = std::string::string(&v91, (char *)&byte_36C2643);
-  v75 = std::operator==<char>(&CGameSettings::m_strNormURLenglish, v43);
+  v75 = std::operator==<char>((int)&CGameSettings::m_strNormURLenglish, (int)v43);
   std::string::~string(&v91);
   if ( v75 )
     CTrace::Print("GameSettings.cpp: No 'm_strNormURLenglish' given! Check 'Web.cfg'!");
   v42 = std::string::string(&v104, (char *)&byte_36C264A);
   v41 = v42;
   LOBYTE(v113) = 4;
-  v40 = (void *)g_pCfgMgr->?(g_pCfgMgr, (std::string *)v90, "WEB", "HelpURLgerman", v42);
+  v40 = (void *)g_pCfgMgr->GetStringValue(g_pCfgMgr, (std::string *)v90, "WEB", "HelpURLgerman", v42);
   std::string::operator=(&CGameSettings::m_strHelpURLgerman, v40);
   std::string::~string(v90);
   LOBYTE(v113) = 0;
   std::string::~string(&v104);
   v39 = std::string::string(&v88, (char *)&byte_36C264B);
-  v74 = std::operator==<char>(&CGameSettings::m_strHelpURLgerman, v39);
+  v74 = std::operator==<char>((int)&CGameSettings::m_strHelpURLgerman, (int)v39);
   std::string::~string(&v88);
   if ( v74 )
     CTrace::Print("GameSettings.cpp: No 'm_strHelpURLgerman' given! Check 'Web.cfg'!");
   v38 = std::string::string(&v87, (char *)&byte_36C2672);
   v37 = v38;
   LOBYTE(v113) = 5;
-  v36 = (void *)g_pCfgMgr->?(g_pCfgMgr, (std::string *)v100, "WEB", "NormURLgerman", v38);
+  v36 = (void *)g_pCfgMgr->GetStringValue(g_pCfgMgr, (std::string *)v100, "WEB", "NormURLgerman", v38);
   std::string::operator=(&CGameSettings::m_strNormURLgerman, v36);
   std::string::~string(v100);
   LOBYTE(v113) = 0;
   std::string::~string(&v87);
   v35 = std::string::string(&v86, (char *)&byte_36C2673);
-  v73 = std::operator==<char>(&CGameSettings::m_strNormURLgerman, v35);
+  v73 = std::operator==<char>((int)&CGameSettings::m_strNormURLgerman, (int)v35);
   std::string::~string(&v86);
   if ( v73 )
     CTrace::Print("GameSettings.cpp: No 'm_strNormURLgerman' given! Check 'Web.cfg'!");
   v34 = std::string::string(&v84, (char *)&byte_36C267D);
   v33 = v34;
   LOBYTE(v113) = 6;
-  v32 = (void *)g_pCfgMgr->?(g_pCfgMgr, (std::string *)v85, "MISCDATA1", "ManualURL_DE", v34);
+  v32 = (void *)g_pCfgMgr->GetStringValue(g_pCfgMgr, (std::string *)v85, "MISCDATA1", "ManualURL_DE", v34);
   std::string::operator=(&CGameSettings::m_strManualURL_DE, v32);
   std::string::~string(v85);
   LOBYTE(v113) = 0;
   std::string::~string(&v84);
   v30 = std::string::string(&v83, (char *)&byte_36C267E);
-  v72 = std::operator==<char>(&CGameSettings::m_strManualURL_DE, v30);
+  v72 = std::operator==<char>((int)&CGameSettings::m_strManualURL_DE, (int)v30);
   std::string::~string(&v83);
   if ( v72 )
     CTrace::Print("GameSettings.cpp: No 'm_strManualURL_DE' given! Check 'Web.cfg'!");
   v29 = std::string::string(&v81, (char *)&byte_36C267F);
   v28 = v29;
   LOBYTE(v113) = 7;
-  v27 = (void *)g_pCfgMgr->?(g_pCfgMgr, (std::string *)v82, "MISCDATA1", "ManualURL_FR", v29);
+  v27 = (void *)g_pCfgMgr->GetStringValue(g_pCfgMgr, (std::string *)v82, "MISCDATA1", "ManualURL_FR", v29);
   std::string::operator=(&CGameSettings::m_strManualURL_FR, v27);
   std::string::~string(v82);
   LOBYTE(v113) = 0;
   std::string::~string(&v81);
   v26 = std::string::string(&v80, (char *)&byte_36C268A);
-  v67 = std::operator==<char>(&CGameSettings::m_strManualURL_FR, v26);
+  v67 = std::operator==<char>((int)&CGameSettings::m_strManualURL_FR, (int)v26);
   std::string::~string(&v80);
   if ( v67 )
     CTrace::Print("GameSettings.cpp: No 'm_strManualURL_FR' given! Check 'Web.cfg'!");
   v25 = std::string::string(&v78, (char *)&byte_36C268B);
   v24 = v25;
   LOBYTE(v113) = 8;
-  v23 = (void *)g_pCfgMgr->?(g_pCfgMgr, (std::string *)v79, "MISCDATA1", "ManualURL_EN", v25);
+  v23 = (void *)g_pCfgMgr->GetStringValue(g_pCfgMgr, (std::string *)v79, "MISCDATA1", "ManualURL_EN", v25);
   std::string::operator=(&CGameSettings::m_strManualURL_EN, v23);
   std::string::~string(v79);
   LOBYTE(v113) = 0;
   std::string::~string(&v78);
   v22 = std::string::string(&v101, (char *)&byte_36C269A);
-  v71 = std::operator==<char>(&CGameSettings::m_strManualURL_EN, v22);
+  v71 = std::operator==<char>((int)&CGameSettings::m_strManualURL_EN, (int)v22);
   std::string::~string(&v101);
   if ( v71 )
     CTrace::Print("GameSettings.cpp: No 'm_strManualURL_EN' given! Check 'Web.cfg'!");
   v21 = std::string::string(&v109, (char *)&byte_36C269B);
   v20 = v21;
   LOBYTE(v113) = 9;
-  v31 = (void *)g_pCfgMgr->?(g_pCfgMgr, (std::string *)v77, "MISCDATA1", "TipsURL_DE", v21);
+  v31 = (void *)g_pCfgMgr->GetStringValue(g_pCfgMgr, (std::string *)v77, "MISCDATA1", "TipsURL_DE", v21);
   std::string::operator=(&CGameSettings::m_strTipsURL_DE, v31);
   std::string::~string(v77);
   LOBYTE(v113) = 0;
   std::string::~string(&v109);
   v64 = std::string::string(&v108, (char *)&byte_36C26CE);
-  v70 = std::operator==<char>(&CGameSettings::m_strTipsURL_DE, v64);
+  v70 = std::operator==<char>((int)&CGameSettings::m_strTipsURL_DE, (int)v64);
   std::string::~string(&v108);
   if ( v70 )
     CTrace::Print("GameSettings.cpp: No 'TipsURL_DE' given! Check 'Web.cfg'!");
   v63 = std::string::string(&v106, (char *)&byte_36C26CF);
   v62 = v63;
   LOBYTE(v113) = 10;
-  v61 = (void *)g_pCfgMgr->?(g_pCfgMgr, (std::string *)v107, "MISCDATA1", "TipsURL_FR", v63);
+  v61 = (void *)g_pCfgMgr->GetStringValue(g_pCfgMgr, (std::string *)v107, "MISCDATA1", "TipsURL_FR", v63);
   std::string::operator=(&CGameSettings::m_strTipsURL_FR, v61);
   std::string::~string(v107);
   LOBYTE(v113) = 0;
   std::string::~string(&v106);
   v60 = std::string::string(&v89, (char *)&byte_36C26E6);
-  v69 = std::operator==<char>(&CGameSettings::m_strTipsURL_FR, v60);
+  v69 = std::operator==<char>((int)&CGameSettings::m_strTipsURL_FR, (int)v60);
   std::string::~string(&v89);
   if ( v69 )
     CTrace::Print("GameSettings.cpp: No 'TipsURL_FR' given! Check 'Web.cfg'!");
   v59 = std::string::string(&v103, (char *)&byte_36C26E7);
   v58 = v59;
   LOBYTE(v113) = 11;
-  v57 = (void *)g_pCfgMgr->?(g_pCfgMgr, (std::string *)v105, "MISCDATA1", "TipsURL_EN", v59);
+  v57 = (void *)g_pCfgMgr->GetStringValue(g_pCfgMgr, (std::string *)v105, "MISCDATA1", "TipsURL_EN", v59);
   std::string::operator=(&CGameSettings::m_strTipsURL_EN, v57);
   std::string::~string(v105);
   LOBYTE(v113) = 0;
   std::string::~string(&v103);
   v56 = std::string::string(&v102, (char *)&byte_36C26EF);
-  v68 = std::operator==<char>(&CGameSettings::m_strTipsURL_EN, v56);
+  v68 = std::operator==<char>((int)&CGameSettings::m_strTipsURL_EN, (int)v56);
   std::string::~string(&v102);
   if ( v68 )
     CTrace::Print("GameSettings.cpp: No 'TipsURL_EN' given! Check 'Web.cfg'!");
@@ -523,7 +523,7 @@ void __cdecl CGameSettings::SetPlayerName(std::wstring a1) {
   if ( v6 >= 0x100 )
     report_rangecheckfailure();
   Dest[v6] = 0;
-  v5 = g_pCfgMgr->?(g_pCfgMgr, "GAMESETTINGS");
+  v5 = g_pCfgMgr->GetConfigVar(g_pCfgMgr, "GAMESETTINGS");
   v4 = std::string::string(&v7, Dest);
   LOBYTE(v9) = 1;
   v5->SetValue(v5, v4);
@@ -609,10 +609,10 @@ int __cdecl CGameSettings::GetCampaignStatus(int _iCampaignType) {
             __debugbreak();
           }
           _iCampaignTypea = _iCampaignType - 1;
-          CGameSettings::m_uiCampaignSave[0] = g_pCfgMgr->?(g_pCfgMgr, "MISCDATA2", "Data01", 0);
-          CGameSettings::m_uiCampaignSave[1] = g_pCfgMgr->?(g_pCfgMgr, "MISCDATA2", "Data02", 0);
-          CGameSettings::m_uiCampaignSave[2] = g_pCfgMgr->?(g_pCfgMgr, "MISCDATA2", "Data03", 0);
-          CGameSettings::m_uiCampaignSave[3] = g_pCfgMgr->?(g_pCfgMgr, "MISCDATA2", "Data04", 0);
+          CGameSettings::m_uiCampaignSave[0] = g_pCfgMgr->GetIntValue(g_pCfgMgr, "MISCDATA2", "Data01", 0);
+          CGameSettings::m_uiCampaignSave[1] = g_pCfgMgr->GetIntValue(g_pCfgMgr, "MISCDATA2", "Data02", 0);
+          CGameSettings::m_uiCampaignSave[2] = g_pCfgMgr->GetIntValue(g_pCfgMgr, "MISCDATA2", "Data03", 0);
+          CGameSettings::m_uiCampaignSave[3] = g_pCfgMgr->GetIntValue(g_pCfgMgr, "MISCDATA2", "Data04", 0);
           v5 = 0;
           for ( i = 0; i < 0x10; ++i )
             v5 |= *((_BYTE *)CGameSettings::m_uiCampaignSave + i);
@@ -656,23 +656,23 @@ int __cdecl CGameSettings::GetCampaignStatus(int _iCampaignType) {
       }
       else
       {
-        CGameSettings::m_uiMD2CampaignSave = g_pCfgMgr->?(g_pCfgMgr, "MISCDATA2", "Data07", 0);
+        CGameSettings::m_uiMD2CampaignSave = g_pCfgMgr->GetIntValue(g_pCfgMgr, "MISCDATA2", "Data07", 0);
         return ((unsigned int)CGameSettings::m_uiMD2CampaignSave >> (4 * _iCampaignType - 68)) & 0xF;
       }
     }
     else
     {
-      CGameSettings::m_uiAOCampaignSave = g_pCfgMgr->?(g_pCfgMgr, "MISCDATA2", "Data06", 0);
+      CGameSettings::m_uiAOCampaignSave = g_pCfgMgr->GetIntValue(g_pCfgMgr, "MISCDATA2", "Data06", 0);
       return ((unsigned int)CGameSettings::m_uiAOCampaignSave >> (4 * _iCampaignType - 44)) & 0xF;
     }
   }
   else
   {
-    CGameSettings::m_uiMDCampaignSave = g_pCfgMgr->?(g_pCfgMgr, "MISCDATA2", "Data05", 0);
+    CGameSettings::m_uiMDCampaignSave = g_pCfgMgr->GetIntValue(g_pCfgMgr, "MISCDATA2", "Data05", 0);
     if ( _iCampaignType == 10 )
-      return CGameSettings::m_uiMDCampaignSave < 0;
+      return (CGameSettings::m_uiMDCampaignSave & 0x80000000) != 0;
     else
-      return ((unsigned int)CGameSettings::m_uiMDCampaignSave >> (4 * _iCampaignType - 20)) & 0xF;
+      return (CGameSettings::m_uiMDCampaignSave >> (4 * _iCampaignType - 20)) & 0xF;
   }
 }
 
@@ -755,18 +755,18 @@ void __cdecl CGameSettings::SetCampaignStatus(int a1, int a2) {
         BYTE1(CGameSettings::m_uiCampaignSave[2]) = v29[2];
         BYTE2(CGameSettings::m_uiCampaignSave[3]) = v29[3];
         CGameSettings::Cryption((unsigned __int8 *)CGameSettings::m_uiCampaignSave, 0x10u);
-        v19 = g_pCfgMgr->?(g_pCfgMgr, "MISCDATA2");
+        v19 = g_pCfgMgr->GetConfigVar(g_pCfgMgr, "MISCDATA2");
         v19->SetValueI(v19, CGameSettings::m_uiCampaignSave[0]);
-        v18 = g_pCfgMgr->?(g_pCfgMgr, "MISCDATA2");
+        v18 = g_pCfgMgr->GetConfigVar(g_pCfgMgr, "MISCDATA2");
         v18->SetValueI(v18, CGameSettings::m_uiCampaignSave[1]);
-        v17 = g_pCfgMgr->?(g_pCfgMgr, "MISCDATA2");
+        v17 = g_pCfgMgr->GetConfigVar(g_pCfgMgr, "MISCDATA2");
         v17->SetValueI(v17, CGameSettings::m_uiCampaignSave[2]);
-        v16 = g_pCfgMgr->?(g_pCfgMgr, "MISCDATA2");
+        v16 = g_pCfgMgr->GetConfigVar(g_pCfgMgr, "MISCDATA2");
         v16->SetValueI(v16, CGameSettings::m_uiCampaignSave[3]);
         ConfigFilePath = CGameSettings::GetConfigFilePath(&v34, L"MiscData2", 1);
         v35 = 4;
         v6 = std::wstring::c_str(ConfigFilePath);
-        g_pCfgMgr->?(g_pCfgMgr, "MISCDATA2", v6);
+        g_pCfgMgr->SaveSection(g_pCfgMgr, "MISCDATA2", v6);
         v35 = -1;
         std::wstring::~wstring(&v34);
       }
@@ -775,13 +775,13 @@ void __cdecl CGameSettings::SetCampaignStatus(int a1, int a2) {
         v11 = 15 << (4 * a1 - 68);
         CGameSettings::m_uiMD2CampaignSave &= ~v11;
         CGameSettings::m_uiMD2CampaignSave |= a2 << (4 * a1 - 68);
-        v24 = g_pCfgMgr->?(g_pCfgMgr, "MISCDATA2");
+        v24 = g_pCfgMgr->GetConfigVar(g_pCfgMgr, "MISCDATA2");
         v24->SetValueI(v24, CGameSettings::m_uiMD2CampaignSave);
         v10 = CGameSettings::GetConfigFilePath(&v33, L"MiscData2", 1);
         v9[2] = v10;
         v35 = 3;
         v5 = std::wstring::c_str(v10);
-        g_pCfgMgr->?(g_pCfgMgr, "MISCDATA2", v5);
+        g_pCfgMgr->SaveSection(g_pCfgMgr, "MISCDATA2", v5);
         v35 = -1;
         std::wstring::~wstring(&v33);
       }
@@ -791,13 +791,13 @@ void __cdecl CGameSettings::SetCampaignStatus(int a1, int a2) {
       v14 = 15 << (4 * a1 - 44);
       CGameSettings::m_uiAOCampaignSave &= ~v14;
       CGameSettings::m_uiAOCampaignSave |= a2 << (4 * a1 - 44);
-      v25 = g_pCfgMgr->?(g_pCfgMgr, "MISCDATA2");
+      v25 = g_pCfgMgr->GetConfigVar(g_pCfgMgr, "MISCDATA2");
       v25->SetValueI(v25, CGameSettings::m_uiAOCampaignSave);
       v13 = CGameSettings::GetConfigFilePath(&v32, L"MiscData2", 1);
       v12 = v13;
       v35 = 2;
       v4 = std::wstring::c_str(v13);
-      g_pCfgMgr->?(g_pCfgMgr, "MISCDATA2", v4);
+      g_pCfgMgr->SaveSection(g_pCfgMgr, "MISCDATA2", v4);
       v35 = -1;
       std::wstring::~wstring(&v32);
     }
@@ -807,12 +807,12 @@ void __cdecl CGameSettings::SetCampaignStatus(int a1, int a2) {
     if ( a2 )
     {
       CGameSettings::m_uiMDCampaignSave |= 0x80000000;
-      v27 = g_pCfgMgr->?(g_pCfgMgr, "MISCDATA2");
+      v27 = g_pCfgMgr->GetConfigVar(g_pCfgMgr, "MISCDATA2");
       v27->SetValueI(v27, CGameSettings::m_uiMDCampaignSave);
       v7 = CGameSettings::GetConfigFilePath(&ret, L"MiscData2", 1);
       v35 = 0;
       v2 = std::wstring::c_str(v7);
-      g_pCfgMgr->?(g_pCfgMgr, "MISCDATA2", v2);
+      g_pCfgMgr->SaveSection(g_pCfgMgr, "MISCDATA2", v2);
       v35 = -1;
       std::wstring::~wstring(&ret);
     }
@@ -821,12 +821,12 @@ void __cdecl CGameSettings::SetCampaignStatus(int a1, int a2) {
   {
     CGameSettings::m_uiMDCampaignSave &= ~(15 << (4 * a1 - 20));
     CGameSettings::m_uiMDCampaignSave |= a2 << (4 * a1 - 20);
-    v26 = g_pCfgMgr->?(g_pCfgMgr, "MISCDATA2");
+    v26 = g_pCfgMgr->GetConfigVar(g_pCfgMgr, "MISCDATA2");
     v26->SetValueI(v26, CGameSettings::m_uiMDCampaignSave);
     v15 = CGameSettings::GetConfigFilePath(&v31, L"MiscData2", 1);
     v35 = 1;
     v3 = std::wstring::c_str(v15);
-    g_pCfgMgr->?(g_pCfgMgr, "MISCDATA2", v3);
+    g_pCfgMgr->SaveSection(g_pCfgMgr, "MISCDATA2", v3);
     v35 = -1;
     std::wstring::~wstring(&v31);
     if ( (CGameSettings::m_uiMDCampaignSave & 0x7FFFFFFF) == 0x33555 )
@@ -1355,7 +1355,7 @@ void __cdecl CGameSettings::LoadAINames(void) {
     sprintf(Buffer, Format, i + 1);
     v7 = std::string::string(&v12, "AI Player");
     v17 = 0;
-    g_pCfgMgr->?(g_pCfgMgr, &v13, "AINAMES", Buffer, v7);
+    g_pCfgMgr->GetStringValue(g_pCfgMgr, &v13, "AINAMES", Buffer, v7);
     LOBYTE(v17) = 2;
     std::string::~string(&v12);
     v6 = std::operator+<char>(&v11, "(AI) ", &v13);

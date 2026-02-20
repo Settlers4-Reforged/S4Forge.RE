@@ -39,7 +39,7 @@ void  CConfigVarInt::SetValue(float a2) {
 // Decompiled from CConfigVarInt *__thiscall CConfigVarInt::CConfigVarInt(CConfigVarInt *this, int a2)
  CConfigVarInt::CConfigVarInt(int a2) {
   
-  CDynamicConfigVar::CDynamicConfigVar(this, 1, 1);
+  CDynamicConfigVar::CDynamicConfigVar(this, CONFIGVAR_TYPE_INT, 1);
   this->__vftable = (CConfigVar_vtbl *)&CConfigVarInt::_vftable_;
   this->value = a2;
   return this;

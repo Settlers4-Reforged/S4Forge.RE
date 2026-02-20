@@ -656,18 +656,18 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
   _BYTE v158[28]; // [esp+10h] [ebp-1B20h] BYREF
   _BYTE v159[28]; // [esp+2Ch] [ebp-1B04h] BYREF
   _BYTE v160[16]; // [esp+58h] [ebp-1AD8h] BYREF
-  _BYTE v161[16]; // [esp+68h] [ebp-1AC8h] BYREF
+  _DWORD v161[4]; // [esp+68h] [ebp-1AC8h] BYREF
   _BYTE v162[16]; // [esp+78h] [ebp-1AB8h] BYREF
-  _BYTE v163[16]; // [esp+88h] [ebp-1AA8h] BYREF
+  _DWORD v163[4]; // [esp+88h] [ebp-1AA8h] BYREF
   _BYTE v164[16]; // [esp+98h] [ebp-1A98h] BYREF
-  _BYTE v165[16]; // [esp+B8h] [ebp-1A78h] BYREF
+  _DWORD v165[4]; // [esp+B8h] [ebp-1A78h] BYREF
   _BYTE v166[16]; // [esp+C8h] [ebp-1A68h] BYREF
-  _BYTE v167[16]; // [esp+D8h] [ebp-1A58h] BYREF
+  _DWORD v167[4]; // [esp+D8h] [ebp-1A58h] BYREF
   _BYTE v168[16]; // [esp+E8h] [ebp-1A48h] BYREF
-  _BYTE v169[16]; // [esp+F8h] [ebp-1A38h] BYREF
+  _DWORD v169[4]; // [esp+F8h] [ebp-1A38h] BYREF
   _BYTE v170[16]; // [esp+108h] [ebp-1A28h] BYREF
-  _BYTE v171[16]; // [esp+118h] [ebp-1A18h] BYREF
-  _BYTE v172[16]; // [esp+128h] [ebp-1A08h] BYREF
+  _DWORD v171[4]; // [esp+118h] [ebp-1A18h] BYREF
+  _DWORD v172[4]; // [esp+128h] [ebp-1A08h] BYREF
   _BYTE v173[16]; // [esp+138h] [ebp-19F8h] BYREF
   _BYTE v174[16]; // [esp+148h] [ebp-19E8h] BYREF
   _BYTE v175[16]; // [esp+158h] [ebp-19D8h] BYREF
@@ -676,21 +676,21 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
   _BYTE v178[16]; // [esp+188h] [ebp-19A8h] BYREF
   _BYTE v179[16]; // [esp+198h] [ebp-1998h] BYREF
   _BYTE v180[16]; // [esp+1A8h] [ebp-1988h] BYREF
-  void *v181; // [esp+1B8h] [ebp-1978h]
+  struct std::string *v181; // [esp+1B8h] [ebp-1978h]
   int v182; // [esp+1BCh] [ebp-1974h]
   int v183; // [esp+1C0h] [ebp-1970h]
-  void *v184; // [esp+1C4h] [ebp-196Ch]
-  void *v185; // [esp+1C8h] [ebp-1968h]
+  struct std::string *v184; // [esp+1C4h] [ebp-196Ch]
+  struct std::string *v185; // [esp+1C8h] [ebp-1968h]
   int v186; // [esp+1CCh] [ebp-1964h]
   int v187; // [esp+1D0h] [ebp-1960h]
-  void *v188; // [esp+1D4h] [ebp-195Ch]
+  struct std::string *v188; // [esp+1D4h] [ebp-195Ch]
   int v189; // [esp+1D8h] [ebp-1958h]
   int v190; // [esp+1DCh] [ebp-1954h]
-  void *v191; // [esp+1E0h] [ebp-1950h]
-  void *v192; // [esp+1E4h] [ebp-194Ch]
-  void *v193; // [esp+1E8h] [ebp-1948h]
-  void *v194; // [esp+1ECh] [ebp-1944h]
-  void *v195; // [esp+1F0h] [ebp-1940h]
+  struct std::string *v191; // [esp+1E0h] [ebp-1950h]
+  struct std::string *v192; // [esp+1E4h] [ebp-194Ch]
+  struct std::string *v193; // [esp+1E8h] [ebp-1948h]
+  struct std::string *v194; // [esp+1ECh] [ebp-1944h]
+  struct std::string *v195; // [esp+1F0h] [ebp-1940h]
   int v196; // [esp+1F4h] [ebp-193Ch]
   int v197; // [esp+1F8h] [ebp-1938h]
   int v198; // [esp+1FCh] [ebp-1934h]
@@ -698,10 +698,10 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
   int v200; // [esp+204h] [ebp-192Ch]
   int v201; // [esp+208h] [ebp-1928h]
   int v202; // [esp+20Ch] [ebp-1924h]
-  void *v203; // [esp+210h] [ebp-1920h]
-  void *v204; // [esp+214h] [ebp-191Ch]
-  void *v205; // [esp+218h] [ebp-1918h]
-  void *v206; // [esp+21Ch] [ebp-1914h]
+  struct std::string *v203; // [esp+210h] [ebp-1920h]
+  struct std::string *v204; // [esp+214h] [ebp-191Ch]
+  struct std::string *v205; // [esp+218h] [ebp-1918h]
+  struct std::string *v206; // [esp+21Ch] [ebp-1914h]
   int v207; // [esp+220h] [ebp-1910h]
   int v208; // [esp+224h] [ebp-190Ch]
   int v209; // [esp+228h] [ebp-1908h]
@@ -710,66 +710,66 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
   int v212; // [esp+234h] [ebp-18FCh]
   int v213; // [esp+238h] [ebp-18F8h]
   int v214; // [esp+23Ch] [ebp-18F4h]
-  void *v215; // [esp+240h] [ebp-18F0h]
+  struct std::string *v215; // [esp+240h] [ebp-18F0h]
   _BYTE v216[16]; // [esp+244h] [ebp-18ECh] BYREF
   _BYTE v217[16]; // [esp+254h] [ebp-18DCh] BYREF
   _BYTE v218[16]; // [esp+264h] [ebp-18CCh] BYREF
   int v219; // [esp+274h] [ebp-18BCh]
-  void *v220; // [esp+278h] [ebp-18B8h]
+  std::string *v220; // [esp+278h] [ebp-18B8h]
   int v221; // [esp+27Ch] [ebp-18B4h]
   int v222; // [esp+280h] [ebp-18B0h]
-  void *v223; // [esp+284h] [ebp-18ACh]
+  std::string *v223; // [esp+284h] [ebp-18ACh]
   int v224; // [esp+288h] [ebp-18A8h]
   int v225; // [esp+28Ch] [ebp-18A4h]
   int v226; // [esp+290h] [ebp-18A0h]
-  void *v227; // [esp+294h] [ebp-189Ch]
+  std::string *v227; // [esp+294h] [ebp-189Ch]
   int v228; // [esp+298h] [ebp-1898h]
   int v229; // [esp+29Ch] [ebp-1894h]
   int v230; // [esp+2A0h] [ebp-1890h]
-  void *v231; // [esp+2A4h] [ebp-188Ch]
+  std::string *v231; // [esp+2A4h] [ebp-188Ch]
   int v232; // [esp+2A8h] [ebp-1888h]
   int v233; // [esp+2ACh] [ebp-1884h]
   int v234; // [esp+2B0h] [ebp-1880h]
   CConfigManager *v235; // [esp+2B4h] [ebp-187Ch]
-  void *v236; // [esp+2B8h] [ebp-1878h]
-  void *v237; // [esp+2BCh] [ebp-1874h]
+  std::string *v236; // [esp+2B8h] [ebp-1878h]
+  std::string *v237; // [esp+2BCh] [ebp-1874h]
   int v238; // [esp+2C0h] [ebp-1870h]
   int v239; // [esp+2C4h] [ebp-186Ch]
   int v240; // [esp+2C8h] [ebp-1868h]
   int v241; // [esp+2CCh] [ebp-1864h]
-  void *v242; // [esp+2D0h] [ebp-1860h]
+  std::string *v242; // [esp+2D0h] [ebp-1860h]
   int v243; // [esp+2D4h] [ebp-185Ch]
   int v244; // [esp+2D8h] [ebp-1858h]
   int v245; // [esp+2DCh] [ebp-1854h]
-  void *v246; // [esp+2E0h] [ebp-1850h]
+  std::string *v246; // [esp+2E0h] [ebp-1850h]
   int v247; // [esp+2E4h] [ebp-184Ch]
   int v248; // [esp+2E8h] [ebp-1848h]
   int v249; // [esp+2ECh] [ebp-1844h]
-  void *v250; // [esp+2F0h] [ebp-1840h]
+  std::string *v250; // [esp+2F0h] [ebp-1840h]
   int v251; // [esp+2F4h] [ebp-183Ch]
   int v252; // [esp+2F8h] [ebp-1838h]
   int v253; // [esp+2FCh] [ebp-1834h]
-  void *v254; // [esp+300h] [ebp-1830h]
+  std::string *v254; // [esp+300h] [ebp-1830h]
   int v255; // [esp+304h] [ebp-182Ch]
   int v256; // [esp+308h] [ebp-1828h]
   int v257; // [esp+30Ch] [ebp-1824h]
-  void *v258; // [esp+310h] [ebp-1820h]
+  std::string *v258; // [esp+310h] [ebp-1820h]
   int v259; // [esp+314h] [ebp-181Ch]
   int v260; // [esp+318h] [ebp-1818h]
-  void *v261; // [esp+31Ch] [ebp-1814h]
+  std::string *v261; // [esp+31Ch] [ebp-1814h]
   int v262; // [esp+320h] [ebp-1810h]
   int v263; // [esp+324h] [ebp-180Ch]
   int v264; // [esp+328h] [ebp-1808h]
   int v265; // [esp+32Ch] [ebp-1804h]
-  void *v266; // [esp+330h] [ebp-1800h]
+  std::string *v266; // [esp+330h] [ebp-1800h]
   int v267; // [esp+334h] [ebp-17FCh]
   int v268; // [esp+338h] [ebp-17F8h]
   int v269; // [esp+33Ch] [ebp-17F4h]
-  void *v270; // [esp+340h] [ebp-17F0h]
+  std::string *v270; // [esp+340h] [ebp-17F0h]
   int v271; // [esp+344h] [ebp-17ECh]
   int v272; // [esp+348h] [ebp-17E8h]
   int v273; // [esp+34Ch] [ebp-17E4h]
-  void *v274; // [esp+350h] [ebp-17E0h]
+  std::string *v274; // [esp+350h] [ebp-17E0h]
   int v275; // [esp+354h] [ebp-17DCh]
   int v276; // [esp+358h] [ebp-17D8h]
   int v277; // [esp+35Ch] [ebp-17D4h]
@@ -778,126 +778,126 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
   int v280; // [esp+368h] [ebp-17C8h]
   int v281; // [esp+36Ch] [ebp-17C4h]
   int v282; // [esp+370h] [ebp-17C0h]
-  void *v283; // [esp+374h] [ebp-17BCh]
+  std::string *v283; // [esp+374h] [ebp-17BCh]
   int v284; // [esp+378h] [ebp-17B8h]
   int v285; // [esp+37Ch] [ebp-17B4h]
   int v286; // [esp+380h] [ebp-17B0h]
-  void *v287; // [esp+384h] [ebp-17ACh]
+  std::string *v287; // [esp+384h] [ebp-17ACh]
   int v288; // [esp+388h] [ebp-17A8h]
   int v289; // [esp+38Ch] [ebp-17A4h]
   int v290; // [esp+390h] [ebp-17A0h]
-  void *v291; // [esp+394h] [ebp-179Ch]
+  std::string *v291; // [esp+394h] [ebp-179Ch]
   int v292; // [esp+398h] [ebp-1798h]
   int v293; // [esp+39Ch] [ebp-1794h]
-  void *v294; // [esp+3A0h] [ebp-1790h]
-  void *v295; // [esp+3A4h] [ebp-178Ch]
+  std::string *v294; // [esp+3A0h] [ebp-1790h]
+  std::string *v295; // [esp+3A4h] [ebp-178Ch]
   int v296; // [esp+3A8h] [ebp-1788h]
   int v297; // [esp+3ACh] [ebp-1784h]
   int v298; // [esp+3B0h] [ebp-1780h]
   int v299; // [esp+3B4h] [ebp-177Ch]
-  void *v300; // [esp+3B8h] [ebp-1778h]
-  void *v301; // [esp+3BCh] [ebp-1774h]
+  std::string *v300; // [esp+3B8h] [ebp-1778h]
+  std::string *v301; // [esp+3BCh] [ebp-1774h]
   CConfigManager *v302; // [esp+3C0h] [ebp-1770h]
   int v303; // [esp+3C4h] [ebp-176Ch]
   int v304; // [esp+3C8h] [ebp-1768h]
   int v305; // [esp+3CCh] [ebp-1764h]
   CConfigManager *v306; // [esp+3D0h] [ebp-1760h]
-  void *v307; // [esp+3D4h] [ebp-175Ch]
-  void *v308; // [esp+3D8h] [ebp-1758h]
+  std::string *v307; // [esp+3D4h] [ebp-175Ch]
+  std::string *v308; // [esp+3D8h] [ebp-1758h]
   int v309; // [esp+3DCh] [ebp-1754h]
   int v310; // [esp+3E0h] [ebp-1750h]
   int v311; // [esp+3E4h] [ebp-174Ch]
   int v312; // [esp+3E8h] [ebp-1748h]
-  void *v313; // [esp+3ECh] [ebp-1744h]
-  void *v314; // [esp+3F0h] [ebp-1740h]
+  std::string *v313; // [esp+3ECh] [ebp-1744h]
+  std::string *v314; // [esp+3F0h] [ebp-1740h]
   int v315; // [esp+3F4h] [ebp-173Ch]
   int v316; // [esp+3F8h] [ebp-1738h]
   int v317; // [esp+3FCh] [ebp-1734h]
-  void *v318; // [esp+400h] [ebp-1730h]
+  std::string *v318; // [esp+400h] [ebp-1730h]
   int v319; // [esp+404h] [ebp-172Ch]
   int v320; // [esp+408h] [ebp-1728h]
   _BYTE v321[16]; // [esp+40Ch] [ebp-1724h] BYREF
-  void *v322; // [esp+41Ch] [ebp-1714h]
+  std::string *v322; // [esp+41Ch] [ebp-1714h]
   int v323; // [esp+420h] [ebp-1710h]
-  void *v324; // [esp+424h] [ebp-170Ch]
+  std::string *v324; // [esp+424h] [ebp-170Ch]
   void *v325; // [esp+428h] [ebp-1708h]
-  void *v326; // [esp+42Ch] [ebp-1704h]
+  std::string *v326; // [esp+42Ch] [ebp-1704h]
   int v327; // [esp+430h] [ebp-1700h]
   int v328; // [esp+434h] [ebp-16FCh]
   int v329; // [esp+438h] [ebp-16F8h]
   int v330; // [esp+43Ch] [ebp-16F4h]
-  void *v331; // [esp+440h] [ebp-16F0h]
+  std::string *v331; // [esp+440h] [ebp-16F0h]
   int v332; // [esp+444h] [ebp-16ECh]
   int v333; // [esp+448h] [ebp-16E8h]
   int v334; // [esp+44Ch] [ebp-16E4h]
   int v335; // [esp+450h] [ebp-16E0h]
   int v336; // [esp+454h] [ebp-16DCh]
-  void *v337; // [esp+458h] [ebp-16D8h]
-  void *v338; // [esp+45Ch] [ebp-16D4h]
+  std::string *v337; // [esp+458h] [ebp-16D8h]
+  std::string *v338; // [esp+45Ch] [ebp-16D4h]
   CConfigManager *v339; // [esp+460h] [ebp-16D0h]
   int v340; // [esp+464h] [ebp-16CCh]
   int v341; // [esp+468h] [ebp-16C8h]
   int v342; // [esp+46Ch] [ebp-16C4h]
   int v343; // [esp+470h] [ebp-16C0h]
-  void *v344; // [esp+474h] [ebp-16BCh]
+  std::string *v344; // [esp+474h] [ebp-16BCh]
   int v345; // [esp+478h] [ebp-16B8h]
   int v346; // [esp+47Ch] [ebp-16B4h]
   int v347; // [esp+480h] [ebp-16B0h]
-  void *v348; // [esp+484h] [ebp-16ACh]
+  std::string *v348; // [esp+484h] [ebp-16ACh]
   int v349; // [esp+488h] [ebp-16A8h]
   int v350; // [esp+48Ch] [ebp-16A4h]
   int v351; // [esp+490h] [ebp-16A0h]
-  void *v352; // [esp+494h] [ebp-169Ch]
+  std::string *v352; // [esp+494h] [ebp-169Ch]
   int v353; // [esp+498h] [ebp-1698h]
   int v354; // [esp+49Ch] [ebp-1694h]
   int v355; // [esp+4A0h] [ebp-1690h]
-  void *v356; // [esp+4A4h] [ebp-168Ch]
+  std::string *v356; // [esp+4A4h] [ebp-168Ch]
   int v357; // [esp+4A8h] [ebp-1688h]
   int v358; // [esp+4ACh] [ebp-1684h]
   int v359; // [esp+4B0h] [ebp-1680h]
   int v360; // [esp+4B4h] [ebp-167Ch]
-  void *v361; // [esp+4B8h] [ebp-1678h]
-  void *v362; // [esp+4BCh] [ebp-1674h]
+  std::string *v361; // [esp+4B8h] [ebp-1678h]
+  std::string *v362; // [esp+4BCh] [ebp-1674h]
   CConfigManager *v363; // [esp+4C0h] [ebp-1670h]
   int v364; // [esp+4C4h] [ebp-166Ch]
   int v365; // [esp+4C8h] [ebp-1668h]
   int v366; // [esp+4CCh] [ebp-1664h]
-  void *v367; // [esp+4D0h] [ebp-1660h]
+  std::string *v367; // [esp+4D0h] [ebp-1660h]
   int v368; // [esp+4D4h] [ebp-165Ch]
   int v369; // [esp+4D8h] [ebp-1658h]
   int v370; // [esp+4DCh] [ebp-1654h]
   int v371; // [esp+4E0h] [ebp-1650h]
-  void *v372; // [esp+4E4h] [ebp-164Ch]
+  std::string *v372; // [esp+4E4h] [ebp-164Ch]
   int v373; // [esp+4E8h] [ebp-1648h]
   int v374; // [esp+4ECh] [ebp-1644h]
   int v375; // [esp+4F0h] [ebp-1640h]
   int v376; // [esp+4F4h] [ebp-163Ch]
   int v377; // [esp+4F8h] [ebp-1638h]
   CConfigManager *v378; // [esp+4FCh] [ebp-1634h]
-  void *v379; // [esp+500h] [ebp-1630h]
-  void *v380; // [esp+504h] [ebp-162Ch]
+  std::string *v379; // [esp+500h] [ebp-1630h]
+  std::string *v380; // [esp+504h] [ebp-162Ch]
   int v381; // [esp+508h] [ebp-1628h]
   int v382; // [esp+50Ch] [ebp-1624h]
   int v383; // [esp+510h] [ebp-1620h]
   int v384; // [esp+514h] [ebp-161Ch]
   int v385; // [esp+518h] [ebp-1618h]
   int v386; // [esp+51Ch] [ebp-1614h]
-  void *v387; // [esp+520h] [ebp-1610h]
-  void *v388; // [esp+524h] [ebp-160Ch]
+  std::string *v387; // [esp+520h] [ebp-1610h]
+  std::string *v388; // [esp+524h] [ebp-160Ch]
   int v389; // [esp+528h] [ebp-1608h]
   int v390; // [esp+52Ch] [ebp-1604h]
-  void *v391; // [esp+530h] [ebp-1600h]
+  std::string *v391; // [esp+530h] [ebp-1600h]
   int v392; // [esp+534h] [ebp-15FCh]
   int v393; // [esp+538h] [ebp-15F8h]
   int v394; // [esp+53Ch] [ebp-15F4h]
-  void *v395; // [esp+540h] [ebp-15F0h]
+  std::string *v395; // [esp+540h] [ebp-15F0h]
   int v396; // [esp+544h] [ebp-15ECh]
   int v397; // [esp+548h] [ebp-15E8h]
   int v398; // [esp+54Ch] [ebp-15E4h]
   int v399; // [esp+550h] [ebp-15E0h]
   CConfigManager *v400; // [esp+554h] [ebp-15DCh]
-  void *v401; // [esp+558h] [ebp-15D8h]
-  void *v402; // [esp+55Ch] [ebp-15D4h]
+  std::string *v401; // [esp+558h] [ebp-15D8h]
+  std::string *v402; // [esp+55Ch] [ebp-15D4h]
   int v403; // [esp+560h] [ebp-15D0h]
   int v404; // [esp+564h] [ebp-15CCh]
   int v405; // [esp+568h] [ebp-15C8h]
@@ -936,63 +936,63 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
   int v438; // [esp+5ECh] [ebp-1544h]
   int v439; // [esp+5F0h] [ebp-1540h]
   int v440; // [esp+5F4h] [ebp-153Ch]
-  void *v441; // [esp+5F8h] [ebp-1538h]
-  void *v442; // [esp+5FCh] [ebp-1534h]
+  std::string *v441; // [esp+5F8h] [ebp-1538h]
+  std::string *v442; // [esp+5FCh] [ebp-1534h]
   int v443; // [esp+600h] [ebp-1530h]
   int v444; // [esp+604h] [ebp-152Ch]
-  void *v445; // [esp+608h] [ebp-1528h]
+  std::string *v445; // [esp+608h] [ebp-1528h]
   int v446; // [esp+60Ch] [ebp-1524h]
   int v447; // [esp+610h] [ebp-1520h]
   int v448; // [esp+614h] [ebp-151Ch]
   int v449; // [esp+618h] [ebp-1518h]
-  int v450; // [esp+61Ch] [ebp-1514h]
+  void *v450; // [esp+61Ch] [ebp-1514h]
   int v451; // [esp+620h] [ebp-1510h]
   int v452; // [esp+624h] [ebp-150Ch]
   int v453; // [esp+628h] [ebp-1508h]
   int v454; // [esp+62Ch] [ebp-1504h]
   int v455; // [esp+630h] [ebp-1500h]
-  void *v456; // [esp+634h] [ebp-14FCh]
+  std::string *v456; // [esp+634h] [ebp-14FCh]
   int v457; // [esp+638h] [ebp-14F8h]
   int v458; // [esp+63Ch] [ebp-14F4h]
   int v459; // [esp+640h] [ebp-14F0h]
-  void *v460; // [esp+644h] [ebp-14ECh]
+  std::string *v460; // [esp+644h] [ebp-14ECh]
   int v461; // [esp+648h] [ebp-14E8h]
   int v462; // [esp+64Ch] [ebp-14E4h]
   int v463; // [esp+650h] [ebp-14E0h]
   int v464; // [esp+654h] [ebp-14DCh]
-  void *v465; // [esp+658h] [ebp-14D8h]
-  void *v466; // [esp+65Ch] [ebp-14D4h]
+  std::string *v465; // [esp+658h] [ebp-14D8h]
+  std::string *v466; // [esp+65Ch] [ebp-14D4h]
   CConfigManager *v467; // [esp+660h] [ebp-14D0h]
   int v468; // [esp+664h] [ebp-14CCh]
   int v469; // [esp+668h] [ebp-14C8h]
   int v470; // [esp+66Ch] [ebp-14C4h]
-  void *v471; // [esp+670h] [ebp-14C0h]
+  std::string *v471; // [esp+670h] [ebp-14C0h]
   int v472; // [esp+674h] [ebp-14BCh]
   int v473; // [esp+678h] [ebp-14B8h]
-  void *v474; // [esp+67Ch] [ebp-14B4h]
+  std::string *v474; // [esp+67Ch] [ebp-14B4h]
   int v475; // [esp+680h] [ebp-14B0h]
   int v476; // [esp+684h] [ebp-14ACh]
   int v477; // [esp+688h] [ebp-14A8h]
   int v478; // [esp+68Ch] [ebp-14A4h]
-  void *v479; // [esp+690h] [ebp-14A0h]
-  void *v480; // [esp+694h] [ebp-149Ch]
+  std::string *v479; // [esp+690h] [ebp-14A0h]
+  std::string *v480; // [esp+694h] [ebp-149Ch]
   int v481; // [esp+698h] [ebp-1498h]
   int v482; // [esp+69Ch] [ebp-1494h]
   int v483; // [esp+6A0h] [ebp-1490h]
   int v484; // [esp+6A4h] [ebp-148Ch]
-  void *v485; // [esp+6A8h] [ebp-1488h]
-  void *v486; // [esp+6ACh] [ebp-1484h]
+  std::string *v485; // [esp+6A8h] [ebp-1488h]
+  std::string *v486; // [esp+6ACh] [ebp-1484h]
   CConfigManager *v487; // [esp+6B0h] [ebp-1480h]
   int v488; // [esp+6B4h] [ebp-147Ch]
   int v489; // [esp+6B8h] [ebp-1478h]
   int v490; // [esp+6BCh] [ebp-1474h]
-  void *v491; // [esp+6C0h] [ebp-1470h]
-  void *v492; // [esp+6C4h] [ebp-146Ch]
+  std::string *v491; // [esp+6C0h] [ebp-1470h]
+  std::string *v492; // [esp+6C4h] [ebp-146Ch]
   int v493; // [esp+6C8h] [ebp-1468h]
   int v494; // [esp+6CCh] [ebp-1464h]
   int v495; // [esp+6D0h] [ebp-1460h]
   int v496; // [esp+6D4h] [ebp-145Ch]
-  int v497; // [esp+6D8h] [ebp-1458h]
+  void *v497; // [esp+6D8h] [ebp-1458h]
   int v498; // [esp+6DCh] [ebp-1454h]
   int v499; // [esp+6E0h] [ebp-1450h]
   int v500; // [esp+6E4h] [ebp-144Ch]
@@ -1001,12 +1001,12 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
   int v503; // [esp+6F0h] [ebp-1440h]
   int v504; // [esp+6F4h] [ebp-143Ch]
   CConfigManager *v505; // [esp+6F8h] [ebp-1438h]
-  void *v506; // [esp+6FCh] [ebp-1434h]
-  void *v507; // [esp+700h] [ebp-1430h]
+  std::string *v506; // [esp+6FCh] [ebp-1434h]
+  std::string *v507; // [esp+700h] [ebp-1430h]
   int v508; // [esp+704h] [ebp-142Ch]
   int v509; // [esp+708h] [ebp-1428h]
   int v510; // [esp+70Ch] [ebp-1424h]
-  int v511; // [esp+710h] [ebp-1420h]
+  void *v511; // [esp+710h] [ebp-1420h]
   int v512; // [esp+714h] [ebp-141Ch]
   int v513; // [esp+718h] [ebp-1418h]
   int v514; // [esp+71Ch] [ebp-1414h]
@@ -1016,127 +1016,127 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
   int v518; // [esp+72Ch] [ebp-1404h]
   int v519; // [esp+730h] [ebp-1400h]
   int v520; // [esp+734h] [ebp-13FCh]
-  void *v521; // [esp+738h] [ebp-13F8h]
+  std::string *v521; // [esp+738h] [ebp-13F8h]
   int v522; // [esp+73Ch] [ebp-13F4h]
   int v523; // [esp+740h] [ebp-13F0h]
-  void *v524; // [esp+744h] [ebp-13ECh]
+  std::string *v524; // [esp+744h] [ebp-13ECh]
   int v525; // [esp+748h] [ebp-13E8h]
   int v526; // [esp+74Ch] [ebp-13E4h]
   int v527; // [esp+750h] [ebp-13E0h]
   int v528; // [esp+754h] [ebp-13DCh]
-  void *v529; // [esp+758h] [ebp-13D8h]
-  void *v530; // [esp+75Ch] [ebp-13D4h]
+  std::string *v529; // [esp+758h] [ebp-13D8h]
+  std::string *v530; // [esp+75Ch] [ebp-13D4h]
   int v531; // [esp+760h] [ebp-13D0h]
   int v532; // [esp+764h] [ebp-13CCh]
-  void *v533; // [esp+768h] [ebp-13C8h]
+  std::string *v533; // [esp+768h] [ebp-13C8h]
   int v534; // [esp+76Ch] [ebp-13C4h]
   int v535; // [esp+770h] [ebp-13C0h]
   int v536; // [esp+774h] [ebp-13BCh]
   int v537; // [esp+778h] [ebp-13B8h]
-  void *v538; // [esp+77Ch] [ebp-13B4h]
+  std::string *v538; // [esp+77Ch] [ebp-13B4h]
   int v539; // [esp+780h] [ebp-13B0h]
   int v540; // [esp+784h] [ebp-13ACh]
   int v541; // [esp+788h] [ebp-13A8h]
-  void *v542; // [esp+78Ch] [ebp-13A4h]
+  std::string *v542; // [esp+78Ch] [ebp-13A4h]
   int v543; // [esp+790h] [ebp-13A0h]
   int v544; // [esp+794h] [ebp-139Ch]
   int v545; // [esp+798h] [ebp-1398h]
-  void *v546; // [esp+79Ch] [ebp-1394h]
+  std::string *v546; // [esp+79Ch] [ebp-1394h]
   int v547; // [esp+7A0h] [ebp-1390h]
   int v548; // [esp+7A4h] [ebp-138Ch]
   int v549; // [esp+7A8h] [ebp-1388h]
-  void *v550; // [esp+7ACh] [ebp-1384h]
+  std::string *v550; // [esp+7ACh] [ebp-1384h]
   int v551; // [esp+7B0h] [ebp-1380h]
   int v552; // [esp+7B4h] [ebp-137Ch]
   int v553; // [esp+7B8h] [ebp-1378h]
-  void *v554; // [esp+7BCh] [ebp-1374h]
+  std::string *v554; // [esp+7BCh] [ebp-1374h]
   int v555; // [esp+7C0h] [ebp-1370h]
   int v556; // [esp+7C4h] [ebp-136Ch]
   int v557; // [esp+7C8h] [ebp-1368h]
-  void *v558; // [esp+7CCh] [ebp-1364h]
+  std::string *v558; // [esp+7CCh] [ebp-1364h]
   int v559; // [esp+7D0h] [ebp-1360h]
   int v560; // [esp+7D4h] [ebp-135Ch]
   int v561; // [esp+7D8h] [ebp-1358h]
-  void *v562; // [esp+7DCh] [ebp-1354h]
+  std::string *v562; // [esp+7DCh] [ebp-1354h]
   int v563; // [esp+7E0h] [ebp-1350h]
   int v564; // [esp+7E4h] [ebp-134Ch]
   int v565; // [esp+7E8h] [ebp-1348h]
-  void *v566; // [esp+7ECh] [ebp-1344h]
+  std::string *v566; // [esp+7ECh] [ebp-1344h]
   int v567; // [esp+7F0h] [ebp-1340h]
   int v568; // [esp+7F4h] [ebp-133Ch]
   int v569; // [esp+7F8h] [ebp-1338h]
-  void *v570; // [esp+7FCh] [ebp-1334h]
+  std::string *v570; // [esp+7FCh] [ebp-1334h]
   int v571; // [esp+800h] [ebp-1330h]
   int v572; // [esp+804h] [ebp-132Ch]
   int v573; // [esp+808h] [ebp-1328h]
-  void *v574; // [esp+80Ch] [ebp-1324h]
+  std::string *v574; // [esp+80Ch] [ebp-1324h]
   int v575; // [esp+810h] [ebp-1320h]
   int v576; // [esp+814h] [ebp-131Ch]
   int v577; // [esp+818h] [ebp-1318h]
-  void *v578; // [esp+81Ch] [ebp-1314h]
+  std::string *v578; // [esp+81Ch] [ebp-1314h]
   int v579; // [esp+820h] [ebp-1310h]
   int v580; // [esp+824h] [ebp-130Ch]
   int v581; // [esp+828h] [ebp-1308h]
-  void *v582; // [esp+82Ch] [ebp-1304h]
+  std::string *v582; // [esp+82Ch] [ebp-1304h]
   int v583; // [esp+830h] [ebp-1300h]
   int v584; // [esp+834h] [ebp-12FCh]
   int v585; // [esp+838h] [ebp-12F8h]
-  void *v586; // [esp+83Ch] [ebp-12F4h]
+  std::string *v586; // [esp+83Ch] [ebp-12F4h]
   int v587; // [esp+840h] [ebp-12F0h]
   int v588; // [esp+844h] [ebp-12ECh]
   int v589; // [esp+848h] [ebp-12E8h] BYREF
   int v590; // [esp+84Ch] [ebp-12E4h]
-  void *v591; // [esp+850h] [ebp-12E0h]
+  std::string *v591; // [esp+850h] [ebp-12E0h]
   int v592; // [esp+854h] [ebp-12DCh]
   int v593; // [esp+858h] [ebp-12D8h]
   int v594; // [esp+85Ch] [ebp-12D4h]
   int v595; // [esp+860h] [ebp-12D0h] BYREF
   int v596; // [esp+864h] [ebp-12CCh] BYREF
-  void *v597; // [esp+868h] [ebp-12C8h]
+  std::string *v597; // [esp+868h] [ebp-12C8h]
   int v598; // [esp+86Ch] [ebp-12C4h]
   int v599; // [esp+870h] [ebp-12C0h]
   int v600; // [esp+874h] [ebp-12BCh]
   int v601; // [esp+878h] [ebp-12B8h] BYREF
-  void *v602; // [esp+87Ch] [ebp-12B4h]
+  std::string *v602; // [esp+87Ch] [ebp-12B4h]
   int v603; // [esp+880h] [ebp-12B0h]
   int v604; // [esp+884h] [ebp-12ACh]
   int v605; // [esp+888h] [ebp-12A8h]
   int v606; // [esp+88Ch] [ebp-12A4h] BYREF
-  void *v607; // [esp+890h] [ebp-12A0h]
+  std::string *v607; // [esp+890h] [ebp-12A0h]
   int v608; // [esp+894h] [ebp-129Ch]
   int v609; // [esp+898h] [ebp-1298h]
   int v610; // [esp+89Ch] [ebp-1294h]
   int v611; // [esp+8A0h] [ebp-1290h] BYREF
-  void *v612; // [esp+8A4h] [ebp-128Ch]
+  std::string *v612; // [esp+8A4h] [ebp-128Ch]
   int v613; // [esp+8A8h] [ebp-1288h]
   int v614; // [esp+8ACh] [ebp-1284h]
   int v615; // [esp+8B0h] [ebp-1280h]
   int v616; // [esp+8B4h] [ebp-127Ch] BYREF
-  void *v617; // [esp+8B8h] [ebp-1278h]
+  std::string *v617; // [esp+8B8h] [ebp-1278h]
   int v618; // [esp+8BCh] [ebp-1274h]
   int v619; // [esp+8C0h] [ebp-1270h]
   int v620; // [esp+8C4h] [ebp-126Ch]
   int v621; // [esp+8C8h] [ebp-1268h] BYREF
-  void *v622; // [esp+8CCh] [ebp-1264h]
+  std::string *v622; // [esp+8CCh] [ebp-1264h]
   int v623; // [esp+8D0h] [ebp-1260h]
   int v624; // [esp+8D4h] [ebp-125Ch]
   int v625; // [esp+8D8h] [ebp-1258h]
-  void *v626; // [esp+8DCh] [ebp-1254h]
+  std::string *v626; // [esp+8DCh] [ebp-1254h]
   int v627; // [esp+8E0h] [ebp-1250h]
   int v628; // [esp+8E4h] [ebp-124Ch]
-  void *v629; // [esp+8E8h] [ebp-1248h]
+  std::string *v629; // [esp+8E8h] [ebp-1248h]
   int v630; // [esp+8ECh] [ebp-1244h]
   int v631; // [esp+8F0h] [ebp-1240h]
-  void *v632; // [esp+8F4h] [ebp-123Ch]
+  std::string *v632; // [esp+8F4h] [ebp-123Ch]
   int v633; // [esp+8F8h] [ebp-1238h]
   int v634; // [esp+8FCh] [ebp-1234h]
-  void *v635; // [esp+900h] [ebp-1230h]
+  std::string *v635; // [esp+900h] [ebp-1230h]
   int v636; // [esp+904h] [ebp-122Ch]
   int v637; // [esp+908h] [ebp-1228h]
-  void *v638; // [esp+90Ch] [ebp-1224h]
+  std::string *v638; // [esp+90Ch] [ebp-1224h]
   int v639; // [esp+910h] [ebp-1220h]
   int v640; // [esp+914h] [ebp-121Ch]
-  void *v641; // [esp+918h] [ebp-1218h]
+  std::string *v641; // [esp+918h] [ebp-1218h]
   int v642; // [esp+91Ch] [ebp-1214h]
   int v643; // [esp+920h] [ebp-1210h]
   int v644; // [esp+924h] [ebp-120Ch]
@@ -1155,7 +1155,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
   int v657; // [esp+958h] [ebp-11D8h]
   int v658; // [esp+95Ch] [ebp-11D4h]
   int v659; // [esp+960h] [ebp-11D0h]
-  void *v660; // [esp+964h] [ebp-11CCh]
+  std::string *v660; // [esp+964h] [ebp-11CCh]
   int Name; // [esp+968h] [ebp-11C8h]
   int v662; // [esp+96Ch] [ebp-11C4h]
   int v663; // [esp+970h] [ebp-11C0h]
@@ -1203,7 +1203,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
   int v705; // [esp+A24h] [ebp-110Ch]
   int v706; // [esp+A28h] [ebp-1108h]
   int v707; // [esp+A2Ch] [ebp-1104h]
-  const char *v708; // [esp+A30h] [ebp-1100h]
+  char *v708; // [esp+A30h] [ebp-1100h]
   CConfigManager *v709; // [esp+A34h] [ebp-10FCh]
   int v710; // [esp+A38h] [ebp-10F8h]
   int v711; // [esp+A3Ch] [ebp-10F4h]
@@ -1386,40 +1386,40 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
   _BYTE v898[28]; // [esp+18ECh] [ebp-244h] BYREF
   _BYTE v899[28]; // [esp+1908h] [ebp-228h] BYREF
   _BYTE v900[28]; // [esp+1924h] [ebp-20Ch] BYREF
-  _BYTE v901[28]; // [esp+1940h] [ebp-1F0h] BYREF
-  _BYTE v902[28]; // [esp+195Ch] [ebp-1D4h] BYREF
-  _BYTE v903[28]; // [esp+1978h] [ebp-1B8h] BYREF
-  _BYTE v904[28]; // [esp+1994h] [ebp-19Ch] BYREF
-  _BYTE v905[28]; // [esp+19B0h] [ebp-180h] BYREF
-  _BYTE v906[28]; // [esp+19CCh] [ebp-164h] BYREF
-  _BYTE v907[28]; // [esp+19E8h] [ebp-148h] BYREF
-  _BYTE v908[28]; // [esp+1A04h] [ebp-12Ch] BYREF
-  _BYTE v909[28]; // [esp+1A20h] [ebp-110h] BYREF
-  _BYTE v910[28]; // [esp+1A3Ch] [ebp-F4h] BYREF
-  _BYTE v911[28]; // [esp+1A58h] [ebp-D8h] BYREF
-  _BYTE v912[28]; // [esp+1A74h] [ebp-BCh] BYREF
+  std::string v901; // [esp+1940h] [ebp-1F0h] BYREF
+  std::string v902; // [esp+195Ch] [ebp-1D4h] BYREF
+  std::string v903; // [esp+1978h] [ebp-1B8h] BYREF
+  std::string v904; // [esp+1994h] [ebp-19Ch] BYREF
+  std::string v905; // [esp+19B0h] [ebp-180h] BYREF
+  std::string v906; // [esp+19CCh] [ebp-164h] BYREF
+  std::string v907; // [esp+19E8h] [ebp-148h] BYREF
+  std::string v908; // [esp+1A04h] [ebp-12Ch] BYREF
+  std::string v909; // [esp+1A20h] [ebp-110h] BYREF
+  std::string v910; // [esp+1A3Ch] [ebp-F4h] BYREF
+  std::string v911; // [esp+1A58h] [ebp-D8h] BYREF
+  std::string v912; // [esp+1A74h] [ebp-BCh] BYREF
   _BYTE v913[28]; // [esp+1A90h] [ebp-A0h] BYREF
-  int v914[7]; // [esp+1AACh] [ebp-84h] BYREF
-  _BYTE v915[28]; // [esp+1AC8h] [ebp-68h] BYREF
-  _BYTE v916[28]; // [esp+1AE4h] [ebp-4Ch] BYREF
-  _BYTE v917[28]; // [esp+1B00h] [ebp-30h] BYREF
+  std::string v914; // [esp+1AACh] [ebp-84h] BYREF
+  std::string v915; // [esp+1AC8h] [ebp-68h] BYREF
+  std::string v916; // [esp+1AE4h] [ebp-4Ch] BYREF
+  std::string v917; // [esp+1B00h] [ebp-30h] BYREF
   int *v918; // [esp+1B20h] [ebp-10h]
   int v919; // [esp+1B2Ch] [ebp-4h]
 
   v918 = &v156;
   v697 = this;
   v787 = 0;
-  result = AdvXMLParser::Parser::OpenXMLFile(aGamedataBuildi, &v787);
+  result = (char *)AdvXMLParser::Parser::OpenXMLFile(aGamedataBuildi, &v787);
   v795 = result;
   if ( !result )
     return result;
   v919 = 0;
   v202 = AdvXMLParser::Parser::Parser(v158);
   LOBYTE(v919) = 1;
-  v669 = AdvXMLParser::Parser::Parse((AdvXMLParser::Parser *)v158, v795, v787);
-  std::auto_ptr<AdvXMLParser::Document>::auto_ptr<AdvXMLParser::Document>(v669);
+  v669 = (struct Document *)AdvXMLParser::Parser::Parse((AdvXMLParser::Parser *)v158, v795, v787);
+  std::auto_ptr<AdvXMLParser::Document>::auto_ptr<AdvXMLParser::Document>((int)v669);
   LOBYTE(v919) = 2;
-  v2 = std::auto_ptr<AdvXMLParser::Document>::operator->(v156, v157);
+  v2 = ((int (__cdecl *)(int, int))std::auto_ptr<AdvXMLParser::Document>::operator->)(v156, v157);
   Root = AdvXMLParser::Document::GetRoot(v2);
   v780 = Root;
   v667 = CDefineTranslator::Instance();
@@ -1427,24 +1427,24 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
   v666 = AdvXMLParser::NodeContainer::Begin(v780, v173);
   v665 = v666;
   LOBYTE(v919) = 3;
-  v201 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v666);
+  v201 = ((int (__stdcall *)(int))AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>)(v666);
   LOBYTE(v919) = 5;
   AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v173);
-  v664 = AdvXMLParser::NodeContainer::End(v780, v172);
+  v664 = (int)AdvXMLParser::NodeContainer::End((void *)v780, v172);
   v663 = v664;
   LOBYTE(v919) = 6;
-  v198 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v664);
+  v198 = ((int (__stdcall *)(int))AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>)(v664);
   LOBYTE(v919) = 8;
   AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v172);
-  while ( (unsigned __int8)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator<(v178) )
+  while ( (unsigned __int8)((_DWORD (__stdcall *)(_BYTE *))AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator<)(v178) )
   {
     v662 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v321);
     v783 = v662;
     Name = AdvXMLParser::Node::GetName(v662);
     if ( std::operator==<char>(Name, "BuildingXMLVersion") )
     {
-      v660 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v783 + 8))(v783, v849);
-      v3 = (const char *)std::string::c_str(v660);
+      v660 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v783 + 8))(v783, v849);
+      v3 = std::string::c_str(v660);
       v4 = j__atoi(v3);
       *(_DWORD *)v697 = v4;
       std::string::~string(v849);
@@ -1452,36 +1452,36 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
     else
     {
       v659 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v321);
-      v658 = AdvXMLParser::Element::operator[]("id");
+      v658 = ((int (__stdcall *)(const char *))AdvXMLParser::Element::operator[])("id");
       v779 = v658;
-      v200 = (*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v658 + 8))(v658, v915);
+      v200 = (*(int (__thiscall **)(int, std::string *))(*(_DWORD *)v658 + 8))(v658, &v915);
       LOBYTE(v919) = 9;
-      if ( std::string::length(v915) )
+      if ( std::string::length(&v915) )
       {
-        ValueOfDefine = CDefineTranslator::GetValueOfDefine(v915);
+        ValueOfDefine = ((int (__stdcall *)(std::string *))CDefineTranslator::GetValueOfDefine)(&v915);
         v791 = ValueOfDefine;
         v655 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v321);
         v654 = AdvXMLParser::NodeContainer::Begin(v655, v162);
         v653 = v654;
         LOBYTE(v919) = 10;
-        v199 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v654);
+        v199 = ((int (__stdcall *)(int))AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>)(v654);
         LOBYTE(v919) = 12;
         AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v162);
         v652 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v321);
-        v651 = AdvXMLParser::NodeContainer::End(v652, v171);
+        v651 = (int)AdvXMLParser::NodeContainer::End((void *)v652, v171);
         v650 = v651;
         LOBYTE(v919) = 13;
-        v197 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v651);
+        v197 = ((int (__stdcall *)(int))AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>)(v651);
         LOBYTE(v919) = 15;
         AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v171);
-        while ( (unsigned __int8)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator<(v179) )
+        while ( (unsigned __int8)((_DWORD (__stdcall *)(_BYTE *))AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator<)(v179) )
         {
           v649 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-          v648 = AdvXMLParser::Element::operator[]("id");
+          v648 = ((int (__stdcall *)(const char *))AdvXMLParser::Element::operator[])("id");
           v778 = v648;
-          v196 = (*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v648 + 8))(v648, v917);
+          v196 = (*(int (__thiscall **)(int, std::string *))(*(_DWORD *)v648 + 8))(v648, &v917);
           LOBYTE(v919) = 16;
-          if ( !std::string::length(v917) )
+          if ( !std::string::length(&v917) )
           {
             v647 = BBSupportDbgReport(
                      2,
@@ -1491,12 +1491,12 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
             if ( v647 == 1 )
               __debugbreak();
           }
-          if ( !std::string::length(v917) )
+          if ( !std::string::length(&v917) )
             goto LABEL_16;
           Instance = CConfigManagerPtr::GetInstance();
           v777 = Instance;
-          v5 = std::string::c_str(v917);
-          v645 = ((int (__thiscall *)(CConfigManager *, int))v777->?)(v777, v5);
+          v5 = (int)std::string::c_str(&v917);
+          v645 = v777->GetDefineValue(v777, (char *)v5);
           v811 = v645;
           if ( v645 <= 0 )
           {
@@ -1508,95 +1508,97 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
           {
             v817 = (char *)&CBuildingInfoMgr::m_vBuildingInfos + 70384 * v791 + 848 * v811;
             v643 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-            v642 = AdvXMLParser::Element::operator()("iHotSpotX", 0);
+            v642 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("iHotSpotX", 0);
             v776 = v642;
-            v641 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v642 + 8))(v642, v850);
-            v6 = (const char *)std::string::c_str(v641);
+            v641 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v642 + 8))(v642, v850);
+            v6 = std::string::c_str(v641);
             v7 = j__atoi(v6);
             *v817 = v7;
             std::string::~string(v850);
             v640 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-            v639 = AdvXMLParser::Element::operator()("iHotSpotY", 0);
+            v639 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("iHotSpotY", 0);
             v775 = v639;
-            v638 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v639 + 8))(v639, v851);
-            v8 = (const char *)std::string::c_str(v638);
+            v638 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v639 + 8))(v639, v851);
+            v8 = std::string::c_str(v638);
             v9 = j__atoi(v8);
             v817[1] = v9;
             std::string::~string(v851);
             v637 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-            v636 = AdvXMLParser::Element::operator()("stone", 0);
+            v636 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("stone", 0);
             v774 = v636;
-            v635 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v636 + 8))(v636, v852);
-            v10 = (const char *)std::string::c_str(v635);
+            v635 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v636 + 8))(v636, v852);
+            v10 = std::string::c_str(v635);
             v11 = j__atoi(v10);
             v817[2] = v11;
             std::string::~string(v852);
             v634 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-            v633 = AdvXMLParser::Element::operator()("boards", 0);
+            v633 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("boards", 0);
             v773 = v633;
-            v632 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v633 + 8))(v633, v853);
-            v12 = (const char *)std::string::c_str(v632);
+            v632 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v633 + 8))(v633, v853);
+            v12 = std::string::c_str(v632);
             v13 = j__atoi(v12);
             v817[3] = v13;
             std::string::~string(v853);
             v631 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-            v630 = AdvXMLParser::Element::operator()("gold", 0);
+            v630 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("gold", 0);
             v772 = v630;
-            v629 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v630 + 8))(v630, v854);
-            v14 = (const char *)std::string::c_str(v629);
+            v629 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v630 + 8))(v630, v854);
+            v14 = std::string::c_str(v629);
             v15 = j__atoi(v14);
             v817[4] = v15;
             std::string::~string(v854);
             v628 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-            v627 = AdvXMLParser::Element::operator()("lines", 0);
+            v627 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("lines", 0);
             v771 = v627;
-            v626 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v627 + 8))(v627, v855);
-            v16 = (const char *)std::string::c_str(v626);
+            v626 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v627 + 8))(v627, v855);
+            v16 = std::string::c_str(v626);
             v17 = j__atoi(v16);
             v817[5] = v17;
             std::string::~string(v855);
             for ( i = 0; i < (unsigned __int8)v817[5]; ++i )
             {
               v625 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-              v624 = AdvXMLParser::Element::operator()("buildingPosLines", 0);
-              v623 = AdvXMLParser::Element::operator()("value", i);
+              v624 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("buildingPosLines", 0);
+              v623 = ((int (__stdcall *)(const char *, int))AdvXMLParser::Element::operator())("value", i);
               v770 = v623;
-              v622 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v623 + 8))(v623, v856);
-              v18 = (const char *)std::string::c_str(v622);
+              v622 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v623 + 8))(v623, v856);
+              v18 = std::string::c_str(v622);
               v797 = j__atoi(v18);
               std::string::~string(v856);
               v621 = v797;
-              std::vector<unsigned int>::push_back(&v621);
+              std::vector<unsigned int>::push_back((int)&v621);
               v620 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-              v619 = AdvXMLParser::Element::operator()("digPosLines", 0);
-              v618 = AdvXMLParser::Element::operator()("value", i);
+              v619 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("digPosLines", 0);
+              v618 = ((int (__stdcall *)(const char *, int))AdvXMLParser::Element::operator())("value", i);
               v769 = v618;
-              v617 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v618 + 8))(v618, v857);
-              v19 = (const char *)std::string::c_str(v617);
+              v617 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v618 + 8))(v618, v857);
+              v19 = std::string::c_str(v617);
               v797 = j__atoi(v19);
               std::string::~string(v857);
               v616 = v797;
-              std::vector<unsigned int>::push_back(&v616);
+              std::vector<unsigned int>::push_back((int)&v616);
               v615 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-              v614 = AdvXMLParser::Element::operator()("blockPosLines", 0);
-              v613 = AdvXMLParser::Element::operator()("value", i);
+              v614 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("blockPosLines", 0);
+              v613 = ((int (__stdcall *)(const char *, int))AdvXMLParser::Element::operator())("value", i);
               v768 = v613;
-              v612 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v613 + 8))(v613, v858);
-              v20 = (const char *)std::string::c_str(v612);
+              v612 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v613 + 8))(v613, v858);
+              v20 = std::string::c_str(v612);
               v797 = j__atoi(v20);
               std::string::~string(v858);
               v611 = v797;
-              std::vector<unsigned int>::push_back(&v611);
+              std::vector<unsigned int>::push_back((int)&v611);
               v610 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-              v609 = AdvXMLParser::Element::operator()("repealingPosLines", 0);
-              v608 = AdvXMLParser::Element::operator()("value", i);
+              v609 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())(
+                       "repealingPosLines",
+                       0);
+              v608 = ((int (__stdcall *)(const char *, int))AdvXMLParser::Element::operator())("value", i);
               v767 = v608;
-              v607 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v608 + 8))(v608, v859);
-              v21 = (const char *)std::string::c_str(v607);
+              v607 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v608 + 8))(v608, v859);
+              v21 = std::string::c_str(v607);
               v797 = j__atoi(v21);
               std::string::~string(v859);
               v606 = v797;
-              std::vector<unsigned int>::push_back(&v606);
+              std::vector<unsigned int>::push_back((int)&v606);
             }
             IsShipyard = CBuildingInfoMgr::BuildingTypeExIsShipyard(v811);
             if ( IsShipyard || (IsPort = CBuildingInfoMgr::BuildingTypeExIsPort(v811)) )
@@ -1605,260 +1607,264 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
               for ( j = 0; j < (unsigned __int8)v817[5]; ++j )
               {
                 v605 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-                v604 = AdvXMLParser::Element::operator()("waterPosLines", 0);
-                v603 = AdvXMLParser::Element::operator()("value", j);
+                v604 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("waterPosLines", 0);
+                v603 = ((int (__stdcall *)(const char *, int))AdvXMLParser::Element::operator())("value", j);
                 v766 = v603;
-                v602 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v603 + 8))(v603, v860);
-                v22 = (const char *)std::string::c_str(v602);
+                v602 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v603 + 8))(v603, v860);
+                v22 = std::string::c_str(v602);
                 v764 = j__atoi(v22);
                 std::string::~string(v860);
                 v601 = v764;
-                std::vector<unsigned int>::push_back(&v601);
+                std::vector<unsigned int>::push_back((int)&v601);
                 v600 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-                v599 = AdvXMLParser::Element::operator()("waterBlockPosLines", 0);
-                v598 = AdvXMLParser::Element::operator()("value", j);
+                v599 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())(
+                         "waterBlockPosLines",
+                         0);
+                v598 = ((int (__stdcall *)(const char *, int))AdvXMLParser::Element::operator())("value", j);
                 v765 = v598;
-                v597 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v598 + 8))(v598, v861);
-                v23 = (const char *)std::string::c_str(v597);
+                v597 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v598 + 8))(v598, v861);
+                v23 = std::string::c_str(v597);
                 v763 = j__atoi(v23);
                 std::string::~string(v861);
                 v596 = v763;
-                std::vector<unsigned int>::push_back(&v596);
+                std::vector<unsigned int>::push_back((int)&v596);
                 v595 = v763 | v764;
-                std::vector<unsigned int>::push_back(&v595);
+                std::vector<unsigned int>::push_back((int)&v595);
                 v594 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-                v593 = AdvXMLParser::Element::operator()("waterFreePosLines", 0);
-                v592 = AdvXMLParser::Element::operator()("value", j);
+                v593 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())(
+                         "waterFreePosLines",
+                         0);
+                v592 = ((int (__stdcall *)(const char *, int))AdvXMLParser::Element::operator())("value", j);
                 v762 = v592;
-                v591 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v592 + 8))(v592, v862);
-                v24 = (const char *)std::string::c_str(v591);
+                v591 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v592 + 8))(v592, v862);
+                v24 = std::string::c_str(v591);
                 v590 = j__atoi(v24);
                 std::string::~string(v862);
                 v589 = v590;
-                std::vector<unsigned int>::push_back(&v589);
+                std::vector<unsigned int>::push_back((int)&v589);
               }
             }
             v588 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-            v587 = AdvXMLParser::Element::operator()("builderNumber", 0);
+            v587 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("builderNumber", 0);
             v761 = v587;
-            v586 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v587 + 8))(v587, v863);
-            v25 = (const char *)std::string::c_str(v586);
+            v586 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v587 + 8))(v587, v863);
+            v25 = std::string::c_str(v586);
             v26 = j__atoi(v25);
             v817[7] = v26;
             std::string::~string(v863);
             for ( k = 0; k < v817[7]; ++k )
             {
               v585 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-              v584 = AdvXMLParser::Element::operator()("builderInfo", k);
-              v583 = AdvXMLParser::Element::operator()("xOffset", 0);
+              v584 = ((int (__stdcall *)(const char *, int))AdvXMLParser::Element::operator())("builderInfo", k);
+              v583 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("xOffset", 0);
               v760 = v583;
-              v582 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v583 + 8))(v583, v864);
-              v27 = (const char *)std::string::c_str(v582);
+              v582 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v583 + 8))(v583, v864);
+              v27 = std::string::c_str(v582);
               v28 = j__atoi(v27);
               v817[3 * k + 8] = v28;
               std::string::~string(v864);
               v581 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-              v580 = AdvXMLParser::Element::operator()("builderInfo", k);
-              v579 = AdvXMLParser::Element::operator()("yOffset", 0);
+              v580 = ((int (__stdcall *)(const char *, int))AdvXMLParser::Element::operator())("builderInfo", k);
+              v579 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("yOffset", 0);
               v759 = v579;
-              v578 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v579 + 8))(v579, v865);
-              v29 = (const char *)std::string::c_str(v578);
+              v578 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v579 + 8))(v579, v865);
+              v29 = std::string::c_str(v578);
               v30 = j__atoi(v29);
               v817[3 * k + 9] = v30;
               std::string::~string(v865);
               v577 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-              v576 = AdvXMLParser::Element::operator()("builderInfo", k);
-              v575 = AdvXMLParser::Element::operator()("dir", 0);
+              v576 = ((int (__stdcall *)(const char *, int))AdvXMLParser::Element::operator())("builderInfo", k);
+              v575 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("dir", 0);
               v758 = v575;
-              v574 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v575 + 8))(v575, v866);
-              v31 = (const char *)std::string::c_str(v574);
+              v574 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v575 + 8))(v575, v866);
+              v31 = std::string::c_str(v574);
               v32 = j__atoi(v31);
               v817[3 * k + 10] = v32;
               std::string::~string(v866);
             }
             v573 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-            v572 = AdvXMLParser::Element::operator()("flag", 0);
-            v571 = AdvXMLParser::Element::operator()("xOffset", 0);
+            v572 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("flag", 0);
+            v571 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("xOffset", 0);
             v757 = v571;
-            v570 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v571 + 8))(v571, v867);
-            v33 = (const char *)std::string::c_str(v570);
+            v570 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v571 + 8))(v571, v867);
+            v33 = std::string::c_str(v570);
             v34 = j__atoi(v33);
             v817[38] = v34;
             std::string::~string(v867);
             v569 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-            v568 = AdvXMLParser::Element::operator()("flag", 0);
-            v567 = AdvXMLParser::Element::operator()("yOffset", 0);
+            v568 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("flag", 0);
+            v567 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("yOffset", 0);
             v756 = v567;
-            v566 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v567 + 8))(v567, v868);
-            v35 = (const char *)std::string::c_str(v566);
+            v566 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v567 + 8))(v567, v868);
+            v35 = std::string::c_str(v566);
             v36 = j__atoi(v35);
             v817[39] = v36;
             std::string::~string(v868);
             v565 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-            v564 = AdvXMLParser::Element::operator()("door", 0);
-            v563 = AdvXMLParser::Element::operator()("xOffset", 0);
+            v564 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("door", 0);
+            v563 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("xOffset", 0);
             v755 = v563;
-            v562 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v563 + 8))(v563, v869);
-            v37 = (const char *)std::string::c_str(v562);
+            v562 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v563 + 8))(v563, v869);
+            v37 = std::string::c_str(v562);
             v38 = j__atoi(v37);
             v817[40] = v38;
             std::string::~string(v869);
             v561 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-            v560 = AdvXMLParser::Element::operator()("door", 0);
-            v559 = AdvXMLParser::Element::operator()("yOffset", 0);
+            v560 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("door", 0);
+            v559 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("yOffset", 0);
             v754 = v559;
-            v558 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v559 + 8))(v559, v870);
-            v39 = (const char *)std::string::c_str(v558);
+            v558 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v559 + 8))(v559, v870);
+            v39 = std::string::c_str(v558);
             v40 = j__atoi(v39);
             v817[41] = v40;
             std::string::~string(v870);
             v557 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-            v556 = AdvXMLParser::Element::operator()("workingpos", 0);
-            v555 = AdvXMLParser::Element::operator()("xOffset", 0);
+            v556 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("workingpos", 0);
+            v555 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("xOffset", 0);
             v753 = v555;
-            v554 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v555 + 8))(v555, v871);
-            v41 = (const char *)std::string::c_str(v554);
+            v554 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v555 + 8))(v555, v871);
+            v41 = std::string::c_str(v554);
             v42 = j__atoi(v41);
             v817[42] = v42;
             std::string::~string(v871);
             v553 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-            v552 = AdvXMLParser::Element::operator()("workingpos", 0);
-            v551 = AdvXMLParser::Element::operator()("yOffset", 0);
+            v552 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("workingpos", 0);
+            v551 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("yOffset", 0);
             v752 = v551;
-            v550 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v551 + 8))(v551, v872);
-            v43 = (const char *)std::string::c_str(v550);
+            v550 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v551 + 8))(v551, v872);
+            v43 = std::string::c_str(v550);
             v44 = j__atoi(v43);
             v817[43] = v44;
             std::string::~string(v872);
             v549 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-            v548 = AdvXMLParser::Element::operator()("bitBoundingRect", 0);
-            v547 = AdvXMLParser::Element::operator()("minX", 0);
+            v548 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("bitBoundingRect", 0);
+            v547 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("minX", 0);
             v751 = v547;
-            v546 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v547 + 8))(v547, v873);
-            v45 = (const char *)std::string::c_str(v546);
+            v546 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v547 + 8))(v547, v873);
+            v45 = std::string::c_str(v546);
             v46 = j__atoi(v45);
             v817[52] = v46;
             std::string::~string(v873);
             v545 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-            v544 = AdvXMLParser::Element::operator()("bitBoundingRect", 0);
-            v543 = AdvXMLParser::Element::operator()("maxX", 0);
+            v544 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("bitBoundingRect", 0);
+            v543 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("maxX", 0);
             v750 = v543;
-            v542 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v543 + 8))(v543, v874);
-            v47 = (const char *)std::string::c_str(v542);
+            v542 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v543 + 8))(v543, v874);
+            v47 = std::string::c_str(v542);
             v48 = j__atoi(v47);
             v817[53] = v48;
             std::string::~string(v874);
             v541 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-            v540 = AdvXMLParser::Element::operator()("bitBoundingRect", 0);
-            v539 = AdvXMLParser::Element::operator()("minY", 0);
+            v540 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("bitBoundingRect", 0);
+            v539 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("minY", 0);
             v749 = v539;
-            v538 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v539 + 8))(v539, v875);
-            v49 = (const char *)std::string::c_str(v538);
+            v538 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v539 + 8))(v539, v875);
+            v49 = std::string::c_str(v538);
             v50 = j__atoi(v49);
             v817[54] = v50;
             std::string::~string(v875);
             v537 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-            v536 = AdvXMLParser::Element::operator()("bitBoundingRect", 0);
-            v219 = AdvXMLParser::Element::operator()("maxY", 0);
+            v536 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("bitBoundingRect", 0);
+            v219 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("maxY", 0);
             v748 = v219;
-            v220 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v219 + 8))(v219, v876);
-            v51 = (const char *)std::string::c_str(v220);
+            v220 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v219 + 8))(v219, v876);
+            v51 = std::string::c_str(v220);
             v52 = j__atoi(v51);
             v817[55] = v52;
             std::string::~string(v876);
             v221 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-            v222 = AdvXMLParser::Element::operator()("pileNumber", 0);
+            v222 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("pileNumber", 0);
             v747 = v222;
-            v223 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v222 + 8))(v222, v877);
-            v53 = (const char *)std::string::c_str(v223);
+            v223 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v222 + 8))(v222, v877);
+            v53 = std::string::c_str(v223);
             v54 = j__atoi(v53);
             v817[57] = v54;
             std::string::~string(v877);
             for ( m = 0; m < v817[57]; ++m )
             {
               v224 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-              v225 = AdvXMLParser::Element::operator()("pile", m);
-              v226 = AdvXMLParser::Element::operator()("xOffset", 0);
+              v225 = ((int (__stdcall *)(const char *, int))AdvXMLParser::Element::operator())("pile", m);
+              v226 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("xOffset", 0);
               v746 = v226;
-              v227 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v226 + 8))(v226, v878);
-              v55 = (const char *)std::string::c_str(v227);
+              v227 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v226 + 8))(v226, v878);
+              v55 = std::string::c_str(v227);
               v56 = j__atoi(v55);
               v817[16 * m + 60] = v56;
               std::string::~string(v878);
               v228 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-              v229 = AdvXMLParser::Element::operator()("pile", m);
-              v230 = AdvXMLParser::Element::operator()("yOffset", 0);
+              v229 = ((int (__stdcall *)(const char *, int))AdvXMLParser::Element::operator())("pile", m);
+              v230 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("yOffset", 0);
               v745 = v230;
-              v231 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v230 + 8))(v230, v879);
-              v57 = (const char *)std::string::c_str(v231);
+              v231 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v230 + 8))(v230, v879);
+              v57 = std::string::c_str(v231);
               v58 = j__atoi(v57);
               v817[16 * m + 61] = v58;
               std::string::~string(v879);
               v232 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-              v233 = AdvXMLParser::Element::operator()("pile", m);
-              v234 = AdvXMLParser::Element::operator()("good", 0);
+              v233 = ((int (__stdcall *)(const char *, int))AdvXMLParser::Element::operator())("pile", m);
+              v234 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("good", 0);
               v744 = v234;
               v235 = CConfigManagerPtr::GetInstance();
               v743 = v235;
-              v236 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v744 + 8))(v744, v880);
+              v236 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v744 + 8))(v744, v880);
               v237 = v236;
               LOBYTE(v919) = 17;
-              v59 = std::string::c_str(v236);
-              v238 = ((int (__thiscall *)(CConfigManager *, int))v743->?)(v743, v59);
+              v59 = (int)std::string::c_str(v236);
+              v238 = v743->GetDefineValue(v743, (char *)v59);
               v817[16 * m + 62] = v238;
               LOBYTE(v919) = 16;
               std::string::~string(v880);
               v239 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-              v240 = AdvXMLParser::Element::operator()("pile", m);
-              v241 = AdvXMLParser::Element::operator()("type", 0);
+              v240 = ((int (__stdcall *)(const char *, int))AdvXMLParser::Element::operator())("pile", m);
+              v241 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("type", 0);
               v742 = v241;
-              v242 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v241 + 8))(v241, v881);
-              v60 = (const char *)std::string::c_str(v242);
+              v242 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v241 + 8))(v241, v881);
+              v60 = std::string::c_str(v242);
               v61 = j__atoi(v60);
               v817[16 * m + 63] = v61;
               std::string::~string(v881);
               v243 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-              v244 = AdvXMLParser::Element::operator()("pile", m);
-              v245 = AdvXMLParser::Element::operator()("patch", 0);
+              v244 = ((int (__stdcall *)(const char *, int))AdvXMLParser::Element::operator())("pile", m);
+              v245 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("patch", 0);
               v741 = v245;
-              v246 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v245 + 8))(v245, v883);
-              v62 = (const char *)std::string::c_str(v246);
+              v246 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v245 + 8))(v245, v883);
+              v62 = std::string::c_str(v246);
               v63 = j__atoi(v62);
               v817[16 * m + 65] = v63;
               std::string::~string(v883);
               v247 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-              v248 = AdvXMLParser::Element::operator()("pile", m);
-              v249 = AdvXMLParser::Element::operator()("appearance", 0);
+              v248 = ((int (__stdcall *)(const char *, int))AdvXMLParser::Element::operator())("pile", m);
+              v249 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("appearance", 0);
               v740 = v249;
-              v250 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v249 + 8))(v249, v848);
-              v64 = (const char *)std::string::c_str(v250);
+              v250 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v249 + 8))(v249, v848);
+              v64 = std::string::c_str(v250);
               v65 = j__atoi(v64);
               v817[16 * m + 64] = v65;
               std::string::~string(v848);
               v251 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-              v252 = AdvXMLParser::Element::operator()("pile", m);
-              v253 = AdvXMLParser::Element::operator()("xPixelOffset", 0);
+              v252 = ((int (__stdcall *)(const char *, int))AdvXMLParser::Element::operator())("pile", m);
+              v253 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("xPixelOffset", 0);
               v739 = v253;
-              v254 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v253 + 8))(v253, v884);
-              v66 = (const char *)std::string::c_str(v254);
+              v254 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v253 + 8))(v253, v884);
+              v66 = std::string::c_str(v254);
               v67 = j__atoi(v66);
               *(_DWORD *)&v817[16 * m + 68] = v67;
               std::string::~string(v884);
               v255 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-              v256 = AdvXMLParser::Element::operator()("pile", m);
-              v257 = AdvXMLParser::Element::operator()("yPixelOffset", 0);
+              v256 = ((int (__stdcall *)(const char *, int))AdvXMLParser::Element::operator())("pile", m);
+              v257 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("yPixelOffset", 0);
               v738 = v257;
-              v258 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v257 + 8))(v257, v885);
-              v68 = (const char *)std::string::c_str(v258);
+              v258 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v257 + 8))(v257, v885);
+              v68 = std::string::c_str(v258);
               v69 = j__atoi(v68);
               *(_DWORD *)&v817[16 * m + 72] = v69;
               std::string::~string(v885);
             }
             v259 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-            v260 = AdvXMLParser::Element::operator()("settlerNumber", 0);
+            v260 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("settlerNumber", 0);
             v737 = v260;
-            v261 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v260 + 8))(v260, v886);
-            v70 = (const char *)std::string::c_str(v261);
+            v261 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v260 + 8))(v260, v886);
+            v70 = std::string::c_str(v261);
             v71 = j__atoi(v70);
             v817[220] = v71;
             std::string::~string(v886);
@@ -1875,44 +1881,44 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
             for ( n = 0; n < (unsigned __int8)v817[220]; ++n )
             {
               v263 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-              v264 = AdvXMLParser::Element::operator()("settler", n);
-              v265 = AdvXMLParser::Element::operator()("xOffset", 0);
+              v264 = ((int (__stdcall *)(const char *, int))AdvXMLParser::Element::operator())("settler", n);
+              v265 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("xOffset", 0);
               v736 = v265;
-              v266 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v265 + 8))(v265, v887);
-              v72 = (const char *)std::string::c_str(v266);
+              v266 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v265 + 8))(v265, v887);
+              v72 = std::string::c_str(v266);
               v73 = j__atoi(v72);
               *(_DWORD *)&v817[12 * n + 224] = v73;
               std::string::~string(v887);
               v267 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-              v268 = AdvXMLParser::Element::operator()("settler", n);
-              v269 = AdvXMLParser::Element::operator()("yOffset", 0);
+              v268 = ((int (__stdcall *)(const char *, int))AdvXMLParser::Element::operator())("settler", n);
+              v269 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("yOffset", 0);
               v735 = v269;
-              v270 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v269 + 8))(v269, v888);
-              v74 = (const char *)std::string::c_str(v270);
+              v270 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v269 + 8))(v269, v888);
+              v74 = std::string::c_str(v270);
               v75 = j__atoi(v74);
               *(_DWORD *)&v817[12 * n + 228] = v75;
               std::string::~string(v888);
               v271 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-              v272 = AdvXMLParser::Element::operator()("settler", n);
-              v273 = AdvXMLParser::Element::operator()("direction", 0);
+              v272 = ((int (__stdcall *)(const char *, int))AdvXMLParser::Element::operator())("settler", n);
+              v273 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("direction", 0);
               v734 = v273;
-              v274 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v273 + 8))(v273, v889);
-              v76 = (const char *)std::string::c_str(v274);
+              v274 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v273 + 8))(v273, v889);
+              v76 = std::string::c_str(v274);
               v77 = j__atoi(v76);
               v817[12 * n + 232] = v77;
               std::string::~string(v889);
-              v195 = std::string::string(v902, "true");
+              v195 = std::string::string(&v902, "true");
               LOBYTE(v919) = 18;
               v275 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-              v276 = AdvXMLParser::Element::operator()("settler", n);
-              v277 = AdvXMLParser::Element::operator()("top", 0);
+              v276 = ((int (__stdcall *)(const char *, int))AdvXMLParser::Element::operator())("settler", n);
+              v277 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("top", 0);
               v733 = v277;
               v278 = (*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v277 + 8))(v277, v890);
               v732 = std::string::compare(v278) == 0;
               v817[12 * n + 233] = v732;
               std::string::~string(v890);
               LOBYTE(v919) = 16;
-              std::string::~string(v902);
+              std::string::~string(&v902);
             }
             v731 = (unsigned __int8)v817[220];
             v817[221] = 0;
@@ -1936,7 +1942,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
               if ( !v817[222] )
               {
                 v153 = v791;
-                v78 = (const char *)std::string::c_str(v917);
+                v78 = std::string::c_str(&v917);
                 v279 = BBSupportDbgReportF(
                          2,
                          "MapObjects\\Building\\BuildingInfoMgr.cpp",
@@ -1951,7 +1957,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
               if ( !v817[221] )
               {
                 v154 = v791;
-                v79 = (const char *)std::string::c_str(v917);
+                v79 = std::string::c_str(&v917);
                 v280 = BBSupportDbgReportF(
                          2,
                          "MapObjects\\Building\\BuildingInfoMgr.cpp",
@@ -1965,58 +1971,58 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
               }
             }
             v281 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-            v320 = AdvXMLParser::Element::operator()("patchSettlerSlot", 0);
+            v320 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("patchSettlerSlot", 0);
             v730 = v320;
-            v283 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v320 + 8))(v320, v891);
-            v80 = (const char *)std::string::c_str(v283);
+            v283 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v320 + 8))(v320, v891);
+            v80 = std::string::c_str(v283);
             v81 = j__atoi(v80);
             v817[476] = v81;
             std::string::~string(v891);
             v284 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-            v285 = AdvXMLParser::Element::operator()("miniflag", 0);
-            v286 = AdvXMLParser::Element::operator()("xOffset", 0);
+            v285 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("miniflag", 0);
+            v286 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("xOffset", 0);
             v729 = v286;
-            v287 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v286 + 8))(v286, v892);
-            v82 = (const char *)std::string::c_str(v287);
+            v287 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v286 + 8))(v286, v892);
+            v82 = std::string::c_str(v287);
             v83 = j__atoi(v82);
             *((_DWORD *)v817 + 11) = v83;
             std::string::~string(v892);
             v288 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-            v289 = AdvXMLParser::Element::operator()("miniflag", 0);
-            v290 = AdvXMLParser::Element::operator()("yOffset", 0);
+            v289 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("miniflag", 0);
+            v290 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("yOffset", 0);
             v728 = v290;
-            v291 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v290 + 8))(v290, v893);
-            v84 = (const char *)std::string::c_str(v291);
+            v291 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v290 + 8))(v290, v893);
+            v84 = std::string::c_str(v291);
             v85 = j__atoi(v84);
             *((_DWORD *)v817 + 12) = v85;
             std::string::~string(v893);
             v292 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-            v293 = AdvXMLParser::Element::operator()("kind", 0);
+            v293 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("kind", 0);
             v727 = v293;
-            v294 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v293 + 8))(v293, v894);
+            v294 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v293 + 8))(v293, v894);
             v295 = v294;
             LOBYTE(v919) = 19;
-            v86 = (char *)std::string::c_str(v294);
-            v194 = std::string::string(v903, v86);
+            v86 = std::string::c_str(v294);
+            v194 = std::string::string(&v903, v86);
             LOBYTE(v919) = 20;
             v296 = CDefineTranslator::Instance();
-            v297 = CDefineTranslator::GetValueOfDefine(v903);
+            v297 = ((int (__stdcall *)(std::string *))CDefineTranslator::GetValueOfDefine)(&v903);
             v817[477] = v297;
             LOBYTE(v919) = 19;
-            std::string::~string(v903);
+            std::string::~string(&v903);
             LOBYTE(v919) = 16;
             std::string::~string(v894);
             v298 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-            v299 = AdvXMLParser::Element::operator()("inhabitant", 0);
+            v299 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("inhabitant", 0);
             v726 = v299;
-            v300 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v299 + 8))(v299, v895);
+            v300 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v299 + 8))(v299, v895);
             v301 = v300;
             LOBYTE(v919) = 21;
-            v87 = (char *)std::string::c_str(v300);
-            v193 = std::string::string(v914, v87);
+            v87 = std::string::c_str(v300);
+            v193 = std::string::string(&v914, v87);
             LOBYTE(v919) = 23;
             std::string::~string(v895);
-            if ( std::operator==<char>((int)v914, (char *)&byte_3778517) )
+            if ( std::operator==<char>((int)&v914, (char *)&byte_3778517) )
             {
               v817[478] = 0;
             }
@@ -2024,34 +2030,34 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
             {
               v302 = CConfigManagerPtr::GetInstance();
               v725 = v302;
-              v88 = std::string::c_str(v914);
-              v303 = ((int (__thiscall *)(CConfigManager *, int))v725->?)(v725, v88);
+              v88 = (int)std::string::c_str(&v914);
+              v303 = v725->GetDefineValue(v725, (char *)v88);
               v817[478] = v303;
             }
             v304 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-            v305 = AdvXMLParser::Element::operator()("tool", 0);
+            v305 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("tool", 0);
             v724 = v305;
             v306 = CConfigManagerPtr::GetInstance();
             v723 = v306;
-            v307 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v724 + 8))(v724, v896);
+            v307 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v724 + 8))(v724, v896);
             v308 = v307;
             LOBYTE(v919) = 24;
-            v89 = std::string::c_str(v307);
-            v309 = ((int (__thiscall *)(CConfigManager *, int))v723->?)(v723, v89);
+            v89 = (int)std::string::c_str(v307);
+            v309 = v723->GetDefineValue(v723, (char *)v89);
             v817[479] = v309;
             LOBYTE(v919) = 23;
             std::string::~string(v896);
             v310 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-            v312 = AdvXMLParser::Element::operator()("productiondelay", 0);
+            v312 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("productiondelay", 0);
             v722 = v312;
-            v313 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v312 + 8))(v312, v897);
+            v313 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v312 + 8))(v312, v897);
             v314 = v313;
             LOBYTE(v919) = 25;
-            v90 = (char *)std::string::c_str(v313);
-            v192 = std::string::string(v908, v90);
+            v90 = std::string::c_str(v313);
+            v192 = std::string::string(&v908, v90);
             LOBYTE(v919) = 27;
             std::string::~string(v897);
-            v91 = (const char *)std::string::c_str(v908);
+            v91 = std::string::c_str(&v908);
             v796 = j__atoi(v91);
             if ( (unsigned int)v796 >= 0x100 )
             {
@@ -2074,66 +2080,66 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
             }
             v817[480] = v796;
             v316 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-            v317 = AdvXMLParser::Element::operator()("dummyValue", 0);
+            v317 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("dummyValue", 0);
             v721 = v317;
-            v318 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v317 + 8))(v317, v898);
-            v92 = (const char *)std::string::c_str(v318);
+            v318 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v317 + 8))(v317, v898);
+            v92 = std::string::c_str(v318);
             v93 = j__atoi(v92);
             *((_DWORD *)v817 + 124) = v93;
             std::string::~string(v898);
             v319 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-            v323 = AdvXMLParser::Element::operator()("influenceRadius", 0);
+            v323 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("influenceRadius", 0);
             v671 = v323;
-            v324 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v323 + 8))(v323, v899);
-            v94 = (const char *)std::string::c_str(v324);
+            v324 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v323 + 8))(v323, v899);
+            v94 = std::string::c_str(v324);
             v95 = j__atoi(v94);
             *((_DWORD *)v817 + 121) = v95;
             std::string::~string(v899);
             v346 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-            v311 = AdvXMLParser::Element::operator()("explorerRadius", 0);
+            v311 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("explorerRadius", 0);
             v720 = v311;
-            v322 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v311 + 8))(v311, v818);
-            v96 = (const char *)std::string::c_str(v322);
+            v322 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v311 + 8))(v311, v818);
+            v96 = std::string::c_str(v322);
             v97 = j__atoi(v96);
             *((_DWORD *)v817 + 122) = v97;
             std::string::~string(v818);
             v535 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-            v534 = AdvXMLParser::Element::operator()("workingAreaRadius", 0);
+            v534 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("workingAreaRadius", 0);
             v719 = v534;
-            v533 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v534 + 8))(v534, v819);
-            v98 = (const char *)std::string::c_str(v533);
+            v533 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v534 + 8))(v534, v819);
+            v98 = std::string::c_str(v533);
             v99 = j__atoi(v98);
             *((_DWORD *)v817 + 123) = v99;
             std::string::~string(v819);
             v532 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-            v531 = AdvXMLParser::Element::operator()("searchType", 0);
+            v531 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("searchType", 0);
             v718 = v531;
-            v530 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v531 + 8))(v531, v820);
+            v530 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v531 + 8))(v531, v820);
             v529 = v530;
             LOBYTE(v919) = 28;
-            v100 = (char *)std::string::c_str(v530);
-            v191 = std::string::string(v904, v100);
+            v100 = std::string::c_str(v530);
+            v191 = std::string::string(&v904, v100);
             LOBYTE(v919) = 29;
             v528 = CDefineTranslator::Instance();
-            v527 = CDefineTranslator::GetValueOfDefine(v904);
+            v527 = ((int (__stdcall *)(std::string *))CDefineTranslator::GetValueOfDefine)(&v904);
             v817[481] = v527;
             LOBYTE(v919) = 28;
-            std::string::~string(v904);
+            std::string::~string(&v904);
             LOBYTE(v919) = 27;
             std::string::~string(v820);
             v526 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-            v525 = AdvXMLParser::Element::operator()("Hitpoints", 0);
+            v525 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("Hitpoints", 0);
             v717 = v525;
-            v524 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v525 + 8))(v525, v821);
-            v101 = (const char *)std::string::c_str(v524);
+            v524 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v525 + 8))(v525, v821);
+            v101 = std::string::c_str(v524);
             v102 = j__atoi(v101);
             v817[500] = v102 / 2;
             std::string::~string(v821);
             v523 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-            v522 = AdvXMLParser::Element::operator()("Armor", 0);
+            v522 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("Armor", 0);
             v716 = v522;
-            v521 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v522 + 8))(v522, v822);
-            v103 = (const char *)std::string::c_str(v521);
+            v521 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v522 + 8))(v522, v822);
+            v103 = std::string::c_str(v521);
             v104 = j__atoi(v103);
             v817[501] = v104;
             std::string::~string(v822);
@@ -2151,96 +2157,98 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
               v817[500] = v714;
             }
             v516 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-            v515 = AdvXMLParser::Element::operator()("animLists", 0);
+            v515 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("animLists", 0);
             v514 = AdvXMLParser::NodeContainer::Begin(v515, v170);
             v513 = v514;
             LOBYTE(v919) = 30;
-            v190 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v514);
+            v190 = ((int (__stdcall *)(int))AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>)(v514);
             LOBYTE(v919) = 32;
             AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v170);
             v512 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-            v511 = AdvXMLParser::Element::operator()("animLists", 0);
-            v510 = AdvXMLParser::NodeContainer::End(v511, v169);
+            v511 = (void *)((void *(__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())(
+                             "animLists",
+                             0);
+            v510 = (int)AdvXMLParser::NodeContainer::End(v511, v169);
             v509 = v510;
             LOBYTE(v919) = 33;
-            v189 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v510);
+            v189 = ((int (__stdcall *)(int))AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>)(v510);
             LOBYTE(v919) = 35;
             AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v169);
-            while ( (unsigned __int8)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator<(v180) )
+            while ( (unsigned __int8)((_DWORD (__stdcall *)(_BYTE *))AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator<)(v180) )
             {
               v508 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v216);
               v713 = v508;
-              v507 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v508 + 8))(v508, v823);
+              v507 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v508 + 8))(v508, v823);
               v506 = v507;
               LOBYTE(v919) = 36;
-              v105 = (char *)std::string::c_str(v507);
-              v188 = std::string::string(v905, v105);
+              v105 = std::string::c_str(v507);
+              v188 = std::string::string(&v905, v105);
               LOBYTE(v919) = 38;
               std::string::~string(v823);
               v505 = CConfigManagerPtr::GetInstance();
               v712 = v505;
-              v106 = std::string::c_str(v905);
-              v504 = ((int (__thiscall *)(CConfigManager *, int))v712->?)(v712, v106);
+              v106 = (int)std::string::c_str(&v905);
+              v504 = v712->GetDefineValue(v712, (char *)v106);
               v503 = v504;
               v803 = v504;
-              std::vector<unsigned char>::push_back(&v803);
+              std::vector<unsigned char>::push_back((int)&v803);
               LOBYTE(v919) = 35;
-              std::string::~string(v905);
+              std::string::~string(&v905);
               AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator++(v216);
             }
             v812 = 0;
             v502 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-            v501 = AdvXMLParser::Element::operator()("patches", 0);
+            v501 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("patches", 0);
             v500 = AdvXMLParser::NodeContainer::Begin(v501, v168);
             v499 = v500;
             LOBYTE(v919) = 39;
-            v208 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v500);
+            v208 = ((int (__stdcall *)(int))AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>)(v500);
             LOBYTE(v919) = 41;
             AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v168);
             v498 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-            v497 = AdvXMLParser::Element::operator()("patches", 0);
-            v496 = AdvXMLParser::NodeContainer::End(v497, v167);
+            v497 = (void *)((void *(__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("patches", 0);
+            v496 = (int)AdvXMLParser::NodeContainer::End(v497, v167);
             v495 = v496;
             LOBYTE(v919) = 42;
-            v186 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v496);
+            v186 = ((int (__stdcall *)(int))AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>)(v496);
             LOBYTE(v919) = 44;
             AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v167);
-            while ( (unsigned __int8)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator<(v174) )
+            while ( (unsigned __int8)((_DWORD (__stdcall *)(_BYTE *))AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator<)(v174) )
             {
               v494 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v670);
-              v493 = AdvXMLParser::Element::operator()("job", 0);
+              v493 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("job", 0);
               v711 = v493;
-              v492 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v493 + 8))(v493, v824);
+              v492 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v493 + 8))(v493, v824);
               v491 = v492;
               LOBYTE(v919) = 45;
-              v107 = (char *)std::string::c_str(v492);
-              v185 = std::string::string(v916, v107);
+              v107 = std::string::c_str(v492);
+              v185 = std::string::string(&v916, v107);
               LOBYTE(v919) = 47;
               std::string::~string(v824);
-              if ( !std::string::length(v916) )
+              if ( !std::string::length(&v916) )
               {
                 v490 = BBSupportDbgReport(2, "MapObjects\\Building\\BuildingInfoMgr.cpp", 864, "patchName.length() > 0");
                 if ( v490 == 1 )
                   __debugbreak();
               }
               v489 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v670);
-              v488 = AdvXMLParser::Element::operator()("job", 0);
+              v488 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("job", 0);
               v710 = v488;
               v487 = CConfigManagerPtr::GetInstance();
               v709 = v487;
-              v486 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v710 + 8))(v710, v825);
+              v486 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v710 + 8))(v710, v825);
               v485 = v486;
               LOBYTE(v919) = 48;
-              v108 = std::string::c_str(v486);
-              v484 = ((int (__thiscall *)(CConfigManager *, int))v709->?)(v709, v108);
+              v108 = (int)std::string::c_str(v486);
+              v484 = v709->GetDefineValue(v709, (char *)v108);
               v786 = v484;
               LOBYTE(v919) = 47;
               std::string::~string(v825);
               if ( v786 < 0 )
               {
-                v708 = std::string::length(v916) ? (const char *)std::string::c_str(v916) : (const char *)&unk_3778527;
-                v155 = (const char *)std::string::c_str(v915);
-                v109 = (const char *)std::string::c_str(v917);
+                v708 = std::string::length(&v916) ? std::string::c_str(&v916) : (char *)&unk_3778527;
+                v155 = std::string::c_str(&v915);
+                v109 = std::string::c_str(&v917);
                 v483 = BBSupportDbgReportF(
                          2,
                          "MapObjects\\Building\\BuildingInfoMgr.cpp",
@@ -2254,51 +2262,51 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
               }
               *(_DWORD *)&v817[16 * v812 + 504] = v786;
               v482 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v670);
-              v481 = AdvXMLParser::Element::operator()("type", 0);
+              v481 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("type", 0);
               v707 = v481;
-              v480 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v481 + 8))(v481, v826);
+              v480 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v481 + 8))(v481, v826);
               v479 = v480;
               LOBYTE(v919) = 49;
-              v110 = (char *)std::string::c_str(v480);
-              std::string::operator=(v916, v110);
+              v110 = std::string::c_str(v480);
+              std::string::operator=(&v916, v110);
               LOBYTE(v919) = 47;
               std::string::~string(v826);
-              v111 = (char *)std::string::c_str(v916);
-              v184 = std::string::string(v901, v111);
+              v111 = std::string::c_str(&v916);
+              v184 = std::string::string(&v901, v111);
               LOBYTE(v919) = 50;
               v478 = CDefineTranslator::Instance();
-              v477 = CDefineTranslator::GetValueOfDefine(v901);
+              v477 = ((int (__stdcall *)(std::string *))CDefineTranslator::GetValueOfDefine)(&v901);
               v786 = v477;
               LOBYTE(v919) = 47;
-              std::string::~string(v901);
+              std::string::~string(&v901);
               v817[16 * v812 + 509] = v786;
               v476 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v670);
-              v475 = AdvXMLParser::Element::operator()("ticks", 0);
+              v475 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("ticks", 0);
               v706 = v475;
-              v474 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v475 + 8))(v475, v827);
-              v112 = (const char *)std::string::c_str(v474);
+              v474 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v475 + 8))(v475, v827);
+              v112 = std::string::c_str(v474);
               v113 = j__atoi(v112);
               v817[16 * v812 + 510] = v113;
               std::string::~string(v827);
               v473 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v670);
-              v472 = AdvXMLParser::Element::operator()("slot", 0);
+              v472 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("slot", 0);
               v705 = v472;
-              v471 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v472 + 8))(v472, v828);
-              v114 = (const char *)std::string::c_str(v471);
+              v471 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v472 + 8))(v472, v828);
+              v114 = std::string::c_str(v471);
               v115 = j__atoi(v114);
               v817[16 * v812 + 508] = v115;
               std::string::~string(v828);
               v470 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v670);
-              v469 = AdvXMLParser::Element::operator()("sound", 0);
-              v468 = AdvXMLParser::Element::operator()("def", 0);
+              v469 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("sound", 0);
+              v468 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("def", 0);
               v704 = v468;
               v467 = CConfigManagerPtr::GetInstance();
               v703 = v467;
-              v466 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v704 + 8))(v704, v829);
+              v466 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v704 + 8))(v704, v829);
               v465 = v466;
               LOBYTE(v919) = 51;
-              v116 = std::string::c_str(v466);
-              v464 = ((int (__thiscall *)(CConfigManager *, int))v703->?)(v703, v116);
+              v116 = (int)std::string::c_str(v466);
+              v464 = v703->GetDefineValue(v703, (char *)v116);
               v782 = v464;
               LOBYTE(v919) = 47;
               std::string::~string(v829);
@@ -2306,20 +2314,20 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                 v782 = 0;
               *(_DWORD *)&v817[16 * v812 + 512] = v782;
               v463 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v670);
-              v462 = AdvXMLParser::Element::operator()("sound", 0);
-              v461 = AdvXMLParser::Element::operator()("frame", 0);
+              v462 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("sound", 0);
+              v461 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("frame", 0);
               v702 = v461;
-              v460 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v461 + 8))(v461, v830);
-              v117 = (const char *)std::string::c_str(v460);
+              v460 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v461 + 8))(v461, v830);
+              v117 = std::string::c_str(v460);
               v118 = j__atoi(v117);
               v817[16 * v812 + 517] = v118;
               std::string::~string(v830);
               v459 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v670);
-              v458 = AdvXMLParser::Element::operator()("sound", 0);
-              v457 = AdvXMLParser::Element::operator()("random", 0);
+              v458 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("sound", 0);
+              v457 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("random", 0);
               v701 = v457;
-              v456 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v457 + 8))(v457, v831);
-              v119 = (const char *)std::string::c_str(v456);
+              v456 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v457 + 8))(v457, v831);
+              v119 = std::string::c_str(v456);
               v120 = j__atoi(v119);
               v817[16 * v812 + 516] = v120;
               std::string::~string(v831);
@@ -2327,55 +2335,55 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                 v817[16 * v812 + 516] = 100;
               ++v812;
               LOBYTE(v919) = 44;
-              std::string::~string(v916);
+              std::string::~string(&v916);
               AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator++(v670);
             }
             v455 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-            v454 = AdvXMLParser::Element::operator()("triggers", 0);
+            v454 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("triggers", 0);
             v453 = AdvXMLParser::NodeContainer::Begin(v454, v166);
             v452 = v453;
             LOBYTE(v919) = 52;
-            v183 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v453);
+            v183 = ((int (__stdcall *)(int))AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>)(v453);
             LOBYTE(v919) = 54;
             AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v166);
             v451 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v814);
-            v450 = AdvXMLParser::Element::operator()("triggers", 0);
-            v449 = AdvXMLParser::NodeContainer::End(v450, v165);
+            v450 = (void *)((void *(__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("triggers", 0);
+            v449 = (int)AdvXMLParser::NodeContainer::End(v450, v165);
             v448 = v449;
             LOBYTE(v919) = 55;
-            v182 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v449);
+            v182 = ((int (__stdcall *)(int))AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>)(v449);
             LOBYTE(v919) = 57;
             AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v165);
-            while ( (unsigned __int8)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator<(v175) )
+            while ( (unsigned __int8)((_DWORD (__stdcall *)(_BYTE *))AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator<)(v175) )
             {
               v447 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v217);
-              v446 = AdvXMLParser::Element::operator()("slot", 0);
+              v446 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("slot", 0);
               v700 = v446;
-              v445 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v446 + 8))(v446, v832);
-              v121 = (const char *)std::string::c_str(v445);
+              v445 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v446 + 8))(v446, v832);
+              v121 = std::string::c_str(v445);
               v438 = j__atoi(v121);
               std::string::~string(v832);
               v444 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v217);
-              v443 = AdvXMLParser::Element::operator()("job", 0);
+              v443 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("job", 0);
               v699 = v443;
-              v442 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v443 + 8))(v443, v833);
+              v442 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v443 + 8))(v443, v833);
               v441 = v442;
               LOBYTE(v919) = 58;
-              v122 = (char *)std::string::c_str(v442);
-              v181 = std::string::string(v907, v122);
+              v122 = std::string::c_str(v442);
+              v181 = std::string::string(&v907, v122);
               LOBYTE(v919) = 60;
               std::string::~string(v833);
-              v123 = (char *)std::string::c_str(v907);
-              v215 = std::string::string(v906, v123);
+              v123 = std::string::c_str(&v907);
+              v215 = std::string::string(&v906, v123);
               LOBYTE(v919) = 61;
               v440 = CDefineTranslator::Instance();
-              v439 = CDefineTranslator::GetValueOfDefine(v906);
+              v439 = ((int (__stdcall *)(std::string *))CDefineTranslator::GetValueOfDefine)(&v906);
               v437 = v439;
               LOBYTE(v919) = 60;
-              std::string::~string(v906);
+              std::string::~string(&v906);
               *(_DWORD *)&v817[4 * v438 + 664] = v437;
               LOBYTE(v919) = 57;
-              std::string::~string(v907);
+              std::string::~string(&v907);
               AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator++(v217);
             }
             v788 = 0;
@@ -2392,7 +2400,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
               {
                 if ( v785 < 0 )
                 {
-                  v431 = Grid::DistanceInline(v781, v432);
+                  v431 = Grid::DistanceInline((int)v781, v432);
                   v698 = v431;
                   if ( v431 > (int)v788 )
                     v788 = v698;
@@ -2440,17 +2448,17 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
             LOBYTE(v919) = 27;
             AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>((CDaoIndexFieldInfo *)v216);
             LOBYTE(v919) = 23;
-            std::string::~string(v908);
+            std::string::~string(&v908);
             LOBYTE(v919) = 16;
-            std::string::~string(v914);
+            std::string::~string(&v914);
             LOBYTE(v919) = 15;
-            std::string::~string(v917);
+            std::string::~string(&v917);
           }
           else
           {
 LABEL_16:
             LOBYTE(v919) = 15;
-            std::string::~string(v917);
+            std::string::~string(&v917);
           }
           AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator++(v814);
         }
@@ -2459,12 +2467,12 @@ LABEL_16:
         LOBYTE(v919) = 9;
         AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>((CDaoIndexFieldInfo *)v814);
         LOBYTE(v919) = 8;
-        std::string::~string(v915);
+        std::string::~string(&v915);
       }
       else
       {
         LOBYTE(v919) = 8;
-        std::string::~string(v915);
+        std::string::~string(&v915);
       }
     }
     AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator++(v321);
@@ -2698,17 +2706,17 @@ LABEL_16:
   }
   memset(&CBuildingInfoMgr::m_vTriggerInfos, 0, 0x210Cu);
   v787 = 0;
-  result = AdvXMLParser::Parser::OpenXMLFile(aGamedataBuildi_0, &v787);
+  result = (char *)AdvXMLParser::Parser::OpenXMLFile(aGamedataBuildi_0, &v787);
   v795 = result;
   if ( !result )
     return result;
   v919 = 64;
   v214 = AdvXMLParser::Parser::Parser(v159);
   LOBYTE(v919) = 65;
-  v426 = AdvXMLParser::Parser::Parse((AdvXMLParser::Parser *)v159, v795, v787);
-  std::auto_ptr<AdvXMLParser::Document>::auto_ptr<AdvXMLParser::Document>(v426);
+  v426 = (struct Document *)AdvXMLParser::Parser::Parse((AdvXMLParser::Parser *)v159, v795, v787);
+  std::auto_ptr<AdvXMLParser::Document>::auto_ptr<AdvXMLParser::Document>((int)v426);
   LOBYTE(v919) = 66;
-  v124 = std::auto_ptr<AdvXMLParser::Document>::operator->(v156, v157);
+  v124 = ((int (__cdecl *)(int, int))std::auto_ptr<AdvXMLParser::Document>::operator->)(v156, v157);
   v425 = AdvXMLParser::Document::GetRoot(v124);
   v695 = v425;
   v424 = CDefineTranslator::Instance();
@@ -2717,236 +2725,236 @@ LABEL_16:
   v423 = AdvXMLParser::NodeContainer::Begin(v695, v164);
   v422 = v423;
   LOBYTE(v919) = 67;
-  v212 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v423);
+  v212 = ((int (__stdcall *)(int))AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>)(v423);
   LOBYTE(v919) = 69;
   AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v164);
-  v421 = AdvXMLParser::NodeContainer::End(v695, v163);
+  v421 = (int)AdvXMLParser::NodeContainer::End((void *)v695, v163);
   v420 = v421;
   LOBYTE(v919) = 70;
-  v211 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v421);
+  v211 = ((int (__stdcall *)(int))AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>)(v421);
   LOBYTE(v919) = 72;
   AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v163);
-  while ( (unsigned __int8)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator<(v176) )
+  while ( (unsigned __int8)((_DWORD (__stdcall *)(_BYTE *))AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator<)(v176) )
   {
     v419 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v218);
-    v418 = AdvXMLParser::Element::operator[]("id");
+    v418 = ((int (__stdcall *)(const char *))AdvXMLParser::Element::operator[])("id");
     v694 = v418;
     v210 = (*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v418 + 8))(v418, v900);
     LOBYTE(v919) = 73;
-    v417 = CDefineTranslator::GetValueOfDefine(v900);
+    v417 = ((int (__stdcall *)(_BYTE *))CDefineTranslator::GetValueOfDefine)(v900);
     v406 = v417;
     v416 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v218);
     v415 = AdvXMLParser::NodeContainer::Begin(v416, v160);
     v414 = v415;
     LOBYTE(v919) = 74;
-    v209 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v415);
+    v209 = ((int (__stdcall *)(int))AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>)(v415);
     LOBYTE(v919) = 76;
     AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v160);
     v413 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v218);
-    v412 = AdvXMLParser::NodeContainer::End(v413, v161);
+    v412 = (int)AdvXMLParser::NodeContainer::End((void *)v413, v161);
     v411 = v412;
     LOBYTE(v919) = 77;
-    v207 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v412);
+    v207 = ((int (__stdcall *)(int))AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>)(v412);
     LOBYTE(v919) = 79;
     AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v161);
-    while ( (unsigned __int8)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator<(v177) )
+    while ( (unsigned __int8)((_DWORD (__stdcall *)(_BYTE *))AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator<)(v177) )
     {
       v410 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v784);
-      v409 = AdvXMLParser::Element::operator[]("id");
+      v409 = ((int (__stdcall *)(const char *))AdvXMLParser::Element::operator[])("id");
       v693 = v409;
       v187 = (*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v409 + 8))(v409, v913);
       LOBYTE(v919) = 80;
-      v408 = CDefineTranslator::GetValueOfDefine(v913);
+      v408 = ((int (__stdcall *)(_BYTE *))CDefineTranslator::GetValueOfDefine)(v913);
       v407 = v408;
       v816 = (char *)&CBuildingInfoMgr::m_vTriggerInfos + 1692 * v406 + 36 * v408;
       v405 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v784);
-      v404 = AdvXMLParser::Element::operator()("patch", 0);
-      v403 = AdvXMLParser::Element::operator()("def", 0);
+      v404 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("patch", 0);
+      v403 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("def", 0);
       v691 = v403;
-      v402 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v403 + 8))(v403, v834);
+      v402 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v403 + 8))(v403, v834);
       v401 = v402;
       LOBYTE(v919) = 81;
-      v125 = (char *)std::string::c_str(v402);
-      v206 = std::string::string(v912, v125);
+      v125 = std::string::c_str(v402);
+      v206 = std::string::string(&v912, v125);
       LOBYTE(v919) = 83;
       std::string::~string(v834);
       v400 = CConfigManagerPtr::GetInstance();
       v690 = v400;
-      v126 = std::string::c_str(v912);
-      v399 = ((int (__thiscall *)(CConfigManager *, int))v690->?)(v690, v126);
+      v126 = (int)std::string::c_str(&v912);
+      v399 = v690->GetDefineValue(v690, (char *)v126);
       *(_DWORD *)v816 = v399;
       v398 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v784);
-      v397 = AdvXMLParser::Element::operator()("patch", 0);
-      v396 = AdvXMLParser::Element::operator()("slot", 0);
+      v397 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("patch", 0);
+      v396 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("slot", 0);
       v689 = v396;
-      v395 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v396 + 8))(v396, v882);
-      v127 = (const char *)std::string::c_str(v395);
+      v395 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v396 + 8))(v396, v882);
+      v127 = std::string::c_str(v395);
       v128 = j__atoi(v127);
       v816[4] = v128;
       std::string::~string(v882);
       v394 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v784);
-      v393 = AdvXMLParser::Element::operator()("patch", 0);
-      v392 = AdvXMLParser::Element::operator()("duration", 0);
+      v393 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("patch", 0);
+      v392 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("duration", 0);
       v688 = v392;
-      v391 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v392 + 8))(v392, v835);
-      v129 = (const char *)std::string::c_str(v391);
+      v391 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v392 + 8))(v392, v835);
+      v129 = std::string::c_str(v391);
       v130 = j__atoi(v129);
       v816[6] = v130;
       std::string::~string(v835);
       v390 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v784);
-      v389 = AdvXMLParser::Element::operator()("type", 0);
+      v389 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("type", 0);
       v687 = v389;
-      v388 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v389 + 8))(v389, v836);
+      v388 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v389 + 8))(v389, v836);
       v387 = v388;
       LOBYTE(v919) = 84;
-      v131 = (char *)std::string::c_str(v388);
-      v205 = std::string::string(v911, v131);
+      v131 = std::string::c_str(v388);
+      v205 = std::string::string(&v911, v131);
       LOBYTE(v919) = 86;
       std::string::~string(v836);
-      v132 = (char *)std::string::c_str(v911);
-      v204 = std::string::string(v909, v132);
+      v132 = std::string::c_str(&v911);
+      v204 = std::string::string(&v909, v132);
       LOBYTE(v919) = 87;
       v386 = CDefineTranslator::Instance();
-      v385 = CDefineTranslator::GetValueOfDefine(v909);
+      v385 = ((int (__stdcall *)(std::string *))CDefineTranslator::GetValueOfDefine)(&v909);
       v816[5] = v385;
       LOBYTE(v919) = 86;
-      std::string::~string(v909);
+      std::string::~string(&v909);
       v384 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v784);
-      v383 = AdvXMLParser::Element::operator()("patch", 0);
-      v382 = AdvXMLParser::Element::operator()("sound", 0);
-      v381 = AdvXMLParser::Element::operator()("def", 0);
+      v383 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("patch", 0);
+      v382 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("sound", 0);
+      v381 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("def", 0);
       v686 = v381;
-      v380 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v381 + 8))(v381, v837);
+      v380 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v381 + 8))(v381, v837);
       v379 = v380;
       LOBYTE(v919) = 88;
-      v133 = (char *)std::string::c_str(v380);
-      v203 = std::string::string(v910, v133);
+      v133 = std::string::c_str(v380);
+      v203 = std::string::string(&v910, v133);
       LOBYTE(v919) = 90;
       std::string::~string(v837);
       v378 = CConfigManagerPtr::GetInstance();
       v685 = v378;
-      v134 = std::string::c_str(v910);
-      v377 = ((int (__thiscall *)(CConfigManager *, int))v685->?)(v685, v134);
+      v134 = (int)std::string::c_str(&v910);
+      v377 = v685->GetDefineValue(v685, (char *)v134);
       *((_DWORD *)v816 + 2) = v377;
       if ( *((_DWORD *)v816 + 2) == -1 )
         *((_DWORD *)v816 + 2) = 0;
       v376 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v784);
-      v375 = AdvXMLParser::Element::operator()("patch", 0);
-      v374 = AdvXMLParser::Element::operator()("sound", 0);
-      v373 = AdvXMLParser::Element::operator()("random", 0);
+      v375 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("patch", 0);
+      v374 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("sound", 0);
+      v373 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("random", 0);
       v684 = v373;
-      v372 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v373 + 8))(v373, v838);
-      v135 = (const char *)std::string::c_str(v372);
+      v372 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v373 + 8))(v373, v838);
+      v135 = std::string::c_str(v372);
       v136 = j__atoi(v135);
       v816[12] = v136;
       std::string::~string(v838);
       if ( !v816[12] )
         v816[12] = 100;
       v371 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v784);
-      v370 = AdvXMLParser::Element::operator()("patch", 0);
-      v369 = AdvXMLParser::Element::operator()("sound", 0);
-      v368 = AdvXMLParser::Element::operator()("frame", 0);
+      v370 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("patch", 0);
+      v369 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("sound", 0);
+      v368 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("frame", 0);
       v683 = v368;
-      v367 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v368 + 8))(v368, v839);
-      v137 = (const char *)std::string::c_str(v367);
+      v367 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v368 + 8))(v368, v839);
+      v137 = std::string::c_str(v367);
       v138 = j__atoi(v137);
       v816[13] = v138;
       std::string::~string(v839);
       v366 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v784);
-      v365 = AdvXMLParser::Element::operator()("effect", 0);
-      v364 = AdvXMLParser::Element::operator()("def", 0);
+      v365 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("effect", 0);
+      v364 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("def", 0);
       v682 = v364;
       v363 = CConfigManagerPtr::GetInstance();
       v681 = v363;
-      v362 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v682 + 8))(v682, v840);
+      v362 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v682 + 8))(v682, v840);
       v361 = v362;
       LOBYTE(v919) = 91;
-      v139 = std::string::c_str(v362);
-      v360 = ((int (__thiscall *)(CConfigManager *, int))v681->?)(v681, v139);
+      v139 = (int)std::string::c_str(v362);
+      v360 = v681->GetDefineValue(v681, (char *)v139);
       *((_DWORD *)v816 + 4) = v360;
       LOBYTE(v919) = 90;
       std::string::~string(v840);
       v359 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v784);
-      v358 = AdvXMLParser::Element::operator()("effect", 0);
-      v357 = AdvXMLParser::Element::operator()("x", 0);
+      v358 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("effect", 0);
+      v357 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("x", 0);
       v680 = v357;
-      v356 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v357 + 8))(v357, v841);
-      v140 = (const char *)std::string::c_str(v356);
+      v356 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v357 + 8))(v357, v841);
+      v140 = std::string::c_str(v356);
       v141 = j__atoi(v140);
       *((_WORD *)v816 + 10) = v141;
       std::string::~string(v841);
       v355 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v784);
-      v354 = AdvXMLParser::Element::operator()("effect", 0);
-      v353 = AdvXMLParser::Element::operator()("y", 0);
+      v354 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("effect", 0);
+      v353 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("y", 0);
       v679 = v353;
-      v352 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v353 + 8))(v353, v842);
-      v142 = (const char *)std::string::c_str(v352);
+      v352 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v353 + 8))(v353, v842);
+      v142 = std::string::c_str(v352);
       v143 = j__atoi(v142);
       *((_WORD *)v816 + 11) = v143;
       std::string::~string(v842);
       v351 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v784);
-      v350 = AdvXMLParser::Element::operator()("effect", 0);
-      v349 = AdvXMLParser::Element::operator()("smoke", 0);
+      v350 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("effect", 0);
+      v349 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("smoke", 0);
       v678 = v349;
-      v348 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v349 + 8))(v349, v843);
-      v144 = (const char *)std::string::c_str(v348);
+      v348 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v349 + 8))(v349, v843);
+      v144 = std::string::c_str(v348);
       v145 = j__atoi(v144);
       v816[25] = v145;
       std::string::~string(v843);
       v347 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v784);
-      v282 = AdvXMLParser::Element::operator()("effect", 0);
-      v345 = AdvXMLParser::Element::operator()("duration", 0);
+      v282 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("effect", 0);
+      v345 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("duration", 0);
       v677 = v345;
-      v344 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v345 + 8))(v345, v844);
-      v146 = (const char *)std::string::c_str(v344);
+      v344 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v345 + 8))(v345, v844);
+      v146 = std::string::c_str(v344);
       v147 = j__atoi(v146);
       v816[24] = v147;
       std::string::~string(v844);
       v343 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v784);
-      v342 = AdvXMLParser::Element::operator()("effect", 0);
-      v341 = AdvXMLParser::Element::operator()("sound", 0);
-      v340 = AdvXMLParser::Element::operator()("def", 0);
+      v342 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("effect", 0);
+      v341 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("sound", 0);
+      v340 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("def", 0);
       v676 = v340;
       v339 = CConfigManagerPtr::GetInstance();
       v675 = v339;
-      v338 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v676 + 8))(v676, v845);
+      v338 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v676 + 8))(v676, v845);
       v337 = v338;
       LOBYTE(v919) = 92;
-      v148 = std::string::c_str(v338);
-      v336 = ((int (__thiscall *)(CConfigManager *, int))v675->?)(v675, v148);
+      v148 = (int)std::string::c_str(v338);
+      v336 = v675->GetDefineValue(v675, (char *)v148);
       *((_DWORD *)v816 + 7) = v336;
       LOBYTE(v919) = 90;
       std::string::~string(v845);
       if ( *((_DWORD *)v816 + 7) == -1 )
         *((_DWORD *)v816 + 7) = 0;
       v335 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v784);
-      v334 = AdvXMLParser::Element::operator()("effect", 0);
-      v333 = AdvXMLParser::Element::operator()("sound", 0);
-      v332 = AdvXMLParser::Element::operator()("random", 0);
+      v334 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("effect", 0);
+      v333 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("sound", 0);
+      v332 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("random", 0);
       v674 = v332;
-      v331 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v332 + 8))(v332, v846);
-      v149 = (const char *)std::string::c_str(v331);
+      v331 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v332 + 8))(v332, v846);
+      v149 = std::string::c_str(v331);
       v150 = j__atoi(v149);
       v816[32] = v150;
       std::string::~string(v846);
       if ( !v816[12] )
         v816[12] = 100;
       v330 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v784);
-      v329 = AdvXMLParser::Element::operator()("effect", 0);
-      v328 = AdvXMLParser::Element::operator()("sound", 0);
-      v327 = AdvXMLParser::Element::operator()("frame", 0);
+      v329 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("effect", 0);
+      v328 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("sound", 0);
+      v327 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("frame", 0);
       v673 = v327;
-      v326 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v327 + 8))(v327, v847);
-      v151 = (const char *)std::string::c_str(v326);
+      v326 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v327 + 8))(v327, v847);
+      v151 = std::string::c_str(v326);
       v152 = j__atoi(v151);
       v816[13] = v152;
       std::string::~string(v847);
       LOBYTE(v919) = 86;
-      std::string::~string(v910);
+      std::string::~string(&v910);
       LOBYTE(v919) = 83;
-      std::string::~string(v911);
+      std::string::~string(&v911);
       LOBYTE(v919) = 80;
-      std::string::~string(v912);
+      std::string::~string(&v912);
       LOBYTE(v919) = 79;
       std::string::~string(v913);
       AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator++(v784);

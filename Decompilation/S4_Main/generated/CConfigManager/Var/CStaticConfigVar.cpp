@@ -20,7 +20,7 @@
   CConfigVar::CConfigVar(this, 1, a3, a4);
   this->__vftable = (CConfigVar_vtbl *)&CStaticConfigVar::_vftable_;
   Instance = CConfigManagerPtr::GetInstance();
-  Instance->?(a2);
+  Instance->AddStaticConfigVar(a2);
   return this;
 }
 

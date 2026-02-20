@@ -8,8 +8,8 @@
  CFile::CFile(void) {
   
   IFSNode::IFSNode(this);
-  this->__vftable = (IFSNode_vtbl *)CFile::_vftable_;
-  std::string::string((struct std::string *)&this->m_spName, "test");
+  this->__vftable = (IFSNode_vtbl *)&CFile::_vftable_;
+  std::string::string(&this->m_spName, "test");
   std::string::string(&this->m_spU24);
   this->m_hFile = 0;
   this->m_bTextMode = 1;
@@ -194,10 +194,10 @@ int  CFile::Eof(void) {
 
 
 // address=[0x2f01420]
-// Decompiled from int __thiscall CFile::Error(CFile *this)
+// Decompiled from int __thiscall CFile::Error(FILE **this)
 int  CFile::Error(void) {
   
-  return j__ferror(this->m_hFile);
+  return j__ferror(this[17]);
 }
 
 

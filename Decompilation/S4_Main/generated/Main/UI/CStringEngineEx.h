@@ -12,11 +12,11 @@ public:
     virtual  ~CStringEngineEx(void);
 
     // address=[0x14ce9a0]
-    virtual char const *  GetString(int a2);
+    virtual char const *  GetString(int _iId);
 
 private:
     // address=[0x14cea80]
-    bool  ExtractStrings(char * buffer, int size, int a4);
+    bool  ExtractStrings(char * sdTextFileData, int size, int _bFillEmptyStrings);
 
     // address=[0x14ced10]
     bool  ImportFile(wchar_t const * FileName, int a3);
@@ -26,7 +26,7 @@ private:
 
     // Type information members
 public:
-    wchar_t ** strings;
+    wchar_t ** m_swpTexts;
 
 };
 

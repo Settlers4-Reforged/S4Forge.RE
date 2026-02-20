@@ -15,7 +15,7 @@
 
 
 // address=[0x2eef2d0]
-// Decompiled from void __thiscall sub_32EF2D0(void *this)
+// Decompiled from void __thiscall CConfigSection::~CConfigSection(void *this)
  CConfigSection::~CConfigSection(void) {
   
   int v1; // eax
@@ -24,35 +24,35 @@
   _BYTE v4[12]; // [esp+10h] [ebp-3Ch] BYREF
   _BYTE v5[12]; // [esp+1Ch] [ebp-30h] BYREF
   int v6; // [esp+28h] [ebp-24h]
-  int v7; // [esp+2Ch] [ebp-20h]
-  int v8; // [esp+30h] [ebp-1Ch]
-  int v9; // [esp+34h] [ebp-18h]
+  CConfigVar *v7; // [esp+2Ch] [ebp-20h]
+  CConfigVar *v8; // [esp+30h] [ebp-1Ch]
+  CConfigVar *v9; // [esp+34h] [ebp-18h]
   void *v10; // [esp+38h] [ebp-14h]
   char v11; // [esp+3Fh] [ebp-Dh]
 
   v10 = this;
   std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,CConfigVar *>>>>::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,CConfigVar *>>>>(v5);
-  v1 = std::_Tree<std::_Tmap_traits<std::string,CConfigVar *,std::less<std::string>,std::allocator<std::pair<std::string const,CConfigVar *>>,0>>::begin(v4);
+  v1 = std::_Tree<std::_Tmap_traits<std::string,CConfigVar *,std::less<std::string>,std::allocator<std::pair<std::string const,CConfigVar *>>,0>>::begin((int)v4);
   std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,CConfigVar *>>>>::operator=(v1);
   std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,CConfigVar *>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,CConfigVar *>>>>(v4);
   while ( 1 )
   {
-    v2 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<std::string,CConfigVar *,std::less<std::string>,std::allocator<std::pair<std::string const,CConfigVar *>>,0>>::end(v3);
+    v2 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<std::string,CConfigVar *,std::less<std::string>,std::allocator<std::pair<std::string const,CConfigVar *>>,0>>::end((int)v3);
     v11 = std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,CConfigVar *>>>>::operator!=(v2);
     std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,CConfigVar *>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,CConfigVar *>>>>(v3);
     if ( !v11 )
       break;
-    v9 = *(_DWORD *)(std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,CConfigVar *>>>>::operator*(v5)
-                   + 28);
-    if ( v9 && !(unsigned __int8)CConfigVar::Static(v9) )
+    v9 = *(CConfigVar **)(std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,CConfigVar *>>>>::operator*((std::_Iterator_base12 *)v5)
+                        + 28);
+    if ( v9 && !CConfigVar::Static(v9) )
     {
       v7 = v9;
       v8 = v9;
       if ( v9 )
-        v6 = (*(int (__thiscall **)(int, int))(*(_DWORD *)v8 + 36))(v8, 1);
+        v6 = ((int (__thiscall *)(CConfigVar *, int))v8->j_??_ECConfigVar@@EAEPAXI@Z)(v8, 1);
       else
         v6 = 0;
-      *(_DWORD *)(std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,CConfigVar *>>>>::operator*(v5)
+      *(_DWORD *)(std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,CConfigVar *>>>>::operator*((std::_Iterator_base12 *)v5)
                 + 28) = 0;
     }
     std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,CConfigVar *>>>>::operator++(v5);

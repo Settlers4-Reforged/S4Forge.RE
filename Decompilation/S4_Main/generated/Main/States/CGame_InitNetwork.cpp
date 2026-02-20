@@ -21,8 +21,8 @@ class CGameState * __cdecl CGame_InitNetwork::DynamicCreateFunc(void * a1) {
  CGame_InitNetwork::CGame_InitNetwork(void * a2) {
   
   int v3; // [esp+8h] [ebp-A4h]
-  void *v4; // [esp+Ch] [ebp-A0h]
-  void *v5; // [esp+14h] [ebp-98h]
+  std::string *v4; // [esp+Ch] [ebp-A0h]
+  struct std::string *v5; // [esp+14h] [ebp-98h]
   INetworkEngine *v6; // [esp+28h] [ebp-84h]
   INetworkEngine *v7; // [esp+2Ch] [ebp-80h]
   INetworkEngine *v8; // [esp+30h] [ebp-7Ch]
@@ -30,8 +30,8 @@ class CGameState * __cdecl CGame_InitNetwork::DynamicCreateFunc(void * a1) {
   CGameType *v10; // [esp+38h] [ebp-74h]
   CGameType *C; // [esp+3Ch] [ebp-70h]
   char v13; // [esp+45h] [ebp-67h]
-  _BYTE v14[28]; // [esp+48h] [ebp-64h] BYREF
-  _BYTE v15[28]; // [esp+64h] [ebp-48h] BYREF
+  std::string v14; // [esp+48h] [ebp-64h] BYREF
+  std::string v15; // [esp+64h] [ebp-48h] BYREF
   _BYTE v16[28]; // [esp+80h] [ebp-2Ch] BYREF
   int v17; // [esp+A8h] [ebp-4h]
 
@@ -49,7 +49,7 @@ class CGameState * __cdecl CGame_InitNetwork::DynamicCreateFunc(void * a1) {
       else
         v10 = 0;
       LOBYTE(v17) = 0;
-      g_pGameType = (int)v10;
+      g_pGameType = (std::wstring *)v10;
     }
     v9 = (INetworkEngine *)operator new(0x18u);
     LOBYTE(v17) = 2;
@@ -63,22 +63,17 @@ class CGameState * __cdecl CGame_InitNetwork::DynamicCreateFunc(void * a1) {
   }
   else
   {
-    v5 = std::string::string(v14, "normal");
+    v5 = std::string::string(&v14, "normal");
     LOBYTE(v17) = 3;
-    v4 = std::string::string(v15, "normal");
+    v4 = std::string::string(&v15, "normal");
     LOBYTE(v17) = 4;
-    v3 = ((int (__thiscall *)(CConfigManager *, _BYTE *, const char *, const char *, void *))g_pCfgMgr->?)(
-           g_pCfgMgr,
-           v16,
-           "COMMANDLINE",
-           "gamemode",
-           v4);
-    v13 = std::operator==<char>(v3, v5);
+    v3 = g_pCfgMgr->GetStringValue(g_pCfgMgr, (std::string *)v16, "COMMANDLINE", "gamemode", v4);
+    v13 = std::operator==<char>(v3, (int)v5);
     std::string::~string(v16);
     LOBYTE(v17) = 3;
-    std::string::~string(v15);
+    std::string::~string(&v15);
     LOBYTE(v17) = 0;
-    std::string::~string(v14);
+    std::string::~string(&v14);
     if ( v13 )
     {
       v7 = (INetworkEngine *)operator new(0x18u);

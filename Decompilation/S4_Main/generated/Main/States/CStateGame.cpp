@@ -789,16 +789,16 @@ int  CStateGame::GetModifierState(void) {
   int v17; // eax
   int v18; // esi
   unsigned int v20; // [esp-4h] [ebp-2C8h]
-  void *TypeString; // [esp+14h] [ebp-2B0h]
+  std::string *TypeString; // [esp+14h] [ebp-2B0h]
   int v22; // [esp+1Ch] [ebp-2A8h]
   int v23; // [esp+24h] [ebp-2A0h]
   struct std::string *v24; // [esp+30h] [ebp-294h]
   int v25; // [esp+34h] [ebp-290h]
-  void *v26; // [esp+3Ch] [ebp-288h]
+  std::string *v26; // [esp+3Ch] [ebp-288h]
   CEvn_Event *v27; // [esp+4Ch] [ebp-278h]
   CEvn_Event *v28; // [esp+50h] [ebp-274h]
   CEvn_Event *v29; // [esp+58h] [ebp-26Ch]
-  void *ModeString; // [esp+60h] [ebp-264h]
+  std::string *ModeString; // [esp+60h] [ebp-264h]
   int v31; // [esp+68h] [ebp-25Ch]
   int Instance; // [esp+6Ch] [ebp-258h]
   int i; // [esp+7Ch] [ebp-248h]
@@ -806,7 +806,7 @@ int  CStateGame::GetModifierState(void) {
   char v36[88]; // [esp+88h] [ebp-23Ch] BYREF
   char v37[88]; // [esp+E0h] [ebp-1E4h] BYREF
   _BYTE v38[28]; // [esp+138h] [ebp-18Ch] BYREF
-  _BYTE v39[28]; // [esp+154h] [ebp-170h] BYREF
+  struct std::string v39; // [esp+154h] [ebp-170h] BYREF
   _BYTE v40[28]; // [esp+170h] [ebp-154h] BYREF
   _BYTE v41[28]; // [esp+18Ch] [ebp-138h] BYREF
   _BYTE v42[28]; // [esp+1A8h] [ebp-11Ch] BYREF
@@ -814,11 +814,11 @@ int  CStateGame::GetModifierState(void) {
   CEvn_Event v44; // [esp+1E0h] [ebp-E4h] BYREF
   CEvn_Event v45; // [esp+1F8h] [ebp-CCh] BYREF
   CEvn_Event v46; // [esp+210h] [ebp-B4h] BYREF
-  _BYTE v47[28]; // [esp+228h] [ebp-9Ch] BYREF
-  _BYTE v48[28]; // [esp+244h] [ebp-80h] BYREF
-  _BYTE v49[28]; // [esp+260h] [ebp-64h] BYREF
-  _BYTE v50[28]; // [esp+27Ch] [ebp-48h] BYREF
-  _BYTE v51[28]; // [esp+298h] [ebp-2Ch] BYREF
+  struct std::string v47; // [esp+228h] [ebp-9Ch] BYREF
+  struct std::string v48; // [esp+244h] [ebp-80h] BYREF
+  std::string v49; // [esp+260h] [ebp-64h] BYREF
+  std::string v50; // [esp+27Ch] [ebp-48h] BYREF
+  struct std::string v51; // [esp+298h] [ebp-2Ch] BYREF
   int v52; // [esp+2C0h] [ebp-4h]
 
   CGameState::CGameState(this);
@@ -862,12 +862,12 @@ int  CStateGame::GetModifierState(void) {
   LOBYTE(v52) = 4;
   if ( (unsigned __int8)CGameType::IsMultiplayerGame(g_pGameType) )
   {
-    Instance = UPlay::UPlayManager::GetInstance();
+    Instance = (int)UPlay::UPlayManager::GetInstance();
     (*(void (__thiscall **)(int, int))(*(_DWORD *)Instance + 52))(Instance, 3);
   }
   else
   {
-    v31 = UPlay::UPlayManager::GetInstance();
+    v31 = (int)UPlay::UPlayManager::GetInstance();
     (*(void (__thiscall **)(int, int))(*(_DWORD *)v31 + 52))(v31, 4);
   }
   IsMCD2TextureSet = CGameType::IsMCD2TextureSet((CGameType *)g_pGameType);
@@ -885,44 +885,56 @@ int  CStateGame::GetModifierState(void) {
   *((_DWORD *)this + 15) = 0;
   *((_DWORD *)this + 16) = 0;
   *((_BYTE *)this + 68) = 0;
-  std::string::string((struct std::string *)v51, "none");
+  std::string::string(&v51, "none");
   LOBYTE(v52) = 5;
-  v22 = g_pCfgMgr->?((int)v38, "COMMANDLINE", "events", (int)v51);
+  v22 = ((int (__stdcall *)(int, char *, char *, int))g_pCfgMgr->GetStringValue)(
+          (int)v38,
+          "COMMANDLINE",
+          "events",
+          (int)&v51);
   LOBYTE(v52) = 6;
   std::operator==<char>(v22, "record");
   LOBYTE(v52) = 5;
   std::string::~string(v38);
   LOBYTE(v52) = 4;
-  std::string::~string(v51);
-  std::string::string((struct std::string *)v47, "none");
+  std::string::~string(&v51);
+  std::string::string(&v47, "none");
   LOBYTE(v52) = 7;
-  v23 = g_pCfgMgr->?((int)v43, "COMMANDLINE", "events", (int)v47);
+  v23 = ((int (__stdcall *)(int, char *, char *, int))g_pCfgMgr->GetStringValue)(
+          (int)v43,
+          "COMMANDLINE",
+          "events",
+          (int)&v47);
   LOBYTE(v52) = 8;
   v34 = std::operator==<char>(v23, "play");
   LOBYTE(v52) = 7;
   std::string::~string(v43);
   LOBYTE(v52) = 4;
-  std::string::~string(v47);
-  v25 = g_pCfgMgr->?("COMMANDLINE", "stopevent", 0);
+  std::string::~string(&v47);
+  v25 = ((int (__stdcall *)(char *, char *, int))g_pCfgMgr->GetIntValue)("COMMANDLINE", "stopevent", 0);
   if ( v34 )
   {
-    std::string::string((struct std::string *)v48, "slot0.rec");
+    std::string::string(&v48, "slot0.rec");
     LOBYTE(v52) = 10;
-    v26 = (void *)g_pCfgMgr->?((int)v40, "COMMANDLINE", "eventfile", (int)v48);
+    v26 = (std::string *)((int (__stdcall *)(int, char *, char *, int))g_pCfgMgr->GetStringValue)(
+                           (int)v40,
+                           "COMMANDLINE",
+                           "eventfile",
+                           (int)&v48);
     LOBYTE(v52) = 11;
     IEventEngine::PlayEvents(g_pEvnEngine, v26, v25);
     LOBYTE(v52) = 10;
     std::string::~string(v40);
     LOBYTE(v52) = 4;
-    std::string::~string(v48);
+    std::string::~string(&v48);
   }
   else
   {
-    v24 = std::string::string((struct std::string *)v39, "slot0.rec");
+    v24 = std::string::string(&v39, "slot0.rec");
     LOBYTE(v52) = 9;
     IEventEngine::RecordEvents(g_pEvnEngine, v24);
     LOBYTE(v52) = 4;
-    std::string::~string(v39);
+    std::string::~string(&v39);
   }
   g_pGame = (_DWORD **)this;
   g_pGameData = (CStateGame *)((char *)this + 76);
@@ -962,9 +974,9 @@ int  CStateGame::GetModifierState(void) {
   IGfxEngine::SetTickCounterAdress(g_pGfxEngine, (unsigned int *)this + 20);
   IEventEngine::SetTickPointer(g_pEvnEngine, (CStateGame *)((char *)this + 80));
   CTextMsgHandler::Init();
-  *((_DWORD *)this + 22) = *(_DWORD *)(g_pGameType + 56);
+  *((_DWORD *)this + 22) = g_pGameType[2].m_u[0];
   *((_DWORD *)this + 23) = 0;
-  *((_DWORD *)this + 21) = *(_DWORD *)(g_pGameType + 56);
+  *((_DWORD *)this + 21) = g_pGameType[2].m_u[0];
   RegisterClasses();
   if ( (unsigned __int8)CGameRun::Init() )
   {
@@ -983,9 +995,9 @@ int  CStateGame::GetModifierState(void) {
     CGfxManager::EnableGfxFile(g_pGfxManager, 1u, 8, 1, 0xFFFFFFFF);
     if ( !*((_BYTE *)g_pGame + 117) )
     {
-      v20 = *(_DWORD *)(g_pGameType + 4 * CPlayerManager::GetLocalPlayerId() + 292);
+      v20 = g_pGameType[10].m_u[CPlayerManager::GetLocalPlayerId() + 3];
       LocalPlayerId = CPlayerManager::GetLocalPlayerId();
-      CStateGame::SetViewPos(this, *(_DWORD *)(g_pGameType + 4 * LocalPlayerId + 256), v20);
+      CStateGame::SetViewPos(this, g_pGameType[9].m_u[LocalPlayerId + 1], v20);
     }
     v6 = (float)(unsigned int)(*((_DWORD *)this + 26) - 917504);
     v27 = CEvn_Event::CEvn_Event(&v44, 0x25Du, 0, (int)(float)((float)(v6 * 100.0) / 3801088.0), 0);
@@ -1000,48 +1012,48 @@ int  CStateGame::GetModifierState(void) {
     std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v37);
     LOBYTE(v52) = 13;
     std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(
-      v49,
-      g_pGameType + 28);
+      (int)&v49,
+      g_pGameType + 1);
     LOBYTE(v52) = 14;
-    v7 = (const char *)std::string::c_str(v49);
+    v7 = std::string::c_str(&v49);
     BBSupportTracePrintF(1, "MapName:        %s", v7);
     LOBYTE(v52) = 13;
-    std::string::~string(v49);
+    std::string::~string(&v49);
     LOBYTE(v52) = 4;
     std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::~wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v37);
-    TypeString = (void *)CGameData::GetTypeString((char *)this + 76, (int)v41);
+    TypeString = (std::string *)CGameData::GetTypeString((char *)this + 76, (int)v41);
     LOBYTE(v52) = 15;
-    v8 = (const char *)std::string::c_str(TypeString);
+    v8 = std::string::c_str(TypeString);
     BBSupportTracePrintF(1, "GameType:       %s", v8);
     LOBYTE(v52) = 4;
     std::string::~string(v41);
-    ModeString = (void *)CGameData::GetModeString((char *)this + 76, (int)v42);
+    ModeString = (std::string *)CGameData::GetModeString((char *)this + 76, (int)v42);
     LOBYTE(v52) = 16;
-    v9 = (const char *)std::string::c_str(ModeString);
+    v9 = std::string::c_str(ModeString);
     BBSupportTracePrintF(1, "GameMode:       %s", v9);
     LOBYTE(v52) = 4;
     std::string::~string(v42);
-    if ( *(_BYTE *)(g_pGameType + 696) )
+    if ( LOBYTE(g_pGameType[24].m_u[6]) )
       BBSupportTracePrintF(1, "Saved Game:     %s", "Yes");
     else
       BBSupportTracePrintF(1, "Saved Game:     %s", "No");
-    if ( *(_BYTE *)(g_pGameType + 696) )
+    if ( LOBYTE(g_pGameType[24].m_u[6]) )
     {
       std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v36);
       LOBYTE(v52) = 17;
       std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(
-        v50,
-        g_pGameType + 704);
+        (int)&v50,
+        (std::wstring *)((char *)g_pGameType + 704));
       LOBYTE(v52) = 18;
-      v10 = (const char *)std::string::c_str(v50);
+      v10 = std::string::c_str(&v50);
       BBSupportTracePrintF(1, "Save File:     %s", v10);
       LOBYTE(v52) = 17;
-      std::string::~string(v50);
+      std::string::~string(&v50);
       LOBYTE(v52) = 4;
       std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::~wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v36);
     }
-    BBSupportTracePrintF(1, "Starting Tick:  %d", *(_DWORD *)(g_pGameType + 700));
-    BBSupportTracePrintF(1, "Time Delay:\t    %d ms", *(_DWORD *)(g_pGameType + 660));
+    BBSupportTracePrintF(1, "Starting Tick:  %d", g_pGameType[25].m_u[0]);
+    BBSupportTracePrintF(1, "Time Delay:\t    %d ms", g_pGameType[23].m_u[4]);
     PlayerId = CPlayerManager::LastPlayerId();
     BBSupportTracePrintF(1, "Playercount:    %d", PlayerId);
     if ( INetworkEngine::IsHost((INetworkEngine *)g_pNetworkEngine) )
@@ -3761,7 +3773,7 @@ void  CStateGame::CheckAutosaveTimer(void) {
   int v7; // [esp+10h] [ebp-Ch]
 
   Instance = CConfigManagerPtr::GetInstance();
-  TickCounter = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))Instance->?)(
+  TickCounter = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))Instance->GetIntValueNoAdd)(
                   Instance,
                   "GAMESETTINGS",
                   "IsAutosaveEnabled",

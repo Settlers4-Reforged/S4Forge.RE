@@ -1,3 +1,4 @@
+#if FALSE
 #include "CConfigFile.h"
 
 // Definitions for class CConfigFile
@@ -62,3 +63,4 @@ wchar_t const *  CConfigFile::GetName(void) {
 }
 
 
+#endif // Already implemented

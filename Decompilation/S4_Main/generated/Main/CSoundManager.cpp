@@ -89,15 +89,15 @@ bool  CSoundManager::OpenSoundFiles(void) {
   v18 = this;
   CFileEx::CFileEx((CFileEx *)v19, 1);
   v21 = 1;
-  CFileEx::Open(v20, (wchar_t *)L"snd\\0.sil", 6, 0, UNUSED_ARG(), UNUSED_ARG());
+  CFileEx::Open((IFileEx *)v20, (wchar_t *)L"snd\\0.sil", CFile_BINARY|CFile_READ, 0, UNUSED_ARG(), UNUSED_ARG());
   v21 = 0;
-  ElementCount = CFileEx::Size(v19);
+  ElementCount = CFileEx::Size((CFileEx *)v19);
   *((_DWORD *)v18 + 9) = (ElementCount - 20) >> 2;
-  if ( *((_DWORD *)v18 + 9) != dword_3737E6C[324] + *(&dword_3737E68 + 324) )
+  if ( *((_DWORD *)v18 + 9) != dword_3737E6C[324] + dword_3737E68[324] )
     CTrace::Print(
       "CSoundManager::OpenSoundFiles : Number of items differs read %d expected %d",
       *((_DWORD *)v18 + 9),
-      dword_3737E6C[324] + *(&dword_3737E68 + 324));
+      dword_3737E6C[324] + dword_3737E68[324]);
   v9 = operator new[](4 * (ElementCount >> 2));
   *((_DWORD *)v18 + 118) = v9;
   v5[4] = CFileEx::Read(v20, *((void **)v18 + 118), 1, ElementCount, "Main\\SoundManager.cpp", 958);
@@ -136,11 +136,7 @@ bool  CSoundManager::OpenSoundFiles(void) {
     else
       *(_DWORD *)(*((_DWORD *)v18 + 7) + 4 * i) = 0;
     SoundName = CS4DefineNames::GetSoundName(i);
-    v3 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->?)(
-           g_pCfgMgr,
-           "SOUND_VOLUMES",
-           SoundName,
-           100);
+    v3 = g_pCfgMgr->GetIntValue(g_pCfgMgr, "SOUND_VOLUMES", SoundName, 100);
     *(_DWORD *)(*((_DWORD *)v18 + 8) + 4 * i) = v3;
   }
   v16 = 1;
@@ -381,11 +377,7 @@ unsigned int  CSoundManager::CrossFade(unsigned int a2, enum SIV_SOUNDS a3, int 
   if ( v7 )
   {
     ISoundEngine::Fade((ISoundEngine *)g_pSoundEngine, a2, 0, a5);
-    v6 = ((int (__thiscall *)(CConfigManager *, const char *, char *, _DWORD))g_pCfgMgr->?)(
-           g_pCfgMgr,
-           "SOUND_VOLUMES",
-           (&off_3737164)[2 * a2],
-           0);
+    v6 = g_pCfgMgr->GetIntValue(g_pCfgMgr, "SOUND_VOLUMES", (&off_3737164)[2 * a2], 0);
     v8 = CSoundManager::CalcFinalVolume(this, *((_DWORD *)this + 5), v6, a4);
     ISoundEngine::Fade((ISoundEngine *)g_pSoundEngine, v7, v8, a5);
     return v7;
@@ -651,7 +643,7 @@ int  CSoundManager::CalcFinalVolume(int a2, int a3, int a4) {
 
 
 // address=[0x149b370]
-// Decompiled from char __thiscall CSoundManager::LoadRaceTitles(CSoundManager *this, int a2, const wchar_t *a3)
+// Decompiled from char __thiscall CSoundManager::LoadRaceTitles(CSoundManager *this, int a2, WCHAR *a3)
 bool  CSoundManager::LoadRaceTitles(int a2, wchar_t const * a3) {
   
   int v3; // eax
@@ -676,21 +668,21 @@ bool  CSoundManager::LoadRaceTitles(int a2, wchar_t const * a3) {
   char v23; // [esp+46h] [ebp-452h]
   char v24; // [esp+47h] [ebp-451h]
   char v25[88]; // [esp+48h] [ebp-450h] BYREF
-  _BYTE v26[28]; // [esp+A0h] [ebp-3F8h] BYREF
+  std::wstring v26; // [esp+A0h] [ebp-3F8h] BYREF
   int v27[7]; // [esp+BCh] [ebp-3DCh] BYREF
   int v28[7]; // [esp+D8h] [ebp-3C0h] BYREF
   int v29[7]; // [esp+F4h] [ebp-3A4h] BYREF
   int v30[7]; // [esp+110h] [ebp-388h] BYREF
   int v31[7]; // [esp+12Ch] [ebp-36Ch] BYREF
-  _BYTE v32[72]; // [esp+148h] [ebp-350h] BYREF
-  _BYTE v33[28]; // [esp+190h] [ebp-308h] BYREF
+  CFile v32; // [esp+148h] [ebp-350h] BYREF
+  std::string v33; // [esp+190h] [ebp-308h] BYREF
   _BYTE v34[28]; // [esp+1ACh] [ebp-2ECh] BYREF
   int v35[7]; // [esp+1C8h] [ebp-2D0h] BYREF
-  _BYTE v36[28]; // [esp+1E4h] [ebp-2B4h] BYREF
-  _BYTE v37[28]; // [esp+200h] [ebp-298h] BYREF
-  int v38[7]; // [esp+21Ch] [ebp-27Ch] BYREF
+  std::string v36; // [esp+1E4h] [ebp-2B4h] BYREF
+  std::string v37; // [esp+200h] [ebp-298h] BYREF
+  std::string v38; // [esp+21Ch] [ebp-27Ch] BYREF
   int v39[7]; // [esp+238h] [ebp-260h] BYREF
-  int v40[7]; // [esp+254h] [ebp-244h] BYREF
+  std::string v40; // [esp+254h] [ebp-244h] BYREF
   char Str[12]; // [esp+478h] [ebp-20h] BYREF
   _DWORD *v42; // [esp+488h] [ebp-10h]
   int v43; // [esp+494h] [ebp-4h]
@@ -698,28 +690,28 @@ bool  CSoundManager::LoadRaceTitles(int a2, wchar_t const * a3) {
   v42 = v9;
   v9[4] = this;
   v23 = 1;
-  std::string::string();
+  ((void (__cdecl *)())std::string::string)();
   v43 = 0;
   v18 = a2;
   switch ( a2 )
   {
     case 0:
-      std::string::operator=(v40, "ROMAN");
+      std::string::operator=(&v40, "ROMAN");
       break;
     case 1:
-      std::string::operator=(v40, "VIKING");
+      std::string::operator=(&v40, "VIKING");
       break;
     case 2:
-      std::string::operator=(v40, "MAYA");
+      std::string::operator=(&v40, "MAYA");
       break;
     case 3:
-      std::string::operator=(v40, "DARK");
+      std::string::operator=(&v40, "DARK");
       break;
     case 4:
-      std::string::operator=(v40, "TROJAN");
+      std::string::operator=(&v40, "TROJAN");
       break;
     case 5:
-      std::string::operator=(v40, "MENU");
+      std::string::operator=(&v40, "MENU");
       break;
     default:
       BBSupportTracePrintF(3, "CSoundManager::LoadRaceTitles(): Unknown Race %i!", a2);
@@ -731,19 +723,19 @@ bool  CSoundManager::LoadRaceTitles(int a2, wchar_t const * a3) {
   if ( v23 )
   {
     v19 = 0;
-    std::string::string(v33, (char *)byte_37370E2);
+    std::string::string(&v33, (char *)byte_37370E2);
     LOBYTE(v43) = 1;
-    std::string::string();
+    ((void (__cdecl *)())std::string::string)();
     LOBYTE(v43) = 2;
-    std::string::string();
+    ((void (__cdecl *)())std::string::string)();
     LOBYTE(v43) = 3;
-    std::string::string();
+    ((void (__cdecl *)())std::string::string)();
     LOBYTE(v43) = 4;
-    std::string::string();
+    ((void (__cdecl *)())std::string::string)();
     LOBYTE(v43) = 5;
     std::wstring::wstring(v39);
     LOBYTE(v43) = 6;
-    v17 = (void *)std::operator+<char>((int)v31, (int)v40, "SOUNDTRACKS");
+    v17 = (void *)std::operator+<char>((int)v31, (int)&v40, "SOUNDTRACKS");
     std::string::operator=(v35, v17);
     std::string::~string(v31);
     for ( i = 0; i < 6; ++i )
@@ -752,49 +744,53 @@ bool  CSoundManager::LoadRaceTitles(int a2, wchar_t const * a3) {
       v15 = v16;
       LOBYTE(v43) = 7;
       v14 = (void *)std::operator+<char>((int)v30, v16, (&aacMusicStyles)[i]);
-      std::string::operator=(v38, v14);
+      std::string::operator=(&v38, v14);
       std::string::~string(v30);
       LOBYTE(v43) = 6;
       std::string::~string(v29);
-      v13 = (void *)std::operator+<char>((int)v28, (int)v38, "_FADETIME");
-      std::string::operator=(v36, v13);
+      v13 = (void *)std::operator+<char>((int)v28, (int)&v38, "_FADETIME");
+      std::string::operator=(&v36, v13);
       std::string::~string(v28);
-      v3 = std::string::c_str(v38);
-      v19 = ((int (__thiscall *)(CConfigManager *, int))g_pCfgMgr->?)(g_pCfgMgr, v3);
+      v3 = (int)std::string::c_str(&v38);
+      v19 = ((int (__thiscall *)(CConfigManager *, int))g_pCfgMgr->GetSectionEntryCount)(g_pCfgMgr, v3);
       if ( v19 > 0 )
       {
         ISoundEngine::InitPlaylist((ISoundEngine *)g_pSoundEngine, i, 0);
         for ( j = 0; j < v19; ++j )
         {
           sprintf(Str, "%d", j);
-          v12 = (void *)std::operator+<char>((int)v27, (int)v40, Str);
-          std::string::operator=(v37, v12);
+          v12 = (void *)std::operator+<char>((int)v27, (int)&v40, Str);
+          std::string::operator=(&v37, v12);
           std::string::~string(v27);
-          v7 = std::string::c_str(v37);
-          v4 = std::string::c_str(v38);
-          ((void (__thiscall *)(CConfigManager *, _BYTE *, int, int, _BYTE *))g_pCfgMgr->?)(g_pCfgMgr, v34, v4, v7, v33);
+          v7 = (int)std::string::c_str(&v37);
+          v4 = (int)std::string::c_str(&v38);
+          g_pCfgMgr->GetStringValue(g_pCfgMgr, (std::string *)v34, (const char *)v4, (const char *)v7, &v33);
           LOBYTE(v43) = 8;
           std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v25);
           LOBYTE(v43) = 9;
           v11 = std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::from_bytes(
-                  v26,
-                  v34);
+                  (int)&v26,
+                  (int)v34);
           std::wstring::operator=(v11);
-          std::wstring::~wstring(v26);
-          if ( (unsigned __int8)std::operator!=<wchar_t>(v39, word_3738860) )
+          std::wstring::~wstring(&v26);
+          if ( (unsigned __int8)std::operator!=<wchar_t>((int)v39, word_3738860) )
           {
-            CFile::CFile((CFile *)v32);
+            CFile::CFile(&v32);
             LOBYTE(v43) = 11;
-            CFile::Open((int)v39, 6, "d:\\projects\\tshe\\purplelamp\\s4\\source\\baselib\\include\\File.h", 0);
-            CFile::Close((CFile *)v32, "d:\\projects\\tshe\\purplelamp\\s4\\source\\baselib\\include\\File.h", 0);
+            ((void (__stdcall *)(int, int, char *, int))CFile::Open)(
+              (int)v39,
+              6,
+              "d:\\projects\\tshe\\purplelamp\\s4\\source\\baselib\\include\\File.h",
+              0);
+            CFile::Close(&v32, "d:\\projects\\tshe\\purplelamp\\s4\\source\\baselib\\include\\File.h", 0);
             v24 = 1;
             v43 = 10;
-            v8 = std::string::c_str(v37);
-            v5 = std::string::c_str(v36);
-            v10 = ((int (__thiscall *)(CConfigManager *, int, int, _DWORD))g_pCfgMgr->?)(g_pCfgMgr, v5, v8, 0);
-            ISoundEngine::AddTitleToPlaylist(i, v39, v10);
+            v8 = (int)std::string::c_str(&v37);
+            v5 = (int)std::string::c_str(&v36);
+            v10 = g_pCfgMgr->GetIntValue(g_pCfgMgr, (const char *)v5, (const char *)v8, 0);
+            ISoundEngine::AddTitleToPlaylist(i, (int)v39, v10);
             LOBYTE(v43) = 9;
-            CFile::~CFile();
+            ((void (__cdecl *)())CFile::~CFile)();
           }
           LOBYTE(v43) = 8;
           std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::~wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v25);
@@ -804,21 +800,21 @@ bool  CSoundManager::LoadRaceTitles(int a2, wchar_t const * a3) {
       }
     }
     LOBYTE(v43) = 5;
-    std::wstring::~wstring(v39);
+    std::wstring::~wstring((std::wstring *)v39);
     LOBYTE(v43) = 4;
-    std::string::~string(v36);
+    std::string::~string(&v36);
     LOBYTE(v43) = 3;
-    std::string::~string(v38);
+    std::string::~string(&v38);
     LOBYTE(v43) = 2;
     std::string::~string(v35);
     LOBYTE(v43) = 1;
-    std::string::~string(v37);
+    std::string::~string(&v37);
     LOBYTE(v43) = 0;
-    std::string::~string(v33);
+    std::string::~string(&v33);
   }
   v22 = v23;
   v43 = -1;
-  std::string::~string(v40);
+  std::string::~string(&v40);
   return v22;
 }
 

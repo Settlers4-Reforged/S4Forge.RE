@@ -1809,7 +1809,7 @@ unsigned long __cdecl GetSystemLanguage(void) {
   sAvailableLanguages[25].m_iId = 17;
   GetLocaleInfoA(0x800u, 3u, LCData, 1024);
   LCData[2] = 0;
-  for ( i = 0; i < 0x1A; ++i )
+  for ( i = 0; i < 26; ++i )
   {
     if ( !j__strcmp(sAvailableLanguages[i].m_spName, LCData) )
       return sAvailableLanguages[i].m_iId;
@@ -37102,12 +37102,12 @@ bool __cdecl ExtraCD::IsGermanOnlyContentEnabled(void) {
   if ( dword_3F450B4 != -1 )
     return byte_3F450B3 || CGameSettings::GetLanguage() == 1;
   Instance = CConfigManagerPtr::GetInstance();
-  byte_3F450B3 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))Instance->?)(
+  byte_3F450B3 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))Instance->GetIntValueNoAdd)(
                    Instance,
                    "GAMESETTINGS",
                    "EnableGermanOnlyContent",
                    1) != 0;
-  j___Init_thread_footer(&dword_3F450B4);
+  j___Init_thread_footer((int)&dword_3F450B4);
   return byte_3F450B3 || CGameSettings::GetLanguage() == 1;
 }
 
@@ -37566,18 +37566,10 @@ int __stdcall DlgProc(struct HWND__ * hDlg, unsigned int a2, unsigned int a3, lo
   
   if ( a2 == 272 )
   {
-    if ( ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->?)(
-           g_pCfgMgr,
-           "GAMESETTINGS",
-           "Language",
-           0) )
-    {
+    if ( g_pCfgMgr->GetIntValue(g_pCfgMgr, "GAMESETTINGS", "Language", 0) )
       SetDlgItemTextA(hDlg, 1009, "Tragen Sie bitte hier Ihre Fehlerbeschreibung ein...");
-    }
     else
-    {
       SetDlgItemTextA(hDlg, 1009, "Please fill in your problem description here...");
-    }
     return 1;
   }
   else if ( a2 == 273 )
@@ -38244,7 +38236,7 @@ public: __thiscall TStaticConfigIntArray<4>::TStaticConfigIntArray<4>(char const
 // Decompiled from TStaticConfigIntArrayBase<4> *__thiscall TStaticConfigIntArrayBase<4>::TStaticConfigIntArrayBase<4>(  TStaticConfigIntArrayBase<4> *this,  int a2,  int a3)
 private: __thiscall TStaticConfigIntArrayBase<4>::TStaticConfigIntArrayBase<4>(char const * a2, char const * a3) {
   
-  CStaticConfigVar::CStaticConfigVar((CStaticConfigVar *)this, a2, a3, 2, 4);
+  CStaticConfigVar::CStaticConfigVar((CStaticConfigVar *)this, a2, a3, CONFIGVAR_TYPE_INT_ARRAY, 4);
   *(_DWORD *)this = &TStaticConfigIntArrayBase_4_::_vftable_;
   return this;
 }

@@ -1863,7 +1863,7 @@ void  CDecoObjMgr::ReadObjectInfos(void) {
   const char *v9; // eax
   _DWORD v10[4]; // [esp+0h] [ebp-480h] BYREF
   _BYTE v11[28]; // [esp+10h] [ebp-470h] BYREF
-  _BYTE v12[16]; // [esp+2Ch] [ebp-454h] BYREF
+  _DWORD v12[4]; // [esp+2Ch] [ebp-454h] BYREF
   _BYTE v13[16]; // [esp+3Ch] [ebp-444h] BYREF
   _BYTE v14[16]; // [esp+5Ch] [ebp-424h] BYREF
   int v15; // [esp+6Ch] [ebp-414h]
@@ -1893,16 +1893,16 @@ void  CDecoObjMgr::ReadObjectInfos(void) {
   const char *v39; // [esp+CCh] [ebp-3B4h]
   int v40; // [esp+D0h] [ebp-3B0h]
   const char *ObjectName; // [esp+D4h] [ebp-3ACh]
-  void *v42; // [esp+D8h] [ebp-3A8h]
+  std::string *v42; // [esp+D8h] [ebp-3A8h]
   int v43; // [esp+DCh] [ebp-3A4h]
   int v44; // [esp+E0h] [ebp-3A0h]
-  void *v45; // [esp+E4h] [ebp-39Ch]
+  std::string *v45; // [esp+E4h] [ebp-39Ch]
   int v46; // [esp+E8h] [ebp-398h]
   int v47; // [esp+ECh] [ebp-394h]
-  void *v48; // [esp+F0h] [ebp-390h]
+  std::string *v48; // [esp+F0h] [ebp-390h]
   int v49; // [esp+F4h] [ebp-38Ch]
   int v50; // [esp+F8h] [ebp-388h]
-  void *v51; // [esp+FCh] [ebp-384h]
+  std::string *v51; // [esp+FCh] [ebp-384h]
   int v52; // [esp+100h] [ebp-380h]
   int v53; // [esp+104h] [ebp-37Ch]
   const char *v54; // [esp+108h] [ebp-378h]
@@ -1910,14 +1910,14 @@ void  CDecoObjMgr::ReadObjectInfos(void) {
   CConfigManager *Instance; // [esp+110h] [ebp-370h]
   int v57; // [esp+114h] [ebp-36Ch]
   int v58; // [esp+118h] [ebp-368h]
-  void *v59; // [esp+11Ch] [ebp-364h]
+  std::string *v59; // [esp+11Ch] [ebp-364h]
   _BYTE v60[16]; // [esp+120h] [ebp-360h] BYREF
   int v61; // [esp+130h] [ebp-350h]
   int v62; // [esp+134h] [ebp-34Ch] BYREF
   int v63; // [esp+138h] [ebp-348h]
   int v64; // [esp+13Ch] [ebp-344h]
   CConfigManager *v65; // [esp+140h] [ebp-340h]
-  const char *v66; // [esp+144h] [ebp-33Ch]
+  char *v66; // [esp+144h] [ebp-33Ch]
   CDecoObjMgr *v67; // [esp+148h] [ebp-338h]
   _BYTE v68[4]; // [esp+14Ch] [ebp-334h] BYREF
   BOOL v69; // [esp+150h] [ebp-330h]
@@ -1946,47 +1946,47 @@ void  CDecoObjMgr::ReadObjectInfos(void) {
   _BYTE v94[28]; // [esp+3FCh] [ebp-84h] BYREF
   _BYTE v95[28]; // [esp+418h] [ebp-68h] BYREF
   _BYTE v96[28]; // [esp+434h] [ebp-4Ch] BYREF
-  _BYTE v97[28]; // [esp+450h] [ebp-30h] BYREF
+  std::string v97; // [esp+450h] [ebp-30h] BYREF
   _DWORD *v98; // [esp+470h] [ebp-10h]
   int v99; // [esp+47Ch] [ebp-4h]
 
   v98 = v10;
   v67 = this;
   v62 = 0;
-  result = AdvXMLParser::Parser::OpenXMLFile(aGamedataObject, &v62);
+  result = (char *)AdvXMLParser::Parser::OpenXMLFile(aGamedataObject, &v62);
   v79 = result;
   if ( !result )
     return result;
   v99 = 0;
   v16 = AdvXMLParser::Parser::Parser(v11);
   LOBYTE(v99) = 1;
-  v32 = AdvXMLParser::Parser::Parse((AdvXMLParser::Parser *)v11, v79, v62);
-  std::auto_ptr<AdvXMLParser::Document>::auto_ptr<AdvXMLParser::Document>(v32);
+  v32 = (struct Document *)AdvXMLParser::Parser::Parse((AdvXMLParser::Parser *)v11, v79, v62);
+  std::auto_ptr<AdvXMLParser::Document>::auto_ptr<AdvXMLParser::Document>((int)v32);
   LOBYTE(v99) = 2;
-  v2 = std::auto_ptr<AdvXMLParser::Document>::operator->(v10[0], v10[1]);
+  v2 = ((int (__cdecl *)(_DWORD, _DWORD))std::auto_ptr<AdvXMLParser::Document>::operator->)(v10[0], v10[1]);
   Root = AdvXMLParser::Document::GetRoot(v2);
   v63 = Root;
   v24 = AdvXMLParser::NodeContainer::Begin(Root, v13);
   v23 = v24;
   LOBYTE(v99) = 3;
-  v15 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v24);
+  v15 = ((int (__stdcall *)(int))AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>)(v24);
   LOBYTE(v99) = 5;
   AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v13);
-  v22 = AdvXMLParser::NodeContainer::End(v63, v12);
+  v22 = (int)AdvXMLParser::NodeContainer::End((void *)v63, v12);
   v21 = v22;
   LOBYTE(v99) = 6;
-  v18 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v22);
+  v18 = ((int (__stdcall *)(int))AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>)(v22);
   LOBYTE(v99) = 8;
   AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v12);
-  while ( (unsigned __int8)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator<(v14) )
+  while ( (unsigned __int8)((_DWORD (__stdcall *)(_BYTE *))AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator<)(v14) )
   {
     v20 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v60);
     v80 = v20;
     Name = AdvXMLParser::Node::GetName(v20);
     if ( std::operator==<char>(Name, "ObjectXMLVersion") )
     {
-      v59 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v80 + 8))(v80, v94);
-      v3 = (const char *)std::string::c_str(v59);
+      v59 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v80 + 8))(v80, v94);
+      v3 = std::string::c_str(v59);
       v4 = j__atoi(v3);
       *((_DWORD *)v67 + 6) = v4;
       std::string::~string(v94);
@@ -1994,21 +1994,21 @@ void  CDecoObjMgr::ReadObjectInfos(void) {
     else
     {
       v58 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v60);
-      v57 = AdvXMLParser::Element::operator[]("id");
+      v57 = ((int (__stdcall *)(const char *))AdvXMLParser::Element::operator[])("id");
       v64 = v57;
-      v17 = (*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v57 + 8))(v57, v97);
+      v17 = (*(int (__thiscall **)(int, std::string *))(*(_DWORD *)v57 + 8))(v57, &v97);
       LOBYTE(v99) = 9;
       Instance = CConfigManagerPtr::GetInstance();
       v65 = Instance;
-      v5 = std::string::c_str(v97);
-      v55 = ((int (__thiscall *)(CConfigManager *, int))v65->?)(v65, v5);
+      v5 = (int)std::string::c_str(&v97);
+      v55 = v65->GetDefineValue(v65, (char *)v5);
       v91 = v55;
       if ( v55 < 0 )
       {
-        if ( std::string::c_str(v97) )
-          v66 = (const char *)std::string::c_str(v97);
+        if ( (int)std::string::c_str(&v97) )
+          v66 = std::string::c_str(&v97);
         else
-          v66 = (const char *)&unk_379CF3A;
+          v66 = (char *)&unk_379CF3A;
         v54 = v66;
         BBSupportTracePrintF(0, "### CDecoObjMgr::ReadObjectInfos(): Unknown object \"%s\"!", v66);
       }
@@ -2016,31 +2016,31 @@ void  CDecoObjMgr::ReadObjectInfos(void) {
       {
         v90 = (char *)v67 + 8 * v91 + 38444;
         v53 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v60);
-        v52 = AdvXMLParser::Element::operator()("blocking", 0);
+        v52 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("blocking", 0);
         v61 = v52;
-        v51 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v52 + 8))(v52, v95);
-        v6 = (const char *)std::string::c_str(v51);
+        v51 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v52 + 8))(v52, v95);
+        v6 = std::string::c_str(v51);
         v74 = j__atoi(v6);
         std::string::~string(v95);
         v50 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v60);
-        v49 = AdvXMLParser::Element::operator()("building", 0);
+        v49 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("building", 0);
         v78 = v49;
-        v48 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v49 + 8))(v49, v92);
-        v7 = (const char *)std::string::c_str(v48);
+        v48 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v49 + 8))(v49, v92);
+        v7 = std::string::c_str(v48);
         v73 = j__atoi(v7);
         std::string::~string(v92);
         v47 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v60);
-        v46 = AdvXMLParser::Element::operator()("repellent", 0);
+        v46 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("repellent", 0);
         v77 = v46;
-        v45 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v46 + 8))(v46, v93);
-        v8 = (const char *)std::string::c_str(v45);
+        v45 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v46 + 8))(v46, v93);
+        v8 = std::string::c_str(v45);
         v72 = j__atoi(v8);
         std::string::~string(v93);
         v44 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v60);
-        v43 = AdvXMLParser::Element::operator()("pingPong", 0);
+        v43 = ((int (__stdcall *)(const char *, _DWORD))AdvXMLParser::Element::operator())("pingPong", 0);
         v76 = v43;
-        v42 = (void *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v43 + 8))(v43, v96);
-        v9 = (const char *)std::string::c_str(v42);
+        v42 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v43 + 8))(v43, v96);
+        v9 = std::string::c_str(v42);
         v71 = j__atoi(v9);
         std::string::~string(v96);
         v87 = v74;
@@ -2182,7 +2182,7 @@ void  CDecoObjMgr::ReadObjectInfos(void) {
         v90[7] = v69;
       }
       LOBYTE(v99) = 8;
-      std::string::~string(v97);
+      std::string::~string(&v97);
     }
     AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator++(v60);
   }

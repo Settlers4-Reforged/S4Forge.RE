@@ -23,7 +23,7 @@ int const *  CConfigVarIntArray::GetIntArray(void)const {
 // Decompiled from CConfigVarIntArray *__thiscall CConfigVarIntArray::CConfigVarIntArray(CConfigVarIntArray *this, void *Src, int _iSize)
  CConfigVarIntArray::CConfigVarIntArray(int const * Src, int _iSize) {
   
-  CDynamicConfigVar::CDynamicConfigVar(this, 2, _iSize);
+  CDynamicConfigVar::CDynamicConfigVar(this, CONFIGVAR_TYPE_INT_ARRAY, _iSize);
   this->__vftable = (CConfigVar_vtbl *)&CConfigVarIntArray::_vftable_;
   if ( _iSize <= 0 && BBSupportDbgReport(2, "Source\\ConfigManager\\ConfigManager.cpp", 1352, "_iSize > 0") == 1 )
     __debugbreak();

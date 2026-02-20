@@ -83,18 +83,18 @@
   int v76; // [esp+270h] [ebp-914h]
   int v77; // [esp+274h] [ebp-910h]
   void *v78; // [esp+278h] [ebp-90Ch]
-  void *v79; // [esp+27Ch] [ebp-908h]
+  std::string *v79; // [esp+27Ch] [ebp-908h]
   const struct AdvXMLParser::Element *v80; // [esp+280h] [ebp-904h]
   AdvXMLParser::Element *v81; // [esp+284h] [ebp-900h]
   AdvXMLParser::Element *v82; // [esp+288h] [ebp-8FCh]
-  void *v83; // [esp+28Ch] [ebp-8F8h]
+  std::string *v83; // [esp+28Ch] [ebp-8F8h]
   const struct AdvXMLParser::Element *v84; // [esp+290h] [ebp-8F4h]
   AdvXMLParser::Element *v85; // [esp+294h] [ebp-8F0h]
   AdvXMLParser::Element *v86; // [esp+298h] [ebp-8ECh]
   int v87; // [esp+29Ch] [ebp-8E8h]
   CConfigManager *v88; // [esp+2A0h] [ebp-8E4h]
-  void *v89; // [esp+2A4h] [ebp-8E0h]
-  void *v90; // [esp+2A8h] [ebp-8DCh]
+  std::string *v89; // [esp+2A4h] [ebp-8E0h]
+  std::string *v90; // [esp+2A8h] [ebp-8DCh]
   const struct AdvXMLParser::Attribute *v91; // [esp+2ACh] [ebp-8D8h]
   AdvXMLParser::Element *v92; // [esp+2B0h] [ebp-8D4h]
   AdvXMLParser::Element *v93; // [esp+2B4h] [ebp-8D0h]
@@ -117,25 +117,25 @@
   int v110; // [esp+2F8h] [ebp-88Ch]
   int v111; // [esp+2FCh] [ebp-888h]
   int v112; // [esp+300h] [ebp-884h]
-  void *v113; // [esp+304h] [ebp-880h]
-  void *v114; // [esp+308h] [ebp-87Ch]
+  std::string *v113; // [esp+304h] [ebp-880h]
+  std::string *v114; // [esp+308h] [ebp-87Ch]
   const struct AdvXMLParser::Element *v115; // [esp+30Ch] [ebp-878h]
   AdvXMLParser::Element *v116; // [esp+310h] [ebp-874h]
-  void *v117; // [esp+314h] [ebp-870h]
-  void *v118; // [esp+318h] [ebp-86Ch]
+  std::string *v117; // [esp+314h] [ebp-870h]
+  std::string *v118; // [esp+318h] [ebp-86Ch]
   const struct AdvXMLParser::Element *v119; // [esp+31Ch] [ebp-868h]
   AdvXMLParser::Element *v120; // [esp+320h] [ebp-864h]
   int v121; // [esp+324h] [ebp-860h]
   int v122; // [esp+328h] [ebp-85Ch]
   void *v123; // [esp+32Ch] [ebp-858h]
   int v124; // [esp+330h] [ebp-854h]
-  void *v125; // [esp+334h] [ebp-850h]
-  void *v126; // [esp+338h] [ebp-84Ch]
+  std::string *v125; // [esp+334h] [ebp-850h]
+  std::string *v126; // [esp+338h] [ebp-84Ch]
   const struct AdvXMLParser::Element *v127; // [esp+33Ch] [ebp-848h]
   AdvXMLParser::Element *v128; // [esp+340h] [ebp-844h]
   int v129; // [esp+344h] [ebp-840h]
-  void *v130; // [esp+348h] [ebp-83Ch]
-  void *v131; // [esp+34Ch] [ebp-838h]
+  std::string *v130; // [esp+348h] [ebp-83Ch]
+  std::string *v131; // [esp+34Ch] [ebp-838h]
   const struct AdvXMLParser::Element *v132; // [esp+350h] [ebp-834h]
   AdvXMLParser::Element *v133; // [esp+354h] [ebp-830h]
   int v134; // [esp+358h] [ebp-82Ch]
@@ -143,22 +143,22 @@
   const struct AdvXMLParser::Element *v136; // [esp+360h] [ebp-824h]
   AdvXMLParser::Element *v137; // [esp+364h] [ebp-820h]
   int v138; // [esp+368h] [ebp-81Ch]
-  void *v139; // [esp+36Ch] [ebp-818h]
+  std::string *v139; // [esp+36Ch] [ebp-818h]
   const struct AdvXMLParser::Element *v140; // [esp+370h] [ebp-814h]
   AdvXMLParser::Element *v141; // [esp+374h] [ebp-810h]
   int v142; // [esp+378h] [ebp-80Ch]
-  void *v143; // [esp+37Ch] [ebp-808h]
+  std::string *v143; // [esp+37Ch] [ebp-808h]
   const struct AdvXMLParser::Element *v144; // [esp+380h] [ebp-804h]
   AdvXMLParser::Element *v145; // [esp+384h] [ebp-800h]
   int v146; // [esp+388h] [ebp-7FCh]
-  void *v147; // [esp+38Ch] [ebp-7F8h]
-  void *v148; // [esp+390h] [ebp-7F4h]
+  std::string *v147; // [esp+38Ch] [ebp-7F8h]
+  std::string *v148; // [esp+390h] [ebp-7F4h]
   const struct AdvXMLParser::Element *v149; // [esp+394h] [ebp-7F0h]
   AdvXMLParser::Element *v150; // [esp+398h] [ebp-7ECh]
-  void *v151; // [esp+39Ch] [ebp-7E8h]
+  std::string *v151; // [esp+39Ch] [ebp-7E8h]
   const struct AdvXMLParser::Element *v152; // [esp+3A0h] [ebp-7E4h]
   AdvXMLParser::Element *v153; // [esp+3A4h] [ebp-7E0h]
-  void *v154; // [esp+3A8h] [ebp-7DCh]
+  std::string *v154; // [esp+3A8h] [ebp-7DCh]
   const struct AdvXMLParser::Element *v155; // [esp+3ACh] [ebp-7D8h]
   AdvXMLParser::Element *v156; // [esp+3B0h] [ebp-7D4h]
   int v157; // [esp+3B4h] [ebp-7D0h]
@@ -239,15 +239,15 @@
   _BYTE v236[28]; // [esp+A20h] [ebp-164h] BYREF
   _BYTE v237[28]; // [esp+A3Ch] [ebp-148h] BYREF
   _BYTE v238[28]; // [esp+A58h] [ebp-12Ch] BYREF
-  _BYTE v239[28]; // [esp+A74h] [ebp-110h] BYREF
-  _BYTE v240[28]; // [esp+A90h] [ebp-F4h] BYREF
-  _BYTE v241[28]; // [esp+AACh] [ebp-D8h] BYREF
-  char v242[28]; // [esp+AC8h] [ebp-BCh] BYREF
+  struct std::string v239; // [esp+A74h] [ebp-110h] BYREF
+  struct std::string v240; // [esp+A90h] [ebp-F4h] BYREF
+  struct std::string v241; // [esp+AACh] [ebp-D8h] BYREF
+  std::string v242; // [esp+AC8h] [ebp-BCh] BYREF
   char v243[28]; // [esp+AE4h] [ebp-A0h] BYREF
-  _BYTE v244[28]; // [esp+B00h] [ebp-84h] BYREF
-  _BYTE v245[28]; // [esp+B1Ch] [ebp-68h] BYREF
-  _BYTE v246[28]; // [esp+B38h] [ebp-4Ch] BYREF
-  _BYTE v247[28]; // [esp+B54h] [ebp-30h] BYREF
+  std::string v244; // [esp+B00h] [ebp-84h] BYREF
+  std::string v245; // [esp+B1Ch] [ebp-68h] BYREF
+  std::string v246; // [esp+B38h] [ebp-4Ch] BYREF
+  struct std::string v247; // [esp+B54h] [ebp-30h] BYREF
   int *v248; // [esp+B74h] [ebp-10h]
   int v249; // [esp+B80h] [ebp-4h]
 
@@ -281,7 +281,7 @@
         v249 = -1;
         *((_DWORD *)v225 + 267 * i + k) = v174;
         std::list<CEntityTask>::clear();
-        SettlerJobFrameCount = CGfxManager::GetSettlerJobFrameCount((CGfxManager *)g_pGfxManager, i, SettlerFirstJob, 2);
+        SettlerJobFrameCount = CGfxManager::GetSettlerJobFrameCount(g_pGfxManager, i, SettlerFirstJob, 2);
         if ( SettlerJobFrameCount <= 0
           && BBSupportDbgReport(2, "MapObjects\\EntityToDoListMgr.cpp", 103, "frames>0") == 1 )
         {
@@ -302,7 +302,7 @@
                0,
                0,
                0);
-        std::list<CEntityTask>::push_back(v1);
+        std::list<CEntityTask>::push_back((int)v1);
       }
     }
   }
@@ -328,7 +328,7 @@
         v249 = -1;
         *((_DWORD *)v225 + 267 * i + v220) = v176;
         std::list<CEntityTask>::clear();
-        SettlerJobFrameCount = CGfxManager::GetSettlerJobFrameCount((CGfxManager *)g_pGfxManager, i, SettlerFirstJob, 2);
+        SettlerJobFrameCount = CGfxManager::GetSettlerJobFrameCount(g_pGfxManager, i, SettlerFirstJob, 2);
         v2 = CEntityTask::CEntityTask(
                (CEntityTask *)v35,
                10,
@@ -344,7 +344,7 @@
                0,
                0,
                0);
-        std::list<CEntityTask>::push_back(v2);
+        std::list<CEntityTask>::push_back((int)v2);
         v3 = CEntityTask::CEntityTask(
                (CEntityTask *)v34,
                24,
@@ -360,7 +360,7 @@
                0,
                0,
                0);
-        std::list<CEntityTask>::push_back(v3);
+        std::list<CEntityTask>::push_back((int)v3);
       }
     }
     ++v220;
@@ -397,13 +397,15 @@
     v68 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v51);
     v67 = AdvXMLParser::Element::operator[](v68, "id");
     v173 = v67;
-    v50[26] = (*(int (__thiscall **)(const struct AdvXMLParser::Attribute *, _BYTE *))(*(_DWORD *)v67 + 8))(v67, v247);
+    v50[26] = (*(int (__thiscall **)(const struct AdvXMLParser::Attribute *, struct std::string *))(*(_DWORD *)v67 + 8))(
+                v67,
+                &v247);
     LOBYTE(v249) = 11;
-    ValueOfDefine = CDefineTranslator::GetValueOfDefine(v207, (struct std::string *)v247);
+    ValueOfDefine = CDefineTranslator::GetValueOfDefine(v207, &v247);
     v212 = ValueOfDefine;
     if ( ValueOfDefine == -1 )
     {
-      v5 = (const char *)std::string::c_str(v247);
+      v5 = std::string::c_str(&v247);
       CTrace::Print("This race define: %s used in JobInfo.xml but isn't part of S4_Defines.h", v5);
     }
     v65 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v51);
@@ -425,16 +427,18 @@
       v59 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v52);
       v58 = AdvXMLParser::Element::operator[](v59, "id");
       v180 = v58;
-      v50[5] = (*(int (__thiscall **)(const struct AdvXMLParser::Attribute *, _BYTE *))(*(_DWORD *)v58 + 8))(v58, v246);
+      v50[5] = (*(int (__thiscall **)(const struct AdvXMLParser::Attribute *, std::string *))(*(_DWORD *)v58 + 8))(
+                 v58,
+                 &v246);
       LOBYTE(v249) = 18;
       Instance = CConfigManagerPtr::GetInstance();
       v181 = Instance;
-      v6 = std::string::c_str(v246);
-      v56 = ((int (__thiscall *)(CConfigManager *, int))v181->?)(v181, v6);
+      v6 = (int)std::string::c_str(&v246);
+      v56 = v181->GetDefineValue(v181, (char *)v6);
       v211 = v56;
       if ( v56 == -1 )
       {
-        v7 = (const char *)std::string::c_str(v246);
+        v7 = std::string::c_str(&v246);
         CTrace::Print("This job list define: %s used in JobInfo.xml but isn't part of S4_AnimListDefines.h", v7);
       }
       if ( v211 == -1 )
@@ -464,18 +468,18 @@
         v161 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v200);
         v160 = AdvXMLParser::Element::operator()(v161, "jobPart", 0);
         v182 = v160;
-        v50[14] = (*(int (__thiscall **)(const struct AdvXMLParser::Element *, _BYTE *))(*(_DWORD *)v160 + 8))(
+        v50[14] = (*(int (__thiscall **)(const struct AdvXMLParser::Element *, std::string *))(*(_DWORD *)v160 + 8))(
                     v160,
-                    v245);
+                    &v245);
         LOBYTE(v249) = 25;
         v159 = CConfigManagerPtr::GetInstance();
         v183 = v159;
-        v8 = std::string::c_str(v245);
-        v158 = ((int (__thiscall *)(CConfigManager *, int))v183->?)(v183, v8);
+        v8 = (int)std::string::c_str(&v245);
+        v158 = v183->GetDefineValue(v183, (char *)v8);
         v205 = v158;
         if ( v158 == -1 )
         {
-          v9 = (const char *)std::string::c_str(v245);
+          v9 = std::string::c_str(&v245);
           CTrace::Print("This job define: %s used in JobInfo.xml but isn't part of SettlerDefines.h", v9);
         }
         if ( v205 == -1 )
@@ -487,67 +491,67 @@
         v156 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v200);
         v155 = AdvXMLParser::Element::operator()(v156, "x", 0);
         v184 = v155;
-        v154 = (void *)(*(int (__thiscall **)(const struct AdvXMLParser::Element *, _BYTE *))(*(_DWORD *)v155 + 8))(
-                         v155,
-                         v235);
-        v10 = (const char *)std::string::c_str(v154);
+        v154 = (std::string *)(*(int (__thiscall **)(const struct AdvXMLParser::Element *, _BYTE *))(*(_DWORD *)v155 + 8))(
+                                v155,
+                                v235);
+        v10 = std::string::c_str(v154);
         v110 = j__atoi(v10);
         std::string::~string(v235);
         v153 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v200);
         v152 = AdvXMLParser::Element::operator()(v153, "y", 0);
         v185 = v152;
-        v151 = (void *)(*(int (__thiscall **)(const struct AdvXMLParser::Element *, _BYTE *))(*(_DWORD *)v152 + 8))(
-                         v152,
-                         v236);
-        v11 = (const char *)std::string::c_str(v151);
+        v151 = (std::string *)(*(int (__thiscall **)(const struct AdvXMLParser::Element *, _BYTE *))(*(_DWORD *)v152 + 8))(
+                                v152,
+                                v236);
+        v11 = std::string::c_str(v151);
         v111 = j__atoi(v11);
         std::string::~string(v236);
         v150 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v200);
         v149 = AdvXMLParser::Element::operator()(v150, "task", 0);
         v186 = v149;
-        v148 = (void *)(*(int (__thiscall **)(const struct AdvXMLParser::Element *, _BYTE *))(*(_DWORD *)v149 + 8))(
-                         v149,
-                         v234);
+        v148 = (std::string *)(*(int (__thiscall **)(const struct AdvXMLParser::Element *, _BYTE *))(*(_DWORD *)v149 + 8))(
+                                v149,
+                                v234);
         v147 = v148;
         LOBYTE(v249) = 26;
-        v12 = (char *)std::string::c_str(v148);
-        v50[19] = std::string::string((struct std::string *)v239, v12);
+        v12 = std::string::c_str(v148);
+        v50[19] = std::string::string(&v239, v12);
         LOBYTE(v249) = 27;
-        v146 = CDefineTranslator::GetValueOfDefine(v207, (struct std::string *)v239);
+        v146 = CDefineTranslator::GetValueOfDefine(v207, &v239);
         v50[18] = v146;
         LOBYTE(v249) = 26;
-        std::string::~string(v239);
+        std::string::~string(&v239);
         LOBYTE(v249) = 25;
         std::string::~string(v234);
         v145 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v200);
         v144 = AdvXMLParser::Element::operator()(v145, "dir", 0);
         v187 = v144;
-        v143 = (void *)(*(int (__thiscall **)(const struct AdvXMLParser::Element *, _BYTE *))(*(_DWORD *)v144 + 8))(
-                         v144,
-                         v237);
-        v13 = (const char *)std::string::c_str(v143);
+        v143 = (std::string *)(*(int (__thiscall **)(const struct AdvXMLParser::Element *, _BYTE *))(*(_DWORD *)v144 + 8))(
+                                v144,
+                                v237);
+        v13 = std::string::c_str(v143);
         v202 = j__atoi(v13);
         std::string::~string(v237);
         if ( v202 == -1 )
           v188 = 0;
         else
           v188 = v202;
-        v142 = CGfxManager::GetSettlerJobFrameCount((CGfxManager *)g_pGfxManager, v212, v205, v188);
+        v142 = CGfxManager::GetSettlerJobFrameCount(g_pGfxManager, v212, v205, v188);
         v203 = v142;
         if ( v142 == 1 )
         {
-          v31 = (const char *)std::string::c_str(v245);
-          v30 = (const char *)std::string::c_str(v247);
-          v14 = (const char *)std::string::c_str(v246);
+          v31 = std::string::c_str(&v245);
+          v30 = std::string::c_str(&v247);
+          v14 = std::string::c_str(&v246);
           BBSupportTracePrintF(3, "WARNING: There is a problem in job %s of race %s with job part %s!", v14, v30, v31);
         }
         v141 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v200);
         v140 = AdvXMLParser::Element::operator()(v141, "duration", 0);
         v190 = v140;
-        v139 = (void *)(*(int (__thiscall **)(const struct AdvXMLParser::Element *, _BYTE *))(*(_DWORD *)v140 + 8))(
-                         v140,
-                         v238);
-        v15 = (const char *)std::string::c_str(v139);
+        v139 = (std::string *)(*(int (__thiscall **)(const struct AdvXMLParser::Element *, _BYTE *))(*(_DWORD *)v140 + 8))(
+                                v140,
+                                v238);
+        v15 = std::string::c_str(v139);
         v206 = j__atoi(v15);
         std::string::~string(v238);
         if ( v206 >= 128 )
@@ -561,49 +565,49 @@
         v137 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v200);
         v136 = AdvXMLParser::Element::operator()(v137, "entity", 0);
         v177 = v136;
-        v50[17] = (*(int (__thiscall **)(const struct AdvXMLParser::Element *, char *))(*(_DWORD *)v136 + 8))(
+        v50[17] = (*(int (__thiscall **)(const struct AdvXMLParser::Element *, std::string *))(*(_DWORD *)v136 + 8))(
                     v136,
-                    v242);
+                    &v242);
         LOBYTE(v249) = 28;
         v135 = CConfigManagerPtr::GetInstance();
         v189 = v135;
-        v16 = std::string::c_str(v242);
-        v134 = ((int (__thiscall *)(CConfigManager *, int))v189->?)(v189, v16);
+        v16 = (int)std::string::c_str(&v242);
+        v134 = v189->GetDefineValue(v189, (char *)v16);
         v201 = v134;
         if ( v134 == -1 )
           v201 = 0;
         v133 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v200);
         v132 = AdvXMLParser::Element::operator()(v133, "task", 0);
         v179 = v132;
-        v131 = (void *)(*(int (__thiscall **)(const struct AdvXMLParser::Element *, _BYTE *))(*(_DWORD *)v132 + 8))(
-                         v132,
-                         v227);
+        v131 = (std::string *)(*(int (__thiscall **)(const struct AdvXMLParser::Element *, _BYTE *))(*(_DWORD *)v132 + 8))(
+                                v132,
+                                v227);
         v130 = v131;
         LOBYTE(v249) = 29;
-        v17 = (char *)std::string::c_str(v131);
-        v50[16] = std::string::string((struct std::string *)v240, v17);
+        v17 = std::string::c_str(v131);
+        v50[16] = std::string::string(&v240, v17);
         LOBYTE(v249) = 30;
-        v129 = CDefineTranslator::GetValueOfDefine(v207, (struct std::string *)v240);
+        v129 = CDefineTranslator::GetValueOfDefine(v207, &v240);
         v109 = v129;
         LOBYTE(v249) = 29;
-        std::string::~string(v240);
+        std::string::~string(&v240);
         LOBYTE(v249) = 28;
         std::string::~string(v227);
         v128 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v200);
         v127 = AdvXMLParser::Element::operator()(v128, "trigger", 0);
         v172 = v127;
-        v126 = (void *)(*(int (__thiscall **)(const struct AdvXMLParser::Element *, _BYTE *))(*(_DWORD *)v127 + 8))(
-                         v127,
-                         v228);
+        v126 = (std::string *)(*(int (__thiscall **)(const struct AdvXMLParser::Element *, _BYTE *))(*(_DWORD *)v127 + 8))(
+                                v127,
+                                v228);
         v125 = v126;
         LOBYTE(v249) = 31;
-        v18 = (char *)std::string::c_str(v126);
-        v50[15] = std::string::string((struct std::string *)v241, v18);
+        v18 = std::string::c_str(v126);
+        v50[15] = std::string::string(&v241, v18);
         LOBYTE(v249) = 32;
-        v124 = CDefineTranslator::GetValueOfDefine(v207, (struct std::string *)v241);
+        v124 = CDefineTranslator::GetValueOfDefine(v207, &v241);
         v112 = v124;
         LOBYTE(v249) = 31;
-        std::string::~string(v241);
+        std::string::~string(&v241);
         LOBYTE(v249) = 28;
         std::string::~string(v228);
         if ( !*((_DWORD *)v225 + 267 * v212 + v211) )
@@ -628,22 +632,22 @@
         v120 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v200);
         v119 = AdvXMLParser::Element::operator()(v120, "visible", 0);
         v169 = v119;
-        v118 = (void *)(*(int (__thiscall **)(const struct AdvXMLParser::Element *, _BYTE *))(*(_DWORD *)v119 + 8))(
-                         v119,
-                         v230);
+        v118 = (std::string *)(*(int (__thiscall **)(const struct AdvXMLParser::Element *, _BYTE *))(*(_DWORD *)v119 + 8))(
+                                v119,
+                                v230);
         v117 = v118;
         LOBYTE(v249) = 34;
-        v19 = (const char *)std::string::c_str(v118);
+        v19 = std::string::c_str(v118);
         v224 = j__atoi(v19) != 0;
         v116 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v200);
         v115 = AdvXMLParser::Element::operator()(v116, "forward", 0);
         v168 = v115;
-        v114 = (void *)(*(int (__thiscall **)(const struct AdvXMLParser::Element *, _BYTE *))(*(_DWORD *)v115 + 8))(
-                         v115,
-                         v229);
+        v114 = (std::string *)(*(int (__thiscall **)(const struct AdvXMLParser::Element *, _BYTE *))(*(_DWORD *)v115 + 8))(
+                                v115,
+                                v229);
         v113 = v114;
         LOBYTE(v249) = 35;
-        v20 = (const char *)std::string::c_str(v114);
+        v20 = std::string::c_str(v114);
         v223 = j__atoi(v20) != 0;
         v108 = CEntityTask::CEntityTask(
                  (CEntityTask *)v33,
@@ -660,15 +664,15 @@
                  0,
                  0,
                  v112);
-        std::list<CEntityTask>::push_back(v108);
+        std::list<CEntityTask>::push_back((int)v108);
         LOBYTE(v249) = 34;
         std::string::~string(v229);
         LOBYTE(v249) = 28;
         std::string::~string(v230);
         LOBYTE(v249) = 25;
-        std::string::~string(v242);
+        std::string::~string(&v242);
         LOBYTE(v249) = 24;
-        std::string::~string(v245);
+        std::string::~string(&v245);
         AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator++(v200);
       }
       LOBYTE(v249) = 21;
@@ -676,7 +680,7 @@
       LOBYTE(v249) = 18;
       AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>((CDaoIndexFieldInfo *)v200);
       LOBYTE(v249) = 17;
-      std::string::~string(v246);
+      std::string::~string(&v246);
       AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator++(v52);
     }
     LOBYTE(v249) = 14;
@@ -684,7 +688,7 @@
     LOBYTE(v249) = 11;
     AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>((CDaoIndexFieldInfo *)v52);
     LOBYTE(v249) = 10;
-    std::string::~string(v247);
+    std::string::~string(&v247);
     AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator++(v51);
   }
   LOBYTE(v249) = 7;
@@ -734,12 +738,14 @@
     v98 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v166);
     v97 = AdvXMLParser::Element::operator[](v98, "id");
     v197 = v97;
-    v50[30] = (*(int (__thiscall **)(const struct AdvXMLParser::Attribute *, _BYTE *))(*(_DWORD *)v97 + 8))(v97, v244);
+    v50[30] = (*(int (__thiscall **)(const struct AdvXMLParser::Attribute *, std::string *))(*(_DWORD *)v97 + 8))(
+                v97,
+                &v244);
     LOBYTE(v249) = 47;
     v96 = CConfigManagerPtr::GetInstance();
     v196 = v96;
-    v22 = std::string::c_str(v244);
-    v95 = ((int (__thiscall *)(CConfigManager *, int))v196->?)(v196, v22);
+    v22 = (int)std::string::c_str(&v244);
+    v95 = v196->GetDefineValue(v196, (char *)v22);
     v204 = v95;
     if ( v95 <= 0 || v204 >= 367 )
     {
@@ -752,19 +758,19 @@
     v92 = AdvXMLParser::Element::operator()(v93, "sound", 0);
     v91 = AdvXMLParser::Element::operator[](v92, "id");
     v195 = v91;
-    v90 = (void *)(*(int (__thiscall **)(const struct AdvXMLParser::Attribute *, _BYTE *))(*(_DWORD *)v91 + 8))(
-                    v91,
-                    v231);
+    v90 = (std::string *)(*(int (__thiscall **)(const struct AdvXMLParser::Attribute *, _BYTE *))(*(_DWORD *)v91 + 8))(
+                           v91,
+                           v231);
     v89 = v90;
     LOBYTE(v249) = 48;
-    v23 = (char *)std::string::c_str(v90);
+    v23 = std::string::c_str(v90);
     v50[29] = std::string::string((struct std::string *)v243, v23);
     LOBYTE(v249) = 50;
     std::string::~string(v231);
     v88 = CConfigManagerPtr::GetInstance();
     v194 = v88;
-    v24 = std::string::c_str(v243);
-    v87 = ((int (__thiscall *)(CConfigManager *, int))v194->?)(v194, v24);
+    v24 = (int)std::string::c_str((std::string *)v243);
+    v87 = v194->GetDefineValue(v194, (char *)v24);
     *v215 = v87;
     if ( *v215 == -1 )
       *v215 = 0;
@@ -772,8 +778,10 @@
     v85 = AdvXMLParser::Element::operator()(v86, "sound", 0);
     v84 = AdvXMLParser::Element::operator()(v85, "frame", 0);
     v193 = v84;
-    v83 = (void *)(*(int (__thiscall **)(const struct AdvXMLParser::Element *, _BYTE *))(*(_DWORD *)v84 + 8))(v84, v232);
-    v25 = (const char *)std::string::c_str(v83);
+    v83 = (std::string *)(*(int (__thiscall **)(const struct AdvXMLParser::Element *, _BYTE *))(*(_DWORD *)v84 + 8))(
+                           v84,
+                           v232);
+    v25 = std::string::c_str(v83);
     v26 = j__atoi(v25);
     *((_BYTE *)v215 + 5) = v26;
     std::string::~string(v232);
@@ -781,8 +789,10 @@
     v81 = AdvXMLParser::Element::operator()(v82, "sound", 0);
     v80 = AdvXMLParser::Element::operator()(v81, "random", 0);
     v192 = v80;
-    v79 = (void *)(*(int (__thiscall **)(const struct AdvXMLParser::Element *, _BYTE *))(*(_DWORD *)v80 + 8))(v80, v233);
-    v27 = (const char *)std::string::c_str(v79);
+    v79 = (std::string *)(*(int (__thiscall **)(const struct AdvXMLParser::Element *, _BYTE *))(*(_DWORD *)v80 + 8))(
+                           v80,
+                           v233);
+    v27 = std::string::c_str(v79);
     v28 = j__atoi(v27);
     *((_BYTE *)v215 + 4) = v28;
     std::string::~string(v233);
@@ -791,7 +801,7 @@
     LOBYTE(v249) = 47;
     std::string::~string(v243);
     LOBYTE(v249) = 46;
-    std::string::~string(v244);
+    std::string::~string(&v244);
     AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator++(v166);
   }
   LOBYTE(v249) = 43;
