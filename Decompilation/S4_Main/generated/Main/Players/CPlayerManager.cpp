@@ -195,18 +195,18 @@ void __cdecl CPlayerManager::Init(void) {
 
 
 // address=[0x1497420]
-// Decompiled from int __cdecl CPlayerManager::AddPlayer(  DWORD a1,  DWORD a2,  DWORD a3,  DWORD a4,  DWORD a5,  DWORD a6,  int a7,  int a8,  int a9,  int a10,  int a11,  int a12,  int a13,  DWORD a14)
-int __cdecl CPlayerManager::AddPlayer(int a1, int a2, int a3, int a4, int a5, int a6, std::wstring a7, int a8) {
+// Decompiled from int __cdecl CPlayerManager::AddPlayer(  DWORD _iPlayerRace,  DWORD _iPlayerX,  DWORD _iPlayerY,  DWORD _iPlayerColor,  DWORD _iPlayerIP,  DWORD _iPeerId,  std::wstring a2,  DWORD a8)
+int __cdecl CPlayerManager::AddPlayer(int _iPlayerRace, int _iPlayerX, int _iPlayerY, int _iPlayerColor, int _iPlayerIP, int _iPeerId, std::wstring a2, int a8) {
   
   OnlineManager *Instance; // eax
-  const wchar_t *v16; // eax
-  size_t v17; // [esp+18h] [ebp-11Ch]
-  int v18; // [esp+1Ch] [ebp-118h]
-  CPlayerInfo *v19; // [esp+20h] [ebp-114h]
+  wchar_t *v10; // eax
+  size_t v11; // [esp+18h] [ebp-11Ch]
+  int v12; // [esp+1Ch] [ebp-118h]
+  CPlayerInfo *v13; // [esp+20h] [ebp-114h]
   char Dest[256]; // [esp+24h] [ebp-110h] BYREF
-  int v21; // [esp+130h] [ebp-4h]
+  int v15; // [esp+130h] [ebp-4h]
 
-  v21 = 0;
+  v15 = 0;
   if ( !CPlayerManager::m_iInitialized )
   {
     if ( "AddPlayer(): Not initialized!" )
@@ -215,8 +215,8 @@ int __cdecl CPlayerManager::AddPlayer(int a1, int a2, int a3, int a4, int a5, in
         __debugbreak();
     }
 LABEL_15:
-    v21 = -1;
-    std::wstring::~wstring(&a7);
+    v15 = -1;
+    std::wstring::~wstring(&a2);
     return 0;
   }
   if ( CPlayerManager::m_iLocked )
@@ -237,39 +237,39 @@ LABEL_15:
     }
     goto LABEL_15;
   }
-  v18 = ++CPlayerManager::m_iNumberOfPlayer;
-  v19 = &CPlayerManager::m_cPlayerInfos[CPlayerManager::m_iNumberOfPlayer];
-  v19->race = a1;
-  v19->startX = a2;
-  v19->startY = a3;
-  v19->unk_18 = a4;
-  v19->unk_10 = a5;
-  v19->unk_14 = a6;
-  std::wstring::operator=((int)&a7);
-  v19->unk_38 = a14;
-  LOBYTE(v19->unk_3c) = 1;
+  v12 = ++CPlayerManager::m_iNumberOfPlayer;
+  v13 = &CPlayerManager::m_cPlayerInfos[CPlayerManager::m_iNumberOfPlayer];
+  v13->m_iRace = _iPlayerRace;
+  v13->m_iStartX = _iPlayerX;
+  v13->m_iStartY = _iPlayerY;
+  v13->m_iColor = _iPlayerColor;
+  v13->m_iIp = _iPlayerIP;
+  v13->m_iPeerId = _iPeerId;
+  std::wstring::operator=(&v13->m_swName, &a2);
+  v13->m_iType = a8;
+  LOBYTE(v13->m_bInitialized) = 1;
   Instance = (OnlineManager *)OnlineManager::GetInstance();
-  if ( OnlineManager::IsLocalPeerId(Instance, a6) )
+  if ( OnlineManager::IsLocalPeerId(Instance, _iPeerId) )
   {
-    CPlayerManager::m_iLocalPlayer = v18;
-    CTrace::Print("Created local Player with id#%d", v18);
+    CPlayerManager::m_iLocalPlayer = v12;
+    CTrace::Print("Created local Player with id#%d", v12);
   }
-  v16 = (const wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)&a7);
-  v17 = j__wcstombs(Dest, v16, 0x100u);
-  if ( v17 >= 0x100 )
+  v10 = std::wstring::c_str(&a2);
+  v11 = j__wcstombs(Dest, v10, 0x100u);
+  if ( v11 >= 0x100 )
     report_rangecheckfailure();
-  Dest[v17] = 0;
+  Dest[v11] = 0;
   CTrace::Print(
     "PlayerManager.cpp: Adding player %s at %d/%d, with race %d, color %d, IP %d!",
     Dest,
-    a2,
-    a3,
-    a1,
-    a4,
-    a5);
-  v21 = -1;
-  std::wstring::~wstring(&a7);
-  return v18;
+    _iPlayerX,
+    _iPlayerY,
+    _iPlayerRace,
+    _iPlayerColor,
+    _iPlayerIP);
+  v15 = -1;
+  std::wstring::~wstring(&a2);
+  return v12;
 }
 
 

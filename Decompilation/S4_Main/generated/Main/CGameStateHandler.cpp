@@ -20,9 +20,9 @@ bool __cdecl CGameStateHandler::Init(void) {
   char v12; // [esp+54h] [ebp-D8h]
   _BYTE v13[28]; // [esp+58h] [ebp-D4h] BYREF
   _BYTE v14[28]; // [esp+74h] [ebp-B8h] BYREF
-  _BYTE v15[28]; // [esp+90h] [ebp-9Ch] BYREF
+  std::string v15; // [esp+90h] [ebp-9Ch] BYREF
   _BYTE v16[28]; // [esp+ACh] [ebp-80h] BYREF
-  _BYTE v17[28]; // [esp+C8h] [ebp-64h] BYREF
+  std::string v17; // [esp+C8h] [ebp-64h] BYREF
   std::string nettestDefault; // [esp+E4h] [ebp-48h] BYREF
   std::string v19; // [esp+100h] [ebp-2Ch] BYREF
   int v20; // [esp+128h] [ebp-4h]
@@ -90,17 +90,17 @@ bool __cdecl CGameStateHandler::Init(void) {
         }
         else
         {
-          v5 = std::string::string((std::string *)v17, "normal");
+          v5 = std::string::string(&v17, "normal");
           v20 = 5;
-          v4 = std::string::string((std::string *)v15, "normal");
+          v4 = std::string::string(&v15, "normal");
           LOBYTE(v20) = 6;
           v3 = g_pCfgMgr->GetStringValue(g_pCfgMgr, (std::string *)v14, "COMMANDLINE", "gamemode", v4);
-          v12 = std::operator==<char>(v3, (int)v5);
+          v12 = std::operator==<char>(v3, v5);
           std::string::~string(v14);
           LOBYTE(v20) = 5;
-          std::string::~string(v15);
+          std::string::~string(&v15);
           v20 = -1;
-          std::string::~string(v17);
+          std::string::~string(&v17);
           if ( v12 )
           {
             CGameStateHandler::Switch((int)CStateSlideshow::DynamicCreateFunc, 0);
@@ -122,8 +122,8 @@ bool __cdecl CGameStateHandler::Init(void) {
             else
               v6 = 0;
             v20 = -1;
-            g_pGameType = (std::wstring *)v6;
-            if ( (unsigned __int8)CGameStateHandler::StartDummyGame() )
+            g_pGameType = v6;
+            if ( CGameStateHandler::StartDummyGame() )
             {
               v7 = (INetworkEngine *)operator new(0x18u);
               v20 = 8;
@@ -133,7 +133,7 @@ bool __cdecl CGameStateHandler::Init(void) {
                 v8 = 0;
               v20 = -1;
               g_pNetworkEngine = (int)v8;
-              INetworkEngine::Start(1, 1, g_pGameType[4].m_u[0], 0);
+              INetworkEngine::Start(1, 1, g_pGameType->m_iActualPlayerCount, 0);
               CGameStateHandler::Switch((int)CStateGame::DynamicCreateFunc, 0);
               timeBeginPeriod(1u);
               CTrace::Print(" MAIN INIT COMPLETE (CGameStateHandler::Init) ");
@@ -992,26 +992,26 @@ void __cdecl CGameStateHandler::LoadConfigFile(wchar_t const * String, char cons
 // Decompiled from char CGameStateHandler::StartDummyGame()
 bool __cdecl CGameStateHandler::StartDummyGame(void) {
   
-  const CHAR *v0; // eax
-  const CHAR *v2; // eax
+  char *v0; // eax
+  char *v2; // eax
   int v3; // [esp-4h] [ebp-B94h]
-  int v4; // [esp+8h] [ebp-B88h] BYREF
+  int iTeamOfPlayerIs255; // [esp+8h] [ebp-B88h] BYREF
   _BYTE v5[4]; // [esp+Ch] [ebp-B84h] BYREF
   _BYTE v6[4]; // [esp+10h] [ebp-B80h] BYREF
   int v7; // [esp+14h] [ebp-B7Ch] BYREF
-  void *PlayerName; // [esp+18h] [ebp-B78h]
+  std::wstring *PlayerName; // [esp+18h] [ebp-B78h]
   int v9; // [esp+1Ch] [ebp-B74h]
-  int v10; // [esp+20h] [ebp-B70h] BYREF
-  int v11; // [esp+24h] [ebp-B6Ch]
-  int v12; // [esp+28h] [ebp-B68h]
+  int iControlOfPlayer; // [esp+20h] [ebp-B70h] BYREF
+  std::wstring *v11; // [esp+24h] [ebp-B6Ch]
+  std::wstring *v12; // [esp+28h] [ebp-B68h]
   BSTR bstrString; // [esp+2Ch] [ebp-B64h] BYREF
   int v14; // [esp+30h] [ebp-B60h]
   int v15; // [esp+34h] [ebp-B5Ch]
-  int v16; // [esp+38h] [ebp-B58h]
-  int v17; // [esp+3Ch] [ebp-B54h]
-  char *v18; // [esp+40h] [ebp-B50h]
+  std::wstring *v16; // [esp+38h] [ebp-B58h]
+  std::wstring *v17; // [esp+3Ch] [ebp-B54h]
+  DWORD v18; // [esp+40h] [ebp-B50h]
   HANDLE hFile; // [esp+44h] [ebp-B4Ch]
-  char v20[4]; // [esp+48h] [ebp-B48h]
+  WCHAR *v20; // [esp+48h] [ebp-B48h]
   int v21; // [esp+4Ch] [ebp-B44h] BYREF
   int v22; // [esp+50h] [ebp-B40h]
   BSTR String; // [esp+54h] [ebp-B3Ch] BYREF
@@ -1040,8 +1040,8 @@ bool __cdecl CGameStateHandler::StartDummyGame(void) {
   LOBYTE(v39) = 3;
   std::string::~string(&v35);
   v9 = std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::from_bytes(
-         (int)&v30,
-         (int)&v36);
+         &v30,
+         &v36);
   std::wstring::operator=(v9);
   std::wstring::~wstring(&v30);
   v0 = std::string::c_str(&v36);
@@ -1060,97 +1060,107 @@ bool __cdecl CGameStateHandler::StartDummyGame(void) {
   }
   else
   {
-    MA_GetMapData((int)g_pGameType[2].m_u, (int)v5, (int)v6, (int)&g_pGameType[2].m_u[2], (int)&g_pGameType[2].m_u[1]);
+    MA_GetMapData(
+      (int)&g_pGameType->dword38,
+      (int)v5,
+      (int)v6,
+      (int)&g_pGameType->dword40,
+      (int)&g_pGameType->m_bIsEmptyMap);
     MA_GetNumberOfPlayers((int)&v24);
-    g_pGameType[30].m_u[3] = v24;
+    g_pGameType->m_iPlayerCount = v24;
     v22 = 0;
     for ( i = 0; (int)i < v24; ++i )
     {
       MA_GetPlayerData(
         i + 1,
         0,
-        &g_pGameType[14].m_u[i + 3],
-        &g_pGameType[9].m_u[i + 2],
-        &g_pGameType[10].m_u[i + 4],
+        &g_pGameType->m_sPlayerRaces[i],
+        &g_pGameType->m_sPlayerStartX[i],
+        &g_pGameType->m_sPlayerStartY[i],
         &String,
         &bstrString,
-        &v10,
-        &v4,
-        &g_pGameType[5].m_u[i + 3]);
-      if ( g_pGameType[14].m_u[i + 3] == 255 )
-        g_pGameType[14].m_u[i + 3] = 5;
-      if ( g_pGameType[5].m_u[i + 3] > v22 )
-        v22 = g_pGameType[5].m_u[i + 3];
-      if ( v10 == 2 )
+        &iControlOfPlayer,
+        &iTeamOfPlayerIs255,
+        &g_pGameType->m_sPlayerTeam[i]);
+      if ( g_pGameType->m_sPlayerRaces[i] == 255 )
+        g_pGameType->m_sPlayerRaces[i] = 5;
+      if ( g_pGameType->m_sPlayerTeam[i] > v22 )
+        v22 = g_pGameType->m_sPlayerTeam[i];
+      if ( iControlOfPlayer == 2 )
       {
-        v11 = std::wstring::wstring(&v31, String);
+        v11 = (std::wstring *)std::wstring::wstring(&v31, String);
         v12 = v11;
         LOBYTE(v39) = 4;
-        CGameType::SetPlayerName(i, v11);
+        CGameType::SetPlayerName(g_pGameType, i, v11);
         LOBYTE(v39) = 3;
         std::wstring::~wstring(&v31);
       }
-      g_pGameType[4].m_u[i + 1] = 1;
-      *((_BYTE *)&g_pGameType[15].m_u[5] + i) = 0;
+      g_pGameType->m_sPlayerType[i] = 1;
+      g_pGameType->m_sPlayerSlot10[i] = 0;
       SysFreeString(bstrString);
       SysFreeString(String);
     }
-    LOBYTE(g_pGameType[26].m_u[1]) = 1;
-    g_pGameType[2].m_u[3] = (int)&dword_F29144[220110] + 3;
-    g_pGameType[26].m_u[2] = 0;
-    g_pGameType[2].m_u[4] = v22 + 1;
-    g_pGameType[30].m_u[6] = 1;
-    g_pGameType[24].m_u[5] = 1;
-    CGameType::SetMCD2TextureSet((CGameType *)g_pGameType, 1);
-    for ( i = 0; i < g_pGameType[4].m_u[0]; ++i )
-      ++g_pGameType[2].m_u[g_pGameType[5].m_u[i + 3] + 5];
-    g_pGameType[4].m_u[0] = v24;
-    if ( g_pGameType[4].m_u[0] > (unsigned int)v24 )
+    g_pGameType->byte2DC = 1;
+    g_pGameType->dword44 = 0x100007F;
+    g_pGameType->dword2E0 = 0;
+    g_pGameType->dword48 = v22 + 1;
+    g_pGameType->dword360 = 1;
+    g_pGameType->m_iGameMatchType = 1;
+    CGameType::SetMCD2TextureSet(g_pGameType, 1);
+    for ( i = 0; i < g_pGameType->m_iActualPlayerCount; ++i )
+      ++g_pGameType->ptr4c[g_pGameType->m_sPlayerTeam[i]];
+    g_pGameType->m_iActualPlayerCount = v24;
+    if ( g_pGameType->m_iActualPlayerCount > (unsigned int)v24 )
     {
       MessageBoxA(g_hWnd, "Too many players given for map.\nPlayercount reduced!!", "S4", 0x30u);
-      g_pGameType[4].m_u[0] = v24;
+      g_pGameType->m_iActualPlayerCount = v24;
     }
-    for ( i = 0; i < g_pGameType[4].m_u[0]; ++i )
+    for ( i = 0; i < g_pGameType->m_iActualPlayerCount; ++i )
     {
       v14 = std::wstring::wstring(&v33, (wchar_t *)&word_36D068C);
       v15 = v14;
       LOBYTE(v39) = 5;
       v3 = v14;
       PlayerName = CGameType::GetPlayerName(g_pGameType, &v32, i);
-      v27 = std::operator==<wchar_t>((int)PlayerName, v3);
+      v27 = std::operator==<wchar_t>(PlayerName, v3);
       std::wstring::~wstring(&v32);
       LOBYTE(v39) = 3;
       std::wstring::~wstring(&v33);
       if ( v27 )
         break;
-      if ( g_pGameType[4].m_u[i + 1] == 1 )
-        *(_DWORD *)v20 = "HUMAN";
+      if ( g_pGameType->m_sPlayerType[i] == 1 )
+      {
+        v20 = (WCHAR *)"HUMAN";
+        swprintf(Buffer, "[%s] Player ID %d", (WCHAR *)"HUMAN", i + 1);
+      }
       else
-        *(_DWORD *)v20 = "AI";
-      swprintf(Buffer, "[%s] Player ID %d", (WCHAR *)v20[0]);
-      v17 = std::wstring::wstring(&v34, Buffer);
+      {
+        v20 = (WCHAR *)"AI";
+        swprintf(Buffer, "[%s] Player ID %d", (WCHAR *)"AI", i + 1);
+      }
+      v17 = (std::wstring *)std::wstring::wstring(&v34, Buffer);
       v16 = v17;
       LOBYTE(v39) = 6;
-      CGameType::SetPlayerName(i, v17);
+      CGameType::SetPlayerName(g_pGameType, i, v17);
       LOBYTE(v39) = 3;
       std::wstring::~wstring(&v34);
     }
-    for ( i = 0; i < g_pGameType[4].m_u[0]; ++i )
+    for ( i = 0; i < g_pGameType->m_iActualPlayerCount; ++i )
     {
       if ( i )
         v18 = 0;
       else
-        v18 = (char *)&dword_F29144[220110] + 3;
-      g_pGameType[6].m_u[i + 5] = (int)v18;
+        v18 = 0x100007F;
+      g_pGameType->m_sPlayerIP[i] = v18;
     }
-    for ( i = 0; i < g_pGameType[4].m_u[0]; ++i )
-      g_pGameType[11].m_u[i + 6] = i;
-    for ( i = 0; i < g_pGameType[4].m_u[0]; ++i )
-      g_pGameType[13].m_u[i + 1] = 0;
+    for ( i = 0; i < g_pGameType->m_iActualPlayerCount; ++i )
+      g_pGameType->m_sPlayerColor[i] = i;
+    for ( i = 0; i < g_pGameType->m_iActualPlayerCount; ++i )
+      g_pGameType->m_sPlayerSlot8[i] = 0;
     MA_CloseMapFile();
     v2 = std::string::c_str(&v36);
     hFile = CreateFileA(v2, 0x80000000, 0, 0, 3u, 0, 0);
-    g_pGameType[30].m_u[4] = GetFileSize(hFile, 0);
+    g_pGameType->m_iFileSize = GetFileSize(hFile, 0);
     CloseHandle(hFile);
     v26 = 1;
     LOBYTE(v39) = 0;

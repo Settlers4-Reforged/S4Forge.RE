@@ -45,7 +45,7 @@ public:
     static void __cdecl Init(void);
 
     // address=[0x1497420]
-    static int __cdecl AddPlayer(int a1, int a2, int a3, int a4, int a5, int a6, std::wstring a7, int a8);
+    static int __cdecl AddPlayer(int _iPlayerRace, int _iPlayerX, int _iPlayerY, int _iPlayerColor, int _iPlayerIP, int _iPeerId, std::wstring a2, int a8);
 
     // address=[0x14976e0]
     static bool __cdecl Lock(void);

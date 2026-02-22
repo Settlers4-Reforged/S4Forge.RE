@@ -1,3 +1,4 @@
+#if FALSE
 #include "CStringEngineEx.h"
 
 // Definitions for class CStringEngineEx
@@ -245,34 +246,34 @@ bool  CStringEngineEx::ImportFile(wchar_t const * FileName, int a3) {
 
 
 // address=[0x14cef30]
-// Decompiled from _DWORD *__thiscall CStringEngineEx::CreateTextForEmptyStrings(_DWORD *this)
+// Decompiled from void __thiscall CStringEngineEx::CreateTextForEmptyStrings(CStringEngineEx *this)
 void  CStringEngineEx::CreateTextForEmptyStrings(void) {
   
-  _DWORD *result; // eax
   const char *StringName; // eax
-  size_t v3; // [esp+4h] [ebp-418h]
-  int v4; // [esp+Ch] [ebp-410h]
+  size_t v2; // [esp+4h] [ebp-418h]
+  int v3; // [esp+Ch] [ebp-410h]
   int i; // [esp+14h] [ebp-408h]
   char Src[1024]; // [esp+18h] [ebp-404h] BYREF
 
-  result = this;
-  if ( !this[1] )
-    return result;
-  v4 = 0;
-  for ( i = 0; i < 3837; ++i )
+  if ( this->m_swpTexts )
   {
-    if ( !*(_DWORD *)(this[1] + 4 * i) )
+    v3 = 0;
+    for ( i = 0; i < 3837; ++i )
     {
-      StringName = (const char *)CS4DefineNames::GetStringName(i);
-      snprintf(Src, 0x3FFu, "<%s>", StringName);
-      Src[1023] = 0;
-      v3 = strlen(Src);
-      *(_DWORD *)(this[1] + 4 * i) = operator new[](v3 + 1);
-      memcpy(*(void **)(this[1] + 4 * i), Src, v3 + 1);
-      ++v4;
+      if ( !this->m_swpTexts[i] )
+      {
+        StringName = (const char *)CS4DefineNames::GetStringName(i);
+        snprintf(Src, 0x3FFu, "<%s>", StringName);
+        Src[1023] = 0;
+        v2 = strlen(Src);
+        this->m_swpTexts[i] = (wchar_t *)operator new[](v2 + 1);
+        memcpy(this->m_swpTexts[i], Src, v2 + 1);
+        ++v3;
+      }
     }
+    BBSupportTracePrintF(1, "%i empty strings.", v3);
   }
-  return (_DWORD *)BBSupportTracePrintF(1, "%i empty strings.", v4);
 }
 
 
+#endif // Already implemented

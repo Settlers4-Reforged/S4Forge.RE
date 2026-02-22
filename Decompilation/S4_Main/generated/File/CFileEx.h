@@ -18,7 +18,7 @@ public:
      CFileEx(std::wstring const & a2, unsigned int a3, bool a4);
 
     // address=[0x2f017f0]
-     CFileEx(wchar_t const * FileName, unsigned int a3, bool a4);
+     CFileEx(wchar_t const * FileName, unsigned int a2, bool a4);
 
     // address=[0x2f01900]
     virtual void  Open(std::wstring const & a2, unsigned int a3, bool a4, char * a5, int a6);

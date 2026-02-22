@@ -1,3 +1,4 @@
+#if FALSE
 #include "IFileEx.h"
 
 // Definitions for class IFileEx
@@ -11,3 +12,4 @@
 }
 
 
+#endif // Already implemented

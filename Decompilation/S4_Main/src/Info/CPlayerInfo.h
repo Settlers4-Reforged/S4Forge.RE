@@ -2,6 +2,9 @@
 #define CPLAYERINFO_H
 
 #include "defines.h"
+#include "../LoadSave/IS4ChunkObject.h"
+#include "../LoadSave/IS4Chunk.h"
+
 
 class CPlayerInfo : public IS4ChunkObject {
 public:
@@ -21,10 +24,10 @@ public:
     void  Clear(void);
 
     // address=[0x1497320]
-    virtual void  Load(class IS4Chunk & a2);
+    virtual void  Load(IS4Chunk & a2);
 
     // address=[0x1497360]
-    virtual void  Save(class IS4Chunk & a2);
+    virtual void  Save(IS4Chunk & a2);
 
     // address=[0x14980c0]
      CPlayerInfo(void);
@@ -34,15 +37,15 @@ public:
 
     // Type information members
 public:
-    DWORD m_iRace;
-    DWORD m_iStartX;
-    DWORD m_iStartY;
-    DWORD m_iIp;
-    DWORD m_iPeerId;
-    DWORD m_iColor;
+    int m_iRace;
+    int m_iStartX;
+    int m_iStartY;
+    int m_iIp;
+    int m_iPeerId;
+    int m_iColor;
     std::wstring m_swName;
-    DWORD m_iType;
-    DWORD m_bInitialized;
+    int m_iType;
+    int m_bInitialized;
 
 };
 

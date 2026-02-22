@@ -1568,25 +1568,24 @@ bool __cdecl ExistsExtractCommand(void) {
   char v10; // [esp+32h] [ebp-1F6h]
   char v11; // [esp+33h] [ebp-1F5h]
   char v12[88]; // [esp+34h] [ebp-1F4h] BYREF
-  _DWORD v13[26]; // [esp+8Ch] [ebp-19Ch] BYREF
-  int v14; // [esp+F4h] [ebp-134h] BYREF
-  std::wstring v15; // [esp+F8h] [ebp-130h] BYREF
+  CFileEx v13; // [esp+8Ch] [ebp-19Ch] BYREF
+  std::wstring v14; // [esp+F8h] [ebp-130h] BYREF
   wchar_t Src[128]; // [esp+114h] [ebp-114h] BYREF
-  _DWORD *v17; // [esp+218h] [ebp-10h]
-  int v18; // [esp+224h] [ebp-4h]
+  _DWORD *v16; // [esp+218h] [ebp-10h]
+  int v17; // [esp+224h] [ebp-4h]
 
-  v17 = v3;
+  v16 = v3;
   v3[4] = 128;
   if ( !g_iArgc )
     return 0;
   memset(Src, 0, sizeof(Src));
   std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v12);
-  v18 = 0;
+  v17 = 0;
   std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::from_bytes(
-    (int)&v15,
+    (int)&v14,
     *g_pArgv);
-  LOBYTE(v18) = 1;
-  v1 = std::wstring::c_str(&v15);
+  LOBYTE(v17) = 1;
+  v1 = std::wstring::c_str(&v14);
   wcsncpy(Src, v1, 0x7Fu);
   j__wcsupr(Src);
   if ( wcsstr(Src, (wchar_t *)L"EXTRACT:\"") )
@@ -1600,10 +1599,10 @@ bool __cdecl ExistsExtractCommand(void) {
     v11 = 1;
     ElementCount = 0;
     Buffer = 0;
-    CFileEx::CFileEx((CFileEx *)v13, 1);
-    LOBYTE(v18) = 3;
-    CFileEx::Open(&v14, Src, 6, 0, UNUSED_ARG(), UNUSED_ARG());
-    v5 = CFileEx::Size(v13);
+    CFileEx::CFileEx(&v13, UNUSED_ARG());
+    LOBYTE(v17) = 3;
+    CFileEx::Open(&v13.IFileEx, Src, CFile_BINARY|CFile_READ, 0, UNUSED_ARG(), UNUSED_ARG());
+    v5 = CFileEx::Size(&v13);
     ElementCount = v5;
     if ( v5 )
     {
@@ -1611,15 +1610,15 @@ bool __cdecl ExistsExtractCommand(void) {
       v3[6] = v4;
       Buffer = v4;
       memset(v4, 0, ElementCount + 8);
-      CFileEx::Read(&v14, Buffer, 1, ElementCount, UNUSED_ARG(), 110);
+      CFileEx::Read(&v13.IFileEx.__vftable, Buffer, 1, ElementCount, UNUSED_ARG(), 110);
     }
-    v18 = 2;
-    CFileEx::Close((CFileEx *)&v14, UNUSED_ARG(), UNUSED_ARG());
+    v17 = 2;
+    CFileEx::Close(&v13.IFileEx, UNUSED_ARG(), UNUSED_ARG());
     if ( v11 && Buffer )
     {
-      CFileEx::Open(&v14, (wchar_t *)L"Extract", 8, 0, UNUSED_ARG(), UNUSED_ARG());
+      CFileEx::Open(&v13.IFileEx, (wchar_t *)L"Extract", CFile_WRITE, 0, UNUSED_ARG(), UNUSED_ARG());
       CFileEx::Write(Buffer, 1u, ElementCount, UNUSED_ARG(), UNUSED_ARG());
-      CFileEx::Close((CFileEx *)&v14, UNUSED_ARG(), UNUSED_ARG());
+      CFileEx::Close(&v13.IFileEx, UNUSED_ARG(), UNUSED_ARG());
       MessageBoxA(0, "File successfully extracted!", &byte_36833EB, 0);
       v3[5] = Buffer;
       operator delete[](Buffer);
@@ -1629,20 +1628,20 @@ bool __cdecl ExistsExtractCommand(void) {
       MessageBoxA(0, "Error while reading file!", &byte_368342B, 0);
     }
     v10 = 1;
-    LOBYTE(v18) = 1;
-    CFileEx::~CFileEx(v13);
-    LOBYTE(v18) = 0;
-    std::wstring::~wstring(&v15);
-    v18 = -1;
+    LOBYTE(v17) = 1;
+    CFileEx::~CFileEx(&v13);
+    LOBYTE(v17) = 0;
+    std::wstring::~wstring(&v14);
+    v17 = -1;
     std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::~wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v12);
     return v10;
   }
   else
   {
     v9 = 0;
-    LOBYTE(v18) = 0;
-    std::wstring::~wstring(&v15);
-    v18 = -1;
+    LOBYTE(v17) = 0;
+    std::wstring::~wstring(&v14);
+    v17 = -1;
     std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::~wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v12);
     return v9;
   }
@@ -16163,10 +16162,10 @@ void __cdecl GuiDlgMainGameSettingsUpdateChangeSlot(int a1) {
 // Decompiled from void GuiDlgMainGameSettingstUpdate()
 void __cdecl GuiDlgMainGameSettingstUpdate(void) {
   
-  const wchar_t *v0; // eax
+  wchar_t *v0; // eax
   char *v1; // eax
   char *v2; // eax
-  const wchar_t *v3; // eax
+  wchar_t *v3; // eax
   char v4; // [esp+8h] [ebp-1F4h]
   BOOL v5; // [esp+14h] [ebp-1E8h]
   int v6; // [esp+30h] [ebp-1CCh]
@@ -16179,7 +16178,7 @@ void __cdecl GuiDlgMainGameSettingstUpdate(void) {
   int i; // [esp+58h] [ebp-1A4h]
   char v14[88]; // [esp+5Ch] [ebp-1A0h] BYREF
   _BYTE v15[28]; // [esp+B4h] [ebp-148h] BYREF
-  CHAR v16[28]; // [esp+D0h] [ebp-12Ch] BYREF
+  std::string v16; // [esp+D0h] [ebp-12Ch] BYREF
   CHAR Destination[256]; // [esp+ECh] [ebp-110h] BYREF
   int v18; // [esp+1F8h] [ebp-4h]
 
@@ -16187,52 +16186,52 @@ void __cdecl GuiDlgMainGameSettingstUpdate(void) {
   v18 = 0;
   byte_3ED2031 = 1;
   if ( byte_4030852 && !byte_4030853 )
-    IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, dword_403089C, 2244, 0);
-  IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, dword_403089C, 2244, byte_40308A1);
-  IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, dword_403089C, 2244, byte_40308A2);
+    IGuiEngine::SetControlVisibility(g_pGUIEngine, dword_403089C, 2244, 0);
+  IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, 2244, byte_40308A1);
+  IGuiEngine::SelectControl(g_pGUIEngine, dword_403089C, 2244, byte_40308A2);
   if ( *(_DWORD *)(g_pGameType + 4 * dword_3D891AC + 116) == 1
     || !byte_4030852
     || INetworkEngine::StormDidEnterSession((INetworkEngine *)g_pNetworkEngine) )
   {
     dword_3D891AC = (char)CPlayerManager::GetLocalSlot();
   }
-  IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, dword_403089C, 2141, byte_40308A4);
-  IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, dword_403089C, 2245, byte_403088D);
+  IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, 2141, byte_40308A4);
+  IGuiEngine::SetControlVisibility(g_pGUIEngine, dword_403089C, 2245, byte_403088D);
   if ( byte_4030850 || byte_40308A0 || byte_40308A3 )
-    IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, dword_403089C, 2183, 0);
+    IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, 2183, 0);
   else
-    IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, dword_403089C, 2183, 1);
+    IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, 2183, 1);
   if ( byte_4030850 || byte_40308A0 || byte_40308A3 )
-    IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, dword_403089C, 2182, 0);
+    IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, 2182, 0);
   else
-    IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, dword_403089C, 2182, 1);
+    IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, 2182, 1);
   if ( byte_4030851 || byte_40308A0 || byte_40308A3 )
-    IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, dword_403089C, 2181, 0);
+    IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, 2181, 0);
   else
-    IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, dword_403089C, 2181, 1);
+    IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, 2181, 1);
   if ( byte_4030851 || byte_40308A0 || byte_40308A3 )
-    IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, dword_403089C, 2180, 0);
+    IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, 2180, 0);
   else
-    IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, dword_403089C, 2180, 1);
+    IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, 2180, 1);
   if ( byte_40308A0 || byte_40308A3 )
-    IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, dword_403089C, 2185, 0);
+    IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, 2185, 0);
   else
-    IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, dword_403089C, 2185, 1);
+    IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, 2185, 1);
   if ( byte_40308A0 || byte_40308A3 )
-    IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, dword_403089C, 2184, 0);
+    IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, 2184, 0);
   else
-    IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, dword_403089C, 2184, 1);
+    IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, 2184, 1);
   if ( byte_40308A0
     || byte_40308A3
     || dword_3D891AC < 0
     || *(_DWORD *)(dword_403083C + 2116 * dword_3D891AC + 60) == 2
     || *(_DWORD *)(dword_403083C + 2116 * dword_3D891AC + 60) == 3 )
   {
-    IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, dword_403089C, 2186, 0);
+    IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, 2186, 0);
   }
   else
   {
-    IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, dword_403089C, 2186, 1);
+    IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, 2186, 1);
   }
   if ( byte_40308A0
     || byte_40308A3
@@ -16240,80 +16239,80 @@ void __cdecl GuiDlgMainGameSettingstUpdate(void) {
     || *(_DWORD *)(dword_403083C + 2116 * dword_3D891AC + 60) == 2
     || *(_DWORD *)(dword_403083C + 2116 * dword_3D891AC + 60) == 3 )
   {
-    IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, dword_403089C, 2187, 0);
+    IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, 2187, 0);
   }
   else
   {
-    IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, dword_403089C, 2187, 1);
+    IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, 2187, 1);
   }
   if ( byte_4030852 )
-    IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, dword_403089C, 2142, 1);
+    IGuiEngine::SetControlVisibility(g_pGUIEngine, dword_403089C, 2142, 1);
   else
-    IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, dword_403089C, 2142, 0);
-  IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, dword_403089C, 2142, byte_403088C);
+    IGuiEngine::SetControlVisibility(g_pGUIEngine, dword_403089C, 2142, 0);
+  IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, 2142, byte_403088C);
   if ( !byte_4030852 )
-    IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, dword_403089C, 2141, byte_4030854 != 1);
-  v0 = (const wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)&stru_40307CC);
+    IGuiEngine::SetControlVisibility(g_pGUIEngine, dword_403089C, 2141, byte_4030854 != 1);
+  v0 = std::wstring::c_str(&stru_40307CC);
   j__wcstombs(Destination, v0, 0x100u);
-  IGuiEngine::SetText((void *)g_pGUIEngine, dword_403089C, 2145, Destination);
+  IGuiEngine::SetText(g_pGUIEngine, dword_403089C, 2145, Destination);
   std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v14);
   LOBYTE(v18) = 1;
   std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(
-    v16,
-    &unk_40307E8);
+    &v16,
+    &stru_40307E8);
   LOBYTE(v18) = 2;
-  v1 = (char *)std::string::c_str(v16);
-  IGuiEngine::SetText((void *)g_pGUIEngine, dword_403089C, 2152, v1);
+  v1 = std::string::c_str(&v16);
+  IGuiEngine::SetText(g_pGUIEngine, dword_403089C, 2152, v1);
   _wsprintfA(Destination, "%u", dword_403084C);
-  IGuiEngine::SetText((void *)g_pGUIEngine, dword_403089C, 2146, Destination);
+  IGuiEngine::SetText(g_pGUIEngine, dword_403089C, 2146, Destination);
   v2 = g_pStringEngine->GetString(g_pStringEngine, 3839);
-  IGuiEngine::SetText((void *)g_pGUIEngine, dword_403089C, 2144, v2);
+  IGuiEngine::SetText(g_pGUIEngine, dword_403089C, 2144, v2);
   _wsprintfA(Destination, "%u / %u", dword_4030840, dword_4030844);
-  IGuiEngine::SetText((void *)g_pGUIEngine, dword_403089C, 2143, Destination);
+  IGuiEngine::SetText(g_pGUIEngine, dword_403089C, 2143, Destination);
   if ( dword_3D891AC >= 0 )
     IGuiEngine::SetImages(
-      (void *)g_pGUIEngine,
+      g_pGUIEngine,
       dword_403089C,
       2189,
       dword_3690424[*(_DWORD *)(dword_403083C + 2116 * dword_3D891AC + 36)],
       0);
   else
-    IGuiEngine::SetImages((void *)g_pGUIEngine, dword_403089C, 2189, 0, 0);
+    IGuiEngine::SetImages(g_pGUIEngine, dword_403089C, 2189, 0, 0);
   if ( dword_3D891AC >= 0 )
     IGuiEngine::SetImages(
-      (void *)g_pGUIEngine,
+      g_pGUIEngine,
       dword_403089C,
       2179,
       dword_36904BC[*(_DWORD *)(dword_403083C + 2116 * dword_3D891AC + 40)],
       0);
   else
-    IGuiEngine::SetImages((void *)g_pGUIEngine, dword_403089C, 2179, 0, 0);
+    IGuiEngine::SetImages(g_pGUIEngine, dword_403089C, 2179, 0, 0);
   if ( dword_3D891AC >= 0 )
     IGuiEngine::SetImages(
-      (void *)g_pGUIEngine,
+      g_pGUIEngine,
       dword_403089C,
       2188,
       dword_3690404[*(_DWORD *)(dword_403083C + 2116 * dword_3D891AC + 4)],
       0);
   else
-    IGuiEngine::SetImages((void *)g_pGUIEngine, dword_403089C, 2188, 0, 0);
+    IGuiEngine::SetImages(g_pGUIEngine, dword_403089C, 2188, 0, 0);
   if ( dword_3D891AC >= 0 )
     IGuiEngine::SetUserLogoImage(
-      (IGuiEngine *)g_pGUIEngine,
+      g_pGUIEngine,
       dword_403089C,
       2256,
       *(_DWORD *)(dword_403083C + 2116 * dword_3D891AC + 44));
   else
-    IGuiEngine::SetUserLogoImage((IGuiEngine *)g_pGUIEngine, dword_403089C, 2256, 0);
+    IGuiEngine::SetUserLogoImage(g_pGUIEngine, dword_403089C, 2256, 0);
   for ( i = 0; i < 8; ++i )
   {
     if ( i >= dword_4030848 )
     {
       for ( j = 0; j < 11; ++j )
-        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, dword_403089C, dword_3690578[11 * i + j], 0);
+        IGuiEngine::SetControlVisibility(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + j], 0);
       continue;
     }
-    IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, dword_403089C, dword_3690578[11 * i], 1);
+    IGuiEngine::SetControlVisibility(g_pGUIEngine, dword_403089C, dword_3690578[11 * i], 1);
     v7 = -1;
     for ( k = 0; k < 8; ++k )
     {
@@ -16328,7 +16327,7 @@ void __cdecl GuiDlgMainGameSettingstUpdate(void) {
         && *(_DWORD *)(g_pGameType + 4 * i + 116) != 2
         && *(_DWORD *)(g_pGameType + 4 * i + 116) != 3
         && !*(_BYTE *)(i + g_pGameType + 440)
-        || (!(unsigned __int8)CGameType::IsClanGame(g_pGameType)
+        || (!CGameType::IsClanGame((CGameType *)g_pGameType)
           ? (v5 = 1)
           : (v5 = *(_DWORD *)(dword_403083C + 2116 * (char)CPlayerManager::GetLocalSlot() + 4) == *(_DWORD *)(dword_403083C + 2116 * i + 4)),
             !v5) )
@@ -16336,7 +16335,7 @@ void __cdecl GuiDlgMainGameSettingstUpdate(void) {
         if ( i != (char)CPlayerManager::GetLocalSlot() )
         {
 LABEL_93:
-          IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, dword_403089C, dword_3690578[11 * i], 0);
+          IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, dword_3690578[11 * i], 0);
           goto LABEL_95;
         }
       }
@@ -16346,29 +16345,29 @@ LABEL_93:
     {
       goto LABEL_93;
     }
-    IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, dword_403089C, dword_3690578[11 * i], 1);
+    IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, dword_3690578[11 * i], 1);
 LABEL_95:
     if ( *(_BYTE *)(dword_403083C + 2116 * i) )
     {
       for ( m = 1; m < 11; ++m )
-        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, dword_403089C, dword_3690578[11 * i + m], 0);
+        IGuiEngine::SetControlVisibility(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + m], 0);
       IGuiEngine::SetImages(
-        (void *)g_pGUIEngine,
+        g_pGUIEngine,
         dword_403089C,
         dword_3690578[11 * i + 9],
         dword_36906D8[3 * *(_DWORD *)(dword_403083C + 2116 * i + 60)],
         dword_36906D8[3 * *(_DWORD *)(dword_403083C + 2116 * i + 60) + 1]);
       IGuiEngine::SetTooltipID(
-        (IGuiEngine *)g_pGUIEngine,
+        g_pGUIEngine,
         dword_403089C,
         dword_3690578[11 * i + 9],
         dword_36906D8[3 * *(_DWORD *)(dword_403083C + 2116 * i + 60) + 2],
         0);
-      IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 9], 1);
+      IGuiEngine::SetControlVisibility(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 9], 1);
       if ( byte_4030852 && *(_BYTE *)(dword_403083C + 2116 * i + 2113) )
-        IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 9], 1);
+        IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 9], 1);
       else
-        IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 9], 0);
+        IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 9], 0);
       GuiDlgMainGameSettingsUpdateChangeSlot(i);
     }
     else
@@ -16388,66 +16387,62 @@ LABEL_95:
         }
       }
       if ( i == dword_3D891AC || !v12 )
-        IGuiEngine::SetFontTemplate((IGuiEngine *)g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 2], 7);
+        IGuiEngine::SetFontTemplate(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 2], 7);
       else
-        IGuiEngine::SetFontTemplate((IGuiEngine *)g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 2], 9);
-      IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 2], v12);
+        IGuiEngine::SetFontTemplate(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 2], 9);
+      IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 2], v12);
       for ( n = 0; n < 11; ++n )
-        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, dword_403089C, dword_3690578[11 * i + n], 1);
+        IGuiEngine::SetControlVisibility(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + n], 1);
       IGuiEngine::SetImages(
-        (void *)g_pGUIEngine,
+        g_pGUIEngine,
         dword_403089C,
         dword_3690578[11 * i + 1],
         dword_3690404[*(_DWORD *)(dword_403083C + 2116 * i + 4)],
         0);
-      v3 = (const wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)(dword_403083C + 2116 * i + 8));
+      v3 = std::wstring::c_str((std::wstring *)(dword_403083C + 2116 * i + 8));
       j__wcstombs(Destination, v3, 0x100u);
-      IGuiEngine::SetText((void *)g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 2], Destination);
+      IGuiEngine::SetText(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 2], Destination);
       IGuiEngine::SetImages(
-        (void *)g_pGUIEngine,
+        g_pGUIEngine,
         dword_403089C,
         dword_3690578[11 * i + 3],
         dword_36904BC[*(_DWORD *)(dword_403083C + 2116 * i + 40)],
         0);
       IGuiEngine::SetImages(
-        (void *)g_pGUIEngine,
+        g_pGUIEngine,
         dword_403089C,
         dword_3690578[11 * i + 4],
         dword_3690424[*(_DWORD *)(dword_403083C + 2116 * i + 36)],
         0);
       if ( byte_4030853 )
-        IGuiEngine::SetUserLogoImage(
-          (IGuiEngine *)g_pGUIEngine,
-          dword_403089C,
-          dword_3690578[11 * i + 5],
-          dword_4030858[i]);
+        IGuiEngine::SetUserLogoImage(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 5], dword_4030858[i]);
       else
-        IGuiEngine::SetUserLogoImage((IGuiEngine *)g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 5], i);
+        IGuiEngine::SetUserLogoImage(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 5], i);
       if ( *(_DWORD *)(dword_403083C + 2116 * i + 48) )
         _wsprintfA(Destination, "%u", *(_DWORD *)(dword_403083C + 2116 * i + 48));
       else
         j__strcpy_0(Destination, "-");
-      IGuiEngine::SetText((void *)g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 6], Destination);
+      IGuiEngine::SetText(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 6], Destination);
       IGuiEngine::SetImages(
-        (void *)g_pGUIEngine,
+        g_pGUIEngine,
         dword_403089C,
         dword_3690578[11 * i + 7],
         dword_3690564[*(_DWORD *)(dword_403083C + 2116 * i + 52)],
         0);
       IGuiEngine::SetImages(
-        (void *)g_pGUIEngine,
+        g_pGUIEngine,
         dword_403089C,
         dword_3690578[11 * i + 8],
         dword_36904D4[*(_DWORD *)(dword_403083C + 2116 * i + 56)],
         0);
       IGuiEngine::SetImages(
-        (void *)g_pGUIEngine,
+        g_pGUIEngine,
         dword_403089C,
         dword_3690578[11 * i + 9],
         dword_36906D8[3 * *(_DWORD *)(dword_403083C + 2116 * i + 60)],
         dword_36906D8[3 * *(_DWORD *)(dword_403083C + 2116 * i + 60) + 1]);
       IGuiEngine::SetTooltipID(
-        (IGuiEngine *)g_pGUIEngine,
+        g_pGUIEngine,
         dword_403089C,
         dword_3690578[11 * i + 9],
         dword_36906D8[3 * *(_DWORD *)(dword_403083C + 2116 * i + 60) + 2],
@@ -16457,21 +16452,21 @@ LABEL_95:
         && *(_BYTE *)(dword_403083C + 2116 * i + 2113)
         && byte_4030852 )
       {
-        IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 9], 1);
+        IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 9], 1);
       }
       else
       {
-        IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 9], 0);
+        IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 9], 0);
       }
       GuiDlgMainGameSettingsUpdateChangeSlot(i);
       v4 = *(_DWORD *)(dword_403083C + 2116 * i + 60) == 1 && !*(_BYTE *)(dword_403083C + 2116 * i + 64) && byte_4030852;
-      IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 10], byte_4030852);
-      IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 10], v4);
+      IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 10], byte_4030852);
+      IGuiEngine::SetControlVisibility(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 10], v4);
     }
   }
   byte_3ED2031 = 0;
   LOBYTE(v18) = 1;
-  std::string::~string(v16);
+  std::string::~string(&v16);
   LOBYTE(v18) = 0;
   std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::~wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v14);
   v18 = -1;
@@ -42746,23 +42741,23 @@ void * __stdcall BBSupportLib::BBSSymbolHandlerProcessHandle(void) {
   if ( dword_468712C <= 0 )
     return 0;
   else
-    return TargetHandle;
+    return hProcess;
 }
 
 
 // address=[0x2f310b0]
-// Decompiled from int __userpurge BBSupportLib::BBSGetSymbolAndLine@<eax>(CHAR *this, char *a2, unsigned int a3)
+// Decompiled from int __userpurge BBSupportLib::BBSGetSymbolAndLine@<eax>(CHAR *this, char *dwAddr, unsigned int a3)
 int __stdcall BBSupportLib::BBSGetSymbolAndLine(char * a2, unsigned int a3) {
   
   int v3; // eax
   int v4; // eax
-  _DWORD v6[5]; // [esp+10h] [ebp-44Ch] BYREF
-  int v7; // [esp+24h] [ebp-438h] BYREF
+  struct _IMAGEHLP_LINE Line; // [esp+10h] [ebp-44Ch] BYREF
+  DWORD v7; // [esp+24h] [ebp-438h] BYREF
   const char *v8; // [esp+28h] [ebp-434h]
-  int v9; // [esp+2Ch] [ebp-430h] BYREF
+  DWORD pdwDisplacement; // [esp+2Ch] [ebp-430h] BYREF
   BOOL v10; // [esp+30h] [ebp-42Ch]
   BOOL v11; // [esp+34h] [ebp-428h]
-  const char *v12; // [esp+38h] [ebp-424h]
+  PIMAGEHLP_SYMBOL Symbol; // [esp+38h] [ebp-424h]
   int v13; // [esp+3Ch] [ebp-420h]
   _DWORD v14[256]; // [esp+40h] [ebp-41Ch] BYREF
   CPPEH_RECORD ms_exc; // [esp+444h] [ebp-18h]
@@ -42775,25 +42770,25 @@ int __stdcall BBSupportLib::BBSGetSymbolAndLine(char * a2, unsigned int a3) {
   ms_exc.registration.TryLevel = 0;
   *this = 0;
   memset(v14, 0, sizeof(v14));
-  v12 = (const char *)v14;
+  Symbol = (PIMAGEHLP_SYMBOL)v14;
   v14[0] = 24;
   v14[4] = 999;
-  v9 = 0;
-  if ( dword_468714C(TargetHandle, a2, &v9, v14) )
+  pdwDisplacement = 0;
+  if ( SymGetSymFromAddr(hProcess, (DWORD)dwAddr, &pdwDisplacement, (PIMAGEHLP_SYMBOL)v14) )
   {
-    v3 = _wsprintfA(&this[v13], "%s+%u", v12 + 20, v9);
+    v3 = _wsprintfA(&this[v13], "%s+%u", Symbol->Name, pdwDisplacement);
     v13 += v3;
   }
-  memset(v6, 0, sizeof(v6));
-  v6[0] = 20;
+  memset(&Line, 0, sizeof(Line));
+  Line.SizeOfStruct = 20;
   v7 = 0;
-  if ( dword_4687150(TargetHandle, a2, &v7, v6) )
+  if ( SymGetLineFromAddr(hProcess, (DWORD)dwAddr, &v7, &Line) )
   {
     if ( v13 <= 0 )
       v8 = (const char *)&unk_3AB9E15;
     else
       v8 = "  ";
-    v4 = _wsprintfA(&this[v13], "%s%s(%u)", v8, (const char *)v6[3], v6[2]);
+    v4 = _wsprintfA(&this[v13], "%s%s(%u)", v8, Line.FileName, Line.LineNumber);
     v13 += v4;
   }
   ms_exc.registration.TryLevel = -2;
@@ -56633,8 +56628,8 @@ void __cdecl MA_GetMapData(int * a1, int * a2, int * a3, int * a4, int * a5) {
 
 
 // address=[0x2fbdd10]
-// Decompiled from wchar_t *__cdecl MA_GetPlayerData(  int a1,  int a2,  int *a3,  int *a4,  int *a5,  wchar_t **a6,  wchar_t **a7,  int *a8,  int *a9,  int *a10)
-void __cdecl MA_GetPlayerData(int a1, int a2, int * a3, int * a4, int * a5, wchar_t * * a6, wchar_t * * a7, int * a8, int * a9, int * a10) {
+// Decompiled from wchar_t *__cdecl MA_GetPlayerData(  int _iPlayerIndex,  int _iUnknown,  int *_iSlot9,  int *_iSlot5,  int *_iSlot6,  wchar_t **a6,  wchar_t **a7,  int *a8,  int *a9,  int *a10)
+void __cdecl MA_GetPlayerData(int _iPlayerIndex, int _iUnknown, int * _iSlot9, int * _iSlot5, int * _iSlot6, wchar_t * * a6, wchar_t * * a7, int * a8, int * a9, int * a10) {
   
   char *NameOfPlayer; // eax
   char *SetupName; // eax
@@ -56643,20 +56638,20 @@ void __cdecl MA_GetPlayerData(int a1, int a2, int * a3, int * a4, int * a5, wcha
   WCHAR WideCharStr[160]; // [esp+144h] [ebp-144h] BYREF
 
   if ( g_bMapIsLoaded
-    && a1 > 0
-    && a1 <= CPlayerData::GetNumberOfPlayers(&g_cPlayerAndTeamData)
-    && a2 >= 0
-    && a2 < CPlayerData::GetNumberOfSetups((CPlayerData *)&g_cPlayerAndTeamData) )
+    && _iPlayerIndex > 0
+    && _iPlayerIndex <= CPlayerData::GetNumberOfPlayers(&g_cPlayerAndTeamData)
+    && _iUnknown >= 0
+    && _iUnknown < CPlayerData::GetNumberOfSetups((CPlayerData *)&g_cPlayerAndTeamData) )
   {
-    *a3 = CPlayerData::GetRaceOfPlayer((CPlayerData *)&g_cPlayerAndTeamData, a1);
-    *a4 = CPlayerData::GetXOfPlayer((CPlayerData *)&g_cPlayerAndTeamData, a1);
-    *a5 = CPlayerData::GetYOfPlayer((CPlayerData *)&g_cPlayerAndTeamData, a1);
-    *a8 = CPlayerData::GetControlOfPlayer((CPlayerData *)&g_cPlayerAndTeamData, a1, a2);
-    *a9 = CPlayerData::GetTeamOfPlayer((CPlayerData *)&g_cPlayerAndTeamData, a1, a2) == 255;
-    *a10 = CPlayerData::GetTeamOfPlayer((CPlayerData *)&g_cPlayerAndTeamData, a1, a2);
-    NameOfPlayer = CPlayerData::GetNameOfPlayer((CPlayerData *)&g_cPlayerAndTeamData, a1);
+    *_iSlot9 = CPlayerData::GetRaceOfPlayer((CPlayerData *)&g_cPlayerAndTeamData, _iPlayerIndex);
+    *_iSlot5 = CPlayerData::GetXOfPlayer((CPlayerData *)&g_cPlayerAndTeamData, _iPlayerIndex);
+    *_iSlot6 = CPlayerData::GetYOfPlayer((CPlayerData *)&g_cPlayerAndTeamData, _iPlayerIndex);
+    *a8 = CPlayerData::GetControlOfPlayer((CPlayerData *)&g_cPlayerAndTeamData, _iPlayerIndex, _iUnknown);
+    *a9 = CPlayerData::GetTeamOfPlayer((CPlayerData *)&g_cPlayerAndTeamData, _iPlayerIndex, _iUnknown) == 255;
+    *a10 = CPlayerData::GetTeamOfPlayer((CPlayerData *)&g_cPlayerAndTeamData, _iPlayerIndex, _iUnknown);
+    NameOfPlayer = CPlayerData::GetNameOfPlayer((CPlayerData *)&g_cPlayerAndTeamData, _iPlayerIndex);
     MultiByteToWideChar(0, 1u, NameOfPlayer, -1, WideCharStr, 80);
-    SetupName = CPlayerData::GetSetupName((CPlayerData *)&g_cPlayerAndTeamData, a2);
+    SetupName = CPlayerData::GetSetupName((CPlayerData *)&g_cPlayerAndTeamData, _iUnknown);
     MultiByteToWideChar(0, 1u, SetupName, -1, psz, 80);
     *a6 = SysAllocString(WideCharStr);
     result = SysAllocString(psz);
@@ -56666,9 +56661,9 @@ void __cdecl MA_GetPlayerData(int a1, int a2, int * a3, int * a4, int * a5, wcha
   {
     *a9 = *a10;
     *a8 = *a9;
-    *a5 = *a8;
-    *a4 = *a5;
-    *a3 = *a4;
+    *_iSlot6 = *a8;
+    *_iSlot5 = *_iSlot6;
+    *_iSlot9 = *_iSlot5;
     MultiByteToWideChar(0, 1u, &MultiByteStr, -1, WideCharStr, 80);
     MultiByteToWideChar(0, 1u, &byte_3AD3322, -1, psz, 80);
     *a6 = SysAllocString(WideCharStr);

@@ -1,3 +1,4 @@
+#if FALSE
 #include "CFileEx.h"
 
 // Definitions for class CFileEx
@@ -19,8 +20,8 @@
   this->CFile.m_bTextMode = 1;
   this->m_hFileMemoryHandle = 0;
   this->m_pFileMemoryMap = 0;
-  LOBYTE(this->m_bFileLibraryHandled) = 0;
-  BYTE1(this->m_bFileLibraryHandled) = 0;
+  this->m_bFileLibraryHandled = 0;
+  this->m_bMemoryMapped = 0;
   this->CFile.m_hFile = 0;
   this->m_uSize = 0;
   this->m_uReadOffset = 0;
@@ -75,29 +76,29 @@ bool  CFileEx::InLibrary(void)const {
 
 
 // address=[0x2f017f0]
-// Decompiled from CFileEx *__thiscall CFileEx::CFileEx(CFileEx *this, wchar_t *FileName, int a2, char a4, int a5)
- CFileEx::CFileEx(wchar_t const * FileName, unsigned int a3, bool a4) {
+// Decompiled from CFileEx *__thiscall CFileEx::CFileEx(CFileEx *this, wchar_t *FileName, int a2, char a4, __unused int a5)
+ CFileEx::CFileEx(wchar_t const * FileName, unsigned int a2, bool a4) {
   
   if ( a5 )
   {
-    *((_DWORD *)this + 18) = &CFileEx::_vbtable_;
-    IFileEx::IFileEx((char *)this + 104);
+    this->m_pVbtable = (vbtable *)&CFileEx::_vbtable_;
+    IFileEx::IFileEx(&this->IFileEx);
   }
-  CFile::CFile(this);
-  *(_DWORD *)this = CFileEx::_vftable_;
-  *(_DWORD *)((char *)this + *(_DWORD *)(*((_DWORD *)this + 18) + 4) + 72) = &CFileEx::`vftable';
-  *(_DWORD *)((char *)this + *(_DWORD *)(*((_DWORD *)this + 18) + 4) + 68) = *(_DWORD *)(*((_DWORD *)this + 18) + 4)
-                                                                           - 32;
+  CFile::CFile(&this->CFile);
+  this->CFile.__vftable = (IFSNode_vtbl *)&CFileEx::_vftable_;
+  *(vbtable **)((char *)&this->m_pVbtable + this->m_pVbtable->virtualBaseOffsets[0]) = (vbtable *)&CFileEx::`vftable';
+  *(FILE **)((char *)&this->CFile.m_hFile + this->m_pVbtable->virtualBaseOffsets[0]) = (FILE *)(this->m_pVbtable->virtualBaseOffsets[0]
+                                                                                              - 32);
   if ( !a2 )
     return this;
-  *((_DWORD *)this + 23) = 0;
-  *((_DWORD *)this + 24) = 0;
-  *((_BYTE *)this + 80) = 0;
-  *((_BYTE *)this + 81) = 0;
-  *((_DWORD *)this + 17) = 0;
-  *((_DWORD *)this + 22) = 0;
-  *((_DWORD *)this + 19) = 0;
-  CFileEx::Open((_DWORD *)this + 26, FileName, a2, a4, UNUSED_ARG(), UNUSED_ARG());
+  this->m_hFileMemoryHandle = 0;
+  this->m_pFileMemoryMap = 0;
+  this->m_bFileLibraryHandled = 0;
+  this->m_bMemoryMapped = 0;
+  this->CFile.m_hFile = 0;
+  this->m_uSize = 0;
+  this->m_uReadOffset = 0;
+  CFileEx::Open(&this->IFileEx, FileName, (CFile::Mode)a2, a4, UNUSED_ARG(), UNUSED_ARG());
   return this;
 }
 
@@ -421,3 +422,4 @@ void  CFileEx::Release(void) {
 }
 
 
+#endif // Already implemented

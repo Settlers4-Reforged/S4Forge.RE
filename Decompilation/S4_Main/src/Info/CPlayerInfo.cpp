@@ -29,11 +29,7 @@ int  CPlayerInfo::StartY(void)const {
 // address=[0x13d1290]
 // Decompiled from std::wstring *__thiscall CPlayerInfo::Name(CPlayerInfo *this)
 std::wstring  CPlayerInfo::Name(void)const {
-  
-  std::wstring *v2; // [esp+10h] [ebp+8h]
-
-  std::wstring::wstring(v2, &this->m_swName);
-  return v2;
+  return this->m_swName;
 }
 
 
@@ -47,7 +43,7 @@ void  CPlayerInfo::Clear(void) {
   this->m_iIp = 0;
   this->m_iPeerId = 0;
   this->m_iColor = 0;
-  return std::wstring::operator=(&this->m_swName, (wchar_t *)&word_3702DA4);
+  this->m_swName = L"";
 }
 
 
@@ -55,8 +51,8 @@ void  CPlayerInfo::Clear(void) {
 // Decompiled from void __thiscall CPlayerInfo::Load(CPlayerInfo *this, struct IS4Chunk *a2)
 void  CPlayerInfo::Load(class IS4Chunk & a2) {
   
-  a2->Load(&this->m_iRace, 4);
-  a2->Load(&this->m_iColor, 4);
+  a2.Load(&this->m_iRace, 4);
+  a2.Load(&this->m_iColor, 4);
 }
 
 
@@ -64,28 +60,18 @@ void  CPlayerInfo::Load(class IS4Chunk & a2) {
 // Decompiled from void __thiscall CPlayerInfo::Save(CPlayerInfo *this, struct IS4Chunk *a2)
 void  CPlayerInfo::Save(class IS4Chunk & a2) {
   
-  a2->Save(&this->m_iRace, 4);
-  a2->Save(&this->m_iColor, 4);
+  a2.Save(&this->m_iRace, 4);
+  a2.Save(&this->m_iColor, 4);
 }
 
 
 // address=[0x14980c0]
 // Decompiled from CPlayerInfo *__thiscall CPlayerInfo::CPlayerInfo(CPlayerInfo *this)
- CPlayerInfo::CPlayerInfo(void) {
-  
-  IS4ChunkObject::IS4ChunkObject(this);
-  this->__vftable = (CPlayerInfo_vtbl *)CPlayerInfo::_vftable_;
-  std::wstring::wstring(&this->m_swName);
-  CPlayerInfo::Clear(this);
-  return this;
+ CPlayerInfo::CPlayerInfo(void) : IS4ChunkObject(), m_swName() {
+  CPlayerInfo::Clear();
 }
 
 
 // address=[0x14982e0]
 // Decompiled from void __thiscall CPlayerInfo::~CPlayerInfo(CPlayerInfo *this)
- CPlayerInfo::~CPlayerInfo(void) {
-  
-  std::wstring::~wstring(&this->m_swName);
-}
-
-
+ CPlayerInfo::~CPlayerInfo(void) = default;

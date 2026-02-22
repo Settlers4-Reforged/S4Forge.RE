@@ -56,6 +56,35 @@ public:
     // address=[0x14b4a60]
     void  TeamWon(int a2);
 
+    // Type information members
+public:
+    _DWORD dword0;
+    _DWORD dword4;
+    _DWORD dword8;
+    _DWORD dwordC;
+    _DWORD dword10;
+    _DWORD dword14;
+    _DWORD dword18;
+    _DWORD dword1C;
+    _DWORD dword20;
+    _DWORD dword24;
+    _BYTE byte28;
+    _BYTE byte29;
+    _BYTE[2] gap2A;
+    int m_sRandom;
+    _BYTE[4] gap30;
+    _BYTE byte34;
+    _BYTE[3] gap35;
+    _DWORD dword38;
+    _DWORD m_iType;
+    std::string std__string40;
+    _DWORD m_iMode;
+    std::string std__string60;
+    _WORD word7C;
+    _BYTE byte7E;
+    _BYTE byte7F;
+    char char80;
+
 };
 
 

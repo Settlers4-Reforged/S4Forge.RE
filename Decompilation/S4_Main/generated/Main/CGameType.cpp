@@ -6,19 +6,15 @@
 // Decompiled from char __thiscall CGameType::IsLadderGame(CGameType *this)
 bool  CGameType::IsLadderGame(void)const {
   
-  return *((_BYTE *)this + 1545);
+  return this->m_bIsLadderGame;
 }
 
 
 // address=[0x13a4100]
-// Decompiled from CGameType *__thiscall CGameType::ChangeLocalSlot(CGameType *this, signed __int8 a2)
+// Decompiled from void __thiscall CGameType::ChangeLocalSlot(CGameType *this, signed __int8 a2)
 void  CGameType::ChangeLocalSlot(signed char a2) {
   
-  CGameType *result; // eax
-
-  result = this;
-  *((_BYTE *)this + 1537) = a2;
-  return result;
+  this->m_cLocalSlot = a2;
 }
 
 
@@ -26,15 +22,15 @@ void  CGameType::ChangeLocalSlot(signed char a2) {
 // Decompiled from char __thiscall CGameType::IsClanGame(CGameType *this)
 bool const  CGameType::IsClanGame(void) {
   
-  return *((_BYTE *)this + 1544);
+  return this->m_bIsClanGame;
 }
 
 
 // address=[0x13a4160]
-// Decompiled from char __thiscall sub_17A4160(_BYTE *this)
+// Decompiled from char __thiscall CGameType::IsSaveGame(CGameType *this)
 bool const  CGameType::IsSaveGame(void)const {
   
-  return this[696];
+  return this->m_bIsSaveGame;
 }
 
 
@@ -44,13 +40,13 @@ bool  CGameType::IsSlotChangable(int a2, bool * a3) {
   
   bool v4; // [esp+4h] [ebp-8h]
 
-  if ( (unsigned __int8)CGameType::IsSaveGame(this) )
+  if ( CGameType::IsSaveGame(this) )
     return 0;
   if ( !a3 )
-    return *((_BYTE *)this + a2 + 600) == 0;
-  v4 = *((_BYTE *)this + a2 + 440) || *((_DWORD *)this + a2 + 29) != 1;
+    return this->m_sPlayerSlot16[a2] == 0;
+  v4 = this->m_sPlayerSlot10[a2] || this->m_sPlayerType[a2] != 1;
   *a3 = v4;
-  return *((_BYTE *)this + a2 + 600) == 0;
+  return this->m_sPlayerSlot16[a2] == 0;
 }
 
 
@@ -58,7 +54,7 @@ bool  CGameType::IsSlotChangable(int a2, bool * a3) {
 // Decompiled from char __thiscall CGameType::IsAddOnMap(CGameType *this)
 bool  CGameType::IsAddOnMap(void) {
   
-  return *((_BYTE *)this + 1546);
+  return this->m_bIsAddOnMap;
 }
 
 
@@ -66,7 +62,7 @@ bool  CGameType::IsAddOnMap(void) {
 // Decompiled from bool __thiscall CGameType::IsEmptyMap(CGameType *this)
 bool  CGameType::IsEmptyMap(void) {
   
-  return *((_DWORD *)this + 15) == 1;
+  return this->m_bIsEmptyMap == 1;
 }
 
 
@@ -74,7 +70,7 @@ bool  CGameType::IsEmptyMap(void) {
 // Decompiled from int __thiscall CGameType::GetLocalSlot(CGameType *this)
 int const  CGameType::GetLocalSlot(void) {
   
-  return *((char *)this + 1537);
+  return this->m_cLocalSlot;
 }
 
 
@@ -82,7 +78,7 @@ int const  CGameType::GetLocalSlot(void) {
 // Decompiled from int __thiscall CGameType::GetMapBuildingXMLVersion(CGameType *this)
 int  CGameType::GetMapBuildingXMLVersion(void)const {
   
-  return *((_DWORD *)this + 389);
+  return this->m_iMapBuildingXMLVersion;
 }
 
 
@@ -90,7 +86,7 @@ int  CGameType::GetMapBuildingXMLVersion(void)const {
 // Decompiled from int __thiscall CGameType::GetMapObjectXMLVersion(CGameType *this)
 int  CGameType::GetMapObjectXMLVersion(void)const {
   
-  return *((_DWORD *)this + 388);
+  return this->m_iMapObjectXMLVersion;
 }
 
 
@@ -98,15 +94,15 @@ int  CGameType::GetMapObjectXMLVersion(void)const {
 // Decompiled from int __thiscall CGameType::GetMultiPlayerGameID(CGameType *this)
 unsigned int const  CGameType::GetMultiPlayerGameID(void) {
   
-  return *((_DWORD *)this + 383);
+  return this->m_iMultiPlayerGameID;
 }
 
 
 // address=[0x1486ef0]
-// Decompiled from int __thiscall CGameType::GetRealPlayerName(void *this, unsigned int a2)
-std::wstring &  CGameType::GetRealPlayerName(int a2) {
+// Decompiled from std::wstring *__thiscall CGameType::GetRealPlayerName(CGameType *this, unsigned int _iPlayerIndex)
+std::wstring &  CGameType::GetRealPlayerName(int _iPlayerIndex) {
   
-  if ( a2 >= 0xA
+  if ( _iPlayerIndex >= 0xA
     && BBSupportDbgReport(
          2,
          "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\main\\GameType.h",
@@ -115,7 +111,7 @@ std::wstring &  CGameType::GetRealPlayerName(int a2) {
   {
     __debugbreak();
   }
-  return (int)this + 28 * a2 + 1028;
+  return &this->m_swpRealPlayerNames[_iPlayerIndex];
 }
 
 
@@ -123,7 +119,7 @@ std::wstring &  CGameType::GetRealPlayerName(int a2) {
 // Decompiled from char __thiscall CGameType::IsBlueByteAddOnMap(CGameType *this)
 bool  CGameType::IsBlueByteAddOnMap(void) {
   
-  return *((_BYTE *)this + 1547);
+  return this->m_bBlueByteAddOnMap;
 }
 
 
@@ -131,7 +127,7 @@ bool  CGameType::IsBlueByteAddOnMap(void) {
 // Decompiled from char __thiscall CGameType::IsBlueByteMCD2Map(CGameType *this)
 bool  CGameType::IsBlueByteMCD2Map(void) {
   
-  return *((_BYTE *)this + 1548);
+  return this->m_bBlueByteMCD2Map;
 }
 
 
@@ -139,7 +135,7 @@ bool  CGameType::IsBlueByteMCD2Map(void) {
 // Decompiled from char __thiscall CGameType::IsCampaignMap(CGameType *this)
 bool  CGameType::IsCampaignMap(void) {
   
-  return *((_BYTE *)this + 997);
+  return this->m_bIsCampaignMap;
 }
 
 
@@ -147,7 +143,7 @@ bool  CGameType::IsCampaignMap(void) {
 // Decompiled from char __thiscall CGameType::IsHost(CGameType *this)
 bool const  CGameType::IsHost(void) {
   
-  return *((_BYTE *)this + 1538);
+  return this->m_bIsHost;
 }
 
 
@@ -155,7 +151,7 @@ bool const  CGameType::IsHost(void) {
 // Decompiled from char __thiscall CGameType::IsMCD2TextureSet(CGameType *this)
 bool  CGameType::IsMCD2TextureSet(void) {
   
-  return *((_BYTE *)this + 1549);
+  return this->m_bIsMCD2TextureSet;
 }
 
 
@@ -163,55 +159,41 @@ bool  CGameType::IsMCD2TextureSet(void) {
 // Decompiled from bool __thiscall CGameType::IsMultiplayerGame(CGameType *this)
 bool const  CGameType::IsMultiplayerGame(void) {
   
-  return *((_DWORD *)this + 173) == 2;
+  return this->m_iGameMatchType == 2;
 }
 
 
 // address=[0x14873d0]
-// Decompiled from CGameType *__thiscall CGameType::SetBlueByteMCD2Map(CGameType *this, bool a2)
+// Decompiled from void __thiscall CGameType::SetBlueByteMCD2Map(CGameType *this, bool a2)
 void  CGameType::SetBlueByteMCD2Map(bool a2) {
   
-  CGameType *result; // eax
-
-  result = this;
-  *((_BYTE *)this + 1548) = a2;
-  return result;
+  this->m_bBlueByteMCD2Map = a2;
 }
 
 
 // address=[0x14873f0]
-// Decompiled from CGameType *__thiscall CGameType::SetClanGame(CGameType *this, bool a2)
+// Decompiled from void __thiscall CGameType::SetClanGame(CGameType *this, bool a2)
 void  CGameType::SetClanGame(bool a2) {
   
-  CGameType *result; // eax
-
-  result = this;
-  *((_BYTE *)this + 1544) = a2;
-  return result;
+  this->m_bIsClanGame = a2;
 }
 
 
 // address=[0x1487410]
-// Decompiled from CGameType *__thiscall CGameType::SetHost(CGameType *this, bool a2)
+// Decompiled from void __thiscall CGameType::SetHost(CGameType *this, bool a2)
 void  CGameType::SetHost(bool a2) {
   
-  CGameType *result; // eax
-
-  result = this;
-  *((_BYTE *)this + 1538) = a2;
-  return result;
+  this->m_bIsHost = a2;
 }
 
 
 // address=[0x1487430]
-// Decompiled from int __thiscall CGameType::SetLocalSlot(CGameType *this, signed __int8 a2)
-void  CGameType::SetLocalSlot(signed char a2) {
+// Decompiled from void __thiscall CGameType::SetLocalSlot(CGameType *this, signed __int8 _iLocalSlotNr)
+void  CGameType::SetLocalSlot(signed char _iLocalSlotNr) {
   
-  int result; // eax
-
-  if ( *((char *)this + 1537) != -1 )
+  if ( this->m_cLocalSlot != -1 )
     CTrace::Print("overwirte m_iLocalPlayerSlot");
-  if ( (unsigned int)a2 > 8
+  if ( (unsigned int)_iLocalSlotNr > 8
     && BBSupportDbgReport(
          2,
          "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\main\\GameType.h",
@@ -220,54 +202,40 @@ void  CGameType::SetLocalSlot(signed char a2) {
   {
     __debugbreak();
   }
-  result = *((char *)this + 1537);
-  if ( result == -1 )
-    *((_BYTE *)this + 1537) = a2;
-  return result;
+  if ( this->m_cLocalSlot == -1 )
+    this->m_cLocalSlot = _iLocalSlotNr;
 }
 
 
 // address=[0x14874d0]
-// Decompiled from CGameType *__thiscall CGameType::SetMCD2TextureSet(CGameType *this, bool a2)
+// Decompiled from void __thiscall CGameType::SetMCD2TextureSet(CGameType *this, bool a2)
 void  CGameType::SetMCD2TextureSet(bool a2) {
   
-  CGameType *result; // eax
-
-  result = this;
-  *((_BYTE *)this + 1549) = a2;
-  return result;
+  this->m_bIsMCD2TextureSet = a2;
 }
 
 
 // address=[0x14874f0]
-// Decompiled from CGameType *__thiscall CGameType::SetMPSavegameID(CGameType *this, int a2)
+// Decompiled from void __thiscall CGameType::SetMPSavegameID(CGameType *this, int a2)
 void  CGameType::SetMPSavegameID(int a2) {
   
-  CGameType *result; // eax
-
-  result = this;
-  *((_DWORD *)this + 385) = a2;
-  return result;
+  this->m_iMPSavegameID = a2;
 }
 
 
 // address=[0x1487510]
-// Decompiled from CGameType *__thiscall CGameType::SetMultiPlayerGameID(CGameType *this, unsigned int a2)
+// Decompiled from void __thiscall CGameType::SetMultiPlayerGameID(CGameType *this, unsigned int a2)
 void  CGameType::SetMultiPlayerGameID(unsigned int a2) {
   
-  CGameType *result; // eax
-
-  result = this;
-  *((_DWORD *)this + 383) = a2;
-  return result;
+  this->m_iMultiPlayerGameID = a2;
 }
 
 
 // address=[0x1487530]
-// Decompiled from int __stdcall CGameType::SetPlayerName(unsigned int a1, int a2)
-void  CGameType::SetPlayerName(int a1, std::wstring & a2) {
+// Decompiled from void __thiscall CGameType::SetPlayerName(CGameType *this, unsigned int _iPlayerIndex, std::wstring *_swpPlayerName)
+void  CGameType::SetPlayerName(int _iPlayerIndex, std::wstring & _swpPlayerName) {
   
-  if ( a1 >= 0xA
+  if ( _iPlayerIndex >= 10
     && BBSupportDbgReport(
          2,
          "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\main\\GameType.h",
@@ -276,7 +244,7 @@ void  CGameType::SetPlayerName(int a1, std::wstring & a2) {
   {
     __debugbreak();
   }
-  return std::wstring::operator=(a2);
+  std::wstring::operator=(&this->m_swpRealPlayerNames[_iPlayerIndex], _swpPlayerName);
 }
 
 
@@ -284,76 +252,86 @@ void  CGameType::SetPlayerName(int a1, std::wstring & a2) {
 // Decompiled from CGameType *__thiscall CGameType::CGameType(CGameType *this)
  CGameType::CGameType(void) {
   
-  std::wstring::wstring(this);
-  std::wstring::wstring((char *)this + 28);
-  *((_DWORD *)this + 14) = 0;
-  *((_DWORD *)this + 15) = 0;
-  *((_DWORD *)this + 16) = 0;
-  *((_DWORD *)this + 17) = 0;
-  *((_DWORD *)this + 18) = 0;
-  *((_DWORD *)this + 28) = 0;
-  *((_BYTE *)this + 560) = 0;
-  *((_BYTE *)this + 609) = 0;
-  *((_DWORD *)this + 153) = 0;
-  *((_DWORD *)this + 154) = 0;
-  *((_DWORD *)this + 155) = 0;
-  *((_DWORD *)this + 165) = 0;
-  std::string::string();
-  *((_BYTE *)this + 696) = 0;
-  *((_BYTE *)this + 697) = 0;
-  *((_DWORD *)this + 175) = 0;
-  std::wstring::wstring((char *)this + 704);
-  *((_BYTE *)this + 732) = 0;
-  *((_DWORD *)this + 184) = 0;
-  *((_DWORD *)this + 186) = 0;
-  *((_BYTE *)this + 748) = 0;
-  *((_DWORD *)this + 188) = 0;
-  std::string::string();
-  std::string::string();
-  std::string::string();
-  *((_WORD *)this + 424) = 0;
-  *((_DWORD *)this + 213) = 0;
-  *((_DWORD *)this + 214) = 0;
-  *((_BYTE *)this + 860) = 0;
-  *((_BYTE *)this + 861) = 0;
-  *((_DWORD *)this + 216) = 0;
-  *((_BYTE *)this + 868) = 0;
-  *((_BYTE *)this + 869) = 0;
-  *((_BYTE *)this + 870) = 0;
-  *((_BYTE *)this + 871) = 0;
-  *((_BYTE *)this + 872) = 0;
-  *((_BYTE *)this + 873) = 0;
-  *((_BYTE *)this + 874) = 0;
-  *((_BYTE *)this + 875) = 0;
-  *((_BYTE *)this + 876) = 0;
-  *((_DWORD *)this + 220) = 0;
-  std::string::string();
-  std::string::string();
-  std::string::string();
-  std::string::string();
-  *((_BYTE *)this + 996) = 0;
-  *((_BYTE *)this + 997) = 0;
-  *((_DWORD *)this + 254) = 0;
-  *((_DWORD *)this + 255) = 0;
-  *((_DWORD *)this + 256) = 0;
-  _vec_ctor((char *)this + 1028, 0x1Cu, 9u, std::wstring::wstring, std::wstring::~wstring);
-  _vec_ctor((char *)this + 1280, 0x1Cu, 9u, std::wstring::wstring, std::wstring::~wstring);
-  *((_DWORD *)this + 383) = 0;
-  *((_BYTE *)this + 1536) = 0;
-  *((_BYTE *)this + 1537) = 0;
-  *((_BYTE *)this + 1538) = 0;
-  *((_BYTE *)this + 1539) = 0;
-  *((_DWORD *)this + 385) = 0;
-  *((_BYTE *)this + 1544) = 0;
-  *((_BYTE *)this + 1545) = 0;
-  *((_BYTE *)this + 1546) = 0;
-  *((_BYTE *)this + 1547) = 0;
-  *((_BYTE *)this + 1548) = 0;
-  *((_BYTE *)this + 1549) = 0;
-  *((_DWORD *)this + 388) = 0;
-  *((_DWORD *)this + 389) = 0;
-  *((_DWORD *)this + 390) = 0;
-  *((_DWORD *)this + 391) = 0;
+  std::wstring::wstring(&this->string0);
+  std::wstring::wstring(&this->m_swMapName);
+  this->dword38 = 0;
+  this->m_bIsEmptyMap = 0;
+  this->dword40 = 0;
+  this->dword44 = 0;
+  this->dword48 = 0;
+  this->m_iActualPlayerCount = 0;
+  this->byte230 = 0;
+  this->byte261 = 0;
+  this->dword264 = 0;
+  this->m_iMapCRC = 0;
+  this->dword26C = 0;
+  this->m_iNetworkTimeDelta = 0;
+  std::string::string(&this->std__string298);
+  this->m_bIsSaveGame = 0;
+  this->byte2B9 = 0;
+  this->dword2BC = 0;
+  std::wstring::wstring(&this->string2c0);
+  this->byte2DC = 0;
+  this->dword2E0 = 0;
+  this->dword2E8 = 0;
+  this->byte2EC = 0;
+  this->dword2F0 = 0;
+  std::string::string(&this->std__string2F4);
+  std::string::string(&this->std__string318);
+  std::string::string(&this->std__string334);
+  this->word350 = 0;
+  this->m_iPlayerCount = 0;
+  this->m_iFileSize = 0;
+  this->byte35C = 0;
+  this->byte35D = 0;
+  this->dword360 = 0;
+  this->byte364 = 0;
+  this->byte365 = 0;
+  this->byte366 = 0;
+  this->byte367 = 0;
+  this->byte368 = 0;
+  this->byte369 = 0;
+  this->byte36A = 0;
+  this->byte36B = 0;
+  this->byte36C = 0;
+  this->dword370 = 0;
+  std::string::string(&this->std__string374);
+  std::string::string(&this->std__string390);
+  std::string::string(&this->std__string3AC);
+  std::string::string(&this->std__string3C8);
+  this->byte3E4 = 0;
+  this->m_bIsCampaignMap = 0;
+  this->dword3F8 = 0;
+  this->dword3FC = 0;
+  this->dword400 = 0;
+  _vec_ctor(
+    (char *)this->m_swpRealPlayerNames,
+    28u,
+    9u,
+    (void (__thiscall *)(void *))std::wstring::wstring,
+    (void (__thiscall *)(void *))std::wstring::~wstring);
+  _vec_ctor(
+    (char *)this->m_swPlayerClanShortcut,
+    28u,
+    9u,
+    (void (__thiscall *)(void *))std::wstring::wstring,
+    (void (__thiscall *)(void *))std::wstring::~wstring);
+  this->m_iMultiPlayerGameID = 0;
+  this->m_bIsMapLoaded = 0;
+  this->m_cLocalSlot = 0;
+  this->m_bIsHost = 0;
+  this->m_bIsWebGame = 0;
+  this->m_iMPSavegameID = 0;
+  this->m_bIsClanGame = 0;
+  this->m_bIsLadderGame = 0;
+  this->m_bIsAddOnMap = 0;
+  this->m_bBlueByteAddOnMap = 0;
+  this->m_bBlueByteMCD2Map = 0;
+  this->m_bIsMCD2TextureSet = 0;
+  this->m_iMapObjectXMLVersion = 0;
+  this->m_iMapBuildingXMLVersion = 0;
+  this->dword618 = 0;
+  this->dword61C = 0;
   CGameType::Init(this);
   return this;
 }
@@ -970,10 +948,10 @@ bool  CGameType::LoadMapData(std::wstring a2, bool a3, unsigned int a4, bool a5,
 
 
 // address=[0x1492f70]
-// Decompiled from bool __thiscall CGameType::IsMapAvailable(char *this, int a2, int a3)
+// Decompiled from bool __thiscall CGameType::IsMapAvailable(CGameType *this, std::wstring *a2, int a3)
 bool  CGameType::IsMapAvailable(std::wstring & a2, int a3) {
   
-  OLECHAR *v4; // eax
+  wchar_t *v4; // eax
   int v5; // [esp+0h] [ebp-2Ch]
   int v6; // [esp+4h] [ebp-28h] BYREF
   int v7; // [esp+8h] [ebp-24h] BYREF
@@ -982,18 +960,21 @@ bool  CGameType::IsMapAvailable(std::wstring & a2, int a3) {
   int v10; // [esp+18h] [ebp-14h] BYREF
   int v11; // [esp+1Ch] [ebp-10h] BYREF
   int v12; // [esp+20h] [ebp-Ch] BYREF
-  int v13; // [esp+24h] [ebp-8h] BYREF
-  char *v14; // [esp+28h] [ebp-4h]
+  int iError; // [esp+24h] [ebp-8h] BYREF
 
-  v14 = this;
-  if ( (*(unsigned __int8 (__thiscall **)(void *, int, _DWORD))(*(_DWORD *)g_pRandomMaps + 32))(g_pRandomMaps, a2, 0) )
-    return 1;
-  std::wstring::operator=(a2);
-  v4 = (OLECHAR *)std::wstring::c_str((_Cnd_internal_imp_t *)(v14 + 28));
-  MA_OpenMapFile(v4, (int)&v6, (int)&v13, 1);
-  if ( v13 )
+  if ( (*(unsigned __int8 (__thiscall **)(void *, std::wstring *, _DWORD))(*(_DWORD *)g_pRandomMaps + 32))(
+         g_pRandomMaps,
+         a2,
+         0) )
   {
-    CTrace::Print("CGameType.cpp: Unable to open Map via Mapreader. Reported error %d", v13);
+    return 1;
+  }
+  std::wstring::operator=(&this->m_swMapName, a2);
+  v4 = std::wstring::c_str(&this->m_swMapName);
+  MA_OpenMapFile(v4, (int)&v6, (int)&iError, 1);
+  if ( iError )
+  {
+    CTrace::Print("CGameType.cpp: Unable to open Map via Mapreader. Reported error %d", iError);
     return 0;
   }
   else
@@ -1014,12 +995,12 @@ bool  CGameType::IsMapAvailable(std::wstring & a2, int a3) {
 
 
 // address=[0x1493090]
-// Decompiled from void __thiscall CGameType::SetMapCRC(_DWORD *this, int a2)
+// Decompiled from void __thiscall CGameType::SetMapCRC(CGameType *this, std::wstring *a2)
 void  CGameType::SetMapCRC(std::wstring & a2) {
   
-  OLECHAR *v2; // eax
+  wchar_t *v2; // eax
   int v3; // eax
-  int v4; // [esp-Ch] [ebp-2Ch]
+  _DWORD *p_dword264; // [esp-Ch] [ebp-2Ch]
   int v5; // [esp+0h] [ebp-20h] BYREF
   int v6; // [esp+4h] [ebp-1Ch] BYREF
   int v7; // [esp+8h] [ebp-18h] BYREF
@@ -1027,18 +1008,16 @@ void  CGameType::SetMapCRC(std::wstring & a2) {
   int v9; // [esp+10h] [ebp-10h] BYREF
   int v10; // [esp+14h] [ebp-Ch] BYREF
   int v11; // [esp+18h] [ebp-8h] BYREF
-  _DWORD *v12; // [esp+1Ch] [ebp-4h]
 
-  v12 = this;
-  this[153] = 0;
-  v12[154] = 0;
-  std::wstring::operator=(a2);
-  v4 = (int)(v12 + 153);
-  v2 = (OLECHAR *)std::wstring::c_str((_Cnd_internal_imp_t *)(v12 + 7));
-  MA_OpenMapFile(v2, v4, (int)&v7, 1);
+  this->dword264 = 0;
+  this->m_iMapCRC = 0;
+  std::wstring::operator=(&this->m_swMapName, a2);
+  p_dword264 = &this->dword264;
+  v2 = std::wstring::c_str(&this->m_swMapName);
+  MA_OpenMapFile(v2, (int)p_dword264, (int)&v7, 1);
   if ( v7 )
   {
-    v12[153] = 0;
+    this->dword264 = 0;
   }
   else
   {
@@ -1052,12 +1031,12 @@ void  CGameType::SetMapCRC(std::wstring & a2) {
     MA_GetMapData((int)&v9, (int)&v10, (int)&v11, (int)&v5, (int)&v6);
     v3 = (**(int (__thiscall ***)(void *, _DWORD, int, int, int, int))g_pMapCheck)(
            g_pMapCheck,
-           v12[153],
+           this->dword264,
            v8,
            v9,
            v10,
            v11);
-    v12[154] = v3;
+    this->m_iMapCRC = v3;
     MA_CloseMapFile();
   }
 }
@@ -1071,9 +1050,9 @@ int  CGameType::HumanPlayers(void) {
   int i; // [esp+8h] [ebp-4h]
 
   v2 = 0;
-  for ( i = 0; i < *((_DWORD *)this + 213); ++i )
+  for ( i = 0; i < this->m_iPlayerCount; ++i )
   {
-    if ( *((_DWORD *)this + i + 29) == 1 )
+    if ( *(_DWORD *)&this->m_sPlayerType[4 * i] == 1 )
       ++v2;
   }
   return v2;
@@ -1081,120 +1060,117 @@ int  CGameType::HumanPlayers(void) {
 
 
 // address=[0x14931e0]
-// Decompiled from CGameType *__thiscall CGameType::Init(CGameType *this)
+// Decompiled from void __thiscall CGameType::Init(CGameType *this)
 void  CGameType::Init(void) {
   
-  CGameType *result; // eax
   int i; // [esp+0h] [ebp-8h]
   int j; // [esp+0h] [ebp-8h]
 
-  *((_BYTE *)this + 1536) = 0;
-  std::wstring::operator=(this, (wchar_t *)&word_36FE958);
-  std::wstring::operator=((char *)this + 28, (wchar_t *)&word_36FE95C);
-  *((_DWORD *)this + 14) = 0;
-  *((_BYTE *)this + 732) = 1;
-  *((_DWORD *)this + 17) = 0;
-  *((_DWORD *)this + 18) = 0;
-  *((_DWORD *)this + 28) = 0;
-  *((_BYTE *)this + 560) = 0;
-  *((_DWORD *)this + 254) = 0;
-  *((_DWORD *)this + 255) = 0;
-  *((_DWORD *)this + 256) = 0;
-  *((_DWORD *)this + 213) = 0;
-  *((_DWORD *)this + 216) = 0;
-  *((_BYTE *)this + 868) = 0;
-  *((_BYTE *)this + 869) = 0;
-  *((_BYTE *)this + 873) = 0;
-  *((_BYTE *)this + 874) = 0;
-  *((_BYTE *)this + 875) = 0;
-  *((_BYTE *)this + 876) = 0;
-  *((_BYTE *)this + 996) = 0;
-  *((_BYTE *)this + 997) = 0;
-  *((_DWORD *)this + 220) = 0;
-  *((_BYTE *)this + 860) = 0;
-  *((_BYTE *)this + 861) = 0;
-  *((_DWORD *)this + 185) = 0;
-  *((_BYTE *)this + 609) = 1;
-  *((_DWORD *)this + 155) = 0;
-  *((_DWORD *)this + 165) = 0;
-  *((_DWORD *)this + 383) = -1;
-  std::string::operator=((char *)this + 664, (char *)&byte_36FE4FA);
-  *((_DWORD *)this + 173) = 1;
-  *((_BYTE *)this + 696) = 0;
-  std::wstring::operator=((char *)this + 704, (wchar_t *)&word_36FE960);
-  *((_DWORD *)this + 184) = 0;
-  *((_BYTE *)this + 748) = 0;
-  *((_DWORD *)this + 188) = -1;
-  *((_BYTE *)this + 870) = 0;
-  *((_BYTE *)this + 871) = 0;
-  *((_BYTE *)this + 872) = 0;
-  *((_DWORD *)this + 14) = 0;
+  this->m_bIsMapLoaded = 0;
+  std::wstring::operator=(this, (wchar_t *)&emptyString);
+  std::wstring::operator=(&this->m_swMapName, (wchar_t *)&emptyString2);
+  this->dword38 = 0;
+  this->byte2DC = 1;
+  this->dword44 = 0;
+  this->dword48 = 0;
+  this->m_iActualPlayerCount = 0;
+  this->byte230 = 0;
+  this->dword3F8 = 0;
+  this->dword3FC = 0;
+  this->dword400 = 0;
+  this->m_iPlayerCount = 0;
+  this->dword360 = 0;
+  this->byte364 = 0;
+  this->byte365 = 0;
+  this->byte369 = 0;
+  this->byte36A = 0;
+  this->byte36B = 0;
+  this->byte36C = 0;
+  this->byte3E4 = 0;
+  this->m_bIsCampaignMap = 0;
+  this->dword370 = 0;
+  this->byte35C = 0;
+  this->byte35D = 0;
+  this->dword2E4 = 0;
+  this->byte261 = 1;
+  this->dword26C = 0;
+  this->m_iNetworkTimeDelta = 0;
+  this->m_iMultiPlayerGameID = -1;
+  std::string::operator=(&this->std__string298, (char *)&byte_36FE4FA);
+  this->m_iGameMatchType = 1;
+  this->m_bIsSaveGame = 0;
+  std::wstring::operator=(&this->string2c0, (wchar_t *)&word_36FE960);
+  this->dword2E0 = 0;
+  this->byte2EC = 0;
+  this->dword2F0 = -1;
+  this->byte366 = 0;
+  this->byte367 = 0;
+  this->byte368 = 0;
+  this->dword38 = 0;
   for ( i = 0; i < 9; ++i )
-    *((_DWORD *)this + i + 19) = 0;
+    this->ptr4c[i] = 0;
   for ( j = 0; j < 9; ++j )
   {
-    *((_DWORD *)this + j + 29) = 0;
-    std::wstring::operator=((char *)this + 28 * j + 1028, (wchar_t *)&word_36FE964);
-    *((_DWORD *)this + j + 38) = 0;
-    *((_DWORD *)this + j + 47) = 0;
-    *((_DWORD *)this + j + 56) = -1;
-    *((_DWORD *)this + j + 65) = 0;
-    *((_DWORD *)this + j + 74) = 0;
-    *((_DWORD *)this + j + 101) = 5;
-    *((_DWORD *)this + j + 83) = 0;
-    *((_DWORD *)this + j + 92) = j;
-    *((_DWORD *)this + j + 156) = 0;
-    *((_BYTE *)this + j + 440) = 1;
-    *((_DWORD *)this + j + 113) = 0;
-    *((_DWORD *)this + j + 122) = 0;
-    *((_DWORD *)this + j + 131) = -1;
-    std::wstring::operator=((char *)this + 28 * j + 1280, (wchar_t *)&word_36FE968);
-    *((_DWORD *)this + j + 141) = -1;
+    this->m_sPlayerType[j] = 0;
+    std::wstring::operator=(&this->m_swpRealPlayerNames[j], (wchar_t *)&emptyString3);
+    this->m_sPlayerTeam[j] = 0;
+    this->m_sPlayerIP[j] = 0;
+    this->m_sPlayerPeerId[j] = -1;
+    this->m_sPlayerStartX[j] = 0;
+    this->m_sPlayerStartY[j] = 0;
+    this->m_sPlayerRaces[j] = 5;
+    this->m_sPlayerColor[j] = 0;
+    this->m_sPlayerSlot8[j] = j;
+    this->m_sPlayerSlot14[j] = 0;
+    this->m_sPlayerSlot10[j] = 1;
+    this->m_sPlayerSlot11[j] = 0;
+    this->m_sPlayerSlot12[j] = 0;
+    this->m_sPlayerSlot13[j] = -1;
+    std::wstring::operator=(&this->m_swPlayerClanShortcut[j], (wchar_t *)&emptyString4);
+    this->m_sPlayerSlot15[j] = -1;
   }
-  *((_DWORD *)this + 165) = CStaticConfigVarInt::operator int(&g_iNetworkTimeDelta);
-  *((_DWORD *)this + 175) = 0;
-  *((_WORD *)this + 424) = 0;
-  memset((char *)this + 784, 0, 7u);
-  *((_BYTE *)this + 1537) = -1;
-  *((_BYTE *)this + 1538) = 0;
-  *((_BYTE *)this + 1539) = 0;
-  *((_DWORD *)this + 385) = 0;
-  *((_BYTE *)this + 1544) = 0;
-  *((_BYTE *)this + 1545) = 0;
-  *((_BYTE *)this + 1546) = 0;
-  *((_BYTE *)this + 1547) = 0;
-  *((_BYTE *)this + 1548) = 0;
-  *((_BYTE *)this + 1549) = 0;
-  *((_DWORD *)this + 388) = 0;
-  *((_DWORD *)this + 389) = 0;
-  result = this;
-  *((_DWORD *)this + 390) = 0;
-  *((_DWORD *)this + 391) = 0;
-  return result;
+  this->m_iNetworkTimeDelta = CStaticConfigVarInt::operator int(&g_iNetworkTimeDelta);
+  this->dword2BC = 0;
+  this->word350 = 0;
+  memset(this->gap310, 0, 7u);
+  this->m_cLocalSlot = -1;
+  this->m_bIsHost = 0;
+  this->m_bIsWebGame = 0;
+  this->m_iMPSavegameID = 0;
+  this->m_bIsClanGame = 0;
+  this->m_bIsLadderGame = 0;
+  this->m_bIsAddOnMap = 0;
+  this->m_bBlueByteAddOnMap = 0;
+  this->m_bBlueByteMCD2Map = 0;
+  this->m_bIsMCD2TextureSet = 0;
+  this->m_iMapObjectXMLVersion = 0;
+  this->m_iMapBuildingXMLVersion = 0;
+  this->dword618 = 0;
+  this->dword61C = 0;
 }
 
 
 // address=[0x1493620]
-// Decompiled from int __thiscall CGameType::ConvertMapNameToMPGameName(char *this, int a2)
+// Decompiled from std::wstring *__thiscall CGameType::ConvertMapNameToMPGameName(CGameType *this, std::wstring *a2)
 std::wstring  CGameType::ConvertMapNameToMPGameName(void a2) {
   
-  CGameType::ConvertMapNameToMPGameName(a2, this + 28);
+  CGameType::ConvertMapNameToMPGameName(a2, &this->m_swMapName);
   return a2;
 }
 
 
 // address=[0x1493660]
-// Decompiled from void *__cdecl CGameType::ConvertMapNameToMPGameName(void *a1, _Cnd_internal_imp_t *a2)
+// Decompiled from void *__cdecl CGameType::ConvertMapNameToMPGameName(std::wstring *a1, std::wstring *a2)
 std::wstring __cdecl CGameType::ConvertMapNameToMPGameName(std::wstring & a1) {
   
-  const wchar_t *v2; // eax
+  wchar_t *v2; // eax
   wchar_t Dir[256]; // [esp+4h] [ebp-814h] BYREF
   wchar_t Ext[256]; // [esp+204h] [ebp-614h] BYREF
   wchar_t Destination[260]; // [esp+404h] [ebp-414h] BYREF
   wchar_t Filename[256]; // [esp+60Ch] [ebp-20Ch] BYREF
   wchar_t Drive[4]; // [esp+80Ch] [ebp-Ch] BYREF
 
-  v2 = (const wchar_t *)std::wstring::c_str(a2);
+  v2 = std::wstring::c_str(a2);
   wcscpy(Destination, v2);
   j___wsplitpath(Destination, Drive, Dir, Filename, Ext);
   std::wstring::wstring(a1, Filename);
@@ -1203,50 +1179,46 @@ std::wstring __cdecl CGameType::ConvertMapNameToMPGameName(std::wstring & a1) {
 
 
 // address=[0x14936f0]
-// Decompiled from void *__thiscall CGameType::GetPlayerName(void *this, void *a2, unsigned int a3)
+// Decompiled from std::wstring *__thiscall CGameType::GetPlayerName(CGameType *this, std::wstring *a2, unsigned int _iPlayerIndex)
 std::wstring  CGameType::GetPlayerName(int a2) {
   
-  _BYTE v5[28]; // [esp+Ch] [ebp-2Ch] BYREF
+  std::wstring v5; // [esp+Ch] [ebp-2Ch] BYREF
   int v6; // [esp+34h] [ebp-4h]
 
-  if ( a3 >= 0xA
+  if ( _iPlayerIndex >= 10
     && BBSupportDbgReport(2, "main\\GameType.cpp", 1114, "(_iPlayerIndex>=0) && (_iPlayerIndex<=PLAYER_MAX)") == 1 )
   {
     __debugbreak();
   }
-  if ( (unsigned __int8)CGameType::IsClanGame(this) )
+  if ( CGameType::IsClanGame(this) )
   {
-    std::wstring::wstring((int)this + 28 * a3 + 1280);
+    std::wstring::wstring(&v5, &this->m_swPlayerClanShortcut[_iPlayerIndex]);
     v6 = 0;
-    std::wstring::operator+=(v5, (wchar_t *)asc_36FF06C);
-    std::wstring::operator+=((int)this + 28 * a3 + 1028);
-    std::wstring::wstring(a2, v5);
+    std::wstring::operator+=(&v5, (wchar_t *)singleSpaceString);
+    std::wstring::operator+=(&v5, &this->m_swpRealPlayerNames[_iPlayerIndex]);
+    std::wstring::wstring(a2, &v5);
     v6 = -1;
-    std::wstring::~wstring(v5);
+    std::wstring::~wstring(&v5);
   }
   else
   {
-    std::wstring::wstring((int)this + 28 * a3 + 1028);
+    std::wstring::wstring(a2, &this->m_swpRealPlayerNames[_iPlayerIndex]);
   }
   return a2;
 }
 
 
 // address=[0x1493810]
-// Decompiled from int __thiscall CGameType::SetPlayerClanShortcut(void *this, unsigned int a2, int a3)
-void  CGameType::SetPlayerClanShortcut(int a2, std::wstring & a3) {
+// Decompiled from void __thiscall CGameType::SetPlayerClanShortcut(  CGameType *this,  unsigned int _iPlayerIndex,  std::wstring *_swpPlayerClanShortcut)
+void  CGameType::SetPlayerClanShortcut(int _iPlayerIndex, std::wstring & _swpPlayerClanShortcut) {
   
-  int result; // eax
-
-  if ( a2 >= 0xA
+  if ( _iPlayerIndex >= 0xA
     && BBSupportDbgReport(2, "main\\GameType.cpp", 1106, "(_iPlayerIndex>=0) && (_iPlayerIndex<=PLAYER_MAX)") == 1 )
   {
     __debugbreak();
   }
-  result = CGameType::IsClanGame(this);
-  if ( (_BYTE)result )
-    return std::wstring::operator=(a3);
-  return result;
+  if ( CGameType::IsClanGame(this) )
+    std::wstring::operator=(&this->m_swPlayerClanShortcut[_iPlayerIndex], _swpPlayerClanShortcut);
 }
 
 
@@ -1258,9 +1230,9 @@ int const  CGameType::GetNumberHumanPlayers(void) {
   int i; // [esp+8h] [ebp-4h]
 
   v2 = 0;
-  for ( i = 0; i < *((_DWORD *)this + 213); ++i )
+  for ( i = 0; i < this->m_iPlayerCount; ++i )
   {
-    if ( *((_DWORD *)this + i + 29) == 1 )
+    if ( *(_DWORD *)&this->m_sPlayerType[4 * i] == 1 )
       ++v2;
   }
   return v2;
@@ -1271,7 +1243,7 @@ int const  CGameType::GetNumberHumanPlayers(void) {
 // Decompiled from char __thiscall CGameType::IsMapLoaded(CGameType *this)
 bool const  CGameType::IsMapLoaded(void) {
   
-  return *((_BYTE *)this + 1536);
+  return this->m_bIsMapLoaded;
 }
 
 
@@ -1279,7 +1251,7 @@ bool const  CGameType::IsMapLoaded(void) {
 // Decompiled from char __thiscall CGameType::IsWebGame(CGameType *this)
 bool const  CGameType::IsWebGame(void) {
   
-  return *((_BYTE *)this + 1539);
+  return this->m_bIsWebGame;
 }
 
 
@@ -1287,18 +1259,18 @@ bool const  CGameType::IsWebGame(void) {
 // Decompiled from int __thiscall CGameType::GetMPSavegameID(CGameType *this)
 int const  CGameType::GetMPSavegameID(void) {
   
-  return *((_DWORD *)this + 385);
+  return this->m_iMPSavegameID;
 }
 
 
 // address=[0x15c4ae0]
-// Decompiled from void *__thiscall CGameType::GetPlayerClanShortcut(void *this, void *a2, unsigned int a3)
+// Decompiled from std::wstring *__thiscall CGameType::GetPlayerClanShortcut(CGameType *this, std::wstring *a2, unsigned int a3)
 std::wstring  CGameType::GetPlayerClanShortcut(int a2) {
   
-  _BYTE v5[28]; // [esp+Ch] [ebp-2Ch] BYREF
+  std::wstring v5; // [esp+Ch] [ebp-2Ch] BYREF
   int v6; // [esp+34h] [ebp-4h]
 
-  std::wstring::wstring(v5);
+  std::wstring::wstring(&v5);
   v6 = 0;
   if ( a3 >= 0xA
     && BBSupportDbgReport(
@@ -1309,37 +1281,29 @@ std::wstring  CGameType::GetPlayerClanShortcut(int a2) {
   {
     __debugbreak();
   }
-  if ( (unsigned __int8)CGameType::IsClanGame(this) )
-    std::wstring::wstring((int)this + 28 * a3 + 1280);
+  if ( CGameType::IsClanGame(this) )
+    std::wstring::wstring(a2, &this->m_swPlayerClanShortcut[a3]);
   else
-    std::wstring::wstring(a2, v5);
+    std::wstring::wstring(a2, &v5);
   v6 = -1;
-  std::wstring::~wstring(v5);
+  std::wstring::~wstring(&v5);
   return a2;
 }
 
 
 // address=[0x15c4dd0]
-// Decompiled from CGameType *__thiscall CGameType::SetLadderGame(CGameType *this, bool a2)
+// Decompiled from void __thiscall CGameType::SetLadderGame(CGameType *this, bool a2)
 void  CGameType::SetLadderGame(bool a2) {
   
-  CGameType *result; // eax
-
-  result = this;
-  *((_BYTE *)this + 1545) = a2;
-  return result;
+  this->m_bIsLadderGame = a2;
 }
 
 
 // address=[0x15c4e90]
-// Decompiled from CGameType *__thiscall CGameType::SetWebGame(CGameType *this, bool a2)
+// Decompiled from void __thiscall CGameType::SetWebGame(CGameType *this, bool a2)
 void  CGameType::SetWebGame(bool a2) {
   
-  CGameType *result; // eax
-
-  result = this;
-  *((_BYTE *)this + 1539) = a2;
-  return result;
+  this->m_bIsWebGame = a2;
 }
 
 
@@ -1347,35 +1311,39 @@ void  CGameType::SetWebGame(bool a2) {
 // Decompiled from int __thiscall CGameType::PatchMaps(CGameType *this, bool a2)
 void  CGameType::PatchMaps(bool a2) {
   
-  _DWORD *v2; // eax
+  wchar_t *v2; // eax
   int result; // eax
-  int v4; // [esp-8h] [ebp-10h]
-  int v5; // [esp-4h] [ebp-Ch]
+  int m_iMapCRC; // [esp-8h] [ebp-10h]
+  int dword358; // [esp-4h] [ebp-Ch]
 
   if ( !g_pMapCheck && BBSupportDbgReport(2, "main\\GameType.cpp", 1141, "g_pMapCheck != 0") == 1 )
     __debugbreak();
-  v5 = *((_DWORD *)this + 214);
-  v4 = *((_DWORD *)this + 154);
-  v2 = std::wstring::c_str((CGameType *)((char *)this + 28));
-  result = (*(int (__thiscall **)(void *, _DWORD *, int, int))(*(_DWORD *)g_pMapCheck + 4))(g_pMapCheck, v2, v4, v5);
+  dword358 = this->m_iFileSize;
+  m_iMapCRC = this->m_iMapCRC;
+  v2 = std::wstring::c_str(&this->m_swMapName);
+  result = (*(int (__thiscall **)(void *, wchar_t *, int, int))(*(_DWORD *)g_pMapCheck + 4))(
+             g_pMapCheck,
+             v2,
+             m_iMapCRC,
+             dword358);
   if ( result == 1 )
   {
-    *((_BYTE *)this + 860) = 1;
-    *((_BYTE *)this + 998) = 1;
-    *((_BYTE *)this + 999) = 1;
-    *((_BYTE *)this + 1007) = 1;
+    this->byte35C = 1;
+    this->gap3E6[0] = 1;
+    this->gap3E6[1] = 1;
+    this->gap3E6[9] = 1;
     result = 1;
-    *((_BYTE *)this + 1008) = 1;
+    this->gap3E6[10] = 1;
     if ( !a2 )
     {
-      *((_DWORD *)this + 29) = 1;
+      *(_DWORD *)this->m_sPlayerType = 1;
       result = 4;
-      *((_DWORD *)this + 30) = 1;
+      *(_DWORD *)&this->m_sPlayerType[4] = 1;
     }
   }
   else if ( result == 2 )
   {
-    return (int)std::wstring::operator=((char *)this + 1056, (wchar_t *)L"Aeneas");
+    return (int)std::wstring::operator=(&this->m_swpRealPlayerNames[1], (wchar_t *)L"Aeneas");
   }
   return result;
 }

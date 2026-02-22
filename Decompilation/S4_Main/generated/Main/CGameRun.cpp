@@ -871,68 +871,56 @@ void __cdecl CGameRun::FillGameType(std::wstring & a1, class CGameType & a2, cla
 // Decompiled from char __thiscall CGameRun::SetupPlayersAndAlliances(void *this)
 void __cdecl CGameRun::SetupPlayersAndAlliances(void) {
   
-  char v2; // [esp-20h] [ebp-5Ch] BYREF
-  int v3; // [esp-1Ch] [ebp-58h]
-  int v4; // [esp-18h] [ebp-54h]
-  int v5; // [esp-14h] [ebp-50h]
-  int v6; // [esp-10h] [ebp-4Ch]
-  int v7; // [esp-Ch] [ebp-48h]
-  int v8; // [esp-8h] [ebp-44h]
-  int v9; // [esp-4h] [ebp-40h]
-  void *PlayerName; // [esp+0h] [ebp-3Ch]
-  char *v11; // [esp+4h] [ebp-38h]
-  int v12; // [esp+8h] [ebp-34h]
-  int v13; // [esp+Ch] [ebp-30h]
-  signed int i; // [esp+10h] [ebp-2Ch]
-  _DWORD v15[9]; // [esp+14h] [ebp-28h] BYREF
+  std::wstring swpPlayerName; // [esp-20h] [ebp-5Ch] BYREF
+  DWORD v3; // [esp-4h] [ebp-40h]
+  std::wstring *PlayerName; // [esp+0h] [ebp-3Ch]
+  std::wstring *p_swpPlayerName; // [esp+4h] [ebp-38h]
+  int v6; // [esp+8h] [ebp-34h]
+  int v7; // [esp+Ch] [ebp-30h]
+  int i; // [esp+10h] [ebp-2Ch]
+  _DWORD v9[9]; // [esp+14h] [ebp-28h] BYREF
 
   CPlayerManager::Init(this);
-  memset(v15, 0, sizeof(v15));
-  v13 = 0;
-  for ( i = 0; i < *(_DWORD *)(g_pGameType + 852); ++i )
+  memset(v9, 0, sizeof(v9));
+  v7 = 0;
+  for ( i = 0; i < g_pGameType->m_iPlayerCount; ++i )
   {
-    if ( !*(_BYTE *)(i + g_pGameType + 440) )
+    if ( !g_pGameType->m_sPlayerSlot10[i] )
     {
-      v9 = *(_DWORD *)(g_pGameType + 4 * i + 116);
-      v11 = &v2;
-      PlayerName = CGameType::GetPlayerName((void *)g_pGameType, &v2, i);
+      v3 = g_pGameType->m_sPlayerType[i];
+      p_swpPlayerName = &swpPlayerName;
+      PlayerName = CGameType::GetPlayerName(g_pGameType, &swpPlayerName, i);
       CPlayerManager::AddPlayer(
-        *(_DWORD *)(g_pGameType + 4 * i + 404),
-        *(_DWORD *)(g_pGameType + 4 * i + 260),
-        *(_DWORD *)(g_pGameType + 4 * i + 296),
-        *(_DWORD *)(g_pGameType + 4 * i + 332),
-        *(_DWORD *)(g_pGameType + 4 * i + 188),
-        *(_DWORD *)(g_pGameType + 4 * i + 224),
-        v2,
-        v3,
-        v4,
-        v5,
-        v6,
-        v7,
-        v8,
-        v9);
-      v12 = *(_DWORD *)(g_pGameType + 4 * i + 152);
-      if ( v12 > 8 )
-        v12 = 0;
-      if ( v12 > v13 )
-        v13 = v12;
+        g_pGameType->m_sPlayerRaces[i],
+        g_pGameType->m_sPlayerStartX[i],
+        g_pGameType->m_sPlayerStartY[i],
+        g_pGameType->m_sPlayerColor[i],
+        g_pGameType->m_sPlayerIP[i],
+        g_pGameType->m_sPlayerPeerId[i],
+        swpPlayerName,
+        v3);
+      v6 = g_pGameType->m_sPlayerTeam[i];
+      if ( v6 > 8 )
+        v6 = 0;
+      if ( v6 > v7 )
+        v7 = v6;
     }
   }
   CPlayerManager::Lock();
-  CGameRun::GetUsedTeam(v13, v15);
-  for ( i = 0; i <= v13; ++i )
+  CGameRun::GetUsedTeam(v7, v9);
+  for ( i = 0; i <= v7; ++i )
   {
-    if ( !v15[i] )
+    if ( !v9[i] )
     {
       CGameRun::RemoveEmptyTeamSlot(i);
-      CGameRun::GetUsedTeam(--v13, v15);
+      CGameRun::GetUsedTeam(--v7, v9);
     }
   }
   CAlliances::Init();
-  for ( i = 0; i < *(_DWORD *)(g_pGameType + 852); ++i )
+  for ( i = 0; i < g_pGameType->m_iPlayerCount; ++i )
   {
-    if ( !*(_BYTE *)(i + g_pGameType + 440) )
-      CAlliances::AddPlayer(i + 1, *(_DWORD *)(g_pGameType + 4 * i + 152) + 1);
+    if ( !g_pGameType->m_sPlayerSlot10[i] )
+      CAlliances::AddPlayer(i + 1, g_pGameType->m_sPlayerTeam[i] + 1);
   }
   return CAlliances::Lock();
 }

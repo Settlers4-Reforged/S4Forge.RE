@@ -39,7 +39,7 @@ public:
     unsigned int const  GetMultiPlayerGameID(void);
 
     // address=[0x1486ef0]
-    std::wstring &  GetRealPlayerName(int a2);
+    std::wstring &  GetRealPlayerName(int _iPlayerIndex);
 
     // address=[0x1486fe0]
     bool  IsBlueByteAddOnMap(void);
@@ -69,7 +69,7 @@ public:
     void  SetHost(bool a2);
 
     // address=[0x1487430]
-    void  SetLocalSlot(signed char a2);
+    void  SetLocalSlot(signed char _iLocalSlotNr);
 
     // address=[0x14874d0]
     void  SetMCD2TextureSet(bool a2);
@@ -81,7 +81,7 @@ public:
     void  SetMultiPlayerGameID(unsigned int a2);
 
     // address=[0x1487530]
-    void  SetPlayerName(int a1, std::wstring & a2);
+    void  SetPlayerName(int _iPlayerIndex, std::wstring & _swpPlayerName);
 
     // address=[0x1490f90]
      CGameType(void);
@@ -114,7 +114,7 @@ public:
     std::wstring  GetPlayerName(int a2);
 
     // address=[0x1493810]
-    void  SetPlayerClanShortcut(int a2, std::wstring & a3);
+    void  SetPlayerClanShortcut(int _iPlayerIndex, std::wstring & _swpPlayerClanShortcut);
 
     // address=[0x1493870]
     int const  GetNumberHumanPlayers(void);
@@ -140,6 +140,101 @@ public:
 private:
     // address=[0x14938c0]
     void  PatchMaps(bool a2);
+
+    // Type information members
+public:
+    std::wstring string0;
+    std::wstring m_swMapName;
+    _DWORD dword38;
+    _DWORD m_bIsEmptyMap;
+    _DWORD dword40;
+    _DWORD dword44;
+    _DWORD dword48;
+    int *[9] ptr4c;
+    _DWORD m_iActualPlayerCount;
+    DWORD[9] m_sPlayerType;
+    int[9] m_sPlayerTeam;
+    DWORD[9] m_sPlayerIP;
+    DWORD[9] m_sPlayerPeerId;
+    int[9] m_sPlayerStartX;
+    int[9] m_sPlayerStartY;
+    DWORD[9] m_sPlayerColor;
+    DWORD[9] m_sPlayerSlot8;
+    int[9] m_sPlayerRaces;
+    BYTE[9] m_sPlayerSlot10;
+    DWORD[9] m_sPlayerSlot11;
+    DWORD[9] m_sPlayerSlot12;
+    DWORD[9] m_sPlayerSlot13;
+    _BYTE byte230;
+    _BYTE[3] gap231;
+    DWORD[9] m_sPlayerSlot15;
+    _BYTE[9] m_sPlayerSlot16;
+    _BYTE byte261;
+    _DWORD dword264;
+    _DWORD m_iMapCRC;
+    _DWORD dword26C;
+    DWORD[9] m_sPlayerSlot14;
+    _DWORD m_iNetworkTimeDelta;
+    std::string std__string298;
+    _DWORD m_iGameMatchType;
+    _BYTE m_bIsSaveGame;
+    _BYTE byte2B9;
+    _DWORD dword2BC;
+    std::wstring string2c0;
+    _BYTE byte2DC;
+    _DWORD dword2E0;
+    _DWORD dword2E4;
+    _DWORD dword2E8;
+    _BYTE byte2EC;
+    _DWORD dword2F0;
+    std::string std__string2F4;
+    _BYTE[8] gap310;
+    std::string std__string318;
+    std::string std__string334;
+    _WORD word350;
+    _DWORD m_iPlayerCount;
+    _DWORD m_iFileSize;
+    _BYTE byte35C;
+    _BYTE byte35D;
+    _DWORD dword360;
+    _BYTE byte364;
+    _BYTE byte365;
+    _BYTE byte366;
+    _BYTE byte367;
+    _BYTE byte368;
+    _BYTE byte369;
+    _BYTE byte36A;
+    _BYTE byte36B;
+    _BYTE byte36C;
+    _DWORD dword370;
+    std::string std__string374;
+    std::string std__string390;
+    std::string std__string3AC;
+    std::string std__string3C8;
+    _BYTE byte3E4;
+    _BYTE m_bIsCampaignMap;
+    _BYTE[18] gap3E6;
+    _DWORD dword3F8;
+    _DWORD dword3FC;
+    _DWORD dword400;
+    std::wstring[9] m_swpRealPlayerNames;
+    std::wstring[9] m_swPlayerClanShortcut;
+    _DWORD m_iMultiPlayerGameID;
+    _BYTE m_bIsMapLoaded;
+    char m_cLocalSlot;
+    _BYTE m_bIsHost;
+    _BYTE m_bIsWebGame;
+    _DWORD m_iMPSavegameID;
+    _BYTE m_bIsClanGame;
+    _BYTE m_bIsLadderGame;
+    _BYTE m_bIsAddOnMap;
+    _BYTE m_bBlueByteAddOnMap;
+    _BYTE m_bBlueByteMCD2Map;
+    _BYTE m_bIsMCD2TextureSet;
+    _DWORD m_iMapObjectXMLVersion;
+    _DWORD m_iMapBuildingXMLVersion;
+    _DWORD dword618;
+    _DWORD dword61C;
 
 };
 

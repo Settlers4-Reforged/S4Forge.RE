@@ -6,25 +6,25 @@
 // Decompiled from CGameData *__thiscall CGameData::CGameData(CGameData *this)
  CGameData::CGameData(void) {
   
-  *(_DWORD *)this = 0;
-  *((_DWORD *)this + 1) = 0;
-  *((_DWORD *)this + 2) = 0;
-  *((_DWORD *)this + 3) = 0;
-  *((_DWORD *)this + 4) = 0;
-  *((_DWORD *)this + 5) = 0;
-  *((_DWORD *)this + 6) = 0;
-  *((_DWORD *)this + 7) = 1572864;
-  *((_DWORD *)this + 8) = -1;
-  *((_DWORD *)this + 9) = -1;
-  *((_BYTE *)this + 40) = 0;
-  *((_BYTE *)this + 41) = 0;
-  CRandom16Ex::CRandom16Ex((CGameData *)((char *)this + 44), 0);
-  *((_BYTE *)this + 52) = 0;
-  *((_DWORD *)this + 14) = 0;
-  std::string::string();
-  std::string::string();
-  *((_BYTE *)this + 126) = 0;
-  CRandom16Ex::Init((CGameData *)((char *)this + 44), 0x46F6Fu, 0);
+  this->dword0 = 0;
+  this->dword4 = 0;
+  this->dword8 = 0;
+  this->dwordC = 0;
+  this->dword10 = 0;
+  this->dword14 = 0;
+  this->dword18 = 0;
+  this->dword1C = 1572864;
+  this->dword20 = -1;
+  this->dword24 = -1;
+  this->byte28 = 0;
+  this->byte29 = 0;
+  CRandom16Ex::CRandom16Ex((CRandom16Ex *)&this->m_sRandom, 0);
+  this->byte34 = 0;
+  this->dword38 = 0;
+  std::string::string(&this->std__string40);
+  std::string::string(&this->std__string60);
+  this->byte7E = 0;
+  CRandom16Ex::Init((CRandom16Ex *)&this->m_sRandom, 0x46F6Fu, 0);
   if ( !g_pGameType && BBSupportDbgReport(2, "GameData.cpp", 57, "g_pGameType != NULL") == 1 )
     __debugbreak();
   if ( (*(int *)(g_pGameType + 692) <= 0 || *(int *)(g_pGameType + 692) >= 5)
@@ -36,19 +36,19 @@
   {
     __debugbreak();
   }
-  *((_DWORD *)this + 15) = *(_DWORD *)(g_pGameType + 692);
-  std::string::operator=((char *)this + 64, (&g_pszGameType)[*((_DWORD *)this + 15)]);
-  if ( !*((_DWORD *)this + 15) && BBSupportDbgReport(2, "GameData.cpp", 63, "m_iType") == 1 )
+  this->m_iType = *(_DWORD *)(g_pGameType + 692);
+  std::string::operator=(&this->std__string40, (&g_pszGameType)[this->m_iType]);
+  if ( !this->m_iType && BBSupportDbgReport(2, "GameData.cpp", 63, "m_iType") == 1 )
     __debugbreak();
-  *((_DWORD *)this + 23) = *(_DWORD *)(g_pGameType + 864);
-  std::string::operator=((char *)this + 96, (&g_pszMapMode)[*((_DWORD *)this + 23)]);
-  if ( !*((_DWORD *)this + 23) && BBSupportDbgReport(2, "GameData.cpp", 67, "m_iMode") == 1 )
+  this->m_iMode = *(_DWORD *)(g_pGameType + 864);
+  std::string::operator=(&this->std__string60, (&g_pszMapMode)[this->m_iMode]);
+  if ( !this->m_iMode && BBSupportDbgReport(2, "GameData.cpp", 67, "m_iMode") == 1 )
     __debugbreak();
-  *((_WORD *)this + 62) = *(_BYTE *)(g_pGameType + 732) == 0;
-  *((_BYTE *)this + 52) = *(_BYTE *)(g_pGameType + 748);
-  *((_DWORD *)this + 14) = *(_DWORD *)(g_pGameType + 752);
-  memcpy((char *)this + 128, (const void *)(g_pGameType + 784), 7u);
-  *((_BYTE *)this + 127) = CGameType::IsLadderGame(g_pGameType);
+  this->word7C = *(_BYTE *)(g_pGameType + 732) == 0;
+  this->byte34 = *(_BYTE *)(g_pGameType + 748);
+  this->dword38 = *(_DWORD *)(g_pGameType + 752);
+  memcpy(&this->char80, (const void *)(g_pGameType + 784), 7u);
+  this->byte7F = CGameType::IsLadderGame(g_pGameType);
   return this;
 }
 
