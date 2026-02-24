@@ -58,7 +58,7 @@ bool __cdecl CGameRun::Init(void) {
     v10 = 0;
   exceptionBlock = -1;
   g_pScriptMgr = v10;
-  if ( CGameData::GetMode(g_pGameData) == 3 )
+  if ( CGameData::GetMode((CGameData *)g_pGameData) == 3 )
     CGameScriptManager::SetVictoryConditionHook(
       g_pScriptMgr,
       (void (__cdecl *)())ScriptEconomyModeVictoryConditionCheck);
@@ -72,7 +72,7 @@ bool __cdecl CGameRun::Init(void) {
   exceptionBlock = -1;
   g_pLogic = v8;
   ((void (__thiscall *)(CGroupMgr *))g_pGroupMgr->Clear)(g_pGroupMgr);
-  CInputProcessor::Reset((CFsm **)&g_cInputProcessor);
+  CInputProcessor::Reset(&g_cInputProcessor);
   v7 = (CLogicRingBuffer *)operator new(0x1Cu);
   exceptionBlock = 4;
   if ( v7 )
@@ -80,15 +80,15 @@ bool __cdecl CGameRun::Init(void) {
   else
     v6 = 0;
   exceptionBlock = -1;
-  *(_DWORD *)(g_pGame + 252) = v6;
+  g_pGame[63] = v6;
   CGameRun::SetupPlayersAndAlliances();
   CStatistic::Init((CStatistic *)&g_cStatistic);
   CInternationalTrader::ReInit();
   CMagic::InitMagicData();
   g_iAutosavePrefix = 65;
-  if ( *(_BYTE *)(g_pGameType + 696) )
+  if ( g_pGameType->m_bIsSaveGame )
   {
-    if ( !CGameRun::LoadGame(g_pGameType + 704) )
+    if ( !CGameRun::LoadGame(&g_pGameType->m_swSaveFile) )
       return 0;
     CGameRun::ActivateAIs();
   }
@@ -101,11 +101,11 @@ bool __cdecl CGameRun::Init(void) {
     if ( v16 <= 0 && BBSupportDbgReport(2, "main\\GameRun.cpp", 219, "iObjectXMLVersion > 0") == 1 )
       __debugbreak();
     if ( g_pGameType )
-      MapBuildingXMLVersion = CGameType::GetMapBuildingXMLVersion((CGameType *)g_pGameType);
+      MapBuildingXMLVersion = CGameType::GetMapBuildingXMLVersion(g_pGameType);
     else
       MapBuildingXMLVersion = 0;
     if ( g_pGameType )
-      MapObjectXMLVersion = CGameType::GetMapObjectXMLVersion((CGameType *)g_pGameType);
+      MapObjectXMLVersion = CGameType::GetMapObjectXMLVersion(g_pGameType);
     else
       MapObjectXMLVersion = 0;
     if ( MapBuildingXMLVersion < 0
@@ -141,16 +141,16 @@ bool __cdecl CGameRun::Init(void) {
       if ( v2 == 1 )
         __debugbreak();
     }
-    v18 = CGameData::IsCampaign(g_pGameData) || CGameData::IsTutorial(g_pGameData);
-    CGameRun::LoadEditorMap(g_pGameType + 28, v18);
-    CLogic::PostLoadMap(g_pLogic, (struct CGameType *)g_pGameType);
+    v18 = CGameData::IsCampaign((CGameData *)g_pGameData) || CGameData::IsTutorial((CGameData *)g_pGameData);
+    CGameRun::LoadEditorMap(&g_pGameType->m_swMapName, v18);
+    CLogic::PostLoadMap(g_pLogic, g_pGameType);
     CEcoSectorMgr::CalculateInitialFreeBeds((CEcoSectorMgr *)g_cESMgr);
     CEcoSectorMgr::OrderDiggerAndBuilderAtStartUp((CEcoSectorMgr *)g_cESMgr);
     CStatistic::UpdateStartStatistic((CStatistic *)&g_cStatistic);
     CGameRun::ActivateAIs();
   }
   LocalSlot = CPlayerManager::GetLocalSlot();
-  CGameType::SetLocalSlot((CGameType *)g_pGameType, LocalSlot);
+  CGameType::SetLocalSlot(g_pGameType, LocalSlot);
   CGameScriptManager::StartScript(g_pScriptMgr);
   CAnimalMgr::Init((CAnimalEffect **)&g_cAnimalMgr);
   CGameRun::m_bInitialized = 1;
@@ -344,10 +344,10 @@ bool __cdecl CGameRun::Exit(void) {
 
 
 // address=[0x1482e30]
-// Decompiled from char __cdecl CGameRun::LoadGame(int a1)
+// Decompiled from char __cdecl CGameRun::LoadGame(void *a1)
 bool __cdecl CGameRun::LoadGame(std::wstring & a1) {
   
-  const char *v1; // eax
+  wchar_t *v1; // eax
   int v3; // [esp+0h] [ebp-E98h] BYREF
   _BYTE v4[12]; // [esp+10h] [ebp-E88h] BYREF
   struct CMapFile *v5; // [esp+1Ch] [ebp-E7Ch]
@@ -366,33 +366,33 @@ bool __cdecl CGameRun::LoadGame(std::wstring & a1) {
   int v18; // [esp+994h] [ebp-504h]
   unsigned int v19; // [esp+99Ch] [ebp-4FCh]
   unsigned int v20; // [esp+9A0h] [ebp-4F8h]
-  int v21; // [esp+9A4h] [ebp-4F4h]
-  int v22; // [esp+9A8h] [ebp-4F0h]
-  int v23; // [esp+9ACh] [ebp-4ECh]
+  _DWORD *v21; // [esp+9A4h] [ebp-4F4h]
+  _DWORD *v22; // [esp+9A8h] [ebp-4F0h]
+  _DWORD *v23; // [esp+9ACh] [ebp-4ECh]
   char v24; // [esp+9B0h] [ebp-4E8h]
   struct S4::CMapFile *v25; // [esp+9B4h] [ebp-4E4h] BYREF
-  _BYTE v26[28]; // [esp+E4Ch] [ebp-4Ch] BYREF
-  _BYTE v27[28]; // [esp+E68h] [ebp-30h] BYREF
+  std::wstring v26; // [esp+E4Ch] [ebp-4Ch] BYREF
+  std::wstring v27; // [esp+E68h] [ebp-30h] BYREF
   int *v28; // [esp+E88h] [ebp-10h]
   int v29; // [esp+E94h] [ebp-4h]
 
   v28 = &v3;
-  std::wstring::wstring(a1);
+  std::wstring::wstring(&v27, a1);
   v29 = 0;
-  (*(void (__thiscall **)(void *, _BYTE *))(*(_DWORD *)g_pRandomMaps + 52))(g_pRandomMaps, v27);
+  (*(void (__thiscall **)(void *, std::wstring *))(*(_DWORD *)g_pRandomMaps + 52))(g_pRandomMaps, &v27);
   LOBYTE(v29) = 1;
   CTrace::Print("CGame loadgame\n");
   BBSupportTracePrintF(1, "------------------------------------------------------------------");
-  v1 = (const char *)std::wstring::c_str((_Cnd_internal_imp_t *)v27);
-  BBSupportTracePrintF(1, "Start loading %s", v1);
-  v6 = SaveFilePath::BuildSaveFilePath(v26, (int)v27);
+  v1 = std::wstring::c_str(&v27);
+  BBSupportTracePrintF(1, "Start loading %s", (const char *)v1);
+  v6 = SaveFilePath::BuildSaveFilePath(&v26, (int)&v27);
   LOBYTE(v29) = 2;
   v5 = S4::CMapFile::CMapFile((CHandleMap *)&v25, 0);
   LOBYTE(v29) = 3;
-  S4::CMapFile::Open((S4::CMapFile *)&v25, (int)v26, 1, 1);
+  S4::CMapFile::Open((S4::CMapFile *)&v25, (int)&v26, 1, 1);
   BBSupportTracePrintF(1, "\tOpen map file\t\tok");
   CWarMap::Init();
-  CWorldManager::LoadMap((struct S4::CMapFile *)&v25, *(_DWORD *)(g_pGameType + 56));
+  CWorldManager::LoadMap((struct S4::CMapFile *)&v25, g_pGameType->m_iWidthHeight);
   BBSupportTracePrintF(1, "\tLoad LoadMap\t\tok");
   CEcoSectorMgr::Load(g_cESMgr, (S4::CMapFile *)&v25);
   BBSupportTracePrintF(1, "\tLoad EsMgr\t\tok");
@@ -407,7 +407,7 @@ bool __cdecl CGameRun::LoadGame(std::wstring & a1) {
   v13 = CInternationalTrader::CInternationalTrader((CInternationalTrader *)v4);
   v12 = v13;
   LOBYTE(v29) = 5;
-  S4::CMapFile::LoadChunkObject(&v25, 167, 0, v13, 0);
+  S4::CMapFile::LoadChunkObject(&v25, 167, 0, (int)v13, 0);
   LOBYTE(v29) = 4;
   CInternationalTrader::~CInternationalTrader((CInternationalTrader *)v4);
   BBSupportTracePrintF(1, "\tLoad GAME_CHUNK_InternationalTrader\t\tok");
@@ -433,12 +433,12 @@ bool __cdecl CGameRun::LoadGame(std::wstring & a1) {
   BBSupportTracePrintF(1, "\tLoad GAME_CHUNK_EFFECTS\t\tok");
   CDecoObjMgr::Load((CDecoObjMgr *)&g_cDecoObjMgr, (struct S4::CMapFile *)&v25);
   BBSupportTracePrintF(1, "\tLoad DecoObjMgr\t\tok");
-  S4::CMapFile::LoadChunkObject(&v25, 131, 0, g_pScriptMgr, 0);
+  S4::CMapFile::LoadChunkObject(&v25, 131, 0, (int)g_pScriptMgr, 0);
   BBSupportTracePrintF(1, "\tLoad GAME_CHUNK_SCRIPT\t\tok");
-  S4::CMapFile::LoadChunkObject(&v25, 140, 0, &g_cPlayerMgr, 0);
+  S4::CMapFile::LoadChunkObject(&v25, 140, 0, (int)&g_cPlayerMgr, 0);
   BBSupportTracePrintF(1, "\tLoad GAME_CHUNK_PLAYER_GAMEDATA\t\tok");
-  S4::CMapFile::LoadChunkObject(&v25, 133, 0, &g_cStatistic, 0);
-  S4::CMapFile::LoadChunkObject(&v25, 137, 0, &g_cStatisticArchive, 0);
+  S4::CMapFile::LoadChunkObject(&v25, 133, 0, (int)&g_cStatistic, 0);
+  S4::CMapFile::LoadChunkObject(&v25, 137, 0, (int)&g_cStatisticArchive, 0);
   BBSupportTracePrintF(1, "\tLoad GAME_CHUNK_STATISTIC\t\tok");
   if ( !g_pGroupMgr )
   {
@@ -446,8 +446,8 @@ bool __cdecl CGameRun::LoadGame(std::wstring & a1) {
     if ( v9 == 1 )
       __debugbreak();
   }
-  (*(void (__thiscall **)(void *))(*(_DWORD *)g_pGroupMgr + 8))(g_pGroupMgr);
-  S4::CMapFile::LoadChunkObject(&v25, 134, 0, g_pGroupMgr, 0);
+  ((void (__thiscall *)(CGroupMgr *))g_pGroupMgr->Clear)(g_pGroupMgr);
+  S4::CMapFile::LoadChunkObject(&v25, 134, 0, (int)g_pGroupMgr, 0);
   BBSupportTracePrintF(1, "\tLoad GAME_CHUNK_GROUP\t\tok");
   if ( !g_pFogging )
   {
@@ -455,14 +455,14 @@ bool __cdecl CGameRun::LoadGame(std::wstring & a1) {
     if ( v8 == 1 )
       __debugbreak();
   }
-  S4::CMapFile::LoadChunkObject(&v25, 135, 0, g_pFogging, 0);
+  S4::CMapFile::LoadChunkObject(&v25, 135, 0, (int)g_pFogging, 0);
   BBSupportTracePrintF(1, "\tLoad GAME_CHUNK_FOGMAP\t\tok");
   (*(void (__thiscall **)(void *))(*(_DWORD *)g_pAI + 12))(g_pAI);
-  S4::CMapFile::LoadChunkObject(&v25, 150, 0, g_pAI, 1);
+  S4::CMapFile::LoadChunkObject(&v25, 150, 0, (int)g_pAI, 1);
   BBSupportTracePrintF(1, "\tLoad GAME_CHUNK_AI\t\tok");
   CGameChunkGeneral::CGameChunkGeneral(v17);
-  S4::CMapFile::LoadChunkObject(&v25, 130, 0, v17, 0);
-  if ( *(_DWORD *)(g_pGameType + 700) != v18 )
+  S4::CMapFile::LoadChunkObject(&v25, 130, 0, (int)v17, 0);
+  if ( g_pGameType->m_uiTickCounter != v18 )
   {
     v7 = BBSupportDbgReport(
            2,
@@ -472,14 +472,14 @@ bool __cdecl CGameRun::LoadGame(std::wstring & a1) {
     if ( v7 == 1 )
       __debugbreak();
   }
-  *(_DWORD *)(g_pGame + 76) = *(_DWORD *)(g_pGameType + 700);
-  CRandom16Ex::Init((CRandom16Ex *)(g_pGame + 120), v19, v20);
-  *(_BYTE *)(g_pGame + 117) = v24;
-  if ( *(_BYTE *)(g_pGame + 117) )
+  g_pGame[19] = (_DWORD *)g_pGameType->m_uiTickCounter;
+  CRandom16Ex::Init((CRandom16Ex *)(g_pGame + 30), v19, v20);
+  *((_BYTE *)g_pGame + 117) = v24;
+  if ( *((_BYTE *)g_pGame + 117) )
   {
-    *(_DWORD *)(g_pGame + 96) = v21;
-    *(_DWORD *)(g_pGame + 100) = v22;
-    *(_DWORD *)(g_pGame + 104) = v23;
+    g_pGame[24] = v21;
+    g_pGame[25] = v22;
+    g_pGame[26] = v23;
     CStateGame::UpdateZoomFactor((CStateGame *)g_pGame);
   }
   S4::CMapFile::Close((S4::CMapFile *)&v25);
@@ -491,9 +491,9 @@ bool __cdecl CGameRun::LoadGame(std::wstring & a1) {
   LOBYTE(v29) = 2;
   S4::CMapFile::~CMapFile((CHandleMap *)&v25);
   LOBYTE(v29) = 1;
-  std::wstring::~wstring(v26);
+  std::wstring::~wstring(&v26);
   v29 = -1;
-  std::wstring::~wstring(v27);
+  std::wstring::~wstring(&v27);
   return v16;
 }
 
@@ -729,57 +729,57 @@ bool __cdecl CGameRun::LoadGeneralInfo(wchar_t const * String, class CGameChunkG
 
 
 // address=[0x1483f20]
-// Decompiled from int __cdecl CGameRun::FillGameType(int a1, int a2, int a3)
-void __cdecl CGameRun::FillGameType(std::wstring & a1, class CGameType & a2, class CGameChunkGeneral & a3) {
+// Decompiled from int __cdecl CGameRun::FillGameType(std::wstring *a2, CGameType *_rGameType, CGameChunkGeneral *_rGeneralChunk)
+void __cdecl CGameRun::FillGameType(std::wstring & a2, class CGameType & _rGameType, class CGameChunkGeneral & _rGeneralChunk) {
   
   OnlineManager *Instance; // eax
-  void *v4; // ecx
-  int v5; // eax
-  _DWORD v7[6]; // [esp+0h] [ebp-51Ch] BYREF
-  int v8; // [esp+18h] [ebp-504h]
-  int v9; // [esp+1Ch] [ebp-500h]
-  BOOL v10; // [esp+20h] [ebp-4FCh]
+  int v4; // eax
+  int result; // eax
+  _DWORD v6[6]; // [esp+0h] [ebp-51Ch] BYREF
+  std::wstring *v7; // [esp+18h] [ebp-504h]
+  int v8; // [esp+1Ch] [ebp-500h]
+  BOOL v9; // [esp+20h] [ebp-4FCh]
   int LocalPeerId; // [esp+24h] [ebp-4F8h]
-  char *v12; // [esp+28h] [ebp-4F4h]
-  int v13; // [esp+2Ch] [ebp-4F0h]
-  char v14; // [esp+30h] [ebp-4ECh]
-  bool v15; // [esp+31h] [ebp-4EBh]
-  bool v16; // [esp+32h] [ebp-4EAh]
-  bool v17; // [esp+33h] [ebp-4E9h]
+  DWORD v11; // [esp+28h] [ebp-4F4h]
+  int v12; // [esp+2Ch] [ebp-4F0h]
+  char v13; // [esp+30h] [ebp-4ECh]
+  bool v14; // [esp+31h] [ebp-4EBh]
+  bool v15; // [esp+32h] [ebp-4EAh]
+  bool v16; // [esp+33h] [ebp-4E9h]
   unsigned int i; // [esp+34h] [ebp-4E8h]
-  _BYTE v19[1176]; // [esp+38h] [ebp-4E4h] BYREF
-  _BYTE v20[28]; // [esp+4D0h] [ebp-4Ch] BYREF
-  _BYTE v21[28]; // [esp+4ECh] [ebp-30h] BYREF
-  _DWORD *v22; // [esp+50Ch] [ebp-10h]
-  int v23; // [esp+518h] [ebp-4h]
+  _BYTE v18[1176]; // [esp+38h] [ebp-4E4h] BYREF
+  std::wstring v19; // [esp+4D0h] [ebp-4Ch] BYREF
+  std::wstring v20; // [esp+4ECh] [ebp-30h] BYREF
+  _DWORD *v21; // [esp+50Ch] [ebp-10h]
+  int v22; // [esp+518h] [ebp-4h]
 
-  v22 = v7;
-  *(_DWORD *)(a2 + 1560) = *(_DWORD *)(a3 + 2384);
-  *(_DWORD *)(a2 + 1564) = *(_DWORD *)(a3 + 2388);
-  std::wstring::operator=(a1);
-  v9 = std::wstring::wstring(v21, (wchar_t *)(a3 + 36));
-  std::wstring::operator=(v9);
-  std::wstring::~wstring(v21);
-  if ( *(_DWORD *)(a3 + 644) >= 9u
+  v21 = v6;
+  _rGameType->dword618 = _rGeneralChunk->dword950;
+  _rGameType->dword61C = _rGeneralChunk->dword954;
+  std::wstring::operator=(&_rGameType->m_swSaveFile, a2);
+  v8 = std::wstring::wstring(&v20, (wchar_t *)_rGeneralChunk->gap24);
+  std::wstring::operator=(v8);
+  std::wstring::~wstring(&v20);
+  if ( _rGeneralChunk->m_uiPlayerCount >= 9u
     && BBSupportDbgReport(2, "main\\GameRun.cpp", 1348, "_rGeneralChunk.m_uiPlayerCount< PLAYER_MAX") == 1 )
   {
     __debugbreak();
   }
-  for ( i = 0; i < *(_DWORD *)(a3 + 644); ++i )
+  for ( i = 0; i < _rGeneralChunk->m_uiPlayerCount; ++i )
   {
-    v8 = std::wstring::wstring(v20, (wchar_t *)(a3 + 84 * i + 652));
-    v7[5] = v8;
-    v23 = 0;
-    CGameType::SetPlayerName(i, v8);
-    v23 = -1;
-    std::wstring::~wstring(v20);
-    *(_DWORD *)(a2 + 4 * i + 116) = *(_DWORD *)(a3 + 84 * i + 648);
-    if ( *(_DWORD *)(a3 + 84 * i + 648) == 1 )
-      v12 = (char *)&dword_F29144[220110] + 3;
+    v7 = (std::wstring *)std::wstring::wstring(&v19, _rGeneralChunk->m_sPlayers[i].m_swName);
+    v6[5] = v7;
+    v22 = 0;
+    CGameType::SetPlayerName(_rGameType, i, v7);
+    v22 = -1;
+    std::wstring::~wstring(&v19);
+    _rGameType->m_sPlayerType[i] = _rGeneralChunk->m_sPlayers[i].m_uType;
+    if ( _rGeneralChunk->m_sPlayers[i].m_uType == 1 )
+      v11 = 0x100007F;
     else
-      v12 = 0;
-    *(_DWORD *)(a2 + 4 * i + 188) = v12;
-    if ( *(_DWORD *)(a3 + 84 * i + 648) == 1 )
+      v11 = 0;
+    _rGameType->m_sPlayerIP[i] = v11;
+    if ( _rGeneralChunk->m_sPlayers[i].m_uType == 1 )
     {
       Instance = (OnlineManager *)OnlineManager::GetInstance();
       LocalPeerId = OnlineManager::GetLocalPeerId(Instance);
@@ -788,82 +788,86 @@ void __cdecl CGameRun::FillGameType(std::wstring & a1, class CGameType & a2, cla
     {
       LocalPeerId = -1;
     }
-    *(_DWORD *)(a2 + 4 * i + 224) = LocalPeerId;
-    *(_DWORD *)(a2 + 4 * i + 260) = *(_DWORD *)(a3 + 84 * i + 720);
-    *(_DWORD *)(a2 + 4 * i + 296) = *(_DWORD *)(a3 + 84 * i + 724);
-    *(_DWORD *)(a2 + 4 * i + 332) = *(_DWORD *)(a3 + 84 * i + 716);
-    v17 = *(_DWORD *)(a2 + 4 * i + 116) == 0;
-    *(_BYTE *)(i + a2 + 440) = v17;
-    *(_DWORD *)(a2 + 4 * i + 152) = *(unsigned __int8 *)(a3 + 84 * i + 728);
+    _rGameType->m_sPlayerPeerId[i] = LocalPeerId;
+    _rGameType->m_sPlayerStartX[i] = _rGeneralChunk->m_sPlayers[i].m_uStartX;
+    _rGameType->m_sPlayerStartY[i] = _rGeneralChunk->m_sPlayers[i].m_uStartY;
+    _rGameType->m_sPlayerColor[i] = _rGeneralChunk->m_sPlayers[i].m_uColor;
+    v16 = _rGameType->m_sPlayerType[i] == 0;
+    _rGameType->m_sPlayerSlot10[i] = v16;
+    _rGameType->m_sPlayerTeam[i] = LOBYTE(_rGeneralChunk->m_sPlayers[i].m_uTeam);
   }
-  if ( *(_DWORD *)(a3 + 2360) != -1 )
+  if ( _rGeneralChunk->m_iTeamWon != -1 )
   {
-    *(_BYTE *)(a2 + 748) = 1;
-    *(_DWORD *)(a2 + 752) = *(_DWORD *)(a3 + 2360);
+    _rGameType->m_bIsGameWon = 1;
+    _rGameType->m_iTeamWon = _rGeneralChunk->m_iTeamWon;
   }
-  *(_DWORD *)(a2 + 864) = *(unsigned __int8 *)(a3 + 2356);
-  memcpy((void *)(a2 + 784), (const void *)(a3 + 2349), 7u);
-  *(_DWORD *)(a2 + 692) = *(_DWORD *)(a3 + 16);
-  *(_DWORD *)(a2 + 740) = *(_DWORD *)(a3 + 8);
-  *(_DWORD *)(a2 + 744) = *(_DWORD *)(a3 + 12);
-  std::wstring::operator=((void *)(a2 + 28), (wchar_t *)(a3 + 100));
-  v10 = *(_DWORD *)(a3 + 16) != 2;
-  *(_BYTE *)(a2 + 732) = v10;
-  *(_DWORD *)(a2 + 700) = *(_DWORD *)(a3 + 2376);
-  *(_DWORD *)(a2 + 660) = *(_DWORD *)(a3 + 2380);
-  *(_DWORD *)(a2 + 56) = *(_DWORD *)(a3 + 32);
-  CGameType::SetMultiPlayerGameID((CGameType *)a2, *(_DWORD *)(a3 + 1320));
-  *(_DWORD *)(a2 + 68) = (char *)&dword_F29144[220110] + 3;
-  *(_DWORD *)(a2 + 112) = *(_DWORD *)(a3 + 644);
-  *(_DWORD *)(a2 + 852) = *(_DWORD *)(a3 + 640);
-  v16 = (*(_DWORD *)(a3 + 4) & 0x200000) != 0;
-  CGameType::SetMCD2TextureSet((CGameType *)a2, v16);
-  v15 = (*(_DWORD *)(a3 + 4) & 0x100000) != 0;
-  CGameType::SetBlueByteMCD2Map((CGameType *)a2, v15);
-  v13 = 0;
-  for ( i = 0; i < *(_DWORD *)(a2 + 112); ++i )
+  _rGameType->m_iMode = (unsigned __int8)_rGeneralChunk->byte934;
+  memcpy(
+    _rGameType->m_pEconomyGoodsArray,
+    _rGeneralChunk->m_pEconomyGoodsArray,
+    sizeof(_rGameType->m_pEconomyGoodsArray));
+  _rGameType->m_iGameType = _rGeneralChunk->dword10;
+  _rGameType->m_iCampaignType = _rGeneralChunk->m_uCampaignType;
+  _rGameType->dword2E8 = _rGeneralChunk->dwordC;
+  std::wstring::operator=(&_rGameType->m_swMapName, _rGeneralChunk->m_swUnknown);
+  v9 = _rGeneralChunk->dword10 != 2;
+  _rGameType->byte2DC = v9;
+  _rGameType->m_uiTickCounter = _rGeneralChunk->m_uiTickCounter;
+  _rGameType->m_iNetworkTimeDelta = _rGeneralChunk->m_iNetworkTimeDelta;
+  _rGameType->m_iWidthHeight = _rGeneralChunk->m_iWidthHeight;
+  CGameType::SetMultiPlayerGameID(_rGameType, _rGeneralChunk->m_uMultiPlayerGameID);
+  _rGameType->dword44 = 0x100007F;
+  _rGameType->m_iActualPlayerCount = _rGeneralChunk->m_uiPlayerCount;
+  _rGameType->m_iMapMaxNumPlayers = _rGeneralChunk->m_iMapMaxNumPlayers;
+  v15 = (_rGeneralChunk->m_uMapFlags & 0x200000) != 0;
+  CGameType::SetMCD2TextureSet(_rGameType, v15);
+  v14 = (_rGeneralChunk->m_uMapFlags & 0x100000) != 0;
+  CGameType::SetBlueByteMCD2Map(_rGameType, v14);
+  v12 = 0;
+  for ( i = 0; i < _rGameType->m_iActualPlayerCount; ++i )
   {
-    if ( *(_DWORD *)(a2 + 4 * i + 152) > v13 )
-      v13 = *(_DWORD *)(a2 + 4 * i + 152);
+    if ( _rGameType->m_sPlayerTeam[i] > v12 )
+      v12 = _rGameType->m_sPlayerTeam[i];
   }
-  *(_DWORD *)(a2 + 72) = v13 + 1;
-  if ( !*(_DWORD *)(a2 + 864) )
+  _rGameType->m_uiNumberAlliances = v12 + 1;
+  if ( !_rGameType->m_iMode )
   {
-    if ( *(_DWORD *)(a2 + 72) == 1 )
-      *(_DWORD *)(a2 + 864) = 5;
+    if ( _rGameType->m_uiNumberAlliances == 1 )
+      _rGameType->m_iMode = 5;
     else
-      *(_DWORD *)(a2 + 864) = 1;
+      _rGameType->m_iMode = 1;
   }
-  if ( *(char *)(a3 + 2364) == -1 )
-    *(_BYTE *)(a3 + 2364) = 0;
-  CGameType::SetClanGame((CGameType *)a2, *(_BYTE *)(a3 + 2372));
-  CGameType::SetLocalSlot((CGameType *)a2, *(_BYTE *)(a3 + 2364));
-  CGameType::SetHost((CGameType *)a2, *(_BYTE *)(a3 + 2365));
-  CGameType::SetMPSavegameID((CGameType *)a2, *(_DWORD *)(a3 + 2368));
-  v14 = 1;
-  v23 = 1;
-  v7[4] = S4::CMapFile::CMapFile((CHandleMap *)v19, 0);
-  LOBYTE(v23) = 2;
-  S4::CMapFile::Open((S4::CMapFile *)v19, a1, 1, 0);
+  if ( (char)_rGeneralChunk->m_cLocalSlot == -1 )
+    _rGeneralChunk->m_cLocalSlot = 0;
+  CGameType::SetClanGame(_rGameType, _rGeneralChunk->m_bIsClanGame);
+  CGameType::SetLocalSlot(_rGameType, _rGeneralChunk->m_cLocalSlot);
+  CGameType::SetHost(_rGameType, _rGeneralChunk->m_bIsHost);
+  CGameType::SetMPSavegameID(_rGameType, _rGeneralChunk->m_uSavegameId);
+  v13 = 1;
+  v22 = 1;
+  v6[4] = S4::CMapFile::CMapFile((CHandleMap *)v18, 0);
+  LOBYTE(v22) = 2;
+  S4::CMapFile::Open((S4::CMapFile *)v18, a2, 1, 0);
   BBSupportTracePrintF(1, "\tOpen map file\t\tok");
-  CPlayerManager::Init(v4);
-  S4::CMapFile::LoadChunkObject(v19, 140, 0, (int)&g_cPlayerMgr, 0);
+  CPlayerManager::Init();
+  S4::CMapFile::LoadChunkObject(v18, 140, 0, (int)&g_cPlayerMgr, 0);
   BBSupportTracePrintF(1, "\tLoad GAME_CHUNK_PLAYER_GAMEDATA\t\tok");
   CPlayerManager::Lock();
-  S4::CMapFile::Close((S4::CMapFile *)v19);
+  S4::CMapFile::Close((S4::CMapFile *)v18);
   BBSupportTracePrintF(1, "\tDone\t\tok");
-  LOBYTE(v23) = 1;
-  S4::CMapFile::~CMapFile((CHandleMap *)v19);
-  v23 = -1;
-  if ( v14 )
+  LOBYTE(v22) = 1;
+  S4::CMapFile::~CMapFile((CHandleMap *)v18);
+  v22 = -1;
+  if ( v13 )
   {
-    for ( i = 0; i < *(_DWORD *)(a2 + 112); ++i )
+    for ( i = 0; i < _rGameType->m_iActualPlayerCount; ++i )
     {
-      v5 = CPlayerManager::Race(i + 1);
-      *(_DWORD *)(a2 + 4 * i + 404) = v5;
+      v4 = CPlayerManager::Race(i + 1);
+      _rGameType->m_sPlayerRaces[i] = v4;
     }
   }
-  return CPlayerManager::Done(v7[0]);
+  CPlayerManager::Done();
+  return result;
 }
 
 
@@ -883,7 +887,7 @@ void __cdecl CGameRun::SetupPlayersAndAlliances(void) {
   CPlayerManager::Init(this);
   memset(v9, 0, sizeof(v9));
   v7 = 0;
-  for ( i = 0; i < g_pGameType->m_iPlayerCount; ++i )
+  for ( i = 0; i < g_pGameType->m_iMapMaxNumPlayers; ++i )
   {
     if ( !g_pGameType->m_sPlayerSlot10[i] )
     {
@@ -917,7 +921,7 @@ void __cdecl CGameRun::SetupPlayersAndAlliances(void) {
     }
   }
   CAlliances::Init();
-  for ( i = 0; i < g_pGameType->m_iPlayerCount; ++i )
+  for ( i = 0; i < g_pGameType->m_iMapMaxNumPlayers; ++i )
   {
     if ( !g_pGameType->m_sPlayerSlot10[i] )
       CAlliances::AddPlayer(i + 1, g_pGameType->m_sPlayerTeam[i] + 1);
@@ -933,10 +937,10 @@ void __cdecl CGameRun::RemoveEmptyTeamSlot(int a1) {
   int result; // eax
   int i; // [esp+0h] [ebp-4h]
 
-  for ( i = 0; i < *(_DWORD *)(g_pGameType + 852); ++i )
+  for ( i = 0; i < g_pGameType->m_iMapMaxNumPlayers; ++i )
   {
-    if ( *(_DWORD *)(g_pGameType + 4 * i + 152) > a1 )
-      --*(_DWORD *)(g_pGameType + 4 * i + 152);
+    if ( g_pGameType->m_sPlayerTeam[i] > a1 )
+      --g_pGameType->m_sPlayerTeam[i];
     result = i + 1;
   }
   return result;
@@ -979,64 +983,56 @@ bool __cdecl CGameRun::LoadGeneralEditorInfo(class S4::CMapFile & a1) {
 // Decompiled from char __cdecl CGameRun::SaveGeneralInfo(struct S4::CMapFile *a1)
 bool __cdecl CGameRun::SaveGeneralInfo(class S4::CMapFile & a1) {
   
-  const char *v1; // eax
-  const wchar_t *v2; // eax
-  const wchar_t *v3; // eax
-  const char *v4; // eax
-  _Cnd_internal_imp_t *RealPlayerName; // eax
-  const wchar_t *v6; // eax
-  void *DateTimeString; // [esp+0h] [ebp-998h]
+  char *v1; // eax
+  wchar_t *v2; // eax
+  wchar_t *v3; // eax
+  char *v4; // eax
+  std::wstring *RealPlayerName; // eax
+  wchar_t *v6; // eax
+  std::string *DateTimeString; // [esp+0h] [ebp-998h]
   BOOL v9; // [esp+4h] [ebp-994h]
   int v10; // [esp+8h] [ebp-990h]
   int i; // [esp+Ch] [ebp-98Ch]
   signed int j; // [esp+Ch] [ebp-98Ch]
-  _BYTE v13[4]; // [esp+10h] [ebp-988h] BYREF
-  int v14; // [esp+14h] [ebp-984h]
-  int v15; // [esp+18h] [ebp-980h]
-  int v16; // [esp+1Ch] [ebp-97Ch]
-  int v17; // [esp+20h] [ebp-978h]
-  int v18; // [esp+24h] [ebp-974h]
-  int v19; // [esp+28h] [ebp-970h]
-  int v20; // [esp+2Ch] [ebp-96Ch]
-  int v21; // [esp+30h] [ebp-968h]
-  wchar_t v22[32]; // [esp+34h] [ebp-964h] BYREF
-  wchar_t v23[256]; // [esp+74h] [ebp-924h] BYREF
+  struct IS4ChunkObject v13[9]; // [esp+10h] [ebp-988h] BYREF
+  wchar_t v14[32]; // [esp+34h] [ebp-964h] BYREF
+  wchar_t v15[256]; // [esp+74h] [ebp-924h] BYREF
   char Destination[28]; // [esp+274h] [ebp-724h] BYREF
-  int v25; // [esp+290h] [ebp-708h]
+  int m_iActualPlayerCount; // [esp+290h] [ebp-708h]
   int PlayerId; // [esp+294h] [ebp-704h]
-  _DWORD v28[168]; // [esp+29Ch] [ebp-6FCh] BYREF
-  char v29[1025]; // [esp+53Ch] [ebp-45Ch] BYREF
-  _BYTE v30[11]; // [esp+93Dh] [ebp-5Bh] BYREF
-  unsigned int v31; // [esp+948h] [ebp-50h]
+  _DWORD v20[168]; // [esp+29Ch] [ebp-6FCh] BYREF
+  char v21[1025]; // [esp+53Ch] [ebp-45Ch] BYREF
+  _BYTE v22[11]; // [esp+93Dh] [ebp-5Bh] BYREF
+  unsigned int v23; // [esp+948h] [ebp-50h]
   char LocalSlot; // [esp+94Ch] [ebp-4Ch]
   char IsHost; // [esp+94Dh] [ebp-4Bh]
   char IsClanGame; // [esp+954h] [ebp-44h]
   int VirtualTick; // [esp+958h] [ebp-40h]
-  int v36; // [esp+95Ch] [ebp-3Ch]
+  int m_iNetworkTimeDelta; // [esp+95Ch] [ebp-3Ch]
   int Seed; // [esp+960h] [ebp-38h]
   int NumberOfRandCalls; // [esp+964h] [ebp-34h]
-  int v39; // [esp+968h] [ebp-30h]
-  int v40; // [esp+96Ch] [ebp-2Ch]
-  int v41; // [esp+970h] [ebp-28h]
-  _BYTE v42[28]; // [esp+978h] [ebp-20h] BYREF
+  int v31; // [esp+968h] [ebp-30h]
+  int v32; // [esp+96Ch] [ebp-2Ch]
+  int v33; // [esp+970h] [ebp-28h]
+  _BYTE v34[28]; // [esp+978h] [ebp-20h] BYREF
 
   CGameChunkGeneral::CGameChunkGeneral(v13);
   memset(Destination, 0, 0x1Au);
   v9 = CGameSettings::GetLanguage() == 1;
-  DateTimeString = (void *)CTimeInfo::GetDateTimeString(v42, v9);
-  v1 = (const char *)std::string::c_str(DateTimeString);
+  DateTimeString = (std::string *)CTimeInfo::GetDateTimeString(v34, v9);
+  v1 = std::string::c_str(DateTimeString);
   j__strcpy_0(Destination, v1);
-  std::string::~string(v42);
+  std::string::~string(v34);
   v10 = 8;
-  if ( CGameType::IsCampaignMap((CGameType *)g_pGameType) )
+  if ( CGameType::IsCampaignMap(g_pGameType) )
   {
-    if ( *(int *)(g_pGameType + 740) < 5 || *(int *)(g_pGameType + 740) >= 11 )
+    if ( (int)g_pGameType->m_iCampaignType < 5 || (int)g_pGameType->m_iCampaignType >= 11 )
     {
-      if ( *(int *)(g_pGameType + 740) < 11 || *(int *)(g_pGameType + 740) >= 17 )
+      if ( (int)g_pGameType->m_iCampaignType < 11 || (int)g_pGameType->m_iCampaignType >= 17 )
       {
-        if ( *(int *)(g_pGameType + 740) < 17 || *(int *)(g_pGameType + 740) >= 21 )
+        if ( (int)g_pGameType->m_iCampaignType < 17 || (int)g_pGameType->m_iCampaignType >= 21 )
         {
-          if ( *(int *)(g_pGameType + 740) >= 21 && *(int *)(g_pGameType + 740) < 25 )
+          if ( (int)g_pGameType->m_iCampaignType >= 21 && (int)g_pGameType->m_iCampaignType < 25 )
             v10 = (int)&dword_800000[2];
         }
         else
@@ -1062,63 +1058,63 @@ bool __cdecl CGameRun::SaveGeneralInfo(class S4::CMapFile & a1) {
       break;
     }
   }
-  if ( CGameType::IsBlueByteAddOnMap((CGameType *)g_pGameType) )
+  if ( CGameType::IsBlueByteAddOnMap(g_pGameType) )
     v10 |= 0x80000u;
-  if ( CGameType::IsBlueByteMCD2Map((CGameType *)g_pGameType) )
+  if ( CGameType::IsBlueByteMCD2Map(g_pGameType) )
     v10 |= 0x100000u;
-  if ( CGameType::IsMCD2TextureSet((CGameType *)g_pGameType) )
+  if ( CGameType::IsMCD2TextureSet(g_pGameType) )
     v10 |= 0x200000u;
   BBSupportTracePrintF(0, "SaveGeneralInfo(): Special: 0x%08x.", (unsigned int)&dword_F29144[203695] & v10);
-  v14 = v10;
-  v18 = g_iApplicationVersionMajor;
-  v19 = g_iApplicationVersionMinor;
-  v20 = g_iApplicationVersionBuild;
-  v21 = *((_DWORD *)g_pGameData + 2);
+  v13[1].__vftable = (IS4ChunkObject_vtbl *)v10;
+  v13[5].__vftable = (IS4ChunkObject_vtbl *)g_iApplicationVersionMajor;
+  v13[6].__vftable = (IS4ChunkObject_vtbl *)g_iApplicationVersionMinor;
+  v13[7].__vftable = (IS4ChunkObject_vtbl *)g_iApplicationVersionBuild;
+  v13[8] = *(struct IS4ChunkObject *)((char *)g_pGameData + 8);
   VirtualTick = INetworkEngine::GetVirtualTick((CGameHost **)g_pNetworkEngine);
-  if ( CGameData::IsGameWon(g_pGameData) )
-    v31 = CGameData::TeamWon(g_pGameData);
+  if ( CGameData::IsGameWon((CGameData *)g_pGameData) )
+    v23 = CGameData::TeamWon(g_pGameData);
   else
-    v31 = -1;
-  v28[167] = CGameType::GetMultiPlayerGameID(g_pGameType);
-  v36 = *(_DWORD *)(g_pGameType + 660);
-  memset(v23, 0, sizeof(v23));
-  v2 = (const wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)(g_pGameType + 28));
-  wcscpy(v23, v2);
-  v17 = *(_DWORD *)(g_pGameType + 692);
-  v15 = *(_DWORD *)(g_pGameType + 740);
-  v16 = *(_DWORD *)(g_pGameType + 744);
-  memset(v22, 0, sizeof(v22));
-  v3 = (const wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)g_pGameType);
-  wcscpy(v22, v3);
-  v25 = *(_DWORD *)(g_pGameType + 112);
-  memcpy(v30, (const void *)(g_pGameType + 784), 7u);
-  v30[7] = *(_BYTE *)(g_pGameType + 864);
-  v29[1024] = 7;
+    v23 = -1;
+  v20[167] = CGameType::GetMultiPlayerGameID(g_pGameType);
+  m_iNetworkTimeDelta = g_pGameType->m_iNetworkTimeDelta;
+  memset(v15, 0, sizeof(v15));
+  v2 = std::wstring::c_str(&g_pGameType->m_swMapName);
+  wcscpy(v15, v2);
+  v13[4] = (struct IS4ChunkObject)g_pGameType->m_iGameType;
+  v13[2] = (struct IS4ChunkObject)g_pGameType->m_iCampaignType;
+  v13[3] = (struct IS4ChunkObject)g_pGameType->dword2E8;
+  memset(v14, 0, sizeof(v14));
+  v3 = std::wstring::c_str(&g_pGameType->string0);
+  wcscpy(v14, v3);
+  m_iActualPlayerCount = g_pGameType->m_iActualPlayerCount;
+  memcpy(v22, g_pGameType->m_pEconomyGoodsArray, 7u);
+  v22[7] = g_pGameType->m_iMode;
+  v21[1024] = 7;
   PlayerId = CPlayerManager::LastPlayerId();
-  v4 = (const char *)std::string::c_str(&unk_402C9B4);
-  j__strcpy_0(v29, v4);
+  v4 = std::string::c_str(&stru_402C9B4);
+  j__strcpy_0(v21, v4);
   for ( j = 0; j < 8; ++j )
   {
-    v28[21 * j - 1] = *(_DWORD *)(g_pGameType + 4 * j + 116);
-    memset(&v28[21 * j], 0, 0x40u);
-    RealPlayerName = (_Cnd_internal_imp_t *)CGameType::GetRealPlayerName((void *)g_pGameType, j);
-    v6 = (const wchar_t *)std::wstring::c_str(RealPlayerName);
-    wcscpy((wchar_t *)&v28[21 * j], v6);
-    v28[21 * j + 16] = *(_DWORD *)(g_pGameType + 4 * j + 332);
-    v28[21 * j + 17] = *(_DWORD *)(g_pGameType + 4 * j + 260);
-    v28[21 * j + 18] = *(_DWORD *)(g_pGameType + 4 * j + 296);
-    LOBYTE(v28[21 * j + 19]) = *(_BYTE *)(g_pGameType + 4 * j + 152);
+    v20[21 * j - 1] = g_pGameType->m_sPlayerType[j];
+    memset(&v20[21 * j], 0, 0x40u);
+    RealPlayerName = CGameType::GetRealPlayerName(g_pGameType, j);
+    v6 = std::wstring::c_str(RealPlayerName);
+    wcscpy((wchar_t *)&v20[21 * j], v6);
+    v20[21 * j + 16] = g_pGameType->m_sPlayerColor[j];
+    v20[21 * j + 17] = g_pGameType->m_sPlayerStartX[j];
+    v20[21 * j + 18] = g_pGameType->m_sPlayerStartY[j];
+    LOBYTE(v20[21 * j + 19]) = g_pGameType->m_sPlayerTeam[j];
   }
   IsClanGame = CGameType::IsClanGame(g_pGameType);
   IsHost = CGameType::IsHost(g_pGameType);
   LocalSlot = CGameType::GetLocalSlot(g_pGameType);
   Seed = CRandom16::GetSeed((CUserToolsManager *)((char *)g_pGameData + 44));
   NumberOfRandCalls = CRandom16::GetNumberOfRandCalls((CUserToolsManager *)((char *)g_pGameData + 44));
-  v39 = *((_DWORD *)g_pGameData + 5);
-  v40 = *((_DWORD *)g_pGameData + 6);
-  v41 = *((_DWORD *)g_pGameData + 7);
+  v31 = *((_DWORD *)g_pGameData + 5);
+  v32 = *((_DWORD *)g_pGameData + 6);
+  v33 = *((_DWORD *)g_pGameData + 7);
   CGameChunkGeneral::GenerateCRC((CGameChunkGeneral *)v13);
-  S4::CMapFile::SaveChunkObject(a1, 130, 0, (struct IS4ChunkObject *)v13, 0);
+  S4::CMapFile::SaveChunkObject(a1, 130, 0, v13, 0);
   return 1;
 }
 
@@ -1143,7 +1139,7 @@ bool __cdecl CGameRun::RandomMap(void) {
 
 
 // address=[0x1484f50]
-// Decompiled from char __cdecl CGameRun::LoadEditorMap(int a1, char a2)
+// Decompiled from char __cdecl CGameRun::LoadEditorMap(std::wstring *a1, char a2)
 bool __cdecl CGameRun::LoadEditorMap(std::wstring & a1, bool a2) {
   
   char *v2; // eax
@@ -1158,7 +1154,10 @@ bool __cdecl CGameRun::LoadEditorMap(std::wstring & a1, bool a2) {
 
   v10 = 0;
   v9 = 0;
-  if ( (*(unsigned __int8 (__thiscall **)(void *, int, _DWORD))(*(_DWORD *)g_pRandomMaps + 32))(g_pRandomMaps, a1, 0) )
+  if ( (*(unsigned __int8 (__thiscall **)(void *, std::wstring *, _DWORD))(*(_DWORD *)g_pRandomMaps + 32))(
+         g_pRandomMaps,
+         a1,
+         0) )
   {
     v9 = (struct S4::CMapFile *)(*(int (__thiscall **)(void *))(*(_DWORD *)g_pRandomMaps + 12))(g_pRandomMaps);
   }
@@ -1173,7 +1172,7 @@ bool __cdecl CGameRun::LoadEditorMap(std::wstring & a1, bool a2) {
     v11 = -1;
     v9 = v5;
     v10 = 1;
-    S4::CMapFile::Open(v5, a1, 1, 1);
+    S4::CMapFile::Open(v5, (int)a1, 1, 1);
   }
   CGameRun::LoadGeneralEditorInfo(v9);
   v2 = CStateGame::GameData((CStateGame *)g_pGame);
@@ -1197,13 +1196,13 @@ bool __cdecl CGameRun::LoadEditorMap(std::wstring & a1, bool a2) {
   {
     v8 = 0;
   }
-  v3 = (wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)(g_pGameType + 28));
+  v3 = std::wstring::c_str(&g_pGameType->m_swMapName);
   CGameScriptManager::NewGameEx((int)Str, v8, v3, a2);
   S4::CMapFile::CloseChunk(v9, 0x10u, 0);
   if ( v10 && v9 )
     (**(void (__thiscall ***)(struct S4::CMapFile *, int))v9)(v9, 1);
   (*(void (__thiscall **)(void *))(*(_DWORD *)g_pAI + 12))(g_pAI);
-  if ( CGameType::IsCampaignMap((CGameType *)g_pGameType) && *(int *)(g_pGameType + 740) < 11 )
+  if ( CGameType::IsCampaignMap(g_pGameType) && (int)g_pGameType->m_iCampaignType < 11 )
     IAIEnvironment::SetGlobalEcoAIFlags(0);
   else
     IAIEnvironment::SetGlobalEcoAIFlags((struct CFrameWnd *)0x10);

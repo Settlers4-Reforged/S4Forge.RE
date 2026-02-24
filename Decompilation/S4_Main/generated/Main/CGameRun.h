@@ -27,7 +27,7 @@ public:
     static bool __cdecl LoadGeneralInfo(wchar_t const * String, class CGameChunkGeneral & a2);
 
     // address=[0x1483f20]
-    static void __cdecl FillGameType(std::wstring & a1, class CGameType & a2, class CGameChunkGeneral & a3);
+    static void __cdecl FillGameType(std::wstring & a2, class CGameType & _rGameType, class CGameChunkGeneral & _rGeneralChunk);
 
 private:
     // address=[0x14845a0]

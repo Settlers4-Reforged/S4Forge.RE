@@ -14,7 +14,7 @@ public:
     // Type information members
 public:
     DWORD m_uType;
-    wchar_t[32] m_swName;
+    wchar_t m_swName[32];
     DWORD m_uColor;
     DWORD m_uStartX;
     DWORD m_uStartY;

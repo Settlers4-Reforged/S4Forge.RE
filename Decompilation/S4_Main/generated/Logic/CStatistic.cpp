@@ -78,22 +78,20 @@ void  CStatistic::Init(void) {
 
 
 // address=[0x1475df0]
-// Decompiled from void *__thiscall CStatistic::Update(CStatistic *this)
+// Decompiled from void __thiscall CStatistic::Update(CStatistic *this)
 void  CStatistic::Update(void) {
   
-  void *result; // eax
   int i; // [esp+4h] [ebp-4h]
 
   CStatistic::CalculateLandSize(this);
   CStatistic::CalculateMana(this);
   CStatistic::CalculateFightingStrengths(this);
-  result = (void *)g_pGameType;
-  if ( *(int *)(g_pGameType + 752) <= 0 || CStatistic::m_bWonStateSaved )
-    return result;
-  CStatistic::m_bWonStateSaved = 1;
-  for ( i = 0; i < 9; ++i )
-    result = memcpy((char *)this + 4392 * i + 4220, (char *)this + 4392 * i + 2568, 0xACu);
-  return result;
+  if ( (int)g_pGameType->m_iTeamWon > 0 && !CStatistic::m_bWonStateSaved )
+  {
+    CStatistic::m_bWonStateSaved = 1;
+    for ( i = 0; i < 9; ++i )
+      memcpy((char *)this + 4392 * i + 4220, (char *)this + 4392 * i + 2568, 0xACu);
+  }
 }
 
 

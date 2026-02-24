@@ -466,41 +466,41 @@ void __cdecl CStateBriefing::InitBriefingTexts(int a1, int a2) {
   {
     case 1:
       v2 = g_pStringEngine->GetString(g_pStringEngine, dword_3D89EF0[a2]);
-      std::string::operator=(&unk_402C9B4, v2);
+      std::string::operator=(&stru_402C9B4, v2);
       v3 = g_pStringEngine->GetString(g_pStringEngine, dword_3D89EFC[a2]);
       std::string::operator=(&unk_402C998, v3);
       v4 = g_pStringEngine->GetString(g_pStringEngine, dword_3D89F08[a2]);
-      std::string::operator=(&unk_402C9D0, v4);
+      std::string::operator=(&stru_402C9D0, v4);
       v5 = g_pStringEngine->GetString(g_pStringEngine, dword_3D89F14[a2]);
       result = std::string::operator=(&unk_402C97C, v5);
       break;
     case 2:
       v7 = g_pStringEngine->GetString(g_pStringEngine, dword_3D89F20[a2]);
-      std::string::operator=(&unk_402C9B4, v7);
+      std::string::operator=(&stru_402C9B4, v7);
       v8 = g_pStringEngine->GetString(g_pStringEngine, dword_3D89F2C[a2]);
       std::string::operator=(&unk_402C998, v8);
       v9 = g_pStringEngine->GetString(g_pStringEngine, dword_3D89F38[a2]);
-      std::string::operator=(&unk_402C9D0, v9);
+      std::string::operator=(&stru_402C9D0, v9);
       v10 = g_pStringEngine->GetString(g_pStringEngine, dword_3D89F44[a2]);
       result = std::string::operator=(&unk_402C97C, v10);
       break;
     case 3:
       v11 = g_pStringEngine->GetString(g_pStringEngine, dword_3D89F50[a2]);
-      std::string::operator=(&unk_402C9B4, v11);
+      std::string::operator=(&stru_402C9B4, v11);
       v12 = g_pStringEngine->GetString(g_pStringEngine, dword_3D89F5C[a2]);
       std::string::operator=(&unk_402C998, v12);
       v13 = g_pStringEngine->GetString(g_pStringEngine, dword_3D89F68[a2]);
-      std::string::operator=(&unk_402C9D0, v13);
+      std::string::operator=(&stru_402C9D0, v13);
       v14 = g_pStringEngine->GetString(g_pStringEngine, dword_3D89F74[a2]);
       result = std::string::operator=(&unk_402C97C, v14);
       break;
     case 4:
       v15 = g_pStringEngine->GetString(g_pStringEngine, dword_3D89F80[a2]);
-      std::string::operator=(&unk_402C9B4, v15);
+      std::string::operator=(&stru_402C9B4, v15);
       v16 = g_pStringEngine->GetString(g_pStringEngine, dword_3D89FB0[a2]);
       std::string::operator=(&unk_402C998, v16);
       v17 = g_pStringEngine->GetString(g_pStringEngine, dword_3D89FE0[a2]);
-      std::string::operator=(&unk_402C9D0, v17);
+      std::string::operator=(&stru_402C9D0, v17);
       v18 = g_pStringEngine->GetString(g_pStringEngine, dword_3D8A010[a2]);
       result = std::string::operator=(&unk_402C97C, v18);
       break;

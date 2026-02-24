@@ -172,25 +172,22 @@ int __cdecl CPlayerManager::GetPlayerControl(int a1) {
 
 
 // address=[0x14973a0]
-// Decompiled from int __thiscall CPlayerManager::Init(void *this)
+// Decompiled from void __cdecl CPlayerManager::Init()
 void __cdecl CPlayerManager::Init(void) {
   
-  int result; // eax
   int i; // [esp+0h] [ebp-4h]
 
-  result = CPlayerManager::Done(this);
+  CPlayerManager::Done();
   CPlayerManager::m_lLocalIP = 0;
   CPlayerManager::m_iNumberOfPlayer = 0;
   CPlayerManager::m_iLocalPlayer = 0;
   for ( i = 0; i < 9; ++i )
   {
-    CPlayerInfo::Clear((CPlayerInfo *)((char *)&CPlayerManager::m_cPlayerInfos + 64 * i));
+    CPlayerInfo::Clear(&CPlayerManager::m_cPlayerInfos[i]);
     CPlayerGameData::Clear((CPlayerGameData *)((char *)&CPlayerManager::m_cPlayerGameData + 152 * i));
-    result = i + 1;
   }
   CPlayerManager::m_iInitialized = 1;
   CPlayerManager::m_iLocked = 0;
-  return result;
 }
 
 
@@ -427,20 +424,20 @@ signed char __cdecl CPlayerManager::GetLocalSlot(void) {
     __debugbreak();
   if ( !g_pNetworkEngine || !g_pGameType )
     return -1;
-  if ( *(int *)(g_pGameType + 852) > 8
+  if ( (int)g_pGameType->m_iMapMaxNumPlayers > 8
     && BBSupportDbgReport(2, "Main\\PlayerManager.cpp", 284, "g_pGameType->m_iMapMaxNumPlayers <= MAX_PLAYER") == 1 )
   {
     __debugbreak();
   }
-  if ( *(int *)(g_pGameType + 852) > 8 )
+  if ( (int)g_pGameType->m_iMapMaxNumPlayers > 8 )
     return -1;
-  for ( i = 0; i < *(_DWORD *)(g_pGameType + 852); ++i )
+  for ( i = 0; i < g_pGameType->m_iMapMaxNumPlayers; ++i )
   {
     Instance = (OnlineManager *)OnlineManager::GetInstance();
     if ( OnlineManager::IsInSession(Instance) )
     {
       v2 = StormManager::GetInstance();
-      if ( StormManager::GetLocalPeerId(v2) == *(_DWORD *)(g_pGameType + 4 * i + 224) )
+      if ( StormManager::GetLocalPeerId(v2) == g_pGameType->m_sPlayerPeerId[i] )
         return i;
     }
   }

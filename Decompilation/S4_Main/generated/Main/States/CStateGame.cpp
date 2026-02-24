@@ -495,12 +495,12 @@ bool  CStateGame::InitGuiEngine(char * a2) {
 void  CStateGame::EndGame(void) {
   
   void *v1; // esp
-  char LocalPlayerId; // al
+  uchar LocalPlayerId; // al
   void *Instance; // eax
   unsigned int v4; // esi
   int v5; // eax
   int v7; // [esp-9A70h] [ebp-9AD4h] BYREF
-  unsigned int v8; // [esp-8h] [ebp-6Ch]
+  uint v8; // [esp-8h] [ebp-6Ch]
   int v9; // [esp-4h] [ebp-68h]
   int *v10; // [esp+8h] [ebp-5Ch]
   int CampaignStatus; // [esp+Ch] [ebp-58h]
@@ -509,11 +509,11 @@ void  CStateGame::EndGame(void) {
   int v14; // [esp+18h] [ebp-4Ch]
   BOOL v15; // [esp+1Ch] [ebp-48h]
   CStateGame *v16; // [esp+20h] [ebp-44h]
-  int v17; // [esp+24h] [ebp-40h]
+  int dword2E4; // [esp+24h] [ebp-40h]
   int v18; // [esp+28h] [ebp-3Ch]
   int v19; // [esp+2Ch] [ebp-38h]
   bool v20; // [esp+33h] [ebp-31h]
-  _BYTE v21[32]; // [esp+34h] [ebp-30h] BYREF
+  CEvn_Logic v21; // [esp+34h] [ebp-30h] BYREF
   int v22; // [esp+60h] [ebp-4h]
 
   v16 = this;
@@ -522,9 +522,9 @@ void  CStateGame::EndGame(void) {
   v10 = &v7;
   CStatistic::CStatistic((struct boost::exception_detail::clone_base *)&g_cStatistic);
   CEndStatistic::Update(&g_cEndStatistic);
-  if ( !CGameData::IsTutorial(g_pGameData) )
+  if ( !CGameData::IsTutorial((CGameData *)g_pGameData) )
   {
-    if ( CGameData::GetMode(g_pGameData) == 3 )
+    if ( CGameData::GetMode((CGameData *)g_pGameData) == 3 )
       CGameStateHandler::Queue((int)CStateEcoStatistic::DynamicCreateFunc, 0);
     else
       CGameStateHandler::Queue((int)CStateEndStatistic::DynamicCreateFunc, 0);
@@ -532,12 +532,12 @@ void  CStateGame::EndGame(void) {
   v9 = 0;
   v8 = 0;
   LocalPlayerId = CPlayerManager::GetLocalPlayerId();
-  v13 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v21, 0xFA2u, 0, 0, LocalPlayerId, v8, v9);
+  v13 = CEvn_Logic::CEvn_Logic(&v21, 0xFA2u, 0, 0, LocalPlayerId, v8, v9);
   v12 = v13;
   v22 = 0;
   INetworkEngine::SendNetMessage((INetworkEngine *)g_pNetworkEngine, v13);
   v22 = -1;
-  CEvn_Logic::~CEvn_Logic(v21);
+  CEvn_Logic::~CEvn_Logic(&v21);
   *((_BYTE *)v16 + 295) = 0;
   INetworkEngine::EndTick((INetworkEngine *)g_pNetworkEngine);
   Instance = (void *)OnlineManager::GetInstance();
@@ -546,40 +546,40 @@ void  CStateGame::EndGame(void) {
   v5 = CPlayerManager::GetLocalPlayerId();
   v15 = v4 == CAlliances::AllianceId(v5);
   v20 = v15;
-  if ( CGameData::IsTutorial((CStateGame *)((char *)v16 + 76)) )
+  if ( CGameData::IsTutorial((CGameData *)((char *)v16 + 76)) )
   {
     v19 = 3;
   }
-  else if ( *(_DWORD *)(g_pGameType + 692) == 3 )
+  else if ( g_pGameType->m_iGameType == 3 )
   {
     if ( v20 )
     {
-      CampaignStatus = CGameSettings::GetCampaignStatus(*(_DWORD *)(g_pGameType + 740));
-      v14 = *(_DWORD *)(g_pGameType + 744) + 1;
+      CampaignStatus = CGameSettings::GetCampaignStatus(g_pGameType->m_iCampaignType);
+      v14 = g_pGameType->dword2E8 + 1;
       if ( v14 > CampaignStatus )
-        CGameSettings::SetCampaignStatus(*(_DWORD *)(g_pGameType + 740), v14);
+        CGameSettings::SetCampaignStatus(g_pGameType->m_iCampaignType, v14);
     }
-    if ( *(_DWORD *)(g_pGameType + 740) == 4 && v20 && *(_DWORD *)(g_pGameType + 744) == 11 )
+    if ( g_pGameType->m_iCampaignType == 4 && v20 && g_pGameType->dword2E8 == 11 )
     {
       if ( (unsigned __int8)CGameSettings::GetShowVideos() )
         CGameStateHandler::Queue((int)CStateVideo::DynamicCreateFunc, 6);
       v19 = 0;
     }
-    else if ( *(_DWORD *)(g_pGameType + 740) == 15 && v20 )
+    else if ( g_pGameType->m_iCampaignType == 15 && v20 )
     {
-      if ( *(_DWORD *)(g_pGameType + 744) == 4 )
+      if ( g_pGameType->dword2E8 == 4 )
       {
         if ( (unsigned __int8)CGameSettings::GetShowVideos() )
           CGameStateHandler::Queue((int)CStateVideo::DynamicCreateFunc, 9);
         v19 = 14;
       }
-      if ( *(_DWORD *)(g_pGameType + 744) == 11 )
+      if ( g_pGameType->dword2E8 == 11 )
       {
         if ( (unsigned __int8)CGameSettings::GetShowVideos() )
           CGameStateHandler::Queue((int)CStateVideo::DynamicCreateFunc, 10);
         v19 = 0;
       }
-      v18 = *(_DWORD *)(g_pGameType + 744) + 1;
+      v18 = g_pGameType->dword2E8 + 1;
       v18 -= 2;
       switch ( v18 )
       {
@@ -588,32 +588,32 @@ void  CStateGame::EndGame(void) {
         case 5:
         case 7:
         case 8:
-          CGameStateHandler::Queue((int)CStateAOSplash::DynamicCreateFunc, *(_DWORD *)(g_pGameType + 744));
+          CGameStateHandler::Queue((int)CStateAOSplash::DynamicCreateFunc, g_pGameType->dword2E8);
           break;
         default:
           break;
       }
       v19 = 14;
     }
-    else if ( *(_DWORD *)(g_pGameType + 740) == 12 && v20 )
+    else if ( g_pGameType->m_iCampaignType == 12 && v20 )
     {
-      if ( *(_DWORD *)(g_pGameType + 744) == 1 )
+      if ( g_pGameType->dword2E8 == 1 )
         CGameStateHandler::Queue((int)CStateAOSplash::DynamicCreateFunc, -1);
       v19 = 13;
     }
-    else if ( *(_DWORD *)(g_pGameType + 744) == 2
+    else if ( g_pGameType->dword2E8 == 2
            && v20
-           && (*(_DWORD *)(g_pGameType + 740) == 1
-            || *(_DWORD *)(g_pGameType + 740) == 2
-            || *(_DWORD *)(g_pGameType + 740) == 3) )
+           && (g_pGameType->m_iCampaignType == 1
+            || g_pGameType->m_iCampaignType == 2
+            || g_pGameType->m_iCampaignType == 3) )
     {
-      CGameStateHandler::Queue((int)CStateVictoryScreen::DynamicCreateFunc, *(_DWORD *)(g_pGameType + 740));
+      CGameStateHandler::Queue((int)CStateVictoryScreen::DynamicCreateFunc, g_pGameType->m_iCampaignType);
       v19 = 0;
     }
     else
     {
-      v17 = *(_DWORD *)(g_pGameType + 740);
-      switch ( --v17 )
+      dword2E4 = g_pGameType->m_iCampaignType;
+      switch ( --dword2E4 )
       {
         case 0:
         case 1:
@@ -776,10 +776,10 @@ int  CStateGame::GetModifierState(void) {
   int ValidTick; // esi
   int LocalPlayerId; // eax
   float v6; // xmm0_4
-  const char *v7; // eax
-  const char *v8; // eax
-  const char *v9; // eax
-  const char *v10; // eax
+  char *v7; // eax
+  char *v8; // eax
+  char *v9; // eax
+  char *v10; // eax
   int PlayerId; // eax
   unsigned int v12; // esi
   int v13; // eax
@@ -839,7 +839,7 @@ int  CStateGame::GetModifierState(void) {
   *((_BYTE *)this + 70) = 0;
   *((_BYTE *)this + 71) = 0;
   *((_BYTE *)this + 72) = 0;
-  CGameData::CGameData((CStateGame *)((char *)this + 76));
+  CGameData::CGameData((CGameData *)((char *)this + 76));
   *((_BYTE *)this + 244) = 0;
   *((_BYTE *)this + 245) = 0;
   *((_BYTE *)this + 246) = 0;
@@ -862,15 +862,15 @@ int  CStateGame::GetModifierState(void) {
   LOBYTE(v52) = 4;
   if ( (unsigned __int8)CGameType::IsMultiplayerGame(g_pGameType) )
   {
-    Instance = (int)UPlay::UPlayManager::GetInstance();
+    Instance = UPlay::UPlayManager::GetInstance();
     (*(void (__thiscall **)(int, int))(*(_DWORD *)Instance + 52))(Instance, 3);
   }
   else
   {
-    v31 = (int)UPlay::UPlayManager::GetInstance();
+    v31 = UPlay::UPlayManager::GetInstance();
     (*(void (__thiscall **)(int, int))(*(_DWORD *)v31 + 52))(v31, 4);
   }
-  IsMCD2TextureSet = CGameType::IsMCD2TextureSet((CGameType *)g_pGameType);
+  IsMCD2TextureSet = CGameType::IsMCD2TextureSet(g_pGameType);
   CGfxManager::EnableMCD2Textures(g_pGfxManager, IsMCD2TextureSet);
   g_uDbgTickCounter = 0;
   g_iGameSpeed = 1;
@@ -974,9 +974,9 @@ int  CStateGame::GetModifierState(void) {
   IGfxEngine::SetTickCounterAdress(g_pGfxEngine, (unsigned int *)this + 20);
   IEventEngine::SetTickPointer(g_pEvnEngine, (CStateGame *)((char *)this + 80));
   CTextMsgHandler::Init();
-  *((_DWORD *)this + 22) = g_pGameType[2].m_u[0];
+  *((_DWORD *)this + 22) = g_pGameType->m_iWidthHeight;
   *((_DWORD *)this + 23) = 0;
-  *((_DWORD *)this + 21) = g_pGameType[2].m_u[0];
+  *((_DWORD *)this + 21) = g_pGameType->m_iWidthHeight;
   RegisterClasses();
   if ( (unsigned __int8)CGameRun::Init() )
   {
@@ -987,7 +987,7 @@ int  CStateGame::GetModifierState(void) {
     CStateGame::UpdateToGuiInfoStruct(this);
     CStateGame::UpdateMusicSettings(this);
     CStateGame::SetupGUI(this);
-    if ( CGameData::IsTutorial((CStateGame *)((char *)this + 76)) )
+    if ( CGameData::IsTutorial((CGameData *)((char *)this + 76)) )
       CTutorial::Init((CTutorial *)&g_cTutorial);
     CStateGame::NotifyGfxEngine(this);
     CStateGame::UpdateClientSize(this);
@@ -995,9 +995,9 @@ int  CStateGame::GetModifierState(void) {
     CGfxManager::EnableGfxFile(g_pGfxManager, 1u, 8, 1, 0xFFFFFFFF);
     if ( !*((_BYTE *)g_pGame + 117) )
     {
-      v20 = g_pGameType[10].m_u[CPlayerManager::GetLocalPlayerId() + 3];
+      v20 = g_pGameType->m_sPlayerStartX[CPlayerManager::GetLocalPlayerId() + 8];
       LocalPlayerId = CPlayerManager::GetLocalPlayerId();
-      CStateGame::SetViewPos(this, g_pGameType[9].m_u[LocalPlayerId + 1], v20);
+      CStateGame::SetViewPos(this, g_pGameType->m_sPlayerPeerId[LocalPlayerId + 8], v20);
     }
     v6 = (float)(unsigned int)(*((_DWORD *)this + 26) - 917504);
     v27 = CEvn_Event::CEvn_Event(&v44, 0x25Du, 0, (int)(float)((float)(v6 * 100.0) / 3801088.0), 0);
@@ -1012,8 +1012,8 @@ int  CStateGame::GetModifierState(void) {
     std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v37);
     LOBYTE(v52) = 13;
     std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(
-      (int)&v49,
-      g_pGameType + 1);
+      &v49,
+      &g_pGameType->m_swMapName);
     LOBYTE(v52) = 14;
     v7 = std::string::c_str(&v49);
     BBSupportTracePrintF(1, "MapName:        %s", v7);
@@ -1033,17 +1033,17 @@ int  CStateGame::GetModifierState(void) {
     BBSupportTracePrintF(1, "GameMode:       %s", v9);
     LOBYTE(v52) = 4;
     std::string::~string(v42);
-    if ( LOBYTE(g_pGameType[24].m_u[6]) )
+    if ( g_pGameType->m_bIsSaveGame )
       BBSupportTracePrintF(1, "Saved Game:     %s", "Yes");
     else
       BBSupportTracePrintF(1, "Saved Game:     %s", "No");
-    if ( LOBYTE(g_pGameType[24].m_u[6]) )
+    if ( g_pGameType->m_bIsSaveGame )
     {
       std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v36);
       LOBYTE(v52) = 17;
       std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(
-        (int)&v50,
-        (std::wstring *)((char *)g_pGameType + 704));
+        &v50,
+        &g_pGameType->m_swSaveFile);
       LOBYTE(v52) = 18;
       v10 = std::string::c_str(&v50);
       BBSupportTracePrintF(1, "Save File:     %s", v10);
@@ -1052,8 +1052,8 @@ int  CStateGame::GetModifierState(void) {
       LOBYTE(v52) = 4;
       std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::~wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v36);
     }
-    BBSupportTracePrintF(1, "Starting Tick:  %d", g_pGameType[25].m_u[0]);
-    BBSupportTracePrintF(1, "Time Delay:\t    %d ms", g_pGameType[23].m_u[4]);
+    BBSupportTracePrintF(1, "Starting Tick:  %d", g_pGameType->m_uiTickCounter);
+    BBSupportTracePrintF(1, "Time Delay:\t    %d ms", g_pGameType->m_iNetworkTimeDelta);
     PlayerId = CPlayerManager::LastPlayerId();
     BBSupportTracePrintF(1, "Playercount:    %d", PlayerId);
     if ( INetworkEngine::IsHost((INetworkEngine *)g_pNetworkEngine) )
@@ -1061,8 +1061,8 @@ int  CStateGame::GetModifierState(void) {
     else
       BBSupportTracePrintF(1, "Network:\t\t   %s", "Client");
     BBSupportTracePrintF(1, "--------------------------------------------------");
-    if ( CGameData::IsGameWon((CStateGame *)((char *)this + 76))
-      && CGameData::GetMode((CStateGame *)((char *)this + 76)) != 5 )
+    if ( CGameData::IsGameWon((CGameData *)((char *)this + 76))
+      && CGameData::GetMode((CGameData *)((char *)this + 76)) != 5 )
     {
       v12 = CGameData::TeamWon((CStateGame *)((char *)this + 76));
       v13 = CPlayerManager::GetLocalPlayerId();
@@ -1080,7 +1080,7 @@ int  CStateGame::GetModifierState(void) {
       }
       else
       {
-        if ( CGameData::IsNetworkGame((CStateGame *)((char *)this + 76)) )
+        if ( CGameData::IsNetworkGame((CGameData *)((char *)this + 76)) )
           (*(void (__thiscall **)(void *, int))(*(_DWORD *)g_pFogging + 40))(g_pFogging, 1);
         v28 = CEvn_Event::CEvn_Event(&v46, 0x261u, 0, 0, 0);
         LOBYTE(v52) = 20;

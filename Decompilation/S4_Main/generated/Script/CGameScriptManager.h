@@ -51,7 +51,7 @@ public:
     void  StartScript(void);
 
     // address=[0x15ff960]
-    void  CreateStartResources(int a2, int a3, int a4, int a5, int a6);
+    void  CreateStartResources(int a2, int _iStartX, int _iStartY, int a5, int a6);
 
     // address=[0x15ffaf0]
     void  SetGlobal(char const * Str, int a3);

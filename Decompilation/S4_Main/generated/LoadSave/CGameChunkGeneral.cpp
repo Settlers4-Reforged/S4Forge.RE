@@ -7,181 +7,178 @@
  CGameChunkGeneral::CGameChunkGeneral(void) {
   
   IS4ChunkObject::IS4ChunkObject(this);
-  *(_DWORD *)this = CGameChunkGeneral::_vftable_;
-  *((_DWORD *)this + 1) = 0;
-  *((_DWORD *)this + 2) = 0;
-  *((_DWORD *)this + 3) = 0;
-  *((_DWORD *)this + 4) = 0;
-  *((_DWORD *)this + 5) = 0;
-  *((_DWORD *)this + 6) = 0;
-  *((_DWORD *)this + 7) = 0;
-  *((_DWORD *)this + 8) = 0;
-  *((_DWORD *)this + 160) = 0;
-  *((_DWORD *)this + 161) = 0;
-  *((_DWORD *)this + 330) = 0;
-  *((_BYTE *)this + 2348) = 0;
-  *((_BYTE *)this + 2356) = 0;
-  *((_DWORD *)this + 590) = 0;
-  *((_BYTE *)this + 2364) = 0;
-  *((_BYTE *)this + 2365) = 0;
-  *((_DWORD *)this + 592) = 0;
-  *((_BYTE *)this + 2372) = 0;
-  *((_DWORD *)this + 594) = 0;
-  *((_DWORD *)this + 595) = 0;
-  *((_DWORD *)this + 596) = 0;
-  *((_DWORD *)this + 597) = 0;
-  *((_DWORD *)this + 598) = 0;
-  *((_DWORD *)this + 599) = 0;
-  *((_DWORD *)this + 600) = 0;
-  *((_BYTE *)this + 2404) = 0;
+  this->__vftable = (IS4ChunkObject_vtbl *)CGameChunkGeneral::_vftable_;
+  this->m_uMapFlags = 0;
+  this->m_uCampaignType = 0;
+  this->dwordC = 0;
+  this->dword10 = 0;
+  this->dword14 = 0;
+  this->dword18 = 0;
+  this->dword1C = 0;
+  this->m_iWidthHeight = 0;
+  this->m_iMapMaxNumPlayers = 0;
+  this->m_uiPlayerCount = 0;
+  this->m_uMultiPlayerGameID = 0;
+  this->byte92C = 0;
+  this->byte934 = 0;
+  this->m_iTeamWon = 0;
+  this->m_cLocalSlot = 0;
+  this->m_bIsHost = 0;
+  this->m_uSavegameId = 0;
+  this->m_bIsClanGame = 0;
+  this->m_uiTickCounter = 0;
+  this->m_iNetworkTimeDelta = 0;
+  this->dword950 = 0;
+  this->dword954 = 0;
+  this->dword958 = 0;
+  this->dword95C = 0;
+  this->dword960 = 0;
+  this->byte964 = 0;
   return this;
 }
 
 
 // address=[0x13eb9f0]
-// Decompiled from int __thiscall CGameChunkGeneral::Load(CGameChunkGeneral *this, struct IS4Chunk *a2)
+// Decompiled from void __thiscall CGameChunkGeneral::Load(CGameChunkGeneral *this, struct IS4Chunk *a2)
 void  CGameChunkGeneral::Load(class IS4Chunk & a2) {
   
-  int result; // eax
-  const wchar_t *v3; // eax
+  wchar_t *v2; // eax
+  int v3; // eax
   int v4; // eax
   int v5; // eax
   int v6; // eax
   int v7; // eax
-  int v8; // eax
   int pExceptionObject; // [esp+4h] [ebp-498h] BYREF
   int i; // [esp+8h] [ebp-494h]
-  int v11; // [esp+Ch] [ebp-490h] BYREF
-  unsigned __int8 v12; // [esp+13h] [ebp-489h] BYREF
-  CGameChunkGeneral *v13; // [esp+14h] [ebp-488h]
-  char v14[88]; // [esp+18h] [ebp-484h] BYREF
-  int v15[7]; // [esp+70h] [ebp-42Ch] BYREF
+  int uGameChunkVersion; // [esp+Ch] [ebp-490h] BYREF
+  unsigned __int8 uCampaignType; // [esp+13h] [ebp-489h] BYREF
+  char v13[88]; // [esp+18h] [ebp-484h] BYREF
+  std::wstring v14; // [esp+70h] [ebp-42Ch] BYREF
   char Str[1024]; // [esp+8Ch] [ebp-410h] BYREF
-  int v17; // [esp+498h] [ebp-4h]
+  int v16; // [esp+498h] [ebp-4h]
 
-  v13 = this;
-  memset((char *)this + 1324, 0, 0x400u);
-  *((_BYTE *)v13 + 2356) = 0;
-  *((_BYTE *)v13 + 2348) = 0;
-  memset((char *)v13 + 2349, 0, 7u);
-  *((_BYTE *)v13 + 2364) = -1;
-  *((_BYTE *)v13 + 2365) = 0;
-  *((_DWORD *)v13 + 592) = 0;
-  *((_BYTE *)v13 + 2372) = 0;
-  *((_DWORD *)v13 + 596) = (char *)&loc_1BB7352 + 1;
-  *((_DWORD *)v13 + 597) = 0;
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 12))(a2, 761539483);
-  v11 = 0;
-  result = (**(int (__thiscall ***)(struct IS4Chunk *, int *, int))a2)(a2, &v11, 4);
-  if ( v11 >= 3 )
+  memset(this->byte52C, 0, sizeof(this->byte52C));
+  this->byte934 = 0;
+  this->byte92C = 0;
+  memset(this->m_pEconomyGoodsArray, 0, sizeof(this->m_pEconomyGoodsArray));
+  this->m_cLocalSlot = -1;
+  this->m_bIsHost = 0;
+  this->m_uSavegameId = 0;
+  this->m_bIsClanGame = 0;
+  this->dword950 = 0x1BB7353;
+  this->dword954 = 0;
+  a2->LoadSignature(761539483);
+  uGameChunkVersion = 0;
+  a2->Load(&uGameChunkVersion, 4);
+  if ( uGameChunkVersion >= 3 )
   {
-    (**(void (__thiscall ***)(struct IS4Chunk *, int, int))a2)(a2, (int)v13 + 4, 4);
-    (**(void (__thiscall ***)(struct IS4Chunk *, int, int))a2)(a2, (int)v13 + 16, 4);
-    (**(void (__thiscall ***)(struct IS4Chunk *, int, int))a2)(a2, (int)v13 + 20, 4);
-    (**(void (__thiscall ***)(struct IS4Chunk *, int, int))a2)(a2, (int)v13 + 24, 4);
-    (**(void (__thiscall ***)(struct IS4Chunk *, int, int))a2)(a2, (int)v13 + 28, 4);
-    (**(void (__thiscall ***)(struct IS4Chunk *, int, int))a2)(a2, (int)v13 + 32, 4);
-    (**(void (__thiscall ***)(struct IS4Chunk *, int, int))a2)(a2, (int)v13 + 36, 64);
-    if ( v11 < 10 )
+    a2->Load(&this->m_uMapFlags, 4);
+    a2->Load(&this->dword10, 4);
+    a2->Load(&this->dword14, 4);
+    a2->Load(&this->dword18, 4);
+    a2->Load(&this->dword1C, 4);
+    a2->Load(&this->m_iWidthHeight, 4);
+    a2->Load(this->gap24, 64);
+    if ( uGameChunkVersion < 10 )
     {
-      (**(void (__thiscall ***)(struct IS4Chunk *, char *, int))a2)(a2, Str, 1024);
-      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v14);
-      v17 = 0;
+      a2->Load(Str, 1024);
+      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v13);
+      v16 = 0;
       std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::from_bytes(
-        (int)v15,
+        (int)&v14,
         Str);
-      v3 = (const wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)v15);
-      wcscpy((wchar_t *)v13 + 50, v3);
-      std::wstring::~wstring(v15);
-      v17 = -1;
-      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::~wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v14);
+      v2 = std::wstring::c_str(&v14);
+      wcscpy(this->m_swUnknown, v2);
+      std::wstring::~wstring(&v14);
+      v16 = -1;
+      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::~wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v13);
     }
     else
     {
-      (**(void (__thiscall ***)(struct IS4Chunk *, int, int))a2)(a2, (int)v13 + 100, 512);
+      a2->Load(this->m_swUnknown, 512);
     }
-    (**(void (__thiscall ***)(struct IS4Chunk *, int, int))a2)(a2, (int)v13 + 612, 26);
-    (**(void (__thiscall ***)(struct IS4Chunk *, int, int))a2)(a2, (int)v13 + 640, 4);
-    (**(void (__thiscall ***)(struct IS4Chunk *, int, int))a2)(a2, (int)v13 + 644, 4);
+    a2->Load(this->byte264, 26);
+    a2->Load(&this->m_iMapMaxNumPlayers, 4);
+    a2->Load(&this->m_uiPlayerCount, 4);
     for ( i = 0; i < 8; ++i )
-      CSavedPlayer::Load((CGameChunkGeneral *)((char *)v13 + 84 * i + 648), a2);
-    (**(void (__thiscall ***)(struct IS4Chunk *, int, int))a2)(a2, (int)v13 + 1320, 4);
-    (**(void (__thiscall ***)(struct IS4Chunk *, int, int))a2)(a2, (int)v13 + 2360, 4);
-    (**(void (__thiscall ***)(struct IS4Chunk *, int, int))a2)(a2, (int)v13 + 2376, 4);
-    (**(void (__thiscall ***)(struct IS4Chunk *, int, int))a2)(a2, (int)v13 + 2380, 4);
-    v12 = 0;
-    (**(void (__thiscall ***)(struct IS4Chunk *, unsigned __int8 *, int))a2)(a2, &v12, 1);
-    if ( v12 >= 0x19u )
+      CSavedPlayer::Load(&this->m_sPlayers[i], a2);
+    a2->Load(&this->m_uMultiPlayerGameID, 4);
+    a2->Load(&this->m_iTeamWon, 4);
+    a2->Load(&this->m_uiTickCounter, 4);
+    a2->Load(&this->m_iNetworkTimeDelta, 4);
+    uCampaignType = 0;
+    a2->Load(&uCampaignType, 1);
+    if ( uCampaignType >= 0x19u )
     {
       if ( BBSupportDbgReport(1, "LoadSave\\GeneralChunk.cpp", 143, "Load(): Invalid campaign type!") == 1 )
         __debugbreak();
-      v12 = 0;
+      uCampaignType = 0;
     }
-    *((_DWORD *)v13 + 2) = v12;
-    (**(void (__thiscall ***)(struct IS4Chunk *, int, int))a2)(a2, (int)v13 + 12, 4);
-    result = (*(int (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 12))(a2, 761539484);
+    this->m_uCampaignType = uCampaignType;
+    a2->Load(&this->dwordC, 4);
+    a2->LoadSignature(761539484);
   }
-  if ( v11 >= 4 )
+  if ( uGameChunkVersion >= 4 )
   {
-    (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 12))(a2, 2103716763);
-    (**(void (__thiscall ***)(struct IS4Chunk *, int, int))a2)(a2, (int)v13 + 1324, 1024);
-    result = (*(int (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 12))(a2, -1922815076);
+    a2->LoadSignature(0x7D642B9B);
+    a2->Load(this->byte52C, 1024);
+    a2->LoadSignature(0x8D642B9C);
   }
-  if ( v11 >= 5 )
+  if ( uGameChunkVersion >= 5 )
   {
-    (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 12))(a2, 224668571);
-    (**(void (__thiscall ***)(struct IS4Chunk *, int, int))a2)(a2, (int)v13 + 2356, 1);
-    (**(void (__thiscall ***)(struct IS4Chunk *, int, int))a2)(a2, (int)v13 + 2348, 1);
-    (**(void (__thiscall ***)(struct IS4Chunk *, int, int))a2)(a2, (int)v13 + 2349, 7);
-    result = (*(int (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 12))(a2, 493104027);
+    a2->LoadSignature(0xD642B9B);
+    a2->Load(&this->byte934, 1);
+    a2->Load(&this->byte92C, 1);
+    a2->Load(this->m_pEconomyGoodsArray, 7);
+    a2->LoadSignature(493104027);
   }
-  if ( v11 >= 6 )
+  if ( uGameChunkVersion >= 6 )
   {
-    (**(void (__thiscall ***)(struct IS4Chunk *, int, int))a2)(a2, (int)v13 + 2364, 1);
-    (**(void (__thiscall ***)(struct IS4Chunk *, int, int))a2)(a2, (int)v13 + 2365, 1);
-    (**(void (__thiscall ***)(struct IS4Chunk *, int, int))a2)(a2, (int)v13 + 2368, 4);
-    result = (*(int (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 12))(a2, 493104029);
+    a2->Load(&this->m_cLocalSlot, 1);
+    a2->Load(&this->m_bIsHost, 1);
+    a2->Load(&this->m_uSavegameId, 4);
+    a2->LoadSignature(493104029);
   }
-  if ( v11 >= 7 )
+  if ( uGameChunkVersion >= 7 )
   {
-    (**(void (__thiscall ***)(struct IS4Chunk *, int, int))a2)(a2, (int)v13 + 2372, 1);
-    result = (*(int (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 12))(a2, 493104030);
+    a2->Load(&this->m_bIsClanGame, 1);
+    a2->LoadSignature(493104030);
   }
-  if ( v11 >= 8 )
+  if ( uGameChunkVersion >= 8 )
   {
-    v4 = (*(int (__thiscall **)(struct IS4Chunk *))(*(_DWORD *)a2 + 8))(a2);
-    *((_DWORD *)v13 + 596) = v4;
-    v5 = (*(int (__thiscall **)(struct IS4Chunk *))(*(_DWORD *)a2 + 8))(a2);
-    *((_DWORD *)v13 + 597) = v5;
-    result = (*(int (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 12))(a2, 493104031);
+    v3 = a2->LoadUnsigned32_(a2);
+    this->dword950 = v3;
+    v4 = a2->LoadUnsigned32_(a2);
+    this->dword954 = v4;
+    a2->LoadSignature(493104031);
   }
-  if ( v11 >= 9 )
+  if ( uGameChunkVersion >= 9 )
   {
-    v6 = (*(int (__thiscall **)(struct IS4Chunk *))(*(_DWORD *)a2 + 8))(a2);
-    *((_DWORD *)v13 + 598) = v6;
-    v7 = (*(int (__thiscall **)(struct IS4Chunk *))(*(_DWORD *)a2 + 8))(a2);
-    *((_DWORD *)v13 + 599) = v7;
-    v8 = (*(int (__thiscall **)(struct IS4Chunk *))(*(_DWORD *)a2 + 8))(a2);
-    *((_DWORD *)v13 + 600) = v8;
-    *((_BYTE *)v13 + 2404) = 1;
-    result = (*(int (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 12))(a2, 493104032);
+    v5 = a2->LoadUnsigned32_(a2);
+    this->dword958 = v5;
+    v6 = a2->LoadUnsigned32_(a2);
+    this->dword95C = v6;
+    v7 = a2->LoadUnsigned32_(a2);
+    this->dword960 = v7;
+    this->byte964 = 1;
+    a2->LoadSignature(493104032);
   }
-  if ( v11 >= 1 && v11 <= 10 )
-    return result;
-  BBSupportTracePrintF(3, "Defect CGameChunkGeneral data!");
-  pExceptionObject = 0;
-  CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
-  _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
-  return result;
+  if ( uGameChunkVersion < 1 || uGameChunkVersion > 10 )
+  {
+    BBSupportTracePrintF(3, "Defect CGameChunkGeneral data!");
+    pExceptionObject = 0;
+    CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
+    _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
+  }
 }
 
 
 // address=[0x13ec060]
-// Decompiled from int __thiscall CGameChunkGeneral::Save(CGameChunkGeneral *this, struct IS4Chunk *a2)
+// Decompiled from void __thiscall CGameChunkGeneral::Save(CGameChunkGeneral *this, struct IS4Chunk *a2)
 void  CGameChunkGeneral::Save(class IS4Chunk & a2) {
   
   int i; // [esp+0h] [ebp-Ch]
-  char v5; // [esp+Bh] [ebp-1h] BYREF
+  char v4; // [esp+Bh] [ebp-1h] BYREF
 
   if ( *((_DWORD *)this + 2) > 0x18u
     && BBSupportDbgReport(
@@ -192,50 +189,50 @@ void  CGameChunkGeneral::Save(class IS4Chunk & a2) {
   {
     __debugbreak();
   }
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 24))(a2, 761539483);
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 20))(a2, 10);
-  (*(void (__thiscall **)(struct IS4Chunk *, char *, int))(*(_DWORD *)a2 + 16))(a2, (char *)this + 4, 4);
-  (*(void (__thiscall **)(struct IS4Chunk *, char *, int))(*(_DWORD *)a2 + 16))(a2, (char *)this + 16, 4);
-  (*(void (__thiscall **)(struct IS4Chunk *, char *, int))(*(_DWORD *)a2 + 16))(a2, (char *)this + 20, 4);
-  (*(void (__thiscall **)(struct IS4Chunk *, char *, int))(*(_DWORD *)a2 + 16))(a2, (char *)this + 24, 4);
-  (*(void (__thiscall **)(struct IS4Chunk *, char *, int))(*(_DWORD *)a2 + 16))(a2, (char *)this + 28, 4);
-  (*(void (__thiscall **)(struct IS4Chunk *, char *, int))(*(_DWORD *)a2 + 16))(a2, (char *)this + 32, 4);
-  (*(void (__thiscall **)(struct IS4Chunk *, char *, int))(*(_DWORD *)a2 + 16))(a2, (char *)this + 36, 64);
-  (*(void (__thiscall **)(struct IS4Chunk *, char *, int))(*(_DWORD *)a2 + 16))(a2, (char *)this + 100, 512);
-  (*(void (__thiscall **)(struct IS4Chunk *, char *, int))(*(_DWORD *)a2 + 16))(a2, (char *)this + 612, 26);
-  (*(void (__thiscall **)(struct IS4Chunk *, char *, int))(*(_DWORD *)a2 + 16))(a2, (char *)this + 640, 4);
-  (*(void (__thiscall **)(struct IS4Chunk *, char *, int))(*(_DWORD *)a2 + 16))(a2, (char *)this + 644, 4);
+  a2->SaveSignature(761539483);
+  a2->SaveUnsigned32(10);
+  a2->Save((char *)this + 4, 4);
+  a2->Save((char *)this + 16, 4);
+  a2->Save((char *)this + 20, 4);
+  a2->Save((char *)this + 24, 4);
+  a2->Save((char *)this + 28, 4);
+  a2->Save((char *)this + 32, 4);
+  a2->Save((char *)this + 36, 64);
+  a2->Save((char *)this + 100, 512);
+  a2->Save((char *)this + 612, 26);
+  a2->Save((char *)this + 640, 4);
+  a2->Save((char *)this + 644, 4);
   for ( i = 0; i < 8; ++i )
     CSavedPlayer::Save((CGameChunkGeneral *)((char *)this + 84 * i + 648), a2);
-  (*(void (__thiscall **)(struct IS4Chunk *, char *, int))(*(_DWORD *)a2 + 16))(a2, (char *)this + 1320, 4);
-  (*(void (__thiscall **)(struct IS4Chunk *, char *, int))(*(_DWORD *)a2 + 16))(a2, (char *)this + 2360, 4);
-  (*(void (__thiscall **)(struct IS4Chunk *, char *, int))(*(_DWORD *)a2 + 16))(a2, (char *)this + 2376, 4);
-  (*(void (__thiscall **)(struct IS4Chunk *, char *, int))(*(_DWORD *)a2 + 16))(a2, (char *)this + 2380, 4);
-  v5 = *((_BYTE *)this + 8);
-  (*(void (__thiscall **)(struct IS4Chunk *, char *, int))(*(_DWORD *)a2 + 16))(a2, &v5, 1);
-  (*(void (__thiscall **)(struct IS4Chunk *, char *, int))(*(_DWORD *)a2 + 16))(a2, (char *)this + 12, 4);
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 24))(a2, 761539484);
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 24))(a2, 2103716763);
-  (*(void (__thiscall **)(struct IS4Chunk *, char *, int))(*(_DWORD *)a2 + 16))(a2, (char *)this + 1324, 1024);
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 24))(a2, -1922815076);
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 24))(a2, 224668571);
-  (*(void (__thiscall **)(struct IS4Chunk *, char *, int))(*(_DWORD *)a2 + 16))(a2, (char *)this + 2356, 1);
-  (*(void (__thiscall **)(struct IS4Chunk *, char *, int))(*(_DWORD *)a2 + 16))(a2, (char *)this + 2348, 1);
-  (*(void (__thiscall **)(struct IS4Chunk *, char *, int))(*(_DWORD *)a2 + 16))(a2, (char *)this + 2349, 7);
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 24))(a2, 493104027);
-  (*(void (__thiscall **)(struct IS4Chunk *, char *, int))(*(_DWORD *)a2 + 16))(a2, (char *)this + 2364, 1);
-  (*(void (__thiscall **)(struct IS4Chunk *, char *, int))(*(_DWORD *)a2 + 16))(a2, (char *)this + 2365, 1);
-  (*(void (__thiscall **)(struct IS4Chunk *, char *, int))(*(_DWORD *)a2 + 16))(a2, (char *)this + 2368, 4);
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 24))(a2, 493104029);
-  (*(void (__thiscall **)(struct IS4Chunk *, char *, int))(*(_DWORD *)a2 + 16))(a2, (char *)this + 2372, 1);
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 24))(a2, 493104030);
-  (*(void (__thiscall **)(struct IS4Chunk *, _DWORD))(*(_DWORD *)a2 + 20))(a2, *((_DWORD *)this + 596));
-  (*(void (__thiscall **)(struct IS4Chunk *, _DWORD))(*(_DWORD *)a2 + 20))(a2, *((_DWORD *)this + 597));
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 24))(a2, 493104031);
-  (*(void (__thiscall **)(struct IS4Chunk *, _DWORD))(*(_DWORD *)a2 + 20))(a2, *((_DWORD *)this + 598));
-  (*(void (__thiscall **)(struct IS4Chunk *, _DWORD))(*(_DWORD *)a2 + 20))(a2, *((_DWORD *)this + 599));
-  (*(void (__thiscall **)(struct IS4Chunk *, _DWORD))(*(_DWORD *)a2 + 20))(a2, *((_DWORD *)this + 600));
-  return (*(int (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 24))(a2, 493104032);
+  a2->Save((char *)this + 1320, 4);
+  a2->Save((char *)this + 2360, 4);
+  a2->Save((char *)this + 2376, 4);
+  a2->Save((char *)this + 2380, 4);
+  v4 = *((_BYTE *)this + 8);
+  a2->Save(&v4, 1);
+  a2->Save((char *)this + 12, 4);
+  a2->SaveSignature(761539484);
+  a2->SaveSignature(2103716763);
+  a2->Save((char *)this + 1324, 1024);
+  a2->SaveSignature(-1922815076);
+  a2->SaveSignature(224668571);
+  a2->Save((char *)this + 2356, 1);
+  a2->Save((char *)this + 2348, 1);
+  a2->Save((char *)this + 2349, 7);
+  a2->SaveSignature(493104027);
+  a2->Save((char *)this + 2364, 1);
+  a2->Save((char *)this + 2365, 1);
+  a2->Save((char *)this + 2368, 4);
+  a2->SaveSignature(493104029);
+  a2->Save((char *)this + 2372, 1);
+  a2->SaveSignature(493104030);
+  a2->SaveUnsigned32(*((_DWORD *)this + 596));
+  a2->SaveUnsigned32(*((_DWORD *)this + 597));
+  a2->SaveSignature(493104031);
+  a2->SaveUnsigned32(*((_DWORD *)this + 598));
+  a2->SaveUnsigned32(*((_DWORD *)this + 599));
+  a2->SaveUnsigned32(*((_DWORD *)this + 600));
+  a2->SaveSignature(493104032);
 }
 
 

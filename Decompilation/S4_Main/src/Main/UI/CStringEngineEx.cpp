@@ -2,7 +2,7 @@
 
 #include "CBB/CBBSupport.h"
 #include "Main/CGameSettings.h"
-#include "File/CFileEx.h"
+#include "../../File/CFileEx.h"
 #include "Main/CS4DefineNames.h"
 
 // Definitions for class CStringEngineEx
@@ -165,7 +165,7 @@ bool CStringEngineEx::ExtractStrings(char *sdTextFileData, int size, int _bFillE
     }
     if (readTxtIndex < STRINGID_MAX && !this->m_swpTexts[readTxtIndex] && (uTextSize > 0 || (_bFillEmptyStrings & 1) == 0))
     {
-      this->m_swpTexts[readTxtIndex] = (wchar_t *)operator new[](uTextSize + 1);
+      this->m_swpTexts[readTxtIndex] =new char[uTextSize + 1];
       if (uTextSize > 0)
         memcpy(this->m_swpTexts[readTxtIndex], &sdTextFileData[uTextPointer], uTextSize);
       *((_BYTE *)this->m_swpTexts[readTxtIndex] + uTextSize) = 0;

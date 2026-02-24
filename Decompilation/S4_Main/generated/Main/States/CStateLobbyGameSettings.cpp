@@ -1476,29 +1476,29 @@ bool  CStateLobbyGameSettings::CheckReady(void) {
   unsigned int k; // [esp+28h] [ebp-8h]
 
   LocalSlot = (char)CPlayerManager::GetLocalSlot();
-  if ( !CGameType::IsMapLoaded((CGameType *)g_pGameType) && !byte_40308A3 )
+  if ( !CGameType::IsMapLoaded(g_pGameType) && !byte_40308A3 )
     return 0;
-  if ( *(_DWORD *)(g_pGameType + 4 * LocalSlot + 452) == 6 )
+  if ( g_pGameType->m_sPlayerSlot11[LocalSlot] == 6 )
     return 1;
-  for ( i = 0; i < *(_DWORD *)(g_pGameType + 852); ++i )
+  for ( i = 0; i < g_pGameType->m_iMapMaxNumPlayers; ++i )
   {
     if ( i != LocalSlot
-      && *(_DWORD *)(g_pGameType + 4 * i + 332) == *(_DWORD *)(g_pGameType + 4 * LocalSlot + 332)
-      && !*(_BYTE *)(i + g_pGameType + 440) )
+      && g_pGameType->m_sPlayerColor[i] == g_pGameType->m_sPlayerColor[LocalSlot]
+      && !g_pGameType->m_sPlayerSlot10[i] )
     {
       return 0;
     }
   }
-  if ( *(_DWORD *)(g_pGameType + 864) != 3 )
+  if ( g_pGameType->m_iMode != 3 )
     return 1;
-  v3 = operator new[](4 * *(_DWORD *)(g_pGameType + 72));
-  memset(v3, 0, 4 * *(_DWORD *)(g_pGameType + 72));
-  for ( j = 0; j < *(_DWORD *)(g_pGameType + 112); ++j )
+  v3 = operator new[](4 * g_pGameType->m_uiNumberAlliances);
+  memset(v3, 0, 4 * g_pGameType->m_uiNumberAlliances);
+  for ( j = 0; j < g_pGameType->m_iActualPlayerCount; ++j )
   {
-    v4 = *(_DWORD *)(g_pGameType + 4 * j + 152);
-    if ( !*(_BYTE *)(j + g_pGameType + 440) )
+    v4 = g_pGameType->m_sPlayerTeam[j];
+    if ( !g_pGameType->m_sPlayerSlot10[j] )
     {
-      if ( (v4 < 0 || (unsigned int)v4 >= *(_DWORD *)(g_pGameType + 72))
+      if ( (v4 < 0 || (unsigned int)v4 >= g_pGameType->m_uiNumberAlliances)
         && BBSupportDbgReport(
              2,
              "main\\states\\StateLobbyGameSettings.cpp",
@@ -1507,11 +1507,11 @@ bool  CStateLobbyGameSettings::CheckReady(void) {
       {
         __debugbreak();
       }
-      if ( v4 >= 0 && (unsigned int)v4 < *(_DWORD *)(g_pGameType + 72) )
+      if ( v4 >= 0 && (unsigned int)v4 < g_pGameType->m_uiNumberAlliances )
         ++*((_DWORD *)v3 + v4);
     }
   }
-  for ( k = 0; k < *(_DWORD *)(g_pGameType + 72); ++k )
+  for ( k = 0; k < g_pGameType->m_uiNumberAlliances; ++k )
   {
     if ( *((int *)v3 + k) <= 0 )
     {

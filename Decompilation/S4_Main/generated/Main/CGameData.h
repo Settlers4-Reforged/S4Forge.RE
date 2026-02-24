@@ -58,7 +58,7 @@ public:
 
     // Type information members
 public:
-    _DWORD dword0;
+    _DWORD m_iTickCounter;
     _DWORD dword4;
     _DWORD dword8;
     _DWORD dwordC;
@@ -73,17 +73,18 @@ public:
     _BYTE[2] gap2A;
     int m_sRandom;
     _BYTE[4] gap30;
-    _BYTE byte34;
+    _BYTE m_bIsGameWon;
     _BYTE[3] gap35;
-    _DWORD dword38;
+    _DWORD m_iTeamWon;
     _DWORD m_iType;
-    std::string std__string40;
+    std::string m_swGameType;
     _DWORD m_iMode;
-    std::string std__string60;
-    _WORD word7C;
+    std::string m_swMapMode;
+    _BYTE m_bIsNetworkGame;
+    _BYTE m_bIsLastFrameRendered;
     _BYTE byte7E;
-    _BYTE byte7F;
-    char char80;
+    _BYTE m_bIsLadderGame;
+    char[7] m_pEconomyGoodsArray;
 
 };
 

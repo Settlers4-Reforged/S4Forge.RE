@@ -445,10 +445,10 @@ void  CGameScriptManager::StartScript(void) {
 
 
 // address=[0x15ff960]
-// Decompiled from int __thiscall CGameScriptManager::CreateStartResources(void ***this, int a2, int a3, int a4, int a5, int a6)
-void  CGameScriptManager::CreateStartResources(int a2, int a3, int a4, int a5, int a6) {
+// Decompiled from struct IScriptFile *__thiscall CGameScriptManager::CreateStartResources(  CGameScriptManager *this,  int a2,  int _iStartX,  int _iStartY,  int a5,  int a6)
+void  CGameScriptManager::CreateStartResources(int a2, int _iStartX, int _iStartY, int a5, int a6) {
   
-  int result; // eax
+  struct IScriptFile *result; // eax
   struct IScriptFile *v7; // [esp+18h] [ebp-24h]
   char *v8; // [esp+28h] [ebp-14h]
 
@@ -457,11 +457,11 @@ void  CGameScriptManager::CreateStartResources(int a2, int a3, int a4, int a5, i
   else
     v7 = 0;
   v8 = 0;
-  CLua::ExecuteScript(this[3], v7);
-  CLua::PushInt(this[3], a3);
-  CLua::PushInt(this[3], a4);
-  CLua::PushInt(this[3], a5);
-  CLua::PushInt(this[3], a6);
+  CLua::ExecuteScript(*((void ***)this + 3), v7);
+  CLua::PushInt(*((void ***)this + 3), _iStartX);
+  CLua::PushInt(*((void ***)this + 3), _iStartY);
+  CLua::PushInt(*((void ***)this + 3), a5);
+  CLua::PushInt(*((void ***)this + 3), a6);
   switch ( a2 )
   {
     case 1:
@@ -485,11 +485,11 @@ void  CGameScriptManager::CreateStartResources(int a2, int a3, int a4, int a5, i
       }
       break;
   }
-  if ( v8 && !CLua::IsNil(this[3], v8) )
-    CLua::CallFunction(this[3], v8);
-  result = (int)v7;
+  if ( v8 && !CLua::IsNil(*((void ***)this + 3), v8) )
+    CLua::CallFunction(*((void ***)this + 3), v8);
+  result = v7;
   if ( v7 )
-    return (**(int (__thiscall ***)(struct IScriptFile *, int))v7)(v7, 1);
+    return (struct IScriptFile *)(**(int (__thiscall ***)(struct IScriptFile *, int))v7)(v7, 1);
   return result;
 }
 

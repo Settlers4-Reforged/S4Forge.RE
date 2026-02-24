@@ -3638,7 +3638,7 @@ void __cdecl InitGuiDlgAOBriefing(void) {
   IGuiEngine::SetText((void *)g_pGUIEngine, 7, 13, v2);
   v3 = (char *)std::string::c_str(&unk_402C97C);
   IGuiEngine::SetText((void *)g_pGUIEngine, 7, 22, v3);
-  v4 = (char *)std::string::c_str(&unk_402C9B4);
+  v4 = (char *)std::string::c_str(&stru_402C9B4);
   IGuiEngine::SetText((void *)g_pGUIEngine, 7, 15, v4);
   IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 7, 6, 0);
   IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 7, 4, 0);
@@ -3699,7 +3699,7 @@ bool __cdecl GuiDlgAOBriefingProc(int a1, int a2, int a3) {
         case 20:
           if ( (a2 & 0x10000) != 0 )
           {
-            v6 = (char *)std::string::c_str(&unk_402C9D0);
+            v6 = (char *)std::string::c_str(&stru_402C9D0);
             IGuiEngine::SetText((void *)g_pGUIEngine, 7, 19, v6);
             IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 7, 6, 1);
           }
@@ -5504,7 +5504,7 @@ void __cdecl InitGuiDlgBriefing(void) {
   {
     v0 = g_pStringEngine->GetString(g_pStringEngine, 880);
     IGuiEngine::SetText((void *)g_pGUIEngine, 35, 369, v0);
-    v1 = (char *)std::string::c_str(&unk_402C9B4);
+    v1 = (char *)std::string::c_str(&stru_402C9B4);
     IGuiEngine::SetText((void *)g_pGUIEngine, 35, 370, v1);
   }
 }
@@ -13631,7 +13631,7 @@ bool __cdecl GuiDlgLoadSaveSubmenuProc(int a1, int a2, int a3) {
     case 0:
       IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 8, 928, 1);
       byte_3ECFA3B = CGameData::GetMode(g_pGameData) == 3;
-      if ( (unsigned __int8)std::operator!=<char>(&unk_402C9B4, (char *)&unk_368F798) || byte_3ECFA3B )
+      if ( (unsigned __int8)std::operator!=<char>(&stru_402C9B4, (char *)&unk_368F798) || byte_3ECFA3B )
         IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 8, 929, 1);
       else
         IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 8, 929, 0);
@@ -14552,7 +14552,7 @@ void __cdecl InitGuiDlgMainBriefing(void) {
   IGuiEngine::SetText((void *)g_pGUIEngine, 10, 2054, v2);
   v3 = (char *)std::string::c_str(&unk_402C97C);
   IGuiEngine::SetText((void *)g_pGUIEngine, 10, 2068, v3);
-  v4 = (char *)std::string::c_str(&unk_402C9B4);
+  v4 = (char *)std::string::c_str(&stru_402C9B4);
   IGuiEngine::SetText((void *)g_pGUIEngine, 10, 2069, v4);
   IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 10, 2074, 0);
   IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 10, 2075, 0);
@@ -14616,7 +14616,7 @@ bool __cdecl GuiDlgMainBriefingProc(int a1, int a2, int a3) {
         case 2073:
           if ( (a2 & 0x10000) != 0 )
           {
-            v6 = (char *)std::string::c_str(&unk_402C9D0);
+            v6 = (char *)std::string::c_str(&stru_402C9D0);
             IGuiEngine::SetText((void *)g_pGUIEngine, 10, 2058, v6);
             if ( byte_402C9F4 )
             {
@@ -16118,41 +16118,41 @@ void __cdecl GuiDlgMainGameSettingsUpdateChangeSlot(int a1) {
   char result; // al
   CHAR v2[4]; // [esp+0h] [ebp-18h] BYREF
   CHAR Str[4]; // [esp+4h] [ebp-14h] BYREF
-  int v4; // [esp+8h] [ebp-10h]
+  DWORD v4; // [esp+8h] [ebp-10h]
   int v5; // [esp+Ch] [ebp-Ch]
   int i; // [esp+10h] [ebp-8h]
   char v7; // [esp+17h] [ebp-1h]
 
   for ( i = 0; i < 8; ++i )
   {
-    if ( *(_BYTE *)(g_pGameType + *(_DWORD *)(g_pGameType + 4 * i + 564) + 440) )
-      *(_DWORD *)(g_pGameType + 4 * i + 564) = -1;
+    if ( g_pGameType->m_sPlayerSlot10[g_pGameType->m_sPlayerSlot15[i]] )
+      g_pGameType->m_sPlayerSlot15[i] = -1;
   }
   v7 = 0;
   for ( i = 0; i < 8; ++i )
   {
-    if ( *(_DWORD *)(g_pGameType + 4 * i + 564) == a1 )
+    if ( g_pGameType->m_sPlayerSlot15[i] == a1 )
       v7 = 1;
   }
-  if ( *(_DWORD *)(g_pGameType + 4 * a1 + 564) == -1 || *(_BYTE *)(a1 + g_pGameType + 440) )
+  if ( g_pGameType->m_sPlayerSlot15[a1] == -1 || g_pGameType->m_sPlayerSlot10[a1] )
   {
-    if ( *(_BYTE *)(a1 + g_pGameType + 440) || !v7 || (result = a1, *(_DWORD *)(g_pGameType + 4 * a1 + 564) == a1) )
+    if ( g_pGameType->m_sPlayerSlot10[a1] || !v7 || (result = a1, g_pGameType->m_sPlayerSlot15[a1] == a1) )
     {
       _wsprintfA(v2, "%u", a1 + 1);
-      IGuiEngine::SetFontTemplate((IGuiEngine *)g_pGUIEngine, dword_403089C, dword_3690578[11 * a1], 1);
-      return IGuiEngine::SetText((void *)g_pGUIEngine, dword_403089C, dword_3690578[11 * a1], v2);
+      IGuiEngine::SetFontTemplate(g_pGUIEngine, dword_403089C, dword_3690578[11 * a1], 1);
+      return IGuiEngine::SetText(g_pGUIEngine, dword_403089C, dword_3690578[11 * a1], v2);
     }
   }
   else
   {
     v5 = a1;
-    v4 = *(_DWORD *)(g_pGameType + 4 * a1 + 564);
+    v4 = g_pGameType->m_sPlayerSlot15[a1];
     _wsprintfA(Str, "%u-%u", a1 + 1, v4 + 1);
-    IGuiEngine::SetFontTemplate((IGuiEngine *)g_pGUIEngine, dword_403089C, dword_3690578[11 * v5], 18);
-    IGuiEngine::SetText((void *)g_pGUIEngine, dword_403089C, dword_3690578[11 * v5], Str);
+    IGuiEngine::SetFontTemplate(g_pGUIEngine, dword_403089C, dword_3690578[11 * v5], 18);
+    IGuiEngine::SetText(g_pGUIEngine, dword_403089C, dword_3690578[11 * v5], Str);
     _wsprintfA(Str, "%u-%u", v4 + 1, v5 + 1);
-    IGuiEngine::SetFontTemplate((IGuiEngine *)g_pGUIEngine, dword_403089C, dword_3690578[11 * v4], 18);
-    return IGuiEngine::SetText((void *)g_pGUIEngine, dword_403089C, dword_3690578[11 * v4], Str);
+    IGuiEngine::SetFontTemplate(g_pGUIEngine, dword_403089C, dword_3690578[11 * v4], 18);
+    return IGuiEngine::SetText(g_pGUIEngine, dword_403089C, dword_3690578[11 * v4], Str);
   }
   return result;
 }
@@ -16189,7 +16189,7 @@ void __cdecl GuiDlgMainGameSettingstUpdate(void) {
     IGuiEngine::SetControlVisibility(g_pGUIEngine, dword_403089C, 2244, 0);
   IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, 2244, byte_40308A1);
   IGuiEngine::SelectControl(g_pGUIEngine, dword_403089C, 2244, byte_40308A2);
-  if ( *(_DWORD *)(g_pGameType + 4 * dword_3D891AC + 116) == 1
+  if ( g_pGameType->m_sPlayerType[dword_3D891AC] == 1
     || !byte_4030852
     || INetworkEngine::StormDidEnterSession((INetworkEngine *)g_pNetworkEngine) )
   {
@@ -16316,18 +16316,18 @@ void __cdecl GuiDlgMainGameSettingstUpdate(void) {
     v7 = -1;
     for ( k = 0; k < 8; ++k )
     {
-      if ( *(_DWORD *)(g_pGameType + 4 * k + 564) == (char)CPlayerManager::GetLocalSlot() )
+      if ( g_pGameType->m_sPlayerSlot15[k] == (char)CPlayerManager::GetLocalSlot() )
         v7 = k;
     }
     if ( v7 == -1 )
     {
-      if ( !CGameType::IsSlotChangable((CGameType *)g_pGameType, i, 0)
-        || *(_DWORD *)(g_pGameType + 4 * (char)CPlayerManager::GetLocalSlot() + 452) == 6
-        || *(_DWORD *)(g_pGameType + 4 * i + 452) == 6
-        && *(_DWORD *)(g_pGameType + 4 * i + 116) != 2
-        && *(_DWORD *)(g_pGameType + 4 * i + 116) != 3
-        && !*(_BYTE *)(i + g_pGameType + 440)
-        || (!CGameType::IsClanGame((CGameType *)g_pGameType)
+      if ( !CGameType::IsSlotChangable(g_pGameType, i, 0)
+        || g_pGameType->m_sPlayerSlot11[(char)CPlayerManager::GetLocalSlot()] == 6
+        || g_pGameType->m_sPlayerSlot11[i] == 6
+        && g_pGameType->m_sPlayerType[i] != 2
+        && g_pGameType->m_sPlayerType[i] != 3
+        && !g_pGameType->m_sPlayerSlot10[i]
+        || (!CGameType::IsClanGame(g_pGameType)
           ? (v5 = 1)
           : (v5 = *(_DWORD *)(dword_403083C + 2116 * (char)CPlayerManager::GetLocalSlot() + 4) == *(_DWORD *)(dword_403083C + 2116 * i + 4)),
             !v5) )
@@ -16340,7 +16340,7 @@ LABEL_93:
         }
       }
     }
-    else if ( *(_DWORD *)(g_pGameType + 4 * (char)CPlayerManager::GetLocalSlot() + 452) == 6
+    else if ( g_pGameType->m_sPlayerSlot11[(char)CPlayerManager::GetLocalSlot()] == 6
            || i != (char)CPlayerManager::GetLocalSlot() && i != v7 )
     {
       goto LABEL_93;
@@ -16551,89 +16551,88 @@ bool __cdecl GuiDlgMainGameSettingsProc(int a1, int a2, int a3) {
   int v9; // eax
   signed __int8 v10; // al
   int Topindex; // eax
-  int v12; // ecx
-  CEvn_Event *v13; // [esp+4h] [ebp-44Ch]
-  CEvn_Event *v14; // [esp+Ch] [ebp-444h]
-  CEvn_Event *v15; // [esp+14h] [ebp-43Ch]
-  CEvn_Event *v16; // [esp+1Ch] [ebp-434h]
-  CEvn_Event *v17; // [esp+24h] [ebp-42Ch]
-  CEvn_Event *v18; // [esp+2Ch] [ebp-424h]
-  CEvn_Event *v19; // [esp+34h] [ebp-41Ch]
-  CEvn_Event *v20; // [esp+40h] [ebp-410h]
-  CEvn_Event *v21; // [esp+48h] [ebp-408h]
-  CEvn_Event *v22; // [esp+50h] [ebp-400h]
-  CEvn_Event *v23; // [esp+58h] [ebp-3F8h]
-  CEvn_Event *v24; // [esp+60h] [ebp-3F0h]
-  CEvn_Event *v25; // [esp+68h] [ebp-3E8h]
-  CEvn_Event *v26; // [esp+70h] [ebp-3E0h]
-  CEvn_Event *v27; // [esp+78h] [ebp-3D8h]
-  CEvn_Event *v28; // [esp+80h] [ebp-3D0h]
-  CEvn_Event *v29; // [esp+8Ch] [ebp-3C4h]
-  CEvn_Event *v30; // [esp+94h] [ebp-3BCh]
-  CEvn_Event *v31; // [esp+9Ch] [ebp-3B4h]
-  CEvn_Event *v32; // [esp+A4h] [ebp-3ACh]
-  CEvn_Event *v33; // [esp+ACh] [ebp-3A4h]
-  CEvn_Event *v34; // [esp+B4h] [ebp-39Ch]
-  CEvn_Event *v35; // [esp+BCh] [ebp-394h]
-  CEvn_Event *v36; // [esp+C4h] [ebp-38Ch]
-  CEvn_Event *v37; // [esp+CCh] [ebp-384h]
-  CEvn_Event *v38; // [esp+D4h] [ebp-37Ch]
-  CEvn_Event *v39; // [esp+DCh] [ebp-374h]
-  CEvn_Event *v40; // [esp+E4h] [ebp-36Ch]
-  CEvn_Event *v41; // [esp+ECh] [ebp-364h]
-  CEvn_Event *v42; // [esp+F4h] [ebp-35Ch]
-  CEvn_Event *v43; // [esp+FCh] [ebp-354h]
-  CEvn_Event *v44; // [esp+104h] [ebp-34Ch]
-  int v45; // [esp+10Ch] [ebp-344h]
+  CEvn_Event *v12; // [esp+4h] [ebp-44Ch]
+  CEvn_Event *v13; // [esp+Ch] [ebp-444h]
+  CEvn_Event *v14; // [esp+14h] [ebp-43Ch]
+  CEvn_Event *v15; // [esp+1Ch] [ebp-434h]
+  CEvn_Event *v16; // [esp+24h] [ebp-42Ch]
+  CEvn_Event *v17; // [esp+2Ch] [ebp-424h]
+  CEvn_Event *v18; // [esp+34h] [ebp-41Ch]
+  CEvn_Event *v19; // [esp+40h] [ebp-410h]
+  CEvn_Event *v20; // [esp+48h] [ebp-408h]
+  CEvn_Event *v21; // [esp+50h] [ebp-400h]
+  CEvn_Event *v22; // [esp+58h] [ebp-3F8h]
+  CEvn_Event *v23; // [esp+60h] [ebp-3F0h]
+  CEvn_Event *v24; // [esp+68h] [ebp-3E8h]
+  CEvn_Event *v25; // [esp+70h] [ebp-3E0h]
+  CEvn_Event *v26; // [esp+78h] [ebp-3D8h]
+  CEvn_Event *v27; // [esp+80h] [ebp-3D0h]
+  CEvn_Event *v28; // [esp+8Ch] [ebp-3C4h]
+  CEvn_Event *v29; // [esp+94h] [ebp-3BCh]
+  CEvn_Event *v30; // [esp+9Ch] [ebp-3B4h]
+  CEvn_Event *v31; // [esp+A4h] [ebp-3ACh]
+  CEvn_Event *v32; // [esp+ACh] [ebp-3A4h]
+  CEvn_Event *v33; // [esp+B4h] [ebp-39Ch]
+  CEvn_Event *v34; // [esp+BCh] [ebp-394h]
+  CEvn_Event *v35; // [esp+C4h] [ebp-38Ch]
+  CEvn_Event *v36; // [esp+CCh] [ebp-384h]
+  CEvn_Event *v37; // [esp+D4h] [ebp-37Ch]
+  CEvn_Event *v38; // [esp+DCh] [ebp-374h]
+  CEvn_Event *v39; // [esp+E4h] [ebp-36Ch]
+  CEvn_Event *v40; // [esp+ECh] [ebp-364h]
+  CEvn_Event *v41; // [esp+F4h] [ebp-35Ch]
+  CEvn_Event *v42; // [esp+FCh] [ebp-354h]
+  CEvn_Event *v43; // [esp+104h] [ebp-34Ch]
+  int v44; // [esp+10Ch] [ebp-344h]
   const char *Text; // [esp+110h] [ebp-340h]
-  unsigned int v47; // [esp+118h] [ebp-338h]
+  unsigned int v46; // [esp+118h] [ebp-338h]
   int j; // [esp+120h] [ebp-330h]
   int k; // [esp+124h] [ebp-32Ch]
   int i; // [esp+12Ch] [ebp-324h]
-  int v51; // [esp+130h] [ebp-320h]
-  unsigned int v52; // [esp+134h] [ebp-31Ch]
-  int v53; // [esp+138h] [ebp-318h]
-  bool v54; // [esp+13Fh] [ebp-311h] BYREF
-  CEvn_Event v55; // [esp+140h] [ebp-310h] BYREF
-  CEvn_Event v56; // [esp+158h] [ebp-2F8h] BYREF
-  CEvn_Event v57; // [esp+170h] [ebp-2E0h] BYREF
-  CEvn_Event v58; // [esp+188h] [ebp-2C8h] BYREF
-  CEvn_Event v59; // [esp+1A0h] [ebp-2B0h] BYREF
-  CEvn_Event v60; // [esp+1B8h] [ebp-298h] BYREF
-  CEvn_Event v61; // [esp+1D0h] [ebp-280h] BYREF
-  CEvn_Event v62; // [esp+1E8h] [ebp-268h] BYREF
-  CEvn_Event v63; // [esp+200h] [ebp-250h] BYREF
-  CEvn_Event v64; // [esp+218h] [ebp-238h] BYREF
-  CEvn_Event v65; // [esp+230h] [ebp-220h] BYREF
-  CEvn_Event v66; // [esp+248h] [ebp-208h] BYREF
-  CEvn_Event v67; // [esp+260h] [ebp-1F0h] BYREF
-  CEvn_Event v68; // [esp+278h] [ebp-1D8h] BYREF
-  CEvn_Event v69; // [esp+290h] [ebp-1C0h] BYREF
-  CEvn_Event v70; // [esp+2A8h] [ebp-1A8h] BYREF
-  CEvn_Event v71; // [esp+2C0h] [ebp-190h] BYREF
-  CEvn_Event v72; // [esp+2D8h] [ebp-178h] BYREF
-  CEvn_Event v73; // [esp+2F0h] [ebp-160h] BYREF
-  CEvn_Event v74; // [esp+308h] [ebp-148h] BYREF
-  CEvn_Event v75; // [esp+320h] [ebp-130h] BYREF
-  CEvn_Event v76; // [esp+338h] [ebp-118h] BYREF
-  CEvn_Event v77; // [esp+350h] [ebp-100h] BYREF
-  CEvn_Event v78; // [esp+368h] [ebp-E8h] BYREF
-  CEvn_Event v79; // [esp+380h] [ebp-D0h] BYREF
-  CEvn_Event v80; // [esp+398h] [ebp-B8h] BYREF
-  CEvn_Event v81; // [esp+3B0h] [ebp-A0h] BYREF
-  CEvn_Event v82; // [esp+3C8h] [ebp-88h] BYREF
-  CEvn_Event v83; // [esp+3E0h] [ebp-70h] BYREF
-  CEvn_Event v84; // [esp+3F8h] [ebp-58h] BYREF
-  CEvn_Event v85; // [esp+410h] [ebp-40h] BYREF
-  CEvn_Event v86; // [esp+428h] [ebp-28h] BYREF
-  int v87; // [esp+44Ch] [ebp-4h]
+  int v50; // [esp+130h] [ebp-320h]
+  unsigned int v51; // [esp+134h] [ebp-31Ch]
+  int v52; // [esp+138h] [ebp-318h]
+  bool v53; // [esp+13Fh] [ebp-311h] BYREF
+  CEvn_Event v54; // [esp+140h] [ebp-310h] BYREF
+  CEvn_Event v55; // [esp+158h] [ebp-2F8h] BYREF
+  CEvn_Event v56; // [esp+170h] [ebp-2E0h] BYREF
+  CEvn_Event v57; // [esp+188h] [ebp-2C8h] BYREF
+  CEvn_Event v58; // [esp+1A0h] [ebp-2B0h] BYREF
+  CEvn_Event v59; // [esp+1B8h] [ebp-298h] BYREF
+  CEvn_Event v60; // [esp+1D0h] [ebp-280h] BYREF
+  CEvn_Event v61; // [esp+1E8h] [ebp-268h] BYREF
+  CEvn_Event v62; // [esp+200h] [ebp-250h] BYREF
+  CEvn_Event v63; // [esp+218h] [ebp-238h] BYREF
+  CEvn_Event v64; // [esp+230h] [ebp-220h] BYREF
+  CEvn_Event v65; // [esp+248h] [ebp-208h] BYREF
+  CEvn_Event v66; // [esp+260h] [ebp-1F0h] BYREF
+  CEvn_Event v67; // [esp+278h] [ebp-1D8h] BYREF
+  CEvn_Event v68; // [esp+290h] [ebp-1C0h] BYREF
+  CEvn_Event v69; // [esp+2A8h] [ebp-1A8h] BYREF
+  CEvn_Event v70; // [esp+2C0h] [ebp-190h] BYREF
+  CEvn_Event v71; // [esp+2D8h] [ebp-178h] BYREF
+  CEvn_Event v72; // [esp+2F0h] [ebp-160h] BYREF
+  CEvn_Event v73; // [esp+308h] [ebp-148h] BYREF
+  CEvn_Event v74; // [esp+320h] [ebp-130h] BYREF
+  CEvn_Event v75; // [esp+338h] [ebp-118h] BYREF
+  CEvn_Event v76; // [esp+350h] [ebp-100h] BYREF
+  CEvn_Event v77; // [esp+368h] [ebp-E8h] BYREF
+  CEvn_Event v78; // [esp+380h] [ebp-D0h] BYREF
+  CEvn_Event v79; // [esp+398h] [ebp-B8h] BYREF
+  CEvn_Event v80; // [esp+3B0h] [ebp-A0h] BYREF
+  CEvn_Event v81; // [esp+3C8h] [ebp-88h] BYREF
+  CEvn_Event v82; // [esp+3E0h] [ebp-70h] BYREF
+  CEvn_Event v83; // [esp+3F8h] [ebp-58h] BYREF
+  CEvn_Event v84; // [esp+410h] [ebp-40h] BYREF
+  CEvn_Event v85; // [esp+428h] [ebp-28h] BYREF
+  int v86; // [esp+44Ch] [ebp-4h]
 
   if ( !g_pEvnEngine )
     return 0;
   if ( a1 && dword_3D891AC < 0 )
   {
     LocalSlot = CPlayerManager::GetLocalSlot();
-    v51 = LocalSlot;
+    v50 = LocalSlot;
     if ( LocalSlot <= 0 )
     {
       if ( byte_4030853 && !byte_4030852 )
@@ -16643,8 +16642,8 @@ bool __cdecl GuiDlgMainGameSettingsProc(int a1, int a2, int a3) {
           if ( g_pGameType )
           {
             Instance = StormManager::GetInstance();
-            if ( *(_DWORD *)(g_pGameType + 4 * v51 + 224) == StormManager::GetLocalPeerId(Instance) )
-              dword_3D891AC = v51;
+            if ( g_pGameType->m_sPlayerPeerId[v50] == StormManager::GetLocalPeerId(Instance) )
+              dword_3D891AC = v50;
           }
         }
       }
@@ -16670,58 +16669,58 @@ bool __cdecl GuiDlgMainGameSettingsProc(int a1, int a2, int a3) {
           goto LABEL_17;
         case 1:
           if ( !byte_3ED2031 && (a2 & 0x10000) != 0 )
-            PlayGuiSound(1);
+            PlayGuiSound(1u);
           break;
         case 2:
           if ( (unsigned __int16)a2 == 2153 )
-            PlayGuiSound(1);
+            PlayGuiSound(1u);
           break;
         case 3:
           switch ( (__int16)a2 )
           {
             case 2141:
-              PlayGuiSound(2);
-              v27 = CEvn_Event::CEvn_Event(&v71, 0x4Du, 0, 0, 0);
-              v87 = 1;
-              IEventEngine::SendAMessage(g_pEvnEngine, v27);
-              v87 = -1;
-              CEvn_Event::~CEvn_Event(&v71);
+              PlayGuiSound(2u);
+              v26 = CEvn_Event::CEvn_Event(&v70, 0x4Du, 0, 0, 0);
+              v86 = 1;
+              IEventEngine::SendAMessage(g_pEvnEngine, v26);
+              v86 = -1;
+              CEvn_Event::~CEvn_Event(&v70);
               break;
             case 2142:
               byte_3ED2030 = 0;
-              IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, dword_403089C, 2244, 0);
+              IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, 2244, 0);
               for ( i = 0; i < 8; ++i )
               {
-                if ( !*(_BYTE *)(i + g_pGameType + 440) )
+                if ( !g_pGameType->m_sPlayerSlot10[i] )
                 {
-                  IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 9], 0);
-                  IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 10], 0);
+                  IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 9], 0);
+                  IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 10], 0);
                 }
               }
-              PlayGuiSound(2);
-              v26 = CEvn_Event::CEvn_Event(&v70, 0x4Eu, 0, 0, 0);
-              v87 = 2;
-              IEventEngine::SendAMessage(g_pEvnEngine, v26);
-              v87 = -1;
-              CEvn_Event::~CEvn_Event(&v70);
+              PlayGuiSound(2u);
+              v25 = CEvn_Event::CEvn_Event(&v69, 0x4Eu, 0, 0, 0);
+              v86 = 2;
+              IEventEngine::SendAMessage(g_pEvnEngine, v25);
+              v86 = -1;
+              CEvn_Event::~CEvn_Event(&v69);
               break;
             case 2144:
-              PlayGuiSound(2);
-              v45 = UPlay::UPlayManager::GetInstance(v12);
-              (*(void (__thiscall **)(int))(*(_DWORD *)v45 + 20))(v45);
+              PlayGuiSound(2u);
+              v44 = UPlay::UPlayManager::GetInstance();
+              (*(void (__thiscall **)(int))(*(_DWORD *)v44 + 20))(v44);
               break;
             case 2153:
-              Text = IGuiEngine::GetText((IGuiEngine *)g_pGUIEngine, dword_403089C, 2153);
+              Text = IGuiEngine::GetText(g_pGUIEngine, dword_403089C, 2153);
               if ( Text )
               {
-                v29 = CEvn_Event::CEvn_Event(&v74, 0x26u, (unsigned int)Text, 0, 0);
-                v87 = 31;
-                IEventEngine::SendAMessage(g_pEvnEngine, v29);
-                v87 = -1;
-                CEvn_Event::~CEvn_Event(&v74);
+                v28 = CEvn_Event::CEvn_Event(&v73, 0x26u, (unsigned int)Text, 0, 0);
+                v86 = 31;
+                IEventEngine::SendAMessage(g_pEvnEngine, v28);
+                v86 = -1;
+                CEvn_Event::~CEvn_Event(&v73);
               }
-              IGuiEngine::SetText((void *)g_pGUIEngine, dword_403089C, 2153, (char *)&byte_368FC5D);
-              IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, dword_403089C, 2153, 1);
+              IGuiEngine::SetText(g_pGUIEngine, dword_403089C, 2153, (char *)&byte_368FC5D);
+              IGuiEngine::SelectControl(g_pGUIEngine, dword_403089C, 2153, 1);
               break;
             case 2155:
             case 2156:
@@ -16731,300 +16730,300 @@ bool __cdecl GuiDlgMainGameSettingsProc(int a1, int a2, int a3) {
             case 2160:
             case 2161:
             case 2162:
-              v52 = (char)CPlayerManager::GetLocalSlot();
-              v53 = (unsigned __int16)a2 - 2155;
-              v54 = 0;
-              if ( v52 != v53 && CGameType::IsSlotChangable((CGameType *)g_pGameType, v53, &v54) )
-                *(_DWORD *)(g_pGameType + 4 * v52 + 564) = v53;
-              if ( v52 == v53 )
+              v51 = (char)CPlayerManager::GetLocalSlot();
+              v52 = (unsigned __int16)a2 - 2155;
+              v53 = 0;
+              if ( v51 != v52 && CGameType::IsSlotChangable(g_pGameType, v52, &v53) )
+                g_pGameType->m_sPlayerSlot15[v51] = v52;
+              if ( v51 == v52 )
               {
                 for ( j = 0; j < 9; ++j )
                 {
-                  if ( *(_DWORD *)(g_pGameType + 4 * j + 564) == v52 )
-                    *(_DWORD *)(g_pGameType + 4 * j + 564) = -1;
+                  if ( g_pGameType->m_sPlayerSlot15[j] == v51 )
+                    g_pGameType->m_sPlayerSlot15[j] = -1;
                 }
-                *(_DWORD *)(g_pGameType + 4 * v52 + 564) = -1;
+                g_pGameType->m_sPlayerSlot15[v51] = -1;
               }
-              if ( v54 || *(_DWORD *)(g_pGameType + 4 * v53 + 564) == v52 )
+              if ( v53 || g_pGameType->m_sPlayerSlot15[v52] == v51 )
               {
                 dword_3D891AC = (unsigned __int16)a2 - 2155;
-                v23 = CEvn_Event::CEvn_Event(&v67, 0x51u, v52, v53, 0);
-                v87 = 5;
-                IEventEngine::SendAMessage(g_pEvnEngine, v23);
-                v87 = -1;
-                CEvn_Event::~CEvn_Event(&v67);
-                *(_DWORD *)(g_pGameType + 4 * v52 + 564) = -1;
-                *(_DWORD *)(g_pGameType + 4 * v53 + 564) = -1;
+                v22 = CEvn_Event::CEvn_Event(&v66, 0x51u, v51, v52, 0);
+                v86 = 5;
+                IEventEngine::SendAMessage(g_pEvnEngine, v22);
+                v86 = -1;
+                CEvn_Event::~CEvn_Event(&v66);
+                g_pGameType->m_sPlayerSlot15[v51] = -1;
+                g_pGameType->m_sPlayerSlot15[v52] = -1;
               }
               else
               {
-                v22 = CEvn_Event::CEvn_Event(&v66, 0x1F58u, v52, v53, 0);
-                v87 = 6;
-                IEventEngine::SendAMessage(g_pEvnEngine, v22);
-                v87 = -1;
-                CEvn_Event::~CEvn_Event(&v66);
+                v21 = CEvn_Event::CEvn_Event(&v65, 0x1F58u, v51, v52, 0);
+                v86 = 6;
+                IEventEngine::SendAMessage(g_pEvnEngine, v21);
+                v86 = -1;
+                CEvn_Event::~CEvn_Event(&v65);
                 GuiDlgMainGameSettingstUpdate();
               }
-              PlayGuiSound(2);
+              PlayGuiSound(2u);
               break;
             case 2180:
-              v21 = CEvn_Event::CEvn_Event(&v65, 0x52u, 1u, dword_3D891AC, 0);
-              v87 = 7;
-              IEventEngine::SendAMessage(g_pEvnEngine, v21);
-              v87 = -1;
-              CEvn_Event::~CEvn_Event(&v65);
-              PlayGuiSound(2);
+              v20 = CEvn_Event::CEvn_Event(&v64, 0x52u, 1u, dword_3D891AC, 0);
+              v86 = 7;
+              IEventEngine::SendAMessage(g_pEvnEngine, v20);
+              v86 = -1;
+              CEvn_Event::~CEvn_Event(&v64);
+              PlayGuiSound(2u);
               break;
             case 2181:
-              v20 = CEvn_Event::CEvn_Event(&v81, 0x52u, 0, dword_3D891AC, 0);
-              v87 = 8;
-              IEventEngine::SendAMessage(g_pEvnEngine, v20);
-              v87 = -1;
-              CEvn_Event::~CEvn_Event(&v81);
-              PlayGuiSound(2);
+              v19 = CEvn_Event::CEvn_Event(&v80, 0x52u, 0, dword_3D891AC, 0);
+              v86 = 8;
+              IEventEngine::SendAMessage(g_pEvnEngine, v19);
+              v86 = -1;
+              CEvn_Event::~CEvn_Event(&v80);
+              PlayGuiSound(2u);
               break;
             case 2182:
-              v19 = CEvn_Event::CEvn_Event(&v63, 0x53u, 1u, dword_3D891AC, 0);
-              v87 = 9;
-              IEventEngine::SendAMessage(g_pEvnEngine, v19);
-              v87 = -1;
-              CEvn_Event::~CEvn_Event(&v63);
-              PlayGuiSound(2);
+              v18 = CEvn_Event::CEvn_Event(&v62, 0x53u, 1u, dword_3D891AC, 0);
+              v86 = 9;
+              IEventEngine::SendAMessage(g_pEvnEngine, v18);
+              v86 = -1;
+              CEvn_Event::~CEvn_Event(&v62);
+              PlayGuiSound(2u);
               break;
             case 2183:
-              v18 = CEvn_Event::CEvn_Event(&v62, 0x53u, 0, dword_3D891AC, 0);
-              v87 = 10;
-              IEventEngine::SendAMessage(g_pEvnEngine, v18);
-              v87 = -1;
-              CEvn_Event::~CEvn_Event(&v62);
-              PlayGuiSound(2);
+              v17 = CEvn_Event::CEvn_Event(&v61, 0x53u, 0, dword_3D891AC, 0);
+              v86 = 10;
+              IEventEngine::SendAMessage(g_pEvnEngine, v17);
+              v86 = -1;
+              CEvn_Event::~CEvn_Event(&v61);
+              PlayGuiSound(2u);
               break;
             case 2184:
-              v17 = CEvn_Event::CEvn_Event(&v61, 0x54u, 1u, dword_3D891AC, 0);
-              v87 = 11;
-              IEventEngine::SendAMessage(g_pEvnEngine, v17);
-              v87 = -1;
-              CEvn_Event::~CEvn_Event(&v61);
-              PlayGuiSound(2);
+              v16 = CEvn_Event::CEvn_Event(&v60, 0x54u, 1u, dword_3D891AC, 0);
+              v86 = 11;
+              IEventEngine::SendAMessage(g_pEvnEngine, v16);
+              v86 = -1;
+              CEvn_Event::~CEvn_Event(&v60);
+              PlayGuiSound(2u);
               break;
             case 2185:
-              v16 = CEvn_Event::CEvn_Event(&v60, 0x54u, 0, dword_3D891AC, 0);
-              v87 = 12;
-              IEventEngine::SendAMessage(g_pEvnEngine, v16);
-              v87 = -1;
-              CEvn_Event::~CEvn_Event(&v60);
-              PlayGuiSound(2);
+              v15 = CEvn_Event::CEvn_Event(&v59, 0x54u, 0, dword_3D891AC, 0);
+              v86 = 12;
+              IEventEngine::SendAMessage(g_pEvnEngine, v15);
+              v86 = -1;
+              CEvn_Event::~CEvn_Event(&v59);
+              PlayGuiSound(2u);
               break;
             case 2186:
-              v15 = CEvn_Event::CEvn_Event(&v59, 0x55u, 1u, dword_3D891AC, 0);
-              v87 = 13;
-              IEventEngine::SendAMessage(g_pEvnEngine, v15);
-              v87 = -1;
-              CEvn_Event::~CEvn_Event(&v59);
-              PlayGuiSound(2);
+              v14 = CEvn_Event::CEvn_Event(&v58, 0x55u, 1u, dword_3D891AC, 0);
+              v86 = 13;
+              IEventEngine::SendAMessage(g_pEvnEngine, v14);
+              v86 = -1;
+              CEvn_Event::~CEvn_Event(&v58);
+              PlayGuiSound(2u);
               break;
             case 2187:
-              v14 = CEvn_Event::CEvn_Event(&v58, 0x55u, 0, dword_3D891AC, 0);
-              v87 = 14;
-              IEventEngine::SendAMessage(g_pEvnEngine, v14);
-              v87 = -1;
-              CEvn_Event::~CEvn_Event(&v58);
-              PlayGuiSound(2);
+              v13 = CEvn_Event::CEvn_Event(&v57, 0x55u, 0, dword_3D891AC, 0);
+              v86 = 14;
+              IEventEngine::SendAMessage(g_pEvnEngine, v13);
+              v86 = -1;
+              CEvn_Event::~CEvn_Event(&v57);
+              PlayGuiSound(2u);
               break;
             case 2222:
-              v13 = CEvn_Event::CEvn_Event(&v57, 0x57u, 0, 0, 0);
-              v87 = 15;
-              IEventEngine::SendAMessage(g_pEvnEngine, v13);
-              v87 = -1;
-              CEvn_Event::~CEvn_Event(&v57);
-              PlayGuiSound(2);
+              v12 = CEvn_Event::CEvn_Event(&v56, 0x57u, 0, 0, 0);
+              v86 = 15;
+              IEventEngine::SendAMessage(g_pEvnEngine, v12);
+              v86 = -1;
+              CEvn_Event::~CEvn_Event(&v56);
+              PlayGuiSound(2u);
               break;
             case 2223:
-              v44 = CEvn_Event::CEvn_Event(&v56, 0x57u, 1u, 0, 0);
-              v87 = 16;
-              IEventEngine::SendAMessage(g_pEvnEngine, v44);
-              v87 = -1;
-              CEvn_Event::~CEvn_Event(&v56);
-              PlayGuiSound(2);
+              v43 = CEvn_Event::CEvn_Event(&v55, 0x57u, 1u, 0, 0);
+              v86 = 16;
+              IEventEngine::SendAMessage(g_pEvnEngine, v43);
+              v86 = -1;
+              CEvn_Event::~CEvn_Event(&v55);
+              PlayGuiSound(2u);
               break;
             case 2224:
-              v43 = CEvn_Event::CEvn_Event(&v55, 0x57u, 2u, 0, 0);
-              v87 = 17;
-              IEventEngine::SendAMessage(g_pEvnEngine, v43);
-              v87 = -1;
-              CEvn_Event::~CEvn_Event(&v55);
-              PlayGuiSound(2);
+              v42 = CEvn_Event::CEvn_Event(&v54, 0x57u, 2u, 0, 0);
+              v86 = 17;
+              IEventEngine::SendAMessage(g_pEvnEngine, v42);
+              v86 = -1;
+              CEvn_Event::~CEvn_Event(&v54);
+              PlayGuiSound(2u);
               break;
             case 2225:
-              v42 = CEvn_Event::CEvn_Event(&v73, 0x57u, 3u, 0, 0);
-              v87 = 18;
-              IEventEngine::SendAMessage(g_pEvnEngine, v42);
-              v87 = -1;
-              CEvn_Event::~CEvn_Event(&v73);
-              PlayGuiSound(2);
+              v41 = CEvn_Event::CEvn_Event(&v72, 0x57u, 3u, 0, 0);
+              v86 = 18;
+              IEventEngine::SendAMessage(g_pEvnEngine, v41);
+              v86 = -1;
+              CEvn_Event::~CEvn_Event(&v72);
+              PlayGuiSound(2u);
               break;
             case 2226:
-              v41 = CEvn_Event::CEvn_Event(&v86, 0x57u, 4u, 0, 0);
-              v87 = 19;
-              IEventEngine::SendAMessage(g_pEvnEngine, v41);
-              v87 = -1;
-              CEvn_Event::~CEvn_Event(&v86);
-              PlayGuiSound(2);
+              v40 = CEvn_Event::CEvn_Event(&v85, 0x57u, 4u, 0, 0);
+              v86 = 19;
+              IEventEngine::SendAMessage(g_pEvnEngine, v40);
+              v86 = -1;
+              CEvn_Event::~CEvn_Event(&v85);
+              PlayGuiSound(2u);
               break;
             case 2227:
-              v40 = CEvn_Event::CEvn_Event(&v85, 0x57u, 5u, 0, 0);
-              v87 = 20;
-              IEventEngine::SendAMessage(g_pEvnEngine, v40);
-              v87 = -1;
-              CEvn_Event::~CEvn_Event(&v85);
-              PlayGuiSound(2);
+              v39 = CEvn_Event::CEvn_Event(&v84, 0x57u, 5u, 0, 0);
+              v86 = 20;
+              IEventEngine::SendAMessage(g_pEvnEngine, v39);
+              v86 = -1;
+              CEvn_Event::~CEvn_Event(&v84);
+              PlayGuiSound(2u);
               break;
             case 2228:
-              v39 = CEvn_Event::CEvn_Event(&v84, 0x57u, 6u, 0, 0);
-              v87 = 21;
-              IEventEngine::SendAMessage(g_pEvnEngine, v39);
-              v87 = -1;
-              CEvn_Event::~CEvn_Event(&v84);
-              PlayGuiSound(2);
+              v38 = CEvn_Event::CEvn_Event(&v83, 0x57u, 6u, 0, 0);
+              v86 = 21;
+              IEventEngine::SendAMessage(g_pEvnEngine, v38);
+              v86 = -1;
+              CEvn_Event::~CEvn_Event(&v83);
+              PlayGuiSound(2u);
               break;
             case 2229:
-              v38 = CEvn_Event::CEvn_Event(&v83, 0x57u, 7u, 0, 0);
-              v87 = 22;
-              IEventEngine::SendAMessage(g_pEvnEngine, v38);
-              v87 = -1;
-              CEvn_Event::~CEvn_Event(&v83);
-              PlayGuiSound(2);
+              v37 = CEvn_Event::CEvn_Event(&v82, 0x57u, 7u, 0, 0);
+              v86 = 22;
+              IEventEngine::SendAMessage(g_pEvnEngine, v37);
+              v86 = -1;
+              CEvn_Event::~CEvn_Event(&v82);
+              PlayGuiSound(2u);
               break;
             case 2230:
-              v37 = CEvn_Event::CEvn_Event(&v82, 0x58u, 0, 0, 0);
-              v87 = 23;
-              IEventEngine::SendAMessage(g_pEvnEngine, v37);
-              v87 = -1;
-              CEvn_Event::~CEvn_Event(&v82);
-              PlayGuiSound(2);
+              v36 = CEvn_Event::CEvn_Event(&v81, 0x58u, 0, 0, 0);
+              v86 = 23;
+              IEventEngine::SendAMessage(g_pEvnEngine, v36);
+              v86 = -1;
+              CEvn_Event::~CEvn_Event(&v81);
+              PlayGuiSound(2u);
               break;
             case 2231:
-              v36 = CEvn_Event::CEvn_Event(&v80, 0x58u, 1u, 0, 0);
-              v87 = 24;
-              IEventEngine::SendAMessage(g_pEvnEngine, v36);
-              v87 = -1;
-              CEvn_Event::~CEvn_Event(&v80);
-              PlayGuiSound(2);
+              v35 = CEvn_Event::CEvn_Event(&v79, 0x58u, 1u, 0, 0);
+              v86 = 24;
+              IEventEngine::SendAMessage(g_pEvnEngine, v35);
+              v86 = -1;
+              CEvn_Event::~CEvn_Event(&v79);
+              PlayGuiSound(2u);
               break;
             case 2232:
-              v35 = CEvn_Event::CEvn_Event(&v79, 0x58u, 2u, 0, 0);
-              v87 = 25;
-              IEventEngine::SendAMessage(g_pEvnEngine, v35);
-              v87 = -1;
-              CEvn_Event::~CEvn_Event(&v79);
-              PlayGuiSound(2);
+              v34 = CEvn_Event::CEvn_Event(&v78, 0x58u, 2u, 0, 0);
+              v86 = 25;
+              IEventEngine::SendAMessage(g_pEvnEngine, v34);
+              v86 = -1;
+              CEvn_Event::~CEvn_Event(&v78);
+              PlayGuiSound(2u);
               break;
             case 2233:
-              v34 = CEvn_Event::CEvn_Event(&v64, 0x58u, 3u, 0, 0);
-              v87 = 26;
-              IEventEngine::SendAMessage(g_pEvnEngine, v34);
-              v87 = -1;
-              CEvn_Event::~CEvn_Event(&v64);
-              PlayGuiSound(2);
+              v33 = CEvn_Event::CEvn_Event(&v63, 0x58u, 3u, 0, 0);
+              v86 = 26;
+              IEventEngine::SendAMessage(g_pEvnEngine, v33);
+              v86 = -1;
+              CEvn_Event::~CEvn_Event(&v63);
+              PlayGuiSound(2u);
               break;
             case 2234:
-              v33 = CEvn_Event::CEvn_Event(&v78, 0x58u, 4u, 0, 0);
-              v87 = 27;
-              IEventEngine::SendAMessage(g_pEvnEngine, v33);
-              v87 = -1;
-              CEvn_Event::~CEvn_Event(&v78);
-              PlayGuiSound(2);
+              v32 = CEvn_Event::CEvn_Event(&v77, 0x58u, 4u, 0, 0);
+              v86 = 27;
+              IEventEngine::SendAMessage(g_pEvnEngine, v32);
+              v86 = -1;
+              CEvn_Event::~CEvn_Event(&v77);
+              PlayGuiSound(2u);
               break;
             case 2235:
-              v32 = CEvn_Event::CEvn_Event(&v77, 0x58u, 5u, 0, 0);
-              v87 = 28;
-              IEventEngine::SendAMessage(g_pEvnEngine, v32);
-              v87 = -1;
-              CEvn_Event::~CEvn_Event(&v77);
-              PlayGuiSound(2);
+              v31 = CEvn_Event::CEvn_Event(&v76, 0x58u, 5u, 0, 0);
+              v86 = 28;
+              IEventEngine::SendAMessage(g_pEvnEngine, v31);
+              v86 = -1;
+              CEvn_Event::~CEvn_Event(&v76);
+              PlayGuiSound(2u);
               break;
             case 2236:
-              v31 = CEvn_Event::CEvn_Event(&v76, 0x58u, 6u, 0, 0);
-              v87 = 29;
-              IEventEngine::SendAMessage(g_pEvnEngine, v31);
-              v87 = -1;
-              CEvn_Event::~CEvn_Event(&v76);
-              PlayGuiSound(2);
+              v30 = CEvn_Event::CEvn_Event(&v75, 0x58u, 6u, 0, 0);
+              v86 = 29;
+              IEventEngine::SendAMessage(g_pEvnEngine, v30);
+              v86 = -1;
+              CEvn_Event::~CEvn_Event(&v75);
+              PlayGuiSound(2u);
               break;
             case 2237:
-              v30 = CEvn_Event::CEvn_Event(&v75, 0x58u, 7u, 0, 0);
-              v87 = 30;
-              IEventEngine::SendAMessage(g_pEvnEngine, v30);
-              v87 = -1;
-              CEvn_Event::~CEvn_Event(&v75);
-              PlayGuiSound(2);
+              v29 = CEvn_Event::CEvn_Event(&v74, 0x58u, 7u, 0, 0);
+              v86 = 30;
+              IEventEngine::SendAMessage(g_pEvnEngine, v29);
+              v86 = -1;
+              CEvn_Event::~CEvn_Event(&v74);
+              PlayGuiSound(2u);
               break;
             case 2238:
               goto LABEL_27;
             case 2239:
               Topindex = CGuiChatMsgList::GetTopindex((CGuiChatMsgList *)&s_cMsgLst);
               CGuiChatMsgList::SetTopindex((CGuiChatMsgList *)&s_cMsgLst, Topindex + 1);
-              PlayGuiSound(2);
+              PlayGuiSound(2u);
               break;
             case 2244:
-              v47 = (char)CPlayerManager::GetLocalSlot();
+              v46 = (char)CPlayerManager::GetLocalSlot();
               for ( k = 0; k < 9; ++k )
               {
-                if ( *(_DWORD *)(g_pGameType + 4 * k + 564) == v47 )
-                  *(_DWORD *)(g_pGameType + 4 * k + 564) = -1;
+                if ( g_pGameType->m_sPlayerSlot15[k] == v46 )
+                  g_pGameType->m_sPlayerSlot15[k] = -1;
               }
-              *(_DWORD *)(g_pGameType + 4 * v47 + 564) = -1;
-              v25 = CEvn_Event::CEvn_Event(&v69, 0x1F58u, v47, v47, 0);
-              v87 = 3;
-              IEventEngine::SendAMessage(g_pEvnEngine, v25);
-              v87 = -1;
-              CEvn_Event::~CEvn_Event(&v69);
-              v10 = CPlayerManager::GetLocalSlot();
-              CGameType::ChangeLocalSlot((CGameType *)g_pGameType, v10);
-              v24 = CEvn_Event::CEvn_Event(&v68, 0x56u, BYTE2(a2) & 1, 0, 0);
-              v87 = 4;
+              g_pGameType->m_sPlayerSlot15[v46] = -1;
+              v24 = CEvn_Event::CEvn_Event(&v68, 0x1F58u, v46, v46, 0);
+              v86 = 3;
               IEventEngine::SendAMessage(g_pEvnEngine, v24);
-              v87 = -1;
+              v86 = -1;
               CEvn_Event::~CEvn_Event(&v68);
-              PlayGuiSound(2);
+              v10 = CPlayerManager::GetLocalSlot();
+              CGameType::ChangeLocalSlot(g_pGameType, v10);
+              v23 = CEvn_Event::CEvn_Event(&v67, 0x56u, BYTE2(a2) & 1, 0, 0);
+              v86 = 4;
+              IEventEngine::SendAMessage(g_pEvnEngine, v23);
+              v86 = -1;
+              CEvn_Event::~CEvn_Event(&v67);
+              PlayGuiSound(2u);
               break;
             case 2265:
-              PlayGuiSound(2);
+              PlayGuiSound(2u);
               dword_3D891AC = 0;
               GuiDlgMainGameSettingstUpdate();
               break;
             case 2266:
-              PlayGuiSound(2);
+              PlayGuiSound(2u);
               dword_3D891AC = 1;
               GuiDlgMainGameSettingstUpdate();
               break;
             case 2267:
-              PlayGuiSound(2);
+              PlayGuiSound(2u);
               dword_3D891AC = 2;
               GuiDlgMainGameSettingstUpdate();
               break;
             case 2268:
-              PlayGuiSound(2);
+              PlayGuiSound(2u);
               dword_3D891AC = 3;
               GuiDlgMainGameSettingstUpdate();
               break;
             case 2269:
-              PlayGuiSound(2);
+              PlayGuiSound(2u);
               dword_3D891AC = 4;
               GuiDlgMainGameSettingstUpdate();
               break;
             case 2270:
-              PlayGuiSound(2);
+              PlayGuiSound(2u);
               dword_3D891AC = 5;
               GuiDlgMainGameSettingstUpdate();
               break;
             case 2271:
-              PlayGuiSound(2);
+              PlayGuiSound(2u);
               dword_3D891AC = 6;
               GuiDlgMainGameSettingstUpdate();
               break;
             case 2272:
-              PlayGuiSound(2);
+              PlayGuiSound(2u);
               dword_3D891AC = 7;
               GuiDlgMainGameSettingstUpdate();
               break;
@@ -17034,7 +17033,7 @@ bool __cdecl GuiDlgMainGameSettingsProc(int a1, int a2, int a3) {
           break;
         case 4:
           if ( (unsigned __int16)a2 == 2153 )
-            IGuiEngine::SetText((void *)g_pGUIEngine, dword_403089C, 2153, (char *)&byte_368FC5E);
+            IGuiEngine::SetText(g_pGUIEngine, dword_403089C, 2153, (char *)&byte_368FC5E);
           break;
         case 8:
           if ( a3 == -1 )
@@ -17065,7 +17064,7 @@ bool __cdecl GuiDlgMainGameSettingsProc(int a1, int a2, int a3) {
             {
               v9 = CGuiChatMsgList::GetTopindex((CGuiChatMsgList *)&s_cMsgLst);
               CGuiChatMsgList::SetTopindex((CGuiChatMsgList *)&s_cMsgLst, v9 + 1);
-              PlayGuiSound(2);
+              PlayGuiSound(2u);
             }
           }
           else
@@ -17073,15 +17072,15 @@ bool __cdecl GuiDlgMainGameSettingsProc(int a1, int a2, int a3) {
 LABEL_27:
             v8 = CGuiChatMsgList::GetTopindex((CGuiChatMsgList *)&s_cMsgLst);
             CGuiChatMsgList::SetTopindex((CGuiChatMsgList *)&s_cMsgLst, v8 - 1);
-            PlayGuiSound(2);
+            PlayGuiSound(2u);
           }
           break;
         case 11:
-          v28 = CEvn_Event::CEvn_Event(&v72, 0x78u, 0, 0, 0);
-          v87 = 0;
-          IEventEngine::SendAMessage(g_pEvnEngine, v28);
-          v87 = -1;
-          CEvn_Event::~CEvn_Event(&v72);
+          v27 = CEvn_Event::CEvn_Event(&v71, 0x78u, 0, 0, 0);
+          v86 = 0;
+          IEventEngine::SendAMessage(g_pEvnEngine, v27);
+          v86 = -1;
+          CEvn_Event::~CEvn_Event(&v71);
           break;
         default:
           return 1;
@@ -20599,7 +20598,7 @@ void __cdecl InitGuiDlgMD2Briefing(void) {
   IGuiEngine::SetText((void *)g_pGUIEngine, 1, 1802, v2);
   v3 = (char *)std::string::c_str(&unk_402C97C);
   IGuiEngine::SetText((void *)g_pGUIEngine, 1, 1807, v3);
-  v4 = (char *)std::string::c_str(&unk_402C9B4);
+  v4 = (char *)std::string::c_str(&stru_402C9B4);
   IGuiEngine::SetText((void *)g_pGUIEngine, 1, 1808, v4);
   IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 1, 1813, 0);
   IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 1, 1814, 0);
@@ -20661,7 +20660,7 @@ bool __cdecl GuiDlgMD2BriefingProc(int a1, int a2, int a3) {
         case 1812:
           if ( (a2 & 0x10000) != 0 )
           {
-            v6 = (char *)std::string::c_str(&unk_402C9D0);
+            v6 = (char *)std::string::c_str(&stru_402C9D0);
             IGuiEngine::SetText((void *)g_pGUIEngine, 1, 1806, v6);
             IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 1, 1813, 1);
           }
@@ -21080,7 +21079,7 @@ void __cdecl InitGuiDlgMDBriefing(void) {
   IGuiEngine::SetText((void *)g_pGUIEngine, 5, 1866, v2);
   v3 = (char *)std::string::c_str(&unk_402C97C);
   IGuiEngine::SetText((void *)g_pGUIEngine, 5, 1871, v3);
-  v4 = (char *)std::string::c_str(&unk_402C9B4);
+  v4 = (char *)std::string::c_str(&stru_402C9B4);
   IGuiEngine::SetText((void *)g_pGUIEngine, 5, 1872, v4);
   IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 5, 1877, 0);
   IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 5, 1878, 0);
@@ -21142,7 +21141,7 @@ bool __cdecl GuiDlgMDBriefingProc(int a1, int a2, int a3) {
         case 1876:
           if ( (a2 & 0x10000) != 0 )
           {
-            v6 = (char *)std::string::c_str(&unk_402C9D0);
+            v6 = (char *)std::string::c_str(&stru_402C9D0);
             IGuiEngine::SetText((void *)g_pGUIEngine, 5, 1870, v6);
             IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 5, 1877, 1);
           }
@@ -34794,7 +34793,7 @@ void __cdecl InitGuiDlgXMD3Briefing(void) {
   IGuiEngine::SetText((void *)g_pGUIEngine, 1, 2914, v2);
   v3 = (char *)std::string::c_str(&unk_402C97C);
   IGuiEngine::SetText((void *)g_pGUIEngine, 1, 2919, v3);
-  v4 = (char *)std::string::c_str(&unk_402C9B4);
+  v4 = (char *)std::string::c_str(&stru_402C9B4);
   IGuiEngine::SetText((void *)g_pGUIEngine, 1, 2920, v4);
   IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 1, 2925, 0);
   IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 1, 2926, 0);
@@ -34829,7 +34828,7 @@ bool __cdecl GuiDlgXMD3BriefingProc(int a1, int a2, int a3) {
       break;
     case 1u:
       if ( (a3 & 0x10000) != 0 )
-        PlayGuiSound(1);
+        PlayGuiSound(1u);
       else
         PlayGuiSound(0);
       break;
@@ -34838,7 +34837,7 @@ bool __cdecl GuiDlgXMD3BriefingProc(int a1, int a2, int a3) {
       switch ( (__int16)a2 )
       {
         case 2915:
-          PlayGuiSound(2);
+          PlayGuiSound(2u);
           v8 = CEvn_Event::CEvn_Event(&v14, 0x2523u, 0, 0, 0);
           v15 = 0;
           IEventEngine::SendAMessage(g_pEvnEngine, v8);
@@ -34846,7 +34845,7 @@ bool __cdecl GuiDlgXMD3BriefingProc(int a1, int a2, int a3) {
           CEvn_Event::~CEvn_Event(&v14);
           break;
         case 2916:
-          PlayGuiSound(2);
+          PlayGuiSound(2u);
           v7 = CEvn_Event::CEvn_Event(&v13, 0x2524u, 0, 0, 0);
           v15 = 1;
           IEventEngine::SendAMessage(g_pEvnEngine, v7);
@@ -34861,25 +34860,25 @@ bool __cdecl GuiDlgXMD3BriefingProc(int a1, int a2, int a3) {
         case 2924:
           if ( (a2 & 0x10000) != 0 )
           {
-            v6 = (char *)std::string::c_str(&unk_402C9D0);
-            IGuiEngine::SetText((void *)g_pGUIEngine, 1, 2918, v6);
-            IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 1, 2926, 1);
+            v6 = std::string::c_str(&stru_402C9D0);
+            IGuiEngine::SetText(g_pGUIEngine, 1, 2918, v6);
+            IGuiEngine::SetControlVisibility(g_pGUIEngine, 1, 2926, 1);
             if ( g_pGameType )
             {
-              if ( *(_DWORD *)(g_pGameType + 1016) )
+              if ( g_pGameType->dword3F8 )
               {
                 v10[0] = 0;
                 v9[0] = 0;
-                IGuiEngine::LockOwnerImage((IGuiEngine *)g_pGUIEngine, 1, 2926, (struct SGuiRect *)v12, v10, v9);
+                IGuiEngine::LockOwnerImage(g_pGUIEngine, 1, 2926, (struct SGuiRect *)v12, v10, v9);
                 if ( v10[0] )
                 {
                   CStateLobbyGameSettings::DrawMap(
-                    *(unsigned __int16 **)(g_pGameType + 1016),
+                    (unsigned __int16 *)g_pGameType->dword3F8,
                     v10[0],
                     v9[0],
-                    *(_DWORD *)(g_pGameType + 1020),
-                    *(_DWORD *)(g_pGameType + 1024));
-                  IGuiEngine::UnlockOwnerImage((IGuiEngine *)g_pGUIEngine, 1, 2926);
+                    g_pGameType->dword3FC,
+                    g_pGameType->dword400);
+                  IGuiEngine::UnlockOwnerImage(g_pGUIEngine, 1, 2926);
                 }
               }
             }
@@ -34887,9 +34886,9 @@ bool __cdecl GuiDlgXMD3BriefingProc(int a1, int a2, int a3) {
           }
           else
           {
-            IGuiEngine::SetText((void *)g_pGUIEngine, 1, 2918, (char *)&byte_369A0E1);
-            IGuiEngine::EraseOwnerImage((IGuiEngine *)g_pGUIEngine, 1, 2926);
-            IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 1, 2926, 0);
+            IGuiEngine::SetText(g_pGUIEngine, 1, 2918, (char *)&byte_369A0E1);
+            IGuiEngine::EraseOwnerImage(g_pGUIEngine, 1, 2926);
+            IGuiEngine::SetControlVisibility(g_pGUIEngine, 1, 2926, 0);
             byte_402C9F5 = 0;
           }
           break;

@@ -1,3 +1,4 @@
+#if FALSE
 #include "CPlayerInfo.h"
 
 // Definitions for class CPlayerInfo
@@ -89,3 +90,4 @@ void  CPlayerInfo::Save(class IS4Chunk & a2) {
 }
 
 
+#endif // Already implemented

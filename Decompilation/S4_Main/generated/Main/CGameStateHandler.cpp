@@ -1061,13 +1061,13 @@ bool __cdecl CGameStateHandler::StartDummyGame(void) {
   else
   {
     MA_GetMapData(
-      (int)&g_pGameType->dword38,
+      (int)&g_pGameType->m_iWidthHeight,
       (int)v5,
       (int)v6,
-      (int)&g_pGameType->dword40,
+      (int)&g_pGameType->m_iStartResources,
       (int)&g_pGameType->m_bIsEmptyMap);
     MA_GetNumberOfPlayers((int)&v24);
-    g_pGameType->m_iPlayerCount = v24;
+    g_pGameType->m_iMapMaxNumPlayers = v24;
     v22 = 0;
     for ( i = 0; (int)i < v24; ++i )
     {
@@ -1103,9 +1103,9 @@ bool __cdecl CGameStateHandler::StartDummyGame(void) {
     g_pGameType->byte2DC = 1;
     g_pGameType->dword44 = 0x100007F;
     g_pGameType->dword2E0 = 0;
-    g_pGameType->dword48 = v22 + 1;
-    g_pGameType->dword360 = 1;
-    g_pGameType->m_iGameMatchType = 1;
+    g_pGameType->m_uiNumberAlliances = v22 + 1;
+    g_pGameType->m_iMode = 1;
+    g_pGameType->m_iGameType = 1;
     CGameType::SetMCD2TextureSet(g_pGameType, 1);
     for ( i = 0; i < g_pGameType->m_iActualPlayerCount; ++i )
       ++g_pGameType->ptr4c[g_pGameType->m_sPlayerTeam[i]];

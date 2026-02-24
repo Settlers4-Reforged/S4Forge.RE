@@ -6,28 +6,28 @@
 // Decompiled from CGameData *__thiscall CGameData::CGameData(CGameData *this)
  CGameData::CGameData(void) {
   
-  this->dword0 = 0;
+  this->m_iTickCounter = 0;
   this->dword4 = 0;
   this->dword8 = 0;
   this->dwordC = 0;
   this->dword10 = 0;
   this->dword14 = 0;
   this->dword18 = 0;
-  this->dword1C = 1572864;
+  this->dword1C = 0x180000;
   this->dword20 = -1;
   this->dword24 = -1;
   this->byte28 = 0;
   this->byte29 = 0;
   CRandom16Ex::CRandom16Ex((CRandom16Ex *)&this->m_sRandom, 0);
-  this->byte34 = 0;
-  this->dword38 = 0;
-  std::string::string(&this->std__string40);
-  std::string::string(&this->std__string60);
+  this->m_bIsGameWon = 0;
+  this->m_iTeamWon = 0;
+  std::string::string(&this->m_swGameType);
+  std::string::string(&this->m_swMapMode);
   this->byte7E = 0;
   CRandom16Ex::Init((CRandom16Ex *)&this->m_sRandom, 0x46F6Fu, 0);
   if ( !g_pGameType && BBSupportDbgReport(2, "GameData.cpp", 57, "g_pGameType != NULL") == 1 )
     __debugbreak();
-  if ( (*(int *)(g_pGameType + 692) <= 0 || *(int *)(g_pGameType + 692) >= 5)
+  if ( ((int)g_pGameType->m_iGameType <= 0 || (int)g_pGameType->m_iGameType >= 5)
     && BBSupportDbgReport(
          2,
          "GameData.cpp",
@@ -36,19 +36,19 @@
   {
     __debugbreak();
   }
-  this->m_iType = *(_DWORD *)(g_pGameType + 692);
-  std::string::operator=(&this->std__string40, (&g_pszGameType)[this->m_iType]);
+  this->m_iType = g_pGameType->m_iGameType;
+  std::string::operator=(&this->m_swGameType, g_pszGameType[this->m_iType]);
   if ( !this->m_iType && BBSupportDbgReport(2, "GameData.cpp", 63, "m_iType") == 1 )
     __debugbreak();
-  this->m_iMode = *(_DWORD *)(g_pGameType + 864);
-  std::string::operator=(&this->std__string60, (&g_pszMapMode)[this->m_iMode]);
+  this->m_iMode = g_pGameType->m_iMode;
+  std::string::operator=(&this->m_swMapMode, g_pszMapMode[this->m_iMode]);
   if ( !this->m_iMode && BBSupportDbgReport(2, "GameData.cpp", 67, "m_iMode") == 1 )
     __debugbreak();
-  this->word7C = *(_BYTE *)(g_pGameType + 732) == 0;
-  this->byte34 = *(_BYTE *)(g_pGameType + 748);
-  this->dword38 = *(_DWORD *)(g_pGameType + 752);
-  memcpy(&this->char80, (const void *)(g_pGameType + 784), 7u);
-  this->byte7F = CGameType::IsLadderGame(g_pGameType);
+  *(_WORD *)&this->m_bIsNetworkGame = g_pGameType->byte2DC == 0;
+  this->m_bIsGameWon = g_pGameType->m_bIsGameWon;
+  this->m_iTeamWon = g_pGameType->m_iTeamWon;
+  memcpy(this->m_pEconomyGoodsArray, g_pGameType->m_pEconomyGoodsArray, sizeof(this->m_pEconomyGoodsArray));
+  this->m_bIsLadderGame = CGameType::IsLadderGame(g_pGameType);
   return this;
 }
 
@@ -57,7 +57,7 @@
 // Decompiled from bool __thiscall CGameData::IsTutorial(CGameData *this)
 bool  CGameData::IsTutorial(void) {
   
-  return *((_DWORD *)this + 15) == 4;
+  return this->m_iType == 4;
 }
 
 
@@ -65,7 +65,7 @@ bool  CGameData::IsTutorial(void) {
 // Decompiled from bool __thiscall CGameData::IsCampaign(CGameData *this)
 bool  CGameData::IsCampaign(void) {
   
-  return *((_DWORD *)this + 15) == 3;
+  return this->m_iType == 3;
 }
 
 
@@ -73,7 +73,7 @@ bool  CGameData::IsCampaign(void) {
 // Decompiled from char __thiscall CGameData::IsLadder(CGameData *this)
 bool  CGameData::IsLadder(void) {
   
-  return *((_BYTE *)this + 127);
+  return this->m_bIsLadderGame;
 }
 
 
@@ -81,7 +81,7 @@ bool  CGameData::IsLadder(void) {
 // Decompiled from int __thiscall CGameData::GetMode(CGameData *this)
 int  CGameData::GetMode(void) {
   
-  return *((_DWORD *)this + 23);
+  return this->m_iMode;
 }
 
 
@@ -89,7 +89,7 @@ int  CGameData::GetMode(void) {
 // Decompiled from char __thiscall CGameData::IsNetworkGame(CGameData *this)
 bool  CGameData::IsNetworkGame(void) {
   
-  return *((_BYTE *)this + 124);
+  return this->m_bIsNetworkGame;
 }
 
 
@@ -97,7 +97,7 @@ bool  CGameData::IsNetworkGame(void) {
 // Decompiled from int __thiscall CGameData::GetTickCounter(CGameData *this)
 unsigned int  CGameData::GetTickCounter(void)const {
   
-  return *(_DWORD *)this;
+  return this->m_iTickCounter;
 }
 
 
@@ -105,15 +105,15 @@ unsigned int  CGameData::GetTickCounter(void)const {
 // Decompiled from char __thiscall CGameData::IsGameWon(CGameData *this)
 bool  CGameData::IsGameWon(void) {
   
-  return *((_BYTE *)this + 52);
+  return this->m_bIsGameWon;
 }
 
 
 // address=[0x144ff50]
-// Decompiled from unsigned int __thiscall CGameData::TeamWon(CUserToolsManager *this)
+// Decompiled from unsigned int __thiscall CGameData::TeamWon(CGameData *this)
 int  CGameData::TeamWon(void) {
   
-  return *((_DWORD *)this + 14);
+  return this->m_iTeamWon;
 }
 
 
@@ -121,15 +121,15 @@ int  CGameData::TeamWon(void) {
 // Decompiled from char __thiscall CGameData::IsLastFrameRendered(CGameData *this)
 bool  CGameData::IsLastFrameRendered(void) {
   
-  return *((_BYTE *)this + 125);
+  return this->m_bIsLastFrameRendered;
 }
 
 
 // address=[0x146ae80]
-// Decompiled from const char *__thiscall CGameData::Rand(std::_Locinfo *this)
+// Decompiled from unsigned int __thiscall CGameData::Rand(CGameData *this)
 unsigned int  CGameData::Rand(void) {
   
-  return (const char *)CRandom16::Rand((std::_Locinfo *)((char *)this + 44));
+  return CRandom16::Rand((CRandom16 *)&this->m_sRandom);
 }
 
 
@@ -137,7 +137,7 @@ unsigned int  CGameData::Rand(void) {
 // Decompiled from char *__thiscall CGameData::GetEconomyGoodsArray(CGameData *this)
 unsigned char *  CGameData::GetEconomyGoodsArray(void) {
   
-  return (char *)this + 128;
+  return &this->m_pEconomyGoodsArray;
 }
 
 
@@ -151,45 +151,37 @@ unsigned char *  CGameData::GetEconomyGoodsArray(void) {
 
 
 // address=[0x14aac40]
-// Decompiled from int __thiscall CGameData::GetModeString(char *this, int a2)
+// Decompiled from std::string *__thiscall CGameData::GetModeString(CGameData *this, std::string *a2)
 std::string  CGameData::GetModeString(void a2) {
   
-  std::string::string(this + 96);
+  std::string::string(a2, (int)&this->m_swMapMode);
   return a2;
 }
 
 
 // address=[0x14aad60]
-// Decompiled from int __thiscall CGameData::GetTypeString(char *this, int a2)
+// Decompiled from std::string *__thiscall CGameData::GetTypeString(CGameData *this, std::string *a2)
 std::string  CGameData::GetTypeString(void a2) {
   
-  std::string::string(this + 64);
+  std::string::string(a2, (int)&this->m_swGameType);
   return a2;
 }
 
 
 // address=[0x14aaf30]
-// Decompiled from CGameData *__thiscall CGameData::SetLastFrameRendered(CGameData *this, bool a2)
+// Decompiled from void __thiscall CGameData::SetLastFrameRendered(CGameData *this, bool a2)
 void  CGameData::SetLastFrameRendered(bool a2) {
   
-  CGameData *result; // eax
-
-  result = this;
-  *((_BYTE *)this + 125) = a2;
-  return result;
+  this->m_bIsLastFrameRendered = a2;
 }
 
 
 // address=[0x14b4a60]
-// Decompiled from CGameData *__thiscall CGameData::TeamWon(CGameData *this, int a2)
+// Decompiled from void __thiscall CGameData::TeamWon(CGameData *this, int a2)
 void  CGameData::TeamWon(int a2) {
   
-  CGameData *result; // eax
-
-  result = this;
-  *((_DWORD *)this + 14) = a2;
-  *((_BYTE *)this + 52) = 1;
-  return result;
+  this->m_iTeamWon = a2;
+  this->m_bIsGameWon = 1;
 }
 
 

@@ -224,102 +224,95 @@ bool  CStateAOBriefing::Perform(void) {
 
 
 // address=[0x149e0f0]
-// Decompiled from bool __thiscall CStateAOBriefing::OnEvent(CStateAOBriefing *this, struct CEvn_Event *a2)
+// Decompiled from char __thiscall CStateAOBriefing::OnEvent(CStateAOBriefing *this, struct CEvn_Event *a2)
 bool  CStateAOBriefing::OnEvent(class CEvn_Event & a2) {
   
   CGUIWrapper *Instance; // eax
-  const char *v4; // eax
+  wchar_t *v4; // eax
   char *v5; // eax
   OnlineManager *v6; // eax
-  char v7; // [esp-40h] [ebp-31Ch] BYREF
-  int v8; // [esp-3Ch] [ebp-318h]
-  int v9; // [esp-38h] [ebp-314h]
-  int v10; // [esp-34h] [ebp-310h]
-  int v11; // [esp-30h] [ebp-30Ch]
-  int v12; // [esp-2Ch] [ebp-308h]
-  int v13; // [esp-28h] [ebp-304h]
-  int v14; // [esp-24h] [ebp-300h]
-  int v15; // [esp-20h] [ebp-2FCh]
-  int v16; // [esp-1Ch] [ebp-2F8h]
-  int v17; // [esp-18h] [ebp-2F4h]
-  int v18; // [esp-14h] [ebp-2F0h]
-  int v19; // [esp-10h] [ebp-2ECh]
-  int v20; // [esp-Ch] [ebp-2E8h]
-  int v21; // [esp-8h] [ebp-2E4h]
-  int v22; // [esp-4h] [ebp-2E0h]
-  int v23; // [esp+0h] [ebp-2DCh]
-  int v24; // [esp+4h] [ebp-2D8h]
-  char *v25; // [esp+8h] [ebp-2D4h]
-  int v26; // [esp+Ch] [ebp-2D0h]
-  int v27; // [esp+18h] [ebp-2C4h]
-  int PlayerName; // [esp+1Ch] [ebp-2C0h]
-  INetworkEngine *v29; // [esp+20h] [ebp-2BCh]
-  int v30; // [esp+24h] [ebp-2B8h]
-  int v31; // [esp+28h] [ebp-2B4h]
-  void *v32; // [esp+2Ch] [ebp-2B0h]
-  int v33; // [esp+30h] [ebp-2ACh]
-  CGameType *v34; // [esp+34h] [ebp-2A8h]
-  void *v35; // [esp+38h] [ebp-2A4h]
-  int v36; // [esp+3Ch] [ebp-2A0h]
-  CEvn_Event *v37; // [esp+40h] [ebp-29Ch]
-  void *v38; // [esp+44h] [ebp-298h]
-  INetworkEngine *v39; // [esp+48h] [ebp-294h]
-  int v40; // [esp+4Ch] [ebp-290h]
-  CGameType *v41; // [esp+50h] [ebp-28Ch]
+  std::wstring v7; // [esp-40h] [ebp-31Ch] BYREF
+  BOOL v8; // [esp-24h] [ebp-300h]
+  int v9; // [esp-20h] [ebp-2FCh]
+  int v10; // [esp-1Ch] [ebp-2F8h]
+  int v11; // [esp-18h] [ebp-2F4h]
+  int v12; // [esp-14h] [ebp-2F0h]
+  int v13; // [esp-10h] [ebp-2ECh]
+  int v14; // [esp-Ch] [ebp-2E8h]
+  int v15; // [esp-8h] [ebp-2E4h]
+  int v16; // [esp-4h] [ebp-2E0h]
+  void *v17; // [esp+4h] [ebp-2D8h]
+  std::wstring *v18; // [esp+8h] [ebp-2D4h]
+  int v19; // [esp+Ch] [ebp-2D0h]
+  std::wstring *v20; // [esp+18h] [ebp-2C4h]
+  std::wstring *PlayerName; // [esp+1Ch] [ebp-2C0h]
+  INetworkEngine *v22; // [esp+20h] [ebp-2BCh]
+  int v23; // [esp+24h] [ebp-2B8h]
+  int v24; // [esp+28h] [ebp-2B4h]
+  void *v25; // [esp+2Ch] [ebp-2B0h]
+  CGameType *v26; // [esp+30h] [ebp-2ACh]
+  CGameType *v27; // [esp+34h] [ebp-2A8h]
+  void *v28; // [esp+38h] [ebp-2A4h]
+  CGameType *v29; // [esp+3Ch] [ebp-2A0h]
+  CEvn_Event *v30; // [esp+40h] [ebp-29Ch]
+  void *v31; // [esp+44h] [ebp-298h]
+  INetworkEngine *v32; // [esp+48h] [ebp-294h]
+  CGameType *v33; // [esp+4Ch] [ebp-290h]
+  CGameType *v34; // [esp+50h] [ebp-28Ch]
   void *C; // [esp+54h] [ebp-288h]
-  int v43; // [esp+58h] [ebp-284h]
-  int (__thiscall ***v44)(_DWORD, int); // [esp+5Ch] [ebp-280h]
-  bool v45; // [esp+63h] [ebp-279h]
+  CGameType *v36; // [esp+58h] [ebp-284h]
+  int (__thiscall ***v37)(_DWORD, int); // [esp+5Ch] [ebp-280h]
+  char v38; // [esp+63h] [ebp-279h]
   int i; // [esp+64h] [ebp-278h]
-  unsigned int v47; // [esp+6Ch] [ebp-270h]
-  char v48; // [esp+71h] [ebp-26Bh]
-  char v49; // [esp+72h] [ebp-26Ah]
+  unsigned int m_iEventId; // [esp+6Ch] [ebp-270h]
+  char v41; // [esp+71h] [ebp-26Bh]
+  char v42; // [esp+72h] [ebp-26Ah]
   char MapData; // [esp+73h] [ebp-269h]
-  CGuiGameState *v51; // [esp+74h] [ebp-268h]
-  char v52; // [esp+7Ah] [ebp-262h]
-  char v53; // [esp+7Bh] [ebp-261h]
-  _BYTE v54[28]; // [esp+7Ch] [ebp-260h] BYREF
-  _DWORD v55[6]; // [esp+98h] [ebp-244h] BYREF
-  char v56[28]; // [esp+B0h] [ebp-22Ch] BYREF
+  CGuiGameState *v44; // [esp+74h] [ebp-268h]
+  char v45; // [esp+7Ah] [ebp-262h]
+  char v46; // [esp+7Bh] [ebp-261h]
+  std::wstring v47; // [esp+7Ch] [ebp-260h] BYREF
+  CEvn_Event v48; // [esp+98h] [ebp-244h] BYREF
+  std::wstring v49; // [esp+B0h] [ebp-22Ch] BYREF
   char Buffer[512]; // [esp+CCh] [ebp-210h] BYREF
-  int v58; // [esp+2D8h] [ebp-4h]
+  int v51; // [esp+2D8h] [ebp-4h]
 
-  v51 = this;
-  v47 = *((_DWORD *)a2 + 1);
-  if ( v47 <= 0x78 )
+  v44 = this;
+  m_iEventId = a2->m_iEventId;
+  if ( m_iEventId <= 0x78 )
   {
-    switch ( v47 )
+    switch ( m_iEventId )
     {
       case 0x78u:
-        *((_BYTE *)v51 + 12) = 0;
+        *((_BYTE *)v44 + 12) = 0;
         return 1;
       case 0xBu:
-        if ( (unsigned __int16)*((_DWORD *)a2 + 2) == 27 )
+        if ( (unsigned __int16)a2->m_wParam == 27 )
         {
-          v37 = CEvn_Event::CEvn_Event((CEvn_Event *)v55, 0x1F55u, 0, 0, 0);
-          v58 = 0;
-          IEventEngine::SendAMessage(g_pEvnEngine, v37);
-          v58 = -1;
-          CEvn_Event::~CEvn_Event(v55);
+          v30 = CEvn_Event::CEvn_Event(&v48, 0x1F55u, 0, 0, 0);
+          v51 = 0;
+          IEventEngine::SendAMessage(g_pEvnEngine, v30);
+          v51 = -1;
+          CEvn_Event::~CEvn_Event(&v48);
           return 1;
         }
         break;
       case 0x72u:
-        v45 = IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 20);
+        v38 = IGuiEngine::CloseDialog(g_pGUIEngine, 20);
         CGuiGameState::SetupExtraGui(g_pAddOn, 7, (int)GuiDlgAOBriefingProc);
         CGuiGameState::SetupGui(
-          v51,
+          v44,
           L"Menu\\GUISetStartscreens.dat",
           10,
           (bool (__cdecl *)(int, int, int))GuiDlgAOBriefingProc,
           7);
         return 1;
     }
-    return CGuiGameState::OnEvent(v51, a2);
+    return CGuiGameState::OnEvent(v44, a2);
   }
-  if ( v47 == 8021 )
+  if ( m_iEventId == 8021 )
   {
-    CSoundManager::StopMusic(g_pSoundManager);
+    CSoundManager::StopMusic((CSoundManager *)g_pSoundManager);
     CSoundManager::StopSounds((CSoundManager *)g_pSoundManager);
     if ( !byte_402C9F4
       && BBSupportDbgReport(2, "main\\states\\StateAOBriefing.cpp", 411, "g_cBriefingSettings.m_bIsCampaign") == 1 )
@@ -328,12 +321,12 @@ bool  CStateAOBriefing::OnEvent(class CEvn_Event & a2) {
     }
     if ( g_pGameType )
     {
+      v29 = g_pGameType;
       v36 = g_pGameType;
-      v43 = g_pGameType;
-      v35 = delete (CGameType *)g_pGameType;
+      v28 = delete g_pGameType;
       g_pGameType = 0;
     }
-    switch ( *((_DWORD *)v51 + 1) )
+    switch ( *((_DWORD *)v44 + 1) )
     {
       case 0xB:
         CGameStateHandler::Switch((int)CStateAOCampaignRoman::DynamicCreateFunc, 0);
@@ -360,135 +353,146 @@ bool  CStateAOBriefing::OnEvent(class CEvn_Event & a2) {
   }
   else
   {
-    if ( v47 != 8022 )
-      return CGuiGameState::OnEvent(v51, a2);
-    Instance = (CGUIWrapper *)CGUIWrapper::GetInstance(v23);
+    if ( m_iEventId != 8022 )
+      return CGuiGameState::OnEvent(v44, a2);
+    Instance = (CGUIWrapper *)CGUIWrapper::GetInstance();
     CGUIWrapper::ReleaseGUIGFXFile(Instance);
     CSoundManager::StopSounds((CSoundManager *)g_pSoundManager);
-    IGfxEngine::SetCursorShape((IGfxEngine *)g_pGfxEngine, 1, 4);
-    CGfxManager::DisableGfxFile((CGfxManager *)g_pGfxManager, 1);
+    IGfxEngine::SetCursorShape(g_pGfxEngine, 1, 4u);
+    CGfxManager::DisableGfxFile(g_pGfxManager, 1);
     if ( (unsigned __int8)CStateLobbyGameSettings::CopyDefaultUserFlags() )
     {
-      CGfxManager::EnableGfxFile((CGfxManager *)g_pGfxManager, 1u, 8, 1, 0xFFFFFFFF);
+      CGfxManager::EnableGfxFile(g_pGfxManager, 1u, 8, 1, 0xFFFFFFFF);
       C = operator new(0x620u);
-      v58 = 1;
+      v51 = 1;
       if ( C )
-        v41 = CGameType::CGameType((CGameType *)C);
+        v34 = CGameType::CGameType((CGameType *)C);
       else
-        v41 = 0;
-      v34 = v41;
-      v58 = -1;
-      g_pGameType = (int)v41;
-      v52 = 0;
-      v26 = 256;
-      v22 = *((_DWORD *)v51 + 2) + 1;
-      v4 = (const char *)std::wstring::c_str((_Cnd_internal_imp_t *)((char *)&stru_402C750
-                                                                   + 28 * *((_DWORD *)v51 + 1)
-                                                                   - 308));
-      snwprintf(Buffer, 0xFFu, v4, v22);
-      std::wstring::wstring(v56);
-      v58 = 2;
-      if ( (*(unsigned __int8 (__thiscall **)(void *, char *, char *, int))(*(_DWORD *)g_pCDDrive + 8))(
-             g_pCDDrive,
-             v56,
-             Buffer,
-             3145744) )
+        v34 = 0;
+      v27 = v34;
+      v51 = -1;
+      g_pGameType = v34;
+      v45 = 0;
+      v19 = 256;
+      v16 = *((_DWORD *)v44 + 2) + 1;
+      v4 = std::wstring::c_str(&stru_402C750 + *((_DWORD *)v44 + 1) - 11);
+      snwprintf(Buffer, 0xFFu, (const char *const)v4, v16);
+      std::wstring::wstring(&v49);
+      v51 = 2;
+      if ( g_pCDDrive->GetCDPath(g_pCDDrive, (char *)&v49, Buffer, 3145744) )
       {
-        v22 = 0;
-        v21 = 0;
-        v20 = *((_DWORD *)v51 + 1);
-        v19 = dword_4031CFC;
-        v18 = 0;
-        v17 = 1;
         v16 = 0;
         v15 = 0;
-        v14 = 1;
-        v25 = &v7;
-        v24 = std::wstring::wstring((int)v56);
-        MapData = CGameType::LoadMapData(v7, v8, v9, v10, v11, v12, v13, v14, v15, v16, v17, v18, v19, v20, v21, v22);
-        v52 = MapData;
+        v14 = *((_DWORD *)v44 + 1);
+        v13 = dword_4031CFC;
+        v12 = 0;
+        v11 = 1;
+        v10 = 0;
+        v9 = 0;
+        v8 = 1;
+        v18 = &v7;
+        v17 = std::wstring::wstring(&v7, &v49);
+        MapData = CGameType::LoadMapData(
+                    g_pGameType,
+                    v7.m_u[0],
+                    v7.m_u[1],
+                    v7.m_u[2],
+                    v7.m_u[3],
+                    v7.m_u[4],
+                    v7.m_u[5],
+                    v7.m_u[6],
+                    v8,
+                    v9,
+                    v10,
+                    v11,
+                    v12,
+                    v13,
+                    v14,
+                    v15,
+                    v16);
+        v45 = MapData;
       }
-      if ( v52 )
+      if ( v45 )
       {
-        if ( !CGameType::IsCampaignMap((CGameType *)g_pGameType)
+        if ( !CGameType::IsCampaignMap(g_pGameType)
           && BBSupportDbgReport(2, "main\\states\\StateAOBriefing.cpp", 553, "g_pGameType->IsCampaignMap()") == 1 )
         {
           __debugbreak();
         }
-        IGuiEngine::EnableEventInput((IGuiEngine *)g_pGUIEngine, 0);
+        IGuiEngine::EnableEventInput(g_pGUIEngine, 0);
         if ( g_pNetworkEngine )
         {
-          v31 = g_pNetworkEngine;
-          v44 = (int (__thiscall ***)(_DWORD, int))g_pNetworkEngine;
-          v30 = (**v44)(v44, 1);
+          v24 = g_pNetworkEngine;
+          v37 = (int (__thiscall ***)(_DWORD, int))g_pNetworkEngine;
+          v23 = (**v37)(v37, 1);
           g_pNetworkEngine = 0;
         }
-        v38 = operator new(0x18u);
-        LOBYTE(v58) = 3;
-        if ( v38 )
-          v39 = INetworkEngine::INetworkEngine((INetworkEngine *)v38, 0);
+        v31 = operator new(0x18u);
+        LOBYTE(v51) = 3;
+        if ( v31 )
+          v32 = INetworkEngine::INetworkEngine((INetworkEngine *)v31, 0);
         else
-          v39 = 0;
-        v29 = v39;
-        LOBYTE(v58) = 2;
-        g_pNetworkEngine = (int)v39;
-        *(_DWORD *)(g_pGameType + 112) = *(_DWORD *)(g_pGameType + 852);
-        *(_DWORD *)(g_pGameType + 188) = INetworkEngine::GetLocalIP((INetworkEngine *)g_pNetworkEngine);
+          v32 = 0;
+        v22 = v32;
+        LOBYTE(v51) = 2;
+        g_pNetworkEngine = (int)v32;
+        g_pGameType->m_iActualPlayerCount = g_pGameType->m_iMapMaxNumPlayers;
+        g_pGameType->m_sPlayerIP[0] = (DWORD)INetworkEngine::GetLocalIP((CGameHost **)g_pNetworkEngine);
         v6 = (OnlineManager *)OnlineManager::GetInstance();
-        *(_DWORD *)(g_pGameType + 224) = OnlineManager::GetLocalPeerId(v6);
-        PlayerName = CGameSettings::GetPlayerName((int)v54);
-        v27 = PlayerName;
-        LOBYTE(v58) = 4;
-        CGameType::SetPlayerName(0, PlayerName);
-        LOBYTE(v58) = 2;
-        std::wstring::~wstring(v54);
-        *(_DWORD *)(g_pGameType + 740) = *((_DWORD *)v51 + 1);
-        *(_DWORD *)(g_pGameType + 744) = *((_DWORD *)v51 + 2);
-        *(_DWORD *)(g_pGameType + 692) = 3;
-        for ( i = 0; i < *(_DWORD *)(g_pGameType + 852); ++i )
-          *(_BYTE *)(i + g_pGameType + 440) = 0;
-        INetworkEngine::Start(1, 1, *(_DWORD *)(g_pGameType + 852), 0);
+        g_pGameType->m_sPlayerPeerId[0] = OnlineManager::GetLocalPeerId(v6);
+        PlayerName = (std::wstring *)CGameSettings::GetPlayerName((int)&v47);
+        v20 = PlayerName;
+        LOBYTE(v51) = 4;
+        CGameType::SetPlayerName(g_pGameType, 0, PlayerName);
+        LOBYTE(v51) = 2;
+        std::wstring::~wstring(&v47);
+        g_pGameType->m_iCampaignType = *((_DWORD *)v44 + 1);
+        g_pGameType->dword2E8 = *((_DWORD *)v44 + 2);
+        g_pGameType->m_iGameType = 3;
+        for ( i = 0; i < g_pGameType->m_iMapMaxNumPlayers; ++i )
+          g_pGameType->m_sPlayerSlot10[i] = 0;
+        INetworkEngine::Start(1, 1, g_pGameType->m_iMapMaxNumPlayers, 0);
         CGameStateHandler::Switch((int)CStateGame::DynamicCreateFunc, 0);
-        v48 = 1;
-        v58 = -1;
-        std::wstring::~wstring(v56);
-        return v48;
+        v41 = 1;
+        v51 = -1;
+        std::wstring::~wstring(&v49);
+        return v41;
       }
       else
       {
         v5 = g_pStringEngine->GetString(g_pStringEngine, 388);
         std::string::operator=(&g_iMessageBoxStringID, v5);
-        v53 = IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 7);
+        v46 = IGuiEngine::CloseDialog(g_pGUIEngine, 7);
         if ( !g_pAddOn && BBSupportDbgReport(2, "main\\states\\StateAOBriefing.cpp", 537, "g_pAddOn") == 1 )
           __debugbreak();
         (*(void (__thiscall **)(int, _DWORD, char (__cdecl *)(int, int, int)))(*(_DWORD *)g_pAddOn + 12))(
           g_pAddOn,
           0,
           GuiDlgMainscreenProc);
-        v53 = IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 20, GuiDlgMainMessageBoxProc);
-        if ( !v53 && BBSupportDbgReport(2, "main\\states\\StateAOBriefing.cpp", 540, "bRet") == 1 )
+        v46 = IGuiEngine::OpenDialog(g_pGUIEngine, 20, (bool (__cdecl *)(int, int, int))GuiDlgMainMessageBoxProc);
+        if ( !v46 && BBSupportDbgReport(2, "main\\states\\StateAOBriefing.cpp", 540, "bRet") == 1 )
           __debugbreak();
         BBSupportTracePrintF(3, "Add On Map '%s' not found!", Buffer);
-        IGfxEngine::SetCursorShape((IGfxEngine *)g_pGfxEngine, 1, 0);
+        IGfxEngine::SetCursorShape(g_pGfxEngine, 1, 0);
         if ( g_pGameType )
         {
+          v26 = g_pGameType;
           v33 = g_pGameType;
-          v40 = g_pGameType;
-          v32 = delete (CGameType *)g_pGameType;
+          v25 = delete g_pGameType;
           g_pGameType = 0;
         }
-        v49 = 1;
-        v58 = -1;
-        std::wstring::~wstring(v56);
-        return v49;
+        v42 = 1;
+        v51 = -1;
+        std::wstring::~wstring(&v49);
+        return v42;
       }
     }
     else
     {
-      IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 7);
+      IGuiEngine::CloseDialog(g_pGUIEngine, 7);
       if ( !g_pAddOn && BBSupportDbgReport(2, "main\\states\\StateAOBriefing.cpp", 502, "g_pAddOn") == 1 )
         __debugbreak();
-      (*(void (__thiscall **)(int, int, bool (__cdecl *)(int, int, int)))(*(_DWORD *)g_pAddOn + 12))(
+      (*(void (__thiscall **)(int, int, char (__cdecl *)(int, unsigned int, int)))(*(_DWORD *)g_pAddOn + 12))(
         g_pAddOn,
         20,
         GuiDlgMainMessageBoxProc);
@@ -576,51 +580,51 @@ void __cdecl CStateAOBriefing::InitBriefingTexts(int a1, int a2) {
   {
     case 11:
       v2 = g_pStringEngine->GetString(g_pStringEngine, dword_3D89CD0[a2]);
-      std::string::operator=(&unk_402C9B4, v2);
+      std::string::operator=(&stru_402C9B4, v2);
       v3 = g_pStringEngine->GetString(g_pStringEngine, dword_3D89CE0[a2]);
       std::string::operator=(&unk_402C998, v3);
       v4 = g_pStringEngine->GetString(g_pStringEngine, dword_3D89CF0[a2]);
-      std::string::operator=(&unk_402C9D0, v4);
+      std::string::operator=(&stru_402C9D0, v4);
       v5 = g_pStringEngine->GetString(g_pStringEngine, dword_3D89D00[a2]);
       result = std::string::operator=(&unk_402C97C, v5);
       break;
     case 12:
       v7 = g_pStringEngine->GetString(g_pStringEngine, dword_3D89D10[a2]);
-      std::string::operator=(&unk_402C9B4, v7);
+      std::string::operator=(&stru_402C9B4, v7);
       v8 = g_pStringEngine->GetString(g_pStringEngine, dword_3D89D20[a2]);
       std::string::operator=(&unk_402C998, v8);
       v9 = g_pStringEngine->GetString(g_pStringEngine, dword_3D89D30[a2]);
-      std::string::operator=(&unk_402C9D0, v9);
+      std::string::operator=(&stru_402C9D0, v9);
       v10 = g_pStringEngine->GetString(g_pStringEngine, dword_3D89D40[a2]);
       result = std::string::operator=(&unk_402C97C, v10);
       break;
     case 13:
       v11 = g_pStringEngine->GetString(g_pStringEngine, dword_3D89D50[a2]);
-      std::string::operator=(&unk_402C9B4, v11);
+      std::string::operator=(&stru_402C9B4, v11);
       v12 = g_pStringEngine->GetString(g_pStringEngine, dword_3D89D60[a2]);
       std::string::operator=(&unk_402C998, v12);
       v13 = g_pStringEngine->GetString(g_pStringEngine, dword_3D89D70[a2]);
-      std::string::operator=(&unk_402C9D0, v13);
+      std::string::operator=(&stru_402C9D0, v13);
       v14 = g_pStringEngine->GetString(g_pStringEngine, dword_3D89D80[a2]);
       result = std::string::operator=(&unk_402C97C, v14);
       break;
     case 14:
       v19 = g_pStringEngine->GetString(g_pStringEngine, dword_3D89E50[a2]);
-      std::string::operator=(&unk_402C9B4, v19);
+      std::string::operator=(&stru_402C9B4, v19);
       v20 = g_pStringEngine->GetString(g_pStringEngine, dword_3D89E60[a2]);
       std::string::operator=(&unk_402C998, v20);
       v21 = g_pStringEngine->GetString(g_pStringEngine, dword_3D89E70[a2]);
-      std::string::operator=(&unk_402C9D0, v21);
+      std::string::operator=(&stru_402C9D0, v21);
       v22 = g_pStringEngine->GetString(g_pStringEngine, dword_3D89E80[a2]);
       result = std::string::operator=(&unk_402C97C, v22);
       break;
     case 15:
       v15 = g_pStringEngine->GetString(g_pStringEngine, dword_3D89D90[a2]);
-      std::string::operator=(&unk_402C9B4, v15);
+      std::string::operator=(&stru_402C9B4, v15);
       v16 = g_pStringEngine->GetString(g_pStringEngine, dword_3D89DC0[a2]);
       std::string::operator=(&unk_402C998, v16);
       v17 = g_pStringEngine->GetString(g_pStringEngine, dword_3D89DF0[a2]);
-      std::string::operator=(&unk_402C9D0, v17);
+      std::string::operator=(&stru_402C9D0, v17);
       v18 = g_pStringEngine->GetString(g_pStringEngine, dword_3D89E20[a2]);
       result = std::string::operator=(&unk_402C97C, v18);
       break;

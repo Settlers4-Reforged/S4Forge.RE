@@ -21,7 +21,7 @@ public:
     virtual ~CFile(void);
 
     // address=[0x135df00]
-    virtual void Accept(class IFSVisitor &a2);
+    virtual void Accept(IFSVisitor &a2);
 
     // address=[0x135dff0]
     virtual std::string const &GetName(void);

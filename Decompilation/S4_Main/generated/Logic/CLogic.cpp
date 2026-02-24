@@ -112,40 +112,34 @@ void  CLogic::SwitchExtraInfoMenu(bool a2) {
 
 
 // address=[0x1469e80]
-// Decompiled from BOOL __thiscall CLogic::PostLoadMap(CLogic *this, struct CGameType *a2)
+// Decompiled from void __thiscall CLogic::PostLoadMap(CLogic *this, struct CGameType *a2)
 void  CLogic::PostLoadMap(class CGameType & a2) {
   
-  BOOL result; // eax
-  int v3; // [esp+8h] [ebp-Ch]
-  int v4; // [esp+Ch] [ebp-8h]
+  int v2; // [esp+8h] [ebp-Ch]
+  DWORD v3; // [esp+Ch] [ebp-8h]
   unsigned int i; // [esp+10h] [ebp-4h]
 
-  result = CGameType::IsEmptyMap(a2);
-  if ( result )
+  if ( CGameType::IsEmptyMap(a2) )
   {
-    for ( i = 0; ; ++i )
+    for ( i = 0; i < a2->m_iActualPlayerCount; ++i )
     {
-      result = i;
-      if ( i >= *((_DWORD *)a2 + 28) )
-        break;
-      v4 = *((_DWORD *)a2 + i + 29);
-      if ( v4 )
+      v3 = a2->m_sPlayerType[i];
+      if ( v3 )
       {
-        if ( v4 == 1 )
-          v3 = 0;
+        if ( v3 == 1 )
+          v2 = 0;
         else
-          v3 = v4 - 1;
+          v2 = v3 - 1;
         CGameScriptManager::CreateStartResources(
-          (void ***)g_pScriptMgr,
-          *((_DWORD *)a2 + 16),
-          *((_DWORD *)a2 + i + 65),
-          *((_DWORD *)a2 + i + 74),
+          g_pScriptMgr,
+          a2->m_iStartResources,
+          a2->m_sPlayerStartX[i],
+          a2->m_sPlayerStartY[i],
           i + 1,
-          v3);
+          v2);
       }
     }
   }
-  return result;
 }
 
 

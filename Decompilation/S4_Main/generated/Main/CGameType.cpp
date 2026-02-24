@@ -159,7 +159,7 @@ bool  CGameType::IsMCD2TextureSet(void) {
 // Decompiled from bool __thiscall CGameType::IsMultiplayerGame(CGameType *this)
 bool const  CGameType::IsMultiplayerGame(void) {
   
-  return this->m_iGameMatchType == 2;
+  return this->m_iGameType == 2;
 }
 
 
@@ -254,11 +254,11 @@ void  CGameType::SetPlayerName(int _iPlayerIndex, std::wstring & _swpPlayerName)
   
   std::wstring::wstring(&this->string0);
   std::wstring::wstring(&this->m_swMapName);
-  this->dword38 = 0;
+  this->m_iWidthHeight = 0;
   this->m_bIsEmptyMap = 0;
-  this->dword40 = 0;
+  this->m_iStartResources = 0;
   this->dword44 = 0;
-  this->dword48 = 0;
+  this->m_uiNumberAlliances = 0;
   this->m_iActualPlayerCount = 0;
   this->byte230 = 0;
   this->byte261 = 0;
@@ -269,22 +269,22 @@ void  CGameType::SetPlayerName(int _iPlayerIndex, std::wstring & _swpPlayerName)
   std::string::string(&this->std__string298);
   this->m_bIsSaveGame = 0;
   this->byte2B9 = 0;
-  this->dword2BC = 0;
-  std::wstring::wstring(&this->string2c0);
+  this->m_uiTickCounter = 0;
+  std::wstring::wstring(&this->m_swSaveFile);
   this->byte2DC = 0;
   this->dword2E0 = 0;
   this->dword2E8 = 0;
-  this->byte2EC = 0;
-  this->dword2F0 = 0;
+  this->m_bIsGameWon = 0;
+  this->m_iTeamWon = 0;
   std::string::string(&this->std__string2F4);
   std::string::string(&this->std__string318);
   std::string::string(&this->std__string334);
   this->word350 = 0;
-  this->m_iPlayerCount = 0;
+  this->m_iMapMaxNumPlayers = 0;
   this->m_iFileSize = 0;
   this->byte35C = 0;
   this->byte35D = 0;
-  this->dword360 = 0;
+  this->m_iMode = 0;
   this->byte364 = 0;
   this->byte365 = 0;
   this->byte366 = 0;
@@ -473,9 +473,9 @@ bool  CGameType::LoadMapData(std::wstring a2, bool a3, unsigned int a4, bool a5,
          v89) )
   {
     std::string::operator=(&unk_402C998, (char *)&byte_36FE4FB);
-    std::string::operator=(&unk_402C9D0, (char *)&byte_36FE50F);
+    std::string::operator=(&stru_402C9D0, (char *)&byte_36FE50F);
     std::string::operator=(&unk_402C97C, (char *)&byte_36FE5B2);
-    std::string::operator=(&unk_402C9B4, (char *)&byte_36FE5B3);
+    std::string::operator=(&stru_402C9B4, (char *)&byte_36FE5B3);
     std::wstring::operator=((int)&a2);
     if ( !(*(unsigned __int8 (__thiscall **)(void *, _BYTE *, char *))(*(_DWORD *)g_pRandomMaps + 16))(
             g_pRandomMaps,
@@ -1050,7 +1050,7 @@ int  CGameType::HumanPlayers(void) {
   int i; // [esp+8h] [ebp-4h]
 
   v2 = 0;
-  for ( i = 0; i < this->m_iPlayerCount; ++i )
+  for ( i = 0; i < this->m_iMapMaxNumPlayers; ++i )
   {
     if ( *(_DWORD *)&this->m_sPlayerType[4 * i] == 1 )
       ++v2;
@@ -1069,17 +1069,17 @@ void  CGameType::Init(void) {
   this->m_bIsMapLoaded = 0;
   std::wstring::operator=(this, (wchar_t *)&emptyString);
   std::wstring::operator=(&this->m_swMapName, (wchar_t *)&emptyString2);
-  this->dword38 = 0;
+  this->m_iWidthHeight = 0;
   this->byte2DC = 1;
   this->dword44 = 0;
-  this->dword48 = 0;
+  this->m_uiNumberAlliances = 0;
   this->m_iActualPlayerCount = 0;
   this->byte230 = 0;
   this->dword3F8 = 0;
   this->dword3FC = 0;
   this->dword400 = 0;
-  this->m_iPlayerCount = 0;
-  this->dword360 = 0;
+  this->m_iMapMaxNumPlayers = 0;
+  this->m_iMode = 0;
   this->byte364 = 0;
   this->byte365 = 0;
   this->byte369 = 0;
@@ -1091,22 +1091,22 @@ void  CGameType::Init(void) {
   this->dword370 = 0;
   this->byte35C = 0;
   this->byte35D = 0;
-  this->dword2E4 = 0;
+  this->m_iCampaignType = 0;
   this->byte261 = 1;
   this->dword26C = 0;
   this->m_iNetworkTimeDelta = 0;
   this->m_iMultiPlayerGameID = -1;
   std::string::operator=(&this->std__string298, (char *)&byte_36FE4FA);
-  this->m_iGameMatchType = 1;
+  this->m_iGameType = 1;
   this->m_bIsSaveGame = 0;
-  std::wstring::operator=(&this->string2c0, (wchar_t *)&word_36FE960);
+  std::wstring::operator=(&this->m_swSaveFile, (wchar_t *)&word_36FE960);
   this->dword2E0 = 0;
-  this->byte2EC = 0;
-  this->dword2F0 = -1;
+  this->m_bIsGameWon = 0;
+  this->m_iTeamWon = -1;
   this->byte366 = 0;
   this->byte367 = 0;
   this->byte368 = 0;
-  this->dword38 = 0;
+  this->m_iWidthHeight = 0;
   for ( i = 0; i < 9; ++i )
     this->ptr4c[i] = 0;
   for ( j = 0; j < 9; ++j )
@@ -1130,9 +1130,9 @@ void  CGameType::Init(void) {
     this->m_sPlayerSlot15[j] = -1;
   }
   this->m_iNetworkTimeDelta = CStaticConfigVarInt::operator int(&g_iNetworkTimeDelta);
-  this->dword2BC = 0;
+  this->m_uiTickCounter = 0;
   this->word350 = 0;
-  memset(this->gap310, 0, 7u);
+  memset(this->m_pEconomyGoodsArray, 0, 7u);
   this->m_cLocalSlot = -1;
   this->m_bIsHost = 0;
   this->m_bIsWebGame = 0;
@@ -1230,7 +1230,7 @@ int const  CGameType::GetNumberHumanPlayers(void) {
   int i; // [esp+8h] [ebp-4h]
 
   v2 = 0;
-  for ( i = 0; i < this->m_iPlayerCount; ++i )
+  for ( i = 0; i < this->m_iMapMaxNumPlayers; ++i )
   {
     if ( *(_DWORD *)&this->m_sPlayerType[4 * i] == 1 )
       ++v2;

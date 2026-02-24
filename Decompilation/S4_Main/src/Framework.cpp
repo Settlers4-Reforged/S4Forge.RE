@@ -486,7 +486,7 @@ bool __cdecl ExistsExtractCommand(void)
         if (v6 >= 0x100)
             throw std::length_error("Extract command too long!");
         *(wchar_t *)((char *)swpAllArguments + v6) = 0;
-        CFileEx pExtractFile(1);
+        CFileEx pExtractFile{};
 
         pExtractFile.Open(swpAllArguments, 6, 0, CFileLog);
 

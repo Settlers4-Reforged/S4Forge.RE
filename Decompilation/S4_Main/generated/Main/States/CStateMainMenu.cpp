@@ -17,7 +17,7 @@ class CGameState * __cdecl CStateMainMenu::DynamicCreateFunc(void * a1) {
 
 
 // address=[0x14c1740]
-// Decompiled from char __cdecl CStateMainMenu::PreLoadGame(char a1)
+// Decompiled from char __cdecl CStateMainMenu::PreLoadGame(std::wstring a1)
 bool __cdecl CStateMainMenu::PreLoadGame(std::wstring a1) {
   
   OnlineManager *Instance; // eax
@@ -25,19 +25,19 @@ bool __cdecl CStateMainMenu::PreLoadGame(std::wstring a1) {
   _DWORD v4[10]; // [esp+0h] [ebp-E88h] BYREF
   _BYTE v5[4]; // [esp+2Ch] [ebp-E5Ch] BYREF
   struct CGameChunkGeneral *v6; // [esp+30h] [ebp-E58h]
-  int v7; // [esp+34h] [ebp-E54h]
+  void *v7; // [esp+34h] [ebp-E54h]
   INetworkEngine *v8; // [esp+38h] [ebp-E50h]
   void *v9; // [esp+3Ch] [ebp-E4Ch]
   BOOL v10; // [esp+40h] [ebp-E48h]
   CGameType *v11; // [esp+44h] [ebp-E44h]
   void *C; // [esp+48h] [ebp-E40h]
-  int v13; // [esp+4Ch] [ebp-E3Ch]
+  CGameType *v13; // [esp+4Ch] [ebp-E3Ch]
   int (__thiscall ***v14)(_DWORD, int); // [esp+50h] [ebp-E38h]
   char v15; // [esp+55h] [ebp-E33h]
   char v16[1324]; // [esp+58h] [ebp-E30h] BYREF
   char Str[1084]; // [esp+584h] [ebp-904h] BYREF
   _BYTE v18[1176]; // [esp+9C0h] [ebp-4C8h] BYREF
-  _BYTE v19[28]; // [esp+E58h] [ebp-30h] BYREF
+  std::wstring v19; // [esp+E58h] [ebp-30h] BYREF
   _DWORD *v20; // [esp+E78h] [ebp-10h]
   int v21; // [esp+E84h] [ebp-4h]
 
@@ -45,10 +45,10 @@ bool __cdecl CStateMainMenu::PreLoadGame(std::wstring a1) {
   v21 = 0;
   CGameChunkGeneral::CGameChunkGeneral(v16);
   v6 = (struct CGameChunkGeneral *)v16;
-  CGfxManager::DisableGfxFile((CGfxManager *)g_pGfxManager, 1);
-  v7 = SaveFilePath::BuildSaveFilePathWithExtension(v19, &a1);
+  CGfxManager::DisableGfxFile(g_pGfxManager, 1);
+  v7 = SaveFilePath::BuildSaveFilePathWithExtension(&v19, (int)&a1);
   std::wstring::operator=(v7);
-  std::wstring::~wstring(v19);
+  std::wstring::~wstring(&v19);
   S4::CMapFile::CMapFile((CHandleMap *)v18, 0);
   LOBYTE(v21) = 1;
   CUserLogoChunk::CUserLogoChunk((CUserLogoChunk *)v5);
@@ -62,7 +62,7 @@ bool __cdecl CStateMainMenu::PreLoadGame(std::wstring a1) {
   {
     v4[9] = g_pGameType;
     v13 = g_pGameType;
-    v4[8] = delete (CGameType *)g_pGameType;
+    v4[8] = delete g_pGameType;
     g_pGameType = 0;
   }
   C = operator new(0x620u);
@@ -73,14 +73,14 @@ bool __cdecl CStateMainMenu::PreLoadGame(std::wstring a1) {
     v11 = 0;
   v4[7] = v11;
   LOBYTE(v21) = 1;
-  g_pGameType = (int)v11;
+  g_pGameType = v11;
   CGameRun::FillGameType(&a1, v11, v16);
-  *(_BYTE *)(g_pGameType + 696) = 1;
+  g_pGameType->m_bIsSaveGame = 1;
   v10 = std::wstring::find((wchar_t *)L"_autoSave", 0) != -1;
-  *(_BYTE *)(g_pGameType + 697) = v10;
+  g_pGameType->byte2B9 = v10;
   Instance = (OnlineManager *)OnlineManager::GetInstance();
   OnlineManager::SetPrivate(Instance, 0);
-  std::string::operator=(&unk_402C9B4, Str);
+  std::string::operator=(&stru_402C9B4, Str);
   if ( g_pNetworkEngine )
   {
     v4[6] = g_pNetworkEngine;
@@ -105,13 +105,13 @@ bool __cdecl CStateMainMenu::PreLoadGame(std::wstring a1) {
   if ( (unsigned __int8)CGameType::IsMultiplayerGame(g_pGameType) )
   {
     INetworkEngine::Start(1, 0, 0, 0);
-    CGameType::SetHost((CGameType *)g_pGameType, 1);
+    CGameType::SetHost(g_pGameType, 1);
     CGameStateHandler::Switch((int)CStateLobbyLoadMP::DynamicCreateFunc, 1);
     CLanLobby::Communicate(1051, 0);
   }
   else
   {
-    INetworkEngine::Start(1, 1, *(_DWORD *)(g_pGameType + 112), 0);
+    INetworkEngine::Start(1, 1, g_pGameType->m_iActualPlayerCount, 0);
     CGameStateHandler::Switch((int)CStateGame::DynamicCreateFunc, 0);
   }
   v15 = 1;
