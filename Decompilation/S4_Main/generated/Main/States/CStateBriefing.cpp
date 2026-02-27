@@ -319,7 +319,7 @@ bool  CStateBriefing::OnEvent(class CEvn_Event & a2) {
             v21 = 0;
             v20 = 0;
             v19 = -1;
-            v18 = dword_4031CFC;
+            v18 = s_uAIDifficulty;
             v17 = 0;
             v16 = 1;
             v15 = 0;

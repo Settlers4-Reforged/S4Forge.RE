@@ -906,9 +906,9 @@ struct SGfxRenderConfiguration const &  IGfxEngine::GetCurrentRenderConfiguratio
 bool  IGfxEngine::RenderFrame(bool a2, bool a3) {
   
   struct SurfaceClipper *v4; // eax
-  bool v5; // al
+  unsigned __int8 v5; // al
   _BYTE v6[100]; // [esp+2Ch] [ebp-D4h] BYREF
-  DWORD v7; // [esp+90h] [ebp-70h]
+  int v7; // [esp+90h] [ebp-70h]
   DWORD TickCount; // [esp+94h] [ebp-6Ch]
   int v9; // [esp+98h] [ebp-68h]
   int v10; // [esp+A0h] [ebp-60h]
@@ -919,26 +919,25 @@ bool  IGfxEngine::RenderFrame(bool a2, bool a3) {
   int v15; // [esp+B4h] [ebp-4Ch]
   int v16; // [esp+B8h] [ebp-48h]
   BOOL v17; // [esp+BCh] [ebp-44h]
-  IGfxEngine *v18; // [esp+C0h] [ebp-40h]
   bool v19; // [esp+C5h] [ebp-3Bh]
   bool v20; // [esp+C6h] [ebp-3Ah]
   bool v21; // [esp+C7h] [ebp-39h]
   int v22; // [esp+C8h] [ebp-38h] BYREF
   _DWORD v23[4]; // [esp+CCh] [ebp-34h] BYREF
-  _DWORD v24[2]; // [esp+DCh] [ebp-24h] BYREF
-  int v25; // [esp+E4h] [ebp-1Ch]
-  int v26; // [esp+E8h] [ebp-18h]
-  int v27; // [esp+ECh] [ebp-14h] BYREF
-  int v28; // [esp+F0h] [ebp-10h]
-  int v29; // [esp+F4h] [ebp-Ch]
-  int v30; // [esp+F8h] [ebp-8h]
+  DWORD v24; // [esp+DCh] [ebp-24h] BYREF
+  int v25; // [esp+E0h] [ebp-20h]
+  int v26; // [esp+E4h] [ebp-1Ch]
+  int v27; // [esp+E8h] [ebp-18h]
+  int v28; // [esp+ECh] [ebp-14h] BYREF
+  int v29; // [esp+F0h] [ebp-10h]
+  int v30; // [esp+F4h] [ebp-Ch]
+  int v31; // [esp+F8h] [ebp-8h]
 
-  v18 = this;
   v22 = 1;
   if ( IsIconic(hWnd) )
   {
     byte_4689BD9 = 1;
-    D3DObjectPtr->field_740 = 1;
+    D3DObjectPtr->m_bIsErrorState = 1;
     return 1;
   }
   if ( !D3DObjectPtr )
@@ -956,11 +955,11 @@ bool  IGfxEngine::RenderFrame(bool a2, bool a3) {
     if ( --g_iRefreshWaitFrames )
       return 1;
   }
-  if ( D3DObjectPtr->field_740 )
+  if ( D3DObjectPtr->m_bIsErrorState )
   {
-    if ( IGfxEngine::SetRenderEnvironment(v18) )
+    if ( IGfxEngine::SetRenderEnvironment(this) )
     {
-      D3DObjectPtr->field_740 = 0;
+      D3DObjectPtr->m_bIsErrorState = 0;
       byte_3E2E2FE = 1;
       byte_3E2E2FF = 1;
       D3DObjectPtr->field_723 = 1;
@@ -969,7 +968,7 @@ bool  IGfxEngine::RenderFrame(bool a2, bool a3) {
     else
     {
       BBSupportTracePrintF(0, "GFX ENGINE: Problem while reinitializing the renderer!");
-      D3DObjectPtr->field_740 = 1;
+      D3DObjectPtr->m_bIsErrorState = 1;
       return 0;
     }
   }
@@ -980,18 +979,16 @@ bool  IGfxEngine::RenderFrame(bool a2, bool a3) {
       CBlitFX::CBlitFX((CBlitFX *)v6);
       v21 = dword_3E2E2B8 == 1;
       CBlitFX::SetFillColor((CBlitFX *)v6, 0, 0, 0, dword_3E2E2B8 == 1);
-      v22 = ((int (__thiscall *)(CSurfaceV7 *, _BYTE *))D3DObjectPtr->FinalRenderSurface->ClearSurface)(
-              D3DObjectPtr->FinalRenderSurface,
-              v6);
+      v22 = D3DObjectPtr->FinalRenderSurface->ClearSurface(D3DObjectPtr->FinalRenderSurface, v6);
       if ( v22 >= 0 )
       {
-        if ( (unsigned __int8)std::operator!=<SurfaceClipper,std::default_delete<SurfaceClipper>>((char *)v18 + 36, 0)
-          && (v4 = (struct SurfaceClipper *)std::unique_ptr<SurfaceClipper>::operator*((char *)v18 + 36),
+        if ( (unsigned __int8)std::operator!=<SurfaceClipper,std::default_delete<SurfaceClipper>>((char *)this + 36, 0)
+          && (v4 = (struct SurfaceClipper *)std::unique_ptr<SurfaceClipper>::operator*((char *)this + 36),
               v22 = CInterfaceD3D::SetCustomClipper(D3DObjectPtr, v4),
               v22 < 0) )
         {
           BBSupportTracePrintF(0, "GFX ENGINE: Failed to assign GUI clipper!");
-          D3DObjectPtr->field_740 = 1;
+          D3DObjectPtr->m_bIsErrorState = 1;
           return 1;
         }
         else if ( AddGuiPatches() )
@@ -1000,19 +997,19 @@ bool  IGfxEngine::RenderFrame(bool a2, bool a3) {
           if ( v22 >= 0 )
             return 1;
           BBSupportTracePrintF(0, "GFX ENGINE: Failed to clear GUI clipper!");
-          D3DObjectPtr->field_740 = 1;
+          D3DObjectPtr->m_bIsErrorState = 1;
           return 1;
         }
         else
         {
-          D3DObjectPtr->field_740 = 1;
+          D3DObjectPtr->m_bIsErrorState = 1;
           return 1;
         }
       }
       else
       {
         BBSupportTracePrintF(0, "GFX ENGINE: Failed to clear final render surface!");
-        D3DObjectPtr->field_740 = 1;
+        D3DObjectPtr->m_bIsErrorState = 1;
         return 1;
       }
     }
@@ -1031,26 +1028,26 @@ bool  IGfxEngine::RenderFrame(bool a2, bool a3) {
     }
     if ( byte_3E2E2FF || byte_3E2E302 )
     {
-      v22 = DrawTexturedLandscape(dword_3E2E2A8, dword_3E2E2AC);
+      v22 = (unsigned __int8)DrawTexturedLandscape(dword_3E2E2A8, dword_3E2E2AC);
       a3 = 1;
     }
     if ( !v22 )
     {
       WriteError(0, "RenderLandscape");
-      D3DObjectPtr->field_740 = 1;
+      D3DObjectPtr->m_bIsErrorState = 1;
       return 1;
     }
     byte_3E2E302 = 0;
     byte_3E2E2FF = 0;
     if ( byte_3E2E300 )
     {
-      v22 = DrawTexturedLandscapeDelta(dword_3E2E2A8, dword_3E2E2AC);
+      v22 = (unsigned __int8)DrawTexturedLandscapeDelta(dword_3E2E2A8, dword_3E2E2AC);
       a3 = 1;
     }
     if ( !v22 )
     {
       WriteError(0, "RenderLandscapeDelta");
-      D3DObjectPtr->field_740 = 1;
+      D3DObjectPtr->m_bIsErrorState = 1;
       return 1;
     }
     byte_3E2E300 = 0;
@@ -1068,7 +1065,7 @@ bool  IGfxEngine::RenderFrame(bool a2, bool a3) {
       if ( v22 )
       {
         WriteError(v22, "BlitLandscapeSurfaceToFinal");
-        D3DObjectPtr->field_740 = 1;
+        D3DObjectPtr->m_bIsErrorState = 1;
         return 0;
       }
       D3DObjectPtr->field_743 = 1;
@@ -1088,7 +1085,7 @@ bool  IGfxEngine::RenderFrame(bool a2, bool a3) {
         if ( v22 < 0 )
         {
           WriteError(v22, "RenderCamWindow");
-          D3DObjectPtr->field_740 = 1;
+          D3DObjectPtr->m_bIsErrorState = 1;
           return 0;
         }
         v9 = g_fVertexSize;
@@ -1099,14 +1096,14 @@ bool  IGfxEngine::RenderFrame(bool a2, bool a3) {
         if ( !v5 )
         {
           WriteError(v22, "RenderCamWindow");
-          D3DObjectPtr->field_740 = 1;
+          D3DObjectPtr->m_bIsErrorState = 1;
           return 0;
         }
         v22 = CInterfaceD3D::SwitchLandscapeRenderTarget(D3DObjectPtr, 0);
         if ( v22 < 0 )
         {
           WriteError(v22, "RenderCamWindow");
-          D3DObjectPtr->field_740 = 1;
+          D3DObjectPtr->m_bIsErrorState = 1;
           return 0;
         }
         v23[0] = dword_3E2E2D4;
@@ -1133,7 +1130,7 @@ bool  IGfxEngine::RenderFrame(bool a2, bool a3) {
         if ( v22 )
         {
           WriteError(v22, "BlitCameraSurfaceToBuffer");
-          D3DObjectPtr->field_740 = 1;
+          D3DObjectPtr->m_bIsErrorState = 1;
           return 0;
         }
         byte_3E2E303 = 0;
@@ -1143,12 +1140,12 @@ bool  IGfxEngine::RenderFrame(bool a2, bool a3) {
         if ( D3DObjectPtr && D3DObjectPtr->CCachePageManager[0] )
           CCachePageManager::SetCurrentZoomFactor(
             (CCachePageManager *)D3DObjectPtr->CCachePageManager[0],
-            *(float *)&dword_3E2E2F4);
+            dword_3E2E2F4);
         RenderObjectLayer(1);
         if ( D3DObjectPtr && D3DObjectPtr->CCachePageManager[0] )
           CCachePageManager::SetCurrentZoomFactor(
             (CCachePageManager *)D3DObjectPtr->CCachePageManager[0],
-            *(float *)&dword_3E2E2F8);
+            dword_3E2E2F8);
         EnableCamRenderSettings(0);
         CInterfaceD3D::SetupViewport(D3DObjectPtr, 0, 0, OutputWidth, OutputHeight);
       }
@@ -1184,14 +1181,14 @@ bool  IGfxEngine::RenderFrame(bool a2, bool a3) {
     AddDebugStrings(v7);
     if ( !byte_3E2E301 )
       goto LABEL_106;
-    v12 = ((int (__thiscall *)(CSurfaceV7 *))D3DObjectPtr->MiniMapSurface->j_?IsLost@CSurfaceV7@@UAEJXZ)(D3DObjectPtr->MiniMapSurface) == -2005532222
-       || ((int (__thiscall *)(CSurfaceV7 *))D3DObjectPtr->MiniMapAreaSurface->j_?IsLost@CSurfaceV7@@UAEJXZ)(D3DObjectPtr->MiniMapAreaSurface) == -2005532222;
+    v12 = D3DObjectPtr->MiniMapSurface->IsLost(D3DObjectPtr->MiniMapSurface) == -2005532222
+       || D3DObjectPtr->MiniMapAreaSurface->IsLost(D3DObjectPtr->MiniMapAreaSurface) == -2005532222;
     v20 = v12;
     if ( byte_3E2E30C || v20 )
     {
       if ( v20 )
       {
-        D3DObjectPtr->field_740 = 1;
+        D3DObjectPtr->m_bIsErrorState = 1;
         return 1;
       }
       byte_3E2E30C = 0;
@@ -1201,43 +1198,43 @@ bool  IGfxEngine::RenderFrame(bool a2, bool a3) {
     DrawMiniMapObjectLayer();
     DrawMiniMapLandscapeLayer();
     GetNextLayer();
-    v27 = g_sMiniMapRect;
-    v28 = dword_4689B90;
-    v29 = dword_4689B94;
-    v30 = dword_4689B98;
-    v24[0] = g_sMiniMapSize;
-    v24[1] = dword_3E2E240;
-    v25 = dword_3E2E244;
-    v26 = dword_3E2E248;
+    v28 = g_sMiniMapRect;
+    v29 = dword_4689B90;
+    v30 = dword_4689B94;
+    v31 = dword_4689B98;
+    v24 = g_sMiniMapSize;
+    v25 = dword_3E2E240;
+    v26 = dword_3E2E244;
+    v27 = dword_3E2E248;
     if ( SGfxRenderConfiguration::IsEditorMode((SGfxRenderConfiguration *)&GfxEngineSetup) )
       goto LABEL_106;
-    if ( v28 <= OutputHeight || v27 <= OutputWidth )
+    if ( v29 <= OutputHeight || v28 <= OutputWidth )
     {
-      if ( v30 > OutputHeight )
+      if ( v31 > OutputHeight )
       {
-        v11 = v30 - OutputHeight;
-        v30 = OutputHeight;
-        v26 -= v11;
+        v11 = v31 - OutputHeight;
+        v31 = OutputHeight;
+        v27 -= v11;
       }
-      if ( v29 > OutputWidth )
+      if ( v30 > OutputWidth )
       {
-        v10 = v29 - OutputWidth;
-        v29 = OutputWidth;
-        v25 -= v10;
+        v10 = v30 - OutputWidth;
+        v30 = OutputWidth;
+        v26 -= v10;
       }
-      v22 = ((int (__thiscall *)(CSurfaceV7 *, int *, CSurfaceV7 *, _DWORD *, int, _DWORD))D3DObjectPtr->FinalRenderSurface->Blt)(
+      v22 = ((int (__thiscall *)(CSurfaceV7 *, int *, CSurfaceV7 *, DWORD *, int, _DWORD))D3DObjectPtr->FinalRenderSurface->Blt)(
               D3DObjectPtr->FinalRenderSurface,
-              &v27,
+              &v28,
               D3DObjectPtr->MiniMapSurface,
-              v24,
+              &v24,
               0x8000,
               0);
       if ( !v22 )
-        v22 = ((int (__thiscall *)(CSurfaceV7 *, int *, CSurfaceV7 *, _DWORD *, int, _DWORD))D3DObjectPtr->FinalRenderSurface->Blt)(
+        v22 = ((int (__thiscall *)(CSurfaceV7 *, int *, CSurfaceV7 *, DWORD *, int, _DWORD))D3DObjectPtr->FinalRenderSurface->Blt)(
                 D3DObjectPtr->FinalRenderSurface,
-                &v27,
+                &v28,
                 D3DObjectPtr->MiniMapAreaSurface,
-                v24,
+                &v24,
                 0x8000,
                 0);
     }
@@ -1252,7 +1249,7 @@ LABEL_106:
       RenderTmpText();
       CInterfaceD3D::BlitCursor(D3DObjectPtr);
       if ( !AddGuiPatches() )
-        D3DObjectPtr->field_740 = 1;
+        D3DObjectPtr->m_bIsErrorState = 1;
       return v22 == 0;
     }
   }
@@ -2378,7 +2375,7 @@ int  IGfxEngine::CreateGuiSurface(int a2, struct GFX_ENGINE_GUI_SURFACE_DESCRIPT
 
   if ( !D3DObjectPtr )
     return -1;
-  if ( D3DObjectPtr->field_740 )
+  if ( D3DObjectPtr->m_bIsErrorState )
     return -1;
   if ( !*((_BYTE *)this + 20) && !D3DObjectPtr->field_71D && !D3DObjectPtr->field_71C )
     BBSupportTracePrintF(0, "GFX ENGINE: Call to CreateGuiSurface without initializing the engine before!");
@@ -2480,7 +2477,7 @@ bool  IGfxEngine::DestroyGuiSurface(int a2) {
   
   if ( !D3DObjectPtr || a2 >= 0xE )
     return 0;
-  if ( D3DObjectPtr->field_740 )
+  if ( D3DObjectPtr->m_bIsErrorState )
     return 0;
   if ( !D3DObjectPtr->field_138[a2] )
     return 0;
@@ -2501,7 +2498,7 @@ bool  IGfxEngine::SetVisibilityOfGuiSurface(int a2, bool a3) {
   
   if ( !D3DObjectPtr || a2 >= 0xE )
     return 0;
-  if ( D3DObjectPtr->field_740 )
+  if ( D3DObjectPtr->m_bIsErrorState )
     return 0;
   if ( !D3DObjectPtr->field_138[a2] )
     return 0;
@@ -2546,7 +2543,7 @@ bool  IGfxEngine::GetGuiSurfaceDestinationRect(int a1, struct tagRECT & a2) {
 
   if ( !D3DObjectPtr || a1 >= 0xE )
     return 0;
-  if ( D3DObjectPtr->field_740 )
+  if ( D3DObjectPtr->m_bIsErrorState )
     return 0;
   if ( !D3DObjectPtr->field_138[a1] )
     return 0;
@@ -2582,7 +2579,7 @@ unsigned short *  IGfxEngine::BeginWriteToSurface(int a2, unsigned int & a3) {
 
   if ( !D3DObjectPtr || a2 >= 0xE )
     return 0;
-  if ( D3DObjectPtr->field_740 )
+  if ( D3DObjectPtr->m_bIsErrorState )
     return 0;
   if ( !D3DObjectPtr->field_138[a2] )
     return 0;
@@ -2599,7 +2596,7 @@ unsigned short *  IGfxEngine::BeginWriteToSurface(int a2, unsigned int & a3) {
           {
             WriteError(v5, "RestoreGuiSurface");
             BBSupportTracePrintF(0, "GFX ENGINE: Problem with gui surfaces! Stop rendering...");
-            D3DObjectPtr->field_740 = 1;
+            D3DObjectPtr->m_bIsErrorState = 1;
             return 0;
           }
         }
@@ -2625,7 +2622,7 @@ bool  IGfxEngine::EndWriteToSurface(int a2) {
   
   if ( !D3DObjectPtr || a2 >= 0xE )
     return 0;
-  if ( D3DObjectPtr->field_740 )
+  if ( D3DObjectPtr->m_bIsErrorState )
     return 0;
   if ( !D3DObjectPtr->field_138[a2] )
     return 0;
@@ -2645,7 +2642,7 @@ bool  IGfxEngine::GetGuiSurfaceDC(int a2, struct HDC__ * * a3) {
 
   if ( !D3DObjectPtr || a2 >= 0xE )
     return 0;
-  if ( D3DObjectPtr->field_740 )
+  if ( D3DObjectPtr->m_bIsErrorState )
     return 0;
   if ( !D3DObjectPtr->field_138[a2] )
     return 0;
@@ -2664,7 +2661,7 @@ bool  IGfxEngine::GetGuiSurfaceDC(int a2, struct HDC__ * * a3) {
           {
             WriteError(v4, "RestoreGuiSurface");
             BBSupportTracePrintF(0, "GFX ENGINE: Problem with gui surfaces! Stop rendering...");
-            D3DObjectPtr->field_740 = 1;
+            D3DObjectPtr->m_bIsErrorState = 1;
             return 0;
           }
         }
@@ -2683,7 +2680,7 @@ bool  IGfxEngine::ReleaseGuiSurfaceDC(int a2, struct HDC__ * a3) {
   
   if ( !D3DObjectPtr || a2 >= 0xE )
     return 0;
-  if ( D3DObjectPtr->field_740 )
+  if ( D3DObjectPtr->m_bIsErrorState )
     return 0;
   if ( D3DObjectPtr->field_138[a2] )
     return (*(int (__thiscall **)(DWORD, HDC))(*(_DWORD *)D3DObjectPtr->field_138[a2] + 44))(
@@ -2706,7 +2703,7 @@ bool  IGfxEngine::SetGuiSurfaceClipRect(struct tagRECT const & Src) {
   int inited; // [esp+Ch] [ebp-4h]
 
   v8 = this;
-  if ( !D3DObjectPtr || D3DObjectPtr->field_740 )
+  if ( !D3DObjectPtr || D3DObjectPtr->m_bIsErrorState )
     return 0;
   v7 = ((int (__cdecl *)(char *))std::make_unique<SurfaceClipper,>)(v6);
   std::unique_ptr<SurfaceClipper>::operator=(v7);

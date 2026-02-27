@@ -4139,7 +4139,7 @@ void __cdecl InitGuiDlgAOCampaigns(void) {
     IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 0, 76, 0);
     IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 0, 76, 0);
     IGuiEngine::ResetRadioGroup((IGuiEngine *)g_pGUIEngine, 0, 65);
-    if ( dword_4031CFC )
+    if ( s_uAIDifficulty )
       IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 0, 65, 1);
     else
       IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 0, 64, 1);
@@ -4227,11 +4227,11 @@ bool __cdecl GuiDlgAOCampaignsProc(int a1, int a2, int a3) {
           break;
         case '@':
           PlayGuiSound(2);
-          dword_4031CFC = 0;
+          s_uAIDifficulty = 0;
           break;
         case 'A':
           PlayGuiSound(2);
-          dword_4031CFC = 1;
+          s_uAIDifficulty = 1;
           break;
         case 'B':
           PlayGuiSound(2);
@@ -17537,7 +17537,7 @@ void __cdecl InitGuiDlgMainLocalType(void) {
     v1 = g_pStringEngine->GetString(g_pStringEngine, 2071);
     IGuiEngine::SetText((void *)g_pGUIEngine, 7, 2402, v1);
     IGuiEngine::ResetRadioGroup((IGuiEngine *)g_pGUIEngine, 7, 2414);
-    if ( dword_4031CFC )
+    if ( s_uAIDifficulty )
       IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 7, 2414, 1);
     else
       IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 7, 2413, 1);
@@ -17611,11 +17611,11 @@ bool __cdecl GuiDlgMainLocalTypeProc(int a1, int a2, int a3) {
           break;
         case 2413:
           PlayGuiSound(2);
-          dword_4031CFC = 0;
+          s_uAIDifficulty = 0;
           break;
         case 2414:
           PlayGuiSound(2);
-          dword_4031CFC = 1;
+          s_uAIDifficulty = 1;
           break;
         default:
           return 1;
@@ -20777,7 +20777,7 @@ void __cdecl InitGuiDlgMD2Campaigns(void) {
   IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 0, 1860, v2 >= 4);
   IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 0, 1841, v2 >= 4);
   IGuiEngine::ResetRadioGroup((IGuiEngine *)g_pGUIEngine, 0, 1825);
-  if ( dword_4031CFC )
+  if ( s_uAIDifficulty )
     return IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 0, 1825, 1);
   else
     return IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 0, 1824, 1);
@@ -20853,11 +20853,11 @@ bool __cdecl GuiDlgMD2CampaignsProc(int a1, int a2, int a3) {
       {
         case 1824:
           PlayGuiSound(2);
-          dword_4031CFC = 0;
+          s_uAIDifficulty = 0;
           break;
         case 1825:
           PlayGuiSound(2);
-          dword_4031CFC = 1;
+          s_uAIDifficulty = 1;
           break;
         case 1826:
           PlayGuiSound(2);
@@ -21515,7 +21515,7 @@ void __cdecl InitGuiDlgMDCampaigns(void) {
     IGuiEngine::SetText((void *)g_pGUIEngine, 0, 1921, v1);
     IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 0, 1917, dword_402CBBC[10] != 0);
     IGuiEngine::ResetRadioGroup((IGuiEngine *)g_pGUIEngine, 0, 1924);
-    if ( dword_4031CFC )
+    if ( s_uAIDifficulty )
       IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 0, 1924, 1);
     else
       IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 0, 1923, 1);
@@ -21601,11 +21601,11 @@ bool __cdecl GuiDlgMDCampaignsProc(int a1, int a2, int a3) {
           break;
         case 1923:
           PlayGuiSound(2);
-          dword_4031CFC = 0;
+          s_uAIDifficulty = 0;
           break;
         case 1924:
           PlayGuiSound(2);
-          dword_4031CFC = 1;
+          s_uAIDifficulty = 1;
           break;
         case 1925:
           PlayGuiSound(2);
@@ -28487,7 +28487,7 @@ void __cdecl UpdateGuiDlgSettingsGame(void) {
     IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 38, 1146, *(_BYTE *)(g_pGame + 364));
     IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 38, 1150, *(_BYTE *)(g_pGame + 372));
     IGuiEngine::SetSliderPosition((IGuiEngine *)g_pGUIEngine, 38, 1149, *(_DWORD *)(g_pGame + 368));
-    if ( dword_4031CFC )
+    if ( s_uAIDifficulty )
       v0 = g_pStringEngine->GetString(g_pStringEngine, 891);
     else
       v0 = g_pStringEngine->GetString(g_pStringEngine, 889);
@@ -34947,7 +34947,7 @@ void __cdecl InitGuiDlgXMD3Campaigns(void) {
   if ( !g_pStringEngine )
     return result;
   IGuiEngine::ResetRadioGroup((IGuiEngine *)g_pGUIEngine, 0, 2937);
-  if ( dword_4031CFC )
+  if ( s_uAIDifficulty )
     return IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 0, 2937, 1);
   else
     return IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 0, 2936, 1);
@@ -35015,11 +35015,11 @@ bool __cdecl GuiDlgXMD3CampaignsProc(int a1, int a2, int a3) {
       {
         case 2936:
           PlayGuiSound(2);
-          dword_4031CFC = 0;
+          s_uAIDifficulty = 0;
           break;
         case 2937:
           PlayGuiSound(2);
-          dword_4031CFC = 1;
+          s_uAIDifficulty = 1;
           break;
         case 2938:
           PlayGuiSound(2);
@@ -37276,18 +37276,18 @@ void __cdecl UpdateReefBlockingBits(void) {
 
 
 // address=[0x14868c0]
-// Decompiled from _DWORD *__thiscall CRingBuffer<CEvn_Logic>::CRingBuffer<CEvn_Logic>(_DWORD *this, unsigned int a2)
+// Decompiled from CRingBuffer *__thiscall CRingBuffer<CEvn_Logic>::CRingBuffer<CEvn_Logic>(CRingBuffer *this, unsigned int a2)
 public: __thiscall CRingBuffer<class CEvn_Logic>::CRingBuffer<class CEvn_Logic>(int a2) {
   
-  int v2; // ecx
+  unsigned int v2; // ecx
   char *v4; // [esp+Ch] [ebp-1Ch]
   char *v5; // [esp+14h] [ebp-14h]
 
-  *this = CRingBuffer_CEvn_Logic_::_vftable_;
-  this[3] = 0;
-  this[2] = 0;
-  this[4] = 0;
-  this[1] = a2;
+  this->__vftable = (CRingBuffer_vtbl *)&CRingBuffer_CEvn_Logic_::_vftable_;
+  this->dwordC = 0;
+  this->m_uPointer = 0;
+  this->dword10 = 0;
+  this->m_uCapacity = a2;
   v2 = (unsigned __int64)a2 >> 27 != 0 ? -1 : 32 * a2;
   v5 = (char *)operator new[](__CFADD__(v2, 4) ? -1 : v2 + 4);
   if ( v5 )
@@ -37300,7 +37300,7 @@ public: __thiscall CRingBuffer<class CEvn_Logic>::CRingBuffer<class CEvn_Logic>(
   {
     v4 = 0;
   }
-  this[5] = v4;
+  this->m_aEvents = v4;
   return this;
 }
 
@@ -37324,10 +37324,10 @@ public: __thiscall CRingBuffer<class CEvn_Logic>::~CRingBuffer<class CEvn_Logic>
 
 
 // address=[0x1486d70]
-// Decompiled from bool __thiscall CRingBuffer<CEvn_Logic>::Check(_DWORD *this)
+// Decompiled from bool __thiscall CRingBuffer<CEvn_Logic>::Check(CRingBuffer *this)
 public: bool __thiscall CRingBuffer<class CEvn_Logic>::Check(void)const {
   
-  return this[2] != this[3];
+  return this->m_uPointer != this->dwordC;
 }
 
 
@@ -37340,13 +37340,13 @@ public: bool __thiscall CRingBuffer<class CEvn_Logic>::CheckVirtual(void)const {
 
 
 // address=[0x1487220]
-// Decompiled from int __thiscall CRingBuffer<CEvn_Logic>::Read(_DWORD *this)
+// Decompiled from CEvn_Logic *__thiscall CRingBuffer<CEvn_Logic>::Read(CRingBuffer *this)
 public: class CEvn_Logic & __thiscall CRingBuffer<class CEvn_Logic>::Read(void) {
   
-  int v2; // [esp+0h] [ebp-8h]
+  CEvn_Logic *v2; // [esp+0h] [ebp-8h]
 
-  v2 = this[5] + 32 * this[2]++;
-  this[2] %= this[1];
+  v2 = &this->m_aEvents[this->m_uPointer++];
+  this->m_uPointer %= this->m_uCapacity;
   return v2;
 }
 
@@ -37376,13 +37376,14 @@ public: void __thiscall CRingBuffer<class CEvn_Logic>::StartVirtual(void) {
 
 
 // address=[0x14875e0]
-// Decompiled from char __thiscall CRingBuffer<CEvn_Logic>::Write(_DWORD *this, int a2)
+// Decompiled from char __thiscall CRingBuffer<CEvn_Logic>::Write(CRingBuffer *this, CEvn_Logic *a2)
 public: bool __thiscall CRingBuffer<class CEvn_Logic>::Write(class CEvn_Logic & a2) {
   
-  if ( (unsigned int)(this[3] + 1) % this[1] == this[2] )
+  if ( (unsigned int)(this->dwordC + 1) % this->m_uCapacity == this->m_uPointer )
     return 0;
-  CEvn_Logic::operator=(this[5] + 32 * this[3]++, a2);
-  this[3] %= this[1];
+  CEvn_Logic::operator=(&this->m_aEvents[this->dwordC], a2);
+  ++this->dwordC;
+  this->dwordC %= this->m_uCapacity;
   return 1;
 }
 
@@ -47137,7 +47138,7 @@ bool __cdecl AddGuiPatches(void) {
     {
       WriteError(v2, "BlitGuiSurface");
       BBSupportTracePrintF(0, "GFX ENGINE: Problem with gui surfaces! Stop rendering...");
-      D3DObjectPtr->field_740 = 1;
+      D3DObjectPtr->m_bIsErrorState = 1;
       return 0;
     }
     D3DObjectPtr->field_743 = 1;
@@ -47178,7 +47179,7 @@ bool __cdecl AddGuiPatches(void) {
         {
           WriteError(v1, "BlitGuiSurface");
           BBSupportTracePrintF(0, "GFX ENGINE: Problem with gui surfaces! Stop rendering...");
-          D3DObjectPtr->field_740 = 1;
+          D3DObjectPtr->m_bIsErrorState = 1;
           return 0;
         }
         D3DObjectPtr->field_743 = 1;
@@ -47473,7 +47474,7 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
     if ( !D3DObjectPtr->field_71D )
       return 0;
     LandscapeRenderTargetSurface = CInterfaceD3D::GetLandscapeRenderTargetSurface(D3DObjectPtr);
-    if ( ((int (__thiscall *)(CSurfaceV7 *))LandscapeRenderTargetSurface->j_?IsLost@CSurfaceV7@@UAEJXZ)(LandscapeRenderTargetSurface) == -2005532222 )
+    if ( ((int (__thiscall *)(CSurfaceV7 *))LandscapeRenderTargetSurface->IsLost)(LandscapeRenderTargetSurface) == -2005532222 )
       return 0;
   }
   else
@@ -48248,7 +48249,7 @@ bool __cdecl DrawTexturedLandscape(int a1, int a2) {
     if ( !D3DObjectPtr->field_71D )
       return 0;
     LandscapeRenderTargetSurface = CInterfaceD3D::GetLandscapeRenderTargetSurface(D3DObjectPtr);
-    if ( ((int (__thiscall *)(CSurfaceV7 *))LandscapeRenderTargetSurface->j_?IsLost@CSurfaceV7@@UAEJXZ)(LandscapeRenderTargetSurface) == -2005532222 )
+    if ( ((int (__thiscall *)(CSurfaceV7 *))LandscapeRenderTargetSurface->IsLost)(LandscapeRenderTargetSurface) == -2005532222 )
       return 0;
   }
   else
@@ -49226,7 +49227,7 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
     if ( !D3DObjectPtr->field_71D )
       return 0;
     LandscapeRenderTargetSurface = CInterfaceD3D::GetLandscapeRenderTargetSurface(D3DObjectPtr);
-    if ( ((int (__thiscall *)(CSurfaceV7 *))LandscapeRenderTargetSurface->j_?IsLost@CSurfaceV7@@UAEJXZ)(LandscapeRenderTargetSurface) == -2005532222 )
+    if ( ((int (__thiscall *)(CSurfaceV7 *))LandscapeRenderTargetSurface->IsLost)(LandscapeRenderTargetSurface) == -2005532222 )
       return 0;
   }
   else
@@ -56171,8 +56172,8 @@ void __cdecl MA_OpenMapFile(wchar_t * psz, int * a2, int * a3, int a4) {
   int v20; // [esp+228h] [ebp-44h]
   int Buffer; // [esp+22Ch] [ebp-40h] BYREF
   DWORD NumberOfBytesRead; // [esp+230h] [ebp-3Ch] BYREF
-  int TeamData; // [esp+234h] [ebp-38h]
-  _BYTE v24[4]; // [esp+238h] [ebp-34h] BYREF
+  BOOL TeamData; // [esp+234h] [ebp-38h]
+  BSTR *v24; // [esp+238h] [ebp-34h] BYREF
   HANDLE hFile; // [esp+23Ch] [ebp-30h]
   LPVOID lpBuffer; // [esp+240h] [ebp-2Ch]
   int v27; // [esp+244h] [ebp-28h] BYREF
@@ -56198,14 +56199,14 @@ void __cdecl MA_OpenMapFile(wchar_t * psz, int * a2, int * a3, int a4) {
   g_bEditorMap = 0;
   g_bCampaign = 0;
   *a2 = 0;
-  _bstr_t::_bstr_t(psz);
+  _bstr_t::_bstr_t(&v24, psz);
   v33 = 0;
   lpBuffer = operator new[](0x40018u);
   if ( !lpBuffer )
   {
     *a3 = 2;
     v33 = -1;
-    return (_DWORD *)_bstr_t::~_bstr_t(v24);
+    return (_DWORD *)_bstr_t::~_bstr_t(&v24);
   }
   v17 = operator new[](0x2001u);
   g_pTextDescription = v17;
@@ -56216,7 +56217,7 @@ void __cdecl MA_OpenMapFile(wchar_t * psz, int * a2, int * a3, int a4) {
     lpBuffer = 0;
     *a3 = 2;
     v33 = -1;
-    return (_DWORD *)_bstr_t::~_bstr_t(v24);
+    return (_DWORD *)_bstr_t::~_bstr_t(&v24);
   }
   memset(g_pTextDescription, 0, 0x2001u);
   v15 = operator new[](0x2001u);
@@ -56231,7 +56232,7 @@ void __cdecl MA_OpenMapFile(wchar_t * psz, int * a2, int * a3, int a4) {
     g_pTextDescription = 0;
     *a3 = 2;
     v33 = -1;
-    return (_DWORD *)_bstr_t::~_bstr_t(v24);
+    return (_DWORD *)_bstr_t::~_bstr_t(&v24);
   }
   memset(g_pTextEnglishDescription, 0, 0x2001u);
   v12 = operator new[](0x2001u);
@@ -56249,7 +56250,7 @@ void __cdecl MA_OpenMapFile(wchar_t * psz, int * a2, int * a3, int a4) {
     g_pTextEnglishDescription = 0;
     *a3 = 2;
     v33 = -1;
-    return (_DWORD *)_bstr_t::~_bstr_t(v24);
+    return (_DWORD *)_bstr_t::~_bstr_t(&v24);
   }
   memset(g_pTextTandT, 0, 0x2001u);
   v8 = operator new[](0x2001u);
@@ -56270,10 +56271,10 @@ void __cdecl MA_OpenMapFile(wchar_t * psz, int * a2, int * a3, int a4) {
     g_pTextTandT = 0;
     *a3 = 2;
     v33 = -1;
-    return (_DWORD *)_bstr_t::~_bstr_t(v24);
+    return (_DWORD *)_bstr_t::~_bstr_t(&v24);
   }
   memset(g_pTextEnglishTandT, 0, 0x2001u);
-  v5 = (const CHAR *)_bstr_t::operator char const *(v24);
+  v5 = (const CHAR *)_bstr_t::operator char const *(&v24);
   hFile = CreateFileA(v5, 0x80000000, 1u, 0, 3u, 0x80u, 0);
   if ( hFile == (HANDLE)-1 )
   {
@@ -56289,7 +56290,7 @@ void __cdecl MA_OpenMapFile(wchar_t * psz, int * a2, int * a3, int a4) {
     g_pTextEnglishTandT = 0;
     *a3 = 5;
     v33 = -1;
-    return (_DWORD *)_bstr_t::~_bstr_t(v24);
+    return (_DWORD *)_bstr_t::~_bstr_t(&v24);
   }
   else
   {
@@ -56314,14 +56315,14 @@ LABEL_16:
       g_pTextEnglishTandT = 0;
       *a3 = 2;
       v33 = -1;
-      return (_DWORD *)_bstr_t::~_bstr_t(v24);
+      return (_DWORD *)_bstr_t::~_bstr_t(&v24);
     }
     if ( v6 == Buffer )
     {
 LABEL_19:
-      SetFilePointer(hFile, 4, 0, 0);
+      SetFilePointer(hFile, 4, 0, FILE_BEGIN);
       ReadFile(hFile, &v19, 4u, &NumberOfBytesRead, 0);
-      CPlayerData::Init(&g_cPlayerAndTeamData);
+      CPlayerData::Init((CPlayerData *)&g_cPlayerAndTeamData);
       v20 = v19;
       if ( v19 == 31 || v20 == 40 )
       {
@@ -56346,13 +56347,31 @@ LABEL_19:
                   goto LABEL_46;
                 goto LABEL_72;
               case 2:
-                TeamData = CPlayerData::Load(lpBuffer, hFile, v27, nNumberOfBytesToRead, Size, v30, v31, v32);
-                dword_4727570 = CPlayerData::GetNumberOfPlayers(&g_cPlayerAndTeamData);
+                TeamData = CPlayerData::Load(
+                             &g_cPlayerAndTeamData,
+                             lpBuffer,
+                             hFile,
+                             v27,
+                             nNumberOfBytesToRead,
+                             Size,
+                             v30,
+                             v31,
+                             v32);
+                g_uNumberOfPlayers = CPlayerData::GetNumberOfPlayers((CPlayerData *)&g_cPlayerAndTeamData);
                 if ( !TeamData )
                   goto LABEL_46;
                 goto LABEL_72;
               case 3:
-                TeamData = CPlayerData::LoadTeamData(lpBuffer, hFile, v27, nNumberOfBytesToRead, Size, v30, v31, v32);
+                TeamData = CPlayerData::LoadTeamData(
+                             &g_cPlayerAndTeamData,
+                             (char *)lpBuffer,
+                             hFile,
+                             v27,
+                             nNumberOfBytesToRead,
+                             Size,
+                             v30,
+                             v31,
+                             v32);
                 if ( !TeamData )
                   goto LABEL_46;
                 goto LABEL_72;
@@ -56372,7 +56391,7 @@ LABEL_19:
                   if ( !TeamData )
                     goto LABEL_46;
                 }
-                else if ( SetFilePointer(hFile, nNumberOfBytesToRead, 0, 1u) == -1 )
+                else if ( SetFilePointer(hFile, nNumberOfBytesToRead, 0, FILE_CURRENT) == -1 )
                 {
                   goto LABEL_59;
                 }
@@ -56385,23 +56404,23 @@ LABEL_75:
                 g_bMapIsLoaded = 1;
                 *a3 = 0;
                 v33 = -1;
-                result = (_DWORD *)_bstr_t::~_bstr_t(v24);
+                result = (_DWORD *)_bstr_t::~_bstr_t(&v24);
                 break;
               case 5:
                 goto LABEL_75;
               case 7:
                 g_bSettlersAvailable = 1;
-                if ( SetFilePointer(hFile, nNumberOfBytesToRead, 0, 1u) == -1 )
+                if ( SetFilePointer(hFile, nNumberOfBytesToRead, 0, FILE_CURRENT) == -1 )
                   goto LABEL_59;
                 goto LABEL_72;
               case 8:
                 g_bBuildingsAvailable = 1;
-                if ( SetFilePointer(hFile, nNumberOfBytesToRead, 0, 1u) == -1 )
+                if ( SetFilePointer(hFile, nNumberOfBytesToRead, 0, FILE_CURRENT) == -1 )
                   goto LABEL_59;
                 goto LABEL_72;
               case 9:
                 g_bPilesAvailable = 1;
-                if ( SetFilePointer(hFile, nNumberOfBytesToRead, 0, 1u) == -1 )
+                if ( SetFilePointer(hFile, nNumberOfBytesToRead, 0, FILE_CURRENT) == -1 )
                   goto LABEL_59;
                 goto LABEL_72;
               case 11:
@@ -56434,12 +56453,12 @@ LABEL_75:
                 goto LABEL_72;
               case 64:
                 g_bEditorMap = 1;
-                if ( SetFilePointer(hFile, nNumberOfBytesToRead, 0, 1u) == -1 )
+                if ( SetFilePointer(hFile, nNumberOfBytesToRead, 0, FILE_CURRENT) == -1 )
                   goto LABEL_59;
                 goto LABEL_72;
               case 65:
                 g_bCampaign = 1;
-                if ( SetFilePointer(hFile, nNumberOfBytesToRead, 0, 1u) == -1 )
+                if ( SetFilePointer(hFile, nNumberOfBytesToRead, 0, FILE_CURRENT) == -1 )
                   goto LABEL_59;
                 goto LABEL_72;
               case 66:
@@ -56450,7 +56469,7 @@ LABEL_75:
                   goto LABEL_46;
                 goto LABEL_72;
               default:
-                if ( SetFilePointer(hFile, nNumberOfBytesToRead, 0, 1u) == -1 )
+                if ( SetFilePointer(hFile, nNumberOfBytesToRead, 0, FILE_CURRENT) == -1 )
                   goto LABEL_59;
                 goto LABEL_72;
             }
@@ -56471,7 +56490,7 @@ LABEL_46:
             g_pTextEnglishTandT = 0;
             *a3 = 3;
             v33 = -1;
-            return (_DWORD *)_bstr_t::~_bstr_t(v24);
+            return (_DWORD *)_bstr_t::~_bstr_t(&v24);
           }
           break;
         }
@@ -56492,7 +56511,7 @@ LABEL_59:
         g_pTextEnglishTandT = 0;
         *a3 = 4;
         v33 = -1;
-        return (_DWORD *)_bstr_t::~_bstr_t(v24);
+        return (_DWORD *)_bstr_t::~_bstr_t(&v24);
       }
     }
     else
@@ -56510,7 +56529,7 @@ LABEL_59:
       g_pTextEnglishTandT = 0;
       *a3 = 1;
       v33 = -1;
-      return (_DWORD *)_bstr_t::~_bstr_t(v24);
+      return (_DWORD *)_bstr_t::~_bstr_t(&v24);
     }
   }
   return result;
@@ -56559,7 +56578,7 @@ void __cdecl MA_GetNumberOfPlayers(int * a1) {
   result = (_DWORD *)(unsigned __int8)g_bMapIsLoaded;
   if ( g_bMapIsLoaded )
   {
-    *a1 = dword_4727570;
+    *a1 = g_uNumberOfPlayers;
   }
   else
   {
@@ -56640,17 +56659,17 @@ void __cdecl MA_GetPlayerData(int _iPlayerIndex, int _iUnknown, int * _iSlot9, i
     && _iPlayerIndex > 0
     && _iPlayerIndex <= CPlayerData::GetNumberOfPlayers(&g_cPlayerAndTeamData)
     && _iUnknown >= 0
-    && _iUnknown < CPlayerData::GetNumberOfSetups((CPlayerData *)&g_cPlayerAndTeamData) )
+    && _iUnknown < CPlayerData::GetNumberOfSetups(&g_cPlayerAndTeamData) )
   {
-    *_iSlot9 = CPlayerData::GetRaceOfPlayer((CPlayerData *)&g_cPlayerAndTeamData, _iPlayerIndex);
-    *_iSlot5 = CPlayerData::GetXOfPlayer((CPlayerData *)&g_cPlayerAndTeamData, _iPlayerIndex);
-    *_iSlot6 = CPlayerData::GetYOfPlayer((CPlayerData *)&g_cPlayerAndTeamData, _iPlayerIndex);
-    *a8 = CPlayerData::GetControlOfPlayer((CPlayerData *)&g_cPlayerAndTeamData, _iPlayerIndex, _iUnknown);
-    *a9 = CPlayerData::GetTeamOfPlayer((CPlayerData *)&g_cPlayerAndTeamData, _iPlayerIndex, _iUnknown) == 255;
-    *a10 = CPlayerData::GetTeamOfPlayer((CPlayerData *)&g_cPlayerAndTeamData, _iPlayerIndex, _iUnknown);
-    NameOfPlayer = CPlayerData::GetNameOfPlayer((CPlayerData *)&g_cPlayerAndTeamData, _iPlayerIndex);
+    *_iSlot9 = CPlayerData::GetRaceOfPlayer(&g_cPlayerAndTeamData, _iPlayerIndex);
+    *_iSlot5 = CPlayerData::GetXOfPlayer(&g_cPlayerAndTeamData, _iPlayerIndex);
+    *_iSlot6 = CPlayerData::GetYOfPlayer(&g_cPlayerAndTeamData, _iPlayerIndex);
+    *a8 = CPlayerData::GetControlOfPlayer(&g_cPlayerAndTeamData, _iPlayerIndex, _iUnknown);
+    *a9 = CPlayerData::GetTeamOfPlayer(&g_cPlayerAndTeamData, _iPlayerIndex, _iUnknown) == 255;
+    *a10 = CPlayerData::GetTeamOfPlayer(&g_cPlayerAndTeamData, _iPlayerIndex, _iUnknown);
+    NameOfPlayer = CPlayerData::GetNameOfPlayer(&g_cPlayerAndTeamData, _iPlayerIndex);
     MultiByteToWideChar(0, 1u, NameOfPlayer, -1, WideCharStr, 80);
-    SetupName = CPlayerData::GetSetupName((CPlayerData *)&g_cPlayerAndTeamData, _iUnknown);
+    SetupName = CPlayerData::GetSetupName(&g_cPlayerAndTeamData, _iUnknown);
     MultiByteToWideChar(0, 1u, SetupName, -1, psz, 80);
     *a6 = SysAllocString(WideCharStr);
     result = SysAllocString(psz);

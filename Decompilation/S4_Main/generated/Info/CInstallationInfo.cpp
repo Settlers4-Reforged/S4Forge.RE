@@ -7,23 +7,23 @@
 unsigned int  CInstallationInfo::GetConfigChecksum(void) {
   
   int ConfigFileCRC; // [esp+4h] [ebp-8h]
-  wchar_t **i; // [esp+8h] [ebp-4h]
+  SConfigFile *i; // [esp+8h] [ebp-4h]
 
   ConfigFileCRC = 1;
-  for ( i = &off_3700880; *i; i += 3 )
+  for ( i = s_sConfigFiles; i->m_sName; ++i )
   {
-    if ( *((_BYTE *)i + 4) )
-      ConfigFileCRC = CInstallationInfo::GetConfigFileCRC(*i, ConfigFileCRC);
+    if ( LOBYTE(i->m_uId) )
+      ConfigFileCRC = CInstallationInfo::GetConfigFileCRC((wchar_t *)i->m_sName, ConfigFileCRC);
   }
   return ConfigFileCRC;
 }
 
 
 // address=[0x1494e80]
-// Decompiled from int __thiscall CInstallationInfo::GetScriptChecksum(CInstallationInfo *this)
+// Decompiled from unsigned int __thiscall CInstallationInfo::GetScriptChecksum(CInstallationInfo *this)
 unsigned int  CInstallationInfo::GetScriptChecksum(void) {
   
-  return CInstallationInfo::GetFileCRC((wchar_t *)L"Script\\Internal\\StartResources.txt", 1);
+  return CInstallationInfo::GetFileCRC((wchar_t *)L"Script\\Internal\\StartResources.txt", 1u);
 }
 
 
@@ -34,15 +34,15 @@ unsigned int  CInstallationInfo::GetGfxChecksum(void) {
   double v1; // st7
   LARGE_INTEGER v3[3]; // [esp+8h] [ebp-24h] BYREF
   unsigned int GfxFileCRC; // [esp+24h] [ebp-8h]
-  int *i; // [esp+28h] [ebp-4h]
+  SGfxFile *i; // [esp+28h] [ebp-4h]
 
   CPerformanceCounter::CPerformanceCounter((CPerformanceCounter *)v3);
   CPerformanceCounter::Start(v3);
   GfxFileCRC = 1;
-  for ( i = &dword_3700A60; *i >= 0; i += 3 )
+  for ( i = s_sGfxFiles; i->m_uId >= 0; ++i )
   {
-    if ( *((_BYTE *)i + 4) )
-      GfxFileCRC = CInstallationInfo::GetGfxFileCRC(*i, GfxFileCRC);
+    if ( LOBYTE(i->m_uU) )
+      GfxFileCRC = CInstallationInfo::GetGfxFileCRC(i->m_uId, GfxFileCRC);
   }
   CPerformanceCounter::Measure(v3);
   v1 = CPerformanceCounter::TimeMs((CPerformanceCounter *)v3);
@@ -55,14 +55,14 @@ unsigned int  CInstallationInfo::GetGfxChecksum(void) {
 // Decompiled from bool __thiscall CInstallationInfo::CheckInstallation(CInstallationInfo *this, int a2)
 bool  CInstallationInfo::CheckInstallation(int a2) {
   
-  bool v2; // bl
-  bool v3; // bl
-  bool v6; // [esp+Fh] [ebp-1h]
+  char v2; // bl
+  char v3; // bl
+  char v6; // [esp+Fh] [ebp-1h]
 
   BBSupportTracePrintF(1, "Checking installation...");
-  v2 = CInstallationInfo::CheckConfigFiles(a2);
-  v3 = CInstallationInfo::CheckGfxFiles(a2) && v2;
-  v6 = CInstallationInfo::CheckWithLuaScript(a2) && v3;
+  v2 = CInstallationInfo::CheckConfigFiles(a2) & 1;
+  v3 = CInstallationInfo::CheckGfxFiles(a2) & v2;
+  v6 = CInstallationInfo::CheckWithLuaScript(a2) & v3;
   if ( v6 )
     BBSupportTracePrintF(1, "Installation check: %s!", "Ok");
   else
@@ -76,16 +76,16 @@ bool  CInstallationInfo::CheckInstallation(int a2) {
 // Decompiled from bool __stdcall CInstallationInfo::IsOptionalGameConfigFile(wchar_t *String2)
 bool  CInstallationInfo::IsOptionalGameConfigFile(wchar_t const * String2) {
   
-  wchar_t **i; // [esp+14h] [ebp-4h]
+  SConfigFile *i; // [esp+14h] [ebp-4h]
 
-  for ( i = &off_3700880; ; i += 3 )
+  for ( i = s_sConfigFiles; ; ++i )
   {
-    if ( i == &off_3700880 + 48 )
+    if ( i == &s_sConfigFiles[16] )
       j___wassert(L"false", L"main\\InstallationInfo.cpp", 0x271u);
-    if ( !j__wcscmp(*i, String2) )
+    if ( !j__wcscmp(i->m_sName, String2) )
       break;
   }
-  return ((unsigned int)i[2] & 0x40000) != 0;
+  return (i->m_uFlags & 0x40000) != 0;
 }
 
 
@@ -108,43 +108,43 @@ bool  CInstallationInfo::IsOptionalGameConfigFile(wchar_t const * String2) {
 
 
 // address=[0x1495090]
-// Decompiled from char __cdecl CInstallationInfo::GetFileProperties(wchar_t *String, int *a2)
+// Decompiled from char __cdecl CInstallationInfo::GetFileProperties(wchar_t *String, SFileProperties *a2)
 bool __cdecl CInstallationInfo::GetFileProperties(wchar_t const * String, struct SFileProperties & a2) {
   
   int v3; // [esp+0h] [ebp-98h] BYREF
   int v4; // [esp+10h] [ebp-88h]
   char DoesFileExistInLib; // [esp+15h] [ebp-83h]
   char v7; // [esp+17h] [ebp-81h]
-  _DWORD v8[26]; // [esp+18h] [ebp-80h] BYREF
-  _DWORD v9[3]; // [esp+80h] [ebp-18h] BYREF
+  CFileEx v8; // [esp+18h] [ebp-80h] BYREF
+  int *v9; // [esp+88h] [ebp-10h]
   int v10; // [esp+94h] [ebp-4h]
 
-  v9[2] = &v3;
-  memset(a2, 0, 8u);
+  v9 = &v3;
+  memset(a2, 0, sizeof(SFileProperties));
   v7 = 0;
   if ( !String || !*String )
     return v7;
-  CFileEx::CFileEx((CFileEx *)v8, 1);
+  CFileEx::CFileEx(&v8, UNUSED_ARG());
   v10 = 1;
-  CFileEx::Open(v9, String, 6, 0, UNUSED_ARG(), UNUSED_ARG());
-  v4 = CFileEx::Size(v8);
-  *a2 = v4;
-  if ( CFileEx::InLibrary((CFileEx *)v8) )
+  CFileEx::Open(&v8.IFileEx, String, CFile_BINARY|CFile_READ, 0, UNUSED_ARG(), UNUSED_ARG());
+  v4 = CFileEx::Size(&v8);
+  a2->m_uSize = v4;
+  if ( CFileEx::InLibrary(&v8) )
   {
-    *((_BYTE *)a2 + 4) = 0;
-    *((_BYTE *)a2 + 5) = 1;
+    a2->m_bOutsideLibrary = 0;
+    a2->m_bInLib = 1;
   }
   else
   {
-    *((_BYTE *)a2 + 4) = 1;
+    a2->m_bOutsideLibrary = 1;
     DoesFileExistInLib = CFileLibrary::DoesFileExistInLib(String);
-    *((_BYTE *)a2 + 5) = DoesFileExistInLib;
+    a2->m_bInLib = DoesFileExistInLib;
   }
   v7 = 1;
   v10 = 0;
-  CFileEx::Close((CFileEx *)v9, UNUSED_ARG(), UNUSED_ARG());
+  CFileEx::Close(&v8.IFileEx, UNUSED_ARG(), UNUSED_ARG());
   v10 = -1;
-  CFileEx::~CFileEx(v8);
+  CFileEx::~CFileEx(&v8);
   return v7;
 }
 
@@ -162,20 +162,20 @@ unsigned int __cdecl CInstallationInfo::GetFileCRC(wchar_t const * FileName, uns
   void *Buffer; // [esp+24h] [ebp-8Ch]
   size_t ElementCount; // [esp+28h] [ebp-88h]
   char v11; // [esp+2Fh] [ebp-81h]
-  _DWORD v12[26]; // [esp+30h] [ebp-80h] BYREF
-  _DWORD v13[3]; // [esp+98h] [ebp-18h] BYREF
+  CFileEx v12; // [esp+30h] [ebp-80h] BYREF
+  int *v13; // [esp+A0h] [ebp-10h]
   int v14; // [esp+ACh] [ebp-4h]
 
-  v13[2] = &v3;
+  v13 = &v3;
   if ( !FileName || !*FileName )
     return a2;
   v11 = 1;
   ElementCount = 0;
   Buffer = 0;
-  CFileEx::CFileEx((CFileEx *)v12, 1);
+  CFileEx::CFileEx(&v12, UNUSED_ARG());
   v14 = 1;
-  CFileEx::Open(v13, FileName, 6, 0, UNUSED_ARG(), UNUSED_ARG());
-  v8 = CFileEx::Size(v12);
+  CFileEx::Open(&v12.IFileEx, FileName, CFile_BINARY|CFile_READ, 0, UNUSED_ARG(), UNUSED_ARG());
+  v8 = CFileEx::Size(&v12);
   ElementCount = v8;
   if ( v8 )
   {
@@ -183,10 +183,10 @@ unsigned int __cdecl CInstallationInfo::GetFileCRC(wchar_t const * FileName, uns
     v6 = v7;
     Buffer = v7;
     memset(v7, 0, ElementCount + 8);
-    CFileEx::Read(v13, Buffer, 1, ElementCount, UNUSED_ARG(), UNUSED_ARG());
+    CFileEx::Read(&v12.IFileEx.__vftable, Buffer, 1, ElementCount, UNUSED_ARG(), UNUSED_ARG());
   }
   v14 = 0;
-  CFileEx::Close((CFileEx *)v13, UNUSED_ARG(), UNUSED_ARG());
+  CFileEx::Close(&v12.IFileEx, UNUSED_ARG(), UNUSED_ARG());
   if ( v11 )
   {
     if ( Buffer )
@@ -198,28 +198,28 @@ unsigned int __cdecl CInstallationInfo::GetFileCRC(wchar_t const * FileName, uns
   }
   v4 = a2;
   v14 = -1;
-  CFileEx::~CFileEx(v12);
+  CFileEx::~CFileEx(&v12);
   return v4;
 }
 
 
 // address=[0x14953d0]
-// Decompiled from int __cdecl CInstallationInfo::GetConfigFileCRC(wchar_t *String, int a2)
+// Decompiled from unsigned int __cdecl CInstallationInfo::GetConfigFileCRC(wchar_t *String, unsigned int a2)
 unsigned int __cdecl CInstallationInfo::GetConfigFileCRC(wchar_t const * String, unsigned int a2) {
   
   wchar_t *v3; // eax
-  int FileCRC; // [esp+4h] [ebp-30h]
-  int v5[7]; // [esp+8h] [ebp-2Ch] BYREF
+  unsigned int FileCRC; // [esp+4h] [ebp-30h]
+  std::wstring ret; // [esp+8h] [ebp-2Ch] BYREF
   int v6; // [esp+30h] [ebp-4h]
 
   if ( !String || !*String )
     return a2;
-  CGameSettings::GetConfigFilePath((int)v5, String, 1);
+  CGameSettings::GetConfigFilePath(&ret, String, 1);
   v6 = 0;
-  v3 = (wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)v5);
+  v3 = std::wstring::c_str(&ret);
   FileCRC = CInstallationInfo::GetFileCRC(v3, a2);
   v6 = -1;
-  std::wstring::~wstring(v5);
+  std::wstring::~wstring(&ret);
   return FileCRC;
 }
 
@@ -253,37 +253,35 @@ unsigned int __cdecl CInstallationInfo::GetGfxFileCRC(int a1, unsigned int a2) {
 
 
 // address=[0x1495620]
-// Decompiled from bool __cdecl CInstallationInfo::CheckFile(const wchar_t *a1, int a2)
+// Decompiled from bool __cdecl CInstallationInfo::CheckFile(wchar_t *a1, int a2)
 bool __cdecl CInstallationInfo::CheckFile(wchar_t const * a1, int a2) {
   
-  int v3; // [esp+0h] [ebp-10h] BYREF
-  unsigned __int8 v4; // [esp+4h] [ebp-Ch]
-  unsigned __int8 v5; // [esp+5h] [ebp-Bh]
-  BOOL v6; // [esp+8h] [ebp-8h]
+  SFileProperties v3; // [esp+0h] [ebp-10h] BYREF
+  BOOL v4; // [esp+8h] [ebp-8h]
   char FileProperties; // [esp+Fh] [ebp-1h]
 
   FileProperties = 1;
-  FileProperties = CInstallationInfo::GetFileProperties((int)a1, &v3);
+  FileProperties = CInstallationInfo::GetFileProperties(a1, &v3);
   if ( (a2 & 0x10000) != 0 )
   {
     if ( FileProperties )
       BBSupportTracePrintF(1, "File should not exist: %s!", (const char *)a1);
-    v6 = FileProperties == 0;
+    v4 = FileProperties == 0;
     return FileProperties == 0;
   }
   else if ( FileProperties )
   {
-    if ( !v3 )
+    if ( !v3.m_uSize )
     {
       FileProperties = 0;
       BBSupportTracePrintF(1, "File is empty: %s!", (const char *)a1);
     }
-    if ( (v5 & v4) != 0 )
+    if ( (v3.m_bInLib & v3.m_bOutsideLibrary) != 0 )
     {
       FileProperties = 0;
       BBSupportTracePrintF(1, "File exists inside and outside of file library: %s!", (const char *)a1);
     }
-    if ( (a2 & 0x20000) != 0 && v5 )
+    if ( (a2 & 0x20000) != 0 && v3.m_bInLib )
     {
       FileProperties = 0;
       BBSupportTracePrintF(1, "File exists inside file library: %s!", (const char *)a1);
@@ -305,17 +303,17 @@ bool __cdecl CInstallationInfo::CheckFile(wchar_t const * a1, int a2) {
 // Decompiled from bool __cdecl CInstallationInfo::CheckConfigFile(wchar_t *String, int a2)
 bool __cdecl CInstallationInfo::CheckConfigFile(wchar_t const * String, int a2) {
   
-  const wchar_t *v2; // eax
+  wchar_t *v2; // eax
   bool v4; // [esp+7h] [ebp-2Dh]
-  int v5[7]; // [esp+8h] [ebp-2Ch] BYREF
+  std::wstring ret; // [esp+8h] [ebp-2Ch] BYREF
   int v6; // [esp+30h] [ebp-4h]
 
-  CGameSettings::GetConfigFilePath((int)v5, String, 1);
+  CGameSettings::GetConfigFilePath(&ret, String, 1);
   v6 = 0;
-  v2 = (const wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)v5);
+  v2 = std::wstring::c_str(&ret);
   v4 = CInstallationInfo::CheckFile(v2, a2);
   v6 = -1;
-  std::wstring::~wstring(v5);
+  std::wstring::~wstring(&ret);
   return v4;
 }
 
@@ -329,7 +327,7 @@ bool __cdecl CInstallationInfo::CheckGfxFile(int a1, int a2) {
 
   v4 = 0;
   snwprintf(Buffer, 0x1FFu, L"Gfx\\%i.gfx", a1);
-  return CInstallationInfo::CheckFile((const wchar_t *)Buffer, a2);
+  return CInstallationInfo::CheckFile((wchar_t *)Buffer, a2);
 }
 
 
@@ -337,12 +335,12 @@ bool __cdecl CInstallationInfo::CheckGfxFile(int a1, int a2) {
 // Decompiled from char __cdecl CInstallationInfo::CheckConfigFiles(int a1)
 bool __cdecl CInstallationInfo::CheckConfigFiles(int a1) {
   
-  wchar_t **i; // [esp+4h] [ebp-8h]
+  SConfigFile *i; // [esp+4h] [ebp-8h]
   char v3; // [esp+Bh] [ebp-1h]
 
   v3 = 1;
-  for ( i = &off_3700880; *i; i += 3 )
-    v3 &= CInstallationInfo::CheckConfigFile(*i, (unsigned int)i[2] | a1);
+  for ( i = s_sConfigFiles; i->m_sName; ++i )
+    v3 &= CInstallationInfo::CheckConfigFile((wchar_t *)i->m_sName, i->m_uFlags | a1);
   return v3;
 }
 
@@ -351,191 +349,194 @@ bool __cdecl CInstallationInfo::CheckConfigFiles(int a1) {
 // Decompiled from char __cdecl CInstallationInfo::CheckGfxFiles(int a1)
 bool __cdecl CInstallationInfo::CheckGfxFiles(int a1) {
   
-  int *i; // [esp+4h] [ebp-8h]
+  SGfxFile *i; // [esp+4h] [ebp-8h]
   char v3; // [esp+Bh] [ebp-1h]
 
   v3 = 1;
-  for ( i = (int *)&dword_3700A60; *i >= 0; i += 3 )
-    v3 &= CInstallationInfo::CheckGfxFile(*i, i[2] | a1);
+  for ( i = s_sGfxFiles; i->m_uId >= 0; ++i )
+    v3 &= CInstallationInfo::CheckGfxFile(i->m_uId, i->m_uFlags | a1);
   return v3;
 }
 
 
 // address=[0x1495930]
-// Decompiled from char *__thiscall CInstallationInfo::CheckTrojanVehicleGfx(CInstallationInfo *this)
+// Decompiled from void __thiscall CInstallationInfo::CheckTrojanVehicleGfx(CInstallationInfo *this)
 void  CInstallationInfo::CheckTrojanVehicleGfx(void) {
   
-  char *result; // eax
-  int v2; // [esp+10h] [ebp-28h]
+  int v1; // [esp+10h] [ebp-28h]
   int j; // [esp+14h] [ebp-24h]
   int i; // [esp+18h] [ebp-20h]
   DWORD dwFileAttributes; // [esp+1Ch] [ebp-1Ch]
   int k; // [esp+20h] [ebp-18h]
   int m; // [esp+20h] [ebp-18h]
-  char *hFile; // [esp+24h] [ebp-14h]
+  HANDLE hFile; // [esp+24h] [ebp-14h]
   DWORD NumberOfBytesRead; // [esp+28h] [ebp-10h] BYREF
-  __int16 v10; // [esp+2Ch] [ebp-Ch] BYREF
-  _WORD v11[3]; // [esp+30h] [ebp-8h] BYREF
-  char v12; // [esp+36h] [ebp-2h]
+  __int16 v9; // [esp+2Ch] [ebp-Ch] BYREF
+  __int16 v10; // [esp+30h] [ebp-8h] BYREF
+  char v11; // [esp+36h] [ebp-2h]
   unsigned __int8 Buffer; // [esp+37h] [ebp-1h] BYREF
 
-  CInstallationInfo::GetFileCRC((wchar_t *)L"Gfx\\34.gil", 1);
-  result = (char *)CInstallationInfo::GetFileCRC((wchar_t *)L"Gfx\\34.gil", 1);
-  if ( result != (char *)1304412675 )
-    return result;
-  dwFileAttributes = GetFileAttributesW(L"Gfx\\34.gfx");
-  if ( (dwFileAttributes & 1) != 0 )
-    SetFileAttributesW(L"Gfx\\34.gfx", dwFileAttributes ^ 1);
-  result = (char *)CreateFileW(L"Gfx\\34.gfx", 0xC0000000, 0, 0, 3u, 0x80u, 0);
-  hFile = result;
-  if ( !result )
-    return result;
-  result = (char *)GetFileSize(result, 0);
-  if ( result != (_BYTE *)&dword_300000[104443] + 2 )
-    return result;
-  for ( i = 0; i < 1; ++i )
+  CInstallationInfo::GetFileCRC((wchar_t *)L"Gfx\\34.gil", 1u);
+  if ( CInstallationInfo::GetFileCRC((wchar_t *)L"Gfx\\34.gil", 1u) == 0x4DBFC203 )
   {
-    for ( j = 0; j < 1; ++j )
+    dwFileAttributes = GetFileAttributesW(L"Gfx\\34.gfx");
+    if ( (dwFileAttributes & 1) != 0 )
+      SetFileAttributesW(L"Gfx\\34.gfx", dwFileAttributes ^ 1);
+    hFile = CreateFileW(L"Gfx\\34.gfx", 0xC0000000, 0, 0, 3u, 0x80u, 0);
+    if ( hFile )
     {
-      NumberOfBytesRead = 0;
-      for ( k = 0; dword_3701170[5 * k]; ++k )
+      if ( GetFileSize(hFile, 0) == 3563502 )
       {
-        SetFilePointer(hFile, dword_3701170[5 * k], 0, 0);
-        ReadFile(hFile, v11, 2u, &NumberOfBytesRead, 0);
-        ReadFile(hFile, &v10, 2u, &NumberOfBytesRead, 0);
-        if ( v11[0] != dword_3701170[5 * k + 3] || v10 != dword_3701170[5 * k + 4] )
-          return (char *)CloseHandle(hFile);
-      }
-      v2 = 0;
-      SetFilePointer(hFile, 0, 0, 0);
-      v12 = 0;
-      ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
-      if ( !NumberOfBytesRead )
-        v12 = 1;
-      while ( !v12 )
-      {
-        if ( Buffer == 161 )
+        for ( i = 0; i < 1; ++i )
         {
-          ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
-          if ( NumberOfBytesRead )
+          for ( j = 0; j < 1; ++j )
           {
-            if ( !Buffer )
+            NumberOfBytesRead = 0;
+            for ( k = 0; s_cTrojanVehicleGfxCheckpoints[k].m_uAtOffset; ++k )
             {
-              ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
-              if ( NumberOfBytesRead )
+              SetFilePointer(hFile, s_cTrojanVehicleGfxCheckpoints[k].m_uAtOffset, 0, FILE_BEGIN);
+              ReadFile(hFile, &v10, 2u, &NumberOfBytesRead, 0);
+              ReadFile(hFile, &v9, 2u, &NumberOfBytesRead, 0);
+              if ( v10 != s_cTrojanVehicleGfxCheckpoints[k].m_uExpectedData[2]
+                || v9 != s_cTrojanVehicleGfxCheckpoints[k].m_uExpectedData[3] )
               {
-                if ( Buffer == 30 )
+                goto LABEL_61;
+              }
+            }
+            v1 = 0;
+            SetFilePointer(hFile, 0, 0, FILE_BEGIN);
+            v11 = 0;
+            ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
+            if ( !NumberOfBytesRead )
+              v11 = 1;
+            while ( !v11 )
+            {
+              if ( Buffer == 161 )
+              {
+                ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
+                if ( NumberOfBytesRead )
                 {
-                  ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
-                  if ( NumberOfBytesRead )
+                  if ( !Buffer )
                   {
-                    if ( !Buffer )
+                    ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
+                    if ( NumberOfBytesRead )
                     {
-                      ++v2;
-                      ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
-                      if ( !NumberOfBytesRead )
-                        v12 = 1;
+                      if ( Buffer == 30 )
+                      {
+                        ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
+                        if ( NumberOfBytesRead )
+                        {
+                          if ( !Buffer )
+                          {
+                            ++v1;
+                            ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
+                            if ( !NumberOfBytesRead )
+                              v11 = 1;
+                          }
+                        }
+                        else
+                        {
+                          v11 = 1;
+                        }
+                      }
+                    }
+                    else
+                    {
+                      v11 = 1;
                     }
                   }
-                  else
-                  {
-                    v12 = 1;
-                  }
+                }
+                else
+                {
+                  v11 = 1;
                 }
               }
               else
               {
-                v12 = 1;
+                ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
+                if ( !NumberOfBytesRead )
+                  v11 = 1;
               }
             }
-          }
-          else
-          {
-            v12 = 1;
-          }
-        }
-        else
-        {
-          ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
-          if ( !NumberOfBytesRead )
-            v12 = 1;
-        }
-      }
-      if ( v2 != 96 )
-        return (char *)CloseHandle(hFile);
-      for ( m = 0; dword_3701170[5 * m]; ++m )
-      {
-        SetFilePointer(hFile, dword_3701170[5 * m], 0, 0);
-        v11[0] = dword_3701170[5 * m + 1];
-        v10 = dword_3701170[5 * m + 2];
-        WriteFile(hFile, v11, 2u, &NumberOfBytesRead, 0);
-        NumberOfBytesRead = 0;
-        WriteFile(hFile, &v10, 2u, &NumberOfBytesRead, 0);
-      }
-      Buffer = 0;
-      SetFilePointer(hFile, 0, 0, 0);
-      v12 = 0;
-      ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
-      if ( !NumberOfBytesRead )
-        v12 = 1;
-      v11[0] = 120;
-      v10 = 59;
-      while ( !v12 )
-      {
-        if ( Buffer == 161 )
-        {
-          ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
-          if ( NumberOfBytesRead )
-          {
-            if ( !Buffer )
+            if ( v1 != 96 )
+              goto LABEL_61;
+            for ( m = 0; s_cTrojanVehicleGfxCheckpoints[m].m_uAtOffset; ++m )
             {
-              ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
-              if ( NumberOfBytesRead )
+              SetFilePointer(hFile, s_cTrojanVehicleGfxCheckpoints[m].m_uAtOffset, 0, FILE_BEGIN);
+              v10 = s_cTrojanVehicleGfxCheckpoints[m].m_uExpectedData[0];
+              v9 = s_cTrojanVehicleGfxCheckpoints[m].m_uExpectedData[1];
+              WriteFile(hFile, &v10, 2u, &NumberOfBytesRead, 0);
+              NumberOfBytesRead = 0;
+              WriteFile(hFile, &v9, 2u, &NumberOfBytesRead, 0);
+            }
+            Buffer = 0;
+            SetFilePointer(hFile, 0, 0, FILE_BEGIN);
+            v11 = 0;
+            ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
+            if ( !NumberOfBytesRead )
+              v11 = 1;
+            v10 = 'x';
+            v9 = ';';
+            while ( !v11 )
+            {
+              if ( Buffer == 0xA1 )
               {
-                if ( Buffer == 30 )
+                ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
+                if ( NumberOfBytesRead )
                 {
-                  ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
-                  if ( NumberOfBytesRead )
+                  if ( !Buffer )
                   {
-                    if ( !Buffer )
+                    ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
+                    if ( NumberOfBytesRead )
                     {
-                      SetFilePointer(hFile, -4, 0, 1u);
-                      NumberOfBytesRead = 0;
-                      WriteFile(hFile, v11, 2u, &NumberOfBytesRead, 0);
-                      NumberOfBytesRead = 0;
-                      WriteFile(hFile, &v10, 2u, &NumberOfBytesRead, 0);
-                      ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
-                      if ( !NumberOfBytesRead )
-                        v12 = 1;
+                      if ( Buffer == 30 )
+                      {
+                        ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
+                        if ( NumberOfBytesRead )
+                        {
+                          if ( !Buffer )
+                          {
+                            SetFilePointer(hFile, -4, 0, FILE_CURRENT);
+                            NumberOfBytesRead = 0;
+                            WriteFile(hFile, &v10, 2u, &NumberOfBytesRead, 0);
+                            NumberOfBytesRead = 0;
+                            WriteFile(hFile, &v9, 2u, &NumberOfBytesRead, 0);
+                            ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
+                            if ( !NumberOfBytesRead )
+                              v11 = 1;
+                          }
+                        }
+                        else
+                        {
+                          v11 = 1;
+                        }
+                      }
+                    }
+                    else
+                    {
+                      v11 = 1;
                     }
                   }
-                  else
-                  {
-                    v12 = 1;
-                  }
+                }
+                else
+                {
+                  v11 = 1;
                 }
               }
               else
               {
-                v12 = 1;
+                ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
+                if ( !NumberOfBytesRead )
+                  v11 = 1;
               }
             }
           }
-          else
-          {
-            v12 = 1;
-          }
         }
-        else
-        {
-          ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
-          if ( !NumberOfBytesRead )
-            v12 = 1;
-        }
+LABEL_61:
+        CloseHandle(hFile);
       }
     }
   }
-  return (char *)CloseHandle(hFile);
 }
 
 
@@ -548,7 +549,9 @@ bool __cdecl CInstallationInfo::CheckWithLuaScript(int a1) {
   int v4; // [esp+1Ch] [ebp-4h]
 
   CInstallationInfo::m_iLuaCheckFlags = a1;
-  CInstallationInfo::m_bLuaCheckOk = CInstallationInfo::CheckFile(L"Script\\Internal\\CheckInstallation.txt", a1);
+  CInstallationInfo::m_bLuaCheckOk = CInstallationInfo::CheckFile(
+                                       (wchar_t *)L"Script\\Internal\\CheckInstallation.txt",
+                                       a1);
   if ( !CInstallationInfo::m_bLuaCheckOk )
     return CInstallationInfo::m_bLuaCheckOk;
   CLua::CLua((CLua *)&v2);
@@ -576,12 +579,12 @@ void __cdecl CInstallationInfo::LuaCheckFile(void) {
   unsigned int v0; // eax
   unsigned int v1; // eax
   char v3; // bl
-  const wchar_t *v4; // eax
+  wchar_t *v4; // eax
   int v5; // [esp-4h] [ebp-98h]
   int IntegerZeroIfNoObject; // [esp+8h] [ebp-8Ch]
   char *Str; // [esp+Ch] [ebp-88h]
   char v8[88]; // [esp+10h] [ebp-84h] BYREF
-  int v9[7]; // [esp+68h] [ebp-2Ch] BYREF
+  std::wstring v9; // [esp+68h] [ebp-2Ch] BYREF
   int v10; // [esp+90h] [ebp-4h]
 
   v0 = j__lua_lua2C(1);
@@ -593,15 +596,15 @@ void __cdecl CInstallationInfo::LuaCheckFile(void) {
     std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v8);
     v10 = 0;
     std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::from_bytes(
-      (int)v9,
+      (int)&v9,
       Str);
     LOBYTE(v10) = 1;
     v3 = CInstallationInfo::m_bLuaCheckOk;
     v5 = IntegerZeroIfNoObject | CInstallationInfo::m_iLuaCheckFlags;
-    v4 = (const wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)v9);
+    v4 = std::wstring::c_str(&v9);
     CInstallationInfo::m_bLuaCheckOk = CInstallationInfo::CheckFile(v4, v5) & v3;
     LOBYTE(v10) = 0;
-    std::wstring::~wstring(v9);
+    std::wstring::~wstring(&v9);
     v10 = -1;
     return std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::~wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v8);
   }
@@ -623,7 +626,7 @@ void __cdecl CInstallationInfo::LuaCheckFiles(void) {
   unsigned int v3; // eax
   int result; // eax
   char v5; // bl
-  const wchar_t *v6; // eax
+  wchar_t *v6; // eax
   int v7; // [esp-4h] [ebp-2A8h]
   int IntegerZeroIfNoObject; // [esp+8h] [ebp-29Ch]
   int v9; // [esp+Ch] [ebp-298h]
@@ -631,7 +634,7 @@ void __cdecl CInstallationInfo::LuaCheckFiles(void) {
   char *Format; // [esp+18h] [ebp-28Ch]
   int i; // [esp+1Ch] [ebp-288h]
   char v13[88]; // [esp+20h] [ebp-284h] BYREF
-  int v14[7]; // [esp+78h] [ebp-22Ch] BYREF
+  std::wstring v14; // [esp+78h] [ebp-22Ch] BYREF
   char Str[512]; // [esp+94h] [ebp-210h] BYREF
   int v16; // [esp+2A0h] [ebp-4h]
 
@@ -655,15 +658,15 @@ void __cdecl CInstallationInfo::LuaCheckFiles(void) {
       std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v13);
       v16 = 0;
       std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::from_bytes(
-        (int)v14,
+        (int)&v14,
         Str);
       LOBYTE(v16) = 1;
       v5 = CInstallationInfo::m_bLuaCheckOk;
       v7 = IntegerZeroIfNoObject | CInstallationInfo::m_iLuaCheckFlags;
-      v6 = (const wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)v14);
+      v6 = std::wstring::c_str(&v14);
       CInstallationInfo::m_bLuaCheckOk = CInstallationInfo::CheckFile(v6, v7) & v5;
       LOBYTE(v16) = 0;
-      std::wstring::~wstring(v14);
+      std::wstring::~wstring(&v14);
       v16 = -1;
       std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::~wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v13);
     }

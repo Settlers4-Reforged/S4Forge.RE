@@ -126,7 +126,7 @@ class CGameState * __cdecl CStateXMD3Briefing::DynamicCreateFunc(void * a1) {
     v22 = 0;
     v21 = 0;
     v20 = v36[1];
-    v19 = dword_4031CFC;
+    v19 = s_uAIDifficulty;
     v18 = 0;
     v17 = 0;
     v16 = 1;

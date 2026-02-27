@@ -1,3 +1,4 @@
+#if FALSE
 #include "IInstallationInfo.h"
 
 // Definitions for class IInstallationInfo
@@ -19,3 +20,4 @@
 }
 
 
+#endif // Already implemented

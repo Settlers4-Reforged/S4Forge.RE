@@ -81,10 +81,10 @@ public:
     bool  ExecuteString(char const * Str);
 
     // address=[0x1602b20]
-    void  ExportFunction(void (__cdecl*)(void) a2, char const * Str);
+    void  ExportFunction(void (__cdecl* a2)(void), char const * Str);
 
     // address=[0x1602b60]
-    void  ExportTableFunction(char const * a2, void (__cdecl*)(void) a3, char const * Str);
+    void  ExportTableFunction(char const * a2, void (__cdecl* a3)(void), char const * Str);
 
     // address=[0x1602c20]
     void  ExportFunctions(struct CLua::SFuncInfo * a1);

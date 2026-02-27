@@ -3,23 +3,19 @@
 // Definitions for class CTutorial
 
 // address=[0x147d690]
-// Decompiled from CTutorial *__thiscall CTutorial::Init(CTutorial *this)
+// Decompiled from void __thiscall CTutorial::Init(CTutorial *this)
 void  CTutorial::Init(void) {
   
-  CTutorial *result; // eax
-
   TBitArray<2956>::SetArray(&unk_3F44AE0);
-  IGuiEngine::SetDlgToIgnore((IGuiEngine *)g_pGUIEngine, 36, 1);
-  IGuiEngine::SetCtrlStatusCallback((IGuiEngine *)g_pGUIEngine, (bool (__cdecl *)(int, int, int, bool, int))sub_147E0F0);
+  IGuiEngine::SetDlgToIgnore(g_pGUIEngine, 36, 1);
+  IGuiEngine::SetCtrlStatusCallback(g_pGUIEngine, (bool (__cdecl *)(int, int, int, bool, int))sub_147E0F0);
   CTutorial::RefreshGUIControlStatus(this);
   IEventEngine::RegisterHandle(g_pEvnEngine, (struct IEvn_Handle *)&g_cTutorial);
-  IGuiEngine::SetDlgToIgnore((IGuiEngine *)g_pGUIEngine, 36, 1);
-  IGuiEngine::SetCtrlStatusCallback((IGuiEngine *)g_pGUIEngine, (bool (__cdecl *)(int, int, int, bool, int))sub_147E140);
+  IGuiEngine::SetDlgToIgnore(g_pGUIEngine, 36, 1);
+  IGuiEngine::SetCtrlStatusCallback(g_pGUIEngine, (bool (__cdecl *)(int, int, int, bool, int))sub_147E140);
   CTutorial::EnableAllGUIControls(this);
-  result = this;
   *((_DWORD *)this + 1) = 0;
   *((_DWORD *)this + 2) = 0;
-  return result;
 }
 
 

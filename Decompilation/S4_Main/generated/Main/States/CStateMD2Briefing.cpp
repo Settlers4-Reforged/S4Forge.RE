@@ -288,7 +288,7 @@ bool  CStateMD2Briefing::OnEvent(class CEvn_Event & a2) {
         v16 = 0;
         v15 = 0;
         v14 = *((_DWORD *)v45 + 1);
-        v13 = dword_4031CFC;
+        v13 = s_uAIDifficulty;
         v12 = 0;
         v11 = 1;
         v10 = 0;

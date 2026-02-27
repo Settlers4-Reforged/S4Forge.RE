@@ -122,6 +122,15 @@ public:
     // address=[0x2fc54a0]
     bool  isAI(void);
 
+    // Type information members
+public:
+    char[10][33] m_uSetupNames;
+    CPlayerData::Player[8] m_sPlayers;
+    CPlayerData::Setup[80] m_sSetups;
+    _DWORD m_uNumberOfPlayers;
+    _DWORD m_uNumberOfSetups;
+    _BYTE[192] gap_35C;
+
 };
 
 

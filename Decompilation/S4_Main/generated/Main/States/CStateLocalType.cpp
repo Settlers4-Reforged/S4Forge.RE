@@ -23,7 +23,7 @@ class CGameState * __cdecl CStateLocalType::DynamicCreateFunc(void * a1) {
   CGuiGameState::CGuiGameState(this);
   *(_DWORD *)this = &CStateLocalType::_vftable_;
   CGuiGameState::EnsureGfxEngineIsInGuiMode(this);
-  dword_4031CFC = CGameSettings::GetAIDifficulty();
+  s_uAIDifficulty = CGameSettings::GetAIDifficulty();
   CGuiGameState::OpenDialog(this, 7, GuiDlgMainLocalTypeProc);
   return this;
 }
@@ -92,27 +92,27 @@ bool  CStateLocalType::OnEvent(class CEvn_Event & a2) {
       result = 1;
       break;
     case 0x60:
-      if ( dword_4031CFC != CGameSettings::GetAIDifficulty() )
-        CGameSettings::SetAIDifficulty(dword_4031CFC);
+      if ( s_uAIDifficulty != CGameSettings::GetAIDifficulty() )
+        CGameSettings::SetAIDifficulty(s_uAIDifficulty);
       CGameStateHandler::Switch((int)CStateCampaignDark::DynamicCreateFunc, 0);
       result = 1;
       break;
     case 0x61:
-      if ( dword_4031CFC != CGameSettings::GetAIDifficulty() )
-        CGameSettings::SetAIDifficulty(dword_4031CFC);
+      if ( s_uAIDifficulty != CGameSettings::GetAIDifficulty() )
+        CGameSettings::SetAIDifficulty(s_uAIDifficulty);
       CGameStateHandler::Switch((int)CStateCampaign3X3::DynamicCreateFunc, 0);
       result = 1;
       break;
     case 0x62:
-      if ( dword_4031CFC != CGameSettings::GetAIDifficulty() )
-        CGameSettings::SetAIDifficulty(dword_4031CFC);
+      if ( s_uAIDifficulty != CGameSettings::GetAIDifficulty() )
+        CGameSettings::SetAIDifficulty(s_uAIDifficulty);
       dword_403191C = 0;
       CGameStateHandler::Switch((int)CStateLobbyMapSettings::DynamicCreateFunc, 0);
       result = 1;
       break;
     case 0x63:
-      if ( dword_4031CFC != CGameSettings::GetAIDifficulty() )
-        CGameSettings::SetAIDifficulty(dword_4031CFC);
+      if ( s_uAIDifficulty != CGameSettings::GetAIDifficulty() )
+        CGameSettings::SetAIDifficulty(s_uAIDifficulty);
       CGameStateHandler::Switch((int)CStateMainMenu::DynamicCreateFunc, 0);
       result = 1;
       break;

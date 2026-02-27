@@ -11,6 +11,14 @@ public:
     // address=[0x14aa940]
      ~CChatInfo(void);
 
+    // Type information members
+public:
+    int m_sChatInfo;
+    _DWORD field_188;
+    _DWORD m_iActualPlayerCount;
+    _DWORD m_uLocalPlayerId;
+    CStateGame::SPlayerInfo[8] m_asPlayerInfo;
+
 };
 
 

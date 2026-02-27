@@ -120,7 +120,7 @@ public:
     void  UpdateClientSize(void);
 
     // address=[0x14aceb0]
-    virtual bool  OnEvent(class CEvn_Event & a2);
+    virtual bool  OnEvent(class CEvn_Event & _sEvent);
 
     // address=[0x14b1950]
     void  GetCenterWorldCoordinate(int & a2, int & a3);
@@ -134,6 +134,79 @@ public:
 private:
     // address=[0x14a8a30]
     void  CheckAutosaveTimer(void);
+
+    // Type information members
+public:
+    _DWORD dword4;
+    _DWORD m_uLastRenderTime;
+    _DWORD dwordC;
+    _DWORD dword10;
+    std::vector m_vCRCHistory;
+    std::vector m_vRandomHistory;
+    _DWORD dword34;
+    _DWORD dword38;
+    _DWORD dword3C;
+    _DWORD dword40;
+    _BYTE m_bAllowDebugString;
+    _BYTE byte45;
+    _BYTE byte46;
+    _BYTE byte47;
+    _BYTE byte48;
+    _BYTE byte49;
+    _BYTE byte4A;
+    _BYTE byte4C;
+    CGameData m_sGameData;
+    _BYTE[33] gapD3;
+    _BYTE byteF4;
+    _BYTE byteF5;
+    _BYTE byteF6;
+    _BYTE byteF7;
+    _BYTE byteF8;
+    CLogicRingBuffer * m_sLogicRingBuffer;
+    _DWORD dword100;
+    _DWORD dword104;
+    _DWORD m_uClientSizeRelated210;
+    _DWORD m_uClientSizeRelated;
+    _DWORD m_uClientWidth;
+    _DWORD m_uClientHeight;
+    _DWORD dword118;
+    _DWORD dword11C;
+    _DWORD dword120;
+    _BYTE byte124;
+    _BYTE byte125;
+    _BYTE byte126;
+    _BYTE byte127;
+    _DWORD m_uValidTick;
+    _BYTE byte12C;
+    _DWORD dword130;
+    _DWORD field_134;
+    _DWORD m_uGfxHighestResolution;
+    _DWORD m_uGfxTextureQuality;
+    BYTE field_140;
+    _BYTE field_141;
+    _BYTE[2] gap_142;
+    _DWORD m_uGfxFiltering;
+    BYTE field_148;
+    _BYTE field_149;
+    _BYTE[2] gap_14A;
+    _DWORD field_14C;
+    _DWORD m_uSoundFXVolume;
+    _DWORD m_uMusicVolume;
+    _DWORD m_uVoiceChatVolume;
+    _DWORD m_uVoiceChatMicro;
+    BYTE m_bMusicOn;
+    _BYTE m_bSoundFxOn;
+    BYTE m_bVoiceChatOn;
+    _BYTE m_bUserMP3;
+    _DWORD field_164;
+    _DWORD m_bExtendedTooltip;
+    BYTE m_bBorderScrollEnabled;
+    _DWORD m_uScrollStepValue;
+    BYTE m_bAlwaysUrgentMsg;
+    _DWORD field_178;
+    _DWORD m_uMsgLevelMask;
+    _DWORD m_uMsgHistory;
+    CChatInfo m_sChatInfo;
 
 };
 

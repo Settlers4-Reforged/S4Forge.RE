@@ -107,20 +107,20 @@ bool  CStateXMD3Campaigns::OnEvent(class CEvn_Event & a2) {
     switch ( event )
     {
       case 0x251Fu:
-        if ( dword_4031CFC != CGameSettings::GetAIDifficulty() )
-          CGameSettings::SetAIDifficulty(dword_4031CFC);
+        if ( s_uAIDifficulty != CGameSettings::GetAIDifficulty() )
+          CGameSettings::SetAIDifficulty(s_uAIDifficulty);
         CGameStateHandler::Switch((int)CStateXMD3Briefing::DynamicCreateFunc, (a2->m_wParam << 16) | 0x16);
         result = 1;
         break;
       case 0x2520u:
-        if ( dword_4031CFC != CGameSettings::GetAIDifficulty() )
-          CGameSettings::SetAIDifficulty(dword_4031CFC);
+        if ( s_uAIDifficulty != CGameSettings::GetAIDifficulty() )
+          CGameSettings::SetAIDifficulty(s_uAIDifficulty);
         CGameStateHandler::Switch((int)CStateXMD3Briefing::DynamicCreateFunc, (a2->m_wParam << 16) | 0x17);
         result = 1;
         break;
       case 0x2521u:
-        if ( dword_4031CFC != CGameSettings::GetAIDifficulty() )
-          CGameSettings::SetAIDifficulty(dword_4031CFC);
+        if ( s_uAIDifficulty != CGameSettings::GetAIDifficulty() )
+          CGameSettings::SetAIDifficulty(s_uAIDifficulty);
         CGameStateHandler::Switch((int)CStateXMD3Briefing::DynamicCreateFunc, (a2->m_wParam << 16) | 0x18);
         result = 1;
         break;
@@ -144,8 +144,8 @@ bool  CStateXMD3Campaigns::OnEvent(class CEvn_Event & a2) {
   }
   else if ( event == 9502 )
   {
-    if ( dword_4031CFC != CGameSettings::GetAIDifficulty() )
-      CGameSettings::SetAIDifficulty(dword_4031CFC);
+    if ( s_uAIDifficulty != CGameSettings::GetAIDifficulty() )
+      CGameSettings::SetAIDifficulty(s_uAIDifficulty);
     CGameStateHandler::Switch((int)CStateXMD3Briefing::DynamicCreateFunc, (a2->m_wParam << 16) | 0x15);
     return 1;
   }

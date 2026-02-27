@@ -13,7 +13,7 @@ bool __cdecl CGameRun::Init(void) {
   int MapBuildingXMLVersion; // [esp+20h] [ebp-850h]
   CLogicRingBuffer *v6; // [esp+24h] [ebp-84Ch]
   CLogicRingBuffer *v7; // [esp+28h] [ebp-848h]
-  CPaneContainer *v8; // [esp+2Ch] [ebp-844h]
+  CLogic *v8; // [esp+2Ch] [ebp-844h]
   CLogic *v9; // [esp+30h] [ebp-840h]
   CGameScriptManager *v10; // [esp+34h] [ebp-83Ch]
   CGameScriptManager *v11; // [esp+38h] [ebp-838h]
@@ -58,7 +58,7 @@ bool __cdecl CGameRun::Init(void) {
     v10 = 0;
   exceptionBlock = -1;
   g_pScriptMgr = v10;
-  if ( CGameData::GetMode((CGameData *)g_pGameData) == 3 )
+  if ( CGameData::GetMode(g_pGameData) == 3 )
     CGameScriptManager::SetVictoryConditionHook(
       g_pScriptMgr,
       (void (__cdecl *)())ScriptEconomyModeVictoryConditionCheck);
@@ -71,21 +71,21 @@ bool __cdecl CGameRun::Init(void) {
     v8 = 0;
   exceptionBlock = -1;
   g_pLogic = v8;
-  ((void (__thiscall *)(CGroupMgr *))g_pGroupMgr->Clear)(g_pGroupMgr);
+  g_pGroupMgr->Clear();
   CInputProcessor::Reset(&g_cInputProcessor);
   v7 = (CLogicRingBuffer *)operator new(0x1Cu);
   exceptionBlock = 4;
   if ( v7 )
-    v6 = CLogicRingBuffer::CLogicRingBuffer(v7, 1024);
+    v6 = CLogicRingBuffer::CLogicRingBuffer(v7, 0x400u);
   else
     v6 = 0;
   exceptionBlock = -1;
-  g_pGame[63] = v6;
+  g_pGame->m_sLogicRingBuffer = v6;
   CGameRun::SetupPlayersAndAlliances();
   CStatistic::Init((CStatistic *)&g_cStatistic);
   CInternationalTrader::ReInit();
   CMagic::InitMagicData();
-  g_iAutosavePrefix = 65;
+  g_iAutosavePrefix = 'A';
   if ( g_pGameType->m_bIsSaveGame )
   {
     if ( !CGameRun::LoadGame(&g_pGameType->m_swSaveFile) )
@@ -141,7 +141,7 @@ bool __cdecl CGameRun::Init(void) {
       if ( v2 == 1 )
         __debugbreak();
     }
-    v18 = CGameData::IsCampaign((CGameData *)g_pGameData) || CGameData::IsTutorial((CGameData *)g_pGameData);
+    v18 = CGameData::IsCampaign(g_pGameData) || CGameData::IsTutorial(g_pGameData);
     CGameRun::LoadEditorMap(&g_pGameType->m_swMapName, v18);
     CLogic::PostLoadMap(g_pLogic, g_pGameType);
     CEcoSectorMgr::CalculateInitialFreeBeds((CEcoSectorMgr *)g_cESMgr);
@@ -1142,7 +1142,7 @@ bool __cdecl CGameRun::RandomMap(void) {
 // Decompiled from char __cdecl CGameRun::LoadEditorMap(std::wstring *a1, char a2)
 bool __cdecl CGameRun::LoadEditorMap(std::wstring & a1, bool a2) {
   
-  char *v2; // eax
+  CGameData *v2; // eax
   wchar_t *v3; // eax
   struct CMapFile *v5; // [esp+10h] [ebp-28h]
   CHandleMap *v6; // [esp+14h] [ebp-24h]
@@ -1172,11 +1172,11 @@ bool __cdecl CGameRun::LoadEditorMap(std::wstring & a1, bool a2) {
     v11 = -1;
     v9 = v5;
     v10 = 1;
-    S4::CMapFile::Open(v5, (int)a1, 1, 1);
+    S4::CMapFile::Open(v5, a1, 1, 1);
   }
   CGameRun::LoadGeneralEditorInfo(v9);
-  v2 = CStateGame::GameData((CStateGame *)g_pGame);
-  CWorldManager::LoadGfxData(v9, 0xDu, *((_DWORD *)v2 + 2));
+  v2 = CStateGame::GameData(g_pGame);
+  CWorldManager::LoadGfxData(v9, 0xDu, v2->m_iHeight);
   CWarMap::Init();
   CBuildingMgr::LoadBuildingData((CBuildingMgr *)g_cBuildingMgr, v9, 8u);
   CSettlerMgr::LoadSettlerData((CSettlerMgr *)g_cSettlerMgr, v9, 7u);
@@ -1211,28 +1211,26 @@ bool __cdecl CGameRun::LoadEditorMap(std::wstring & a1, bool a2) {
 
 
 // address=[0x1485180]
-// Decompiled from int CGameRun::ActivateAIs()
+// Decompiled from void CGameRun::ActivateAIs()
 void __cdecl CGameRun::ActivateAIs(void) {
   
-  int result; // eax
-  int v1; // [esp+0h] [ebp-Ch]
+  int PlayerId; // [esp+0h] [ebp-Ch]
+  unsigned int v1; // [esp+4h] [ebp-8h]
   int i; // [esp+8h] [ebp-4h]
 
-  result = CPlayerManager::LastPlayerId();
-  v1 = result;
-  for ( i = 1; i <= v1; ++i )
+  PlayerId = CPlayerManager::LastPlayerId();
+  for ( i = 1; i <= PlayerId; ++i )
   {
     if ( CPlayerManager::IsAI(i) )
     {
       (*(void (__thiscall **)(void *, int))(*(_DWORD *)g_pAI + 28))(g_pAI, i);
       if ( CPlayerManager::GetPlayerControl(i) == 2 )
-        IAIDifficultyLevels::SetDifficultyLevel(i, 1u);
+        v1 = 1;
       else
-        IAIDifficultyLevels::SetDifficultyLevel(i, 2u);
+        v1 = 2;
+      IAIDifficultyLevels::SetDifficultyLevel(i, v1);
     }
-    result = i + 1;
   }
-  return result;
 }
 
 

@@ -3,13 +3,13 @@
 // Definitions for class CLogicRingBuffer
 
 // address=[0x1486a00]
-// Decompiled from CLogicRingBuffer *__thiscall CLogicRingBuffer::CLogicRingBuffer(CLogicRingBuffer *this, int a2)
+// Decompiled from CLogicRingBuffer *__thiscall CLogicRingBuffer::CLogicRingBuffer(CLogicRingBuffer *this, unsigned int a2)
  CLogicRingBuffer::CLogicRingBuffer(int a2) {
   
-  CRingBuffer<CEvn_Logic>::CRingBuffer<CEvn_Logic>(a2);
-  IS4ChunkObject::IS4ChunkObject((CLogicRingBuffer *)((char *)this + 24));
-  *(_DWORD *)this = &CLogicRingBuffer::_vftable_;
-  *((_DWORD *)this + 6) = &CLogicRingBuffer::`vftable';
+  CRingBuffer<CEvn_Logic>::CRingBuffer<CEvn_Logic>((CRingBuffer<CEvn_Logic> *)this, a2);
+  IS4ChunkObject::IS4ChunkObject(&this->IS4ChunkObject);
+  this->CRingBuffer::__vftable = (CRingBuffer_vtbl *)&CLogicRingBuffer::_vftable_;
+  this->IS4ChunkObject::__vftable = (IS4ChunkObject_vtbl *)&CLogicRingBuffer::`vftable';
   return this;
 }
 

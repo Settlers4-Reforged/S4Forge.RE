@@ -656,18 +656,20 @@ void  S4::CMapFile::SaveChunk(unsigned short a2, unsigned short a3, unsigned int
 bool  S4::CMapFile::LoadChunkObject(unsigned short a2, unsigned short a3, class IS4ChunkObject & a4, enum T_S4_MAP_CHUNK_STATUS a5) {
   
   _BYTE v6[28]; // [esp+4h] [ebp-48h] BYREF
+  S4::CMapFile *v7; // [esp+20h] [ebp-2Ch]
   int v8; // [esp+24h] [ebp-28h] BYREF
   int pExceptionObject; // [esp+28h] [ebp-24h] BYREF
-  void *chunkData; // [esp+2Ch] [ebp-20h]
+  const void *chunkData; // [esp+2Ch] [ebp-20h]
   BOOL v11; // [esp+30h] [ebp-1Ch]
   BOOL v12; // [esp+34h] [ebp-18h]
   int chunkSize; // [esp+38h] [ebp-14h] BYREF
   char v14; // [esp+3Fh] [ebp-Dh]
   int v15; // [esp+48h] [ebp-4h]
 
+  v7 = this;
   v8 = 0;
   chunkSize = 0;
-  chunkData = S4::CMapFile::LoadChunk(this, a2, a3, &v8, (size_t *)&chunkSize);
+  chunkData = S4::CMapFile::LoadChunk(this, a2, a3, &v8, &chunkSize);
   v12 = chunkData != 0;
   v11 = chunkSize > 0;
   if ( v11 && v12 )
@@ -678,7 +680,7 @@ bool  S4::CMapFile::LoadChunkObject(unsigned short a2, unsigned short a3, class 
     (**a4)(a4, v6);
     v14 = 1;
     v15 = -1;
-    CS4MemChunk::~CS4MemChunk((void **)v6);
+    CS4MemChunk::~CS4MemChunk((CS4MemChunk *)v6);
     return v14;
   }
   else

@@ -329,7 +329,7 @@ bool  CStateMDBriefing::OnEvent(class CEvn_Event & a2) {
         v22 = 0;
         v21 = 0;
         v20 = *((_DWORD *)v51 + 1);
-        v19 = dword_4031CFC;
+        v19 = s_uAIDifficulty;
         v18 = 0;
         v17 = 1;
         v16 = 0;

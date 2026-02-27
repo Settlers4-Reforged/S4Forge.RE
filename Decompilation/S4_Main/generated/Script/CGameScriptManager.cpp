@@ -125,8 +125,8 @@ void  CGameScriptManager::SetVictoryConditionHook(void (__cdecl*)(void) a2) {
 // Decompiled from CGameScriptManager *__thiscall CGameScriptManager::CGameScriptManager(CGameScriptManager *this)
  CGameScriptManager::CGameScriptManager(void) {
   
-  IS4ChunkObject::IS4ChunkObject(this);
-  *(_DWORD *)this = CGameScriptManager::_vftable_;
+  IS4ChunkObject::IS4ChunkObject((IS4ChunkObject *)this);
+  *(_DWORD *)this = &CGameScriptManager::_vftable_;
   _vec_ctor_no(
     (char *)this + 28,
     0x44u,
@@ -144,7 +144,7 @@ void  CGameScriptManager::SetVictoryConditionHook(void (__cdecl*)(void) a2) {
   *((_DWORD *)this + 1) = 0;
   *((_DWORD *)this + 2) = 0;
   *((_DWORD *)this + 398) = 0;
-  CGameScriptManager::m_pGameScriptManager = (int)this;
+  CGameScriptManager::m_pGameScriptManager = this;
   CGameScriptManager::InitScriptEnvironmentAndManager(this);
   return this;
 }

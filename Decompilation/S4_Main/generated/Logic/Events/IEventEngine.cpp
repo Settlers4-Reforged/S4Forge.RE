@@ -212,13 +212,13 @@ bool  IEventEngine::SendRawEvent(unsigned int a2, unsigned int a3, unsigned int 
 // Decompiled from char __thiscall IEventEngine::RegisterHandle(IEventEngine *this, struct IEvn_Handle *a2)
 bool  IEventEngine::RegisterHandle(class IEvn_Handle * a2) {
   
-  _DWORD v3[3]; // [esp-10h] [ebp-5Ch] BYREF
+  int v3[3]; // [esp-10h] [ebp-5Ch] BYREF
   struct IEvn_Handle **v4; // [esp-4h] [ebp-50h]
   _BYTE v5[12]; // [esp+4h] [ebp-48h] BYREF
   _BYTE v6[12]; // [esp+10h] [ebp-3Ch] BYREF
   int v7; // [esp+1Ch] [ebp-30h]
   _DWORD *v8; // [esp+20h] [ebp-2Ch]
-  _DWORD *v9; // [esp+24h] [ebp-28h]
+  int *v9; // [esp+24h] [ebp-28h]
   struct std::_Iterator_base12 *v10; // [esp+28h] [ebp-24h]
   struct std::_Iterator_base12 *v11; // [esp+2Ch] [ebp-20h]
   struct CEvn_HandleList *v12; // [esp+30h] [ebp-1Ch]
@@ -250,7 +250,7 @@ bool  IEventEngine::RegisterHandle(class IEvn_Handle * a2) {
   v8 = std::_List_const_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::_List_const_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>(
          v3,
          v11);
-  v7 = std::list<IEvn_Handle *>::insert(v6, v3[0], v3[1], v3[2], v4);
+  v7 = std::list<IEvn_Handle *>::insert((int)v6, v3[0], v3[1], v3[2], (int)v4);
   std::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::~_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>(v6);
   v16 = -1;
   std::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::~_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>(v5);
@@ -592,10 +592,10 @@ unsigned int  IEventEngine::GetCurrentTickCounter(void) {
 
 
 // address=[0x14ab030]
-// Decompiled from void __thiscall IEventEngine::SetTickPointer(IEventEngine *this, struct CPaneContainer *a2)
+// Decompiled from void __thiscall IEventEngine::SetTickPointer(IEventEngine *this, _DWORD *a2)
 void  IEventEngine::SetTickPointer(unsigned int * a2) {
   
-  this->m_pTick = (int)a2;
+  this->m_pTick = a2;
 }
 
 

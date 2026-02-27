@@ -58,18 +58,18 @@ public:
 
     // Type information members
 public:
-    _DWORD m_iTickCounter;
-    _DWORD dword4;
-    _DWORD dword8;
-    _DWORD dwordC;
+    _DWORD m_uTickCounter;
+    _DWORD m_uVirtualTick;
+    _DWORD m_iHeight;
+    _DWORD m_iWidth;
     _DWORD dword10;
-    _DWORD dword14;
-    _DWORD dword18;
-    _DWORD dword1C;
+    _DWORD m_uCamX;
+    _DWORD m_uCamY;
+    _DWORD m_uZoom;
     _DWORD dword20;
     _DWORD dword24;
     _BYTE byte28;
-    _BYTE byte29;
+    _BYTE m_bFixedStartCamera;
     _BYTE[2] gap2A;
     int m_sRandom;
     _BYTE[4] gap30;

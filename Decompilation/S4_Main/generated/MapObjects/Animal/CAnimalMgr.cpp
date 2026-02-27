@@ -45,105 +45,97 @@
 // Decompiled from int __thiscall CAnimalMgr::Init(CAnimalEffect **this)
 void  CAnimalMgr::Init(void) {
   
-  Squares *v1; // eax
-  CAnimalEffect *v2; // eax
-  CAnimalMgr *v3; // ecx
-  int v4; // edx
-  Squares *v5; // eax
-  int v6; // esi
-  int v7; // ecx
-  int v8; // edi
-  int v9; // edx
-  int v10; // ecx
-  int v11; // eax
+  int v1; // eax
+  int v2; // eax
+  int v3; // esi
+  int v4; // edi
+  int v5; // eax
   int result; // eax
-  int v13; // [esp+Ch] [ebp-74h]
-  int v14; // [esp+10h] [ebp-70h]
-  int v15; // [esp+18h] [ebp-68h] BYREF
-  int v16; // [esp+1Ch] [ebp-64h] BYREF
-  int v17; // [esp+20h] [ebp-60h] BYREF
-  int v18; // [esp+24h] [ebp-5Ch]
-  int v19; // [esp+28h] [ebp-58h] BYREF
-  int v20; // [esp+2Ch] [ebp-54h]
-  int v21; // [esp+30h] [ebp-50h]
-  IEntity *v22; // [esp+34h] [ebp-4Ch]
-  CAnimalEffect *v23; // [esp+38h] [ebp-48h]
+  unsigned int v7; // [esp+Ch] [ebp-74h]
+  int v8; // [esp+10h] [ebp-70h]
+  int v9; // [esp+18h] [ebp-68h] BYREF
+  int v10; // [esp+1Ch] [ebp-64h] BYREF
+  int v11; // [esp+20h] [ebp-60h] BYREF
+  int v12; // [esp+24h] [ebp-5Ch]
+  int v13; // [esp+28h] [ebp-58h] BYREF
+  int v14; // [esp+2Ch] [ebp-54h]
+  int v15; // [esp+30h] [ebp-50h]
+  IEntity *v16; // [esp+34h] [ebp-4Ch]
+  CAnimalEffect *v17; // [esp+38h] [ebp-48h]
   void *C; // [esp+3Ch] [ebp-44h]
-  IEntity *v25; // [esp+40h] [ebp-40h]
-  int v26; // [esp+44h] [ebp-3Ch]
-  int v27; // [esp+48h] [ebp-38h]
-  unsigned __int16 *v28; // [esp+4Ch] [ebp-34h]
-  int v29; // [esp+50h] [ebp-30h]
-  int v30; // [esp+54h] [ebp-2Ch]
-  int v31; // [esp+58h] [ebp-28h]
+  IEntity *v19; // [esp+40h] [ebp-40h]
+  int v20; // [esp+44h] [ebp-3Ch]
+  int v21; // [esp+48h] [ebp-38h]
+  IEntity *v22; // [esp+4Ch] [ebp-34h]
+  int v23; // [esp+50h] [ebp-30h]
+  int v24; // [esp+54h] [ebp-2Ch]
+  int v25; // [esp+58h] [ebp-28h]
   int n; // [esp+5Ch] [ebp-24h]
   int k; // [esp+60h] [ebp-20h]
   int m; // [esp+64h] [ebp-1Ch]
   int i; // [esp+68h] [ebp-18h]
   int j; // [esp+6Ch] [ebp-14h]
-  CAnimalEffect **v37; // [esp+70h] [ebp-10h]
-  int v38; // [esp+7Ch] [ebp-4h]
+  int v32; // [esp+7Ch] [ebp-4h]
 
-  v37 = this;
-  v1 = (Squares *)((int (__thiscall *)(CAnimalEffect **))CWorldManager::Width)(this);
-  v2 = (CAnimalEffect *)Squares::XYToVW((int)v1);
-  v3 = (CAnimalMgr *)v37;
-  v37[71] = v2;
-  v5 = (Squares *)((int (__fastcall *)(CAnimalMgr *, int))CWorldManager::Height)(v3, v4);
-  v37[72] = (CAnimalEffect *)Squares::XYToVW((int)v5);
-  v37[93] = 0;
-  v37[62] = 0;
-  v37[63] = 0;
-  v37[94] = (CAnimalEffect *)2;
-  CAnimalMgr::LoadAnimalData((CAnimalMgr *)v37);
-  v21 = (_DWORD)v37[72] * (_DWORD)v37[71];
-  v6 = 100 * (*(int (__thiscall **)(void *))(*(_DWORD *)g_pTiling + 52))(g_pTiling);
-  v8 = ((int (__thiscall *)(int))CWorldManager::Width)(v7);
-  v31 = v6 / (((int (__fastcall *)(int, int))CWorldManager::Height)(v10, v9) * v8);
-  if ( !v31 )
-    v31 = 1;
-  v27 = (int)v37[61] * v31 * v21 / 10000;
-  if ( v27 < (int)v37[64] )
-    v37[64] = (CAnimalEffect *)v27;
-  v20 = 100
+  v1 = CWorldManager::Width();
+  this[71] = (CAnimalEffect *)Squares::XYToVW(v1);
+  v2 = CWorldManager::Height();
+  this[72] = (CAnimalEffect *)Squares::XYToVW(v2);
+  this[93] = 0;
+  this[62] = 0;
+  this[63] = 0;
+  this[94] = (CAnimalEffect *)2;
+  CAnimalMgr::LoadAnimalData((CAnimalMgr *)this);
+  v15 = (_DWORD)this[72] * (_DWORD)this[71];
+  v3 = 100 * (*(int (__thiscall **)(void *))(*(_DWORD *)g_pTiling + 52))(g_pTiling);
+  v4 = CWorldManager::Width();
+  v25 = v3 / (CWorldManager::Height() * v4);
+  if ( !v25 )
+    v25 = 1;
+  v21 = (int)this[61] * v25 * v15 / 10000;
+  if ( v21 < (int)this[64] )
+    this[64] = (CAnimalEffect *)v21;
+  v14 = 100
       - ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->GetIntValueNoAdd)(
           g_pCfgMgr,
           "ANIMAL_DATA",
           "HUNT_PERCENT",
           50);
-  v37[65] = (CAnimalEffect *)(v20 * (int)v37[64] / 100);
+  this[65] = (CAnimalEffect *)(v14 * (int)this[64] / 100);
   std::vector<unsigned int>::clear();
   std::vector<unsigned int>::clear();
   std::vector<unsigned int>::clear();
   std::vector<unsigned int>::clear();
   std::vector<unsigned int>::clear();
-  for ( i = 0; i < (int)v37[71]; ++i )
+  for ( i = 0; i < (int)this[71]; ++i )
   {
-    for ( j = 0; j < (int)v37[72]; ++j )
+    for ( j = 0; j < (int)this[72]; ++j )
     {
       if ( CAIResourceMap::IsOfLandtype(12, (Squares *)i, (Squares *)j) )
       {
-        v19 = Y16X16::PackXYFast(i, j);
-        std::vector<unsigned int>::push_back((int)&v19);
-        v29 = 16 * i;
-        v30 = 16 * j;
+        v13 = Y16X16::PackXYFast(i, j);
+        std::vector<unsigned int>::push_back(&v13);
+        v23 = 16 * i;
+        v24 = 16 * j;
         for ( k = 0; k < 16; ++k )
         {
           for ( m = 0; m < 16; ++m )
           {
-            v26 = CWorldManager::ObjectId(k + v29, m + v30);
-            if ( v26 )
+            v20 = CWorldManager::ObjectId(k + v23, m + v24);
+            if ( v20 )
             {
-              v25 = CMapObjectMgr::EntityPtr(v26);
-              if ( v25 )
+              v19 = CMapObjectMgr::EntityPtr(v20);
+              if ( v19 )
               {
-                v11 = IEntity::Type(v25);
-                if ( CDecoObjMgr::IsFlower((CDecoObjMgr *)&g_cDecoObjMgr, v11)
-                  && CAnimalMgr::CheckButterflyUnderground((CAnimalMgr *)v37, k + v29, m + v30) )
+                v5 = IEntity::Type(v19);
+                if ( CDecoObjMgr::IsFlower((CDecoObjMgr *)&g_cDecoObjMgr, v5) )
                 {
-                  v18 = Y16X16::PackXYFast(k + v29, m + v30);
-                  v17 = v18;
-                  std::vector<unsigned int>::push_back((int)&v17);
+                  if ( CAnimalMgr::CheckButterflyUnderground((CAnimalMgr *)this, k + v23, m + v24) )
+                  {
+                    v12 = Y16X16::PackXYFast(k + v23, m + v24);
+                    v11 = v12;
+                    std::vector<unsigned int>::push_back(&v11);
+                  }
                 }
               }
             }
@@ -152,45 +144,45 @@ void  CAnimalMgr::Init(void) {
       }
       if ( CAIResourceMap::IsOfLandtype(2, (Squares *)i, (Squares *)j) )
       {
-        v16 = Y16X16::PackXYFast(i, j);
-        std::vector<unsigned int>::push_back((int)&v16);
+        v10 = Y16X16::PackXYFast(i, j);
+        std::vector<unsigned int>::push_back(&v10);
       }
       if ( CAIResourceMap::IsOfLandtype(7, (Squares *)i, (Squares *)j)
-        && (unsigned __int8)CAnimalMgr::IsLandscapeAround(v37, 13, i, j)
+        && (unsigned __int8)CAnimalMgr::IsLandscapeAround(this, 13, i, j)
         || CAIResourceMap::IsOfLandtype(13, (Squares *)i, (Squares *)j) )
       {
-        v15 = Y16X16::PackXYFast(i, j);
-        std::vector<unsigned int>::push_back((int)&v15);
+        v9 = Y16X16::PackXYFast(i, j);
+        std::vector<unsigned int>::push_back(&v9);
       }
     }
   }
   C = operator new(0x38u);
-  v38 = 0;
+  v32 = 0;
   if ( C )
-    v23 = CAnimalEffect::CAnimalEffect((CAnimalEffect *)C);
+    v17 = CAnimalEffect::CAnimalEffect((CAnimalEffect *)C);
   else
-    v23 = 0;
-  v38 = -1;
-  v37[97] = v23;
-  CAnimalEffect::SetMaxAmountButterflies(v37[97], (int)v37[67] + 1);
-  CAnimalEffect::SetMaxAmountBirds(v37[97], (CAnimalEffect *)((char *)v37[68] + 1));
-  CAnimalEffect::SetMaxAmountSeagulls(v37[97], (int)v37[69] + 1);
+    v17 = 0;
+  v32 = -1;
+  this[97] = v17;
+  CAnimalEffect::SetMaxAmountButterflies(this[97], (int)this[67] + 1);
+  CAnimalEffect::SetMaxAmountBirds(this[97], (CAnimalEffect *)((char *)this[68] + 1));
+  CAnimalEffect::SetMaxAmountSeagulls(this[97], (int)this[69] + 1);
   result = CMapObjectMgr::LastUsedId();
-  v14 = result;
-  for ( n = 1; n <= v14; ++n )
+  v8 = result;
+  for ( n = 1; n <= v8; ++n )
   {
-    v28 = (unsigned __int16 *)CMapObjectMgr::EntityPtr(n);
-    if ( v28 )
+    v22 = CMapObjectMgr::EntityPtr(n);
+    if ( v22 )
     {
-      if ( IEntity::ObjType((IEntity *)v28) == 128 )
+      if ( IEntity::ObjType(v22) == 128 )
       {
-        v22 = (IEntity *)v28;
-        if ( !IEntity::FlagBits((IEntity *)v28, (EntityFlag)&unk_4000000) )
+        v16 = v22;
+        if ( !IEntity::FlagBits(v22, (EntityFlag)&unk_4000000) )
         {
-          v37[62] = (CAnimalEffect *)((char *)v37[62] + 1);
-          v13 = IEntity::Type(v22);
-          if ( !CAnimalMgr::IsHuntable((CAnimalMgr *)v37, v13) )
-            v37[63] = (CAnimalEffect *)((char *)v37[63] + 1);
+          this[62] = (CAnimalEffect *)((char *)this[62] + 1);
+          v7 = IEntity::Type(v16);
+          if ( !CAnimalMgr::IsHuntable((CAnimalMgr *)this, v7) )
+            this[63] = (CAnimalEffect *)((char *)this[63] + 1);
         }
       }
     }

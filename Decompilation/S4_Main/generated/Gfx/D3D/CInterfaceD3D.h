@@ -181,7 +181,7 @@ public:
     int field_734;
     _BYTE[4] gap_738;
     int field_73C;
-    char field_740;
+    char m_bIsErrorState;
     char IsHQTextureSet;
     char IsForceBlit;
     char field_743;

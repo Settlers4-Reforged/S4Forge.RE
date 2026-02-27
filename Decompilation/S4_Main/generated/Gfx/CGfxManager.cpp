@@ -829,7 +829,7 @@ void  CGfxManager::GetBoundingBox(struct SGfxBoundingBox & a2, unsigned int a3, 
 
 
 // address=[0x13637e0]
-// Decompiled from char __thiscall CGfxManager::EnableGfxFile(CGfxManager *this, unsigned int a2, int a3, bool a4, unsigned int a5)
+// Decompiled from char __thiscall CGfxManager::EnableGfxFile(CGfxManager *this, unsigned int a2, int a3, bool a4, int a5)
 bool  CGfxManager::EnableGfxFile(unsigned int a2, int a3, bool a4, unsigned int a5) {
   
   char result; // al

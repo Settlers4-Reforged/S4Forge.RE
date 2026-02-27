@@ -26,3 +26,4 @@ set(CMAKE_EXE_LINKER_FLAGS "-m32")
 
 target_include_directories(S4_Main PRIVATE S4_Main/generated)
 target_include_directories(S4_Main PRIVATE S4_Main/src)
+target_include_directories(S4_Main PRIVATE S4_Main/lib)

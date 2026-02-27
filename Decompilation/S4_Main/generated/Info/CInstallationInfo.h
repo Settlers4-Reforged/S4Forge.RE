@@ -81,10 +81,6 @@ protected:
     // address=[0x3f456dc]
     static bool m_bLuaCheckOk;
 
-    // Type information members
-public:
-    int m_uU4;
-
 };
 
 

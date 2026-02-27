@@ -45,7 +45,7 @@ bool  CInterfaceD3D::HasCameraWindowSurface(void)const {
   this->IsHQTextureSet = 0;
   this->field_734 = 0;
   this->field_448 = 0;
-  this->field_740 = 0;
+  this->m_bIsErrorState = 0;
   this->field_730 = 0;
   this->field_72C = 0;
   memset(this->field_71E, 0, sizeof(this->field_71E));
@@ -2069,12 +2069,12 @@ bool  CInterfaceD3D::BlitSurfaceToWindow(void) {
       if ( v6 == -2005532085 )
       {
         BBSupportTracePrintF(1, "GFX ENGINE: Stop rendering because of inaccessability of primary surface!");
-        this->field_740 = 1;
+        this->m_bIsErrorState = 1;
       }
       break;
     case -2005532447:
       WriteError(-2005532447, "Exclusive mode down! Stop rendering...");
-      this->field_740 = 1;
+      this->m_bIsErrorState = 1;
       break;
     default:
       WriteError(v6, "PrimarySurfaceBlit");

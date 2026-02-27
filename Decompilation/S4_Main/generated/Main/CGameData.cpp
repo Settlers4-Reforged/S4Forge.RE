@@ -6,18 +6,18 @@
 // Decompiled from CGameData *__thiscall CGameData::CGameData(CGameData *this)
  CGameData::CGameData(void) {
   
-  this->m_iTickCounter = 0;
-  this->dword4 = 0;
-  this->dword8 = 0;
-  this->dwordC = 0;
+  this->m_uTickCounter = 0;
+  this->m_uVirtualTick = 0;
+  this->m_iHeight = 0;
+  this->m_iWidth = 0;
   this->dword10 = 0;
-  this->dword14 = 0;
-  this->dword18 = 0;
-  this->dword1C = 0x180000;
+  this->m_uCamX = 0;
+  this->m_uCamY = 0;
+  this->m_uZoom = 0x180000;
   this->dword20 = -1;
   this->dword24 = -1;
   this->byte28 = 0;
-  this->byte29 = 0;
+  this->m_bFixedStartCamera = 0;
   CRandom16Ex::CRandom16Ex((CRandom16Ex *)&this->m_sRandom, 0);
   this->m_bIsGameWon = 0;
   this->m_iTeamWon = 0;
@@ -97,7 +97,7 @@ bool  CGameData::IsNetworkGame(void) {
 // Decompiled from int __thiscall CGameData::GetTickCounter(CGameData *this)
 unsigned int  CGameData::GetTickCounter(void)const {
   
-  return this->m_iTickCounter;
+  return this->m_uTickCounter;
 }
 
 

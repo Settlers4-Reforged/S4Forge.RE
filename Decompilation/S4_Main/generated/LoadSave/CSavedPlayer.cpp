@@ -1,3 +1,4 @@
+#if FALSE
 #include "CSavedPlayer.h"
 
 // Definitions for class CSavedPlayer
@@ -41,3 +42,4 @@ void  CSavedPlayer::Save(class IS4Chunk & a2) {
 }
 
 
+#endif // Already implemented

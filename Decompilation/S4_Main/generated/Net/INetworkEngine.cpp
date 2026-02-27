@@ -11,10 +11,10 @@ bool  INetworkEngine::StormDidEnterSession(void)const {
 
 
 // address=[0x1486f50]
-// Decompiled from int __thiscall INetworkEngine::GetVirtualTick(CGameHost **this)
+// Decompiled from int __thiscall INetworkEngine::GetVirtualTick(INetworkEngine *this)
 int  INetworkEngine::GetVirtualTick(void) {
   
-  return CGameHost::GetVirtualTick(this[2]);
+  return CGameHost::GetVirtualTick(*((CMsgStacks ***)this + 2));
 }
 
 

@@ -49,8 +49,8 @@ bool  CStateAOCampaigns::Perform(void) {
   Instance = UPlay::UPlayManager::GetInstance();
   if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)Instance + 36))(Instance) )
   {
-    if ( dword_4031CFC != CGameSettings::GetAIDifficulty() )
-      CGameSettings::SetAIDifficulty(dword_4031CFC);
+    if ( s_uAIDifficulty != CGameSettings::GetAIDifficulty() )
+      CGameSettings::SetAIDifficulty(s_uAIDifficulty);
     IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 0);
     if ( !g_pAddOn && BBSupportDbgReport(2, "main\\states\\StateAOCampaigns.cpp", 190, "g_pAddOn") == 1 )
       __debugbreak();
@@ -100,32 +100,32 @@ bool  CStateAOCampaigns::OnEvent(class CEvn_Event & a2) {
     switch ( event )
     {
       case 0x1F43u:
-        if ( dword_4031CFC != CGameSettings::GetAIDifficulty() )
-          CGameSettings::SetAIDifficulty(dword_4031CFC);
+        if ( s_uAIDifficulty != CGameSettings::GetAIDifficulty() )
+          CGameSettings::SetAIDifficulty(s_uAIDifficulty);
         CGameStateHandler::Switch((int)CStateAOCampaignRoman::DynamicCreateFunc, 0);
         result = 1;
         break;
       case 0x1F44u:
-        if ( dword_4031CFC != CGameSettings::GetAIDifficulty() )
-          CGameSettings::SetAIDifficulty(dword_4031CFC);
+        if ( s_uAIDifficulty != CGameSettings::GetAIDifficulty() )
+          CGameSettings::SetAIDifficulty(s_uAIDifficulty);
         CGameStateHandler::Switch((int)CStateAOCampaignMayan::DynamicCreateFunc, 0);
         result = 1;
         break;
       case 0x1F45u:
-        if ( dword_4031CFC != CGameSettings::GetAIDifficulty() )
-          CGameSettings::SetAIDifficulty(dword_4031CFC);
+        if ( s_uAIDifficulty != CGameSettings::GetAIDifficulty() )
+          CGameSettings::SetAIDifficulty(s_uAIDifficulty);
         CGameStateHandler::Switch((int)CStateAOCampaignViking::DynamicCreateFunc, 0);
         result = 1;
         break;
       case 0x1F46u:
-        if ( dword_4031CFC != CGameSettings::GetAIDifficulty() )
-          CGameSettings::SetAIDifficulty(dword_4031CFC);
+        if ( s_uAIDifficulty != CGameSettings::GetAIDifficulty() )
+          CGameSettings::SetAIDifficulty(s_uAIDifficulty);
         CGameStateHandler::Switch((int)CStateAOCampaignTrojan::DynamicCreateFunc, 0);
         result = 1;
         break;
       case 0x1F51u:
-        if ( dword_4031CFC != CGameSettings::GetAIDifficulty() )
-          CGameSettings::SetAIDifficulty(dword_4031CFC);
+        if ( s_uAIDifficulty != CGameSettings::GetAIDifficulty() )
+          CGameSettings::SetAIDifficulty(s_uAIDifficulty);
         CGameStateHandler::Switch((int)CStateAOCampaignsSettle::DynamicCreateFunc, 0);
         result = 1;
         break;
@@ -135,8 +135,8 @@ bool  CStateAOCampaigns::OnEvent(class CEvn_Event & a2) {
   }
   else if ( event == 8002 )
   {
-    if ( dword_4031CFC != CGameSettings::GetAIDifficulty() )
-      CGameSettings::SetAIDifficulty(dword_4031CFC);
+    if ( s_uAIDifficulty != CGameSettings::GetAIDifficulty() )
+      CGameSettings::SetAIDifficulty(s_uAIDifficulty);
     IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 0);
     if ( !g_pAddOn && BBSupportDbgReport(2, "main\\states\\StateAOCampaigns.cpp", 109, "g_pAddOn") == 1 )
       __debugbreak();
