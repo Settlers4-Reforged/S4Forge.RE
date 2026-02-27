@@ -13,6 +13,7 @@
 #include "Logic/Events/IEventEngine.h"
 #include "Main/CGameSettings.h"
 #include "Debug/CTrace.h"
+#include "Info/CInstallationInfo.h"
 
 
 // address=[0x01357310]
