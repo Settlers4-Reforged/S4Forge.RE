@@ -12,6 +12,9 @@
 
 #include "lua/lua.h"
 
+CInstallationInfo sInstallationInfo{};
+CInstallationInfo *g_pInstallationInfo = &sInstallationInfo;
+
 // Definitions for class CInstallationInfo
 
 struct SConfigFile
