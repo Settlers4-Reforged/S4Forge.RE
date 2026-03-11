@@ -12,7 +12,7 @@ public:
     int  FindFunction(int a2);
 
     // address=[0x15fec50]
-    void  AddFunction(int a2);
+    void  AddFunction(int _iScriptFuncId);
 
     // address=[0x15fed50]
     void  RemoveFunction(int a2);
@@ -27,10 +27,15 @@ public:
      CScriptEventRequests(void);
 
     // address=[0x1601d30]
-    int  operator[](int a2)const;
+    int  operator[](int _iIdx)const;
 
     // address=[0x16022d0]
     void  Clear(void);
+
+    // Type information members
+public:
+    int m_iSize;
+    unsigned __int8[64] m_aScriptFunc;
 
 };
 

@@ -499,7 +499,6 @@ FOLDER_MAP =  {
         "CInvokeEvent",
         "CMainProblemSolveEvent",
         "CNet_Event",
-        "CScriptEventRequests",
         "CSubProblemSolveEvent",
         "CVC_EventHandle",
         "IEventEngine",
@@ -882,6 +881,7 @@ FOLDER_MAP =  {
     ],
 
     "Script/": [
+        "CScriptEventRequests",
         "CGameScriptManager",
         "CLua",
         "CScriptManager",
