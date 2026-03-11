@@ -2,6 +2,7 @@
 #define CSTDSCRIPTFILE_H
 
 #include "defines.h"
+#include "IScriptFile.h"
 
 class CStdScriptFile : public IScriptFile {
 public:

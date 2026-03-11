@@ -1197,7 +1197,7 @@ bool __cdecl CGameRun::LoadEditorMap(std::wstring & a1, bool a2) {
     v8 = 0;
   }
   v3 = std::wstring::c_str(&g_pGameType->m_swMapName);
-  CGameScriptManager::NewGameEx((int)Str, v8, v3, a2);
+  CGameScriptManager::NewGameEx(Str, v8, v3, a2);
   S4::CMapFile::CloseChunk(v9, 0x10u, 0);
   if ( v10 && v9 )
     (**(void (__thiscall ***)(struct S4::CMapFile *, int))v9)(v9, 1);

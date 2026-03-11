@@ -67,6 +67,9 @@ unsigned int __stdcall BBSupportGetModuleTimeDateStamp(void *);
 // address=[0x2f2fa90]
 char const * __cdecl BBSupportDllVersionString(void);
 
+// address=[0x1603ef0]
+void __cdecl ScriptTracePrintF(unsigned int a1, char const * Format, ...);
+
 namespace BBSupportLib {
     // address=[0x2f2f800]
     void __stdcall BBSCopyString(wchar_t *,wchar_t const *,unsigned int);

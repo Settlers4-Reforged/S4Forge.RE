@@ -1,3 +1,4 @@
+#if FALSE
 #include "CGameScriptManager.h"
 
 // Definitions for class CGameScriptManager
@@ -6,7 +7,7 @@
 // Decompiled from CLua *__thiscall CGameScriptManager::GetScriptEnv(CGameScriptManager *this)
 class CLua &  CGameScriptManager::GetScriptEnv(void) {
   
-  if ( !*((_DWORD *)this + 3)
+  if ( !this->m_pScriptEnv
     && BBSupportDbgReport(
          2,
          "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Script\\GameScriptManager.h",
@@ -15,7 +16,7 @@ class CLua &  CGameScriptManager::GetScriptEnv(void) {
   {
     __debugbreak();
   }
-  return (CLua *)*((_DWORD *)this + 3);
+  return this->m_pScriptEnv;
 }
 
 
@@ -28,11 +29,11 @@ void  CGameScriptManager::SendGameEvent(int a2, int a3) {
          2,
          "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Script\\GameScriptManager.h",
          269,
-         (const char *)&dword_36A8410[1]) == 1 )
+         "static_cast<unsigned int>(_iEventType) < SCRIPT_EVENTS_MAX") == 1 )
   {
     __debugbreak();
   }
-  if ( (int)CScriptEventRequests::Size((CGameScriptManager *)((char *)this + 68 * a2 + 28)) > 0 )
+  if ( CScriptEventRequests::Size(&this->m_aScriptEventRequests[a2]) > 0 )
     CGameScriptManager::SendGameEventCall(this, a2, a3);
 }
 
@@ -46,11 +47,11 @@ void  CGameScriptManager::SendGameEvent(int a2, int a3, int a4, int a5, int a6) 
          2,
          "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Script\\GameScriptManager.h",
          299,
-         (const char *)&dword_36A8410[1]) == 1 )
+         "static_cast<unsigned int>(_iEventType) < SCRIPT_EVENTS_MAX") == 1 )
   {
     __debugbreak();
   }
-  if ( (int)CScriptEventRequests::Size((CGameScriptManager *)((char *)this + 68 * a2 + 28)) > 0 )
+  if ( CScriptEventRequests::Size(&this->m_aScriptEventRequests[a2]) > 0 )
     CGameScriptManager::SendGameEventCall(this, a2, a3, a4, a5, a6);
 }
 
@@ -64,11 +65,11 @@ void  CGameScriptManager::SendGameEvent(int a2) {
          2,
          "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Script\\GameScriptManager.h",
          259,
-         (const char *)&dword_36A8410[1]) == 1 )
+         (const char *)&unk_36A8410[1]) == 1 )
   {
     __debugbreak();
   }
-  if ( (int)CScriptEventRequests::Size((CGameScriptManager *)((char *)this + 68 * a2 + 28)) > 0 )
+  if ( CScriptEventRequests::Size(&this->m_aScriptEventRequests[a2]) > 0 )
     CGameScriptManager::SendGameEventCall(this, a2);
 }
 
@@ -82,11 +83,11 @@ void  CGameScriptManager::SendGameEvent(int a2, int a3, int a4) {
          2,
          "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Script\\GameScriptManager.h",
          279,
-         (const char *)&dword_36A8410[1]) == 1 )
+         (const char *)&unk_36A8410[1]) == 1 )
   {
     __debugbreak();
   }
-  if ( (int)CScriptEventRequests::Size((CGameScriptManager *)((char *)this + 68 * a2 + 28)) > 0 )
+  if ( CScriptEventRequests::Size(&this->m_aScriptEventRequests[a2]) > 0 )
     CGameScriptManager::SendGameEventCall(this, a2, a3, a4);
 }
 
@@ -100,24 +101,20 @@ void  CGameScriptManager::SendGameEvent(int a2, int a3, int a4, int a5) {
          2,
          "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Script\\GameScriptManager.h",
          289,
-         (const char *)&dword_36A8410[1]) == 1 )
+         (const char *)&unk_36A8410[1]) == 1 )
   {
     __debugbreak();
   }
-  if ( (int)CScriptEventRequests::Size((CGameScriptManager *)((char *)this + 68 * a2 + 28)) > 0 )
+  if ( CScriptEventRequests::Size(&this->m_aScriptEventRequests[a2]) > 0 )
     CGameScriptManager::SendGameEventCall(this, a2, a3, a4, a5);
 }
 
 
 // address=[0x14875a0]
-// Decompiled from CGameScriptManager *__thiscall CGameScriptManager::SetVictoryConditionHook(  CGameScriptManager *this,  void (__cdecl *a2)())
+// Decompiled from void __thiscall CGameScriptManager::SetVictoryConditionHook(CGameScriptManager *this, void (__cdecl *a2)())
 void  CGameScriptManager::SetVictoryConditionHook(void (__cdecl*)(void) a2) {
   
-  CGameScriptManager *result; // eax
-
-  result = this;
-  *((_DWORD *)this + 398) = a2;
-  return result;
+  this->m_pVictoryConditionHook = a2;
 }
 
 
@@ -125,25 +122,25 @@ void  CGameScriptManager::SetVictoryConditionHook(void (__cdecl*)(void) a2) {
 // Decompiled from CGameScriptManager *__thiscall CGameScriptManager::CGameScriptManager(CGameScriptManager *this)
  CGameScriptManager::CGameScriptManager(void) {
   
-  IS4ChunkObject::IS4ChunkObject((IS4ChunkObject *)this);
-  *(_DWORD *)this = &CGameScriptManager::_vftable_;
+  IS4ChunkObject::IS4ChunkObject(this);
+  this->__vftable = (CGameScriptManager_vtbl *)&CGameScriptManager::_vftable_;
   _vec_ctor_no(
-    (char *)this + 28,
+    this->m_aScriptEventRequests,
     0x44u,
-    0x17u,
+    23u,
     (void *(__thiscall *)(void *))CScriptEventRequests::CScriptEventRequests);
   if ( CGameScriptManager::m_pGameScriptManager
     && BBSupportDbgReport(2, "Script\\GameScriptManager.cpp", 234, "m_pGameScriptManager == 0") == 1 )
   {
     __debugbreak();
   }
-  *((_DWORD *)this + 3) = 0;
-  *((_DWORD *)this + 4) = 0;
-  *((_DWORD *)this + 5) = 0;
-  *((_DWORD *)this + 6) = 0;
-  *((_DWORD *)this + 1) = 0;
-  *((_DWORD *)this + 2) = 0;
-  *((_DWORD *)this + 398) = 0;
+  this->m_pScriptEnv = 0;
+  this->m_pScriptManager = 0;
+  this->m_pMapScriptData = 0;
+  this->m_uMapScriptSize = 0;
+  this->m_uGameScriptState = 0;
+  this->m_uStartOfGameState = 0;
+  this->m_pVictoryConditionHook = 0;
   CGameScriptManager::m_pGameScriptManager = this;
   CGameScriptManager::InitScriptEnvironmentAndManager(this);
   return this;
@@ -154,7 +151,7 @@ void  CGameScriptManager::SetVictoryConditionHook(void (__cdecl*)(void) a2) {
 // Decompiled from void __thiscall CGameScriptManager::~CGameScriptManager(CGameScriptManager *this)
  CGameScriptManager::~CGameScriptManager(void) {
   
-  *(_DWORD *)this = CGameScriptManager::_vftable_;
+  this->__vftable = (CGameScriptManager_vtbl *)&CGameScriptManager::_vftable_;
   if ( !CGameScriptManager::m_pGameScriptManager
     && BBSupportDbgReport(2, "Script\\GameScriptManager.cpp", 263, "m_pGameScriptManager != 0") == 1 )
   {
@@ -169,18 +166,18 @@ void  CGameScriptManager::SetVictoryConditionHook(void (__cdecl*)(void) a2) {
 // Decompiled from void __thiscall CGameScriptManager::Update(CGameScriptManager *this, unsigned int a2)
 void  CGameScriptManager::Update(unsigned int a2) {
   
-  if ( *((_DWORD *)this + 2) == 1 )
+  if ( this->m_uStartOfGameState == 1 )
   {
     CGameScriptManager::SendGameEvent(this, 1u);
     CGameScriptManager::SendGameEvent(this, 2u);
-    *((_DWORD *)this + 2) = 3;
+    this->m_uStartOfGameState = 3;
   }
-  else if ( *((_DWORD *)this + 2) == 2 )
+  else if ( this->m_uStartOfGameState == 2 )
   {
     CGameScriptManager::SendGameEvent(this, 2u);
-    *((_DWORD *)this + 2) = 3;
+    this->m_uStartOfGameState = 3;
   }
-  else if ( *((_DWORD *)this + 2) != 3
+  else if ( this->m_uStartOfGameState != 3
          && BBSupportDbgReport(2, "Script\\GameScriptManager.cpp", 594, "m_uStartOfGameState == 3") == 1 )
   {
     __debugbreak();
@@ -194,11 +191,11 @@ void  CGameScriptManager::Update(unsigned int a2) {
       __debugbreak();
     if ( !CGameData::IsGameWon(g_pGameData) )
     {
-      if ( *((_DWORD *)this + 398) )
+      if ( this->m_pVictoryConditionHook )
       {
-        (*((void (**)(void))this + 398))();
+        this->m_pVictoryConditionHook();
       }
-      else if ( CScriptEventRequests::Size((CGameScriptManager *)((char *)this + 232)) )
+      else if ( CScriptEventRequests::Size(&this->m_aScriptEventRequests[3]) )
       {
         CGameScriptManager::SendGameEvent(this, 3u);
       }
@@ -217,78 +214,74 @@ void  CGameScriptManager::NewGame(char const * Src, unsigned int Size) {
   
   int result; // eax
 
-  if ( *((_DWORD *)this + 1)
+  if ( this->m_uGameScriptState
     && BBSupportDbgReport(2, "Script\\GameScriptManager.cpp", 450, "m_uGameScriptState == 0") == 1 )
   {
     __debugbreak();
   }
-  if ( !*((_DWORD *)this + 3) && BBSupportDbgReport(2, "Script\\GameScriptManager.cpp", 452, "m_pScriptEnv != 0") == 1 )
+  if ( !this->m_pScriptEnv && BBSupportDbgReport(2, "Script\\GameScriptManager.cpp", 452, "m_pScriptEnv != 0") == 1 )
     __debugbreak();
-  if ( !*((_DWORD *)this + 4)
+  if ( !this->m_pScriptManager
     && BBSupportDbgReport(2, "Script\\GameScriptManager.cpp", 453, "m_pScriptManager != 0") == 1 )
   {
     __debugbreak();
   }
   CGameScriptManager::LoadMapScript(Src, Size);
-  CGameScriptManager::UnrequestAllEvents(this);
-  *((_DWORD *)this + 1) = 1;
+  result = CGameScriptManager::UnrequestAllEvents(this);
+  this->m_uGameScriptState = 1;
   return result;
 }
 
 
 // address=[0x15ff1f0]
-// Decompiled from void __thiscall CGameScriptManager::NewGameEx(  CGameScriptManager *this,  _BYTE *Src,  unsigned int Size,  wchar_t *Source,  char a5)
+// Decompiled from void __thiscall CGameScriptManager::NewGameEx(  CGameScriptManager *this,  _BYTE *Src,  size_t Size,  wchar_t *Source,  char a5)
 void  CGameScriptManager::NewGameEx(char const * Src, unsigned int Size, wchar_t const * Source, bool a5) {
   
   wchar_t *v5; // eax
-  const char *v6; // eax
+  wchar_t *v6; // eax
   int v7; // [esp+0h] [ebp-6BCh] BYREF
-  _BYTE v8[12]; // [esp+10h] [ebp-6ACh] BYREF
-  int v9; // [esp+1Ch] [ebp-6A0h]
-  int v10; // [esp+20h] [ebp-69Ch]
-  int v11; // [esp+24h] [ebp-698h]
-  int v12; // [esp+28h] [ebp-694h]
-  int v13; // [esp+2Ch] [ebp-690h]
-  wchar_t *v14; // [esp+30h] [ebp-68Ch]
-  wchar_t *v15; // [esp+34h] [ebp-688h]
-  CGameScriptManager *v16; // [esp+38h] [ebp-684h]
-  unsigned int j; // [esp+3Ch] [ebp-680h]
-  signed int v18; // [esp+40h] [ebp-67Ch]
-  wchar_t *v19; // [esp+44h] [ebp-678h]
-  _BYTE *v20; // [esp+48h] [ebp-674h]
-  char v21; // [esp+4Fh] [ebp-66Dh]
-  unsigned int i; // [esp+50h] [ebp-66Ch]
-  _BYTE v23[28]; // [esp+54h] [ebp-668h] BYREF
-  _BYTE v24[28]; // [esp+70h] [ebp-64Ch] BYREF
-  _BYTE v25[28]; // [esp+8Ch] [ebp-630h] BYREF
+  struct IScriptFile v8[5]; // [esp+10h] [ebp-6ACh] BYREF
+  std::wstring *v9; // [esp+24h] [ebp-698h]
+  IScriptFile_vtbl *v10; // [esp+28h] [ebp-694h]
+  std::wstring *v11; // [esp+2Ch] [ebp-690h]
+  wchar_t *v12; // [esp+30h] [ebp-68Ch]
+  wchar_t *v13; // [esp+34h] [ebp-688h]
+  size_t j; // [esp+3Ch] [ebp-680h]
+  signed int v16; // [esp+40h] [ebp-67Ch]
+  wchar_t *v17; // [esp+44h] [ebp-678h]
+  _BYTE *v18; // [esp+48h] [ebp-674h]
+  char v19; // [esp+4Fh] [ebp-66Dh]
+  size_t i; // [esp+50h] [ebp-66Ch]
+  std::wstring v21; // [esp+54h] [ebp-668h] BYREF
+  std::wstring v22; // [esp+70h] [ebp-64Ch] BYREF
+  std::wstring v23; // [esp+8Ch] [ebp-630h] BYREF
   wchar_t Destination[512]; // [esp+A8h] [ebp-614h] BYREF
   wchar_t String[256]; // [esp+4A8h] [ebp-214h] BYREF
-  int *v28; // [esp+6ACh] [ebp-10h]
-  int v29; // [esp+6B8h] [ebp-4h]
+  int *v26; // [esp+6ACh] [ebp-10h]
+  int v27; // [esp+6B8h] [ebp-4h]
 
-  v28 = &v7;
-  v16 = this;
+  v26 = &v7;
   memset(String, 0, sizeof(String));
   wcscpy(String, L"Script\\");
   if ( Src && *Src && Size >= 2 )
   {
-    v20 = Src;
-    for ( i = Size; i && (unsigned __int8)v20[i - 1] <= 0x20u; --i )
+    v18 = Src;
+    for ( i = Size; i && (unsigned __int8)v18[i - 1] <= 0x20u; --i )
       ;
-    while ( i && (unsigned __int8)*v20 <= 0x20u )
+    while ( i && (unsigned __int8)*v18 <= 0x20u )
     {
-      ++v20;
+      ++v18;
       --i;
     }
-    if ( i > 2 && *v20 == 36 && v20[i - 1] == 36 )
+    if ( i > 2 && *v18 == 36 && v18[i - 1] == 36 )
     {
-      ++v20;
+      ++v18;
       i -= 2;
-      if ( i < 0x40 && v20[i - 1] == 92 )
+      if ( i < 0x40 && v18[i - 1] == 92 )
       {
-        v15 = &String[wcslen(String)];
+        v13 = &String[wcslen(String)];
         for ( j = 0; j < i; ++j )
-          v15[j] = (char)v20[j];
+          v13[j] = (char)v18[j];
       }
       Src = 0;
       Size = 0;
@@ -296,7 +289,7 @@ void  CGameScriptManager::NewGameEx(char const * Src, unsigned int Size, wchar_t
   }
   if ( !a5 && Src )
     goto LABEL_22;
-  v21 = 0;
+  v19 = 0;
   if ( Source )
   {
     if ( *Source )
@@ -304,45 +297,45 @@ void  CGameScriptManager::NewGameEx(char const * Src, unsigned int Size, wchar_t
       if ( wcslen(Source) < 0x400 )
       {
         wcscpy(Destination, Source);
-        v19 = (wchar_t *)sub_1601260(Destination);
-        if ( v19 )
+        v17 = (wchar_t *)sub_1601260(Destination);
+        if ( v17 )
         {
-          v18 = wcslen(v19);
-          if ( v18 > 4 && (!wcsicmp(L".edm", &v19[v18 - 4]) || !wcsicmp(L".map", &v19[v18 - 4])) )
+          v16 = wcslen(v17);
+          if ( v16 > 4 && (!wcsicmp(L".edm", &v17[v16 - 4]) || !wcsicmp(L".map", &v17[v16 - 4])) )
           {
-            v19[v18 - 3] = 116;
-            v19[v18 - 2] = 120;
-            v19[v18 - 1] = 116;
-            v14 = v19;
-            v13 = std::wstring::wstring(v23, v19);
-            v11 = v13;
-            v29 = 0;
-            v12 = std::wstring::wstring(v24, String);
-            v10 = v12;
-            LOBYTE(v29) = 1;
-            std::operator+<wchar_t>(v25, v12, v11);
-            LOBYTE(v29) = 3;
-            std::wstring::~wstring(v24);
-            LOBYTE(v29) = 4;
-            std::wstring::~wstring(v23);
-            LOBYTE(v29) = 5;
-            v5 = (wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)v25);
-            v9 = CStdScriptFile::CStdScriptFile(v5);
-            LOBYTE(v29) = 6;
-            v6 = (const char *)std::wstring::c_str((_Cnd_internal_imp_t *)v25);
-            ScriptTracePrintF(1u, "SCRIPT: \"%s\" loaded.", v6);
-            v21 = 1;
-            CGameScriptManager::NewGame(v16, (struct IScriptFile *)v8);
-            LOBYTE(v29) = 5;
-            CStdScriptFile::~CStdScriptFile((CStdScriptFile *)v8);
-            v29 = -1;
-            std::wstring::~wstring(v25);
+            v17[v16 - 3] = 116;
+            v17[v16 - 2] = 120;
+            v17[v16 - 1] = 116;
+            v12 = v17;
+            v11 = (std::wstring *)std::wstring::wstring(&v21, v17);
+            v9 = v11;
+            v27 = 0;
+            v10 = (IScriptFile_vtbl *)std::wstring::wstring(&v22, String);
+            v8[4].__vftable = v10;
+            LOBYTE(v27) = 1;
+            std::operator+<wchar_t>(&v23, v10, v9);
+            LOBYTE(v27) = 3;
+            std::wstring::~wstring(&v22);
+            LOBYTE(v27) = 4;
+            std::wstring::~wstring(&v21);
+            LOBYTE(v27) = 5;
+            v5 = std::wstring::c_str(&v23);
+            v8[3].__vftable = (IScriptFile_vtbl *)CStdScriptFile::CStdScriptFile((CStdScriptFile *)v8, v5);
+            LOBYTE(v27) = 6;
+            v6 = std::wstring::c_str(&v23);
+            ScriptTracePrintF(1u, "SCRIPT: \"%s\" loaded.", (const char *)v6);
+            v19 = 1;
+            CGameScriptManager::NewGame(this, v8);
+            LOBYTE(v27) = 5;
+            CStdScriptFile::~CStdScriptFile((void **)&v8[0].__vftable);
+            v27 = -1;
+            std::wstring::~wstring(&v23);
           }
         }
       }
     }
   }
-  if ( !v21 )
+  if ( !v19 )
   {
     if ( Src )
     {
@@ -350,60 +343,53 @@ LABEL_22:
       CGameScriptManager::NewGame(Src, Size);
       return;
     }
-    CGameScriptManager::NewGame(v16);
+    CGameScriptManager::NewGame(this);
   }
 }
 
 
 // address=[0x15ff6c0]
-// Decompiled from CGameScriptManager *__thiscall CGameScriptManager::Load(CGameScriptManager *this, struct IS4Chunk *a2)
+// Decompiled from void __thiscall CGameScriptManager::Load(CGameScriptManager *this, struct IS4Chunk *a2)
 void  CGameScriptManager::Load(class IS4Chunk & a2) {
   
-  CGameScriptManager *result; // eax
-
-  if ( *((_DWORD *)this + 1)
+  if ( this->m_uGameScriptState
     && BBSupportDbgReport(2, "Script\\GameScriptManager.cpp", 1200, "m_uGameScriptState == 0") == 1 )
   {
     __debugbreak();
   }
-  if ( !*((_DWORD *)this + 3) && BBSupportDbgReport(2, "Script\\GameScriptManager.cpp", 1202, "m_pScriptEnv != 0") == 1 )
+  if ( !this->m_pScriptEnv && BBSupportDbgReport(2, "Script\\GameScriptManager.cpp", 1202, "m_pScriptEnv != 0") == 1 )
     __debugbreak();
-  if ( !*((_DWORD *)this + 4)
+  if ( !this->m_pScriptManager
     && BBSupportDbgReport(2, "Script\\GameScriptManager.cpp", 1203, "m_pScriptManager != 0") == 1 )
   {
     __debugbreak();
   }
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 12))(a2, 1093785866);
-  *((_DWORD *)this + 5) = 0;
-  *((_DWORD *)this + 6) = (*(int (__thiscall **)(struct IS4Chunk *))(*(_DWORD *)a2 + 8))(a2);
-  if ( *((_DWORD *)this + 6) )
+  a2->LoadSignature(1093785866);
+  this->m_pMapScriptData = 0;
+  this->m_uMapScriptSize = a2->LoadUnsigned32_(a2);
+  if ( this->m_uMapScriptSize )
   {
-    *((_DWORD *)this + 5) = operator new[](*((_DWORD *)this + 6));
-    (**(void (__thiscall ***)(struct IS4Chunk *, _DWORD, _DWORD))a2)(a2, *((_DWORD *)this + 5), *((_DWORD *)this + 6));
+    this->m_pMapScriptData = (int)operator new[](this->m_uMapScriptSize);
+    a2->Load((void *)this->m_pMapScriptData, this->m_uMapScriptSize);
   }
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 12))(a2, -254867929);
+  a2->LoadSignature(-254867929);
   CGameScriptManager::LoadState(this, a2);
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 12))(a2, -999328080);
-  result = this;
-  *((_DWORD *)this + 1) = 2;
-  return result;
+  a2->LoadSignature(-999328080);
+  this->m_uGameScriptState = 2;
 }
 
 
 // address=[0x15ff800]
-// Decompiled from int __thiscall CGameScriptManager::Save(CGameScriptManager *this, struct IS4Chunk *a2)
+// Decompiled from void __thiscall CGameScriptManager::Save(CGameScriptManager *this, struct IS4Chunk *a2)
 void  CGameScriptManager::Save(class IS4Chunk & a2) {
   
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 24))(a2, 1093785866);
-  (*(void (__thiscall **)(struct IS4Chunk *, _DWORD))(*(_DWORD *)a2 + 20))(a2, *((_DWORD *)this + 6));
-  if ( *((_DWORD *)this + 6) )
-    (*(void (__thiscall **)(struct IS4Chunk *, _DWORD, _DWORD))(*(_DWORD *)a2 + 16))(
-      a2,
-      *((_DWORD *)this + 5),
-      *((_DWORD *)this + 6));
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 24))(a2, -254867929);
+  a2->SaveSignature(1093785866);
+  a2->SaveUnsigned32(this->m_uMapScriptSize);
+  if ( this->m_uMapScriptSize )
+    a2->Save((void *)this->m_pMapScriptData, this->m_uMapScriptSize);
+  a2->SaveSignature(-254867929);
   CGameScriptManager::SaveState(this, a2);
-  return (*(int (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 24))(a2, -999328080);
+  a2->SaveSignature(-999328080);
 }
 
 
@@ -413,8 +399,8 @@ void  CGameScriptManager::StartScript(void) {
   
   CGameScriptManager *result; // eax
 
-  if ( *((_DWORD *)this + 1) != 1
-    && *((_DWORD *)this + 1) != 2
+  if ( this->m_uGameScriptState != 1
+    && this->m_uGameScriptState != 2
     && BBSupportDbgReport(
          2,
          "Script\\GameScriptManager.cpp",
@@ -423,55 +409,54 @@ void  CGameScriptManager::StartScript(void) {
   {
     __debugbreak();
   }
-  if ( !*((_DWORD *)this + 3) && BBSupportDbgReport(2, "Script\\GameScriptManager.cpp", 470, "m_pScriptEnv != 0") == 1 )
+  if ( !this->m_pScriptEnv && BBSupportDbgReport(2, "Script\\GameScriptManager.cpp", 470, "m_pScriptEnv != 0") == 1 )
     __debugbreak();
-  if ( !*((_DWORD *)this + 4)
+  if ( !this->m_pScriptManager
     && BBSupportDbgReport(2, "Script\\GameScriptManager.cpp", 471, "m_pScriptManager != 0") == 1 )
   {
     __debugbreak();
   }
-  if ( *((_DWORD *)this + 5) )
+  if ( this->m_pMapScriptData )
   {
     CGameScriptManager::ExecuteScript(this);
     CGameScriptManager::CallRegisterFunctions(this);
-    if ( *((_DWORD *)this + 1) == 1 )
+    if ( this->m_uGameScriptState == 1 )
       CGameScriptManager::CallNewGame(this);
   }
-  *((_DWORD *)this + 2) = *((_DWORD *)this + 1);
+  this->m_uStartOfGameState = this->m_uGameScriptState;
   result = this;
-  *((_DWORD *)this + 1) = 3;
+  this->m_uGameScriptState = 3;
   return result;
 }
 
 
 // address=[0x15ff960]
-// Decompiled from struct IScriptFile *__thiscall CGameScriptManager::CreateStartResources(  CGameScriptManager *this,  int a2,  int _iStartX,  int _iStartY,  int a5,  int a6)
+// Decompiled from void __thiscall CGameScriptManager::CreateStartResources(  CGameScriptManager *this,  int a2,  int _iStartX,  int _iStartY,  int a5,  int a6)
 void  CGameScriptManager::CreateStartResources(int a2, int _iStartX, int _iStartY, int a5, int a6) {
   
-  struct IScriptFile *result; // eax
-  struct IScriptFile *v7; // [esp+18h] [ebp-24h]
-  char *v8; // [esp+28h] [ebp-14h]
+  struct IScriptFile *v6; // [esp+18h] [ebp-24h]
+  char *v7; // [esp+28h] [ebp-14h]
 
   if ( operator new(0xCu) )
-    v7 = (struct IScriptFile *)CStdScriptFile::CStdScriptFile((wchar_t *)L"Script\\Internal\\StartResources.txt");
+    v6 = (struct IScriptFile *)CStdScriptFile::CStdScriptFile((wchar_t *)L"Script\\Internal\\StartResources.txt");
   else
-    v7 = 0;
-  v8 = 0;
-  CLua::ExecuteScript(*((void ***)this + 3), v7);
-  CLua::PushInt(*((void ***)this + 3), _iStartX);
-  CLua::PushInt(*((void ***)this + 3), _iStartY);
-  CLua::PushInt(*((void ***)this + 3), a5);
-  CLua::PushInt(*((void ***)this + 3), a6);
+    v6 = 0;
+  v7 = 0;
+  CLua::ExecuteScript(this->m_pScriptEnv, v6);
+  CLua::PushInt(this->m_pScriptEnv, _iStartX);
+  CLua::PushInt(this->m_pScriptEnv, _iStartY);
+  CLua::PushInt(this->m_pScriptEnv, a5);
+  CLua::PushInt(this->m_pScriptEnv, a6);
   switch ( a2 )
   {
     case 1:
-      v8 = "CreateStartResourcesFew";
+      v7 = "CreateStartResourcesFew";
       break;
     case 2:
-      v8 = "CreateStartResourcesMedium";
+      v7 = "CreateStartResourcesMedium";
       break;
     case 3:
-      v8 = "CreateStartResourcesMany";
+      v7 = "CreateStartResourcesMany";
       break;
     default:
       if ( !"GameScriptManager: Wrong amount of startresources!"
@@ -485,12 +470,10 @@ void  CGameScriptManager::CreateStartResources(int a2, int _iStartX, int _iStart
       }
       break;
   }
-  if ( v8 && !CLua::IsNil(*((void ***)this + 3), v8) )
-    CLua::CallFunction(*((void ***)this + 3), v8);
-  result = v7;
-  if ( v7 )
-    return (struct IScriptFile *)(**(int (__thiscall ***)(struct IScriptFile *, int))v7)(v7, 1);
-  return result;
+  if ( v7 && !CLua::IsNil(this->m_pScriptEnv, v7) )
+    CLua::CallFunction(this->m_pScriptEnv, v7);
+  if ( v6 )
+    ((void (__thiscall *)(struct IScriptFile *, int))v6->dtor)(v6, 1);
 }
 
 
@@ -498,9 +481,9 @@ void  CGameScriptManager::CreateStartResources(int a2, int _iStartX, int _iStart
 // Decompiled from int __thiscall CGameScriptManager::SetGlobal(CGameScriptManager *this, char *Str, int a3)
 void  CGameScriptManager::SetGlobal(char const * Str, int a3) {
   
-  void **ScriptEnv; // [esp+4h] [ebp-4h]
+  CLua *ScriptEnv; // [esp+4h] [ebp-4h]
 
-  ScriptEnv = (void **)CGameScriptManager::GetScriptEnv(this);
+  ScriptEnv = CGameScriptManager::GetScriptEnv(this);
   CLua::PushInt(ScriptEnv, a3);
   return CLua::SetGlobal(Str);
 }
@@ -510,11 +493,11 @@ void  CGameScriptManager::SetGlobal(char const * Str, int a3) {
 // Decompiled from int __thiscall CGameScriptManager::NewGame(CGameScriptManager *this, struct IScriptFile *a2)
 void  CGameScriptManager::NewGame(class IScriptFile & a2) {
   
-  void *v2; // eax
+  char *v2; // eax
   size_t v4; // [esp-4h] [ebp-8h]
 
-  v4 = (*(int (__thiscall **)(struct IScriptFile *))(*(_DWORD *)a2 + 8))(a2);
-  v2 = (void *)(*(int (__thiscall **)(struct IScriptFile *))(*(_DWORD *)a2 + 4))(a2);
+  v4 = a2->GetSize(a2);
+  v2 = (char *)a2->GetScript(a2);
   return CGameScriptManager::NewGame(v2, v4);
 }
 
@@ -528,104 +511,109 @@ void  CGameScriptManager::NewGame(void) {
 
 
 // address=[0x15ffb30]
-// Decompiled from bool __thiscall CGameScriptManager::LoadMapScript(int this, void *Src, size_t Size)
+// Decompiled from bool __thiscall CGameScriptManager::LoadMapScript(CGameScriptManager *this, void *Src, size_t Size)
 bool  CGameScriptManager::LoadMapScript(char const * Src, unsigned int Size) {
   
-  if ( *(_DWORD *)(this + 20)
+  if ( this->m_pMapScriptData
     && BBSupportDbgReport(2, "Script\\GameScriptManager.cpp", 362, "m_pMapScriptData == 0") == 1 )
   {
     __debugbreak();
   }
-  if ( *(_DWORD *)(this + 24)
+  if ( this->m_uMapScriptSize
     && BBSupportDbgReport(2, "Script\\GameScriptManager.cpp", 363, "m_uMapScriptSize == 0") == 1 )
   {
     __debugbreak();
   }
   if ( Src && Size )
   {
-    *(_DWORD *)(this + 20) = operator new[](Size);
-    *(_DWORD *)(this + 24) = Size;
-    memcpy(*(void **)(this + 20), Src, Size);
-    CLua::ExecuteScript(*(CLua **)(this + 12), *(void **)(this + 20), *(_DWORD *)(this + 24), 0);
+    this->m_pMapScriptData = (int)operator new[](Size);
+    this->m_uMapScriptSize = Size;
+    memcpy((void *)this->m_pMapScriptData, Src, Size);
+    CLua::ExecuteScript(this->m_pScriptEnv, (void *)this->m_pMapScriptData, this->m_uMapScriptSize, 0);
   }
   else
   {
-    *(_DWORD *)(this + 20) = 0;
-    *(_DWORD *)(this + 24) = 0;
+    this->m_pMapScriptData = 0;
+    this->m_uMapScriptSize = 0;
   }
-  return *(_DWORD *)(this + 20) != 0;
+  return this->m_pMapScriptData != 0;
 }
 
 
 // address=[0x15ffc30]
-// Decompiled from int __thiscall CGameScriptManager::LoadState(CGameScriptManager *this, struct IS4Chunk *a2)
+// Decompiled from void __thiscall CGameScriptManager::LoadState(CGameScriptManager *this, struct IS4Chunk *a2)
 void  CGameScriptManager::LoadState(class IS4Chunk & a2) {
   
-  int v3; // [esp+0h] [ebp-58h]
+  signed int v2; // [esp+0h] [ebp-58h]
   int i; // [esp+8h] [ebp-50h]
-  double v6[9]; // [esp+Ch] [ebp-4Ch] BYREF
+  double v5[9]; // [esp+Ch] [ebp-4Ch] BYREF
 
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 12))(a2, -159512950);
-  (*(void (__thiscall **)(struct IS4Chunk *, int, int))(*(_DWORD *)a2 + 4))(a2, 9, 9);
-  (**(void (__thiscall ***)(struct IS4Chunk *, double *, int))a2)(a2, v6, 72);
-  CGameScriptManager::SetSaveVarValues(this, v6, 9);
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 12))(a2, 2136404269);
-  v3 = (*(int (__thiscall **)(struct IS4Chunk *, _DWORD, int))(*(_DWORD *)a2 + 4))(a2, 0, 23);
-  for ( i = 0; i < v3; ++i )
-    CScriptEventRequests::Load((CGameScriptManager *)((char *)this + 68 * i + 28), a2);
+  a2->LoadSignature(-159512950);
+  a2->LoadUnsigned32(9, 9);
+  a2->Load(v5, 72);
+  CGameScriptManager::SetSaveVarValues(this, v5, 9);
+  a2->LoadSignature(2136404269);
+  v2 = a2->LoadUnsigned32(0, 23);
+  for ( i = 0; i < v2; ++i )
+    CScriptEventRequests::Load(&this->m_aScriptEventRequests[i], a2);
   while ( i < 23 )
-    CScriptEventRequests::Clear((CGameScriptManager *)((char *)this + 68 * i++ + 28));
-  return (*(int (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 12))(a2, -1919979084);
+    CScriptEventRequests::Clear(&this->m_aScriptEventRequests[i++]);
+  a2->LoadSignature(-1919979084);
 }
 
 
 // address=[0x15ffd30]
-// Decompiled from int __thiscall CGameScriptManager::SaveState(CGameScriptManager *this, struct IS4Chunk *a2)
+// Decompiled from void __thiscall CGameScriptManager::SaveState(CGameScriptManager *this, struct IS4Chunk *a2)
 void  CGameScriptManager::SaveState(class IS4Chunk & a2) {
   
   int i; // [esp+4h] [ebp-50h]
-  double v5[9]; // [esp+8h] [ebp-4Ch] BYREF
+  double v4[9]; // [esp+8h] [ebp-4Ch] BYREF
 
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 24))(a2, -159512950);
-  CGameScriptManager::GetSaveVarValues(this, v5, 9);
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 20))(a2, 9);
-  (*(void (__thiscall **)(struct IS4Chunk *, double *, int))(*(_DWORD *)a2 + 16))(a2, v5, 72);
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 24))(a2, 2136404269);
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 20))(a2, 23);
+  a2->SaveSignature(-159512950);
+  CGameScriptManager::GetSaveVarValues(this, v4, 9);
+  a2->SaveUnsigned32(9);
+  a2->Save(v4, 0x48u);
+  a2->SaveSignature(2136404269);
+  a2->SaveUnsigned32(23);
   for ( i = 0; i < 23; ++i )
-    CScriptEventRequests::Save((CGameScriptManager *)((char *)this + 68 * i + 28), a2);
-  return (*(int (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 24))(a2, -1919979084);
+    CScriptEventRequests::Save(&this->m_aScriptEventRequests[i], a2);
+  a2->SaveSignature(-1919979084);
 }
 
 
 // address=[0x15ffe00]
-// Decompiled from char __thiscall CGameScriptManager::ExecuteScript(CGameScriptManager *this)
+// Decompiled from void __thiscall CGameScriptManager::ExecuteScript(CGameScriptManager *this)
 void  CGameScriptManager::ExecuteScript(void) {
   
-  char result; // al
   CLua *ScriptEnv; // [esp+0h] [ebp-8h]
 
-  result = (char)this;
-  if ( !*((_DWORD *)this + 5) )
-    return result;
-  if ( !*((_DWORD *)this + 6) )
-    return result;
-  ScriptEnv = CGameScriptManager::GetScriptEnv(this);
-  return CLua::ExecuteScript(ScriptEnv, *((void **)this + 5), *((_DWORD *)this + 6), 0);
+  if ( this->m_pMapScriptData )
+  {
+    if ( this->m_uMapScriptSize )
+    {
+      ScriptEnv = CGameScriptManager::GetScriptEnv(this);
+      CLua::ExecuteScript(ScriptEnv, this->m_pMapScriptData, this->m_uMapScriptSize, 0);
+    }
+  }
 }
 
 
 // address=[0x15ffe50]
-// Decompiled from int __thiscall CGameScriptManager::CallNewGame(CGameScriptManager *this)
+// Decompiled from void __thiscall CGameScriptManager::CallNewGame(CGameScriptManager *this)
 void  CGameScriptManager::CallNewGame(void) {
   
-  void **ScriptEnv; // [esp+4h] [ebp-4h]
+  CLua *ScriptEnv; // [esp+4h] [ebp-4h]
 
-  ScriptEnv = (void **)CGameScriptManager::GetScriptEnv(this);
+  ScriptEnv = CGameScriptManager::GetScriptEnv(this);
   if ( CLua::IsNil(ScriptEnv, "new_game") )
-    return BBSupportTracePrintF(0, "SCRIPT: Warning: %s not found.", "new_game");
-  ScriptTracePrintF(1u, "SCRIPT: Executing %s...", "new_game");
-  return CLua::CallFunction(ScriptEnv, "new_game");
+  {
+    BBSupportTracePrintF(0, "SCRIPT: Warning: %s not found.", "new_game");
+  }
+  else
+  {
+    ScriptTracePrintF(1u, "SCRIPT: Executing %s...", "new_game");
+    CLua::CallFunction(ScriptEnv, "new_game");
+  }
 }
 
 
@@ -634,9 +622,9 @@ void  CGameScriptManager::CallNewGame(void) {
 void  CGameScriptManager::CallRegisterFunctions(void) {
   
   CScriptManager *ScriptManager; // [esp+0h] [ebp-Ch]
-  void **ScriptEnv; // [esp+4h] [ebp-8h]
+  CLua *ScriptEnv; // [esp+4h] [ebp-8h]
 
-  ScriptEnv = (void **)CGameScriptManager::GetScriptEnv(this);
+  ScriptEnv = CGameScriptManager::GetScriptEnv(this);
   ScriptManager = CGameScriptManager::GetScriptManager(this);
   if ( CLua::IsNil(ScriptEnv, "register_functions") )
   {
@@ -645,7 +633,7 @@ void  CGameScriptManager::CallRegisterFunctions(void) {
   else
   {
     ScriptTracePrintF(1u, "SCRIPT: Executing %s...", "register_functions");
-    CScriptManager::AllowRegisterFunction(ScriptManager, 1);
+    CScriptManager::AllowRegisterFunction(ScriptManager, 1u);
     CLua::CallFunction(ScriptEnv, "register_functions");
     CScriptManager::AllowRegisterFunction(ScriptManager, 0);
   }
@@ -661,9 +649,9 @@ void  CGameScriptManager::InitScriptEnvironmentAndManager(void) {
   CLua *v3; // [esp+14h] [ebp-18h]
   CLua *C; // [esp+18h] [ebp-14h]
 
-  if ( *((_DWORD *)this + 3) && BBSupportDbgReport(2, "Script\\GameScriptManager.cpp", 282, "m_pScriptEnv == 0") == 1 )
+  if ( this->m_pScriptEnv && BBSupportDbgReport(2, "Script\\GameScriptManager.cpp", 282, "m_pScriptEnv == 0") == 1 )
     __debugbreak();
-  if ( *((_DWORD *)this + 4)
+  if ( this->m_pScriptManager
     && BBSupportDbgReport(2, "Script\\GameScriptManager.cpp", 283, "m_pScriptManager == 0") == 1 )
   {
     __debugbreak();
@@ -673,37 +661,32 @@ void  CGameScriptManager::InitScriptEnvironmentAndManager(void) {
     v3 = CLua::CLua(C);
   else
     v3 = 0;
-  *((_DWORD *)this + 3) = v3;
+  this->m_pScriptEnv = v3;
   v2 = (CScriptManager *)operator new(0x110u);
   if ( v2 )
-    v1 = CScriptManager::CScriptManager(v2, *((struct CLua **)this + 3));
+    v1 = CScriptManager::CScriptManager(v2, this->m_pScriptEnv);
   else
     v1 = 0;
-  *((_DWORD *)this + 4) = v1;
-  CLua::ExportFunction((int)CGameScriptManager::LuaRequestEvent, "request_event");
-  CLua::ExportFunction((int)CGameScriptManager::LuaRequestEvents, "request_events");
-  CLua::ExportFunction((int)CGameScriptManager::LuaUnrequestEvent, "unrequest_event");
-  CLua::ExportFunction((int)CGameScriptManager::LuaUnrequestEvents, "unrequest_events");
-  CLua::ExportFunction((int)CGameScriptManager::LuaErrorToTrace, "_ERRORMESSAGE");
-  CLua::CreateTable(off_3D8C0F8);
-  ScriptExportVars(*((struct CLua **)this + 3));
-  ScriptExportFunctions(*((struct CLua **)this + 3));
+  this->m_pScriptManager = v1;
+  CLua::ExportFunction(this->m_pScriptEnv, CGameScriptManager::LuaRequestEvent, "request_event");
+  CLua::ExportFunction(this->m_pScriptEnv, CGameScriptManager::LuaRequestEvents, "request_events");
+  CLua::ExportFunction(this->m_pScriptEnv, CGameScriptManager::LuaUnrequestEvent, "unrequest_event");
+  CLua::ExportFunction(this->m_pScriptEnv, CGameScriptManager::LuaUnrequestEvents, "unrequest_events");
+  CLua::ExportFunction(this->m_pScriptEnv, CGameScriptManager::LuaErrorToTrace, "_ERRORMESSAGE");
+  CLua::CreateTable(this->m_pScriptEnv, off_3D8C0F8);
+  ScriptExportVars(this->m_pScriptEnv);
+  ScriptExportFunctions(this->m_pScriptEnv);
 }
 
 
 // address=[0x1600110]
-// Decompiled from int __thiscall CGameScriptManager::UnrequestAllEvents(CGameScriptManager *this)
+// Decompiled from void __thiscall CGameScriptManager::UnrequestAllEvents(CGameScriptManager *this)
 void  CGameScriptManager::UnrequestAllEvents(void) {
   
-  int result; // eax
   int i; // [esp+4h] [ebp-4h]
 
   for ( i = 0; i < 23; ++i )
-  {
-    CScriptEventRequests::Clear((CGameScriptManager *)((char *)this + 68 * i + 28));
-    result = i + 1;
-  }
-  return result;
+    CScriptEventRequests::Clear(&this->m_aScriptEventRequests[i]);
 }
 
 
@@ -712,45 +695,46 @@ void  CGameScriptManager::UnrequestAllEvents(void) {
 void  CGameScriptManager::Done(void) {
   
   CGameScriptManager *result; // eax
-  CLua *v2; // [esp+14h] [ebp-Ch]
-  void (__thiscall ***v3)(_DWORD, int); // [esp+18h] [ebp-8h]
+  CLua *m_pScriptEnv; // [esp+14h] [ebp-Ch]
+  CScriptManager *m_pScriptManager; // [esp+18h] [ebp-8h]
 
-  if ( *((_DWORD *)this + 4) )
+  if ( this->m_pScriptManager )
   {
-    v3 = (void (__thiscall ***)(_DWORD, int))*((_DWORD *)this + 4);
-    if ( v3 )
-      (**v3)(v3, 1);
-    *((_DWORD *)this + 4) = 0;
+    m_pScriptManager = this->m_pScriptManager;
+    if ( m_pScriptManager )
+      (*(void (__thiscall **)(CScriptManager *, int))m_pScriptManager->vtable)(m_pScriptManager, 1);// dtor
+    this->m_pScriptManager = 0;
   }
-  if ( *((_DWORD *)this + 3) )
+  if ( this->m_pScriptEnv )
   {
-    v2 = (CLua *)*((_DWORD *)this + 3);
-    if ( v2 )
-      delete v2;
-    *((_DWORD *)this + 3) = 0;
+    m_pScriptEnv = this->m_pScriptEnv;
+    if ( m_pScriptEnv )
+      delete m_pScriptEnv;
+    this->m_pScriptEnv = 0;
   }
-  if ( *((_DWORD *)this + 5) )
+  if ( this->m_pMapScriptData )
   {
-    operator delete[](*((void **)this + 5));
-    *((_DWORD *)this + 5) = 0;
+    operator delete[](this->m_pMapScriptData);
+    this->m_pMapScriptData = 0;
   }
   result = this;
-  *((_DWORD *)this + 6) = 0;
-  *((_DWORD *)this + 1) = 0;
-  *((_DWORD *)this + 398) = 0;
+  this->m_uMapScriptSize = 0;
+  this->m_uGameScriptState = 0;
+  this->m_pVictoryConditionHook = 0;
   return result;
 }
 
 
 // address=[0x1600230]
-// Decompiled from int __thiscall CGameScriptManager::SendGameEventCall(CGameScriptManager *this, unsigned int a2)
-void  CGameScriptManager::SendGameEventCall(int a2) {
+// Decompiled from void __thiscall CGameScriptManager::SendGameEventCall(CGameScriptManager *this, unsigned int _iEventType)
+void  CGameScriptManager::SendGameEventCall(int _iEventType) {
   
-  int v3; // [esp+4h] [ebp-14h]
-  int v4; // [esp+8h] [ebp-10h]
-  int i; // [esp+10h] [ebp-8h]
+  unsigned int v2; // [esp+4h] [ebp-14h]
+  int v3; // [esp+8h] [ebp-10h]
+  CScriptEventRequests *v4; // [esp+Ch] [ebp-Ch]
+  signed int i; // [esp+10h] [ebp-8h]
 
-  if ( a2 >= 0x17
+  if ( _iEventType >= 0x17
     && BBSupportDbgReport(
          2,
          "Script\\GameScriptManager.cpp",
@@ -759,41 +743,43 @@ void  CGameScriptManager::SendGameEventCall(int a2) {
   {
     __debugbreak();
   }
-  if ( !*((_DWORD *)this + 3) && BBSupportDbgReport(2, "Script\\GameScriptManager.cpp", 635, "m_pScriptEnv != 0") == 1 )
+  if ( !this->m_pScriptEnv && BBSupportDbgReport(2, "Script\\GameScriptManager.cpp", 635, "m_pScriptEnv != 0") == 1 )
     __debugbreak();
-  if ( !*((_DWORD *)this + 4)
+  if ( !this->m_pScriptManager
     && BBSupportDbgReport(2, "Script\\GameScriptManager.cpp", 636, "m_pScriptManager != 0") == 1 )
   {
     __debugbreak();
   }
-  if ( *((_DWORD *)this + 1) != 3
+  if ( this->m_uGameScriptState != 3
     && BBSupportDbgReport(2, "Script\\GameScriptManager.cpp", 637, "m_uGameScriptState == 3") == 1 )
   {
     __debugbreak();
   }
-  CLua::BeginBlock(*((void ***)this + 3));
-  v4 = CScriptEventRequests::Size((CGameScriptManager *)((char *)this + 68 * a2 + 28));
-  for ( i = 0; i < v4; ++i )
+  v4 = &this->m_aScriptEventRequests[_iEventType];
+  CLua::BeginBlock(this->m_pScriptEnv);
+  v3 = CScriptEventRequests::Size(v4);
+  for ( i = 0; i < v3; ++i )
   {
-    if ( CScriptEventRequests::operator[](i) != 255 )
+    if ( CScriptEventRequests::operator[]((unsigned int *)v4, i) != 255 )
     {
-      v3 = CScriptEventRequests::operator[](i);
-      CScriptManager::Call(*((CScriptManager **)this + 4), v3);
+      v2 = CScriptEventRequests::operator[]((unsigned int *)v4, i);
+      CScriptManager::Call(this->m_pScriptManager, v2);
     }
   }
-  return CLua::EndBlock(*((void ***)this + 3));
+  CLua::EndBlock(this->m_pScriptEnv);
 }
 
 
 // address=[0x1600370]
-// Decompiled from int __thiscall CGameScriptManager::SendGameEventCall(CGameScriptManager *this, unsigned int a2, int a3)
-void  CGameScriptManager::SendGameEventCall(int a2, int a3) {
+// Decompiled from void __thiscall CGameScriptManager::SendGameEventCall(CGameScriptManager *this, unsigned int _iEventType, int a3)
+void  CGameScriptManager::SendGameEventCall(int _iEventType, int a3) {
   
-  int v3; // eax
-  int v5; // [esp+8h] [ebp-10h]
-  int i; // [esp+10h] [ebp-8h]
+  unsigned int v3; // [esp+4h] [ebp-14h]
+  int v4; // [esp+8h] [ebp-10h]
+  CScriptEventRequests *v5; // [esp+Ch] [ebp-Ch]
+  signed int i; // [esp+10h] [ebp-8h]
 
-  if ( a2 >= 0x17
+  if ( _iEventType >= 0x17
     && BBSupportDbgReport(
          2,
          "Script\\GameScriptManager.cpp",
@@ -802,41 +788,43 @@ void  CGameScriptManager::SendGameEventCall(int a2, int a3) {
   {
     __debugbreak();
   }
-  if ( !*((_DWORD *)this + 3) && BBSupportDbgReport(2, "Script\\GameScriptManager.cpp", 669, "m_pScriptEnv != 0") == 1 )
+  if ( !this->m_pScriptEnv && BBSupportDbgReport(2, "Script\\GameScriptManager.cpp", 669, "m_pScriptEnv != 0") == 1 )
     __debugbreak();
-  if ( !*((_DWORD *)this + 4)
+  if ( !this->m_pScriptManager
     && BBSupportDbgReport(2, "Script\\GameScriptManager.cpp", 670, "m_pScriptManager != 0") == 1 )
   {
     __debugbreak();
   }
-  if ( *((_DWORD *)this + 1) != 3
+  if ( this->m_uGameScriptState != 3
     && BBSupportDbgReport(2, "Script\\GameScriptManager.cpp", 671, "m_uGameScriptState == 3") == 1 )
   {
     __debugbreak();
   }
-  CLua::BeginBlock(*((void ***)this + 3));
-  v5 = CScriptEventRequests::Size((CGameScriptManager *)((char *)this + 68 * a2 + 28));
-  for ( i = 0; i < v5; ++i )
+  v5 = &this->m_aScriptEventRequests[_iEventType];
+  CLua::BeginBlock(this->m_pScriptEnv);
+  v4 = CScriptEventRequests::Size(v5);
+  for ( i = 0; i < v4; ++i )
   {
-    if ( CScriptEventRequests::operator[](i) != 255 )
+    if ( CScriptEventRequests::operator[]((unsigned int *)v5, i) != 255 )
     {
-      v3 = CScriptEventRequests::operator[](i);
-      CScriptManager::Call(*((CScriptManager **)this + 4), v3, a3);
+      v3 = CScriptEventRequests::operator[]((unsigned int *)v5, i);
+      CScriptManager::Call(this->m_pScriptManager, v3, a3);
     }
   }
-  return CLua::EndBlock(*((void ***)this + 3));
+  CLua::EndBlock(this->m_pScriptEnv);
 }
 
 
 // address=[0x16004b0]
-// Decompiled from int __thiscall CGameScriptManager::SendGameEventCall(CGameScriptManager *this, unsigned int a2, int a3, int a4)
-void  CGameScriptManager::SendGameEventCall(int a2, int a3, int a4) {
+// Decompiled from void __thiscall CGameScriptManager::SendGameEventCall(  CGameScriptManager *this,  unsigned int _iEventType,  int a3,  int a4)
+void  CGameScriptManager::SendGameEventCall(int _iEventType, int a3, int a4) {
   
-  int v5; // [esp+4h] [ebp-14h]
-  int v6; // [esp+8h] [ebp-10h]
-  int i; // [esp+10h] [ebp-8h]
+  unsigned int v4; // [esp-Ch] [ebp-24h]
+  int v5; // [esp+8h] [ebp-10h]
+  CScriptEventRequests *v6; // [esp+Ch] [ebp-Ch]
+  signed int i; // [esp+10h] [ebp-8h]
 
-  if ( a2 >= 0x17
+  if ( _iEventType >= 0x17
     && BBSupportDbgReport(
          2,
          "Script\\GameScriptManager.cpp",
@@ -845,41 +833,43 @@ void  CGameScriptManager::SendGameEventCall(int a2, int a3, int a4) {
   {
     __debugbreak();
   }
-  if ( !*((_DWORD *)this + 3) && BBSupportDbgReport(2, "Script\\GameScriptManager.cpp", 703, "m_pScriptEnv != 0") == 1 )
+  if ( !this->m_pScriptEnv && BBSupportDbgReport(2, "Script\\GameScriptManager.cpp", 703, "m_pScriptEnv != 0") == 1 )
     __debugbreak();
-  if ( !*((_DWORD *)this + 4)
+  if ( !this->m_pScriptManager
     && BBSupportDbgReport(2, "Script\\GameScriptManager.cpp", 704, "m_pScriptManager != 0") == 1 )
   {
     __debugbreak();
   }
-  if ( *((_DWORD *)this + 1) != 3
+  if ( this->m_uGameScriptState != 3
     && BBSupportDbgReport(2, "Script\\GameScriptManager.cpp", 705, "m_uGameScriptState == 3") == 1 )
   {
     __debugbreak();
   }
-  CLua::BeginBlock(*((void ***)this + 3));
-  v6 = CScriptEventRequests::Size((CGameScriptManager *)((char *)this + 68 * a2 + 28));
-  for ( i = 0; i < v6; ++i )
+  v6 = &this->m_aScriptEventRequests[_iEventType];
+  CLua::BeginBlock(this->m_pScriptEnv);
+  v5 = CScriptEventRequests::Size(v6);
+  for ( i = 0; i < v5; ++i )
   {
-    if ( CScriptEventRequests::operator[](i) != 255 )
+    if ( CScriptEventRequests::operator[]((unsigned int *)v6, i) != 255 )
     {
-      v5 = CScriptEventRequests::operator[](i);
-      CScriptManager::Call(*((CScriptManager **)this + 4), v5, a3, a4);
+      v4 = CScriptEventRequests::operator[]((unsigned int *)v6, i);
+      CScriptManager::Call(this->m_pScriptManager, v4, a3, a4);
     }
   }
-  return CLua::EndBlock(*((void ***)this + 3));
+  CLua::EndBlock(this->m_pScriptEnv);
 }
 
 
 // address=[0x16005f0]
-// Decompiled from int __thiscall CGameScriptManager::SendGameEventCall(CGameScriptManager *this, unsigned int a2, int a3, int a4, int a5)
-void  CGameScriptManager::SendGameEventCall(int a2, int a3, int a4, int a5) {
+// Decompiled from void __thiscall CGameScriptManager::SendGameEventCall(  CGameScriptManager *this,  unsigned int _iEventType,  int a3,  int a4,  int a5)
+void  CGameScriptManager::SendGameEventCall(int _iEventType, int a3, int a4, int a5) {
   
-  int v6; // [esp+4h] [ebp-14h]
-  int v7; // [esp+8h] [ebp-10h]
-  int i; // [esp+10h] [ebp-8h]
+  unsigned int v5; // [esp+4h] [ebp-14h]
+  int v6; // [esp+8h] [ebp-10h]
+  CScriptEventRequests *v7; // [esp+Ch] [ebp-Ch]
+  signed int i; // [esp+10h] [ebp-8h]
 
-  if ( a2 >= 0x17
+  if ( _iEventType >= 0x17
     && BBSupportDbgReport(
          2,
          "Script\\GameScriptManager.cpp",
@@ -888,41 +878,43 @@ void  CGameScriptManager::SendGameEventCall(int a2, int a3, int a4, int a5) {
   {
     __debugbreak();
   }
-  if ( !*((_DWORD *)this + 3) && BBSupportDbgReport(2, "Script\\GameScriptManager.cpp", 737, "m_pScriptEnv != 0") == 1 )
+  if ( !this->m_pScriptEnv && BBSupportDbgReport(2, "Script\\GameScriptManager.cpp", 737, "m_pScriptEnv != 0") == 1 )
     __debugbreak();
-  if ( !*((_DWORD *)this + 4)
+  if ( !this->m_pScriptManager
     && BBSupportDbgReport(2, "Script\\GameScriptManager.cpp", 738, "m_pScriptManager != 0") == 1 )
   {
     __debugbreak();
   }
-  if ( *((_DWORD *)this + 1) != 3
+  if ( this->m_uGameScriptState != 3
     && BBSupportDbgReport(2, "Script\\GameScriptManager.cpp", 739, "m_uGameScriptState == 3") == 1 )
   {
     __debugbreak();
   }
-  CLua::BeginBlock(*((void ***)this + 3));
-  v7 = CScriptEventRequests::Size((CGameScriptManager *)((char *)this + 68 * a2 + 28));
-  for ( i = 0; i < v7; ++i )
+  v7 = &this->m_aScriptEventRequests[_iEventType];
+  CLua::BeginBlock(this->m_pScriptEnv);
+  v6 = CScriptEventRequests::Size(v7);
+  for ( i = 0; i < v6; ++i )
   {
-    if ( CScriptEventRequests::operator[](i) != 255 )
+    if ( CScriptEventRequests::operator[]((unsigned int *)v7, i) != 255 )
     {
-      v6 = CScriptEventRequests::operator[](i);
-      CScriptManager::Call(*((CScriptManager **)this + 4), v6, a3, a4, a5);
+      v5 = CScriptEventRequests::operator[]((unsigned int *)v7, i);
+      CScriptManager::Call(this->m_pScriptManager, v5, a3, a4, a5);
     }
   }
-  return CLua::EndBlock(*((void ***)this + 3));
+  CLua::EndBlock(this->m_pScriptEnv);
 }
 
 
 // address=[0x1600730]
-// Decompiled from int __thiscall CGameScriptManager::SendGameEventCall(  CGameScriptManager *this,  unsigned int a2,  int a3,  int a4,  int a5,  int a6)
-void  CGameScriptManager::SendGameEventCall(int a2, int a3, int a4, int a5, int a6) {
+// Decompiled from void __thiscall CGameScriptManager::SendGameEventCall(  CGameScriptManager *this,  unsigned int _iEventType,  int a3,  int a4,  int a5,  int a6)
+void  CGameScriptManager::SendGameEventCall(int _iEventType, int a3, int a4, int a5, int a6) {
   
-  int v6; // eax
-  int v8; // [esp+8h] [ebp-10h]
-  int i; // [esp+10h] [ebp-8h]
+  unsigned int v6; // [esp+4h] [ebp-14h]
+  int v7; // [esp+8h] [ebp-10h]
+  CScriptEventRequests *v8; // [esp+Ch] [ebp-Ch]
+  signed int i; // [esp+10h] [ebp-8h]
 
-  if ( a2 >= 0x17
+  if ( _iEventType >= 0x17
     && BBSupportDbgReport(
          2,
          "Script\\GameScriptManager.cpp",
@@ -931,109 +923,104 @@ void  CGameScriptManager::SendGameEventCall(int a2, int a3, int a4, int a5, int 
   {
     __debugbreak();
   }
-  if ( !*((_DWORD *)this + 3) && BBSupportDbgReport(2, "Script\\GameScriptManager.cpp", 771, "m_pScriptEnv != 0") == 1 )
+  if ( !this->m_pScriptEnv && BBSupportDbgReport(2, "Script\\GameScriptManager.cpp", 771, "m_pScriptEnv != 0") == 1 )
     __debugbreak();
-  if ( !*((_DWORD *)this + 4)
+  if ( !this->m_pScriptManager
     && BBSupportDbgReport(2, "Script\\GameScriptManager.cpp", 772, "m_pScriptManager != 0") == 1 )
   {
     __debugbreak();
   }
-  if ( *((_DWORD *)this + 1) != 3
+  if ( this->m_uGameScriptState != 3
     && BBSupportDbgReport(2, "Script\\GameScriptManager.cpp", 773, "m_uGameScriptState == 3") == 1 )
   {
     __debugbreak();
   }
-  CLua::BeginBlock(*((void ***)this + 3));
-  v8 = CScriptEventRequests::Size((CGameScriptManager *)((char *)this + 68 * a2 + 28));
-  for ( i = 0; i < v8; ++i )
+  v8 = &this->m_aScriptEventRequests[_iEventType];
+  CLua::BeginBlock(this->m_pScriptEnv);
+  v7 = CScriptEventRequests::Size(v8);
+  for ( i = 0; i < v7; ++i )
   {
-    if ( CScriptEventRequests::operator[](i) != 255 )
+    if ( CScriptEventRequests::operator[]((unsigned int *)v8, i) != 255 )
     {
-      v6 = CScriptEventRequests::operator[](i);
-      CScriptManager::Call(*((CScriptManager **)this + 4), v6, a3, a4, a5, a6);
+      v6 = CScriptEventRequests::operator[]((unsigned int *)v8, i);
+      CScriptManager::Call(this->m_pScriptManager, v6, a3, a4, a5, a6);
     }
   }
-  return CLua::EndBlock(*((void ***)this + 3));
+  CLua::EndBlock(this->m_pScriptEnv);
 }
 
 
 // address=[0x1600880]
-// Decompiled from double *__thiscall CGameScriptManager::GetSaveVarValues(CGameScriptManager *this, double *a2, unsigned int a3)
-void  CGameScriptManager::GetSaveVarValues(double * a2, int a3) {
+// Decompiled from void __thiscall CGameScriptManager::GetSaveVarValues(CGameScriptManager *this, double *a2, signed int iSize)
+void  CGameScriptManager::GetSaveVarValues(double * a2, int iSize) {
   
-  double *result; // eax
-  double v4; // st7
-  int v5; // [esp+0h] [ebp-28h]
-  double *v6; // [esp+4h] [ebp-24h]
-  void **ScriptEnv; // [esp+8h] [ebp-20h]
+  int v3; // [esp+0h] [ebp-28h]
+  int pVarsTable; // [esp+4h] [ebp-24h]
+  CLua *ScriptEnv; // [esp+8h] [ebp-20h]
   signed int i; // [esp+10h] [ebp-18h]
-  char Str[6]; // [esp+14h] [ebp-14h] BYREF
-  int v11; // [esp+1Ah] [ebp-Eh]
-  int v12; // [esp+1Eh] [ebp-Ah]
-  __int16 v13; // [esp+22h] [ebp-6h]
+  char sVarName[6]; // [esp+14h] [ebp-14h] BYREF
+  int v9; // [esp+1Ah] [ebp-Eh]
+  int v10; // [esp+1Eh] [ebp-Ah]
+  __int16 v11; // [esp+22h] [ebp-6h]
 
-  if ( a3 >= 0xA && BBSupportDbgReport(2, "Script\\GameScriptManager.cpp", 1075, "(iSize >= 0) && (iSize <= 9)") == 1 )
-    __debugbreak();
-  strcpy(Str, "Save?");
-  v11 = 0;
-  v12 = 0;
-  v13 = 0;
-  ScriptEnv = (void **)CGameScriptManager::GetScriptEnv(this);
-  result = (double *)CLua::GetGlobal(ScriptEnv, "Vars");
-  v6 = result;
-  for ( i = 0; i < (int)a3; ++i )
+  if ( (unsigned int)iSize >= 10
+    && BBSupportDbgReport(2, "Script\\GameScriptManager.cpp", 1075, "(iSize >= 0) && (iSize <= 9)") == 1 )
   {
-    Str[4] = i + 49;
-    lua_pushobject(v6);
-    lua_pushstring(Str);
-    v5 = j__lua_rawgettable(v5);
-    v4 = j__lua_getnumber(v5);
-    result = a2;
-    a2[i] = v4;
+    __debugbreak();
   }
-  return result;
+  strcpy(sVarName, "Save?");
+  v9 = 0;
+  v10 = 0;
+  v11 = 0;
+  ScriptEnv = CGameScriptManager::GetScriptEnv(this);
+  pVarsTable = CLua::GetGlobal(ScriptEnv, "Vars");
+  for ( i = 0; i < iSize; ++i )
+  {
+    sVarName[4] = i + '1';
+    lua_pushobject(pVarsTable);
+    lua_pushstring(sVarName);
+    v3 = j__lua_rawgettable();
+    a2[i] = j__lua_getnumber(v3);
+  }
 }
 
 
 // address=[0x1600970]
-// Decompiled from int __thiscall CGameScriptManager::SetSaveVarValues(CGameScriptManager *this, double *a2, unsigned int a3)
-void  CGameScriptManager::SetSaveVarValues(double * a2, int a3) {
+// Decompiled from void __thiscall CGameScriptManager::SetSaveVarValues(CGameScriptManager *this, double *a2, unsigned int iSize)
+void  CGameScriptManager::SetSaveVarValues(double * a2, int iSize) {
   
-  int result; // eax
-  int v4; // [esp+8h] [ebp-24h]
-  void **ScriptEnv; // [esp+Ch] [ebp-20h]
+  int pVarsTable; // [esp+8h] [ebp-24h]
+  CLua *ScriptEnv; // [esp+Ch] [ebp-20h]
   signed int i; // [esp+14h] [ebp-18h]
-  char Str[6]; // [esp+18h] [ebp-14h] BYREF
-  int v9; // [esp+1Eh] [ebp-Eh]
-  int v10; // [esp+22h] [ebp-Ah]
-  __int16 v11; // [esp+26h] [ebp-6h]
+  char sVarName[6]; // [esp+18h] [ebp-14h] BYREF
+  int v8; // [esp+1Eh] [ebp-Eh]
+  int v9; // [esp+22h] [ebp-Ah]
+  __int16 v10; // [esp+26h] [ebp-6h]
 
-  if ( a3 >= 0xA && BBSupportDbgReport(2, "Script\\GameScriptManager.cpp", 1103, "(iSize >= 0) && (iSize <= 9)") == 1 )
+  if ( iSize >= 0xA && BBSupportDbgReport(2, "Script\\GameScriptManager.cpp", 1103, "(iSize >= 0) && (iSize <= 9)") == 1 )
     __debugbreak();
-  strcpy(Str, "Save?");
+  strcpy(sVarName, "Save?");
+  v8 = 0;
   v9 = 0;
   v10 = 0;
-  v11 = 0;
-  ScriptEnv = (void **)CGameScriptManager::GetScriptEnv(this);
-  result = CLua::GetGlobal(ScriptEnv, "Vars");
-  v4 = result;
-  for ( i = 0; i < (int)a3; ++i )
+  ScriptEnv = CGameScriptManager::GetScriptEnv(this);
+  pVarsTable = CLua::GetGlobal(ScriptEnv, "Vars");
+  for ( i = 0; i < (int)iSize; ++i )
   {
-    Str[4] = i + 49;
-    lua_pushobject(v4);
-    lua_pushstring(Str);
-    lua_pushnumber(*(_QWORD *)&a2[i]);
-    result = lua_rawsettable();
+    sVarName[4] = i + 49;
+    lua_pushobject(pVarsTable);
+    lua_pushstring(sVarName);
+    lua_pushnumber(a2[i]);
+    lua_rawsettable();
   }
-  return result;
 }
 
 
 // address=[0x1600a60]
-// Decompiled from void __thiscall CGameScriptManager::RequestEvent(char *this, int a2, unsigned int a3)
-void  CGameScriptManager::RequestEvent(int a2, int a3) {
+// Decompiled from void __thiscall CGameScriptManager::RequestEvent(CGameScriptManager *this, char *a2, unsigned int _iEventType)
+void  CGameScriptManager::RequestEvent(int a2, int _iEventType) {
   
-  if ( a3 >= 0x17
+  if ( _iEventType >= 0x17
     && BBSupportDbgReport(
          2,
          "Script\\GameScriptManager.cpp",
@@ -1042,15 +1029,15 @@ void  CGameScriptManager::RequestEvent(int a2, int a3) {
   {
     __debugbreak();
   }
-  CScriptEventRequests::AddFunction((CScriptEventRequests *)&this[68 * a3 + 28], a2);
+  CScriptEventRequests::AddFunction(&this->m_aScriptEventRequests[_iEventType], a2);
 }
 
 
 // address=[0x1600ab0]
-// Decompiled from void __thiscall CGameScriptManager::UnrequestEvent(char *this, int a2, unsigned int a3)
-void  CGameScriptManager::UnrequestEvent(int a2, int a3) {
+// Decompiled from void __thiscall CGameScriptManager::UnrequestEvent(CGameScriptManager *this, unsigned int a2, unsigned int _iEventType)
+void  CGameScriptManager::UnrequestEvent(int a2, int _iEventType) {
   
-  if ( a3 >= 0x17
+  if ( _iEventType >= 0x17
     && BBSupportDbgReport(
          2,
          "Script\\GameScriptManager.cpp",
@@ -1059,7 +1046,7 @@ void  CGameScriptManager::UnrequestEvent(int a2, int a3) {
   {
     __debugbreak();
   }
-  CScriptEventRequests::RemoveFunction((CScriptEventRequests *)&this[68 * a3 + 28], a2);
+  CScriptEventRequests::RemoveFunction(&this->m_aScriptEventRequests[_iEventType], a2);
 }
 
 
@@ -1069,34 +1056,34 @@ void __cdecl CGameScriptManager::LuaRequestEvent(void) {
   
   CScriptManager *ScriptManager; // [esp+0h] [ebp-1Ch]
   unsigned int Param; // [esp+4h] [ebp-18h]
-  int Func; // [esp+8h] [ebp-14h]
+  char *Func; // [esp+8h] [ebp-14h]
   __int64 v3; // [esp+Ch] [ebp-10h]
   CLua *ScriptEnv; // [esp+14h] [ebp-8h]
-  int Int; // [esp+18h] [ebp-4h]
+  int iEventType; // [esp+18h] [ebp-4h]
 
   if ( !CGameScriptManager::m_pGameScriptManager
     && BBSupportDbgReport(2, "Script\\GameScriptManager.cpp", 827, "m_pGameScriptManager != 0") == 1 )
   {
     __debugbreak();
   }
-  ScriptEnv = CGameScriptManager::GetScriptEnv((CGameScriptManager *)CGameScriptManager::m_pGameScriptManager);
-  ScriptManager = CGameScriptManager::GetScriptManager((CGameScriptManager *)CGameScriptManager::m_pGameScriptManager);
+  ScriptEnv = CGameScriptManager::GetScriptEnv(CGameScriptManager::m_pGameScriptManager);
+  ScriptManager = CGameScriptManager::GetScriptManager(CGameScriptManager::m_pGameScriptManager);
   Param = CLua::GetParam(ScriptEnv, 1);
-  Func = CScriptManager::FindFunc(ScriptManager, Param);
-  if ( Func == -1 )
+  Func = (char *)CScriptManager::FindFunc(ScriptManager, Param);
+  if ( Func == (char *)-1 )
   {
     ScriptTracePrintF(2u, "SCRIPT: request_event: Parameter 1 is not a registered function!");
   }
   else
   {
-    Int = CLua::GetInt(ScriptEnv, 2);
-    HIDWORD(v3) = Int <= 0;
-    LODWORD(v3) = Int >= 23;
+    iEventType = CLua::GetInt(ScriptEnv, 2);
+    HIDWORD(v3) = iEventType <= 0;
+    LODWORD(v3) = iEventType >= 23;
     if ( v3 )
-      ScriptTracePrintF(2u, "SCRIPT: request_event: Invalid event type %i!", Int);
+      ScriptTracePrintF(2u, "SCRIPT: request_event: Invalid event type %i!", iEventType);
     else
       CScriptEventRequests::AddFunction(
-        (CScriptEventRequests *)(CGameScriptManager::m_pGameScriptManager + 68 * Int + 28),
+        &CGameScriptManager::m_pGameScriptManager->m_aScriptEventRequests[iEventType],
         Func);
   }
 }
@@ -1108,10 +1095,10 @@ void __cdecl CGameScriptManager::LuaRequestEvents(void) {
   
   CScriptManager *ScriptManager; // [esp+0h] [ebp-20h]
   unsigned int Param; // [esp+4h] [ebp-1Ch]
-  int Func; // [esp+8h] [ebp-18h]
+  char *Func; // [esp+8h] [ebp-18h]
   __int64 v3; // [esp+Ch] [ebp-14h]
   CLua *ScriptEnv; // [esp+14h] [ebp-Ch]
-  int Int; // [esp+18h] [ebp-8h]
+  int iEventType; // [esp+18h] [ebp-8h]
   int i; // [esp+1Ch] [ebp-4h]
 
   if ( !CGameScriptManager::m_pGameScriptManager
@@ -1119,26 +1106,26 @@ void __cdecl CGameScriptManager::LuaRequestEvents(void) {
   {
     __debugbreak();
   }
-  ScriptEnv = CGameScriptManager::GetScriptEnv((CGameScriptManager *)CGameScriptManager::m_pGameScriptManager);
-  ScriptManager = CGameScriptManager::GetScriptManager((CGameScriptManager *)CGameScriptManager::m_pGameScriptManager);
+  ScriptEnv = CGameScriptManager::GetScriptEnv(CGameScriptManager::m_pGameScriptManager);
+  ScriptManager = CGameScriptManager::GetScriptManager(CGameScriptManager::m_pGameScriptManager);
   Param = CLua::GetParam(ScriptEnv, 1);
-  Func = CScriptManager::FindFunc(ScriptManager, Param);
-  if ( Func == -1 )
+  Func = (char *)CScriptManager::FindFunc(ScriptManager, Param);
+  if ( Func == (char *)-1 )
   {
     ScriptTracePrintF(2u, "SCRIPT: request_events: Parameter 1 is not a registered function!");
   }
   else
   {
-    for ( i = 2; CLua::CheckParam((void **)ScriptEnv, i); ++i )
+    for ( i = 2; CLua::CheckParam(ScriptEnv, i); ++i )
     {
-      Int = CLua::GetInt(ScriptEnv, i);
-      HIDWORD(v3) = Int <= 0;
-      LODWORD(v3) = Int >= 23;
+      iEventType = CLua::GetInt(ScriptEnv, i);
+      HIDWORD(v3) = iEventType <= 0;
+      LODWORD(v3) = iEventType >= 23;
       if ( v3 )
-        ScriptTracePrintF(2u, "SCRIPT: request_events: Parameter %i is an invalid event type %i!", i, Int);
+        ScriptTracePrintF(2u, "SCRIPT: request_events: Parameter %i is an invalid event type %i!", i, iEventType);
       else
         CScriptEventRequests::AddFunction(
-          (CScriptEventRequests *)(CGameScriptManager::m_pGameScriptManager + 68 * Int + 28),
+          &CGameScriptManager::m_pGameScriptManager->m_aScriptEventRequests[iEventType],
           Func);
     }
   }
@@ -1151,18 +1138,18 @@ void __cdecl CGameScriptManager::LuaUnrequestEvent(void) {
   
   CScriptManager *ScriptManager; // [esp+0h] [ebp-1Ch]
   unsigned int Param; // [esp+4h] [ebp-18h]
-  int Func; // [esp+8h] [ebp-14h]
+  unsigned int Func; // [esp+8h] [ebp-14h]
   __int64 v3; // [esp+Ch] [ebp-10h]
   CLua *ScriptEnv; // [esp+14h] [ebp-8h]
-  int Int; // [esp+18h] [ebp-4h]
+  int iEventType; // [esp+18h] [ebp-4h]
 
   if ( !CGameScriptManager::m_pGameScriptManager
     && BBSupportDbgReport(2, "Script\\GameScriptManager.cpp", 904, "m_pGameScriptManager != 0") == 1 )
   {
     __debugbreak();
   }
-  ScriptEnv = CGameScriptManager::GetScriptEnv((CGameScriptManager *)CGameScriptManager::m_pGameScriptManager);
-  ScriptManager = CGameScriptManager::GetScriptManager((CGameScriptManager *)CGameScriptManager::m_pGameScriptManager);
+  ScriptEnv = CGameScriptManager::GetScriptEnv(CGameScriptManager::m_pGameScriptManager);
+  ScriptManager = CGameScriptManager::GetScriptManager(CGameScriptManager::m_pGameScriptManager);
   Param = CLua::GetParam(ScriptEnv, 1);
   Func = CScriptManager::FindFunc(ScriptManager, Param);
   if ( Func == -1 )
@@ -1171,14 +1158,14 @@ void __cdecl CGameScriptManager::LuaUnrequestEvent(void) {
   }
   else
   {
-    Int = CLua::GetInt(ScriptEnv, 2);
-    HIDWORD(v3) = Int <= 0;
-    LODWORD(v3) = Int >= 23;
+    iEventType = CLua::GetInt(ScriptEnv, 2);
+    HIDWORD(v3) = iEventType <= 0;
+    LODWORD(v3) = iEventType >= 23;
     if ( v3 )
-      ScriptTracePrintF(2u, "SCRIPT: unrequest_event: Invalid event type %i!", Int);
+      ScriptTracePrintF(2u, "SCRIPT: unrequest_event: Invalid event type %i!", iEventType);
     else
       CScriptEventRequests::RemoveFunction(
-        (CScriptEventRequests *)(CGameScriptManager::m_pGameScriptManager + 68 * Int + 28),
+        &CGameScriptManager::m_pGameScriptManager->m_aScriptEventRequests[iEventType],
         Func);
   }
 }
@@ -1190,10 +1177,10 @@ void __cdecl CGameScriptManager::LuaUnrequestEvents(void) {
   
   CScriptManager *ScriptManager; // [esp+0h] [ebp-20h]
   unsigned int Param; // [esp+4h] [ebp-1Ch]
-  int Func; // [esp+8h] [ebp-18h]
+  unsigned int Func; // [esp+8h] [ebp-18h]
   __int64 v3; // [esp+Ch] [ebp-14h]
   CLua *ScriptEnv; // [esp+14h] [ebp-Ch]
-  int Int; // [esp+18h] [ebp-8h]
+  int iEventType; // [esp+18h] [ebp-8h]
   int i; // [esp+1Ch] [ebp-4h]
 
   if ( !CGameScriptManager::m_pGameScriptManager
@@ -1201,8 +1188,8 @@ void __cdecl CGameScriptManager::LuaUnrequestEvents(void) {
   {
     __debugbreak();
   }
-  ScriptEnv = CGameScriptManager::GetScriptEnv((CGameScriptManager *)CGameScriptManager::m_pGameScriptManager);
-  ScriptManager = CGameScriptManager::GetScriptManager((CGameScriptManager *)CGameScriptManager::m_pGameScriptManager);
+  ScriptEnv = CGameScriptManager::GetScriptEnv(CGameScriptManager::m_pGameScriptManager);
+  ScriptManager = CGameScriptManager::GetScriptManager(CGameScriptManager::m_pGameScriptManager);
   Param = CLua::GetParam(ScriptEnv, 1);
   Func = CScriptManager::FindFunc(ScriptManager, Param);
   if ( Func == -1 )
@@ -1211,16 +1198,16 @@ void __cdecl CGameScriptManager::LuaUnrequestEvents(void) {
   }
   else
   {
-    for ( i = 2; CLua::CheckParam((void **)ScriptEnv, i); ++i )
+    for ( i = 2; CLua::CheckParam(ScriptEnv, i); ++i )
     {
-      Int = CLua::GetInt(ScriptEnv, i);
-      HIDWORD(v3) = Int <= 0;
-      LODWORD(v3) = Int >= 23;
+      iEventType = CLua::GetInt(ScriptEnv, i);
+      HIDWORD(v3) = iEventType <= 0;
+      LODWORD(v3) = iEventType >= 23;
       if ( v3 )
-        ScriptTracePrintF(2u, "SCRIPT: unrequest_events: Parameter %i is an invalid event type %i!", i, Int);
+        ScriptTracePrintF(2u, "SCRIPT: unrequest_events: Parameter %i is an invalid event type %i!", i, iEventType);
       else
         CScriptEventRequests::RemoveFunction(
-          (CScriptEventRequests *)(CGameScriptManager::m_pGameScriptManager + 68 * Int + 28),
+          &CGameScriptManager::m_pGameScriptManager->m_aScriptEventRequests[iEventType],
           Func);
     }
   }
@@ -1231,18 +1218,18 @@ void __cdecl CGameScriptManager::LuaUnrequestEvents(void) {
 // Decompiled from void CGameScriptManager::LuaErrorToTrace()
 void __cdecl CGameScriptManager::LuaErrorToTrace(void) {
   
-  const char *v0; // eax
+  char *v0; // eax
   int v1; // [esp+4h] [ebp-474h] BYREF
   int CurrentLine; // [esp+8h] [ebp-470h]
   char *Source; // [esp+Ch] [ebp-46Ch]
   char *v4; // [esp+10h] [ebp-468h] BYREF
   char *Str; // [esp+14h] [ebp-464h] BYREF
   int v6; // [esp+18h] [ebp-460h]
-  unsigned int j; // [esp+1Ch] [ebp-45Ch]
+  int j; // [esp+1Ch] [ebp-45Ch]
   int i; // [esp+20h] [ebp-458h]
-  void **ScriptEnv; // [esp+24h] [ebp-454h]
+  CLua *ScriptEnv; // [esp+24h] [ebp-454h]
   char v10; // [esp+2Bh] [ebp-44Dh]
-  _BYTE v11[28]; // [esp+2Ch] [ebp-44Ch] BYREF
+  std::string v11; // [esp+2Ch] [ebp-44Ch] BYREF
   char Destination[1024]; // [esp+48h] [ebp-430h] BYREF
   char Buffer[32]; // [esp+448h] [ebp-30h] BYREF
   int v14; // [esp+474h] [ebp-4h]
@@ -1252,8 +1239,8 @@ void __cdecl CGameScriptManager::LuaErrorToTrace(void) {
   {
     __debugbreak();
   }
-  ScriptEnv = (void **)CGameScriptManager::GetScriptEnv((CGameScriptManager *)CGameScriptManager::m_pGameScriptManager);
-  Source = (char *)CLua::GetString((CLua *)ScriptEnv, 1);
+  ScriptEnv = CGameScriptManager::GetScriptEnv(CGameScriptManager::m_pGameScriptManager);
+  Source = CLua::GetString(ScriptEnv, 1);
   memset(Destination, 0, sizeof(Destination));
   j__strncpy(Destination, Source, 0x3FFu);
   for ( i = 0; Destination[i]; ++i )
@@ -1262,7 +1249,7 @@ void __cdecl CGameScriptManager::LuaErrorToTrace(void) {
       Destination[i] = 32;
   }
   ScriptTracePrintF(2u, "SCRIPT: Error: %s", Destination);
-  std::string::string();
+  std::string::string(&v11);
   v14 = 0;
   v6 = 1;
   for ( j = CLua::GetStackedFunction(ScriptEnv, 1); j; j = CLua::GetStackedFunction(ScriptEnv, v6) )
@@ -1283,7 +1270,7 @@ void __cdecl CGameScriptManager::LuaErrorToTrace(void) {
       std::string::operator+=("()");
       v10 = 1;
     }
-    CurrentLine = CLua::GetCurrentLine(ScriptEnv, j);
+    CurrentLine = CLua::GetCurrentLine((void **)&ScriptEnv->state, j);
     if ( v10 )
       std::string::operator+=(",");
     snprintf(Buffer, 0x1Fu, "%u", CurrentLine);
@@ -1291,21 +1278,21 @@ void __cdecl CGameScriptManager::LuaErrorToTrace(void) {
     std::string::operator+=(" ");
     ++v6;
   }
-  if ( std::string::length(v11) )
+  if ( std::string::length(&v11) )
   {
-    v0 = (const char *)std::string::c_str(v11);
+    v0 = std::string::c_str(&v11);
     ScriptTracePrintF(2u, "SCRIPT: Callstack: %s", v0);
   }
   v14 = -1;
-  std::string::~string(v11);
+  std::string::~string(&v11);
 }
 
 
 // address=[0x1602590]
-// Decompiled from int __thiscall CGameScriptManager::GetScriptManager(CGameScriptManager *this)
+// Decompiled from CScriptManager *__thiscall CGameScriptManager::GetScriptManager(CGameScriptManager *this)
 class CScriptManager &  CGameScriptManager::GetScriptManager(void) {
   
-  if ( !*((_DWORD *)this + 4)
+  if ( !this->m_pScriptManager
     && BBSupportDbgReport(
          2,
          "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\script\\GameScriptManager.h",
@@ -1314,10 +1301,11 @@ class CScriptManager &  CGameScriptManager::GetScriptManager(void) {
   {
     __debugbreak();
   }
-  return *((_DWORD *)this + 4);
+  return this->m_pScriptManager;
 }
 
 
 // address=[0x462b824]
 // [Decompilation failed for static class CGameScriptManager * CGameScriptManager::m_pGameScriptManager]
 
+#endif // Already implemented

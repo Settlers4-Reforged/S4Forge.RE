@@ -3,6 +3,11 @@
 
 #include "defines.h"
 
+#include "LoadSave/IS4ChunkObject.h"
+#include "CScriptEventRequests.h"
+
+extern class CGameScriptManager *g_pScriptMgr;
+
 class CGameScriptManager : public IS4ChunkObject {
 public:
     // address=[0x131ec80]
@@ -24,7 +29,7 @@ public:
     void  SendGameEvent(int a2, int a3, int a4, int a5);
 
     // address=[0x14875a0]
-    void  SetVictoryConditionHook(void (__cdecl*)(void) a2);
+    void  SetVictoryConditionHook(void (__cdecl *a2)(void) );
 
     // address=[0x15feea0]
      CGameScriptManager(void);
@@ -147,8 +152,8 @@ public:
     CScriptManager * m_pScriptManager;
     void * m_pMapScriptData;
     int m_uMapScriptSize;
-    CScriptEventRequests[23] m_aScriptEventRequests;
-    void (__cdecl *)() m_pVictoryConditionHook;
+    CScriptEventRequests m_aScriptEventRequests[23];
+    void (__cdecl *m_pVictoryConditionHook)();
 
 };
 

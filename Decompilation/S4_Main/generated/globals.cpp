@@ -39929,31 +39929,31 @@ void __cdecl ScriptExportVars(class CLua & a1) {
 
 
 // address=[0x1603a90]
-// Decompiled from struct CLua::SFuncInfo *__cdecl ScriptExportFunctions(struct CLua *a1)
+// Decompiled from void __cdecl ScriptExportFunctions(struct CLua *a1)
 void __cdecl ScriptExportFunctions(class CLua & a1) {
   
-  CLua::ExportTableFunctions(a1, "Buildings", stru_3D8C140);
-  CLua::ExportTableFunctions(a1, "dbg", stru_3D8C1B8);
-  CLua::ExportTableFunctions(a1, "Debug", (struct CLua::SFuncInfo *)&off_3D8C318);
-  CLua::ExportTableFunctions(a1, "Effects", (struct CLua::SFuncInfo *)&off_3D8C3A8);
-  CLua::ExportTableFunctions(a1, "Game", (struct CLua::SFuncInfo *)&off_3D8C418);
-  CLua::ExportTableFunctions(a1, "Goods", (struct CLua::SFuncInfo *)&off_3D8C560);
-  CLua::ExportTableFunctions(a1, "Magic", (struct CLua::SFuncInfo *)&off_3D8C788);
-  CLua::ExportTableFunctions(a1, "Map", (struct CLua::SFuncInfo *)&off_3D8C7B8);
-  CLua::ExportTableFunctions(a1, "Sounds", (struct CLua::SFuncInfo *)&off_3D8EF60);
-  CLua::ExportTableFunctions(a1, "Statistic", (struct CLua::SFuncInfo *)&off_3D8EFE8);
-  CLua::ExportTableFunctions(a1, "Tutorial", (struct CLua::SFuncInfo *)&off_3D8F030);
-  CLua::ExportTableFunctions(a1, "Vehicles", (struct CLua::SFuncInfo *)&off_3D8F0F8);
-  CLua::ExportTableFunctions(a1, "Settlers", (struct CLua::SFuncInfo *)&off_3D8EF90);
-  return CLua::ExportTableFunctions(a1, "DarkTribe", (struct CLua::SFuncInfo *)&off_3D8F148);
+  CLua::ExportTableFunctions(a1, "Buildings", sBuildingFunctions);
+  CLua::ExportTableFunctions(a1, "dbg", sDbgFunctions);
+  CLua::ExportTableFunctions(a1, "Debug", &sDebugFunctions);
+  CLua::ExportTableFunctions(a1, "Effects", &sEffectFunctions);
+  CLua::ExportTableFunctions(a1, "Game", sGameFunctions);
+  CLua::ExportTableFunctions(a1, "Goods", &stru_3D8C560);
+  CLua::ExportTableFunctions(a1, "Magic", &stru_3D8C788);
+  CLua::ExportTableFunctions(a1, "Map", &stru_3D8C7B8);
+  CLua::ExportTableFunctions(a1, "Sounds", &stru_3D8EF60);
+  CLua::ExportTableFunctions(a1, "Statistic", &stru_3D8EFE8);
+  CLua::ExportTableFunctions(a1, "Tutorial", &stru_3D8F030);
+  CLua::ExportTableFunctions(a1, "Vehicles", &stru_3D8F0F8);
+  CLua::ExportTableFunctions(a1, "Settlers", &stru_3D8EF90);
+  CLua::ExportTableFunctions(a1, "DarkTribe", &stru_3D8F148);
 }
 
 
 // address=[0x1603ba0]
-// Decompiled from int ScriptDefaultVictoryConditionCheck()
+// Decompiled from char ScriptDefaultVictoryConditionCheck()
 void __cdecl ScriptDefaultVictoryConditionCheck(void) {
   
-  sub_1609370();
+  GameDefaultPlayersLostCheck();
   return sub_16094C0(0, 0);
 }
 
@@ -39965,7 +39965,7 @@ void __cdecl ScriptEconomyModeVictoryConditionCheck(void) {
   int result; // eax
   float TickCounter; // xmm0_4
   CEvn_Event *v2; // eax
-  int v3; // [esp+14h] [ebp-6Ch]
+  S4_GOOD_ENUM v3; // [esp+14h] [ebp-6Ch]
   int PlayerId; // [esp+18h] [ebp-68h]
   int Good; // [esp+28h] [ebp-58h]
   char *EconomyGoodsArray; // [esp+2Ch] [ebp-54h]
@@ -39981,7 +39981,7 @@ void __cdecl ScriptEconomyModeVictoryConditionCheck(void) {
   CEvn_Event v16; // [esp+58h] [ebp-28h] BYREF
   int v17; // [esp+7Ch] [ebp-4h]
 
-  sub_1609370();
+  GameDefaultPlayersLostCheck();
   result = (unsigned __int8)sub_16094C0(0, 0);
   if ( (_BYTE)result )
     return result;
@@ -39999,7 +39999,7 @@ void __cdecl ScriptEconomyModeVictoryConditionCheck(void) {
   v14 = 0;
   for ( i = 0; i < 7; ++i )
   {
-    v3 = (unsigned __int8)EconomyGoodsArray[i];
+    v3 = EconomyGoodsArray[i];
     v12 = 0;
     v11 = 0;
     for ( j = 1; j <= PlayerId; ++j )

@@ -13,11 +13,11 @@ struct lua_State *  CLua::ActivateScriptingEnvironment(void) {
 
 
 // address=[0x1601e20]
-// Decompiled from int __thiscall CLua::BeginBlock(void **this)
+// Decompiled from void *__thiscall CLua::BeginBlock(CLua *this)
 void  CLua::BeginBlock(void) {
   
-  lua_state = *this;
-  return lua_beginblock(this);
+  lua_state = this->state;
+  return lua_beginblock();
 }
 
 
@@ -40,7 +40,7 @@ void  CLua::CallFunction(unsigned int a2) {
 
 
 // address=[0x16021c0]
-// Decompiled from int __thiscall CLua::CallFunction(void **this, char *Str)
+// Decompiled from int __thiscall CLua::CallFunction(CLua *this, char *Str)
 void  CLua::CallFunction(char const * Str) {
   
   int result; // eax
@@ -48,7 +48,7 @@ void  CLua::CallFunction(char const * Str) {
 
   if ( Str )
   {
-    lua_state = *this;
+    lua_state = this->state;
     v3 = lua_getglobal(Str);
     if ( j__lua_isfunction(v3) )
     {
@@ -81,16 +81,16 @@ void  CLua::CallFunction(char const * Str) {
 
 
 // address=[0x1602280]
-// Decompiled from bool __thiscall CLua::CheckParam(void **this, int a2)
+// Decompiled from bool __thiscall CLua::CheckParam(CLua *this, int a2)
 bool  CLua::CheckParam(int a2) {
   
-  lua_state = *this;
+  lua_state = this->state;
   return j__lua_lua2C(a2) != 0;
 }
 
 
 // address=[0x1602310]
-// Decompiled from int __thiscall CLua::CreateTable(void **this, char *Str)
+// Decompiled from int __thiscall CLua::CreateTable(CLua *this, char *Str)
 void  CLua::CreateTable(char const * Str) {
   
   int v2; // eax
@@ -104,7 +104,7 @@ void  CLua::CreateTable(char const * Str) {
   {
     __debugbreak();
   }
-  lua_state = *this;
+  lua_state = this->state;
   v2 = lua_createtable();
   lua_pushobject(v2);
   return j__lua_setglobal(Str);
@@ -112,11 +112,11 @@ void  CLua::CreateTable(char const * Str) {
 
 
 // address=[0x1602380]
-// Decompiled from int __thiscall CLua::EndBlock(void **this)
+// Decompiled from int __thiscall CLua::EndBlock(CLua *this)
 void  CLua::EndBlock(void) {
   
-  lua_state = *this;
-  return lua_endblock(this);
+  lua_state = this->state;
+  return lua_endblock();
 }
 
 
@@ -130,16 +130,16 @@ int  CLua::GetCurrentLine(unsigned int a2) {
 
 
 // address=[0x16023e0]
-// Decompiled from int __thiscall CLua::GetFuncInfo(void **this, unsigned int a2, char **a3, int *a4)
+// Decompiled from int __thiscall CLua::GetFuncInfo(CLua *this, int a2, char **a3, int *a4)
 void  CLua::GetFuncInfo(unsigned int a2, char * * a3, int * a4) {
   
-  lua_state = *this;
-  return j__lua_funcinfo(a2, a3, a4);
+  lua_state = this->state;
+  return j__lua_funcinfo(a2, (int)a3, (int)a4);
 }
 
 
 // address=[0x1602420]
-// Decompiled from int __thiscall CLua::GetGlobal(void **this, char *Str)
+// Decompiled from int __thiscall CLua::GetGlobal(CLua *this, char *Str)
 unsigned int  CLua::GetGlobal(char const * Str) {
   
   if ( !Str
@@ -151,7 +151,7 @@ unsigned int  CLua::GetGlobal(char const * Str) {
   {
     __debugbreak();
   }
-  lua_state = *this;
+  lua_state = this->state;
   return lua_getglobal(Str);
 }
 
@@ -162,7 +162,7 @@ int  CLua::GetInt(int a2) {
   
   int v2; // eax
 
-  lua_state = *(void **)this;
+  lua_state = this->state;
   CLua::dbgCheckParam(this, a2);
   v2 = j__lua_lua2C(a2);
   return (int)j__lua_getnumber(v2);
@@ -170,11 +170,11 @@ int  CLua::GetInt(int a2) {
 
 
 // address=[0x16024e0]
-// Decompiled from int __thiscall CLua::GetObjName(void **this, unsigned int a2, char **a3)
+// Decompiled from int __thiscall CLua::GetObjName(CLua *this, int a2, char **a3)
 char *  CLua::GetObjName(unsigned int a2, char * * a3) {
   
-  lua_state = *this;
-  return j__lua_getobjname(a2, a3);
+  lua_state = this->state;
+  return j__lua_getobjname(a2, (int)a3);
 }
 
 
@@ -198,45 +198,45 @@ unsigned int  CLua::GetRef(int a2) {
 
 
 // address=[0x16025e0]
-// Decompiled from int __thiscall CLua::GetStackedFunction(void **this, int a2)
+// Decompiled from int __thiscall CLua::GetStackedFunction(CLua *this, int a2)
 unsigned int  CLua::GetStackedFunction(int a2) {
   
-  lua_state = *this;
+  lua_state = this->state;
   return j__lua_stackedfunction(a2);
 }
 
 
 // address=[0x1602610]
-// Decompiled from int __thiscall CLua::GetString(CLua *this, int a2)
+// Decompiled from char *__thiscall CLua::GetString(CLua *this, int a2)
 char *  CLua::GetString(int a2) {
   
   int v2; // eax
 
-  lua_state = *(void **)this;
-  CLua::dbgCheckParam(this, a2);
+  lua_state = this->state;
+  CLua::dbgCheckParam((void **)&this->state, a2);
   v2 = j__lua_lua2C(a2);
   return j__lua_getstring(v2);
 }
 
 
 // address=[0x1602660]
-// Decompiled from bool __thiscall CLua::IsNil(void **this, char *Str)
+// Decompiled from bool __thiscall CLua::IsNil(CLua *this, char *Str)
 bool  CLua::IsNil(char const * Str) {
   
   int v3; // [esp+0h] [ebp-Ch]
 
-  lua_state = *this;
+  lua_state = this->state;
   v3 = lua_getglobal(Str);
   return lua_isnil(v3) != 0;
 }
 
 
 // address=[0x1602720]
-// Decompiled from void *__thiscall CLua::PushInt(CLua *this, int a2)
+// Decompiled from void __thiscall CLua::PushInt(CLua *this, int a2)
 void  CLua::PushInt(int a2) {
   
   lua_state = this->state;
-  return lua_pushnumber((double)a2);
+  lua_pushnumber((double)a2);
 }
 
 
@@ -770,14 +770,14 @@ int  CLua::Lock(unsigned int a2) {
 
 
 // address=[0x16033d0]
-// Decompiled from int __thiscall CLua::dbgCheckParam(void **this, int a2)
+// Decompiled from int __thiscall CLua::dbgCheckParam(CLua *this, int a2)
 void  CLua::dbgCheckParam(int a2) {
   
   int v2; // eax
   int result; // eax
   int v4; // [esp+4h] [ebp-Ch]
 
-  lua_state = *this;
+  lua_state = this->state;
   v4 = j__lua_lua2C(a2);
   v2 = j__lua_stackedfunction(1);
   result = j__lua_currentline(v2);

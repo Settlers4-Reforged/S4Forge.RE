@@ -1,3 +1,4 @@
+#if FALSE
 #include "CScriptManager.h"
 
 // Definitions for class CScriptManager
@@ -251,3 +252,4 @@ void __cdecl CScriptManager::LuaRegisterFunction(void) {
 // address=[0x462b870]
 // [Decompilation failed for static class CScriptManager * CScriptManager::m_pScriptManager]
 
+#endif // Already implemented

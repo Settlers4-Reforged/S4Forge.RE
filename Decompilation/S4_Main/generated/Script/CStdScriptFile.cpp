@@ -1,55 +1,55 @@
+#if FALSE
 #include "CStdScriptFile.h"
 
 // Definitions for class CStdScriptFile
 
 // address=[0x160dbd0]
-// Decompiled from int __thiscall CStdScriptFile::CStdScriptFile(int this, wchar_t *FileName)
+// Decompiled from CStdScriptFile *__thiscall CStdScriptFile::CStdScriptFile(CStdScriptFile *this, wchar_t *FileName)
  CStdScriptFile::CStdScriptFile(wchar_t const * FileName) {
   
-  _DWORD v4[26]; // [esp+Ch] [ebp-7Ch] BYREF
-  int v5; // [esp+74h] [ebp-14h] BYREF
-  int v6; // [esp+84h] [ebp-4h]
+  CFileEx v4; // [esp+Ch] [ebp-7Ch] BYREF
+  int v5; // [esp+84h] [ebp-4h]
 
-  IScriptFile::IScriptFile((IScriptFile *)this);
-  v6 = 0;
-  *(_DWORD *)this = &CStdScriptFile::_vftable_;
-  *(_DWORD *)(this + 4) = 0;
-  *(_DWORD *)(this + 8) = 0;
+  IScriptFile::IScriptFile(this);
+  v5 = 0;
+  this->__vftable = (IScriptFile_vtbl *)&CStdScriptFile::_vftable_;
+  this->m_pScript = 0;
+  this->m_uSize = 0;
   if ( !FileName )
     return this;
-  CFileEx::CFileEx((CFileEx *)v4, 1);
-  LOBYTE(v6) = 1;
-  CFileEx::Open(&v5, FileName, 6, 0, UNUSED_ARG(), UNUSED_ARG());
-  *(_DWORD *)(this + 8) = CFileEx::Size(v4);
-  *(_DWORD *)(this + 4) = operator new[](*(_DWORD *)(this + 8) + 1);
-  *(_BYTE *)(*(_DWORD *)(this + 4) + *(_DWORD *)(this + 8)) = 0;
-  CFileEx::Read(&v5, *(void **)(this + 4), 1, *(_DWORD *)(this + 8), "Script\\ScriptFile.cpp", 49);
-  CFileEx::Close((CFileEx *)&v5, UNUSED_ARG(), UNUSED_ARG());
-  LOBYTE(v6) = 0;
-  CFileEx::~CFileEx(v4);
+  CFileEx::CFileEx(&v4, UNUSED_ARG());
+  LOBYTE(v5) = 1;
+  CFileEx::Open(&v4.IFileEx, FileName, CFile_BINARY|CFile_READ, 0, UNUSED_ARG(), UNUSED_ARG());
+  this->m_uSize = CFileEx::Size(&v4);
+  this->m_pScript = (const char *)operator new[](this->m_uSize + 1);
+  this->m_pScript[this->m_uSize] = 0;
+  CFileEx::Read(&v4.IFileEx.__vftable, (void *)this->m_pScript, 1, this->m_uSize, UNUSED_ARG(), UNUSED_ARG());
+  CFileEx::Close(&v4.IFileEx, UNUSED_ARG(), UNUSED_ARG());
+  LOBYTE(v5) = 0;
+  CFileEx::~CFileEx(&v4);
   return this;
 }
 
 
 // address=[0x160dd00]
-// Decompiled from void __thiscall CStdScriptFile::~CStdScriptFile(void **this)
+// Decompiled from void __thiscall CStdScriptFile::~CStdScriptFile(CStdScriptFile *this)
  CStdScriptFile::~CStdScriptFile(void) {
   
-  *this = &CStdScriptFile::_vftable_;
-  if ( this[1] )
+  this->__vftable = (IScriptFile_vtbl *)&CStdScriptFile::_vftable_;
+  if ( this->m_pScript )
   {
-    operator delete[](this[1]);
-    this[1] = 0;
+    operator delete[]((void *)this->m_pScript);
+    this->m_pScript = 0;
   }
-  IScriptFile::~IScriptFile((IScriptFile *)this);
+  IScriptFile::~IScriptFile(this);
 }
 
 
 // address=[0x160dd50]
-// Decompiled from int __thiscall CStdScriptFile::GetScript(CStdScriptFile *this)
+// Decompiled from const char *__thiscall CStdScriptFile::GetScript(CStdScriptFile *this)
 char const *  CStdScriptFile::GetScript(void) {
   
-  return *((_DWORD *)this + 1);
+  return this->m_pScript;
 }
 
 
@@ -57,7 +57,8 @@ char const *  CStdScriptFile::GetScript(void) {
 // Decompiled from int __thiscall CStdScriptFile::GetSize(CStdScriptFile *this)
 unsigned int  CStdScriptFile::GetSize(void) {
   
-  return *((_DWORD *)this + 2);
+  return this->m_uSize;
 }
 
 
+#endif // Already implemented
