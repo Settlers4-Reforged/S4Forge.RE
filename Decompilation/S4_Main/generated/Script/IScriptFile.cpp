@@ -1,3 +1,4 @@
+#if FALSE
 #include "IScriptFile.h"
 
 // Definitions for class IScriptFile
@@ -6,7 +7,7 @@
 // Decompiled from IScriptFile *__thiscall IScriptFile::IScriptFile(IScriptFile *this)
  IScriptFile::IScriptFile(void) {
   
-  *(_DWORD *)this = &IScriptFile::_vftable_;
+  this->__vftable = (IScriptFile_vtbl *)&IScriptFile::_vftable_;
   return this;
 }
 
@@ -23,3 +24,4 @@
 }
 
 
+#endif // Already implemented

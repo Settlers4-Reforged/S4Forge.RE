@@ -1,3 +1,4 @@
+#if FALSE
 #include "CInstallationInfo.h"
 
 // Definitions for class CInstallationInfo
@@ -385,7 +386,7 @@ void  CInstallationInfo::CheckTrojanVehicleGfx(void) {
     hFile = CreateFileW(L"Gfx\\34.gfx", 0xC0000000, 0, 0, 3u, 0x80u, 0);
     if ( hFile )
     {
-      if ( GetFileSize(hFile, 0) == 3563502 )
+      if ( GetFileSize(hFile, 0) == 0x365FEE )
       {
         for ( i = 0; i < 1; ++i )
         {
@@ -617,66 +618,61 @@ void __cdecl CInstallationInfo::LuaCheckFile(void) {
 
 
 // address=[0x1496110]
-// Decompiled from int CInstallationInfo::LuaCheckFiles()
+// Decompiled from void CInstallationInfo::LuaCheckFiles()
 void __cdecl CInstallationInfo::LuaCheckFiles(void) {
   
   unsigned int v0; // eax
   unsigned int v1; // eax
   unsigned int v2; // eax
   unsigned int v3; // eax
-  int result; // eax
-  char v5; // bl
-  wchar_t *v6; // eax
-  int v7; // [esp-4h] [ebp-2A8h]
+  char v4; // bl
+  wchar_t *v5; // eax
+  int v6; // [esp-4h] [ebp-2A8h]
   int IntegerZeroIfNoObject; // [esp+8h] [ebp-29Ch]
-  int v9; // [esp+Ch] [ebp-298h]
+  int v8; // [esp+Ch] [ebp-298h]
   int Integer; // [esp+10h] [ebp-294h]
   char *Format; // [esp+18h] [ebp-28Ch]
   int i; // [esp+1Ch] [ebp-288h]
-  char v13[88]; // [esp+20h] [ebp-284h] BYREF
-  std::wstring v14; // [esp+78h] [ebp-22Ch] BYREF
+  char v12[88]; // [esp+20h] [ebp-284h] BYREF
+  std::wstring v13; // [esp+78h] [ebp-22Ch] BYREF
   char Str[512]; // [esp+94h] [ebp-210h] BYREF
-  int v16; // [esp+2A0h] [ebp-4h]
+  int v15; // [esp+2A0h] [ebp-4h]
 
   v0 = j__lua_lua2C(1);
   Format = (char *)CInstallationInfo::LuaGetString(v0);
   v1 = j__lua_lua2C(2);
   Integer = CInstallationInfo::LuaGetInteger(v1);
   v2 = j__lua_lua2C(3);
-  v9 = CInstallationInfo::LuaGetInteger(v2);
+  v8 = CInstallationInfo::LuaGetInteger(v2);
   v3 = j__lua_lua2C(4);
   IntegerZeroIfNoObject = CInstallationInfo::LuaGetIntegerZeroIfNoObject(v3);
-  if ( Format && *Format && Integer >= 0 && v9 >= 0 && IntegerZeroIfNoObject >= 0 )
+  if ( Format && *Format && Integer >= 0 && v8 >= 0 && IntegerZeroIfNoObject >= 0 )
   {
     Str[511] = 0;
-    for ( i = Integer; ; ++i )
+    for ( i = Integer; i <= v8; ++i )
     {
-      result = i;
-      if ( i > v9 )
-        break;
       snprintf(Str, 0x1FFu, Format, i);
-      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v13);
-      v16 = 0;
+      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v12);
+      v15 = 0;
       std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::from_bytes(
-        (int)&v14,
+        (int)&v13,
         Str);
-      LOBYTE(v16) = 1;
-      v5 = CInstallationInfo::m_bLuaCheckOk;
-      v7 = IntegerZeroIfNoObject | CInstallationInfo::m_iLuaCheckFlags;
-      v6 = std::wstring::c_str(&v14);
-      CInstallationInfo::m_bLuaCheckOk = CInstallationInfo::CheckFile(v6, v7) & v5;
-      LOBYTE(v16) = 0;
-      std::wstring::~wstring(&v14);
-      v16 = -1;
-      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::~wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v13);
+      LOBYTE(v15) = 1;
+      v4 = CInstallationInfo::m_bLuaCheckOk;
+      v6 = IntegerZeroIfNoObject | CInstallationInfo::m_iLuaCheckFlags;
+      v5 = std::wstring::c_str(&v13);
+      CInstallationInfo::m_bLuaCheckOk = CInstallationInfo::CheckFile(v5, v6) & v4;
+      LOBYTE(v15) = 0;
+      std::wstring::~wstring(&v13);
+      v15 = -1;
+      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::~wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v12);
     }
   }
   else
   {
     CInstallationInfo::m_bLuaCheckOk = 0;
-    return BBSupportTracePrintF(1, "LuaCheckFiles(): Invalid parameter!");
+    BBSupportTracePrintF(1, "LuaCheckFiles(): Invalid parameter!");
   }
-  return result;
 }
 
 
@@ -719,3 +715,4 @@ char const * __cdecl CInstallationInfo::LuaGetString(unsigned int a1) {
 // address=[0x3f456dc]
 // [Decompilation failed for static bool CInstallationInfo::m_bLuaCheckOk]
 
+#endif // Already implemented

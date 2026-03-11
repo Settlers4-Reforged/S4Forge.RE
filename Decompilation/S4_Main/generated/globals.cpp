@@ -39905,35 +39905,35 @@ void __cdecl __vcrt_va_start_verify_argument_type<enum EScriptType>(void) {
 
 
 // address=[0x1603910]
-// Decompiled from char *__cdecl ScriptExportVars(struct CLua *a1)
+// Decompiled from void __cdecl ScriptExportVars(struct CLua *a1)
 void __cdecl ScriptExportVars(class CLua & a1) {
   
-  CLua::ExportTableTypes((int)"Buildings", "BUILDING_", (int)&unk_37EA308, 379);
-  CLua::ExportTableTypes((int)"Effects", "EFFECT_", (int)&unk_37F8C38, 86);
-  CLua::ExportTableTypes((int)"Goods", "GOOD_", (int)&unk_37FD850, 43);
-  CLua::ExportTableTypes((int)"Settlers", "SETTLER_", (int)&unk_37FF108, 434);
-  CLua::ExportTableTypes((int)"Sounds", "SOUND_", (int)&unk_37E8AF8, 109);
-  CLua::ExportTableTypes((int)"Vehicles", "VEHICLE_", (int)&unk_37EDCF0, 59);
-  CLua::ExportTableVar("Vehicles", "FOUNDATION_CART", DOUBLE_1030_0);
-  CLua::ExportTableVars(a1, "Buildings", (struct CLua::SVarInfo *)&off_3D8C100);
-  CLua::ExportTableVars(a1, "Game", (struct CLua::SVarInfo *)&off_3D8C3B8);
-  CLua::ExportTableVars(a1, "Goods", (struct CLua::SVarInfo *)&off_3D8C510);
-  CLua::ExportTableVars(a1, "Control", (struct CLua::SVarInfo *)&off_3D8C960);
-  CLua::ExportTableVars(a1, "Dialog", (struct CLua::SVarInfo *)&off_3D8F170);
-  CLua::ExportTableVars(a1, "Menu", (struct CLua::SVarInfo *)&off_3D8C588);
-  CLua::ExportTableVars(a1, "Magic", (struct CLua::SVarInfo *)&off_3D8C6F8);
-  CLua::ExportTableVars(a1, "Events", (struct CLua::SVarInfo *)&off_3D8C800);
-  CLua::ExportTableVars(a1, "Settlers", (struct CLua::SVarInfo *)&off_3D8EF70);
-  return CLua::ExportTableVars(a1, "Vehicles", (struct CLua::SVarInfo *)&off_3D8F0B8);
+  CLua::ExportTableTypes("Buildings", "BUILDING_", &sBuildingDefines, 379u);
+  CLua::ExportTableTypes("Effects", "EFFECT_", &sEffectDefines, 86u);
+  CLua::ExportTableTypes("Goods", "GOOD_", &sGoodDefines, 43u);
+  CLua::ExportTableTypes("Settlers", "SETTLER_", &sSettlerDefines, 434u);
+  CLua::ExportTableTypes("Sounds", "SOUND_", &sSoundDefines, 109u);
+  CLua::ExportTableTypes("Vehicles", "VEHICLE_", &sVehicleDefines, 59u);
+  CLua::ExportTableVar("Vehicles", "FOUNDATION_CART", 1030.0);
+  CLua::ExportTableVars(a1, "Buildings", sBuildingsVarTable);
+  CLua::ExportTableVars(a1, "Game", sGameVarTable);
+  CLua::ExportTableVars(a1, "Goods", sGoodsVarTable);
+  CLua::ExportTableVars(a1, "Control", sControlVarTable);
+  CLua::ExportTableVars(a1, "Dialog", sDialogVarTable);
+  CLua::ExportTableVars(a1, "Menu", sMenuVarTable);
+  CLua::ExportTableVars(a1, "Magic", sMagicVarTable);
+  CLua::ExportTableVars(a1, "Events", sEventsVarTable);
+  CLua::ExportTableVars(a1, "Settlers", sSettlersVarTable);
+  CLua::ExportTableVars(a1, "Vehicles", sVehiclesVarTable);
 }
 
 
 // address=[0x1603a90]
-// Decompiled from void __cdecl ScriptExportFunctions(struct CLua *a1)
+// Decompiled from struct CLua::SFuncInfo *__cdecl ScriptExportFunctions(struct CLua *a1)
 void __cdecl ScriptExportFunctions(class CLua & a1) {
   
-  CLua::ExportTableFunctions(a1, "Buildings", (struct CLua::SFuncInfo *)&off_3D8C140);
-  CLua::ExportTableFunctions(a1, "dbg", (struct CLua::SFuncInfo *)&off_3D8C1B8);
+  CLua::ExportTableFunctions(a1, "Buildings", stru_3D8C140);
+  CLua::ExportTableFunctions(a1, "dbg", stru_3D8C1B8);
   CLua::ExportTableFunctions(a1, "Debug", (struct CLua::SFuncInfo *)&off_3D8C318);
   CLua::ExportTableFunctions(a1, "Effects", (struct CLua::SFuncInfo *)&off_3D8C3A8);
   CLua::ExportTableFunctions(a1, "Game", (struct CLua::SFuncInfo *)&off_3D8C418);
@@ -39945,7 +39945,7 @@ void __cdecl ScriptExportFunctions(class CLua & a1) {
   CLua::ExportTableFunctions(a1, "Tutorial", (struct CLua::SFuncInfo *)&off_3D8F030);
   CLua::ExportTableFunctions(a1, "Vehicles", (struct CLua::SFuncInfo *)&off_3D8F0F8);
   CLua::ExportTableFunctions(a1, "Settlers", (struct CLua::SFuncInfo *)&off_3D8EF90);
-  CLua::ExportTableFunctions(a1, "DarkTribe", (struct CLua::SFuncInfo *)&off_3D8F148);
+  return CLua::ExportTableFunctions(a1, "DarkTribe", (struct CLua::SFuncInfo *)&off_3D8F148);
 }
 
 

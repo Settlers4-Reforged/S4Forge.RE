@@ -45,9 +45,9 @@ private:
     // Type information members
 public:
     void * vtable;
-    CLua * m_pScriptEnv;
+    class CLua *m_pScriptEnv;
     int m_iNumberOfRegisteredFunctions;
-    int[64] m_pFunctionLock;
+    int m_pFunctionLock[64];
     byte m_bAllowRegister;
 
 };

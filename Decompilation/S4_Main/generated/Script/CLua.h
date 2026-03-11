@@ -72,7 +72,7 @@ public:
     bool  ExecuteScript(wchar_t const * FileName);
 
     // address=[0x1602a30]
-    bool  ExecuteScript(class IScriptFile & a2);
+    bool  ExecuteScript(class IScriptFile & _rScriptFile);
 
     // address=[0x1602aa0]
     bool  ExecuteScript(void * a2, int a3, char * a4);
@@ -81,31 +81,31 @@ public:
     bool  ExecuteString(char const * Str);
 
     // address=[0x1602b20]
-    void  ExportFunction(void (__cdecl* a2)(void), char const * Str);
+    void  ExportFunction(void (__cdecl*)(void) a1, char const * a2);
 
     // address=[0x1602b60]
-    void  ExportTableFunction(char const * a2, void (__cdecl* a3)(void), char const * Str);
+    void  ExportTableFunction(char const * a2, void (__cdecl*)(void) a3, char const * a4);
 
     // address=[0x1602c20]
-    void  ExportFunctions(struct CLua::SFuncInfo * a1);
+    void  ExportFunctions(struct CLua::SFuncInfo * a2);
 
     // address=[0x1602c90]
     void  ExportTableFunctions(char const * a2, struct CLua::SFuncInfo * a3);
 
     // address=[0x1602d20]
-    void  ExportTableVar(char const * a2, char const * Str, double a4);
+    void  ExportTableVar(char const * _pTableName, char const * _pVarName, double _dVar);
 
     // address=[0x1602e30]
-    void  ExportTableVars(char const * a2, struct CLua::SVarInfo * a3);
+    void  ExportTableVars(char const * _pTableName, struct CLua::SVarInfo * a3);
 
     // address=[0x1602ea0]
-    void  ExportTableTypes(char const * a1, char const * Str, struct SConfigTypeString const * a3, unsigned int a4);
+    void  ExportTableTypes(char const * _pTableName, char const * _pDefinePrefix, struct SConfigTypeString const * a4, unsigned int _uCount);
 
     // address=[0x1602f60]
     void  ExportGlobalVar(char const * Str, double a3);
 
     // address=[0x1602fa0]
-    void __cdecl Push(enum EScriptType a1, ... a2);
+    void __cdecl Push(enum EScriptType a1, ... a1);
 
     // address=[0x1603120]
     void __cdecl Get(enum EScriptType a1, ... a2);
@@ -139,7 +139,7 @@ private:
     void  dbgCheckParam(int a2);
 
     // address=[0x1603450]
-    static void __cdecl scrDbgDumpTableEntry(void a1);
+    static void __cdecl scrDbgDumpTableEntry(void);
 
     // address=[0x16034b0]
     static void __cdecl scrIncTableEntryCount(void);
@@ -152,6 +152,10 @@ private:
 
     // address=[0x462b83c]
     static class CLua * s_pLua;
+
+    // Type information members
+public:
+    struct lua_State * state;
 
 };
 

@@ -3,24 +3,20 @@
 // Definitions for class CScriptManager
 
 // address=[0x1601e00]
-// Decompiled from CScriptManager *__thiscall CScriptManager::AllowRegisterFunction(CScriptManager *this, bool a2)
+// Decompiled from void __thiscall CScriptManager::AllowRegisterFunction(CScriptManager *this, byte a2)
 void  CScriptManager::AllowRegisterFunction(bool a2) {
   
-  CScriptManager *result; // eax
-
-  result = this;
-  *((_BYTE *)this + 268) = a2;
-  return result;
+  this->m_bAllowRegister = a2;
 }
 
 
 // address=[0x1601e50]
-// Decompiled from int __thiscall CScriptManager::Call(CScriptManager *this, unsigned int a2)
+// Decompiled from void __thiscall CScriptManager::Call(CScriptManager *this, unsigned int a2)
 void  CScriptManager::Call(int a2) {
   
-  unsigned int Ref; // eax
+  int Ref; // eax
 
-  if ( a2 >= *((_DWORD *)this + 2)
+  if ( a2 >= this->m_iNumberOfRegisteredFunctions
     && BBSupportDbgReport(
          2,
          "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\script\\ScriptManager.h",
@@ -29,18 +25,18 @@ void  CScriptManager::Call(int a2) {
   {
     __debugbreak();
   }
-  Ref = CLua::GetRef(*((void ***)this + 1), *((_DWORD *)this + a2 + 3));
-  return CLua::CallFunction(*((void ***)this + 1), Ref);
+  Ref = CLua::GetRef(this->m_pScriptEnv, this->m_pFunctionLock[a2]);
+  CLua::CallFunction(this->m_pScriptEnv, Ref);
 }
 
 
 // address=[0x1601ec0]
-// Decompiled from int __thiscall CScriptManager::Call(CScriptManager *this, unsigned int a2, int a3)
+// Decompiled from void __thiscall CScriptManager::Call(CScriptManager *this, unsigned int a2, int a3)
 void  CScriptManager::Call(int a2, int a3) {
   
-  unsigned int Ref; // eax
+  int Ref; // [esp-4h] [ebp-8h]
 
-  if ( a2 >= *((_DWORD *)this + 2)
+  if ( a2 >= this->m_iNumberOfRegisteredFunctions
     && BBSupportDbgReport(
          2,
          "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\script\\ScriptManager.h",
@@ -49,19 +45,19 @@ void  CScriptManager::Call(int a2, int a3) {
   {
     __debugbreak();
   }
-  CLua::PushInt(*((void ***)this + 1), a3);
-  Ref = CLua::GetRef(*((void ***)this + 1), *((_DWORD *)this + a2 + 3));
-  return CLua::CallFunction(*((void ***)this + 1), Ref);
+  CLua::PushInt(this->m_pScriptEnv, a3);
+  Ref = CLua::GetRef(this->m_pScriptEnv, this->m_pFunctionLock[a2]);
+  CLua::CallFunction(this->m_pScriptEnv, Ref);
 }
 
 
 // address=[0x1601f40]
-// Decompiled from int __thiscall CScriptManager::Call(CScriptManager *this, unsigned int a2, int a3, int a4)
+// Decompiled from void __thiscall CScriptManager::Call(CScriptManager *this, unsigned int a2, int a3, int a4)
 void  CScriptManager::Call(int a2, int a3, int a4) {
   
-  unsigned int Ref; // eax
+  int Ref; // eax
 
-  if ( a2 >= *((_DWORD *)this + 2)
+  if ( a2 >= this->m_iNumberOfRegisteredFunctions
     && BBSupportDbgReport(
          2,
          "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\script\\ScriptManager.h",
@@ -70,20 +66,20 @@ void  CScriptManager::Call(int a2, int a3, int a4) {
   {
     __debugbreak();
   }
-  CLua::PushInt(*((void ***)this + 1), a3);
-  CLua::PushInt(*((void ***)this + 1), a4);
-  Ref = CLua::GetRef(*((void ***)this + 1), *((_DWORD *)this + a2 + 3));
-  return CLua::CallFunction(*((void ***)this + 1), Ref);
+  CLua::PushInt(this->m_pScriptEnv, a3);
+  CLua::PushInt(this->m_pScriptEnv, a4);
+  Ref = CLua::GetRef(this->m_pScriptEnv, this->m_pFunctionLock[a2]);
+  CLua::CallFunction(this->m_pScriptEnv, Ref);
 }
 
 
 // address=[0x1601fe0]
-// Decompiled from int __thiscall CScriptManager::Call(CScriptManager *this, unsigned int a2, int a3, int a4, int a5)
-void  CScriptManager::Call(int a2, int a3, int a4, int a5) {
+// Decompiled from void __thiscall CScriptManager::Call(CScriptManager *this, unsigned int _iScriptFuncId, int a3, int a4, int a5)
+void  CScriptManager::Call(int _iScriptFuncId, int a3, int a4, int a5) {
   
-  unsigned int Ref; // eax
+  int Ref; // eax
 
-  if ( a2 >= *((_DWORD *)this + 2)
+  if ( _iScriptFuncId >= this->m_iNumberOfRegisteredFunctions
     && BBSupportDbgReport(
          2,
          "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\script\\ScriptManager.h",
@@ -92,21 +88,21 @@ void  CScriptManager::Call(int a2, int a3, int a4, int a5) {
   {
     __debugbreak();
   }
-  CLua::PushInt(*((void ***)this + 1), a3);
-  CLua::PushInt(*((void ***)this + 1), a4);
-  CLua::PushInt(*((void ***)this + 1), a5);
-  Ref = CLua::GetRef(*((void ***)this + 1), *((_DWORD *)this + a2 + 3));
-  return CLua::CallFunction(*((void ***)this + 1), Ref);
+  CLua::PushInt(this->m_pScriptEnv, a3);
+  CLua::PushInt(this->m_pScriptEnv, a4);
+  CLua::PushInt(this->m_pScriptEnv, a5);
+  Ref = CLua::GetRef(this->m_pScriptEnv, this->m_pFunctionLock[_iScriptFuncId]);
+  CLua::CallFunction(this->m_pScriptEnv, Ref);
 }
 
 
 // address=[0x1602090]
-// Decompiled from int __thiscall CScriptManager::Call(CScriptManager *this, unsigned int a2, int a3, int a4, int a5, int a6)
-void  CScriptManager::Call(int a2, int a3, int a4, int a5, int a6) {
+// Decompiled from int __thiscall CScriptManager::Call(CScriptManager *this, unsigned int _iScriptFuncId, int a3, int a4, int a5, int a6)
+void  CScriptManager::Call(int _iScriptFuncId, int a3, int a4, int a5, int a6) {
   
-  unsigned int Ref; // eax
+  int Ref; // eax
 
-  if ( a2 >= *((_DWORD *)this + 2)
+  if ( _iScriptFuncId >= this->m_iNumberOfRegisteredFunctions
     && BBSupportDbgReport(
          2,
          "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\script\\ScriptManager.h",
@@ -115,12 +111,12 @@ void  CScriptManager::Call(int a2, int a3, int a4, int a5, int a6) {
   {
     __debugbreak();
   }
-  CLua::PushInt(*((void ***)this + 1), a3);
-  CLua::PushInt(*((void ***)this + 1), a4);
-  CLua::PushInt(*((void ***)this + 1), a5);
-  CLua::PushInt(*((void ***)this + 1), a6);
-  Ref = CLua::GetRef(*((void ***)this + 1), *((_DWORD *)this + a2 + 3));
-  return CLua::CallFunction(*((void ***)this + 1), Ref);
+  CLua::PushInt(this->m_pScriptEnv, a3);
+  CLua::PushInt(this->m_pScriptEnv, a4);
+  CLua::PushInt(this->m_pScriptEnv, a5);
+  CLua::PushInt(this->m_pScriptEnv, a6);
+  Ref = CLua::GetRef(this->m_pScriptEnv, this->m_pFunctionLock[_iScriptFuncId]);
+  return CLua::CallFunction(this->m_pScriptEnv, Ref);
 }
 
 
@@ -128,18 +124,18 @@ void  CScriptManager::Call(int a2, int a3, int a4, int a5, int a6) {
 // Decompiled from CScriptManager *__thiscall CScriptManager::CScriptManager(CScriptManager *this, struct CLua *a2)
  CScriptManager::CScriptManager(class CLua & a2) {
   
-  *(_DWORD *)this = &CScriptManager::_vftable_;
+  this->vtable = &CScriptManager::_vftable_;
   if ( CScriptManager::m_pScriptManager
     && BBSupportDbgReport(2, "Script\\ScriptManager.cpp", 95, "m_pScriptManager == 0") == 1 )
   {
     __debugbreak();
   }
-  CScriptManager::m_pScriptManager = (int)this;
-  *((_DWORD *)this + 1) = a2;
-  *((_DWORD *)this + 2) = 0;
-  memset((char *)this + 12, 0, 0x100u);
-  *((_BYTE *)this + 268) = 0;
-  CLua::ExportFunction((int)CScriptManager::LuaRegisterFunction, (char *)&dword_381E474[1]);
+  CScriptManager::m_pScriptManager = this;      // Size 0x110
+  this->m_pScriptEnv = a2;
+  this->m_iNumberOfRegisteredFunctions = 0;
+  memset(this->m_pFunctionLock, 0, sizeof(this->m_pFunctionLock));
+  this->m_bAllowRegister = 0;
+  CLua::ExportFunction(this->m_pScriptEnv, (void (__cdecl *)())CScriptManager::LuaRegisterFunction, "reg_func");
   return this;
 }
 
@@ -151,27 +147,27 @@ void  CScriptManager::Call(int a2, int a3, int a4, int a5, int a6) {
   CScriptManager *result; // eax
 
   result = this;
-  *(_DWORD *)this = &CScriptManager::_vftable_;
+  this->vtable = &CScriptManager::_vftable_;
   CScriptManager::m_pScriptManager = 0;
   return result;
 }
 
 
 // address=[0x160df60]
-// Decompiled from int __thiscall CScriptManager::FindFunc(CScriptManager *this, unsigned int a2)
+// Decompiled from int __thiscall CScriptManager::FindFunc(CScriptManager *this, int a2)
 int  CScriptManager::FindFunc(unsigned int a2) {
   
-  unsigned int Ref; // eax
-  int v4; // [esp+0h] [ebp-Ch]
+  int Ref; // eax
+  int m_iNumberOfRegisteredFunctions; // [esp+0h] [ebp-Ch]
   int i; // [esp+4h] [ebp-8h]
 
-  if ( !*((_DWORD *)this + 1) && BBSupportDbgReport(2, "Script\\ScriptManager.cpp", 126, "m_pScriptEnv != 0") == 1 )
+  if ( !this->m_pScriptEnv && BBSupportDbgReport(2, "Script\\ScriptManager.cpp", 126, "m_pScriptEnv != 0") == 1 )
     __debugbreak();
-  v4 = *((_DWORD *)this + 2);
-  for ( i = 0; i < v4; ++i )
+  m_iNumberOfRegisteredFunctions = this->m_iNumberOfRegisteredFunctions;
+  for ( i = 0; i < m_iNumberOfRegisteredFunctions; ++i )
   {
-    Ref = CLua::GetRef(*((void ***)this + 1), *((_DWORD *)this + i + 3));
-    if ( CLua::EqualObjects(*((void ***)this + 1), a2, Ref) )
+    Ref = CLua::GetRef(this->m_pScriptEnv, this->m_pFunctionLock[i]);
+    if ( CLua::EqualObjects(this->m_pScriptEnv, a2, Ref) )
       return i;
   }
   return -1;
@@ -179,72 +175,60 @@ int  CScriptManager::FindFunc(unsigned int a2) {
 
 
 // address=[0x160dff0]
-// Decompiled from int __thiscall CScriptManager::RegisterFunction(CScriptManager *this)
+// Decompiled from void __thiscall CScriptManager::RegisterFunction(CScriptManager *this)
 void  CScriptManager::RegisterFunction(void) {
   
-  int result; // eax
-  unsigned int Param; // [esp+4h] [ebp-8h]
+  int Param; // [esp+4h] [ebp-8h]
 
-  if ( !*((_DWORD *)this + 1) && BBSupportDbgReport(2, "Script\\ScriptManager.cpp", 148, "m_pScriptEnv != 0") == 1 )
+  if ( !this->m_pScriptEnv && BBSupportDbgReport(2, "Script\\ScriptManager.cpp", 148, "m_pScriptEnv != 0") == 1 )
     __debugbreak();
-  Param = CLua::GetParam(*((CLua **)this + 1), 1);
-  if ( *((_BYTE *)this + 268) )
+  Param = CLua::GetParam(this->m_pScriptEnv, 1);
+  if ( this->m_bAllowRegister )
   {
-    if ( CLua::IsFunction(*((void ***)this + 1), Param) )
+    if ( CLua::IsFunction(this->m_pScriptEnv, Param) )
     {
       if ( CScriptManager::FindFunc(this, Param) == -1 )
       {
-        if ( *((int *)this + 2) < 64 )
+        if ( this->m_iNumberOfRegisteredFunctions < 64 )
         {
-          *((_DWORD *)this + *((_DWORD *)this + 2) + 3) = CLua::Lock(*((void ***)this + 1), Param);
-          result = *((_DWORD *)this + 2) + 1;
-          *((_DWORD *)this + 2) = result;
+          this->m_pFunctionLock[this->m_iNumberOfRegisteredFunctions++] = CLua::Lock(this->m_pScriptEnv, Param);
         }
-        else
+        else if ( BBSupportDbgReport(
+                    1,
+                    "Script\\ScriptManager.cpp",
+                    166,
+                    "CScriptManager::RegisterFunction(): Too many registered functions!") == 1 )
         {
-          result = BBSupportDbgReport(
-                     1,
-                     "Script\\ScriptManager.cpp",
-                     166,
-                     "CScriptManager::RegisterFunction(): Too many registered functions!");
-          if ( result == 1 )
-            __debugbreak();
-        }
-      }
-      else
-      {
-        result = BBSupportDbgReport(
-                   1,
-                   "Script\\ScriptManager.cpp",
-                   162,
-                   "CScriptManager::RegisterFunction(): Function already registered!");
-        if ( result == 1 )
           __debugbreak();
+        }
+      }
+      else if ( BBSupportDbgReport(
+                  1,
+                  "Script\\ScriptManager.cpp",
+                  162,
+                  "CScriptManager::RegisterFunction(): Function already registered!") == 1 )
+      {
+        __debugbreak();
       }
     }
-    else
+    else if ( BBSupportDbgReport(
+                1,
+                "Script\\ScriptManager.cpp",
+                158,
+                "CScriptManager::RegisterFunction(): Parameter not a function!") == 1 )
     {
-      if ( BBSupportDbgReport(
-             1,
-             "Script\\ScriptManager.cpp",
-             158,
-             "CScriptManager::RegisterFunction(): Parameter not a function!") == 1 )
-        __debugbreak();
-      return 0;
+      __debugbreak();
     }
   }
-  else
+  else if ( BBSupportDbgReportF(
+              1,
+              "Script\\ScriptManager.cpp",
+              154,
+              "CScriptManager::RegisterFunction(): Illegal call to %s (must only be used in register_functions)!",
+              "reg_func") == 1 )
   {
-    result = BBSupportDbgReportF(
-               1,
-               "Script\\ScriptManager.cpp",
-               154,
-               "CScriptManager::RegisterFunction(): Illegal call to %s (must only be used in register_functions)!",
-               (const char *)&dword_381E474[1]);
-    if ( result == 1 )
-      __debugbreak();
+    __debugbreak();
   }
-  return result;
 }
 
 
@@ -253,7 +237,7 @@ void  CScriptManager::RegisterFunction(void) {
 void __cdecl CScriptManager::LuaRegisterFunction(void) {
   
   if ( CScriptManager::m_pScriptManager )
-    return CScriptManager::RegisterFunction((CScriptManager *)CScriptManager::m_pScriptManager);
+    return CScriptManager::RegisterFunction(CScriptManager::m_pScriptManager);
   if ( BBSupportDbgReport(
          1,
          "Script\\ScriptManager.cpp",
