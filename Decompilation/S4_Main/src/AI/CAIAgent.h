@@ -26,6 +26,8 @@ public:
     // address=[0x12ff000]
     virtual void Save(class IS4Chunk &a2);
 
+    virtual unsigned int Execute(unsigned int a2, unsigned int a3) = 0;
+
     // address=[0x12ff9c0]
     void UpdateScheduleTime(unsigned int a2);
 
@@ -36,8 +38,8 @@ public:
 public:
     DWORD               m_uScheduleTime;
     DWORD               m_uDefaultExecutionDelay;
-    DWORD               dwordC;
-    DWORD               dword10;
+    DWORD               dwordC; // Dont know...
+    DWORD               dword10; // Maybe priority?
     class CAIScheduler *m_pScheduler;
     CAIAgent *          m_pPrevAgent;
     CAIAgent *          m_pNextAgent;
