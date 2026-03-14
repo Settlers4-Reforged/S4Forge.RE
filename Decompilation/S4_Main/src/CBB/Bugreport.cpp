@@ -47,7 +47,6 @@ std::wstring __cdecl Bugreport::BuildTraceFilePath(std::wstring const &a2)
 {
     std::wstring BugReportsDirectoryPath; // [esp+4h] [ebp-84h]
     std::wstring v5;                      // [esp+5Ch] [ebp-2Ch] BYREF
-    int v6;                               // [esp+84h] [ebp-4h]
 
     if (a2.empty())
     {
