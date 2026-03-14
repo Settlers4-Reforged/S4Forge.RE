@@ -43,16 +43,12 @@ void  CAIRegion::Clear(void) {
 
 
 // address=[0x1311ca0]
-// Decompiled from int __thiscall CAIRegion::DefineRegion(CAIRegion *this, int a2, int a3, int a4)
+// Decompiled from void __thiscall CAIRegion::DefineRegion(CAIRegion *this, int a2, int a3, int a4)
 void  CAIRegion::DefineRegion(int a2, int a3, int a4) {
   
-  int result; // eax
-
   *(_DWORD *)this = a2;
-  result = a3;
   *((_DWORD *)this + 1) = a3;
   *((_DWORD *)this + 2) = a4;
-  return result;
 }
 
 

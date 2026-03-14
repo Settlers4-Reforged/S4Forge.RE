@@ -188,7 +188,7 @@ bool  CAIDarkTribeSectorAI::IsNormalPlayerSector(void)const {
 
 
 // address=[0x1321d50]
-// Decompiled from std::bad_function_call *__thiscall CAIDarkTribeSectorAI::CAIDarkTribeSectorAI(  std::bad_function_call *this,  pairNode *a2,  int a3)
+// Decompiled from CAIDarkTribeSectorAI *__thiscall CAIDarkTribeSectorAI::CAIDarkTribeSectorAI(  CAIDarkTribeSectorAI *this,  pairNode *a2,  int a3)
  CAIDarkTribeSectorAI::CAIDarkTribeSectorAI(class CAIPlayerAI & a2, int a3) {
   
   struct IAIDarkTribeEcoAI *EcoAI; // eax
@@ -225,14 +225,14 @@ bool  CAIDarkTribeSectorAI::IsNormalPlayerSector(void)const {
   {
     __debugbreak();
   }
-  CAIDarkTribeSectorAI::AttachAgentEx(v6, (std::bad_function_call *)((char *)v6 + 412), 0x64u, 0x100u, 8u);
-  CAIDarkTribeSectorAI::AttachAgentEx(v6, (std::bad_function_call *)((char *)v6 + 332), 0x64u, 0x100u, 8u);
-  CAIDarkTribeSectorAI::AttachAgentEx(v6, (std::bad_function_call *)((char *)v6 + 452), 0x64u, 0x100u, 8u);
-  CAIDarkTribeSectorAI::AttachAgentEx(v6, (std::bad_function_call *)((char *)v6 + 492), 0x64u, 0x100u, 8u);
-  CAIDarkTribeSectorAI::AttachAgentEx(v6, (std::bad_function_call *)((char *)v6 + 532), 0x64u, 0x100u, 8u);
-  CAIDarkTribeSectorAI::AttachAgentEx(v6, (std::bad_function_call *)((char *)v6 + 372), 0x64u, 0x100u, 8u);
-  CAIDarkTribeSectorAI::AttachAgentEx(v6, (std::bad_function_call *)((char *)v6 + 264), 0x64u, 0x100u, 8u);
-  CAIDarkTribeSectorAI::AttachAgentEx(v6, (std::bad_function_call *)((char *)v6 + 576), 0x64u, 0x100u, 8u);
+  CAIDarkTribeSectorAI::AttachAgentEx(v6, (struct CAIDarkTribeSectorAgent *)((char *)v6 + 412), 100, 256, 8);
+  CAIDarkTribeSectorAI::AttachAgentEx(v6, (struct CAIDarkTribeSectorAgent *)((char *)v6 + 332), 100, 256, 8);
+  CAIDarkTribeSectorAI::AttachAgentEx(v6, (struct CAIDarkTribeSectorAgent *)((char *)v6 + 452), 100, 256, 8);
+  CAIDarkTribeSectorAI::AttachAgentEx(v6, (struct CAIDarkTribeSectorAgent *)((char *)v6 + 492), 100, 256, 8);
+  CAIDarkTribeSectorAI::AttachAgentEx(v6, (struct CAIDarkTribeSectorAgent *)((char *)v6 + 532), 100, 256, 8);
+  CAIDarkTribeSectorAI::AttachAgentEx(v6, (struct CAIDarkTribeSectorAgent *)((char *)v6 + 372), 100, 256, 8);
+  CAIDarkTribeSectorAI::AttachAgentEx(v6, (struct CAIDarkTribeSectorAgent *)((char *)v6 + 264), 100, 256, 8);
+  CAIDarkTribeSectorAI::AttachAgentEx(v6, (struct CAIDarkTribeSectorAgent *)((char *)v6 + 576), 100, 256, 8);
   *((_DWORD *)v6 + 11) = (char *)v6 + 620;
   *((_DWORD *)v6 + 15) = (char *)v6 + 700;
   *((_DWORD *)v6 + 10) = (char *)v6 + 940;
@@ -342,7 +342,7 @@ bool  CAIDarkTribeSectorAI::ProcessEvent(class CAIEvent const * a2) {
 
 
 // address=[0x1322a00]
-// Decompiled from void __thiscall CAIDarkTribeSectorAI::AttachAgentEx(  CAIDarkTribeSectorAI *this,  struct CAIDarkTribeSectorAgent *a2,  unsigned int a3,  unsigned int a4,  unsigned int a5)
+// Decompiled from void __thiscall CAIDarkTribeSectorAI::AttachAgentEx(  CAIDarkTribeSectorAI *this,  struct CAIDarkTribeSectorAgent *a2,  int a3,  int a4,  int a5)
 void  CAIDarkTribeSectorAI::AttachAgentEx(class CAIDarkTribeSectorAgent & a2, unsigned int a3, unsigned int a4, unsigned int a5) {
   
   CAIDarkTribeSectorAgent::AttachSectorAI(a2, this);

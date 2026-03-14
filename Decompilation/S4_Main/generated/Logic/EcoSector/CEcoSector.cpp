@@ -152,7 +152,7 @@ void  CEcoSector::SetSettlerOffer(int a2, int a3) {
     return (_DWORD *)BBSupportTracePrintF(
                        0,
                        "CEcoSector::SetSettlerOffer(): offer %s nr %u to ecosector %u list - now %u entries",
-                       (&off_36A114C)[2 * a2],
+                       (&MEMORY[0x36A114C])[2 * a2],
                        a3,
                        this[8],
                        v6);
@@ -250,7 +250,7 @@ void  CEcoSector::GetSettlerOutOfOffer(int a2) {
   return BBSupportTracePrintF(
            0,
            "CEcoSector::GetSettlerOutOfOffer(): get %s nr %u out of ecosector %u list - still %u entries",
-           (&off_36A114C)[2 * v9],
+           (&MEMORY[0x36A114C])[2 * v9],
            a2,
            v10,
            v14);

@@ -674,15 +674,15 @@ class CBuilding *  CBuildingMgr::GetBuilding(int a2, int a3)const {
 
 
 // address=[0x14f51a0]
-// Decompiled from int __thiscall CBuildingMgr::GetNumberOfBuildings(CBuildingMgr *this, int a2, int a3, unsigned int _iPeriod)
-int  CBuildingMgr::GetNumberOfBuildings(int a2, int a3, int _iPeriod)const {
+// Decompiled from int __thiscall CBuildingMgr::GetNumberOfBuildings(  CBuildingMgr *this,  int _iOwnerId,  S4_BUILDING_ENUM _iBuildingType,  unsigned int _iPeriod)
+int  CBuildingMgr::GetNumberOfBuildings(int _iOwnerId, int _iBuildingType, int _iPeriod)const {
   
-  if ( (a2 <= 0 || a2 >= 9)
+  if ( (_iOwnerId <= 0 || _iOwnerId >= 9)
     && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1287, "_iOwnerId>0 && _iOwnerId<PLAYER_MAX") == 1 )
   {
     __debugbreak();
   }
-  if ( (a3 <= 0 || a3 >= 83)
+  if ( (_iBuildingType <= 0 || _iBuildingType >= 0x53)
     && BBSupportDbgReport(
          2,
          "MapObjects\\Building\\BuildingMgr.cpp",
@@ -703,11 +703,12 @@ int  CBuildingMgr::GetNumberOfBuildings(int a2, int a3, int _iPeriod)const {
   switch ( _iPeriod )
   {
     case 0u:
-      return *((_DWORD *)this + 166 * a2 + 2 * a3 + 754);
+      return *((_DWORD *)this + 166 * _iOwnerId + 2 * _iBuildingType + 754);
     case 1u:
-      return *((_DWORD *)this + 166 * a2 + 2 * a3 + 755);
+      return *((_DWORD *)this + 166 * _iOwnerId + 2 * _iBuildingType + 755);
     case 2u:
-      return *((_DWORD *)this + 166 * a2 + 2 * a3 + 755) + *((_DWORD *)this + 166 * a2 + 2 * a3 + 754);
+      return *((_DWORD *)this + 166 * _iOwnerId + 2 * _iBuildingType + 755)
+           + *((_DWORD *)this + 166 * _iOwnerId + 2 * _iBuildingType + 754);
   }
   return 0;
 }

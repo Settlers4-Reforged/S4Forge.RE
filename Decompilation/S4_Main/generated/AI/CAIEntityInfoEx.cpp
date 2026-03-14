@@ -3,11 +3,11 @@
 // Definitions for class CAIEntityInfoEx
 
 // address=[0x130acc0]
-// Decompiled from _BYTE *__thiscall CAIEntityInfoEx::CAIEntityInfoEx(_BYTE *this, char a2)
+// Decompiled from CAIEntityInfoEx *__thiscall CAIEntityInfoEx::CAIEntityInfoEx(CAIEntityInfoEx *this, char a2)
  CAIEntityInfoEx::CAIEntityInfoEx(enum T_AI_ENTITY_INFO_EX_CLASS a2) {
   
-  *(_DWORD *)this = &CAIEntityInfoEx::_vftable_;
-  this[4] = a2;
+  this->vftable = (CAIEntityInfoEx_vtbl *)&CAIEntityInfoEx::_vftable_;
+  this->m_bClass = a2;
   return this;
 }
 

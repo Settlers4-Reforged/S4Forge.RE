@@ -90,12 +90,12 @@ bool  CLua::CheckParam(int a2) {
 
 
 // address=[0x1602310]
-// Decompiled from int __thiscall CLua::CreateTable(CLua *this, char *Str)
-void  CLua::CreateTable(char const * Str) {
+// Decompiled from void __thiscall CLua::CreateTable(CLua *this, char *_pName)
+void  CLua::CreateTable(char const * _pName) {
   
   int v2; // eax
 
-  if ( !Str
+  if ( !_pName
     && BBSupportDbgReport(
          2,
          "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\script\\Lua.h",
@@ -107,7 +107,7 @@ void  CLua::CreateTable(char const * Str) {
   lua_state = this->state;
   v2 = lua_createtable();
   lua_pushobject(v2);
-  return j__lua_setglobal(Str);
+  j__lua_setglobal(_pName);
 }
 
 
@@ -220,12 +220,12 @@ char *  CLua::GetString(int a2) {
 
 
 // address=[0x1602660]
-// Decompiled from bool __thiscall CLua::IsNil(CLua *this, char *Str)
+// Decompiled from bool __thiscall CLua::IsNil(void **this, char *Str)
 bool  CLua::IsNil(char const * Str) {
   
   int v3; // [esp+0h] [ebp-Ch]
 
-  lua_state = this->state;
+  lua_state = *this;
   v3 = lua_getglobal(Str);
   return lua_isnil(v3) != 0;
 }

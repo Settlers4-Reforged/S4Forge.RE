@@ -27,7 +27,7 @@ public:
     static int __cdecl NumberOfPlayers(void);
 
     // address=[0x14477c0]
-    static class CPlayerGameData & __cdecl PlayerGameData(int a1);
+    static class CPlayerGameData & __cdecl PlayerGameData(int _iPlayerId);
 
     // address=[0x144fed0]
     static std::wstring __cdecl Name(int a1);

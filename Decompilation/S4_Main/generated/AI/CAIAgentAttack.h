@@ -66,6 +66,19 @@ protected:
     // address=[0x13008d0]
     bool  OrderSquadsToSneakUpPosition(int a2);
 
+    // Type information members
+public:
+    int m_uU1;
+    int m_uU2;
+    int m_uU3;
+    int m_uU4;
+    int m_uU5;
+    int m_uU6;
+    int m_uU7;
+    int m_uU8;
+    int m_uU9;
+    int m_uU10;
+
 };
 
 

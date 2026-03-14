@@ -234,54 +234,56 @@ void  CGameScriptManager::NewGame(char const * Src, unsigned int Size) {
 
 
 // address=[0x15ff1f0]
-// Decompiled from void __thiscall CGameScriptManager::NewGameEx(  CGameScriptManager *this,  _BYTE *Src,  size_t Size,  wchar_t *Source,  char a5)
+// Decompiled from void __thiscall CGameScriptManager::NewGameEx(  CGameScriptManager *this,  const char *Src,  size_t Size,  wchar_t *Source,  char a5)
 void  CGameScriptManager::NewGameEx(char const * Src, unsigned int Size, wchar_t const * Source, bool a5) {
   
   wchar_t *v5; // eax
   wchar_t *v6; // eax
   int v7; // [esp+0h] [ebp-6BCh] BYREF
-  struct IScriptFile v8[5]; // [esp+10h] [ebp-6ACh] BYREF
-  std::wstring *v9; // [esp+24h] [ebp-698h]
-  IScriptFile_vtbl *v10; // [esp+28h] [ebp-694h]
-  std::wstring *v11; // [esp+2Ch] [ebp-690h]
-  wchar_t *v12; // [esp+30h] [ebp-68Ch]
-  wchar_t *v13; // [esp+34h] [ebp-688h]
+  CStdScriptFile v8; // [esp+10h] [ebp-6ACh] BYREF
+  CStdScriptFile *v9; // [esp+1Ch] [ebp-6A0h]
+  void *v10; // [esp+20h] [ebp-69Ch]
+  std::wstring *v11; // [esp+24h] [ebp-698h]
+  void *v12; // [esp+28h] [ebp-694h]
+  std::wstring *v13; // [esp+2Ch] [ebp-690h]
+  wchar_t *v14; // [esp+30h] [ebp-68Ch]
+  wchar_t *v15; // [esp+34h] [ebp-688h]
   size_t j; // [esp+3Ch] [ebp-680h]
-  signed int v16; // [esp+40h] [ebp-67Ch]
-  wchar_t *v17; // [esp+44h] [ebp-678h]
-  _BYTE *v18; // [esp+48h] [ebp-674h]
-  char v19; // [esp+4Fh] [ebp-66Dh]
+  signed int v18; // [esp+40h] [ebp-67Ch]
+  wchar_t *FileName; // [esp+44h] [ebp-678h]
+  unsigned __int8 *v20; // [esp+48h] [ebp-674h]
+  char v21; // [esp+4Fh] [ebp-66Dh]
   size_t i; // [esp+50h] [ebp-66Ch]
-  std::wstring v21; // [esp+54h] [ebp-668h] BYREF
-  std::wstring v22; // [esp+70h] [ebp-64Ch] BYREF
-  std::wstring v23; // [esp+8Ch] [ebp-630h] BYREF
+  std::wstring v23; // [esp+54h] [ebp-668h] BYREF
+  std::wstring v24; // [esp+70h] [ebp-64Ch] BYREF
+  std::wstring v25; // [esp+8Ch] [ebp-630h] BYREF
   wchar_t Destination[512]; // [esp+A8h] [ebp-614h] BYREF
   wchar_t String[256]; // [esp+4A8h] [ebp-214h] BYREF
-  int *v26; // [esp+6ACh] [ebp-10h]
-  int v27; // [esp+6B8h] [ebp-4h]
+  int *v28; // [esp+6ACh] [ebp-10h]
+  int v29; // [esp+6B8h] [ebp-4h]
 
-  v26 = &v7;
+  v28 = &v7;
   memset(String, 0, sizeof(String));
   wcscpy(String, L"Script\\");
   if ( Src && *Src && Size >= 2 )
   {
-    v18 = Src;
-    for ( i = Size; i && (unsigned __int8)v18[i - 1] <= 0x20u; --i )
+    v20 = (unsigned __int8 *)Src;
+    for ( i = Size; i && v20[i - 1] <= (unsigned int)' '; --i )
       ;
-    while ( i && (unsigned __int8)*v18 <= 0x20u )
+    while ( i && *v20 <= (unsigned int)' ' )
     {
-      ++v18;
+      ++v20;
       --i;
     }
-    if ( i > 2 && *v18 == 36 && v18[i - 1] == 36 )
+    if ( i > 2 && *v20 == '$' && v20[i - 1] == '$' )
     {
-      ++v18;
+      ++v20;
       i -= 2;
-      if ( i < 0x40 && v18[i - 1] == 92 )
+      if ( i < 64 && v20[i - 1] == '\\' )
       {
-        v13 = &String[wcslen(String)];
+        v15 = &String[wcslen(String)];
         for ( j = 0; j < i; ++j )
-          v13[j] = (char)v18[j];
+          v15[j] = (char)v20[j];
       }
       Src = 0;
       Size = 0;
@@ -289,7 +291,7 @@ void  CGameScriptManager::NewGameEx(char const * Src, unsigned int Size, wchar_t
   }
   if ( !a5 && Src )
     goto LABEL_22;
-  v19 = 0;
+  v21 = 0;
   if ( Source )
   {
     if ( *Source )
@@ -297,50 +299,50 @@ void  CGameScriptManager::NewGameEx(char const * Src, unsigned int Size, wchar_t
       if ( wcslen(Source) < 0x400 )
       {
         wcscpy(Destination, Source);
-        v17 = (wchar_t *)sub_1601260(Destination);
-        if ( v17 )
+        FileName = GetFileNameFromPath(Destination);
+        if ( FileName )
         {
-          v16 = wcslen(v17);
-          if ( v16 > 4 && (!wcsicmp(L".edm", &v17[v16 - 4]) || !wcsicmp(L".map", &v17[v16 - 4])) )
+          v18 = wcslen(FileName);
+          if ( v18 > 4 && (!wcsicmp(L".edm", &FileName[v18 - 4]) || !wcsicmp(L".map", &FileName[v18 - 4])) )
           {
-            v17[v16 - 3] = 116;
-            v17[v16 - 2] = 120;
-            v17[v16 - 1] = 116;
-            v12 = v17;
-            v11 = (std::wstring *)std::wstring::wstring(&v21, v17);
-            v9 = v11;
-            v27 = 0;
-            v10 = (IScriptFile_vtbl *)std::wstring::wstring(&v22, String);
-            v8[4].__vftable = v10;
-            LOBYTE(v27) = 1;
-            std::operator+<wchar_t>(&v23, v10, v9);
-            LOBYTE(v27) = 3;
-            std::wstring::~wstring(&v22);
-            LOBYTE(v27) = 4;
-            std::wstring::~wstring(&v21);
-            LOBYTE(v27) = 5;
-            v5 = std::wstring::c_str(&v23);
-            v8[3].__vftable = (IScriptFile_vtbl *)CStdScriptFile::CStdScriptFile((CStdScriptFile *)v8, v5);
-            LOBYTE(v27) = 6;
-            v6 = std::wstring::c_str(&v23);
-            ScriptTracePrintF(1u, "SCRIPT: \"%s\" loaded.", (const char *)v6);
-            v19 = 1;
-            CGameScriptManager::NewGame(this, v8);
-            LOBYTE(v27) = 5;
-            CStdScriptFile::~CStdScriptFile((void **)&v8[0].__vftable);
-            v27 = -1;
+            FileName[v18 - 3] = 't';
+            FileName[v18 - 2] = 'x';
+            FileName[v18 - 1] = 't';
+            v14 = FileName;
+            v13 = (std::wstring *)std::wstring::wstring(&v23, FileName);
+            v11 = v13;
+            v29 = 0;
+            v12 = (void *)std::wstring::wstring(&v24, String);
+            v10 = v12;
+            LOBYTE(v29) = 1;
+            std::operator+<wchar_t>(&v25, v12, v11);
+            LOBYTE(v29) = 3;
+            std::wstring::~wstring(&v24);
+            LOBYTE(v29) = 4;
             std::wstring::~wstring(&v23);
+            LOBYTE(v29) = 5;
+            v5 = std::wstring::c_str(&v25);
+            v9 = CStdScriptFile::CStdScriptFile(&v8, v5);
+            LOBYTE(v29) = 6;
+            v6 = std::wstring::c_str(&v25);
+            ScriptTracePrintF(1u, "SCRIPT: \"%s\" loaded.", (const char *)v6);
+            v21 = 1;
+            CGameScriptManager::NewGame(this, &v8);
+            LOBYTE(v29) = 5;
+            CStdScriptFile::~CStdScriptFile(&v8);
+            v29 = -1;
+            std::wstring::~wstring(&v25);
           }
         }
       }
     }
   }
-  if ( !v19 )
+  if ( !v21 )
   {
     if ( Src )
     {
 LABEL_22:
-      CGameScriptManager::NewGame(Src, Size);
+      CGameScriptManager::NewGame((void *)Src, Size);
       return;
     }
     CGameScriptManager::NewGame(this);

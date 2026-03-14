@@ -86,10 +86,10 @@ int __cdecl CPlayerManager::NumberOfPlayers(void) {
 
 
 // address=[0x14477c0]
-// Decompiled from char *__cdecl CPlayerManager::PlayerGameData(int a1)
-class CPlayerGameData & __cdecl CPlayerManager::PlayerGameData(int a1) {
+// Decompiled from CPlayerGameData *__cdecl CPlayerManager::PlayerGameData(int _iPlayerId)
+class CPlayerGameData & __cdecl CPlayerManager::PlayerGameData(int _iPlayerId) {
   
-  if ( !CPlayerManager::ValidUsedPlayerId(a1)
+  if ( !CPlayerManager::ValidUsedPlayerId(_iPlayerId)
     && BBSupportDbgReport(
          2,
          "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Main\\States\\..\\..\\Main\\PlayerManager.h",
@@ -98,7 +98,7 @@ class CPlayerGameData & __cdecl CPlayerManager::PlayerGameData(int a1) {
   {
     __debugbreak();
   }
-  return (char *)&CPlayerManager::m_cPlayerGameData + 152 * a1;
+  return (CPlayerGameData *)((char *)&CPlayerManager::m_cPlayerGameData + 152 * _iPlayerId);
 }
 
 

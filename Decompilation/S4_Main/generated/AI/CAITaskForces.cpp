@@ -11,15 +11,12 @@ enum T_AI_TASK_FORCE_CLASS __cdecl CAITaskForces::TaskForceClass(enum T_AI_TASK_
 
 
 // address=[0x1328e40]
-// Decompiled from void *CAITaskForces::Init()
+// Decompiled from void CAITaskForces::Init()
 void __cdecl CAITaskForces::Init(void) {
   
-  void *result; // eax
-
   CAITaskForces::Done();
-  result = memset(&dword_3ECCD28, 0, 0x208u);
+  memset(&s_sTaskForcesData, 0, 0x208u);
   dword_3ECCD24 = 1;
-  return result;
 }
 
 
@@ -27,11 +24,11 @@ void __cdecl CAITaskForces::Init(void) {
 // Decompiled from void CAITaskForces::Done()
 void __cdecl CAITaskForces::Done(void) {
   
-  if ( dword_3ECCD24 )
+  if ( dword_3ECCD24.m_iTotalNumberOfTaskForces )
   {
-    dword_3ECCD24 = 0;
-    while ( dword_3ECCD30 )
-      (*(void (__thiscall **)(int, int))(*(_DWORD *)dword_3ECCD30 + 8))(dword_3ECCD30, 1);
+    dword_3ECCD24.m_iTotalNumberOfTaskForces = 0;
+    while ( dword_3ECCD24.m_pCurrentTaskForce )
+      dword_3ECCD24.m_pCurrentTaskForce->dtor(dword_3ECCD24.m_pCurrentTaskForce, 1);
   }
 }
 
@@ -47,20 +44,20 @@ void __cdecl CAITaskForces::Execute(void) {
   int v4; // [esp+Ch] [ebp-8h]
   CAITaskForce *v5; // [esp+10h] [ebp-4h]
 
-  v3 = dword_3ECCD28 / 8;
-  v4 = dword_3ECCD2C + dword_3ECCD28 % 8;
+  v3 = s_sTaskForcesData / 8;
+  v4 = MEMORY[0x3ECCD2C] + s_sTaskForcesData % 8;
   if ( v4 >= 8 )
   {
     ++v3;
     v4 -= 8;
   }
   result = v4;
-  dword_3ECCD2C = v4;
+  MEMORY[0x3ECCD2C] = v4;
   if ( v3 <= 0 )
     return result;
-  v5 = (CAITaskForce *)dword_3ECCD34;
-  if ( !dword_3ECCD34 )
-    v5 = (CAITaskForce *)dword_3ECCD30;
+  v5 = (CAITaskForce *)MEMORY[0x3ECCD34];
+  if ( !MEMORY[0x3ECCD34] )
+    v5 = (CAITaskForce *)MEMORY[0x3ECCD30];
   if ( v5 )
   {
     for ( i = 0; i < v3; ++i )
@@ -71,12 +68,12 @@ void __cdecl CAITaskForces::Execute(void) {
       v5 = v1;
       if ( !v1 )
       {
-        v5 = (CAITaskForce *)dword_3ECCD30;
+        v5 = (CAITaskForce *)MEMORY[0x3ECCD30];
         break;
       }
     }
     result = (int)v5;
-    dword_3ECCD34 = (int)v5;
+    MEMORY[0x3ECCD34] = (int)v5;
   }
   else
   {
@@ -96,8 +93,8 @@ void __cdecl CAITaskForces::Execute(void) {
 // Decompiled from void __cdecl CAITaskForces::RemoveEntityFromTaskForce(int a1)
 void __cdecl CAITaskForces::RemoveEntityFromTaskForce(int a1) {
   
-  int v1; // [esp+0h] [ebp-8h]
-  int EntityInfo; // [esp+4h] [ebp-4h]
+  struct CAITaskForce *v1; // [esp+0h] [ebp-8h]
+  CAIEntityInfo *EntityInfo; // [esp+4h] [ebp-4h]
 
   if ( a1 > 0 )
   {
@@ -106,7 +103,7 @@ void __cdecl CAITaskForces::RemoveEntityFromTaskForce(int a1) {
     {
       v1 = CAIEntityInfo::TaskForce(EntityInfo);
       if ( v1 )
-        (*(void (__thiscall **)(int, int))(*(_DWORD *)v1 + 24))(v1, EntityInfo);
+        v1->RemoveEntity(v1, EntityInfo);
     }
   }
 }
@@ -250,15 +247,15 @@ LABEL_45:
 void  CAITaskForces::DbgPrint(void) {
   
   int v1; // eax
-  int v2; // [esp+4h] [ebp-8h]
+  CAITaskForce *m_pFirstTaskForce; // [esp+4h] [ebp-8h]
   int v3; // [esp+8h] [ebp-4h]
 
-  v2 = dword_3ECCD30;
+  m_pFirstTaskForce = s_sTaskForcesData.m_pFirstTaskForce;
   v3 = 0;
-  while ( v2 )
+  while ( m_pFirstTaskForce )
   {
     ++v3;
-    v2 = *(_DWORD *)(v2 + 28);
+    m_pFirstTaskForce = (CAITaskForce *)m_pFirstTaskForce->m_pFirstTaskForce;
   }
   if ( v3 == CAITaskForces::TotalNumberOfTaskForces() )
     return CTrace::Print("%i task forces.", v3);
@@ -271,7 +268,7 @@ void  CAITaskForces::DbgPrint(void) {
 // Decompiled from int CAITaskForces::TotalNumberOfTaskForces()
 int __cdecl CAITaskForces::TotalNumberOfTaskForces(void) {
   
-  return dword_3ECCD28;
+  return s_sTaskForcesData.m_iTotalNumberOfTaskForces;
 }
 
 
@@ -284,16 +281,16 @@ int __cdecl CAITaskForces::NumberOfTaskForces(int a1, int a2) {
 
 
 // address=[0x1329490]
-// Decompiled from int __cdecl CAITaskForces::AddTaskForce(struct CAITaskForce *a1)
-void __cdecl CAITaskForces::AddTaskForce(class CAITaskForce * a1) {
+// Decompiled from void __cdecl CAITaskForces::AddTaskForce(struct CAITaskForce *_pTaskForce)
+void __cdecl CAITaskForces::AddTaskForce(class CAITaskForce * _pTaskForce) {
   
-  if ( !a1 && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 1463, "_pTaskForce != 0") == 1 )
+  if ( !_pTaskForce && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 1463, "_pTaskForce != 0") == 1 )
     __debugbreak();
-  *((_DWORD *)a1 + 6) = 0;
-  *((_DWORD *)a1 + 7) = dword_3ECCD30;
-  if ( dword_3ECCD30 )
+  _pTaskForce->m_pPrevTaskForce = 0;
+  _pTaskForce->m_pFirstTaskForce = s_sTaskForcesData.m_pFirstTaskForce;
+  if ( s_sTaskForcesData.m_pFirstTaskForce )
   {
-    if ( *(_DWORD *)(dword_3ECCD30 + 24)
+    if ( s_sTaskForcesData.m_pFirstTaskForce->m_pPrevTaskForce
       && BBSupportDbgReport(
            2,
            "AI\\AI_TaskForces.cpp",
@@ -302,93 +299,84 @@ void __cdecl CAITaskForces::AddTaskForce(class CAITaskForce * a1) {
     {
       __debugbreak();
     }
-    *(_DWORD *)(dword_3ECCD30 + 24) = a1;
+    s_sTaskForcesData.m_pFirstTaskForce->m_pPrevTaskForce = _pTaskForce;
   }
   else
   {
-    if ( dword_3ECCD28
+    if ( s_sTaskForcesData.m_iTotalNumberOfTaskForces
       && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 1476, "s_sTaskForcesData.m_iTotalNumberOfTaskForces == 0") == 1 )
     {
       __debugbreak();
     }
-    if ( dword_3ECCD34
+    if ( s_sTaskForcesData.m_pCurrentTaskForce
       && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 1477, "s_sTaskForcesData.m_pCurrentTaskForce == 0") == 1 )
     {
       __debugbreak();
     }
-    dword_3ECCD34 = (int)a1;
+    s_sTaskForcesData.m_pCurrentTaskForce = _pTaskForce;
   }
-  dword_3ECCD30 = (int)a1;
-  return ++dword_3ECCD28;
+  s_sTaskForcesData.m_pFirstTaskForce = _pTaskForce;
+  ++s_sTaskForcesData.m_iTotalNumberOfTaskForces;
 }
 
 
 // address=[0x1329590]
-// Decompiled from struct CAITaskForce *__cdecl CAITaskForces::RemoveTaskForce(struct CAITaskForce *a1)
-void __cdecl CAITaskForces::RemoveTaskForce(class CAITaskForce * a1) {
+// Decompiled from void __cdecl CAITaskForces::RemoveTaskForce(struct CAITaskForce *_pTaskForce)
+void __cdecl CAITaskForces::RemoveTaskForce(class CAITaskForce * _pTaskForce) {
   
-  struct CAITaskForce *result; // eax
-
-  if ( !a1 && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 1494, "_pTaskForce != 0") == 1 )
+  if ( !_pTaskForce && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 1494, "_pTaskForce != 0") == 1 )
     __debugbreak();
-  result = 0;
-  if ( !a1 )
-    return result;
-  if ( *((_DWORD *)a1 + 6) )
+  if ( _pTaskForce )
   {
-    if ( *(struct CAITaskForce **)(*((_DWORD *)a1 + 6) + 28) != a1
-      && BBSupportDbgReport(
-           2,
-           "AI\\AI_TaskForces.cpp",
-           1500,
-           "_pTaskForce->m_pPrevTaskForce->m_pNextTaskForce == _pTaskForce") == 1 )
+    if ( _pTaskForce->m_pPrevTaskForce )
+    {
+      if ( _pTaskForce->m_pPrevTaskForce->m_pFirstTaskForce != _pTaskForce
+        && BBSupportDbgReport(
+             2,
+             "AI\\AI_TaskForces.cpp",
+             1500,
+             "_pTaskForce->m_pPrevTaskForce->m_pNextTaskForce == _pTaskForce") == 1 )
+      {
+        __debugbreak();
+      }
+      _pTaskForce->m_pPrevTaskForce->m_pFirstTaskForce = _pTaskForce->m_pFirstTaskForce;
+    }
+    else
+    {
+      if ( s_sTaskForcesData.m_pFirstTaskForce != _pTaskForce
+        && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 1506, "s_sTaskForcesData.m_pFirstTaskForce == _pTaskForce") == 1 )
+      {
+        __debugbreak();
+      }
+      s_sTaskForcesData.m_pFirstTaskForce = _pTaskForce->m_pFirstTaskForce;
+    }
+    if ( _pTaskForce->m_pFirstTaskForce )
+    {
+      if ( _pTaskForce->m_pFirstTaskForce->m_pPrevTaskForce != _pTaskForce
+        && BBSupportDbgReport(
+             2,
+             "AI\\AI_TaskForces.cpp",
+             1513,
+             "_pTaskForce->m_pNextTaskForce->m_pPrevTaskForce == _pTaskForce") == 1 )
+      {
+        __debugbreak();
+      }
+      _pTaskForce->m_pFirstTaskForce->m_pPrevTaskForce = _pTaskForce->m_pPrevTaskForce;
+    }
+    if ( s_sTaskForcesData.m_pCurrentTaskForce == _pTaskForce )
+      s_sTaskForcesData.m_pCurrentTaskForce = _pTaskForce->m_pFirstTaskForce;
+    if ( !s_sTaskForcesData.m_pCurrentTaskForce )
+      s_sTaskForcesData.m_pCurrentTaskForce = s_sTaskForcesData.m_pFirstTaskForce;
+    _pTaskForce->m_pPrevTaskForce = 0;
+    _pTaskForce->m_pFirstTaskForce = 0;
+    if ( s_sTaskForcesData.m_iTotalNumberOfTaskForces <= 0
+      && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 1531, "s_sTaskForcesData.m_iTotalNumberOfTaskForces > 0") == 1 )
     {
       __debugbreak();
     }
-    *(_DWORD *)(*((_DWORD *)a1 + 6) + 28) = *((_DWORD *)a1 + 7);
+    if ( s_sTaskForcesData.m_iTotalNumberOfTaskForces > 0 )
+      --s_sTaskForcesData.m_iTotalNumberOfTaskForces;
   }
-  else
-  {
-    if ( (struct CAITaskForce *)dword_3ECCD30 != a1
-      && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 1506, "s_sTaskForcesData.m_pFirstTaskForce == _pTaskForce") == 1 )
-    {
-      __debugbreak();
-    }
-    dword_3ECCD30 = *((_DWORD *)a1 + 7);
-  }
-  if ( *((_DWORD *)a1 + 7) )
-  {
-    if ( *(struct CAITaskForce **)(*((_DWORD *)a1 + 7) + 24) != a1
-      && BBSupportDbgReport(
-           2,
-           "AI\\AI_TaskForces.cpp",
-           1513,
-           "_pTaskForce->m_pNextTaskForce->m_pPrevTaskForce == _pTaskForce") == 1 )
-    {
-      __debugbreak();
-    }
-    *(_DWORD *)(*((_DWORD *)a1 + 7) + 24) = *((_DWORD *)a1 + 6);
-  }
-  if ( (struct CAITaskForce *)dword_3ECCD34 == a1 )
-    dword_3ECCD34 = *((_DWORD *)a1 + 7);
-  if ( !dword_3ECCD34 )
-    dword_3ECCD34 = dword_3ECCD30;
-  result = a1;
-  *((_DWORD *)a1 + 6) = 0;
-  *((_DWORD *)a1 + 7) = 0;
-  if ( dword_3ECCD28 <= 0 )
-  {
-    result = (struct CAITaskForce *)BBSupportDbgReport(
-                                      2,
-                                      "AI\\AI_TaskForces.cpp",
-                                      1531,
-                                      "s_sTaskForcesData.m_iTotalNumberOfTaskForces > 0");
-    if ( result == (struct CAITaskForce *)1 )
-      __debugbreak();
-  }
-  if ( dword_3ECCD28 > 0 )
-    return (struct CAITaskForce *)--dword_3ECCD28;
-  return result;
 }
 
 

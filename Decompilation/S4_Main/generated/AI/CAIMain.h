@@ -42,7 +42,7 @@ public:
     virtual void  PostAIEvent(int a2, int a3, int a4, int a5);
 
     // address=[0x1313410]
-    virtual void  DarkTribeIncreaseManaForNewManaSphere(int a2);
+    virtual void  DarkTribeIncreaseManaForNewManaSphere(int _iPlayerId);
 
     // address=[0x13134b0]
     virtual class CStaticConfigVarInt const *  DarkTribeGetProductionCostConfigVar(int a2)const;
@@ -64,6 +64,15 @@ public:
 
     // address=[0x1314050]
     static bool __cdecl IsRealPlayerId(unsigned int a1);
+
+    // Type information members
+public:
+    bool m_bInitialized;
+    DWORD m_uActiveAIsMask;
+    struct CAIPlayerAI *[9] m_pPlayerAIs;
+    CAIScheduler m_sAIScheduler;
+    CAIAgentEvaluation m_sAIAgentEvaluation;
+    _BYTE[40] gap_60;
 
 };
 

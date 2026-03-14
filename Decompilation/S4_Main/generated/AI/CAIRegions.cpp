@@ -43,20 +43,14 @@ void  CAIRegions::ClearRegion(int a2) {
 
 
 // address=[0x1311790]
-// Decompiled from int __thiscall CAIRegions::ClearAllRegions(CAIRegions *this)
+// Decompiled from void __thiscall CAIRegions::ClearAllRegions(CAIRegions *this)
 void  CAIRegions::ClearAllRegions(void) {
   
-  int result; // eax
   int i; // [esp+4h] [ebp-4h]
 
-  result = 0;
   *(_DWORD *)this = 0;
   for ( i = 0; i < 16; ++i )
-  {
     CAIRegion::Clear((CAIRegions *)((char *)this + 12 * i + 4));
-    result = i + 1;
-  }
-  return result;
 }
 
 

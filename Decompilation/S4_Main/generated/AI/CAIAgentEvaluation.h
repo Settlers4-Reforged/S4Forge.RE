@@ -17,6 +17,11 @@ public:
     // address=[0x1314030]
     void  Init(void);
 
+    // Type information members
+public:
+    int m_iCurrentPlayerId;
+    struct CAIPlayerEvaluations * m_pAIPlayerEvaluations;
+
 };
 
 

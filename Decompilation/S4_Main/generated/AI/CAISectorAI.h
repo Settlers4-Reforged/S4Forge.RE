@@ -51,7 +51,7 @@ public:
     virtual enum T_AI_PRESENT_REQUEST_RESULT  RequestDivinePresent(int a1, enum T_AI_PRESENT_REQUEST_PRIORITY a2);
 
     // address=[0x1320300]
-    static class CAISectorAI * __cdecl CreateNormalSectorAI(class CAIPlayerAI & a1, int a2);
+    static class CAISectorAI * __cdecl CreateNormalSectorAI(class CAIPlayerAI & _rPlayerAI, int a2);
 
     // address=[0x13203b0]
     static class CAISectorAI * __cdecl CreateDarkTribeSectorAI(class CAIPlayerAI & a1, int a2);

@@ -17,6 +17,10 @@ public:
     // address=[0x1311590]
     void  DbgPrint(void);
 
+    // Type information members
+public:
+    CAIPlayerEvaluation[9] m_sPlayerEvaluations;
+
 };
 
 

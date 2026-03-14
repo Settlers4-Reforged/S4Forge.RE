@@ -39954,7 +39954,7 @@ void __cdecl ScriptExportFunctions(class CLua & a1) {
 void __cdecl ScriptDefaultVictoryConditionCheck(void) {
   
   GameDefaultPlayersLostCheck();
-  return sub_16094C0(0, 0);
+  return GameEndAnnouncement(0, 0);
 }
 
 
@@ -39982,7 +39982,7 @@ void __cdecl ScriptEconomyModeVictoryConditionCheck(void) {
   int v17; // [esp+7Ch] [ebp-4h]
 
   GameDefaultPlayersLostCheck();
-  result = (unsigned __int8)sub_16094C0(0, 0);
+  result = (unsigned __int8)GameEndAnnouncement(0, 0);
   if ( (_BYTE)result )
     return result;
   TickCounter = (float)(unsigned int)CStateGame::GetTickCounter(g_pGame);

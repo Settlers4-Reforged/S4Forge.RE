@@ -3,52 +3,48 @@
 // Definitions for class CAIPlayerEvaluation
 
 // address=[0x1310d40]
-// Decompiled from CAIPlayerEvaluation *__thiscall CAIPlayerEvaluation::Clear(CAIPlayerEvaluation *this)
+// Decompiled from void __thiscall CAIPlayerEvaluation::Clear(CAIPlayerEvaluation *this)
 void  CAIPlayerEvaluation::Clear(void) {
   
-  CAIPlayerEvaluation *result; // eax
-
-  *(_DWORD *)this = 0;
-  *((_DWORD *)this + 1) = 0;
-  *((_DWORD *)this + 2) = 0;
-  *((_DWORD *)this + 3) = 0;
-  *((_DWORD *)this + 4) = 0;
-  *((_DWORD *)this + 5) = 0;
-  *((_DWORD *)this + 6) = 0;
-  *((_DWORD *)this + 7) = 0;
-  *((_DWORD *)this + 8) = 0;
-  *((_DWORD *)this + 9) = 0;
-  *((_DWORD *)this + 10) = 0;
-  *((_DWORD *)this + 11) = 0;
-  *((_DWORD *)this + 12) = 0;
-  *((_DWORD *)this + 13) = 0;
-  *((_DWORD *)this + 14) = 0;
-  *((_DWORD *)this + 15) = 0;
-  *((_DWORD *)this + 16) = 0;
-  *((_DWORD *)this + 17) = 0;
-  *((_DWORD *)this + 18) = 0;
-  *((_DWORD *)this + 19) = 0;
-  *((_DWORD *)this + 20) = 0;
-  result = this;
-  *((_DWORD *)this + 21) = 0;
-  return result;
+  this->m_uAITick = 0;
+  this->m_uSwordCount = 0;
+  this->m_uBowCount = 0;
+  this->m_uSpecialWeaponCount = 0;
+  this->m_uTotalWeaponCount = 0;
+  this->m_uGoldCount = 0;
+  this->m_uOfferedSwordmen = 0;
+  this->m_uOfferedBowmen = 0;
+  this->m_uTotalSwordmen = 0;
+  this->m_uTotalBowmen = 0;
+  this->m_uSpecialistsCount = 0;
+  this->m_uLeadersCount = 0;
+  this->m_uPriestsCount = 0;
+  this->m_uTotalUnitCount = 0;
+  this->m_uTotalFighterCount = 0;
+  this->m_uTotalUnitCountEx = 0;
+  this->m_uTotalUnitValueEx = 0;
+  this->m_uSmallTowerCount = 0;
+  this->m_uBigTowerCount = 0;
+  this->m_uCastleCount = 0;
+  this->m_uTotalWarBuildingCount = 0;
+  this->m_uTotalWarBuildingValue = 0;
 }
 
 
 // address=[0x1310e30]
-// Decompiled from void __thiscall CAIPlayerEvaluation::EvaluatePlayer(CAIPlayerEvaluation *this, int a2)
+// Decompiled from void __thiscall CAIPlayerEvaluation::EvaluatePlayer(CAIPlayerEvaluation *this, DWORD a2)
 void  CAIPlayerEvaluation::EvaluatePlayer(int a2) {
   
-  int Seed; // eax
-  int NumberOfRandCalls; // [esp-4h] [ebp-8h]
+  DWORD Seed; // eax
+  DWORD NumberOfRandCalls; // [esp-4h] [ebp-8h]
 
-  *(_DWORD *)this = IAIEnvironment::TickCounter();
-  NumberOfRandCalls = CRandom16::GetNumberOfRandCalls((CUserToolsManager *)((char *)g_pGameData + 44));
-  Seed = CRandom16::GetSeed((CUserToolsManager *)((char *)g_pGameData + 44));
+  this->m_uAITick = IAIEnvironment::TickCounter();
+  NumberOfRandCalls = CRandom16::GetNumberOfRandCalls((CRandom16 *)&g_pGameData->m_sRandom);
+  Seed = CRandom16::GetSeed((CRandom16 *)&g_pGameData->m_sRandom);
   IMessageTracer::PushFormatedInts(
     g_pMsgTracer2,
     "==> Evaluation: AI_tick %u, seed 0x%08x, counter %u",
-    *(_DWORD *)this,
+    this->m_uAITick,
     Seed,
     NumberOfRandCalls);
   CAIPlayerEvaluation::EvaluateGoods(this, a2);
@@ -63,18 +59,21 @@ void  CAIPlayerEvaluation::DbgPrint(void) {
   
   IAIEnvironment::DbgTracePrintF(
     "F-S/B/U/L, P:      %5i, %5i, %5i, %5i, %5i",
-    *((_DWORD *)this + 8),
-    *((_DWORD *)this + 9),
-    *((_DWORD *)this + 10),
-    *((_DWORD *)this + 11),
-    *((_DWORD *)this + 12));
-  IAIEnvironment::DbgTracePrintF("Units (Value):     %5i, %5i", *((_DWORD *)this + 13), *((_DWORD *)this + 14));
+    this->m_uTotalSwordmen,
+    this->m_uTotalBowmen,
+    this->m_uSpecialistsCount,
+    this->m_uLeadersCount,
+    this->m_uPriestsCount);
+  IAIEnvironment::DbgTracePrintF("Units (Value):     %5i, %5i", this->m_uTotalUnitCount, this->m_uTotalFighterCount);
   IAIEnvironment::DbgTracePrintF(
     "Towers & castles:  %5i, %5i, %5i",
-    *((_DWORD *)this + 17),
-    *((_DWORD *)this + 18),
-    *((_DWORD *)this + 19));
-  IAIEnvironment::DbgTracePrintF("Buildings (Value): %5i, %5i", *((_DWORD *)this + 20), *((_DWORD *)this + 21));
+    this->m_uSmallTowerCount,
+    this->m_uBigTowerCount,
+    this->m_uCastleCount);
+  IAIEnvironment::DbgTracePrintF(
+    "Buildings (Value): %5i, %5i",
+    this->m_uTotalWarBuildingCount,
+    this->m_uTotalWarBuildingValue);
 }
 
 
@@ -82,157 +81,165 @@ void  CAIPlayerEvaluation::DbgPrint(void) {
 // Decompiled from void __thiscall CAIPlayerEvaluation::EvaluateGoods(CAIPlayerEvaluation *this, int a2)
 void  CAIPlayerEvaluation::EvaluateGoods(int a2) {
   
-  int v2; // [esp+0h] [ebp-Ch]
+  int iRace; // [esp+0h] [ebp-Ch]
 
-  v2 = IAIEnvironment::PlayerRace(a2);
-  *((_DWORD *)this + 1) = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, 34);
-  *((_DWORD *)this + 2) = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, 8);
-  switch ( v2 )
+  iRace = IAIEnvironment::PlayerRace(a2);
+  this->m_uSwordCount = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, S4_GOOD_SWORD);
+  this->m_uBowCount = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, S4_GOOD_BOW);
+  switch ( iRace )
   {
     case 1:
-      *((_DWORD *)this + 3) = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, 5);
+      this->m_uSpecialWeaponCount = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, S4_GOOD_BATTLEAXE);
       break;
     case 2:
-      *((_DWORD *)this + 3) = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, 6);
+      this->m_uSpecialWeaponCount = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, S4_GOOD_BLOWGUN);
       break;
     case 4:
-      *((_DWORD *)this + 3) = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, 38);
+      this->m_uSpecialWeaponCount = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, S4_GOOD_BACKPACKCATAPULT);
       break;
     default:
-      *((_DWORD *)this + 3) = 0;
+      this->m_uSpecialWeaponCount = 0;
       break;
   }
-  *((_DWORD *)this + 4) = *((_DWORD *)this + 3) + *((_DWORD *)this + 2) + *((_DWORD *)this + 1);
-  *((_DWORD *)this + 5) = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, 14);
+  this->m_uTotalWeaponCount = this->m_uSpecialWeaponCount + this->m_uBowCount + this->m_uSwordCount;
+  this->m_uGoldCount = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, S4_GOOD_GOLDBAR);
   IMessageTracer::PushFormatedInts(
     g_pMsgTracer2,
     "CAIPlayerEvaluation(Goods): Player %i: %i %i %i %i",
     a2,
-    *((_DWORD *)this + 1),
-    *((_DWORD *)this + 2),
-    *((_DWORD *)this + 3),
-    *((_DWORD *)this + 5));
+    this->m_uSwordCount,
+    this->m_uBowCount,
+    this->m_uSpecialWeaponCount,
+    this->m_uGoldCount);
 }
 
 
 // address=[0x1311060]
-// Decompiled from void __thiscall CAIPlayerEvaluation::EvaluateWarriors(CAIPlayerEvaluation *this, int a2)
-void  CAIPlayerEvaluation::EvaluateWarriors(int a2) {
+// Decompiled from void __thiscall CAIPlayerEvaluation::EvaluateWarriors(CAIPlayerEvaluation *this, int _iPlayerId)
+void  CAIPlayerEvaluation::EvaluateWarriors(int _iPlayerId) {
   
-  int v2; // [esp+0h] [ebp-7Ch]
-  int v3; // [esp+4h] [ebp-78h]
-  int v4; // [esp+8h] [ebp-74h]
-  int v5; // [esp+Ch] [ebp-70h]
-  int v6; // [esp+10h] [ebp-6Ch]
-  int NumberOfOfferedSettlers; // [esp+14h] [ebp-68h]
-  int NumberOfSettlers; // [esp+18h] [ebp-64h]
-  int v9; // [esp+24h] [ebp-58h]
-  int v10; // [esp+28h] [ebp-54h]
-  int j; // [esp+2Ch] [ebp-50h]
-  int i; // [esp+30h] [ebp-4Ch]
-  _DWORD v14[16]; // [esp+38h] [ebp-44h] BYREF
+  DWORD uFighterNumberEx; // [esp+0h] [ebp-7Ch]
+  int uFighterValueEx; // [esp+4h] [ebp-78h]
+  DWORD uFighterValue; // [esp+8h] [ebp-74h]
+  DWORD uFighterNumber; // [esp+Ch] [ebp-70h]
+  int uLeaderValue; // [esp+10h] [ebp-6Ch]
+  DWORD NumberOfOfferedSettlers; // [esp+14h] [ebp-68h]
+  DWORD uNumberOfSettlers; // [esp+18h] [ebp-64h]
+  DWORD iEvalType; // [esp+28h] [ebp-54h] MAPDST
+  DWORD j; // [esp+2Ch] [ebp-50h]
+  DWORD i; // [esp+30h] [ebp-4Ch]
+  _DWORD aSettlerWeights[16]; // [esp+38h] [ebp-44h] BYREF
 
-  memset(v14, 0, sizeof(v14));
-  for ( i = 0; dword_3D7A218[3 * i]; ++i )
+  memset(aSettlerWeights, 0, sizeof(aSettlerWeights));
+  for ( i = 0; s_sAISettlerEvalWeights[i].m_iType; ++i )
   {
-    NumberOfSettlers = IAIEnvironment::SettlerGetNumberOfSettlers(a2, dword_3D7A218[3 * i]);
-    v10 = dword_3D7A218[3 * i + 1];
+    uNumberOfSettlers = IAIEnvironment::SettlerGetNumberOfSettlers(_iPlayerId, s_sAISettlerEvalWeights[i].m_iType);
+    iEvalType = s_sAISettlerEvalWeights[i].m_iEvalType;
     IMessageTracer::PushFormatedInts(
       g_pMsgTracer2,
       "SettlerEvals %i, Eval type %i number: %i",
       i,
-      v10,
-      NumberOfSettlers);
-    v14[2 * v10] += NumberOfSettlers;
-    v14[2 * v10 + 1] += dword_3D7A218[3 * i + 2] * NumberOfSettlers;
+      iEvalType,
+      uNumberOfSettlers);
+    aSettlerWeights[2 * iEvalType] += uNumberOfSettlers;
+    aSettlerWeights[2 * iEvalType + 1] += s_sAISettlerEvalWeights[i].m_iWeight * uNumberOfSettlers;
   }
-  for ( j = 0; dword_3D7A318[3 * j]; ++j )
+  for ( j = 0; s_sAIOfferedSettlerEvalWeights[j].m_iType; ++j )
   {
     NumberOfOfferedSettlers = CSettlerMgr::GetNumberOfOfferedSettlers(
                                 (CSettlerMgr *)g_cSettlerMgr,
-                                a2,
-                                dword_3D7A318[3 * j]);
-    v9 = dword_3D7A318[3 * j + 1];
+                                _iPlayerId,
+                                s_sAIOfferedSettlerEvalWeights[j].m_iType);
+    iEvalType = s_sAIOfferedSettlerEvalWeights[j].m_iEvalType;
     IMessageTracer::PushFormatedInts(
       g_pMsgTracer2,
       "SettlerEvalsEx %i, Eval type %i number: %i",
       j,
-      v9,
+      iEvalType,
       NumberOfOfferedSettlers);
-    v14[2 * v9] += NumberOfOfferedSettlers;
-    v14[2 * v9 + 1] += dword_3D7A318[3 * j + 2] * NumberOfOfferedSettlers;
+    aSettlerWeights[2 * iEvalType] += NumberOfOfferedSettlers;
+    aSettlerWeights[2 * iEvalType + 1] += s_sAIOfferedSettlerEvalWeights[j].m_iWeight * NumberOfOfferedSettlers;
   }
-  v5 = v14[10] + v14[8] + v14[6];
-  v4 = v14[11] + v14[9] + v14[7];
-  v6 = v14[13];
-  IMessageTracer::PushFormatedInts(g_pMsgTracer2, "FighterNumber %i, FighterValue %i, LeaderValue %i.", v5, v4, v14[13]);
-  *((_DWORD *)this + 6) = v14[2];
-  *((_DWORD *)this + 7) = v14[4];
-  *((_DWORD *)this + 8) = v14[6];
-  *((_DWORD *)this + 9) = v14[8];
+  uFighterNumber = aSettlerWeights[10] + aSettlerWeights[8] + aSettlerWeights[6];
+  uFighterValue = aSettlerWeights[11] + aSettlerWeights[9] + aSettlerWeights[7];
+  uLeaderValue = aSettlerWeights[13];
+  IMessageTracer::PushFormatedInts(
+    g_pMsgTracer2,
+    "FighterNumber %i, FighterValue %i, LeaderValue %i.",
+    uFighterNumber,
+    uFighterValue,
+    aSettlerWeights[13]);
+  this->m_uOfferedSwordmen = aSettlerWeights[2];
+  this->m_uOfferedBowmen = aSettlerWeights[4];
+  this->m_uTotalSwordmen = aSettlerWeights[6];
+  this->m_uTotalBowmen = aSettlerWeights[8];
   IMessageTracer::PushFormatedInts(
     g_pMsgTracer2,
     "OfferedSwordmen %i, OfferedBowmen %i, TotalSwordmen %i, TotalBowmen %i.",
-    *((_DWORD *)this + 6),
-    *((_DWORD *)this + 7),
-    *((_DWORD *)this + 8),
-    *((_DWORD *)this + 9));
-  *((_DWORD *)this + 10) = v14[10];
-  *((_DWORD *)this + 11) = v14[12];
-  *((_DWORD *)this + 12) = v14[14];
+    this->m_uOfferedSwordmen,
+    this->m_uOfferedBowmen,
+    this->m_uTotalSwordmen,
+    this->m_uTotalBowmen);
+  this->m_uSpecialistsCount = aSettlerWeights[10];
+  this->m_uLeadersCount = aSettlerWeights[12];
+  this->m_uPriestsCount = aSettlerWeights[14];
   IMessageTracer::PushFormatedInts(
     g_pMsgTracer2,
     "SpecialistsNumber %i, LeadersNumber %i, PriestsNumber %i",
-    *((_DWORD *)this + 10),
-    *((_DWORD *)this + 11),
-    *((_DWORD *)this + 12));
-  *((_DWORD *)this + 13) = *((_DWORD *)this + 12) + *((_DWORD *)this + 11) + v5;
-  *((_DWORD *)this + 14) = v6 + v4;
-  v2 = v14[10] + v14[4] + v14[2];
-  v3 = v14[11] + v14[5] + v14[3];
-  *((_DWORD *)this + 15) = *((_DWORD *)this + 12) + *((_DWORD *)this + 11) + v2;
-  *((_DWORD *)this + 16) = v6 + v3;
-  IMessageTracer::PushFormatedInts(g_pMsgTracer2, "FighterNumberEx %i, FighterValueEx %i", v2, v3);
+    this->m_uSpecialistsCount,
+    this->m_uLeadersCount,
+    this->m_uPriestsCount);
+  this->m_uTotalUnitCount = this->m_uPriestsCount + this->m_uLeadersCount + uFighterNumber;
+  this->m_uTotalFighterCount = uLeaderValue + uFighterValue;
+  uFighterNumberEx = aSettlerWeights[10] + aSettlerWeights[4] + aSettlerWeights[2];// Specialist + Bowmen + Swordmen
+  uFighterValueEx = aSettlerWeights[11] + aSettlerWeights[5] + aSettlerWeights[3];
+  this->m_uTotalUnitCountEx = this->m_uPriestsCount + this->m_uLeadersCount + uFighterNumberEx;
+  this->m_uTotalUnitValueEx = uLeaderValue + uFighterValueEx;
+  IMessageTracer::PushFormatedInts(
+    g_pMsgTracer2,
+    "FighterNumberEx %i, FighterValueEx %i",
+    uFighterNumberEx,
+    uFighterValueEx);
   IMessageTracer::PushFormatedInts(
     g_pMsgTracer2,
     "CAIPlayerEvaluation(MilUnits): Player %i: %i %i %i %i",
-    a2,
-    *((_DWORD *)this + 13),
-    *((_DWORD *)this + 14),
-    *((_DWORD *)this + 15),
-    *((_DWORD *)this + 16));
+    _iPlayerId,
+    this->m_uTotalUnitCount,
+    this->m_uTotalFighterCount,
+    this->m_uTotalUnitCountEx,
+    this->m_uTotalUnitValueEx);
 }
 
 
 // address=[0x1311400]
-// Decompiled from char *__thiscall CAIPlayerEvaluation::EvaluateBuildings(CAIPlayerEvaluation *this, int a2)
+// Decompiled from void __thiscall CAIPlayerEvaluation::EvaluateBuildings(CAIPlayerEvaluation *this, DWORD a2)
 void  CAIPlayerEvaluation::EvaluateBuildings(int a2) {
   
   int NumberOfBuildings; // [esp+0h] [ebp-18h]
-  int v4; // [esp+4h] [ebp-14h]
-  int v5; // [esp+8h] [ebp-10h]
-  int v6; // [esp+10h] [ebp-8h]
+  int uTotalWarBuildingValue; // [esp+4h] [ebp-14h]
+  int uTotalWarBuildingCount; // [esp+8h] [ebp-10h]
+  int i; // [esp+10h] [ebp-8h]
 
-  v5 = 0;
-  v4 = 0;
-  v6 = 0;
-  *((_DWORD *)this + 17) = IAIEnvironment::BuildingGetNumberOfBuildings(a2, 46, 2u);
-  *((_DWORD *)this + 18) = IAIEnvironment::BuildingGetNumberOfBuildings(a2, 47, 2u);
-  *((_DWORD *)this + 19) = IAIEnvironment::BuildingGetNumberOfBuildings(a2, 48, 2u);
-  while ( dword_3D7A36C[2 * v6] )
+  uTotalWarBuildingCount = 0;
+  uTotalWarBuildingValue = 0;
+  i = 0;
+  this->m_uSmallTowerCount = IAIEnvironment::BuildingGetNumberOfBuildings(a2, 0x2E, 2u);
+  this->m_uBigTowerCount = IAIEnvironment::BuildingGetNumberOfBuildings(a2, 0x2F, 2u);
+  this->m_uCastleCount = IAIEnvironment::BuildingGetNumberOfBuildings(a2, 0x30, 2u);
+  while ( s_sAIBuildingEvalWeights[i].m_iType )
   {
-    NumberOfBuildings = IAIEnvironment::BuildingGetNumberOfBuildings(a2, dword_3D7A36C[2 * v6], 2u);
-    v5 += NumberOfBuildings;
-    v4 += NumberOfBuildings * dword_3D7A36C[2 * v6++ + 1];
+    NumberOfBuildings = IAIEnvironment::BuildingGetNumberOfBuildings(a2, s_sAIBuildingEvalWeights[i].m_iType, 2u);
+    uTotalWarBuildingCount += NumberOfBuildings;
+    uTotalWarBuildingValue += NumberOfBuildings * s_sAIBuildingEvalWeights[i++].m_iWeight;
   }
-  *((_DWORD *)this + 20) = v5;
-  *((_DWORD *)this + 21) = v4;
-  return IMessageTracer::PushFormatedInts(
-           g_pMsgTracer2,
-           "CAIPlayerEvaluation(MilBuildings): Player %i: %i %i",
-           a2,
-           *((_DWORD *)this + 20),
-           *((_DWORD *)this + 21));
+  this->m_uTotalWarBuildingCount = uTotalWarBuildingCount;
+  this->m_uTotalWarBuildingValue = uTotalWarBuildingValue;
+  IMessageTracer::PushFormatedInts(
+    g_pMsgTracer2,
+    "CAIPlayerEvaluation(MilBuildings): Player %i: %i %i",
+    a2,
+    this->m_uTotalWarBuildingCount,
+    this->m_uTotalWarBuildingValue);
 }
 
 

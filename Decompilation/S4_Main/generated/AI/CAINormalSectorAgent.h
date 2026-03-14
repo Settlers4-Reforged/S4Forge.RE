@@ -17,6 +17,10 @@ public:
     // address=[0x1303c90]
     void  AttachSectorAI(class CAINormalSectorAI * a2);
 
+    // Type information members
+public:
+    struct CAINormalSectorAI * m_pSectorAI;
+
 };
 
 

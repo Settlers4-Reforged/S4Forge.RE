@@ -1,3 +1,4 @@
+#if FALSE
 #include "IAIUnknown.h"
 
 // Definitions for class IAIUnknown
@@ -6,8 +7,9 @@
 // Decompiled from IAIUnknown *__thiscall IAIUnknown::IAIUnknown(IAIUnknown *this)
  IAIUnknown::IAIUnknown(void) {
   
-  *(_DWORD *)this = IAIUnknown::_vftable_;
+  this->__vftable = (IAIUnknown_vtbl *)IAIUnknown::_vftable_;
   return this;
 }
 
 
+#endif // Already implemented

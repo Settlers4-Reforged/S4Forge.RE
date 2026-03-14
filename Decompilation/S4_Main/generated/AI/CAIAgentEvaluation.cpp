@@ -1,3 +1,4 @@
+#if FALSE
 #include "CAIAgentEvaluation.h"
 
 // Definitions for class CAIAgentEvaluation
@@ -7,9 +8,9 @@
  CAIAgentEvaluation::CAIAgentEvaluation(class CAIPlayerEvaluations & a2) {
   
   CAIAgent::CAIAgent(this, "player evaluation");
-  *(_DWORD *)this = &CAIAgentEvaluation::_vftable_;
-  *((_DWORD *)this + 10) = a2;
-  *((_DWORD *)this + 9) = 1;
+  this->__vftable = (CAIAgentEvaluation_vtbl *)&CAIAgentEvaluation::_vftable_;
+  this->m_pAIPlayerEvaluations = a2;
+  this->m_iCurrentPlayerId = 1;
   return this;
 }
 
@@ -18,31 +19,31 @@
 // Decompiled from unsigned int __thiscall CAIAgentEvaluation::Execute(CAIAgentEvaluation *this, unsigned int a2, unsigned int a3)
 unsigned int  CAIAgentEvaluation::Execute(unsigned int a2, unsigned int a3) {
   
-  if ( *((int *)this + 9) < 1
+  if ( this->m_iCurrentPlayerId < 1
     && BBSupportDbgReport(2, "AI\\AI_AgentsEx.cpp", 43, "m_iCurrentPlayerId >= PLAYER_FIRST") == 1 )
   {
     __debugbreak();
   }
-  if ( *((int *)this + 9) > 8
+  if ( this->m_iCurrentPlayerId > 8
     && BBSupportDbgReport(2, "AI\\AI_AgentsEx.cpp", 44, "m_iCurrentPlayerId <= PLAYER_LAST") == 1 )
   {
     __debugbreak();
   }
-  ++*((_DWORD *)this + 9);
-  if ( *((_DWORD *)this + 9) > IAIEnvironment::AlliancesLastPlayerId() )
-    *((_DWORD *)this + 9) = 1;
-  if ( *((int *)this + 9) < 1
+  ++this->m_iCurrentPlayerId;
+  if ( this->m_iCurrentPlayerId > IAIEnvironment::AlliancesLastPlayerId() )
+    this->m_iCurrentPlayerId = 1;
+  if ( this->m_iCurrentPlayerId < 1
     && BBSupportDbgReport(2, "AI\\AI_AgentsEx.cpp", 55, "m_iCurrentPlayerId >= PLAYER_FIRST") == 1 )
   {
     __debugbreak();
   }
-  if ( *((int *)this + 9) > 8
+  if ( this->m_iCurrentPlayerId > 8
     && BBSupportDbgReport(2, "AI\\AI_AgentsEx.cpp", 56, "m_iCurrentPlayerId <= PLAYER_LAST") == 1 )
   {
     __debugbreak();
   }
-  CAIPlayerEvaluations::EvaluatePlayer(*((CAIPlayerEvaluations **)this + 10), *((_DWORD *)this + 9));
-  IMessageTracer::PushFormatedInts(g_pMsgTracer2, aEvaluatingPlay, *((_DWORD *)this + 9));
+  CAIPlayerEvaluations::EvaluatePlayer(this->m_pAIPlayerEvaluations, this->m_iCurrentPlayerId);
+  IMessageTracer::PushFormatedInts(g_pMsgTracer2, aEvaluatingPlay, this->m_iCurrentPlayerId);
   return CAIAgent::ExecuteResult(0, 0);
 }
 
@@ -56,14 +57,11 @@ unsigned int  CAIAgentEvaluation::Execute(unsigned int a2, unsigned int a3) {
 
 
 // address=[0x1314030]
-// Decompiled from CAIAgentEvaluation *__thiscall CAIAgentEvaluation::Init(CAIAgentEvaluation *this)
+// Decompiled from void __thiscall CAIAgentEvaluation::Init(CAIAgentEvaluation *this)
 void  CAIAgentEvaluation::Init(void) {
   
-  CAIAgentEvaluation *result; // eax
-
-  result = this;
-  *((_DWORD *)this + 9) = 1;
-  return result;
+  this->m_iCurrentPlayerId = 1;
 }
 
 
+#endif // Already implemented

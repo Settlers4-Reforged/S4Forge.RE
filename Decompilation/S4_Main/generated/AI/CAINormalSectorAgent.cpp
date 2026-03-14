@@ -7,8 +7,8 @@
  CAINormalSectorAgent::CAINormalSectorAgent(char const * a2) {
   
   CAIAgent::CAIAgent(this, a2);
-  *(_DWORD *)this = &CAINormalSectorAgent::_vftable_;
-  *((_DWORD *)this + 9) = 0;
+  this->__vftable = (CAIAgent_vtbl *)&CAINormalSectorAgent::_vftable_;
+  this->m_pSectorAI = 0;
   return this;
 }
 
@@ -22,10 +22,10 @@
 
 
 // address=[0x1301810]
-// Decompiled from int __thiscall CAINormalSectorAgent::SectorAI(CAINormalSectorAgent *this)
+// Decompiled from struct CAINormalSectorAI *__thiscall CAINormalSectorAgent::SectorAI(CAINormalSectorAgent *this)
 class CAINormalSectorAI *  CAINormalSectorAgent::SectorAI(void)const {
   
-  return *((_DWORD *)this + 9);
+  return this->m_pSectorAI;
 }
 
 

@@ -38,6 +38,16 @@ public:
     // address=[0x130aa00]
     class CAIEntityInfoEx *  ExtendedInfo(enum T_AI_ENTITY_INFO_EX_CLASS a2);
 
+    // Type information members
+public:
+    _WORD m_iEntityId;
+    _WORD m_iTargetId;
+    _DWORD m_uTimeStamp;
+    CAITaskForce * m_pTaskForce;
+    CAIEntityInfo * m_pPrevEntity;
+    CAIEntityInfo * m_pNextEntity;
+    CAIEntityInfoEx * m_pInfoEx;
+
 };
 
 

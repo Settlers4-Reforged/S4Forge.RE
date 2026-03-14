@@ -18,6 +18,11 @@ protected:
     // address=[0x130aaf0]
     static class CAIEntityInfoEx * __cdecl CreateExtendedInfo(enum T_AI_ENTITY_INFO_EX_CLASS a1);
 
+    // Type information members
+public:
+    CAIEntityInfoEx_vtbl * vftable;
+    _BYTE m_bClass;
+
 };
 
 

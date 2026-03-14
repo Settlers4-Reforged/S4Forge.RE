@@ -37,10 +37,15 @@ public:
 
 protected:
     // address=[0x1328970]
-    void  AddTaskForce(class CAITaskForce * a2);
+    void  AddTaskForce(class CAITaskForce * _pTaskForce);
 
     // address=[0x1328b20]
-    void  RemoveTaskForce(class CAITaskForce * a2);
+    void  RemoveTaskForce(class CAITaskForce * _pTaskForce);
+
+    // Type information members
+public:
+    void * vftable;
+    SAITaskForceGroupData m_sData;
 
 };
 

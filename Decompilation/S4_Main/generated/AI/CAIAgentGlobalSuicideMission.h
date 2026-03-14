@@ -22,7 +22,7 @@ public:
 
 protected:
     // address=[0x1306f00]
-    static int __cdecl FindNearestBuildingInSector(int a1, int a2, int a3, int a4);
+    static int __cdecl FindNearestBuildingInSector(int arg0, int a2, int a3, int a4);
 
 };
 

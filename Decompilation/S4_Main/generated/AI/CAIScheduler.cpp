@@ -1,3 +1,4 @@
+#if FALSE
 #include "CAIScheduler.h"
 
 // Definitions for class CAIScheduler
@@ -7,9 +8,9 @@
  CAIScheduler::CAIScheduler(void) {
   
   CAIAgent::CAIAgent(this, "Scheduler");
-  *(_DWORD *)this = &CAIScheduler::_vftable_;
-  *((_DWORD *)this + 9) = 0;
-  *((_DWORD *)this + 10) = 0;
+  this->__vftable = (CAIScheduler_vtbl *)&CAIScheduler::_vftable_;
+  this->m_iNumberOfAgents = 0;
+  this->m_pFirstAgent = 0;
   return this;
 }
 
@@ -25,16 +26,16 @@
 
 
 // address=[0x12ff120]
-// Decompiled from void __thiscall CAIScheduler::AddAgent(  CAIScheduler *this,  CAIScheduler **a2,  CAIScheduler *a3,  CAIScheduler *a4,  CAIScheduler *a5)
-void  CAIScheduler::AddAgent(class CAIAgent & a2, unsigned int a3, unsigned int a4, unsigned int a5) {
+// Decompiled from void __thiscall CAIScheduler::AddAgent(  CAIScheduler *this,  CAIAgent *_rAgent,  int _uDefaultExecutionDelay,  int a4,  int a5)
+void  CAIScheduler::AddAgent(class CAIAgent & _rAgent, unsigned int _uDefaultExecutionDelay, unsigned int a4, unsigned int a5) {
   
-  if ( a2[5] )
-    CAIScheduler::RemoveAgent(a2[5], (struct CAIAgent *)a2);
-  a2[1] = 0;
-  a2[2] = a3;
-  a2[3] = a4;
-  a2[4] = a5;
-  CAIScheduler::AddAgentEx(this, (struct CAIAgent *)a2);
+  if ( _rAgent->m_pScheduler )
+    CAIScheduler::RemoveAgent(_rAgent->m_pScheduler, _rAgent);
+  _rAgent->m_uScheduleTime = 0;
+  _rAgent->m_uDefaultExecutionDelay = _uDefaultExecutionDelay;
+  _rAgent->dwordC = a4;
+  _rAgent->dword10 = a5;
+  CAIScheduler::AddAgentEx(this, _rAgent);
 }
 
 
@@ -42,7 +43,7 @@ void  CAIScheduler::AddAgent(class CAIAgent & a2, unsigned int a3, unsigned int 
 // Decompiled from void __thiscall CAIScheduler::RemoveAgent(CAIScheduler *this, struct CAIAgent *a2)
 void  CAIScheduler::RemoveAgent(class CAIAgent & a2) {
   
-  if ( *((CAIScheduler **)a2 + 5) == this )
+  if ( a2->m_pScheduler == this )
   {
     CAIScheduler::RemoveAgentEx(this, a2);
   }
@@ -71,16 +72,16 @@ void  CAIScheduler::RemoveAllAgents(void) {
 
 
 // address=[0x12ff200]
-// Decompiled from void __thiscall CAIScheduler::UpdateAgentScheduleTime(CAIScheduler *this, struct CAIAgent *a2, unsigned int a3)
-void  CAIScheduler::UpdateAgentScheduleTime(class CAIAgent & a2, unsigned int a3) {
+// Decompiled from void __thiscall CAIScheduler::UpdateAgentScheduleTime(  CAIScheduler *this,  struct CAIAgent *_rParent,  unsigned int _uScheduleTime)
+void  CAIScheduler::UpdateAgentScheduleTime(class CAIAgent & _rParent, unsigned int _uScheduleTime) {
   
-  if ( *((CAIScheduler **)a2 + 5) == this )
+  if ( _rParent->m_pScheduler == this )
   {
-    if ( *((_DWORD *)a2 + 1) != a3 )
+    if ( _rParent->m_uScheduleTime != _uScheduleTime )
     {
-      CAIScheduler::RemoveAgentEx(this, a2);
-      *((_DWORD *)a2 + 1) = a3;
-      CAIScheduler::AddAgentEx(this, a2);
+      CAIScheduler::RemoveAgentEx(this, _rParent);
+      _rParent->m_uScheduleTime = _uScheduleTime;
+      CAIScheduler::AddAgentEx(this, _rParent);
     }
   }
   else if ( BBSupportDbgReport(1, "AI\\AI_Agents.cpp", 314, "CAIScheduler::UpdateAgentExecutionDelay(): Invalid agent!") == 1 )
@@ -147,101 +148,94 @@ unsigned int  CAIScheduler::Execute(unsigned int a2, unsigned int a3) {
 
 
 // address=[0x12ff400]
-// Decompiled from CAIScheduler *__thiscall CAIScheduler::AddAgentEx(CAIScheduler *this, struct CAIAgent *a2)
+// Decompiled from void __thiscall CAIScheduler::AddAgentEx(CAIScheduler *this, struct CAIAgent *a2)
 void  CAIScheduler::AddAgentEx(class CAIAgent * a2) {
   
-  CAIScheduler *result; // eax
-  unsigned int v3; // [esp+4h] [ebp-10h]
-  _DWORD *v5; // [esp+Ch] [ebp-8h]
-  _DWORD *i; // [esp+10h] [ebp-4h]
+  unsigned int dword4; // [esp+4h] [ebp-10h]
+  CAIAgent *v4; // [esp+Ch] [ebp-8h]
+  CAIAgent *i; // [esp+10h] [ebp-4h]
 
   if ( !a2 && BBSupportDbgReport(2, "AI\\AI_Agents.cpp", 174, "_pAgent != 0") == 1 )
     __debugbreak();
-  if ( *((_DWORD *)a2 + 5) && BBSupportDbgReport(2, "AI\\AI_Agents.cpp", 175, "_pAgent->m_pScheduler == 0") == 1 )
+  if ( a2->m_pScheduler && BBSupportDbgReport(2, "AI\\AI_Agents.cpp", 175, "_pAgent->m_pScheduler == 0") == 1 )
     __debugbreak();
-  v3 = *((_DWORD *)a2 + 1);
-  v5 = 0;
-  for ( i = (_DWORD *)*((_DWORD *)this + 10);
-        i && v3 >= i[1] && (v3 != i[1] || *((_DWORD *)a2 + 4) < i[4]);
-        i = (_DWORD *)i[7] )
+  dword4 = a2->m_uScheduleTime;
+  v4 = 0;
+  for ( i = this->m_pFirstAgent;
+        i && dword4 >= i->m_uScheduleTime && (dword4 != i->m_uScheduleTime || a2->dword10 < i->dword10);
+        i = i->m_pNextAgent )
   {
-    v5 = i;
+    v4 = i;
   }
-  *((_DWORD *)a2 + 6) = v5;
-  *((_DWORD *)a2 + 7) = i;
-  *((_DWORD *)a2 + 5) = this;
-  if ( v5
-    && (_DWORD *)v5[7] != i
+  a2->m_pPrevAgent = v4;
+  a2->m_pNextAgent = i;
+  a2->m_pScheduler = this;
+  if ( v4
+    && v4->m_pNextAgent != i
     && BBSupportDbgReport(2, "AI\\AI_Agents.cpp", 203, "(pPrevAgent == 0) || (pPrevAgent->m_pNextAgent == pNextAgent)") == 1 )
   {
     __debugbreak();
   }
   if ( i
-    && (_DWORD *)i[6] != v5
+    && i->m_pPrevAgent != v4
     && BBSupportDbgReport(2, "AI\\AI_Agents.cpp", 204, "(pNextAgent == 0) || (pNextAgent->m_pPrevAgent == pPrevAgent)") == 1 )
   {
     __debugbreak();
   }
-  if ( v5 )
-    v5[7] = a2;
+  if ( v4 )
+    v4->m_pNextAgent = a2;
   else
-    *((_DWORD *)this + 10) = a2;
+    this->m_pFirstAgent = a2;
   if ( i )
-    i[6] = a2;
-  result = this;
-  ++*((_DWORD *)this + 9);
-  return result;
+    i->m_pPrevAgent = a2;
+  ++this->m_iNumberOfAgents;
 }
 
 
 // address=[0x12ff580]
-// Decompiled from struct CAIAgent **__thiscall CAIScheduler::RemoveAgentEx(struct CAIAgent **this, struct CAIAgent *a2)
-void  CAIScheduler::RemoveAgentEx(class CAIAgent * a2) {
+// Decompiled from void __thiscall CAIScheduler::RemoveAgentEx(CAIScheduler *this, struct CAIAgent *_pAgent)
+void  CAIScheduler::RemoveAgentEx(class CAIAgent * _pAgent) {
   
-  struct CAIAgent **result; // eax
-
-  if ( !a2 && BBSupportDbgReport(2, "AI\\AI_Agents.cpp", 249, "_pAgent != 0") == 1 )
+  if ( !_pAgent && BBSupportDbgReport(2, "AI\\AI_Agents.cpp", 249, "_pAgent != 0") == 1 )
     __debugbreak();
-  if ( *((struct CAIAgent ***)a2 + 5) != this
+  if ( _pAgent->m_pScheduler != this
     && BBSupportDbgReport(2, "AI\\AI_Agents.cpp", 250, "_pAgent->m_pScheduler == this") == 1 )
   {
     __debugbreak();
   }
-  if ( *((_DWORD *)a2 + 6) )
+  if ( _pAgent->m_pPrevAgent )
   {
-    if ( *(struct CAIAgent **)(*((_DWORD *)a2 + 6) + 28) != a2
+    if ( _pAgent->m_pPrevAgent->m_pNextAgent != _pAgent
       && BBSupportDbgReport(2, "AI\\AI_Agents.cpp", 254, "_pAgent->m_pPrevAgent->m_pNextAgent == _pAgent") == 1 )
     {
       __debugbreak();
     }
-    *(_DWORD *)(*((_DWORD *)a2 + 6) + 28) = *((_DWORD *)a2 + 7);
+    _pAgent->m_pPrevAgent->m_pNextAgent = _pAgent->m_pNextAgent;
   }
   else
   {
-    if ( this[10] != a2 && BBSupportDbgReport(2, "AI\\AI_Agents.cpp", 260, "m_pFirstAgent == _pAgent") == 1 )
+    if ( this->m_pFirstAgent != _pAgent
+      && BBSupportDbgReport(2, "AI\\AI_Agents.cpp", 260, "m_pFirstAgent == _pAgent") == 1 )
+    {
       __debugbreak();
-    this[10] = (struct CAIAgent *)*((_DWORD *)a2 + 7);
+    }
+    this->m_pFirstAgent = _pAgent->m_pNextAgent;
   }
-  if ( *((_DWORD *)a2 + 7) )
+  if ( _pAgent->m_pNextAgent )
   {
-    if ( *(struct CAIAgent **)(*((_DWORD *)a2 + 7) + 24) != a2
+    if ( _pAgent->m_pNextAgent->m_pPrevAgent != _pAgent
       && BBSupportDbgReport(2, "AI\\AI_Agents.cpp", 267, "_pAgent->m_pNextAgent->m_pPrevAgent == _pAgent") == 1 )
     {
       __debugbreak();
     }
-    *(_DWORD *)(*((_DWORD *)a2 + 7) + 24) = *((_DWORD *)a2 + 6);
+    _pAgent->m_pNextAgent->m_pPrevAgent = _pAgent->m_pPrevAgent;
   }
-  *((_DWORD *)a2 + 6) = 0;
-  *((_DWORD *)a2 + 7) = 0;
-  *((_DWORD *)a2 + 5) = 0;
-  result = this;
-  this[9] = (struct CAIAgent *)((char *)this[9] - 1);
-  if ( (int)this[9] >= 0 )
-    return result;
-  result = (struct CAIAgent **)BBSupportDbgReport(2, "AI\\AI_Agents.cpp", 278, "m_iNumberOfAgents >= 0");
-  if ( result == (struct CAIAgent **)1 )
+  _pAgent->m_pPrevAgent = 0;
+  _pAgent->m_pNextAgent = 0;
+  _pAgent->m_pScheduler = 0;
+  if ( --this->m_iNumberOfAgents < 0 && BBSupportDbgReport(2, "AI\\AI_Agents.cpp", 278, "m_iNumberOfAgents >= 0") == 1 )
     __debugbreak();
-  return result;
 }
 
 
+#endif // Already implemented

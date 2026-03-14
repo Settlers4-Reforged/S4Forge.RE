@@ -17,6 +17,10 @@ public:
     // address=[0x1301910]
     void  AttachSectorAI(class CAIDarkTribeSectorAI * a2);
 
+    // Type information members
+public:
+    struct CAIDarkTribeSectorAI * m_pSectorAI;
+
 };
 
 

@@ -190,16 +190,19 @@ enum T_AI_PRESENT_REQUEST_RESULT  CAISectorAI::RequestDivinePresent(int a1, enum
 
 
 // address=[0x1320300]
-// Decompiled from int __cdecl CAISectorAI::CreateNormalSectorAI(pairNode *a1, int a2)
-class CAISectorAI * __cdecl CAISectorAI::CreateNormalSectorAI(class CAIPlayerAI & a1, int a2) {
+// Decompiled from CAINormalSectorAI *__cdecl CAISectorAI::CreateNormalSectorAI(struct CAIPlayerAI *_rPlayerAI, int a2)
+class CAISectorAI * __cdecl CAISectorAI::CreateNormalSectorAI(class CAIPlayerAI & _rPlayerAI, int a2) {
   
-  if ( CAIPlayerAI::Race(a1) == 3
+  CAINormalSectorAI *C; // [esp+Ch] [ebp-10h]
+
+  if ( CAIPlayerAI::Race(_rPlayerAI) == 3
     && BBSupportDbgReport(2, "AI\\AI_SectorAI.cpp", 204, "_rPlayerAI.Race() != RACE_DARK") == 1 )
   {
     __debugbreak();
   }
-  if ( operator new(0x159Cu) )
-    return CAINormalSectorAI::CAINormalSectorAI(a1, a2);
+  C = (CAINormalSectorAI *)operator new(0x159Cu);
+  if ( C )
+    return CAINormalSectorAI::CAINormalSectorAI(C, _rPlayerAI, a2);
   else
     return 0;
 }
@@ -864,7 +867,7 @@ void __cdecl CAISectorAI::AwakeAgent(class CAIAgent & a1) {
   *((_DWORD *)this + 1) = a2;
   CAIEventQueue::CAIEventQueue((CAISectorAI *)((char *)this + 8));
   v2 = CAIPlayerAI::PlayerId(a2);
-  CAITaskForceGroup::CAITaskForceGroup((CAISectorAI *)((char *)this + 92), v2);
+  CAITaskForceGroup::CAITaskForceGroup((CAITaskForceGroup *)((char *)this + 92), v2);
   memset((char *)this + 32, 0, 0x3Cu);
   memset((char *)this + 232, 0, 0x20u);
   return this;

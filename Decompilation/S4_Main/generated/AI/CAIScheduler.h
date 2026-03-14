@@ -12,7 +12,7 @@ public:
     virtual  ~CAIScheduler(void);
 
     // address=[0x12ff120]
-    void  AddAgent(class CAIAgent & a2, unsigned int a3, unsigned int a4, unsigned int a5);
+    void  AddAgent(class CAIAgent & _rAgent, unsigned int _uDefaultExecutionDelay, unsigned int a4, unsigned int a5);
 
     // address=[0x12ff180]
     void  RemoveAgent(class CAIAgent & a2);
@@ -21,7 +21,7 @@ public:
     void  RemoveAllAgents(void);
 
     // address=[0x12ff200]
-    void  UpdateAgentScheduleTime(class CAIAgent & a2, unsigned int a3);
+    void  UpdateAgentScheduleTime(class CAIAgent & _rParent, unsigned int _uScheduleTime);
 
     // address=[0x12ff270]
     virtual unsigned int  Execute(unsigned int a2, unsigned int a3);
@@ -31,7 +31,12 @@ private:
     void  AddAgentEx(class CAIAgent * a2);
 
     // address=[0x12ff580]
-    void  RemoveAgentEx(class CAIAgent * a2);
+    void  RemoveAgentEx(class CAIAgent * _pAgent);
+
+    // Type information members
+public:
+    int m_iNumberOfAgents;
+    CAIAgent * m_pFirstAgent;
 
 };
 

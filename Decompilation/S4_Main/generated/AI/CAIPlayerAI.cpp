@@ -70,16 +70,16 @@ void  CAIPlayerAI::PostAIEvent(int a2, int a3, int a4, int a5) {
 // Decompiled from CAIPlayerAI *__thiscall CAIPlayerAI::CAIPlayerAI(CAIPlayerAI *this, int a2, bool a3)
  CAIPlayerAI::CAIPlayerAI(int a2, bool a3) {
   
-  IAIUnknown::IAIUnknown(this);
-  IS4ChunkObject::IS4ChunkObject((CAIPlayerAI *)((char *)this + 4));
+  IAIUnknown::IAIUnknown((IAIUnknown *)this);
+  IS4ChunkObject::IS4ChunkObject((IS4ChunkObject *)this + 1);
   *(_DWORD *)this = CAIPlayerAI::_vftable_;
   *((_DWORD *)this + 1) = &CAIPlayerAI::`vftable';
   *((_BYTE *)this + 8) = a3;
   *((_DWORD *)this + 3) = a2;
   *((_DWORD *)this + 4) = IAIEnvironment::PlayerRace(a2);
-  *((_DWORD *)this + 5) = *(&off_3D7A4E0 + *((_DWORD *)this + 4));
+  *((_DWORD *)this + 5) = (&off_3D7A4E0)[*((_DWORD *)this + 4)];
   *((_DWORD *)this + 6) = *(&off_3D7A50C + *((_DWORD *)this + 4));
-  CAIScheduler::CAIScheduler((CAIPlayerAI *)((char *)this + 28));
+  CAIScheduler::CAIScheduler((CAIScheduler *)((char *)this + 28));
   TAIStaticPtrVector<CAISectorAI,8>::TAIStaticPtrVector<CAISectorAI,8>((char *)this + 72);
   CAIEventQueue::CAIEventQueue((CAIPlayerAI *)((char *)this + 108));
   CAITaskForceReservoir::CAITaskForceReservoir((CAIPlayerAI *)((char *)this + 132), a2);
@@ -87,10 +87,12 @@ void  CAIPlayerAI::PostAIEvent(int a2, int a3, int a4, int a5) {
   CAITaskForceReservoir::CAITaskForceReservoir((CAIPlayerAI *)((char *)this + 292), a2);
   CAITaskForceReservoir::CAITaskForceReservoir((CAIPlayerAI *)((char *)this + 372), a2);
   CAITaskForceReservoir::CAITaskForceReservoir((CAIPlayerAI *)((char *)this + 452), a2);
-  CAIAgentGlobalSuicideMission::CAIAgentGlobalSuicideMission((CAIPlayerAI *)((char *)this + 532), "global suicide");
+  CAIAgentGlobalSuicideMission::CAIAgentGlobalSuicideMission(
+    (CAIAgentGlobalSuicideMission *)((char *)this + 532),
+    "global suicide");
   CAITaskForceSquad::CAITaskForceSquad((char *)this + 572, a2, 4, 0);
-  CAIAgentPlayerBase::AttachPlayerAI((CAIPlayerAI *)((char *)this + 532), this);
-  CAIScheduler::AddAgent((CAIPlayerAI *)((char *)this + 28), (CAIPlayerAI *)((char *)this + 532), 0x96u, 0x100u, 8u);
+  CAIAgentPlayerBase::AttachPlayerAI((CAIAgentPlayerBase *)((char *)this + 532), this);
+  CAIScheduler::AddAgent((CAIScheduler *)((char *)this + 28), (CAIAgent *)((char *)this + 532), 150, 256, 8);
   return this;
 }
 
@@ -179,7 +181,7 @@ void  CAIPlayerAI::DbgPrint(void) {
     result = TAIStaticPtrVector<CAISectorAI,8>::Size((char *)this + 72);
     if ( i >= result )
       break;
-    v2 = TAIStaticPtrVector<CAISectorAI,8>::operator[](i);
+    v2 = TAIStaticPtrVector<CAISectorAI,8>::operator[]((_DWORD *)this + 18, i);
     (*(void (__thiscall **)(int, int))(*(_DWORD *)v2 + 32))(v2, v2);
   }
   return result;

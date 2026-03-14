@@ -260,7 +260,7 @@ void  CPlayerGameData::PostLoadInit(int a2) {
 // Decompiled from void __thiscall CPlayerGameData::SetPlayerLostFlag(CPlayerGameData *this)
 void  CPlayerGameData::SetPlayerLostFlag(void) {
   
-  unsigned int v1; // eax
+  int v1; // eax
 
   v1 = CPlayerGameData::Flags(this);
   CPlayerGameData::SetFlags(this, v1 | 1);
@@ -316,14 +316,10 @@ void  CPlayerGameData::SaveDataBlock(class IS4Chunk & a2, void * a3, unsigned in
 
 
 // address=[0x1474ca0]
-// Decompiled from int __thiscall CPlayerGameData::SetFlags(CPlayerGameData *this, unsigned int a2)
+// Decompiled from void __thiscall CPlayerGameData::SetFlags(CPlayerGameData *this, unsigned int a2)
 void  CPlayerGameData::SetFlags(unsigned int a2) {
   
-  int result; // eax
-
-  result = a2 + 1398813903;
-  *((_DWORD *)this + 1) = a2 + 1398813903;
-  return result;
+  *((_DWORD *)this + 1) = a2 + 0x536034CF;
 }
 
 

@@ -84,13 +84,13 @@ public:
     void  ChangeType(enum T_AI_TASK_FORCE_TYPE a2);
 
     // address=[0x1327260]
-    virtual enum T_RESULT  CAITaskForce::AddEntity(class CAIEntityInfo * a2, enum CAITaskForce::T_POSITION a3);
+    virtual enum T_RESULT  CAITaskForce::AddEntity(class CAIEntityInfo * _pEntityInfo, enum CAITaskForce::T_POSITION a3);
 
     // address=[0x13275f0]
-    enum T_RESULT  CAITaskForce::AddEntity(int a2, enum CAITaskForce::T_POSITION a3);
+    enum T_RESULT  CAITaskForce::AddEntity(int _iEntityId, enum CAITaskForce::T_POSITION a3);
 
     // address=[0x1327690]
-    virtual enum T_RESULT  CAITaskForce::RemoveEntity(class CAIEntityInfo * a2);
+    virtual enum T_RESULT  CAITaskForce::RemoveEntity(class CAIEntityInfo * _pEntityInfo);
 
     // address=[0x13279f0]
     enum T_RESULT  CAITaskForce::RemoveEntity(int a2);
@@ -99,7 +99,7 @@ public:
     virtual void  RemoveAllEntities(void);
 
     // address=[0x1327b40]
-    void  SetAssociatedTaskForce(class CAITaskForce * a2);
+    void  SetAssociatedTaskForce(class CAITaskForce * _pTaskForce);
 
     // address=[0x1327c70]
     void  ClearAssociatedTaskForce(void);
@@ -117,7 +117,7 @@ public:
     char const *  ShortName(void)const;
 
     // address=[0x13280e0]
-    bool  GetPositionOfFirstEntity(int & a2, int & a3);
+    bool  GetPositionOfFirstEntity(int & _rX, int & _rY);
 
     // address=[0x132a520]
     class CAITaskForceGroup const *  TaskForceGroup(void)const;
@@ -129,7 +129,7 @@ public:
     bool  GoalIsPosition(void)const;
 
     // address=[0x132ec90]
-    void  SetWaitCounter(unsigned int a2);
+    void  SetWaitCounter(unsigned int _uNewCounter);
 
     // address=[0x132ece0]
     int  State(void)const;
@@ -139,10 +139,10 @@ protected:
     virtual bool  IsAddEntityOk(int a2);
 
     // address=[0x1326f40]
-     CAITaskForce(int a2, enum T_AI_TASK_FORCE_CLASS a3, enum T_AI_TASK_FORCE_TYPE a4, int a5);
+     CAITaskForce(int _iOwnerId, enum T_AI_TASK_FORCE_CLASS _tClass, enum T_AI_TASK_FORCE_TYPE _tType, int _iFlags);
 
     // address=[0x13281a0]
-    void  SetCommand(int a2, int a3, int a4);
+    void  SetCommand(int _iCommand, int a3, int _iFlags);
 
     // address=[0x1328240]
     void  MarkGoalAsEntity(void);
@@ -172,13 +172,38 @@ protected:
     void  SetState(int a2);
 
     // address=[0x132eb80]
-    void  SetStateEx(int a2, int a3);
+    void  SetStateEx(int a2, int _iNextState);
 
     // address=[0x132ebf0]
-    void  SetStateFlagBit(unsigned int a2);
+    void  SetStateFlagBit(unsigned int _uMask);
 
     // address=[0x132ec50]
     void  SetStatus(enum T_AI_TASK_FORCE_STATUS a2);
+
+    // Type information members
+public:
+    _DWORD m_tClass;
+    _DWORD m_tType;
+    int m_iNumberOfEntities;
+    struct CAIEntityInfo * m_pFirstEntity;
+    struct CAIEntityInfo * m_pLastEntity;
+    struct CAITaskForce * m_pPrevTaskForce;
+    struct CAITaskForce * m_pFirstTaskForce;
+    CAITaskForce * m_pPrevTaskForceGroupMember;
+    struct CAITaskForce * m_pNextTaskForceGroupMember;
+    struct CAITaskForceGroup * m_pTaskForceGroup;
+    struct CAITaskForce * m_pAssociatedTaskForce;
+    int m_iAssociatedId;
+    unsigned __int8 m_uNewCounter;
+    _BYTE m_bState;
+    _BYTE m_iNextState;
+    unsigned __int8 m_bStatus;
+    DWORD m_uFlags;
+    _DWORD m_uCmdGoal;
+    _DWORD m_uCmdUniqueId;
+    _DWORD m_uCmdTimeStamp;
+    _DWORD m_uStatusTimeStamp;
+    _DWORD m_uTimeStamp;
 
 };
 

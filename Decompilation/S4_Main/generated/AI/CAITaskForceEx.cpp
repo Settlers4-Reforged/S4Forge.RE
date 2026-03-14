@@ -1,3 +1,4 @@
+#if FALSE
 #include "CAITaskForceEx.h"
 
 // Definitions for class CAITaskForceEx
@@ -632,3 +633,4 @@ void  CAITaskForceEx::SetCommandAndClearStuff(int a2, int a3, int a4) {
 }
 
 
+#endif // Already implemented

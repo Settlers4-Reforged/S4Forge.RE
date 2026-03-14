@@ -12,6 +12,12 @@ protected:
     // address=[0x130aba0]
      CAIEntityInfoTower(void);
 
+    // Type information members
+public:
+    _DWORD dword8;
+    _DWORD dwordC;
+    _DWORD dword10;
+
 };
 
 

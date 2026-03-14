@@ -15,10 +15,10 @@
  CAIEntityInfoTower::CAIEntityInfoTower(void) {
   
   CAIEntityInfoEx::CAIEntityInfoEx(this, 0);
-  *(_DWORD *)this = &CAIEntityInfoTower::_vftable_;
-  *((_DWORD *)this + 2) = 0;
-  *((_DWORD *)this + 3) = 0;
-  *((_DWORD *)this + 4) = 0;
+  this->vftable = (CAIEntityInfoEx_vtbl *)&CAIEntityInfoTower::_vftable_;
+  this->dword8 = 0;
+  this->dwordC = 0;
+  this->dword10 = 0;
   return this;
 }
 

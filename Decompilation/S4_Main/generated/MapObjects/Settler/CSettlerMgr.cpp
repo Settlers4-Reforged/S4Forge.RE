@@ -32,8 +32,8 @@ class CSettler &  CSettlerMgr::operator[](int a1) {
 
 
 // address=[0x130ecc0]
-// Decompiled from int __thiscall CSettlerMgr::GetNumberOfSettlers(CSettlerMgr *this, int a2, int a3)
-int  CSettlerMgr::GetNumberOfSettlers(int a2, int a3)const {
+// Decompiled from int __thiscall CSettlerMgr::GetNumberOfSettlers(CSettlerMgr *this, int a2, S4_SETTLER_ENUM _iSettlerType)
+int  CSettlerMgr::GetNumberOfSettlers(int a2, int _iSettlerType)const {
   
   if ( (a2 < 1 || a2 > 8)
     && BBSupportDbgReport(
@@ -44,7 +44,7 @@ int  CSettlerMgr::GetNumberOfSettlers(int a2, int a3)const {
   {
     __debugbreak();
   }
-  if ( (a3 <= 0 || a3 >= 67)
+  if ( (_iSettlerType <= SETTLER_NO_SETTLER || _iSettlerType >= SETTLER_MAX)
     && BBSupportDbgReport(
          2,
          "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\MapObjects\\Settler\\SettlerMgr.h",
@@ -53,7 +53,7 @@ int  CSettlerMgr::GetNumberOfSettlers(int a2, int a3)const {
   {
     __debugbreak();
   }
-  return *((_DWORD *)this + 67 * a2 + a3 + 610);
+  return *((_DWORD *)this + 67 * a2 + _iSettlerType + 610);
 }
 
 
@@ -1924,15 +1924,15 @@ void __cdecl CSettlerMgr::FillFreeCarrier(class CInfoExchange * a1, bool a2, boo
     LocalPlayerId = CPlayerManager::GetLocalPlayerId();
     if ( CEcoSector::Owner(v5) == LocalPlayerId )
     {
-      a1->m_uNrOfSettlers = CEcoSector::NrOfSettler(v5, S4_SETTLER_CARRIER);
+      a1->m_uNrOfSettlers = CEcoSector::NrOfSettler(v5, SETTLER_CARRIER);
       a1->m_uNrOfCarriers = CEcoSector::MinCarrier(v5);
       a1->m_uNrOfNonCarriers = a1->m_uNrOfSettlers - a1->m_uNrOfCarriers;
-      a1->m_uNrOfDigger = CEcoSector::NrOfSettler(v5, S4_SETTLER_DIGGER);
-      a1->m_uNrOfFreeDigger = CEcoSector::WorkerDeltaAmount(v5, S4_SETTLER_DIGGER);
+      a1->m_uNrOfDigger = CEcoSector::NrOfSettler(v5, SETTLER_DIGGER);
+      a1->m_uNrOfFreeDigger = CEcoSector::WorkerDeltaAmount(v5, SETTLER_DIGGER);
       a1->m_bHasShovels = CEcoSector::NrOfGoods(v5, S4_GOOD_SHOVEL) > 0;
       a1->m_uNrOfShovels = CEcoSector::NrOfGoods(v5, S4_GOOD_SHOVEL);
-      a1->m_uNrOfBuilders = CEcoSector::NrOfSettler(v5, S4_SETTLER_BUILDER);
-      a1->m_uNrOfFreeBuilders = CEcoSector::WorkerDeltaAmount(v5, S4_SETTLER_BUILDER);
+      a1->m_uNrOfBuilders = CEcoSector::NrOfSettler(v5, SETTLER_BUILDER);
+      a1->m_uNrOfFreeBuilders = CEcoSector::WorkerDeltaAmount(v5, SETTLER_BUILDER);
       a1->m_bHasHammers = CEcoSector::NrOfGoods(v5, S4_GOOD_HAMMER) > 0;
       a1->m_uNrOfHammers = CEcoSector::NrOfGoods(v5, S4_GOOD_HAMMER);
       a1->m_bLooksAtEcoSector = 1;

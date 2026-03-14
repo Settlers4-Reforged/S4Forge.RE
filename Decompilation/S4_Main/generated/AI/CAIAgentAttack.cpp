@@ -7,7 +7,7 @@
  CAIAgentAttack::CAIAgentAttack(void) {
   
   CAINormalSectorAgent::CAINormalSectorAgent(this, "attack");
-  *(_DWORD *)this = &CAIAgentAttack::_vftable_;
+  this->__vftable = (CAIAgent_vtbl *)&CAIAgentAttack::_vftable_;
   CAIAgentAttack::ResetAttackState(this);
   return this;
 }
@@ -17,7 +17,7 @@
 // Decompiled from unsigned int __thiscall CAIAgentAttack::Execute(CAIAgentAttack *this, unsigned int a2, unsigned int a3)
 unsigned int  CAIAgentAttack::Execute(unsigned int a2, unsigned int a3) {
   
-  struct CAINormalSectorAI *v3; // eax
+  CAISectorAI *v3; // eax
   pairNode *v4; // eax
   unsigned int v5; // esi
   unsigned int v6; // eax
@@ -28,27 +28,27 @@ unsigned int  CAIAgentAttack::Execute(unsigned int a2, unsigned int a3) {
   int v12; // [esp+1Ch] [ebp-1Ch]
   int v13; // [esp+20h] [ebp-18h]
   unsigned int v14; // [esp+24h] [ebp-14h]
-  int v15; // [esp+30h] [ebp-8h]
+  unsigned int v15; // [esp+30h] [ebp-8h]
 
   v3 = CAINormalSectorAgent::SectorAI(this);
   v4 = (pairNode *)CAISectorAI::PlayerAI(v3);
   v15 = CAIPlayerAI::PlayerId(v4);
-  switch ( *((_DWORD *)this + 10) )
+  switch ( this->m_uU1 )
   {
     case 0:
-      CAIPlayersScriptVars::operator[](v15);
+      CAIPlayersScriptVars::operator[]((char *)g_cAIPlayersScriptVars, v15);
       v12 = CAIPlayerScriptVars::operator[](0);
       if ( v12 <= 0 )
         return CAIAgent::ExecuteResult(0, 0);
-      CAIPlayersScriptVars::operator[](v15);
+      CAIPlayersScriptVars::operator[]((char *)g_cAIPlayersScriptVars, v15);
       v10 = CAIPlayerScriptVars::operator[](1);
       v9 = IAIEnvironment::MinutesToTicks(v10);
       v14 = IAIEnvironment::TickCounter();
-      if ( v14 <= *((_DWORD *)this + 13) || v14 <= v9 )
+      if ( v14 <= this->m_uU4 || v14 <= v9 )
         return CAIAgent::ExecuteResult(0, 0);
-      if ( (unsigned int)IAIEnvironment::Rand() < *((_DWORD *)this + 14)
+      if ( (unsigned int)IAIEnvironment::Rand() < this->m_uU5
         && ((v5 = IAIEnvironment::Rand(),
-             CAIPlayersScriptVars::operator[](v15),
+             CAIPlayersScriptVars::operator[]((char *)g_cAIPlayersScriptVars, v15),
              v6 = CAIPlayerScriptVars::operator[](2),
              v5 >= CRandom16::PercentValue(v6))
           ? (v13 = 2)
@@ -57,13 +57,13 @@ unsigned int  CAIAgentAttack::Execute(unsigned int a2, unsigned int a3) {
          && CAIAgentAttack::CheckStrengthAndFindAnyTarget(this, 0, v13)
          && CAIAgentAttack::OrderSquadsToSneakUpPosition(this, v13 == 1)) )
       {
-        *((_DWORD *)this + 10) = 1;
+        this->m_uU1 = 1;
         return CAIAgent::ExecuteResult(0, 0);
       }
       else
       {
-        if ( *((_DWORD *)this + 14) < CRandom16::PercentValue(0x10u) )
-          *((_DWORD *)this + 14) += CRandom16::PercentValue(2u);
+        if ( this->m_uU5 < CRandom16::PercentValue(0x10u) )
+          this->m_uU5 += CRandom16::PercentValue(2u);
         v8 = IAIEnvironment::Rand();
         return CAIAgent::ExecuteResult((v8 & 0x100) + 512, 0);
       }
@@ -74,19 +74,19 @@ unsigned int  CAIAgentAttack::Execute(unsigned int a2, unsigned int a3) {
       if ( !v11 )
         goto LABEL_23;
       if ( v11 > 0 )
-        *((_DWORD *)this + 10) = 3;
+        this->m_uU1 = 3;
       return CAIAgent::ExecuteResult(0, 0);
     case 2:
       CAIAgentAttack::CheckCurrentTarget(this, 1);
-      if ( (int)CAIAgentAttack::CheckSquadTargets(this) > 0 )
+      if ( CAIAgentAttack::CheckSquadTargets(this) > 0 )
         return CAIAgent::ExecuteResult(0, 0);
       CAIAgentAttack::OrderSquadsHome(this, 4);
       CAIAgentAttack::ResetAttackState(this);
       return CAIAgent::ExecuteResult(0, 0);
     case 3:
-      if ( CAIAgentAttack::CheckCurrentTarget(this, 1) && (int)CAIAgentAttack::OrderSquadsToAttack(this) > 0 )
+      if ( CAIAgentAttack::CheckCurrentTarget(this, 1) && CAIAgentAttack::OrderSquadsToAttack(this) > 0 )
       {
-        *((_DWORD *)this + 10) = 2;
+        this->m_uU1 = 2;
       }
       else
       {
@@ -101,7 +101,7 @@ LABEL_23:
              "AI\\AI_AgentsAttack.cpp",
              783,
              "CAIAgentAttack::Execute(): Invalid state %i!",
-             *((_DWORD *)this + 10)) == 1 )
+             this->m_uU1) == 1 )
         __debugbreak();
       CAIAgentAttack::ResetAttackState(this);
       return CAIAgent::ExecuteResult(0, 0);
@@ -114,21 +114,21 @@ LABEL_23:
 void  CAIAgentAttack::Load(class IS4Chunk & a2) {
   
   CAIAgentAttack::ResetAttackState(this);
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 12))(a2, -1516290048);
-  (*(void (__thiscall **)(struct IS4Chunk *, int, int))(*(_DWORD *)a2 + 4))(a2, 1, 1);
+  a2->LoadSignature(-1516290048);
+  a2->LoadUnsigned32(1, 1);
   CAIAgent::Load(this, a2);
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 12))(a2, -1516290046);
-  *((_DWORD *)this + 10) = (*(int (__thiscall **)(struct IS4Chunk *, _DWORD, int))(*(_DWORD *)a2 + 4))(a2, 0, 3);
-  *((_DWORD *)this + 11) = (*(int (__thiscall **)(struct IS4Chunk *))(*(_DWORD *)a2 + 8))(a2);
-  *((_DWORD *)this + 12) = (*(int (__thiscall **)(struct IS4Chunk *))(*(_DWORD *)a2 + 8))(a2);
-  *((_DWORD *)this + 13) = (*(int (__thiscall **)(struct IS4Chunk *))(*(_DWORD *)a2 + 8))(a2);
-  *((_DWORD *)this + 14) = (*(int (__thiscall **)(struct IS4Chunk *))(*(_DWORD *)a2 + 8))(a2);
-  *((_DWORD *)this + 15) = (*(int (__thiscall **)(struct IS4Chunk *))(*(_DWORD *)a2 + 8))(a2);
-  *((_DWORD *)this + 16) = (*(int (__thiscall **)(struct IS4Chunk *))(*(_DWORD *)a2 + 8))(a2);
-  *((_DWORD *)this + 17) = (*(int (__thiscall **)(struct IS4Chunk *))(*(_DWORD *)a2 + 8))(a2);
-  *((_DWORD *)this + 18) = (*(int (__thiscall **)(struct IS4Chunk *))(*(_DWORD *)a2 + 8))(a2);
-  *((_DWORD *)this + 19) = (*(int (__thiscall **)(struct IS4Chunk *))(*(_DWORD *)a2 + 8))(a2);
-  return (*(int (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 12))(a2, -1516290047);
+  ((void (__thiscall *)(struct IS4Chunk *, int))a2->LoadSignature)(a2, -1516290046);
+  this->m_uU1 = ((int (__thiscall *)(struct IS4Chunk *, _DWORD, int))a2->LoadUnsigned32)(a2, 0, 3);
+  this->m_uU2 = a2->LoadUnsigned32_(a2);
+  this->m_uU3 = a2->LoadUnsigned32_(a2);
+  this->m_uU4 = a2->LoadUnsigned32_(a2);
+  this->m_uU5 = a2->LoadUnsigned32_(a2);
+  this->m_uU6 = a2->LoadUnsigned32_(a2);
+  this->m_uU7 = a2->LoadUnsigned32_(a2);
+  this->m_uU8 = a2->LoadUnsigned32_(a2);
+  this->m_uU9 = a2->LoadUnsigned32_(a2);
+  this->m_uU10 = a2->LoadUnsigned32_(a2);
+  return ((int (__thiscall *)(struct IS4Chunk *, int))a2->LoadSignature)(a2, -1516290047);
 }
 
 
@@ -211,29 +211,25 @@ void  CAIAgentAttack::ResetAttackState(void) {
   
   int v1; // esi
 
-  *((_DWORD *)this + 10) = 0;
-  *((_DWORD *)this + 11) = 0;
-  *((_DWORD *)this + 12) = 0;
+  this->m_uU1 = 0;
+  this->m_uU2 = 0;
+  this->m_uU3 = 0;
   v1 = IAIEnvironment::TickCounter();
-  *((_DWORD *)this + 13) = v1 + (IAIEnvironment::Rand() & 0x7F) + 512;
-  *((_DWORD *)this + 14) = CRandom16::PercentValue(2u);
+  this->m_uU4 = v1 + (IAIEnvironment::Rand() & 0x7F) + 512;
+  this->m_uU5 = CRandom16::PercentValue(2u);
   CAIAgentAttack::ResetAttackTarget(this);
 }
 
 
 // address=[0x13000d0]
-// Decompiled from CAIAgentAttack *__thiscall CAIAgentAttack::ResetAttackTarget(CAIAgentAttack *this)
+// Decompiled from void __thiscall CAIAgentAttack::ResetAttackTarget(CAIAgentAttack *this)
 void  CAIAgentAttack::ResetAttackTarget(void) {
   
-  CAIAgentAttack *result; // eax
-
-  *((_DWORD *)this + 15) = 0;
-  *((_DWORD *)this + 16) = 0;
-  *((_DWORD *)this + 17) = 0;
-  result = this;
-  *((_DWORD *)this + 18) = 0;
-  *((_DWORD *)this + 19) = 0;
-  return result;
+  this->m_uU6 = 0;
+  this->m_uU7 = 0;
+  this->m_uU8 = 0;
+  this->m_uU9 = 0;
+  this->m_uU10 = 0;
 }
 
 
@@ -523,12 +519,12 @@ bool  CAIAgentAttack::FindNearTarget(class CAITaskForce * a2, int a3, int & a4) 
 
 
 // address=[0x13006e0]
-// Decompiled from char __thiscall CAIAgentAttack::CheckStrengthAndFindAnyTarget(CAIAgentAttack *this, int a2, int a3)
+// Decompiled from char __thiscall CAIAgentAttack::CheckStrengthAndFindAnyTarget(CAIAgentAttack *this, char *a2, int a3)
 bool  CAIAgentAttack::CheckStrengthAndFindAnyTarget(int a2, int a3) {
   
   pairNode *v3; // eax
-  CAIGoal *v4; // eax
-  CAIGoal *v5; // eax
+  char *v4; // eax
+  char *v5; // eax
   int v7; // [esp+4h] [ebp-3Ch]
   int v8; // [esp+Ch] [ebp-34h]
   int v9; // [esp+10h] [ebp-30h]
@@ -537,7 +533,7 @@ bool  CAIAgentAttack::CheckStrengthAndFindAnyTarget(int a2, int a3) {
   int v12; // [esp+1Ch] [ebp-24h]
   int v13; // [esp+20h] [ebp-20h]
   struct CAINormalSectorAI *v14; // [esp+24h] [ebp-1Ch]
-  int v15; // [esp+28h] [ebp-18h]
+  int m_uU3; // [esp+28h] [ebp-18h]
   CAIGoalCache *v16; // [esp+2Ch] [ebp-14h]
   int v17; // [esp+30h] [ebp-10h]
   int v18; // [esp+34h] [ebp-Ch]
@@ -546,10 +542,10 @@ bool  CAIAgentAttack::CheckStrengthAndFindAnyTarget(int a2, int a3) {
   IMessageTracer::PushFormatedInts(
     g_pMsgTracer,
     "CAIAgentAttack::CheckStrengthAndFindAnyTarget(): TargetPlayerId %u, Mode %u",
-    a2,
+    (DWORD)a2,
     a3);
   CAIAgentAttack::ResetAttackTarget(this);
-  if ( !a3 || *((int *)this + 11) >= 15 )
+  if ( !a3 || this->m_uU2 >= 15 )
   {
     v14 = CAINormalSectorAgent::SectorAI(this);
     v16 = (struct CAINormalSectorAI *)((char *)v14 + 1452);
@@ -559,33 +555,33 @@ bool  CAIAgentAttack::CheckStrengthAndFindAnyTarget(int a2, int a3) {
       v3 = (pairNode *)CAISectorAI::PlayerAI(v14);
       v12 = CAIPlayerAI::PlayerId(v3);
       v17 = IAIEnvironment::AlliancesPlayerAllyBits(v12);
-      if ( a2 > 0 )
-        v17 = ~IAIEnvironment::AlliancesPlayerBit(a2);
-      v15 = *((_DWORD *)this + 12);
+      if ( (int)a2 > 0 )
+        v17 = ~IAIEnvironment::AlliancesPlayerBit((char)a2);
+      m_uU3 = this->m_uU3;
       if ( a3 > 0 )
       {
         if ( a3 == 1 )
           v13 = 3;
         else
           v13 = 4;
-        CAIPlayersScriptVars::operator[](v12);
+        CAIPlayersScriptVars::operator[]((char *)g_cAIPlayersScriptVars, v12);
         v11 = CAIPlayerScriptVars::operator[](v13);
         if ( v11 > 0 )
-          v15 = 100 * v15 / v11;
+          m_uU3 = 100 * m_uU3 / v11;
       }
       for ( i = 0; i < v10; ++i )
       {
         v4 = CAIGoalCache::Goal(v16, i);
-        v18 = CAIGoal::EntityId(v4);
+        v18 = CAIGoal::EntityId((CAIGoal *)v4);
         v5 = CAIGoalCache::Goal(v16, i);
-        v7 = CAIGoal::UniqueId(v5);
+        v7 = CAIGoal::UniqueId((CAIGoal *)v5);
         if ( IAIEnvironment::EntityUniqueId(v18) == v7 )
         {
           v9 = IAIEnvironment::EntityOwnerId(v18);
           v8 = IAIEnvironment::AlliancesPlayerBit(v9);
           if ( (v17 & v8) == 0 )
           {
-            if ( a3 > 0 && v15 <= dword_3E95220[22 * v9] )
+            if ( a3 > 0 && m_uU3 <= MEMORY[0x3E95220][22 * v9] )
             {
               v17 |= v8;
             }

@@ -34,10 +34,10 @@ protected:
     static int __cdecl NumberOfTaskForces(int a1, int a2);
 
     // address=[0x1329490]
-    static void __cdecl AddTaskForce(class CAITaskForce * a1);
+    static void __cdecl AddTaskForce(class CAITaskForce * _pTaskForce);
 
     // address=[0x1329590]
-    static void __cdecl RemoveTaskForce(class CAITaskForce * a1);
+    static void __cdecl RemoveTaskForce(class CAITaskForce * _pTaskForce);
 
 };
 

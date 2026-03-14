@@ -3,7 +3,7 @@
 // Definitions for class CAINormalSectorAI
 
 // address=[0x1323250]
-// Decompiled from std::bad_function_call *__thiscall CAINormalSectorAI::CAINormalSectorAI(  std::bad_function_call *this,  pairNode *a2,  int a3)
+// Decompiled from CAINormalSectorAI *__thiscall CAINormalSectorAI::CAINormalSectorAI(CAINormalSectorAI *this, pairNode *a2, int a3)
  CAINormalSectorAI::CAINormalSectorAI(class CAIPlayerAI & a2, int a3) {
   
   int v3; // eax
@@ -11,7 +11,7 @@
   int v5; // eax
   int v6; // eax
   int v8; // [esp+4h] [ebp-20h]
-  int v9; // [esp+8h] [ebp-1Ch] BYREF
+  Grid *v9; // [esp+8h] [ebp-1Ch] BYREF
   int v10; // [esp+Ch] [ebp-18h] BYREF
   int i; // [esp+10h] [ebp-14h]
   std::bad_function_call *v12; // [esp+14h] [ebp-10h]
@@ -39,7 +39,7 @@
   CAITaskForceReservoir::CAITaskForceReservoir((std::bad_function_call *)((char *)v12 + 2644), *((_DWORD *)a2 + 3));
   LOBYTE(v13) = 6;
   CAITaskForceReservoir::CAITaskForceReservoir((std::bad_function_call *)((char *)v12 + 2724), *((_DWORD *)a2 + 3));
-  CAIAgentAttack::CAIAgentAttack((std::bad_function_call *)((char *)v12 + 2804));
+  CAIAgentAttack::CAIAgentAttack((CAIAgentAttack *)((char *)v12 + 2804));
   CAIAgentEvalDefence::CAIAgentEvalDefence((std::bad_function_call *)((char *)v12 + 2884));
   CAIAgentEvalOffence::CAIAgentEvalOffence((std::bad_function_call *)((char *)v12 + 2928));
   CAIAgentGeologists::CAIAgentGeologists((std::bad_function_call *)((char *)v12 + 2968));
@@ -66,19 +66,84 @@
   CMilitaryBuildingIterator::Init((std::bad_function_call *)((char *)v12 + 3408), v3);
   v4 = IAIEnvironment::AlliancesPlayerEnemyBits(v8);
   CMilitaryBuildingIterator::Init((std::bad_function_call *)((char *)v12 + 3444), v4);
-  CAINormalSectorAI::AttachAgentEx(v12, (std::bad_function_call *)((char *)v12 + 2804), 0x64u, 0x100u, 8u);
-  CAINormalSectorAI::AttachAgentEx(v12, (std::bad_function_call *)((char *)v12 + 2884), 5u, 0x100u, 8u);
-  CAINormalSectorAI::AttachAgentEx(v12, (std::bad_function_call *)((char *)v12 + 2928), 0xAu, 0x100u, 8u);
-  CAINormalSectorAI::AttachAgentEx(v12, (std::bad_function_call *)((char *)v12 + 3008), 0x64u, 0x100u, 8u);
-  CAINormalSectorAI::AttachAgentEx(v12, (std::bad_function_call *)((char *)v12 + 2968), 0x64u, 0x100u, 8u);
-  CAINormalSectorAI::AttachAgentEx(v12, (std::bad_function_call *)((char *)v12 + 3048), 0x25u, 0x100u, 8u);
-  CAINormalSectorAI::AttachAgentEx(v12, (std::bad_function_call *)((char *)v12 + 3092), 0x64u, 0x100u, 8u);
-  CAINormalSectorAI::AttachAgentEx(v12, (std::bad_function_call *)((char *)v12 + 3132), 0x64u, 0x100u, 8u);
-  CAINormalSectorAI::AttachAgentEx(v12, (std::bad_function_call *)((char *)v12 + 3204), 0xFAu, 0x100u, 8u);
-  CAINormalSectorAI::AttachAgentEx(v12, (std::bad_function_call *)((char *)v12 + 3248), 0x64u, 0x100u, 8u);
-  CAINormalSectorAI::AttachAgentEx(v12, (std::bad_function_call *)((char *)v12 + 3288), 0x64u, 0x100u, 8u);
-  CAINormalSectorAI::AttachAgentEx(v12, (std::bad_function_call *)((char *)v12 + 3328), 0x64u, 0x100u, 8u);
-  CAINormalSectorAI::AttachAgentEx(v12, (std::bad_function_call *)((char *)v12 + 3368), 0x96u, 0x100u, 8u);
+  CAINormalSectorAI::AttachAgentEx(
+    v12,
+    (struct CAINormalSectorAgent *)((char *)v12 + 2804),
+    (CAIScheduler *)0x64,
+    (CAIScheduler *)0x100,
+    (CAIScheduler *)8);
+  CAINormalSectorAI::AttachAgentEx(
+    v12,
+    (struct CAINormalSectorAgent *)((char *)v12 + 2884),
+    (CAIScheduler *)5,
+    (CAIScheduler *)0x100,
+    (CAIScheduler *)8);
+  CAINormalSectorAI::AttachAgentEx(
+    v12,
+    (struct CAINormalSectorAgent *)((char *)v12 + 2928),
+    (CAIScheduler *)0xA,
+    (CAIScheduler *)0x100,
+    (CAIScheduler *)8);
+  CAINormalSectorAI::AttachAgentEx(
+    v12,
+    (struct CAINormalSectorAgent *)((char *)v12 + 3008),
+    (CAIScheduler *)0x64,
+    (CAIScheduler *)0x100,
+    (CAIScheduler *)8);
+  CAINormalSectorAI::AttachAgentEx(
+    v12,
+    (struct CAINormalSectorAgent *)((char *)v12 + 2968),
+    (CAIScheduler *)0x64,
+    (CAIScheduler *)0x100,
+    (CAIScheduler *)8);
+  CAINormalSectorAI::AttachAgentEx(
+    v12,
+    (struct CAINormalSectorAgent *)((char *)v12 + 3048),
+    (CAIScheduler *)0x25,
+    (CAIScheduler *)0x100,
+    (CAIScheduler *)8);
+  CAINormalSectorAI::AttachAgentEx(
+    v12,
+    (struct CAINormalSectorAgent *)((char *)v12 + 3092),
+    (CAIScheduler *)0x64,
+    (CAIScheduler *)0x100,
+    (CAIScheduler *)8);
+  CAINormalSectorAI::AttachAgentEx(
+    v12,
+    (struct CAINormalSectorAgent *)((char *)v12 + 3132),
+    (CAIScheduler *)0x64,
+    (CAIScheduler *)0x100,
+    (CAIScheduler *)8);
+  CAINormalSectorAI::AttachAgentEx(
+    v12,
+    (struct CAINormalSectorAgent *)((char *)v12 + 3204),
+    (CAIScheduler *)0xFA,
+    (CAIScheduler *)0x100,
+    (CAIScheduler *)8);
+  CAINormalSectorAI::AttachAgentEx(
+    v12,
+    (struct CAINormalSectorAgent *)((char *)v12 + 3248),
+    (CAIScheduler *)0x64,
+    (CAIScheduler *)0x100,
+    (CAIScheduler *)8);
+  CAINormalSectorAI::AttachAgentEx(
+    v12,
+    (struct CAINormalSectorAgent *)((char *)v12 + 3288),
+    (CAIScheduler *)0x64,
+    (CAIScheduler *)0x100,
+    (CAIScheduler *)8);
+  CAINormalSectorAI::AttachAgentEx(
+    v12,
+    (struct CAINormalSectorAgent *)((char *)v12 + 3328),
+    (CAIScheduler *)0x64,
+    (CAIScheduler *)0x100,
+    (CAIScheduler *)8);
+  CAINormalSectorAI::AttachAgentEx(
+    v12,
+    (struct CAINormalSectorAgent *)((char *)v12 + 3368),
+    (CAIScheduler *)0x96,
+    (CAIScheduler *)0x100,
+    (CAIScheduler *)8);
   for ( i = 0; i <= 14; ++i )
   {
     *((_DWORD *)v12 + i + 8) = CAITaskForces::CreateTaskForce(v8, 1);
@@ -90,7 +155,7 @@
   }
   if ( a3 <= 0 )
     return v12;
-  v9 = IAIEnvironment::UnpackXFast(a3);
+  v9 = (Grid *)IAIEnvironment::UnpackXFast(a3);
   v10 = IAIEnvironment::UnpackYFast(a3);
   *((_DWORD *)v12 + 58) = 0;
   *((_DWORD *)v12 + 59) = v9;
@@ -98,7 +163,7 @@
   IAIEnvironment::GetNearestNoneBlockedPosition(&v9, &v10);
   *((_DWORD *)v12 + 62) = v9;
   *((_DWORD *)v12 + 63) = v10;
-  v5 = IAIEnvironment::WorldIndex(v9, v10);
+  v5 = IAIEnvironment::WorldIndex((int)v9, v10);
   *((_DWORD *)v12 + 64) = v5;
   v6 = IAIEnvironment::WorldSectorId(*((_DWORD *)v12 + 64));
   *((_DWORD *)v12 + 65) = v6;

@@ -1,28 +1,29 @@
+#if FALSE
 #include "CAITaskForceGroup.h"
 
 // Definitions for class CAITaskForceGroup
 
 // address=[0x12fd0d0]
-// Decompiled from int __thiscall CAITaskForceGroup::FirstTaskForce(_DWORD *this, int a2)
+// Decompiled from struct CAITaskForce *__thiscall CAITaskForceGroup::FirstTaskForce(CAITaskForceGroup *this, int a2)
 class CAITaskForce *  CAITaskForceGroup::FirstTaskForce(enum T_AI_TASK_FORCE_CLASS a2)const {
   
-  return this[a2 + 26];
+  return this->m_sData.m_pTaskForces[a2];
 }
 
 
 // address=[0x13015c0]
-// Decompiled from int __thiscall CAITaskForceGroup::NumberOfTaskForcesOfType(_DWORD *this, int a2)
+// Decompiled from int __thiscall CAITaskForceGroup::NumberOfTaskForcesOfType(CAITaskForceGroup *this, int a2)
 int  CAITaskForceGroup::NumberOfTaskForcesOfType(enum T_AI_TASK_FORCE_TYPE a2)const {
   
-  return this[a2 + 12];
+  return this->m_sData.m_iNumberOfTaskForcesOfType[a2];
 }
 
 
 // address=[0x1303970]
-// Decompiled from int __thiscall CAITaskForceGroup::NumberOfTaskForcesOfClass(_DWORD *this, int a2)
+// Decompiled from DWORD __thiscall CAITaskForceGroup::NumberOfTaskForcesOfClass(CAITaskForceGroup *this, int a2)
 int  CAITaskForceGroup::NumberOfTaskForcesOfClass(enum T_AI_TASK_FORCE_CLASS a2)const {
   
-  return this[a2 + 3];
+  return this->m_sData.m_iNumberOfTaskForcesOfClass[a2];
 }
 
 
@@ -30,9 +31,9 @@ int  CAITaskForceGroup::NumberOfTaskForcesOfClass(enum T_AI_TASK_FORCE_CLASS a2)
 // Decompiled from CAITaskForceGroup *__thiscall CAITaskForceGroup::CAITaskForceGroup(CAITaskForceGroup *this, int a2)
  CAITaskForceGroup::CAITaskForceGroup(int a2) {
   
-  *(_DWORD *)this = CAITaskForceGroup::_vftable_;
-  memset((char *)this + 4, 0, 0x88u);
-  *((_DWORD *)this + 1) = a2;
+  this->vftable = CAITaskForceGroup::_vftable_;
+  memset(&this->m_sData, 0, sizeof(this->m_sData));
+  this->m_sData.m_iPlayerId = a2;
   return this;
 }
 
@@ -64,17 +65,17 @@ class CAITaskForce *  CAITaskForceGroup::CreateTaskForce(enum T_AI_TASK_FORCE_TY
 void  CAITaskForceGroup::DeleteAllTaskForces(void) {
   
   struct CAITaskForce *TaskForceGroupMemberOfSameClass; // [esp+0h] [ebp-20h]
-  CAITaskForce *j; // [esp+18h] [ebp-8h]
-  int i; // [esp+1Ch] [ebp-4h]
+  CAITaskForce *i; // [esp+18h] [ebp-8h]
+  int tTaskForceClass; // [esp+1Ch] [ebp-4h]
 
-  for ( i = 0; i < 9; ++i )
+  for ( tTaskForceClass = 0; tTaskForceClass < 9; ++tTaskForceClass )
   {
-    for ( j = (CAITaskForce *)CAITaskForceGroup::FirstTaskForce(this, i); j; j = TaskForceGroupMemberOfSameClass )
+    for ( i = CAITaskForceGroup::FirstTaskForce(this, tTaskForceClass); i; i = TaskForceGroupMemberOfSameClass )
     {
-      TaskForceGroupMemberOfSameClass = CAITaskForce::NextTaskForceGroupMemberOfSameClass(j);
-      (*(void (__thiscall **)(CAITaskForce *, int))(*(_DWORD *)j + 8))(j, 1);
+      TaskForceGroupMemberOfSameClass = CAITaskForce::NextTaskForceGroupMemberOfSameClass(i);
+      i->dtor(i, 1);
     }
-    if ( CAITaskForceGroup::FirstTaskForce(this, i) )
+    if ( CAITaskForceGroup::FirstTaskForce(this, tTaskForceClass) )
     {
       if ( BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 880, "FirstTaskForce(tTaskForceClass) == 0") == 1 )
         __debugbreak();
@@ -84,140 +85,138 @@ void  CAITaskForceGroup::DeleteAllTaskForces(void) {
 
 
 // address=[0x1328510]
-// Decompiled from int __thiscall CAITaskForceGroup::Load(CAITaskForceGroup *this, struct IS4Chunk *a2)
+// Decompiled from void __thiscall CAITaskForceGroup::Load(CAITaskForceGroup *this, struct IS4Chunk *a2)
 void  CAITaskForceGroup::Load(class IS4Chunk & a2) {
   
   int v2; // eax
-  int v4; // [esp-4h] [ebp-30h]
-  int v5; // [esp+0h] [ebp-2Ch]
-  int v6; // [esp+8h] [ebp-24h]
-  _DWORD *v7; // [esp+10h] [ebp-1Ch]
-  int v8; // [esp+14h] [ebp-18h]
-  int v9; // [esp+18h] [ebp-14h]
-  int v10; // [esp+1Ch] [ebp-10h]
+  int v3; // [esp-4h] [ebp-30h]
+  int v4; // [esp+8h] [ebp-24h]
+  CAITaskForce **v5; // [esp+10h] [ebp-1Ch]
+  int v6; // [esp+14h] [ebp-18h]
+  int v7; // [esp+18h] [ebp-14h]
+  CAITaskForce *pAssociatedTaskForce; // [esp+1Ch] [ebp-10h]
   int i; // [esp+24h] [ebp-8h]
-  struct CAITaskForce *TaskForce; // [esp+28h] [ebp-4h]
+  struct CAITaskForce *pTaskForce; // [esp+28h] [ebp-4h]
 
   CAITaskForceGroup::DeleteAllTaskForces(this);
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 12))(a2, -1516371968);
-  (*(void (__thiscall **)(struct IS4Chunk *, int, int))(*(_DWORD *)a2 + 4))(a2, 1, 1);
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 12))(a2, -1516371966);
-  v4 = CAITaskForceGroup::PlayerId(this);
+  a2->LoadSignature(-1516371968);
+  a2->LoadUnsigned32(1, 1);
+  a2->LoadSignature(-1516371966);
+  v3 = CAITaskForceGroup::PlayerId(this);
   v2 = CAITaskForceGroup::PlayerId(this);
-  (*(void (__thiscall **)(struct IS4Chunk *, int, int))(*(_DWORD *)a2 + 4))(a2, v2, v4);
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 12))(a2, -1516371965);
-  v9 = (*(int (__thiscall **)(struct IS4Chunk *))(*(_DWORD *)a2 + 8))(a2);
-  if ( v9 <= 0 )
-    return (*(int (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 12))(a2, -1516371967);
-  v7 = operator new[](4 * v9);
-  for ( i = 0; i < v9; ++i )
+  a2->LoadUnsigned32(v2, v3);
+  a2->LoadSignature(-1516371965);
+  v7 = a2->LoadUnsigned32_(a2);
+  if ( v7 > 0 )
   {
-    v6 = (*(int (__thiscall **)(struct IS4Chunk *, _DWORD, int))(*(_DWORD *)a2 + 4))(a2, 0, 13);
-    v5 = (*(int (__thiscall **)(struct IS4Chunk *))(*(_DWORD *)a2 + 8))(a2);
-    TaskForce = CAITaskForceGroup::CreateTaskForce(this, v6);
-    if ( !TaskForce && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 1012, "pTaskForce != 0") == 1 )
-      __debugbreak();
-    v7[i] = TaskForce;
-    (**(void (__thiscall ***)(struct CAITaskForce *, struct IS4Chunk *))TaskForce)(TaskForce, a2);
-    v8 = (*(int (__thiscall **)(struct IS4Chunk *, int, int))(*(_DWORD *)a2 + 8))(a2, v5, v6);
-    if ( v8 >= 0 && v8 < i )
+    v5 = (CAITaskForce **)operator new[](4 * v7);
+    for ( i = 0; i < v7; ++i )
     {
-      v10 = v7[v8];
-      if ( !v10 && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 1028, "pAssociatedTaskForce != 0") == 1 )
+      v4 = a2->LoadUnsigned32(0, 13);
+      a2->LoadUnsigned32_(a2);
+      pTaskForce = CAITaskForceGroup::CreateTaskForce(this, v4);
+      if ( !pTaskForce && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 1012, "pTaskForce != 0") == 1 )
         __debugbreak();
-      if ( v10 )
+      v5[i] = pTaskForce;
+      pTaskForce->Load(pTaskForce, a2);
+      v6 = a2->LoadUnsigned32_(a2);
+      if ( v6 >= 0 && v6 < i )
       {
-        *((_DWORD *)TaskForce + 11) = v10;
-        *(_DWORD *)(v10 + 44) = TaskForce;
+        pAssociatedTaskForce = v5[v6];
+        if ( !pAssociatedTaskForce
+          && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 1028, "pAssociatedTaskForce != 0") == 1 )
+        {
+          __debugbreak();
+        }
+        if ( pAssociatedTaskForce )
+        {
+          pTaskForce->m_pAssociatedTaskForce = pAssociatedTaskForce;
+          pAssociatedTaskForce->m_pAssociatedTaskForce = pTaskForce;
+        }
       }
     }
   }
-  return (*(int (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 12))(a2, -1516371967);
+  a2->LoadSignature(-1516371967);
 }
 
 
 // address=[0x13286f0]
-// Decompiled from int __thiscall CAITaskForceGroup::Save(CAITaskForceGroup *this, struct IS4Chunk *a2)
+// Decompiled from void __thiscall CAITaskForceGroup::Save(CAITaskForceGroup *this, struct IS4Chunk *a2)
 void  CAITaskForceGroup::Save(class IS4Chunk & a2) {
   
-  int v2; // eax
+  int iPlayerId; // eax
   int v3; // eax
-  int v5; // [esp+8h] [ebp-28h]
-  int v6; // [esp+Ch] [ebp-24h]
-  int v7; // [esp+10h] [ebp-20h]
-  CAITaskForce *v8; // [esp+14h] [ebp-1Ch]
+  int v4; // [esp+8h] [ebp-28h]
+  int iAssociatedId; // [esp+Ch] [ebp-24h]
+  int v6; // [esp+10h] [ebp-20h]
+  struct CAITaskForce *pAssociatedTaskForce; // [esp+14h] [ebp-1Ch]
   int k; // [esp+18h] [ebp-18h]
   struct CAITaskForce *j; // [esp+1Ch] [ebp-14h]
   int i; // [esp+20h] [ebp-10h]
   CAITaskForce *m; // [esp+28h] [ebp-8h]
-  int v14; // [esp+2Ch] [ebp-4h]
+  int iNumberOfTaskForces; // [esp+2Ch] [ebp-4h]
 
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 24))(a2, -1516371968);
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 20))(a2, 1);
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 24))(a2, -1516371966);
-  v2 = CAITaskForceGroup::PlayerId(this);
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 20))(a2, v2);
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 24))(a2, -1516371965);
-  v14 = 0;
+  a2->SaveSignature(-1516371968);
+  a2->SaveUnsigned32(1);
+  a2->SaveSignature(-1516371966);
+  iPlayerId = CAITaskForceGroup::PlayerId(this);
+  a2->SaveUnsigned32(iPlayerId);
+  a2->SaveSignature(-1516371965);
+  iNumberOfTaskForces = 0;
   for ( i = 1; i < 9; ++i )
   {
-    for ( j = (struct CAITaskForce *)CAITaskForceGroup::FirstTaskForce(this, i);
-          j;
-          j = CAITaskForce::NextTaskForceGroupMemberOfSameClass(j) )
-    {
-      *((_DWORD *)j + 12) = v14++;
-    }
+    for ( j = CAITaskForceGroup::FirstTaskForce(this, i); j; j = CAITaskForce::NextTaskForceGroupMemberOfSameClass(j) )
+      j->m_iAssociatedId = iNumberOfTaskForces++;
   }
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 20))(a2, v14);
-  if ( v14 <= 0 )
-    return (*(int (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 24))(a2, -1516371967);
-  v7 = 0;
-  for ( k = 1; k < 9; ++k )
+  a2->SaveUnsigned32(iNumberOfTaskForces);
+  if ( iNumberOfTaskForces > 0 )
   {
-    for ( m = (CAITaskForce *)CAITaskForceGroup::FirstTaskForce(this, k);
-          m;
-          m = CAITaskForce::NextTaskForceGroupMemberOfSameClass(m) )
+    v6 = 0;
+    for ( k = 1; k < 9; ++k )
     {
-      if ( v7 >= v14
-        && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 1103, "iTaskForceCounter < iNumberOfTaskForces") == 1 )
+      for ( m = CAITaskForceGroup::FirstTaskForce(this, k); m; m = CAITaskForce::NextTaskForceGroupMemberOfSameClass(m) )
       {
-        __debugbreak();
-      }
-      v3 = CAITaskForce::Type(m);
-      (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 20))(a2, v3);
-      (*(void (__thiscall **)(struct IS4Chunk *, _DWORD))(*(_DWORD *)a2 + 20))(a2, 0);
-      (*(void (__thiscall **)(CAITaskForce *, struct IS4Chunk *))(*(_DWORD *)m + 4))(m, a2);
-      v5 = -1;
-      v8 = (CAITaskForce *)CAITaskForce::AssociatedTaskForce(m);
-      if ( v8 )
-      {
-        if ( (CAITaskForceGroup *)CAITaskForce::TaskForceGroup(v8) != this
-          && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 1122, "pAssociatedTaskForce->TaskForceGroup() == this") == 1 )
+        if ( v6 >= iNumberOfTaskForces
+          && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 1103, "iTaskForceCounter < iNumberOfTaskForces") == 1 )
         {
           __debugbreak();
         }
-        if ( (CAITaskForceGroup *)CAITaskForce::TaskForceGroup(v8) == this )
+        v3 = CAITaskForce::Type(m);
+        a2->SaveUnsigned32(v3);
+        a2->SaveUnsigned32(0);
+        m->Save(m, a2);
+        v4 = -1;
+        pAssociatedTaskForce = CAITaskForce::AssociatedTaskForce(m);
+        if ( pAssociatedTaskForce )
         {
-          v6 = *((_DWORD *)v8 + 12);
-          if ( v6 >= v14
-            && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 1128, "iAssociatedId < iNumberOfTaskForces") == 1 )
+          if ( CAITaskForce::TaskForceGroup(pAssociatedTaskForce) != this
+            && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 1122, "pAssociatedTaskForce->TaskForceGroup() == this") == 1 )
           {
             __debugbreak();
           }
-          if ( v6 < v14 )
-            v5 = v6;
+          if ( CAITaskForce::TaskForceGroup(pAssociatedTaskForce) == this )
+          {
+            iAssociatedId = pAssociatedTaskForce->m_iAssociatedId;
+            if ( iAssociatedId >= iNumberOfTaskForces
+              && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 1128, "iAssociatedId < iNumberOfTaskForces") == 1 )
+            {
+              __debugbreak();
+            }
+            if ( iAssociatedId < iNumberOfTaskForces )
+              v4 = iAssociatedId;
+          }
         }
+        a2->SaveUnsigned32(v4);
+        ++v6;
       }
-      (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 20))(a2, v5);
-      ++v7;
+    }
+    if ( v6 != iNumberOfTaskForces
+      && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 1147, "iTaskForceCounter == iNumberOfTaskForces") == 1 )
+    {
+      __debugbreak();
     }
   }
-  if ( v7 != v14
-    && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 1147, "iTaskForceCounter == iNumberOfTaskForces") == 1 )
-  {
-    __debugbreak();
-  }
-  return (*(int (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 24))(a2, -1516371967);
+  a2->SaveSignature(-1516371967);
 }
 
 
@@ -225,26 +224,26 @@ void  CAITaskForceGroup::Save(class IS4Chunk & a2) {
 // Decompiled from int __thiscall CAITaskForceGroup::PlayerId(CAITaskForceGroup *this)
 int  CAITaskForceGroup::PlayerId(void) {
   
-  return *((_DWORD *)this + 1);
+  return this->m_sData.m_iPlayerId;
 }
 
 
 // address=[0x1328970]
-// Decompiled from _DWORD *__thiscall CAITaskForceGroup::AddTaskForce(CAITaskForceGroup *this, struct CAITaskForce *a2)
-void  CAITaskForceGroup::AddTaskForce(class CAITaskForce * a2) {
+// Decompiled from void __thiscall CAITaskForceGroup::AddTaskForce(CAITaskForceGroup *this, struct CAITaskForce *_pTaskForce)
+void  CAITaskForceGroup::AddTaskForce(class CAITaskForce * _pTaskForce) {
   
-  _DWORD *result; // eax
-  int v3; // [esp+Ch] [ebp-8h]
+  int v2; // eax
+  int iTaskForceClass; // [esp+Ch] [ebp-8h]
 
-  if ( !a2 && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 891, "_pTaskForce != 0") == 1 )
+  if ( !_pTaskForce && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 891, "_pTaskForce != 0") == 1 )
     __debugbreak();
-  if ( *((_DWORD *)a2 + 10)
+  if ( _pTaskForce->m_pTaskForceGroup
     && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 892, "_pTaskForce->m_pTaskForceGroup == 0") == 1 )
   {
     __debugbreak();
   }
-  v3 = CAITaskForce::Class(a2);
-  if ( (v3 >= 9 || v3 < 0)
+  iTaskForceClass = CAITaskForce::Class(_pTaskForce);
+  if ( (iTaskForceClass >= 9 || iTaskForceClass < 0)
     && BBSupportDbgReport(
          2,
          "AI\\AI_TaskForces.cpp",
@@ -253,12 +252,12 @@ void  CAITaskForceGroup::AddTaskForce(class CAITaskForce * a2) {
   {
     __debugbreak();
   }
-  *((_DWORD *)a2 + 8) = 0;
-  *((_DWORD *)a2 + 9) = *((_DWORD *)this + v3 + 26);
-  *((_DWORD *)a2 + 10) = this;
-  if ( *((_DWORD *)this + v3 + 26) )
+  _pTaskForce->m_pPrevTaskForceGroupMember = 0;
+  _pTaskForce->m_pNextTaskForceGroupMember = this->m_sData.m_pTaskForces[iTaskForceClass];
+  _pTaskForce->m_pTaskForceGroup = this;
+  if ( this->m_sData.m_pTaskForces[iTaskForceClass] )
   {
-    if ( *(_DWORD *)(*((_DWORD *)this + v3 + 26) + 32)
+    if ( this->m_sData.m_pTaskForces[iTaskForceClass]->m_pPrevTaskForceGroupMember
       && BBSupportDbgReport(
            2,
            "AI\\AI_TaskForces.cpp",
@@ -267,9 +266,9 @@ void  CAITaskForceGroup::AddTaskForce(class CAITaskForce * a2) {
     {
       __debugbreak();
     }
-    *(_DWORD *)(*((_DWORD *)this + v3 + 26) + 32) = a2;
+    this->m_sData.m_pTaskForces[iTaskForceClass]->m_pPrevTaskForceGroupMember = _pTaskForce;
   }
-  else if ( *((_DWORD *)this + v3 + 3)
+  else if ( this->m_sData.m_iNumberOfTaskForcesOfClass[iTaskForceClass]
          && BBSupportDbgReport(
               2,
               "AI\\AI_TaskForces.cpp",
@@ -278,31 +277,30 @@ void  CAITaskForceGroup::AddTaskForce(class CAITaskForce * a2) {
   {
     __debugbreak();
   }
-  *((_DWORD *)this + v3 + 26) = a2;
-  ++*((_DWORD *)this + 2);
-  ++*((_DWORD *)this + v3 + 3);
-  result = (_DWORD *)((char *)this + 4 * CAITaskForce::Type(a2) + 48);
-  ++*result;
-  return result;
+  this->m_sData.m_pTaskForces[iTaskForceClass] = _pTaskForce;
+  ++this->m_sData.m_iTotalNumberOfTaskForces;
+  ++this->m_sData.m_iNumberOfTaskForcesOfClass[iTaskForceClass];
+  v2 = CAITaskForce::Type(_pTaskForce);
+  ++this->m_sData.m_iNumberOfTaskForcesOfType[v2];
 }
 
 
 // address=[0x1328b20]
-// Decompiled from int __thiscall CAITaskForceGroup::RemoveTaskForce(_DWORD *this, _DWORD *a2)
-void  CAITaskForceGroup::RemoveTaskForce(class CAITaskForce * a2) {
+// Decompiled from void __thiscall CAITaskForceGroup::RemoveTaskForce(struct CAITaskForceGroup *this, CAITaskForce *_pTaskForce)
+void  CAITaskForceGroup::RemoveTaskForce(class CAITaskForce * _pTaskForce) {
   
   int v2; // eax
-  int v4; // [esp+Ch] [ebp-8h]
+  int iTaskForceClass; // [esp+Ch] [ebp-8h]
 
-  if ( !a2 && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 928, "_pTaskForce != 0") == 1 )
+  if ( !_pTaskForce && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 928, "_pTaskForce != 0") == 1 )
     __debugbreak();
-  if ( (_DWORD *)a2[10] != this
+  if ( _pTaskForce->m_pTaskForceGroup != this
     && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 929, "_pTaskForce->m_pTaskForceGroup == this") == 1 )
   {
     __debugbreak();
   }
-  v4 = CAITaskForce::Class(a2);
-  if ( (v4 >= 9 || v4 < 0)
+  iTaskForceClass = CAITaskForce::Class(_pTaskForce);
+  if ( (iTaskForceClass >= 9 || iTaskForceClass < 0)
     && BBSupportDbgReport(
          2,
          "AI\\AI_TaskForces.cpp",
@@ -311,9 +309,9 @@ void  CAITaskForceGroup::RemoveTaskForce(class CAITaskForce * a2) {
   {
     __debugbreak();
   }
-  if ( a2[8] )
+  if ( _pTaskForce->m_pPrevTaskForceGroupMember )
   {
-    if ( *(_DWORD **)(a2[8] + 36) != a2
+    if ( _pTaskForce->m_pPrevTaskForceGroupMember->m_pNextTaskForceGroupMember != _pTaskForce
       && BBSupportDbgReport(
            2,
            "AI\\AI_TaskForces.cpp",
@@ -322,20 +320,20 @@ void  CAITaskForceGroup::RemoveTaskForce(class CAITaskForce * a2) {
     {
       __debugbreak();
     }
-    *(_DWORD *)(a2[8] + 36) = a2[9];
+    _pTaskForce->m_pPrevTaskForceGroupMember->m_pNextTaskForceGroupMember = _pTaskForce->m_pNextTaskForceGroupMember;
   }
   else
   {
-    if ( (_DWORD *)this[v4 + 26] != a2
+    if ( this->m_sData.m_pTaskForces[iTaskForceClass] != _pTaskForce
       && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 943, "m_sData.m_pTaskForces[iTaskForceClass] == _pTaskForce") == 1 )
     {
       __debugbreak();
     }
-    this[v4 + 26] = a2[9];
+    this->m_sData.m_pTaskForces[iTaskForceClass] = _pTaskForce->m_pNextTaskForceGroupMember;
   }
-  if ( a2[9] )
+  if ( _pTaskForce->m_pNextTaskForceGroupMember )
   {
-    if ( *(_DWORD **)(a2[9] + 32) != a2
+    if ( _pTaskForce->m_pNextTaskForceGroupMember->m_pPrevTaskForceGroupMember != _pTaskForce
       && BBSupportDbgReport(
            2,
            "AI\\AI_TaskForces.cpp",
@@ -344,26 +342,26 @@ void  CAITaskForceGroup::RemoveTaskForce(class CAITaskForce * a2) {
     {
       __debugbreak();
     }
-    *(_DWORD *)(a2[9] + 32) = a2[8];
+    _pTaskForce->m_pNextTaskForceGroupMember->m_pPrevTaskForceGroupMember = _pTaskForce->m_pPrevTaskForceGroupMember;
   }
-  a2[8] = 0;
-  a2[9] = 0;
-  a2[10] = 0;
-  --this[2];
-  --this[v4 + 3];
-  v2 = CAITaskForce::Type(a2);
-  --this[v2 + 12];
-  if ( (int)this[2] < 0
+  _pTaskForce->m_pPrevTaskForceGroupMember = 0;
+  _pTaskForce->m_pNextTaskForceGroupMember = 0;
+  _pTaskForce->m_pTaskForceGroup = 0;
+  --this->m_sData.m_iTotalNumberOfTaskForces;
+  --this->m_sData.m_iNumberOfTaskForcesOfClass[iTaskForceClass];
+  v2 = CAITaskForce::Type(_pTaskForce);
+  --this->m_sData.m_iNumberOfTaskForcesOfType[v2];
+  if ( this->m_sData.m_iTotalNumberOfTaskForces < 0
     && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 964, "m_sData.m_iTotalNumberOfTaskForces >= 0") == 1 )
   {
     __debugbreak();
   }
-  if ( (int)this[v4 + 3] < 0
+  if ( this->m_sData.m_iNumberOfTaskForcesOfClass[iTaskForceClass] < 0
     && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 965, "m_sData.m_iNumberOfTaskForcesOfClass[iTaskForceClass] >= 0") == 1 )
   {
     __debugbreak();
   }
-  if ( (int)this[CAITaskForce::Type(a2) + 12] < 0
+  if ( this->m_sData.m_iNumberOfTaskForcesOfType[CAITaskForce::Type(_pTaskForce)] < 0
     && BBSupportDbgReport(
          2,
          "AI\\AI_TaskForces.cpp",
@@ -372,7 +370,7 @@ void  CAITaskForceGroup::RemoveTaskForce(class CAITaskForce * a2) {
   {
     __debugbreak();
   }
-  return 0;
 }
 
 
+#endif // Already implemented

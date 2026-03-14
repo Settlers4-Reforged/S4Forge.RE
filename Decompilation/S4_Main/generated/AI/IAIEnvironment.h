@@ -138,7 +138,7 @@ public:
     static int __cdecl EntityUniqueId(int a1);
 
     // address=[0x130afa0]
-    static class CAIEntityInfo * __cdecl EntityGetEntityInfo(int a1, bool a2);
+    static class CAIEntityInfo * __cdecl EntityGetEntityInfo(int _iEntityId, bool _bCreate);
 
     // address=[0x130b0e0]
     static int __cdecl EntityFlags(int a1);

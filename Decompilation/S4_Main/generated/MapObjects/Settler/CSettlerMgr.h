@@ -9,7 +9,7 @@ public:
     class CSettler &  operator[](int a1);
 
     // address=[0x130ecc0]
-    int  GetNumberOfSettlers(int a2, int a3)const;
+    int  GetNumberOfSettlers(int a2, int _iSettlerType)const;
 
     // address=[0x130edf0]
     class CSettler *  GetSettlerPtr(int a1);

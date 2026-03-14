@@ -58,25 +58,19 @@ void  CAIPlayerScriptVars::SetDifficultyLevel(enum T_AI_DIFFICULTY_LEVEL a2) {
 
 
 // address=[0x131cad0]
-// Decompiled from CAIPlayerScriptVars *__thiscall CAIPlayerScriptVars::Init(CAIPlayerScriptVars *this)
+// Decompiled from void __thiscall CAIPlayerScriptVars::Init(CAIPlayerScriptVars *this)
 void  CAIPlayerScriptVars::Init(void) {
   
-  CAIPlayerScriptVars *result; // eax
   int j; // [esp+8h] [ebp-8h]
   int i; // [esp+Ch] [ebp-4h]
 
   CAIPlayerScriptVars::SetDifficultyLevel((unsigned int *)this, 2u);
-  result = this;
   *((_DWORD *)this + 1) = 0;
   for ( i = 0; i <= 3; ++i )
   {
     for ( j = 0; j <= 22; ++j )
-    {
-      result = (CAIPlayerScriptVars *)dword_3ECC7C8[23 * i + j];
-      *((_DWORD *)this + 23 * i + j + 3) = result;
-    }
+      *((_DWORD *)this + 23 * i + j + 3) = dword_3ECC7C8[23 * i + j];
   }
-  return result;
 }
 
 

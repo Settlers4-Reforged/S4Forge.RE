@@ -6,7 +6,7 @@
 class CAIAgentPlayerBase : public CAIAgent {
 public:
     // address=[0x1306b10]
-    void  AttachPlayerAI(class CAIPlayerAI * a2);
+    void  AttachPlayerAI(class CAIPlayerAI * _pPlayerAI);
 
     // address=[0x1307170]
     class CAIPlayerAI *  PlayerAI(void)const;
@@ -16,6 +16,10 @@ public:
 
     // address=[0x1319280]
     virtual  ~CAIAgentPlayerBase(void);
+
+    // Type information members
+public:
+    struct CAIPlayerAI * m_pPlayerAI;
 
 };
 

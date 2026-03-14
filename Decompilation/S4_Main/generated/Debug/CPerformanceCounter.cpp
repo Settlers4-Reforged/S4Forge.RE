@@ -14,24 +14,20 @@
 
 
 // address=[0x2efd690]
-// Decompiled from BOOL __thiscall CPerformanceCounter::Start(LARGE_INTEGER *this)
+// Decompiled from void __thiscall CPerformanceCounter::Start(LARGE_INTEGER *this)
 void  CPerformanceCounter::Start(void) {
   
   this[2].LowPart = GetTickCount();
-  return QueryPerformanceCounter(this);
+  QueryPerformanceCounter(this);
 }
 
 
 // address=[0x2efd6c0]
-// Decompiled from DWORD __thiscall CPerformanceCounter::Measure(LARGE_INTEGER *this)
+// Decompiled from void __thiscall CPerformanceCounter::Measure(LARGE_INTEGER *this)
 void  CPerformanceCounter::Measure(void) {
   
-  DWORD result; // eax
-
   QueryPerformanceCounter(this + 1);
-  result = GetTickCount();
-  this[2].HighPart = result;
-  return result;
+  this[2].HighPart = GetTickCount();
 }
 
 

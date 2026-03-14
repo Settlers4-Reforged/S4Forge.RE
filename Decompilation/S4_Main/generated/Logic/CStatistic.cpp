@@ -1372,38 +1372,32 @@ void  CStatistic::FillExtraInfo(void) {
   v6 = CStatistic::GetGood(this, LocalPlayerId, S4_GOOD_BREAD);
   v7 = CStatistic::GetGood(this, LocalPlayerId, S4_GOOD_MEAT) + v6;
   g_cExtendedMenuInfo.m_uGoodsFood = CStatistic::GetGood(this, LocalPlayerId, S4_GOOD_FISH) + v7;
-  NumberOfSettlers = CSettlerMgr::GetNumberOfSettlers(
-                       (CSettlerMgr *)g_cSettlerMgr,
-                       LocalPlayerId,
-                       S4_SETTLER_SWORDSMAN_01);
-  v9 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, S4_SETTLER_SWORDSMAN_02)
+  NumberOfSettlers = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, SETTLER_SWORDSMAN_01);
+  v9 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, SETTLER_SWORDSMAN_02)
      + NumberOfSettlers;
-  v10 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, S4_SETTLER_SWORDSMAN_03) + v9;
-  v11 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, S4_SETTLER_BOWMAN_01) + v10;
-  v12 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, S4_SETTLER_BOWMAN_02) + v11;
-  v13 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, S4_SETTLER_BOWMAN_03) + v12;
-  v14 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, S4_SETTLER_AXEWARRIOR_01) + v13;
-  v15 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, S4_SETTLER_AXEWARRIOR_02) + v14;
-  v16 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, S4_SETTLER_AXEWARRIOR_03) + v15;
-  v17 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, S4_SETTLER_BLOWGUNWARRIOR_01)
-      + v16;
-  v18 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, S4_SETTLER_BLOWGUNWARRIOR_02)
-      + v17;
-  v19 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, S4_SETTLER_BLOWGUNWARRIOR_03)
-      + v18;
-  v20 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, S4_SETTLER_MEDIC_01) + v19;
-  v21 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, S4_SETTLER_MEDIC_02) + v20;
-  v22 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, S4_SETTLER_MEDIC_03) + v21;
-  v23 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, S4_SETTLER_BACKPACKCATAPULTIST_01)
+  v10 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, SETTLER_SWORDSMAN_03) + v9;
+  v11 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, SETTLER_BOWMAN_01) + v10;
+  v12 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, SETTLER_BOWMAN_02) + v11;
+  v13 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, SETTLER_BOWMAN_03) + v12;
+  v14 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, SETTLER_AXEWARRIOR_01) + v13;
+  v15 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, SETTLER_AXEWARRIOR_02) + v14;
+  v16 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, SETTLER_AXEWARRIOR_03) + v15;
+  v17 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, SETTLER_BLOWGUNWARRIOR_01) + v16;
+  v18 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, SETTLER_BLOWGUNWARRIOR_02) + v17;
+  v19 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, SETTLER_BLOWGUNWARRIOR_03) + v18;
+  v20 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, SETTLER_MEDIC_01) + v19;
+  v21 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, SETTLER_MEDIC_02) + v20;
+  v22 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, SETTLER_MEDIC_03) + v21;
+  v23 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, SETTLER_BACKPACKCATAPULTIST_01)
       + v22;
-  v24 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, S4_SETTLER_BACKPACKCATAPULTIST_02)
+  v24 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, SETTLER_BACKPACKCATAPULTIST_02)
       + v23;
-  v25 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, S4_SETTLER_BACKPACKCATAPULTIST_03)
+  v25 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, SETTLER_BACKPACKCATAPULTIST_03)
       + v24;
   g_cExtendedMenuInfo.m_uSoldierCount = CSettlerMgr::GetNumberOfSettlers(
                                           (CSettlerMgr *)g_cSettlerMgr,
                                           LocalPlayerId,
-                                          S4_SETTLER_SQUADLEADER)
+                                          SETTLER_SQUADLEADER)
                                       + v25;
   g_cExtendedMenuInfo.m_uOffenseStrength = CStatistic::OffenceStrength100(this, LocalPlayerId);
   g_cExtendedMenuInfo.m_uDefenceStrength = CStatistic::DefenceStrength100(this, LocalPlayerId);

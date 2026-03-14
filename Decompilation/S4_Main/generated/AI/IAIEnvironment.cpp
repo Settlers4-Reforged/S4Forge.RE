@@ -442,36 +442,38 @@ int __cdecl IAIEnvironment::EntityUniqueId(int a1) {
 
 
 // address=[0x130afa0]
-// Decompiled from int __cdecl IAIEnvironment::EntityGetEntityInfo(int a1, unsigned __int8 a2)
-class CAIEntityInfo * __cdecl IAIEnvironment::EntityGetEntityInfo(int a1, bool a2) {
+// Decompiled from CAIEntityInfo *__cdecl IAIEnvironment::EntityGetEntityInfo(int _iEntityId, bool _bCreate)
+class CAIEntityInfo * __cdecl IAIEnvironment::EntityGetEntityInfo(int _iEntityId, bool _bCreate) {
   
-  int v3; // [esp+8h] [ebp-20h]
-  int v4; // [esp+14h] [ebp-14h]
-  _DWORD *v5; // [esp+18h] [ebp-10h]
+  struct CAIEntityInfo *v3; // [esp+8h] [ebp-20h]
+  CAIEntityInfo *C; // [esp+Ch] [ebp-1Ch]
+  CAIEntityInfo *v5; // [esp+14h] [ebp-14h]
+  IEntity *pEntity; // [esp+18h] [ebp-10h]
 
-  if ( a1 <= 0 && BBSupportDbgReport(2, (int)"AI\\AI_Environment.cpp", 355, (int)"_iEntityId > 0") == 1 )
+  if ( _iEntityId <= 0 && BBSupportDbgReport(2, "AI\\AI_Environment.cpp", 355, "_iEntityId > 0") == 1 )
     __debugbreak();
-  v4 = 0;
-  v5 = (_DWORD *)CMapObjectMgr::EntityPtr(a1);
-  if ( !v5 )
-    return v4;
-  v4 = IEntity::AIEntityInfoPtr(v5);
-  if ( ((v4 == 0) & a2) == 0 )
-    return v4;
-  if ( !IEntity::FlagBits(v5, EntityFlag_AliveMask) )
-    return v4;
-  if ( IEntity::ID() != a1
-    && BBSupportDbgReport(2, (int)"AI\\AI_Environment.cpp", 369, (int)"pEntity->ID() == _iEntityId") == 1 )
+  v5 = 0;
+  pEntity = CMapObjectMgr::EntityPtr(_iEntityId);
+  if ( !pEntity )
+    return v5;
+  v5 = IEntity::AIEntityInfoPtr(pEntity);
+  if ( v5 != 0 || !_bCreate )
+    return v5;
+  if ( !IEntity::FlagBits(pEntity, EntityFlag_AliveMask) )
+    return v5;
+  if ( IEntity::ID(pEntity) != _iEntityId
+    && BBSupportDbgReport(2, "AI\\AI_Environment.cpp", 369, "pEntity->ID() == _iEntityId") == 1 )
   {
     __debugbreak();
   }
-  if ( operator new(0x18u) )
-    v3 = CAIEntityInfo::CAIEntityInfo(a1);
+  C = (CAIEntityInfo *)operator new(0x18u);
+  if ( C )
+    v3 = CAIEntityInfo::CAIEntityInfo(C, _iEntityId);
   else
     v3 = 0;
-  v4 = v3;
-  IEntity::SetAIEntityInfoPtr(v3);
-  return v4;
+  v5 = v3;
+  IEntity::SetAIEntityInfoPtr(pEntity, v3);
+  return v5;
 }
 
 
@@ -654,22 +656,22 @@ bool __cdecl IAIEnvironment::EntityIsAliveAndOfGivenWarriorType(int a1, enum T_A
 
 
 // address=[0x130b4c0]
-// Decompiled from void **__cdecl IAIEnvironment::EntityGetEntityInfoTower(int a1)
+// Decompiled from CAIEntityInfoTower *__cdecl IAIEnvironment::EntityGetEntityInfoTower(int a1)
 class CAIEntityInfoTower * __cdecl IAIEnvironment::EntityGetEntityInfoTower(int a1) {
   
-  int v2; // [esp+0h] [ebp-Ch]
-  int EntityInfo; // [esp+4h] [ebp-8h]
-  void **v4; // [esp+8h] [ebp-4h]
+  CAIEntityInfoTower *v2; // [esp+0h] [ebp-Ch]
+  CAIEntityInfo *EntityInfo; // [esp+4h] [ebp-8h]
+  CAIEntityInfoTower *pEntityInfoEx; // [esp+8h] [ebp-4h]
 
   v2 = 0;
-  EntityInfo = IAIEnvironment::EntityGetEntityInfo(a1, 1u);
+  EntityInfo = IAIEnvironment::EntityGetEntityInfo(a1, 1);
   if ( !EntityInfo )
-    return (void **)v2;
-  v4 = (void **)CAIEntityInfo::ExtendedInfo(EntityInfo, 0);
-  if ( !v4 && BBSupportDbgReport(2, "AI\\AI_Environment.cpp", 473, "pEntityInfoEx != 0") == 1 )
+    return v2;
+  pEntityInfoEx = (CAIEntityInfoTower *)CAIEntityInfo::ExtendedInfo(EntityInfo, 0);
+  if ( !pEntityInfoEx && BBSupportDbgReport(2, "AI\\AI_Environment.cpp", 473, "pEntityInfoEx != 0") == 1 )
     __debugbreak();
   if ( !j____RTDynamicCast(
-          v4,
+          (void **)&pEntityInfoEx->vftable,
           0,
           &CAIEntityInfoEx__RTTI_Type_Descriptor_,
           &CAIEntityInfoTower__RTTI_Type_Descriptor_,
@@ -678,7 +680,7 @@ class CAIEntityInfoTower * __cdecl IAIEnvironment::EntityGetEntityInfoTower(int 
   {
     __debugbreak();
   }
-  return v4;
+  return pEntityInfoEx;
 }
 
 
@@ -921,7 +923,7 @@ int __cdecl IAIEnvironment::BuildingPackedEnsignPosition(int a1) {
 
 
 // address=[0x130bac0]
-// Decompiled from int __cdecl IAIEnvironment::BuildingGetNumberOfBuildings(int a1, int a2, unsigned int a3)
+// Decompiled from int __cdecl IAIEnvironment::BuildingGetNumberOfBuildings(int a1, S4_BUILDING_ENUM a2, unsigned int a3)
 int __cdecl IAIEnvironment::BuildingGetNumberOfBuildings(int a1, int a2, int a3) {
   
   return CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, a1, a2, a3);
@@ -1217,7 +1219,7 @@ void __cdecl IAIEnvironment::VehicleSendQueuedVanishCommand(int a1) {
 
 
 // address=[0x130c260]
-// Decompiled from int __cdecl IAIEnvironment::SettlerGetNumberOfSettlers(int a1, int a2)
+// Decompiled from int __cdecl IAIEnvironment::SettlerGetNumberOfSettlers(int a1, S4_SETTLER_ENUM a2)
 int __cdecl IAIEnvironment::SettlerGetNumberOfSettlers(int a1, int a2) {
   
   return CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, a1, a2);
@@ -1820,10 +1822,10 @@ int const * __cdecl IAIEnvironment::AlliancesAllyPlayerIds(int a1) {
 
 
 // address=[0x1314090]
-// Decompiled from void __cdecl IAIEnvironment::SetGlobalEcoAIFlags(struct CFrameWnd *a1)
+// Decompiled from void __cdecl IAIEnvironment::SetGlobalEcoAIFlags(int a1)
 void __cdecl IAIEnvironment::SetGlobalEcoAIFlags(int a1) {
   
-  IAIEnvironment::m_iGlobalEcoAIFlags = (int)a1;
+  IAIEnvironment::m_iGlobalEcoAIFlags = a1;
 }
 
 
@@ -1918,18 +1920,13 @@ int __cdecl IAIEnvironment::WorldOwnerIdPackedXY(int a1) {
 
 
 // address=[0x130d250]
-// Decompiled from int IAIEnvironment::Init()
+// Decompiled from void IAIEnvironment::Init()
 void __cdecl IAIEnvironment::Init(void) {
   
-  int v0; // ecx
-  int result; // eax
-
-  IAIEnvironment::m_pRandom = (int)CStateGame::Random16((CStateGame *)g_pGame);
+  IAIEnvironment::m_pRandom = (int)CStateGame::Random16(g_pGame);
   IAIEnvironment::m_uTickCounter = 0;
-  result = CWorldManager::Width(v0);
-  IAIEnvironment::m_iWorldWidthHeigth = result;
+  IAIEnvironment::m_iWorldWidthHeigth = CWorldManager::Width();
   IAIEnvironment::m_iGlobalEcoAIFlags = 0;
-  return result;
 }
 
 

@@ -21,7 +21,7 @@ public:
     bool  CheckParam(int a2);
 
     // address=[0x1602310]
-    void  CreateTable(char const * Str);
+    void  CreateTable(char const * _pName);
 
     // address=[0x1602380]
     void  EndBlock(void);

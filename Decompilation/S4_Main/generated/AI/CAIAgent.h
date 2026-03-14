@@ -12,7 +12,7 @@ public:
     virtual void  ProcessEvent(class CAIEvent const & a2);
 
     // address=[0x12fd7e0]
-    void  UpdateScheduleTimeIfLess(unsigned int a2);
+    void  UpdateScheduleTimeIfLess(unsigned int _uScheduleTime);
 
     // address=[0x12fee10]
      CAIAgent(char const * a2);
@@ -31,6 +31,17 @@ public:
 
     // address=[0x13064e0]
     unsigned int  DefaultExecutionDelay(void)const;
+
+    // Type information members
+public:
+    _DWORD m_uScheduleTime;
+    _DWORD m_uDefaultExecutionDelay;
+    _DWORD dwordC;
+    _DWORD dword10;
+    CAIScheduler * m_pScheduler;
+    CAIAgent * m_pPrevAgent;
+    CAIAgent * m_pNextAgent;
+    _DWORD m_spName;
 
 };
 

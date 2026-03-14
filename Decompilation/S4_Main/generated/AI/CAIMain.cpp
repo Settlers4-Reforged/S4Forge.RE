@@ -14,100 +14,90 @@ void  CAIMain::InitScripting(void) {
 // Decompiled from void __thiscall CAIMain::Init(CAIMain *this)
 void  CAIMain::Init(void) {
   
-  (*(void (__thiscall **)(CAIMain *))(*(_DWORD *)this + 20))(this);
-  memset((char *)this + 12, 0, 0x24u);
-  CAIPlayerEvaluations::Clear((CAIPlayerEvaluations *)&g_cAIPlayerEvaluations);
+  this->Done(this);
+  memset(this->m_pPlayerAIs, 0, sizeof(this->m_pPlayerAIs));
+  CAIPlayerEvaluations::Clear(&g_cAIPlayerEvaluations);
   CAIRegions::ClearAllRegions((CAIRegions *)&g_cAIRegions);
   CAIPlayersScriptVars::Init((CAIPlayersScriptVars *)g_cAIPlayersScriptVars);
   IAIEnvironment::Init();
   CAIResourceMap::Init();
   CAITaskForces::Init();
-  CAIAgentEvaluation::Init((CAIMain *)((char *)this + 92));
-  *((_BYTE *)this + 4) = 1;
+  CAIAgentEvaluation::Init(&this->m_sAIAgentEvaluation);
+  this->m_bInitialized = 1;
   IAIEnvironment::DbgEnableAITraceEx();
 }
 
 
 // address=[0x1311fc0]
-// Decompiled from char __thiscall CAIMain::IsInitialised(CAIMain *this)
+// Decompiled from bool __thiscall CAIMain::IsInitialised(CAIMain *this)
 bool  CAIMain::IsInitialised(void) {
   
-  return *((_BYTE *)this + 4);
+  return this->m_bInitialized;
 }
 
 
 // address=[0x1311fe0]
-// Decompiled from int __thiscall CAIMain::Done(CAIMain *this)
+// Decompiled from void __thiscall CAIMain::Done(CAIMain *this)
 void  CAIMain::Done(void) {
   
-  int result; // eax
-
-  if ( *((_BYTE *)this + 4) )
+  if ( this->m_bInitialized )
   {
-    (*(void (__thiscall **)(CAIMain *))(*(_DWORD *)this + 36))(this);
+    this->DeactivateAllPlayerAIs(this);
     CAITaskForces::Done();
     CAIResourceMap::Done();
     IAIEnvironment::Done();
-    *((_BYTE *)this + 4) = 0;
+    this->m_bInitialized = 0;
   }
-  if ( *((_BYTE *)this + 4) && BBSupportDbgReport(2, "AI\\AI_Main.cpp", 186, "m_bInitialized == false") == 1 )
+  if ( this->m_bInitialized && BBSupportDbgReport(2, "AI\\AI_Main.cpp", 186, "m_bInitialized == false") == 1 )
     __debugbreak();
-  result = 0;
-  if ( !*((_DWORD *)this + 2) )
-    return result;
-  result = BBSupportDbgReport(2, "AI\\AI_Main.cpp", 187, "m_uActiveAIsMask == 0");
-  if ( result == 1 )
-    __debugbreak();
-  return result;
+  if ( this->m_uActiveAIsMask )
+  {
+    if ( BBSupportDbgReport(2, "AI\\AI_Main.cpp", 187, "m_uActiveAIsMask == 0") == 1 )
+      __debugbreak();
+  }
 }
 
 
 // address=[0x1312070]
-// Decompiled from int __thiscall CAIMain::Load(CAIMain *this, struct IS4Chunk *a2)
+// Decompiled from void __thiscall CAIMain::Load(CAIMain *this, struct IS4Chunk *a2)
 void  CAIMain::Load(class IS4Chunk & a2) {
   
-  struct CFrameWnd *v2; // eax
-  int v4; // [esp+0h] [ebp-18h]
+  int v2; // eax
+  unsigned int v3; // [esp+0h] [ebp-18h]
   int pExceptionObject; // [esp+4h] [ebp-14h] BYREF
-  int v6; // [esp+8h] [ebp-10h]
+  int iSaveVersion; // [esp+8h] [ebp-10h]
   int i; // [esp+Ch] [ebp-Ch]
-  CAIMain *v8; // [esp+10h] [ebp-8h]
   int PlayerId; // [esp+14h] [ebp-4h]
 
-  v8 = this;
-  if ( !*((_BYTE *)this + 4) && BBSupportDbgReport(2, "AI\\AI_Main.cpp", 654, "m_bInitialized") == 1 )
+  if ( !this->m_bInitialized && BBSupportDbgReport(2, "AI\\AI_Main.cpp", 654, "m_bInitialized") == 1 )
     __debugbreak();
-  (*(void (__thiscall **)(CAIMain *))(*(_DWORD *)v8 + 12))(v8);
-  CAIPlayerEvaluations::EvaluateAllPlayers((CAIPlayerEvaluations *)&g_cAIPlayerEvaluations);
-  v6 = (*(int (__thiscall **)(struct IS4Chunk *))(*(_DWORD *)a2 + 8))(a2);
-  v4 = 0;
-  if ( v6 != -1517285376 )
+  this->Init(this);
+  CAIPlayerEvaluations::EvaluateAllPlayers(&g_cAIPlayerEvaluations);
+  iSaveVersion = a2->LoadUnsigned32_(a2);
+  v3 = 0;
+  if ( iSaveVersion != 0xA5901000 )
   {
-    if ( v6 != -1517285374 )
+    if ( iSaveVersion != 0xA5901002 )
     {
       pExceptionObject = 0;
       CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
       _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
     }
-    v4 = (*(int (__thiscall **)(struct IS4Chunk *, int, int))(*(_DWORD *)a2 + 4))(a2, 1, 1);
+    v3 = a2->LoadUnsigned32(1, 1);
   }
-  if ( v4 )
+  if ( v3 )
   {
-    v2 = (struct CFrameWnd *)(*(int (__thiscall **)(struct IS4Chunk *))(*(_DWORD *)a2 + 8))(a2);
+    v2 = a2->LoadUnsigned32_(a2);
     IAIEnvironment::SetGlobalEcoAIFlags(v2);
   }
   CAIRegions::Load((CAIRegions *)&g_cAIRegions, a2);
   CAIPlayersScriptVars::Load((CAIPlayersScriptVars *)g_cAIPlayersScriptVars, a2);
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 12))(a2, -1517285328);
+  a2->LoadSignature(0xA5901030);
   PlayerId = IAIEnvironment::AlliancesLastPlayerId();
-  (*(void (__thiscall **)(struct IS4Chunk *, int, int))(*(_DWORD *)a2 + 4))(a2, PlayerId, PlayerId);
-  for ( i = (*(int (__thiscall **)(struct IS4Chunk *, int, int))(*(_DWORD *)a2 + 4))(a2, 1, PlayerId + 1);
-        i <= PlayerId;
-        i = (*(int (__thiscall **)(struct IS4Chunk *, int, int))(*(_DWORD *)a2 + 4))(a2, i + 1, PlayerId + 1) )
-  {
-    CAIMain::CreatePlayerAI(v8, i, a2);
-  }
-  return (*(int (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 12))(a2, -1517285375);
+  a2->LoadUnsigned32(PlayerId, PlayerId);
+  for ( i = a2->LoadUnsigned32(1, PlayerId + 1); i <= PlayerId; i = a2->LoadUnsigned32(i + 1, PlayerId + 1) )
+    CAIMain::CreatePlayerAI(this, i, a2);
+  a2->LoadSignature(0xA5901001);
 }
 
 
@@ -146,45 +136,41 @@ void  CAIMain::Save(class IS4Chunk & a2) {
 
 
 // address=[0x1312330]
-// Decompiled from CAIMain *__thiscall CAIMain::Execute(CAIMain *this)
+// Decompiled from void __thiscall CAIMain::Execute(CAIMain *this)
 void  CAIMain::Execute(void) {
   
-  CAIMain *result; // eax
-  CAIMain *v2; // [esp+4h] [ebp-10h]
-  int v3; // [esp+8h] [ebp-Ch]
+  int PlayerId; // [esp+4h] [ebp-10h]
+  int v2; // [esp+8h] [ebp-Ch]
   int i; // [esp+Ch] [ebp-8h]
 
-  if ( !*((_BYTE *)this + 4) && BBSupportDbgReport(2, "AI\\AI_Main.cpp", 233, "m_bInitialized") == 1 )
+  if ( !this->m_bInitialized && BBSupportDbgReport(2, "AI\\AI_Main.cpp", 233, "m_bInitialized") == 1 )
     __debugbreak();
   IAIEnvironment::UpdateTickCounter();
   CAIResourceMap::Update();
-  result = this;
-  if ( !*((_DWORD *)this + 2) )
-    return result;
-  v3 = IAIEnvironment::TickCounter();
-  CAITaskForces::Execute();
-  (*(void (__thiscall **)(char *, int, int))(*((_DWORD *)this + 12) + 4))((char *)this + 48, v3, 511);
-  result = (CAIMain *)CPlayerManager::LastPlayerId();
-  v2 = result;
-  for ( i = 1; i <= (int)v2; ++i )
+  if ( this->m_uActiveAIsMask )
   {
-    if ( *((_DWORD *)this + i + 3) )
+    v2 = IAIEnvironment::TickCounter();
+    CAITaskForces::Execute();
+    this->m_sAIScheduler.Execute(&this->m_sAIScheduler, v2, 511);
+    PlayerId = CPlayerManager::LastPlayerId();
+    for ( i = 1; i <= PlayerId; ++i )
     {
-      if ( (*((_DWORD *)this + 2) & (1 << i)) == 0
-        && BBSupportDbgReport(2, "AI\\AI_Main.cpp", 255, "(m_uActiveAIsMask & (1 << iPlayerId)) != 0") == 1 )
+      if ( this->m_pPlayerAIs[i] )
+      {
+        if ( (this->m_uActiveAIsMask & (1 << i)) == 0
+          && BBSupportDbgReport(2, "AI\\AI_Main.cpp", 255, "(m_uActiveAIsMask & (1 << iPlayerId)) != 0") == 1 )
+        {
+          __debugbreak();
+        }
+        (*(void (__thiscall **)(struct CAIPlayerAI *))(*(_DWORD *)this->m_pPlayerAIs[i] + 4))(this->m_pPlayerAIs[i]);
+      }
+      else if ( (this->m_uActiveAIsMask & (1 << i)) != 0
+             && BBSupportDbgReport(2, "AI\\AI_Main.cpp", 261, "(m_uActiveAIsMask & (1 << iPlayerId)) == 0") == 1 )
       {
         __debugbreak();
       }
-      (*(void (__thiscall **)(_DWORD))(**((_DWORD **)this + i + 3) + 4))(*((_DWORD *)this + i + 3));
     }
-    else if ( (*((_DWORD *)this + 2) & (1 << i)) != 0
-           && BBSupportDbgReport(2, "AI\\AI_Main.cpp", 261, "(m_uActiveAIsMask & (1 << iPlayerId)) == 0") == 1 )
-    {
-      __debugbreak();
-    }
-    result = (CAIMain *)(i + 1);
   }
-  return result;
 }
 
 
@@ -288,9 +274,9 @@ void  CAIMain::DeactivateAllPlayerAIs(void) {
 // Decompiled from bool __thiscall CAIMain::IsPlayerAIActive(CAIMain *this, unsigned int a2)
 bool  CAIMain::IsPlayerAIActive(int a2) {
   
-  if ( !*((_BYTE *)this + 4) && BBSupportDbgReport(2, aAiAiMainC, 353, "m_bInitialized") == 1 )
+  if ( !this->m_bInitialized && BBSupportDbgReport(2, aAiAiMainC, 353, "m_bInitialized") == 1 )
     __debugbreak();
-  return *((_BYTE *)this + 4) && CAIMain::IsRealPlayerId(a2) && *((_DWORD *)this + a2 + 3);
+  return this->m_bInitialized && CAIMain::IsRealPlayerId(a2) && this->m_pPlayerAIs[a2];
 }
 
 
@@ -533,23 +519,23 @@ LABEL_89:
 
 
 // address=[0x1313410]
-// Decompiled from void __thiscall CAIMain::DarkTribeIncreaseManaForNewManaSphere(CAIMain *this, int a2)
-void  CAIMain::DarkTribeIncreaseManaForNewManaSphere(int a2) {
+// Decompiled from void __thiscall CAIMain::DarkTribeIncreaseManaForNewManaSphere(CAIMain *this, int _iPlayerId)
+void  CAIMain::DarkTribeIncreaseManaForNewManaSphere(int _iPlayerId) {
   
   int Value; // [esp+4h] [ebp-4h]
 
-  if ( !IAIEnvironment::AlliancesIsValidUsedPlayerId(a2)
+  if ( !IAIEnvironment::AlliancesIsValidUsedPlayerId(_iPlayerId)
     && BBSupportDbgReport(2, "AI\\AI_Main.cpp", 761, "g_pAIEnv->AlliancesIsValidUsedPlayerId(_iPlayerId)") == 1 )
   {
     __debugbreak();
   }
-  if ( IAIEnvironment::PlayerRace(a2) != 3
+  if ( IAIEnvironment::PlayerRace(_iPlayerId) != 3
     && BBSupportDbgReport(2, "AI\\AI_Main.cpp", 762, "g_pAIEnv->PlayerRace(_iPlayerId) == RACE_DARK") == 1 )
   {
     __debugbreak();
   }
-  Value = CAIPlayersScriptVars::GetValue(g_cAIPlayersScriptVars, a2, 11);
-  IAIEnvironment::MagicIncreaseMana(a2, Value);
+  Value = CAIPlayersScriptVars::GetValue(g_cAIPlayersScriptVars, _iPlayerId, 11);
+  IAIEnvironment::MagicIncreaseMana(_iPlayerId, Value);
 }
 
 
@@ -592,37 +578,28 @@ class CStaticConfigVarInt const *  CAIMain::DarkTribeGetProductionCostConfigVar(
 
 
 // address=[0x1313570]
-// Decompiled from char __thiscall CAIMain::DbgPrint(CAIMain *this, unsigned int a2)
+// Decompiled from void __thiscall CAIMain::DbgPrint(CAIMain *this, unsigned int a2)
 void  CAIMain::DbgPrint(int a2) {
   
-  int PlayerId; // eax
-  int v4; // [esp+0h] [ebp-Ch]
+  int PlayerId; // [esp+0h] [ebp-Ch]
   int i; // [esp+8h] [ebp-4h]
 
-  if ( !*((_BYTE *)this + 4) && BBSupportDbgReport(2, "AI\\AI_Main.cpp", 819, "m_bInitialized") == 1 )
+  if ( !this->m_bInitialized && BBSupportDbgReport(2, "AI\\AI_Main.cpp", 819, "m_bInitialized") == 1 )
     __debugbreak();
   if ( a2 )
   {
-    LOBYTE(PlayerId) = CAIMain::IsRealPlayerId(a2);
-    if ( (_BYTE)PlayerId )
-    {
-      LOBYTE(PlayerId) = (_BYTE)this;
-      if ( *((_DWORD *)this + a2 + 3) )
-        LOBYTE(PlayerId) = CAIPlayerAI::DbgPrint(*((CAIPlayerAI **)this + a2 + 3));
-    }
+    if ( CAIMain::IsRealPlayerId(a2) && this->m_pPlayerAIs[a2] )
+      CAIPlayerAI::DbgPrint(this->m_pPlayerAIs[a2]);
   }
   else
   {
     PlayerId = CPlayerManager::LastPlayerId();
-    v4 = PlayerId;
-    for ( i = 1; i <= v4; ++i )
+    for ( i = 1; i <= PlayerId; ++i )
     {
-      if ( *((_DWORD *)this + i + 3) )
-        CAIPlayerAI::DbgPrint(*((CAIPlayerAI **)this + i + 3));
-      LOBYTE(PlayerId) = i + 1;
+      if ( this->m_pPlayerAIs[i] )
+        CAIPlayerAI::DbgPrint(this->m_pPlayerAIs[i]);
     }
   }
-  return PlayerId;
 }
 
 
@@ -630,15 +607,13 @@ void  CAIMain::DbgPrint(int a2) {
 // Decompiled from CAIMain *__thiscall CAIMain::CAIMain(CAIMain *this)
  CAIMain::CAIMain(void) {
   
-  IAIMain::IAIMain(this);
-  *(_DWORD *)this = CAIMain::_vftable_;
-  CAIScheduler::CAIScheduler((CAIMain *)((char *)this + 48));
-  CAIAgentEvaluation::CAIAgentEvaluation(
-    (CAIMain *)((char *)this + 92),
-    (struct CAIPlayerEvaluations *)&g_cAIPlayerEvaluations);
-  *((_BYTE *)this + 4) = 0;
-  *((_DWORD *)this + 2) = 0;
-  CAIScheduler::AddAgent((CAIMain *)((char *)this + 48), (CAIMain *)((char *)this + 92), 0xFu, 0x100u, 8u);
+  IAIMain::IAIMain((IAIMain *)this);
+  this->__vftable = (CAIMain_vtbl *)CAIMain::_vftable_;
+  CAIScheduler::CAIScheduler(&this->m_sAIScheduler);
+  CAIAgentEvaluation::CAIAgentEvaluation(&this->m_sAIAgentEvaluation, &g_cAIPlayerEvaluations);
+  this->m_bInitialized = 0;
+  this->m_uActiveAIsMask = 0;
+  CAIScheduler::AddAgent(&this->m_sAIScheduler, &this->m_sAIAgentEvaluation, 15, 256, 8);
   return this;
 }
 
