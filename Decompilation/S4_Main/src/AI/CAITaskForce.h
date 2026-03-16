@@ -44,9 +44,13 @@ enum T_AI_WARRIOR_TYPE {
 };
 
 enum T_AI_TASK_FORCE_CLASS {
-    AI_TASK_FORCE_CLASS_NONE  = 0,
-    AI_TASK_FORCE_CLASS_SQUAD = 2,
-    AI_TASK_FORCE_CLASS_MAX   = 9,
+    AI_TASK_FORCE_CLASS_NONE      = 0,
+    AI_TASK_FORCE_CLASS_RESERVOIR = 1,
+    AI_TASK_FORCE_CLASS_SQUAD     = 2,
+    AI_TASK_FORCE_CLASS_PRIESTS   = 3,
+
+    AI_TASK_FORCE_CLASS_GROUP     = 6, // just a guess, but CTaskForceEx checks this in a Group call
+    AI_TASK_FORCE_CLASS_MAX = 9,
 };
 
 enum T_RESULT {
