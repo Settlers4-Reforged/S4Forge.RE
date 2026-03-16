@@ -46,8 +46,16 @@ protected:
 
     // Type information members
 public:
-    void *                vftable;
-    SAITaskForceGroupData m_sData;
+    void *vftable;
+
+    struct SAITaskForceGroupData {
+        int           m_iPlayerId;
+        int           m_iTotalNumberOfTaskForces;
+        int           m_iNumberOfTaskForcesOfClass[9];
+        int           m_iNumberOfTaskForcesOfType[9];
+        BYTE          gap_50[20];
+        CAITaskForce *m_pTaskForces[9];
+    } m_sData;
 };
 
 
