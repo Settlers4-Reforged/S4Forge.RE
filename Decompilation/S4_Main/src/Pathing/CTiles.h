@@ -17,6 +17,7 @@ public:
 
 protected:
     friend class ITiling;
+    friend class CTilesAndLinks;
 
     struct SFirstLast {
         WORD m_uFirst;
