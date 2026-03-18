@@ -1,7 +1,6 @@
 #include "../MapObjects/SPoint.h"
 
-namespace Y16X16
-{
+namespace Y16X16 {
     // address=[0x1307190]
     int __cdecl UnpackXFast(int);
 
@@ -18,8 +17,7 @@ namespace Y16X16
     int __cdecl XYNotNegative(int);
 } // namespace Y16X16
 
-namespace Grid
-{
+namespace Grid {
     // address=[0x13066c0]
     bool __cdecl InQuadrat(int, int, int);
 
@@ -58,6 +56,7 @@ namespace Grid
 
     // address=[0x130ea70]
     int __cdecl DistanceInline(int, int);
+
     // address=[0x141db20]
     int __cdecl TurnLeft(int);
 
@@ -65,8 +64,7 @@ namespace Grid
     int __cdecl TurnRight(int);
 } // namespace Grid
 
-namespace Squares
-{
+namespace Squares {
     // address=[0x1306b00]
     int __cdecl XYToVW(int);
 
@@ -79,3 +77,12 @@ namespace Squares
     // address=[0x131ca60]
     bool __cdecl ValidVW(int, int);
 } // namespace Squares
+
+// address=[0x37D8C08]
+extern SPoint g_sNeighborPoints[6];
+
+// address=[0x37D8C38]
+extern SPoint g_sNeighborOrthos[6];
+
+// address=[0x037D8C68]
+extern SPoint g_sSurroundingHexPoints[37];
