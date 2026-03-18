@@ -86,6 +86,8 @@ public:
     static int __cdecl TileTypeToOwnerId(int a1);
 
 protected:
+    friend class CTilesEx;
+
     // address=[0x15e6f80]
     void Init(int a2, int a3, class CLinkList &a4);
 

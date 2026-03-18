@@ -16,6 +16,7 @@ public:
     static bool __cdecl IsValidTileId(int a1);
 
 protected:
+    friend class CTilesEx;
     friend class ITiling;
     friend class CTilesAndLinks;
 
