@@ -7,93 +7,79 @@
  CAITaskForceManakopters::CAITaskForceManakopters(int a2, int a3) {
   
   CAITaskForceEx::CAITaskForceEx(this, a2, 8, 13, a3);
-  *(_DWORD *)this = CAITaskForceManakopters::_vftable_;
+  this->__vftable = (CAITaskForceEx_vtbl *)CAITaskForceManakopters::_vftable_;
   return this;
 }
 
 
 // address=[0x132a2a0]
-// Decompiled from void __thiscall CAITaskForceManakopters::~CAITaskForceManakopters(CAITaskForceManakopters *this)
+// Decompiled from struct CAITaskForce *__thiscall CAITaskForceManakopters::~CAITaskForceManakopters(CAITaskForce **this)
  CAITaskForceManakopters::~CAITaskForceManakopters(void) {
   
-  CAITaskForceEx::~CAITaskForceEx(this);
+  return CAITaskForceEx::~CAITaskForceEx(this);
 }
 
 
 // address=[0x132d290]
-// Decompiled from int __thiscall CAITaskForceManakopters::Execute(CAITaskForceManakopters *this)
+// Decompiled from void __thiscall CAITaskForceManakopters::Execute(CAITaskForceManakopters *this)
 void  CAITaskForceManakopters::Execute(void) {
   
-  int result; // eax
-  __int16 v2; // ax
-  int v3; // eax
-  __int16 v4; // [esp-4h] [ebp-24h]
-  int v5; // [esp+0h] [ebp-20h]
-  int v6; // [esp+4h] [ebp-1Ch]
-  int v7; // [esp+14h] [ebp-Ch]
-  int v8; // [esp+18h] [ebp-8h]
+  __int16 v1; // ax
+  int v2; // eax
+  __int16 v3; // [esp-4h] [ebp-24h]
+  int v4; // [esp+0h] [ebp-20h]
+  int v5; // [esp+4h] [ebp-1Ch]
+  CAIEntityInfo *Entity; // [esp+Ch] [ebp-14h]
+  CAIEntityInfo *v7; // [esp+14h] [ebp-Ch]
+  CAIEntityInfo *v8; // [esp+18h] [ebp-8h]
 
   CAITaskForce::SetWaitCounter(this, 8u);
-  result = CAITaskForce::State(this);
-  switch ( result )
+  switch ( CAITaskForce::State(this) )
   {
     case 0:
-      return result;
+      return;
     case 103:
-      result = CAITaskForce::FirstEntity(this);
-      if ( result )
+      Entity = CAITaskForce::FirstEntity(this);
+      if ( Entity )
       {
-        v3 = CAIEntityInfo::EntityId(result);
-        result = IAIEnvironment::EntityIsManakopterMoving(v3);
-        if ( !(_BYTE)result )
-          result = CAITaskForce::SetNewStatusAndState(this, 1, 0, 0);
+        v2 = CAIEntityInfo::EntityId(Entity);
+        if ( !IAIEnvironment::EntityIsManakopterMoving(v2) )
+          CAITaskForce::SetNewStatusAndState(this, 1, 0, 0);
       }
       break;
     case 109:
-      result = CAITaskForce::FirstEntity(this);
-      v7 = result;
-      if ( result )
+      v7 = CAITaskForce::FirstEntity(this);
+      if ( v7 && CAITaskForce::CmdGoal(this) > 0 )
       {
-        result = CAITaskForce::CmdGoal(this);
-        if ( result > 0 )
+        while ( v7 )
         {
-          while ( v7 )
-          {
-            v5 = CAIEntityInfo::EntityId(v7);
-            v4 = Y16X16::UnpackYFast(*((_DWORD *)this + 20));
-            v2 = Y16X16::UnpackXFast(*((_DWORD *)this + 20));
-            IAIEnvironment::EntityManakopterFlyTo(v5, v2, v4);
-            v7 = CAIEntityInfo::Next(v7);
-          }
-          result = (int)CAITaskForce::SetState(this, 103);
+          v4 = CAIEntityInfo::EntityId(v7);
+          v3 = Y16X16::UnpackYFast(this->m_iDestinationXY);
+          v1 = Y16X16::UnpackXFast(this->m_iDestinationXY);
+          IAIEnvironment::EntityManakopterFlyTo(v4, v1, v3);
+          v7 = CAIEntityInfo::Next(v7);
         }
+        CAITaskForce::SetState(this, 103);
       }
       break;
     case 110:
-      result = CAITaskForce::FirstEntity(this);
-      v8 = result;
-      if ( result )
+      v8 = CAITaskForce::FirstEntity(this);
+      if ( v8 )
       {
         while ( v8 )
         {
-          v6 = CAIEntityInfo::EntityId(v8);
-          IAIEnvironment::EntityManakopterUnload(v6);
+          v5 = CAIEntityInfo::EntityId(v8);
+          IAIEnvironment::EntityManakopterUnload(v5);
           v8 = CAIEntityInfo::Next(v8);
         }
-        result = (int)CAITaskForce::SetState(this, 0);
+        CAITaskForce::SetState(this, 0);
       }
       break;
     default:
-      result = BBSupportDbgReport(
-                 1,
-                 "AI\\AI_TaskForcesEx.cpp",
-                 2850,
-                 "CAITaskForceManakopters::Execute(): Invalid state!");
-      if ( result == 1 )
+      if ( BBSupportDbgReport(1, "AI\\AI_TaskForcesEx.cpp", 2850, "CAITaskForceManakopters::Execute(): Invalid state!") == 1 )
         __debugbreak();
       break;
   }
-  return result;
 }
 
 
@@ -111,7 +97,7 @@ bool  CAITaskForceManakopters::NewCommand(int a2, int a3, int a4) {
       break;
     case 1u:
       CAITaskForce::MarkGoalAsPosition(this);
-      (*(void (__thiscall **)(CAITaskForceManakopters *, int))(*(_DWORD *)this + 44))(this, a3);
+      this->SetDestinationXY(this, a3);
       CAITaskForce::SetNewStatusAndState(this, 8, 109, 0);
       result = 1;
       break;

@@ -1,4 +1,3 @@
-#if FALSE
 #include "CAITaskForceGroup.h"
 
 // Definitions for class CAITaskForceGroup
@@ -373,4 +372,3 @@ void  CAITaskForceGroup::RemoveTaskForce(class CAITaskForce * _pTaskForce) {
 }
 
 
-#endif // Already implemented

@@ -7,41 +7,37 @@
  CAITaskForceDarkGardeners::CAITaskForceDarkGardeners(int a2, int a3) {
   
   CAITaskForceEx::CAITaskForceEx(this, a2, 6, 11, a3);
-  *(_DWORD *)this = CAITaskForceDarkGardeners::_vftable_;
+  this->__vftable = (CAITaskForceEx_vtbl *)CAITaskForceDarkGardeners::_vftable_;
   return this;
 }
 
 
 // address=[0x132a280]
-// Decompiled from void __thiscall CAITaskForceDarkGardeners::~CAITaskForceDarkGardeners(CAITaskForceDarkGardeners *this)
+// Decompiled from struct CAITaskForce *__thiscall CAITaskForceDarkGardeners::~CAITaskForceDarkGardeners(CAITaskForce **this)
  CAITaskForceDarkGardeners::~CAITaskForceDarkGardeners(void) {
   
-  CAITaskForceEx::~CAITaskForceEx(this);
+  return CAITaskForceEx::~CAITaskForceEx(this);
 }
 
 
 // address=[0x132ce70]
-// Decompiled from char __thiscall CAITaskForceDarkGardeners::Execute(CAITaskForceDarkGardeners *this)
+// Decompiled from void __thiscall CAITaskForceDarkGardeners::Execute(CAITaskForceDarkGardeners *this)
 void  CAITaskForceDarkGardeners::Execute(void) {
   
-  int v1; // eax
-
   if ( CAITaskForce::State(this) == 2 )
   {
-    v1 = CAITaskForce::Status(this);
-    if ( v1 != 6 )
+    if ( CAITaskForce::Status(this) != 6 )
     {
       CAITaskForceEx::FindWaypoints(this);
       CAITaskForceEx::InitWalk(this, 1);
       CAITaskForce::SetStatus(this, 6);
-      LOBYTE(v1) = CAITaskForce::SetWaitCounter(this, 0xFAu);
+      CAITaskForce::SetWaitCounter(this, 0xFAu);
     }
   }
   else
   {
-    LOBYTE(v1) = CAITaskForceEx::Execute(this);
+    CAITaskForceEx::Execute(this);
   }
-  return v1;
 }
 
 
@@ -55,7 +51,7 @@ bool  CAITaskForceDarkGardeners::NewCommand(int a2, int a3, int a4) {
   if ( a2 == 5 )
   {
     CAITaskForce::MarkGoalAsPosition(this);
-    (*(void (__thiscall **)(CAITaskForceDarkGardeners *, int))(*(_DWORD *)this + 44))(this, a3);
+    this->SetDestinationXY(this, a3);
     CAITaskForce::SetNewStatusAndState(this, 2, 102, 2);
     return 1;
   }

@@ -97,11 +97,11 @@ int  CAITaskForcePriestsMaya::ChooseMilitarySpellDestination(int a2, int a3, int
 
 
 // address=[0x132e4e0]
-// Decompiled from _DWORD *__thiscall CAITaskForcePriestsMaya::CAITaskForcePriestsMaya(_DWORD *this, int a2, int a3, int a4)
+// Decompiled from CAITaskForcePriestsMaya *__thiscall CAITaskForcePriestsMaya::CAITaskForcePriestsMaya(  CAITaskForcePriestsMaya *this,  int a2,  int a3,  int a4)
  CAITaskForcePriestsMaya::CAITaskForcePriestsMaya(int a2, enum T_AI_TASK_FORCE_TYPE a3, int a4) {
   
   CAITaskForcePriests::CAITaskForcePriests(this, a2, a3, a4);
-  *this = CAITaskForcePriestsMaya::_vftable_;
+  *(_DWORD *)this = CAITaskForcePriestsMaya::_vftable_;
   return this;
 }
 
