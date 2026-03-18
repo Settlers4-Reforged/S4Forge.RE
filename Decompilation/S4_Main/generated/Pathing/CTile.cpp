@@ -1,3 +1,4 @@
+#if FALSE
 #include "CTile.h"
 
 // Definitions for class CTile
@@ -6,7 +7,7 @@
 // Decompiled from int __thiscall CTile::SectorId(CTile *this)
 int  CTile::SectorId(void)const {
   
-  return (unsigned __int16)*((_DWORD *)this + 1);
+  return (unsigned __int16)this->m_iSectorId;
 }
 
 
@@ -14,7 +15,7 @@ int  CTile::SectorId(void)const {
 // Decompiled from int __thiscall CTile::CenterX(CTile *this)
 int  CTile::CenterX(void)const {
   
-  return (unsigned __int16)this->center;
+  return (unsigned __int16)this->m_uCenter;
 }
 
 
@@ -22,7 +23,7 @@ int  CTile::CenterX(void)const {
 // Decompiled from int __thiscall CTile::CenterY(CTile *this)
 int  CTile::CenterY(void)const {
   
-  return (int)this->center >> 16;
+  return (int)this->m_uCenter >> 16;
 }
 
 
@@ -30,7 +31,7 @@ int  CTile::CenterY(void)const {
 // Decompiled from int __thiscall CTile::NextSquareTile(CTile *this)
 int  CTile::NextSquareTile(void)const {
   
-  return this->nextSquareTile;
+  return this->m_uSquareNext;
 }
 
 
@@ -38,7 +39,7 @@ int  CTile::NextSquareTile(void)const {
 // Decompiled from DWORD __thiscall CTile::OwnerId(CTile *this)
 int  CTile::OwnerId(void)const {
   
-  return this->type & 0xF;
+  return this->m_iType & 0xF;
 }
 
 
@@ -46,7 +47,7 @@ int  CTile::OwnerId(void)const {
 // Decompiled from DWORD __thiscall CTile::EcoSectorId(CTile *this)
 int  CTile::EcoSectorId(void)const {
   
-  return HIWORD(this->ecoSectorId);
+  return HIWORD(this->m_iSectorId);
 }
 
 
@@ -54,23 +55,23 @@ int  CTile::EcoSectorId(void)const {
 // Decompiled from BOOL __thiscall CTile::TilingType(CTile *this)
 enum T_TILING_TYPE  CTile::TilingType(void)const {
   
-  return (this->type & 0x8000000) != 0;
+  return (this->m_iType & 0x8000000) != 0;
 }
 
 
 // address=[0x1346870]
-// Decompiled from DWORD __thiscall CTile::LinkList(CTile *this)
+// Decompiled from struct CLinkList *__thiscall CTile::LinkList(CTile *this)
 class CLinkList &  CTile::LinkList(void)const {
   
-  return this->LinkList;
+  return this->m_pLinkList;
 }
 
 
 // address=[0x13469c0]
-// Decompiled from DWORD __thiscall CTile::Type(CTile *this)
+// Decompiled from int __thiscall CTile::Type(CTile *this)
 int  CTile::Type(void)const {
   
-  return this->type;
+  return this->m_iType;
 }
 
 
@@ -78,7 +79,7 @@ int  CTile::Type(void)const {
 // Decompiled from DWORD __thiscall CTile::CenterXY(CTile *this)
 int  CTile::CenterXY(void)const {
   
-  return this->center;
+  return this->m_uCenter;
 }
 
 
@@ -113,14 +114,10 @@ int __cdecl CTile::TileTypeOwnerCheckMaskFromPlayerBits(int a1) {
 
 
 // address=[0x15e7360]
-// Decompiled from CTile *__thiscall CTile::SetLinkList(CTile *this, struct CLinkList *a2)
+// Decompiled from void __thiscall CTile::SetLinkList(CTile *this, struct CLinkList *a2)
 void  CTile::SetLinkList(class CLinkList & a2) {
   
-  CTile *result; // eax
-
-  result = this;
-  this->LinkList = (DWORD)a2;
-  return result;
+  this->m_pLinkList = a2;
 }
 
 
@@ -148,8 +145,8 @@ void  CTile::SetSize(int a2) {
   {
     __debugbreak();
   }
-  result = (a2 << 13) | this->type & 0xFFC01FFF;
-  this->type = result;
+  result = (a2 << 13) | this->m_iType & 0xFFC01FFF;
+  this->m_iType = result;
   return result;
 }
 
@@ -161,7 +158,7 @@ void  CTile::SetType(int a2) {
   CTile *result; // eax
 
   result = this;
-  this->type = a2;
+  this->m_iType = a2;
   return result;
 }
 
@@ -178,7 +175,7 @@ int __cdecl CTile::TileType(int a1) {
 // Decompiled from bool __thiscall CTile::Unused(CTile *this)
 bool  CTile::Unused(void)const {
   
-  return this->type == -1;
+  return this->m_iType == -1;
 }
 
 
@@ -186,7 +183,7 @@ bool  CTile::Unused(void)const {
 // Decompiled from bool __thiscall CTile::Used(CTile *this)
 bool  CTile::Used(void)const {
   
-  return this->type < 0xFFFFFFFD;
+  return this->m_iType < 0xFFFFFFFD;
 }
 
 
@@ -205,7 +202,7 @@ void  CTile::ChangeSize(int a2) {
 // Decompiled from DWORD __thiscall CTile::NextFree(CTile *this)
 int  CTile::NextFree(void)const {
   
-  return this->center;
+  return this->m_uCenter;
 }
 
 
@@ -213,7 +210,7 @@ int  CTile::NextFree(void)const {
 // Decompiled from DWORD __thiscall CTile::PrevFree(CTile *this)
 int  CTile::PrevFree(void)const {
   
-  return this->ecoSectorId;
+  return this->m_iSectorId;
 }
 
 
@@ -224,31 +221,31 @@ void  CTile::SetCenterXY(int a2) {
   CTile *result; // eax
 
   result = this;
-  this->center = a2;
+  this->m_uCenter = a2;
   return result;
 }
 
 
 // address=[0x15f5710]
-// Decompiled from CTile *__thiscall CTile::SetEcoSectorId(CTile *this, __int16 a2)
+// Decompiled from CTile *__thiscall CTile::SetEcoSectorId(CTile *this, int a2)
 void  CTile::SetEcoSectorId(int a2) {
   
   CTile *result; // eax
 
   result = this;
-  HIWORD(this->ecoSectorId) = a2;
+  this->m_iEcoSectorId = a2;
   return result;
 }
 
 
 // address=[0x15f5840]
-// Decompiled from CTile *__thiscall CTile::SetSectorId(CTile *this, __int16 a2)
+// Decompiled from CTile *__thiscall CTile::SetSectorId(CTile *this, WORD a2)
 void  CTile::SetSectorId(int a2) {
   
   CTile *result; // eax
 
   result = this;
-  LOWORD(this->ecoSectorId) = a2;
+  this->m_iSectorId = a2;
   return result;
 }
 
@@ -257,7 +254,7 @@ void  CTile::SetSectorId(int a2) {
 // Decompiled from DWORD __thiscall CTile::Size(CTile *this)
 int  CTile::Size(void)const {
   
-  return (this->type & 0x3FE000) >> 13;
+  return (this->m_iType & 0x3FE000) >> 13;
 }
 
 
@@ -270,17 +267,13 @@ int __cdecl CTile::TileTypeToOwnerId(int a1) {
 
 
 // address=[0x15e6f80]
-// Decompiled from CTile *__thiscall CTile::Init(CTile *this, DWORD a2, DWORD a3, struct CLinkList *a4)
+// Decompiled from void __thiscall CTile::Init(CTile *this, int a2, DWORD a3, struct CLinkList *a4)
 void  CTile::Init(int a2, int a3, class CLinkList & a4) {
   
-  CTile *result; // eax
-
-  this->type = a2;
-  this->center = a3;
-  this->LinkList = (DWORD)a4;
-  result = this;
-  this->ecoSectorId = 0;
-  return result;
+  this->m_iType = a2;
+  this->m_uCenter = a3;
+  this->m_pLinkList = a4;
+  *(_DWORD *)&this->m_iSectorId = 0;
 }
 
 
@@ -290,12 +283,13 @@ void  CTile::InitPseudoTile(int a2, class CLinkList & a3) {
   
   CTile *result; // eax
 
-  this->type = CTile::TileType(a2);
-  this->center = 0;
+  this->m_iType = CTile::TileType(a2);
+  this->m_uCenter = 0;
   result = this;
-  this->LinkList = (DWORD)a3;
-  this->ecoSectorId = 0;
+  this->m_pLinkList = (DWORD)a3;
+  this->m_iSectorId = 0;
   return result;
 }
 
 
+#endif // Already implemented

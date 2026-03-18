@@ -17,6 +17,13 @@ public:
     // address=[0x2f90e30]
     void  SetNewFogging(int a2);
 
+    // Type information members
+public:
+    BYTE a;
+    BYTE m_uGroundType;
+    BYTE m_uGradient;
+    BYTE m_uGfxBits;
+
 };
 
 

@@ -1,3 +1,4 @@
+#if FALSE
 #include "T_GFX_MAP_ELEMENT.h"
 
 // Definitions for class T_GFX_MAP_ELEMENT
@@ -6,7 +7,7 @@
 // Decompiled from int __thiscall T_GFX_MAP_ELEMENT::GetGradient(T_GFX_MAP_ELEMENT *this)
 int  T_GFX_MAP_ELEMENT::GetGradient(void) {
   
-  return *((_BYTE *)this + 2) & 0xF;
+  return this->m_uGradient & 0xF;
 }
 
 
@@ -14,7 +15,7 @@ int  T_GFX_MAP_ELEMENT::GetGradient(void) {
 // Decompiled from int __thiscall T_GFX_MAP_ELEMENT::GetNewFogging(T_GFX_MAP_ELEMENT *this)
 int  T_GFX_MAP_ELEMENT::GetNewFogging(void) {
   
-  return (*((_BYTE *)this + 3) & 0x38) >> 3;
+  return (this->m_uGfxBits & 0x38) >> 3;
 }
 
 
@@ -22,19 +23,16 @@ int  T_GFX_MAP_ELEMENT::GetNewFogging(void) {
 // Decompiled from int __thiscall T_GFX_MAP_ELEMENT::GetOldFogging(T_GFX_MAP_ELEMENT *this)
 int  T_GFX_MAP_ELEMENT::GetOldFogging(void) {
   
-  return *((_BYTE *)this + 3) & 7;
+  return this->m_uGfxBits & 7;
 }
 
 
 // address=[0x2f90e30]
-// Decompiled from T_GFX_MAP_ELEMENT *__thiscall T_GFX_MAP_ELEMENT::SetNewFogging(T_GFX_MAP_ELEMENT *this, char a2)
+// Decompiled from void __thiscall T_GFX_MAP_ELEMENT::SetNewFogging(T_GFX_MAP_ELEMENT *this, int a2)
 void  T_GFX_MAP_ELEMENT::SetNewFogging(int a2) {
   
-  T_GFX_MAP_ELEMENT *result; // eax
-
-  result = this;
-  *((_BYTE *)this + 3) = (8 * a2) | *((_BYTE *)this + 3) & 0xC7;
-  return result;
+  this->m_uGfxBits = (8 * a2) | this->m_uGfxBits & 0xC7;
 }
 
 
+#endif // Already implemented

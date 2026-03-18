@@ -7,11 +7,11 @@
 int __cdecl ITiling::CatapultSectorId(int a1) {
   
   int v1; // eax
-  CTile *v2; // eax
+  const struct CTile *v2; // eax
 
   v1 = ITiling::CatapultTileId(a1);
-  v2 = (CTile *)ITiling::Tile(v1);
-  return CTile::SectorId(v2);
+  v2 = ITiling::Tile(v1);
+  return CTile::SectorId((CTile *)v2);
 }
 
 
@@ -19,10 +19,10 @@ int __cdecl ITiling::CatapultSectorId(int a1) {
 // Decompiled from int __cdecl ITiling::CatapultTileId(int a1)
 int __cdecl ITiling::CatapultTileId(int a1) {
   
-  if ( (unsigned __int16)(*(&ITiling::m_pTileIds + 1))[a1] >= 0x8000u )
+  if ( ITiling::m_pCatapultTileIds[a1] >= 0x8000u )
     return 0;
   else
-    return (unsigned __int16)(*(&ITiling::m_pTileIds + 1))[a1];
+    return ITiling::m_pCatapultTileIds[a1];
 }
 
 
@@ -35,10 +35,10 @@ class CTile const & __cdecl ITiling::Tile(int a1) {
 
 
 // address=[0x13066a0]
-// Decompiled from int __cdecl ITiling::FirstTileOfSquareVW(int a1, int a2)
-int __cdecl ITiling::FirstTileOfSquareVW(int a1, int a2) {
+// Decompiled from int __cdecl ITiling::FirstTileOfSquareVW(int _uV, int _uW)
+int __cdecl ITiling::FirstTileOfSquareVW(int _uV, int _uW) {
   
-  return (unsigned __int16)CTiles::m_sSquareFirstLastTiles[128 * a2 + 128 + 2 * a1];
+  return *((unsigned __int16 *)&CTiles::m_sSquareFirstLastTiles + 128 * _uW + 2 * _uV + 128);
 }
 
 
@@ -96,7 +96,7 @@ int __cdecl ITiling::NumberOfWaterElementsDiv2XY(int a1, int a2) {
   int v2; // esi
 
   v2 = (Squares::XYToVW(a2) + 1) << 6;
-  return (unsigned __int8)ITiling::m_uSquareNumberOfWaterElementsDiv2[v2 + Squares::XYToVW(a1)];
+  return (unsigned __int8)m_uSquareNumberOfWaterElementsDiv2[v2 + Squares::XYToVW(a1)];
 }
 
 
@@ -104,7 +104,7 @@ int __cdecl ITiling::NumberOfWaterElementsDiv2XY(int a1, int a2) {
 // Decompiled from int __cdecl ITiling::NumberOfWaterElementsDiv2VW(int a1, int a2)
 int __cdecl ITiling::NumberOfWaterElementsDiv2VW(int a1, int a2) {
   
-  return (unsigned __int8)ITiling::m_uSquareNumberOfWaterElementsDiv2[64 * a2 + 64 + a1];
+  return (unsigned __int8)m_uSquareNumberOfWaterElementsDiv2[64 * a2 + 64 + a1];
 }
 
 

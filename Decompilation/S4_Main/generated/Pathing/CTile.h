@@ -92,12 +92,13 @@ protected:
 
     // Type information members
 public:
-    DWORD type;
-    DWORD ecoSectorId;
-    DWORD center;
-    WORD field_C;
-    WORD nextSquareTile;
-    DWORD LinkList;
+    int m_iType;
+    WORD m_iSectorId;
+    WORD m_iEcoSectorId;
+    DWORD m_uCenter;
+    WORD m_uSquarePrev;
+    WORD m_uSquareNext;
+    struct CLinkList * m_pLinkList;
 
 };
 

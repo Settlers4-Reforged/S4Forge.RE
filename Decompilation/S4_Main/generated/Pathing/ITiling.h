@@ -15,7 +15,7 @@ public:
     static class CTile const & __cdecl Tile(int a1);
 
     // address=[0x13066a0]
-    static int __cdecl FirstTileOfSquareVW(int a1, int a2);
+    static int __cdecl FirstTileOfSquareVW(int _uV, int _uW);
 
     // address=[0x130eb10]
     static int __cdecl EcoSectorId(int a1);
