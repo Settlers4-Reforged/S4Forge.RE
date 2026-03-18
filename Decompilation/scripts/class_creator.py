@@ -1,9 +1,9 @@
-import ida_hexrays
 import ida_bytes
-import ida_typeinf
 import ida_funcs
-import idautils
+import ida_hexrays
 import ida_nalt
+import ida_typeinf
+import idautils
 import idc
 import os
 import re
@@ -114,7 +114,7 @@ REPLACEMENTS = {
     "class std::basic_string<wchar_t,struct std::char_traits<wchar_t>,class std::allocator<wchar_t> >": "std::wstring",
 }
 
-FOLDER_MAP =  {
+FOLDER_MAP = {
     "AI/": [
         "CParam",
         "CParameterSet",
@@ -460,9 +460,6 @@ FOLDER_MAP =  {
         "CInputProcessor",
         "CInternationalTrader",
         "CFsm",
-        "CTile",
-        "CTileIdRef",
-        "CTiles",
         "CReserveDatabase",
         "CReserveEntry",
         "CRandom16",
@@ -656,11 +653,11 @@ FOLDER_MAP =  {
         "IAnimatedEntity",
         "IDarkTribe",
         "CDarkConvert",
-        "ITiling",
         "IEntity",
         "IFlyingEntity",
         "IGroupMgr",
         "IMovingEntity",
+        "T_GFX_MAP_ELEMENT"
     ],
 
     "MapObjects/Vehicle/": [
@@ -856,6 +853,9 @@ FOLDER_MAP =  {
         "CSquareVisited",
         "CSectorSpiralWalk",
         "CSpiralWalk",
+        "CTile",
+        "CTileIdRef",
+        "CTiles",
         "CTilesAndLinks",
         "CTilesEx",
         "CTiling",
@@ -878,6 +878,7 @@ FOLDER_MAP =  {
         "CWater",
         "CWaterFlags",
         "CWaterFlagsEx",
+        "ITiling",
     ],
 
     "Script/": [
@@ -999,7 +1000,7 @@ FOLDER_MAP =  {
 
 }
 
-WORKING_DIR="K:/Projekte/Siedler4/S4Forge.RE/Decompilation/"
+WORKING_DIR = "K:/Projekte/Siedler4/S4Forge.RE/Decompilation/"
 
 OUTPUT_DIR = WORKING_DIR + "S4_Main/generated/"
 IMPL_DIR = WORKING_DIR + "S4_Main/src/"
@@ -1082,10 +1083,11 @@ class RTTIParser:
 
 def get_function_definition(ea):
     cfunc = ida_hexrays.decompile(ea)
-    if(cfunc is not None):
+    if (cfunc is not None):
         cfunc.refresh_func_ctext()
     pseudocode_text = str(cfunc)
     return pseudocode_text
+
 
 def get_class_members(class_name: str):
     tif = ida_typeinf.tinfo_t()
@@ -1101,10 +1103,10 @@ def get_class_members(class_name: str):
         member = udt[i]
         member_name = member.name
         if member_name == "":
-            continue # skip base classes
+            continue  # skip base classes
 
         if member_name.startswith("__"):
-            continue # skip vtable and other compiler-generated members
+            continue  # skip vtable and other compiler-generated members
 
         member_type = member.type
         type_str = member_type.dstr()
@@ -1112,12 +1114,13 @@ def get_class_members(class_name: str):
 
     return members
 
+
 def get_function_info_from_address(address: int) -> bool:
     tif = ida_typeinf.tinfo_t()
-    
+
     # 1. Try to get the explicit type (saved in DB)
     success = ida_nalt.get_tinfo(tif, address)
-    
+
     # 2. If that fails, ask IDA to guess the type
     if not success:
         print(f"No explicit type at {hex(address)}. Attempting to guess...")
@@ -1136,7 +1139,8 @@ def get_function_info_from_address(address: int) -> bool:
     else:
         print("Type info is not a function.")
         return False
-    
+
+
 def get_arguments_from_function_info(ftd):
     args = []
     for i, arg in enumerate(ftd):
@@ -1145,10 +1149,11 @@ def get_arguments_from_function_info(ftd):
 
         args.append({
             "index": i,
-            "name": arg.name or f"a{i+1}",
+            "name": arg.name or f"a{i + 1}",
         })
 
     return args
+
 
 def split_params(param_str):
     params = []
@@ -1180,9 +1185,9 @@ def append_names(func_decl, args: list = None) -> str:
     open_paren = func_decl.find('(')
     close_paren = func_decl.rfind(')')
 
-    before = func_decl[:open_paren+1]
+    before = func_decl[:open_paren + 1]
     after = func_decl[close_paren:]
-    inside = func_decl[open_paren+1:close_paren]
+    inside = func_decl[open_paren + 1:close_paren]
 
     params = split_params(inside)
 
@@ -1194,7 +1199,7 @@ def append_names(func_decl, args: list = None) -> str:
             new_params.append(p)
         else:
             if args and arg_index <= len(args):
-                new_params.append(f"{p} {args[arg_index-1]['name']}")
+                new_params.append(f"{p} {args[arg_index - 1]['name']}")
             else:
                 new_params.append(f"{p} a{arg_index}")
             arg_index += 1
@@ -1208,8 +1213,8 @@ seen_destructors = set()
 
 def is_deleting_destructor(symbol: str):
     return (
-        "`scalar deleting destructor'" in symbol
-        or "`vector deleting destructor'" in symbol
+            "`scalar deleting destructor'" in symbol
+            or "`vector deleting destructor'" in symbol
     )
 
 
@@ -1349,7 +1354,8 @@ def write_globals(globals_list, generated_headers):
 
         for entry in globals_list:
             # entries without any type information (aka, no space in the name) should just be maybe documented as comments, but otherwise skipped
-            if entry["symbol"].find(" ") == -1 or entry["symbol"].find("destructor iterator") != -1 or entry["symbol"].find("'") != -1:
+            if entry["symbol"].find(" ") == -1 or entry["symbol"].find("destructor iterator") != -1 or entry[
+                "symbol"].find("'") != -1:
                 skipped_entries.append(entry)
                 continue
 
@@ -1370,12 +1376,12 @@ def write_globals(globals_list, generated_headers):
                 f.write("\n")
 
         for entry in skipped_entries:
-                f.write(
-                    f"// SKIPPED address=[{hex(int(entry['address'], 16) - ADDRESS_OFFSET)}]\n")
-                f.write(f"// {entry['symbol']};\n")
+            f.write(
+                f"// SKIPPED address=[{hex(int(entry['address'], 16) - ADDRESS_OFFSET)}]\n")
+            f.write(f"// {entry['symbol']};\n")
 
         f.write(f"#endif // {guard}\n")
-    
+
     implementation_path = os.path.join(OUTPUT_DIR, GLOBAL_HEADER.replace(".h", ".cpp"))
     with open(implementation_path, "w", encoding="utf-8") as f:
         f.write(f'#include "{GLOBAL_HEADER}"\n')
@@ -1385,7 +1391,7 @@ def write_globals(globals_list, generated_headers):
                 f.write(
                     f"// address=[{hex(int(entry['address'], 16) - ADDRESS_OFFSET)}]\n")
                 func = get_function_definition(int(entry['address'], 16) - ADDRESS_OFFSET)
-                
+
                 if func == "None":
                     f.write(f"// [Decompilation failed for {entry['symbol']}]\n\n")
                     continue
@@ -1401,12 +1407,13 @@ def write_globals(globals_list, generated_headers):
                 func = func_name + " {\n  " + func_without_declaration
 
                 commented_func_name = ida_func_name.split("\n")
-                commented_func_name = [line.strip() for line in commented_func_name if line.strip() != '' and not line.strip().startswith("//")]
+                commented_func_name = [line.strip() for line in commented_func_name if
+                                       line.strip() != '' and not line.strip().startswith("//")]
                 ida_func_name = "\n ".join(commented_func_name)
 
                 ida_func_name = ida_func_name.strip().replace("\n", " ")
                 f.write(f"// Decompiled from {ida_func_name}\n")
-                
+
                 func = strip_destructor(func)
                 f.write(f"{func}\n\n")
 
@@ -1455,8 +1462,9 @@ def write_class_headers(classes, generated_headers):
                         )
 
                         ftd = get_function_info_from_address(int(entry['address'], 16) - ADDRESS_OFFSET)
-                        decl_arguments = get_arguments_from_function_info(ftd) if ftd else None 
-                        print (f"Processing {clean_decl} with args {decl_arguments} for function at {hex(int(entry['address'], 16) - ADDRESS_OFFSET)}")
+                        decl_arguments = get_arguments_from_function_info(ftd) if ftd else None
+                        print(
+                            f"Processing {clean_decl} with args {decl_arguments} for function at {hex(int(entry['address'], 16) - ADDRESS_OFFSET)}")
                         if decl_arguments:
                             clean_decl = append_names(clean_decl, decl_arguments)
 
@@ -1491,9 +1499,11 @@ def create_class_file_paths(class_name):
     abs_path = os.path.join(OUTPUT_DIR, rel_path)
     return rel_path, abs_path
 
+
 def is_implementation_available(rel_path: str) -> bool:
     impl_path = os.path.join(IMPL_DIR, rel_path)
     return os.path.isfile(impl_path)
+
 
 def strip_for_decompilation(method_name: str) -> str:
     """Strips unnecessary parts from method name for decompilation"""
@@ -1501,12 +1511,13 @@ def strip_for_decompilation(method_name: str) -> str:
     method_name = method_name.replace("virtual ", "")
     # Remove static specifier
     method_name = method_name.replace("static ", "")
-    
+
     return method_name
+
 
 def strip_destructor(func: str) -> str:
     """Strips unnecessary parts from destructor for decompilation"""
-    
+
     # Destructors look like this in MSVC decompilation:
     # ClassName::`scalar deleting destructor'(pointer) for ClassName, with optional other params
     # We want to convert it to:
@@ -1517,6 +1528,7 @@ def strip_destructor(func: str) -> str:
     # The func can contain multiple destructors
 
     pattern = re.compile(r"(\w+)::`(scalar|vector) deleting destructor'\(([^,]+).+\)")
+
     def replacer(match):
         # class_name = match.group(1)
         delete_type = match.group(2)
@@ -1526,8 +1538,9 @@ def strip_destructor(func: str) -> str:
             return f"delete {pointer}"
         else:
             return f"delete[] {pointer}"
-    
+
     return pattern.sub(replacer, func)
+
 
 def write_class_definitions(classes):
     for (namespaces, class_name), members in classes.items():
@@ -1540,7 +1553,7 @@ def write_class_definitions(classes):
 
         with open(abs_path, "w", encoding="utf-8") as f:
             if impl_exists:
-               f.write(f"#if FALSE\n")
+                f.write(f"#if FALSE\n")
             f.write(f"#include \"{class_name}.h\"\n\n")
 
             f.write(f"// Definitions for class {class_name}\n\n")
@@ -1552,13 +1565,13 @@ def write_class_definitions(classes):
                 for entry in members[access]:
                     f.write(
                         f"// address=[{hex(int(entry['address'], 16) - ADDRESS_OFFSET)}]\n")
-                
+
                     func = get_function_definition(int(entry['address'], 16) - ADDRESS_OFFSET)
-                    
+
                     if func == "None":
                         f.write(f"// [Decompilation failed for {entry['declaration']}]\n\n")
                         continue
-                        
+
                     func_name = strip_for_decompilation(entry["declaration"])
 
                     ftd = get_function_info_from_address(int(entry['address'], 16) - ADDRESS_OFFSET)
@@ -1570,12 +1583,13 @@ def write_class_definitions(classes):
                     func = func_name + " {\n  " + func_without_declaration
 
                     commented_func_name = ida_func_name.split("\n")
-                    commented_func_name = [line.strip() for line in commented_func_name if line.strip() != '' and not line.strip().startswith("//")]
+                    commented_func_name = [line.strip() for line in commented_func_name if
+                                           line.strip() != '' and not line.strip().startswith("//")]
                     ida_func_name = "\n ".join(commented_func_name)
 
                     ida_func_name = ida_func_name.strip().replace("\n", " ")
                     f.write(f"// Decompiled from {ida_func_name}\n")
-                    
+
                     func = strip_destructor(func)
                     f.write(f"{func}\n\n")
             if impl_exists:
@@ -1593,6 +1607,7 @@ def write_aggregate_header(generated_headers):
             f.write(f'#include "{header}"\n')
 
         f.write(f"\n#endif // {guard}\n")
+
 
 def write_default_header():
     path = os.path.join(OUTPUT_DIR, DEFINES_HEADER)
@@ -1618,6 +1633,7 @@ def write_default_header():
 
         f.write(f"#endif // {guard}\n")
 
+
 def main(input_file):
     os.makedirs(OUTPUT_DIR, exist_ok=True)
 
@@ -1642,5 +1658,6 @@ def main(input_file):
     write_class_headers(classes, generated_headers)
     write_aggregate_header(generated_headers)
     write_class_definitions(classes)
-    
+
+
 main(WORKING_DIR + "syms.txt")
