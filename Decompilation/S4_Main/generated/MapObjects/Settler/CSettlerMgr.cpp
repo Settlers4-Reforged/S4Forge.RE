@@ -1929,12 +1929,12 @@ void __cdecl CSettlerMgr::FillFreeCarrier(class CInfoExchange * a1, bool a2, boo
       a1->m_uNrOfNonCarriers = a1->m_uNrOfSettlers - a1->m_uNrOfCarriers;
       a1->m_uNrOfDigger = CEcoSector::NrOfSettler(v5, SETTLER_DIGGER);
       a1->m_uNrOfFreeDigger = CEcoSector::WorkerDeltaAmount(v5, SETTLER_DIGGER);
-      a1->m_bHasShovels = CEcoSector::NrOfGoods(v5, S4_GOOD_SHOVEL) > 0;
-      a1->m_uNrOfShovels = CEcoSector::NrOfGoods(v5, S4_GOOD_SHOVEL);
+      a1->m_bHasShovels = CEcoSector::NrOfGoods(v5, GOOD_SHOVEL) > 0;
+      a1->m_uNrOfShovels = CEcoSector::NrOfGoods(v5, GOOD_SHOVEL);
       a1->m_uNrOfBuilders = CEcoSector::NrOfSettler(v5, SETTLER_BUILDER);
       a1->m_uNrOfFreeBuilders = CEcoSector::WorkerDeltaAmount(v5, SETTLER_BUILDER);
-      a1->m_bHasHammers = CEcoSector::NrOfGoods(v5, S4_GOOD_HAMMER) > 0;
-      a1->m_uNrOfHammers = CEcoSector::NrOfGoods(v5, S4_GOOD_HAMMER);
+      a1->m_bHasHammers = CEcoSector::NrOfGoods(v5, GOOD_HAMMER) > 0;
+      a1->m_uNrOfHammers = CEcoSector::NrOfGoods(v5, GOOD_HAMMER);
       a1->m_bLooksAtEcoSector = 1;
       v6 = 1;
     }

@@ -1,3 +1,4 @@
+#if FALSE
 #include "CAIEntityInfoEx.h"
 
 // Definitions for class CAIEntityInfoEx
@@ -25,10 +26,10 @@
 
 
 // address=[0x130adb0]
-// Decompiled from int __thiscall CAIEntityInfoEx::Class(unsigned __int8 *this)
+// Decompiled from int __thiscall CAIEntityInfoEx::Class(CAIEntityInfoEx *this)
 enum T_AI_ENTITY_INFO_EX_CLASS  CAIEntityInfoEx::Class(void)const {
   
-  return this[4];
+  return (unsigned __int8)this->m_bClass;
 }
 
 
@@ -57,3 +58,4 @@ class CAIEntityInfoEx * __cdecl CAIEntityInfoEx::CreateExtendedInfo(enum T_AI_EN
 }
 
 
+#endif // Already implemented

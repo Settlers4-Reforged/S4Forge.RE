@@ -282,7 +282,7 @@ bool  CAIMain::IsPlayerAIActive(int a2) {
 
 // address=[0x1312780]
 // Decompiled from void __thiscall CAIMain::PostAIEvent(CAIPlayerAI **this, int a2, int a3, int a4, int a5)
-void  CAIMain::PostAIEvent(int a2, int a3, int a4, int a5) {
+void  CAIMain::PostAIEvent(int iEventType, int iX, int iY, int iDark) {
   
   int v5; // [esp+C8h] [ebp-48h]
   int v6; // [esp+CCh] [ebp-44h]

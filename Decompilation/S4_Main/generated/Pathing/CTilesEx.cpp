@@ -3,53 +3,50 @@
 // Definitions for class CTilesEx
 
 // address=[0x15e3040]
-// Decompiled from int **__cdecl CTilesEx::InitTiles(struct CLinkList *a1)
+// Decompiled from void __cdecl CTilesEx::InitTiles(struct CLinkList *a1)
 void __cdecl CTilesEx::InitTiles(class CLinkList & a1) {
   
-  int **v1; // eax
-  int **v2; // eax
-  int **v3; // eax
-  int **v4; // eax
-  int **v5; // eax
-  int **v6; // eax
-  int **result; // eax
-  CTile *v8; // [esp+0h] [ebp-Ch]
+  CTile *v1; // eax
+  CTile *v2; // eax
+  CTile *v3; // eax
+  CTile *v4; // eax
+  CTile *v5; // eax
+  CTile *v6; // eax
+  CTile *v7; // [esp+0h] [ebp-Ch]
   int i; // [esp+4h] [ebp-8h]
   int j; // [esp+8h] [ebp-4h]
 
   v1 = CTiles::TileEx(0);
-  CTile::InitPseudoTile((CTile *)v1, 0, a1);
+  CTile::InitPseudoTile(v1, 0, a1);
   for ( i = 1; i <= 8; ++i )
   {
     v2 = CTiles::TileEx(i);
-    CTile::InitPseudoTile((CTile *)v2, i, a1);
+    CTile::InitPseudoTile(v2, i, a1);
   }
   v3 = CTiles::TileEx(9);
-  CTile::InitPseudoTile((CTile *)v3, 0, a1);
+  CTile::InitPseudoTile(v3, 0, a1);
   v4 = CTiles::TileEx(9);
-  CTile::SetType((CTile *)v4, 0xFFFFFFFD);
+  CTile::SetType(v4, 0xFFFFFFFD);
   v5 = CTiles::TileEx(0x7FFF);
-  CTile::InitPseudoTile((CTile *)v5, 0, a1);
+  CTile::InitPseudoTile(v5, 0, a1);
   v6 = CTiles::TileEx(0x7FFF);
-  CTile::SetType((CTile *)v6, 0xFFFFFFFE);
+  CTile::SetType(v6, 0xFFFFFFFE);
   for ( j = 10; j <= 32766; ++j )
   {
-    v8 = (CTile *)CTiles::TileEx(j);
-    CTile::SetType(v8, 0xFFFFFFFF);
-    v8->ecoSectorId = j - 1;
-    v8->center = j + 1;
+    v7 = CTiles::TileEx(j);
+    CTile::SetType(v7, 0xFFFFFFFF);
+    v7->m_iSectorId = j - 1;
+    v7->m_uCenter = j + 1;
   }
-  CTiles::TileEx(9)[2] = (int *)10;
-  CTiles::TileEx(10)[1] = (int *)9;
-  CTiles::TileEx(32766)[2] = _enc_textbss_begin + 28671;
-  result = CTiles::TileEx(0x7FFF);
-  result[1] = _enc_textbss_begin + 28670;
+  CTiles::TileEx(9)->m_uCenter = 10;
+  CTiles::TileEx(10)->m_iSectorId = 9;
+  CTiles::TileEx(32766)->m_uCenter = 0x7FFF;
+  CTiles::TileEx(0x7FFF)->m_iSectorId = 32766;
   CTilesEx::m_iNumberOfUsedTiles = 0;
   CTilesEx::m_iLastUsedTileId = 9;
   CTilesEx::m_iTilesPushBackMode = 1;
   CTilesEx::m_iMaxUsedTiles = 0;
   CTilesEx::m_iCalcFreeListCounter = 0;
-  return result;
 }
 
 
@@ -57,15 +54,15 @@ void __cdecl CTilesEx::InitTiles(class CLinkList & a1) {
 // Decompiled from void __thiscall CTilesEx::DeactivateTilesPushBackMode(void *this)
 void __cdecl CTilesEx::DeactivateTilesPushBackMode(void) {
   
-  int *v2; // [esp+0h] [ebp-4h]
+  int v1; // [esp+0h] [ebp-4h]
 
   if ( CTilesEx::m_iTilesPushBackMode )
   {
     if ( CTilesEx::m_iLastUsedTileId == CTilesEx::m_iNumberOfUsedTiles + 9 )
     {
-      v2 = (int *)(CTilesEx::m_iLastUsedTileId + 1);
-      CTiles::TileEx(9)[2] = v2;
-      CTiles::TileEx((int)v2)[1] = (int *)9;
+      v1 = CTilesEx::m_iLastUsedTileId + 1;
+      CTiles::TileEx(9)->m_uCenter = v1;
+      CTiles::TileEx(v1)->m_iSectorId = 9;
     }
     else
     {
@@ -75,7 +72,7 @@ void __cdecl CTilesEx::DeactivateTilesPushBackMode(void) {
              108,
              "CTiles::DeactivatePushBackMode(): Last used tile invalid!") == 1 )
         __debugbreak();
-      CTilesEx::CalculateListOfFreeTiles(0, this);
+      CTilesEx::CalculateListOfFreeTiles(0);
     }
     CTilesEx::CalculateSquareTileLists();
     CTilesEx::m_iTilesPushBackMode = 0;
@@ -92,116 +89,107 @@ void __cdecl CTilesEx::CalculateOwnerBits(void) {
 
 
 // address=[0x15e3260]
-// Decompiled from __int16 __cdecl CTilesEx::InsertTileIntoSquareList(int a1)
+// Decompiled from void __cdecl CTilesEx::InsertTileIntoSquareList(int a1)
 void __cdecl CTilesEx::InsertTileIntoSquareList(int a1) {
   
-  int **v1; // eax
-  __int16 result; // ax
-  int **v3; // eax
-  int v4; // [esp+0h] [ebp-18h]
-  int v5; // [esp+4h] [ebp-14h]
-  int v6; // [esp+8h] [ebp-10h]
-  int v7; // [esp+Ch] [ebp-Ch]
-  CTile *v8; // [esp+10h] [ebp-8h]
-  struct CTiles::SFirstLast *LastXY; // [esp+14h] [ebp-4h]
+  CTile *iPrevTileId; // eax
+  CTile *v2; // eax
+  int v3; // [esp+0h] [ebp-18h]
+  int v4; // [esp+4h] [ebp-14h]
+  int m_uFirst; // [esp+8h] [ebp-10h]
+  int m_uLast; // [esp+Ch] [ebp-Ch]
+  CTile *rTile; // [esp+10h] [ebp-8h]
+  SFirstLast *rFirstLast; // [esp+14h] [ebp-4h]
 
-  v8 = (CTile *)CTiles::TileEx(a1);
-  if ( !CTile::Used(v8) && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 159, "rTile.Used()") == 1 )
+  rTile = CTiles::TileEx(a1);
+  if ( !CTile::Used(rTile) && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 159, "rTile.Used()") == 1 )
     __debugbreak();
-  v4 = CTile::CenterX(v8);
-  v5 = CTile::CenterY(v8);
-  LastXY = CTiles::SquareFirstLastXY(v4, v5);
-  if ( *(_WORD *)LastXY )
+  v3 = CTile::CenterX(rTile);
+  v4 = CTile::CenterY(rTile);
+  rFirstLast = CTiles::SquareFirstLastXY(v3, v4);
+  if ( rFirstLast->m_uFirst )
   {
-    if ( !*((_WORD *)LastXY + 1) )
+    if ( !rFirstLast->m_uLast )
     {
       if ( BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 170, "rFirstLast.m_uLast != 0") == 1 )
         __debugbreak();
-      *((_WORD *)LastXY + 1) = *(_WORD *)LastXY;
+      rFirstLast->m_uLast = rFirstLast->m_uFirst;
     }
-    if ( (CTile::Type(v8, v4) & 0x8000000) != 0 )
+    if ( (CTile::Type(rTile, v3) & 0x8000000) != 0 )
     {
-      v7 = *((unsigned __int16 *)LastXY + 1);
-      v1 = CTiles::TileEx(v7);
-      if ( !CTile::Used((CTile *)v1)
+      m_uLast = rFirstLast->m_uLast;
+      iPrevTileId = CTiles::TileEx(m_uLast);
+      if ( !CTile::Used(iPrevTileId)
         && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 181, "TileEx(iPrevTileId).Used()") == 1 )
       {
         __debugbreak();
       }
-      if ( *((_WORD *)CTiles::TileEx(v7) + 7) )
+      if ( CTiles::TileEx(m_uLast)->m_uSquareNext )
       {
         if ( BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 182, "TileEx(iPrevTileId).m_uSquareNext == 0") == 1 )
           __debugbreak();
       }
-      *((_WORD *)CTiles::TileEx(v7) + 7) = a1;
-      v8->field_C = v7;
-      v8->nextSquareTile = 0;
-      result = (__int16)LastXY;
-      *((_WORD *)LastXY + 1) = a1;
+      CTiles::TileEx(m_uLast)->m_uSquareNext = a1;
+      rTile->m_uSquarePrev = m_uLast;
+      rTile->m_uSquareNext = 0;
+      rFirstLast->m_uLast = a1;
     }
     else
     {
-      v6 = *(unsigned __int16 *)LastXY;
-      v3 = CTiles::TileEx(v6);
-      if ( !CTile::Used((CTile *)v3)
+      m_uFirst = rFirstLast->m_uFirst;
+      v2 = CTiles::TileEx(m_uFirst);
+      if ( !CTile::Used(v2)
         && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 197, "TileEx(iNextTileId).Used()") == 1 )
       {
         __debugbreak();
       }
-      if ( *((_WORD *)CTiles::TileEx(v6) + 6)
+      if ( CTiles::TileEx(m_uFirst)->m_uSquarePrev
         && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 198, "TileEx(iNextTileId).m_uSquarePrev == 0") == 1 )
       {
         __debugbreak();
       }
-      *((_WORD *)CTiles::TileEx(v6) + 6) = a1;
-      v8->field_C = 0;
-      result = v6;
-      v8->nextSquareTile = v6;
-      *(_WORD *)LastXY = a1;
+      CTiles::TileEx(m_uFirst)->m_uSquarePrev = a1;
+      rTile->m_uSquarePrev = 0;
+      rTile->m_uSquareNext = m_uFirst;
+      rFirstLast->m_uFirst = a1;
     }
   }
   else
   {
-    if ( *((_WORD *)LastXY + 1)
-      && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 212, "rFirstLast.m_uLast == 0") == 1 )
-    {
+    if ( rFirstLast->m_uLast && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 212, "rFirstLast.m_uLast == 0") == 1 )
       __debugbreak();
-    }
-    *(_WORD *)LastXY = a1;
-    *((_WORD *)LastXY + 1) = a1;
-    v8->field_C = 0;
-    result = 0;
-    v8->nextSquareTile = 0;
+    rFirstLast->m_uFirst = a1;
+    rFirstLast->m_uLast = a1;
+    rTile->m_uSquarePrev = 0;
+    rTile->m_uSquareNext = 0;
   }
-  return result;
 }
 
 
 // address=[0x15e34f0]
-// Decompiled from int **__cdecl CTilesEx::DeleteTileFromSquareList(int a1)
-void __cdecl CTilesEx::DeleteTileFromSquareList(int a1) {
+// Decompiled from void __cdecl CTilesEx::DeleteTileFromSquareList(int _iTileId)
+void __cdecl CTilesEx::DeleteTileFromSquareList(int _iTileId) {
   
-  int **v1; // eax
-  int **v2; // eax
-  int **result; // eax
-  int v4; // [esp+0h] [ebp-10h]
-  int v5; // [esp+4h] [ebp-Ch]
-  struct CTiles::SFirstLast *LastXY; // [esp+8h] [ebp-8h]
-  CTile *v7; // [esp+Ch] [ebp-4h]
+  CTile *rTilePrev; // eax
+  CTile *rTileNext; // eax
+  int iX; // [esp+0h] [ebp-10h]
+  int iY; // [esp+4h] [ebp-Ch]
+  struct SFirstLast *rFirstLast; // [esp+8h] [ebp-8h]
+  CTile *rTile; // [esp+Ch] [ebp-4h]
 
-  v7 = (CTile *)CTiles::TileEx(a1);
-  v4 = CTile::CenterX(v7);
-  v5 = CTile::CenterY(v7);
-  LastXY = CTiles::SquareFirstLastXY(v4, v5);
-  if ( v7->field_C )
+  rTile = CTiles::TileEx(_iTileId);
+  iX = CTile::CenterX(rTile);
+  iY = CTile::CenterY(rTile);
+  rFirstLast = CTiles::SquareFirstLastXY(iX, iY);
+  if ( rTile->m_uSquarePrev )
   {
-    v1 = CTiles::TileEx(v7->field_C);
-    if ( !CTile::Used((CTile *)v1)
+    rTilePrev = CTiles::TileEx(rTile->m_uSquarePrev);
+    if ( !CTile::Used(rTilePrev)
       && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 238, "TileEx(rTile.m_uSquarePrev).Used()") == 1 )
     {
       __debugbreak();
     }
-    if ( *((unsigned __int16 *)CTiles::TileEx(v7->field_C) + 7) != a1
+    if ( CTiles::TileEx(rTile->m_uSquarePrev)->m_uSquareNext != _iTileId
       && BBSupportDbgReport(
            2,
            "Pathing\\TilesAndLinks.cpp",
@@ -210,26 +198,26 @@ void __cdecl CTilesEx::DeleteTileFromSquareList(int a1) {
     {
       __debugbreak();
     }
-    *((_WORD *)CTiles::TileEx(v7->field_C) + 7) = v7->nextSquareTile;
+    CTiles::TileEx(rTile->m_uSquarePrev)->m_uSquareNext = rTile->m_uSquareNext;
   }
   else
   {
-    if ( *(unsigned __int16 *)LastXY != a1
+    if ( rFirstLast->m_uFirst != _iTileId
       && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 245, "rFirstLast.m_uFirst == _iTileId") == 1 )
     {
       __debugbreak();
     }
-    *(_WORD *)LastXY = v7->nextSquareTile;
+    rFirstLast->m_uFirst = rTile->m_uSquareNext;
   }
-  if ( v7->nextSquareTile )
+  if ( rTile->m_uSquareNext )
   {
-    v2 = CTiles::TileEx(v7->nextSquareTile);
-    if ( !CTile::Used((CTile *)v2)
+    rTileNext = CTiles::TileEx(rTile->m_uSquareNext);
+    if ( !CTile::Used(rTileNext)
       && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 252, "TileEx(rTile.m_uSquareNext).Used()") == 1 )
     {
       __debugbreak();
     }
-    if ( *((unsigned __int16 *)CTiles::TileEx(v7->nextSquareTile) + 6) != a1
+    if ( CTiles::TileEx(rTile->m_uSquareNext)->m_uSquarePrev != _iTileId
       && BBSupportDbgReport(
            2,
            "Pathing\\TilesAndLinks.cpp",
@@ -238,60 +226,57 @@ void __cdecl CTilesEx::DeleteTileFromSquareList(int a1) {
     {
       __debugbreak();
     }
-    result = CTiles::TileEx(v7->nextSquareTile);
-    *((_WORD *)result + 6) = v7->field_C;
+    CTiles::TileEx(rTile->m_uSquareNext)->m_uSquarePrev = rTile->m_uSquarePrev;
   }
   else
   {
-    if ( *((unsigned __int16 *)LastXY + 1) != a1
+    if ( rFirstLast->m_uLast != _iTileId
       && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 259, "rFirstLast.m_uLast == _iTileId") == 1 )
     {
       __debugbreak();
     }
-    result = (int **)LastXY;
-    *((_WORD *)LastXY + 1) = v7->field_C;
+    rFirstLast->m_uLast = rTile->m_uSquarePrev;
   }
-  return result;
 }
 
 
 // address=[0x15e36f0]
-// Decompiled from int CTilesEx::CalculateListOfFreeTiles()
+// Decompiled from void __cdecl CTilesEx::CalculateListOfFreeTiles()
 void __cdecl CTilesEx::CalculateListOfFreeTiles(void) {
   
-  int **v0; // eax
-  int v2; // [esp+0h] [ebp-10h]
-  int v3; // [esp+4h] [ebp-Ch]
-  int v4; // [esp+8h] [ebp-8h]
+  CTile *v0; // eax
+  int v1; // [esp+0h] [ebp-10h]
+  int v2; // [esp+4h] [ebp-Ch]
+  int v3; // [esp+8h] [ebp-8h]
   int i; // [esp+Ch] [ebp-4h]
 
-  v3 = 0;
-  v2 = 9;
-  v4 = 9;
-  CTiles::TileEx(9)[1] = 0;
+  v2 = 0;
+  v1 = 9;
+  v3 = 9;
+  CTiles::TileEx(9)->m_iSectorId = 0;
   for ( i = 10; i <= 32766; ++i )
   {
     v0 = CTiles::TileEx(i);
-    if ( CTile::Used((CTile *)v0) )
+    if ( CTile::Used(v0) )
     {
-      ++v3;
-      v2 = i;
+      ++v2;
+      v1 = i;
     }
     else
     {
-      CTiles::TileEx(i)[1] = (int *)v4;
-      CTiles::TileEx(v4)[2] = (int *)i;
-      v4 = i;
+      CTiles::TileEx(i)->m_iSectorId = v3;
+      CTiles::TileEx(v3)->m_uCenter = i;
+      v3 = i;
     }
   }
-  CTiles::TileEx(v4)[2] = _enc_textbss_begin + 28671;
-  CTiles::TileEx(0x7FFF)[1] = (int *)v4;
-  CTiles::TileEx(0x7FFF)[2] = 0;
-  CTilesEx::m_iNumberOfUsedTiles = v3;
-  CTilesEx::m_iLastUsedTileId = v2;
-  if ( v3 > CTilesEx::m_iMaxUsedTiles )
+  CTiles::TileEx(v3)->m_uCenter = 0x7FFF;
+  CTiles::TileEx(0x7FFF)->m_iSectorId = v3;
+  CTiles::TileEx(0x7FFF)->m_uCenter = 0;
+  CTilesEx::m_iNumberOfUsedTiles = v2;
+  CTilesEx::m_iLastUsedTileId = v1;
+  if ( v2 > CTilesEx::m_iMaxUsedTiles )
     CTilesEx::m_iMaxUsedTiles = CTilesEx::m_iNumberOfUsedTiles;
-  return ++CTilesEx::m_iCalcFreeListCounter;
+  ++CTilesEx::m_iCalcFreeListCounter;
 }
 
 
@@ -300,17 +285,17 @@ void __cdecl CTilesEx::CalculateListOfFreeTiles(void) {
 void __cdecl CTilesEx::CalculateSquareTileLists(void) {
   
   int result; // eax
-  int **v1; // eax
+  CTile *v1; // eax
   int v2; // [esp+0h] [ebp-8h]
   int i; // [esp+4h] [ebp-4h]
 
-  memset(CTiles::m_sSquareFirstLastTiles, 0, sizeof(CTiles::m_sSquareFirstLastTiles));
+  memset(&CTiles::m_sSquareFirstLastTiles, 0, 0x4200u);
   result = CTilesEx::LastUsedTileId();
   v2 = result;
   for ( i = 10; i <= v2; ++i )
   {
     v1 = CTiles::TileEx(i);
-    if ( CTile::Used((CTile *)v1) )
+    if ( CTile::Used(v1) )
       CTilesEx::InsertTileIntoSquareList(i);
     result = i + 1;
   }
@@ -319,14 +304,12 @@ void __cdecl CTilesEx::CalculateSquareTileLists(void) {
 
 
 // address=[0x15e3880]
-// Decompiled from int *CTilesEx::PushTileUndef()
+// Decompiled from int __cdecl CTilesEx::PushTileUndef()
 int __cdecl CTilesEx::PushTileUndef(void) {
   
-  int v0; // ecx
-  int v2; // ecx
-  int **v3; // eax
-  int *v4; // [esp+0h] [ebp-8h]
-  int *v5; // [esp+4h] [ebp-4h]
+  CTile *v1; // eax
+  DWORD v2; // [esp+0h] [ebp-8h]
+  signed int m_uCenter; // [esp+4h] [ebp-4h]
 
   if ( CTilesEx::m_iTilesPushBackMode
     && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 345, "!m_iTilesPushBackMode") == 1 )
@@ -335,27 +318,27 @@ int __cdecl CTilesEx::PushTileUndef(void) {
   }
   if ( CTilesEx::m_iNumberOfUsedTiles < 32757
     || (CTrace::Print("CTiles::PushTileUndef(): Tile limit exceeded. Rebuilding list of free tiles!"),
-        CTilesEx::CalculateListOfFreeTiles(v0),
+        CTilesEx::CalculateListOfFreeTiles(),
         CTilesEx::m_iNumberOfUsedTiles < 32757) )
   {
-    v5 = CTiles::TileEx(9)[2];
-    if ( CTiles::IsValidRealTile(v5)
+    m_uCenter = CTiles::TileEx(9)->m_uCenter;
+    if ( CTiles::IsValidRealTile(m_uCenter)
       || (CTrace::Print("CTiles::PushTileUndef(): Invalid free tile id. Rebuilding list of free tiles!"),
-          CTilesEx::CalculateListOfFreeTiles(v2),
-          v5 = CTiles::TileEx(9)[2],
-          CTiles::IsValidRealTile(v5)) )
+          CTilesEx::CalculateListOfFreeTiles(),
+          m_uCenter = CTiles::TileEx(9)->m_uCenter,
+          CTiles::IsValidRealTile(m_uCenter)) )
     {
-      v4 = CTiles::TileEx((int)v5)[2];
-      CTiles::TileEx((int)v4)[1] = (int *)9;
-      CTiles::TileEx(9)[2] = v4;
-      v3 = CTiles::TileEx((int)v5);
-      CTile::SetType((CTile *)v3, 0);
+      v2 = CTiles::TileEx(m_uCenter)->m_uCenter;
+      CTiles::TileEx(v2)->m_iSectorId = 9;
+      CTiles::TileEx(9)->m_uCenter = v2;
+      v1 = CTiles::TileEx(m_uCenter);
+      CTile::SetType(v1, 0);
       ++CTilesEx::m_iNumberOfUsedTiles;
-      if ( (int)v5 > CTilesEx::m_iLastUsedTileId )
-        CTilesEx::m_iLastUsedTileId = (int)v5;
+      if ( m_uCenter > CTilesEx::m_iLastUsedTileId )
+        CTilesEx::m_iLastUsedTileId = m_uCenter;
       if ( CTilesEx::m_iNumberOfUsedTiles > CTilesEx::m_iMaxUsedTiles )
         CTilesEx::m_iMaxUsedTiles = CTilesEx::m_iNumberOfUsedTiles;
-      return v5;
+      return m_uCenter;
     }
     else
     {
@@ -374,8 +357,8 @@ int __cdecl CTilesEx::PushTileUndef(void) {
 
 
 // address=[0x15e3a10]
-// Decompiled from int __cdecl CTilesEx::PushTilesBackUndef(int a1)
-int __cdecl CTilesEx::PushTilesBackUndef(int a1) {
+// Decompiled from int __cdecl CTilesEx::PushTilesBackUndef(int _iCount)
+int __cdecl CTilesEx::PushTilesBackUndef(int _iCount) {
   
   int v2; // [esp+0h] [ebp-4h]
 
@@ -384,14 +367,14 @@ int __cdecl CTilesEx::PushTilesBackUndef(int a1) {
   {
     __debugbreak();
   }
-  if ( a1 + CTilesEx::m_iNumberOfUsedTiles > 32757
+  if ( _iCount + CTilesEx::m_iNumberOfUsedTiles > 32757
     && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 129, "m_iNumberOfUsedTiles + _iCount <= TILES_MAX_NUMBER") == 1 )
   {
     __debugbreak();
   }
   v2 = CTilesEx::m_iLastUsedTileId;
-  CTilesEx::m_iNumberOfUsedTiles += a1;
-  CTilesEx::m_iLastUsedTileId += a1;
+  CTilesEx::m_iNumberOfUsedTiles += _iCount;
+  CTilesEx::m_iLastUsedTileId += _iCount;
   if ( CTilesEx::m_iNumberOfUsedTiles > CTilesEx::m_iMaxUsedTiles )
     CTilesEx::m_iMaxUsedTiles = CTilesEx::m_iNumberOfUsedTiles;
   return v2 + 1;
@@ -399,18 +382,18 @@ int __cdecl CTilesEx::PushTilesBackUndef(int a1) {
 
 
 // address=[0x15e3ac0]
-// Decompiled from int *__cdecl CTilesEx::PushTile(DWORD a1, DWORD a2)
+// Decompiled from int __cdecl CTilesEx::PushTile(int a1, int a2)
 int __cdecl CTilesEx::PushTile(int a1, int a2) {
   
-  int **v2; // eax
+  CTile *v2; // eax
   struct CLinkList *v4; // [esp-4h] [ebp-Ch]
-  int *v5; // [esp+4h] [ebp-4h]
+  int v5; // [esp+4h] [ebp-4h]
 
   v5 = CTilesEx::PushTileUndef();
   v4 = CLinks::LinkList(0);
-  v2 = CTiles::TileEx((int)v5);
-  CTile::Init((CTile *)v2, a1, a2, v4);
-  CTilesEx::InsertTileIntoSquareList((int)v5);
+  v2 = CTiles::TileEx(v5);
+  CTile::Init(v2, a1, a2, v4);
+  CTilesEx::InsertTileIntoSquareList(v5);
   if ( (a1 & 0xF) != 0 )
     COwnerMapEx::NotifyCreateTile(a2, a1 & 0xF);
   return v5;
@@ -418,82 +401,69 @@ int __cdecl CTilesEx::PushTile(int a1, int a2) {
 
 
 // address=[0x15e3b30]
-// Decompiled from int *__cdecl CTilesEx::DuplicateTile(int a1)
+// Decompiled from int __cdecl CTilesEx::DuplicateTile(int a1)
 int __cdecl CTilesEx::DuplicateTile(int a1) {
   
-  int **v1; // eax
-  struct CLinkList *v2; // eax
-  int *v4; // [esp+0h] [ebp-8h]
-  int **v5; // [esp+4h] [ebp-4h]
+  struct CLinkList *v1; // eax
+  int v3; // [esp+0h] [ebp-8h]
+  CTile *v4; // [esp+4h] [ebp-4h]
 
-  v4 = CTilesEx::PushTileUndef();
-  v5 = CTiles::TileEx((int)v4);
-  v1 = CTiles::TileEx(a1);
-  *v5 = *v1;
-  v5[1] = v1[1];
-  v5[2] = v1[2];
-  v5[3] = v1[3];
-  v5[4] = v1[4];
-  v2 = CLinks::LinkList(0);
-  CTile::SetLinkList((CTile *)v5, v2);
-  CTile::SetSize((CTile *)v5, 0);
-  CTilesEx::InsertTileIntoSquareList((int)v4);
-  return v4;
+  v3 = CTilesEx::PushTileUndef();
+  v4 = CTiles::TileEx(v3);
+  *v4 = *CTiles::TileEx(a1);
+  v1 = CLinks::LinkList(0);
+  CTile::SetLinkList(v4, v1);
+  CTile::SetSize(v4, 0);
+  CTilesEx::InsertTileIntoSquareList(v3);
+  return v3;
 }
 
 
 // address=[0x15e3bb0]
-// Decompiled from int __cdecl CTilesEx::DeleteTile(int *a1)
+// Decompiled from void __cdecl CTilesEx::DeleteTile(int a1)
 void __cdecl CTilesEx::DeleteTile(int a1) {
   
-  int result; // eax
-  int v2; // eax
-  int **v3; // eax
-  int *v4; // [esp+0h] [ebp-10h]
-  int v5; // [esp+4h] [ebp-Ch]
+  int v1; // eax
+  CTile *v2; // eax
+  DWORD m_uCenter; // [esp+0h] [ebp-10h]
+  int v4; // [esp+4h] [ebp-Ch]
   int i; // [esp+8h] [ebp-8h]
-  CTile *v7; // [esp+Ch] [ebp-4h]
+  CTile *v6; // [esp+Ch] [ebp-4h]
 
   if ( CTilesEx::IsValidUsedTile(a1) )
   {
-    v7 = (CTile *)CTiles::TileEx((int)a1);
-    CTilesEx::DeleteTileFromSquareList((int)a1);
-    v5 = CTile::OwnerId(v7);
-    if ( v5 )
+    v6 = CTiles::TileEx(a1);
+    CTilesEx::DeleteTileFromSquareList(a1);
+    v4 = CTile::OwnerId(v6);
+    if ( v4 )
     {
-      v2 = CTile::CenterXY(v7);
-      COwnerMapEx::NotifyDeleteTile(v2, v5);
+      v1 = CTile::CenterXY(v6);
+      COwnerMapEx::NotifyDeleteTile(v1, v4);
     }
-    CTile::SetType(v7, 0xFFFFFFFF);
-    v4 = CTiles::TileEx(9)[2];
-    CTiles::TileEx(9)[2] = a1;
-    v7->ecoSectorId = 9;
-    v7->center = (DWORD)v4;
-    CTiles::TileEx((int)v4)[1] = a1;
+    CTile::SetType(v6, 0xFFFFFFFF);
+    m_uCenter = CTiles::TileEx(9)->m_uCenter;
+    CTiles::TileEx(9)->m_uCenter = a1;
+    v6->m_iSectorId = 9;
+    v6->m_uCenter = m_uCenter;
+    CTiles::TileEx(m_uCenter)->m_iSectorId = a1;
     if ( --CTilesEx::m_iNumberOfUsedTiles < 0 )
-      CTilesEx::CalculateListOfFreeTiles(a1);
-    result = CTilesEx::m_iLastUsedTileId;
-    if ( (int *)CTilesEx::m_iLastUsedTileId == a1 )
+      CTilesEx::CalculateListOfFreeTiles();
+    if ( CTilesEx::m_iLastUsedTileId == a1 )
     {
-      for ( i = (int)a1 - 1; ; --i )
+      for ( i = a1 - 1; ; --i )
       {
-        v3 = CTiles::TileEx(i);
-        result = CTile::Unused((CTile *)v3);
-        if ( !(_BYTE)result )
+        v2 = CTiles::TileEx(i);
+        if ( !CTile::Unused(v2) )
           break;
       }
       CTilesEx::m_iLastUsedTileId = i;
     }
   }
-  else
+  else if ( "CTilesEx::DeleteTile(): Not a used real tile!" )
   {
-    if ( !"CTilesEx::DeleteTile(): Not a used real tile!" )
-      return 0;
     if ( BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 484, "!\"CTilesEx::DeleteTile(): Not a used real tile!\"") == 1 )
       __debugbreak();
-    return 0;
   }
-  return result;
 }
 
 
@@ -501,14 +471,14 @@ void __cdecl CTilesEx::DeleteTile(int a1) {
 // Decompiled from bool __cdecl CTilesEx::IsUsedRealTile(int a1)
 bool __cdecl CTilesEx::IsUsedRealTile(int a1) {
   
-  int **v1; // eax
+  CTile *v1; // eax
   char v3; // [esp+0h] [ebp-4h]
 
   v3 = 0;
   if ( !CTiles::IsValidRealTile(a1) )
     return v3;
   v1 = CTiles::TileEx(a1);
-  if ( CTile::Used((CTile *)v1) )
+  if ( CTile::Used(v1) )
     return 1;
   return v3;
 }
@@ -518,14 +488,14 @@ bool __cdecl CTilesEx::IsUsedRealTile(int a1) {
 // Decompiled from bool __cdecl CTilesEx::IsValidUsedTile(int a1)
 bool __cdecl CTilesEx::IsValidUsedTile(int a1) {
   
-  int **v1; // eax
+  CTile *v1; // eax
   char v3; // [esp+0h] [ebp-4h]
 
   v3 = 0;
   if ( !CTiles::IsValidRealTile(a1) )
     return v3;
   v1 = CTiles::TileEx(a1);
-  if ( CTile::Used((CTile *)v1) )
+  if ( CTile::Used(v1) )
     return 1;
   return v3;
 }

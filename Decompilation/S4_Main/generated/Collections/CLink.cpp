@@ -1,3 +1,4 @@
+#if FALSE
 #include "CLink.h"
 
 // Definitions for class CLink
@@ -6,7 +7,7 @@
 // Decompiled from bool __thiscall CLink::IsHeader(CLink *this)
 bool  CLink::IsHeader(void)const {
   
-  return *((unsigned __int8 *)this + 1) == 253;
+  return HIBYTE(this->m_uData) == 253;
 }
 
 
@@ -14,7 +15,7 @@ bool  CLink::IsHeader(void)const {
 // Decompiled from bool __thiscall CLink::Unused(CLink *this)
 bool  CLink::Unused(void)const {
   
-  return *((unsigned __int8 *)this + 1) == 255;
+  return HIBYTE(this->m_uData) == 255;
 }
 
 
@@ -22,7 +23,7 @@ bool  CLink::Unused(void)const {
 // Decompiled from bool __thiscall CLink::Used(CLink *this)
 bool  CLink::Used(void)const {
   
-  return *((unsigned __int8 *)this + 1) < 0xFEu;
+  return HIBYTE(this->m_uData) < 254u;
 }
 
 
@@ -30,7 +31,8 @@ bool  CLink::Used(void)const {
 // Decompiled from bool __thiscall CLink::PrevLinkIsLastOne(CLink *this)
 bool  CLink::PrevLinkIsLastOne(void)const {
   
-  return *((unsigned __int8 *)this + 1) >= 0xFDu;
+  return HIBYTE(this->m_uData) >= 253u;
 }
 
 
+#endif // Already implemented

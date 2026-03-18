@@ -234,7 +234,7 @@ unsigned int  CAIAgentDarkTribeSquadManager::Execute(unsigned int a2, unsigned i
 
 // address=[0x1302940]
 // Decompiled from struct CAITaskForce *__thiscall CAIAgentDarkTribeSquadManager::SimpleSquadManagement(  CAIDarkTribeSectorAgent *this,  int a2,  int a3,  int a4)
-void  CAIAgentDarkTribeSquadManager::SimpleSquadManagement(enum T_AI_WARRIOR_TYPE a2, enum T_AI_TASK_FORCE_TYPE a3, int a4) {
+void  CAIAgentDarkTribeSquadManager::SimpleSquadManagement(enum T_AI_WARRIOR_TYPE a2, enum T_AI_TASK_FORCE_TYPE a3, int _iScheduledTaskForceSize) {
   
   struct CAIDarkTribeSectorAI *v4; // eax
   struct CAIDarkTribeSectorAI *v5; // eax

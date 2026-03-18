@@ -25,12 +25,12 @@ bool  CAITaskForcePriests::NewCommand(int a2, int a3, int a4) {
 
 
 // address=[0x132b480]
-// Decompiled from _DWORD *__thiscall CAITaskForcePriests::CAITaskForcePriests(_DWORD *this, int a2, int a3, int a4)
- CAITaskForcePriests::CAITaskForcePriests(int a2, enum T_AI_TASK_FORCE_TYPE a3, int a4) {
+// Decompiled from CAITaskForcePriests *__thiscall CAITaskForcePriests::CAITaskForcePriests(  CAITaskForcePriests *this,  int iOwnerId,  int tType,  int iFlags)
+ CAITaskForcePriests::CAITaskForcePriests(int iOwnerId, enum T_AI_TASK_FORCE_TYPE tType, int iFlags) {
   
-  CAITaskForceEx::CAITaskForceEx(this, a2, 3, a3, a4);
-  *this = CAITaskForcePriests::_vftable_;
-  this[24] = 0;
+  CAITaskForceEx::CAITaskForceEx(this, iOwnerId, 3, tType, iFlags);
+  *(_DWORD *)this = CAITaskForcePriests::_vftable_;
+  *((_DWORD *)this + 24) = 0;
   return this;
 }
 
@@ -123,25 +123,25 @@ void  CAITaskForcePriests::Execute(void) {
 
 
 // address=[0x132b6f0]
-// Decompiled from int __cdecl CAITaskForcePriests::CreatePriestsTaskForce(int a1, int a2, int a3, int a4)
-class CAITaskForcePriests * __cdecl CAITaskForcePriests::CreatePriestsTaskForce(int a1, int a2, enum T_AI_TASK_FORCE_TYPE a3, int a4) {
+// Decompiled from CAITaskForcePriestsRoman *__cdecl CAITaskForcePriests::CreatePriestsTaskForce(  int _iRace,  int iOwnerId,  int tType,  int iFlags)
+class CAITaskForcePriests * __cdecl CAITaskForcePriests::CreatePriestsTaskForce(int _iRace, int iOwnerId, enum T_AI_TASK_FORCE_TYPE tType, int iFlags) {
   
-  int result; // eax
-  int v5; // [esp+14h] [ebp-30h]
+  CAITaskForcePriestsRoman *result; // eax
+  CAITaskForcePriestsRoman *v5; // [esp+14h] [ebp-30h]
   void *v6; // [esp+18h] [ebp-2Ch]
-  int v7; // [esp+1Ch] [ebp-28h]
+  CAITaskForcePriestsRoman *v7; // [esp+1Ch] [ebp-28h]
   void *v8; // [esp+20h] [ebp-24h]
-  int v9; // [esp+24h] [ebp-20h]
+  CAITaskForcePriestsRoman *v9; // [esp+24h] [ebp-20h]
   void *v10; // [esp+28h] [ebp-1Ch]
-  int v11; // [esp+2Ch] [ebp-18h]
-  void *C; // [esp+30h] [ebp-14h]
+  CAITaskForcePriestsRoman *v11; // [esp+2Ch] [ebp-18h]
+  CAITaskForcePriestsRoman *C; // [esp+30h] [ebp-14h]
 
-  switch ( a1 )
+  switch ( _iRace )
   {
     case 0:
-      C = operator new(0x64u);
+      C = (CAITaskForcePriestsRoman *)operator new(0x64u);
       if ( C )
-        v11 = CAITaskForcePriestsRoman::CAITaskForcePriestsRoman(C, a2, a3, a4);
+        v11 = CAITaskForcePriestsRoman::CAITaskForcePriestsRoman(C, iOwnerId, tType, iFlags);
       else
         v11 = 0;
       result = v11;
@@ -149,7 +149,11 @@ class CAITaskForcePriests * __cdecl CAITaskForcePriests::CreatePriestsTaskForce(
     case 1:
       v10 = operator new(0x64u);
       if ( v10 )
-        v9 = CAITaskForcePriestsViking::CAITaskForcePriestsViking(v10, a2, a3, a4);
+        v9 = (CAITaskForcePriestsRoman *)CAITaskForcePriestsViking::CAITaskForcePriestsViking(
+                                           v10,
+                                           iOwnerId,
+                                           tType,
+                                           iFlags);
       else
         v9 = 0;
       result = v9;
@@ -157,7 +161,7 @@ class CAITaskForcePriests * __cdecl CAITaskForcePriests::CreatePriestsTaskForce(
     case 2:
       v8 = operator new(0x64u);
       if ( v8 )
-        v7 = CAITaskForcePriestsMaya::CAITaskForcePriestsMaya(v8, a2, a3, a4);
+        v7 = (CAITaskForcePriestsRoman *)CAITaskForcePriestsMaya::CAITaskForcePriestsMaya(v8, iOwnerId, tType, iFlags);
       else
         v7 = 0;
       result = v7;
@@ -165,7 +169,11 @@ class CAITaskForcePriests * __cdecl CAITaskForcePriests::CreatePriestsTaskForce(
     case 4:
       v6 = operator new(0x64u);
       if ( v6 )
-        v5 = CAITaskForcePriestsTrojan::CAITaskForcePriestsTrojan(v6, a2, a3, a4);
+        v5 = (CAITaskForcePriestsRoman *)CAITaskForcePriestsTrojan::CAITaskForcePriestsTrojan(
+                                           v6,
+                                           iOwnerId,
+                                           tType,
+                                           iFlags);
       else
         v5 = 0;
       result = v5;

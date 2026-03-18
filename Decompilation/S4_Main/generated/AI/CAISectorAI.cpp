@@ -435,7 +435,7 @@ int  CAISectorAI::FindInnerPoint(int a2) {
   {
     v19 = 0;
     v7 = g_sNeighborPoints[2 * i];
-    v6 = dword_37D8C0C[2 * i];
+    v6 = MEMORY[0x37D8C0C][2 * i];
     v23 = v10;
     v24 = v9;
     for ( j = 0; j < 8; ++j )
@@ -473,7 +473,7 @@ int  CAISectorAI::FindInnerPoint(int a2) {
   }
   if ( v22 >= 0
     && (v17 = (int)v10 + 6 * g_sNeighborPoints[2 * v22],
-        v18 = (int)v9 + 6 * dword_37D8C0C[2 * v22],
+        v18 = (int)v9 + 6 * MEMORY[0x37D8C0C][2 * v22],
         CSectorSpiralWalk::CSectorSpiralWalk((CSectorSpiralWalk *)v3, v17, v18, 8, v8),
         CSectorSpiralWalk::NextXY((CSectorSpiralWalk *)v3, &v17, &v18)) )
   {
@@ -857,19 +857,19 @@ void __cdecl CAISectorAI::AwakeAgent(class CAIAgent & a1) {
 
 
 // address=[0x131ff50]
-// Decompiled from CAISectorAI *__thiscall CAISectorAI::CAISectorAI(CAISectorAI *this, pairNode *a2)
+// Decompiled from CAISectorAI *__thiscall CAISectorAI::CAISectorAI(CAISectorAI *this, CAIPlayerAI *a2)
  CAISectorAI::CAISectorAI(class CAIPlayerAI & a2) {
   
   int v2; // eax
 
   IAISectorAI::IAISectorAI(this);
-  *(_DWORD *)this = &CAISectorAI::_vftable_;
-  *((_DWORD *)this + 1) = a2;
-  CAIEventQueue::CAIEventQueue((CAISectorAI *)((char *)this + 8));
-  v2 = CAIPlayerAI::PlayerId(a2);
-  CAITaskForceGroup::CAITaskForceGroup((CAITaskForceGroup *)((char *)this + 92), v2);
-  memset((char *)this + 32, 0, 0x3Cu);
-  memset((char *)this + 232, 0, 0x20u);
+  this->__vftable = (IAIUnknown_vtbl *)&CAISectorAI::_vftable_;
+  this->m_pPlayerAI = a2;
+  CAIEventQueue::CAIEventQueue((CAIEventQueue *)&this[1]);
+  v2 = CAIPlayerAI::PlayerId((pairNode *)a2);
+  CAITaskForceGroup::CAITaskForceGroup((CAITaskForceGroup *)&this[11].m_pPlayerAI, v2);
+  memset(&this[4], 0, 0x3Cu);
+  memset(&this[29], 0, 0x20u);
   return this;
 }
 

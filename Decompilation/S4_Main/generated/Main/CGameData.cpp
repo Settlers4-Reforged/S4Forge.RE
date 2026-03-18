@@ -18,13 +18,13 @@
   this->dword24 = -1;
   this->byte28 = 0;
   this->m_bFixedStartCamera = 0;
-  CRandom16Ex::CRandom16Ex((CRandom16Ex *)&this->m_sRandom, 0);
+  CRandom16Ex::CRandom16Ex(&this->m_sRandom, 0);
   this->m_bIsGameWon = 0;
   this->m_iTeamWon = 0;
   std::string::string(&this->m_swGameType);
   std::string::string(&this->m_swMapMode);
   this->byte7E = 0;
-  CRandom16Ex::Init((CRandom16Ex *)&this->m_sRandom, 0x46F6Fu, 0);
+  CRandom16Ex::Init(&this->m_sRandom, 290671, 0);
   if ( !g_pGameType && BBSupportDbgReport(2, "GameData.cpp", 57, "g_pGameType != NULL") == 1 )
     __debugbreak();
   if ( ((int)g_pGameType->m_iGameType <= 0 || (int)g_pGameType->m_iGameType >= 5)

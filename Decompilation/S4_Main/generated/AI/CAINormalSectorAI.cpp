@@ -3,7 +3,7 @@
 // Definitions for class CAINormalSectorAI
 
 // address=[0x1323250]
-// Decompiled from CAINormalSectorAI *__thiscall CAINormalSectorAI::CAINormalSectorAI(CAINormalSectorAI *this, pairNode *a2, int a3)
+// Decompiled from CAINormalSectorAI *__thiscall CAINormalSectorAI::CAINormalSectorAI(CAINormalSectorAI *this, CAIPlayerAI *a2, int a3)
  CAINormalSectorAI::CAINormalSectorAI(class CAIPlayerAI & a2, int a3) {
   
   int v3; // eax
@@ -18,7 +18,7 @@
   int v13; // [esp+20h] [ebp-4h]
 
   v12 = this;
-  CAISectorAI::CAISectorAI(this);
+  CAISectorAI::CAISectorAI((CAISectorAI *)this, a2);
   v13 = 0;
   *(_DWORD *)v12 = &CAINormalSectorAI::_vftable_;
   CAIGoalCache::CAIGoalCache((std::bad_function_call *)((char *)v12 + 264));
@@ -26,19 +26,19 @@
   CAIGoalCache::CAIGoalCache((std::bad_function_call *)((char *)v12 + 1056));
   CAIGoalCache::CAIGoalCache((std::bad_function_call *)((char *)v12 + 1452));
   CAIGoalCache::CAIGoalCache((std::bad_function_call *)((char *)v12 + 1848));
-  CAITaskForceReservoir::CAITaskForceReservoir((std::bad_function_call *)((char *)v12 + 2244), *((_DWORD *)a2 + 3));
+  CAITaskForceReservoir::CAITaskForceReservoir((std::bad_function_call *)((char *)v12 + 2244), a2->m_uU);
   LOBYTE(v13) = 1;
-  CAITaskForceReservoir::CAITaskForceReservoir((std::bad_function_call *)((char *)v12 + 2324), *((_DWORD *)a2 + 3));
+  CAITaskForceReservoir::CAITaskForceReservoir((std::bad_function_call *)((char *)v12 + 2324), a2->m_uU);
   LOBYTE(v13) = 2;
-  CAITaskForceReservoir::CAITaskForceReservoir((std::bad_function_call *)((char *)v12 + 2404), *((_DWORD *)a2 + 3));
+  CAITaskForceReservoir::CAITaskForceReservoir((std::bad_function_call *)((char *)v12 + 2404), a2->m_uU);
   LOBYTE(v13) = 3;
-  CAITaskForceReservoir::CAITaskForceReservoir((std::bad_function_call *)((char *)v12 + 2484), *((_DWORD *)a2 + 3));
+  CAITaskForceReservoir::CAITaskForceReservoir((std::bad_function_call *)((char *)v12 + 2484), a2->m_uU);
   LOBYTE(v13) = 4;
-  CAITaskForceReservoir::CAITaskForceReservoir((std::bad_function_call *)((char *)v12 + 2564), *((_DWORD *)a2 + 3));
+  CAITaskForceReservoir::CAITaskForceReservoir((std::bad_function_call *)((char *)v12 + 2564), a2->m_uU);
   LOBYTE(v13) = 5;
-  CAITaskForceReservoir::CAITaskForceReservoir((std::bad_function_call *)((char *)v12 + 2644), *((_DWORD *)a2 + 3));
+  CAITaskForceReservoir::CAITaskForceReservoir((std::bad_function_call *)((char *)v12 + 2644), a2->m_uU);
   LOBYTE(v13) = 6;
-  CAITaskForceReservoir::CAITaskForceReservoir((std::bad_function_call *)((char *)v12 + 2724), *((_DWORD *)a2 + 3));
+  CAITaskForceReservoir::CAITaskForceReservoir((std::bad_function_call *)((char *)v12 + 2724), a2->m_uU);
   CAIAgentAttack::CAIAgentAttack((CAIAgentAttack *)((char *)v12 + 2804));
   CAIAgentEvalDefence::CAIAgentEvalDefence((std::bad_function_call *)((char *)v12 + 2884));
   CAIAgentEvalOffence::CAIAgentEvalOffence((std::bad_function_call *)((char *)v12 + 2928));
@@ -61,7 +61,7 @@
   {
     __debugbreak();
   }
-  v8 = CAIPlayerAI::PlayerId(a2);
+  v8 = CAIPlayerAI::PlayerId((pairNode *)a2);
   v3 = IAIEnvironment::AlliancesPlayerBit(v8);
   CMilitaryBuildingIterator::Init((std::bad_function_call *)((char *)v12 + 3408), v3);
   v4 = IAIEnvironment::AlliancesPlayerEnemyBits(v8);

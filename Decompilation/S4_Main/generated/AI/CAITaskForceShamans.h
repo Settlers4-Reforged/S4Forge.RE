@@ -6,7 +6,7 @@
 class CAITaskForceShamans : public CAITaskForceEx {
 public:
     // address=[0x132a1c0]
-     CAITaskForceShamans(int a2, int a3);
+     CAITaskForceShamans(int iOwnerId, int iFlags);
 
     // address=[0x132a2c0]
     virtual  ~CAITaskForceShamans(void);

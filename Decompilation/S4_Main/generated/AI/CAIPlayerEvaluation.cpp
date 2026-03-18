@@ -1,3 +1,4 @@
+#if FALSE
 #include "CAIPlayerEvaluation.h"
 
 // Definitions for class CAIPlayerEvaluation
@@ -84,25 +85,25 @@ void  CAIPlayerEvaluation::EvaluateGoods(int a2) {
   int iRace; // [esp+0h] [ebp-Ch]
 
   iRace = IAIEnvironment::PlayerRace(a2);
-  this->m_uSwordCount = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, S4_GOOD_SWORD);
-  this->m_uBowCount = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, S4_GOOD_BOW);
+  this->m_uSwordCount = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, GOOD_SWORD);
+  this->m_uBowCount = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, GOOD_BOW);
   switch ( iRace )
   {
     case 1:
-      this->m_uSpecialWeaponCount = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, S4_GOOD_BATTLEAXE);
+      this->m_uSpecialWeaponCount = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, GOOD_BATTLEAXE);
       break;
     case 2:
-      this->m_uSpecialWeaponCount = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, S4_GOOD_BLOWGUN);
+      this->m_uSpecialWeaponCount = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, GOOD_BLOWGUN);
       break;
     case 4:
-      this->m_uSpecialWeaponCount = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, S4_GOOD_BACKPACKCATAPULT);
+      this->m_uSpecialWeaponCount = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, GOOD_BACKPACKCATAPULT);
       break;
     default:
       this->m_uSpecialWeaponCount = 0;
       break;
   }
   this->m_uTotalWeaponCount = this->m_uSpecialWeaponCount + this->m_uBowCount + this->m_uSwordCount;
-  this->m_uGoldCount = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, S4_GOOD_GOLDBAR);
+  this->m_uGoldCount = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, GOOD_GOLDBAR);
   IMessageTracer::PushFormatedInts(
     g_pMsgTracer2,
     "CAIPlayerEvaluation(Goods): Player %i: %i %i %i %i",
@@ -223,9 +224,9 @@ void  CAIPlayerEvaluation::EvaluateBuildings(int a2) {
   uTotalWarBuildingCount = 0;
   uTotalWarBuildingValue = 0;
   i = 0;
-  this->m_uSmallTowerCount = IAIEnvironment::BuildingGetNumberOfBuildings(a2, 0x2E, 2u);
-  this->m_uBigTowerCount = IAIEnvironment::BuildingGetNumberOfBuildings(a2, 0x2F, 2u);
-  this->m_uCastleCount = IAIEnvironment::BuildingGetNumberOfBuildings(a2, 0x30, 2u);
+  this->m_uSmallTowerCount = IAIEnvironment::BuildingGetNumberOfBuildings(a2, BUILDING_GUARDTOWERSMALL, 2u);
+  this->m_uBigTowerCount = IAIEnvironment::BuildingGetNumberOfBuildings(a2, BUILDING_GUARDTOWERBIG, 2u);
+  this->m_uCastleCount = IAIEnvironment::BuildingGetNumberOfBuildings(a2, BUILDING_CASTLE, 2u);
   while ( s_sAIBuildingEvalWeights[i].m_iType )
   {
     NumberOfBuildings = IAIEnvironment::BuildingGetNumberOfBuildings(a2, s_sAIBuildingEvalWeights[i].m_iType, 2u);
@@ -243,3 +244,4 @@ void  CAIPlayerEvaluation::EvaluateBuildings(int a2) {
 }
 
 
+#endif // Already implemented

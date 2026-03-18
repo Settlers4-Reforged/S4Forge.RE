@@ -209,7 +209,7 @@ int  CWalkingCatapult::IdleWalk(int a2, int a3) {
       this[7] = Y16X16::PackXYFast(v13, v7);
     }
     v17 = Y16X16::DirectionFast(a2, this[7]);
-    v4 = CWorldManager::Index(g_sNeighborPoints[2 * v17] + v19, dword_37D8C0C[2 * v17] + v18);
+    v4 = CWorldManager::Index(g_sNeighborPoints[2 * v17] + v19, MEMORY[0x37D8C0C][2 * v17] + v18);
     if ( !(*(unsigned __int8 (__thiscall **)(_DWORD *, int))(*this + 20))(this, v4) )
       return 8;
     return v17;

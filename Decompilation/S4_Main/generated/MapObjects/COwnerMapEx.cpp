@@ -6,43 +6,40 @@
 // Decompiled from int COwnerMapEx::CalculateOwnerBits()
 void __cdecl COwnerMapEx::CalculateOwnerBits(void) {
   
-  int v0; // ecx
-  Squares *v1; // eax
-  int v2; // edx
-  int v3; // ecx
-  Squares *v4; // eax
-  char v5; // bl
+  int v0; // eax
+  int v1; // eax
+  char v2; // bl
   int result; // eax
-  char v7; // bl
-  int v8; // [esp+4h] [ebp-18h]
-  int v9; // [esp+8h] [ebp-14h]
+  char v4; // bl
+  int v5; // [esp+4h] [ebp-18h]
+  int v6; // [esp+8h] [ebp-14h]
   int m; // [esp+Ch] [ebp-10h]
   int k; // [esp+10h] [ebp-Ch]
   int j; // [esp+14h] [ebp-8h]
   int i; // [esp+18h] [ebp-4h]
 
   COwnerMap::ClearOwnerBits();
-  v1 = (Squares *)CWorldManager::Width(v0);
-  v8 = Squares::XYToVW(v1);
-  v4 = (Squares *)CWorldManager::Height(v3, v2);
-  v9 = Squares::XYToVW(v4);
-  for ( i = 0; i < v9; ++i )
+  v0 = CWorldManager::Width();
+  v5 = Squares::XYToVW(v0);
+  v1 = CWorldManager::Height();
+  v6 = Squares::XYToVW(v1);
+  for ( i = 0; i < v6; ++i )
   {
-    for ( j = 0; j < v8; ++j )
+    for ( j = 0; j < v5; ++j )
     {
-      v5 = COwnerMapExEx::CalculateOwnerBits1(j, i);
-      *COwnerMap::OwnerBits1VWRef(j, i) = v5;
+      v2 = COwnerMapExEx::CalculateOwnerBits1(j, i);
+      *COwnerMap::OwnerBits1VWRef(j, i) = v2;
     }
   }
   for ( k = 0; ; ++k )
   {
     result = k;
-    if ( k >= v9 )
+    if ( k >= v6 )
       break;
-    for ( m = 0; m < v8; ++m )
+    for ( m = 0; m < v5; ++m )
     {
-      v7 = COwnerMapExEx::CalculateOwnerBits9(m, k);
-      *COwnerMap::OwnerBits9VWRef(m, k) = v7;
+      v4 = COwnerMapExEx::CalculateOwnerBits9(m, k);
+      *COwnerMap::OwnerBits9VWRef(m, k) = v4;
     }
   }
   return result;

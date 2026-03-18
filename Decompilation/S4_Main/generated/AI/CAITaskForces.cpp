@@ -16,7 +16,7 @@ void __cdecl CAITaskForces::Init(void) {
   
   CAITaskForces::Done();
   memset(&s_sTaskForcesData, 0, 0x208u);
-  dword_3ECCD24 = 1;
+  s_bTaskForcesInitialized = 1;
 }
 
 
@@ -24,11 +24,11 @@ void __cdecl CAITaskForces::Init(void) {
 // Decompiled from void CAITaskForces::Done()
 void __cdecl CAITaskForces::Done(void) {
   
-  if ( dword_3ECCD24.m_iTotalNumberOfTaskForces )
+  if ( s_bTaskForcesInitialized )
   {
-    dword_3ECCD24.m_iTotalNumberOfTaskForces = 0;
-    while ( dword_3ECCD24.m_pCurrentTaskForce )
-      dword_3ECCD24.m_pCurrentTaskForce->dtor(dword_3ECCD24.m_pCurrentTaskForce, 1);
+    s_bTaskForcesInitialized = 0;
+    while ( s_sTaskForcesData.m_pFirstTaskForce )
+      s_sTaskForcesData.m_pFirstTaskForce->dtor(s_sTaskForcesData.m_pFirstTaskForce, 1);
   }
 }
 
@@ -110,11 +110,11 @@ void __cdecl CAITaskForces::RemoveEntityFromTaskForce(int a1) {
 
 
 // address=[0x1329020]
-// Decompiled from int __cdecl CAITaskForces::CreateTaskForce(int a1, int a2)
-class CAITaskForce * __cdecl CAITaskForces::CreateTaskForce(int a1, enum T_AI_TASK_FORCE_TYPE a2) {
+// Decompiled from CAITaskForcePriestsRoman *__cdecl CAITaskForces::CreateTaskForce(int _iPlayerId, int iTaskForceClass)
+class CAITaskForce * __cdecl CAITaskForces::CreateTaskForce(int _iPlayerId, enum T_AI_TASK_FORCE_TYPE iTaskForceClass) {
   
-  int result; // eax
-  int v3; // [esp+18h] [ebp-64h]
+  CAITaskForcePriestsRoman *result; // eax
+  int iRace; // [esp+18h] [ebp-64h]
   CAITaskForceManakopters *v4; // [esp+28h] [ebp-54h]
   CAITaskForceManakopters *v5; // [esp+2Ch] [ebp-50h]
   CAITaskForceShamans *v6; // [esp+30h] [ebp-4Ch]
@@ -125,17 +125,17 @@ class CAITaskForce * __cdecl CAITaskForces::CreateTaskForce(int a1, enum T_AI_TA
   void *v11; // [esp+44h] [ebp-38h]
   int v12; // [esp+48h] [ebp-34h]
   void *v13; // [esp+4Ch] [ebp-30h]
-  int v14; // [esp+50h] [ebp-2Ch]
-  void *v15; // [esp+54h] [ebp-28h]
+  CAITaskForceSquad *v14; // [esp+50h] [ebp-2Ch]
+  CAITaskForceSquad *v15; // [esp+54h] [ebp-28h]
   CAITaskForceReservoir *v16; // [esp+58h] [ebp-24h]
   CAITaskForceReservoir *C; // [esp+5Ch] [ebp-20h]
   __int64 v18; // [esp+60h] [ebp-1Ch]
-  int PriestsTaskForce; // [esp+6Ch] [ebp-10h]
+  CAITaskForcePriestsRoman *pTaskForce; // [esp+6Ch] [ebp-10h]
 
-  if ( dword_3ECCD24 )
+  if ( s_bTaskForcesInitialized )
   {
-    HIDWORD(v18) = a1 < 1;
-    LODWORD(v18) = a1 > 8;
+    HIDWORD(v18) = _iPlayerId < 1;
+    LODWORD(v18) = _iPlayerId > 8;
     if ( v18 )
     {
       if ( BBSupportDbgReport(1, "AI\\AI_TaskForces.cpp", 1279, "CAITaskForces::CreateTaskForce(): Invalid player id!") == 1 )
@@ -144,21 +144,21 @@ class CAITaskForce * __cdecl CAITaskForces::CreateTaskForce(int a1, enum T_AI_TA
     }
     else
     {
-      v3 = IAIEnvironment::PlayerRace(a1);
-      if ( (a1 & 0xFFFFFFF0) != 0
+      iRace = IAIEnvironment::PlayerRace(_iPlayerId);
+      if ( (_iPlayerId & 0xFFFFFFF0) != 0
         && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 1286, "(_iPlayerId & ~AI_TASK_FORCE_FLAG_OWNER_ID_MASK) == 0") == 1 )
       {
         __debugbreak();
       }
-      switch ( a2 )
+      switch ( iTaskForceClass )
       {
         case 1:
           C = (CAITaskForceReservoir *)operator new(0x50u);
           if ( C )
-            v16 = CAITaskForceReservoir::CAITaskForceReservoir(C, a1);
+            v16 = CAITaskForceReservoir::CAITaskForceReservoir(C, _iPlayerId);
           else
             v16 = 0;
-          PriestsTaskForce = (int)v16;
+          pTaskForce = (CAITaskForcePriestsRoman *)v16;
           goto LABEL_45;
         case 2:
         case 3:
@@ -166,59 +166,59 @@ class CAITaskForce * __cdecl CAITaskForces::CreateTaskForce(int a1, enum T_AI_TA
         case 5:
         case 6:
         case 7:
-          v15 = operator new(0x70u);
+          v15 = (CAITaskForceSquad *)operator new(0x70u);
           if ( v15 )
-            v14 = CAITaskForceSquad::CAITaskForceSquad(v15, a1, a2, 0);
+            v14 = CAITaskForceSquad::CAITaskForceSquad(v15, _iPlayerId, iTaskForceClass, 0);
           else
             v14 = 0;
-          PriestsTaskForce = v14;
+          pTaskForce = v14;
           goto LABEL_45;
         case 8:
-          PriestsTaskForce = CAITaskForcePriests::CreatePriestsTaskForce(v3, a1, a2, 0);
+          pTaskForce = CAITaskForcePriests::CreatePriestsTaskForce(iRace, _iPlayerId, iTaskForceClass, 0);
           goto LABEL_45;
         case 9:
           v13 = operator new(0x60u);
           if ( v13 )
-            v12 = CTaskForceWarMachines::CTaskForceWarMachines(v13, a1, a2, 0);
+            v12 = CTaskForceWarMachines::CTaskForceWarMachines(v13, _iPlayerId, iTaskForceClass, 0);
           else
             v12 = 0;
-          PriestsTaskForce = v12;
+          pTaskForce = (CAITaskForcePriestsRoman *)v12;
           goto LABEL_45;
         case 10:
           v11 = operator new(0x60u);
           if ( v11 )
-            v10 = CTaskForceWarShips::CTaskForceWarShips(v11, a1, a2, 0);
+            v10 = CTaskForceWarShips::CTaskForceWarShips(v11, _iPlayerId, iTaskForceClass, 0);
           else
             v10 = 0;
-          PriestsTaskForce = v10;
+          pTaskForce = (CAITaskForcePriestsRoman *)v10;
           goto LABEL_45;
         case 11:
           v9 = (CAITaskForceDarkGardeners *)operator new(0x60u);
           if ( v9 )
-            v8 = CAITaskForceDarkGardeners::CAITaskForceDarkGardeners(v9, a1, 0);
+            v8 = CAITaskForceDarkGardeners::CAITaskForceDarkGardeners(v9, _iPlayerId, 0);
           else
             v8 = 0;
-          PriestsTaskForce = (int)v8;
+          pTaskForce = v8;
           goto LABEL_45;
         case 12:
           v7 = (CAITaskForceShamans *)operator new(0x60u);
           if ( v7 )
-            v6 = CAITaskForceShamans::CAITaskForceShamans(v7, a1, 0);
+            v6 = CAITaskForceShamans::CAITaskForceShamans(v7, _iPlayerId, 0);
           else
             v6 = 0;
-          PriestsTaskForce = (int)v6;
+          pTaskForce = v6;
           goto LABEL_45;
         case 13:
           v5 = (CAITaskForceManakopters *)operator new(0x60u);
           if ( v5 )
-            v4 = CAITaskForceManakopters::CAITaskForceManakopters(v5, a1, 0);
+            v4 = CAITaskForceManakopters::CAITaskForceManakopters(v5, _iPlayerId, 0);
           else
             v4 = 0;
-          PriestsTaskForce = (int)v4;
+          pTaskForce = v4;
 LABEL_45:
-          if ( !PriestsTaskForce && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 1350, "pTaskForce != 0") == 1 )
+          if ( !pTaskForce && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 1350, "pTaskForce != 0") == 1 )
             __debugbreak();
-          result = PriestsTaskForce;
+          result = pTaskForce;
           break;
         default:
           if ( BBSupportDbgReport(

@@ -4160,7 +4160,7 @@ void  CInputProcessor::ShowPossibleBuildingType(void) {
     for ( i = 0; i < 6; ++i )
     {
       v10 = g_sNeighborPoints[2 * i] + iMouseHoverX;
-      v11 = dword_37D8C0C[2 * i] + iMouseHoverY;
+      v11 = MEMORY[0x37D8C0C][2 * i] + iMouseHoverY;
       if ( CWorldManager::InWorld(v10, v11) )
       {
         v8 = this->m_iBuildBuildingType;

@@ -1,3 +1,4 @@
+#if FALSE
 #include "CWaypoints.h"
 
 // Definitions for class CWaypoints
@@ -6,7 +7,7 @@
 // Decompiled from int __thiscall CWaypoints::GoalDistance(CWaypoints *this)
 int  CWaypoints::GoalDistance(void)const {
   
-  return *((_DWORD *)this + 1);
+  return this->m_iGoalDistance;
 }
 
 
@@ -14,31 +15,27 @@ int  CWaypoints::GoalDistance(void)const {
 // Decompiled from int __thiscall CWaypoints::Back(CWaypoints *this)
 int  CWaypoints::Back(void)const {
   
-  return *((_DWORD *)this + *((_DWORD *)this + 4) + 5);
+  return this->m_iWaypoints[this->m_iCurrentPointer];
 }
 
 
 // address=[0x132e850]
-// Decompiled from int __thiscall CWaypoints::CachedWaypointsCount(pairNode *this)
+// Decompiled from int __thiscall CWaypoints::CachedWaypointsCount(CWaypoints *this)
 int  CWaypoints::CachedWaypointsCount(void)const {
   
-  return *((_DWORD *)this + 3);
+  return this->m_iCachedWaypointsCount;
 }
 
 
 // address=[0x132ea70]
-// Decompiled from CWaypoints *__thiscall CWaypoints::PopBack(CWaypoints *this)
+// Decompiled from void __thiscall CWaypoints::PopBack(CWaypoints *this)
 void  CWaypoints::PopBack(void) {
   
-  CWaypoints *result; // eax
-
-  result = this;
-  if ( *((int *)this + 3) <= 0 )
-    return result;
-  --*((_DWORD *)this + 3);
-  result = (CWaypoints *)CWaypoints::DecWrap(*((_DWORD *)this + 4));
-  *((_DWORD *)this + 4) = result;
-  return result;
+  if ( this->m_iCachedWaypointsCount > 0 )
+  {
+    --this->m_iCachedWaypointsCount;
+    this->m_iCurrentPointer = CWaypoints::DecWrap(this->m_iCurrentPointer);
+  }
 }
 
 
@@ -46,7 +43,7 @@ void  CWaypoints::PopBack(void) {
 // Decompiled from int __thiscall CWaypoints::Goal(CWaypoints *this)
 int  CWaypoints::Goal(void)const {
   
-  return *(_DWORD *)this;
+  return this->m_iGoal;
 }
 
 
@@ -54,49 +51,39 @@ int  CWaypoints::Goal(void)const {
 // Decompiled from char __thiscall CWaypoints::GoalCached(CWaypoints *this)
 bool  CWaypoints::GoalCached(void)const {
   
-  return *((_BYTE *)this + 84);
+  return this[5].m_iGoalDistance;
 }
 
 
 // address=[0x15d66b0]
-// Decompiled from CWaypoints *__thiscall CWaypoints::Init(CWaypoints *this)
+// Decompiled from void __thiscall CWaypoints::Init(CWaypoints *this)
 void  CWaypoints::Init(void) {
   
-  CWaypoints *result; // eax
-
-  *(_DWORD *)this = -1;
-  *((_DWORD *)this + 2) = 0;
-  *((_DWORD *)this + 3) = 0;
-  result = this;
-  *((_DWORD *)this + 4) = 15;
-  *((_BYTE *)this + 84) = 0;
-  return result;
+  this->m_iGoal = -1;
+  this->m_iTotalWaypoints = 0;
+  this->m_iCachedWaypointsCount = 0;
+  this->m_iCurrentPointer = 15;
+  this->m_bFullyCached = 0;
 }
 
 
 // address=[0x15d6a20]
-// Decompiled from int __thiscall CWaypoints::PushBack(CWaypoints *this, int a2)
-void  CWaypoints::PushBack(int a2) {
+// Decompiled from void __thiscall CWaypoints::PushBack(CWaypoints *this, int _iXY)
+void  CWaypoints::PushBack(int _iXY) {
   
-  int result; // eax
-
-  *((_BYTE *)this + 84) = *((_DWORD *)this + 3) < 16;
-  ++*((_DWORD *)this + 2);
-  *((_DWORD *)this + 3) += *((_DWORD *)this + 3) < 16;
-  *((_DWORD *)this + 4) = CWaypoints::IncWrap(*((_DWORD *)this + 4));
-  result = *((_DWORD *)this + 4);
-  *((_DWORD *)this + result + 5) = a2;
-  return result;
+  this->m_bFullyCached = this->m_iCachedWaypointsCount < 16;
+  ++this->m_iTotalWaypoints;
+  this->m_iCachedWaypointsCount += this->m_iCachedWaypointsCount < 16;
+  this->m_iCurrentPointer = CWaypoints::IncWrap(this->m_iCurrentPointer);
+  this->m_iWaypoints[this->m_iCurrentPointer] = _iXY;
 }
 
 
 // address=[0x15d6ad0]
-// Decompiled from int __thiscall CWaypoints::PushGoal(CWaypoints *this, int a2, int a3)
+// Decompiled from void __thiscall CWaypoints::PushGoal(CWaypoints *this, int a2, int a3)
 void  CWaypoints::PushGoal(int a2, int a3) {
   
-  int result; // eax
-
-  if ( *((_DWORD *)this + 2)
+  if ( this->m_iTotalWaypoints
     && BBSupportDbgReport(
          2,
          "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\pathing\\AStar.h",
@@ -105,23 +92,21 @@ void  CWaypoints::PushGoal(int a2, int a3) {
   {
     __debugbreak();
   }
-  *((_DWORD *)this + 2) = 1;
-  *((_DWORD *)this + 3) = 1;
-  *((_DWORD *)this + 4) = 0;
-  *(_DWORD *)this = a2;
-  *((_DWORD *)this + 5) = a2;
-  result = a3;
-  *((_DWORD *)this + 1) = a3;
-  *((_BYTE *)this + 84) = 1;
-  return result;
+  this->m_iTotalWaypoints = 1;
+  this->m_iCachedWaypointsCount = 1;
+  this->m_iCurrentPointer = 0;
+  this->m_iGoal = a2;
+  this->m_iWaypoints[0] = a2;
+  this->m_iGoalDistance = a3;
+  this->m_bFullyCached = 1;
 }
 
 
 // address=[0x132e930]
-// Decompiled from int __cdecl CWaypoints::DecWrap(char a1)
+// Decompiled from int __cdecl CWaypoints::DecWrap(int a1)
 int __cdecl CWaypoints::DecWrap(int a1) {
   
-  return (a1 - 1) & 0xF;
+  return ((_BYTE)a1 - 1) & 0xF;
 }
 
 
@@ -133,3 +118,4 @@ int __cdecl CWaypoints::IncWrap(int a1) {
 }
 
 
+#endif // Already implemented

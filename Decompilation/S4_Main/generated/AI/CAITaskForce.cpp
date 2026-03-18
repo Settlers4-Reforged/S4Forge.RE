@@ -12,14 +12,10 @@ class CAITaskForce *  CAITaskForce::AssociatedTaskForce(void)const {
 
 
 // address=[0x12fcf20]
-// Decompiled from unsigned int __thiscall CAITaskForce::ClearFlagBit(CAITaskForce *this, unsigned int a2)
+// Decompiled from void __thiscall CAITaskForce::ClearFlagBit(CAITaskForce *this, unsigned int a2)
 void  CAITaskForce::ClearFlagBit(unsigned int a2) {
   
-  unsigned int result; // eax
-
-  result = *((_DWORD *)this + 14) & ~a2;
-  *((_DWORD *)this + 14) = result;
-  return result;
+  this->m_uFlags &= ~a2;
 }
 
 
@@ -211,15 +207,11 @@ enum T_AI_TASK_FORCE_CLASS  CAITaskForce::Class(void)const {
 
 
 // address=[0x1327140]
-// Decompiled from CAITaskForce *__thiscall CAITaskForce::Release(CAITaskForce *this)
+// Decompiled from void __thiscall CAITaskForce::Release(CAITaskForce *this)
 void  CAITaskForce::Release(void) {
   
-  CAITaskForce *result; // eax
-
-  result = this;
   if ( this )
-    return (CAITaskForce *)(*(int (__thiscall **)(CAITaskForce *, int))(*(_DWORD *)this + 8))(this, 1);
-  return result;
+    this->dtor(this, 1);
 }
 
 

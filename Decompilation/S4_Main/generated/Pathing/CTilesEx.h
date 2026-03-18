@@ -18,7 +18,7 @@ public:
     static void __cdecl InsertTileIntoSquareList(int a1);
 
     // address=[0x15e34f0]
-    static void __cdecl DeleteTileFromSquareList(int a1);
+    static void __cdecl DeleteTileFromSquareList(int _iTileId);
 
     // address=[0x15e36f0]
     static void __cdecl CalculateListOfFreeTiles(void);
@@ -30,7 +30,7 @@ public:
     static int __cdecl PushTileUndef(void);
 
     // address=[0x15e3a10]
-    static int __cdecl PushTilesBackUndef(int a1);
+    static int __cdecl PushTilesBackUndef(int _iCount);
 
     // address=[0x15e3ac0]
     static int __cdecl PushTile(int a1, int a2);

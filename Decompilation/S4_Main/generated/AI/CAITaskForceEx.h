@@ -67,13 +67,18 @@ protected:
     virtual  ~CAITaskForceEx(void);
 
     // address=[0x132a140]
-     CAITaskForceEx(int a2, enum T_AI_TASK_FORCE_CLASS a3, enum T_AI_TASK_FORCE_TYPE a4, int a5);
+     CAITaskForceEx(int iOwnerId, enum T_AI_TASK_FORCE_CLASS tClass, enum T_AI_TASK_FORCE_TYPE tType, int iFlags);
 
     // address=[0x132b230]
     bool  EscortInitWalk(void);
 
     // address=[0x132eac0]
     void  SetCommandAndClearStuff(int a2, int a3, int a4);
+
+    // Type information members
+public:
+    int m_iDestinationXY;
+    int[3] m_iWaypointsXY;
 
 };
 

@@ -6,8 +6,8 @@
 // Decompiled from CAITaskForceReservoir *__thiscall CAITaskForceReservoir::CAITaskForceReservoir(CAITaskForceReservoir *this, int a2)
  CAITaskForceReservoir::CAITaskForceReservoir(int a2) {
   
-  CAITaskForce::CAITaskForce((int)this, a2, 1, 1, 0x80000000);
-  *(_DWORD *)this = CAITaskForceReservoir::_vftable_;
+  CAITaskForce::CAITaskForce(this, a2, 1, 1, 0x80000000);
+  this->__vftable = (CAITaskForce_vtbl *)CAITaskForceReservoir::_vftable_;
   return this;
 }
 

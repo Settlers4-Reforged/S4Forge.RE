@@ -120,6 +120,10 @@ protected:
     // address=[0x1321520]
     virtual bool  ProcessEvent(class CAIEvent const * a2);
 
+    // Type information members
+public:
+    CAIPlayerAI * m_pPlayerAI;
+
 };
 
 

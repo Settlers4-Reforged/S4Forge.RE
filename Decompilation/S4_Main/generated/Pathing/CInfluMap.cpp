@@ -11,7 +11,7 @@ int __cdecl CInfluMap::EnemyValueVW(int a1, int a2, int a3) {
 
 
 // address=[0x1306580]
-// Decompiled from int __cdecl CInfluMap::EnemyValueXY(Squares *a1, Squares *a2, int a3)
+// Decompiled from int __cdecl CInfluMap::EnemyValueXY(int a1, int a2, int a3)
 int __cdecl CInfluMap::EnemyValueXY(int a1, int a2, int a3) {
   
   int v3; // eax

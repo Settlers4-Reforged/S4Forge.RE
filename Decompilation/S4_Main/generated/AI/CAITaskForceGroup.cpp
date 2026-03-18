@@ -53,7 +53,7 @@ class CAITaskForce *  CAITaskForceGroup::CreateTaskForce(enum T_AI_TASK_FORCE_TY
   
   struct CAITaskForce *TaskForce; // [esp+4h] [ebp-4h]
 
-  TaskForce = (struct CAITaskForce *)CAITaskForces::CreateTaskForce(*((_DWORD *)this + 1), a2);
+  TaskForce = (struct CAITaskForce *)CAITaskForces::CreateTaskForce(this->m_sData.m_iPlayerId, a2);
   if ( TaskForce )
     CAITaskForceGroup::AddTaskForce(this, TaskForce);
   return TaskForce;

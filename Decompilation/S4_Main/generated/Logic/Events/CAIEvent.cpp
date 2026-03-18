@@ -32,10 +32,10 @@ int __cdecl CAIEvent::Pack(unsigned int a1, unsigned int a2) {
 // Decompiled from CAIEvent *__thiscall CAIEvent::CAIEvent(CAIEvent *this, int a2, int a3, int a4, int a5)
  CAIEvent::CAIEvent(int a2, int a3, int a4, int a5) {
   
-  *(_DWORD *)this = a2;
-  *((_DWORD *)this + 1) = a3;
-  *((_DWORD *)this + 2) = a4;
-  *((_DWORD *)this + 3) = a5;
+  this->m_iType = a2;
+  this->m_iX = a3;
+  this->m_iY = a4;
+  this->m_iDark = a5;
   return this;
 }
 

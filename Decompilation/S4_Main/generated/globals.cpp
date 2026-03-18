@@ -38960,10 +38960,10 @@ int __cdecl Y16X16::XYNotNegative(int) {
 
 
 // address=[0x15dc4b0]
-// Decompiled from int __cdecl Grid::Direction(Grid *this, int a2)
-int __cdecl Grid::Direction(int a2, int a2) {
+// Decompiled from int __cdecl Grid::Direction(int x, int y)
+int __cdecl Grid::Direction(int x, int y) {
   
-  return sub_15DC780(this, a2);
+  return sub_15DC780(x, y);
 }
 
 
@@ -39982,7 +39982,8 @@ void __cdecl ScriptEconomyModeVictoryConditionCheck(void) {
   int v17; // [esp+7Ch] [ebp-4h]
 
   GameDefaultPlayersLostCheck();
-  result = (unsigned __int8)GameEndAnnouncement(0, 0);
+  GameEndAnnouncement(0, 0);
+  result = (unsigned __int8)result;
   if ( (_BYTE)result )
     return result;
   TickCounter = (float)(unsigned int)CStateGame::GetTickCounter(g_pGame);
@@ -39999,7 +40000,7 @@ void __cdecl ScriptEconomyModeVictoryConditionCheck(void) {
   v14 = 0;
   for ( i = 0; i < 7; ++i )
   {
-    v3 = EconomyGoodsArray[i];
+    v3 = (unsigned __int8)EconomyGoodsArray[i];
     v12 = 0;
     v11 = 0;
     for ( j = 1; j <= PlayerId; ++j )
@@ -47474,7 +47475,7 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
     if ( !D3DObjectPtr->field_71D )
       return 0;
     LandscapeRenderTargetSurface = CInterfaceD3D::GetLandscapeRenderTargetSurface(D3DObjectPtr);
-    if ( ((int (__thiscall *)(CSurfaceV7 *))LandscapeRenderTargetSurface->IsLost)(LandscapeRenderTargetSurface) == -2005532222 )
+    if ( LandscapeRenderTargetSurface->IsLost(LandscapeRenderTargetSurface) == -2005532222 )
       return 0;
   }
   else
@@ -47566,13 +47567,13 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
       g_iUsedFogFadeStep = v52;
       if ( v93 && v86 )
       {
-        v79 = CalcFinalHeightOffset(*(unsigned __int8 *)v111);
-        v45 = *((char *)v111 + 2) < 0;
-        v43 = v45 ? 0 : *((_BYTE *)v111 + 2) & 0xF;
+        v79 = CalcFinalHeightOffset(v111->a);
+        v45 = (v111->m_uGradient & 0x80u) != 0;
+        v43 = v45 ? 0 : v111->m_uGradient & 0xF;
         NewFogging = T_GFX_MAP_ELEMENT::GetNewFogging(v111);
         OldFogging = T_GFX_MAP_ELEMENT::GetOldFogging(v111);
         v44 = NewFogging != OldFogging;
-        v105 = v44 | *((_BYTE *)v111 + 3) & 0x40;
+        v105 = v44 | v111->m_uGfxBits & 0x40;
         ShadowFog = CHeightAndTypeTable::GetShadowFog(
                       (CHeightAndTypeTable *)g_cHeightAndTypeTable,
                       g_iUsedFogFadeStep,
@@ -47585,12 +47586,12 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
                      v43,
                      OldFogging,
                      NewFogging);
-        v110 = (unsigned __int8)byte_3ACD340[*((unsigned __int8 *)v111 + 1)];
-        v85 = (*((_BYTE *)v111 + 2) & 0x40) != 0;
+        v110 = (unsigned __int8)byte_3ACD340[v111->m_uGroundType];
+        v85 = (v111->m_uGradient & 0x40) != 0;
         v99 = v85;
         if ( (v110 == 28 || v110 == 29) && CalcCurrentFog(v111) <= 59 )
           v110 = 16;
-        *((_BYTE *)v111 + 3) &= ~0x40u;
+        v111->m_uGfxBits &= ~0x40u;
       }
       else
       {
@@ -47603,16 +47604,16 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
       }
       if ( Number == g_iFadeYBorder - 1 )
         g_iUsedFogFadeStep = 15;
-      v111 = (T_GFX_MAP_ELEMENT *)((char *)v111 + 4 * g_iMapSize);
+      v111 += g_iMapSize;
       if ( v86 && v95 )
       {
-        v62 = CalcFinalHeightOffset(*(unsigned __int8 *)v111);
-        v42 = *((char *)v111 + 2) < 0;
-        v40 = v42 ? 0 : *((_BYTE *)v111 + 2) & 0xF;
+        v62 = CalcFinalHeightOffset(v111->a);
+        v42 = (v111->m_uGradient & 0x80u) != 0;
+        v40 = v42 ? 0 : v111->m_uGradient & 0xF;
         v57 = T_GFX_MAP_ELEMENT::GetNewFogging(v111);
         v56 = T_GFX_MAP_ELEMENT::GetOldFogging(v111);
         v41 = v57 != v56;
-        v98 = v41 | *((_BYTE *)v111 + 3) & 0x40;
+        v98 = v41 | v111->m_uGfxBits & 0x40;
         v61 = CHeightAndTypeTable::GetShadowFog(
                 (CHeightAndTypeTable *)g_cHeightAndTypeTable,
                 g_iUsedFogFadeStep,
@@ -47625,12 +47626,12 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
                 v40,
                 v56,
                 v57);
-        v104 = (unsigned __int8)byte_3ACD340[*((unsigned __int8 *)v111 + 1)];
-        v84 = (*((_BYTE *)v111 + 2) & 0x40) != 0;
+        v104 = (unsigned __int8)byte_3ACD340[v111->m_uGroundType];
+        v84 = (v111->m_uGradient & 0x40) != 0;
         v91 = v84;
         if ( (v104 == 28 || v104 == 29) && CalcCurrentFog(v111) <= 59 )
           v104 = 16;
-        *((_BYTE *)v111 + 3) &= ~0x40u;
+        v111->m_uGfxBits &= ~0x40u;
       }
       else
       {
@@ -47649,16 +47650,16 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
         v94 = FastIndexValidation(v80 + (unsigned __int8)g_bHalfLine + 1);
         if ( Number == g_iFadeYBorder - 1 )
           g_iUsedFogFadeStep = 15;
-        v111 = (T_GFX_MAP_ELEMENT *)((char *)v111 + 4);
+        ++v111;
         if ( v94 && v95 )
         {
-          v71 = CalcFinalHeightOffset(*(unsigned __int8 *)v111);
-          v39 = *((char *)v111 + 2) < 0;
-          v37 = v39 ? 0 : *((_BYTE *)v111 + 2) & 0xF;
+          v71 = CalcFinalHeightOffset(v111->a);
+          v39 = (v111->m_uGradient & 0x80u) != 0;
+          v37 = v39 ? 0 : v111->m_uGradient & 0xF;
           v54 = T_GFX_MAP_ELEMENT::GetNewFogging(v111);
           v53 = T_GFX_MAP_ELEMENT::GetOldFogging(v111);
           v38 = v54 != v53;
-          v106 = v38 | *((_BYTE *)v111 + 3) & 0x40;
+          v106 = v38 | v111->m_uGfxBits & 0x40;
           v73 = CHeightAndTypeTable::GetShadowFog(
                   (CHeightAndTypeTable *)g_cHeightAndTypeTable,
                   g_iUsedFogFadeStep,
@@ -47671,12 +47672,12 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
                   v37,
                   v53,
                   v54);
-          v109 = (unsigned __int8)byte_3ACD340[*((unsigned __int8 *)v111 + 1)];
-          v83 = (*((_BYTE *)v111 + 2) & 0x40) != 0;
+          v109 = (unsigned __int8)byte_3ACD340[v111->m_uGroundType];
+          v83 = (v111->m_uGradient & 0x40) != 0;
           v100 = v83;
           if ( (v109 == 28 || v109 == 29) && CalcCurrentFog(v111) <= 59 )
             v109 = 16;
-          *((_BYTE *)v111 + 3) &= ~0x40u;
+          v111->m_uGfxBits &= ~0x40u;
         }
         else
         {
@@ -47694,16 +47695,16 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
         v76 = v100;
         v77 = v106;
         g_iUsedFogFadeStep = v52;
-        v111 = (T_GFX_MAP_ELEMENT *)((char *)v111 - 4 * g_iMapSize);
+        v111 -= g_iMapSize;
         if ( v94 && v93 )
         {
-          v70 = CalcFinalHeightOffset(*(unsigned __int8 *)v111);
-          v36 = *((char *)v111 + 2) < 0;
-          v34 = v36 ? 0 : *((_BYTE *)v111 + 2) & 0xF;
+          v70 = CalcFinalHeightOffset(v111->a);
+          v36 = (v111->m_uGradient & 0x80u) != 0;
+          v34 = v36 ? 0 : v111->m_uGradient & 0xF;
           v51 = T_GFX_MAP_ELEMENT::GetNewFogging(v111);
           v50 = T_GFX_MAP_ELEMENT::GetOldFogging(v111);
           v35 = v51 != v50;
-          v101 = v35 | *((_BYTE *)v111 + 3) & 0x40;
+          v101 = v35 | v111->m_uGfxBits & 0x40;
           v68 = CHeightAndTypeTable::GetShadowFog(
                   (CHeightAndTypeTable *)g_cHeightAndTypeTable,
                   g_iUsedFogFadeStep,
@@ -47716,12 +47717,12 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
                   v34,
                   v50,
                   v51);
-          v102 = (unsigned __int8)byte_3ACD340[*((unsigned __int8 *)v111 + 1)];
-          v88 = (*((_BYTE *)v111 + 2) & 0x40) != 0;
+          v102 = (unsigned __int8)byte_3ACD340[v111->m_uGroundType];
+          v88 = (v111->m_uGradient & 0x40) != 0;
           v92 = v88;
           if ( (v102 == 28 || v102 == 29) && CalcCurrentFog(v111) <= 59 )
             v102 = 16;
-          *((_BYTE *)v111 + 3) &= ~0x40u;
+          v111->m_uGfxBits &= ~0x40u;
         }
         else
         {
@@ -48062,7 +48063,7 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
         *(float *)&g_fPatternSuboffsetX = *(float *)&g_fPatternSuboffsetX + 0.125;
         if ( *(float *)&g_fPatternSuboffsetX >= 1.0 )
           *(float *)&g_fPatternSuboffsetX = *(float *)&g_fPatternSuboffsetX - 1.0;
-        v111 = (T_GFX_MAP_ELEMENT *)((char *)v111 + 4 * g_iMapSize);
+        v111 += g_iMapSize;
         v79 = v10;
         v62 = v9;
         v110 = v8;
@@ -57002,7 +57003,7 @@ void __cdecl InitRandomMap(class IMapGeneratorHost * a1, struct SRandomMapParams
   }
   if ( g_pRand )
   {
-    operator delete((void *)g_pRand);
+    operator delete(g_pRand);
     g_pRand = 0;
   }
   g_pHost = (int)a1;
@@ -57025,7 +57026,7 @@ void __cdecl InitRandomMap(class IMapGeneratorHost * a1, struct SRandomMapParams
   else
     v16 = 0;
   v24 = -1;
-  g_pRand = (int)v16;
+  g_pRand = v16;
   v23 = (int)(sqrt<int>(g_iWorldSize) / 2.0);
   if ( v23 % 4 )
   {
@@ -57154,7 +57155,7 @@ void __cdecl CreatePreview(class IMapGeneratorHost * a1, unsigned short * a2, in
   int v51; // [esp+77Ch] [ebp-4h]
 
   NewValue = controlfp(0xA031Fu, 0x30F031Fu);
-  CRandom16Ex::Init((CRandom16Ex *)g_pRand, g_iRandomSeed, 0);
+  CRandom16Ex::Init(g_pRand, g_iRandomSeed, 0);
   g_iPreviewImageSize = a3;
   v48 = 2 * a3;
   CLandscapeColorProperties::CLandscapeColorProperties((CLandscapeColorProperties *)v50);
@@ -57183,7 +57184,7 @@ void __cdecl CreatePreview(class IMapGeneratorHost * a1, unsigned short * a2, in
     {
       v41 = CLandscapeColorProperties::HiColValue((CLandscapeColorProperties *)v50, 16);
       Element = CGrid::getElement((CGrid *)g_pFeatureGrid, j);
-      v3 = CRandom16::Rand((CRandom16 *)g_pRand);
+      v3 = CRandom16::Rand(g_pRand);
       v46 = v34 + v3 % v34;
       CPreviewBlob::CPreviewBlob(
         (CPreviewBlob *)v15,
@@ -57196,7 +57197,7 @@ void __cdecl CreatePreview(class IMapGeneratorHost * a1, unsigned short * a2, in
         v48,
         v35);
       CBlob::drawBlob((CBlob *)v15);
-      v4 = CRandom16::Rand((CRandom16 *)g_pRand);
+      v4 = CRandom16::Rand(g_pRand);
       v46 = v34 + v4 % v34;
       CPreviewBlob::CPreviewBlob(
         (CPreviewBlob *)v14,
@@ -57209,7 +57210,7 @@ void __cdecl CreatePreview(class IMapGeneratorHost * a1, unsigned short * a2, in
         v48,
         v35);
       CBlob::drawBlob((CBlob *)v14);
-      v5 = CRandom16::Rand((CRandom16 *)g_pRand);
+      v5 = CRandom16::Rand(g_pRand);
       v46 = v34 + v5 % v34;
       CPreviewBlob::CPreviewBlob(
         (CPreviewBlob *)v13,
@@ -57222,7 +57223,7 @@ void __cdecl CreatePreview(class IMapGeneratorHost * a1, unsigned short * a2, in
         v48,
         v35);
       CBlob::drawBlob((CBlob *)v13);
-      v6 = CRandom16::Rand((CRandom16 *)g_pRand);
+      v6 = CRandom16::Rand(g_pRand);
       v46 = v34 + v6 % v34;
       CPreviewBlob::CPreviewBlob(
         (CPreviewBlob *)v8,
@@ -57382,7 +57383,7 @@ bool __cdecl GenerateRandomMap(class IMapGeneratorHost * a1) {
   int v17; // eax
   char v18; // bl
   unsigned int v19; // eax
-  unsigned int v20; // edx
+  unsigned int v20; // eax
   int v21; // eax
   int v22; // eax
   unsigned int v23; // eax
@@ -57420,7 +57421,7 @@ bool __cdecl GenerateRandomMap(class IMapGeneratorHost * a1) {
   float v55; // [esp+46Ch] [ebp-FBB0h]
   CCheckLayer *v56; // [esp+470h] [ebp-FBACh]
   unsigned int NewValue; // [esp+474h] [ebp-FBA8h]
-  int v58; // [esp+478h] [ebp-FBA4h]
+  CRandom16Ex *v58; // [esp+478h] [ebp-FBA4h]
   void *C; // [esp+47Ch] [ebp-FBA0h]
   void *v60; // [esp+480h] [ebp-FB9Ch]
   void *v61; // [esp+484h] [ebp-FB98h]
@@ -57492,7 +57493,7 @@ bool __cdecl GenerateRandomMap(class IMapGeneratorHost * a1) {
   if ( !g_pMapElement )
     return 0;
   NewValue = controlfp(0xA031Fu, 0x30F031Fu);
-  CRandom16Ex::Init((CRandom16Ex *)g_pRand, g_iRandomSeed, 0);
+  CRandom16Ex::Init(g_pRand, g_iRandomSeed, 0);
   g_pHost = (int)a1;
   v72 = (CCheckLayer *)operator new(0xCu);
   v125 = 0;
@@ -57546,7 +57547,7 @@ bool __cdecl GenerateRandomMap(class IMapGeneratorHost * a1) {
           CBlob::drawBlob((CBlob *)v33);
         }
       }
-      v2 = CRandom16::Rand((CRandom16 *)g_pRand);
+      v2 = CRandom16::Rand(g_pRand);
       v111 = v2 % v115;
       CLandBlob::CLandBlob(
         (CLandBlob *)v32,
@@ -57560,7 +57561,7 @@ bool __cdecl GenerateRandomMap(class IMapGeneratorHost * a1) {
         g_iWorldSize,
         (struct CCheckLayer *)g_pCheckLayer);
       CBlob::drawBlob((CBlob *)v32);
-      v3 = CRandom16::Rand((CRandom16 *)g_pRand);
+      v3 = CRandom16::Rand(g_pRand);
       v111 = v3 % v115;
       CLandBlob::CLandBlob(
         (CLandBlob *)v31,
@@ -57574,7 +57575,7 @@ bool __cdecl GenerateRandomMap(class IMapGeneratorHost * a1) {
         g_iWorldSize,
         (struct CCheckLayer *)g_pCheckLayer);
       CBlob::drawBlob((CBlob *)v31);
-      v4 = CRandom16::Rand((CRandom16 *)g_pRand);
+      v4 = CRandom16::Rand(g_pRand);
       v111 = v4 % v115;
       CLandBlob::CLandBlob(
         (CLandBlob *)v38,
@@ -57588,7 +57589,7 @@ bool __cdecl GenerateRandomMap(class IMapGeneratorHost * a1) {
         g_iWorldSize,
         (struct CCheckLayer *)g_pCheckLayer);
       CBlob::drawBlob((CBlob *)v38);
-      v5 = CRandom16::Rand((CRandom16 *)g_pRand);
+      v5 = CRandom16::Rand(g_pRand);
       v111 = v5 % v115;
       CLandBlob::CLandBlob(
         (CLandBlob *)v37,
@@ -57658,9 +57659,9 @@ bool __cdecl GenerateRandomMap(class IMapGeneratorHost * a1) {
       v27 = g_iWorldSize;
       v26 = (int)(float)((float)((float)v84 + *(float *)&g_fScaleFactor) + (float)v70);
       v25 = (int)(float)((float)((float)v82 + *(float *)&g_fScaleFactor) + (float)v86);
-      v6 = CRandom16::Rand((CRandom16 *)g_pRand);
+      v6 = CRandom16::Rand(g_pRand);
       v24 = v84 - v6 % v85;
-      v7 = CRandom16::Rand((CRandom16 *)g_pRand);
+      v7 = CRandom16::Rand(g_pRand);
       CMountainBlob::CMountainBlob((CMountainBlob *)v124, v82 - v7 % v83, v24, v25, v26, 50, v27, v29);
       CBlob::drawBlob((CBlob *)v124);
     }
@@ -57685,7 +57686,7 @@ bool __cdecl GenerateRandomMap(class IMapGeneratorHost * a1) {
       CBlob::drawBlob((CBlob *)v35);
     }
     else if ( (CGrid::getElement((CGrid *)g_pFeatureGrid, i) == 1 || CGrid::getElement((CGrid *)g_pFeatureGrid, i) == 104)
-           && CRandom16::Rand((CRandom16 *)g_pRand) % 6u > 4 )
+           && CRandom16::Rand(g_pRand) % 6u > 4 )
     {
       CLandBlob::CLandBlob(
         (CLandBlob *)v34,
@@ -57752,9 +57753,9 @@ bool __cdecl GenerateRandomMap(class IMapGeneratorHost * a1) {
     {
       do
       {
-        v8 = CRandom16::Rand((CRandom16 *)g_pRand);
+        v8 = CRandom16::Rand(g_pRand);
         v104 = v8 % Size;
-        v9 = CRandom16::Rand((CRandom16 *)g_pRand);
+        v9 = CRandom16::Rand(g_pRand);
         v97 = v9 % Size;
       }
       while ( !CGrid::getElement((CGrid *)g_pFeatureGrid, v104, v9 % Size) );
@@ -57778,12 +57779,12 @@ bool __cdecl GenerateRandomMap(class IMapGeneratorHost * a1) {
       {
         CPlayerData::getNearestMountain(*(CPlayerData **)(g_pPlayerData + 4 * i), &v108, &v107);
         v55 = (float)((float)v108 * *(float *)&g_fScaleFactor) + 50.0;
-        v79 = CRandom16::Rand((CRandom16 *)g_pRand) % (unsigned int)(int)*(float *)&g_fScaleFactor;
+        v79 = CRandom16::Rand(g_pRand) % (unsigned int)(int)*(float *)&g_fScaleFactor;
         v52 = (double)v79;
         v10 = (float)v79;
         v108 = (int)(float)(v55 + v10);
         v54 = (float)((float)v107 * *(float *)&g_fScaleFactor) + 50.0;
-        v78 = CRandom16::Rand((CRandom16 *)g_pRand) % (unsigned int)(int)*(float *)&g_fScaleFactor;
+        v78 = CRandom16::Rand(g_pRand) % (unsigned int)(int)*(float *)&g_fScaleFactor;
         v51 = (double)v78;
         v11 = (float)v78;
         v107 = (int)(float)(v54 + v11);
@@ -57819,7 +57820,7 @@ bool __cdecl GenerateRandomMap(class IMapGeneratorHost * a1) {
         if ( ValidateMapIndex(v94, v107 + v13) && *(_BYTE *)(g_pMapElement + 4 * (v94 + g_iWorldSize * v95) + 1) == 32 )
         {
           v14 = v112;
-          v15 = CRandom16::Rand((CRandom16 *)g_pRand);
+          v15 = CRandom16::Rand(g_pRand);
           *(_BYTE *)(g_pEditorLayer + 4 * (v94 + g_iWorldSize * v95) + 3) = (g_uResourceWealth
                                                                            + v15
                                                                            % (16
@@ -57832,10 +57833,10 @@ bool __cdecl GenerateRandomMap(class IMapGeneratorHost * a1) {
   for ( i = 0; i < v69; ++i )
   {
     if ( *(_BYTE *)(g_pMapElement + 4 * i + 1) == 32
-      && !(CRandom16::Rand((CRandom16 *)g_pRand) % (250 - 10 * (unsigned int)(unsigned __int8)g_uResourceWealth)) )
+      && !(CRandom16::Rand(g_pRand) % (250 - 10 * (unsigned int)(unsigned __int8)g_uResourceWealth)) )
     {
       v116 = 1;
-      v119 = CRandom16::Rand((CRandom16 *)g_pRand) % 0x14u;
+      v119 = CRandom16::Rand(g_pRand) % 0x14u;
       v117 = 0;
       if ( v119 >= 7u )
       {
@@ -57879,7 +57880,7 @@ bool __cdecl GenerateRandomMap(class IMapGeneratorHost * a1) {
           && !*(_BYTE *)(g_pEditorLayer + 4 * (v101 + g_iWorldSize * v102) + 3) )
         {
           v18 = v116;
-          v19 = CRandom16::Rand((CRandom16 *)g_pRand);
+          v19 = CRandom16::Rand(g_pRand);
           *(_BYTE *)(g_pEditorLayer + 4 * (v101 + g_iWorldSize * v102) + 3) = (g_uResourceWealth
                                                                              + v19
                                                                              % (16
@@ -57895,9 +57896,9 @@ bool __cdecl GenerateRandomMap(class IMapGeneratorHost * a1) {
       || *(_BYTE *)(g_pMapElement + 4 * i + 1) == 5
       || *(_BYTE *)(g_pMapElement + 4 * i + 1) == 6 )
     {
-      v20 = (unsigned __int8)g_uResourceWealth
-          + CRandom16::Rand((CRandom16 *)g_pRand) % (16 - (unsigned int)(unsigned __int8)g_uResourceWealth);
-      *(_BYTE *)(g_pEditorLayer + 4 * i + 3) = v20;
+      v20 = CRandom16::Rand(g_pRand);
+      *(_BYTE *)(g_pEditorLayer + 4 * i + 3) = g_uResourceWealth
+                                             + v20 % (16 - (unsigned int)(unsigned __int8)g_uResourceWealth);
     }
   }
   if ( (g_iFlags & 1) != 0 )
@@ -57942,7 +57943,7 @@ bool __cdecl GenerateRandomMap(class IMapGeneratorHost * a1) {
       {
         v30 = (struct CCheckLayer *)g_pCheckLayer;
         v28 = g_iWorldSize;
-        v23 = CRandom16::Rand((CRandom16 *)g_pRand);
+        v23 = CRandom16::Rand(g_pRand);
         CObjectBlob::CObjectBlob(
           (CObjectBlob *)v42,
           v113,
@@ -58034,7 +58035,7 @@ bool __cdecl GenerateRandomMap(class IMapGeneratorHost * a1) {
           (struct CCheckLayer *)g_pCheckLayer);
         CBlob::drawBlob((CBlob *)v46);
       }
-      if ( Element == 1 && !(CRandom16::Rand((CRandom16 *)g_pRand) % 0xAu) )
+      if ( Element == 1 && !(CRandom16::Rand(g_pRand) % 0xAu) )
       {
         CObjectBlob::CObjectBlob(
           (CObjectBlob *)v45,
@@ -58051,7 +58052,7 @@ bool __cdecl GenerateRandomMap(class IMapGeneratorHost * a1) {
           (struct CCheckLayer *)g_pCheckLayer);
         CBlob::drawBlob((CBlob *)v45);
       }
-      if ( (Element == 1 || Element == 104 || Element == 105) && !(CRandom16::Rand((CRandom16 *)g_pRand) % 0x14u) )
+      if ( (Element == 1 || Element == 104 || Element == 105) && !(CRandom16::Rand(g_pRand) % 0x14u) )
       {
         CObjectBlob::CObjectBlob(
           (CObjectBlob *)v44,
@@ -58135,7 +58136,7 @@ bool __cdecl GenerateRandomMap(class IMapGeneratorHost * a1) {
   if ( g_pRand )
   {
     v58 = g_pRand;
-    operator delete((void *)g_pRand);
+    operator delete(g_pRand);
     g_pRand = 0;
   }
   g_pPlayerData = 0;

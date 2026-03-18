@@ -1,12 +1,13 @@
+#if FALSE
 #include "CAIPlayerEvaluations.h"
 
 // Definitions for class CAIPlayerEvaluations
 
 // address=[0x1303c50]
-// Decompiled from void __thiscall CAIPlayerEvaluations::EvaluatePlayer(CAIPlayerEvaluation *this, DWORD a2)
+// Decompiled from void __thiscall CAIPlayerEvaluations::EvaluatePlayer(CAIPlayerEvaluations *this, DWORD a2)
 void  CAIPlayerEvaluations::EvaluatePlayer(int a2) {
   
-  CAIPlayerEvaluation::EvaluatePlayer(&this[a2], a2);
+  CAIPlayerEvaluation::EvaluatePlayer(&this->m_sPlayerEvaluations[a2], a2);
 }
 
 
@@ -19,7 +20,7 @@ void  CAIPlayerEvaluations::Clear(void) {
 
   for ( i = 0; i < 9; ++i )
   {
-    CAIPlayerEvaluation::Clear((CAIPlayerEvaluation *)this + i);
+    CAIPlayerEvaluation::Clear(&this->m_sPlayerEvaluations[i]);
     result = i + 1;
   }
   return result;
@@ -36,7 +37,7 @@ void  CAIPlayerEvaluations::EvaluateAllPlayers(void) {
   CAIPlayerEvaluations::Clear(this);
   PlayerId = IAIEnvironment::AlliancesLastPlayerId();
   for ( i = 1; i <= PlayerId; ++i )
-    CAIPlayerEvaluations::EvaluatePlayer(this->m_sPlayerEvaluations, i);
+    CAIPlayerEvaluations::EvaluatePlayer(this, i);
 }
 
 
@@ -57,3 +58,4 @@ void  CAIPlayerEvaluations::DbgPrint(void) {
 }
 
 
+#endif // Already implemented

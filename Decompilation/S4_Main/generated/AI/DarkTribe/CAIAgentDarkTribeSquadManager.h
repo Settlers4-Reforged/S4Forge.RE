@@ -16,7 +16,7 @@ public:
 
 protected:
     // address=[0x1302940]
-    void  SimpleSquadManagement(enum T_AI_WARRIOR_TYPE a2, enum T_AI_TASK_FORCE_TYPE a3, int a4);
+    void  SimpleSquadManagement(enum T_AI_WARRIOR_TYPE a2, enum T_AI_TASK_FORCE_TYPE a3, int _iScheduledTaskForceSize);
 
     // address=[0x1302bb0]
     void  AssociateSquads(enum T_AI_TASK_FORCE_CLASS a2);

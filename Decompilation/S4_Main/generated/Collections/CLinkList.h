@@ -32,6 +32,13 @@ public:
     // address=[0x15f49c0]
     int  Marker(void)const;
 
+    // Type information members
+public:
+    BYTE m_uSize;
+    BYTE m_uMarker;
+    WORD m_uOwnerTileId;
+    CLink[] m_uLinkTileIds;
+
 };
 
 

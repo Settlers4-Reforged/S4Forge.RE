@@ -20,6 +20,11 @@ public:
     // address=[0x13613b0]
      CRandom16(unsigned int a2);
 
+    // Type information members
+public:
+    DWORD m_uSeed;
+    DWORD m_uIteration;
+
 };
 
 

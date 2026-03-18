@@ -1,3 +1,4 @@
+#if FALSE
 #include "ITiling.h"
 
 // Definitions for class ITiling
@@ -95,8 +96,8 @@ int __cdecl ITiling::NumberOfWaterElementsDiv2XY(int a1, int a2) {
   
   int v2; // esi
 
-  v2 = (Squares::XYToVW(a2) + 1) << 6;
-  return (unsigned __int8)m_uSquareNumberOfWaterElementsDiv2[v2 + Squares::XYToVW(a1)];
+  v2 = (Squares::XYToVW((int)a2) + 1) << 6;
+  return *((unsigned __int8 *)&m_uSquareNumberOfWaterElementsDiv2 + v2 + Squares::XYToVW((int)a1));
 }
 
 
@@ -104,7 +105,7 @@ int __cdecl ITiling::NumberOfWaterElementsDiv2XY(int a1, int a2) {
 // Decompiled from int __cdecl ITiling::NumberOfWaterElementsDiv2VW(int a1, int a2)
 int __cdecl ITiling::NumberOfWaterElementsDiv2VW(int a1, int a2) {
   
-  return (unsigned __int8)m_uSquareNumberOfWaterElementsDiv2[64 * a2 + 64 + a1];
+  return *((unsigned __int8 *)&m_uSquareNumberOfWaterElementsDiv2 + 64 * a2 + a1 + 64);
 }
 
 
@@ -131,3 +132,4 @@ int __cdecl ITiling::OwnerPseudoTileId(int a1) {
 // address=[0x4236808]
 // [Decompilation failed for static unsigned char (* ITiling::m_uSquareNumberOfWaterElementsDiv2)[64]]
 
+#endif // Already implemented

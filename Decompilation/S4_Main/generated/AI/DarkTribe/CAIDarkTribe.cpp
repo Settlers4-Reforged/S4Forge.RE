@@ -609,7 +609,7 @@ void  CAIDarkTribe::UpdateDarkTribeElement(int a2, bool a3) {
         for ( i = 0; i < 6; ++i )
         {
           v23 = g_sNeighborPoints[2 * i] + v26;
-          v24 = dword_37D8C0C[2 * i] + v27;
+          v24 = MEMORY[0x37D8C0C][2 * i] + v27;
           if ( v24 >= 0 && v24 <= *((_DWORD *)v29 + 3) && v23 >= 0 && v23 <= *((_DWORD *)v29 + 2) )
           {
             if ( (*(unsigned __int8 (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)g_pTiling + 32))(
@@ -1649,7 +1649,7 @@ bool  CAIDarkTribe::IsPureDarkLandAround(int a2, int a3) {
   for ( i = 0; i < 6; ++i )
   {
     v6 = g_sNeighborPoints[2 * i] + a2;
-    v7 = dword_37D8C0C[2 * i] + a3;
+    v7 = MEMORY[0x37D8C0C][2 * i] + a3;
     if ( v7 >= 0 && v7 <= *((_DWORD *)this + 3) && v6 >= 0 && v6 <= *((_DWORD *)this + 2) )
     {
       v4 = CAIResourceMap::ResourceDataVW(v6, v7);
@@ -1702,7 +1702,7 @@ int  CAIDarkTribe::CountAdjacentDarkLand(int a2, int a3) {
   for ( i = 0; i < 6; ++i )
   {
     v4 = g_sNeighborPoints[2 * i] + a2;
-    v5 = dword_37D8C0C[2 * i] + a3;
+    v5 = MEMORY[0x37D8C0C][2 * i] + a3;
     if ( (unsigned __int8)CWorldManager::InWorld(v4, v5) )
     {
       if ( CWorldManager::FlagBits(v4, v5, 4u) )
@@ -1721,7 +1721,7 @@ bool  CAIDarkTribe::IsAdjacent(int a2, int a3, int a4, int a5) {
 
   for ( i = 0; i < 6; ++i )
   {
-    if ( g_sNeighborPoints[2 * i] + a2 == a4 && dword_37D8C0C[2 * i] + a3 == a5 )
+    if ( g_sNeighborPoints[2 * i] + a2 == a4 && MEMORY[0x37D8C0C][2 * i] + a3 == a5 )
       return 1;
   }
   return 0;

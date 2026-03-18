@@ -75,6 +75,15 @@ protected:
     // address=[0x1318a10]
     void  MoveToSuicideSquad(void);
 
+    // Type information members
+public:
+    bool m_bU;
+    DWORD m_uU;
+    int m_iRace;
+    int * m_pRaceBasedTable1;
+    int * m_pRaceBasedTable2;
+    CAIScheduler m_cScheduler;
+
 };
 
 

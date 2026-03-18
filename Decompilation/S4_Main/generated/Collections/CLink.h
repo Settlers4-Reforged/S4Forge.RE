@@ -17,6 +17,10 @@ public:
     // address=[0x15f5360]
     bool  PrevLinkIsLastOne(void)const;
 
+    // Type information members
+public:
+    WORD m_uData;
+
 };
 
 

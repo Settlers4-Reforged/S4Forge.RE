@@ -29,6 +29,11 @@ public:
     // address=[0x1319880]
     void  PostAIEvent(int a2, int a3, int a4, int a5);
 
+    // Type information members
+public:
+    DWORD m_uReadCounter;
+    std::vector m_vEvents;
+
 };
 
 

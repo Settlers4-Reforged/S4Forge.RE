@@ -41,7 +41,7 @@ public:
     CAIScheduler * m_pScheduler;
     CAIAgent * m_pPrevAgent;
     CAIAgent * m_pNextAgent;
-    _DWORD m_spName;
+    const char * m_spName;
 
 };
 

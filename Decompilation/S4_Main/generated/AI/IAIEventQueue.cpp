@@ -1,3 +1,4 @@
+#if FALSE
 #include "IAIEventQueue.h"
 
 // Definitions for class IAIEventQueue
@@ -7,8 +8,9 @@
  IAIEventQueue::IAIEventQueue(void) {
   
   IS4ChunkObject::IS4ChunkObject(this);
-  *(_DWORD *)this = IAIEventQueue::_vftable_;
+  this->__vftable = (IS4ChunkObject_vtbl *)IAIEventQueue::_vftable_;
   return this;
 }
 
 
+#endif // Already implemented

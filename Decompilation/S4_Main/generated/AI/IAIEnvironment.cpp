@@ -19,7 +19,7 @@ int __cdecl IAIEnvironment::PackXYFast(int a1, int a2) {
 
 
 // address=[0x12fd580]
-// Decompiled from unsigned int IAIEnvironment::Rand()
+// Decompiled from int IAIEnvironment::Rand()
 unsigned int __cdecl IAIEnvironment::Rand(void) {
   
   return CRandom16::Rand((CRandom16 *)IAIEnvironment::m_pRandom);
@@ -116,7 +116,7 @@ int __cdecl IAIEnvironment::AlliancesPlayerAllyBits(int a1) {
 
 
 // address=[0x13011d0]
-// Decompiled from int __cdecl IAIEnvironment::AlliancesPlayerBit(int a1)
+// Decompiled from int __cdecl IAIEnvironment::AlliancesPlayerBit(char a1)
 int __cdecl IAIEnvironment::AlliancesPlayerBit(int a1) {
   
   return CAlliances::PlayerBit(a1);
@@ -300,7 +300,7 @@ int __cdecl IAIEnvironment::GridDistancePackedXY(int a1, int a2) {
   v6 = v2 - IAIEnvironment::UnpackYFast(a1);
   v3 = IAIEnvironment::UnpackXFast(a2);
   v4 = IAIEnvironment::UnpackXFast(a1);
-  return IAIEnvironment::GridDistance(v3 - v4, v6);
+  return IAIEnvironment::GridDistance((Grid *)(v3 - v4), v6);
 }
 
 
@@ -321,7 +321,7 @@ class CRandom16 * __cdecl IAIEnvironment::RandomPtr(void) {
 
 
 // address=[0x130add0]
-// Decompiled from int __cdecl IAIEnvironment::GridDistance(Grid *a1, int a2)
+// Decompiled from int __cdecl IAIEnvironment::GridDistance(int a1, int a2)
 int __cdecl IAIEnvironment::GridDistance(int a1, int a2) {
   
   return Grid::DistanceInline(a1, a2);
@@ -361,7 +361,7 @@ int __cdecl IAIEnvironment::WorldEcoSectorId(int a1) {
 
 
 // address=[0x130ae70]
-// Decompiled from int __cdecl IAIEnvironment::WorldIsBlockedLand(int a1)
+// Decompiled from bool __cdecl IAIEnvironment::WorldIsBlockedLand(int a1)
 bool __cdecl IAIEnvironment::WorldIsBlockedLand(int a1) {
   
   return CWorldManager::IsBlockedLand(a1);
@@ -717,37 +717,36 @@ void __cdecl IAIEnvironment::EntitySendCastSpellCommand(int a1, int a2, int a3) 
 
 
 // address=[0x130b630]
-// Decompiled from int __cdecl IAIEnvironment::MovingEntitySendMoveCommand(int a1, int a2, int a3, bool a4)
+// Decompiled from void __cdecl IAIEnvironment::MovingEntitySendMoveCommand(int a1, int a2, int a3, bool a4)
 void __cdecl IAIEnvironment::MovingEntitySendMoveCommand(int a1, int a2, int a3, bool a4) {
   
-  int result; // eax
-  int v5; // eax
-  _BYTE v6[24]; // [esp+4h] [ebp-3Ch] BYREF
-  CEntityEvent *v7; // [esp+1Ch] [ebp-24h]
-  CEntityEvent *v8; // [esp+20h] [ebp-20h]
-  int v9; // [esp+24h] [ebp-1Ch]
-  void **v10; // [esp+28h] [ebp-18h]
-  int v11; // [esp+2Ch] [ebp-14h]
-  int v12; // [esp+30h] [ebp-10h]
-  int v13; // [esp+3Ch] [ebp-4h]
+  int v4; // eax
+  CEntityEvent v5; // [esp+4h] [ebp-3Ch] BYREF
+  CEntityEvent *v6; // [esp+1Ch] [ebp-24h]
+  CEntityEvent *v7; // [esp+20h] [ebp-20h]
+  int v8; // [esp+24h] [ebp-1Ch]
+  void **v9; // [esp+28h] [ebp-18h]
+  int v10; // [esp+2Ch] [ebp-14h]
+  IEntity *v11; // [esp+30h] [ebp-10h]
+  int v12; // [esp+3Ch] [ebp-4h]
 
-  v10 = (void **)CMapObjectMgr::EntityPtr(a1);
-  result = j____RTDynamicCast(v10, 0, &IEntity__RTTI_Type_Descriptor_, &IMovingEntity__RTTI_Type_Descriptor_, 0);
-  v12 = result;
-  if ( !result )
-    return result;
-  if ( a4 )
-    v11 = 0;
-  else
-    v11 = 4;
-  v9 = v11;
-  v5 = IAIEnvironment::PackXYFast(a2, a3);
-  v8 = CEntityEvent::CEntityEvent((CEntityEvent *)v6, 0x11u, 13, v11, v5, 0);
-  v7 = v8;
-  v13 = 0;
-  (*(void (__thiscall **)(int, CEntityEvent *))(*(_DWORD *)v12 + 80))(v12, v8);
-  v13 = -1;
-  return CEntityEvent::~CEntityEvent(v6);
+  v9 = (void **)CMapObjectMgr::EntityPtr(a1);
+  v11 = (IEntity *)j____RTDynamicCast(v9, 0, &IEntity__RTTI_Type_Descriptor_, &IMovingEntity__RTTI_Type_Descriptor_, 0);
+  if ( v11 )
+  {
+    if ( a4 )
+      v10 = 0;
+    else
+      v10 = 4;
+    v8 = v10;
+    v4 = IAIEnvironment::PackXYFast(a2, a3);
+    v7 = CEntityEvent::CEntityEvent(&v5, 0x11u, 13, v10, v4, 0);
+    v6 = v7;
+    v12 = 0;
+    v11->SetEvent(v11, v7);
+    v12 = -1;
+    CEntityEvent::~CEntityEvent(&v5);
+  }
 }
 
 
@@ -1547,14 +1546,14 @@ int __cdecl IAIEnvironment::GetNearestGreenBorderElement(int & a1, int & a2, int
 
 
 // address=[0x130cab0]
-// Decompiled from int __cdecl IAIEnvironment::GetNearestNoneBlockedPosition(Grid **a1, int *a2)
+// Decompiled from int __cdecl IAIEnvironment::GetNearestNoneBlockedPosition(int *a1, int *a2)
 int __cdecl IAIEnvironment::GetNearestNoneBlockedPosition(int & a1, int & a2) {
   
   int result; // eax
   int v3; // [esp+4h] [ebp-18h]
   int v4; // [esp+8h] [ebp-14h]
-  Grid *v5; // [esp+Ch] [ebp-10h]
-  int v6; // [esp+10h] [ebp-Ch]
+  int v5; // [esp+Ch] [ebp-10h]
+  unsigned int v6; // [esp+10h] [ebp-Ch]
   Grid *v7; // [esp+14h] [ebp-8h]
   int i; // [esp+18h] [ebp-4h]
 
@@ -1562,15 +1561,15 @@ int __cdecl IAIEnvironment::GetNearestNoneBlockedPosition(int & a1, int & a2) {
   v4 = *a2;
   for ( i = 0; i < 19825; ++i )
   {
-    v7 = (Grid *)((char *)v5 + CSpiralOffsets::DeltaX(i));
+    v7 = (Grid *)(v5 + CSpiralOffsets::DeltaX(i));
     v6 = v4 + CSpiralOffsets::DeltaY(i);
-    if ( (unsigned __int8)CWorldManager::InWorld((int)v7, v6) )
+    if ( CWorldManager::InWorld((unsigned int)v7, v6) )
     {
       v3 = CWorldManager::Index((int)v7, v6);
-      if ( !(unsigned __int8)CWorldManager::IsBlockedLand(v3) )
+      if ( !CWorldManager::IsBlockedLand(v3) )
       {
         result = Grid::Distance(v7, v6, *a1, *a2);
-        *a1 = v7;
+        *a1 = (int)v7;
         *a2 = v6;
         return result;
       }
@@ -1887,35 +1886,35 @@ int __cdecl IAIEnvironment::WorldCatapultSectorIdPackedXY(int a1) {
 
 
 // address=[0x132ee10]
-// Decompiled from bool __cdecl IAIEnvironment::WorldIsBlockedLand(struct _Cnd_internal_imp_t *a1, struct _Mtx_internal_imp_t *a2)
+// Decompiled from bool __cdecl IAIEnvironment::WorldIsBlockedLand(int a1, int a2)
 bool __cdecl IAIEnvironment::WorldIsBlockedLand(int a1, int a2) {
   
   int v2; // eax
 
-  v2 = IAIEnvironment::WorldIndex((int)a1, (int)a2);
+  v2 = IAIEnvironment::WorldIndex(a1, a2);
   return IAIEnvironment::WorldIsBlockedLand(v2);
 }
 
 
 // address=[0x132ee40]
-// Decompiled from void __cdecl IAIEnvironment::WorldIsBlockedLandPackedXY(struct _iobuf *a1)
+// Decompiled from bool __cdecl IAIEnvironment::WorldIsBlockedLandPackedXY(int a1)
 bool __cdecl IAIEnvironment::WorldIsBlockedLandPackedXY(int a1) {
   
   int v1; // eax
 
   v1 = IAIEnvironment::WorldIndexPackedXY(a1);
-  IAIEnvironment::WorldIsBlockedLand(v1);
+  return IAIEnvironment::WorldIsBlockedLand(v1);
 }
 
 
 // address=[0x132ee60]
-// Decompiled from void __cdecl IAIEnvironment::WorldOwnerIdPackedXY(struct _iobuf *a1)
+// Decompiled from int __cdecl IAIEnvironment::WorldOwnerIdPackedXY(int a1)
 int __cdecl IAIEnvironment::WorldOwnerIdPackedXY(int a1) {
   
   int v1; // eax
 
   v1 = IAIEnvironment::WorldIndexPackedXY(a1);
-  IAIEnvironment::WorldOwnerId(v1);
+  return IAIEnvironment::WorldOwnerId(v1);
 }
 
 

@@ -1175,7 +1175,7 @@ int  CWarriorBehavior::WarriorEvadeScan15a(class IMovingEntity & a2, int * a3) {
   CSectorSpiralWalk::CSectorSpiralWalk(
     (CSectorSpiralWalk *)v7,
     v21 + 6 * g_sNeighborPoints[2 * v16],
-    v22 + 6 * dword_37D8C0C[2 * v16],
+    v22 + 6 * MEMORY[0x37D8C0C][2 * v16],
     4,
     v10);
   if ( !CSectorSpiralWalk::NextXY((CSectorSpiralWalk *)v7, &v8, &v9) )

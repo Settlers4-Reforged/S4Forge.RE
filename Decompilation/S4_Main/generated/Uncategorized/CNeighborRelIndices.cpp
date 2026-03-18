@@ -12,7 +12,7 @@ void  CNeighborRelIndices::Init(int a2) {
 
   for ( i = 0; i < 6; ++i )
   {
-    v3 = g_sNeighborPoints[2 * i] + a2 * dword_37D8C0C[2 * i];
+    v3 = g_sNeighborPoints[2 * i] + a2 * MEMORY[0x37D8C0C][2 * i];
     *((_DWORD *)this + i) = v3;
     *((_DWORD *)this + i + 6) = v3;
     result = i + 1;

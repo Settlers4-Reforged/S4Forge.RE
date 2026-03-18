@@ -67,32 +67,32 @@ void  CAIPlayerAI::PostAIEvent(int a2, int a3, int a4, int a5) {
 
 
 // address=[0x13176b0]
-// Decompiled from CAIPlayerAI *__thiscall CAIPlayerAI::CAIPlayerAI(CAIPlayerAI *this, int a2, bool a3)
+// Decompiled from CAIPlayerAI *__thiscall CAIPlayerAI::CAIPlayerAI(CAIPlayerAI *this, DWORD a2, bool a3)
  CAIPlayerAI::CAIPlayerAI(int a2, bool a3) {
   
-  IAIUnknown::IAIUnknown((IAIUnknown *)this);
-  IS4ChunkObject::IS4ChunkObject((IS4ChunkObject *)this + 1);
-  *(_DWORD *)this = CAIPlayerAI::_vftable_;
-  *((_DWORD *)this + 1) = &CAIPlayerAI::`vftable';
-  *((_BYTE *)this + 8) = a3;
-  *((_DWORD *)this + 3) = a2;
-  *((_DWORD *)this + 4) = IAIEnvironment::PlayerRace(a2);
-  *((_DWORD *)this + 5) = (&off_3D7A4E0)[*((_DWORD *)this + 4)];
-  *((_DWORD *)this + 6) = *(&off_3D7A50C + *((_DWORD *)this + 4));
-  CAIScheduler::CAIScheduler((CAIScheduler *)((char *)this + 28));
-  TAIStaticPtrVector<CAISectorAI,8>::TAIStaticPtrVector<CAISectorAI,8>((char *)this + 72);
-  CAIEventQueue::CAIEventQueue((CAIPlayerAI *)((char *)this + 108));
-  CAITaskForceReservoir::CAITaskForceReservoir((CAIPlayerAI *)((char *)this + 132), a2);
-  CAITaskForceReservoir::CAITaskForceReservoir((CAIPlayerAI *)((char *)this + 212), a2);
-  CAITaskForceReservoir::CAITaskForceReservoir((CAIPlayerAI *)((char *)this + 292), a2);
-  CAITaskForceReservoir::CAITaskForceReservoir((CAIPlayerAI *)((char *)this + 372), a2);
-  CAITaskForceReservoir::CAITaskForceReservoir((CAIPlayerAI *)((char *)this + 452), a2);
+  IAIUnknown::IAIUnknown(this);
+  IS4ChunkObject::IS4ChunkObject(&this->IS4ChunkObject);
+  this->IAIUnknown::__vftable = (IAIUnknown_vtbl *)CAIPlayerAI::_vftable_;
+  this->IS4ChunkObject::__vftable = (IS4ChunkObject_vtbl *)&CAIPlayerAI::`vftable';
+  this->m_bU = a3;
+  this->m_uU = a2;
+  this->m_iRace = IAIEnvironment::PlayerRace(a2);
+  this->m_pRaceBasedTable1 = off_3D7A4E0[this->m_iRace];
+  this->m_pRaceBasedTable2 = off_3D7A50C[this->m_iRace];
+  CAIScheduler::CAIScheduler(&this->m_cScheduler);
+  TAIStaticPtrVector<CAISectorAI,8>::TAIStaticPtrVector<CAISectorAI,8>(&this[1]);
+  CAIEventQueue::CAIEventQueue((std::bad_function_call *)&this[1].m_cScheduler.m_uDefaultExecutionDelay);
+  CAITaskForceReservoir::CAITaskForceReservoir((CAITaskForceReservoir *)&this[1].m_cScheduler.m_spName, a2);
+  CAITaskForceReservoir::CAITaskForceReservoir((CAITaskForceReservoir *)&this[2].m_cScheduler.m_pFirstAgent, a2);
+  CAITaskForceReservoir::CAITaskForceReservoir((CAITaskForceReservoir *)&this[4].IS4ChunkObject, a2);
+  CAITaskForceReservoir::CAITaskForceReservoir((CAITaskForceReservoir *)&this[5].m_uU, a2);
+  CAITaskForceReservoir::CAITaskForceReservoir((CAITaskForceReservoir *)&this[6].m_pRaceBasedTable1, a2);
   CAIAgentGlobalSuicideMission::CAIAgentGlobalSuicideMission(
-    (CAIAgentGlobalSuicideMission *)((char *)this + 532),
+    (CAIAgentGlobalSuicideMission *)&this[7].m_cScheduler,
     "global suicide");
-  CAITaskForceSquad::CAITaskForceSquad((char *)this + 572, a2, 4, 0);
-  CAIAgentPlayerBase::AttachPlayerAI((CAIAgentPlayerBase *)((char *)this + 532), this);
-  CAIScheduler::AddAgent((CAIScheduler *)((char *)this + 28), (CAIAgent *)((char *)this + 532), 150, 256, 8);
+  CAITaskForceSquad::CAITaskForceSquad(&this[7].m_cScheduler.m_pFirstAgent, a2, 4, 0);
+  CAIAgentPlayerBase::AttachPlayerAI((CAIAgentPlayerBase *)&this[7].m_cScheduler, this);
+  CAIScheduler::AddAgent(&this->m_cScheduler, &this[7].m_cScheduler, 150, 256, 8);
   return this;
 }
 

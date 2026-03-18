@@ -932,7 +932,7 @@ int __cdecl CScanner::IsNearMyLand(int a1, int a2, int a3) {
     for ( j = 0; j < 6; ++j )
     {
       v8 = g_sNeighborPoints[2 * j];
-      v7 = dword_37D8C0C[2 * j];
+      v7 = MEMORY[0x37D8C0C][2 * j];
       v15 = (Grid *)a2;
       v16 = a3;
       for ( k = 0; k < 4; ++k )

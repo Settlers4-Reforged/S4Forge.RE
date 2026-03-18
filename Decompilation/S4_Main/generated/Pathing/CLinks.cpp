@@ -3,27 +3,22 @@
 // Definitions for class CLinks
 
 // address=[0x15e3cf0]
-// Decompiled from int CLinks::InitLinks()
+// Decompiled from void CLinks::InitLinks()
 void __cdecl CLinks::InitLinks(void) {
   
-  int result; // eax
   int i; // [esp+0h] [ebp-4h]
 
-  CLinks::m_cLinks[0] = -1024;
+  CLinks::m_cLinks[0].m_uData = 0;
+  CLinks::m_cLinks[0].? = 252;
   CLinks::m_cLinks[1] = 0;
-  LOBYTE(CLinks::m_cLinks[262142]) = 0;
-  HIBYTE(CLinks::m_cLinks[262142]) = -2;
-  result = 0;
+  CLinks::m_cLinks[0x3FFFE].m_uData = 0;
+  CLinks::m_cLinks[0x3FFFE].? = 254;
   CLinks::m_cLinks[0x3FFFF] = 0;
-  for ( i = 2; i <= 262141; ++i )
-  {
-    result = i;
-    CLinks::m_cLinks[i] = -256;
-  }
+  for ( i = 2; i <= 0x3FFFD; ++i )
+    CLinks::m_cLinks[i] = (CLink)0xFF00;
   CLinks::m_iLinksPushBackMode = 1;
   CLinks::m_iMinFreeLinksId = 2;
   CLinks::m_iMaxUsedLinksId = 2;
-  return result;
 }
 
 
@@ -140,7 +135,7 @@ bool __cdecl CLinks::IsValidUsedLinkList(class CLinkList const & a1) {
 
 
 // address=[0x15e7250]
-// Decompiled from __int16 *__cdecl CLinks::Link(int a1)
+// Decompiled from CLink *__cdecl CLinks::Link(int a1)
 class CLink const & __cdecl CLinks::Link(int a1) {
   
   return &CLinks::m_cLinks[a1];
@@ -148,10 +143,10 @@ class CLink const & __cdecl CLinks::Link(int a1) {
 
 
 // address=[0x15e7270]
-// Decompiled from __int16 *__cdecl CLinks::LinkList(int a1)
+// Decompiled from struct CLinkList *__cdecl CLinks::LinkList(int a1)
 class CLinkList & __cdecl CLinks::LinkList(int a1) {
   
-  return &CLinks::m_cLinks[a1];
+  return (struct CLinkList *)&CLinks::m_cLinks[a1];
 }
 
 
@@ -187,22 +182,21 @@ void __cdecl CLinks::LinkListMarkAsUnused(class CLinkList & a1) {
 
 
 // address=[0x15e4140]
-// Decompiled from int __cdecl CLinks::LinkListPushLinkTileId(struct CLinkList *a1, int a2)
-void __cdecl CLinks::LinkListPushLinkTileId(class CLinkList & a1, int a2) {
+// Decompiled from void __cdecl CLinks::LinkListPushLinkTileId(struct CLinkList *_rLinkList, int _iLinkTileId)
+void __cdecl CLinks::LinkListPushLinkTileId(class CLinkList & _rLinkList, int _iLinkTileId) {
   
   CLink *v2; // eax
   CLink *v3; // eax
-  int result; // eax
-  int v5; // [esp+0h] [ebp-14h]
-  int v6; // [esp+Ch] [ebp-8h]
-  int v7; // [esp+10h] [ebp-4h]
+  int v4; // [esp+0h] [ebp-14h]
+  int iLinksId; // [esp+Ch] [ebp-8h]
+  int iOldSize; // [esp+10h] [ebp-4h]
 
-  if ( CLinkList::SearchForLinkTileId(a1, a2)
+  if ( CLinkList::SearchForLinkTileId(_rLinkList, _iLinkTileId)
     && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 910, "!_rLinkList.SearchForLinkTileId(_iLinkTileId)") == 1 )
   {
     __debugbreak();
   }
-  if ( CLinks::m_iMaxUsedLinksId < 2
+  if ( CLinks::m_iMaxUsedLinksId < LINK_FIRST_REAL
     && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 912, "m_iMaxUsedLinksId >= LINK_FIRST_REAL") == 1 )
   {
     __debugbreak();
@@ -223,10 +217,13 @@ void __cdecl CLinks::LinkListPushLinkTileId(class CLinkList & a1, int a2) {
   {
     __debugbreak();
   }
-  v7 = CLinkList::Size((unsigned __int8 *)a1);
-  if ( v7 + 1 >= 62 && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 921, "(iOldSize + 1) < LINK_LIST_MAX") == 1 )
+  iOldSize = CLinkList::Size(_rLinkList);
+  if ( iOldSize + 1 >= 62
+    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 921, "(iOldSize + 1) < LINK_LIST_MAX") == 1 )
+  {
     __debugbreak();
-  if ( *((unsigned __int16 *)a1 + v7 + 2) != 65280
+  }
+  if ( _rLinkList->m_uLinkTileIds[iOldSize].m_uData != 65280
     && BBSupportDbgReport(
          2,
          "Pathing\\TilesAndLinks.cpp",
@@ -235,11 +232,11 @@ void __cdecl CLinks::LinkListPushLinkTileId(class CLinkList & a1, int a2) {
   {
     __debugbreak();
   }
-  *(_BYTE *)a1 = v7 + 1;
-  *((_WORD *)a1 + v7 + 2) = a2;
-  v6 = CLinks::LinksId(a1);
-  v5 = v7 + (((_BYTE)v7 + 1) & 1) + 3;
-  if ( (v6 > 262141 || v6 < 2)
+  _rLinkList->m_uSize = iOldSize + 1;
+  _rLinkList->m_uLinkTileIds[iOldSize].m_uData = _iLinkTileId;
+  iLinksId = CLinks::LinksId(_rLinkList);
+  v4 = iOldSize + (((_BYTE)iOldSize + 1) & 1) + 3;
+  if ( (iLinksId > 262141 || iLinksId < 2)
     && BBSupportDbgReport(
          2,
          "Pathing\\TilesAndLinks.cpp",
@@ -248,8 +245,8 @@ void __cdecl CLinks::LinkListPushLinkTileId(class CLinkList & a1, int a2) {
   {
     __debugbreak();
   }
-  if ( v5 + v6 >= CLinks::m_iMaxUsedLinksId )
-    CLinks::m_iMaxUsedLinksId = v5 + v6;
+  if ( v4 + iLinksId >= CLinks::m_iMaxUsedLinksId )
+    CLinks::m_iMaxUsedLinksId = v4 + iLinksId;
   if ( CLinks::m_iMaxUsedLinksId < 2
     && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 939, "m_iMaxUsedLinksId >= LINK_FIRST_REAL") == 1 )
   {
@@ -266,13 +263,11 @@ void __cdecl CLinks::LinkListPushLinkTileId(class CLinkList & a1, int a2) {
     __debugbreak();
   }
   v3 = CLinks::Link(CLinks::m_iMaxUsedLinksId);
-  LOBYTE(result) = CLink::Used(v3);
-  if ( !(_BYTE)result )
-    return result;
-  result = BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 942, "!Link(m_iMaxUsedLinksId).Used()");
-  if ( result == 1 )
+  if ( CLink::Used(v3)
+    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 942, "!Link(m_iMaxUsedLinksId).Used()") == 1 )
+  {
     __debugbreak();
-  return result;
+  }
 }
 
 
@@ -619,7 +614,7 @@ void __cdecl CLinks::CheckLinksInfo(void) {
 // Decompiled from int __cdecl CLinks::LinksId(const struct CLinkList *a1)
 int __cdecl CLinks::LinksId(class CLinkList const & a1) {
   
-  return (a1 - (const struct CLinkList *)CLinks::m_cLinks) >> 1;
+  return ((char *)a1 - (char *)CLinks::m_cLinks) >> 1;
 }
 
 

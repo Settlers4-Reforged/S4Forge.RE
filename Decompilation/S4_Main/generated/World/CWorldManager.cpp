@@ -926,7 +926,7 @@ void __cdecl CWorldManager::Destruct(void) {
 
 
 // address=[0x16a26d0]
-// Decompiled from char __cdecl CWorldManager::LoadMap(struct S4::CMapFile *a1, int a2)
+// Decompiled from char __cdecl CWorldManager::LoadMap(struct S4::CMapFile *a1, struct T_GFX_MAP_ELEMENT *a2)
 bool __cdecl CWorldManager::LoadMap(class S4::CMapFile & a1, int a2) {
   
   __int16 v2; // ax
@@ -934,10 +934,10 @@ bool __cdecl CWorldManager::LoadMap(class S4::CMapFile & a1, int a2) {
   int i; // [esp+Ch] [ebp-10h]
   int v6; // [esp+18h] [ebp-4h]
 
-  CWorldManager::Construct(a2);
+  CWorldManager::Construct((int)a2);
   TMap<unsigned char>::TMap<unsigned char>(&v4);
   v6 = 0;
-  TMap<unsigned char>::Init(CWorldManager::m_iWidthHeight);
+  TMap<unsigned char>::Init((void **)&v4, CWorldManager::m_iWidthHeight);
   TMap<unsigned char>::LoadMap((void **)&v4, a1, 0xD2u, CWorldManager::m_iWidthHeight);
   for ( i = 0; i < CWorldManager::m_iWorldIdxMax; ++i )
   {
@@ -948,7 +948,7 @@ bool __cdecl CWorldManager::LoadMap(class S4::CMapFile & a1, int a2) {
   v6 = -1;
   TMap<unsigned char>::~TMap<unsigned char>();
   memset(CWorldManager::m_cCatapultTileIdMap, 0, 2 * CWorldManager::m_iWorldIdxMax);
-  TMap<T_GFX_MAP_ELEMENT>::LoadMap(a1, 200, CWorldManager::m_iWidthHeight);
+  TMap<T_GFX_MAP_ELEMENT>::LoadMap((void **)&CWorldManager::m_cRenderMap, a1, 0xC8u, CWorldManager::m_iWidthHeight);
   TMap<unsigned char>::LoadMap((void **)&CWorldManager::m_cFlagMap, a1, 0xCDu, CWorldManager::m_iWidthHeight);
   TMap<unsigned short>::LoadMap((void **)&CWorldManager::m_cMapObjectMap, a1, 0xCAu, CWorldManager::m_iWidthHeight);
   TMap<unsigned short>::LoadMap((void **)&CWorldManager::m_cDecoObjectMap, a1, 0xC9u, CWorldManager::m_iWidthHeight);
@@ -959,7 +959,14 @@ bool __cdecl CWorldManager::LoadMap(class S4::CMapFile & a1, int a2) {
     0xD1u,
     CWorldManager::m_iWidthHeight);
   TSparseMap<unsigned char>::LoadMap((void *)CWorldManager::m_pHelpObjectMap, a1, 0xCCu);
-  (**(void (__cdecl ***)(int))g_pTiling)(a2);
+  g_pTiling->Init(
+    g_pTiling,
+    a2,
+    (unsigned __int8 *)CWorldManager::m_cRenderMap,
+    (unsigned __int16 *)CWorldManager::m_cFlagMap,
+    (unsigned __int16 *)CWorldManager::m_cNormalTileIdMap,
+    (unsigned __int8 *)CWorldManager::m_cCatapultTileIdMap,
+    CWorldManager::m_cFogMap);
   return 1;
 }
 

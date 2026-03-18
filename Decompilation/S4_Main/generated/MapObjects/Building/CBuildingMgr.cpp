@@ -682,7 +682,7 @@ int  CBuildingMgr::GetNumberOfBuildings(int _iOwnerId, int _iBuildingType, int _
   {
     __debugbreak();
   }
-  if ( (_iBuildingType <= 0 || _iBuildingType >= 0x53)
+  if ( (_iBuildingType <= BUILDING_NO_BUILDING || _iBuildingType >= BUILDING_MAX)
     && BBSupportDbgReport(
          2,
          "MapObjects\\Building\\BuildingMgr.cpp",
@@ -2605,7 +2605,7 @@ LABEL_50:
       for ( m = 0; m < 2; ++m )
       {
         v28 = g_sNeighborPoints[2 * v62] + a2;
-        v29 = dword_37D8C0C[2 * v62] + a3;
+        v29 = MEMORY[0x37D8C0C][2 * v62] + a3;
         if ( (int)CBuildingMgr::CheckForBuildWater(v27, v28, v29, a4, a5, v30) > 0 )
         {
           v65 = -1;

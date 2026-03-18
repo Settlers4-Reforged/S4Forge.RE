@@ -191,7 +191,7 @@ int  CWalkingShip::IdleWalk(int a2, int a3) {
     v19 = Y16X16::DirectionFast(a2, *((_DWORD *)this + 7));
     v7 = Y16X16::UnpackXFast((int)a2);
     v6 = Y16X16::UnpackYFast((int)a2);
-    v5 = CWorldManager::Index(g_sNeighborPoints[2 * v19] + v7, dword_37D8C0C[2 * v19] + v6);
+    v5 = CWorldManager::Index(g_sNeighborPoints[2 * v19] + v7, MEMORY[0x37D8C0C][2 * v19] + v6);
     if ( (*(unsigned __int8 (__thiscall **)(CWalkingShip *, int))(*(_DWORD *)this + 20))(this, v5) )
     {
       *((_DWORD *)this + 12) |= 0x20000u;

@@ -154,7 +154,7 @@ protected:
     static void __cdecl BlockedLandSurroundingCheck(int a1, int a2);
 
     // address=[0x15ecb50]
-    virtual void  Init(int a2, struct T_GFX_MAP_ELEMENT * a3, unsigned char * a4, unsigned short * a5, unsigned short * a6, unsigned char * a7, bool a8);
+    virtual void  Init(int iWorldWidthHeight, struct T_GFX_MAP_ELEMENT * pGfxMapElements, unsigned char * pFlagBitsLayer, unsigned short * _pNormalTileIds, unsigned short * _pCatapultTileIds, unsigned char * pFogLayer, bool a8);
 
     // address=[0x15ece80]
     virtual void  Done(void);

@@ -17,41 +17,42 @@ unsigned int  CAIAgentGlobalSuicideMission::Execute(unsigned int a2, unsigned in
   int v11; // [esp+8h] [ebp-2Ch]
   int v12; // [esp+Ch] [ebp-28h] BYREF
   int v13; // [esp+10h] [ebp-24h] BYREF
-  pairNode *v14; // [esp+14h] [ebp-20h]
+  struct CAIPlayerAI *v14; // [esp+14h] [ebp-20h]
   int v16; // [esp+1Ch] [ebp-18h]
   struct _Cnd_internal_imp_t *v17; // [esp+20h] [ebp-14h] BYREF
   struct _Mtx_internal_imp_t *v18; // [esp+24h] [ebp-10h] BYREF
-  CUserToolsManager *v19; // [esp+28h] [ebp-Ch]
+  CUserToolsManager *p_m_pFirstAgent; // [esp+28h] [ebp-Ch]
   int iGoalId; // [esp+2Ch] [ebp-8h]
   bool v21; // [esp+31h] [ebp-3h]
   char v22; // [esp+32h] [ebp-2h]
   bool v23; // [esp+33h] [ebp-1h]
 
   v14 = CAIAgentPlayerBase::PlayerAI(this);
-  v19 = (pairNode *)((char *)v14 + 572);
-  if ( CAITaskForce::NumberOfEntities((pairNode *)((char *)v14 + 572)) > 0 )
+  p_m_pFirstAgent = (CUserToolsManager *)&v14[7].m_cScheduler.m_pFirstAgent;
+  if ( CAITaskForce::NumberOfEntities((pairNode *)&v14[7].m_cScheduler.m_pFirstAgent) > 0 )
   {
     v22 = 0;
-    CAITaskForce::GetPositionOfFirstEntity(v19, (int *)&v17, (int *)&v18);
+    CAITaskForce::GetPositionOfFirstEntity((CAITaskForce *)p_m_pFirstAgent, (int *)&v17, (int *)&v18);
     v11 = IAIEnvironment::WorldSectorId((int)v17, (int)v18);
     iGoalId = 0;
     v16 = 0x4000;
-    v23 = CAITaskForce::Command(v19) == 4 && CAITaskForce::IsGoalValid(v19, 1);
+    v23 = CAITaskForce::Command((CAITaskForce *)p_m_pFirstAgent) == 4
+       && CAITaskForce::IsGoalValid((CAITaskForce *)p_m_pFirstAgent, 1);
     v21 = v23;
     if ( v23 )
     {
-      iGoalId = CAITaskForce::CmdGoal(v19);
+      iGoalId = CAITaskForce::CmdGoal((CAITaskForce *)p_m_pFirstAgent);
       if ( iGoalId <= 0 && BBSupportDbgReport(2, "AI\\AI_AgentsPlayer.cpp", 113, "iGoalId > 0") == 1 )
         __debugbreak();
       if ( IAIEnvironment::EntityIsAliveAndOfGivenWarriorType(iGoalId, 12) )
       {
         IAIEnvironment::BuildingGetEnsignPosition(iGoalId, &v12, &v13);
-        v16 = IAIEnvironment::GridDistance((Grid *)(v12 - (_DWORD)v17), v13 - (_DWORD)v18);
+        v16 = IAIEnvironment::GridDistance(v12 - (_DWORD)v17, v13 - (_DWORD)v18);
       }
     }
     if ( v16 > 10 )
     {
-      v5 = CAIPlayerAI::PlayerId(v14);
+      v5 = CAIPlayerAI::PlayerId((pairNode *)v14);
       if ( CScanner::FindNearestEnemyTowerInSector((struct SFindNearestResult *)&v9, (int)v17, (int)v18, 32, v5) )
       {
         if ( v9 <= 0 && BBSupportDbgReport(2, "AI\\AI_AgentsPlayer.cpp", 132, "sResult.m_iEntityId > 0") == 1 )
@@ -86,14 +87,22 @@ unsigned int  CAIAgentGlobalSuicideMission::Execute(unsigned int a2, unsigned in
     if ( iGoalId <= 0 )
     {
       v7 = IAIEnvironment::PackXYFast((int)v17, (int)v18);
-      (*(void (__thiscall **)(CUserToolsManager *, int, int, _DWORD))(*(_DWORD *)v19 + 32))(v19, 1, v7, 0);
+      (*(void (__thiscall **)(CUserToolsManager *, int, int, _DWORD))(*(_DWORD *)p_m_pFirstAgent + 32))(
+        p_m_pFirstAgent,
+        1,
+        v7,
+        0);
     }
-    else if ( CAITaskForce::Command(v19) != 4
-           || (v6 = CAITaskForce::CmdGoal(v19), v6 != iGoalId)
-           || ((unsigned int)&unk_4000000 & CAITaskForce::Flags(v19)) != 0
-           || a2 >= CAITaskForce::CmdTimeStamp(v19) + 1000 )
+    else if ( CAITaskForce::Command((CAITaskForce *)p_m_pFirstAgent) != 4
+           || (v6 = CAITaskForce::CmdGoal((CAITaskForce *)p_m_pFirstAgent), v6 != iGoalId)
+           || ((unsigned int)&unk_4000000 & CAITaskForce::Flags((CAITaskForce *)p_m_pFirstAgent)) != 0
+           || a2 >= CAITaskForce::CmdTimeStamp(p_m_pFirstAgent) + 1000 )
     {
-      (*(void (__thiscall **)(CUserToolsManager *, int, int, _DWORD))(*(_DWORD *)v19 + 32))(v19, 4, iGoalId, 0);
+      (*(void (__thiscall **)(CUserToolsManager *, int, int, _DWORD))(*(_DWORD *)p_m_pFirstAgent + 32))(
+        p_m_pFirstAgent,
+        4,
+        iGoalId,
+        0);
     }
     if ( v22 )
     {

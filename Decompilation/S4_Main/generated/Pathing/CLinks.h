@@ -34,7 +34,7 @@ protected:
     static void __cdecl LinkListMarkAsUnused(class CLinkList & a1);
 
     // address=[0x15e4140]
-    static void __cdecl LinkListPushLinkTileId(class CLinkList & a1, int a2);
+    static void __cdecl LinkListPushLinkTileId(class CLinkList & _rLinkList, int _iLinkTileId);
 
     // address=[0x15e4410]
     static bool __cdecl LinkListRemoveLinkTileId(class CLinkList & a1, int a2);

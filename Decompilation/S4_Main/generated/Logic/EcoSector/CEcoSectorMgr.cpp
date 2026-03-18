@@ -1126,7 +1126,7 @@ void __cdecl CEcoSectorMgr::FillGoodAmount(class CInfoExchange * a1, bool a2, bo
   int LocalPlayerEcoSectorPtrAtCenter; // [esp+18h] [ebp-3Ch]
   int j; // [esp+1Ch] [ebp-38h]
   int i; // [esp+20h] [ebp-34h]
-  int k; // [esp+24h] [ebp-30h]
+  S4_GOOD_ENUM k; // [esp+24h] [ebp-30h]
   CEvn_Event v11; // [esp+2Ch] [ebp-28h] BYREF
   int v12; // [esp+50h] [ebp-4h]
 
@@ -1169,13 +1169,10 @@ void __cdecl CEcoSectorMgr::FillGoodAmount(class CInfoExchange * a1, bool a2, bo
     else
     {
       LocalPlayerId = CPlayerManager::GetLocalPlayerId();
-      for ( k = 1; k < 43; ++k )
+      for ( k = 1; k < GOOD_MAX; ++k )
       {
         *(&a1->m_iUnknown + 2 * k) = k;
-        *((_DWORD *)&a1->m_bOverEcoSector + 2 * k) = CStatistic::GetGood(
-                                                       (CStatistic *)&g_cStatistic,
-                                                       LocalPlayerId,
-                                                       (S4_GOOD_ENUM)k);
+        *((_DWORD *)&a1->m_bOverEcoSector + 2 * k) = CStatistic::GetGood((CStatistic *)&g_cStatistic, LocalPlayerId, k);
       }
     }
     a1->m_iUnknown = 32;

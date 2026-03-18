@@ -12,15 +12,15 @@
 
 
 // address=[0x132bfc0]
-// Decompiled from _DWORD *__thiscall CAITaskForceSquad::CAITaskForceSquad(_DWORD *this, int a2, int a3, int a4)
+// Decompiled from CAITaskForceSquad *__thiscall CAITaskForceSquad::CAITaskForceSquad(CAITaskForceSquad *this, int a2, int a3, int a4)
  CAITaskForceSquad::CAITaskForceSquad(int a2, enum T_AI_TASK_FORCE_TYPE a3, int a4) {
   
-  CAITaskForceEx::CAITaskForceEx(this, a2, 2, a3, a4);
-  *this = CAITaskForceSquad::_vftable_;
-  this[24] = 0;
-  this[25] = 0;
-  this[26] = 0;
-  this[27] = 0;
+  CAITaskForceEx::CAITaskForceEx((CAITaskForceEx *)this, a2, 2, a3, a4);
+  *(_DWORD *)this = CAITaskForceSquad::_vftable_;
+  *((_DWORD *)this + 0x18) = 0;
+  *((_DWORD *)this + 25) = 0;
+  *((_DWORD *)this + 26) = 0;
+  *((_DWORD *)this + 27) = 0;
   return this;
 }
 

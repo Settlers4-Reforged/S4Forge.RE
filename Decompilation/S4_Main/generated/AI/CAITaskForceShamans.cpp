@@ -3,10 +3,10 @@
 // Definitions for class CAITaskForceShamans
 
 // address=[0x132a1c0]
-// Decompiled from CAITaskForceShamans *__thiscall CAITaskForceShamans::CAITaskForceShamans(CAITaskForceShamans *this, int a2, int a3)
- CAITaskForceShamans::CAITaskForceShamans(int a2, int a3) {
+// Decompiled from CAITaskForceShamans *__thiscall CAITaskForceShamans::CAITaskForceShamans(  CAITaskForceShamans *this,  int iOwnerId,  int iFlags)
+ CAITaskForceShamans::CAITaskForceShamans(int iOwnerId, int iFlags) {
   
-  CAITaskForceEx::CAITaskForceEx(this, a2, 7, 12, a3);
+  CAITaskForceEx::CAITaskForceEx(this, iOwnerId, 7, 12, iFlags);
   *(_DWORD *)this = CAITaskForceShamans::_vftable_;
   return this;
 }

@@ -29,6 +29,13 @@ public:
     // address=[0x1319b30]
     int  Type(void)const;
 
+    // Type information members
+public:
+    int m_iType;
+    int m_iX;
+    int m_iY;
+    int m_iDark;
+
 };
 
 

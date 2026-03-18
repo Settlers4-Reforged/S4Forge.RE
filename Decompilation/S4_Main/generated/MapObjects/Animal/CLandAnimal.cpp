@@ -575,7 +575,7 @@ int  CLandAnimal::GetMoveDir(void) {
     for ( j = 0; j < 3; ++j )
     {
       v24 = (Grid *)Grid::TurnRight(v24);
-      v34 = CWorldManager::Index(g_sNeighborPoints[2 * (_DWORD)v24] + v18, dword_37D8C0C[2 * (_DWORD)v24] + v17);
+      v34 = CWorldManager::Index(g_sNeighborPoints[2 * (_DWORD)v24] + v18, MEMORY[0x37D8C0C][2 * (_DWORD)v24] + v17);
       if ( CLandAnimal::CheckTile(this, v34) )
         CPossibleDirs::PushDir((CPossibleDirs *)v38, v24);
     }
@@ -584,7 +584,7 @@ int  CLandAnimal::GetMoveDir(void) {
   {
     for ( k = 0; k < 6; ++k )
     {
-      v35 = CWorldManager::Index(g_sNeighborPoints[2 * k] + v18, dword_37D8C0C[2 * k] + v17);
+      v35 = CWorldManager::Index(g_sNeighborPoints[2 * k] + v18, MEMORY[0x37D8C0C][2 * k] + v17);
       if ( CLandAnimal::IsTileFree(this, v35) )
       {
         v10 = (CWalking *)std::auto_ptr<CWalking>::operator->(v35);
@@ -678,7 +678,7 @@ int  CLandAnimal::GetTerritoryDir(void) {
   v7 = 0;
   for ( i = 0; i < 6; ++i )
   {
-    if ( CLandAnimal::IsValidSquare(this, g_sNeighborPoints[2 * i] + v4, dword_37D8C0C[2 * i] + v5) )
+    if ( CLandAnimal::IsValidSquare(this, g_sNeighborPoints[2 * i] + v4, MEMORY[0x37D8C0C][2 * i] + v5) )
       v9[++v7] = i;
   }
   if ( v7 <= 0 )
@@ -715,7 +715,7 @@ int  CLandAnimal::GetDirection(int a2) {
     return 0;
   for ( i = 0; i < 6; ++i )
   {
-    if ( v8 == g_sNeighborPoints[2 * i] && v7 == dword_37D8C0C[2 * i] )
+    if ( v8 == g_sNeighborPoints[2 * i] && v7 == MEMORY[0x37D8C0C][2 * i] )
       return i;
   }
   return -1;

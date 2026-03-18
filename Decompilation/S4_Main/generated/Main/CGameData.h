@@ -71,8 +71,7 @@ public:
     _BYTE byte28;
     _BYTE m_bFixedStartCamera;
     _BYTE[2] gap2A;
-    int m_sRandom;
-    _BYTE[4] gap30;
+    CRandom16Ex m_sRandom;
     _BYTE m_bIsGameWon;
     _BYTE[3] gap35;
     _DWORD m_iTeamWon;

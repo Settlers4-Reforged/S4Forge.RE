@@ -124,7 +124,7 @@ void  CAI_Ecosector_Grid_Iterator::FindStartPoint(void) {
   int result; // eax
   int TileOfSquareVW; // [esp+0h] [ebp-18h]
   int v3; // [esp+4h] [ebp-14h]
-  int v4; // [esp+8h] [ebp-10h]
+  char v4; // [esp+8h] [ebp-10h]
   unsigned __int8 j; // [esp+16h] [ebp-2h]
   unsigned __int8 i; // [esp+17h] [ebp-1h]
 

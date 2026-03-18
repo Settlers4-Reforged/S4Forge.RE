@@ -1,3 +1,4 @@
+#if FALSE
 #include "CTilingWorld.h"
 
 // Definitions for class CTilingWorld
@@ -6,7 +7,7 @@
 // Decompiled from int __cdecl CTilingWorld::WorldGroundType(int a1)
 int __cdecl CTilingWorld::WorldGroundType(int a1) {
   
-  return *(unsigned __int8 *)(CTilingWorld::m_pWorldGfxMapElements + 4 * a1 + 1);
+  return m_pWorldGfxMapElements[a1].m_uGroundType;
 }
 
 
@@ -98,7 +99,7 @@ int __cdecl CTilingWorld::WorldIsGroundTypeWater(int a1) {
 // Decompiled from bool __cdecl CTilingWorld::WorldIsWater(int a1)
 bool __cdecl CTilingWorld::WorldIsWater(int a1) {
   
-  return CLandscapeProperties::IsWater(*(unsigned __int8 *)(CTilingWorld::m_pWorldGfxMapElements + 4 * a1 + 1));
+  return CLandscapeProperties::IsWater(*(unsigned __int8 *)(m_pWorldGfxMapElements + 4 * a1 + 1));
 }
 
 
@@ -170,23 +171,20 @@ int __cdecl CTilingWorld::WorldWidthHeight(void) {
 // [Decompilation failed for static int * CTilingWorld::m_iWorldSurroundingRelIndices]
 
 // address=[0x15e75d0]
-// Decompiled from int __cdecl CTilingWorld::WorldInterfaceInit(  int a1,  struct T_GFX_MAP_ELEMENT *a2,  unsigned __int8 *a3,  unsigned __int8 *a4)
-void __cdecl CTilingWorld::WorldInterfaceInit(int a1, struct T_GFX_MAP_ELEMENT * a2, unsigned char * a3, unsigned char * a4) {
+// Decompiled from void __cdecl CTilingWorld::WorldInterfaceInit(  int _iWorldWidthHeight,  struct T_GFX_MAP_ELEMENT *_pGfxMapElements,  unsigned __int8 *_pFlagBitsLayer,  unsigned __int8 *_pFogLayer)
+void __cdecl CTilingWorld::WorldInterfaceInit(int _iWorldWidthHeight, struct T_GFX_MAP_ELEMENT * _pGfxMapElements, unsigned char * _pFlagBitsLayer, unsigned char * _pFogLayer) {
   
-  int v4; // ecx
-  int v5; // edx
-  int result; // eax
-  int v7; // esi
-  int v8; // [esp+4h] [ebp-Ch]
+  int v4; // esi
+  int v5; // [esp+4h] [ebp-Ch]
   int j; // [esp+8h] [ebp-8h]
   int i; // [esp+Ch] [ebp-4h]
 
-  if ( a1 < 16
+  if ( _iWorldWidthHeight < 16
     && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 317, "_iWorldWidthHeight >= Squares::SQUARE_WIDTH_HEIGHT") == 1 )
   {
     __debugbreak();
   }
-  if ( a1 > 1024
+  if ( _iWorldWidthHeight > 1024
     && BBSupportDbgReport(
          2,
          "Pathing\\Tiling.cpp",
@@ -195,37 +193,35 @@ void __cdecl CTilingWorld::WorldInterfaceInit(int a1, struct T_GFX_MAP_ELEMENT *
   {
     __debugbreak();
   }
-  if ( a1 % 16
+  if ( _iWorldWidthHeight % 16
     && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 319, "(_iWorldWidthHeight % Squares::SQUARE_WIDTH_HEIGHT) == 0") == 1 )
   {
     __debugbreak();
   }
-  if ( !a2 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 321, "_pGfxMapElements != 0") == 1 )
+  if ( !_pGfxMapElements && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 321, "_pGfxMapElements != 0") == 1 )
     __debugbreak();
-  v4 = 0;
-  if ( !a3 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 322, "_pFlagBitsLayer != 0") == 1 )
+  if ( !_pFlagBitsLayer && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 322, "_pFlagBitsLayer != 0") == 1 )
     __debugbreak();
-  v5 = 0;
-  if ( !a4 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 323, "_pFogLayer != 0") == 1 )
+  if ( !_pFogLayer && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 323, "_pFogLayer != 0") == 1 )
     __debugbreak();
-  CTilingWorld::WorldInterfaceDone(v4, v5);
-  CTilingWorld::m_uWorldWidthHeight = a1;
-  CTilingWorld::m_uWorldSize = a1 * a1;
-  CTilingWorld::m_pWorldGfxMapElements = (int)a2;
-  CTilingWorld::m_pWorldFlagBitsLayer = (int)a3;
-  CTilingWorld::m_pWorldFogLayer = (int)a4;
+  CTilingWorld::WorldInterfaceDone();
+  CTilingWorld::m_uWorldWidthHeight = _iWorldWidthHeight;
+  CTilingWorld::m_uWorldSize = _iWorldWidthHeight * _iWorldWidthHeight;
+  m_pWorldGfxMapElements = _pGfxMapElements;
+  CTilingWorld::m_pWorldFlagBitsLayer = _pFlagBitsLayer;
+  CTilingWorld::m_pWorldFogLayer = _pFogLayer;
   for ( i = 0; i < 6; ++i )
   {
-    v8 = g_sNeighborPoints[2 * i] + dword_37D8C0C[2 * i] * a1;
-    CTilingWorld::m_iWorldNeighborRelIndices[i] = v8;
-    dword_42CF910[i] = v8;
+    v5 = g_sNeighborPoints[2 * i] + MEMORY[0x37D8C0C][2 * i] * _iWorldWidthHeight;
+    CTilingWorld::m_iWorldNeighborRelIndices[i] = v5;
+    dword_42CF910[i] = v5;
   }
-  CTilingWorld::m_iWorldSortedNeighborRelIndices[0] = -a1 - 1;
-  CTilingWorld::m_iWorldSortedNeighborRelIndices[1] = -a1;
+  CTilingWorld::m_iWorldSortedNeighborRelIndices[0] = -_iWorldWidthHeight - 1;
+  CTilingWorld::m_iWorldSortedNeighborRelIndices[1] = -_iWorldWidthHeight;
   CTilingWorld::m_iWorldSortedNeighborRelIndices[2] = -1;
   CTilingWorld::m_iWorldSortedNeighborRelIndices[3] = 1;
-  CTilingWorld::m_iWorldSortedNeighborRelIndices[4] = a1;
-  CTilingWorld::m_iWorldSortedNeighborRelIndices[5] = a1 + 1;
+  CTilingWorld::m_iWorldSortedNeighborRelIndices[4] = _iWorldWidthHeight;
+  CTilingWorld::m_iWorldSortedNeighborRelIndices[5] = _iWorldWidthHeight + 1;
   if ( CTilingWorld::m_iWorldSortedNeighborRelIndices[0] >= CTilingWorld::m_iWorldSortedNeighborRelIndices[1]
     && BBSupportDbgReport(
          2,
@@ -271,15 +267,12 @@ void __cdecl CTilingWorld::WorldInterfaceInit(int a1, struct T_GFX_MAP_ELEMENT *
   {
     __debugbreak();
   }
-  result = 0;
   for ( j = 0; j < 19; ++j )
   {
-    v7 = CSpiralOffsets::DeltaX(j);
-    CTilingWorld::m_iWorldSurroundingRelIndices[j] = a1 * CSpiralOffsets::DeltaY(j) + v7;
-    result = j + 1;
+    v4 = CSpiralOffsets::DeltaX(j);
+    CTilingWorld::m_iWorldSurroundingRelIndices[j] = _iWorldWidthHeight * CSpiralOffsets::DeltaY(j) + v4;
   }
   CTilingWorld::m_iWorldInterfaceInitialized = 1;
-  return result;
 }
 
 
@@ -292,45 +285,33 @@ void __cdecl CTilingWorld::WorldInterfaceDone(void) {
     CTilingWorld::m_iWorldInterfaceInitialized = 0;
     CTilingWorld::m_uWorldWidthHeight = 0;
     CTilingWorld::m_uWorldSize = 0;
-    CTilingWorld::m_pWorldGfxMapElements = 0;
+    m_pWorldGfxMapElements = 0;
     CTilingWorld::m_pWorldFlagBitsLayer = 0;
   }
 }
 
 
 // address=[0x15f5b00]
-// Decompiled from int __cdecl CTilingWorld::WorldClearBlockedLandFlag(int a1)
+// Decompiled from void __cdecl CTilingWorld::WorldClearBlockedLandFlag(int a1)
 void __cdecl CTilingWorld::WorldClearBlockedLandFlag(int a1) {
   
-  int result; // eax
-
-  result = a1 + CTilingWorld::m_pWorldFlagBitsLayer;
-  *(_BYTE *)(a1 + CTilingWorld::m_pWorldFlagBitsLayer) &= ~1u;
-  return result;
+  CTilingWorld::m_pWorldFlagBitsLayer[a1] &= ~1u;
 }
 
 
 // address=[0x15f5b30]
-// Decompiled from int __cdecl CTilingWorld::WorldClearGfxBorderstoneBit(int a1)
+// Decompiled from void __cdecl CTilingWorld::WorldClearGfxBorderstoneBit(int a1)
 void __cdecl CTilingWorld::WorldClearGfxBorderstoneBit(int a1) {
   
-  int result; // eax
-
-  result = a1;
-  *(_BYTE *)(CTilingWorld::m_pWorldGfxMapElements + 4 * a1 + 3) &= ~0x80u;
-  return result;
+  m_pWorldGfxMapElements[a1].m_uGfxBits &= ~0x80u;
 }
 
 
 // address=[0x15f5fd0]
-// Decompiled from int __cdecl CTilingWorld::WorldSetBlockedLandFlag(int a1)
+// Decompiled from void __cdecl CTilingWorld::WorldSetBlockedLandFlag(int a1)
 void __cdecl CTilingWorld::WorldSetBlockedLandFlag(int a1) {
   
-  int result; // eax
-
-  result = a1 + CTilingWorld::m_pWorldFlagBitsLayer;
-  *(_BYTE *)(a1 + CTilingWorld::m_pWorldFlagBitsLayer) |= 1u;
-  return result;
+  CTilingWorld::m_pWorldFlagBitsLayer[a1] |= 1u;
 }
 
 
@@ -341,8 +322,9 @@ void __cdecl CTilingWorld::WorldSetGfxBorderstoneBit(int a1) {
   int result; // eax
 
   result = a1;
-  *(_BYTE *)(CTilingWorld::m_pWorldGfxMapElements + 4 * a1 + 3) |= 0x80u;
+  m_pWorldGfxMapElements[a1].m_uGfxBits |= 0x80u;
   return result;
 }
 
 
+#endif // Already implemented

@@ -1,3 +1,4 @@
+#if FALSE
 #include "CAIEntityInfo.h"
 
 // Definitions for class CAIEntityInfo
@@ -27,10 +28,10 @@ class CAITaskForce *  CAIEntityInfo::TaskForce(void)const {
 
 
 // address=[0x1306910]
-// Decompiled from int __thiscall CAIEntityInfo::Prev(pairNode *this)
+// Decompiled from CAIEntityInfo *__thiscall CAIEntityInfo::Prev(CAIEntityInfo *this)
 class CAIEntityInfo *  CAIEntityInfo::Prev(void)const {
   
-  return *((_DWORD *)this + 3);
+  return this->m_pPrevEntity;
 }
 
 
@@ -54,7 +55,7 @@ void  CAIEntityInfo::SetTimeStamp(unsigned int a2) {
 // Decompiled from int __thiscall CAIEntityInfo::TargetId(CAIEntityInfo *this)
 int  CAIEntityInfo::TargetId(void)const {
   
-  return *((unsigned __int16 *)this + 1);
+  return (unsigned __int16)this->m_iTargetId;
 }
 
 
@@ -62,7 +63,7 @@ int  CAIEntityInfo::TargetId(void)const {
 // Decompiled from int __thiscall CAIEntityInfo::TimeStamp(CAIEntityInfo *this)
 unsigned int  CAIEntityInfo::TimeStamp(void)const {
   
-  return *((_DWORD *)this + 1);
+  return this->m_uTimeStamp;
 }
 
 
@@ -82,32 +83,25 @@ unsigned int  CAIEntityInfo::TimeStamp(void)const {
 
 
 // address=[0x130a8e0]
-// Decompiled from CAIEntityInfo *__thiscall CAIEntityInfo::~CAIEntityInfo(CAIEntityInfo *this)
+// Decompiled from void __thiscall CAIEntityInfo::~CAIEntityInfo(CAIEntityInfo *this)
  CAIEntityInfo::~CAIEntityInfo(void) {
   
-  CAIEntityInfo *result; // eax
-
-  if ( *((_DWORD *)this + 2) )
+  if ( this->m_pTaskForce )
   {
-    (*(void (__thiscall **)(_DWORD, CAIEntityInfo *))(**((_DWORD **)this + 2) + 24))(*((_DWORD *)this + 2), this);
-    *((_DWORD *)this + 2) = 0;
+    this->m_pTaskForce->RemoveEntity(this->m_pTaskForce, this);
+    this->m_pTaskForce = 0;
   }
-  if ( *((_DWORD *)this + 2) && BBSupportDbgReport(2, "AI\\AI_EntityInfo.cpp", 66, "m_pTaskForce == 0") == 1 )
+  if ( this->m_pTaskForce && BBSupportDbgReport(2, "AI\\AI_EntityInfo.cpp", 66, "m_pTaskForce == 0") == 1 )
     __debugbreak();
-  if ( *((_DWORD *)this + 3) && BBSupportDbgReport(2, "AI\\AI_EntityInfo.cpp", 67, "m_pPrevEntity == 0") == 1 )
+  if ( this->m_pPrevEntity && BBSupportDbgReport(2, "AI\\AI_EntityInfo.cpp", 67, "m_pPrevEntity == 0") == 1 )
     __debugbreak();
-  result = this;
-  if ( *((_DWORD *)this + 4) )
+  if ( this->m_pNextEntity && BBSupportDbgReport(2, "AI\\AI_EntityInfo.cpp", 68, "m_pNextEntity == 0") == 1 )
+    __debugbreak();
+  if ( this->m_pInfoEx )
   {
-    result = (CAIEntityInfo *)BBSupportDbgReport(2, "AI\\AI_EntityInfo.cpp", 68, "m_pNextEntity == 0");
-    if ( result == (CAIEntityInfo *)1 )
-      __debugbreak();
+    this->m_pInfoEx->vftable->dtor(this->m_pInfoEx, 1);
+    this->m_pInfoEx = 0;
   }
-  if ( !*((_DWORD *)this + 5) )
-    return result;
-  result = (CAIEntityInfo *)(***((int (__thiscall ****)(_DWORD, int))this + 5))(*((_DWORD *)this + 5), 1);
-  *((_DWORD *)this + 5) = 0;
-  return result;
 }
 
 
@@ -119,7 +113,7 @@ class CAIEntityInfoEx *  CAIEntityInfo::ExtendedInfo(enum T_AI_ENTITY_INFO_EX_CL
 
   if ( this->m_pInfoEx )
   {
-    if ( CAIEntityInfoEx::Class((unsigned __int8 *)this->m_pInfoEx) == a2 )
+    if ( CAIEntityInfoEx::Class(this->m_pInfoEx) == a2 )
       return this->m_pInfoEx;
     if ( BBSupportDbgReport(
            1,
@@ -141,3 +135,4 @@ class CAIEntityInfoEx *  CAIEntityInfo::ExtendedInfo(enum T_AI_ENTITY_INFO_EX_CL
 }
 
 
+#endif // Already implemented

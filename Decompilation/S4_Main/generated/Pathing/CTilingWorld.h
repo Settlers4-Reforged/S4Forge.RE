@@ -85,7 +85,7 @@ public:
 
 protected:
     // address=[0x15e75d0]
-    static void __cdecl WorldInterfaceInit(int a1, struct T_GFX_MAP_ELEMENT * a2, unsigned char * a3, unsigned char * a4);
+    static void __cdecl WorldInterfaceInit(int _iWorldWidthHeight, struct T_GFX_MAP_ELEMENT * _pGfxMapElements, unsigned char * _pFlagBitsLayer, unsigned char * _pFogLayer);
 
     // address=[0x15e7960]
     static void __cdecl WorldInterfaceDone(void);

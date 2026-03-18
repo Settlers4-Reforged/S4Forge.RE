@@ -147,12 +147,7 @@ bool  CBuildingInfoMgr::DbgCheckBuildingBits(int a2, int a3) {
   if ( !v46 )
   {
     v51 = 0;
-    BBSupportTracePrintF(
-      3,
-      "Invalid digging bits for building %i (%s) of race %i!",
-      a3,
-      (&MEMORY[0x377C0D4])[2 * a3],
-      a2);
+    BBSupportTracePrintF(3, "Invalid digging bits for building %i (%s) of race %i!", a3, (&off_377C0D4)[2 * a3], a2);
   }
   v37 = 1;
   if ( !v52[6] && (v52[52] < -15 || v52[53] > 15 || v52[54] < -15 || v52[55] > 15) )
@@ -162,7 +157,7 @@ bool  CBuildingInfoMgr::DbgCheckBuildingBits(int a2, int a3) {
       3,
       "Invalid size of bounding box for building %i (%s) of race %i!",
       a3,
-      (&MEMORY[0x377C0D4])[2 * a3],
+      (&off_377C0D4)[2 * a3],
       a2);
   }
   v45 = 1;
@@ -191,12 +186,7 @@ bool  CBuildingInfoMgr::DbgCheckBuildingBits(int a2, int a3) {
   if ( !v45 )
   {
     v51 = 0;
-    BBSupportTracePrintF(
-      3,
-      "Invalid bounding box for building %i (%s) of race %i!",
-      a3,
-      (&MEMORY[0x377C0D4])[2 * a3],
-      a2);
+    BBSupportTracePrintF(3, "Invalid bounding box for building %i (%s) of race %i!", a3, (&off_377C0D4)[2 * a3], a2);
   }
   if ( !v44 )
   {
@@ -205,7 +195,7 @@ bool  CBuildingInfoMgr::DbgCheckBuildingBits(int a2, int a3) {
       3,
       "Building bits out of range (-15..15) for building %i (%s) of race %i!",
       a3,
-      (&MEMORY[0x377C0D4])[2 * a3],
+      (&off_377C0D4)[2 * a3],
       a2);
   }
   v47 = 1;
@@ -239,12 +229,7 @@ bool  CBuildingInfoMgr::DbgCheckBuildingBits(int a2, int a3) {
   if ( !v47 )
   {
     v51 = 0;
-    BBSupportTracePrintF(
-      3,
-      "Invalid blocking bits for building %i (%s) of race %i!",
-      a3,
-      (&MEMORY[0x377C0D4])[2 * a3],
-      a2);
+    BBSupportTracePrintF(3, "Invalid blocking bits for building %i (%s) of race %i!", a3, (&off_377C0D4)[2 * a3], a2);
   }
   v49 = 1;
   v28 = v52[57];
@@ -286,7 +271,7 @@ bool  CBuildingInfoMgr::DbgCheckBuildingBits(int a2, int a3) {
   if ( !v49 )
   {
     v51 = 0;
-    BBSupportTracePrintF(3, "Invalid piles for building %i (%s) of race %i!", a3, (&MEMORY[0x377C0D4])[2 * a3], a2);
+    BBSupportTracePrintF(3, "Invalid piles for building %i (%s) of race %i!", a3, (&off_377C0D4)[2 * a3], a2);
   }
   v50 = 1;
   v38 = v52[38];
@@ -355,7 +340,7 @@ bool  CBuildingInfoMgr::DbgCheckBuildingBits(int a2, int a3) {
         v30,
         v31,
         a3,
-        (&MEMORY[0x377C0D4])[2 * a3],
+        (&off_377C0D4)[2 * a3],
         a2);
       v51 = 0;
     }
@@ -2444,7 +2429,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                        956,
                        "Invalid building info for building %i (%s) of race %i (%s)!",
                        v811,
-                       (&MEMORY[0x377C0D4])[2 * v811],
+                       (&off_377C0D4)[2 * v811],
                        v791,
                        RaceName);
               if ( v428 == 1 )

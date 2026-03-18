@@ -1,28 +1,26 @@
+#if FALSE
 #include "CRandom16Ex.h"
 
 // Definitions for class CRandom16Ex
 
 // address=[0x13613e0]
-// Decompiled from CRandom16Ex *__thiscall CRandom16Ex::CRandom16Ex(CRandom16Ex *this, unsigned int a2)
+// Decompiled from CRandom16Ex *__thiscall CRandom16Ex::CRandom16Ex(CRandom16Ex *this, int a2)
  CRandom16Ex::CRandom16Ex(unsigned int a2) {
   
   CRandom16::CRandom16(this, 0);
-  *(_DWORD *)this = a2;
-  *((_DWORD *)this + 1) = 0;
+  this->m_uSeed = a2;
+  this->m_uIteration = 0;
   return this;
 }
 
 
 // address=[0x1361420]
-// Decompiled from unsigned int __thiscall CRandom16Ex::Init(CRandom16Ex *this, unsigned int a2, unsigned int a3)
+// Decompiled from void __thiscall CRandom16Ex::Init(CRandom16Ex *this, int a2, int a3)
 void  CRandom16Ex::Init(unsigned int a2, unsigned int a3) {
   
-  unsigned int result; // eax
-
-  *(_DWORD *)this = a2;
-  result = a3;
-  *((_DWORD *)this + 1) = a3;
-  return result;
+  this->m_uSeed = a2;
+  this->m_uIteration = a3;
 }
 
 
+#endif // Already implemented

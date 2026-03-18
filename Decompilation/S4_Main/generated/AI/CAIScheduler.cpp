@@ -55,19 +55,11 @@ void  CAIScheduler::RemoveAgent(class CAIAgent & a2) {
 
 
 // address=[0x12ff1d0]
-// Decompiled from CAIScheduler *__thiscall CAIScheduler::RemoveAllAgents(struct CAIAgent **this)
+// Decompiled from void __thiscall CAIScheduler::RemoveAllAgents(CAIScheduler *this)
 void  CAIScheduler::RemoveAllAgents(void) {
   
-  CAIScheduler *result; // eax
-
-  while ( 1 )
-  {
-    result = (CAIScheduler *)this;
-    if ( !this[10] )
-      break;
-    CAIScheduler::RemoveAgent((CAIScheduler *)this, this[10]);
-  }
-  return result;
+  while ( this->m_pFirstAgent )
+    CAIScheduler::RemoveAgent(this, this->m_pFirstAgent);
 }
 
 
@@ -96,54 +88,52 @@ void  CAIScheduler::UpdateAgentScheduleTime(class CAIAgent & _rParent, unsigned 
 unsigned int  CAIScheduler::Execute(unsigned int a2, unsigned int a3) {
   
   unsigned int v4; // [esp+0h] [ebp-1Ch]
-  int v5; // [esp+4h] [ebp-18h]
+  int m_uDefaultExecutionDelay; // [esp+4h] [ebp-18h]
   unsigned int v6; // [esp+8h] [ebp-14h]
-  unsigned int v7; // [esp+Ch] [ebp-10h]
-  unsigned int v8; // [esp+10h] [ebp-Ch]
-  struct CAIAgent *v9; // [esp+14h] [ebp-8h]
+  unsigned int m_uScheduleTime; // [esp+Ch] [ebp-10h]
+  unsigned int dwordC; // [esp+10h] [ebp-Ch]
+  CAIAgent *m_pFirstAgent; // [esp+14h] [ebp-8h]
 
   v6 = 1;
-  while ( *((_DWORD *)this + 10)
-       && *(_DWORD *)(*((_DWORD *)this + 10) + 4) <= a2
-       && *(_DWORD *)(*((_DWORD *)this + 10) + 12) <= a3 )
+  while ( this->m_pFirstAgent && this->m_pFirstAgent->m_uScheduleTime <= a2 && this->m_pFirstAgent->dwordC <= a3 )
   {
-    v9 = (struct CAIAgent *)*((_DWORD *)this + 10);
-    v4 = (*(int (__thiscall **)(struct CAIAgent *, unsigned int, unsigned int))(*(_DWORD *)v9 + 4))(v9, a2, a3);
-    v5 = v4 >> 12;
-    v8 = v4 & 0xFFF;
+    m_pFirstAgent = this->m_pFirstAgent;
+    v4 = m_pFirstAgent->Execute(m_pFirstAgent, a2, a3);
+    m_uDefaultExecutionDelay = v4 >> 12;
+    dwordC = v4 & 0xFFF;
     if ( !(v4 >> 12) )
-      v5 = *((_DWORD *)v9 + 2);
-    if ( !v5 )
-      v5 = 1;
+      m_uDefaultExecutionDelay = m_pFirstAgent->m_uDefaultExecutionDelay;
+    if ( !m_uDefaultExecutionDelay )
+      m_uDefaultExecutionDelay = 1;
     if ( (v4 & 0xFFF) == 0 )
-      v8 = *((_DWORD *)v9 + 3);
-    if ( !v8 )
-      v8 = 1;
-    CAIScheduler::RemoveAgentEx(this, v9);
-    *((_DWORD *)v9 + 1) = v5 + a2;
-    CAIScheduler::AddAgentEx(this, v9);
-    if ( v8 >= a3 )
+      dwordC = m_pFirstAgent->dwordC;
+    if ( !dwordC )
+      dwordC = 1;
+    CAIScheduler::RemoveAgentEx(this, m_pFirstAgent);
+    m_pFirstAgent->m_uScheduleTime = m_uDefaultExecutionDelay + a2;
+    CAIScheduler::AddAgentEx(this, m_pFirstAgent);
+    if ( dwordC >= a3 )
       a3 = 0;
     else
-      a3 -= v8;
-    v6 += v8;
+      a3 -= dwordC;
+    v6 += dwordC;
   }
   if ( v6 > 0xFFF )
     v6 = 4095;
-  if ( !*((_DWORD *)this + 10) )
+  if ( !this->m_pFirstAgent )
     return CAIAgent::ExecuteResult(0xFFFFFu, v6);
-  v7 = *(_DWORD *)(*((_DWORD *)this + 10) + 4);
-  if ( v7 > a2 )
+  m_uScheduleTime = this->m_pFirstAgent->m_uScheduleTime;
+  if ( m_uScheduleTime > a2 )
   {
-    if ( v7 - a2 > 0xFFFFF )
-      v7 = a2 + 0xFFFFF;
+    if ( m_uScheduleTime - a2 > 0xFFFFF )
+      m_uScheduleTime = a2 + 0xFFFFF;
   }
   else
   {
-    v7 = a2 + 1;
+    m_uScheduleTime = a2 + 1;
   }
-  *((_DWORD *)this + 1) = v7;
-  return CAIAgent::ExecuteResult(v7 - a2, v6);
+  this->m_uScheduleTime = m_uScheduleTime;
+  return CAIAgent::ExecuteResult(m_uScheduleTime - a2, v6);
 }
 
 

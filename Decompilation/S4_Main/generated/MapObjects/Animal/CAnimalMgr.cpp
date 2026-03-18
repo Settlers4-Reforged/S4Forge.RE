@@ -14,7 +14,7 @@
   std::vector<unsigned int>::vector<unsigned int>();
   std::vector<unsigned int>::vector<unsigned int>();
   std::vector<unsigned int>::vector<unsigned int>();
-  CRandom16Ex::CRandom16Ex((CAnimalMgr *)((char *)this + 380), 0);
+  CRandom16Ex::CRandom16Ex((CRandom16Ex *)((char *)this + 380), 0);
   CAnimalMgr::Clear(this);
   for ( i = 0; i < 17; ++i )
   {
@@ -22,7 +22,7 @@
     *((_DWORD *)this + i + 41) = 0;
   }
   *((_DWORD *)this + 97) = 0;
-  CRandom16Ex::Init((CAnimalMgr *)((char *)this + 380), 0x29061971u, 0);
+  CRandom16Ex::Init((CRandom16Ex *)((char *)this + 380), 688265585, 0);
   return this;
 }
 
@@ -423,7 +423,7 @@ void  CAnimalMgr::SpawnAnimalInTown(int a2, int a3, int a4) {
   {
     for ( i = 0; i < 6; ++i )
     {
-      v4 = CWarMap::FirstEntityIdVW(2, g_sNeighborPoints[2 * i] + a3, dword_37D8C0C[2 * i] + a4);
+      v4 = CWarMap::FirstEntityIdVW(2, g_sNeighborPoints[2 * i] + a3, MEMORY[0x37D8C0C][2 * i] + a4);
       v17 = v4;
       if ( v4 > 0 )
         break;
@@ -1776,7 +1776,7 @@ bool  CAnimalMgr::IsLandscapeAround(enum T_RESOURCE_LANDTYPE a2, int a3, int a4)
   for ( i = 0; i < 6; ++i )
   {
     v6 = (Squares *)(g_sNeighborPoints[2 * i] + a3);
-    v7 = (Squares *)(dword_37D8C0C[2 * i] + a4);
+    v7 = (Squares *)(MEMORY[0x37D8C0C][2 * i] + a4);
     if ( (int)v7 >= 0
       && (int)v7 <= this[71]
       && (int)v6 >= 0

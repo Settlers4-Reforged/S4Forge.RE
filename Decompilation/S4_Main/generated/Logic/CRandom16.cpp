@@ -1,14 +1,15 @@
+#if FALSE
 #include "CRandom16.h"
 
 // Definitions for class CRandom16
 
 // address=[0x12fd540]
-// Decompiled from int __thiscall CRandom16::Rand(CRandom16 *this)
+// Decompiled from unsigned int __thiscall CRandom16::Rand(CRandom16 *this)
 unsigned int  CRandom16::Rand(void) {
   
-  ++*((_DWORD *)this + 1);
-  *(_DWORD *)this = 1812433253 * *(_DWORD *)this + 1;
-  return HIWORD(*(_DWORD *)this);
+  ++this->m_uIteration;
+  this->m_uSeed = 1812433253 * this->m_uSeed + 1;
+  return HIWORD(this->m_uSeed);
 }
 
 
@@ -24,7 +25,7 @@ unsigned int __cdecl CRandom16::PercentValue(unsigned int a1) {
 // Decompiled from int __thiscall CRandom16::GetNumberOfRandCalls(CRandom16 *this)
 unsigned int  CRandom16::GetNumberOfRandCalls(void)const {
   
-  return *((_DWORD *)this + 1);
+  return this->m_uIteration;
 }
 
 
@@ -37,12 +38,13 @@ unsigned int  CRandom16::GetSeed(void)const {
 
 
 // address=[0x13613b0]
-// Decompiled from CRandom16 *__thiscall CRandom16::CRandom16(CRandom16 *this, unsigned int a2)
+// Decompiled from CRandom16 *__thiscall CRandom16::CRandom16(CRandom16 *this, int a2)
  CRandom16::CRandom16(unsigned int a2) {
   
-  *(_DWORD *)this = a2;
-  *((_DWORD *)this + 1) = 0;
+  this->m_uSeed = a2;
+  this->m_uIteration = 0;
   return this;
 }
 
 
+#endif // Already implemented

@@ -79,11 +79,11 @@ int  CAITaskForcePriestsRoman::ChooseMilitarySpellDestination(int a2, int a3, in
 
 
 // address=[0x132e520]
-// Decompiled from _DWORD *__thiscall CAITaskForcePriestsRoman::CAITaskForcePriestsRoman(_DWORD *this, int a2, int a3, int a4)
- CAITaskForcePriestsRoman::CAITaskForcePriestsRoman(int a2, enum T_AI_TASK_FORCE_TYPE a3, int a4) {
+// Decompiled from CAITaskForcePriestsRoman *__thiscall CAITaskForcePriestsRoman::CAITaskForcePriestsRoman(  CAITaskForcePriestsRoman *this,  int iOwnerId,  int tType,  int iFlags)
+ CAITaskForcePriestsRoman::CAITaskForcePriestsRoman(int iOwnerId, enum T_AI_TASK_FORCE_TYPE tType, int iFlags) {
   
-  CAITaskForcePriests::CAITaskForcePriests(this, a2, a3, a4);
-  *this = CAITaskForcePriestsRoman::_vftable_;
+  CAITaskForcePriests::CAITaskForcePriests(this, iOwnerId, tType, iFlags);
+  *(_DWORD *)this = CAITaskForcePriestsRoman::_vftable_;
   return this;
 }
 

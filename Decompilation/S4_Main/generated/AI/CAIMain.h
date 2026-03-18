@@ -39,7 +39,7 @@ public:
     virtual bool  IsPlayerAIActive(int a2);
 
     // address=[0x1312780]
-    virtual void  PostAIEvent(int a2, int a3, int a4, int a5);
+    virtual void  PostAIEvent(int iEventType, int iX, int iY, int iDark);
 
     // address=[0x1313410]
     virtual void  DarkTribeIncreaseManaForNewManaSphere(int _iPlayerId);
@@ -72,7 +72,6 @@ public:
     struct CAIPlayerAI *[9] m_pPlayerAIs;
     CAIScheduler m_sAIScheduler;
     CAIAgentEvaluation m_sAIAgentEvaluation;
-    _BYTE[40] gap_60;
 
 };
 
