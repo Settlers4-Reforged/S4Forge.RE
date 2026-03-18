@@ -2,17 +2,18 @@
 #define CAITASKFORCEGROUP_H
 
 #include "defines.h"
+#include "Defines/AI.h"
 
 class CAITaskForceGroup {
 public:
     // address=[0x12fd0d0]
-    class CAITaskForce *FirstTaskForce(enum T_AI_TASK_FORCE_CLASS a2) const;
+    class CAITaskForce *FirstTaskForce(T_AI_TASK_FORCE_CLASS a2) const;
 
     // address=[0x13015c0]
-    int NumberOfTaskForcesOfType(enum T_AI_TASK_FORCE_TYPE a2) const;
+    int NumberOfTaskForcesOfType(T_AI_TASK_FORCE_TYPE a2) const;
 
     // address=[0x1303970]
-    int NumberOfTaskForcesOfClass(enum T_AI_TASK_FORCE_CLASS a2) const;
+    int NumberOfTaskForcesOfClass(T_AI_TASK_FORCE_CLASS a2) const;
 
     // address=[0x1328380]
     CAITaskForceGroup(int a2);
@@ -21,7 +22,7 @@ public:
     ~CAITaskForceGroup(void);
 
     // address=[0x1328410]
-    class CAITaskForce *CreateTaskForce(enum T_AI_TASK_FORCE_TYPE a2);
+    class CAITaskForce *CreateTaskForce(T_AI_TASK_FORCE_TYPE a2);
 
     // address=[0x1328450]
     void DeleteAllTaskForces(void);

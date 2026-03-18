@@ -543,7 +543,7 @@ void __cdecl CTiling::CalcSectorIds(bool a1) {
   for ( j = 10; j <= UsedTileId; ++j )
   {
     v4 = CTiles::TileEx(j);
-    v13 = ((unsigned int)&unk_4000000 & CTile::Type(v4, v9)) == 0;
+    v13 = ((unsigned int)&MEMORY[0x4000000] & CTile::Type(v4, v9)) == 0;
     v5 = CTiles::TileEx(j);
     if ( CTile::SectorId((CTile *)v5) == 0 && v13 )
     {
@@ -3699,7 +3699,7 @@ int __cdecl CTiling::DbgCheckTileLinkList(int a1, int a2) {
     v18 = 0x8000000;
     v17 = 671088640;
   }
-  else if ( v19 == &unk_4000000 )
+  else if ( v19 == &MEMORY[0x4000000] )
   {
     v18 = 0x8000000;
     v17 = 0x8000000;

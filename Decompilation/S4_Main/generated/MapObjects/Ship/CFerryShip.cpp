@@ -460,7 +460,7 @@ LABEL_13:
       CVehicle::WalkDirAndRegister(v25, v4, 0);
       break;
   }
-  result = IEntity::FlagBits(v25, (EntityFlag)&unk_4000000);
+  result = IEntity::FlagBits(v25, (EntityFlag)&MEMORY[0x4000000]);
   if ( result )
     return result;
   if ( *((unsigned __int8 *)v25 + 107) != *((_DWORD *)v25 + 53) )
@@ -551,7 +551,7 @@ void  CFerryShip::Unload(void) {
   CFerryShip *v13; // [esp+1Ch] [ebp-4h]
 
   v13 = this;
-  result = IEntity::FlagBits(this, (EntityFlag)&unk_4000000);
+  result = IEntity::FlagBits(this, (EntityFlag)&MEMORY[0x4000000]);
   if ( result )
     return result;
   v8 = 0;

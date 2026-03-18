@@ -222,7 +222,7 @@ void  CShamanRole::WarriorTaskAttack(class IMovingEntity & a2, int a3, enum T_WA
   v23 = result;
   if ( !result )
     return result;
-  result = (_DWORD *)IEntity::FlagBits(v23, (EntityFlag)&unk_4000000);
+  result = (_DWORD *)IEntity::FlagBits(v23, (EntityFlag)&MEMORY[0x4000000]);
   if ( result )
     return result;
   v21 = CLogic::FutureEvents(g_pLogic);
@@ -279,7 +279,7 @@ void  CShamanRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent 
       return CSoldierRole::ConvertEventIntoGoal(a2, a3);
     this[25] = *(_DWORD *)(a3 + 12);
     v7 = (_DWORD *)CMapObjectMgr::EntityPtr(this[25]);
-    if ( !v7 || IEntity::FlagBits(v7, (EntityFlag)&unk_4000000) )
+    if ( !v7 || IEntity::FlagBits(v7, (EntityFlag)&MEMORY[0x4000000]) )
     {
       this[25] = 0;
       this[26] = 0;

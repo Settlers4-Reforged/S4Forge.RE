@@ -9,7 +9,7 @@ protected:
     static void __cdecl InitTiles(void);
 
     // address=[0x15e5020]
-    static int __cdecl MoveLinkList(int a1, int a2);
+    static int __cdecl MoveLinkList(int _iDstLinksId, int _iSrcLinksId);
 
     // address=[0x15e51c0]
     static void __cdecl LinksGarbageCollection(int a1);
@@ -39,7 +39,7 @@ protected:
     static void __cdecl DeleteTile(int a1);
 
     // address=[0x15e6090]
-    static void __cdecl MergeTileLinkLists(int a1, int a2);
+    static void __cdecl MergeTileLinkLists(int _iDstTileId, int _iSrcTileId);
 
 };
 

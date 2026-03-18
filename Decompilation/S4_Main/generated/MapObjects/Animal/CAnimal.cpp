@@ -81,7 +81,7 @@ void  CAnimal::LogicUpdate(void) {
   {
     if ( *((_DWORD *)this + 25) == 5 )
     {
-      if ( !IEntity::FlagBits(this, (EntityFlag)&unk_4000000) )
+      if ( !IEntity::FlagBits(this, (EntityFlag)&MEMORY[0x4000000]) )
       {
         *((_DWORD *)this + 32) += 15;
         if ( *((int *)this + 32) < 450 )

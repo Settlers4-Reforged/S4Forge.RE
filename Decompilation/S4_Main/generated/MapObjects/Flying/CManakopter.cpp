@@ -121,7 +121,7 @@ void  CManakopter::LogicUpdate(void) {
   CPropertySet *v26; // [esp+74h] [ebp-4h]
 
   v26 = this;
-  if ( !IEntity::FlagBits(this, (EntityFlag)&unk_4000000) )
+  if ( !IEntity::FlagBits(this, (EntityFlag)&MEMORY[0x4000000]) )
   {
     v17 = 0;
     v18 = 0;
@@ -281,7 +281,7 @@ bool  CManakopter::SettlerEnter(int a2) {
   }
   if ( !SettlerPtr && BBSupportDbgReport(2, "mapobjects\\Manakopter.cpp", 401, "pSettler != NULL") == 1 )
     __debugbreak();
-  if ( !SettlerPtr || ((unsigned int)&unk_4000000 & IEntity::Flags(SettlerPtr)) != 0 )
+  if ( !SettlerPtr || ((unsigned int)&MEMORY[0x4000000] & IEntity::Flags(SettlerPtr)) != 0 )
     return 0;
   v7 = IEntity::Type((unsigned __int16 *)SettlerPtr);
   v8 = IEntity::UniqueId(SettlerPtr);

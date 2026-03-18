@@ -38,7 +38,7 @@ unsigned int CAIAgentEvaluation::Execute(unsigned int a2, unsigned int a3) {
     __debugbreak();
   }
   this->m_pAIPlayerEvaluations.EvaluatePlayer(this->m_iCurrentPlayerId);
-  IMessageTracer::PushFormatedInts(g_pMsgTracer2, aEvaluatingPlay, this->m_iCurrentPlayerId);
+  g_pMsgTracer2->PushFormatedInts("Evaluating player %i", this->m_iCurrentPlayerId);
   return CAIAgent::ExecuteResult(0, 0);
 }
 

@@ -1,3 +1,4 @@
+#if FALSE
 #include "CTilesEx.h"
 
 // Definitions for class CTilesEx
@@ -26,7 +27,7 @@ void __cdecl CTilesEx::InitTiles(class CLinkList & a1) {
   v3 = CTiles::TileEx(9);
   CTile::InitPseudoTile(v3, 0, a1);
   v4 = CTiles::TileEx(9);
-  CTile::SetType(v4, 0xFFFFFFFD);
+  CTile::SetType(v4, -3u);
   v5 = CTiles::TileEx(0x7FFF);
   CTile::InitPseudoTile(v5, 0, a1);
   v6 = CTiles::TileEx(0x7FFF);
@@ -35,13 +36,13 @@ void __cdecl CTilesEx::InitTiles(class CLinkList & a1) {
   {
     v7 = CTiles::TileEx(j);
     CTile::SetType(v7, 0xFFFFFFFF);
-    v7->m_iSectorId = j - 1;
+    *(_DWORD *)&v7->m_iSectorId = j - 1;
     v7->m_uCenter = j + 1;
   }
   CTiles::TileEx(9)->m_uCenter = 10;
-  CTiles::TileEx(10)->m_iSectorId = 9;
+  *(_DWORD *)&CTiles::TileEx(10)->m_iSectorId = 9;
   CTiles::TileEx(32766)->m_uCenter = 0x7FFF;
-  CTiles::TileEx(0x7FFF)->m_iSectorId = 32766;
+  *(_DWORD *)&CTiles::TileEx(0x7FFF)->m_iSectorId = 32766;
   CTilesEx::m_iNumberOfUsedTiles = 0;
   CTilesEx::m_iLastUsedTileId = 9;
   CTilesEx::m_iTilesPushBackMode = 1;
@@ -62,7 +63,7 @@ void __cdecl CTilesEx::DeactivateTilesPushBackMode(void) {
     {
       v1 = CTilesEx::m_iLastUsedTileId + 1;
       CTiles::TileEx(9)->m_uCenter = v1;
-      CTiles::TileEx(v1)->m_iSectorId = 9;
+      *(_DWORD *)&CTiles::TileEx(v1)->m_iSectorId = 9;
     }
     else
     {
@@ -72,7 +73,7 @@ void __cdecl CTilesEx::DeactivateTilesPushBackMode(void) {
              108,
              "CTiles::DeactivatePushBackMode(): Last used tile invalid!") == 1 )
         __debugbreak();
-      CTilesEx::CalculateListOfFreeTiles(0);
+      CTilesEx::CalculateListOfFreeTiles();
     }
     CTilesEx::CalculateSquareTileLists();
     CTilesEx::m_iTilesPushBackMode = 0;
@@ -115,7 +116,7 @@ void __cdecl CTilesEx::InsertTileIntoSquareList(int a1) {
         __debugbreak();
       rFirstLast->m_uLast = rFirstLast->m_uFirst;
     }
-    if ( (CTile::Type(rTile, v3) & 0x8000000) != 0 )
+    if ( (CTile::Type(rTile) & 0x8000000) != 0 )
     {
       m_uLast = rFirstLast->m_uLast;
       iPrevTileId = CTiles::TileEx(m_uLast);
@@ -253,7 +254,7 @@ void __cdecl CTilesEx::CalculateListOfFreeTiles(void) {
   v2 = 0;
   v1 = 9;
   v3 = 9;
-  CTiles::TileEx(9)->m_iSectorId = 0;
+  *(_DWORD *)&CTiles::TileEx(9)->m_iSectorId = 0;
   for ( i = 10; i <= 32766; ++i )
   {
     v0 = CTiles::TileEx(i);
@@ -264,13 +265,13 @@ void __cdecl CTilesEx::CalculateListOfFreeTiles(void) {
     }
     else
     {
-      CTiles::TileEx(i)->m_iSectorId = v3;
+      *(_DWORD *)&CTiles::TileEx(i)->m_iSectorId = v3;
       CTiles::TileEx(v3)->m_uCenter = i;
       v3 = i;
     }
   }
   CTiles::TileEx(v3)->m_uCenter = 0x7FFF;
-  CTiles::TileEx(0x7FFF)->m_iSectorId = v3;
+  *(_DWORD *)&CTiles::TileEx(0x7FFF)->m_iSectorId = v3;
   CTiles::TileEx(0x7FFF)->m_uCenter = 0;
   CTilesEx::m_iNumberOfUsedTiles = v2;
   CTilesEx::m_iLastUsedTileId = v1;
@@ -281,25 +282,21 @@ void __cdecl CTilesEx::CalculateListOfFreeTiles(void) {
 
 
 // address=[0x15e3810]
-// Decompiled from int CTilesEx::CalculateSquareTileLists()
+// Decompiled from void CTilesEx::CalculateSquareTileLists()
 void __cdecl CTilesEx::CalculateSquareTileLists(void) {
   
-  int result; // eax
-  CTile *v1; // eax
-  int v2; // [esp+0h] [ebp-8h]
+  CTile *v0; // eax
+  int UsedTileId; // [esp+0h] [ebp-8h]
   int i; // [esp+4h] [ebp-4h]
 
   memset(&CTiles::m_sSquareFirstLastTiles, 0, 0x4200u);
-  result = CTilesEx::LastUsedTileId();
-  v2 = result;
-  for ( i = 10; i <= v2; ++i )
+  UsedTileId = CTilesEx::LastUsedTileId();
+  for ( i = 10; i <= UsedTileId; ++i )
   {
-    v1 = CTiles::TileEx(i);
-    if ( CTile::Used(v1) )
+    v0 = CTiles::TileEx(i);
+    if ( CTile::Used(v0) )
       CTilesEx::InsertTileIntoSquareList(i);
-    result = i + 1;
   }
-  return result;
 }
 
 
@@ -443,9 +440,9 @@ void __cdecl CTilesEx::DeleteTile(int a1) {
     CTile::SetType(v6, 0xFFFFFFFF);
     m_uCenter = CTiles::TileEx(9)->m_uCenter;
     CTiles::TileEx(9)->m_uCenter = a1;
-    v6->m_iSectorId = 9;
+    *(_DWORD *)&v6->m_iSectorId = 9;
     v6->m_uCenter = m_uCenter;
-    CTiles::TileEx(m_uCenter)->m_iSectorId = a1;
+    *(_DWORD *)&CTiles::TileEx(m_uCenter)->m_iSectorId = a1;
     if ( --CTilesEx::m_iNumberOfUsedTiles < 0 )
       CTilesEx::CalculateListOfFreeTiles();
     if ( CTilesEx::m_iLastUsedTileId == a1 )
@@ -468,7 +465,7 @@ void __cdecl CTilesEx::DeleteTile(int a1) {
 
 
 // address=[0x15e7050]
-// Decompiled from bool __cdecl CTilesEx::IsUsedRealTile(int a1)
+// Decompiled from char __cdecl CTilesEx::IsUsedRealTile(int a1)
 bool __cdecl CTilesEx::IsUsedRealTile(int a1) {
   
   CTile *v1; // eax
@@ -485,7 +482,7 @@ bool __cdecl CTilesEx::IsUsedRealTile(int a1) {
 
 
 // address=[0x15e71c0]
-// Decompiled from bool __cdecl CTilesEx::IsValidUsedTile(int a1)
+// Decompiled from char __cdecl CTilesEx::IsValidUsedTile(int a1)
 bool __cdecl CTilesEx::IsValidUsedTile(int a1) {
   
   CTile *v1; // eax
@@ -532,3 +529,4 @@ int __cdecl CTilesEx::NumberOfUsedTiles(void) {
 // address=[0x4237898]
 // [Decompilation failed for static int CTilesEx::m_iCalcFreeListCounter]
 
+#endif // Already implemented

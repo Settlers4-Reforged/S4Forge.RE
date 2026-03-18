@@ -81,7 +81,7 @@ int  CGenericBuildingIterator::NextBuilding(void) {
     }
     v4 = (_DWORD *)CBuildingMgr::operator[](*((_DWORD *)this + 6));
   }
-  while ( ((unsigned int)&unk_4000000 & IEntity::Flags(v4)) != 0 );
+  while ( ((unsigned int)&MEMORY[0x4000000] & IEntity::Flags(v4)) != 0 );
   return *((_DWORD *)this + 6);
 }
 

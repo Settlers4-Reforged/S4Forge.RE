@@ -65,7 +65,7 @@ unsigned int  CAIAgentDarkTribeDarkGardeners::Execute(unsigned int a2, unsigned 
       v21 = CAITaskForce::Flags(i);
       v14 = CAITaskForce::Status(i);
       v20 = CAITaskForce::Command(i);
-      v39 = ((unsigned int)&unk_4000000 & v21) != 0;
+      v39 = ((unsigned int)&MEMORY[0x4000000] & v21) != 0;
       v37 = v39;
       v34 = CAITaskForce::TimeStamp(i);
       v28 = v37 || v34 + 1000 <= a2 || !v34 || v20 != 5;

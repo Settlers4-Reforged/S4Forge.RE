@@ -215,14 +215,10 @@ int  CTile::PrevFree(void)const {
 
 
 // address=[0x15f56f0]
-// Decompiled from CTile *__thiscall CTile::SetCenterXY(CTile *this, DWORD a2)
+// Decompiled from void __thiscall CTile::SetCenterXY(CTile *this, DWORD a2)
 void  CTile::SetCenterXY(int a2) {
   
-  CTile *result; // eax
-
-  result = this;
   this->m_uCenter = a2;
-  return result;
 }
 
 
@@ -286,8 +282,8 @@ void  CTile::InitPseudoTile(int a2, class CLinkList & a3) {
   this->m_iType = CTile::TileType(a2);
   this->m_uCenter = 0;
   result = this;
-  this->m_pLinkList = (DWORD)a3;
-  this->m_iSectorId = 0;
+  this->m_pLinkList = a3;
+  *(_DWORD *)&this->m_iSectorId = 0;
   return result;
 }
 

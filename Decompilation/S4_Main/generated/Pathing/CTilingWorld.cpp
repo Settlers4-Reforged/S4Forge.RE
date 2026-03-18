@@ -212,7 +212,7 @@ void __cdecl CTilingWorld::WorldInterfaceInit(int _iWorldWidthHeight, struct T_G
   CTilingWorld::m_pWorldFogLayer = _pFogLayer;
   for ( i = 0; i < 6; ++i )
   {
-    v5 = g_sNeighborPoints[2 * i] + MEMORY[0x37D8C0C][2 * i] * _iWorldWidthHeight;
+    v5 = g_sNeighborPoints[i].x + g_sNeighborPoints[i].y * _iWorldWidthHeight;
     CTilingWorld::m_iWorldNeighborRelIndices[i] = v5;
     dword_42CF910[i] = v5;
   }

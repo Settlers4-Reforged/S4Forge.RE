@@ -45,7 +45,7 @@ void  CSquare::InitAndFillTypeMapNormal(int a2, int a3) {
         if ( (CWaterFlags::WaterFlags(v11) & 0x400) != 0 )
         {
           IsBlockedLand = 0;
-          v8 = (unsigned int)&unk_4000000 | v8 & 0xDFFFFFFF;
+          v8 = (unsigned int)&MEMORY[0x4000000] | v8 & 0xDFFFFFFF;
         }
         else
         {

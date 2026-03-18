@@ -566,7 +566,7 @@ int  CMilitaryBuildingRole::Decrease(int a2) {
   if ( v6 <= 0 )
     return 0;
   BuildingPtr = (IEntity *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3));
-  if ( !BuildingPtr || IEntity::FlagBits(BuildingPtr, (EntityFlag)&unk_4000000) )
+  if ( !BuildingPtr || IEntity::FlagBits(BuildingPtr, (EntityFlag)&MEMORY[0x4000000]) )
     return v6;
   v3 = IEntity::Hitpoints(BuildingPtr) - v6;
   if ( v3 > 0 )

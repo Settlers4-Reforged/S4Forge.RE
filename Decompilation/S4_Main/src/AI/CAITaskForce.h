@@ -2,64 +2,11 @@
 #define CAITASKFORCE_H
 
 #include <LoadSave/IS4ChunkObject.h>
+#include "Defines/AI.h"
 
 #include "defines.h"
 
-enum T_AI_TASK_FORCE_CMD {
-    T_AI_TASK_FORCE_CMD_UNKNOWN_0,
-    T_AI_TASK_FORCE_CMD_UNKNOWN_1,
-    T_AI_TASK_FORCE_CMD_UNKNOWN_2,
-    T_AI_TASK_FORCE_CMD_UNKNOWN_3,
-    T_AI_TASK_FORCE_CMD_UNKNOWN_4,
-};
-
-enum T_AI_TASK_FORCE_STATUS {
-    TASK_FORCE_STATUS_NONE = 0,
-    TASK_FORCE_STATUS_UNKNOWN_1,
-    TASK_FORCE_STATUS_UNKNOWN_2,
-    TASK_FORCE_STATUS_UNKNOWN_3,
-    TASK_FORCE_STATUS_UNKNOWN_4,
-};
-
-enum T_AI_TASK_FORCE_TYPE {
-    TASK_FORCE_TYPE_NONE = 0,
-    TASK_FORCE_TYPE_UNKNOWN_1,
-    TASK_FORCE_TYPE_UNKNOWN_2,
-    TASK_FORCE_TYPE_UNKNOWN_3,
-    TASK_FORCE_TYPE_UNKNOWN_4,
-    AI_TASK_FORCE_TYPE_PRIESTS        = 8,
-    AI_TASK_FORCE_TYPE_DARK_GARDENERS = 11,
-    AI_TASK_FORCE_TYPE_SHAMANS        = 12,
-    AI_TASK_FORCE_TYPE_MANAKOPTERS    = 13
-};
-
-enum T_AI_WARRIOR_TYPE {
-    AI_WARRIOR_TYPE_NONE           = 0,
-    AI_WARRIOR_TYPE_PRIEST         = 6,
-    AI_WARRIOR_TYPE_MISC_UNIT      = 7,
-    AI_WARRIOR_TYPE_FIGHTER_UNIQUE = 4,
-    AI_WARRIOR_TYPE_VEHICLE_MISC   = 9,
-    AI_WARRIOR_TYPE_TOWER_BUILDING = 12,
-    AI_WARRIOR_TYPE_LAST           = 13,
-};
-
-enum T_AI_TASK_FORCE_CLASS {
-    AI_TASK_FORCE_CLASS_NONE      = 0,
-    AI_TASK_FORCE_CLASS_RESERVOIR = 1,
-    AI_TASK_FORCE_CLASS_SQUAD     = 2,
-    AI_TASK_FORCE_CLASS_PRIESTS   = 3,
-
-    AI_TASK_FORCE_CLASS_GROUP = 6, // just a guess, but CTaskForceEx checks this in a Group call
-    AI_TASK_FORCE_CLASS_MAX   = 9,
-};
-
-enum T_RESULT {
-    RESULT_INVALID   = 0,
-    RESULT_FAILED    = 1,
-    RESULT_UNKNOWN_2 = 2, //As in, I dont know what the name is
-    RESULT_OK        = 3,
-    RESULT_UNKNOWN_4 = 4, //As in, I dont know what the name is
-};
+extern enum T_AI_TASK_FORCE_CLASS const *const g_tAITaskForceTypeToClassMap;
 
 class CAITaskForce : public IS4ChunkObject {
 public:
@@ -201,6 +148,8 @@ public:
     int State(void) const;
 
 protected:
+    friend class CAITaskForces;
+
     // address=[0x13197f0]
     virtual bool IsAddEntityOk(int a2);
 
@@ -246,19 +195,21 @@ protected:
     // address=[0x132ec50]
     void SetStatus(T_AI_TASK_FORCE_STATUS a2);
 
+    virtual void Execute(void) = 0;
+
     // Type information members
 public:
     enum T_AI_TASK_FORCE_CLASS  m_tClass;
     enum T_AI_TASK_FORCE_TYPE   m_tType;
     int                         m_iNumberOfEntities;
-    struct CAIEntityInfo *      m_pFirstEntity;
-    struct CAIEntityInfo *      m_pLastEntity;
-    struct CAITaskForce *       m_pPrevTaskForce;
-    struct CAITaskForce *       m_pFirstTaskForce;
+    class CAIEntityInfo *       m_pFirstEntity;
+    class CAIEntityInfo *       m_pLastEntity;
+    class CAITaskForce *        m_pPrevTaskForce;
+    class CAITaskForce *        m_pFirstTaskForce;
     CAITaskForce *              m_pPrevTaskForceGroupMember;
-    struct CAITaskForce *       m_pNextTaskForceGroupMember;
-    struct CAITaskForceGroup *  m_pTaskForceGroup;
-    struct CAITaskForce *       m_pAssociatedTaskForce;
+    class CAITaskForce *        m_pNextTaskForceGroupMember;
+    class CAITaskForceGroup *   m_pTaskForceGroup;
+    class CAITaskForce *        m_pAssociatedTaskForce;
     int                         m_iAssociatedId;
     unsigned __int8             m_uNewCounter;
     BYTE                        m_bState;

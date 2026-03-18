@@ -777,7 +777,7 @@ void  CNetInputProcessor::Process(class CEvn_Logic & a2) {
       VehiclePtr = (void **)CVehicleMgr::GetVehiclePtr(v90);
       if ( VehiclePtr )
       {
-        if ( !IEntity::FlagBits(VehiclePtr, (EntityFlag)&unk_4000000)
+        if ( !IEntity::FlagBits(VehiclePtr, (EntityFlag)&MEMORY[0x4000000])
           && IEntity::OwnerId((unsigned __int8 *)VehiclePtr) == v152 )
         {
           if ( j____RTDynamicCast(VehiclePtr, 0, &CVehicle__RTTI_Type_Descriptor_, &CWheeler__RTTI_Type_Descriptor_, 0) )
@@ -896,7 +896,7 @@ class CBuilding * __cdecl CNetInputProcessor::GetAliveBuildingPtr(int a1) {
   unsigned __int8 *BuildingPtr; // [esp+0h] [ebp-4h]
 
   BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a1);
-  if ( !BuildingPtr || IEntity::FlagBits(BuildingPtr, (EntityFlag)&unk_4000000) )
+  if ( !BuildingPtr || IEntity::FlagBits(BuildingPtr, (EntityFlag)&MEMORY[0x4000000]) )
     return 0;
   else
     return BuildingPtr;
@@ -910,10 +910,16 @@ class CBuilding * __cdecl CNetInputProcessor::GetAliveBuildingPtrOfPlayer(int a1
   unsigned __int8 *BuildingPtr; // [esp+0h] [ebp-4h]
 
   BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a1);
-  if ( BuildingPtr && !IEntity::FlagBits(BuildingPtr, (EntityFlag)&unk_4000000) && IEntity::OwnerId(BuildingPtr) == a2 )
+  if ( BuildingPtr
+    && !IEntity::FlagBits(BuildingPtr, (EntityFlag)&MEMORY[0x4000000])
+    && IEntity::OwnerId(BuildingPtr) == a2 )
+  {
     return BuildingPtr;
+  }
   else
+  {
     return 0;
+  }
 }
 
 

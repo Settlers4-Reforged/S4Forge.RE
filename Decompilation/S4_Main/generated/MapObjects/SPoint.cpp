@@ -1,3 +1,4 @@
+#if FALSE
 #include "SPoint.h"
 
 // Definitions for class SPoint
@@ -54,3 +55,4 @@ struct SPoint &  SPoint::Zero(void) {
 }
 
 
+#endif // Already implemented

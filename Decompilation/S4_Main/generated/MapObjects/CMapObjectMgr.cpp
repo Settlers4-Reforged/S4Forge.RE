@@ -657,7 +657,7 @@ int  CMapObjectMgr::RegisterForLogicUpdate(int iDeltaTicks, int _iEntityId) {
       v9,
       (char *)iDeltaTicks);
   }
-  if ( IEntity::FlagBits(pEntity, (EntityFlag)&unk_4000000)
+  if ( IEntity::FlagBits(pEntity, (EntityFlag)&MEMORY[0x4000000])
     && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 874, "pEntity->FlagBits(ENTITY_FLAG_DIED) == 0") == 1 )
   {
     __debugbreak();

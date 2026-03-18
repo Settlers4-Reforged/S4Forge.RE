@@ -41,7 +41,7 @@ unsigned int  CAIAgentDarkTribeShamans::Execute(unsigned int a2, unsigned int a3
       CAITaskForce::Status(i);
       if ( v16 != 3 && v16 != 9 && (CAITaskForce::Flags(i) & 0x20000000) == 0 )
       {
-        if ( ((unsigned int)&unk_4000000 & CAITaskForce::Flags(i)) != 0
+        if ( ((unsigned int)&MEMORY[0x4000000] & CAITaskForce::Flags(i)) != 0
           || CAITaskForce::Command(i) != 1
           || (v5 = CAITaskForce::CmdTimeStamp(i), v5 + IAIEnvironment::Rand() % 0x200u + 200 <= a2) )
         {

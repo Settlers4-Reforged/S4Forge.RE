@@ -384,7 +384,7 @@ void  CSlaveRole::TakeJob(class CSettler * a2) {
         v9 = IEntity::X(ManakopterPtr);
         v10 = IEntity::X(a2);
         if ( (int)Grid::Distance((Grid *)(v9 - v10), v17) >= 4
-          || IEntity::FlagBits(ManakopterPtr, (EntityFlag)&unk_4000000) )
+          || IEntity::FlagBits(ManakopterPtr, (EntityFlag)&MEMORY[0x4000000]) )
         {
 LABEL_21:
           CSlaveRole::FreeServant((CSlaveRole *)this, a2);
@@ -684,7 +684,7 @@ LABEL_15:
       v44 = CSettlerMgr::GetSettlerInfo(v15, v32);
       ManakopterPtr = CFlyingMgr::GetManakopterPtr((CFlyingMgr *)g_cFlyingMgr, a3[3]);
       v53 = 0;
-      if ( !ManakopterPtr || IEntity::FlagBits(ManakopterPtr, (EntityFlag)&unk_4000000) )
+      if ( !ManakopterPtr || IEntity::FlagBits(ManakopterPtr, (EntityFlag)&MEMORY[0x4000000]) )
       {
         v16 = IEntity::OwnerId((unsigned __int8 *)a2);
         v45 = (*(int (__thiscall **)(void *, int))(*(_DWORD *)g_pDarkTribe + 24))(g_pDarkTribe, v16);

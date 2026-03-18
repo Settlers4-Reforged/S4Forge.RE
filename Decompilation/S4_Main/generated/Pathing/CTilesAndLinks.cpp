@@ -1,21 +1,22 @@
+#if FALSE
 #include "CTilesAndLinks.h"
 
 // Definitions for class CTilesAndLinks
 
 // address=[0x15e5000]
-// Decompiled from int **CTilesAndLinks::InitTiles()
+// Decompiled from void CTilesAndLinks::InitTiles()
 void __cdecl CTilesAndLinks::InitTiles(void) {
   
   struct CLinkList *v0; // eax
 
   v0 = CLinks::LinkList(0);
-  return CTilesEx::InitTiles(v0);
+  CTilesEx::InitTiles(v0);
 }
 
 
 // address=[0x15e5020]
-// Decompiled from int __cdecl CTilesAndLinks::MoveLinkList(int a1, int a2)
-int __cdecl CTilesAndLinks::MoveLinkList(int a1, int a2) {
+// Decompiled from int __cdecl CTilesAndLinks::MoveLinkList(int _iDstLinksId, int _iSrcLinksId)
+int __cdecl CTilesAndLinks::MoveLinkList(int _iDstLinksId, int _iSrcLinksId) {
   
   CLink *v2; // eax
   CLink *v3; // eax
@@ -26,32 +27,41 @@ int __cdecl CTilesAndLinks::MoveLinkList(int a1, int a2) {
   struct CLinkList *v9; // [esp+10h] [ebp-8h]
   int i; // [esp+14h] [ebp-4h]
 
-  if ( a1 >= a2 && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 1127, "_iDstLinksId < _iSrcLinksId") == 1 )
+  if ( _iDstLinksId >= _iSrcLinksId
+    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 1127, "_iDstLinksId < _iSrcLinksId") == 1 )
+  {
     __debugbreak();
-  if ( (a1 & 1) != 0 && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 1128, "(_iDstLinksId & 1) == 0") == 1 )
+  }
+  if ( (_iDstLinksId & 1) != 0
+    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 1128, "(_iDstLinksId & 1) == 0") == 1 )
+  {
     __debugbreak();
-  if ( (a2 & 1) != 0 && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 1129, "(_iSrcLinksId & 1) == 0") == 1 )
+  }
+  if ( (_iSrcLinksId & 1) != 0
+    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 1129, "(_iSrcLinksId & 1) == 0") == 1 )
+  {
     __debugbreak();
-  v2 = CLinks::Link(a1);
+  }
+  v2 = CLinks::Link(_iDstLinksId);
   if ( !CLink::Unused(v2)
     && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 1130, "Link(_iDstLinksId).Unused()") == 1 )
   {
     __debugbreak();
   }
-  v3 = CLinks::Link(a2);
+  v3 = CLinks::Link(_iSrcLinksId);
   if ( !CLink::IsHeader(v3)
     && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 1131, "Link(_iSrcLinksId).IsHeader()") == 1 )
   {
     __debugbreak();
   }
-  v8 = CLinks::LinkList(a1);
-  v9 = CLinks::LinkList(a2);
+  v8 = CLinks::LinkList(_iDstLinksId);
+  v9 = CLinks::LinkList(_iSrcLinksId);
   v4 = CLinkList::Size(v9);
   v7 = v4 + (CLinkList::Size(v9) & 1) + 2;
   for ( i = 0; i < v7 >> 1; ++i )
   {
-    *((_DWORD *)&v8->m_uSize + i) = *((_DWORD *)&v9->m_uSize + i);
-    *((_DWORD *)&v9->m_uSize + i) = -16711936;
+    v8[i] = v9[i];
+    *((_DWORD *)v9 + i) = 0xFF00FF00;
   }
   v5 = CLinkList::OwnerTileId(v8);
   CTile::SetLinkList(&CTiles::m_cTiles[v5], v8);
@@ -376,11 +386,11 @@ class CLinkList & __cdecl CTilesAndLinks::PushLinksUndef(int a1) {
 
 
 // address=[0x15e5b70]
-// Decompiled from struct CLinkList *__cdecl CTilesAndLinks::PushLinks(const struct CIntLinkList *a1)
+// Decompiled from CLinkList *__cdecl CTilesAndLinks::PushLinks(const struct CIntLinkList *a1)
 class CLinkList & __cdecl CTilesAndLinks::PushLinks(class CIntLinkList const & a1) {
   
   int v1; // eax
-  struct CLinkList *v3; // [esp+0h] [ebp-4h]
+  CLinkList *v3; // [esp+0h] [ebp-4h]
 
   v1 = CIntLinkList::Size(a1);
   v3 = CTilesAndLinks::PushLinksUndef(v1);
@@ -451,8 +461,8 @@ void __cdecl CTilesAndLinks::AddLink(int _iOwnerTileId, int _iLinkTileId) {
 // Decompiled from char __cdecl CTilesAndLinks::DeleteLink(int a1, int a2)
 void __cdecl CTilesAndLinks::DeleteLink(int a1, int a2) {
   
-  int **v2; // eax
-  const struct CLinkList *v4; // [esp+0h] [ebp-4h]
+  CTile *v2; // eax
+  struct CLinkList *v4; // [esp+0h] [ebp-4h]
 
   if ( !CTilesEx::IsUsedRealTile(a1)
     && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 1484, "IsUsedRealTile(_iOwnerTileId)") == 1 )
@@ -467,8 +477,8 @@ void __cdecl CTilesAndLinks::DeleteLink(int a1, int a2) {
   if ( a1 == a2 && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 1487, "_iOwnerTileId != _iLinkTileId") == 1 )
     __debugbreak();
   v2 = CTiles::TileEx(a1);
-  v4 = (const struct CLinkList *)CTile::LinkList(v2);
-  if ( !(unsigned __int8)CLinks::IsValidUsedLinkList(v4)
+  v4 = CTile::LinkList(v2);
+  if ( !CLinks::IsValidUsedLinkList(v4)
     && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 1491, "IsValidUsedLinkList(rLinkList)") == 1 )
   {
     __debugbreak();
@@ -507,114 +517,109 @@ void __cdecl CTilesAndLinks::ReplaceLink(int a1, int a2, int a3) {
 
 
 // address=[0x15e5ef0]
-// Decompiled from int __cdecl CTilesAndLinks::AddLinkList(const struct CLinkList *a1)
+// Decompiled from void __cdecl CTilesAndLinks::AddLinkList(struct CLinkList *a1)
 void __cdecl CTilesAndLinks::AddLinkList(class CLinkList const & a1) {
   
-  int result; // eax
-  unsigned __int16 *v2; // eax
-  int v3; // [esp+0h] [ebp-Ch]
-  int v4; // [esp+4h] [ebp-8h]
+  const unsigned __int16 *v1; // eax
+  int v2; // [esp+0h] [ebp-Ch]
+  int v3; // [esp+4h] [ebp-8h]
   int i; // [esp+8h] [ebp-4h]
 
-  if ( !(unsigned __int8)CLinks::IsValidUsedLinkList(a1)
+  if ( !CLinks::IsValidUsedLinkList(a1)
     && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 1528, "IsValidUsedLinkList(_rLinkList)") == 1 )
   {
     __debugbreak();
   }
-  v4 = CLinkList::Size((unsigned __int8 *)a1);
-  result = CLinkList::OwnerTileId(a1);
-  v3 = result;
-  for ( i = 0; i < v4; ++i )
+  v3 = CLinkList::Size(a1);
+  v2 = CLinkList::OwnerTileId(a1);
+  for ( i = 0; i < v3; ++i )
   {
-    v2 = (unsigned __int16 *)CLinkList::operator[](a1, i);
-    CTilesAndLinks::AddLink(*v2, v3);
-    result = i + 1;
+    v1 = CLinkList::operator[](a1, i);
+    CTilesAndLinks::AddLink(*v1, v2);
   }
-  return result;
 }
 
 
 // address=[0x15e5f80]
-// Decompiled from int __cdecl CTilesAndLinks::DeleteLinkList(struct CLinkList *a1)
+// Decompiled from void __cdecl CTilesAndLinks::DeleteLinkList(struct CLinkList *a1)
 void __cdecl CTilesAndLinks::DeleteLinkList(class CLinkList & a1) {
   
-  unsigned __int16 *v1; // eax
-  int v3; // [esp+0h] [ebp-Ch]
-  int v4; // [esp+4h] [ebp-8h]
+  const unsigned __int16 *v1; // eax
+  int v2; // [esp+0h] [ebp-Ch]
+  int v3; // [esp+4h] [ebp-8h]
   int i; // [esp+8h] [ebp-4h]
 
-  if ( !(unsigned __int8)CLinks::IsValidUsedLinkList(a1)
+  if ( !CLinks::IsValidUsedLinkList(a1)
     && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 1506, "IsValidUsedLinkList(_rLinkList)") == 1 )
   {
     __debugbreak();
   }
-  v4 = CLinkList::Size((unsigned __int8 *)a1);
-  v3 = CLinkList::OwnerTileId(a1);
-  for ( i = 0; i < v4; ++i )
+  v3 = CLinkList::Size(a1);
+  v2 = CLinkList::OwnerTileId(a1);
+  for ( i = 0; i < v3; ++i )
   {
-    v1 = (unsigned __int16 *)CLinkList::operator[](a1, i);
-    CTilesAndLinks::DeleteLink(*v1, v3);
+    v1 = CLinkList::operator[](a1, i);
+    CTilesAndLinks::DeleteLink(*v1, v2);
   }
-  return CLinks::LinkListMarkAsUnused(a1);
+  CLinks::LinkListMarkAsUnused(a1);
 }
 
 
 // address=[0x15e6020]
-// Decompiled from int __cdecl CTilesAndLinks::DeleteTile(int *a1)
+// Decompiled from void __cdecl CTilesAndLinks::DeleteTile(int *a1)
 void __cdecl CTilesAndLinks::DeleteTile(int a1) {
   
-  int **v2; // eax
-  struct CLinkList *v3; // eax
+  CTile *v1; // eax
+  struct CLinkList *v2; // eax
 
   if ( CTilesEx::IsUsedRealTile((int)a1) )
   {
-    v2 = CTiles::TileEx((int)a1);
-    v3 = (struct CLinkList *)CTile::LinkList(v2);
-    CTilesAndLinks::DeleteLinkList(v3);
-    return CTilesEx::DeleteTile(a1);
+    v1 = CTiles::TileEx((int)a1);
+    v2 = CTile::LinkList(v1);
+    CTilesAndLinks::DeleteLinkList(v2);
+    CTilesEx::DeleteTile((int)a1);
   }
-  else
+  else if ( !"DeleteTile(): Not a used real tile!"
+         && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 1551, "\"DeleteTile(): Not a used real tile!\"") == 1 )
   {
-    if ( !"DeleteTile(): Not a used real tile!"
-      && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 1551, "\"DeleteTile(): Not a used real tile!\"") == 1 )
-    {
-      __debugbreak();
-    }
-    return 0;
+    __debugbreak();
   }
 }
 
 
 // address=[0x15e6090]
-// Decompiled from int __cdecl CTilesAndLinks::MergeTileLinkLists(int a1, int a2)
-void __cdecl CTilesAndLinks::MergeTileLinkLists(int a1, int a2) {
+// Decompiled from void __cdecl CTilesAndLinks::MergeTileLinkLists(int _iDstTileId, int _iSrcTileId)
+void __cdecl CTilesAndLinks::MergeTileLinkLists(int _iDstTileId, int _iSrcTileId) {
   
-  int **v2; // eax
-  int result; // eax
-  int **v4; // eax
+  CTile *v2; // eax
+  int i; // eax
+  CTile *v4; // eax
   CLinkList *v5; // eax
-  unsigned __int8 *v6; // [esp+8h] [ebp-Ch]
+  struct CLinkList *v6; // [esp+8h] [ebp-Ch]
   int v7; // [esp+Ch] [ebp-8h]
   int v8; // [esp+10h] [ebp-4h]
 
-  if ( a1 == a2 && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 1575, "_iDstTileId != _iSrcTileId") == 1 )
-    __debugbreak();
-  v2 = CTiles::TileEx(a2);
-  v6 = (unsigned __int8 *)CTile::LinkList(v2);
-  v8 = 0;
-  for ( result = CLinkList::Size(v6); v8 < result; result = CLinkList::Size(v6) )
+  if ( _iDstTileId == _iSrcTileId
+    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 1575, "_iDstTileId != _iSrcTileId") == 1 )
   {
-    v7 = *(unsigned __int16 *)CLinkList::operator[](v6, v8);
-    v4 = CTiles::TileEx(a1);
-    v5 = (CLinkList *)CTile::LinkList(v4);
-    if ( CLinkList::SearchForLinkTileId(v5, v7) == 0 && v7 != a1 )
+    __debugbreak();
+  }
+  v2 = CTiles::TileEx(_iSrcTileId);
+  v6 = CTile::LinkList(v2);
+  v8 = 0;
+  for ( i = CLinkList::Size(v6); v8 < i; i = CLinkList::Size(v6) )
+  {
+    v7 = *CLinkList::operator[](v6, v8);
+    v4 = CTiles::TileEx(_iDstTileId);
+    v5 = CTile::LinkList(v4);
+    if ( CLinkList::SearchForLinkTileId(v5, v7) == 0 && v7 != _iDstTileId )
     {
-      CTilesAndLinks::AddLink(a1, v7);
-      CTilesAndLinks::ReplaceLink(v7, a2, a1);
+      CTilesAndLinks::AddLink(_iDstTileId, v7);
+      CTilesAndLinks::ReplaceLink(v7, _iSrcTileId, _iDstTileId);
     }
     ++v8;
   }
-  return result;
 }
 
 
+#endif // Already implemented

@@ -572,7 +572,7 @@ bool  CEcoManager::GetBuildingPosition(int a2, int & a3, int & a4) {
   unsigned __int8 *BuildingPtr; // [esp+4h] [ebp-4h]
 
   BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a2);
-  if ( BuildingPtr && !IEntity::FlagBits(BuildingPtr, (EntityFlag)&unk_4000000) )
+  if ( BuildingPtr && !IEntity::FlagBits(BuildingPtr, (EntityFlag)&MEMORY[0x4000000]) )
   {
     if ( CBuilding::EcoSectorId(BuildingPtr) != *((_DWORD *)this + 1)
       && BBSupportDbgReport(

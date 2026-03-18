@@ -894,7 +894,7 @@ void  IBuildingRole::PostLoadSetWaterFlags(class CBuilding * a2) {
   IBuildingRole *v12; // [esp+1Ch] [ebp-4h]
 
   v12 = this;
-  result = IEntity::FlagBits(a2, (EntityFlag)&unk_4000000);
+  result = IEntity::FlagBits(a2, (EntityFlag)&MEMORY[0x4000000]);
   if ( result )
     return result;
   result = (int)v12;

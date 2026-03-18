@@ -2992,8 +2992,8 @@ int  CInterfaceD3D::IsInterface7Available(bool & a2, struct HWND__ * a3) {
                               }
                               else if ( (unsigned __int8)sub_2F8BE40(v26, v6, &dword_760B60[65960], 0) )
                               {
-                                if ( (v25 & 0x40) != 0 && ((unsigned int)&unk_4000000 & v25) != 0
-                                  || (v27 & 0x40) != 0 && ((unsigned int)&unk_4000000 & v27) != 0 )
+                                if ( (v25 & 0x40) != 0 && ((unsigned int)&MEMORY[0x4000000] & v25) != 0
+                                  || (v27 & 0x40) != 0 && ((unsigned int)&MEMORY[0x4000000] & v27) != 0 )
                                 {
                                   if ( (v25 & 0x400000) != 0 )
                                   {
@@ -3343,8 +3343,8 @@ int  CInterfaceD3D::IsInterface3Available(struct HWND__ * a2) {
                       }
                       else if ( (unsigned __int8)sub_2F8BE40(v15, v4, 4000000, 0) )
                       {
-                        if ( (v14 & 0x40) != 0 && ((unsigned int)&unk_4000000 & v14) != 0
-                          || (v16 & 0x40) != 0 && ((unsigned int)&unk_4000000 & v16) != 0 )
+                        if ( (v14 & 0x40) != 0 && ((unsigned int)&MEMORY[0x4000000] & v14) != 0
+                          || (v16 & 0x40) != 0 && ((unsigned int)&MEMORY[0x4000000] & v16) != 0 )
                         {
                           if ( (v14 & 0x400000) != 0 )
                           {

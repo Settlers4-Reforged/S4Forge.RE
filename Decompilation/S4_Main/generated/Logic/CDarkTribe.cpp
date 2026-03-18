@@ -139,7 +139,7 @@ void  CDarkTribe::AssociateServantWithMushroomFarm(int a2) {
 
   SettlerPtr = CSettlerMgr::GetSettlerPtr(a2);
   if ( SettlerPtr
-    && !IEntity::FlagBits(SettlerPtr, (EntityFlag)&unk_4000000)
+    && !IEntity::FlagBits(SettlerPtr, (EntityFlag)&MEMORY[0x4000000])
     && IEntity::Type((unsigned __int16 *)SettlerPtr) == 55 )
   {
     MushroomFarmForServant = CDarkTribe::FindMushroomFarmForServant(this, a2);

@@ -1,4 +1,3 @@
-#if FALSE
 #include "CAIAgentGlobalSuicideMission.h"
 
 // Definitions for class CAIAgentGlobalSuicideMission
@@ -95,7 +94,7 @@ unsigned int  CAIAgentGlobalSuicideMission::Execute(unsigned int a2, unsigned in
     }
     else if ( CAITaskForce::Command((CAITaskForce *)p_m_pFirstAgent) != 4
            || (v6 = CAITaskForce::CmdGoal((CAITaskForce *)p_m_pFirstAgent), v6 != iGoalId)
-           || ((unsigned int)&unk_4000000 & CAITaskForce::Flags((CAITaskForce *)p_m_pFirstAgent)) != 0
+           || ((unsigned int)&MEMORY[0x4000000] & CAITaskForce::Flags((CAITaskForce *)p_m_pFirstAgent)) != 0
            || a2 >= CAITaskForce::CmdTimeStamp(p_m_pFirstAgent) + 1000 )
     {
       (*(void (__thiscall **)(CUserToolsManager *, int, int, _DWORD))(*(_DWORD *)p_m_pFirstAgent + 32))(
@@ -201,4 +200,3 @@ int __cdecl CAIAgentGlobalSuicideMission::FindNearestBuildingInSector(int arg0, 
 }
 
 
-#endif // Already implemented

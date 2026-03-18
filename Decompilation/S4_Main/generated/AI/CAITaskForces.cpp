@@ -34,58 +34,53 @@ void __cdecl CAITaskForces::Done(void) {
 
 
 // address=[0x1328ed0]
-// Decompiled from int CAITaskForces::Execute()
+// Decompiled from void CAITaskForces::Execute()
 void __cdecl CAITaskForces::Execute(void) {
   
-  int result; // eax
-  CAITaskForce *v1; // [esp+0h] [ebp-14h]
+  CAITaskForce *m_pFirstTaskForce; // [esp+0h] [ebp-14h]
   int i; // [esp+4h] [ebp-10h]
-  int v3; // [esp+8h] [ebp-Ch]
-  int v4; // [esp+Ch] [ebp-8h]
-  CAITaskForce *v5; // [esp+10h] [ebp-4h]
+  int v2; // [esp+8h] [ebp-Ch]
+  int v3; // [esp+Ch] [ebp-8h]
+  CAITaskForce *m_pCurrentTaskForce; // [esp+10h] [ebp-4h]
 
-  v3 = s_sTaskForcesData / 8;
-  v4 = MEMORY[0x3ECCD2C] + s_sTaskForcesData % 8;
-  if ( v4 >= 8 )
+  v2 = s_sTaskForcesData.m_iTotalNumberOfTaskForces / 8;
+  v3 = s_sTaskForcesData.m_iTaskForceRemainder + s_sTaskForcesData.m_iTotalNumberOfTaskForces % 8;
+  if ( v3 >= 8 )
   {
-    ++v3;
-    v4 -= 8;
+    ++v2;
+    v3 -= 8;
   }
-  result = v4;
-  MEMORY[0x3ECCD2C] = v4;
-  if ( v3 <= 0 )
-    return result;
-  v5 = (CAITaskForce *)MEMORY[0x3ECCD34];
-  if ( !MEMORY[0x3ECCD34] )
-    v5 = (CAITaskForce *)MEMORY[0x3ECCD30];
-  if ( v5 )
+  s_sTaskForcesData.m_iTaskForceRemainder = v3;
+  if ( v2 > 0 )
   {
-    for ( i = 0; i < v3; ++i )
+    m_pCurrentTaskForce = s_sTaskForcesData.m_pCurrentTaskForce;
+    if ( !s_sTaskForcesData.m_pCurrentTaskForce )
+      m_pCurrentTaskForce = s_sTaskForcesData.m_pFirstTaskForce;
+    if ( m_pCurrentTaskForce )
     {
-      v1 = (CAITaskForce *)*((_DWORD *)v5 + 7);
-      if ( !CAITaskForce::DecWaitCounter(v5, 8u) )
-        (*(void (__thiscall **)(CAITaskForce *))(*(_DWORD *)v5 + 40))(v5);
-      v5 = v1;
-      if ( !v1 )
+      for ( i = 0; i < v2; ++i )
       {
-        v5 = (CAITaskForce *)MEMORY[0x3ECCD30];
-        break;
+        m_pFirstTaskForce = m_pCurrentTaskForce->m_pFirstTaskForce;
+        if ( !CAITaskForce::DecWaitCounter(m_pCurrentTaskForce, 8u) )
+          m_pCurrentTaskForce->Execute(m_pCurrentTaskForce);
+        m_pCurrentTaskForce = m_pFirstTaskForce;
+        if ( !m_pFirstTaskForce )
+        {
+          m_pCurrentTaskForce = s_sTaskForcesData.m_pFirstTaskForce;
+          break;
+        }
       }
+      s_sTaskForcesData.m_pCurrentTaskForce = m_pCurrentTaskForce;
     }
-    result = (int)v5;
-    MEMORY[0x3ECCD34] = (int)v5;
-  }
-  else
-  {
-    result = BBSupportDbgReport(
-               1,
-               "AI\\AI_TaskForces.cpp",
-               1408,
-               "CAITaskForces::Execute(): Invalid number of task forces!");
-    if ( result == 1 )
+    else if ( BBSupportDbgReport(
+                1,
+                "AI\\AI_TaskForces.cpp",
+                1408,
+                "CAITaskForces::Execute(): Invalid number of task forces!") == 1 )
+    {
       __debugbreak();
+    }
   }
-  return result;
 }
 
 
@@ -255,7 +250,7 @@ void  CAITaskForces::DbgPrint(void) {
   while ( m_pFirstTaskForce )
   {
     ++v3;
-    m_pFirstTaskForce = (CAITaskForce *)m_pFirstTaskForce->m_pFirstTaskForce;
+    m_pFirstTaskForce = m_pFirstTaskForce->m_pFirstTaskForce;
   }
   if ( v3 == CAITaskForces::TotalNumberOfTaskForces() )
     return CTrace::Print("%i task forces.", v3);

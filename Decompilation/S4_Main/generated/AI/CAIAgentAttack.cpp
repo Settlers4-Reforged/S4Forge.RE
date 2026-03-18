@@ -477,7 +477,7 @@ int  CAIAgentAttack::CheckSquadTargets(void) {
         }
         else if ( CAITaskForce::Command(v21) != 4
                || (v7 = CAITaskForce::CmdGoal(v21), v7 != v19)
-               || ((unsigned int)&unk_4000000 & CAITaskForce::Flags(v21)) != 0
+               || ((unsigned int)&MEMORY[0x4000000] & CAITaskForce::Flags(v21)) != 0
                || (v8 = CAITaskForce::CmdTimeStamp(v21), v17 >= v8 + 1000) )
         {
           (*(void (__thiscall **)(CUserToolsManager *, int, int, _DWORD))(*(_DWORD *)v21 + 32))(v21, 4, v19, 0);

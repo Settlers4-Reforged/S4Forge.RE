@@ -6,13 +6,13 @@ project(S4_Main CXX)
 math(EXPR bits "8 * ${CMAKE_SIZEOF_VOID_P}")
 message(STATUS "Building ${bits}-bit Settlers 4")
 if (NOT bits EQUAL 32)
-  message(WARNING "Only 32-bit executables are supported at this time!")
-endif()
+    message(WARNING "Only 32-bit executables are supported at this time!")
+endif ()
 
-file(GLOB_RECURSE CUSTOM_SOURCES S4_Main/src/*.cpp)
+file(GLOB_RECURSE CUSTOM_SOURCES ./S4_Main/src/*.cpp)
 
 set(SOURCE_LIST
-    ${CUSTOM_SOURCES}
+        ${CUSTOM_SOURCES}
 )
 
 add_executable(S4_Main ${SOURCE_LIST})
@@ -24,6 +24,6 @@ set(CMAKE_C_FLAGS "-m32")
 set(CMAKE_CXX_FLAGS "-m32")
 set(CMAKE_EXE_LINKER_FLAGS "-m32")
 
-target_include_directories(S4_Main PRIVATE S4_Main/generated)
+#target_include_directories(S4_Main PRIVATE S4_Main/generated)
 target_include_directories(S4_Main PRIVATE S4_Main/src)
 target_include_directories(S4_Main PRIVATE S4_Main/lib)

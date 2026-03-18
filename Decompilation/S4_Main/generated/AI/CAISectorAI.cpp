@@ -396,14 +396,14 @@ void  CAISectorAI::MoveOneDefendingFighterToReservoir(int a2, enum T_AI_WARRIOR_
 
 
 // address=[0x13209e0]
-// Decompiled from int __thiscall CAISectorAI::FindInnerPoint(pairNode **this, int a2)
+// Decompiled from int __thiscall CAISectorAI::FindInnerPoint(CAISectorAI *this, int a2)
 int  CAISectorAI::FindInnerPoint(int a2) {
   
   _BYTE v3[20]; // [esp+4h] [ebp-8Ch] BYREF
   int v4; // [esp+18h] [ebp-78h]
   int v5; // [esp+1Ch] [ebp-74h]
-  int v6; // [esp+20h] [ebp-70h]
-  int v7; // [esp+24h] [ebp-6Ch]
+  int y; // [esp+20h] [ebp-70h]
+  int x; // [esp+24h] [ebp-6Ch]
   int v8; // [esp+28h] [ebp-68h]
   struct _Mtx_internal_imp_t *v9; // [esp+2Ch] [ebp-64h]
   struct _Cnd_internal_imp_t *v10; // [esp+30h] [ebp-60h]
@@ -412,7 +412,7 @@ int  CAISectorAI::FindInnerPoint(int a2) {
   BOOL v13; // [esp+3Ch] [ebp-54h]
   BOOL v14; // [esp+40h] [ebp-50h]
   BOOL v15; // [esp+44h] [ebp-4Ch]
-  pairNode **v16; // [esp+48h] [ebp-48h]
+  CAISectorAI *v16; // [esp+48h] [ebp-48h]
   int v17; // [esp+4Ch] [ebp-44h] BYREF
   int v18; // [esp+50h] [ebp-40h] BYREF
   int v19; // [esp+54h] [ebp-3Ch]
@@ -428,21 +428,21 @@ int  CAISectorAI::FindInnerPoint(int a2) {
   v16 = this;
   v10 = (struct _Cnd_internal_imp_t *)IAIEnvironment::UnpackXFast(a2);
   v9 = (struct _Mtx_internal_imp_t *)IAIEnvironment::UnpackYFast(a2);
-  v4 = CAIPlayerAI::PlayerId(v16[1]);
-  v8 = CAISectorAI::SectorId((CAISectorAI *)v16);
+  v4 = CAIPlayerAI::PlayerId((pairNode *)v16->m_pPlayerAI);
+  v8 = CAISectorAI::SectorId(v16);
   memset(v27, 0, sizeof(v27));
   for ( i = 0; i < 6; ++i )
   {
     v19 = 0;
-    v7 = g_sNeighborPoints[2 * i];
-    v6 = MEMORY[0x37D8C0C][2 * i];
+    x = g_sNeighborPoints[i].x;
+    y = g_sNeighborPoints[i].y;
     v23 = v10;
     v24 = v9;
     for ( j = 0; j < 8; ++j )
     {
-      v23 = (struct _Cnd_internal_imp_t *)((char *)v23 + v7);
-      v24 = (struct _Mtx_internal_imp_t *)((char *)v24 + v6);
-      if ( !IAIEnvironment::WorldInWorld(v23, v24) )
+      v23 = (struct _Cnd_internal_imp_t *)((char *)v23 + x);
+      v24 = (struct _Mtx_internal_imp_t *)((char *)v24 + y);
+      if ( !IAIEnvironment::WorldInWorld((unsigned int)v23, (unsigned int)v24) )
         break;
       v5 = IAIEnvironment::WorldOwnerId(v23, v24);
       if ( v5 != v4 )
@@ -472,8 +472,8 @@ int  CAISectorAI::FindInnerPoint(int a2) {
     }
   }
   if ( v22 >= 0
-    && (v17 = (int)v10 + 6 * g_sNeighborPoints[2 * v22],
-        v18 = (int)v9 + 6 * MEMORY[0x37D8C0C][2 * v22],
+    && (v17 = (int)v10 + 6 * g_sNeighborPoints[v22].x,
+        v18 = (int)v9 + 6 * g_sNeighborPoints[v22].y,
         CSectorSpiralWalk::CSectorSpiralWalk((CSectorSpiralWalk *)v3, v17, v18, 8, v8),
         CSectorSpiralWalk::NextXY((CSectorSpiralWalk *)v3, &v17, &v18)) )
   {

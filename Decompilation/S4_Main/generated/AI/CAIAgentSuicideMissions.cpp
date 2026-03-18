@@ -38,7 +38,7 @@ unsigned int  CAIAgentSuicideMissions::Execute(unsigned int a2, unsigned int a3)
           }
           else if ( CAITaskForce::Command(i) != 4
                  || CAITaskForce::CmdGoal(i) != TargetForSuicideMission
-                 || ((unsigned int)&unk_4000000 & CAITaskForce::Flags(i)) != 0
+                 || ((unsigned int)&MEMORY[0x4000000] & CAITaskForce::Flags(i)) != 0
                  || a2 >= CAITaskForce::CmdTimeStamp(i) + 1000 )
           {
             (*(void (__thiscall **)(CUserToolsManager *, int, int, _DWORD))(*(_DWORD *)i + 32))(

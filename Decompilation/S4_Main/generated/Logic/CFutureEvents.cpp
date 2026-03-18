@@ -822,7 +822,7 @@ void __cdecl CFutureEvents::ExecuteEnslaveSettler(struct CFutureEvents::SFutureE
   {
     SettlerPtr = (unsigned __int8 *)CFlyingMgr::GetManakopterPtr((CFlyingMgr *)g_cFlyingMgr, v12);
     v17 = SettlerPtr;
-    if ( !SettlerPtr || (SettlerPtr = (unsigned __int8 *)IEntity::FlagBits(v17, (EntityFlag)&unk_4000000)) != 0 )
+    if ( !SettlerPtr || (SettlerPtr = (unsigned __int8 *)IEntity::FlagBits(v17, (EntityFlag)&MEMORY[0x4000000])) != 0 )
     {
       v18 = 0;
       v17 = 0;

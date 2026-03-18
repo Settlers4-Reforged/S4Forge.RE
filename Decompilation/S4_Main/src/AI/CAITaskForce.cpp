@@ -5,6 +5,7 @@
 
 #include "CAIEntityInfo.h"
 #include "CAITaskForceGroup.h"
+#include "CAITaskForces.h"
 #include "CBB/CBBSupport.h"
 
 // Definitions for class CAITaskForce
@@ -157,14 +158,14 @@ unsigned int CAITaskForce::StatusTimeStamp(void) const {
 
 // address=[0x1319810]
 // Decompiled from char __thiscall CAITaskForce::NewCommand(CAITaskForce *this, int a2, int a3, int a4)
-bool CAITaskForce::NewCommand(int a2, int a3, int a4) {
+bool CAITaskForce::NewCommand(int, int, int) {
   return 0;
 }
 
 
 // address=[0x1319830]
 // Decompiled from int __stdcall CAITaskForce::NumberOfEntities(int a1)
-int CAITaskForce::NumberOfEntities(enum T_AI_WARRIOR_TYPE a1) const {
+int CAITaskForce::NumberOfEntities(enum T_AI_WARRIOR_TYPE) const {
   return -1;
 }
 
@@ -193,8 +194,8 @@ void CAITaskForce::Release(void) {
   delete this;
 }
 
-// address=[0x03679264]
-T_AI_TASK_FORCE_CLASS const g_tAITaskForceTypeToClassMap[14] = {
+
+T_AI_TASK_FORCE_CLASS const s_tAITaskForceTypeToClassMap[] = {
   static_cast<T_AI_TASK_FORCE_CLASS>(0),
   static_cast<T_AI_TASK_FORCE_CLASS>(1),
   static_cast<T_AI_TASK_FORCE_CLASS>(6),
@@ -206,6 +207,9 @@ T_AI_TASK_FORCE_CLASS const g_tAITaskForceTypeToClassMap[14] = {
   static_cast<T_AI_TASK_FORCE_CLASS>(7),
   static_cast<T_AI_TASK_FORCE_CLASS>(8)
 };
+
+// address=[0x03679264]
+T_AI_TASK_FORCE_CLASS const *const g_tAITaskForceTypeToClassMap = s_tAITaskForceTypeToClassMap;
 // g_tAITaskForceTypeToClassMap dd 0                    ; 0
 // .rdata:03679264                                         ; DATA XREF: CAITaskForces::TaskForceClass(T_AI_TASK_FORCE_TYPE)+6↑r
 // .rdata:03679264                                         ; CAITaskForce::CAITaskForce(int,T_AI_TASK_FORCE_CLASS,T_AI_TASK_FORCE_TYPE,int)+54↑r ...
@@ -220,6 +224,8 @@ T_AI_TASK_FORCE_CLASS const g_tAITaskForceTypeToClassMap[14] = {
 
 // address=[0x1327180]
 // Decompiled from void __thiscall CAITaskForce::ChangeType(struct CAITaskForce *this, int a2)
+
+
 void CAITaskForce::ChangeType(enum T_AI_TASK_FORCE_TYPE a2) {
   if(this->m_tType != a2) {
     if(g_tAITaskForceTypeToClassMap[a2] == this->Class()) {

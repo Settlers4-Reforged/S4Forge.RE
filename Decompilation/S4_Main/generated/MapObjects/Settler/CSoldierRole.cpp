@@ -1635,7 +1635,7 @@ LABEL_33:
       v30 = IEntity::Race(a2);
       CSettlerMgr::GetSettlerInfo(v30, v51);
       v70 = CFlyingMgr::GetManakopterPtr((CFlyingMgr *)g_cFlyingMgr, *((_DWORD *)a3 + 3));
-      if ( v70 && !IEntity::FlagBits(v70, (EntityFlag)&unk_4000000) )
+      if ( v70 && !IEntity::FlagBits(v70, (EntityFlag)&MEMORY[0x4000000]) )
       {
         v68 = IEntity::PackedXY(v70);
         if ( v68 )

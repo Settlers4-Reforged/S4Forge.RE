@@ -4,10 +4,10 @@
 // Definitions for class CLinkList
 
 // address=[0x1346460]
-// Decompiled from CLink *__thiscall CLinkList::operator[](struct CLinkList *this, int a2)
+// Decompiled from const unsigned __int16 *__thiscall CLinkList::operator[](struct CLinkList *this, int a2)
 unsigned short const &  CLinkList::operator[](int a2)const {
   
-  return &this->m_uOwnerTileId[a2 + 1];
+  return &this->m_uLinkTileIds[a2].m_uData;
 }
 
 

@@ -1,3 +1,4 @@
+#if FALSE
 #include "IAIEnvironment.h"
 
 // Definitions for class IAIEnvironment
@@ -1963,3 +1964,4 @@ void __cdecl IAIEnvironment::UpdateTickCounter(void) {
 // address=[0x3e95190]
 // [Decompilation failed for static int IAIEnvironment::m_iGlobalEcoAIFlags]
 
+#endif // Already implemented

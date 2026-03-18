@@ -257,7 +257,7 @@ void  CHJBRole::PostLoadInit(class CSettler * a2) {
   if ( a2 )
   {
     CSoldierRole::PostLoadInit(a2);
-    if ( !IEntity::FlagBits(a2, (EntityFlag)&unk_4000000) )
+    if ( !IEntity::FlagBits(a2, (EntityFlag)&MEMORY[0x4000000]) )
     {
       if ( IHJBMgr::GetHJBPlayerId(this)
         && BBSupportDbgReport(

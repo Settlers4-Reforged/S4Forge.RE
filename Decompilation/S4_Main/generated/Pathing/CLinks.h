@@ -43,7 +43,7 @@ protected:
     static bool __cdecl LinkListReplaceLink(class CLinkList & a1, int a2, int a3);
 
     // address=[0x15e4550]
-    static int __cdecl SearchForUnusedLinkEntries(int a1);
+    static int __cdecl SearchForUnusedLinkEntries(int _iSizeEx);
 
     // address=[0x15e4b00]
     static void __cdecl CalculateLinksInfo(void);

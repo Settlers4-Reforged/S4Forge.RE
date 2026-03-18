@@ -2,11 +2,7 @@
 #define CAIENTITYINFOEX_H
 
 #include "defines.h"
-
-enum T_AI_ENTITY_INFO_EX_CLASS {
-    AI_ENTITY_INFO_EX_CLASS_TOWER = 0,
-    AI_ENTITY_INFO_EX_CLASS_MAX,
-};
+#include "Defines/AI.h"
 
 class CAIEntityInfoEx {
 public:

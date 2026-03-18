@@ -2,6 +2,7 @@
 #define CAIENTITYINFO_H
 
 #include "defines.h"
+#include "Defines/AI.h"
 
 class CAIEntityInfo {
 public:
@@ -36,7 +37,7 @@ public:
     ~CAIEntityInfo(void);
 
     // address=[0x130aa00]
-    class CAIEntityInfoEx *ExtendedInfo(enum T_AI_ENTITY_INFO_EX_CLASS a2);
+    class CAIEntityInfoEx *ExtendedInfo(T_AI_ENTITY_INFO_EX_CLASS a2);
 
     // Type information members
 public:

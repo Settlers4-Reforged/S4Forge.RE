@@ -174,7 +174,7 @@ void  CSettler::LogicUpdate(void) {
   int v2; // [esp+0h] [ebp-Ch]
   int v3; // [esp+4h] [ebp-8h]
 
-  result = IEntity::FlagBits(this, (EntityFlag)&unk_4000000);
+  result = IEntity::FlagBits(this, (EntityFlag)&MEMORY[0x4000000]);
   if ( result )
     return result;
   if ( IEntity::FlagBits(this, (EntityFlag)0x80u) )
@@ -228,7 +228,7 @@ struct SGfxObjectInfo *  CSettler::GetGfxInfos(void) {
   signed int v30; // [esp+68h] [ebp-10h]
   unsigned int v31; // [esp+6Ch] [ebp-Ch]
 
-  if ( IEntity::FlagBits((_DWORD *)this, (EntityFlag)&unk_4000000) )
+  if ( IEntity::FlagBits((_DWORD *)this, (EntityFlag)&MEMORY[0x4000000]) )
     return 0;
   if ( !IEntity::IsVisible((_DWORD *)this) )
     return 0;
@@ -834,7 +834,7 @@ void  CSettler::ChangeTypeComeToBuilding(int a2, int a3) {
   int v8; // [esp+30h] [ebp-4h]
 
   v7 = this;
-  result = IEntity::FlagBits(this, (EntityFlag)&unk_4000000);
+  result = IEntity::FlagBits(this, (EntityFlag)&MEMORY[0x4000000]);
   if ( result )
     return result;
   CSettler::ChangeType(v7, a2, 1, 0);
@@ -1446,7 +1446,7 @@ int  CSettler::WalkDir(int a2) {
   Y16X16 *v24; // [esp+4Ch] [ebp-10h]
   int v25; // [esp+50h] [ebp-Ch]
 
-  if ( IEntity::FlagBits(this, (EntityFlag)&unk_4000000) )
+  if ( IEntity::FlagBits(this, (EntityFlag)&MEMORY[0x4000000]) )
   {
     BBSupportTracePrintF(0, "STOP this settler is dead");
     return -1;

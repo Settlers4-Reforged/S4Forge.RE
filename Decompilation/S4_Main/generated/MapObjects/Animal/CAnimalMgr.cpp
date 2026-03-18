@@ -177,7 +177,7 @@ void  CAnimalMgr::Init(void) {
       if ( IEntity::ObjType(v22) == 128 )
       {
         v16 = v22;
-        if ( !IEntity::FlagBits(v22, (EntityFlag)&unk_4000000) )
+        if ( !IEntity::FlagBits(v22, (EntityFlag)&MEMORY[0x4000000]) )
         {
           this[62] = (CAnimalEffect *)((char *)this[62] + 1);
           v7 = IEntity::Type(v16);
