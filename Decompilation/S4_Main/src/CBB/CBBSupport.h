@@ -2,31 +2,34 @@
 void __stdcall BBSupportActivateDbgReportHook(void);
 
 // address=[0x2f2d8c0]
-int __stdcall BBSupportDbgReport(int,char const *,unsigned int,char const *);
+int __stdcall BBSupportDbgReport(int, char const *, unsigned int, char const *);
 
 // address=[0x2f2df30]
-int __cdecl BBSupportDbgReportF(int,char const *,unsigned int,char const *,...);
+int __cdecl BBSupportDbgReportF(int, char const *, unsigned int, char const *, ...);
+
+#define BB_REPORT(msg) if(BBSupportDbgReport(2, __FILE__, __LINE__, msg) == 1) { __debugbreak(); }
+#define BB_ASSERT(cond) if(!(cond) && BBSupportDbgReport(2, __FILE__, __LINE__, #cond) == 1) { __debugbreak(); }
 
 // address=[0x2f2dfe0]
 void __stdcall BBSupportWarningMessageBoxes(bool);
 
 // address=[0x2f2e210]
-void __stdcall BBSupportOpenTraceFile(int,wchar_t const *);
+void __stdcall BBSupportOpenTraceFile(int, wchar_t const *);
 
 // address=[0x2f2e270]
-void __stdcall BBSupportSmartOpenTraceFile(wchar_t const *,wchar_t const *);
+void __stdcall BBSupportSmartOpenTraceFile(wchar_t const *, wchar_t const *);
 
 // address=[0x2f2e770]
-bool __stdcall BBSupportGetTraceFilePath(wchar_t *,unsigned int);
+bool __stdcall BBSupportGetTraceFilePath(wchar_t *, unsigned int);
 
 // address=[0x2f2e7d0]
-void __stdcall BBSupportTracePrint(unsigned int,char const *);
+void __stdcall BBSupportTracePrint(unsigned int, char const *);
 
 // address=[0x2f2ea40]
-void __stdcall BBSupportTracePrint(unsigned int,wchar_t const *);
+void __stdcall BBSupportTracePrint(unsigned int, wchar_t const *);
 
 // address=[0x2f2ecc0]
-void __cdecl BBSupportTracePrintF(unsigned int,char const *,...);
+void __cdecl BBSupportTracePrintF(unsigned int, char const *, ...);
 
 // address=[0x2f2ed60]
 unsigned int __stdcall BBSupportReserveTraceLevel(void);
@@ -68,11 +71,11 @@ unsigned int __stdcall BBSupportGetModuleTimeDateStamp(void *);
 char const * __cdecl BBSupportDllVersionString(void);
 
 // address=[0x1603ef0]
-void __cdecl ScriptTracePrintF(unsigned int a1, char const * Format, ...);
+void __cdecl ScriptTracePrintF(unsigned int a1, char const *Format, ...);
 
 namespace BBSupportLib {
     // address=[0x2f2f800]
-    void __stdcall BBSCopyString(wchar_t *,wchar_t const *,unsigned int);
+    void __stdcall BBSCopyString(wchar_t *, wchar_t const *, unsigned int);
 
     // address=[0x2f2f9e0]
     int __stdcall BBSGetDevelopmentFlags(void);
