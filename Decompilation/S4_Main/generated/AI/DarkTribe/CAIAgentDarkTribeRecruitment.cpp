@@ -87,7 +87,7 @@ unsigned int  CAIAgentDarkTribeRecruitment::Execute(unsigned int a2, unsigned in
       v32 = sub_1303080(v28 - v27, 0, 5);
     }
   }
-  v9 = CStaticConfigVarInt::operator int(&unk_3E8DD6C);
+  v9 = CStaticConfigVarInt::operator int(&stru_3E8DD6C);
   v38 = sub_1303080(v9, 0, 4096);
   v37 = 0;
   v36 = 0;

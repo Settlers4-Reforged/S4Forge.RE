@@ -6,7 +6,7 @@
 class CVWList {
 public:
     // address=[0x1334ec0]
-     CVWList(int a2, int a3, int a4);
+     CVWList(int iX, int iY, int iRadius);
 
     // address=[0x1335b10]
     struct SVW const &  CVWList::operator[](int a2)const;
@@ -15,11 +15,17 @@ public:
     int  Size(void)const;
 
     // address=[0x15de830]
-    void  CalculateOverlappingSquares(int a2, int a3, int a4);
+    void  CalculateOverlappingSquares(int _iX, int _iY, int _iRadius);
 
 protected:
     // address=[0x15e2cf0]
     void  PushEx(int & a2, int a3, int a4);
+
+    // Type information members
+public:
+    int m_iSize;
+    int m_iU;
+    CVWList::SVW[27] m_aVW;
 
 };
 

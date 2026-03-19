@@ -18,10 +18,14 @@ public:
     virtual void  Execute(void);
 
     // address=[0x132b6f0]
-    static class CAITaskForcePriests * __cdecl CreatePriestsTaskForce(int _iRace, int iOwnerId, enum T_AI_TASK_FORCE_TYPE tType, int iFlags);
+    static class CAITaskForcePriests * __cdecl CreatePriestsTaskForce(int iRace, int iOwnerId, enum T_AI_TASK_FORCE_TYPE tType, int iFlags);
 
     // address=[0x132e610]
     virtual  ~CAITaskForcePriests(void);
+
+    // Type information members
+public:
+    int m_uNextSpellTick;
 
 };
 

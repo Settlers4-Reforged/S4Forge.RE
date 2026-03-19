@@ -128,28 +128,28 @@ void  CAIScripting::InitPlayerScriptVarsDefaultValues(void) {
     v11 = (void **)(&off_3676210 + 3 * i);
     if ( *v11 )
     {
-      dword_3ECC7C8[i] = 0;
+      unk_3ECC7C8[i] = 0;
       v8 = v11[2];
       v5 = v11[1];
       v2 = (_DWORD *)TStaticConfigIntArrayBase<3>::operator[](*v11, 0);
-      dword_3ECC7C8[i + 23] = sub_131CE10(*v2, v5, v8);
+      unk_3ECC7C8[i + 23] = sub_131CE10(*v2, v5, v8);
       v9 = v11[2];
       v6 = v11[1];
       v3 = (_DWORD *)TStaticConfigIntArrayBase<3>::operator[](*v11, 1);
-      dword_3ECC7C8[i + 46] = sub_131CE10(*v3, v6, v9);
+      unk_3ECC7C8[i + 46] = sub_131CE10(*v3, v6, v9);
       v10 = v11[2];
       v7 = v11[1];
       v4 = (_DWORD *)TStaticConfigIntArrayBase<3>::operator[](*v11, 2);
       result = sub_131CE10(*v4, v7, v10);
-      dword_3ECC7C8[i + 69] = result;
+      unk_3ECC7C8[i + 69] = result;
     }
     else
     {
-      dword_3ECC7C8[i] = 0;
-      dword_3ECC7C8[i + 23] = 0;
-      dword_3ECC7C8[i + 46] = 0;
+      unk_3ECC7C8[i] = 0;
+      unk_3ECC7C8[i + 23] = 0;
+      unk_3ECC7C8[i + 46] = 0;
       result = 92;
-      dword_3ECC7C8[i + 69] = 0;
+      unk_3ECC7C8[i + 69] = 0;
     }
   }
   return result;

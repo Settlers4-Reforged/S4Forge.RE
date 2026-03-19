@@ -33,7 +33,7 @@ public:
     void  OccupationCheck(int a2);
 
     // address=[0x1324670]
-    int  FindTargetForSuicideMission(class CAITaskForce * a2);
+    int  FindTargetForSuicideMission(class CAITaskForce * _pSquad);
 
     // address=[0x1324930]
     void  MoveSquadHome(class CAITaskForce * a2);

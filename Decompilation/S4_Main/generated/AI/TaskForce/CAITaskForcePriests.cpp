@@ -1,3 +1,4 @@
+#if FALSE
 #include "CAITaskForcePriests.h"
 
 // Definitions for class CAITaskForcePriests
@@ -7,7 +8,7 @@
 bool  CAITaskForcePriests::NewCommand(int a2, int a3, int a4) {
   
   CAITaskForceEx::SetCommandAndClearStuff(this, a2, a3, a4);
-  *((_DWORD *)this + 24) = 0;
+  this->m_uNextSpellTick = 0;
   if ( !a2 )
     return 1;
   if ( a2 == 6 )
@@ -29,8 +30,8 @@ bool  CAITaskForcePriests::NewCommand(int a2, int a3, int a4) {
  CAITaskForcePriests::CAITaskForcePriests(int iOwnerId, enum T_AI_TASK_FORCE_TYPE tType, int iFlags) {
   
   CAITaskForceEx::CAITaskForceEx(this, iOwnerId, 3, tType, iFlags);
-  *(_DWORD *)this = CAITaskForcePriests::_vftable_;
-  *((_DWORD *)this + 24) = 0;
+  this->__vftable = (CAITaskForceEx_vtbl *)CAITaskForcePriests::_vftable_;
+  this->m_uNextSpellTick = 0;
   return this;
 }
 
@@ -47,96 +48,95 @@ bool  CAITaskForcePriests::IsAddEntityOk(int a2) {
 
 
 // address=[0x132b500]
-// Decompiled from char __thiscall CAITaskForcePriests::Execute(CAITaskForcePriests *this)
+// Decompiled from void __thiscall CAITaskForcePriests::Execute(CAITaskForcePriests *this)
 void  CAITaskForcePriests::Execute(void) {
   
-  int v1; // eax
+  unsigned int iOwnerId; // eax
   int v2; // eax
   int v3; // eax
-  _BYTE v5[4]; // [esp+0h] [ebp-5Ch] BYREF
-  int v6; // [esp+4h] [ebp-58h]
-  int v7; // [esp+8h] [ebp-54h]
-  int v8; // [esp+Ch] [ebp-50h]
-  int v9; // [esp+10h] [ebp-4Ch]
-  int v10; // [esp+14h] [ebp-48h]
-  int v11; // [esp+18h] [ebp-44h]
-  _DWORD *v12; // [esp+1Ch] [ebp-40h]
-  unsigned int v13; // [esp+20h] [ebp-3Ch]
-  int v14; // [esp+24h] [ebp-38h]
-  int v15; // [esp+28h] [ebp-34h]
-  int v16; // [esp+2Ch] [ebp-30h]
-  int j; // [esp+30h] [ebp-2Ch]
+  _BYTE v4[4]; // [esp+0h] [ebp-5Ch] BYREF
+  int v5; // [esp+4h] [ebp-58h]
+  int v6; // [esp+8h] [ebp-54h]
+  int v7; // [esp+Ch] [ebp-50h]
+  int iDstXY; // [esp+10h] [ebp-4Ch]
+  int v9; // [esp+14h] [ebp-48h]
+  int v10; // [esp+18h] [ebp-44h]
+  IEntity *v11; // [esp+1Ch] [ebp-40h]
+  unsigned int iTick; // [esp+20h] [ebp-3Ch]
+  int v13; // [esp+24h] [ebp-38h]
+  int v14; // [esp+28h] [ebp-34h]
+  char *v15; // [esp+2Ch] [ebp-30h]
+  CAIEntityInfo *j; // [esp+30h] [ebp-2Ch]
   int i; // [esp+34h] [ebp-28h]
-  char v19; // [esp+3Bh] [ebp-21h]
-  CAITaskForceEx *v20; // [esp+3Ch] [ebp-20h]
-  _BYTE v21[24]; // [esp+40h] [ebp-1Ch] BYREF
+  char v18; // [esp+3Bh] [ebp-21h]
+  struct SCountFightersResult v20; // [esp+40h] [ebp-1Ch] BYREF
 
-  v20 = this;
-  v13 = IAIEnvironment::TickCounter();
-  if ( v13 < *((_DWORD *)v20 + 24) )
-    return CAITaskForceEx::Execute(v20);
-  v1 = CAITaskForce::OwnerId(v20);
-  v16 = CAIPlayersScriptVars::operator[](v1);
-  v15 = 0;
-  if ( !CAIPlayerScriptVars::operator[](8) )
+  iTick = IAIEnvironment::TickCounter();
+  if ( iTick >= this->m_uNextSpellTick )
   {
-    v7 = CAIPlayerScriptVars::operator[](9);
-    v6 = CAIPlayerScriptVars::operator[](10);
-    for ( i = 0; i < 8; ++i )
+    iOwnerId = CAITaskForce::OwnerId(this);
+    v15 = CAIPlayersScriptVars::operator[]((char *)g_cAIPlayersScriptVars, iOwnerId);
+    v14 = 0;
+    if ( !CAIPlayerScriptVars::operator[](v15, 8u) )
     {
-      if ( (v7 & (1 << i)) != 0 )
+      v6 = CAIPlayerScriptVars::operator[](v15, 9u);
+      v5 = CAIPlayerScriptVars::operator[](v15, 0xAu);
+      for ( i = 0; i < 8; ++i )
       {
-        v2 = CAITaskForce::OwnerId(v20);
-        if ( CMagic::CheckManaForCastSpell(v2, i, v6) )
-          v15 |= 1 << i;
+        if ( (v6 & (1 << i)) != 0 )
+        {
+          v2 = CAITaskForce::OwnerId(this);
+          if ( CMagic::CheckManaForCastSpell(v2, i, v5) )
+            v14 |= 1 << i;
+        }
       }
     }
-  }
-  v19 = 0;
-  CTmpEntitiesRef::CTmpEntitiesRef((CTmpEntitiesRef *)v5);
-  for ( j = CAITaskForce::FirstEntity(v20); j; j = CAIEntityInfo::Next(j) )
-  {
-    v8 = CAIEntityInfo::EntityId(j);
-    v12 = (_DWORD *)CTmpEntitiesRef::operator[](v8);
-    v10 = IEntity::X(v12);
-    v11 = IEntity::Y(v12);
-    v3 = CAITaskForce::OwnerId(v20);
-    CScanner::CountFighters((struct SCountFightersResult *)v21, v10, v11, 20, v3);
-    v14 = (*(int (__thiscall **)(CAITaskForceEx *, _BYTE *, int))(*(_DWORD *)v20 + 48))(v20, v21, v15);
-    if ( v14 >= 0 )
+    v18 = 0;
+    CTmpEntitiesRef::CTmpEntitiesRef((CTmpEntitiesRef *)v4);
+    for ( j = CAITaskForce::FirstEntity(this); j; j = CAIEntityInfo::Next(j) )
     {
-      v9 = (*(int (__thiscall **)(CAITaskForceEx *, int, int, int, _DWORD))(*(_DWORD *)v20 + 52))(v20, v14, v10, v11, 0);
-      if ( v9 >= 0 )
+      v7 = CAIEntityInfo::EntityId(j);
+      v11 = CTmpEntitiesRef::operator[](v7);
+      v9 = IEntity::X(v11);
+      v10 = IEntity::Y(v11);
+      v3 = CAITaskForce::OwnerId(this);
+      CScanner::CountFighters(&v20, v9, v10, 20, v3);
+      v13 = this->ChooseMilitarySpell(this, &v20, v14);
+      if ( v13 >= 0 )
       {
-        IAIEnvironment::EntitySendCastSpellCommand(v8, v14, v9);
-        v19 = 1;
-        break;
+        iDstXY = this->ChooseMilitarySpellDestination(this, v13, v9, v10, 0);
+        if ( iDstXY >= 0 )
+        {
+          IAIEnvironment::EntitySendCastSpellCommand(v7, v13, iDstXY);
+          v18 = 1;
+          break;
+        }
       }
     }
+    if ( v18 )
+      this->m_uNextSpellTick = iTick + (IAIEnvironment::Rand() & 0x1F) + 45;
+    else
+      this->m_uNextSpellTick = iTick + 30;
   }
-  if ( v19 )
-    *((_DWORD *)v20 + 24) = v13 + (IAIEnvironment::Rand() & 0x1F) + 45;
-  else
-    *((_DWORD *)v20 + 24) = v13 + 30;
-  return CAITaskForceEx::Execute(v20);
+  CAITaskForceEx::Execute(this);
 }
 
 
 // address=[0x132b6f0]
-// Decompiled from CAITaskForcePriestsRoman *__cdecl CAITaskForcePriests::CreatePriestsTaskForce(  int _iRace,  int iOwnerId,  int tType,  int iFlags)
-class CAITaskForcePriests * __cdecl CAITaskForcePriests::CreatePriestsTaskForce(int _iRace, int iOwnerId, enum T_AI_TASK_FORCE_TYPE tType, int iFlags) {
+// Decompiled from CAITaskForcePriests *__cdecl CAITaskForcePriests::CreatePriestsTaskForce(  int iRace,  int iOwnerId,  int tType,  int iFlags)
+class CAITaskForcePriests * __cdecl CAITaskForcePriests::CreatePriestsTaskForce(int iRace, int iOwnerId, enum T_AI_TASK_FORCE_TYPE tType, int iFlags) {
   
-  CAITaskForcePriestsRoman *result; // eax
-  CAITaskForcePriestsRoman *v5; // [esp+14h] [ebp-30h]
-  void *v6; // [esp+18h] [ebp-2Ch]
-  CAITaskForcePriestsRoman *v7; // [esp+1Ch] [ebp-28h]
-  void *v8; // [esp+20h] [ebp-24h]
-  CAITaskForcePriestsRoman *v9; // [esp+24h] [ebp-20h]
-  void *v10; // [esp+28h] [ebp-1Ch]
+  CAITaskForcePriests *result; // eax
+  CAITaskForcePriestsTrojan *v5; // [esp+14h] [ebp-30h]
+  CAITaskForcePriestsTrojan *v6; // [esp+18h] [ebp-2Ch]
+  CAITaskForcePriestsMaya *v7; // [esp+1Ch] [ebp-28h]
+  CAITaskForcePriestsMaya *v8; // [esp+20h] [ebp-24h]
+  CAITaskForcePriestsViking *v9; // [esp+24h] [ebp-20h]
+  CAITaskForcePriestsViking *v10; // [esp+28h] [ebp-1Ch]
   CAITaskForcePriestsRoman *v11; // [esp+2Ch] [ebp-18h]
   CAITaskForcePriestsRoman *C; // [esp+30h] [ebp-14h]
 
-  switch ( _iRace )
+  switch ( iRace )
   {
     case 0:
       C = (CAITaskForcePriestsRoman *)operator new(0x64u);
@@ -147,33 +147,25 @@ class CAITaskForcePriests * __cdecl CAITaskForcePriests::CreatePriestsTaskForce(
       result = v11;
       break;
     case 1:
-      v10 = operator new(0x64u);
+      v10 = (CAITaskForcePriestsViking *)operator new(0x64u);
       if ( v10 )
-        v9 = (CAITaskForcePriestsRoman *)CAITaskForcePriestsViking::CAITaskForcePriestsViking(
-                                           v10,
-                                           iOwnerId,
-                                           tType,
-                                           iFlags);
+        v9 = CAITaskForcePriestsViking::CAITaskForcePriestsViking(v10, iOwnerId, tType, iFlags);
       else
         v9 = 0;
       result = v9;
       break;
     case 2:
-      v8 = operator new(0x64u);
+      v8 = (CAITaskForcePriestsMaya *)operator new(0x64u);
       if ( v8 )
-        v7 = (CAITaskForcePriestsRoman *)CAITaskForcePriestsMaya::CAITaskForcePriestsMaya(v8, iOwnerId, tType, iFlags);
+        v7 = CAITaskForcePriestsMaya::CAITaskForcePriestsMaya(v8, iOwnerId, tType, iFlags);
       else
         v7 = 0;
       result = v7;
       break;
     case 4:
-      v6 = operator new(0x64u);
+      v6 = (CAITaskForcePriestsTrojan *)operator new(0x64u);
       if ( v6 )
-        v5 = (CAITaskForcePriestsRoman *)CAITaskForcePriestsTrojan::CAITaskForcePriestsTrojan(
-                                           v6,
-                                           iOwnerId,
-                                           tType,
-                                           iFlags);
+        v5 = CAITaskForcePriestsTrojan::CAITaskForcePriestsTrojan(v6, iOwnerId, tType, iFlags);
       else
         v5 = 0;
       result = v5;
@@ -193,10 +185,11 @@ class CAITaskForcePriests * __cdecl CAITaskForcePriests::CreatePriestsTaskForce(
 
 
 // address=[0x132e610]
-// Decompiled from void __thiscall CAITaskForcePriests::~CAITaskForcePriests(CAITaskForcePriests *this)
+// Decompiled from struct CAITaskForce *__thiscall CAITaskForcePriests::~CAITaskForcePriests(CAITaskForce **this)
  CAITaskForcePriests::~CAITaskForcePriests(void) {
   
-  CAITaskForceEx::~CAITaskForceEx(this);
+  return CAITaskForceEx::~CAITaskForceEx(this);
 }
 
 
+#endif // Already implemented

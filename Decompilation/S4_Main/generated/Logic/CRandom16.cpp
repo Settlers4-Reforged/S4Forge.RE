@@ -4,7 +4,7 @@
 // Definitions for class CRandom16
 
 // address=[0x12fd540]
-// Decompiled from unsigned int __thiscall CRandom16::Rand(CRandom16 *this)
+// Decompiled from DWORD __thiscall CRandom16::Rand(CRandom16 *this)
 unsigned int  CRandom16::Rand(void) {
   
   ++this->m_uIteration;

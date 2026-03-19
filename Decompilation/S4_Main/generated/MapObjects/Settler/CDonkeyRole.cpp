@@ -62,15 +62,15 @@ class CWalking *  CDonkeyRole::InitWalking(class CSettler * a2) {
 void  CDonkeyRole::LogicUpdateJob(class CSettler * a2) {
   
   int v2; // eax
-  unsigned __int8 *v3; // eax
-  unsigned __int8 *v4; // eax
+  IEntity *v3; // eax
+  IEntity *v4; // eax
   int v5; // eax
   int v6; // eax
   CDonkeyRole *result; // eax
   int v8; // [esp+0h] [ebp-10h]
-  int v9; // [esp+4h] [ebp-Ch]
+  IEntity *v9; // [esp+4h] [ebp-Ch]
 
-  if ( IEntity::FlagBits(a2, EntityFlag_Selected) || IEntity::FlagBits(a2, (EntityFlag)0x400u) )
+  if ( IEntity::FlagBits(a2, EntityFlag_Selected) || IEntity::FlagBits(a2, (EntityFlag)1024) )
     (*(void (__thiscall **)(CDonkeyRole *, int))(*(_DWORD *)this + 132))(this, 1);
   switch ( *((_BYTE *)this + 4) )
   {
@@ -79,7 +79,7 @@ void  CDonkeyRole::LogicUpdateJob(class CSettler * a2) {
       (*(void (__thiscall **)(CDonkeyRole *, struct CSettler *))(*(_DWORD *)this + 16))(this, a2);
       if ( !IEntity::FlagBits(a2, EntityFlag_Registered) && debug && DEBUG_FLAGS[dword_41520AC] )
       {
-        v2 = IEntity::ID();
+        v2 = IEntity::ID(a2);
         BBSupportTracePrintF(0, "LogicUpdateJob - Go - not registered donkey %u", v2);
       }
       break;
@@ -92,11 +92,11 @@ void  CDonkeyRole::LogicUpdateJob(class CSettler * a2) {
       {
         __debugbreak();
       }
-      v3 = (unsigned __int8 *)CMapObjectMgr::EntityPtr(*((unsigned __int16 *)this + 38));
-      if ( IEntity::ObjType(v3) != 4 )
+      v3 = CMapObjectMgr::EntityPtr(*((unsigned __int16 *)this + 38));
+      if ( IEntity::ObjType(v3) != CATAPULT_OBJ )
       {
-        v4 = (unsigned __int8 *)CMapObjectMgr::EntityPtr(*((unsigned __int16 *)this + 38));
-        if ( IEntity::ObjType(v4) != 2
+        v4 = CMapObjectMgr::EntityPtr(*((unsigned __int16 *)this + 38));
+        if ( IEntity::ObjType(v4) != SHIP_OBJ
           && BBSupportDbgReport(
                2,
                "MapObjects\\Settler\\DonkeyRole.cpp",
@@ -108,12 +108,12 @@ void  CDonkeyRole::LogicUpdateJob(class CSettler * a2) {
         }
       }
       v9 = CVehicleMgr::operator[](*((unsigned __int16 *)this + 38));
-      (*(void (__thiscall **)(int, _DWORD, _DWORD))(*(_DWORD *)v9 + 132))(
+      ((void (__thiscall *)(IEntity *, _DWORD, _DWORD))v9->__vftable[1].Decrease)(
         v9,
         *((unsigned __int8 *)this + 72),
         *((_DWORD *)this + 17));
-      v5 = IEntity::ID();
-      (*(void (__thiscall **)(int, int))(*(_DWORD *)v9 + 64))(v9, v5);
+      v5 = IEntity::ID(a2);
+      ((void (__thiscall *)(IEntity *, int))v9->Detach)(v9, v5);
       *((_WORD *)this + 38) = 0;
       *((_DWORD *)this + 17) = 0;
       CDonkeyRole::SetFree(this);
@@ -121,7 +121,7 @@ void  CDonkeyRole::LogicUpdateJob(class CSettler * a2) {
       CDonkeyRole::SetJobType(this, 0);
       if ( !IEntity::FlagBits(a2, EntityFlag_Registered) && debug && DEBUG_FLAGS[dword_41520AC] )
       {
-        v6 = IEntity::ID();
+        v6 = IEntity::ID(a2);
         BBSupportTracePrintF(0, "LogicUpdateJob - LoadGood ready - not registered settler %u", v6);
       }
       break;
@@ -141,7 +141,7 @@ LABEL_28:
       else
       {
         CDonkeyRole::DropGoods(this, a2);
-        IAnimatedEntity::RegisterForLogicUpdate(v8 - 1);
+        IAnimatedEntity::RegisterForLogicUpdate(a2, v8 - 1);
       }
       break;
     default:

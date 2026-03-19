@@ -180,7 +180,7 @@ public:
     static class CAIEntityInfoTower * __cdecl EntityGetEntityInfoTower(int a1);
 
     // address=[0x130b570]
-    static void __cdecl EntitySendCastSpellCommand(int a1, int a2, int a3);
+    static void __cdecl EntitySendCastSpellCommand(int a1, int a2, int _iDstXY);
 
     // address=[0x130b630]
     static void __cdecl MovingEntitySendMoveCommand(int a1, int a2, int a3, bool a4);

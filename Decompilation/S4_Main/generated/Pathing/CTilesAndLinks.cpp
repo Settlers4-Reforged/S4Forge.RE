@@ -61,7 +61,7 @@ int __cdecl CTilesAndLinks::MoveLinkList(int _iDstLinksId, int _iSrcLinksId) {
   for ( i = 0; i < v7 >> 1; ++i )
   {
     v8[i] = v9[i];
-    *((_DWORD *)v9 + i) = 0xFF00FF00;
+    *((_DWORD *)v9 + i) = -16711936;
   }
   v5 = CLinkList::OwnerTileId(v8);
   CTile::SetLinkList(&CTiles::m_cTiles[v5], v8);

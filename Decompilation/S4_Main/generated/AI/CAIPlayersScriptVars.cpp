@@ -3,10 +3,10 @@
 // Definitions for class CAIPlayersScriptVars
 
 // address=[0x12fcb40]
-// Decompiled from char *__thiscall CAIPlayersScriptVars::operator[](char *this, unsigned int a2)
-class CAIPlayerScriptVars const &  CAIPlayersScriptVars::operator[](int a2) {
+// Decompiled from char *__thiscall CAIPlayersScriptVars::operator[](char *this, unsigned int _iPlayerId)
+class CAIPlayerScriptVars const &  CAIPlayersScriptVars::operator[](int _iPlayerId) {
   
-  if ( a2 >= 9
+  if ( _iPlayerId >= 9
     && BBSupportDbgReport(
          2,
          "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Script.h",
@@ -15,7 +15,7 @@ class CAIPlayerScriptVars const &  CAIPlayersScriptVars::operator[](int a2) {
   {
     __debugbreak();
   }
-  return &this[380 * a2];
+  return &this[380 * _iPlayerId];
 }
 
 

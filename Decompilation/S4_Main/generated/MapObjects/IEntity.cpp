@@ -12,7 +12,7 @@ int  IEntity::FlagBits(int a2)const {
 
 
 // address=[0x12fd480]
-// Decompiled from int __thiscall IEntity::ObjType(IEntity *this)
+// Decompiled from T_SETTLER_OBJ_TYPE __thiscall IEntity::ObjType(IEntity *this)
 int  IEntity::ObjType(void)const {
   
   return this->m_objType;

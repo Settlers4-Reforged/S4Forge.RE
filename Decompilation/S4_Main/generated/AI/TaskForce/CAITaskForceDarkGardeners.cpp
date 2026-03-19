@@ -1,3 +1,4 @@
+#if FALSE
 #include "CAITaskForceDarkGardeners.h"
 
 // Definitions for class CAITaskForceDarkGardeners
@@ -68,3 +69,4 @@ bool  CAITaskForceDarkGardeners::NewCommand(int a2, int a3, int a4) {
 }
 
 
+#endif // Already implemented

@@ -18,7 +18,7 @@ public:
     virtual bool  NewCommand(int a2, int a3, int a4);
 
     // address=[0x132c580]
-    virtual enum CAITaskForce::T_RESULT  AddEntity(class CAIEntityInfo * a2, enum CAITaskForce::T_POSITION a3);
+    virtual enum CAITaskForce::T_RESULT  AddEntity(class CAIEntityInfo * _pEntityInfo, enum CAITaskForce::T_POSITION a3);
 
     // address=[0x132c660]
     virtual enum CAITaskForce::T_RESULT  RemoveEntity(class CAIEntityInfo * a2);
@@ -28,6 +28,13 @@ public:
 
     // address=[0x132c830]
     virtual int  NumberOfEntities(enum T_AI_WARRIOR_TYPE a2)const;
+
+    // Type information members
+public:
+    int m_iNumberOfSwordsmen;
+    int m_iNumberOfBowmen;
+    int m_iNumberOfUniqueFighters;
+    int m_iNumberOfSquadleaders;
 
 };
 

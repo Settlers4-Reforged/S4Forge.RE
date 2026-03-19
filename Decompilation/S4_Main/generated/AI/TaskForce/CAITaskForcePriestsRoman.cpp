@@ -1,3 +1,4 @@
+#if FALSE
 #include "CAITaskForcePriestsRoman.h"
 
 // Definitions for class CAITaskForcePriestsRoman
@@ -12,31 +13,31 @@ int  CAITaskForcePriestsRoman::ChooseMilitarySpell(struct SCountFightersResult c
   int v7; // [esp-14h] [ebp-24h]
   int v8; // [esp-Ch] [ebp-1Ch]
   int v9; // [esp-8h] [ebp-18h]
-  int v10; // [esp+8h] [ebp-8h]
-  int v11; // [esp+Ch] [ebp-4h]
+  int m_uAllySoldiers; // [esp+8h] [ebp-8h]
+  int m_uEnemySoldiers; // [esp+Ch] [ebp-4h]
 
-  v11 = *((_DWORD *)a2 + 5);
-  if ( v11 <= 0 )
+  m_uEnemySoldiers = a2->m_uEnemySoldiers;
+  if ( m_uEnemySoldiers <= 0 )
     return -1;
-  if ( v11 < 5 )
+  if ( m_uEnemySoldiers < 5 )
   {
     v4 = IAIEnvironment::Rand();
-    if ( v4 >= v11 * CRandom16::PercentValue(0x14u) )
+    if ( v4 >= m_uEnemySoldiers * CRandom16::PercentValue(0x14u) )
       return -1;
   }
-  v10 = *((_DWORD *)a2 + 3);
-  if ( v10 < 10 )
+  m_uAllySoldiers = a2->m_uAllySoldiers;
+  if ( m_uAllySoldiers < 10 )
   {
     v5 = IAIEnvironment::Rand();
-    if ( v5 >= v10 * CRandom16::PercentValue(0xAu) )
+    if ( v5 >= m_uAllySoldiers * CRandom16::PercentValue(0xAu) )
       a3 &= ~0x10u;
   }
   if ( (a3 & 0x70) == 0 )
     return -1;
-  v9 = CStaticConfigVarInt::operator int(&unk_3ECCFC0);
-  v8 = CStaticConfigVarInt::operator int(&unk_3ECCFB4);
-  v7 = CStaticConfigVarInt::operator int(&unk_3ECCF9C);
-  v6 = CStaticConfigVarInt::operator int(&unk_3ECCFA8);
+  v9 = CStaticConfigVarInt::operator int(&s_cAIConfigRomanMilitarySpellChanceNone);
+  v8 = CStaticConfigVarInt::operator int(&s_cAIConfigRomanMilitarySpellChanceSoldier);
+  v7 = CStaticConfigVarInt::operator int(&s_cAIConfigRomanMilitarySpellChanceAttack);
+  v6 = CStaticConfigVarInt::operator int(&s_cAIConfigRomanMilitarySpellChanceDefence);
   return sub_132D6A0(4, v6, 5, v7, 6, v8, v9, a3);
 }
 
@@ -96,3 +97,4 @@ int  CAITaskForcePriestsRoman::ChooseMilitarySpellDestination(int a2, int a3, in
 }
 
 
+#endif // Already implemented

@@ -6,7 +6,7 @@
 class CAIPlayerScriptVars {
 public:
     // address=[0x12fcaf0]
-    int  operator[](enum T_AI_PLAYER_SCRIPT_VAR_INDEX a2)const;
+    int  operator[](enum T_AI_PLAYER_SCRIPT_VAR_INDEX _tVarIndex)const;
 
     // address=[0x1303840]
     int  Flags(void)const;

@@ -6,7 +6,7 @@
 class CAIPlayersScriptVars {
 public:
     // address=[0x12fcb40]
-    class CAIPlayerScriptVars const &  operator[](int a2);
+    class CAIPlayerScriptVars const &  operator[](int _iPlayerId);
 
     // address=[0x13038b0]
     int  GetValue(int a2, enum T_AI_PLAYER_SCRIPT_VAR_INDEX a3);

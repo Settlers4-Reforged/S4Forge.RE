@@ -1,3 +1,4 @@
+#if FALSE
 #include "CAITaskForceManakopters.h"
 
 // Definitions for class CAITaskForceManakopters
@@ -123,3 +124,4 @@ bool  CAITaskForceManakopters::NewCommand(int a2, int a3, int a4) {
 }
 
 
+#endif // Already implemented

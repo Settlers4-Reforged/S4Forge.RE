@@ -216,18 +216,10 @@ LABEL_26:
     *((_DWORD *)CAIDefenceGoals::Goal((CAIDefenceGoals *)v132, v86) + 4) = k;
     ++v116;
     v73 += v120;
-    v85 += ((int (__thiscall *)(CAITaskForce *, int))k->j_?NumberOfEntities@CAITaskForce@@UBEHW4T_AI_WARRIOR_TYPE@@@Z)(
-             k,
-             2);
-    v84 += ((int (__thiscall *)(CAITaskForce *, int))k->j_?NumberOfEntities@CAITaskForce@@UBEHW4T_AI_WARRIOR_TYPE@@@Z)(
-             k,
-             3);
-    v83 += ((int (__thiscall *)(CAITaskForce *, int))k->j_?NumberOfEntities@CAITaskForce@@UBEHW4T_AI_WARRIOR_TYPE@@@Z)(
-             k,
-             4);
-    v72 = ((int (__thiscall *)(CAITaskForce *, int))k->j_?NumberOfEntities@CAITaskForce@@UBEHW4T_AI_WARRIOR_TYPE@@@Z)(
-            k,
-            5);
+    v85 += ((int (__thiscall *)(CAITaskForce *, int))k->NumberOfEntities)(k, 2);
+    v84 += ((int (__thiscall *)(CAITaskForce *, int))k->NumberOfEntities)(k, 3);
+    v83 += ((int (__thiscall *)(CAITaskForce *, int))k->NumberOfEntities)(k, 4);
+    v72 = ((int (__thiscall *)(CAITaskForce *, int))k->NumberOfEntities)(k, 5);
     v77 += v72;
     if ( v72 <= 0 )
       ++v79;

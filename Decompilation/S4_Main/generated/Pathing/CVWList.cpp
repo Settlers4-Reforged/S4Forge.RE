@@ -1,21 +1,22 @@
+#if FALSE
 #include "CVWList.h"
 
 // Definitions for class CVWList
 
 // address=[0x1334ec0]
-// Decompiled from CVWList *__thiscall CVWList::CVWList(CVWList *this, int a2, int a3, int a4)
- CVWList::CVWList(int a2, int a3, int a4) {
+// Decompiled from CVWList *__thiscall CVWList::CVWList(CVWList *this, unsigned int iX, unsigned int iY, unsigned int iRadius)
+ CVWList::CVWList(int iX, int iY, int iRadius) {
   
-  CVWList::CalculateOverlappingSquares(this, a2, a3, a4);
+  CVWList::CalculateOverlappingSquares(this, iX, iY, iRadius);
   return this;
 }
 
 
 // address=[0x1335b10]
-// Decompiled from int __thiscall CVWList::operator[](void *this, int a2)
+// Decompiled from const struct CVWList::SVW *__thiscall CVWList::operator[](CVWList *this, int a2)
 struct CVWList::SVW const &  CVWList::operator[](int a2)const {
   
-  return (int)this + 8 * a2 + 8;
+  return &this->m_aVW[a2];
 }
 
 
@@ -23,60 +24,51 @@ struct CVWList::SVW const &  CVWList::operator[](int a2)const {
 // Decompiled from int __thiscall CVWList::Size(CVWList *this)
 int  CVWList::Size(void)const {
   
-  return *(_DWORD *)this;
+  return this->m_iSize;
 }
 
 
 // address=[0x15de830]
-// Decompiled from CVWList *__thiscall CVWList::CalculateOverlappingSquares(CVWList *this, int a2, int a3, unsigned int a4)
-void  CVWList::CalculateOverlappingSquares(int a2, int a3, int a4) {
+// Decompiled from void __thiscall CVWList::CalculateOverlappingSquares(  CVWList *this,  unsigned int _iX,  unsigned int _iY,  unsigned int _iRadius)
+void  CVWList::CalculateOverlappingSquares(int _iX, int _iY, int _iRadius) {
   
-  CVWList *result; // eax
-  int v5; // [esp+8h] [ebp-18h]
-  int v6; // [esp+Ch] [ebp-14h]
-  int v7; // [esp+10h] [ebp-10h] BYREF
+  int iV; // [esp+8h] [ebp-18h]
+  int iW; // [esp+Ch] [ebp-14h]
+  int v6; // [esp+10h] [ebp-10h] BYREF
   int j; // [esp+14h] [ebp-Ch]
   int i; // [esp+18h] [ebp-8h]
-  CVWList *v10; // [esp+1Ch] [ebp-4h]
 
-  v10 = this;
-  if ( !(unsigned __int8)CWorldManager::InWorld(a2, a3)
+  if ( !CWorldManager::InWorld(_iX, _iY)
     && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 161, "g_cWorld.InWorld(_iX, _iY)") == 1 )
   {
     __debugbreak();
   }
-  if ( a4 > 0x20 && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 162, "(_iRadius >=0) && (_iRadius <= 32)") == 1 )
+  if ( _iRadius > 0x20 && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 162, "(_iRadius >=0) && (_iRadius <= 32)") == 1 )
     __debugbreak();
-  v5 = Squares::XYToVW((Squares *)a2);
-  v6 = Squares::XYToVW((Squares *)a3);
-  v7 = sub_15E1D20(v5, v6);
+  iV = Squares::XYToVW(_iX);
+  iW = Squares::XYToVW(_iY);
+  v6 = sub_15E1D20(iV, iW);
   for ( i = -2; i <= 2; ++i )
   {
     for ( j = -2; j <= 2; ++j )
     {
-      if ( (unsigned __int8)sub_15E1E40(&v7, j, i, a2 & 0xF, a3 & 0xF, a4) )
-        CVWList::PushEx(v10, &v7, j + v5, i + v6);
+      if ( sub_15E1E40(&v6, j, i, _iX & 0xF, _iY & 0xF, _iRadius) )
+        CVWList::PushEx(this, &v6, j + iV, i + iW);
     }
   }
-  *(_DWORD *)v10 = v7 & 0x1F;
-  *((_DWORD *)v10 + 2 * *(_DWORD *)v10 + 2) = -1;
-  result = v10;
-  *((_DWORD *)v10 + 2 * *(_DWORD *)v10 + 3) = -1;
-  return result;
+  this->m_iSize = v6 & 0x1F;
+  this->m_aVW[this->m_iSize].m_iV = -1;
+  this->m_aVW[this->m_iSize].m_iW = -1;
 }
 
 
 // address=[0x15e2cf0]
-// Decompiled from int __thiscall CVWList::PushEx(CVWList *this, int *a2, int a3, int a4)
+// Decompiled from void __thiscall CVWList::PushEx(CVWList *this, int *a2, int a3, int a4)
 void  CVWList::PushEx(int & a2, int a3, int a4) {
   
-  int result; // eax
-
-  *((_DWORD *)this + 2 * (*a2 & 0x1F) + 2) = a3;
-  *((_DWORD *)this + 2 * (*a2 & 0x1F) + 3) = a4;
-  result = *a2 + 1;
-  *a2 = result;
-  return result;
+  this->m_aVW[*a2 & 0x1F].m_iV = a3;
+  this->m_aVW[(*a2)++ & 0x1F].m_iW = a4;
 }
 
 
+#endif // Already implemented

@@ -20,7 +20,7 @@ int __cdecl IAIEnvironment::PackXYFast(int a1, int a2) {
 
 
 // address=[0x12fd580]
-// Decompiled from int IAIEnvironment::Rand()
+// Decompiled from unsigned int IAIEnvironment::Rand()
 unsigned int __cdecl IAIEnvironment::Rand(void) {
   
   return CRandom16::Rand((CRandom16 *)IAIEnvironment::m_pRandom);
@@ -541,19 +541,20 @@ void __cdecl IAIEnvironment::EntityGetEntityTypeAndPosition(int a1, int & a2, in
 
 
 // address=[0x130b1d0]
-// Decompiled from unsigned int __cdecl IAIEnvironment::EntityWarriorType(int a1)
+// Decompiled from T_AI_WARRIOR_TYPE __cdecl IAIEnvironment::EntityWarriorType(int a1)
 enum T_AI_WARRIOR_TYPE __cdecl IAIEnvironment::EntityWarriorType(int a1) {
   
-  unsigned int v2; // [esp+8h] [ebp-4h]
+  IEntity *v2; // [esp+4h] [ebp-8h]
+  T_AI_WARRIOR_TYPE v3; // [esp+8h] [ebp-4h]
 
-  CMapObjectMgr::Entity(a1);
-  v2 = IEntity::WarriorType();
-  if ( v2 > 0xE
-    && BBSupportDbgReport(2, (int)"AI\\AI_Environment.cpp", 408, (int)"uWarriorType <= AI_WARRIOR_TYPE_LAST") == 1 )
+  v2 = CMapObjectMgr::Entity(a1);
+  v3 = IEntity::WarriorType(v2);
+  if ( (unsigned int)v3 > 14
+    && BBSupportDbgReport(2, "AI\\AI_Environment.cpp", 408, "uWarriorType <= AI_WARRIOR_TYPE_LAST") == 1 )
   {
     __debugbreak();
   }
-  return v2;
+  return v3;
 }
 
 
@@ -686,34 +687,27 @@ class CAIEntityInfoTower * __cdecl IAIEnvironment::EntityGetEntityInfoTower(int 
 
 
 // address=[0x130b570]
-// Decompiled from unsigned __int16 *__cdecl IAIEnvironment::EntitySendCastSpellCommand(int a1, int a2, int a3)
-void __cdecl IAIEnvironment::EntitySendCastSpellCommand(int a1, int a2, int a3) {
+// Decompiled from void __cdecl IAIEnvironment::EntitySendCastSpellCommand(int a1, int a2, int _iDstXY)
+void __cdecl IAIEnvironment::EntitySendCastSpellCommand(int a1, int a2, int _iDstXY) {
   
-  unsigned __int16 *result; // eax
-  int v4; // eax
-  _BYTE v5[24]; // [esp+4h] [ebp-30h] BYREF
-  CEntityEvent *v6; // [esp+1Ch] [ebp-18h]
-  CEntityEvent *v7; // [esp+20h] [ebp-14h]
-  unsigned __int16 *v8; // [esp+24h] [ebp-10h]
-  int v9; // [esp+30h] [ebp-4h]
+  int v3; // eax
+  CEntityEvent v4; // [esp+4h] [ebp-30h] BYREF
+  CEntityEvent *v5; // [esp+1Ch] [ebp-18h]
+  CEntityEvent *v6; // [esp+20h] [ebp-14h]
+  IEntity *SettlerPtr; // [esp+24h] [ebp-10h]
+  int v8; // [esp+30h] [ebp-4h]
 
-  result = (unsigned __int16 *)CSettlerMgr::GetSettlerPtr(a1);
-  v8 = result;
-  if ( !result )
-    return result;
-  result = (unsigned __int16 *)IEntity::FlagBits(v8, EntityFlag_Ready);
-  if ( !result )
-    return result;
-  result = (unsigned __int16 *)IEntity::Type(v8);
-  if ( result != (unsigned __int16 *)45 )
-    return result;
-  v4 = IEntity::OwnerId((unsigned __int8 *)v8);
-  v7 = CEntityEvent::CEntityEvent((CEntityEvent *)v5, 3u, a2, v4, 0, a3);
-  v6 = v7;
-  v9 = 0;
-  (*(void (__thiscall **)(unsigned __int16 *, CEntityEvent *))(*(_DWORD *)v8 + 80))(v8, v7);
-  v9 = -1;
-  return (unsigned __int16 *)CEntityEvent::~CEntityEvent(v5);
+  SettlerPtr = CSettlerMgr::GetSettlerPtr((struct CSettlerMgr *)g_cSettlerMgr, a1);
+  if ( SettlerPtr && IEntity::FlagBits(SettlerPtr, EntityFlag_Ready) && IEntity::Type(SettlerPtr) == 45 )
+  {
+    v3 = IEntity::OwnerId(SettlerPtr);
+    v6 = CEntityEvent::CEntityEvent(&v4, 3u, a2, v3, 0, _iDstXY);
+    v5 = v6;
+    v8 = 0;
+    SettlerPtr->SetEvent(SettlerPtr, v6);
+    v8 = -1;
+    CEntityEvent::~CEntityEvent(&v4);
+  }
 }
 
 

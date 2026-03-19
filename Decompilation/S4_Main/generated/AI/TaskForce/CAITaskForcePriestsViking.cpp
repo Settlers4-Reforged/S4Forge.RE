@@ -1,3 +1,4 @@
+#if FALSE
 #include "CAITaskForcePriestsViking.h"
 
 // Definitions for class CAITaskForcePriestsViking
@@ -14,38 +15,38 @@ int  CAITaskForcePriestsViking::ChooseMilitarySpell(struct SCountFightersResult 
   int v9; // [esp-14h] [ebp-24h]
   int v10; // [esp-Ch] [ebp-1Ch]
   int v11; // [esp-8h] [ebp-18h]
-  int v12; // [esp+8h] [ebp-8h]
-  int v13; // [esp+Ch] [ebp-4h]
+  int m_uAllySoldiers; // [esp+8h] [ebp-8h]
+  int m_uEnemySoldiers; // [esp+Ch] [ebp-4h]
 
   if ( (a3 & 0x80) != 0 )
   {
     v3 = IAIEnvironment::Rand();
-    v4 = CStaticConfigVarInt::operator int(&unk_3ECCFFC);
+    v4 = CStaticConfigVarInt::operator int(&s_cAIConfigVikingMilitarySpellThorsHammer);
     if ( v3 < CRandom16::PercentValue(v4) )
       return 7;
   }
-  v13 = *((_DWORD *)a2 + 5);
-  if ( v13 <= 0 )
+  m_uEnemySoldiers = a2->m_uEnemySoldiers;
+  if ( m_uEnemySoldiers <= 0 )
     return -1;
-  if ( v13 < 5 )
+  if ( m_uEnemySoldiers < 5 )
   {
     v6 = IAIEnvironment::Rand();
-    if ( v6 >= v13 * CRandom16::PercentValue(0x14u) )
+    if ( v6 >= m_uEnemySoldiers * CRandom16::PercentValue(0x14u) )
       return -1;
   }
-  v12 = *((_DWORD *)a2 + 3);
-  if ( v12 < 10 )
+  m_uAllySoldiers = a2->m_uAllySoldiers;
+  if ( m_uAllySoldiers < 10 )
   {
     v7 = IAIEnvironment::Rand();
-    if ( v7 >= v12 * CRandom16::PercentValue(0xAu) )
+    if ( v7 >= m_uAllySoldiers * CRandom16::PercentValue(0xAu) )
       a3 &= ~0x20u;
   }
   if ( (a3 & 0x70) == 0 )
     return -1;
-  v11 = CStaticConfigVarInt::operator int(&unk_3ECCFF0);
-  v10 = CStaticConfigVarInt::operator int(&unk_3ECCFE4);
-  v9 = CStaticConfigVarInt::operator int(&unk_3ECCFCC);
-  v8 = CStaticConfigVarInt::operator int(&unk_3ECCFD8);
+  v11 = CStaticConfigVarInt::operator int(&s_cAIConfigVikingMilitarySpellChanceNone);
+  v10 = CStaticConfigVarInt::operator int(&s_cAIConfigVikingMilitarySpellChanceSoldier);
+  v9 = CStaticConfigVarInt::operator int(&s_cAIConfigVikingMilitarySpellChanceAttack);
+  v8 = CStaticConfigVarInt::operator int(&s_cAIConfigVikingMilitarySpellChanceDefence);
   return sub_132D6A0(4, v8, 5, v9, 6, v10, v11, a3);
 }
 
@@ -92,11 +93,11 @@ CAITaskForcePriestsViking__ChooseMilitarySpellDestination___def_172BB45:
 
 
 // address=[0x132e5a0]
-// Decompiled from _DWORD *__thiscall CAITaskForcePriestsViking::CAITaskForcePriestsViking(_DWORD *this, int a2, int a3, int a4)
+// Decompiled from CAITaskForcePriestsViking *__thiscall CAITaskForcePriestsViking::CAITaskForcePriestsViking(  CAITaskForcePriestsViking *this,  int a2,  int a3,  int a4)
  CAITaskForcePriestsViking::CAITaskForcePriestsViking(int a2, enum T_AI_TASK_FORCE_TYPE a3, int a4) {
   
   CAITaskForcePriests::CAITaskForcePriests(this, a2, a3, a4);
-  *this = CAITaskForcePriestsViking::_vftable_;
+  this->__vftable = (CAITaskForcePriests_vtbl *)CAITaskForcePriestsViking::_vftable_;
   return this;
 }
 
@@ -109,3 +110,4 @@ CAITaskForcePriestsViking__ChooseMilitarySpellDestination___def_172BB45:
 }
 
 
+#endif // Already implemented

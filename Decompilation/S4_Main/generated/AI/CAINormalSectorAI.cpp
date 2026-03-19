@@ -567,71 +567,72 @@ void  CAINormalSectorAI::OccupationCheck(int a2) {
 
 
 // address=[0x1324670]
-// Decompiled from int __thiscall CAINormalSectorAI::FindTargetForSuicideMission(char *this, pairNode *a2)
-int  CAINormalSectorAI::FindTargetForSuicideMission(class CAITaskForce * a2) {
+// Decompiled from int __thiscall CAINormalSectorAI::FindTargetForSuicideMission(CAISectorAI *this, CAITaskForce *_pSquad)
+int  CAINormalSectorAI::FindTargetForSuicideMission(class CAITaskForce * _pSquad) {
   
   pairNode *v3; // eax
   int v4; // eax
-  CAIGoal *v5; // eax
+  char *v5; // eax
   int v6; // [esp+0h] [ebp-34h] BYREF
   int v7; // [esp+4h] [ebp-30h]
   int v8; // [esp+8h] [ebp-2Ch] BYREF
   int v9; // [esp+Ch] [ebp-28h] BYREF
-  char *v11; // [esp+14h] [ebp-20h]
-  int v12; // [esp+18h] [ebp-1Ch]
-  CAIGoalCache *v13; // [esp+1Ch] [ebp-18h]
-  int v14; // [esp+20h] [ebp-14h] BYREF
-  int v15; // [esp+24h] [ebp-10h] BYREF
+  int iNumberOfSwordsman; // [esp+18h] [ebp-1Ch]
+  CAIPlayerAI **p_m_pPlayerAI; // [esp+1Ch] [ebp-18h]
+  int iSquadX; // [esp+20h] [ebp-14h] BYREF
+  int iSquadY; // [esp+24h] [ebp-10h] BYREF
   int v16; // [esp+28h] [ebp-Ch]
   int v17; // [esp+2Ch] [ebp-8h]
   bool v18; // [esp+32h] [ebp-2h]
   bool v19; // [esp+33h] [ebp-1h]
 
-  v11 = this;
-  if ( !a2 && BBSupportDbgReport(2, "AI\\AI_SectorAINormal.cpp", 1724, "_pSquad != 0") == 1 )
+  if ( !_pSquad && BBSupportDbgReport(2, "AI\\AI_SectorAINormal.cpp", 1724, "_pSquad != 0") == 1 )
     __debugbreak();
-  if ( CAITaskForce::Class(a2) != 2
+  if ( CAITaskForce::Class(_pSquad) != AI_TASK_FORCE_CLASS_SQUAD
     && BBSupportDbgReport(2, "AI\\AI_SectorAINormal.cpp", 1725, "_pSquad->Class() == AI_TASK_FORCE_CLASS_SQUAD") == 1 )
   {
     __debugbreak();
   }
-  if ( !CAITaskForce::NumberOfEntities(a2) )
+  if ( !CAITaskForce::NumberOfEntities(_pSquad) )
     return 0;
-  v12 = (*(int (__thiscall **)(pairNode *, int))(*(_DWORD *)a2 + 16))(a2, 2);
-  if ( v12 < 0 && BBSupportDbgReport(2, "AI\\AI_SectorAINormal.cpp", 1736, "iNumberOfSwordsman >= 0") == 1 )
+  iNumberOfSwordsman = _pSquad->NumberOfEntities(_pSquad, AI_WARRIOR_TYPE_SWORDMAN);
+  if ( iNumberOfSwordsman < 0
+    && BBSupportDbgReport(2, "AI\\AI_SectorAINormal.cpp", 1736, "iNumberOfSwordsman >= 0") == 1 )
+  {
     __debugbreak();
-  if ( v12 <= 0 )
+  }
+  if ( iNumberOfSwordsman <= 0 )
     return 0;
-  CAITaskForce::GetPositionOfFirstEntity(a2, &v14, &v15);
-  if ( (v14 < 0 || v15 < 0)
+  CAITaskForce::GetPositionOfFirstEntity(_pSquad, &iSquadX, &iSquadY);
+  if ( (iSquadX < 0 || iSquadY < 0)
     && BBSupportDbgReport(2, "AI\\AI_SectorAINormal.cpp", 1748, "(iSquadX >= 0) && (iSquadY >= 0)") == 1 )
   {
     __debugbreak();
   }
   v17 = 0;
   v16 = 0x4000;
-  v19 = CAITaskForce::Command(a2) == 4 && CAITaskForce::IsGoalValid(a2, 1);
+  v19 = CAITaskForce::Command(_pSquad) == 4 && CAITaskForce::IsGoalValid(_pSquad, 1);
   v18 = v19;
   if ( v19 )
   {
-    v17 = CAITaskForce::CmdGoal(a2);
+    v17 = CAITaskForce::CmdGoal(_pSquad);
     if ( v17 <= 0 && BBSupportDbgReport(2, "AI\\AI_SectorAINormal.cpp", 1759, "iGoalId > 0") == 1 )
       __debugbreak();
-    if ( IAIEnvironment::EntityIsAliveAndOfGivenWarriorType(v17, 12) )
+    if ( IAIEnvironment::EntityIsAliveAndOfGivenWarriorType(v17, AI_WARRIOR_TYPE_TOWER_BUILDING) )
     {
       IAIEnvironment::BuildingGetEnsignPosition(v17, &v8, &v9);
-      v16 = IAIEnvironment::GridDistance(v8 - v14, v9 - v15);
+      v16 = IAIEnvironment::GridDistance(v8 - iSquadX, v9 - iSquadY);
     }
   }
   if ( v16 > 10 )
   {
-    v3 = (pairNode *)CAISectorAI::PlayerAI(v11);
+    v3 = (pairNode *)CAISectorAI::PlayerAI(this);
     v4 = CAIPlayerAI::PlayerId(v3);
-    if ( CScanner::FindNearestEnemyTowerInSector((struct SFindNearestResult *)&v6, v14, v15, 32, v4) )
+    if ( CScanner::FindNearestEnemyTowerInSector((struct SFindNearestResult *)&v6, iSquadX, iSquadY, 32, v4) )
     {
       if ( v6 <= 0 && BBSupportDbgReport(2, "AI\\AI_SectorAINormal.cpp", 1778, "sResult.m_iEntityId > 0") == 1 )
         __debugbreak();
-      if ( !IAIEnvironment::EntityIsAliveAndOfGivenWarriorType(v6, 12)
+      if ( !IAIEnvironment::EntityIsAliveAndOfGivenWarriorType(v6, AI_WARRIOR_TYPE_TOWER_BUILDING)
         && BBSupportDbgReport(
              2,
              "AI\\AI_SectorAINormal.cpp",
@@ -649,14 +650,14 @@ int  CAINormalSectorAI::FindTargetForSuicideMission(class CAITaskForce * a2) {
   }
   if ( v17 > 0 )
     return v17;
-  v13 = (CAIGoalCache *)(v11 + 1452);
-  CAIGoalCache::DeleteInvalidGoalsIfNecessary((CAIGoalCache *)(v11 + 1452));
-  if ( (int)CAIGoalCache::NumberOfCachedGoals(v13) > 0 )
+  p_m_pPlayerAI = &this[181].m_pPlayerAI;
+  CAIGoalCache::DeleteInvalidGoalsIfNecessary((CAIGoalCache *)&this[181].m_pPlayerAI);
+  if ( CAIGoalCache::NumberOfCachedGoals((CAIGoalCache *)p_m_pPlayerAI) > 0 )
   {
-    v5 = CAIGoalCache::Goal(v13, 0);
-    v17 = CAIGoal::EntityId(v5);
+    v5 = CAIGoalCache::Goal((CAIGoalCache *)p_m_pPlayerAI, 0);
+    v17 = CAIGoal::EntityId((CAIGoal *)v5);
   }
-  if ( !IAIEnvironment::EntityIsAliveAndOfGivenWarriorType(v17, 12) )
+  if ( !IAIEnvironment::EntityIsAliveAndOfGivenWarriorType(v17, AI_WARRIOR_TYPE_TOWER_BUILDING) )
     return 0;
   return v17;
 }

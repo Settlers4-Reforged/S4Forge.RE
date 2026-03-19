@@ -178,7 +178,7 @@ bool  CAITaskForce::NewCommand(int a2, int a3, int a4) {
 
 
 // address=[0x1319830]
-// Decompiled from int __stdcall CAITaskForce::NumberOfEntities(int a1)
+// Decompiled from int __stdcall CAITaskForce::NumberOfEntities(enum T_AI_WARRIOR_TYPE a1)
 int  CAITaskForce::NumberOfEntities(enum T_AI_WARRIOR_TYPE a1)const {
   
   return -1;
@@ -186,7 +186,7 @@ int  CAITaskForce::NumberOfEntities(enum T_AI_WARRIOR_TYPE a1)const {
 
 
 // address=[0x1321b40]
-// Decompiled from int __thiscall CAITaskForce::Class(CAITaskForce *this)
+// Decompiled from T_AI_TASK_FORCE_CLASS __thiscall CAITaskForce::Class(CAITaskForce *this)
 enum T_AI_TASK_FORCE_CLASS  CAITaskForce::Class(void)const {
   
   return this->m_tClass;

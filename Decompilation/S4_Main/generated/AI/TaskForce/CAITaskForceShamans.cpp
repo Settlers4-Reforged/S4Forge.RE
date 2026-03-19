@@ -1,3 +1,4 @@
+#if FALSE
 #include "CAITaskForceShamans.h"
 
 // Definitions for class CAITaskForceShamans
@@ -6,7 +7,7 @@
 // Decompiled from CAITaskForceShamans *__thiscall CAITaskForceShamans::CAITaskForceShamans(  CAITaskForceShamans *this,  int iOwnerId,  int iFlags)
  CAITaskForceShamans::CAITaskForceShamans(int iOwnerId, int iFlags) {
   
-  CAITaskForceEx::CAITaskForceEx(this, iOwnerId, 7, 12, iFlags);
+  CAITaskForceEx::CAITaskForceEx((CAITaskForceEx *)this, iOwnerId, 7, 12, iFlags);
   *(_DWORD *)this = CAITaskForceShamans::_vftable_;
   return this;
 }
@@ -21,111 +22,93 @@
 
 
 // address=[0x132cf70]
-// Decompiled from char __thiscall CAITaskForceShamans::Execute(CAITaskForceShamans *this)
+// Decompiled from void __thiscall CAITaskForceShamans::Execute(CAITaskForceShamans *this)
 void  CAITaskForceShamans::Execute(void) {
   
-  int Entity; // eax
+  int v1; // eax
   int v2; // eax
-  int v3; // eax
-  int v5; // [esp+0h] [ebp-30h]
-  int v6; // [esp+4h] [ebp-2Ch]
-  int v7; // [esp+8h] [ebp-28h]
-  int v8; // [esp+Ch] [ebp-24h]
-  int v9; // [esp+18h] [ebp-18h]
-  int v10; // [esp+1Ch] [ebp-14h]
-  int v11; // [esp+20h] [ebp-10h]
-  int v12; // [esp+24h] [ebp-Ch]
-  char v14; // [esp+2Eh] [ebp-2h]
-  char v15; // [esp+2Fh] [ebp-1h]
+  int v3; // [esp+0h] [ebp-30h]
+  int v4; // [esp+4h] [ebp-2Ch]
+  int v5; // [esp+8h] [ebp-28h]
+  int v6; // [esp+Ch] [ebp-24h]
+  CAIEntityInfo *v7; // [esp+18h] [ebp-18h]
+  CAIEntityInfo *v8; // [esp+1Ch] [ebp-14h]
+  CAIEntityInfo *v9; // [esp+20h] [ebp-10h]
+  CAIEntityInfo *Entity; // [esp+24h] [ebp-Ch]
+  char v12; // [esp+2Eh] [ebp-2h]
+  char v13; // [esp+2Fh] [ebp-1h]
 
   CAITaskForce::SetWaitCounter(this, 8u);
   switch ( CAITaskForce::State(this) )
   {
-    case 'k':
+    case 0x6B:
       Entity = CAITaskForce::FirstEntity(this);
-      v12 = Entity;
-      if ( Entity )
+      if ( Entity && CAITaskForce::CmdGoal(this) > 0 )
       {
-        Entity = CAITaskForce::CmdGoal(this);
-        if ( Entity > 0 )
+        while ( Entity )
         {
-          while ( v12 )
-          {
-            v8 = CAIEntityInfo::EntityId(v12);
-            v2 = CAITaskForce::CmdGoal(this);
-            IAIEnvironment::EntityEnterManakopter(v8, v2);
-            v12 = CAIEntityInfo::Next(v12);
-          }
-          LOBYTE(Entity) = CAITaskForce::SetNewStatusAndState(this, 9, 108, 0);
+          v6 = CAIEntityInfo::EntityId(Entity);
+          v1 = CAITaskForce::CmdGoal(this);
+          IAIEnvironment::EntityEnterManakopter(v6, v1);
+          Entity = CAIEntityInfo::Next(Entity);
         }
+        CAITaskForce::SetNewStatusAndState(this, 9, 108, 0);
       }
       break;
-    case 'l':
-      Entity = CAITaskForce::FirstEntity(this);
-      v11 = Entity;
-      v15 = 1;
-      if ( Entity )
-      {
-        Entity = CAITaskForce::CmdGoal(this);
-        if ( Entity > 0 )
-        {
-          while ( v11 )
-          {
-            v7 = CAIEntityInfo::EntityId(v11);
-            Entity = IAIEnvironment::EntityFlags(v7) & 0x8000;
-            if ( !Entity )
-            {
-              v15 = 0;
-              break;
-            }
-            Entity = CAIEntityInfo::Next(v11);
-            v11 = Entity;
-          }
-          if ( v15 )
-            LOBYTE(Entity) = CAITaskForce::SetStatus(this, 8);
-        }
-      }
-      break;
-    case 'o':
-      Entity = CAITaskForce::FirstEntity(this);
-      v10 = Entity;
-      v14 = 1;
-      if ( Entity )
-      {
-        while ( v10 )
-        {
-          v6 = CAIEntityInfo::EntityId(v10);
-          if ( !IAIEnvironment::EntityIsShamanOutOfMana(v6) )
-            v14 = 0;
-          Entity = CAIEntityInfo::Next(v10);
-          v10 = Entity;
-        }
-        if ( v14 )
-          LOBYTE(Entity) = CAITaskForce::SetStatus(this, 10);
-      }
-      break;
-    case 'p':
-      Entity = CAITaskForce::FirstEntity(this);
-      v9 = Entity;
-      if ( Entity )
+    case 0x6C:
+      v9 = CAITaskForce::FirstEntity(this);
+      v13 = 1;
+      if ( v9 && CAITaskForce::CmdGoal(this) > 0 )
       {
         while ( v9 )
         {
           v5 = CAIEntityInfo::EntityId(v9);
-          v3 = CAITaskForce::CmdGoal(this);
-          LOBYTE(Entity) = IAIEnvironment::EntitySendShamanWorkEvent(v5, v3);
-          if ( !(_BYTE)Entity )
-            return Entity;
+          if ( (IAIEnvironment::EntityFlags(v5) & 0x8000) == 0 )
+          {
+            v13 = 0;
+            break;
+          }
           v9 = CAIEntityInfo::Next(v9);
         }
-        LOBYTE(Entity) = (unsigned __int8)CAITaskForce::SetState(this, 111);
+        if ( v13 )
+          CAITaskForce::SetStatus(this, 8);
+      }
+      break;
+    case 0x6F:
+      v8 = CAITaskForce::FirstEntity(this);
+      v12 = 1;
+      if ( v8 )
+      {
+        while ( v8 )
+        {
+          v4 = CAIEntityInfo::EntityId(v8);
+          if ( !IAIEnvironment::EntityIsShamanOutOfMana(v4) )
+            v12 = 0;
+          v8 = CAIEntityInfo::Next(v8);
+        }
+        if ( v12 )
+          CAITaskForce::SetStatus(this, 10);
+      }
+      break;
+    case 0x70:
+      v7 = CAITaskForce::FirstEntity(this);
+      if ( v7 )
+      {
+        while ( v7 )
+        {
+          v3 = CAIEntityInfo::EntityId(v7);
+          v2 = CAITaskForce::CmdGoal(this);
+          if ( !IAIEnvironment::EntitySendShamanWorkEvent(v3, v2) )
+            return;
+          v7 = CAIEntityInfo::Next(v7);
+        }
+        CAITaskForce::SetState(this, 111);
       }
       break;
     default:
-      LOBYTE(Entity) = CAITaskForceEx::Execute(this);
+      CAITaskForceEx::Execute(this);
       break;
   }
-  return Entity;
 }
 
 
@@ -145,7 +128,7 @@ bool  CAITaskForceShamans::NewCommand(int a2, int a3, int a4) {
     case 1u:
     case 7u:
       CAITaskForce::MarkGoalAsPosition(this);
-      (*(void (__thiscall **)(CAITaskForceShamans *, int))(*(_DWORD *)this + 44))(this, a3);
+      this->SetDestinationXY(this, a3);
       CAITaskForce::SetNewStatusAndState(this, 2, 102, 0);
       result = 1;
       break;
@@ -176,3 +159,4 @@ bool  CAITaskForceShamans::NewCommand(int a2, int a3, int a4) {
 }
 
 
+#endif // Already implemented

@@ -6,34 +6,34 @@
 class CScanner {
 public:
     // address=[0x1301390]
-    static bool __cdecl FindNearestEnemyTowerInSector(struct SFindNearestResult & a1, int a2, int a3, int a4, int a5);
+    static bool __cdecl FindNearestEnemyTowerInSector(struct SFindNearestResult & a1, int a2, int a3, int a4, int iPlayerId);
 
     // address=[0x13065f0]
-    static int __cdecl FindNearestOwnTowerInSector(int a1, int a2, int a3, int a4);
+    static int __cdecl FindNearestOwnTowerInSector(int a1, int a2, int a3, int _iPlayerId);
 
     // address=[0x15df090]
-    static bool __cdecl CheckIfAEnemyUnitMayBeInRange(int a1, int a2, int a3, int a4);
+    static bool __cdecl CheckIfAEnemyUnitMayBeInRange(int _iX, int _iY, int _iRadius, int _iPlayerId);
 
     // address=[0x15df200]
-    static int __cdecl CountCiviliansAndFindNearestInSector(int a1, int a2, int a3, int a4, int * a5);
+    static int __cdecl CountCiviliansAndFindNearestInSector(int _iX, int _iY, int _iRadius, int a4, int * a5);
 
     // address=[0x15df4f0]
-    static void __cdecl CountFighters(struct SCountFightersResult & a1, int a2, int a3, int a4, int a5);
+    static void __cdecl CountFighters(struct SCountFightersResult & a1, int _iX, int _iY, int _iRadius, int _iPlayerId);
 
     // address=[0x15df900]
-    static void __cdecl EvaluateFighters(struct SEvalFightersResult & a1, int a2, int a3, int a4, int a5);
+    static void __cdecl EvaluateFighters(struct SEvalFightersResult & a1, int _iX, int _iY, int a4, int a5);
 
     // address=[0x15dfdc0]
-    static void __cdecl EvaluateTowers(struct SEvalTowersResult & a1, int a2, int a3, int a4, int a5);
+    static void __cdecl EvaluateTowers(struct SEvalTowersResult & arg0, int _iX, int _iY, int _iRadius, int _iPlayerId);
 
     // address=[0x15e0530]
-    static bool __cdecl FindNearestTowerInSector(struct SFindNearestResult & a1, int a2, int a3, int a4, int a5);
+    static bool __cdecl FindNearestTowerInSector(struct SFindNearestResult & arg0, int iX, int iY, int _iRadius, int a5);
 
     // address=[0x15e08a0]
-    static int __cdecl FindNearestFighter(int a1, int a2, int a3, int a4, int a5);
+    static int __cdecl FindNearestFighter(int _iX, int _iY, int _iRadius, int _iFighterSearchMask, int _iOwnerBitMask);
 
     // address=[0x15e0af0]
-    static int __cdecl FindNearestAnimal(int a1, int a2, int a3, bool a4, int a5);
+    static int __cdecl FindNearestAnimal(int _iX, int _iY, int a3, bool a4, int a5);
 
     // address=[0x15e0d40]
     static int __cdecl FindNearestEnemyBowman(int a1, int a2, int a3, int a4);
@@ -51,28 +51,28 @@ public:
     static int __cdecl FindNearestAllyFighter(int a1, int a2, int a3, int a4);
 
     // address=[0x15e0e30]
-    static int __cdecl CountSettlers(int a1, int a2, int a3, int const * a4, int const * a5, int a6, int a7);
+    static int __cdecl CountSettlers(int _iX, int _iY, int _iRadius, int const * _pPlayerIds, int const * _pSettlerTypes, int _iSectorId, int _iLimit);
 
     // address=[0x15e1070]
-    static int __cdecl IsNearMyLand(int a1, int a2, int a3);
+    static int __cdecl IsNearMyLand(int _iPlayerId, int _iX, int _iY);
 
     // address=[0x15e13a0]
     static bool __cdecl FindNearestPlayerLand(int a1, int & a2, int & a3);
 
     // address=[0x15e1460]
-    static bool __cdecl FindAnyEnemyFighter(int a1, int a2, int a3, int a4, int a5);
+    static bool __cdecl FindAnyEnemyFighter(int _iX, int _iY, int _iRadius, int a4, int a5);
 
     // address=[0x15e1710]
-    static bool __cdecl FindAnySettlerOrVehicle(int a1, int a2, int a3, int a4);
+    static bool __cdecl FindAnySettlerOrVehicle(int _iX, int _iY, int _iRadius, int _iPlayerId);
 
     // address=[0x15e19d0]
-    static bool __cdecl IsAreaCompletelyOwned(int a1, int a2, int a3, int a4);
+    static bool __cdecl IsAreaCompletelyOwned(int _iX, int _iY, int _iRadius, int _iPlayerId);
 
     // address=[0x15e1b40]
-    static bool __cdecl IsAreaCompletelyGreen(int a1, int a2, int a3);
+    static bool __cdecl IsAreaCompletelyGreen(int _iX, int _iY, int _iRadius);
 
     // address=[0x15e1c30]
-    static bool __cdecl IsAreaCompletelyDarkLand(int a1, int a2, int a3);
+    static bool __cdecl IsAreaCompletelyDarkLand(int _iX, int _iY, int _iRadius);
 
 };
 

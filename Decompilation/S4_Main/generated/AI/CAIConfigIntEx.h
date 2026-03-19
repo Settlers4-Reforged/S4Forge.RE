@@ -14,6 +14,11 @@ public:
     // address=[0x131ecd0]
     char const *  Name(void)const;
 
+    // Type information members
+public:
+    int[3] m_aData;
+    const char * m_spName;
+
 };
 
 

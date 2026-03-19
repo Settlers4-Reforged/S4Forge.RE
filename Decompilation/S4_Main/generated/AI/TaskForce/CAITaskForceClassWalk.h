@@ -20,6 +20,11 @@ public:
     // address=[0x1328dd0]
     bool  NextTaskForce(void);
 
+    // Type information members
+public:
+    CAITaskForce * m_pCurrentTaskForce;
+    CAITaskForce * m_pNextTaskForce;
+
 };
 
 

@@ -3,10 +3,10 @@
 // Definitions for class CAIPlayerScriptVars
 
 // address=[0x12fcaf0]
-// Decompiled from int __thiscall CAIPlayerScriptVars::operator[](_DWORD *this, unsigned int a2)
-int  CAIPlayerScriptVars::operator[](enum T_AI_PLAYER_SCRIPT_VAR_INDEX a2)const {
+// Decompiled from int __thiscall CAIPlayerScriptVars::operator[](_DWORD *this, unsigned int _tVarIndex)
+int  CAIPlayerScriptVars::operator[](enum T_AI_PLAYER_SCRIPT_VAR_INDEX _tVarIndex)const {
   
-  if ( a2 > 0x16
+  if ( _tVarIndex > 0x16
     && BBSupportDbgReport(
          2,
          "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Script.h",
@@ -15,7 +15,7 @@ int  CAIPlayerScriptVars::operator[](enum T_AI_PLAYER_SCRIPT_VAR_INDEX a2)const 
   {
     __debugbreak();
   }
-  return *(_DWORD *)(this[2] + 4 * a2);
+  return *(_DWORD *)(this[2] + 4 * _tVarIndex);
 }
 
 
@@ -69,7 +69,7 @@ void  CAIPlayerScriptVars::Init(void) {
   for ( i = 0; i <= 3; ++i )
   {
     for ( j = 0; j <= 22; ++j )
-      *((_DWORD *)this + 23 * i + j + 3) = dword_3ECC7C8[23 * i + j];
+      *((_DWORD *)this + 23 * i + j + 3) = unk_3ECC7C8[23 * i + j];
   }
 }
 
@@ -102,7 +102,7 @@ void  CAIPlayerScriptVars::Load(class IS4Chunk & a2) {
     }
     while ( j <= 22 )
     {
-      *((_DWORD *)this + 23 * i + j + 3) = dword_3ECC7C8[23 * i + j];
+      *((_DWORD *)this + 23 * i + j + 3) = unk_3ECC7C8[23 * i + j];
       result = ++j;
     }
   }
