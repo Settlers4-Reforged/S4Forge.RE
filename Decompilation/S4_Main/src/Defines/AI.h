@@ -55,6 +55,7 @@ enum T_AI_TASK_FORCE_CLASS {
     AI_TASK_FORCE_CLASS_PRIESTS   = 3,
 
     AI_TASK_FORCE_CLASS_GROUP       = 6, // just a guess, but CTaskForceEx checks this in a Group call
+    AI_TASK_FORCE_CLASS_SHAMANS     = 7,
     AI_TASK_FORCE_CLASS_MANAKOPTERS = 8,
     AI_TASK_FORCE_CLASS_MAX         = 9,
 };
@@ -63,8 +64,8 @@ enum T_RESULT {
     RESULT_INVALID   = 0,
     RESULT_FAILED    = 1,
     RESULT_UNKNOWN_2 = 2, //As in, I dont know what the name is
-    RESULT_OK        = 3,
-    RESULT_UNKNOWN_4 = 4, //As in, I dont know what the name is
+    RESULT_ADDED     = 3,
+    RESULT_REMOVED   = 4, //Just a guess to be added and removed - seems to be used in CAITaskForceSquard mostly in regards to that semantic
 };
 
 enum T_AI_ENTITY_INFO_EX_CLASS {
