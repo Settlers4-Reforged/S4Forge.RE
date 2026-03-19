@@ -5,6 +5,8 @@
 
 // Definitions for class CAlliances
 
+class CAlliances g_cAlliances{};
+
 // address=[0x1301120]
 // Decompiled from int __cdecl CAlliances::AllianceId(int a1)
 int __cdecl CAlliances::AllianceId(int a1) {

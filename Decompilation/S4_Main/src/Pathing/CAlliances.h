@@ -3,6 +3,8 @@
 
 #include "defines.h"
 
+extern class CAlliances g_cAlliances;
+
 class CAlliances {
 public:
     // address=[0x1301120]
