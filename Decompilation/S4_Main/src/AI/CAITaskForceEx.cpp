@@ -7,6 +7,7 @@
 
 #include "CAIEntityInfo.h"
 #include "CBB/CBBSupport.h"
+#include "MapObjects/IEntity.h"
 
 
 // Definitions for class CAITaskForceEx
@@ -183,7 +184,7 @@ void CAITaskForceEx::Execute(void) {
          && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 860, "GoalIsEntity()") == 1) {
         __debugbreak();
       }
-      if((IAIEnvironment::EntityFlags(this->CmdGoal()) & 0x2000000) == 0)
+      if((IAIEnvironment::EntityFlags(this->CmdGoal()) & EntityFlag_Ready) == 0)
         goto LABEL_34;
 
       for(CAIEntityInfo *i = this->FirstEntity(); i; i = i->Next())
@@ -194,7 +195,7 @@ void CAITaskForceEx::Execute(void) {
          && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 887, "GoalIsEntity()") == 1) {
         __debugbreak();
       }
-      if((IAIEnvironment::EntityFlags(this->CmdGoal()) & 0x2000000) != 0)
+      if((IAIEnvironment::EntityFlags(this->CmdGoal()) & EntityFlag_Ready) != 0)
         return;
       goto LABEL_34;
     case 106:

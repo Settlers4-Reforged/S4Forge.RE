@@ -9,87 +9,6 @@
 
 // Definitions for class CAITaskForcePriestsMaya
 
-// address=[0x132D560]
-int __cdecl sub_132D560(int *_pNumbers, int *_pChances, int _iSize) {
-  int    j; // [esp+4h] [ebp-50h]
-  _DWORD v8[16]; // [esp+10h] [ebp-44h]
-
-  BB_ASSERT(_pNumbers != nullptr);
-  BB_ASSERT(_pChances != nullptr);
-  BB_ASSERT(_iSize >= 0);
-  BB_ASSERT(_iSize <= 16);
-
-  // if(!_pNumbers && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 79, "_pNumbers != 0") == 1)
-  //   __debugbreak();
-  // if(!_pChances && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 80, "_pChances != 0") == 1)
-  //   __debugbreak();
-  // if(_iSize < 0 && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 81, "_iSize >= 0") == 1)
-  //   __debugbreak();
-  // if(_iSize > 16 && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 82, "_iSize <= 16") == 1)
-  //   __debugbreak();
-
-  unsigned int v6 = 0;
-  for(int i = 0; i < _iSize; ++i) {
-    if(_pChances[i] > 0)
-      v6 += _pChances[i];
-    v8[i] = v6;
-  }
-  if(!v6)
-    return -1;
-  unsigned int iChosenChance = IAIEnvironment::Rand() % v6;
-  for(j = 0; v8[j] <= iChosenChance; ++j);
-  return _pNumbers[j];
-}
-
-// address=[0x132D6A0]
-int __cdecl sub_132D6A0(int _iNumber1, int a2, int _iNumber2, int a4, int _iNumber3, int a6, int a7, int a8) {
-  int aNumbers[4]; // [esp+0h] [ebp-24h] BYREF
-  int aChances[4]; // [esp+10h] [ebp-14h] BYREF
-
-  BB_ASSERT(_iNumber1 >= 0);
-  BB_ASSERT(_iNumber2 >= 0);
-  BB_ASSERT(_iNumber3 >= 0);
-  BB_ASSERT(_iNumber1 < 32);
-  BB_ASSERT(_iNumber2 < 32);
-  BB_ASSERT(_iNumber3 < 32);
-  // if(_iNumber1 < 0 && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 152, "_iNumber1 >= 0") == 1)
-  //   __debugbreak();
-  // if(_iNumber2 < 0 && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 153, "_iNumber2 >= 0") == 1)
-  //   __debugbreak();
-  // if(_iNumber3 < 0 && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 154, "_iNumber3 >= 0") == 1)
-  //   __debugbreak();
-  // if(_iNumber1 >= 32 && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 156, "_iNumber1 < 32") == 1)
-  //   __debugbreak();
-  // if(_iNumber2 >= 32 && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 157, "_iNumber2 < 32") == 1)
-  //   __debugbreak();
-  // if(_iNumber3 >= 32 && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 158, "_iNumber3 < 32") == 1)
-  //   __debugbreak();
-  if((a8 & (1 << _iNumber1)) == 0)
-    a2 = 0;
-  if((a8 & (1 << _iNumber2)) == 0)
-    a4 = 0;
-  if((a8 & (1 << _iNumber3)) == 0)
-    a6 = 0;
-  aNumbers[0] = _iNumber1;
-  aNumbers[1] = _iNumber2;
-  aNumbers[2] = _iNumber3;
-  aNumbers[3] = -1;
-  aChances[0] = a2;
-  aChances[1] = a4;
-  aChances[2] = a6;
-  aChances[3] = a7;
-  return sub_132D560(aNumbers, aChances, 4);
-}
-
-// 3ECD02C
-CAIConfigInt s_sConfigMayaMilitarySpellChanceNone{"MayaMilitarySpellChanceNone", 5};
-// 03ECD020
-CAIConfigInt s_sConfigMayaMilitarySpellChanceSoldier{"MayaMilitarySpellChanceSoldier", 5};
-// 3ECD008
-CAIConfigInt s_sConfigMayaMilitarySpellChanceAttack{"MayaMilitarySpellChanceAttack", 5};
-// 3ECD014
-CAIConfigInt s_sConfigMayaMilitarySpellChanceDefence{"MayaMilitarySpellChanceDefence", 5};
-
 
 // address=[0x132bbf0]
 // Decompiled from int __thiscall CAITaskForcePriestsMaya::ChooseMilitarySpell(  CAITaskForcePriestsMaya *this,  const struct SCountFightersResult *a2,  int a3)
@@ -119,7 +38,7 @@ int CAITaskForcePriestsMaya::ChooseMilitarySpell(struct SCountFightersResult con
   if((a3 & 0x70) == 0)
     return -1;
 
-  return sub_132D6A0(
+  return ChooseNextSpellType(
     4,
     s_sConfigMayaMilitarySpellChanceDefence,
     5,

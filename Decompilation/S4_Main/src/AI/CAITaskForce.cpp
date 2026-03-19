@@ -337,7 +337,7 @@ T_RESULT CAITaskForce::AddEntity(CAIEntityInfo *_pEntityInfo, enum CAITaskForce:
         __debugbreak();
     }
   }
-  return RESULT_OK;
+  return RESULT_ADDED;
 }
 
 
@@ -444,7 +444,7 @@ enum T_RESULT CAITaskForce::RemoveEntity(class CAIEntityInfo *_pEntityInfo) {
         __debugbreak();
       }
     }
-    return RESULT_UNKNOWN_4;
+    return RESULT_REMOVED;
   } else {
     if(BBSupportDbgReport(1, "AI\\AI_TaskForces.cpp", 367, "CAITaskForce::RemoveEntity(): Entity not in taskforce!") == 1)
       __debugbreak();

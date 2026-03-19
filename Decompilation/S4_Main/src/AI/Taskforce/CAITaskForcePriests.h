@@ -28,6 +28,9 @@ public:
 
     virtual int ChooseMilitarySpellDestination(int a2, int a3, int a4, int a5) = 0;
 
+protected:
+    int __cdecl ChooseNextSpellType(int _iNumber1, int a2, int _iNumber2, int a4, int _iNumber3, int a6, int a7, int a8);
+
     // Type information members
 public:
     int m_uNextSpellTick;
