@@ -10,8 +10,7 @@
 extern class IEventEngine *g_pEvnEngine;
 
 
-class IEventEngine
-{
+class IEventEngine {
 public:
     // address=[0x1352c00]
     IEventEngine(void);
@@ -50,13 +49,13 @@ public:
     void SetOSParam(unsigned int a2);
 
     // address=[0x13537f0]
-    bool PlayEvents(std::string const &_pReplayFile, int a3);
+    bool PlayEvents(std::string const &_pReplayFile, int _iReplayStopOffset);
 
     // address=[0x1353a60]
     bool RecordEvents(std::string const &_pTargetFile);
 
     // address=[0x1353b60]
-    void SetGuiEventProc(bool(__cdecl *a2)(struct SEventStruct &));
+    void SetGuiEventProc(bool (__cdecl *a2)(struct SEventStruct &));
 
     // address=[0x1355880]
     bool IsEventEngineLocked(void);
@@ -85,17 +84,18 @@ public:
     // Type information members
 public:
     CEvn_HandleList *m_pEventHandleList;
-    int m_pOSParam;
-    unsigned int m_hWnd;
-    HANDLE m_hReplayFile;
-    bool m_bIsEventRecording;
-    bool m_bIsEventPlaying;
+    int              m_pOSParam;
+    unsigned int     m_hWnd;
+    HANDLE           m_hReplayFile;
+    bool             m_bIsEventRecording;
+    bool             m_bIsEventPlaying;
     //_BYTE[2] pad_16;
     unsigned int *m_pTick;
-    bool m_bLocked;
+    bool          m_bLocked;
     //_BYTE[3] gap_1D;
-    int field_20;
-    bool(__cdecl *m_pGuiEventProc)(struct SEventStruct &);
+    uint32_t m_uLastReplayTick;
+
+    bool (__cdecl *m_pGuiEventProc)(struct SEventStruct &);
 
 private:
     static const int replayFileVersion = 0x1C;
