@@ -1,0 +1,102 @@
+#include "ITiling.h"
+
+#include "CTiles.h"
+#include "CTile.h"
+#include "World/helper.h"
+
+// Definitions for class ITiling
+
+// address=[0x12fcea0]
+// Decompiled from int __cdecl ITiling::CatapultSectorId(int a1)
+int __cdecl ITiling::CatapultSectorId(int a1) {
+  return Tile(CatapultTileId(a1)).SectorId();
+}
+
+
+// address=[0x12fced0]
+// Decompiled from int __cdecl ITiling::CatapultTileId(int a1)
+int __cdecl ITiling::CatapultTileId(int a1) {
+  if(*ITiling::m_pCatapultTileIds[a1] >= 0x8000u)
+    return 0;
+  else
+    return *ITiling::m_pCatapultTileIds[a1];
+}
+
+
+// address=[0x12fd780]
+// Decompiled from CTile *__cdecl ITiling::Tile(int a1)
+class CTile const & __cdecl ITiling::Tile(int a1) {
+  return CTiles::m_cTiles[a1];
+}
+
+
+// address=[0x13066a0]
+// Decompiled from int __cdecl ITiling::FirstTileOfSquareVW(int _uV, int _uW)
+int __cdecl ITiling::FirstTileOfSquareVW(int _uV, int _uW) {
+  //return *((unsigned __int16 *) &CTiles::m_sSquareFirstLastTiles + 128 * _uW + 2 * _uV + 128);
+  return CTiles::m_sSquareFirstLastTiles[_uW][_uV].m_uFirst; //NOTE: I think this us _uW+1... not sure though
+}
+
+
+// address=[0x130eb10]
+// Decompiled from int __cdecl ITiling::EcoSectorId(int a1)
+int __cdecl ITiling::EcoSectorId(int a1) {
+  return ITiling::Tile(ITiling::NormalTileId(a1)).EcoSectorId();
+}
+
+
+// address=[0x130f210]
+// Decompiled from int __cdecl ITiling::NormalTileId(int a1)
+int __cdecl ITiling::NormalTileId(int a1) {
+  return *ITiling::m_pTileIds[a1];
+}
+
+
+// address=[0x130f270]
+// Decompiled from int __cdecl ITiling::OwnerId(int a1)
+int __cdecl ITiling::OwnerId(int a1) {
+  return ITiling::Tile(ITiling::NormalTileId(a1)).OwnerId();
+}
+
+
+// address=[0x130f360]
+// Decompiled from int __cdecl ITiling::SectorId(int a1)
+int __cdecl ITiling::SectorId(int a1) {
+  return ITiling::Tile(ITiling::NormalTileId(a1)).SectorId();
+}
+
+
+// address=[0x1351c50]
+// Decompiled from int __cdecl ITiling::NumberOfWaterElementsDiv2XY(Squares *a1, Squares *a2)
+int __cdecl ITiling::NumberOfWaterElementsDiv2XY(int a1, int a2) {
+  int v2; // esi
+  v2 = (Squares::XYToVW((int) a2) + 1) << 6;
+  return *((unsigned __int8 *) &m_uSquareNumberOfWaterElementsDiv2 + v2 + Squares::XYToVW((int) a1)); // TODO: 2D array decomp
+}
+
+
+// address=[0x14e0060]
+// Decompiled from int __cdecl ITiling::NumberOfWaterElementsDiv2VW(int a1, int a2)
+int __cdecl ITiling::NumberOfWaterElementsDiv2VW(int a1, int a2) {
+  return *((unsigned __int8 *) &m_uSquareNumberOfWaterElementsDiv2 + 64 * a2 + a1 + 64);
+}
+
+
+// address=[0x15f3f60]
+// Decompiled from ITiling *__thiscall ITiling::ITiling(ITiling *this)
+ITiling::ITiling(void) = default;
+
+
+// address=[0x15f5240]
+// Decompiled from int __cdecl ITiling::OwnerPseudoTileId(int a1)
+int __cdecl ITiling::OwnerPseudoTileId(int a1) {
+  return a1;
+}
+
+
+// address=[0x4236800]
+// [Decompilation failed for static unsigned short * * ITiling::m_pTileIds]
+
+// address=[0x4236808]
+// [Decompilation failed for static unsigned char (* ITiling::m_uSquareNumberOfWaterElementsDiv2)[64]]
+
