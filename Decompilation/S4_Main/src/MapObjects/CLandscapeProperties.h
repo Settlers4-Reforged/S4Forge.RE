@@ -3,6 +3,8 @@
 
 #include "defines.h"
 
+extern class CLandscapeProperties s_cLandscapeProperties;
+
 class CLandscapeProperties {
 public:
     // address=[0x141d960]

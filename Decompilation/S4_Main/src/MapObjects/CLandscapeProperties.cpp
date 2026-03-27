@@ -2,6 +2,8 @@
 
 #include "Defines/World.h"
 
+CLandscapeProperties s_cLandscapeProperties{};
+
 // Definitions for class CLandscapeProperties
 
 // address=[0x141d960]
