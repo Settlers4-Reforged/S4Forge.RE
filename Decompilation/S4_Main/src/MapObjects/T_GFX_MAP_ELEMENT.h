@@ -6,24 +6,23 @@
 class T_GFX_MAP_ELEMENT {
 public:
     // address=[0x151aa30]
-    int  GetGradient(void);
+    int GetGradient(void);
 
     // address=[0x15db1b0]
-    int  GetNewFogging(void);
+    int GetNewFogging(void);
 
     // address=[0x15db1d0]
-    int  GetOldFogging(void);
+    int GetOldFogging(void);
 
     // address=[0x2f90e30]
-    void  SetNewFogging(int a2);
+    void SetNewFogging(int a2);
 
     // Type information members
 public:
-    BYTE a;
+    BYTE m_uGroundHeight;
     BYTE m_uGroundType;
     BYTE m_uGradient;
     BYTE m_uGfxBits;
-
 };
 
 

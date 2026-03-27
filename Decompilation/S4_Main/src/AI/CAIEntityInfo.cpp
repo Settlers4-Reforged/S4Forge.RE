@@ -98,8 +98,6 @@ CAIEntityInfo::~CAIEntityInfo(void) {
 // address=[0x130aa00]
 // Decompiled from CAIEntityInfoEx *__thiscall CAIEntityInfo::ExtendedInfo(CAIEntityInfo *this, int a2)
 class CAIEntityInfoEx *CAIEntityInfo::ExtendedInfo(enum T_AI_ENTITY_INFO_EX_CLASS a2) {
-  CAIEntityInfoEx *m_pInfoEx; // [esp+8h] [ebp-8h]
-
   if(this->m_pInfoEx) {
     if(this->m_pInfoEx->Class() == a2)
       return this->m_pInfoEx;

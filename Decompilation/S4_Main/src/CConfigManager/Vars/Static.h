@@ -311,64 +311,6 @@ CStaticConfigVarInt g_iVikingWarmachineShotCost{"MAGIC", "VikingWarmachineShotCo
 CStaticConfigVarInt g_iDbgIgnoreFightingStrength{"LOGIC", "DbgIgnoreFightingStrength", 0};
 // address=[0x3F29DA4]
 CStaticConfigVarInt g_iFightingStrengthDivisor{"LOGIC", "FightingStrengthDivisor", 1000};
-// address=[0x3F45200]
-CStaticConfigVarInt CGameSettings::m_iAIDifficulty{"GAMESETTINGS", "AILevel", 0};
-// address=[0x3F4520C]
-CStaticConfigVarInt CGameSettings::m_iAlwaysUrgentMsg{"GAMESETTINGS", "PopupAllMsgs", 0};
-// address=[0x3F45224]
-CStaticConfigVarInt CGameSettings::m_iAutoSaveInterval{"GAMESETTINGS", "AutoSaveInterval", 15};
-// address=[0x3F451C4]
-CStaticConfigVarInt CGameSettings::m_iBorderScroll{"GAMESETTINGS", "BorderScroll", 0};
-// address=[0x3F451E8]
-CStaticConfigVarInt CGameSettings::m_iChatMessageFilter{"GAMESETTINGS", "ChatMessageFilter", 18446744073709551615};
-// address=[0x3F451D0]
-CStaticConfigVarInt CGameSettings::m_iExtendedTooltip{"GAMESETTINGS", "ExtendedTooltip", 1};
-// address=[0x3F45158]
-CStaticConfigVarInt CGameSettings::m_iFiltering{"GAMESETTINGS", "Filtering", 1};
-// address=[0x3F45194]
-CStaticConfigVarInt CGameSettings::m_iForceBlit{"ADVGAMESETTINGS", "ForceBlit", 0};
-// address=[0x3F45140]
-CStaticConfigVarInt CGameSettings::m_iFullscreenEnabled{"GAMESETTINGS", "Fullscreen", 1};
-// address=[0x3F45218]
-CStaticConfigVarInt CGameSettings::m_iLanguage{"GAMESETTINGS", "Language", 0};
-// address=[0x3F451B8]
-CStaticConfigVarInt CGameSettings::m_iMsgHistory{"GAMESETTINGS", "MsgHistory", 100};
-// address=[0x3F451AC]
-CStaticConfigVarInt CGameSettings::m_iMsgLevelMask{"GAMESETTINGS", "MsgLevelMask", 18446744073709551615};
-// address=[0x3F4523C]
-CStaticConfigVarInt CGameSettings::m_iMusicOn{"GAMESETTINGS", "MusicEnabled", 1};
-// address=[0x3F45230]
-CStaticConfigVarInt CGameSettings::m_iMusicVolume{"GAMESETTINGS", "MusicVolume", 100};
-// address=[0x3F451DC]
-CStaticConfigVarInt CGameSettings::m_iScrollStepValue{"GAMESETTINGS", "ScrollStepValue", 10};
-// address=[0x3F451A0]
-CStaticConfigVarInt CGameSettings::m_iShowVideos{"ADVGAMESETTINGS", "ShowVideos", 1};
-// address=[0x3F45254]
-CStaticConfigVarInt CGameSettings::m_iSoundFXOn{"GAMESETTINGS", "SoundFXEnabled", 1};
-// address=[0x3F45248]
-CStaticConfigVarInt CGameSettings::m_iSoundFXVolume{"GAMESETTINGS", "SoundFXVolume", 100};
-// address=[0x3F4514C]
-CStaticConfigVarInt CGameSettings::m_iTextureQuality{"GAMESETTINGS", "TextureQuality", 1};
-// address=[0x3F45284]
-CStaticConfigVarInt CGameSettings::m_iUserMP3{"GAMESETTINGS", "MP3UserFolder", 0};
-// address=[0x3F45278]
-CStaticConfigVarInt CGameSettings::m_iVoiceChatMicro{"GAMESETTINGS", "VoiceChatMicro", 100};
-// address=[0x3F45260]
-CStaticConfigVarInt CGameSettings::m_iVoiceChatOn{"GAMESETTINGS", "VoiceChatEnabled", 1};
-// address=[0x3F4526C]
-CStaticConfigVarInt CGameSettings::m_iVoiceChatVolume{"GAMESETTINGS", "VoiceChatVolume", 100};
-// address=[0x3F451F4]
-CStaticConfigVarInt CGameSettings::m_iWebHelpMode{"GAMESETTINGS", "WebHelpMode", 1};
-// address=[0x3F45170]
-CStaticConfigVarInt CGameSettings::m_iWindowHeight{"GAMESETTINGS", "WindowHeight", 600};
-// address=[0x3F4517C]
-CStaticConfigVarInt CGameSettings::m_iWindowPosX{"GAMESETTINGS", "WindowPosX", 0};
-// address=[0x3F45188]
-CStaticConfigVarInt CGameSettings::m_iWindowPosY{"GAMESETTINGS", "WindowPosY", 0};
-// address=[0x3F45164]
-CStaticConfigVarInt CGameSettings::m_iWindowWidth{"GAMESETTINGS", "WindowWidth", 800};
-// address=[0x3F454C0]
-CStaticConfigVarInt CGameSettings::m_uiTutorialSave{"GAMESETTINGS", "Tutorial", 0};
 // address=[0x402ECB4]
 CStaticConfigVarInt g_iRandomNumberCheckInterval{"DESYNC", "RandomNumberCheckInterval", 10};
 // address=[0x402ECA8]

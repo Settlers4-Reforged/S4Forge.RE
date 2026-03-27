@@ -6,29 +6,28 @@
 
 #include "defines.h"
 
-enum EntityFlag : int
-{
-    EntityFlag_Attached = 0x20,
-    EntityFlag_Offered = 0x40,
-    EntityFlag_Visible = 0x100,
-    EntityFlag_Selected = 0x200,
-    EntityFlag_Selectable = 0x2000,
-    EntityFlag_OnBoard = 0x8000,
+enum EntityFlag : int {
+    EntityFlag_Attached       = 0x20,
+    EntityFlag_Offered        = 0x40,
+    EntityFlag_Visible        = 0x100,
+    EntityFlag_Selected       = 0x200,
+    EntityFlag_Selectable     = 0x2000,
+    EntityFlag_OnBoard        = 0x8000,
     EntityFlag_VulnerableMask = 0x30000,
     EntityFlag_MagicInvisible = 0x80000,
-    EntityFlag_Birth = 0x1000000,
-    EntityFlag_Ready = 0x2000000,
-    EntityFlag_AliveMask = 0x3000000,
-    EntityFlag_Died = 0x4000000,
-    EntityFlag_Registered = 0x20000000, // aka. registered for logic update in x ticks - see CMapObjectMgr
-    EntityFlag_GlobalOffered = 0x40000000,
+    EntityFlag_Birth          = 0x1000000,
+    EntityFlag_Ready          = 0x2000000,
+    EntityFlag_AliveMask      = 0x3000000,
+    EntityFlag_Died           = 0x4000000,
+    EntityFlag_Ownerless      = 0x10000000, // Maybe? In world checks, where if the flag is set, no owner is asked from - or rather the local player is asked from
+    EntityFlag_Registered     = 0x20000000, // aka. registered for logic update in x ticks - see CMapObjectMgr
+    EntityFlag_GlobalOffered  = 0x40000000,
 };
 
 /// @brief Current entity attacker id for damage handling
 extern int g_CurrentEntityAttacker;
 
-class IEntity : public CPersistence
-{
+class IEntity : public CPersistence {
 public:
     // address=[0x12fd110]
     int FlagBits(int a2) const;
@@ -200,16 +199,15 @@ public:
     // address=[0x156d340]
     void SetHitpoints(unsigned int hp);
 
-    enum EntityType : int8_t
-    {
-        Settler = 0x1,
-        Ship = 0x2,
+    enum EntityType : int8_t {
+        Settler     = 0x1,
+        Ship        = 0x2,
         Landvehicle = 0x4,
-        Building = 0x8,
-        Good = 0x10,
-        Plant = 0x20,
-        Unknown = 0x40,
-        Animal = 0x80,
+        Building    = 0x8,
+        Good        = 0x10,
+        Plant       = 0x20,
+        Unknown     = 0x40,
+        Animal      = 0x80,
     };
 
 protected:
@@ -223,26 +221,27 @@ protected:
 private:
     friend class CMapObjectMgr;
 
-    int m_iUniqueId;
-    WORD m_nEntityId;
-    EntityType m_objType;
-    BYTE pad_b;
-    WORD m_nType;
-    BYTE unk_e;
-    BYTE unk_f;
+    int                   m_iUniqueId;
+    WORD                  m_nEntityId;
+    EntityType            m_objType;
+    BYTE                  pad_b;
+    WORD                  m_nType;
+    BYTE                  unk_e;
+    BYTE                  unk_f;
     struct CAIEntityInfo *m_psAIEntityInfo;
-    int m_iFlags; // EntityFlag
-    int m_uPackedXY;
-    CWarMapNode m_warMapNode;
-    union
-    {
-        struct
-        {
-            BYTE m_cRace : 4;
-            BYTE m_cPlayer : 4;
+    int                   m_iFlags; // EntityFlag
+    int                   m_uPackedXY;
+    CWarMapNode           m_warMapNode;
+
+    union {
+        struct {
+            BYTE m_cRace: 4;
+            BYTE m_cPlayer: 4;
         };
+
         BYTE m_cPacked;
     } m_packedTribePlayer;
+
     BYTE m_cHealth;
     BYTE pad_22;
     BYTE pad_23;
