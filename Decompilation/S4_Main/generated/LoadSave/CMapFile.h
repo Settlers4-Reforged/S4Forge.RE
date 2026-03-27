@@ -29,7 +29,7 @@ public:
     void const *  LoadChunk(unsigned int a2, unsigned int a3);
 
     // address=[0x13dad70]
-    void const *  LoadChunk(unsigned short a2, unsigned short a3, int & a4, int * a5);
+    void const *  LoadChunk(unsigned short a2, unsigned short a3, int & a4, int * _uReadSize);
 
     // address=[0x13db3e0]
     void  CloseChunk(unsigned short a2, unsigned short a3);

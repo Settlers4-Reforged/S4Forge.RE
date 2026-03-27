@@ -434,74 +434,72 @@ void  CPileMgr::SearchSpaceForGoods(int a2, int a3, int a4, int a5) {
 // Decompiled from void __thiscall CPileMgr::Store(CPileMgr *this, struct S4::CMapFile *a2)
 void  CPileMgr::Store(class S4::CMapFile & a2) {
   
-  std::strstreambuf *v2; // eax
-  void *v3; // eax
-  int v4; // [esp+0h] [ebp-104h] BYREF
-  _DWORD v5[43]; // [esp+10h] [ebp-F4h] BYREF
-  unsigned int v6; // [esp+BCh] [ebp-48h]
+  char *v2; // eax
+  int v3; // [esp+0h] [ebp-104h] BYREF
+  DWORD v4[43]; // [esp+10h] [ebp-F4h] BYREF
+  unsigned int v5; // [esp+BCh] [ebp-48h]
   size_t Size; // [esp+C0h] [ebp-44h]
   void *Src; // [esp+C4h] [ebp-40h]
-  int v9; // [esp+C8h] [ebp-3Ch]
-  unsigned __int8 *v10; // [esp+CCh] [ebp-38h]
-  int v11; // [esp+D0h] [ebp-34h]
-  unsigned __int8 *v12; // [esp+D4h] [ebp-30h]
+  T_SETTLER_OBJ_TYPE v8; // [esp+C8h] [ebp-3Ch]
+  IEntity *v9; // [esp+CCh] [ebp-38h]
+  T_SETTLER_OBJ_TYPE v10; // [esp+D0h] [ebp-34h]
+  IEntity *v11; // [esp+D4h] [ebp-30h]
   int UsedId; // [esp+D8h] [ebp-2Ch]
-  int v14; // [esp+DCh] [ebp-28h] BYREF
-  int v15; // [esp+E0h] [ebp-24h]
-  unsigned __int8 *v16; // [esp+E4h] [ebp-20h]
-  int v17; // [esp+E8h] [ebp-1Ch] BYREF
-  unsigned __int8 *v18; // [esp+ECh] [ebp-18h]
+  int v13; // [esp+DCh] [ebp-28h] BYREF
+  int v14; // [esp+E0h] [ebp-24h]
+  IEntity *v15; // [esp+E4h] [ebp-20h]
+  int v16; // [esp+E8h] [ebp-1Ch] BYREF
+  IEntity *v17; // [esp+ECh] [ebp-18h]
   int i; // [esp+F0h] [ebp-14h]
-  int *v20; // [esp+F4h] [ebp-10h]
-  int v21; // [esp+100h] [ebp-4h]
+  int *v19; // [esp+F4h] [ebp-10h]
+  int v20; // [esp+100h] [ebp-4h]
 
-  v20 = &v4;
-  v5[42] = this;
-  std::ostrstream::ostrstream(0, 0x40000, 0, 2, 1);
-  v21 = 0;
-  v6 = std::ios_base::exceptions((char *)v5 + *(_DWORD *)(v5[0] + 4));
-  std::ios_base::exceptions((std::ios_base *)((char *)v5 + *(_DWORD *)(v5[0] + 4)), 6);
-  LOBYTE(v21) = 1;
-  v14 = 1;
-  operator^<unsigned int>((struct std::ostream *)v5, &v14);
+  v19 = &v3;
+  v4[42] = (DWORD)this;
+  std::ostrstream::ostrstream(v4, 0, 0x40000LL, 2, 1);
+  v20 = 0;
+  v5 = std::ios_base::exceptions((char *)v4 + *(_DWORD *)(v4[0] + 4));
+  std::ios_base::exceptions((std::ios_base *)((char *)v4 + *(_DWORD *)(v4[0] + 4)), 6);
+  LOBYTE(v20) = 1;
+  v13 = 1;
+  operator^<unsigned int>((struct std::ostream *)v4, &v13);
   UsedId = CMapObjectMgr::LastUsedId();
-  v15 = UsedId;
-  v17 = 0;
-  for ( i = 0; i <= v15; ++i )
+  v14 = UsedId;
+  v16 = 0;
+  for ( i = 0; i <= v14; ++i )
   {
-    v12 = (unsigned __int8 *)CMapObjectMgr::EntityPtr(i);
-    v16 = v12;
-    if ( v12 )
+    v11 = CMapObjectMgr::EntityPtr(i);
+    v15 = v11;
+    if ( v11 )
     {
-      v11 = IEntity::ObjType(v16);
-      if ( v11 == 16 )
-        ++v17;
+      v10 = IEntity::ObjType(v15);
+      if ( v10 == PILE_OBJ )
+        ++v16;
     }
   }
-  operator^<unsigned int>((struct std::ostream *)v5, &v17);
-  for ( i = 0; i <= v15; ++i )
+  operator^<unsigned int>((struct std::ostream *)v4, &v16);
+  for ( i = 0; i <= v14; ++i )
   {
-    v10 = (unsigned __int8 *)CMapObjectMgr::EntityPtr(i);
-    v18 = v10;
-    if ( v10 )
+    v9 = CMapObjectMgr::EntityPtr(i);
+    v17 = v9;
+    if ( v9 )
     {
-      v9 = IEntity::ObjType(v18);
-      if ( v9 == 16 )
-        (*(void (__thiscall **)(unsigned __int8 *, _DWORD *))(*(_DWORD *)v18 + 4))(v18, v5);
+      v8 = IEntity::ObjType(v17);
+      if ( v8 == PILE_OBJ )
+        v17->j_?Store@IEntity@@UAEXAAV?$basic_ostream@DU?$char_traits@D@std@@@std@@@Z((char *)v17, (int)v4);
     }
   }
   std::ostream::put(0);
-  v21 = 0;
-  std::ostrstream::freeze((std::ostrstream *)v5, 1);
-  v2 = std::ostrstream::rdbuf((std::ostrstream *)v5);
-  Size = std::strstreambuf::pcount(v2);
-  std::ostrstream::str((CDaoIndexFieldInfo *)v5);
-  Src = v3;
-  S4::CMapFile::SaveChunk(163, 0, Size, v3, 0);
-  std::ostrstream::freeze((std::ostrstream *)v5, 0);
-  std::ios_base::exceptions((std::ios_base *)((char *)v5 + *(_DWORD *)(v5[0] + 4)), v6);
-  v21 = -1;
-  std::ostrstream::`vbase destructor'((std::ostrstream *)v5);
+  v20 = 0;
+  std::ostrstream::freeze((std::ostrstream *)v4, 1);
+  v2 = std::ostrstream::rdbuf((std::ostrstream *)v4);
+  Size = std::strstreambuf::pcount((std::strstreambuf *)v2);
+  Src = std::ostrstream::str(v4);
+  S4::CMapFile::SaveChunk(a2, 0xA3u, 0, Size, Src, 0);
+  std::ostrstream::freeze((std::ostrstream *)v4, 0);
+  std::ios_base::exceptions((std::ios_base *)((char *)v4 + *(_DWORD *)(v4[0] + 4)), v5);
+  v20 = -1;
+  std::ostrstream::`vbase destructor'((std::ostrstream *)v4);
 }
 
 

@@ -92,9 +92,9 @@ int __cdecl CScanner::CountCiviliansAndFindNearestInSector(int _iX, int _iY, int
   int v11; // [esp+4h] [ebp-114h]
   int v12; // [esp+8h] [ebp-110h]
   int m_iV; // [esp+Ch] [ebp-10Ch]
-  int v14; // [esp+14h] [ebp-104h]
-  int v15; // [esp+18h] [ebp-100h]
-  int v16; // [esp+1Ch] [ebp-FCh]
+  int iSmallestDistance; // [esp+14h] [ebp-104h]
+  int iDistance; // [esp+18h] [ebp-100h]
+  int iSectorId; // [esp+1Ch] [ebp-FCh]
   int iNearestXY; // [esp+20h] [ebp-F8h]
   int j; // [esp+24h] [ebp-F4h]
   int iResult; // [esp+28h] [ebp-F0h]
@@ -110,10 +110,10 @@ int __cdecl CScanner::CountCiviliansAndFindNearestInSector(int _iX, int _iY, int
   if ( _iRadius <= 0 && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 818, "_iRadius > 0") == 1 )
     __debugbreak();
   iResult = 0;
-  v16 = CWorldManager::SectorId(_iX, _iY);
+  iSectorId = CWorldManager::SectorId(_iX, _iY);
   iNearestXY = -1;
-  v14 = 0x4000;
-  if ( v16 > 0 )
+  iSmallestDistance = 0x4000;
+  if ( iSectorId > 0 )
   {
     CVWList::CVWList(&v22, _iX, _iY, _iRadius);
     for ( i = 0; i < CVWList::Size(&v22); ++i )
@@ -123,23 +123,23 @@ int __cdecl CScanner::CountCiviliansAndFindNearestInSector(int _iX, int _iY, int
       for ( j = CWarMap::FirstEntityIdVW(0, m_iV, v5->m_iW); j; j = CWarMapNode::Next(v8) )
       {
         v21 = CMapObjectMgr::Entity(j);
-        if ( !IEntity::WarriorType(v21)
-          && (char *)IEntity::FlagBits(v21, (EntityFlag)&byte_20000CA[54]) == &byte_20000CA[54] )
+        if ( IEntity::WarriorType(v21) == AI_WARRIOR_TYPE_NONE
+          && IEntity::FlagBits(v21, EntityFlag_Ready|EntityFlag_Visible) == (EntityFlag_Ready|EntityFlag_Visible) )
         {
           v6 = IEntity::OwnerId(v21);
           if ( (a4 & CAlliances::PlayerBit(v6)) != 0 )
           {
             v11 = IEntity::X(v21);
             v12 = IEntity::Y(v21);
-            if ( CWorldManager::SectorId(v11, v12) == v16 )
+            if ( CWorldManager::SectorId(v11, v12) == iSectorId )
             {
               ++iResult;
               v10 = IEntity::Y(v21) - _iY;
               v7 = IEntity::X(v21);
-              v15 = Grid::Distance(v7 - _iX, v10);
-              if ( v15 < v14 )
+              iDistance = Grid::Distance(v7 - _iX, v10);
+              if ( iDistance < iSmallestDistance )
               {
-                v14 = v15;
+                iSmallestDistance = iDistance;
                 iNearestXY = IEntity::PackedXY(v21);
               }
             }
@@ -571,7 +571,7 @@ bool __cdecl CScanner::FindNearestTowerInSector(struct SFindNearestResult & arg0
     for ( a1 = CWarMap::FirstEntityIdVW(2, m_iV, v5->m_iW); a1; a1 = CWarMapNode::Next(rWarMapNode) )
     {
       v18 = (IEntity *)CBuildingMgr::operator[](a1);
-      v19 = IEntity::FlagBits(v18, (EntityFlag)((char *)&loc_1FFFFFF + 1)) != 0;
+      v19 = IEntity::FlagBits(v18, EntityFlag_Ready) != 0;
       if ( IEntity::WarriorType(v18) == AI_WARRIOR_TYPE_TOWER_BUILDING && v19 )
       {
         v8 = IEntity::OwnerId(v18);

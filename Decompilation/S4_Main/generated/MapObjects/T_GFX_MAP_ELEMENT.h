@@ -19,7 +19,7 @@ public:
 
     // Type information members
 public:
-    BYTE a;
+    BYTE m_uGroundHeight;
     BYTE m_uGroundType;
     BYTE m_uGradient;
     BYTE m_uGfxBits;

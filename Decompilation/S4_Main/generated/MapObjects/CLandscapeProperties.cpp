@@ -6,7 +6,7 @@
 // Decompiled from bool __thiscall CLandscapeProperties::IsBlockedLand(CLandscapeProperties *this, int a2)
 bool  CLandscapeProperties::IsBlockedLand(int a2) {
   
-  return (*((_BYTE *)this + a2) & 0x10) != 0;
+  return (this->m_uLandscapeProperty[a2] & 0x10) != 0;
 }
 
 
@@ -22,7 +22,7 @@ bool __cdecl CLandscapeProperties::IsWater(int a1) {
 // Decompiled from int __thiscall CLandscapeProperties::TileType(CLandscapeProperties *this, int a2)
 unsigned int  CLandscapeProperties::TileType(int a2) {
   
-  return *((unsigned __int8 *)this + a2) << 28;
+  return (unsigned __int8)this->m_uLandscapeProperty[a2] << 28;
 }
 
 
@@ -30,41 +30,41 @@ unsigned int  CLandscapeProperties::TileType(int a2) {
 // Decompiled from CLandscapeProperties *__thiscall CLandscapeProperties::CLandscapeProperties(CLandscapeProperties *this)
  CLandscapeProperties::CLandscapeProperties(void) {
   
-  *((_BYTE *)this + 16) = 1;
-  *(_BYTE *)this = 18;
-  *((_BYTE *)this + 1) = 18;
-  *((_BYTE *)this + 2) = 18;
-  *((_BYTE *)this + 3) = 18;
-  *((_BYTE *)this + 4) = 18;
-  *((_BYTE *)this + 5) = 18;
-  *((_BYTE *)this + 6) = 18;
-  *((_BYTE *)this + 7) = 18;
-  *((_BYTE *)this + 48) = 1;
-  *((_BYTE *)this + 8) = 18;
-  *((_BYTE *)this + 32) = 5;
-  *((_BYTE *)this + 17) = 5;
-  *((_BYTE *)this + 33) = 5;
-  *((_BYTE *)this + 129) = 17;
-  *((_BYTE *)this + 35) = 5;
-  *((_BYTE *)this + 24) = 1;
-  *((_BYTE *)this + 25) = 1;
-  *((_BYTE *)this + 18) = 1;
-  *((_BYTE *)this + 128) = 17;
-  *((_BYTE *)this + 80) = 17;
-  *((_BYTE *)this + 81) = 17;
-  *((_BYTE *)this + 21) = 1;
-  *((_BYTE *)this + 64) = 1;
-  *((_BYTE *)this + 65) = 1;
-  *((_BYTE *)this + 20) = 1;
-  *((_BYTE *)this + 144) = 1;
-  *((_BYTE *)this + 145) = 1;
-  *((_BYTE *)this + 23) = 1;
-  *((_BYTE *)this + 96) = 1;
-  *((_BYTE *)this + 97) = 1;
-  *((_BYTE *)this + 98) = 1;
-  *((_BYTE *)this + 99) = 1;
-  *((_BYTE *)this + 28) = 1;
-  *((_BYTE *)this + 29) = 1;
+  this->m_uLandscapeProperty[GROUND_GRASS] = 1;
+  this->m_uLandscapeProperty[0] = 18;
+  this->m_uLandscapeProperty[GROUND_WATER2] = 18;
+  this->m_uLandscapeProperty[GROUND_WATER3] = 18;
+  this->m_uLandscapeProperty[GROUND_WATER4] = 18;
+  this->m_uLandscapeProperty[GROUND_WATER5] = 18;
+  this->m_uLandscapeProperty[GROUND_WATER6] = 18;
+  this->m_uLandscapeProperty[GROUND_WATER7] = 18;
+  this->m_uLandscapeProperty[GROUND_WATER8] = 18;
+  this->m_uLandscapeProperty[GROUND_BEACH] = 1;
+  this->m_uLandscapeProperty[GROUND_WATER_BEACH] = 18;
+  this->m_uLandscapeProperty[GROUND_MOUNTAIN] = 5;
+  this->m_uLandscapeProperty[GROUND_GRASS_MOUNTAIN] = 5;
+  this->m_uLandscapeProperty[GROUND_MOUNTAIN_GRASS] = 5;
+  this->m_uLandscapeProperty[GROUND_SNOW_MOUNTAIN] = 17;
+  this->m_uLandscapeProperty[GROUND_MOUNTAIN_SNOW] = 5;
+  this->m_uLandscapeProperty[GROUND_GRASS_DARK] = 1;
+  this->m_uLandscapeProperty[GROUND_GRASS_WEIRD] = 1;
+  this->m_uLandscapeProperty[GROUND_GRASS_ISLAND] = 1;
+  this->m_uLandscapeProperty[GROUND_SNOW] = 17;
+  this->m_uLandscapeProperty[GROUND_SWAMP] = 17;
+  this->m_uLandscapeProperty[GROUND_SWAMP_GRASS] = 17;
+  this->m_uLandscapeProperty[GROUND_GRASS_SWAMP] = 1;
+  this->m_uLandscapeProperty[GROUND_DESERT] = 1;
+  this->m_uLandscapeProperty[GROUND_DESERT_GRASS] = 1;
+  this->m_uLandscapeProperty[GROUND_GRASS_DESERT] = 1;
+  this->m_uLandscapeProperty[GROUND_MUD] = 1;
+  this->m_uLandscapeProperty[GROUND_MUD_GRASS] = 1;
+  this->m_uLandscapeProperty[GROUND_GRASS_MUD] = 1;
+  this->m_uLandscapeProperty[GROUND_RIVER1] = 1;
+  this->m_uLandscapeProperty[GROUND_RIVER2] = 1;
+  this->m_uLandscapeProperty[GROUND_RIVER3] = 1;
+  this->m_uLandscapeProperty[GROUND_RIVER4] = 1;
+  this->m_uLandscapeProperty[GROUND_GRASS_DUSTY] = 1;
+  this->m_uLandscapeProperty[GROUND_GRASS_PAVEMENT] = 1;
   return this;
 }
 
@@ -73,7 +73,7 @@ unsigned int  CLandscapeProperties::TileType(int a2) {
 // Decompiled from bool __thiscall CLandscapeProperties::IsSlowType(CLandscapeProperties *this, int a2)
 bool  CLandscapeProperties::IsSlowType(int a2) {
   
-  return (*((_BYTE *)this + a2) & 4) != 0;
+  return (*(&this->m_uLandscapeProperty + a2) & 4) != 0;
 }
 
 

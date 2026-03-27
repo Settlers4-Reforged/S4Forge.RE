@@ -20,6 +20,10 @@ public:
     // address=[0x16a7200]
     bool  IsSlowType(int a2);
 
+    // Type information members
+public:
+    _BYTE[255] m_uLandscapeProperty;
+
 };
 
 

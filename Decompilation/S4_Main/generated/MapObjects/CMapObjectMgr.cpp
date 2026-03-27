@@ -746,7 +746,7 @@ void  CMapObjectMgr::UnRegisterFromLogicUpdate(int slot, int entity) {
 // Decompiled from void __thiscall CMapObjectMgr::Store(CMapObjectMgr *this, struct S4::CMapFile *arg0)
 void  CMapObjectMgr::Store(class S4::CMapFile & a2) {
   
-  std::strstreambuf *v2; // eax
+  char *v2; // eax
   int v3; // [esp+0h] [ebp-160h] BYREF
   char stringStream[168]; // [esp+10h] [ebp-150h] BYREF
   _BYTE v5[12]; // [esp+B8h] [ebp-A8h] BYREF
@@ -862,7 +862,7 @@ void  CMapObjectMgr::Store(class S4::CMapFile & a2) {
   std::ostream::put(0);
   v38 = 0;
   v2 = std::ostrstream::rdbuf((std::ostrstream *)stringStream);
-  Size = std::strstreambuf::pcount(v2);
+  Size = std::strstreambuf::pcount((std::strstreambuf *)v2);
   mgrSerializationOutput = std::ostrstream::str(stringStream);
   S4::CMapFile::SaveChunk(arg0, 0xAAu, 0, Size, mgrSerializationOutput, 0);
   std::ostrstream::freeze((std::ostrstream *)stringStream, 0);

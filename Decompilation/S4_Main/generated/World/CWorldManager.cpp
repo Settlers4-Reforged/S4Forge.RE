@@ -331,11 +331,9 @@ void __cdecl CWorldManager::ClearFlagBits(int _iX, int _iY, unsigned int _uMask)
 
 
 // address=[0x141d830]
-// Decompiled from unsigned __int8 *__cdecl CWorldManager::ClearFlagBits(int _iTileId, char _uMask)
+// Decompiled from void __cdecl CWorldManager::ClearFlagBits(int _iTileId, char _uMask)
 void __cdecl CWorldManager::ClearFlagBits(int _iTileId, unsigned int _uMask) {
   
-  unsigned __int8 *result; // eax
-
   if ( (_uMask & 1) != 0
     && BBSupportDbgReport(
          2,
@@ -345,9 +343,7 @@ void __cdecl CWorldManager::ClearFlagBits(int _iTileId, unsigned int _uMask) {
   {
     __debugbreak();
   }
-  result = &CWorldManager::m_cFlagMap.m_pData[_iTileId];
   CWorldManager::m_cFlagMap.m_pData[_iTileId] &= ~_uMask;
-  return result;
 }
 
 
@@ -402,11 +398,9 @@ void __cdecl CWorldManager::SetFlagBits(int _iX, int _iY, unsigned int _uMask) {
 
 
 // address=[0x141dac0]
-// Decompiled from unsigned int __cdecl CWorldManager::SetFlagBits(int _iTileId, unsigned int _uMask)
+// Decompiled from void __cdecl CWorldManager::SetFlagBits(int _iTileId, unsigned int _uMask)
 void __cdecl CWorldManager::SetFlagBits(int _iTileId, unsigned int _uMask) {
   
-  unsigned int result; // eax
-
   if ( (_uMask & 1) != 0
     && BBSupportDbgReport(
          2,
@@ -416,9 +410,7 @@ void __cdecl CWorldManager::SetFlagBits(int _iTileId, unsigned int _uMask) {
   {
     __debugbreak();
   }
-  result = _uMask | CWorldManager::m_cFlagMap.m_pData[_iTileId];
-  CWorldManager::m_cFlagMap.m_pData[_iTileId] = result;
-  return result;
+  CWorldManager::m_cFlagMap.m_pData[_iTileId] |= _uMask;
 }
 
 
@@ -902,7 +894,7 @@ bool __cdecl CWorldManager::LoadMap(class S4::CMapFile & a1, int _iWidth) {
   }
   TMap<unsigned char>::Done(&mOwnerMap);
   exceptionBlock = -1;
-  TMap<unsigned char>::~TMap<unsigned char>();
+  TMap<unsigned char>::~TMap<unsigned char>(&mOwnerMap);
   memset(CWorldManager::m_cCatapultTileIdMap.m_pData, 0, 2 * CWorldManager::m_iWorldIdxMax);
   TMap<T_GFX_MAP_ELEMENT>::LoadMap(&CWorldManager::m_cRenderMap, a1, 200u, CWorldManager::m_iWidthHeight);
   TMap<unsigned char>::LoadMap(&CWorldManager::m_cFlagMap, a1, 205u, CWorldManager::m_iWidthHeight);
@@ -1263,9 +1255,8 @@ void __cdecl CWorldManager::SetOwner(int _iX, int _iY) {
   signed int k; // [esp+11Ch] [ebp-1C674h]
   int iOwnerId; // [esp+120h] [ebp-1C670h]
   unsigned int v49; // [esp+124h] [ebp-1C66Ch]
-  int iDY; // [esp+128h] [ebp-1C668h] OVERLAPPED
-  int iDX; // [esp+12Ch] [ebp-1C664h]
-  _BYTE v52[112211]; // [esp+1138h] [ebp-1B658h] BYREF
+  int iDYX[2]; // [esp+128h] [ebp-1C668h]
+  _BYTE v51[112211]; // [esp+1138h] [ebp-1B658h] BYREF
 
   if ( !CWorldManager::InWorld(_iX, _iY) && BBSupportDbgReport(2, "World\\World.cpp", 447, "InWorld(_iX, _iY)") == 1 )
     __debugbreak();
@@ -1278,7 +1269,7 @@ void __cdecl CWorldManager::SetOwner(int _iX, int _iY) {
   {
     __debugbreak();
   }
-  memset(v52, 0, sizeof(v52));
+  memset(v51, 0, sizeof(v51));
   v31 = 0;
   v39 = 0;
   if ( (int)(_iX - 100) < 1 )
@@ -1300,17 +1291,17 @@ void __cdecl CWorldManager::SetOwner(int _iX, int _iY) {
     v25 = 100;
   v9 = v25;
   v34 = CWorldManager::Index(_iX, v24 + _iY);
-  for ( iDY = v24; iDY <= v9; ++iDY )
+  for ( iDYX[0] = v24; iDYX[0] <= v9; ++iDYX[0] )
   {
-    for ( iDX = v12; iDX <= v11; ++iDX )
+    for ( iDYX[1] = v12; iDYX[1] <= v11; ++iDYX[1] )
     {
-      iWorldIdx = iDX + v34;
-      if ( !CWorldManager::InInnerWorld1(iDX + _iX, iDY + _iY)
+      iWorldIdx = iDYX[1] + v34;
+      if ( !CWorldManager::InInnerWorld1(iDYX[1] + _iX, iDYX[0] + _iY)
         && BBSupportDbgReport(2, "World\\World.cpp", 497, "InInnerWorld1(_iX + iDX, _iY + iDY)") == 1 )
       {
         __debugbreak();
       }
-      v2 = CWorldManager::Index(iDX + _iX, iDY + _iY);
+      v2 = CWorldManager::Index(iDYX[1] + _iX, iDYX[0] + _iY);
       if ( v2 != iWorldIdx
         && BBSupportDbgReport(2, "World\\World.cpp", 498, "Index(_iX + iDX, _iY + iDY) == iWorldIdx") == 1 )
       {
@@ -1330,7 +1321,7 @@ void __cdecl CWorldManager::SetOwner(int _iX, int _iY) {
         if ( v35 > 0 )
         {
           v3 = v22 + 50;
-          if ( v3 >= Grid::Distance(iDX, iDY) )
+          if ( v3 >= Grid::Distance(iDYX[1], iDYX[0]) )
           {
             iOwnerId = IEntity::OwnerId(v40);
             if ( (iOwnerId > 8 || iOwnerId < 1)
@@ -1342,35 +1333,35 @@ void __cdecl CWorldManager::SetOwner(int _iX, int _iY) {
             {
               __debugbreak();
             }
-            if ( !*(_QWORD *)&iDY )
+            if ( !*(_QWORD *)iDYX )
             {
               v31 = CBuilding::EnsignPackedXY(v40);
               v39 = IEntity::OwnerId(v40);
             }
-            if ( Grid::InQuadrat(iDX + 50, iDY + 50, 0x65u) )
+            if ( Grid::InQuadrat(iDYX[1] + 50, iDYX[0] + 50, 0x65u) )
             {
-              v52[1111 * iDY + 56100 + 11 * iDX] = -1;
-              v52[1111 * iDY + 56100 + 11 * iDX + iOwnerId] = -1;
-              v52[1111 * iDY + 56110 + 11 * iDX] = iOwnerId;
+              v51[1111 * iDYX[0] + 56100 + 11 * iDYX[1]] = -1;
+              v51[1111 * iDYX[0] + 56100 + 11 * iDYX[1] + iOwnerId] = -1;
+              v51[1111 * iDYX[0] + 56110 + 11 * iDYX[1]] = iOwnerId;
             }
-            v8 = iDX + 50;
-            v7 = iDY + 50;
+            v8 = iDYX[1] + 50;
+            v7 = iDYX[0] + 50;
             for ( i = 1; i <= v35; ++i )
             {
               v44 = v8 + CSpiralOffsets::DeltaX(i);
               v45 = v7 + CSpiralOffsets::DeltaY(i);
               if ( Grid::InQuadrat(v44, v45, 0x65u) )
               {
-                v49 = (unsigned __int8)v52[1111 * v45 + 11 * v44 + iOwnerId];
+                v49 = (unsigned __int8)v51[1111 * v45 + 11 * v44 + iOwnerId];
                 v4 = CSpiralOffsets::Radius(i);
                 v49 += 50 - v4;
                 if ( v49 > 0xFE )
                   v49 = 254;
-                v52[1111 * v45 + 11 * v44 + iOwnerId] = v49;
-                if ( v49 > (unsigned __int8)v52[1111 * v45 + 11 * v44] )
+                v51[1111 * v45 + 11 * v44 + iOwnerId] = v49;
+                if ( v49 > (unsigned __int8)v51[1111 * v45 + 11 * v44] )
                 {
-                  v52[1111 * v45 + 11 * v44] = v49;
-                  v52[1111 * v45 + 10 + 11 * v44] = iOwnerId;
+                  v51[1111 * v45 + 11 * v44] = v49;
+                  v51[1111 * v45 + 10 + 11 * v44] = iOwnerId;
                 }
               }
             }
@@ -1420,7 +1411,7 @@ void __cdecl CWorldManager::SetOwner(int _iX, int _iY) {
       else
         v15 = 128;
       v33 |= v15;
-      v52[1111 * j + 56109 + 11 * k] = v33;
+      v51[1111 * j + 56109 + 11 * k] = v33;
     }
     v32 += CWorldManager::Width();
   }
@@ -1439,18 +1430,18 @@ void __cdecl CWorldManager::SetOwner(int _iX, int _iY) {
     {
       __debugbreak();
     }
-    v14 = v52[1111 * v42 + 56109 + 11 * v41];
+    v14 = v51[1111 * v42 + 56109 + 11 * v41];
     if ( v14 < 0 )
     {
       v37 = v14 & 0x3F;
-      v30 = v52[1111 * v42 + 56110 + 11 * v41] & 0x3F;
+      v30 = v51[1111 * v42 + 56110 + 11 * v41] & 0x3F;
       v28 = v41 + _iX;
       v29 = v42 + _iY;
       v27 = CWorldManager::Index(v41 + _iX, v42 + _iY);
       if ( v30 )
       {
         CWorldManager::SetFlagBits(v27, 0x80u);
-        if ( (!v37 || !v52[1111 * v42 + 56100 + 11 * v41 + v37]) && v37 != v30 )
+        if ( (!v37 || !v51[1111 * v42 + 56100 + 11 * v41 + v37]) && v37 != v30 )
         {
           v13 = v37 != 0;
           if ( CWorldManager::FlagBits(v27, 8u) != 0 && v13 )
@@ -1757,7 +1748,7 @@ void __cdecl CWorldManager::SetGroundInit(int a1, int a2) {
     CWorldManager::SetMoveCostsBits(a1, 3);
   else
     CWorldManager::SetMoveCostsBits(a1, 2);
-  if ( a2 == 28 || a2 == 29 )
+  if ( a2 == GROUND_GRASS_DUSTY || a2 == GROUND_GRASS_PAVEMENT )
     CWorldManager::SetMoveCostsBits(a1, 0);
 }
 
@@ -1766,17 +1757,17 @@ void __cdecl CWorldManager::SetGroundInit(int a1, int a2) {
 // Decompiled from void __cdecl CWorldManager::GetBuildingInfluenceInfo(int *a1, int *a2, int *a3)
 void __cdecl CWorldManager::GetBuildingInfluenceInfo(int a1, int & a2, int & a3) {
   
-  if ( a1 == (int *)46 )
+  if ( a1 == (int *)BUILDING_GUARDTOWERSMALL )
   {
     *a2 = 3499;
     *a3 = 37;
   }
-  else if ( a1 == (int *)47 )
+  else if ( a1 == (int *)BUILDING_GUARDTOWERBIG )
   {
     *a2 = 3999;
     *a3 = 40;
   }
-  else if ( a1 == (int *)48 )
+  else if ( a1 == (int *)BUILDING_CASTLE )
   {
     *a2 = 4999;
     *a3 = 44;

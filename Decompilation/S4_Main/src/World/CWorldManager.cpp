@@ -8,6 +8,7 @@
 #include "Defines/Players.h"
 #include "Defines/World.h"
 #include "LoadSave/CMapFile.h"
+#include "MapObjects/CLandscapeProperties.h"
 #include "MapObjects/IEntity.h"
 #include "MapObjects/CMapObjectMgr.h"
 #include "MapObjects/T_GFX_MAP_ELEMENT.h"
@@ -321,7 +322,7 @@ bool __cdecl CWorldManager::InInnerWorld16(int _iX, int _iY) {
 // address=[0x141d9d0]
 // Decompiled from bool __cdecl CWorldManager::IsWater(int _iTileId)
 bool __cdecl CWorldManager::IsWater(int _iTileId) {
-  return CLandscapeProperties::IsWater(CWorldManager::m_cRenderMap.m_pData[_iTileId + 1]);
+  return CLandscapeProperties::IsWater(CWorldManager::m_cRenderMap.m_pData[_iTileId].m_uGroundType);
 }
 
 
@@ -843,7 +844,7 @@ void __cdecl CWorldManager::LoadGfxData(class S4::CMapFile &a1, int a2, int _iWi
   int                iTileId = 0;
   for(iY = 0; iY < _iWidth; ++iY) {
     for(iX = 0; iX < _iWidth; ++iX) {
-      *&CWorldManager::m_cRenderMap.m_pData[iTileId] = *pGfxMapElements;
+      CWorldManager::m_cRenderMap.m_pData[iTileId] = *pGfxMapElements;
       if(CWorldManager::IsWater(iTileId))
         iOwner = ITiling::OwnerPseudoTileId(0);
       else
@@ -1524,7 +1525,7 @@ void __cdecl CWorldManager::SetBlockedLandEx(int a1) {
 // address=[0x16a78a0]
 // Decompiled from void __cdecl CWorldManager::SetGroundTypeOnly(int a1, unsigned __int8 a2)
 void __cdecl CWorldManager::SetGroundTypeOnly(int a1, int a2) {
-  CWorldManager::m_cRenderMap.m_pData[a1 + 1] = *reinterpret_cast<T_GFX_MAP_ELEMENT *>(&a2);
+  CWorldManager::m_cRenderMap.m_pData[a1].m_uGroundType = a2;
 }
 
 

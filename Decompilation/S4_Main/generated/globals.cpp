@@ -36787,7 +36787,7 @@ private: bool __thiscall TSparseMap<unsigned char>::IsValidCoordinate(unsigned i
 
 
 // address=[0x1460800]
-// Decompiled from void __thiscall TSparseMap<unsigned char>::Set(TSparseMap *this, unsigned int _uX, int _uY, _BYTE *_uValue)
+// Decompiled from void __thiscall TSparseMap<unsigned char>::Set(TSparseMap *this, unsigned int _uX, int _uY, const uchar *_uValue)
 public: void __thiscall TSparseMap<unsigned char>::Set(unsigned int _uX, unsigned int _uY, unsigned char const & _uValue) {
   
   TSparseMap::TNode *v4; // [esp+8h] [ebp-24h]
@@ -36809,7 +36809,7 @@ public: void __thiscall TSparseMap<unsigned char>::Set(unsigned int _uX, unsigne
                   &this->m_vNodes,
                   _uY))->m_pNextNode; i->m_iHeight < _uX; i = i->m_pNextNode )
       pTargetNode = i;
-    v5 = (TSparseMap::TNode *)TSparseMap<unsigned char>::TNode::operator new(12);
+    v5 = (TSparseMap::TNode *)TSparseMap<unsigned char>::TNode::operator new(0xC);
     if ( v5 )
       v4 = TSparseMap<unsigned char>::TNode::TNode(v5);
     else
@@ -40247,7 +40247,7 @@ public: __thiscall TStaticFIFO<int,1024>::TStaticFIFO<int,1024>(void) {
 
 
 // address=[0x16a6110]
-// Decompiled from int __thiscall TMap<unsigned char>::~TMap<unsigned char>(void *this)
+// Decompiled from int __thiscall TMap<unsigned char>::~TMap<unsigned char>(TMap *this)
 public: __thiscall TMap<unsigned char>::~TMap<unsigned char>(void) {
   
   return TMap<unsigned char>::Done(this);
@@ -40298,7 +40298,9 @@ private: void __thiscall TSparseMap<unsigned char>::Construct(void) {
     else
       v3 = 0;
     v3->m_iHeight = this->m_iHeight;
-    *std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::operator[](a1) = v3;
+    *std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::operator[](
+       &this->m_vNodes,
+       a1) = v3;
     v2 = (TSparseMap::TNode *)TSparseMap<unsigned char>::TNode::operator new(12);
     if ( v2 )
       v1 = TSparseMap<unsigned char>::TNode::TNode(v2);
@@ -40307,41 +40309,45 @@ private: void __thiscall TSparseMap<unsigned char>::Construct(void) {
     LOBYTE(v1->m_iValue) = 0;
     v1->m_iHeight = this->m_iHeight;
     v1->m_pNextNode = 0;
-    (*std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::operator[](a1))->m_pNextNode = v1;
+    (*std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::operator[](
+        &this->m_vNodes,
+        a1))->m_pNextNode = v1;
   }
 }
 
 
 // address=[0x16a6cf0]
-// Decompiled from _DWORD *__thiscall TSparseMap<unsigned char>::Destruct(_DWORD *this)
+// Decompiled from void __thiscall TSparseMap<unsigned char>::Destruct(TSparseMap *this)
 private: void __thiscall TSparseMap<unsigned char>::Destruct(void) {
   
   void **v1; // eax
-  _DWORD *result; // eax
-  void *v3; // [esp+4h] [ebp-14h]
-  _DWORD *v4; // [esp+Ch] [ebp-Ch]
-  unsigned int i; // [esp+14h] [ebp-4h]
+  TSparseMap::TNode *v2; // [esp+4h] [ebp-14h]
+  TSparseMap::TNode *m_pNextNode; // [esp+Ch] [ebp-Ch]
+  unsigned int a1; // [esp+14h] [ebp-4h]
 
-  for ( i = 0; i < this[6]; ++i )
+  for ( a1 = 0; a1 < this->m_iWidth; ++a1 )
   {
-    if ( *(_DWORD *)std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::operator[](i) )
+    if ( *std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::operator[](
+            &this->m_vNodes,
+            a1) )
     {
-      v4 = *(_DWORD **)(*(_DWORD *)std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::operator[](i)
-                      + 4);
-      v1 = (void **)std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::operator[](i);
+      m_pNextNode = (*std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::operator[](
+                        &this->m_vNodes,
+                        a1))->m_pNextNode;
+      v1 = (void **)std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::operator[](
+                      &this->m_vNodes,
+                      a1);
       TSparseMap<unsigned char>::TNode::operator delete(*v1);
       do
       {
-        v3 = v4;
-        v4 = (_DWORD *)v4[1];
-        TSparseMap<unsigned char>::TNode::operator delete(v3);
+        v2 = m_pNextNode;
+        m_pNextNode = m_pNextNode->m_pNextNode;
+        TSparseMap<unsigned char>::TNode::operator delete(v2);
       }
-      while ( v4 );
+      while ( m_pNextNode );
     }
   }
-  result = this;
-  this[7] = 0;
-  return result;
+  this->m_uSetNodes = 0;
 }
 
 
@@ -47559,7 +47565,7 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
       g_iUsedFogFadeStep = v52;
       if ( v93 && v86 )
       {
-        v79 = CalcFinalHeightOffset(v111->a);
+        v79 = CalcFinalHeightOffset(v111->m_uGroundHeight);
         v45 = (v111->m_uGradient & 0x80u) != 0;
         v43 = v45 ? 0 : v111->m_uGradient & 0xF;
         NewFogging = T_GFX_MAP_ELEMENT::GetNewFogging(v111);
@@ -47599,7 +47605,7 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
       v111 += g_iMapSize;
       if ( v86 && v95 )
       {
-        v62 = CalcFinalHeightOffset(v111->a);
+        v62 = CalcFinalHeightOffset(v111->m_uGroundHeight);
         v42 = (v111->m_uGradient & 0x80u) != 0;
         v40 = v42 ? 0 : v111->m_uGradient & 0xF;
         v57 = T_GFX_MAP_ELEMENT::GetNewFogging(v111);
@@ -47645,7 +47651,7 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
         ++v111;
         if ( v94 && v95 )
         {
-          v71 = CalcFinalHeightOffset(v111->a);
+          v71 = CalcFinalHeightOffset(v111->m_uGroundHeight);
           v39 = (v111->m_uGradient & 0x80u) != 0;
           v37 = v39 ? 0 : v111->m_uGradient & 0xF;
           v54 = T_GFX_MAP_ELEMENT::GetNewFogging(v111);
@@ -47690,7 +47696,7 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
         v111 -= g_iMapSize;
         if ( v94 && v93 )
         {
-          v70 = CalcFinalHeightOffset(v111->a);
+          v70 = CalcFinalHeightOffset(v111->m_uGroundHeight);
           v36 = (v111->m_uGradient & 0x80u) != 0;
           v34 = v36 ? 0 : v111->m_uGradient & 0xF;
           v51 = T_GFX_MAP_ELEMENT::GetNewFogging(v111);
