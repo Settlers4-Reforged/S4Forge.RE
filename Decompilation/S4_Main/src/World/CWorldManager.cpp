@@ -400,21 +400,21 @@ int __cdecl CWorldManager::OwnerId(int _iX, int _iY) {
 // address=[0x1460470]
 // Decompiled from unsigned int CWorldManager::ClearHelperObject()
 void __cdecl CWorldManager::ClearHelperObject(void) {
-  CWorldManager::m_pHelpObjectMap.Clear();
+  CWorldManager::m_pHelpObjectMap->Clear();
 }
 
 
 // address=[0x14605e0]
 // Decompiled from int __cdecl CWorldManager::GetHelperObject(unsigned int a1, int a2)
 int __cdecl CWorldManager::GetHelperObject(int a1, int a2) {
-  return CWorldManager::m_pHelpObjectMap.Get(a1, a2);
+  return CWorldManager::m_pHelpObjectMap->Get(a1, a2);
 }
 
 
 // address=[0x1460a20]
 // Decompiled from int __cdecl CWorldManager::SetHelperObject(unsigned int a1, int a2, char a3)
 void __cdecl CWorldManager::SetHelperObject(int a1, int a2, int a3) {
-  CWorldManager::m_pHelpObjectMap.Set(a1, a2, &a3);
+  CWorldManager::m_pHelpObjectMap->Set(a1, a2, a3);
 }
 
 
@@ -465,7 +465,7 @@ int __cdecl CWorldManager::PileId(int _iX, int _iY) {
 // address=[0x1470e10]
 // Decompiled from int __cdecl CWorldManager::SurroundingHexPointRelIndex(int _iTileId)
 int __cdecl CWorldManager::SurroundingHexPointRelIndex(int _iTileId) {
-  return CSurroundingHexPointsIndices::operator[](CWorldManager::m_cSurroundingHexPointsIndices, _iTileId);
+  return CWorldManager::m_cSurroundingHexPointsIndices[_iTileId];
 }
 
 
@@ -765,7 +765,7 @@ bool __cdecl CWorldManager::LoadMap(class S4::CMapFile &a1, int _iWidth) {
   CWorldManager::m_cDecoObjectMap.LoadMap(a1, 201u, CWorldManager::m_iWidthHeight);
   CWorldManager::m_cResourceMap.LoadMap(a1, 207u, CWorldManager::m_iWidthHeight);
   CWorldManager::m_cWalkCount5MoveCost3Map.LoadMap(a1, 209u, CWorldManager::m_iWidthHeight);
-  CWorldManager::m_pHelpObjectMap.LoadMap(a1, 204u);
+  CWorldManager::m_pHelpObjectMap->LoadMap(a1, 204u);
   g_pTiling->Init(
     _iWidth,
     CWorldManager::m_cRenderMap.m_pData,
@@ -801,7 +801,7 @@ bool __cdecl CWorldManager::SaveMap(class S4::CMapFile &_pMapFile) {
     _pMapFile,
     0xD1u,
     CWorldManager::m_iWidthHeight);
-  CWorldManager::m_pHelpObjectMap.SaveMap(_pMapFile, 204);
+  CWorldManager::m_pHelpObjectMap->SaveMap(_pMapFile, 204);
   return 1;
 }
 
@@ -1374,14 +1374,14 @@ struct SGfxColor * __cdecl CWorldManager::GetMiniMapColor(unsigned int _iTileId)
 // address=[0x16a4480]
 // Decompiled from void __cdecl CWorldManager::WorldSetNumberOfNextLine(int a1)
 void __cdecl CWorldManager::WorldSetNumberOfNextLine(int a1) {
-  TSparseMap<unsigned char>::SetNewLine(CWorldManager::m_pHelpObjectMap, a1);
+  CWorldManager::m_pHelpObjectMap->SetNewLine(a1);
 }
 
 
 // address=[0x16a44a0]
 // Decompiled from char __cdecl CWorldManager::WorldGetIconObjectByX(unsigned int a1)
 unsigned char __cdecl CWorldManager::WorldGetIconObjectByX(int a1) {
-  return TSparseMap<unsigned char>::GetByX(CWorldManager::m_pHelpObjectMap, a1);
+  return CWorldManager::m_pHelpObjectMap->GetByX(a1);
 }
 
 
