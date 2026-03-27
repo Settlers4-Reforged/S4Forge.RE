@@ -28,21 +28,21 @@ bool __cdecl CAIResourceMap::IsOfLandtype(enum T_RESOURCE_LANDTYPE a1, int a2, i
   {
     case 1:
       v11 = CAIResourceData::ResourceAmount1(v15, 7);
-      v16 = v11 < CStaticConfigVarInt::operator int(&unk_3EC2C88);
+      v16 = v11 < CStaticConfigVarInt::operator int(&g_iPLAIN_TREES);
       break;
     case 2:
       v12 = CAIResourceData::ResourceAmount1(v15, 7);
-      if ( v12 < CStaticConfigVarInt::operator int(&unk_3EC2C94) )
-        v16 = v12 >= CStaticConfigVarInt::operator int(&unk_3EC2C88);
+      if ( v12 < CStaticConfigVarInt::operator int(&g_iLIGHT_TREES) )
+        v16 = v12 >= CStaticConfigVarInt::operator int(&g_iPLAIN_TREES);
       break;
     case 3:
       v13 = CAIResourceData::ResourceAmount1(v15, 7);
-      if ( v13 < CStaticConfigVarInt::operator int(&unk_3EC2CA0) )
-        v16 = v13 >= CStaticConfigVarInt::operator int(&unk_3EC2C94);
+      if ( v13 < CStaticConfigVarInt::operator int(&g_iDEEP_TREES) )
+        v16 = v13 >= CStaticConfigVarInt::operator int(&g_iLIGHT_TREES);
       break;
     case 4:
       v14 = CAIResourceData::ResourceAmount1(v15, 7);
-      v16 = v14 >= CStaticConfigVarInt::operator int(&unk_3EC2CA0);
+      v16 = v14 >= CStaticConfigVarInt::operator int(&g_iDEEP_TREES);
       break;
     case 5:
       v16 = (CAIResourceData::Flags1(v15) & 0x40) != 0;

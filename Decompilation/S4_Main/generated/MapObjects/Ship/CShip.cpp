@@ -587,7 +587,7 @@ void  CShip::RepairAt(int a2) {
   result = (CShip *)(*(int (__thiscall **)(CShip *))(*(_DWORD *)this + 40))(this);
   if ( (unsigned int)result >= *(_DWORD *)(*((_DWORD *)this + 25) + 48) )
     return result;
-  v3 = CStaticConfigVarInt::operator int(&unk_4158CE0) + *((_BYTE *)this + 33);
+  v3 = CStaticConfigVarInt::operator int(&g_iShipRepairRate) + *((_BYTE *)this + 33);
   result = this;
   *((_BYTE *)this + 33) = v3;
   return result;

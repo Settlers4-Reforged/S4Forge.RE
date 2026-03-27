@@ -292,7 +292,7 @@ void  CWheeler::RepairAt(int a2) {
   result = (CWheeler *)(*(int (__thiscall **)(CWheeler *))(*(_DWORD *)this + 40))(this);
   if ( (unsigned int)result >= *(_DWORD *)(*((_DWORD *)this + 25) + 48) )
     return result;
-  v3 = CStaticConfigVarInt::operator int(&unk_415A600) + *((_BYTE *)this + 33);
+  v3 = CStaticConfigVarInt::operator int(&g_iWheelerRepairRate) + *((_BYTE *)this + 33);
   result = this;
   *((_BYTE *)this + 33) = v3;
   return result;

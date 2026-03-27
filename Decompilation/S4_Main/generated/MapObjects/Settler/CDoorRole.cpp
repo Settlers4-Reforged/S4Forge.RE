@@ -30,7 +30,7 @@ void  CDoorRole::LogicUpdate(class CSettler * a2) {
   if ( result >= *(unsigned __int8 *)(SettlerInfo + 2) )
     return result;
   v6 = IEntity::Hitpoints(a2);
-  if ( v6 < CStaticConfigVarInt::operator int(&unk_41520B4) )
+  if ( v6 < CStaticConfigVarInt::operator int(&g_iMaxTowerDoorHealth) )
     IEntity::SetHitpoints(a2, v6 + 1);
   return IAnimatedEntity::RegisterForLogicUpdate(15);
 }
@@ -206,7 +206,7 @@ void  CDoorRole::Init(class CSettler * a2) {
     return result;
   this[9] = IEntity::EntityId((unsigned __int16 *)a2);
   CWarMap::AddEntity(a2);
-  v3 = CStaticConfigVarInt::operator int(&unk_41520B4);
+  v3 = CStaticConfigVarInt::operator int(&g_iMaxTowerDoorHealth);
   return IEntity::SetHitpoints((IEntity *)a2, v3);
 }
 

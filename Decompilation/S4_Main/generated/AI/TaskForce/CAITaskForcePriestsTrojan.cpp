@@ -40,7 +40,7 @@ int  CAITaskForcePriestsTrojan::ChooseMilitarySpell(struct SCountFightersResult 
   v8 = CStaticConfigVarInt::operator int(&s_cAIConfigTrojanMilitarySpellChanceNone);
   v7 = CStaticConfigVarInt::operator int(&s_cAIConfigTrojanMilitarySpellChanceSoldier);
   v6 = CStaticConfigVarInt::operator int(&s_cAIConfigTrojanMilitarySpellChanceDefence);
-  return sub_132D6A0(4, v6, 6, v7, 5, 0, v8, a3);
+  return ChooseNextSpellType(4, v6, 6, v7, 5, 0, v8, a3);
 }
 
 

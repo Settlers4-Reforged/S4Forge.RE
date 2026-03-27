@@ -455,7 +455,7 @@ void __cdecl CMagic::IncreaseManaByDonation(int a1) {
   {
     __debugbreak();
   }
-  v1 = CStaticConfigVarInt::operator int(&unk_3F2011C);
+  v1 = CStaticConfigVarInt::operator int(&g_iManaPerDonation);
   v5 = MagicMax(v1, 1, 99);
   CMagic::IncreaseMana(a1, v5);
   v2 = CPlayerManager::PlayerGameData(a1);
@@ -480,7 +480,7 @@ void __cdecl CMagic::IncreaseManaByBigTemple(int a1) {
   {
     __debugbreak();
   }
-  v1 = CStaticConfigVarInt::operator int(&unk_3F20128);
+  v1 = CStaticConfigVarInt::operator int(&g_iManaPerBigTemple);
   v5 = MagicMax(v1, 0, 999);
   CMagic::IncreaseMana(a1, v5);
   v2 = CPlayerManager::PlayerGameData(a1);
@@ -520,7 +520,7 @@ void __cdecl CMagic::DecreaseManaAfterWarmachineShot(int a1) {
   int v1; // eax
   int v2; // [esp+0h] [ebp-4h]
 
-  v1 = CStaticConfigVarInt::operator int(&unk_3F200F8);
+  v1 = CStaticConfigVarInt::operator int(&g_iVikingWarmachineShotCost);
   v2 = MagicMax(v1, 1, 999);
   CMagic::DecreaseMana(a1, v2);
 }
@@ -729,7 +729,7 @@ int __cdecl CMagic::MagicGetSpellRange(int a1, int a2) {
   }
   if ( a2 == 4 && a1 == 2 || a2 == 7 && a1 == 4 )
     return 2048;
-  v3 = CStaticConfigVarInt::operator int(&unk_3F20134);
+  v3 = CStaticConfigVarInt::operator int(&g_iDefaultSpellRange);
   return MagicMax(v3, 5, 50);
 }
 

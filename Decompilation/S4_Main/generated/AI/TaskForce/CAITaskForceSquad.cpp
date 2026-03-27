@@ -128,7 +128,7 @@ LABEL_21:
         while ( v9 )
         {
           v2 = CAIEntityInfo::EntityId(v9);
-          if ( (IAIEnvironment::EntityFlags(v2) & 0x8000) == 0 )
+          if ( (IAIEnvironment::EntityFlags(v2) & EntityFlag_OnBoard) == 0 )
             v12 = 0;
           v9 = CAIEntityInfo::Next(v9);
         }
@@ -300,48 +300,56 @@ enum CAITaskForce::T_RESULT  CAITaskForceSquad::RemoveEntity(class CAIEntityInfo
 
 
 // address=[0x132c7f0]
-// Decompiled from CAITaskForceSquad *__thiscall CAITaskForceSquad::RemoveAllEntities(CAITaskForceSquad *this)
+// Decompiled from void __thiscall CAITaskForceSquad::RemoveAllEntities(CAITaskForceSquad *this)
 void  CAITaskForceSquad::RemoveAllEntities(void) {
   
-  CAITaskForceSquad *result; // eax
-
   CAITaskForce::RemoveAllEntities(this);
-  *((_DWORD *)this + 24) = 0;
-  *((_DWORD *)this + 25) = 0;
-  *((_DWORD *)this + 26) = 0;
-  result = this;
-  *((_DWORD *)this + 27) = 0;
-  return result;
+  this->m_iNumberOfSwordsmen = 0;
+  this->m_iNumberOfBowmen = 0;
+  this->m_iNumberOfUniqueFighters = 0;
+  this->m_iNumberOfSquadleaders = 0;
 }
 
 
 // address=[0x132c830]
-// Decompiled from int __thiscall CAITaskForceSquad::NumberOfEntities(int *this, int a2)
+// Decompiled from int __thiscall CAITaskForceSquad::NumberOfEntities(CAITaskForceSquad *this, T_AI_WARRIOR_TYPE a2)
 int  CAITaskForceSquad::NumberOfEntities(enum T_AI_WARRIOR_TYPE a2)const {
   
   int result; // eax
 
   switch ( a2 )
   {
-    case 2:
-      if ( this[24] < 0 && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 1138, "m_iNumberOfSwordsmen >= 0") == 1 )
+    case AI_WARRIOR_TYPE_SWORDMAN:
+      if ( this->m_iNumberOfSwordsmen < 0
+        && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 1138, "m_iNumberOfSwordsmen >= 0") == 1 )
+      {
         __debugbreak();
-      result = this[24];
+      }
+      result = this->m_iNumberOfSwordsmen;
       break;
-    case 3:
-      if ( this[25] < 0 && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 1145, "m_iNumberOfBowmen >= 0") == 1 )
+    case AI_WARRIOR_TYPE_BOWMAN:
+      if ( this->m_iNumberOfBowmen < 0
+        && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 1145, "m_iNumberOfBowmen >= 0") == 1 )
+      {
         __debugbreak();
-      result = this[25];
+      }
+      result = this->m_iNumberOfBowmen;
       break;
-    case 4:
-      if ( this[26] < 0 && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 1152, "m_iNumberOfUniqueFighters >= 0") == 1 )
+    case AI_WARRIOR_TYPE_FIGHTER_UNIQUE:
+      if ( this->m_iNumberOfUniqueFighters < 0
+        && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 1152, "m_iNumberOfUniqueFighters >= 0") == 1 )
+      {
         __debugbreak();
-      result = this[26];
+      }
+      result = this->m_iNumberOfUniqueFighters;
       break;
-    case 5:
-      if ( this[27] < 0 && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 1159, "m_iNumberOfSquadleaders >= 0") == 1 )
+    case AI_WARRIOR_TYPE_SQUAD_LEADER:
+      if ( this->m_iNumberOfSquadleaders < 0
+        && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 1159, "m_iNumberOfSquadleaders >= 0") == 1 )
+      {
         __debugbreak();
-      result = this[27];
+      }
+      result = this->m_iNumberOfSquadleaders;
       break;
     default:
       result = -1;

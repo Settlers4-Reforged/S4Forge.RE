@@ -42,7 +42,7 @@ public:
     static void __cdecl Done(void);
 
     // address=[0x15d3040]
-    static bool __cdecl AddPlayer(int a1, int a2);
+    static bool __cdecl AddPlayer(int _iPlayerId, int iAllianceId);
 
     // address=[0x15d31c0]
     static bool __cdecl Lock(void);

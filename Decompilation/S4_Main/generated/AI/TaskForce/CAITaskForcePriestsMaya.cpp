@@ -49,7 +49,7 @@ int  CAITaskForcePriestsMaya::ChooseMilitarySpell(struct SCountFightersResult co
   v9 = CStaticConfigVarInt::operator int(&s_sConfigMayaMilitarySpellChanceSoldier);
   v8 = CStaticConfigVarInt::operator int(&s_sConfigMayaMilitarySpellChanceAttack);
   v7 = CStaticConfigVarInt::operator int(&s_sConfigMayaMilitarySpellChanceDefence);
-  return sub_132D6A0(4, v7, 5, v8, 6, v9, v10, a3);
+  return ChooseNextSpellType(4, v7, 5, v8, 6, v9, v10, a3);
 }
 
 

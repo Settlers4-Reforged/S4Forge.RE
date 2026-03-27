@@ -1,3 +1,4 @@
+#if FALSE
 #include "CAlliances.h"
 
 // Definitions for class CAlliances
@@ -6,7 +7,7 @@
 // Decompiled from int __cdecl CAlliances::AllianceId(int a1)
 int __cdecl CAlliances::AllianceId(int a1) {
   
-  return dword_415C3D4[a1];
+  return CAlliances::m_sData.m_iAllianceIds[a1];
 }
 
 
@@ -14,7 +15,7 @@ int __cdecl CAlliances::AllianceId(int a1) {
 // Decompiled from bool __cdecl CAlliances::IsValidUsedPlayerId(int a1)
 bool __cdecl CAlliances::IsValidUsedPlayerId(int a1) {
   
-  return (unsigned int)(a1 - 1) <= 7 && dword_415C3D4[a1] > 0;
+  return (unsigned int)(a1 - 1) <= 7 && CAlliances::m_sData.m_iAllianceIds[a1] > 0;
 }
 
 
@@ -22,7 +23,7 @@ bool __cdecl CAlliances::IsValidUsedPlayerId(int a1) {
 // Decompiled from int __cdecl CAlliances::PlayerAllyBits(int a1)
 int __cdecl CAlliances::PlayerAllyBits(int a1) {
   
-  return dword_415C3F8[a1];
+  return CAlliances::m_sData.m_iPlayerAllyBits[a1];
 }
 
 
@@ -38,7 +39,7 @@ int __cdecl CAlliances::PlayerBit(int a1) {
 // Decompiled from int __cdecl CAlliances::PlayerEnemyBits(int a1)
 int __cdecl CAlliances::PlayerEnemyBits(int a1) {
   
-  return dword_415C41C[a1];
+  return CAlliances::m_sData.m_iPlayerEnemyBits[a1];
 }
 
 
@@ -46,7 +47,7 @@ int __cdecl CAlliances::PlayerEnemyBits(int a1) {
 // Decompiled from int CAlliances::LastPlayerId()
 int __cdecl CAlliances::LastPlayerId(void) {
   
-  return dword_415C3C8;
+  return CAlliances::m_sData.m_iLastPlayerId;
 }
 
 
@@ -54,7 +55,7 @@ int __cdecl CAlliances::LastPlayerId(void) {
 // Decompiled from int *__cdecl CAlliances::EnemyPlayerIds(int a1)
 int const * __cdecl CAlliances::EnemyPlayerIds(int a1) {
   
-  return &dword_415C5A8[8 * a1];
+  return CAlliances::m_sData.m_iEnemyPlayerIds[a1];
 }
 
 
@@ -62,7 +63,7 @@ int const * __cdecl CAlliances::EnemyPlayerIds(int a1) {
 // Decompiled from int *__cdecl CAlliances::AllyPlayerIds(int a1)
 int const * __cdecl CAlliances::AllyPlayerIds(int a1) {
   
-  return &dword_415C488[8 * a1];
+  return CAlliances::m_sData.m_iAllyPlayerIds[a1];
 }
 
 
@@ -70,7 +71,7 @@ int const * __cdecl CAlliances::AllyPlayerIds(int a1) {
 // Decompiled from int CAlliances::AllPlayersBits()
 int __cdecl CAlliances::AllPlayersBits(void) {
   
-  return dword_415C3D0;
+  return CAlliances::m_sData.m_iAllPlayersBits;
 }
 
 
@@ -78,7 +79,7 @@ int __cdecl CAlliances::AllPlayersBits(void) {
 // Decompiled from int CAlliances::LastAllianceId()
 int __cdecl CAlliances::LastAllianceId(void) {
   
-  return dword_415C3CC;
+  return CAlliances::m_sData.m_iLastAllianceId;
 }
 
 
@@ -88,7 +89,7 @@ void __cdecl CAlliances::Init(void) {
   
   void *result; // eax
 
-  result = memset(&CAlliances::m_sData, 0, 0x308u);
+  result = memset(&CAlliances::m_sData, 0, sizeof(CAlliances::m_sData));
   CAlliances::m_iInitialized = 1;
   CAlliances::m_iLocked = 0;
   return result;
@@ -101,7 +102,7 @@ void __cdecl CAlliances::Done(void) {
   
   void *result; // eax
 
-  result = memset(&CAlliances::m_sData, 0, 0x308u);
+  result = memset(&CAlliances::m_sData, 0, sizeof(CAlliances::m_sData));
   CAlliances::m_iInitialized = 0;
   CAlliances::m_iLocked = 0;
   return result;
@@ -109,8 +110,8 @@ void __cdecl CAlliances::Done(void) {
 
 
 // address=[0x15d3040]
-// Decompiled from char __cdecl CAlliances::AddPlayer(int a1, int a2)
-bool __cdecl CAlliances::AddPlayer(int a1, int a2) {
+// Decompiled from char __cdecl CAlliances::AddPlayer(int _iPlayerId, int iAllianceId)
+bool __cdecl CAlliances::AddPlayer(int _iPlayerId, int iAllianceId) {
   
   if ( CAlliances::m_iInitialized )
   {
@@ -120,15 +121,15 @@ bool __cdecl CAlliances::AddPlayer(int a1, int a2) {
         __debugbreak();
       return 0;
     }
-    else if ( a1 >= 1 && a1 <= 8 )
+    else if ( _iPlayerId >= 1 && _iPlayerId <= 8 )
     {
-      if ( a2 != 9 && (a2 > 8 || a2 < 1) )
+      if ( iAllianceId != 9 && (iAllianceId > 8 || iAllianceId < 1) )
       {
         if ( BBSupportDbgReport(1, "Pathing\\Alliances.cpp", 97, "CAlliances::AddPlayer(): Invalid alliance id!") == 1 )
           __debugbreak();
         return 0;
       }
-      else if ( dword_415C3D4[a1] )
+      else if ( CAlliances::m_sData.m_iAllianceIds[_iPlayerId] )
       {
         if ( BBSupportDbgReport(
                1,
@@ -140,12 +141,12 @@ bool __cdecl CAlliances::AddPlayer(int a1, int a2) {
       }
       else
       {
-        ++CAlliances::m_sData;
-        if ( a1 > dword_415C3C8 )
-          dword_415C3C8 = a1;
-        dword_415C3D4[a1] = a2;
-        if ( a2 != 9 )
-          ++dword_415C440[a2];
+        ++CAlliances::m_sData.m_iNumberOfPlayers;
+        if ( _iPlayerId > CAlliances::m_sData.m_iLastPlayerId )
+          CAlliances::m_sData.m_iLastPlayerId = _iPlayerId;
+        CAlliances::m_sData.m_iAllianceIds[_iPlayerId] = iAllianceId;
+        if ( iAllianceId != 9 )
+          ++CAlliances::m_sData.m_iAlliancesNumberOfAllies[iAllianceId];
         return 1;
       }
     }
@@ -169,25 +170,22 @@ bool __cdecl CAlliances::AddPlayer(int a1, int a2) {
 // Decompiled from char CAlliances::Lock()
 bool __cdecl CAlliances::Lock(void) {
   
-  const int *v1; // esi
-  const int *v2; // esi
-  int v3; // [esp+4h] [ebp-70h]
+  int *v1; // esi
+  int *v2; // esi
+  int iLastPlayerId; // [esp+4h] [ebp-70h]
   int v4; // [esp+8h] [ebp-6Ch]
   int v5; // [esp+Ch] [ebp-68h]
-  int v6; // [esp+10h] [ebp-64h]
+  int iPlayerId; // [esp+10h] [ebp-64h]
   int v7; // [esp+1Ch] [ebp-58h]
-  int v8; // [esp+20h] [ebp-54h]
-  int v9; // [esp+24h] [ebp-50h]
-  int v10; // [esp+28h] [ebp-4Ch]
-  int v11; // [esp+2Ch] [ebp-48h]
+  int iThisAlliance; // [esp+20h] [ebp-54h]
+  int iEnemyCounter; // [esp+24h] [ebp-50h]
+  int iAllyCounter; // [esp+28h] [ebp-4Ch]
+  int iAllPlayerBits; // [esp+2Ch] [ebp-48h]
   int m; // [esp+30h] [ebp-44h]
   int i; // [esp+34h] [ebp-40h]
   int k; // [esp+38h] [ebp-3Ch]
-  int ii; // [esp+3Ch] [ebp-38h]
-  int n; // [esp+40h] [ebp-34h]
-  int v17; // [esp+44h] [ebp-30h]
-  int j; // [esp+48h] [ebp-2Ch]
-  _DWORD v19[9]; // [esp+4Ch] [ebp-28h] BYREF
+  int iAllianceId; // [esp+3Ch] [ebp-38h] MAPDST
+  _DWORD iAllyBits[9]; // [esp+4Ch] [ebp-28h] BYREF
 
   if ( CAlliances::m_iInitialized )
   {
@@ -200,14 +198,14 @@ bool __cdecl CAlliances::Lock(void) {
     else
     {
       CAlliances::m_iLocked = 1;
-      v17 = 1;
-      for ( i = 1; i <= dword_415C3C8; ++i )
+      iAllianceId = 1;
+      for ( i = 1; i <= CAlliances::m_sData.m_iLastPlayerId; ++i )
       {
-        if ( dword_415C3D4[i] == 9 )
+        if ( CAlliances::m_sData.m_iAllianceIds[i] == 9 )
         {
-          while ( dword_415C440[v17] != 0 && v17 < 8 )
-            ++v17;
-          if ( dword_415C440[v17]
+          while ( CAlliances::m_sData.m_iAlliancesNumberOfAllies[iAllianceId] != 0 && iAllianceId < 8 )
+            ++iAllianceId;
+          if ( CAlliances::m_sData.m_iAlliancesNumberOfAllies[iAllianceId]
             && BBSupportDbgReport(
                  2,
                  "Pathing\\Alliances.cpp",
@@ -216,19 +214,19 @@ bool __cdecl CAlliances::Lock(void) {
           {
             __debugbreak();
           }
-          dword_415C3D4[i] = v17;
-          dword_415C440[v17] = 1;
+          CAlliances::m_sData.m_iAllianceIds[i] = iAllianceId;
+          CAlliances::m_sData.m_iAlliancesNumberOfAllies[iAllianceId] = 1;
         }
       }
-      for ( j = 1; j <= 8; ++j )
+      for ( iAllianceId = 1; iAllianceId <= 8; ++iAllianceId )
       {
-        v6 = dword_415C440[j];
-        if ( v6 > 0 )
+        iPlayerId = CAlliances::m_sData.m_iAlliancesNumberOfAllies[iAllianceId];
+        if ( iPlayerId > 0 )
         {
-          ++dword_415C3C4;
-          dword_415C3CC = j;
-          dword_415C464[j] = CAlliances::m_sData - v6;
-          if ( dword_415C464[j] > 7
+          ++CAlliances::m_sData.m_iNumberOfAlliances;
+          CAlliances::m_sData.m_iLastAllianceId = iAllianceId;
+          CAlliances::m_sData.m_iNumberOfEnemies[iAllianceId] = CAlliances::m_sData.m_iNumberOfPlayers - iPlayerId;
+          if ( CAlliances::m_sData.m_iNumberOfEnemies[iAllianceId] > 7
             && BBSupportDbgReport(
                  2,
                  "Pathing\\Alliances.cpp",
@@ -237,21 +235,21 @@ bool __cdecl CAlliances::Lock(void) {
           {
             __debugbreak();
           }
-          v10 = 0;
-          v9 = 0;
-          v3 = dword_415C3C8;
-          for ( k = 1; k <= v3; ++k )
+          iAllyCounter = 0;
+          iEnemyCounter = 0;
+          iLastPlayerId = CAlliances::m_sData.m_iLastPlayerId;
+          for ( k = 1; k <= iLastPlayerId; ++k )
           {
-            v5 = dword_415C3D4[k];
+            v5 = CAlliances::m_sData.m_iAllianceIds[k];
             if ( v5 )
             {
-              if ( v5 == j )
-                dword_415C488[8 * j + v10++] = k;
+              if ( v5 == iAllianceId )
+                CAlliances::m_sData.m_iAllyPlayerIds[iAllianceId][iAllyCounter++] = k;
               else
-                dword_415C5A8[8 * j + v9++] = k;
+                CAlliances::m_sData.m_iEnemyPlayerIds[iAllianceId][iEnemyCounter++] = k;
             }
           }
-          if ( dword_415C440[j] != v10
+          if ( CAlliances::m_sData.m_iAlliancesNumberOfAllies[iAllianceId] != iAllyCounter
             && BBSupportDbgReport(
                  2,
                  "Pathing\\Alliances.cpp",
@@ -260,7 +258,7 @@ bool __cdecl CAlliances::Lock(void) {
           {
             __debugbreak();
           }
-          if ( dword_415C464[j] != v9
+          if ( CAlliances::m_sData.m_iNumberOfEnemies[iAllianceId] != iEnemyCounter
             && BBSupportDbgReport(
                  2,
                  "Pathing\\Alliances.cpp",
@@ -271,27 +269,27 @@ bool __cdecl CAlliances::Lock(void) {
           }
         }
       }
-      v11 = 0;
-      memset(v19, 0, sizeof(v19));
-      for ( m = 1; m <= dword_415C3C8; ++m )
+      iAllPlayerBits = 0;
+      memset(iAllyBits, 0, sizeof(iAllyBits));
+      for ( m = 1; m <= CAlliances::m_sData.m_iLastPlayerId; ++m )
       {
         v4 = CAlliances::PlayerBit(m);
-        v7 = dword_415C3D4[m];
+        v7 = CAlliances::m_sData.m_iAllianceIds[m];
         if ( v7 )
         {
-          v11 |= v4;
-          v19[v7] |= v4;
+          iAllPlayerBits |= v4;
+          iAllyBits[v7] |= v4;
         }
       }
-      dword_415C3D0 = v11;
-      for ( n = 1; n <= dword_415C3C8; ++n )
+      CAlliances::m_sData.m_iAllPlayersBits = iAllPlayerBits;
+      for ( iAllianceId = 1; iAllianceId <= CAlliances::m_sData.m_iLastPlayerId; ++iAllianceId )
       {
-        v8 = dword_415C3D4[n];
-        if ( v8 )
+        iThisAlliance = CAlliances::m_sData.m_iAllianceIds[iAllianceId];
+        if ( iThisAlliance )
         {
-          dword_415C3F8[n] = v19[v8];
-          dword_415C41C[n] = v11 & ~v19[v8];
-          if ( dword_415C41C[n] != (v19[v8] ^ v11)
+          CAlliances::m_sData.m_iPlayerAllyBits[iAllianceId] = iAllyBits[iThisAlliance];
+          CAlliances::m_sData.m_iPlayerEnemyBits[iAllianceId] = iAllPlayerBits & ~iAllyBits[iThisAlliance];
+          if ( CAlliances::m_sData.m_iPlayerEnemyBits[iAllianceId] != (iAllyBits[iThisAlliance] ^ iAllPlayerBits)
             && BBSupportDbgReport(
                  2,
                  "Pathing\\Alliances.cpp",
@@ -302,10 +300,10 @@ bool __cdecl CAlliances::Lock(void) {
           }
         }
       }
-      for ( ii = 1; ii <= 8; ++ii )
+      for ( iAllianceId = 1; iAllianceId <= 8; ++iAllianceId )
       {
-        v1 = CAlliances::AllyPlayerIds(ii);
-        if ( v1[CAlliances::NumberOfAllies(ii)]
+        v1 = CAlliances::AllyPlayerIds(iAllianceId);
+        if ( v1[CAlliances::NumberOfAllies(iAllianceId)]
           && BBSupportDbgReport(
                2,
                "Pathing\\Alliances.cpp",
@@ -314,8 +312,8 @@ bool __cdecl CAlliances::Lock(void) {
         {
           __debugbreak();
         }
-        v2 = CAlliances::EnemyPlayerIds(ii);
-        if ( v2[CAlliances::NumberOfEnemies(ii)]
+        v2 = CAlliances::EnemyPlayerIds(iAllianceId);
+        if ( v2[CAlliances::NumberOfEnemies(iAllianceId)]
           && BBSupportDbgReport(
                2,
                "Pathing\\Alliances.cpp",
@@ -341,7 +339,7 @@ bool __cdecl CAlliances::Lock(void) {
 // Decompiled from int __cdecl CAlliances::NumberOfAllies(int a1)
 int __cdecl CAlliances::NumberOfAllies(int a1) {
   
-  return dword_415C440[a1];
+  return CAlliances::m_sData.m_iAlliancesNumberOfAllies[a1];
 }
 
 
@@ -349,7 +347,7 @@ int __cdecl CAlliances::NumberOfAllies(int a1) {
 // Decompiled from int __cdecl CAlliances::NumberOfEnemies(int a1)
 int __cdecl CAlliances::NumberOfEnemies(int a1) {
   
-  return dword_415C464[a1];
+  return CAlliances::m_sData.m_iNumberOfEnemies[a1];
 }
 
 
@@ -357,7 +355,7 @@ int __cdecl CAlliances::NumberOfEnemies(int a1) {
 // Decompiled from int CAlliances::NumberOfPlayers()
 int __cdecl CAlliances::NumberOfPlayers(void) {
   
-  return CAlliances::m_sData;
+  return CAlliances::m_sData.m_iNumberOfPlayers;
 }
 
 
@@ -365,7 +363,7 @@ int __cdecl CAlliances::NumberOfPlayers(void) {
 // Decompiled from int CAlliances::NumberOfAlliances()
 int __cdecl CAlliances::NumberOfAlliances(void) {
   
-  return dword_415C3C4;
+  return CAlliances::m_sData.m_iNumberOfAlliances;
 }
 
 
@@ -378,3 +376,4 @@ int __cdecl CAlliances::NumberOfAlliances(void) {
 // address=[0x415c3c0]
 // [Decompilation failed for static struct CAlliances::SAlliancesData CAlliances::m_sData]
 
+#endif // Already implemented

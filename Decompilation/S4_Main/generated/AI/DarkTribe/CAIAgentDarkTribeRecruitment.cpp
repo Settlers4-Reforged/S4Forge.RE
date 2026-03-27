@@ -61,33 +61,33 @@ unsigned int  CAIAgentDarkTribeRecruitment::Execute(unsigned int a2, unsigned in
   IAIEnvironment::SettlerGetNumberOfSettlers(v43, 55);
   IAIEnvironment::BuildingGetNumberOfBuildings(v43, 49, 2u);
   v39 = v41 + NumberOfSettlers;
-  v6 = CStaticConfigVarInt::operator int(&unk_3E8DD78);
+  v6 = CStaticConfigVarInt::operator int(&s_iDTFightersMin);
   v33 = 0;
   v32 = 0;
   if ( v41 + NumberOfSettlers >= sub_1303080(v6, 0, 1000) )
   {
     if ( (v35 & 0x10000000) == 0 )
     {
-      v25 = CStaticConfigVarInt::operator int(&unk_3E8DDB4);
-      v23 = CStaticConfigVarInt::operator int(&unk_3E8DDA8);
-      v21 = CStaticConfigVarInt::operator int(&unk_3E8DD9C);
-      v19 = CStaticConfigVarInt::operator int(&unk_3E8DD90);
-      v7 = CStaticConfigVarInt::operator int(&unk_3E8DD84);
+      v25 = CStaticConfigVarInt::operator int(&s_iDTGardenerMax);
+      v23 = CStaticConfigVarInt::operator int(&s_iDTGardenerMax2B);
+      v21 = CStaticConfigVarInt::operator int(&s_iDTGardenerMax2A256);
+      v19 = CStaticConfigVarInt::operator int(&s_iDTGardenerMax1B);
+      v7 = CStaticConfigVarInt::operator int(&s_iDTGardenerMax1A256);
       v30 = sub_1303110(v39, v7, v19, v21, v23, v25);
       v33 = sub_1303080(v30 - v29, 0, 5);
     }
     if ( (v35 & 0x20000000) == 0 )
     {
-      v26 = CStaticConfigVarInt::operator int(&unk_3E8DDF0);
-      v24 = CStaticConfigVarInt::operator int(&unk_3E8DDE4);
-      v22 = CStaticConfigVarInt::operator int(&unk_3E8DDD8);
-      v20 = CStaticConfigVarInt::operator int(&unk_3E8DDCC);
-      v8 = CStaticConfigVarInt::operator int(&unk_3E8DDC0);
+      v26 = CStaticConfigVarInt::operator int(&s_iDTShamanMax);
+      v24 = CStaticConfigVarInt::operator int(&s_iDTShamanMax2B);
+      v22 = CStaticConfigVarInt::operator int(&s_iDTShamanMax2A256);
+      v20 = CStaticConfigVarInt::operator int(&s_iDTShamanMax1B);
+      v8 = CStaticConfigVarInt::operator int(&s_iDTShamanMax1A256);
       v28 = sub_1303110(v39, v8, v20, v22, v24, v26);
       v32 = sub_1303080(v28 - v27, 0, 5);
     }
   }
-  v9 = CStaticConfigVarInt::operator int(&stru_3E8DD6C);
+  v9 = CStaticConfigVarInt::operator int(&s_iDTBowmanToSwordsmanRatio256);
   v38 = sub_1303080(v9, 0, 4096);
   v37 = 0;
   v36 = 0;

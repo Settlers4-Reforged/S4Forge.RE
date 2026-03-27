@@ -156,7 +156,7 @@ void  CTowerSoldier::LogicUpdate(class CSettler * a2) {
       v7 = IEntity::Race(a2);
       v39 = *(_BYTE *)(CSettlerMgr::GetSettlerInfo(v7, v28) + 3);
       *((_WORD *)this + 17) = v52;
-      *((_BYTE *)this + 47) = v39 + CStaticConfigVarInt::operator int(&unk_4158CC0);
+      *((_BYTE *)this + 47) = v39 + CStaticConfigVarInt::operator int(&g_iTowerStoneThrowerExtraDmg);
       IMovingEntity::SetDirection(a2, *((unsigned __int8 *)this + 46));
       CSettler::TakeAnimList(a2, 2);
       if ( IEntity::WarriorType() != 3 )
@@ -177,7 +177,7 @@ LABEL_17:
       v31 = IEntity::PackedXY(a2);
       v11 = IEntity::OwnerId((unsigned __int8 *)a2);
       v51 = CTowerSoldier::SearchBowmanTarget(v11, v31);
-      v46 = CStaticConfigVarInt::operator int(&unk_4158CB4);
+      v46 = CStaticConfigVarInt::operator int(&g_iTowerBowmanExtraDmg);
       goto LABEL_35;
     case 3:
       if ( !*((_DWORD *)this + 12)
@@ -207,7 +207,7 @@ LABEL_17:
       v32 = IEntity::PackedXY(a2);
       v13 = IEntity::OwnerId((unsigned __int8 *)a2);
       v51 = CTowerSoldier::SearchDoorGuardTarget(v13, v32);
-      v46 = CStaticConfigVarInt::operator int(&unk_4158CCC);
+      v46 = CStaticConfigVarInt::operator int(&g_iTowerDoorGuardExtraDmg);
       v14 = IEntity::Type((unsigned __int16 *)a2);
       if ( CSettlerMgr::SettlerWarriorType(v14) == 3 )
         v54 = 1;

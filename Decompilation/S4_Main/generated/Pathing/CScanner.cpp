@@ -24,10 +24,10 @@ bool __cdecl CScanner::FindNearestEnemyTowerInSector(struct SFindNearestResult &
 
 
 // address=[0x13065f0]
-// Decompiled from int __cdecl CScanner::FindNearestOwnTowerInSector(int a1, int a2, int a3, int _iPlayerId)
+// Decompiled from int __cdecl CScanner::FindNearestOwnTowerInSector(unsigned int a1, unsigned int a2, int a3, int _iPlayerId)
 int __cdecl CScanner::FindNearestOwnTowerInSector(int a1, int a2, int a3, int _iPlayerId) {
   
-  int v5; // [esp+0h] [ebp-Ch] BYREF
+  struct SFindNearestResult v5; // [esp+0h] [ebp-Ch] BYREF
   int v6; // [esp+8h] [ebp-4h]
 
   if ( !CAlliances::IsValidUsedPlayerId(_iPlayerId)
@@ -40,8 +40,8 @@ int __cdecl CScanner::FindNearestOwnTowerInSector(int a1, int a2, int a3, int _i
     __debugbreak();
   }
   v6 = CAlliances::PlayerBit(_iPlayerId);
-  CScanner::FindNearestTowerInSector((struct SFindNearestResult *)&v5, a1, a2, a3, v6);
-  return v5;
+  CScanner::FindNearestTowerInSector(&v5, a1, a2, a3, v6);
+  return v5.m_iNearestFoundId;
 }
 
 
@@ -254,28 +254,24 @@ void __cdecl CScanner::EvaluateFighters(struct SEvalFightersResult & a1, int _iX
   CWarMapNode *v7; // eax
   struct SEvalFightersResult *result; // eax
   unsigned int v9; // [esp+8h] [ebp-154h]
-  int v10; // [esp+Ch] [ebp-150h]
+  int iAllyMask; // [esp+Ch] [ebp-150h]
   int v11; // [esp+14h] [ebp-148h]
   int m_iV; // [esp+20h] [ebp-13Ch]
-  int v13; // [esp+28h] [ebp-134h]
-  int v14; // [esp+2Ch] [ebp-130h]
-  BOOL v15; // [esp+30h] [ebp-12Ch]
-  BOOL v16; // [esp+34h] [ebp-128h]
+  int iAdjInflu; // [esp+28h] [ebp-134h]
+  int iInfluValue; // [esp+2Ch] [ebp-130h]
+  BOOL bIsOwn; // [esp+30h] [ebp-12Ch]
+  BOOL bIsEnemy; // [esp+34h] [ebp-128h]
   int v17; // [esp+40h] [ebp-11Ch]
   int v18; // [esp+44h] [ebp-118h]
-  int v19; // [esp+48h] [ebp-114h]
+  int iSectorId; // [esp+48h] [ebp-114h]
   int j; // [esp+4Ch] [ebp-110h]
   int v21; // [esp+50h] [ebp-10Ch]
-  unsigned int v22; // [esp+54h] [ebp-108h]
+  unsigned int uIdx; // [esp+54h] [ebp-108h]
   int i; // [esp+58h] [ebp-104h]
   IEntity *v24; // [esp+5Ch] [ebp-100h]
-  CVWList v25; // [esp+60h] [ebp-FCh] BYREF
-  int v26; // [esp+140h] [ebp-1Ch]
-  int v27; // [esp+144h] [ebp-18h]
-  int v28; // [esp+148h] [ebp-14h]
-  int v29; // [esp+14Ch] [ebp-10h]
-  int v30; // [esp+150h] [ebp-Ch]
-  int v31; // [esp+154h] [ebp-8h]
+  CVWList cVWList; // [esp+60h] [ebp-FCh] BYREF
+  int iInfluences[3]; // [esp+140h] [ebp-1Ch] BYREF
+  int iUnitCount[3]; // [esp+14Ch] [ebp-10h] BYREF
 
   if ( !CWorldManager::InWorld(_iX, _iY)
     && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 963, "g_cWorld.InWorld(_iX, _iY)") == 1 )
@@ -289,63 +285,62 @@ void __cdecl CScanner::EvaluateFighters(struct SEvalFightersResult & a1, int _iX
   {
     __debugbreak();
   }
-  v19 = CWorldManager::SectorId(_iX, _iY);
-  if ( !v19 && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 969, "iSectorId != 0") == 1 )
+  iSectorId = CWorldManager::SectorId(_iX, _iY);
+  if ( !iSectorId && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 969, "iSectorId != 0") == 1 )
     __debugbreak();
-  CVWList::CVWList(&v25, _iX, _iY, a4);
-  v10 = CAlliances::PlayerAllyBits(a5);
-  v29 = 0;
-  v30 = 0;
-  v31 = 0;
-  v26 = 0;
-  v27 = 0;
-  v28 = 0;
-  for ( i = 0; i < CVWList::Size(&v25); ++i )
+  CVWList::CVWList(&cVWList, _iX, _iY, a4);
+  iAllyMask = CAlliances::PlayerAllyBits(a5);
+  memset(iUnitCount, 0, sizeof(iUnitCount));
+  memset(iInfluences, 0, sizeof(iInfluences));
+  for ( i = 0; i < CVWList::Size(&cVWList); ++i )
   {
-    m_iV = CVWList::operator[](&v25, i)->m_iV;
-    v5 = CVWList::operator[](&v25, i);
+    m_iV = CVWList::operator[](&cVWList, i)->m_iV;
+    v5 = CVWList::operator[](&cVWList, i);
     for ( j = CWarMap::FirstEntityIdVW(0, m_iV, v5->m_iW); j; j = CWarMapNode::Next(v7) )
     {
       v24 = CMapObjectMgr::Entity(j);
-      if ( ((1 << IEntity::WarriorType(v24)) & 0x3C) != 0 )
+      if ( ((1 << IEntity::WarriorType(v24)) & 60) != 0 )
       {
         v17 = IEntity::X(v24);
         v18 = IEntity::Y(v24);
         v11 = CWorldManager::Index(v17, v18);
-        if ( ITiling::SectorId(v11) == v19 )
+        if ( ITiling::SectorId(v11) == iSectorId )
         {
           v21 = Grid::DistanceInline(v17 - _iX, v18 - _iY);
           if ( v21 <= a4 )
           {
-            v15 = IEntity::OwnerId(v24) == a5;
+            bIsOwn = IEntity::OwnerId(v24) == a5;
             v6 = IEntity::OwnerId(v24);
-            v16 = (v10 & CAlliances::PlayerBit(v6)) == 0;
-            if ( v15 && v16 && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1011, "!(uIsOwn && uIsEnemy)") == 1 )
+            bIsEnemy = (iAllyMask & CAlliances::PlayerBit(v6)) == 0;
+            if ( bIsOwn && bIsEnemy && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1011, "!(uIsOwn && uIsEnemy)") == 1 )
               __debugbreak();
-            v22 = v15 + 2 * v16;
-            if ( v22 >= 3 && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1015, "uIdx < 3") == 1 )
+            // 0 = ally
+            // 1 = own
+            // 2 = enemy
+            uIdx = bIsOwn + 2 * bIsEnemy;
+            if ( uIdx >= 3 && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1015, "uIdx < 3") == 1 )
               __debugbreak();
-            ++*(&v29 + v22);
+            ++iUnitCount[uIdx];
             v9 = IEntity::Type(v24);
-            v14 = 16 * CWarMap::SettlerInfluValue(v9);
+            iInfluValue = 16 * CWarMap::SettlerInfluValue(v9);
             if ( v21 > 12 )
-              v13 = v14 / v21;
+              iAdjInflu = iInfluValue / v21;
             else
-              v13 = v14;
-            *(&v26 + v22) += v13;
+              iAdjInflu = iInfluValue;
+            iInfluences[uIdx] += iAdjInflu;
           }
         }
       }
       v7 = IEntity::WarMapNode(v24);
     }
   }
-  *((_DWORD *)a1 + 1) = v29;
-  *(_DWORD *)a1 = v30;
-  *((_DWORD *)a1 + 2) = v31;
-  *((_DWORD *)a1 + 4) = v26;
-  *((_DWORD *)a1 + 3) = v27;
+  a1->m_iAlliedUnits = iUnitCount[0];
+  a1->m_iOwnUnits = iUnitCount[1];
+  a1->m_iEnemyUnits = iUnitCount[2];
+  a1->m_iAllyValue = iInfluences[0];
+  a1->m_iOwnValue = iInfluences[1];
   result = a1;
-  *((_DWORD *)a1 + 5) = v28;
+  a1->m_iEnemyValue = iInfluences[2];
   return result;
 }
 

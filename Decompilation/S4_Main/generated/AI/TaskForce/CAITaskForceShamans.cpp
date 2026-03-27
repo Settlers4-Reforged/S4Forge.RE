@@ -35,7 +35,7 @@ void  CAITaskForceShamans::Execute(void) {
   CAIEntityInfo *v8; // [esp+1Ch] [ebp-14h]
   CAIEntityInfo *v9; // [esp+20h] [ebp-10h]
   CAIEntityInfo *Entity; // [esp+24h] [ebp-Ch]
-  char v12; // [esp+2Eh] [ebp-2h]
+  bool v12; // [esp+2Eh] [ebp-2h]
   char v13; // [esp+2Fh] [ebp-1h]
 
   CAITaskForce::SetWaitCounter(this, 8u);
@@ -63,7 +63,7 @@ void  CAITaskForceShamans::Execute(void) {
         while ( v9 )
         {
           v5 = CAIEntityInfo::EntityId(v9);
-          if ( (IAIEnvironment::EntityFlags(v5) & 0x8000) == 0 )
+          if ( (IAIEnvironment::EntityFlags(v5) & EntityFlag_OnBoard) == 0 )
           {
             v13 = 0;
             break;

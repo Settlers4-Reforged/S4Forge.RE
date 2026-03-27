@@ -220,7 +220,7 @@ void  CDarkTribe::ChangePositionOrSurroundingToDarkLand(int a2, int a3, bool a4)
     if ( !result )
     {
       v5 = CWorldManager::Ground(v8, v9);
-      result = CLandscapeProperties::IsBlockedLand((CLandscapeProperties *)&g_cLandscapeProperties, v5);
+      result = CLandscapeProperties::IsBlockedLand((CLandscapeProperties *)&s_cLandscapeProperties, v5);
       if ( !(_BYTE)result )
       {
         result = CWorldManager::Ground(v8, v9) & 0xF0;

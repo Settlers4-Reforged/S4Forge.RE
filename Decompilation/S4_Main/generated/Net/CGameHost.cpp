@@ -1079,7 +1079,7 @@ bool  CGameHost::StartIniFileGame(wchar_t const * Source) {
       __debugbreak();
   }
   v64 = (unsigned __int8)j__strtol(Str + 10, &EndPtr, 10);
-  v5 = CStaticConfigVarInt::operator int(&unk_415AD78);
+  v5 = CStaticConfigVarInt::operator int(&g_iProductID);
   if ( v64 != v5 )
   {
     CTrace::Print("GameHost.cpp: Internet game ini file malformed in phase! Wrong Product ID %d!", v64);

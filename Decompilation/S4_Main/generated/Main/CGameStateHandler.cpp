@@ -449,7 +449,7 @@ bool __cdecl CGameStateHandler::InitGfxManager(void) {
 
   if ( !g_pGfxEngine && BBSupportDbgReport(2, "Main\\GameStateHandler.cpp", 1385, "g_pGfxEngine") == 1 )
     __debugbreak();
-  GfxMode = IGfxEngine::GetGfxMode((IGfxEngine *)g_pGfxEngine);
+  GfxMode = IGfxEngine::GetGfxMode(g_pGfxEngine);
   if ( GfxMode )
   {
     C = (CGfxManager *)operator new(0xCC0u);
@@ -464,26 +464,26 @@ bool __cdecl CGameStateHandler::InitGfxManager(void) {
     {
       v2 = 0;
     }
-    g_pGfxManager = (int)v2;
-    if ( (unsigned __int8)CGfxManager::OpenGFXFiles(v2) )
+    g_pGfxManager = v2;
+    if ( CGfxManager::OpenGFXFiles(v2) )
     {
       if ( g_pGame )
       {
-        CGfxManager::EnableGfxFile((CGfxManager *)g_pGfxManager, 1u, 8, 1, 0xFFFFFFFF);
-        CGfxManager::EnableGfxFile((CGfxManager *)g_pGfxManager, 9u, 9, 1, 0xFFFFFFFF);
+        CGfxManager::EnableGfxFile(g_pGfxManager, 1u, 8, 1, 0xFFFFFFFF);
+        CGfxManager::EnableGfxFile(g_pGfxManager, 9u, 9, 1, 0xFFFFFFFF);
       }
       else
       {
-        CGfxManager::EnableGfxFile((CGfxManager *)g_pGfxManager, 0, 9, 1, 0xFFFFFFFF);
+        CGfxManager::EnableGfxFile(g_pGfxManager, 0, 9, 1, 0xFFFFFFFF);
       }
-      IGfxEngine::SetReloadCallback((IGfxEngine *)g_pGfxEngine, CGfxManager::Reload);
-      IGfxEngine::SetOwnerIDCallback((IGfxEngine *)g_pGfxEngine, CWorldManager::WorldOwnerIdColor);
+      IGfxEngine::SetReloadCallback(g_pGfxEngine, CGfxManager::Reload);
+      IGfxEngine::SetOwnerIDCallback(g_pGfxEngine, CWorldManager::WorldOwnerIdColor);
       return 1;
     }
     else
     {
       if ( g_pGfxManager )
-        delete (CGfxManager *)g_pGfxManager;
+        delete g_pGfxManager;
       g_pGfxManager = 0;
       return 0;
     }

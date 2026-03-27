@@ -2779,15 +2779,15 @@ void  CTiling::SetBlockedLand(int a2, int a3) {
   int v7; // [esp+Ch] [ebp-8h]
   int i; // [esp+10h] [ebp-4h]
 
-  if ( byte_42CF998 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4093, "!s_bTilingInModification") == 1 )
+  if ( s_bTilingInModification && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4093, "!s_bTilingInModification") == 1 )
     __debugbreak();
-  byte_42CF998 = 1;
+  s_bTilingInModification = 1;
   if ( CTilingWorld::WorldInInnerWorld2(a2, a3) )
   {
     v7 = CTilingWorld::WorldIndex(a2, a3);
     if ( CTilingWorld::WorldIsBlockedLand(v7) )
     {
-      byte_42CF998 = 0;
+      s_bTilingInModification = 0;
     }
     else
     {
@@ -2813,7 +2813,7 @@ void  CTiling::SetBlockedLand(int a2, int a3) {
       }
       CTiling::CalculateBorderstoneBits7(a2, a3);
       CProfile::End((CProfile *)&stru_42F79B0);
-      byte_42CF998 = 0;
+      s_bTilingInModification = 0;
     }
   }
   else
@@ -2824,7 +2824,7 @@ void  CTiling::SetBlockedLand(int a2, int a3) {
            4099,
            "CTiling::SetBlockedLand(): (X, Y) must be in inner inner world!") == 1 )
       __debugbreak();
-    byte_42CF998 = 0;
+    s_bTilingInModification = 0;
   }
 }
 
@@ -2836,16 +2836,16 @@ void  CTiling::SetBlockedWater(int a2, int a3) {
   int result; // eax
   int v3; // [esp+4h] [ebp-4h]
 
-  if ( byte_42CF998 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4156, "!s_bTilingInModification") == 1 )
+  if ( s_bTilingInModification && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4156, "!s_bTilingInModification") == 1 )
     __debugbreak();
-  byte_42CF998 = 1;
+  s_bTilingInModification = 1;
   if ( (unsigned __int8)CTilingWorld::WorldInInnerWorld2(a1, a2) )
   {
     v3 = CTilingWorld::WorldIndex(a1, a2);
     result = (unsigned __int8)CWaterFlags::IsBlockedWater(v3);
     if ( (_BYTE)result )
     {
-      byte_42CF998 = 0;
+      s_bTilingInModification = 0;
     }
     else
     {
@@ -2856,7 +2856,7 @@ void  CTiling::SetBlockedWater(int a2, int a3) {
       }
       CWaterFlags::SetWaterFlagBits(v3, 512);
       result = CTiling::SetBlockingEx(0, a1, a2);
-      byte_42CF998 = 0;
+      s_bTilingInModification = 0;
     }
   }
   else
@@ -2868,7 +2868,7 @@ void  CTiling::SetBlockedWater(int a2, int a3) {
                "CTiling::SetBlockedWater(): (X, Y) must be in inner inner world!");
     if ( result == 1 )
       __debugbreak();
-    byte_42CF998 = 0;
+    s_bTilingInModification = 0;
   }
   return result;
 }
@@ -2888,15 +2888,15 @@ void  CTiling::ClearBlockedLand(int a2, int a3) {
   int i; // [esp+20h] [ebp-8h]
   char v12; // [esp+27h] [ebp-1h]
 
-  if ( byte_42CF998 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4277, "!s_bTilingInModification") == 1 )
+  if ( s_bTilingInModification && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4277, "!s_bTilingInModification") == 1 )
     __debugbreak();
-  byte_42CF998 = 1;
+  s_bTilingInModification = 1;
   if ( CTilingWorld::WorldInInnerWorld2(a2, a3) )
   {
     v9 = CTilingWorld::WorldIndex(a2, a3);
     if ( CTilingWorld::WorldIsWater(v9) )
     {
-      byte_42CF998 = 0;
+      s_bTilingInModification = 0;
     }
     else if ( CTilingWorld::WorldIsBlockedLand(v9) )
     {
@@ -2924,11 +2924,11 @@ void  CTiling::ClearBlockedLand(int a2, int a3) {
       }
       CTiling::CalculateBorderstoneBits7(a2, a3);
       CProfile::End((CProfile *)&stru_42F7A58);
-      byte_42CF998 = 0;
+      s_bTilingInModification = 0;
     }
     else
     {
-      byte_42CF998 = 0;
+      s_bTilingInModification = 0;
     }
   }
   else
@@ -2939,7 +2939,7 @@ void  CTiling::ClearBlockedLand(int a2, int a3) {
            4283,
            "CTiling::ClearBlockedLand(): (X, Y) must be in inner inner world!") == 1 )
       __debugbreak();
-    byte_42CF998 = 0;
+    s_bTilingInModification = 0;
   }
 }
 
@@ -2951,9 +2951,9 @@ void  CTiling::ClearBlockedWater(int a2, int a3) {
   int v3; // eax
   int v6; // [esp+4h] [ebp-4h]
 
-  if ( byte_42CF998 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4366, "!s_bTilingInModification") == 1 )
+  if ( s_bTilingInModification && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4366, "!s_bTilingInModification") == 1 )
     __debugbreak();
-  byte_42CF998 = 1;
+  s_bTilingInModification = 1;
   if ( CTilingWorld::WorldInInnerWorld2(a2, a3) )
   {
     v6 = CTilingWorld::WorldIndex(a2, a3);
@@ -2972,16 +2972,16 @@ void  CTiling::ClearBlockedWater(int a2, int a3) {
         LOBYTE(v3) = CWaterFlags::IsFreeWater(v6);
         if ( (_BYTE)v3 )
           LOBYTE(v3) = CTiling::ClearBlockingEx(this, 0, a2, a3);
-        byte_42CF998 = 0;
+        s_bTilingInModification = 0;
       }
       else
       {
-        byte_42CF998 = 0;
+        s_bTilingInModification = 0;
       }
     }
     else
     {
-      byte_42CF998 = 0;
+      s_bTilingInModification = 0;
     }
   }
   else
@@ -2993,7 +2993,7 @@ void  CTiling::ClearBlockedWater(int a2, int a3) {
            "CTiling::ClearBlockedWater(): (X, Y) must be in inner inner world!");
     if ( v3 == 1 )
       __debugbreak();
-    byte_42CF998 = 0;
+    s_bTilingInModification = 0;
   }
   return v3;
 }
@@ -3021,9 +3021,9 @@ void  CTiling::ChangeOwner(int a2, int a3, int a4) {
   int v20; // [esp+10h] [ebp-Ch]
   NeighborAnalysis *v21; // [esp+14h] [ebp-8h]
 
-  if ( byte_42CF998 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4499, "!s_bTilingInModification") == 1 )
+  if ( s_bTilingInModification && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4499, "!s_bTilingInModification") == 1 )
     __debugbreak();
-  byte_42CF998 = 1;
+  s_bTilingInModification = 1;
   if ( !CTilingWorld::WorldInInnerWorld1(a2, a3)
     && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4503, "WorldInInnerWorld1(_iX, _iY)") == 1 )
   {
@@ -3042,7 +3042,7 @@ void  CTiling::ChangeOwner(int a2, int a3, int a4) {
   v17 = CTile::SectorId((CTile *)v5);
   if ( v19 == a4 )
   {
-    byte_42CF998 = 0;
+    s_bTilingInModification = 0;
   }
   else
   {
@@ -3063,7 +3063,7 @@ void  CTiling::ChangeOwner(int a2, int a3, int a4) {
           a4);
         CProfile::End((CProfile *)&stru_42F7B00);
       }
-      byte_42CF998 = 0;
+      s_bTilingInModification = 0;
     }
     else
     {
@@ -3134,7 +3134,7 @@ void  CTiling::ChangeOwner(int a2, int a3, int a4) {
         a3,
         a4);
       CProfile::End((CProfile *)&stru_42F7B00);
-      byte_42CF998 = 0;
+      s_bTilingInModification = 0;
     }
   }
 }
@@ -4963,7 +4963,7 @@ int __cdecl CTiling::TileType(int a1, int a2, int a3, int a4) {
   int v5; // esi
 
   v4 = CTile::TileType(a1);
-  v5 = CLandscapeProperties::TileType((CLandscapeProperties *)&g_cLandscapeProperties, a2) | v4;
+  v5 = CLandscapeProperties::TileType((CLandscapeProperties *)&s_cLandscapeProperties, a2) | v4;
   return v5 | CSquare::TileTypeXY(a3, a4);
 }
 

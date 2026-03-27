@@ -28,7 +28,7 @@ void __cdecl CMinimapHandler::FilterKeyPressed(int a1) {
 void __cdecl CMinimapHandler::Init(void) {
   
   int result; // eax
-  int v1; // eax
+  unsigned int v1; // eax
   int i; // [esp+0h] [ebp-4h]
   int j; // [esp+0h] [ebp-4h]
   int k; // [esp+0h] [ebp-4h]
@@ -54,9 +54,9 @@ void __cdecl CMinimapHandler::Init(void) {
   CMinimapHandler::m_iObjectBitMask[127] = 8;
   for ( j = 0; j < 4; ++j )
   {
-    CMinimapHandler::m_sObjectColor[3 * j] = *(_DWORD *)TStaticConfigIntArrayBase<4>::operator[](j);
-    dword_415AB0C[3 * j] = *(_DWORD *)TStaticConfigIntArrayBase<4>::operator[](j);
-    dword_415AB10[3 * j] = *(_DWORD *)TStaticConfigIntArrayBase<4>::operator[](j);
+    CMinimapHandler::m_sObjectColor[j].m_iR = *(_DWORD *)TStaticConfigIntArrayBase<4>::operator[](&g_iR, j);
+    dword_415AB0C[3 * j] = *(_DWORD *)TStaticConfigIntArrayBase<4>::operator[](&g_iG, j);
+    dword_415AB10[3 * j] = *(_DWORD *)TStaticConfigIntArrayBase<4>::operator[](&g_iB, j);
   }
   CMinimapHandler::UpdateAlliances();
   for ( k = 1; ; ++k )
@@ -65,10 +65,7 @@ void __cdecl CMinimapHandler::Init(void) {
     if ( k > result )
       break;
     v1 = CPlayerManager::Color(k);
-    IGfxEngine::GetPlayerColor(
-      (IGfxEngine *)g_pGfxEngine,
-      v1,
-      (struct SGfxColor *)((char *)&CMinimapHandler::m_sOwnerColor + 12 * k));
+    IGfxEngine::GetPlayerColor(g_pGfxEngine, v1, &CMinimapHandler::m_sOwnerColor[k]);
   }
   return result;
 }
@@ -122,18 +119,10 @@ void __cdecl CMinimapHandler::UpdateAlliances(void) {
 
 
 // address=[0x16a6ef0]
-// Decompiled from int __cdecl CMinimapHandler::GetEcoSectorColor(int a1, struct SGfxColor *a2)
+// Decompiled from void __cdecl CMinimapHandler::GetEcoSectorColor(int a1, struct SGfxColor *a2)
 void __cdecl CMinimapHandler::GetEcoSectorColor(int a1, struct SGfxColor & a2) {
   
-  _DWORD *v2; // eax
-  int result; // eax
-
-  v2 = (_DWORD *)((char *)&CMinimapHandler::m_sOwnerColor + 12 * a1);
-  *(_DWORD *)a2 = *v2;
-  *((_DWORD *)a2 + 1) = v2[1];
-  result = v2[2];
-  *((_DWORD *)a2 + 2) = result;
-  return result;
+  *a2 = CMinimapHandler::m_sOwnerColor[a1];
 }
 
 
@@ -141,27 +130,17 @@ void __cdecl CMinimapHandler::GetEcoSectorColor(int a1, struct SGfxColor & a2) {
 // Decompiled from char __cdecl CMinimapHandler::GetObjectColor(int a1, struct SGfxColor *a2, int a3, int a4)
 bool __cdecl CMinimapHandler::GetObjectColor(int a1, struct SGfxColor & a2, int a3, int a4) {
   
-  _DWORD *v5; // eax
-  int v6; // [esp+4h] [ebp-4h]
+  int v5; // [esp+4h] [ebp-4h]
 
   if ( a3 && a1 == 1 )
     a1 = 22;
-  v6 = CMinimapHandler::m_iObjectGroups[a1];
-  if ( !CMinimapHandler::m_iGroupEnabled[v6] )
+  v5 = CMinimapHandler::m_iObjectGroups[a1];
+  if ( !CMinimapHandler::m_iGroupEnabled[v5] )
     return 0;
-  if ( v6 == 1 )
-  {
-    v5 = (_DWORD *)((char *)&CMinimapHandler::m_sOwnerColorAlly + 12 * a4 - 12);
-    *(_DWORD *)a2 = *v5;
-    *((_DWORD *)a2 + 1) = v5[1];
-    *((_DWORD *)a2 + 2) = v5[2];
-  }
+  if ( v5 == 1 )
+    *a2 = CMinimapHandler::m_sOwnerColorAlly[a4 - 1];
   else
-  {
-    *(_DWORD *)a2 = CMinimapHandler::m_sObjectColor[9];
-    *((_DWORD *)a2 + 1) = CMinimapHandler::m_sObjectColor[10];
-    *((_DWORD *)a2 + 2) = CMinimapHandler::m_sObjectColor[11];
-  }
+    *a2 = CMinimapHandler::m_sObjectColor[3];
   return 1;
 }
 

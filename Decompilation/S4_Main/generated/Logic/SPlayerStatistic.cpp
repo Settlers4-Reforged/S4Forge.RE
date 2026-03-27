@@ -45,7 +45,7 @@ void  CStatistic::SPlayerStatistic::CalculateFightingStrength(int a2) {
   {
     __debugbreak();
   }
-  v12 = CStaticConfigVarInt::operator int(&stru_3F29D98) == 1;
+  v12 = CStaticConfigVarInt::operator int(&g_iDbgIgnoreFightingStrength) == 1;
   v11 = 256;
   if ( *((int *)this + 1097) <= 0 )
   {
@@ -64,10 +64,10 @@ void  CStatistic::SPlayerStatistic::CalculateFightingStrength(int a2) {
         v9 = *((_DWORD *)this + 746) + *((_DWORD *)this + 745) + 2 * *((_DWORD *)this + 747);
         v6 = 2 * (*((_DWORD *)this + 749) + *((_DWORD *)this + 748) + 2 * *((_DWORD *)this + 750));
       }
-      if ( CStaticConfigVarInt::operator int((CStaticConfigVarInt *)&unk_3F29DA4) <= 0 )
+      if ( CStaticConfigVarInt::operator int((CStaticConfigVarInt *)&g_iFightingStrengthDivisor) <= 0 )
         v7 = 1000;
       else
-        v7 = CStaticConfigVarInt::operator int((CStaticConfigVarInt *)&unk_3F29DA4);
+        v7 = CStaticConfigVarInt::operator int((CStaticConfigVarInt *)&g_iFightingStrengthDivisor);
       v3 = (((v6 + v9) << 8) + 127) / v7 + *((_DWORD *)this + 744);
       v15[0] = 64;
       v15[1] = 65;

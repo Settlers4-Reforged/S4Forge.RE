@@ -1315,7 +1315,7 @@ bool  CStateGame::Perform(void) {
     v50->dwordC >>= 1;
     if ( v29 >= 0 )
     {
-      v9 = CStaticConfigVarInt::operator int(&stru_402ECA8);
+      v9 = CStaticConfigVarInt::operator int(&g_iRenderSlice);
       if ( v50->dwordC >= v9 )
       {
         v49 = 1;
@@ -1473,33 +1473,27 @@ float  CStateGame::GetZoomFactor(void) {
 
 
 // address=[0x14a8820]
-// Decompiled from int __thiscall CStateGame::NotifyGfxEngine(CStateGame *this)
+// Decompiled from void __thiscall CStateGame::NotifyGfxEngine(CStateGame *this)
 void  CStateGame::NotifyGfxEngine(void) {
   
   size_t v1; // eax
   unsigned __int16 *MapObjectPtr; // eax
   struct T_GFX_MAP_ELEMENT *LandscapePtr; // [esp-4h] [ebp-8h]
-  unsigned __int16 *DecoObjectPtr; // [esp-4h] [ebp-8h]
+  unsigned __int8 *DecoObjectPtr; // [esp-4h] [ebp-8h]
 
-  LandscapePtr = (struct T_GFX_MAP_ELEMENT *)CWorldManager::GetLandscapePtr();
+  LandscapePtr = CWorldManager::GetLandscapePtr();
   v1 = CWorldManager::Width();
   IGfxEngine::SetGfxLayerAccess(g_pGfxEngine, v1, LandscapePtr);
-  DecoObjectPtr = (unsigned __int16 *)CWorldManager::GetDecoObjectPtr();
+  DecoObjectPtr = CWorldManager::GetDecoObjectPtr();
   MapObjectPtr = CWorldManager::GetMapObjectPtr();
-  IGfxEngine::SetObjectLayerAccess(
-    g_pGfxEngine,
-    (struct SGfxObjectInfo *(__cdecl *)(unsigned int, int))MapObjectGetGfxInfo,
-    MapObjectPtr,
-    DecoObjectPtr);
-  IGfxEngine::SetMiniMapColorCallback(
-    g_pGfxEngine,
-    (struct SGfxColor *(__cdecl *)(unsigned int))CWorldManager::GetMiniMapColor);
+  IGfxEngine::SetObjectLayerAccess(g_pGfxEngine, MapObjectGetGfxInfo, MapObjectPtr, (unsigned __int16 *)DecoObjectPtr);
+  IGfxEngine::SetMiniMapColorCallback(g_pGfxEngine, CWorldManager::GetMiniMapColor);
   IGfxEngine::SetIconCallbacks(
     g_pGfxEngine,
-    (void (__cdecl *)(int))CWorldManager::WorldSetNumberOfNextLine,
-    (unsigned __int8 (__cdecl *)(int))CWorldManager::WorldGetIconObjectByX);
+    CWorldManager::WorldSetNumberOfNextLine,
+    CWorldManager::WorldGetIconObjectByX);
   IGfxEngine::EnableIconLayer(g_pGfxEngine, 0);
-  return (*(int (__thiscall **)(void *, CStateGame *))(*(_DWORD *)g_pFogging + 16))(g_pFogging, this);
+  (*(void (__thiscall **)(void *, CStateGame *))(*(_DWORD *)g_pFogging + 16))(g_pFogging, this);
 }
 
 

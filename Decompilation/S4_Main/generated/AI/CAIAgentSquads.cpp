@@ -172,8 +172,8 @@ unsigned int  CAIAgentSquads::Execute(unsigned int a2, unsigned int a3) {
   }
   v9 = (CAITaskForceGroup *)CAISectorAI::TaskForceGroup(v131);
   v65 = CAITaskForceGroup::NumberOfTaskForcesOfType(v9, 5);
-  v10 = CStaticConfigVarInt::operator int(&stru_3E8DE18);
-  v119 = v65 * CStaticConfigVarInt::operator int(&stru_3E8DE24) + v10;
+  v10 = CStaticConfigVarInt::operator int(&s_iSquadMinFighters);
+  v119 = v65 * CStaticConfigVarInt::operator int(&s_iSquadMinExtraFighters) + v10;
   v116 = 0;
   v79 = 0;
   v70 = 0;
@@ -315,8 +315,8 @@ LABEL_26:
       v95 = IAIEnvironment::ClipMin(iTotalNumberOfInsufficientFighters, v124) / v115;
       if ( v95 > 0 )
       {
-        if ( v95 > CStaticConfigVarInt::operator int(&stru_3E8DE30) )
-          v95 = CStaticConfigVarInt::operator int(&stru_3E8DE30);
+        if ( v95 > CStaticConfigVarInt::operator int(&s_iSquadMaxRecruits) )
+          v95 = CStaticConfigVarInt::operator int(&s_iSquadMaxRecruits);
         v19 = (CAITaskForceGroup *)CAISectorAI::TaskForceGroup(v131);
         for ( n = CAITaskForceGroup::FirstTaskForce(v19, 2); n; n = v41 )
         {

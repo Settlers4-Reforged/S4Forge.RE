@@ -1,3 +1,4 @@
+#if FALSE
 #include "CAIConfigInt.h"
 
 // Definitions for class CAIConfigInt
@@ -6,7 +7,7 @@
 // Decompiled from CAIConfigInt *__thiscall CAIConfigInt::CAIConfigInt(CAIConfigInt *this, const char *a2, int a3)
  CAIConfigInt::CAIConfigInt(char const * a2, int a3) {
   
-  CStaticConfigVarInt::CStaticConfigVarInt(this, (const char *)off_366E0C8, a2, a3);
+  CStaticConfigVarInt::CStaticConfigVarInt(this, "AI", a2, a3);
   this->__vftable = (CConfigVar_vtbl *)&CAIConfigInt::_vftable_;
   return this;
 }
@@ -20,3 +21,4 @@
 }
 
 
+#endif // Already implemented

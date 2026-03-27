@@ -36714,23 +36714,26 @@ int const & __cdecl BB::Min<int>(int const & a1, int const & a2) {
 
 
 // address=[0x1460380]
-// Decompiled from unsigned int __thiscall TSparseMap<unsigned char>::Clear(_DWORD *this)
+// Decompiled from void __thiscall TSparseMap<unsigned char>::Clear(TSparseMap *this)
 public: void __thiscall TSparseMap<unsigned char>::Clear(void) {
   
-  unsigned int result; // eax
-  int *v2; // eax
-  int v3; // [esp+4h] [ebp-10h]
-  _DWORD *v5; // [esp+Ch] [ebp-8h]
-  unsigned int i; // [esp+10h] [ebp-4h]
+  TSparseMap::TNode **v1; // eax
+  TSparseMap::TNode *v2; // [esp+4h] [ebp-10h]
+  TSparseMap::TNode *pTempNode; // [esp+Ch] [ebp-8h]
+  unsigned int a1; // [esp+10h] [ebp-4h]
 
-  for ( i = 0; i < this[6]; ++i )
+  for ( a1 = 0; a1 < this->m_iWidth; ++a1 )
   {
-    if ( *(_DWORD *)std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::operator[](i) )
+    if ( *std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::operator[](
+            &this->m_vNodes,
+            a1) )
     {
-      v2 = (int *)std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::operator[](i);
-      v3 = *v2;
-      v5 = *(_DWORD **)(*v2 + 4);
-      if ( !v5
+      v1 = std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::operator[](
+             &this->m_vNodes,
+             a1);
+      v2 = *v1;
+      pTempNode = (*v1)->m_pNextNode;
+      if ( !pTempNode
         && BBSupportDbgReport(
              2,
              "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\world\\TSparseMap.h",
@@ -36739,88 +36742,87 @@ public: void __thiscall TSparseMap<unsigned char>::Clear(void) {
       {
         __debugbreak();
       }
-      while ( v5[1] )
+      while ( pTempNode->m_pNextNode )
       {
-        *(_DWORD *)(v3 + 4) = v5[1];
-        TSparseMap<unsigned char>::TNode::operator delete(v5);
-        v5 = *(_DWORD **)(v3 + 4);
+        v2->m_pNextNode = pTempNode->m_pNextNode;
+        TSparseMap<unsigned char>::TNode::operator delete(pTempNode);
+        pTempNode = v2->m_pNextNode;
       }
     }
-    result = i + 1;
   }
-  this[7] = 0;
-  return result;
+  this->m_uSetNodes = 0;
 }
 
 
 // address=[0x1460510]
-// Decompiled from char __thiscall TSparseMap<unsigned char>::Get(_BYTE *this, unsigned int a2, int a3)
-public: unsigned char __thiscall TSparseMap<unsigned char>::Get(unsigned int a2, unsigned int a3) {
+// Decompiled from BYTE __thiscall TSparseMap<unsigned char>::Get(TSparseMap *this, unsigned int _uX, int _uY)
+public: unsigned char __thiscall TSparseMap<unsigned char>::Get(unsigned int _uX, unsigned int _uY) {
   
-  int i; // [esp+4h] [ebp-4h]
+  TSparseMap::TNode *i; // [esp+4h] [ebp-4h]
 
-  if ( !(unsigned __int8)TSparseMap<unsigned char>::IsValidCoordinate(a2, a3) )
+  if ( !TSparseMap<unsigned char>::IsValidCoordinate(this, _uX, _uY) )
     j___wassert(
       L"IsValidCoordinate(_uX, _uY)",
       L"d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\world\\TSparseMap.h",
       0x1B4u);
-  if ( !(unsigned __int8)TSparseMap<unsigned char>::IsValidCoordinate(a2, a3) )
-    return this[32];
-  for ( i = *(_DWORD *)(*(_DWORD *)std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::operator[](a3)
-                      + 4); *(_DWORD *)i < a2; i = *(_DWORD *)(i + 4) )
+  if ( !TSparseMap<unsigned char>::IsValidCoordinate(this, _uX, _uY) )
+    return this->m_iDefault;
+  for ( i = (*std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::operator[](
+                &this->m_vNodes,
+                _uY))->m_pNextNode; i->m_iHeight < _uX; i = i->m_pNextNode )
     ;
-  if ( *(_DWORD *)i == a2 )
-    return *(_BYTE *)(i + 8);
+  if ( i->m_iHeight == _uX )
+    return i->m_iValue;
   else
-    return this[32];
+    return this->m_iDefault;
 }
 
 
 // address=[0x1460700]
-// Decompiled from bool __thiscall TSparseMap<unsigned char>::IsValidCoordinate(_DWORD *this, unsigned int a2, unsigned int a3)
+// Decompiled from bool __thiscall TSparseMap<unsigned char>::IsValidCoordinate(TSparseMap *this, unsigned int a2, unsigned int a3)
 private: bool __thiscall TSparseMap<unsigned char>::IsValidCoordinate(unsigned int a2, unsigned int a3)const {
   
-  return a2 < this[5] && a3 < this[6];
+  return a2 < this->m_iHeight && a3 < this->m_iWidth;
 }
 
 
 // address=[0x1460800]
-// Decompiled from int __thiscall TSparseMap<unsigned char>::Set(_DWORD *this, unsigned int a2, int a3, _BYTE *a4)
-public: void __thiscall TSparseMap<unsigned char>::Set(unsigned int a2, unsigned int a3, unsigned char const & a4) {
+// Decompiled from void __thiscall TSparseMap<unsigned char>::Set(TSparseMap *this, unsigned int _uX, int _uY, _BYTE *_uValue)
+public: void __thiscall TSparseMap<unsigned char>::Set(unsigned int _uX, unsigned int _uY, unsigned char const & _uValue) {
   
-  int result; // eax
-  _DWORD *v5; // [esp+8h] [ebp-24h]
-  _DWORD *v6; // [esp+Ch] [ebp-20h]
-  unsigned int *v7; // [esp+10h] [ebp-1Ch]
-  unsigned int *i; // [esp+14h] [ebp-18h]
+  TSparseMap::TNode *v4; // [esp+8h] [ebp-24h]
+  TSparseMap::TNode *v5; // [esp+Ch] [ebp-20h]
+  TSparseMap::TNode *pTargetNode; // [esp+10h] [ebp-1Ch]
+  TSparseMap::TNode *i; // [esp+14h] [ebp-18h]
 
-  if ( !(unsigned __int8)TSparseMap<unsigned char>::IsValidCoordinate(a2, a3) )
+  if ( !TSparseMap<unsigned char>::IsValidCoordinate(this, _uX, _uY) )
     j___wassert(
       L"IsValidCoordinate(_uX, _uY)",
       L"d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\world\\TSparseMap.h",
       0x13Cu);
-  result = (unsigned __int8)TSparseMap<unsigned char>::IsValidCoordinate(a2, a3);
-  if ( !(_BYTE)result )
-    return result;
-  v7 = *(unsigned int **)std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::operator[](a3);
-  for ( i = *(unsigned int **)(*(_DWORD *)std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::operator[](a3)
-                             + 4); *i < a2; i = (unsigned int *)i[1] )
-    v7 = i;
-  v6 = (_DWORD *)TSparseMap<unsigned char>::TNode::operator new(12);
-  if ( v6 )
-    v5 = TSparseMap<unsigned char>::TNode::TNode(v6);
-  else
-    v5 = 0;
-  result = (int)v5;
-  if ( !v5 )
-    return result;
-  *((_BYTE *)v5 + 8) = *a4;
-  *v5 = a2;
-  v5[1] = v7[1];
-  v7[1] = (unsigned int)v5;
-  result = this[7] + 1;
-  this[7] = result;
-  return result;
+  if ( TSparseMap<unsigned char>::IsValidCoordinate(this, _uX, _uY) )
+  {
+    pTargetNode = *std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::operator[](
+                     &this->m_vNodes,
+                     _uY);
+    for ( i = (*std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::operator[](
+                  &this->m_vNodes,
+                  _uY))->m_pNextNode; i->m_iHeight < _uX; i = i->m_pNextNode )
+      pTargetNode = i;
+    v5 = (TSparseMap::TNode *)TSparseMap<unsigned char>::TNode::operator new(12);
+    if ( v5 )
+      v4 = TSparseMap<unsigned char>::TNode::TNode(v5);
+    else
+      v4 = 0;
+    if ( v4 )
+    {
+      LOBYTE(v4->m_iValue) = *_uValue;
+      v4->m_iHeight = _uX;
+      v4->m_pNextNode = pTargetNode->m_pNextNode;
+      pTargetNode->m_pNextNode = v4;
+      ++this->m_uSetNodes;
+    }
+  }
 }
 
 
@@ -38118,7 +38120,7 @@ public: int __thiscall TStaticArray<unsigned short,100>::Size(void)const {
 
 
 // address=[0x1558300]
-// Decompiled from int __cdecl MapObjectGetGfxInfo(unsigned int a1, int a2)
+// Decompiled from struct SGfxObjectInfo *__cdecl MapObjectGetGfxInfo(unsigned int a1, int a2)
 struct SGfxObjectInfo * __cdecl MapObjectGetGfxInfo(unsigned int a1, int a2) {
   
   return CMapObjectMgr::GetGfxInfo(g_pMapObjectMgr, a1, a2);
@@ -40194,19 +40196,19 @@ float __cdecl ceil(float a1) {
 // [Decompilation failed for unsigned int __cdecl GetVideoInterfaceVersion(void)]
 
 // address=[0x16a5830]
-// Decompiled from _DWORD *__thiscall TMap<unsigned char>::TMap<unsigned char>(_DWORD *this)
+// Decompiled from TMap<unsigned char> *__thiscall TMap<unsigned char>::TMap<unsigned char>(TMap<unsigned char> *this)
 public: __thiscall TMap<unsigned char>::TMap<unsigned char>(void) {
   
-  *this = 0;
+  *(_DWORD *)this = 0;
   return this;
 }
 
 
 // address=[0x16a5850]
-// Decompiled from _DWORD *__thiscall TMap<unsigned short>::TMap<unsigned short>(_DWORD *this)
+// Decompiled from TMap<unsigned short> *__thiscall TMap<unsigned short>::TMap<unsigned short>(TMap<unsigned short> *this)
 public: __thiscall TMap<unsigned short>::TMap<unsigned short>(void) {
   
-  *this = 0;
+  *(_DWORD *)this = 0;
   return this;
 }
 
@@ -40221,15 +40223,15 @@ public: __thiscall TMap<struct T_GFX_MAP_ELEMENT>::TMap<struct T_GFX_MAP_ELEMENT
 
 
 // address=[0x16a5890]
-// Decompiled from int __thiscall TSparseMap<unsigned char>::TSparseMap<unsigned char>(int this, int a2, int a3, char a4)
-public: __thiscall TSparseMap<unsigned char>::TSparseMap<unsigned char>(unsigned int a2, unsigned int a3, unsigned char a4) {
+// Decompiled from TSparseMap *__thiscall TSparseMap<unsigned char>::TSparseMap<unsigned char>(  TSparseMap *this,  int _iWidth,  int _iHeight,  BYTE a4)
+public: __thiscall TSparseMap<unsigned char>::TSparseMap<unsigned char>(unsigned int _iWidth, unsigned int _iHeight, unsigned char a4) {
   
-  std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>();
-  *(_DWORD *)(this + 20) = a2;
-  *(_DWORD *)(this + 24) = a3;
-  *(_DWORD *)(this + 28) = 0;
-  *(_BYTE *)(this + 32) = a4;
-  TSparseMap<unsigned char>::Construct();
+  std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>(this);
+  this->m_iHeight = _iWidth;
+  this->m_iWidth = _iHeight;
+  this->m_uSetNodes = 0;
+  this->m_iDefault = a4;
+  TSparseMap<unsigned char>::Construct(this);
   return this;
 }
 
@@ -40278,41 +40280,35 @@ public: __thiscall TSparseMap<unsigned char>::~TSparseMap<unsigned char>(void) {
 
 
 // address=[0x16a6b60]
-// Decompiled from _DWORD *__thiscall TSparseMap<unsigned char>::Construct(_DWORD *this)
+// Decompiled from void __thiscall TSparseMap<unsigned char>::Construct(TSparseMap *this)
 private: void __thiscall TSparseMap<unsigned char>::Construct(void) {
   
-  _DWORD *result; // eax
-  _DWORD *v2; // [esp+Ch] [ebp-2Ch]
-  _DWORD *v3; // [esp+10h] [ebp-28h]
-  _DWORD *v4; // [esp+18h] [ebp-20h]
-  _DWORD *v5; // [esp+1Ch] [ebp-1Ch]
-  unsigned int i; // [esp+24h] [ebp-14h]
+  TSparseMap::TNode *v1; // [esp+Ch] [ebp-2Ch]
+  TSparseMap::TNode *v2; // [esp+10h] [ebp-28h]
+  TSparseMap::TNode *v3; // [esp+18h] [ebp-20h]
+  TSparseMap::TNode *v4; // [esp+1Ch] [ebp-1Ch]
+  unsigned int a1; // [esp+24h] [ebp-14h]
 
-  std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::resize(this[6]);
-  for ( i = 0; ; ++i )
+  std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::resize(this->m_iWidth);
+  for ( a1 = 0; a1 < this->m_iWidth; ++a1 )
   {
-    result = this;
-    if ( i >= this[6] )
-      break;
-    v5 = (_DWORD *)TSparseMap<unsigned char>::TNode::operator new(12);
-    if ( v5 )
-      v4 = TSparseMap<unsigned char>::TNode::TNode(v5);
+    v4 = (TSparseMap::TNode *)TSparseMap<unsigned char>::TNode::operator new(12);
+    if ( v4 )
+      v3 = TSparseMap<unsigned char>::TNode::TNode(v4);
     else
-      v4 = 0;
-    *v4 = this[5];
-    *(_DWORD *)std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::operator[](i) = v4;
-    v3 = (_DWORD *)TSparseMap<unsigned char>::TNode::operator new(12);
-    if ( v3 )
-      v2 = TSparseMap<unsigned char>::TNode::TNode(v3);
+      v3 = 0;
+    v3->m_iHeight = this->m_iHeight;
+    *std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::operator[](a1) = v3;
+    v2 = (TSparseMap::TNode *)TSparseMap<unsigned char>::TNode::operator new(12);
+    if ( v2 )
+      v1 = TSparseMap<unsigned char>::TNode::TNode(v2);
     else
-      v2 = 0;
-    *((_BYTE *)v2 + 8) = 0;
-    *v2 = this[5];
-    v2[1] = 0;
-    *(_DWORD *)(*(_DWORD *)std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::operator[](i)
-              + 4) = v2;
+      v1 = 0;
+    LOBYTE(v1->m_iValue) = 0;
+    v1->m_iHeight = this->m_iHeight;
+    v1->m_pNextNode = 0;
+    (*std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::operator[](a1))->m_pNextNode = v1;
   }
-  return result;
 }
 
 
@@ -40400,10 +40396,10 @@ public: bool __thiscall TStaticFIFO<int,1024>::Empty(void) {
 
 
 // address=[0x16a6ec0]
-// Decompiled from char __thiscall TSparseMap<unsigned char>::GetByX(int this, unsigned int a2)
-public: unsigned char __thiscall TSparseMap<unsigned char>::GetByX(int a2) {
+// Decompiled from char __thiscall TSparseMap<unsigned char>::GetByX(TSparseMap *this, unsigned int _uX)
+public: unsigned char __thiscall TSparseMap<unsigned char>::GetByX(int _uX) {
   
-  return TSparseMap<unsigned char>::Get((_BYTE *)this, a2, *(_DWORD *)(this + 16));
+  return TSparseMap<unsigned char>::Get(this, _uX, this->m_iNewLine);
 }
 
 
@@ -40476,14 +40472,10 @@ public: void __thiscall TStaticFIFO<int,1024>::Push(int const & a2) {
 
 
 // address=[0x16a78c0]
-// Decompiled from _DWORD *__thiscall TSparseMap<unsigned char>::SetNewLine(_DWORD *this, int a2)
+// Decompiled from void __thiscall TSparseMap<unsigned char>::SetNewLine(TSparseMap *this, int a2)
 public: void __thiscall TSparseMap<unsigned char>::SetNewLine(int a2) {
   
-  _DWORD *result; // eax
-
-  result = this;
-  this[4] = a2;
-  return result;
+  this->m_iNewLine = a2;
 }
 
 

@@ -64,22 +64,32 @@ protected:
     void __fastcall SaveFuncNOP(void const * a1, unsigned int a2);
 
     // address=[0x13ed130]
-    void __fastcall SaveFuncCalcSize(void const * a2, unsigned int a3);
+    void __fastcall SaveFuncCalcSize(void const * _pData, unsigned int _uSize);
 
     // address=[0x13ed1d0]
-    void __fastcall SaveFuncSaveData(void const * a1, unsigned int a2);
+    void __fastcall SaveFuncSaveData(void const * a2, unsigned int Size);
 
     // address=[0x13ed310]
     void __fastcall SaveUnsigned32NOP(unsigned int);
 
     // address=[0x13ed340]
-    void __fastcall SaveUnsigned32CalcSize(unsigned int);
+    void __fastcall SaveUnsigned32CalcSize(unsigned int a2);
 
     // address=[0x13ed390]
     void __fastcall SaveUnsigned32SaveData(unsigned int a2);
 
     // address=[0x13ed740]
     unsigned int  LoadUnsigned32Inline(void);
+
+    // Type information members
+public:
+    T_S4_CHUNK_MODE m_tMode;
+    _DWORD m_uSize;
+    const void * m_pData;
+    const void * m_pCurrent;
+    void (__fastcall *)(CS4MemChunk *this, const void *a2, unsigned int a3) m_pSaveFunc;
+    void (__fastcall *)(CS4MemChunk *this, unsigned int a2) m_pSaveUnsigned32;
+    S4::CMapFile * m_pMapFile;
 
 };
 

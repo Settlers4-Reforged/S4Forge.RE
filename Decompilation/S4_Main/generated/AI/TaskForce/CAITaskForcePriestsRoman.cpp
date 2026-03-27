@@ -38,7 +38,7 @@ int  CAITaskForcePriestsRoman::ChooseMilitarySpell(struct SCountFightersResult c
   v8 = CStaticConfigVarInt::operator int(&s_cAIConfigRomanMilitarySpellChanceSoldier);
   v7 = CStaticConfigVarInt::operator int(&s_cAIConfigRomanMilitarySpellChanceAttack);
   v6 = CStaticConfigVarInt::operator int(&s_cAIConfigRomanMilitarySpellChanceDefence);
-  return sub_132D6A0(4, v6, 5, v7, 6, v8, v9, a3);
+  return ChooseNextSpellType(4, v6, 5, v7, 6, v8, v9, a3);
 }
 
 

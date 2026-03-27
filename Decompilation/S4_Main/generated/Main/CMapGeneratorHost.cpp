@@ -50,7 +50,7 @@ void  CMapGeneratorHost::UpdateGroundInformation(void) {
   {
     CMapGeneratorHost::RefreshShading((CMapGeneratorHost *)this, i);
     if ( CLandscapeProperties::IsBlockedLand(
-           (CLandscapeProperties *)&g_cLandscapeProperties,
+           (CLandscapeProperties *)&s_cLandscapeProperties,
            *((unsigned __int8 *)v2 + 1)) )
     {
       *((_BYTE *)v3 + 2) |= 1u;

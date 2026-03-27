@@ -1,3 +1,4 @@
+#if FALSE
 #include "CAIConfigIntEx.h"
 
 // Definitions for class CAIConfigIntEx
@@ -22,9 +23,9 @@
     v6 = a5;
   }
   if ( a4 == 0x80000000 )
-    TStaticConfigIntArray<3>::TStaticConfigIntArray<3>((TStaticConfigIntArray<3> *)this, 0x366E0C8, (int)a2, a3, a3, v6);
+    TStaticConfigIntArray<3>::TStaticConfigIntArray<3>((TStaticConfigIntArray<3> *)this, "AI", a2, a3, a3, v6);
   else
-    TStaticConfigIntArray<3>::TStaticConfigIntArray<3>((TStaticConfigIntArray<3> *)this, 0x366E0C8, (int)a2, a3, a4, v6);
+    TStaticConfigIntArray<3>::TStaticConfigIntArray<3>((TStaticConfigIntArray<3> *)this, "AI", a2, a3, a4, v6);
   this->__vftable = (CConfigVar_vtbl *)&CAIConfigIntEx::_vftable_;
   this->m_spName = a2;
   return this;
@@ -40,10 +41,11 @@
 
 
 // address=[0x131ecd0]
-// Decompiled from int __thiscall CAIConfigIntEx::Name(CAIConfigIntEx *this)
+// Decompiled from const char *__thiscall CAIConfigIntEx::Name(CAIConfigIntEx *this)
 char const *  CAIConfigIntEx::Name(void)const {
   
-  return *((_DWORD *)this + 5);
+  return this->m_spName;
 }
 
 
+#endif // Already implemented

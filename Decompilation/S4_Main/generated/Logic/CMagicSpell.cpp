@@ -497,15 +497,15 @@ int  CMagicSpell::SpellAttackLightningBolt(void) {
   v18 = this;
   v11 = CAlliances::PlayerEnemyBits(*(_DWORD *)this);
   v9[8] = 252;
-  if ( CStaticConfigVarInt::operator int(&unk_3F200BC) <= 0 )
+  if ( CStaticConfigVarInt::operator int(&g_iLightningBoltDamageMin) <= 0 )
     v15 = 1;
   else
-    v15 = CStaticConfigVarInt::operator int(&unk_3F200BC);
+    v15 = CStaticConfigVarInt::operator int(&g_iLightningBoltDamageMin);
   v16 = v15;
-  if ( CStaticConfigVarInt::operator int(&unk_3F200C8) < v15 )
+  if ( CStaticConfigVarInt::operator int(&g_iLightningBoltDamageMax) < v15 )
     v14 = 1;
   else
-    v14 = CStaticConfigVarInt::operator int(&unk_3F200C8) - v16 + 1;
+    v14 = CStaticConfigVarInt::operator int(&g_iLightningBoltDamageMax) - v16 + 1;
   v13 = v14;
   if ( v14 <= 0 && BBSupportDbgReport(2, "Logic\\Magic.cpp", 1604, "iDamageMod > 0") == 1 )
     __debugbreak();

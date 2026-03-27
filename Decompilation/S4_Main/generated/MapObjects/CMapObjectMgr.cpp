@@ -1153,7 +1153,7 @@ void  CMapObjectMgr::DbgPrintAllEntities(int a2) {
 
 
 // address=[0x1558cb0]
-// Decompiled from int __thiscall CMapObjectMgr::GetGfxInfo(CMapObjectMgr *this, unsigned int _iId, int a3)
+// Decompiled from struct SGfxObjectInfo *__thiscall CMapObjectMgr::GetGfxInfo(CMapObjectMgr *this, unsigned int _iId, int a3)
 struct SGfxObjectInfo *  CMapObjectMgr::GetGfxInfo(int _iId, int a3) {
   
   if ( !CMapObjectMgr::ValidUsedEntityId(_iId)

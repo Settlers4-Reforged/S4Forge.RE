@@ -71,7 +71,7 @@ bool __cdecl CTextMsgHandler::AddTextMsg(int a1, int a2, int a3, int a4, bool a5
     if ( v12 )
       v9 = -1;
     else
-      v9 = CStaticConfigVarInt::operator int(&unk_403221C) / 2;
+      v9 = CStaticConfigVarInt::operator int(&g_iDefaultMessageTimeOut) / 2;
     *((_DWORD *)v11 + 3) = v9;
     *((_DWORD *)v11 + 4) = a3;
     *((_DWORD *)v11 + 5) = a4;
@@ -128,7 +128,7 @@ bool __cdecl CTextMsgHandler::AddTextMsg(int a1, int a2, bool a3, bool a4, ... a
     memset(v9, 0, 0x24u);
     *(_DWORD *)v9 = a1;
     *((_DWORD *)v9 + 1) = a2;
-    v5 = CStaticConfigVarInt::operator int(&unk_403221C);
+    v5 = CStaticConfigVarInt::operator int(&g_iDefaultMessageTimeOut);
     *((_DWORD *)v9 + 3) = v5 / 2;
     *((_BYTE *)v9 + 29) = a3;
     *((_DWORD *)v9 + 6) = v7;
@@ -173,7 +173,7 @@ bool __cdecl CTextMsgHandler::AddTextMsg(int a1, int a2, bool a3) {
     memset(v5, 0, 0x24u);
     *v5 = a1;
     v5[1] = a2;
-    v5[3] = CStaticConfigVarInt::operator int(&unk_403221C) / 2;
+    v5[3] = CStaticConfigVarInt::operator int(&g_iDefaultMessageTimeOut) / 2;
     v5[6] = 165;
     if ( !(unsigned __int8)CTextMsgHandler::CheckExists(v5) || a3 )
     {
@@ -243,7 +243,7 @@ bool __cdecl CTextMsgHandler::AddWarningMsg(int a1, int a2, int a3, int a4) {
     memset(v7, 0, 0x24u);
     *(_DWORD *)v10 = a1;
     *((_DWORD *)v10 + 1) = a2;
-    v5 = CStaticConfigVarInt::operator int(&unk_403221C);
+    v5 = CStaticConfigVarInt::operator int(&g_iDefaultMessageTimeOut);
     *((_DWORD *)v10 + 3) = v5 / 2;
     *((_DWORD *)v10 + 4) = a3;
     *((_DWORD *)v10 + 5) = a4;
@@ -289,7 +289,7 @@ bool __cdecl CTextMsgHandler::AddWarningMsg(int a1, int a2) {
     memset(v5, 0, 0x24u);
     *(_DWORD *)v8 = a1;
     *((_DWORD *)v8 + 1) = a2;
-    v3 = CStaticConfigVarInt::operator int(&unk_403221C);
+    v3 = CStaticConfigVarInt::operator int(&g_iDefaultMessageTimeOut);
     *((_DWORD *)v8 + 3) = v3 / 2;
     *((_BYTE *)v8 + 29) = 1;
     *((_DWORD *)v8 + 6) = v4;

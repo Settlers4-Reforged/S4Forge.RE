@@ -47,20 +47,20 @@ int  CAITaskForcePriestsViking::ChooseMilitarySpell(struct SCountFightersResult 
   v10 = CStaticConfigVarInt::operator int(&s_cAIConfigVikingMilitarySpellChanceSoldier);
   v9 = CStaticConfigVarInt::operator int(&s_cAIConfigVikingMilitarySpellChanceAttack);
   v8 = CStaticConfigVarInt::operator int(&s_cAIConfigVikingMilitarySpellChanceDefence);
-  return sub_132D6A0(4, v8, 5, v9, 6, v10, v11, a3);
+  return ChooseNextSpellType(4, v8, 5, v9, 6, v10, v11, a3);
 }
 
 
 // address=[0x132bb20]
-// Decompiled from int __thiscall CAITaskForcePriestsViking::ChooseMilitarySpellDestination(  CAITaskForcePriestsViking *this,  int a2,  int a3,  int a4,  int a5)
+// Decompiled from int __thiscall CAITaskForcePriestsViking::ChooseMilitarySpellDestination(  CAITaskForcePriestsViking *this,  int a2,  unsigned int a3,  unsigned int a4,  int a5)
 int  CAITaskForcePriestsViking::ChooseMilitarySpellDestination(int a2, int a3, int a4, int a5) {
   
-  int v5; // eax
+  char v5; // al
   int result; // eax
   int v7; // eax
   int v8; // eax
-  int v9; // [esp+0h] [ebp-10h] BYREF
-  CAITaskForce *v10; // [esp+8h] [ebp-8h]
+  struct SFindNearestResult v9; // [esp+0h] [ebp-10h] BYREF
+  CAITaskForcePriestsViking *v10; // [esp+8h] [ebp-8h]
   int v11; // [esp+Ch] [ebp-4h]
 
   v10 = this;
@@ -78,9 +78,9 @@ int  CAITaskForcePriestsViking::ChooseMilitarySpellDestination(int a2, int a3, i
       break;
     case 7:
       v8 = CAITaskForce::OwnerId(v10);
-      if ( !CScanner::FindNearestEnemyTowerInSector((struct SFindNearestResult *)&v9, a3, a4, 20, v8) )
+      if ( !CScanner::FindNearestEnemyTowerInSector(&v9, a3, a4, 20, v8) )
         goto CAITaskForcePriestsViking__ChooseMilitarySpellDestination___def_172BB45;
-      IAIEnvironment::BuildingGetEnsignPosition(v9, &a3, &a4);
+      IAIEnvironment::BuildingGetEnsignPosition(v9.m_iNearestFoundId, (int *)&a3, (int *)&a4);
       result = IAIEnvironment::PackXYFast(a3, a4);
       break;
     default:

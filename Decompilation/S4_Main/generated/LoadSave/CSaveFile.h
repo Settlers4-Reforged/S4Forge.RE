@@ -17,7 +17,7 @@ public:
      CSaveFile(bool a2);
 
     // address=[0x13eb520]
-    bool  Open(std::wstring const & a1, int a2);
+    bool  Open(std::wstring const & a1, int a3);
 
     // address=[0x13eb590]
     bool  Close(void);

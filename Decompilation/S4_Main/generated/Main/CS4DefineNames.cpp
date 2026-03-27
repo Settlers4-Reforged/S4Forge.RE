@@ -39,10 +39,10 @@ char const * __cdecl CS4DefineNames::GetGoodName(int a1) {
 // Decompiled from const char *__cdecl CS4DefineNames::GetObjectName(unsigned int a1)
 char const * __cdecl CS4DefineNames::GetObjectName(int a1) {
   
-  if ( a1 >= 0x123 )
+  if ( a1 >= 291 )
     return "<INVALID>";
   else
-    return (&off_3722104)[2 * a1];
+    return s_sObjectNames[a1].m_sName;
 }
 
 
