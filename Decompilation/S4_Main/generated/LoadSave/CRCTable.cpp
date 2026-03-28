@@ -1,3 +1,4 @@
+#if FALSE
 #include "CRCTable.h"
 
 // Definitions for class CRCTable
@@ -47,3 +48,4 @@ unsigned long  cdm_crc::CRCGenerator<16,32773,0,0,1,1>::CRCTable::CalcTableEntry
 }
 
 
+#endif // Already implemented

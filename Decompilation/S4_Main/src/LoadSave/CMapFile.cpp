@@ -1,10 +1,13 @@
 #include "CMapFile.h"
 
+#include "Crc.h"
+#include "Cryptor.h"
 #include "CS4MemChunk.h"
 #include "CSaveFile.h"
 #include "IS4ChunkObject.h"
 #include "CBB/CBBSupport.h"
 #include "CBB/CS4InvalidMapException.h"
+#include "Compression/LZHL.h"
 
 // Definitions for class CMapFile
 
@@ -247,13 +250,13 @@ void const *S4::CMapFile::LoadChunk(unsigned short a2, unsigned short a3, int &a
     } else {
       uSize = sChunk.m_uUncompressedSize;
       pChunkDataBuffer = new char[sChunk.m_uUncompressedSize];
-      int uCompressedSize = sChunk.m_uUncompressedSize;
-      int uChunkSize = sChunk.m_uChunkSizeInFile;
+      size_t uCompressedSize = sChunk.m_uUncompressedSize;
+      size_t uChunkSize = sChunk.m_uChunkSizeInFile;
       pChunkFileEnd = &pChunkDataBuffer[sChunk.m_uUncompressedSize];
       pChunkCompressedEnd = &pReadChunkData[sChunk.m_uChunkSizeInFile];
-      int rDecompressor = LZHLCreateDecompressor();
+      LZHLDecompressor *rDecompressor = LZHLCreateDecompressor();
       do {
-        if(!LZHLDecompress(rDecompressor, &pChunkFileEnd[-uCompressedSize], &uCompressedSize, &pChunkCompressedEnd[-uChunkSize], &uChunkSize)) {
+        if(!LZHLDecompress(rDecompressor, reinterpret_cast<uint8_t *>(&pChunkFileEnd[-uCompressedSize]), &uCompressedSize, reinterpret_cast<const uint8_t *>(&pChunkCompressedEnd[-uChunkSize]), &uChunkSize)) {
           BBSupportTracePrintF(3, "Decompression of chunk failed!");
           throw new CS4InvalidMapException();
         }
@@ -478,9 +481,9 @@ void S4::CMapFile::Cryption(void *a2, unsigned int a3) {
 
   Cryptor v4{};
 
-  Cryptor::Set_Key(v4, "01234567890123456789");
+  v4.Set_Key("01234567890123456789");
   for(unsigned int i = 0; i < a3; ++i)
-    v4.Transform_Char(&static_cast<unsigned __int8 *>(a2)[i]);
+    v4.Transform_Char(static_cast<unsigned char *>(a2)[i]);
 }
 
 
@@ -488,8 +491,8 @@ void S4::CMapFile::Cryption(void *a2, unsigned int a3) {
 // Decompiled from unsigned int __thiscall S4::CMapFile::Crc(S4::CMapFile *this, char *a2, int a3)
 unsigned int S4::CMapFile::Crc(void *a2, unsigned int a3) {
   // [esp+8h] [ebp-8h]
-  cdm_crc::CRCGenerator < 16, 32773, 0, 0, 1, 1 > v5{};
-  v5.Process(a2, a3);
+  cdm_crc::CRCGenerator<16, 32773, 0, 0, 1, 1> v5{};
+  v5.Process(static_cast<unsigned char *>(a2), a3);
   unsigned int NormalCRC = v5.GetNormalCRC();
   return NormalCRC >> (32 - v5.GetWidth());
 }
@@ -502,7 +505,7 @@ unsigned int S4::CMapFile::FileCRC(int a2, int a3) {
 
   char Buffer; // [esp+Fh] [ebp-1h] BYREF
 
-  cdm_crc::CRCGenerator < 16, 32773, 0, 0, 1, 1 > v5{};
+  cdm_crc::CRCGenerator<16, 32773, 0, 0, 1, 1> v5{};
   while(a2 < a3) {
     this->m_cSaveFile.Read(&Buffer, 1u);
     ++a2;

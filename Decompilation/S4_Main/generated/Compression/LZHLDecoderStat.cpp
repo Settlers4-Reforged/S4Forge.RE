@@ -1,3 +1,4 @@
+#if FALSE
 #include "LZHLDecoderStat.h"
 
 // Definitions for class LZHLDecoderStat
@@ -29,3 +30,4 @@
 // address=[0x3e2d858]
 // [Decompilation failed for static short * LZHLDecoderStat::symbolTable0]
 
+#endif // Already implemented

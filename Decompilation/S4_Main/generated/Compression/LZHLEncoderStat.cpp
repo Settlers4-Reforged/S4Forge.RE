@@ -1,3 +1,4 @@
+#if FALSE
 #include "LZHLEncoderStat.h"
 
 // Definitions for class LZHLEncoderStat
@@ -157,3 +158,4 @@ void __cdecl LZHLEncoderStat::_addGroup(int * a1, int a2, int a3) {
 }
 
 
+#endif // Already implemented

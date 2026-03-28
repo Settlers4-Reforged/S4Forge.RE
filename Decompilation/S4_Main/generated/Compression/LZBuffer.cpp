@@ -1,3 +1,4 @@
+#if FALSE
 #include "LZBuffer.h"
 
 // Definitions for class LZBuffer
@@ -145,3 +146,4 @@ void  LZBuffer::_bufCpy(unsigned char * a2, int a3, unsigned int a4) {
 }
 
 
+#endif // Already implemented

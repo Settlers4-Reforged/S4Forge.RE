@@ -1,3 +1,4 @@
+#if FALSE
 #include "LZHLEncoder.h"
 
 // Definitions for class LZHLEncoder
@@ -258,3 +259,4 @@ void  LZHLEncoder::_putBits(int a2, unsigned long a3) {
 }
 
 
+#endif // Already implemented

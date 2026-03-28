@@ -5,6 +5,12 @@
 #include "IAIEnvironment.h"
 #include "CBB/CBBSupport.h"
 #include "Debug/CTrace.h"
+#include "TaskForce/CAITaskForceReservoir.h"
+#include "TaskForce/CAITaskForceSquad.h"
+#include "TaskForce/CAITaskForceShamans.h"
+#include "TaskForce/CAITaskForceManakopters.h"
+#include "TaskForce/CAITaskForceDarkGardeners.h"
+#include "TaskForce/CAITaskForcePriests.h"
 
 // Definitions for class CAITaskForces
 
@@ -120,19 +126,19 @@ class CAITaskForce * __cdecl CAITaskForces::CreateTaskForce(int _iPlayerId, enum
         case 5:
         case 6:
         case 7:
-          pTaskForce = CAITaskForceSquad(_iPlayerId, iTaskForceClass, 0);
+          pTaskForce = new CAITaskForceSquad(_iPlayerId, iTaskForceClass, 0);
         case 8:
-          pTaskForce = CreatePriestsTaskForce(iRace, _iPlayerId, iTaskForceClass, 0);
+          pTaskForce = CAITaskForcePriests::CreatePriestsTaskForce(iRace, _iPlayerId, iTaskForceClass, 0);
         case 9:
-          pTaskForce = CTaskForceWarMachines(_iPlayerId, iTaskForceClass, 0);
+          pTaskForce = new CTaskForceWarMachines(_iPlayerId, iTaskForceClass, 0);
         case 10:
-          pTaskForce = CTaskForceWarShips(_iPlayerId, iTaskForceClass, 0);
+          pTaskForce = new CTaskForceWarShips(_iPlayerId, iTaskForceClass, 0);
         case 11:
-          pTaskForce = CAITaskForceDarkGardeners(_iPlayerId, 0);
+          pTaskForce = new CAITaskForceDarkGardeners(_iPlayerId, 0);
         case 12:
-          pTaskForce = CAITaskForceShamans(_iPlayerId, 0);
+          pTaskForce = new CAITaskForceShamans(_iPlayerId, 0);
         case 13:
-          pTaskForce = CAITaskForceManakopters(_iPlayerId, 0);
+          pTaskForce = new CAITaskForceManakopters(_iPlayerId, 0);
         default:
           if(BBSupportDbgReport(
                1,

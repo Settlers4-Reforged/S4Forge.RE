@@ -1,3 +1,4 @@
+#if FALSE
 #include "LZHLCompressor.h"
 
 // Definitions for class LZHLCompressor
@@ -349,3 +350,4 @@ unsigned long  LZHLCompressor::_updateTable(unsigned long a2, unsigned char cons
 }
 
 
+#endif // Already implemented

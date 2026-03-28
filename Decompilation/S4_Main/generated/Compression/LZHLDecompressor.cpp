@@ -1,3 +1,4 @@
+#if FALSE
 #include "LZHLDecompressor.h"
 
 // Definitions for class LZHLDecompressor
@@ -200,3 +201,4 @@ int  LZHLDecompressor::_get(unsigned char const * & a2, unsigned char const * a3
 }
 
 
+#endif // Already implemented

@@ -1,3 +1,4 @@
+#if FALSE
 #include "CLandscapeProperties.h"
 
 // Definitions for class CLandscapeProperties
@@ -6,7 +7,7 @@
 // Decompiled from bool __thiscall CLandscapeProperties::IsBlockedLand(CLandscapeProperties *this, int a2)
 bool  CLandscapeProperties::IsBlockedLand(int a2) {
   
-  return (this->m_uLandscapeProperty[a2] & 0x10) != 0;
+  return (this->m_uLandscapeProperty[a2] & LANDSCAPE_BLOCKED) != 0;
 }
 
 
@@ -73,7 +74,8 @@ unsigned int  CLandscapeProperties::TileType(int a2) {
 // Decompiled from bool __thiscall CLandscapeProperties::IsSlowType(CLandscapeProperties *this, int a2)
 bool  CLandscapeProperties::IsSlowType(int a2) {
   
-  return (*(&this->m_uLandscapeProperty + a2) & 4) != 0;
+  return (this->m_uLandscapeProperty[a2] & LANDSCAPE_SLOW) != 0;
 }
 
 
+#endif // Already implemented

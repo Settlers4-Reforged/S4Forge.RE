@@ -2,6 +2,7 @@
 
 #include "CBB/CBBSupport.h"
 #include "World/helper.h"
+#include "World/CWorldManager.h"
 
 // Definitions for class CVWList
 
@@ -117,12 +118,9 @@ void CVWList::CalculateOverlappingSquares(int _iX, int _iY, int _iRadius) {
   // [esp+14h] [ebp-Ch]
   // [esp+18h] [ebp-8h]
 
-  if(!CWorldManager::InWorld(_iX, _iY)
-     && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 161, "g_cWorld.InWorld(_iX, _iY)") == 1) {
-    __debugbreak();
-  }
-  if(_iRadius > 0x20 && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 162, "(_iRadius >=0) && (_iRadius <= 32)") == 1)
-    __debugbreak();
+  BB_ASSERT(g_cWorld.InWorld(_iX, _iY))
+  BB_ASSERT((_iRadius >=0) && (_iRadius <= 32))
+
   int iV = Squares::XYToVW(_iX);
   int iW = Squares::XYToVW(_iY);
   v6 = sub_15E1D20(iV, iW);

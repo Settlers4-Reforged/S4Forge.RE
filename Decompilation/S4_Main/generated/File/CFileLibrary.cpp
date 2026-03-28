@@ -2087,7 +2087,7 @@ int  CFileLibrary::UnpackData(char * _pDst, int _uDstSize, char * _pSrc, int _uS
   
   DWORD v7; // [esp+0h] [ebp-38h] BYREF
   int bSucceeded; // [esp+14h] [ebp-24h]
-  int pDecompressor; // [esp+24h] [ebp-14h]
+  LZHLDecompressor *pDecompressor; // [esp+24h] [ebp-14h]
   DWORD *v13; // [esp+28h] [ebp-10h]
   int exceptionBlock; // [esp+34h] [ebp-4h]
 

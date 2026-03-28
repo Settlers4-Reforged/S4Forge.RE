@@ -744,7 +744,7 @@ void  S4::CMapFile::SaveDbgInfoChunk(char const * a2) {
 
 
 // address=[0x13dbc20]
-// Decompiled from void __thiscall S4::CMapFile::Cryption(S4::CMapFile *this, void *a2, unsigned int a3)
+// Decompiled from void __thiscall S4::CMapFile::Cryption(S4::CMapFile *this, unsigned __int8 *a2, unsigned int a3)
 void  S4::CMapFile::Cryption(void * a2, unsigned int a3) {
   
   unsigned int i; // [esp+14h] [ebp-7Ch]
@@ -758,7 +758,7 @@ void  S4::CMapFile::Cryption(void * a2, unsigned int a3) {
   LOBYTE(v6) = 1;
   Cryptor::Set_Key(v4, (int)&v5);
   for ( i = 0; i < a3; ++i )
-    Cryptor::Transform_Char((Cryptor *)v4, (unsigned __int8 *)a2 + i);
+    Cryptor::Transform_Char((Cryptor *)v4, &a2[i]);
   LOBYTE(v6) = 0;
   std::string::~string(&v5);
   v6 = -1;

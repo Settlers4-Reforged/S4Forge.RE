@@ -1,3 +1,4 @@
+#if FALSE
 #include "HuffStat.h"
 
 // Definitions for class HuffStat
@@ -40,3 +41,4 @@ int  HuffStat::makeSortedTmp(struct HuffStatTmpStruct * a2) {
 }
 
 
+#endif // Already implemented

@@ -29,7 +29,7 @@ void  CSquare::InitAndFillTypeMapNormal(int a2, int a3) {
       v7 = ITiling::OwnerId(v11);
       v6 = CTilingWorld::WorldGroundType(v11);
       v4 = CTile::TileType(v7);
-      v8 = v5 | CLandscapeProperties::TileType((CLandscapeProperties *)&s_cLandscapeProperties, v6) | v4;
+      v8 = v5 | CLandscapeProperties::TileType(&s_cLandscapeProperties, v6) | v4;
       if ( (v8 & 0x10000000) != 0 )
       {
         IsBlockedLand = CTilingWorld::WorldIsBlockedLand(v11);
@@ -45,7 +45,7 @@ void  CSquare::InitAndFillTypeMapNormal(int a2, int a3) {
         if ( (CWaterFlags::WaterFlags(v11) & 0x400) != 0 )
         {
           IsBlockedLand = 0;
-          v8 = (unsigned int)&MEMORY[0x4000000] | v8 & 0xDFFFFFFF;
+          v8 = v8 & 0xDBFFFFFF | 0x4000000;
         }
         else
         {

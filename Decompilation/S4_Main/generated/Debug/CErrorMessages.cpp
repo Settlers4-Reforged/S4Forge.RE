@@ -3,7 +3,7 @@
 // Definitions for class CErrorMessages
 
 // address=[0x14812a0]
-// Decompiled from char *__thiscall CErrorMessages::GetErrorMessage(CErrorMessages *this, const struct CErrorMessageId *a2)
+// Decompiled from char *__thiscall CErrorMessages::GetErrorMessage(CErrorMessages *this, struct CErrorMessageId *a2)
 char const *  CErrorMessages::GetErrorMessage(class CErrorMessageId const & a2)const {
   
   int Id; // [esp+4h] [ebp-4h]
@@ -19,8 +19,8 @@ char const *  CErrorMessages::GetErrorMessage(class CErrorMessageId const & a2)c
 // Decompiled from CErrorMessages *__thiscall CErrorMessages::CErrorMessages(CErrorMessages *this)
  CErrorMessages::CErrorMessages(void) {
   
-  IErrorMessages::IErrorMessages(this);
-  *(_DWORD *)this = &CErrorMessages::_vftable_;
+  IErrorMessages::IErrorMessages((IErrorMessages *)this);
+  this->__vftable = (CErrorMessages_vtbl *)&CErrorMessages::_vftable_;
   return this;
 }
 

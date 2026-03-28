@@ -1748,7 +1748,7 @@ void __cdecl CWorldManager::SetGroundInit(int a1, int a2) {
     CWorldManager::SetMoveCostsBits(a1, 3);
   else
     CWorldManager::SetMoveCostsBits(a1, 2);
-  if ( a2 == GROUND_GRASS_DUSTY || a2 == GROUND_GRASS_PAVEMENT )
+  if ( a2 == 28 || a2 == 29 )
     CWorldManager::SetMoveCostsBits(a1, 0);
 }
 
@@ -1757,17 +1757,17 @@ void __cdecl CWorldManager::SetGroundInit(int a1, int a2) {
 // Decompiled from void __cdecl CWorldManager::GetBuildingInfluenceInfo(int *a1, int *a2, int *a3)
 void __cdecl CWorldManager::GetBuildingInfluenceInfo(int a1, int & a2, int & a3) {
   
-  if ( a1 == (int *)BUILDING_GUARDTOWERSMALL )
+  if ( a1 == (int *)46 )
   {
     *a2 = 3499;
     *a3 = 37;
   }
-  else if ( a1 == (int *)BUILDING_GUARDTOWERBIG )
+  else if ( a1 == (int *)47 )
   {
     *a2 = 3999;
     *a3 = 40;
   }
-  else if ( a1 == (int *)BUILDING_CASTLE )
+  else if ( a1 == (int *)48 )
   {
     *a2 = 4999;
     *a3 = 44;
