@@ -686,7 +686,7 @@
 #include "Uncategorized/COneVehicleTypeIterator.h"
 #include "Uncategorized/COptimizeOptions.h"
 #include "Uncategorized/CRefGrpEntry.h"
-#include "Uncategorized/Cryptor.h"
+#include "LoadSave/Cryptor.h"
 #include "Uncategorized/SAIDTOCCUPIEDELEMENT.h"
 #include "Uncategorized/SAIDTUD.h"
 #include "Uncategorized/SAI_ECO_POSS_BUILD_PLACE.h"
