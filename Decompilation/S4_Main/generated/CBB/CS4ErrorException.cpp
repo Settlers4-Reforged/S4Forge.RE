@@ -1,3 +1,4 @@
+#if FALSE
 #include "CS4ErrorException.h"
 
 // Definitions for class CS4ErrorException
@@ -43,3 +44,4 @@ bool  CS4ErrorException::GetErrorMessage(char * a2, unsigned int a3) {
 }
 
 
+#endif // Already implemented

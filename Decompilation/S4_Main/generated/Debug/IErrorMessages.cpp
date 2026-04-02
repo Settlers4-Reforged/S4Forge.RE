@@ -1,3 +1,4 @@
+#if FALSE
 #include "IErrorMessages.h"
 
 // Definitions for class IErrorMessages
@@ -11,3 +12,4 @@
 }
 
 
+#endif // Already implemented

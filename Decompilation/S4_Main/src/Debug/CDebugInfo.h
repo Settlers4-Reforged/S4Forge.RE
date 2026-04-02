@@ -3,6 +3,34 @@
 
 #include "defines.h"
 
+struct SEnvironmentInfo {
+    int          sVersion;
+    int          sPlatformId;
+    int          sOSVersionMayor;
+    int          sOSVersionMinor;
+    std::string  sOSAdditionalInfo;
+    int          gap;
+    bool         bIsMMX;
+    int          sProcessorCount;
+    int          sProcessorSpeed;
+    unsigned int uTotalPhyMemory;
+    unsigned int uTotalVirtMemory;
+    unsigned int uFreePhyMemory;
+    unsigned int uFreeVirtMemory;
+    int          gpuGap[9];
+    bool         bLoadedWSA;
+};
+
+static_assert(sizeof(SEnvironmentInfo) == 0x74, "SEnvironmentInfo has wrong size");
+
+
+struct SFreqInfo {
+    int m_uSpeed0;
+    int m_uSpeed1;
+    int m_uSpeed2;
+    int m_uSpeed3;
+};
+
 class CDebugInfo {
 public:
     // address=[0x135e070]
@@ -34,16 +62,16 @@ private:
     static bool __cdecl CheckGraphicsAdapter(void);
 
     // address=[0x147fd90]
-    static SFreqInfo __cdecl CPUSpeed(int retstr);
+    static struct SFreqInfo __cdecl CPUSpeed(int);
 
     // address=[0x147ff20]
     static bool __cdecl CheckMemory(void);
 
     // address=[0x147ff80]
-    static SFreqInfo __cdecl GetBSFCpuSpeed(unsigned int retstr);
+    static struct SFreqInfo __cdecl GetBSFCpuSpeed(unsigned int);
 
     // address=[0x14800f0]
-    static SFreqInfo __cdecl GetRDTSCCpuSpeed(void retstr);
+    static struct SFreqInfo __cdecl GetRDTSCCpuSpeed(void);
 
     // address=[0x14803b0]
     static unsigned short __cdecl wincpuid(void);
@@ -52,7 +80,7 @@ private:
     static unsigned int __cdecl wincpufeatures(void);
 
     // address=[0x14804f0]
-    static SFreqInfo __cdecl GetCmosCpuSpeed(void a1);
+    static struct SFreqInfo __cdecl GetCmosCpuSpeed(void);
 
     // address=[0x1480700]
     static unsigned short __cdecl wincpuidsupport(void);
@@ -88,7 +116,7 @@ private:
     static unsigned int m_iClone;
 
     // address=[0x3f44e90]
-    static SEnvironmentInfo m_EnvInfo;
+    static struct SEnvironmentInfo m_EnvInfo;
 
     // address=[0x3f44f08]
     static std::string *m_strOS;

@@ -11,37 +11,35 @@ bool __cdecl CDebugInfo::IsMMX(void) {
 
 
 // address=[0x1480a00]
-// Decompiled from bool __cdecl CDebugInfo::CheckEnvironment(bool a1)
-bool __cdecl CDebugInfo::CheckEnvironment(bool a1) {
+// Decompiled from bool __cdecl CDebugInfo::CheckEnvironment(bool _bLogEnv)
+bool __cdecl CDebugInfo::CheckEnvironment(bool _bLogEnv) {
   
-  DWORD LastError; // eax
-  DWORD v2; // eax
-  DWORD v3; // eax
+  DWORD LastError; // eax MAPDST
 
   memset(&CDebugInfo::m_EnvInfo, 0, 0x74u);
-  if ( !(unsigned __int8)CDebugInfo::CheckOS() )
+  if ( !CDebugInfo::CheckOS() )
   {
     LastError = GetLastError();
     CTrace::Print("DebugInfo.cpp: Error calling CheckOS(); LastError: %d", LastError);
   }
-  if ( !(unsigned __int8)CDebugInfo::CheckCPU() )
+  if ( !CDebugInfo::CheckCPU() )
   {
-    v2 = GetLastError();
-    CTrace::Print("DebugInfo.cpp: Error calling CheckCPU(); LastError: %d", v2);
+    LastError = GetLastError();
+    CTrace::Print("DebugInfo.cpp: Error calling CheckCPU(); LastError: %d", LastError);
   }
-  if ( !(unsigned __int8)CDebugInfo::CheckMemory() )
+  if ( !CDebugInfo::CheckMemory() )
   {
-    v3 = GetLastError();
-    CTrace::Print("DebugInfo.cpp: Error calling CheckMemory(); LastError: %d", v3);
+    LastError = GetLastError();
+    CTrace::Print("DebugInfo.cpp: Error calling CheckMemory(); LastError: %d", LastError);
   }
-  if ( a1 )
+  if ( _bLogEnv )
     CDebugInfo::LogEnvironment();
-  if ( !(unsigned __int8)CDebugInfo::IsWindowsNT40() || (unsigned __int8)CDebugInfo::IsMMX() )
+  if ( !CDebugInfo::IsWindowsNT40() || CDebugInfo::IsMMX() )
   {
-    if ( (unsigned __int8)CDebugInfo::IsTargetPlatform() )
+    if ( CDebugInfo::IsTargetPlatform() )
     {
-      byte_3F44F00 = ImportWSAFunctions();
-      if ( !byte_3F44F00 )
+      g_bLoadedWSA = ImportWSAFunctions();
+      if ( !g_bLoadedWSA )
         CTrace::Print("DebugInfo.cpp: Winsock2 not found !!!!");
       CDebugInfo::CheckGraphicsAdapter();
       return 1;
@@ -64,11 +62,11 @@ bool __cdecl CDebugInfo::CheckEnvironment(bool a1) {
 // Decompiled from bool CDebugInfo::IsTargetPlatform()
 bool __cdecl CDebugInfo::IsTargetPlatform(void) {
   
-  if ( dword_3F44E94 == 2 )
+  if ( sPlatformId == 2 )
     return sOSVersionMajor >= 4;
-  if ( dword_3F44E94 == 1 )
+  if ( sPlatformId == 1 )
     return sOSVersionMajor >= 4;
-  return dword_3F44E94 != 0;
+  return sPlatformId != 0;
 }
 
 
@@ -84,7 +82,7 @@ bool __cdecl CDebugInfo::IsWindowsNT40(void) {
 // Decompiled from char CDebugInfo::IsNetworkAvailable()
 bool __cdecl CDebugInfo::IsNetworkAvailable(void) {
   
-  return byte_3F44F00;
+  return g_bLoadedWSA;
 }
 
 
@@ -92,8 +90,8 @@ bool __cdecl CDebugInfo::IsNetworkAvailable(void) {
 // Decompiled from int CDebugInfo::LogEnvironment()
 void __cdecl CDebugInfo::LogEnvironment(void) {
   
-  const char *v0; // eax
-  const char *v1; // eax
+  char *v0; // eax
+  char *v1; // eax
 
   BBSupportTracePrintF(1, "=====================================================================");
   BBSupportTracePrintF(1, "SYSTEM INFORMATION");
@@ -102,8 +100,8 @@ void __cdecl CDebugInfo::LogEnvironment(void) {
   BBSupportTracePrintF(1, "CPU Family: %d", (unsigned __int16)word_3D89A28);
   BBSupportTracePrintF(1, "CPU Model : %d", (unsigned __int8)byte_3F44E8D);
   BBSupportTracePrintF(1, "CPU Steppg: %d", (unsigned __int8)byte_3F44E8C);
-  BBSupportTracePrintF(1, "# of CPUs : %d", dword_3F44EC4);
-  BBSupportTracePrintF(1, "CPU Speed : %d", dword_3F44EC8);
+  BBSupportTracePrintF(1, "# of CPUs : %d", sProcessorCount);
+  BBSupportTracePrintF(1, "CPU Speed : %d", sProcessorSpeed);
   if ( bIsMMX )
     BBSupportTracePrintF(1, "MMX Ext.  : %s", "Yes");
   else
@@ -111,11 +109,11 @@ void __cdecl CDebugInfo::LogEnvironment(void) {
   BBSupportTracePrintF(1, (char *)&sEmpty4);
   BBSupportTracePrintF(1, "OPERATING SYSTEM INFORMATION");
   BBSupportTracePrintF(1, "---------------------------------------------------------------------");
-  v0 = (const char *)std::string::c_str((char *)&CDebugInfo::m_strOS + 28 * CDebugInfo::m_EnvInfo);
+  v0 = std::string::c_str((std::string *)&CDebugInfo::m_strOS + CDebugInfo::m_EnvInfo);
   BBSupportTracePrintF(1, "Detected OS: %s", v0);
   BBSupportTracePrintF(1, "VersionMajor: %d", sOSVersionMajor);
   BBSupportTracePrintF(1, "VersionMinor: %d", sOSVersionMinor);
-  v1 = (const char *)std::string::c_str(&sOSAdditionalInfo);
+  v1 = std::string::c_str(&sOSAdditionalInfo);
   BBSupportTracePrintF(1, "Additional Info: %s", v1);
   BBSupportTracePrintF(1, (char *)&sEmpty5);
   BBSupportTracePrintF(1, "MEMORY INFORMATION");
@@ -138,20 +136,20 @@ bool __cdecl CDebugInfo::CheckOS(void) {
   VersionInformation.dwOSVersionInfoSize = 148;
   if ( GetVersionExA(&VersionInformation) )
   {
-    dword_3F44E94 = VersionInformation.dwPlatformId;
+    sPlatformId = VersionInformation.dwPlatformId;
     sOSVersionMajor = VersionInformation.dwMajorVersion;
     sOSVersionMinor = VersionInformation.dwMinorVersion;
     std::string::operator=(&sOSAdditionalInfo, VersionInformation.szCSDVersion);
-    if ( dword_3F44E94 )
+    if ( sPlatformId )
     {
-      if ( dword_3F44E94 == 1 )
+      if ( sPlatformId == 1 )
       {
         if ( sOSVersionMajor > 4 || sOSVersionMajor == 4 && sOSVersionMinor > 0 )
           CDebugInfo::m_EnvInfo = 4;
         else
           CDebugInfo::m_EnvInfo = 3;
       }
-      else if ( dword_3F44E94 == 2 )
+      else if ( sPlatformId == 2 )
       {
         switch ( sOSVersionMajor )
         {
@@ -185,7 +183,7 @@ bool __cdecl CDebugInfo::CheckOS(void) {
   }
   else
   {
-    dword_3F44E94 = -1;
+    sPlatformId = -1;
     sOSVersionMajor = -1;
     sOSVersionMinor = -1;
     return 0;
@@ -226,11 +224,11 @@ bool __cdecl CDebugInfo::CheckCPU(void) {
   v9 = v0[1];
   v10 = v0[2];
   v11 = v0[3];
-  dword_3F44EC8 = v11;
+  sProcessorSpeed = v11;
   memset(&SystemInfo, 0, sizeof(SystemInfo));
   GetSystemInfo(&SystemInfo);
-  dword_3F44EC4 = SystemInfo.dwNumberOfProcessors;
-  bIsMMX = ((unsigned int)dword_800000 & CDebugInfo::wincpufeatures()) != 0;
+  sProcessorCount = SystemInfo.dwNumberOfProcessors;
+  bIsMMX = (CDebugInfo::wincpufeatures() & 0x800000) != 0;
   return 1;
 }
 
@@ -244,99 +242,63 @@ bool __cdecl CDebugInfo::CheckGraphicsAdapter(void) {
 
 
 // address=[0x147fd90]
-// Decompiled from _DWORD *__cdecl CDebugInfo::CPUSpeed(_DWORD *a1, int a2)
-struct SFreqInfo __cdecl CDebugInfo::CPUSpeed(int a1) {
+// Decompiled from SFreqInfo *__cdecl CDebugInfo::CPUSpeed(SFreqInfo *__return_ptr retstr, _DWORD *a1, int a2)
+struct SFreqInfo __cdecl CDebugInfo::CPUSpeed(int retstr) {
   
-  int *RDTSCCpuSpeed; // eax
-  int *CmosCpuSpeed; // eax
-  int *BSFCpuSpeed; // eax
-  _BYTE v6[16]; // [esp+0h] [ebp-84h] BYREF
-  _BYTE v7[16]; // [esp+10h] [ebp-74h] BYREF
-  _BYTE v8[16]; // [esp+20h] [ebp-64h] BYREF
-  int v9; // [esp+30h] [ebp-54h]
-  int v10; // [esp+34h] [ebp-50h]
-  int v11; // [esp+38h] [ebp-4Ch]
-  unsigned __int16 v12; // [esp+3Ch] [ebp-48h]
-  _DWORD v13[4]; // [esp+40h] [ebp-44h] BYREF
-  int v14; // [esp+50h] [ebp-34h]
-  int v15; // [esp+54h] [ebp-30h]
-  int v16; // [esp+58h] [ebp-2Ch]
-  int v17; // [esp+5Ch] [ebp-28h]
-  int v18; // [esp+60h] [ebp-24h]
-  int v19; // [esp+64h] [ebp-20h]
-  int v20; // [esp+68h] [ebp-1Ch]
-  int v21; // [esp+6Ch] [ebp-18h]
-  int v22; // [esp+70h] [ebp-14h]
-  int v23; // [esp+74h] [ebp-10h]
-  int v24; // [esp+78h] [ebp-Ch]
-  int v25; // [esp+7Ch] [ebp-8h]
+  _BYTE v4[16]; // [esp+0h] [ebp-84h] BYREF
+  _BYTE v5[16]; // [esp+10h] [ebp-74h] BYREF
+  _BYTE v6[16]; // [esp+20h] [ebp-64h] BYREF
+  int v7; // [esp+30h] [ebp-54h]
+  int v8; // [esp+34h] [ebp-50h]
+  int v9; // [esp+38h] [ebp-4Ch]
+  unsigned __int16 v10; // [esp+3Ch] [ebp-48h]
+  SFreqInfo v11; // [esp+40h] [ebp-44h] BYREF
+  SFreqInfo v12; // [esp+50h] [ebp-34h]
+  SFreqInfo v13; // [esp+60h] [ebp-24h]
+  SFreqInfo v14; // [esp+70h] [ebp-14h]
 
-  v12 = CDebugInfo::wincpuid();
-  v9 = CDebugInfo::wincpufeatures();
-  v11 = 0;
-  memset(v13, 0, sizeof(v13));
-  if ( a2 > 0 )
+  v10 = CDebugInfo::wincpuid();
+  v7 = CDebugInfo::wincpufeatures();
+  v9 = 0;
+  memset(&v11, 0, sizeof(v11));
+  if ( (int)a1 > 0 )
   {
-    if ( a2 <= 150 )
+    if ( (int)a1 <= 150 )
     {
-      v10 = 4000 * a2;
-      v11 = 1;
+      v8 = 4000 * (_DWORD)a1;
+      v9 = 1;
     }
   }
   else
   {
-    v10 = 4000000;
+    v8 = 4000000;
   }
-  if ( (v9 & 0x10) == 0 || v11 )
+  if ( (v7 & 0x10) == 0 || v9 )
   {
-    if ( v12 < 3u )
+    if ( v10 < 3u )
     {
-      *a1 = v13[0];
-      a1[1] = v13[1];
-      a1[2] = v13[2];
-      a1[3] = v13[3];
+      *retstr = v11;
     }
     else
     {
-      BSFCpuSpeed = (int *)CDebugInfo::GetBSFCpuSpeed(v6, v10);
-      v14 = *BSFCpuSpeed;
-      v15 = BSFCpuSpeed[1];
-      v16 = BSFCpuSpeed[2];
-      v17 = BSFCpuSpeed[3];
-      *a1 = v14;
-      a1[1] = v15;
-      a1[2] = v16;
-      a1[3] = v17;
+      v12 = *(SFreqInfo *)CDebugInfo::GetBSFCpuSpeed(v4, v8);
+      *retstr = v12;
     }
-    return a1;
+    return retstr;
   }
   else
   {
-    if ( a2 )
+    if ( a1 )
     {
-      CmosCpuSpeed = (int *)CDebugInfo::GetCmosCpuSpeed(v7);
-      v18 = *CmosCpuSpeed;
-      v19 = CmosCpuSpeed[1];
-      v20 = CmosCpuSpeed[2];
-      v21 = CmosCpuSpeed[3];
-      *a1 = v18;
-      a1[1] = v19;
-      a1[2] = v20;
-      a1[3] = v21;
+      v13 = *(SFreqInfo *)CDebugInfo::GetCmosCpuSpeed(v5);
+      *retstr = v13;
     }
     else
     {
-      RDTSCCpuSpeed = (int *)CDebugInfo::GetRDTSCCpuSpeed(v8);
-      v22 = *RDTSCCpuSpeed;
-      v23 = RDTSCCpuSpeed[1];
-      v24 = RDTSCCpuSpeed[2];
-      v25 = RDTSCCpuSpeed[3];
-      *a1 = v22;
-      a1[1] = v23;
-      a1[2] = v24;
-      a1[3] = v25;
+      v14 = *(SFreqInfo *)CDebugInfo::GetRDTSCCpuSpeed(v6);
+      *retstr = v14;
     }
-    return a1;
+    return retstr;
   }
 }
 
@@ -358,158 +320,152 @@ bool __cdecl CDebugInfo::CheckMemory(void) {
 
 
 // address=[0x147ff80]
-// Decompiled from _DWORD *__cdecl CDebugInfo::GetBSFCpuSpeed(_DWORD *a1, unsigned int a2)
-struct SFreqInfo __cdecl CDebugInfo::GetBSFCpuSpeed(unsigned int a1) {
+// Decompiled from SFreqInfo *__cdecl CDebugInfo::GetBSFCpuSpeed(SFreqInfo *__return_ptr retstr, _DWORD *a1, unsigned int a2)
+struct SFreqInfo __cdecl CDebugInfo::GetBSFCpuSpeed(unsigned int retstr) {
   
-  __int16 v3; // bx
+  __int16 v4; // bx
   LARGE_INTEGER PerformanceCount; // [esp+4h] [ebp-40h] BYREF
-  LARGE_INTEGER v5; // [esp+Ch] [ebp-38h] BYREF
+  LARGE_INTEGER v6; // [esp+Ch] [ebp-38h] BYREF
   LARGE_INTEGER Frequency; // [esp+14h] [ebp-30h] BYREF
-  DWORD v7; // [esp+1Ch] [ebp-28h]
-  DWORD v8; // [esp+20h] [ebp-24h]
+  DWORD v8; // [esp+1Ch] [ebp-28h]
+  DWORD v9; // [esp+20h] [ebp-24h]
   int i; // [esp+24h] [ebp-20h]
-  int v10; // [esp+28h] [ebp-1Ch]
-  DWORD v11; // [esp+2Ch] [ebp-18h]
-  _DWORD v12[4]; // [esp+30h] [ebp-14h] BYREF
+  unsigned int v11; // [esp+28h] [ebp-1Ch]
+  DWORD v12; // [esp+2Ch] [ebp-18h]
+  SFreqInfo v13; // [esp+30h] [ebp-14h] BYREF
 
-  v10 = 0;
-  v8 = 0;
-  v7 = -1;
-  memset(v12, 0, sizeof(v12));
+  v11 = 0;
+  v9 = 0;
+  v8 = -1;
+  memset(&v13, 0, sizeof(v13));
   if ( QueryPerformanceFrequency(&Frequency) )
   {
     for ( i = 0; i < 10; ++i )
     {
       QueryPerformanceCounter(&PerformanceCount);
-      v3 = 4000;
+      v4 = 4000;
       do
-        --v3;
-      while ( v3 );
-      QueryPerformanceCounter(&v5);
-      v8 = v5.LowPart - PerformanceCount.LowPart;
-      if ( v5.LowPart - PerformanceCount.LowPart < v7 )
-        v7 = v8;
+        --v4;
+      while ( v4 );
+      QueryPerformanceCounter(&v6);
+      v9 = v6.LowPart - PerformanceCount.LowPart;
+      if ( v6.LowPart - PerformanceCount.LowPart < v8 )
+        v8 = v9;
     }
-    v11 = 100000 * v7 / (Frequency.LowPart / 0xA);
-    if ( v11 % Frequency.LowPart > Frequency.LowPart >> 1 )
+    v12 = 100000 * v8 / (Frequency.LowPart / 0xA);
+    if ( v12 % Frequency.LowPart > Frequency.LowPart >> 1 )
+      ++v12;
+    v11 = (unsigned int)a1 / v12;
+    v13.m_uSpeed2 = (unsigned int)a1 / v12;
+    if ( (unsigned int)a1 % v12 > v12 >> 1 )
       ++v11;
-    v10 = a2 / v11;
-    v12[2] = a2 / v11;
-    if ( a2 % v11 > v11 >> 1 )
-      ++v10;
-    v12[1] = v11;
-    v12[3] = v10;
-    *a1 = a2;
-    a1[1] = v12[1];
-    a1[2] = v12[2];
-    a1[3] = v12[3];
-    return a1;
+    v13.m_uSpeed1 = v12;
+    v13.m_uSpeed3 = v11;
+    retstr->m_uSpeed0 = (int)a1;
+    retstr->m_uSpeed1 = v13.m_uSpeed1;
+    retstr->m_uSpeed2 = v13.m_uSpeed2;
+    retstr->m_uSpeed3 = v13.m_uSpeed3;
+    return retstr;
   }
   else
   {
-    *a1 = v12[0];
-    a1[1] = v12[1];
-    a1[2] = v12[2];
-    a1[3] = v12[3];
-    return a1;
+    *retstr = v13;
+    return retstr;
   }
 }
 
 
 // address=[0x14800f0]
-// Decompiled from _DWORD *__cdecl CDebugInfo::GetRDTSCCpuSpeed(_DWORD *a1)
-struct SFreqInfo __cdecl CDebugInfo::GetRDTSCCpuSpeed(void a1) {
+// Decompiled from SFreqInfo *__cdecl CDebugInfo::GetRDTSCCpuSpeed(SFreqInfo *__return_ptr retstr, _DWORD *a1)
+struct SFreqInfo __cdecl CDebugInfo::GetRDTSCCpuSpeed(void retstr) {
   
-  unsigned __int64 v2; // rax
   unsigned __int64 v3; // rax
+  unsigned __int64 v4; // rax
   LARGE_INTEGER Frequency; // [esp+Ch] [ebp-60h] BYREF
-  int v5; // [esp+14h] [ebp-58h]
-  int v6; // [esp+18h] [ebp-54h]
+  int v6; // [esp+14h] [ebp-58h]
+  int v7; // [esp+18h] [ebp-54h]
   LARGE_INTEGER PerformanceCount; // [esp+1Ch] [ebp-50h] BYREF
-  unsigned int v8; // [esp+24h] [ebp-48h]
-  unsigned int v9; // [esp+28h] [ebp-44h]
+  unsigned int v9; // [esp+24h] [ebp-48h]
+  unsigned int v10; // [esp+28h] [ebp-44h]
   HANDLE hThread; // [esp+2Ch] [ebp-40h]
   int nPriority; // [esp+30h] [ebp-3Ch]
-  LARGE_INTEGER v12; // [esp+34h] [ebp-38h] BYREF
-  int v13; // [esp+3Ch] [ebp-30h]
-  unsigned int v14; // [esp+40h] [ebp-2Ch]
-  unsigned int v15; // [esp+44h] [ebp-28h]
-  unsigned int v16; // [esp+48h] [ebp-24h]
-  int v17; // [esp+4Ch] [ebp-20h]
-  unsigned int v18; // [esp+50h] [ebp-1Ch]
-  DWORD v19; // [esp+54h] [ebp-18h]
-  _DWORD v20[4]; // [esp+58h] [ebp-14h] BYREF
+  LARGE_INTEGER v13; // [esp+34h] [ebp-38h] BYREF
+  int v14; // [esp+3Ch] [ebp-30h]
+  unsigned int v15; // [esp+40h] [ebp-2Ch]
+  unsigned int v16; // [esp+44h] [ebp-28h]
+  unsigned int v17; // [esp+48h] [ebp-24h]
+  int v18; // [esp+4Ch] [ebp-20h]
+  unsigned int v19; // [esp+50h] [ebp-1Ch]
+  DWORD v20; // [esp+54h] [ebp-18h]
+  SFreqInfo v21; // [esp+58h] [ebp-14h] BYREF
 
-  v17 = 0;
-  v16 = 0;
   v18 = 0;
-  v13 = 0;
+  v17 = 0;
+  v19 = 0;
   v14 = 0;
   v15 = 0;
+  v16 = 0;
   hThread = GetCurrentThread();
-  memset(v20, 0, sizeof(v20));
+  memset(&v21, 0, sizeof(v21));
   if ( QueryPerformanceFrequency(&Frequency) )
   {
     do
     {
-      ++v13;
-      v18 = v16;
-      v16 = v17;
+      ++v14;
+      v19 = v17;
+      v17 = v18;
       QueryPerformanceCounter(&PerformanceCount);
-      v12 = PerformanceCount;
+      v13 = PerformanceCount;
       nPriority = GetThreadPriority(hThread);
       if ( nPriority != 0x7FFFFFFF )
         SetThreadPriority(hThread, 15);
-      while ( v12.LowPart - PerformanceCount.LowPart < 0x32 )
+      while ( v13.LowPart - PerformanceCount.LowPart < 0x32 )
       {
-        QueryPerformanceCounter(&v12);
-        v2 = __rdtsc();
-        v5 = v2;
-      }
-      PerformanceCount = v12;
-      while ( v12.LowPart - PerformanceCount.LowPart < 0x3E8 )
-      {
-        QueryPerformanceCounter(&v12);
+        QueryPerformanceCounter(&v13);
         v3 = __rdtsc();
         v6 = v3;
       }
+      PerformanceCount = v13;
+      while ( v13.LowPart - PerformanceCount.LowPart < 0x3E8 )
+      {
+        QueryPerformanceCounter(&v13);
+        v4 = __rdtsc();
+        v7 = v4;
+      }
       if ( nPriority != 0x7FFFFFFF )
         SetThreadPriority(hThread, nPriority);
-      v9 = v6 - v5;
-      v19 = 100000 * (v12.LowPart - PerformanceCount.LowPart) / (Frequency.LowPart / 0xA);
-      v15 += v19;
-      v14 += v6 - v5;
-      if ( v19 % Frequency.LowPart > Frequency.LowPart >> 1 )
-        ++v19;
-      v17 = v9 / v19;
-      if ( v9 % v19 > v19 >> 1 )
-        ++v17;
-      v8 = v18 + v16 + v17;
+      v10 = v7 - v6;
+      v20 = 100000 * (v13.LowPart - PerformanceCount.LowPart) / (Frequency.LowPart / 0xA);
+      v16 += v20;
+      v15 += v7 - v6;
+      if ( v20 % Frequency.LowPart > Frequency.LowPart >> 1 )
+        ++v20;
+      v18 = v10 / v20;
+      if ( v10 % v20 > v20 >> 1 )
+        ++v18;
+      v9 = v19 + v17 + v18;
     }
-    while ( v13 < 3 || v13 < 20 && (j__abs(3 * v17 - v8) > 3 || j__abs(3 * v16 - v8) > 3 || j__abs(3 * v18 - v8) > 3) );
-    v18 = 10 * v14 / v15;
-    v16 = 100 * v14 / v15;
-    if ( v16 - 10 * v18 >= 6 )
-      ++v18;
-    v20[2] = v14 / v15;
-    v20[3] = v14 / v15;
-    v17 = 10 * (v14 / v15);
-    if ( v18 - v17 >= 6 )
-      ++v20[3];
-    v20[1] = v15;
-    *a1 = v14;
-    a1[1] = v20[1];
-    a1[2] = v20[2];
-    a1[3] = v20[3];
-    return a1;
+    while ( v14 < 3 || v14 < 20 && (j__abs(3 * v18 - v9) > 3 || j__abs(3 * v17 - v9) > 3 || j__abs(3 * v19 - v9) > 3) );
+    v19 = 10 * v15 / v16;
+    v17 = 100 * v15 / v16;
+    if ( v17 - 10 * v19 >= 6 )
+      ++v19;
+    v21.m_uSpeed2 = v15 / v16;
+    v21.m_uSpeed3 = v15 / v16;
+    v18 = 10 * (v15 / v16);
+    if ( v19 - v18 >= 6 )
+      ++v21.m_uSpeed3;
+    v21.m_uSpeed1 = v16;
+    retstr->m_uSpeed0 = v15;
+    retstr->m_uSpeed1 = v21.m_uSpeed1;
+    retstr->m_uSpeed2 = v21.m_uSpeed2;
+    retstr->m_uSpeed3 = v21.m_uSpeed3;
+    return retstr;
   }
   else
   {
-    *a1 = v20[0];
-    a1[1] = v20[1];
-    a1[2] = v20[2];
-    a1[3] = v20[3];
-    return a1;
+    *retstr = v21;
+    return retstr;
   }
 }
 
@@ -518,30 +474,30 @@ struct SFreqInfo __cdecl CDebugInfo::GetRDTSCCpuSpeed(void a1) {
 // Decompiled from __int16 __thiscall CDebugInfo::wincpuid(void *this)
 unsigned short __cdecl CDebugInfo::wincpuid(void) {
   
-  __int16 v2; // [esp+0h] [ebp-4h]
+  __int16 v3; // [esp+0h] [ebp-4h]
 
-  if ( (unsigned __int16)CDebugInfo::wincpuidsupport(this) )
+  if ( (unsigned __int16)CDebugInfo::wincpuidsupport() )
   {
-    v2 = CDebugInfo::check_IDProc();
+    v3 = CDebugInfo::check_IDProc(this);
   }
   else
   {
-    CDebugInfo::m_iClone = (unsigned __int16)CDebugInfo::check_clone();
-    v2 = CDebugInfo::check_8086();
-    if ( v2 )
+    CDebugInfo::m_iClone = (unsigned __int16)CDebugInfo::check_clone(this);
+    v3 = CDebugInfo::check_8086();
+    if ( v3 )
     {
-      v2 = CDebugInfo::check_80286();
-      if ( v2 != 2 )
+      v3 = CDebugInfo::check_80286();
+      if ( v3 != 2 )
       {
-        v2 = CDebugInfo::check_80386();
-        if ( v2 != 3 )
-          v2 = 4;
+        v3 = CDebugInfo::check_80386();
+        if ( v3 != 3 )
+          v3 = 4;
       }
     }
   }
   if ( CDebugInfo::m_iClone )
-    return v2 | 0x8000;
-  return v2;
+    return v3 | 0x8000;
+  return v3;
 }
 
 
@@ -574,7 +530,7 @@ unsigned int __cdecl CDebugInfo::wincpufeatures(void) {
 
 
 // address=[0x14804f0]
-// Decompiled from _DWORD *__cdecl CDebugInfo::GetCmosCpuSpeed(_DWORD *a1)
+// Decompiled from SFreqInfo *__cdecl CDebugInfo::GetCmosCpuSpeed(SFreqInfo *a1)
 struct SFreqInfo __cdecl CDebugInfo::GetCmosCpuSpeed(void a1) {
   
   unsigned int v2[2]; // [esp+4h] [ebp-5Ch] BYREF
@@ -594,11 +550,11 @@ struct SFreqInfo __cdecl CDebugInfo::GetCmosCpuSpeed(void a1) {
   unsigned int v16; // [esp+40h] [ebp-20h]
   int CmosTick; // [esp+44h] [ebp-1Ch]
   int v18; // [esp+48h] [ebp-18h]
-  _DWORD v19[4]; // [esp+4Ch] [ebp-14h] BYREF
+  SFreqInfo v19; // [esp+4Ch] [ebp-14h] BYREF
 
   v16 = 0;
   hThread = GetCurrentThread();
-  memset(v19, 0, sizeof(v19));
+  memset(&v19, 0, sizeof(v19));
   nPriority = GetThreadPriority(hThread);
   if ( nPriority != 0x7FFFFFFF )
     SetThreadPriority(hThread, nPriority + 1);
@@ -641,19 +597,16 @@ struct SFreqInfo __cdecl CDebugInfo::GetCmosCpuSpeed(void a1) {
     v8 = v18 - CmosTick;
   else
     v8 = v18 + 10 - CmosTick;
-  v19[0] = v7;
+  v19.m_uSpeed0 = v7;
   v2[1] = v7 / 0x186A0;
   v13 = 10 * (v7 / 0xF4240);
   v16 = v7 / 0xF4240;
-  v19[2] = v7 / 0xF4240;
+  v19.m_uSpeed2 = v7 / 0xF4240;
   if ( v7 / 0x186A0 - v13 >= 6 )
     ++v16;
-  v19[3] = v16;
-  v19[1] = 1000000 * (v18 - CmosTick);
-  *a1 = v19[0];
-  a1[1] = v19[1];
-  a1[2] = v19[2];
-  a1[3] = v19[3];
+  v19.m_uSpeed3 = v16;
+  v19.m_uSpeed1 = 1000000 * (v18 - CmosTick);
+  *a1 = v19;
   return a1;
 }
 
