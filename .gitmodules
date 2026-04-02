@@ -1,0 +1,4 @@
+[submodule "Decompilation/S4_Main/lib/sdl"]
+	path = Decompilation/S4_Main/lib/sdl
+	url = https://github.com/libsdl-org/SDL.git
+	branch = release-3.4.x
