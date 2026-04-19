@@ -1,5 +1,6 @@
 #include "CAIEntityInfoEx.h"
 
+#include "CAIEntityInfoTower.h"
 #include "CBB/CBBSupport.h"
 
 // Definitions for class CAIEntityInfoEx
@@ -28,11 +29,8 @@ enum T_AI_ENTITY_INFO_EX_CLASS CAIEntityInfoEx::Class(void) const {
 class CAIEntityInfoEx * __cdecl CAIEntityInfoEx::CreateExtendedInfo(enum T_AI_ENTITY_INFO_EX_CLASS a1) {
   // [esp+Ch] [ebp-18h]
   // [esp+14h] [ebp-10h]
-
-
   if(a1 >= AI_ENTITY_INFO_EX_CLASS_MAX) {
-    if(BBSupportDbgReport(1, "AI\\AI_EntityInfo.cpp", 135, "CAIEntityInfoEx::CreateExtendedInfo(): Invalid class!") == 1)
-      __debugbreak();
+    BB_REPORT("CAIEntityInfoEx::CreateExtendedInfo(): Invalid class!");
   } else {
     return new CAIEntityInfoTower();
   }

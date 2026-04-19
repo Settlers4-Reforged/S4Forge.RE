@@ -102,57 +102,54 @@ void __cdecl CAITaskForces::RemoveEntityFromTaskForce(int a1) {
 
 
 // address=[0x1329020]
-// Decompiled from CAITaskForcePriestsRoman *__cdecl CAITaskForces::CreateTaskForce(int _iPlayerId, int iTaskForceClass)
-class CAITaskForce * __cdecl CAITaskForces::CreateTaskForce(int _iPlayerId, enum T_AI_TASK_FORCE_TYPE iTaskForceClass) {
+// Decompiled from CAITaskForcePriestsRoman *__cdecl CAITaskForces::CreateTaskForce(int _iPlayerId, int _iTaskForceType)
+class CAITaskForce * __cdecl CAITaskForces::CreateTaskForce(int _iPlayerId, enum T_AI_TASK_FORCE_TYPE _iTaskForceType) {
   if(s_bTaskForcesInitialized) {
     if(_iPlayerId < 1 && _iPlayerId > 8) {
-      if(BBSupportDbgReport(1, "AI\\AI_TaskForces.cpp", 1279, "CAITaskForces::CreateTaskForce(): Invalid player id!") == 1)
-        __debugbreak();
+      BB_REPORT("CAITaskForces::CreateTaskForce(): Invalid player id!");
       return 0;
-    } else {
-      int iRace = IAIEnvironment::PlayerRace(_iPlayerId);
-      if((_iPlayerId & 0xFFFFFFF0) != 0
-         && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 1286, "(_iPlayerId & ~AI_TASK_FORCE_FLAG_OWNER_ID_MASK) == 0") == 1) {
-        __debugbreak();
-      }
-
-      CAITaskForce *pTaskForce;
-      switch(iTaskForceClass) {
-        case 1:
-          pTaskForce = CAITaskForceReservoir(_iPlayerId);
-        case 2:
-        case 3:
-        case 4:
-        case 5:
-        case 6:
-        case 7:
-          pTaskForce = new CAITaskForceSquad(_iPlayerId, iTaskForceClass, 0);
-        case 8:
-          pTaskForce = CAITaskForcePriests::CreatePriestsTaskForce(iRace, _iPlayerId, iTaskForceClass, 0);
-        case 9:
-          pTaskForce = new CTaskForceWarMachines(_iPlayerId, iTaskForceClass, 0);
-        case 10:
-          pTaskForce = new CTaskForceWarShips(_iPlayerId, iTaskForceClass, 0);
-        case 11:
-          pTaskForce = new CAITaskForceDarkGardeners(_iPlayerId, 0);
-        case 12:
-          pTaskForce = new CAITaskForceShamans(_iPlayerId, 0);
-        case 13:
-          pTaskForce = new CAITaskForceManakopters(_iPlayerId, 0);
-        default:
-          if(BBSupportDbgReport(
-               1,
-               "AI\\AI_TaskForces.cpp",
-               1344,
-               "CAITaskForces::CreateTaskForce(): Unknown task force class!") == 1)
-            __debugbreak();
-          pTaskForce = 0;
-          break;
-      }
-
-      if(!pTaskForce && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 1350, "pTaskForce != 0") == 1)
-        __debugbreak();
     }
+
+    int iRace = IAIEnvironment::PlayerRace(_iPlayerId);
+    BB_ASSERT((_iPlayerId & ~AI_TASK_FORCE_FLAG_OWNER_ID_MASK) == 0)
+    static_assert(~AI_TASK_FORCE_FLAG_OWNER_ID_MASK == 0xFFFFFFF0, "AI_TASK_FORCE_FLAG_OWNER_ID_MASK does not match original game value!");
+
+    CAITaskForce *pTaskForce;
+    switch(_iTaskForceType) {
+      case AI_TASK_FORCE_TYPE_RESERVOIR:
+        pTaskForce = new CAITaskForceReservoir(_iPlayerId);
+      case AI_TASK_FORCE_TYPE_UNKNOWN_2:
+      case AI_TASK_FORCE_TYPE_UNKNOWN_3:
+      case AI_TASK_FORCE_TYPE_UNKNOWN_4:
+      case AI_TASK_FORCE_TYPE_UNKNOWN_5:
+      case AI_TASK_FORCE_TYPE_UNKNOWN_6:
+      case AI_TASK_FORCE_TYPE_UNKNOWN_7:
+        pTaskForce = new CAITaskForceSquad(_iPlayerId, _iTaskForceType, 0);
+      case AI_TASK_FORCE_TYPE_PRIESTS:
+        pTaskForce = CAITaskForcePriests::CreatePriestsTaskForce(iRace, _iPlayerId, _iTaskForceType, 0);
+      case AI_TASK_FORCE_TYPE_UNKNOWN_9:
+        pTaskForce = new CTaskForceWarMachines(_iPlayerId, _iTaskForceType, 0);
+      case AI_TASK_FORCE_TYPE_UNKNOWN_10:
+        pTaskForce = new CTaskForceWarShips(_iPlayerId, _iTaskForceType, 0);
+      case AI_TASK_FORCE_TYPE_DARK_GARDENERS:
+        pTaskForce = new CAITaskForceDarkGardeners(_iPlayerId, 0);
+      case AI_TASK_FORCE_TYPE_SHAMANS:
+        pTaskForce = new CAITaskForceShamans(_iPlayerId, 0);
+      case AI_TASK_FORCE_TYPE_MANAKOPTERS:
+        pTaskForce = new CAITaskForceManakopters(_iPlayerId, 0);
+      default:
+        if(BBSupportDbgReport(
+             1,
+             "AI\\AI_TaskForces.cpp",
+             1344,
+             "CAITaskForces::CreateTaskForce(): Unknown task force class!") == 1)
+          __debugbreak();
+        pTaskForce = 0;
+        break;
+    }
+
+    if(!pTaskForce && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 1350, "pTaskForce != 0") == 1)
+      __debugbreak();
   } else {
     if(BBSupportDbgReport(1, "AI\\AI_TaskForces.cpp", 1272, "CAITaskForces::CreateTaskForce(): Not initialized!") == 1)
       __debugbreak();
@@ -177,8 +174,9 @@ void CAITaskForces::DbgPrint(void) {
     m_pFirstTaskForce = m_pFirstTaskForce->m_pFirstTaskForce;
   }
   if(v3 == CAITaskForces::TotalNumberOfTaskForces())
-    return CTrace::Print("%i task forces.", v3);
-  return CTrace::Print("%i task forces, but TotalNumberOfTaskForces() returns %i!", v3, CAITaskForces::TotalNumberOfTaskForces());
+    CTrace::Print("%i task forces.", v3);
+  else
+    CTrace::Print("%i task forces, but TotalNumberOfTaskForces() returns %i!", v3, CAITaskForces::TotalNumberOfTaskForces());
 }
 
 

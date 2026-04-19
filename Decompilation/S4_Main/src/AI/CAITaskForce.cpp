@@ -773,7 +773,7 @@ CAITaskForce::CAITaskForce(int _iOwnerId, enum T_AI_TASK_FORCE_CLASS _tClass, en
   this->m_uCmdUniqueId = 0;
   this->m_uCmdTimeStamp = 0;
   this->m_uTimeStamp = 0;
-  CAITaskForces::AddTaskForce();
+  CAITaskForces::AddTaskForce(this);
 }
 
 

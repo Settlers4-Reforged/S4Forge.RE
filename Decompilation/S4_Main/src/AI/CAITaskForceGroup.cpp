@@ -3,6 +3,7 @@
 #include "../LoadSave/IS4Chunk.h"
 
 #include "CAITaskForce.h"
+#include "CAITaskForces.h"
 #include "CBB/CBBSupport.h"
 
 // Definitions for class CAITaskForceGroup

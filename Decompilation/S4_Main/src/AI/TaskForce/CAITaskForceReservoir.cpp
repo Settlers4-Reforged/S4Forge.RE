@@ -4,7 +4,7 @@
 
 // address=[0x13191d0]
 // Decompiled from CAITaskForceReservoir *__thiscall CAITaskForceReservoir::CAITaskForceReservoir(CAITaskForceReservoir *this, int a2)
-CAITaskForceReservoir::CAITaskForceReservoir(int a2) : CAITaskForce(a2, AI_TASK_FORCE_CLASS_RESERVOIR, TASK_FORCE_TYPE_RESERVOIR, 0x80000000) {}
+CAITaskForceReservoir::CAITaskForceReservoir(int a2) : CAITaskForce(a2, AI_TASK_FORCE_CLASS_RESERVOIR, AI_TASK_FORCE_TYPE_RESERVOIR, 0x80000000) {}
 
 
 // address=[0x13192d0]
