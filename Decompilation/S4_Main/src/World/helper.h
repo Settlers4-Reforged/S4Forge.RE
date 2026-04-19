@@ -15,6 +15,18 @@ namespace Y16X16 {
 
     // address=[0x15d7190]
     int __cdecl XYNotNegative(int);
+
+    // address=[0x1568700]
+    int __cdecl DeltaXFast(int, int);
+
+    // address=[0x1568720]
+    int __cdecl DeltaYFast(int, int);
+
+    // address=[0x1568740]
+    int __cdecl DirectionFast(int, int);
+
+    // address=[0x1592da0]
+    int __cdecl DistanceFast(int, int);
 } // namespace Y16X16
 
 namespace Grid {
