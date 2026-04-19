@@ -1061,7 +1061,7 @@ void  CVehicle::Store(std::ostream & a2) {
   operator^<unsigned short>(a1, &v10[1].m_wJobPart);
   operator^<unsigned short>(a1, &v10[1].m_wPrevEntity);
   operator^<float>(a1, &v10[1].m_uLastUpdateTick);
-  operator^<unsigned char>(a1, &v10->unk_45);
+  operator^<unsigned char>(a1, &v10->m_iDistance);
   v7 = std::vector<CEntityTask>::size(&v10[1].m_uLastLogicUpdate);
   operator^<unsigned int>(a1, &v7);
   std::vector<CEntityTask>::begin(v4);

@@ -7,8 +7,8 @@
  CWalkingShip::CWalkingShip(void) {
   
   CWalkingBase::CWalkingBase(this, 4, 0);
-  *(_DWORD *)this = &CWalkingShip::_vftable_;
-  *((_DWORD *)this + 13) |= 0x100u;
+  this->__vftable = (CWalkingShip_vtbl *)&CWalkingShip::_vftable_;
+  this->m_sData.m_iEntityFlags |= 0x100u;
   return this;
 }
 
@@ -61,7 +61,7 @@ bool  CWalkingShip::FindPathAStar64(int a2, int a3, class CDirCache & a4) {
 
 
 // address=[0x15f99b0]
-// Decompiled from int __thiscall CWalkingShip::IdleWalk(CWalkingShip *this, Y16X16 *a2, int a3)
+// Decompiled from int __thiscall CWalkingShip::IdleWalk(CWalkingShip *this, int a2, int a3)
 int  CWalkingShip::IdleWalk(int a2, int a3) {
   
   int v4; // [esp+8h] [ebp-B4h]
@@ -81,8 +81,8 @@ int  CWalkingShip::IdleWalk(int a2, int a3) {
   int v18; // [esp+50h] [ebp-6Ch]
   int v19; // [esp+5Ch] [ebp-60h]
   int v20; // [esp+60h] [ebp-5Ch]
-  int v21; // [esp+64h] [ebp-58h]
-  int v22; // [esp+68h] [ebp-54h]
+  unsigned int v21; // [esp+64h] [ebp-58h]
+  unsigned int v22; // [esp+68h] [ebp-54h]
   int v23; // [esp+6Ch] [ebp-50h]
   int v24; // [esp+70h] [ebp-4Ch]
   int v25; // [esp+74h] [ebp-48h]
@@ -104,7 +104,7 @@ int  CWalkingShip::IdleWalk(int a2, int a3) {
   v25 = 0;
   v28 = 10;
   v27 = 0;
-  v23 = CWorldManager::Index((int)a2);
+  v23 = CWorldManager::Index(a2);
   for ( i = 0; i < 6; ++i )
   {
     v4 = v23 + CWorldManager::NeighborRelIndex(i);
@@ -139,36 +139,36 @@ int  CWalkingShip::IdleWalk(int a2, int a3) {
   }
   if ( v34 )
   {
-    v11 = CWorldManager::Index((int)a2);
-    v12 = (*(int (__thiscall **)(CWalkingShip *, int))(*(_DWORD *)this + 28))(this, v11);
-    if ( (*((_DWORD *)this + 12) & 0x20000) == 0 )
-      *((_DWORD *)this + 7) = -1;
-    *((_DWORD *)this + 12) &= ~0x20000u;
-    if ( (unsigned __int8)CWorldManager::InWorldPackedXY(*((_DWORD *)this + 7)) )
+    v11 = CWorldManager::Index(a2);
+    v12 = this->SectorId(this, v11);
+    if ( (this->m_sData.m_uFlags & 0x20000) == 0 )
+      this->m_sData.m_iIdleWalkToXY = -1;
+    this->m_sData.m_uFlags &= ~0x20000u;
+    if ( CWorldManager::InWorldPackedXY(this->m_sData.m_iIdleWalkToXY) )
     {
-      v10 = CWorldManager::Index(*((_DWORD *)this + 7));
-      v18 = (*(int (__thiscall **)(CWalkingShip *, int))(*(_DWORD *)this + 28))(this, v10);
+      v10 = CWorldManager::Index(this->m_sData.m_iIdleWalkToXY);
+      v18 = this->SectorId(this, v10);
       if ( (CWaterFlags::WaterFlags(v23) & 0x1000) != 0 || v18 <= 0 || v12 != v18 )
-        *((_DWORD *)this + 7) = -1;
+        this->m_sData.m_iIdleWalkToXY = -1;
     }
     else
     {
-      *((_DWORD *)this + 7) = -1;
+      this->m_sData.m_iIdleWalkToXY = -1;
     }
-    if ( *((int *)this + 7) < 0 )
+    if ( this->m_sData.m_iIdleWalkToXY < 0 )
     {
-      v9 = Y16X16::UnpackXFast((int)a2);
-      v8 = Y16X16::UnpackYFast((int)a2);
+      v9 = Y16X16::UnpackXFast(a2);
+      v8 = Y16X16::UnpackYFast(a2);
       v20 = -1;
       v14 = -1;
       for ( j = 0; j < SurroundingHexPointsCount(15); ++j )
       {
         v22 = v9 + SSurroundingPoint8::X(&g_sSurroundingHexPoints8[4 * j]);
         v21 = v8 + SSurroundingPoint8::Y(&g_sSurroundingHexPoints8[4 * j]);
-        if ( (unsigned __int8)CWorldManager::InWorld(v22, v21) )
+        if ( CWorldManager::InWorld(v22, v21) )
         {
           v17 = CWorldManager::Index(v22, v21);
-          if ( (*(int (__thiscall **)(CWalkingShip *, int))(*(_DWORD *)this + 28))(this, v17) == v12 )
+          if ( this->SectorId(this, v17) == v12 )
           {
             v16 = CWaterFlags::WaterFlags(v17);
             if ( (v16 & 0x1000) == 0 )
@@ -186,21 +186,21 @@ int  CWalkingShip::IdleWalk(int a2, int a3) {
       }
       if ( v20 < 0 )
         return 8;
-      *((_DWORD *)this + 7) = Y16X16::PackXYFast(v20, v14);
+      this->m_sData.m_iIdleWalkToXY = Y16X16::PackXYFast(v20, v14);
     }
-    v19 = Y16X16::DirectionFast(a2, *((_DWORD *)this + 7));
-    v7 = Y16X16::UnpackXFast((int)a2);
-    v6 = Y16X16::UnpackYFast((int)a2);
-    v5 = CWorldManager::Index(g_sNeighborPoints[2 * v19] + v7, MEMORY[0x37D8C0C][2 * v19] + v6);
-    if ( (*(unsigned __int8 (__thiscall **)(CWalkingShip *, int))(*(_DWORD *)this + 20))(this, v5) )
+    v19 = Y16X16::DirectionFast(a2, this->m_sData.m_iIdleWalkToXY);
+    v7 = Y16X16::UnpackXFast(a2);
+    v6 = Y16X16::UnpackYFast(a2);
+    v5 = CWorldManager::Index(g_sNeighborPoints[v19].x + v7, g_sNeighborPoints[v19].y + v6);
+    if ( this->IsNotBlocked(this, v5) )
     {
-      *((_DWORD *)this + 12) |= 0x20000u;
+      this->m_sData.m_uFlags |= 0x20000u;
       return v19;
     }
   }
   else
   {
-    *((_DWORD *)this + 7) = -1;
+    this->m_sData.m_iIdleWalkToXY = -1;
   }
   if ( v34 | v33 )
   {
@@ -226,7 +226,7 @@ int  CWalkingShip::IdleWalk(int a2, int a3) {
         return m;
     }
   }
-  *((_DWORD *)this + 7) = -1;
+  this->m_sData.m_iIdleWalkToXY = -1;
   return 8;
 }
 

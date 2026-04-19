@@ -12,7 +12,7 @@ public:
     virtual void  Store(std::ostream & a2);
 
     // address=[0x15f6860]
-    virtual void  Init(int a2, int a3);
+    virtual void  Init(int a2, int _iFlags);
 
     // address=[0x15f6950]
     virtual void  Init(class CWalking * a2, int a3);
@@ -86,6 +86,10 @@ protected:
 
     // address=[0x15fb300]
     bool  NextCoarseWaypoint(int a2);
+
+    // Type information members
+public:
+    CWalkingBase::SData m_sData;
 
 };
 

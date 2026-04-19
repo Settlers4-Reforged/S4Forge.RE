@@ -7,8 +7,8 @@
  CWalkingNormal::CWalkingNormal(int a2) {
   
   CWalkingBase::CWalkingBase(this, 0, a2);
-  *(_DWORD *)this = &CWalkingNormal::_vftable_;
-  *((_DWORD *)this + 13) = *((_DWORD *)this + 13);
+  this->__vftable = (CWalking_vtbl *)&CWalkingNormal::_vftable_;
+  this->m_sData.m_iEntityFlags = this->m_sData.m_iEntityFlags;
   return this;
 }
 

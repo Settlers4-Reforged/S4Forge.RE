@@ -1128,11 +1128,11 @@ void  CSettler::Store(std::ostream & a1) {
   IMovingEntity::Store(this, a1);
   v6 = 1;
   operator^<unsigned int>(a1, &v6);
-  operator^<short>(a1, &v10->unk_48);
-  if ( v10->unk_48 != -1 )
+  operator^<short>(a1, &v10->m_iToDoSize);
+  if ( v10->m_iToDoSize != -1 )
   {
     a2[1] = 0;
-    std::list<CEntityTask>::begin((void *)v10->entityTasks, (int)v3);
+    std::list<CEntityTask>::begin((void *)v10->m_pToDoList, (int)v3);
     v13 = 0;
     while ( 1 )
     {
@@ -1143,7 +1143,7 @@ void  CSettler::Store(std::ostream & a1) {
       LOBYTE(v13) = 0;
       std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v2);
       if ( !v11
-        || (unsigned __int8)std::_List_const_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator==((std::_Iterator_base12 *)&v10->unk_58) )
+        || (unsigned __int8)std::_List_const_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator==((std::_Iterator_base12 *)&v10->m_cCurrentToDoItemIter) )
       {
         break;
       }
@@ -1275,7 +1275,7 @@ int  CSettler::SetGroupFlags(int a2) {
     settlerType,
     posX,
     posY);
-  this->unk_45 = 0;
+  this->m_iDistance = 0;
   IEntity::SetPosition(this, posX, posY);
   this->m_objType = Settler;
   this->m_nType = settlerType;
@@ -1334,12 +1334,12 @@ int  CSettler::SetGroupFlags(int a2) {
   IMovingEntity::IMovingEntity(this, id);
   this->__vftable = (CSettler_vtbl *)&CSettler::_vftable_;
   std::auto_ptr<ISettlerRole>::auto_ptr<ISettlerRole>((auto_ptr_ISettlerRole *)&this->role, 0);
-  this->unk_45 = 0;
+  this->m_iDistance = 0;
   this->m_objType = 0;
   this->m_nType = type;
   IEntity::ClearFlagBits(this, EntityFlag_VulnerableMask|EntityFlag_Selectable|EntityFlag_Visible|0x800);
   this->m_iFlags = this->m_iFlags;
-  this->displacementCosts = 5;
+  this->m_cDisplacementCosts = 5;
   return this;
 }
 
@@ -1404,9 +1404,9 @@ int  CSettler::Walk(void) {
     BBSupportTracePrintF(0, "STOP this settler is dead");
     return -1;
   }
-  else if ( std::auto_ptr<CWalking>::get(&this->walking) )
+  else if ( std::auto_ptr<CWalking>::get(&this->m_pWalkin) )
   {
-    v4 = std::auto_ptr<CWalking>::operator->(&this->walking);
+    v4 = std::auto_ptr<CWalking>::operator->(&this->m_pWalkin);
     v2 = IEntity::PackedXY(this);
     v3 = (*(int (__thiscall **)(int, int))(*(_DWORD *)v4 + 12))(v4, v2);
     return CSettler::WalkDir(this, v3);

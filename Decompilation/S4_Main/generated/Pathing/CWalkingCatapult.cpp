@@ -7,8 +7,8 @@
  CWalkingCatapult::CWalkingCatapult(void) {
   
   CWalkingBase::CWalkingBase(this, 3, 0);
-  *(_DWORD *)this = &CWalkingCatapult::_vftable_;
-  *((_DWORD *)this + 13) |= 0x200u;
+  this->__vftable = (CWalking_vtbl *)&CWalkingCatapult::_vftable_;
+  this->m_sData.m_iEntityFlags |= 0x200u;
   return this;
 }
 
@@ -43,7 +43,7 @@ bool  CWalkingCatapult::IsNotOccupied(int a2) {
   
   int v3; // [esp+4h] [ebp-4h]
 
-  v3 = CWorldManager::Width(this);
+  v3 = CWorldManager::Width();
   if ( CWorldManager::OccupyingEntityId(a2) )
     return 0;
   if ( CWorldManager::OccupyingEntityId(a2 + 1) )
@@ -61,21 +61,21 @@ bool  CWalkingCatapult::IsNotOccupied(int a2) {
 
 
 // address=[0x15f9300]
-// Decompiled from char __thiscall CWalkingCatapult::FindPathAStar64(CWalkingCatapult *this, int a2, int a3, struct CDirCache *a4)
+// Decompiled from char __thiscall CWalkingCatapult::FindPathAStar64(  CWalkingCatapult *this,  unsigned int a2,  unsigned int a3,  struct CDirCache *a4)
 bool  CWalkingCatapult::FindPathAStar64(int a2, int a3, class CDirCache & a4) {
   
   int v5; // [esp+4h] [ebp-2Ch]
-  int v6; // [esp+Ch] [ebp-24h]
+  int iIndex; // [esp+Ch] [ebp-24h]
   int v7; // [esp+14h] [ebp-1Ch]
   int j; // [esp+18h] [ebp-18h]
   int i; // [esp+1Ch] [ebp-14h]
-  char Path; // [esp+23h] [ebp-Dh]
+  char bFound; // [esp+23h] [ebp-Dh]
   _BYTE v11[8]; // [esp+24h] [ebp-Ch]
 
-  v6 = CWorldManager::Index(a2);
+  iIndex = CWorldManager::Index(a2);
   for ( i = 0; i < 6; ++i )
   {
-    v7 = v6 + CWorldManager::NeighborRelIndex(i);
+    v7 = iIndex + CWorldManager::NeighborRelIndex(i);
     if ( CWorldManager::MapObjectId(v7) == i + 1 )
     {
       v11[i] = 1;
@@ -88,21 +88,21 @@ bool  CWalkingCatapult::FindPathAStar64(int a2, int a3, class CDirCache & a4) {
       v11[i] = 0;
     }
   }
-  Path = CAStar64::FindPath((CAStar64 *)&g_cAStar64Catapult, a2, a3, a4);
+  bFound = CAStar64::FindPath((CAStar64 *)&g_cAStar64Catapult, a2, a3, a4);
   for ( j = 0; j < 6; ++j )
   {
     if ( v11[j] )
     {
-      v5 = v6 + CWorldManager::NeighborRelIndex(j);
+      v5 = iIndex + CWorldManager::NeighborRelIndex(j);
       CWorldManager::SetMapObjectId(v5, j + 1);
     }
   }
-  return Path;
+  return bFound;
 }
 
 
 // address=[0x15f9420]
-// Decompiled from int __thiscall CWalkingCatapult::IdleWalk(_DWORD *this, Y16X16 *a2, int a3)
+// Decompiled from int __thiscall CWalkingCatapult::IdleWalk(CWalkingCatapult *this, int a2, int a3)
 int  CWalkingCatapult::IdleWalk(int a2, int a3) {
   
   int v4; // [esp+0h] [ebp-64h]
@@ -115,12 +115,12 @@ int  CWalkingCatapult::IdleWalk(int a2, int a3) {
   int v11; // [esp+24h] [ebp-40h]
   int v12; // [esp+28h] [ebp-3Ch]
   int v13; // [esp+30h] [ebp-34h]
-  int v14; // [esp+34h] [ebp-30h]
-  int v15; // [esp+38h] [ebp-2Ch]
+  unsigned int v14; // [esp+34h] [ebp-30h]
+  unsigned int v15; // [esp+38h] [ebp-2Ch]
   int v16; // [esp+3Ch] [ebp-28h]
   int v17; // [esp+40h] [ebp-24h]
-  int v18; // [esp+44h] [ebp-20h]
-  int v19; // [esp+48h] [ebp-1Ch]
+  int iCurrentY; // [esp+44h] [ebp-20h]
+  int iCurrentX; // [esp+48h] [ebp-1Ch]
   int v20; // [esp+4Ch] [ebp-18h]
   int k; // [esp+50h] [ebp-14h]
   int i; // [esp+54h] [ebp-10h]
@@ -128,16 +128,16 @@ int  CWalkingCatapult::IdleWalk(int a2, int a3) {
   char v25; // [esp+62h] [ebp-2h]
   bool v26; // [esp+63h] [ebp-1h]
 
-  v19 = Y16X16::UnpackXFast((int)a2);
-  v18 = Y16X16::UnpackYFast((int)a2);
-  if ( !CWorldManager::InInnerWorld1(v19, v18)
+  iCurrentX = Y16X16::UnpackXFast(a2);
+  iCurrentY = Y16X16::UnpackYFast(a2);
+  if ( !CWorldManager::InInnerWorld1(iCurrentX, iCurrentY)
     && BBSupportDbgReport(2, "Pathing\\Walking.cpp", 2009, "g_cWorld.InInnerWorld1(iCurrentX, iCurrentY)") == 1 )
   {
     __debugbreak();
   }
-  if ( !CWorldManager::InInnerWorld1(v19, v18) )
+  if ( !CWorldManager::InInnerWorld1(iCurrentX, iCurrentY) )
     return 8;
-  v16 = CWorldManager::Index(v19, v18);
+  v16 = CWorldManager::Index(iCurrentX, iCurrentY);
   v26 = CWorldManager::MoveCostsBits(v16) >= 7;
   if ( !v26 )
   {
@@ -153,37 +153,37 @@ int  CWalkingCatapult::IdleWalk(int a2, int a3) {
   }
   if ( v26 )
   {
-    v9 = (*(int (__thiscall **)(_DWORD *, int))(*this + 28))(this, v16);
-    if ( (this[12] & 0x20000) == 0 )
-      this[7] = -1;
-    this[12] &= ~0x20000u;
-    if ( (unsigned __int8)CWorldManager::InWorldPackedXY(this[7]) )
+    v9 = this->SectorId(this, v16);
+    if ( (this->m_sData.m_uFlags & 0x20000) == 0 )
+      this->m_sData.m_iIdleWalkToXY = -1;
+    this->m_sData.m_uFlags &= ~0x20000u;
+    if ( CWorldManager::InWorldPackedXY(this->m_sData.m_iIdleWalkToXY) )
     {
-      v11 = CWorldManager::Index(this[7]);
-      v10 = (*(int (__thiscall **)(_DWORD *, int))(*this + 28))(this, v11);
+      v11 = CWorldManager::Index(this->m_sData.m_iIdleWalkToXY);
+      v10 = this->SectorId(this, v11);
       if ( CWorldManager::MoveCostsBits(v11) == 7 || v10 <= 0 || v9 != v10 )
-        this[7] = -1;
+        this->m_sData.m_iIdleWalkToXY = -1;
     }
     else
     {
-      this[7] = -1;
+      this->m_sData.m_iIdleWalkToXY = -1;
     }
-    if ( (int)this[7] < 0 )
+    if ( this->m_sData.m_iIdleWalkToXY < 0 )
     {
-      v6 = Y16X16::UnpackXFast((int)a2);
-      v5 = Y16X16::UnpackYFast((int)a2);
+      v6 = Y16X16::UnpackXFast(a2);
+      v5 = Y16X16::UnpackYFast(a2);
       v13 = -1;
       v7 = -1;
       for ( j = 0; j < SurroundingHexPointsCount(15); ++j )
       {
         v15 = v6 + SSurroundingPoint8::X(&g_sSurroundingHexPoints8[4 * j]);
         v14 = v5 + SSurroundingPoint8::Y(&g_sSurroundingHexPoints8[4 * j]);
-        if ( (unsigned __int8)CWorldManager::InWorld(v15, v14) )
+        if ( CWorldManager::InWorld(v15, v14) )
         {
           v20 = CWorldManager::Index(v15, v14);
-          if ( (*(int (__thiscall **)(_DWORD *, int))(*this + 28))(this, v20) == v9
+          if ( this->SectorId(this, v20) == v9
             && CWorldManager::MoveCostsBits(v20) < 7
-            && (*(unsigned __int8 (__thiscall **)(_DWORD *, int))(*this + 24))(this, v20) )
+            && this->IsNotOccupied(this, v20) )
           {
             v25 = 1;
             for ( k = 1; k < 19; ++k )
@@ -206,17 +206,17 @@ int  CWalkingCatapult::IdleWalk(int a2, int a3) {
       }
       if ( v13 < 0 )
         return 8;
-      this[7] = Y16X16::PackXYFast(v13, v7);
+      this->m_sData.m_iIdleWalkToXY = Y16X16::PackXYFast(v13, v7);
     }
-    v17 = Y16X16::DirectionFast(a2, this[7]);
-    v4 = CWorldManager::Index(g_sNeighborPoints[2 * v17] + v19, MEMORY[0x37D8C0C][2 * v17] + v18);
-    if ( !(*(unsigned __int8 (__thiscall **)(_DWORD *, int))(*this + 20))(this, v4) )
+    v17 = Y16X16::DirectionFast(a2, this->m_sData.m_iIdleWalkToXY);
+    v4 = CWorldManager::Index(g_sNeighborPoints[v17].x + iCurrentX, g_sNeighborPoints[v17].y + iCurrentY);
+    if ( !this->IsNotBlocked(this, v4) )
       return 8;
     return v17;
   }
   else
   {
-    this[7] = -1;
+    this->m_sData.m_iIdleWalkToXY = -1;
     return 8;
   }
 }

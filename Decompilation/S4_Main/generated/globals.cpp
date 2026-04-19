@@ -198,10 +198,10 @@ int __cdecl Squares::XYToVW(int xy) {
 
 
 // address=[0x1307190]
-// Decompiled from int __cdecl Y16X16::UnpackXFast(unsigned __int16 a1)
+// Decompiled from int __cdecl Y16X16::UnpackXFast(int a1)
 int __cdecl Y16X16::UnpackXFast(int a1) {
   
-  return a1;
+  return (unsigned __int16)a1;
 }
 
 
@@ -37609,10 +37609,10 @@ void __cdecl __vcrt_va_start_verify_argument_type<bool>(void) {
 
 
 // address=[0x14d8770]
-// Decompiled from int __cdecl Y16X16::NeighborModifier(Y16X16 *this)
+// Decompiled from int __cdecl Y16X16::NeighborModifier(int this)
 int __cdecl Y16X16::NeighborModifier(int) {
   
-  return Y16X16::g_iNeighborY16X16Modifiers[(_DWORD)this];
+  return Y16X16::g_iNeighborY16X16Modifiers[this];
 }
 
 
@@ -38180,14 +38180,14 @@ float __cdecl abs(float X) {
 
 
 // address=[0x1592da0]
-// Decompiled from int __cdecl Y16X16::DistanceFast(Y16X16 *this, int a2)
-int __cdecl Y16X16::DistanceFast(int a2, int a2) {
+// Decompiled from int __cdecl Y16X16::DistanceFast(int _iAXY, int _iBXY)
+int __cdecl Y16X16::DistanceFast(int _iAXY, int _iBXY) {
   
   int v3; // [esp+0h] [ebp-8h]
   int v4; // [esp+4h] [ebp-4h]
 
-  v3 = Y16X16::DeltaXFast((int)this, a2);
-  v4 = Y16X16::DeltaYFast((int)this, a2);
+  v3 = Y16X16::DeltaXFast(_iAXY, _iBXY);
+  v4 = Y16X16::DeltaYFast(_iAXY, _iBXY);
   return Grid::Distance(v3, v4);
 }
 

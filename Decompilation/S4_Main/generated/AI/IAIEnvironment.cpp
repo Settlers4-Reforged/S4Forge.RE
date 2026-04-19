@@ -301,7 +301,7 @@ int __cdecl IAIEnvironment::GridDistancePackedXY(int a1, int a2) {
   v6 = v2 - IAIEnvironment::UnpackYFast(a1);
   v3 = IAIEnvironment::UnpackXFast(a2);
   v4 = IAIEnvironment::UnpackXFast(a1);
-  return IAIEnvironment::GridDistance((Grid *)(v3 - v4), v6);
+  return IAIEnvironment::GridDistance(v3 - v4, v6);
 }
 
 
@@ -378,12 +378,12 @@ bool __cdecl IAIEnvironment::WorldIsScree(int a1) {
 
 
 // address=[0x130aec0]
-// Decompiled from int __cdecl IAIEnvironment::EntityObjectType(int a1)
+// Decompiled from T_SETTLER_OBJ_TYPE __cdecl IAIEnvironment::EntityObjectType(int a1)
 int __cdecl IAIEnvironment::EntityObjectType(int a1) {
   
-  unsigned __int8 *v1; // eax
+  IEntity *v1; // eax
 
-  v1 = (unsigned __int8 *)CMapObjectMgr::Entity(a1);
+  v1 = CMapObjectMgr::Entity(a1);
   return IEntity::ObjType(v1);
 }
 
@@ -417,7 +417,7 @@ int __cdecl IAIEnvironment::EntitySectorId(int a1) {
   int v1; // eax
   int v3; // [esp+0h] [ebp-Ch]
   int v4; // [esp+4h] [ebp-8h]
-  int v5; // [esp+8h] [ebp-4h]
+  IEntity *v5; // [esp+8h] [ebp-4h]
 
   v4 = 0;
   v5 = CMapObjectMgr::EntityPtr(a1);
@@ -609,10 +609,10 @@ void __cdecl IAIEnvironment::EntityGetWarriorTypeAndPosition(int a1, enum T_AI_W
 // Decompiled from bool __cdecl IAIEnvironment::EntityIsAlive(int a1)
 bool __cdecl IAIEnvironment::EntityIsAlive(int a1) {
   
-  _DWORD *v2; // [esp+0h] [ebp-8h]
+  IEntity *v2; // [esp+0h] [ebp-8h]
 
-  v2 = (_DWORD *)CMapObjectMgr::EntityPtr(a1);
-  return v2 && IEntity::FlagBits(v2, (EntityFlag)&loc_3000000) != 0;
+  v2 = CMapObjectMgr::EntityPtr(a1);
+  return v2 && IEntity::FlagBits(v2, EntityFlag_AliveMask) != 0;
 }
 
 
@@ -620,10 +620,10 @@ bool __cdecl IAIEnvironment::EntityIsAlive(int a1) {
 // Decompiled from bool __cdecl IAIEnvironment::EntityIsReady(int a1)
 bool __cdecl IAIEnvironment::EntityIsReady(int a1) {
   
-  _DWORD *v2; // [esp+0h] [ebp-8h]
+  IEntity *v2; // [esp+0h] [ebp-8h]
 
-  v2 = (_DWORD *)CMapObjectMgr::EntityPtr(a1);
-  return v2 && IEntity::FlagBits(v2, (EntityFlag)((char *)&loc_1FFFFFF + 1)) != 0;
+  v2 = CMapObjectMgr::EntityPtr(a1);
+  return v2 && IEntity::FlagBits(v2, EntityFlag_Ready) != 0;
 }
 
 
@@ -631,10 +631,10 @@ bool __cdecl IAIEnvironment::EntityIsReady(int a1) {
 // Decompiled from bool __cdecl IAIEnvironment::EntityIsAliveAndHasGivenUniqueId(int a1, int a2)
 bool __cdecl IAIEnvironment::EntityIsAliveAndHasGivenUniqueId(int a1, int a2) {
   
-  _DWORD *v3; // [esp+0h] [ebp-8h]
+  IEntity *v3; // [esp+0h] [ebp-8h]
   bool v4; // [esp+5h] [ebp-3h]
 
-  v3 = (_DWORD *)CMapObjectMgr::EntityPtr(a1);
+  v3 = CMapObjectMgr::EntityPtr(a1);
   if ( !v3 )
     return 0;
   v4 = IEntity::FlagBits(v3, EntityFlag_AliveMask) != 0;
@@ -746,13 +746,13 @@ void __cdecl IAIEnvironment::MovingEntitySendMoveCommand(int a1, int a2, int a3,
 
 
 // address=[0x130b710]
-// Decompiled from bool __cdecl IAIEnvironment::MovingEntityIsWaiting(int a1)
+// Decompiled from bool __cdecl IAIEnvironment::MovingEntityIsWaiting(unsigned int a1)
 bool __cdecl IAIEnvironment::MovingEntityIsWaiting(int a1) {
   
-  void **v1; // eax
+  IMovingEntity *v1; // eax
 
   v1 = CMapObjectMgr::MovingEntity(a1);
-  return *(_BYTE *)(IMovingEntity::GetActualTask(v1) + 4) == 17;
+  return *((_BYTE *)IMovingEntity::GetActualTask(v1) + 4) == 17;
 }
 
 
@@ -760,13 +760,13 @@ bool __cdecl IAIEnvironment::MovingEntityIsWaiting(int a1) {
 // Decompiled from int __cdecl IAIEnvironment::MovingEntityWalkingState(int a1)
 int __cdecl IAIEnvironment::MovingEntityWalkingState(int a1) {
   
-  void **v2; // [esp+0h] [ebp-Ch]
+  IEntity *v2; // [esp+0h] [ebp-Ch]
   IMovingEntity *v3; // [esp+4h] [ebp-8h]
   struct CWalking *v4; // [esp+8h] [ebp-4h]
 
-  v2 = (void **)CMapObjectMgr::EntityPtr(a1);
+  v2 = CMapObjectMgr::EntityPtr(a1);
   v3 = (IMovingEntity *)j____RTDynamicCast(
-                          v2,
+                          (void **)&v2->__vftable,
                           0,
                           &IEntity__RTTI_Type_Descriptor_,
                           &IMovingEntity__RTTI_Type_Descriptor_,

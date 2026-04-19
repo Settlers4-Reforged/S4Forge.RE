@@ -46,8 +46,8 @@ bool  CAStar64Worker::InitFindPath(void) {
   
   int v1; // eax
 
-  dword_415C76C = (int (__cdecl *)(_DWORD))CAStar64Worker::IsNotBlocked;
-  dword_415C770 = CAStar64Worker::MoveCosts;
+  s_pIsNotBlocked = (int (__cdecl *)(_DWORD))CAStar64Worker::IsNotBlocked;
+  s_pMoveCost = CAStar64Worker::MoveCosts;
   v1 = CY6R1X6::WorldIdx(dword_4174BC4);
   CAStar64Worker::m_iEcoSectorId = CWorldManager::EcoSectorId(dword_4174BC0 + v1);
   return CAStar64Worker::m_iEcoSectorId != 0;

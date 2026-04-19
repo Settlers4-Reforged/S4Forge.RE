@@ -1,3 +1,4 @@
+#if FALSE
 #include "CAIEvent.h"
 
 // Definitions for class CAIEvent
@@ -88,3 +89,4 @@ int  CAIEvent::Type(void)const {
 }
 
 
+#endif // Already implemented

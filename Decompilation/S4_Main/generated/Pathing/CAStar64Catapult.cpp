@@ -54,8 +54,8 @@ int __cdecl CAStar64Catapult::MoveCosts(int a1, int a2) {
 // Decompiled from char __thiscall CAStar64Catapult::InitFindPath(CAStar64Catapult *this)
 bool  CAStar64Catapult::InitFindPath(void) {
   
-  dword_415C76C = (int (__cdecl *)(_DWORD))j_CAStar64Catapult::IsNotBlocked;
-  dword_415C770 = j_CAStar64Catapult::MoveCosts;
+  s_pIsNotBlocked = (int (__cdecl *)(_DWORD))j_CAStar64Catapult::IsNotBlocked;
+  s_pMoveCost = j_CAStar64Catapult::MoveCosts;
   return 1;
 }
 

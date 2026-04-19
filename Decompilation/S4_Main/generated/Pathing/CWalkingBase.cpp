@@ -6,201 +6,191 @@
 // Decompiled from CWalking *__thiscall CWalkingBase::~CWalkingBase(CWalkingBase *this)
  CWalkingBase::~CWalkingBase(void) {
   
-  *(_DWORD *)this = &CWalkingBase::_vftable_;
+  this->__vftable = (CWalking_vtbl *)&CWalkingBase::_vftable_;
   CWalkingBase::DetachWalking(this);
   return CWalking::~CWalking(this);
 }
 
 
 // address=[0x15f66b0]
-// Decompiled from int __thiscall CWalkingBase::Store(int *this, int a2)
+// Decompiled from void __thiscall CWalkingBase::Store(CWalkingBase *this, struct std::ostream *a2)
 void  CWalkingBase::Store(std::ostream & a2) {
   
-  int v3; // [esp+0h] [ebp-10h] BYREF
-  int *v4; // [esp+4h] [ebp-Ch]
-  __int16 v5; // [esp+8h] [ebp-8h] BYREF
-  __int16 v6; // [esp+Ch] [ebp-4h] BYREF
+  int v2; // [esp+0h] [ebp-10h] BYREF
+  __int16 v4; // [esp+8h] [ebp-8h] BYREF
+  __int16 v5; // [esp+Ch] [ebp-4h] BYREF
 
-  v4 = this;
-  v3 = 929995208;
-  operator^<int>(a2, &v3);
-  v6 = 1;
-  operator^<short>(a2, &v6);
-  v5 = (*(int (__thiscall **)(int *))(*v4 + 60))(v4);
+  v2 = 929995208;
+  operator^<int>(a2, &v2);
+  v5 = 1;
   operator^<short>(a2, &v5);
-  operator^<int>(a2, v4 + 12);
-  operator^<int>(a2, v4 + 2);
-  operator^<int>(a2, v4 + 3);
-  operator^<int>(a2, v4 + 4);
-  operator^<int>(a2, v4 + 5);
-  operator^<int>(a2, v4 + 6);
-  operator^<int>(a2, v4 + 7);
-  operator^<int>(a2, v4 + 8);
-  operator^<int>(a2, v4 + 9);
-  operator^<int>(a2, v4 + 10);
-  operator^<int>(a2, v4 + 11);
-  operator^<int>(a2, v4 + 13);
-  operator^<int>(a2, v4 + 14);
-  operator^<int>(a2, v4 + 15);
-  operator^<int>(a2, v4 + 16);
-  operator^<int>(a2, v4 + 17);
-  v3 = 1726811097;
-  return operator^<int>(a2, &v3);
+  v4 = this->GetWalkingType(this);
+  operator^<short>(a2, &v4);
+  operator^<int>(a2, &this->m_sData.m_uFlags);
+  operator^<int>(a2, &this->m_sData.m_iWalkState);
+  operator^<int>(a2, &this->m_sData.field_8);
+  operator^<int>(a2, &this->m_sData.m_iWalkToXY);
+  operator^<int>(a2, &this->m_sData.m_iWalkTo2XY);
+  operator^<int>(a2, &this->m_sData.m_iLeaderWalkToXY);
+  operator^<int>(a2, &this->m_sData.m_iIdleWalkToXY);
+  operator^<int>(a2, &this->m_sData.m_iWalkToIndex);
+  operator^<int>(a2, &this->m_sData.field_20);
+  operator^<int>(a2, &this->m_sData.m_iFineWaypoint);
+  operator^<int>(a2, &this->m_sData.m_iCoarseWaypointXY);
+  operator^<int>(a2, &this->m_sData.m_iEntityFlags);
+  operator^<int>(a2, &this->m_sData.field_34);
+  operator^<int>(a2, &this->m_sData.field_38);
+  operator^<int>(a2, &this->m_sData.field_3C);
+  operator^<int>(a2, &this->m_sData.field_40);
+  v2 = 1726811097;
+  operator^<int>(a2, &v2);
 }
 
 
 // address=[0x15f6860]
-// Decompiled from int __thiscall CWalkingBase::Init(CWalkingBase *this, int a2, int a3)
-void  CWalkingBase::Init(int a2, int a3) {
+// Decompiled from void __thiscall CWalkingBase::Init(CWalkingBase *this, int a2, int _iFlags)
+void  CWalkingBase::Init(int a2, int _iFlags) {
   
-  int result; // eax
-  unsigned int v5; // [esp+14h] [ebp+Ch]
+  unsigned int _iFlagsa; // [esp+14h] [ebp+Ch]
 
-  if ( (a3 & 0xBC000) != 0
+  if ( (_iFlags & 0xBC000) != 0
     && BBSupportDbgReport(2, "Pathing\\Walking.cpp", 524, "(_iFlags & WALK_FLAG_STRICT_INTERNAL_USE_MASK) == 0") == 1 )
   {
     __debugbreak();
   }
-  v5 = a3 & 0xFFF43060;
+  _iFlagsa = _iFlags & 0xFFF43060;
   if ( a2 < 0 )
   {
-    *((_DWORD *)this + 4) = -1;
-    *((_DWORD *)this + 8) = 0;
-    *((_DWORD *)this + 2) = a2 != -1;
+    this->m_sData.m_iWalkToXY = -1;
+    this->m_sData.m_iWalkToIndex = 0;
+    this->m_sData.m_iWalkState = a2 != -1;
   }
   else
   {
-    *((_DWORD *)this + 4) = a2;
-    *((_DWORD *)this + 8) = CWorldManager::Index(a2);
-    *((_DWORD *)this + 2) = 8;
+    this->m_sData.m_iWalkToXY = a2;
+    this->m_sData.m_iWalkToIndex = CWorldManager::Index(a2);
+    this->m_sData.m_iWalkState = 8;
   }
-  *((_DWORD *)this + 17) = 0;
-  *((_DWORD *)this + 5) = *((_DWORD *)this + 4);
-  *((_DWORD *)this + 12) = *((_DWORD *)this + 13) | v5;
-  *((_DWORD *)this + 9) = 0;
-  result = v5 & 0x40000;
-  if ( (v5 & 0x40000) != 0 )
-    return result;
-  result = *((_DWORD *)this + 4);
-  *((_DWORD *)this + 6) = result;
-  return result;
+  this->m_sData.field_40 = 0;
+  this->m_sData.m_iWalkTo2XY = this->m_sData.m_iWalkToXY;
+  this->m_sData.m_uFlags = this->m_sData.m_iEntityFlags | _iFlagsa;
+  this->m_sData.field_20 = 0;
+  if ( (_iFlagsa & 0x40000) == 0 )
+    this->m_sData.m_iLeaderWalkToXY = this->m_sData.m_iWalkToXY;
 }
 
 
 // address=[0x15f6950]
-// Decompiled from void __thiscall CWalkingBase::Init(CWalkingBase *this, struct CWalking *a2, int a3)
+// Decompiled from void __thiscall CWalkingBase::Init(CWalkingBase *this, struct CWalkingBase *a2, int a3)
 void  CWalkingBase::Init(class CWalking * a2, int a3) {
   
-  (*(void (__thiscall **)(CWalkingBase *, int, int))(*(_DWORD *)this + 8))(this, -1, a3);
+  this->InitB(this, -1, a3);
   CWalkingBase::AttachWalking(this, a2);
 }
 
 
 // address=[0x15f6980]
-// Decompiled from CWalkingBase *__thiscall CWalkingBase::InitIfLeader(CWalkingBase *this, int a2, int a3)
+// Decompiled from void __thiscall CWalkingBase::InitIfLeader(CWalkingBase *this, int a2, int a3)
 void  CWalkingBase::InitIfLeader(int a2, int a3) {
   
-  CWalkingBase *result; // eax
-  int v4; // [esp+0h] [ebp-8h]
+  int m_iWalkState; // [esp+0h] [ebp-8h]
 
-  *((_DWORD *)this + 6) = a2;
-  if ( !*((_DWORD *)this + 47) )
-    return (CWalkingBase *)(*(int (__thiscall **)(CWalkingBase *, int, int))(*(_DWORD *)this + 8))(this, a2, a3);
-  result = this;
-  v4 = *((_DWORD *)this + 2);
-  if ( v4 > 0 && v4 <= 5 )
-    return (CWalkingBase *)(*(int (__thiscall **)(CWalkingBase *, int, int))(*(_DWORD *)this + 8))(
-                             this,
-                             -1,
-                             a3 | 0x40000);
-  return result;
+  this->m_sData.m_iLeaderWalkToXY = a2;
+  if ( this->m_sData.m_pLatestWalking )
+  {
+    m_iWalkState = this->m_sData.m_iWalkState;
+    if ( m_iWalkState > 0 && m_iWalkState <= 5 )
+      this->InitB(this, -1, a3 | 0x40000);
+  }
+  else
+  {
+    this->InitB(this, a2, a3);
+  }
 }
 
 
 // address=[0x15f69f0]
-// Decompiled from int __thiscall CWalkingBase::Walk(CWalkingBase *this, Y16X16 *a2)
+// Decompiled from int __thiscall CWalkingBase::Walk(CWalkingBase *this, int a2)
 int  CWalkingBase::Walk(int a2) {
   
-  void *v2; // eax
-  const char *v3; // eax
+  struct type_info *pTypeId; // eax
+  const char *pTypeName; // eax
   int v4; // eax
   int v6; // eax
   int v7; // eax
   int v8; // eax
   int v9; // eax
   int v10; // eax
-  int v11; // eax
-  Y16X16 *v12; // eax
-  Y16X16 *v13; // eax
-  void *v14; // eax
+  __int16 v11; // ax
+  int v12; // eax
+  int v13; // eax
+  struct type_info *v14; // eax
   const char *v15; // eax
-  void *v16; // eax
+  struct type_info *v16; // eax
   const char *v17; // eax
-  int v18; // [esp+0h] [ebp-138h]
-  CEvn_Event *v19; // [esp+Ch] [ebp-12Ch]
-  CEvn_Event *v20; // [esp+10h] [ebp-128h]
-  int v21; // [esp+18h] [ebp-120h]
-  int v22; // [esp+1Ch] [ebp-11Ch]
-  int v23; // [esp+34h] [ebp-104h]
-  int v24; // [esp+44h] [ebp-F4h]
-  int v25; // [esp+48h] [ebp-F0h]
-  int v26; // [esp+4Ch] [ebp-ECh]
-  int v27; // [esp+50h] [ebp-E8h]
-  int v28; // [esp+60h] [ebp-D8h]
-  int v29; // [esp+6Ch] [ebp-CCh]
+  struct CEvn_Event *v18; // [esp+Ch] [ebp-12Ch]
+  struct CEvn_Event *v19; // [esp+10h] [ebp-128h]
+  int v20; // [esp+18h] [ebp-120h]
+  int v21; // [esp+1Ch] [ebp-11Ch]
+  int v22; // [esp+34h] [ebp-104h]
+  int iMapObjectId; // [esp+44h] [ebp-F4h]
+  int v24; // [esp+48h] [ebp-F0h]
+  int v25; // [esp+4Ch] [ebp-ECh]
+  int v26; // [esp+50h] [ebp-E8h]
+  int m_iWalkToXY; // [esp+60h] [ebp-D8h]
+  int v28; // [esp+6Ch] [ebp-CCh]
   int Path; // [esp+80h] [ebp-B8h]
-  int v31; // [esp+8Ch] [ebp-ACh]
-  char v32; // [esp+90h] [ebp-A8h]
-  struct CWalking *v33; // [esp+98h] [ebp-A0h]
-  bool v34; // [esp+A0h] [ebp-98h]
-  int v35; // [esp+B8h] [ebp-80h]
-  int v36; // [esp+BCh] [ebp-7Ch]
-  int v37; // [esp+C0h] [ebp-78h]
-  int v38; // [esp+C4h] [ebp-74h]
-  int v39; // [esp+C8h] [ebp-70h]
-  int v40; // [esp+CCh] [ebp-6Ch]
-  int v41; // [esp+D0h] [ebp-68h]
-  int v42; // [esp+D4h] [ebp-64h]
+  int v30; // [esp+8Ch] [ebp-ACh]
+  char v31; // [esp+90h] [ebp-A8h]
+  struct CWalking *v32; // [esp+98h] [ebp-A0h]
+  bool v33; // [esp+A0h] [ebp-98h]
+  int v34; // [esp+B8h] [ebp-80h]
+  int v35; // [esp+BCh] [ebp-7Ch]
+  int v36; // [esp+C0h] [ebp-78h]
+  int v37; // [esp+C4h] [ebp-74h]
+  int iDbgCurrentX; // [esp+C8h] [ebp-70h]
+  int iDbgCurrentY; // [esp+CCh] [ebp-6Ch]
+  int iIndex; // [esp+D0h] [ebp-68h]
+  int m_iFineWaypoint; // [esp+D4h] [ebp-64h]
   int j; // [esp+D8h] [ebp-60h]
-  int v44; // [esp+DCh] [ebp-5Ch]
-  void **v45; // [esp+E0h] [ebp-58h]
-  _DWORD *i; // [esp+E4h] [ebp-54h]
-  char v47; // [esp+EBh] [ebp-4Dh]
-  int v48; // [esp+ECh] [ebp-4Ch]
-  char v49; // [esp+F1h] [ebp-47h]
-  char v50; // [esp+F2h] [ebp-46h]
-  char v51; // [esp+F3h] [ebp-45h]
-  CEvn_Event v53; // [esp+F8h] [ebp-40h] BYREF
-  CEvn_Event v54; // [esp+110h] [ebp-28h] BYREF
-  int v55; // [esp+134h] [ebp-4h]
+  int v43; // [esp+DCh] [ebp-5Ch]
+  IMovingEntity *v44; // [esp+E0h] [ebp-58h]
+  CWalkingBase *i; // [esp+E4h] [ebp-54h]
+  char v46; // [esp+EBh] [ebp-4Dh]
+  int v47; // [esp+ECh] [ebp-4Ch]
+  char v48; // [esp+F1h] [ebp-47h]
+  char v49; // [esp+F2h] [ebp-46h]
+  char v50; // [esp+F3h] [ebp-45h]
+  CEvn_Event v52; // [esp+F8h] [ebp-40h] BYREF
+  CEvn_Event v53; // [esp+110h] [ebp-28h] BYREF
+  int v54; // [esp+134h] [ebp-4h]
 
-  v39 = Y16X16::UnpackXFast((int)a2);
-  v40 = Y16X16::UnpackYFast((int)a2);
-  if ( !(unsigned __int8)CWorldManager::InWorld(v39, v40)
+  iDbgCurrentX = Y16X16::UnpackXFast(a2);
+  iDbgCurrentY = Y16X16::UnpackYFast(a2);
+  if ( !CWorldManager::InWorld(iDbgCurrentX, iDbgCurrentY)
     && BBSupportDbgReport(2, "Pathing\\Walking.cpp", 796, "g_cWorld.InWorld(iDbgCurrentX, iDbgCurrentY)") == 1 )
   {
     __debugbreak();
   }
-  v41 = CWorldManager::Index(v39, v40);
-  v24 = CWorldManager::MapObjectId(v41);
-  if ( !(*(unsigned __int8 (__thiscall **)(CWalkingBase *, int))(*(_DWORD *)this + 20))(this, v41)
-    || (*(int (__thiscall **)(CWalkingBase *, int))(*(_DWORD *)this + 28))(this, v41) <= 0 )
+  iIndex = CWorldManager::Index(iDbgCurrentX, iDbgCurrentY);
+  iMapObjectId = CWorldManager::MapObjectId(iIndex);
+  if ( !this->IsNotBlocked(this, iIndex) || this->SectorId(this, iIndex) <= 0 )
   {
-    v2 = (void *)typeid(this);
-    v3 = (const char *)type_info::name(v2);
-    BBSupportTracePrintF(0, "Walk() [%s]: Invalid current position!", v3);
-    BBSupportTracePrintF(0, "  WalkState: %i.", *((_DWORD *)this + 2));
+    pTypeId = typeid(this);
+    pTypeName = type_info::name(pTypeId);
+    BBSupportTracePrintF(0, "Walk() [%s]: Invalid current position!", pTypeName);
+    BBSupportTracePrintF(0, "  WalkState: %i.", this->m_sData.m_iWalkState);
     CWalkingBase::DbgPrintElementInfo(this, "  Current:   ", a2);
-    CWalkingBase::DbgPrintElementInfo(this, "  WalkTo:    ", *((_DWORD *)this + 4));
-    CWalkingBase::DbgPrintElementInfo(this, "  WalkTo2:   ", *((_DWORD *)this + 5));
-    BBSupportTracePrintF(0, "  Map object id @ (%i, %i) is %i.", v39, v40, v24);
-    CMapObjectMgr::DbgPrintEntity(g_pMapObjectMgr, v24, 0, 0);
-    (*(void (__thiscall **)(void *, _DWORD))(*(_DWORD *)g_pTiling + 72))(g_pTiling, 0);
-    v19 = CEvn_Event::CEvn_Event(&v53, 0xDu, 0x70u, 0, 0);
-    v55 = 0;
-    IEventEngine::SendAMessage(g_pEvnEngine, v19);
-    v55 = -1;
-    CEvn_Event::~CEvn_Event(&v53);
+    CWalkingBase::DbgPrintElementInfo(this, "  WalkTo:    ", this->m_sData.m_iWalkToXY);
+    CWalkingBase::DbgPrintElementInfo(this, "  WalkTo2:   ", this->m_sData.m_iWalkTo2XY);
+    BBSupportTracePrintF(0, "  Map object id @ (%i, %i) is %i.", iDbgCurrentX, iDbgCurrentY, iMapObjectId);
+    CMapObjectMgr::DbgPrintEntity(g_pMapObjectMgr, iMapObjectId, 0, 0);
+    g_pTiling->DbgCheckTiling(g_pTiling, 0);
+    v18 = CEvn_Event::CEvn_Event(&v52, 0xDu, 0x70u, 0, 0);
+    v54 = 0;
+    IEventEngine::SendAMessage(g_pEvnEngine, v18);
+    v54 = -1;
+    CEvn_Event::~CEvn_Event(&v52);
     if ( BBSupportDbgReport(
            1,
            "Pathing\\Walking.cpp",
@@ -208,86 +198,83 @@ int  CWalkingBase::Walk(int a2) {
            "Invalid walk position! Dietmar: I need the trace file. [Ignore --> Pause]") == 1 )
       __debugbreak();
   }
-  if ( *((_DWORD *)this + 6) != *((_DWORD *)this + 4) && *((_DWORD *)this + 47) == 0 )
+  if ( this->m_sData.m_iLeaderWalkToXY != this->m_sData.m_iWalkToXY && this->m_sData.m_pLatestWalking == 0 )
   {
     v4 = CWalkingBase::Flags(this);
-    (*(void (__thiscall **)(CWalkingBase *, _DWORD, unsigned int))(*(_DWORD *)this + 8))(
-      this,
-      *((_DWORD *)this + 6),
-      v4 & 0xFFF43060);
+    this->InitB(this, this->m_sData.m_iLeaderWalkToXY, v4 & 0xFFF43060);
   }
-  if ( *((_DWORD *)this + 2) > 5u )
+  if ( this->m_sData.m_iWalkState > 5u )
   {
-    *((_DWORD *)this + 12) &= ~0x20000u;
-    if ( !(unsigned __int8)CWorldManager::InWorldPackedXY(*((_DWORD *)this + 4))
+    this->m_sData.m_uFlags &= ~0x20000u;
+    if ( !CWorldManager::InWorldPackedXY(this->m_sData.m_iWalkToXY)
       && BBSupportDbgReport(2, "Pathing\\Walking.cpp", 843, "g_cWorld.InWorldPackedXY(m_sData.m_iWalkToXY)") == 1 )
     {
       __debugbreak();
     }
-    CWalkingBase::GoalCheck(this, a2);
+    CWalkingBase::GoalCheck(this, (Y16X16 *)a2);
   }
-  v50 = 0;
   v49 = 0;
-  v51 = 0;
-  v38 = 0;
-  while ( v38 < 32 )
+  v48 = 0;
+  v50 = 0;
+  v37 = 0;
+  while ( v37 < 32 )
   {
-    switch ( *((_DWORD *)this + 2) )
+    switch ( this->m_sData.m_iWalkState )
     {
       case 0:
-        return (*(int (__thiscall **)(CWalkingBase *, Y16X16 *, _DWORD))(*(_DWORD *)this + 16))(this, a2, 0) | 0x10;
+        return this->IdleWalk(this, (Y16X16 *)a2, 0) | 0x10;
       case 1:
-        *((_DWORD *)this + 17) = 0;
-        *((_DWORD *)this + 2) = 2;
+        this->m_sData.field_40 = 0;
+        this->m_sData.m_iWalkState = 2;
         return 72;
       case 2:
-        return (*(int (__thiscall **)(CWalkingBase *, Y16X16 *, _DWORD))(*(_DWORD *)this + 16))(this, a2, 0) | 0x50;
+        return this->IdleWalk(this, (Y16X16 *)a2, 0) | 0x50;
       case 3:
-        *((_DWORD *)this + 17) = 0;
-        if ( *((_DWORD *)this + 45) == 0 && *((_DWORD *)this + 46) != 0 )
-          CWalkingBase::GroupLeaderWalking(this, *((_DWORD *)this + 5), 0);
-        if ( (*((_DWORD *)this + 12) & 0x40000) != 0 )
+        this->m_sData.field_40 = 0;
+        if ( this->m_sData.m_pPrevWalking == 0 && this->m_sData.m_pNextWalking != 0 )
+          CWalkingBase::GroupLeaderWalking(this, this->m_sData.m_iWalkTo2XY, 0);
+        if ( (this->m_sData.m_uFlags & 0x40000) != 0 )
         {
-          *((_DWORD *)this + 2) = 0;
+          this->m_sData.m_iWalkState = 0;
           return 24;
         }
         else
         {
-          if ( (*((_DWORD *)this + 12) & 0x4000) != 0 )
-            *((_DWORD *)this + 2) = 4;
+          if ( (this->m_sData.m_uFlags & 0x4000) != 0 )
+            this->m_sData.m_iWalkState = 4;
           else
-            *((_DWORD *)this + 2) = 5;
+            this->m_sData.m_iWalkState = 5;
           return 40;
         }
       case 4:
         return 40;
       case 5:
-        return (*(int (__thiscall **)(CWalkingBase *, Y16X16 *, _DWORD))(*(_DWORD *)this + 16))(this, a2, 0) | 0x30;
+        return this->IdleWalk(this, (Y16X16 *)a2, 0) | 0x30;
       case 6:
-        if ( v51 )
+        if ( v50 )
           goto LABEL_50;
-        if ( (int)++*((_DWORD *)this + 9) <= 16 )
+        if ( (int)++this->m_sData.field_20 <= 16 )
         {
-          if ( *((int *)this + 9) > 2 )
+          if ( (int)this->m_sData.field_20 > 2 )
           {
-            v34 = Y16X16::DistanceFast(a2, *((_DWORD *)this + 4)) <= 3;
-            if ( (CWalkingBase::Flags(this) & 0x2000) != 0 && v34 )
-              *((_DWORD *)this + 2) = 3;
+            v33 = Y16X16::DistanceFast(a2, this->m_sData.m_iWalkToXY) <= 3;
+            if ( (CWalkingBase::Flags(this) & 0x2000) != 0 && v33 )
+              this->m_sData.m_iWalkState = 3;
             else
-              *((_DWORD *)this + 2) = 9;
+              this->m_sData.m_iWalkState = 9;
             goto LABEL_16;
           }
-          if ( Y16X16::DistanceFast(a2, *((_DWORD *)this + 10)) == 1 )
+          if ( Y16X16::DistanceFast(a2, this->m_sData.m_iFineWaypoint) == 1 )
           {
-            v23 = CWorldManager::Index(*((_DWORD *)this + 10));
-            v37 = CWorldManager::OccupyingEntityId(v23);
-            if ( v37 )
+            v22 = CWorldManager::Index(this->m_sData.m_iFineWaypoint);
+            v36 = CWorldManager::OccupyingEntityId(v22);
+            if ( v36 )
             {
-              v45 = (void **)CMapObjectMgr::EntityPtr(v37);
-              if ( v45 )
+              v44 = (IMovingEntity *)CMapObjectMgr::EntityPtr(v36);
+              if ( v44 )
               {
                 if ( !j____RTDynamicCast(
-                        v45,
+                        (void **)&v44->__vftable,
                         0,
                         &IEntity__RTTI_Type_Descriptor_,
                         &IMovingEntity__RTTI_Type_Descriptor_,
@@ -296,44 +283,44 @@ int  CWalkingBase::Walk(int a2) {
                 {
                   __debugbreak();
                 }
-                v33 = IMovingEntity::Walking((IMovingEntity *)v45);
-                if ( v33 )
+                v32 = IMovingEntity::Walking(v44);
+                if ( v32 )
                 {
-                  if ( *((_DWORD *)v33 + 2) == 6 && *((Y16X16 **)v33 + 10) == a2 )
+                  if ( v32[2].__vftable == (CWalking_vtbl *)6 && v32[10].__vftable == (CWalking_vtbl *)a2 )
                   {
-                    *((_DWORD *)this + 2) = 9;
+                    this->m_sData.m_iWalkState = 9;
                     goto LABEL_16;
                   }
                 }
               }
             }
           }
-          v51 = 1;
+          v50 = 1;
 LABEL_50:
-          if ( *((Y16X16 **)this + 10) == a2 )
+          if ( this->m_sData.m_iFineWaypoint == a2 )
           {
-            *((_DWORD *)this + 9) = 0;
-            if ( CDirCache::Count((CWalkingBase *)((char *)this + 160)) <= 0 )
+            this->m_sData.field_20 = 0;
+            if ( CDirCache::Count((CDirCache *)this->m_sData.gap_48) <= 0 )
             {
-              *((_DWORD *)this + 2) = 9;
+              this->m_sData.m_iWalkState = 9;
               goto LABEL_16;
             }
-            v48 = CDirCache::Back((CWalkingBase *)((char *)this + 160));
-            *((_DWORD *)this + 10) = (char *)a2 + Y16X16::NeighborModifier((Y16X16 *)v48);
-            CDirCache::PopBack((CWalkingBase *)((char *)this + 160));
+            v47 = CDirCache::Back((CDirCache *)this->m_sData.gap_48);
+            this->m_sData.m_iFineWaypoint = a2 + Y16X16::NeighborModifier(v47);
+            CDirCache::PopBack((CDirCache *)this->m_sData.gap_48);
           }
           else
           {
-            if ( Y16X16::DistanceFast(a2, *((_DWORD *)this + 10)) != 1 )
+            if ( Y16X16::DistanceFast(a2, this->m_sData.m_iFineWaypoint) != 1 )
             {
-              *((_DWORD *)this + 2) = 9;
+              this->m_sData.m_iWalkState = 9;
               goto LABEL_16;
             }
-            v48 = Y16X16::DirectionFast(a2, *((_DWORD *)this + 10));
+            v47 = Y16X16::DirectionFast(a2, this->m_sData.m_iFineWaypoint);
           }
-          if ( v48 < 0 && BBSupportDbgReport(2, "Pathing\\Walking.cpp", 1018, "iDir >= 0") == 1 )
+          if ( v47 < 0 && BBSupportDbgReport(2, "Pathing\\Walking.cpp", 1018, "iDir >= 0") == 1 )
             __debugbreak();
-          if ( *((Y16X16 **)this + 10) != (Y16X16 *)((char *)a2 + Y16X16::NeighborModifier((Y16X16 *)v48))
+          if ( this->m_sData.m_iFineWaypoint != a2 + Y16X16::NeighborModifier(v47)
             && BBSupportDbgReport(
                  2,
                  "Pathing\\Walking.cpp",
@@ -342,48 +329,48 @@ LABEL_50:
           {
             __debugbreak();
           }
-          if ( *((_DWORD *)this + 1) == 4 )
+          if ( this->m_sData.m_iWalkingType == 4 )
           {
-            v6 = CWorldManager::Index(*((_DWORD *)this + 10));
-            if ( (*(unsigned __int8 (__thiscall **)(CWalkingBase *, int))(*(_DWORD *)this + 20))(this, v6) )
+            v6 = CWorldManager::Index(this->m_sData.m_iFineWaypoint);
+            if ( this->IsNotBlocked(this, v6) )
             {
-              v7 = CWorldManager::Index(*((_DWORD *)this + 10));
-              v32 = CWaterFlags::WaterFlags(v7);
-              v44 = (v32 & 0xF0) >> 4;
-              if ( v44 )
-                *((_DWORD *)this + 2) = 9;
-              if ( v44 > 2 )
+              v7 = CWorldManager::Index(this->m_sData.m_iFineWaypoint);
+              v31 = CWaterFlags::WaterFlags(v7);
+              v43 = (v31 & 0xF0) >> 4;
+              if ( v43 )
+                this->m_sData.m_iWalkState = 9;
+              if ( v43 > 2 )
               {
-                v8 = Y16X16::NeighborModifier((Y16X16 *)(v48 + 3));
-                v9 = CWorldManager::Index((int)a2 + v8);
+                v8 = Y16X16::NeighborModifier(v47 + 3);
+                v9 = CWorldManager::Index(a2 + v8);
                 CWaterFlags::WaterFlags(v9);
-                if ( (v32 & 0xF0) >> 4 < v44 + 2 )
+                if ( (v31 & 0xF0) >> 4 < v43 + 2 )
                 {
-                  if ( (int)Y16X16::DistanceFast(a2, *((_DWORD *)this + 4)) > 3 )
+                  if ( Y16X16::DistanceFast(a2, this->m_sData.m_iWalkToXY) > 3 )
                   {
-                    v31 = *((_DWORD *)this + 14) + 1;
-                    *((_DWORD *)this + 14) = v31;
-                    if ( v31 >= 2 && v44 <= 7 )
-                      return v48;
+                    v30 = this->m_sData.field_34 + 1;
+                    this->m_sData.field_34 = v30;
+                    if ( v30 >= 2 && v43 <= 7 )
+                      return v47;
                     else
                       return 136;
                   }
                   else
                   {
-                    *((_DWORD *)this + 2) = 3;
+                    this->m_sData.m_iWalkState = 3;
                     return 40;
                   }
                 }
                 else
                 {
-                  *((_DWORD *)this + 14) = 0;
-                  return v48;
+                  this->m_sData.field_34 = 0;
+                  return v47;
                 }
               }
               else
               {
-                *((_DWORD *)this + 14) = 0;
-                return v48;
+                this->m_sData.field_34 = 0;
+                return v47;
               }
             }
             else
@@ -393,54 +380,54 @@ LABEL_50:
               {
                 __debugbreak();
               }
-              *((_DWORD *)this + 2) = 1;
+              this->m_sData.m_iWalkState = 1;
               return 72;
             }
           }
           else
           {
-            v10 = CWorldManager::Index(*((_DWORD *)this + 10));
-            if ( (*(unsigned __int8 (__thiscall **)(CWalkingBase *, int))(*(_DWORD *)this + 20))(this, v10) )
-              return v48;
-            if ( v50 )
+            v10 = CWorldManager::Index(this->m_sData.m_iFineWaypoint);
+            if ( this->IsNotBlocked(this, v10) )
+              return v47;
+            if ( v49 )
             {
               CTrace::Print(">>>>>> CWalking::Walk(): Waypoint blocked! <<<<<<");
-              *((_DWORD *)this + 2) = 7;
+              this->m_sData.m_iWalkState = 7;
             }
             else
             {
-              v50 = 1;
-              *((_DWORD *)this + 2) = 9;
+              v49 = 1;
+              this->m_sData.m_iWalkState = 9;
             }
             goto LABEL_16;
           }
         }
         else
         {
-          *((_DWORD *)this + 9) = 0;
-          *((_DWORD *)this + 2) = 7;
-          return (*(int (__thiscall **)(CWalkingBase *, Y16X16 *, _DWORD))(*(_DWORD *)this + 16))(this, a2, 0);
+          this->m_sData.field_20 = 0;
+          this->m_sData.m_iWalkState = 7;
+          return this->IdleWalk(this, (Y16X16 *)a2, 0);
         }
       case 7:
-        *((_DWORD *)this + 2) = 8;
-        CWalkingBase::GoalCheck(this, a2);
-        if ( *((_DWORD *)this + 2) != 8 )
+        this->m_sData.m_iWalkState = 8;
+        CWalkingBase::GoalCheck(this, (Y16X16 *)a2);
+        if ( this->m_sData.m_iWalkState != 8 )
           CTrace::Print(
             "### CWalkingBase::Walk(): STATE_EX_GOAL_CHECK has changed walk state! New state %i. ###",
-            *((_DWORD *)this + 2));
+            this->m_sData.m_iWalkState);
         goto LABEL_16;
       case 8:
         v11 = CWalkingBase::Flags(this);
-        Path = CAStarTiling::FindPath(a2, *((_DWORD *)this + 5), (CWalkingBase *)((char *)this + 72), v11);
+        Path = CAStarTiling::FindPath(a2, this->m_sData.m_iWalkTo2XY, &this->m_sData.m_cCoarseWaypoints, v11);
         if ( Path )
         {
           if ( ((Path < 0) & ((CWalkingBase::Flags(this) & 0x40) != 0)) != 0 )
           {
-            *((_DWORD *)this + 4) = CWaypoints::Goal((CWalkingBase *)((char *)this + 72));
-            *((_DWORD *)this + 5) = *((_DWORD *)this + 4);
-            *((_DWORD *)this + 8) = CWorldManager::Index(*((_DWORD *)this + 4));
+            this->m_sData.m_iWalkToXY = CWaypoints::Goal(&this->m_sData.m_cCoarseWaypoints);
+            this->m_sData.m_iWalkTo2XY = this->m_sData.m_iWalkToXY;
+            this->m_sData.m_iWalkToIndex = CWorldManager::Index(this->m_sData.m_iWalkToXY);
           }
-          if ( CWaypoints::CachedWaypointsCount((CWalkingBase *)((char *)this + 72)) <= 0
+          if ( CWaypoints::CachedWaypointsCount(&this->m_sData.m_cCoarseWaypoints) <= 0
             && BBSupportDbgReport(
                  2,
                  "Pathing\\Walking.cpp",
@@ -449,10 +436,10 @@ LABEL_50:
           {
             __debugbreak();
           }
-          *((_DWORD *)this + 11) = CWaypoints::Back((char *)this + 72, v18);
-          CWaypoints::PopBack((char *)this + 72);
-          if ( CWaypoints::CachedWaypointsCount((CWalkingBase *)((char *)this + 72)) <= 0
-            && *((_DWORD *)this + 11) != *((_DWORD *)this + 5)
+          this->m_sData.m_iCoarseWaypointXY = CWaypoints::Back(&this->m_sData.m_cCoarseWaypoints);
+          CWaypoints::PopBack(&this->m_sData.m_cCoarseWaypoints);
+          if ( CWaypoints::CachedWaypointsCount(&this->m_sData.m_cCoarseWaypoints) <= 0
+            && this->m_sData.m_iCoarseWaypointXY != this->m_sData.m_iWalkTo2XY
             && BBSupportDbgReport(
                  2,
                  "Pathing\\Walking.cpp",
@@ -461,80 +448,80 @@ LABEL_50:
           {
             __debugbreak();
           }
-          *((_DWORD *)this + 2) = 9;
+          this->m_sData.m_iWalkState = 9;
         }
         else
         {
-          *((_DWORD *)this + 2) = 1;
+          this->m_sData.m_iWalkState = 1;
         }
         goto LABEL_16;
       case 9:
-        if ( !*((_DWORD *)this + 17) )
+        if ( !this->m_sData.field_40 )
           goto LABEL_113;
-        if ( *((_DWORD *)this + 45) == 0 && *((_DWORD *)this + 46) != 0 )
+        if ( this->m_sData.m_pPrevWalking == 0 && this->m_sData.m_pNextWalking != 0 )
         {
-          if ( *((int *)this + 17) < 0 || (int)Y16X16::DistanceFast(*((Y16X16 **)this + 17), a2) <= 2 )
+          if ( (int)this->m_sData.field_40 < 0 || Y16X16::DistanceFast(this->m_sData.field_40, a2) <= 2 )
           {
-            v36 = 0;
             v35 = 0;
-            for ( i = (_DWORD *)*((_DWORD *)this + 46); i; i = (_DWORD *)i[46] )
+            v34 = 0;
+            for ( i = this->m_sData.m_pNextWalking; i; i = i->m_sData.m_pNextWalking )
             {
-              if ( (*(int (__thiscall **)(_DWORD *, _DWORD))(*i + 52))(i, 0) >= 6 )
-                ++v35;
-              ++v36;
+              if ( ((int (__thiscall *)(CWalkingBase *, _DWORD))i->State)(i, 0) >= 6 )
+                ++v34;
+              ++v35;
             }
-            if ( v35 > v36 / 4 )
+            if ( v34 > v35 / 4 )
             {
-              *((_DWORD *)this + 17) = -1;
-              return (*(int (__thiscall **)(CWalkingBase *, Y16X16 *, _DWORD))(*(_DWORD *)this + 16))(this, a2, 0) | 0x10;
+              this->m_sData.field_40 = -1;
+              return this->IdleWalk(this, (Y16X16 *)a2, 0) | 0x10;
             }
           }
         }
         else
         {
-          *((_DWORD *)this + 17) = 0;
+          this->m_sData.field_40 = 0;
         }
 LABEL_113:
-        if ( *((_DWORD *)this + 11) == *((_DWORD *)this + 5) )
+        if ( this->m_sData.m_iCoarseWaypointXY == this->m_sData.m_iWalkTo2XY )
           goto LABEL_119;
-        v47 = CWaypoints::GoalCached((CWalkingBase *)((char *)this + 72));
-        v29 = CWaypoints::CachedWaypointsCount((CWalkingBase *)((char *)this + 72));
-        if ( v29 && (v29 >= 2 || v47 != 0) )
+        v46 = CWaypoints::GoalCached(&this->m_sData.m_cCoarseWaypoints);
+        v28 = CWaypoints::CachedWaypointsCount(&this->m_sData.m_cCoarseWaypoints);
+        if ( v28 && (v28 >= 2 || v46 != 0) )
         {
-          if ( CWalkingBase::NextCoarseWaypoint(this, (int)a2) )
+          if ( CWalkingBase::NextCoarseWaypoint(this, a2) )
           {
 LABEL_119:
-            if ( *((_DWORD *)this + 11) == *((_DWORD *)this + 5) )
-              v28 = *((_DWORD *)this + 4);
+            if ( this->m_sData.m_iCoarseWaypointXY == this->m_sData.m_iWalkTo2XY )
+              m_iWalkToXY = this->m_sData.m_iWalkToXY;
             else
-              v28 = *((_DWORD *)this + 11);
-            if ( (*(unsigned __int8 (__thiscall **)(CWalkingBase *, Y16X16 *, int, char *))(*(_DWORD *)this + 68))(
+              m_iWalkToXY = this->m_sData.m_iCoarseWaypointXY;
+            if ( ((unsigned __int8 (__thiscall *)(CWalkingBase *, int, int, _BYTE *))this->FindPathAStar64)(
                    this,
                    a2,
-                   v28,
-                   (char *)this + 160) )
+                   m_iWalkToXY,
+                   this->m_sData.gap_48) )
             {
-              if ( CDirCache::Count((CWalkingBase *)((char *)this + 160)) <= 0
+              if ( CDirCache::Count((CDirCache *)this->m_sData.gap_48) <= 0
                 && BBSupportDbgReport(2, "Pathing\\Walking.cpp", 1251, "m_sData.m_cFineWaypoints.Count() > 0") == 1 )
               {
                 __debugbreak();
               }
-              v12 = (Y16X16 *)CDirCache::Back((CWalkingBase *)((char *)this + 160));
-              *((_DWORD *)this + 10) = (char *)a2 + Y16X16::NeighborModifier(v12);
-              CDirCache::PopBack((CWalkingBase *)((char *)this + 160));
-              if ( *((_DWORD *)this + 45) == 0 && *((_DWORD *)this + 46) != 0 )
+              v12 = CDirCache::Back((CDirCache *)this->m_sData.gap_48);
+              this->m_sData.m_iFineWaypoint = a2 + Y16X16::NeighborModifier(v12);
+              CDirCache::PopBack((CDirCache *)this->m_sData.gap_48);
+              if ( this->m_sData.m_pPrevWalking == 0 && this->m_sData.m_pNextWalking != 0 )
               {
-                v22 = CDirCache::Count((CWalkingBase *)((char *)this + 160));
-                v42 = *((_DWORD *)this + 10);
-                for ( j = 0; j < v22; ++j )
+                v21 = CDirCache::Count((CDirCache *)this->m_sData.gap_48);
+                m_iFineWaypoint = this->m_sData.m_iFineWaypoint;
+                for ( j = 0; j < v21; ++j )
                 {
-                  v13 = (Y16X16 *)CDirCache::operator[]((_BYTE *)this + 160, j);
-                  v42 += Y16X16::NeighborModifier(v13);
+                  v13 = CDirCache::operator[](this->m_sData.gap_48, j);
+                  m_iFineWaypoint += Y16X16::NeighborModifier(v13);
                 }
-                *((_DWORD *)this + 17) = v42;
-                CWalkingBase::GroupLeaderWalking(this, v42, 0x40000);
+                this->m_sData.field_40 = m_iFineWaypoint;
+                CWalkingBase::GroupLeaderWalking(this, m_iFineWaypoint, 0x40000);
               }
-              if ( Y16X16::DistanceFast(a2, *((_DWORD *)this + 10)) != 1
+              if ( Y16X16::DistanceFast(a2, this->m_sData.m_iFineWaypoint) != 1
                 && BBSupportDbgReport(
                      2,
                      "Pathing\\Walking.cpp",
@@ -543,58 +530,58 @@ LABEL_119:
               {
                 __debugbreak();
               }
-              *((_DWORD *)this + 2) = 6;
+              this->m_sData.m_iWalkState = 6;
             }
             else
             {
-              v26 = Y16X16::UnpackXFast((int)a2);
-              v27 = Y16X16::UnpackYFast((int)a2);
-              v21 = CWorldManager::Index(v26, v27);
-              v25 = CWorldManager::MapObjectId(v21);
-              v14 = (void *)typeid(this);
-              v15 = (const char *)type_info::name(v14);
+              v25 = Y16X16::UnpackXFast(a2);
+              v26 = Y16X16::UnpackYFast(a2);
+              v20 = CWorldManager::Index(v25, v26);
+              v24 = CWorldManager::MapObjectId(v20);
+              v14 = typeid(this);
+              v15 = type_info::name(v14);
               BBSupportTracePrintF(0, "Walk() [%s]: FindPathAStar64() failed!", v15);
               CWalkingBase::DbgPrintElementInfo(this, "  Current:  ", a2);
-              CWalkingBase::DbgPrintElementInfo(this, "  Waypoint: ", v28);
-              CWalkingBase::DbgPrintElementInfo(this, "  WalkTo:   ", *((_DWORD *)this + 4));
-              CWalkingBase::DbgPrintElementInfo(this, "  WalkTo2:  ", *((_DWORD *)this + 5));
-              BBSupportTracePrintF(0, "  Map object id @ (%i, %i) is %i.", v26, v27, v25);
-              CMapObjectMgr::DbgPrintEntity(g_pMapObjectMgr, v25, 0, 0);
-              (*(void (__thiscall **)(void *, _DWORD))(*(_DWORD *)g_pTiling + 72))(g_pTiling, 0);
-              if ( v49 )
+              CWalkingBase::DbgPrintElementInfo(this, "  Waypoint: ", m_iWalkToXY);
+              CWalkingBase::DbgPrintElementInfo(this, "  WalkTo:   ", this->m_sData.m_iWalkToXY);
+              CWalkingBase::DbgPrintElementInfo(this, "  WalkTo2:  ", this->m_sData.m_iWalkTo2XY);
+              BBSupportTracePrintF(0, "  Map object id @ (%i, %i) is %i.", v25, v26, v24);
+              CMapObjectMgr::DbgPrintEntity(g_pMapObjectMgr, v24, 0, 0);
+              g_pTiling->DbgCheckTiling(g_pTiling, 0);
+              if ( v48 )
               {
-                v20 = CEvn_Event::CEvn_Event(&v54, 0xDu, 0x70u, 0, 0);
-                v55 = 1;
-                IEventEngine::SendAMessage(g_pEvnEngine, v20);
-                v55 = -1;
-                CEvn_Event::~CEvn_Event(&v54);
+                v19 = CEvn_Event::CEvn_Event(&v53, 0xDu, 0x70u, 0, 0);
+                v54 = 1;
+                IEventEngine::SendAMessage(g_pEvnEngine, v19);
+                v54 = -1;
+                CEvn_Event::~CEvn_Event(&v53);
                 if ( BBSupportDbgReport(
                        1,
                        "Pathing\\Walking.cpp",
                        1315,
                        "FindPathAStar64 failed! Dietmar: I need the trace file. [Ignore --> Pause]") == 1 )
                   __debugbreak();
-                *((_DWORD *)this + 2) = 1;
+                this->m_sData.m_iWalkState = 1;
               }
               else
               {
                 BBSupportTracePrintF(0, "FindPathAStar64 failed once [may be ignored]");
-                v49 = 1;
-                *((_DWORD *)this + 2) = 7;
+                v48 = 1;
+                this->m_sData.m_iWalkState = 7;
               }
             }
           }
           else
           {
-            *((_DWORD *)this + 2) = 8;
+            this->m_sData.m_iWalkState = 8;
           }
         }
         else
         {
-          *((_DWORD *)this + 2) = 8;
+          this->m_sData.m_iWalkState = 8;
         }
 LABEL_16:
-        ++v38;
+        ++v37;
         break;
       default:
         if ( "Walk(): Invalid walk state!"
@@ -602,20 +589,20 @@ LABEL_16:
         {
           __debugbreak();
         }
-        *((_DWORD *)this + 2) = 1;
+        this->m_sData.m_iWalkState = 1;
         goto LABEL_16;
     }
   }
-  v16 = (void *)typeid(this);
-  v17 = (const char *)type_info::name(v16);
+  v16 = typeid(this);
+  v17 = type_info::name(v16);
   BBSupportTracePrintF(3, "### Walk() [%s]: LoopCount >= 32! ###", v17);
-  *((_DWORD *)this + 2) = 7;
+  this->m_sData.m_iWalkState = 7;
   return 8;
 }
 
 
 // address=[0x15f7bc0]
-// Decompiled from int __thiscall CWalkingBase::IdleWalk(CWalkingBase *this, Y16X16 *a2, int a3)
+// Decompiled from int __thiscall CWalkingBase::IdleWalk(CWalkingBase *this, int a2, int a3)
 int  CWalkingBase::IdleWalk(int a2, int a3) {
   
   int v3; // eax
@@ -626,12 +613,12 @@ int  CWalkingBase::IdleWalk(int a2, int a3) {
   int v9; // [esp+1Ch] [ebp-B8h]
   int v10; // [esp+20h] [ebp-B4h]
   int v11; // [esp+24h] [ebp-B0h]
-  int v12; // [esp+28h] [ebp-ACh]
+  unsigned int v12; // [esp+28h] [ebp-ACh]
   int v13; // [esp+2Ch] [ebp-A8h]
   int v14; // [esp+30h] [ebp-A4h]
   int v15; // [esp+34h] [ebp-A0h]
   int v16; // [esp+38h] [ebp-9Ch]
-  int v17; // [esp+3Ch] [ebp-98h]
+  unsigned int v17; // [esp+3Ch] [ebp-98h]
   int v18; // [esp+40h] [ebp-94h]
   int v19; // [esp+44h] [ebp-90h]
   int v20; // [esp+48h] [ebp-8Ch]
@@ -659,13 +646,13 @@ int  CWalkingBase::IdleWalk(int a2, int a3) {
   v20 = 0;
   v18 = 0;
   v25 = 0;
-  v15 = CWorldManager::Index((int)a2);
+  v15 = CWorldManager::Index(a2);
   for ( i = 0; i < 6; ++i )
   {
     v19 = v15 + CWorldManager::NeighborRelIndex(i);
-    if ( (*(unsigned __int8 (__thiscall **)(CWalkingBase *, int))(*(_DWORD *)this + 20))(this, v19) )
+    if ( this->IsNotBlocked(this, v19) )
     {
-      if ( (*(unsigned __int8 (__thiscall **)(CWalkingBase *, int))(*(_DWORD *)this + 24))(this, v19) )
+      if ( this->IsNotOccupied(this, v19) )
       {
         if ( CWorldManager::MoveCostsBits(v19) >= 7 )
         {
@@ -693,14 +680,14 @@ int  CWalkingBase::IdleWalk(int a2, int a3) {
   v40[6] = v40[0];
   if ( v25 && (v18 || v25 > 2) || CWorldManager::MoveCostsBits(v15) != 7 )
   {
-    *((_DWORD *)this + 7) = -1;
+    this->m_sData.m_iIdleWalkToXY = -1;
     if ( (CWalkingBase::Flags(this) & 0x20000) != 0
-      && v40[Grid::TurnLeft(*((Grid **)this + 3))] == 2
-      && v40[*((_DWORD *)this + 3)] == 2
-      && v40[*((_DWORD *)this + 3) + 1] == 2 )
+      && v40[Grid::TurnLeft(this->m_sData.field_8)] == 2
+      && v40[this->m_sData.field_8] == 2
+      && v40[this->m_sData.field_8 + 1] == 2 )
     {
-      *((_DWORD *)this + 12) &= ~0x20000u;
-      return *((_DWORD *)this + 3);
+      this->m_sData.m_uFlags &= ~0x20000u;
+      return this->m_sData.field_8;
     }
     else
     {
@@ -714,10 +701,9 @@ int  CWalkingBase::IdleWalk(int a2, int a3) {
           {
             v23 = v15 + CWorldManager::SurroundingHexPointRelIndex(j);
             v22 = j - 6;
-            if ( CWorldManager::InWorld(v23)
-              && (*(unsigned __int8 (__thiscall **)(CWalkingBase *, unsigned int))(*(_DWORD *)this + 20))(this, v23) )
+            if ( CWorldManager::InWorld(v23) && this->IsNotBlocked(this, v23) )
             {
-              if ( (*(unsigned __int8 (__thiscall **)(CWalkingBase *, unsigned int))(*(_DWORD *)this + 24))(this, v23) )
+              if ( this->IsNotOccupied(this, v23) )
               {
                 if ( CWorldManager::MoveCostsBits(v23) >= 7 )
                   v39[v22 - 1] = 1;
@@ -761,55 +747,55 @@ int  CWalkingBase::IdleWalk(int a2, int a3) {
             }
           }
           if ( v29 > 0 )
-            v29 = CStateGame::Rand(g_pGame) % (unsigned int)v29;
+            v29 = CStateGame::Rand(g_pGame) % v29;
           for ( ii = 0; ii < 6; ++ii )
           {
             if ( v29 < v40[ii] )
             {
-              *((_DWORD *)this + 12) |= 0x20000u;
-              *((_DWORD *)this + 3) = ii;
+              this->m_sData.m_uFlags |= 0x20000u;
+              this->m_sData.field_8 = ii;
               return ii;
             }
           }
         }
       }
-      *((_DWORD *)this + 12) &= ~0x20000u;
+      this->m_sData.m_uFlags &= ~0x20000u;
       return 8;
     }
   }
   else
   {
-    v3 = CWorldManager::Index((int)a2);
-    v9 = (*(int (__thiscall **)(CWalkingBase *, int))(*(_DWORD *)this + 28))(this, v3);
-    if ( (*((_DWORD *)this + 12) & 0x20000) == 0 )
-      *((_DWORD *)this + 7) = -1;
-    *((_DWORD *)this + 12) &= ~0x20000u;
-    if ( (unsigned __int8)CWorldManager::InWorldPackedXY(*((_DWORD *)this + 7)) )
+    v3 = CWorldManager::Index(a2);
+    v9 = this->SectorId(this, v3);
+    if ( (this->m_sData.m_uFlags & 0x20000) == 0 )
+      this->m_sData.m_iIdleWalkToXY = -1;
+    this->m_sData.m_uFlags &= ~0x20000u;
+    if ( CWorldManager::InWorldPackedXY(this->m_sData.m_iIdleWalkToXY) )
     {
-      v11 = CWorldManager::Index(*((_DWORD *)this + 7));
-      v10 = (*(int (__thiscall **)(CWalkingBase *, int))(*(_DWORD *)this + 28))(this, v11);
+      v11 = CWorldManager::Index(this->m_sData.m_iIdleWalkToXY);
+      v10 = this->SectorId(this, v11);
       if ( CWorldManager::MoveCostsBits(v11) == 7 || v10 <= 0 || v9 != v10 )
-        *((_DWORD *)this + 7) = -1;
+        this->m_sData.m_iIdleWalkToXY = -1;
     }
     else
     {
-      *((_DWORD *)this + 7) = -1;
+      this->m_sData.m_iIdleWalkToXY = -1;
     }
-    if ( *((int *)this + 7) < 0 )
+    if ( this->m_sData.m_iIdleWalkToXY < 0 )
     {
-      v6 = Y16X16::UnpackXFast((int)a2);
-      v5 = Y16X16::UnpackYFast((int)a2);
+      v6 = Y16X16::UnpackXFast(a2);
+      v5 = Y16X16::UnpackYFast(a2);
       v16 = -1;
       v8 = -1;
       for ( jj = 0; jj < SurroundingHexPointsCount(15); ++jj )
       {
         v12 = v6 + SSurroundingPoint8::X(&g_sSurroundingHexPoints8[4 * jj]);
         v17 = v5 + SSurroundingPoint8::Y(&g_sSurroundingHexPoints8[4 * jj]);
-        if ( (unsigned __int8)CWorldManager::InWorld(v12, v17) )
+        if ( CWorldManager::InWorld(v12, v17) )
         {
           v13 = CWorldManager::Index(v12, v17);
-          if ( (*(int (__thiscall **)(CWalkingBase *, int))(*(_DWORD *)this + 28))(this, v13) == v9
-            && (*(unsigned __int8 (__thiscall **)(CWalkingBase *, int))(*(_DWORD *)this + 24))(this, v13)
+          if ( this->SectorId(this, v13) == v9
+            && this->IsNotOccupied(this, v13)
             && CWorldManager::MoveCostsBits(v13) < 7 )
           {
             v16 = v12;
@@ -820,21 +806,21 @@ int  CWalkingBase::IdleWalk(int a2, int a3) {
       }
       if ( v16 < 0 )
         return 8;
-      *((_DWORD *)this + 7) = Y16X16::PackXYFast(v16, v8);
+      this->m_sData.m_iIdleWalkToXY = Y16X16::PackXYFast(v16, v8);
     }
-    v30 = Y16X16::DirectionFast(a2, *((_DWORD *)this + 7));
-    v27 = v40[Grid::TurnLeft((Grid *)v30)];
-    v26 = v40[Grid::TurnLeft((Grid *)v30)];
+    v30 = Y16X16::DirectionFast(a2, this->m_sData.m_iIdleWalkToXY);
+    v27 = v40[Grid::TurnLeft(v30)];
+    v26 = v40[Grid::TurnLeft(v30)];
     if ( v40[v30] < v27 || v40[v30] < v26 )
     {
       if ( v27 == v26 )
         CStateGame::Rand(g_pGame);
-      v30 = Grid::TurnLeft((Grid *)v30);
+      v30 = Grid::TurnLeft(v30);
     }
     if ( (int)v40[v30] <= 0 )
       v30 = 8;
     if ( v30 == 8 )
-      *((_DWORD *)this + 7) = -1;
+      this->m_sData.m_iIdleWalkToXY = -1;
     return v30;
   }
 }
@@ -844,7 +830,7 @@ int  CWalkingBase::IdleWalk(int a2, int a3) {
 // Decompiled from int __thiscall CWalkingBase::DestinationXY(CWalkingBase *this)
 int  CWalkingBase::DestinationXY(void)const {
   
-  return *((_DWORD *)this + 4);
+  return this->m_sData.m_iWalkToXY;
 }
 
 
@@ -858,7 +844,7 @@ int  CWalkingBase::State(int a2)const {
   int v5; // [esp+Ch] [ebp-Ch]
   int v6; // [esp+10h] [ebp-8h]
 
-  switch ( *((_DWORD *)this + 2) )
+  switch ( this->m_sData.m_iWalkState )
   {
     case 0:
     case 1:
@@ -866,12 +852,12 @@ int  CWalkingBase::State(int a2)const {
     case 3:
     case 4:
     case 5:
-      result = *((_DWORD *)this + 2) + 1;
+      result = this->m_sData.m_iWalkState + 1;
       break;
     case 6:
-      if ( *((_DWORD *)this + 5) == *((_DWORD *)this + 11) )
+      if ( this->m_sData.m_iWalkTo2XY == this->m_sData.m_iCoarseWaypointXY )
       {
-        v6 = Y16X16::DistanceFast(*((Y16X16 **)this + 4), *((_DWORD *)this + 10));
+        v6 = Y16X16::DistanceFast(this->m_sData.m_iWalkToXY, this->m_sData.m_iFineWaypoint);
         if ( v6 <= 14 )
           v4 = v6 + 1;
         else
@@ -880,7 +866,7 @@ int  CWalkingBase::State(int a2)const {
       }
       else
       {
-        v5 = Y16X16::DistanceFast(*((Y16X16 **)this + 4), *((_DWORD *)this + 11));
+        v5 = Y16X16::DistanceFast(this->m_sData.m_iWalkToXY, this->m_sData.m_iCoarseWaypointXY);
         if ( v5 <= 14 )
           v3 = v5 + 1;
         else
@@ -914,7 +900,7 @@ int  CWalkingBase::State(int a2)const {
 // Decompiled from int __thiscall CWalkingBase::OwnerId(CWalkingBase *this)
 int  CWalkingBase::OwnerId(void)const {
   
-  return *((_DWORD *)this + 13) & 0xF;
+  return this->m_sData.m_iEntityFlags & 0xF;
 }
 
 
@@ -922,7 +908,7 @@ int  CWalkingBase::OwnerId(void)const {
 // Decompiled from bool __thiscall CWalkingBase::IsNotBlocked(CWalkingBase *this, int a2)
 bool  CWalkingBase::IsNotBlocked(int a2) {
   
-  return (unsigned __int8)CWorldManager::IsBlockedLand(a2) == 0;
+  return !CWorldManager::IsBlockedLand(a2);
 }
 
 
@@ -956,7 +942,7 @@ int  CWalkingBase::GetNextWaypoint(void) {
   
   int result; // eax
 
-  switch ( *((_DWORD *)this + 2) )
+  switch ( this->m_sData.m_iWalkState )
   {
     case 0:
     case 1:
@@ -967,7 +953,7 @@ int  CWalkingBase::GetNextWaypoint(void) {
       result = -1;
       break;
     case 6:
-      result = *((_DWORD *)this + 11);
+      result = this->m_sData.m_iCoarseWaypointXY;
       break;
     case 7:
       result = -1;
@@ -976,7 +962,7 @@ int  CWalkingBase::GetNextWaypoint(void) {
       result = -1;
       break;
     case 9:
-      result = *((_DWORD *)this + 11);
+      result = this->m_sData.m_iCoarseWaypointXY;
       break;
     default:
       result = -1;
@@ -991,20 +977,20 @@ int  CWalkingBase::GetNextWaypoint(void) {
  CWalkingBase::CWalkingBase(int a2, int a3) {
   
   CWalking::CWalking(this);
-  *(_DWORD *)this = &CWalkingBase::_vftable_;
-  memset((char *)this + 4, 0, 0xBCu);
-  *((_DWORD *)this + 1) = a2;
-  *((_DWORD *)this + 2) = 1;
-  *((_DWORD *)this + 13) = a3;
+  this->__vftable = (CWalking_vtbl *)&CWalkingBase::_vftable_;
+  memset(&this->m_sData, 0, 188u);
+  this->m_sData = a2;
+  this->? = 1;
+  this->?[10] = a3;
   return this;
 }
 
 
 // address=[0x15fb220]
-// Decompiled from char *__thiscall CWalkingBase::GetData(CWalkingBase *this)
+// Decompiled from CWalkingBase::SData *__thiscall CWalkingBase::GetData(CWalkingBase *this)
 struct CWalkingBase::SData &  CWalkingBase::GetData(void) {
   
-  return (char *)this + 4;
+  return &this->m_sData;
 }
 
 
@@ -1022,128 +1008,111 @@ int  CWalkingBase::FindNearest(int a2, int a3, int a4) {
   
   int v4; // eax
   int v5; // eax
-  int v6; // eax
+  __int16 v6; // ax
   int v8; // [esp+14h] [ebp-64h]
-  _BYTE v10[88]; // [esp+1Ch] [ebp-5Ch] BYREF
+  struct CWaypoints v10; // [esp+1Ch] [ebp-5Ch] BYREF
 
   v4 = CWorldManager::Index(a2);
-  v8 = (*(int (__thiscall **)(CWalkingBase *, int))(*(_DWORD *)this + 28))(this, v4);
+  v8 = this->SectorId(this, v4);
   v5 = CWorldManager::Index(a3);
-  if ( (*(int (__thiscall **)(CWalkingBase *, int))(*(_DWORD *)this + 28))(this, v5) == v8 || v8 == 0 )
+  if ( this->SectorId(this, v5) == v8 || v8 == 0 )
     return a3;
   v6 = CWalkingBase::Flags(this);
-  if ( CAStarTiling::FindPath(a2, a3, (struct CWaypoints *)v10, v6 | 0x40) )
-    return CWaypoints::Goal((CWaypoints *)v10);
+  if ( CAStarTiling::FindPath(a2, a3, &v10, v6 | 0x40) )
+    return CWaypoints::Goal(&v10);
   else
     return a3;
 }
 
 
 // address=[0x15f87f0]
-// Decompiled from int __thiscall CWalkingBase::GoalCheck(CWalkingBase *this, Y16X16 *a2)
+// Decompiled from void __thiscall CWalkingBase::GoalCheck(CWalkingBase *this, int a2)
 void  CWalkingBase::GoalCheck(int a2) {
   
   int v2; // eax
-  int result; // eax
+  int v3; // eax
   int v4; // eax
-  int v5; // eax
-  int IsBlockedLand; // [esp+0h] [ebp-34h]
+  int v5; // [esp-4h] [ebp-38h]
+  BOOL IsBlockedLand; // [esp+0h] [ebp-34h]
   int v7; // [esp+4h] [ebp-30h]
   int v8; // [esp+8h] [ebp-2Ch]
   int v9; // [esp+Ch] [ebp-28h]
   int v10; // [esp+10h] [ebp-24h]
-  int v11; // [esp+14h] [ebp-20h]
-  int v12; // [esp+1Ch] [ebp-18h]
-  int v13; // [esp+20h] [ebp-14h]
-  int v14; // [esp+24h] [ebp-10h]
-  int v15; // [esp+28h] [ebp-Ch]
+  int v11; // [esp+1Ch] [ebp-18h]
+  int v12; // [esp+20h] [ebp-14h]
+  int v13; // [esp+24h] [ebp-10h]
+  int v14; // [esp+28h] [ebp-Ch]
   int i; // [esp+2Ch] [ebp-8h]
 
-  v2 = CWorldManager::Index((int)a2);
-  v14 = (*(int (__thiscall **)(CWalkingBase *, int))(*(_DWORD *)this + 28))(this, v2);
-  if ( v14 )
+  v2 = CWorldManager::Index(a2);
+  v13 = this->SectorId(this, v2);
+  if ( v13 )
   {
     if ( (CWalkingBase::Flags(this) & 0x1000) != 0 )
     {
-      result = Y16X16::DistanceFast(a2, *((_DWORD *)this + 4));
-      if ( result > 1 )
+      if ( Y16X16::DistanceFast(a2, this->m_sData.m_iWalkToXY) > 1 )
       {
-        if ( v14 == (*(int (__thiscall **)(CWalkingBase *, _DWORD))(*(_DWORD *)this + 28))(this, *((_DWORD *)this + 8)) )
+        if ( v13 == this->SectorId(this, this->m_sData.m_iWalkToIndex) )
         {
-          result = (int)this;
-          *((_DWORD *)this + 5) = *((_DWORD *)this + 4);
+          this->m_sData.m_iWalkTo2XY = this->m_sData.m_iWalkToXY;
         }
         else
         {
-          v4 = CWorldManager::Index(*((_DWORD *)this + 5));
-          result = (*(int (__thiscall **)(CWalkingBase *, int))(*(_DWORD *)this + 28))(this, v4);
-          if ( v14 != result )
+          v3 = CWorldManager::Index(this->m_sData.m_iWalkTo2XY);
+          if ( v13 != this->SectorId(this, v3) )
           {
             for ( i = 0; i < 6; ++i )
             {
-              v5 = CWorldManager::NeighborRelIndex(i);
-              if ( v14 == (*(int (__thiscall **)(CWalkingBase *, int))(*(_DWORD *)this + 28))(
-                            this,
-                            *((_DWORD *)this + 8) + v5) )
+              v4 = CWorldManager::NeighborRelIndex(i);
+              if ( v13 == this->SectorId(this, this->m_sData.m_iWalkToIndex + v4) )
               {
-                result = *((_DWORD *)this + 4) + Y16X16::NeighborModifier((Y16X16 *)i);
-                *((_DWORD *)this + 5) = result;
+                this->m_sData.m_iWalkTo2XY = this->m_sData.m_iWalkToXY + Y16X16::NeighborModifier(i);
                 break;
               }
-              result = i + 1;
             }
             if ( i >= 6 )
-              *((_DWORD *)this + 2) = 1;
+              this->m_sData.m_iWalkState = 1;
           }
         }
       }
       else
       {
-        *((_DWORD *)this + 2) = 3;
+        this->m_sData.m_iWalkState = 3;
       }
     }
-    else if ( a2 == *((Y16X16 **)this + 4) )
+    else if ( a2 == this->m_sData.m_iWalkToXY )
     {
-      result = (int)this;
-      *((_DWORD *)this + 2) = 3;
+      this->m_sData.m_iWalkState = 3;
     }
-    else
+    else if ( (CWalkingBase::Flags(this) & 0x40) == 0 && v13 != this->SectorId(this, this->m_sData.m_iWalkToIndex) )
     {
-      result = CWalkingBase::Flags(this) & 0x40;
-      if ( !result )
-      {
-        result = (*(int (__thiscall **)(CWalkingBase *, _DWORD))(*(_DWORD *)this + 28))(this, *((_DWORD *)this + 8));
-        if ( v14 != result )
-          *((_DWORD *)this + 2) = 1;
-      }
+      this->m_sData.m_iWalkState = 1;
     }
   }
   else
   {
-    v12 = Y16X16::UnpackXFast((int)a2);
-    v13 = Y16X16::UnpackYFast((int)a2);
-    v15 = CWorldManager::Index(v12, v13);
-    IsBlockedLand = (unsigned __int8)CWorldManager::IsBlockedLand(v15);
-    v7 = CWorldManager::OwnerId(v15);
-    v8 = CWorldManager::SectorId(v15);
-    v9 = CWorldManager::EcoSectorId(v15);
-    v10 = CWorldManager::OccupyingEntityId(v15);
-    v11 = (*(unsigned __int8 (__thiscall **)(CWalkingBase *, int))(*(_DWORD *)this + 20))(this, v15);
+    v11 = Y16X16::UnpackXFast(a2);
+    v12 = Y16X16::UnpackYFast(a2);
+    v14 = CWorldManager::Index(v11, v12);
+    IsBlockedLand = CWorldManager::IsBlockedLand(v14);
+    v7 = CWorldManager::OwnerId(v14);
+    v8 = CWorldManager::SectorId(v14);
+    v9 = CWorldManager::EcoSectorId(v14);
+    v10 = CWorldManager::OccupyingEntityId(v14);
+    v5 = this->IsNotBlocked(this, v14);
     CTrace::Print(
       "### CWalkingBase::GoalCheck(): Current sector id is 0! (%i, %i), is blocked land %i, owner %i, sector %i, eco-sect"
       "or %i, entity %i, not blocked %i. ###",
+      v11,
       v12,
-      v13,
       IsBlockedLand,
       v7,
       v8,
       v9,
       v10,
-      v11);
-    result = (int)this;
-    *((_DWORD *)this + 2) = 1;
+      v5);
+    this->m_sData.m_iWalkState = 1;
   }
-  return result;
 }
 
 
@@ -1153,22 +1122,22 @@ void  CWalkingBase::DbgPrintElementInfo(char const * a2, int a3) {
   
   int v4; // [esp+0h] [ebp-2Ch]
   int v5; // [esp+4h] [ebp-28h]
-  unsigned int v6; // [esp+8h] [ebp-24h]
+  int v6; // [esp+8h] [ebp-24h]
   int v7; // [esp+Ch] [ebp-20h]
   int v8; // [esp+10h] [ebp-1Ch]
   int v9; // [esp+14h] [ebp-18h]
   int v10; // [esp+18h] [ebp-14h]
-  int v11; // [esp+1Ch] [ebp-10h]
-  int v12; // [esp+20h] [ebp-Ch]
+  unsigned int v11; // [esp+1Ch] [ebp-10h]
+  unsigned int v12; // [esp+20h] [ebp-Ch]
   int v14; // [esp+28h] [ebp-4h]
 
   v11 = (__int16)Y16X16::UnpackXFast(a3);
   v12 = (__int16)Y16X16::UnpackYFast(a3);
-  if ( !(unsigned __int8)CWorldManager::InWorld(v11, v12) )
+  if ( !CWorldManager::InWorld(v11, v12) )
     return BBSupportTracePrintF(0, "%s( %4i, %4i ) - Not in world.", a2, v11, v12);
   v14 = CWorldManager::Index(v11, v12);
-  v4 = (*(unsigned __int8 (__thiscall **)(CWalkingBase *, int))(*(_DWORD *)this + 20))(this, v14);
-  v5 = (*(int (__thiscall **)(CWalkingBase *, int))(*(_DWORD *)this + 28))(this, v14);
+  v4 = this->IsNotBlocked(this, v14);
+  v5 = this->SectorId(this, v14);
   v6 = CWorldManager::Flags(v14);
   v7 = ITiling::OwnerId(v14);
   v8 = ITiling::SectorId(v14);
@@ -1191,35 +1160,31 @@ void  CWalkingBase::DbgPrintElementInfo(char const * a2, int a3) {
 
 
 // address=[0x15f8b70]
-// Decompiled from struct CWalkingBase *__thiscall CWalkingBase::AttachWalking(CWalkingBase *this, struct CWalkingBase *a2)
+// Decompiled from void __thiscall CWalkingBase::AttachWalking(CWalkingBase *this, struct CWalkingBase *a2)
 void  CWalkingBase::AttachWalking(class CWalkingBase * a2) {
   
-  struct CWalkingBase *result; // eax
-
   if ( !a2 && BBSupportDbgReport(2, "Pathing\\Walking.cpp", 430, "_pWalking != 0") == 1 )
     __debugbreak();
   if ( a2 == this && BBSupportDbgReport(2, "Pathing\\Walking.cpp", 431, "_pWalking != this") == 1 )
     __debugbreak();
-  if ( *((_DWORD *)a2 + 45)
+  if ( a2->m_sData.m_pPrevWalking
     && BBSupportDbgReport(2, "Pathing\\Walking.cpp", 432, "_pWalking->m_sData.m_pPrevWalking == 0") == 1 )
   {
     __debugbreak();
   }
-  result = (struct CWalkingBase *)*((_DWORD *)this + 47);
-  if ( result == a2 )
-    return result;
-  (*(void (__thiscall **)(CWalkingBase *))(*(_DWORD *)this + 48))(this);
-  *((_DWORD *)this + 45) = a2;
-  *((_DWORD *)this + 46) = *((_DWORD *)a2 + 46);
-  *((_DWORD *)this + 47) = a2;
-  if ( *((_DWORD *)a2 + 46) )
-    *(_DWORD *)(*((_DWORD *)a2 + 46) + 180) = this;
-  *((_DWORD *)a2 + 46) = this;
-  if ( *((int *)a2 + 4) >= 0 )
-    *((_DWORD *)a2 + 2) = 8;
-  result = (struct CWalkingBase *)(*(int (__thiscall **)(struct CWalkingBase *))(*(_DWORD *)a2 + 60))(a2);
-  *((_DWORD *)this + 1) = result;
-  return result;
+  if ( this->m_sData.m_pLatestWalking != a2 )
+  {
+    this->DetachWalking(this);
+    this->m_sData.m_pPrevWalking = a2;
+    this->m_sData.m_pNextWalking = a2->m_sData.m_pNextWalking;
+    this->m_sData.m_pLatestWalking = a2;
+    if ( a2->m_sData.m_pNextWalking )
+      a2->m_sData.m_pNextWalking->m_sData.m_pPrevWalking = this;
+    a2->m_sData.m_pNextWalking = this;
+    if ( a2->m_sData.m_iWalkToXY >= 0 )
+      a2->m_sData.m_iWalkState = 8;
+    this->m_sData.m_iWalkingType = a2->GetWalkingType(a2);
+  }
 }
 
 
@@ -1231,39 +1196,39 @@ class CWalking *  CWalkingBase::DetachWalking(void) {
   int i; // [esp+4h] [ebp-Ch]
   _DWORD *v4; // [esp+8h] [ebp-8h]
 
-  *((_DWORD *)this + 4) = *((_DWORD *)this + 6);
-  if ( *((_DWORD *)this + 45) )
+  this->m_sData.m_iWalkToXY = this->m_sData.m_iLeaderWalkToXY;
+  if ( this->m_sData.m_pPrevWalking )
   {
-    if ( *(CWalkingBase **)(*((_DWORD *)this + 45) + 184) != this
+    if ( *(CWalkingBase **)(this->m_sData.m_pPrevWalking + 184) != this
       && BBSupportDbgReport(2, "Pathing\\Walking.cpp", 372, "m_sData.m_pPrevWalking->m_sData.m_pNextWalking == this") == 1 )
     {
       __debugbreak();
     }
-    if ( *((_DWORD *)this + 46) )
+    if ( this->m_sData.m_pNextWalking )
     {
-      if ( *(CWalkingBase **)(*((_DWORD *)this + 46) + 180) != this
+      if ( *(CWalkingBase **)(this->m_sData.m_pNextWalking + 180) != this
         && BBSupportDbgReport(2, "Pathing\\Walking.cpp", 376, "m_sData.m_pNextWalking->m_sData.m_pPrevWalking == this") == 1 )
       {
         __debugbreak();
       }
-      *(_DWORD *)(*((_DWORD *)this + 45) + 184) = *((_DWORD *)this + 46);
-      *(_DWORD *)(*((_DWORD *)this + 46) + 180) = *((_DWORD *)this + 45);
+      *(_DWORD *)(this->m_sData.m_pPrevWalking + 184) = this->m_sData.m_pNextWalking;
+      *(_DWORD *)(this->m_sData.m_pNextWalking + 180) = this->m_sData.m_pPrevWalking;
     }
     else
     {
-      *(_DWORD *)(*((_DWORD *)this + 45) + 184) = 0;
+      *(_DWORD *)(this->m_sData.m_pPrevWalking + 184) = 0;
     }
-    *((_DWORD *)this + 45) = 0;
-    *((_DWORD *)this + 46) = 0;
-    *((_DWORD *)this + 47) = 0;
+    this->m_sData.m_pPrevWalking = 0;
+    this->m_sData.m_pNextWalking = 0;
+    this->m_sData.m_pLatestWalking = 0;
     return 0;
   }
   else
   {
-    v4 = (_DWORD *)*((_DWORD *)this + 46);
-    *((_DWORD *)this + 45) = 0;
-    *((_DWORD *)this + 46) = 0;
-    *((_DWORD *)this + 47) = 0;
+    v4 = (_DWORD *)this->m_sData.m_pNextWalking;
+    this->m_sData.m_pPrevWalking = 0;
+    this->m_sData.m_pNextWalking = 0;
+    this->m_sData.m_pLatestWalking = 0;
     if ( !v4 )
       return v4;
     v4[45] = 0;
@@ -1289,31 +1254,31 @@ class CWalking *  CWalkingBase::DetachWalking(void) {
 
 
 // address=[0x15f8e70]
-// Decompiled from int __thiscall CWalkingBase::GroupLeaderWalking(CWalkingBase *this, int a2, int a3)
+// Decompiled from _DWORD *__thiscall CWalkingBase::GroupLeaderWalking(CWalkingBase *this, int a2, int a3)
 void  CWalkingBase::GroupLeaderWalking(int a2, int a3) {
   
-  int result; // eax
+  _DWORD *result; // eax
   int v4; // eax
   int v5; // eax
   int v6; // eax
   unsigned int v7; // [esp-4h] [ebp-2Ch]
   int v8; // [esp+0h] [ebp-28h]
-  int v10; // [esp+8h] [ebp-20h]
+  _DWORD *v10; // [esp+8h] [ebp-20h]
   int v11; // [esp+Ch] [ebp-1Ch]
   int v12; // [esp+10h] [ebp-18h]
   int v13; // [esp+14h] [ebp-14h]
   _DWORD *v14; // [esp+18h] [ebp-10h]
-  int v15; // [esp+1Ch] [ebp-Ch]
-  int v16; // [esp+20h] [ebp-8h]
+  unsigned int v15; // [esp+1Ch] [ebp-Ch]
+  unsigned int v16; // [esp+20h] [ebp-8h]
   int v17; // [esp+24h] [ebp-4h]
 
   v13 = Y16X16::UnpackXFast(a2);
   v12 = Y16X16::UnpackYFast(a2);
-  result = CWorldManager::SectorId(v13, v12);
+  result = (_DWORD *)CWorldManager::SectorId(v13, v12);
   v10 = result;
   if ( result )
   {
-    v14 = (_DWORD *)*((_DWORD *)this + 46);
+    v14 = *(_DWORD **)this->m_sData.m_pNextWalking;
     v17 = 1;
     v8 = 0;
     v11 = 0;
@@ -1323,13 +1288,13 @@ void  CWalkingBase::GroupLeaderWalking(int a2, int a3) {
       v16 = v12 + 2 * CSpiralOffsets::DeltaY(v17);
       while ( 1 )
       {
-        if ( (unsigned __int8)CWorldManager::InWorld(v15, v16) )
+        if ( CWorldManager::InWorld(v15, v16) )
         {
           v4 = CWorldManager::Index(v15, v16);
-          if ( CWorldManager::SectorId(v4) == v10 )
+          if ( (_DWORD *)CWorldManager::SectorId(v4) == v10 )
           {
             v5 = CWorldManager::Index(v15, v16);
-            if ( !(unsigned __int8)CWorldManager::IsBlockedLand(v5) )
+            if ( !CWorldManager::IsBlockedLand(v5) )
               break;
           }
         }
@@ -1346,14 +1311,18 @@ void  CWalkingBase::GroupLeaderWalking(int a2, int a3) {
       if ( ++v17 > 4000 )
         v17 = 1;
       ++v8;
-      result = (int)v14;
+      result = v14;
       v14 = (_DWORD *)v14[46];
     }
   }
   else
   {
-    result = BBSupportDbgReport(1, "Pathing\\Walking.cpp", 642, "CWalkingBase::GroupLeaderWalking(): Invalid waypoint!");
-    if ( result == 1 )
+    result = (_DWORD *)BBSupportDbgReport(
+                         1,
+                         "Pathing\\Walking.cpp",
+                         642,
+                         "CWalkingBase::GroupLeaderWalking(): Invalid waypoint!");
+    if ( result == (_DWORD *)1 )
       __debugbreak();
   }
   return result;
@@ -1361,10 +1330,10 @@ void  CWalkingBase::GroupLeaderWalking(int a2, int a3) {
 
 
 // address=[0x15fb200]
-// Decompiled from int __thiscall CWalkingBase::Flags(CPaneContainer *this)
+// Decompiled from int __thiscall CWalkingBase::Flags(CWalkingBase *this)
 int  CWalkingBase::Flags(void) {
   
-  return *((_DWORD *)this + 12);
+  return this->m_sData.m_uFlags;
 }
 
 
@@ -1373,58 +1342,56 @@ int  CWalkingBase::Flags(void) {
 bool  CWalkingBase::IsNeighborTile(int a2, int a3) {
   
   CLinkList *v4; // [esp+4h] [ebp-8h]
-  struct CTile *v5; // [esp+8h] [ebp-4h]
+  CTile *v5; // [esp+8h] [ebp-4h]
 
-  v5 = (struct CTile *)ITiling::Tile(a2);
-  v4 = (CLinkList *)CTile::LinkList(v5);
+  v5 = ITiling::Tile(a2);
+  v4 = CTile::LinkList(v5);
   return CLinkList::SearchForLinkTileId(v4, a3);
 }
 
 
 // address=[0x15fb300]
-// Decompiled from char __thiscall CWalkingBase::NextCoarseWaypoint(_DWORD *this, int a2)
+// Decompiled from char __thiscall CWalkingBase::NextCoarseWaypoint(CWalkingBase *this, int a2)
 bool  CWalkingBase::NextCoarseWaypoint(int a2) {
   
   int v3; // eax
-  int v4; // [esp+0h] [ebp-24h]
-  int v5; // [esp+4h] [ebp-20h]
-  int v6; // [esp+8h] [ebp-1Ch]
-  int v7; // [esp+Ch] [ebp-18h]
-  int v8; // [esp+10h] [ebp-14h]
-  int v9; // [esp+14h] [ebp-10h]
-  int v10; // [esp+18h] [ebp-Ch]
-  int v11; // [esp+1Ch] [ebp-8h]
+  int v4; // [esp+4h] [ebp-20h]
+  int v5; // [esp+8h] [ebp-1Ch]
+  int v6; // [esp+Ch] [ebp-18h]
+  int v7; // [esp+10h] [ebp-14h]
+  int v8; // [esp+14h] [ebp-10h]
+  int v9; // [esp+18h] [ebp-Ch]
+  int iCurrentSectorId; // [esp+1Ch] [ebp-8h]
 
-  if ( CWaypoints::CachedWaypointsCount((pairNode *)(this + 18)) <= 0
+  if ( CWaypoints::CachedWaypointsCount(&this->m_sData.m_cCoarseWaypoints) <= 0
     && BBSupportDbgReport(2, "Pathing\\Walking.cpp", 734, "m_sData.m_cCoarseWaypoints.CachedWaypointsCount() > 0") == 1 )
   {
     __debugbreak();
   }
-  v5 = Y16X16::UnpackXFast(a2);
-  v6 = Y16X16::UnpackYFast(a2);
-  v10 = CWorldManager::Index(v5, v6);
-  v11 = (*(int (__thiscall **)(_DWORD *, int))(*this + 28))(this, v10);
-  v8 = (*(int (__thiscall **)(_DWORD *, int))(*this + 64))(this, v10);
-  if ( v11 <= 0 && BBSupportDbgReport(2, "Pathing\\Walking.cpp", 744, "iCurrentSectorId > 0") == 1 )
+  v4 = Y16X16::UnpackXFast(a2);
+  v5 = Y16X16::UnpackYFast(a2);
+  v9 = CWorldManager::Index(v4, v5);
+  iCurrentSectorId = this->SectorId(this, v9);
+  v7 = this->TileId(this, v9);
+  if ( iCurrentSectorId <= 0 && BBSupportDbgReport(2, "Pathing\\Walking.cpp", 744, "iCurrentSectorId > 0") == 1 )
     __debugbreak();
   while ( 1 )
   {
-    v9 = CWorldManager::Index(this[11]);
-    v7 = (*(int (__thiscall **)(_DWORD *, int))(*this + 64))(this, v9);
-    v4 = (*(int (__thiscall **)(_DWORD *, int))(*this + 28))(this, v9);
-    if ( v4 != v11 )
+    v8 = CWorldManager::Index(this->m_sData.m_iCoarseWaypointXY);
+    v6 = this->TileId(this, v8);
+    if ( this->SectorId(this, v8) != iCurrentSectorId )
       return 0;
-    if ( v7 != v8 && !CWalkingBase::IsNeighborTile((CWalkingBase *)this, v7, v8) )
+    if ( v6 != v7 && !CWalkingBase::IsNeighborTile(this, v6, v7) )
       return 1;
-    this[11] = CWaypoints::Back(this + 18, v4);
-    CWaypoints::PopBack(this + 18);
-    if ( this[11] == this[5] )
+    this->m_sData.m_iCoarseWaypointXY = CWaypoints::Back(&this->m_sData.m_cCoarseWaypoints);
+    CWaypoints::PopBack(&this->m_sData.m_cCoarseWaypoints);
+    if ( this->m_sData.m_iCoarseWaypointXY == this->m_sData.m_iWalkTo2XY )
       break;
-    if ( CWaypoints::CachedWaypointsCount((pairNode *)(this + 18)) <= 0 )
+    if ( CWaypoints::CachedWaypointsCount(&this->m_sData.m_cCoarseWaypoints) <= 0 )
       return 0;
   }
-  v3 = CWorldManager::Index(this[11]);
-  if ( (*(int (__thiscall **)(_DWORD *, int))(*this + 28))(this, v3) != v11
+  v3 = CWorldManager::Index(this->m_sData.m_iCoarseWaypointXY);
+  if ( this->SectorId(this, v3) != iCurrentSectorId
     && BBSupportDbgReport(
          2,
          "Pathing\\Walking.cpp",

@@ -7,8 +7,8 @@
  CWalkingWorker::CWalkingWorker(int a2) {
   
   CWalkingBase::CWalkingBase(this, 0, a2);
-  *(_DWORD *)this = &CWalkingWorker::_vftable_;
-  *((_DWORD *)this + 13) |= 0x10u;
+  this->__vftable = (CWalking_vtbl *)&CWalkingWorker::_vftable_;
+  this->m_sData.m_iEntityFlags |= 0x10u;
   return this;
 }
 
@@ -40,7 +40,7 @@ bool  CWalkingWorker::IsNotBlocked(int a2) {
   v6 = ITiling::NormalTileId(a2);
   if ( v6 < 10 )
     return 0;
-  v2 = (CTile *)ITiling::Tile(v6);
+  v2 = ITiling::Tile(v6);
   v3 = CTile::OwnerId(v2);
   return v3 == CWalkingBase::OwnerId(this);
 }
@@ -55,7 +55,7 @@ int  CWalkingWorker::SectorId(int a2) {
 
 
 // address=[0x15f9170]
-// Decompiled from char __thiscall CWalkingWorker::FindPathAStar64(CWalkingWorker *this, int a2, int a3, struct CDirCache *a4)
+// Decompiled from char __thiscall CWalkingWorker::FindPathAStar64(  CWalkingWorker *this,  unsigned int a2,  unsigned int a3,  struct CDirCache *a4)
 bool  CWalkingWorker::FindPathAStar64(int a2, int a3, class CDirCache & a4) {
   
   return CAStar64::FindPath((CAStar64 *)&g_cAStar64Worker, a2, a3, a4);

@@ -32,8 +32,8 @@ int __cdecl CAStar64Ship::MoveCosts(int a1, int a2) {
 // Decompiled from char __thiscall CAStar64Ship::InitFindPath(CAStar64Ship *this)
 bool  CAStar64Ship::InitFindPath(void) {
   
-  dword_415C76C = (int (__cdecl *)(_DWORD))CAStar64Ship::IsNotBlocked;
-  dword_415C770 = CAStar64Ship::MoveCosts;
+  s_pIsNotBlocked = (int (__cdecl *)(_DWORD))CAStar64Ship::IsNotBlocked;
+  s_pMoveCost = CAStar64Ship::MoveCosts;
   return 1;
 }
 

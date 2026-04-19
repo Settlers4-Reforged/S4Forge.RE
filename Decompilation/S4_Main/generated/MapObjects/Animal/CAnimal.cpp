@@ -121,7 +121,7 @@ struct SGfxObjectInfo *  CAnimal::GetGfxInfos(void) {
     (char)this->m_cDirection,
     this->m_cFrame);
   byte_40FE51D = this->m_cDirection;
-  byte_40FE51C = this->unk_45;
+  byte_40FE51C = this->m_iDistance;
   byte_40FE518 = this->m_objType;
   byte_40FE51A = IEntity::IsVisible(this);
   return &IEntity::m_sGfxInfo;

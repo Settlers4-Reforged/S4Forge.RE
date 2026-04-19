@@ -161,7 +161,7 @@ void  ISettlerRole::Go(class CSettler * settler) {
     return this->GetSettlerRole(settler, -1);
   if ( (this->settlerWalk & 0xFu) >= 6 )
     return IAnimatedEntity::RegisterForLogicUpdate(settler, 1);
-  settler->unk_45 = -1;
+  settler->m_iDistance = -1;
   this->walkspeed = 9;
   if ( IEntity::Type(settler) != 1 && IEntity::Type(settler) != 60 )
     return IAnimatedEntity::RegisterForLogicUpdate(settler, (char)this->walkspeed);

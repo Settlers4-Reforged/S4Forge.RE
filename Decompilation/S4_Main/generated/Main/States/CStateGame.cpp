@@ -19,10 +19,10 @@ class CRandom16 &  CStateGame::Random16(void) {
 
 
 // address=[0x1326f20]
-// Decompiled from int __thiscall CStateGame::Rand(CStateGame *this)
+// Decompiled from DWORD __thiscall CStateGame::Rand(CStateGame *this)
 unsigned int  CStateGame::Rand(void) {
   
-  return CRandom16::Rand((CRandom16 *)&this->m_sGameData.m_sRandom);
+  return CRandom16::Rand(&this->m_sGameData.m_sRandom);
 }
 
 

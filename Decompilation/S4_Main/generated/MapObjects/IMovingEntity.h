@@ -45,7 +45,7 @@ public:
     void  WalkToXY(int a2, int a3);
 
     // address=[0x15591b0]
-    virtual void  NewToDoList(class std::list<class CEntityTask,class std::allocator<class CEntityTask> > * a2, int a3);
+    virtual void  NewToDoList(class std::list<class CEntityTask,class std::allocator<class CEntityTask> > * _toDo, int a3);
 
     // address=[0x1559260]
     void  ResetToDoList(void);
@@ -76,10 +76,10 @@ protected:
     void  SetPositionAndDir(int a2, int a3);
 
     // address=[0x1559460]
-     IMovingEntity(std::istream & a2);
+     IMovingEntity(std::istream & _pStream);
 
     // address=[0x15595e0]
-    virtual void  Store(std::ostream & a2);
+    virtual void  Store(std::ostream & a1);
 
     // address=[0x15596c0]
     void  InitDistance(void);
@@ -95,15 +95,15 @@ public:
     BYTE unk_42;
     BYTE pad_43;
     BYTE m_cDirection;
-    BYTE unk_45;
-    BYTE displacementCosts;
+    BYTE m_iDistance;
+    unsigned __int8 m_cDisplacementCosts;
     BYTE pad;
-    __int16 unk_48;
+    __int16 m_iToDoSize;
     WORD unk_4A;
     DWORD unk_4c;
-    LPVOID walking;
-    DWORD entityTasks;
-    struct IMovingEntity::IMovingEntity::IMovingEntity::IMovingEntity::IMovingEntity::IMovingEntity::std::List * unk_58;
+    struct CWalking * m_pWalkin;
+    DWORD m_pToDoList;
+    struct IMovingEntity::IMovingEntity::IMovingEntity::IMovingEntity::IMovingEntity::IMovingEntity::std::List * m_cCurrentToDoItemIter;
     DWORD unk_5C;
     DWORD unk_60;
 

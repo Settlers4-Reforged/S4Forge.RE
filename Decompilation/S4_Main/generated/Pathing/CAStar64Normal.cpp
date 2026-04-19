@@ -37,8 +37,8 @@ int __cdecl CAStar64Normal::MoveCosts(int a1, int a2) {
 // Decompiled from char __thiscall CAStar64Normal::InitFindPath(CAStar64Normal *this)
 bool  CAStar64Normal::InitFindPath(void) {
   
-  dword_415C76C = (int (__cdecl *)(_DWORD))CAStar64Normal::IsNotBlocked;
-  dword_415C770 = CAStar64Normal::MoveCosts;
+  s_pIsNotBlocked = (int (__cdecl *)(_DWORD))CAStar64Normal::IsNotBlocked;
+  s_pMoveCost = CAStar64Normal::MoveCosts;
   return 1;
 }
 

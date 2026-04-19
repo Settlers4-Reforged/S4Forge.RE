@@ -56,17 +56,17 @@ int __cdecl CMapObjectMgr::GetUniqueId(int a1) {
 
 
 // address=[0x130f140]
-// Decompiled from IEntity *__cdecl CMapObjectMgr::MovingEntity(unsigned int _iId)
+// Decompiled from IMovingEntity *__cdecl CMapObjectMgr::MovingEntity(unsigned int _iId)
 class IMovingEntity & __cdecl CMapObjectMgr::MovingEntity(int _iId) {
   
-  IEntity *v2; // [esp+0h] [ebp-4h]
+  IMovingEntity *v2; // [esp+0h] [ebp-4h]
 
   if ( !CMapObjectMgr::ValidUsedEntityId(_iId)
     && BBSupportDbgReport(2, string__2, 246, "ValidUsedEntityId( _iId )") == 1 )
   {
     __debugbreak();
   }
-  v2 = CMapObjectMgr::m_vEntities[_iId];
+  v2 = (IMovingEntity *)CMapObjectMgr::m_vEntities[_iId];
   if ( !j____RTDynamicCast(
           (void **)&v2->__vftable,
           0,
