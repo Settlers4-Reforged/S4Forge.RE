@@ -21,7 +21,7 @@ public:
     static void __cdecl RemoveEntityFromTaskForce(int a1);
 
     // address=[0x1329020]
-    static class CAITaskForce * __cdecl CreateTaskForce(int _iPlayerId, enum T_AI_TASK_FORCE_TYPE iTaskForceClass);
+    static class CAITaskForce * __cdecl CreateTaskForce(int iPlayerId, enum T_AI_TASK_FORCE_TYPE iTaskForceType);
 
     // address=[0x13293f0]
     void  DbgPrint(void);

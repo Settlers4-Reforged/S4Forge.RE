@@ -63,7 +63,7 @@ public:
     bool  EvaluateEnemyMilitaryBuilding(int a2, struct SAIEvalResults & a3);
 
     // address=[0x1320740]
-    void  EvaluateOwnMilitaryBuilding(int a2, struct SAIDefenceEvalResult & a3);
+    void  EvaluateOwnMilitaryBuilding(int a1, struct SAIDefenceEvalResult & a3);
 
     // address=[0x1320890]
     void  MoveOneDefendingFighterToReservoir(int a2, enum T_AI_WARRIOR_TYPE a3, bool a4);

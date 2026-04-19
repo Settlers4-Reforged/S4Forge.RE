@@ -21,7 +21,7 @@ public:
     virtual void  Execute(void);
 
     // address=[0x1323f40]
-    virtual bool  ProcessEvent(class CAIEvent const * a2);
+    virtual bool  ProcessEvent(class CAIEvent const * _pEvent);
 
     // address=[0x1324390]
     void  AttachAgentEx(class CAINormalSectorAgent & a2, unsigned int a3, unsigned int a4, unsigned int a5);

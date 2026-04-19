@@ -1,3 +1,4 @@
+#if FALSE
 #include "CAIEntityInfoTower.h"
 
 // Definitions for class CAIEntityInfoTower
@@ -16,10 +17,11 @@
   
   CAIEntityInfoEx::CAIEntityInfoEx(this, 0);
   this->vftable = (CAIEntityInfoEx_vtbl *)&CAIEntityInfoTower::_vftable_;
-  this->dword8 = 0;
-  this->dwordC = 0;
-  this->dword10 = 0;
+  this->m_iOwnValue = 0;
+  this->m_iAllyValue = 0;
+  this->m_iEnemyValue = 0;
   return this;
 }
 
 
+#endif // Already implemented

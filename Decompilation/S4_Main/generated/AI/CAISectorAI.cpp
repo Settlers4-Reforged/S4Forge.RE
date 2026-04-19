@@ -27,10 +27,10 @@ int  CAISectorAI::BaseY(void)const {
 
 
 // address=[0x12fd4f0]
-// Decompiled from int __thiscall CAISectorAI::PlayerAI(CAISectorAI *this)
+// Decompiled from CAIPlayerAI *__thiscall CAISectorAI::PlayerAI(CAISectorAI *this)
 class CAIPlayerAI &  CAISectorAI::PlayerAI(void)const {
   
-  return *((_DWORD *)this + 1);
+  return this->m_pPlayerAI;
 }
 
 
@@ -313,47 +313,39 @@ bool  CAISectorAI::EvaluateEnemyMilitaryBuilding(int a2, struct SAIEvalResults &
 
 
 // address=[0x1320740]
-// Decompiled from int __thiscall CAISectorAI::EvaluateOwnMilitaryBuilding(pairNode **this, int a2, struct SAIDefenceEvalResult *a3)
-void  CAISectorAI::EvaluateOwnMilitaryBuilding(int a2, struct SAIDefenceEvalResult & a3) {
+// Decompiled from void __thiscall CAISectorAI::EvaluateOwnMilitaryBuilding(pairNode **this, int a1, struct SAIDefenceEvalResult *a3)
+void  CAISectorAI::EvaluateOwnMilitaryBuilding(int a1, struct SAIDefenceEvalResult & a3) {
   
   unsigned int v3; // eax
-  int v4; // eax
-  int v5; // edx
-  int result; // eax
-  _DWORD *v8; // [esp+4h] [ebp-38h]
-  int v9; // [esp+8h] [ebp-34h]
-  int v10; // [esp+Ch] [ebp-30h]
-  int v11; // [esp+10h] [ebp-2Ch]
-  int v12; // [esp+14h] [ebp-28h]
+  CAIEntityInfoTower *v4; // eax
+  CBuilding *v6; // [esp+4h] [ebp-38h]
+  Squares *v7; // [esp+8h] [ebp-34h]
+  Squares *v8; // [esp+Ch] [ebp-30h]
+  int v9; // [esp+10h] [ebp-2Ch]
+  int v10; // [esp+14h] [ebp-28h]
   CAIEntityInfo *EntityInfo; // [esp+1Ch] [ebp-20h]
-  _BYTE v14[12]; // [esp+20h] [ebp-1Ch] BYREF
-  int v15; // [esp+2Ch] [ebp-10h]
-  int v16; // [esp+30h] [ebp-Ch]
-  int v17; // [esp+34h] [ebp-8h]
+  struct SEvalFightersResult v12; // [esp+20h] [ebp-1Ch] BYREF
 
-  if ( a2 <= 0 && BBSupportDbgReport(2, "AI\\AI_SectorAI.cpp", 493, "_iBuildingId > 0") == 1 )
+  if ( a1 <= 0 && BBSupportDbgReport(2, "AI\\AI_SectorAI.cpp", 493, "_iBuildingId > 0") == 1 )
     __debugbreak();
-  v8 = (_DWORD *)CBuildingMgr::operator[](a2);
-  v12 = CBuilding::EnsignPackedXY(v8);
-  v9 = Y16X16::UnpackXFast(v12);
-  v10 = Y16X16::UnpackYFast(v12);
-  v11 = CAIPlayerAI::PlayerId(this[1]);
-  IAIEnvironment::EvaluateOwnerMap(v11, v9, v10, a3);
-  CScanner::EvaluateFighters((struct SEvalFightersResult *)v14, v9, v10, 32, v11);
-  *((_DWORD *)a3 + 8) = v15;
-  *((_DWORD *)a3 + 9) = v17;
-  EntityInfo = (CAIEntityInfo *)IAIEnvironment::EntityGetEntityInfo(a2, 1u);
+  v6 = CBuildingMgr::operator[](a1);
+  v10 = CBuilding::EnsignPackedXY(v6);
+  v7 = (Squares *)Y16X16::UnpackXFast(v10);
+  v8 = (Squares *)Y16X16::UnpackYFast(v10);
+  v9 = CAIPlayerAI::PlayerId(this[1]);
+  IAIEnvironment::EvaluateOwnerMap(v9, v7, v8, a3);
+  CScanner::EvaluateFighters(&v12, (unsigned int)v7, (unsigned int)v8, 32, v9);
+  *((_DWORD *)a3 + 8) = v12.m_iOwnValue;
+  *((_DWORD *)a3 + 9) = v12.m_iEnemyValue;
+  EntityInfo = IAIEnvironment::EntityGetEntityInfo(a1, 1);
   if ( !EntityInfo && BBSupportDbgReport(2, "AI\\AI_SectorAI.cpp", 517, "pEntityInfo != 0") == 1 )
     __debugbreak();
   v3 = IAIEnvironment::TickCounter();
   CAIEntityInfo::SetTimeStamp(EntityInfo, v3);
-  v4 = CAIEntityInfo::ExtendedInfo(EntityInfo, 0);
-  *(_DWORD *)(v4 + 8) = v15;
-  *(_DWORD *)(v4 + 12) = v16;
-  v5 = v4;
-  result = v17;
-  *(_DWORD *)(v5 + 16) = v17;
-  return result;
+  v4 = (CAIEntityInfoTower *)CAIEntityInfo::ExtendedInfo(EntityInfo, 0);
+  v4->m_iOwnValue = v12.m_iOwnValue;
+  v4->m_iAllyValue = v12.m_iAllyValue;
+  v4->m_iEnemyValue = v12.m_iEnemyValue;
 }
 
 

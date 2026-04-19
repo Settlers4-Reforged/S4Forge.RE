@@ -11,7 +11,7 @@
   int v5; // eax
   int v6; // eax
   int v8; // [esp+4h] [ebp-20h]
-  Grid *v9; // [esp+8h] [ebp-1Ch] BYREF
+  int v9; // [esp+8h] [ebp-1Ch] BYREF
   int v10; // [esp+Ch] [ebp-18h] BYREF
   int i; // [esp+10h] [ebp-14h]
   std::bad_function_call *v12; // [esp+14h] [ebp-10h]
@@ -26,19 +26,19 @@
   CAIGoalCache::CAIGoalCache((std::bad_function_call *)((char *)v12 + 1056));
   CAIGoalCache::CAIGoalCache((std::bad_function_call *)((char *)v12 + 1452));
   CAIGoalCache::CAIGoalCache((std::bad_function_call *)((char *)v12 + 1848));
-  CAITaskForceReservoir::CAITaskForceReservoir((std::bad_function_call *)((char *)v12 + 2244), a2->m_uU);
+  CAITaskForceReservoir::CAITaskForceReservoir((CAITaskForceReservoir *)((char *)v12 + 2244), a2->m_uU);
   LOBYTE(v13) = 1;
-  CAITaskForceReservoir::CAITaskForceReservoir((std::bad_function_call *)((char *)v12 + 2324), a2->m_uU);
+  CAITaskForceReservoir::CAITaskForceReservoir((CAITaskForceReservoir *)((char *)v12 + 2324), a2->m_uU);
   LOBYTE(v13) = 2;
-  CAITaskForceReservoir::CAITaskForceReservoir((std::bad_function_call *)((char *)v12 + 2404), a2->m_uU);
+  CAITaskForceReservoir::CAITaskForceReservoir((CAITaskForceReservoir *)((char *)v12 + 2404), a2->m_uU);
   LOBYTE(v13) = 3;
-  CAITaskForceReservoir::CAITaskForceReservoir((std::bad_function_call *)((char *)v12 + 2484), a2->m_uU);
+  CAITaskForceReservoir::CAITaskForceReservoir((CAITaskForceReservoir *)((char *)v12 + 2484), a2->m_uU);
   LOBYTE(v13) = 4;
-  CAITaskForceReservoir::CAITaskForceReservoir((std::bad_function_call *)((char *)v12 + 2564), a2->m_uU);
+  CAITaskForceReservoir::CAITaskForceReservoir((CAITaskForceReservoir *)((char *)v12 + 2564), a2->m_uU);
   LOBYTE(v13) = 5;
-  CAITaskForceReservoir::CAITaskForceReservoir((std::bad_function_call *)((char *)v12 + 2644), a2->m_uU);
+  CAITaskForceReservoir::CAITaskForceReservoir((CAITaskForceReservoir *)((char *)v12 + 2644), a2->m_uU);
   LOBYTE(v13) = 6;
-  CAITaskForceReservoir::CAITaskForceReservoir((std::bad_function_call *)((char *)v12 + 2724), a2->m_uU);
+  CAITaskForceReservoir::CAITaskForceReservoir((CAITaskForceReservoir *)((char *)v12 + 2724), a2->m_uU);
   CAIAgentAttack::CAIAgentAttack((CAIAgentAttack *)((char *)v12 + 2804));
   CAIAgentEvalDefence::CAIAgentEvalDefence((std::bad_function_call *)((char *)v12 + 2884));
   CAIAgentEvalOffence::CAIAgentEvalOffence((std::bad_function_call *)((char *)v12 + 2928));
@@ -146,7 +146,7 @@
     (CAIScheduler *)8);
   for ( i = 0; i <= 14; ++i )
   {
-    *((_DWORD *)v12 + i + 8) = CAITaskForces::CreateTaskForce(v8, 1);
+    *((_DWORD *)v12 + i + 8) = CAITaskForces::CreateTaskForce(v8, AI_TASK_FORCE_TYPE_RESERVOIR);
     if ( !*((_DWORD *)v12 + i + 8)
       && BBSupportDbgReport(2, "AI\\AI_SectorAINormal.cpp", 321, "m_pReservoir[i] != 0") == 1 )
     {
@@ -155,7 +155,7 @@
   }
   if ( a3 <= 0 )
     return v12;
-  v9 = (Grid *)IAIEnvironment::UnpackXFast(a3);
+  v9 = IAIEnvironment::UnpackXFast(a3);
   v10 = IAIEnvironment::UnpackYFast(a3);
   *((_DWORD *)v12 + 58) = 0;
   *((_DWORD *)v12 + 59) = v9;
@@ -163,7 +163,7 @@
   IAIEnvironment::GetNearestNoneBlockedPosition(&v9, &v10);
   *((_DWORD *)v12 + 62) = v9;
   *((_DWORD *)v12 + 63) = v10;
-  v5 = IAIEnvironment::WorldIndex((int)v9, v10);
+  v5 = IAIEnvironment::WorldIndex(v9, v10);
   *((_DWORD *)v12 + 64) = v5;
   v6 = IAIEnvironment::WorldSectorId(*((_DWORD *)v12 + 64));
   *((_DWORD *)v12 + 65) = v6;
@@ -310,11 +310,11 @@ void  CAINormalSectorAI::Execute(void) {
 
 
 // address=[0x1323f40]
-// Decompiled from char __thiscall CAINormalSectorAI::ProcessEvent(int this, pairNode *a2)
-bool  CAINormalSectorAI::ProcessEvent(class CAIEvent const * a2) {
+// Decompiled from char __thiscall CAINormalSectorAI::ProcessEvent(int this, struct CAIEvent *_pEvent)
+bool  CAINormalSectorAI::ProcessEvent(class CAIEvent const * _pEvent) {
   
   char result; // al
-  int v3; // eax
+  unsigned __int16 v3; // ax
   int v4; // eax
   pairNode *v5; // eax
   int v6; // eax
@@ -325,33 +325,33 @@ bool  CAINormalSectorAI::ProcessEvent(class CAIEvent const * a2) {
   unsigned int v11; // [esp+24h] [ebp-68h]
   int v12; // [esp+28h] [ebp-64h]
   int v13; // [esp+2Ch] [ebp-60h]
-  int v14; // [esp+30h] [ebp-5Ch]
+  unsigned int v14; // [esp+30h] [ebp-5Ch]
   int v15; // [esp+34h] [ebp-58h]
-  int v16; // [esp+40h] [ebp-4Ch]
+  CAIEntityInfo *v16; // [esp+40h] [ebp-4Ch]
   int v17; // [esp+4Ch] [ebp-40h]
   int v18; // [esp+54h] [ebp-38h]
   int v19; // [esp+58h] [ebp-34h]
   int v20; // [esp+5Ch] [ebp-30h]
   int EconomyAIIndex; // [esp+60h] [ebp-2Ch]
   int v22; // [esp+64h] [ebp-28h]
-  int v23; // [esp+68h] [ebp-24h]
+  T_AI_TASK_FORCE_TYPE v23; // [esp+68h] [ebp-24h]
   int v24; // [esp+6Ch] [ebp-20h]
   int TargetForSuicideMission; // [esp+74h] [ebp-18h]
   int v26; // [esp+78h] [ebp-14h]
-  int i; // [esp+80h] [ebp-Ch]
-  struct CAITaskForce *TaskForce; // [esp+84h] [ebp-8h]
+  CAIEntityInfo *i; // [esp+80h] [ebp-Ch]
+  pairNode *TaskForce; // [esp+84h] [ebp-8h]
 
-  if ( !a2 && BBSupportDbgReport(2, "AI\\AI_SectorAINormal.cpp", 536, "_pEvent != 0") == 1 )
+  if ( !_pEvent && BBSupportDbgReport(2, "AI\\AI_SectorAINormal.cpp", 536, "_pEvent != 0") == 1 )
     __debugbreak();
-  switch ( CAIEvent::Type(a2) )
+  switch ( CAIEvent::Type(_pEvent) )
   {
     case 3:
-      v8 = CAIEvent::Data3(a2);
-      if ( v8 == *(_DWORD *)(CAISectorAI::PlayerAI(this) + 12) )
+      v8 = CAIEvent::Data3(_pEvent);
+      if ( v8 == *(_DWORD *)(CAISectorAI::PlayerAI((CAISectorAI *)this) + 12) )
       {
-        v7 = CAIEvent::Data2(a2);
-        CAIEvent::Data1(a2);
-        v6 = CAISectorAI::PlayerAI(this);
+        v7 = CAIEvent::Data2(_pEvent);
+        CAIEvent::Data1(_pEvent);
+        v6 = CAISectorAI::PlayerAI((CAISectorAI *)this);
         (*(void (__thiscall **)(int, int, _DWORD, int, int))(*(_DWORD *)this + 28))(
           this,
           31,
@@ -361,31 +361,31 @@ bool  CAINormalSectorAI::ProcessEvent(class CAIEvent const * a2) {
       }
       result = 1;
       break;
-    case 0xD:
-      v14 = CAIEvent::Data2(a2);
-      v15 = CAIEvent::Data3(a2);
+    case 13:
+      v14 = CAIEvent::Data2(_pEvent);
+      v15 = CAIEvent::Data3(_pEvent);
       CAINormalSectorAI::CreateNewEcoSectorAIIfNecessaryAndMeaningful((CAINormalSectorAI *)this, v14, v15);
       result = 1;
       break;
-    case 0xE:
-      CAIEvent::Data2(a2);
-      CAIEvent::Data3(a2);
+    case 14:
+      CAIEvent::Data2(_pEvent);
+      CAIEvent::Data3(_pEvent);
       CAINormalSectorAI::DeleteInvalidEcoSectorAIs((CAINormalSectorAI *)this);
       result = 1;
       break;
-    case 0x10:
-      v3 = CAIEvent::Data2(a2);
+    case 16:
+      v3 = CAIEvent::Data2(_pEvent);
       v26 = CAIEvent::UnpackA(v3);
-      v4 = CAIEvent::Data2(a2);
+      v4 = CAIEvent::Data2(_pEvent);
       v12 = CAIEvent::UnpackB(v4);
-      v13 = CAIEvent::Data3(a2);
+      v13 = CAIEvent::Data3(_pEvent);
       if ( IAIEnvironment::EcoSectorCheckId(v12, v13) )
       {
         CAINormalSectorAI::DeleteInvalidEcoSectorAIs((CAINormalSectorAI *)this);
         EconomyAIIndex = CAINormalSectorAI::GetEconomyAIIndex((CAINormalSectorAI *)this, v26);
         if ( EconomyAIIndex >= 0 )
         {
-          v5 = (pairNode *)TAIStaticPtrVector<CAIEcoSectorAIEx,512>::operator[](EconomyAIIndex);
+          v5 = (pairNode *)TAIStaticPtrVector<CAIEcoSectorAIEx,512>::operator[]((_DWORD *)(this + 3480), EconomyAIIndex);
           v11 = CAIEcoSectorAIEx::CreationTime(v5);
           if ( v11 < IAIEnvironment::TickCounter() )
           {
@@ -397,35 +397,35 @@ bool  CAINormalSectorAI::ProcessEvent(class CAIEvent const * a2) {
       }
       result = 1;
       break;
-    case 0x14:
-      v9 = CAIEvent::Data2(a2);
-      CAITaskForce::AddEntity((void *)(this + 2484), v9, 0);
+    case 20:
+      v9 = CAIEvent::Data2(_pEvent);
+      CAITaskForce::AddEntity((CAITaskForce *)(this + 2484), v9, 0);
       result = 1;
       break;
-    case 0x1B:
+    case 27:
       goto LABEL_6;
-    case 0x1C:
-      v22 = CAIEvent::Data2(a2);
-      if ( CAITaskForce::NumberOfEntities((pairNode *)(this + 2484)) > 0 )
+    case 28:
+      v22 = CAIEvent::Data2(_pEvent);
+      if ( CAITaskForce::NumberOfEntities((CAITaskForce *)(this + 2484)) > 0 )
       {
         if ( v22 == 9 )
-          v23 = 4;
+          v23 = AI_TASK_FORCE_TYPE_UNKNOWN_4;
         else
-          v23 = 3;
-        TaskForce = CAITaskForceGroup::CreateTaskForce((CAITaskForceGroup *)(this + 92), v23);
+          v23 = AI_TASK_FORCE_TYPE_UNKNOWN_3;
+        TaskForce = (pairNode *)CAITaskForceGroup::CreateTaskForce((CAITaskForceGroup *)(this + 92), v23);
         if ( !TaskForce && BBSupportDbgReport(2, "AI\\AI_SectorAINormal.cpp", 580, "pSquad != 0") == 1 )
           __debugbreak();
-        for ( i = CAITaskForce::FirstEntity(this + 2484); i; i = v16 )
+        for ( i = CAITaskForce::FirstEntity((CAITaskForce *)(this + 2484)); i; i = v16 )
         {
           v16 = CAIEntityInfo::Next(i);
           v17 = CAIEntityInfo::EntityId(i);
           if ( ((1 << IAIEnvironment::EntityWarriorType(v17)) & 0x1C) != 0 )
-            (*(void (__thiscall **)(struct CAITaskForce *, int, _DWORD))(*(_DWORD *)TaskForce + 20))(TaskForce, i, 0);
+            (*(void (__thiscall **)(pairNode *, CAIEntityInfo *, _DWORD))(*(_DWORD *)TaskForce + 20))(TaskForce, i, 0);
         }
-        if ( CAITaskForce::NumberOfEntities(TaskForce) <= 0 )
+        if ( CAITaskForce::NumberOfEntities((CAITaskForce *)TaskForce) <= 0 )
         {
           if ( TaskForce )
-            (*(void (__thiscall **)(struct CAITaskForce *, int))(*(_DWORD *)TaskForce + 8))(TaskForce, 1);
+            (*(void (__thiscall **)(pairNode *, int))(*(_DWORD *)TaskForce + 8))(TaskForce, 1);
         }
         else
         {
@@ -435,11 +435,11 @@ bool  CAINormalSectorAI::ProcessEvent(class CAIEvent const * a2) {
             TargetForSuicideMission = CAINormalSectorAI::FindTargetForSuicideMission(TaskForce);
           if ( TargetForSuicideMission <= 0 )
           {
-            CAINormalSectorAI::MoveSquadHome((CAINormalSectorAI *)this, TaskForce);
+            CAINormalSectorAI::MoveSquadHome((CAINormalSectorAI *)this, (struct CAITaskForce *)TaskForce);
           }
           else
           {
-            (*(void (__thiscall **)(struct CAITaskForce *, int, int, _DWORD))(*(_DWORD *)TaskForce + 32))(
+            (*(void (__thiscall **)(pairNode *, int, int, _DWORD))(*(_DWORD *)TaskForce + 32))(
               TaskForce,
               4,
               TargetForSuicideMission,
@@ -450,14 +450,14 @@ bool  CAINormalSectorAI::ProcessEvent(class CAIEvent const * a2) {
       }
       result = 1;
       break;
-    case 0x1F:
-      v24 = CAIEvent::Data2(a2);
+    case 31:
+      v24 = CAIEvent::Data2(_pEvent);
       v20 = IAIEnvironment::EntityOwnerId(v24);
       CAIGoalCache::Insert((CAIGoalCache *)(this + 1452), v24, 0x7FFFFFFF);
       CAIAgentAttack::AttackNow((CAIAgentAttack *)(this + 2804), v20, 10);
 LABEL_6:
-      v18 = CAIEvent::Data2(a2);
-      v19 = CAIEvent::Data3(a2);
+      v18 = CAIEvent::Data2(_pEvent);
+      v19 = CAIEvent::Data3(_pEvent);
       CAIAgentAttack::AttackNow((CAIAgentAttack *)(this + 2804), v18, v19);
       result = 1;
       break;

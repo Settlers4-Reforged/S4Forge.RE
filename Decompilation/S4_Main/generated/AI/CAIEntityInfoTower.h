@@ -14,9 +14,9 @@ protected:
 
     // Type information members
 public:
-    _DWORD dword8;
-    _DWORD dwordC;
-    _DWORD dword10;
+    int m_iOwnValue;
+    int m_iAllyValue;
+    int m_iEnemyValue;
 
 };
 

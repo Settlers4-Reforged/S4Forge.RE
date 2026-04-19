@@ -48,12 +48,12 @@ int  CAITaskForceGroup::NumberOfTaskForcesOfClass(enum T_AI_TASK_FORCE_CLASS a2)
 
 
 // address=[0x1328410]
-// Decompiled from struct CAITaskForce *__thiscall CAITaskForceGroup::CreateTaskForce(CAITaskForceGroup *this, int a2)
+// Decompiled from CAITaskForce *__thiscall CAITaskForceGroup::CreateTaskForce(CAITaskForceGroup *this, T_AI_TASK_FORCE_TYPE a2)
 class CAITaskForce *  CAITaskForceGroup::CreateTaskForce(enum T_AI_TASK_FORCE_TYPE a2) {
   
   struct CAITaskForce *TaskForce; // [esp+4h] [ebp-4h]
 
-  TaskForce = (struct CAITaskForce *)CAITaskForces::CreateTaskForce(this->m_sData.m_iPlayerId, a2);
+  TaskForce = CAITaskForces::CreateTaskForce(this->m_sData.m_iPlayerId, a2);
   if ( TaskForce )
     CAITaskForceGroup::AddTaskForce(this, TaskForce);
   return TaskForce;

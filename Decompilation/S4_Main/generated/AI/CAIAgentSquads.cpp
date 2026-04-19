@@ -158,7 +158,7 @@ unsigned int  CAIAgentSquads::Execute(unsigned int a2, unsigned int a3) {
     v74 = CAIGoal::EntityId((CAIGoal *)v4);
     v5 = CAIGoalCache::Goal((struct CAINormalSectorAI *)((char *)v131 + 264), i);
     v75 = CAIGoal::Value((CAIGoal *)v5);
-    dword10 = IAIEnvironment::EntityGetEntityInfoTower(v74)->dword10;
+    dword10 = IAIEnvironment::EntityGetEntityInfoTower(v74)->m_iEnemyValue;
     if ( dword10 > 0 || v75 > 0 )
       CAIDefenceGoals::Insert((CAIDefenceGoals *)v132, v74, 0x80000000, v75, dword10);
   }
