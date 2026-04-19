@@ -8,6 +8,7 @@ int __stdcall BBSupportDbgReport(int, char const *, unsigned int, char const *);
 int __cdecl BBSupportDbgReportF(int, char const *, unsigned int, char const *, ...);
 
 #define BB_REPORT(msg) if(BBSupportDbgReport(2, __FILE__, __LINE__, msg) == 1) { __debugbreak(); }
+#define BB_REPORTF(msg, arg...) if(BBSupportDbgReportF(2, __FILE__, __LINE__, msg, arg) == 1) { __debugbreak(); }
 #define BB_ASSERT(cond) if(!(cond) && BBSupportDbgReport(2, __FILE__, __LINE__, #cond) == 1) { __debugbreak(); }
 
 // address=[0x2f2dfe0]

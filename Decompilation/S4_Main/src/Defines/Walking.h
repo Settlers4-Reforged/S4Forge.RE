@@ -1,0 +1,13 @@
+#ifndef WALKING_H
+#define WALKING_H
+
+enum T_WALKING_TYPE {
+    WALKING_TYPE_NORMAL   = 0,
+    WALKING_TYPE_WORKER   = 1,
+    WALKING_TYPE_CATAPULT = 3,
+    WALKING_TYPE_SHIP     = 4,
+};
+
+constexpr int WALK_FLAG_STRICT_INTERNAL_USE_MASK = 0xBC000;
+
+#endif //WALKING_H
