@@ -7,13 +7,13 @@
  CGfxManager::CGfxManager(bool a2, bool a3, bool a4) {
   
   int v5; // [esp+4h] [ebp-34h]
-  _BYTE v7[28]; // [esp+Ch] [ebp-2Ch] BYREF
+  std::wstring v7; // [esp+Ch] [ebp-2Ch] BYREF
   int v8; // [esp+34h] [ebp-4h]
 
   *(_DWORD *)this = &CGfxManager::_vftable_;
   _vec_ctor_no((char *)this + 4, 0x10u, 0x2Au, (void *(__thiscall *)(void *))CGfxManager::SGFXINFO::SGFXINFO);
   _vec_ctor_no((char *)this + 2188, 0x10u, 0x2Au, (void *(__thiscall *)(void *))CGfxManager::SGFXINFO::SGFXINFO);
-  std::wstring::wstring((char *)this + 3196);
+  std::wstring::wstring((std::wstring *)((char *)this + 3196));
   v8 = 1;
   String::String((CGfxManager *)((char *)this + 3232));
   *((_BYTE *)this + 3224) = a2;
@@ -25,9 +25,9 @@
   memset((char *)this + 1516, 0, 0x150u);
   memset((char *)this + 1852, 0, 0x150u);
   memset((char *)this + 2860, 0, 0xA8u);
-  v5 = std::wstring::wstring(v7, (wchar_t *)L"Gfx");
+  v5 = std::wstring::wstring(&v7, (wchar_t *)L"Gfx");
   std::wstring::operator=(v5);
-  std::wstring::~wstring(v7);
+  std::wstring::~wstring(&v7);
   *((_DWORD *)this + 807) = -1;
   memset(byte_3ECDBF4, 0, 0x2Au);
   *((_BYTE *)this + 3260) = a3;

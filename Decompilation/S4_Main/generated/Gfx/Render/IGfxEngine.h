@@ -30,7 +30,7 @@ public:
     void  SetCameraMode(int a2);
 
     // address=[0x2f5a7d0]
-    void  SetGfxLayerAccess(int a2, struct T_GFX_MAP_ELEMENT * a3);
+    void  SetGfxLayerAccess(int _iSize, struct T_GFX_MAP_ELEMENT * a3);
 
     // address=[0x2f5a860]
     bool  SetPlayerColor(int a1, struct SGfxColor & a2);
@@ -39,7 +39,7 @@ public:
     bool  GetPlayerColor(int a2, struct SGfxColor & a3);
 
     // address=[0x2f5a930]
-    void  SetObjectLayerAccess(struct SGfxObjectInfo * (__cdecl*)(unsigned int,int) a2, unsigned short * a3, unsigned short * a4);
+    void  SetObjectLayerAccess(struct SGfxObjectInfo * (__cdecl*)(unsigned int,int) a2, unsigned short * _pMapObjects, unsigned short * _pDecoObjects);
 
     // address=[0x2f5a960]
     void  SetOwnerIDCallback(int (__cdecl*)(int) a2);
@@ -135,10 +135,10 @@ public:
     bool  PutAccessoryIcon(int a2, void * a3, void * a4);
 
     // address=[0x2f5b570]
-    bool  InitEngine(struct SGfxRenderConfiguration a2, bool a3, int & a4, int & a5, int & a6);
+    bool  InitEngine(struct SGfxRenderConfiguration a2, bool _bIsMMX, int & a4, int & a5, int & a6);
 
     // address=[0x2f5b7c0]
-    bool  RebuildRenderEnvironment(struct SGfxRenderConfiguration a2);
+    bool  RebuildRenderEnvironment(struct SGfxRenderConfiguration sConf);
 
     // address=[0x2f5b8e0]
     struct SGfxRenderConfiguration const &  GetCurrentRenderConfiguration(void)const;
@@ -159,7 +159,7 @@ public:
     void  EnableIconLayer(bool a2);
 
     // address=[0x2f5c480]
-    void  UpdateWorldPosition(int a2, int a2);
+    void  UpdateWorldPosition(int a2, int a3);
 
     // address=[0x2f5c540]
     void  UpdateWorldPosition(int a2);
@@ -168,7 +168,7 @@ public:
     void  RenderCursor(void);
 
     // address=[0x2f5c610]
-    void  ConvertMapPositionToWorldScreenOffsets(int a2, int a3, float & a4, float & a4);
+    void  ConvertMapPositionToWorldScreenOffsets(int a2, int a3, float & a4, float & a5);
 
     // address=[0x2f5c6d0]
     void  ConvertMapPositionToWorldScreenOffsets(int a1, int a2, int & a3, int & a4);
@@ -207,7 +207,7 @@ public:
     int  GetGfxMode(void);
 
     // address=[0x2f5ca40]
-    static unsigned short __cdecl ConvertRgbToHicol(int a1, int a2, int a3);
+    static unsigned short __cdecl ConvertRgbToHicol(int _uR, int _uG, int _uB);
 
     // address=[0x2f5cae0]
     int  GetOutputWidth(void);
@@ -273,10 +273,10 @@ public:
     bool  SolidColorFillGuiSurface(int a2, unsigned char a3, unsigned char a4, unsigned char a5, struct tagRECT a6);
 
     // address=[0x2f699c0]
-    bool  RenderObject(int a2, int a3, struct SGfxObjectInfo * a4, int a5, int a5);
+    bool  RenderObject(int a2, int a3, struct SGfxObjectInfo * a4, int a5, int a6);
 
     // address=[0x2f69c10]
-    bool  RenderResource(int a2, int a3, void * a4, void * a5, void * a6, int a6);
+    bool  RenderResource(int a2, int a3, void * a4, void * a5, void * a6, int a7);
 
     // address=[0x2f69ec0]
     void  SetEffectSystemInterfacePtr(class IGfxEffects * a2);
@@ -288,7 +288,7 @@ public:
     void  EnableDebugStringCallback(char * (__cdecl*)(void) a2);
 
     // address=[0x2f72f50]
-    int  CreateGuiSurface(int a2, struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION * a3);
+    int  CreateGuiSurface(int _iIndex, struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION * a3);
 
     // address=[0x2f73220]
     int  CreateGuiSurface(struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION * a2);
@@ -324,7 +324,7 @@ public:
     bool  ReleaseGuiSurfaceDC(int a2, struct HDC__ * a3);
 
     // address=[0x2f73a10]
-    bool  SetGuiSurfaceClipRect(struct tagRECT const & Src);
+    bool  SetGuiSurfaceClipRect(struct tagRECT const & _rRect);
 
     // address=[0x2f73b20]
     void  ClearGuiSurfaceClipRect(void);
@@ -338,6 +338,24 @@ private:
 
     // address=[0x2f60510]
     bool  SetRenderEnvironment(void);
+
+    // Type information members
+public:
+    _DWORD m_iVertexSize;
+    int m_iCameraVertexSize;
+    _DWORD m_uFixedCursorShape;
+    int m_iWaveIndex;
+    DWORD m_uWaveFrame;
+    _BYTE m_bNeedsRebuild;
+    _BYTE m_bHasCpuMMX;
+    _BYTE m_bHardwareRenderingPossible;
+    _BYTE m_bSoftwareRenderingPossible;
+    _DWORD m_bV7Available;
+    _DWORD m_bV3Available;
+    _BYTE m_bHardwareObjectPossible;
+    _BYTE m_bLockCursorShape;
+    _BYTE[2] gap22;
+    struct SurfaceClipper * m_pSurfaceClipper;
 
 };
 

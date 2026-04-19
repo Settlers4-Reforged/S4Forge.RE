@@ -66,6 +66,28 @@ protected:
     // address=[0x46c16a0]
     static float * sm_fTextureCoordTable;
 
+    // Type information members
+public:
+    struct IDirectDrawSurface7 * m_pSurfaceB;
+    struct IDirectDrawSurface7 * m_pSurfaceA;
+    struct IDirect3DDevice7 * m_pDevice;
+    _DWORD dwordC;
+    _DWORD dword10;
+    _DWORD dword14;
+    _DWORD dword18;
+    _BYTE[2016] gap1C;
+    _DWORD dword7FC;
+    _DWORD dword800;
+    _DWORD dword804;
+    _DWORD dword808;
+    _DWORD dword80C;
+    _DWORD dword810;
+    _DWORD dword814;
+    _BYTE byte818;
+    _BYTE byte819;
+    _DWORD dword81C;
+    _DWORD dword820;
+
 };
 
 

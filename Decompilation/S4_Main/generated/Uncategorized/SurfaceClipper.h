@@ -29,6 +29,11 @@ public:
     // address=[0x2f8a620]
     long  SetClipWindow(struct HWND__ * a2);
 
+    // Type information members
+public:
+    LPDIRECTDRAWCLIPPER m_pClipper;
+    std::vector m_vChar;
+
 };
 
 

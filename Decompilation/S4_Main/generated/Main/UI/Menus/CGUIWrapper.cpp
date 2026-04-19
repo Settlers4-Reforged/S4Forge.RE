@@ -37,8 +37,7 @@ bool  CGUIWrapper::RebuildGuiEngineWithGfxFile(unsigned int a2, void * a3, int a
   int DialogsRenderOffsetX; // [esp+18h] [ebp-2Ch]
   int DialogsRenderOffsetY; // [esp+1Ch] [ebp-28h]
   float DialogsRenderScaleX; // [esp+20h] [ebp-24h]
-  float DialogsRenderScaleY; // [esp+24h] [ebp-20h]
-  IGuiEngine *v11; // [esp+28h] [ebp-1Ch]
+  struct IGuiEngine *v10; // [esp+28h] [ebp-1Ch]
   IGuiEngine *C; // [esp+2Ch] [ebp-18h]
 
   if ( !g_pGfxManager )
@@ -47,45 +46,37 @@ bool  CGUIWrapper::RebuildGuiEngineWithGfxFile(unsigned int a2, void * a3, int a
     return 0;
   DialogsRenderOffsetX = 0;
   DialogsRenderOffsetY = 0;
-  DialogsRenderScaleX = 0.0;
-  DialogsRenderScaleY = 0.0;
+  *(_QWORD *)&DialogsRenderScaleX = 0LL;
   if ( g_pGUIEngine )
   {
-    DialogsRenderOffsetX = IGuiEngine::GetDialogsRenderOffsetX((IGuiEngine *)g_pGUIEngine);
-    DialogsRenderOffsetY = IGuiEngine::GetDialogsRenderOffsetY((IGuiEngine *)g_pGUIEngine);
-    DialogsRenderScaleX = IGuiEngine::GetDialogsRenderScaleX((IGuiEngine *)g_pGUIEngine);
-    DialogsRenderScaleY = IGuiEngine::GetDialogsRenderScaleY((IGuiEngine *)g_pGUIEngine);
+    DialogsRenderOffsetX = IGuiEngine::GetDialogsRenderOffsetX(g_pGUIEngine);
+    DialogsRenderOffsetY = IGuiEngine::GetDialogsRenderOffsetY(g_pGUIEngine);
+    DialogsRenderScaleX = IGuiEngine::GetDialogsRenderScaleX(g_pGUIEngine);
+    *(&DialogsRenderScaleX + 1) = IGuiEngine::GetDialogsRenderScaleY(g_pGUIEngine);
     if ( g_pGUIEngine )
-      delete (IGuiEngine *)g_pGUIEngine;
-    if ( CGfxManager::IsGfxFileEnabled((CGfxManager *)g_pGfxManager, *(_DWORD *)this) )
-      CGfxManager::DisableGfxFile((CGfxManager *)g_pGfxManager, *(_DWORD *)this);
+      delete g_pGUIEngine;
+    if ( CGfxManager::IsGfxFileEnabled(g_pGfxManager, *(_DWORD *)this) )
+      CGfxManager::DisableGfxFile(g_pGfxManager, *(_DWORD *)this);
   }
-  CGfxManager::EnableGfxFile((CGfxManager *)g_pGfxManager, a2, 9, 1, 0xFFFFFFFF);
+  CGfxManager::EnableGfxFile(g_pGfxManager, a2, 9, 1, 0xFFFFFFFF);
   C = (IGuiEngine *)operator new(0x10u);
   if ( C )
-    v11 = IGuiEngine::IGuiEngine(C);
+    v10 = IGuiEngine::IGuiEngine(C);
   else
-    v11 = 0;
-  g_pGUIEngine = (int)v11;
-  if ( !v11 )
+    v10 = 0;
+  g_pGUIEngine = v10;
+  if ( !v10 )
     return 0;
   Language = CGameSettings::GetLanguage();
-  if ( !IGuiEngine::Init(
-          (IGuiEngine *)g_pGUIEngine,
-          (struct IGfxEngine *)g_pGfxEngine,
-          (struct CGfxManager *)g_pGfxManager,
-          a3,
-          a4,
-          a5,
-          Language) )
+  if ( !IGuiEngine::Init(g_pGUIEngine, g_pGfxEngine, g_pGfxManager, a3, a4, a5, Language) )
     return 0;
-  IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, a4);
+  IGuiEngine::CloseDialog(g_pGUIEngine, a4);
   IGuiEngine::SetDialogsRenderOffset(
-    (IGuiEngine *)g_pGUIEngine,
+    g_pGUIEngine,
     DialogsRenderOffsetX,
     DialogsRenderOffsetY,
     DialogsRenderScaleX,
-    DialogsRenderScaleY);
+    *(&DialogsRenderScaleX + 1));
   *(_DWORD *)this = a2;
   return 1;
 }

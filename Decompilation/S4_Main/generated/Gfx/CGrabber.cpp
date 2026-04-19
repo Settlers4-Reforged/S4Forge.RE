@@ -3,13 +3,13 @@
 // Definitions for class CGrabber
 
 // address=[0x14944f0]
-// Decompiled from void __cdecl CGrabber::DoGrab(char a1)
+// Decompiled from void __cdecl CGrabber::DoGrab(std::wstring a1)
 void __cdecl CGrabber::DoGrab(std::wstring a1) {
   
-  const WCHAR *v1; // eax
+  wchar_t *v1; // eax
   int v2; // [esp+18h] [ebp-D8h]
-  int v3; // [esp+1Ch] [ebp-D4h]
-  void *UserDirectoryPath; // [esp+20h] [ebp-D0h]
+  void *v3; // [esp+1Ch] [ebp-D4h]
+  std::wstring *a2; // [esp+20h] [ebp-D0h]
   DWORD nNumberOfBytesToWrite; // [esp+28h] [ebp-C8h]
   int v6; // [esp+2Ch] [ebp-C4h] BYREF
   int v7; // [esp+30h] [ebp-C0h] BYREF
@@ -17,9 +17,9 @@ void __cdecl CGrabber::DoGrab(std::wstring a1) {
   DWORD NumberOfBytesWritten; // [esp+38h] [ebp-B8h] BYREF
   HANDLE hFile; // [esp+3Ch] [ebp-B4h]
   int v11[11]; // [esp+40h] [ebp-B0h] BYREF
-  _BYTE v12[28]; // [esp+6Ch] [ebp-84h] BYREF
-  _BYTE v13[28]; // [esp+88h] [ebp-68h] BYREF
-  int v14[7]; // [esp+A4h] [ebp-4Ch] BYREF
+  std::wstring v12; // [esp+6Ch] [ebp-84h] BYREF
+  std::wstring v13; // [esp+88h] [ebp-68h] BYREF
+  std::wstring a1a; // [esp+A4h] [ebp-4Ch] BYREF
   __int16 Buffer; // [esp+C0h] [ebp-30h] BYREF
   DWORD v16; // [esp+C2h] [ebp-2Eh]
   int v17; // [esp+CAh] [ebp-26h]
@@ -27,19 +27,19 @@ void __cdecl CGrabber::DoGrab(std::wstring a1) {
   int v19; // [esp+ECh] [ebp-4h]
 
   v19 = 0;
-  if ( (unsigned __int8)std::wstring::empty(&a1) )
+  if ( std::wstring::empty(&a1) )
   {
-    UserDirectoryPath = FilePaths::GetUserDirectoryPath(v13);
+    a2 = FilePaths::GetUserDirectoryPath();
     LOBYTE(v19) = 1;
-    v3 = std::operator+<wchar_t>((int)v14, (int)UserDirectoryPath, (wchar_t *)L"Grab\\frame%6d.bmp");
+    v3 = std::operator+<wchar_t>(&a1a, a2, (wchar_t *)L"Grab\\frame%6d.bmp");
     std::wstring::operator=(v3);
-    std::wstring::~wstring(v14);
+    std::wstring::~wstring(&a1a);
     LOBYTE(v19) = 0;
-    std::wstring::~wstring(v13);
+    std::wstring::~wstring(&v13);
   }
-  v2 = sub_1494C50(v12, &a1);
+  v2 = sub_1494C50(&v12, &a1);
   std::wstring::operator=(v2);
-  std::wstring::~wstring(v12);
+  std::wstring::~wstring(&v12);
   FilePaths::EnsurePathExists(&a1);
   memset(v18, 0, sizeof(v18));
   memset(v11, 0, sizeof(v11));
@@ -49,7 +49,7 @@ void __cdecl CGrabber::DoGrab(std::wstring a1) {
   v18[3] = 0;
   v18[4] = 0;
   *(_DWORD *)&v18[5] = 54;
-  v1 = (const WCHAR *)std::wstring::c_str((_Cnd_internal_imp_t *)&a1);
+  v1 = std::wstring::c_str(&a1);
   hFile = CreateFileW(v1, 0x40000000u, 0, 0, 2u, 0x80u, 0);
   nNumberOfBytesToWrite = sub_1494AB0(v6, v7, 16);
   v17 = 54;

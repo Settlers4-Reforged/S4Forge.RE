@@ -30,6 +30,12 @@ protected:
     // address=[0x1481a00]
     void  LoadMenuData(wchar_t const * FileName);
 
+    // Type information members
+public:
+    int m_u4;
+    bool m_u8;
+    bool m_u9;
+
 };
 
 

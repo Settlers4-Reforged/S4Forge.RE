@@ -19,7 +19,7 @@ int  IGuiEngine::GetDialogsRenderOffsetY(void)const {
 
 
 // address=[0x13d8ba0]
-// Decompiled from double __thiscall IGuiEngine::GetDialogsRenderScaleX(IGuiEngine *this)
+// Decompiled from float __thiscall IGuiEngine::GetDialogsRenderScaleX(IGuiEngine *this)
 float  IGuiEngine::GetDialogsRenderScaleX(void)const {
   
   return *((float *)this + 2);
@@ -48,13 +48,8 @@ bool  IGuiEngine::OpenDialog(int a2, bool (__cdecl*)(int,int,int) a3) {
   unsigned __int16 *v12; // [esp+24h] [ebp-38h]
   struct SGuiControl *v13; // [esp+28h] [ebp-34h]
   struct SGuiControl *v14; // [esp+28h] [ebp-34h]
-  _DWORD v15[2]; // [esp+2Ch] [ebp-30h] BYREF
-  int v16; // [esp+34h] [ebp-28h]
-  int v17; // [esp+38h] [ebp-24h]
-  int v18; // [esp+3Ch] [ebp-20h]
-  int v19; // [esp+40h] [ebp-1Ch]
-  char v20; // [esp+44h] [ebp-18h]
-  struct SEventStruct v21; // [esp+48h] [ebp-14h] BYREF
+  struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION v15; // [esp+2Ch] [ebp-30h] BYREF
+  struct SEventStruct v16; // [esp+48h] [ebp-14h] BYREF
 
   if ( !sub_2F9E8F0() || !a3 )
     return 0;
@@ -87,18 +82,18 @@ bool  IGuiEngine::OpenDialog(int a2, bool (__cdecl*)(int,int,int) a3) {
     }
     v13 = (struct SGuiControl *)((char *)v13 + 36);
   }
-  v20 = 1;
+  LOBYTE(v15.m_uU18) = 1;
   v4 = v12[4];
-  v15[0] = v12[3];
-  v15[1] = v4;
-  v16 = v12[1] + IGuiEngine::GetDialogsRenderOffsetX((IGuiEngine *)g_pGUIEngine);
-  v17 = v12[2] + IGuiEngine::GetDialogsRenderOffsetY((IGuiEngine *)g_pGUIEngine);
-  DialogsRenderScaleX = IGuiEngine::GetDialogsRenderScaleX((IGuiEngine *)g_pGUIEngine);
-  v18 = v16 + (int)(float)((float)((float)v15[0] * DialogsRenderScaleX) + 0.5);
-  DialogsRenderScaleY = IGuiEngine::GetDialogsRenderScaleY((IGuiEngine *)g_pGUIEngine);
-  v19 = v17 + (int)(float)((float)((float)v4 * DialogsRenderScaleY) + 0.5);
-  IGfxEngine::CreateGuiSurface((IGfxEngine *)g_pGfxEngine, *v12, (struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION *)v15);
-  IGfxEngine::SetVisibilityOfGuiSurface((IGfxEngine *)g_pGfxEngine, *v12, 1);
+  v15.m_uU0 = v12[3];
+  v15.m_uU4 = v4;
+  v15.m_sDestinationRect = v12[1] + IGuiEngine::GetDialogsRenderOffsetX(g_pGUIEngine);
+  v15.? = v12[2] + IGuiEngine::GetDialogsRenderOffsetY(g_pGUIEngine);
+  DialogsRenderScaleX = IGuiEngine::GetDialogsRenderScaleX(g_pGUIEngine);
+  v15.? = v15.m_sDestinationRect + (int)(float)((float)((float)v15.m_uU0 * DialogsRenderScaleX) + 0.5);
+  DialogsRenderScaleY = IGuiEngine::GetDialogsRenderScaleY(g_pGUIEngine);
+  v15.? = v15.? + (int)(float)((float)((float)v4 * DialogsRenderScaleY) + 0.5);
+  IGfxEngine::CreateGuiSurface(g_pGfxEngine, *v12, &v15);
+  IGfxEngine::SetVisibilityOfGuiSurface(g_pGfxEngine, *v12, 1);
   g_iOpenDialogs[*v12] = a2 + 1;
   g_pfDialogCallbacks[*v12] = (int)a3;
   a3(0, 0, 0);
@@ -113,11 +108,11 @@ bool  IGuiEngine::OpenDialog(int a2, bool (__cdecl*)(int,int,int) a3) {
     v14 = (struct SGuiControl *)((char *)v14 + 36);
   }
   UpdateGui(*v12);
-  v21.m_iEventId = 5;
-  v21.m_lParam = qword_471F794 + (HIDWORD(qword_471F794) << 16);
-  v21.m_wParam = 0;
-  v21.m_iTick = 0;
-  GuiEngine2_EventProc(&v21);
+  v16.m_iEventId = 5;
+  v16.m_lParam = qword_471F794 + (HIDWORD(qword_471F794) << 16);
+  v16.m_wParam = 0;
+  v16.m_iTick = 0;
+  GuiEngine2_EventProc(&v16);
   return 1;
 }
 

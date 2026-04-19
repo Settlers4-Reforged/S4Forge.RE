@@ -7,10 +7,10 @@
  CExtraCD::CExtraCD(void) {
   
   IExtraCD::IExtraCD(this);
-  *(_DWORD *)this = &CExtraCD::_vftable_;
-  *((_DWORD *)this + 1) = 0;
-  *((_BYTE *)this + 8) = 0;
-  *((_BYTE *)this + 9) = 0;
+  this->__vftable = (CExtraCD_vtbl *)&CExtraCD::_vftable_;
+  this->m_u4 = 0;
+  this->m_u8 = 0;
+  this->m_u9 = 0;
   return this;
 }
 

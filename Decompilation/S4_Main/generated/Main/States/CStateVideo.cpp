@@ -126,13 +126,12 @@ bool  CStateVideo::Perform(void) {
   unsigned int v2; // [esp+Ch] [ebp-40h] BYREF
   unsigned __int16 *v3; // [esp+10h] [ebp-3Ch]
   CStateVideo *v4; // [esp+14h] [ebp-38h]
-  bool v5; // [esp+1Bh] [ebp-31h]
-  _DWORD v6[6]; // [esp+1Ch] [ebp-30h] BYREF
-  char v7; // [esp+34h] [ebp-18h]
-  int v8; // [esp+38h] [ebp-14h]
-  int v9; // [esp+3Ch] [ebp-10h]
-  int v10; // [esp+40h] [ebp-Ch]
-  int v11; // [esp+44h] [ebp-8h]
+  char v5; // [esp+1Bh] [ebp-31h]
+  struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION v6; // [esp+1Ch] [ebp-30h] BYREF
+  int v7; // [esp+38h] [ebp-14h]
+  int v8; // [esp+3Ch] [ebp-10h]
+  int v9; // [esp+40h] [ebp-Ch]
+  int v10; // [esp+44h] [ebp-8h]
 
   v4 = this;
   if ( !g_pGfxEngine && BBSupportDbgReport(2, "Main\\States\\StateVideo.cpp", 273, "g_pGfxEngine") == 1 )
@@ -144,34 +143,31 @@ bool  CStateVideo::Perform(void) {
       v5 = 0;
       if ( IVideoEngine::IsReadyForNextFrame((IVideoEngine *)g_pVideoEngine) )
       {
-        v3 = IGfxEngine::BeginWriteToSurface((IGfxEngine *)g_pGfxEngine, 0, &v2);
+        v3 = IGfxEngine::BeginWriteToSurface(g_pGfxEngine, 0, &v2);
         if ( !v3 )
         {
+          LOBYTE(v6.m_uU18) = 0;
+          v6.m_uU0 = 640;
+          v6.m_uU4 = 480;
           v7 = 0;
-          v6[0] = 640;
-          v6[1] = 480;
           v8 = 0;
-          v9 = 0;
-          v10 = 640;
-          v11 = 480;
-          v6[2] = 0;
-          v6[3] = 0;
-          v6[4] = 640;
-          v6[5] = 480;
-          if ( !IGfxEngine::CreateGuiSurface(
-                  (IGfxEngine *)g_pGfxEngine,
-                  0,
-                  (struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION *)v6) )
+          v9 = 640;
+          v10 = 480;
+          v6.m_sDestinationRect = 0;
+          v6.? = 0;
+          v6.? = 640;
+          v6.? = 480;
+          if ( !IGfxEngine::CreateGuiSurface(g_pGfxEngine, 0, &v6) )
           {
             CStateVideo::AlignVideoSurface(v4);
-            IGfxEngine::SetVisibilityOfGuiSurface((IGfxEngine *)g_pGfxEngine, 0, 1);
-            v3 = IGfxEngine::BeginWriteToSurface((IGfxEngine *)g_pGfxEngine, 0, &v2);
+            IGfxEngine::SetVisibilityOfGuiSurface(g_pGfxEngine, 0, 1);
+            v3 = IGfxEngine::BeginWriteToSurface(g_pGfxEngine, 0, &v2);
           }
         }
         v5 = IVideoEngine::RenderToSurface((IVideoEngine *)g_pVideoEngine, v3, v2);
-        IGfxEngine::EndWriteToSurface((IGfxEngine *)g_pGfxEngine, 0);
-        IGfxEngine::RenderFrame((IGfxEngine *)g_pGfxEngine, 0, 0);
-        IGfxEngine::ShowFrame((IGfxEngine *)g_pGfxEngine);
+        IGfxEngine::EndWriteToSurface(g_pGfxEngine, 0);
+        IGfxEngine::RenderFrame(g_pGfxEngine, 0, 0);
+        IGfxEngine::ShowFrame(g_pGfxEngine);
         if ( !v5 )
           CStateVideo::EndVideo(v4);
       }

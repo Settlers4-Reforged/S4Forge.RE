@@ -3,14 +3,14 @@
 // Definitions for class CStateMainMenu
 
 // address=[0x14c16a0]
-// Decompiled from CStateMainMenu *__cdecl CStateMainMenu::DynamicCreateFunc(void *a1)
+// Decompiled from struct CGameState *__cdecl CStateMainMenu::DynamicCreateFunc(void *a1)
 class CGameState * __cdecl CStateMainMenu::DynamicCreateFunc(void * a1) {
   
   CStateMainMenu *C; // [esp+Ch] [ebp-10h]
 
   C = (CStateMainMenu *)operator new(0x14u);
   if ( C )
-    return CStateMainMenu::CStateMainMenu(C, a1);
+    return (struct CGameState *)CStateMainMenu::CStateMainMenu(C, a1);
   else
     return 0;
 }

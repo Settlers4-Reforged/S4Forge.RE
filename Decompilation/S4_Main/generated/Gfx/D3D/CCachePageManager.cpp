@@ -3,7 +3,7 @@
 // Definitions for class CCachePageManager
 
 // address=[0x2f5f420]
-// Decompiled from void __thiscall CCachePageManager::SetCurrentZoomFactor(CCachePageManager *this, int a2)
+// Decompiled from void __thiscall CCachePageManager::SetCurrentZoomFactor(CCachePageManager *this, float a2)
 void  CCachePageManager::SetCurrentZoomFactor(float a2) {
   
   CCachePageManager::sm_fZoomFactor = a2;
@@ -33,29 +33,29 @@ bool  CCachePageManager::IsVideoSurfaceLocked(void) {
   int i; // [esp+4h] [ebp-8h]
   int j; // [esp+4h] [ebp-8h]
 
-  *((_DWORD *)this + 1) = a2;
-  *(_DWORD *)this = a3;
-  *((_DWORD *)this + 2) = a4;
-  *((_DWORD *)this + 4) = 0;
-  *((_DWORD *)this + 3) = 0;
-  *((_DWORD *)this + 6) = 0;
-  *((_DWORD *)this + 5) = 0;
-  *((_DWORD *)this + 511) = 0;
-  *((_BYTE *)this + 2073) = 0;
-  *((_BYTE *)this + 2072) = 0;
-  *((_DWORD *)this + 519) = 0;
-  *((_DWORD *)this + 520) = 0;
-  *((_DWORD *)this + 515) = 0;
-  *((_DWORD *)this + 514) = 0;
-  *((_DWORD *)this + 516) = 511;
-  *((_DWORD *)this + 517) = 511;
-  *((_DWORD *)this + 512) = 0;
-  *((_DWORD *)this + 513) = 0;
+  this->m_pSurfaceA = a2;
+  this->m_pSurfaceB = a3;
+  this->m_pDevice = a4;
+  this->dword10 = 0;
+  this->dwordC = 0;
+  this->dword18 = 0;
+  this->dword14 = 0;
+  this->dword7FC = 0;
+  this->byte819 = 0;
+  this->byte818 = 0;
+  this->dword81C = 0;
+  this->dword820 = 0;
+  this->dword80C = 0;
+  this->dword808 = 0;
+  this->dword810 = 511;
+  this->dword814 = 511;
+  this->dword800 = 0;
+  this->dword804 = 0;
   for ( i = 0; i < 576; ++i )
   {
-    dword_46C1F20[8 * i] = (int)&dword_F29144[220078] + 3;
-    dword_46C1F18[8 * i] = LODWORD(FLOAT_0_5);
-    dword_46C1F1C[8 * i] = LODWORD(FLOAT_0_5);
+    dword_46C1F20[8 * i] = 0xFFFFFF;
+    dword_46C1F18[8 * i] = FLOAT_0_5;
+    dword_46C1F1C[8 * i] = FLOAT_0_5;
   }
   for ( j = 0; j < 512; ++j )
     CCachePageManager::sm_fTextureCoordTable[j] = (float)((float)j / 512.0) + 0.0009765625;

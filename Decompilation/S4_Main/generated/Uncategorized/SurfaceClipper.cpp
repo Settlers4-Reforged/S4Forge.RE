@@ -14,12 +14,9 @@ struct IDirectDrawClipper *  SurfaceClipper::GetClipper(void) {
 // Decompiled from SurfaceClipper *__thiscall SurfaceClipper::SurfaceClipper(SurfaceClipper *this)
  SurfaceClipper::SurfaceClipper(void) {
   
-  SurfaceClipper *v2; // [esp+0h] [ebp-4h]
-  int savedregs; // [esp+4h] [ebp+0h]
-
-  *(_DWORD *)this = 0;
-  std::vector<char>::vector<char>((int)this, savedregs);
-  return v2;
+  this->m_pClipper = 0;
+  std::vector<char>::vector<char>(&this->m_vChar);
+  return this;
 }
 
 
@@ -71,8 +68,8 @@ long  SurfaceClipper::SetClipRect(struct tagRECT const & Src) {
   
   _DWORD *v4; // [esp+8h] [ebp-4h]
 
-  std::vector<char>::resize(52);
-  v4 = (_DWORD *)std::vector<char>::front();
+  std::vector<char>::resize(this + 1, 0x34u);
+  v4 = (_DWORD *)std::vector<char>::front(this + 1);
   *v4 = 32;
   v4[1] = 1;
   v4[2] = 1;

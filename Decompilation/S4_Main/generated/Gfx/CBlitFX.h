@@ -17,6 +17,11 @@ public:
     // address=[0x2f864e0]
     void  SetFillColorAlpha(int a2, int a3, int a4, int a5);
 
+    // Type information members
+public:
+    int m_u0;
+    int[24] m_u4;
+
 };
 
 

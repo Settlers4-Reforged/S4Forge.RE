@@ -6,22 +6,22 @@
 // Decompiled from CFixCursor *__thiscall CFixCursor::CFixCursor(CFixCursor *this)
  CFixCursor::CFixCursor(void) {
   
-  *((_BYTE *)this + 36) = 0;
-  *((_DWORD *)this + 3) = 0;
-  *((_DWORD *)this + 1) = 0;
-  *((_DWORD *)this + 2) = 0;
-  *((_DWORD *)this + 4) = 0;
-  *((_DWORD *)this + 7) = 0;
-  *((_DWORD *)this + 5) = 0;
-  *((_DWORD *)this + 6) = 0;
-  *((_DWORD *)this + 8) = 0;
-  *(_DWORD *)this = 0;
+  this->m_bVisible = 0;
+  this->? = 0;
+  this->m_sRect = 0;
+  this->? = 0;
+  this->? = 0;
+  this->? = 0;
+  this->m_sOffset = 0;
+  this->? = 0;
+  this->? = 0;
+  this->m_pSurface = 0;
   return this;
 }
 
 
 // address=[0x2f624a0]
-// Decompiled from int __thiscall CFixCursor::SetSurfacePtr(  CFixCursor *this,  unsigned __int16 a2,  struct CSurface *a3,  unsigned __int16 a4)
+// Decompiled from int __thiscall CFixCursor::SetSurfacePtr(CFixCursor *this, unsigned __int16 a2, CSurfaceV7 *a3, unsigned __int16 a4)
 void  CFixCursor::SetSurfacePtr(unsigned short a2, class CSurface * a3, unsigned short a4) {
   
   unsigned int v5; // [esp+0h] [ebp-2Ch] BYREF
@@ -30,14 +30,12 @@ void  CFixCursor::SetSurfacePtr(unsigned short a2, class CSurface * a3, unsigned
   int v8; // [esp+Ch] [ebp-20h] BYREF
   int y; // [esp+10h] [ebp-1Ch]
   int v10; // [esp+14h] [ebp-18h]
-  CFixCursor *v11; // [esp+18h] [ebp-14h]
   int x; // [esp+1Ch] [ebp-10h]
   HGDIOBJ ho; // [esp+20h] [ebp-Ch]
   HDC hdc; // [esp+24h] [ebp-8h]
   unsigned __int16 v15; // [esp+28h] [ebp-4h]
 
-  v11 = this;
-  *(_DWORD *)this = a3;
+  this->m_pSurface = a3;
   ho = LoadBitmapA(g_hInstance, (LPCSTR)a2);
   if ( !ho )
     return BBSupportTracePrintF(1, "GFX ENGINE: Cannot open resource bitmap!");
@@ -47,11 +45,7 @@ void  CFixCursor::SetSurfacePtr(unsigned short a2, class CSurface * a3, unsigned
     h = SelectObject(hdc, ho);
     if ( h )
     {
-      v10 = (*(int (__thiscall **)(_DWORD, unsigned int *, int *, int))(**(_DWORD **)v11 + 32))(
-              *(_DWORD *)v11,
-              &v5,
-              &v8,
-              1);
+      v10 = this->m_pSurface->Lock(this->m_pSurface, (int *)&v5, &v8, 1);
       if ( v10 )
       {
         WriteError(v10, "LockCursorSurface");
@@ -79,7 +73,7 @@ void  CFixCursor::SetSurfacePtr(unsigned short a2, class CSurface * a3, unsigned
           }
           v8 += 2 * (v5 >> 1);
         }
-        v10 = (*(int (__thiscall **)(_DWORD))(**(_DWORD **)v11 + 36))(*(_DWORD *)v11);
+        v10 = this->m_pSurface->Unlock(this->m_pSurface);
         if ( v10 )
           WriteError(v10, "UnlockCursorSurface");
         SelectObject(hdc, h);
@@ -103,80 +97,67 @@ void  CFixCursor::SetSurfacePtr(unsigned short a2, class CSurface * a3, unsigned
 
 
 // address=[0x2f626a0]
-// Decompiled from CFixCursor *__thiscall CFixCursor::SetFixCursor(CFixCursor *this, int a2, int a3, bool a4)
+// Decompiled from void __thiscall CFixCursor::SetFixCursor(CFixCursor *this, int a2, int a3, bool a4)
 void  CFixCursor::SetFixCursor(int a2, int a3, bool a4) {
   
-  CFixCursor *result; // eax
-  int v5; // eax
-  int v6; // edx
+  int v4; // eax
+  int v5; // [esp+0h] [ebp-8h]
+  int v6; // [esp+0h] [ebp-8h]
   int v7; // [esp+0h] [ebp-8h]
-  int v8; // [esp+0h] [ebp-8h]
-  int v9; // [esp+0h] [ebp-8h]
 
-  *((_BYTE *)this + 36) = a4;
-  *((_DWORD *)this + 1) = a2 - 8;
-  *((_DWORD *)this + 2) = a3 - 8;
-  *((_DWORD *)this + 3) = a2 + 24;
-  *((_DWORD *)this + 4) = a3 + 24;
-  *((_DWORD *)this + 5) = 0;
-  *((_DWORD *)this + 6) = 0;
-  *((_DWORD *)this + 7) = 32;
-  *((_DWORD *)this + 8) = 32;
-  if ( *((_DWORD *)this + 4) > OutputHeight )
+  this->m_bVisible = a4;
+  this->m_sRect.left = a2 - 8;
+  this->m_sRect.top = a3 - 8;
+  this->m_sRect.right = a2 + 24;
+  this->m_sRect.bottom = a3 + 24;
+  this->m_sOffset.left = 0;
+  this->m_sOffset.top = 0;
+  this->m_sOffset.right = 32;
+  this->m_sOffset.bottom = 32;
+  if ( this->m_sRect.bottom > GfxEngineSetup.m_uHeight )
   {
-    v7 = *((_DWORD *)this + 4) - OutputHeight;
-    *((_DWORD *)this + 4) -= v7;
-    *((_DWORD *)this + 8) -= v7;
+    v5 = this->m_sRect.bottom - GfxEngineSetup.m_uHeight;
+    this->m_sRect.bottom -= v5;
+    this->m_sOffset.bottom -= v5;
   }
-  result = this;
-  if ( *((_DWORD *)this + 3) > OutputWidth )
+  if ( this->m_sRect.right > GfxEngineSetup.m_uWidth )
   {
-    v8 = *((_DWORD *)this + 3) - OutputWidth;
-    *((_DWORD *)this + 3) -= v8;
-    result = this;
-    *((_DWORD *)this + 7) -= v8;
+    v6 = this->m_sRect.right - GfxEngineSetup.m_uWidth;
+    this->m_sRect.right -= v6;
+    this->m_sOffset.right -= v6;
   }
-  if ( *((int *)this + 2) < 0 )
+  if ( this->m_sRect.top < 0 )
   {
-    v9 = abs(*((_DWORD *)this + 2));
-    *((_DWORD *)this + 2) += v9;
-    result = this;
-    *((_DWORD *)this + 6) += v9;
+    v7 = abs(this->m_sRect.top);
+    this->m_sRect.top += v7;
+    this->m_sOffset.top += v7;
   }
-  if ( *((int *)this + 1) >= 0 )
-    return result;
-  v5 = abs(*((_DWORD *)this + 1));
-  *((_DWORD *)this + 1) += v5;
-  v6 = v5 + *((_DWORD *)this + 5);
-  result = this;
-  *((_DWORD *)this + 5) = v6;
-  return result;
+  if ( this->m_sRect.left < 0 )
+  {
+    v4 = abs(this->m_sRect.left);
+    this->m_sRect.left += v4;
+    this->m_sOffset.left += v4;
+  }
 }
 
 
 // address=[0x2f62800]
-// Decompiled from int __thiscall CFixCursor::Show(CFixCursor *this, struct CSurface *a2)
+// Decompiled from HRESULT __thiscall CFixCursor::Show(CFixCursor *this, CSurfaceV7 *a2)
 long  CFixCursor::Show(class CSurface * a2) {
   
   if ( !CFixCursor::IsVisible(this) )
     return 0;
-  if ( *(_DWORD *)this && a2 )
-    return (*(int (__thiscall **)(struct CSurface *, char *, _DWORD, char *, int, _DWORD))(*(_DWORD *)a2 + 24))(
-             a2,
-             (char *)this + 4,
-             *(_DWORD *)this,
-             (char *)this + 20,
-             0x8000,
-             0);
+  if ( this->m_pSurface && a2 )
+    return a2->Blt(a2, &this->m_sRect, this->m_pSurface, &this->m_sOffset, 0x8000u, 0);
   return 0;
 }
 
 
 // address=[0x2f699a0]
-// Decompiled from unsigned __int8 __thiscall CFixCursor::IsVisible(CMFCScanliner *this)
+// Decompiled from unsigned __int8 __thiscall CFixCursor::IsVisible(CFixCursor *this)
 bool  CFixCursor::IsVisible(void) {
   
-  return *((_BYTE *)this + 36);
+  return this->m_bVisible;
 }
 
 

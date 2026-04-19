@@ -38316,83 +38316,76 @@ class ISimpleNet * __cdecl CreateSimpleNet(void) {
 // Decompiled from char ImportWSAFunctions()
 bool __cdecl ImportWSAFunctions(void) {
   
-  hLibModule = LoadLibraryA("WS2_32.DLL");
-  controlfp(0xA031Fu, (unsigned int)&loc_30F031E + 1);
-  if ( hLibModule
-    || (hLibModule = LoadLibraryA("wsock32.DLL"), controlfp(0xA031Fu, (unsigned int)&loc_30F031E + 1), hLibModule) )
+  hWSALib = LoadLibraryA("WS2_32.DLL");
+  _controlfp(0xA031Fu, 0x30F031Fu);
+  if ( hWSALib || (hWSALib = LoadLibraryA("wsock32.DLL"), _controlfp(0xA031Fu, 0x30F031Fu), hWSALib) )
   {
-    WSACleanup = GetProcAddress(hLibModule, "WSACleanup");
+    WSACleanup = GetProcAddress(hWSALib, "WSACleanup");
     if ( WSACleanup )
     {
-      WSAGetLastError = GetProcAddress(hLibModule, "WSAGetLastError");
+      WSAGetLastError = GetProcAddress(hWSALib, "WSAGetLastError");
       if ( WSAGetLastError )
       {
-        inet_addr = (unsigned int (__stdcall *)(const char *))GetProcAddress(hLibModule, "inet_addr");
+        inet_addr = (unsigned int (__stdcall *)(const char *))GetProcAddress(hWSALib, "inet_addr");
         if ( inet_addr )
         {
-          closesocket = (int (__stdcall *)(SOCKET))GetProcAddress(hLibModule, "closesocket");
+          closesocket = (int (__stdcall *)(SOCKET))GetProcAddress(hWSALib, "closesocket");
           if ( closesocket )
           {
-            shutdown = (int (__stdcall *)(SOCKET, int))GetProcAddress(hLibModule, "shutdown");
+            shutdown = (int (__stdcall *)(SOCKET, int))GetProcAddress(hWSALib, "shutdown");
             if ( shutdown )
             {
-              inet_ntoa = (char *(__stdcall *)(struct in_addr))GetProcAddress(hLibModule, "inet_ntoa");
+              inet_ntoa = (char *(__stdcall *)(struct in_addr))GetProcAddress(hWSALib, "inet_ntoa");
               if ( inet_ntoa )
               {
-                socket = (SOCKET (__stdcall *)(int, int, int))GetProcAddress(hLibModule, "socket");
+                socket = (SOCKET (__stdcall *)(int, int, int))GetProcAddress(hWSALib, "socket");
                 if ( socket )
                 {
                   getsockname = (int (__stdcall *)(SOCKET, struct sockaddr *, int *))GetProcAddress(
-                                                                                       hLibModule,
+                                                                                       hWSALib,
                                                                                        "getsockname");
                   if ( getsockname )
                   {
                     getsockopt = (int (__stdcall *)(SOCKET, int, int, char *, int *))GetProcAddress(
-                                                                                       hLibModule,
+                                                                                       hWSALib,
                                                                                        "getsockopt");
                     if ( getsockopt )
                     {
                       setsockopt = (int (__stdcall *)(SOCKET, int, int, const char *, int))GetProcAddress(
-                                                                                             hLibModule,
+                                                                                             hWSALib,
                                                                                              "setsockopt");
                       if ( setsockopt )
                       {
-                        bind = (int (__stdcall *)(SOCKET, const struct sockaddr *, int))GetProcAddress(
-                                                                                          hLibModule,
-                                                                                          "bind");
+                        bind = (int (__stdcall *)(SOCKET, const struct sockaddr *, int))GetProcAddress(hWSALib, "bind");
                         if ( bind )
                         {
-                          htons = (u_short (__stdcall *)(u_short))GetProcAddress(hLibModule, "htons");
+                          htons = (u_short (__stdcall *)(u_short))GetProcAddress(hWSALib, "htons");
                           if ( htons )
                           {
-                            select = (int (__stdcall *)(int, fd_set *, fd_set *, fd_set *, const struct timeval *))GetProcAddress(hLibModule, "select");
+                            select = (int (__stdcall *)(int, fd_set *, fd_set *, fd_set *, const struct timeval *))GetProcAddress(hWSALib, "select");
                             if ( select )
                             {
-                              sendto = (int (__stdcall *)(SOCKET, const char *, int, int, const struct sockaddr *, int))GetProcAddress(hLibModule, "sendto");
+                              sendto = (int (__stdcall *)(SOCKET, const char *, int, int, const struct sockaddr *, int))GetProcAddress(hWSALib, "sendto");
                               if ( sendto )
                               {
-                                recvfrom = (int (__stdcall *)(SOCKET, char *, int, int, struct sockaddr *, int *))GetProcAddress(hLibModule, "recvfrom");
+                                recvfrom = (int (__stdcall *)(SOCKET, char *, int, int, struct sockaddr *, int *))GetProcAddress(hWSALib, "recvfrom");
                                 if ( recvfrom )
                                 {
-                                  WSAIoctl = (int (__stdcall *)(SOCKET, DWORD, LPVOID, DWORD, LPVOID, DWORD, LPDWORD, LPWSAOVERLAPPED, LPWSAOVERLAPPED_COMPLETION_ROUTINE))GetProcAddress(hLibModule, "WSAIoctl");
+                                  WSAIoctl = (int (__stdcall *)(SOCKET, DWORD, LPVOID, DWORD, LPVOID, DWORD, LPDWORD, LPWSAOVERLAPPED, LPWSAOVERLAPPED_COMPLETION_ROUTINE))GetProcAddress(hWSALib, "WSAIoctl");
                                   if ( !WSAIoctl )
                                     BBSupportTracePrintF(3, "Error getting WSAIoctl!");
-                                  WSAStartup = (int (__stdcall *)(WORD, LPWSADATA))GetProcAddress(
-                                                                                     hLibModule,
-                                                                                     "WSAStartup");
+                                  WSAStartup = (int (__stdcall *)(WORD, LPWSADATA))GetProcAddress(hWSALib, "WSAStartup");
                                   if ( WSAStartup )
                                   {
-                                    gethostname = (int (__stdcall *)(char *, int))GetProcAddress(
-                                                                                    hLibModule,
-                                                                                    "gethostname");
+                                    gethostname = (int (__stdcall *)(char *, int))GetProcAddress(hWSALib, "gethostname");
                                     if ( gethostname )
                                     {
                                       gethostbyname = (struct hostent *(__stdcall *)(const char *))GetProcAddress(
-                                                                                                     hLibModule,
+                                                                                                     hWSALib,
                                                                                                      "gethostbyname");
                                       if ( gethostbyname )
                                       {
-                                        ntohl = (u_long (__stdcall *)(u_long))GetProcAddress(hLibModule, "ntohl");
+                                        ntohl = (u_long (__stdcall *)(u_long))GetProcAddress(hWSALib, "ntohl");
                                         if ( ntohl )
                                         {
                                           return 1;
@@ -38525,10 +38518,10 @@ void __cdecl ExitWSAFunctions(void) {
   
   BOOL result; // eax
 
-  if ( !hLibModule )
+  if ( !hWSALib )
     return result;
-  result = FreeLibrary(hLibModule);
-  hLibModule = 0;
+  result = FreeLibrary(hWSALib);
+  hWSALib = 0;
   return result;
 }
 
@@ -43003,24 +42996,24 @@ void __cdecl ConvertMapIndexToScreenPosition(int a1, int a2, int & a3, int & a4,
   int v13; // [esp+24h] [ebp-8h]
   unsigned __int8 *v14; // [esp+28h] [ebp-4h]
 
-  result = dword_3E2E2A0;
-  v14 = (unsigned __int8 *)dword_3E2E2A0;
-  if ( dword_3E2E2A0 )
+  result = g_pGfxLayer;
+  v14 = (unsigned __int8 *)g_pGfxLayer;
+  if ( g_pGfxLayer )
   {
     *a3 = -8 * dword_3E2E290 - (dword_3E2E2B4 << 16);
     *a3 += dword_3E2E290 * (HIDWORD(a1) - (dword_3E2E2AC - 7));
     if ( (a1 & 0x100000000LL) != 0 )
     {
-      *a2 = (dword_3E2E2BC - dword_3E2E2B0 - (dword_3E2E28C >> 16) - ((30 * dword_3E2E28C) >> 16)) << 16;
+      *a2 = (g_uLeftGuiBorderWidth - dword_3E2E2B0 - (g_iVertexSize >> 16) - ((30 * g_iVertexSize) >> 16)) << 16;
       v12 = 1;
     }
     else
     {
-      *a2 = ((dword_3E2E2BC - dword_3E2E2B0 - (dword_3E2E28C >> 16) - ((30 * dword_3E2E28C) >> 16)) << 16)
-          + -dword_3E2E28C / 2;
+      *a2 = ((g_uLeftGuiBorderWidth - dword_3E2E2B0 - (g_iVertexSize >> 16) - ((30 * g_iVertexSize) >> 16)) << 16)
+          + -g_iVertexSize / 2;
       v12 = 0;
     }
-    *a2 += dword_3E2E28C * (a1 - v12 - (dword_3E2E2A8 + SHIDWORD(a1) / 2 - 30));
+    *a2 += g_iVertexSize * (a1 - v12 - (dword_3E2E2A8 + SHIDWORD(a1) / 2 - 30));
     if ( (int)(HIDWORD(a1) | a1) >= 0 && (int)a1 < (int)Size && SHIDWORD(a1) < (int)Size )
       v14 += 4 * a1 + 4 * Size * HIDWORD(a1);
     v13 = (int)CalcFinalHeightOffset(*v14) >> 16;
@@ -43068,44 +43061,40 @@ void __cdecl ConvertMapIndexToScreenPosition(int a1, int a2, int & a3, int & a4,
 
 
 // address=[0x2f5d3a0]
-// Decompiled from int *__cdecl ConvertMapIndexToScreenPosition(__int64 a1, int *a2, int *a3)
+// Decompiled from void __cdecl ConvertMapIndexToScreenPosition(int a1, int a2, int *a3, int *a4)
 void __cdecl ConvertMapIndexToScreenPosition(int a1, int a2, int & a3, int & a4) {
   
-  int *result; // eax
   int v4; // [esp+8h] [ebp-8h]
-  unsigned __int8 *v5; // [esp+Ch] [ebp-4h]
+  struct T_GFX_MAP_ELEMENT *v5; // [esp+Ch] [ebp-4h]
 
-  result = (int *)dword_3E2E2A0;
-  v5 = (unsigned __int8 *)dword_3E2E2A0;
-  if ( dword_3E2E2A0 )
+  v5 = g_pGfxLayer;
+  if ( g_pGfxLayer )
   {
-    *a3 = -8 * dword_3E2E290 - (dword_3E2E2B4 << 16);
-    *a3 += dword_3E2E290 * (HIDWORD(a1) - (dword_3E2E2AC - 7));
-    if ( (a1 & 0x100000000LL) != 0 )
+    *a4 = -8 * dword_3E2E290 - (dword_3E2E2B4 << 16);
+    *a4 += dword_3E2E290 * (a2 - (dword_3E2E2AC - 7));
+    if ( (a2 & 1) != 0 )
     {
-      *a2 = (dword_3E2E2BC - dword_3E2E2B0 - (dword_3E2E28C >> 16) - ((30 * dword_3E2E28C) >> 16)) << 16;
+      *a3 = (g_uLeftGuiBorderWidth - dword_3E2E2B0 - (g_iVertexSize >> 16) - ((30 * g_iVertexSize) >> 16)) << 16;
       v4 = 1;
     }
     else
     {
-      *a2 = ((dword_3E2E2BC - dword_3E2E2B0 - (dword_3E2E28C >> 16) - ((30 * dword_3E2E28C) >> 16)) << 16)
-          + -dword_3E2E28C / 2;
+      *a3 = ((g_uLeftGuiBorderWidth - dword_3E2E2B0 - (g_iVertexSize >> 16) - ((30 * g_iVertexSize) >> 16)) << 16)
+          + -g_iVertexSize / 2;
       v4 = 0;
     }
-    *a2 += dword_3E2E28C * (a1 - v4 - (dword_3E2E2A8 + SHIDWORD(a1) / 2 - 30));
-    if ( (int)(HIDWORD(a1) | a1) >= 0 && (int)a1 < (int)Size && SHIDWORD(a1) < (int)Size )
-      v5 += 4 * a1 + 4 * Size * HIDWORD(a1);
-    *a3 -= CalcFinalHeightOffset(*v5);
-    *a2 >>= 16;
-    result = a3;
+    *a3 += g_iVertexSize * (a1 - v4 - (dword_3E2E2A8 + a2 / 2 - 30));
+    if ( (a2 | a1) >= 0 && a1 < (int)Size && a2 < (int)Size )
+      v5 += a1 + Size * a2;
+    *a4 -= CalcFinalHeightOffset(v5->m_uGroundHeight);
     *a3 >>= 16;
+    *a4 >>= 16;
   }
   else
   {
+    *a4 = 0;
     *a3 = 0;
-    *a2 = 0;
   }
-  return result;
 }
 
 
@@ -43156,24 +43145,28 @@ int __cdecl SearchMapPoint(int a1, int a2, int & a3, int & a4, bool a5) {
   int v38; // [esp+88h] [ebp+8h]
   int v39; // [esp+8Ch] [ebp+Ch]
 
-  if ( dword_3E2E2A0 )
+  if ( g_pGfxLayer )
   {
-    NewValue = controlfp(0x300u, 0x300u);
+    NewValue = _controlfp(0x300u, 0x300u);
     v27 = a2;
     v26 = a1;
-    v38 = a1 + dword_3E2E2B0 + (dword_3E2E28C >> 17);
+    v38 = a1 + dword_3E2E2B0 + (g_iVertexSize >> 17);
     v39 = a2 + dword_3E2E2B4 + (dword_3E2E290 >> 17);
     if ( g_iCameraMode == 1 )
       v39 *= 2;
-    *a4 = v39 / (dword_3E2E28C >> 16) + dword_3E2E2AC + 1;
+    *a4 = v39 / (g_iVertexSize >> 16) + dword_3E2E2AC + 1;
     if ( (*a4 & 1) != 0 )
-      v25 = dword_3E2E2BC - dword_3E2E2B0 - (dword_3E2E28C >> 16) - ((30 * dword_3E2E28C) >> 16);
+      v25 = g_uLeftGuiBorderWidth - dword_3E2E2B0 - (g_iVertexSize >> 16) - ((30 * g_iVertexSize) >> 16);
     else
-      v25 = dword_3E2E2BC - dword_3E2E2B0 - (dword_3E2E28C >> 16) - ((30 * dword_3E2E28C) >> 16) - (dword_3E2E28C >> 17);
-    *a3 = dword_3E2E2A8 + *a4 / 2 - 30 + (v38 - v25) / (dword_3E2E28C >> 16);
+      v25 = g_uLeftGuiBorderWidth
+          - dword_3E2E2B0
+          - (g_iVertexSize >> 16)
+          - ((30 * g_iVertexSize) >> 16)
+          - (g_iVertexSize >> 17);
+    *a3 = dword_3E2E2A8 + *a4 / 2 - 30 + (v38 - v25) / (g_iVertexSize >> 16);
     if ( *a3 >= 0 && *a4 >= 0 && *a3 < (int)Size && *a4 < (int)Size )
     {
-      v14 = (dword_3E2E28C >> 16) / 2 + 1;
+      v14 = (g_iVertexSize >> 16) / 2 + 1;
       v21 = 5;
       v17 = FLOAT_0_75;
       if ( !g_iCameraMode )
@@ -43183,12 +43176,12 @@ int __cdecl SearchMapPoint(int a1, int a2, int & a3, int & a4, bool a5) {
         HIDWORD(v7) = *a4;
         LODWORD(v7) = *a3;
         ConvertMapIndexToScreenPosition(v7, &v25, &v22, &v13, &v12);
-        v11 = (int)(float)((float)(v27 - v22) / (float)((float)((float)(dword_3E2E28C >> 16) / 32.0) * 1.65));
+        v11 = (int)(float)((float)(v27 - v22) / (float)((float)((float)(g_iVertexSize >> 16) / 32.0) * 1.65));
         Number = (int)(float)((float)(v11 / 7) * v17);
         if ( v26 - v25 >= 0 )
-          v6 = (float)((float)(v26 - v25) / (float)(dword_3E2E28C >> 16)) + 0.5;
+          v6 = (float)((float)(v26 - v25) / (float)(g_iVertexSize >> 16)) + 0.5;
         else
-          v6 = (float)((float)(v26 - v25) / (float)(dword_3E2E28C >> 16)) - 0.5;
+          v6 = (float)((float)(v26 - v25) / (float)(g_iVertexSize >> 16)) - 0.5;
         v19 = (int)v6;
         v30 = 1;
         if ( j__abs(Number) <= 0 || v27 >= v22 - v13 && v27 < v12 + v22 )
@@ -43223,7 +43216,7 @@ int __cdecl SearchMapPoint(int a1, int a2, int & a3, int & a4, bool a5) {
           BBSupportTracePrintF(1, "GFX ENGINE: Error while calculating coordinates!");
           *a4 = 0;
           *a3 = 0;
-          controlfp(NewValue, 0x300u);
+          _controlfp(NewValue, 0x300u);
           return -1;
         }
       }
@@ -43289,7 +43282,7 @@ int __cdecl SearchMapPoint(int a1, int a2, int & a3, int & a4, bool a5) {
         default:
           break;
       }
-      controlfp(NewValue, 0x300u);
+      _controlfp(NewValue, 0x300u);
       return *a3 + Size * *a4;
     }
     else
@@ -43299,7 +43292,7 @@ int __cdecl SearchMapPoint(int a1, int a2, int & a3, int & a4, bool a5) {
         *a4 = 0;
         *a3 = 0;
       }
-      controlfp(NewValue, 0x300u);
+      _controlfp(NewValue, 0x300u);
       return -1;
     }
   }
@@ -43321,7 +43314,7 @@ void __cdecl InitGradientTable(void) {
 
   for ( i = 0; i < 512; ++i )
   {
-    g_iDestSizeTable[i] = (int)(float)((float)i * *(float *)&dword_3E2E2F4);
+    g_iDestSizeTable[i] = (int)(float)((float)i * *(float *)&g_fZoomFactor);
     result = i + 1;
   }
   return result;
@@ -43337,7 +43330,7 @@ void __cdecl InitCamGradientTable(void) {
 
   for ( i = 0; i < 512; ++i )
   {
-    g_iCamDestSizeTable[i] = (int)(float)((float)i * *(float *)&dword_3E2E2F8);
+    g_iCamDestSizeTable[i] = (int)(float)((float)i * *(float *)&g_fCameraZoomFactor);
     result = i + 1;
   }
   return result;
@@ -43358,7 +43351,7 @@ void __cdecl RenderTmpText(void) {
   result = 1;
   if ( !g_cTextTmp[0] )
     return result;
-  ((void (__thiscall *)(CSurfaceV7 *, HDC *))D3DObjectPtr->FinalRenderSurface->j_?GetDC@CSurfaceV7@@UAEJPAPAUHDC__@@@Z)(
+  ((void (__thiscall *)(CSurfaceV7 *, HDC *))D3DObjectPtr->FinalRenderSurface->GetDC)(
     D3DObjectPtr->FinalRenderSurface,
     &hdc);
   SetBkMode(hdc, 1);
@@ -43371,7 +43364,7 @@ void __cdecl RenderTmpText(void) {
   v2 = strlen("Hallo");
   TextOutA(hdc, 50, 50, "Hallo", v2);
   SelectObject(hdc, v3);
-  ((void (__thiscall *)(CSurfaceV7 *, HDC))D3DObjectPtr->FinalRenderSurface->j_?ReleaseDC@CSurfaceV7@@UAEJPAUHDC__@@@Z)(
+  ((void (__thiscall *)(CSurfaceV7 *, HDC))D3DObjectPtr->FinalRenderSurface->ReleaseDC)(
     D3DObjectPtr->FinalRenderSurface,
     hdc);
   return DeleteObject(h);
@@ -43402,14 +43395,14 @@ void __cdecl EnableCamRenderSettings(bool a1) {
   Swap32Bit(&dword_3E2E2C8, &dword_3E2E2AC);
   Swap32Bit(&dword_3E2E2CC, &dword_3E2E2B0);
   Swap32Bit(&dword_3E2E2D0, &dword_3E2E2B4);
-  Swap32Bit(&dword_3E2E294, &dword_3E2E28C);
+  Swap32Bit(&g_iCameraVertexSize, &g_iVertexSize);
   Swap32Bit(&dword_3E2E298, &dword_3E2E290);
-  Swap32Bit(&dword_3E2E2D4, &WindowPositionX);
-  Swap32Bit(&dword_3E2E2D8, &WindowPositionY);
-  Swap32Bit(&dword_3E2E2DC, &OutputWidth);
-  Swap32Bit(&dword_3E2E2E0, &OutputHeight);
-  Swap32Bit(&unk_3E2E2C0, &dword_3E2E2BC);
-  Swap32Bit(&dword_3E2E2F8, &dword_3E2E2F4);
+  Swap32Bit(&dword_3E2E2D4, &MEMORY[0x3E2E274]);
+  Swap32Bit(&dword_3E2E2D8, &MEMORY[0x3E2E278]);
+  Swap32Bit(&dword_3E2E2DC, &MEMORY[0x3E2E26C]);
+  Swap32Bit(&dword_3E2E2E0, &MEMORY[0x3E2E270]);
+  Swap32Bit(&unk_3E2E2C0, &g_uLeftGuiBorderWidth);
+  Swap32Bit(&g_fCameraZoomFactor, &g_fZoomFactor);
   Swap32Bit(&g_fCamVertexSize, &g_fVertexSize);
 }
 
@@ -43557,7 +43550,7 @@ bool __cdecl DeleteEngine(void) {
 // Decompiled from bool HardwareIsRunning()
 bool __cdecl HardwareIsRunning(void) {
   
-  return D3DObjectPtr && D3DObjectPtr->field_71D;
+  return D3DObjectPtr && D3DObjectPtr->m_bInitHardware;
 }
 
 
@@ -43565,7 +43558,7 @@ bool __cdecl HardwareIsRunning(void) {
 // Decompiled from bool SoftwareIsRunning()
 bool __cdecl SoftwareIsRunning(void) {
   
-  return D3DObjectPtr && D3DObjectPtr->field_71C;
+  return D3DObjectPtr && D3DObjectPtr->m_bInitSoftware;
 }
 
 
@@ -43573,33 +43566,33 @@ bool __cdecl SoftwareIsRunning(void) {
 // Decompiled from char __cdecl ReadTextureBitmapSet(bool a1, char a2, bool a3, int a4)
 bool __cdecl ReadTextureBitmapSet(bool a1, bool a2, bool a3, int a4) {
   
-  int v5; // [esp+0h] [ebp-18h]
+  char *v5; // [esp+0h] [ebp-18h]
   int k; // [esp+4h] [ebp-14h]
   int j; // [esp+8h] [ebp-10h]
   int i; // [esp+Ch] [ebp-Ch]
-  int v9; // [esp+10h] [ebp-8h]
+  _DWORD *v9; // [esp+10h] [ebp-8h]
   char v10; // [esp+17h] [ebp-1h]
 
   if ( !g_pfForceReload )
     return 0;
-  v9 = g_pfForceReload(1, (unsigned __int8)a2, a3);
+  v9 = g_pfForceReload(1, a2, a3);
   if ( !v9 )
     return 0;
-  if ( *(unsigned __int8 *)(v9 + 3) != a4 )
+  if ( *((unsigned __int8 *)v9 + 3) != a4 )
     return 0;
   v10 = 1;
-  while ( *(_DWORD *)(v9 + 4) && ((*(_WORD *)v9 & 2) != 0 && a1 || (*(_WORD *)v9 & 2) == 0 && !a1) )
-    v9 += *(_DWORD *)(v9 + 4) + 8;
-  if ( !*(_DWORD *)(v9 + 4) && ((*(_WORD *)v9 & 2) != 0 && a1 || (*(_WORD *)v9 & 2) == 0 && !a1) )
+  while ( v9[1] && ((*(_WORD *)v9 & 2) != 0 && a1 || (*(_WORD *)v9 & 2) == 0 && !a1) )
+    v9 = (_DWORD *)((char *)v9 + v9[1] + 8);
+  if ( !v9[1] && ((*(_WORD *)v9 & 2) != 0 && a1 || (*(_WORD *)v9 & 2) == 0 && !a1) )
     return 0;
-  v5 = v9 + 8;
+  v5 = (char *)(v9 + 2);
   if ( a1 )
   {
     if ( a2 )
     {
       for ( i = 0; i < a4; ++i )
       {
-        if ( !(unsigned __int8)ReadTextureBitmap(i, (void *)(v5 + (i << 17)), 1, a2) )
+        if ( !(unsigned __int8)ReadTextureBitmap(i, &v5[0x20000 * i], 1, a2) )
         {
           v10 = 0;
           break;
@@ -43610,7 +43603,7 @@ bool __cdecl ReadTextureBitmapSet(bool a1, bool a2, bool a3, int a4) {
     {
       for ( j = 0; j < a4; ++j )
       {
-        if ( !(unsigned __int8)ReadTextureBitmap(j, (void *)(v5 + (j << 15)), 1, 0) )
+        if ( !(unsigned __int8)ReadTextureBitmap(j, &v5[0x8000 * j], 1, 0) )
         {
           v10 = 0;
           break;
@@ -43622,14 +43615,14 @@ bool __cdecl ReadTextureBitmapSet(bool a1, bool a2, bool a3, int a4) {
   {
     for ( k = 0; k < a4; ++k )
     {
-      if ( !(unsigned __int8)ReadTextureBitmap(k, (void *)(v5 + 66304 * k), 0, 1) )
+      if ( !(unsigned __int8)ReadTextureBitmap(k, &v5[66304 * k], 0, 1) )
       {
         v10 = 0;
         break;
       }
     }
   }
-  g_pfForceReload(0, 1, dword_3E2E2B8 == 1);
+  g_pfForceReload(0, 1, g_uGfxMode == 1);
   return v10;
 }
 
@@ -44264,7 +44257,7 @@ bool __cdecl CheckConfiguration(struct SGfxRenderConfiguration & a1) {
   bool IsHQTextureSet; // al
   bool IsFiltering; // al
 
-  if ( *((_BYTE *)a1 + 2) )
+  if ( a1->m_bD3DInterface )
   {
     SGfxRenderConfiguration::EnableHardwareLandscapeEngine(a1, 0);
     SGfxRenderConfiguration::EnableHardwareObjectEngine(a1, 0);
@@ -44279,25 +44272,25 @@ bool __cdecl CheckConfiguration(struct SGfxRenderConfiguration & a1) {
   BBSupportTracePrintF(1, "GFX ENGINE: HQTextQuality: %d", IsHQTextureSet);
   IsFiltering = SGfxRenderConfiguration::IsFiltering(a1);
   BBSupportTracePrintF(1, "GFX ENGINE: Filtering:     %d", IsFiltering);
-  BBSupportTracePrintF(1, "GFX ENGINE: DD3-Interface: %d", *((unsigned __int8 *)a1 + 2));
-  BBSupportTracePrintF(1, "GFX ENGINE: GUI only mode: %d", *((unsigned __int8 *)a1 + 1));
-  BBSupportTracePrintF(1, "GFX ENGINE: Width:         %d", *((_DWORD *)a1 + 3));
-  BBSupportTracePrintF(1, "GFX ENGINE: Height:        %d", *((_DWORD *)a1 + 4));
-  BBSupportTracePrintF(1, "GFX ENGINE: X:             %d", *((_DWORD *)a1 + 5));
-  BBSupportTracePrintF(1, "GFX ENGINE: Y:             %d", *((_DWORD *)a1 + 6));
-  BBSupportTracePrintF(1, "GFX ENGINE: hWnd:          %d", *((_DWORD *)a1 + 2));
+  BBSupportTracePrintF(1, "GFX ENGINE: DD3-Interface: %d", a1->m_bD3DInterface);
+  BBSupportTracePrintF(1, "GFX ENGINE: GUI only mode: %d", a1->m_bGuiOnly);
+  BBSupportTracePrintF(1, "GFX ENGINE: Width:         %d", a1->m_uWidth);
+  BBSupportTracePrintF(1, "GFX ENGINE: Height:        %d", a1->m_uHeight);
+  BBSupportTracePrintF(1, "GFX ENGINE: X:             %d", a1->m_uX);
+  BBSupportTracePrintF(1, "GFX ENGINE: Y:             %d", a1->m_uY);
+  BBSupportTracePrintF(1, "GFX ENGINE: hWnd:          %d", a1->m_hWnd);
   BBSupportTracePrintF(1, "GFX ENGINE: ---------------------");
-  if ( *((int *)a1 + 3) < 1 )
-    *((_DWORD *)a1 + 3) = 1;
-  if ( *((int *)a1 + 4) < 1 )
-    *((_DWORD *)a1 + 4) = 1;
+  if ( a1->m_uWidth < 1 )
+    a1->m_uWidth = 1;
+  if ( a1->m_uHeight < 1 )
+    a1->m_uHeight = 1;
   BBSupportTracePrintF(
     1,
     "GFX ENGINE: Set window setup: x:%d y:%d width:%d height:%d",
-    *((_DWORD *)a1 + 5),
-    *((_DWORD *)a1 + 6),
-    *((_DWORD *)a1 + 3),
-    *((_DWORD *)a1 + 4));
+    a1->m_uX,
+    a1->m_uY,
+    a1->m_uWidth,
+    a1->m_uHeight);
   return 1;
 }
 
@@ -44329,16 +44322,16 @@ bool __cdecl BlitSettler(int a1, int a2, int a3, struct SGfxObjectInfo * a4) {
     v12 = *v10;
     v11 = v10[1];
     v10 += 2;
-    v14 = (a2 - (int)(float)((float)(*v10++ << 16) * *(float *)&dword_3E2E2F4)) >> 16;
-    v13 = (a3 - (int)(float)((float)(*v10 << 16) * *(float *)&dword_3E2E2F4)) >> 16;
-    if ( v14 <= OutputWidth
-      && v13 <= OutputHeight
-      && *(_DWORD *)(g_pDestSizeTable + 4 * v12) + v14 >= dword_3E2E2BC
+    v14 = (a2 - (int)(float)((float)(*v10++ << 16) * g_fZoomFactor)) >> 16;
+    v13 = (a3 - (int)(float)((float)(*v10 << 16) * g_fZoomFactor)) >> 16;
+    if ( v14 <= GfxEngineSetup.m_uWidth
+      && v13 <= GfxEngineSetup.m_uHeight
+      && *(_DWORD *)(g_pDestSizeTable + 4 * v12) + v14 >= g_uLeftGuiBorderWidth
       && *(_DWORD *)(g_pDestSizeTable + 4 * v11) + v13 >= 0 )
     {
       v6 = &g_uColorPalette;
       sub_2F6FD80(&v6, a1);
-      ZoomBobNormal(v6, v10 + 5, v12, v11, v14, v13, 0, (void *)g_pBeginOfRenderBuffer, 0);
+      ZoomBobNormal((int)v6, (int)(v10 + 5), v12, v11, v14, v13, 0, g_pBeginOfRenderBuffer, 0);
     }
   }
   if ( !g_pIconPalette )
@@ -44352,11 +44345,11 @@ bool __cdecl BlitSettler(int a1, int a2, int a3, struct SGfxObjectInfo * a4) {
     v11 = *v7++;
     if ( v12 > 512 || v11 > 512 )
       BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Size of accessory object is too big! Object will be ignored!");
-    v14 = (a2 - (int)(float)((float)(*v7++ << 16) * *(float *)&dword_3E2E2F4)) >> 16;
-    v13 = (a3 - (int)(float)((float)(*v7 << 16) * *(float *)&dword_3E2E2F4)) >> 16;
-    if ( v14 <= OutputWidth
-      && v13 <= OutputHeight
-      && *(_DWORD *)(g_pDestSizeTable + 4 * v12) + v14 >= dword_3E2E2BC
+    v14 = (a2 - (int)(float)((float)(*v7++ << 16) * g_fZoomFactor)) >> 16;
+    v13 = (a3 - (int)(float)((float)(*v7 << 16) * g_fZoomFactor)) >> 16;
+    if ( v14 <= GfxEngineSetup.m_uWidth
+      && v13 <= GfxEngineSetup.m_uHeight
+      && *(_DWORD *)(g_pDestSizeTable + 4 * v12) + v14 >= g_uLeftGuiBorderWidth
       && *(_DWORD *)(g_pDestSizeTable + 4 * v11) + v13 >= 0 )
     {
       g_iSettlerSelections[3 * g_iSettlerSelectionCounter] = v14;
@@ -44372,11 +44365,11 @@ bool __cdecl BlitSettler(int a1, int a2, int a3, struct SGfxObjectInfo * a4) {
     v11 = *v9++;
     if ( v12 > 512 || v11 > 512 )
       BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Size of accessory object is too big! Object will be ignored!");
-    v14 = (a2 - (int)(float)((float)(*v9++ << 16) * *(float *)&dword_3E2E2F4)) >> 16;
-    v13 = (a3 - (int)(float)((float)(*v9 << 16) * *(float *)&dword_3E2E2F4)) >> 16;
-    if ( v14 <= OutputWidth
-      && v13 <= OutputHeight
-      && *(_DWORD *)(g_pDestSizeTable + 4 * v12) + v14 >= dword_3E2E2BC
+    v14 = (a2 - (int)(float)((float)(*v9++ << 16) * g_fZoomFactor)) >> 16;
+    v13 = (a3 - (int)(float)((float)(*v9 << 16) * g_fZoomFactor)) >> 16;
+    if ( v14 <= GfxEngineSetup.m_uWidth
+      && v13 <= GfxEngineSetup.m_uHeight
+      && *(_DWORD *)(g_pDestSizeTable + 4 * v12) + v14 >= g_uLeftGuiBorderWidth
       && *(_DWORD *)(g_pDestSizeTable + 4 * v11) + v13 >= 0 )
     {
       g_iSettlerFitness[5 * g_iSettlerFitnessCounter] = v14;
@@ -44394,11 +44387,11 @@ bool __cdecl BlitSettler(int a1, int a2, int a3, struct SGfxObjectInfo * a4) {
   v11 = *v8++;
   if ( v12 > 512 || v11 > 512 )
     BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Size of accessory object is too big! Object will be ignored!");
-  v14 = (a2 - (int)(float)((float)(*v8++ << 16) * *(float *)&dword_3E2E2F4)) >> 16;
-  v13 = (a3 - (int)(float)((float)(*v8 << 16) * *(float *)&dword_3E2E2F4)) >> 16;
-  if ( v14 > OutputWidth
-    || v13 > OutputHeight
-    || *(_DWORD *)(g_pDestSizeTable + 4 * v12) + v14 < dword_3E2E2BC
+  v14 = (a2 - (int)(float)((float)(*v8++ << 16) * g_fZoomFactor)) >> 16;
+  v13 = (a3 - (int)(float)((float)(*v8 << 16) * g_fZoomFactor)) >> 16;
+  if ( v14 > GfxEngineSetup.m_uWidth
+    || v13 > GfxEngineSetup.m_uHeight
+    || *(_DWORD *)(g_pDestSizeTable + 4 * v12) + v14 < g_uLeftGuiBorderWidth
     || *(_DWORD *)(g_pDestSizeTable + 4 * v11) + v13 < 0 )
   {
     return 1;
@@ -44417,7 +44410,7 @@ bool __cdecl BlitSettler(int a1, int a2, int a3, struct SGfxObjectInfo * a4) {
 bool __cdecl BlitObject(int a1, int a2, int a3, struct SGfxObjectInfo * a4) {
   
   int v5; // [esp+0h] [ebp-24h]
-  int v6; // [esp+4h] [ebp-20h]
+  float v6; // [esp+4h] [ebp-20h]
   int v7; // [esp+Ch] [ebp-18h]
   int v8; // [esp+Ch] [ebp-18h]
   int v9; // [esp+10h] [ebp-14h]
@@ -44448,37 +44441,37 @@ bool __cdecl BlitObject(int a1, int a2, int a3, struct SGfxObjectInfo * a4) {
     v21 = v20 + 2;
     if ( v7 > 512 || v9 > 512 )
       BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Size of object is too big! Object will be ignored!");
-    v6 = dword_3E2E2F4;
+    v6 = g_fZoomFactor;
     v5 = *(_DWORD *)g_pZoomGradient;
     if ( (v21[2] & 0x10) != 0 )
     {
       *(int *)g_pZoomGradient >>= 1;
-      *(float *)&dword_3E2E2F4 = *(float *)&dword_3E2E2F4 * 0.5;
-      v14 = (a2 - (int)(float)((float)(*v21 << 16) * *(float *)&dword_3E2E2F4)) >> 16;
+      g_fZoomFactor = g_fZoomFactor * 0.5;
+      v14 = (a2 - (int)(float)((float)(*v21 << 16) * g_fZoomFactor)) >> 16;
       v22 = v21 + 1;
-      v17 = (a3 - (int)(float)((float)(*v22 << 16) * *(float *)&dword_3E2E2F4)) >> 16;
-      if ( v14 <= OutputWidth
-        && v17 <= OutputHeight
-        && v14 + (*(int *)(g_pDestSizeTable + 4 * v7) >> 1) >= dword_3E2E2BC
+      v17 = (a3 - (int)(float)((float)(*v22 << 16) * g_fZoomFactor)) >> 16;
+      if ( v14 <= GfxEngineSetup.m_uWidth
+        && v17 <= GfxEngineSetup.m_uHeight
+        && v14 + (*(int *)(g_pDestSizeTable + 4 * v7) >> 1) >= g_uLeftGuiBorderWidth
         && v17 + (*(int *)(g_pDestSizeTable + 4 * v9) >> 1) >= 0 )
       {
-        ZoomBobNormal(*((void **)a4 + 1), v22 + 3, v7, v9, v14, v17, 0, (void *)g_pBeginOfRenderBuffer, 1);
+        ZoomBobNormal(*((_DWORD *)a4 + 1), (int)(v22 + 3), v7, v9, v14, v17, 0, g_pBeginOfRenderBuffer, 1);
       }
     }
     else
     {
-      v15 = (a2 - (int)(float)((float)(*v21 << 16) * *(float *)&dword_3E2E2F4)) >> 16;
+      v15 = (a2 - (int)(float)((float)(*v21 << 16) * g_fZoomFactor)) >> 16;
       v23 = v21 + 1;
-      v18 = (a3 - (int)(float)((float)(*v23 << 16) * *(float *)&dword_3E2E2F4)) >> 16;
-      if ( v15 <= OutputWidth
-        && v18 <= OutputHeight
-        && *(_DWORD *)(g_pDestSizeTable + 4 * v7) + v15 >= dword_3E2E2BC
+      v18 = (a3 - (int)(float)((float)(*v23 << 16) * g_fZoomFactor)) >> 16;
+      if ( v15 <= GfxEngineSetup.m_uWidth
+        && v18 <= GfxEngineSetup.m_uHeight
+        && *(_DWORD *)(g_pDestSizeTable + 4 * v7) + v15 >= g_uLeftGuiBorderWidth
         && *(_DWORD *)(g_pDestSizeTable + 4 * v9) + v18 >= 0 )
       {
-        ZoomBobNormal(*((void **)a4 + 1), v23 + 3, v7, v9, v15, v18, 0, (void *)g_pBeginOfRenderBuffer, 0);
+        ZoomBobNormal(*((_DWORD *)a4 + 1), (int)(v23 + 3), v7, v9, v15, v18, 0, g_pBeginOfRenderBuffer, 0);
       }
     }
-    dword_3E2E2F4 = v6;
+    g_fZoomFactor = v6;
     *(_DWORD *)g_pZoomGradient = v5;
   }
   if ( !*((_BYTE *)a4 + 22) || !g_pIconPalette )
@@ -44490,15 +44483,15 @@ bool __cdecl BlitObject(int a1, int a2, int a3, struct SGfxObjectInfo * a4) {
   v12 = v11 + 2;
   if ( v8 > 512 || v10 > 512 )
     BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Size of accessory object is too big! Object will be ignored!");
-  v16 = (a2 - (int)(float)((float)(*v12 << 16) * *(float *)&dword_3E2E2F4)) >> 16;
+  v16 = (a2 - (int)(float)((float)(*v12 << 16) * g_fZoomFactor)) >> 16;
   v13 = v12 + 1;
-  v19 = (a3 - (int)(float)((float)(*v13 << 16) * *(float *)&dword_3E2E2F4)) >> 16;
-  if ( v16 <= OutputWidth
-    && v19 <= OutputHeight
-    && *(_DWORD *)(g_pDestSizeTable + 4 * v8) + v16 >= dword_3E2E2BC
+  v19 = (a3 - (int)(float)((float)(*v13 << 16) * g_fZoomFactor)) >> 16;
+  if ( v16 <= GfxEngineSetup.m_uWidth
+    && v19 <= GfxEngineSetup.m_uHeight
+    && *(_DWORD *)(g_pDestSizeTable + 4 * v8) + v16 >= g_uLeftGuiBorderWidth
     && *(_DWORD *)(g_pDestSizeTable + 4 * v10) + v19 >= 0 )
   {
-    ZoomBobNormal((void *)g_pIconPalette, v13 + 3, v8, v10, v16, v19, 0, (void *)g_pBeginOfRenderBuffer, 0);
+    ZoomBobNormal(g_pIconPalette, (int)(v13 + 3), v8, v10, v16, v19, 0, g_pBeginOfRenderBuffer, 0);
   }
   return 1;
 }
@@ -44512,9 +44505,9 @@ bool __cdecl BlitVehicle(int a1, int a2, int a3, struct SGfxObjectInfo * a4) {
   int v6; // [esp+10h] [ebp-3Ch]
   int v7; // [esp+14h] [ebp-38h]
   int v8; // [esp+1Ch] [ebp-30h]
-  void *v9; // [esp+20h] [ebp-2Ch]
+  unsigned int v9; // [esp+20h] [ebp-2Ch]
   void *v10; // [esp+24h] [ebp-28h] BYREF
-  void *v11; // [esp+28h] [ebp-24h]
+  unsigned int v11; // [esp+28h] [ebp-24h]
   unsigned __int16 *v12; // [esp+2Ch] [ebp-20h]
   unsigned __int16 *v13; // [esp+30h] [ebp-1Ch]
   unsigned __int16 *v14; // [esp+34h] [ebp-18h]
@@ -44541,56 +44534,56 @@ bool __cdecl BlitVehicle(int a1, int a2, int a3, struct SGfxObjectInfo * a4) {
     v16 = *v19++;
     if ( v15 > 512 || v16 > 512 )
       BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Size of vehicle object is too big! Object will be ignored!");
-    v17 = (a2 - (int)(float)((float)(*v19++ << 16) * *(float *)&dword_3E2E2F4)) >> 16;
-    v18 = (a3 - (int)(float)((float)(*v19 << 16) * *(float *)&dword_3E2E2F4)) >> 16;
-    v11 = (void *)g_pBeginOfRenderBuffer;
+    v17 = (a2 - (int)(float)((float)(*v19++ << 16) * g_fZoomFactor)) >> 16;
+    v18 = (a3 - (int)(float)((float)(*v19 << 16) * g_fZoomFactor)) >> 16;
+    v11 = g_pBeginOfRenderBuffer;
     if ( !v7 || v7 == 0xFFFF )
     {
-      if ( v17 <= OutputWidth
-        && v18 <= OutputHeight
-        && *(_DWORD *)(g_pDestSizeTable + 4 * v15) + v17 >= dword_3E2E2BC
+      if ( v17 <= GfxEngineSetup.m_uWidth
+        && v18 <= GfxEngineSetup.m_uHeight
+        && *(_DWORD *)(g_pDestSizeTable + 4 * v15) + v17 >= g_uLeftGuiBorderWidth
         && *(_DWORD *)(g_pDestSizeTable + 4 * v16) + v18 >= 0 )
       {
-        ZoomBobNormal(v10, v19 + 3, v15, v16, v17, v18, 0, (void *)g_pBeginOfRenderBuffer, 0);
+        ZoomBobNormal((int)v10, (int)(v19 + 3), v15, v16, v17, v18, 0, g_pBeginOfRenderBuffer, 0);
       }
     }
     else
     {
-      v5 = v7 * (int)(float)((float)v16 * *(float *)&dword_3E2E2F4) / 0xFFFFu + v18;
-      v8 = v5 - (int)(float)(*(float *)&dword_3E2E2F4 * 10.0);
-      v11 = (void *)(g_iScanlineLength
-                   + g_pRenderAdress
-                   + g_iRenderPitch * (v5 - 1)
-                   - g_iRenderPitch * (int)(float)(*(float *)&dword_3E2E2F4 * 10.0));
+      v5 = v7 * (int)(float)((float)v16 * g_fZoomFactor) / 0xFFFFu + v18;
+      v8 = v5 - (int)(float)(g_fZoomFactor * 10.0);
+      v11 = g_iScanlineLength
+          + g_pRenderAdress
+          + g_iRenderPitch * (v5 - 1)
+          - g_iRenderPitch * (int)(float)(g_fZoomFactor * 10.0);
       v6 = v5;
-      v9 = (void *)(g_iScanlineLength + g_pRenderAdress + g_iRenderPitch * (v5 - 1));
-      if ( (unsigned int)v11 < g_pBeginOfRenderBuffer )
+      v9 = g_iScanlineLength + g_pRenderAdress + g_iRenderPitch * (v5 - 1);
+      if ( v11 < g_pBeginOfRenderBuffer )
       {
-        v11 = (void *)g_pBeginOfRenderBuffer;
+        v11 = g_pBeginOfRenderBuffer;
         v8 = 0;
       }
-      if ( (unsigned int)v11 > g_pEndOfRenderBuffer )
+      if ( v11 > g_pEndOfRenderBuffer )
       {
-        v11 = (void *)g_pEndOfRenderBuffer;
-        v8 = OutputHeight - 1;
+        v11 = g_pEndOfRenderBuffer;
+        v8 = GfxEngineSetup.m_uHeight - 1;
       }
-      if ( (unsigned int)v9 < g_pBeginOfRenderBuffer )
+      if ( v9 < g_pBeginOfRenderBuffer )
       {
-        v9 = (void *)g_pBeginOfRenderBuffer;
+        v9 = g_pBeginOfRenderBuffer;
         v6 = 0;
       }
-      if ( (unsigned int)v9 > g_pEndOfRenderBuffer )
+      if ( v9 > g_pEndOfRenderBuffer )
       {
-        v9 = (void *)g_pEndOfRenderBuffer;
-        v6 = OutputHeight - 1;
+        v9 = g_pEndOfRenderBuffer;
+        v6 = GfxEngineSetup.m_uHeight - 1;
       }
-      if ( v17 <= OutputWidth
-        && v18 <= OutputHeight
-        && *(_DWORD *)(g_pDestSizeTable + 4 * v15) + v17 >= dword_3E2E2BC
+      if ( v17 <= GfxEngineSetup.m_uWidth
+        && v18 <= GfxEngineSetup.m_uHeight
+        && *(_DWORD *)(g_pDestSizeTable + 4 * v15) + v17 >= g_uLeftGuiBorderWidth
         && *(_DWORD *)(g_pDestSizeTable + 4 * v16) + v18 >= 0 )
       {
-        ZoomBobNormal(v10, v19 + 3, v15, v16, v17, v18, v6, v9, 0);
-        ZoomBobBuildState(v10, v19 + 3, v15, v16, v17, v18, v8, v11, v9);
+        ZoomBobNormal((int)v10, (int)(v19 + 3), v15, v16, v17, v18, v6, v9, 0);
+        ZoomBobBuildState((int)v10, (int)(v19 + 3), v15, v16, v17, v18, v8, v11, v9);
       }
     }
     if ( *((_DWORD *)a4 + 3) )
@@ -44601,16 +44594,16 @@ bool __cdecl BlitVehicle(int a1, int a2, int a3, struct SGfxObjectInfo * a4) {
       v16 = *v19++;
       if ( v15 > 512 || v16 > 512 )
         BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Size of vehicle object is too big! Object will be ignored!");
-      v17 = (a2 - (int)(float)((float)(*v19++ << 16) * *(float *)&dword_3E2E2F4)) >> 16;
-      v18 = (a3 - (int)(float)((float)(*v19 << 16) * *(float *)&dword_3E2E2F4)) >> 16;
-      if ( v17 <= OutputWidth
-        && v18 <= OutputHeight
-        && *(_DWORD *)(g_pDestSizeTable + 4 * v15) + v17 >= dword_3E2E2BC
+      v17 = (a2 - (int)(float)((float)(*v19++ << 16) * g_fZoomFactor)) >> 16;
+      v18 = (a3 - (int)(float)((float)(*v19 << 16) * g_fZoomFactor)) >> 16;
+      if ( v17 <= GfxEngineSetup.m_uWidth
+        && v18 <= GfxEngineSetup.m_uHeight
+        && *(_DWORD *)(g_pDestSizeTable + 4 * v15) + v17 >= g_uLeftGuiBorderWidth
         && *(_DWORD *)(g_pDestSizeTable + 4 * v16) + v18 >= 0 )
       {
         v10 = (void *)*((_DWORD *)a4 + 4);
         sub_2F6FD80(&v10, a1);
-        ZoomBobNormal(v10, v19 + 3, v15, v16, v17, v18, 0, (void *)g_pBeginOfRenderBuffer, 0);
+        ZoomBobNormal((int)v10, (int)(v19 + 3), v15, v16, v17, v18, 0, g_pBeginOfRenderBuffer, 0);
       }
     }
   }
@@ -44627,14 +44620,14 @@ bool __cdecl BlitVehicle(int a1, int a2, int a3, struct SGfxObjectInfo * a4) {
       BBSupportTracePrintF(
         0,
         "GFX ENGINE: DATA ERROR: Size of vehicle selection object is too big! Object will be ignored!");
-    v17 = (a2 - (int)(float)((float)(*v14++ << 16) * *(float *)&dword_3E2E2F4)) >> 16;
-    v18 = (a3 - (int)(float)((float)(*v14 << 16) * *(float *)&dword_3E2E2F4)) >> 16;
-    if ( v17 <= OutputWidth
-      && v18 <= OutputHeight
-      && *(_DWORD *)(g_pDestSizeTable + 4 * v15) + v17 >= dword_3E2E2BC
+    v17 = (a2 - (int)(float)((float)(*v14++ << 16) * g_fZoomFactor)) >> 16;
+    v18 = (a3 - (int)(float)((float)(*v14 << 16) * g_fZoomFactor)) >> 16;
+    if ( v17 <= GfxEngineSetup.m_uWidth
+      && v18 <= GfxEngineSetup.m_uHeight
+      && *(_DWORD *)(g_pDestSizeTable + 4 * v15) + v17 >= g_uLeftGuiBorderWidth
       && *(_DWORD *)(g_pDestSizeTable + 4 * v16) + v18 >= 0 )
     {
-      ZoomBobNormal((void *)g_pIconPalette, v14 + 3, v15, v16, v17, v18, 0, (void *)g_pBeginOfRenderBuffer, 0);
+      ZoomBobNormal(g_pIconPalette, (int)(v14 + 3), v15, v16, v17, v18, 0, g_pBeginOfRenderBuffer, 0);
     }
   }
   if ( *((_BYTE *)a4 + 21) )
@@ -44645,14 +44638,14 @@ bool __cdecl BlitVehicle(int a1, int a2, int a3, struct SGfxObjectInfo * a4) {
     v16 = *v13++;
     if ( v15 > 512 || v16 > 512 )
       BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Size of accessory object is too big! Object will be ignored!");
-    v17 = (a2 - (int)(float)((float)(*v13++ << 16) * *(float *)&dword_3E2E2F4)) >> 16;
-    v18 = (a3 - (int)(float)((float)(*v13 << 16) * *(float *)&dword_3E2E2F4)) >> 16;
-    if ( v17 <= OutputWidth
-      && v18 <= OutputHeight
-      && *(_DWORD *)(g_pDestSizeTable + 4 * v15) + v17 >= dword_3E2E2BC
+    v17 = (a2 - (int)(float)((float)(*v13++ << 16) * g_fZoomFactor)) >> 16;
+    v18 = (a3 - (int)(float)((float)(*v13 << 16) * g_fZoomFactor)) >> 16;
+    if ( v17 <= GfxEngineSetup.m_uWidth
+      && v18 <= GfxEngineSetup.m_uHeight
+      && *(_DWORD *)(g_pDestSizeTable + 4 * v15) + v17 >= g_uLeftGuiBorderWidth
       && *(_DWORD *)(g_pDestSizeTable + 4 * v16) + v18 >= 0 )
     {
-      ZoomBobNormal((void *)g_pIconPalette, v13 + 3, v15, v16, v17, v18, 0, (void *)g_pBeginOfRenderBuffer, 0);
+      ZoomBobNormal(g_pIconPalette, (int)(v13 + 3), v15, v16, v17, v18, 0, g_pBeginOfRenderBuffer, 0);
     }
   }
   if ( !*((_BYTE *)a4 + 20) )
@@ -44663,14 +44656,14 @@ bool __cdecl BlitVehicle(int a1, int a2, int a3, struct SGfxObjectInfo * a4) {
   v16 = *v12++;
   if ( v15 > 512 || v16 > 512 )
     BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Size of accessory object is too big! Object will be ignored!");
-  v17 = (a2 - (int)(float)((float)(*v12++ << 16) * *(float *)&dword_3E2E2F4)) >> 16;
-  v18 = (a3 - (int)(float)((float)(*v12 << 16) * *(float *)&dword_3E2E2F4)) >> 16;
-  if ( v17 <= OutputWidth
-    && v18 <= OutputHeight
-    && *(_DWORD *)(g_pDestSizeTable + 4 * v15) + v17 >= dword_3E2E2BC
+  v17 = (a2 - (int)(float)((float)(*v12++ << 16) * g_fZoomFactor)) >> 16;
+  v18 = (a3 - (int)(float)((float)(*v12 << 16) * g_fZoomFactor)) >> 16;
+  if ( v17 <= GfxEngineSetup.m_uWidth
+    && v18 <= GfxEngineSetup.m_uHeight
+    && *(_DWORD *)(g_pDestSizeTable + 4 * v15) + v17 >= g_uLeftGuiBorderWidth
     && *(_DWORD *)(g_pDestSizeTable + 4 * v16) + v18 >= 0 )
   {
-    ZoomBobNormal((void *)g_pIconPalette, v12 + 3, v15, v16, v17, v18, 0, (void *)g_pBeginOfRenderBuffer, 0);
+    ZoomBobNormal(g_pIconPalette, (int)(v12 + 3), v15, v16, v17, v18, 0, g_pBeginOfRenderBuffer, 0);
   }
   return 1;
 }
@@ -44744,12 +44737,12 @@ bool __cdecl BlitBuilding(int a1, int a2, int a3, struct SGfxObjectInfo * a4, in
         BBSupportTracePrintF(
           0,
           "GFX ENGINE: DATA ERROR: Size of build layer object is too big! Object will be ignored!");
-      v41 = (a2 - (int)(float)((float)(*(unsigned __int16 *)v44 << 16) * *(float *)&dword_3E2E2F4)) >> 16;
+      v41 = (a2 - (int)(float)((float)(*(unsigned __int16 *)v44 << 16) * *(float *)&g_fZoomFactor)) >> 16;
       v44 += 2;
-      v42 = (a3 - (int)(float)((float)(*(unsigned __int16 *)v44 << 16) * *(float *)&dword_3E2E2F4)) >> 16;
-      if ( v41 <= OutputWidth
-        && v42 <= OutputHeight
-        && *(_DWORD *)(g_pDestSizeTable + 4 * v39) + v41 >= dword_3E2E2BC
+      v42 = (a3 - (int)(float)((float)(*(unsigned __int16 *)v44 << 16) * *(float *)&g_fZoomFactor)) >> 16;
+      if ( v41 <= MEMORY[0x3E2E26C]
+        && v42 <= MEMORY[0x3E2E270]
+        && *(_DWORD *)(g_pDestSizeTable + 4 * v39) + v41 >= g_uLeftGuiBorderWidth
         && *(_DWORD *)(g_pDestSizeTable + 4 * v40) + v42 >= 0 )
       {
         ZoomBobNormal(Src, v44 + 6, v39, v40, v41, v42, 0, (void *)g_pBeginOfRenderBuffer, 0);
@@ -44765,9 +44758,9 @@ bool __cdecl BlitBuilding(int a1, int a2, int a3, struct SGfxObjectInfo * a4, in
     v44 += 2;
     if ( v39 > 512 || v40 > 512 )
       BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Size of building object is too big! Object will be ignored!");
-    v41 = a2 - (int)(float)((float)(*(unsigned __int16 *)v44 << 16) * *(float *)&dword_3E2E2F4);
+    v41 = a2 - (int)(float)((float)(*(unsigned __int16 *)v44 << 16) * *(float *)&g_fZoomFactor);
     v44 += 2;
-    v42 = a3 - (int)(float)((float)(*(unsigned __int16 *)v44 << 16) * *(float *)&dword_3E2E2F4);
+    v42 = a3 - (int)(float)((float)(*(unsigned __int16 *)v44 << 16) * *(float *)&g_fZoomFactor);
     v44 += 6;
     v33 = (void *)g_pBeginOfRenderBuffer;
     v29 = 0;
@@ -44775,9 +44768,9 @@ bool __cdecl BlitBuilding(int a1, int a2, int a3, struct SGfxObjectInfo * a4, in
     {
       if ( v26 != 0xFFFF )
       {
-        if ( v41 >> 16 <= OutputWidth
-          && v42 >> 16 <= OutputHeight
-          && *(_DWORD *)(g_pDestSizeTable + 4 * v39) + (v41 >> 16) >= dword_3E2E2BC
+        if ( v41 >> 16 <= MEMORY[0x3E2E26C]
+          && v42 >> 16 <= MEMORY[0x3E2E270]
+          && *(_DWORD *)(g_pDestSizeTable + 4 * v39) + (v41 >> 16) >= g_uLeftGuiBorderWidth
           && *(_DWORD *)(g_pDestSizeTable + 4 * v40) + (v42 >> 16) >= 0 )
         {
           ZoomBobNormal(Src, v44, v39, v40, v41 >> 16, v42 >> 16, 0, (void *)g_pBeginOfRenderBuffer, 0);
@@ -44823,14 +44816,14 @@ bool __cdecl BlitBuilding(int a1, int a2, int a3, struct SGfxObjectInfo * a4, in
                   "GFX ENGINE: DATA ERROR: Size of building object is too big! Object will be ignored!");
               v22 = (a2
                    - (int)(float)((float)((*(unsigned __int16 *)v44 - *((_DWORD *)a4 + 4 * j + 136)) << 16)
-                                * *(float *)&dword_3E2E2F4)) >> 16;
+                                * *(float *)&g_fZoomFactor)) >> 16;
               v44 += 2;
               v23 = (a3
                    - (int)(float)((float)((*(unsigned __int16 *)v44 - *((_DWORD *)a4 + 4 * j + 137)) << 16)
-                                * *(float *)&dword_3E2E2F4)) >> 16;
-              if ( v22 <= OutputWidth
-                && v23 <= OutputHeight
-                && *(_DWORD *)(g_pDestSizeTable + 4 * v20) + v22 >= dword_3E2E2BC
+                                * *(float *)&g_fZoomFactor)) >> 16;
+              if ( v22 <= MEMORY[0x3E2E26C]
+                && v23 <= MEMORY[0x3E2E270]
+                && *(_DWORD *)(g_pDestSizeTable + 4 * v20) + v22 >= g_uLeftGuiBorderWidth
                 && *(_DWORD *)(g_pDestSizeTable + 4 * v21) + v23 >= 0 )
               {
                 v12 = (void *)*((_DWORD *)a4 + 4 * j + 135);
@@ -44853,8 +44846,8 @@ bool __cdecl BlitBuilding(int a1, int a2, int a3, struct SGfxObjectInfo * a4, in
             v19 = *v38++;
             if ( *((_DWORD *)a4 + 4 * j + 51) )
             {
-              v24 = (a2 - (int)(float)((float)((*v38++ - *((_DWORD *)a4 + 4 * j + 52)) << 16) * *(float *)&dword_3E2E2F4)) >> 16;
-              v25 = (a3 - (int)(float)((float)((*v38 - *((_DWORD *)a4 + 4 * j + 53)) << 16) * *(float *)&dword_3E2E2F4)) >> 16;
+              v24 = (a2 - (int)(float)((float)((*v38++ - *((_DWORD *)a4 + 4 * j + 52)) << 16) * *(float *)&g_fZoomFactor)) >> 16;
+              v25 = (a3 - (int)(float)((float)((*v38 - *((_DWORD *)a4 + 4 * j + 53)) << 16) * *(float *)&g_fZoomFactor)) >> 16;
               memcpy(&g_uColorPalette, *((const void **)a4 + 4 * j + 51), 0x180u);
               memcpy(&unk_468A760, (char *)&g_cColorGradient + 64 * *((unsigned __int8 *)a4 + 715), 0x40u);
               memcpy(
@@ -44863,9 +44856,9 @@ bool __cdecl BlitBuilding(int a1, int a2, int a3, struct SGfxObjectInfo * a4, in
                 0x40u);
               v11 = &g_uColorPalette;
               sub_2F6FD80(&v11, a1);
-              if ( v24 <= OutputWidth
-                && v25 <= OutputHeight
-                && *(_DWORD *)(g_pDestSizeTable + 4 * v18) + v24 >= dword_3E2E2BC
+              if ( v24 <= MEMORY[0x3E2E26C]
+                && v25 <= MEMORY[0x3E2E270]
+                && *(_DWORD *)(g_pDestSizeTable + 4 * v18) + v24 >= g_uLeftGuiBorderWidth
                 && *(_DWORD *)(g_pDestSizeTable + 4 * v19) + v25 >= 0 )
               {
                 if ( j == 20 && *a6 < 511 )
@@ -44890,9 +44883,9 @@ bool __cdecl BlitBuilding(int a1, int a2, int a3, struct SGfxObjectInfo * a4, in
             }
           }
         }
-        if ( v41 >> 16 <= OutputWidth
-          && v42 >> 16 <= OutputHeight
-          && *(_DWORD *)(g_pDestSizeTable + 4 * v39) + (v41 >> 16) >= dword_3E2E2BC
+        if ( v41 >> 16 <= MEMORY[0x3E2E26C]
+          && v42 >> 16 <= MEMORY[0x3E2E270]
+          && *(_DWORD *)(g_pDestSizeTable + 4 * v39) + (v41 >> 16) >= g_uLeftGuiBorderWidth
           && *(_DWORD *)(g_pDestSizeTable + 4 * v40) + (v42 >> 16) >= 0 )
         {
           for ( j = 5; j < 0xA; ++j )
@@ -44920,13 +44913,13 @@ bool __cdecl BlitBuilding(int a1, int a2, int a3, struct SGfxObjectInfo * a4, in
           if ( v31 > 512 || v32 > 512 )
             BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Size of building flag is too big! Object will be ignored!");
           v34 = a2
-              - (int)(float)((float)((*(unsigned __int16 *)v44 - *((_DWORD *)a4 + 6)) << 16) * *(float *)&dword_3E2E2F4);
+              - (int)(float)((float)((*(unsigned __int16 *)v44 - *((_DWORD *)a4 + 6)) << 16) * *(float *)&g_fZoomFactor);
           v44 += 2;
           v35 = a3
-              - (int)(float)((float)((*(unsigned __int16 *)v44 - *((_DWORD *)a4 + 7)) << 16) * *(float *)&dword_3E2E2F4);
-          if ( v34 >> 16 <= OutputWidth
-            && v35 >> 16 <= OutputHeight
-            && *(_DWORD *)(g_pDestSizeTable + 4 * v31) + (v34 >> 16) >= dword_3E2E2BC
+              - (int)(float)((float)((*(unsigned __int16 *)v44 - *((_DWORD *)a4 + 7)) << 16) * *(float *)&g_fZoomFactor);
+          if ( v34 >> 16 <= MEMORY[0x3E2E26C]
+            && v35 >> 16 <= MEMORY[0x3E2E270]
+            && *(_DWORD *)(g_pDestSizeTable + 4 * v31) + (v34 >> 16) >= g_uLeftGuiBorderWidth
             && *(_DWORD *)(g_pDestSizeTable + 4 * v32) + (v35 >> 16) >= 0 )
           {
             v10 = (void *)*((_DWORD *)a4 + 21);
@@ -44944,12 +44937,12 @@ bool __cdecl BlitBuilding(int a1, int a2, int a3, struct SGfxObjectInfo * a4, in
               BBSupportTracePrintF(
                 0,
                 "GFX ENGINE: DATA ERROR: Size of heraldic figure is too big! Object will be ignored!");
-            v34 -= (int)(float)((float)(*(unsigned __int16 *)v44 << 16) * *(float *)&dword_3E2E2F4);
+            v34 -= (int)(float)((float)(*(unsigned __int16 *)v44 << 16) * *(float *)&g_fZoomFactor);
             v44 += 2;
-            v35 -= (int)(float)((float)(*(unsigned __int16 *)v44 << 16) * *(float *)&dword_3E2E2F4);
-            if ( v34 >> 16 <= OutputWidth
-              && v35 >> 16 <= OutputHeight
-              && *(_DWORD *)(g_pDestSizeTable + 4 * v31) + (v34 >> 16) >= dword_3E2E2BC
+            v35 -= (int)(float)((float)(*(unsigned __int16 *)v44 << 16) * *(float *)&g_fZoomFactor);
+            if ( v34 >> 16 <= MEMORY[0x3E2E26C]
+              && v35 >> 16 <= MEMORY[0x3E2E270]
+              && *(_DWORD *)(g_pDestSizeTable + 4 * v31) + (v34 >> 16) >= g_uLeftGuiBorderWidth
               && *(_DWORD *)(g_pDestSizeTable + 4 * v32) + (v35 >> 16) >= 0 )
             {
               v7 = (void *)*((_DWORD *)a4 + 19);
@@ -44974,14 +44967,14 @@ bool __cdecl BlitBuilding(int a1, int a2, int a3, struct SGfxObjectInfo * a4, in
                 "GFX ENGINE: DATA ERROR: Size of building-effect is too big! Object will be ignored!");
             v16 = (a2
                  - (int)(float)((float)((*(unsigned __int16 *)v44 - *((_DWORD *)a4 + 4 * j + 28)) << 16)
-                              * *(float *)&dword_3E2E2F4)) >> 16;
+                              * *(float *)&g_fZoomFactor)) >> 16;
             v44 += 2;
             v17 = (a3
                  - (int)(float)((float)((*(unsigned __int16 *)v44 - *((_DWORD *)a4 + 4 * j + 29)) << 16)
-                              * *(float *)&dword_3E2E2F4)) >> 16;
-            if ( v16 <= OutputWidth
-              && v17 <= OutputHeight
-              && *(_DWORD *)(g_pDestSizeTable + 4 * v13) + v16 >= dword_3E2E2BC
+                              * *(float *)&g_fZoomFactor)) >> 16;
+            if ( v16 <= MEMORY[0x3E2E26C]
+              && v17 <= MEMORY[0x3E2E270]
+              && *(_DWORD *)(g_pDestSizeTable + 4 * v13) + v16 >= g_uLeftGuiBorderWidth
               && *(_DWORD *)(g_pDestSizeTable + 4 * v15) + v17 >= 0 )
             {
               v8 = (void *)*((_DWORD *)a4 + 4 * j + 27);
@@ -44994,8 +44987,8 @@ bool __cdecl BlitBuilding(int a1, int a2, int a3, struct SGfxObjectInfo * a4, in
     }
     else
     {
-      v27 = (int)(float)(*(float *)&dword_3E2E2F4 * 10.0);
-      v9 = v26 * (int)(float)((float)v40 * *(float *)&dword_3E2E2F4) / 0xFFFFu + (v42 >> 16);
+      v27 = (int)(float)(*(float *)&g_fZoomFactor * 10.0);
+      v9 = v26 * (int)(float)((float)v40 * *(float *)&g_fZoomFactor) / 0xFFFFu + (v42 >> 16);
       v29 = v9 - v27;
       v33 = (void *)(g_iScanlineLength + g_pRenderAdress + g_iRenderPitch * (v9 - 1) - g_iRenderPitch * v27);
       v14 = v9;
@@ -45008,7 +45001,7 @@ bool __cdecl BlitBuilding(int a1, int a2, int a3, struct SGfxObjectInfo * a4, in
       if ( (unsigned int)v33 > g_pEndOfRenderBuffer )
       {
         v33 = (void *)g_pEndOfRenderBuffer;
-        v29 = OutputHeight - 1;
+        v29 = MEMORY[0x3E2E270] - 1;
       }
       if ( (unsigned int)v30 < g_pBeginOfRenderBuffer )
       {
@@ -45018,11 +45011,11 @@ bool __cdecl BlitBuilding(int a1, int a2, int a3, struct SGfxObjectInfo * a4, in
       if ( (unsigned int)v30 > g_pEndOfRenderBuffer )
       {
         v30 = (char *)g_pEndOfRenderBuffer;
-        v14 = OutputHeight - 1;
+        v14 = MEMORY[0x3E2E270] - 1;
       }
-      if ( v41 >> 16 <= OutputWidth
-        && v42 >> 16 <= OutputHeight
-        && *(_DWORD *)(g_pDestSizeTable + 4 * v39) + (v41 >> 16) >= dword_3E2E2BC
+      if ( v41 >> 16 <= MEMORY[0x3E2E26C]
+        && v42 >> 16 <= MEMORY[0x3E2E270]
+        && *(_DWORD *)(g_pDestSizeTable + 4 * v39) + (v41 >> 16) >= g_uLeftGuiBorderWidth
         && *(_DWORD *)(g_pDestSizeTable + 4 * v40) + (v42 >> 16) >= 0 )
       {
         ZoomBobNormal(Src, v44, v39, v40, v41 >> 16, v42 >> 16, v14, v30, 0);
@@ -45037,11 +45030,11 @@ bool __cdecl BlitBuilding(int a1, int a2, int a3, struct SGfxObjectInfo * a4, in
   v40 = *v37++;
   if ( v39 > 512 || v40 > 512 )
     BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Size of accessory object is too big! Object will be ignored!");
-  v41 = (a2 - (int)(float)((float)(*v37++ << 16) * *(float *)&dword_3E2E2F4)) >> 16;
-  v42 = (a3 - (int)(float)((float)(*v37 << 16) * *(float *)&dword_3E2E2F4)) >> 16;
-  if ( v41 <= OutputWidth
-    && v42 <= OutputHeight
-    && *(_DWORD *)(g_pDestSizeTable + 4 * v39) + v41 >= dword_3E2E2BC
+  v41 = (a2 - (int)(float)((float)(*v37++ << 16) * *(float *)&g_fZoomFactor)) >> 16;
+  v42 = (a3 - (int)(float)((float)(*v37 << 16) * *(float *)&g_fZoomFactor)) >> 16;
+  if ( v41 <= MEMORY[0x3E2E26C]
+    && v42 <= MEMORY[0x3E2E270]
+    && *(_DWORD *)(g_pDestSizeTable + 4 * v39) + v41 >= g_uLeftGuiBorderWidth
     && *(_DWORD *)(g_pDestSizeTable + 4 * v40) + v42 >= 0 )
   {
     ZoomBobNormal((void *)g_pIconPalette, v37 + 3, v39, v40, v41, v42, 0, (void *)g_pBeginOfRenderBuffer, 0);
@@ -45073,11 +45066,11 @@ bool __cdecl BlitBorderstone(int a1, int a2, int a3, int a4) {
   v10 += 2;
   if ( v6 > 512 || v7 > 512 )
     BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Size of borderstone object is too big! Object will be ignored!");
-  v8 = (a2 - (int)(float)((float)*v10++ * *(float *)&dword_3E2E2F4)) >> 16;
-  v9 = (a3 - (int)(float)((float)*v10 * *(float *)&dword_3E2E2F4)) >> 16;
-  if ( v8 > OutputWidth
-    || v9 > OutputHeight
-    || *(_DWORD *)(g_pDestSizeTable + 4 * v6) + v8 < dword_3E2E2BC
+  v8 = (a2 - (int)(float)((float)*v10++ * *(float *)&g_fZoomFactor)) >> 16;
+  v9 = (a3 - (int)(float)((float)*v10 * *(float *)&g_fZoomFactor)) >> 16;
+  if ( v8 > MEMORY[0x3E2E26C]
+    || v9 > MEMORY[0x3E2E270]
+    || *(_DWORD *)(g_pDestSizeTable + 4 * v6) + v8 < g_uLeftGuiBorderWidth
     || *(_DWORD *)(g_pDestSizeTable + 4 * v7) + v9 < 0 )
   {
     return 1;
@@ -45111,12 +45104,12 @@ bool __cdecl BlitAccessoryIcon(int a1, int a2, int a3, int a4) {
   v10 = v9 + 2;
   if ( v5 > 512 || v6 > 512 )
     BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Size of accessory object is too big! Object will be ignored!");
-  v7 = (a2 - (int)(float)((float)(*v10 << 16) * *(float *)&dword_3E2E2F4)) >> 16;
+  v7 = (a2 - (int)(float)((float)(*v10 << 16) * *(float *)&g_fZoomFactor)) >> 16;
   v11 = v10 + 1;
-  v8 = (a3 - (int)(float)((float)(*v11 << 16) * *(float *)&dword_3E2E2F4)) >> 16;
-  if ( v7 <= OutputWidth
-    && v8 <= OutputHeight
-    && *(_DWORD *)(g_pDestSizeTable + 4 * v5) + v7 >= dword_3E2E2BC
+  v8 = (a3 - (int)(float)((float)(*v11 << 16) * *(float *)&g_fZoomFactor)) >> 16;
+  if ( v7 <= MEMORY[0x3E2E26C]
+    && v8 <= MEMORY[0x3E2E270]
+    && *(_DWORD *)(g_pDestSizeTable + 4 * v5) + v7 >= g_uLeftGuiBorderWidth
     && *(_DWORD *)(g_pDestSizeTable + 4 * v6) + v8 >= 0 )
   {
     ZoomBobNormal((void *)g_pIconPalette, v11 + 3, v5, v6, v7, v8, 0, (void *)g_pBeginOfRenderBuffer, 0);
@@ -45146,11 +45139,11 @@ bool __cdecl BlitWave(int a1, int a2, int a3, int a4, int a5) {
   v11 += 2;
   if ( v7 > 512 || v8 > 512 )
     BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Size of wave object is too big! Object will be ignored!");
-  v9 = (a2 - (int)(float)((float)*v11++ * *(float *)&dword_3E2E2F4)) >> 16;
-  v10 = (a3 - (int)(float)((float)*v11 * *(float *)&dword_3E2E2F4)) >> 16;
-  if ( v9 > OutputWidth
-    || v10 > OutputHeight
-    || *(_DWORD *)(g_pDestSizeTable + 4 * v7) + v9 < dword_3E2E2BC
+  v9 = (a2 - (int)(float)((float)*v11++ * *(float *)&g_fZoomFactor)) >> 16;
+  v10 = (a3 - (int)(float)((float)*v11 * *(float *)&g_fZoomFactor)) >> 16;
+  if ( v9 > MEMORY[0x3E2E26C]
+    || v10 > MEMORY[0x3E2E270]
+    || *(_DWORD *)(g_pDestSizeTable + 4 * v7) + v9 < g_uLeftGuiBorderWidth
     || *(_DWORD *)(g_pDestSizeTable + 4 * v8) + v10 < 0 )
   {
     return 1;
@@ -45185,332 +45178,338 @@ bool __cdecl RenderObjectLayer(bool a1) {
   __int16 *v18; // esi
   __int16 *v19; // edi
   int v20; // edx
-  int v22; // [esp+28h] [ebp-6820h]
-  int v23; // [esp+2Ch] [ebp-681Ch]
-  int v24; // [esp+38h] [ebp-6810h]
-  int v25; // [esp+3Ch] [ebp-680Ch]
-  int v26; // [esp+40h] [ebp-6808h]
-  int v27; // [esp+44h] [ebp-6804h]
-  int v28; // [esp+48h] [ebp-6800h]
-  int v29; // [esp+50h] [ebp-67F8h]
-  int v30; // [esp+54h] [ebp-67F4h]
-  int v31; // [esp+5Ch] [ebp-67ECh]
-  int v32; // [esp+64h] [ebp-67E4h] BYREF
-  int v33; // [esp+68h] [ebp-67E0h] BYREF
-  size_t v34; // [esp+6Ch] [ebp-67DCh]
-  int v35; // [esp+70h] [ebp-67D8h]
-  int v36; // [esp+74h] [ebp-67D4h]
-  int v37; // [esp+78h] [ebp-67D0h]
-  int v38; // [esp+7Ch] [ebp-67CCh]
-  int v39; // [esp+80h] [ebp-67C8h]
-  int v40; // [esp+84h] [ebp-67C4h]
-  int v41; // [esp+88h] [ebp-67C0h]
-  int v42; // [esp+8Ch] [ebp-67BCh]
-  int v43; // [esp+90h] [ebp-67B8h]
-  int v44; // [esp+94h] [ebp-67B4h]
-  int v45; // [esp+98h] [ebp-67B0h]
-  int v46; // [esp+9Ch] [ebp-67ACh]
-  int v47; // [esp+A0h] [ebp-67A8h]
-  int v48; // [esp+A4h] [ebp-67A4h]
-  float v49; // [esp+A8h] [ebp-67A0h]
-  int v50; // [esp+ACh] [ebp-679Ch]
-  int v51; // [esp+B0h] [ebp-6798h]
-  void *v52; // [esp+B4h] [ebp-6794h] BYREF
-  int v53; // [esp+B8h] [ebp-6790h]
-  void *v54; // [esp+BCh] [ebp-678Ch] BYREF
-  int v55; // [esp+C0h] [ebp-6788h]
-  int v56; // [esp+C4h] [ebp-6784h] BYREF
-  int v57; // [esp+C8h] [ebp-6780h]
-  int v58; // [esp+CCh] [ebp-677Ch]
-  int v59; // [esp+D0h] [ebp-6778h] BYREF
-  int v60; // [esp+D4h] [ebp-6774h]
-  unsigned __int8 *v61; // [esp+D8h] [ebp-6770h]
-  int v62; // [esp+DCh] [ebp-676Ch]
-  int v63; // [esp+E0h] [ebp-6768h]
-  int v64; // [esp+E4h] [ebp-6764h]
-  int v65; // [esp+E8h] [ebp-6760h]
-  int v66; // [esp+ECh] [ebp-675Ch]
-  int v67; // [esp+F0h] [ebp-6758h]
-  int v68; // [esp+F4h] [ebp-6754h]
-  unsigned __int16 *v69; // [esp+F8h] [ebp-6750h]
-  int v70; // [esp+FCh] [ebp-674Ch]
-  int v71; // [esp+100h] [ebp-6748h]
-  int v72; // [esp+104h] [ebp-6744h]
-  int v73; // [esp+108h] [ebp-6740h]
-  unsigned __int16 *v74; // [esp+10Ch] [ebp-673Ch]
-  int v75; // [esp+110h] [ebp-6738h]
-  int v76; // [esp+114h] [ebp-6734h]
-  int v77; // [esp+118h] [ebp-6730h]
-  int v78; // [esp+11Ch] [ebp-672Ch]
-  int v79; // [esp+120h] [ebp-6728h]
-  int v80; // [esp+124h] [ebp-6724h]
+  __int64 v22; // [esp-18h] [ebp-6860h]
+  __int64 v23; // [esp-18h] [ebp-6860h]
+  __int64 v24; // [esp-18h] [ebp-6860h]
+  __int64 v25; // [esp-Ch] [ebp-6854h]
+  __int64 v26; // [esp-Ch] [ebp-6854h]
+  __int64 v27; // [esp-8h] [ebp-6850h]
+  __int64 v28; // [esp-8h] [ebp-6850h]
+  __int64 v29; // [esp+0h] [ebp-6848h]
+  __int64 v30; // [esp+0h] [ebp-6848h]
+  __int64 v31; // [esp+0h] [ebp-6848h]
+  __int64 v32; // [esp+0h] [ebp-6848h]
+  __int64 v33; // [esp+0h] [ebp-6848h]
+  int v34; // [esp+28h] [ebp-6820h]
+  int v35; // [esp+2Ch] [ebp-681Ch]
+  int v36; // [esp+38h] [ebp-6810h]
+  int v37; // [esp+3Ch] [ebp-680Ch]
+  int v38; // [esp+40h] [ebp-6808h]
+  int v39; // [esp+44h] [ebp-6804h]
+  int v40; // [esp+48h] [ebp-6800h]
+  int v41; // [esp+50h] [ebp-67F8h]
+  int v42; // [esp+54h] [ebp-67F4h]
+  __int64 v43; // [esp+5Ch] [ebp-67ECh]
+  int v44; // [esp+64h] [ebp-67E4h] BYREF
+  int v45; // [esp+68h] [ebp-67E0h] BYREF
+  struct T_GFX_MAP_ELEMENT *v46; // [esp+6Ch] [ebp-67DCh]
+  int v47; // [esp+70h] [ebp-67D8h]
+  unsigned int v48; // [esp+74h] [ebp-67D4h]
+  int v49; // [esp+78h] [ebp-67D0h]
+  int v50; // [esp+7Ch] [ebp-67CCh]
+  int v51; // [esp+80h] [ebp-67C8h]
+  int v52; // [esp+84h] [ebp-67C4h]
+  int v53; // [esp+88h] [ebp-67C0h]
+  int v54; // [esp+8Ch] [ebp-67BCh]
+  int v55; // [esp+90h] [ebp-67B8h]
+  int v56; // [esp+94h] [ebp-67B4h]
+  int v57; // [esp+98h] [ebp-67B0h]
+  int v58; // [esp+9Ch] [ebp-67ACh]
+  int v59; // [esp+A0h] [ebp-67A8h]
+  int v60; // [esp+A4h] [ebp-67A4h]
+  float v61; // [esp+A8h] [ebp-67A0h]
+  int v62; // [esp+ACh] [ebp-679Ch]
+  int v63; // [esp+B0h] [ebp-6798h]
+  void *v64; // [esp+B4h] [ebp-6794h] BYREF
+  int v65; // [esp+B8h] [ebp-6790h]
+  void *v66; // [esp+BCh] [ebp-678Ch] BYREF
+  int v67; // [esp+C0h] [ebp-6788h]
+  int v68; // [esp+C4h] [ebp-6784h] BYREF
+  struct T_GFX_MAP_ELEMENT *v69; // [esp+C8h] [ebp-6780h]
+  int v70; // [esp+CCh] [ebp-677Ch]
+  int v71; // [esp+D0h] [ebp-6778h] BYREF
+  int v72; // [esp+D4h] [ebp-6774h]
+  unsigned __int8 *v73; // [esp+D8h] [ebp-6770h]
+  int v74; // [esp+DCh] [ebp-676Ch]
+  int v75; // [esp+E0h] [ebp-6768h]
+  int v76; // [esp+E4h] [ebp-6764h]
+  unsigned int v77; // [esp+E8h] [ebp-6760h]
+  int v78; // [esp+ECh] [ebp-675Ch]
+  int v79; // [esp+F0h] [ebp-6758h]
+  int v80; // [esp+F4h] [ebp-6754h]
+  unsigned __int16 *v81; // [esp+F8h] [ebp-6750h]
+  int v82; // [esp+FCh] [ebp-674Ch]
+  int v83; // [esp+100h] [ebp-6748h]
+  int v84; // [esp+104h] [ebp-6744h]
+  int v85; // [esp+108h] [ebp-6740h]
+  unsigned __int16 *v86; // [esp+10Ch] [ebp-673Ch]
+  int v87; // [esp+110h] [ebp-6738h]
+  int v88; // [esp+114h] [ebp-6734h]
+  int v89; // [esp+118h] [ebp-6730h]
+  int v90; // [esp+11Ch] [ebp-672Ch]
+  int v91; // [esp+120h] [ebp-6728h]
+  int v92; // [esp+124h] [ebp-6724h]
   int i; // [esp+128h] [ebp-6720h]
-  bool v82; // [esp+12Fh] [ebp-6719h]
-  int v83; // [esp+130h] [ebp-6718h]
-  size_t v84; // [esp+134h] [ebp-6714h]
-  int v85; // [esp+138h] [ebp-6710h] BYREF
+  bool v94; // [esp+12Fh] [ebp-6719h]
+  int v95; // [esp+130h] [ebp-6718h]
+  size_t v96; // [esp+134h] [ebp-6714h]
+  int v97; // [esp+138h] [ebp-6710h] BYREF
   unsigned __int8 IconObjectByX; // [esp+13Fh] [ebp-6709h]
-  int v87; // [esp+140h] [ebp-6708h]
-  int v88; // [esp+144h] [ebp-6704h]
-  int v89; // [esp+148h] [ebp-6700h]
-  int v90; // [esp+14Ch] [ebp-66FCh]
-  int v91; // [esp+150h] [ebp-66F8h]
-  int v92; // [esp+154h] [ebp-66F4h]
-  struct T_GFX_MAP_ELEMENT *v93; // [esp+158h] [ebp-66F0h]
-  unsigned __int8 v94; // [esp+15Fh] [ebp-66E9h]
-  int v95; // [esp+160h] [ebp-66E8h]
+  int v99; // [esp+140h] [ebp-6708h]
+  int v100; // [esp+144h] [ebp-6704h]
+  int v101; // [esp+148h] [ebp-6700h]
+  int v102; // [esp+14Ch] [ebp-66FCh]
+  int v103; // [esp+150h] [ebp-66F8h]
+  int v104; // [esp+154h] [ebp-66F4h]
+  struct T_GFX_MAP_ELEMENT *v105; // [esp+158h] [ebp-66F0h]
+  unsigned __int8 v106; // [esp+15Fh] [ebp-66E9h]
+  int v107; // [esp+160h] [ebp-66E8h]
   void *GfxObjectInfo; // [esp+164h] [ebp-66E4h]
-  int v97; // [esp+168h] [ebp-66E0h]
-  int v98; // [esp+16Ch] [ebp-66DCh]
+  int v109; // [esp+168h] [ebp-66E0h]
+  int v110; // [esp+16Ch] [ebp-66DCh]
   int j; // [esp+170h] [ebp-66D8h]
-  _DWORD v100[5]; // [esp+174h] [ebp-66D4h] BYREF
-  char v101; // [esp+18Ah] [ebp-66BEh]
-  _OWORD v102[1536]; // [esp+444h] [ebp-6404h] BYREF
-  _BYTE v103[1024]; // [esp+6444h] [ebp-404h] BYREF
+  _DWORD v112[5]; // [esp+174h] [ebp-66D4h] BYREF
+  char v113; // [esp+18Ah] [ebp-66BEh]
+  _OWORD v114[1536]; // [esp+444h] [ebp-6404h] BYREF
+  _BYTE v115[1024]; // [esp+6444h] [ebp-404h] BYREF
 
-  v77 = 0;
-  v85 = 0;
-  memset(v103, 255, Size);
+  v89 = 0;
+  v97 = 0;
+  memset(v115, 255, Size);
   g_iSettlerSelectionCounter = 0;
   g_iSettlerFitnessCounter = 0;
   g_iSettlerMagicCounter = 0;
-  v94 = 0;
-  if ( !g_pfGetGfxObjectInfo || !dword_3E2E2E8 || !dword_3E2E2EC || !g_pfGetOwnerID )
+  v106 = 0;
+  if ( !g_pfGetGfxObjectInfo || !g_pMapObjects || !g_pDecoObjects || !g_pfGetOwnerID )
     return 1;
-  v84 = Size;
-  v57 = dword_3E2E2A0;
-  if ( !dword_3E2E2A0 )
+  v96 = Size;
+  v69 = g_pGfxLayer;
+  if ( !g_pGfxLayer )
   {
     BBSupportTracePrintF(0, "GFX ENGINE: Can't render objects without having a world!");
     return 1;
   }
-  v95 = dword_3E2E28C;
-  v90 = dword_3E2E290;
-  v51 = (((OutputWidth - dword_3E2E2BC) << 16) + 4 * dword_3E2E28C) / dword_3E2E28C;
-  v42 = (dword_3E2E290 + (OutputHeight << 16)) / dword_3E2E290;
-  v80 = v42 + dword_3E2E2AC + 2;
-  if ( v80 < g_iMapSize && v80 > 0 )
-    v80 += (unsigned __int8)g_uMaxYTable[v80] / 8;
-  v80 += 11;
-  v97 = -8 * v90 - (dword_3E2E2B4 << 16);
-  v41 = -v95 / 2;
-  v22 = v95 / 2;
-  v88 = 0;
-  v49 = (float)v95 / 65536.0;
-  v48 = (int)(float)((float)dword_3E2E2A8 * v49);
-  v35 = (int)(float)((float)dword_3E2E2AC * (float)((float)v90 / 65536.0));
-  if ( D3DObjectPtr->field_71D && byte_3E2E30E )
+  v107 = g_iVertexSize;
+  v102 = dword_3E2E290;
+  v63 = (((GfxEngineSetup.m_uWidth - g_uLeftGuiBorderWidth) << 16) + 4 * g_iVertexSize) / g_iVertexSize;
+  v54 = (dword_3E2E290 + (GfxEngineSetup.m_uHeight << 16)) / dword_3E2E290;
+  v92 = v54 + dword_3E2E2AC + 2;
+  if ( v92 < g_iMapSize && v92 > 0 )
+    v92 += (unsigned __int8)g_uMaxYTable[v92] / 8;
+  v92 += 11;
+  v109 = -8 * v102 - (dword_3E2E2B4 << 16);
+  v53 = -v107 / 2;
+  v34 = v107 / 2;
+  v100 = 0;
+  v61 = (float)v107 / 65536.0;
+  v60 = (int)(float)((float)dword_3E2E2A8 * v61);
+  v47 = (int)(float)((float)dword_3E2E2AC * (float)((float)v102 / 65536.0));
+  if ( D3DObjectPtr->m_bInitHardware && g_bHardwareObjectEnabled )
   {
-    v87 = CInterfaceD3D::BeginObjectScene(D3DObjectPtr);
-    if ( v87 )
+    v99 = CInterfaceD3D::BeginObjectScene(D3DObjectPtr);
+    if ( v99 )
     {
-      WriteError(v87, "BeginObjectScene");
+      WriteError(v99, "BeginObjectScene");
       return 0;
     }
   }
   else
   {
-    v87 = ((int (__thiscall *)(CSurfaceV7 *, int *, int *, int))D3DObjectPtr->FinalRenderSurface->Lock)(
-            D3DObjectPtr->FinalRenderSurface,
-            &v59,
-            &v56,
-            1);
-    if ( v87 )
+    v99 = D3DObjectPtr->FinalRenderSurface->Lock(D3DObjectPtr->FinalRenderSurface, &v71, &v68, 1);
+    if ( v99 )
     {
-      WriteError(v87, "LockObjectRenderSurfaceSW");
+      WriteError(v99, "LockObjectRenderSurfaceSW");
       return 0;
     }
-    g_pRenderAdress = v56 + v59 * dword_3E2E288 + 2 * dword_3E2E284;
+    g_pRenderAdress = v68 + v71 * dword_3E2E288 + 2 * dword_3E2E284;
     g_pBeginOfRenderBuffer = g_pRenderAdress;
-    g_iRenderPitch = v59;
-    g_iScanlineLength = 2 * OutputWidth;
-    g_pEndOfRenderBuffer = 2 * OutputWidth + g_pRenderAdress + v59 * (OutputHeight - 1);
+    g_iRenderPitch = v71;
+    g_iScanlineLength = 2 * GfxEngineSetup.m_uWidth;
+    g_pEndOfRenderBuffer = 2 * GfxEngineSetup.m_uWidth + g_pRenderAdress + v71 * (GfxEngineSetup.m_uHeight - 1);
   }
   GfxObjectInfo = 0;
-  v93 = 0;
+  v105 = 0;
   if ( s_pEffectSystem )
   {
-    v67 = dword_3E2E2AC - 7;
-    v38 = dword_3E2E2A8 + (dword_3E2E2AC - 7) / 2 - 30;
-    v40 = v80;
-    v39 = v38 + (v80 - (dword_3E2E2AC - 7)) / 2;
-    (**(void (__thiscall ***)(int, int, int, int, int, int))s_pEffectSystem)(
+    v79 = dword_3E2E2AC - 7;
+    v50 = dword_3E2E2A8 + (dword_3E2E2AC - 7) / 2 - 30;
+    v52 = v92;
+    v51 = v50 + (v92 - (dword_3E2E2AC - 7)) / 2;
+    (**(void (__thiscall ***)(struct IGfxEffects *, int, int, int, int, int))s_pEffectSystem)(
       s_pEffectSystem,
-      v38,
+      v50,
       dword_3E2E2AC - 7,
-      v39,
-      v80,
-      v51 + dword_3E2E2A8 + v39 + (dword_3E2E2AC - 7) / 2 + 9);
+      v51,
+      v92,
+      v63 + dword_3E2E2A8 + v51 + (dword_3E2E2AC - 7) / 2 + 9);
   }
   j = dword_3E2E2AC - 7;
-  while ( j < v80 )
+  while ( j < v92 )
   {
     if ( (j & 1) != 0 )
     {
-      v98 = (dword_3E2E2BC - dword_3E2E2B0 - (v95 >> 16) - ((30 * v95) >> 16)) << 16;
-      v88 = 1;
+      v110 = (g_uLeftGuiBorderWidth - dword_3E2E2B0 - (v107 >> 16) - ((30 * v107) >> 16)) << 16;
+      v100 = 1;
     }
     else
     {
-      v98 = v41 + ((dword_3E2E2BC - dword_3E2E2B0 - (v95 >> 16) - ((30 * v95) >> 16)) << 16);
-      v88 = 0;
+      v110 = v53 + ((g_uLeftGuiBorderWidth - dword_3E2E2B0 - (v107 >> 16) - ((30 * v107) >> 16)) << 16);
+      v100 = 0;
     }
     g_iUsedFogFadeStep = g_iFogFadeStep;
     if ( j < g_iFadeYBorder )
       g_iUsedFogFadeStep = 0;
-    v23 = v51 + dword_3E2E2A8 + j / 2 + 1;
-    v73 = dword_3E2E2A8 + v84 * j + j / 2 - 30;
-    v29 = dword_3E2E2A8 + j / 2 - 30;
+    v35 = v63 + dword_3E2E2A8 + j / 2 + 1;
+    v85 = dword_3E2E2A8 + v96 * j + j / 2 - 30;
+    v41 = dword_3E2E2A8 + j / 2 - 30;
     if ( FastIndexValidation(j) )
     {
-      v78 = v29;
-      while ( v78 < v23 + 8 )
+      v90 = v41;
+      while ( v90 < v35 + 8 )
       {
-        if ( FastIndexValidation(v88 + v78) )
+        if ( FastIndexValidation(v100 + v90) )
         {
-          v93 = (struct T_GFX_MAP_ELEMENT *)(v57 + 4 * (v88 + v73));
-          if ( (*((_BYTE *)v93 + 3) & 0x80) != 0 )
+          v105 = &v69[v100 + v85];
+          if ( (v105->m_uGfxBits & 0x80) != 0 )
           {
-            v89 = CalcFinalHeightOffset(*(unsigned __int8 *)v93);
-            v37 = CalcCurrentFog(v93);
-            if ( v37 > 59
-              && (!SGfxRenderConfiguration::IsEditorMode((SGfxRenderConfiguration *)&GfxEngineSetup)
-               || *((unsigned __int8 *)v93 + 1) > 8u) )
+            v101 = CalcFinalHeightOffset(v105->m_uGroundHeight);
+            v49 = CalcCurrentFog(v105);
+            if ( v49 > 59 && (!SGfxRenderConfiguration::IsEditorMode(&GfxEngineSetup) || v105->m_uGroundType > 8u) )
             {
-              OwnerID = g_pfGetOwnerID(v88 + v73);
-              g_pfBlitBorderstone(v37, v98, v97 - v89, OwnerID);
+              OwnerID = g_pfGetOwnerID(v100 + v85);
+              g_pfBlitBorderstone(v49, v110, v109 - v101, OwnerID);
             }
           }
-          v82 = (*((_BYTE *)v93 + 2) & 0x20) != 0;
-          sub_2F6F620(v98, v97, v88 + v78, j, *((unsigned __int8 *)v93 + 1));
-          v65 = *(unsigned __int16 *)(dword_3E2E2E8 + 2 * (v88 + v73));
-          v36 = *(unsigned __int16 *)(dword_3E2E2EC + 2 * (v88 + v73));
-          if ( v36 )
+          v94 = (v105->m_uGradient & 0x20) != 0;
+          sub_2F6F620(v110, v109, v100 + v90, j, v105->m_uGroundType);
+          v77 = *(unsigned __int16 *)(g_pMapObjects + 2 * (v100 + v85));
+          v48 = *(unsigned __int16 *)(g_pDecoObjects + 2 * (v100 + v85));
+          if ( v48 )
           {
-            v72 = CalcCurrentFog(v93);
-            if ( v72 > 17 )
+            v84 = CalcCurrentFog(v105);
+            if ( v84 > 17 )
             {
-              GfxObjectInfo = (void *)g_pfGetGfxObjectInfo(v36, -1);
+              GfxObjectInfo = g_pfGetGfxObjectInfo(v48, -1);
               if ( GfxObjectInfo )
               {
                 if ( *((_BYTE *)GfxObjectInfo + 714) )
                 {
-                  v89 = CalcFinalHeightOffset(*(unsigned __int8 *)v93);
+                  v101 = CalcFinalHeightOffset(v105->m_uGroundHeight);
                   if ( *((_BYTE *)GfxObjectInfo + 712) == 8 )
                   {
-                    if ( v72 > 59 )
-                      g_pfBlitBuilding(v72, v98, v97 - v89, GfxObjectInfo, (char *)&v102[768] + 24 * v85, &v85);
+                    if ( v84 > 59 )
+                      g_pfBlitBuilding(v84, v110, v109 - v101, GfxObjectInfo, (char *)&v114[768] + 24 * v97, &v97);
                     memset(GfxObjectInfo, 0, 0x2D0u);
                   }
-                  else if ( *((_BYTE *)GfxObjectInfo + 712) != 16 || v72 > 59 )
+                  else if ( *((_BYTE *)GfxObjectInfo + 712) != 16 || v84 > 59 )
                   {
-                    g_pfBlitObject(v72, v98, v97 - v89, GfxObjectInfo);
+                    g_pfBlitObject(v84, v110, v109 - v101, GfxObjectInfo);
                   }
                 }
               }
             }
           }
-          if ( v65 )
+          if ( v77 )
           {
-            v79 = CalcCurrentFog(v93);
-            if ( v79 > 59 )
+            v91 = CalcCurrentFog(v105);
+            if ( v91 > 59 )
             {
-              GfxObjectInfo = (void *)g_pfGetGfxObjectInfo(v65, -1);
+              GfxObjectInfo = g_pfGetGfxObjectInfo(v77, -1);
               if ( GfxObjectInfo )
               {
                 if ( *((_BYTE *)GfxObjectInfo + 714) )
                 {
-                  v89 = CalcFinalHeightOffset(*(unsigned __int8 *)v93);
-                  v91 = 0;
-                  v92 = 0;
-                  v83 = *((unsigned __int8 *)GfxObjectInfo + 716);
-                  v75 = v98;
-                  v76 = v97;
-                  v66 = *((unsigned __int8 *)GfxObjectInfo + 712);
-                  switch ( --v66 )
+                  v101 = CalcFinalHeightOffset(v105->m_uGroundHeight);
+                  v103 = 0;
+                  v104 = 0;
+                  v95 = *((unsigned __int8 *)GfxObjectInfo + 716);
+                  v87 = v110;
+                  v88 = v109;
+                  v78 = *((unsigned __int8 *)GfxObjectInfo + 712);
+                  switch ( --v78 )
                   {
                     case 0:
-                      v64 = *((char *)GfxObjectInfo + 717);
-                      switch ( ++v64 )
+                      v76 = *((char *)GfxObjectInfo + 717);
+                      switch ( ++v76 )
                       {
                         case 0:
-                          v83 = 0;
-                          v75 = v98 + ((*((_DWORD *)GfxObjectInfo + 6) * (v95 >> 16) / 256) << 16);
-                          v76 = v97 + ((*((_DWORD *)GfxObjectInfo + 7) * (v90 >> 16) / 256) << 16);
+                          v95 = 0;
+                          v87 = v110 + ((*((_DWORD *)GfxObjectInfo + 6) * (v107 >> 16) / 256) << 16);
+                          v88 = v109 + ((*((_DWORD *)GfxObjectInfo + 7) * (v102 >> 16) / 256) << 16);
                           break;
                         case 1:
-                          v91 = v98 - v95;
-                          v92 = v97 - CalcFinalHeightOffset(*((unsigned __int8 *)v93 - 4));
+                          v103 = v110 - v107;
+                          v104 = v109 - CalcFinalHeightOffset(v105[-1].m_uGroundHeight);
                           break;
                         case 2:
-                          v91 = v98 - v95 / 2;
-                          v11 = v97 - v90;
-                          v92 = v11 - CalcFinalHeightOffset(*((unsigned __int8 *)v93 - 4 * v84 - 4));
+                          v103 = v110 - v107 / 2;
+                          v11 = v109 - v102;
+                          v104 = v11 - CalcFinalHeightOffset(v105[-v96 - 1].m_uGroundHeight);
                           break;
                         case 3:
-                          v91 = v98 + v95 / 2;
-                          v12 = v97 - v90;
-                          v92 = v12 - CalcFinalHeightOffset(*((unsigned __int8 *)v93 - 4 * v84));
+                          v103 = v110 + v107 / 2;
+                          v12 = v109 - v102;
+                          v104 = v12 - CalcFinalHeightOffset(v105[-v96].m_uGroundHeight);
                           break;
                         case 4:
-                          v91 = v95 + v98;
-                          v92 = v97 - CalcFinalHeightOffset(*((unsigned __int8 *)v93 + 4));
+                          v103 = v107 + v110;
+                          v104 = v109 - CalcFinalHeightOffset(v105[1].m_uGroundHeight);
                           break;
                         case 5:
-                          v91 = v98 + v95 / 2;
-                          v13 = v90 + v97;
-                          v92 = v13 - CalcFinalHeightOffset(*((unsigned __int8 *)v93 + 4 * v84 + 4));
+                          v103 = v110 + v107 / 2;
+                          v13 = v102 + v109;
+                          v104 = v13 - CalcFinalHeightOffset(v105[v96 + 1].m_uGroundHeight);
                           break;
                         case 6:
-                          v91 = v98 - v95 / 2;
-                          v14 = v90 + v97;
-                          v92 = v14 - CalcFinalHeightOffset(*((unsigned __int8 *)v93 + 4 * v84));
+                          v103 = v110 - v107 / 2;
+                          v14 = v102 + v109;
+                          v104 = v14 - CalcFinalHeightOffset(v105[v96].m_uGroundHeight);
                           break;
                         default:
                           BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Illegal value in iDirection");
                           break;
                       }
-                      if ( v83 )
+                      if ( v95 )
                         g_pfBlitSettler(
-                          v79,
-                          v98 - ((v83 * (v98 - v91)) >> 8),
-                          v97 - v89 - ((v83 * (v97 - v89 - v92)) >> 8),
+                          v91,
+                          v110 - ((v95 * (v110 - v103)) >> 8),
+                          v109 - v101 - ((v95 * (v109 - v101 - v104)) >> 8),
                           GfxObjectInfo);
                       else
-                        g_pfBlitSettler(v79, v75, v76 - v89, GfxObjectInfo);
+                        g_pfBlitSettler(v91, v87, v88 - v101, GfxObjectInfo);
                       break;
                     case 1:
                     case 3:
-                      v50 = *((char *)GfxObjectInfo + 717);
-                      switch ( v50 )
+                      v62 = *((char *)GfxObjectInfo + 717);
+                      switch ( v62 )
                       {
                         case 0:
-                          v91 = v98 - v95;
-                          v92 = v97 - CalcFinalHeightOffset(*((unsigned __int8 *)v93 - 4));
+                          v103 = v110 - v107;
+                          v104 = v109 - CalcFinalHeightOffset(v105[-1].m_uGroundHeight);
                           break;
                         case 1:
-                          v91 = v98 - v95 / 2;
-                          v3 = v97 - v90;
-                          v92 = v3 - CalcFinalHeightOffset(*((unsigned __int8 *)v93 - 4 * v84 - 4));
+                          v103 = v110 - v107 / 2;
+                          v3 = v109 - v102;
+                          v104 = v3 - CalcFinalHeightOffset(v105[-v96 - 1].m_uGroundHeight);
                           break;
                         case 2:
-                          v91 = v98 + v95 / 2;
-                          v4 = v97 - v90;
-                          v92 = v4 - CalcFinalHeightOffset(*((unsigned __int8 *)v93 - 4 * v84));
+                          v103 = v110 + v107 / 2;
+                          v4 = v109 - v102;
+                          v104 = v4 - CalcFinalHeightOffset(v105[-v96].m_uGroundHeight);
                           break;
                         case 3:
-                          v91 = v95 + v98;
-                          v92 = v97 - CalcFinalHeightOffset(*((unsigned __int8 *)v93 + 4));
+                          v103 = v107 + v110;
+                          v104 = v109 - CalcFinalHeightOffset(v105[1].m_uGroundHeight);
                           break;
                         case 4:
-                          v91 = v98 + v95 / 2;
-                          v5 = v90 + v97;
-                          v92 = v5 - CalcFinalHeightOffset(*((unsigned __int8 *)v93 + 4 * v84 + 4));
+                          v103 = v110 + v107 / 2;
+                          v5 = v102 + v109;
+                          v104 = v5 - CalcFinalHeightOffset(v105[v96 + 1].m_uGroundHeight);
                           break;
                         case 5:
-                          v91 = v98 - v95 / 2;
-                          v6 = v90 + v97;
-                          v92 = v6 - CalcFinalHeightOffset(*((unsigned __int8 *)v93 + 4 * v84));
+                          v103 = v110 - v107 / 2;
+                          v6 = v102 + v109;
+                          v104 = v6 - CalcFinalHeightOffset(v105[v96].m_uGroundHeight);
                           break;
                         default:
                           BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Illegal value in iDirection");
@@ -45518,21 +45517,21 @@ bool __cdecl RenderObjectLayer(bool a1) {
                       }
                       if ( *((_BYTE *)GfxObjectInfo + 712) == 2 )
                       {
-                        if ( v85 < 512 )
+                        if ( v97 < 512 )
                         {
-                          *((_DWORD *)&v102[768] + 6 * v85) = v65;
-                          *((_DWORD *)&v102[768] + 6 * v85 + 1) = v98 - ((v83 * (v98 - v91)) >> 8);
-                          *((_DWORD *)&v102[768] + 6 * v85 + 2) = v97 - v89 - ((v83 * (v97 - v89 - v92)) >> 8);
-                          *((_DWORD *)&v102[769] + 6 * v85++ + 1) = v79;
+                          *((_DWORD *)&v114[768] + 6 * v97) = v77;
+                          *((_DWORD *)&v114[768] + 6 * v97 + 1) = v110 - ((v95 * (v110 - v103)) >> 8);
+                          *((_DWORD *)&v114[768] + 6 * v97 + 2) = v109 - v101 - ((v95 * (v109 - v101 - v104)) >> 8);
+                          *((_DWORD *)&v114[769] + 6 * v97++ + 1) = v91;
                         }
                       }
                       else
                       {
-                        v103[v88 + v78] = v94;
-                        LODWORD(v102[v94]) = v65;
-                        DWORD1(v102[v94]) = v98 - ((v83 * (v98 - v91)) >> 8);
-                        DWORD2(v102[v94]) = v97 - v89 - ((v83 * (v97 - v89 - v92)) >> 8);
-                        HIDWORD(v102[v94++]) = v79;
+                        v115[v100 + v90] = v106;
+                        LODWORD(v114[v106]) = v77;
+                        DWORD1(v114[v106]) = v110 - ((v95 * (v110 - v103)) >> 8);
+                        DWORD2(v114[v106]) = v109 - v101 - ((v95 * (v109 - v101 - v104)) >> 8);
+                        HIDWORD(v114[v106++]) = v91;
                       }
                       *((_DWORD *)GfxObjectInfo + 23) = 0;
                       *(_DWORD *)GfxObjectInfo = 0;
@@ -45542,284 +45541,277 @@ bool __cdecl RenderObjectLayer(bool a1) {
                       *((_BYTE *)GfxObjectInfo + 21) = 0;
                       break;
                     case 7:
-                      g_pfBlitBuilding(v79, v75, v76 - v89, GfxObjectInfo, (char *)&v102[768] + 24 * v85, &v85);
+                      g_pfBlitBuilding(v91, v87, v88 - v101, GfxObjectInfo, (char *)&v114[768] + 24 * v97, &v97);
                       memset(GfxObjectInfo, 0, 0x2D0u);
                       break;
                     case 127:
-                      v60 = *((char *)GfxObjectInfo + 717);
-                      switch ( ++v60 )
+                      v72 = *((char *)GfxObjectInfo + 717);
+                      switch ( ++v72 )
                       {
                         case 0:
-                          v83 = 0;
-                          v75 = v98 + ((*((_DWORD *)GfxObjectInfo + 6) * (v95 >> 16) / 256) << 16);
-                          v76 = v97 + ((*((_DWORD *)GfxObjectInfo + 7) * (v90 >> 16) / 256) << 16);
+                          v95 = 0;
+                          v87 = v110 + ((*((_DWORD *)GfxObjectInfo + 6) * (v107 >> 16) / 256) << 16);
+                          v88 = v109 + ((*((_DWORD *)GfxObjectInfo + 7) * (v102 >> 16) / 256) << 16);
                           break;
                         case 1:
-                          v91 = v98 - v95;
-                          v92 = v97 - CalcFinalHeightOffset(*((unsigned __int8 *)v93 - 4));
+                          v103 = v110 - v107;
+                          v104 = v109 - CalcFinalHeightOffset(v105[-1].m_uGroundHeight);
                           break;
                         case 2:
-                          v91 = v98 - v95 / 2;
-                          v7 = v97 - v90;
-                          v92 = v7 - CalcFinalHeightOffset(*((unsigned __int8 *)v93 - 4 * v84 - 4));
+                          v103 = v110 - v107 / 2;
+                          v7 = v109 - v102;
+                          v104 = v7 - CalcFinalHeightOffset(v105[-v96 - 1].m_uGroundHeight);
                           break;
                         case 3:
-                          v91 = v98 + v95 / 2;
-                          v8 = v97 - v90;
-                          v92 = v8 - CalcFinalHeightOffset(*((unsigned __int8 *)v93 - 4 * v84));
+                          v103 = v110 + v107 / 2;
+                          v8 = v109 - v102;
+                          v104 = v8 - CalcFinalHeightOffset(v105[-v96].m_uGroundHeight);
                           break;
                         case 4:
-                          v91 = v95 + v98;
-                          v92 = v97 - CalcFinalHeightOffset(*((unsigned __int8 *)v93 + 4));
+                          v103 = v107 + v110;
+                          v104 = v109 - CalcFinalHeightOffset(v105[1].m_uGroundHeight);
                           break;
                         case 5:
-                          v91 = v98 + v95 / 2;
-                          v9 = v90 + v97;
-                          v92 = v9 - CalcFinalHeightOffset(*((unsigned __int8 *)v93 + 4 * v84 + 4));
+                          v103 = v110 + v107 / 2;
+                          v9 = v102 + v109;
+                          v104 = v9 - CalcFinalHeightOffset(v105[v96 + 1].m_uGroundHeight);
                           break;
                         case 6:
-                          v91 = v98 - v95 / 2;
-                          v10 = v90 + v97;
-                          v92 = v10 - CalcFinalHeightOffset(*((unsigned __int8 *)v93 + 4 * v84));
+                          v103 = v110 - v107 / 2;
+                          v10 = v102 + v109;
+                          v104 = v10 - CalcFinalHeightOffset(v105[v96].m_uGroundHeight);
                           break;
                         default:
                           BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Illegal value in iDirection");
                           break;
                       }
-                      if ( !v83 )
+                      if ( !v95 )
                         goto RenderObjectLayer___def_336D47A;
                       g_pfBlitObject(
-                        v79,
-                        v98 - ((v83 * (v98 - v91)) >> 8),
-                        v97 - v89 - ((v83 * (v97 - v89 - v92)) >> 8),
+                        v91,
+                        v110 - ((v95 * (v110 - v103)) >> 8),
+                        v109 - v101 - ((v95 * (v109 - v101 - v104)) >> 8),
                         GfxObjectInfo);
                       break;
                     default:
 RenderObjectLayer___def_336D47A:
-                      g_pfBlitObject(v79, v75, v76 - v89, GfxObjectInfo);
+                      g_pfBlitObject(v91, v87, v88 - v101, GfxObjectInfo);
                       break;
                   }
                 }
               }
             }
           }
-          if ( (unsigned __int8)v103[v88 + v78] != 255 )
+          if ( (unsigned __int8)v115[v100 + v90] != 255 )
           {
-            v63 = (unsigned __int8)v103[v88 + v78];
-            v103[v88 + v78] = -1;
-            GfxObjectInfo = (void *)g_pfGetGfxObjectInfo(v102[v63], -1);
-            g_pfBlitVehicle(HIDWORD(v102[v63]), DWORD1(v102[v63]), DWORD2(v102[v63]), GfxObjectInfo);
+            v75 = (unsigned __int8)v115[v100 + v90];
+            v115[v100 + v90] = -1;
+            GfxObjectInfo = g_pfGetGfxObjectInfo(v114[v75], -1);
+            g_pfBlitVehicle(HIDWORD(v114[v75]), DWORD1(v114[v75]), DWORD2(v114[v75]), GfxObjectInfo);
           }
         }
-        v98 += v95;
-        ++v78;
-        ++v73;
+        v110 += v107;
+        ++v90;
+        ++v85;
       }
       if ( s_pEffectSystem )
       {
-        v34 = dword_3E2E2A0 + 4 * Size * j;
-        for ( i = (*(int (__thiscall **)(int, int))(*(_DWORD *)s_pEffectSystem + 4))(s_pEffectSystem, j);
+        v46 = &g_pGfxLayer[Size * j];
+        for ( i = (*(int (__thiscall **)(struct IGfxEffects *, int))(*(_DWORD *)s_pEffectSystem + 4))(
+                    s_pEffectSystem,
+                    j);
               i;
-              i = (*(int (__thiscall **)(int))(*(_DWORD *)s_pEffectSystem + 8))(s_pEffectSystem) )
+              i = (*(int (__thiscall **)(struct IGfxEffects *))(*(_DWORD *)s_pEffectSystem + 8))(s_pEffectSystem) )
         {
-          v70 = (int)(float)((float)(*(float *)(i + 696) - 24.0) * *(float *)&dword_3E2E2F4)
-              + dword_3E2E2BC
-              - (v22 >> 16)
-              - v48;
-          v71 = (int)(float)((float)(*(float *)(i + 700) - 12.0) * *(float *)&dword_3E2E2F4) - v35 - dword_3E2E2B4;
-          v70 -= dword_3E2E2B0;
-          v62 = CalcCurrentFog((struct T_GFX_MAP_ELEMENT *)(v34 + 4 * *(_DWORD *)(i + 704)));
-          if ( v62 > 59 )
+          v82 = (int)(float)((float)(*(float *)(i + 696) - 24.0) * g_fZoomFactor)
+              + g_uLeftGuiBorderWidth
+              - (v34 >> 16)
+              - v60;
+          v83 = (int)(float)((float)(*(float *)(i + 700) - 12.0) * g_fZoomFactor) - v47 - dword_3E2E2B4;
+          v82 -= dword_3E2E2B0;
+          v74 = CalcCurrentFog(&v46[*(_DWORD *)(i + 704)]);
+          if ( v74 > 59 )
           {
             if ( *(_BYTE *)(i + 712) == 1 )
             {
-              g_pfBlitSettler(v62, v70 << 16, v71 << 16, i);
+              g_pfBlitSettler(v74, v82 << 16, v83 << 16, i);
             }
             else if ( *(unsigned __int8 *)(i + 713) < 0xC0u )
             {
-              g_pfBlitObject(v62, v70 << 16, v71 << 16, i);
+              g_pfBlitObject(v74, v82 << 16, v83 << 16, i);
             }
-            else if ( v77 < 512 )
+            else if ( v89 < 512 )
             {
-              LODWORD(v102[v77 + 256]) = *(_DWORD *)i;
-              DWORD1(v102[v77 + 256]) = v70 + (v71 << 16);
-              DWORD2(v102[v77 + 256]) = *(_DWORD *)(i + 4);
-              HIDWORD(v102[v77++ + 256]) = v62;
+              LODWORD(v114[v89 + 256]) = *(_DWORD *)i;
+              DWORD1(v114[v89 + 256]) = v82 + (v83 << 16);
+              DWORD2(v114[v89 + 256]) = *(_DWORD *)(i + 4);
+              HIDWORD(v114[v89++ + 256]) = v74;
             }
           }
         }
       }
     }
     ++j;
-    v97 += v90;
+    v109 += v102;
   }
-  v48 = (int)(float)((float)(dword_3E2E2A8 + j / 2) * v49);
+  v60 = (int)(float)((float)(dword_3E2E2A8 + j / 2) * v61);
   if ( g_sGfxObjectCursorBuilding >= 0
     && byte_3E2E664
-    && !CFixCursor::IsVisible((CMFCScanliner *)&D3DObjectPtr->MoveCursor)
-    && !CFixCursor::IsVisible((CMFCScanliner *)&D3DObjectPtr->ZoomCursor) )
+    && !CFixCursor::IsVisible((CFixCursor *)&D3DObjectPtr[1].m_sClipper1.m_vChar.uC)
+    && !CFixCursor::IsVisible((CFixCursor *)&D3DObjectPtr[1].m_sViewport.dwY) )
   {
-    IGfxEngine::GetScreenOffsetsByMapIndices(dword_3E2E38C, dword_3E2E390, &v32, &v33);
-    g_pfBlitBuilding(255, v32 << 16, v33 << 16, &unk_3E2E394, (char *)&v102[768] + 24 * v85, &v85);
+    IGfxEngine::GetScreenOffsetsByMapIndices(dword_3E2E38C, dword_3E2E390, &v44, &v45);
+    g_pfBlitBuilding(255, v44 << 16, v45 << 16, &unk_3E2E394, (char *)&v114[768] + 24 * v97, &v97);
   }
-  for ( j = 0; j < v85; ++j )
+  for ( j = 0; j < v97; ++j )
   {
-    if ( *((_DWORD *)&v102[768] + 6 * j) == -1 )
+    if ( *((_DWORD *)&v114[768] + 6 * j) == -1 )
     {
-      v54 = (void *)*((_DWORD *)&v102[769] + 6 * j);
-      if ( (unsigned __int8)SGfxRenderConfiguration::IsHardwareObjectEngine(&GfxEngineSetup) )
+      v66 = (void *)*((_DWORD *)&v114[769] + 6 * j);
+      if ( SGfxRenderConfiguration::IsHardwareObjectEngine(&GfxEngineSetup) )
       {
-        v55 = (unsigned __int8)*((_DWORD *)&v102[769] + 6 * j + 1);
+        v67 = (unsigned __int8)*((_DWORD *)&v114[769] + 6 * j + 1);
+        *((float *)&v29 + 1) = (float)*((int *)&v114[768] + 6 * j + 2);
+        *(float *)&v29 = (float)*((int *)&v114[768] + 6 * j + 1);
+        HIDWORD(v25) = **((unsigned __int16 **)&v114[768] + 6 * j + 3);
+        LODWORD(v25) = *((_DWORD *)&v114[768] + 6 * j + 3) + 12;
         RenderGfx(
-          (char *)&dword_8F0000[157088] + j,
-          v54,
-          (void *)(*((_DWORD *)&v102[768] + 6 * j + 3) + 12),
-          **((unsigned __int16 **)&v102[768] + 6 * j + 3),
-          *(unsigned __int16 *)(*((_DWORD *)&v102[768] + 6 * j + 3) + 2),
-          (float)*((int *)&v102[768] + 6 * j + 1),
-          (float)*((int *)&v102[768] + 6 * j + 2),
-          65793 * v55,
+          (int)&dword_8F0000[157088] + j,
+          v66,
+          v25,
+          *(unsigned __int16 *)(*((_DWORD *)&v114[768] + 6 * j + 3) + 2),
+          v29,
+          65793 * v67,
           0,
           0,
           0);
       }
       else
       {
-        sub_2F6FD80(&v54, *((_DWORD *)&v102[769] + 6 * j + 1));
+        sub_2F6FD80(&v66, *((_DWORD *)&v114[769] + 6 * j + 1));
         ZoomBobNormal(
-          v54,
-          (void *)(*((_DWORD *)&v102[768] + 6 * j + 3) + 12),
-          **((unsigned __int16 **)&v102[768] + 6 * j + 3),
-          *(unsigned __int16 *)(*((_DWORD *)&v102[768] + 6 * j + 3) + 2),
-          *((int *)&v102[768] + 6 * j + 1) >> 16,
-          *((int *)&v102[768] + 6 * j + 2) >> 16,
+          (int)v66,
+          *((_DWORD *)&v114[768] + 6 * j + 3) + 12,
+          **((unsigned __int16 **)&v114[768] + 6 * j + 3),
+          *(unsigned __int16 *)(*((_DWORD *)&v114[768] + 6 * j + 3) + 2),
+          *((int *)&v114[768] + 6 * j + 1) >> 16,
+          *((int *)&v114[768] + 6 * j + 2) >> 16,
           0,
-          (void *)g_pBeginOfRenderBuffer,
+          g_pBeginOfRenderBuffer,
           0);
       }
     }
-    else if ( *((_DWORD *)&v102[768] + 6 * j) == -2 )
+    else if ( *((_DWORD *)&v114[768] + 6 * j) == -2 )
     {
-      v61 = (unsigned __int8 *)*((_DWORD *)&v102[768] + 6 * j + 3);
-      v47 = *((int *)&v102[769] + 6 * j + 1) >> 16;
-      memcpy(&g_uColorPalette, *((const void **)&v102[769] + 6 * j), 0x180u);
-      memcpy(&unk_468A760, (char *)&g_cColorGradient + 64 * v47, 0x40u);
-      memcpy(&unk_468A7A0, (const void *)(*((_DWORD *)&v102[769] + 6 * j) + (v47 << 6) + 512), 0x40u);
-      v52 = &g_uColorPalette;
-      v45 = *v61++;
-      v46 = *v61;
-      if ( (unsigned __int8)SGfxRenderConfiguration::IsHardwareObjectEngine(&GfxEngineSetup) )
+      v73 = (unsigned __int8 *)*((_DWORD *)&v114[768] + 6 * j + 3);
+      v59 = *((int *)&v114[769] + 6 * j + 1) >> 16;
+      memcpy(&g_uColorPalette, *((const void **)&v114[769] + 6 * j), 0x180u);
+      memcpy(&unk_468A760, (char *)&g_cColorGradient + 64 * v59, 0x40u);
+      memcpy(&unk_468A7A0, (const void *)(*((_DWORD *)&v114[769] + 6 * j) + (v59 << 6) + 512), 0x40u);
+      v64 = &g_uColorPalette;
+      v57 = *v73++;
+      v58 = *v73;
+      if ( SGfxRenderConfiguration::IsHardwareObjectEngine(&GfxEngineSetup) )
       {
-        v53 = (unsigned __int8)*((_DWORD *)&v102[769] + 6 * j + 1);
-        RenderGfx(
-          (char *)&dword_9BC178[198098] + j,
-          v52,
-          (void *)(*((_DWORD *)&v102[768] + 6 * j + 3) + 8),
-          v45,
-          v46,
-          (float)*((int *)&v102[768] + 6 * j + 1),
-          (float)*((int *)&v102[768] + 6 * j + 2),
-          65793 * v53,
-          0,
-          0,
-          0);
+        v65 = (unsigned __int8)*((_DWORD *)&v114[769] + 6 * j + 1);
+        *((float *)&v30 + 1) = (float)*((int *)&v114[768] + 6 * j + 2);
+        *(float *)&v30 = (float)*((int *)&v114[768] + 6 * j + 1);
+        HIDWORD(v26) = v57;
+        LODWORD(v26) = *((_DWORD *)&v114[768] + 6 * j + 3) + 8;
+        RenderGfx((int)&dword_9BC178[198098] + j, v64, v26, v58, v30, 65793 * v65, 0, 0, 0);
       }
       else
       {
-        sub_2F6FD80(&v52, (unsigned __int8)*((_DWORD *)&v102[769] + 6 * j + 1));
+        sub_2F6FD80(&v64, (unsigned __int8)*((_DWORD *)&v114[769] + 6 * j + 1));
         ZoomBobNormal(
-          v52,
-          (void *)(*((_DWORD *)&v102[768] + 6 * j + 3) + 8),
-          v45,
-          v46,
-          *((_DWORD *)&v102[768] + 6 * j + 1),
-          *((_DWORD *)&v102[768] + 6 * j + 2),
+          (int)v64,
+          *((_DWORD *)&v114[768] + 6 * j + 3) + 8,
+          v57,
+          v58,
+          *((_DWORD *)&v114[768] + 6 * j + 1),
+          *((_DWORD *)&v114[768] + 6 * j + 2),
           0,
-          (void *)g_pBeginOfRenderBuffer,
+          g_pBeginOfRenderBuffer,
           0);
       }
     }
     else
     {
-      GfxObjectInfo = (void *)g_pfGetGfxObjectInfo(*((_DWORD *)&v102[768] + 6 * j), -1);
+      GfxObjectInfo = g_pfGetGfxObjectInfo(*((_DWORD *)&v114[768] + 6 * j), -1);
       g_pfBlitVehicle(
-        *((_DWORD *)&v102[769] + 6 * j + 1),
-        *((_DWORD *)&v102[768] + 6 * j + 1),
-        *((_DWORD *)&v102[768] + 6 * j + 2),
+        *((_DWORD *)&v114[769] + 6 * j + 1),
+        *((_DWORD *)&v114[768] + 6 * j + 1),
+        *((_DWORD *)&v114[768] + 6 * j + 2),
         GfxObjectInfo);
     }
   }
-  for ( j = 0; j < v77; ++j )
+  for ( j = 0; j < v89; ++j )
   {
-    v100[0] = v102[j + 256];
-    v100[1] = DWORD2(v102[j + 256]);
-    v101 = 0;
+    v112[0] = v114[j + 256];
+    v112[1] = DWORD2(v114[j + 256]);
+    v113 = 0;
     g_pfBlitObject(
-      HIDWORD(v102[j + 256]),
-      (unsigned __int16)DWORD1(v102[j + 256]) << 16,
-      DWORD1(v102[j + 256]) & 0xFFFF0000,
-      v100);
+      HIDWORD(v114[j + 256]),
+      (unsigned __int16)DWORD1(v114[j + 256]) << 16,
+      DWORD1(v114[j + 256]) & 0xFFFF0000,
+      v112);
   }
   if ( g_iSettlerSelectionCounter )
   {
-    if ( byte_3E2E30E )
+    if ( g_bHardwareObjectEnabled )
     {
       for ( j = 0; j < g_iSettlerSelectionCounter; ++j )
       {
-        v74 = (unsigned __int16 *)g_pIconGfx[g_iSettlerSelections[3 * j + 2]];
-        v31 = *v74++;
-        CacheRenderingStandard(
-          (void *)g_pIconPalette,
-          v74 + 5,
-          v74[4],
-          64,
-          v31,
-          *v74,
-          (float)g_iSettlerSelections[3 * j],
-          (float)g_iSettlerSelections[3 * j + 1],
-          0,
-          (char *)&dword_F29144[220078] + 3,
-          0,
-          0);
+        v86 = (unsigned __int16 *)g_pIconGfx[g_iSettlerSelections[3 * j + 2]];
+        LODWORD(v43) = *v86++;
+        HIDWORD(v43) = *v86;
+        *((float *)&v31 + 1) = (float)g_iSettlerSelections[3 * j + 1];
+        *(float *)&v31 = (float)g_iSettlerSelections[3 * j];
+        HIDWORD(v22) = v86 + 5;
+        LODWORD(v22) = g_pIconPalette;
+        CacheRenderingStandard(v22, v86[4], 64, v43, v31, 0, (int)&dword_F29144[220078] + 3, 0, 0);
       }
     }
     else
     {
       for ( j = 0; j < g_iSettlerSelectionCounter; ++j )
       {
-        v69 = (unsigned __int16 *)g_pIconGfx[g_iSettlerSelections[3 * j + 2]];
-        v30 = *v69++;
+        v81 = (unsigned __int16 *)g_pIconGfx[g_iSettlerSelections[3 * j + 2]];
+        v42 = *v81++;
         ZoomBobNormal(
-          (void *)g_pIconPalette,
-          v69 + 5,
-          v30,
-          *v69,
+          g_pIconPalette,
+          (int)(v81 + 5),
+          v42,
+          *v81,
           g_iSettlerSelections[3 * j],
           g_iSettlerSelections[3 * j + 1],
           0,
-          (void *)g_pBeginOfRenderBuffer,
+          g_pBeginOfRenderBuffer,
           0);
       }
     }
   }
   if ( g_iSettlerMagicCounter )
   {
-    if ( byte_3E2E30E )
+    if ( g_bHardwareObjectEnabled )
     {
       for ( j = 0; j < g_iSettlerMagicCounter; ++j )
       {
-        v44 = g_iSettlerMagic[5 * j + 4];
+        v56 = g_iSettlerMagic[5 * j + 4];
+        *((float *)&v32 + 1) = (float)g_iSettlerMagic[5 * j + 1];
+        *(float *)&v32 = (float)g_iSettlerMagic[5 * j];
+        HIDWORD(v27) = g_iSettlerMagic[5 * j + 3];
+        LODWORD(v27) = g_iSettlerMagic[5 * j + 2];
+        HIDWORD(v23) = v56 + 6;
+        LODWORD(v23) = g_pIconPalette;
         CacheRenderingStandard(
-          (void *)g_pIconPalette,
-          (void *)(v44 + 6),
-          *(unsigned __int16 *)(v44 + 4),
+          v23,
+          *(unsigned __int16 *)(v56 + 4),
           64,
-          g_iSettlerMagic[5 * j + 2],
-          g_iSettlerMagic[5 * j + 3],
-          (float)g_iSettlerMagic[5 * j],
-          (float)g_iSettlerMagic[5 * j + 1],
+          v27,
+          v32,
           0,
-          (char *)&dword_F29144[220078] + 3,
+          (int)&dword_F29144[220078] + 3,
           0,
           0);
       }
@@ -45828,35 +45820,38 @@ RenderObjectLayer___def_336D47A:
     {
       for ( j = 0; j < g_iSettlerMagicCounter; ++j )
         ZoomBobNormal(
-          (void *)g_pIconPalette,
-          (void *)(g_iSettlerMagic[5 * j + 4] + 6),
+          g_pIconPalette,
+          g_iSettlerMagic[5 * j + 4] + 6,
           g_iSettlerMagic[5 * j + 2],
           g_iSettlerMagic[5 * j + 3],
           g_iSettlerMagic[5 * j],
           g_iSettlerMagic[5 * j + 1],
           0,
-          (void *)g_pBeginOfRenderBuffer,
+          g_pBeginOfRenderBuffer,
           0);
     }
   }
   if ( g_iSettlerFitnessCounter )
   {
-    if ( byte_3E2E30E )
+    if ( g_bHardwareObjectEnabled )
     {
       for ( j = 0; j < g_iSettlerFitnessCounter; ++j )
       {
-        v43 = g_iSettlerFitness[5 * j + 4];
+        v55 = g_iSettlerFitness[5 * j + 4];
+        *((float *)&v33 + 1) = (float)g_iSettlerFitness[5 * j + 1];
+        *(float *)&v33 = (float)g_iSettlerFitness[5 * j];
+        HIDWORD(v28) = g_iSettlerFitness[5 * j + 3];
+        LODWORD(v28) = g_iSettlerFitness[5 * j + 2];
+        HIDWORD(v24) = v55 + 6;
+        LODWORD(v24) = g_pIconPalette;
         CacheRenderingStandard(
-          (void *)g_pIconPalette,
-          (void *)(v43 + 6),
-          *(unsigned __int16 *)(v43 + 4),
+          v24,
+          *(unsigned __int16 *)(v55 + 4),
           64,
-          g_iSettlerFitness[5 * j + 2],
-          g_iSettlerFitness[5 * j + 3],
-          (float)g_iSettlerFitness[5 * j],
-          (float)g_iSettlerFitness[5 * j + 1],
+          v28,
+          v33,
           0,
-          (char *)&dword_F29144[220078] + 3,
+          (int)&dword_F29144[220078] + 3,
           0,
           0);
       }
@@ -45865,106 +45860,102 @@ RenderObjectLayer___def_336D47A:
     {
       for ( j = 0; j < g_iSettlerFitnessCounter; ++j )
         ZoomBobNormal(
-          (void *)g_pIconPalette,
-          (void *)(g_iSettlerFitness[5 * j + 4] + 6),
+          g_pIconPalette,
+          g_iSettlerFitness[5 * j + 4] + 6,
           g_iSettlerFitness[5 * j + 2],
           g_iSettlerFitness[5 * j + 3],
           g_iSettlerFitness[5 * j],
           g_iSettlerFitness[5 * j + 1],
           0,
-          (void *)g_pBeginOfRenderBuffer,
+          g_pBeginOfRenderBuffer,
           0);
     }
   }
-  if ( byte_3E2E30D && g_pfSetNumberOfNextLine && g_pfGetIconObjectByX )
+  if ( g_bIconLayerEnabled && g_pfSetNumberOfNextLine && g_pfGetIconObjectByX )
   {
-    v97 = -8 * v90 - (dword_3E2E2B4 << 16);
+    v109 = -8 * v102 - (dword_3E2E2B4 << 16);
     j = dword_3E2E2AC - 7;
-    while ( j < v42 + dword_3E2E2AC + 16 )
+    while ( j < v54 + dword_3E2E2AC + 16 )
     {
       if ( (j & 1) != 0 )
       {
-        v98 = (dword_3E2E2BC - dword_3E2E2B0 - (v95 >> 16) - ((30 * v95) >> 16)) << 16;
-        v88 = 1;
+        v110 = (g_uLeftGuiBorderWidth - dword_3E2E2B0 - (v107 >> 16) - ((30 * v107) >> 16)) << 16;
+        v100 = 1;
       }
       else
       {
-        v98 = v41 + ((dword_3E2E2BC - dword_3E2E2B0 - (v95 >> 16) - ((30 * v95) >> 16)) << 16);
-        v88 = 0;
+        v110 = v53 + ((g_uLeftGuiBorderWidth - dword_3E2E2B0 - (v107 >> 16) - ((30 * v107) >> 16)) << 16);
+        v100 = 0;
       }
-      v27 = v51 + dword_3E2E2A8 + j / 2 + 1;
-      v58 = dword_3E2E2A8 + v84 * j + j / 2 - 30;
-      v28 = dword_3E2E2A8 + j / 2 - 30;
+      v39 = v63 + dword_3E2E2A8 + j / 2 + 1;
+      v70 = dword_3E2E2A8 + v96 * j + j / 2 - 30;
+      v40 = dword_3E2E2A8 + j / 2 - 30;
       if ( FastIndexValidation(j) )
       {
         g_pfSetNumberOfNextLine(j);
-        v68 = v28;
-        while ( v68 < v27 + 8 )
+        v80 = v40;
+        while ( v80 < v39 + 8 )
         {
-          if ( FastIndexValidation(v88 + v68) )
+          if ( FastIndexValidation(v100 + v80) )
           {
-            IconObjectByX = g_pfGetIconObjectByX(v88 + v68);
+            IconObjectByX = g_pfGetIconObjectByX(v100 + v80);
             if ( IconObjectByX == 255 )
               break;
             if ( IconObjectByX )
             {
-              v93 = (struct T_GFX_MAP_ELEMENT *)(v57 + 4 * (v88 + v58));
-              v26 = CalcFinalHeightOffset(*(unsigned __int8 *)v93);
-              g_pfBlitAccessoryIcon(0, v98, v97 - v26, IconObjectByX);
+              v105 = &v69[v100 + v70];
+              v38 = CalcFinalHeightOffset(v105->m_uGroundHeight);
+              g_pfBlitAccessoryIcon(0, v110, v109 - v38, IconObjectByX);
             }
           }
-          v98 += v95;
-          ++v68;
-          ++v58;
+          v110 += v107;
+          ++v80;
+          ++v70;
         }
       }
       ++j;
-      v97 += v90;
+      v109 += v102;
     }
   }
-  if ( D3DObjectPtr->field_71D && byte_3E2E30E )
+  if ( D3DObjectPtr->m_bInitHardware && g_bHardwareObjectEnabled )
     FlushCacheList();
-  if ( Src && !a1 )
+  if ( g_pRequestedRectangle && !a1 )
   {
-    if ( D3DObjectPtr->field_71D && byte_3E2E30E )
+    if ( D3DObjectPtr->m_bInitHardware && g_bHardwareObjectEnabled )
     {
-      v87 = ((int (__thiscall *)(CSurfaceV7 *, int *, int *, int))D3DObjectPtr->FinalRenderSurface->Lock)(
-              D3DObjectPtr->FinalRenderSurface,
-              &v59,
-              &v56,
-              1);
-      if ( v87 )
+      v99 = D3DObjectPtr->FinalRenderSurface->Lock(D3DObjectPtr->FinalRenderSurface, &v71, &v68, 1);
+      if ( v99 )
       {
-        WriteError(v87, "LockSoftwareObjectSurface");
+        WriteError(v99, "LockSoftwareObjectSurface");
         return 0;
       }
-      g_pRenderAdress = v56;
-      g_pBeginOfRenderBuffer = v56;
-      g_iRenderPitch = v59;
-      g_iScanlineLength = 2 * OutputWidth;
+      g_pRenderAdress = v68;
+      g_pBeginOfRenderBuffer = v68;
+      g_iRenderPitch = v71;
+      g_iScanlineLength = 2 * GfxEngineSetup.m_uWidth;
     }
-    memcpy(&dword_468DCEC, Src, 0x10u);
+    memcpy(&dword_468DCEC, g_pRequestedRectangle, 0x10u);
     if ( dword_468DCEC > dword_468DCF4 )
     {
-      v25 = dword_468DCEC;
+      v37 = dword_468DCEC;
       dword_468DCEC = dword_468DCF4;
-      dword_468DCF4 = v25;
+      dword_468DCF4 = v37;
     }
     if ( dword_468DCF0 > dword_468DCF8 )
     {
-      v24 = dword_468DCF0;
+      v36 = dword_468DCF0;
       dword_468DCF0 = dword_468DCF8;
-      dword_468DCF8 = v24;
+      dword_468DCF8 = v36;
     }
     if ( dword_468DCEC < 0 )
       dword_468DCEC = 0;
     if ( dword_468DCF0 < 0 )
       dword_468DCF0 = 0;
-    if ( dword_468DCF8 >= OutputHeight )
-      dword_468DCF8 = OutputHeight - 1;
-    if ( dword_468DCF4 >= OutputWidth )
-      dword_468DCF4 = OutputWidth - 1;
-    v15 = word_3E2E2FC;
+    if ( dword_468DCF8 >= GfxEngineSetup.m_uHeight )
+      dword_468DCF8 = GfxEngineSetup.m_uHeight - 1;
+    if ( dword_468DCF4 >= GfxEngineSetup.m_uWidth )
+      dword_468DCF4 = GfxEngineSetup.m_uWidth - 1;
+    v15 = g_uRequestedRectangleColor;
     v16 = (__int16 *)(dword_468DCEC + dword_468DCEC + g_iRenderPitch * dword_468DCF0 + g_pBeginOfRenderBuffer);
     v17 = v16;
     v18 = (__int16 *)((char *)v16 + dword_468DCF4 - dword_468DCEC + dword_468DCF4 - dword_468DCEC);
@@ -45987,34 +45978,34 @@ RenderObjectLayer___def_336D47A:
         *++v19 = v15;
       while ( (int)v19 < (int)v18 );
     }
-    if ( D3DObjectPtr->field_71D )
+    if ( D3DObjectPtr->m_bInitHardware )
     {
-      if ( byte_3E2E30E )
+      if ( g_bHardwareObjectEnabled )
       {
-        v87 = ((int (__thiscall *)(CSurfaceV7 *))D3DObjectPtr->FinalRenderSurface->Unlock)(D3DObjectPtr->FinalRenderSurface);
-        if ( v87 )
+        v99 = D3DObjectPtr->FinalRenderSurface->Unlock(D3DObjectPtr->FinalRenderSurface);
+        if ( v99 )
         {
-          WriteError(v87, "UnlockFinalObjectRenderSurface");
+          WriteError(v99, "UnlockFinalObjectRenderSurface");
           return 0;
         }
       }
     }
   }
-  if ( D3DObjectPtr->field_71D && byte_3E2E30E )
+  if ( D3DObjectPtr->m_bInitHardware && g_bHardwareObjectEnabled )
   {
-    v87 = CInterfaceD3D::EndObjectScene(D3DObjectPtr);
-    if ( v87 )
+    v99 = CInterfaceD3D::EndObjectScene(D3DObjectPtr);
+    if ( v99 )
     {
-      WriteError(v87, "EndObjectScene");
+      WriteError(v99, "EndObjectScene");
       return 0;
     }
   }
   else
   {
-    v87 = ((int (__thiscall *)(CSurfaceV7 *))D3DObjectPtr->FinalRenderSurface->Unlock)(D3DObjectPtr->FinalRenderSurface);
-    if ( v87 )
+    v99 = D3DObjectPtr->FinalRenderSurface->Unlock(D3DObjectPtr->FinalRenderSurface);
+    if ( v99 )
     {
-      WriteError(v87, "UnlockFinalObjectRenderSurface");
+      WriteError(v99, "UnlockFinalObjectRenderSurface");
       return 0;
     }
   }
@@ -46121,12 +46112,12 @@ void __cdecl ZoomBobBuildState(void * a1, void * a2, int a3, int a4, int a5, int
   v9 = a9;
   operator|| = a9;
   operator|| = *(_DWORD *)g_pZoomGradient;
-  if ( a5 < 0 || (v9 = operator|| + operator||, operator|| + operator|| >= OutputWidth) )
+  if ( a5 < 0 || (v9 = operator|| + operator||, operator|| + operator|| >= MEMORY[0x3E2E26C]) )
   {
     v62 = __PAIR64__(v9, g_pZoomGradient);
-    if ( operator|| >= OutputHeight
+    if ( operator|| >= MEMORY[0x3E2E270]
       || operator|| + operator|| < 0 != __OFADD__(operator||, operator||)
-      || operator|| >= OutputWidth
+      || operator|| >= MEMORY[0x3E2E26C]
       || operator|| + operator|| < 0 != __OFADD__(operator||, operator||) )
     {
       return v62;
@@ -46362,7 +46353,7 @@ LABEL_104:
   }
   HIDWORD(v61) = operator|| + operator||;
   LODWORD(v61) = g_pZoomGradient;
-  if ( operator|| >= OutputHeight || operator|| + operator|| < 0 != __OFADD__(operator||, operator||) )
+  if ( operator|| >= MEMORY[0x3E2E270] || operator|| + operator|| < 0 != __OFADD__(operator||, operator||) )
     return v61;
   v10 = (unsigned __int8 *)operator||;
   v11 = operator||;
@@ -46637,12 +46628,12 @@ void __cdecl ZoomBobNormal(void * a1, void * a2, int a3, int a4, int a5, int a6,
   v9 = g_pEndOfRenderBuffer;
   operator|| = g_pEndOfRenderBuffer;
   operator|| = *(_DWORD *)g_pZoomGradient;
-  if ( a5 < 0 || (v9 = operator|| + operator||, operator|| + operator|| >= OutputWidth) )
+  if ( a5 < 0 || (v9 = operator|| + operator||, operator|| + operator|| >= MEMORY[0x3E2E26C]) )
   {
     v62 = __PAIR64__(v9, g_pZoomGradient);
-    if ( operator|| >= OutputHeight
+    if ( operator|| >= MEMORY[0x3E2E270]
       || operator|| + operator|| < 0 != __OFADD__(operator||, operator||)
-      || operator|| >= OutputWidth
+      || operator|| >= MEMORY[0x3E2E26C]
       || operator|| + operator|| < 0 != __OFADD__(operator||, operator||) )
     {
       return v62;
@@ -46876,7 +46867,7 @@ LABEL_70:
   {
     HIDWORD(v61) = operator|| + operator||;
     LODWORD(v61) = g_pZoomGradient;
-    if ( operator|| >= OutputHeight || operator|| + operator|| < 0 != __OFADD__(operator||, operator||) )
+    if ( operator|| >= MEMORY[0x3E2E270] || operator|| + operator|| < 0 != __OFADD__(operator||, operator||) )
       return v61;
     v10 = (unsigned __int8 *)operator||;
     v11 = operator||;
@@ -47088,47 +47079,41 @@ bool __cdecl AddGuiPatches(void) {
     return 1;
   if ( !D3DObjectPtr->FinalRenderSurface )
     return 1;
-  if ( SGfxRenderConfiguration::IsEditorMode((SGfxRenderConfiguration *)&GfxEngineSetup) )
+  if ( SGfxRenderConfiguration::IsEditorMode(&GfxEngineSetup) )
   {
-    if ( !D3DObjectPtr->field_138[0] || !byte_468E2E8[0] )
+    if ( !D3DObjectPtr->m_pGuiSurfaces[0] || !g_bGuiSurfaceVisible[0] )
       return 1;
-    if ( !(unsigned __int8)sub_2F74710((RECT *)&unk_468DFA8) )
+    if ( !sub_2F74710((RECT *)&stru_468DFA4[0].m_uU4) )
       return 1;
-    v2 = (*(int (__thiscall **)(DWORD, char *, CSurfaceV7 *, char *, _DWORD, _DWORD))(*(_DWORD *)D3DObjectPtr->field_138[0]
-                                                                                    + 24))(
-           D3DObjectPtr->field_138[0],
-           byte_468E208,
+    v2 = D3DObjectPtr->m_pGuiSurfaces[0]->Blt(
+           D3DObjectPtr->m_pGuiSurfaces[0],
+           (struct tagRECT *)byte_468E208,
            D3DObjectPtr->FinalRenderSurface,
-           byte_468E128,
+           (struct tagRECT *)byte_468E128,
            0,
            0);
-    if ( !v2 && D3DObjectPtr->field_138[1] && byte_468E2E8[1] )
+    if ( !v2 && D3DObjectPtr->m_pGuiSurfaces[1] && g_bGuiSurfaceVisible[1] )
     {
-      if ( !(unsigned __int8)sub_2F74710((RECT *)((char *)&unk_468DFA8 + 28)) )
+      if ( !sub_2F74710((RECT *)&stru_468DFA4[1].m_uU4) )
         return 1;
-      if ( byte_468DFB8[28] )
+      if ( LOBYTE(stru_468DFA4[1].m_sDestinationRect.bottom) )
       {
-        (*(void (__thiscall **)(DWORD, int, void *))(*(_DWORD *)D3DObjectPtr->field_138[1] + 52))(
-          D3DObjectPtr->field_138[1],
-          8,
-          &g_sColorKeyGui);
-        v2 = (*(int (__thiscall **)(DWORD, char *, DWORD, char *, int, _DWORD))(*(_DWORD *)D3DObjectPtr->field_138[0]
-                                                                              + 24))(
-               D3DObjectPtr->field_138[0],
-               &byte_468E208[16],
-               D3DObjectPtr->field_138[1],
-               &byte_468E128[16],
+        D3DObjectPtr->m_pGuiSurfaces[1]->SetColorKey(D3DObjectPtr->m_pGuiSurfaces[1], 8, (int *)&g_sColorKeyGui);
+        v2 = D3DObjectPtr->m_pGuiSurfaces[0]->Blt(
+               D3DObjectPtr->m_pGuiSurfaces[0],
+               (struct tagRECT *)&byte_468E208[16],
+               D3DObjectPtr->m_pGuiSurfaces[1],
+               (struct tagRECT *)&byte_468E128[16],
                0x8000,
                0);
       }
       else
       {
-        v2 = (*(int (__thiscall **)(DWORD, char *, DWORD, char *, _DWORD, _DWORD))(*(_DWORD *)D3DObjectPtr->field_138[0]
-                                                                                 + 24))(
-               D3DObjectPtr->field_138[0],
-               &byte_468E208[16],
-               D3DObjectPtr->field_138[1],
-               &byte_468E128[16],
+        v2 = D3DObjectPtr->m_pGuiSurfaces[0]->Blt(
+               D3DObjectPtr->m_pGuiSurfaces[0],
+               (struct tagRECT *)&byte_468E208[16],
+               D3DObjectPtr->m_pGuiSurfaces[1],
+               (struct tagRECT *)&byte_468E128[16],
                0,
                0);
       }
@@ -47137,40 +47122,35 @@ bool __cdecl AddGuiPatches(void) {
     {
       WriteError(v2, "BlitGuiSurface");
       BBSupportTracePrintF(0, "GFX ENGINE: Problem with gui surfaces! Stop rendering...");
-      D3DObjectPtr->m_bIsErrorState = 1;
+      LOBYTE(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) = 1;
       return 0;
     }
-    D3DObjectPtr->field_743 = 1;
+    HIBYTE(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) = 1;
   }
   else
   {
     for ( i = 0; i < 0xE; ++i )
     {
-      if ( D3DObjectPtr->field_138[i]
-        && byte_468E2E8[i]
-        && (unsigned __int8)sub_2F74710((RECT *)((char *)&unk_468DFA8 + 28 * i)) )
+      if ( D3DObjectPtr->m_pGuiSurfaces[i] && g_bGuiSurfaceVisible[i] && sub_2F74710((RECT *)&stru_468DFA4[i].m_uU4) )
       {
-        if ( byte_468DFB8[28 * i] )
+        if ( LOBYTE(stru_468DFA4[i].m_sDestinationRect.bottom) )
         {
-          (*(void (__thiscall **)(DWORD, int, void *))(*(_DWORD *)D3DObjectPtr->field_138[i] + 52))(
-            D3DObjectPtr->field_138[i],
-            8,
-            &g_sColorKeyGui);
-          v1 = ((int (__thiscall *)(CSurfaceV7 *, char *, DWORD, char *, int, _DWORD))D3DObjectPtr->FinalRenderSurface->Blt)(
+          D3DObjectPtr->m_pGuiSurfaces[i]->SetColorKey(D3DObjectPtr->m_pGuiSurfaces[i], 8, (int *)&g_sColorKeyGui);
+          v1 = D3DObjectPtr->FinalRenderSurface->Blt(
                  D3DObjectPtr->FinalRenderSurface,
-                 &byte_468E208[16 * i],
-                 D3DObjectPtr->field_138[i],
-                 &byte_468E128[16 * i],
+                 (struct tagRECT *)&byte_468E208[16 * i],
+                 D3DObjectPtr->m_pGuiSurfaces[i],
+                 (struct tagRECT *)&byte_468E128[16 * i],
                  0x8000,
                  0);
         }
         else
         {
-          v1 = ((int (__thiscall *)(CSurfaceV7 *, char *, DWORD, char *, _DWORD, _DWORD))D3DObjectPtr->FinalRenderSurface->Blt)(
+          v1 = D3DObjectPtr->FinalRenderSurface->Blt(
                  D3DObjectPtr->FinalRenderSurface,
-                 &byte_468E208[16 * i],
-                 D3DObjectPtr->field_138[i],
-                 &byte_468E128[16 * i],
+                 (struct tagRECT *)&byte_468E208[16 * i],
+                 D3DObjectPtr->m_pGuiSurfaces[i],
+                 (struct tagRECT *)&byte_468E128[16 * i],
                  0,
                  0);
         }
@@ -47178,10 +47158,10 @@ bool __cdecl AddGuiPatches(void) {
         {
           WriteError(v1, "BlitGuiSurface");
           BBSupportTracePrintF(0, "GFX ENGINE: Problem with gui surfaces! Stop rendering...");
-          D3DObjectPtr->m_bIsErrorState = 1;
+          LOBYTE(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) = 1;
           return 0;
         }
-        D3DObjectPtr->field_743 = 1;
+        HIBYTE(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) = 1;
       }
     }
   }
@@ -47193,8 +47173,8 @@ bool __cdecl AddGuiPatches(void) {
 // Decompiled from void __cdecl AddDebugStrings(int a1)
 void __cdecl AddDebugStrings(int a1) {
   
-  const char *v1; // eax
-  const CHAR *v2; // eax
+  char *v1; // eax
+  char *v2; // eax
   size_t v3; // eax
   size_t v4; // eax
   size_t v5; // [esp+8h] [ebp-130h]
@@ -47209,7 +47189,7 @@ void __cdecl AddDebugStrings(int a1) {
   HFONT ho; // [esp+3Ch] [ebp-FCh]
   int v15; // [esp+40h] [ebp-F8h]
   int v16; // [esp+44h] [ebp-F4h]
-  int v17; // [esp+48h] [ebp-F0h]
+  struct T_GFX_MAP_ELEMENT *v17; // [esp+48h] [ebp-F0h]
   int v18; // [esp+4Ch] [ebp-ECh]
   int v19; // [esp+50h] [ebp-E8h]
   int v20; // [esp+54h] [ebp-E4h]
@@ -47221,52 +47201,50 @@ void __cdecl AddDebugStrings(int a1) {
   CHAR Str[100]; // [esp+6Ch] [ebp-CCh] BYREF
   CHAR String[100]; // [esp+D0h] [ebp-68h] BYREF
 
-  if ( dword_468DF98 || dword_468DF9C )
+  if ( s_pfDebugValueCallback || s_pfDebugStringCallback )
   {
-    ((void (__thiscall *)(CSurfaceV7 *, HDC *))D3DObjectPtr->FinalRenderSurface->j_?GetDC@CSurfaceV7@@UAEJPAPAUHDC__@@@Z)(
-      D3DObjectPtr->FinalRenderSurface,
-      &hdc);
+    D3DObjectPtr->FinalRenderSurface->GetDC(D3DObjectPtr->FinalRenderSurface, &hdc);
     SetBkMode(hdc, 1);
     SetTextColor(hdc, (COLORREF)&dword_F29144[220078] + 3);
     SetTextAlign(hdc, 0x1Eu);
     ho = CreateFontA(11, 5, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0x20u, "Arial");
     h = CreateFontA(18, 5, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0x20u, "Arial");
     v6 = SelectObject(hdc, h);
-    if ( dword_468DF9C )
+    if ( s_pfDebugStringCallback )
     {
-      v1 = (const char *)dword_468DF9C();
+      v1 = s_pfDebugStringCallback();
       v5 = strlen(v1);
-      v2 = (const CHAR *)dword_468DF9C();
-      TextOutA(hdc, OutputWidth / 2, 16, v2, v5);
+      v2 = s_pfDebugStringCallback();
+      TextOutA(hdc, GfxEngineSetup.m_uWidth / 2, 16, v2, v5);
       sprintf(String, "RndTime: %.3f sec/frame", (float)((float)a1 / 1000.0));
       v3 = strlen(String);
-      TextOutA(hdc, OutputWidth / 2, 32, String, v3);
+      TextOutA(hdc, GfxEngineSetup.m_uWidth / 2, 32, String, v3);
     }
     SelectObject(hdc, ho);
-    if ( !dword_468DF98 )
+    if ( !s_pfDebugValueCallback )
       goto LABEL_21;
     v9 = Size;
-    v17 = dword_3E2E2A0;
-    if ( dword_3E2E2A0 )
+    v17 = g_pGfxLayer;
+    if ( g_pGfxLayer )
     {
-      v23 = dword_3E2E28C;
+      v23 = g_iVertexSize;
       v15 = dword_3E2E290;
-      v10 = (((OutputWidth - dword_3E2E2BC) << 16) + 4 * dword_3E2E28C) / dword_3E2E28C;
-      v12 = (dword_3E2E290 + (OutputHeight << 16)) / dword_3E2E290;
+      v10 = (((GfxEngineSetup.m_uWidth - g_uLeftGuiBorderWidth) << 16) + 4 * g_iVertexSize) / g_iVertexSize;
+      v12 = (dword_3E2E290 + (GfxEngineSetup.m_uHeight << 16)) / dword_3E2E290;
       v18 = -dword_3E2E290 - (dword_3E2E2B4 << 16);
       if ( D3DObjectPtr )
       {
-        v11 = -dword_3E2E28C / 2;
+        v11 = -g_iVertexSize / 2;
         for ( i = dword_3E2E2AC; i < v12 + dword_3E2E2AC + 16; ++i )
         {
           if ( (i & 1) != 0 )
           {
-            v20 = (dword_3E2E2BC - dword_3E2E2B0 - (v23 >> 16)) << 16;
+            v20 = (g_uLeftGuiBorderWidth - dword_3E2E2B0 - (v23 >> 16)) << 16;
             v21 = 1;
           }
           else
           {
-            v20 = v11 + ((dword_3E2E2BC - dword_3E2E2B0 - (v23 >> 16)) << 16);
+            v20 = v11 + ((g_uLeftGuiBorderWidth - dword_3E2E2B0 - (v23 >> 16)) << 16);
             v21 = 0;
           }
           v8 = v10 + dword_3E2E2A8 + i / 2 + 1;
@@ -47275,8 +47253,8 @@ void __cdecl AddDebugStrings(int a1) {
           {
             if ( FastIndexValidation(i) && FastIndexValidation(v21 + j) )
             {
-              v7 = CalcFinalHeightOffset(*(unsigned __int8 *)(v17 + 4 * (v21 + v19)));
-              v16 = dword_468DF98(v21 + j, i);
+              v7 = CalcFinalHeightOffset(v17[v21 + v19].m_uGroundHeight);
+              v16 = s_pfDebugValueCallback(v21 + j, i);
               if ( v16 > 0 )
               {
                 sprintf(Str, "%d", v16);
@@ -47291,9 +47269,7 @@ void __cdecl AddDebugStrings(int a1) {
         }
 LABEL_21:
         SelectObject(hdc, v6);
-        ((void (__thiscall *)(CSurfaceV7 *, HDC))D3DObjectPtr->FinalRenderSurface->j_?ReleaseDC@CSurfaceV7@@UAEJPAUHDC__@@@Z)(
-          D3DObjectPtr->FinalRenderSurface,
-          hdc);
+        D3DObjectPtr->FinalRenderSurface->ReleaseDC(D3DObjectPtr->FinalRenderSurface, hdc);
         DeleteObject(ho);
         DeleteObject(h);
       }
@@ -47320,7 +47296,7 @@ void __cdecl ClipGuiSurface(int a1) {
   RECT rcSrc2; // [esp+34h] [ebp-24h] BYREF
   RECT v13; // [esp+44h] [ebp-14h]
 
-  v10 = &dword_468DFA0[7 * a1];
+  v10 = &g_pGuiSurfaceDescriptors[7 * a1];
   v8 = &byte_468E128[16 * a1];
   lprcDst = (LPRECT)&byte_468E208[16 * a1];
   v13 = *(RECT *)sub_2F74660(v2);
@@ -47460,8 +47436,8 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
   if ( dword_3E2E314 == 2000 )
     return g_bRenderSuccess;
   g_iMapSize = Size;
-  v46 = dword_3E2E2A0;
-  if ( !dword_3E2E2A0 )
+  v46 = g_pGfxLayer;
+  if ( !g_pGfxLayer )
     return 1;
   dword_3E2E708 = LODWORD(FLOAT_0_001953125);
   if ( !SGfxRenderConfiguration::IsHQTextureSet((SGfxRenderConfiguration *)&GfxEngineSetup) )
@@ -47470,7 +47446,7 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
   {
     if ( !D3DObjectPtr )
       return 0;
-    if ( !D3DObjectPtr->field_71D )
+    if ( !D3DObjectPtr->m_bInitHardware )
       return 0;
     LandscapeRenderTargetSurface = CInterfaceD3D::GetLandscapeRenderTargetSurface(D3DObjectPtr);
     if ( LandscapeRenderTargetSurface->IsLost(LandscapeRenderTargetSurface) == -2005532222 )
@@ -47481,14 +47457,14 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
     dword_3E2E708 = 0;
     if ( !D3DObjectPtr )
       return 0;
-    if ( !D3DObjectPtr->field_71C )
+    if ( !D3DObjectPtr->m_bInitSoftware )
       return 0;
   }
-  v82 = dword_3E2E28C;
+  v82 = g_iVertexSize;
   v81 = dword_3E2E290;
   g_pVertex = D3DObjectPtr->field_0;
-  v11 = (((OutputWidth - dword_3E2E2BC) << 16) + 4 * dword_3E2E28C) / dword_3E2E28C;
-  v14 = (dword_3E2E290 + (OutputHeight << 16)) / dword_3E2E290;
+  v11 = (((MEMORY[0x3E2E26C] - g_uLeftGuiBorderWidth) << 16) + 4 * g_iVertexSize) / g_iVertexSize;
+  v14 = (dword_3E2E290 + (MEMORY[0x3E2E270] << 16)) / dword_3E2E290;
   v69 = v14 + a2 + 2;
   if ( v14 + a2 + 5 < g_iMapSize && v69 > 0 )
     v69 += (unsigned __int8)byte_469717B[v69] / 5;
@@ -47513,22 +47489,22 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
       WriteError(v78, "LockLandscapeSurfaceForSoftwareRendering");
       return 0;
     }
-    j__TRI_set_window(v12, OutputWidth + 1, OutputHeight + 1, v13);
+    j__TRI_set_window(v12, MEMORY[0x3E2E26C] + 1, MEMORY[0x3E2E270] + 1, v13);
   }
   for ( Number = a2; Number < v69; ++Number )
   {
     if ( Number >= dword_3E2E314 - 2 )
     {
-      if ( Number > dword_3E2E318 + 2 )
+      if ( Number > g_iFoggingRange + 2 )
         break;
       if ( (Number & 1) != 0 )
       {
-        v96 = (dword_3E2E2BC - dword_3E2E2B0 - (v82 >> 16)) << 16;
+        v96 = (g_uLeftGuiBorderWidth - dword_3E2E2B0 - (v82 >> 16)) << 16;
         g_bHalfLine = 1;
       }
       else
       {
-        v96 = v33 + ((dword_3E2E2BC - dword_3E2E2B0 - (v82 >> 16)) << 16);
+        v96 = v33 + ((g_uLeftGuiBorderWidth - dword_3E2E2B0 - (v82 >> 16)) << 16);
         g_bHalfLine = 0;
       }
       if ( Number < 0 )
@@ -47737,7 +47713,7 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
         v4 = v67;
         v74 = v92;
         v75 = v101;
-        if ( (v96 != v33 || g_bHalfLine) && (v97 >> 16) - v79 <= OutputHeight && v106 | v98 | v105 )
+        if ( (v96 != v33 || g_bHalfLine) && (v97 >> 16) - v79 <= MEMORY[0x3E2E270] && v106 | v98 | v105 )
         {
           s_iDarkTribeElement = 22 * (v100 || v91 || v99);
           if ( v110 == v104 && v104 == v109 && byte_3ACD240[v110] >= 0 )
@@ -47895,7 +47871,7 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
           }
         }
         if ( (v80 != v24 - 1 || !g_bHalfLine)
-          && ((v97 >> 16) - v79 <= OutputHeight || (v97 >> 16) - v70 <= OutputHeight)
+          && ((v97 >> 16) - v79 <= MEMORY[0x3E2E270] || (v97 >> 16) - v70 <= MEMORY[0x3E2E270])
           && v106 | v101 | v105 )
         {
           s_iDarkTribeElement = 22 * (v100 || v92 || v99);
@@ -48155,7 +48131,7 @@ bool __cdecl DrawTexturedLandscape(int a1, int a2) {
   int OldFogging; // [esp+BCh] [ebp-118h]
   int NewFogging; // [esp+C0h] [ebp-114h]
   BOOL v50; // [esp+C4h] [ebp-110h]
-  int v51; // [esp+C8h] [ebp-10Ch]
+  struct T_GFX_MAP_ELEMENT *v51; // [esp+C8h] [ebp-10Ch]
   BOOL v52; // [esp+CCh] [ebp-108h]
   CSurfaceV7 *v53; // [esp+D0h] [ebp-104h]
   CSurfaceV7 *v54; // [esp+D4h] [ebp-100h]
@@ -48199,8 +48175,8 @@ bool __cdecl DrawTexturedLandscape(int a1, int a2) {
   bool v92; // [esp+15Bh] [ebp-79h]
   int v93; // [esp+15Ch] [ebp-78h]
   int v94; // [esp+160h] [ebp-74h]
-  _DWORD *v95; // [esp+164h] [ebp-70h] BYREF
-  _DWORD *v96; // [esp+168h] [ebp-6Ch] BYREF
+  float *v95; // [esp+164h] [ebp-70h] BYREF
+  float *v96; // [esp+168h] [ebp-6Ch] BYREF
   int v97; // [esp+16Ch] [ebp-68h]
   int Number; // [esp+170h] [ebp-64h]
   int v99; // [esp+174h] [ebp-60h]
@@ -48226,8 +48202,8 @@ bool __cdecl DrawTexturedLandscape(int a1, int a2) {
   char v119; // [esp+1AFh] [ebp-25h]
   int v120; // [esp+1B0h] [ebp-24h] BYREF
   int v121; // [esp+1B4h] [ebp-20h]
-  int v122; // [esp+1B8h] [ebp-1Ch]
-  int v123; // [esp+1BCh] [ebp-18h]
+  int m_uWidth; // [esp+1B8h] [ebp-1Ch]
+  int m_uHeight; // [esp+1BCh] [ebp-18h]
   int v124; // [esp+1C0h] [ebp-14h] BYREF
   int v125; // [esp+1C4h] [ebp-10h]
   int v126; // [esp+1C8h] [ebp-Ch]
@@ -48235,20 +48211,20 @@ bool __cdecl DrawTexturedLandscape(int a1, int a2) {
 
   g_bRenderSuccess = 1;
   g_iMapSize = Size;
-  v51 = dword_3E2E2A0;
-  if ( !dword_3E2E2A0 )
+  v51 = g_pGfxLayer;
+  if ( !g_pGfxLayer )
     return 1;
   dword_3E2E708 = LODWORD(FLOAT_0_001953125);
-  if ( !SGfxRenderConfiguration::IsHQTextureSet((SGfxRenderConfiguration *)&GfxEngineSetup) )
+  if ( !SGfxRenderConfiguration::IsHQTextureSet(&GfxEngineSetup) )
     dword_3E2E708 = LODWORD(FLOAT_0_00390625);
-  if ( SGfxRenderConfiguration::IsHardwareLandscapeEngine((SGfxRenderConfiguration *)&GfxEngineSetup) )
+  if ( SGfxRenderConfiguration::IsHardwareLandscapeEngine(&GfxEngineSetup) )
   {
     if ( !D3DObjectPtr )
       return 0;
-    if ( !D3DObjectPtr->field_71D )
+    if ( !D3DObjectPtr->m_bInitHardware )
       return 0;
     LandscapeRenderTargetSurface = CInterfaceD3D::GetLandscapeRenderTargetSurface(D3DObjectPtr);
-    if ( ((int (__thiscall *)(CSurfaceV7 *))LandscapeRenderTargetSurface->IsLost)(LandscapeRenderTargetSurface) == -2005532222 )
+    if ( LandscapeRenderTargetSurface->IsLost(LandscapeRenderTargetSurface) == -2005532222 )
       return 0;
   }
   else
@@ -48256,18 +48232,18 @@ bool __cdecl DrawTexturedLandscape(int a1, int a2) {
     dword_3E2E708 = 0;
     if ( !D3DObjectPtr )
       return 0;
-    if ( !D3DObjectPtr->field_71C )
+    if ( !D3DObjectPtr->m_bInitSoftware )
       return 0;
   }
   g_pVertex = D3DObjectPtr->field_0;
-  v99 = dword_3E2E28C;
+  v99 = g_iVertexSize;
   v85 = dword_3E2E290;
-  v13 = (((OutputWidth - dword_3E2E2BC) << 16) + 4 * dword_3E2E28C) / dword_3E2E28C;
-  v74 = (dword_3E2E290 + (OutputHeight << 16)) / dword_3E2E290 + a2 + 2;
+  v13 = (((GfxEngineSetup.m_uWidth - g_uLeftGuiBorderWidth) << 16) + 4 * g_iVertexSize) / g_iVertexSize;
+  v74 = (dword_3E2E290 + (GfxEngineSetup.m_uHeight << 16)) / dword_3E2E290 + a2 + 2;
   v112 = -dword_3E2E290 - (dword_3E2E2B4 << 16);
-  v34 = -dword_3E2E28C / 2;
-  v94 = dword_3E2E28C / 2;
-  if ( (dword_3E2E290 + (OutputHeight << 16)) / dword_3E2E290 + a2 + 5 < g_iMapSize && v74 > 0 )
+  v34 = -g_iVertexSize / 2;
+  v94 = g_iVertexSize / 2;
+  if ( (dword_3E2E290 + (GfxEngineSetup.m_uHeight << 16)) / dword_3E2E290 + a2 + 5 < g_iMapSize && v74 > 0 )
     v74 += (unsigned __int8)byte_469717B[v74] / 5;
   v124 = -1;
   v125 = -1;
@@ -48300,61 +48276,61 @@ bool __cdecl DrawTexturedLandscape(int a1, int a2) {
       v97 = v57 - dword_46C1668;
     dword_46C1664 += Number;
     dword_46C1668 += v97;
-    if ( j__abs(Number) >= OutputWidth - dword_3E2E2BC )
+    if ( j__abs(Number) >= GfxEngineSetup.m_uWidth - g_uLeftGuiBorderWidth )
       byte_3E2E2FF = 1;
-    if ( j__abs(v97) >= OutputWidth )
+    if ( j__abs(v97) >= GfxEngineSetup.m_uWidth )
       byte_3E2E2FF = 1;
     if ( Number >= 0 )
     {
       if ( Number <= 0 )
       {
         v120 = 0;
-        v122 = OutputWidth;
+        m_uWidth = GfxEngineSetup.m_uWidth;
         v124 = 0;
-        v126 = OutputWidth;
+        v126 = GfxEngineSetup.m_uWidth;
       }
       else
       {
         v120 = j__abs(Number);
-        v122 = OutputWidth;
+        m_uWidth = GfxEngineSetup.m_uWidth;
         v124 = 0;
-        v126 = OutputWidth - Number;
+        v126 = GfxEngineSetup.m_uWidth - Number;
       }
     }
     else
     {
       v120 = 0;
-      v122 = Number + OutputWidth;
+      m_uWidth = Number + GfxEngineSetup.m_uWidth;
       v124 = j__abs(Number);
-      v126 = OutputWidth;
+      v126 = GfxEngineSetup.m_uWidth;
     }
     if ( v97 >= 0 )
     {
       if ( v97 <= 0 )
       {
         v121 = 0;
-        v123 = OutputHeight;
+        m_uHeight = GfxEngineSetup.m_uHeight;
         v125 = 0;
-        v127 = OutputHeight;
+        v127 = GfxEngineSetup.m_uHeight;
       }
       else
       {
         v121 = j__abs(v97);
-        v123 = OutputHeight;
+        m_uHeight = GfxEngineSetup.m_uHeight;
         v125 = 0;
-        v127 = OutputHeight - v97;
+        v127 = GfxEngineSetup.m_uHeight - v97;
       }
     }
     else
     {
       v121 = 0;
-      v123 = v97 + OutputHeight;
+      m_uHeight = v97 + GfxEngineSetup.m_uHeight;
       v125 = j__abs(v97);
-      v127 = OutputHeight;
+      v127 = GfxEngineSetup.m_uHeight;
     }
-    v56 = !v124 && v126 == OutputWidth;
+    v56 = !v124 && v126 == GfxEngineSetup.m_uWidth;
     v109 = v56;
-    v55 = !v125 && v127 == OutputHeight;
+    v55 = !v125 && v127 == GfxEngineSetup.m_uHeight;
     v92 = v55;
     if ( v109 && v92 )
       return 1;
@@ -48362,13 +48338,7 @@ bool __cdecl DrawTexturedLandscape(int a1, int a2) {
     {
       v54 = CInterfaceD3D::GetLandscapeRenderTargetSurface(D3DObjectPtr);
       v3 = CInterfaceD3D::GetLandscapeRenderTargetSurface(D3DObjectPtr);
-      v93 = ((int (__thiscall *)(CSurfaceV7 *, int *, CSurfaceV7 *, int *, _DWORD, _DWORD))v54->Blt)(
-              v54,
-              &v124,
-              v3,
-              &v120,
-              0,
-              0);
+      v93 = v54->Blt(v54, (struct tagRECT *)&v124, v3, (struct tagRECT *)&v120, 0, 0);
       if ( v93 )
       {
         WriteError(v93, "DeltaScrollBlitError");
@@ -48383,7 +48353,7 @@ bool __cdecl DrawTexturedLandscape(int a1, int a2) {
   dword_46C1648 = dword_3E2E2B0;
   dword_46C164C = dword_3E2E2AC;
   dword_46C1650 = dword_3E2E2B4;
-  if ( SGfxRenderConfiguration::IsHardwareLandscapeEngine((SGfxRenderConfiguration *)&GfxEngineSetup) )
+  if ( SGfxRenderConfiguration::IsHardwareLandscapeEngine(&GfxEngineSetup) )
   {
     v93 = CInterfaceD3D::BeginLandscapeScene(D3DObjectPtr);
     if ( v93 )
@@ -48395,15 +48365,15 @@ bool __cdecl DrawTexturedLandscape(int a1, int a2) {
   else
   {
     v53 = CInterfaceD3D::GetLandscapeRenderTargetSurface(D3DObjectPtr);
-    v93 = ((int (__thiscall *)(CSurfaceV7 *, int *, int *, int))v53->Lock)(v53, &v9, &v14, 1);
+    v93 = v53->Lock(v53, &v9, &v14, 1);
     if ( v93 )
     {
       WriteError(v93, "LockLandscapeSurfaceForSoftwareRendering");
       return 0;
     }
-    j__TRI_set_window(v14, OutputWidth + 1, OutputHeight + 1, v9);
+    j__TRI_set_window(v14, GfxEngineSetup.m_uWidth + 1, GfxEngineSetup.m_uHeight + 1, v9);
   }
-  v60 = (dword_3E2E2BC - dword_3E2E2B0 - (v99 >> 16)) << 16;
+  v60 = (g_uLeftGuiBorderWidth - dword_3E2E2B0 - (v99 >> 16)) << 16;
   v84 = -1;
   for ( i = a2; i < v74; ++i )
   {
@@ -48415,7 +48385,7 @@ bool __cdecl DrawTexturedLandscape(int a1, int a2) {
         v112 += v85;
         continue;
       }
-      if ( v109 && v127 == OutputHeight && (v112 - 2 * v94) >> 16 > v125 )
+      if ( v109 && v127 == GfxEngineSetup.m_uHeight && (v112 - 2 * v94) >> 16 > v125 )
       {
         if ( v84 == -1 )
         {
@@ -48433,7 +48403,7 @@ bool __cdecl DrawTexturedLandscape(int a1, int a2) {
       }
       if ( v125 || (v94 + v112) >> 16 >= v127 )
       {
-        if ( v127 == OutputHeight && (v112 - 2 * v94) >> 16 > v125 )
+        if ( v127 == GfxEngineSetup.m_uHeight && (v112 - 2 * v94) >> 16 > v125 )
         {
           if ( v84 == -1 )
           {
@@ -48482,19 +48452,19 @@ bool __cdecl DrawTexturedLandscape(int a1, int a2) {
     }
     v66 = v13 + a1 + i / 2 + 1;
     v62 = i / 2 + a1 + g_iMapSize * i;
-    v118 = (T_GFX_MAP_ELEMENT *)(v51 + 4 * (v62 + (unsigned __int8)g_bHalfLine));
+    v118 = &v51[v62 + (unsigned __int8)g_bHalfLine];
     v80 = a1 + i / 2;
     if ( !v108 )
     {
-      if ( v126 == OutputWidth )
+      if ( v126 == GfxEngineSetup.m_uWidth )
       {
-        v66 -= ((v126 - v124 - dword_3E2E2BC) << 16) / v99 + 1;
+        v66 -= ((v126 - v124 - g_uLeftGuiBorderWidth) << 16) / v99 + 1;
       }
       else
       {
-        v63 = ((v126 - v124 - dword_3E2E2BC) << 16) / v99;
+        v63 = ((v126 - v124 - g_uLeftGuiBorderWidth) << 16) / v99;
         v80 += v63;
-        v118 = (T_GFX_MAP_ELEMENT *)((char *)v118 + 4 * v63);
+        v118 += v63;
         v105 += v99 * v63;
       }
     }
@@ -48516,9 +48486,9 @@ bool __cdecl DrawTexturedLandscape(int a1, int a2) {
     g_iUsedFogFadeStep = v61;
     if ( v100 && v90 )
     {
-      v82 = CalcFinalHeightOffset(*(unsigned __int8 *)v118);
-      v50 = *((char *)v118 + 2) < 0;
-      v47 = v50 ? 0 : *((_BYTE *)v118 + 2) & 0xF;
+      v82 = CalcFinalHeightOffset(v118->m_uGroundHeight);
+      v50 = (v118->m_uGradient & 0x80u) != 0;
+      v47 = v50 ? 0 : v118->m_uGradient & 0xF;
       NewFogging = T_GFX_MAP_ELEMENT::GetNewFogging(v118);
       OldFogging = T_GFX_MAP_ELEMENT::GetOldFogging(v118);
       ShadowFog = CHeightAndTypeTable::GetShadowFog(
@@ -48533,10 +48503,10 @@ bool __cdecl DrawTexturedLandscape(int a1, int a2) {
                    v47,
                    OldFogging,
                    NewFogging);
-      v117 = (unsigned __int8)byte_3ACD340[*((unsigned __int8 *)v118 + 1)];
-      v91 = (*((_BYTE *)v118 + 2) & 0x40) != 0;
+      v117 = (unsigned __int8)byte_3ACD340[v118->m_uGroundType];
+      v91 = (v118->m_uGradient & 0x40) != 0;
       v106 = v91;
-      if ( (v117 == 28 || v117 == 29) && (int)CalcCurrentFog(v118) <= 59 )
+      if ( (v117 == 28 || v117 == 29) && CalcCurrentFog(v118) <= 59 )
         v117 = 16;
     }
     else
@@ -48549,12 +48519,12 @@ bool __cdecl DrawTexturedLandscape(int a1, int a2) {
     }
     if ( i == g_iFadeYBorder - 1 )
       g_iUsedFogFadeStep = 15;
-    v118 = (T_GFX_MAP_ELEMENT *)((char *)v118 + 4 * g_iMapSize);
+    v118 += g_iMapSize;
     if ( v90 && v104 )
     {
-      v69 = CalcFinalHeightOffset(*(unsigned __int8 *)v118);
-      v46 = *((char *)v118 + 2) < 0;
-      v43 = v46 ? 0 : *((_BYTE *)v118 + 2) & 0xF;
+      v69 = CalcFinalHeightOffset(v118->m_uGroundHeight);
+      v46 = (v118->m_uGradient & 0x80u) != 0;
+      v43 = v46 ? 0 : v118->m_uGradient & 0xF;
       v45 = T_GFX_MAP_ELEMENT::GetNewFogging(v118);
       v44 = T_GFX_MAP_ELEMENT::GetOldFogging(v118);
       v68 = CHeightAndTypeTable::GetShadowFog(
@@ -48569,10 +48539,10 @@ bool __cdecl DrawTexturedLandscape(int a1, int a2) {
               v43,
               v44,
               v45);
-      v111 = (unsigned __int8)byte_3ACD340[*((unsigned __int8 *)v118 + 1)];
-      v89 = (*((_BYTE *)v118 + 2) & 0x40) != 0;
+      v111 = (unsigned __int8)byte_3ACD340[v118->m_uGroundType];
+      v89 = (v118->m_uGradient & 0x40) != 0;
       v101 = v89;
-      if ( (v111 == 28 || v111 == 29) && (int)CalcCurrentFog(v118) <= 59 )
+      if ( (v111 == 28 || v111 == 29) && CalcCurrentFog(v118) <= 59 )
         v111 = 16;
     }
     else
@@ -48591,12 +48561,12 @@ bool __cdecl DrawTexturedLandscape(int a1, int a2) {
       v103 = FastIndexValidation(v83 + (unsigned __int8)g_bHalfLine + 1);
       if ( i == g_iFadeYBorder - 1 )
         g_iUsedFogFadeStep = 15;
-      v118 = (T_GFX_MAP_ELEMENT *)((char *)v118 + 4);
+      ++v118;
       if ( v103 && v104 )
       {
-        v77 = CalcFinalHeightOffset(*(unsigned __int8 *)v118);
-        v42 = *((char *)v118 + 2) < 0;
-        v39 = v42 ? 0 : *((_BYTE *)v118 + 2) & 0xF;
+        v77 = CalcFinalHeightOffset(v118->m_uGroundHeight);
+        v42 = (v118->m_uGradient & 0x80u) != 0;
+        v39 = v42 ? 0 : v118->m_uGradient & 0xF;
         v41 = T_GFX_MAP_ELEMENT::GetNewFogging(v118);
         v40 = T_GFX_MAP_ELEMENT::GetOldFogging(v118);
         v75 = CHeightAndTypeTable::GetShadowFog(
@@ -48611,10 +48581,10 @@ bool __cdecl DrawTexturedLandscape(int a1, int a2) {
                 v39,
                 v40,
                 v41);
-        v115 = (unsigned __int8)byte_3ACD340[*((unsigned __int8 *)v118 + 1)];
-        v87 = (*((_BYTE *)v118 + 2) & 0x40) != 0;
+        v115 = (unsigned __int8)byte_3ACD340[v118->m_uGroundType];
+        v87 = (v118->m_uGradient & 0x40) != 0;
         v107 = v87;
-        if ( (v115 == 28 || v115 == 29) && (int)CalcCurrentFog(v118) <= 59 )
+        if ( (v115 == 28 || v115 == 29) && CalcCurrentFog(v118) <= 59 )
           v115 = 16;
       }
       else
@@ -48631,12 +48601,12 @@ bool __cdecl DrawTexturedLandscape(int a1, int a2) {
       v5 = v78;
       v81 = v107;
       g_iUsedFogFadeStep = v61;
-      v118 = (T_GFX_MAP_ELEMENT *)((char *)v118 - 4 * g_iMapSize);
+      v118 -= g_iMapSize;
       if ( v103 && v100 )
       {
-        v76 = CalcFinalHeightOffset(*(unsigned __int8 *)v118);
-        v38 = *((char *)v118 + 2) < 0;
-        v35 = v38 ? 0 : *((_BYTE *)v118 + 2) & 0xF;
+        v76 = CalcFinalHeightOffset(v118->m_uGroundHeight);
+        v38 = (v118->m_uGradient & 0x80u) != 0;
+        v35 = v38 ? 0 : v118->m_uGradient & 0xF;
         v37 = T_GFX_MAP_ELEMENT::GetNewFogging(v118);
         v36 = T_GFX_MAP_ELEMENT::GetOldFogging(v118);
         v73 = CHeightAndTypeTable::GetShadowFog(
@@ -48651,10 +48621,10 @@ bool __cdecl DrawTexturedLandscape(int a1, int a2) {
                 v35,
                 v36,
                 v37);
-        v110 = (unsigned __int8)byte_3ACD340[*((unsigned __int8 *)v118 + 1)];
-        v88 = (*((_BYTE *)v118 + 2) & 0x40) != 0;
+        v110 = (unsigned __int8)byte_3ACD340[v118->m_uGroundType];
+        v88 = (v118->m_uGradient & 0x40) != 0;
         v102 = v88;
-        if ( (v110 == 28 || v110 == 29) && (int)CalcCurrentFog(v118) <= 59 )
+        if ( (v110 == 28 || v110 == 29) && CalcCurrentFog(v118) <= 59 )
           v110 = 16;
       }
       else
@@ -48670,7 +48640,7 @@ bool __cdecl DrawTexturedLandscape(int a1, int a2) {
       v8 = v73;
       v6 = v72;
       v79 = v102;
-      if ( (v105 != v60 + v34 || g_bHalfLine) && (v112 >> 16) - v82 <= OutputHeight )
+      if ( (v105 != v60 + v34 || g_bHalfLine) && (v112 >> 16) - v82 <= GfxEngineSetup.m_uHeight )
       {
         s_iDarkTribeElement = 22 * (v107 || v101 || v106);
         if ( v117 == v111 && v111 == v115 && byte_3ACD240[v117] >= 0 )
@@ -48704,72 +48674,41 @@ bool __cdecl DrawTexturedLandscape(int a1, int a2) {
             }
             if ( v111 == v115 )
             {
-              v114 = (unsigned __int8 *)&byte_4697610
-                   + 156 * (unsigned __int8)byte_3ACD510[v111]
-                   + 4 * (unsigned __int8)byte_3ACD510[v117];
-              v96 = (_DWORD *)((char *)&PatternTripleVertices
-                             + 576 * *v114
-                             + 144 * v114[1]
-                             + 144 * (unsigned __int8)(v119 & v114[3]));
+              v114 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v111] + 4 * (unsigned __int8)byte_3ACD510[v117]];
+              v96 = &PatternTripleVertices[144 * *v114 + 36 * v114[1] + 36 * (unsigned __int8)(v119 & v114[3])];
             }
             else if ( v111 == v117 )
             {
-              v114 = (unsigned __int8 *)&byte_4697610
-                   + 156 * (unsigned __int8)byte_3ACD510[v111]
-                   + 4 * (unsigned __int8)byte_3ACD510[v115];
-              v96 = (_DWORD *)((char *)&PatternTripleVertices
-                             + 576 * *v114
-                             + 144 * v114[1]
-                             + 144 * (unsigned __int8)(v119 & v114[3])
-                             + 48);
+              v114 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v111] + 4 * (unsigned __int8)byte_3ACD510[v115]];
+              v96 = &PatternTripleVertices[144 * *v114 + 12 + 36 * v114[1] + 36 * (unsigned __int8)(v119 & v114[3])];
             }
             else if ( v117 == v115 )
             {
-              v114 = (unsigned __int8 *)&byte_4697610
-                   + 156 * (unsigned __int8)byte_3ACD510[v117]
-                   + 4 * (unsigned __int8)byte_3ACD510[v111];
-              v96 = (_DWORD *)((char *)&PatternTripleVertices
-                             + 576 * *v114
-                             + 144 * v114[1]
-                             + 144 * (unsigned __int8)(v119 & v114[3])
-                             + 96);
+              v114 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v117] + 4 * (unsigned __int8)byte_3ACD510[v111]];
+              v96 = &PatternTripleVertices[144 * *v114 + 24 + 36 * v114[1] + 36 * (unsigned __int8)(v119 & v114[3])];
             }
             else
             {
-              sub_2F7C100(&v117, &v111, &v115, &g_bRiverMouth, 0, &v96);
+              sub_2F7C100(&v117, &v111, &v115, &g_bRiverMouth, 0, (int *)&v96);
               if ( !g_bRiverMouth )
               {
                 if ( v111 == v115 )
                 {
-                  v114 = (unsigned __int8 *)&byte_4697610
-                       + 156 * (unsigned __int8)byte_3ACD510[v111]
-                       + 4 * (unsigned __int8)byte_3ACD510[v117];
-                  v96 = (_DWORD *)((char *)&PatternTripleVertices
-                                 + 576 * *v114
-                                 + 144 * v114[1]
-                                 + 144 * (unsigned __int8)(v119 & v114[3]));
+                  v114 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v111]
+                                     + 4 * (unsigned __int8)byte_3ACD510[v117]];
+                  v96 = &PatternTripleVertices[144 * *v114 + 36 * v114[1] + 36 * (unsigned __int8)(v119 & v114[3])];
                 }
                 else if ( v111 == v117 )
                 {
-                  v114 = (unsigned __int8 *)&byte_4697610
-                       + 156 * (unsigned __int8)byte_3ACD510[v111]
-                       + 4 * (unsigned __int8)byte_3ACD510[v115];
-                  v96 = (_DWORD *)((char *)&PatternTripleVertices
-                                 + 576 * *v114
-                                 + 144 * v114[1]
-                                 + 144 * (unsigned __int8)(v119 & v114[3])
-                                 + 48);
+                  v114 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v111]
+                                     + 4 * (unsigned __int8)byte_3ACD510[v115]];
+                  v96 = &PatternTripleVertices[144 * *v114 + 12 + 36 * v114[1] + 36 * (unsigned __int8)(v119 & v114[3])];
                 }
                 else
                 {
-                  v114 = (unsigned __int8 *)&byte_4697610
-                       + 156 * (unsigned __int8)byte_3ACD510[v117]
-                       + 4 * (unsigned __int8)byte_3ACD510[v111];
-                  v96 = (_DWORD *)((char *)&PatternTripleVertices
-                                 + 576 * *v114
-                                 + 144 * v114[1]
-                                 + 144 * (unsigned __int8)(v119 & v114[3])
-                                 + 96);
+                  v114 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v117]
+                                     + 4 * (unsigned __int8)byte_3ACD510[v111]];
+                  v96 = &PatternTripleVertices[144 * *v114 + 24 + 36 * v114[1] + 36 * (unsigned __int8)(v119 & v114[3])];
                 }
               }
             }
@@ -48782,14 +48721,14 @@ bool __cdecl DrawTexturedLandscape(int a1, int a2) {
             {
               CInterfaceD3D::ChangeCurrentTexturePage(D3DObjectPtr, s_iDarkTribeElement + v114[2]);
             }
-            *(_DWORD *)(g_pVertex + 24) = *v96;
-            *(_DWORD *)(g_pVertex + 28) = v96[1];
+            *(float *)(g_pVertex + 24) = *v96;
+            *(float *)(g_pVertex + 28) = v96[1];
             g_pVertex += 32;
-            *(_DWORD *)(g_pVertex + 24) = v96[2];
-            *(_DWORD *)(g_pVertex + 28) = v96[3];
+            *(float *)(g_pVertex + 24) = v96[2];
+            *(float *)(g_pVertex + 28) = v96[3];
             g_pVertex += 32;
-            *(_DWORD *)(g_pVertex + 24) = v96[4];
-            *(_DWORD *)(g_pVertex + 28) = v96[5];
+            *(float *)(g_pVertex + 24) = v96[4];
+            *(float *)(g_pVertex + 28) = v96[5];
             g_pVertex -= 64;
           }
         }
@@ -48853,7 +48792,7 @@ bool __cdecl DrawTexturedLandscape(int a1, int a2) {
         }
       }
       if ( (v83 != v66 - 1 || !g_bHalfLine)
-        && ((v112 >> 16) - v82 <= OutputHeight || (v112 >> 16) - v76 <= OutputHeight) )
+        && ((v112 >> 16) - v82 <= GfxEngineSetup.m_uHeight || (v112 >> 16) - v76 <= GfxEngineSetup.m_uHeight) )
       {
         s_iDarkTribeElement = 22 * (v107 || v102 || v106);
         if ( v117 == v110 && v110 == v115 && byte_3ACD240[v117] >= 0 )
@@ -48887,74 +48826,41 @@ bool __cdecl DrawTexturedLandscape(int a1, int a2) {
             }
             if ( v117 == v110 )
             {
-              v113 = (unsigned __int8 *)&byte_4697610
-                   + 156 * (unsigned __int8)byte_3ACD510[v117]
-                   + 4 * (unsigned __int8)byte_3ACD510[v115];
-              v95 = (_DWORD *)((char *)&PatternTripleVertices
-                             + 576 * *v113
-                             + 144 * v113[1]
-                             + 144 * (unsigned __int8)(v119 & v113[3])
-                             + 72);
+              v113 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v117] + 4 * (unsigned __int8)byte_3ACD510[v115]];
+              v95 = &PatternTripleVertices[144 * *v113 + 18 + 36 * v113[1] + 36 * (unsigned __int8)(v119 & v113[3])];
             }
             else if ( v110 == v115 )
             {
-              v113 = (unsigned __int8 *)&byte_4697610
-                   + 156 * (unsigned __int8)byte_3ACD510[v110]
-                   + 4 * (unsigned __int8)byte_3ACD510[v117];
-              v95 = (_DWORD *)((char *)&PatternTripleVertices
-                             + 576 * *v113
-                             + 144 * v113[1]
-                             + 144 * (unsigned __int8)(v119 & v113[3])
-                             + 120);
+              v113 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v110] + 4 * (unsigned __int8)byte_3ACD510[v117]];
+              v95 = &PatternTripleVertices[144 * *v113 + 30 + 36 * v113[1] + 36 * (unsigned __int8)(v119 & v113[3])];
             }
             else if ( v117 == v115 )
             {
-              v113 = (unsigned __int8 *)&byte_4697610
-                   + 156 * (unsigned __int8)byte_3ACD510[v117]
-                   + 4 * (unsigned __int8)byte_3ACD510[v110];
-              v95 = (_DWORD *)((char *)&PatternTripleVertices
-                             + 576 * *v113
-                             + 144 * v113[1]
-                             + 144 * (unsigned __int8)(v119 & v113[3])
-                             + 24);
+              v113 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v117] + 4 * (unsigned __int8)byte_3ACD510[v110]];
+              v95 = &PatternTripleVertices[144 * *v113 + 6 + 36 * v113[1] + 36 * (unsigned __int8)(v119 & v113[3])];
             }
             else
             {
-              sub_2F7C100(&v117, &v115, &v110, &g_bRiverMouth, 1, &v95);
+              sub_2F7C100(&v117, &v115, &v110, &g_bRiverMouth, 1u, (int *)&v95);
               if ( !g_bRiverMouth )
               {
                 if ( v117 == v110 )
                 {
-                  v113 = (unsigned __int8 *)&byte_4697610
-                       + 156 * (unsigned __int8)byte_3ACD510[v117]
-                       + 4 * (unsigned __int8)byte_3ACD510[v115];
-                  v95 = (_DWORD *)((char *)&PatternTripleVertices
-                                 + 576 * *v113
-                                 + 144 * v113[1]
-                                 + 144 * (unsigned __int8)(v119 & v113[3])
-                                 + 72);
+                  v113 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v117]
+                                     + 4 * (unsigned __int8)byte_3ACD510[v115]];
+                  v95 = &PatternTripleVertices[144 * *v113 + 18 + 36 * v113[1] + 36 * (unsigned __int8)(v119 & v113[3])];
                 }
                 else if ( v110 == v115 )
                 {
-                  v113 = (unsigned __int8 *)&byte_4697610
-                       + 156 * (unsigned __int8)byte_3ACD510[v110]
-                       + 4 * (unsigned __int8)byte_3ACD510[v117];
-                  v95 = (_DWORD *)((char *)&PatternTripleVertices
-                                 + 576 * *v113
-                                 + 144 * v113[1]
-                                 + 144 * (unsigned __int8)(v119 & v113[3])
-                                 + 120);
+                  v113 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v110]
+                                     + 4 * (unsigned __int8)byte_3ACD510[v117]];
+                  v95 = &PatternTripleVertices[144 * *v113 + 30 + 36 * v113[1] + 36 * (unsigned __int8)(v119 & v113[3])];
                 }
                 else
                 {
-                  v113 = (unsigned __int8 *)&byte_4697610
-                       + 156 * (unsigned __int8)byte_3ACD510[v117]
-                       + 4 * (unsigned __int8)byte_3ACD510[v110];
-                  v95 = (_DWORD *)((char *)&PatternTripleVertices
-                                 + 576 * *v113
-                                 + 144 * v113[1]
-                                 + 144 * (unsigned __int8)(v119 & v113[3])
-                                 + 24);
+                  v113 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v117]
+                                     + 4 * (unsigned __int8)byte_3ACD510[v110]];
+                  v95 = &PatternTripleVertices[144 * *v113 + 6 + 36 * v113[1] + 36 * (unsigned __int8)(v119 & v113[3])];
                 }
               }
             }
@@ -48967,14 +48873,14 @@ bool __cdecl DrawTexturedLandscape(int a1, int a2) {
             {
               CInterfaceD3D::ChangeCurrentTexturePage(D3DObjectPtr, s_iDarkTribeElement + v113[2]);
             }
-            *(_DWORD *)(g_pVertex + 24) = *v95;
-            *(_DWORD *)(g_pVertex + 28) = v95[1];
+            *(float *)(g_pVertex + 24) = *v95;
+            *(float *)(g_pVertex + 28) = v95[1];
             g_pVertex += 32;
-            *(_DWORD *)(g_pVertex + 24) = v95[2];
-            *(_DWORD *)(g_pVertex + 28) = v95[3];
+            *(float *)(g_pVertex + 24) = v95[2];
+            *(float *)(g_pVertex + 28) = v95[3];
             g_pVertex += 32;
-            *(_DWORD *)(g_pVertex + 24) = v95[4];
-            *(_DWORD *)(g_pVertex + 28) = v95[5];
+            *(float *)(g_pVertex + 24) = v95[4];
+            *(float *)(g_pVertex + 28) = v95[5];
             g_pVertex -= 64;
           }
         }
@@ -49045,7 +48951,7 @@ bool __cdecl DrawTexturedLandscape(int a1, int a2) {
       *(float *)&g_fPatternSuboffsetX = *(float *)&g_fPatternSuboffsetX + 0.125;
       if ( *(float *)&g_fPatternSuboffsetX >= 1.0 )
         *(float *)&g_fPatternSuboffsetX = *(float *)&g_fPatternSuboffsetX - 1.0;
-      v118 = (T_GFX_MAP_ELEMENT *)((char *)v118 + 4 * g_iMapSize);
+      v118 += g_iMapSize;
       v82 = v12;
       v69 = v11;
       v117 = v10;
@@ -49062,14 +48968,14 @@ bool __cdecl DrawTexturedLandscape(int a1, int a2) {
     v112 += v85;
   }
   CInterfaceD3D::RenderScene(D3DObjectPtr, 0);
-  if ( SGfxRenderConfiguration::IsHardwareLandscapeEngine((SGfxRenderConfiguration *)&GfxEngineSetup) )
+  if ( SGfxRenderConfiguration::IsHardwareLandscapeEngine(&GfxEngineSetup) )
   {
     CInterfaceD3D::EndLandscapeScene(D3DObjectPtr);
   }
   else
   {
     v16 = CInterfaceD3D::GetLandscapeRenderTargetSurface(D3DObjectPtr);
-    v93 = ((int (__thiscall *)(CSurfaceV7 *))v16->Unlock)(v16);
+    v93 = v16->Unlock(v16);
     if ( v93 )
     {
       WriteError(v93, "UnlockLandscapeSurfaceForSoftwareRendering");
@@ -49213,8 +49119,8 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
 
   g_bRenderSuccess = 1;
   g_iMapSize = Size;
-  v51 = dword_3E2E2A0;
-  if ( !dword_3E2E2A0 )
+  v51 = g_pGfxLayer;
+  if ( !g_pGfxLayer )
     return 1;
   dword_3E2E708 = LODWORD(FLOAT_0_001953125);
   if ( !SGfxRenderConfiguration::IsHQTextureSet((SGfxRenderConfiguration *)&GfxEngineSetup) )
@@ -49223,7 +49129,7 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
   {
     if ( !D3DObjectPtr )
       return 0;
-    if ( !D3DObjectPtr->field_71D )
+    if ( !D3DObjectPtr->m_bInitHardware )
       return 0;
     LandscapeRenderTargetSurface = CInterfaceD3D::GetLandscapeRenderTargetSurface(D3DObjectPtr);
     if ( ((int (__thiscall *)(CSurfaceV7 *))LandscapeRenderTargetSurface->IsLost)(LandscapeRenderTargetSurface) == -2005532222 )
@@ -49234,18 +49140,18 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
     dword_3E2E708 = 0;
     if ( !D3DObjectPtr )
       return 0;
-    if ( !D3DObjectPtr->field_71C )
+    if ( !D3DObjectPtr->m_bInitSoftware )
       return 0;
   }
   g_pVertex = D3DObjectPtr->field_0;
-  v100 = dword_3E2E294;
+  v100 = g_iCameraVertexSize;
   v86 = dword_3E2E298;
-  v14 = ((dword_3E2E2DC << 16) + 4 * dword_3E2E294) / dword_3E2E294;
+  v14 = ((dword_3E2E2DC << 16) + 4 * g_iCameraVertexSize) / g_iCameraVertexSize;
   v10 = (dword_3E2E298 + (dword_3E2E2E0 << 16)) / dword_3E2E298;
   v75 = v10 + a2 + 2;
   v113 = -dword_3E2E298 - (dword_3E2E2D0 << 16);
-  v34 = -dword_3E2E294 / 2;
-  v95 = dword_3E2E294 / 2;
+  v34 = -g_iCameraVertexSize / 2;
+  v95 = g_iCameraVertexSize / 2;
   if ( v10 + a2 + 5 < g_iMapSize && v75 > 0 )
     v75 += (unsigned __int8)byte_469717B[v75] / 5;
   v125 = -1;
@@ -50102,7 +50008,7 @@ bool __cdecl DrawMiniMapLandscapeLayer(void) {
   __int16 v19; // [esp+44h] [ebp-4h]
   unsigned __int8 v20; // [esp+46h] [ebp-2h]
 
-  if ( !dword_3E2E2A0 )
+  if ( !g_pGfxLayer )
     return 0;
   v13 = ((int (__thiscall *)(CSurfaceV7 *, unsigned int *, int *, int))D3DObjectPtr->MiniMapSurface->Lock)(
           D3DObjectPtr->MiniMapSurface,
@@ -50116,7 +50022,7 @@ bool __cdecl DrawMiniMapLandscapeLayer(void) {
   }
   else
   {
-    NewValue = controlfp(0x300u, 0x300u);
+    NewValue = _controlfp(0x300u, 0x300u);
     v15 = (_WORD *)(v6 + 2 * ((v8 * dword_46C7E4C) >> 1));
     v15 += dword_46C7E48 + 80 - dword_46C7E4C % 8 / 2;
     v4 = 8 * (v8 >> 1) - 160;
@@ -50129,7 +50035,7 @@ bool __cdecl DrawMiniMapLandscapeLayer(void) {
       {
         if ( !byte_46C8358[162 * v12 + i] )
         {
-          v11 = (T_GFX_MAP_ELEMENT *)(dword_3E2E2A0 + 4 * (int)(float)(v10 + 0.5));
+          v11 = (T_GFX_MAP_ELEMENT *)(g_pGfxLayer + 4 * (int)(float)(v10 + 0.5));
           v5 = *((unsigned __int8 *)v11 + 1);
           v9 = 8 * T_GFX_MAP_ELEMENT::GetGradient(v11) - 64;
           v1 = CLandscapeColorProperties::ColorEntry((CLandscapeColorProperties *)&g_cLandscapeColorProperties, v5);
@@ -50172,7 +50078,7 @@ bool __cdecl DrawMiniMapLandscapeLayer(void) {
             v18 = 255;
           if ( v17 > 255 )
             v17 = 255;
-          if ( dword_3E2E2B8 == 1 )
+          if ( g_uGfxMode == 1 )
             v2 = 32 * (int)(float)((float)v17 * 0.12156863)
                + ((unsigned __int16)(int)(float)((float)v16 * 0.12156863) << 10);
           else
@@ -50186,7 +50092,7 @@ bool __cdecl DrawMiniMapLandscapeLayer(void) {
       }
       v15 += v4 - 4;
     }
-    controlfp(NewValue, 0x300u);
+    _controlfp(NewValue, 0x300u);
     v13 = ((int (__thiscall *)(CSurfaceV7 *))D3DObjectPtr->MiniMapSurface->Unlock)(D3DObjectPtr->MiniMapSurface);
     if ( v13 )
     {
@@ -50205,8 +50111,8 @@ bool __cdecl DrawMiniMapLandscapeLayer(void) {
 // Decompiled from char DrawMiniMapObjectLayer()
 bool __cdecl DrawMiniMapObjectLayer(void) {
   
-  __int16 v1; // ax
-  __int16 v2; // ax
+  unsigned __int16 v1; // ax
+  unsigned __int16 v2; // ax
   unsigned int NewValue; // [esp+4h] [ebp-3Ch]
   unsigned int v4; // [esp+8h] [ebp-38h]
   unsigned int v5; // [esp+Ch] [ebp-34h] BYREF
@@ -50214,24 +50120,20 @@ bool __cdecl DrawMiniMapObjectLayer(void) {
   int v7; // [esp+14h] [ebp-2Ch]
   int OwnerID; // [esp+18h] [ebp-28h]
   int v9; // [esp+1Ch] [ebp-24h]
-  int *GfxMiniMapColor; // [esp+20h] [ebp-20h]
+  struct SGfxColor *GfxMiniMapColor; // [esp+20h] [ebp-20h]
   int v11; // [esp+24h] [ebp-1Ch]
   int v12; // [esp+28h] [ebp-18h]
   int i; // [esp+2Ch] [ebp-14h]
   int v14; // [esp+30h] [ebp-10h]
-  size_t v15; // [esp+34h] [ebp-Ch]
+  unsigned int v15; // [esp+34h] [ebp-Ch]
   int v16; // [esp+38h] [ebp-8h]
   int v17; // [esp+3Ch] [ebp-4h]
 
   if ( !g_pfGetGfxMiniMapColor || !g_pfGetOwnerID )
     return 0;
-  if ( !dword_3E2E2A0 )
+  if ( !g_pGfxLayer )
     return 0;
-  v12 = ((int (__thiscall *)(CSurfaceV7 *, unsigned int *, int *, int))D3DObjectPtr->MiniMapSurface->Lock)(
-          D3DObjectPtr->MiniMapSurface,
-          &v5,
-          &v6,
-          1);
+  v12 = D3DObjectPtr->MiniMapSurface->Lock(D3DObjectPtr->MiniMapSurface, (int *)&v5, &v6, 1);
   if ( v12 )
   {
     WriteError(v12, "LockMiniMapSurface");
@@ -50240,7 +50142,7 @@ bool __cdecl DrawMiniMapObjectLayer(void) {
   else
   {
     v9 = v6;
-    NewValue = controlfp(0x300u, 0x300u);
+    NewValue = _controlfp(0x300u, 0x300u);
     v9 += 160;
     v4 = v5 >> 1;
     for ( i = dword_46C7E4C; i < (int)Size; i += 8 )
@@ -50257,23 +50159,22 @@ bool __cdecl DrawMiniMapObjectLayer(void) {
           byte_46C8358[162 * v16 + v17] = --v14;
         if ( !v14 || v14 == 254 )
         {
-          GfxMiniMapColor = (int *)g_pfGetGfxMiniMapColor(v15);
+          GfxMiniMapColor = g_pfGetGfxMiniMapColor(v15);
           if ( GfxMiniMapColor )
           {
-            if ( T_GFX_MAP_ELEMENT::GetNewFogging((T_GFX_MAP_ELEMENT *)(dword_3E2E2A0 + 4 * v15)) < 3 )
+            if ( T_GFX_MAP_ELEMENT::GetNewFogging(&g_pGfxLayer[v15]) < 3 )
             {
               byte_46C8358[162 * v16 + v17] = byte_46CE9E0[162 * v16 + v17];
-              v1 = IGfxEngine::ConvertRgbToHicol(*GfxMiniMapColor, GfxMiniMapColor[1], GfxMiniMapColor[2]);
+              v1 = IGfxEngine::ConvertRgbToHicol(GfxMiniMapColor->m_iR, GfxMiniMapColor->m_iG, GfxMiniMapColor->m_iB);
               *(_WORD *)(v7 + 2 * v16) = v1;
             }
           }
-          else if ( (*(_BYTE *)(dword_3E2E2A0 + 4 * v15 + 3) & 0x80) != 0
-                 && T_GFX_MAP_ELEMENT::GetNewFogging((T_GFX_MAP_ELEMENT *)(dword_3E2E2A0 + 4 * v15)) < 3 )
+          else if ( (g_pGfxLayer[v15].m_uGfxBits & 0x80) != 0 && T_GFX_MAP_ELEMENT::GetNewFogging(&g_pGfxLayer[v15]) < 3 )
           {
             OwnerID = g_pfGetOwnerID(v15);
             byte_46C8358[162 * v16 + v17] = byte_46CE9E0[162 * v16 + v17];
             v2 = IGfxEngine::ConvertRgbToHicol(
-                   dword_468D2C8[3 * OwnerID],
+                   g_pPlayerColors[OwnerID].m_iR,
                    dword_468D2CC[3 * OwnerID],
                    dword_468D2D0[3 * OwnerID]);
             *(_WORD *)(v7 + 2 * v16) = v2;
@@ -50283,8 +50184,8 @@ bool __cdecl DrawMiniMapObjectLayer(void) {
         v15 += 8;
       }
     }
-    controlfp(NewValue, 0x300u);
-    v12 = ((int (__thiscall *)(CSurfaceV7 *))D3DObjectPtr->MiniMapSurface->Unlock)(D3DObjectPtr->MiniMapSurface);
+    _controlfp(NewValue, 0x300u);
+    v12 = D3DObjectPtr->MiniMapSurface->Unlock(D3DObjectPtr->MiniMapSurface);
     if ( v12 )
     {
       WriteError(v12, "UnlockMiniMapSurface");
@@ -50318,7 +50219,7 @@ bool __cdecl MarkCurrentArea(void) {
 
   if ( !D3DObjectPtr )
     return 0;
-  if ( !D3DObjectPtr->field_71D && !D3DObjectPtr->field_71C )
+  if ( !D3DObjectPtr->m_bInitHardware && !D3DObjectPtr->m_bInitSoftware )
     return 0;
   v8 = ((int (__thiscall *)(CSurfaceV7 *, _DWORD))D3DObjectPtr->MiniMapAreaSurface->ClearSurface)(
          D3DObjectPtr->MiniMapAreaSurface,
@@ -50342,7 +50243,7 @@ bool __cdecl MarkCurrentArea(void) {
     }
     else
     {
-      NewValue = controlfp(0x300u, 0x300u);
+      NewValue = _controlfp(0x300u, 0x300u);
       v7 = v2 >> 1;
       v4 = (int)(float)((float)dword_3E2E2AC * *(float *)&dword_3E2E718);
       v12 = (int)(float)((float)dword_3E2E2A8 * *(float *)&dword_3E2E718);
@@ -50408,7 +50309,7 @@ bool __cdecl MarkCurrentArea(void) {
           ++v10;
         }
       }
-      controlfp(NewValue, 0x300u);
+      _controlfp(NewValue, 0x300u);
       v8 = ((int (__thiscall *)(CSurfaceV7 *))D3DObjectPtr->MiniMapAreaSurface->Unlock)(D3DObjectPtr->MiniMapAreaSurface);
       if ( v8 )
       {
@@ -50429,12 +50330,12 @@ bool __cdecl MarkCurrentArea(void) {
 bool __cdecl DrawCompleteMiniMap(void) {
   
   char *v1; // eax
-  __int16 v2; // ax
-  __int16 v3; // ax
+  unsigned __int16 v2; // ax
+  unsigned __int16 v3; // ax
   unsigned int NewValue; // [esp+4h] [ebp-64h]
   unsigned int v5; // [esp+8h] [ebp-60h]
   int v6; // [esp+Ch] [ebp-5Ch]
-  int v7; // [esp+10h] [ebp-58h]
+  int m_uGroundType; // [esp+10h] [ebp-58h]
   _WORD *v8; // [esp+14h] [ebp-54h]
   unsigned int v9; // [esp+18h] [ebp-50h] BYREF
   int v10; // [esp+1Ch] [ebp-4Ch] BYREF
@@ -50443,13 +50344,13 @@ bool __cdecl DrawCompleteMiniMap(void) {
   float v13; // [esp+28h] [ebp-40h]
   int v14; // [esp+2Ch] [ebp-3Ch]
   int j; // [esp+30h] [ebp-38h]
-  int *GfxMiniMapColor; // [esp+34h] [ebp-34h]
+  struct SGfxColor *GfxMiniMapColor; // [esp+34h] [ebp-34h]
   int v17; // [esp+38h] [ebp-30h]
   T_GFX_MAP_ELEMENT *v18; // [esp+3Ch] [ebp-2Ch]
   int v19; // [esp+40h] [ebp-28h]
   int v20; // [esp+44h] [ebp-24h]
   int v21; // [esp+48h] [ebp-20h]
-  size_t v22; // [esp+4Ch] [ebp-1Ch]
+  unsigned int v22; // [esp+4Ch] [ebp-1Ch]
   int i; // [esp+50h] [ebp-18h]
   int v24; // [esp+54h] [ebp-14h]
   int v25; // [esp+58h] [ebp-10h]
@@ -50458,13 +50359,9 @@ bool __cdecl DrawCompleteMiniMap(void) {
   __int16 v28; // [esp+64h] [ebp-4h]
   unsigned __int8 v29; // [esp+66h] [ebp-2h]
 
-  if ( !dword_3E2E2A0 || !g_pfGetOwnerID )
+  if ( !g_pGfxLayer || !g_pfGetOwnerID )
     return 0;
-  v19 = ((int (__thiscall *)(CSurfaceV7 *, unsigned int *, int *, int))D3DObjectPtr->MiniMapSurface->Lock)(
-          D3DObjectPtr->MiniMapSurface,
-          &v9,
-          &v10,
-          1);
+  v19 = D3DObjectPtr->MiniMapSurface->Lock(D3DObjectPtr->MiniMapSurface, (int *)&v9, &v10, 1);
   if ( v19 )
   {
     WriteError(v19, "UnlockMiniMapSurface");
@@ -50472,7 +50369,7 @@ bool __cdecl DrawCompleteMiniMap(void) {
   }
   else
   {
-    NewValue = controlfp(0x300u, 0x300u);
+    NewValue = _controlfp(0x300u, 0x300u);
     v26 = (_WORD *)(v10 + 160);
     v6 = (v9 >> 1) - 160;
     for ( i = 0; i < 160; ++i )
@@ -50480,16 +50377,18 @@ bool __cdecl DrawCompleteMiniMap(void) {
       v13 = (float)(int)(Size * (int)(float)((float)((float)i * *(float *)&dword_3E2E71C) + 0.5));
       for ( j = 0; j < 160; ++j )
       {
-        v18 = (T_GFX_MAP_ELEMENT *)(dword_3E2E2A0 + 4 * (int)(float)(v13 + 0.5));
-        v7 = *((unsigned __int8 *)v18 + 1);
+        v18 = &g_pGfxLayer[(float)(v13 + 0.5)];
+        m_uGroundType = v18->m_uGroundType;
         v14 = 8 * T_GFX_MAP_ELEMENT::GetGradient(v18) - 64;
-        v1 = CLandscapeColorProperties::ColorEntry((CLandscapeColorProperties *)&g_cLandscapeColorProperties, v7);
+        v1 = CLandscapeColorProperties::ColorEntry(
+               (CLandscapeColorProperties *)&g_cLandscapeColorProperties,
+               m_uGroundType);
         v28 = *(_WORD *)v1;
         v29 = v1[2];
         v24 = v14 + (unsigned __int8)v28;
         v25 = v14 + HIBYTE(v28);
         v27 = v14 + v29;
-        if ( (*((_BYTE *)v18 + 2) & 0x40) != 0 )
+        if ( (v18->m_uGradient & 0x40) != 0 )
         {
           v27 = (v27 + v27 + v25 + v24) / 4;
           v25 = v27;
@@ -50523,7 +50422,7 @@ bool __cdecl DrawCompleteMiniMap(void) {
           v27 = 255;
         if ( v25 > 255 )
           v25 = 255;
-        if ( dword_3E2E2B8 == 1 )
+        if ( g_uGfxMode == 1 )
           *v26 = (int)(float)((float)v27 * 0.12156863)
                + 32 * (int)(float)((float)v25 * 0.12156863)
                + ((unsigned __int16)(int)(float)((float)v24 * 0.12156863) << 10);
@@ -50550,24 +50449,23 @@ bool __cdecl DrawCompleteMiniMap(void) {
         v17 = 0;
         while ( v17 < (int)Size )
         {
-          GfxMiniMapColor = (int *)g_pfGetGfxMiniMapColor(v22);
+          GfxMiniMapColor = g_pfGetGfxMiniMapColor(v22);
           v20 = (int)(float)((float)((float)v17 * *(float *)&dword_3E2E718) + 0.5);
           if ( GfxMiniMapColor )
           {
-            if ( T_GFX_MAP_ELEMENT::GetNewFogging((T_GFX_MAP_ELEMENT *)(dword_3E2E2A0 + 4 * v22)) < 3 )
+            if ( T_GFX_MAP_ELEMENT::GetNewFogging(&g_pGfxLayer[v22]) < 3 )
             {
               byte_46C8358[162 * v20 + v21] = -1;
-              v2 = IGfxEngine::ConvertRgbToHicol(*GfxMiniMapColor, GfxMiniMapColor[1], GfxMiniMapColor[2]);
+              v2 = IGfxEngine::ConvertRgbToHicol(GfxMiniMapColor->m_iR, GfxMiniMapColor->m_iG, GfxMiniMapColor->m_iB);
               v8[v20] = v2;
             }
           }
-          else if ( (*(_BYTE *)(dword_3E2E2A0 + 4 * v22 + 3) & 0x80) != 0
-                 && T_GFX_MAP_ELEMENT::GetNewFogging((T_GFX_MAP_ELEMENT *)(dword_3E2E2A0 + 4 * v22)) < 3 )
+          else if ( (g_pGfxLayer[v22].m_uGfxBits & 0x80) != 0 && T_GFX_MAP_ELEMENT::GetNewFogging(&g_pGfxLayer[v22]) < 3 )
           {
             OwnerID = g_pfGetOwnerID(v22);
             byte_46C8358[162 * v20 + v21] = byte_46CE9E0[162 * v20 + v21];
             v3 = IGfxEngine::ConvertRgbToHicol(
-                   dword_468D2C8[3 * OwnerID],
+                   g_pPlayerColors[OwnerID].m_iR,
                    dword_468D2CC[3 * OwnerID],
                    dword_468D2D0[3 * OwnerID]);
             v8[v20] = v3;
@@ -50577,8 +50475,8 @@ bool __cdecl DrawCompleteMiniMap(void) {
         }
       }
     }
-    controlfp(NewValue, 0x300u);
-    v19 = ((int (__thiscall *)(CSurfaceV7 *))D3DObjectPtr->MiniMapSurface->Unlock)(D3DObjectPtr->MiniMapSurface);
+    _controlfp(NewValue, 0x300u);
+    v19 = D3DObjectPtr->MiniMapSurface->Unlock(D3DObjectPtr->MiniMapSurface);
     if ( v19 )
     {
       WriteError(v19, "UnlockMiniMapSurface");
@@ -50608,8 +50506,8 @@ void __cdecl SetMiniMapAreaSize(void) {
   
   int result; // eax
 
-  dword_3E2E728 = (int)(float)((float)(OutputHeight / (dword_3E2E290 >> 16)) * *(float *)&dword_3E2E718);
-  result = OutputWidth / (dword_3E2E28C >> 16);
+  dword_3E2E728 = (int)(float)((float)(MEMORY[0x3E2E270] / (dword_3E2E290 >> 16)) * *(float *)&dword_3E2E718);
+  result = MEMORY[0x3E2E26C] / (g_iVertexSize >> 16);
   dword_3E2E724 = (int)(float)((float)result * *(float *)&dword_3E2E718);
   return result;
 }
@@ -50629,7 +50527,7 @@ void __cdecl CalcMaxTimeStamps(void) {
   result = memset(byte_46CE9E0, 0, 0x6684u);
   v5 = 0;
   v4 = 0;
-  if ( dword_3E2E2A0 )
+  if ( g_pGfxLayer )
   {
     do
     {
@@ -50899,74 +50797,75 @@ void __cdecl InitRenderStates(void) {
 // Decompiled from char __cdecl BlitSettlerHardware(int a1, int a2, int a3, struct SGfxObjectInfo *a4)
 bool __cdecl BlitSettlerHardware(int a1, int a2, int a3, struct SGfxObjectInfo * a4) {
   
-  int v5; // [esp+18h] [ebp-2Ch]
-  char v6; // [esp+1Ch] [ebp-28h]
-  int v7; // [esp+24h] [ebp-20h]
+  __int64 v5; // [esp-Ch] [ebp-50h]
+  int v6; // [esp+18h] [ebp-2Ch]
+  char v7; // [esp+1Ch] [ebp-28h]
   int v8; // [esp+24h] [ebp-20h]
   int v9; // [esp+24h] [ebp-20h]
   int v10; // [esp+24h] [ebp-20h]
-  int v11; // [esp+28h] [ebp-1Ch]
+  int v11; // [esp+24h] [ebp-20h]
   int v12; // [esp+28h] [ebp-1Ch]
   int v13; // [esp+28h] [ebp-1Ch]
   int v14; // [esp+28h] [ebp-1Ch]
-  unsigned __int16 *v15; // [esp+2Ch] [ebp-18h]
-  unsigned __int16 *v16; // [esp+30h] [ebp-14h]
+  int v15; // [esp+28h] [ebp-1Ch]
+  unsigned __int16 *v16; // [esp+2Ch] [ebp-18h]
   unsigned __int16 *v17; // [esp+30h] [ebp-14h]
-  unsigned __int16 *v18; // [esp+34h] [ebp-10h]
+  unsigned __int16 *v18; // [esp+30h] [ebp-14h]
   unsigned __int16 *v19; // [esp+34h] [ebp-10h]
-  unsigned __int8 *v20; // [esp+38h] [ebp-Ch]
+  unsigned __int16 *v20; // [esp+34h] [ebp-10h]
   unsigned __int8 *v21; // [esp+38h] [ebp-Ch]
   unsigned __int8 *v22; // [esp+38h] [ebp-Ch]
-  float v23; // [esp+3Ch] [ebp-8h]
+  unsigned __int8 *v23; // [esp+38h] [ebp-Ch]
   float v24; // [esp+3Ch] [ebp-8h]
   float v25; // [esp+3Ch] [ebp-8h]
   float v26; // [esp+3Ch] [ebp-8h]
-  float v27; // [esp+40h] [ebp-4h]
+  float v27; // [esp+3Ch] [ebp-8h]
   float v28; // [esp+40h] [ebp-4h]
   float v29; // [esp+40h] [ebp-4h]
   float v30; // [esp+40h] [ebp-4h]
-  int v31; // [esp+50h] [ebp+Ch]
-  int v32; // [esp+54h] [ebp+10h]
+  float v31; // [esp+40h] [ebp-4h]
+  int v32; // [esp+50h] [ebp+Ch]
+  int v33; // [esp+54h] [ebp+10h]
 
   if ( !*((_DWORD *)a4 + 1) )
     return 0;
   byte_46F32C8 = *((_BYTE *)a4 + 23) != 0;
   *((_BYTE *)a4 + 23) = 0;
-  v31 = a2 >> 16;
-  v32 = a3 >> 16;
-  v20 = *(unsigned __int8 **)a4;
+  v32 = a2 >> 16;
+  v33 = a3 >> 16;
+  v21 = *(unsigned __int8 **)a4;
   *(_DWORD *)a4 = 0;
-  if ( v20 )
+  if ( v21 )
   {
     memcpy(&g_uColorPalette, *((const void **)a4 + 1), 0x180u);
     memcpy(&unk_468A760, (char *)&g_cColorGradient + 64 * *((unsigned __int8 *)a4 + 715), 0x40u);
     memcpy(&unk_468A7A0, (const void *)(*((_DWORD *)a4 + 1) + (*((unsigned __int8 *)a4 + 715) << 6) + 512), 0x40u);
-    v11 = *v20;
-    v21 = v20 + 1;
-    v7 = *v21++;
-    v27 = (float)v31 - (float)((float)*v21 * *(float *)&dword_3E2E2F4);
+    v12 = *v21;
     v22 = v21 + 1;
-    v23 = (float)v32 - (float)((float)*v22 * *(float *)&dword_3E2E2F4);
-    if ( (float)OutputWidth >= v27
-      && (float)OutputHeight >= v23
-      && (float)((float)*(int *)(g_pDestSizeTable + 4 * v11) + v27) >= (float)dword_3E2E2BC
-      && (float)((float)*(int *)(g_pDestSizeTable + 4 * v7) + v23) >= 0.0 )
+    v8 = *v22++;
+    v28 = (float)v32 - (float)((float)*v22 * g_fZoomFactor);
+    v23 = v22 + 1;
+    v24 = (float)v33 - (float)((float)*v23 * g_fZoomFactor);
+    if ( (float)GfxEngineSetup.m_uWidth >= v28
+      && (float)GfxEngineSetup.m_uHeight >= v24
+      && (float)((float)*(int *)(g_pDestSizeTable + 4 * v12) + v28) >= (float)g_uLeftGuiBorderWidth
+      && (float)((float)*(int *)(g_pDestSizeTable + 4 * v8) + v24) >= 0.0 )
     {
-      if ( *(float *)&dword_3E2E2F4 >= 1.0 )
-        v6 = 0;
+      if ( g_fZoomFactor >= 1.0 )
+        v7 = 0;
       else
-        v6 = 64;
+        v7 = 64;
+      HIDWORD(v5) = v12;
+      LODWORD(v5) = v23 + 5;
       RenderGfx(
-        *(_DWORD *)(v22 + 1) + 1000000 * *((unsigned __int8 *)a4 + 715),
+        *(_DWORD *)(v23 + 1) + 1000000 * *((unsigned __int8 *)a4 + 715),
         &g_uColorPalette,
-        v22 + 5,
-        v11,
-        v7,
-        v27,
-        v23,
+        v5,
+        v8,
+        __SPAIR64__(LODWORD(v24), LODWORD(v28)),
         65793 * a1,
         0,
-        v6,
+        v7,
         0);
     }
   }
@@ -50974,65 +50873,65 @@ bool __cdecl BlitSettlerHardware(int a1, int a2, int a3, struct SGfxObjectInfo *
     return 1;
   if ( *((_BYTE *)a4 + 22) )
   {
-    v15 = (unsigned __int16 *)g_pIconGfx[*((unsigned __int8 *)a4 + 22)];
-    v5 = *((unsigned __int8 *)a4 + 22);
+    v16 = (unsigned __int16 *)g_pIconGfx[*((unsigned __int8 *)a4 + 22)];
+    v6 = *((unsigned __int8 *)a4 + 22);
     *((_BYTE *)a4 + 22) = 0;
-    v12 = *v15++;
-    v8 = *v15++;
-    v28 = (float)v31 - (float)((float)*v15 * *(float *)&dword_3E2E2F4);
-    v24 = (float)v32 - (float)((float)v15[1] * *(float *)&dword_3E2E2F4);
-    if ( (float)OutputWidth >= v28
-      && (float)OutputHeight >= v24
-      && (float)((float)*(int *)(g_pDestSizeTable + 4 * v12) + v28) >= (float)dword_3E2E2BC
-      && (float)((float)*(int *)(g_pDestSizeTable + 4 * v8) + v24) >= 0.0 )
+    v13 = *v16++;
+    v9 = *v16++;
+    v29 = (float)v32 - (float)((float)*v16 * g_fZoomFactor);
+    v25 = (float)v33 - (float)((float)v16[1] * g_fZoomFactor);
+    if ( (float)GfxEngineSetup.m_uWidth >= v29
+      && (float)GfxEngineSetup.m_uHeight >= v25
+      && (float)((float)*(int *)(g_pDestSizeTable + 4 * v13) + v29) >= (float)g_uLeftGuiBorderWidth
+      && (float)((float)*(int *)(g_pDestSizeTable + 4 * v9) + v25) >= 0.0 )
     {
-      g_iSettlerSelections[3 * g_iSettlerSelectionCounter] = (int)v28;
-      g_iSettlerSelections[3 * g_iSettlerSelectionCounter + 1] = (int)v24;
-      g_iSettlerSelections[3 * g_iSettlerSelectionCounter++ + 2] = v5;
+      g_iSettlerSelections[3 * g_iSettlerSelectionCounter] = (int)v29;
+      g_iSettlerSelections[3 * g_iSettlerSelectionCounter + 1] = (int)v25;
+      g_iSettlerSelections[3 * g_iSettlerSelectionCounter++ + 2] = v6;
     }
   }
   if ( *((_BYTE *)a4 + 20) )
   {
-    v18 = (unsigned __int16 *)g_pIconGfx[*((unsigned __int8 *)a4 + 20)];
+    v19 = (unsigned __int16 *)g_pIconGfx[*((unsigned __int8 *)a4 + 20)];
     *((_BYTE *)a4 + 20) = 0;
-    v13 = *v18++;
-    v9 = *v18++;
-    v29 = (float)v31 - (float)((float)*v18 * *(float *)&dword_3E2E2F4);
-    v19 = v18 + 1;
-    v25 = (float)v32 - (float)((float)*v19 * *(float *)&dword_3E2E2F4);
-    if ( (float)OutputWidth >= v29
-      && (float)OutputHeight >= v25
-      && (float)((float)*(int *)(g_pDestSizeTable + 4 * v13) + v29) >= (float)dword_3E2E2BC
-      && (float)((float)*(int *)(g_pDestSizeTable + 4 * v9) + v25) >= 0.0 )
+    v14 = *v19++;
+    v10 = *v19++;
+    v30 = (float)v32 - (float)((float)*v19 * g_fZoomFactor);
+    v20 = v19 + 1;
+    v26 = (float)v33 - (float)((float)*v20 * g_fZoomFactor);
+    if ( (float)GfxEngineSetup.m_uWidth >= v30
+      && (float)GfxEngineSetup.m_uHeight >= v26
+      && (float)((float)*(int *)(g_pDestSizeTable + 4 * v14) + v30) >= (float)g_uLeftGuiBorderWidth
+      && (float)((float)*(int *)(g_pDestSizeTable + 4 * v10) + v26) >= 0.0 )
     {
-      g_iSettlerFitness[5 * g_iSettlerFitnessCounter] = (int)v29;
-      g_iSettlerFitness[5 * g_iSettlerFitnessCounter + 1] = (int)v25;
-      g_iSettlerFitness[5 * g_iSettlerFitnessCounter + 2] = v13;
-      g_iSettlerFitness[5 * g_iSettlerFitnessCounter + 3] = v9;
-      g_iSettlerFitness[5 * g_iSettlerFitnessCounter++ + 4] = (int)v19;
+      g_iSettlerFitness[5 * g_iSettlerFitnessCounter] = (int)v30;
+      g_iSettlerFitness[5 * g_iSettlerFitnessCounter + 1] = (int)v26;
+      g_iSettlerFitness[5 * g_iSettlerFitnessCounter + 2] = v14;
+      g_iSettlerFitness[5 * g_iSettlerFitnessCounter + 3] = v10;
+      g_iSettlerFitness[5 * g_iSettlerFitnessCounter++ + 4] = (int)v20;
     }
   }
   if ( !*((_BYTE *)a4 + 21) )
     return 1;
-  v16 = (unsigned __int16 *)g_pIconGfx[*((unsigned __int8 *)a4 + 21)];
+  v17 = (unsigned __int16 *)g_pIconGfx[*((unsigned __int8 *)a4 + 21)];
   *((_BYTE *)a4 + 21) = 0;
-  v14 = *v16++;
-  v10 = *v16++;
-  v30 = (float)v31 - (float)((float)*v16 * *(float *)&dword_3E2E2F4);
-  v17 = v16 + 1;
-  v26 = (float)v32 - (float)((float)*v17 * *(float *)&dword_3E2E2F4);
-  if ( (float)OutputWidth < v30
-    || (float)OutputHeight < v26
-    || (float)((float)*(int *)(g_pDestSizeTable + 4 * v14) + v30) < (float)dword_3E2E2BC
-    || (float)((float)*(int *)(g_pDestSizeTable + 4 * v10) + v26) < 0.0 )
+  v15 = *v17++;
+  v11 = *v17++;
+  v31 = (float)v32 - (float)((float)*v17 * g_fZoomFactor);
+  v18 = v17 + 1;
+  v27 = (float)v33 - (float)((float)*v18 * g_fZoomFactor);
+  if ( (float)GfxEngineSetup.m_uWidth < v31
+    || (float)GfxEngineSetup.m_uHeight < v27
+    || (float)((float)*(int *)(g_pDestSizeTable + 4 * v15) + v31) < (float)g_uLeftGuiBorderWidth
+    || (float)((float)*(int *)(g_pDestSizeTable + 4 * v11) + v27) < 0.0 )
   {
     return 1;
   }
-  g_iSettlerMagic[5 * g_iSettlerMagicCounter] = (int)v30;
-  g_iSettlerMagic[5 * g_iSettlerMagicCounter + 1] = (int)v26;
-  g_iSettlerMagic[5 * g_iSettlerMagicCounter + 2] = v14;
-  g_iSettlerMagic[5 * g_iSettlerMagicCounter + 3] = v10;
-  g_iSettlerMagic[5 * g_iSettlerMagicCounter++ + 4] = (int)v17;
+  g_iSettlerMagic[5 * g_iSettlerMagicCounter] = (int)v31;
+  g_iSettlerMagic[5 * g_iSettlerMagicCounter + 1] = (int)v27;
+  g_iSettlerMagic[5 * g_iSettlerMagicCounter + 2] = v15;
+  g_iSettlerMagic[5 * g_iSettlerMagicCounter + 3] = v11;
+  g_iSettlerMagic[5 * g_iSettlerMagicCounter++ + 4] = (int)v18;
   return 1;
 }
 
@@ -51057,12 +50956,12 @@ bool __cdecl BlitWaveHardware(int a1, int a2, int a3, int a4, int a5) {
   v6 = *v10;
   v11 = v10 + 1;
   v7 = *v11++;
-  v8 = (a2 - (int)(float)((float)*v11 * *(float *)&dword_3E2E2F4)) >> 16;
+  v8 = (a2 - (int)(float)((float)*v11 * *(float *)&g_fZoomFactor)) >> 16;
   v12 = v11 + 1;
-  v9 = (a3 - (int)(float)((float)*v12 * *(float *)&dword_3E2E2F4)) >> 16;
-  if ( v8 <= OutputWidth
-    && v9 <= OutputHeight
-    && v8 + (*(int *)(g_pDestSizeTable + 4 * v6) >> 1) >= dword_3E2E2BC
+  v9 = (a3 - (int)(float)((float)*v12 * *(float *)&g_fZoomFactor)) >> 16;
+  if ( v8 <= MEMORY[0x3E2E26C]
+    && v9 <= MEMORY[0x3E2E270]
+    && v8 + (*(int *)(g_pDestSizeTable + 4 * v6) >> 1) >= g_uLeftGuiBorderWidth
     && v9 + (*(int *)(g_pDestSizeTable + 4 * v7) >> 1) >= 0 )
   {
     CacheRenderingStandard(
@@ -51333,17 +51232,17 @@ bool __cdecl BlitBuildingHardware(int a1, int a2, int a3, struct SGfxObjectInfo 
     v115 = v66 + v114;
     if ( v109 >= 0 && v111 >= 0 && v115 < 512 && v113 < 512 )
     {
-      v75 = (float)v117 - (float)((float)(v65 + v40) * *(float *)&dword_3E2E2F4);
-      v80 = (float)v118 - (float)((float)(v66 + v41) * *(float *)&dword_3E2E2F4);
-      if ( (float)OutputWidth >= v75
-        && (float)OutputHeight >= v80
-        && (float)((float)*(int *)(g_pDestSizeTable + 4 * (v113 - v109)) + v75) >= (float)dword_3E2E2BC
+      v75 = (float)v117 - (float)((float)(v65 + v40) * *(float *)&g_fZoomFactor);
+      v80 = (float)v118 - (float)((float)(v66 + v41) * *(float *)&g_fZoomFactor);
+      if ( (float)MEMORY[0x3E2E26C] >= v75
+        && (float)MEMORY[0x3E2E270] >= v80
+        && (float)((float)*(int *)(g_pDestSizeTable + 4 * (v113 - v109)) + v75) >= (float)g_uLeftGuiBorderWidth
         && (float)((float)*(int *)(g_pDestSizeTable + 4 * (v115 - v111)) + v80) >= 0.0 )
       {
         if ( byte_3E2E324 )
         {
-          v35 = (float)(v113 - v109) * *(float *)&dword_3E2E2F4;
-          v34 = (float)(v115 - v111) * *(float *)&dword_3E2E2F4;
+          v35 = (float)(v113 - v109) * *(float *)&g_fZoomFactor;
+          v34 = (float)(v115 - v111) * *(float *)&g_fZoomFactor;
           _vec_ctor_no(v116, 0x20u, 6u, (void *(__thiscall *)(void *))_D3DTLVERTEX::_D3DTLVERTEX);
           v116[4] = &dword_420320[234316];
           v116[5] = -1;
@@ -51387,8 +51286,8 @@ bool __cdecl BlitBuildingHardware(int a1, int a2, int a3, struct SGfxObjectInfo 
           *(float *)&v116[43] = FLOAT_0_5;
           *(float *)&v116[40] = v75 + v35;
           *(float *)&v116[41] = v80 + v34;
-          (*(void (__stdcall **)(int, int, int, _DWORD *, int, _DWORD))(*(_DWORD *)D3DObjectPtr->field_38 + 100))(
-            D3DObjectPtr->field_38,
+          (*(void (__stdcall **)(int, int, int, _DWORD *, int, _DWORD))(*(_DWORD *)D3DObjectPtr->m_pObjectDevice + 100))(
+            D3DObjectPtr->m_pObjectDevice,
             4,
             452,
             v116,
@@ -51404,12 +51303,12 @@ bool __cdecl BlitBuildingHardware(int a1, int a2, int a3, struct SGfxObjectInfo 
             v68 = *v92;
             v93 = v92 + 1;
             v72 = *v93++;
-            v76 = (float)v117 - (float)((float)(v65 + *v93) * *(float *)&dword_3E2E2F4);
+            v76 = (float)v117 - (float)((float)(v65 + *v93) * *(float *)&g_fZoomFactor);
             v94 = v93 + 1;
-            v81 = (float)v118 - (float)((float)(v66 + *v94) * *(float *)&dword_3E2E2F4);
-            if ( (float)OutputWidth >= v76
-              && (float)OutputHeight >= v81
-              && (float)((float)*(int *)(g_pDestSizeTable + 4 * v68) + v76) >= (float)dword_3E2E2BC
+            v81 = (float)v118 - (float)((float)(v66 + *v94) * *(float *)&g_fZoomFactor);
+            if ( (float)MEMORY[0x3E2E26C] >= v76
+              && (float)MEMORY[0x3E2E270] >= v81
+              && (float)((float)*(int *)(g_pDestSizeTable + 4 * v68) + v76) >= (float)g_uLeftGuiBorderWidth
               && (float)((float)*(int *)(g_pDestSizeTable + 4 * v72) + v81) >= 0.0 )
             {
               sub_2F96D80(
@@ -51438,8 +51337,8 @@ bool __cdecl BlitBuildingHardware(int a1, int a2, int a3, struct SGfxObjectInfo 
           v73 = *v95++;
           v31 = *v95++;
           v30 = *v95;
-          v77 = (float)v117 - (float)((float)(v65 + v31) * *(float *)&dword_3E2E2F4);
-          v82 = (float)v118 - (float)((float)(v66 + v30) * *(float *)&dword_3E2E2F4);
+          v77 = (float)v117 - (float)((float)(v65 + v31) * *(float *)&g_fZoomFactor);
+          v82 = (float)v118 - (float)((float)(v66 + v30) * *(float *)&g_fZoomFactor);
           v96 = v95 + 3;
           if ( *((_DWORD *)a4 + 23) )
           {
@@ -51498,8 +51397,8 @@ bool __cdecl BlitBuildingHardware(int a1, int a2, int a3, struct SGfxObjectInfo 
             if ( *((_DWORD *)a4 + 12) && *a6 < 511 )
             {
               *a5 = -1;
-              a5[1] = (int)(float)((float)v117 - (float)((float)v31 * *(float *)&dword_3E2E2F4));
-              a5[2] = (int)(float)((float)v118 - (float)((float)v30 * *(float *)&dword_3E2E2F4));
+              a5[1] = (int)(float)((float)v117 - (float)((float)v31 * *(float *)&g_fZoomFactor));
+              a5[2] = (int)(float)((float)v118 - (float)((float)v30 * *(float *)&g_fZoomFactor));
               a5[3] = *((_DWORD *)a4 + 12);
               a5[4] = *((_DWORD *)a4 + 1);
               a5[5] = a1;
@@ -51557,9 +51456,9 @@ bool __cdecl BlitBuildingHardware(int a1, int a2, int a3, struct SGfxObjectInfo 
                   v56 = v55 + 1;
                   v27 = *v56;
                   v8 = (int)(float)((float)v117
-                                  - (float)((float)(v26 - *((_DWORD *)a4 + 4 * n + 52)) * *(float *)&dword_3E2E2F4));
+                                  - (float)((float)(v26 - *((_DWORD *)a4 + 4 * n + 52)) * *(float *)&g_fZoomFactor));
                   v7 = (int)(float)((float)v118
-                                  - (float)((float)(v27 - *((_DWORD *)a4 + 4 * n + 53)) * *(float *)&dword_3E2E2F4));
+                                  - (float)((float)(v27 - *((_DWORD *)a4 + 4 * n + 53)) * *(float *)&g_fZoomFactor));
                   memcpy(&g_uColorPalette, *((const void **)a4 + 4 * n + 51), 0x180u);
                   memcpy(&unk_468A760, (char *)&g_cColorGradient + 64 * *((unsigned __int8 *)a4 + 715), 0x40u);
                   memcpy(
@@ -51690,12 +51589,12 @@ bool __cdecl BlitBuildingHardware(int a1, int a2, int a3, struct SGfxObjectInfo 
               BBSupportTracePrintF(
                 0,
                 "GFX ENGINE: DATA ERROR: Size of building-effect is too big! Object will be ignored!");
-            v78 = (float)v117 - (float)((float)(*v106 - *((_DWORD *)a4 + 4 * jj + 28)) * *(float *)&dword_3E2E2F4);
+            v78 = (float)v117 - (float)((float)(*v106 - *((_DWORD *)a4 + 4 * jj + 28)) * *(float *)&g_fZoomFactor);
             v107 = v106 + 1;
-            v83 = (float)v118 - (float)((float)(*v107 - *((_DWORD *)a4 + 4 * jj + 29)) * *(float *)&dword_3E2E2F4);
-            if ( (float)OutputWidth >= v78
-              && (float)OutputHeight >= v83
-              && (float)((float)*(int *)(g_pDestSizeTable + 4 * v32) + v78) >= (float)dword_3E2E2BC
+            v83 = (float)v118 - (float)((float)(*v107 - *((_DWORD *)a4 + 4 * jj + 29)) * *(float *)&g_fZoomFactor);
+            if ( (float)MEMORY[0x3E2E26C] >= v78
+              && (float)MEMORY[0x3E2E270] >= v83
+              && (float)((float)*(int *)(g_pDestSizeTable + 4 * v32) + v78) >= (float)g_uLeftGuiBorderWidth
               && (float)((float)*(int *)(g_pDestSizeTable + 4 * v33) + v83) >= 0.0 )
             {
               RenderGfx(v107[2], *((void **)a4 + 4 * jj + 27), v107 + 3, v32, v33, v78, v83, 65793 * a1, 0, 0, 0);
@@ -51712,12 +51611,12 @@ bool __cdecl BlitBuildingHardware(int a1, int a2, int a3, struct SGfxObjectInfo 
           BBSupportTracePrintF(
             0,
             "GFX ENGINE: DATA ERROR: Size of accessory object is too big! Object will be ignored!");
-        v79 = (float)v117 - (float)((float)*v51 * *(float *)&dword_3E2E2F4);
+        v79 = (float)v117 - (float)((float)*v51 * *(float *)&g_fZoomFactor);
         v52 = v51 + 1;
-        v84 = (float)v118 - (float)((float)*v52 * *(float *)&dword_3E2E2F4);
-        if ( (float)OutputWidth >= v79
-          && (float)OutputHeight >= v84
-          && (float)((float)*(int *)(g_pDestSizeTable + 4 * v70) + v79) >= (float)dword_3E2E2BC
+        v84 = (float)v118 - (float)((float)*v52 * *(float *)&g_fZoomFactor);
+        if ( (float)MEMORY[0x3E2E26C] >= v79
+          && (float)MEMORY[0x3E2E270] >= v84
+          && (float)((float)*(int *)(g_pDestSizeTable + 4 * v70) + v79) >= (float)g_uLeftGuiBorderWidth
           && (float)((float)*(int *)(g_pDestSizeTable + 4 * v74) + v84) >= 0.0 )
         {
           CacheRenderingStandard((void *)g_pIconPalette, v52 + 3, v52[2], 64, v70, v74, v79, v84, 0, -1, 0, 0);
@@ -51784,18 +51683,18 @@ bool __cdecl BlitObjectHardware(int a1, int a2, int a3, struct SGfxObjectInfo * 
     v20 = v19 + 1;
     v9 = *v20;
     v21 = v20 + 1;
-    v6 = dword_3E2E2F4;
+    v6 = g_fZoomFactor;
     v5 = *(_DWORD *)g_pZoomGradient;
     if ( (v21[2] & 0x10) != 0 )
     {
       *(int *)g_pZoomGradient >>= 1;
-      *(float *)&dword_3E2E2F4 = *(float *)&dword_3E2E2F4 * 0.5;
-      v11 = (float)v24 - (float)((float)*v21 * *(float *)&dword_3E2E2F4);
+      *(float *)&g_fZoomFactor = *(float *)&g_fZoomFactor * 0.5;
+      v11 = (float)v24 - (float)((float)*v21 * *(float *)&g_fZoomFactor);
       v22 = v21 + 1;
-      v14 = (float)v25 - (float)((float)*v22 * *(float *)&dword_3E2E2F4);
-      if ( (float)OutputWidth >= v11
-        && (float)OutputHeight >= v14
-        && (float)((float)(*(int *)(g_pDestSizeTable + 4 * v7) >> 1) + v11) >= (float)dword_3E2E2BC
+      v14 = (float)v25 - (float)((float)*v22 * *(float *)&g_fZoomFactor);
+      if ( (float)MEMORY[0x3E2E26C] >= v11
+        && (float)MEMORY[0x3E2E270] >= v14
+        && (float)((float)(*(int *)(g_pDestSizeTable + 4 * v7) >> 1) + v11) >= (float)g_uLeftGuiBorderWidth
         && (float)((float)(*(int *)(g_pDestSizeTable + 4 * v9) >> 1) + v14) >= 0.0 )
       {
         CacheRenderingStandard(
@@ -51815,12 +51714,12 @@ bool __cdecl BlitObjectHardware(int a1, int a2, int a3, struct SGfxObjectInfo * 
     }
     else
     {
-      v12 = (float)v24 - (float)((float)*v21 * *(float *)&dword_3E2E2F4);
+      v12 = (float)v24 - (float)((float)*v21 * *(float *)&g_fZoomFactor);
       v23 = v21 + 1;
-      v15 = (float)v25 - (float)((float)*v23 * *(float *)&dword_3E2E2F4);
-      if ( (float)OutputWidth >= v12
-        && (float)OutputHeight >= v15
-        && (float)((float)*(int *)(g_pDestSizeTable + 4 * v7) + v12) >= (float)dword_3E2E2BC
+      v15 = (float)v25 - (float)((float)*v23 * *(float *)&g_fZoomFactor);
+      if ( (float)MEMORY[0x3E2E26C] >= v12
+        && (float)MEMORY[0x3E2E270] >= v15
+        && (float)((float)*(int *)(g_pDestSizeTable + 4 * v7) + v12) >= (float)g_uLeftGuiBorderWidth
         && (float)((float)*(int *)(g_pDestSizeTable + 4 * v9) + v15) >= 0.0 )
       {
         CacheRenderingStandard(
@@ -51838,7 +51737,7 @@ bool __cdecl BlitObjectHardware(int a1, int a2, int a3, struct SGfxObjectInfo * 
           0);
       }
     }
-    dword_3E2E2F4 = v6;
+    g_fZoomFactor = v6;
     *(_DWORD *)g_pZoomGradient = v5;
   }
   if ( !*((_BYTE *)a4 + 22) )
@@ -51849,12 +51748,12 @@ bool __cdecl BlitObjectHardware(int a1, int a2, int a3, struct SGfxObjectInfo * 
   *((_BYTE *)a4 + 22) = 0;
   v8 = *v17++;
   v10 = *v17++;
-  v13 = (float)v24 - (float)((float)*v17 * *(float *)&dword_3E2E2F4);
+  v13 = (float)v24 - (float)((float)*v17 * *(float *)&g_fZoomFactor);
   v18 = v17 + 1;
-  v16 = (float)v25 - (float)((float)*v18 * *(float *)&dword_3E2E2F4);
-  if ( (float)OutputWidth >= v13
-    && (float)OutputHeight >= v16
-    && (float)((float)*(int *)(g_pDestSizeTable + 4 * v8) + v13) >= (float)dword_3E2E2BC
+  v16 = (float)v25 - (float)((float)*v18 * *(float *)&g_fZoomFactor);
+  if ( (float)MEMORY[0x3E2E26C] >= v13
+    && (float)MEMORY[0x3E2E270] >= v16
+    && (float)((float)*(int *)(g_pDestSizeTable + 4 * v8) + v13) >= (float)g_uLeftGuiBorderWidth
     && (float)((float)*(int *)(g_pDestSizeTable + 4 * v10) + v16) >= 0.0 )
   {
     CacheRenderingStandard(
@@ -51901,12 +51800,12 @@ bool __cdecl BlitBorderstoneHardware(int a1, int a2, int a3, int a4) {
   v5 = *v9;
   v10 = v9 + 1;
   v6 = *v10;
-  v7 = (float)v12 - (float)((float)v10[1] * *(float *)&dword_3E2E2F4);
+  v7 = (float)v12 - (float)((float)v10[1] * *(float *)&g_fZoomFactor);
   v11 = v10 + 2;
-  v8 = (float)v13 - (float)((float)*v11 * *(float *)&dword_3E2E2F4);
-  if ( (float)OutputWidth >= v7
-    && (float)OutputHeight >= v8
-    && (float)((float)*(int *)(g_pDestSizeTable + 4 * v5) + v7) >= (float)dword_3E2E2BC
+  v8 = (float)v13 - (float)((float)*v11 * *(float *)&g_fZoomFactor);
+  if ( (float)MEMORY[0x3E2E26C] >= v7
+    && (float)MEMORY[0x3E2E270] >= v8
+    && (float)((float)*(int *)(g_pDestSizeTable + 4 * v5) + v7) >= (float)g_uLeftGuiBorderWidth
     && (float)((float)*(int *)(g_pDestSizeTable + 4 * v6) + v8) >= 0.0 )
   {
     CacheRenderingStandard((void *)g_pBorderstonePalette, v11 + 3, v11[2], 32, v5, v6, v7, v8, 0, 65793 * a1, 0, 0);
@@ -52043,17 +51942,17 @@ bool __cdecl BlitVehicleHardware(int a1, int a2, int a3, struct SGfxObjectInfo *
     v57 = v18 + v56;
     if ( v51 >= 0 && v53 >= 0 && v57 < 512 && v55 < 512 )
     {
-      v46 = (float)v59 - (float)((float)(v17 + v13) * *(float *)&dword_3E2E2F4);
-      v42 = (float)v60 - (float)((float)(v18 + v14) * *(float *)&dword_3E2E2F4);
-      if ( (float)OutputWidth >= v46
-        && (float)OutputHeight >= v42
-        && (float)((float)*(int *)(g_pDestSizeTable + 4 * (v55 - v51)) + v46) >= (float)dword_3E2E2BC
+      v46 = (float)v59 - (float)((float)(v17 + v13) * *(float *)&g_fZoomFactor);
+      v42 = (float)v60 - (float)((float)(v18 + v14) * *(float *)&g_fZoomFactor);
+      if ( (float)MEMORY[0x3E2E26C] >= v46
+        && (float)MEMORY[0x3E2E270] >= v42
+        && (float)((float)*(int *)(g_pDestSizeTable + 4 * (v55 - v51)) + v46) >= (float)g_uLeftGuiBorderWidth
         && (float)((float)*(int *)(g_pDestSizeTable + 4 * (v57 - v53)) + v42) >= 0.0 )
       {
         if ( byte_3E2E324 )
         {
-          v16 = (float)(v55 - v51) * *(float *)&dword_3E2E2F4;
-          v12 = (float)(v57 - v53) * *(float *)&dword_3E2E2F4;
+          v16 = (float)(v55 - v51) * *(float *)&g_fZoomFactor;
+          v12 = (float)(v57 - v53) * *(float *)&g_fZoomFactor;
           _vec_ctor_no(v58, 0x20u, 6u, (void *(__thiscall *)(void *))_D3DTLVERTEX::_D3DTLVERTEX);
           v58[4] = &dword_420320[234316];
           v58[5] = -1;
@@ -52097,8 +51996,8 @@ bool __cdecl BlitVehicleHardware(int a1, int a2, int a3, struct SGfxObjectInfo *
           *(float *)&v58[43] = FLOAT_0_5;
           *(float *)&v58[40] = v46 + v16;
           *(float *)&v58[41] = v42 + v12;
-          (*(void (__stdcall **)(int, int, int, _DWORD *, int, _DWORD))(*(_DWORD *)D3DObjectPtr->field_38 + 100))(
-            D3DObjectPtr->field_38,
+          (*(void (__stdcall **)(int, int, int, _DWORD *, int, _DWORD))(*(_DWORD *)D3DObjectPtr->m_pObjectDevice + 100))(
+            D3DObjectPtr->m_pObjectDevice,
             4,
             452,
             v58,
@@ -52112,9 +52011,9 @@ bool __cdecl BlitVehicleHardware(int a1, int a2, int a3, struct SGfxObjectInfo *
           memcpy(&g_uColorPalette, *((const void **)a4 + 1), 0x180u);
           memcpy(&unk_468A760, (char *)&g_cColorGradient + 64 * *((unsigned __int8 *)a4 + 715), 0x40u);
           memcpy(&unk_468A7A0, (const void *)(*((_DWORD *)a4 + 1) + (*((unsigned __int8 *)a4 + 715) << 6) + 512), 0x40u);
-          if ( (float)OutputWidth >= v46
-            && (float)OutputHeight >= v42
-            && (float)((float)*(int *)(g_pDestSizeTable + 4 * v32) + v46) >= (float)dword_3E2E2BC
+          if ( (float)MEMORY[0x3E2E26C] >= v46
+            && (float)MEMORY[0x3E2E270] >= v42
+            && (float)((float)*(int *)(g_pDestSizeTable + 4 * v32) + v46) >= (float)g_uLeftGuiBorderWidth
             && (float)((float)*(int *)(g_pDestSizeTable + 4 * v37) + v42) >= 0.0 )
           {
             sub_2F96D80(
@@ -52141,9 +52040,9 @@ bool __cdecl BlitVehicleHardware(int a1, int a2, int a3, struct SGfxObjectInfo *
             v38 = *v30++;
             v5 = *v30;
             v31 = v30 + 1;
-            if ( (float)OutputWidth >= v46
-              && (float)OutputHeight >= v42
-              && (float)((float)*(int *)(g_pDestSizeTable + 4 * v33) + v46) >= (float)dword_3E2E2BC
+            if ( (float)MEMORY[0x3E2E26C] >= v46
+              && (float)MEMORY[0x3E2E270] >= v42
+              && (float)((float)*(int *)(g_pDestSizeTable + 4 * v33) + v46) >= (float)g_uLeftGuiBorderWidth
               && (float)((float)*(int *)(g_pDestSizeTable + 4 * v38) + v42) >= 0.0 )
             {
               ((void (__cdecl *)(_DWORD, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, char, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, char))sub_2F96D80)(
@@ -52173,12 +52072,12 @@ bool __cdecl BlitVehicleHardware(int a1, int a2, int a3, struct SGfxObjectInfo *
             *((_BYTE *)a4 + 22) = 0;
             v34 = *v25++;
             v39 = *v25++;
-            v47 = (float)v59 - (float)((float)*v25 * *(float *)&dword_3E2E2F4);
+            v47 = (float)v59 - (float)((float)*v25 * *(float *)&g_fZoomFactor);
             v26 = v25 + 1;
-            v43 = (float)v60 - (float)((float)*v26 * *(float *)&dword_3E2E2F4);
-            if ( (float)OutputWidth >= v47
-              && (float)OutputHeight >= v43
-              && (float)((float)*(int *)(g_pDestSizeTable + 4 * v34) + v47) >= (float)dword_3E2E2BC
+            v43 = (float)v60 - (float)((float)*v26 * *(float *)&g_fZoomFactor);
+            if ( (float)MEMORY[0x3E2E26C] >= v47
+              && (float)MEMORY[0x3E2E270] >= v43
+              && (float)((float)*(int *)(g_pDestSizeTable + 4 * v34) + v47) >= (float)g_uLeftGuiBorderWidth
               && (float)((float)*(int *)(g_pDestSizeTable + 4 * v39) + v43) >= 0.0 )
             {
               CacheRenderingStandard(
@@ -52202,12 +52101,12 @@ bool __cdecl BlitVehicleHardware(int a1, int a2, int a3, struct SGfxObjectInfo *
             *((_BYTE *)a4 + 21) = 0;
             v35 = *v23++;
             v40 = *v23++;
-            v48 = (float)v59 - (float)((float)*v23 * *(float *)&dword_3E2E2F4);
+            v48 = (float)v59 - (float)((float)*v23 * *(float *)&g_fZoomFactor);
             v24 = v23 + 1;
-            v44 = (float)v60 - (float)((float)*v24 * *(float *)&dword_3E2E2F4);
-            if ( (float)OutputWidth >= v48
-              && (float)OutputHeight >= v44
-              && (float)((float)*(int *)(g_pDestSizeTable + 4 * v35) + v48) >= (float)dword_3E2E2BC
+            v44 = (float)v60 - (float)((float)*v24 * *(float *)&g_fZoomFactor);
+            if ( (float)MEMORY[0x3E2E26C] >= v48
+              && (float)MEMORY[0x3E2E270] >= v44
+              && (float)((float)*(int *)(g_pDestSizeTable + 4 * v35) + v48) >= (float)g_uLeftGuiBorderWidth
               && (float)((float)*(int *)(g_pDestSizeTable + 4 * v40) + v44) >= 0.0 )
             {
               CacheRenderingStandard(
@@ -52231,12 +52130,12 @@ bool __cdecl BlitVehicleHardware(int a1, int a2, int a3, struct SGfxObjectInfo *
           *((_BYTE *)a4 + 20) = 0;
           v36 = *v21++;
           v41 = *v21++;
-          v49 = (float)v59 - (float)((float)*v21 * *(float *)&dword_3E2E2F4);
+          v49 = (float)v59 - (float)((float)*v21 * *(float *)&g_fZoomFactor);
           v22 = v21 + 1;
-          v45 = (float)v60 - (float)((float)*v22 * *(float *)&dword_3E2E2F4);
-          if ( (float)OutputWidth >= v49
-            && (float)OutputHeight >= v45
-            && (float)((float)*(int *)(g_pDestSizeTable + 4 * v36) + v49) >= (float)dword_3E2E2BC
+          v45 = (float)v60 - (float)((float)*v22 * *(float *)&g_fZoomFactor);
+          if ( (float)MEMORY[0x3E2E26C] >= v49
+            && (float)MEMORY[0x3E2E270] >= v45
+            && (float)((float)*(int *)(g_pDestSizeTable + 4 * v36) + v49) >= (float)g_uLeftGuiBorderWidth
             && (float)((float)*(int *)(g_pDestSizeTable + 4 * v41) + v45) >= 0.0 )
           {
             CacheRenderingStandard(
@@ -52304,12 +52203,12 @@ bool __cdecl BlitAccessoryIconHardware(int a1, int a2, int a3, int a4) {
   v5 = *v9;
   v10 = v9 + 1;
   v6 = *v10++;
-  v7 = (float)v12 - (float)((float)*v10 * *(float *)&dword_3E2E2F4);
+  v7 = (float)v12 - (float)((float)*v10 * *(float *)&g_fZoomFactor);
   v11 = v10 + 1;
-  v8 = (float)v13 - (float)((float)*v11 * *(float *)&dword_3E2E2F4);
-  if ( (float)OutputWidth >= v7
-    && (float)OutputHeight >= v8
-    && (float)((float)*(int *)(g_pDestSizeTable + 4 * v5) + v7) >= (float)dword_3E2E2BC
+  v8 = (float)v13 - (float)((float)*v11 * *(float *)&g_fZoomFactor);
+  if ( (float)MEMORY[0x3E2E26C] >= v7
+    && (float)MEMORY[0x3E2E270] >= v8
+    && (float)((float)*(int *)(g_pDestSizeTable + 4 * v5) + v7) >= (float)g_uLeftGuiBorderWidth
     && (float)((float)*(int *)(g_pDestSizeTable + 4 * v6) + v8) >= 0.0 )
   {
     CacheRenderingStandard(
@@ -52351,10 +52250,10 @@ void __cdecl RenderGfx(int a1, void * a2, void * a3, int a4, int a5, float a6, f
     return sub_2F976F0(a6, a5, HIDWORD(a5), 0, IsAlreadyStored, a7, a8 | 0x10, a9);
   v13 = HIDWORD(a3);
   v14 = a4;
-  if ( *(float *)&dword_3E2E2F4 < 1.0 && (a8 & 0x40) != 0 )
+  if ( *(float *)&g_fZoomFactor < 1.0 && (a8 & 0x40) != 0 )
   {
-    v13 = (int)(float)((float)SHIDWORD(a3) * *(float *)&dword_3E2E2F4) + 1;
-    v14 = (int)(float)((float)a4 * *(float *)&dword_3E2E2F4) + 1;
+    v13 = (int)(float)((float)SHIDWORD(a3) * *(float *)&g_fZoomFactor) + 1;
+    v14 = (int)(float)((float)a4 * *(float *)&g_fZoomFactor) + 1;
   }
   if ( !CCachePageManager::GetPictureArea(
           (CCachePageManager *)D3DObjectPtr->CCachePageManager[0],
@@ -52381,7 +52280,7 @@ void __cdecl RenderGfx(int a1, void * a2, void * a3, int a4, int a5, float a6, f
   }
   CCachePageManager::LockSourceSurface((CCachePageManager *)D3DObjectPtr->CCachePageManager[0], &v12, &v15);
   v15 += v10 + v11 * v12 / 2;
-  if ( *(float *)&dword_3E2E2F4 < 1.0 && (a8 & 0x40) != 0 )
+  if ( *(float *)&g_fZoomFactor < 1.0 && (a8 & 0x40) != 0 )
     sub_2F97D20(a2, a3, HIDWORD(a3), a4, v15, v12, 0, 0);
   else
     sub_2F977E0(a2, a3, v15, v12, HIDWORD(a3), a4);
@@ -52431,10 +52330,10 @@ bool __cdecl CacheRenderingStandard(void * a1, void * a2, int a3, int a4, int a5
       }
       else if ( CInterfaceD3D::GetCacheRetrys(D3DObjectPtr) > 0 )
       {
-        for ( i = 1; i < D3DObjectPtr->field_448 && D3DObjectPtr->field_44C[i]; ++i )
+        for ( i = 1; i < D3DObjectPtr->m_uCacheSurfaceCount && D3DObjectPtr->m_pCacheManagers[i]; ++i )
         {
           if ( CCachePageManager::GetPictureArea(
-                 (CCachePageManager *)D3DObjectPtr->field_44C[i],
+                 (CCachePageManager *)D3DObjectPtr->m_pCacheManagers[i],
                  0.0,
                  0.0,
                  a4,
@@ -52444,11 +52343,11 @@ bool __cdecl CacheRenderingStandard(void * a1, void * a2, int a3, int a4, int a5
                  &v18,
                  &v19) )
           {
-            CCachePageManager::LockVideoSurface((CCachePageManager *)D3DObjectPtr->field_44C[i], &v20, &v22);
+            CCachePageManager::LockVideoSurface((CCachePageManager *)D3DObjectPtr->m_pCacheManagers[i], &v20, &v22);
             v22 += v18 + v19 * v20 / 2;
             sub_2F977E0(a1, HIDWORD(a1), v22, v20, a4, HIDWORD(a4));
-            CCachePageManager::UnlockVideoSurface((CCachePageManager *)D3DObjectPtr->field_44C[i]);
-            LastCacheObjectNr = CCachePageManager::GetLastCacheObjectNr((CCachePageManager *)D3DObjectPtr->field_44C[i]);
+            CCachePageManager::UnlockVideoSurface((CCachePageManager *)D3DObjectPtr->m_pCacheManagers[i]);
+            LastCacheObjectNr = CCachePageManager::GetLastCacheObjectNr((CCachePageManager *)D3DObjectPtr->m_pCacheManagers[i]);
             CCacheManager::SetCacheInfos((CCacheManager *)&g_cCacheManager, a2, i, LastCacheObjectNr);
             UsedCacheTextures = CCacheManager::GetUsedCacheTextures((CCacheManager *)&g_cCacheManager);
             if ( i > UsedCacheTextures )
@@ -52488,7 +52387,7 @@ bool __cdecl CacheRenderingStandard(void * a1, void * a2, int a3, int a4, int a5
     }
     else
     {
-      if ( *(float *)&dword_3E2E2F4 >= 1.0 )
+      if ( *(float *)&g_fZoomFactor >= 1.0 )
         v21 = 0;
       else
         v21 = 64;
@@ -52543,8 +52442,8 @@ void __cdecl FlushCacheList(void) {
     v3 = 2;
   else
     v3 = 1;
-  (*(void (__stdcall **)(int, _DWORD, int, int))(*(_DWORD *)D3DObjectPtr->field_38 + 148))(
-    D3DObjectPtr->field_38,
+  (*(void (__stdcall **)(int, _DWORD, int, int))(*(_DWORD *)D3DObjectPtr->m_pObjectDevice + 148))(
+    D3DObjectPtr->m_pObjectDevice,
     0,
     16,
     v3);
@@ -52552,8 +52451,8 @@ void __cdecl FlushCacheList(void) {
     v2 = 2;
   else
     v2 = 1;
-  (*(void (__stdcall **)(int, _DWORD, int, int))(*(_DWORD *)D3DObjectPtr->field_38 + 148))(
-    D3DObjectPtr->field_38,
+  (*(void (__stdcall **)(int, _DWORD, int, int))(*(_DWORD *)D3DObjectPtr->m_pObjectDevice + 148))(
+    D3DObjectPtr->m_pObjectDevice,
     0,
     17,
     v2);
@@ -52563,13 +52462,13 @@ void __cdecl FlushCacheList(void) {
     {
       if ( (byte_47132E7[16 * i] & 8) != 0 )
       {
-        (*(void (__stdcall **)(int, _DWORD, int, int))(*(_DWORD *)D3DObjectPtr->field_38 + 148))(
-          D3DObjectPtr->field_38,
+        (*(void (__stdcall **)(int, _DWORD, int, int))(*(_DWORD *)D3DObjectPtr->m_pObjectDevice + 148))(
+          D3DObjectPtr->m_pObjectDevice,
           0,
           16,
           1);
-        (*(void (__stdcall **)(int, _DWORD, int, int))(*(_DWORD *)D3DObjectPtr->field_38 + 148))(
-          D3DObjectPtr->field_38,
+        (*(void (__stdcall **)(int, _DWORD, int, int))(*(_DWORD *)D3DObjectPtr->m_pObjectDevice + 148))(
+          D3DObjectPtr->m_pObjectDevice,
           0,
           17,
           1);
@@ -52577,13 +52476,13 @@ void __cdecl FlushCacheList(void) {
       }
       else if ( IsFiltering )
       {
-        (*(void (__stdcall **)(int, _DWORD, int, int))(*(_DWORD *)D3DObjectPtr->field_38 + 148))(
-          D3DObjectPtr->field_38,
+        (*(void (__stdcall **)(int, _DWORD, int, int))(*(_DWORD *)D3DObjectPtr->m_pObjectDevice + 148))(
+          D3DObjectPtr->m_pObjectDevice,
           0,
           16,
           2);
-        (*(void (__stdcall **)(int, _DWORD, int, int))(*(_DWORD *)D3DObjectPtr->field_38 + 148))(
-          D3DObjectPtr->field_38,
+        (*(void (__stdcall **)(int, _DWORD, int, int))(*(_DWORD *)D3DObjectPtr->m_pObjectDevice + 148))(
+          D3DObjectPtr->m_pObjectDevice,
           0,
           17,
           2);
@@ -52592,7 +52491,7 @@ void __cdecl FlushCacheList(void) {
     }
     if ( (byte_47132E7[16 * i] & 0x10) != 0 )
     {
-      v5 = *(float *)&dword_3E2E2F4 < 1.0 && (byte_47132E7[16 * i] & 0x40) != 0;
+      v5 = *(float *)&g_fZoomFactor < 1.0 && (byte_47132E7[16 * i] & 0x40) != 0;
       CCachePageManager::RenderCacheObject(
         (CCachePageManager *)D3DObjectPtr->CCachePageManager[(unsigned __int8)byte_47132E4[16 * i]],
         (unsigned __int8)byte_47132E5[16 * i],
@@ -52606,7 +52505,7 @@ void __cdecl FlushCacheList(void) {
     else
     {
       CCachePageManager::RenderCacheObject(
-        (CCachePageManager *)D3DObjectPtr->field_44C[(unsigned __int8)byte_47132E4[16 * i]],
+        (CCachePageManager *)D3DObjectPtr->m_pCacheManagers[(unsigned __int8)byte_47132E4[16 * i]],
         (unsigned __int8)byte_47132E5[16 * i],
         *(float *)&dword_47132DC[4 * i],
         *(float *)&dword_47132E0[4 * i],
@@ -56976,7 +56875,7 @@ void __cdecl InitRandomMap(class IMapGeneratorHost * a1, struct SRandomMapParams
   int v23; // [esp+9Ch] [ebp-10h]
   int v24; // [esp+A8h] [ebp-4h]
 
-  NewValue = controlfp(0xA031Fu, 0x30F031Fu);
+  NewValue = _controlfp(0xA031Fu, 0x30F031Fu);
   if ( g_pBasicGrid )
   {
     v19 = g_pBasicGrid;
@@ -57095,7 +56994,7 @@ void __cdecl InitRandomMap(class IMapGeneratorHost * a1, struct SRandomMapParams
     CPlayerData::setStartPos_Real(*(CPlayerData **)(g_pPlayerData + 4 * k), v4, v5);
     (*(void (__thiscall **)(int, int, int, int))(*(_DWORD *)g_pHost + 28))(g_pHost, k + 1, v4, v5);
   }
-  return controlfp(NewValue, 0x30F031Fu);
+  return _controlfp(NewValue, 0x30F031Fu);
 }
 
 
@@ -57152,7 +57051,7 @@ void __cdecl CreatePreview(class IMapGeneratorHost * a1, unsigned short * a2, in
   _BYTE v50[1280]; // [esp+270h] [ebp-510h] BYREF
   int v51; // [esp+77Ch] [ebp-4h]
 
-  NewValue = controlfp(0xA031Fu, 0x30F031Fu);
+  NewValue = _controlfp(0xA031Fu, 0x30F031Fu);
   CRandom16Ex::Init(g_pRand, g_iRandomSeed, 0);
   g_iPreviewImageSize = a3;
   v48 = 2 * a3;
@@ -57355,7 +57254,7 @@ void __cdecl CreatePreview(class IMapGeneratorHost * a1, unsigned short * a2, in
     v19 = 0;
   C = (void *)g_pPreviewImage;
   operator delete[]((void *)g_pPreviewImage);
-  return controlfp(NewValue, 0x30F031Fu);
+  return _controlfp(NewValue, 0x30F031Fu);
 }
 
 
@@ -57490,7 +57389,7 @@ bool __cdecl GenerateRandomMap(class IMapGeneratorHost * a1) {
 
   if ( !g_pMapElement )
     return 0;
-  NewValue = controlfp(0xA031Fu, 0x30F031Fu);
+  NewValue = _controlfp(0xA031Fu, 0x30F031Fu);
   CRandom16Ex::Init(g_pRand, g_iRandomSeed, 0);
   g_pHost = (int)a1;
   v72 = (CCheckLayer *)operator new(0xCu);
@@ -58144,7 +58043,7 @@ bool __cdecl GenerateRandomMap(class IMapGeneratorHost * a1) {
   g_pMapElement = 0;
   g_pEditorLayer = 0;
   g_pHost = 0;
-  controlfp(NewValue, 0x30F031Fu);
+  _controlfp(NewValue, 0x30F031Fu);
   return 1;
 }
 

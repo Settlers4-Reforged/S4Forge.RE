@@ -946,26 +946,18 @@ bool __cdecl CGameSettings::GetShowVideos(void) {
 
 
 // address=[0x148ff20]
-// Decompiled from BOOL __cdecl CGameSettings::SetAlwaysHardwareImpossible(bool a1)
+// Decompiled from void __cdecl CGameSettings::SetAlwaysHardwareImpossible(bool a1)
 void __cdecl CGameSettings::SetAlwaysHardwareImpossible(bool a1) {
   
-  BOOL result; // eax
-
-  result = a1;
   CGameSettings::m_iHardwareAlwaysImpossible = a1;
-  return result;
 }
 
 
 // address=[0x148ff40]
-// Decompiled from BOOL __cdecl CGameSettings::SetAlwaysHardwareObjectImpossible(bool a1)
+// Decompiled from void __cdecl CGameSettings::SetAlwaysHardwareObjectImpossible(bool a1)
 void __cdecl CGameSettings::SetAlwaysHardwareObjectImpossible(bool a1) {
   
-  BOOL result; // eax
-
-  result = a1;
   CGameSettings::m_iHardwareObjectAlwaysImpossible = a1;
-  return result;
 }
 
 

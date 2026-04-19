@@ -24,7 +24,7 @@ void  CAddOn::EnsureExtraGUI(int a2, bool (__cdecl*)(int,int,int) a3) {
  CAddOn::CAddOn(void) {
   
   CExtraCD::CExtraCD(this);
-  *(_DWORD *)this = &CAddOn::_vftable_;
+  this->__vftable = (CAddOn_vtbl *)&CAddOn::_vftable_;
   return this;
 }
 

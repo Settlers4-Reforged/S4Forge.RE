@@ -507,10 +507,10 @@ LABEL_134:
 
 
 // address=[0x139eaa0]
-// Decompiled from bool __thiscall CGuiEventHandler::RecalcDialogPos(CGuiEventHandler *this, bool a2)
+// Decompiled from char __thiscall CGuiEventHandler::RecalcDialogPos(CGuiEventHandler *this, bool a2)
 void  CGuiEventHandler::RecalcDialogPos(bool a2) {
   
-  bool result; // al
+  char result; // al
   int OutputWidth; // eax
   int v4; // eax
   int v5; // eax
@@ -521,14 +521,14 @@ void  CGuiEventHandler::RecalcDialogPos(bool a2) {
   int v10; // [esp+Ch] [ebp-ECh]
   CEvn_Logic *v11; // [esp+10h] [ebp-E8h]
   CEvn_Logic *v12; // [esp+18h] [ebp-E0h]
-  CEvn_Event *v13; // [esp+20h] [ebp-D8h]
-  CEvn_Event *v14; // [esp+28h] [ebp-D0h]
-  CEvn_Event *v15; // [esp+30h] [ebp-C8h]
+  struct CEvn_Event *v13; // [esp+20h] [ebp-D8h]
+  struct CEvn_Event *v14; // [esp+28h] [ebp-D0h]
+  struct CEvn_Event *v15; // [esp+30h] [ebp-C8h]
   int OutputHeight; // [esp+44h] [ebp-B4h]
   char v17; // [esp+4Ah] [ebp-AEh]
   char v18; // [esp+4Bh] [ebp-ADh]
-  _BYTE v20[32]; // [esp+50h] [ebp-A8h] BYREF
-  _BYTE v21[32]; // [esp+70h] [ebp-88h] BYREF
+  CEvn_Logic v20; // [esp+50h] [ebp-A8h] BYREF
+  CEvn_Logic v21; // [esp+70h] [ebp-88h] BYREF
   CEvn_Event v22; // [esp+90h] [ebp-68h] BYREF
   CEvn_Event v23; // [esp+A8h] [ebp-50h] BYREF
   CEvn_Event v24; // [esp+C0h] [ebp-38h] BYREF
@@ -556,30 +556,30 @@ void  CGuiEventHandler::RecalcDialogPos(bool a2) {
     v29 = -1;
     CEvn_Event::~CEvn_Event(&v22);
   }
-  OutputHeight = IGfxEngine::GetOutputHeight((IGfxEngine *)g_pGfxEngine);
+  OutputHeight = IGfxEngine::GetOutputHeight(g_pGfxEngine);
   v18 = sub_139F260(1, OutputHeight);
   if ( v18 != (*((_DWORD *)this + 8) != -1) )
   {
     if ( v18 )
     {
-      IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 1, GuiDlgMainBarExt1Proc);
+      IGuiEngine::OpenDialog(g_pGUIEngine, 1, (bool (__cdecl *)(int, int, int))GuiDlgMainBarExt1Proc);
       *((_DWORD *)this + 8) = 1;
-      v12 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v21, 0x1E2u, 1u, 0, 0, 0, 0);
+      v12 = CEvn_Logic::CEvn_Logic(&v21, 0x1E2u, 1u, 0, 0, 0, 0);
       v29 = 3;
       IEventEngine::SendAMessage(g_pEvnEngine, v12);
       v29 = -1;
-      CEvn_Logic::~CEvn_Logic(v21);
+      CEvn_Logic::~CEvn_Logic(&v21);
       *((_BYTE *)this + 5) = 1;
     }
     else
     {
-      v11 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v20, 0x1E2u, 0, 0, 0, 0, 0);
+      v11 = CEvn_Logic::CEvn_Logic(&v20, 0x1E2u, 0, 0, 0, 0, 0);
       v29 = 4;
       IEventEngine::SendAMessage(g_pEvnEngine, v11);
       v29 = -1;
-      CEvn_Logic::~CEvn_Logic(v20);
+      CEvn_Logic::~CEvn_Logic(&v20);
       *((_BYTE *)this + 5) = 0;
-      IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, *((_DWORD *)this + 8));
+      IGuiEngine::CloseDialog(g_pGUIEngine, *((_DWORD *)this + 8));
       *((_DWORD *)this + 8) = -1;
     }
   }
@@ -589,56 +589,52 @@ void  CGuiEventHandler::RecalcDialogPos(bool a2) {
   {
     if ( v17 )
     {
-      IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 2, GuiDlgMainBarExt2Proc);
+      IGuiEngine::OpenDialog(g_pGUIEngine, 2, (bool (__cdecl *)(int, int, int))GuiDlgMainBarExt2Proc);
       *((_DWORD *)this + 9) = 2;
-      result = IGfxEngine::EnableCameraWindow((IGfxEngine *)g_pGfxEngine, 1, 16, 818, 174, 190);
+      result = IGfxEngine::EnableCameraWindow(g_pGfxEngine, 1, 16, 818, 174, 190);
     }
     else
     {
-      IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, *((_DWORD *)this + 9));
+      IGuiEngine::CloseDialog(g_pGUIEngine, *((_DWORD *)this + 9));
       *((_DWORD *)this + 9) = -1;
-      result = IGfxEngine::EnableCameraWindow((IGfxEngine *)g_pGfxEngine, 0, 0, 0, 0, 0);
+      result = IGfxEngine::EnableCameraWindow(g_pGfxEngine, 0, 0, 0, 0, 0);
     }
   }
   if ( *((_DWORD *)this + 7) != -1 )
   {
-    IGuiEngine::GetDialogRenderRect((IGuiEngine *)g_pGUIEngine, 72, (struct SGuiRect *)&v25);
+    IGuiEngine::GetDialogRenderRect(g_pGUIEngine, 72, (struct SGuiRect *)&v25);
     v10 = v27 - v25 + 1;
-    OutputWidth = IGfxEngine::GetOutputWidth((IGfxEngine *)g_pGfxEngine);
-    result = IGuiEngine::SetDialogRenderPos((IGuiEngine *)g_pGUIEngine, 72, (OutputWidth - 210) / 2 - v10 / 2 + 210, 10);
+    OutputWidth = IGfxEngine::GetOutputWidth(g_pGfxEngine);
+    result = IGuiEngine::SetDialogRenderPos(g_pGUIEngine, 72, (OutputWidth - 210) / 2 - v10 / 2 + 210, 10);
   }
   if ( *((_DWORD *)this + 15) != -1 )
   {
-    IGuiEngine::GetDialogRenderRect((IGuiEngine *)g_pGUIEngine, 74, (struct SGuiRect *)&v25);
+    IGuiEngine::GetDialogRenderRect(g_pGUIEngine, 74, (struct SGuiRect *)&v25);
     v9 = v27 - v25 + 1;
-    v4 = IGfxEngine::GetOutputWidth((IGfxEngine *)g_pGfxEngine);
-    result = IGuiEngine::SetDialogRenderPos((IGuiEngine *)g_pGUIEngine, 74, v4 - v9, 0);
+    v4 = IGfxEngine::GetOutputWidth(g_pGfxEngine);
+    result = IGuiEngine::SetDialogRenderPos(g_pGUIEngine, 74, v4 - v9, 0);
   }
   if ( *((_DWORD *)this + 10) == -1 )
   {
     if ( *((_DWORD *)this + 13) != -1 )
     {
-      IGuiEngine::GetDialogRenderRect((IGuiEngine *)g_pGUIEngine, 59, (struct SGuiRect *)&v25);
-      result = IGuiEngine::SetDialogRenderPos((IGuiEngine *)g_pGUIEngine, 59, 209, OutputHeight - (v28 - v26 + 1));
+      IGuiEngine::GetDialogRenderRect(g_pGUIEngine, 59, (struct SGuiRect *)&v25);
+      result = IGuiEngine::SetDialogRenderPos(g_pGUIEngine, 59, 209, OutputHeight - (v28 - v26 + 1));
     }
   }
   else
   {
-    IGuiEngine::GetDialogRenderRect((IGuiEngine *)g_pGUIEngine, *((_DWORD *)this + 10), (struct SGuiRect *)&v25);
-    result = IGuiEngine::SetDialogRenderPos(
-               (IGuiEngine *)g_pGUIEngine,
-               *((_DWORD *)this + 10),
-               209,
-               OutputHeight - (v28 - v26 + 1));
+    IGuiEngine::GetDialogRenderRect(g_pGUIEngine, *((_DWORD *)this + 10), (struct SGuiRect *)&v25);
+    result = IGuiEngine::SetDialogRenderPos(g_pGUIEngine, *((_DWORD *)this + 10), 209, OutputHeight - (v28 - v26 + 1));
   }
-  if ( !*(_DWORD *)(g_pGame + 360) )
+  if ( !g_pGame->m_bExtendedTooltip )
     return result;
-  IGuiEngine::GetDialogRenderRect((IGuiEngine *)g_pGUIEngine, 73, (struct SGuiRect *)&v25);
+  IGuiEngine::GetDialogRenderRect(g_pGUIEngine, 73, (struct SGuiRect *)&v25);
   v8 = v27 - v25 + 1;
-  v5 = IGfxEngine::GetOutputHeight((IGfxEngine *)g_pGfxEngine);
+  v5 = IGfxEngine::GetOutputHeight(g_pGfxEngine);
   v7 = v5 - (v28 - v26 + 1);
-  v6 = IGfxEngine::GetOutputWidth((IGfxEngine *)g_pGfxEngine);
-  return IGuiEngine::SetDialogRenderPos((IGuiEngine *)g_pGUIEngine, 73, v6 - v8, v7);
+  v6 = IGfxEngine::GetOutputWidth(g_pGfxEngine);
+  return IGuiEngine::SetDialogRenderPos(g_pGUIEngine, 73, v6 - v8, v7);
 }
 
 

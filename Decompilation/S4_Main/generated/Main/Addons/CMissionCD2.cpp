@@ -25,7 +25,7 @@ void  CMissionCD2::EnsureExtraGUI(int a2, bool (__cdecl*)(int,int,int) a3) {
  CMissionCD2::CMissionCD2(void) {
   
   CExtraCD::CExtraCD(this);
-  *(_DWORD *)this = &CMissionCD2::_vftable_;
+  this->__vftable = (CMissionCD2_vtbl *)&CMissionCD2::_vftable_;
   return this;
 }
 

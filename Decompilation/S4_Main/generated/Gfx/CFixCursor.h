@@ -20,6 +20,13 @@ public:
     // address=[0x2f699a0]
     bool  IsVisible(void);
 
+    // Type information members
+public:
+    CSurfaceV7 * m_pSurface;
+    RECT m_sRect;
+    RECT m_sOffset;
+    _BYTE m_bVisible;
+
 };
 
 

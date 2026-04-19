@@ -14,18 +14,17 @@ struct _DDBLTFX *  CBlitFX::GetBlitStructPtr(void) {
 // Decompiled from CBlitFX *__thiscall CBlitFX::CBlitFX(CBlitFX *this)
  CBlitFX::CBlitFX(void) {
   
-  memset(this, 0, 0x64u);
-  *(_DWORD *)this = 100;
+  memset(this, 0, sizeof(CBlitFX));
+  this->m_u0 = 100;
   return this;
 }
 
 
 // address=[0x2f86430]
-// Decompiled from CBlitFX *__thiscall CBlitFX::SetFillColor(CBlitFX *this, int a2, int a3, int a4, bool a5)
+// Decompiled from void __thiscall CBlitFX::SetFillColor(CBlitFX *this, int a2, int a3, int a4, bool a5)
 void  CBlitFX::SetFillColor(int a2, int a3, int a4, bool a5) {
   
   int v5; // edx
-  CBlitFX *result; // eax
 
   if ( a5 )
     v5 = 32 * (unsigned __int16)(int)(float)((float)a3 * 0.12156863)
@@ -33,9 +32,7 @@ void  CBlitFX::SetFillColor(int a2, int a3, int a4, bool a5) {
   else
     v5 = 32 * (unsigned __int16)(int)(float)((float)a3 * 0.24705882)
        + ((unsigned __int16)(int)(float)((float)a2 * 0.12156863) << 11);
-  result = this;
-  *((_DWORD *)this + 20) = (unsigned __int16)(int)(float)((float)a4 * 0.12156863) + v5;
-  return result;
+  this->m_u4[19] = (unsigned __int16)(int)(float)((float)a4 * 0.12156863) + v5;
 }
 
 

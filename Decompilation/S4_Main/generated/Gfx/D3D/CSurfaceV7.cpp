@@ -7,7 +7,7 @@
  CSurfaceV7::CSurfaceV7(void) {
   
   CSurface::CSurface((CSurface *)this);
-  this->__vftable = (CSurfaceV7_vtbl *)&CSurfaceV7::_vftable_;
+  this->CSurface = (CSurfaceV7_vtbl *)&CSurfaceV7::_vftable_;
   this->field_8 = 0;
   this->innerSurface = 0;
   this->field_C = 0;

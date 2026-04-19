@@ -43,9 +43,9 @@ class IExtraCD * __cdecl IExtraCD::CreateMissionCD2Object(void) {
   C = (CMissionCD2 *)operator new(0xCu);
   if ( !C )
     return 0;
-  *(_DWORD *)C = 0;
-  *((_DWORD *)C + 1) = 0;
-  *((_DWORD *)C + 2) = 0;
+  C->__vftable = 0;
+  C->m_u4 = 0;
+  *(_DWORD *)&C->m_u8 = 0;
   return CMissionCD2::CMissionCD2(C);
 }
 
@@ -70,7 +70,7 @@ class IExtraCD * __cdecl IExtraCD::CreateMissionCD3Object(void) {
 // Decompiled from IExtraCD *__thiscall IExtraCD::IExtraCD(IExtraCD *this)
  IExtraCD::IExtraCD(void) {
   
-  *(_DWORD *)this = &IExtraCD::_vftable_;
+  this->__vftable = (IExtraCD_vtbl *)&IExtraCD::_vftable_;
   return this;
 }
 

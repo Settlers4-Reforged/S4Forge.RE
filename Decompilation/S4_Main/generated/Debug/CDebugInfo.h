@@ -34,16 +34,16 @@ private:
     static bool __cdecl CheckGraphicsAdapter(void);
 
     // address=[0x147fd90]
-    static SFreqInfo __cdecl CPUSpeed(int retstr);
+    static struct SFreqInfo __cdecl CPUSpeed(int retstr);
 
     // address=[0x147ff20]
     static bool __cdecl CheckMemory(void);
 
     // address=[0x147ff80]
-    static SFreqInfo __cdecl GetBSFCpuSpeed(unsigned int retstr);
+    static struct SFreqInfo __cdecl GetBSFCpuSpeed(unsigned int retstr);
 
     // address=[0x14800f0]
-    static SFreqInfo __cdecl GetRDTSCCpuSpeed(void retstr);
+    static struct SFreqInfo __cdecl GetRDTSCCpuSpeed(void retstr);
 
     // address=[0x14803b0]
     static unsigned short __cdecl wincpuid(void);
@@ -52,7 +52,7 @@ private:
     static unsigned int __cdecl wincpufeatures(void);
 
     // address=[0x14804f0]
-    static SFreqInfo __cdecl GetCmosCpuSpeed(void a1);
+    static struct SFreqInfo __cdecl GetCmosCpuSpeed(void a1);
 
     // address=[0x1480700]
     static unsigned short __cdecl wincpuidsupport(void);
@@ -76,22 +76,23 @@ private:
     static int __cdecl GetCmosTick(void);
 
     // address=[0x1480980]
-    static unsigned int __cdecl cpuTimeStamp(unsigned long *a1, unsigned long *a2);
+    static unsigned int __cdecl cpuTimeStamp(unsigned long * a1, unsigned long * a2);
 
     // address=[0x14809c0]
-    static unsigned int __cdecl diffTime64(unsigned long a1, unsigned long a2, unsigned long a3, unsigned long a4, unsigned long *a5, unsigned long *a6);
+    static unsigned int __cdecl diffTime64(unsigned long a1, unsigned long a2, unsigned long a3, unsigned long a4, unsigned long * a5, unsigned long * a6);
 
     // address=[0x3d899d8]
-    static unsigned int *processor_cycles;
+    static unsigned int * processor_cycles;
 
     // address=[0x3f44e88]
     static unsigned int m_iClone;
 
     // address=[0x3f44e90]
-    static SEnvironmentInfo m_EnvInfo;
+    static struct SEnvironmentInfo m_EnvInfo;
 
     // address=[0x3f44f08]
-    static std::string *m_strOS;
+    static std::string * m_strOS;
+
 };
 
 

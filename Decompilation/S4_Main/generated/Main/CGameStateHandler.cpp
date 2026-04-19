@@ -15,7 +15,7 @@ bool __cdecl CGameStateHandler::Init(void) {
   INetworkEngine *v7; // [esp+3Ch] [ebp-F0h]
   INetworkEngine *v8; // [esp+40h] [ebp-ECh]
   CGameType *C; // [esp+44h] [ebp-E8h]
-  struct IEvn_Handle *v10; // [esp+48h] [ebp-E4h]
+  CGameStateEventHandle *v10; // [esp+48h] [ebp-E4h]
   _AFX_OLE_STATE *v11; // [esp+4Ch] [ebp-E0h]
   char v12; // [esp+54h] [ebp-D8h]
   _BYTE v13[28]; // [esp+58h] [ebp-D4h] BYREF
@@ -55,21 +55,21 @@ bool __cdecl CGameStateHandler::Init(void) {
   g_pAddOn = IExtraCD::CreateAddOnCDObject();
   g_pMissionCD2 = IExtraCD::CreateMissionCD2Object();
   g_pMissionCD3 = IExtraCD::CreateMissionCD3Object();
-  if ( (unsigned __int8)CGameStateHandler::InitGfxEngine() )
+  if ( CGameStateHandler::InitGfxEngine() )
   {
     CTrace::Print("INIT GFX-ENGINE COMPLETE");
     CGameSettings::DetermineHighestResolution();
-    if ( (unsigned __int8)CGameStateHandler::InitSoundEngine() )
+    if ( CGameStateHandler::InitSoundEngine() )
       CTrace::Print("INIT SOUND-ENGINE COMPLETE");
     else
       CTrace::Print("INIT SOUND-ENGINE FAILED");
-    if ( (unsigned __int8)CGameStateHandler::InitGfxManager() )
+    if ( CGameStateHandler::InitGfxManager() )
     {
       CTrace::Print("INIT GFX-MANAGER COMPLETE");
       if ( CGameStateHandler::InitGfxCompiler() )
       {
         CTrace::Print("INIT GFX-RTCompiler COMPLETE");
-        if ( (unsigned __int8)CGameStateHandler::InitSoundManager() )
+        if ( CGameStateHandler::InitSoundManager() )
           CTrace::Print("INIT SOUND-MANAGER COMPLETE");
         else
           CTrace::Print("INIT SOUND-MANAGER FAILED");
@@ -80,12 +80,12 @@ bool __cdecl CGameStateHandler::Init(void) {
         else
           v10 = 0;
         v20 = -1;
-        dword_3F45674 = (int)v10;
+        g_pGameStateEventHandle = v10;
         IEventEngine::RegisterHandle(g_pEvnEngine, v10);
         CStateLoadGame::InitSaveList();
         if ( g_pCfgMgr->GetIntValue(g_pCfgMgr, "COMMANDLINE", "netgame", 0) )
         {
-          CGameStateHandler::Switch((int)CStateMainMenu::DynamicCreateFunc, 5);
+          CGameStateHandler::Switch(CStateMainMenu::DynamicCreateFunc, (void *)5);
           return 1;
         }
         else
@@ -103,14 +103,14 @@ bool __cdecl CGameStateHandler::Init(void) {
           std::string::~string(&v17);
           if ( v12 )
           {
-            CGameStateHandler::Switch((int)CStateSlideshow::DynamicCreateFunc, 0);
+            CGameStateHandler::Switch(CStateSlideshow::DynamicCreateFunc, 0);
             if ( (unsigned __int8)CGameSettings::GetShowVideos() )
             {
-              CGameStateHandler::Queue((int)CStateVideo::DynamicCreateFunc, 7);
-              CGameStateHandler::Queue((int)CStateVideo::DynamicCreateFunc, 1);
-              CGameStateHandler::Queue((int)CStateVideo::DynamicCreateFunc, 0);
+              CGameStateHandler::Queue(CStateVideo::DynamicCreateFunc, (void *)7);
+              CGameStateHandler::Queue(CStateVideo::DynamicCreateFunc, (void *)1);
+              CGameStateHandler::Queue(CStateVideo::DynamicCreateFunc, 0);
             }
-            CGameStateHandler::Queue((int)CStateMainMenu::DynamicCreateFunc, 19);
+            CGameStateHandler::Queue(CStateMainMenu::DynamicCreateFunc, (void *)0x13);
             return 1;
           }
           else
@@ -132,9 +132,9 @@ bool __cdecl CGameStateHandler::Init(void) {
               else
                 v8 = 0;
               v20 = -1;
-              g_pNetworkEngine = (int)v8;
+              g_pNetworkEngine = v8;
               INetworkEngine::Start(1, 1, g_pGameType->m_iActualPlayerCount, 0);
-              CGameStateHandler::Switch((int)CStateGame::DynamicCreateFunc, 0);
+              CGameStateHandler::Switch(CStateGame::DynamicCreateFunc, 0);
               timeBeginPeriod(1u);
               CTrace::Print(" MAIN INIT COMPLETE (CGameStateHandler::Init) ");
               return 1;
@@ -174,25 +174,26 @@ bool __cdecl CGameStateHandler::Perform(void) {
   storm::SimpleConnectivityFacade **v2; // eax
   std::wstring v3; // [esp-1Ch] [ebp-88h] BYREF
   int v4; // [esp+0h] [ebp-6Ch]
-  _DWORD v5[5]; // [esp+4h] [ebp-68h] BYREF
+  SStateCommand v5; // [esp+4h] [ebp-68h] BYREF
+  int v6; // [esp+10h] [ebp-5Ch]
+  std::wstring *v7; // [esp+14h] [ebp-58h]
   struct tagPOINT Point; // [esp+18h] [ebp-54h] BYREF
-  int v7; // [esp+20h] [ebp-4Ch]
-  int v8; // [esp+24h] [ebp-48h]
-  int v9; // [esp+28h] [ebp-44h]
-  int v10; // [esp+2Ch] [ebp-40h]
-  int v11; // [esp+30h] [ebp-3Ch]
+  int pIt; // [esp+24h] [ebp-48h] MAPDST
+  int v11; // [esp+28h] [ebp-44h]
+  CGameState *v12; // [esp+2Ch] [ebp-40h]
+  int v13; // [esp+30h] [ebp-3Ch]
   int Instance; // [esp+34h] [ebp-38h]
-  int v13; // [esp+38h] [ebp-34h]
-  int (__thiscall ***v14)(_DWORD, int); // [esp+3Ch] [ebp-30h]
+  SStateCommand *pNextState; // [esp+38h] [ebp-34h]
+  CGameState *v16; // [esp+3Ch] [ebp-30h]
   DWORD Time; // [esp+40h] [ebp-2Ch]
-  CEvn_Event v16; // [esp+44h] [ebp-28h] BYREF
-  int v17; // [esp+68h] [ebp-4h]
+  CEvn_Event v18; // [esp+44h] [ebp-28h] BYREF
+  int exceptionBlock; // [esp+68h] [ebp-4h]
 
   if ( CGameStateHandler::m_bGrab )
   {
-    v5[4] = &v3;
-    v5[3] = std::wstring::wstring(&v3, (wchar_t *)&word_36EB218);
-    CGrabber::DoGrab(v3.m_u[0]);
+    v7 = &v3;
+    v6 = std::wstring::wstring(&v3, (wchar_t *)&word_36EB218);
+    CGrabber::DoGrab(v3);
   }
   if ( CGameStateHandler::m_uiLastTime )
   {
@@ -201,15 +202,15 @@ bool __cdecl CGameStateHandler::Perform(void) {
     {
       GetCursorPos(&Point);
       ScreenToClient(g_hWnd, &Point);
-      CEvn_Event::CEvn_Event(&v16, 0x15u, 0, Point.x + (Point.y << 16), 0);
-      v17 = 0;
-      IEventEngine::SendAMessage(g_pEvnEngine, &v16);
+      CEvn_Event::CEvn_Event(&v18, 0x15u, 0, Point.x + (Point.y << 16), 0);
+      exceptionBlock = 0;
+      IEventEngine::SendAMessage(g_pEvnEngine, &v18);
       if ( Time - CGameStateHandler::m_uiLastTime - 100 >= 0xA )
         CGameStateHandler::m_uiLastTime = Time - 10;
       else
         CGameStateHandler::m_uiLastTime += 100;
-      v17 = -1;
-      CEvn_Event::~CEvn_Event(&v16);
+      exceptionBlock = -1;
+      CEvn_Event::~CEvn_Event(&v18);
     }
   }
   else
@@ -222,21 +223,20 @@ bool __cdecl CGameStateHandler::Perform(void) {
     IEventEngine::LockEventEngine(g_pEvnEngine, 1);
     if ( CGameStateHandler::m_s_pCurrentState )
     {
-      v10 = CGameStateHandler::m_s_pCurrentState;
-      v14 = (int (__thiscall ***)(_DWORD, int))CGameStateHandler::m_s_pCurrentState;
-      v9 = (**v14)(v14, 1);
+      v12 = CGameStateHandler::m_s_pCurrentState;
+      v16 = CGameStateHandler::m_s_pCurrentState;
+      v11 = ((int (__thiscall *)(CGameState *, int))v16->dtor)(v16, 1);
       CGameStateHandler::m_s_pCurrentState = 0;
     }
     if ( !std::list<SStateCommand>::size(&CGameStateHandler::m_listQueuedStates) )
       return 0;
-    v8 = std::list<SStateCommand>::begin(v5);
-    v7 = v8;
-    v17 = 1;
-    v13 = std::_List_iterator<std::_List_val<std::_List_simple_types<SStateCommand>>>::operator*(v8);
-    v17 = -1;
-    std::_List_iterator<std::_List_val<std::_List_simple_types<SStateCommand>>>::~_List_iterator<std::_List_val<std::_List_simple_types<SStateCommand>>>(v5);
-    CGameStateHandler::m_s_pCurrentState = (*(int (__cdecl **)(_DWORD))v13)(*(_DWORD *)(v13 + 4));
-    std::list<SStateCommand>::pop_front(v4, v5[0]);
+    pIt = std::list<SStateCommand>::begin(&CGameStateHandler::m_listQueuedStates, (int)&v5);
+    exceptionBlock = 1;
+    pNextState = (SStateCommand *)std::_List_iterator<std::_List_val<std::_List_simple_types<SStateCommand>>>::operator*(pIt);
+    exceptionBlock = -1;
+    std::_List_iterator<std::_List_val<std::_List_simple_types<SStateCommand>>>::~_List_iterator<std::_List_val<std::_List_simple_types<SStateCommand>>>(&v5);
+    CGameStateHandler::m_s_pCurrentState = (CGameState *)pNextState->m_pStateFactory(pNextState->m_pFactoryArgument);
+    std::list<SStateCommand>::pop_front(v4, v5.m_pStateFactory);
     if ( !CGameStateHandler::m_s_pCurrentState )
       return 0;
     IEventEngine::LockEventEngine(g_pEvnEngine, 0);
@@ -245,8 +245,8 @@ bool __cdecl CGameStateHandler::Perform(void) {
     return 0;
   Instance = UPlay::UPlayManager::GetInstance();
   (*(void (__thiscall **)(int))(*(_DWORD *)Instance + 4))(Instance);
-  v11 = UPlay::UPlayManager::GetInstance();
-  if ( !(*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)v11 + 32))(v11) )
+  v13 = UPlay::UPlayManager::GetInstance();
+  if ( !(*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)v13 + 32))(v13) )
   {
     v1 = (OnlineManager *)OnlineManager::GetInstance();
     OnlineManager::Update(v1);
@@ -256,14 +256,14 @@ bool __cdecl CGameStateHandler::Perform(void) {
   if ( CGameStateHandler::m_bQuitApplication )
     return 0;
   if ( g_pSoundEngine )
-    ISoundEngine::Perform((ISoundEngine *)g_pSoundEngine);
+    ISoundEngine::Perform(g_pSoundEngine);
   if ( !CGameStateHandler::m_s_pCurrentState )
     return 1;
   if ( !g_pGfxEngine || !g_pGUIEngine )
-    return (*(int (__thiscall **)(int))(*(_DWORD *)CGameStateHandler::m_s_pCurrentState + 4))(CGameStateHandler::m_s_pCurrentState);
+    return CGameStateHandler::m_s_pCurrentState->Perform(CGameStateHandler::m_s_pCurrentState);
   if ( IGfxEngine::IsGfxEngineRebuilded(g_pGfxEngine) )
     IGuiEngine::RefreshAllSurfaces(g_pGUIEngine);
-  return (*(int (__thiscall **)(int))(*(_DWORD *)CGameStateHandler::m_s_pCurrentState + 4))(CGameStateHandler::m_s_pCurrentState);
+  return CGameStateHandler::m_s_pCurrentState->Perform(CGameStateHandler::m_s_pCurrentState);
 }
 
 
@@ -272,7 +272,7 @@ bool __cdecl CGameStateHandler::Perform(void) {
 bool __cdecl CGameStateHandler::CanProcessInvites(void) {
   
   if ( CGameStateHandler::m_s_pCurrentState )
-    return (*(int (__thiscall **)(int))(*(_DWORD *)CGameStateHandler::m_s_pCurrentState + 12))(CGameStateHandler::m_s_pCurrentState);
+    return CGameStateHandler::m_s_pCurrentState->CanProcessInvites(CGameStateHandler::m_s_pCurrentState);
   else
     return 0;
 }
@@ -283,62 +283,66 @@ bool __cdecl CGameStateHandler::CanProcessInvites(void) {
 void __cdecl CGameStateHandler::Kill(void) {
   
   CDestructionManager *v0; // eax
-  _BYTE v2[28]; // [esp+74h] [ebp-48h] BYREF
-  _BYTE v3[28]; // [esp+90h] [ebp-2Ch] BYREF
+  std::string v2; // [esp+74h] [ebp-48h] BYREF
+  std::string v3; // [esp+90h] [ebp-2Ch] BYREF
   int v4; // [esp+B8h] [ebp-4h]
 
   if ( g_pSoundEngine )
   {
-    (**(void (__thiscall ***)(int, int))g_pSoundEngine)(g_pSoundEngine, 1);
+    (**(void (__thiscall ***)(ISoundEngine *, int))g_pSoundEngine)(g_pSoundEngine, 1);// dtor
     g_pSoundEngine = 0;
   }
   if ( g_pEvnEngine )
   {
-    std::string::string(v3, (char *)&byte_36C362D);
+    std::string::string(&v3, (char *)&byte_36C362D);
     v4 = 0;
-    IEventEngine::RecordEvents(g_pEvnEngine, v3);
+    IEventEngine::RecordEvents(g_pEvnEngine, &v3);
     v4 = -1;
-    std::string::~string(v3);
-    std::string::string(v2, (char *)&byte_36C362E);
+    std::string::~string(&v3);
+    std::string::string(&v2, (char *)&byte_36C362E);
     v4 = 1;
-    IEventEngine::PlayEvents(v2, 0);
+    IEventEngine::PlayEvents(g_pEvnEngine, &v2, 0);
     v4 = -1;
-    std::string::~string(v2);
+    std::string::~string(&v2);
     IEventEngine::LockEventEngine(g_pEvnEngine, 1);
   }
-  if ( dword_3F45674 )
+  if ( g_pGameStateEventHandle )
   {
-    (*(void (__thiscall **)(int, int))(*(_DWORD *)dword_3F45674 + 4))(dword_3F45674, 1);
-    dword_3F45674 = 0;
+    (*(void (__thiscall **)(CGameStateEventHandle *, int))(*(_DWORD *)g_pGameStateEventHandle + 4))(// dtor
+      g_pGameStateEventHandle,
+      1);
+    g_pGameStateEventHandle = 0;
   }
   if ( g_pNetworkEngine )
   {
-    (**(void (__thiscall ***)(int, int))g_pNetworkEngine)(g_pNetworkEngine, 1);
+    (**(void (__thiscall ***)(INetworkEngine *, int))g_pNetworkEngine)(g_pNetworkEngine, 1);
     g_pNetworkEngine = 0;
   }
   if ( CGameStateHandler::m_s_pCurrentState )
   {
-    (**(void (__thiscall ***)(int, int))CGameStateHandler::m_s_pCurrentState)(CGameStateHandler::m_s_pCurrentState, 1);
+    ((void (__thiscall *)(CGameState *, int))CGameStateHandler::m_s_pCurrentState->dtor)(
+      CGameStateHandler::m_s_pCurrentState,
+      1);
     CGameStateHandler::m_s_pCurrentState = 0;
   }
   if ( g_pGUIEngine )
   {
-    delete (IGuiEngine *)g_pGUIEngine;
+    delete g_pGUIEngine;
     g_pGUIEngine = 0;
   }
   if ( g_pGfxEngine )
   {
-    delete (IGfxEngine *)g_pGfxEngine;
+    delete g_pGfxEngine;
     g_pGfxEngine = 0;
   }
   if ( g_pGfxManager )
   {
-    delete (CGfxManager *)g_pGfxManager;
+    delete g_pGfxManager;
     g_pGfxManager = 0;
   }
   if ( g_pSoundManager )
   {
-    delete (CSoundManager *)g_pSoundManager;
+    delete g_pSoundManager;
     g_pSoundManager = 0;
   }
   if ( g_pStringEngine )
@@ -372,22 +376,22 @@ bool __cdecl CGameStateHandler::InitGfxEngine(void) {
     CTrace::Print("Wrong version of gfx engine!");
     return 1;
   }
-  memset(&CGameStateHandler::m_sRenderCfg, 0, 0x24u);
+  memset(&CGameStateHandler::m_sRenderCfg, 0, sizeof(CGameStateHandler::m_sRenderCfg));
   C = (IGfxEngine *)operator new(0x28u);
   if ( C )
     v1 = IGfxEngine::IGfxEngine(C);
   else
     v1 = 0;
-  g_pGfxEngine = (int)v1;
-  controlfp(0xA031Fu, (unsigned int)&loc_30F031E + 1);
-  IGfxEngine::SetTriangleSize((IGfxEngine *)g_pGfxEngine, 1572864);
-  IGfxEngine::SetCameraMode((IGfxEngine *)g_pGfxEngine, 1);
-  IGfxEngine::SetScrollOffsets((IGfxEngine *)g_pGfxEngine, 0, 0);
-  IGfxEngine::EnableMiniMap((IGfxEngine *)g_pGfxEngine, 1, 15, 8, 0);
+  g_pGfxEngine = v1;
+  _controlfp(0xA031Fu, 0x30F031Fu);
+  IGfxEngine::SetTriangleSize(g_pGfxEngine, 0x180000);
+  IGfxEngine::SetCameraMode(g_pGfxEngine, 1);
+  IGfxEngine::SetScrollOffsets(g_pGfxEngine, 0, 0);
+  IGfxEngine::EnableMiniMap(g_pGfxEngine, 1, 15, 8, 0);
   if ( CGameStateHandler::BuildInitRenderCfg(0, 1) )
     return 1;
   if ( g_pGfxEngine )
-    delete (IGfxEngine *)g_pGfxEngine;
+    delete g_pGfxEngine;
   g_pGfxEngine = 0;
   return 0;
 }
@@ -409,21 +413,21 @@ bool __cdecl CGameStateHandler::InitSoundEngine(void) {
       v1 = ISoundEngine::ISoundEngine(C);
     else
       v1 = 0;
-    g_pSoundEngine = (int)v1;
+    g_pSoundEngine = v1;
     if ( v1 )
     {
-      if ( ISoundEngine::Init((ISoundEngine *)g_pSoundEngine, word_36D5788, 22050, 1, 16, 28, 4) )
+      if ( ISoundEngine::Init(g_pSoundEngine, word_36D5788, 22050, 1, 16, 28, 4) )
       {
-        if ( ISoundEngine::VCStart((ISoundEngine *)g_pSoundEngine, g_pEvnEngine, 1) )
+        if ( ISoundEngine::VCStart(g_pSoundEngine, g_pEvnEngine, 1) )
           CTrace::Print("INIT VOICE-CHAT COMPLETE");
         else
           CTrace::Print("INIT VOICE-CHAT FAILED");
-        ISoundEngine::SetTimerInterval((ISoundEngine *)g_pSoundEngine, 71);
+        ISoundEngine::SetTimerInterval(g_pSoundEngine, 71);
       }
       else
       {
         if ( g_pSoundEngine )
-          (**(void (__thiscall ***)(int, int))g_pSoundEngine)(g_pSoundEngine, 1);
+          (**(void (__thiscall ***)(ISoundEngine *, int))g_pSoundEngine)(g_pSoundEngine, 1);// dtor
         g_pSoundEngine = 0;
       }
     }
@@ -441,24 +445,24 @@ bool __cdecl CGameStateHandler::InitSoundEngine(void) {
 // Decompiled from char CGameStateHandler::InitGfxManager()
 bool __cdecl CGameStateHandler::InitGfxManager(void) {
   
-  char v1; // al
+  char bHasAddOn; // al
   CGfxManager *v2; // [esp+14h] [ebp-1Ch]
   CGfxManager *C; // [esp+18h] [ebp-18h]
-  int GfxMode; // [esp+1Ch] [ebp-14h]
-  bool v5; // [esp+23h] [ebp-Dh]
+  int uBitMode; // [esp+1Ch] [ebp-14h]
+  bool bHasAnyMissionCD; // [esp+23h] [ebp-Dh]
 
   if ( !g_pGfxEngine && BBSupportDbgReport(2, "Main\\GameStateHandler.cpp", 1385, "g_pGfxEngine") == 1 )
     __debugbreak();
-  GfxMode = IGfxEngine::GetGfxMode(g_pGfxEngine);
-  if ( GfxMode )
+  uBitMode = IGfxEngine::GetGfxMode(g_pGfxEngine);
+  if ( uBitMode )
   {
     C = (CGfxManager *)operator new(0xCC0u);
     if ( C )
     {
-      v5 = (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pMissionCD2 + 4))(g_pMissionCD2)
-        || (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pMissionCD3 + 4))(g_pMissionCD3);
-      v1 = (*(int (__thiscall **)(int))(*(_DWORD *)g_pAddOn + 4))(g_pAddOn);
-      v2 = CGfxManager::CGfxManager(C, GfxMode == 2, v1, v5);
+      bHasAnyMissionCD = g_pMissionCD2->IsExtraInstalled(g_pMissionCD2)
+                      || g_pMissionCD3->IsExtraInstalled(g_pMissionCD3);
+      bHasAddOn = g_pAddOn->IsExtraInstalled(g_pAddOn);
+      v2 = CGfxManager::CGfxManager(C, uBitMode == 2, bHasAddOn, bHasAnyMissionCD);
     }
     else
     {
@@ -508,8 +512,8 @@ bool __cdecl CGameStateHandler::InitSoundManager(void) {
     v1 = CSoundManager::CSoundManager(C);
   else
     v1 = 0;
-  g_pSoundManager = (int)v1;
-  return CSoundManager::OpenSoundFiles(v1);
+  g_pSoundManager = v1;
+  return CSoundManager::OpenSoundFiles(v1) != 0;
 }
 
 
@@ -562,7 +566,7 @@ bool __cdecl CGameStateHandler::InitFileLibrary(void) {
 // Decompiled from char CGameStateHandler::InitGfxCompiler()
 bool __cdecl CGameStateHandler::InitGfxCompiler(void) {
   
-  controlfp(0xA031Fu, (unsigned int)&loc_30F031E + 1);
+  _controlfp(0xA031Fu, 0x30F031Fu);
   if ( GetLibVersion() == _crt_argv_unexpanded_arguments )
   {
     g_pRTComp = GetLibInstance();
@@ -588,27 +592,18 @@ bool __cdecl CGameStateHandler::InitGfxCompiler(void) {
 // Decompiled from void CGameStateHandler::DietmarsGameSettingsDefaults()
 void __cdecl CGameStateHandler::DietmarsGameSettingsDefaults(void) {
   
-  int v0; // [esp+0h] [ebp-Ch]
-  int v1; // [esp+4h] [ebp-8h]
-  int v2; // [esp+8h] [ebp-4h]
+  CConfigVar *v0; // [esp+0h] [ebp-Ch]
+  CConfigVar *v1; // [esp+4h] [ebp-8h]
+  CConfigVar *v2; // [esp+8h] [ebp-4h]
 
   if ( g_pCfgMgr )
   {
-    v2 = ((int (__thiscall *)(CConfigManager *, const char *, const char *))g_pCfgMgr->GetConfigVar)(
-           g_pCfgMgr,
-           "GAMESETTINGS",
-           "Fullscreen");
-    (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)v2 + 32))(v2, 0);
-    v1 = ((int (__thiscall *)(CConfigManager *, const char *, const char *))g_pCfgMgr->GetConfigVar)(
-           g_pCfgMgr,
-           "GAMESETTINGS",
-           "MusicEnabled");
-    (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)v1 + 32))(v1, 0);
-    v0 = ((int (__thiscall *)(CConfigManager *, const char *, const char *))g_pCfgMgr->GetConfigVar)(
-           g_pCfgMgr,
-           "ADVGAMESETTINGS",
-           "ShowVideos");
-    (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)v0 + 32))(v0, 0);
+    v2 = g_pCfgMgr->GetConfigVar(g_pCfgMgr, "GAMESETTINGS", "Fullscreen");
+    v2->SetValueI(v2, 0);
+    v1 = g_pCfgMgr->GetConfigVar(g_pCfgMgr, "GAMESETTINGS", "MusicEnabled");
+    v1->SetValueI(v1, 0);
+    v0 = g_pCfgMgr->GetConfigVar(g_pCfgMgr, "ADVGAMESETTINGS", "ShowVideos");
+    v0->SetValueI(v0, 0);
   }
 }
 
@@ -653,53 +648,40 @@ void __cdecl CGameStateHandler::LoadAllConfigFiles(void) {
 // Decompiled from char __cdecl CGameStateHandler::RebuildGfxEngine(char a1)
 bool __cdecl CGameStateHandler::RebuildGfxEngine(bool a1) {
   
-  int v2; // esi
-  int *v3; // eax
-  _BYTE v4[36]; // [esp+Ch] [ebp-8Ch] BYREF
-  _BYTE v5[16]; // [esp+30h] [ebp-68h] BYREF
-  int v6; // [esp+40h] [ebp-58h]
-  int v7; // [esp+44h] [ebp-54h]
-  BOOL v8; // [esp+48h] [ebp-50h]
-  char v10; // [esp+4Fh] [ebp-49h]
-  _BYTE v11[24]; // [esp+50h] [ebp-48h] BYREF
-  _DWORD v12[4]; // [esp+68h] [ebp-30h] BYREF
-  int v13; // [esp+78h] [ebp-20h]
-  int v14; // [esp+7Ch] [ebp-1Ch]
-  int v15; // [esp+80h] [ebp-18h]
-  int v16; // [esp+84h] [ebp-14h]
-  int v17; // [esp+94h] [ebp-4h]
+  int IsHardwareObjectEngine; // esi
+  _BYTE v3[36]; // [esp+Ch] [ebp-8Ch] BYREF
+  struct tagRECT v4; // [esp+30h] [ebp-68h] BYREF
+  struct CEvn_Event *v5; // [esp+40h] [ebp-58h]
+  struct CEvn_Event *v6; // [esp+44h] [ebp-54h]
+  BOOL v7; // [esp+48h] [ebp-50h]
+  char v9; // [esp+4Fh] [ebp-49h]
+  CEvn_Event v10; // [esp+50h] [ebp-48h] BYREF
+  struct tagRECT v12; // [esp+78h] [ebp-20h] MAPDST BYREF
+  int v13; // [esp+94h] [ebp-4h]
 
-  v8 = g_pGame == 0;
-  v10 = g_pGame == 0;
-  qmemcpy(v4, &CGameStateHandler::m_sRenderCfg, sizeof(v4));
-  if ( (unsigned __int8)CGameStateHandler::BuildInitRenderCfg(1, v8) )
+  v7 = g_pGame == 0;
+  v9 = g_pGame == 0;
+  qmemcpy(v3, &CGameStateHandler::m_sRenderCfg, sizeof(v3));
+  if ( CGameStateHandler::BuildInitRenderCfg(1, g_pGame == 0) )
   {
-    v2 = (unsigned __int8)SGfxRenderConfiguration::IsHardwareObjectEngine(v4);
-    if ( v2 != (unsigned __int8)SGfxRenderConfiguration::IsHardwareObjectEngine(&CGameStateHandler::m_sRenderCfg) )
+    IsHardwareObjectEngine = (unsigned __int8)SGfxRenderConfiguration::IsHardwareObjectEngine(v3);
+    if ( IsHardwareObjectEngine != (unsigned __int8)SGfxRenderConfiguration::IsHardwareObjectEngine(&CGameStateHandler::m_sRenderCfg) )
     {
-      CGfxManager::DisableGfxFile(-1);
+      CGfxManager::DisableGfxFile(g_pGfxManager, -1);
       CGfxManager::OpenGFXFiles(g_pGfxManager);
     }
     if ( a1 )
-      sub_148DA20(v10);
+      sub_148DA20(v9);
     if ( !g_pGUIEngine )
       return 1;
     IGuiEngine::RefreshAllSurfaces(g_pGUIEngine);
-    v3 = (int *)sub_148D860(v5);
-    v13 = *v3;
-    v14 = v3[1];
-    v15 = v3[2];
-    v16 = v3[3];
-    v12[0] = v13;
-    v12[1] = v14;
-    v12[2] = v15;
-    v12[3] = v16;
-    v7 = CEvn_Event::CEvn_Event(626, v12, 0, 0);
-    v6 = v7;
-    v17 = 0;
-    IEventEngine::SendAMessage(v7);
-    v17 = -1;
-    CEvn_Event::~CEvn_Event(v11);
+    v12 = *sub_148D860(&v4);
+    v6 = CEvn_Event::CEvn_Event(&v10, 0x272u, (unsigned int)&v12, 0, 0);
+    v5 = v6;
+    v13 = 0;
+    IEventEngine::SendAMessage(g_pEvnEngine, v6);
+    v13 = -1;
+    CEvn_Event::~CEvn_Event(&v10);
     return 1;
   }
   else
@@ -714,23 +696,13 @@ bool __cdecl CGameStateHandler::RebuildGfxEngine(bool a1) {
 // Decompiled from char __cdecl CGameStateHandler::CheckGfxRenderQuality(int a1)
 bool __cdecl CGameStateHandler::CheckGfxRenderQuality(unsigned int a1) {
   
-  int v2[9]; // [esp-24h] [ebp-50h] BYREF
-  _DWORD v3[9]; // [esp+8h] [ebp-24h] BYREF
+  struct SGfxRenderConfiguration v2; // [esp-24h] [ebp-50h] BYREF
+  SGfxRenderConfiguration v3; // [esp+8h] [ebp-24h] BYREF
 
-  qmemcpy(v3, &CGameStateHandler::m_sRenderCfg, sizeof(v3));
-  v3[1] = a1;
-  qmemcpy(v2, v3, sizeof(v2));
-  return IGfxEngine::CheckRenderConfiguration(
-           (_BYTE *)g_pGfxEngine,
-           v2[0],
-           v2[1],
-           v2[2],
-           v2[3],
-           v2[4],
-           v2[5],
-           v2[6],
-           v2[7],
-           v2[8]);
+  qmemcpy(&v3, &CGameStateHandler::m_sRenderCfg, sizeof(v3));
+  v3.m_uFlags = a1;
+  qmemcpy(&v2, &v3, sizeof(v2));
+  return IGfxEngine::CheckRenderConfiguration(g_pGfxEngine, v2);
 }
 
 
@@ -908,26 +880,23 @@ void __cdecl CGameStateHandler::SetCorrectWindowSize(void) {
 
 
 // address=[0x148fef0]
-// Decompiled from int __cdecl sub_188FEF0(int a1, int a2)
+// Decompiled from void __cdecl CGameStateHandler::Queue(struct CGameState *(__cdecl *a1)(void *), void *a2)
 void __cdecl CGameStateHandler::Queue(class CGameState * (__cdecl*)(void *) a1, void * a2) {
   
-  _DWORD v3[2]; // [esp+0h] [ebp-8h] BYREF
+  SStateCommand v2; // [esp+0h] [ebp-8h] BYREF
 
-  v3[0] = a1;
-  v3[1] = a2;
-  return std::list<SStateCommand>::push_back(v3);
+  v2.m_pStateFactory = a1;
+  v2.m_pFactoryArgument = a2;
+  std::list<SStateCommand>::push_back((int)&v2);
 }
 
 
 // address=[0x1490010]
-// Decompiled from int __cdecl sub_1890010(int a1, int a2)
+// Decompiled from void __cdecl CGameStateHandler::Switch(struct CGameState *(__cdecl *a1)(void *), void *a2)
 void __cdecl CGameStateHandler::Switch(class CGameState * (__cdecl*)(void *) a1, void * a2) {
   
-  int result; // eax
-
-  result = CGameStateHandler::Queue(a1, a2);
+  CGameStateHandler::Queue((int)a1, (int)a2);
   CGameStateHandler::m_bWantSwitch = 1;
-  return result;
 }
 
 
@@ -1193,119 +1162,74 @@ void __cdecl CGameStateHandler::PerformPendingFullScreenEnterOrExit(void a1) {
 // Decompiled from char __cdecl CGameStateHandler::BuildInitRenderCfg(bool a1, bool a2)
 bool __cdecl CGameStateHandler::BuildInitRenderCfg(bool a1, bool a2) {
   
-  int *v2; // eax
-  char GfxFiltering; // al
+  bool GfxFiltering; // al
   char GfxLandscapeHardware; // al
   char GfxObjectHardware; // al
-  const CHAR *v6; // eax
+  char *v5; // eax
   bool IsFiltering; // al
   bool IsHQTextureSet; // al
-  int v10[16]; // [esp-34h] [ebp-FCh] BYREF
-  char v11[16]; // [esp+Ch] [ebp-BCh] BYREF
-  CEvn_Event *v12; // [esp+1Ch] [ebp-ACh]
-  CEvn_Event *v13; // [esp+20h] [ebp-A8h]
-  CEvn_Event *v14; // [esp+24h] [ebp-A4h]
-  CEvn_Event *v15; // [esp+28h] [ebp-A0h]
-  int v16; // [esp+2Ch] [ebp-9Ch] BYREF
-  BOOL v17; // [esp+30h] [ebp-98h]
-  int v18; // [esp+34h] [ebp-94h]
-  int v19; // [esp+38h] [ebp-90h]
-  int v20; // [esp+3Ch] [ebp-8Ch] BYREF
-  int v21; // [esp+40h] [ebp-88h] BYREF
-  bool v22; // [esp+48h] [ebp-80h]
-  bool v23; // [esp+49h] [ebp-7Fh]
-  bool v24; // [esp+4Ah] [ebp-7Eh]
+  _BYTE v9[52]; // [esp-34h] [ebp-FCh] BYREF
+  char v10[16]; // [esp+Ch] [ebp-BCh] BYREF
+  struct CEvn_Event *v11; // [esp+1Ch] [ebp-ACh]
+  struct CEvn_Event *v12; // [esp+20h] [ebp-A8h]
+  struct CEvn_Event *v13; // [esp+24h] [ebp-A4h]
+  struct CEvn_Event *v14; // [esp+28h] [ebp-A0h]
+  int v15; // [esp+2Ch] [ebp-9Ch] BYREF
+  BOOL v16; // [esp+30h] [ebp-98h]
+  int v17; // [esp+34h] [ebp-94h]
+  int v18; // [esp+38h] [ebp-90h]
+  int v19; // [esp+3Ch] [ebp-8Ch] BYREF
+  int v20; // [esp+40h] [ebp-88h] BYREF
+  bool v21; // [esp+48h] [ebp-80h]
+  bool v22; // [esp+49h] [ebp-7Fh]
+  bool v23; // [esp+4Ah] [ebp-7Eh]
   char inited; // [esp+4Bh] [ebp-7Dh]
-  _DWORD v26[6]; // [esp+4Ch] [ebp-7Ch] BYREF
-  _DWORD v27[6]; // [esp+64h] [ebp-64h] BYREF
-  char v28[28]; // [esp+7Ch] [ebp-4Ch] BYREF
-  int v29; // [esp+98h] [ebp-30h]
-  int v30; // [esp+9Ch] [ebp-2Ch]
-  int v31; // [esp+A0h] [ebp-28h]
-  int v32; // [esp+A4h] [ebp-24h]
-  int v33; // [esp+A8h] [ebp-20h]
-  int v34; // [esp+ACh] [ebp-1Ch]
-  int v35; // [esp+B0h] [ebp-18h]
-  int v36; // [esp+B4h] [ebp-14h]
-  int v37; // [esp+C4h] [ebp-4h]
+  CEvn_Event v25; // [esp+4Ch] [ebp-7Ch] BYREF
+  CEvn_Event v26; // [esp+64h] [ebp-64h] BYREF
+  char v27[28]; // [esp+7Ch] [ebp-4Ch] BYREF
+  struct tagRECT v28; // [esp+98h] [ebp-30h] MAPDST
+  int v30; // [esp+C4h] [ebp-4h]
 
-  v17 = a2 && !g_pGame;
-  byte_3F45605 = v17;
+  v16 = a2 && !g_pGame;
+  CGameStateHandler::m_sRenderCfg.m_bGuiOnly = v16;
   CGameStateHandler::PerformPendingFullScreenEnterOrExit();
-  v2 = (int *)sub_148D8B0(v11);
-  v29 = *v2;
-  v30 = v2[1];
-  v31 = v2[2];
-  v32 = v2[3];
-  v33 = v29;
-  v34 = v30;
-  v35 = v31;
-  v36 = v32;
-  byte_3F45606 = CDebugInfo::IsWindowsNT40();
-  dword_3F4560C = (int)g_hWnd;
-  dword_3F45610 = v35 - v33;
-  dword_3F45614 = v36 - v34;
-  dword_3F45618 = v33;
-  dword_3F4561C = v34;
+  v28 = *sub_148D8B0((struct tagRECT *)v10);
+  CGameStateHandler::m_sRenderCfg.m_bD3DInterface = CDebugInfo::IsWindowsNT40();
+  CGameStateHandler::m_sRenderCfg.m_hWnd = g_hWnd;
+  CGameStateHandler::m_sRenderCfg.m_uWidth = v28.right - v28.left;
+  CGameStateHandler::m_sRenderCfg.m_uHeight = v28.bottom - v28.top;
+  *(_QWORD *)&CGameStateHandler::m_sRenderCfg.m_uX = *(_QWORD *)&v28.left;
   GfxFiltering = CGameSettings::GetGfxFiltering();
-  SGfxRenderConfiguration::EnableFiltering((SGfxRenderConfiguration *)&CGameStateHandler::m_sRenderCfg, GfxFiltering);
+  SGfxRenderConfiguration::EnableFiltering(&CGameStateHandler::m_sRenderCfg, GfxFiltering);
   GfxLandscapeHardware = CGameSettings::GetGfxLandscapeHardware();
-  SGfxRenderConfiguration::EnableHardwareLandscapeEngine(
-    (SGfxRenderConfiguration *)&CGameStateHandler::m_sRenderCfg,
-    GfxLandscapeHardware);
+  SGfxRenderConfiguration::EnableHardwareLandscapeEngine(&CGameStateHandler::m_sRenderCfg, GfxLandscapeHardware);
   GfxObjectHardware = CGameSettings::GetGfxObjectHardware();
-  SGfxRenderConfiguration::EnableHardwareObjectEngine(
-    (SGfxRenderConfiguration *)&CGameStateHandler::m_sRenderCfg,
-    GfxObjectHardware);
-  v24 = CGameSettings::GetGfxTextureQuality() != 0;
-  SGfxRenderConfiguration::EnableHQTextureSet((SGfxRenderConfiguration *)&CGameStateHandler::m_sRenderCfg, v24);
-  v23 = CGameSettings::GetGfxPureSoftwareMode() != 0;
-  SGfxRenderConfiguration::SetPureSoftwareMode((SGfxRenderConfiguration *)&CGameStateHandler::m_sRenderCfg, v23);
-  v22 = CGameSettings::GetGfxForceBlit() != 0;
-  SGfxRenderConfiguration::ForceBlit((SGfxRenderConfiguration *)&CGameStateHandler::m_sRenderCfg, v22);
+  SGfxRenderConfiguration::EnableHardwareObjectEngine(&CGameStateHandler::m_sRenderCfg, GfxObjectHardware);
+  v23 = CGameSettings::GetGfxTextureQuality() != 0;
+  SGfxRenderConfiguration::EnableHQTextureSet(&CGameStateHandler::m_sRenderCfg, v23);
+  v22 = CGameSettings::GetGfxPureSoftwareMode() != 0;
+  SGfxRenderConfiguration::SetPureSoftwareMode(&CGameStateHandler::m_sRenderCfg, v22);
+  v21 = CGameSettings::GetGfxForceBlit() != 0;
+  SGfxRenderConfiguration::ForceBlit(&CGameStateHandler::m_sRenderCfg, v21);
+  v19 = 0;
   v20 = 0;
-  v21 = 0;
-  v16 = 0;
+  v15 = 0;
   if ( a1 )
   {
-    qmemcpy(&v10[4], &CGameStateHandler::m_sRenderCfg, 0x24u);
-    inited = IGfxEngine::RebuildRenderEnvironment(
-               g_pGfxEngine,
-               v10[4],
-               v10[5],
-               v10[6],
-               v10[7],
-               v10[8],
-               v10[9],
-               v10[10],
-               v10[11],
-               v10[12]);
+    qmemcpy(&v9[0x10], &CGameStateHandler::m_sRenderCfg, 0x24u);
+    inited = IGfxEngine::RebuildRenderEnvironment(g_pGfxEngine, *(struct SGfxRenderConfiguration *)&v9[16]);
   }
   else
   {
-    LOBYTE(v10[9]) = CDebugInfo::IsMMX();
-    qmemcpy(v10, &CGameStateHandler::m_sRenderCfg, 0x24u);
-    inited = IGfxEngine::InitEngine(
-               g_pGfxEngine,
-               v10[0],
-               v10[1],
-               v10[2],
-               v10[3],
-               v10[4],
-               v10[5],
-               v10[6],
-               v10[7],
-               v10[8],
-               v10[9],
-               &v20,
-               &v21,
-               &v16);
-    if ( v16 == 27 )
+    v9[36] = CDebugInfo::IsMMX();
+    qmemcpy(v9, &CGameStateHandler::m_sRenderCfg, 0x24u);
+    inited = IGfxEngine::InitEngine(g_pGfxEngine, *(struct SGfxRenderConfiguration *)v9, v9[36], &v19, &v20, &v15);
+    if ( v15 == 27 )
     {
       CTrace::Print("GameStateHandler: HARDWARE OBJECTS IS DISABLED!");
       CGameSettings::SetAlwaysHardwareObjectImpossible(1);
     }
-    if ( v21 )
+    if ( v20 )
     {
       CTrace::Print("GameStateHandler: HARDWARE IS COMPLETELY DISABLED!");
       CGameSettings::SetAlwaysHardwareImpossible(1);
@@ -1314,53 +1238,41 @@ bool __cdecl CGameStateHandler::BuildInitRenderCfg(bool a1, bool a2) {
   }
   if ( !inited )
   {
-    if ( v21 == 26 )
+    if ( v20 == 26 )
     {
-      v15 = CEvn_Event::CEvn_Event((CEvn_Event *)v27, 0x6Eu, 1u, 0, 0);
-      v14 = v15;
-      v37 = 0;
-      IEventEngine::SendAMessage(g_pEvnEngine, v15);
-      v37 = -1;
-      CEvn_Event::~CEvn_Event(v27);
+      v14 = CEvn_Event::CEvn_Event(&v26, 0x6Eu, 1u, 0, 0);
+      v13 = v14;
+      v30 = 0;
+      IEventEngine::SendAMessage(g_pEvnEngine, v14);
+      v30 = -1;
+      CEvn_Event::~CEvn_Event(&v26);
     }
     else
     {
-      v13 = CEvn_Event::CEvn_Event((CEvn_Event *)v26, 0x6Eu, 0, 0, 0);
-      v12 = v13;
-      v37 = 1;
-      IEventEngine::SendAMessage(g_pEvnEngine, v13);
-      v37 = -1;
-      CEvn_Event::~CEvn_Event(v26);
+      v12 = CEvn_Event::CEvn_Event(&v25, 0x6Eu, 0, 0, 0);
+      v11 = v12;
+      v30 = 1;
+      IEventEngine::SendAMessage(g_pEvnEngine, v12);
+      v30 = -1;
+      CEvn_Event::~CEvn_Event(&v25);
     }
     CTrace::Print("CGameStateHandler.cpp: Gamesettings reduced to default. Stored gfx settings won't work !!");
-    SGfxRenderConfiguration::EnableFiltering((SGfxRenderConfiguration *)&CGameStateHandler::m_sRenderCfg, 0);
-    SGfxRenderConfiguration::EnableHardwareLandscapeEngine(
-      (SGfxRenderConfiguration *)&CGameStateHandler::m_sRenderCfg,
-      0);
-    SGfxRenderConfiguration::EnableHardwareObjectEngine((SGfxRenderConfiguration *)&CGameStateHandler::m_sRenderCfg, 0);
-    SGfxRenderConfiguration::EnableHQTextureSet((SGfxRenderConfiguration *)&CGameStateHandler::m_sRenderCfg, 1);
-    dword_3F45610 = *(&g_pResolutions + 2);
-    dword_3F45614 = *(&dword_3D7AAE8 + 2);
-    qmemcpy(&v10[4], &CGameStateHandler::m_sRenderCfg, 0x24u);
-    inited = IGfxEngine::RebuildRenderEnvironment(
-               g_pGfxEngine,
-               v10[4],
-               v10[5],
-               v10[6],
-               v10[7],
-               v10[8],
-               v10[9],
-               v10[10],
-               v10[11],
-               v10[12]);
+    SGfxRenderConfiguration::EnableFiltering(&CGameStateHandler::m_sRenderCfg, 0);
+    SGfxRenderConfiguration::EnableHardwareLandscapeEngine(&CGameStateHandler::m_sRenderCfg, 0);
+    SGfxRenderConfiguration::EnableHardwareObjectEngine(&CGameStateHandler::m_sRenderCfg, 0);
+    SGfxRenderConfiguration::EnableHQTextureSet(&CGameStateHandler::m_sRenderCfg, 1);
+    CGameStateHandler::m_sRenderCfg.m_uWidth = g_pResolutions[1].m_iWidth;
+    CGameStateHandler::m_sRenderCfg.m_uHeight = g_pResolutions[1].m_iHeight;
+    qmemcpy(&v9[16], &CGameStateHandler::m_sRenderCfg, 0x24u);
+    inited = IGfxEngine::RebuildRenderEnvironment(g_pGfxEngine, *(struct SGfxRenderConfiguration *)&v9[16]);
   }
   if ( !inited && !a1 )
   {
-    std::string::string();
-    v37 = 2;
-    CTrace::Print("ERROR: GfxEngine could not be initialized: SWError %d, HWError %d!", v20, v21);
-    v19 = v20;
-    if ( v20 > 0 && (v19 <= 4 || v19 == 6) )
+    std::string::string((std::string *)v27);
+    v30 = 2;
+    CTrace::Print("ERROR: GfxEngine could not be initialized: SWError %d, HWError %d!", v19, v20);
+    v18 = v19;
+    if ( v19 > 0 && (v18 <= 4 || v18 == 6) )
       std::string::operator+=("Software 3D: The Settlers IV needs at least DirectX7.0 for Windows 95/98/2000 or DirectX3."
                               "0 for Windows NT4.0\n"
                               "Software 3D: Die Siedler IV ben?tigt mindestens DirectX7.0 unter Windows 95/98/2000 und Di"
@@ -1369,8 +1281,8 @@ bool __cdecl CGameStateHandler::BuildInitRenderCfg(bool a1, bool a2) {
       std::string::operator+=("Software 3D: Error initializing Graphic Interface!\n"
                               "Software 3D: Fehler beim Starten der Grafikausgabe!");
     std::string::operator+=("\n\n");
-    v18 = v21;
-    if ( v21 > 0 && (v18 <= 4 || v18 == 6) )
+    v17 = v20;
+    if ( v20 > 0 && (v17 <= 4 || v17 == 6) )
       std::string::operator+=("Hardware 3D: The Settlers IV needs at least DirectX7.0 for Windows 95/98/2000 or DirectX3."
                               "0 for Windows NT4.0\n"
                               "Hardware 3D: Die Siedler IV ben?tigt mindestens DirectX7.0 unter Windows 95/98/2000 und Di"
@@ -1378,17 +1290,17 @@ bool __cdecl CGameStateHandler::BuildInitRenderCfg(bool a1, bool a2) {
     else
       std::string::operator+=("Hardware 3D: Error initializing Graphic Interface!\n"
                               "Hardware 3D: Fehler beim Starten der Grafikausgabe!");
-    v10[12] = 48;
-    v10[11] = (int)"S4";
-    v6 = (const CHAR *)std::string::c_str(v28);
-    MessageBoxA(g_hWnd, v6, (LPCSTR)v10[11], v10[12]);
+    *(_DWORD *)&v9[48] = 48;
+    *(_DWORD *)&v9[44] = "S4";
+    v5 = std::string::c_str((std::string *)v27);
+    MessageBoxA(g_hWnd, v5, *(LPCSTR *)&v9[44], *(UINT *)&v9[48]);
     j__exit(0);
   }
   if ( g_pGUIEngine )
     IGuiEngine::RefreshAllSurfaces(g_pGUIEngine);
-  IsFiltering = SGfxRenderConfiguration::IsFiltering((SGfxRenderConfiguration *)&CGameStateHandler::m_sRenderCfg);
+  IsFiltering = SGfxRenderConfiguration::IsFiltering(&CGameStateHandler::m_sRenderCfg);
   CGameSettings::SetGfxFiltering(IsFiltering);
-  IsHQTextureSet = SGfxRenderConfiguration::IsHQTextureSet((SGfxRenderConfiguration *)&CGameStateHandler::m_sRenderCfg);
+  IsHQTextureSet = SGfxRenderConfiguration::IsHQTextureSet(&CGameStateHandler::m_sRenderCfg);
   CGameSettings::SetGfxTextureQuality(IsHQTextureSet);
   return 1;
 }
