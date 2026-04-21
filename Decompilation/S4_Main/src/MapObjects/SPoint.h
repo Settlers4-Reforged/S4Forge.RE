@@ -41,6 +41,7 @@ class SPoint8 {
 
 public:
     SPoint8() = default;
+
     SPoint8(int8_t _iX, int8_t _iY);
 };
 

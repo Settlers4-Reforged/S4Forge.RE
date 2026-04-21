@@ -1,3 +1,4 @@
+#if FALSE
 #include "SSurroundingPoint8.h"
 
 // Definitions for class SSurroundingPoint8
@@ -34,3 +35,4 @@ int  SSurroundingPoint8::Radius(void)const {
 }
 
 
+#endif // Already implemented

@@ -1190,34 +1190,34 @@ void  CWalkingBase::AttachWalking(class CWalkingBase * a2) {
 
 
 // address=[0x15f8c90]
-// Decompiled from _DWORD *__thiscall CWalkingBase::DetachWalking(CWalkingBase *this)
+// Decompiled from CWalkingBase *__thiscall CWalkingBase::DetachWalking(CWalkingBase *this)
 class CWalking *  CWalkingBase::DetachWalking(void) {
   
-  int v2; // [esp+0h] [ebp-10h]
-  int i; // [esp+4h] [ebp-Ch]
-  _DWORD *v4; // [esp+8h] [ebp-8h]
+  CWalkingBase *pNextWalking; // [esp+0h] [ebp-10h]
+  CWalkingBase *pWalking; // [esp+4h] [ebp-Ch]
+  CWalkingBase *m_pNextWalking; // [esp+8h] [ebp-8h]
 
   this->m_sData.m_iWalkToXY = this->m_sData.m_iLeaderWalkToXY;
   if ( this->m_sData.m_pPrevWalking )
   {
-    if ( *(CWalkingBase **)(this->m_sData.m_pPrevWalking + 184) != this
+    if ( this->m_sData.m_pPrevWalking->m_sData.m_pNextWalking != this
       && BBSupportDbgReport(2, "Pathing\\Walking.cpp", 372, "m_sData.m_pPrevWalking->m_sData.m_pNextWalking == this") == 1 )
     {
       __debugbreak();
     }
     if ( this->m_sData.m_pNextWalking )
     {
-      if ( *(CWalkingBase **)(this->m_sData.m_pNextWalking + 180) != this
+      if ( this->m_sData.m_pNextWalking->m_sData.m_pPrevWalking != this
         && BBSupportDbgReport(2, "Pathing\\Walking.cpp", 376, "m_sData.m_pNextWalking->m_sData.m_pPrevWalking == this") == 1 )
       {
         __debugbreak();
       }
-      *(_DWORD *)(this->m_sData.m_pPrevWalking + 184) = this->m_sData.m_pNextWalking;
-      *(_DWORD *)(this->m_sData.m_pNextWalking + 180) = this->m_sData.m_pPrevWalking;
+      this->m_sData.m_pPrevWalking->m_sData.m_pNextWalking = this->m_sData.m_pNextWalking;
+      this->m_sData.m_pNextWalking->m_sData.m_pPrevWalking = this->m_sData.m_pPrevWalking;
     }
     else
     {
-      *(_DWORD *)(this->m_sData.m_pPrevWalking + 184) = 0;
+      this->m_sData.m_pPrevWalking->m_sData.m_pNextWalking = 0;
     }
     this->m_sData.m_pPrevWalking = 0;
     this->m_sData.m_pNextWalking = 0;
@@ -1226,19 +1226,19 @@ class CWalking *  CWalkingBase::DetachWalking(void) {
   }
   else
   {
-    v4 = (_DWORD *)this->m_sData.m_pNextWalking;
+    m_pNextWalking = this->m_sData.m_pNextWalking;
     this->m_sData.m_pPrevWalking = 0;
     this->m_sData.m_pNextWalking = 0;
     this->m_sData.m_pLatestWalking = 0;
-    if ( !v4 )
-      return v4;
-    v4[45] = 0;
-    v4[47] = 0;
-    for ( i = v4[46]; i; i = v2 )
+    if ( !m_pNextWalking )
+      return m_pNextWalking;
+    m_pNextWalking->m_sData.m_pPrevWalking = 0;
+    m_pNextWalking->m_sData.m_pLatestWalking = 0;
+    for ( pWalking = m_pNextWalking->m_sData.m_pNextWalking; pWalking; pWalking = pNextWalking )
     {
-      v2 = *(_DWORD *)(i + 184);
-      if ( v2
-        && *(_DWORD *)(v2 + 180) != i
+      pNextWalking = pWalking->m_sData.m_pNextWalking;
+      if ( pNextWalking
+        && pNextWalking->m_sData.m_pPrevWalking != pWalking
         && BBSupportDbgReport(
              2,
              "Pathing\\Walking.cpp",
@@ -1247,86 +1247,76 @@ class CWalking *  CWalkingBase::DetachWalking(void) {
       {
         __debugbreak();
       }
-      *(_DWORD *)(i + 188) = v4;
+      pWalking->m_sData.m_pLatestWalking = m_pNextWalking;
     }
-    return v4;
+    return m_pNextWalking;
   }
 }
 
 
 // address=[0x15f8e70]
-// Decompiled from _DWORD *__thiscall CWalkingBase::GroupLeaderWalking(CWalkingBase *this, int a2, int a3)
+// Decompiled from void __thiscall CWalkingBase::GroupLeaderWalking(CWalkingBase *this, int a2, int a3)
 void  CWalkingBase::GroupLeaderWalking(int a2, int a3) {
   
-  _DWORD *result; // eax
+  int v3; // eax
   int v4; // eax
   int v5; // eax
-  int v6; // eax
-  unsigned int v7; // [esp-4h] [ebp-2Ch]
-  int v8; // [esp+0h] [ebp-28h]
-  _DWORD *v10; // [esp+8h] [ebp-20h]
-  int v11; // [esp+Ch] [ebp-1Ch]
-  int v12; // [esp+10h] [ebp-18h]
-  int v13; // [esp+14h] [ebp-14h]
-  _DWORD *v14; // [esp+18h] [ebp-10h]
-  unsigned int v15; // [esp+1Ch] [ebp-Ch]
-  unsigned int v16; // [esp+20h] [ebp-8h]
-  int v17; // [esp+24h] [ebp-4h]
+  unsigned int v6; // [esp-4h] [ebp-2Ch]
+  int v7; // [esp+0h] [ebp-28h]
+  int v9; // [esp+8h] [ebp-20h]
+  int v10; // [esp+Ch] [ebp-1Ch]
+  int v11; // [esp+10h] [ebp-18h]
+  int v12; // [esp+14h] [ebp-14h]
+  CWalkingBase *m_pNextWalking; // [esp+18h] [ebp-10h]
+  unsigned int v14; // [esp+1Ch] [ebp-Ch]
+  unsigned int v15; // [esp+20h] [ebp-8h]
+  int v16; // [esp+24h] [ebp-4h]
 
-  v13 = Y16X16::UnpackXFast(a2);
-  v12 = Y16X16::UnpackYFast(a2);
-  result = (_DWORD *)CWorldManager::SectorId(v13, v12);
-  v10 = result;
-  if ( result )
+  v12 = Y16X16::UnpackXFast(a2);
+  v11 = Y16X16::UnpackYFast(a2);
+  v9 = CWorldManager::SectorId(v12, v11);
+  if ( v9 )
   {
-    v14 = *(_DWORD **)this->m_sData.m_pNextWalking;
-    v17 = 1;
-    v8 = 0;
-    v11 = 0;
-    while ( v14 )
+    m_pNextWalking = this->m_sData.m_pNextWalking;
+    v16 = 1;
+    v7 = 0;
+    v10 = 0;
+    while ( m_pNextWalking )
     {
-      v15 = v13 + 2 * CSpiralOffsets::DeltaX(v17);
-      v16 = v12 + 2 * CSpiralOffsets::DeltaY(v17);
+      v14 = v12 + 2 * CSpiralOffsets::DeltaX(v16);
+      v15 = v11 + 2 * CSpiralOffsets::DeltaY(v16);
       while ( 1 )
       {
-        if ( CWorldManager::InWorld(v15, v16) )
+        if ( CWorldManager::InWorld(v14, v15) )
         {
-          v4 = CWorldManager::Index(v15, v16);
-          if ( (_DWORD *)CWorldManager::SectorId(v4) == v10 )
+          v3 = CWorldManager::Index(v14, v15);
+          if ( CWorldManager::SectorId(v3) == v9 )
           {
-            v5 = CWorldManager::Index(v15, v16);
-            if ( !CWorldManager::IsBlockedLand(v5) )
+            v4 = CWorldManager::Index(v14, v15);
+            if ( !CWorldManager::IsBlockedLand(v4) )
               break;
           }
         }
-        if ( ++v17 > 4000 )
-          v17 = 1;
-        v15 = v13 + 2 * CSpiralOffsets::DeltaX(v17);
-        v16 = v12 + 2 * CSpiralOffsets::DeltaY(v17);
-        if ( ++v11 > 200000 && BBSupportDbgReport(1, "Pathing\\Walking.cpp", 629, "Endless loop detected!") == 1 )
+        if ( ++v16 > 4000 )
+          v16 = 1;
+        v14 = v12 + 2 * CSpiralOffsets::DeltaX(v16);
+        v15 = v11 + 2 * CSpiralOffsets::DeltaY(v16);
+        if ( ++v10 > 200000 && BBSupportDbgReport(1, "Pathing\\Walking.cpp", 629, "Endless loop detected!") == 1 )
           __debugbreak();
       }
-      v7 = (a3 | CWalkingBase::Flags(this)) & 0xFFF43060;
-      v6 = Y16X16::PackXYFast(v15, v16);
-      (*(void (__thiscall **)(_DWORD *, int, unsigned int))(*v14 + 8))(v14, v6, v7);
-      if ( ++v17 > 4000 )
-        v17 = 1;
-      ++v8;
-      result = v14;
-      v14 = (_DWORD *)v14[46];
+      v6 = (a3 | CWalkingBase::Flags(this)) & 0xFFF43060;
+      v5 = Y16X16::PackXYFast(v14, v15);
+      m_pNextWalking->InitB(m_pNextWalking, v5, v6);
+      if ( ++v16 > 4000 )
+        v16 = 1;
+      ++v7;
+      m_pNextWalking = m_pNextWalking->m_sData.m_pNextWalking;
     }
   }
-  else
+  else if ( BBSupportDbgReport(1, "Pathing\\Walking.cpp", 642, "CWalkingBase::GroupLeaderWalking(): Invalid waypoint!") == 1 )
   {
-    result = (_DWORD *)BBSupportDbgReport(
-                         1,
-                         "Pathing\\Walking.cpp",
-                         642,
-                         "CWalkingBase::GroupLeaderWalking(): Invalid waypoint!");
-    if ( result == (_DWORD *)1 )
-      __debugbreak();
+    __debugbreak();
   }
-  return result;
 }
 
 

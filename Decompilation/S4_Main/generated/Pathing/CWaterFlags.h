@@ -49,7 +49,7 @@ protected:
     static void __cdecl PlaceShip(int a1);
 
     // address=[0x15fcfc0]
-    static void __cdecl RemoveShip(int _iXY);
+    static void __cdecl RemoveShip(int a1);
 
     // address=[0x15fe7a0]
     static void __cdecl SetWaterFlags(int a1, int a2);

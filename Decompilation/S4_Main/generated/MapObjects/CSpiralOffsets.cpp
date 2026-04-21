@@ -6,7 +6,7 @@
 // Decompiled from int __cdecl CSpiralOffsets::DeltaX(int a1)
 int __cdecl CSpiralOffsets::DeltaX(int a1) {
   
-  return CSpiralOffsets::m_sOffsets[4 * a1];
+  return CSpiralOffsets__m_sOffsets[a1].m_iDeltaX;
 }
 
 
@@ -14,7 +14,7 @@ int __cdecl CSpiralOffsets::DeltaX(int a1) {
 // Decompiled from int __cdecl CSpiralOffsets::DeltaY(int a1)
 int __cdecl CSpiralOffsets::DeltaY(int a1) {
   
-  return byte_3E39621[4 * a1];
+  return CSpiralOffsets__m_sOffsets[a1].m_iDeltaY;
 }
 
 
@@ -22,7 +22,7 @@ int __cdecl CSpiralOffsets::DeltaY(int a1) {
 // Decompiled from int __cdecl CSpiralOffsets::First(int a1)
 int __cdecl CSpiralOffsets::First(int a1) {
   
-  return (unsigned __int16)CSpiralOffsets::m_sFirstLast[2 * a1];
+  return CSpiralOffsets::m_sFirstLast[a1].m_uFirst;
 }
 
 
@@ -30,7 +30,7 @@ int __cdecl CSpiralOffsets::First(int a1) {
 // Decompiled from int __cdecl CSpiralOffsets::Last(int a1)
 int __cdecl CSpiralOffsets::Last(int a1) {
   
-  return (unsigned __int16)word_3E394F2[2 * a1];
+  return CSpiralOffsets::m_sFirstLast[a1].m_uLast;
 }
 
 
@@ -38,7 +38,7 @@ int __cdecl CSpiralOffsets::Last(int a1) {
 // Decompiled from int __cdecl CSpiralOffsets::Radius(int a1)
 int __cdecl CSpiralOffsets::Radius(int a1) {
   
-  return (unsigned __int8)byte_3E39622[4 * a1];
+  return CSpiralOffsets__m_sOffsets[a1].m_iRadius;
 }
 
 
@@ -46,7 +46,7 @@ int __cdecl CSpiralOffsets::Radius(int a1) {
 // Decompiled from int __cdecl CSpiralOffsets::Direction(int a1)
 int __cdecl CSpiralOffsets::Direction(int a1) {
   
-  return (unsigned __int8)byte_3E39623[4 * a1];
+  return CSpiralOffsets__m_sOffsets[a1].m_iDirection;
 }
 
 
@@ -62,7 +62,7 @@ int __cdecl CSpiralOffsets::PseudoDistanceSquareEx(int a1, int a2) {
 // Decompiled from int __cdecl CSpiralOffsets::MaxGridDistance(int a1)
 int __cdecl CSpiralOffsets::MaxGridDistance(int a1) {
   
-  return (unsigned __int8)CSpiralOffsets::m_uMaxDists[a1];
+  return CSpiralOffsets::m_uMaxDists[a1];
 }
 
 

@@ -25,7 +25,7 @@ protected:
     virtual bool  FindPathAStar64(int a2, int a3, class CDirCache & a4);
 
     // address=[0x15f9420]
-    virtual int  IdleWalk(int _iXY, int a3);
+    virtual int  IdleWalk(int a2, int a3);
 
     // address=[0x15f9810]
     virtual int  SectorId(int a2);

@@ -177,8 +177,8 @@ int  CWalkingCatapult::IdleWalk(int a2, int a3) {
       v7 = -1;
       for ( j = 0; j < SurroundingHexPointsCount(15); ++j )
       {
-        v15 = v6 + SSurroundingPoint8::X(&g_sSurroundingHexPoints8[4 * j]);
-        v14 = v5 + SSurroundingPoint8::Y(&g_sSurroundingHexPoints8[4 * j]);
+        v15 = v6 + SSurroundingPoint8::X(&g_sSurroundingHexPoints8[j]);
+        v14 = v5 + SSurroundingPoint8::Y(&g_sSurroundingHexPoints8[j]);
         if ( CWorldManager::InWorld(v15, v14) )
         {
           v20 = CWorldManager::Index(v15, v14);
