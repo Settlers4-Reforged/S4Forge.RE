@@ -132,3 +132,23 @@ SPoint g_sSurroundingHexPoints[37] = {
     {1, -2},
     {2, -1},
 };
+
+// address=[0x37d98d4]
+int const *const Y16X16::g_iNeighborY16X16Modifiers = new int const[]{
+    1,
+    0x10001,
+    0x10000, -1,
+    -0x10001,
+    -0x10000,
+    1,
+    0x10001,
+    0x10000,
+    -1,
+    -0x10001,
+    -0x10000,
+};
+
+// address=[0x14d8770]
+int __cdecl Y16X16::NeighborModifier(int a1) {
+    return g_iNeighborY16X16Modifiers[a1];
+}

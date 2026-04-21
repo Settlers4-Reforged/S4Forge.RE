@@ -16,6 +16,9 @@ namespace Y16X16 {
     // address=[0x15d7190]
     int __cdecl XYNotNegative(int);
 
+    // address=[0x14d8770]
+    int __cdecl NeighborModifier(int);
+
     // address=[0x1568700]
     int __cdecl DeltaXFast(int, int);
 
@@ -27,6 +30,8 @@ namespace Y16X16 {
 
     // address=[0x1592da0]
     int __cdecl DistanceFast(int, int);
+
+    extern int const *const g_iNeighborY16X16Modifiers;
 } // namespace Y16X16
 
 namespace Grid {
