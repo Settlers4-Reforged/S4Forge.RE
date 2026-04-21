@@ -3,6 +3,10 @@
 
 #include "defines.h"
 
+#include
+#include
+#include#include
+
 class SPoint {
 public:
     // address=[0x15ddb00]
@@ -34,6 +38,10 @@ class SPoint8 {
     int8_t y;
 
     friend class SPoint;
+
+public:
+    SPoint8() = default;
+    SPoint8(int8_t _iX, int8_t _iY);
 };
 
 

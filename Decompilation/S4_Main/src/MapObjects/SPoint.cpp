@@ -38,6 +38,11 @@ int SPoint::Y(void) const {
   return this->y;
 }
 
+SPoint8::SPoint8(int8_t _iX, int8_t _iY) {
+  this->x = _iX;
+  this->y = _iY;
+}
+
 
 // address=[0x15ddd20]
 // Decompiled from SPoint *__thiscall SPoint::Zero(SPoint *this)
