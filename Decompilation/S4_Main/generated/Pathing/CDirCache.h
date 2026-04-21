@@ -30,6 +30,12 @@ private:
     // address=[0x15fb1e0]
     static unsigned char __cdecl DecWrap(unsigned char a1);
 
+    // Type information members
+public:
+    BYTE m_iCount;
+    BYTE m_iPointer;
+    BYTE[16] m_aValues;
+
 };
 
 

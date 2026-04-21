@@ -6,7 +6,7 @@
 // Decompiled from int __thiscall SSurroundingPoint8::X(SSurroundingPoint8 *this)
 int  SSurroundingPoint8::X(void)const {
   
-  return *(char *)this;
+  return this->m_iX;
 }
 
 
@@ -14,15 +14,15 @@ int  SSurroundingPoint8::X(void)const {
 // Decompiled from int __thiscall SSurroundingPoint8::Y(SSurroundingPoint8 *this)
 int  SSurroundingPoint8::Y(void)const {
   
-  return *((char *)this + 1);
+  return this->m_iY;
 }
 
 
 // address=[0x15ddca0]
-// Decompiled from SSurroundingPoint8 *__thiscall SSurroundingPoint8::Point(SSurroundingPoint8 *this)
+// Decompiled from const struct SPoint8 *__thiscall SSurroundingPoint8::Point(SSurroundingPoint8 *this)
 struct SPoint8 const &  SSurroundingPoint8::Point(void)const {
   
-  return this;
+  return (const struct SPoint8 *)this;
 }
 
 
@@ -30,7 +30,7 @@ struct SPoint8 const &  SSurroundingPoint8::Point(void)const {
 // Decompiled from int __thiscall SSurroundingPoint8::Radius(SSurroundingPoint8 *this)
 int  SSurroundingPoint8::Radius(void)const {
   
-  return *((unsigned __int8 *)this + 2);
+  return (unsigned __int8)this->m_iRadius;
 }
 
 

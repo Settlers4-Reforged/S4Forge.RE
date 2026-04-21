@@ -1,3 +1,4 @@
+#if FALSE
 #include "CWalkingWorker.h"
 
 // Definitions for class CWalkingWorker
@@ -62,3 +63,4 @@ bool  CWalkingWorker::FindPathAStar64(int a2, int a3, class CDirCache & a4) {
 }
 
 
+#endif // Already implemented

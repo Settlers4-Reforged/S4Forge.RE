@@ -334,7 +334,7 @@ int __cdecl CTiling::SearchForNearestTileElement(int a1, int a2, enum T_TILING_T
     for ( i = 1; i < SurroundingHexPointsCount(15); ++i )
     {
       v7 = v13 + g_sSurroundingHexPoints8[4 * i];
-      v8 = v12 + byte_37D8D91[4 * i];
+      v8 = v12 + MEMORY[0x37D8D91][4 * i];
       v5 = CTilingWorld::WorldIndex(v7, v8);
       if ( CTileIdRef::TileId((CTileIdRef *)v11, v5) == a2 )
         return Y16X16::PackXYFast(v7, v8);
@@ -345,7 +345,7 @@ int __cdecl CTiling::SearchForNearestTileElement(int a1, int a2, enum T_TILING_T
     for ( j = 1; j < SurroundingHexPointsCount(15); ++j )
     {
       v9 = v13 + g_sSurroundingHexPoints8[4 * j];
-      v10 = v12 + byte_37D8D91[4 * j];
+      v10 = v12 + MEMORY[0x37D8D91][4 * j];
       if ( CTilingWorld::WorldInWorld(v9, v10) )
       {
         v4 = CTilingWorld::WorldIndex(v9, v10);

@@ -322,7 +322,6 @@ FOLDER_MAP = {
         "CFixCursor",
         "CBlitFX",
         "CColorGradient",
-        "CDirCache",
     ],
 
     "Gfx/Compiler/": [
@@ -839,6 +838,7 @@ FOLDER_MAP = {
         "CAlliances",
         "CAreaList",
         "CDebugGridTest",
+        "CDirCache",
         "CFogging",
         "CInfluMap",
         "CLinks",

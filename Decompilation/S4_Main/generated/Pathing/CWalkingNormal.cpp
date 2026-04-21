@@ -1,3 +1,4 @@
+#if FALSE
 #include "CWalkingNormal.h"
 
 // Definitions for class CWalkingNormal
@@ -29,3 +30,4 @@ enum T_WALKING_TYPE const  CWalkingNormal::GetWalkingType(void) {
 }
 
 
+#endif // Already implemented

@@ -1,39 +1,32 @@
+#if FALSE
 #include "CDirCache.h"
 
 // Definitions for class CDirCache
 
 // address=[0x15d6690]
-// Decompiled from CDirCache *__thiscall CDirCache::Init(CDirCache *this)
+// Decompiled from void __thiscall CDirCache::Init(CDirCache *this)
 void  CDirCache::Init(void) {
   
-  CDirCache *result; // eax
-
-  result = this;
-  *(_BYTE *)this = 0;
-  *((_BYTE *)this + 1) = 15;
-  return result;
+  this->m_iCount = 0;
+  this->m_iPointer = 15;
 }
 
 
 // address=[0x15d69a0]
-// Decompiled from int __thiscall CDirCache::PushBack(CDirCache *this, char a2)
+// Decompiled from void __thiscall CDirCache::PushBack(CDirCache *this, BYTE a2)
 void  CDirCache::PushBack(int a2) {
   
-  int result; // eax
-
-  *(_BYTE *)this += *(unsigned __int8 *)this < 0x10u;
-  *((_BYTE *)this + 1) = CDirCache::IncWrap(*((_BYTE *)this + 1));
-  result = *((unsigned __int8 *)this + 1);
-  *((_BYTE *)this + result + 2) = a2;
-  return result;
+  this->m_iCount += this->m_iCount < 16u;
+  this->m_iPointer = CDirCache::IncWrap(this->m_iPointer);
+  this->m_aValues[this->m_iPointer] = a2;
 }
 
 
 // address=[0x15faff0]
-// Decompiled from int __thiscall CDirCache::operator[](_BYTE *this, char a2)
+// Decompiled from int __thiscall CDirCache::operator[](CDirCache *this, char a2)
 int  CDirCache::operator[](int a2) {
   
-  return (unsigned __int8)this[((this[1] - a2) & 0xF) + 2];
+  return this->m_aValues[(this->m_iPointer - a2) & 0xF];
 }
 
 
@@ -41,7 +34,7 @@ int  CDirCache::operator[](int a2) {
 // Decompiled from int __thiscall CDirCache::Back(CDirCache *this)
 int  CDirCache::Back(void)const {
   
-  return *((unsigned __int8 *)this + *((unsigned __int8 *)this + 1) + 2);
+  return this->m_iPointer[this->m_iPointer[0] + 1];
 }
 
 
@@ -49,25 +42,21 @@ int  CDirCache::Back(void)const {
 // Decompiled from int __thiscall CDirCache::Count(CDirCache *this)
 int  CDirCache::Count(void)const {
   
-  return *(unsigned __int8 *)this;
+  return this->m_iCount;
 }
 
 
 // address=[0x15fb520]
-// Decompiled from int __thiscall CDirCache::PopBack(CDirCache *this)
+// Decompiled from void __thiscall CDirCache::PopBack(CDirCache *this)
 void  CDirCache::PopBack(void) {
   
-  int result; // eax
-
-  if ( !*(_BYTE *)this
+  if ( !this->m_iCount
     && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\pathing\\AStar.h", 397, string__63) == 1 )
   {
     __debugbreak();
   }
-  --*(_BYTE *)this;
-  LOBYTE(result) = CDirCache::DecWrap(*((_BYTE *)this + 1));
-  *((_BYTE *)this + 1) = result;
-  return result;
+  --this->m_iCount;
+  this->m_iPointer = CDirCache::DecWrap(this->m_iPointer);
 }
 
 
@@ -87,3 +76,4 @@ unsigned char __cdecl CDirCache::DecWrap(unsigned char a1) {
 }
 
 
+#endif // Already implemented

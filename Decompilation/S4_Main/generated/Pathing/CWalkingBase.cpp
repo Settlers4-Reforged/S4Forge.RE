@@ -1,3 +1,4 @@
+#if FALSE
 #include "CWalkingBase.h"
 
 // Definitions for class CWalkingBase
@@ -142,7 +143,7 @@ int  CWalkingBase::Walk(int a2) {
   int Path; // [esp+80h] [ebp-B8h]
   int v30; // [esp+8Ch] [ebp-ACh]
   char v31; // [esp+90h] [ebp-A8h]
-  struct CWalking *v32; // [esp+98h] [ebp-A0h]
+  struct CWalkingBase *v32; // [esp+98h] [ebp-A0h]
   bool v33; // [esp+A0h] [ebp-98h]
   int v34; // [esp+B8h] [ebp-80h]
   int v35; // [esp+BCh] [ebp-7Ch]
@@ -211,7 +212,7 @@ int  CWalkingBase::Walk(int a2) {
     {
       __debugbreak();
     }
-    CWalkingBase::GoalCheck(this, (Y16X16 *)a2);
+    CWalkingBase::GoalCheck(this, a2);
   }
   v49 = 0;
   v48 = 0;
@@ -283,10 +284,10 @@ int  CWalkingBase::Walk(int a2) {
                 {
                   __debugbreak();
                 }
-                v32 = IMovingEntity::Walking(v44);
+                v32 = (struct CWalkingBase *)IMovingEntity::Walking(v44);
                 if ( v32 )
                 {
-                  if ( v32[2].__vftable == (CWalking_vtbl *)6 && v32[10].__vftable == (CWalking_vtbl *)a2 )
+                  if ( v32->m_sData.m_iWalkState == 6 && v32->m_sData.m_iFineWaypoint == a2 )
                   {
                     this->m_sData.m_iWalkState = 9;
                     goto LABEL_16;
@@ -300,14 +301,14 @@ LABEL_50:
           if ( this->m_sData.m_iFineWaypoint == a2 )
           {
             this->m_sData.field_20 = 0;
-            if ( CDirCache::Count((CDirCache *)this->m_sData.gap_48) <= 0 )
+            if ( CDirCache::Count(&this->m_sData.m_cDirCache) <= 0 )
             {
               this->m_sData.m_iWalkState = 9;
               goto LABEL_16;
             }
-            v47 = CDirCache::Back((CDirCache *)this->m_sData.gap_48);
+            v47 = CDirCache::Back(&this->m_sData.m_cDirCache);
             this->m_sData.m_iFineWaypoint = a2 + Y16X16::NeighborModifier(v47);
-            CDirCache::PopBack((CDirCache *)this->m_sData.gap_48);
+            CDirCache::PopBack(&this->m_sData.m_cDirCache);
           }
           else
           {
@@ -410,7 +411,7 @@ LABEL_50:
         }
       case 7:
         this->m_sData.m_iWalkState = 8;
-        CWalkingBase::GoalCheck(this, (Y16X16 *)a2);
+        CWalkingBase::GoalCheck(this, a2);
         if ( this->m_sData.m_iWalkState != 8 )
           CTrace::Print(
             "### CWalkingBase::Walk(): STATE_EX_GOAL_CHECK has changed walk state! New state %i. ###",
@@ -495,27 +496,27 @@ LABEL_119:
               m_iWalkToXY = this->m_sData.m_iWalkToXY;
             else
               m_iWalkToXY = this->m_sData.m_iCoarseWaypointXY;
-            if ( ((unsigned __int8 (__thiscall *)(CWalkingBase *, int, int, _BYTE *))this->FindPathAStar64)(
+            if ( ((unsigned __int8 (__thiscall *)(CWalkingBase *, int, int, CDirCache *))this->FindPathAStar64)(
                    this,
                    a2,
                    m_iWalkToXY,
-                   this->m_sData.gap_48) )
+                   &this->m_sData.m_cDirCache) )
             {
-              if ( CDirCache::Count((CDirCache *)this->m_sData.gap_48) <= 0
+              if ( CDirCache::Count(&this->m_sData.m_cDirCache) <= 0
                 && BBSupportDbgReport(2, "Pathing\\Walking.cpp", 1251, "m_sData.m_cFineWaypoints.Count() > 0") == 1 )
               {
                 __debugbreak();
               }
-              v12 = CDirCache::Back((CDirCache *)this->m_sData.gap_48);
+              v12 = CDirCache::Back(&this->m_sData.m_cDirCache);
               this->m_sData.m_iFineWaypoint = a2 + Y16X16::NeighborModifier(v12);
-              CDirCache::PopBack((CDirCache *)this->m_sData.gap_48);
+              CDirCache::PopBack(&this->m_sData.m_cDirCache);
               if ( this->m_sData.m_pPrevWalking == 0 && this->m_sData.m_pNextWalking != 0 )
               {
-                v21 = CDirCache::Count((CDirCache *)this->m_sData.gap_48);
+                v21 = CDirCache::Count(&this->m_sData.m_cDirCache);
                 m_iFineWaypoint = this->m_sData.m_iFineWaypoint;
                 for ( j = 0; j < v21; ++j )
                 {
-                  v13 = CDirCache::operator[](this->m_sData.gap_48, j);
+                  v13 = CDirCache::operator[](&this->m_sData.m_cDirCache.m_iCount, j);
                   m_iFineWaypoint += Y16X16::NeighborModifier(v13);
                 }
                 this->m_sData.field_40 = m_iFineWaypoint;
@@ -978,10 +979,10 @@ int  CWalkingBase::GetNextWaypoint(void) {
   
   CWalking::CWalking(this);
   this->__vftable = (CWalking_vtbl *)&CWalkingBase::_vftable_;
-  memset(&this->m_sData, 0, 188u);
-  this->m_sData = a2;
-  this->? = 1;
-  this->?[10] = a3;
+  memset(&this->m_sData, 0, sizeof(this->m_sData));
+  this->m_sData.m_iWalkingType = a2;
+  this->m_sData.m_iWalkState = 1;
+  this->m_sData.m_iEntityFlags = a3;
   return this;
 }
 
@@ -995,7 +996,7 @@ struct CWalkingBase::SData &  CWalkingBase::GetData(void) {
 
 
 // address=[0x15f86e0]
-// Decompiled from char __thiscall CWalkingBase::FindPathAStar64(CWalkingBase *this, int a2, int a3, struct CDirCache *a4)
+// Decompiled from char __thiscall CWalkingBase::FindPathAStar64(  CWalkingBase *this,  unsigned int a2,  unsigned int a3,  struct CDirCache *a4)
 bool  CWalkingBase::FindPathAStar64(int a2, int a3, class CDirCache & a4) {
   
   return CAStar64::FindPath((CAStar64 *)&g_cAStar64Normal, a2, a3, a4);
@@ -1404,3 +1405,4 @@ bool  CWalkingBase::NextCoarseWaypoint(int a2) {
 }
 
 
+#endif // Already implemented

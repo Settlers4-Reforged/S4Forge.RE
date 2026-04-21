@@ -1,3 +1,4 @@
+#if FALSE
 #include "CWalkingShip.h"
 
 // Definitions for class CWalkingShip
@@ -231,3 +232,4 @@ int  CWalkingShip::IdleWalk(int a2, int a3) {
 }
 
 
+#endif // Already implemented

@@ -1170,7 +1170,7 @@ int  CWarriorBehavior::WarriorEvadeScan15a(class IMovingEntity & a2, int * a3) {
     }
   }
   v10 = CWorldManager::SectorId(v21, v22);
-  v5 = (unsigned __int8)byte_37D8D93[4 * i];
+  v5 = (unsigned __int8)MEMORY[0x37D8D93][4 * i];
   v16 = (v5 + CStateGame::Rand(g_pGame) % 3u + 2) % 6;
   CSectorSpiralWalk::CSectorSpiralWalk(
     (CSectorSpiralWalk *)v7,

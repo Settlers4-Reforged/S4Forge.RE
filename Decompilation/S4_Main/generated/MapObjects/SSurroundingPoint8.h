@@ -17,6 +17,13 @@ public:
     // address=[0x15ddcc0]
     int  Radius(void)const;
 
+    // Type information members
+public:
+    char m_iX;
+    char m_iY;
+    char m_iRadius;
+    char m_iPadding;
+
 };
 
 

@@ -35443,7 +35443,7 @@ std::istream & __cdecl operator^<unsigned short>(std::istream & a1, unsigned sho
 // Decompiled from int __cdecl operator^<int>(struct std::istream *a1, int *a2)
 std::istream & __cdecl operator^<int>(std::istream & a1, int & a2) {
   
-  Serial::Serialize<int>(a1, a2);
+  Serial::Serialize<int>((int)a1, (int)a2);
   return (int)a1;
 }
 

@@ -1,3 +1,4 @@
+#if FALSE
 #include "CWalkingCatapult.h"
 
 // Definitions for class CWalkingCatapult
@@ -238,3 +239,4 @@ int  CWalkingCatapult::TileId(int a2) {
 }
 
 
+#endif // Already implemented

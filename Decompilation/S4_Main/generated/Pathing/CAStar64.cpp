@@ -19,9 +19,9 @@ bool  CAStar64::FindPath(int a2, int a3, class CDirCache & a4) {
   unsigned int v15; // esi
   int v16; // eax
   int v17; // [esp-4h] [ebp-74h]
-  Grid *v18; // [esp-4h] [ebp-74h]
-  _BYTE v19[8]; // [esp+4h] [ebp-6Ch] BYREF
-  _BYTE v20[8]; // [esp+Ch] [ebp-64h] BYREF
+  int v18; // [esp-4h] [ebp-74h]
+  int v19[2]; // [esp+4h] [ebp-6Ch] BYREF
+  int v20[2]; // [esp+Ch] [ebp-64h] BYREF
   _DWORD v21[2]; // [esp+14h] [ebp-5Ch] BYREF
   _DWORD v22[2]; // [esp+1Ch] [ebp-54h] BYREF
   int v23; // [esp+24h] [ebp-4Ch]
@@ -38,10 +38,10 @@ bool  CAStar64::FindPath(int a2, int a3, class CDirCache & a4) {
   int v35; // [esp+54h] [ebp-1Ch]
   int iNeighborG; // [esp+58h] [ebp-18h]
   int v37; // [esp+5Ch] [ebp-14h]
-  Grid *v38; // [esp+60h] [ebp-10h]
+  int v38; // [esp+60h] [ebp-10h]
   int i; // [esp+64h] [ebp-Ch]
-  int v40; // [esp+68h] [ebp-8h]
-  int v41; // [esp+6Ch] [ebp-4h]
+  unsigned int v40; // [esp+68h] [ebp-8h]
+  unsigned int v41; // [esp+6Ch] [ebp-4h]
 
   CDirCache::Init(a4);
   s_pIsNotBlocked = 0;
@@ -71,7 +71,7 @@ bool  CAStar64::FindPath(int a2, int a3, class CDirCache & a4) {
             v17 = i;
             v8 = COpenListEntry24::G((COpenListEntry24 *)v21);
             CG24Closed1Parent7::Set((CG24Closed1Parent7 *)((char *)&unk_416CBC0 + 4 * v40), v8, 0, v17);
-            sub_15D5530((int)a4);
+            sub_15D5530(a4);
             return 1;
           }
           v32 = dword_4174BC0 + CY6R1X6::WorldIdx(v40);
@@ -79,11 +79,11 @@ bool  CAStar64::FindPath(int a2, int a3, class CDirCache & a4) {
           {
             v9 = COpenListEntry24::G((COpenListEntry24 *)v21);
             v31 = v9 + 8 * s_pMoveCost(v32, 0) + 1;
-            ((void (__stdcall *)(int))TBitArray<8192>::Set)(v40);
+            TBitArray<8192>::Set(dword_416C7C0, v40);
             CG24Closed1Parent7::Set((CG24Closed1Parent7 *)((char *)&unk_416CBC0 + 4 * v40), v31, 0, i);
             v25 = sub_15D55C0(v40, dword_4174BC8);
             COpenListEntry24::Set((COpenListEntry24 *)v20, v40, v31, v25);
-            ((void (__stdcall *)(_BYTE *))TPriorityQueue<COpenListEntry24,8192>::Push)(v20);
+            TPriorityQueue<COpenListEntry24,8192>::Push(dword_415C788, v20);
           }
         }
       }
@@ -98,10 +98,10 @@ bool  CAStar64::FindPath(int a2, int a3, class CDirCache & a4) {
         v34 = COpenListEntry24::Index((COpenListEntry24 *)v22);
         CG24Closed1Parent7::SetClosedFlag((CG24Closed1Parent7 *)((char *)&unk_416CBC0 + 4 * v34));
         v30 = CG24Closed1Parent7::Parent((CG24Closed1Parent7 *)((char *)&unk_416CBC0 + 4 * v34));
-        v38 = (Grid *)Grid::TurnLeft(v30 & 7);
+        v38 = Grid::TurnLeft(v30 & 7);
         while ( v35 > 0 )
         {
-          v12 = CY6R1X6::NeighborRelPackedIdx((int)v38);
+          v12 = CY6R1X6::NeighborRelPackedIdx(v38);
           v41 = v34 + v12;
           if ( CY6R1X6::Valid(v34 + v12) )
           {
@@ -109,14 +109,14 @@ bool  CAStar64::FindPath(int a2, int a3, class CDirCache & a4) {
             {
               v18 = v38;
               v13 = COpenListEntry24::G((COpenListEntry24 *)v22);
-              CG24Closed1Parent7::Set((CG24Closed1Parent7 *)((char *)&unk_416CBC0 + 4 * v41), v13, 0, (int)v18);
-              sub_15D5530((int)a4);
+              CG24Closed1Parent7::Set((CG24Closed1Parent7 *)((char *)&unk_416CBC0 + 4 * v41), v13, 0, v18);
+              sub_15D5530(a4);
               return 1;
             }
             v27 = dword_4174BC0 + CY6R1X6::WorldIdx(v41);
             if ( (unsigned __int8)s_pIsNotBlocked(v27) )
             {
-              v37 = (int)v38 - v30;
+              v37 = v38 - v30;
               v37 += v37 < 0 ? 6 : 0;
               v24 = dword_37D81B0[v37];
               LOBYTE(v28) = COpenListEntry24::G((COpenListEntry24 *)v22) & 7;
@@ -131,18 +131,18 @@ bool  CAStar64::FindPath(int a2, int a3, class CDirCache & a4) {
               {
                 __debugbreak();
               }
-              if ( (unsigned __int8)sub_15D55E0(v41, iNeighborG) )
+              if ( sub_15D55E0(v41, iNeighborG) )
               {
-                ((void (__stdcall *)(int))TBitArray<8192>::Set)(v41);
-                CG24Closed1Parent7::Set((CG24Closed1Parent7 *)((char *)&unk_416CBC0 + 4 * v41), iNeighborG, 0, (int)v38);
+                TBitArray<8192>::Set(dword_416C7C0, v41);
+                CG24Closed1Parent7::Set((CG24Closed1Parent7 *)((char *)&unk_416CBC0 + 4 * v41), iNeighborG, 0, v38);
                 v23 = sub_15D55C0(v41, dword_4174BC8);
                 COpenListEntry24::Set((COpenListEntry24 *)v19, v41, iNeighborG, v23);
-                ((void (__stdcall *)(_BYTE *))TPriorityQueue<COpenListEntry24,8192>::Push)(v19);
+                TPriorityQueue<COpenListEntry24,8192>::Push(dword_415C788, v19);
               }
             }
           }
           --v35;
-          v38 = (Grid *)Grid::TurnRight((int)v38);
+          v38 = Grid::TurnRight(v38);
         }
         v35 = 3;
       }

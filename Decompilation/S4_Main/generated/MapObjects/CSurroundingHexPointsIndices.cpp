@@ -19,8 +19,8 @@ void  CSurroundingHexPointsIndices::Init(int a2) {
 
   for ( i = 0; i < 721; ++i )
   {
-    v3 = SSurroundingPoint8::X(&g_sSurroundingHexPoints8[4 * i]);
-    *((_DWORD *)this + i) = v3 + a2 * SSurroundingPoint8::Y(&g_sSurroundingHexPoints8[4 * i]);
+    v3 = SSurroundingPoint8::X(&g_sSurroundingHexPoints8[i]);
+    *((_DWORD *)this + i) = v3 + a2 * SSurroundingPoint8::Y(&g_sSurroundingHexPoints8[i]);
   }
 }
 

@@ -1,3 +1,4 @@
+#if FALSE
 #include "Cryptor.h"
 
 // Definitions for class Cryptor
@@ -229,3 +230,4 @@ void  Cryptor::Weak_Transform_Char(unsigned char & a2) {
 }
 
 
+#endif // Already implemented
