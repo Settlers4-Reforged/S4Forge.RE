@@ -3,6 +3,9 @@
 
 #include "defines.h"
 
+// address=[0x37de3ac]
+extern class ITiling *g_pTiling;
+
 class ITiling {
 public:
     // address=[0x12fcea0]
@@ -42,6 +45,8 @@ public:
     static int __cdecl OwnerPseudoTileId(int a1);
 
 protected:
+    friend class CWalkingBase;
+
     // address=[0x4236800]
     static unsigned short **m_pTileIds;
     // address=[0x4236804]

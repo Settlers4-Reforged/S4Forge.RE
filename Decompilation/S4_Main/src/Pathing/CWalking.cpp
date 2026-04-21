@@ -78,7 +78,7 @@ class CWalking * __cdecl CWalking::Create(std::istream &_rStream) {
   _rStream >> pNewWalking->GetData().m_iIdleWalkToXY;
   _rStream >> pNewWalking->GetData().m_iWalkToIndex;
   _rStream >> pNewWalking->GetData().field_20;
-  _rStream >> pNewWalking->GetData().m_iFineWaypoint;
+  _rStream >> pNewWalking->GetData().m_iFineWaypointXY;
   _rStream >> pNewWalking->GetData().m_iCoarseWaypointXY;
   _rStream >> pNewWalking->GetData().m_iEntityFlags;
   _rStream >> pNewWalking->GetData().field_34;

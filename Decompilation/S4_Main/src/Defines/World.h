@@ -11,6 +11,10 @@ enum T_WORLD_FLAGS {
 constexpr int MAX_INFLU_RADIUS = 40;
 constexpr int MAX_INFLU_DIST = 50;
 
+enum T_WATER_FLAGS {
+    WATER_FLAG_SHIP = 0x800
+};
+
 #define GROUND_TYPES \
     X(0x0, GROUND_WATER1) \
     X(0x1, GROUND_WATER2) \

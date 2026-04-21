@@ -2,6 +2,9 @@
 #define CWALKINGBASE_H
 
 #include "defines.h"
+#include "CDirCache.h"
+#include "CWalking.h"
+#include "CWaypoints.h"
 
 class CWalkingBase : public CWalking {
 public:
@@ -21,7 +24,7 @@ public:
     virtual void InitIfLeader(int a2, int a3);
 
     // address=[0x15f69f0]
-    virtual int Walk(int a2);
+    virtual int Walk(int _iCurrentXY);
 
     // address=[0x15f7bc0]
     virtual int IdleWalk(int a2, int a3);
@@ -53,8 +56,33 @@ public:
     // address=[0x15faee0]
     CWalkingBase(int a2, int a3);
 
+    struct SData {
+        int           m_iWalkingType;
+        int           m_iWalkState;
+        DWORD         field_8;
+        int           m_iWalkToXY;
+        int           m_iWalkTo2XY;
+        int           m_iLeaderWalkToXY;
+        int           m_iIdleWalkToXY;
+        int           m_iWalkToIndex;
+        int           field_20;
+        int           m_iFineWaypointXY;
+        int           m_iCoarseWaypointXY;
+        int           m_uFlags;
+        DWORD         m_iEntityFlags;
+        int           field_34;
+        int           field_38;
+        int           field_3C;
+        int           field_40;
+        CWaypoints    m_cCoarseWaypoints;
+        CDirCache     m_cFineWaypoints;
+        CWalkingBase *m_pPrevWalking;
+        CWalkingBase *m_pNextWalking;
+        CWalkingBase *m_pLatestWalking;
+    };
+
     // address=[0x15fb220]
-    struct SData &CWalkingBase::GetData(void);
+    SData &CWalkingBase::GetData(void);
 
 protected:
     // address=[0x15f86e0]
@@ -82,14 +110,14 @@ protected:
     int Flags(void);
 
     // address=[0x15fb2b0]
-    bool IsNeighborTile(int _iTileA, int a3);
+    bool IsNeighborTile(int _iTileA, int _iTileB);
 
     // address=[0x15fb300]
-    bool NextCoarseWaypoint(int a2);
+    bool NextCoarseWaypoint(int _iXY);
 
     // Type information members
 public:
-    CWalkingBase::SData m_sData;
+    SData m_sData;
 };
 
 

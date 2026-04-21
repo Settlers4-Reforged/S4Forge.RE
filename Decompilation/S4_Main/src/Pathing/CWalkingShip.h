@@ -2,31 +2,31 @@
 #define CWALKINGSHIP_H
 
 #include "defines.h"
+#include "CWalkingBase.h"
 
 class CWalkingShip : public CWalkingBase {
 public:
     // address=[0x15f9850]
-     CWalkingShip(void);
+    CWalkingShip(void);
 
     // address=[0x15fafb0]
-    virtual  ~CWalkingShip(void);
+    virtual ~CWalkingShip(void);
 
     // address=[0x15fb270]
-    virtual enum T_WALKING_TYPE const  GetWalkingType(void);
+    virtual enum T_WALKING_TYPE const GetWalkingType(void);
 
 protected:
     // address=[0x15f9890]
-    virtual bool  IsNotBlocked(int a2);
+    virtual bool IsNotBlocked(int a2);
 
     // address=[0x15f98d0]
-    virtual bool  IsNotOccupied(int a2);
+    virtual bool IsNotOccupied(int a2);
 
     // address=[0x15f9910]
-    virtual bool  FindPathAStar64(int a2, int a3, class CDirCache & a4);
+    virtual bool FindPathAStar64(int a2, int a3, class CDirCache &a4);
 
     // address=[0x15f99b0]
-    virtual int  IdleWalk(int _iXY, int a3);
-
+    virtual int IdleWalk(int _iXY, int a3);
 };
 
 

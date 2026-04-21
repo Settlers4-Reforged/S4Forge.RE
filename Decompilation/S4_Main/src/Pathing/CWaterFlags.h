@@ -40,13 +40,13 @@ protected:
     static void __cdecl SetWaterFlagBits(int a1, int a2);
 
     // address=[0x15fcd50]
-    static void __cdecl Init(unsigned short * a1);
+    static void __cdecl Init(unsigned short *_pWaterFlagsLayer);
 
     // address=[0x15fcdc0]
     static void __cdecl Done(void);
 
     // address=[0x15fcde0]
-    static void __cdecl PlaceShip(int a1);
+    static void __cdecl PlaceShip(int _iXY);
 
     // address=[0x15fcfc0]
     static void __cdecl RemoveShip(int _iXY);
@@ -58,8 +58,7 @@ protected:
     static int m_iInitialized;
 
     // address=[0x4617aa8]
-    static unsigned short * m_pWaterFlagsLayer;
-
+    static unsigned short *m_pWaterFlagsLayer;
 };
 
 
