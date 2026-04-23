@@ -3,14 +3,12 @@
 
 #include "defines.h"
 
-struct SConfigTypeString
-{
-    int m_iNr;
+struct SConfigTypeString {
+    int         m_iNr;
     const char *m_sName;
 };
 
-enum EScriptType
-{
+enum EScriptType {
     ESCRIPT_TYPE_INT = 0,
     ESCRIPT_TYPE_FLOAT,
     ESCRIPT_TYPE_DOUBLE,
@@ -20,19 +18,17 @@ enum EScriptType
     ESCRIPT_TYPE_END = 6,
 };
 
-class CLua
-{
+class CLua {
 public:
-    struct SFuncInfo
-    {
+    struct SFuncInfo {
         const char *m_swpName;
-        void(__cdecl *m_fpFunction)();
+
+        void (__cdecl *m_fpFunction)();
     };
 
-    struct SVarInfo
-    {
+    struct SVarInfo {
         const char *m_swpName;
-        double m_dDefault;
+        double      m_dDefault;
     };
 
 public:
@@ -43,7 +39,7 @@ public:
     void BeginBlock(void);
 
     // address=[0x1602150]
-    void CallFunction(unsigned int a2);
+    void CallFunction(unsigned int _FuncObj);
 
     // address=[0x16021c0]
     void CallFunction(char const *Str);
@@ -52,7 +48,7 @@ public:
     bool CheckParam(int a2);
 
     // address=[0x1602310]
-    void CreateTable(char const *Str);
+    void CreateTable(char const *_pName);
 
     // address=[0x1602380]
     void EndBlock(void);
@@ -64,7 +60,7 @@ public:
     void GetFuncInfo(unsigned int a2, char **a3, int *a4);
 
     // address=[0x1602420]
-    unsigned int GetGlobal(char const *Str);
+    unsigned int GetGlobal(char const *_pName);
 
     // address=[0x1602480]
     int GetInt(int a2);
@@ -91,7 +87,7 @@ public:
     void PushInt(int a2);
 
     // address=[0x1602760]
-    void SetGlobal(char const *Str);
+    void SetGlobal(char const *_pName);
 
     // address=[0x16027c0]
     CLua(void);
@@ -112,16 +108,16 @@ public:
     bool ExecuteString(char const *Str);
 
     // address=[0x1602b20]
-    void ExportFunction(void(__cdecl *a2)(void), char const *Str);
+    void ExportFunction(void (__cdecl *a2)(void), char const *Str);
 
     // address=[0x1602b60]
-    void ExportTableFunction(char const *a2, void(__cdecl *a3)(void), char const *Str);
+    void ExportTableFunction(char const *_pTableName, void (__cdecl *_fpFunction)(void), char const *_pFunctionName);
 
     // address=[0x1602c20]
-    void ExportFunctions(CLua::SFuncInfo *a1);
+    void ExportFunctions(CLua::SFuncInfo *_pFuncInfo);
 
     // address=[0x1602c90]
-    void ExportTableFunctions(char const *a2, CLua::SFuncInfo *a3);
+    void ExportTableFunctions(char const *_pTableName, CLua::SFuncInfo *_pFuncInfo);
 
     // address=[0x1602d20]
     void ExportTableVar(char const *a2, char const *Str, double a4);
@@ -133,7 +129,7 @@ public:
     void ExportTableTypes(char const *a1, char const *Str, struct SConfigTypeString const *a3, unsigned int a4);
 
     // address=[0x1602f60]
-    void ExportGlobalVar(char const *Str, double a3);
+    void ExportGlobalVar(char const *_pVarName, double _dValue);
 
     // address=[0x1602fa0]
     void __cdecl Push(enum EScriptType a1, ...);
