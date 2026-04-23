@@ -467,7 +467,7 @@ void __cdecl CWarMap::RemoveEntityEx(class IEntity & a1, int a2) {
       s_iEntityWarMapXYs[IEntity::ID(a1)] = -1;
       if ( IEntity::ID(a1) <= 0 && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 385, "_rEntity.ID() > 0") == 1 )
         __debugbreak();
-      if ( *(unsigned __int16 *)&IEntity::WarMapNode(a1)->prev == 0xFFFF
+      if ( *(unsigned __int16 *)&IEntity::WarMapNode(a1)->m_uNextPrev == 0xFFFF
         && BBSupportDbgReport(
              2,
              "Pathing\\WarMap.cpp",

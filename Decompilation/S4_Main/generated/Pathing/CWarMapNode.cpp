@@ -6,7 +6,7 @@
 // Decompiled from int __thiscall CWarMapNode::Next(CWarMapNode *this)
 int  CWarMapNode::Next(void)const {
   
-  return this->next;
+  return this->?;
 }
 
 
@@ -23,23 +23,19 @@ int  CWarMapNode::Next(void)const {
 // Decompiled from bool __thiscall CWarMapNode::IsInWarMap(CWarMapNode *this)
 bool  CWarMapNode::IsInWarMap(void)const {
   
-  return *this != 0xFFFF;
+  return this->m_uNextPrev != 0xFFFF;
 }
 
 
 // address=[0x15fb590]
-// Decompiled from CWarMapNode *__thiscall CWarMapNode::~CWarMapNode(CWarMapNode *this)
+// Decompiled from void __thiscall CWarMapNode::~CWarMapNode(CWarMapNode *this)
  CWarMapNode::~CWarMapNode(void) {
   
-  CWarMapNode *result; // eax
-
-  result = this;
-  if ( *(_DWORD *)this == 0xFFFF )
-    return result;
-  result = (CWarMapNode *)BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 173, "m_uNextPrev == NEXT_PREV_NOT_IN_LIST");
-  if ( result == (CWarMapNode *)1 )
+  if ( this->m_uNextPrev != 0xFFFF
+    && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 173, "m_uNextPrev == NEXT_PREV_NOT_IN_LIST") == 1 )
+  {
     __debugbreak();
-  return result;
+  }
 }
 
 
@@ -47,7 +43,7 @@ bool  CWarMapNode::IsInWarMap(void)const {
 // Decompiled from int __thiscall CWarMapNode::Prev(CWarMapNode *this)
 int  CWarMapNode::Prev(void)const {
   
-  return *(unsigned __int16 *)&this->prev;
+  return LOWORD(this->m_uNextPrev);
 }
 
 
@@ -55,31 +51,23 @@ int  CWarMapNode::Prev(void)const {
 // Decompiled from void __thiscall CWarMapNode::SetNext(CWarMapNode *this, WORD a2)
 void  CWarMapNode::SetNext(int a2) {
   
-  this->next = a2;
+  HIWORD(this->m_uNextPrev) = a2;
 }
 
 
 // address=[0x15fc770]
-// Decompiled from CWarMapNode *__thiscall CWarMapNode::SetPrev(CWarMapNode *this, __int16 a2)
+// Decompiled from void __thiscall CWarMapNode::SetPrev(CWarMapNode *this, __int16 a2)
 void  CWarMapNode::SetPrev(int a2) {
   
-  CWarMapNode *result; // eax
-
-  result = this;
-  *(_WORD *)this = a2;
-  return result;
+  LOWORD(this->m_uNextPrev) = a2;
 }
 
 
 // address=[0x15fc790]
-// Decompiled from int __thiscall CWarMapNode::SetPrevNext(CWarMapNode *this, int a2, int a3)
+// Decompiled from void __thiscall CWarMapNode::SetPrevNext(CWarMapNode *this, int a2, int a3)
 void  CWarMapNode::SetPrevNext(int a2, int a3) {
   
-  int result; // eax
-
-  result = a2 | (a3 << 16);
-  *this = (CWarMapNode)result;
-  return result;
+  this->m_uNextPrev = a2 | (a3 << 16);
 }
 
 

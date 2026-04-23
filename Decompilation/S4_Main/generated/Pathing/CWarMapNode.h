@@ -32,9 +32,7 @@ protected:
 
     // Type information members
 public:
-    BYTE prev;
-    BYTE unk_1d;
-    WORD next;
+    DWORD m_uNextPrev;
 
 };
 

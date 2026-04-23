@@ -955,23 +955,21 @@ int  CBuilding::GetObserverTarget(enum T_OBSERVER_TARGET a2) {
 
 
 // address=[0x14e9b30]
-// Decompiled from char *__thiscall CBuilding::CBuilding(char *this, int a2)
+// Decompiled from struct CBuilding *__thiscall CBuilding::CBuilding(struct CBuilding *this, struct std::istream *a2)
  CBuilding::CBuilding(std::istream & a2) {
   
   int BuildingRole; // [esp+4h] [ebp-28h]
   int v4; // [esp+Ch] [ebp-20h] BYREF
   int v5; // [esp+10h] [ebp-1Ch] BYREF
   int pExceptionObject; // [esp+14h] [ebp-18h] BYREF
-  char *v7; // [esp+18h] [ebp-14h]
   unsigned __int8 v8; // [esp+1Fh] [ebp-Dh] BYREF
   int v9; // [esp+28h] [ebp-4h]
 
-  v7 = this;
-  IAnimatedEntity::IAnimatedEntity(a2);
+  IAnimatedEntity::IAnimatedEntity((IAnimatedEntity *)this, a2);
   v9 = 0;
-  *(_DWORD *)v7 = &CBuilding::_vftable_;
-  std::auto_ptr<IBuildingRole>::auto_ptr<IBuildingRole>((_DWORD *)v7 + 21, 0);
-  CObserverList::CObserverList(a2);
+  *(_DWORD *)this = &CBuilding::_vftable_;
+  std::auto_ptr<IBuildingRole>::auto_ptr<IBuildingRole>((_DWORD *)this + 21, 0);
+  CObserverList::CObserverList((struct CBuilding *)((char *)this + 88), (int)a2);
   LOBYTE(v9) = 2;
   operator^<unsigned int>(a2, &v4);
   if ( v4 != 1 )
@@ -981,21 +979,21 @@ int  CBuilding::GetObserverTarget(enum T_OBSERVER_TARGET a2) {
     CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
     _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
   }
-  operator^<int>(a2, (int)(v7 + 72));
-  operator^<int>(a2, (int)(v7 + 76));
-  operator^<int>(a2, (int)(v7 + 80));
-  operator^<unsigned short>(a2, v7 + 70);
-  operator^<unsigned char>(a2, v7 + 68);
+  operator^<int>(a2, (int *)this + 18);
+  operator^<int>(a2, (int *)this + 19);
+  operator^<int>(a2, (int *)this + 20);
+  operator^<unsigned short>(a2, (char *)this + 70);
+  operator^<unsigned char>(a2, (char *)this + 68);
   operator^<unsigned char>(a2, &v8);
-  BuildingRole = CBuildingMgr::LoadBuildingRole(a2, v8);
+  BuildingRole = CBuildingMgr::LoadBuildingRole((int)a2, v8);
   std::auto_ptr<IBuildingRole>::auto_ptr<IBuildingRole>(&v5, BuildingRole);
   LOBYTE(v9) = 3;
-  std::auto_ptr<IBuildingRole>::operator=(&v5);
-  CBuilding::CorrectBuildingBits(v7);
+  std::auto_ptr<IBuildingRole>::operator=((char *)this + 84, (int)&v5);
+  CBuilding::CorrectBuildingBits((IEntity *)this);
   LOBYTE(v9) = 2;
   std::auto_ptr<IBuildingRole>::~auto_ptr<IBuildingRole>(&v5);
   v9 = -1;
-  return v7;
+  return this;
 }
 
 
@@ -1130,36 +1128,26 @@ void  CBuilding::NotifyAndDetachAllObservers(class CEntityEvent const & a2) {
 
 
 // address=[0x14e9db0]
-// Decompiled from int __thiscall CBuilding::CorrectBuildingBits(_BYTE *this)
+// Decompiled from void __thiscall CBuilding::CorrectBuildingBits(IEntity *this)
 void  CBuilding::CorrectBuildingBits(void) {
   
   int v1; // eax
-  int result; // eax
-  int v3; // eax
+  int v2; // eax
+  int v3; // [esp-4h] [ebp-8h]
   int v4; // [esp-4h] [ebp-8h]
-  int v5; // [esp-4h] [ebp-8h]
 
-  if ( IEntity::Race(this) == 1 && IEntity::Type((unsigned __int16 *)this) == 47 )
+  if ( IEntity::Race(this) == 1 && IEntity::Type(this) == BUILDING_GUARDTOWERBIG )
   {
-    v4 = IEntity::Y(this) + 1;
+    v3 = IEntity::Y(this) + 1;
     v1 = IEntity::X(this);
-    return CWorldManager::ClearBlockedPosition(v1 - 2, v4);
+    CWorldManager::ClearBlockedPosition(v1 - 2, v3);
   }
-  else
+  else if ( IEntity::Race(this) == 2 && IEntity::Type(this) == BUILDING_CASTLE )
   {
-    result = IEntity::Race(this);
-    if ( result == 2 )
-    {
-      result = IEntity::Type((unsigned __int16 *)this);
-      if ( result == 48 )
-      {
-        v5 = IEntity::Y(this) + 4;
-        v3 = IEntity::X(this);
-        return CWorldManager::ClearBlockedPosition(v3 - 2, v5);
-      }
-    }
+    v4 = IEntity::Y(this) + 4;
+    v2 = IEntity::X(this);
+    CWorldManager::ClearBlockedPosition(v2 - 2, v4);
   }
-  return result;
 }
 
 

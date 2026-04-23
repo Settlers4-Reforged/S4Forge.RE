@@ -14,9 +14,9 @@ CEntityEvent::CEntityEvent(unsigned char a2, int a3, int a4, int a5, int a6) : C
 {
   this->m_iEvent = a2;
   this->m_iType = a3;
-  this->unk_C = a4;
-  this->unk_10 = a5;
-  this->unk_14 = a6;
+  this->m_iDataA = a4;
+  this->m_iDataB = a5;
+  this->m_iDataC = a6;
 }
 
 // address=[0x130e430]
@@ -43,9 +43,9 @@ CEntityEvent::CEntityEvent(class CEntityEvent const &a2) : CPersistence()
 {
   this->m_iEvent = a2.m_iEvent;
   this->m_iType = a2.m_iType;
-  this->unk_C = a2.unk_C;
-  this->unk_10 = a2.unk_10;
-  this->unk_14 = a2.unk_14;
+  this->m_iDataA = a2.m_iDataA;
+  this->m_iDataB = a2.m_iDataB;
+  this->m_iDataC = a2.m_iDataC;
 }
 
 // address=[0x14e46f0]
@@ -55,9 +55,9 @@ class CEntityEvent &CEntityEvent::operator=(class CEntityEvent const &a2)
   CPersistence::operator=(a2);
   this->m_iEvent = a2.m_iEvent;
   this->m_iType = a2.m_iType;
-  this->unk_C = a2.unk_C;
-  this->unk_10 = a2.unk_10;
-  this->unk_14 = a2.unk_14;
+  this->m_iDataA = a2.m_iDataA;
+  this->m_iDataB = a2.m_iDataB;
+  this->m_iDataC = a2.m_iDataC;
   return *this;
 }
 
@@ -84,9 +84,9 @@ CEntityEvent::CEntityEvent(std::istream &stream) : CPersistence()
   }
   stream >> this->m_iEvent;
   stream >> this->m_iType;
-  stream >> this->unk_C;
-  stream >> this->unk_10;
-  stream >> this->unk_14;
+  stream >> this->m_iDataA;
+  stream >> this->m_iDataB;
+  stream >> this->m_iDataC;
 }
 
 // address=[0x154c1e0]
@@ -101,9 +101,9 @@ void CEntityEvent::Store(std::ostream &stream)
   stream << fileVersion;
   stream << this->m_iEvent;
   stream << this->m_iType;
-  stream << this->unk_C;
-  stream << this->unk_10;
-  stream << this->unk_14;
+  stream << this->m_iDataA;
+  stream << this->m_iDataB;
+  stream << this->m_iDataC;
 }
 
 // address=[0x3d8bb20]

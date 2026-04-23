@@ -7,13 +7,13 @@
 // Decompiled from void __thiscall CEntityEvent::CEntityEvent(CEntityEvent *this, unsigned __int8 a2, int a3, int a4, int a5, int a6)
  CEntityEvent::CEntityEvent(unsigned char a2, int a3, int a4, int a5, int a6) {
   
-  CPersistence::CPersistence(this);
-  this->__vftable = (CPersistence_vtbl *)&CEntityEvent::_vftable_;
+  CPersistence::CPersistence(&this->CPersistence);
+  this->__vftable = (CEntityEvent_vtbl *)&CEntityEvent::_vftable_;
   this->m_iEvent = a2;
   this->m_iType = a3;
-  this->unk_C = a4;
-  this->unk_10 = a5;
-  this->unk_14 = a6;
+  this->m_iDataA = a4;
+  this->m_iDataB = a5;
+  this->m_iDataC = a6;
 }
 
 
@@ -55,9 +55,9 @@ class CPersistence * __cdecl CEntityEvent::New(std::istream & a1) {
   this->__vftable = (CPersistence_vtbl *)&CEntityEvent::_vftable_;
   this->m_iEvent = a2->m_iEvent;
   this->m_iType = a2->m_iType;
-  this->unk_C = a2->unk_C;
-  this->unk_10 = a2->unk_10;
-  this->unk_14 = a2->unk_14;
+  this->m_iDataA = a2->m_iDataA;
+  this->m_iDataB = a2->m_iDataB;
+  this->m_iDataC = a2->m_iDataC;
   return this;
 }
 
@@ -106,9 +106,9 @@ class CEntityEvent * __cdecl CEntityEvent::Load(std::istream & a1) {
   }
   operator^<int>(a1, &this->m_iEvent);
   operator^<int>(a1, &this->m_iType);
-  operator^<int>(a1, &this->unk_C);
-  operator^<int>(a1, &this->unk_10);
-  operator^<int>(a1, &this->unk_14);
+  operator^<int>(a1, &this->m_iDataA);
+  operator^<int>(a1, &this->m_iDataB);
+  operator^<int>(a1, &this->m_iDataC);
   return this;
 }
 
@@ -124,9 +124,9 @@ void  CEntityEvent::Store(std::ostream & a2) {
   operator^<unsigned int>(a2, &fileVersion);
   operator^<int>(a2, &this->m_iEvent);
   operator^<int>(a2, &this->m_iType);
-  operator^<int>(a2, &this->unk_C);
-  operator^<int>(a2, &this->unk_10);
-  operator^<int>(a2, &this->unk_14);
+  operator^<int>(a2, &this->m_iDataA);
+  operator^<int>(a2, &this->m_iDataB);
+  operator^<int>(a2, &this->m_iDataC);
 }
 
 

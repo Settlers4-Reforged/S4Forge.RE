@@ -39,9 +39,9 @@ public:
 public:
     int m_iEvent;
     int m_iType;
-    int unk_C;
-    int unk_10;
-    int unk_14;
+    int m_iDataA;
+    int m_iDataB;
+    int m_iDataC;
 
 };
 

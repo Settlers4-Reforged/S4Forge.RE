@@ -1,3 +1,4 @@
+#if FALSE
 #include "IAnimatedEntity.h"
 
 // Definitions for class IAnimatedEntity
@@ -35,10 +36,10 @@ int  IAnimatedEntity::Previous(void)const {
 
 
 // address=[0x1439e10]
-// Decompiled from void __thiscall IAnimatedEntity::SetNext(IAnimatedEntity *this, int a2)
-void  IAnimatedEntity::SetNext(int a2) {
+// Decompiled from void __thiscall IAnimatedEntity::SetNext(IAnimatedEntity *this, int _id)
+void  IAnimatedEntity::SetNext(int _id) {
   
-  if ( IEntity::ID(this) == a2
+  if ( IEntity::ID(this) == _id
     && BBSupportDbgReport(
          2,
          "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\MapObjects\\AnimatedEntity.h",
@@ -47,7 +48,7 @@ void  IAnimatedEntity::SetNext(int a2) {
   {
     __debugbreak();
   }
-  this->m_wNextEntity = a2;
+  this->m_wNextEntity = _id;
 }
 
 
@@ -95,20 +96,20 @@ void  IAnimatedEntity::UnRegisterFromLogicUpdate(void) {
 
 
 // address=[0x14e3210]
-// Decompiled from int __thiscall IAnimatedEntity::SetEvent(IAnimatedEntity *this, const struct CEntityEvent *a2)
-void  IAnimatedEntity::SetEvent(class CEntityEvent const & a2) {
+// Decompiled from void __thiscall IAnimatedEntity::SetEvent(IAnimatedEntity *this, const struct CEntityEvent *a1)
+void  IAnimatedEntity::SetEvent(class CEntityEvent const & a1) {
   
   DWORD v2; // eax
   DWORD m_iEvent; // [esp-8h] [ebp-Ch]
   DWORD m_iType; // [esp-4h] [ebp-8h]
 
-  m_iType = a2->m_iType;
-  m_iEvent = a2->m_iEvent;
+  m_iType = a1->m_iType;
+  m_iEvent = a1->m_iEvent;
   v2 = IEntity::EntityId(this);
   IMessageTracer::PushFormatedInts(g_pMsgTracer, "SetEvent(): id %u, event %u, type %u", v2, m_iEvent, m_iType);
   if ( !IEntity::FlagBits(this, EntityFlag_Registered) )
     IAnimatedEntity::RegisterForLogicUpdate(this, 1);
-  return std::vector<CEntityEvent>::push_back(a2);
+  std::vector<CEntityEvent>::push_back(&this->m_iEventQueue, a1);
 }
 
 
@@ -205,8 +206,6 @@ void  IAnimatedEntity::BoxSelection(void) {
 // Decompiled from IAnimatedEntity *__thiscall IAnimatedEntity::IAnimatedEntity(IAnimatedEntity *this, int id)
  IAnimatedEntity::IAnimatedEntity(int id) {
   
-  std::bad_function_call *v4; // [esp+0h] [ebp-4h]
-
   IEntity::IEntity(this, id);
   this->__vftable = (IAnimatedEntity_vtbl *)&IAnimatedEntity::_vftable_;
   this->m_cFrame = 0;
@@ -216,64 +215,56 @@ void  IAnimatedEntity::BoxSelection(void) {
   this->m_wNextEntity = 0;
   this->m_uLastUpdateTick = 0;
   this->m_uLastLogicUpdate = -1;
-  std::vector<CEntityEvent>::vector<CEntityEvent>(this);
-  return (IAnimatedEntity *)v4;
+  std::vector<CEntityEvent>::vector<CEntityEvent>(&this->m_iEventQueue);
+  return this;
 }
 
 
 // address=[0x14eb2a0]
-// Decompiled from int __thiscall IAnimatedEntity::AttackerPlayerId(unsigned __int8 *this)
+// Decompiled from int __thiscall IAnimatedEntity::AttackerPlayerId(IAnimatedEntity *this)
 int  IAnimatedEntity::AttackerPlayerId(void)const {
   
-  return this[37];
+  return this->m_cAttackerPlayerId;
 }
 
 
 // address=[0x1501170]
-// Decompiled from int __thiscall IAnimatedEntity::LastUpdateTick(_DWORD *this)
+// Decompiled from DWORD __thiscall IAnimatedEntity::LastUpdateTick(IAnimatedEntity *this)
 unsigned int  IAnimatedEntity::LastUpdateTick(void)const {
   
-  return this[11];
+  return this->m_uLastUpdateTick;
 }
 
 
 // address=[0x1548370]
-// Decompiled from int __thiscall IAnimatedEntity::JobPart(unsigned __int16 *this)
+// Decompiled from int __thiscall IAnimatedEntity::JobPart(IAnimatedEntity *this)
 int  IAnimatedEntity::JobPart(void)const {
   
-  return this[19];
+  return this->m_wJobPart;
 }
 
 
 // address=[0x15639c0]
-// Decompiled from _BYTE *__thiscall IAnimatedEntity::SetFrame(_BYTE *this, char a2)
+// Decompiled from void __thiscall IAnimatedEntity::SetFrame(IAnimatedEntity *this, BYTE a2)
 void  IAnimatedEntity::SetFrame(int a2) {
   
-  _BYTE *result; // eax
-
-  result = this;
-  this[36] = a2;
-  return result;
+  this->m_cFrame = a2;
 }
 
 
 // address=[0x15670a0]
-// Decompiled from void __thiscall IAnimatedEntity::EventQueueEmpty(COleCmdUI *this)
+// Decompiled from void __thiscall IAnimatedEntity::EventQueueEmpty(IAnimatedEntity *this)
 bool  IAnimatedEntity::EventQueueEmpty(void)const {
   
-  std::vector<CEntityEvent>::empty((char *)this + 52);
+  std::vector<CEntityEvent>::empty(&this->m_iEventQueue);
 }
 
 
 // address=[0x1567140]
-// Decompiled from _WORD *__thiscall IAnimatedEntity::SetJobPart(_WORD *this, __int16 a2)
+// Decompiled from void __thiscall IAnimatedEntity::SetJobPart(IAnimatedEntity *this, WORD a2)
 void  IAnimatedEntity::SetJobPart(int a2) {
   
-  _WORD *result; // eax
-
-  result = this;
-  this[19] = a2;
-  return result;
+  this->m_wJobPart = a2;
 }
 
 
@@ -281,8 +272,8 @@ void  IAnimatedEntity::SetJobPart(int a2) {
 // Decompiled from IAnimatedEntity *__thiscall IAnimatedEntity::IAnimatedEntity(IAnimatedEntity *this, struct std::istream *a1)
  IAnimatedEntity::IAnimatedEntity(std::istream & a1) {
   
-  int v2; // eax
-  unsigned int v4; // [esp+4h] [ebp-24h] BYREF
+  const struct CEntityEvent *v2; // eax
+  unsigned int iQueueSize; // [esp+4h] [ebp-24h] BYREF
   int fileVersion; // [esp+Ch] [ebp-1Ch] MAPDST BYREF
   int pExceptionObject; // [esp+10h] [ebp-18h] BYREF
   unsigned int i; // [esp+14h] [ebp-14h]
@@ -308,11 +299,11 @@ void  IAnimatedEntity::SetJobPart(int a2) {
   operator^<unsigned short>(a1, &this->m_wNextEntity);
   operator^<unsigned int>(a1, &this->m_uLastUpdateTick);
   operator^<int>(a1, &this->m_uLastLogicUpdate);
-  operator^<unsigned int>(a1, &v4);
-  for ( i = 0; i < v4; ++i )
+  operator^<unsigned int>(a1, &iQueueSize);
+  for ( i = 0; i < iQueueSize; ++i )
   {
-    v2 = CEntityEvent::Load(a1);
-    std::vector<CEntityEvent>::push_back(v2);
+    v2 = (const struct CEntityEvent *)CEntityEvent::Load(a1);
+    std::vector<CEntityEvent>::push_back(&this->m_iEventQueue, v2);
   }
   ExceptionBlock = -1;
   return this;
@@ -327,9 +318,9 @@ void  IAnimatedEntity::Store(std::ostream & a2) {
   _BYTE v4[12]; // [esp+10h] [ebp-34h] BYREF
   std::_Iterator_base12 *v5; // [esp+1Ch] [ebp-28h]
   std::_Iterator_base12 *v6; // [esp+20h] [ebp-24h]
-  int v7; // [esp+24h] [ebp-20h] BYREF
+  int iQueueSize; // [esp+24h] [ebp-20h] BYREF
   int v8; // [esp+28h] [ebp-1Ch] BYREF
-  int v9; // [esp+2Ch] [ebp-18h]
+  CEntityEvent *v9; // [esp+2Ch] [ebp-18h]
   char v11; // [esp+37h] [ebp-Dh]
   int v12; // [esp+40h] [ebp-4h]
 
@@ -342,9 +333,9 @@ void  IAnimatedEntity::Store(std::ostream & a2) {
   operator^<unsigned short>(a2, &this->m_wPrevEntity);
   operator^<unsigned short>(a2, &this->m_wNextEntity);
   operator^<unsigned int>(a2, (int *)&this->m_uLastUpdateTick);
-  operator^<int>(a2, (int *)&this->m_uLastLogicUpdate);
-  v7 = std::vector<CEntityEvent>::size(&this->m_iEventQueue);
-  operator^<unsigned int>(a2, &v7);
+  operator^<int>(a2, &this->m_uLastLogicUpdate);
+  iQueueSize = std::vector<CEntityEvent>::size(&this->m_iEventQueue);
+  operator^<unsigned int>(a2, &iQueueSize);
   std::vector<CEntityEvent>::begin(&this->m_iEventQueue, (int)v4);
   v12 = 0;
   while ( 1 )
@@ -357,8 +348,8 @@ void  IAnimatedEntity::Store(std::ostream & a2) {
     std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CEntityEvent>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CEntityEvent>>>(v3);
     if ( !v11 )
       break;
-    v9 = std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CEntityEvent>>>::operator->(v4);
-    (*(void (__thiscall **)(int, struct std::ostream *))(*(_DWORD *)v9 + 4))(v9, a2);
+    v9 = (CEntityEvent *)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CEntityEvent>>>::operator->(v4);
+    v9->Store(v9, a2);
     std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CEntityEvent>>>::operator++(v4);
   }
   v12 = -1;
@@ -367,52 +358,50 @@ void  IAnimatedEntity::Store(std::ostream & a2) {
 
 
 // address=[0x14e3780]
-// Decompiled from bool __thiscall IAnimatedEntity::ProcessAllEvents(_DWORD *this)
+// Decompiled from bool __thiscall IAnimatedEntity::ProcessAllEvents(IAnimatedEntity *this)
 bool  IAnimatedEntity::ProcessAllEvents(void) {
   
-  struct boost::exception_detail::clone_base *v1; // eax
-  _DWORD v3[4]; // [esp-Ch] [ebp-6Ch] BYREF
-  _DWORD v4[6]; // [esp+4h] [ebp-5Ch] BYREF
+  CEntityEvent *v1; // eax
+  int v3[4]; // [esp-Ch] [ebp-6Ch] BYREF
+  CEntityEvent v4; // [esp+4h] [ebp-5Ch] BYREF
   _BYTE v5[12]; // [esp+1Ch] [ebp-44h] BYREF
   _BYTE v6[12]; // [esp+28h] [ebp-38h] BYREF
   int v7; // [esp+34h] [ebp-2Ch]
   int v8; // [esp+38h] [ebp-28h]
-  _DWORD *v9; // [esp+3Ch] [ebp-24h]
-  struct std::_Iterator_base12 *v10; // [esp+40h] [ebp-20h]
-  struct std::_Iterator_base12 *v11; // [esp+44h] [ebp-1Ch]
+  int *v9; // [esp+3Ch] [ebp-24h]
+  struct std::_Iterator_base12 *v11; // [esp+44h] [ebp-1Ch] MAPDST
   BOOL v12; // [esp+48h] [ebp-18h]
   bool v14; // [esp+53h] [ebp-Dh]
   int v15; // [esp+5Ch] [ebp-4h]
 
   v14 = 0;
-  while ( !(unsigned __int8)std::vector<CEntityEvent>::empty(this + 13) )
+  while ( !(unsigned __int8)std::vector<CEntityEvent>::empty(&this->m_iEventQueue) )
   {
-    v1 = (struct boost::exception_detail::clone_base *)std::vector<CEntityEvent>::front(v3[3], v4[0]);
-    CEntityEvent::CEntityEvent(v1);
+    v1 = std::vector<CEntityEvent>::front(&this->m_iEventQueue);
+    CEntityEvent::CEntityEvent((struct boost::exception_detail::clone_base *)v1);
     v15 = 0;
-    v11 = (struct std::_Iterator_base12 *)std::vector<CEntityEvent>::begin(v5);
-    v10 = v11;
+    v11 = (struct std::_Iterator_base12 *)std::vector<CEntityEvent>::begin(&this->m_iEventQueue, (int)v5);
     LOBYTE(v15) = 1;
     v9 = v3;
     v8 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CEntityEvent>>>::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CEntityEvent>>>(v11);
-    v7 = std::vector<CEntityEvent>::erase(v6, v3[0], v3[1], v3[2]);
+    v7 = std::vector<CEntityEvent>::erase(&this->m_iEventQueue, (int)v6, v3[0], v3[1], v3[2]);
     std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CEntityEvent>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CEntityEvent>>>(v6);
     LOBYTE(v15) = 0;
     std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CEntityEvent>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CEntityEvent>>>(v5);
-    this[5] &= ~0x80000000;
+    this->m_iFlags &= ~0x80000000;
     IMessageTracer::PushFormatedInts(
       g_pMsgTracer,
       "ConvertEventIntoGoal(): event %u, type %u, data %u, %u, %u",
-      v4[1],
-      v4[2],
-      v4[3],
-      v4[4],
-      v4[5]);
-    (*(void (__thiscall **)(_DWORD *, _DWORD *))(*this + 108))(this, v4);
-    v12 = this[5] >= 0;
+      v4.m_iEvent,
+      v4.m_iType,
+      v4.m_iDataA,
+      v4.m_iDataB,
+      v4.m_iDataC);
+    this->ConvertEventIntoGoal(this, &v4);
+    v12 = this->m_iFlags >= 0;
     v14 = v12;
     v15 = -1;
-    CEntityEvent::~CEntityEvent(v4);
+    CEntityEvent::~CEntityEvent(&v4);
   }
   return v14;
 }
@@ -427,11 +416,12 @@ void  IAnimatedEntity::ConvertEventIntoGoal(class CEntityEvent * a1) {
 
 
 // address=[0x14e4b90]
-// Decompiled from int __thiscall IAnimatedEntity::SetLastLogicUpdate(_DWORD *this, int a2)
+// Decompiled from int __thiscall IAnimatedEntity::SetLastLogicUpdate(IAnimatedEntity *this, int a2)
 int  IAnimatedEntity::SetLastLogicUpdate(int a2) {
   
-  this[12] = a2;
+  this->m_uLastLogicUpdate = a2;
   return a2;
 }
 
 
+#endif // Already implemented

@@ -218,7 +218,7 @@ protected:
     static struct SGfxObjectInfo m_sGfxInfo;
 
     // Type information members
-private:
+protected:
     friend class CMapObjectMgr;
 
     int                   m_iUniqueId;

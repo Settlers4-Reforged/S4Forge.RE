@@ -1,3 +1,4 @@
+#if FALSE
 #include "CSpiralOffsets.h"
 
 // Definitions for class CSpiralOffsets
@@ -75,3 +76,4 @@ int __cdecl CSpiralOffsets::MaxGridDistance(int a1) {
 // address=[0x3e39620]
 // [Decompilation failed for static struct CSpiralOffsets::SSprialOffset * CSpiralOffsets::m_sOffsets]
 
+#endif // Already implemented

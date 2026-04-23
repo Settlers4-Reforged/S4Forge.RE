@@ -89,11 +89,6 @@ protected:
 
     // Type information members
 public:
-    DWORD unk_3c;
-    CHAR unk_40;
-    BYTE unk_41;
-    BYTE unk_42;
-    BYTE pad_43;
     BYTE m_cDirection;
     BYTE m_iDistance;
     unsigned __int8 m_cDisplacementCosts;
@@ -103,7 +98,7 @@ public:
     DWORD unk_4c;
     struct CWalking * m_pWalkin;
     DWORD m_pToDoList;
-    struct IMovingEntity::IMovingEntity::IMovingEntity::IMovingEntity::IMovingEntity::IMovingEntity::std::List * m_cCurrentToDoItemIter;
+    std::list m_cCurrentToDoItemIter;
     DWORD unk_5C;
     DWORD unk_60;
 

@@ -1036,7 +1036,7 @@ void  CVehicle::Store(std::ostream & a2) {
 
   v10 = this;
   IMovingEntity::Store(this, a1);
-  CObserverList::Store(&v10[1].unk_40, a1);
+  CObserverList::Store(&v10[1].?, a1);
   v8 = 2;
   operator^<unsigned int>(a1, &v8);
   operator^<unsigned char>(a1, (BYTE *)&v10[1].m_nType);
@@ -1052,9 +1052,9 @@ void  CVehicle::Store(std::ostream & a2) {
   operator^<unsigned int>(a1, (int *)&v10[1].m_uPackedXY);
   operator^<bool>(a1, &CVehicle::m_bCallTakeJob);
   operator^<unsigned char>(a1, (BYTE *)&v10[1].m_warMapNode);
-  operator^<unsigned char>(a1, &v10[1].m_warMapNode.unk_1d);
-  operator^<unsigned char>(a1, (BYTE *)&v10[1].m_warMapNode.next);
-  operator^<unsigned char>(a1, (BYTE *)&v10[1].m_warMapNode.next + 1);
+  operator^<unsigned char>(a1, &v10[1].m_warMapNode.?);
+  operator^<unsigned char>(a1, (BYTE *)&v10[1].m_warMapNode.?);
+  operator^<unsigned char>(a1, (BYTE *)&v10[1].m_warMapNode.? + 1);
   operator^<unsigned short>(a1, (WORD *)&v10[1].m_packedTribePlayer);
   operator^<unsigned short>(a1, (WORD *)&v10[1].pad_22);
   operator^<unsigned short>(a1, (WORD *)&v10[1].m_cFrame);
