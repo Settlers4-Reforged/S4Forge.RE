@@ -2,15 +2,15 @@
 #define CFSM_H
 
 #include "defines.h"
+#include "Events/IEventHandler.h"
 
-class CFsm
-{
+class CFsm {
 public:
     // address=[0x1460490]
     int CurrentState(void) const;
 
     // address=[0x2f05d80]
-    CFsm(class IEventHandler *a2, int a3, int a4);
+    CFsm(IEventHandler *a2, int a3, int a4);
 
     // address=[0x2f05e40]
     ~CFsm(void);
@@ -34,25 +34,23 @@ private:
     // address=[0x2f06170]
     int Hash(int a2);
 
-    struct Transition
-    {
-        DWORD unk_0;
-        DWORD m_iState;
-        int unk_8;
+    struct Transition {
+        DWORD m_iStartState;
+        DWORD m_iTransitionToState;
+        int   m_iEventId;
         DWORD m_iHandlerId;
     };
 
-    struct SEvent
-    {
+    struct SEvent {
         DWORD m_iId;
         void *m_pPayload;
     };
 
     // Type information members
 public:
-    int m_iSize;
-    CFsm::Transition *m_pTransitions;
-    DWORD m_iCurrentState;
+    int                       m_iSize;
+    CFsm::Transition *        m_pTransitions;
+    DWORD                     m_iCurrentState;
     std::list<CFsm::SEvent *> m_pEventQueue;
     //DWORD unk_10; Probably static members of std::list...
     //DWORD unk_14;

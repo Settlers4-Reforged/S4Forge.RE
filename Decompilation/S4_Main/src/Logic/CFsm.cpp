@@ -14,7 +14,7 @@ int CFsm::CurrentState(void) const
 
 // address=[0x2f05d80]
 // Decompiled from CFsm *__thiscall CFsm::CFsm(CFsm *this, struct IEventHandler *a2, int a3, int a4)
-CFsm::CFsm(class IEventHandler *a2, int a3, int a4)
+CFsm::CFsm(IEventHandler *a2, int a3, int a4)
 {
 
   this->m_iSize = a3;
@@ -48,9 +48,9 @@ int CFsm::DefineTransition(int a2, int a3, int a4, int a5)
   v7 = this->Hash(a2, a4);
   if (v7 == -1)
     return v7;
-  this->m_pTransitions[v7].unk_0 = a2;
-  this->m_pTransitions[v7].m_iState = a3;
-  this->m_pTransitions[v7].unk_8 = a4;
+  this->m_pTransitions[v7].m_iStartState = a2;
+  this->m_pTransitions[v7].m_iTransitionToState = a3;
+  this->m_pTransitions[v7].m_iEventId = a4;
   this->m_pTransitions[v7].m_iHandlerId = a5;
   return v7;
 }
@@ -81,7 +81,7 @@ int CFsm::Control(int _iEventId, void *_pEvent)
       handlerResult = this->m_pEventHandler->m_pHandlers[this->m_pTransitions[hash].m_iHandlerId](
           this->m_pEventHandler,
           (struct CEvn_Logic *)i->m_pPayload);
-      this->m_iCurrentState = this->m_pTransitions[hash].m_iState;
+      this->m_iCurrentState = this->m_pTransitions[hash].m_iTransitionToState;
     }
     
     this->m_pEventQueue.pop_front();
@@ -155,7 +155,7 @@ int CFsm::Hash(int a2)
 
   v4 = 0;
   v3 = (signed int)(this->m_iCurrentState + (a2 << 8)) % this->m_iSize;
-  while ((this->m_pTransitions[(v4 + v3) % this->m_iSize].unk_0 != this->m_iCurrentState || this->m_pTransitions[(v4 + v3) % this->m_iSize].unk_8 != a2) && v4 < this->m_iSize)
+  while ((this->m_pTransitions[(v4 + v3) % this->m_iSize].m_iStartState != this->m_iCurrentState || this->m_pTransitions[(v4 + v3) % this->m_iSize].m_iEventId != a2) && v4 < this->m_iSize)
     ++v4;
   if (v4 < this->m_iSize)
     return (v4 + v3) % this->m_iSize;

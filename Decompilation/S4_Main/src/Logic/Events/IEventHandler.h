@@ -1,12 +1,17 @@
 #ifndef IEVENTHANDLER_H
 #define IEVENTHANDLER_H
 
+#include <functional>
+
 #include "defines.h"
+#include "IEventHandler.h"
 
-typedef bool(__thiscall *EventHandlerFunc)(class IEventHandler *processor, struct CEvn_Logic *event);
+class IEventHandler;
 
-class IEventHandler
-{
+//typedef bool (IEventHandler::*EventHandlerFunc)(struct CEvn_Logic *event);
+typedef std::function<bool(IEventHandler *, struct CEvn_Logic *)> EventHandlerFunc;
+
+class IEventHandler {
 public:
     // address=[0x1460060]
     IEventHandler(int a2);
