@@ -37,7 +37,7 @@ private:
 public:
     int m_iSize;
     CFsm::Transition * m_pTransitions;
-    DWORD m_iCurrentState;
+    T_INPUT_STATE m_iCurrentState;
     DWORD m_pEventQueue;
     DWORD unk_10;
     DWORD unk_14;

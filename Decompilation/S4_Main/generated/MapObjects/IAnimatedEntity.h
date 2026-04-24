@@ -6,91 +6,92 @@
 class IAnimatedEntity : public IEntity {
 public:
     // address=[0x1307150]
-    int Next(void) const;
+    int  Next(void)const;
 
     // address=[0x1351b10]
-    int Frame(void) const;
+    int  Frame(void)const;
 
     // address=[0x1351b30]
-    int GetLastLogicUpdateTick(void) const;
+    int  GetLastLogicUpdateTick(void)const;
 
     // address=[0x1439c70]
-    int Previous(void) const;
+    int  Previous(void)const;
 
     // address=[0x1439e10]
-    void SetNext(int _id);
+    void  SetNext(int _id);
 
     // address=[0x1439eb0]
-    void SetPrevious(int a2);
+    void  SetPrevious(int a2);
 
     // address=[0x14d87d0]
-    void SetLastUpdateTick(unsigned int a2);
+    void  SetLastUpdateTick(unsigned int a2);
 
     // address=[0x14e31a0]
-    int RegisterForLogicUpdate(int _iDeltaTicks);
+    int  RegisterForLogicUpdate(int _iDeltaTicks);
 
     // address=[0x14e31d0]
-    void UnRegisterFromLogicUpdate(void);
+    void  UnRegisterFromLogicUpdate(void);
 
     // address=[0x14e3210]
-    virtual void SetEvent(class CEntityEvent const &a1);
+    virtual void  SetEvent(class CEntityEvent const & a1);
 
     // address=[0x14e3270]
-    virtual void ClearAllQueuedEvents(void);
+    virtual void  ClearAllQueuedEvents(void);
 
     // address=[0x14e3290]
-    void BoxSelection(void);
+    void  BoxSelection(void);
 
     // address=[0x14e46c0]
-    virtual ~IAnimatedEntity(void);
+    virtual  ~IAnimatedEntity(void);
 
     // address=[0x14eb000]
-    IAnimatedEntity(int id);
+     IAnimatedEntity(int id);
 
     // address=[0x14eb2a0]
-    int AttackerPlayerId(void) const;
+    int  AttackerPlayerId(void)const;
 
     // address=[0x1501170]
-    unsigned int LastUpdateTick(void) const;
+    unsigned int  LastUpdateTick(void)const;
 
     // address=[0x1548370]
-    int JobPart(void) const;
+    int  JobPart(void)const;
 
     // address=[0x15639c0]
-    void SetFrame(int a2);
+    void  SetFrame(int a2);
 
     // address=[0x15670a0]
-    bool EventQueueEmpty(void) const;
+    bool  EventQueueEmpty(void)const;
 
     // address=[0x1567140]
-    void SetJobPart(int a2);
+    void  SetJobPart(int a2);
 
 protected:
     // address=[0x14e3460]
-    IAnimatedEntity(std::istream &_rStream);
+     IAnimatedEntity(std::istream & a1);
 
     // address=[0x14e35f0]
-    virtual void Store(std::ostream &a2);
+    virtual void  Store(std::ostream & a2);
 
     // address=[0x14e3780]
-    bool ProcessAllEvents(void);
+    bool  ProcessAllEvents(void);
 
     // address=[0x14e4ae0]
-    virtual void ConvertEventIntoGoal(class CEntityEvent *a1);
+    virtual void  ConvertEventIntoGoal(class CEntityEvent * a1);
 
     // address=[0x14e4b90]
-    int SetLastLogicUpdate(int a2);
+    int  SetLastLogicUpdate(int a2);
 
     // Type information members
 public:
-    BYTE        m_cFrame;
-    BYTE        m_cAttackerPlayerId;
-    WORD        m_wJobPart;
-    WORD        m_wPrevEntity;
-    WORD        m_wNextEntity;
-    DWORD       m_uLastUpdateTick;
-    int         m_uLastLogicUpdate;
+    BYTE m_cFrame;
+    BYTE m_cAttackerPlayerId;
+    WORD m_wJobPart;
+    WORD m_wPrevEntity;
+    WORD m_wNextEntity;
+    DWORD m_uLastUpdateTick;
+    int m_uLastLogicUpdate;
     std::vector m_iEventQueue;
+
 };
 
 

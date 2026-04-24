@@ -121,7 +121,7 @@ protected:
     bool  InitExtraMenu(class CEvn_Logic * a2);
 
     // address=[0x1457890]
-    bool  SelectNextVehicle(class CEvn_Logic * a2);
+    bool  SelectNextVehicle(class CEvn_Logic * _pEvent);
 
     // address=[0x1457b80]
     bool  BuildingAmount(class CEvn_Logic * a2);
@@ -184,7 +184,7 @@ protected:
     bool  GoodDeliveringChanged(class CEvn_Logic * a2);
 
     // address=[0x1458d90]
-    bool  TransportPrioChanged(class CEvn_Logic * a2);
+    bool  TransportPrioChanged(class CEvn_Logic * _pEvent);
 
     // address=[0x1458ec0]
     bool  UnitProduction(class CEvn_Logic * a2);
@@ -223,7 +223,7 @@ protected:
     bool  SelectTypeInSurrounding(class CEvn_Logic * a2);
 
     // address=[0x1459c50]
-    bool  SelectGroup(class CEvn_Logic * a2);
+    bool  SelectGroup(class CEvn_Logic * _pEvent);
 
     // address=[0x1459df0]
     bool  GroupToSelection(class CEvn_Logic * a1);
@@ -337,7 +337,7 @@ protected:
     int  SelectAllInSurrounding(int a2, int a3);
 
     // address=[0x145c790]
-    bool  SelectAtSector(enum SETTLER_TYPES a1, int a2);
+    bool  SelectAtSector(enum SETTLER_TYPES _SettlerType, int a2);
 
     // address=[0x145c8e0]
     int  GetUserESInMiddleOfTheScreen(void);
@@ -398,29 +398,26 @@ public:
     CFsm * m_pFSM;
     DWORD unk_C;
     DWORD m_iBuildBuildingType;
-    DWORD unk_14;
+    DWORD m_iSpellDestination;
     DWORD unk_18;
     DWORD unk_1C;
     DWORD unk_20;
-    DWORD unk_24;
-    DWORD unk_28;
-    DWORD unk_2C;
-    DWORD unk_30;
+    int m_iScreenMapStartX;
+    int m_iScreenMapStartY;
+    int m_iScreenMapEndX;
+    int m_iScreenMapEndY;
     BYTE m_bBoxSelectAllSettler;
     DWORD m_iSelectionLocalPlayerId;
-    DWORD m_iSelectionXStart;
-    DWORD m_iSelectionYStart;
-    DWORD m_iSelectionXEnd;
-    DWORD m_iSelectionYEnd;
+    int m_iSelectionXStart;
+    int m_iSelectionYStart;
+    int m_iSelectionXEnd;
+    int m_iSelectionYEnd;
     DWORD m_iSelectionType;
-    DWORD m_iViewState;
-    DWORD m_pEntityCandidates;
-    DWORD unk_58;
-    DWORD unk_5C;
-    DWORD unk_60;
+    T_INPUT_STATE m_iViewState;
+    std::vector m_pEntityCandidates;
     DWORD m_iSelectionStrict;
     BYTE unk_68;
-    BYTE unk_69;
+    BYTE m_bIsLocal;
     BYTE m_iSelectionMode;
     BYTE unk_6B;
 

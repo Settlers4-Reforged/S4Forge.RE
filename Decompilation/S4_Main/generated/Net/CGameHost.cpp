@@ -605,30 +605,30 @@ void  CGameHost::ContinueSearchForHost(void) {
 // Decompiled from char __thiscall CGameHost::Run(CGameHost *this)
 bool  CGameHost::Run(void) {
   
-  const char *v1; // eax
+  char *v1; // eax
   OnlineManager *Instance; // eax
   int v3; // eax
-  unsigned int v4; // eax
+  uint v4; // eax
   const char *v5; // eax
-  unsigned int CurrentTickCounter; // eax
+  uint CurrentTickCounter; // eax
   const char *v7; // eax
   DWORD v8; // esi
   DWORD v9; // esi
   DWORD v10; // esi
   DWORD v11; // esi
-  int v12; // eax
+  int Size; // esi
   DWORD v13; // esi
-  CEvn_Event *v15; // [esp+18h] [ebp-9A8h]
-  void *v16; // [esp+20h] [ebp-9A0h]
+  struct CEvn_Event *v15; // [esp+18h] [ebp-9A8h]
+  std::string *v16; // [esp+20h] [ebp-9A0h]
   float v17; // [esp+28h] [ebp-998h]
   unsigned int i; // [esp+2Ch] [ebp-994h]
   _BYTE v20[32]; // [esp+36h] [ebp-98Ah] BYREF
   __int16 v21; // [esp+438h] [ebp-588h]
   _BYTE v22[32]; // [esp+43Ah] [ebp-586h] BYREF
   _BYTE v23[28]; // [esp+83Ch] [ebp-184h] BYREF
-  _DWORD v24[6]; // [esp+858h] [ebp-168h] BYREF
-  _BYTE v25[32]; // [esp+870h] [ebp-150h] BYREF
-  CHAR Src[32]; // [esp+890h] [ebp-130h] BYREF
+  CEvn_Event v24; // [esp+858h] [ebp-168h] BYREF
+  CNet_Event v25; // [esp+870h] [ebp-150h] BYREF
+  CNet_Event Src; // [esp+890h] [ebp-130h] BYREF
   CHAR OutputString[256]; // [esp+8B0h] [ebp-110h] BYREF
   int v28; // [esp+9BCh] [ebp-4h]
 
@@ -637,23 +637,24 @@ bool  CGameHost::Run(void) {
   CGameHost::DeliverSimpleMessage(this);
   if ( !(*(unsigned __int8 (__thiscall **)(_DWORD))(**((_DWORD **)this + 49) + 20))(*((_DWORD *)this + 49)) )
   {
-    v16 = (void *)(*(int (__thiscall **)(_DWORD, _BYTE *))(**((_DWORD **)this + 49) + 8))(*((_DWORD *)this + 49), v23);
+    v16 = (std::string *)(*(int (__thiscall **)(_DWORD, _BYTE *))(**((_DWORD **)this + 49) + 8))(
+                           *((_DWORD *)this + 49),
+                           v23);
     v28 = 0;
-    v1 = (const char *)std::string::c_str(v16);
+    v1 = std::string::c_str(v16);
     CTrace::Print("GameHost.cpp: %s!", v1);
     v28 = -1;
     std::string::~string(v23);
   }
   if ( *((_BYTE *)this + 8) )
   {
-    for ( i = 0; i < *(_DWORD *)(g_pGameType + 112); ++i )
+    for ( i = 0; i < g_pGameType->m_iActualPlayerCount; ++i )
     {
-      if ( *(_DWORD *)(g_pGameType + 4 * i + 224) != -1 )
+      if ( g_pGameType->m_sPlayerPeerId[i] != -1 )
       {
         Instance = (OnlineManager *)OnlineManager::GetInstance();
         if ( !OnlineManager::IsInSession(Instance)
-          || (v3 = StormManager::GetInstance(),
-              *(_DWORD *)(g_pGameType + 4 * i + 224) != StormManager::GetLocalPeerId(v3)) )
+          || (v3 = StormManager::GetInstance(), g_pGameType->m_sPlayerPeerId[i] != StormManager::GetLocalPeerId(v3)) )
         {
           if ( *((int *)this + i + 58) > 20 )
           {
@@ -665,30 +666,30 @@ bool  CGameHost::Run(void) {
               if ( v17 > (float)(CMsgStacks::GetNumberOfStacks(*((pairNode **)this + 5)) / 2 + 1) )
               {
                 CurrentTickCounter = IEventEngine::GetCurrentTickCounter(g_pEvnEngine);
-                CNet_Event::CNet_Event((CNet_Event *)v25, 0xFA7u, 0x23u, 0, 0, 0, 0, CurrentTickCounter);
+                CNet_Event::CNet_Event(&v25, 0xFA7u, 0x23u, 0, 0, 0, 0, CurrentTickCounter);
                 v28 = 2;
-                memcpy(v20, v25, sizeof(v20));
-                v7 = (const char *)(*(int (__thiscall **)(_DWORD, _DWORD))(**((_DWORD **)this + 49) + 48))(
+                memcpy(v20, &v25, sizeof(v20));
+                v7 = (const char *)(*(int (__thiscall **)(_DWORD, DWORD))(**((_DWORD **)this + 49) + 48))(
                                      *((_DWORD *)this + 49),
-                                     *(_DWORD *)(g_pGameType + 4 * i + 188));
+                                     g_pGameType->m_sPlayerIP[i]);
                 CTrace::Print("GameHost.cpp: Restrain player index %u, IP %s!", i, v7);
                 v28 = -1;
-                CNet_Event::~CNet_Event((CNet_Event *)v25);
+                CNet_Event::~CNet_Event(&v25);
               }
             }
             else
             {
               v4 = IEventEngine::GetCurrentTickCounter(g_pEvnEngine);
-              CNet_Event::CNet_Event((CNet_Event *)Src, 0xFA7u, 0xFFFFFFDD, 0, 0, 0, 0, v4);
+              CNet_Event::CNet_Event(&Src, 0xFA7u, 0xFFFFFFDD, 0, 0, 0, 0, v4);
               v28 = 1;
               v21 = 1039;
-              memcpy(v22, Src, sizeof(v22));
-              v5 = (const char *)(*(int (__thiscall **)(_DWORD, _DWORD))(**((_DWORD **)this + 49) + 48))(
+              memcpy(v22, &Src, sizeof(v22));
+              v5 = (const char *)(*(int (__thiscall **)(_DWORD, DWORD))(**((_DWORD **)this + 49) + 48))(
                                    *((_DWORD *)this + 49),
-                                   *(_DWORD *)(g_pGameType + 4 * i + 188));
+                                   g_pGameType->m_sPlayerIP[i]);
               CTrace::Print("GameHost.cpp: Boosting player index %u, IP %s!", i, v5);
               v28 = -1;
-              CNet_Event::~CNet_Event((CNet_Event *)Src);
+              CNet_Event::~CNet_Event(&Src);
             }
             *((_DWORD *)this + i + 58) = 0;
             *((_DWORD *)this + i + 50) = 0;
@@ -697,7 +698,7 @@ bool  CGameHost::Run(void) {
       }
     }
   }
-  if ( CFsm::CurrentState(*((CFsm **)this + 3)) == 10 )
+  if ( CFsm::CurrentState(*((CFsm **)this + 3)) == ZOOM_AREA_STATE )
   {
     if ( !*((_DWORD *)this + 10) )
       *((_DWORD *)this + 10) = timeGetTime();
@@ -711,8 +712,10 @@ bool  CGameHost::Run(void) {
       if ( *((_DWORD *)this + 11) > (unsigned int)(CStaticConfigVarInt::operator int(&g_iNetAfterLobbyConnectTimeout)
                                                  / 1000) )
       {
-        CGameStateHandler::Queue((int)CStateMessageBox::DynamicCreateFunc, 2408);
-        CGameStateHandler::Switch((int)CStateMainMenu::DynamicCreateFunc, 0);
+        CGameStateHandler::Queue(
+          (struct CGameState *(__cdecl *)(void *))CStateMessageBox::DynamicCreateFunc,
+          (void *)0x968);
+        CGameStateHandler::Switch(CStateMainMenu::DynamicCreateFunc, 0);
       }
     }
   }
@@ -721,18 +724,19 @@ bool  CGameHost::Run(void) {
     v9 = *((_DWORD *)this + 14) + CStaticConfigVarInt::operator int(&g_iNotReadyGameStartTimeout);
     if ( v9 < timeGetTime() )
     {
-      v15 = CEvn_Event::CEvn_Event((CEvn_Event *)v24, 0xFA1u, 0, 0, 0);
+      v15 = CEvn_Event::CEvn_Event(&v24, 0xFA1u, 0, 0, 0);
       v28 = 3;
       IEventEngine::SendAMessage(g_pEvnEngine, v15);
       v28 = -1;
-      CEvn_Event::~CEvn_Event(v24);
+      CEvn_Event::~CEvn_Event(&v24);
       *((_DWORD *)this + 14) = timeGetTime();
     }
   }
-  if ( (CFsm::CurrentState(*((CFsm **)this + 3)) == 30 || CFsm::CurrentState(*((CFsm **)this + 3)) == 18)
+  if ( (CFsm::CurrentState(*((CFsm **)this + 3)) == (ZOOM_AREA_STATE|TRY_BUILD_STATE|0x10)
+     || CFsm::CurrentState(*((CFsm **)this + 3)) == 18)
     && *((_DWORD *)this + 6) )
   {
-    if ( (int)CGameType::GetNumberHumanPlayers((CGameType *)g_pGameType) <= 1 )
+    if ( CGameType::GetNumberHumanPlayers(g_pGameType) <= 1 )
     {
       CFsm::Control(*((CFsm **)this + 3), 1015, 0);
     }
@@ -746,7 +750,7 @@ bool  CGameHost::Run(void) {
       }
     }
   }
-  if ( CFsm::CurrentState(*((CFsm **)this + 3)) == 27 )
+  if ( CFsm::CurrentState(*((CFsm **)this + 3)) == (MAX_STATE|0x10) )
   {
     if ( !*((_DWORD *)this + 12) )
       *((_DWORD *)this + 12) = timeGetTime();
@@ -757,12 +761,12 @@ bool  CGameHost::Run(void) {
       CFsm::Control(*((CFsm **)this + 3), 1019, 0);
     }
   }
-  if ( CFsm::CurrentState(*((CFsm **)this + 3)) == 15 )
+  if ( CFsm::CurrentState(*((CFsm **)this + 3)) == (MAX_STATE|TRY_BUILD_STATE) )
   {
     if ( !*((_DWORD *)this + 13) )
       *((_DWORD *)this + 13) = timeGetTime();
-    CClientList::GetSize(*((CDaoIndexFieldInfo **)this + 4));
-    if ( v12 == CGameType::HumanPlayers((CGameType *)g_pGameType) - 1 )
+    Size = CClientList::GetSize(*((CDaoIndexFieldInfo **)this + 4));
+    if ( Size == CGameType::HumanPlayers(g_pGameType) - 1 )
     {
       CFsm::Control(*((CFsm **)this + 3), 1014, 0);
     }
@@ -779,7 +783,7 @@ bool  CGameHost::Run(void) {
   if ( *((_BYTE *)this + 9) )
     CGameHost::OnClientRun(this);
   else
-    CGameHost::OnHostRun(this);
+    CGameHost::OnHostRun((CFsm **)this);
   return 0;
 }
 

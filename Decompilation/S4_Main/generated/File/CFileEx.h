@@ -53,7 +53,7 @@ public:
     // Type information members
 public:
     CFile CFile;
-    vbtable * m_pVbtable;
+    vbtable::CFileEx * m_pVbtable;
     int m_uReadOffset;
     bool m_bFileLibraryHandled;
     bool m_bMemoryMapped;

@@ -9,14 +9,14 @@
   
   if ( a2 )
   {
-    this->m_pVbtable = (vbtable *)&CFileEx::_vbtable_;
+    this->m_pVbtable = (vbtable::CFileEx *)&CFileEx::_vbtable_;
     IFileEx::IFileEx(&this->IFileEx);
   }
   CFile::CFile(&this->CFile);
   this->CFile.__vftable = (IFSNode_vtbl *)&CFileEx::_vftable_;
-  *(vbtable **)((char *)&this->m_pVbtable + this->m_pVbtable->virtualBaseOffsets[0]) = (vbtable *)&CFileEx::`vftable';
-  *(FILE **)((char *)&this->CFile.m_hFile + this->m_pVbtable->virtualBaseOffsets[0]) = (FILE *)(this->m_pVbtable->virtualBaseOffsets[0]
-                                                                                              - 32);
+  *(vbtable::CFileEx **)((char *)&this->m_pVbtable + this->m_pVbtable->offsetIFileEx[0]) = (vbtable::CFileEx *)&CFileEx::`vftable';
+  *(FILE **)((char *)&this->CFile.m_hFile + this->m_pVbtable->offsetIFileEx[0]) = (FILE *)(this->m_pVbtable->offsetIFileEx[0]
+                                                                                         - 32);
   this->CFile.m_bTextMode = 1;
   this->m_hFileMemoryHandle = 0;
   this->m_pFileMemoryMap = 0;
@@ -59,15 +59,15 @@ bool  CFileEx::InLibrary(void)const {
 
   if ( a5 )
   {
-    this->m_pVbtable = (vbtable *)&CFileEx::_vbtable_;
+    this->m_pVbtable = (vbtable::CFileEx *)&CFileEx::_vbtable_;
     IFileEx::IFileEx(&this->IFileEx);
   }
   CFile::CFile(&this->CFile);
   v9 = 0;
   this->CFile.__vftable = (IFSNode_vtbl *)&CFileEx::_vftable_;
-  *(vbtable **)((char *)&this->m_pVbtable + this->m_pVbtable->virtualBaseOffsets[0]) = (vbtable *)&CFileEx::`vftable';
-  *(FILE **)((char *)&this->CFile.m_hFile + this->m_pVbtable->virtualBaseOffsets[0]) = (FILE *)(this->m_pVbtable->virtualBaseOffsets[0]
-                                                                                              - 32);
+  *(vbtable::CFileEx **)((char *)&this->m_pVbtable + this->m_pVbtable->offsetIFileEx[0]) = (vbtable::CFileEx *)&CFileEx::`vftable';
+  *(FILE **)((char *)&this->CFile.m_hFile + this->m_pVbtable->offsetIFileEx[0]) = (FILE *)(this->m_pVbtable->offsetIFileEx[0]
+                                                                                         - 32);
   v5 = std::wstring::c_str(a2);
   CFileEx::CFileEx(&v8, v5, a3, a4, 1);
   CFileEx::~CFileEx(&v8);
@@ -81,14 +81,14 @@ bool  CFileEx::InLibrary(void)const {
   
   if ( a5 )
   {
-    this->m_pVbtable = (vbtable *)&CFileEx::_vbtable_;
+    this->m_pVbtable = (vbtable::CFileEx *)&CFileEx::_vbtable_;
     IFileEx::IFileEx(&this->IFileEx);
   }
   CFile::CFile(&this->CFile);
   this->CFile.__vftable = (IFSNode_vtbl *)&CFileEx::_vftable_;
-  *(vbtable **)((char *)&this->m_pVbtable + this->m_pVbtable->virtualBaseOffsets[0]) = (vbtable *)&CFileEx::`vftable';
-  *(FILE **)((char *)&this->CFile.m_hFile + this->m_pVbtable->virtualBaseOffsets[0]) = (FILE *)(this->m_pVbtable->virtualBaseOffsets[0]
-                                                                                              - 32);
+  *(vbtable::CFileEx **)((char *)&this->m_pVbtable + this->m_pVbtable->offsetIFileEx[0]) = (vbtable::CFileEx *)&CFileEx::`vftable';
+  *(FILE **)((char *)&this->CFile.m_hFile + this->m_pVbtable->offsetIFileEx[0]) = (FILE *)(this->m_pVbtable->offsetIFileEx[0]
+                                                                                         - 32);
   if ( !a2 )
     return this;
   this->m_hFileMemoryHandle = 0;
@@ -111,8 +111,8 @@ void  CFileEx::Open(std::wstring const & a2, unsigned int a3, bool a4, char * a5
 
   v6 = std::wstring::c_str(a2);                 // Call to CFileEx->Open with wchar_t*
   return (**(int (__thiscall ***)(char *, wchar_t *, int, _DWORD, int, int))((char *)&ADJ(this)->m_pVbtable
-                                                                           + ADJ(this)->m_pVbtable->virtualBaseOffsets[offsetof(vbtable, topOffset)]))(
-           (char *)&ADJ(this)->m_pVbtable + ADJ(this)->m_pVbtable->virtualBaseOffsets[offsetof(vbtable, topOffset)],
+                                                                           + (unsigned int)ADJ(this)->m_pVbtable->offsetIFileEx))(
+           (char *)&ADJ(this)->m_pVbtable + (unsigned int)ADJ(this)->m_pVbtable->offsetIFileEx,
            v6,
            a3,
            a4,
@@ -133,9 +133,9 @@ void  CFileEx::Open(wchar_t const * FileName, unsigned int _uFileMask, bool a4, 
   ADJ(this)->m_bFileLibraryHandled = 0;
   if ( a4 )
   {                                             // ->MapFile (?)
-    ((void (__thiscall *)(char *, wchar_t *, char *, int))(*(vbtable **)((char *)&ADJ(this)->m_pVbtable
-                                                                       + ADJ(this)->m_pVbtable->virtualBaseOffsets[offsetof(vbtable, topOffset)]))->virtualBaseOffsets[1])(
-      (char *)&ADJ(this)->m_pVbtable + ADJ(this)->m_pVbtable->virtualBaseOffsets[offsetof(vbtable, topOffset)],
+    ((void (__thiscall *)(char *, wchar_t *, char *, int))(*(vbtable::CFileEx **)((char *)&ADJ(this)->m_pVbtable
+                                                                                + (unsigned int)ADJ(this)->m_pVbtable->offsetIFileEx))->offsetCFile)(
+      (char *)&ADJ(this)->m_pVbtable + (unsigned int)ADJ(this)->m_pVbtable->offsetIFileEx,
       FileName,
       Str,
       a6);

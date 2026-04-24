@@ -55,17 +55,17 @@ class String &  String::operator=(class String const & a2) {
 
 
 // address=[0x1351700]
-// Decompiled from void *__thiscall String::operator=(void *this, char *Str)
+// Decompiled from std::string *__thiscall String::operator=(std::string *this, char *Str)
 class String &  String::operator=(char const * Str) {
   
-  void *v3; // [esp+0h] [ebp-28h]
-  _BYTE v5[28]; // [esp+8h] [ebp-20h] BYREF
+  struct std::string *v3; // [esp+0h] [ebp-28h]
+  std::string v5; // [esp+8h] [ebp-20h] BYREF
 
   if ( Str )
   {
-    v3 = std::string::string(v5, Str);
+    v3 = std::string::string(&v5, Str);
     std::string::operator=(this, v3);
-    std::string::~string(v5);
+    std::string::~string(&v5);
   }
   else
   {

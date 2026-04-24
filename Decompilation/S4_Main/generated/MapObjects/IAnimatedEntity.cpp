@@ -125,63 +125,64 @@ void  IAnimatedEntity::ClearAllQueuedEvents(void) {
 // Decompiled from void __thiscall IAnimatedEntity::BoxSelection(IAnimatedEntity *this)
 void  IAnimatedEntity::BoxSelection(void) {
   
-  __int16 v1; // ax
-  __int64 packedXY; // [esp-10h] [ebp-4Ch]
+  int v1; // eax
+  __int16 v2; // ax
+  int v3; // [esp-Ch] [ebp-48h]
   int yScreenOffset; // [esp+1Ch] [ebp-20h] BYREF
   int xScreenOffset; // [esp+20h] [ebp-1Ch] BYREF
   int SelectionType; // [esp+24h] [ebp-18h]
-  int v6; // [esp+28h] [ebp-14h]
-  int EntitySelectionType; // [esp+2Ch] [ebp-10h]
+  DWORD v7; // [esp+28h] [ebp-14h]
+  DWORD EntitySelectionType; // [esp+2Ch] [ebp-10h]
   int mask; // [esp+30h] [ebp-Ch]
-  bool v10; // [esp+3Bh] [ebp-1h]
+  bool v11; // [esp+3Bh] [ebp-1h]
 
   if ( IEntity::OwnerId(this) == g_cInputProcessor.m_iSelectionLocalPlayerId )
   {
-    v6 = CInputProcessor::StrictSelection(&g_cInputProcessor);
+    v7 = CInputProcessor::StrictSelection(&g_cInputProcessor);
     mask = 0xFF0000;
-    if ( v6 == 1 )
+    if ( v7 == 1 )
     {
       mask = 0xFFFF00;
     }
-    else if ( v6 == 2 )
+    else if ( v7 == 2 )
     {
       mask = 0xFFFFFF;
     }
     EntitySelectionType = CInputProcessor::GetEntitySelectionType(this);
     SelectionType = CInputProcessor::GetSelectionType(&g_cInputProcessor);
-    if ( IEntity::FlagBits(this, EntityFlag_Selectable) || IEntity::ObjType(this) == 8 )
+    if ( IEntity::FlagBits(this, EntityFlag_Selectable) || IEntity::ObjType(this) == BUILDING_OBJ )
     {
-      v10 = 0;
-      if ( v6 )
+      v11 = 0;
+      if ( v7 )
       {
-        v10 = (mask & EntitySelectionType) == (mask & SelectionType);
+        v11 = (mask & EntitySelectionType) == (mask & SelectionType);
       }
-      else if ( (EntitySelectionType & 0xFF0000) <= (SelectionType & 0xFF0000) )
+      else if ( (int)(EntitySelectionType & 0xFF0000) <= (SelectionType & 0xFF0000) )
       {
         if ( (EntitySelectionType & 0xFF0000) == (SelectionType & 0xFF0000) )
-          v10 = (EntitySelectionType & 0xFF00) == (SelectionType & 0xFF00);
+          v11 = (EntitySelectionType & 0xFF00) == (SelectionType & 0xFF00);
       }
       else
       {
-        v10 = 1;
+        v11 = 1;
       }
-      if ( v10 )
+      if ( v11 )
       {
         xScreenOffset = -1;
         yScreenOffset = -1;
-        HIDWORD(packedXY) = IEntity::Y(this);
-        LODWORD(packedXY) = IEntity::X(this);
-        if ( IGfxEngine::GetScreenOffsetsByMapIndices(packedXY, &xScreenOffset, &yScreenOffset) )
+        v3 = IEntity::Y(this);
+        v1 = IEntity::X(this);
+        if ( IGfxEngine::GetScreenOffsetsByMapIndices(v1, v3, &xScreenOffset, &yScreenOffset) )
         {
-          if ( (int)g_cInputProcessor.m_iSelectionXStart <= xScreenOffset
-            && (int)g_cInputProcessor.m_iSelectionXEnd >= xScreenOffset
-            && (int)g_cInputProcessor.m_iSelectionYStart <= yScreenOffset
-            && (int)g_cInputProcessor.m_iSelectionYEnd >= yScreenOffset )
+          if ( g_cInputProcessor.m_iSelectionXStart <= xScreenOffset
+            && g_cInputProcessor.m_iSelectionXEnd >= xScreenOffset
+            && g_cInputProcessor.m_iSelectionYStart <= yScreenOffset
+            && g_cInputProcessor.m_iSelectionYEnd >= yScreenOffset )
           {
             if ( !CInputProcessor::BoxSelectAllSettler(&g_cInputProcessor) )
               CInputProcessor::SetSelectionType(&g_cInputProcessor, EntitySelectionType);
-            v1 = IEntity::EntityId(this);
-            CInputProcessor::NewCandidate(&g_cInputProcessor, v1);
+            v2 = IEntity::EntityId(this);
+            CInputProcessor::NewCandidate(&g_cInputProcessor, v2);
           }
         }
       }
@@ -378,7 +379,7 @@ bool  IAnimatedEntity::ProcessAllEvents(void) {
   while ( !(unsigned __int8)std::vector<CEntityEvent>::empty(&this->m_iEventQueue) )
   {
     v1 = std::vector<CEntityEvent>::front(&this->m_iEventQueue);
-    CEntityEvent::CEntityEvent((struct boost::exception_detail::clone_base *)v1);
+    CEntityEvent::CEntityEvent(&v4, v1);
     v15 = 0;
     v11 = (struct std::_Iterator_base12 *)std::vector<CEntityEvent>::begin(&this->m_iEventQueue, (int)v5);
     LOBYTE(v15) = 1;

@@ -1732,8 +1732,8 @@ void __cdecl CSettlerMgr::FillSettlerAmount(class CInfoExchange * a1, bool a2, b
   int LocalPlayerEcoSectorIdAtCenter; // [esp+28h] [ebp-44h]
   CEcoSector *v11; // [esp+2Ch] [ebp-40h]
   int i; // [esp+30h] [ebp-3Ch]
-  int v13; // [esp+34h] [ebp-38h]
-  unsigned int v14; // [esp+38h] [ebp-34h]
+  S4_SETTLER_ENUM _iSettlerType; // [esp+34h] [ebp-38h]
+  _DWORD *v14; // [esp+38h] [ebp-34h]
   int LocalPlayerId; // [esp+3Ch] [ebp-30h]
   int v16; // [esp+40h] [ebp-2Ch]
   int NumberOfSettlers; // [esp+40h] [ebp-2Ch]
@@ -1759,7 +1759,7 @@ void __cdecl CSettlerMgr::FillSettlerAmount(class CInfoExchange * a1, bool a2, b
                        &CInfoExchange__RTTI_Type_Descriptor_,
                        &CSettlerStatisticInfo__RTTI_Type_Descriptor_,
                        0);
-  v14 = (unsigned int)result;
+  v14 = result;
   if ( !result )
   {
     result = (_DWORD *)BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 2037, "pSettlerMenu != 0");
@@ -1768,7 +1768,7 @@ void __cdecl CSettlerMgr::FillSettlerAmount(class CInfoExchange * a1, bool a2, b
   }
   if ( !v14 )
     return result;
-  *(_BYTE *)(v14 + 8) = a3;
+  *((_BYTE *)v14 + 8) = a3;
   LocalPlayerId = CPlayerManager::GetLocalPlayerId();
   LocalPlayerEcoSectorIdAtCenter = 0;
   v11 = 0;
@@ -1783,79 +1783,99 @@ void __cdecl CSettlerMgr::FillSettlerAmount(class CInfoExchange * a1, bool a2, b
   }
   for ( i = 0; i < 36; ++i )
   {
-    v13 = *(_DWORD *)(v14 + 8 * i + 40);
-    if ( v13 )
+    _iSettlerType = v14[2 * i + 10];
+    if ( _iSettlerType )
     {
       v16 = 0;
-      switch ( v13 )
+      switch ( _iSettlerType )
       {
-        case 29:
-        case 30:
-        case 31:
-          NumberOfSettlers = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, 29);
-          v18 = NumberOfSettlers + CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, 30);
-          v16 = v18 + CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, 31);
+        case SETTLER_SWORDSMAN_01:
+        case SETTLER_SWORDSMAN_02:
+        case SETTLER_SWORDSMAN_03:
+          NumberOfSettlers = CSettlerMgr::GetNumberOfSettlers(
+                               (CSettlerMgr *)g_cSettlerMgr,
+                               LocalPlayerId,
+                               SETTLER_SWORDSMAN_01);
+          v18 = NumberOfSettlers
+              + CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, SETTLER_SWORDSMAN_02);
+          v16 = v18
+              + CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, SETTLER_SWORDSMAN_03);
           break;
-        case 32:
-        case 33:
-        case 34:
-          v19 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, 32);
-          v20 = v19 + CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, 33);
-          v16 = v20 + CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, 34);
+        case SETTLER_BOWMAN_01:
+        case SETTLER_BOWMAN_02:
+        case SETTLER_BOWMAN_03:
+          v19 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, SETTLER_BOWMAN_01);
+          v20 = v19 + CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, SETTLER_BOWMAN_02);
+          v16 = v20 + CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, SETTLER_BOWMAN_03);
           break;
-        case 35:
-        case 36:
-        case 37:
-          v21 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, 35);
-          v22 = v21 + CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, 36);
-          v16 = v22 + CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, 37);
+        case SETTLER_MEDIC_01:
+        case SETTLER_MEDIC_02:
+        case SETTLER_MEDIC_03:
+          v21 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, SETTLER_MEDIC_01);
+          v22 = v21 + CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, SETTLER_MEDIC_02);
+          v16 = v22 + CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, SETTLER_MEDIC_03);
           break;
-        case 38:
-        case 39:
-        case 40:
-          v23 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, 38);
-          v24 = v23 + CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, 39);
-          v16 = v24 + CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, 40);
+        case SETTLER_AXEWARRIOR_01:
+        case SETTLER_AXEWARRIOR_02:
+        case SETTLER_AXEWARRIOR_03:
+          v23 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, SETTLER_AXEWARRIOR_01);
+          v24 = v23
+              + CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, SETTLER_AXEWARRIOR_02);
+          v16 = v24
+              + CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, SETTLER_AXEWARRIOR_03);
           break;
-        case 41:
-        case 42:
-        case 43:
-          v25 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, 41);
-          v26 = v25 + CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, 42);
-          v16 = v26 + CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, 43);
+        case SETTLER_BLOWGUNWARRIOR_01:
+        case SETTLER_BLOWGUNWARRIOR_02:
+        case SETTLER_BLOWGUNWARRIOR_03:
+          v25 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, SETTLER_BLOWGUNWARRIOR_01);
+          v26 = v25
+              + CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, SETTLER_BLOWGUNWARRIOR_02);
+          v16 = v26
+              + CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, SETTLER_BLOWGUNWARRIOR_03);
           break;
-        case 61:
-        case 62:
-        case 63:
-          v27 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, 61);
-          v28 = v27 + CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, 62);
-          v16 = v28 + CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, 63);
+        case SETTLER_BACKPACKCATAPULTIST_01:
+        case SETTLER_BACKPACKCATAPULTIST_02:
+        case SETTLER_BACKPACKCATAPULTIST_03:
+          v27 = CSettlerMgr::GetNumberOfSettlers(
+                  (CSettlerMgr *)g_cSettlerMgr,
+                  LocalPlayerId,
+                  SETTLER_BACKPACKCATAPULTIST_01);
+          v28 = v27
+              + CSettlerMgr::GetNumberOfSettlers(
+                  (CSettlerMgr *)g_cSettlerMgr,
+                  LocalPlayerId,
+                  SETTLER_BACKPACKCATAPULTIST_02);
+          v16 = v28
+              + CSettlerMgr::GetNumberOfSettlers(
+                  (CSettlerMgr *)g_cSettlerMgr,
+                  LocalPlayerId,
+                  SETTLER_BACKPACKCATAPULTIST_03);
           break;
         default:
-          v5 = CSettlerMgr::SettlerWarriorType(v13);
+          v5 = CSettlerMgr::SettlerWarriorType(_iSettlerType);
           if ( !a3 || v5 )
           {
-            v16 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, v13);
+            v16 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, _iSettlerType);
           }
           else if ( v11 )
           {
-            v16 = CEcoSector::NrOfSettler(v11, v13);
+            v16 = CEcoSector::NrOfSettler(v11, _iSettlerType);
           }
           break;
       }
-      *(_DWORD *)(v14 + 8 * i + 44) = v16;
+      v14[2 * i + 11] = v16;
     }
   }
-  *(_DWORD *)(v14 + 12) = CEcoSectorMgr::GetNrOfCurrentTotalBeds((CEcoSectorMgr *)g_cESMgr, LocalPlayerId);
-  *(_DWORD *)(v14 + 16) = CEcoSectorMgr::GetNrOfInitialFreeBeds((CEcoSectorMgr *)g_cESMgr, LocalPlayerId);
-  *(_DWORD *)(v14 + 20) = *(_DWORD *)(v14 + 12) - *(_DWORD *)(v14 + 16);
-  v4 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, 1);
-  *(_DWORD *)(v14 + 28) = CEcoSectorMgr::GetNrStrikingCarriers((CEcoSectorMgr *)g_cESMgr, LocalPlayerId);
-  *(_DWORD *)(v14 + 24) = v4 - *(_DWORD *)(v14 + 28);
+  v14[3] = CEcoSectorMgr::GetNrOfCurrentTotalBeds((CEcoSectorMgr *)g_cESMgr, LocalPlayerId);
+  v14[4] = CEcoSectorMgr::GetNrOfInitialFreeBeds((CEcoSectorMgr *)g_cESMgr, LocalPlayerId);
+  v14[5] = v14[3] - v14[4];
+  v4 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, SETTLER_CARRIER);
+  v14[7] = CEcoSectorMgr::GetNrStrikingCarriers((CEcoSectorMgr *)g_cESMgr, LocalPlayerId);
+  v14[6] = v4 - v14[7];
   if ( a3 )
   {
     if ( v11 )
-      v8 = CEcoSector::NrOfSettler(v11, 1);
+      v8 = CEcoSector::NrOfSettler(v11, SETTLER_CARRIER);
     else
       v8 = 0;
     if ( LocalPlayerEcoSectorIdAtCenter <= 0 )
@@ -1864,19 +1884,19 @@ void __cdecl CSettlerMgr::FillSettlerAmount(class CInfoExchange * a1, bool a2, b
       NrOfStrikingCarriersInEcoSector = CEcoSectorMgr::GetNrOfStrikingCarriersInEcoSector(
                                           (CEcoSectorMgr *)g_cESMgr,
                                           LocalPlayerEcoSectorIdAtCenter);
-    *(_DWORD *)(v14 + 36) = NrOfStrikingCarriersInEcoSector;
-    *(_DWORD *)(v14 + 32) = v8 - NrOfStrikingCarriersInEcoSector;
+    v14[9] = NrOfStrikingCarriersInEcoSector;
+    v14[8] = v8 - NrOfStrikingCarriersInEcoSector;
   }
   else
   {
-    *(_DWORD *)(v14 + 36) = *(_DWORD *)(v14 + 28);
-    *(_DWORD *)(v14 + 32) = *(_DWORD *)(v14 + 24);
+    v14[9] = v14[7];
+    v14[8] = v14[6];
   }
-  *(_DWORD *)(v14 + 4) = 29;
+  v14[1] = 29;
   v6 = 604;
   if ( !a2 )
     v6 = 602;
-  CEvn_Event::CEvn_Event(&v29, v6, 0, v14, 0);
+  CEvn_Event::CEvn_Event(&v29, v6, 0, (unsigned int)v14, 0);
   v30 = 0;
   if ( !g_pEvnEngine && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 2186, "g_pEvnEngine != NULL") == 1 )
     __debugbreak();

@@ -18,6 +18,11 @@ protected:
     // address=[0x1474c70]
     void  Clear(void);
 
+    // Type information members
+public:
+    int m_iMushroomFarmsDestroyed;
+    int m_iServantsFreed;
+
 };
 
 

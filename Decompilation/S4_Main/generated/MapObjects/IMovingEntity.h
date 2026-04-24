@@ -99,8 +99,6 @@ public:
     struct CWalking * m_pWalkin;
     DWORD m_pToDoList;
     std::list m_cCurrentToDoItemIter;
-    DWORD unk_5C;
-    DWORD unk_60;
 
 };
 

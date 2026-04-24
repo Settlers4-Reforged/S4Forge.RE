@@ -57,6 +57,16 @@ protected:
     // address=[0x1474cd0]
     void  SetMaxNumberOfBigTemples(int a2);
 
+    // Type information members
+public:
+    int m_iFlags;
+    int m_iManaAmount;
+    int m_iTotalAmountOfCollectedMana;
+    int m_iMaxNumberOfBigTemples;
+    int[8] m_aSpellCategoryCost;
+    int[8] m_aSpellCategoryCounter;
+    int[8] m_aMaxSpellCastNumbers;
+
 };
 
 

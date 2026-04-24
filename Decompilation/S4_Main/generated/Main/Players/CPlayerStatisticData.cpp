@@ -3,14 +3,10 @@
 // Definitions for class CPlayerStatisticData
 
 // address=[0x1508170]
-// Decompiled from CPlayerStatisticData *__thiscall CPlayerStatisticData::IncreaseMushroomFarmsDestroyed(CPlayerStatisticData *this)
+// Decompiled from void __thiscall CPlayerStatisticData::IncreaseMushroomFarmsDestroyed(CPlayerStatisticData *this)
 void  CPlayerStatisticData::IncreaseMushroomFarmsDestroyed(void) {
   
-  CPlayerStatisticData *result; // eax
-
-  result = this;
-  ++*(_DWORD *)this;
-  return result;
+  ++this->m_iMushroomFarmsDestroyed;
 }
 
 
@@ -18,7 +14,7 @@ void  CPlayerStatisticData::IncreaseMushroomFarmsDestroyed(void) {
 // Decompiled from int __thiscall CPlayerStatisticData::MushroomFarmsDestroyed(CPlayerStatisticData *this)
 int  CPlayerStatisticData::MushroomFarmsDestroyed(void)const {
   
-  return *(_DWORD *)this;
+  return this->m_iMushroomFarmsDestroyed;
 }
 
 
@@ -26,7 +22,7 @@ int  CPlayerStatisticData::MushroomFarmsDestroyed(void)const {
 // Decompiled from int __thiscall CPlayerStatisticData::ServantsFreed(CPlayerStatisticData *this)
 int  CPlayerStatisticData::ServantsFreed(void)const {
   
-  return *((_DWORD *)this + 1);
+  return this->m_iServantsFreed;
 }
 
 
@@ -34,7 +30,7 @@ int  CPlayerStatisticData::ServantsFreed(void)const {
 // Decompiled from void *__thiscall CPlayerStatisticData::Clear(CPlayerStatisticData *this)
 void  CPlayerStatisticData::Clear(void) {
   
-  return memset(this, 0, 8u);
+  return memset(this, 0, sizeof(CPlayerStatisticData));
 }
 
 

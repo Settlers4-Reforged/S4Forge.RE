@@ -27,7 +27,7 @@ int __cdecl COwnerMap::OwnerBit(int a1) {
 
 
 // address=[0x1351d30]
-// Decompiled from int __cdecl COwnerMap::OwnerBits1XY(Squares *a1, Squares *a2)
+// Decompiled from int __cdecl COwnerMap::OwnerBits1XY(int a1, int a2)
 int __cdecl COwnerMap::OwnerBits1XY(int a1, int a2) {
   
   int v2; // esi

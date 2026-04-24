@@ -192,15 +192,15 @@ void __cdecl CPlayerManager::Init(void) {
 
 
 // address=[0x1497420]
-// Decompiled from int __cdecl CPlayerManager::AddPlayer(  DWORD _iPlayerRace,  DWORD _iPlayerX,  DWORD _iPlayerY,  DWORD _iPlayerColor,  DWORD _iPlayerIP,  DWORD _iPeerId,  std::wstring a2,  DWORD a8)
-int __cdecl CPlayerManager::AddPlayer(int _iPlayerRace, int _iPlayerX, int _iPlayerY, int _iPlayerColor, int _iPlayerIP, int _iPeerId, std::wstring a2, int a8) {
+// Decompiled from int __cdecl CPlayerManager::AddPlayer(  DWORD _iPlayerRace,  DWORD _iPlayerX,  DWORD _iPlayerY,  DWORD _iPlayerColor,  DWORD _iPlayerIP,  DWORD _iPeerId,  std::wstring _swPlayerName,  DWORD _iType)
+int __cdecl CPlayerManager::AddPlayer(int _iPlayerRace, int _iPlayerX, int _iPlayerY, int _iPlayerColor, int _iPlayerIP, int _iPeerId, std::wstring _swPlayerName, int _iType) {
   
   OnlineManager *Instance; // eax
   wchar_t *v10; // eax
   size_t v11; // [esp+18h] [ebp-11Ch]
   int v12; // [esp+1Ch] [ebp-118h]
   CPlayerInfo *v13; // [esp+20h] [ebp-114h]
-  char Dest[256]; // [esp+24h] [ebp-110h] BYREF
+  char _spPlayerName[256]; // [esp+24h] [ebp-110h] BYREF
   int v15; // [esp+130h] [ebp-4h]
 
   v15 = 0;
@@ -213,7 +213,7 @@ int __cdecl CPlayerManager::AddPlayer(int _iPlayerRace, int _iPlayerX, int _iPla
     }
 LABEL_15:
     v15 = -1;
-    std::wstring::~wstring(&a2);
+    std::wstring::~wstring(&_swPlayerName);
     return 0;
   }
   if ( CPlayerManager::m_iLocked )
@@ -242,8 +242,8 @@ LABEL_15:
   v13->m_iColor = _iPlayerColor;
   v13->m_iIp = _iPlayerIP;
   v13->m_iPeerId = _iPeerId;
-  std::wstring::operator=(&v13->m_swName, &a2);
-  v13->m_iType = a8;
+  std::wstring::operator=(&v13->m_swName, &_swPlayerName);
+  v13->m_iType = _iType;
   LOBYTE(v13->m_bInitialized) = 1;
   Instance = (OnlineManager *)OnlineManager::GetInstance();
   if ( OnlineManager::IsLocalPeerId(Instance, _iPeerId) )
@@ -251,21 +251,21 @@ LABEL_15:
     CPlayerManager::m_iLocalPlayer = v12;
     CTrace::Print("Created local Player with id#%d", v12);
   }
-  v10 = std::wstring::c_str(&a2);
-  v11 = j__wcstombs(Dest, v10, 0x100u);
+  v10 = std::wstring::c_str(&_swPlayerName);
+  v11 = j__wcstombs(_spPlayerName, v10, 0x100u);
   if ( v11 >= 0x100 )
     report_rangecheckfailure();
-  Dest[v11] = 0;
+  _spPlayerName[v11] = 0;
   CTrace::Print(
     "PlayerManager.cpp: Adding player %s at %d/%d, with race %d, color %d, IP %d!",
-    Dest,
+    _spPlayerName,
     _iPlayerX,
     _iPlayerY,
     _iPlayerRace,
     _iPlayerColor,
     _iPlayerIP);
   v15 = -1;
-  std::wstring::~wstring(&a2);
+  std::wstring::~wstring(&_swPlayerName);
   return v12;
 }
 
@@ -318,31 +318,21 @@ void __cdecl CPlayerManager::Done(void) {
 
 
 // address=[0x14977b0]
-// Decompiled from int __thiscall CPlayerManager::Load(CPlayerManager *this, struct IS4Chunk *a2)
+// Decompiled from void __thiscall CPlayerManager::Load(CPlayerManager *this, struct IS4Chunk *a2)
 void  CPlayerManager::Load(class IS4Chunk & a2) {
   
-  int result; // eax
   int i; // [esp+4h] [ebp-4h]
   int j; // [esp+4h] [ebp-4h]
 
-  CPlayerManager::m_iNumberOfPlayer = (*(int (__thiscall **)(struct IS4Chunk *, _DWORD, int))(*(_DWORD *)a2 + 4))(
-                                        a2,
-                                        0,
-                                        12);
-  CPlayerManager::m_iLocalPlayer = (*(int (__thiscall **)(struct IS4Chunk *))(*(_DWORD *)a2 + 8))(a2);
+  CPlayerManager::m_iNumberOfPlayer = a2->LoadUnsigned32(0, 12);
+  CPlayerManager::m_iLocalPlayer = a2->LoadUnsigned32_(a2);
   for ( i = 1; i <= CPlayerManager::LastPlayerId(); ++i )
   {
-    CPlayerGameData::Load((CPlayerGameData *)((char *)&CPlayerManager::m_cPlayerGameData + 152 * i), a2);
-    CPlayerGameData::PostLoadInit((CPlayerGameData *)((char *)&CPlayerManager::m_cPlayerGameData + 152 * i), i);
+    CPlayerGameData::Load(&CPlayerManager::m_cPlayerGameData[i], a2);
+    CPlayerGameData::PostLoadInit(&CPlayerManager::m_cPlayerGameData[i], i);
   }
-  for ( j = 1; ; ++j )
-  {
-    result = CPlayerManager::LastPlayerId();
-    if ( j > result )
-      break;
+  for ( j = 1; j <= CPlayerManager::LastPlayerId(); ++j )
     CPlayerInfo::Load(&CPlayerManager::m_cPlayerInfos[j], a2);
-  }
-  return result;
 }
 
 

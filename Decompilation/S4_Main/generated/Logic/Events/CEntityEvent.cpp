@@ -52,7 +52,7 @@ class CPersistence * __cdecl CEntityEvent::New(std::istream & a1) {
  CEntityEvent::CEntityEvent(class CEntityEvent const & a2) {
   
   CPersistence::CPersistence(this);
-  this->__vftable = (CPersistence_vtbl *)&CEntityEvent::_vftable_;
+  this->__vftable = (CEntityEvent_vtbl *)&CEntityEvent::_vftable_;
   this->m_iEvent = a2->m_iEvent;
   this->m_iType = a2->m_iType;
   this->m_iDataA = a2->m_iDataA;

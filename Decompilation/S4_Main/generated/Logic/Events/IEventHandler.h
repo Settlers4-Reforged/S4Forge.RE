@@ -13,7 +13,7 @@ public:
 
     // Type information members
 public:
-    char (__thiscall **)(CInputProcessor *this, struct CEvn_Logic *) m_pHandlers;
+    char (__thiscall **)(IEventHandler *this, void *) m_pHandlers;
 
 };
 

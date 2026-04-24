@@ -1,3 +1,4 @@
+#if FALSE
 #include "CWarMapNode.h"
 
 // Definitions for class CWarMapNode
@@ -71,3 +72,4 @@ void  CWarMapNode::SetPrevNext(int a2, int a3) {
 }
 
 
+#endif // Already implemented
