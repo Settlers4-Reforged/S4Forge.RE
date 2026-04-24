@@ -1,0 +1,188 @@
+#ifndef LOGIC_H
+#define LOGIC_H
+
+#include "DefineTransformers.h"
+
+#define LOGIC_MSGS \
+    X(0, LOGIC_MSG_BEGIN) \
+X(1, LOGIC_MSG_DEFAULT) \
+X(2, LOGIC_MSG_NEW_DIALOG) \
+X(3, LOGIC_MSG_SHOWWORKINGAREA) \
+X(4, LOGIC_MSG_TRYCRUSH_BUILDING) \
+X(5, LOGIC_MSG_CRUSH_BUILDING) \
+X(6, LOGIC_MSG_SWITCH_BUILDING) \
+X(7, LOGIC_MSG_PRIO_BUILDING_SITE) \
+X(8, LOGIC_MSG_NEXT_BUILDING) \
+X(9, LOGIC_MSG_CHOOSE_TRADE_DEST) \
+X(10, LOGIC_MSG_GOTO_POS) \
+X(11, LOGIC_MSG_FORCE_GOTO) \
+X(12, LOGIC_MSG_STAND_GROUND) \
+X(13, LOGIC_MSG_WAYPOINT) \
+X(14, LOGIC_MSG_PATROL ) \
+X(15, LOGIC_MSG_INJURED_OUT) \
+X(16, LOGIC_MSG_ESCORT) \
+X(17, LOGIC_MSG_EMPTY) \
+X(18, LOGIC_MSG_LOAD) \
+X(19, LOGIC_MSG_MORPH2FOUNDATIONCART) \
+X(20, LOGIC_MSG_MORPH2CART) \
+X(21, LOGIC_MSG_FOUNDATION) \
+X(22, LOCIC_MSG_GOTO_VEHICLE_GROUP_MENU) \
+X(23, LOGIC_MSG_MORPH_2_CARRIER) \
+X(24, LOGIC_MSG_ENTITY_TO_SELECTION) \
+X(25, LOGIC_MSG_SELECT_KIND) \
+X(26, LOGIC_MSG_SELECT_TYPE) \
+X(27, LOGIC_MSG_NEXT_VEHICLE) \
+X(28, LOGIC_MSG_INIT_BUILD_MENU) \
+X(29, LOGIC_MSG_INIT_SETTLERSTATISTIC_MENU) \
+X(30, LOGIC_MSG_INIT_FREECARRIER_MENU) \
+X(31, LOGIC_MSG_INIT_SETTLERPRODUCTION_MENU) \
+X(32, LOGIC_MSG_INIT_AVAILABLE_GOODS_MENU) \
+X(33, LOGIC_MSG_INIT_TRANSPORTPRIORITY_MENU) \
+X(34, LOGIC_MSG_INIT_GOODDISTRIBUTION_MENU) \
+X(35, LOGIC_MSG_INIT_STATISTIC) \
+X(36, LOGIC_MSG_INIT_ECONOMYGAME_MENU) \
+X(37, LOGIC_MSG_TRYBUILD) \
+X(38, LOGIC_MSG_MARK_NEXT_BUILDING) \
+X(39, LOGIC_MSG_BUILDING_MATERIAL) \
+X(40, LOGIC_MSG_SWITCH_LOCAL) \
+X(41, LOGIC_MSG_SEARCH_UNIT) \
+X(42, LOGIC_MSG_UNIT_RESERVATION) \
+X(43, LOGIC_MSG_GET_TOWER_WARRIOR) \
+X(44, LOGIC_MSG_THROW_OUT_TOWER_WARRIOR) \
+X(45, LOGIC_MSG_GOOD_DELIVERING_CHANGED) \
+X(46, LOGIC_MSG_TRANSPORT_PRIO) \
+X(47, LOGIC_MSG_DESTROY_VEHICLE) \
+X(48, LOGIC_MSG_DESTROY_CART_WARMACHINE) \
+X(49, LOGIC_MSG_INIT_MAGIC_SIDEBAR) \
+X(50, LOGIC_MSG_INIT_GROUP_SIDEBAR) \
+X(51, LOGIC_MSG_INIT_ADDSOLDIER_SIDEBAR) \
+X(52, LOGIC_MSG_INIT_TOOL_SIDEBAR) \
+X(53, LOGIC_MSG_INIT_WEAPON_SIDEBAR) \
+X(54, LOGIC_MSG_INIT_SPECIALIST_SIDEBAR) \
+X(55, LOGIC_MSG_INIT_GOODSOUT_SIDEBAR) \
+X(56, LOGIC_MSG_INIT_TRADE_SIDEBAR) \
+X(57, LOGIC_MSG_INIT_STORAGE_SIDBAR) \
+X(58, LOGIC_MSG_INIT_EYECATCHER_SIDBAR) \
+X(59, LOGIC_MSG_INIT_ADDVEHICLE_SIDBAR) \
+X(60, LOGIC_MSG_CLOSED_SIDEBAR) \
+X(61, LOGIC_MSG_UNIT_PRODUCTION) \
+X(62, LOGIC_MSG_URGENT_PRODUCTION) \
+X(63, LOGIC_MSG_WEAPON_PERCENT_CHANGED) \
+X(64, LOGIC_MSG_WEAPONAUTOPRODUCTION) \
+X(65, LOGIC_MSG_TRANSPORT_GOOD) \
+X(66, LOGIC_MSG_TRADE_WITH) \
+X(67, LOGIC_MSG_TRADE_GOOD) \
+X(68, LOGIC_MSG_STORAGE_GOOD_SWITCH) \
+X(69, LOGIC_MSG_VEHICLE_PRODUCTION) \
+X(70, LOGIC_MSG_DEFINE_GROUP) \
+X(71, LOGIC_MSG_GROUP_TO_SELECTION) \
+X(72, LOGIC_MSG_SELECT_GROUP) \
+X(73, LOGIC_MSG_FOCUS_GROUP) \
+X(74, LOGIC_MSG_TRY_CAST_SPELL) \
+X(75, LOGIC_MSG_MINIMAP) \
+X(76, LOGIC_MSG_CHOOSE_OBSERVE_TARGET) \
+X(77, LOGIC_MSG_LMB) \
+X(78, LOGIC_MSG_BOX_SELECTION) \
+X(79, LOGIC_MSG_BOX_SELECTION_VIRTUAL) \
+X(80, LOGIC_MSG_RMB) \
+X(81, LOGIC_MSG_SPECIALIST_PRODUCTION) \
+X(82, LOGIC_MSG_INIT_EXTRA_MENU) \
+X(83, LOGIC_MSG_ZOOM_AREA) \
+X(84, LOGIC_MSG_END)
+
+#define X TO_ENUM
+
+enum T_LOGIC_MSG {
+    LOGIC_MSGS
+};
+
+#undef X
+
+enum T_LOGIC_HANDLERS {
+    HandleInternalError     = 0,
+    Default                 = 1,
+    NewDialogClear          = 17,
+    EmptyFunct              = 3,
+    TryBuild                = 4,
+    Build                   = 5,
+    ShowWorkingArea         = 6,
+    SetWorkingArea          = 7,
+    TryCrushBuilding        = 8,
+    CrushBuilding           = 9,
+    SwitchBuilding          = 10,
+    PrioBuildingSite        = 11,
+    SelectNextBuilding      = 12,
+    SelectBuilding          = 13,
+    MarkNextBuilding        = 15,
+    SelectNextVehicle       = 14,
+    BuildingAmount          = 16,
+    FillTower               = 18,
+    EmptyTower              = 19,
+    ChooseTradeDest         = 21,
+    SelectTradeDest         = 22,
+    TransportGoods          = 23,
+    TradeWith               = 24,
+    TradeGoods              = 25,
+    SetTradePlayerStatus    = 26,
+    PrepareBoxSelection     = 27,
+    DotSelection            = 28,
+    SelectTypeInSurrounding = 29,
+    SelectGroup             = 30,
+    GroupToSelection        = 31,
+    DefineGroup             = 32,
+    FocusGroup              = 33,
+    SendTo                  = 34,
+    ForceGoto               = 35,
+    StandGround             = 36,
+    ChooseSecondPatrolPos   = 37,
+    SelectSecondPatrolPos   = 38,
+    InjuredOut              = 40,
+    MorphToCarrier          = 41,
+    InitExtraMenu           = 20,
+    InitEconomyGameMenu     = 56,
+    GotoVehicleGroupMenu    = 39,
+    SearchUnit              = 48,
+    UnitReservation         = 49,
+    ChooseSpellDest         = 42,
+    SelectSpellDest         = 43,
+    SwitchLocalGlobal       = 74,
+    InitSettlerAmount       = 44,
+    InitFreeCarrier         = 45,
+    InitSettlerProduction   = 46,
+    InitSettlerSearch       = 47,
+    InitGoodAmount          = 50,
+    InitTransportPrio       = 51,
+    InitGoodDistribution    = 52,
+    GoodDeliveringChanged   = 54,
+    TransportPrioChanged    = 53,
+    UnitProduction          = 68,
+    UrgentProduction        = 69,
+    WeaponPercent           = 70,
+    WeaponAutoproduction    = 71,
+    StorageGoodSwitch       = 72,
+    VehicleProduction       = 73,
+    DestroyBuildupVehicle   = 82,
+    SpecialistProduction    = 75,
+    InitMagicSideBar        = 57,
+    InitGroupSideBar        = 58,
+    InitAddSoldierSideBar   = 59,
+    InitToolSideBar         = 60,
+    InitWeaponSideBar       = 61,
+    InitGoodsOutSideBar     = 62,
+    InitTradeSideBar        = 63,
+    InitStorageSideBar      = 64,
+    InitEyeCatcherSideBar   = 65,
+    InitAddVehicleSideBar   = 66,
+    CloseSideBar            = 67,
+    Morph2FoundationCart    = 76,
+    CreateSettlement        = 77,
+    Morph2Cart              = 78,
+    VehicleUnload           = 79,
+    CatapultLoad            = 80,
+    DestroyWarMachine       = 81,
+    ClearDialog             = 2,
+    ZoomAreaState           = 83,
+    CamSelection            = 84,
+};
+
+#endif //LOGIC_H
