@@ -142,61 +142,10 @@ static_assert(sizeof(SSaveFileChunk) == 0x18, "Size of SSaveFileChunk is not 24 
 // address=[0x13dad70]
 // Decompiled from void *__thiscall S4::CMapFile::LoadChunk(  S4::CMapFile *this,  unsigned __int16 a2,  unsigned __int16 a3,  int *a4,  size_t *a5)
 void const *S4::CMapFile::LoadChunk(unsigned short a2, unsigned short a3, int &a4, int *_uReadSize) {
-  void **                v6; // eax
-  std::_Iterator_base12 *v7; // [esp-4h] [ebp-11Ch]
-  std::_Iterator_base12 *v8; // [esp-4h] [ebp-11Ch]
-  std::_Iterator_base12 *v9; // [esp-4h] [ebp-11Ch]
-  _BYTE                  v10[12]; // [esp+4h] [ebp-114h] BYREF
-  _BYTE                  v11[12]; // [esp+10h] [ebp-108h] BYREF
-  _BYTE                  v12[12]; // [esp+1Ch] [ebp-FCh] BYREF
-  _BYTE                  v13[12]; // [esp+28h] [ebp-F0h] BYREF
-  _BYTE                  v14[12]; // [esp+34h] [ebp-E4h] BYREF
-  _BYTE                  v15[12]; // [esp+40h] [ebp-D8h] BYREF
-  void *                 v16; // [esp+4Ch] [ebp-CCh]
-  void *                 v17; // [esp+50h] [ebp-C8h]
-  void *                 pUncompressedChunkData; // [esp+54h] [ebp-C4h]
-  char *                 pChunkFileEnd; // [esp+5Ch] [ebp-BCh]
-  char *                 pChunkCompressedEnd; // [esp+60h] [ebp-B8h]
-  std::_Iterator_base12 *v22; // [esp+64h] [ebp-B4h]
-  char *                 v23; // [esp+68h] [ebp-B0h]
-  unsigned int           v24; // [esp+6Ch] [ebp-ACh]
-  void *                 C; // [esp+70h] [ebp-A8h]
-  // [esp+74h] [ebp-A4h]
-  void *                 v27; // [esp+78h] [ebp-A0h]
-  std::_Iterator_base12 *v28; // [esp+7Ch] [ebp-9Ch]
-  std::_Iterator_base12 *v29; // [esp+80h] [ebp-98h]
-  std::_Iterator_base12 *v30; // [esp+84h] [ebp-94h]
-  std::_Iterator_base12 *v31; // [esp+88h] [ebp-90h]
-  std::_Iterator_base12 *v32; // [esp+90h] [ebp-88h]
-  std::_Iterator_base12 *v33; // [esp+94h] [ebp-84h]
-  std::_Iterator_base12 *v34; // [esp+98h] [ebp-80h]
-  std::_Iterator_base12 *v35; // [esp+9Ch] [ebp-7Ch]
-  std::_Iterator_base12 *v36; // [esp+A0h] [ebp-78h]
-  std::_Iterator_base12 *v37; // [esp+A4h] [ebp-74h]
-  std::_Iterator_base12 *v38; // [esp+A8h] [ebp-70h]
-  // [esp+ACh] [ebp-6Ch]
-  int     v40; // [esp+B0h] [ebp-68h] BYREF
-  int     v41; // [esp+B4h] [ebp-64h] BYREF
-  int     pExceptionObject; // [esp+B8h] [ebp-60h] BYREF
-  BOOL    v43; // [esp+BCh] [ebp-5Ch]
-  _DWORD *v44; // [esp+C0h] [ebp-58h]
-  BOOL    v45; // [esp+C4h] [ebp-54h]
-  int     v46; // [esp+C8h] [ebp-50h] BYREF
-  int     v47; // [esp+CCh] [ebp-4Ch]
-  int     v48; // [esp+D0h] [ebp-48h]
-  char *  pChunkDataBuffer; // [esp+D4h] [ebp-44h]
-  // [esp+D8h] [ebp-40h]
-  bool   v51; // [esp+DDh] [ebp-3Bh]
-  bool   v52; // [esp+DEh] [ebp-3Ah]
-  bool   v53; // [esp+DFh] [ebp-39h]
-  int    v54; // [esp+E0h] [ebp-38h] BYREF
-  char * pReadChunkData; // [esp+E4h] [ebp-34h]
-  int    v57; // [esp+ECh] [ebp-2Ch]
-  size_t uElementSize; // [esp+F4h] [ebp-24h]
-  size_t v60; // [esp+F8h] [ebp-20h]
-  int    v61; // [esp+FCh] [ebp-1Ch]
-  int    v62; // [esp+104h] [ebp-14h]
-  int    v63; // [esp+114h] [ebp-4h]
+  char *pChunkFileEnd; // [esp+5Ch] [ebp-BCh]
+  char *pChunkCompressedEnd; // [esp+60h] [ebp-B8h]
+  char *pChunkDataBuffer; // [esp+D4h] [ebp-44h]
+  char *pReadChunkData; // [esp+E4h] [ebp-34h]
 
   int  uRequestedType = a2 + (a3 << 16);
   auto itFoundRef = m_vRefCounts.find(uRequestedType);

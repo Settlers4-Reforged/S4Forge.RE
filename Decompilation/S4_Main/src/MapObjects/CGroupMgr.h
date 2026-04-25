@@ -56,7 +56,7 @@ public:
 private:
     static const int MAX_GROUP_SIZE = 100;
     static const int MAX_GROUPS_PER_PLAYER = 11;
-    static const int MAX_GROUPS = MAX_GROUPS_PER_PLAYER * MAX_PLAYERS; // 99
+    static const int MAX_GROUPS = MAX_GROUPS_PER_PLAYER * (MAX_PLAYER + 1); // 99
 
 
     static const int GROUP_FIRST = 1;
