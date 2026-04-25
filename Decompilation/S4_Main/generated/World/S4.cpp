@@ -3,13 +3,13 @@
 // Definitions for class S4
 
 // address=[0x16a7240]
-// Decompiled from void __thiscall TMap<unsigned char>::LoadMap(TMap *this, S4::CMapFile *_rMapFile, unsigned __int16 a3, int _iSize)
+// Decompiled from void __thiscall TMap<unsigned char>::LoadMap(TMap *this, S4::CMapFile *_rMapFile, T_S4_MAP_CHUNK a3, int _iSize)
 void  TMap<unsigned char>::LoadMap(class S4::CMapFile & _rMapFile, int a3, int _iSize) {
   
-  int v4; // [esp+0h] [ebp-Ch] BYREF
+  int a4; // [esp+0h] [ebp-Ch] BYREF
   void *pChunk; // [esp+8h] [ebp-4h]
 
-  pChunk = S4::CMapFile::LoadChunk(_rMapFile, a3, 0, &v4, 0);
+  pChunk = S4::CMapFile::LoadChunk(_rMapFile, a3, 0, &a4, 0);
   if ( !pChunk
     && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\world\\TMap.h", 82, "pChunk != NULL") == 1 )
   {
@@ -21,15 +21,15 @@ void  TMap<unsigned char>::LoadMap(class S4::CMapFile & _rMapFile, int a3, int _
 
 
 // address=[0x16a72d0]
-// Decompiled from void __thiscall TMap<unsigned short>::LoadMap(TMap *this, S4::CMapFile *a2, unsigned __int16 a3, int a4)
+// Decompiled from void __thiscall TMap<unsigned short>::LoadMap(TMap *this, S4::CMapFile *a2, T_S4_MAP_CHUNK a3, int a4)
 void  TMap<unsigned short>::LoadMap(class S4::CMapFile & a2, int a3, int a4) {
   
-  int v4; // [esp+0h] [ebp-Ch] BYREF
+  int a4a; // [esp+0h] [ebp-Ch] BYREF
   TMap *v5; // [esp+4h] [ebp-8h]
   void *Src; // [esp+8h] [ebp-4h]
 
   v5 = this;
-  Src = S4::CMapFile::LoadChunk(a2, a3, 0, &v4, 0);
+  Src = S4::CMapFile::LoadChunk(a2, a3, 0, &a4a, 0);
   if ( !Src
     && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\world\\TMap.h", 82, "pChunk != NULL") == 1 )
   {
@@ -41,15 +41,15 @@ void  TMap<unsigned short>::LoadMap(class S4::CMapFile & a2, int a3, int a4) {
 
 
 // address=[0x16a7370]
-// Decompiled from void __thiscall TMap<T_GFX_MAP_ELEMENT>::LoadMap(TMap *this, S4::CMapFile *a2, unsigned __int16 a3, int a4)
+// Decompiled from void __thiscall TMap<T_GFX_MAP_ELEMENT>::LoadMap(TMap *this, S4::CMapFile *a2, T_S4_MAP_CHUNK a3, int a4)
 void  TMap<struct T_GFX_MAP_ELEMENT>::LoadMap(class S4::CMapFile & a2, int a3, int a4) {
   
-  int v4; // [esp+0h] [ebp-Ch] BYREF
+  int a4a; // [esp+0h] [ebp-Ch] BYREF
   TMap *v5; // [esp+4h] [ebp-8h]
   void *Src; // [esp+8h] [ebp-4h]
 
   v5 = this;
-  Src = S4::CMapFile::LoadChunk(a2, a3, 0, &v4, 0);
+  Src = S4::CMapFile::LoadChunk(a2, a3, 0, &a4a, 0);
   if ( !Src
     && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\world\\TMap.h", 82, "pChunk != NULL") == 1 )
   {

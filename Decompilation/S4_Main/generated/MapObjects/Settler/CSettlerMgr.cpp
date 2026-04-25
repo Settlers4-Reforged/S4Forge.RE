@@ -452,21 +452,21 @@ class ISettlerRole * __cdecl CSettlerMgr::LoadSettlerRole(std::istream & a1, int
 
 
 // address=[0x1580eb0]
-// Decompiled from void __thiscall CSettlerMgr::LoadSettlerData(CSettlerMgr *this, struct S4::CMapFile *a2, unsigned __int16 a3)
+// Decompiled from void __thiscall CSettlerMgr::LoadSettlerData(CSettlerMgr *this, struct S4::CMapFile *a2, T_S4_MAP_CHUNK a3)
 void  CSettlerMgr::LoadSettlerData(class S4::CMapFile & a2, int a3) {
   
   char *v4; // [esp+10h] [ebp-28h]
   int v5; // [esp+14h] [ebp-24h]
-  int v6; // [esp+20h] [ebp-18h] BYREF
+  int a4; // [esp+20h] [ebp-18h] BYREF
   int v7; // [esp+24h] [ebp-14h]
   int v8; // [esp+28h] [ebp-10h]
   char *v9; // [esp+2Ch] [ebp-Ch]
   int i; // [esp+30h] [ebp-8h]
   int v11; // [esp+34h] [ebp-4h]
 
-  v6 = 0;
-  v4 = (char *)S4::CMapFile::LoadChunk(a2, a3, 0, &v6, 0);
-  for ( i = 0; i < v6; ++i )
+  a4 = 0;
+  v4 = (char *)S4::CMapFile::LoadChunk(a2, a3, 0, &a4, 0);
+  for ( i = 0; i < a4; ++i )
   {
     v9 = &v4[6 * i];
     v7 = *(unsigned __int16 *)v9;
@@ -2375,11 +2375,11 @@ void  CSettlerMgr::Load(class S4::CMapFile & a2) {
   int v2; // [esp+0h] [ebp-100h] BYREF
   _DWORD v3[44]; // [esp+10h] [ebp-F0h] BYREF
   unsigned int v4; // [esp+C0h] [ebp-40h]
-  _DWORD *v5; // [esp+C4h] [ebp-3Ch]
-  _DWORD *v6; // [esp+C8h] [ebp-38h]
+  IEntity *v5; // [esp+C4h] [ebp-3Ch]
+  IEntity *v6; // [esp+C8h] [ebp-38h]
   int v7; // [esp+CCh] [ebp-34h]
   int v8; // [esp+D0h] [ebp-30h] BYREF
-  int v9; // [esp+D4h] [ebp-2Ch] BYREF
+  int a4; // [esp+D4h] [ebp-2Ch] BYREF
   unsigned int v10; // [esp+D8h] [ebp-28h] BYREF
   int pExceptionObject; // [esp+DCh] [ebp-24h] BYREF
   char *Str; // [esp+E0h] [ebp-20h]
@@ -2393,8 +2393,8 @@ void  CSettlerMgr::Load(class S4::CMapFile & a2) {
   v13 = this;
   CTrace::Print("CSettlerMgr load");
   CSettlerMgr::Clear(v13);
-  v9 = 0;
-  Str = (char *)S4::CMapFile::LoadChunk(a2, 0xA1u, 0, &v9, 0);
+  a4 = 0;
+  Str = (char *)S4::CMapFile::LoadChunk(a2, MAP_CHUNK_SAVE_SETTLERS, 0, &a4, 0);
   if ( Str )
   {
     std::istrstream::istrstream(Str, 1);
@@ -2415,7 +2415,7 @@ void  CSettlerMgr::Load(class S4::CMapFile & a2) {
     operator^<unsigned int>(v3, &v10);
     for ( i = 0; i < v10; ++i )
     {
-      v6 = (_DWORD *)CPersistence::New(v3, v2);
+      v6 = (IEntity *)CPersistence::New((struct std::istream *)v3);
       v5 = v6;
       ++*((_WORD *)v13 + 12);
       IEntity::ClearFlagBits(v5, EntityFlag_Selected);
@@ -2423,17 +2423,17 @@ void  CSettlerMgr::Load(class S4::CMapFile & a2) {
     for ( i = 0; i < 9; ++i )
     {
       for ( j = 0; j < 67; ++j )
-        operator^<int>((int)v3, (int)v13 + 268 * i + 4 * j + 28);
+        operator^<int>((struct std::istream *)v3, (int *)v13 + 67 * i + j + 7);
     }
     for ( i = 0; i < 9; ++i )
     {
       for ( j = 0; j < 67; ++j )
-        operator^<int>((int)v3, (int)v13 + 268 * i + 4 * j + 2440);
+        operator^<int>((struct std::istream *)v3, (int *)v13 + 67 * i + j + 610);
     }
     for ( i = 0; i < 9; ++i )
     {
       for ( j = 0; j < 67; ++j )
-        operator^<int>((int)v3, (int)v13 + 268 * i + 4 * j + 4852);
+        operator^<int>((struct std::istream *)v3, (int *)v13 + 67 * i + j + 1213);
     }
     v17 = 0;
     std::ios_base::exceptions((std::ios_base *)((char *)v3 + *(_DWORD *)(v3[0] + 4)), v4);

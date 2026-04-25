@@ -31,8 +31,8 @@ void  CPlayerData::Init(void) {
     this->m_sPlayers[i].m_uRace = 0;
     for ( j = 0; j < 10; ++j )
     {
-      HIBYTE(this->m_sSetups[j].m_iPlayerControl[i]) = 1;
-      LOBYTE(this->m_sSetups[j].m_iPlayerControl[i]) = 0;
+      this->m_sSetups[j][i].m_iPlayerControl = 1;
+      this->m_sSetups[j][i].m_iTeam = 0;
     }
   }
   for ( k = 0; k < 10; ++k )
@@ -74,7 +74,7 @@ int  CPlayerData::AddPlayer(int _iRace, int _iX, int _iY, char * _spName) {
 
 
 // address=[0x2fbf1e0]
-// Decompiled from int __thiscall CPlayerData::DeletePlayer(CPlayerData *this, T_CONSTANTS _Number)
+// Decompiled from int __thiscall CPlayerData::DeletePlayer(CPlayerData *this, int _Number)
 int  CPlayerData::DeletePlayer(int _Number) {
   
   int iNewPlayers; // [esp+8h] [ebp-8h]
@@ -100,8 +100,8 @@ int  CPlayerData::AddSetup(void) {
     return 0;
   for ( i = 0; i < 8; ++i )
   {
-    HIBYTE(this->m_sSetups[this->m_iNumberOfSetups].m_iPlayerControl[i]) = 1;
-    LOBYTE(this->m_sSetups[this->m_iNumberOfSetups].m_iPlayerControl[i]) = 0;
+    this->m_sSetups[this->m_iNumberOfSetups][i].m_iPlayerControl = 1;
+    this->m_sSetups[this->m_iNumberOfSetups][i].m_iTeam = 0;
   }
   ++this->m_iNumberOfSetups;
   return 1;
@@ -109,15 +109,15 @@ int  CPlayerData::AddSetup(void) {
 
 
 // address=[0x2fbf300]
-// Decompiled from int __thiscall CPlayerData::DeleteSetup(CPlayerData *this, int a2)
-int  CPlayerData::DeleteSetup(int a2) {
+// Decompiled from int __thiscall CPlayerData::DeleteSetup(CPlayerData *this, int setupId)
+int  CPlayerData::DeleteSetup(int setupId) {
   
   int i; // [esp+0h] [ebp-8h]
 
-  if ( (int)this->m_iNumberOfSetups < 2 )
+  if ( this->m_iNumberOfSetups < 2 )
     return 0;
   for ( i = 0; i < 8; ++i )
-    this->m_sSetups[a2].m_iPlayerControl[i] = *(_WORD *)&this->m_sPlayers[7].m_sName[16 * this->m_iNumberOfSetups
+    this->m_sSetups[setupId][i] = *(CPlayerData::Team *)&this->m_sPlayers[7].m_sName[16 * this->m_iNumberOfSetups
                                                                                    + 17
                                                                                    + 2 * i];
   --this->m_iNumberOfSetups;
@@ -211,12 +211,12 @@ char *  CPlayerData::GetSetupName(int a2) {
 
 
 // address=[0x2fbf5c0]
-// Decompiled from int __thiscall CPlayerData::GetControlOfPlayer(CPlayerData *this, int a2, int a3)
-int  CPlayerData::GetControlOfPlayer(int a2, int a3) {
+// Decompiled from int __thiscall CPlayerData::GetControlOfPlayer(CPlayerData *this, int player, int setupId)
+int  CPlayerData::GetControlOfPlayer(int player, int setupId) {
   
-  if ( a2 < 1 )
+  if ( player < 1 )
     j___wassert(L"_Player>=1", L"PlayerAndTeamData.cpp", 0x189u);
-  return (unsigned __int8)this->m_sPlayers[7].m_sName[16 * a3 + 32 + 2 * a2];
+  return (unsigned __int8)this->m_sPlayers[7].m_sName[16 * setupId + 32 + 2 * player];
 }
 
 
@@ -291,15 +291,15 @@ void  CPlayerData::SetSetupName(int a2, char * Source) {
 
 
 // address=[0x2fbf7a0]
-// Decompiled from char *__thiscall CPlayerData::SetControlOfPlayer(CPlayerData *this, int a2, int a3, char a4)
+// Decompiled from CPlayerData::Team *__thiscall CPlayerData::SetControlOfPlayer(CPlayerData *this, int a2, int a3, BYTE a4)
 void  CPlayerData::SetControlOfPlayer(int a2, int a3, int a4) {
   
-  char *result; // eax
+  CPlayerData::Team *result; // eax
 
   if ( a2 < 1 )
     j___wassert(L"_Player>=1", L"PlayerAndTeamData.cpp", 0x16Au);
-  result = (char *)this + 16 * a3 + 690;
-  result[2 * a2 - 1] = a4;
+  result = this->m_sSetups[a3];
+  result[a2 - 1].m_iPlayerControl = a4;
   return result;
 }
 
@@ -338,7 +338,7 @@ int  CPlayerData::SaveTeamData(unsigned char * a2, int a3) {
 
   memcpy(a2, this->m_uSetupNames[a3], 33u);
   NumberOfPlayers = CPlayerData::GetNumberOfPlayers(this);
-  memcpy(a2 + 33, &this->m_sSetups[8 * a3], 2 * NumberOfPlayers);
+  memcpy(a2 + 33, this->m_sSetups[a3], 2 * NumberOfPlayers);
   return 2 * CPlayerData::GetNumberOfPlayers(this) + 33;
 }
 
@@ -351,8 +351,8 @@ int  CPlayerData::Load(unsigned char * a2, void * a3, struct SMapChunkHeader a4)
   BOOL v6; // [esp+4h] [ebp-8h]
 
   this->m_uNumberOfPlayers = a4.m_iNumberOfPlayers;
-  v6 = ReadFile(hFile, lpBuffer, a4.nNumberOfBytesToRead, &NumberOfBytesRead, 0);
-  ReadChunk((char *)lpBuffer, a4.nNumberOfBytesToRead, a4.a6);
+  v6 = ReadFile(hFile, lpBuffer, a4.m_iSize, &NumberOfBytesRead, 0);
+  ReadChunk((char *)lpBuffer, a4.m_iSize, a4.m_iDecompressedSize);
   memcpy(this->m_sPlayers, lpBuffer, 45 * this->m_uNumberOfPlayers);
   return v6;
 }
@@ -370,8 +370,8 @@ int  CPlayerData::LoadTeamData(unsigned char * a2, void * a3, struct SMapChunkHe
   iSetup = a4.m_iSetup;
   if ( a4.m_iSetup >= 10u )
     return 0;
-  v7 = ReadFile(hFile, lpBuffer, a4.nNumberOfBytesToRead, &NumberOfBytesRead, 0);
-  ReadChunk((char *)lpBuffer, a4.nNumberOfBytesToRead, a4.a6);
+  v7 = ReadFile(hFile, lpBuffer, a4.m_iSize, &NumberOfBytesRead, 0);
+  ReadChunk((char *)lpBuffer, a4.m_iSize, a4.m_iDecompressedSize);
   memcpy(this->m_uSetupNames[iSetup], lpBuffer, sizeof(this->m_uSetupNames[iSetup]));
   if ( iSetup + 1 > this->m_iNumberOfSetups )
     this->m_iNumberOfSetups = iSetup + 1;
@@ -402,7 +402,7 @@ int  CPlayerData::GetSizeOfTeamElement(void) {
 int  CPlayerData::CheckTeams(void) {
   
   int v2; // [esp+0h] [ebp-38h]
-  int v3; // [esp+4h] [ebp-34h]
+  int m_iTeam; // [esp+4h] [ebp-34h]
   int i; // [esp+Ch] [ebp-2Ch]
   int j; // [esp+10h] [ebp-28h]
   int k; // [esp+10h] [ebp-28h]
@@ -415,12 +415,12 @@ int  CPlayerData::CheckTeams(void) {
       uSetups[j] = 0;
     for ( k = 0; k < this->m_uNumberOfPlayers; ++k )
     {
-      v3 = this->m_sSetups[8 * i + k].m_iPlayerControl;
-      if ( v3 != 255 )
+      m_iTeam = this->m_sSetups[i][k].m_iTeam;
+      if ( m_iTeam != 255 )
       {
-        if ( v3 >= this->m_uNumberOfPlayers )
+        if ( m_iTeam >= this->m_uNumberOfPlayers )
           return 0;
-        uSetups[v3] = 1;
+        uSetups[m_iTeam] = 1;
       }
     }
     if ( !uSetups[0] )
@@ -444,82 +444,88 @@ int  CPlayerData::CheckTeams(void) {
 
 
 // address=[0x2fc5330]
-// Decompiled from CPlayerData *__thiscall CPlayerData::CPlayerData(CPlayerData *this, int a2, char a3)
+// Decompiled from MG::CPlayerData *__thiscall CPlayerData::CPlayerData(MG::CPlayerData *this, int a2, bool a3)
  CPlayerData::CPlayerData(int a2, bool a3) {
   
-  *(_DWORD *)&this->m_uSetupNames[0][24] = a2;
-  this->m_uSetupNames[0][28] = a3;
-  *(_QWORD *)&this->m_uSetupNames[0][0] = 0LL;
-  *(_QWORD *)&this->m_uSetupNames[0][8] = 0LL;
-  *(_QWORD *)&this->m_uSetupNames[0][16] = 0LL;
+  this->m_iRace = a2;
+  this->m_bIsAI = a3;
+  this->m_iBasicX = 0;
+  this->m_iBasicY = 0;
+  this->m_iRealX = 0;
+  this->m_iRealY = 0;
+  this->m_iNearestMountainX = 0;
+  this->m_iNearestMountainY = 0;
   return this;
 }
 
 
 // address=[0x2fc5390]
-// Decompiled from void __thiscall CPlayerData::setStartPos_Basic(CPlayerData *this, int a2, int a3)
+// Decompiled from void __thiscall CPlayerData::setStartPos_Basic(MG::CPlayerData *this, int a2, int a3)
 void  CPlayerData::setStartPos_Basic(int a2, int a3) {
   
-  *(_QWORD *)&this->m_uSetupNames[0][0] = __PAIR64__(a3, a2);
+  this->m_iBasicX = a2;
+  this->m_iBasicY = a3;
 }
 
 
 // address=[0x2fc53b0]
-// Decompiled from void __thiscall CPlayerData::getStartPos_Basic(CPlayerData *this, int *a2, int *a3)
+// Decompiled from void __thiscall CPlayerData::getStartPos_Basic(MG::CPlayerData *this, int *a2, int *a3)
 void  CPlayerData::getStartPos_Basic(int & a2, int & a3) {
   
-  *a2 = *(_DWORD *)&this->m_uSetupNames[0][0];
-  *a3 = *(_DWORD *)&this->m_uSetupNames[0][4];
+  *a2 = this->m_iBasicX;
+  *a3 = this->m_iBasicY;
 }
 
 
 // address=[0x2fc53e0]
-// Decompiled from void __thiscall CPlayerData::setStartPos_Real(CPlayerData *this, int a2, int a3)
+// Decompiled from void __thiscall CPlayerData::setStartPos_Real(MG::CPlayerData *this, int a2, int a3)
 void  CPlayerData::setStartPos_Real(int a2, int a3) {
   
-  *(_QWORD *)&this->m_uSetupNames[0][8] = __PAIR64__(a3, a2);
+  this->m_iRealX = a2;
+  this->m_iRealY = a3;
 }
 
 
 // address=[0x2fc5400]
-// Decompiled from void __thiscall CPlayerData::getStartPos_Real(CPlayerData *this, int *a2, int *a3)
+// Decompiled from void __thiscall CPlayerData::getStartPos_Real(MG::CPlayerData *this, int *a2, int *a3)
 void  CPlayerData::getStartPos_Real(int & a2, int & a3) {
   
-  *a2 = *(_DWORD *)&this->m_uSetupNames[0][8];
-  *a3 = *(_DWORD *)&this->m_uSetupNames[0][12];
+  *a2 = this->m_iRealX;
+  *a3 = this->m_iRealY;
 }
 
 
 // address=[0x2fc5430]
-// Decompiled from void __thiscall CPlayerData::getNearestMountain(CPlayerData *this, int *a2, int *a3)
+// Decompiled from void __thiscall CPlayerData::getNearestMountain(MG::CPlayerData *this, int *a2, int *a3)
 void  CPlayerData::getNearestMountain(int & a2, int & a3) {
   
-  *a2 = *(_DWORD *)&this->m_uSetupNames[0][16];
-  *a3 = *(_DWORD *)&this->m_uSetupNames[0][20];
+  *a2 = this->m_iNearestMountainX;
+  *a3 = this->m_iNearestMountainY;
 }
 
 
 // address=[0x2fc5460]
-// Decompiled from void __thiscall CPlayerData::setNearestMountain(CPlayerData *this, int a2, int a3)
+// Decompiled from void __thiscall CPlayerData::setNearestMountain(MG::CPlayerData *this, int a2, int a3)
 void  CPlayerData::setNearestMountain(int a2, int a3) {
   
-  *(_QWORD *)&this->m_uSetupNames[0][16] = __PAIR64__(a3, a2);
+  this->m_iNearestMountainX = a2;
+  this->m_iNearestMountainY = a3;
 }
 
 
 // address=[0x2fc5480]
-// Decompiled from int __thiscall CPlayerData::getRace(CPlayerData *this)
+// Decompiled from int __thiscall CPlayerData::getRace(MG::CPlayerData *this)
 int  CPlayerData::getRace(void) {
   
-  return *(_DWORD *)&this->m_uSetupNames[0][24];
+  return this->m_iRace;
 }
 
 
 // address=[0x2fc54a0]
-// Decompiled from char __thiscall CPlayerData::isAI(CPlayerData *this)
+// Decompiled from bool __thiscall CPlayerData::isAI(MG::CPlayerData *this)
 bool  CPlayerData::isAI(void) {
   
-  return this->m_uSetupNames[0][28];
+  return this->m_bIsAI;
 }
 
 

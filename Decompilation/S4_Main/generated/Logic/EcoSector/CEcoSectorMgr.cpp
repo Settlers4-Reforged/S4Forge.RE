@@ -1540,7 +1540,7 @@ void  CEcoSectorMgr::Store(class S4::CMapFile & a2) {
 
 
 // address=[0x1444230]
-// Decompiled from void __thiscall CEcoSectorMgr::Load(char *this, S4::CMapFile *a2)
+// Decompiled from void __thiscall CEcoSectorMgr::Load(char *this, S4::CMapFile *arg0)
 void  CEcoSectorMgr::Load(class S4::CMapFile & a2) {
   
   int v2; // [esp+0h] [ebp-128h] BYREF
@@ -1550,7 +1550,7 @@ void  CEcoSectorMgr::Load(class S4::CMapFile & a2) {
   int v6; // [esp+C0h] [ebp-68h]
   int v7; // [esp+C4h] [ebp-64h]
   int Version; // [esp+C8h] [ebp-60h]
-  int v9; // [esp+CCh] [ebp-5Ch] BYREF
+  int a4; // [esp+CCh] [ebp-5Ch] BYREF
   int pExceptionObject; // [esp+D4h] [ebp-54h] BYREF
   int v11; // [esp+D8h] [ebp-50h] BYREF
   char *Str; // [esp+DCh] [ebp-4Ch]
@@ -1559,24 +1559,24 @@ void  CEcoSectorMgr::Load(class S4::CMapFile & a2) {
   int i; // [esp+E8h] [ebp-40h]
   char v16[4]; // [esp+ECh] [ebp-3Ch] BYREF
   int j; // [esp+F0h] [ebp-38h]
-  char *v18; // [esp+F4h] [ebp-34h]
-  _BYTE v19[28]; // [esp+F8h] [ebp-30h] BYREF
+  int a2; // [esp+F4h] [ebp-34h]
+  std::string v19; // [esp+F8h] [ebp-30h] BYREF
   int *v20; // [esp+118h] [ebp-10h]
   int v21; // [esp+124h] [ebp-4h]
 
   v20 = &v2;
-  v18 = this;
-  v9 = 0;
-  Str = (char *)S4::CMapFile::LoadChunk(a2, 0xB4u, 0, &v9, 0);
+  a2 = (int)this;
+  a4 = 0;
+  Str = (char *)S4::CMapFile::LoadChunk(arg0, MAP_CHUNK_SAVE_ES, 0, &a4, 0);
   if ( Str )
   {
-    std::string::string(v19, Str);
+    std::string::string(&v19, Str);
     v21 = 0;
-    std::istringstream::istringstream(v19, 1, 1);
+    std::istringstream::istringstream((int)&v19, 1, 1);
     LOBYTE(v21) = 1;
     v4 = std::ios_base::exceptions((char *)v3 + *(_DWORD *)(v3[0] + 4));
     std::ios_base::exceptions((std::ios_base *)((char *)v3 + *(_DWORD *)(v3[0] + 4)), 6);
-    Version = Serial::LoadVersion(v3);
+    Version = Serial::LoadVersion((int)v3);
     LOBYTE(v21) = 2;
     if ( Version != 3 )
     {
@@ -1585,19 +1585,19 @@ void  CEcoSectorMgr::Load(class S4::CMapFile & a2) {
       CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
       _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
     }
-    operator^<int>((int)v3, (int)v18);
-    operator^<int>((int)v3, (int)(v18 + 4));
-    operator^<int>((int)v3, (int)(v18 + 8));
-    operator^<int>((int)v3, (int)(v18 + 12));
-    operator^<int>((int)v3, (int)(v18 + 16));
+    operator^<int>((struct std::istream *)v3, (int *)a2);
+    operator^<int>((struct std::istream *)v3, (int *)(a2 + 4));
+    operator^<int>((struct std::istream *)v3, (int *)(a2 + 8));
+    operator^<int>((struct std::istream *)v3, (int *)(a2 + 12));
+    operator^<int>((struct std::istream *)v3, (int *)(a2 + 16));
     v11 = 0;
-    operator^<int>((int)v3, (int)&v11);
+    operator^<int>((struct std::istream *)v3, &v11);
     for ( i = 0; i < v11; ++i )
-      CPersistence::New(v3, v2);
-    operator^<int>((int)v3, (int)(v18 + 65556));
-    LoadArray<int>(v3, v18 + 65560, 36);
+      CPersistence::New((struct std::istream *)v3);
+    operator^<int>((struct std::istream *)v3, (int *)(a2 + 65556));
+    LoadArray<int>((struct std::istream *)v3, a2 + 65560, 0x24u);
     v14 = 0;
-    operator^<int>((int)v3, (int)&v14);
+    operator^<int>((struct std::istream *)v3, &v14);
     if ( v14 > 9 )
     {
       v7 = BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 522, "iPlayerMax <= PLAYER_MAX");
@@ -1607,17 +1607,17 @@ void  CEcoSectorMgr::Load(class S4::CMapFile & a2) {
     LOBYTE(v21) = 3;
     for ( j = 0; j < v14; ++j )
     {
-      if ( std::vector<unsigned short>::size(&v18[16 * j + 65596]) )
+      if ( std::vector<unsigned short>::size(a2 + 16 * j + 65596) )
       {
         v6 = BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 529, "m_vStrikeSettlers[i].size()==0");
         if ( v6 == 1 )
           __debugbreak();
       }
-      operator^<int>((int)v3, (int)&v5);
+      operator^<int>((struct std::istream *)v3, &v5);
       for ( k = 0; k < v5; ++k )
       {
         operator^<unsigned short>(v3, v16);
-        std::vector<unsigned short>::push_back(v16);
+        std::vector<unsigned short>::push_back((void *)(a2 + 16 * j + 65596), (__int16 *)v16);
       }
     }
     v21 = 1;
@@ -1625,7 +1625,7 @@ void  CEcoSectorMgr::Load(class S4::CMapFile & a2) {
     LOBYTE(v21) = 0;
     std::istringstream::`vbase destructor'(v3);
     v21 = -1;
-    std::string::~string(v19);
+    std::string::~string(&v19);
   }
 }
 

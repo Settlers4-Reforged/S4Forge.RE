@@ -77,39 +77,36 @@ void  CPileMgr::Clear(void) {
 
 
 // address=[0x155e970]
-// Decompiled from char *__thiscall CPileMgr::LoadPileData(CPileMgr *this, struct S4::CMapFile *a2, int a3)
+// Decompiled from void __thiscall CPileMgr::LoadPileData(CPileMgr *this, struct S4::CMapFile *a2, int a3)
 void  CPileMgr::LoadPileData(class S4::CMapFile & a2, int a3) {
   
-  char *result; // eax
-  char *v5; // [esp+8h] [ebp-14h]
-  int v6; // [esp+Ch] [ebp-10h]
-  int v7; // [esp+10h] [ebp-Ch] BYREF
+  char *v4; // [esp+8h] [ebp-14h]
+  unsigned int v5; // [esp+Ch] [ebp-10h]
+  int a4; // [esp+10h] [ebp-Ch] BYREF
   int i; // [esp+14h] [ebp-8h]
-  char *v9; // [esp+18h] [ebp-4h]
+  char *v8; // [esp+18h] [ebp-4h]
 
-  v7 = 0;
-  result = (char *)S4::CMapFile::LoadChunk(a2, 9u, 0, &v7, 0);
-  v5 = result;
-  for ( i = 0; i < v7; ++i )
+  a4 = 0;
+  v4 = (char *)S4::CMapFile::LoadChunk(a2, MAP_CHUNK_PILES, 0, &a4, 0);
+  for ( i = 0; i < a4; ++i )
   {
-    v9 = &v5[8 * i];
-    if ( (unsigned __int8)v9[6] == 254 )
-      v6 = 3;
+    v8 = &v4[8 * i];
+    if ( (unsigned __int8)v8[6] == 254 )
+      v5 = 3;
     else
-      v6 = 2;
-    result = (char *)CPileMgr::AddPile(
-                       this,
-                       *(unsigned __int16 *)v9,
-                       *((unsigned __int16 *)v9 + 1),
-                       (unsigned __int8)v9[4],
-                       (unsigned __int8)v9[5],
-                       v6,
-                       0,
-                       0,
-                       0,
-                       0);
+      v5 = 2;
+    CPileMgr::AddPile(
+      this,
+      *(unsigned __int16 *)v8,
+      *((unsigned __int16 *)v8 + 1),
+      (unsigned __int8)v8[4],
+      (unsigned __int8)v8[5],
+      v5,
+      0,
+      0,
+      0,
+      0);
   }
-  return result;
 }
 
 

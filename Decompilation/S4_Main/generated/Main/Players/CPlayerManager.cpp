@@ -514,10 +514,7 @@ void __cdecl CPlayerManager::SetPlayerControl(int a1, int arg4) {
   CPlayerManager::m_cPlayerInfos[a1].m_iType = arg4;
   if ( arg4 == 2 || arg4 == 3 )
   {
-    a2 = (std::wstring *)std::operator+<wchar_t>(
-                           (int)&v3,
-                           (wchar_t *)L"(AI) ",
-                           (int)CPlayerManager::m_cPlayerInfos[a1].m_swName.m_u);
+    a2 = (std::wstring *)std::operator+<wchar_t>(&v3, (wchar_t *)L"(AI) ", &CPlayerManager::m_cPlayerInfos[a1].m_swName);
     std::wstring::operator=(&CPlayerManager::m_cPlayerInfos[a1].m_swName, a2);
     std::wstring::~wstring(&v3);
   }

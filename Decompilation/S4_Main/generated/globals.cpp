@@ -56065,16 +56065,15 @@ void __cdecl MA_OpenMapFile(wchar_t * psz, int * a2, int * a3, int a4) {
   void *v15; // [esp+214h] [ebp-58h]
   void *C; // [esp+218h] [ebp-54h]
   void *v17; // [esp+21Ch] [ebp-50h]
-  int m_iU0; // [esp+220h] [ebp-4Ch]
-  int v19; // [esp+224h] [ebp-48h] BYREF
-  int v20; // [esp+228h] [ebp-44h]
+  int iChunkId; // [esp+220h] [ebp-4Ch]
+  int iFileVersion; // [esp+224h] [ebp-48h] MAPDST BYREF
   int Buffer; // [esp+22Ch] [ebp-40h] BYREF
   DWORD NumberOfBytesRead; // [esp+230h] [ebp-3Ch] BYREF
-  BOOL TeamData; // [esp+234h] [ebp-38h]
+  BOOL bHasData; // [esp+234h] [ebp-38h]
   BSTR *v24; // [esp+238h] [ebp-34h] BYREF
   HANDLE hFile; // [esp+23Ch] [ebp-30h]
   unsigned __int8 *lpBuffer; // [esp+240h] [ebp-2Ch]
-  struct SMapChunkHeader v27; // [esp+244h] [ebp-28h] BYREF
+  struct SMapChunkHeader sChunkHeader; // [esp+244h] [ebp-28h] BYREF
   int v28; // [esp+268h] [ebp-4h]
 
   ReleaseMemory();
@@ -56214,64 +56213,63 @@ LABEL_16:
     {
 LABEL_19:
       SetFilePointer(hFile, 4, 0, FILE_BEGIN);
-      ReadFile(hFile, &v19, 4u, &NumberOfBytesRead, 0);
+      ReadFile(hFile, &iFileVersion, 4u, &NumberOfBytesRead, 0);
       CPlayerData::Init(&g_cPlayerAndTeamData);
-      v20 = v19;
-      if ( v19 == 31 || v20 == 40 )
+      if ( iFileVersion == 31 || iFileVersion == 40 )
       {
-        if ( v19 == 40 )
+        if ( iFileVersion == 40 )
           g_bAddOnMap = 1;
         while ( 2 )
         {
-          TeamData = ReadFile(hFile, &v27, 0x18u, &NumberOfBytesRead, 0);
-          Cryption((unsigned __int8 *)&v27, 0x18u);
-          if ( TeamData )
+          bHasData = ReadFile(hFile, &sChunkHeader, 0x18u, &NumberOfBytesRead, 0);
+          Cryption((unsigned __int8 *)&sChunkHeader, 0x18u);
+          if ( bHasData )
           {
-            m_iU0 = v27.m_iU0;
-            switch ( v27.m_iU0 )
+            iChunkId = sChunkHeader.m_iChunkId;
+            switch ( sChunkHeader.m_iChunkId )
             {
-              case 0u:
+              case MAP_CHUNK_DUMMY:
                 goto LABEL_72;
-              case 1u:
-                TeamData = ReadFile(hFile, lpBuffer, v27.nNumberOfBytesToRead, &NumberOfBytesRead, 0);
-                ReadChunk((char *)lpBuffer, v27.nNumberOfBytesToRead, v27.a6);
+              case MAP_CHUNK_GENERAL:
+                bHasData = ReadFile(hFile, lpBuffer, sChunkHeader.m_iSize, &NumberOfBytesRead, 0);
+                ReadChunk((char *)lpBuffer, sChunkHeader.m_iSize, sChunkHeader.m_iDecompressedSize);
                 memcpy(&g_sGeneralMapData, lpBuffer, 0x18u);
-                if ( !TeamData )
+                if ( !bHasData )
                   goto LABEL_46;
                 goto LABEL_72;
-              case 2u:
-                TeamData = CPlayerData::Load(&g_cPlayerAndTeamData, lpBuffer, hFile, v27);
+              case MAP_CHUNK_PLAYER:
+                bHasData = CPlayerData::Load(&g_cPlayerAndTeamData, lpBuffer, hFile, sChunkHeader);
                 g_uNumberOfPlayers = CPlayerData::GetNumberOfPlayers(&g_cPlayerAndTeamData);
-                if ( !TeamData )
+                if ( !bHasData )
                   goto LABEL_46;
                 goto LABEL_72;
-              case 3u:
-                TeamData = CPlayerData::LoadTeamData(&g_cPlayerAndTeamData, lpBuffer, hFile, v27);
-                if ( !TeamData )
+              case MAP_CHUNK_TEAM:
+                bHasData = CPlayerData::LoadTeamData(&g_cPlayerAndTeamData, lpBuffer, hFile, sChunkHeader);
+                if ( !bHasData )
                   goto LABEL_46;
                 goto LABEL_72;
-              case 4u:
+              case MAP_CHUNK_PREVIEW:
                 if ( a4 )
                 {
-                  g_iPreviewSize = v27.m_iNumberOfPlayers;
-                  if ( v27.m_iNumberOfPlayers < 128 || g_iPreviewSize > 1024 )
+                  g_iPreviewSize = sChunkHeader.m_iNumberOfPlayers;
+                  if ( sChunkHeader.m_iNumberOfPlayers < 128 || g_iPreviewSize > 1024 )
                     goto LABEL_46;
                   if ( g_pPreviewGfx )
                     operator delete[](g_pPreviewGfx);
                   g_pPreviewGfx = operator new[](2 * g_iPreviewSize * g_iPreviewSize);
                   if ( !g_pPreviewGfx )
                     goto LABEL_16;
-                  TeamData = ReadFile(hFile, g_pPreviewGfx, v27.nNumberOfBytesToRead, &NumberOfBytesRead, 0);
-                  ReadChunk((char *)g_pPreviewGfx, v27.nNumberOfBytesToRead, v27.a6);
-                  if ( !TeamData )
+                  bHasData = ReadFile(hFile, g_pPreviewGfx, sChunkHeader.m_iSize, &NumberOfBytesRead, 0);
+                  ReadChunk((char *)g_pPreviewGfx, sChunkHeader.m_iSize, sChunkHeader.m_iDecompressedSize);
+                  if ( !bHasData )
                     goto LABEL_46;
                 }
-                else if ( SetFilePointer(hFile, v27.nNumberOfBytesToRead, 0, FILE_CURRENT) == -1 )
+                else if ( SetFilePointer(hFile, sChunkHeader.m_iSize, 0, FILE_CURRENT) == -1 )
                 {
                   goto LABEL_59;
                 }
 LABEL_72:
-                if ( v27.m_iU0 )
+                if ( sChunkHeader.m_iChunkId )
                   continue;
 LABEL_75:
                 CloseHandle(hFile);
@@ -56281,70 +56279,70 @@ LABEL_75:
                 v28 = -1;
                 result = (_DWORD *)_bstr_t::~_bstr_t(&v24);
                 break;
-              case 5u:
+              case MAP_CHUNK_DUMMY_2:
                 goto LABEL_75;
-              case 7u:
+              case MAP_CHUNK_SETTLERS:
                 g_bSettlersAvailable = 1;
-                if ( SetFilePointer(hFile, v27.nNumberOfBytesToRead, 0, FILE_CURRENT) == -1 )
+                if ( SetFilePointer(hFile, sChunkHeader.m_iSize, 0, FILE_CURRENT) == -1 )
                   goto LABEL_59;
                 goto LABEL_72;
-              case 8u:
+              case MAP_CHUNK_BUILDINGS:
                 g_bBuildingsAvailable = 1;
-                if ( SetFilePointer(hFile, v27.nNumberOfBytesToRead, 0, FILE_CURRENT) == -1 )
+                if ( SetFilePointer(hFile, sChunkHeader.m_iSize, 0, FILE_CURRENT) == -1 )
                   goto LABEL_59;
                 goto LABEL_72;
-              case 9u:
+              case MAP_CHUNK_PILES:
                 g_bPilesAvailable = 1;
-                if ( SetFilePointer(hFile, v27.nNumberOfBytesToRead, 0, FILE_CURRENT) == -1 )
+                if ( SetFilePointer(hFile, sChunkHeader.m_iSize, 0, FILE_CURRENT) == -1 )
                   goto LABEL_59;
                 goto LABEL_72;
-              case 0xBu:
-                TeamData = ReadFile(hFile, lpBuffer, v27.nNumberOfBytesToRead, &NumberOfBytesRead, 0);
-                ReadChunk((char *)lpBuffer, v27.nNumberOfBytesToRead, v27.a6);
-                if ( !TeamData )
+              case MAP_CHUNK_DESCRIPTION:
+                bHasData = ReadFile(hFile, lpBuffer, sChunkHeader.m_iSize, &NumberOfBytesRead, 0);
+                ReadChunk((char *)lpBuffer, sChunkHeader.m_iSize, sChunkHeader.m_iDecompressedSize);
+                if ( !bHasData )
                   goto LABEL_59;
-                memcpy(g_pTextDescription, lpBuffer, v27.a6);
+                memcpy(g_pTextDescription, lpBuffer, sChunkHeader.m_iDecompressedSize);
                 goto LABEL_72;
-              case 0xCu:
-                TeamData = ReadFile(hFile, lpBuffer, v27.nNumberOfBytesToRead, &NumberOfBytesRead, 0);
-                ReadChunk((char *)lpBuffer, v27.nNumberOfBytesToRead, v27.a6);
-                if ( !TeamData )
+              case MAP_CHUNK_TIPS:
+                bHasData = ReadFile(hFile, lpBuffer, sChunkHeader.m_iSize, &NumberOfBytesRead, 0);
+                ReadChunk((char *)lpBuffer, sChunkHeader.m_iSize, sChunkHeader.m_iDecompressedSize);
+                if ( !bHasData )
                   goto LABEL_59;
-                memcpy(g_pTextTandT, lpBuffer, v27.a6);
+                memcpy(g_pTextTandT, lpBuffer, sChunkHeader.m_iDecompressedSize);
                 goto LABEL_72;
-              case 0xEu:
-                TeamData = ReadFile(hFile, lpBuffer, v27.nNumberOfBytesToRead, &NumberOfBytesRead, 0);
-                ReadChunk((char *)lpBuffer, v27.nNumberOfBytesToRead, v27.a6);
-                if ( !TeamData )
+              case MAP_CHUNK_ENGLISH_DESCRIPTION:
+                bHasData = ReadFile(hFile, lpBuffer, sChunkHeader.m_iSize, &NumberOfBytesRead, 0);
+                ReadChunk((char *)lpBuffer, sChunkHeader.m_iSize, sChunkHeader.m_iDecompressedSize);
+                if ( !bHasData )
                   goto LABEL_59;
-                memcpy(g_pTextEnglishDescription, lpBuffer, v27.a6);
+                memcpy(g_pTextEnglishDescription, lpBuffer, sChunkHeader.m_iDecompressedSize);
                 goto LABEL_72;
-              case 0xFu:
-                TeamData = ReadFile(hFile, lpBuffer, v27.nNumberOfBytesToRead, &NumberOfBytesRead, 0);
-                ReadChunk((char *)lpBuffer, v27.nNumberOfBytesToRead, v27.a6);
-                if ( !TeamData )
+              case MAP_CHUNK_ENGLISH_TIPS:
+                bHasData = ReadFile(hFile, lpBuffer, sChunkHeader.m_iSize, &NumberOfBytesRead, 0);
+                ReadChunk((char *)lpBuffer, sChunkHeader.m_iSize, sChunkHeader.m_iDecompressedSize);
+                if ( !bHasData )
                   goto LABEL_59;
-                memcpy(g_pTextEnglishTandT, lpBuffer, v27.a6);
+                memcpy(g_pTextEnglishTandT, lpBuffer, sChunkHeader.m_iDecompressedSize);
                 goto LABEL_72;
-              case 0x40u:
+              case MAP_CHUNK_IS_EDITOR:
                 g_bEditorMap = 1;
-                if ( SetFilePointer(hFile, v27.nNumberOfBytesToRead, 0, FILE_CURRENT) == -1 )
+                if ( SetFilePointer(hFile, sChunkHeader.m_iSize, 0, FILE_CURRENT) == -1 )
                   goto LABEL_59;
                 goto LABEL_72;
-              case 0x41u:
+              case MAP_CHUNK_IS_CAMPAIGN:
                 g_bCampaign = 1;
-                if ( SetFilePointer(hFile, v27.nNumberOfBytesToRead, 0, FILE_CURRENT) == -1 )
+                if ( SetFilePointer(hFile, sChunkHeader.m_iSize, 0, FILE_CURRENT) == -1 )
                   goto LABEL_59;
                 goto LABEL_72;
-              case 0x42u:
-                TeamData = ReadFile(hFile, lpBuffer, v27.nNumberOfBytesToRead, &NumberOfBytesRead, 0);
-                ReadChunk((char *)lpBuffer, v27.nNumberOfBytesToRead, v27.a6);
+              case MAP_CHUNK_EDITOR_DATA:
+                bHasData = ReadFile(hFile, lpBuffer, sChunkHeader.m_iSize, &NumberOfBytesRead, 0);
+                ReadChunk((char *)lpBuffer, sChunkHeader.m_iSize, sChunkHeader.m_iDecompressedSize);
                 memcpy(&g_sEditorInfo, lpBuffer, 0x14u);
-                if ( !TeamData )
+                if ( !bHasData )
                   goto LABEL_46;
                 goto LABEL_72;
               default:
-                if ( SetFilePointer(hFile, v27.nNumberOfBytesToRead, 0, FILE_CURRENT) == -1 )
+                if ( SetFilePointer(hFile, sChunkHeader.m_iSize, 0, FILE_CURRENT) == -1 )
                   goto LABEL_59;
                 goto LABEL_72;
             }

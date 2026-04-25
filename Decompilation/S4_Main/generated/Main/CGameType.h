@@ -211,7 +211,7 @@ public:
     std::string std__string390;
     std::string std__string3AC;
     std::string std__string3C8;
-    _BYTE byte3E4;
+    _BYTE m_bIsEditorMap;
     _BYTE m_bIsCampaignMap;
     _BYTE[18] gap3E6;
     _DWORD dword3F8;

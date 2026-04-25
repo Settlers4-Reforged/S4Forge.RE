@@ -364,8 +364,8 @@ bool __cdecl CGameRun::LoadGame(std::wstring & a1) {
   char v16; // [esp+4Bh] [ebp-E4Dh]
   _BYTE v17[2376]; // [esp+4Ch] [ebp-E4Ch] BYREF
   int v18; // [esp+994h] [ebp-504h]
-  unsigned int v19; // [esp+99Ch] [ebp-4FCh]
-  unsigned int v20; // [esp+9A0h] [ebp-4F8h]
+  int v19; // [esp+99Ch] [ebp-4FCh]
+  int v20; // [esp+9A0h] [ebp-4F8h]
   _DWORD *v21; // [esp+9A4h] [ebp-4F4h]
   _DWORD *v22; // [esp+9A8h] [ebp-4F0h]
   _DWORD *v23; // [esp+9ACh] [ebp-4ECh]
@@ -389,7 +389,7 @@ bool __cdecl CGameRun::LoadGame(std::wstring & a1) {
   LOBYTE(v29) = 2;
   v5 = S4::CMapFile::CMapFile((CHandleMap *)&v25, 0);
   LOBYTE(v29) = 3;
-  S4::CMapFile::Open((S4::CMapFile *)&v25, (int)&v26, 1, 1);
+  S4::CMapFile::Open((S4::CMapFile *)&v25, &v26, 1, 1);
   BBSupportTracePrintF(1, "\tOpen map file\t\tok");
   CWarMap::Init();
   CWorldManager::LoadMap((struct S4::CMapFile *)&v25, g_pGameType->m_iWidthHeight);
@@ -457,7 +457,7 @@ bool __cdecl CGameRun::LoadGame(std::wstring & a1) {
   }
   S4::CMapFile::LoadChunkObject(&v25, 135, 0, (int)g_pFogging, 0);
   BBSupportTracePrintF(1, "\tLoad GAME_CHUNK_FOGMAP\t\tok");
-  (*(void (__thiscall **)(void *))(*(_DWORD *)g_pAI + 12))(g_pAI);
+  g_pAI->Init(g_pAI);
   S4::CMapFile::LoadChunkObject(&v25, 150, 0, (int)g_pAI, 1);
   BBSupportTracePrintF(1, "\tLoad GAME_CHUNK_AI\t\tok");
   CGameChunkGeneral::CGameChunkGeneral(v17);
@@ -472,15 +472,15 @@ bool __cdecl CGameRun::LoadGame(std::wstring & a1) {
     if ( v7 == 1 )
       __debugbreak();
   }
-  g_pGame[19] = (_DWORD *)g_pGameType->m_uiTickCounter;
-  CRandom16Ex::Init((CRandom16Ex *)(g_pGame + 30), v19, v20);
-  *((_BYTE *)g_pGame + 117) = v24;
-  if ( *((_BYTE *)g_pGame + 117) )
+  g_pGame->m_sGameData.m_uTickCounter = g_pGameType->m_uiTickCounter;
+  CRandom16Ex::Init(&g_pGame->m_sGameData.m_sRandom, v19, v20);
+  g_pGame->m_sGameData.m_bFixedStartCamera = v24;
+  if ( g_pGame->m_sGameData.m_bFixedStartCamera )
   {
-    g_pGame[24] = v21;
-    g_pGame[25] = v22;
-    g_pGame[26] = v23;
-    CStateGame::UpdateZoomFactor((CStateGame *)g_pGame);
+    g_pGame->m_sGameData.m_uCamX = v21;
+    g_pGame->m_sGameData.m_uCamY = v22;
+    g_pGame->m_sGameData.m_uZoom = v23;
+    CStateGame::UpdateZoomFactor(g_pGame);
   }
   S4::CMapFile::Close((S4::CMapFile *)&v25);
   UpdateReefBlockingBits();
@@ -1147,8 +1147,8 @@ bool __cdecl CGameRun::LoadEditorMap(std::wstring & a1, bool a2) {
   struct CMapFile *v5; // [esp+10h] [ebp-28h]
   CHandleMap *v6; // [esp+14h] [ebp-24h]
   char *Str; // [esp+1Ch] [ebp-1Ch]
-  int v8; // [esp+20h] [ebp-18h] BYREF
-  struct S4::CMapFile *v9; // [esp+24h] [ebp-14h]
+  size_t Size; // [esp+20h] [ebp-18h] BYREF
+  S4::CMapFile *v9; // [esp+24h] [ebp-14h]
   char v10; // [esp+2Bh] [ebp-Dh]
   int v11; // [esp+34h] [ebp-4h]
 
@@ -1159,7 +1159,7 @@ bool __cdecl CGameRun::LoadEditorMap(std::wstring & a1, bool a2) {
          a1,
          0) )
   {
-    v9 = (struct S4::CMapFile *)(*(int (__thiscall **)(void *))(*(_DWORD *)g_pRandomMaps + 12))(g_pRandomMaps);
+    v9 = (S4::CMapFile *)(*(int (__thiscall **)(void *))(*(_DWORD *)g_pRandomMaps + 12))(g_pRandomMaps);
   }
   else
   {
@@ -1170,42 +1170,42 @@ bool __cdecl CGameRun::LoadEditorMap(std::wstring & a1, bool a2) {
     else
       v5 = 0;
     v11 = -1;
-    v9 = v5;
+    v9 = (S4::CMapFile *)v5;
     v10 = 1;
-    S4::CMapFile::Open(v5, a1, 1, 1);
+    S4::CMapFile::Open((S4::CMapFile *)v5, a1, 1, 1);
   }
   CGameRun::LoadGeneralEditorInfo(v9);
   v2 = CStateGame::GameData(g_pGame);
-  CWorldManager::LoadGfxData(v9, 0xDu, v2->m_iHeight);
+  CWorldManager::LoadGfxData(v9, MAP_CHUNK_GFX_ELEMENTS, v2->m_iHeight);
   CWarMap::Init();
-  CBuildingMgr::LoadBuildingData((CBuildingMgr *)g_cBuildingMgr, v9, 8u);
-  CSettlerMgr::LoadSettlerData((CSettlerMgr *)g_cSettlerMgr, v9, 7u);
-  CPileMgr::LoadPileData((CPileMgr *)&g_cPileMgr, v9, 9);
-  v8 = 0;
-  Str = (char *)S4::CMapFile::LoadChunk(v9, 0x10u, 0, &v8, 0);
+  CBuildingMgr::LoadBuildingData((CBuildingMgr *)g_cBuildingMgr, v9, MAP_CHUNK_BUILDINGS);
+  CSettlerMgr::LoadSettlerData((CSettlerMgr *)g_cSettlerMgr, v9, MAP_CHUNK_SETTLERS);
+  CPileMgr::LoadPileData((CPileMgr *)&g_cPileMgr, v9, MAP_CHUNK_PILES);
+  Size = 0;
+  Str = (char *)S4::CMapFile::LoadChunk(v9, MAP_CHUNK_SCRIPT, 0, (int *)&Size, 0);
   if ( Str )
   {
-    v8 = strlen(Str);
-    if ( v8 < 4 )
+    Size = strlen(Str);
+    if ( (int)Size < 4 )
     {
-      v8 = 0;
+      Size = 0;
       Str = 0;
     }
   }
   else
   {
-    v8 = 0;
+    Size = 0;
   }
   v3 = std::wstring::c_str(&g_pGameType->m_swMapName);
-  CGameScriptManager::NewGameEx(Str, v8, v3, a2);
-  S4::CMapFile::CloseChunk(v9, 0x10u, 0);
+  CGameScriptManager::NewGameEx(g_pScriptMgr, Str, Size, v3, a2);
+  S4::CMapFile::CloseChunk(v9, MAP_CHUNK_SCRIPT, 0);
   if ( v10 && v9 )
-    (**(void (__thiscall ***)(struct S4::CMapFile *, int))v9)(v9, 1);
-  (*(void (__thiscall **)(void *))(*(_DWORD *)g_pAI + 12))(g_pAI);
+    (*(void (__thiscall **)(S4::CMapFile *, int))v9->vftable)(v9, 1);// dtor
+  g_pAI->Init(g_pAI);
   if ( CGameType::IsCampaignMap(g_pGameType) && (int)g_pGameType->m_iCampaignType < 11 )
     IAIEnvironment::SetGlobalEcoAIFlags(0);
   else
-    IAIEnvironment::SetGlobalEcoAIFlags((struct CFrameWnd *)0x10);
+    IAIEnvironment::SetGlobalEcoAIFlags(16);
   return 1;
 }
 

@@ -226,8 +226,8 @@ void  CGameScriptManager::NewGame(char const * Src, unsigned int Size) {
   {
     __debugbreak();
   }
-  CGameScriptManager::LoadMapScript(Src, Size);
-  result = CGameScriptManager::UnrequestAllEvents(this);
+  CGameScriptManager::LoadMapScript(this, Src, Size);
+  CGameScriptManager::UnrequestAllEvents(this);
   this->m_uGameScriptState = 1;
   return result;
 }
@@ -315,7 +315,7 @@ void  CGameScriptManager::NewGameEx(char const * Src, unsigned int Size, wchar_t
             v12 = (void *)std::wstring::wstring(&v24, String);
             v10 = v12;
             LOBYTE(v29) = 1;
-            std::operator+<wchar_t>(&v25, v12, v11);
+            std::operator+<wchar_t>((int)&v25, v12, v11);
             LOBYTE(v29) = 3;
             std::wstring::~wstring(&v24);
             LOBYTE(v29) = 4;
@@ -342,7 +342,7 @@ void  CGameScriptManager::NewGameEx(char const * Src, unsigned int Size, wchar_t
     if ( Src )
     {
 LABEL_22:
-      CGameScriptManager::NewGame((void *)Src, Size);
+      CGameScriptManager::NewGame(this, (void *)Src, Size);
       return;
     }
     CGameScriptManager::NewGame(this);
@@ -528,10 +528,10 @@ bool  CGameScriptManager::LoadMapScript(char const * Src, unsigned int Size) {
   }
   if ( Src && Size )
   {
-    this->m_pMapScriptData = (int)operator new[](Size);
+    this->m_pMapScriptData = operator new[](Size);
     this->m_uMapScriptSize = Size;
-    memcpy((void *)this->m_pMapScriptData, Src, Size);
-    CLua::ExecuteScript(this->m_pScriptEnv, (void *)this->m_pMapScriptData, this->m_uMapScriptSize, 0);
+    memcpy(this->m_pMapScriptData, Src, Size);
+    CLua::ExecuteScript(this->m_pScriptEnv, this->m_pMapScriptData, this->m_uMapScriptSize, 0);
   }
   else
   {

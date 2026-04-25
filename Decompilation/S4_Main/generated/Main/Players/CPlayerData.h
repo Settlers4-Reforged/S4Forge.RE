@@ -27,7 +27,7 @@ public:
     int  AddSetup(void);
 
     // address=[0x2fbf300]
-    int  DeleteSetup(int a2);
+    int  DeleteSetup(int setupId);
 
     // address=[0x2fbf390]
     int  GetRaceOfPlayer(int _Player);
@@ -48,7 +48,7 @@ public:
     char *  GetSetupName(int a2);
 
     // address=[0x2fbf5c0]
-    int  GetControlOfPlayer(int a2, int a3);
+    int  GetControlOfPlayer(int player, int setupId);
 
     // address=[0x2fbf610]
     int  GetTeamOfPlayer(int a2, int a3);
@@ -126,7 +126,7 @@ public:
 public:
     char[10][33] m_uSetupNames;
     CPlayerData::Player[8] m_sPlayers;
-    CPlayerData::Team[80] m_sSetups;
+    CPlayerData::Team[10][8] m_sSetups;
     _BYTE[2] gap_352;
     _DWORD m_uNumberOfPlayers;
     int m_iNumberOfSetups;

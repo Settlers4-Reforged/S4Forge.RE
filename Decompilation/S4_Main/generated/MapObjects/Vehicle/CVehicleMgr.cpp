@@ -546,7 +546,7 @@ void  CVehicleMgr::Load(class S4::CMapFile & a2) {
   unsigned int v4; // [esp+B8h] [ebp-9Ch]
   int v5; // [esp+BCh] [ebp-98h]
   int v6; // [esp+C0h] [ebp-94h]
-  int v7; // [esp+C4h] [ebp-90h]
+  T_SETTLER_OBJ_TYPE v7; // [esp+C4h] [ebp-90h]
   int v8; // [esp+C8h] [ebp-8Ch]
   int v9; // [esp+CCh] [ebp-88h]
   int v10; // [esp+D0h] [ebp-84h]
@@ -554,10 +554,10 @@ void  CVehicleMgr::Load(class S4::CMapFile & a2) {
   int v13; // [esp+DCh] [ebp-78h]
   int v14; // [esp+E0h] [ebp-74h]
   int v15; // [esp+E4h] [ebp-70h]
-  unsigned __int16 *v16; // [esp+E8h] [ebp-6Ch]
+  IEntity *v16; // [esp+E8h] [ebp-6Ch]
   int v17; // [esp+ECh] [ebp-68h]
   int v18; // [esp+F0h] [ebp-64h] BYREF
-  int v19; // [esp+F4h] [ebp-60h] BYREF
+  int a4; // [esp+F4h] [ebp-60h] BYREF
   _WORD *v20; // [esp+FCh] [ebp-58h]
   int v21; // [esp+100h] [ebp-54h]
   int v22; // [esp+104h] [ebp-50h] BYREF
@@ -566,21 +566,21 @@ void  CVehicleMgr::Load(class S4::CMapFile & a2) {
   char *Str; // [esp+110h] [ebp-44h]
   CVehicleMgr *v26; // [esp+114h] [ebp-40h]
   unsigned int i; // [esp+118h] [ebp-3Ch]
-  unsigned __int16 *v29; // [esp+120h] [ebp-34h]
-  _BYTE v30[28]; // [esp+124h] [ebp-30h] BYREF
+  IEntity *v29; // [esp+120h] [ebp-34h]
+  std::string v30; // [esp+124h] [ebp-30h] BYREF
   int *v31; // [esp+144h] [ebp-10h]
   int v32; // [esp+150h] [ebp-4h]
 
   v31 = &v2;
   v26 = this;
   CVehicleMgr::Clear(this);
-  v19 = 0;
-  Str = (char *)S4::CMapFile::LoadChunk(a2, 0xA6u, 0, &v19, 0);
+  a4 = 0;
+  Str = (char *)S4::CMapFile::LoadChunk(a2, MAP_CHUNK_SAVE_VEHICLES, 0, &a4, 0);
   if ( Str )
   {
-    std::string::string(v30, Str);
+    std::string::string(&v30, Str);
     v32 = 0;
-    std::istringstream::istringstream(v30, 1, 1);
+    std::istringstream::istringstream((int)&v30, 1, 1);
     LOBYTE(v32) = 1;
     v4 = std::ios_base::exceptions((char *)v3 + *(_DWORD *)(v3[0] + 4));
     std::ios_base::exceptions((std::ios_base *)((char *)v3 + *(_DWORD *)(v3[0] + 4)), 6);
@@ -598,7 +598,7 @@ void  CVehicleMgr::Load(class S4::CMapFile & a2) {
     operator^<unsigned int>(v3, &v23);
     for ( i = 0; i < v23; ++i )
     {
-      v16 = (unsigned __int16 *)CPersistence::New(v3, v2);
+      v16 = (IEntity *)CPersistence::New((struct std::istream *)v3);
       v29 = v16;
       if ( !v16 )
       {
@@ -613,29 +613,29 @@ void  CVehicleMgr::Load(class S4::CMapFile & a2) {
         _CxxThrowException(&v22, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
       }
       IEntity::ClearFlagBits(v29, EntityFlag_Selected);
-      (*(void (__thiscall **)(unsigned __int16 *))(*(_DWORD *)v29 + 12))(v29);
-      v14 = IEntity::ID();
+      ((void (__thiscall *)(IEntity *))v29->PostLoadInit)(v29);
+      v14 = IEntity::ID(v29);
       v13 = IEntity::Type(v29);
-      v12 = IEntity::OwnerId((unsigned __int8 *)v29);
+      v12 = IEntity::OwnerId(v29);
       CVehicleMgr::AttachVehicle(v26, v12, v13, v14);
       if ( IEntity::FlagBits(v29, (EntityFlag)&dword_F29144[220079]) )
         v21 = 1;
       else
         v21 = 2;
       v8 = v21;
-      v9 = IEntity::OwnerId((unsigned __int8 *)v29);
+      v9 = IEntity::OwnerId(v29);
       v10 = IEntity::Type(v29);
       v20 = (_WORD *)((char *)v26 + 36 * v9 + 6 * v10 + 2 * v8 + 28);
       ++*v20;
-      v7 = IEntity::ObjType((unsigned __int8 *)v29);
-      if ( v7 == 2 )
+      v7 = IEntity::ObjType(v29);
+      if ( v7 == SHIP_OBJ )
       {
         v6 = IEntity::WorldIdx();
         v5 = v6;
         if ( CWaterFlags::IsBlockedWater(v6) )
         {
           IEntity::ClearFlagBits(v29, EntityFlag_Visible);
-          (*(void (__thiscall **)(unsigned __int16 *, int))(*(_DWORD *)v29 + 32))(v29, 0x4000);
+          ((void (__thiscall *)(IEntity *, int))v29->Decrease)(v29, 0x4000);
         }
       }
     }
@@ -644,7 +644,7 @@ void  CVehicleMgr::Load(class S4::CMapFile & a2) {
     LOBYTE(v32) = 0;
     std::istringstream::`vbase destructor'(v3);
     v32 = -1;
-    std::string::~string(v30);
+    std::string::~string(&v30);
   }
 }
 

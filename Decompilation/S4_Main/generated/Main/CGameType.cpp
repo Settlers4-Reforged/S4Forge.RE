@@ -299,7 +299,7 @@ void  CGameType::SetPlayerName(int _iPlayerIndex, std::wstring & _swpPlayerName)
   std::string::string(&this->std__string390);
   std::string::string(&this->std__string3AC);
   std::string::string(&this->std__string3C8);
-  this->byte3E4 = 0;
+  this->m_bIsEditorMap = 0;
   this->m_bIsCampaignMap = 0;
   this->dword3F8 = 0;
   this->dword3FC = 0;
@@ -509,7 +509,7 @@ bool  CGameType::LoadMapData(std::wstring a2, bool _bAIActive, unsigned int a4, 
     }
     Chunk = S4::CMapFile::LoadChunk(pMapFile, 0xDCu, 0);
     this->m_bIsCampaignMap = 0;
-    this->byte3E4 = 0;
+    this->m_bIsEditorMap = 0;
     this->m_iWidthHeight = Chunk[3];
     this->m_iStartResources = 1;
     this->m_bIsEmptyMap = 1;
@@ -591,7 +591,7 @@ bool  CGameType::LoadMapData(std::wstring a2, bool _bAIActive, unsigned int a4, 
     this->m_bIsCampaignMap = v64 != 0;
     MA_IsEditorMap(&v64);
     v70 = v64 != 0;
-    this->byte3E4 = v64 != 0;
+    this->m_bIsEditorMap = v64 != 0;
     MA_GetMapProperty(1, &v64);
     v69 = v64 != 0;
     this->m_bIsAddOnMap = v64 != 0;
@@ -1086,7 +1086,7 @@ void  CGameType::Init(void) {
   this->byte36A = 0;
   this->byte36B = 0;
   this->byte36C = 0;
-  this->byte3E4 = 0;
+  this->m_bIsEditorMap = 0;
   this->m_bIsCampaignMap = 0;
   this->m_iNumberOfSetups = 0;
   this->byte35C = 0;

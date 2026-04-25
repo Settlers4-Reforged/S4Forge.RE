@@ -2,8 +2,8 @@
 #define CPLAYERGAMEDATA_H
 
 #include "defines.h"
-#include "Main/Player/CPlayerStatisticData.h"
-#include "Main/Player/CPlayerMagicData.h"
+#include "Main/Players/CPlayerStatisticData.h"
+#include "Main/Players/CPlayerMagicData.h"
 
 class CPlayerGameData {
 public:

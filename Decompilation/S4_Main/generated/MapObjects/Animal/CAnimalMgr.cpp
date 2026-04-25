@@ -885,50 +885,49 @@ void  CAnimalMgr::Store(class S4::CMapFile & a2) {
 // Decompiled from void __thiscall CAnimalMgr::Load(CAnimalMgr *this, struct S4::CMapFile *a2)
 void  CAnimalMgr::Load(class S4::CMapFile & a2) {
   
-  int v2; // [esp+0h] [ebp-FCh]
-  _DWORD v3[42]; // [esp+4h] [ebp-F8h] BYREF
-  unsigned int v4; // [esp+ACh] [ebp-50h]
-  int v5; // [esp+B0h] [ebp-4Ch]
-  int v6; // [esp+B4h] [ebp-48h] BYREF
-  int v7[2]; // [esp+B8h] [ebp-44h] BYREF
-  unsigned int v8; // [esp+C0h] [ebp-3Ch] BYREF
+  _DWORD v2[42]; // [esp+4h] [ebp-F8h] BYREF
+  unsigned int v3; // [esp+ACh] [ebp-50h]
+  int v4; // [esp+B0h] [ebp-4Ch]
+  int v5; // [esp+B4h] [ebp-48h] BYREF
+  int a4[2]; // [esp+B8h] [ebp-44h] BYREF
+  unsigned int v7; // [esp+C0h] [ebp-3Ch] BYREF
   int pExceptionObject; // [esp+C4h] [ebp-38h] BYREF
   char *Str; // [esp+C8h] [ebp-34h]
   unsigned int i; // [esp+CCh] [ebp-30h]
-  _BYTE v12[28]; // [esp+D0h] [ebp-2Ch] BYREF
-  int v13; // [esp+F8h] [ebp-4h]
+  std::string v11; // [esp+D0h] [ebp-2Ch] BYREF
+  int v12; // [esp+F8h] [ebp-4h]
 
-  v7[1] = (int)this;
+  a4[1] = (int)this;
   CAnimalMgr::Clear(this);
   CTrace::Print("DecoObjMgr load");
-  v7[0] = 0;
-  Str = (char *)S4::CMapFile::LoadChunk(a2, 0xA5u, 0, v7, 0);
+  a4[0] = 0;
+  Str = (char *)S4::CMapFile::LoadChunk(a2, MAP_CHUNK_SAVE_ANIMALS, 0, a4, 0);
   if ( Str )
   {
-    std::string::string(v12, Str);
-    v13 = 0;
-    std::istringstream::istringstream(v12, 1, 1);
-    LOBYTE(v13) = 1;
-    v4 = std::ios_base::exceptions((char *)v3 + *(_DWORD *)(v3[0] + 4));
-    std::ios_base::exceptions((std::ios_base *)((char *)v3 + *(_DWORD *)(v3[0] + 4)), 6);
-    operator^<unsigned int>(v3, &v6);
-    v5 = v6;
-    if ( v6 != 1 )
+    std::string::string(&v11, Str);
+    v12 = 0;
+    std::istringstream::istringstream(&v11, 1, 1);
+    LOBYTE(v12) = 1;
+    v3 = std::ios_base::exceptions((char *)v2 + *(_DWORD *)(v2[0] + 4));
+    std::ios_base::exceptions((std::ios_base *)((char *)v2 + *(_DWORD *)(v2[0] + 4)), 6);
+    operator^<unsigned int>(v2, &v5);
+    v4 = v5;
+    if ( v5 != 1 )
     {
       BBSupportTracePrintF(3, "load output defect Unknown fileFormatVersion for CAnimalMgr");
       pExceptionObject = 0;
       CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
       _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
     }
-    v8 = 0;
-    operator^<unsigned int>(v3, &v8);
-    for ( i = 0; i < v8; ++i )
-      CPersistence::New(v3, v2);
-    std::ios_base::exceptions((std::ios_base *)((char *)v3 + *(_DWORD *)(v3[0] + 4)), v4);
-    LOBYTE(v13) = 0;
-    std::istringstream::`vbase destructor'(v3);
-    v13 = -1;
-    std::string::~string(v12);
+    v7 = 0;
+    operator^<unsigned int>(v2, &v7);
+    for ( i = 0; i < v7; ++i )
+      CPersistence::New((struct std::istream *)v2);
+    std::ios_base::exceptions((std::ios_base *)((char *)v2 + *(_DWORD *)(v2[0] + 4)), v3);
+    LOBYTE(v12) = 0;
+    std::istringstream::`vbase destructor'(v2);
+    v12 = -1;
+    std::string::~string(&v11);
   }
 }
 

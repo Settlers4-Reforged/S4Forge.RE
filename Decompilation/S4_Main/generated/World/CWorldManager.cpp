@@ -956,13 +956,13 @@ bool __cdecl CWorldManager::SaveMap(class S4::CMapFile & _pMapFile) {
 
 
 // address=[0x16a2a20]
-// Decompiled from void __cdecl CWorldManager::LoadGfxData(struct S4::CMapFile *a1, unsigned __int16 a2, int _iWidth)
+// Decompiled from void __cdecl CWorldManager::LoadGfxData(struct S4::CMapFile *a1, T_S4_MAP_CHUNK a2, int _iWidth)
 void __cdecl CWorldManager::LoadGfxData(class S4::CMapFile & a1, int a2, int _iWidth) {
   
   __int16 iOwner; // ax
   SGroundData *pMapElementsStart; // [esp+0h] [ebp-30h]
   int v5; // [esp+4h] [ebp-2Ch] BYREF
-  int v6; // [esp+8h] [ebp-28h] BYREF
+  int a4; // [esp+8h] [ebp-28h] BYREF
   int iX; // [esp+14h] [ebp-1Ch] MAPDST
   struct T_GFX_MAP_ELEMENT *GfxMapElements; // [esp+18h] [ebp-18h] MAPDST
   int iObjectID; // [esp+1Ch] [ebp-14h]
@@ -974,10 +974,10 @@ void __cdecl CWorldManager::LoadGfxData(class S4::CMapFile & a1, int a2, int _iW
   CWorldManager::Construct(_iWidth);
   GfxMapElements = 0;
   pMapElements = 0;
-  v6 = 0;
-  GfxMapElements = (struct T_GFX_MAP_ELEMENT *)S4::CMapFile::LoadChunk(a1, a2, 0, &v6, 0);
+  a4 = 0;
+  GfxMapElements = (struct T_GFX_MAP_ELEMENT *)S4::CMapFile::LoadChunk(a1, a2, 0, &a4, 0);
   v5 = 0;
-  pMapElements = (SGroundData *)S4::CMapFile::LoadChunk(a1, 6u, 0, &v5, 0);
+  pMapElements = (SGroundData *)S4::CMapFile::LoadChunk(a1, MAP_CHUNK_ELEMENTS, 0, &v5, 0);
   if ( !GfxMapElements && BBSupportDbgReport(2, "World\\World.cpp", 878, "pGfxMapElements != NULL") == 1 )
     __debugbreak();
   if ( !pMapElements && BBSupportDbgReport(2, "World\\World.cpp", 879, "pMapElements != NULL") == 1 )
@@ -1049,7 +1049,7 @@ void __cdecl CWorldManager::LoadGfxData(class S4::CMapFile & a1, int a2, int _iW
       ++pMapElements;
     }
   }
-  S4::CMapFile::CloseChunk(a1, 6u, 0);
+  S4::CMapFile::CloseChunk(a1, MAP_CHUNK_ELEMENTS, 0);
 }
 
 
