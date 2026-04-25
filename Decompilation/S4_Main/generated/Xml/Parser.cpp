@@ -1,3 +1,4 @@
+#if FALSE
 #include "Parser.h"
 
 // Definitions for class Parser
@@ -391,3 +392,4 @@ bool  AdvXMLParser::Parser::ParseNmtoken(std::string & a2) {
 }
 
 
+#endif // Already implemented

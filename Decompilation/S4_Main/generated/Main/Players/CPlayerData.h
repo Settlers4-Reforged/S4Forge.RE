@@ -18,10 +18,10 @@ public:
     int  GetNumberOfSetups(void);
 
     // address=[0x2fbf130]
-    int  AddPlayer(int a2, int a3, int a4, char * Source);
+    int  AddPlayer(int _iRace, int _iX, int _iY, char * _spName);
 
     // address=[0x2fbf1e0]
-    int  DeletePlayer(int a2);
+    int  DeletePlayer(int _Number);
 
     // address=[0x2fbf270]
     int  AddSetup(void);
@@ -30,7 +30,7 @@ public:
     int  DeleteSetup(int a2);
 
     // address=[0x2fbf390]
-    int  GetRaceOfPlayer(int a2);
+    int  GetRaceOfPlayer(int _Player);
 
     // address=[0x2fbf3d0]
     int  GetXOfPlayer(int a2);
@@ -39,7 +39,7 @@ public:
     int  GetYOfPlayer(int a2);
 
     // address=[0x2fbf450]
-    void  ChangePlayer(int a2, int a3);
+    void  ChangePlayer(int _iSourcePlayer, int _iDestPlayer);
 
     // address=[0x2fbf560]
     char *  GetNameOfPlayer(int a2);
@@ -81,10 +81,10 @@ public:
     int  SaveTeamData(unsigned char * a2, int a3);
 
     // address=[0x2fbf900]
-    int  Load(unsigned char * lpBuffer, void * hFile, struct SMapChunkHeader a4);
+    int  Load(unsigned char * a2, void * a3, struct SMapChunkHeader a4);
 
     // address=[0x2fbf980]
-    int  LoadTeamData(unsigned char * lpBuffer, void * hFile, struct SMapChunkHeader a4);
+    int  LoadTeamData(unsigned char * a2, void * a3, struct SMapChunkHeader a4);
 
     // address=[0x2fbfa50]
     int  GetSizeOfPlayerElement(void);
@@ -126,10 +126,10 @@ public:
 public:
     char[10][33] m_uSetupNames;
     CPlayerData::Player[8] m_sPlayers;
-    CPlayerData::Setup[80] m_sSetups;
+    CPlayerData::Team[80] m_sSetups;
+    _BYTE[2] gap_352;
     _DWORD m_uNumberOfPlayers;
-    _DWORD m_uNumberOfSetups;
-    _BYTE[192] gap_35C;
+    int m_iNumberOfSetups;
 
 };
 

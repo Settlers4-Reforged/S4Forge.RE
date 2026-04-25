@@ -1,3 +1,4 @@
+#if FALSE
 #include "Attribute.h"
 
 // Definitions for class Attribute
@@ -261,3 +262,4 @@ void  AdvXMLParser::Attribute::GenerateXML(class AdvXMLParser::GenerateContext &
 // address=[0x46856a4]
 // [Decompilation failed for static class AdvXMLParser::Attribute AdvXMLParser::Attribute::null]
 
+#endif // Already implemented

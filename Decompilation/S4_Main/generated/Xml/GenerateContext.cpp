@@ -1,3 +1,4 @@
+#if FALSE
 #include "GenerateContext.h"
 
 // Definitions for class GenerateContext
@@ -185,3 +186,4 @@ void  AdvXMLParser::GenerateContext::GenerateIndentation(void) {
 }
 
 
+#endif // Already implemented

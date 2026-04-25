@@ -1,3 +1,4 @@
+#if FALSE
 #include "CData.h"
 
 // Definitions for class CData
@@ -166,3 +167,4 @@ void  AdvXMLParser::CData::GenerateXML(class AdvXMLParser::GenerateContext & a2)
 // address=[0x46856e8]
 // [Decompilation failed for static class AdvXMLParser::CData AdvXMLParser::CData::null]
 
+#endif // Already implemented

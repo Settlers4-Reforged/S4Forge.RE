@@ -1,3 +1,4 @@
+#if FALSE
 #include "Pi.h"
 
 // Definitions for class Pi
@@ -197,3 +198,4 @@ bool __cdecl AdvXMLParser::Pi::ParsePITarget(class AdvXMLParser::Parser & a1, st
 }
 
 
+#endif // Already implemented

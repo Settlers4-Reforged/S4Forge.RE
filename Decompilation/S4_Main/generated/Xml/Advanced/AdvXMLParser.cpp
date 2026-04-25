@@ -1,3 +1,4 @@
+#if FALSE
 #include "AdvXMLParser.h"
 
 // Definitions for class AdvXMLParser
@@ -33,3 +34,4 @@ bool  AdvXMLParser::ConstIterator<class AdvXMLParser::Element>::operator<(struct
 }
 
 
+#endif // Already implemented

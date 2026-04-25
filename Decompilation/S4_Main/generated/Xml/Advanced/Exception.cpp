@@ -1,3 +1,4 @@
+#if FALSE
 #include "Exception.h"
 
 // Definitions for class Exception
@@ -32,3 +33,4 @@
 }
 
 
+#endif // Already implemented

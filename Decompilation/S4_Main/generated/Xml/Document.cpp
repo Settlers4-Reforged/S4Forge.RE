@@ -1,3 +1,4 @@
+#if FALSE
 #include "Document.h"
 
 // Definitions for class Document
@@ -505,3 +506,4 @@ void  AdvXMLParser::Document::ParseRootElement(class AdvXMLParser::Parser & a2) 
 }
 
 
+#endif // Already implemented

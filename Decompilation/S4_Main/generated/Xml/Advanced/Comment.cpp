@@ -1,3 +1,4 @@
+#if FALSE
 #include "Comment.h"
 
 // Definitions for class Comment
@@ -170,3 +171,4 @@ void  AdvXMLParser::Comment::GenerateXML(class AdvXMLParser::GenerateContext & a
 // address=[0x4685728]
 // [Decompilation failed for static class AdvXMLParser::Comment AdvXMLParser::Comment::null]
 
+#endif // Already implemented

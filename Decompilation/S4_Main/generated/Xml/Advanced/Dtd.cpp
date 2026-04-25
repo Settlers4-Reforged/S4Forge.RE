@@ -1,3 +1,4 @@
+#if FALSE
 #include "Dtd.h"
 
 // Definitions for class Dtd
@@ -713,3 +714,4 @@ bool  AdvXMLParser::Dtd::ParsePublicID(class AdvXMLParser::Parser & a2) {
 }
 
 
+#endif // Already implemented

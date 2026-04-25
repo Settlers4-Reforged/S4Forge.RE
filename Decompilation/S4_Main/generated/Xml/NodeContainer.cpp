@@ -1,3 +1,4 @@
+#if FALSE
 #include "NodeContainer.h"
 
 // Definitions for class NodeContainer
@@ -831,3 +832,4 @@ void  AdvXMLParser::NodeContainer::GenerateXML(class AdvXMLParser::GenerateConte
 }
 
 
+#endif // Already implemented

@@ -1,3 +1,4 @@
+#if FALSE
 #include "InvalidRefException.h"
 
 // Definitions for class InvalidRefException
@@ -33,3 +34,4 @@
 }
 
 
+#endif // Already implemented

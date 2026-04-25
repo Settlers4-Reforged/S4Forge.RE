@@ -1,3 +1,4 @@
+#if FALSE
 #include "EntityRef.h"
 
 // Definitions for class EntityRef
@@ -204,3 +205,4 @@ bool  AdvXMLParser::EntityRef::MapReferenceName(void) {
 }
 
 
+#endif // Already implemented

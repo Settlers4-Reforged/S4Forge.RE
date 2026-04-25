@@ -3,10 +3,10 @@
 // Definitions for class CPlayerManager
 
 // address=[0x130f2c0]
-// Decompiled from int __cdecl CPlayerManager::Race(int a1)
-int __cdecl CPlayerManager::Race(int a1) {
+// Decompiled from DWORD __cdecl CPlayerManager::Race(int _iPlayerId)
+int __cdecl CPlayerManager::Race(int _iPlayerId) {
   
-  if ( !CPlayerManager::ValidUsedPlayerId(a1)
+  if ( !CPlayerManager::ValidUsedPlayerId(_iPlayerId)
     && BBSupportDbgReport(
          2,
          "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Main\\PlayerManager.h",
@@ -15,7 +15,7 @@ int __cdecl CPlayerManager::Race(int a1) {
   {
     __debugbreak();
   }
-  return dword_402BDCC[16 * a1];
+  return CPlayerManager::m_cPlayerInfos[_iPlayerId].m_iRace;
 }
 
 
@@ -61,7 +61,7 @@ class CPlayerInfo const & __cdecl CPlayerManager::PlayerInfo(int a1) {
 
 
 // address=[0x13919d0]
-// Decompiled from int __cdecl CPlayerManager::Color(int a1)
+// Decompiled from DWORD __cdecl CPlayerManager::Color(int a1)
 int __cdecl CPlayerManager::Color(int a1) {
   
   if ( !CPlayerManager::ValidUsedPlayerId(a1)
@@ -73,7 +73,7 @@ int __cdecl CPlayerManager::Color(int a1) {
   {
     __debugbreak();
   }
-  return dword_402BDE0[16 * a1];
+  return CPlayerManager::m_cPlayerInfos[a1].m_iColor;
 }
 
 
@@ -98,12 +98,12 @@ class CPlayerGameData & __cdecl CPlayerManager::PlayerGameData(int _iPlayerId) {
   {
     __debugbreak();
   }
-  return (CPlayerGameData *)((char *)&CPlayerManager::m_cPlayerGameData + 152 * _iPlayerId);
+  return &CPlayerManager::m_cPlayerGameData[_iPlayerId];
 }
 
 
 // address=[0x144fed0]
-// Decompiled from int __cdecl CPlayerManager::Name(int a1, int a2)
+// Decompiled from std::wstring *__cdecl CPlayerManager::Name(std::wstring *a1, int a2)
 std::wstring __cdecl CPlayerManager::Name(int a1) {
   
   if ( !CPlayerManager::ValidUsedPlayerId(a2)
@@ -115,7 +115,7 @@ std::wstring __cdecl CPlayerManager::Name(int a1) {
   {
     __debugbreak();
   }
-  std::wstring::wstring((int)&unk_402BDE4 + 64 * a2);
+  std::wstring::wstring(a1, &CPlayerManager::m_cPlayerInfos[a2].m_swName);
   return a1;
 }
 
@@ -133,7 +133,7 @@ bool __cdecl CPlayerManager::IsAlive(int a1) {
   {
     __debugbreak();
   }
-  return byte_402BE04[64 * a1];
+  return CPlayerManager::m_cPlayerInfos[a1].m_bAlive;
 }
 
 
@@ -150,12 +150,12 @@ bool __cdecl CPlayerManager::IsAI(int a1) {
   {
     __debugbreak();
   }
-  return dword_402BE00[16 * a1] == 2 || dword_402BE00[16 * a1] == 3;
+  return CPlayerManager::m_cPlayerInfos[a1].m_iType == 2 || CPlayerManager::m_cPlayerInfos[a1].m_iType == 3;
 }
 
 
 // address=[0x1486e90]
-// Decompiled from int __cdecl CPlayerManager::GetPlayerControl(int a1)
+// Decompiled from DWORD __cdecl CPlayerManager::GetPlayerControl(int a1)
 int __cdecl CPlayerManager::GetPlayerControl(int a1) {
   
   if ( !CPlayerManager::ValidUsedPlayerId(a1)
@@ -167,7 +167,7 @@ int __cdecl CPlayerManager::GetPlayerControl(int a1) {
   {
     __debugbreak();
   }
-  return dword_402BE00[16 * a1];
+  return CPlayerManager::m_cPlayerInfos[a1].m_iType;
 }
 
 
@@ -184,7 +184,7 @@ void __cdecl CPlayerManager::Init(void) {
   for ( i = 0; i < 9; ++i )
   {
     CPlayerInfo::Clear(&CPlayerManager::m_cPlayerInfos[i]);
-    CPlayerGameData::Clear((CPlayerGameData *)((char *)&CPlayerManager::m_cPlayerGameData + 152 * i));
+    CPlayerGameData::Clear(&CPlayerManager::m_cPlayerGameData[i]);
   }
   CPlayerManager::m_iInitialized = 1;
   CPlayerManager::m_iLocked = 0;
@@ -244,7 +244,7 @@ LABEL_15:
   v13->m_iPeerId = _iPeerId;
   std::wstring::operator=(&v13->m_swName, &_swPlayerName);
   v13->m_iType = _iType;
-  LOBYTE(v13->m_bInitialized) = 1;
+  LOBYTE(v13->m_bAlive) = 1;
   Instance = (OnlineManager *)OnlineManager::GetInstance();
   if ( OnlineManager::IsLocalPeerId(Instance, _iPeerId) )
   {
@@ -341,22 +341,21 @@ void  CPlayerManager::Load(class IS4Chunk & a2) {
 void  CPlayerManager::Save(class IS4Chunk & a2) {
   
   int result; // eax
-  int v3; // [esp+0h] [ebp-Ch]
   int PlayerId; // [esp+4h] [ebp-8h]
   int i; // [esp+8h] [ebp-4h]
   int j; // [esp+8h] [ebp-4h]
 
-  PlayerId = CPlayerManager::LastPlayerId(this);
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 20))(a2, PlayerId);
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 20))(a2, CPlayerManager::m_iLocalPlayer);
-  for ( i = 1; i <= CPlayerManager::LastPlayerId(v3); ++i )
-    CPlayerGameData::Save((CPlayerGameData *)((char *)&CPlayerManager::m_cPlayerGameData + 152 * i), a2);
+  PlayerId = CPlayerManager::LastPlayerId();
+  a2->SaveUnsigned32(PlayerId);
+  a2->SaveUnsigned32(CPlayerManager::m_iLocalPlayer);
+  for ( i = 1; i <= CPlayerManager::LastPlayerId(); ++i )
+    CPlayerGameData::Save(&CPlayerManager::m_cPlayerGameData[i], a2);
   for ( j = 1; ; ++j )
   {
-    result = CPlayerManager::LastPlayerId(v3);
+    result = CPlayerManager::LastPlayerId();
     if ( j > result )
       break;
-    CPlayerInfo::Save((CPlayerInfo *)((char *)&CPlayerManager::m_cPlayerInfos + 64 * j), a2);
+    CPlayerInfo::Save(&CPlayerManager::m_cPlayerInfos[j], a2);
   }
   return result;
 }
@@ -366,35 +365,34 @@ void  CPlayerManager::Save(class IS4Chunk & a2) {
 // Decompiled from int CPlayerManager::PrintStats()
 void __cdecl CPlayerManager::PrintStats(void) {
   
-  const char *v0; // eax
-  int v2; // [esp+0h] [ebp-3Ch]
-  const char *v3; // [esp+4h] [ebp-38h]
-  int PlayerControl; // [esp+8h] [ebp-34h]
+  char *v0; // eax
+  const char *v2; // [esp+4h] [ebp-38h]
+  DWORD PlayerControl; // [esp+8h] [ebp-34h]
   int i; // [esp+Ch] [ebp-30h]
-  _BYTE v6[28]; // [esp+10h] [ebp-2Ch] BYREF
-  int v7; // [esp+38h] [ebp-4h]
+  std::string v5; // [esp+10h] [ebp-2Ch] BYREF
+  int v6; // [esp+38h] [ebp-4h]
 
   CTrace::Print("----------------------------------------------------------------------------------");
   CTrace::Print("Player Stats:");
-  for ( i = 1; i <= CPlayerManager::LastPlayerId(v2); ++i )
+  for ( i = 1; i <= CPlayerManager::LastPlayerId(); ++i )
   {
     PlayerControl = CPlayerManager::GetPlayerControl(i);
-    std::string::string(v6, "Undefined");
-    v7 = 0;
+    std::string::string(&v5, "Undefined");
+    v6 = 0;
     if ( PlayerControl == 2 )
-      std::string::operator=(v6, "AI Level 1");
+      std::string::operator=(&v5, "AI Level 1");
     if ( PlayerControl == 3 )
-      std::string::operator=(v6, "AI Level 2");
+      std::string::operator=(&v5, "AI Level 2");
     if ( PlayerControl == 1 )
-      std::string::operator=(v6, "Human");
+      std::string::operator=(&v5, "Human");
     if ( CPlayerManager::IsAlive(i) )
-      v3 = "Yes";
+      v2 = "Yes";
     else
-      v3 = "No";
-    v0 = (const char *)std::string::c_str(v6);
-    CTrace::Print("CPlayerManager: Player: %d, Control: %s, Alive: %s.", i, v0, v3);
-    v7 = -1;
-    std::string::~string(v6);
+      v2 = "No";
+    v0 = std::string::c_str(&v5);
+    CTrace::Print("CPlayerManager: Player: %d, Control: %s, Alive: %s.", i, v0, v2);
+    v6 = -1;
+    std::string::~string(&v5);
   }
   return CTrace::Print("----------------------------------------------------------------------------------");
 }
@@ -414,7 +412,7 @@ signed char __cdecl CPlayerManager::GetLocalSlot(void) {
     __debugbreak();
   if ( !g_pNetworkEngine || !g_pGameType )
     return -1;
-  if ( (int)g_pGameType->m_iMapMaxNumPlayers > 8
+  if ( g_pGameType->m_iMapMaxNumPlayers > MAX_PLAYER
     && BBSupportDbgReport(2, "Main\\PlayerManager.cpp", 284, "g_pGameType->m_iMapMaxNumPlayers <= MAX_PLAYER") == 1 )
   {
     __debugbreak();
@@ -439,14 +437,14 @@ signed char __cdecl CPlayerManager::GetLocalSlot(void) {
 // Decompiled from CPlayerManager *__thiscall CPlayerManager::CPlayerManager(CPlayerManager *this)
  CPlayerManager::CPlayerManager(void) {
   
-  IS4ChunkObject::IS4ChunkObject(this);
+  IS4ChunkObject::IS4ChunkObject((IS4ChunkObject *)this);
   *(_DWORD *)this = CPlayerManager::_vftable_;
   return this;
 }
 
 
 // address=[0x14aae50]
-// Decompiled from int __cdecl CPlayerManager::PlayerDied(int a1)
+// Decompiled from void __cdecl CPlayerManager::PlayerDied(int a1)
 void __cdecl CPlayerManager::PlayerDied(int a1) {
   
   if ( !CPlayerManager::ValidUsedPlayerId(a1)
@@ -458,13 +456,13 @@ void __cdecl CPlayerManager::PlayerDied(int a1) {
   {
     __debugbreak();
   }
-  byte_402BE04[64 * a1] = 0;
-  return CPlayerManager::PrintStats();
+  LOBYTE(CPlayerManager::m_cPlayerInfos[a1].m_bAlive) = 0;
+  CPlayerManager::PrintStats();
 }
 
 
 // address=[0x14b4800]
-// Decompiled from int __cdecl CPlayerManager::PeerId(int a1)
+// Decompiled from DWORD __cdecl CPlayerManager::PeerId(int a1)
 int __cdecl CPlayerManager::PeerId(int a1) {
   
   if ( !CPlayerManager::ValidUsedPlayerId(a1)
@@ -476,16 +474,14 @@ int __cdecl CPlayerManager::PeerId(int a1) {
   {
     __debugbreak();
   }
-  return dword_402BDDC[16 * a1];
+  return CPlayerManager::m_cPlayerInfos[a1].m_iPeerId;
 }
 
 
 // address=[0x14b4930]
-// Decompiled from int __cdecl CPlayerManager::SetLocalPlayerId(int a1)
+// Decompiled from void __cdecl CPlayerManager::SetLocalPlayerId(int a1)
 void __cdecl CPlayerManager::SetLocalPlayerId(int a1) {
   
-  int result; // eax
-
   if ( !CPlayerManager::ValidUsedPlayerId(a1)
     && BBSupportDbgReport(
          2,
@@ -495,18 +491,16 @@ void __cdecl CPlayerManager::SetLocalPlayerId(int a1) {
   {
     __debugbreak();
   }
-  result = a1;
   CPlayerManager::m_iLocalPlayer = a1;
-  return result;
 }
 
 
 // address=[0x14b4980]
-// Decompiled from int __cdecl CPlayerManager::SetPlayerControl(int a1, int a2)
-void __cdecl CPlayerManager::SetPlayerControl(int a1, int a2) {
+// Decompiled from void __cdecl CPlayerManager::SetPlayerControl(int a1, DWORD arg4)
+void __cdecl CPlayerManager::SetPlayerControl(int a1, int arg4) {
   
-  int v3; // [esp+0h] [ebp-24h]
-  int v4[7]; // [esp+4h] [ebp-20h] BYREF
+  std::wstring *a2; // [esp+0h] [ebp-24h]
+  std::wstring v3; // [esp+4h] [ebp-20h] BYREF
 
   if ( !CPlayerManager::ValidUsedPlayerId(a1)
     && BBSupportDbgReport(
@@ -517,18 +511,22 @@ void __cdecl CPlayerManager::SetPlayerControl(int a1, int a2) {
   {
     __debugbreak();
   }
-  dword_402BE00[16 * a1] = a2;
-  if ( a2 != 2 && a2 != 3 )
-    return CPlayerManager::PrintStats();
-  v3 = std::operator+<wchar_t>((int)v4, (wchar_t *)L"(AI) ", (int)&unk_402BDE4 + 64 * a1);
-  std::wstring::operator=(v3);
-  std::wstring::~wstring(v4);
-  return CPlayerManager::PrintStats();
+  CPlayerManager::m_cPlayerInfos[a1].m_iType = arg4;
+  if ( arg4 == 2 || arg4 == 3 )
+  {
+    a2 = (std::wstring *)std::operator+<wchar_t>(
+                           (int)&v3,
+                           (wchar_t *)L"(AI) ",
+                           (int)CPlayerManager::m_cPlayerInfos[a1].m_swName.m_u);
+    std::wstring::operator=(&CPlayerManager::m_cPlayerInfos[a1].m_swName, a2);
+    std::wstring::~wstring(&v3);
+  }
+  CPlayerManager::PrintStats();
 }
 
 
 // address=[0x15c4d00]
-// Decompiled from int __cdecl CPlayerManager::IP(int a1)
+// Decompiled from DWORD __cdecl CPlayerManager::IP(int a1)
 int __cdecl CPlayerManager::IP(int a1) {
   
   if ( !CPlayerManager::ValidUsedPlayerId(a1)
@@ -540,7 +538,7 @@ int __cdecl CPlayerManager::IP(int a1) {
   {
     __debugbreak();
   }
-  return dword_402BDD8[16 * a1];
+  return CPlayerManager::m_cPlayerInfos[a1].m_iIp;
 }
 
 

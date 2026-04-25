@@ -423,41 +423,41 @@ void __cdecl CStateXMD3Briefing::InitBriefingTexts(int a1, int a2) {
       v2 = g_pStringEngine->GetString(g_pStringEngine, dword_3D8A6D8[a2]);
       std::string::operator=(&stru_402C9B4, v2);
       v3 = g_pStringEngine->GetString(g_pStringEngine, dword_3D8A6E8[a2]);
-      std::string::operator=(&unk_402C998, v3);
+      std::string::operator=(&stru_402C998, v3);
       v4 = g_pStringEngine->GetString(g_pStringEngine, dword_3D8A6F8[a2]);
       std::string::operator=(&stru_402C9D0, v4);
       v5 = g_pStringEngine->GetString(g_pStringEngine, dword_3D8A708[a2]);
-      result = std::string::operator=(&unk_402C97C, v5);
+      result = std::string::operator=(&stru_402C97C, v5);
       break;
     case 22:
       v7 = g_pStringEngine->GetString(g_pStringEngine, dword_3D8A718[a2]);
       std::string::operator=(&stru_402C9B4, v7);
       v8 = g_pStringEngine->GetString(g_pStringEngine, dword_3D8A728[a2]);
-      std::string::operator=(&unk_402C998, v8);
+      std::string::operator=(&stru_402C998, v8);
       v9 = g_pStringEngine->GetString(g_pStringEngine, dword_3D8A738[a2]);
       std::string::operator=(&stru_402C9D0, v9);
       v10 = g_pStringEngine->GetString(g_pStringEngine, dword_3D8A748[a2]);
-      result = std::string::operator=(&unk_402C97C, v10);
+      result = std::string::operator=(&stru_402C97C, v10);
       break;
     case 23:
       v11 = g_pStringEngine->GetString(g_pStringEngine, dword_3D8A758[a2]);
       std::string::operator=(&stru_402C9B4, v11);
       v12 = g_pStringEngine->GetString(g_pStringEngine, dword_3D8A768[a2]);
-      std::string::operator=(&unk_402C998, v12);
+      std::string::operator=(&stru_402C998, v12);
       v13 = g_pStringEngine->GetString(g_pStringEngine, dword_3D8A778[a2]);
       std::string::operator=(&stru_402C9D0, v13);
       v14 = g_pStringEngine->GetString(g_pStringEngine, dword_3D8A788[a2]);
-      result = std::string::operator=(&unk_402C97C, v14);
+      result = std::string::operator=(&stru_402C97C, v14);
       break;
     case 24:
       v15 = g_pStringEngine->GetString(g_pStringEngine, dword_3D8A798[a2]);
       std::string::operator=(&stru_402C9B4, v15);
       v16 = g_pStringEngine->GetString(g_pStringEngine, dword_3D8A7A8[a2]);
-      std::string::operator=(&unk_402C998, v16);
+      std::string::operator=(&stru_402C998, v16);
       v17 = g_pStringEngine->GetString(g_pStringEngine, dword_3D8A7B8[a2]);
       std::string::operator=(&stru_402C9D0, v17);
       v18 = g_pStringEngine->GetString(g_pStringEngine, dword_3D8A7C8[a2]);
-      result = std::string::operator=(&unk_402C97C, v18);
+      result = std::string::operator=(&stru_402C97C, v18);
       break;
     default:
       result = (void *)BBSupportDbgReportF(

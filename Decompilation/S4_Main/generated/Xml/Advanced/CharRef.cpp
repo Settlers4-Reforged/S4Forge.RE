@@ -1,3 +1,4 @@
+#if FALSE
 #include "CharRef.h"
 
 // Definitions for class CharRef
@@ -137,3 +138,4 @@ void  AdvXMLParser::CharRef::GenerateXML(class AdvXMLParser::GenerateContext & a
 }
 
 
+#endif // Already implemented

@@ -6,7 +6,7 @@
 class CPlayerManager : public IS4ChunkObject {
 public:
     // address=[0x130f2c0]
-    static int __cdecl Race(int a1);
+    static int __cdecl Race(int _iPlayerId);
 
     // address=[0x130f490]
     static bool __cdecl ValidUsedPlayerId(int a1);
@@ -78,7 +78,7 @@ public:
     static void __cdecl SetLocalPlayerId(int a1);
 
     // address=[0x14b4980]
-    static void __cdecl SetPlayerControl(int a1, int a2);
+    static void __cdecl SetPlayerControl(int a1, int arg4);
 
     // address=[0x15c4d00]
     static int __cdecl IP(int a1);

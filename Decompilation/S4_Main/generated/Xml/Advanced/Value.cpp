@@ -1,3 +1,4 @@
+#if FALSE
 #include "Value.h"
 
 // Definitions for class Value
@@ -17,3 +18,4 @@ void  AdvXMLParser::Value::Add(char const * Str) {
 }
 
 
+#endif // Already implemented

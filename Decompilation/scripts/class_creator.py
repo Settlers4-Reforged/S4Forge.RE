@@ -499,20 +499,26 @@ FOLDER_MAP = {
         "IFutureEvents",
     ],
 
+    "MapGen/": [
+        "IMapGeneratorHost",
+        "CMapGeneratorHost",
+        "CRandomMaps",
+        "IRandomMaps",
+    ],
+
     "Main/": [
         "CGameRun",
         "CGameSettings",
+        "CBriefingSettings",
         "CGameState",
         "CGameData",
         "CGuiGameState",
         "CGameStateHandler",
         "CGameType",
-        "CMapGeneratorHost",
         "CSoundManager",
         "CTextMsgHandler",
         "CS4DefineNames",
         "CDefineTranslator",
-        "IMapGeneratorHost",
     ],
 
     "Main/Players/": [
@@ -588,6 +594,8 @@ FOLDER_MAP = {
         "CScrollMultiline",
         "CStringEngine",
         "CStringEngineEx",
+        "SMapEntry",
+        "SPlayerEntry",
     ],
 
     "Main/UI/Menus/": [
@@ -620,8 +628,6 @@ FOLDER_MAP = {
         "CHexIndices",
         "CGroupMgr",
         "CGroupWalking",
-        "CRandomMaps",
-        "IRandomMaps",
         "CMapObjectMgr",
         "CMaterialManagerTask",
         "CObserverList",
@@ -911,7 +917,6 @@ FOLDER_MAP = {
     ],
 
     "Uncategorized/": [
-        "CBriefingSettings",
         "CCheckLayer",
         "CClassNetGameIniBuffer",
         "CCommandQueue",
@@ -941,8 +946,6 @@ FOLDER_MAP = {
         "SEntry",
         "SGameEntry",
         "SM_SIV_PaletteBlock",
-        "SMapEntry",
-        "SPlayerEntry",
         "SSquadValue",
         "SampleFrameworkApplication",
         "String",

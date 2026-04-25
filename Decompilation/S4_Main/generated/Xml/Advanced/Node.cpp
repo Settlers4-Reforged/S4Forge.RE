@@ -1,3 +1,4 @@
+#if FALSE
 #include "Node.h"
 
 // Definitions for class Node
@@ -71,3 +72,4 @@ class AdvXMLParser::NodeContainer &  AdvXMLParser::Node::GetParent(void)const {
 // address=[0x3e2d2a8]
 // [Decompilation failed for static class AdvXMLParser::NodeContainer & AdvXMLParser::Node::null]
 
+#endif // Already implemented

@@ -1,3 +1,4 @@
+#if FALSE
 #include "ParsingException.h"
 
 // Definitions for class ParsingException
@@ -44,3 +45,4 @@ int  AdvXMLParser::ParsingException::GetLine(void)const {
 }
 
 
+#endif // Already implemented

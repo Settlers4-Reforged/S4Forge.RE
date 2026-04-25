@@ -42,7 +42,7 @@ public:
     DWORD m_iColor;
     std::wstring m_swName;
     DWORD m_iType;
-    DWORD m_bInitialized;
+    DWORD m_bAlive;
 
 };
 

@@ -61,40 +61,38 @@ void  CBasicGrid::initGrid(void) {
   void *v34; // [esp+88h] [ebp-14h]
   unsigned int v35; // [esp+8Ch] [ebp-10h]
   unsigned int v36; // [esp+90h] [ebp-Ch]
-  CBasicGrid *v37; // [esp+94h] [ebp-8h]
   int j; // [esp+98h] [ebp-4h]
 
-  v37 = this;
-  v35 = CRandom16::Rand((CRandom16 *)g_pRand) % *((_DWORD *)this + 2);
-  v36 = CRandom16::Rand((CRandom16 *)g_pRand) % *((_DWORD *)v37 + 2);
-  *(_BYTE *)(*((_DWORD *)v37 + 1) + v35 + *((_DWORD *)v37 + 2) * v36) = 101;
+  v35 = CRandom16::Rand(g_pRand) % *((_DWORD *)this + 2);
+  v36 = CRandom16::Rand(g_pRand) % *((_DWORD *)this + 2);
+  *(_BYTE *)(*((_DWORD *)this + 1) + v35 + *((_DWORD *)this + 2) * v36) = 101;
   CPlayerData::setStartPos_Basic(*(CPlayerData **)g_pPlayerData, v35, v36);
-  v19 = *((_DWORD *)v37 + 2);
-  v34 = operator new[](4 * *((_DWORD *)v37 + 2));
-  memset(v34, 0, 4 * *((_DWORD *)v37 + 2));
-  v33 = operator new[](4 * *((_DWORD *)v37 + 2));
-  memset(v33, 0, 4 * *((_DWORD *)v37 + 2));
+  v19 = *((_DWORD *)this + 2);
+  v34 = operator new[](4 * *((_DWORD *)this + 2));
+  memset(v34, 0, 4 * *((_DWORD *)this + 2));
+  v33 = operator new[](4 * *((_DWORD *)this + 2));
+  memset(v33, 0, 4 * *((_DWORD *)this + 2));
   for ( i = 1; i < (unsigned __int8)g_iNumPlayers; ++i )
   {
     v8 = pow<int,int>(v19, 3);
     *((_DWORD *)v34 + v35) = (int)((double)*((int *)v34 + v35) + v8);
     v7 = pow<int,int>(v19, 3);
     *((_DWORD *)v33 + v36) = (int)((double)*((int *)v33 + v36) + v7);
-    for ( j = 1; j < *((_DWORD *)v37 + 2); ++j )
+    for ( j = 1; j < *((_DWORD *)this + 2); ++j )
     {
       v24 = (int)pow<int,int>(v19 - j, 3);
       if ( (int)(v35 - j) >= 0 )
         *((_DWORD *)v34 + v35 - j) += v24;
-      if ( (signed int)(j + v35) < *((_DWORD *)v37 + 2) )
+      if ( (signed int)(j + v35) < *((_DWORD *)this + 2) )
         *((_DWORD *)v34 + j + v35) += v24;
       if ( (int)(v36 - j) >= 0 )
         *((_DWORD *)v33 + v36 - j) += v24;
-      if ( (signed int)(j + v36) < *((_DWORD *)v37 + 2) )
+      if ( (signed int)(j + v36) < *((_DWORD *)this + 2) )
         *((_DWORD *)v33 + j + v36) += v24;
     }
     v31 = 0;
     v30 = 0;
-    for ( j = 1; j < *((_DWORD *)v37 + 2); ++j )
+    for ( j = 1; j < *((_DWORD *)this + 2); ++j )
     {
       if ( *((_DWORD *)v34 + v31) > *((_DWORD *)v34 + j) )
         v31 = j;
@@ -107,12 +105,12 @@ void  CBasicGrid::initGrid(void) {
     v21 = 0;
     v10 = (int)((double)*((int *)v34 + v35) * 0.4);
     v9 = (int)((double)*((int *)v33 + v36) * 0.4);
-    for ( j = 0; j < *((_DWORD *)v37 + 2); ++j )
+    for ( j = 0; j < *((_DWORD *)this + 2); ++j )
     {
       if ( j != v35 && v10 + *((_DWORD *)v34 + v35) > *((_DWORD *)v34 + j) )
       {
-        v16 = 2 * *((_DWORD *)v37 + 2);
-        v27 = 2 * *((_DWORD *)v37 + 2);
+        v16 = 2 * *((_DWORD *)this + 2);
+        v27 = 2 * *((_DWORD *)this + 2);
         for ( k = 0; k < i; ++k )
         {
           v18 = 0;
@@ -136,11 +134,11 @@ void  CBasicGrid::initGrid(void) {
     }
     if ( v31 != v35 )
       v35 = v31;
-    for ( j = 0; j < *((_DWORD *)v37 + 2); ++j )
+    for ( j = 0; j < *((_DWORD *)this + 2); ++j )
     {
       if ( j != v36 && v9 + *((_DWORD *)v33 + v36) > *((_DWORD *)v33 + j) )
       {
-        v13 = 2 * *((_DWORD *)v37 + 2);
+        v13 = 2 * *((_DWORD *)this + 2);
         v25 = v13;
         for ( m = 0; m < i; ++m )
         {
@@ -165,24 +163,24 @@ void  CBasicGrid::initGrid(void) {
     }
     if ( v30 != v36 )
       v36 = v30;
-    *(_BYTE *)(*((_DWORD *)v37 + 1) + v35 + *((_DWORD *)v37 + 2) * v36) = 101;
+    *(_BYTE *)(*((_DWORD *)this + 1) + v35 + *((_DWORD *)this + 2) * v36) = 101;
     CPlayerData::setStartPos_Basic(*(CPlayerData **)(g_pPlayerData + 4 * i), v35, v36);
   }
   operator delete[](v34);
   operator delete[](v33);
-  v20 = *((_DWORD *)v37 + 2) * *((_DWORD *)v37 + 2);
-  v11 = (int)(float)((float)((float)v20 * (float)((float)*((int *)v37 + 3) / 100.0))
+  v20 = *((_DWORD *)this + 2) * *((_DWORD *)this + 2);
+  v11 = (int)(float)((float)((float)v20 * (float)((float)*((int *)this + 3) / 100.0))
                    - (float)(unsigned __int8)g_iNumPlayers);
   for ( n = 0; n < v11; ++n )
   {
-    v5 = CRandom16::Rand((CRandom16 *)g_pRand);
+    v5 = CRandom16::Rand(g_pRand);
     v29 = v5 % v20;
-    while ( *(_BYTE *)(*((_DWORD *)v37 + 1) + v29) )
+    while ( *(_BYTE *)(*((_DWORD *)this + 1) + v29) )
     {
       if ( ++v29 >= v20 )
         v29 = 0;
     }
-    *(_BYTE *)(*((_DWORD *)v37 + 1) + v29) = 1;
+    *(_BYTE *)(*((_DWORD *)this + 1) + v29) = 1;
   }
   result = v11;
   if ( v11 <= v20 )

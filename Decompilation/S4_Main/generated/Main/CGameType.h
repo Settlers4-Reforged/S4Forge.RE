@@ -90,7 +90,7 @@ public:
      ~CGameType(void);
 
     // address=[0x1491490]
-    bool  LoadMapData(std::wstring a2, bool a3, unsigned int a4, bool a5, bool a6, int a7, int a8, int a9, bool a10, bool a11);
+    bool  LoadMapData(std::wstring a2, bool _bAIActive, unsigned int a4, bool a5, bool a6, int _iSetupIndex, int _iAIDifficulty, int a9, bool a10, bool a11);
 
     // address=[0x1492f70]
     bool  IsMapAvailable(std::wstring & a2, int a3);
@@ -181,13 +181,13 @@ public:
     _BYTE byte2B9;
     _DWORD m_uiTickCounter;
     std::wstring m_swSaveFile;
-    _BYTE byte2DC;
+    _BYTE m_bAIActive;
     _DWORD dword2E0;
     _DWORD m_iCampaignType;
     _DWORD dword2E8;
     _BYTE m_bIsGameWon;
     _DWORD m_iTeamWon;
-    std::string std__string2F4;
+    std::string m_swpTeamName;
     char[7] m_pEconomyGoodsArray;
     std::string std__string318;
     std::string std__string334;
@@ -197,16 +197,16 @@ public:
     _BYTE byte35C;
     _BYTE byte35D;
     _DWORD m_iMode;
-    _BYTE byte364;
-    _BYTE byte365;
-    _BYTE byte366;
-    _BYTE byte367;
-    _BYTE byte368;
+    _BYTE m_bEconomyPossible;
+    _BYTE m_bCompetetivePossible;
+    _BYTE m_bFreeSettlePossible;
+    _BYTE m_bConflictPossible;
+    _BYTE m_bCooperationPossible;
     _BYTE byte369;
     _BYTE byte36A;
     _BYTE byte36B;
     _BYTE byte36C;
-    _DWORD dword370;
+    _DWORD m_iNumberOfSetups;
     std::string std__string374;
     std::string std__string390;
     std::string std__string3AC;

@@ -44,7 +44,7 @@
   std::string::operator=(&this->m_swMapMode, g_pszMapMode[this->m_iMode]);
   if ( !this->m_iMode && BBSupportDbgReport(2, "GameData.cpp", 67, "m_iMode") == 1 )
     __debugbreak();
-  *(_WORD *)&this->m_bIsNetworkGame = g_pGameType->byte2DC == 0;
+  *(_WORD *)&this->m_bIsNetworkGame = g_pGameType->m_bAIActive == 0;
   this->m_bIsGameWon = g_pGameType->m_bIsGameWon;
   this->m_iTeamWon = g_pGameType->m_iTeamWon;
   memcpy(this->m_pEconomyGoodsArray, g_pGameType->m_pEconomyGoodsArray, sizeof(this->m_pEconomyGoodsArray));

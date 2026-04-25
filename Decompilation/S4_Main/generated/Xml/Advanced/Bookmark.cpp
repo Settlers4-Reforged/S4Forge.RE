@@ -1,3 +1,4 @@
+#if FALSE
 #include "Bookmark.h"
 
 // Definitions for class Bookmark
@@ -64,3 +65,4 @@ void  AdvXMLParser::Bookmark::Restore(void) {
 }
 
 
+#endif // Already implemented

@@ -3630,13 +3630,13 @@ void __cdecl InitGuiDlgAOBriefing(void) {
   char *v4; // eax
 
   IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 7, 3, 0);
-  v0 = std::string::c_str(&unk_402C998);
+  v0 = std::string::c_str(&stru_402C998);
   result = CScrollMultiline::SetText(s_cAOScrolltext, v0);
   if ( !g_pStringEngine )
     return result;
   v2 = g_pStringEngine->GetString(g_pStringEngine, 880);
   IGuiEngine::SetText((void *)g_pGUIEngine, 7, 13, v2);
-  v3 = (char *)std::string::c_str(&unk_402C97C);
+  v3 = (char *)std::string::c_str(&stru_402C97C);
   IGuiEngine::SetText((void *)g_pGUIEngine, 7, 22, v3);
   v4 = (char *)std::string::c_str(&stru_402C9B4);
   IGuiEngine::SetText((void *)g_pGUIEngine, 7, 15, v4);
@@ -14544,13 +14544,13 @@ void __cdecl InitGuiDlgMainBriefing(void) {
   char *v4; // eax
 
   IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 10, 2072, 0);
-  v0 = std::string::c_str(&unk_402C998);
+  v0 = std::string::c_str(&stru_402C998);
   result = CScrollMultiline::SetText(s_cScrolltext, v0);
   if ( !g_pStringEngine )
     return result;
   v2 = g_pStringEngine->GetString(g_pStringEngine, 880);
   IGuiEngine::SetText((void *)g_pGUIEngine, 10, 2054, v2);
-  v3 = (char *)std::string::c_str(&unk_402C97C);
+  v3 = (char *)std::string::c_str(&stru_402C97C);
   IGuiEngine::SetText((void *)g_pGUIEngine, 10, 2068, v3);
   v4 = (char *)std::string::c_str(&stru_402C9B4);
   IGuiEngine::SetText((void *)g_pGUIEngine, 10, 2069, v4);
@@ -20590,13 +20590,13 @@ void __cdecl InitGuiDlgMD2Briefing(void) {
   char *v4; // eax
 
   IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 1, 1811, 0);
-  v0 = std::string::c_str(&unk_402C998);
+  v0 = std::string::c_str(&stru_402C998);
   result = CScrollMultiline::SetText(s_cMD2Scrolltext, v0);
   if ( !g_pStringEngine )
     return result;
   v2 = g_pStringEngine->GetString(g_pStringEngine, 880);
   IGuiEngine::SetText((void *)g_pGUIEngine, 1, 1802, v2);
-  v3 = (char *)std::string::c_str(&unk_402C97C);
+  v3 = (char *)std::string::c_str(&stru_402C97C);
   IGuiEngine::SetText((void *)g_pGUIEngine, 1, 1807, v3);
   v4 = (char *)std::string::c_str(&stru_402C9B4);
   IGuiEngine::SetText((void *)g_pGUIEngine, 1, 1808, v4);
@@ -21071,13 +21071,13 @@ void __cdecl InitGuiDlgMDBriefing(void) {
   char *v4; // eax
 
   IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 5, 1875, 0);
-  v0 = std::string::c_str(&unk_402C998);
+  v0 = std::string::c_str(&stru_402C998);
   result = CScrollMultiline::SetText(s_cMDScrolltext, v0);
   if ( !g_pStringEngine )
     return result;
   v2 = g_pStringEngine->GetString(g_pStringEngine, 880);
   IGuiEngine::SetText((void *)g_pGUIEngine, 5, 1866, v2);
-  v3 = (char *)std::string::c_str(&unk_402C97C);
+  v3 = (char *)std::string::c_str(&stru_402C97C);
   IGuiEngine::SetText((void *)g_pGUIEngine, 5, 1871, v3);
   v4 = (char *)std::string::c_str(&stru_402C9B4);
   IGuiEngine::SetText((void *)g_pGUIEngine, 5, 1872, v4);
@@ -34785,13 +34785,13 @@ void __cdecl InitGuiDlgXMD3Briefing(void) {
   char *v4; // eax
 
   IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 1, 2923, 0);
-  v0 = std::string::c_str(&unk_402C998);
+  v0 = std::string::c_str(&stru_402C998);
   result = CScrollMultiline::SetText(s_cXMD3Scrolltext, v0);
   if ( !g_pStringEngine )
     return result;
   v2 = g_pStringEngine->GetString(g_pStringEngine, 880);
   IGuiEngine::SetText((void *)g_pGUIEngine, 1, 2914, v2);
-  v3 = (char *)std::string::c_str(&unk_402C97C);
+  v3 = (char *)std::string::c_str(&stru_402C97C);
   IGuiEngine::SetText((void *)g_pGUIEngine, 1, 2919, v3);
   v4 = (char *)std::string::c_str(&stru_402C9B4);
   IGuiEngine::SetText((void *)g_pGUIEngine, 1, 2920, v4);
@@ -56065,7 +56065,7 @@ void __cdecl MA_OpenMapFile(wchar_t * psz, int * a2, int * a3, int a4) {
   void *v15; // [esp+214h] [ebp-58h]
   void *C; // [esp+218h] [ebp-54h]
   void *v17; // [esp+21Ch] [ebp-50h]
-  int v18; // [esp+220h] [ebp-4Ch]
+  int m_iU0; // [esp+220h] [ebp-4Ch]
   int v19; // [esp+224h] [ebp-48h] BYREF
   int v20; // [esp+228h] [ebp-44h]
   int Buffer; // [esp+22Ch] [ebp-40h] BYREF
@@ -56073,14 +56073,9 @@ void __cdecl MA_OpenMapFile(wchar_t * psz, int * a2, int * a3, int a4) {
   BOOL TeamData; // [esp+234h] [ebp-38h]
   BSTR *v24; // [esp+238h] [ebp-34h] BYREF
   HANDLE hFile; // [esp+23Ch] [ebp-30h]
-  LPVOID lpBuffer; // [esp+240h] [ebp-2Ch]
-  int v27; // [esp+244h] [ebp-28h] BYREF
-  DWORD nNumberOfBytesToRead; // [esp+248h] [ebp-24h]
-  size_t Size; // [esp+24Ch] [ebp-20h]
-  int v30; // [esp+250h] [ebp-1Ch]
-  int v31; // [esp+254h] [ebp-18h]
-  int v32; // [esp+258h] [ebp-14h]
-  int v33; // [esp+268h] [ebp-4h]
+  unsigned __int8 *lpBuffer; // [esp+240h] [ebp-2Ch]
+  struct SMapChunkHeader v27; // [esp+244h] [ebp-28h] BYREF
+  int v28; // [esp+268h] [ebp-4h]
 
   ReleaseMemory();
   InitVariables();
@@ -56098,12 +56093,12 @@ void __cdecl MA_OpenMapFile(wchar_t * psz, int * a2, int * a3, int a4) {
   g_bCampaign = 0;
   *a2 = 0;
   _bstr_t::_bstr_t(&v24, psz);
-  v33 = 0;
-  lpBuffer = operator new[](0x40018u);
+  v28 = 0;
+  lpBuffer = (unsigned __int8 *)operator new[](0x40018u);
   if ( !lpBuffer )
   {
     *a3 = 2;
-    v33 = -1;
+    v28 = -1;
     return (_DWORD *)_bstr_t::~_bstr_t(&v24);
   }
   v17 = operator new[](0x2001u);
@@ -56114,7 +56109,7 @@ void __cdecl MA_OpenMapFile(wchar_t * psz, int * a2, int * a3, int a4) {
     operator delete[](lpBuffer);
     lpBuffer = 0;
     *a3 = 2;
-    v33 = -1;
+    v28 = -1;
     return (_DWORD *)_bstr_t::~_bstr_t(&v24);
   }
   memset(g_pTextDescription, 0, 0x2001u);
@@ -56129,7 +56124,7 @@ void __cdecl MA_OpenMapFile(wchar_t * psz, int * a2, int * a3, int a4) {
     lpBuffer = 0;
     g_pTextDescription = 0;
     *a3 = 2;
-    v33 = -1;
+    v28 = -1;
     return (_DWORD *)_bstr_t::~_bstr_t(&v24);
   }
   memset(g_pTextEnglishDescription, 0, 0x2001u);
@@ -56147,7 +56142,7 @@ void __cdecl MA_OpenMapFile(wchar_t * psz, int * a2, int * a3, int a4) {
     g_pTextDescription = 0;
     g_pTextEnglishDescription = 0;
     *a3 = 2;
-    v33 = -1;
+    v28 = -1;
     return (_DWORD *)_bstr_t::~_bstr_t(&v24);
   }
   memset(g_pTextTandT, 0, 0x2001u);
@@ -56168,7 +56163,7 @@ void __cdecl MA_OpenMapFile(wchar_t * psz, int * a2, int * a3, int a4) {
     g_pTextEnglishDescription = 0;
     g_pTextTandT = 0;
     *a3 = 2;
-    v33 = -1;
+    v28 = -1;
     return (_DWORD *)_bstr_t::~_bstr_t(&v24);
   }
   memset(g_pTextEnglishTandT, 0, 0x2001u);
@@ -56187,7 +56182,7 @@ void __cdecl MA_OpenMapFile(wchar_t * psz, int * a2, int * a3, int a4) {
     g_pTextTandT = 0;
     g_pTextEnglishTandT = 0;
     *a3 = 5;
-    v33 = -1;
+    v28 = -1;
     return (_DWORD *)_bstr_t::~_bstr_t(&v24);
   }
   else
@@ -56212,7 +56207,7 @@ LABEL_16:
       g_pTextTandT = 0;
       g_pTextEnglishTandT = 0;
       *a3 = 2;
-      v33 = -1;
+      v28 = -1;
       return (_DWORD *)_bstr_t::~_bstr_t(&v24);
     }
     if ( v6 == Buffer )
@@ -56220,7 +56215,7 @@ LABEL_16:
 LABEL_19:
       SetFilePointer(hFile, 4, 0, FILE_BEGIN);
       ReadFile(hFile, &v19, 4u, &NumberOfBytesRead, 0);
-      CPlayerData::Init((CPlayerData *)&g_cPlayerAndTeamData);
+      CPlayerData::Init(&g_cPlayerAndTeamData);
       v20 = v19;
       if ( v19 == 31 || v20 == 40 )
       {
@@ -56232,142 +56227,124 @@ LABEL_19:
           Cryption((unsigned __int8 *)&v27, 0x18u);
           if ( TeamData )
           {
-            v18 = (unsigned __int16)v27;
-            switch ( (__int16)v27 )
+            m_iU0 = v27.m_iU0;
+            switch ( v27.m_iU0 )
             {
-              case 0:
+              case 0u:
                 goto LABEL_72;
-              case 1:
-                TeamData = ReadFile(hFile, lpBuffer, nNumberOfBytesToRead, &NumberOfBytesRead, 0);
-                ReadChunk(lpBuffer, nNumberOfBytesToRead, Size);
+              case 1u:
+                TeamData = ReadFile(hFile, lpBuffer, v27.nNumberOfBytesToRead, &NumberOfBytesRead, 0);
+                ReadChunk((char *)lpBuffer, v27.nNumberOfBytesToRead, v27.a6);
                 memcpy(&g_sGeneralMapData, lpBuffer, 0x18u);
                 if ( !TeamData )
                   goto LABEL_46;
                 goto LABEL_72;
-              case 2:
-                TeamData = CPlayerData::Load(
-                             &g_cPlayerAndTeamData,
-                             lpBuffer,
-                             hFile,
-                             v27,
-                             nNumberOfBytesToRead,
-                             Size,
-                             v30,
-                             v31,
-                             v32);
-                g_uNumberOfPlayers = CPlayerData::GetNumberOfPlayers((CPlayerData *)&g_cPlayerAndTeamData);
+              case 2u:
+                TeamData = CPlayerData::Load(&g_cPlayerAndTeamData, lpBuffer, hFile, v27);
+                g_uNumberOfPlayers = CPlayerData::GetNumberOfPlayers(&g_cPlayerAndTeamData);
                 if ( !TeamData )
                   goto LABEL_46;
                 goto LABEL_72;
-              case 3:
-                TeamData = CPlayerData::LoadTeamData(
-                             &g_cPlayerAndTeamData,
-                             (char *)lpBuffer,
-                             hFile,
-                             v27,
-                             nNumberOfBytesToRead,
-                             Size,
-                             v30,
-                             v31,
-                             v32);
+              case 3u:
+                TeamData = CPlayerData::LoadTeamData(&g_cPlayerAndTeamData, lpBuffer, hFile, v27);
                 if ( !TeamData )
                   goto LABEL_46;
                 goto LABEL_72;
-              case 4:
+              case 4u:
                 if ( a4 )
                 {
-                  g_iPreviewSize = v32;
-                  if ( v32 < 128 || g_iPreviewSize > 1024 )
+                  g_iPreviewSize = v27.m_iNumberOfPlayers;
+                  if ( v27.m_iNumberOfPlayers < 128 || g_iPreviewSize > 1024 )
                     goto LABEL_46;
                   if ( g_pPreviewGfx )
                     operator delete[](g_pPreviewGfx);
                   g_pPreviewGfx = operator new[](2 * g_iPreviewSize * g_iPreviewSize);
                   if ( !g_pPreviewGfx )
                     goto LABEL_16;
-                  TeamData = ReadFile(hFile, g_pPreviewGfx, nNumberOfBytesToRead, &NumberOfBytesRead, 0);
-                  ReadChunk(g_pPreviewGfx, nNumberOfBytesToRead, Size);
+                  TeamData = ReadFile(hFile, g_pPreviewGfx, v27.nNumberOfBytesToRead, &NumberOfBytesRead, 0);
+                  ReadChunk((char *)g_pPreviewGfx, v27.nNumberOfBytesToRead, v27.a6);
                   if ( !TeamData )
                     goto LABEL_46;
                 }
-                else if ( SetFilePointer(hFile, nNumberOfBytesToRead, 0, FILE_CURRENT) == -1 )
+                else if ( SetFilePointer(hFile, v27.nNumberOfBytesToRead, 0, FILE_CURRENT) == -1 )
                 {
                   goto LABEL_59;
                 }
 LABEL_72:
-                if ( (_WORD)v27 )
+                if ( v27.m_iU0 )
                   continue;
 LABEL_75:
                 CloseHandle(hFile);
                 operator delete[](lpBuffer);
                 g_bMapIsLoaded = 1;
                 *a3 = 0;
-                v33 = -1;
+                v28 = -1;
                 result = (_DWORD *)_bstr_t::~_bstr_t(&v24);
                 break;
-              case 5:
+              case 5u:
                 goto LABEL_75;
-              case 7:
+              case 7u:
                 g_bSettlersAvailable = 1;
-                if ( SetFilePointer(hFile, nNumberOfBytesToRead, 0, FILE_CURRENT) == -1 )
+                if ( SetFilePointer(hFile, v27.nNumberOfBytesToRead, 0, FILE_CURRENT) == -1 )
                   goto LABEL_59;
                 goto LABEL_72;
-              case 8:
+              case 8u:
                 g_bBuildingsAvailable = 1;
-                if ( SetFilePointer(hFile, nNumberOfBytesToRead, 0, FILE_CURRENT) == -1 )
+                if ( SetFilePointer(hFile, v27.nNumberOfBytesToRead, 0, FILE_CURRENT) == -1 )
                   goto LABEL_59;
                 goto LABEL_72;
-              case 9:
+              case 9u:
                 g_bPilesAvailable = 1;
-                if ( SetFilePointer(hFile, nNumberOfBytesToRead, 0, FILE_CURRENT) == -1 )
+                if ( SetFilePointer(hFile, v27.nNumberOfBytesToRead, 0, FILE_CURRENT) == -1 )
                   goto LABEL_59;
                 goto LABEL_72;
-              case 11:
-                TeamData = ReadFile(hFile, lpBuffer, nNumberOfBytesToRead, &NumberOfBytesRead, 0);
-                ReadChunk(lpBuffer, nNumberOfBytesToRead, Size);
+              case 0xBu:
+                TeamData = ReadFile(hFile, lpBuffer, v27.nNumberOfBytesToRead, &NumberOfBytesRead, 0);
+                ReadChunk((char *)lpBuffer, v27.nNumberOfBytesToRead, v27.a6);
                 if ( !TeamData )
                   goto LABEL_59;
-                memcpy(g_pTextDescription, lpBuffer, Size);
+                memcpy(g_pTextDescription, lpBuffer, v27.a6);
                 goto LABEL_72;
-              case 12:
-                TeamData = ReadFile(hFile, lpBuffer, nNumberOfBytesToRead, &NumberOfBytesRead, 0);
-                ReadChunk(lpBuffer, nNumberOfBytesToRead, Size);
+              case 0xCu:
+                TeamData = ReadFile(hFile, lpBuffer, v27.nNumberOfBytesToRead, &NumberOfBytesRead, 0);
+                ReadChunk((char *)lpBuffer, v27.nNumberOfBytesToRead, v27.a6);
                 if ( !TeamData )
                   goto LABEL_59;
-                memcpy(g_pTextTandT, lpBuffer, Size);
+                memcpy(g_pTextTandT, lpBuffer, v27.a6);
                 goto LABEL_72;
-              case 14:
-                TeamData = ReadFile(hFile, lpBuffer, nNumberOfBytesToRead, &NumberOfBytesRead, 0);
-                ReadChunk(lpBuffer, nNumberOfBytesToRead, Size);
+              case 0xEu:
+                TeamData = ReadFile(hFile, lpBuffer, v27.nNumberOfBytesToRead, &NumberOfBytesRead, 0);
+                ReadChunk((char *)lpBuffer, v27.nNumberOfBytesToRead, v27.a6);
                 if ( !TeamData )
                   goto LABEL_59;
-                memcpy(g_pTextEnglishDescription, lpBuffer, Size);
+                memcpy(g_pTextEnglishDescription, lpBuffer, v27.a6);
                 goto LABEL_72;
-              case 15:
-                TeamData = ReadFile(hFile, lpBuffer, nNumberOfBytesToRead, &NumberOfBytesRead, 0);
-                ReadChunk(lpBuffer, nNumberOfBytesToRead, Size);
+              case 0xFu:
+                TeamData = ReadFile(hFile, lpBuffer, v27.nNumberOfBytesToRead, &NumberOfBytesRead, 0);
+                ReadChunk((char *)lpBuffer, v27.nNumberOfBytesToRead, v27.a6);
                 if ( !TeamData )
                   goto LABEL_59;
-                memcpy(g_pTextEnglishTandT, lpBuffer, Size);
+                memcpy(g_pTextEnglishTandT, lpBuffer, v27.a6);
                 goto LABEL_72;
-              case 64:
+              case 0x40u:
                 g_bEditorMap = 1;
-                if ( SetFilePointer(hFile, nNumberOfBytesToRead, 0, FILE_CURRENT) == -1 )
+                if ( SetFilePointer(hFile, v27.nNumberOfBytesToRead, 0, FILE_CURRENT) == -1 )
                   goto LABEL_59;
                 goto LABEL_72;
-              case 65:
+              case 0x41u:
                 g_bCampaign = 1;
-                if ( SetFilePointer(hFile, nNumberOfBytesToRead, 0, FILE_CURRENT) == -1 )
+                if ( SetFilePointer(hFile, v27.nNumberOfBytesToRead, 0, FILE_CURRENT) == -1 )
                   goto LABEL_59;
                 goto LABEL_72;
-              case 66:
-                TeamData = ReadFile(hFile, lpBuffer, nNumberOfBytesToRead, &NumberOfBytesRead, 0);
-                ReadChunk(lpBuffer, nNumberOfBytesToRead, Size);
+              case 0x42u:
+                TeamData = ReadFile(hFile, lpBuffer, v27.nNumberOfBytesToRead, &NumberOfBytesRead, 0);
+                ReadChunk((char *)lpBuffer, v27.nNumberOfBytesToRead, v27.a6);
                 memcpy(&g_sEditorInfo, lpBuffer, 0x14u);
                 if ( !TeamData )
                   goto LABEL_46;
                 goto LABEL_72;
               default:
-                if ( SetFilePointer(hFile, nNumberOfBytesToRead, 0, FILE_CURRENT) == -1 )
+                if ( SetFilePointer(hFile, v27.nNumberOfBytesToRead, 0, FILE_CURRENT) == -1 )
                   goto LABEL_59;
                 goto LABEL_72;
             }
@@ -56387,7 +56364,7 @@ LABEL_46:
             g_pTextTandT = 0;
             g_pTextEnglishTandT = 0;
             *a3 = 3;
-            v33 = -1;
+            v28 = -1;
             return (_DWORD *)_bstr_t::~_bstr_t(&v24);
           }
           break;
@@ -56408,7 +56385,7 @@ LABEL_59:
         g_pTextTandT = 0;
         g_pTextEnglishTandT = 0;
         *a3 = 4;
-        v33 = -1;
+        v28 = -1;
         return (_DWORD *)_bstr_t::~_bstr_t(&v24);
       }
     }
@@ -56426,7 +56403,7 @@ LABEL_59:
       g_pTextTandT = 0;
       g_pTextEnglishTandT = 0;
       *a3 = 1;
-      v33 = -1;
+      v28 = -1;
       return (_DWORD *)_bstr_t::~_bstr_t(&v24);
     }
   }
@@ -56544,8 +56521,8 @@ void __cdecl MA_GetMapData(int * a1, int * a2, int * a3, int * a4, int * a5) {
 
 
 // address=[0x2fbdd10]
-// Decompiled from wchar_t *__cdecl MA_GetPlayerData(  int _iPlayerIndex,  int _iUnknown,  int *_iSlot9,  int *_iSlot5,  int *_iSlot6,  wchar_t **a6,  wchar_t **a7,  int *a8,  int *a9,  int *a10)
-void __cdecl MA_GetPlayerData(int _iPlayerIndex, int _iUnknown, int * _iSlot9, int * _iSlot5, int * _iSlot6, wchar_t * * a6, wchar_t * * a7, int * a8, int * a9, int * a10) {
+// Decompiled from wchar_t *__cdecl MA_GetPlayerData(  int _iPlayerIndex,  int _iSetupIndex,  int *_iPlayerRace,  int *_iPlayerX,  int *_iPlayerY,  wchar_t **_swpPlayerName,  wchar_t **_swpSetupName,  int *_iPlayerControl,  int *_iHasTeam,  int *_iPlayerTeam)
+void __cdecl MA_GetPlayerData(int _iPlayerIndex, int _iSetupIndex, int * _iPlayerRace, int * _iPlayerX, int * _iPlayerY, wchar_t * * _swpPlayerName, wchar_t * * _swpSetupName, int * _iPlayerControl, int * _iHasTeam, int * _iPlayerTeam) {
   
   char *NameOfPlayer; // eax
   char *SetupName; // eax
@@ -56556,35 +56533,35 @@ void __cdecl MA_GetPlayerData(int _iPlayerIndex, int _iUnknown, int * _iSlot9, i
   if ( g_bMapIsLoaded
     && _iPlayerIndex > 0
     && _iPlayerIndex <= CPlayerData::GetNumberOfPlayers(&g_cPlayerAndTeamData)
-    && _iUnknown >= 0
-    && _iUnknown < CPlayerData::GetNumberOfSetups(&g_cPlayerAndTeamData) )
+    && _iSetupIndex >= 0
+    && _iSetupIndex < CPlayerData::GetNumberOfSetups(&g_cPlayerAndTeamData) )
   {
-    *_iSlot9 = CPlayerData::GetRaceOfPlayer(&g_cPlayerAndTeamData, _iPlayerIndex);
-    *_iSlot5 = CPlayerData::GetXOfPlayer(&g_cPlayerAndTeamData, _iPlayerIndex);
-    *_iSlot6 = CPlayerData::GetYOfPlayer(&g_cPlayerAndTeamData, _iPlayerIndex);
-    *a8 = CPlayerData::GetControlOfPlayer(&g_cPlayerAndTeamData, _iPlayerIndex, _iUnknown);
-    *a9 = CPlayerData::GetTeamOfPlayer(&g_cPlayerAndTeamData, _iPlayerIndex, _iUnknown) == 255;
-    *a10 = CPlayerData::GetTeamOfPlayer(&g_cPlayerAndTeamData, _iPlayerIndex, _iUnknown);
+    *_iPlayerRace = CPlayerData::GetRaceOfPlayer(&g_cPlayerAndTeamData, _iPlayerIndex);
+    *_iPlayerX = CPlayerData::GetXOfPlayer(&g_cPlayerAndTeamData, _iPlayerIndex);
+    *_iPlayerY = CPlayerData::GetYOfPlayer(&g_cPlayerAndTeamData, _iPlayerIndex);
+    *_iPlayerControl = CPlayerData::GetControlOfPlayer(&g_cPlayerAndTeamData, _iPlayerIndex, _iSetupIndex);
+    *_iHasTeam = CPlayerData::GetTeamOfPlayer(&g_cPlayerAndTeamData, _iPlayerIndex, _iSetupIndex) == 255;
+    *_iPlayerTeam = CPlayerData::GetTeamOfPlayer(&g_cPlayerAndTeamData, _iPlayerIndex, _iSetupIndex);
     NameOfPlayer = CPlayerData::GetNameOfPlayer(&g_cPlayerAndTeamData, _iPlayerIndex);
     MultiByteToWideChar(0, 1u, NameOfPlayer, -1, WideCharStr, 80);
-    SetupName = CPlayerData::GetSetupName(&g_cPlayerAndTeamData, _iUnknown);
+    SetupName = CPlayerData::GetSetupName(&g_cPlayerAndTeamData, _iSetupIndex);
     MultiByteToWideChar(0, 1u, SetupName, -1, psz, 80);
-    *a6 = SysAllocString(WideCharStr);
+    *_swpPlayerName = SysAllocString(WideCharStr);
     result = SysAllocString(psz);
-    *a7 = result;
+    *_swpSetupName = result;
   }
   else
   {
-    *a9 = *a10;
-    *a8 = *a9;
-    *_iSlot6 = *a8;
-    *_iSlot5 = *_iSlot6;
-    *_iSlot9 = *_iSlot5;
+    *_iHasTeam = *_iPlayerTeam;
+    *_iPlayerControl = *_iHasTeam;
+    *_iPlayerY = *_iPlayerControl;
+    *_iPlayerX = *_iPlayerY;
+    *_iPlayerRace = *_iPlayerX;
     MultiByteToWideChar(0, 1u, &MultiByteStr, -1, WideCharStr, 80);
     MultiByteToWideChar(0, 1u, &byte_3AD3322, -1, psz, 80);
-    *a6 = SysAllocString(WideCharStr);
+    *_swpPlayerName = SysAllocString(WideCharStr);
     result = SysAllocString(psz);
-    *a7 = result;
+    *_swpSetupName = result;
   }
   return result;
 }

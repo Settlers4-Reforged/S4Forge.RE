@@ -969,7 +969,7 @@ bool __cdecl CGameStateHandler::StartDummyGame(void) {
   _BYTE v6[4]; // [esp+10h] [ebp-B80h] BYREF
   int v7; // [esp+14h] [ebp-B7Ch] BYREF
   std::wstring *PlayerName; // [esp+18h] [ebp-B78h]
-  int v9; // [esp+1Ch] [ebp-B74h]
+  std::wstring *a2; // [esp+1Ch] [ebp-B74h]
   int iControlOfPlayer; // [esp+20h] [ebp-B70h] BYREF
   std::wstring *v11; // [esp+24h] [ebp-B6Ch]
   std::wstring *v12; // [esp+28h] [ebp-B68h]
@@ -1008,10 +1008,10 @@ bool __cdecl CGameStateHandler::StartDummyGame(void) {
   g_pCfgMgr->GetStringValue(g_pCfgMgr, &v36, "COMMANDLINE", "map", &v35);
   LOBYTE(v39) = 3;
   std::string::~string(&v35);
-  v9 = std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::from_bytes(
-         &v30,
-         &v36);
-  std::wstring::operator=(v9);
+  a2 = (std::wstring *)std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::from_bytes(
+                         &v30,
+                         &v36);
+  std::wstring::operator=(&g_pGameType->m_swMapName, a2);
   std::wstring::~wstring(&v30);
   v0 = std::string::c_str(&v36);
   MultiByteToWideChar(0, 1u, v0, -1, WideCharStr, 1024);
@@ -1069,7 +1069,7 @@ bool __cdecl CGameStateHandler::StartDummyGame(void) {
       SysFreeString(bstrString);
       SysFreeString(String);
     }
-    g_pGameType->byte2DC = 1;
+    g_pGameType->m_bAIActive = 1;
     g_pGameType->dword44 = 0x100007F;
     g_pGameType->dword2E0 = 0;
     g_pGameType->m_uiNumberAlliances = v22 + 1;

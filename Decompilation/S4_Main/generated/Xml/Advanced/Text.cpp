@@ -1,3 +1,4 @@
+#if FALSE
 #include "Text.h"
 
 // Definitions for class Text
@@ -151,3 +152,4 @@ void  AdvXMLParser::Text::GenerateXML(class AdvXMLParser::GenerateContext & a2)c
 }
 
 
+#endif // Already implemented

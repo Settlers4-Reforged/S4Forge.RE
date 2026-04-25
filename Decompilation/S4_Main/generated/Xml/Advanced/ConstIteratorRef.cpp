@@ -1,3 +1,4 @@
+#if FALSE
 #include "ConstIteratorRef.h"
 
 // Definitions for class ConstIteratorRef
@@ -21,3 +22,4 @@
 }
 
 
+#endif // Already implemented

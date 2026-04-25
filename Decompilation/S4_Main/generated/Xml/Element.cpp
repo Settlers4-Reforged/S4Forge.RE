@@ -1,3 +1,4 @@
+#if FALSE
 #include "Element.h"
 
 // Definitions for class Element
@@ -1299,3 +1300,4 @@ void  AdvXMLParser::Element::HandleSpecialAttributes(class AdvXMLParser::Attribu
 }
 
 
+#endif // Already implemented

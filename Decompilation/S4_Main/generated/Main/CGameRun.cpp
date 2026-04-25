@@ -811,7 +811,7 @@ void __cdecl CGameRun::FillGameType(std::wstring & a2, class CGameType & _rGameT
   _rGameType->dword2E8 = _rGeneralChunk->dwordC;
   std::wstring::operator=(&_rGameType->m_swMapName, _rGeneralChunk->m_swUnknown);
   v9 = _rGeneralChunk->dword10 != 2;
-  _rGameType->byte2DC = v9;
+  _rGameType->m_bAIActive = v9;
   _rGameType->m_uiTickCounter = _rGeneralChunk->m_uiTickCounter;
   _rGameType->m_iNetworkTimeDelta = _rGeneralChunk->m_iNetworkTimeDelta;
   _rGameType->m_iWidthHeight = _rGeneralChunk->m_iWidthHeight;

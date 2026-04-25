@@ -1,3 +1,4 @@
+#if FALSE
 #include "Reference.h"
 
 // Definitions for class Reference
@@ -61,3 +62,4 @@ class AdvXMLParser::Reference * __cdecl AdvXMLParser::Reference::Parse(class Adv
 }
 
 
+#endif // Already implemented
