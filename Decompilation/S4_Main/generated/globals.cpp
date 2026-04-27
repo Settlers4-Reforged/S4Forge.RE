@@ -56233,13 +56233,13 @@ LABEL_19:
               case MAP_CHUNK_GENERAL:
                 bHasData = ReadFile(hFile, lpBuffer, sChunkHeader.m_iSize, &NumberOfBytesRead, 0);
                 ReadChunk((char *)lpBuffer, sChunkHeader.m_iSize, sChunkHeader.m_iDecompressedSize);
-                memcpy(&g_sGeneralMapData, lpBuffer, 0x18u);
+                memcpy(&g_sGeneralMapData, lpBuffer, sizeof(g_sGeneralMapData));
                 if ( !bHasData )
                   goto LABEL_46;
                 goto LABEL_72;
               case MAP_CHUNK_PLAYER:
                 bHasData = CPlayerData::Load(&g_cPlayerAndTeamData, lpBuffer, hFile, sChunkHeader);
-                g_uNumberOfPlayers = CPlayerData::GetNumberOfPlayers(&g_cPlayerAndTeamData);
+                g_sGeneralMapData.m_uNumberOfPlayers = CPlayerData::GetNumberOfPlayers(&g_cPlayerAndTeamData);
                 if ( !bHasData )
                   goto LABEL_46;
                 goto LABEL_72;
@@ -56443,22 +56443,13 @@ void __cdecl MA_IsEditorMap(int * a1) {
 
 
 // address=[0x2fbdc20]
-// Decompiled from _DWORD *__cdecl sub_33BDC20(_DWORD *a1)
+// Decompiled from void __cdecl MA_GetNumberOfPlayers(int *a1)
 void __cdecl MA_GetNumberOfPlayers(int * a1) {
   
-  _DWORD *result; // eax
-
-  result = (_DWORD *)(unsigned __int8)g_bMapIsLoaded;
   if ( g_bMapIsLoaded )
-  {
-    *a1 = g_uNumberOfPlayers;
-  }
+    *a1 = MEMORY[0x4727570];
   else
-  {
-    result = a1;
     *a1 = 0;
-  }
-  return result;
 }
 
 
@@ -56483,38 +56474,25 @@ void __cdecl MA_GetNumberOfSetups(int * a1) {
 
 
 // address=[0x2fbdc80]
-// Decompiled from int __cdecl sub_33BDC80(_DWORD *a1, _DWORD *a2, _DWORD *a3, _DWORD *a4, _DWORD *a5)
-void __cdecl MA_GetMapData(int * a1, int * a2, int * a3, int * a4, int * a5) {
+// Decompiled from void __cdecl MA_GetMapData(  int *_pWidthHeight,  int *_pGameType,  int *_pMapFlags,  int *_pStartResources,  int *_pIsEmptyMap)
+void __cdecl MA_GetMapData(int * _pWidthHeight, int * _pGameType, int * _pMapFlags, int * _pStartResources, int * _pIsEmptyMap) {
   
-  int result; // eax
-
   if ( g_bMapIsLoaded )
   {
-    *a1 = dword_4727578;
-    *a2 = g_sGeneralMapData;
-    result = dword_4727580;
-    *a3 = dword_4727580;
-    *a4 = dword_4727574;
-    if ( g_bSettlersAvailable || g_bBuildingsAvailable )
-    {
-      result = (int)a5;
-      *a5 = 0;
-    }
-    else
-    {
-      *a5 = 1;
-    }
+    *_pWidthHeight = g_sGeneralMapData.m_iWidthHeight;
+    *_pGameType = g_sGeneralMapData.m_iGameType;
+    *_pMapFlags = *(_DWORD *)&g_sGeneralMapData.m_bMapIsLoaded;
+    *_pStartResources = g_sGeneralMapData.m_iStartResources;
+    *_pIsEmptyMap = !g_bSettlersAvailable && !g_bBuildingsAvailable;
   }
   else
   {
-    *a4 = 0;
-    *a3 = 0;
-    *a2 = 0;
-    *a1 = 0;
-    result = (int)a5;
-    *a5 = 0;
+    *_pStartResources = 0;
+    *_pMapFlags = 0;
+    *_pGameType = 0;
+    *_pWidthHeight = 0;
+    *_pIsEmptyMap = 0;
   }
-  return result;
 }
 
 
@@ -56667,7 +56645,7 @@ void __cdecl MA_GetMapProperty(int a1, int * a2) {
   }
   else if ( a1 == 2 )
   {
-    v3 = (dword_4727580 & 0x40) != 0 && g_bMapIsLoaded;
+    v3 = (MEMORY[0x4727580] & 0x40) != 0 && g_bMapIsLoaded;
     *a2 = v3;
   }
   else
@@ -58642,7 +58620,7 @@ int __cdecl ValidateYMapIndex(int a1) {
 
 
 // address=[0x2fcd3e0]
-// Decompiled from _crt_argv_mode __cdecl GetLibVersion()
+// Decompiled from unsigned int __cdecl GetLibVersion()
 unsigned int __cdecl GetLibVersion(void) {
   
   return 1;

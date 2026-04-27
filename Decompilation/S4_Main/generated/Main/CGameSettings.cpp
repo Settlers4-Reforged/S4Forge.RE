@@ -536,24 +536,25 @@ void __cdecl CGameSettings::SetPlayerName(std::wstring a1) {
 
 
 // address=[0x14888f0]
-// Decompiled from int __cdecl CGameSettings::GetManualURL(int a1)
-std::string __cdecl CGameSettings::GetManualURL(void a1) {
+// Decompiled from int __cdecl CGameSettings::GetManualURL()
+std::string __cdecl CGameSettings::GetManualURL(void) {
   
   int Language; // [esp+0h] [ebp-8h]
+  std::string *v2; // [esp+10h] [ebp+8h]
 
   Language = CGameSettings::GetLanguage();
   if ( Language == 1 )
   {
-    std::string::string(&CGameSettings::m_strManualURL_DE);
-    return a1;
+    std::string::string(v2, (int)&CGameSettings::m_strManualURL_DE);
+    return (int)v2;
   }
   else
   {
     if ( Language == 2 )
-      std::string::string(&CGameSettings::m_strManualURL_FR);
+      std::string::string(v2, (int)&CGameSettings::m_strManualURL_FR);
     else
-      std::string::string(&CGameSettings::m_strManualURL_EN);
-    return a1;
+      std::string::string(v2, (int)&CGameSettings::m_strManualURL_EN);
+    return (int)v2;
   }
 }
 

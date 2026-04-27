@@ -364,8 +364,8 @@ bool __cdecl CGameRun::LoadGame(std::wstring & a1) {
   char v16; // [esp+4Bh] [ebp-E4Dh]
   _BYTE v17[2376]; // [esp+4Ch] [ebp-E4Ch] BYREF
   int v18; // [esp+994h] [ebp-504h]
-  int v19; // [esp+99Ch] [ebp-4FCh]
-  int v20; // [esp+9A0h] [ebp-4F8h]
+  unsigned int v19; // [esp+99Ch] [ebp-4FCh]
+  unsigned int v20; // [esp+9A0h] [ebp-4F8h]
   _DWORD *v21; // [esp+9A4h] [ebp-4F4h]
   _DWORD *v22; // [esp+9A8h] [ebp-4F0h]
   _DWORD *v23; // [esp+9ACh] [ebp-4ECh]
@@ -389,7 +389,7 @@ bool __cdecl CGameRun::LoadGame(std::wstring & a1) {
   LOBYTE(v29) = 2;
   v5 = S4::CMapFile::CMapFile((CHandleMap *)&v25, 0);
   LOBYTE(v29) = 3;
-  S4::CMapFile::Open((S4::CMapFile *)&v25, &v26, 1, 1);
+  S4::CMapFile::Open((S4::CMapFile *)&v25, (int)&v26, 1, 1);
   BBSupportTracePrintF(1, "\tOpen map file\t\tok");
   CWarMap::Init();
   CWorldManager::LoadMap((struct S4::CMapFile *)&v25, g_pGameType->m_iWidthHeight);
@@ -457,7 +457,7 @@ bool __cdecl CGameRun::LoadGame(std::wstring & a1) {
   }
   S4::CMapFile::LoadChunkObject(&v25, 135, 0, (int)g_pFogging, 0);
   BBSupportTracePrintF(1, "\tLoad GAME_CHUNK_FOGMAP\t\tok");
-  g_pAI->Init(g_pAI);
+  (*(void (__thiscall **)(void *))(*(_DWORD *)g_pAI + 12))(g_pAI);
   S4::CMapFile::LoadChunkObject(&v25, 150, 0, (int)g_pAI, 1);
   BBSupportTracePrintF(1, "\tLoad GAME_CHUNK_AI\t\tok");
   CGameChunkGeneral::CGameChunkGeneral(v17);
@@ -472,15 +472,15 @@ bool __cdecl CGameRun::LoadGame(std::wstring & a1) {
     if ( v7 == 1 )
       __debugbreak();
   }
-  g_pGame->m_sGameData.m_uTickCounter = g_pGameType->m_uiTickCounter;
-  CRandom16Ex::Init(&g_pGame->m_sGameData.m_sRandom, v19, v20);
-  g_pGame->m_sGameData.m_bFixedStartCamera = v24;
-  if ( g_pGame->m_sGameData.m_bFixedStartCamera )
+  g_pGame[19] = (_DWORD *)g_pGameType->m_uiTickCounter;
+  CRandom16Ex::Init((CRandom16Ex *)(g_pGame + 30), v19, v20);
+  *((_BYTE *)g_pGame + 117) = v24;
+  if ( *((_BYTE *)g_pGame + 117) )
   {
-    g_pGame->m_sGameData.m_uCamX = v21;
-    g_pGame->m_sGameData.m_uCamY = v22;
-    g_pGame->m_sGameData.m_uZoom = v23;
-    CStateGame::UpdateZoomFactor(g_pGame);
+    g_pGame[24] = v21;
+    g_pGame[25] = v22;
+    g_pGame[26] = v23;
+    CStateGame::UpdateZoomFactor((CStateGame *)g_pGame);
   }
   S4::CMapFile::Close((S4::CMapFile *)&v25);
   UpdateReefBlockingBits();

@@ -1,3 +1,4 @@
+#if FALSE
 #include "CGameStateHandler.h"
 
 // Definitions for class CGameStateHandler
@@ -16,12 +17,12 @@ bool __cdecl CGameStateHandler::Init(void) {
   INetworkEngine *v8; // [esp+40h] [ebp-ECh]
   CGameType *C; // [esp+44h] [ebp-E8h]
   CGameStateEventHandle *v10; // [esp+48h] [ebp-E4h]
-  _AFX_OLE_STATE *v11; // [esp+4Ch] [ebp-E0h]
+  CGameStateEventHandle *v11; // [esp+4Ch] [ebp-E0h]
   char v12; // [esp+54h] [ebp-D8h]
-  _BYTE v13[28]; // [esp+58h] [ebp-D4h] BYREF
+  std::string v13; // [esp+58h] [ebp-D4h] BYREF
   _BYTE v14[28]; // [esp+74h] [ebp-B8h] BYREF
   std::string v15; // [esp+90h] [ebp-9Ch] BYREF
-  _BYTE v16[28]; // [esp+ACh] [ebp-80h] BYREF
+  std::string v16; // [esp+ACh] [ebp-80h] BYREF
   std::string v17; // [esp+C8h] [ebp-64h] BYREF
   std::string nettestDefault; // [esp+E4h] [ebp-48h] BYREF
   std::string v19; // [esp+100h] [ebp-2Ch] BYREF
@@ -34,20 +35,20 @@ bool __cdecl CGameStateHandler::Init(void) {
   CGameStateHandler::InitStringEngine();
   std::string::string(&nettestDefault, "none");
   v20 = 0;
-  v2 = g_pCfgMgr->GetStringValue(g_pCfgMgr, (std::string *)v16, "COMMANDLINE", "nettest", &nettestDefault);
+  v2 = g_pCfgMgr->GetStringValue(g_pCfgMgr, &v16, "COMMANDLINE", "nettest", &nettestDefault);
   LOBYTE(v20) = 1;
   std::operator==<char>(v2, "host");
   LOBYTE(v20) = 0;
-  std::string::~string(v16);
+  std::string::~string(&v16);
   v20 = -1;
   std::string::~string(&nettestDefault);
   std::string::string(&v19, "none");
   v20 = 2;
-  v1 = g_pCfgMgr->GetStringValue(g_pCfgMgr, (std::string *)v13, "COMMANDLINE", "nettest", &v19);
+  v1 = g_pCfgMgr->GetStringValue(g_pCfgMgr, &v13, "COMMANDLINE", "nettest", &v19);
   LOBYTE(v20) = 3;
   std::operator==<char>(v1, "client");
   LOBYTE(v20) = 2;
-  std::string::~string(v13);
+  std::string::~string(&v13);
   v20 = -1;
   std::string::~string(&v19);
   g_pCfgMgr->GetIntValue(g_pCfgMgr, "COMMANDLINE", "videoplay", 0);
@@ -73,7 +74,7 @@ bool __cdecl CGameStateHandler::Init(void) {
           CTrace::Print("INIT SOUND-MANAGER COMPLETE");
         else
           CTrace::Print("INIT SOUND-MANAGER FAILED");
-        v11 = (_AFX_OLE_STATE *)operator new(4u);
+        v11 = (CGameStateEventHandle *)operator new(4u);
         v20 = 4;
         if ( v11 )
           v10 = CGameStateEventHandle::CGameStateEventHandle(v11);
@@ -178,13 +179,13 @@ bool __cdecl CGameStateHandler::Perform(void) {
   int v6; // [esp+10h] [ebp-5Ch]
   std::wstring *v7; // [esp+14h] [ebp-58h]
   struct tagPOINT Point; // [esp+18h] [ebp-54h] BYREF
-  int pIt; // [esp+24h] [ebp-48h] MAPDST
+  void *pIt; // [esp+24h] [ebp-48h] MAPDST
   int v11; // [esp+28h] [ebp-44h]
-  CGameState *v12; // [esp+2Ch] [ebp-40h]
+  struct CGameState *v12; // [esp+2Ch] [ebp-40h]
   int v13; // [esp+30h] [ebp-3Ch]
   int Instance; // [esp+34h] [ebp-38h]
   SStateCommand *pNextState; // [esp+38h] [ebp-34h]
-  CGameState *v16; // [esp+3Ch] [ebp-30h]
+  struct CGameState *v16; // [esp+3Ch] [ebp-30h]
   DWORD Time; // [esp+40h] [ebp-2Ch]
   CEvn_Event v18; // [esp+44h] [ebp-28h] BYREF
   int exceptionBlock; // [esp+68h] [ebp-4h]
@@ -198,11 +199,11 @@ bool __cdecl CGameStateHandler::Perform(void) {
   if ( CGameStateHandler::m_uiLastTime )
   {
     Time = timeGetTime();
-    if ( Time - CGameStateHandler::m_uiLastTime >= 0x64 )
+    if ( Time - CGameStateHandler::m_uiLastTime >= 100 )
     {
       GetCursorPos(&Point);
       ScreenToClient(g_hWnd, &Point);
-      CEvn_Event::CEvn_Event(&v18, 0x15u, 0, Point.x + (Point.y << 16), 0);
+      CEvn_Event::CEvn_Event(&v18, GENERIC_EVENT_MOUSE_POS, 0, Point.x + (Point.y << 16), 0);
       exceptionBlock = 0;
       IEventEngine::SendAMessage(g_pEvnEngine, &v18);
       if ( Time - CGameStateHandler::m_uiLastTime - 100 >= 0xA )
@@ -225,17 +226,17 @@ bool __cdecl CGameStateHandler::Perform(void) {
     {
       v12 = CGameStateHandler::m_s_pCurrentState;
       v16 = CGameStateHandler::m_s_pCurrentState;
-      v11 = ((int (__thiscall *)(CGameState *, int))v16->dtor)(v16, 1);
+      v11 = ((int (__thiscall *)(struct CGameState *, int))v16->dtor)(v16, 1);
       CGameStateHandler::m_s_pCurrentState = 0;
     }
     if ( !std::list<SStateCommand>::size(&CGameStateHandler::m_listQueuedStates) )
       return 0;
-    pIt = std::list<SStateCommand>::begin(&CGameStateHandler::m_listQueuedStates, (int)&v5);
+    pIt = (void *)std::list<SStateCommand>::begin(&CGameStateHandler::m_listQueuedStates, (int)&v5);
     exceptionBlock = 1;
     pNextState = (SStateCommand *)std::_List_iterator<std::_List_val<std::_List_simple_types<SStateCommand>>>::operator*(pIt);
     exceptionBlock = -1;
     std::_List_iterator<std::_List_val<std::_List_simple_types<SStateCommand>>>::~_List_iterator<std::_List_val<std::_List_simple_types<SStateCommand>>>(&v5);
-    CGameStateHandler::m_s_pCurrentState = (CGameState *)pNextState->m_pStateFactory(pNextState->m_pFactoryArgument);
+    CGameStateHandler::m_s_pCurrentState = pNextState->m_pStateFactory(pNextState->m_pFactoryArgument);
     std::list<SStateCommand>::pop_front(v4, v5.m_pStateFactory);
     if ( !CGameStateHandler::m_s_pCurrentState )
       return 0;
@@ -320,7 +321,7 @@ void __cdecl CGameStateHandler::Kill(void) {
   }
   if ( CGameStateHandler::m_s_pCurrentState )
   {
-    ((void (__thiscall *)(CGameState *, int))CGameStateHandler::m_s_pCurrentState->dtor)(
+    ((void (__thiscall *)(struct CGameState *, int))CGameStateHandler::m_s_pCurrentState->dtor)(
       CGameStateHandler::m_s_pCurrentState,
       1);
     CGameStateHandler::m_s_pCurrentState = 0;
@@ -473,12 +474,12 @@ bool __cdecl CGameStateHandler::InitGfxManager(void) {
     {
       if ( g_pGame )
       {
-        CGfxManager::EnableGfxFile(g_pGfxManager, 1u, 8, 1, 0xFFFFFFFF);
-        CGfxManager::EnableGfxFile(g_pGfxManager, 9u, 9, 1, 0xFFFFFFFF);
+        CGfxManager::EnableGfxFile(g_pGfxManager, 1u, 8, 1u, -1);
+        CGfxManager::EnableGfxFile(g_pGfxManager, 9u, 9, 1u, -1);
       }
       else
       {
-        CGfxManager::EnableGfxFile(g_pGfxManager, 0, 9, 1, 0xFFFFFFFF);
+        CGfxManager::EnableGfxFile(g_pGfxManager, 0, 9, 1u, -1);
       }
       IGfxEngine::SetReloadCallback(g_pGfxEngine, CGfxManager::Reload);
       IGfxEngine::SetOwnerIDCallback(g_pGfxEngine, CWorldManager::WorldOwnerIdColor);
@@ -546,10 +547,10 @@ bool __cdecl CGameStateHandler::InitConfigManager(void) {
 // Decompiled from char CGameStateHandler::InitStringEngine()
 bool __cdecl CGameStateHandler::InitStringEngine(void) {
   
-  int v0; // eax
+  int iLang; // eax
 
-  v0 = g_pCfgMgr->GetIntValue(g_pCfgMgr, "GAMESETTINGS", "Language", 0);
-  g_pStringEngine = (CStringEngineEx *)CStringEngine::CreateStringEngine(v0);
+  iLang = g_pCfgMgr->GetIntValue(g_pCfgMgr, "GAMESETTINGS", "Language", 0);
+  g_pStringEngine = (CStringEngineEx *)CStringEngine::CreateStringEngine(iLang);
   return 1;
 }
 
@@ -567,7 +568,7 @@ bool __cdecl CGameStateHandler::InitFileLibrary(void) {
 bool __cdecl CGameStateHandler::InitGfxCompiler(void) {
   
   _controlfp(0xA031Fu, 0x30F031Fu);
-  if ( GetLibVersion() == _crt_argv_unexpanded_arguments )
+  if ( GetLibVersion() == 1 )
   {
     g_pRTComp = GetLibInstance();
     if ( g_pRTComp )
@@ -594,12 +595,12 @@ void __cdecl CGameStateHandler::DietmarsGameSettingsDefaults(void) {
   
   CConfigVar *v0; // [esp+0h] [ebp-Ch]
   CConfigVar *v1; // [esp+4h] [ebp-8h]
-  CConfigVar *v2; // [esp+8h] [ebp-4h]
+  CConfigVar *bFull; // [esp+8h] [ebp-4h]
 
   if ( g_pCfgMgr )
   {
-    v2 = g_pCfgMgr->GetConfigVar(g_pCfgMgr, "GAMESETTINGS", "Fullscreen");
-    v2->SetValueI(v2, 0);
+    bFull = g_pCfgMgr->GetConfigVar(g_pCfgMgr, "GAMESETTINGS", "Fullscreen");
+    bFull->SetValueI(bFull, 0);
     v1 = g_pCfgMgr->GetConfigVar(g_pCfgMgr, "GAMESETTINGS", "MusicEnabled");
     v1->SetValueI(v1, 0);
     v0 = g_pCfgMgr->GetConfigVar(g_pCfgMgr, "ADVGAMESETTINGS", "ShowVideos");
@@ -649,33 +650,33 @@ void __cdecl CGameStateHandler::LoadAllConfigFiles(void) {
 bool __cdecl CGameStateHandler::RebuildGfxEngine(bool a1) {
   
   int IsHardwareObjectEngine; // esi
-  _BYTE v3[36]; // [esp+Ch] [ebp-8Ch] BYREF
+  SGfxRenderConfiguration v3; // [esp+Ch] [ebp-8Ch] BYREF
   struct tagRECT v4; // [esp+30h] [ebp-68h] BYREF
   struct CEvn_Event *v5; // [esp+40h] [ebp-58h]
   struct CEvn_Event *v6; // [esp+44h] [ebp-54h]
   BOOL v7; // [esp+48h] [ebp-50h]
-  char v9; // [esp+4Fh] [ebp-49h]
+  char bIsGameState; // [esp+4Fh] [ebp-49h]
   CEvn_Event v10; // [esp+50h] [ebp-48h] BYREF
   struct tagRECT v12; // [esp+78h] [ebp-20h] MAPDST BYREF
   int v13; // [esp+94h] [ebp-4h]
 
   v7 = g_pGame == 0;
-  v9 = g_pGame == 0;
-  qmemcpy(v3, &CGameStateHandler::m_sRenderCfg, sizeof(v3));
+  bIsGameState = g_pGame == 0;
+  qmemcpy(&v3, &CGameStateHandler::m_sRenderCfg, sizeof(v3));
   if ( CGameStateHandler::BuildInitRenderCfg(1, g_pGame == 0) )
   {
-    IsHardwareObjectEngine = (unsigned __int8)SGfxRenderConfiguration::IsHardwareObjectEngine(v3);
+    IsHardwareObjectEngine = (unsigned __int8)SGfxRenderConfiguration::IsHardwareObjectEngine(&v3);
     if ( IsHardwareObjectEngine != (unsigned __int8)SGfxRenderConfiguration::IsHardwareObjectEngine(&CGameStateHandler::m_sRenderCfg) )
     {
       CGfxManager::DisableGfxFile(g_pGfxManager, -1);
       CGfxManager::OpenGFXFiles(g_pGfxManager);
     }
     if ( a1 )
-      sub_148DA20(v9);
+      ResetGfxState(bIsGameState);
     if ( !g_pGUIEngine )
       return 1;
     IGuiEngine::RefreshAllSurfaces(g_pGUIEngine);
-    v12 = *sub_148D860(&v4);
+    v12 = *GetRectOfWindow(&v4);
     v6 = CEvn_Event::CEvn_Event(&v10, 0x272u, (unsigned int)&v12, 0, 0);
     v5 = v6;
     v13 = 0;
@@ -710,113 +711,104 @@ bool __cdecl CGameStateHandler::CheckGfxRenderQuality(unsigned int a1) {
 // Decompiled from char __cdecl CGameStateHandler::CheckGfxHardwareMode(int a1)
 bool __cdecl CGameStateHandler::CheckGfxHardwareMode(unsigned int a1) {
   
-  int v2[9]; // [esp-24h] [ebp-54h] BYREF
-  _BYTE v3[40]; // [esp+8h] [ebp-28h] BYREF
+  struct SGfxRenderConfiguration v2; // [esp-24h] [ebp-54h] BYREF
+  struct SGfxRenderConfiguration v3; // [esp+8h] [ebp-28h] BYREF
+  bool v4; // [esp+2Fh] [ebp-1h]
 
-  qmemcpy(v3, &CGameStateHandler::m_sRenderCfg, 0x24u);
-  v3[39] = a1 != 0;
-  v3[0] = a1 != 0;
-  qmemcpy(v2, v3, sizeof(v2));
-  return IGfxEngine::CheckRenderConfiguration(
-           (_BYTE *)g_pGfxEngine,
-           v2[0],
-           v2[1],
-           v2[2],
-           v2[3],
-           v2[4],
-           v2[5],
-           v2[6],
-           v2[7],
-           v2[8]);
+  qmemcpy(&v3, &CGameStateHandler::m_sRenderCfg, sizeof(v3));
+  v4 = a1 != 0;
+  v3.m_uUnkConf0 = a1 != 0;
+  qmemcpy(&v2, &v3, sizeof(v2));
+  return IGfxEngine::CheckRenderConfiguration(g_pGfxEngine, v2);
 }
 
 
 // address=[0x148c620]
-// Decompiled from char __cdecl CGameStateHandler::ShowHTMLPage(char a1, int a2, int a3, int a4, int a5, int a6, int a7, char a8)
+// Decompiled from bool __cdecl CGameStateHandler::ShowHTMLPage(std::string a1, std::string a2)
 bool __cdecl CGameStateHandler::ShowHTMLPage(std::string a1, std::string a2) {
   
-  const CHAR *v8; // eax
-  const char *v9; // eax
-  const CHAR *v10; // eax
-  const char *v11; // eax
-  char *v13; // eax
-  char *v14; // eax
-  char *v15; // eax
-  int v16; // [esp-10h] [ebp-6Ch]
-  const CHAR *v17; // [esp-Ch] [ebp-68h]
-  const char *v18; // [esp-Ch] [ebp-68h]
-  int v19; // [esp-8h] [ebp-64h]
-  int v20; // [esp-8h] [ebp-64h]
-  HINSTANCE v21; // [esp+Ch] [ebp-50h]
-  _BYTE v22[28]; // [esp+14h] [ebp-48h] BYREF
-  _BYTE v23[28]; // [esp+30h] [ebp-2Ch] BYREF
-  int v24; // [esp+58h] [ebp-4h]
+  char *v2; // eax
+  char *v3; // eax
+  char *v4; // eax
+  char *v5; // eax
+  char *v7; // eax
+  char *v8; // eax
+  char *v9; // eax
+  int v10; // [esp-10h] [ebp-6Ch]
+  char *v11; // [esp-Ch] [ebp-68h]
+  char *v12; // [esp-Ch] [ebp-68h]
+  int v13; // [esp-8h] [ebp-64h]
+  int v14; // [esp-8h] [ebp-64h]
+  HINSTANCE v15; // [esp+Ch] [ebp-50h]
+  std::string v16; // [esp+14h] [ebp-48h] BYREF
+  std::string v17; // [esp+30h] [ebp-2Ch] BYREF
+  int v18; // [esp+58h] [ebp-4h]
 
-  v24 = 1;
-  std::string::string(v23, (char *)&byte_36C362F);
-  LOBYTE(v24) = 2;
+  v18 = 1;
+  std::string::string(&v17, (char *)&byte_36C362F);
+  LOBYTE(v18) = 2;
   std::string::operator+=((int)&a1);
-  std::string::c_str(&a8);
-  if ( std::string::length(&a8) )
+  std::string::c_str(&a2);
+  if ( std::string::length(&a2) )
   {
-    v17 = (const CHAR *)std::string::c_str(&a8);
-    v8 = (const CHAR *)std::string::c_str(v23);
-    v21 = ShellExecuteA(g_hWnd, "open", v8, v17, 0, 5);
-    v19 = std::string::length(&a8);
-    v18 = (const char *)std::string::c_str(&a8);
-    v16 = std::string::length(v23);
-    v9 = (const char *)std::string::c_str(v23);
-    BBSupportTracePrintF(1, "ShowHtml: <%s, %u>, <%s, %u> : Shellexecute returned %u!", v9, v16, v18, v19, v21);
+    v11 = std::string::c_str(&a2);
+    v2 = std::string::c_str(&v17);
+    v15 = ShellExecuteA(g_hWnd, "open", v2, v11, 0, 5);
+    v13 = std::string::length(&a2);
+    v12 = std::string::c_str(&a2);
+    v10 = std::string::length(&v17);
+    v3 = std::string::c_str(&v17);
+    BBSupportTracePrintF(1, "ShowHtml: <%s, %u>, <%s, %u> : Shellexecute returned %u!", v3, v10, v12, v13, v15);
   }
   else
   {
-    v10 = (const CHAR *)std::string::c_str(v23);
-    v21 = ShellExecuteA(g_hWnd, "open", v10, 0, 0, 5);
-    v20 = std::string::length(v23);
-    v11 = (const char *)std::string::c_str(v23);
-    BBSupportTracePrintF(1, "ShowHtml: <%s, %u> : Shellexecute returned %u!", v11, v20, v21);
+    v4 = std::string::c_str(&v17);
+    v15 = ShellExecuteA(g_hWnd, "open", v4, 0, 0, 5);
+    v14 = std::string::length(&v17);
+    v5 = std::string::c_str(&v17);
+    BBSupportTracePrintF(1, "ShowHtml: <%s, %u> : Shellexecute returned %u!", v5, v14, v15);
   }
-  if ( (int)v21 > 32 )
+  if ( (int)v15 > 32 )
   {
-    LOBYTE(v24) = 1;
-    std::string::~string(v23);
-    LOBYTE(v24) = 0;
+    LOBYTE(v18) = 1;
+    std::string::~string(&v17);
+    LOBYTE(v18) = 0;
     std::string::~string(&a1);
-    v24 = -1;
-    std::string::~string(&a8);
+    v18 = -1;
+    std::string::~string(&a2);
     return 1;
   }
-  std::string::string();
-  LOBYTE(v24) = 3;
-  if ( (int)v21 < 2 )
+  std::string::string(&v16);
+  LOBYTE(v18) = 3;
+  if ( (int)v15 < 2 )
     goto LABEL_11;
-  if ( (int)v21 <= 3 )
+  if ( (int)v15 <= 3 )
   {
-    std::string::operator=(v22, "File not found!");
-    v14 = g_pStringEngine->GetString(g_pStringEngine, 2392);
-    std::string::operator=(&g_iMessageBoxStringID, v14);
+    std::string::operator=(&v16, "File not found!");
+    v8 = g_pStringEngine->GetString(g_pStringEngine, 2392);
+    std::string::operator=(&g_iMessageBoxStringID, v8);
     goto LABEL_12;
   }
-  if ( v21 != (HINSTANCE)31 )
+  if ( v15 != (HINSTANCE)31 )
   {
 LABEL_11:
-    std::string::operator=(v22, "No Memory!");
-    v15 = g_pStringEngine->GetString(g_pStringEngine, 2390);
-    std::string::operator=(&g_iMessageBoxStringID, v15);
+    std::string::operator=(&v16, "No Memory!");
+    v9 = g_pStringEngine->GetString(g_pStringEngine, 2390);
+    std::string::operator=(&g_iMessageBoxStringID, v9);
     goto LABEL_12;
   }
-  std::string::operator=(v22, "No assocation with given filetype!");
-  v13 = g_pStringEngine->GetString(g_pStringEngine, 2386);
-  std::string::operator=(&g_iMessageBoxStringID, v13);
+  std::string::operator=(&v16, "No assocation with given filetype!");
+  v7 = g_pStringEngine->GetString(g_pStringEngine, 2386);
+  std::string::operator=(&g_iMessageBoxStringID, v7);
 LABEL_12:
-  LOBYTE(v24) = 2;
-  std::string::~string(v22);
-  LOBYTE(v24) = 1;
-  std::string::~string(v23);
-  LOBYTE(v24) = 0;
+  LOBYTE(v18) = 2;
+  std::string::~string(&v16);
+  LOBYTE(v18) = 1;
+  std::string::~string(&v17);
+  LOBYTE(v18) = 0;
   std::string::~string(&a1);
-  v24 = -1;
-  std::string::~string(&a8);
+  v18 = -1;
+  std::string::~string(&a2);
   return 0;
 }
 
@@ -841,15 +833,15 @@ void __cdecl CGameStateHandler::SetCorrectWindowSize(void) {
   UINT uFlags; // [esp+40h] [ebp-8h]
   MACRO_WS dwNewLong; // [esp+44h] [ebp-4h]
 
-  if ( CGameSettings::GetGfxFullscreenEnabled(v2, HIDWORD(v2), v3, HIDWORD(v3)) )
+  if ( CGameSettings::GetGfxFullscreenEnabled() )
   {
-    v7 = sub_148D980();
+    v7 = GetCurrentMonitorSize();
     v3 = v7;
     v13 = (int *)&v3;
   }
   else
   {
-    v6 = sub_148D9F0();
+    v6 = GetCurrentDesiredWindowSize();
     v2 = v6;
     v13 = (int *)&v2;
   }
@@ -863,7 +855,7 @@ void __cdecl CGameStateHandler::SetCorrectWindowSize(void) {
   dwNewLong = GetWindowLongA(g_hWnd, -16);
   X = 0;
   Y = 0;
-  if ( CGameSettings::GetGfxFullscreenEnabled(v2, HIDWORD(v2), v3, HIDWORD(v3)) )
+  if ( CGameSettings::GetGfxFullscreenEnabled() )
   {
     dwNewLong &= 0xFF30FFFF;
     uFlags = WM_MDINEXT;
@@ -917,7 +909,7 @@ bool __cdecl CGameStateHandler::IsGrabbing(void) {
 
 
 // address=[0x15c4a10]
-// Decompiled from int CGameStateHandler::GetCurrentState()
+// Decompiled from struct CGameState *CGameStateHandler::GetCurrentState()
 class CGameState * __cdecl CGameStateHandler::GetCurrentState(void) {
   
   return CGameStateHandler::m_s_pCurrentState;
@@ -925,35 +917,35 @@ class CGameState * __cdecl CGameStateHandler::GetCurrentState(void) {
 
 
 // address=[0x148c9a0]
-// Decompiled from void __cdecl CGameStateHandler::LoadConfigFile(wchar_t *String, const char *a2)
+// Decompiled from void __cdecl CGameStateHandler::LoadConfigFile(wchar_t *String, const char *arg4)
 void __cdecl CGameStateHandler::LoadConfigFile(wchar_t const * String, char const * a2) {
   
   wchar_t *v2; // eax
-  const char *v3; // eax
+  wchar_t *v3; // eax
   wchar_t *v4; // eax
-  int ConfigFilePath; // [esp+4h] [ebp-50h]
-  int v6[7]; // [esp+Ch] [ebp-48h] BYREF
-  int v7[7]; // [esp+28h] [ebp-2Ch] BYREF
+  std::wstring *a2; // [esp+4h] [ebp-50h]
+  std::wstring v6; // [esp+Ch] [ebp-48h] BYREF
+  std::wstring ret; // [esp+28h] [ebp-2Ch] BYREF
   int v8; // [esp+50h] [ebp-4h]
 
-  CGameSettings::GetConfigFilePath((std::wstring *)v7, String, 0);
+  CGameSettings::GetConfigFilePath(&ret, String, 0);
   v8 = 0;
-  v2 = std::wstring::c_str((std::wstring *)v7);
-  if ( !(unsigned __int8)g_pCfgMgr->AddConfigFileEx(g_pCfgMgr, v2, a2) )
+  v2 = std::wstring::c_str(&ret);
+  if ( !g_pCfgMgr->AddConfigFileEx(g_pCfgMgr, v2, arg4) )
   {
-    v3 = (const char *)std::wstring::c_str((std::wstring *)v7);
-    BBSupportTracePrintF(0, "Couldn't find '%s'", v3);
+    v3 = std::wstring::c_str(&ret);
+    BBSupportTracePrintF(0, "Couldn't find '%s'", (const char *)v3);
   }
   if ( g_pInstallationInfo->IsOptionalGameConfigFile(g_pInstallationInfo, String) )
   {
-    ConfigFilePath = (int)CGameSettings::GetConfigFilePath((std::wstring *)v6, String, 1);
-    std::wstring::operator=(ConfigFilePath);
-    std::wstring::~wstring((std::wstring *)v6);
-    v4 = std::wstring::c_str((std::wstring *)v7);
-    g_pCfgMgr->AddConfigFileEx(g_pCfgMgr, v4, a2);
+    a2 = CGameSettings::GetConfigFilePath(&v6, String, 1);
+    std::wstring::operator=(&ret, a2);
+    std::wstring::~wstring(&v6);
+    v4 = std::wstring::c_str(&ret);
+    g_pCfgMgr->AddConfigFileEx(g_pCfgMgr, v4, arg4);
   }
   v8 = -1;
-  std::wstring::~wstring((std::wstring *)v7);
+  std::wstring::~wstring(&ret);
 }
 
 
@@ -964,16 +956,16 @@ bool __cdecl CGameStateHandler::StartDummyGame(void) {
   char *v0; // eax
   char *v2; // eax
   int v3; // [esp-4h] [ebp-B94h]
-  int iTeamOfPlayerIs255; // [esp+8h] [ebp-B88h] BYREF
-  _BYTE v5[4]; // [esp+Ch] [ebp-B84h] BYREF
-  _BYTE v6[4]; // [esp+10h] [ebp-B80h] BYREF
+  int iHasTeam; // [esp+8h] [ebp-B88h] BYREF
+  int iGameType; // [esp+Ch] [ebp-B84h] BYREF
+  int iMapFlags; // [esp+10h] [ebp-B80h] BYREF
   int v7; // [esp+14h] [ebp-B7Ch] BYREF
   std::wstring *PlayerName; // [esp+18h] [ebp-B78h]
   std::wstring *a2; // [esp+1Ch] [ebp-B74h]
   int iControlOfPlayer; // [esp+20h] [ebp-B70h] BYREF
   std::wstring *v11; // [esp+24h] [ebp-B6Ch]
   std::wstring *v12; // [esp+28h] [ebp-B68h]
-  BSTR bstrString; // [esp+2Ch] [ebp-B64h] BYREF
+  BSTR swSetupName; // [esp+2Ch] [ebp-B64h] BYREF
   int v14; // [esp+30h] [ebp-B60h]
   int v15; // [esp+34h] [ebp-B5Ch]
   std::wstring *v16; // [esp+38h] [ebp-B58h]
@@ -983,8 +975,8 @@ bool __cdecl CGameStateHandler::StartDummyGame(void) {
   WCHAR *v20; // [esp+48h] [ebp-B48h]
   int v21; // [esp+4Ch] [ebp-B44h] BYREF
   int v22; // [esp+50h] [ebp-B40h]
-  BSTR String; // [esp+54h] [ebp-B3Ch] BYREF
-  signed int v24; // [esp+58h] [ebp-B38h] BYREF
+  BSTR swPlayerName; // [esp+54h] [ebp-B3Ch] BYREF
+  int iNumberOfPlayers; // [esp+58h] [ebp-B38h] BYREF
   char v25; // [esp+5Dh] [ebp-B33h]
   char v26; // [esp+5Eh] [ebp-B32h]
   char v27; // [esp+5Fh] [ebp-B31h]
@@ -1015,7 +1007,7 @@ bool __cdecl CGameStateHandler::StartDummyGame(void) {
   std::wstring::~wstring(&v30);
   v0 = std::string::c_str(&v36);
   MultiByteToWideChar(0, 1u, v0, -1, WideCharStr, 1024);
-  MA_OpenMapFile(WideCharStr, (int)&v7, (int)&v21, 0);
+  MA_OpenMapFile(WideCharStr, &v7, &v21, 0);
   if ( v21 )
   {
     CTrace::Print("GameStateHandler.cpp: Unable to open Map via Mapreader. Reported error %d", v21);
@@ -1030,15 +1022,15 @@ bool __cdecl CGameStateHandler::StartDummyGame(void) {
   else
   {
     MA_GetMapData(
-      (int)&g_pGameType->m_iWidthHeight,
-      (int)v5,
-      (int)v6,
-      (int)&g_pGameType->m_iStartResources,
-      (int)&g_pGameType->m_bIsEmptyMap);
-    MA_GetNumberOfPlayers((int)&v24);
-    g_pGameType->m_iMapMaxNumPlayers = v24;
+      &g_pGameType->m_iWidthHeight,
+      &iGameType,
+      &iMapFlags,
+      &g_pGameType->m_iStartResources,
+      &g_pGameType->m_bIsEmptyMap);
+    MA_GetNumberOfPlayers(&iNumberOfPlayers);
+    g_pGameType->m_iMapMaxNumPlayers = iNumberOfPlayers;
     v22 = 0;
-    for ( i = 0; (int)i < v24; ++i )
+    for ( i = 0; (int)i < iNumberOfPlayers; ++i )
     {
       MA_GetPlayerData(
         i + 1,
@@ -1046,10 +1038,10 @@ bool __cdecl CGameStateHandler::StartDummyGame(void) {
         &g_pGameType->m_sPlayerRaces[i],
         &g_pGameType->m_sPlayerStartX[i],
         &g_pGameType->m_sPlayerStartY[i],
-        &String,
-        &bstrString,
+        &swPlayerName,
+        &swSetupName,
         &iControlOfPlayer,
-        &iTeamOfPlayerIs255,
+        &iHasTeam,
         &g_pGameType->m_sPlayerTeam[i]);
       if ( g_pGameType->m_sPlayerRaces[i] == 255 )
         g_pGameType->m_sPlayerRaces[i] = 5;
@@ -1057,7 +1049,7 @@ bool __cdecl CGameStateHandler::StartDummyGame(void) {
         v22 = g_pGameType->m_sPlayerTeam[i];
       if ( iControlOfPlayer == 2 )
       {
-        v11 = (std::wstring *)std::wstring::wstring(&v31, String);
+        v11 = (std::wstring *)std::wstring::wstring(&v31, swPlayerName);
         v12 = v11;
         LOBYTE(v39) = 4;
         CGameType::SetPlayerName(g_pGameType, i, v11);
@@ -1066,8 +1058,8 @@ bool __cdecl CGameStateHandler::StartDummyGame(void) {
       }
       g_pGameType->m_sPlayerType[i] = 1;
       g_pGameType->m_sPlayerSlot10[i] = 0;
-      SysFreeString(bstrString);
-      SysFreeString(String);
+      SysFreeString(swSetupName);
+      SysFreeString(swPlayerName);
     }
     g_pGameType->m_bAIActive = 1;
     g_pGameType->dword44 = 0x100007F;
@@ -1078,11 +1070,11 @@ bool __cdecl CGameStateHandler::StartDummyGame(void) {
     CGameType::SetMCD2TextureSet(g_pGameType, 1);
     for ( i = 0; i < g_pGameType->m_iActualPlayerCount; ++i )
       ++g_pGameType->ptr4c[g_pGameType->m_sPlayerTeam[i]];
-    g_pGameType->m_iActualPlayerCount = v24;
-    if ( g_pGameType->m_iActualPlayerCount > (unsigned int)v24 )
+    g_pGameType->m_iActualPlayerCount = iNumberOfPlayers;
+    if ( g_pGameType->m_iActualPlayerCount > (unsigned int)iNumberOfPlayers )
     {
       MessageBoxA(g_hWnd, "Too many players given for map.\nPlayercount reduced!!", "S4", 0x30u);
-      g_pGameType->m_iActualPlayerCount = v24;
+      g_pGameType->m_iActualPlayerCount = iNumberOfPlayers;
     }
     for ( i = 0; i < g_pGameType->m_iActualPlayerCount; ++i )
     {
@@ -1142,19 +1134,17 @@ bool __cdecl CGameStateHandler::StartDummyGame(void) {
 
 
 // address=[0x148d250]
-// Decompiled from unsigned __int8 __fastcall CGameStateHandler::PerformPendingFullScreenEnterOrExit(__int16 a1)
-void __cdecl CGameStateHandler::PerformPendingFullScreenEnterOrExit(void a1) {
+// Decompiled from void __cdecl CGameStateHandler::PerformPendingFullScreenEnterOrExit()
+void __cdecl CGameStateHandler::PerformPendingFullScreenEnterOrExit(void) {
   
-  unsigned __int8 result; // al
-  int v2; // [esp-2h] [ebp-4h]
+  __int16 v0; // cx
+  int v1; // [esp-2h] [ebp-4h]
 
-  LOWORD(v2) = a1;
-  HIBYTE(v2) = CGameSettings::GetGfxFullscreenEnabled() != 0;
-  BYTE2(v2) = HIBYTE(v2);
-  result = sub_148D790();
-  if ( result != HIBYTE(v2) )
-    return CGameStateHandler::SetCorrectWindowSize(v2);
-  return result;
+  LOWORD(v1) = v0;
+  HIBYTE(v1) = CGameSettings::GetGfxFullscreenEnabled() != 0;
+  BYTE2(v1) = HIBYTE(v1);
+  if ( IsWindowFullscreen() != HIBYTE(v1) )
+    CGameStateHandler::SetCorrectWindowSize(v1);
 }
 
 
@@ -1175,7 +1165,7 @@ bool __cdecl CGameStateHandler::BuildInitRenderCfg(bool a1, bool a2) {
   struct CEvn_Event *v13; // [esp+24h] [ebp-A4h]
   struct CEvn_Event *v14; // [esp+28h] [ebp-A0h]
   int v15; // [esp+2Ch] [ebp-9Ch] BYREF
-  BOOL v16; // [esp+30h] [ebp-98h]
+  BOOL bGuiOnly; // [esp+30h] [ebp-98h]
   int v17; // [esp+34h] [ebp-94h]
   int v18; // [esp+38h] [ebp-90h]
   int v19; // [esp+3Ch] [ebp-8Ch] BYREF
@@ -1190,8 +1180,8 @@ bool __cdecl CGameStateHandler::BuildInitRenderCfg(bool a1, bool a2) {
   struct tagRECT v28; // [esp+98h] [ebp-30h] MAPDST
   int v30; // [esp+C4h] [ebp-4h]
 
-  v16 = a2 && !g_pGame;
-  CGameStateHandler::m_sRenderCfg.m_bGuiOnly = v16;
+  bGuiOnly = a2 && !g_pGame;
+  CGameStateHandler::m_sRenderCfg.m_bGuiOnly = bGuiOnly;
   CGameStateHandler::PerformPendingFullScreenEnterOrExit();
   v28 = *sub_148D8B0((struct tagRECT *)v10);
   CGameStateHandler::m_sRenderCfg.m_bD3DInterface = CDebugInfo::IsWindowsNT40();
@@ -1216,7 +1206,7 @@ bool __cdecl CGameStateHandler::BuildInitRenderCfg(bool a1, bool a2) {
   v15 = 0;
   if ( a1 )
   {
-    qmemcpy(&v9[0x10], &CGameStateHandler::m_sRenderCfg, 0x24u);
+    qmemcpy(&v9[16], &CGameStateHandler::m_sRenderCfg, 0x24u);
     inited = IGfxEngine::RebuildRenderEnvironment(g_pGfxEngine, *(struct SGfxRenderConfiguration *)&v9[16]);
   }
   else
@@ -1333,3 +1323,4 @@ bool __cdecl CGameStateHandler::BuildInitRenderCfg(bool a1, bool a2) {
 // address=[0x3f45668]
 // [Decompilation failed for static class std::list<struct SStateCommand,class std::allocator<struct SStateCommand> > CGameStateHandler::m_listQueuedStates]
 
+#endif // Already implemented

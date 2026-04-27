@@ -210,7 +210,7 @@ void  CBuildingMgr::LoadBuildingData(class S4::CMapFile & a2, int a3) {
 int  CBuildingMgr::AddBuilding(int a2, int a3, int a4, int a5, bool a6) {
   
   int v6; // eax
-  DWORD v7; // eax
+  int v7; // eax
   int v8; // ecx
   int v9; // eax
   int v11; // [esp-8h] [ebp-5Ch] BYREF
@@ -230,10 +230,12 @@ int  CBuildingMgr::AddBuilding(int a2, int a3, int a4, int a5, bool a6) {
   int FreeSlot; // [esp+34h] [ebp-20h]
   int v26; // [esp+38h] [ebp-1Ch]
   _DWORD *v27; // [esp+3Ch] [ebp-18h]
+  CBuildingMgr *v28; // [esp+40h] [ebp-14h]
   bool v29; // [esp+47h] [ebp-Dh]
   int v30; // [esp+50h] [ebp-4h]
 
-  if ( !CWorldManager::InWorld(a2, a3)
+  v28 = this;
+  if ( !(unsigned __int8)CWorldManager::InWorld(a2, a3)
     && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 441, "g_cWorld.InWorld(_iX, _iY)") == 1 )
   {
     __debugbreak();
@@ -262,19 +264,19 @@ int  CBuildingMgr::AddBuilding(int a2, int a3, int a4, int a5, bool a6) {
   {
     __debugbreak();
   }
-  if ( *((int *)this + 6) >= 4000 )
+  if ( *((int *)v28 + 6) >= 4000 )
     return 0;
   v29 = 0;
   if ( a5 == 80 )
   {
-    v29 = CBuildingMgr::GetFirstBuildingId(this, a4, 80) != 0;
+    v29 = CBuildingMgr::GetFirstBuildingId(v28, a4, 80) != 0;
     v6 = Y16X16::PackXYFast(a2, a3);
-    if ( !CBuildingMgr::AddPositionToList(this, v6, a4) )
+    if ( !CBuildingMgr::AddPositionToList(v28, v6, a4) )
       BBSupportTracePrintF(1, "Couldn't build ManakopterHall at pos %d,%d for player %d", a2, a3, a4);
   }
-  ++*((_DWORD *)this + 6);
+  ++*((_DWORD *)v28 + 6);
   v7 = CPlayerManager::Race(a4);
-  BuildingRole = (struct IBuildingRole *)CBuildingMgr::CreateBuildingRole(a5, v7, a6);
+  BuildingRole = CBuildingMgr::CreateBuildingRole(a5, v7, a6);
   std::auto_ptr<IBuildingRole>::auto_ptr<IBuildingRole>(v24, (int)BuildingRole);
   v30 = 0;
   FreeSlot = CMapObjectMgr::GetFreeSlot();
@@ -296,14 +298,14 @@ int  CBuildingMgr::AddBuilding(int a2, int a3, int a4, int a5, bool a6) {
   v18 = v22;
   LOBYTE(v30) = 0;
   v27 = v22;
-  v26 = IEntity::Type((IEntity *)v22);
+  v26 = IEntity::Type(v22);
   v21 = 0;
   if ( !a6 )
   {
     v21 = 1;
     CBuilding::SetToWorld(v27);
     CStatistic::AddBuilding((CStatistic *)&g_cStatistic, a4, v26, 1);
-    IEntity::SetFlagBits(v27, (EntityFlag)0x10000);
+    IEntity::SetFlagBits(v27, (EntityFlag)0x10000u);
     v12 = 1;
     v11 = IEntity::Y(v27);
     v9 = IEntity::X(v27);
@@ -317,13 +319,13 @@ int  CBuildingMgr::AddBuilding(int a2, int a3, int a4, int a5, bool a6) {
       __debugbreak();
     }
   }
-  CBuildingMgr::AttachBuilding(this, a4, v26, FreeSlot);
-  CBuildingMgr::ChangeNumberOfBuildings(this, a4, v26, v21, 1);
+  CBuildingMgr::AttachBuilding(v28, a4, v26, FreeSlot);
+  CBuildingMgr::ChangeNumberOfBuildings(v28, a4, v26, v21, 1);
   if ( v29 )
   {
-    v17 = *((_DWORD *)this + a4 + 72884);
-    CBuildingMgr::DestroyBuilding(this, a2, a3, a4);
-    *((_DWORD *)this + a4 + 72884) = v17;
+    v17 = *((_DWORD *)v28 + a4 + 72884);
+    CBuildingMgr::DestroyBuilding(v28, a2, a3, a4);
+    *((_DWORD *)v28 + a4 + 72884) = v17;
     v16 = 0;
     v30 = -1;
     std::auto_ptr<IBuildingRole>::~auto_ptr<IBuildingRole>(v24);
@@ -2040,18 +2042,18 @@ void  CBuildingMgr::Load(class S4::CMapFile & a2) {
   CBuildingMgr *v17; // [esp+E0h] [ebp-38h]
   int m; // [esp+E4h] [ebp-34h]
   int k; // [esp+E8h] [ebp-30h]
-  std::string v20; // [esp+ECh] [ebp-2Ch] BYREF
+  _BYTE v20[28]; // [esp+ECh] [ebp-2Ch] BYREF
   int v21; // [esp+114h] [ebp-4h]
 
   v17 = this;
   CTrace::Print("BuildingMgr load");
   v7 = 0;
-  Str = (char *)S4::CMapFile::LoadChunk(a2, 162u, 0, &v7, 0);
+  Str = (char *)S4::CMapFile::LoadChunk(a2, 0xA2u, 0, &v7, 0);
   if ( Str )
   {
-    std::string::string(&v20, Str);
+    std::string::string(v20, Str);
     v21 = 0;
-    std::istringstream::istringstream((int)&v20, 1, 1);
+    std::istringstream::istringstream(v20, 1, 1);
     LOBYTE(v21) = 1;
     v5 = std::ios_base::exceptions((char *)v3 + *(_DWORD *)(v3[0] + 4));
     std::ios_base::exceptions((std::ios_base *)((char *)v3 + *(_DWORD *)(v3[0] + 4)), 6);
@@ -2069,13 +2071,13 @@ void  CBuildingMgr::Load(class S4::CMapFile & a2) {
       j = 0;
       for ( i = 0; i < 9; ++i )
       {
-        operator^<int>((struct std::istream *)v3, (int *)v17 + i + 72884);
-        operator^<int>((struct std::istream *)v3, (int *)v17 + i + 72875);
+        operator^<int>((int)v3, (int)v17 + 4 * i + 291536);
+        operator^<int>((int)v3, (int)v17 + 4 * i + 291500);
         for ( j = 0; j < 20; ++j )
-          operator^<int>((struct std::istream *)v3, (int *)v17 + 20 * i + j + 72695);
+          operator^<int>((int)v3, (int)v17 + 80 * i + 4 * j + 290780);
       }
     }
-    operator^<int>((struct std::istream *)v3, (int *)v17 + 6);
+    operator^<int>((int)v3, (int)v17 + 24);
     m = 0;
     n = 0;
     for ( k = 0; k < 9; ++k )
@@ -2094,13 +2096,13 @@ void  CBuildingMgr::Load(class S4::CMapFile & a2) {
     for ( k = 0; k < 9; ++k )
     {
       for ( m = 0; m < 83; ++m )
-        operator^<int>((struct std::istream *)v3, (int *)v17 + 83 * k + m + 2248);
+        operator^<int>((int)v3, (int)v17 + 332 * k + 4 * m + 8992);
     }
     v9 = 0;
     operator^<unsigned int>(v3, &v9);
     for ( k = 0; k < v9; ++k )
     {
-      v12 = ((int (__cdecl *)(_DWORD *, int))CPersistence::New)(v3, v2);
+      v12 = CPersistence::New(v3, v2);
       if ( !v12 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 377, "pNewBulding != NULL") == 1 )
         __debugbreak();
       if ( v12 )
@@ -2128,7 +2130,7 @@ void  CBuildingMgr::Load(class S4::CMapFile & a2) {
     LOBYTE(v21) = 0;
     std::istringstream::`vbase destructor'(v3);
     v21 = -1;
-    std::string::~string(&v20);
+    std::string::~string(v20);
   }
 }
 

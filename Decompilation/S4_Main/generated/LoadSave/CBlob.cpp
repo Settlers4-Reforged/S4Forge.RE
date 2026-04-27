@@ -87,158 +87,154 @@
 
 
 // address=[0x2fc8be0]
-// Decompiled from CBlob *__thiscall CBlob::drawBlob(CBlob *this)
+// Decompiled from void __thiscall CBlob::drawBlob(CBlob *this)
 void  CBlob::drawBlob(void) {
   
-  CBlob *result; // eax
-  int v2; // eax
-  int v3; // [esp-4h] [ebp-4Ch]
+  int v1; // eax
+  int v2; // [esp-4h] [ebp-4Ch]
   int NextDirection; // [esp+0h] [ebp-48h]
-  int v5; // [esp+4h] [ebp-44h]
-  int v6; // [esp+8h] [ebp-40h]
+  int v4; // [esp+4h] [ebp-44h]
+  int v5; // [esp+8h] [ebp-40h]
   int i; // [esp+Ch] [ebp-3Ch]
-  int v8; // [esp+10h] [ebp-38h]
-  int v9; // [esp+14h] [ebp-34h]
-  int v10; // [esp+18h] [ebp-30h]
-  int v11; // [esp+1Ch] [ebp-2Ch]
-  int v13; // [esp+24h] [ebp-24h]
-  _DWORD v14[3]; // [esp+28h] [ebp-20h]
-  int v15; // [esp+34h] [ebp-14h]
-  _DWORD v16[3]; // [esp+38h] [ebp-10h]
+  int v7; // [esp+10h] [ebp-38h]
+  int v8; // [esp+14h] [ebp-34h]
+  int v9; // [esp+18h] [ebp-30h]
+  int v10; // [esp+1Ch] [ebp-2Ch]
+  int v12; // [esp+24h] [ebp-24h]
+  _DWORD v13[3]; // [esp+28h] [ebp-20h]
+  int v14; // [esp+34h] [ebp-14h]
+  _DWORD v15[3]; // [esp+38h] [ebp-10h]
 
-  result = this;
-  if ( *((_DWORD *)this + 6) - *((_DWORD *)this + 4) < 14 )
-    return result;
-  result = this;
-  if ( *((_DWORD *)this + 7) - *((_DWORD *)this + 5) < 14 )
-    return result;
-  v15 = *((_DWORD *)this + 4) + (*((_DWORD *)this + 6) - *((_DWORD *)this + 4)) / 2;
-  v16[0] = *((_DWORD *)this + 4);
-  v16[1] = *((_DWORD *)this + 4) + (*((_DWORD *)this + 6) - *((_DWORD *)this + 4)) / 2;
-  v16[2] = *((_DWORD *)this + 6);
-  v13 = *((_DWORD *)this + 5);
-  v14[0] = *((_DWORD *)this + 5) + (*((_DWORD *)this + 7) - *((_DWORD *)this + 5)) / 2;
-  v14[1] = *((_DWORD *)this + 7);
-  v14[2] = *((_DWORD *)this + 5) + (*((_DWORD *)this + 7) - *((_DWORD *)this + 5)) / 2;
-  for ( i = 0; i < 4; ++i )
+  if ( *((_DWORD *)this + 6) - *((_DWORD *)this + 4) >= 14 && *((_DWORD *)this + 7) - *((_DWORD *)this + 5) >= 14 )
   {
-    v6 = v16[i - 1];
-    v5 = v14[i - 1];
-    if ( i == 3 )
+    v14 = *((_DWORD *)this + 4) + (*((_DWORD *)this + 6) - *((_DWORD *)this + 4)) / 2;
+    v15[0] = *((_DWORD *)this + 4);
+    v15[1] = *((_DWORD *)this + 4) + (*((_DWORD *)this + 6) - *((_DWORD *)this + 4)) / 2;
+    v15[2] = *((_DWORD *)this + 6);
+    v12 = *((_DWORD *)this + 5);
+    v13[0] = *((_DWORD *)this + 5) + (*((_DWORD *)this + 7) - *((_DWORD *)this + 5)) / 2;
+    v13[1] = *((_DWORD *)this + 7);
+    v13[2] = *((_DWORD *)this + 5) + (*((_DWORD *)this + 7) - *((_DWORD *)this + 5)) / 2;
+    for ( i = 0; i < 4; ++i )
     {
-      v9 = v15;
-      v8 = v13;
-    }
-    else
-    {
-      v9 = v16[i];
-      v8 = v14[i];
-    }
-    v11 = v16[i - 1];
-    v10 = v14[i - 1];
-    if ( (v9 >= *((_DWORD *)this + 3) || v9 <= 0)
-      && BBSupportDbgReport(2, "Blob.cpp", 128, "iEndX < m_iWorldSize && iEndX > 0") == 1 )
-    {
-      __debugbreak();
-    }
-    if ( (v8 >= *((_DWORD *)this + 3) || v8 <= 0)
-      && BBSupportDbgReport(2, "Blob.cpp", 129, "iEndY < m_iWorldSize && iEndY > 0") == 1 )
-    {
-      __debugbreak();
-    }
-    if ( (v6 <= 0 || v6 >= *((_DWORD *)this + 3))
-      && BBSupportDbgReport(2, "Blob.cpp", 130, "iStartX > 0 && iStartX < m_iWorldSize") == 1 )
-    {
-      __debugbreak();
-    }
-    if ( (v5 <= 0 || v5 >= *((_DWORD *)this + 3))
-      && BBSupportDbgReport(2, "Blob.cpp", 131, "iStartY > 0 && iStartY < m_iWorldSize") == 1 )
-    {
-      __debugbreak();
-    }
-    while ( v11 != v9 || v10 != v8 )
-    {
-      v3 = j__abs(v8 - v10);
-      v2 = j__abs(v9 - v11);
-      NextDirection = CBlob::getNextDirection(this, v2, v3);
-      switch ( NextDirection )
+      v5 = v15[i - 1];
+      v4 = v13[i - 1];
+      if ( i == 3 )
       {
-        case 1:
-          if ( v9 > v11 && v11 < *((_DWORD *)this + 3) - 1 )
-            ++v11;
-          if ( v9 < v11 && v11 > 0 )
-            --v11;
-          break;
-        case 2:
-          if ( v9 >= v11 || v8 <= v10 || v10 >= *((_DWORD *)this + 3) - 1 )
-          {
-            if ( v9 < v11 || v8 < v10 || v11 >= *((_DWORD *)this + 3) - 1 || v10 >= *((_DWORD *)this + 3) - 1 )
+        v8 = v14;
+        v7 = v12;
+      }
+      else
+      {
+        v8 = v15[i];
+        v7 = v13[i];
+      }
+      v10 = v15[i - 1];
+      v9 = v13[i - 1];
+      if ( (v8 >= *((_DWORD *)this + 3) || v8 <= 0)
+        && BBSupportDbgReport(2, "Blob.cpp", 128, "iEndX < m_iWorldSize && iEndX > 0") == 1 )
+      {
+        __debugbreak();
+      }
+      if ( (v7 >= *((_DWORD *)this + 3) || v7 <= 0)
+        && BBSupportDbgReport(2, "Blob.cpp", 129, "iEndY < m_iWorldSize && iEndY > 0") == 1 )
+      {
+        __debugbreak();
+      }
+      if ( (v5 <= 0 || v5 >= *((_DWORD *)this + 3))
+        && BBSupportDbgReport(2, "Blob.cpp", 130, "iStartX > 0 && iStartX < m_iWorldSize") == 1 )
+      {
+        __debugbreak();
+      }
+      if ( (v4 <= 0 || v4 >= *((_DWORD *)this + 3))
+        && BBSupportDbgReport(2, "Blob.cpp", 131, "iStartY > 0 && iStartY < m_iWorldSize") == 1 )
+      {
+        __debugbreak();
+      }
+      while ( v10 != v8 || v9 != v7 )
+      {
+        v2 = j__abs(v7 - v9);
+        v1 = j__abs(v8 - v10);
+        NextDirection = CBlob::getNextDirection(this, v1, v2);
+        switch ( NextDirection )
+        {
+          case 1:
+            if ( v8 > v10 && v10 < *((_DWORD *)this + 3) - 1 )
+              ++v10;
+            if ( v8 < v10 && v10 > 0 )
+              --v10;
+            break;
+          case 2:
+            if ( v8 >= v10 || v7 <= v9 || v9 >= *((_DWORD *)this + 3) - 1 )
             {
-              if ( v9 <= v11 || v8 >= v10 || v10 <= 0 )
+              if ( v8 < v10 || v7 < v9 || v10 >= *((_DWORD *)this + 3) - 1 || v9 >= *((_DWORD *)this + 3) - 1 )
               {
-                if ( v9 <= v11 && v8 <= v10 && v11 > 0 && v10 > 0 )
+                if ( v8 <= v10 || v7 >= v9 || v9 <= 0 )
                 {
-                  --v11;
-                  --v10;
+                  if ( v8 <= v10 && v7 <= v9 && v10 > 0 && v9 > 0 )
+                  {
+                    --v10;
+                    --v9;
+                  }
+                }
+                else
+                {
+                  --v9;
                 }
               }
               else
               {
-                --v10;
+                ++v10;
+                ++v9;
               }
             }
             else
             {
-              ++v11;
-              ++v10;
+              ++v9;
             }
-          }
-          else
-          {
-            ++v10;
-          }
-          break;
-        case 3:
-          if ( v9 > v11 || v8 < v10 || v11 <= 0 )
-          {
-            if ( v9 <= v11 || v8 <= v10 || v10 >= *((_DWORD *)this + 3) - 1 )
+            break;
+          case 3:
+            if ( v8 > v10 || v7 < v9 || v10 <= 0 )
             {
-              if ( v9 < v11 || v8 > v10 || v11 >= *((_DWORD *)this + 3) - 1 )
+              if ( v8 <= v10 || v7 <= v9 || v9 >= *((_DWORD *)this + 3) - 1 )
               {
-                if ( v9 < v11 && v8 < v10 && v10 > 0 )
-                  --v10;
+                if ( v8 < v10 || v7 > v9 || v10 >= *((_DWORD *)this + 3) - 1 )
+                {
+                  if ( v8 < v10 && v7 < v9 && v9 > 0 )
+                    --v9;
+                }
+                else
+                {
+                  ++v10;
+                }
               }
               else
               {
-                ++v11;
+                ++v9;
               }
             }
             else
             {
-              ++v10;
+              --v10;
             }
-          }
-          else
-          {
-            --v11;
-          }
-          break;
+            break;
+        }
+        if ( v10 >= *((_DWORD *)this + 3) && BBSupportDbgReport(2, "Blob.cpp", 195, "iCurrentX < m_iWorldSize") == 1 )
+          __debugbreak();
+        if ( v10 <= 0 && BBSupportDbgReport(2, "Blob.cpp", 196, "iCurrentX > 0") == 1 )
+          __debugbreak();
+        if ( v9 >= *((_DWORD *)this + 3) && BBSupportDbgReport(2, "Blob.cpp", 197, "iCurrentY < m_iWorldSize") == 1 )
+          __debugbreak();
+        if ( v9 <= 0 && BBSupportDbgReport(2, "Blob.cpp", 198, "iCurrentY > 0") == 1 )
+          __debugbreak();
+        (*(void (__thiscall **)(CBlob *, int, int))(*(_DWORD *)this + 4))(this, v10, v9);
       }
-      if ( v11 >= *((_DWORD *)this + 3) && BBSupportDbgReport(2, "Blob.cpp", 195, "iCurrentX < m_iWorldSize") == 1 )
-        __debugbreak();
-      if ( v11 <= 0 && BBSupportDbgReport(2, "Blob.cpp", 196, "iCurrentX > 0") == 1 )
-        __debugbreak();
-      if ( v10 >= *((_DWORD *)this + 3) && BBSupportDbgReport(2, "Blob.cpp", 197, "iCurrentY < m_iWorldSize") == 1 )
-        __debugbreak();
-      if ( v10 <= 0 && BBSupportDbgReport(2, "Blob.cpp", 198, "iCurrentY > 0") == 1 )
-        __debugbreak();
-      (*(void (__thiscall **)(CBlob *, int, int))(*(_DWORD *)this + 4))(this, v11, v10);
     }
+    (**(void (__thiscall ***)(CBlob *, int, int))this)(
+      this,
+      *((_DWORD *)this + 4) + (*((_DWORD *)this + 6) - *((_DWORD *)this + 4)) / 2,
+      *((_DWORD *)this + 5) + (*((_DWORD *)this + 7) - *((_DWORD *)this + 5)) / 2);
   }
-  return (CBlob *)(**(int (__thiscall ***)(CBlob *, int, int))this)(
-                    this,
-                    *((_DWORD *)this + 4) + (*((_DWORD *)this + 6) - *((_DWORD *)this + 4)) / 2,
-                    *((_DWORD *)this + 5) + (*((_DWORD *)this + 7) - *((_DWORD *)this + 5)) / 2);
 }
 
 

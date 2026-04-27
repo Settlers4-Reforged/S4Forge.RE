@@ -1,3 +1,4 @@
+#if FALSE
 #include "CPlayerMagicData.h"
 
 // Definitions for class CPlayerMagicData
@@ -150,3 +151,4 @@ void  CPlayerMagicData::SetMaxNumberOfBigTemples(int a2) {
 }
 
 
+#endif // Already implemented

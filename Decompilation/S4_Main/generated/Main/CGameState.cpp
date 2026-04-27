@@ -1,3 +1,4 @@
+#if FALSE
 #include "CGameState.h"
 
 // Definitions for class CGameState
@@ -11,12 +12,12 @@ bool  CGameState::OnEvent(class CEvn_Event & a1) {
 
 
 // address=[0x149d860]
-// Decompiled from int __cdecl CGameState::DynamicCreateFunc(struct boost::exception_detail::clone_base *a1)
+// Decompiled from CGameState *__cdecl CGameState::DynamicCreateFunc(void *a1)
 class CGameState * __cdecl CGameState::DynamicCreateFunc(void * a1) {
   
-  boost::exception_detail::clone_base *v3; // [esp+Ch] [ebp-10h]
+  CGameState *v3; // [esp+Ch] [ebp-10h]
 
-  v3 = (boost::exception_detail::clone_base *)operator new(4u);
+  v3 = (CGameState *)operator new(4u);
   if ( v3 )
     return CGameState::CGameState(v3, a1);
   else
@@ -25,10 +26,10 @@ class CGameState * __cdecl CGameState::DynamicCreateFunc(void * a1) {
 
 
 // address=[0x149d900]
-// Decompiled from CGameState *__thiscall CGameState::CGameState(CGameState *this, const struct boost::exception_detail::clone_base *a2)
+// Decompiled from CGameState *__thiscall CGameState::CGameState(CGameState *this, void *a2)
  CGameState::CGameState(void * a2) {
   
-  *(_DWORD *)this = &CGameState::_vftable_;
+  this->__vftable = (CGameState_vtbl *)&CGameState::_vftable_;
   return this;
 }
 
@@ -40,7 +41,7 @@ class CGameState * __cdecl CGameState::DynamicCreateFunc(void * a1) {
   CGameState *result; // eax
 
   result = this;
-  *(_DWORD *)this = &CGameState::_vftable_;
+  this->__vftable = (CGameState_vtbl *)&CGameState::_vftable_;
   return result;
 }
 
@@ -59,9 +60,9 @@ bool  CGameState::Perform(void) {
   
   if ( BBSupportDbgReport(
          2,
-         (int)"d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\main\\states\\GameState.h",
+         "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\main\\states\\GameState.h",
          54,
-         (int)"false") == 1 )
+         "false") == 1 )
     __debugbreak();
   return 0;
 }
@@ -71,8 +72,9 @@ bool  CGameState::Perform(void) {
 // Decompiled from CGameState *__thiscall CGameState::CGameState(CGameState *this)
  CGameState::CGameState(void) {
   
-  *(_DWORD *)this = &CGameState::_vftable_;
+  this->__vftable = (CGameState_vtbl *)&CGameState::_vftable_;
   return this;
 }
 
 
+#endif // Already implemented

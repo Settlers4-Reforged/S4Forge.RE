@@ -85,7 +85,7 @@ private:
     static bool __cdecl StartDummyGame(void);
 
     // address=[0x148d250]
-    static void __cdecl PerformPendingFullScreenEnterOrExit(void a1);
+    static void __cdecl PerformPendingFullScreenEnterOrExit(void);
 
     // address=[0x148d290]
     static bool __cdecl BuildInitRenderCfg(bool a1, bool a2);

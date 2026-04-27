@@ -145,9 +145,9 @@ private:
 public:
     std::wstring string0;
     std::wstring m_swMapName;
-    _DWORD m_iWidthHeight;
-    _DWORD m_bIsEmptyMap;
-    _DWORD m_iStartResources;
+    int m_iWidthHeight;
+    int m_bIsEmptyMap;
+    int m_iStartResources;
     _DWORD dword44;
     _DWORD m_uiNumberAlliances;
     int[9] ptr4c;

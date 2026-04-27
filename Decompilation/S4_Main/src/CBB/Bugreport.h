@@ -3,8 +3,9 @@
 
 #include "defines.h"
 
-namespace Bugreport
-{
+extern char g_szBugReportText[8200];
+
+namespace Bugreport {
     // address=[0x134dbe0]
     std::wstring __cdecl GetBugReportsDirectoryPath(void);
 

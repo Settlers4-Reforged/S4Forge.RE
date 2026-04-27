@@ -1,3 +1,4 @@
+#if FALSE
 #include "CPlayerManager.h"
 
 // Definitions for class CPlayerManager
@@ -560,3 +561,4 @@ int __cdecl CPlayerManager::IP(int a1) {
 // address=[0x402c008]
 // [Decompilation failed for static class CPlayerGameData * CPlayerManager::m_cPlayerGameData]
 
+#endif // Already implemented

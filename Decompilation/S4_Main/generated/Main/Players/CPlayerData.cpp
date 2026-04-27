@@ -1,3 +1,4 @@
+#if FALSE
 #include "CPlayerData.h"
 
 // Definitions for class CPlayerData
@@ -385,7 +386,7 @@ int  CPlayerData::LoadTeamData(unsigned char * a2, void * a3, struct SMapChunkHe
 // Decompiled from int CPlayerData::GetSizeOfPlayerElement()
 int  CPlayerData::GetSizeOfPlayerElement(void) {
   
-  return 0x2D;
+  return 45;
 }
 
 
@@ -529,3 +530,4 @@ bool  CPlayerData::isAI(void) {
 }
 
 
+#endif // Already implemented

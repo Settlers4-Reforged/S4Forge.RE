@@ -6,8 +6,8 @@
 // Decompiled from CGameStateEventHandle *__thiscall CGameStateEventHandle::CGameStateEventHandle(CGameStateEventHandle *this)
  CGameStateEventHandle::CGameStateEventHandle(void) {
   
-  IEvn_Handle::IEvn_Handle(this);
-  *(_DWORD *)this = &CGameStateEventHandle::_vftable_;
+  IEvn_Handle::IEvn_Handle((IEvn_Handle *)this);
+  this->__vftable = (CGameStateEventHandle_vtbl *)&CGameStateEventHandle::_vftable_;
   return this;
 }
 
@@ -26,151 +26,141 @@ bool  CGameStateEventHandle::OnEvent(class CEvn_Event & a2) {
   
   char result; // al
   size_t v3; // eax
-  const WCHAR *v4; // eax
-  char v5; // [esp-38h] [ebp-400h] BYREF
-  int v6; // [esp-34h] [ebp-3FCh]
-  int v7; // [esp-30h] [ebp-3F8h]
-  int v8; // [esp-2Ch] [ebp-3F4h]
-  int v9; // [esp-28h] [ebp-3F0h]
-  int v10; // [esp-24h] [ebp-3ECh]
-  int v11; // [esp-20h] [ebp-3E8h]
-  char v12; // [esp-1Ch] [ebp-3E4h] BYREF
-  int v13; // [esp-18h] [ebp-3E0h]
-  int v14; // [esp-Ch] [ebp-3D4h]
-  const char *v15; // [esp-8h] [ebp-3D0h]
-  BOOL v16; // [esp-4h] [ebp-3CCh]
-  void *v17[19]; // [esp+0h] [ebp-3C8h] BYREF
-  struct std::string *v18; // [esp+4Ch] [ebp-37Ch]
-  int v19; // [esp+50h] [ebp-378h]
-  struct std::string *v20; // [esp+54h] [ebp-374h]
-  std::string *v21; // [esp+58h] [ebp-370h]
-  std::string *v22; // [esp+5Ch] [ebp-36Ch]
-  int v23; // [esp+60h] [ebp-368h]
-  int v24; // [esp+64h] [ebp-364h]
-  std::wstring *v25; // [esp+68h] [ebp-360h]
-  int v26; // [esp+6Ch] [ebp-35Ch]
-  int BugReportMessageFilePath; // [esp+70h] [ebp-358h]
-  struct std::string *v28; // [esp+74h] [ebp-354h]
-  int v29; // [esp+78h] [ebp-350h]
-  int v30; // [esp+7Ch] [ebp-34Ch]
+  wchar_t *v4; // eax
+  std::string v5; // [esp-38h] [ebp-400h] BYREF
+  std::string v6; // [esp-1Ch] [ebp-3E4h] BYREF
+  int v7; // [esp+0h] [ebp-3C8h] BYREF
+  int ManualURL; // [esp+10h] [ebp-3B8h]
+  CFile *v9; // [esp+14h] [ebp-3B4h]
+  std::wstring *BugReportScreenshotPath; // [esp+18h] [ebp-3B0h]
+  std::string *v11; // [esp+1Ch] [ebp-3ACh]
+  int v12; // [esp+20h] [ebp-3A8h]
+  std::string *v14; // [esp+28h] [ebp-3A0h]
+  struct std::string *v15; // [esp+2Ch] [ebp-39Ch]
+  void *v16; // [esp+30h] [ebp-398h]
+  int v17; // [esp+34h] [ebp-394h]
+  std::string *v18; // [esp+38h] [ebp-390h]
+  std::string *v19; // [esp+3Ch] [ebp-38Ch]
+  struct std::string *v20; // [esp+40h] [ebp-388h]
+  void *v21; // [esp+44h] [ebp-384h]
+  std::wstring *v22; // [esp+48h] [ebp-380h]
+  struct std::string *v23; // [esp+4Ch] [ebp-37Ch]
+  int m_wParam; // [esp+50h] [ebp-378h]
+  struct std::string *v25; // [esp+54h] [ebp-374h]
+  std::string *v26; // [esp+58h] [ebp-370h]
+  std::string *v27; // [esp+5Ch] [ebp-36Ch]
+  struct std::string *v28; // [esp+60h] [ebp-368h]
+  int v29; // [esp+64h] [ebp-364h]
+  std::wstring *v30; // [esp+68h] [ebp-360h]
+  std::wstring *a1; // [esp+6Ch] [ebp-35Ch]
+  std::wstring *BugReportMessageFilePath; // [esp+70h] [ebp-358h]
+  struct std::string *v33; // [esp+74h] [ebp-354h]
+  int v34; // [esp+78h] [ebp-350h]
+  int v35; // [esp+7Ch] [ebp-34Ch]
   struct tagPOINT Point; // [esp+80h] [ebp-348h] BYREF
-  INT_PTR v32; // [esp+88h] [ebp-340h]
-  int v33; // [esp+8Ch] [ebp-33Ch]
-  int v34; // [esp+90h] [ebp-338h]
-  char v35; // [esp+97h] [ebp-331h]
-  bool v36; // [esp+99h] [ebp-32Fh]
-  bool v37; // [esp+9Ah] [ebp-32Eh]
-  struct CEvn_Event *v38; // [esp+9Ch] [ebp-32Ch]
-  CFile v39; // [esp+A0h] [ebp-328h] BYREF
-  std::string v40; // [esp+E8h] [ebp-2E0h] BYREF
-  std::string v41; // [esp+104h] [ebp-2C4h] BYREF
-  std::wstring v42; // [esp+120h] [ebp-2A8h] BYREF
-  std::wstring v43; // [esp+13Ch] [ebp-28Ch] BYREF
-  _BYTE v44[28]; // [esp+158h] [ebp-270h] BYREF
-  std::wstring v45; // [esp+174h] [ebp-254h] BYREF
-  std::wstring v46; // [esp+190h] [ebp-238h] BYREF
+  INT_PTR v37; // [esp+88h] [ebp-340h]
+  int iEventId; // [esp+8Ch] [ebp-33Ch]
+  int v39; // [esp+90h] [ebp-338h]
+  char v40; // [esp+97h] [ebp-331h]
+  bool v41; // [esp+99h] [ebp-32Fh]
+  bool v42; // [esp+9Ah] [ebp-32Eh]
+  struct CEvn_Event *v43; // [esp+9Ch] [ebp-32Ch]
+  CFile v44; // [esp+A0h] [ebp-328h] BYREF
+  std::string v45; // [esp+E8h] [ebp-2E0h] BYREF
+  std::string v46; // [esp+104h] [ebp-2C4h] BYREF
+  std::wstring v47; // [esp+120h] [ebp-2A8h] BYREF
+  std::wstring v48; // [esp+13Ch] [ebp-28Ch] BYREF
+  _BYTE v49[28]; // [esp+158h] [ebp-270h] BYREF
+  std::wstring v50; // [esp+174h] [ebp-254h] BYREF
+  std::wstring v51; // [esp+190h] [ebp-238h] BYREF
   WCHAR ExistingFileName[260]; // [esp+1ACh] [ebp-21Ch] BYREF
-  void **v48; // [esp+3B8h] [ebp-10h]
-  int v49; // [esp+3C4h] [ebp-4h]
+  int *v53; // [esp+3B8h] [ebp-10h]
+  int v54; // [esp+3C4h] [ebp-4h]
 
-  v48 = v17;
-  v17[9] = this;
-  v38 = a2;
-  v33 = a2->m_iEventId;
-  switch ( v33 )
+  v53 = &v7;
+  v43 = a2;
+  iEventId = a2->m_iEventId;
+  switch ( iEventId )
   {
-    case 0:
-      v19 = (unsigned __int16)v38->m_wParam;
-      if ( v19 == 40009 )
+    case GENERIC_EVENT_LOAD_CONFIG:
+      m_wParam = (unsigned __int16)v43->m_wParam;
+      if ( m_wParam == 0x9C49 )
         CGameStateHandler::LoadAllConfigFiles();
       goto CGameStateEventHandle__OnEvent___def_188A00A;
-    case 2:
+    case GENERIC_EVENT_UPDATE_WINDOW_POS:
       Point.x = 0;
       Point.y = 0;
-      ClientToScreen((HWND)v38[1].__vftable, &Point);
+      ClientToScreen((HWND)v43[1].__vftable, &Point);
       if ( g_pGfxEngine )
         IGfxEngine::SetWindowPosition(g_pGfxEngine, Point.x, Point.y);
       goto CGameStateEventHandle__OnEvent___def_188A00A;
-    case 3:
+    case GENERIC_EVENT_REBUILD_GFX:
       if ( g_pGfxEngine )
         CGameStateHandler::RebuildGfxEngine(0);
       goto CGameStateEventHandle__OnEvent___def_188A00A;
-    case 4:
-    case 118:
+    case GENERIC_EVENT_QUIT_1:
+    case GENERIC_EVENT_QUIT_2:
       PostQuitMessage(0);
       return 1;
-    case 11:
-      v34 = v38->m_wParam;
-      v34 -= 45;
-      switch ( v34 )
+    case GENERIC_EVENT_KEY_PRESS:
+      v39 = v43->m_wParam;
+      v39 -= 0x2D;
+      switch ( v39 )
       {
-        case 0:
-          if ( (v38->m_lParam & 4) == 0 || (v38->m_lParam & 8) == 0 )
+        case 0:                                 // PrintScreen
+          if ( (v43->m_lParam & 4) == 0 || (v43->m_lParam & 8) == 0 )
             goto CGameStateEventHandle__OnEvent___def_188A00A;
           CGameStateHandler::m_bGrab = CGameStateHandler::m_bGrab == 0;
           result = 0;
           break;
-        case 67:
-          if ( (v38->m_lParam & 8) != 0 )
+        case 67:                                // F1
+          if ( (v43->m_lParam & 8) != 0 )       // CTRL held down
           {
-            v32 = DialogBoxParamA(g_hInstance, (LPCSTR)0x79, g_hWnd, DlgProc, 0);
-            if ( v32 )
+            v37 = DialogBoxParamA(g_hInstance, (LPCSTR)0x79, g_hWnd, DlgProc, 0);
+            if ( v37 )
             {
-              if ( v32 == 2 )
+              if ( v37 == 2 )
               {
                 IGfxEngine::ShowFrame(g_pGfxEngine);
-                v17[7] = &v12;
-                v17[6] = Bugreport::GetBugReportScreenshotPath((std::wstring *)&v12);
-                ((void (__cdecl *)(char, int))CGrabber::DoGrab)(v12, v13);
+                v11 = &v6;
+                BugReportScreenshotPath = Bugreport::GetBugReportScreenshotPath((std::wstring *)&v6);
+                CGrabber::DoGrab((std::wstring)v6);
               }
-              v49 = 1;
-              v17[5] = CFile::CFile(&v39);
-              LOBYTE(v49) = 2;
-              BugReportMessageFilePath = ((int (__cdecl *)(std::wstring *, void *))Bugreport::GetBugReportMessageFilePath)(
-                                           &v43,
-                                           v17[0]);
-              v26 = BugReportMessageFilePath;
-              LOBYTE(v49) = 3;
-              ((void (__stdcall *)(int, int, char *, int))CFile::Open)(
-                BugReportMessageFilePath,
-                9,
-                "d:\\projects\\tshe\\purplelamp\\s4\\source\\baselib\\include\\File.h",
-                0);
-              LOBYTE(v49) = 2;
-              std::wstring::~wstring(&v43);
-              v16 = 0;
-              v15 = "d:\\projects\\tshe\\purplelamp\\s4\\source\\baselib\\include\\File.h";
-              v14 = 1;
+              v54 = 1;
+              v9 = CFile::CFile(&v44);
+              LOBYTE(v54) = 2;
+              BugReportMessageFilePath = Bugreport::GetBugReportMessageFilePath(&v48);
+              a1 = BugReportMessageFilePath;
+              LOBYTE(v54) = 3;
+              CFile::Open(&v44, BugReportMessageFilePath, CFile_TEXT|CFile_WRITE, UNUSED_ARG(), UNUSED_ARG());
+              LOBYTE(v54) = 2;
+              std::wstring::~wstring(&v48);
+              v6.m_uU1C = 0;
+              v6.m_uU18 = (int)"d:\\projects\\tshe\\purplelamp\\s4\\source\\baselib\\include\\File.h";
+              v6.m_uU14 = 1;
               v3 = strlen(g_szBugReportText);
-              ((void (__stdcall *)(void *, size_t, size_t, int, int))CFile::Write)(
-                g_szBugReportText,
-                v3,
-                1u,
-                (int)"d:\\projects\\tshe\\purplelamp\\s4\\source\\baselib\\include\\File.h",
-                0);
-              CFile::Close(&v39, "d:\\projects\\tshe\\purplelamp\\s4\\source\\baselib\\include\\File.h", 0);
-              LOBYTE(v49) = 1;
-              ((void (__cdecl *)())CFile::~CFile)();
-              v49 = -1;
-              BBSupportGetTraceFilePath(ExistingFileName, 0x208);
-              std::wstring::wstring(&v45, ExistingFileName);
-              v49 = 5;
-              Bugreport::BuildTraceFilePath(&v46, &v45);
-              LOBYTE(v49) = 7;
-              std::wstring::~wstring(&v45);
-              v16 = 0;
-              v4 = std::wstring::c_str(&v46);
-              CopyFileW(ExistingFileName, v4, v16);
-              v25 = (std::wstring *)((std::wstring *(__cdecl *)(std::wstring *, void *))Bugreport::BuildAutoReporterCmdLineArgsForUserReports)(
-                                      &v42,
-                                      v17[0]);
-              v17[18] = v25;
-              LOBYTE(v49) = 8;
-              Bugreport::LaunchAutoreport(1, v25);
-              LOBYTE(v49) = 7;
-              std::wstring::~wstring(&v42);
-              v49 = -1;
-              std::wstring::~wstring(&v46);
+              CFile::Write(&v44, g_szBugReportText, v3, 1, UNUSED_ARG(), UNUSED_ARG());
+              CFile::Close(&v44, UNUSED_ARG(), UNUSED_ARG());
+              LOBYTE(v54) = 1;
+              CFile::~CFile(&v44);
+              v54 = -1;
+              BBSupportGetTraceFilePath(ExistingFileName, 520);
+              std::wstring::wstring(&v50, ExistingFileName);
+              v54 = 5;
+              Bugreport::BuildTraceFilePath(&v51, &v50);
+              LOBYTE(v54) = 7;
+              std::wstring::~wstring(&v50);
+              v6.m_uU1C = 0;
+              v4 = std::wstring::c_str(&v51);
+              CopyFileW(ExistingFileName, v4, v6.m_uU1C);
+              v30 = Bugreport::BuildAutoReporterCmdLineArgsForUserReports(&v47);
+              v22 = v30;
+              LOBYTE(v54) = 8;
+              Bugreport::LaunchAutoreport(1, v30);
+              LOBYTE(v54) = 7;
+              std::wstring::~wstring(&v47);
+              v54 = -1;
+              std::wstring::~wstring(&v51);
               result = 1;
             }
             else
@@ -180,91 +170,91 @@ bool  CGameStateEventHandle::OnEvent(class CEvn_Event & a2) {
           }
           else
           {
-            v17[17] = &v12;
-            v18 = std::string::string((std::string *)&v12, (char *)&byte_36C34A3);
-            v17[16] = v18;
-            v49 = 9;
-            v17[15] = &v5;
-            v17[4] = (void *)CGameSettings::GetManualURL((int)&v5);
-            v49 = -1;
-            CGameStateHandler::ShowHTMLPage(v5, v6, v7, v8, v9, v10, v11, v12);
+            v21 = &v6;
+            v23 = std::string::string(&v6, (char *)&byte_36C34A3);
+            v20 = v23;
+            v54 = 9;
+            v19 = &v5;
+            ManualURL = CGameSettings::GetManualURL();
+            v54 = -1;
+            CGameStateHandler::ShowHTMLPage(v5, v6);
             result = 1;
           }
           break;
-        case 68:
-          if ( (v38->m_lParam & 4) == 0 )
+        case 68:                                // F2
+          if ( (v43->m_lParam & 4) == 0 )       // Shift held
             ChangeScreenSize(800, 600);
           goto CGameStateEventHandle__OnEvent___def_188A00A;
-        case 69:
+        case 69:                                // F3
           ChangeScreenSize(1024, 768);
           goto CGameStateEventHandle__OnEvent___def_188A00A;
-        case 70:
+        case 70:                                // F4
           ChangeScreenSize(1280, 1024);
           goto CGameStateEventHandle__OnEvent___def_188A00A;
         default:
           goto CGameStateEventHandle__OnEvent___def_188A00A;
       }
       return result;
-    case 12:
-      if ( v38->m_wParam == 13 && (v38->m_lParam & 0x10) != 0 )
+    case GENERIC_EVENT_TOGGLE_FULLSCREEN:
+      if ( v43->m_wParam == 13 && (v43->m_lParam & 0x10) != 0 )
       {
-        v37 = CGameSettings::GetGfxFullscreenEnabled() == 0;
-        CGameSettings::SetGfxFullscreenEnabled(v37);
+        v42 = CGameSettings::GetGfxFullscreenEnabled() == 0;
+        CGameSettings::SetGfxFullscreenEnabled(v42);
         CGameStateHandler::RebuildGfxEngine(0);
       }
       goto CGameStateEventHandle__OnEvent___def_188A00A;
-    case 13:
-      v29 = v38->m_wParam;
-      if ( v29 != 63 )
+    case GENERIC_EVENT_SHOW_MANUAL:
+      v34 = v43->m_wParam;
+      if ( v34 != 63 )
         goto CGameStateEventHandle__OnEvent___def_188A00A;
-      v17[12] = &v12;
-      v28 = std::string::string((std::string *)&v12, (char *)&byte_36C34A2);
-      v17[11] = v28;
-      v49 = 0;
-      v17[10] = &v5;
-      v17[8] = (void *)CGameSettings::GetManualURL((int)&v5);
-      v49 = -1;
-      CGameStateHandler::ShowHTMLPage(v5, v6, v7, v8, v9, v10, v11, v12);
+      v16 = &v6;
+      v33 = std::string::string(&v6, (char *)&byte_36C34A2);
+      v15 = v33;
+      v54 = 0;
+      v14 = &v5;
+      v12 = CGameSettings::GetManualURL();
+      v54 = -1;
+      CGameStateHandler::ShowHTMLPage(v5, v6);
       result = 1;
       break;
-    case 17:
+    case GENERIC_EVENT_REBUILD_GFX_2:
       CGameStateHandler::RebuildGfxEngine(0);
       return 1;
-    case 20:
-      v30 = v38->m_wParam;
-      if ( v30 != 44 )
+    case GENERIC_EVENT_KEY_UP:
+      v35 = v43->m_wParam;
+      if ( v35 != 0x2C )
         goto CGameStateEventHandle__OnEvent___def_188A00A;
-      if ( (v38->m_lParam & 4) != 0 )
+      if ( (v43->m_lParam & 4) != 0 )
       {
         CGameStateHandler::m_bGrab = CGameStateHandler::m_bGrab == 0;
         result = 1;
       }
       else
       {
-        v17[14] = &v12;
-        v17[13] = (void *)std::wstring::wstring((std::wstring *)&v12, (wchar_t *)&word_36C34A0);
-        ((void (__cdecl *)(char, int))CGrabber::DoGrab)(v12, v13);
+        v18 = &v6;
+        v17 = std::wstring::wstring((std::wstring *)&v6, (wchar_t *)&word_36C34A0);
+        CGrabber::DoGrab((std::wstring)v6);
         result = 0;
       }
       break;
-    case 22:
-      if ( v38->m_wParam )
+    case GENERIC_EVENT_FOCUS:
+      if ( v43->m_wParam )                      // Gained Focus
       {
         CGameStateHandler::m_bAppActive = 1;
         if ( g_pGfxEngine && g_pGUIEngine )
           IGuiEngine::RefreshAllSurfaces(g_pGUIEngine);
       }
-      else
+      else                                      // Lost it...
       {
         CGameStateHandler::m_bAppActive = 0;
       }
       if ( g_pSoundManager )
       {
-        v36 = CGameStateHandler::m_bAppActive == 0;
-        CSoundManager::Mute((CSoundManager *)g_pSoundManager, CGameStateHandler::m_bAppActive == 0);
+        v41 = CGameStateHandler::m_bAppActive == 0;
+        CSoundManager::Mute(g_pSoundManager, CGameStateHandler::m_bAppActive == 0);
       }
       goto CGameStateEventHandle__OnEvent___def_188A00A;
-    case 25:
+    case GENERIC_EVENT_START_TICK:
       if ( !g_pGame
         && BBSupportDbgReportF(2, "Main\\GameStateEventHandle.cpp", 262, "Start tick receive when there's no game !!!!") == 1 )
       {
@@ -272,34 +262,32 @@ bool  CGameStateEventHandle::OnEvent(class CEvn_Event & a2) {
       }
       if ( !g_pGame )
         return 1;
-      CStateGame::ReadyToGo((CStateGame *)g_pGame);
+      CStateGame::ReadyToGo(g_pGame);
       if ( !CGameSettings::GetWebHelpMode() )
         return 1;
-      v20 = std::string::string(&v41, "???");
-      v23 = (int)v20;
-      v49 = 10;
-      v21 = std::string::string(&v40, "???");
-      v22 = v21;
-      LOBYTE(v49) = 11;
-      v24 = g_pCfgMgr->GetStringValue(g_pCfgMgr, (std::string *)v44, "COMMANDLINE", "netgame", v21);
-      v35 = std::operator!=<char>(v24, v23);
-      std::string::~string(v44);
-      LOBYTE(v49) = 10;
-      std::string::~string(&v40);
-      v49 = -1;
-      std::string::~string(&v41);
-      if ( v35 )
+      v25 = std::string::string(&v46, "???");
+      v28 = v25;
+      v54 = 10;
+      v26 = std::string::string(&v45, "???");
+      v27 = v26;
+      LOBYTE(v54) = 11;
+      v29 = g_pCfgMgr->GetStringValue(g_pCfgMgr, (std::string *)v49, "COMMANDLINE", "netgame", v26);
+      v40 = std::operator!=<char>(v29, v28);
+      std::string::~string(v49);
+      LOBYTE(v54) = 10;
+      std::string::~string(&v45);
+      v54 = -1;
+      std::string::~string(&v46);
+      if ( v40 )
         CGameSettings::SetWebHelpMode(0);
       return 1;
-    case 108:
+    case GENERIC_EVENT_REQUEST_QUIT:
       CGameStateHandler::m_bQuitApplication = 1;
       return 1;
     default:
 CGameStateEventHandle__OnEvent___def_188A00A:
       if ( CGameStateHandler::m_s_pCurrentState )
-        result = (*(int (__thiscall **)(int, struct CEvn_Event *))(*(_DWORD *)CGameStateHandler::m_s_pCurrentState + 8))(
-                   CGameStateHandler::m_s_pCurrentState,
-                   a2);
+        result = CGameStateHandler::m_s_pCurrentState->OnEvent(CGameStateHandler::m_s_pCurrentState, a2);
       else
         result = 0;
       break;
