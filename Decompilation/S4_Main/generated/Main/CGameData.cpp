@@ -129,7 +129,7 @@ bool  CGameData::IsLastFrameRendered(void) {
 // Decompiled from unsigned int __thiscall CGameData::Rand(CGameData *this)
 unsigned int  CGameData::Rand(void) {
   
-  return CRandom16::Rand((CRandom16 *)&this->m_sRandom);
+  return CRandom16::Rand(&this->m_sRandom);
 }
 
 

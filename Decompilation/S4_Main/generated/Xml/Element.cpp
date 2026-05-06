@@ -39,7 +39,7 @@ class AdvXMLParser::Element const &  AdvXMLParser::Element::GetElement(char cons
   
   int v4; // [esp+0h] [ebp-4h]
 
-  AdvXMLParser::NodeContainer::NodeContainer(AdvXMLParser::Node::null, a2);
+  AdvXMLParser::NodeContainer::NodeContainer(this, (int)AdvXMLParser::Node::null, a2);
   *this = &AdvXMLParser::Element::_vftable_;
   std::vector<AdvXMLParser::Attribute *>::vector<AdvXMLParser::Attribute *>(this);
   *(_BYTE *)(v4 + 72) = 0;
@@ -816,52 +816,51 @@ std::string  AdvXMLParser::Element::GetData(void a1)const {
 std::string  AdvXMLParser::Element::GetValue(void a2)const {
   
   _BYTE v3[12]; // [esp+4h] [ebp-80h] BYREF
-  _BYTE v4[12]; // [esp+10h] [ebp-74h] BYREF
-  int v5; // [esp+1Ch] [ebp-68h]
-  int v6; // [esp+20h] [ebp-64h]
-  std::_Iterator_base12 *v7; // [esp+24h] [ebp-60h]
-  std::_Iterator_base12 *v8; // [esp+28h] [ebp-5Ch]
-  int v9; // [esp+2Ch] [ebp-58h]
-  int v10; // [esp+30h] [ebp-54h]
-  _BYTE *v11; // [esp+34h] [ebp-50h]
-  char v12; // [esp+3Bh] [ebp-49h]
-  _BYTE v13[28]; // [esp+3Ch] [ebp-48h] BYREF
-  _BYTE v14[28]; // [esp+58h] [ebp-2Ch] BYREF
-  int v15; // [esp+80h] [ebp-4h]
+  _DWORD v4[4]; // [esp+10h] [ebp-74h] BYREF
+  int v5; // [esp+20h] [ebp-64h]
+  std::_Iterator_base12 *v6; // [esp+24h] [ebp-60h]
+  std::_Iterator_base12 *v7; // [esp+28h] [ebp-5Ch]
+  int v8; // [esp+2Ch] [ebp-58h]
+  int v9; // [esp+30h] [ebp-54h]
+  _BYTE *v10; // [esp+34h] [ebp-50h]
+  bool v11; // [esp+3Bh] [ebp-49h]
+  _BYTE v12[28]; // [esp+3Ch] [ebp-48h] BYREF
+  std::string v13; // [esp+58h] [ebp-2Ch] BYREF
+  int v14; // [esp+80h] [ebp-4h]
 
-  v11 = this;
-  v9 = 0;
-  std::string::string();
-  v15 = 0;
+  v10 = this;
+  v8 = 0;
+  std::string::string(&v13);
+  v14 = 0;
   std::vector<AdvXMLParser::Node *>::begin(v4);
-  LOBYTE(v15) = 1;
+  LOBYTE(v14) = 1;
   while ( 1 )
   {
-    v8 = (std::_Iterator_base12 *)std::vector<AdvXMLParser::Node *>::end(v3);
-    v7 = v8;
-    LOBYTE(v15) = 2;
-    v12 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator<(v8);
-    LOBYTE(v15) = 1;
+    v7 = (std::_Iterator_base12 *)std::vector<AdvXMLParser::Node *>::end((int)v3);
+    v6 = v7;
+    LOBYTE(v14) = 2;
+    v11 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator<(v4, v7);
+    LOBYTE(v14) = 1;
     std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::~_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>(v3);
-    if ( !v12 )
+    if ( !v11 )
       break;
-    v10 = *(_DWORD *)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator*(v4);
-    v6 = (*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v10 + 8))(v10, v13);
-    v5 = v6;
-    LOBYTE(v15) = 3;
-    std::string::operator+=(v6);
-    LOBYTE(v15) = 1;
-    std::string::~string(v13);
+    v9 = *(_DWORD *)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator*();
+    v5 = (*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v9 + 8))(v9, v12);
+    v4[3] = v5;
+    LOBYTE(v14) = 3;
+    std::string::operator+=(v5);
+    LOBYTE(v14) = 1;
+    std::string::~string(v12);
     std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator++(v4);
   }
-  LOBYTE(v15) = 0;
+  LOBYTE(v14) = 0;
   std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::~_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>(v4);
-  if ( !v11[72] )
-    AdvXMLParser::Element::Normalize((int)v14);
-  std::string::string(v14);
-  v9 |= 1u;
-  v15 = -1;
-  std::string::~string(v14);
+  if ( !v10[72] )
+    AdvXMLParser::Element::Normalize((int)&v13);
+  std::string::string(&v13);
+  v8 |= 1u;
+  v14 = -1;
+  std::string::~string(&v13);
   return a2;
 }
 

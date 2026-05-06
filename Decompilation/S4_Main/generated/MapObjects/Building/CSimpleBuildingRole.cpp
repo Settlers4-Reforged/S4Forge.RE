@@ -84,15 +84,15 @@ class CSimpleBuildingRole * __cdecl CSimpleBuildingRole::Load(std::istream & a1)
 
 
 // address=[0x151ab50]
-// Decompiled from int __thiscall CSimpleBuildingRole::LogicUpdate(unsigned __int8 *this, CMFCToolBarButton *a2)
+// Decompiled from EntityFlag __thiscall CSimpleBuildingRole::LogicUpdate(unsigned __int8 *this, IAnimatedEntity *a2)
 void  CSimpleBuildingRole::LogicUpdate(class CBuilding * a2) {
   
-  int result; // eax
+  EntityFlag result; // eax
   int v3; // eax
   int v4; // esi
   int v5; // esi
   int v6; // eax
-  struct CPaneContainer *v7; // eax
+  int v7; // eax
   int v8; // eax
   int v9; // eax
   int v10; // eax
@@ -112,40 +112,40 @@ void  CSimpleBuildingRole::LogicUpdate(class CBuilding * a2) {
   int v24; // esi
   int v25; // [esp-4h] [ebp-D8h]
   char v26; // [esp-4h] [ebp-D8h]
-  int v27; // [esp-4h] [ebp-D8h]
+  __int16 v27; // [esp-4h] [ebp-D8h]
   int v28; // [esp-4h] [ebp-D8h]
   int v29; // [esp-4h] [ebp-D8h]
-  _BYTE v30[24]; // [esp+8h] [ebp-CCh] BYREF
-  _BYTE v31[24]; // [esp+20h] [ebp-B4h] BYREF
-  _BYTE v32[24]; // [esp+38h] [ebp-9Ch] BYREF
+  CEntityEvent v30; // [esp+8h] [ebp-CCh] BYREF
+  CEntityEvent v31; // [esp+20h] [ebp-B4h] BYREF
+  CEntityEvent v32; // [esp+38h] [ebp-9Ch] BYREF
   int v33; // [esp+50h] [ebp-84h]
-  int v34; // [esp+54h] [ebp-80h]
+  IEntity *v34; // [esp+54h] [ebp-80h]
   CEntityEvent *v35; // [esp+58h] [ebp-7Ch]
   CEntityEvent *v36; // [esp+5Ch] [ebp-78h]
-  int v37; // [esp+60h] [ebp-74h]
+  CSettlerMgr::SSettlerInfos *v37; // [esp+60h] [ebp-74h]
   int v38; // [esp+64h] [ebp-70h]
   int v39; // [esp+68h] [ebp-6Ch]
   int v40; // [esp+6Ch] [ebp-68h]
   CEntityEvent *v41; // [esp+70h] [ebp-64h]
   CEntityEvent *v42; // [esp+74h] [ebp-60h]
-  int v43; // [esp+78h] [ebp-5Ch]
+  CSettlerMgr::SSettlerInfos *v43; // [esp+78h] [ebp-5Ch]
   CEntityEvent *v44; // [esp+7Ch] [ebp-58h]
   CEntityEvent *v45; // [esp+80h] [ebp-54h]
   int v46; // [esp+84h] [ebp-50h]
-  int v47; // [esp+88h] [ebp-4Ch]
-  int v48; // [esp+8Ch] [ebp-48h]
-  int v49; // [esp+90h] [ebp-44h]
-  int v50; // [esp+94h] [ebp-40h]
+  unsigned int v47; // [esp+88h] [ebp-4Ch]
+  unsigned int v48; // [esp+8Ch] [ebp-48h]
+  IEntity *v49; // [esp+90h] [ebp-44h]
+  IEntity *v50; // [esp+94h] [ebp-40h]
   int v51; // [esp+98h] [ebp-3Ch]
   int v52; // [esp+9Ch] [ebp-38h]
   int v53; // [esp+A0h] [ebp-34h]
-  unsigned int ObjectType; // [esp+A4h] [ebp-30h]
-  int SettlerInfo; // [esp+A8h] [ebp-2Ch]
+  T_OBJECT_TYPE ObjectType; // [esp+A4h] [ebp-30h]
+  CSettlerMgr::SSettlerInfos *SettlerInfo; // [esp+A8h] [ebp-2Ch]
   unsigned __int8 v56; // [esp+ACh] [ebp-28h]
-  CPaneContainer *v57; // [esp+B0h] [ebp-24h]
-  unsigned __int16 *v58; // [esp+B4h] [ebp-20h]
+  IEntity *v57; // [esp+B0h] [ebp-24h]
+  IEntity *v58; // [esp+B4h] [ebp-20h]
   int v59; // [esp+B8h] [ebp-1Ch]
-  unsigned __int16 *v60; // [esp+BCh] [ebp-18h]
+  IEntity *v60; // [esp+BCh] [ebp-18h]
   char v61; // [esp+C3h] [ebp-11h]
   unsigned __int8 *v62; // [esp+C4h] [ebp-10h]
   int v63; // [esp+D0h] [ebp-4h]
@@ -153,41 +153,41 @@ void  CSimpleBuildingRole::LogicUpdate(class CBuilding * a2) {
   v62 = this;
   result = IEntity::FlagBits(a2, EntityFlag_Selected);
   if ( result )
-    result = (*(int (__thiscall **)(unsigned __int8 *, CMFCToolBarButton *, int))(*(_DWORD *)v62 + 88))(v62, a2, 1);
+    result = (*(int (__thiscall **)(unsigned __int8 *, IAnimatedEntity *, int))(*(_DWORD *)v62 + 88))(v62, a2, 1);
   v56 = v62[4];
   switch ( v56 )
   {
     case 1u:
-      result = (*(int (__thiscall **)(unsigned __int8 *, CMFCToolBarButton *))(*(_DWORD *)v62 + 120))(v62, a2);
+      result = (*(int (__thiscall **)(unsigned __int8 *, IAnimatedEntity *))(*(_DWORD *)v62 + 120))(v62, a2);
       if ( (_BYTE)result )
         v62[4] = 3;
       else
-        return IAnimatedEntity::RegisterForLogicUpdate(31);
+        return IAnimatedEntity::RegisterForLogicUpdate(a2, 31);
       break;
     case 2u:
       if ( v62[5] > (int)*(unsigned __int8 *)(*((_DWORD *)v62 + 94) + 480) )
       {
         v62[5] = 0;
         v62[4] = 3;
-        return IAnimatedEntity::RegisterForLogicUpdate(1);
+        return IAnimatedEntity::RegisterForLogicUpdate(a2, 1);
       }
       else
       {
         ++v62[5];
-        return IAnimatedEntity::RegisterForLogicUpdate(14);
+        return IAnimatedEntity::RegisterForLogicUpdate(a2, 14);
       }
     case 3u:
-      if ( !v62[29] || !IEntity::FlagBits(a2, (EntityFlag)0x1000u) )
-        return IAnimatedEntity::RegisterForLogicUpdate(31);
-      if ( IEntity::Type((unsigned __int16 *)a2) == 2 )
+      if ( !v62[29] || !IEntity::FlagBits(a2, (EntityFlag)4096) )
+        return IAnimatedEntity::RegisterForLogicUpdate(a2, 31);
+      if ( IEntity::Type(a2) == 2 )
       {
-        if ( (*(unsigned __int8 (__thiscall **)(unsigned __int8 *, CMFCToolBarButton *, int))(*(_DWORD *)v62 + 104))(
+        if ( (*(unsigned __int8 (__thiscall **)(unsigned __int8 *, IAnimatedEntity *, int))(*(_DWORD *)v62 + 104))(
                v62,
                a2,
                1) )
         {
-          v57 = (CPaneContainer *)CSettlerMgr::operator[](*((unsigned __int16 *)v62 + 4));
-          v25 = IEntity::Type((unsigned __int16 *)v57);
+          v57 = CSettlerMgr::operator[](*((unsigned __int16 *)v62 + 4));
+          v25 = IEntity::Type(v57);
           v3 = IEntity::Race(v57);
           SettlerInfo = CSettlerMgr::GetSettlerInfo(v3, v25);
           v4 = Y16X16::UnpackXFast(*((_DWORD *)v62 + 4));
@@ -196,56 +196,52 @@ void  CSimpleBuildingRole::LogicUpdate(class CBuilding * a2) {
           v52 = v5 - *(char *)(std::vector<CSettlerMgr::SSearchInfos>::operator[](1) + 6);
           v26 = CWorldManager::Ground(v51, v52);
           v6 = IEntity::Race(v57);
-          ObjectType = CDecoObjMgr::GetObjectType(
-                         (CDecoObjMgr *)&g_cDecoObjMgr,
-                         *(unsigned __int8 *)(SettlerInfo + 6),
-                         v6,
-                         v26);
-          if ( !ObjectType )
-            return IAnimatedEntity::RegisterForLogicUpdate(14);
-          CDecoObjMgr::SetFlagsForObject((CDecoObjMgr *)&g_cDecoObjMgr, v51, v52, ObjectType, 0);
-          v7 = (struct CPaneContainer *)CBuilding::DoorPackedXY(a2);
+          ObjectType = CDecoObjMgr::GetObjectType(&g_cDecoObjMgr, SettlerInfo->m_uFarmerType, v6, v26);
+          if ( ObjectType == OBJECT_NO_OBJECT )
+            return IAnimatedEntity::RegisterForLogicUpdate(a2, 14);
+          CDecoObjMgr::SetFlagsForObject(&g_cDecoObjMgr, v51, v52, ObjectType, 0);
+          v7 = CBuilding::DoorPackedXY((CMFCToolBarButton *)a2);
           IEntity::SetPosition(v57, v7);
-          v27 = *((unsigned __int16 *)v62 + 4);
+          v27 = *((_WORD *)v62 + 4);
           v8 = CBuilding::DoorWorldIdx(a2);
           CWorldManager::SetSettlerId(v8, v27);
           IEntity::ClearFlagBits(v57, EntityFlag_OnBoard|EntityFlag_Visible);
           v50 = CSettlerMgr::operator[](*((unsigned __int16 *)v62 + 4));
-          v45 = CEntityEvent::CEntityEvent((CEntityEvent *)v32, 6u, 0, 0, ObjectType, *((_DWORD *)v62 + 4));
+          v45 = CEntityEvent::CEntityEvent(&v32, 6u, 0, 0, ObjectType, *((_DWORD *)v62 + 4));
           v44 = v45;
           v63 = 0;
-          (*(void (__thiscall **)(int, CEntityEvent *))(*(_DWORD *)v50 + 80))(v50, v45);
+          v50->SetEvent(v50, v45);
           v63 = -1;
-          return CEntityEvent::~CEntityEvent(v32);
+          return CEntityEvent::~CEntityEvent(&v32);
         }
       }
-      else if ( IEntity::Type((unsigned __int16 *)a2) == 27 )
+      else if ( IEntity::Type(a2) == 27 )
       {
-        v9 = CBuilding::EnsignWorldIdx(a2);
+        v9 = CBuilding::EnsignWorldIdx((CBuilding *)a2);
         v53 = CWorldManager::SettlerId(v9);
         if ( v53 )
         {
-          v58 = (unsigned __int16 *)CSettlerMgr::operator[](v53);
+          v58 = CSettlerMgr::operator[](v53);
           v28 = IEntity::Type(v58);
           v10 = IEntity::Race(v58);
           v43 = CSettlerMgr::GetSettlerInfo(v10, v28);
-          v11 = IEntity::OwnerId((unsigned __int8 *)v58);
+          v11 = IEntity::OwnerId(v58);
           v12 = CAlliances::AllianceId(v11);
-          v13 = IEntity::OwnerId((unsigned __int8 *)a2);
+          v13 = IEntity::OwnerId(a2);
           if ( v12 == CAlliances::AllianceId(v13)
-            && IEntity::WarriorType()
-            && (*(int (__thiscall **)(unsigned __int16 *))(*(_DWORD *)v58 + 40))(v58) < *(unsigned __int8 *)(v43 + 2) )
+            && IEntity::WarriorType(v58)
+            && ((int (__thiscall *)(IEntity *))v58->Amount)(v58) < v43->m_bHealth )
           {
             v62[380] = 0;
             v34 = CSettlerMgr::operator[](*((unsigned __int16 *)v62 + 4));
             v49 = CSettlerMgr::operator[](*((unsigned __int16 *)v62 + 4));
             v14 = (unsigned __int8 *)std::vector<unsigned char>::operator[](0);
-            v42 = CEntityEvent::CEntityEvent((CEntityEvent *)v31, 3u, 0, 0, *v14, v53);
+            v42 = CEntityEvent::CEntityEvent(&v31, 3u, 0, 0, *v14, v53);
             v41 = v42;
             v63 = 1;
-            (*(void (__thiscall **)(int, CEntityEvent *))(*(_DWORD *)v49 + 80))(v49, v42);
+            v49->SetEvent(v49, v42);
             v63 = -1;
-            return CEntityEvent::~CEntityEvent(v31);
+            return CEntityEvent::~CEntityEvent(&v31);
           }
         }
         if ( v62[380] )
@@ -266,34 +262,34 @@ void  CSimpleBuildingRole::LogicUpdate(class CBuilding * a2) {
             v47 = v40 + CSpiralOffsets::DeltaX(v59 + *((unsigned __int16 *)v62 + 10));
             v48 = v39 + CSpiralOffsets::DeltaY(v59 + *((unsigned __int16 *)v62 + 10));
             v38 = CWorldManager::Index(v47, v48);
-            if ( (unsigned __int8)CWorldManager::InWorld(v47, v48) )
+            if ( CWorldManager::InWorld(v47, v48) )
             {
               v46 = CWorldManager::SettlerId(v38);
               if ( v46 )
               {
-                v60 = (unsigned __int16 *)CSettlerMgr::operator[](v46);
+                v60 = CSettlerMgr::operator[](v46);
                 v29 = IEntity::Type(v60);
                 v17 = IEntity::Race(v60);
                 v37 = CSettlerMgr::GetSettlerInfo(v17, v29);
-                if ( IEntity::WarriorType() )
+                if ( IEntity::WarriorType(v60) )
                 {
-                  v18 = IEntity::OwnerId((unsigned __int8 *)v60);
+                  v18 = IEntity::OwnerId(v60);
                   v19 = CAlliances::AllianceId(v18);
-                  v20 = IEntity::OwnerId((unsigned __int8 *)a2);
+                  v20 = IEntity::OwnerId(a2);
                   if ( v19 == CAlliances::AllianceId(v20)
-                    && (*(int (__thiscall **)(unsigned __int16 *))(*(_DWORD *)v60 + 40))(v60) < *(unsigned __int8 *)(v37 + 2) )
+                    && ((int (__thiscall *)(IEntity *))v60->Amount)(v60) < v37->m_bHealth )
                   {
-                    v21 = (ISettlerRole *)CSettler::Role(v60);
+                    v21 = (ISettlerRole *)CSettler::Role((CSettler *)v60);
                     if ( ISettlerRole::GetTask(v21) == 27
-                      || (v22 = (ISettlerRole *)CSettler::Role(v60), ISettlerRole::GetTask(v22) == 17) )
+                      || (v22 = (ISettlerRole *)CSettler::Role((CSettler *)v60), ISettlerRole::GetTask(v22) == 17) )
                     {
                       v23 = CBuilding::EnsignPackedXY(a2);
-                      v36 = CEntityEvent::CEntityEvent((CEntityEvent *)v30, 0x11u, 13, 0, v23, 0);
+                      v36 = CEntityEvent::CEntityEvent(&v30, 0x11u, 13, 0, v23, 0);
                       v35 = v36;
                       v63 = 2;
-                      (*(void (__thiscall **)(unsigned __int16 *, CEntityEvent *))(*(_DWORD *)v60 + 80))(v60, v36);
+                      v60->SetEvent(v60, v36);
                       v63 = -1;
-                      CEntityEvent::~CEntityEvent(v30);
+                      CEntityEvent::~CEntityEvent(&v30);
                       v61 = 1;
                       ++v59;
                       break;
@@ -311,11 +307,11 @@ void  CSimpleBuildingRole::LogicUpdate(class CBuilding * a2) {
           if ( v61 == 1 )
           {
             v62[380] = 10;
-            return IAnimatedEntity::RegisterForLogicUpdate(14);
+            return IAnimatedEntity::RegisterForLogicUpdate(a2, 14);
           }
         }
       }
-      return IAnimatedEntity::RegisterForLogicUpdate(31);
+      return IAnimatedEntity::RegisterForLogicUpdate(a2, 31);
     default:
       return result;
   }

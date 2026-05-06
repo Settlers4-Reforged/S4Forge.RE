@@ -168,256 +168,252 @@ bool  CStateBriefing::Perform(void) {
 bool  CStateBriefing::OnEvent(class CEvn_Event & a2) {
   
   char result; // al
-  const char *v3; // eax
+  wchar_t *v3; // eax
   char *v4; // eax
   OnlineManager *Instance; // eax
-  char v6; // [esp-40h] [ebp-330h] BYREF
-  int v7; // [esp-3Ch] [ebp-32Ch]
-  int v8; // [esp-38h] [ebp-328h]
-  int v9; // [esp-34h] [ebp-324h]
-  int v10; // [esp-30h] [ebp-320h]
-  int v11; // [esp-2Ch] [ebp-31Ch]
-  int v12; // [esp-28h] [ebp-318h]
-  int v13; // [esp-24h] [ebp-314h]
-  int v14; // [esp-20h] [ebp-310h]
-  int v15; // [esp-1Ch] [ebp-30Ch]
-  int v16; // [esp-18h] [ebp-308h]
-  int v17; // [esp-14h] [ebp-304h]
-  int v18; // [esp-10h] [ebp-300h]
-  int v19; // [esp-Ch] [ebp-2FCh]
-  int v20; // [esp-8h] [ebp-2F8h]
-  int v21; // [esp-4h] [ebp-2F4h]
-  char *v22; // [esp+4h] [ebp-2ECh]
-  int v23; // [esp+8h] [ebp-2E8h]
-  int v24; // [esp+Ch] [ebp-2E4h]
-  int v25; // [esp+10h] [ebp-2E0h]
-  CEvn_Event *v26; // [esp+14h] [ebp-2DCh]
-  int v27; // [esp+1Ch] [ebp-2D4h]
-  int v28; // [esp+20h] [ebp-2D0h]
-  int PlayerName; // [esp+24h] [ebp-2CCh]
-  INetworkEngine *v30; // [esp+28h] [ebp-2C8h]
-  int v31; // [esp+30h] [ebp-2C0h]
-  void *v32; // [esp+34h] [ebp-2BCh]
-  int v33; // [esp+38h] [ebp-2B8h]
-  CGameType *v34; // [esp+3Ch] [ebp-2B4h]
-  void *v35; // [esp+40h] [ebp-2B0h]
-  int v36; // [esp+44h] [ebp-2ACh]
-  INetworkEngine *v37; // [esp+48h] [ebp-2A8h]
-  int v38; // [esp+4Ch] [ebp-2A4h]
-  INetworkEngine *v39; // [esp+50h] [ebp-2A0h]
-  void *v40; // [esp+54h] [ebp-29Ch]
-  int v41; // [esp+58h] [ebp-298h]
-  CGameType *v42; // [esp+5Ch] [ebp-294h]
-  void *v43; // [esp+60h] [ebp-290h]
-  int v44; // [esp+64h] [ebp-28Ch]
-  INetworkEngine *v45; // [esp+68h] [ebp-288h]
+  std::wstring v6; // [esp-40h] [ebp-330h] BYREF
+  BOOL v7; // [esp-24h] [ebp-314h]
+  int v8; // [esp-20h] [ebp-310h]
+  int v9; // [esp-1Ch] [ebp-30Ch]
+  int v10; // [esp-18h] [ebp-308h]
+  int v11; // [esp-14h] [ebp-304h]
+  DWORD v12; // [esp-10h] [ebp-300h]
+  int v13; // [esp-Ch] [ebp-2FCh]
+  int v14; // [esp-8h] [ebp-2F8h]
+  int v15; // [esp-4h] [ebp-2F4h]
+  std::wstring *v16; // [esp+4h] [ebp-2ECh]
+  int v17; // [esp+8h] [ebp-2E8h]
+  void *v18; // [esp+Ch] [ebp-2E4h]
+  INetworkEngine *v19; // [esp+10h] [ebp-2E0h]
+  struct CEvn_Event *v20; // [esp+14h] [ebp-2DCh]
+  int v21; // [esp+1Ch] [ebp-2D4h]
+  std::wstring *v22; // [esp+20h] [ebp-2D0h]
+  std::wstring *PlayerName; // [esp+24h] [ebp-2CCh]
+  INetworkEngine *v24; // [esp+28h] [ebp-2C8h]
+  INetworkEngine *v25; // [esp+30h] [ebp-2C0h]
+  void *v26; // [esp+34h] [ebp-2BCh]
+  CGameType *v27; // [esp+38h] [ebp-2B8h]
+  CGameType *v28; // [esp+3Ch] [ebp-2B4h]
+  void *v29; // [esp+40h] [ebp-2B0h]
+  CGameType *v30; // [esp+44h] [ebp-2ACh]
+  INetworkEngine *v31; // [esp+48h] [ebp-2A8h]
+  int v32; // [esp+4Ch] [ebp-2A4h]
+  INetworkEngine *v33; // [esp+50h] [ebp-2A0h]
+  void *v34; // [esp+54h] [ebp-29Ch]
+  CGameType *v35; // [esp+58h] [ebp-298h]
+  CGameType *v36; // [esp+5Ch] [ebp-294h]
+  void *v37; // [esp+60h] [ebp-290h]
+  CGameType *v38; // [esp+64h] [ebp-28Ch]
+  INetworkEngine *v39; // [esp+68h] [ebp-288h]
   void *C; // [esp+6Ch] [ebp-284h]
-  int (__thiscall ***v47)(_DWORD, int); // [esp+70h] [ebp-280h]
-  bool v48; // [esp+7Bh] [ebp-275h]
+  INetworkEngine *v41; // [esp+70h] [ebp-280h]
+  char v42; // [esp+7Bh] [ebp-275h]
   int i; // [esp+7Ch] [ebp-274h]
-  int v50; // [esp+80h] [ebp-270h]
-  char v51; // [esp+85h] [ebp-26Bh]
-  char v52; // [esp+86h] [ebp-26Ah]
+  int v44; // [esp+80h] [ebp-270h]
+  char v45; // [esp+85h] [ebp-26Bh]
+  char v46; // [esp+86h] [ebp-26Ah]
   char MapData; // [esp+87h] [ebp-269h]
-  CGuiGameState *v54; // [esp+88h] [ebp-268h]
-  char v55; // [esp+8Eh] [ebp-262h]
-  char v56; // [esp+8Fh] [ebp-261h]
-  _BYTE v57[28]; // [esp+90h] [ebp-260h] BYREF
-  CEvn_Event v58; // [esp+ACh] [ebp-244h] BYREF
-  char v59[28]; // [esp+C4h] [ebp-22Ch] BYREF
+  CGuiGameState *v48; // [esp+88h] [ebp-268h]
+  char v49; // [esp+8Eh] [ebp-262h]
+  char v50; // [esp+8Fh] [ebp-261h]
+  std::wstring v51; // [esp+90h] [ebp-260h] BYREF
+  CEvn_Event v52; // [esp+ACh] [ebp-244h] BYREF
+  std::wstring v53; // [esp+C4h] [ebp-22Ch] BYREF
   char Buffer[512]; // [esp+E0h] [ebp-210h] BYREF
-  int v61; // [esp+2ECh] [ebp-4h]
+  int v55; // [esp+2ECh] [ebp-4h]
 
-  v54 = this;
-  v50 = a2->m_iEventId - 11;
-  switch ( v50 )
+  v48 = this;
+  v44 = a2->m_iEventId - 11;
+  switch ( v44 )
   {
     case 0:
       if ( (unsigned __int16)a2->m_wParam != 27 )
         goto CStateBriefing__OnEvent___def_18A23F6;
-      v26 = CEvn_Event::CEvn_Event(&v58, 0x70u, 0, 0, 0);
-      v61 = 0;
-      IEventEngine::SendAMessage(g_pEvnEngine, v26);
-      v61 = -1;
-      CEvn_Event::~CEvn_Event(&v58);
+      v20 = CEvn_Event::CEvn_Event(&v52, 0x70u, 0, 0, 0);
+      v55 = 0;
+      IEventEngine::SendAMessage(g_pEvnEngine, v20);
+      v55 = -1;
+      CEvn_Event::~CEvn_Event(&v52);
       result = 1;
       break;
     case 101:
       CSoundManager::StopMusic(g_pSoundManager);
-      CSoundManager::StopSounds((CSoundManager *)g_pSoundManager);
+      CSoundManager::StopSounds(g_pSoundManager);
       if ( byte_402C9F4 )
       {
         if ( g_pGameType )
         {
-          v36 = g_pGameType;
-          v44 = g_pGameType;
-          v35 = delete (CGameType *)g_pGameType;
+          v30 = g_pGameType;
+          v38 = g_pGameType;
+          v29 = delete g_pGameType;
           g_pGameType = 0;
         }
-        if ( *((_DWORD *)v54 + 1) == 4 )
-          CGameStateHandler::Switch((int)CStateCampaignDark::DynamicCreateFunc, 0);
+        if ( *((_DWORD *)v48 + 1) == 4 )
+          CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateCampaignDark::DynamicCreateFunc, 0);
         else
-          CGameStateHandler::Switch((int)CStateCampaign3X3::DynamicCreateFunc, 0);
+          CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateCampaign3X3::DynamicCreateFunc, 0);
         result = 1;
       }
       else
       {
         if ( g_pNetworkEngine )
         {
-          v25 = g_pNetworkEngine;
-          v38 = (**(int (__thiscall ***)(int, int))g_pNetworkEngine)(g_pNetworkEngine, 1);
+          v19 = g_pNetworkEngine;
+          v32 = (**(int (__thiscall ***)(INetworkEngine *, int))g_pNetworkEngine)(g_pNetworkEngine, 1);
           g_pNetworkEngine = 0;
         }
         C = operator new(0x18u);
-        v61 = 1;
+        v55 = 1;
         if ( C )
-          v45 = INetworkEngine::INetworkEngine((INetworkEngine *)C, 0);
+          v39 = INetworkEngine::INetworkEngine((INetworkEngine *)C, 0);
         else
-          v45 = 0;
-        v37 = v45;
-        v61 = -1;
-        g_pNetworkEngine = (int)v45;
+          v39 = 0;
+        v31 = v39;
+        v55 = -1;
+        g_pNetworkEngine = v39;
         INetworkEngine::Start(1, 0, 0, 0);
-        CGameStateHandler::Switch((int)CStateLobbyGameSettings::DynamicCreateFunc, 1);
+        CGameStateHandler::Switch(
+          (struct CGameState *(__cdecl *)(void *))CStateLobbyGameSettings::DynamicCreateFunc,
+          (void *)1);
         CLanLobby::Communicate(1051, 0);
         result = 1;
       }
       break;
     case 102:
-      CSoundManager::StopSounds((CSoundManager *)g_pSoundManager);
-      IGfxEngine::SetCursorShape((IGfxEngine *)g_pGfxEngine, 1, 4);
+      CSoundManager::StopSounds(g_pSoundManager);
+      IGfxEngine::SetCursorShape(g_pGfxEngine, 1, 4u);
       if ( byte_402C9F4 )
       {
-        CGfxManager::DisableGfxFile((CGfxManager *)g_pGfxManager, 1);
+        CGfxManager::DisableGfxFile(g_pGfxManager, 1);
         if ( (unsigned __int8)CStateLobbyGameSettings::CopyDefaultUserFlags() )
         {
-          CGfxManager::EnableGfxFile((CGfxManager *)g_pGfxManager, 1u, 8, 1, 0xFFFFFFFF);
-          v43 = operator new(0x620u);
-          v61 = 2;
-          if ( v43 )
-            v42 = CGameType::CGameType((CGameType *)v43);
+          CGfxManager::EnableGfxFile(g_pGfxManager, 1u, 8, 1u, -1);
+          v37 = operator new(0x620u);
+          v55 = 2;
+          if ( v37 )
+            v36 = CGameType::CGameType((CGameType *)v37);
           else
-            v42 = 0;
-          v34 = v42;
-          v61 = -1;
-          g_pGameType = (int)v42;
-          v56 = 0;
-          v23 = 256;
-          v21 = *((_DWORD *)v54 + 2) + 1;
-          v3 = (const char *)std::wstring::c_str((_Cnd_internal_imp_t *)((char *)&stru_402C9F8
-                                                                       + 28 * *((_DWORD *)v54 + 1)
-                                                                       - 28));
-          snwprintf(Buffer, 0xFFu, v3, v21);
-          std::wstring::wstring(v59);
-          v61 = 3;
-          if ( (*(unsigned __int8 (__thiscall **)(void *, char *, char *, int))(*(_DWORD *)g_pCDDrive + 8))(
-                 g_pCDDrive,
-                 v59,
-                 Buffer,
-                 3145732) )
+            v36 = 0;
+          v28 = v36;
+          v55 = -1;
+          g_pGameType = v36;
+          v50 = 0;
+          v17 = 256;
+          v15 = *((_DWORD *)v48 + 2) + 1;
+          v3 = std::wstring::c_str(&stru_402C9F8 + *((_DWORD *)v48 + 1) - 1);
+          snwprintf(Buffer, 0xFFu, (const char *const)v3, v15);
+          std::wstring::wstring(&v53);
+          v55 = 3;
+          if ( g_pCDDrive->GetCDPath(g_pCDDrive, (char *)&v53, Buffer, 3145732) )
           {
-            v21 = 0;
-            v20 = 0;
-            v19 = -1;
-            v18 = s_uAIDifficulty;
-            v17 = 0;
-            v16 = 1;
             v15 = 0;
             v14 = 0;
-            v13 = 1;
-            v22 = &v6;
-            v24 = std::wstring::wstring((int)v59);
-            MapData = CGameType::LoadMapData(v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16, v17, v18, v19, v20, v21);
-            v56 = MapData;
+            v13 = -1;
+            v12 = s_uAIDifficulty;
+            v11 = 0;
+            v10 = 1;
+            v9 = 0;
+            v8 = 0;
+            v7 = 1;
+            v16 = &v6;
+            v18 = std::wstring::wstring(&v6, &v53);
+            MapData = CGameType::LoadMapData(g_pGameType, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15);
+            v50 = MapData;
           }
-          if ( v56 )
+          if ( v50 )
           {
-            IGuiEngine::EnableEventInput((IGuiEngine *)g_pGUIEngine, 0);
+            IGuiEngine::EnableEventInput(g_pGUIEngine, 0);
             if ( g_pNetworkEngine )
             {
-              v31 = g_pNetworkEngine;
-              v47 = (int (__thiscall ***)(_DWORD, int))g_pNetworkEngine;
-              v27 = (**v47)(v47, 1);
+              v25 = g_pNetworkEngine;
+              v41 = g_pNetworkEngine;
+              v21 = (**(int (__thiscall ***)(INetworkEngine *, int))v41)(v41, 1);
               g_pNetworkEngine = 0;
             }
-            v40 = operator new(0x18u);
-            LOBYTE(v61) = 4;
-            if ( v40 )
-              v39 = INetworkEngine::INetworkEngine((INetworkEngine *)v40, 0);
+            v34 = operator new(0x18u);
+            LOBYTE(v55) = 4;
+            if ( v34 )
+              v33 = INetworkEngine::INetworkEngine((INetworkEngine *)v34, 0);
             else
-              v39 = 0;
-            v30 = v39;
-            LOBYTE(v61) = 3;
-            g_pNetworkEngine = (int)v39;
-            *(_DWORD *)(g_pGameType + 112) = *(_DWORD *)(g_pGameType + 852);
-            *(_DWORD *)(g_pGameType + 188) = INetworkEngine::GetLocalIP((CGameHost **)g_pNetworkEngine);
+              v33 = 0;
+            v24 = v33;
+            LOBYTE(v55) = 3;
+            g_pNetworkEngine = v33;
+            g_pGameType->m_iActualPlayerCount = g_pGameType->m_iMapMaxNumPlayers;
+            g_pGameType->m_sPlayerIP[0] = (DWORD)INetworkEngine::GetLocalIP((CGameHost **)g_pNetworkEngine);
             Instance = (OnlineManager *)OnlineManager::GetInstance();
-            *(_DWORD *)(g_pGameType + 224) = OnlineManager::GetLocalPeerId(Instance);
-            PlayerName = CGameSettings::GetPlayerName((int)v57);
-            v28 = PlayerName;
-            LOBYTE(v61) = 5;
-            CGameType::SetPlayerName(0, PlayerName);
-            LOBYTE(v61) = 3;
-            std::wstring::~wstring(v57);
-            *(_DWORD *)(g_pGameType + 740) = *((_DWORD *)v54 + 1);
-            *(_DWORD *)(g_pGameType + 744) = *((_DWORD *)v54 + 2);
-            *(_DWORD *)(g_pGameType + 692) = 3;
-            for ( i = 0; i < *(_DWORD *)(g_pGameType + 852); ++i )
-              *(_BYTE *)(i + g_pGameType + 440) = 0;
-            INetworkEngine::Start(1, 1, *(_DWORD *)(g_pGameType + 852), 0);
-            CGameStateHandler::Switch((int)CStateGame::DynamicCreateFunc, 0);
-            v51 = 1;
-            v61 = -1;
-            std::wstring::~wstring(v59);
-            result = v51;
+            g_pGameType->m_sPlayerPeerId[0] = OnlineManager::GetLocalPeerId(Instance);
+            PlayerName = (std::wstring *)CGameSettings::GetPlayerName((int)&v51);
+            v22 = PlayerName;
+            LOBYTE(v55) = 5;
+            CGameType::SetPlayerName(g_pGameType, 0, PlayerName);
+            LOBYTE(v55) = 3;
+            std::wstring::~wstring(&v51);
+            g_pGameType->m_iCampaignType = *((_DWORD *)v48 + 1);
+            g_pGameType->dword2E8 = *((_DWORD *)v48 + 2);
+            g_pGameType->m_iGameType = 3;
+            for ( i = 0; i < g_pGameType->m_iMapMaxNumPlayers; ++i )
+              g_pGameType->m_sPlayerSlot10[i] = 0;
+            INetworkEngine::Start(1, 1, g_pGameType->m_iMapMaxNumPlayers, 0);
+            CGameStateHandler::Switch(CStateGame::DynamicCreateFunc, 0);
+            v45 = 1;
+            v55 = -1;
+            std::wstring::~wstring(&v53);
+            result = v45;
           }
           else
           {
             v4 = g_pStringEngine->GetString(g_pStringEngine, 2394);
             std::string::operator=(&g_iMessageBoxStringID, v4);
-            v55 = IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 10);
-            v55 = IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 20, GuiDlgMainMessageBoxProc);
-            if ( !v55 && BBSupportDbgReport(2, "main\\states\\StateBriefing.cpp", 405, "bRet") == 1 )
+            v49 = IGuiEngine::CloseDialog(g_pGUIEngine, 10);
+            v49 = IGuiEngine::OpenDialog(g_pGUIEngine, 20, (bool (__cdecl *)(int, int, int))GuiDlgMainMessageBoxProc);
+            if ( !v49 && BBSupportDbgReport(2, "main\\states\\StateBriefing.cpp", 405, "bRet") == 1 )
               __debugbreak();
             BBSupportTracePrintF(3, "Campaign map '%s' not found!", Buffer);
-            IGfxEngine::SetCursorShape((IGfxEngine *)g_pGfxEngine, 1, 0);
+            IGfxEngine::SetCursorShape(g_pGfxEngine, 1, 0);
             if ( g_pGameType )
             {
-              v33 = g_pGameType;
-              v41 = g_pGameType;
-              v32 = delete (CGameType *)g_pGameType;
+              v27 = g_pGameType;
+              v35 = g_pGameType;
+              v26 = delete g_pGameType;
               g_pGameType = 0;
             }
-            v52 = 1;
-            v61 = -1;
-            std::wstring::~wstring(v59);
-            result = v52;
+            v46 = 1;
+            v55 = -1;
+            std::wstring::~wstring(&v53);
+            result = v46;
           }
         }
         else
         {
-          CGameStateHandler::Switch((int)CStateMessageBox::DynamicCreateFunc, 2398);
+          CGameStateHandler::Switch(
+            (struct CGameState *(__cdecl *)(void *))CStateMessageBox::DynamicCreateFunc,
+            (void *)0x95E);
           result = 1;
         }
       }
       else
       {
-        CGameStateHandler::Switch((int)CStateGame::DynamicCreateFunc, 0);
+        CGameStateHandler::Switch(CStateGame::DynamicCreateFunc, 0);
         result = 1;
       }
       break;
     case 103:
-      v48 = IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 20);
-      CGuiGameState::SetupGui(v54, L"Menu\\GUISetStartscreens.dat", 10, GuiDlgMainBriefingProc);
+      v42 = IGuiEngine::CloseDialog(g_pGUIEngine, 20);
+      CGuiGameState::SetupGui(
+        v48,
+        L"Menu\\GUISetStartscreens.dat",
+        10,
+        (bool (__cdecl *)(int, int, int))GuiDlgMainBriefingProc);
       result = 1;
       break;
     case 109:
-      *((_BYTE *)v54 + 12) = 0;
+      *((_BYTE *)v48 + 12) = 0;
       result = 1;
       break;
     default:
 CStateBriefing__OnEvent___def_18A23F6:
-      result = CGuiGameState::OnEvent(v54, a2);
+      result = CGuiGameState::OnEvent(v48, a2);
       break;
   }
   return result;

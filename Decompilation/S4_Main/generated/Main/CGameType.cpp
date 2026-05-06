@@ -363,8 +363,8 @@ void  CGameType::SetPlayerName(int _iPlayerIndex, std::wstring & _swpPlayerName)
 
 
 // address=[0x1491490]
-// Decompiled from char __thiscall CGameType::LoadMapData(  CGameType *this,  std::wstring a2,  bool _bAIActive,  int a4,  unsigned __int8 a5,  char a6,  int _iSetupIndex,  DWORD _iAIDifficulty,  int a9,  unsigned __int8 a10,  char a11)
-bool  CGameType::LoadMapData(std::wstring a2, bool _bAIActive, unsigned int a4, bool a5, bool a6, int _iSetupIndex, int _iAIDifficulty, int a9, bool a10, bool a11) {
+// Decompiled from char __thiscall CGameType::LoadMapData(  CGameType *this,  std::wstring _sMapName,  bool _bAIActive,  int a4,  unsigned __int8 a5,  char a6,  int _iSetupIndex,  DWORD _iAIDifficulty,  int a9,  bool _bIsLadderGame,  bool _bIsClanGame)
+bool  CGameType::LoadMapData(std::wstring _sMapName, bool _bAIActive, unsigned int a4, bool a5, bool a6, int _iSetupIndex, int _iAIDifficulty, int a9, bool _bIsLadderGame, bool _bIsClanGame) {
   
   wchar_t *v12; // eax
   int v13; // eax
@@ -374,7 +374,7 @@ bool  CGameType::LoadMapData(std::wstring a2, bool _bAIActive, unsigned int a4, 
   int v17; // [esp-4h] [ebp-8D1Ch]
   struct tagVARIANT v18; // [esp+8h] [ebp-8D10h] BYREF
   int v19; // [esp+18h] [ebp-8D00h]
-  std::wstring *v20; // [esp+1Ch] [ebp-8CFCh]
+  std::wstring *AIName; // [esp+1Ch] [ebp-8CFCh]
   signed int v21; // [esp+20h] [ebp-8CF8h]
   signed int v22; // [esp+24h] [ebp-8CF4h]
   struct std::string *v23; // [esp+28h] [ebp-8CF0h]
@@ -383,14 +383,13 @@ bool  CGameType::LoadMapData(std::wstring a2, bool _bAIActive, unsigned int a4, 
   void *dword3F8; // [esp+34h] [ebp-8CE4h]
   void *C; // [esp+38h] [ebp-8CE0h]
   size_t v28; // [esp+3Ch] [ebp-8CDCh]
-  std::wstring *AIName; // [esp+40h] [ebp-8CD8h]
+  std::wstring *a2; // [esp+40h] [ebp-8CD8h]
   S4::CMapFile *pMapFile; // [esp+44h] [ebp-8CD4h]
   BOOL v31; // [esp+48h] [ebp-8CD0h]
   BSTR swpSetupName; // [esp+4Ch] [ebp-8CCCh] BYREF
   BOOL v33; // [esp+50h] [ebp-8CC8h]
   size_t v34; // [esp+54h] [ebp-8CC4h]
-  unsigned int v35; // [esp+58h] [ebp-8CC0h]
-  unsigned int v36; // [esp+5Ch] [ebp-8CBCh]
+  unsigned int iRequestLang; // [esp+5Ch] [ebp-8CBCh] MAPDST
   int v37; // [esp+60h] [ebp-8CB8h]
   int StringId; // [esp+64h] [ebp-8CB4h]
   int v39; // [esp+68h] [ebp-8CB0h]
@@ -400,7 +399,7 @@ bool  CGameType::LoadMapData(std::wstring a2, bool _bAIActive, unsigned int a4, 
   _BYTE *v43; // [esp+78h] [ebp-8CA0h]
   wchar_t *swpPlayerName; // [esp+7Ch] [ebp-8C9Ch] BYREF
   int v45; // [esp+80h] [ebp-8C98h]
-  int v46; // [esp+84h] [ebp-8C94h] BYREF
+  int iGameType; // [esp+84h] [ebp-8C94h] BYREF
   int v47; // [esp+88h] [ebp-8C90h] BYREF
   int v48; // [esp+8Ch] [ebp-8C8Ch] BYREF
   char *v49; // [esp+90h] [ebp-8C88h]
@@ -418,40 +417,42 @@ bool  CGameType::LoadMapData(std::wstring a2, bool _bAIActive, unsigned int a4, 
   char v61; // [esp+C3h] [ebp-8C55h]
   char *v62; // [esp+C4h] [ebp-8C54h]
   BSTR v63; // [esp+C8h] [ebp-8C50h]
-  int v64; // [esp+CCh] [ebp-8C4Ch] BYREF
-  char v65; // [esp+D0h] [ebp-8C48h]
+  int bIsCampaign; // [esp+CCh] [ebp-8C4Ch] BYREF
+  int bIsEditor; // [esp+CCh] [ebp-8C4Ch] SPLIT BYREF
+  int iMapProperty; // [esp+CCh] [ebp-8C4Ch] SPLIT BYREF
+  char v67; // [esp+D0h] [ebp-8C48h]
   signed int j; // [esp+D4h] [ebp-8C44h]
-  char v67; // [esp+DBh] [ebp-8C3Dh]
-  bool v68; // [esp+DCh] [ebp-8C3Ch]
-  bool v69; // [esp+DDh] [ebp-8C3Bh]
-  bool v70; // [esp+DEh] [ebp-8C3Ah]
-  bool v71; // [esp+DFh] [ebp-8C39h]
-  int v72; // [esp+E0h] [ebp-8C38h] BYREF
-  OLECHAR v73; // [esp+E4h] [ebp-8C34h]
+  char v69; // [esp+DBh] [ebp-8C3Dh]
+  bool v70; // [esp+DCh] [ebp-8C3Ch]
+  bool v71; // [esp+DDh] [ebp-8C3Bh]
+  bool v72; // [esp+DEh] [ebp-8C3Ah]
+  bool v73; // [esp+DFh] [ebp-8C39h]
+  T_S4_MAP_FLAGS iMapFlags; // [esp+E0h] [ebp-8C38h] BYREF
+  OLECHAR v75; // [esp+E4h] [ebp-8C34h]
   int i; // [esp+E8h] [ebp-8C30h]
-  bool v75; // [esp+EFh] [ebp-8C29h]
+  bool v77; // [esp+EFh] [ebp-8C29h]
   int m; // [esp+F0h] [ebp-8C28h]
-  _BYTE v78[184]; // [esp+F8h] [ebp-8C20h] BYREF
-  CFile v79; // [esp+1B0h] [ebp-8B68h] BYREF
-  std::wstring v80; // [esp+1F8h] [ebp-8B20h] BYREF
-  std::string v81; // [esp+214h] [ebp-8B04h] BYREF
-  std::wstring v82; // [esp+230h] [ebp-8AE8h] BYREF
-  std::wstring v83; // [esp+24Ch] [ebp-8ACCh] BYREF
+  _BYTE v80[184]; // [esp+F8h] [ebp-8C20h] BYREF
+  CFile v81; // [esp+1B0h] [ebp-8B68h] BYREF
+  std::wstring v82; // [esp+1F8h] [ebp-8B20h] BYREF
+  std::string v83; // [esp+214h] [ebp-8B04h] BYREF
+  std::wstring v84; // [esp+230h] [ebp-8AE8h] BYREF
+  std::wstring v85; // [esp+24Ch] [ebp-8ACCh] BYREF
   char Buffer[2048]; // [esp+268h] [ebp-8AB0h] BYREF
   char Destination[16384]; // [esp+A68h] [ebp-82B0h] BYREF
   char Dest[16384]; // [esp+4A68h] [ebp-42B0h] BYREF
-  char v87[256]; // [esp+8A68h] [ebp-2B0h] BYREF
-  char v88[144]; // [esp+8B68h] [ebp-1B0h] BYREF
-  char v89[144]; // [esp+8BF8h] [ebp-120h] BYREF
+  char v89[256]; // [esp+8A68h] [ebp-2B0h] BYREF
+  char v90[144]; // [esp+8B68h] [ebp-1B0h] BYREF
+  char v91[144]; // [esp+8BF8h] [ebp-120h] BYREF
   char Str[128]; // [esp+8C88h] [ebp-90h] BYREF
-  int v91; // [esp+8D14h] [ebp-4h]
+  int v93; // [esp+8D14h] [ebp-4h]
 
-  v91 = 0;
+  v93 = 0;
   CGameType::Init(this);
   v48 = 0;
   v47 = 0;
-  v46 = 0;
-  v72 = 0;
+  iGameType = 0;
+  iMapFlags = 0;
   this->m_bAIActive = _bAIActive;
   this->dword44 = a4;
   if ( _iAIDifficulty != -1 )
@@ -461,50 +462,50 @@ bool  CGameType::LoadMapData(std::wstring a2, bool _bAIActive, unsigned int a4, 
     else
       _iAIDifficulty = 2;
   }
-  std::wstring::wstring(&v83);
-  LOBYTE(v91) = 1;
+  std::wstring::wstring(&v85);
+  LOBYTE(v93) = 1;
   this->dword264 = 0;
   this->m_iMapCRC = 0;
   if ( (*(unsigned __int8 (__thiscall **)(void *, std::wstring *, std::wstring *))(*(_DWORD *)g_pRandomMaps + 32))(
          g_pRandomMaps,
-         &a2,
-         &v83) )
+         &_sMapName,
+         &v85) )
   {
     std::string::operator=(&stru_402C998, (char *)&byte_36FE4FB);
     std::string::operator=(&stru_402C9D0, (char *)&byte_36FE50F);
     std::string::operator=(&stru_402C97C, (char *)&byte_36FE5B2);
     std::string::operator=(&stru_402C9B4, (char *)&byte_36FE5B3);
-    std::wstring::operator=(&this->m_swMapName, &a2);
+    std::wstring::operator=(&this->m_swMapName, &_sMapName);
     if ( !(*(unsigned __int8 (__thiscall **)(void *, _BYTE *, std::wstring *))(*(_DWORD *)g_pRandomMaps + 16))(
             g_pRandomMaps,
-            v78,
-            &v83) )
+            v80,
+            &v85) )
     {
       BBSupportTracePrintF(0, "[MM] LoadMapData: couldn't GetParamsFromMapKey");
-      LOBYTE(v91) = 0;
-      std::wstring::~wstring(&v83);
-      v91 = -1;
-      std::wstring::~wstring(&a2);
+      LOBYTE(v93) = 0;
+      std::wstring::~wstring(&v85);
+      v93 = -1;
+      std::wstring::~wstring(&_sMapName);
       return 0;
     }
-    (**(void (__thiscall ***)(void *, _BYTE *))g_pRandomMaps)(g_pRandomMaps, v78);
+    (**(void (__thiscall ***)(void *, _BYTE *))g_pRandomMaps)(g_pRandomMaps, v80);
     if ( !(*(unsigned __int8 (__thiscall **)(void *))(*(_DWORD *)g_pRandomMaps + 8))(g_pRandomMaps) )
     {
       BBSupportTracePrintF(0, "[MM] LoadMapData: couldn't GenereateRandomMap");
-      LOBYTE(v91) = 0;
-      std::wstring::~wstring(&v83);
-      v91 = -1;
-      std::wstring::~wstring(&a2);
+      LOBYTE(v93) = 0;
+      std::wstring::~wstring(&v85);
+      v93 = -1;
+      std::wstring::~wstring(&_sMapName);
       return 0;
     }
     pMapFile = (S4::CMapFile *)(*(int (__thiscall **)(void *))(*(_DWORD *)g_pRandomMaps + 12))(g_pRandomMaps);
     if ( !pMapFile )
     {
       BBSupportTracePrintF(0, "[MM] LoadMapData: pMapFile == 0");
-      LOBYTE(v91) = 0;
-      std::wstring::~wstring(&v83);
-      v91 = -1;
-      std::wstring::~wstring(&a2);
+      LOBYTE(v93) = 0;
+      std::wstring::~wstring(&v85);
+      v93 = -1;
+      std::wstring::~wstring(&_sMapName);
       return 0;
     }
     Chunk = S4::CMapFile::LoadChunk(pMapFile, 0xDCu, 0);
@@ -548,9 +549,9 @@ bool  CGameType::LoadMapData(std::wstring a2, bool _bAIActive, unsigned int a4, 
       }
       if ( this->m_sPlayerType[i] != 1 )
       {
-        AIName = (std::wstring *)CGameSettings::GetAIName((int)&v80, i);
-        std::wstring::operator=(&this->m_swpRealPlayerNames[i], AIName);
-        std::wstring::~wstring(&v80);
+        a2 = (std::wstring *)CGameSettings::GetAIName((int)&v82, i);
+        std::wstring::operator=(&this->m_swpRealPlayerNames[i], a2);
+        std::wstring::~wstring(&v82);
       }
     }
     this->m_uiNumberAlliances = this->m_iMapMaxNumPlayers;
@@ -560,19 +561,19 @@ bool  CGameType::LoadMapData(std::wstring a2, bool _bAIActive, unsigned int a4, 
   }
   else
   {
-    std::wstring::operator=(&this->m_swMapName, &a2);
+    std::wstring::operator=(&this->m_swMapName, &_sMapName);
     v17 = a5;
     p_dword264 = &this->dword264;
     v12 = std::wstring::c_str(&this->m_swMapName);
-    MA_OpenMapFile(v12, (int)p_dword264, (int)&reportedError, v17);
+    MA_OpenMapFile(v12, p_dword264, &reportedError, v17);
     if ( reportedError )
     {
       CTrace::Print("CGameType.cpp: Unable to open Map via Mapreader. Reported error %d", reportedError);
       v61 = 0;
-      LOBYTE(v91) = 0;
-      std::wstring::~wstring(&v83);
-      v91 = -1;
-      std::wstring::~wstring(&a2);
+      LOBYTE(v93) = 0;
+      std::wstring::~wstring(&v85);
+      v93 = -1;
+      std::wstring::~wstring(&_sMapName);
       return v61;
     }
     MA_GetDataChecksums(&v48, &v47);
@@ -586,25 +587,20 @@ bool  CGameType::LoadMapData(std::wstring a2, bool _bAIActive, unsigned int a4, 
       this->m_iMapBuildingXMLVersion = 0;
       this->m_iMapObjectXMLVersion = 0;
     }
-    MA_IsCampaignMap(&v64);
-    v71 = v64 != 0;
-    this->m_bIsCampaignMap = v64 != 0;
-    MA_IsEditorMap(&v64);
-    v70 = v64 != 0;
-    this->m_bIsEditorMap = v64 != 0;
-    MA_GetMapProperty(1, &v64);
-    v69 = v64 != 0;
-    this->m_bIsAddOnMap = v64 != 0;
-    MA_GetMapProperty(2, &v64);
-    v68 = v64 != 0;
-    this->m_bBlueByteAddOnMap = v64 != 0;
-    MA_GetMapData(
-      (int)&this->m_iWidthHeight,
-      (int)&v46,
-      (int)&v72,
-      (int)&this->m_iStartResources,
-      (int)&this->m_bIsEmptyMap);
-    if ( (v46 & 2) != 0 )
+    MA_IsCampaignMap(&bIsCampaign);
+    v73 = bIsCampaign != 0;
+    this->m_bIsCampaignMap = bIsCampaign != 0;
+    MA_IsEditorMap(&bIsEditor);
+    v72 = bIsEditor != 0;
+    this->m_bIsEditorMap = bIsEditor != 0;
+    MA_GetMapProperty(MAP_PROPERTY_ADDON_MAP, &iMapProperty);
+    v71 = iMapProperty != 0;
+    this->m_bIsAddOnMap = iMapProperty != 0;
+    MA_GetMapProperty(MAP_PROPERTY_BB_ADDON_MAP, &iMapProperty);
+    v70 = iMapProperty != 0;
+    this->m_bBlueByteAddOnMap = iMapProperty != 0;
+    MA_GetMapData(&this->m_iWidthHeight, &iGameType, (int *)&iMapFlags, &this->m_iStartResources, &this->m_bIsEmptyMap);
+    if ( (iGameType & 2) != 0 )
       v41 = 2;
     else
       v41 = 1;
@@ -619,46 +615,48 @@ bool  CGameType::LoadMapData(std::wstring a2, bool _bAIActive, unsigned int a4, 
     std::string::operator=(&this->std__string3AC, (char *)&byte_36FE683);
     memset(Destination, 0, sizeof(Destination));
     memset(Dest, 0, sizeof(Dest));
-    v75 = 0;
+    v77 = 0;
     pbstr = 0;
     MA_GetDescriptionText(0, &pbstr);
     if ( pbstr )
     {
       memset(Str, 0, sizeof(Str));
       v63 = pbstr;
-      for ( j = SysStringLen(pbstr); j > 0 && *v63 <= 0x20u; --j )
+      for ( j = SysStringLen(pbstr); j > 0 && *v63 <= (unsigned int)' '; --j )
         ++v63;
       while ( j > 0 && v63[j - 1] <= 0x20u )
         --j;
-      v40 = j >= 2 && (unsigned int)j < 0x80 && *v63 == 36 && v63[j - 1] == 36;
-      v75 = v40;
+      v40 = j >= 2 && (unsigned int)j < 0x80 && *v63 == '$' && v63[j - 1] == '$';
+      v77 = v40;
       if ( v40 )
       {
         for ( k = 1; k < j - 1; ++k )
         {
-          v73 = v63[k];
-          if ( (v73 < 0x41u || v73 > 0x5Au) && (v73 < 0x30u || v73 > 0x39u) && v73 != 95 )
+          v75 = v63[k];
+          if ( (v75 < (unsigned int)'A' || v75 > (unsigned int)'Z')
+            && (v75 < (unsigned int)'0' || v75 > (unsigned int)'9')
+            && v75 != '_' )
           {
-            v75 = 0;
+            v77 = 0;
             break;
           }
-          v89[k + 143] = v73;
+          v91[k + 143] = v75;
         }
       }
-      if ( v75 )
+      if ( v77 )
       {
         v50 = strlen(Str);
-        if ( v50 > 5 && !j__strcmp(&v89[v50 + 139], "_DESC") && CS4DefineNames::GetStringId(Str) >= 0 )
+        if ( v50 > 5 && !j__strcmp(&v91[v50 + 139], "_DESC") && CS4DefineNames::GetStringId(Str) >= 0 )
         {
           v39 = v50 - 5;
           if ( (unsigned int)(v50 - 5) >= 0x80 )
             report_rangecheckfailure();
           Str[v39] = 0;
         }
-        snprintf(v88, 0x90u, "%s_DESC", Str);
-        snprintf(v89, 0x90u, "%s_TIPS", Str);
-        StringId = CS4DefineNames::GetStringId(v88);
-        v37 = CS4DefineNames::GetStringId(v89);
+        snprintf(v90, 0x90u, "%s_DESC", Str);
+        snprintf(v91, 0x90u, "%s_TIPS", Str);
+        StringId = CS4DefineNames::GetStringId(v90);
+        v37 = CS4DefineNames::GetStringId(v91);
         if ( StringId >= 0 )
         {
           Source = g_pStringEngine->GetString(g_pStringEngine, StringId);
@@ -680,20 +678,19 @@ bool  CGameType::LoadMapData(std::wstring a2, bool _bAIActive, unsigned int a4, 
       }
       SysFreeString(pbstr);
     }
-    if ( !v75 )
+    if ( !v77 )
     {
       if ( CGameSettings::GetLanguage() == 1 )
-        v36 = 0;
+        iRequestLang = 0;
       else
-        v36 = 2;
-      v35 = v36;
+        iRequestLang = 2;
       bstrString = 0;
-      MA_GetDescriptionText(v36, &bstrString);
+      MA_GetDescriptionText(iRequestLang, &bstrString);
       v21 = j__wcstombs(Destination, bstrString, 0x3FFEu);
       if ( v21 <= 0 )
         memset(Destination, 0, sizeof(Destination));
       SysFreeString(bstrString);
-      MA_GetDescriptionText(v35 + 1, &bstrString);
+      MA_GetDescriptionText(iRequestLang + 1, &bstrString);
       v22 = j__wcstombs(Dest, bstrString, 0x3FFEu);
       if ( v22 <= 0 )
         memset(Dest, 0, sizeof(Dest));
@@ -721,16 +718,16 @@ bool  CGameType::LoadMapData(std::wstring a2, bool _bAIActive, unsigned int a4, 
     if ( Dest[0] )
       std::string::operator=(&this->std__string390, Dest);
     MA_GetNumberOfSetups(&this->m_iNumberOfSetups);
-    MA_GetNumberOfPlayers((int)&this->m_iMapMaxNumPlayers);
+    MA_GetNumberOfPlayers(&this->m_iMapMaxNumPlayers);
     v45 = 0;
-    this->byte36A = (v72 & 1) != 0 && CGameType::IsEmptyMap(this);
-    this->byte36B = (v72 & 2) != 0;
-    this->byte36C = (v72 & 4) == 0 && CGameType::IsEmptyMap(this);
-    this->byte369 = (v72 & 8) == 0;
-    this->m_bBlueByteAddOnMap = (v72 & 0x40) != 0;
-    this->m_bBlueByteMCD2Map = (v72 & 0x100) != 0;
-    this->m_bIsMCD2TextureSet = (v72 & 0x200) != 0;
-    v67 = 0;
+    this->byte36A = (iMapFlags & MAP_FLAGS_U0) != 0 && CGameType::IsEmptyMap(this);
+    this->byte36B = (iMapFlags & MAP_FLAGS_U1) != 0;
+    this->byte36C = (iMapFlags & MAP_FLAGS_U2) == 0 && CGameType::IsEmptyMap(this);
+    this->byte369 = (iMapFlags & MAP_FLAGS_U3) == 0;
+    this->m_bBlueByteAddOnMap = (iMapFlags & MAP_FLAGS_BB_ADDON_MAP) != 0;
+    this->m_bBlueByteMCD2Map = (iMapFlags & MAP_FLAGS_BB_MCD2_MAP) != 0;
+    this->m_bIsMCD2TextureSet = (iMapFlags & MAP_FLAGS_MCD2_TEXTURE_SET) != 0;
+    v69 = 0;
     v56 = 0;
     for ( m = 0; m < this->m_iMapMaxNumPlayers; ++m )
     {
@@ -755,14 +752,14 @@ bool  CGameType::LoadMapData(std::wstring a2, bool _bAIActive, unsigned int a4, 
         iTeam = 0;
       }
       this->m_sPlayerTeam[m] = iTeam;
-      v28 = j__wcstombs(v87, swpSetupName, 0x100u);
+      v28 = j__wcstombs(v89, swpSetupName, 0x100u);
       v34 = v28;
       if ( v28 >= 0x100 )
         report_rangecheckfailure();
-      v87[v34] = 0;
-      v23 = std::string::string(&v81, v87);
+      v89[v34] = 0;
+      v23 = std::string::string(&v83, v89);
       std::string::operator=(&this->m_swpTeamName, v23);
-      std::string::~string(&v81);
+      std::string::~string(&v83);
       if ( j__wcscmp(swpPlayerName, &String2) ) // Empty?
         std::wstring::operator=(&this->m_swpRealPlayerNames[m], swpPlayerName);
       v33 = iPlayerControl == 2;
@@ -772,7 +769,7 @@ bool  CGameType::LoadMapData(std::wstring a2, bool _bAIActive, unsigned int a4, 
         if ( iPlayerControl != 2 )
         {
           if ( m )
-            v67 = 1;
+            v69 = 1;
           ++v56;
         }
         this->gap3E6[m] = 0;
@@ -804,9 +801,9 @@ bool  CGameType::LoadMapData(std::wstring a2, bool _bAIActive, unsigned int a4, 
       if ( (this->m_sPlayerType[m] == 2 || this->m_sPlayerType[m] == 3)
         && (unsigned __int8)std::operator==<wchar_t>((int)this->m_swpRealPlayerNames[m].m_u, (wchar_t *)&word_36FEE98) )
       {
-        v20 = (std::wstring *)CGameSettings::GetAIName((int)&v82, m);
-        std::wstring::operator=(&this->m_swpRealPlayerNames[m], v20);
-        std::wstring::~wstring(&v82);
+        AIName = (std::wstring *)CGameSettings::GetAIName((int)&v84, m);
+        std::wstring::operator=(&this->m_swpRealPlayerNames[m], AIName);
+        std::wstring::~wstring(&v84);
       }
       if ( this->m_sPlayerTeam[m] > v45 )
         v45 = this->m_sPlayerTeam[m];
@@ -824,7 +821,7 @@ bool  CGameType::LoadMapData(std::wstring a2, bool _bAIActive, unsigned int a4, 
       SysFreeString(swpSetupName);
       SysFreeString(swpPlayerName);
     }
-    if ( this->m_iMapMaxNumPlayers == 1 || this->byte36B && this->byte36C || !v67 )
+    if ( this->m_iMapMaxNumPlayers == 1 || this->byte36B && this->byte36C || !v69 )
       this->byte35D = 1;
     if ( v56 >= 2 )
       this->byte35C = 1;
@@ -840,8 +837,8 @@ bool  CGameType::LoadMapData(std::wstring a2, bool _bAIActive, unsigned int a4, 
     }
     else
     {
-      this->m_bEconomyPossible = (v72 & 0x10) != 0;
-      this->m_bCompetetivePossible = (v72 & 0x20) != 0;
+      this->m_bEconomyPossible = (iMapFlags & 0x10) != 0;
+      this->m_bCompetetivePossible = (iMapFlags & 0x20) != 0;
     }
     if ( !_iSetupIndex && this->dword3F8 )
     {
@@ -866,14 +863,14 @@ bool  CGameType::LoadMapData(std::wstring a2, bool _bAIActive, unsigned int a4, 
       }
     }
     MA_CloseMapFile();
-    CFile::CFile(&v79);
-    LOBYTE(v91) = 2;
-    CFile::Open(&v79, &this->m_swMapName, CFile_BINARY|CFile_READ, UNUSED_ARG(), UNUSED_ARG());
-    v13 = CFile::Size(&v79);
+    CFile::CFile(&v81);
+    LOBYTE(v93) = 2;
+    CFile::Open(&v81, &this->m_swMapName, CFile_BINARY|CFile_READ, UNUSED_ARG(), UNUSED_ARG());
+    v13 = CFile::Size(&v81);
     this->m_iFileSize = v13;
-    CFile::Close(&v79, UNUSED_ARG(), UNUSED_ARG());
-    LOBYTE(v91) = 1;
-    CFile::~CFile(&v79);
+    CFile::Close(&v81, UNUSED_ARG(), UNUSED_ARG());
+    LOBYTE(v93) = 1;
+    CFile::~CFile(&v81);
   }
   for ( n = 0; n < this->m_iMapMaxNumPlayers; ++n )
     this->m_sPlayerColor[n] = n;
@@ -881,7 +878,7 @@ bool  CGameType::LoadMapData(std::wstring a2, bool _bAIActive, unsigned int a4, 
     this->m_bFreeSettlePossible = 1;
   if ( !this->m_bConflictPossible && this->m_bFreeSettlePossible && !this->m_bCooperationPossible )
   {
-    if ( a9 == 8 || (v72 & 0x80) != 0 )
+    if ( a9 == 8 || (iMapFlags & 0x80) != 0 )
     {
       this->m_iMode = 1;
       this->m_bConflictPossible = 1;
@@ -908,16 +905,16 @@ bool  CGameType::LoadMapData(std::wstring a2, bool _bAIActive, unsigned int a4, 
     __debugbreak();
   }
   this->m_bIsMapLoaded = 1;
-  v14 = (**(int (__thiscall ***)(void *, _DWORD, _DWORD, _DWORD, int, int))g_pMapCheck)(
+  v14 = (**(int (__thiscall ***)(void *, _DWORD, _DWORD, int, int, T_S4_MAP_FLAGS))g_pMapCheck)(
           g_pMapCheck,
           this->dword264,
           this->m_iMapMaxNumPlayers,
           this->m_iWidthHeight,
-          v46,
-          v72);
+          iGameType,
+          iMapFlags);
   this->m_iMapCRC = v14;
   v19 = 1024;
-  v15 = std::wstring::c_str(&a2);
+  v15 = std::wstring::c_str(&_sMapName);
   snwprintf(Buffer, 0x400u, L"\"%s\",", v15);
   BBSupportTracePrintF(
     1,
@@ -928,8 +925,8 @@ bool  CGameType::LoadMapData(std::wstring a2, bool _bAIActive, unsigned int a4, 
     v48,
     v47);
   CGameType::PatchMaps(this, _bAIActive);
-  v31 = a11 == 0;
-  if ( (v31 & a10) != 0 )
+  v31 = !_bIsClanGame;
+  if ( v31 && _bIsLadderGame )
   {
     this->byte36C = 0;
     this->byte36B = 0;
@@ -938,12 +935,12 @@ bool  CGameType::LoadMapData(std::wstring a2, bool _bAIActive, unsigned int a4, 
     this->m_sPlayerTeam[0] = 0;
     this->m_sPlayerTeam[1] = 1;
   }
-  v65 = 1;
-  LOBYTE(v91) = 0;
-  std::wstring::~wstring(&v83);
-  v91 = -1;
-  std::wstring::~wstring(&a2);
-  return v65;
+  v67 = 1;
+  LOBYTE(v93) = 0;
+  std::wstring::~wstring(&v85);
+  v93 = -1;
+  std::wstring::~wstring(&_sMapName);
+  return v67;
 }
 
 
@@ -971,7 +968,7 @@ bool  CGameType::IsMapAvailable(std::wstring & a2, int a3) {
   }
   std::wstring::operator=(&this->m_swMapName, a2);
   v4 = std::wstring::c_str(&this->m_swMapName);
-  MA_OpenMapFile(v4, (int)&v6, (int)&iError, 1);
+  MA_OpenMapFile(v4, &v6, &iError, 1);
   if ( iError )
   {
     CTrace::Print("CGameType.cpp: Unable to open Map via Mapreader. Reported error %d", iError);
@@ -985,8 +982,8 @@ bool  CGameType::IsMapAvailable(std::wstring & a2, int a3) {
     v12 = 0;
     v7 = 0;
     v8 = 0;
-    MA_GetNumberOfPlayers((int)&v9);
-    MA_GetMapData((int)&v10, (int)&v11, (int)&v12, (int)&v7, (int)&v8);
+    MA_GetNumberOfPlayers(&v9);
+    MA_GetMapData(&v10, &v11, &v12, &v7, &v8);
     v5 = (**(int (__thiscall ***)(void *, int, int, int, int, int))g_pMapCheck)(g_pMapCheck, v6, v9, v10, v11, v12);
     MA_CloseMapFile();
     return a3 == v5;

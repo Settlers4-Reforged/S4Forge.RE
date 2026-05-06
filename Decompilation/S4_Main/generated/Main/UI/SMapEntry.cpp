@@ -6,9 +6,9 @@
 // Decompiled from CLanLobbyMapSettings::SMapEntry *__thiscall CLanLobbyMapSettings::SMapEntry::SMapEntry(  CLanLobbyMapSettings::SMapEntry *this)
  CLanLobbyMapSettings::SMapEntry::SMapEntry(void) {
   
-  std::string::string();
-  std::wstring::wstring((char *)this + 28);
-  std::string::string();
+  std::string::string(&this->std__string0);
+  std::wstring::wstring(&this->std__wstring1C);
+  std::string::string(&this->std__string60);
   return this;
 }
 

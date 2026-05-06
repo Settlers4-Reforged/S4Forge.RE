@@ -52,14 +52,14 @@ class CPersistence * __cdecl CPlant::New(std::istream & a1) {
 // Decompiled from CPlant *__thiscall CPlant::CPlant(CPlant *this, const struct CPlant *a2, int a3, int a4, int a5)
  CPlant::CPlant(class CPlant const & a2, int a3, int a4, int a5) {
   
-  IDecoObject::IDecoObject(this, a2, a3, a4, a5);
+  IDecoObject::IDecoObject(this, (IEntity *)a2, a3, a4, a5);
   *(_DWORD *)this = &CPlant::_vftable_;
   *((_DWORD *)this + 19) = 0;
-  IEntity::SetFlagBits(this, (EntityFlag)((char *)&loc_1FFFFFF + 1));
+  IEntity::SetFlagBits(this, EntityFlag_Ready);
   *((_BYTE *)this + 73) = 3;
   *((_WORD *)this + 19) = *((unsigned __int8 *)this + 73)
                         + (unsigned __int16)CGfxManager::GetObjectFirstJob(
-                                              (CGfxManager *)g_pGfxManager,
+                                              g_pGfxManager,
                                               *((unsigned __int16 *)this + 6));
   *((_BYTE *)this + 74) = *((_BYTE *)a2 + 74);
   if ( !*((_BYTE *)this + 74) && BBSupportDbgReport(2, "MapObjects\\DecoObj\\Plant.cpp", 135, "m_uCycleFrames") == 1 )

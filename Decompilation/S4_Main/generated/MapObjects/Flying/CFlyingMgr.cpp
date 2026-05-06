@@ -68,29 +68,29 @@ bool  CFlyingMgr::AddFlyingEntity(int a2, int a3, int a4, int a5, bool a5) {
 
 
 // address=[0x154f5c0]
-// Decompiled from int __thiscall CFlyingMgr::DeleteFlyingEntity(CFlyingMgr *this, int a2)
+// Decompiled from void __thiscall CFlyingMgr::DeleteFlyingEntity(CFlyingMgr *this, int a2)
 void  CFlyingMgr::DeleteFlyingEntity(int a2) {
   
-  unsigned __int8 *v2; // eax
-  int v3; // eax
-  unsigned __int8 *v5; // [esp+4h] [ebp-10h]
-  int v6; // [esp+8h] [ebp-Ch]
-  int v8; // [esp+10h] [ebp-4h]
+  IEntity *v2; // eax
+  IEntity *v3; // eax
+  IEntity *v4; // [esp+4h] [ebp-10h]
+  int v5; // [esp+8h] [ebp-Ch]
+  int v7; // [esp+10h] [ebp-4h]
 
-  v2 = (unsigned __int8 *)CMapObjectMgr::Entity(a2);
-  if ( IEntity::ObjType(v2) != 64
+  v2 = CMapObjectMgr::Entity(a2);
+  if ( IEntity::ObjType(v2) != DECO_OBJ
     && BBSupportDbgReport(2, "mapobjects\\FlyingMgr.cpp", 271, "g_pMapObjectMgr->Entity(_iId).ObjType() == DECO_OBJ") == 1 )
   {
     __debugbreak();
   }
-  v5 = (unsigned __int8 *)CFlyingMgr::operator[](a2);
-  v8 = IEntity::OwnerId(v5);
-  v6 = IEntity::Type((unsigned __int16 *)v5);
-  CFlyingMgr::DetachFlyingEntity(this, v8, v6, a2);
-  --*((_DWORD *)this + 2 * v8 + v6 + 19);
+  v4 = CFlyingMgr::operator[](a2);
+  v7 = IEntity::OwnerId(v4);
+  v5 = IEntity::Type(v4);
+  CFlyingMgr::DetachFlyingEntity(this, v7, v5, a2);
+  --*((_DWORD *)this + 2 * v7 + v5 + 19);
   v3 = CMapObjectMgr::EntityPtr(a2);
-  (*(void (__thiscall **)(int, int))(*(_DWORD *)v3 + 16))(v3, v3);
-  return CMapObjectMgr::Kill(a2, 0);
+  ((void (__thiscall *)(IEntity *, IEntity *))v3->Delete)(v3, v3);
+  CMapObjectMgr::Kill(g_pMapObjectMgr, a2, 0);
 }
 
 

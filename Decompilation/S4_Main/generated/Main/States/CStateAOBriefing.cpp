@@ -237,7 +237,7 @@ bool  CStateAOBriefing::OnEvent(class CEvn_Event & a2) {
   int v10; // [esp-1Ch] [ebp-2F8h]
   int v11; // [esp-18h] [ebp-2F4h]
   int v12; // [esp-14h] [ebp-2F0h]
-  int v13; // [esp-10h] [ebp-2ECh]
+  DWORD v13; // [esp-10h] [ebp-2ECh]
   int v14; // [esp-Ch] [ebp-2E8h]
   int v15; // [esp-8h] [ebp-2E4h]
   int v16; // [esp-4h] [ebp-2E0h]
@@ -248,20 +248,20 @@ bool  CStateAOBriefing::OnEvent(class CEvn_Event & a2) {
   std::wstring *PlayerName; // [esp+1Ch] [ebp-2C0h]
   INetworkEngine *v22; // [esp+20h] [ebp-2BCh]
   int v23; // [esp+24h] [ebp-2B8h]
-  int v24; // [esp+28h] [ebp-2B4h]
+  INetworkEngine *v24; // [esp+28h] [ebp-2B4h]
   void *v25; // [esp+2Ch] [ebp-2B0h]
   CGameType *v26; // [esp+30h] [ebp-2ACh]
   CGameType *v27; // [esp+34h] [ebp-2A8h]
   void *v28; // [esp+38h] [ebp-2A4h]
   CGameType *v29; // [esp+3Ch] [ebp-2A0h]
-  CEvn_Event *v30; // [esp+40h] [ebp-29Ch]
+  struct CEvn_Event *v30; // [esp+40h] [ebp-29Ch]
   void *v31; // [esp+44h] [ebp-298h]
   INetworkEngine *v32; // [esp+48h] [ebp-294h]
   CGameType *v33; // [esp+4Ch] [ebp-290h]
   CGameType *v34; // [esp+50h] [ebp-28Ch]
   void *C; // [esp+54h] [ebp-288h]
   CGameType *v36; // [esp+58h] [ebp-284h]
-  int (__thiscall ***v37)(_DWORD, int); // [esp+5Ch] [ebp-280h]
+  INetworkEngine *v37; // [esp+5Ch] [ebp-280h]
   char v38; // [esp+63h] [ebp-279h]
   int i; // [esp+64h] [ebp-278h]
   unsigned int m_iEventId; // [esp+6Ch] [ebp-270h]
@@ -299,7 +299,7 @@ bool  CStateAOBriefing::OnEvent(class CEvn_Event & a2) {
         break;
       case 0x72u:
         v38 = IGuiEngine::CloseDialog(g_pGUIEngine, 20);
-        CGuiGameState::SetupExtraGui(g_pAddOn, 7, (int)GuiDlgAOBriefingProc);
+        CGuiGameState::SetupExtraGui((int)g_pAddOn, 7, (int)GuiDlgAOBriefingProc);
         CGuiGameState::SetupGui(
           v44,
           L"Menu\\GUISetStartscreens.dat",
@@ -312,8 +312,8 @@ bool  CStateAOBriefing::OnEvent(class CEvn_Event & a2) {
   }
   if ( m_iEventId == 8021 )
   {
-    CSoundManager::StopMusic((CSoundManager *)g_pSoundManager);
-    CSoundManager::StopSounds((CSoundManager *)g_pSoundManager);
+    CSoundManager::StopMusic(g_pSoundManager);
+    CSoundManager::StopSounds(g_pSoundManager);
     if ( !byte_402C9F4
       && BBSupportDbgReport(2, "main\\states\\StateAOBriefing.cpp", 411, "g_cBriefingSettings.m_bIsCampaign") == 1 )
     {
@@ -329,22 +329,22 @@ bool  CStateAOBriefing::OnEvent(class CEvn_Event & a2) {
     switch ( *((_DWORD *)v44 + 1) )
     {
       case 0xB:
-        CGameStateHandler::Switch((int)CStateAOCampaignRoman::DynamicCreateFunc, 0);
+        CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateAOCampaignRoman::DynamicCreateFunc, 0);
         break;
       case 0xC:
-        CGameStateHandler::Switch((int)CStateAOCampaignViking::DynamicCreateFunc, 0);
+        CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateAOCampaignViking::DynamicCreateFunc, 0);
         break;
       case 0xD:
-        CGameStateHandler::Switch((int)CStateAOCampaignMayan::DynamicCreateFunc, 0);
+        CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateAOCampaignMayan::DynamicCreateFunc, 0);
         break;
       case 0xE:
-        CGameStateHandler::Switch((int)CStateAOCampaignsSettle::DynamicCreateFunc, 0);
+        CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateAOCampaignsSettle::DynamicCreateFunc, 0);
         break;
       case 0xF:
-        CGameStateHandler::Switch((int)CStateAOCampaignTrojan::DynamicCreateFunc, 0);
+        CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateAOCampaignTrojan::DynamicCreateFunc, 0);
         break;
       case 0x10:
-        CGameStateHandler::Switch((int)CStateAOCampaigns::DynamicCreateFunc, 0);
+        CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateAOCampaigns::DynamicCreateFunc, 0);
         break;
       default:
         return 1;
@@ -357,12 +357,12 @@ bool  CStateAOBriefing::OnEvent(class CEvn_Event & a2) {
       return CGuiGameState::OnEvent(v44, a2);
     Instance = (CGUIWrapper *)CGUIWrapper::GetInstance();
     CGUIWrapper::ReleaseGUIGFXFile(Instance);
-    CSoundManager::StopSounds((CSoundManager *)g_pSoundManager);
+    CSoundManager::StopSounds(g_pSoundManager);
     IGfxEngine::SetCursorShape(g_pGfxEngine, 1, 4u);
     CGfxManager::DisableGfxFile(g_pGfxManager, 1);
     if ( (unsigned __int8)CStateLobbyGameSettings::CopyDefaultUserFlags() )
     {
-      CGfxManager::EnableGfxFile(g_pGfxManager, 1u, 8, 1, 0xFFFFFFFF);
+      CGfxManager::EnableGfxFile(g_pGfxManager, 1u, 8, 1u, -1);
       C = operator new(0x620u);
       v51 = 1;
       if ( C )
@@ -392,24 +392,7 @@ bool  CStateAOBriefing::OnEvent(class CEvn_Event & a2) {
         v8 = 1;
         v18 = &v7;
         v17 = std::wstring::wstring(&v7, &v49);
-        MapData = CGameType::LoadMapData(
-                    g_pGameType,
-                    v7.m_u[0],
-                    v7.m_u[1],
-                    v7.m_u[2],
-                    v7.m_u[3],
-                    v7.m_u[4],
-                    v7.m_u[5],
-                    v7.m_u[6],
-                    v8,
-                    v9,
-                    v10,
-                    v11,
-                    v12,
-                    v13,
-                    v14,
-                    v15,
-                    v16);
+        MapData = CGameType::LoadMapData(g_pGameType, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16);
         v45 = MapData;
       }
       if ( v45 )
@@ -423,8 +406,8 @@ bool  CStateAOBriefing::OnEvent(class CEvn_Event & a2) {
         if ( g_pNetworkEngine )
         {
           v24 = g_pNetworkEngine;
-          v37 = (int (__thiscall ***)(_DWORD, int))g_pNetworkEngine;
-          v23 = (**v37)(v37, 1);
+          v37 = g_pNetworkEngine;
+          v23 = (**(int (__thiscall ***)(INetworkEngine *, int))v37)(v37, 1);
           g_pNetworkEngine = 0;
         }
         v31 = operator new(0x18u);
@@ -435,7 +418,7 @@ bool  CStateAOBriefing::OnEvent(class CEvn_Event & a2) {
           v32 = 0;
         v22 = v32;
         LOBYTE(v51) = 2;
-        g_pNetworkEngine = (int)v32;
+        g_pNetworkEngine = v32;
         g_pGameType->m_iActualPlayerCount = g_pGameType->m_iMapMaxNumPlayers;
         g_pGameType->m_sPlayerIP[0] = (DWORD)INetworkEngine::GetLocalIP((CGameHost **)g_pNetworkEngine);
         v6 = (OnlineManager *)OnlineManager::GetInstance();
@@ -452,7 +435,7 @@ bool  CStateAOBriefing::OnEvent(class CEvn_Event & a2) {
         for ( i = 0; i < g_pGameType->m_iMapMaxNumPlayers; ++i )
           g_pGameType->m_sPlayerSlot10[i] = 0;
         INetworkEngine::Start(1, 1, g_pGameType->m_iMapMaxNumPlayers, 0);
-        CGameStateHandler::Switch((int)CStateGame::DynamicCreateFunc, 0);
+        CGameStateHandler::Switch(CStateGame::DynamicCreateFunc, 0);
         v41 = 1;
         v51 = -1;
         std::wstring::~wstring(&v49);
@@ -465,7 +448,7 @@ bool  CStateAOBriefing::OnEvent(class CEvn_Event & a2) {
         v46 = IGuiEngine::CloseDialog(g_pGUIEngine, 7);
         if ( !g_pAddOn && BBSupportDbgReport(2, "main\\states\\StateAOBriefing.cpp", 537, "g_pAddOn") == 1 )
           __debugbreak();
-        (*(void (__thiscall **)(int, _DWORD, char (__cdecl *)(int, int, int)))(*(_DWORD *)g_pAddOn + 12))(
+        ((void (__thiscall *)(CAddOn *, _DWORD, char (__cdecl *)(int, int, int)))g_pAddOn->j_?EnsureMainGUI@CExtraCD@@UAEXHP6A_NHHH@Z@Z)(
           g_pAddOn,
           0,
           GuiDlgMainscreenProc);
@@ -492,11 +475,13 @@ bool  CStateAOBriefing::OnEvent(class CEvn_Event & a2) {
       IGuiEngine::CloseDialog(g_pGUIEngine, 7);
       if ( !g_pAddOn && BBSupportDbgReport(2, "main\\states\\StateAOBriefing.cpp", 502, "g_pAddOn") == 1 )
         __debugbreak();
-      (*(void (__thiscall **)(int, int, char (__cdecl *)(int, unsigned int, int)))(*(_DWORD *)g_pAddOn + 12))(
+      ((void (__thiscall *)(CAddOn *, int, char (__cdecl *)(int, unsigned int, int)))g_pAddOn->j_?EnsureMainGUI@CExtraCD@@UAEXHP6A_NHHH@Z@Z)(
         g_pAddOn,
         20,
         GuiDlgMainMessageBoxProc);
-      CGameStateHandler::Switch((int)CStateMessageBox::DynamicCreateFunc, 2398);
+      CGameStateHandler::Switch(
+        (struct CGameState *(__cdecl *)(void *))CStateMessageBox::DynamicCreateFunc,
+        (void *)0x95E);
       return 1;
     }
   }

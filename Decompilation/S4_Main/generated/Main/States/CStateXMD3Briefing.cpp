@@ -20,67 +20,61 @@ class CGameState * __cdecl CStateXMD3Briefing::DynamicCreateFunc(void * a1) {
 // Decompiled from CStateXMD3Briefing *__thiscall CStateXMD3Briefing::CStateXMD3Briefing(CStateXMD3Briefing *this, void *a2)
  CStateXMD3Briefing::CStateXMD3Briefing(void * a2) {
   
-  const char *v2; // eax
+  wchar_t *v2; // eax
   wchar_t *v3; // eax
   wchar_t *v4; // eax
   char *v5; // eax
-  char v7; // [esp-40h] [ebp-2A0h] BYREF
-  int v8; // [esp-3Ch] [ebp-29Ch]
-  int v9; // [esp-38h] [ebp-298h]
-  int v10; // [esp-34h] [ebp-294h]
-  int v11; // [esp-30h] [ebp-290h]
-  int v12; // [esp-2Ch] [ebp-28Ch]
-  int v13; // [esp-28h] [ebp-288h]
-  int v14; // [esp-24h] [ebp-284h]
-  int v15; // [esp-20h] [ebp-280h]
-  int v16; // [esp-1Ch] [ebp-27Ch]
-  int v17; // [esp-18h] [ebp-278h]
-  int v18; // [esp-14h] [ebp-274h]
-  int v19; // [esp-10h] [ebp-270h]
-  int v20; // [esp-Ch] [ebp-26Ch]
-  int v21; // [esp-8h] [ebp-268h]
-  int v22; // [esp-4h] [ebp-264h]
-  int v23; // [esp+4h] [ebp-25Ch]
-  char *v24; // [esp+8h] [ebp-258h]
-  int v25; // [esp+Ch] [ebp-254h]
-  void *v26; // [esp+10h] [ebp-250h]
-  int v27; // [esp+14h] [ebp-24Ch]
-  CGameType *v28; // [esp+18h] [ebp-248h]
-  int v29; // [esp+1Ch] [ebp-244h]
-  CGameType *v30; // [esp+20h] [ebp-240h]
+  std::wstring v7; // [esp-40h] [ebp-2A0h] BYREF
+  BOOL bAIActive; // [esp-24h] [ebp-284h]
+  int v9; // [esp-20h] [ebp-280h]
+  int v10; // [esp-1Ch] [ebp-27Ch]
+  int v11; // [esp-18h] [ebp-278h]
+  int iSetupIndex; // [esp-14h] [ebp-274h]
+  DWORD iAIDifficulty; // [esp-10h] [ebp-270h]
+  int v14; // [esp-Ch] [ebp-26Ch]
+  BOOL bIsLadderGame; // [esp-8h] [ebp-268h]
+  int bIsClanGame; // [esp-4h] [ebp-264h]
+  void *v17; // [esp+4h] [ebp-25Ch]
+  std::wstring *v18; // [esp+8h] [ebp-258h]
+  int v19; // [esp+Ch] [ebp-254h]
+  void *v20; // [esp+10h] [ebp-250h]
+  CGameType *v21; // [esp+14h] [ebp-24Ch]
+  CGameType *v22; // [esp+18h] [ebp-248h]
+  CGameType *v23; // [esp+1Ch] [ebp-244h]
+  CGameType *v24; // [esp+20h] [ebp-240h]
   void *C; // [esp+24h] [ebp-23Ch]
-  int v32; // [esp+28h] [ebp-238h]
+  int v26; // [esp+28h] [ebp-238h]
   char MapData; // [esp+2Dh] [ebp-233h]
-  char v34; // [esp+2Eh] [ebp-232h]
-  char v35; // [esp+2Fh] [ebp-231h]
-  _DWORD *v36; // [esp+30h] [ebp-230h]
-  char v37[28]; // [esp+34h] [ebp-22Ch] BYREF
+  char v28; // [esp+2Eh] [ebp-232h]
+  char v29; // [esp+2Fh] [ebp-231h]
+  int *v30; // [esp+30h] [ebp-230h]
+  std::wstring v31; // [esp+34h] [ebp-22Ch] BYREF
   char Buffer[512]; // [esp+50h] [ebp-210h] BYREF
-  int v39; // [esp+25Ch] [ebp-4h]
+  int v33; // [esp+25Ch] [ebp-4h]
 
-  v36 = this;
+  v30 = (int *)this;
   CGuiGameState::CGuiGameState(this);
-  v39 = 0;
-  *v36 = &CStateXMD3Briefing::_vftable_;
+  v33 = 0;
+  *v30 = (int)&CStateXMD3Briefing::_vftable_;
   CSoundManager::StopMusic(g_pSoundManager);
-  CGuiGameState::EnsureGfxEngineIsInGuiMode(v36);
-  CGuiGameState::SetupExtraGui(g_pMissionCD3, 1, (int)GuiDlgXMD3BriefingProc);
-  v36[1] = (unsigned __int16)a2;
-  v36[2] = HIWORD(a2);
-  *((_BYTE *)v36 + 12) = 0;
-  if ( (int)v36[1] >= 25
+  CGuiGameState::EnsureGfxEngineIsInGuiMode(v30);
+  CGuiGameState::SetupExtraGui((int)g_pMissionCD3, 1, (int)GuiDlgXMD3BriefingProc);
+  v30[1] = (unsigned __int16)a2;
+  v30[2] = HIWORD(a2);
+  *((_BYTE *)v30 + 12) = 0;
+  if ( v30[1] >= 25
     && BBSupportDbgReport(2, "main\\states\\statexmd3briefing.cpp", 193, "m_iCampaignType < CAMPAIGN_MAX") == 1 )
   {
     __debugbreak();
   }
-  v32 = v36[1];
-  if ( v32 < 21 || v32 > 24 )
+  v26 = v30[1];
+  if ( v26 < 21 || v26 > 24 )
   {
     byte_402C9F4 = 0;
   }
   else
   {
-    if ( (int)v36[2] >= 4
+    if ( v30[2] >= 4
       && BBSupportDbgReport(2, "main\\states\\statexmd3briefing.cpp", 201, "m_iLevel < XMD3_CAMPAIGN_RMVT_COUNT") == 1 )
     {
       __debugbreak();
@@ -90,89 +84,96 @@ class CGameState * __cdecl CStateXMD3Briefing::DynamicCreateFunc(void * a1) {
   byte_402C9F5 = 0;
   if ( byte_402C9F4 )
   {
-    CStateXMD3Briefing::InitBriefingTexts(v36[1], v36[2]);
+    CStateXMD3Briefing::InitBriefingTexts(v30[1], v30[2]);
   }
   else
   {
-    std::string::operator=(g_pGameType + 884);
-    std::string::operator=(g_pGameType + 912);
-    std::string::operator=(g_pGameType + 940);
-    std::string::operator=(g_pGameType + 968);
+    std::string::operator=(&stru_402C998, &g_pGameType->std__string374);
+    std::string::operator=(&stru_402C9D0, &g_pGameType->std__string390);
+    std::string::operator=(&stru_402C97C, &g_pGameType->std__string3AC);
+    std::string::operator=(&stru_402C9B4, &g_pGameType->std__string3C8);
   }
-  CGuiGameState::OpenDialog((CGuiGameState *)v36, 1, GuiDlgXMD3BriefingProc);
-  IGfxEngine::SetCursorShape((IGfxEngine *)g_pGfxEngine, 1, 0);
+  CGuiGameState::OpenDialog((CGuiGameState *)v30, 1, (bool (__cdecl *)(int, int, int))GuiDlgXMD3BriefingProc);
+  IGfxEngine::SetCursorShape(g_pGfxEngine, 1, 0);
   C = operator new(0x620u);
-  LOBYTE(v39) = 1;
+  LOBYTE(v33) = 1;
   if ( C )
-    v30 = CGameType::CGameType((CGameType *)C);
+    v24 = CGameType::CGameType((CGameType *)C);
   else
-    v30 = 0;
-  v28 = v30;
-  LOBYTE(v39) = 0;
-  g_pGameType = (int)v30;
-  v35 = 0;
-  v25 = 256;
-  v22 = v36[2] + 1;
-  v2 = (const char *)std::wstring::c_str((_Cnd_internal_imp_t *)((char *)&stru_4032170 + 28 * v36[1] - 588));
-  snwprintf(Buffer, 0xFFu, v2, v22);
-  std::wstring::wstring(v37);
-  LOBYTE(v39) = 2;
-  if ( (*(unsigned __int8 (__thiscall **)(void *, char *, char *, int))(*(_DWORD *)g_pCDDrive + 8))(
-         g_pCDDrive,
-         v37,
-         Buffer,
-         3145984) )
+    v24 = 0;
+  v22 = v24;
+  LOBYTE(v33) = 0;
+  g_pGameType = v24;
+  v29 = 0;
+  v19 = 256;
+  bIsClanGame = v30[2] + 1;
+  v2 = std::wstring::c_str(&stru_4032170 + v30[1] - 21);
+  snwprintf(Buffer, 0xFFu, (const char *const)v2, bIsClanGame);
+  std::wstring::wstring(&v31);
+  LOBYTE(v33) = 2;
+  if ( g_pCDDrive->GetCDPath(g_pCDDrive, (char *)&v31, Buffer, 3145984) )
   {
-    v22 = 0;
-    v21 = 0;
-    v20 = v36[1];
-    v19 = s_uAIDifficulty;
-    v18 = 0;
-    v17 = 0;
-    v16 = 1;
-    v15 = 0;
-    v14 = 1;
-    v24 = &v7;
-    v23 = std::wstring::wstring((int)v37);
-    MapData = CGameType::LoadMapData(v7, v8, v9, v10, v11, v12, v13, v14, v15, v16, v17, v18, v19, v20, v21, v22);
-    v35 = MapData;
+    bIsClanGame = 0;
+    bIsLadderGame = 0;
+    v14 = v30[1];
+    iAIDifficulty = s_uAIDifficulty;
+    iSetupIndex = 0;
+    v11 = 0;
+    v10 = 1;
+    v9 = 0;
+    bAIActive = 1;
+    v18 = &v7;
+    v17 = std::wstring::wstring(&v7, &v31);
+    MapData = CGameType::LoadMapData(
+                g_pGameType,
+                v7,
+                bAIActive,
+                v9,
+                v10,
+                v11,
+                iSetupIndex,
+                iAIDifficulty,
+                v14,
+                bIsLadderGame,
+                bIsClanGame);
+    v29 = MapData;
     BBSupportTracePrintF(1, "GetCDPath success: ");
-    v3 = (wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)v37);
+    v3 = std::wstring::c_str(&v31);
     BBSupportTracePrint(1, v3);
   }
   else
   {
     BBSupportTracePrintF(1, "GetCDPath failure: ");
-    v4 = (wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)v37);
+    v4 = std::wstring::c_str(&v31);
     BBSupportTracePrint(1, v4);
   }
-  if ( !v35 )
+  if ( !v29 )
   {
     v5 = g_pStringEngine->GetString(g_pStringEngine, 3785);
     std::string::operator=(&g_iMessageBoxStringID, v5);
-    v34 = IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 1);
+    v28 = IGuiEngine::CloseDialog(g_pGUIEngine, 1);
     if ( !g_pMissionCD3 && BBSupportDbgReport(2, "main\\states\\statexmd3briefing.cpp", 266, "g_pMissionCD3") == 1 )
       __debugbreak();
-    (*(void (__thiscall **)(int, _DWORD, char (__cdecl *)(int, int, int)))(*(_DWORD *)g_pMissionCD3 + 12))(
+    ((void (__thiscall *)(CMissionCD3 *, _DWORD, char (__cdecl *)(int, int, int)))g_pMissionCD3->j_?EnsureMainGUI@CExtraCD@@UAEXHP6A_NHHH@Z@Z)(
       g_pMissionCD3,
       0,
       GuiDlgMainscreenProc);
-    v34 = IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 20, GuiDlgMainMessageBoxProc);
-    if ( !v34 && BBSupportDbgReport(2, "main\\states\\statexmd3briefing.cpp", 269, "bRet") == 1 )
+    v28 = IGuiEngine::OpenDialog(g_pGUIEngine, 20, (bool (__cdecl *)(int, int, int))GuiDlgMainMessageBoxProc);
+    if ( !v28 && BBSupportDbgReport(2, "main\\states\\statexmd3briefing.cpp", 269, "bRet") == 1 )
       __debugbreak();
     BBSupportTracePrintF(3, "MissionCD3 Map '%s' not found!", Buffer);
-    IGfxEngine::SetCursorShape((IGfxEngine *)g_pGfxEngine, 1, 0);
+    IGfxEngine::SetCursorShape(g_pGfxEngine, 1, 0);
     if ( g_pGameType )
     {
-      v27 = g_pGameType;
-      v29 = g_pGameType;
-      v26 = delete (CGameType *)g_pGameType;
+      v21 = g_pGameType;
+      v23 = g_pGameType;
+      v20 = delete g_pGameType;
       g_pGameType = 0;
     }
   }
-  LOBYTE(v39) = 0;
-  std::wstring::~wstring(v37);
-  return (CStateXMD3Briefing *)v36;
+  LOBYTE(v33) = 0;
+  std::wstring::~wstring(&v31);
+  return (CStateXMD3Briefing *)v30;
 }
 
 

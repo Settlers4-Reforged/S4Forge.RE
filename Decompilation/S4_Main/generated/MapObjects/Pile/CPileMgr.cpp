@@ -483,7 +483,7 @@ void  CPileMgr::Store(class S4::CMapFile & a2) {
     {
       v8 = IEntity::ObjType(v17);
       if ( v8 == PILE_OBJ )
-        v17->j_?Store@IEntity@@UAEXAAV?$basic_ostream@DU?$char_traits@D@std@@@std@@@Z((char *)v17, (int)v4);
+        v17->Store((char *)v17, (int)v4);
     }
   }
   std::ostream::put(0);

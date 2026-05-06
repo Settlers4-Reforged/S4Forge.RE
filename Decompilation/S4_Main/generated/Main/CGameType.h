@@ -90,7 +90,7 @@ public:
      ~CGameType(void);
 
     // address=[0x1491490]
-    bool  LoadMapData(std::wstring a2, bool _bAIActive, unsigned int a4, bool a5, bool a6, int _iSetupIndex, int _iAIDifficulty, int a9, bool a10, bool a11);
+    bool  LoadMapData(std::wstring _sMapName, bool _bAIActive, unsigned int a4, bool a5, bool a6, int _iSetupIndex, int _iAIDifficulty, int a9, bool _bIsLadderGame, bool _bIsClanGame);
 
     // address=[0x1492f70]
     bool  IsMapAvailable(std::wstring & a2, int a3);
@@ -199,7 +199,7 @@ public:
     _DWORD m_iMode;
     _BYTE m_bEconomyPossible;
     _BYTE m_bCompetetivePossible;
-    _BYTE m_bFreeSettlePossible;
+    bool m_bFreeSettlePossible;
     _BYTE m_bConflictPossible;
     _BYTE m_bCooperationPossible;
     _BYTE byte369;

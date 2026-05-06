@@ -37394,11 +37394,11 @@ public: bool __thiscall CRingBuffer<class CEvn_Logic>::Write(class CEvn_Logic & 
 // Decompiled from BOOL __cdecl ChangeScreenSize(int a1, int cy)
 void __cdecl ChangeScreenSize(int a1, int cy) {
   
-  unsigned int dwNewLong; // [esp+0h] [ebp-4h]
+  int dwNewLong; // [esp+0h] [ebp-4h]
 
-  dwNewLong = (unsigned int)&dword_C20408[212734] | GetWindowLongA(g_hWnd, -16);
+  dwNewLong = GetWindowLongA(g_hWnd, GWL_STYLE) | WS_OVERLAPPEDWINDOW;
   SetWindowLongA(g_hWnd, -16, dwNewLong);
-  return SetWindowPos(g_hWnd, 0, 0, 0, a1, cy, 0x226u);
+  return SetWindowPos(g_hWnd, 0, 0, 0, a1, cy, WM_MDITILE);
 }
 
 
@@ -56481,7 +56481,7 @@ void __cdecl MA_GetMapData(int * _pWidthHeight, int * _pGameType, int * _pMapFla
   {
     *_pWidthHeight = g_sGeneralMapData.m_iWidthHeight;
     *_pGameType = g_sGeneralMapData.m_iGameType;
-    *_pMapFlags = *(_DWORD *)&g_sGeneralMapData.m_bMapIsLoaded;
+    *_pMapFlags = g_sGeneralMapData.m_iFlags;
     *_pStartResources = g_sGeneralMapData.m_iStartResources;
     *_pIsEmptyMap = !g_bSettlersAvailable && !g_bBuildingsAvailable;
   }

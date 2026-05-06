@@ -22,7 +22,7 @@ public:
 
 private:
     // address=[0x14be980]
-    void  AddMapList(std::wstring a2, std::wstring a3);
+    void  AddMapList(std::wstring arg0, std::wstring a3);
 
     // address=[0x14bf100]
     int  RefreshMapList(void);

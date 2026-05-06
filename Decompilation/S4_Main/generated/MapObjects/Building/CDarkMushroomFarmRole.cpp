@@ -412,29 +412,29 @@ bool  CDarkMushroomFarmRole::PlantMushroom(class CBuilding * a2) {
   int v7; // esi
   int v8; // esi
   int v9; // eax
-  struct CPaneContainer *v10; // eax
+  int v10; // eax
   int v11; // eax
-  int v13; // [esp-8h] [ebp-7Ch]
+  unsigned int v13; // [esp-8h] [ebp-7Ch]
   int v14; // [esp-4h] [ebp-78h]
   char v15; // [esp-4h] [ebp-78h]
-  int v16; // [esp-4h] [ebp-78h]
-  _BYTE v17[24]; // [esp+8h] [ebp-6Ch] BYREF
+  __int16 v16; // [esp-4h] [ebp-78h]
+  CEntityEvent v17; // [esp+8h] [ebp-6Ch] BYREF
   int v18; // [esp+20h] [ebp-54h]
   CEntityEvent *v19; // [esp+24h] [ebp-50h]
   CEntityEvent *v20; // [esp+28h] [ebp-4Ch]
   int v21; // [esp+2Ch] [ebp-48h]
   int v22; // [esp+30h] [ebp-44h]
-  int v23; // [esp+34h] [ebp-40h]
-  unsigned int ObjectType; // [esp+38h] [ebp-3Ch]
+  IEntity *v23; // [esp+34h] [ebp-40h]
+  T_OBJECT_TYPE ObjectType; // [esp+38h] [ebp-3Ch]
   int v25; // [esp+3Ch] [ebp-38h]
   int v26; // [esp+40h] [ebp-34h]
-  int (__cdecl *v27)(int, int, _DWORD); // [esp+44h] [ebp-30h]
+  int (__cdecl *v27)(unsigned int, unsigned int, _DWORD); // [esp+44h] [ebp-30h]
   int v28; // [esp+48h] [ebp-2Ch]
   int v29; // [esp+4Ch] [ebp-28h]
-  int v30; // [esp+50h] [ebp-24h]
-  int v31; // [esp+54h] [ebp-20h]
-  CPaneContainer *v32; // [esp+58h] [ebp-1Ch]
-  int SettlerInfo; // [esp+5Ch] [ebp-18h]
+  unsigned int v30; // [esp+50h] [ebp-24h]
+  unsigned int v31; // [esp+54h] [ebp-20h]
+  IEntity *v32; // [esp+58h] [ebp-1Ch]
+  CSettlerMgr::SSettlerInfos *SettlerInfo; // [esp+5Ch] [ebp-18h]
   _DWORD *v34; // [esp+60h] [ebp-14h]
   char v35; // [esp+67h] [ebp-Dh]
   int v36; // [esp+70h] [ebp-4h]
@@ -448,20 +448,20 @@ bool  CDarkMushroomFarmRole::PlantMushroom(class CBuilding * a2) {
   v21 = 10;
   v35 = 0;
   v22 = v34[97];
-  v32 = (CPaneContainer *)CSettlerMgr::operator[](*((unsigned __int16 *)v34 + 4));
-  v14 = IEntity::Type((unsigned __int16 *)v32);
+  v32 = CSettlerMgr::operator[](*((unsigned __int16 *)v34 + 4));
+  v14 = IEntity::Type(v32);
   v4 = IEntity::Race(v32);
   SettlerInfo = CSettlerMgr::GetSettlerInfo(v4, v14);
-  v27 = *(int (__cdecl **)(int, int, _DWORD))std::vector<CSettlerMgr::SSearchInfos>::operator[](1);
+  v27 = *(int (__cdecl **)(unsigned int, unsigned int, _DWORD))std::vector<CSettlerMgr::SSearchInfos>::operator[](1);
   if ( v27 )
   {
     while ( v34[97] < v21 + v22 )
     {
-      if ( (unsigned int)CGameData::Rand(g_pGameData) >= 0x4000 )
+      if ( CGameData::Rand(g_pGameData) >= 0x4000 )
       {
         v30 = v28 + CSpiralOffsets::DeltaX(v34[97]);
         v31 = v29 + CSpiralOffsets::DeltaY(v34[97]);
-        if ( (unsigned __int8)CWorldManager::InWorld(v30, v31) )
+        if ( CWorldManager::InWorld(v30, v31) )
         {
           v5 = CWorldManager::SectorId(v28, v29);
           if ( v5 == CWorldManager::SectorId(v30, v31) )
@@ -496,21 +496,21 @@ bool  CDarkMushroomFarmRole::PlantMushroom(class CBuilding * a2) {
   v26 = v8 - *(char *)(std::vector<CSettlerMgr::SSearchInfos>::operator[](1) + 6);
   v15 = CWorldManager::Ground(v25, v26);
   v9 = IEntity::Race(v32);
-  ObjectType = CDecoObjMgr::GetObjectType((CDecoObjMgr *)&g_cDecoObjMgr, *(unsigned __int8 *)(SettlerInfo + 6), v9, v15);
-  CDecoObjMgr::SetFlagsForObject((CDecoObjMgr *)&g_cDecoObjMgr, v25, v26, ObjectType, 0);
-  v10 = (struct CPaneContainer *)CBuilding::DoorPackedXY(a2);
+  ObjectType = CDecoObjMgr::GetObjectType(&g_cDecoObjMgr, SettlerInfo->m_uFarmerType, v9, v15);
+  CDecoObjMgr::SetFlagsForObject(&g_cDecoObjMgr, v25, v26, ObjectType, 0);
+  v10 = CBuilding::DoorPackedXY(a2);
   IEntity::SetPosition(v32, v10);
-  v16 = *((unsigned __int16 *)v34 + 4);
+  v16 = *((_WORD *)v34 + 4);
   v11 = CBuilding::DoorWorldIdx(a2);
   CWorldManager::SetSettlerId(v11, v16);
   IEntity::SetFlagBits(v32, EntityFlag_Visible);
   v23 = CSettlerMgr::operator[](*((unsigned __int16 *)v34 + 4));
-  v20 = CEntityEvent::CEntityEvent((CEntityEvent *)v17, 6u, 0, 0, ObjectType, v34[4]);
+  v20 = CEntityEvent::CEntityEvent(&v17, 6u, 0, 0, ObjectType, v34[4]);
   v19 = v20;
   v36 = 0;
-  (*(void (__thiscall **)(int, CEntityEvent *))(*(_DWORD *)v23 + 80))(v23, v20);
+  v23->SetEvent(v23, v20);
   v36 = -1;
-  CEntityEvent::~CEntityEvent(v17);
+  CEntityEvent::~CEntityEvent(&v17);
   *((_BYTE *)v34 + 29) = 0;
   return 1;
 }

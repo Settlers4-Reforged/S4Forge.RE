@@ -830,7 +830,7 @@ void  CSettlerMgr::LoadInfo(bool isMP) {
           v36[11] = std::string::string(&v188, v16);
           LOBYTE(v192) = 19;
           v102 = CDefineTranslator::GetValueOfDefine(defineTranslator, &v188);
-          settlerInfo->m_uOther = v102;
+          settlerInfo->m_uFarmerType = v102;
           LOBYTE(v192) = 18;
           std::string::~string(&v188);
           LOBYTE(v192) = 17;

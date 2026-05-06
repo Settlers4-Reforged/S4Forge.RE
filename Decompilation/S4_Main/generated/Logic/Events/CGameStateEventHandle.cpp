@@ -1,3 +1,4 @@
+#if FALSE
 #include "CGameStateEventHandle.h"
 
 // Definitions for class CGameStateEventHandle
@@ -30,11 +31,11 @@ bool  CGameStateEventHandle::OnEvent(class CEvn_Event & a2) {
   std::string v5; // [esp-38h] [ebp-400h] BYREF
   std::string v6; // [esp-1Ch] [ebp-3E4h] BYREF
   int v7; // [esp+0h] [ebp-3C8h] BYREF
-  int ManualURL; // [esp+10h] [ebp-3B8h]
+  std::string *ManualURL; // [esp+10h] [ebp-3B8h]
   CFile *v9; // [esp+14h] [ebp-3B4h]
   std::wstring *BugReportScreenshotPath; // [esp+18h] [ebp-3B0h]
   std::string *v11; // [esp+1Ch] [ebp-3ACh]
-  int v12; // [esp+20h] [ebp-3A8h]
+  std::string *v12; // [esp+20h] [ebp-3A8h]
   std::string *v14; // [esp+28h] [ebp-3A0h]
   struct std::string *v15; // [esp+2Ch] [ebp-39Ch]
   void *v16; // [esp+30h] [ebp-398h]
@@ -175,7 +176,7 @@ bool  CGameStateEventHandle::OnEvent(class CEvn_Event & a2) {
             v20 = v23;
             v54 = 9;
             v19 = &v5;
-            ManualURL = CGameSettings::GetManualURL();
+            ManualURL = CGameSettings::GetManualURL(&v5);
             v54 = -1;
             CGameStateHandler::ShowHTMLPage(v5, v6);
             result = 1;
@@ -212,7 +213,7 @@ bool  CGameStateEventHandle::OnEvent(class CEvn_Event & a2) {
       v15 = v33;
       v54 = 0;
       v14 = &v5;
-      v12 = CGameSettings::GetManualURL();
+      v12 = CGameSettings::GetManualURL(&v5);
       v54 = -1;
       CGameStateHandler::ShowHTMLPage(v5, v6);
       result = 1;
@@ -296,3 +297,4 @@ CGameStateEventHandle__OnEvent___def_188A00A:
 }
 
 
+#endif // Already implemented

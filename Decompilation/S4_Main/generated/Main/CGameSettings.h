@@ -54,7 +54,7 @@ public:
     static void __cdecl SetPlayerName(std::wstring a1);
 
     // address=[0x14888f0]
-    static std::string __cdecl GetManualURL(void);
+    static std::string __cdecl GetManualURL(void a1);
 
     // address=[0x1488970]
     static std::string __cdecl GetTipsURL(void a1);
