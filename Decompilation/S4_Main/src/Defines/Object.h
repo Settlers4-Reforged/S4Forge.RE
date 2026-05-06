@@ -3,6 +3,11 @@
 
 #include "DefineTransformers.h"
 
+enum T_RESOURCE_AMOUNT {
+    NO_RESOURCE_AMOUNT  = 0,
+    MAX_RESOURCE_AMOUNT = 0x10
+};
+
 #define OBJECT_TYPES \
     X(0, NONE_OBJ) \
     X(1, SETTLER_OBJ) \
@@ -10,7 +15,7 @@
     X(4, CATAPULT_OBJ) \
     X(8, BUILDING_OBJ) \
     X(16, PILE_OBJ) \
-    X(32, UNKNOWN_OBJ) \
+    X(32, DECO_OBJ_2) \
     X(64, DECO_OBJ)
 
 
@@ -319,6 +324,7 @@ enum T_SETTLER_OBJ_TYPE {
 
 enum T_OBJECT_TYPE {
     OBJECTS
+    OBJECT_MAX
 };
 
 #undef X
