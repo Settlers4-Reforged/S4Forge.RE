@@ -181,7 +181,7 @@ struct SGfxObjectInfo *  CTree::GetGfxInfos(void) {
   else
     byte_40FE518 = 16;
   byte_40FE51A = IEntity::IsVisible((void *)this);
-  byte_40FE266 = 0;
+  MEMORY[0x40FE266] = 0;
   return &IEntity::m_sGfxInfo;
 }
 

@@ -243,14 +243,14 @@ void  CPile::LogicUpdate(void) {
 
 
 // address=[0x155bf10]
-// Decompiled from void *__thiscall sub_195BF10(_BYTE *this)
+// Decompiled from struct SGfxObjectInfo *__thiscall CPile::GetGfxInfos(_BYTE *this)
 struct SGfxObjectInfo *  CPile::GetGfxInfos(void) {
   
   memset(&IEntity::m_sGfxInfo, 0, 0x2D0u);
   if ( !this[68] || (unsigned __int8)this[68] >= 0x2Bu || !this[69] )
     return &IEntity::m_sGfxInfo;
   CGfxManager::GetPileGfxInfo(
-    &IEntity::m_sGfxInfo,
+    (int)&IEntity::m_sGfxInfo,
     (unsigned __int8)this[68],
     (unsigned __int8)this[69],
     (unsigned __int8)this[74]);

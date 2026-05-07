@@ -1103,15 +1103,15 @@ void  CVehicle::GetTurnGfxInfo(void) {
   else
     v2 = *(_DWORD *)(*((_DWORD *)this + 25) + 28);
   CGfxManager::GetVehicleGfxInfo(
-    (CGfxManager *)g_pGfxManager,
-    (struct SGfxObjectInfo *)&IEntity::m_sGfxInfo,
+    g_pGfxManager,
+    &IEntity::m_sGfxInfo,
     v1,
     v2,
     dword_37BEC14[5 * v4],
     dword_37BEC18[5 * v4],
     0,
     0);
-  dword_40FE25C = 0;
+  IEntity::m_sGfxInfo.m_pPatchGfxData = 0;
 }
 
 

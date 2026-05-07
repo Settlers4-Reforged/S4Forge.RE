@@ -24,7 +24,7 @@ public:
      CDecoObject(std::istream & a2);
 
     // address=[0x1541f80]
-    virtual void  Store(std::ostream & a2);
+    virtual void  Store(std::ostream & a1);
 
     // address=[0x15422d0]
     virtual  ~CDecoObject(void);
@@ -46,6 +46,14 @@ public:
 
     // address=[0x3d8bad0]
     static unsigned long m_iClassID;
+
+    // Type information members
+public:
+    bool m_uU1;
+    BYTE m_iPhases;
+    BYTE m_uCycleFrames;
+    BYTE m_iGoodType;
+    WORD m_uTickCounter;
 
 };
 

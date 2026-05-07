@@ -373,20 +373,20 @@ struct SGfxObjectInfo *  CSettler::GetGfxInfos(void) {
   if ( IEntity::FlagBits((_DWORD *)this, (EntityFlag)0x800u) )
   {
     byte_40FE51D = -1;
-    dword_40FE268 = (int)*(float *)(std::auto_ptr<ISettlerRole>::operator->((_DWORD *)(this + 100)) + 36);
-    dword_40FE26C = (int)*(float *)(std::auto_ptr<ISettlerRole>::operator->((_DWORD *)(this + 100)) + 40);
+    MEMORY[0x40FE268] = (int)*(float *)(std::auto_ptr<ISettlerRole>::operator->((_DWORD *)(this + 100)) + 36);
+    MEMORY[0x40FE26C] = (int)*(float *)(std::auto_ptr<ISettlerRole>::operator->((_DWORD *)(this + 100)) + 40);
   }
   else
   {
     byte_40FE51D = *(_BYTE *)(this + 68);
-    dword_40FE268 = 0;
-    dword_40FE26C = 0;
+    MEMORY[0x40FE268] = 0;
+    MEMORY[0x40FE26C] = 0;
   }
-  byte_40FE266 = 0;
+  MEMORY[0x40FE266] = 0;
   if ( IEntity::FlagBits((_DWORD *)this, EntityFlag_Selected) )
   {
     v8 = std::auto_ptr<ISettlerRole>::operator->((_DWORD *)(this + 100));
-    byte_40FE266 = (*(int (__thiscall **)(int, int))(*(_DWORD *)v8 + 108))(v8, this);
+    MEMORY[0x40FE266] = (*(int (__thiscall **)(int, int))(*(_DWORD *)v8 + 108))(v8, this);
     v10 = IEntity::Type((unsigned __int16 *)this);
     v9 = IEntity::Race((_BYTE *)this);
     SettlerInfo = CSettlerMgr::GetSettlerInfo(v9, v10);
@@ -399,7 +399,7 @@ struct SGfxObjectInfo *  CSettler::GetGfxInfos(void) {
       {
         __debugbreak();
       }
-      byte_40FE264 = 9 - 7 * v19 / v24;
+      MEMORY[0x40FE264] = 9 - 7 * v19 / v24;
     }
   }
   else if ( IEntity::FlagBits((_DWORD *)this, (EntityFlag)0x400u) )
@@ -408,25 +408,25 @@ struct SGfxObjectInfo *  CSettler::GetGfxInfos(void) {
       v18 = 91;
     else
       v18 = 0;
-    byte_40FE266 = v18;
+    MEMORY[0x40FE266] = v18;
   }
   if ( IEntity::FlagBits((_DWORD *)this, (EntityFlag)&dword_ECC2A8[53078]) )
   {
     if ( IEntity::FlagBits((_DWORD *)this, (EntityFlag)0x100000u) )
     {
-      byte_40FE265 = 32;
+      MEMORY[0x40FE265] = 32;
     }
     else if ( IEntity::FlagBits((_DWORD *)this, (EntityFlag)0x200000u) )
     {
-      byte_40FE265 = 35;
+      MEMORY[0x40FE265] = 35;
     }
     else if ( IEntity::FlagBits((_DWORD *)this, (EntityFlag)0x400000u) )
     {
-      byte_40FE265 = 33;
+      MEMORY[0x40FE265] = 33;
     }
     else
     {
-      byte_40FE265 = 34;
+      MEMORY[0x40FE265] = 34;
     }
   }
   byte_40FE51C = *(_BYTE *)(this + 69);

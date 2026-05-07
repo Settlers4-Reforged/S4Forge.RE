@@ -9,7 +9,7 @@ public:
     static class CPersistence * __cdecl New(std::istream & a1);
 
     // address=[0x154a040]
-     CPlant(int a2, int a3, int a4, int a5, int a6, int a7);
+     CPlant(int a2, int a3, int a4, int a5, int _iGoodType, int a7);
 
     // address=[0x154a1a0]
      CPlant(class CPlant const & a2, int a3, int a4, int a5);
@@ -24,7 +24,7 @@ public:
     virtual struct SGfxObjectInfo *  GetGfxInfos(void);
 
     // address=[0x154a540]
-    virtual void  Take(int a2);
+    virtual void  Take(int _iAmount);
 
     // address=[0x154a6c0]
     virtual void  Decrease(int a2);
@@ -42,7 +42,7 @@ public:
      CPlant(std::istream & a2);
 
     // address=[0x154a860]
-    virtual void  Store(std::ostream & a2);
+    virtual void  Store(std::ostream & a1);
 
     // address=[0x154ab80]
     virtual unsigned long  ClassID(void)const;
@@ -52,6 +52,14 @@ public:
 
     // address=[0x3d8bb18]
     static unsigned long m_iClassID;
+
+    // Type information members
+public:
+    bool m_uU1;
+    BYTE m_iPhases;
+    BYTE m_uCycleFrames;
+    BYTE m_iGoodType;
+    int m_uU5;
 
 };
 

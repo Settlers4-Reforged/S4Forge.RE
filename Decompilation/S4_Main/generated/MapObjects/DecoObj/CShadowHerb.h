@@ -36,7 +36,7 @@ public:
      CShadowHerb(std::istream & a2);
 
     // address=[0x154b100]
-    virtual void  Store(std::ostream & a2);
+    virtual void  Store(std::ostream & a1);
 
     // address=[0x154b2f0]
     virtual  ~CShadowHerb(void);
@@ -46,6 +46,14 @@ public:
 
     // address=[0x3d8bb1c]
     static unsigned long m_iClassID;
+
+    // Type information members
+public:
+    bool m_uU1;
+    BYTE m_iPhases;
+    BYTE m_uCycleFrames;
+    BYTE m_iGoodType;
+    int m_uU5;
 
 };
 

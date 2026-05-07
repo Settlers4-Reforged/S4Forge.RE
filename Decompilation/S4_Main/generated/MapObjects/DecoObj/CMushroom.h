@@ -36,13 +36,21 @@ public:
      CMushroom(std::istream & a2);
 
     // address=[0x1549d60]
-    virtual void  Store(std::ostream & a2);
+    virtual void  Store(std::ostream & a1);
 
     // address=[0x154a020]
     virtual unsigned long  ClassID(void)const;
 
     // address=[0x3d8bb14]
     static unsigned long m_iClassID;
+
+    // Type information members
+public:
+    bool m_uU1;
+    BYTE m_iPhases;
+    BYTE m_uCycleFrames;
+    BYTE m_iGoodType;
+    int m_uU0;
 
 };
 

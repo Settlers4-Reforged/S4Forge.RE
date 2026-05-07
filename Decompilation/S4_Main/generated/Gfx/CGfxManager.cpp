@@ -281,7 +281,7 @@ void  CGfxManager::GetObjectGfxInfo(struct SGfxObjectInfo & a2, unsigned int a3,
   }
   if ( a3 >= 552 && BBSupportDbgReportF(2, "GfxManager.cpp", 1425, "%u < SIV_OBJECT_MAX", a3) == 1 )
     __debugbreak();
-  v6 = a3 >= 0x228 ? 0 : a3;
+  v6 = a3 >= 552 ? 0 : a3;
   if ( a4 >= CGfxManager::GetObjectFrameCount(this, v6)
     && BBSupportDbgReportF(2, "GfxManager.cpp", 1429, "%u < GetObjectFrameCount( %u )", a4, v6) == 1 )
   {
@@ -291,7 +291,7 @@ void  CGfxManager::GetObjectGfxInfo(struct SGfxObjectInfo & a2, unsigned int a3,
   if ( !_iAmount && BBSupportDbgReportF(2, "GfxManager.cpp", 1432, "_iAmount : %u", 0) == 1 )
     __debugbreak();
   _iAmounta = _iAmount - 1;
-  a2->m_pGfxData = *(char **)(*(_DWORD *)&this->m_pFileGfxJobs[s_iActiveGfx].m_pItem[v6 + 5][4 * _iAmounta] + 4 * v7);
+  a2->m_pGfxData = *(BYTE **)(*(_DWORD *)&this->m_pFileGfxJobs[s_iActiveGfx].m_pItem[v6 + 5][4 * _iAmounta] + 4 * v7);
   if ( !this->m_pFilePalIndex[s_iActiveGfx]
     && BBSupportDbgReportF(2, "GfxManager.cpp", 1446, "m_pFilePalIndex[ %u ]", s_iActiveGfx) == 1 )
   {

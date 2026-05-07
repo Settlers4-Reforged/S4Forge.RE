@@ -207,7 +207,7 @@ struct SGfxObjectInfo *  CCart::GetGfxInfos(void) {
       v6 = 73;
     else
       v6 = 0;
-    byte_40FE266 = v6;
+    MEMORY[0x40FE266] = v6;
   }
   else if ( IEntity::FlagBits(this, (EntityFlag)0x400u) )
   {
@@ -215,7 +215,7 @@ struct SGfxObjectInfo *  CCart::GetGfxInfos(void) {
       v5 = 90;
     else
       v5 = 0;
-    byte_40FE266 = v5;
+    MEMORY[0x40FE266] = v5;
   }
   return &IEntity::m_sGfxInfo;
 }
@@ -1918,7 +1918,7 @@ void  CCart::GetTurnGfxInfo(void) {
     v3,
     0,
     0);
-  dword_40FE25C = 0;
+  MEMORY[0x40FE25C] = 0;
 }
 
 

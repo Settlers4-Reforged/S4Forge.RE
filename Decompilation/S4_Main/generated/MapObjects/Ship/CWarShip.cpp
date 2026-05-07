@@ -296,8 +296,8 @@ struct SGfxObjectInfo *  CWarShip::GetGfxInfos(void) {
   CShip::GetGfxInfos((int)this);
   if ( !IEntity::FlagBits(this, EntityFlag_Selected) )
     return &IEntity::m_sGfxInfo;
-  byte_40FE264 = CShip::GetHealthDisplayID(this);
-  byte_40FE265 = CWarShip::GetAmmoDisplayID(this);
+  MEMORY[0x40FE264] = CShip::GetHealthDisplayID(this);
+  MEMORY[0x40FE265] = CWarShip::GetAmmoDisplayID(this);
   return &IEntity::m_sGfxInfo;
 }
 

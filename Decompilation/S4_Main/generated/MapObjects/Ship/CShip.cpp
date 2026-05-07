@@ -110,7 +110,7 @@ struct SGfxObjectInfo *  CShip::GetGfxInfos(void) {
       v4 = 27;
     else
       v4 = 0;
-    byte_40FE266 = v4;
+    MEMORY[0x40FE266] = v4;
   }
   else if ( IEntity::FlagBits((_DWORD *)this, (EntityFlag)0x400u) )
   {
@@ -118,9 +118,9 @@ struct SGfxObjectInfo *  CShip::GetGfxInfos(void) {
       v3 = 89;
     else
       v3 = 0;
-    byte_40FE266 = v3;
+    MEMORY[0x40FE266] = v3;
   }
-  byte_40FE264 = 0;
+  MEMORY[0x40FE264] = 0;
   if ( !IEntity::FlagBits((_DWORD *)this, (EntityFlag)((char *)&loc_1FFFFFF + 1)) )
     dword_40FE2AC = 65534 - *(unsigned __int16 *)(this + 124) * *(unsigned __int16 *)(this + 128);
   return &IEntity::m_sGfxInfo;

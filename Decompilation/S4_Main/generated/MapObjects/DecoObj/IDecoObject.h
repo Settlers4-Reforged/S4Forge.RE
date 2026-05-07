@@ -9,10 +9,10 @@ public:
     bool  IsStaticInstance(void)const;
 
     // address=[0x15414c0]
-     IDecoObject(int a2, int a3, int a4, int a5, bool a6);
+     IDecoObject(int _iX, int _iY, int _iDecoObjectType, int _iId, bool a6);
 
     // address=[0x1541700]
-     IDecoObject(class IDecoObject const & a2, int a3, int a4, int a5);
+     IDecoObject(class IDecoObject const & _rStaticDecoObject, int _iId, int _iX, int _iY);
 
     // address=[0x15418d0]
     virtual  ~IDecoObject(void);
@@ -26,6 +26,10 @@ protected:
 
     // address=[0x1541b20]
     virtual void  Store(std::ostream & a2);
+
+    // Type information members
+public:
+    bool m_bStaticInstance;
 
 };
 

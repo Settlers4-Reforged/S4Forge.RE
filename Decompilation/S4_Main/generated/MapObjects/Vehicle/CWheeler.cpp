@@ -112,7 +112,7 @@ struct SGfxObjectInfo *  CWheeler::GetGfxInfos(void) {
       v5 = 73;
     else
       v5 = 0;
-    byte_40FE266 = v5;
+    MEMORY[0x40FE266] = v5;
   }
   else if ( IEntity::FlagBits((_DWORD *)this, (EntityFlag)0x400u) )
   {
@@ -120,7 +120,7 @@ struct SGfxObjectInfo *  CWheeler::GetGfxInfos(void) {
       v4 = 90;
     else
       v4 = 0;
-    byte_40FE266 = v4;
+    MEMORY[0x40FE266] = v4;
   }
   return &IEntity::m_sGfxInfo;
 }

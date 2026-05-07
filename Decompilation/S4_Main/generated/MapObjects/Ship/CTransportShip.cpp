@@ -738,7 +738,7 @@ struct SGfxObjectInfo *  CTransportShip::GetGfxInfos(void) {
   
   CShip::GetGfxInfos((int)this);
   if ( IEntity::FlagBits(this, (EntityFlag)0x400u) )
-    byte_40FE264 = CShip::GetHealthDisplayID(this);
+    MEMORY[0x40FE264] = CShip::GetHealthDisplayID(this);
   return &IEntity::m_sGfxInfo;
 }
 

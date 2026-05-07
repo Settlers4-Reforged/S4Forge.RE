@@ -488,8 +488,8 @@ struct SGfxObjectInfo *  CCatapult::GetGfxInfos(void) {
   CWheeler::GetGfxInfos((int)this);
   if ( !IEntity::FlagBits(this, EntityFlag_Selected) )
     return &IEntity::m_sGfxInfo;
-  byte_40FE264 = CCatapult::GetHealthDisplayID(this);
-  byte_40FE265 = CCatapult::GetAmmoDisplayID(this);
+  MEMORY[0x40FE264] = CCatapult::GetHealthDisplayID(this);
+  MEMORY[0x40FE265] = CCatapult::GetAmmoDisplayID(this);
   return &IEntity::m_sGfxInfo;
 }
 

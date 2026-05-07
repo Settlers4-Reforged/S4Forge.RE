@@ -1,66 +1,59 @@
+#if FALSE
 #include "CMushroom.h"
 
 // Definitions for class CMushroom
 
 // address=[0x1549690]
-// Decompiled from CMushroom *__thiscall CMushroom::CMushroom(CMushroom *this, int a2, int a3, int a4, int a5, int a6)
+// Decompiled from CMushroom *__thiscall CMushroom::CMushroom(CMushroom *this, unsigned int a2, unsigned int a3, int a4, int a5, int a6)
  CMushroom::CMushroom(int a2, int a3, int a4, int a5, int a6) {
   
   IDecoObject::IDecoObject(this, a2, a3, a4, a5, a6 != 0);
-  *(_DWORD *)this = &CMushroom::_vftable_;
-  *((_BYTE *)this + 72) = 1;
-  *((_BYTE *)this + 73) = a6;
-  *((_DWORD *)this + 19) = 0;
-  *((_WORD *)this + 19) = *((unsigned __int8 *)this + 73)
-                        + (unsigned __int16)CGfxManager::GetObjectFirstJob(
-                                              (CGfxManager *)g_pGfxManager,
-                                              *((unsigned __int16 *)this + 6));
-  *((_BYTE *)this + 74) = CGfxManager::GetObjectFrameCount(
-                            (CGfxManager *)g_pGfxManager,
-                            *((unsigned __int16 *)this + 19));
-  if ( !*((_BYTE *)this + 74) && BBSupportDbgReport(2, "MapObjects\\DecoObj\\Mushroom.cpp", 82, "m_uCycleFrames") == 1 )
+  this->__vftable = (IAnimatedEntity_vtbl *)&CMushroom::_vftable_;
+  this->? = 1;
+  this->? = a6;
+  this->m_uU0 = 0;
+  this->m_wJobPart = this->? + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType);
+  this->? = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_wJobPart);
+  if ( !this->? && BBSupportDbgReport(2, "MapObjects\\DecoObj\\Mushroom.cpp", 82, "m_uCycleFrames") == 1 )
     __debugbreak();
-  if ( *((_BYTE *)this + 73) )
+  if ( this->? )
   {
-    *((_BYTE *)this + 36) = CStateGame::Rand(g_pGame) % (unsigned int)*((unsigned __int8 *)this + 74);
-    IEntity::SetFlagBits(this, (EntityFlag)((char *)&loc_1FFFFFF + 1));
+    this->m_cFrame = CStateGame::Rand(g_pGame) % this->?;
+    IEntity::SetFlagBits(this, EntityFlag_Ready);
   }
   else
   {
-    IAnimatedEntity::RegisterForLogicUpdate(31);
-    *((_BYTE *)this + 36) = 0;
+    IAnimatedEntity::RegisterForLogicUpdate(this, 31);
+    this->m_cFrame = 0;
   }
   return this;
 }
 
 
 // address=[0x15497e0]
-// Decompiled from CMushroom *__thiscall CMushroom::CMushroom(CMushroom *this, const struct CMushroom *a2, int a3, int a4, int a5)
+// Decompiled from CMushroom *__thiscall CMushroom::CMushroom(  CMushroom *this,  const struct CMushroom *a2,  int a3,  unsigned int a4,  unsigned int a5)
  CMushroom::CMushroom(class CMushroom const & a2, int a3, int a4, int a5) {
   
   IDecoObject::IDecoObject(this, a2, a3, a4, a5);
-  *(_DWORD *)this = &CMushroom::_vftable_;
-  *((_DWORD *)this + 19) = 0;
-  *((_BYTE *)this + 73) = 3;
-  *((_WORD *)this + 19) = *((unsigned __int8 *)this + 73)
-                        + (unsigned __int16)CGfxManager::GetObjectFirstJob(
-                                              (CGfxManager *)g_pGfxManager,
-                                              *((unsigned __int16 *)this + 6));
-  *((_BYTE *)this + 74) = *((_BYTE *)a2 + 74);
-  if ( !*((_BYTE *)this + 74) && BBSupportDbgReport(2, "MapObjects\\DecoObj\\Mushroom.cpp", 129, "m_uCycleFrames") == 1 )
+  this->__vftable = (IAnimatedEntity_vtbl *)&CMushroom::_vftable_;
+  this->m_uU0 = 0;
+  this->? = 3;
+  this->m_wJobPart = this->? + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType);
+  this->? = a2->?;
+  if ( !this->? && BBSupportDbgReport(2, "MapObjects\\DecoObj\\Mushroom.cpp", 129, "m_uCycleFrames") == 1 )
     __debugbreak();
-  *((_BYTE *)this + 36) = *((_BYTE *)a2 + 36);
-  *((_BYTE *)this + 72) = 1;
+  this->m_cFrame = a2->m_cFrame;
+  this->? = 1;
   return this;
 }
 
 
 // address=[0x15498d0]
-// Decompiled from void __thiscall CMushroom::~CMushroom(CMushroom *this)
+// Decompiled from int __thiscall CMushroom::~CMushroom(CMushroom *this)
  CMushroom::~CMushroom(void) {
   
-  *(_DWORD *)this = &CMushroom::_vftable_;
-  IDecoObject::~IDecoObject(this);
+  this->__vftable = (IAnimatedEntity_vtbl *)&CMushroom::_vftable_;
+  return IDecoObject::~IDecoObject(this);
 }
 
 
@@ -68,51 +61,48 @@
 // Decompiled from void __thiscall CMushroom::LogicUpdate(CMushroom *this)
 void  CMushroom::LogicUpdate(void) {
   
-  int v1; // eax
-  unsigned int v2; // esi
+  unsigned int v1; // eax
+  unsigned int m_cFrame; // esi
   int v3; // eax
-  int v4; // [esp-Ch] [ebp-18h]
-  int v5; // [esp-8h] [ebp-14h]
+  unsigned int v4; // [esp-Ch] [ebp-18h]
+  T_OBJECT_TYPE v5; // [esp-8h] [ebp-14h]
 
-  switch ( *((_BYTE *)this + 73) )
+  switch ( this->? )
   {
-    case 0:
-    case 1:
-    case 2:
-      if ( (int)++*((_DWORD *)this + 19) < 5 )
+    case 0u:
+    case 1u:
+    case 2u:
+      if ( ++this->m_uU0 < 5 )
         goto LABEL_10;
-      *((_DWORD *)this + 19) = 0;
-      ++*((_BYTE *)this + 73);
-      *((_WORD *)this + 19) = *((unsigned __int8 *)this + 73)
-                            + (unsigned __int16)CGfxManager::GetObjectFirstJob(
-                                                  (CGfxManager *)g_pGfxManager,
-                                                  *((unsigned __int16 *)this + 6));
-      if ( *((_BYTE *)this + 73) != 3 )
+      this->m_uU0 = 0;
+      ++this->?;
+      this->m_wJobPart = this->? + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType);
+      if ( this->? != 3 )
         goto LABEL_10;
-      v5 = IEntity::Type((unsigned __int16 *)this);
+      v5 = IEntity::Type(this);
       v4 = IEntity::Y(this);
       v1 = IEntity::X(this);
-      CDecoObjMgr::ChangeToStaticInstance((CDecoObjMgr *)&g_cDecoObjMgr, v1, v4, v5, 0);
+      CDecoObjMgr::ChangeToStaticInstance(&g_cDecoObjMgr, v1, v4, v5, 0);
       break;
-    case 3:
-      ++*((_DWORD *)this + 19);
-      *((_DWORD *)this + 19) = 0;
-      IAnimatedEntity::RegisterForLogicUpdate(31);
+    case 3u:
+      ++this->m_uU0;
+      this->m_uU0 = 0;
+      IAnimatedEntity::RegisterForLogicUpdate(this, 31);
       break;
-    case 4:
-      if ( (int)++*((_DWORD *)this + 19) < 5
-        || (*((_DWORD *)this + 19) = 0,
-            ++*((_BYTE *)this + 36),
-            v2 = *((unsigned __int8 *)this + 36),
-            v2 < CGfxManager::GetObjectFrameCount((CGfxManager *)g_pGfxManager, *((unsigned __int16 *)this + 19))) )
+    case 4u:
+      if ( ++this->m_uU0 < 5
+        || (this->m_uU0 = 0,
+            ++this->m_cFrame,
+            m_cFrame = this->m_cFrame,
+            m_cFrame < CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_wJobPart)) )
       {
 LABEL_10:
-        IAnimatedEntity::RegisterForLogicUpdate(31);
+        IAnimatedEntity::RegisterForLogicUpdate(this, 31);
       }
       else
       {
-        v3 = IEntity::ID();
-        CDecoObjMgr::Delete((CDecoObjMgr *)&g_cDecoObjMgr, v3);
+        v3 = IEntity::ID(this);
+        CDecoObjMgr::Delete(&g_cDecoObjMgr, v3);
       }
       break;
     default:
@@ -122,27 +112,23 @@ LABEL_10:
 
 
 // address=[0x1549a60]
-// Decompiled from void *__thiscall sub_1949A60(int this)
+// Decompiled from struct SGfxObjectInfo *__thiscall CMushroom::GetGfxInfos(CMushroom *this)
 struct SGfxObjectInfo *  CMushroom::GetGfxInfos(void) {
   
-  int v1; // esi
-  int v2; // eax
+  int TickCounter; // esi
+  DWORD v2; // eax
   int v4; // [esp+4h] [ebp-8h]
 
-  v1 = CStateGame::GetTickCounter(g_pGame);
-  v4 = v1 - IAnimatedEntity::LastUpdateTick(this);
+  TickCounter = CStateGame::GetTickCounter(g_pGame);
+  v4 = TickCounter - IAnimatedEntity::LastUpdateTick(this);
   v2 = CStateGame::GetTickCounter(g_pGame);
-  IAnimatedEntity::SetLastUpdateTick((CMFCCaptionButton *)this, v2);
+  IAnimatedEntity::SetLastUpdateTick(this, v2);
   if ( v4 )
-    *(_BYTE *)(this + 36) = (v4 + (unsigned int)*(unsigned __int8 *)(this + 36)) % *(unsigned __int8 *)(this + 74);
-  CGfxManager::GetObjectGfxInfo(
-    &IEntity::m_sGfxInfo,
-    *(unsigned __int16 *)(this + 38),
-    *(unsigned __int8 *)(this + 36),
-    1);
+    this->m_cFrame = (v4 + (unsigned int)this->m_cFrame) % this->?;
+  CGfxManager::GetObjectGfxInfo(g_pGfxManager, &IEntity::m_sGfxInfo, this->m_wJobPart, this->m_cFrame, 1);
   byte_40FE518 = 16;
-  byte_40FE51A = IEntity::IsVisible((void *)this);
-  byte_40FE266 = 0;
+  byte_40FE51A = IEntity::IsVisible(this);
+  IEntity::m_sGfxInfo.m_uFlags = 0;
   return &IEntity::m_sGfxInfo;
 }
 
@@ -156,20 +142,15 @@ void  CMushroom::Decrease(int a2) {
   {
     __debugbreak();
   }
-  IEntity::ClearFlagBits(this, (EntityFlag)((char *)&loc_1FFFFFF + 1));
-  ++*((_BYTE *)this + 73);
-  *((_BYTE *)this + 36) = 0;
-  *((_WORD *)this + 19) = *((unsigned __int8 *)this + 73)
-                        + (unsigned __int16)CGfxManager::GetObjectFirstJob(
-                                              (CGfxManager *)g_pGfxManager,
-                                              *((unsigned __int16 *)this + 6));
-  *((_BYTE *)this + 74) = CGfxManager::GetObjectFrameCount(
-                            (CGfxManager *)g_pGfxManager,
-                            *((unsigned __int16 *)this + 19));
-  if ( !*((_BYTE *)this + 74) && BBSupportDbgReport(2, "MapObjects\\DecoObj\\Mushroom.cpp", 345, "m_uCycleFrames") == 1 )
+  IEntity::ClearFlagBits(this, EntityFlag_Ready);
+  ++this->?;
+  this->m_cFrame = 0;
+  this->m_wJobPart = this->? + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType);
+  this->? = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_wJobPart);
+  if ( !this->? && BBSupportDbgReport(2, "MapObjects\\DecoObj\\Mushroom.cpp", 345, "m_uCycleFrames") == 1 )
     __debugbreak();
-  *((_DWORD *)this + 19) = 0;
-  return IAnimatedEntity::RegisterForLogicUpdate(31);
+  this->m_uU0 = 0;
+  return IAnimatedEntity::RegisterForLogicUpdate(this, 31);
 }
 
 
@@ -182,66 +163,62 @@ int  CMushroom::Increase(int a2) {
 
 
 // address=[0x1549c00]
-// Decompiled from unsigned int __cdecl CMushroom::operator new(unsigned int a1)
+// Decompiled from uint __cdecl CMushroom::operator new(uint a1)
 void * __cdecl CMushroom::operator new(unsigned int a1) {
   
-  return CDecoObjMgr::Alloc((CDecoObjMgr *)&g_cDecoObjMgr, a1);
+  return CDecoObjMgr::Alloc(&g_cDecoObjMgr, a1);
 }
 
 
 // address=[0x1549c20]
-// Decompiled from void __cdecl CMushroom::operator delete(void *a1)
+// Decompiled from void __cdecl CMushroom::operator delete(uint *a1)
 void __cdecl CMushroom::operator delete(void * a1) {
   
-  CDecoObjMgr::Dealloc((CDecoObjMgr *)&g_cDecoObjMgr, a1);
+  CDecoObjMgr::Dealloc(&g_cDecoObjMgr, a1);
 }
 
 
 // address=[0x1549c60]
-// Decompiled from _DWORD *__thiscall CMushroom::CMushroom(_DWORD *this, int a2)
+// Decompiled from CMushroom *__thiscall CMushroom::CMushroom(CMushroom *this, struct std::istream *a1)
  CMushroom::CMushroom(std::istream & a2) {
   
-  int v3; // [esp+8h] [ebp-18h] BYREF
+  int fileFormatVersion; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
-  _DWORD *v5; // [esp+10h] [ebp-10h]
   int v6; // [esp+1Ch] [ebp-4h]
 
-  v5 = this;
-  IDecoObject::IDecoObject(a2);
+  IDecoObject::IDecoObject(this, a1);
   v6 = 0;
-  *v5 = &CMushroom::_vftable_;
-  operator^<unsigned int>(a2, &v3);
-  if ( v3 != 1 )
+  this->__vftable = (IAnimatedEntity_vtbl *)&CMushroom::_vftable_;
+  operator^<unsigned int>(a1, &fileFormatVersion);
+  if ( fileFormatVersion != 1 )
   {
     BBSupportTracePrintF(3, "load output defect Unknown fileFormatVersion for CMushroom");
     pExceptionObject = 0;
     CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
     _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
   }
-  operator^<bool>(a2, v5 + 18);
-  operator^<unsigned char>(a2, (char *)v5 + 73);
-  operator^<unsigned char>(a2, (char *)v5 + 74);
-  operator^<int>(a2, (int)(v5 + 19));
+  operator^<bool>(a1, &this->?);
+  operator^<unsigned char>(a1, &this->?);
+  operator^<unsigned char>(a1, &this->?);
+  operator^<int>(a1, &this->m_uU0);
   v6 = -1;
-  return v5;
+  return this;
 }
 
 
 // address=[0x1549d60]
-// Decompiled from int __thiscall CMushroom::Store(int *this, struct std::ostream *a2)
-void  CMushroom::Store(std::ostream & a2) {
+// Decompiled from void __thiscall CMushroom::Store(CMushroom *this, struct std::ostream *a1)
+void  CMushroom::Store(std::ostream & a1) {
   
-  int v3; // [esp+0h] [ebp-8h] BYREF
-  int *v4; // [esp+4h] [ebp-4h]
+  int v2; // [esp+0h] [ebp-8h] BYREF
 
-  v4 = this;
-  IDecoObject::Store(a2);
-  v3 = 1;
-  operator^<unsigned int>(a2, &v3);
-  operator^<bool>((int)a2, (int)(v4 + 18));
-  operator^<unsigned char>(a2, (int)v4 + 73);
-  operator^<unsigned char>(a2, (int)v4 + 74);
-  return operator^<int>((int)a2, v4 + 19);
+  IDecoObject::Store(this, a1);
+  v2 = 1;
+  operator^<unsigned int>(a1, &v2);
+  operator^<bool>(a1, &this->?);
+  operator^<unsigned char>(a1, &this->?);
+  operator^<unsigned char>(a1, &this->?);
+  operator^<int>(a1, &this->m_uU0);
 }
 
 
@@ -256,3 +233,4 @@ unsigned long  CMushroom::ClassID(void)const {
 // address=[0x3d8bb14]
 // [Decompilation failed for static unsigned long CMushroom::m_iClassID]
 
+#endif // Already implemented

@@ -260,23 +260,26 @@ void  CBuilding::LogicUpdate(void) {
 
 
 // address=[0x14e8be0]
-// Decompiled from void *__thiscall sub_18E8BE0(_BYTE *this)
+// Decompiled from struct SGfxObjectInfo *__thiscall CBuilding::GetGfxInfos(IEntity *this)
 struct SGfxObjectInfo *  CBuilding::GetGfxInfos(void) {
   
-  int v1; // eax
+  struct IBuildingRole *v1; // eax
 
   if ( (unsigned __int8)CInputProcessor::IsBoxSelection(&g_cInputProcessor) )
-    IAnimatedEntity::BoxSelection(this);
-  dword_40FE2A8 = 0;
+    IAnimatedEntity::BoxSelection();
+  IEntity::m_sGfxInfo.dword58 = 0;
   dword_40FE2AC = 0;
-  v1 = std::auto_ptr<IBuildingRole>::operator->();
-  (*(void (__thiscall **)(int, _BYTE *, void *))(*(_DWORD *)v1 + 20))(v1, this, &IEntity::m_sGfxInfo);
-  byte_40FE518 = this[10];
+  v1 = (struct IBuildingRole *)std::auto_ptr<IBuildingRole>::operator->(&this[2].m_nType);
+  ((void (__thiscall *)(struct IBuildingRole *, IEntity *, struct SGfxObjectInfo *))v1->__vftable[2].j___purecall)(
+    v1,
+    this,
+    &IEntity::m_sGfxInfo);
+  byte_40FE518 = this->m_objType;
   byte_40FE51A = IEntity::IsVisible(this);
-  if ( IEntity::FlagBits(512) )
-    byte_40FE266 = 28;
+  if ( IEntity::FlagBits(this, EntityFlag_Selected) )
+    IEntity::m_sGfxInfo.m_uFlags = 28;
   else
-    byte_40FE266 = 0;
+    IEntity::m_sGfxInfo.m_uFlags = 0;
   return &IEntity::m_sGfxInfo;
 }
 

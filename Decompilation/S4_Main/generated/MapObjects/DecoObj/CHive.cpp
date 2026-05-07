@@ -1,69 +1,63 @@
+#if FALSE
 #include "CHive.h"
 
 // Definitions for class CHive
 
 // address=[0x15488d0]
-// Decompiled from CHive *__thiscall CHive::CHive(CHive *this, int a2, int a3, int a4, int a5, int a6)
- CHive::CHive(int a2, int a3, int a4, int a5, int a6) {
+// Decompiled from CHive *__thiscall CHive::CHive(  CHive *this,  unsigned int _iX,  unsigned int _iY,  int _iDecoObjectType,  int _iId,  int _iPhases)
+ CHive::CHive(int _iX, int _iY, int _iDecoObjectType, int _iId, int _iPhases) {
   
-  IDecoObject::IDecoObject(this, a2, a3, a4, a5, a6 != 0);
-  *(_DWORD *)this = &CHive::_vftable_;
-  if ( a6 && BBSupportDbgReport(2, "mapobjects\\decoobj\\hive.cpp", 70, "_iPhases == GROW1") == 1 )
+  IDecoObject::IDecoObject(this, _iX, _iY, _iDecoObjectType, _iId, _iPhases != 0);
+  this->__vftable = (IAnimatedEntity_vtbl *)&CHive::_vftable_;
+  if ( _iPhases && BBSupportDbgReport(2, "mapobjects\\decoobj\\hive.cpp", 70, "_iPhases == GROW1") == 1 )
     __debugbreak();
-  *((_DWORD *)this + 20) = 406;
-  *((_BYTE *)this + 72) = 1;
-  *((_BYTE *)this + 73) = a6;
-  *((_DWORD *)this + 19) = 0;
+  this->m_uU6 = 406;
+  this->? = 1;
+  this->? = _iPhases;
+  this->m_uU5 = 0;
   if ( CHive::IsFlowerInSurrounding(this) )
   {
-    ++*((_BYTE *)this + 73);
-    *((_WORD *)this + 19) = CGfxManager::GetObjectFirstJob(
-                              (CGfxManager *)g_pGfxManager,
-                              *((unsigned __int16 *)this + 6));
+    ++this->?;
+    this->m_wJobPart = CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType);
   }
   else
   {
-    *((_WORD *)this + 19) = CGfxManager::GetObjectFirstJob(
-                              (CGfxManager *)g_pGfxManager,
-                              *((unsigned __int16 *)this + 6))
-                          + 1;
+    this->m_wJobPart = CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType) + 1;
   }
-  *((_BYTE *)this + 74) = CGfxManager::GetObjectFrameCount(
-                            (CGfxManager *)g_pGfxManager,
-                            *((unsigned __int16 *)this + 19));
-  if ( !*((_BYTE *)this + 74) && BBSupportDbgReport(2, "mapobjects\\decoobj\\hive.cpp", 98, "m_uCycleFrames") == 1 )
+  this->? = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_wJobPart);
+  if ( !this->? && BBSupportDbgReport(2, "mapobjects\\decoobj\\hive.cpp", 98, "m_uCycleFrames") == 1 )
     __debugbreak();
-  IAnimatedEntity::RegisterForLogicUpdate(31);
-  *((_BYTE *)this + 36) = 0;
+  IAnimatedEntity::RegisterForLogicUpdate(this, 31);
+  this->m_cFrame = 0;
   return this;
 }
 
 
 // address=[0x1548a60]
-// Decompiled from CHive *__thiscall CHive::CHive(CHive *this, const struct CHive *a2, int a3, int a4, int a5)
+// Decompiled from CHive *__thiscall CHive::CHive(CHive *this, const struct CHive *a2, int a3, unsigned int a4, unsigned int a5)
  CHive::CHive(class CHive const & a2, int a3, int a4, int a5) {
   
   IDecoObject::IDecoObject(this, a2, a3, a4, a5);
-  *(_DWORD *)this = &CHive::_vftable_;
-  *((_DWORD *)this + 19) = 0;
-  *((_BYTE *)this + 73) = *((_BYTE *)a2 + 73);
-  *((_WORD *)this + 19) = *((_WORD *)a2 + 19);
-  *((_BYTE *)this + 74) = *((_BYTE *)a2 + 74);
-  if ( !*((_BYTE *)this + 74) && BBSupportDbgReport(2, "mapobjects\\decoobj\\hive.cpp", 135, "m_uCycleFrames") == 1 )
+  this->__vftable = (IAnimatedEntity_vtbl *)&CHive::_vftable_;
+  this->m_uU5 = 0;
+  this->m_iPhases = a2->m_iPhases;
+  this->m_wJobPart = a2->m_wJobPart;
+  this->m_uCycleFrames = a2->m_uCycleFrames;
+  if ( !this->m_uCycleFrames && BBSupportDbgReport(2, "mapobjects\\decoobj\\hive.cpp", 135, "m_uCycleFrames") == 1 )
     __debugbreak();
-  *((_DWORD *)this + 20) = *((_DWORD *)a2 + 20);
-  *((_BYTE *)this + 36) = *((_BYTE *)a2 + 36);
-  *((_BYTE *)this + 72) = 1;
+  this->m_uU6 = a2->m_uU6;
+  this->m_cFrame = a2->m_cFrame;
+  this->m_uU1 = 1;
   return this;
 }
 
 
 // address=[0x1548b50]
-// Decompiled from void __thiscall CHive::~CHive(CHive *this)
+// Decompiled from int __thiscall CHive::~CHive(CHive *this)
  CHive::~CHive(void) {
   
-  *(_DWORD *)this = &CHive::_vftable_;
-  IDecoObject::~IDecoObject(this);
+  this->__vftable = (IAnimatedEntity_vtbl *)&CHive::_vftable_;
+  return IDecoObject::~IDecoObject(this);
 }
 
 
@@ -71,103 +65,81 @@
 // Decompiled from void __thiscall CHive::LogicUpdate(CHive *this)
 void  CHive::LogicUpdate(void) {
   
-  unsigned int v1; // esi
+  unsigned int m_cFrame; // esi
   int v2; // eax
   int v3; // [esp+8h] [ebp-8h]
 
   v3 = 1;
   if ( CHive::IsFlowerInSurrounding(this) )
     v3 = 3;
-  switch ( *((_BYTE *)this + 73) )
+  switch ( this->m_iPhases )
   {
-    case 0:
-      *((_DWORD *)this + 19) += v3;
-      if ( *((int *)this + 19) >= 20 )
+    case 0u:
+      this->m_uU5 += v3;
+      if ( this->m_uU5 >= 20 )
       {
-        *((_DWORD *)this + 19) = 0;
-        ++*((_BYTE *)this + 73);
-        *((_WORD *)this + 19) = CGfxManager::GetObjectFirstJob(
-                                  (CGfxManager *)g_pGfxManager,
-                                  *((unsigned __int16 *)this + 6));
-        *((_BYTE *)this + 74) = CGfxManager::GetObjectFrameCount(
-                                  (CGfxManager *)g_pGfxManager,
-                                  *((unsigned __int16 *)this + 19));
+        this->m_uU5 = 0;
+        ++this->m_iPhases;
+        this->m_wJobPart = CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType);
+        this->m_uCycleFrames = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_wJobPart);
       }
       goto LABEL_24;
-    case 1:
-      *((_DWORD *)this + 19) += v3;
-      if ( *((int *)this + 19) >= 20 )
+    case 1u:
+      this->m_uU5 += v3;
+      if ( this->m_uU5 >= 20 )
       {
-        *((_DWORD *)this + 19) = 0;
-        ++*((_BYTE *)this + 73);
+        this->m_uU5 = 0;
+        ++this->m_iPhases;
       }
       goto LABEL_24;
-    case 2:
-      *((_DWORD *)this + 19) += v3;
-      if ( *((int *)this + 19) >= 20 )
+    case 2u:
+      this->m_uU5 += v3;
+      if ( this->m_uU5 >= 20 )
       {
-        *((_DWORD *)this + 19) = 0;
-        ++*((_BYTE *)this + 73);
-        *((_BYTE *)this + 36) = 0;
-        *((_WORD *)this + 19) = CGfxManager::GetObjectFirstJob(
-                                  (CGfxManager *)g_pGfxManager,
-                                  *((unsigned __int16 *)this + 6))
-                              + 1;
-        *((_BYTE *)this + 74) = CGfxManager::GetObjectFrameCount(
-                                  (CGfxManager *)g_pGfxManager,
-                                  *((unsigned __int16 *)this + 19));
-        IEntity::SetFlagBits(this, (EntityFlag)((char *)&loc_1FFFFFF + 1));
+        this->m_uU5 = 0;
+        ++this->m_iPhases;
+        this->m_cFrame = 0;
+        this->m_wJobPart = CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType) + 1;
+        this->m_uCycleFrames = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_wJobPart);
+        IEntity::SetFlagBits(this, EntityFlag_Ready);
       }
       goto LABEL_24;
-    case 3:
-      if ( (int)--*((_DWORD *)this + 20) <= 0 )
+    case 3u:
+      if ( --this->m_uU6 <= 0 )
       {
-        IEntity::ClearFlagBits(this, (EntityFlag)((char *)&loc_1FFFFFF + 1));
-        ++*((_BYTE *)this + 73);
-        *((_BYTE *)this + 36) = 0;
-        *((_WORD *)this + 19) = CGfxManager::GetObjectFirstJob(
-                                  (CGfxManager *)g_pGfxManager,
-                                  *((unsigned __int16 *)this + 6))
-                              + 2;
-        *((_BYTE *)this + 74) = CGfxManager::GetObjectFrameCount(
-                                  (CGfxManager *)g_pGfxManager,
-                                  *((unsigned __int16 *)this + 19));
-        if ( !*((_BYTE *)this + 74)
-          && BBSupportDbgReport(2, "mapobjects\\decoobj\\hive.cpp", 334, "m_uCycleFrames") == 1 )
-        {
+        IEntity::ClearFlagBits(this, EntityFlag_Ready);
+        ++this->m_iPhases;
+        this->m_cFrame = 0;
+        this->m_wJobPart = CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType) + 2;
+        this->m_uCycleFrames = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_wJobPart);
+        if ( !this->m_uCycleFrames && BBSupportDbgReport(2, "mapobjects\\decoobj\\hive.cpp", 334, "m_uCycleFrames") == 1 )
           __debugbreak();
-        }
       }
       goto LABEL_24;
-    case 4:
-      if ( (int)++*((_DWORD *)this + 19) >= 20 )
+    case 4u:
+      if ( ++this->m_uU5 >= 20 )
       {
-        *((_DWORD *)this + 19) = 0;
-        ++*((_BYTE *)this + 73);
-        *((_BYTE *)this + 36) = 0;
-        *((_WORD *)this + 19) = CGfxManager::GetObjectFirstJob(
-                                  (CGfxManager *)g_pGfxManager,
-                                  *((unsigned __int16 *)this + 6))
-                              + 3;
-        *((_BYTE *)this + 74) = CGfxManager::GetObjectFrameCount(
-                                  (CGfxManager *)g_pGfxManager,
-                                  *((unsigned __int16 *)this + 19));
+        this->m_uU5 = 0;
+        ++this->m_iPhases;
+        this->m_cFrame = 0;
+        this->m_wJobPart = CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType) + 3;
+        this->m_uCycleFrames = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_wJobPart);
       }
       goto LABEL_24;
-    case 5:
-      if ( (int)++*((_DWORD *)this + 19) < 20
-        || (*((_DWORD *)this + 19) = 0,
-            ++*((_BYTE *)this + 36),
-            v1 = *((unsigned __int8 *)this + 36),
-            v1 < CGfxManager::GetObjectFrameCount((CGfxManager *)g_pGfxManager, *((unsigned __int16 *)this + 19))) )
+    case 5u:
+      if ( ++this->m_uU5 < 20
+        || (this->m_uU5 = 0,
+            ++this->m_cFrame,
+            m_cFrame = this->m_cFrame,
+            m_cFrame < CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_wJobPart)) )
       {
 LABEL_24:
-        IAnimatedEntity::RegisterForLogicUpdate(31);
+        IAnimatedEntity::RegisterForLogicUpdate(this, 31);
       }
       else
       {
-        v2 = IEntity::ID();
-        CDecoObjMgr::Delete((CDecoObjMgr *)&g_cDecoObjMgr, v2);
+        v2 = IEntity::ID(this);
+        CDecoObjMgr::Delete(&g_cDecoObjMgr, v2);
       }
       break;
     default:
@@ -177,11 +149,11 @@ LABEL_24:
 
 
 // address=[0x1548eb0]
-// Decompiled from void *__thiscall CHive::GetGfxInfos(CHive *this)
+// Decompiled from struct SGfxObjectInfo *__thiscall CHive::GetGfxInfos(CHive *this)
 struct SGfxObjectInfo *  CHive::GetGfxInfos(void) {
   
   int TickCounter; // esi
-  int v2; // eax
+  DWORD v2; // eax
   int v4; // [esp+4h] [ebp-8h]
 
   TickCounter = CStateGame::GetTickCounter(g_pGame);
@@ -189,15 +161,11 @@ struct SGfxObjectInfo *  CHive::GetGfxInfos(void) {
   v2 = CStateGame::GetTickCounter(g_pGame);
   IAnimatedEntity::SetLastUpdateTick(this, v2);
   if ( v4 )
-    *((_BYTE *)this + 36) = (v4 + (unsigned int)*((unsigned __int8 *)this + 36)) % *((unsigned __int8 *)this + 74);
-  CGfxManager::GetObjectGfxInfo(
-    (int)&IEntity::m_sGfxInfo,
-    *((unsigned __int16 *)this + 19),
-    *((unsigned __int8 *)this + 36),
-    1);
+    this->m_cFrame = (v4 + (unsigned int)this->m_cFrame) % this->m_uCycleFrames;
+  CGfxManager::GetObjectGfxInfo(g_pGfxManager, &IEntity::m_sGfxInfo, this->m_wJobPart, this->m_cFrame, 1);
   byte_40FE518 = 16;
   byte_40FE51A = IEntity::IsVisible(this);
-  byte_40FE266 = 0;
+  IEntity::m_sGfxInfo.m_uFlags = 0;
   return &IEntity::m_sGfxInfo;
 }
 
@@ -213,28 +181,23 @@ void  CHive::Decrease(int a2) {
   {
     __debugbreak();
   }
-  if ( (unsigned int)CGameData::Rand(g_pGameData) <= 0x1000 )
-    return IAnimatedEntity::RegisterForLogicUpdate(31);
-  IEntity::ClearFlagBits(this, (EntityFlag)((char *)&loc_1FFFFFF + 1));
+  if ( CGameData::Rand(g_pGameData) <= 0x1000 )
+    return IAnimatedEntity::RegisterForLogicUpdate(this, 31);
+  IEntity::ClearFlagBits(this, EntityFlag_Ready);
   if ( CHive::IsFlowerInSurrounding(this) )
   {
-    *((_BYTE *)this + 73) = 1;
-    *((_BYTE *)this + 36) = 0;
-    *((_WORD *)this + 19) = CGfxManager::GetObjectFirstJob(
-                              (CGfxManager *)g_pGfxManager,
-                              *((unsigned __int16 *)this + 6));
+    this->m_iPhases = 1;
+    this->m_cFrame = 0;
+    this->m_wJobPart = CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType);
   }
   else
   {
-    *((_BYTE *)this + 73) = 0;
-    *((_BYTE *)this + 36) = 0;
-    *((_WORD *)this + 19) = CGfxManager::GetObjectFirstJob(
-                              (CGfxManager *)g_pGfxManager,
-                              *((unsigned __int16 *)this + 6))
-                          + 1;
+    this->m_iPhases = 0;
+    this->m_cFrame = 0;
+    this->m_wJobPart = CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType) + 1;
   }
-  result = CGfxManager::GetObjectFrameCount((CGfxManager *)g_pGfxManager, *((unsigned __int16 *)this + 19));
-  *((_BYTE *)this + 74) = result;
+  result = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_wJobPart);
+  this->m_uCycleFrames = result;
   return result;
 }
 
@@ -248,18 +211,18 @@ int  CHive::Increase(int a2) {
 
 
 // address=[0x1549080]
-// Decompiled from unsigned int __cdecl CHive::operator new(unsigned int a1)
+// Decompiled from uint __cdecl CHive::operator new(uint a1)
 void * __cdecl CHive::operator new(unsigned int a1) {
   
-  return CDecoObjMgr::Alloc((CDecoObjMgr *)&g_cDecoObjMgr, a1);
+  return CDecoObjMgr::Alloc(&g_cDecoObjMgr, a1);
 }
 
 
 // address=[0x15490a0]
-// Decompiled from void __cdecl CHive::operator delete(void *a1)
+// Decompiled from void __cdecl CHive::operator delete(uint *a1)
 void __cdecl CHive::operator delete(void * a1) {
   
-  CDecoObjMgr::Dealloc((CDecoObjMgr *)&g_cDecoObjMgr, a1);
+  CDecoObjMgr::Dealloc(&g_cDecoObjMgr, a1);
 }
 
 
@@ -271,9 +234,9 @@ bool  CHive::IsFlowerInSurrounding(void) {
   int v2; // esi
   int v4; // [esp+4h] [ebp-20h]
   int v5; // [esp+8h] [ebp-1Ch]
-  unsigned __int16 *DecoObjPtr; // [esp+Ch] [ebp-18h]
-  int v7; // [esp+10h] [ebp-14h]
-  int v8; // [esp+14h] [ebp-10h]
+  IEntity *DecoObjPtr; // [esp+Ch] [ebp-18h]
+  unsigned int v7; // [esp+10h] [ebp-14h]
+  unsigned int v8; // [esp+14h] [ebp-10h]
   int v10; // [esp+1Ch] [ebp-8h]
   int i; // [esp+20h] [ebp-4h]
 
@@ -284,14 +247,14 @@ bool  CHive::IsFlowerInSurrounding(void) {
     v7 = CSpiralOffsets::DeltaX(i) + v1;
     v2 = IEntity::Y(this);
     v8 = CSpiralOffsets::DeltaY(i) + v2;
-    if ( (unsigned __int8)CWorldManager::InWorld(v7, v8) )
+    if ( CWorldManager::InWorld(v7, v8) )
     {
       v5 = CWorldManager::ObjectId(v7, v8);
-      DecoObjPtr = (unsigned __int16 *)CDecoObjMgr::GetDecoObjPtr(v5);
+      DecoObjPtr = CDecoObjMgr::GetDecoObjPtr(v5);
       if ( DecoObjPtr )
       {
         v4 = IEntity::Type(DecoObjPtr);
-        if ( CDecoObjMgr::IsFlower((CDecoObjMgr *)&g_cDecoObjMgr, v4) )
+        if ( CDecoObjMgr::IsFlower(&g_cDecoObjMgr, v4) )
           return 1;
       }
     }
@@ -301,19 +264,17 @@ bool  CHive::IsFlowerInSurrounding(void) {
 
 
 // address=[0x15491c0]
-// Decompiled from _DWORD *__thiscall CHive::CHive(_DWORD *this, int a2)
+// Decompiled from CHive *__thiscall CHive::CHive(CHive *this, struct std::istream *a1)
  CHive::CHive(std::istream & a2) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
-  _DWORD *v5; // [esp+10h] [ebp-10h]
   int v6; // [esp+1Ch] [ebp-4h]
 
-  v5 = this;
-  IDecoObject::IDecoObject(a2);
+  IDecoObject::IDecoObject(this, a1);
   v6 = 0;
-  *v5 = &CHive::_vftable_;
-  operator^<unsigned int>(a2, &v3);
+  this->__vftable = (IAnimatedEntity_vtbl *)&CHive::_vftable_;
+  operator^<unsigned int>(a1, &v3);
   if ( v3 != 1 )
   {
     BBSupportTracePrintF(3, "load output defect Unknown fileFormatVersion for CHive");
@@ -321,32 +282,30 @@ bool  CHive::IsFlowerInSurrounding(void) {
     CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
     _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
   }
-  operator^<bool>(a2, v5 + 18);
-  operator^<unsigned char>(a2, (char *)v5 + 73);
-  operator^<unsigned char>(a2, (char *)v5 + 74);
-  operator^<int>(a2, (int)(v5 + 19));
-  operator^<int>(a2, (int)(v5 + 20));
+  operator^<bool>(a1, &this->m_uU1);
+  operator^<unsigned char>(a1, &this->m_iPhases);
+  operator^<unsigned char>(a1, &this->m_uCycleFrames);
+  operator^<int>(a1, &this->m_uU5);
+  operator^<int>(a1, &this->m_uU6);
   v6 = -1;
-  return v5;
+  return this;
 }
 
 
 // address=[0x15492d0]
-// Decompiled from int __thiscall CHive::Store(int *this, struct std::ostream *a2)
-void  CHive::Store(std::ostream & a2) {
+// Decompiled from void __thiscall CHive::Store(CHive *this, struct std::ostream *a1)
+void  CHive::Store(std::ostream & a1) {
   
-  int v3; // [esp+0h] [ebp-8h] BYREF
-  int *v4; // [esp+4h] [ebp-4h]
+  int v2; // [esp+0h] [ebp-8h] BYREF
 
-  v4 = this;
-  IDecoObject::Store(a2);
-  v3 = 1;
-  operator^<unsigned int>(a2, &v3);
-  operator^<bool>((int)a2, (int)(v4 + 18));
-  operator^<unsigned char>(a2, (int)v4 + 73);
-  operator^<unsigned char>(a2, (int)v4 + 74);
-  operator^<int>((int)a2, v4 + 19);
-  return operator^<int>((int)a2, v4 + 20);
+  IDecoObject::Store(this, a1);
+  v2 = 1;
+  operator^<unsigned int>(a1, &v2);
+  operator^<bool>(a1, &this->m_uU1);
+  operator^<unsigned char>(a1, &this->m_iPhases);
+  operator^<unsigned char>(a1, &this->m_uCycleFrames);
+  operator^<int>(a1, &this->m_uU5);
+  operator^<int>(a1, &this->m_uU6);
 }
 
 
@@ -361,3 +320,4 @@ unsigned long  CHive::ClassID(void)const {
 // address=[0x3d8bb10]
 // [Decompilation failed for static unsigned long CHive::m_iClassID]
 
+#endif // Already implemented

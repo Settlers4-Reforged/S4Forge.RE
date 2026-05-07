@@ -1,3 +1,4 @@
+#if FALSE
 #include "CPlant.h"
 
 // Definitions for class CPlant
@@ -17,32 +18,27 @@ class CPersistence * __cdecl CPlant::New(std::istream & a1) {
 
 
 // address=[0x154a040]
-// Decompiled from CPlant *__thiscall CPlant::CPlant(CPlant *this, int a2, int a3, int a4, int a5, char a6, int a7)
- CPlant::CPlant(int a2, int a3, int a4, int a5, int a6, int a7) {
+// Decompiled from CPlant *__thiscall CPlant::CPlant(  CPlant *this,  unsigned int a2,  unsigned int a3,  T_OBJECT_TYPE a4,  int a5,  BYTE _iGoodType,  int a7)
+ CPlant::CPlant(int a2, int a3, int a4, int a5, int _iGoodType, int a7) {
   
   IDecoObject::IDecoObject(this, a2, a3, a4, a5, a7 != 0);
-  *(_DWORD *)this = &CPlant::_vftable_;
-  *((_BYTE *)this + 72) = 1;
-  *((_BYTE *)this + 73) = a7;
-  *((_BYTE *)this + 75) = a6;
-  *((_DWORD *)this + 19) = 0;
-  *((_WORD *)this + 19) = *((unsigned __int8 *)this + 73)
-                        + (unsigned __int16)CGfxManager::GetObjectFirstJob(
-                                              (CGfxManager *)g_pGfxManager,
-                                              *((unsigned __int16 *)this + 6));
-  *((_BYTE *)this + 74) = CGfxManager::GetObjectFrameCount(
-                            (CGfxManager *)g_pGfxManager,
-                            *((unsigned __int16 *)this + 19));
-  if ( !*((_BYTE *)this + 74) && BBSupportDbgReport(2, "MapObjects\\DecoObj\\Plant.cpp", 89, "m_uCycleFrames") == 1 )
+  this->__vftable = (IAnimatedEntity_vtbl *)&CPlant::_vftable_;
+  this->m_uU1 = 1;
+  this->m_iPhases = a7;
+  this->m_iGoodType = _iGoodType;
+  this->m_uU5 = 0;
+  this->m_wJobPart = this->m_iPhases + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType);
+  this->m_uCycleFrames = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_wJobPart);
+  if ( !this->m_uCycleFrames && BBSupportDbgReport(2, "MapObjects\\DecoObj\\Plant.cpp", 89, "m_uCycleFrames") == 1 )
     __debugbreak();
   if ( IDecoObject::IsStaticInstance(this) )
   {
-    *((_BYTE *)this + 36) = CStateGame::Rand(g_pGame) % (unsigned int)*((unsigned __int8 *)this + 74);
-    IEntity::SetFlagBits(this, (EntityFlag)((char *)&loc_1FFFFFF + 1));
+    this->m_cFrame = CStateGame::Rand(g_pGame) % this->m_uCycleFrames;
+    IEntity::SetFlagBits(this, EntityFlag_Ready);
   }
   else
   {
-    IAnimatedEntity::RegisterForLogicUpdate(31);
+    IAnimatedEntity::RegisterForLogicUpdate(this, 31);
   }
   return this;
 }
@@ -52,21 +48,18 @@ class CPersistence * __cdecl CPlant::New(std::istream & a1) {
 // Decompiled from CPlant *__thiscall CPlant::CPlant(CPlant *this, const struct CPlant *a2, int a3, int a4, int a5)
  CPlant::CPlant(class CPlant const & a2, int a3, int a4, int a5) {
   
-  IDecoObject::IDecoObject(this, (IEntity *)a2, a3, a4, a5);
-  *(_DWORD *)this = &CPlant::_vftable_;
-  *((_DWORD *)this + 19) = 0;
+  IDecoObject::IDecoObject(this, a2, a3, a4, a5);
+  this->__vftable = (IAnimatedEntity_vtbl *)&CPlant::_vftable_;
+  this->m_uU5 = 0;
   IEntity::SetFlagBits(this, EntityFlag_Ready);
-  *((_BYTE *)this + 73) = 3;
-  *((_WORD *)this + 19) = *((unsigned __int8 *)this + 73)
-                        + (unsigned __int16)CGfxManager::GetObjectFirstJob(
-                                              g_pGfxManager,
-                                              *((unsigned __int16 *)this + 6));
-  *((_BYTE *)this + 74) = *((_BYTE *)a2 + 74);
-  if ( !*((_BYTE *)this + 74) && BBSupportDbgReport(2, "MapObjects\\DecoObj\\Plant.cpp", 135, "m_uCycleFrames") == 1 )
+  this->m_iPhases = 3;
+  this->m_wJobPart = this->m_iPhases + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType);
+  this->m_uCycleFrames = a2->m_uCycleFrames;
+  if ( !this->m_uCycleFrames && BBSupportDbgReport(2, "MapObjects\\DecoObj\\Plant.cpp", 135, "m_uCycleFrames") == 1 )
     __debugbreak();
-  *((_BYTE *)this + 36) = *((_BYTE *)a2 + 36);
-  *((_BYTE *)this + 72) = 1;
-  *((_BYTE *)this + 75) = *((_BYTE *)a2 + 75);
+  this->m_cFrame = a2->m_cFrame;
+  this->m_uU1 = 1;
+  this->m_iGoodType = a2->m_iGoodType;
   return this;
 }
 
@@ -84,58 +77,56 @@ class CPersistence * __cdecl CPlant::New(std::istream & a1) {
 // Decompiled from void __thiscall CPlant::LogicUpdate(CPlant *this)
 void  CPlant::LogicUpdate(void) {
   
-  int v1; // eax
+  unsigned int v1; // eax
   int v2; // eax
-  unsigned int v3; // esi
+  unsigned int m_cFrame; // esi
   int v4; // eax
-  int v5; // [esp-Ch] [ebp-1Ch]
-  int v6; // [esp-8h] [ebp-18h]
+  unsigned int v5; // [esp-Ch] [ebp-1Ch]
+  T_OBJECT_TYPE v6; // [esp-8h] [ebp-18h]
 
-  switch ( *((_BYTE *)this + 73) )
+  switch ( this->m_iPhases )
   {
-    case 0:
-    case 1:
-    case 2:
-      if ( (int)++*((_DWORD *)this + 19) >= 30
-        && (*((_DWORD *)this + 19) = 0,
-            ++*((_BYTE *)this + 73),
-            *((_WORD *)this + 19) = *((unsigned __int8 *)this + 73)
-                                  + (unsigned __int16)CGfxManager::GetObjectFirstJob(
-                                                        (CGfxManager *)g_pGfxManager,
-                                                        *((unsigned __int16 *)this + 6)),
-            *((_BYTE *)this + 73) == 3) )
+    case 0u:
+    case 1u:
+    case 2u:
+      if ( ++this->m_uU5 >= 30
+        && (this->m_uU5 = 0,
+            ++this->m_iPhases,
+            this->m_wJobPart = this->m_iPhases
+                             + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType),
+            this->m_iPhases == 3) )
       {
-        IEntity::SetFlagBits(this, (EntityFlag)((char *)&loc_1FFFFFF + 1));
-        v6 = IEntity::Type((unsigned __int16 *)this);
+        IEntity::SetFlagBits(this, EntityFlag_Ready);
+        v6 = IEntity::Type(this);
         v5 = IEntity::Y(this);
         v1 = IEntity::X(this);
-        CDecoObjMgr::ChangeToStaticInstance((CDecoObjMgr *)&g_cDecoObjMgr, v1, v5, v6, 0);
+        CDecoObjMgr::ChangeToStaticInstance(&g_cDecoObjMgr, v1, v5, v6, 0);
       }
       else
       {
-        if ( !IEntity::FlagBits(this, (EntityFlag)0x100000u) )
+        if ( !IEntity::FlagBits(this, (EntityFlag)0x100000) )
           goto LABEL_14;
         v2 = CStaticConfigVarInt::operator int(g_pMagicFasterCropsDecrease256);
-        IAnimatedEntity::RegisterForLogicUpdate((31 * v2 + 127) >> 8);
+        IAnimatedEntity::RegisterForLogicUpdate(this, (31 * v2 + 127) >> 8);
       }
       break;
-    case 4:
-    case 5:
-      if ( (int)++*((_DWORD *)this + 19) >= 30
-        && (*((_WORD *)this + 6) == 209
-         || *((_WORD *)this + 6) == 210
-         || (*((_DWORD *)this + 19) = 0,
-             ++*((_BYTE *)this + 36),
-             v3 = *((unsigned __int8 *)this + 36),
-             v3 >= CGfxManager::GetObjectFrameCount((CGfxManager *)g_pGfxManager, *((unsigned __int16 *)this + 19)))) )
+    case 4u:
+    case 5u:
+      if ( ++this->m_uU5 >= 30
+        && (this->m_nType == OBJECT_WHEAT1
+         || this->m_nType == OBJECT_WHEAT2
+         || (this->m_uU5 = 0,
+             ++this->m_cFrame,
+             m_cFrame = this->m_cFrame,
+             m_cFrame >= CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_wJobPart))) )
       {
-        v4 = IEntity::ID();
-        CDecoObjMgr::Delete((CDecoObjMgr *)&g_cDecoObjMgr, v4);
+        v4 = IEntity::ID(this);
+        CDecoObjMgr::Delete(&g_cDecoObjMgr, v4);
       }
       else
       {
 LABEL_14:
-        IAnimatedEntity::RegisterForLogicUpdate(31);
+        IAnimatedEntity::RegisterForLogicUpdate(this, 31);
       }
       break;
     default:
@@ -145,48 +136,44 @@ LABEL_14:
 
 
 // address=[0x154a490]
-// Decompiled from void *__thiscall CPlant::GetGfxInfos(int this)
+// Decompiled from struct SGfxObjectInfo *__thiscall CPlant::GetGfxInfos(CPlant *this)
 struct SGfxObjectInfo *  CPlant::GetGfxInfos(void) {
   
   int TickCounter; // esi
-  int v2; // eax
+  DWORD v2; // eax
   int v4; // [esp+4h] [ebp-8h]
 
   TickCounter = CStateGame::GetTickCounter(g_pGame);
   v4 = TickCounter - IAnimatedEntity::LastUpdateTick(this);
   v2 = CStateGame::GetTickCounter(g_pGame);
-  IAnimatedEntity::SetLastUpdateTick((CMFCCaptionButton *)this, v2);
-  if ( v4 && *(unsigned __int8 *)(this + 73) < 4u )
-    *(_BYTE *)(this + 36) = (v4 + (unsigned int)*(unsigned __int8 *)(this + 36)) % *(unsigned __int8 *)(this + 74);
-  CGfxManager::GetObjectGfxInfo(
-    (int)&IEntity::m_sGfxInfo,
-    *(unsigned __int16 *)(this + 38),
-    *(unsigned __int8 *)(this + 36),
-    1);
+  IAnimatedEntity::SetLastUpdateTick(this, v2);
+  if ( v4 && this->m_iPhases < 4u )
+    this->m_cFrame = (v4 + (unsigned int)this->m_cFrame) % this->m_uCycleFrames;
+  CGfxManager::GetObjectGfxInfo(g_pGfxManager, &IEntity::m_sGfxInfo, this->m_wJobPart, this->m_cFrame, 1);
   byte_40FE518 = 16;
-  byte_40FE51A = IEntity::IsVisible((_DWORD *)this);
-  byte_40FE266 = 0;
+  byte_40FE51A = IEntity::IsVisible(this);
+  IEntity::m_sGfxInfo.m_uFlags = 0;
   return &IEntity::m_sGfxInfo;
 }
 
 
 // address=[0x154a540]
-// Decompiled from int __thiscall CPlant::Take(CPlant *this, int a2)
-void  CPlant::Take(int a2) {
+// Decompiled from int __thiscall CPlant::Take(CPlant *this, int _iAmount)
+void  CPlant::Take(int _iAmount) {
   
   if ( IDecoObject::IsStaticInstance(this)
     && BBSupportDbgReport(2, "MapObjects\\DecoObj\\Plant.cpp", 342, "! IsStaticInstance()") == 1 )
   {
     __debugbreak();
   }
-  if ( (a2 + *((unsigned __int8 *)this + 73) > 5
-     || IEntity::Type((unsigned __int16 *)this) != 209
-     && IEntity::Type((unsigned __int16 *)this) != 210
-     && IEntity::Type((unsigned __int16 *)this) != 255)
-    && (a2 + *((unsigned __int8 *)this + 73) > 4
-     || IEntity::Type((unsigned __int16 *)this) == 209
-     || IEntity::Type((unsigned __int16 *)this) == 210
-     || IEntity::Type((unsigned __int16 *)this) == 255)
+  if ( (_iAmount + this->m_iPhases > 5
+     || IEntity::Type(this) != OBJECT_WHEAT1
+     && IEntity::Type(this) != OBJECT_WHEAT2
+     && IEntity::Type(this) != OBJECT_SUNFLOWER)
+    && (_iAmount + this->m_iPhases > 4
+     || IEntity::Type(this) == OBJECT_WHEAT1
+     || IEntity::Type(this) == OBJECT_WHEAT2
+     || IEntity::Type(this) == OBJECT_SUNFLOWER)
     && BBSupportDbgReport(
          2,
          "MapObjects\\DecoObj\\Plant.cpp",
@@ -197,20 +184,15 @@ void  CPlant::Take(int a2) {
   {
     __debugbreak();
   }
-  IEntity::ClearFlagBits(this, (EntityFlag)((char *)&loc_1FFFFFF + 1));
-  *((_BYTE *)this + 73) += a2;
-  *((_BYTE *)this + 36) = 0;
-  *((_WORD *)this + 19) = *((unsigned __int8 *)this + 73)
-                        + (unsigned __int16)CGfxManager::GetObjectFirstJob(
-                                              (CGfxManager *)g_pGfxManager,
-                                              *((unsigned __int16 *)this + 6));
-  *((_BYTE *)this + 74) = CGfxManager::GetObjectFrameCount(
-                            (CGfxManager *)g_pGfxManager,
-                            *((unsigned __int16 *)this + 19));
-  if ( !*((_BYTE *)this + 74) && BBSupportDbgReport(2, "MapObjects\\DecoObj\\Plant.cpp", 362, "m_uCycleFrames") == 1 )
+  IEntity::ClearFlagBits(this, EntityFlag_Ready);
+  this->m_iPhases += _iAmount;
+  this->m_cFrame = 0;
+  this->m_wJobPart = this->m_iPhases + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType);
+  this->m_uCycleFrames = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_wJobPart);
+  if ( !this->m_uCycleFrames && BBSupportDbgReport(2, "MapObjects\\DecoObj\\Plant.cpp", 362, "m_uCycleFrames") == 1 )
     __debugbreak();
-  *((_DWORD *)this + 19) = 0;
-  return IAnimatedEntity::RegisterForLogicUpdate(31);
+  this->m_uU5 = 0;
+  return IAnimatedEntity::RegisterForLogicUpdate(this, 31);
 }
 
 
@@ -231,68 +213,64 @@ int  CPlant::Increase(int a2) {
 
 
 // address=[0x154a6f0]
-// Decompiled from unsigned int __cdecl CPlant::operator new(unsigned int a1)
+// Decompiled from uint __cdecl CPlant::operator new(uint a1)
 void * __cdecl CPlant::operator new(unsigned int a1) {
   
-  return CDecoObjMgr::Alloc((CDecoObjMgr *)&g_cDecoObjMgr, a1);
+  return CDecoObjMgr::Alloc(&g_cDecoObjMgr, a1);
 }
 
 
 // address=[0x154a710]
-// Decompiled from void __cdecl CPlant::operator delete(void *a1)
+// Decompiled from void __cdecl CPlant::operator delete(uint *a1)
 void __cdecl CPlant::operator delete(void * a1) {
   
-  CDecoObjMgr::Dealloc((CDecoObjMgr *)&g_cDecoObjMgr, a1);
+  CDecoObjMgr::Dealloc(&g_cDecoObjMgr, a1);
 }
 
 
 // address=[0x154a750]
-// Decompiled from char *__thiscall CPlant::CPlant(char *this, int a2)
+// Decompiled from CPlant *__thiscall CPlant::CPlant(CPlant *this, struct std::istream *a1)
  CPlant::CPlant(std::istream & a2) {
   
-  int v3; // [esp+8h] [ebp-18h] BYREF
+  int fileFormatVersion; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
-  char *v5; // [esp+10h] [ebp-10h]
   int v6; // [esp+1Ch] [ebp-4h]
 
-  v5 = this;
-  IDecoObject::IDecoObject(a2);
+  IDecoObject::IDecoObject(this, a1);
   v6 = 0;
-  *(_DWORD *)v5 = &CPlant::_vftable_;
-  operator^<unsigned int>(a2, &v3);
-  if ( v3 != 1 )
+  this->__vftable = (IAnimatedEntity_vtbl *)&CPlant::_vftable_;
+  operator^<unsigned int>(a1, &fileFormatVersion);
+  if ( fileFormatVersion != 1 )
   {
     BBSupportTracePrintF(3, "load output defect Unknown fileFormatVersion for CPlant");
     pExceptionObject = 0;
     CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
     _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
   }
-  operator^<bool>(a2, v5 + 72);
-  operator^<unsigned char>(a2, v5 + 73);
-  operator^<unsigned char>(a2, v5 + 74);
-  operator^<unsigned char>(a2, v5 + 75);
-  operator^<int>(a2, (int)(v5 + 76));
+  operator^<bool>(a1, &this->m_uU1);
+  operator^<unsigned char>(a1, &this->m_iPhases);
+  operator^<unsigned char>(a1, &this->m_uCycleFrames);
+  operator^<unsigned char>(a1, &this->m_iGoodType);
+  operator^<int>(a1, &this->m_uU5);
   v6 = -1;
-  return v5;
+  return this;
 }
 
 
 // address=[0x154a860]
-// Decompiled from int __thiscall CPlant::Store(int *this, struct std::ostream *a2)
-void  CPlant::Store(std::ostream & a2) {
+// Decompiled from void __thiscall CPlant::Store(CPlant *this, struct std::ostream *a1)
+void  CPlant::Store(std::ostream & a1) {
   
-  int v3; // [esp+0h] [ebp-8h] BYREF
-  int *v4; // [esp+4h] [ebp-4h]
+  int v2; // [esp+0h] [ebp-8h] BYREF
 
-  v4 = this;
-  IDecoObject::Store(a2);
-  v3 = 1;
-  operator^<unsigned int>(a2, &v3);
-  operator^<bool>((int)a2, (int)(v4 + 18));
-  operator^<unsigned char>(a2, (int)v4 + 73);
-  operator^<unsigned char>(a2, (int)v4 + 74);
-  operator^<unsigned char>(a2, (int)v4 + 75);
-  return operator^<int>((int)a2, v4 + 19);
+  IDecoObject::Store(this, a1);
+  v2 = 1;
+  operator^<unsigned int>(a1, &v2);
+  operator^<bool>(a1, &this->m_uU1);
+  operator^<unsigned char>(a1, &this->m_iPhases);
+  operator^<unsigned char>(a1, &this->m_uCycleFrames);
+  operator^<unsigned char>(a1, &this->m_iGoodType);
+  operator^<int>(a1, &this->m_uU5);
 }
 
 
@@ -308,10 +286,11 @@ unsigned long  CPlant::ClassID(void)const {
 // Decompiled from int __thiscall CPlant::GetGoodType(CPlant *this)
 int  CPlant::GetGoodType(void)const {
   
-  return *((unsigned __int8 *)this + 75);
+  return this->m_iGoodType;
 }
 
 
 // address=[0x3d8bb18]
 // [Decompilation failed for static unsigned long CPlant::m_iClassID]
 
+#endif // Already implemented
