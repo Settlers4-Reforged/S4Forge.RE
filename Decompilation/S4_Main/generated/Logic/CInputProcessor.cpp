@@ -4073,7 +4073,7 @@ void  CInputProcessor::ShowPossibleBuildingType(void) {
   int iPlayerId; // eax
   int v3; // eax
   int v4; // eax
-  unsigned int v5; // eax
+  DWORD v5; // eax
   DWORD m_iBuildBuildingType; // [esp-8h] [ebp-34h]
   DWORD iBuildingType; // [esp-8h] [ebp-34h]
   char v8; // [esp+4h] [ebp-28h]

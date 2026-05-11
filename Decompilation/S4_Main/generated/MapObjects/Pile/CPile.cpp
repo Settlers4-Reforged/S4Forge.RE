@@ -269,7 +269,7 @@ void  CPile::GetPatchGfx(struct SGfxPatchObject & a2) {
   if ( *((_BYTE *)this + 68) && *((unsigned __int8 *)this + 68) < 0x2Bu && *((_BYTE *)this + 69) )
   {
     CGfxManager::GetPatchPileGfxInfo(
-      (CGfxManager *)g_pGfxManager,
+      g_pGfxManager,
       a2,
       *((unsigned __int8 *)this + 68),
       *((unsigned __int8 *)this + 69),

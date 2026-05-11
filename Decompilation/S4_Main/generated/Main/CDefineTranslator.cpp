@@ -20,14 +20,15 @@ int  CDefineTranslator::GetValueOfDefine(std::string const & a2)const {
   int v15; // [esp+54h] [ebp-4h]
 
   v12 = this;
-  if ( !std::string::compare((char *)&byte_369F007) )
+  if ( !std::string::compare(a2, (char *)&byte_369F007) )
     return 0;
   std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,int>>>>::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,int>>>>(v5);
   v15 = 0;
   v13 = 0;
   v10 = std::_Tree<std::_Tmap_traits<std::string,int,std::less<std::string>,std::allocator<std::pair<std::string const,int>>,0>>::find(
-          v4,
-          a2);
+          v12,
+          (int)v4,
+          (int)a2);
   v9 = v10;
   LOBYTE(v15) = 1;
   std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,int>>>>::operator=(v10);

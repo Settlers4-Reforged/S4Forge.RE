@@ -84,7 +84,7 @@ public:
     bool  DisableDialogControls(int a2);
 
     // address=[0x2fa1520]
-    bool  SetText(int a2, int a3, char const * Str);
+    bool  SetText(int _iContainer, int _iControlId, char const * Str);
 
     // address=[0x2fa17e0]
     bool  SetEditProperties(int a2, int a3, unsigned char a4, unsigned char a5);
@@ -138,10 +138,10 @@ public:
     int  GetSliderPosition(int a2, int a3);
 
     // address=[0x2fa2580]
-    bool  SelectControl(int a2, int a3, bool a4);
+    bool  SelectControl(int a2, int _iControlId, bool a4);
 
     // address=[0x2fa2700]
-    bool  ResetRadioGroup(int a2, int a3);
+    bool  ResetRadioGroup(int _iContainer, int _iControlId);
 
     // address=[0x2fa27d0]
     bool  SetWidth(int a2, int a3, int a4);

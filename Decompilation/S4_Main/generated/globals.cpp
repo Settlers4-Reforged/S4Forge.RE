@@ -3655,8 +3655,8 @@ bool __cdecl GuiDlgAOBriefingProc(int a1, int a2, int a3) {
   char *v4; // eax
   char *v5; // eax
   char *v6; // eax
-  CEvn_Event *v7; // [esp+4h] [ebp-5Ch]
-  CEvn_Event *v8; // [esp+Ch] [ebp-54h]
+  struct CEvn_Event *v7; // [esp+4h] [ebp-5Ch]
+  struct CEvn_Event *v8; // [esp+Ch] [ebp-54h]
   CEvn_Event v9; // [esp+20h] [ebp-40h] BYREF
   CEvn_Event v10; // [esp+38h] [ebp-28h] BYREF
   int v11; // [esp+5Ch] [ebp-4h]
@@ -3670,7 +3670,7 @@ bool __cdecl GuiDlgAOBriefingProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a3 & 0x10000) != 0 )
-        PlayGuiSound(1);
+        PlayGuiSound(1u);
       else
         PlayGuiSound(0);
       break;
@@ -3678,7 +3678,7 @@ bool __cdecl GuiDlgAOBriefingProc(int a1, int a2, int a3) {
       switch ( (__int16)a2 )
       {
         case 1:
-          PlayGuiSound(2);
+          PlayGuiSound(2u);
           v8 = CEvn_Event::CEvn_Event(&v10, 0x1F55u, 0, 0, 0);
           v11 = 0;
           IEventEngine::SendAMessage(g_pEvnEngine, v8);
@@ -3686,7 +3686,7 @@ bool __cdecl GuiDlgAOBriefingProc(int a1, int a2, int a3) {
           CEvn_Event::~CEvn_Event(&v10);
           break;
         case 2:
-          PlayGuiSound(2);
+          PlayGuiSound(2u);
           v7 = CEvn_Event::CEvn_Event(&v9, 0x1F56u, 0, 0, 0);
           v11 = 1;
           IEventEngine::SendAMessage(g_pEvnEngine, v7);
@@ -3699,14 +3699,14 @@ bool __cdecl GuiDlgAOBriefingProc(int a1, int a2, int a3) {
         case 20:
           if ( (a2 & 0x10000) != 0 )
           {
-            v6 = (char *)std::string::c_str(&stru_402C9D0);
-            IGuiEngine::SetText((void *)g_pGUIEngine, 7, 19, v6);
-            IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 7, 6, 1);
+            v6 = std::string::c_str(&stru_402C9D0);
+            IGuiEngine::SetText(g_pGUIEngine, 7, 19, v6);
+            IGuiEngine::SetControlVisibility(g_pGUIEngine, 7, 6, 1);
           }
           else
           {
-            IGuiEngine::SetText((void *)g_pGUIEngine, 7, 19, (char *)&byte_368A54B);
-            IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 7, 6, 0);
+            IGuiEngine::SetText(g_pGUIEngine, 7, 19, (char *)&byte_368A54B);
+            IGuiEngine::SetControlVisibility(g_pGUIEngine, 7, 6, 0);
           }
           break;
         case 21:
@@ -3766,9 +3766,9 @@ void __cdecl InitGuiDlgAOCampaignBonus(void) {
   if ( g_pStringEngine )
   {
     v0 = g_pStringEngine->GetString(g_pStringEngine, 112);
-    IGuiEngine::SetText((void *)g_pGUIEngine, 6, 25, v0);
+    IGuiEngine::SetText(g_pGUIEngine, 6, 25, v0);
     v1 = g_pStringEngine->GetString(g_pStringEngine, 26);
-    IGuiEngine::SetText((void *)g_pGUIEngine, 6, 23, v1);
+    IGuiEngine::SetText(g_pGUIEngine, 6, 23, v1);
   }
 }
 
@@ -3860,20 +3860,20 @@ void __cdecl InitGuiDlgAOCampaignMayan(void) {
 
   if ( g_pStringEngine )
   {
-    v0 = g_pStringEngine->GetString(g_pStringEngine, 114);
-    IGuiEngine::SetText((void *)g_pGUIEngine, 3, 45, v0);
-    v1 = g_pStringEngine->GetString(g_pStringEngine, 35);
-    IGuiEngine::SetText((void *)g_pGUIEngine, 3, 34, v1);
-    v2 = g_pStringEngine->GetString(g_pStringEngine, 37);
-    IGuiEngine::SetText((void *)g_pGUIEngine, 3, 35, v2);
-    v3 = g_pStringEngine->GetString(g_pStringEngine, 39);
-    IGuiEngine::SetText((void *)g_pGUIEngine, 3, 36, v3);
-    v4 = g_pStringEngine->GetString(g_pStringEngine, 41);
-    IGuiEngine::SetText((void *)g_pGUIEngine, 3, 37, v4);
+    v0 = g_pStringEngine->GetString(g_pStringEngine, AO_CAPTION_MAYAN_MENU);
+    IGuiEngine::SetText(g_pGUIEngine, 3, 45, v0);
+    v1 = g_pStringEngine->GetString(g_pStringEngine, AO_B_CAPTION_MAYAN_1);
+    IGuiEngine::SetText(g_pGUIEngine, 3, 34, v1);
+    v2 = g_pStringEngine->GetString(g_pStringEngine, AO_B_CAPTION_MAYAN_2);
+    IGuiEngine::SetText(g_pGUIEngine, 3, 35, v2);
+    v3 = g_pStringEngine->GetString(g_pStringEngine, AO_B_CAPTION_MAYAN_3);
+    IGuiEngine::SetText(g_pGUIEngine, 3, 36, v3);
+    v4 = g_pStringEngine->GetString(g_pStringEngine, AO_B_CAPTION_MAYAN_4);
+    IGuiEngine::SetText(g_pGUIEngine, 3, 37, v4);
     v5 = dword_402CBBC[13];
-    IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 3, 35, v5 >= 1);
-    IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 3, 36, v5 >= 2);
-    IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 3, 37, v5 >= 3);
+    IGuiEngine::EnableControl(g_pGUIEngine, 3, 35, v5 >= 1);
+    IGuiEngine::EnableControl(g_pGUIEngine, 3, 36, v5 >= 2);
+    IGuiEngine::EnableControl(g_pGUIEngine, 3, 37, v5 >= 3);
   }
 }
 
@@ -5560,17 +5560,17 @@ bool __cdecl GuiDlgBriefingProc(int a1, int a2, int a3) {
 
 
 // address=[0x137cb80]
-// Decompiled from char __cdecl SetBuildBasicProperties(int a1, int a2, int a3, int a4)
+// Decompiled from bool __cdecl SetBuildBasicProperties(int a1, int a2, T_S4_GUI a3, T_S4_GUI a4)
 void __cdecl SetBuildBasicProperties(int a1, int a2, int a3, int a4) {
   
   CHAR v5[52]; // [esp+4h] [ebp-6Ch] BYREF
   CHAR Str[52]; // [esp+38h] [ebp-38h] BYREF
 
   _wsprintfA(Str, "%u", a1);
-  IGuiEngine::SetText((void *)g_pGUIEngine, 9, a3, Str);
+  IGuiEngine::SetText(g_pGUIEngine, 9, a3, Str);
   _wsprintfA(v5, "+%u", a2);
-  IGuiEngine::SetText((void *)g_pGUIEngine, 9, a4, v5);
-  return IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 9, a4, a2 > 0);
+  IGuiEngine::SetText(g_pGUIEngine, 9, a4, v5);
+  return IGuiEngine::SetControlVisibility(g_pGUIEngine, 9, a4, a2 > 0);
 }
 
 
@@ -7855,27 +7855,27 @@ void __cdecl UpdateGuiDlgBuildingContext(void) {
 
   if ( g_pGUIEngine )
   {
-    GuiHouseImageID = GetGuiHouseImageID((char)g_cBuildingInfo.?, (char)g_cBuildingInfo.?, 0);
-    IGuiEngine::SetImages((void *)g_pGUIEngine, 15, 470, GuiHouseImageID, 0);
-    GuiHouseString = (char *)GetGuiHouseString((char)g_cBuildingInfo.?, (char)g_cBuildingInfo.?);
-    IGuiEngine::SetText((void *)g_pGUIEngine, 15, 467, GuiHouseString);
-    _wsprintfA(Str, "%u", (char)g_cBuildingInfo.?);
-    IGuiEngine::SetText((void *)g_pGUIEngine, 15, 468, Str);
-    if ( (char)g_cBuildingInfo.? <= 0 )
+    GuiHouseImageID = GetGuiHouseImageID((char)g_cBuildingInfo.m_cRace, (char)g_cBuildingInfo.m_cType, 0);
+    IGuiEngine::SetImages(g_pGUIEngine, 15, 470, GuiHouseImageID, 0);
+    GuiHouseString = GetGuiHouseString((char)g_cBuildingInfo.m_cRace, (char)g_cBuildingInfo.m_cType);
+    IGuiEngine::SetText(g_pGUIEngine, 15, 467, GuiHouseString);
+    _wsprintfA(Str, "%u", byte_3F1E4BC);
+    IGuiEngine::SetText(g_pGUIEngine, 15, 468, Str);
+    if ( byte_3F1E4BB <= 0 )
     {
-      IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 15, 469, 0);
+      IGuiEngine::SetControlVisibility(g_pGUIEngine, 15, 469, 0);
     }
     else
     {
-      _wsprintfA(Str, "+%u", (char)g_cBuildingInfo.?);
-      IGuiEngine::SetText((void *)g_pGUIEngine, 15, 469, Str);
-      IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 15, 469, 1);
+      _wsprintfA(Str, "+%u", byte_3F1E4BB);
+      IGuiEngine::SetText(g_pGUIEngine, 15, 469, Str);
+      IGuiEngine::SetControlVisibility(g_pGUIEngine, 15, 469, 1);
     }
-    IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 15, 471, g_cBuildingInfo.?);
-    if ( g_cBuildingInfo.? == 40 || g_cBuildingInfo.? == 41 || g_cBuildingInfo.? == 42 )
+    IGuiEngine::SetControlVisibility(g_pGUIEngine, 15, 471, g_cBuildingInfo.m_unknownA);
+    if ( g_cBuildingInfo.m_cType == 40 || g_cBuildingInfo.m_cType == 41 || g_cBuildingInfo.m_cType == 42 )
     {
-      _wsprintfA(Str, "%u", g_cBuildingInfo.?);
-      IGuiEngine::SetText((void *)g_pGUIEngine, 15, 472, Str);
+      _wsprintfA(Str, "%u", (unsigned __int8)byte_3F1E4BF);
+      IGuiEngine::SetText(g_pGUIEngine, 15, 472, Str);
     }
   }
 }
@@ -7898,10 +7898,16 @@ bool __cdecl GuiDlgBuildingContextProc(int a1, int a2, int a3) {
   switch ( a1 )
   {
     case 0:
-      if ( g_cBuildingInfo.? == 40 || g_cBuildingInfo.? == 41 || g_cBuildingInfo.? == 42 )
-        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 15, 473, 1);
+      if ( g_cBuildingInfo.m_cType == BUILDING_RESIDENCESMALL
+        || g_cBuildingInfo.m_cType == BUILDING_RESIDENCEMEDIUM
+        || g_cBuildingInfo.m_cType == BUILDING_RESIDENCEBIG )
+      {
+        IGuiEngine::SetControlVisibility(g_pGUIEngine, 15, 473, 1);
+      }
       else
-        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 15, 473, 0);
+      {
+        IGuiEngine::SetControlVisibility(g_pGUIEngine, 15, 473, 0);
+      }
       UpdateGuiDlgBuildingContext();
       break;
     case 1:
@@ -9588,7 +9594,7 @@ void __cdecl SetTownBuildCosts(int a1, bool a2) {
 
 
 // address=[0x1388800]
-// Decompiled from char __cdecl GuiDlgBuildTownProc(int a1, int a2, int a3)
+// Decompiled from char __cdecl GuiDlgBuildTownProc(int a1, int a2, T_S4_TRANSLATION a3)
 bool __cdecl GuiDlgBuildTownProc(int a1, int a2, int a3) {
   
   char *v4; // eax
@@ -9596,11 +9602,11 @@ bool __cdecl GuiDlgBuildTownProc(int a1, int a2, int a3) {
   CEvn_Logic *v6; // [esp+4h] [ebp-7B4h]
   CEvn_Logic *v7; // [esp+Ch] [ebp-7ACh]
   CEvn_Logic *v8; // [esp+14h] [ebp-7A4h]
-  CEvn_Event *v9; // [esp+1Ch] [ebp-79Ch]
+  struct CEvn_Event *v9; // [esp+1Ch] [ebp-79Ch]
   CEvn_Logic *v10; // [esp+24h] [ebp-794h]
   CEvn_Logic *v11; // [esp+2Ch] [ebp-78Ch]
   CEvn_Logic *v12; // [esp+34h] [ebp-784h]
-  CEvn_Event *v13; // [esp+3Ch] [ebp-77Ch]
+  struct CEvn_Event *v13; // [esp+3Ch] [ebp-77Ch]
   CEvn_Logic *v14; // [esp+44h] [ebp-774h]
   CEvn_Logic *v15; // [esp+4Ch] [ebp-76Ch]
   CEvn_Logic *v16; // [esp+58h] [ebp-760h]
@@ -9622,69 +9628,69 @@ bool __cdecl GuiDlgBuildTownProc(int a1, int a2, int a3) {
   CEvn_Logic *v32; // [esp+D4h] [ebp-6E4h]
   CEvn_Logic *v33; // [esp+DCh] [ebp-6DCh]
   CEvn_Logic *v34; // [esp+E4h] [ebp-6D4h]
-  CEvn_Event *v35; // [esp+ECh] [ebp-6CCh]
+  struct CEvn_Event *v35; // [esp+ECh] [ebp-6CCh]
   CEvn_Logic *v36; // [esp+F4h] [ebp-6C4h]
   CEvn_Logic *v37; // [esp+FCh] [ebp-6BCh]
   CEvn_Logic *v38; // [esp+104h] [ebp-6B4h]
-  CEvn_Event *v39; // [esp+10Ch] [ebp-6ACh]
+  struct CEvn_Event *v39; // [esp+10Ch] [ebp-6ACh]
   CEvn_Logic *v40; // [esp+114h] [ebp-6A4h]
   CEvn_Logic *v41; // [esp+11Ch] [ebp-69Ch]
   CEvn_Logic *v42; // [esp+124h] [ebp-694h]
-  CEvn_Event *v43; // [esp+12Ch] [ebp-68Ch]
+  struct CEvn_Event *v43; // [esp+12Ch] [ebp-68Ch]
   CEvn_Logic *v44; // [esp+134h] [ebp-684h]
   CEvn_Logic *v45; // [esp+13Ch] [ebp-67Ch]
-  CEvn_Event *v46; // [esp+144h] [ebp-674h]
+  struct CEvn_Event *v46; // [esp+144h] [ebp-674h]
   CEvn_Logic *v47; // [esp+14Ch] [ebp-66Ch]
   CEvn_Logic *v48; // [esp+154h] [ebp-664h]
   CEvn_Logic *v49; // [esp+15Ch] [ebp-65Ch]
   CEvn_Logic *v50; // [esp+164h] [ebp-654h]
-  CEvn_Event *v51; // [esp+16Ch] [ebp-64Ch]
+  struct CEvn_Event *v51; // [esp+16Ch] [ebp-64Ch]
   CEvn_Logic *v52; // [esp+174h] [ebp-644h]
   CEvn_Logic *v53; // [esp+17Ch] [ebp-63Ch]
   CEvn_Logic *v54; // [esp+184h] [ebp-634h]
-  CEvn_Event *v55; // [esp+18Ch] [ebp-62Ch]
-  _BYTE v56[32]; // [esp+1A8h] [ebp-610h] BYREF
-  _BYTE v57[32]; // [esp+1C8h] [ebp-5F0h] BYREF
-  _BYTE v58[32]; // [esp+1E8h] [ebp-5D0h] BYREF
-  _BYTE v59[32]; // [esp+208h] [ebp-5B0h] BYREF
-  _BYTE v60[32]; // [esp+228h] [ebp-590h] BYREF
-  _BYTE v61[32]; // [esp+248h] [ebp-570h] BYREF
-  _BYTE v62[32]; // [esp+268h] [ebp-550h] BYREF
-  _BYTE v63[32]; // [esp+288h] [ebp-530h] BYREF
-  _BYTE v64[32]; // [esp+2A8h] [ebp-510h] BYREF
-  _BYTE v65[32]; // [esp+2C8h] [ebp-4F0h] BYREF
-  _BYTE v66[32]; // [esp+2E8h] [ebp-4D0h] BYREF
-  _BYTE v67[32]; // [esp+308h] [ebp-4B0h] BYREF
-  _BYTE v68[32]; // [esp+328h] [ebp-490h] BYREF
-  _BYTE v69[32]; // [esp+348h] [ebp-470h] BYREF
-  _BYTE v70[32]; // [esp+368h] [ebp-450h] BYREF
-  _BYTE v71[32]; // [esp+388h] [ebp-430h] BYREF
-  _BYTE v72[32]; // [esp+3A8h] [ebp-410h] BYREF
-  _BYTE v73[32]; // [esp+3C8h] [ebp-3F0h] BYREF
-  _BYTE v74[32]; // [esp+3E8h] [ebp-3D0h] BYREF
-  _BYTE v75[32]; // [esp+408h] [ebp-3B0h] BYREF
-  _BYTE v76[32]; // [esp+428h] [ebp-390h] BYREF
-  _BYTE v77[32]; // [esp+448h] [ebp-370h] BYREF
-  _BYTE v78[32]; // [esp+468h] [ebp-350h] BYREF
-  _BYTE v79[32]; // [esp+488h] [ebp-330h] BYREF
-  _BYTE v80[32]; // [esp+4A8h] [ebp-310h] BYREF
-  _BYTE v81[32]; // [esp+4C8h] [ebp-2F0h] BYREF
-  _BYTE v82[32]; // [esp+4E8h] [ebp-2D0h] BYREF
-  _BYTE v83[32]; // [esp+508h] [ebp-2B0h] BYREF
-  _BYTE v84[32]; // [esp+528h] [ebp-290h] BYREF
-  _BYTE v85[32]; // [esp+548h] [ebp-270h] BYREF
-  _BYTE v86[32]; // [esp+568h] [ebp-250h] BYREF
-  _BYTE v87[32]; // [esp+588h] [ebp-230h] BYREF
-  _BYTE v88[32]; // [esp+5A8h] [ebp-210h] BYREF
-  _BYTE v89[32]; // [esp+5C8h] [ebp-1F0h] BYREF
-  _BYTE v90[32]; // [esp+5E8h] [ebp-1D0h] BYREF
-  _BYTE v91[32]; // [esp+608h] [ebp-1B0h] BYREF
-  _BYTE v92[32]; // [esp+628h] [ebp-190h] BYREF
-  _BYTE v93[32]; // [esp+648h] [ebp-170h] BYREF
-  _BYTE v94[32]; // [esp+668h] [ebp-150h] BYREF
-  _BYTE v95[32]; // [esp+688h] [ebp-130h] BYREF
-  _BYTE v96[32]; // [esp+6A8h] [ebp-110h] BYREF
-  _BYTE v97[32]; // [esp+6C8h] [ebp-F0h] BYREF
+  struct CEvn_Event *v55; // [esp+18Ch] [ebp-62Ch]
+  CEvn_Logic v56; // [esp+1A8h] [ebp-610h] BYREF
+  CEvn_Logic v57; // [esp+1C8h] [ebp-5F0h] BYREF
+  CEvn_Logic v58; // [esp+1E8h] [ebp-5D0h] BYREF
+  CEvn_Logic v59; // [esp+208h] [ebp-5B0h] BYREF
+  CEvn_Logic v60; // [esp+228h] [ebp-590h] BYREF
+  CEvn_Logic v61; // [esp+248h] [ebp-570h] BYREF
+  CEvn_Logic v62; // [esp+268h] [ebp-550h] BYREF
+  CEvn_Logic v63; // [esp+288h] [ebp-530h] BYREF
+  CEvn_Logic v64; // [esp+2A8h] [ebp-510h] BYREF
+  CEvn_Logic v65; // [esp+2C8h] [ebp-4F0h] BYREF
+  CEvn_Logic v66; // [esp+2E8h] [ebp-4D0h] BYREF
+  CEvn_Logic v67; // [esp+308h] [ebp-4B0h] BYREF
+  CEvn_Logic v68; // [esp+328h] [ebp-490h] BYREF
+  CEvn_Logic v69; // [esp+348h] [ebp-470h] BYREF
+  CEvn_Logic v70; // [esp+368h] [ebp-450h] BYREF
+  CEvn_Logic v71; // [esp+388h] [ebp-430h] BYREF
+  CEvn_Logic v72; // [esp+3A8h] [ebp-410h] BYREF
+  CEvn_Logic v73; // [esp+3C8h] [ebp-3F0h] BYREF
+  CEvn_Logic v74; // [esp+3E8h] [ebp-3D0h] BYREF
+  CEvn_Logic v75; // [esp+408h] [ebp-3B0h] BYREF
+  CEvn_Logic v76; // [esp+428h] [ebp-390h] BYREF
+  CEvn_Logic v77; // [esp+448h] [ebp-370h] BYREF
+  CEvn_Logic v78; // [esp+468h] [ebp-350h] BYREF
+  CEvn_Logic v79; // [esp+488h] [ebp-330h] BYREF
+  CEvn_Logic v80; // [esp+4A8h] [ebp-310h] BYREF
+  CEvn_Logic v81; // [esp+4C8h] [ebp-2F0h] BYREF
+  CEvn_Logic v82; // [esp+4E8h] [ebp-2D0h] BYREF
+  CEvn_Logic v83; // [esp+508h] [ebp-2B0h] BYREF
+  CEvn_Logic v84; // [esp+528h] [ebp-290h] BYREF
+  CEvn_Logic v85; // [esp+548h] [ebp-270h] BYREF
+  CEvn_Logic v86; // [esp+568h] [ebp-250h] BYREF
+  CEvn_Logic v87; // [esp+588h] [ebp-230h] BYREF
+  CEvn_Logic v88; // [esp+5A8h] [ebp-210h] BYREF
+  CEvn_Logic v89; // [esp+5C8h] [ebp-1F0h] BYREF
+  CEvn_Logic v90; // [esp+5E8h] [ebp-1D0h] BYREF
+  CEvn_Logic v91; // [esp+608h] [ebp-1B0h] BYREF
+  CEvn_Logic v92; // [esp+628h] [ebp-190h] BYREF
+  CEvn_Logic v93; // [esp+648h] [ebp-170h] BYREF
+  CEvn_Logic v94; // [esp+668h] [ebp-150h] BYREF
+  CEvn_Logic v95; // [esp+688h] [ebp-130h] BYREF
+  CEvn_Logic v96; // [esp+6A8h] [ebp-110h] BYREF
+  CEvn_Logic v97; // [esp+6C8h] [ebp-F0h] BYREF
   CEvn_Event v98; // [esp+6E8h] [ebp-D0h] BYREF
   CEvn_Event v99; // [esp+700h] [ebp-B8h] BYREF
   CEvn_Event v100; // [esp+718h] [ebp-A0h] BYREF
@@ -9705,7 +9711,7 @@ bool __cdecl GuiDlgBuildTownProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a2 & 0x10000) != 0 )
-        PlayGuiSound(1);
+        PlayGuiSound(1u);
       else
         PlayGuiSound(0);
       break;
@@ -9715,238 +9721,238 @@ bool __cdecl GuiDlgBuildTownProc(int a1, int a2, int a3) {
         case 541:
           if ( (a2 & 0x10000) != 0 )
           {
-            v14 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v75, 0x1CCu, 0, 0, 0, 0, 0);
+            v14 = CEvn_Logic::CEvn_Logic(&v75, 0x1CCu, 0, 0, 0, 0, 0);
             v106 = 16;
             IEventEngine::SendAMessage(g_pEvnEngine, v14);
             v106 = -1;
-            CEvn_Logic::~CEvn_Logic(v75);
+            CEvn_Logic::~CEvn_Logic(&v75);
             v13 = CEvn_Event::CEvn_Event(&v105, 0x260u, 0, 0, 0);
             v106 = 17;
             IEventEngine::SendAMessage(g_pEvnEngine, v13);
             v106 = -1;
             CEvn_Event::~CEvn_Event(&v105);
-            v12 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v74, 0x1B5u, 0, 0x21u, 0, 0, 0);
+            v12 = CEvn_Logic::CEvn_Logic(&v74, 0x1B5u, 0, 0x21u, 0, 0, 0);
             v106 = 18;
             IEventEngine::SendAMessage(g_pEvnEngine, v12);
             v106 = -1;
-            CEvn_Logic::~CEvn_Logic(v74);
+            CEvn_Logic::~CEvn_Logic(&v74);
           }
           else
           {
-            v11 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v73, 0x191u, 0, 0, 0, 0, 0);
+            v11 = CEvn_Logic::CEvn_Logic(&v73, 0x191u, 0, 0, 0, 0, 0);
             v106 = 19;
             IEventEngine::SendAMessage(g_pEvnEngine, v11);
             v106 = -1;
-            CEvn_Logic::~CEvn_Logic(v73);
+            CEvn_Logic::~CEvn_Logic(&v73);
           }
           return 1;
         case 543:
           if ( (a2 & 0x10000) != 0 )
           {
-            v10 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v72, 0x1CCu, 0, 0, 0, 0, 0);
+            v10 = CEvn_Logic::CEvn_Logic(&v72, 0x1CCu, 0, 0, 0, 0, 0);
             v106 = 20;
             IEventEngine::SendAMessage(g_pEvnEngine, v10);
             v106 = -1;
-            CEvn_Logic::~CEvn_Logic(v72);
+            CEvn_Logic::~CEvn_Logic(&v72);
             v9 = CEvn_Event::CEvn_Event(&v98, 0x260u, 0, 0, 0);
             v106 = 21;
             IEventEngine::SendAMessage(g_pEvnEngine, v9);
             v106 = -1;
             CEvn_Event::~CEvn_Event(&v98);
-            v8 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v71, 0x1B5u, 0, 0x1Fu, 0, 0, 0);
+            v8 = CEvn_Logic::CEvn_Logic(&v71, 0x1B5u, 0, 0x1Fu, 0, 0, 0);
             v106 = 22;
             IEventEngine::SendAMessage(g_pEvnEngine, v8);
             v106 = -1;
-            CEvn_Logic::~CEvn_Logic(v71);
+            CEvn_Logic::~CEvn_Logic(&v71);
           }
           else
           {
-            v7 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v70, 0x191u, 0, 0, 0, 0, 0);
+            v7 = CEvn_Logic::CEvn_Logic(&v70, 0x191u, 0, 0, 0, 0, 0);
             v106 = 23;
             IEventEngine::SendAMessage(g_pEvnEngine, v7);
             v106 = -1;
-            CEvn_Logic::~CEvn_Logic(v70);
+            CEvn_Logic::~CEvn_Logic(&v70);
           }
           return 1;
         case 545:
           if ( (a2 & 0x10000) != 0 )
           {
-            v6 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v93, 0x1CCu, 0, 0, 0, 0, 0);
+            v6 = CEvn_Logic::CEvn_Logic(&v93, 0x1CCu, 0, 0, 0, 0, 0);
             v106 = 24;
             IEventEngine::SendAMessage(g_pEvnEngine, v6);
             v106 = -1;
-            CEvn_Logic::~CEvn_Logic(v93);
+            CEvn_Logic::~CEvn_Logic(&v93);
             v55 = CEvn_Event::CEvn_Event(&v104, 0x260u, 0, 0, 0);
             v106 = 25;
             IEventEngine::SendAMessage(g_pEvnEngine, v55);
             v106 = -1;
             CEvn_Event::~CEvn_Event(&v104);
-            v54 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v69, 0x1B5u, 0, 0x22u, 0, 0, 0);
+            v54 = CEvn_Logic::CEvn_Logic(&v69, 0x1B5u, 0, 0x22u, 0, 0, 0);
             v106 = 26;
             IEventEngine::SendAMessage(g_pEvnEngine, v54);
             v106 = -1;
-            CEvn_Logic::~CEvn_Logic(v69);
+            CEvn_Logic::~CEvn_Logic(&v69);
           }
           else
           {
-            v53 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v68, 0x191u, 0, 0, 0, 0, 0);
+            v53 = CEvn_Logic::CEvn_Logic(&v68, 0x191u, 0, 0, 0, 0, 0);
             v106 = 27;
             IEventEngine::SendAMessage(g_pEvnEngine, v53);
             v106 = -1;
-            CEvn_Logic::~CEvn_Logic(v68);
+            CEvn_Logic::~CEvn_Logic(&v68);
           }
           return 1;
         case 547:
           if ( (a2 & 0x10000) != 0 )
           {
-            v52 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v67, 0x1CCu, 0, 0, 0, 0, 0);
+            v52 = CEvn_Logic::CEvn_Logic(&v67, 0x1CCu, 0, 0, 0, 0, 0);
             v106 = 28;
             IEventEngine::SendAMessage(g_pEvnEngine, v52);
             v106 = -1;
-            CEvn_Logic::~CEvn_Logic(v67);
+            CEvn_Logic::~CEvn_Logic(&v67);
             v51 = CEvn_Event::CEvn_Event(&v103, 0x260u, 0, 0, 0);
             v106 = 29;
             IEventEngine::SendAMessage(g_pEvnEngine, v51);
             v106 = -1;
             CEvn_Event::~CEvn_Event(&v103);
-            v50 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v66, 0x1B5u, 0, 0xDu, 0, 0, 0);
+            v50 = CEvn_Logic::CEvn_Logic(&v66, 0x1B5u, 0, 0xDu, 0, 0, 0);
             v106 = 30;
             IEventEngine::SendAMessage(g_pEvnEngine, v50);
             v106 = -1;
-            CEvn_Logic::~CEvn_Logic(v66);
+            CEvn_Logic::~CEvn_Logic(&v66);
           }
           else
           {
-            v49 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v65, 0x191u, 0, 0, 0, 0, 0);
+            v49 = CEvn_Logic::CEvn_Logic(&v65, 0x191u, 0, 0, 0, 0, 0);
             v106 = 31;
             IEventEngine::SendAMessage(g_pEvnEngine, v49);
             v106 = -1;
-            CEvn_Logic::~CEvn_Logic(v65);
+            CEvn_Logic::~CEvn_Logic(&v65);
           }
           return 1;
         case 548:
           if ( (a2 & 0x10000) != 0 )
           {
-            MEMORY[0x3F1EF94] = 27;
-            MEMORY[0x3F1EF98][0] = 64;
-            MEMORY[0x3F1EF98][4] = 65;
-            MEMORY[0x3F1EF98][8] = 66;
-            MEMORY[0x3F1EF98][12] = 67;
-            MEMORY[0x3F1EF98][16] = 68;
-            MEMORY[0x3F1EF98][20] = 69;
-            MEMORY[0x3F1EF98][24] = 70;
-            MEMORY[0x3F1EF98][28] = 71;
-            MEMORY[0x3F1EF98][32] = 72;
-            MEMORY[0x3F1EF98][36] = 73;
-            MEMORY[0x3F1EF98][40] = 74;
-            MEMORY[0x3F1EF98][44] = 75;
-            v48 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v64, 0x1CAu, 0, (unsigned int)&g_cEyeCatcherBarInfo, 0, 0, 0);
+            g_cEyeCatcherBarInfo.m_iUnknown = 27;
+            g_cEyeCatcherBarInfo.m_sEyeCatcher[0].m_uBuildingId = BUILDING_EYECATCHER01;
+            g_cEyeCatcherBarInfo.m_sEyeCatcher[1].m_uBuildingId = BUILDING_EYECATCHER02;
+            g_cEyeCatcherBarInfo.m_sEyeCatcher[2].m_uBuildingId = BUILDING_EYECATCHER03;
+            g_cEyeCatcherBarInfo.m_sEyeCatcher[3].m_uBuildingId = BUILDING_EYECATCHER04;
+            g_cEyeCatcherBarInfo.m_sEyeCatcher[4].m_uBuildingId = BUILDING_EYECATCHER05;
+            g_cEyeCatcherBarInfo.m_sEyeCatcher[5].m_uBuildingId = BUILDING_EYECATCHER06;
+            g_cEyeCatcherBarInfo.m_sEyeCatcher[6].m_uBuildingId = BUILDING_EYECATCHER07;
+            g_cEyeCatcherBarInfo.m_sEyeCatcher[7].m_uBuildingId = BUILDING_EYECATCHER08;
+            g_cEyeCatcherBarInfo.m_sEyeCatcher[8].m_uBuildingId = BUILDING_EYECATCHER09;
+            g_cEyeCatcherBarInfo.m_sEyeCatcher[9].m_uBuildingId = BUILDING_EYECATCHER10;
+            g_cEyeCatcherBarInfo.m_sEyeCatcher[10].m_uBuildingId = BUILDING_EYECATCHER11;
+            g_cEyeCatcherBarInfo.m_sEyeCatcher[11].m_uBuildingId = BUILDING_EYECATCHER12;
+            v48 = CEvn_Logic::CEvn_Logic(&v64, 0x1CAu, 0, (uint)&g_cEyeCatcherBarInfo, 0, 0, 0);
             v106 = 32;
             IEventEngine::SendAMessage(g_pEvnEngine, v48);
             v106 = -1;
-            CEvn_Logic::~CEvn_Logic(v64);
+            CEvn_Logic::~CEvn_Logic(&v64);
           }
           else
           {
-            v47 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v63, 0x1CCu, 0, 0, 0, 0, 0);
+            v47 = CEvn_Logic::CEvn_Logic(&v63, 0x1CCu, 0, 0, 0, 0, 0);
             v106 = 33;
             IEventEngine::SendAMessage(g_pEvnEngine, v47);
             v106 = -1;
-            CEvn_Logic::~CEvn_Logic(v63);
+            CEvn_Logic::~CEvn_Logic(&v63);
             v46 = CEvn_Event::CEvn_Event(&v102, 0x260u, 0, 0, 0);
             v106 = 34;
             IEventEngine::SendAMessage(g_pEvnEngine, v46);
             v106 = -1;
             CEvn_Event::~CEvn_Event(&v102);
-            v45 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v62, 0x191u, 0, 0, 0, 0, 0);
+            v45 = CEvn_Logic::CEvn_Logic(&v62, 0x191u, 0, 0, 0, 0, 0);
             v106 = 35;
             IEventEngine::SendAMessage(g_pEvnEngine, v45);
             v106 = -1;
-            CEvn_Logic::~CEvn_Logic(v62);
+            CEvn_Logic::~CEvn_Logic(&v62);
           }
           return 1;
         case 556:
           if ( (a2 & 0x10000) != 0 )
           {
-            v44 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v61, 0x1CCu, 0, 0, 0, 0, 0);
+            v44 = CEvn_Logic::CEvn_Logic(&v61, 0x1CCu, 0, 0, 0, 0, 0);
             v106 = 36;
             IEventEngine::SendAMessage(g_pEvnEngine, v44);
             v106 = -1;
-            CEvn_Logic::~CEvn_Logic(v61);
+            CEvn_Logic::~CEvn_Logic(&v61);
             v43 = CEvn_Event::CEvn_Event(&v101, 0x260u, 0, 0, 0);
             v106 = 37;
             IEventEngine::SendAMessage(g_pEvnEngine, v43);
             v106 = -1;
             CEvn_Event::~CEvn_Event(&v101);
-            v42 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v60, 0x1B5u, 0, 0x20u, 0, 0, 0);
+            v42 = CEvn_Logic::CEvn_Logic(&v60, 0x1B5u, 0, 0x20u, 0, 0, 0);
             v106 = 38;
             IEventEngine::SendAMessage(g_pEvnEngine, v42);
             v106 = -1;
-            CEvn_Logic::~CEvn_Logic(v60);
+            CEvn_Logic::~CEvn_Logic(&v60);
           }
           else
           {
-            v41 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v59, 0x191u, 0, 0, 0, 0, 0);
+            v41 = CEvn_Logic::CEvn_Logic(&v59, 0x191u, 0, 0, 0, 0, 0);
             v106 = 39;
             IEventEngine::SendAMessage(g_pEvnEngine, v41);
             v106 = -1;
-            CEvn_Logic::~CEvn_Logic(v59);
+            CEvn_Logic::~CEvn_Logic(&v59);
           }
           return 1;
         case 557:
           if ( (a2 & 0x10000) != 0 )
           {
-            v40 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v58, 0x1CCu, 0, 0, 0, 0, 0);
+            v40 = CEvn_Logic::CEvn_Logic(&v58, 0x1CCu, 0, 0, 0, 0, 0);
             v106 = 40;
             IEventEngine::SendAMessage(g_pEvnEngine, v40);
             v106 = -1;
-            CEvn_Logic::~CEvn_Logic(v58);
+            CEvn_Logic::~CEvn_Logic(&v58);
             v39 = CEvn_Event::CEvn_Event(&v99, 0x260u, 0, 0, 0);
             v106 = 41;
             IEventEngine::SendAMessage(g_pEvnEngine, v39);
             v106 = -1;
             CEvn_Event::~CEvn_Event(&v99);
-            v38 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v57, 0x1B5u, 0, 0x2Bu, 0, 0, 0);
+            v38 = CEvn_Logic::CEvn_Logic(&v57, 0x1B5u, 0, 0x2Bu, 0, 0, 0);
             v106 = 42;
             IEventEngine::SendAMessage(g_pEvnEngine, v38);
             v106 = -1;
-            CEvn_Logic::~CEvn_Logic(v57);
+            CEvn_Logic::~CEvn_Logic(&v57);
           }
           else
           {
-            v37 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v56, 0x191u, 0, 0, 0, 0, 0);
+            v37 = CEvn_Logic::CEvn_Logic(&v56, 0x191u, 0, 0, 0, 0, 0);
             v106 = 43;
             IEventEngine::SendAMessage(g_pEvnEngine, v37);
             v106 = -1;
-            CEvn_Logic::~CEvn_Logic(v56);
+            CEvn_Logic::~CEvn_Logic(&v56);
           }
           return 1;
         case 558:
           if ( (a2 & 0x10000) != 0 )
           {
-            v36 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v97, 0x1CCu, 0, 0, 0, 0, 0);
+            v36 = CEvn_Logic::CEvn_Logic(&v97, 0x1CCu, 0, 0, 0, 0, 0);
             v106 = 44;
             IEventEngine::SendAMessage(g_pEvnEngine, v36);
             v106 = -1;
-            CEvn_Logic::~CEvn_Logic(v97);
+            CEvn_Logic::~CEvn_Logic(&v97);
             v35 = CEvn_Event::CEvn_Event(&v100, 0x260u, 0, 0, 0);
             v106 = 45;
             IEventEngine::SendAMessage(g_pEvnEngine, v35);
             v106 = -1;
             CEvn_Event::~CEvn_Event(&v100);
-            v34 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v96, 0x1B5u, 0, 0x2Cu, 0, 0, 0);
+            v34 = CEvn_Logic::CEvn_Logic(&v96, 0x1B5u, 0, 0x2Cu, 0, 0, 0);
             v106 = 46;
             IEventEngine::SendAMessage(g_pEvnEngine, v34);
             v106 = -1;
-            CEvn_Logic::~CEvn_Logic(v96);
+            CEvn_Logic::~CEvn_Logic(&v96);
           }
           else
           {
-            v33 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v95, 0x191u, 0, 0, 0, 0, 0);
+            v33 = CEvn_Logic::CEvn_Logic(&v95, 0x191u, 0, 0, 0, 0, 0);
             v106 = 47;
             IEventEngine::SendAMessage(g_pEvnEngine, v33);
             v106 = -1;
-            CEvn_Logic::~CEvn_Logic(v95);
+            CEvn_Logic::~CEvn_Logic(&v95);
           }
           return 1;
         case 563:
@@ -9954,19 +9960,19 @@ bool __cdecl GuiDlgBuildTownProc(int a1, int a2, int a3) {
             return 1;
           if ( (a2 & 0x10000) != 0 )
           {
-            v32 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v94, 0x1B8u, 0, 1u, 0, 0, 0);
+            v32 = CEvn_Logic::CEvn_Logic(&v94, 0x1B8u, 0, 1u, 0, 0, 0);
             v106 = 48;
             IEventEngine::SendAMessage(g_pEvnEngine, v32);
             v106 = -1;
-            CEvn_Logic::~CEvn_Logic(v94);
+            CEvn_Logic::~CEvn_Logic(&v94);
           }
           else
           {
-            v31 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v92, 0x1B8u, 0, 0, 0, 0, 0);
+            v31 = CEvn_Logic::CEvn_Logic(&v92, 0x1B8u, 0, 0, 0, 0, 0);
             v106 = 49;
             IEventEngine::SendAMessage(g_pEvnEngine, v31);
             v106 = -1;
-            CEvn_Logic::~CEvn_Logic(v92);
+            CEvn_Logic::~CEvn_Logic(&v92);
           }
           break;
         default:
@@ -10011,63 +10017,63 @@ GuiDlgBuildTownProc___def_178895B:
         switch ( (__int16)a2 )
         {
           case 541:
-            v30 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v91, 0x1E6u, 0, 0x21u, 0, 0, 0);
+            v30 = CEvn_Logic::CEvn_Logic(&v91, 0x1E6u, 0, 0x21u, 0, 0, 0);
             v106 = 0;
             IEventEngine::SendAMessage(g_pEvnEngine, v30);
             v106 = -1;
-            CEvn_Logic::~CEvn_Logic(v91);
+            CEvn_Logic::~CEvn_Logic(&v91);
             break;
           case 543:
-            v29 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v90, 0x1E6u, 0, 0x1Fu, 0, 0, 0);
+            v29 = CEvn_Logic::CEvn_Logic(&v90, 0x1E6u, 0, 0x1Fu, 0, 0, 0);
             v106 = 1;
             IEventEngine::SendAMessage(g_pEvnEngine, v29);
             v106 = -1;
-            CEvn_Logic::~CEvn_Logic(v90);
-            v28 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v89, 0x1CBu, 0, 0, 0, 0, 0);
+            CEvn_Logic::~CEvn_Logic(&v90);
+            v28 = CEvn_Logic::CEvn_Logic(&v89, 0x1CBu, 0, 0, 0, 0, 0);
             v106 = 2;
             IEventEngine::SendAMessage(g_pEvnEngine, v28);
             v106 = -1;
-            CEvn_Logic::~CEvn_Logic(v89);
+            CEvn_Logic::~CEvn_Logic(&v89);
             break;
           case 545:
-            v27 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v88, 0x1E6u, 0, 0x22u, 0, 0, 0);
+            v27 = CEvn_Logic::CEvn_Logic(&v88, 0x1E6u, 0, 0x22u, 0, 0, 0);
             v106 = 3;
             IEventEngine::SendAMessage(g_pEvnEngine, v27);
             v106 = -1;
-            CEvn_Logic::~CEvn_Logic(v88);
-            v26 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v87, 0x1C9u, 0, 0, 0, 0, 0);
+            CEvn_Logic::~CEvn_Logic(&v88);
+            v26 = CEvn_Logic::CEvn_Logic(&v87, 0x1C9u, 0, 0, 0, 0, 0);
             v106 = 4;
             IEventEngine::SendAMessage(g_pEvnEngine, v26);
             v106 = -1;
-            CEvn_Logic::~CEvn_Logic(v87);
+            CEvn_Logic::~CEvn_Logic(&v87);
             break;
           case 547:
-            v25 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v86, 0x1E6u, 0, 0xDu, 0, 0, 0);
+            v25 = CEvn_Logic::CEvn_Logic(&v86, 0x1E6u, 0, 0xDu, 0, 0, 0);
             v106 = 5;
             IEventEngine::SendAMessage(g_pEvnEngine, v25);
             v106 = -1;
-            CEvn_Logic::~CEvn_Logic(v86);
+            CEvn_Logic::~CEvn_Logic(&v86);
             break;
           case 556:
-            v24 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v85, 0x1E6u, 0, 0x20u, 0, 0, 0);
+            v24 = CEvn_Logic::CEvn_Logic(&v85, 0x1E6u, 0, 0x20u, 0, 0, 0);
             v106 = 6;
             IEventEngine::SendAMessage(g_pEvnEngine, v24);
             v106 = -1;
-            CEvn_Logic::~CEvn_Logic(v85);
+            CEvn_Logic::~CEvn_Logic(&v85);
             break;
           case 557:
-            v23 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v84, 0x1E6u, 0, 0x2Bu, 0, 0, 0);
+            v23 = CEvn_Logic::CEvn_Logic(&v84, 0x1E6u, 0, 0x2Bu, 0, 0, 0);
             v106 = 7;
             IEventEngine::SendAMessage(g_pEvnEngine, v23);
             v106 = -1;
-            CEvn_Logic::~CEvn_Logic(v84);
+            CEvn_Logic::~CEvn_Logic(&v84);
             break;
           case 558:
-            v22 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v83, 0x1E6u, 0, 0x2Cu, 0, 0, 0);
+            v22 = CEvn_Logic::CEvn_Logic(&v83, 0x1E6u, 0, 0x2Cu, 0, 0, 0);
             v106 = 8;
             IEventEngine::SendAMessage(g_pEvnEngine, v22);
             v106 = -1;
-            CEvn_Logic::~CEvn_Logic(v83);
+            CEvn_Logic::~CEvn_Logic(&v83);
             break;
           default:
             return 1;
@@ -10078,53 +10084,53 @@ GuiDlgBuildTownProc___def_178895B:
         switch ( (__int16)a2 )
         {
           case 541:
-            v21 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v82, 0x1B6u, 0, 0x21u, 0, 0, 0);
+            v21 = CEvn_Logic::CEvn_Logic(&v82, 0x1B6u, 0, 0x21u, 0, 0, 0);
             v106 = 9;
             IEventEngine::SendAMessage(g_pEvnEngine, v21);
             v106 = -1;
-            CEvn_Logic::~CEvn_Logic(v82);
+            CEvn_Logic::~CEvn_Logic(&v82);
             break;
           case 543:
-            v20 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v81, 0x1B6u, 0, 0x1Fu, 0, 0, 0);
+            v20 = CEvn_Logic::CEvn_Logic(&v81, 0x1B6u, 0, 0x1Fu, 0, 0, 0);
             v106 = 10;
             IEventEngine::SendAMessage(g_pEvnEngine, v20);
             v106 = -1;
-            CEvn_Logic::~CEvn_Logic(v81);
+            CEvn_Logic::~CEvn_Logic(&v81);
             break;
           case 545:
-            v19 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v80, 0x1B6u, 0, 0x22u, 0, 0, 0);
+            v19 = CEvn_Logic::CEvn_Logic(&v80, 0x1B6u, 0, 0x22u, 0, 0, 0);
             v106 = 11;
             IEventEngine::SendAMessage(g_pEvnEngine, v19);
             v106 = -1;
-            CEvn_Logic::~CEvn_Logic(v80);
+            CEvn_Logic::~CEvn_Logic(&v80);
             break;
           case 547:
-            v18 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v79, 0x1B6u, 0, 0xDu, 0, 0, 0);
+            v18 = CEvn_Logic::CEvn_Logic(&v79, 0x1B6u, 0, 0xDu, 0, 0, 0);
             v106 = 12;
             IEventEngine::SendAMessage(g_pEvnEngine, v18);
             v106 = -1;
-            CEvn_Logic::~CEvn_Logic(v79);
+            CEvn_Logic::~CEvn_Logic(&v79);
             break;
           case 556:
-            v17 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v78, 0x1B6u, 0, 0x20u, 0, 0, 0);
+            v17 = CEvn_Logic::CEvn_Logic(&v78, 0x1B6u, 0, 0x20u, 0, 0, 0);
             v106 = 13;
             IEventEngine::SendAMessage(g_pEvnEngine, v17);
             v106 = -1;
-            CEvn_Logic::~CEvn_Logic(v78);
+            CEvn_Logic::~CEvn_Logic(&v78);
             break;
           case 557:
-            v16 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v77, 0x1B6u, 0, 0x2Bu, 0, 0, 0);
+            v16 = CEvn_Logic::CEvn_Logic(&v77, 0x1B6u, 0, 0x2Bu, 0, 0, 0);
             v106 = 14;
             IEventEngine::SendAMessage(g_pEvnEngine, v16);
             v106 = -1;
-            CEvn_Logic::~CEvn_Logic(v77);
+            CEvn_Logic::~CEvn_Logic(&v77);
             break;
           case 558:
-            v15 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v76, 0x1B6u, 0, 0x2Cu, 0, 0, 0);
+            v15 = CEvn_Logic::CEvn_Logic(&v76, 0x1B6u, 0, 0x2Cu, 0, 0, 0);
             v106 = 15;
             IEventEngine::SendAMessage(g_pEvnEngine, v15);
             v106 = -1;
-            CEvn_Logic::~CEvn_Logic(v76);
+            CEvn_Logic::~CEvn_Logic(&v76);
             break;
           default:
             return 1;
@@ -17848,7 +17854,7 @@ LABEL_4:
   }
   v9 = (char *)std::string::c_str(&unk_403193C);
   IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 2486, v9);
-  v10 = (char *)std::string::c_str(&unk_403197C);
+  v10 = (char *)std::string::c_str(&stru_403197C);
   IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 2494, v10);
   if ( CGameType::IsAddOnMap((CGameType *)g_pGameType) )
   {
@@ -20732,55 +20738,55 @@ void __cdecl InitGuiDlgMD2Campaigns(void) {
   v3 = dword_402CBBC[19];
   v2 = dword_402CBBC[20];
   if ( v4 >= 1 || v3 >= 1 )
-    IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 0, 1827, 1);
+    IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1827, 1);
   else
-    IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 0, 1827, 0);
-  IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 0, 1851, v1 >= 1);
-  IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 0, 1828, v1 >= 1);
-  IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 0, 1852, v1 >= 2);
-  IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 0, 1829, v1 >= 2);
-  IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 0, 1853, v1 >= 3);
-  IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 0, 1830, v1 >= 3);
-  IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 0, 1854, v1 >= 4);
-  IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 0, 1831, v1 >= 4);
-  IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 0, 1832, 1);
-  IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 0, 1861, v4 >= 1);
-  IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 0, 1862, v4 >= 1);
-  IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 0, 1833, v4 >= 1);
-  IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 0, 1863, v4 >= 2);
-  IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 0, 1834, v4 >= 2);
-  IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 0, 1864, v4 >= 3);
-  IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 0, 1835, v4 >= 3);
-  IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 0, 1865, v4 >= 4);
-  IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 0, 1836, v4 >= 4);
-  IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 0, 1842, 1);
-  IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 0, 1847, v3 >= 1);
-  IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 0, 1843, v3 >= 1);
-  IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 0, 1848, v3 >= 2);
-  IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 0, 1844, v3 >= 2);
-  IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 0, 1849, v3 >= 3);
-  IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 0, 1845, v3 >= 3);
-  IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 0, 1850, v3 >= 4);
-  IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 0, 1846, v3 >= 4);
+    IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1827, 0);
+  IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1851, v1 >= 1);
+  IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1828, v1 >= 1);
+  IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1852, v1 >= 2);
+  IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1829, v1 >= 2);
+  IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1853, v1 >= 3);
+  IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1830, v1 >= 3);
+  IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1854, v1 >= 4);
+  IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1831, v1 >= 4);
+  IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1832, 1);
+  IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1861, v4 >= 1);
+  IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1862, v4 >= 1);
+  IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1833, v4 >= 1);
+  IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1863, v4 >= 2);
+  IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1834, v4 >= 2);
+  IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1864, v4 >= 3);
+  IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1835, v4 >= 3);
+  IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1865, v4 >= 4);
+  IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1836, v4 >= 4);
+  IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1842, 1);
+  IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1847, v3 >= 1);
+  IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1843, v3 >= 1);
+  IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1848, v3 >= 2);
+  IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1844, v3 >= 2);
+  IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1849, v3 >= 3);
+  IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1845, v3 >= 3);
+  IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1850, v3 >= 4);
+  IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1846, v3 >= 4);
   if ( v4 >= 1 || v3 >= 1 )
-    IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 0, 1837, 1);
+    IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1837, 1);
   else
-    IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 0, 1837, 0);
-  IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 0, 1855, v2 >= 1);
-  IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 0, 1838, v2 >= 1);
-  IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 0, 1856, v2 >= 2);
-  IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 0, 1857, v2 >= 2);
-  IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 0, 1858, v2 >= 2);
-  IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 0, 1839, v2 >= 2);
-  IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 0, 1859, v2 >= 3);
-  IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 0, 1840, v2 >= 3);
-  IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 0, 1860, v2 >= 4);
-  IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 0, 1841, v2 >= 4);
-  IGuiEngine::ResetRadioGroup((IGuiEngine *)g_pGUIEngine, 0, 1825);
+    IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1837, 0);
+  IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1855, v2 >= 1);
+  IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1838, v2 >= 1);
+  IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1856, v2 >= 2);
+  IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1857, v2 >= 2);
+  IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1858, v2 >= 2);
+  IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1839, v2 >= 2);
+  IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1859, v2 >= 3);
+  IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1840, v2 >= 3);
+  IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1860, v2 >= 4);
+  IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1841, v2 >= 4);
+  IGuiEngine::ResetRadioGroup(g_pGUIEngine, 0, 1825);
   if ( s_uAIDifficulty )
-    return IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 0, 1825, 1);
+    return IGuiEngine::SelectControl(g_pGUIEngine, 0, 1825, 1);
   else
-    return IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 0, 1824, 1);
+    return IGuiEngine::SelectControl(g_pGUIEngine, 0, 1824, 1);
   return result;
 }
 
@@ -22000,7 +22006,7 @@ void __cdecl GuiDlgMDRandomMapParametersUpdate(void) {
   char *v6; // eax
   char *v7; // eax
   char *v8; // eax
-  const wchar_t *v9; // eax
+  wchar_t *v9; // eax
   char *v10; // eax
   char *v11; // eax
   char *v12; // eax
@@ -22033,32 +22039,31 @@ void __cdecl GuiDlgMDRandomMapParametersUpdate(void) {
   char *v39; // eax
   char *v40; // eax
   char *v41; // eax
-  CEvn_Event *v42; // [esp+4h] [ebp-240h]
-  CEvn_Event *v43; // [esp+Ch] [ebp-238h]
-  CEvn_Event *v44; // [esp+14h] [ebp-230h]
-  CEvn_Event *v45; // [esp+1Ch] [ebp-228h]
+  struct CEvn_Event *v42; // [esp+4h] [ebp-240h]
+  struct CEvn_Event *v43; // [esp+Ch] [ebp-238h]
+  struct CEvn_Event *v44; // [esp+14h] [ebp-230h]
+  struct CEvn_Event *v45; // [esp+1Ch] [ebp-228h]
   char v46[88]; // [esp+44h] [ebp-200h] BYREF
   CEvn_Event v47; // [esp+9Ch] [ebp-1A8h] BYREF
   CEvn_Event v48; // [esp+B4h] [ebp-190h] BYREF
   CEvn_Event v49; // [esp+CCh] [ebp-178h] BYREF
   CEvn_Event v50; // [esp+E4h] [ebp-160h] BYREF
-  _BYTE v51[28]; // [esp+FCh] [ebp-148h] BYREF
-  char v52[28]; // [esp+118h] [ebp-12Ch] BYREF
+  std::string v51; // [esp+FCh] [ebp-148h] BYREF
+  std::wstring v52; // [esp+118h] [ebp-12Ch] BYREF
   char Dest[256]; // [esp+134h] [ebp-110h] BYREF
   int v54; // [esp+240h] [ebp-4h]
 
-  IGuiEngine::SetImages((void *)g_pGUIEngine, dword_4031998, 2006, 31, 31);
+  IGuiEngine::SetImages(g_pGUIEngine, dword_4031998, 2006, 31, 31);
   byte_3EDFB45 = 0;
   GuiDlgMDRandomMapParametersFillPlayerTeams();
-  IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, dword_4031998, 2005, byte_3EDFB44);
+  IGuiEngine::EnableControl(g_pGUIEngine, dword_4031998, 2005, byte_3EDFB44);
   if ( !g_pAddOn && BBSupportDbgReport(2, "gui\\GUI_MD_RandomMapParameters.cpp", 433, "g_pAddOn") == 1 )
     __debugbreak();
   if ( !g_pMissionCD2 && BBSupportDbgReport(2, "gui\\GUI_MD_RandomMapParameters.cpp", 434, "g_pMissionCD2") == 1 )
     __debugbreak();
   if ( g_pEvnEngine )
   {
-    if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pAddOn + 4))(g_pAddOn)
-      || (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pMissionCD2 + 4))(g_pMissionCD2) )
+    if ( g_pAddOn->IsExtraInstalled(g_pAddOn) || g_pMissionCD2->IsExtraInstalled(g_pMissionCD2) )
     {
       v45 = CEvn_Event::CEvn_Event(&v50, 0x4Bu, (unsigned __int8)g_uiExtrasAllowed, 0, 0);
       v54 = 0;
@@ -22074,7 +22079,7 @@ void __cdecl GuiDlgMDRandomMapParametersUpdate(void) {
       v54 = -1;
       CEvn_Event::~CEvn_Event(&v49);
     }
-    if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pMissionCD2 + 4))(g_pMissionCD2) )
+    if ( g_pMissionCD2->IsExtraInstalled(g_pMissionCD2) )
     {
       v43 = CEvn_Event::CEvn_Event(&v48, 0x4Cu, (unsigned __int8)g_bNewTextures, 0, 0);
       v54 = 2;
@@ -22094,63 +22099,63 @@ void __cdecl GuiDlgMDRandomMapParametersUpdate(void) {
   switch ( dword_4031930 )
   {
     case 1:
-      v0 = g_pStringEngine->GetString(g_pStringEngine, 2056);
-      IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 2000, v0);
+      v0 = g_pStringEngine->GetString(g_pStringEngine, GUI_S4S_MPS_SMALL_TT);
+      IGuiEngine::SetText(g_pGUIEngine, dword_4031998, 2000, v0);
       break;
     case 2:
-      v1 = g_pStringEngine->GetString(g_pStringEngine, 2049);
-      IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 2000, v1);
+      v1 = g_pStringEngine->GetString(g_pStringEngine, GUI_S4S_MPS_MED_TT);
+      IGuiEngine::SetText(g_pGUIEngine, dword_4031998, 2000, v1);
       break;
     case 3:
-      v2 = g_pStringEngine->GetString(g_pStringEngine, 2046);
-      IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 2000, v2);
+      v2 = g_pStringEngine->GetString(g_pStringEngine, GUI_S4S_MPS_LARGE_TT);
+      IGuiEngine::SetText(g_pGUIEngine, dword_4031998, 2000, v2);
       break;
   }
   switch ( dword_4031934 )
   {
     case 1:
-      v3 = g_pStringEngine->GetString(g_pStringEngine, 2040);
-      IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 1987, v3);
+      v3 = g_pStringEngine->GetString(g_pStringEngine, GUI_S4S_MPS_CONF_TT);
+      IGuiEngine::SetText(g_pGUIEngine, dword_4031998, 1987, v3);
       break;
     case 2:
-      v5 = g_pStringEngine->GetString(g_pStringEngine, 2041);
-      IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 1987, v5);
+      v5 = g_pStringEngine->GetString(g_pStringEngine, GUI_S4S_MPS_COOP_TT);
+      IGuiEngine::SetText(g_pGUIEngine, dword_4031998, 1987, v5);
       break;
     case 3:
-      v4 = g_pStringEngine->GetString(g_pStringEngine, 2042);
-      IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 1987, v4);
+      v4 = g_pStringEngine->GetString(g_pStringEngine, GUI_S4S_MPS_ECON_TT);
+      IGuiEngine::SetText(g_pGUIEngine, dword_4031998, 1987, v4);
       break;
     case 4:
-      v6 = g_pStringEngine->GetString(g_pStringEngine, 2309);
-      IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 1987, v6);
+      v6 = g_pStringEngine->GetString(g_pStringEngine, GUI_S_MPS_HEAD_TT);
+      IGuiEngine::SetText(g_pGUIEngine, dword_4031998, 1987, v6);
       break;
     case 5:
-      v7 = g_pStringEngine->GetString(g_pStringEngine, 2043);
-      IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 1987, v7);
+      v7 = g_pStringEngine->GetString(g_pStringEngine, GUI_S4S_MPS_FREES_TT);
+      IGuiEngine::SetText(g_pGUIEngine, dword_4031998, 1987, v7);
       break;
     default:
       break;
   }
-  IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, dword_4031998, 2006, byte_3EDFB45);
-  v8 = (char *)std::string::c_str(&unk_403197C);
-  IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 2003, v8);
-  v9 = (const wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)&stru_4031960);
+  IGuiEngine::SelectControl(g_pGUIEngine, dword_4031998, GUI_S4S_DT_M1_TT, byte_3EDFB45);
+  v8 = std::string::c_str(&stru_403197C);
+  IGuiEngine::SetText(g_pGUIEngine, dword_4031998, 2003, v8);
+  v9 = std::wstring::c_str(&stru_4031960);
   j__wcstombs(Dest, v9, 0x100u);
-  IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 1985, Dest);
+  IGuiEngine::SetText(g_pGUIEngine, dword_4031998, 1985, Dest);
   if ( dword_4031F88 > 640 )
   {
     if ( dword_4031F88 > 896 )
     {
       if ( dword_4031F88 == 960 )
       {
-        v21 = g_pStringEngine->GetString(g_pStringEngine, 3290);
-        IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 1964, v21);
+        v21 = g_pStringEngine->GetString(g_pStringEngine, MD_LBL_RANDOMMAPSIZE_960);
+        IGuiEngine::SetText(g_pGUIEngine, dword_4031998, 1964, v21);
         goto LABEL_62;
       }
       if ( dword_4031F88 == 1024 )
       {
-        v22 = g_pStringEngine->GetString(g_pStringEngine, 3278);
-        IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 1964, v22);
+        v22 = g_pStringEngine->GetString(g_pStringEngine, MD_LBL_RANDOMMAPSIZE_1024);
+        IGuiEngine::SetText(g_pGUIEngine, dword_4031998, 1964, v22);
         goto LABEL_62;
       }
     }
@@ -22159,20 +22164,20 @@ void __cdecl GuiDlgMDRandomMapParametersUpdate(void) {
       switch ( dword_4031F88 )
       {
         case 896:
-          v20 = g_pStringEngine->GetString(g_pStringEngine, 3289);
-          IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 1964, v20);
+          v20 = g_pStringEngine->GetString(g_pStringEngine, MD_LBL_RANDOMMAPSIZE_896);
+          IGuiEngine::SetText(g_pGUIEngine, dword_4031998, 1964, v20);
           goto LABEL_62;
         case 704:
-          v17 = g_pStringEngine->GetString(g_pStringEngine, 3286);
-          IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 1964, v17);
+          v17 = g_pStringEngine->GetString(g_pStringEngine, MD_LBL_RANDOMMAPSIZE_704);
+          IGuiEngine::SetText(g_pGUIEngine, dword_4031998, 1964, v17);
           goto LABEL_62;
         case 768:
-          v18 = g_pStringEngine->GetString(g_pStringEngine, 3287);
-          IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 1964, v18);
+          v18 = g_pStringEngine->GetString(g_pStringEngine, MD_LBL_RANDOMMAPSIZE_768);
+          IGuiEngine::SetText(g_pGUIEngine, dword_4031998, 1964, v18);
           goto LABEL_62;
         case 832:
-          v19 = g_pStringEngine->GetString(g_pStringEngine, 3288);
-          IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 1964, v19);
+          v19 = g_pStringEngine->GetString(g_pStringEngine, MD_LBL_RANDOMMAPSIZE_832);
+          IGuiEngine::SetText(g_pGUIEngine, dword_4031998, 1964, v19);
           goto LABEL_62;
       }
     }
@@ -22181,22 +22186,22 @@ void __cdecl GuiDlgMDRandomMapParametersUpdate(void) {
   {
     if ( dword_4031F88 == 640 )
     {
-      v16 = g_pStringEngine->GetString(g_pStringEngine, 3285);
-      IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 1964, v16);
+      v16 = g_pStringEngine->GetString(g_pStringEngine, MD_LBL_RANDOMMAPSIZE_640);
+      IGuiEngine::SetText(g_pGUIEngine, dword_4031998, 1964, v16);
       goto LABEL_62;
     }
     if ( dword_4031F88 > 448 )
     {
       if ( dword_4031F88 == 512 )
       {
-        v14 = g_pStringEngine->GetString(g_pStringEngine, 3283);
-        IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 1964, v14);
+        v14 = g_pStringEngine->GetString(g_pStringEngine, MD_LBL_RANDOMMAPSIZE_512);
+        IGuiEngine::SetText(g_pGUIEngine, dword_4031998, 1964, v14);
         goto LABEL_62;
       }
       if ( dword_4031F88 == 576 )
       {
-        v15 = g_pStringEngine->GetString(g_pStringEngine, 3284);
-        IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 1964, v15);
+        v15 = g_pStringEngine->GetString(g_pStringEngine, MD_LBL_RANDOMMAPSIZE_576);
+        IGuiEngine::SetText(g_pGUIEngine, dword_4031998, 1964, v15);
         goto LABEL_62;
       }
     }
@@ -22206,44 +22211,44 @@ void __cdecl GuiDlgMDRandomMapParametersUpdate(void) {
       {
         case 448:
           v13 = g_pStringEngine->GetString(g_pStringEngine, 3282);
-          IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 1964, v13);
+          IGuiEngine::SetText(g_pGUIEngine, dword_4031998, 1964, v13);
           goto LABEL_62;
         case 256:
           v10 = g_pStringEngine->GetString(g_pStringEngine, 3279);
-          IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 1964, v10);
+          IGuiEngine::SetText(g_pGUIEngine, dword_4031998, 1964, v10);
           goto LABEL_62;
         case 320:
           v11 = g_pStringEngine->GetString(g_pStringEngine, 3280);
-          IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 1964, v11);
+          IGuiEngine::SetText(g_pGUIEngine, dword_4031998, 1964, v11);
           goto LABEL_62;
         case 384:
           v12 = g_pStringEngine->GetString(g_pStringEngine, 3281);
-          IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 1964, v12);
+          IGuiEngine::SetText(g_pGUIEngine, dword_4031998, 1964, v12);
           goto LABEL_62;
       }
     }
   }
   dword_4031F88 = 512;
   v23 = g_pStringEngine->GetString(g_pStringEngine, 3283);
-  IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 1964, v23);
+  IGuiEngine::SetText(g_pGUIEngine, dword_4031998, 1964, v23);
 LABEL_62:
   switch ( dword_4031F94 & 3 )
   {
     case 0:
       v24 = g_pStringEngine->GetString(g_pStringEngine, 3276);
-      IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 1968, v24);
+      IGuiEngine::SetText(g_pGUIEngine, dword_4031998, 1968, v24);
       break;
     case 1:
       v26 = g_pStringEngine->GetString(g_pStringEngine, 3277);
-      IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 1968, v26);
+      IGuiEngine::SetText(g_pGUIEngine, dword_4031998, 1968, v26);
       break;
     case 2:
       v25 = g_pStringEngine->GetString(g_pStringEngine, 3275);
-      IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 1968, v25);
+      IGuiEngine::SetText(g_pGUIEngine, dword_4031998, 1968, v25);
       break;
     case 3:
       v27 = g_pStringEngine->GetString(g_pStringEngine, 3274);
-      IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 1968, v27);
+      IGuiEngine::SetText(g_pGUIEngine, dword_4031998, 1968, v27);
       break;
     default:
       break;
@@ -22251,45 +22256,45 @@ LABEL_62:
   switch ( dword_4031F8C )
   {
     case 10:
-      v28 = g_pStringEngine->GetString(g_pStringEngine, 3265);
-      IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 1975, v28);
+      v28 = g_pStringEngine->GetString(g_pStringEngine, MD_LBL_RANDOMMAPLANDMASS10);
+      IGuiEngine::SetText(g_pGUIEngine, dword_4031998, 1975, v28);
       break;
     case 20:
-      v29 = g_pStringEngine->GetString(g_pStringEngine, 3266);
-      IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 1975, v29);
+      v29 = g_pStringEngine->GetString(g_pStringEngine, MD_LBL_RANDOMMAPLANDMASS20);
+      IGuiEngine::SetText(g_pGUIEngine, dword_4031998, 1975, v29);
       break;
     case 30:
-      v30 = g_pStringEngine->GetString(g_pStringEngine, 3267);
-      IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 1975, v30);
+      v30 = g_pStringEngine->GetString(g_pStringEngine, MD_LBL_RANDOMMAPLANDMASS30);
+      IGuiEngine::SetText(g_pGUIEngine, dword_4031998, 1975, v30);
       break;
     case 40:
-      v31 = g_pStringEngine->GetString(g_pStringEngine, 3268);
-      IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 1975, v31);
+      v31 = g_pStringEngine->GetString(g_pStringEngine, MD_LBL_RANDOMMAPLANDMASS40);
+      IGuiEngine::SetText(g_pGUIEngine, dword_4031998, 1975, v31);
       break;
     case 50:
-      v32 = g_pStringEngine->GetString(g_pStringEngine, 3269);
-      IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 1975, v32);
+      v32 = g_pStringEngine->GetString(g_pStringEngine, MD_LBL_RANDOMMAPLANDMASS50);
+      IGuiEngine::SetText(g_pGUIEngine, dword_4031998, 1975, v32);
       break;
     case 60:
-      v33 = g_pStringEngine->GetString(g_pStringEngine, 3270);
-      IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 1975, v33);
+      v33 = g_pStringEngine->GetString(g_pStringEngine, MD_LBL_RANDOMMAPLANDMASS60);
+      IGuiEngine::SetText(g_pGUIEngine, dword_4031998, GUI_QRY_MENU_RACE_SELCT_MAYAN, v33);
       break;
     case 70:
-      v34 = g_pStringEngine->GetString(g_pStringEngine, 3271);
-      IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 1975, v34);
+      v34 = g_pStringEngine->GetString(g_pStringEngine, MD_LBL_RANDOMMAPLANDMASS70);
+      IGuiEngine::SetText(g_pGUIEngine, dword_4031998, 1975, v34);
       break;
     case 80:
-      v35 = g_pStringEngine->GetString(g_pStringEngine, 3272);
-      IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 1975, v35);
+      v35 = g_pStringEngine->GetString(g_pStringEngine, MD_LBL_RANDOMMAPLANDMASS80);
+      IGuiEngine::SetText(g_pGUIEngine, dword_4031998, 1975, v35);
       break;
     case 90:
-      v36 = g_pStringEngine->GetString(g_pStringEngine, 3273);
-      IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 1975, v36);
+      v36 = g_pStringEngine->GetString(g_pStringEngine, MD_LBL_RANDOMMAPLANDMASS90);
+      IGuiEngine::SetText(g_pGUIEngine, dword_4031998, 1975, v36);
       break;
     default:
       dword_4031F8C = 70;
-      v37 = g_pStringEngine->GetString(g_pStringEngine, 3269);
-      IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 1975, v37);
+      v37 = g_pStringEngine->GetString(g_pStringEngine, MD_LBL_RANDOMMAPLANDMASS50);
+      IGuiEngine::SetText(g_pGUIEngine, dword_4031998, 1975, v37);
       break;
   }
   dword_4031FA0 = dword_4031924;
@@ -22297,49 +22302,52 @@ LABEL_62:
     Dest[0] = 0;
   else
     sprintf(Dest, "%i", dword_4031F84);
-  IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 1972, Dest);
+  IGuiEngine::SetText(g_pGUIEngine, dword_4031998, 1972, Dest);
   if ( dword_4031F90 == 5 )
   {
-    v38 = g_pStringEngine->GetString(g_pStringEngine, 2056);
-    IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 1979, v38);
+    v38 = g_pStringEngine->GetString(g_pStringEngine, GUI_S4S_MPS_SMALL_TT);
+    IGuiEngine::SetText(g_pGUIEngine, dword_4031998, GUI_QRY_MENU_RACE_SELECT_VIKINGS, v38);
   }
   else if ( dword_4031F90 == 10 )
   {
-    v39 = g_pStringEngine->GetString(g_pStringEngine, 2049);
-    IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 1979, v39);
+    v39 = g_pStringEngine->GetString(g_pStringEngine, GUI_S4S_MPS_MED_TT);
+    IGuiEngine::SetText(g_pGUIEngine, dword_4031998, 1979, v39);
   }
   else
   {
     if ( dword_4031F90 == 15 )
     {
-      v40 = g_pStringEngine->GetString(g_pStringEngine, 2046);
+      v40 = g_pStringEngine->GetString(g_pStringEngine, GUI_S4S_MPS_LARGE_TT);
     }
     else
     {
       dword_4031F90 = 10;
-      v40 = g_pStringEngine->GetString(g_pStringEngine, 2049);
+      v40 = g_pStringEngine->GetString(g_pStringEngine, GUI_S4S_MPS_MED_TT);
     }
-    IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 1979, v40);
+    IGuiEngine::SetText(g_pGUIEngine, dword_4031998, 1979, v40);
   }
   if ( byte_3EDFB44 )
   {
-    std::wstring::wstring(v52);
+    std::wstring::wstring(&v52);
     v54 = 4;
-    (*(void (__thiscall **)(void *, int *, char *))(*(_DWORD *)g_pRandomMaps + 24))(g_pRandomMaps, &g_sRMP, v52);
+    (*(void (__thiscall **)(void *, int *, std::wstring *))(*(_DWORD *)g_pRandomMaps + 24))(
+      g_pRandomMaps,
+      &g_sRMP,
+      &v52);
     std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v46);
     LOBYTE(v54) = 5;
     std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(
-      v51,
-      v52);
+      &v51,
+      &v52);
     LOBYTE(v54) = 6;
-    v41 = (char *)std::string::c_str(v51);
-    IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 1983, v41);
+    v41 = std::string::c_str(&v51);
+    IGuiEngine::SetText(g_pGUIEngine, dword_4031998, 1983, v41);
     LOBYTE(v54) = 5;
-    std::string::~string(v51);
+    std::string::~string(&v51);
     LOBYTE(v54) = 4;
     std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::~wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v46);
     v54 = -1;
-    std::wstring::~wstring(v52);
+    std::wstring::~wstring(&v52);
   }
 }
 
@@ -25368,8 +25376,8 @@ bool __cdecl GuiDlgResourceCollectorContextProc(int a1, int a2, int a3) {
 
 
 // address=[0x13c03b0]
-// Decompiled from int __cdecl GetGuiHouseImageID(int a1, int a2, char a3)
-unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3) {
+// Decompiled from int __cdecl GetGuiHouseImageID(int _iRace, S4_BUILDING_ENUM _iBuildingType, char a3)
+unsigned int __cdecl GetGuiHouseImageID(int _iRace, enum BUILDING_TYPES _iBuildingType, bool a3) {
   
   int result; // eax
   int v4; // [esp+0h] [ebp-3B0h]
@@ -25553,10 +25561,10 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
   int v182; // [esp+2C8h] [ebp-E8h]
   int v183; // [esp+2CCh] [ebp-E4h]
 
-  switch ( a2 )
+  switch ( _iBuildingType )
   {
-    case 1:
-      switch ( a1 )
+    case BUILDING_WOODCUTTERHUT:
+      switch ( _iRace )
       {
         case 1:
           if ( a3 )
@@ -25588,8 +25596,8 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 2:
-      switch ( a1 )
+    case BUILDING_FORESTERHUT:
+      switch ( _iRace )
       {
         case 1:
           if ( a3 )
@@ -25621,8 +25629,8 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 3:
-      switch ( a1 )
+    case BUILDING_SAWMILL:
+      switch ( _iRace )
       {
         case 1:
           if ( a3 )
@@ -25654,8 +25662,8 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 4:
-      switch ( a1 )
+    case BUILDING_STONECUTTERHUT:
+      switch ( _iRace )
       {
         case 1:
           if ( a3 )
@@ -25687,8 +25695,8 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 5:
-      switch ( a1 )
+    case BUILDING_WATERWORKHUT:
+      switch ( _iRace )
       {
         case 1:
           if ( a3 )
@@ -25720,8 +25728,8 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 6:
-      switch ( a1 )
+    case BUILDING_FISHERHUT:
+      switch ( _iRace )
       {
         case 1:
           if ( a3 )
@@ -25753,8 +25761,8 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 7:
-      switch ( a1 )
+    case BUILDING_HUNTERHUT:
+      switch ( _iRace )
       {
         case 1:
           if ( a3 )
@@ -25786,8 +25794,8 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 8:
-      switch ( a1 )
+    case BUILDING_SLAUGHTERHOUSE:
+      switch ( _iRace )
       {
         case 1:
           if ( a3 )
@@ -25819,8 +25827,8 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 9:
-      switch ( a1 )
+    case BUILDING_MILL:
+      switch ( _iRace )
       {
         case 1:
           if ( a3 )
@@ -25852,8 +25860,8 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 10:
-      switch ( a1 )
+    case BUILDING_BAKERY:
+      switch ( _iRace )
       {
         case 1:
           if ( a3 )
@@ -25885,8 +25893,8 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 11:
-      switch ( a1 )
+    case BUILDING_GRAINFARM:
+      switch ( _iRace )
       {
         case 1:
           if ( a3 )
@@ -25918,8 +25926,8 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 12:
-      switch ( a1 )
+    case BUILDING_ANIMALRANCH:
+      switch ( _iRace )
       {
         case 1:
           if ( a3 )
@@ -25951,8 +25959,8 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 13:
-      switch ( a1 )
+    case BUILDING_DONKEYRANCH:
+      switch ( _iRace )
       {
         case 1:
           if ( a3 )
@@ -25984,8 +25992,8 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 14:
-      switch ( a1 )
+    case BUILDING_STONEMINE:
+      switch ( _iRace )
       {
         case 1:
           if ( a3 )
@@ -26017,8 +26025,8 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 15:
-      switch ( a1 )
+    case BUILDING_IRONMINE:
+      switch ( _iRace )
       {
         case 1:
           if ( a3 )
@@ -26050,8 +26058,8 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 16:
-      switch ( a1 )
+    case BUILDING_GOLDMINE:
+      switch ( _iRace )
       {
         case 1:
           if ( a3 )
@@ -26083,8 +26091,8 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 17:
-      switch ( a1 )
+    case BUILDING_COALMINE:
+      switch ( _iRace )
       {
         case 1:
           if ( a3 )
@@ -26116,10 +26124,10 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 18:
-      if ( a1 )
+    case BUILDING_SULFURMINE:
+      if ( _iRace )
       {
-        if ( a1 == 1 )
+        if ( _iRace == 1 )
         {
           if ( a3 )
             v79 = 958;
@@ -26127,7 +26135,7 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
             v79 = 957;
           result = v79;
         }
-        else if ( a1 == 4 )
+        else if ( _iRace == 4 )
         {
           if ( a3 )
             v78 = 957;
@@ -26153,8 +26161,8 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
         result = v77;
       }
       break;
-    case 19:
-      switch ( a1 )
+    case BUILDING_SMELTGOLD:
+      switch ( _iRace )
       {
         case 1:
           if ( a3 )
@@ -26186,8 +26194,8 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 20:
-      switch ( a1 )
+    case BUILDING_SMELTIRON:
+      switch ( _iRace )
       {
         case 1:
           if ( a3 )
@@ -26219,8 +26227,8 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 21:
-      switch ( a1 )
+    case BUILDING_TOOLSMITH:
+      switch ( _iRace )
       {
         case 1:
           if ( a3 )
@@ -26252,8 +26260,8 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 22:
-      switch ( a1 )
+    case BUILDING_WEAPONSMITH:
+      switch ( _iRace )
       {
         case 1:
           if ( a3 )
@@ -26285,8 +26293,8 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 23:
-      switch ( a1 )
+    case BUILDING_VEHICLEHALL:
+      switch ( _iRace )
       {
         case 1:
           if ( a3 )
@@ -26318,8 +26326,8 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 24:
-      switch ( a1 )
+    case BUILDING_BARRACKS:
+      switch ( _iRace )
       {
         case 1:
           if ( a3 )
@@ -26351,15 +26359,15 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 25:
+    case BUILDING_CHARCOALMAKER:
       if ( a3 )
         v63 = 871;
       else
         v63 = 914;
       result = v63;
       break;
-    case 26:
-      switch ( a1 )
+    case BUILDING_TRAININGCENTER:
+      switch ( _iRace )
       {
         case 1:
           if ( a3 )
@@ -26391,8 +26399,8 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 27:
-      switch ( a1 )
+    case BUILDING_HEALERHUT:
+      switch ( _iRace )
       {
         case 1:
           if ( a3 )
@@ -26424,8 +26432,8 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 28:
-      switch ( a1 )
+    case BUILDING_AMMOMAKERHUT:
+      switch ( _iRace )
       {
         case 1:
           if ( a3 )
@@ -26457,8 +26465,8 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 30:
-      switch ( a1 )
+    case BUILDING_LANDSCAPEMAKERHUT:
+      switch ( _iRace )
       {
         case 1:
           if ( a3 )
@@ -26490,16 +26498,16 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 31:
-    case 58:
-    case 59:
-    case 60:
-    case 61:
-    case 62:
-    case 63:
-    case 76:
-    case 77:
-      switch ( a1 )
+    case BUILDING_SHIPYARD:
+    case BUILDING_SHIPYARDA:
+    case BUILDING_SHIPYARDB:
+    case BUILDING_SHIPYARDC:
+    case BUILDING_SHIPYARDD:
+    case BUILDING_SHIPYARDE:
+    case BUILDING_SHIPYARDF:
+    case BUILDING_SHIPYARDG:
+    case BUILDING_SHIPYARDH:
+      switch ( _iRace )
       {
         case 1:
           if ( a3 )
@@ -26531,16 +26539,16 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 32:
-    case 52:
-    case 53:
-    case 54:
-    case 55:
-    case 56:
-    case 57:
-    case 78:
-    case 79:
-      switch ( a1 )
+    case BUILDING_PORT:
+    case BUILDING_PORTA:
+    case BUILDING_PORTB:
+    case BUILDING_PORTC:
+    case BUILDING_PORTD:
+    case BUILDING_PORTE:
+    case BUILDING_PORTF:
+    case BUILDING_PORTG:
+    case BUILDING_PORTH:
+      switch ( _iRace )
       {
         case 1:
           if ( a3 )
@@ -26572,8 +26580,8 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 33:
-      switch ( a1 )
+    case BUILDING_MARKETPLACE:
+      switch ( _iRace )
       {
         case 1:
           if ( a3 )
@@ -26605,8 +26613,8 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 34:
-      switch ( a1 )
+    case BUILDING_STORAGEAREA:
+      switch ( _iRace )
       {
         case 1:
           if ( a3 )
@@ -26638,43 +26646,43 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 35:
+    case BUILDING_VINYARD:
       if ( a3 )
         v38 = 965;
       else
         v38 = 902;
       result = v38;
       break;
-    case 36:
+    case BUILDING_AGAVEFARMERHUT:
       if ( a3 )
         v37 = 970;
       else
         v37 = 927;
       result = v37;
       break;
-    case 37:
+    case BUILDING_TEQUILAMAKERHUT:
       if ( a3 )
         v36 = 933;
       else
         v36 = 889;
       result = v36;
       break;
-    case 38:
+    case BUILDING_BEEKEEPERHUT:
       if ( a3 )
         v33 = 873;
       else
         v33 = 911;
       result = v33;
       break;
-    case 39:
+    case BUILDING_MEADMAKERHUT:
       if ( a3 )
         v32 = 922;
       else
         v32 = 902;
       result = v32;
       break;
-    case 40:
-      switch ( a1 )
+    case BUILDING_RESIDENCESMALL:
+      switch ( _iRace )
       {
         case 1:
           if ( a3 )
@@ -26706,8 +26714,8 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 41:
-      switch ( a1 )
+    case BUILDING_RESIDENCEMEDIUM:
+      switch ( _iRace )
       {
         case 1:
           if ( a3 )
@@ -26739,8 +26747,8 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 42:
-      switch ( a1 )
+    case BUILDING_RESIDENCEBIG:
+      switch ( _iRace )
       {
         case 1:
           if ( a3 )
@@ -26772,8 +26780,8 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 43:
-      switch ( a1 )
+    case BUILDING_SMALLTEMPLE:
+      switch ( _iRace )
       {
         case 1:
           if ( a3 )
@@ -26805,8 +26813,8 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 44:
-      switch ( a1 )
+    case BUILDING_BIGTEMPLE:
+      switch ( _iRace )
       {
         case 1:
           if ( a3 )
@@ -26838,8 +26846,8 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 45:
-      switch ( a1 )
+    case BUILDING_LOOKOUTTOWER:
+      switch ( _iRace )
       {
         case 1:
           if ( a3 )
@@ -26871,8 +26879,8 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 46:
-      switch ( a1 )
+    case BUILDING_GUARDTOWERSMALL:
+      switch ( _iRace )
       {
         case 1:
           if ( a3 )
@@ -26904,8 +26912,8 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 47:
-      switch ( a1 )
+    case BUILDING_GUARDTOWERBIG:
+      switch ( _iRace )
       {
         case 1:
           if ( a3 )
@@ -26937,8 +26945,8 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 48:
-      switch ( a1 )
+    case BUILDING_CASTLE:
+      switch ( _iRace )
       {
         case 1:
           if ( a3 )
@@ -26970,10 +26978,10 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 49:
-    case 50:
-    case 51:
-      switch ( a1 )
+    case BUILDING_MUSHROOMFARM:
+    case BUILDING_DARKTEMPLE:
+    case BUILDING_FORTRESS:
+      switch ( _iRace )
       {
         case 1:
           if ( a3 )
@@ -27005,8 +27013,8 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 64:
-      switch ( a1 )
+    case BUILDING_EYECATCHER01:
+      switch ( _iRace )
       {
         case 1:
           result = 572;
@@ -27022,8 +27030,8 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 65:
-      switch ( a1 )
+    case BUILDING_EYECATCHER02:
+      switch ( _iRace )
       {
         case 1:
           result = 574;
@@ -27039,8 +27047,8 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 66:
-      switch ( a1 )
+    case BUILDING_EYECATCHER03:
+      switch ( _iRace )
       {
         case 1:
           result = 573;
@@ -27056,8 +27064,8 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 67:
-      switch ( a1 )
+    case BUILDING_EYECATCHER04:
+      switch ( _iRace )
       {
         case 1:
           result = 576;
@@ -27073,8 +27081,8 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 68:
-      switch ( a1 )
+    case BUILDING_EYECATCHER05:
+      switch ( _iRace )
       {
         case 1:
           result = 575;
@@ -27090,8 +27098,8 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 69:
-      switch ( a1 )
+    case BUILDING_EYECATCHER06:
+      switch ( _iRace )
       {
         case 1:
           result = 578;
@@ -27107,8 +27115,8 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 70:
-      switch ( a1 )
+    case BUILDING_EYECATCHER07:
+      switch ( _iRace )
       {
         case 1:
           result = 577;
@@ -27124,8 +27132,8 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 71:
-      switch ( a1 )
+    case BUILDING_EYECATCHER08:
+      switch ( _iRace )
       {
         case 1:
           result = 579;
@@ -27141,8 +27149,8 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 72:
-      switch ( a1 )
+    case BUILDING_EYECATCHER09:
+      switch ( _iRace )
       {
         case 1:
           result = 580;
@@ -27158,8 +27166,8 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 73:
-      switch ( a1 )
+    case BUILDING_EYECATCHER10:
+      switch ( _iRace )
       {
         case 1:
           result = 581;
@@ -27175,8 +27183,8 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 74:
-      switch ( a1 )
+    case BUILDING_EYECATCHER11:
+      switch ( _iRace )
       {
         case 1:
           result = 582;
@@ -27192,8 +27200,8 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 75:
-      switch ( a1 )
+    case BUILDING_EYECATCHER12:
+      switch ( _iRace )
       {
         case 1:
           result = 583;
@@ -27209,14 +27217,14 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
           break;
       }
       break;
-    case 81:
+    case BUILDING_SUNFLOWEROILMAKERHUT:
       if ( a3 )
         v34 = 971;
       else
         v34 = 970;
       result = v34;
       break;
-    case 82:
+    case BUILDING_SUNFLOWERFARMERHUT:
       if ( a3 )
         v35 = 973;
       else
@@ -27224,7 +27232,7 @@ unsigned int __cdecl GetGuiHouseImageID(int a1, enum BUILDING_TYPES a2, bool a3)
       result = v35;
       break;
     default:
-      switch ( a1 )
+      switch ( _iRace )
       {
         case 1:
           if ( a3 )
@@ -30554,10 +30562,10 @@ void __cdecl SetSoldierProperties(struct SHealthState * a1, int a2, int a3) {
 // Decompiled from void UpdateGuiDlgSoldierContext()
 void __cdecl UpdateGuiDlgSoldierContext(void) {
   
-  CEvn_Event *v0; // [esp+4h] [ebp-90h]
+  struct CEvn_Event *v0; // [esp+4h] [ebp-90h]
   CEvn_Logic *v1; // [esp+Ch] [ebp-88h]
   int i; // [esp+14h] [ebp-80h]
-  _BYTE v3[32]; // [esp+18h] [ebp-7Ch] BYREF
+  CEvn_Logic v3; // [esp+18h] [ebp-7Ch] BYREF
   CEvn_Event v4; // [esp+38h] [ebp-5Ch] BYREF
   CHAR Str[52]; // [esp+50h] [ebp-44h] BYREF
   int v6; // [esp+90h] [ebp-4h]
@@ -30583,17 +30591,17 @@ void __cdecl UpdateGuiDlgSoldierContext(void) {
     SetSoldierProperties((struct SHealthState *)&dword_3F1E6E0, 1442, 1443);
     if ( dword_3F1E6E4 || dword_3F1E6E0 )
     {
-      IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 45, 1444, 1);
+      IGuiEngine::EnableControl(g_pGUIEngine, 45, 1444, 1);
     }
     else
     {
       if ( byte_3EFD457 )
       {
-        v1 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v3, 0x1CCu, 0, 0, 0, 0, 0);
+        v1 = CEvn_Logic::CEvn_Logic(&v3, 0x1CCu, 0, 0, 0, 0, 0);
         v6 = 0;
         IEventEngine::SendAMessage(g_pEvnEngine, v1);
         v6 = -1;
-        CEvn_Logic::~CEvn_Logic(v3);
+        CEvn_Logic::~CEvn_Logic(&v3);
         v0 = CEvn_Event::CEvn_Event(&v4, 0x260u, 0, 0, 0);
         v6 = 1;
         IEventEngine::SendAMessage(g_pEvnEngine, v0);
@@ -30601,18 +30609,18 @@ void __cdecl UpdateGuiDlgSoldierContext(void) {
         CEvn_Event::~CEvn_Event(&v4);
         byte_3EFD457 = 0;
       }
-      IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 45, 1444, 0);
+      IGuiEngine::EnableControl(g_pGUIEngine, 45, 1444, 0);
       byte_3EFD459 = 0;
     }
     _wsprintfA(Str, "%u%%", dword_3F1E6EC);
-    IGuiEngine::SetText((void *)g_pGUIEngine, 45, 1445, Str);
+    IGuiEngine::SetText(g_pGUIEngine, 45, 1445, Str);
     _wsprintfA(Str, "%u%%", dword_3F1E6F0);
-    IGuiEngine::SetText((void *)g_pGUIEngine, 45, 1422, Str);
+    IGuiEngine::SetText(g_pGUIEngine, 45, 1422, Str);
     _wsprintfA(Str, off_3698EE0, dword_3F1E6F4);
-    IGuiEngine::SetText((void *)g_pGUIEngine, 45, 1448, Str);
+    IGuiEngine::SetText(g_pGUIEngine, 45, 1448, Str);
     if ( byte_3EFD459 )
     {
-      IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 45, 1444, 1);
+      IGuiEngine::SelectControl(g_pGUIEngine, 45, 1444, 1);
       byte_3EFD459 = 0;
     }
   }
@@ -30620,135 +30628,134 @@ void __cdecl UpdateGuiDlgSoldierContext(void) {
 
 
 // address=[0x13cbeb0]
-// Decompiled from char __cdecl GuiDlgSoldierContextProc(int a1, int a2, int a3)
+// Decompiled from char __cdecl GuiDlgSoldierContextProc(int a1, int a2, T_S4_TRANSLATION a3)
 bool __cdecl GuiDlgSoldierContextProc(int a1, int a2, int a3) {
   
   char *v4; // eax
   char *v5; // eax
   char *v6; // eax
-  int v7; // [esp+0h] [ebp-184h]
-  CEvn_Logic *v8; // [esp+Ch] [ebp-178h]
-  CEvn_Logic *v9; // [esp+14h] [ebp-170h]
-  CEvn_Logic *v10; // [esp+1Ch] [ebp-168h]
-  CEvn_Logic *v11; // [esp+24h] [ebp-160h]
-  CEvn_Event *v12; // [esp+28h] [ebp-15Ch]
-  CEvn_Logic *v13; // [esp+30h] [ebp-154h]
-  CEvn_Logic *v14; // [esp+38h] [ebp-14Ch]
-  CEvn_Event *v15; // [esp+40h] [ebp-144h]
-  CEvn_Logic *v16; // [esp+44h] [ebp-140h]
-  char LocalPlayerId; // [esp+58h] [ebp-12Ch]
-  _BYTE v18[32]; // [esp+64h] [ebp-120h] BYREF
-  _BYTE v19[32]; // [esp+84h] [ebp-100h] BYREF
-  _BYTE v20[32]; // [esp+A4h] [ebp-E0h] BYREF
-  _BYTE v21[32]; // [esp+C4h] [ebp-C0h] BYREF
-  _BYTE v22[32]; // [esp+E4h] [ebp-A0h] BYREF
-  _BYTE v23[32]; // [esp+104h] [ebp-80h] BYREF
-  _BYTE v24[32]; // [esp+124h] [ebp-60h] BYREF
-  CEvn_Event v25; // [esp+144h] [ebp-40h] BYREF
-  CEvn_Event v26; // [esp+15Ch] [ebp-28h] BYREF
-  int v27; // [esp+180h] [ebp-4h]
+  CEvn_Logic *v7; // [esp+Ch] [ebp-178h]
+  CEvn_Logic *v8; // [esp+14h] [ebp-170h]
+  CEvn_Logic *v9; // [esp+1Ch] [ebp-168h]
+  CEvn_Logic *v10; // [esp+24h] [ebp-160h]
+  struct CEvn_Event *v11; // [esp+28h] [ebp-15Ch]
+  CEvn_Logic *v12; // [esp+30h] [ebp-154h]
+  CEvn_Logic *v13; // [esp+38h] [ebp-14Ch]
+  struct CEvn_Event *v14; // [esp+40h] [ebp-144h]
+  CEvn_Logic *v15; // [esp+44h] [ebp-140h]
+  uchar LocalPlayerId; // [esp+58h] [ebp-12Ch]
+  CEvn_Logic v17; // [esp+64h] [ebp-120h] BYREF
+  CEvn_Logic v18; // [esp+84h] [ebp-100h] BYREF
+  CEvn_Logic v19; // [esp+A4h] [ebp-E0h] BYREF
+  CEvn_Logic v20; // [esp+C4h] [ebp-C0h] BYREF
+  CEvn_Logic v21; // [esp+E4h] [ebp-A0h] BYREF
+  CEvn_Logic v22; // [esp+104h] [ebp-80h] BYREF
+  CEvn_Logic v23; // [esp+124h] [ebp-60h] BYREF
+  CEvn_Event v24; // [esp+144h] [ebp-40h] BYREF
+  CEvn_Event v25; // [esp+15Ch] [ebp-28h] BYREF
+  int v26; // [esp+180h] [ebp-4h]
 
   if ( !g_pEvnEngine )
     return 0;
   switch ( a1 )
   {
     case 0:
-      v4 = g_pStringEngine->GetString(g_pStringEngine, 885);
-      IGuiEngine::SetText((void *)g_pGUIEngine, 45, 1401, v4);
+      v4 = g_pStringEngine->GetString(g_pStringEngine, GUI_ACP_CTX_MILITARY);
+      IGuiEngine::SetText(g_pGUIEngine, 45, 1401, v4);
       byte_3EFD457 = 0;
       byte_3EFD458 = 0;
       byte_3EFD459 = 1;
       UpdateGuiDlgSoldierContext();
       break;
     case 1:
-      if ( (a3 & 0x10000) != 0 )
-        PlayGuiSound(1);
+      if ( (BYTE2(a3) & 1) != 0 )
+        PlayGuiSound(1u);
       else
         PlayGuiSound(0);
       break;
     case 3:
-      LocalPlayerId = CPlayerManager::GetLocalPlayerId(v7);
+      LocalPlayerId = CPlayerManager::GetLocalPlayerId();
       switch ( (__int16)a2 )
       {
         case 1437:
-          v16 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v18, 0x19Fu, (a3 & 4) != 0, 0, LocalPlayerId, 0, 0);
-          v27 = 0;
-          IEventEngine::SendAMessage(g_pEvnEngine, v16);
-          v27 = -1;
-          CEvn_Logic::~CEvn_Logic(v18);
-          PlayGuiSound(2);
+          v15 = CEvn_Logic::CEvn_Logic(&v17, 0x19Fu, (a3 & 4) != 0, 0, LocalPlayerId, 0, 0);
+          v26 = 0;
+          IEventEngine::SendAMessage(g_pEvnEngine, v15);
+          v26 = -1;
+          CEvn_Logic::~CEvn_Logic(&v17);
+          PlayGuiSound(2u);
           break;
         case 1438:
-          v8 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v19, 0x19Eu, 0, 0, LocalPlayerId, 0, 0);
-          v27 = 1;
-          IEventEngine::SendAMessage(g_pEvnEngine, v8);
-          v27 = -1;
-          CEvn_Logic::~CEvn_Logic(v19);
-          PlayGuiSound(2);
+          v7 = CEvn_Logic::CEvn_Logic(&v18, 0x19Eu, 0, 0, LocalPlayerId, 0, 0);
+          v26 = 1;
+          IEventEngine::SendAMessage(g_pEvnEngine, v7);
+          v26 = -1;
+          CEvn_Logic::~CEvn_Logic(&v18);
+          PlayGuiSound(2u);
           break;
         case 1439:
-          v9 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v20, 0x19Cu, 0, 0, LocalPlayerId, 0, 0);
-          v27 = 2;
-          IEventEngine::SendAMessage(g_pEvnEngine, v9);
-          v27 = -1;
-          CEvn_Logic::~CEvn_Logic(v20);
-          PlayGuiSound(2);
+          v8 = CEvn_Logic::CEvn_Logic(&v19, 0x19Cu, 0, 0, LocalPlayerId, 0, 0);
+          v26 = 2;
+          IEventEngine::SendAMessage(g_pEvnEngine, v8);
+          v26 = -1;
+          CEvn_Logic::~CEvn_Logic(&v19);
+          PlayGuiSound(2u);
           break;
         case 1440:
           if ( (a2 & 0x10000) != 0 )
           {
             if ( byte_3EFD457 )
-              IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 45, 1444, 0);
-            v10 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v21, 0x1C2u, 0, 0, 0, 0, 0);
-            v27 = 3;
-            IEventEngine::SendAMessage(g_pEvnEngine, v10);
-            v27 = -1;
-            CEvn_Logic::~CEvn_Logic(v21);
+              IGuiEngine::SelectControl(g_pGUIEngine, 45, 1444, 0);
+            v9 = CEvn_Logic::CEvn_Logic(&v20, 0x1C2u, 0, 0, 0, 0, 0);
+            v26 = 3;
+            IEventEngine::SendAMessage(g_pEvnEngine, v9);
+            v26 = -1;
+            CEvn_Logic::~CEvn_Logic(&v20);
             byte_3EFD458 = 1;
           }
           else
           {
-            v11 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v22, 0x1CCu, 0, 0, 0, 0, 0);
-            v27 = 4;
-            IEventEngine::SendAMessage(g_pEvnEngine, v11);
-            v27 = -1;
-            CEvn_Logic::~CEvn_Logic(v22);
-            v15 = CEvn_Event::CEvn_Event(&v25, 0x260u, 0, 0, 0);
-            v27 = 5;
-            IEventEngine::SendAMessage(g_pEvnEngine, v15);
-            v27 = -1;
-            CEvn_Event::~CEvn_Event(&v25);
+            v10 = CEvn_Logic::CEvn_Logic(&v21, 0x1CCu, 0, 0, 0, 0, 0);
+            v26 = 4;
+            IEventEngine::SendAMessage(g_pEvnEngine, v10);
+            v26 = -1;
+            CEvn_Logic::~CEvn_Logic(&v21);
+            v14 = CEvn_Event::CEvn_Event(&v24, 0x260u, 0, 0, 0);
+            v26 = 5;
+            IEventEngine::SendAMessage(g_pEvnEngine, v14);
+            v26 = -1;
+            CEvn_Event::~CEvn_Event(&v24);
             byte_3EFD458 = 0;
           }
-          PlayGuiSound(2);
+          PlayGuiSound(2u);
           break;
         case 1444:
           if ( (a2 & 0x10000) != 0 )
           {
             if ( byte_3EFD458 )
-              IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 45, 1440, 0);
-            v14 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v23, 0x1C1u, 0, 0, 0, 0, 0);
-            v27 = 6;
-            IEventEngine::SendAMessage(g_pEvnEngine, v14);
-            v27 = -1;
-            CEvn_Logic::~CEvn_Logic(v23);
+              IGuiEngine::SelectControl(g_pGUIEngine, 45, 1440, 0);
+            v13 = CEvn_Logic::CEvn_Logic(&v22, 0x1C1u, 0, 0, 0, 0, 0);
+            v26 = 6;
+            IEventEngine::SendAMessage(g_pEvnEngine, v13);
+            v26 = -1;
+            CEvn_Logic::~CEvn_Logic(&v22);
             byte_3EFD457 = 1;
           }
           else
           {
-            v13 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v24, 0x1CCu, 0, 0, 0, 0, 0);
-            v27 = 7;
-            IEventEngine::SendAMessage(g_pEvnEngine, v13);
-            v27 = -1;
-            CEvn_Logic::~CEvn_Logic(v24);
-            v12 = CEvn_Event::CEvn_Event(&v26, 0x260u, 0, 0, 0);
-            v27 = 8;
+            v12 = CEvn_Logic::CEvn_Logic(&v23, 0x1CCu, 0, 0, 0, 0, 0);
+            v26 = 7;
             IEventEngine::SendAMessage(g_pEvnEngine, v12);
-            v27 = -1;
-            CEvn_Event::~CEvn_Event(&v26);
+            v26 = -1;
+            CEvn_Logic::~CEvn_Logic(&v23);
+            v11 = CEvn_Event::CEvn_Event(&v25, 0x260u, 0, 0, 0);
+            v26 = 8;
+            IEventEngine::SendAMessage(g_pEvnEngine, v11);
+            v26 = -1;
+            CEvn_Event::~CEvn_Event(&v25);
             byte_3EFD457 = 0;
           }
-          PlayGuiSound(2);
+          PlayGuiSound(2u);
           break;
         default:
           return 1;
@@ -30997,9 +31004,9 @@ void __cdecl DrawGoodsGrid(void) {
 // Decompiled from void DrawGoodsGraph()
 void __cdecl DrawGoodsGraph(void) {
   
-  unsigned int v0; // eax
-  unsigned int v1; // eax
-  unsigned int v2; // eax
+  DWORD v0; // eax
+  DWORD v1; // eax
+  DWORD v2; // eax
   LPARAM v3; // [esp+4h] [ebp-8Ch]
   int v4; // [esp+8h] [ebp-88h]
   LPARAM data; // [esp+Ch] [ebp-84h]
@@ -31044,14 +31051,12 @@ void __cdecl DrawGoodsGraph(void) {
   int v44; // [esp+2Ch] [ebp-64h]
   int v45; // [esp+2Ch] [ebp-64h]
   _BYTE v46[16]; // [esp+30h] [ebp-60h] BYREF
-  int v47; // [esp+40h] [ebp-50h] BYREF
-  int v48; // [esp+44h] [ebp-4Ch]
-  int v49; // [esp+48h] [ebp-48h]
+  struct SGfxColor v47; // [esp+40h] [ebp-50h] BYREF
   CHAR Str[64]; // [esp+4Ch] [ebp-44h] BYREF
 
-  IGuiEngine::EraseOwnerImage((IGuiEngine *)g_pGUIEngine, 76, 1471);
+  IGuiEngine::EraseOwnerImage(g_pGUIEngine, 76, 1471);
   IGuiEngine::LockOwnerImage(
-    (IGuiEngine *)g_pGUIEngine,
+    g_pGUIEngine,
     76,
     1471,
     (struct SGuiRect *)v46,
@@ -31062,21 +31067,21 @@ void __cdecl DrawGoodsGraph(void) {
   {
     dword_3EFD464 = (unsigned int)dword_3EFD464 >> 1;
     DrawGoodsGrid();
-    v3 = (unsigned __int16)IGfxEngine::ConvertRgbToHicol(255, 255, 255);
+    v3 = IGfxEngine::ConvertRgbToHicol(255, 255, 255);
     if ( dword_3EFD46C )
     {
       if ( dword_3EFD46C == 1 )
       {
         if ( dword_3F2BCC0 >= 0 )
         {
-          LocalPlayerId = CPlayerManager::GetLocalPlayerId(1);
+          LocalPlayerId = CPlayerManager::GetLocalPlayerId();
           v1 = CPlayerManager::Color(LocalPlayerId);
-          IGfxEngine::GetPlayerColor((IGfxEngine *)g_pGfxEngine, v1, (struct SGfxColor *)&v47);
-          dataa = (unsigned __int16)IGfxEngine::ConvertRgbToHicol(v47, v48, v49);
+          IGfxEngine::GetPlayerColor(g_pGfxEngine, v1, &v47);
+          dataa = IGfxEngine::ConvertRgbToHicol(v47.m_iR, v47.m_iG, v47.m_iB);
           v24 = 15;
           v41 = dword_3F32B24[784 * LocalPlayerId + 16 * dword_3EFD468 + dword_3F2BCC0];
           _wsprintfA(Str, "%d", v41);
-          IGuiEngine::SetText((void *)g_pGUIEngine, 76, 1475, Str);
+          IGuiEngine::SetText(g_pGUIEngine, 76, 1475, Str);
           yStarta = (int)(float)(178.0 - (float)((float)v41 * *(float *)&dword_3EFD474));
           xStarta = (int)(float)((float)15 * *(float *)&dword_3EFD470);
           for ( i = dword_3F2BCC0; i >= 0; --i )
@@ -31093,7 +31098,7 @@ void __cdecl DrawGoodsGraph(void) {
             if ( v24 == dword_3EFD47C )
             {
               _wsprintfA(Str, "%d", v42);
-              IGuiEngine::SetText((void *)g_pGUIEngine, 76, 1475, Str);
+              IGuiEngine::SetText(g_pGUIEngine, 76, 1475, Str);
               LineDDA(xEndb, 0, xEndb, 179, LineCallbackGoods, v3);
             }
             --v24;
@@ -31112,7 +31117,7 @@ void __cdecl DrawGoodsGraph(void) {
             if ( v24 == dword_3EFD47C )
             {
               _wsprintfA(Str, "%d", v43);
-              IGuiEngine::SetText((void *)g_pGUIEngine, 76, 1475, Str);
+              IGuiEngine::SetText(g_pGUIEngine, 76, 1475, Str);
               LineDDA(xEndc, 0, xEndc, 179, LineCallbackGoods, v3);
             }
             --v24;
@@ -31121,10 +31126,10 @@ void __cdecl DrawGoodsGraph(void) {
       }
       else if ( dword_3EFD46C == 2 && dword_3F2BCD4 >= 0 )
       {
-        v10 = CPlayerManager::GetLocalPlayerId(2);
+        v10 = CPlayerManager::GetLocalPlayerId();
         v2 = CPlayerManager::Color(v10);
-        IGfxEngine::GetPlayerColor((IGfxEngine *)g_pGfxEngine, v2, (struct SGfxColor *)&v47);
-        datab = (unsigned __int16)IGfxEngine::ConvertRgbToHicol(v47, v48, v49);
+        IGfxEngine::GetPlayerColor(g_pGfxEngine, v2, &v47);
+        datab = IGfxEngine::ConvertRgbToHicol(v47.m_iR, v47.m_iG, v47.m_iB);
         v25 = 15;
         yStartb = (int)(float)(178.0
                              - (float)((float)dword_3F39964[784 * v10 + 16 * dword_3EFD468 + dword_3F2BCD4]
@@ -31144,7 +31149,7 @@ void __cdecl DrawGoodsGraph(void) {
           if ( v25 == dword_3EFD47C )
           {
             _wsprintfA(Str, "%d", v44);
-            IGuiEngine::SetText((void *)g_pGUIEngine, 76, 1475, Str);
+            IGuiEngine::SetText(g_pGUIEngine, 76, 1475, Str);
             LineDDA(xEndd, 0, xEndd, 179, LineCallbackGoods, v3);
           }
           --v25;
@@ -31163,7 +31168,7 @@ void __cdecl DrawGoodsGraph(void) {
           if ( v25 == dword_3EFD47C )
           {
             _wsprintfA(Str, "%d", v45);
-            IGuiEngine::SetText((void *)g_pGUIEngine, 76, 1475, Str);
+            IGuiEngine::SetText(g_pGUIEngine, 76, 1475, Str);
             LineDDA(xEnde, 0, xEnde, 179, LineCallbackGoods, v3);
           }
           --v25;
@@ -31172,10 +31177,10 @@ void __cdecl DrawGoodsGraph(void) {
     }
     else if ( dword_3F2BCAC >= 0 )
     {
-      v8 = CPlayerManager::GetLocalPlayerId(0);
+      v8 = CPlayerManager::GetLocalPlayerId();
       v0 = CPlayerManager::Color(v8);
-      IGfxEngine::GetPlayerColor((IGfxEngine *)g_pGfxEngine, v0, (struct SGfxColor *)&v47);
-      data = (unsigned __int16)IGfxEngine::ConvertRgbToHicol(v47, v48, v49);
+      IGfxEngine::GetPlayerColor(g_pGfxEngine, v0, &v47);
+      data = IGfxEngine::ConvertRgbToHicol(v47.m_iR, v47.m_iG, v47.m_iB);
       v23 = 15;
       v38 = dword_3F2BCE4[784 * v8 + 16 * dword_3EFD468 + dword_3F2BCAC];
       *(float *)&dword_3EFD474 = 178.0 / *(float *)&dword_3EFD478;
@@ -31195,7 +31200,7 @@ void __cdecl DrawGoodsGraph(void) {
         if ( v23 == dword_3EFD47C )
         {
           _wsprintfA(Str, "%d", v39);
-          IGuiEngine::SetText((void *)g_pGUIEngine, 76, 1475, Str);
+          IGuiEngine::SetText(g_pGUIEngine, 76, 1475, Str);
           LineDDA(xEnd, 0, xEnd, 179, LineCallbackGoods, v3);
         }
         --v23;
@@ -31214,14 +31219,14 @@ void __cdecl DrawGoodsGraph(void) {
         if ( v23 == dword_3EFD47C )
         {
           _wsprintfA(Str, "%d", v40);
-          IGuiEngine::SetText((void *)g_pGUIEngine, 76, 1475, Str);
+          IGuiEngine::SetText(g_pGUIEngine, 76, 1475, Str);
           LineDDA(xEnda, 0, xEnda, 179, LineCallbackGoods, v3);
         }
         --v23;
       }
     }
   }
-  IGuiEngine::UnlockOwnerImage((IGuiEngine *)g_pGUIEngine, 76, 1471);
+  IGuiEngine::UnlockOwnerImage(g_pGUIEngine, 76, 1471);
   if ( byte_3EFD45C )
   {
     byte_3EFD45C = 0;

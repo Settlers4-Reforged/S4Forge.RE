@@ -3,10 +3,10 @@
 // Definitions for class IBuildingRole
 
 // address=[0x130f040]
-// Decompiled from char __thiscall IBuildingRole::HaveInhabitant(_BYTE *this)
+// Decompiled from char __thiscall IBuildingRole::HaveInhabitant(IBuildingRole *this)
 bool  IBuildingRole::HaveInhabitant(void)const {
   
-  return this[29];
+  return this->m_bInhabitants;
 }
 
 
@@ -55,10 +55,10 @@ void  IBuildingRole::NotifySelected(void) {
 
 
 // address=[0x14e6850]
-// Decompiled from int __thiscall IBuildingRole::OrderInhabitantCancelled(IBuildingRole *this, struct CBuilding *a2)
+// Decompiled from void __thiscall IBuildingRole::OrderInhabitantCancelled(IBuildingRole *this, struct CBuilding *a2)
 void  IBuildingRole::OrderInhabitantCancelled(class CBuilding * a2) {
   
-  return (*(int (__thiscall **)(IBuildingRole *, _DWORD))(*(_DWORD *)this + 80))(this, *((unsigned __int16 *)this + 4));
+  this->InhabitantFlee(this, (unsigned __int16)this->m_uSettlerId);
 }
 
 
@@ -66,7 +66,7 @@ void  IBuildingRole::OrderInhabitantCancelled(class CBuilding * a2) {
 // Decompiled from char __thiscall IBuildingRole::SettlerEnter(IBuildingRole *this, struct CBuilding *a2, int a3)
 bool  IBuildingRole::SettlerEnter(class CBuilding * a2, int a3) {
   
-  (*(void (__thiscall **)(IBuildingRole *, struct CBuilding *, _DWORD))(*(_DWORD *)this + 72))(this, a2, 0);
+  this->LockPiles(this, a2, 0);
   return 1;
 }
 
@@ -86,225 +86,193 @@ void  IBuildingRole::SwitchPriority(void) {
   unsigned int i; // [esp+0h] [ebp-8h]
 
   CPersistence::CPersistence(this);
-  *(_DWORD *)this = &IBuildingRole::_vftable_;
-  *((_BYTE *)this + 4) = 0;
-  *((_BYTE *)this + 5) = 0;
-  *((_WORD *)this + 3) = 0;
-  *((_WORD *)this + 4) = 0;
-  *((_WORD *)this + 5) = 0;
-  *((_WORD *)this + 6) = 0;
-  *((_DWORD *)this + 4) = 0;
-  *((_BYTE *)this + 29) = 0;
-  *((_BYTE *)this + 365) = 0;
-  *((_DWORD *)this + 94) = 0;
+  this->__vftable = (IBuildingRole_vtbl *)&IBuildingRole::_vftable_;
+  this->byte4 = 0;
+  this->byte5 = 0;
+  this->m_iEntityId = 0;
+  this->m_uSettlerId = 0;
+  this->wordA = 0;
+  this->wordC = 0;
+  this->field_10 = 0;
+  this->m_bInhabitants = 0;
+  this->byte16D = 0;
+  this->m_pBuildingInfo = 0;
   for ( i = 0; i < 0xA; ++i )
   {
-    *((_DWORD *)this + 2 * i + 19) = 0;
-    *((_DWORD *)this + 2 * i + 20) = 0;
+    this->gap_4c[2 * i] = 0;
+    this->gap_4c[2 * i + 1] = 0;
   }
   IBuildingRole::WorkingAreaChanged(this);
-  *((_BYTE *)this + 356) = 0;
-  *((_DWORD *)this + 8) = 0;
+  this->byte164 = 0;
+  this->m_pSearchFkt = 0;
   return this;
 }
 
 
 // address=[0x14fdfb0]
-// Decompiled from struct IBuildingRole *__thiscall IBuildingRole::Update(struct IBuildingRole *this, struct CBuilding *a2)
+// Decompiled from void __thiscall IBuildingRole::Update(struct IBuildingRole *this, struct CBuilding *a2)
 void  IBuildingRole::Update(class CBuilding * a2) {
   
-  int TickCounter; // esi
-  int v3; // esi
-  struct IBuildingRole *result; // eax
-  int v5; // eax
-  unsigned __int8 v6; // al
-  unsigned int v7; // eax
+  __int16 TickCounter; // si
+  DWORD v3; // eax
+  unsigned __int8 v4; // al
+  unsigned int v5; // eax
+  unsigned int v6; // eax
+  unsigned int BuildingJobFrameCount; // eax
   unsigned int v8; // eax
   unsigned int v9; // eax
-  unsigned int v10; // eax
-  int v11; // esi
-  int v12; // eax
+  int v10; // esi
+  int v11; // eax
+  int v12; // esi
   int v13; // eax
-  int v14; // edx
-  int v15; // esi
-  int v16; // eax
-  int v17; // et2
-  int v18; // eax
-  int v19; // [esp-8h] [ebp-30h]
-  int v20; // [esp-8h] [ebp-30h]
-  unsigned int v21; // [esp-4h] [ebp-2Ch]
-  unsigned int v22; // [esp-4h] [ebp-2Ch]
-  unsigned int v23; // [esp-4h] [ebp-2Ch]
-  unsigned int v24; // [esp-4h] [ebp-2Ch]
-  unsigned int BuildingJobFrameCount; // [esp+8h] [ebp-20h]
-  int v26; // [esp+Ch] [ebp-1Ch]
-  int v27; // [esp+10h] [ebp-18h]
-  char v28; // [esp+14h] [ebp-14h]
-  int v29; // [esp+18h] [ebp-10h]
+  int v14; // [esp-Ch] [ebp-34h]
+  int v15; // [esp-8h] [ebp-30h]
+  int v16; // [esp-8h] [ebp-30h]
+  int v17; // [esp-4h] [ebp-2Ch]
+  int v18; // [esp-4h] [ebp-2Ch]
+  int v19; // [esp-4h] [ebp-2Ch]
+  int v20; // [esp-4h] [ebp-2Ch]
+  signed int v21; // [esp+Ch] [ebp-1Ch]
+  signed int v22; // [esp+10h] [ebp-18h]
+  char v23; // [esp+14h] [ebp-14h]
+  int v24; // [esp+18h] [ebp-10h]
   unsigned int i; // [esp+1Ch] [ebp-Ch]
-  unsigned __int8 v32; // [esp+26h] [ebp-2h]
+  unsigned __int8 v27; // [esp+26h] [ebp-2h]
 
   TickCounter = CGameData::GetTickCounter(g_pGameData);
-  v3 = TickCounter - IAnimatedEntity::LastUpdateTick(a2);
-  result = this;
-  *((_WORD *)this + 5) = v3;
-  if ( !*((_WORD *)this + 5) )
-    return result;
-  v5 = CGameData::GetTickCounter(g_pGameData);
-  IAnimatedEntity::SetLastUpdateTick(a2, v5);
+  this->wordA = TickCounter - IAnimatedEntity::LastUpdateTick(a2);
+  if ( !this->wordA )
+    return;
+  v3 = CGameData::GetTickCounter(g_pGameData);
+  IAnimatedEntity::SetLastUpdateTick((IAnimatedEntity *)a2, v3);
   for ( i = 0; i < 0xA; ++i )
   {
-    if ( !*((_BYTE *)this + 20 * i + 156) )
+    if ( !LOBYTE(this->gap_4c[5 * i + 20]) )
       continue;
     if ( !IEntity::Race(a2) || IEntity::Race(a2) == 1 )
     {
-      v6 = *((_BYTE *)this + 20 * i + 165) + 1;
-      *((_BYTE *)this + 20 * i + 165) = v6;
-      if ( v6 <= 2u )
+      v4 = BYTE1(this->gap_4c[5 * i + 22]) + 1;
+      BYTE1(this->gap_4c[5 * i + 22]) = v4;
+      if ( v4 <= 2u )
         continue;
-      *((_BYTE *)this + 20 * i + 165) = 0;
+      BYTE1(this->gap_4c[5 * i + 22]) = 0;
     }
-    v28 = *((_BYTE *)this + 20 * i + 158);
-    if ( v28 )
+    v23 = BYTE2(this->gap_4c[5 * i + 20]);
+    if ( v23 )
     {
-      if ( v28 == 1 )
+      if ( v23 == 1 )
       {
-        if ( *((_BYTE *)this + 20 * i + 164) )
+        if ( LOBYTE(this->gap_4c[5 * i + 22]) )
         {
-          v22 = *((_DWORD *)this + 2 * i + 19);
-          v8 = IEntity::Race(a2);
-          BuildingJobFrameCount = CGfxManager::GetBuildingJobFrameCount((CGfxManager *)g_pGfxManager, v8, v22);
-          if ( ++*((_DWORD *)this + 2 * i + 20) >= BuildingJobFrameCount )
+          v18 = this->gap_4c[2 * i];
+          v6 = IEntity::Race(a2);
+          BuildingJobFrameCount = CGfxManager::GetBuildingJobFrameCount(g_pGfxManager, v6, v18);
+          if ( ++this->gap_4c[2 * i + 1] >= BuildingJobFrameCount )
           {
-            *((_DWORD *)this + 2 * i + 20) = 0;
-            result = (struct IBuildingRole *)(20 * i);
-            if ( !*((_BYTE *)this + 20 * i + 159) )
-              return result;
-            v29 = *((unsigned __int8 *)this + 20 * i + 159);
-            *((_BYTE *)this + 20 * i + 157) = v29 + j__rand() % ((v29 + 1) / 2);
-            result = this;
-            *((_BYTE *)this + 20 * i + 164) = 0;
-            return result;
+            this->gap_4c[2 * i + 1] = 0;
+            if ( !HIBYTE(this->gap_4c[5 * i + 20]) )
+              return;
+            v24 = HIBYTE(this->gap_4c[5 * i + 20]);
+            BYTE1(this->gap_4c[5 * i + 20]) = v24 + j__rand() % ((v24 + 1) / 2);
+            LOBYTE(this->gap_4c[5 * i + 22]) = 0;
+            return;
           }
         }
-        else if ( *((_BYTE *)this + 20 * i + 157) )
+        else if ( BYTE1(this->gap_4c[5 * i + 20]) )
         {
-          --*((_BYTE *)this + 20 * i + 157);
+          --BYTE1(this->gap_4c[5 * i + 20]);
         }
         else
         {
-          *((_BYTE *)this + 20 * i + 156) = 1;
-          v23 = *((_DWORD *)this + 2 * i + 19);
-          v9 = IEntity::Race(a2);
-          *((_BYTE *)this + 20 * i + 164) = CGfxManager::GetBuildingJobFrameCount((CGfxManager *)g_pGfxManager, v9, v23);
-          *((_DWORD *)this + 2 * i + 20) = 0;
+          LOBYTE(this->gap_4c[5 * i + 20]) = 1;
+          v19 = this->gap_4c[2 * i];
+          v8 = IEntity::Race(a2);
+          LOBYTE(this->gap_4c[5 * i + 22]) = CGfxManager::GetBuildingJobFrameCount(g_pGfxManager, v8, v19);
+          this->gap_4c[2 * i + 1] = 0;
         }
       }
-      else if ( v28 == 2 && *((_BYTE *)this + 20 * i + 164) )
+      else if ( v23 == 2 && LOBYTE(this->gap_4c[5 * i + 22]) )
       {
-        if ( (unsigned __int8)++*((_BYTE *)this + 20 * i + 157) < (int)*((unsigned __int8 *)this + 20 * i + 164) )
+        if ( (unsigned __int8)++BYTE1(this->gap_4c[5 * i + 20]) < (int)LOBYTE(this->gap_4c[5 * i + 22]) )
         {
-          v24 = *((_DWORD *)this + 2 * i + 19);
-          v10 = IEntity::Race(a2);
-          v26 = CGfxManager::GetBuildingJobFrameCount((CGfxManager *)g_pGfxManager, v10, v24);
-          if ( v26 <= 0 )
-            v26 = 1;
-          *((_DWORD *)this + 2 * i + 20) = (*((_DWORD *)this + 2 * i + 20) + 1) % (unsigned int)v26;
+          v20 = this->gap_4c[2 * i];
+          v9 = IEntity::Race(a2);
+          v21 = CGfxManager::GetBuildingJobFrameCount(g_pGfxManager, v9, v20);
+          if ( v21 <= 0 )
+            v21 = 1;
+          this->gap_4c[2 * i + 1] = (this->gap_4c[2 * i + 1] + 1) % v21;
         }
         else
         {
-          *((_BYTE *)this + 20 * i + 156) = 0;
+          LOBYTE(this->gap_4c[5 * i + 20]) = 0;
         }
       }
     }
     else
     {
-      v21 = *((_DWORD *)this + 2 * i + 19);
-      v7 = IEntity::Race(a2);
-      v27 = CGfxManager::GetBuildingJobFrameCount((CGfxManager *)g_pGfxManager, v7, v21);
-      if ( v27 <= 0 )
-        v27 = 1;
-      *((_DWORD *)this + 2 * i + 20) = (*((_DWORD *)this + 2 * i + 20) + 1) % (unsigned int)v27;
+      v17 = this->gap_4c[2 * i];
+      v5 = IEntity::Race(a2);
+      v22 = CGfxManager::GetBuildingJobFrameCount(g_pGfxManager, v5, v17);
+      if ( v22 <= 0 )
+        v22 = 1;
+      this->gap_4c[2 * i + 1] = (this->gap_4c[2 * i + 1] + 1) % v22;
     }
-    if ( *((int *)this + 5 * i + 42) > 0 && *((unsigned __int8 *)this + 20 * i + 173) == *((_DWORD *)this + 2 * i + 20) )
+    if ( (int)this->gap_4c[5 * i + 23] > 0 && BYTE1(this->gap_4c[5 * i + 24]) == this->gap_4c[2 * i + 1] )
     {
-      if ( *((_BYTE *)this + 20 * i + 172) == 100
-        || (v11 = *((unsigned __int8 *)this + 20 * i + 172), v11 >= j__rand() % 100) )
+      if ( LOBYTE(this->gap_4c[5 * i + 24]) == 100 || (v10 = LOBYTE(this->gap_4c[5 * i + 24]), v10 >= j__rand() % 100) )
       {
-        v19 = IEntity::Y(a2);
-        v12 = IEntity::X(a2);
-        CSoundManager::PlayEnvironmentSound(g_pSoundManager, *((_DWORD *)this + 5 * i + 42), v12, v19, 0);
+        v15 = IEntity::Y(a2);
+        v14 = IEntity::X(a2);
+        CSoundManager::PlayEnvironmentSound(g_pSoundManager, this->gap_4c[5 * i + 23], v14, v15, 0);
       }
     }
   }
-  result = (struct IBuildingRole *)*((unsigned __int8 *)this + 356);
-  if ( !*((_BYTE *)this + 356) )
-    return result;
-  v13 = IEntity::Type((unsigned __int16 *)a2);
-  result = (struct IBuildingRole *)CBuildingMgr::IsMilitary(v13);
-  if ( (_BYTE)result )
-    return result;
-  v32 = *((_BYTE *)this + 358) + 1;
-  *((_BYTE *)this + 358) = v32;
-  if ( v32 >= (int)*((unsigned __int8 *)this + 357) )
+  if ( this->byte164 )
   {
-    if ( (*((_BYTE *)this + 364) & 1) != 0 )
+    v11 = IEntity::Type((IEntity *)a2);
+    if ( !(unsigned __int8)CBuildingMgr::IsMilitary(v11) )
     {
-      *((_BYTE *)this + 358) = 0;
-      *((_BYTE *)this + 359) = 0;
-      ++*((_BYTE *)this + 356);
-      if ( (*((_BYTE *)this + 364) & 0x40) != 0 )
+      v27 = this->gap165[1] + 1;
+      this->gap165[1] = v27;
+      if ( v27 >= (int)(unsigned __int8)this->gap165[0] )
       {
-        result = (struct IBuildingRole *)CGfxManager::GetEffectFrameCount(
-                                           (CGfxManager *)g_pGfxManager,
-                                           *((unsigned __int8 *)this + 356));
-        *((_BYTE *)this + 357) = (_BYTE)result;
-        *((_BYTE *)this + 364) = 0;
+        if ( (this->gap165[7] & 1) != 0 )
+        {
+          this->gap165[1] = 0;
+          this->gap165[2] = 0;
+          ++this->byte164;
+          if ( (this->gap165[7] & 0x40) != 0 )
+          {
+            this->gap165[0] = CGfxManager::GetEffectFrameCount(g_pGfxManager, (unsigned __int8)this->byte164);
+            this->gap165[7] = 0;
+          }
+          else
+          {
+            this->gap165[0] = this->byte16D;
+            this->gap165[7] |= 0x40u;
+          }
+        }
+        else
+        {
+          this->byte164 = 0;
+        }
       }
       else
       {
-        *((_BYTE *)this + 357) = *((_BYTE *)this + 365);
-        result = this;
-        *((_BYTE *)this + 364) |= 0x40u;
-      }
-    }
-    else
-    {
-      result = this;
-      *((_BYTE *)this + 356) = 0;
-    }
-  }
-  else
-  {
-    v14 = (*((unsigned __int8 *)this + 359) + 1)
-        % (int)CGfxManager::GetEffectFrameCount((CGfxManager *)g_pGfxManager, *((unsigned __int8 *)this + 356));
-    result = this;
-    *((_BYTE *)this + 359) = v14;
-    if ( *((int *)this + 92) > 0 )
-    {
-      result = (struct IBuildingRole *)*((unsigned __int8 *)this + 373);
-      if ( result == (struct IBuildingRole *)*((unsigned __int8 *)this + 359) )
-      {
-        if ( *((_BYTE *)this + 372) == 100
-          || (v15 = *((unsigned __int8 *)this + 372),
-              v16 = j__rand(),
-              v17 = v16 % 100,
-              result = (struct IBuildingRole *)(v16 / 100),
-              v15 >= v17) )
+        this->gap165[2] = ((unsigned __int8)this->gap165[2] + 1)
+                        % CGfxManager::GetEffectFrameCount(g_pGfxManager, (unsigned __int8)this->byte164);
+        if ( (int)this->field_170 > 0 && BYTE1(this->field_174) == (unsigned __int8)this->gap165[2] )
         {
-          v20 = IEntity::Y(a2);
-          v18 = IEntity::X(a2);
-          return (struct IBuildingRole *)CSoundManager::PlayEnvironmentSound(
-                                           g_pSoundManager,
-                                           *((_DWORD *)this + 92),
-                                           v18,
-                                           v20,
-                                           0);
+          if ( LOBYTE(this->field_174) == 100 || (v12 = LOBYTE(this->field_174), v12 >= j__rand() % 100) )
+          {
+            v16 = IEntity::Y(a2);
+            v13 = IEntity::X(a2);
+            CSoundManager::PlayEnvironmentSound(g_pSoundManager, this->field_170, v13, v16, 0);
+          }
         }
       }
     }
   }
-  return result;
 }
 
 
@@ -354,29 +322,24 @@ void  IBuildingRole::Switch(void) {
 
 
 // address=[0x14fe6b0]
-// Decompiled from IBuildingRole *__thiscall IBuildingRole::InhabitantFlee(IBuildingRole *this, int a2)
-void  IBuildingRole::InhabitantFlee(int a2) {
+// Decompiled from void __thiscall IBuildingRole::InhabitantFlee(IBuildingRole *this, int _iSettlerId)
+void  IBuildingRole::InhabitantFlee(int _iSettlerId) {
   
-  IBuildingRole *result; // eax
+  CBuilding *v2; // eax
 
-  if ( !*((_WORD *)this + 4)
-    && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingRole.cpp", 1285, "m_uSettlerId") == 1 )
-  {
+  if ( !this->m_uSettlerId && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingRole.cpp", 1285, "m_uSettlerId") == 1 )
     __debugbreak();
-  }
-  if ( *((unsigned __int16 *)this + 4) != a2
+  if ( (unsigned __int16)this->m_uSettlerId != _iSettlerId
     && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingRole.cpp", 1286, "m_uSettlerId == _iSettlerId") == 1 )
   {
     __debugbreak();
   }
-  *((_BYTE *)this + 4) = 1;
-  *((_BYTE *)this + 5) = 0;
-  *((_WORD *)this + 4) = 0;
-  CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
-  IAnimatedEntity::RegisterForLogicUpdate(1);
-  result = this;
-  *((_BYTE *)this + 29) = 0;
-  return result;
+  this->byte4 = 1;
+  this->byte5 = 0;
+  this->m_uSettlerId = 0;
+  v2 = CBuildingMgr::operator[]((unsigned __int16)this->m_iEntityId);
+  IAnimatedEntity::RegisterForLogicUpdate((IAnimatedEntity *)v2, 1);
+  this->m_bInhabitants = 0;
 }
 
 
@@ -456,92 +419,92 @@ void  IBuildingRole::ReturnBuildingMaterial(class CBuilding * a2) {
 
 
 // address=[0x14fe8d0]
-// Decompiled from unsigned __int16 *__thiscall IBuildingRole::RemoveInhabitant(unsigned __int16 *this, _DWORD *a2)
+// Decompiled from void __thiscall IBuildingRole::RemoveInhabitant(IBuildingRole *this, _DWORD *a2)
 void  IBuildingRole::RemoveInhabitant(class CBuilding * a2) {
   
-  unsigned __int16 *result; // eax
+  int v2; // esi
   int v3; // esi
-  int v4; // esi
-  int v5; // eax
-  int v6; // esi
-  int v7; // eax
-  int v8; // [esp-4h] [ebp-30h]
-  int v9; // [esp+4h] [ebp-28h]
-  struct CEcoSector *v10; // [esp+8h] [ebp-24h]
-  int v11; // [esp+Ch] [ebp-20h]
-  struct CEcoSector *EcoSectorPtr; // [esp+10h] [ebp-1Ch]
-  int v13; // [esp+14h] [ebp-18h]
-  int v15; // [esp+1Ch] [ebp-10h] BYREF
-  int v16; // [esp+20h] [ebp-Ch] BYREF
-  unsigned __int8 *v17; // [esp+24h] [ebp-8h]
-  char v18; // [esp+2Bh] [ebp-1h]
+  int v4; // eax
+  int v5; // esi
+  int v6; // eax
+  int v7; // [esp-4h] [ebp-30h]
+  int v8; // [esp+4h] [ebp-28h]
+  int v9; // [esp+8h] [ebp-24h]
+  int v10; // [esp+Ch] [ebp-20h]
+  int EcoSectorPtr; // [esp+10h] [ebp-1Ch]
+  IEntity *v12; // [esp+14h] [ebp-18h]
+  int v14; // [esp+1Ch] [ebp-10h] BYREF
+  int v15; // [esp+20h] [ebp-Ch] BYREF
+  IEntity *v16; // [esp+24h] [ebp-8h]
+  char bPositionFound; // [esp+2Bh] [ebp-1h]
 
-  result = this;
-  if ( !this[4] )
-    return result;
-  v17 = (unsigned __int8 *)CSettlerMgr::operator[](this[4]);
-  v13 = CBuildingMgr::operator[](this[3]);
-  v3 = IEntity::PackedXY(v17);
-  if ( v3 == IEntity::PackedXY(v13) )
+  if ( this->m_uSettlerId )
   {
-    if ( !IEntity::FlagBits(v17, EntityFlag_OnBoard)
-      && BBSupportDbgReport(
-           2,
-           "MapObjects\\Building\\BuildingRole.cpp",
-           310,
-           "rSettler.FlagBits(ENTITY_FLAG_ON_BOARD) != 0") == 1 )
+    v16 = CSettlerMgr::operator[]((unsigned __int16)this->m_uSettlerId);
+    v12 = (IEntity *)CBuildingMgr::operator[]((unsigned __int16)this->m_iEntityId);
+    v2 = IEntity::PackedXY(v16);
+    if ( v2 == IEntity::PackedXY(v12) )
     {
-      __debugbreak();
-    }
-    v18 = 0;
-    v15 = CBuilding::DoorX(v13);
-    v16 = CBuilding::DoorY(v13);
-    v11 = CWorldManager::EcoSectorId(v15, v16);
-    EcoSectorPtr = CEcoSectorMgr::GetEcoSectorPtrEx((CEcoSectorMgr *)g_cESMgr, v11);
-    if ( EcoSectorPtr )
-    {
-      v4 = CEcoSector::Owner(EcoSectorPtr);
-      if ( v4 == IEntity::OwnerId(v17) )
-        v18 = CSettlerMgr::SearchFreePositionInEcoSector((CSettlerMgr *)g_cSettlerMgr, &v15, &v16, v11);
-    }
-    if ( !v18 )
-    {
-      v8 = IEntity::Y(a2);
-      v5 = IEntity::X(a2);
-      v9 = CWorldManager::EcoSectorId(v5, v8);
-      v10 = CEcoSectorMgr::GetEcoSectorPtrEx((CEcoSectorMgr *)g_cESMgr, v9);
-      if ( v10 )
+      if ( !IEntity::FlagBits(v16, EntityFlag_OnBoard)
+        && BBSupportDbgReport(
+             2,
+             "MapObjects\\Building\\BuildingRole.cpp",
+             310,
+             "rSettler.FlagBits(ENTITY_FLAG_ON_BOARD) != 0") == 1 )
       {
-        v6 = CEcoSector::Owner(v10);
-        if ( v6 == IEntity::OwnerId(v17) )
-          v18 = CSettlerMgr::SearchFreePositionInEcoSector((CSettlerMgr *)g_cSettlerMgr, &v15, &v16, v9);
+        __debugbreak();
       }
+      bPositionFound = 0;
+      v14 = CBuilding::DoorX(v12);
+      v15 = CBuilding::DoorY(v12);
+      v10 = CWorldManager::EcoSectorId(v14, v15);
+      EcoSectorPtr = CEcoSectorMgr::GetEcoSectorPtrEx((CEcoSectorMgr *)g_cESMgr, v10);
+      if ( EcoSectorPtr )
+      {
+        v3 = CEcoSector::Owner(EcoSectorPtr);
+        if ( v3 == IEntity::OwnerId(v16) )
+          bPositionFound = CSettlerMgr::SearchFreePositionInEcoSector((CSettlerMgr *)g_cSettlerMgr, &v14, &v15, v10);
+      }
+      if ( !bPositionFound )
+      {
+        v7 = IEntity::Y(a2);
+        v4 = IEntity::X(a2);
+        v8 = CWorldManager::EcoSectorId(v4, v7);
+        v9 = CEcoSectorMgr::GetEcoSectorPtrEx((CEcoSectorMgr *)g_cESMgr, v8);
+        if ( v9 )
+        {
+          v5 = CEcoSector::Owner(v9);
+          if ( v5 == IEntity::OwnerId(v16) )
+            bPositionFound = CSettlerMgr::SearchFreePositionInEcoSector((CSettlerMgr *)g_cSettlerMgr, &v14, &v15, v8);
+        }
+      }
+      if ( !bPositionFound
+        && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingRole.cpp", 336, "bPositionFound") == 1 )
+      {
+        __debugbreak();
+      }
+      v6 = Y16X16::PackXYFast(v14, v15);
+      ((void (__thiscall *)(IEntity *, int))v16->j_?PlaceInMapObjectLayer@IEntity@@UAEXH@Z)(v16, v6);
     }
-    if ( !v18 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingRole.cpp", 336, "bPositionFound") == 1 )
+    else if ( IEntity::FlagBits(v16, EntityFlag_OnBoard)
+           && BBSupportDbgReport(
+                2,
+                "MapObjects\\Building\\BuildingRole.cpp",
+                342,
+                "rSettler.FlagBits(ENTITY_FLAG_ON_BOARD) == 0") == 1 )
+    {
       __debugbreak();
-    v7 = Y16X16::PackXYFast(v15, v16);
-    (*(void (__thiscall **)(unsigned __int8 *, int))(*(_DWORD *)v17 + 52))(v17, v7);
+    }
+    IEntity::SetFlagBits(v16, EntityFlag_Visible);
+    IEntity::ClearFlagBits(v16, EntityFlag_MagicInvisible);
+    IEntity::ClearFlagBits(v16, EntityFlag_OnBoard);
+    this->m_uSettlerId = 0;
   }
-  else if ( IEntity::FlagBits(v17, EntityFlag_OnBoard)
-         && BBSupportDbgReport(
-              2,
-              "MapObjects\\Building\\BuildingRole.cpp",
-              342,
-              "rSettler.FlagBits(ENTITY_FLAG_ON_BOARD) == 0") == 1 )
-  {
-    __debugbreak();
-  }
-  IEntity::SetFlagBits(v17, EntityFlag_Visible);
-  IEntity::ClearFlagBits(v17, EntityFlag_MagicInvisible);
-  IEntity::ClearFlagBits(v17, EntityFlag_OnBoard);
-  result = this;
-  this[4] = 0;
-  return result;
 }
 
 
 // address=[0x14feaf0]
-// Decompiled from bool __thiscall IBuildingRole::SearchInWorkingArea(int this, unsigned __int8 *a2, int a3)
+// Decompiled from bool __thiscall IBuildingRole::SearchInWorkingArea(IBuildingRole *this, IEntity *a2, int a3)
 bool  IBuildingRole::SearchInWorkingArea(class CBuilding * a2, int a3) {
   
   int WorkingAreaPackedXY; // eax
@@ -568,14 +531,14 @@ bool  IBuildingRole::SearchInWorkingArea(class CBuilding * a2, int a3) {
   int v25; // [esp+44h] [ebp-34h]
   int v26; // [esp+48h] [ebp-30h]
   int v27; // [esp+50h] [ebp-28h]
-  int v28; // [esp+54h] [ebp-24h]
+  int iFoundIdx; // [esp+54h] [ebp-24h]
   int v29; // [esp+58h] [ebp-20h]
   int j; // [esp+5Ch] [ebp-1Ch]
   bool v31; // [esp+62h] [ebp-16h]
   int i; // [esp+64h] [ebp-14h]
-  int v33; // [esp+68h] [ebp-10h]
+  unsigned int v33; // [esp+68h] [ebp-10h]
   int v34; // [esp+68h] [ebp-10h]
-  int v35; // [esp+6Ch] [ebp-Ch]
+  unsigned int v35; // [esp+6Ch] [ebp-Ch]
   int v36; // [esp+6Ch] [ebp-Ch]
 
   v17 = IEntity::OwnerId(a2);
@@ -585,22 +548,22 @@ bool  IBuildingRole::SearchInWorkingArea(class CBuilding * a2, int a3) {
   v4 = CBuilding::GetWorkingAreaPackedXY(a2);
   v15 = Y16X16::UnpackYFast(v4);
   v29 = -1;
-  v28 = -1;
-  v11 = *(char *)(*(_DWORD *)(this + 376) + 478);
+  iFoundIdx = -1;
+  v11 = *((char *)this->m_pBuildingInfo + 478);
   v5 = IEntity::Race(a2);
   CSettlerMgr::GetSettlerInfo(v5, v11);
   v22 = *(char *)(std::vector<CSettlerMgr::SSearchInfos>::operator[](a3) + 5);
-  v12 = *(char *)(*(_DWORD *)(this + 376) + 478);
+  v12 = *((char *)this->m_pBuildingInfo + 478);
   v6 = IEntity::Race(a2);
   CSettlerMgr::GetSettlerInfo(v6, v12);
   v21 = *(char *)(std::vector<CSettlerMgr::SSearchInfos>::operator[](a3) + 6);
-  v27 = CSpiralOffsets::Last(*(_DWORD *)(*(_DWORD *)(this + 376) + 492));
-  v7 = CBuilding::EnsignWorldIdx(a2);
+  v27 = CSpiralOffsets::Last(*((_DWORD *)this->m_pBuildingInfo + 123));
+  v7 = CBuilding::EnsignWorldIdx((CBuilding *)a2);
   v19 = CWorldManager::EcoSectorId(v7);
-  if ( *(_DWORD *)(this + 32) )
+  if ( this->m_pSearchFkt )
   {
-    if ( *(unsigned __int16 *)(this + 4 * a3 + 22) < *(unsigned __int16 *)(this + 4 * a3 + 20) + 75 )
-      *(_WORD *)(this + 4 * a3 + 22) = *(_WORD *)(this + 4 * a3 + 20) + 75;
+    if ( *(unsigned __int16 *)&this->gap_14[4 * a3 + 2] < *(unsigned __int16 *)&this->gap_14[4 * a3] + 75 )
+      *(_WORD *)&this->gap_14[4 * a3 + 2] = *(_WORD *)&this->gap_14[4 * a3] + 75;
     for ( i = 0; i < 2; ++i )
     {
       if ( i )
@@ -608,23 +571,22 @@ bool  IBuildingRole::SearchInWorkingArea(class CBuilding * a2, int a3) {
       else
         v20 = 75;
       v25 = v20;
-      v24 = *(unsigned __int16 *)(this + 4 * a3 + 20 + 2 * i);
+      v24 = *(unsigned __int16 *)&this->gap_14[4 * a3 + 2 * i];
       if ( v20 + v24 >= v27 )
         v25 = v27 - v24;
       for ( j = 0; j < v25; ++j )
       {
         v33 = v16 + CSpiralOffsets::DeltaX(j + v24);
         v35 = v15 + CSpiralOffsets::DeltaY(j + v24);
-        if ( (unsigned __int8)CWorldManager::InWorld(v33, v35)
-          && CWorldManager::EcoSectorId(v22 + v33, v21 + v35) == v19 )
+        if ( CWorldManager::InWorld(v33, v35) && CWorldManager::EcoSectorId(v22 + v33, v21 + v35) == v19 )
         {
-          v23 = (*(int (__cdecl **)(int, int, _DWORD))(this + 32))(v33, v35, 0);
+          v23 = ((int (__cdecl *)(unsigned int, unsigned int, _DWORD))this->m_pSearchFkt)(v33, v35, 0);
           if ( v23 > 0 )
           {
-            *(_DWORD *)(this + 16) = Y16X16::PackXYFast(v22 + v33, v21 + v35);
-            *(_WORD *)(this + 12) = v23;
+            this->field_10 = Y16X16::PackXYFast(v22 + v33, v21 + v35);
+            this->wordC = v23;
             v29 = i;
-            v28 = j + v24;
+            iFoundIdx = j + v24;
             break;
           }
           if ( v23 < 0 )
@@ -633,26 +595,26 @@ bool  IBuildingRole::SearchInWorkingArea(class CBuilding * a2, int a3) {
             v36 = v21 + v35;
             if ( CWorldManager::EcoSectorId(v34, v36) == v19 )
             {
-              *(_DWORD *)(this + 16) = Y16X16::PackXYFast(v34, v36);
-              *(_WORD *)(this + 12) = 0;
+              this->field_10 = Y16X16::PackXYFast(v34, v36);
+              this->wordC = 0;
               v29 = i;
-              v28 = j + v24;
+              iFoundIdx = j + v24;
               break;
             }
           }
         }
       }
-      *(_WORD *)(this + 4 * a3 + 20 + 2 * i) += j;
+      *(_WORD *)&this->gap_14[4 * a3 + 2 * i] += j;
       if ( v29 >= 0 )
         break;
     }
   }
-  if ( *(int *)(*(_DWORD *)(this + 376) + 492) < 0
+  if ( *((int *)this->m_pBuildingInfo + 123) < 0
     && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingRole.cpp", 618, "m_pBuildingInfo->workingAreaRadius >= 0") == 1 )
   {
     __debugbreak();
   }
-  if ( *(int *)(*(_DWORD *)(this + 376) + 492) >= 75
+  if ( *((int *)this->m_pBuildingInfo + 123) >= 75
     && BBSupportDbgReport(
          2,
          "MapObjects\\Building\\BuildingRole.cpp",
@@ -663,24 +625,24 @@ bool  IBuildingRole::SearchInWorkingArea(class CBuilding * a2, int a3) {
   }
   if ( v29 < 0 )
   {
-    v31 = *(unsigned __int16 *)(this + 20) >= v27;
-    if ( *(unsigned __int16 *)(this + 4 * a3 + 20) < v27 )
+    v31 = *(unsigned __int16 *)this->gap_14 >= v27;
+    if ( *(unsigned __int16 *)&this->gap_14[4 * a3] < v27 )
     {
-      if ( *(unsigned __int16 *)(this + 4 * a3 + 22) >= v27 )
-        *(_WORD *)(this + 4 * a3 + 22) = 0;
+      if ( *(unsigned __int16 *)&this->gap_14[4 * a3 + 2] >= v27 )
+        *(_WORD *)&this->gap_14[4 * a3 + 2] = 0;
     }
     else
     {
-      *(_WORD *)(this + 4 * a3 + 20) = 0;
-      *(_WORD *)(this + 4 * a3 + 22) = 0;
+      *(_WORD *)&this->gap_14[4 * a3] = 0;
+      *(_WORD *)&this->gap_14[4 * a3 + 2] = 0;
     }
     if ( v31 )
     {
-      if ( *(_BYTE *)(this + 28) )
+      if ( this->field_1C )
       {
-        *(_BYTE *)(this + 28) = 0;
+        this->field_1C = 0;
         v26 = 3837;
-        v18 = IEntity::Type((unsigned __int16 *)a2);
+        v18 = IEntity::Type(a2);
         if ( v18 == 1 )
         {
           v26 = 2554;
@@ -703,23 +665,23 @@ bool  IBuildingRole::SearchInWorkingArea(class CBuilding * a2, int a3) {
       }
       else
       {
-        *(_BYTE *)(this + 28) = 1;
+        this->field_1C = 1;
       }
     }
   }
   else
   {
-    if ( v28 < 0 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingRole.cpp", 625, "iFoundIdx >= 0") == 1 )
+    if ( iFoundIdx < 0 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingRole.cpp", 625, "iFoundIdx >= 0") == 1 )
       __debugbreak();
-    *(_BYTE *)(this + 28) = 0;
-    if ( !v29 || v28 <= 150 || *(unsigned __int16 *)(this + 4 * a3 + 20) >= 0x96u )
-      *(_WORD *)(this + 4 * a3 + 20) = 0;
+    this->field_1C = 0;
+    if ( !v29 || iFoundIdx <= 150 || *(unsigned __int16 *)&this->gap_14[4 * a3] >= 0x96u )
+      *(_WORD *)&this->gap_14[4 * a3] = 0;
     else
-      *(_WORD *)(this + 4 * a3 + 22) = v28;
+      *(_WORD *)&this->gap_14[4 * a3 + 2] = iFoundIdx;
     if ( a3 == 1 )
     {
-      *(_WORD *)(this + 20) = 0;
-      *(_WORD *)(this + 22) = 0;
+      *(_WORD *)this->gap_14 = 0;
+      *(_WORD *)&this->gap_14[2] = 0;
     }
   }
   return v29 >= 0;
@@ -1069,107 +1031,105 @@ void  IBuildingRole::KillInhabitant(class CBuilding * a2) {
 
 
 // address=[0x14ffea0]
-// Decompiled from int __thiscall IBuildingRole::InitCommon(int this, _BYTE *a2)
+// Decompiled from void __thiscall IBuildingRole::InitCommon(IBuildingRole *this, IEntity *a2)
 void  IBuildingRole::InitCommon(class CBuilding * a2) {
   
   int v2; // eax
   int v3; // eax
-  int v5; // [esp-8h] [ebp-Ch]
-  __int16 v6; // [esp-4h] [ebp-8h]
-  int v7; // [esp-4h] [ebp-8h]
+  int v4; // [esp-8h] [ebp-Ch]
+  __int16 v5; // [esp-4h] [ebp-8h]
+  int v6; // [esp-4h] [ebp-8h]
 
-  *(_WORD *)(this + 8) = 0;
-  *(_BYTE *)(this + 29) = 0;
-  *(_BYTE *)(this + 5) = 0;
+  this->m_uSettlerId = 0;
+  this->m_bInhabitants = 0;
+  this->byte5 = 0;
   IBuildingRole::WorkingAreaChanged(this);
   IEntity::ClearFlagBits(a2, EntityFlag_Birth);
   IEntity::SetFlagBits(a2, EntityFlag_Ready);
-  v6 = IEntity::ID();
-  v5 = IEntity::Y(a2);
+  v5 = IEntity::ID(a2);
+  v4 = IEntity::Y(a2);
   v2 = IEntity::X(a2);
-  CWorldManager::SetMapObjectId(v2, v5, v6);
-  v7 = CBuilding::BuildingTypeEx(a2);
+  CWorldManager::SetMapObjectId(v2, v4, v5);
+  v6 = CBuilding::BuildingTypeEx((unsigned __int8 *)a2);
   v3 = IEntity::Race(a2);
-  *(_DWORD *)(this + 376) = CBuildingInfoMgr::GetBuildingInfo(v3, v7);
-  *(_WORD *)(this + 6) = IEntity::ID();
-  (*(void (__thiscall **)(_BYTE *, _DWORD))(*(_DWORD *)a2 + 24))(
-    a2,
-    *(unsigned __int8 *)(*(_DWORD *)(this + 376) + 500));
-  return IBuildingRole::InitHousePatches((void *)this);
+  this->m_pBuildingInfo = (const struct CBuildingInfoMgr::SBuildingInfos *)CBuildingInfoMgr::GetBuildingInfo(v3, v6);
+  this->m_iEntityId = IEntity::ID(a2);
+  a2->Increase(a2, *((unsigned __int8 *)this->m_pBuildingInfo + 500));
+  IBuildingRole::InitHousePatches((int)this);
 }
 
 
 // address=[0x14fff70]
-// Decompiled from void *__thiscall IBuildingRole::InitHousePatches(int this)
+// Decompiled from void *__thiscall IBuildingRole::InitHousePatches(IBuildingRole *this)
 void  IBuildingRole::InitHousePatches(void) {
   
   void *result; // eax
-  _BYTE *v2; // eax
+  CBuilding *v2; // eax
   unsigned int v3; // eax
-  unsigned int v4; // [esp-4h] [ebp-1Ch]
+  int v4; // [esp-4h] [ebp-1Ch]
   char v5; // [esp+4h] [ebp-14h]
   char BuildingJobFrameCount; // [esp+8h] [ebp-10h]
   unsigned int i; // [esp+Ch] [ebp-Ch]
   int v8; // [esp+10h] [ebp-8h]
 
-  if ( !*(_DWORD *)(this + 376)
+  if ( !this->m_pBuildingInfo
     && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingRole.cpp", 1008, "m_pBuildingInfo != 0") == 1 )
   {
     __debugbreak();
   }
-  result = memset((void *)(this + 156), 0, 0xC8u);
+  result = memset(&this->gap_4c[20], 0, 0xC8u);
   for ( i = 0; i < 0xA; ++i )
   {
-    if ( *(_DWORD *)(*(_DWORD *)(this + 376) + 16 * i + 504) )
+    if ( *((_DWORD *)this->m_pBuildingInfo + 4 * i + 126) )
     {
-      v8 = *(unsigned __int8 *)(*(_DWORD *)(this + 376) + 16 * i + 508);
-      *(_DWORD *)(this + 20 * v8 + 160) = *(_DWORD *)(*(_DWORD *)(this + 376) + 16 * i + 504);
-      *(_BYTE *)(this + 20 * v8 + 158) = *(_BYTE *)(*(_DWORD *)(this + 376) + 16 * i + 509);
-      *(_DWORD *)(this + 20 * v8 + 168) = *(_DWORD *)(*(_DWORD *)(this + 376) + 16 * i + 512);
-      *(_BYTE *)(this + 20 * v8 + 173) = *(_BYTE *)(*(_DWORD *)(this + 376) + 16 * i + 517);
-      *(_BYTE *)(this + 20 * v8 + 172) = *(_BYTE *)(*(_DWORD *)(this + 376) + 16 * i + 516);
-      if ( *(int *)(this + 20 * v8 + 168) < 0 && *(int *)(this + 20 * v8 + 168) >= 109 )
+      v8 = *((unsigned __int8 *)this->m_pBuildingInfo + 16 * i + 508);
+      this->gap_4c[5 * v8 + 21] = *((_DWORD *)this->m_pBuildingInfo + 4 * i + 126);
+      BYTE2(this->gap_4c[5 * v8 + 20]) = *((_BYTE *)this->m_pBuildingInfo + 16 * i + 509);
+      this->gap_4c[5 * v8 + 23] = *((_DWORD *)this->m_pBuildingInfo + 4 * i + 128);
+      BYTE1(this->gap_4c[5 * v8 + 24]) = *((_BYTE *)this->m_pBuildingInfo + 16 * i + 517);
+      LOBYTE(this->gap_4c[5 * v8 + 24]) = *((_BYTE *)this->m_pBuildingInfo + 16 * i + 516);
+      if ( (this->gap_4c[5 * v8 + 23] & 0x80000000) != 0 && (int)this->gap_4c[5 * v8 + 23] >= 109 )
       {
         if ( BBSupportDbgReport(2, "MapObjects\\Building\\BuildingRole.cpp", 1035, "0") == 1 )
           __debugbreak();
-        *(_DWORD *)(this + 20 * v8 + 168) = 0;
+        this->gap_4c[5 * v8 + 23] = 0;
       }
-      *(_BYTE *)(this + 20 * v8 + 165) = 0;
-      v5 = *(_BYTE *)(*(_DWORD *)(this + 376) + 16 * i + 509);
+      BYTE1(this->gap_4c[5 * v8 + 22]) = 0;
+      v5 = *((_BYTE *)this->m_pBuildingInfo + 16 * i + 509);
       if ( v5 )
       {
         if ( v5 == 1 )
         {
-          *(_DWORD *)(this + 8 * v8 + 76) = *(_DWORD *)(*(_DWORD *)(this + 376) + 16 * i + 504);
-          *(_DWORD *)(this + 8 * v8 + 80) = 0;
-          *(_BYTE *)(this + 20 * v8 + 157) = *(_BYTE *)(*(_DWORD *)(this + 376) + 16 * i + 510);
-          *(_BYTE *)(this + 20 * v8 + 159) = *(_BYTE *)(*(_DWORD *)(this + 376) + 16 * i + 510);
-          *(_BYTE *)(this + 20 * v8 + 164) = 0;
-          *(_BYTE *)(this + 20 * v8 + 156) = 1;
+          this->gap_4c[2 * v8] = *((_DWORD *)this->m_pBuildingInfo + 4 * i + 126);
+          this->gap_4c[2 * v8 + 1] = 0;
+          BYTE1(this->gap_4c[5 * v8 + 20]) = *((_BYTE *)this->m_pBuildingInfo + 16 * i + 510);
+          HIBYTE(this->gap_4c[5 * v8 + 20]) = *((_BYTE *)this->m_pBuildingInfo + 16 * i + 510);
+          LOBYTE(this->gap_4c[5 * v8 + 22]) = 0;
+          LOBYTE(this->gap_4c[5 * v8 + 20]) = 1;
         }
         else if ( v5 == 2 )
         {
-          BuildingJobFrameCount = *(_BYTE *)(*(_DWORD *)(this + 376) + 16 * i + 510);
+          BuildingJobFrameCount = *((_BYTE *)this->m_pBuildingInfo + 16 * i + 510);
           if ( !BuildingJobFrameCount )
           {
-            v4 = *(_DWORD *)(this + 20 * v8 + 160);
-            v2 = (_BYTE *)CBuildingMgr::operator[](*(unsigned __int16 *)(this + 6));
+            v4 = this->gap_4c[5 * v8 + 21];
+            v2 = CBuildingMgr::operator[]((unsigned __int16)this->m_iEntityId);
             v3 = IEntity::Race(v2);
-            BuildingJobFrameCount = CGfxManager::GetBuildingJobFrameCount((CGfxManager *)g_pGfxManager, v3, v4);
+            BuildingJobFrameCount = CGfxManager::GetBuildingJobFrameCount(g_pGfxManager, v3, v4);
           }
-          *(_BYTE *)(this + 20 * v8 + 164) = BuildingJobFrameCount;
-          *(_BYTE *)(this + 20 * v8 + 157) = 0;
-          *(_BYTE *)(this + 20 * v8 + 156) = 0;
+          LOBYTE(this->gap_4c[5 * v8 + 22]) = BuildingJobFrameCount;
+          BYTE1(this->gap_4c[5 * v8 + 20]) = 0;
+          LOBYTE(this->gap_4c[5 * v8 + 20]) = 0;
         }
       }
       else
       {
-        *(_DWORD *)(this + 8 * v8 + 76) = *(_DWORD *)(*(_DWORD *)(this + 376) + 16 * i + 504);
-        *(_DWORD *)(this + 8 * v8 + 80) = 0;
-        if ( *(_BYTE *)(*(_DWORD *)(this + 376) + 16 * i + 510) )
-          *(_BYTE *)(this + 20 * v8 + 156) = 1;
+        this->gap_4c[2 * v8] = *((_DWORD *)this->m_pBuildingInfo + 4 * i + 126);
+        this->gap_4c[2 * v8 + 1] = 0;
+        if ( *((_BYTE *)this->m_pBuildingInfo + 16 * i + 510) )
+          LOBYTE(this->gap_4c[5 * v8 + 20]) = 1;
         else
-          *(_BYTE *)(this + 20 * v8 + 156) = 0;
+          LOBYTE(this->gap_4c[5 * v8 + 20]) = 0;
       }
     }
     result = (void *)(i + 1);
@@ -1179,7 +1139,7 @@ void  IBuildingRole::InitHousePatches(void) {
 
 
 // address=[0x1500310]
-// Decompiled from char __thiscall IBuildingRole::OrderInhabitant(IBuildingRole *this, struct CBuilding *a2)
+// Decompiled from char __thiscall IBuildingRole::OrderInhabitant(IBuildingRole *this, IEntity *a2)
 bool  IBuildingRole::OrderInhabitant(class CBuilding * a2) {
   
   int v2; // eax
@@ -1188,21 +1148,21 @@ bool  IBuildingRole::OrderInhabitant(class CBuilding * a2) {
   int v6; // [esp-4h] [ebp-Ch]
   int v7; // [esp+0h] [ebp-8h]
 
-  if ( *((_WORD *)this + 4) )
+  if ( this->m_uSettlerId )
     return 1;
-  v2 = CBuilding::EnsignWorldIdx(a2);
+  v2 = CBuilding::EnsignWorldIdx((CBuilding *)a2);
   v7 = CWorldManager::EcoSectorId(v2);
   if ( !v7 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingRole.cpp", 255, "m_iESId != 0") == 1 )
     __debugbreak();
   if ( !v7 )
     return 0;
-  v6 = *(char *)(*((_DWORD *)this + 94) + 478);
-  v5 = IEntity::ID();
-  v4 = (CEcoSector *)CEcoSectorMgr::operator[](v7);
-  *((_WORD *)this + 4) = CEcoSector::OrderWorker(v4, v5, v6);
-  if ( *((_WORD *)this + 4) )
+  v6 = *((char *)this->m_pBuildingInfo + 478);
+  v5 = IEntity::ID(a2);
+  v4 = (CEcoSector *)CEcoSectorMgr::operator[](g_cESMgr, v7);
+  this->m_uSettlerId = CEcoSector::OrderWorker(v4, v5, v6);
+  if ( this->m_uSettlerId )
     return 1;
-  IAnimatedEntity::RegisterForLogicUpdate(31);
+  IAnimatedEntity::RegisterForLogicUpdate((IAnimatedEntity *)a2, 31);
   return 0;
 }
 

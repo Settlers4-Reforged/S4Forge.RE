@@ -233,36 +233,36 @@ void  CBarrackRole::LogicUpdate(class CBuilding * a2) {
 
 
 // address=[0x14e6f50]
-// Decompiled from unsigned int __thiscall CBarrackRole::FillGfxInfo(CBarrackRole *this, struct CBuilding *a2, struct SGfxObjectInfo *a3)
+// Decompiled from unsigned int __thiscall CBarrackRole::FillGfxInfo(CBarrackRole *this, IEntity *a2, struct SGfxObjectInfo *a3)
 void  CBarrackRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo & a3) {
   
-  int v3; // eax
+  unsigned int v3; // eax
   unsigned int result; // eax
   unsigned __int16 *v5; // eax
-  unsigned __int8 *v6; // eax
+  IEntity *v6; // eax
   unsigned __int16 *v7; // eax
-  unsigned __int8 *v8; // eax
-  int v9; // [esp-Ch] [ebp-18h]
+  CPile *v8; // eax
+  unsigned int v9; // [esp-Ch] [ebp-18h]
   int v10; // [esp+0h] [ebp-Ch]
   unsigned int i; // [esp+4h] [ebp-8h]
 
-  (*(void (__thiscall **)(CBarrackRole *, struct CBuilding *))(*(_DWORD *)this + 16))(this, a2);
-  v9 = IEntity::Type((unsigned __int16 *)a2);
+  (*(void (__thiscall **)(CBarrackRole *, IEntity *))(*(_DWORD *)this + 16))(this, a2);
+  v9 = IEntity::Type(a2);
   v3 = IEntity::Race(a2);
-  CGfxManager::GetBuildingGfxInfo((int)a3, v3, v9, 1, (int)this + 76);
+  CGfxManager::GetBuildingGfxInfo(g_pGfxManager, a3, v3, v9, 1, (int)this + 76);
   v10 = 0;
   for ( i = 0; ; ++i )
   {
     result = std::vector<unsigned short>::size((char *)this + 384);
     if ( i >= result )
       break;
-    v5 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 384, i);
+    v5 = std::vector<unsigned short>::operator[]((char *)this + 384, i);
     v6 = CPileMgr::operator[](*v5);
     if ( (unsigned __int8)CPile::IsPatchPile(v6) )
     {
-      v7 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 384, i);
-      v8 = CPileMgr::operator[](*v7);
-      CPile::GetPatchGfx((CPile *)v8, (struct SGfxObjectInfo *)((char *)a3 + 16 * v10++ + 536));
+      v7 = std::vector<unsigned short>::operator[]((char *)this + 384, i);
+      v8 = (CPile *)CPileMgr::operator[](*v7);
+      CPile::GetPatchGfx(v8, (struct SGfxPatchObject *)&a3[5].gap38[16 * v10++ + 20]);
     }
   }
   return result;

@@ -21,7 +21,7 @@ public:
     void  LoadInfo(bool a2);
 
     // address=[0x14eb970]
-    bool  DbgCheckBuildingBits(int a2, int a3);
+    bool  DbgCheckBuildingBits(int _iRace, int _iBuildingType);
 
     // address=[0x14ec5d0]
     void  DbgTraceProductionDelays(void);
@@ -50,6 +50,10 @@ private:
 
     // address=[0x40352a0]
     static struct SBuildingInfos (* CBuildingInfoMgr::m_vBuildingInfos)[83];
+
+    // Type information members
+public:
+    int m_iXmlVersion;
 
 };
 

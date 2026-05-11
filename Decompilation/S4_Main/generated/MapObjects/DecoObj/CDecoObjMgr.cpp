@@ -1004,7 +1004,7 @@ void  CDecoObjMgr::Rod(int a2, bool a3) {
         switch ( IEntity::Type(pEntity) )
         {
           case OBJECT_GRAPE:
-            if ( v21 == OBJECT_GRAPE_CUT )
+            if ( v21 == 386 )
               goto LABEL_35;
             FreeSlot = CMapObjectMgr::GetFreeSlot();
             if ( FreeSlot != -1 )
@@ -1017,7 +1017,7 @@ void  CDecoObjMgr::Rod(int a2, bool a3) {
             }
             break;
           case OBJECT_WHEAT1:
-            if ( v21 == OBJECT_WHEAT1_ROT )
+            if ( v21 == 438 )
               goto LABEL_35;
             v17 = CMapObjectMgr::GetFreeSlot();
             if ( v17 != -1 )
@@ -1030,7 +1030,7 @@ void  CDecoObjMgr::Rod(int a2, bool a3) {
             }
             break;
           case OBJECT_WHEAT2:
-            if ( v21 == OBJECT_WHEAT2_ROT )
+            if ( v21 == 444 )
               goto LABEL_35;
             v16 = CMapObjectMgr::GetFreeSlot();
             if ( v16 != -1 )
@@ -1043,7 +1043,7 @@ void  CDecoObjMgr::Rod(int a2, bool a3) {
             }
             break;
           case OBJECT_AGAVE:
-            if ( v21 == OBJECT_AGAVE_ROT )
+            if ( v21 == 449 )
               goto LABEL_35;
             v15 = CMapObjectMgr::GetFreeSlot();
             if ( v15 != -1 )
@@ -1056,7 +1056,7 @@ void  CDecoObjMgr::Rod(int a2, bool a3) {
             }
             break;
           case OBJECT_SUNFLOWER:
-            if ( v21 == OBJECT_SUNFLOWER_ROT )
+            if ( v21 == 516 )
             {
 LABEL_35:
               CDecoObjMgr::RemoveDecoObject(this, v22, v23, 0);
@@ -1084,28 +1084,28 @@ LABEL_35:
         switch ( IEntity::Type(pEntity) )
         {
           case OBJECT_GRAPE:
-            if ( v24 != OBJECT_GRAPE_GROWNUP )
-              pEntity->Take(OBJECT_GRAPE_CUT - v24);
+            if ( v24 != 385 )
+              pEntity->Take(386 - v24);
             break;
           case OBJECT_WHEAT1:
-            if ( v24 != OBJECT_WHEAT1_GROWNUP )
-              pEntity->Take(OBJECT_WHEAT1_ROT - v24);
+            if ( v24 != 436 )
+              pEntity->Take(438 - v24);
             break;
           case OBJECT_WHEAT2:
-            if ( v24 != OBJECT_WHEAT2_GROWNUP )
-              pEntity->Take(OBJECT_WHEAT2_ROT - v24);
+            if ( v24 != 442 )
+              pEntity->Take(444 - v24);
             break;
           case OBJECT_AGAVE:
-            if ( v24 != OBJECT_AGAVE_GROWNUP )
-              pEntity->Take(OBJECT_AGAVE_ROT - v24);
+            if ( v24 != 448 )
+              pEntity->Take(449 - v24);
             break;
           case OBJECT_HIVE:
-            if ( v24 != OBJECT_HIVE_FULL )
-              pEntity->Take(OBJECT_HIVE_ROT2 - v24);
+            if ( v24 != 470 )
+              pEntity->Take(472 - v24);
             break;
           case OBJECT_SUNFLOWER:
-            if ( v24 != OBJECT_SUNFLOWER_GROWNUP )
-              pEntity->Take(OBJECT_SUNFLOWER_ROT - v24);
+            if ( v24 != 514 )
+              pEntity->Take(516 - v24);
             break;
           default:
             return;

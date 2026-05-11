@@ -29,7 +29,7 @@ class CGameState * __cdecl CStateCampaign3X3::DynamicCreateFunc(void * a1) {
   dword_402CBBC[1] = 2;
   dword_402CBBC[2] = 2;
   dword_402CBBC[3] = 2;
-  CGuiGameState::OpenDialog(this, 8, GuiDlgMain3x3CampaignProc);
+  CGuiGameState::OpenDialog(this, 8, (bool (__cdecl *)(int, int, int))GuiDlgMain3x3CampaignProc);
   return this;
 }
 

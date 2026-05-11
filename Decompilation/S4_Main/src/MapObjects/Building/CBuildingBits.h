@@ -6,15 +6,14 @@
 class CBuildingBits {
 public:
     // address=[0x14f1a80]
-    void  PrintToTraceFile(unsigned int a2);
+    void PrintToTraceFile(unsigned int a2);
 
     // address=[0x14f3590]
-     CBuildingBits(void);
+    CBuildingBits(void);
 
     // Type information members
 public:
-    BYTE[80][80] m_iBits;
-
+    BYTE m_iBits[80][80];
 };
 
 

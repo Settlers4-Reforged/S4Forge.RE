@@ -724,8 +724,8 @@ bool  IGuiEngine::DisableDialogControls(int a2) {
 
 
 // address=[0x2fa1520]
-// Decompiled from char __thiscall IGuiEngine::SetText(struct IGuiEngine *this, int a2, int a3, char *Str)
-bool  IGuiEngine::SetText(int a2, int a3, char const * Str) {
+// Decompiled from char __thiscall IGuiEngine::SetText(struct IGuiEngine *this, int _iContainer, int _iControlId, char *Str)
+bool  IGuiEngine::SetText(int _iContainer, int _iControlId, char const * Str) {
   
   unsigned int id; // [esp+4h] [ebp-14h]
   unsigned int v6; // [esp+8h] [ebp-10h]
@@ -735,7 +735,7 @@ bool  IGuiEngine::SetText(int a2, int a3, char const * Str) {
 
   if ( !sub_2FA28C0() || !Str )
     return 0;
-  ControlPtr = GetControlPtr(a2, a3);
+  ControlPtr = GetControlPtr(_iContainer, _iControlId);
   if ( !ControlPtr )
     return 0;
   Count = strlen(Str);
@@ -1159,7 +1159,7 @@ bool  IGuiEngine::LockOwnerImage(int a2, int a3, struct SGuiRect & a4, unsigned 
 
 
 // address=[0x2fa2130]
-// Decompiled from bool __thiscall IGuiEngine::UnlockOwnerImage(IGuiEngine *this, int a2, int a3)
+// Decompiled from char __thiscall IGuiEngine::UnlockOwnerImage(IGuiEngine *this, int a2, int a3)
 bool  IGuiEngine::UnlockOwnerImage(int a2, int a3) {
   
   unsigned __int16 *v4; // [esp+4h] [ebp-8h]
@@ -1178,7 +1178,7 @@ bool  IGuiEngine::UnlockOwnerImage(int a2, int a3) {
   if ( dword_3E2F134 < 0 )
     return 0;
   dword_3E2F134 = -1;
-  return IGfxEngine::EndWriteToSurface((IGfxEngine *)g_pGfxEngine, *v4);
+  return IGfxEngine::EndWriteToSurface(g_pGfxEngine, *v4);
 }
 
 
@@ -1307,8 +1307,8 @@ int  IGuiEngine::GetSliderPosition(int a2, int a3) {
 
 
 // address=[0x2fa2580]
-// Decompiled from char __thiscall IGuiEngine::SelectControl(IGuiEngine *this, int a2, int a3, bool a4)
-bool  IGuiEngine::SelectControl(int a2, int a3, bool a4) {
+// Decompiled from char __thiscall IGuiEngine::SelectControl(IGuiEngine *this, int a2, int _iControlId, bool a4)
+bool  IGuiEngine::SelectControl(int a2, int _iControlId, bool a4) {
   
   int SurfaceID; // eax
   int v6; // [esp-8h] [ebp-10h]
@@ -1316,7 +1316,7 @@ bool  IGuiEngine::SelectControl(int a2, int a3, bool a4) {
 
   if ( !sub_2FA28C0() )
     return 0;
-  ControlPtr = GetControlPtr(a2, a3);
+  ControlPtr = GetControlPtr(a2, _iControlId);
   if ( !ControlPtr )
     return 0;
   if ( ((ControlPtr->effects & 1) == 0 || a4) && ((ControlPtr->effects & 1) != 0 || !a4) )
@@ -1341,15 +1341,15 @@ bool  IGuiEngine::SelectControl(int a2, int a3, bool a4) {
   else if ( (ControlPtr->controlType == 5 || ControlPtr->controlType == 20) && a4 )
   {
     g_pCurrentEditControl = (int)ControlPtr;
-    SelectEditControl(ControlPtr, &dword_ECC2A8[53078]);
+    SelectEditControl(ControlPtr, (int)&dword_ECC2A8[53078]);
   }
   return 1;
 }
 
 
 // address=[0x2fa2700]
-// Decompiled from char __thiscall IGuiEngine::ResetRadioGroup(IGuiEngine *this, int a2, int a3)
-bool  IGuiEngine::ResetRadioGroup(int a2, int a3) {
+// Decompiled from char __thiscall IGuiEngine::ResetRadioGroup(IGuiEngine *this, int _iContainer, int _iControlId)
+bool  IGuiEngine::ResetRadioGroup(int _iContainer, int _iControlId) {
   
   int unknown4_low; // [esp+4h] [ebp-10h]
   int v5; // [esp+8h] [ebp-Ch]
@@ -1359,7 +1359,7 @@ bool  IGuiEngine::ResetRadioGroup(int a2, int a3) {
 
   if ( !sub_2FA28C0() )
     return 0;
-  ControlPtr = GetControlPtr(a2, a3);
+  ControlPtr = GetControlPtr(_iContainer, _iControlId);
   if ( !ControlPtr )
     return 0;
   unknown4_low = LOBYTE(ControlPtr->unknown4);

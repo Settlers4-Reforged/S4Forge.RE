@@ -1,3 +1,4 @@
+#if FALSE
 #include "CS4DefineNames.h"
 
 // Definitions for class CS4DefineNames
@@ -28,7 +29,7 @@ char const * __cdecl CS4DefineNames::GetBuildingName(int a1) {
 // Decompiled from const char *__cdecl CS4DefineNames::GetGoodName(unsigned int a1)
 char const * __cdecl CS4DefineNames::GetGoodName(int a1) {
   
-  if ( a1 >= 0x2B )
+  if ( a1 >= 43 )
     return "<INVALID>";
   else
     return s_sGoodName[a1].m_sName;
@@ -118,3 +119,4 @@ int __cdecl CS4DefineNames::GetStringId(char const * Str1) {
 }
 
 
+#endif // Already implemented

@@ -779,11 +779,11 @@ void  CStateMDRandomMapParameters::PaintMap(void) {
                              this);
   v4 = 0;
   v3 = 0;
-  result = IGuiEngine::LockOwnerImage((IGuiEngine *)g_pGUIEngine, dword_4031998, 2022, (struct SGuiRect *)v5, &v4, &v3);
+  result = IGuiEngine::LockOwnerImage(g_pGUIEngine, dword_4031998, 2022, (struct SGuiRect *)v5, &v4, &v3);
   if ( !v4 )
     return result;
   CStateMDRandomMapParameters::DrawMap(v2, v4, v3, 160, 160);
-  return IGuiEngine::UnlockOwnerImage((IGuiEngine *)g_pGUIEngine, dword_4031998, 2022);
+  return IGuiEngine::UnlockOwnerImage(g_pGUIEngine, dword_4031998, GUI_S4S_GS_MASIZE_TT);
 }
 
 

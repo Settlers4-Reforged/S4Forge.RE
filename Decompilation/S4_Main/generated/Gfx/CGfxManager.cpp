@@ -21,7 +21,7 @@
   memset(this->m_sFilePal, 0, sizeof(this->m_sFilePal));
   memset(this->m_pFilePalIndex, 0, sizeof(this->m_pFilePalIndex));
   memset(this->m_pFileGfxFrames, 0, sizeof(this->m_pFileGfxFrames));
-  memset(this->field_49C, 0, sizeof(this->field_49C));
+  memset(this->m_pFileGfxDirections, 0, sizeof(this->m_pFileGfxDirections));
   memset(this->m_pFileGfxJobs, 0, sizeof(this->m_pFileGfxJobs));
   memset(this->m_pFileGfxJobCodes, 0, sizeof(this->m_pFileGfxJobCodes));
   memset(this->field_B2C, 0, 0xA8u);
@@ -168,7 +168,7 @@ void  CGfxManager::GetBuildingGfxInfo(struct SGfxObjectInfo & a2, unsigned int _
   {
     dword_3ECDD74 = *(_DWORD *)(dword_3ECDD6C + 4);
     dword_3ECDD70 = *(_DWORD *)dword_3ECDD74;
-    a2->m_pGfxData = (char *)dword_3ECDD70;
+    a2->m_pGfxData = (BYTE *)dword_3ECDD70;
     dword_3ECDD74 = *(_DWORD *)dword_3ECDD6C;
     dword_3ECDD70 = *(_DWORD *)dword_3ECDD74;
     a2->dword58 = dword_3ECDD70;
@@ -179,13 +179,13 @@ void  CGfxManager::GetBuildingGfxInfo(struct SGfxObjectInfo & a2, unsigned int _
     {
       dword_3ECDD74 = *(_DWORD *)(dword_3ECDD6C + 4);
       dword_3ECDD70 = *(_DWORD *)dword_3ECDD74;
-      a2->m_pGfxData = (char *)dword_3ECDD70;
+      a2->m_pGfxData = (BYTE *)dword_3ECDD70;
     }
     if ( (_iFlags & 2) != 0 )
     {
       dword_3ECDD74 = *(_DWORD *)dword_3ECDD6C;
       dword_3ECDD70 = *(_DWORD *)dword_3ECDD74;
-      a2->m_pGfxData = (char *)dword_3ECDD70;
+      a2->m_pGfxData = (BYTE *)dword_3ECDD70;
     }
   }
   if ( _argBuildingFX )
@@ -194,7 +194,7 @@ void  CGfxManager::GetBuildingGfxInfo(struct SGfxObjectInfo & a2, unsigned int _
     {
       if ( _argBuildingFX[i].m_iBuildingDefine )
       {
-        if ( _argBuildingFX[i].m_iBuildingDefine >= *(_DWORD *)&this->field_49C[8 * iGfxFile + 4]
+        if ( _argBuildingFX[i].m_iBuildingDefine >= (unsigned int)this->m_pFileGfxDirections[iGfxFile].m_iCount
           && BBSupportDbgReport(
                2,
                "GfxManager.cpp",
@@ -203,12 +203,12 @@ void  CGfxManager::GetBuildingGfxInfo(struct SGfxObjectInfo & a2, unsigned int _
         {
           __debugbreak();
         }
-        _argBuildingFX[i].m_iBuildingDefine &= (_argBuildingFX[i].m_iBuildingDefine >= *(_DWORD *)&this->field_49C[8 * iGfxFile + 4])
+        _argBuildingFX[i].m_iBuildingDefine &= (_argBuildingFX[i].m_iBuildingDefine >= (unsigned int)this->m_pFileGfxDirections[iGfxFile].m_iCount)
                                              - 1;
-        if ( _argBuildingFX[i].m_iFrame >= (unsigned int)CGfxManager::GetBuildingJobFrameCount(
-                                                           this,
-                                                           _iRace,
-                                                           _argBuildingFX[i].m_iBuildingDefine)
+        if ( _argBuildingFX[i].m_iFrame >= CGfxManager::GetBuildingJobFrameCount(
+                                             this,
+                                             _iRace,
+                                             _argBuildingFX[i].m_iBuildingDefine)
           && BBSupportDbgReport(
                2,
                "GfxManager.cpp",
@@ -217,16 +217,14 @@ void  CGfxManager::GetBuildingGfxInfo(struct SGfxObjectInfo & a2, unsigned int _
         {
           __debugbreak();
         }
-        _argBuildingFX[i].m_iFrame &= (_argBuildingFX[i].m_iFrame >= (unsigned int)CGfxManager::GetBuildingJobFrameCount(
-                                                                                     this,
-                                                                                     _iRace,
-                                                                                     _argBuildingFX[i].m_iBuildingDefine))
+        _argBuildingFX[i].m_iFrame &= (_argBuildingFX[i].m_iFrame >= CGfxManager::GetBuildingJobFrameCount(
+                                                                       this,
+                                                                       _iRace,
+                                                                       _argBuildingFX[i].m_iBuildingDefine))
                                     - 1;
-        dword_3ECDD70 = *(_DWORD *)(*(_DWORD *)&this->field_49C[8 * iGfxFile]
-                                  + 4 * _argBuildingFX[i].m_iBuildingDefine
-                                  + 20);
+        dword_3ECDD70 = (int)this->m_pFileGfxDirections[iGfxFile].m_pItem[_argBuildingFX[i].m_iBuildingDefine + 5];
         dword_3ECDD74 = *(_DWORD *)(dword_3ECDD70 + 4 * _argBuildingFX[i].m_iFrame);
-        *(_DWORD *)&a2->m_pPatchGfxData[4 * i + 20] = dword_3ECDD74;
+        *(_DWORD *)&a2->gapC[4 * i + 9] = dword_3ECDD74;
       }
     }
   }
@@ -360,7 +358,7 @@ unsigned int  CGfxManager::GetSettlerFirstJob(unsigned int _iRace, unsigned int 
   v4 = _iRace + 20;
   if ( this->m_pFileGfxJobCodes[_iRace + 20].m_pItem )
   {
-    if ( this->m_pFileGfxJobs[v4].m_pItem[((unsigned int)(this->m_pFileGfxJobCodes[v4].m_pItem[a3 + 5] - 20) >> 2) + 5] == (char *)(*(_DWORD *)&this->field_49C[8 * v4] + 20) )
+    if ( this->m_pFileGfxJobs[v4].m_pItem[((unsigned int)(this->m_pFileGfxJobCodes[v4].m_pItem[a3 + 5] - 20) >> 2) + 5] == (char *)(*(_DWORD *)&this->m_pFileGfxDirections[8 * v4] + 20) )
       return 0;
     else
       return (unsigned int)(this->m_pFileGfxJobCodes[v4].m_pItem[a3 + 5] - 20) >> 2;
@@ -791,10 +789,10 @@ unsigned int  CGfxManager::GetEffectFrameCount(unsigned int a2) {
 
 
 // address=[0x13635a0]
-// Decompiled from int __thiscall CGfxManager::GetBuildingJobFrameCount(CGfxManager *this, unsigned int a2, int a3)
+// Decompiled from unsigned int __thiscall CGfxManager::GetBuildingJobFrameCount(CGfxManager *this, unsigned int a2, int iJob)
 unsigned int  CGfxManager::GetBuildingJobFrameCount(unsigned int a2, unsigned int a3) {
   
-  return CGfxManager::GetJobFrameCount(a2 + 10, a3, 0);
+  return CGfxManager::GetJobFrameCount(this, a2 + 10, iJob, 0);
 }
 
 
@@ -1058,7 +1056,7 @@ unsigned int  CGfxManager::GetJobFrameCount(unsigned int _iGfxFile, unsigned int
         _iJob = 0;
       }
       v8 = (char *)*((_DWORD *)this->m_pFileGfxJobs[_iGfxFile].m_pItem + 5);
-      v6 = *(_DWORD *)(*(_DWORD *)&this->field_49C[8 * _iGfxFile] + 20);
+      v6 = *(_DWORD *)(*(_DWORD *)&this->m_pFileGfxDirections[8 * _iGfxFile] + 20);
       iDir = _iDir;
       v13 = this->m_pFileGfxJobs[_iGfxFile].m_pItem[_iJob + 5];
       if ( v13 == v8 )
@@ -1107,24 +1105,24 @@ unsigned int  CGfxManager::GetJobFrameCount(unsigned int _iGfxFile, unsigned int
     }
     else
     {
-      if ( _iJob >= *(_DWORD *)&this->field_49C[8 * _iGfxFile + 4] )
+      if ( _iJob >= *(_DWORD *)&this->m_pFileGfxDirections[8 * _iGfxFile + 4] )
       {
         BBSupportTracePrintF(2, "GfxManager: Invalid Job#%d for GfxFile#%d and Direction#%d", _iJob, _iGfxFile, _iDir);
         _iJob = 0;
       }
       v9 = 0;
-      for ( i = _iJob + 1; i < *(_DWORD *)&this->field_49C[8 * _iGfxFile + 4]; ++i )
+      for ( i = _iJob + 1; i < *(_DWORD *)&this->m_pFileGfxDirections[8 * _iGfxFile + 4]; ++i )
       {
-        if ( *(char ***)(*(_DWORD *)&this->field_49C[8 * _iGfxFile] + 4 * i + 20) != this->m_pFileGfxFrames[_iGfxFile].m_pItem
-                                                                                   + 5 )
+        if ( *(char ***)(*(_DWORD *)&this->m_pFileGfxDirections[8 * _iGfxFile] + 4 * i + 20) != this->m_pFileGfxFrames[_iGfxFile].m_pItem
+                                                                                              + 5 )
         {
-          v9 = *(char **)(*(_DWORD *)&this->field_49C[8 * _iGfxFile] + 4 * i + 20);
+          v9 = *(char **)(*(_DWORD *)&this->m_pFileGfxDirections[8 * _iGfxFile] + 4 * i + 20);
           break;
         }
       }
       if ( !v9 )
         v9 = (char *)this->m_pFileGfxFrames[_iGfxFile].m_pItem + this->m_pFileGfxFrames[_iGfxFile].m_iCount + 5;
-      return (unsigned int)&v9[-*(_DWORD *)(*(_DWORD *)&this->field_49C[8 * _iGfxFile] + 4 * _iJob + 20)] >> 2;
+      return (unsigned int)&v9[-*(_DWORD *)(*(_DWORD *)&this->m_pFileGfxDirections[8 * _iGfxFile] + 4 * _iJob + 20)] >> 2;
     }
   }
   else
@@ -1146,7 +1144,7 @@ bool  CGfxManager::IsDirectionAvailable(unsigned int _iGfxFile, unsigned int a3,
     return a4 == 0;
   if ( _iGfxFile < 0xA || _iGfxFile >= 0x13 )
   {
-    if ( *(_DWORD *)&this->m_pFileGfxJobs[_iGfxFile].m_pItem[a3 + 5][4 * a4] == *(_DWORD *)(*(_DWORD *)&this->field_49C[8 * _iGfxFile]
+    if ( *(_DWORD *)&this->m_pFileGfxJobs[_iGfxFile].m_pItem[a3 + 5][4 * a4] == *(_DWORD *)(*(_DWORD *)&this->m_pFileGfxDirections[8 * _iGfxFile]
                                                                                           + 20) )
       return 0;
   }
@@ -1154,8 +1152,8 @@ bool  CGfxManager::IsDirectionAvailable(unsigned int _iGfxFile, unsigned int a3,
   {
     if ( a4 )
       return 0;
-    if ( *(char ***)(*(_DWORD *)&this->field_49C[8 * _iGfxFile] + 4 * a3 + 20) == this->m_pFileGfxFrames[_iGfxFile].m_pItem
-                                                                                + 5 )
+    if ( *(char ***)(*(_DWORD *)&this->m_pFileGfxDirections[8 * _iGfxFile] + 4 * a3 + 20) == this->m_pFileGfxFrames[_iGfxFile].m_pItem
+                                                                                           + 5 )
       return 0;
   }
   return 1;
@@ -1195,7 +1193,7 @@ void  CGfxManager::GetRawGfxInfo(struct SGfxObjectInfo & a2, unsigned int a3, un
   }
   else
   {
-    dword_3ECDD78 = *(_DWORD *)(*(_DWORD *)&this->field_49C[8 * a3] + 4 * a4 + 20);
+    dword_3ECDD78 = *(_DWORD *)(*(_DWORD *)&this->m_pFileGfxDirections[8 * a3] + 4 * a4 + 20);
     dword_3ECDD7C = *(_DWORD *)(dword_3ECDD78 + 4 * a6);
     v11 = dword_3ECDD78 + 4 * a6;
     v10 = (signed int)(v11 - (unsigned int)(this->m_pFileGfxFrames[a3].m_pItem + 5)) >> 2;
@@ -1268,7 +1266,7 @@ LABEL_30:
         if ( *a5 == -1 )
         {
           *a5 = this->m_pFileGfxJobs[_iGfxFile].m_iCount - 1;
-          *a6 = *(_DWORD *)&this->field_49C[8 * _iGfxFile + 4] - 1;
+          *a6 = *(_DWORD *)&this->m_pFileGfxDirections[8 * _iGfxFile + 4] - 1;
           *a7 = CGfxManager::GetJobFrameCount(this, _iGfxFile, *a5, *a6) - 1;
         }
         if ( CGfxManager::HasSil(this, _iGfxFile) )
@@ -1329,11 +1327,11 @@ LABEL_30:
     {
       for ( k = 0; ; ++k )
       {
-        if ( k >= *(_DWORD *)&this->field_49C[8 * _iGfxFile + 4] )
+        if ( k >= *(_DWORD *)&this->m_pFileGfxDirections[8 * _iGfxFile + 4] )
         {
           if ( *a5 == -1 )
           {
-            *a5 = *(_DWORD *)&this->field_49C[8 * _iGfxFile + 4] - 1;
+            *a5 = *(_DWORD *)&this->m_pFileGfxDirections[8 * _iGfxFile + 4] - 1;
             *a6 = 0;
             *a7 = CGfxManager::GetJobFrameCount(this, _iGfxFile, *a5, *a6) - 1;
           }
@@ -1343,7 +1341,7 @@ LABEL_30:
             *a4 = -1;
           return 1;
         }
-        v11 = (signed int)(*(_DWORD *)(*(_DWORD *)&this->field_49C[8 * _iGfxFile] + 4 * k + 20)
+        v11 = (signed int)(*(_DWORD *)(*(_DWORD *)&this->m_pFileGfxDirections[8 * _iGfxFile] + 4 * k + 20)
                          - (unsigned int)(this->m_pFileGfxFrames[_iGfxFile].m_pItem + 5))
             / 4;
         if ( v11 >= a3 )
@@ -1353,15 +1351,15 @@ LABEL_30:
       if ( v11 != a3 )
       {
         --*a5;
-        while ( *(char ***)(*(_DWORD *)&this->field_49C[8 * _iGfxFile] + 4 * *a5 + 20) == this->m_pFileGfxFrames[_iGfxFile].m_pItem
-                                                                                        + 5 )
+        while ( *(char ***)(*(_DWORD *)&this->m_pFileGfxDirections[8 * _iGfxFile] + 4 * *a5 + 20) == this->m_pFileGfxFrames[_iGfxFile].m_pItem + 5 )
           --*a5;
       }
       if ( CGfxManager::HasSil(this, _iGfxFile) )
       {
         for ( m = 0; m < this->m_pFileGfxJobs[_iGfxFile].m_iCount; ++m )
         {
-          if ( (int)&this->m_pFileGfxJobs[_iGfxFile].m_pItem[m + 5][-*(_DWORD *)&this->field_49C[8 * _iGfxFile] - 20]
+          if ( (int)&this->m_pFileGfxJobs[_iGfxFile].m_pItem[m + 5][-*(_DWORD *)&this->m_pFileGfxDirections[8 * _iGfxFile]
+                                                                  - 20]
              / 4 > (int)*a5 )
           {
             *a4 = m - 1;
@@ -1376,7 +1374,7 @@ LABEL_30:
         *a4 = -1;
       }
       *a7 = 0;
-      *a7 = (signed int)(*(_DWORD *)(*(_DWORD *)&this->field_49C[8 * _iGfxFile] + 4 * *a5 + 20)
+      *a7 = (signed int)(*(_DWORD *)(*(_DWORD *)&this->m_pFileGfxDirections[8 * _iGfxFile] + 4 * *a5 + 20)
                        - (unsigned int)(this->m_pFileGfxFrames[_iGfxFile].m_pItem + 5))
           / 4
           - a3;
@@ -1423,24 +1421,24 @@ bool  CGfxManager::GetJobIndices(unsigned int _iGfxFile, unsigned int a3, int & 
   else
   {
     *a4 = (unsigned int)this->m_pFileGfxJobs[_iGfxFile].m_pItem[a3 + 5];
-    *a4 -= *(_DWORD *)&this->field_49C[8 * _iGfxFile] + 20;
+    *a4 -= *(_DWORD *)&this->m_pFileGfxDirections[8 * _iGfxFile] + 20;
     *a4 = (int)*a4 / 4;
     if ( a3 == this->m_pFileGfxJobs[_iGfxFile].m_iCount - 1 )
     {
-      *a5 = *(_DWORD *)&this->field_49C[8 * _iGfxFile + 4];
+      *a5 = *(_DWORD *)&this->m_pFileGfxDirections[8 * _iGfxFile + 4];
     }
     else
     {
       *a5 = (int)this->m_pFileGfxJobs[_iGfxFile].m_pItem[a3 + 6];
-      *a5 -= *(_DWORD *)&this->field_49C[8 * _iGfxFile] + 20;
+      *a5 -= *(_DWORD *)&this->m_pFileGfxDirections[8 * _iGfxFile] + 20;
       *a5 /= 4;
       --*a5;
     }
     for ( j = *a4; j <= *a5; ++j )
     {
-      if ( *(_DWORD *)(*(_DWORD *)&this->field_49C[8 * _iGfxFile] + 20) != *(_DWORD *)(*(_DWORD *)&this->field_49C[8 * _iGfxFile]
-                                                                                     + 4 * j
-                                                                                     + 20) )
+      if ( *(_DWORD *)(*(_DWORD *)&this->m_pFileGfxDirections[8 * _iGfxFile] + 20) != *(_DWORD *)(*(_DWORD *)&this->m_pFileGfxDirections[8 * _iGfxFile]
+                                                                                                + 4 * j
+                                                                                                + 20) )
         return 1;
     }
   }
@@ -1564,10 +1562,10 @@ bool  CGfxManager::RemoveAllGFX(int a2) {
       operator delete[](this->m_pFileGfxFrames[i].m_pItem);
       this->m_pFileGfxFrames[i].m_pItem = 0;
     }
-    if ( this->field_49C[i].m_pItem )
+    if ( this->m_pFileGfxDirections[i].m_pItem )
     {
-      operator delete[](this->field_49C[i].m_pItem);
-      this->field_49C[i].m_pItem = 0;
+      operator delete[](this->m_pFileGfxDirections[i].m_pItem);
+      this->m_pFileGfxDirections[i].m_pItem = 0;
     }
     if ( this->m_pFileGfxJobs[i].m_pItem )
     {

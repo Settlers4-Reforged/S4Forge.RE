@@ -99,16 +99,16 @@ void  CDarkTempleRole::LogicUpdate(class CBuilding * a2) {
 
 
 // address=[0x15084c0]
-// Decompiled from int __thiscall CDarkTempleRole::FillGfxInfo(CDarkTempleRole *this, struct CBuilding *a2, struct SGfxObjectInfo *a3)
+// Decompiled from void __thiscall CDarkTempleRole::FillGfxInfo(CDarkTempleRole *this, IEntity *a2, struct SGfxObjectInfo *a3)
 void  CDarkTempleRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo & a3) {
   
-  int v3; // eax
-  int v5; // [esp-Ch] [ebp-10h]
+  unsigned int v3; // eax
+  unsigned int v4; // [esp-Ch] [ebp-10h]
 
-  (*(void (__thiscall **)(CDarkTempleRole *, struct CBuilding *))(*(_DWORD *)this + 16))(this, a2);
-  v5 = IEntity::Type((unsigned __int16 *)a2);
+  (*(void (__thiscall **)(CDarkTempleRole *, IEntity *))(*(_DWORD *)this + 16))(this, a2);
+  v4 = IEntity::Type(a2);
   v3 = IEntity::Race(a2);
-  return CGfxManager::GetBuildingGfxInfo((int)a3, v3, v5, 1, (int)this + 76);
+  CGfxManager::GetBuildingGfxInfo(g_pGfxManager, a3, v3, v4, 1, (int)this + 76);
 }
 
 

@@ -23,11 +23,11 @@ class CGameState * __cdecl CStateAOCampaignBonus::DynamicCreateFunc(void * a1) {
   CGuiGameState::CGuiGameState(this);
   *(_DWORD *)this = &CStateAOCampaignBonus::_vftable_;
   CGuiGameState::EnsureGfxEngineIsInGuiMode(this);
-  CGuiGameState::SetupExtraGui(g_pAddOn, 6, (int)GuiDlgAOCampaignBonusProc);
+  CGuiGameState::SetupExtraGui((int)g_pAddOn, 6, (int)GuiDlgAOCampaignBonusProc);
   g_cCampaignSettings = 23;
   dword_402CBBC[16] = CGameSettings::GetCampaignStatus(16);
   dword_402CBBC[16] = 5;
-  CGuiGameState::OpenDialog(this, 6, GuiDlgAOCampaignBonusProc);
+  CGuiGameState::OpenDialog(this, 6, (bool (__cdecl *)(int, int, int))GuiDlgAOCampaignBonusProc);
   return this;
 }
 

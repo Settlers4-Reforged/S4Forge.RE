@@ -42,7 +42,7 @@ public:
     virtual void  Switch(void);
 
     // address=[0x14fe6b0]
-    virtual void  InhabitantFlee(int a2);
+    virtual void  InhabitantFlee(int _iSettlerId);
 
     // address=[0x14fe750]
     virtual void  ReturnBuildingMaterial(class CBuilding * a2);
@@ -96,6 +96,30 @@ protected:
 private:
     // address=[0x14e6830]
     virtual void  NotifyDetach(class CBuilding * a2, int a3);
+
+    // Type information members
+public:
+    _BYTE byte4;
+    _BYTE byte5;
+    _WORD m_iEntityId;
+    _WORD m_uSettlerId;
+    _WORD wordA;
+    _WORD wordC;
+    _BYTE[2] gap_E;
+    _DWORD field_10;
+    _BYTE[8] gap_14;
+    BYTE field_1C;
+    _BYTE m_bInhabitants;
+    _BYTE[2] gap_1E;
+    _DWORD m_pSearchFkt;
+    _BYTE[40] gap_24;
+    DWORD[70] gap_4c;
+    _BYTE byte164;
+    _BYTE[8] gap165;
+    _BYTE byte16D;
+    DWORD field_170;
+    DWORD field_174;
+    const struct CBuildingInfoMgr::SBuildingInfos * m_pBuildingInfo;
 
 };
 

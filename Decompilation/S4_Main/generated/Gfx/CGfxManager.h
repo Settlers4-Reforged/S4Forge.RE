@@ -185,7 +185,7 @@ public:
     CGfxManager::SGFXINFO[42] m_sFilePal;
     char **[42] m_pFilePalIndex;
     CGfxManager::SGfxFrame[42] m_pFileGfxFrames;
-    CGfxManager::SGfxFrame[42] field_49C;
+    CGfxManager::SGfxFrame[42] m_pFileGfxDirections;
     CGfxManager::SGfxFrame[42] m_pFileGfxJobs;
     CGfxManager::SGfxFrame[42] m_pFileGfxJobCodes;
     CGfxManager::SGFXINFO[42] m_sFileGfx;

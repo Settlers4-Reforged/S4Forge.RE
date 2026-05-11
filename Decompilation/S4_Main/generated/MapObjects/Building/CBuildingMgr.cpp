@@ -18,7 +18,7 @@ class CBuilding &  CBuildingMgr::operator[](int a1) {
   {
     __debugbreak();
   }
-  if ( IEntity::ObjType(v2) != 8
+  if ( IEntity::ObjType(v2) != BUILDING_OBJ
     && BBSupportDbgReport(
          2,
          "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\MapObjects\\Building\\BuildingMgr.h",
