@@ -6,6 +6,7 @@
 #include "lua/luadebug.h"
 #include "lua/lualib.h"
 
+#include "Defines/DefineTransformers.h"
 #include "CBB/CBBSupport.h"
 #include "../File/CFileEx.h"
 #include "IScriptFile.h"
@@ -344,10 +345,10 @@ void CLua::ExportTableVars(char const *_pTableName, struct CLua::SVarInfo *a3) {
 
 // address=[0x1602ea0]
 // Decompiled from int __stdcall CLua::ExportTableTypes(char *a1, char *Str, int *a3, unsigned int a4)
-void CLua::ExportTableTypes(const char *                    _pTableName,
-                            const char *                    _pDefinePrefix,
-                            const struct SConfigTypeString *_pConfig,
-                            unsigned int                    _uCount) {
+void CLua::ExportTableTypes(const char *             _pTableName,
+                            const char *             _pDefinePrefix,
+                            const SConfigTypeString *_pConfig,
+                            unsigned int             _uCount) {
   char *pConfigName;            // [esp+10h] [ebp-Ch]
   BB_ASSERT(_pTableName != 0)
 

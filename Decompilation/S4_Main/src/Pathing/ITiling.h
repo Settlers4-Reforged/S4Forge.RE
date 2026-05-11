@@ -46,6 +46,7 @@ public:
 
 protected:
     friend class CWalkingBase;
+    friend class CDecoObjMgr;
 
     // address=[0x4236800]
     static unsigned short **m_pTileIds;
