@@ -127,10 +127,8 @@ IDecoObject::IDecoObject(std::istream &a2) : IAnimatedEntity(a2) {
 // address=[0x1541b20]
 // Decompiled from struct std::ostream *__thiscall IDecoObject::Store(const struct IDecoObject *this, struct std::ostream *a2)
 void IDecoObject::Store(std::ostream &a2) {
-  int fileFormatVersion; // [esp+0h] [ebp-8h] BYREF
-
   IAnimatedEntity::Store(a2);
-  fileFormatVersion = 1;
+  int fileFormatVersion = 1;
   a2 << fileFormatVersion;
   a2 << this->m_bStaticInstance;
 }

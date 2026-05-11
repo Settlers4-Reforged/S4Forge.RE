@@ -14,7 +14,7 @@ public:
     static class CPersistence * __cdecl New(std::istream &a1);
 
     // address=[0x154a040]
-    CPlant(int a2, int a3, int a4, int a5, int _iGoodType, int a7);
+    CPlant(int a2, int a3, int a4, int a5, int _iGoodType, int _iStage);
 
     // address=[0x154a1a0]
     CPlant(class CPlant const &a2, int a3, int a4, int a5);

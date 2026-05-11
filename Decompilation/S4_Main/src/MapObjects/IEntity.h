@@ -200,14 +200,14 @@ public:
     void SetHitpoints(unsigned int hp);
 
     enum EntityType : int8_t {
-        Settler     = 0x1,
-        Ship        = 0x2,
-        Landvehicle = 0x4,
-        Building    = 0x8,
-        Good        = 0x10,
-        Plant       = 0x20,
-        Unknown     = 0x40,
-        Animal      = 0x80,
+        Settler       = 0x1,
+        Ship          = 0x2,
+        Landvehicle   = 0x4,
+        Building      = 0x8,
+        Good          = 0x10,
+        LANDSCAPE_OBJ = 0x20,
+        Unknown       = 0x40,
+        Animal        = 0x80,
     };
 
 protected:
@@ -220,6 +220,7 @@ protected:
     // Type information members
 protected:
     friend class CMapObjectMgr;
+    friend class CDecoObjMgr;
 
     int                   m_iUniqueId;
     WORD                  m_nEntityId;

@@ -246,18 +246,8 @@ IAnimatedEntity::IAnimatedEntity(std::istream &_rStream) : IEntity(_rStream), m_
 // address=[0x14e35f0]
 // Decompiled from int __thiscall IAnimatedEntity::Store(IAnimatedEntity *this, struct std::ostream *a2)
 void IAnimatedEntity::Store(std::ostream &_rStream) {
-  _BYTE v3[12]; // [esp+4h] [ebp-40h] BYREF
-  _BYTE v4[12]; // [esp+10h] [ebp-34h] BYREF
-  // [esp+1Ch] [ebp-28h]
-  // [esp+20h] [ebp-24h]
-
-  int iFileVersion; // [esp+28h] [ebp-1Ch] BYREF
-  // [esp+2Ch] [ebp-18h]
-  // [esp+37h] [ebp-Dh]
-  // [esp+40h] [ebp-4h]
-
   IEntity::Store(_rStream);
-  iFileVersion = 1;
+  int iFileVersion = 1;
   _rStream << iFileVersion;
   _rStream << this->m_cFrame;
   _rStream << this->m_cAttackerPlayerId;

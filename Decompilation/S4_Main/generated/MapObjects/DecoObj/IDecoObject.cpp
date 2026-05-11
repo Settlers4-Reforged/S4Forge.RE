@@ -21,7 +21,7 @@ bool  IDecoObject::IsStaticInstance(void)const {
 
   IAnimatedEntity::IAnimatedEntity(this, _iId);
   this->__vftable = (IAnimatedEntity_vtbl *)&IDecoObject::_vftable_;
-  LOBYTE(this->m_bStaticInstance) = a6;
+  this->m_bStaticInstance = a6;
   if ( !CWorldManager::InWorld(_iX, _iY)
     && BBSupportDbgReport(2, "MapObjects\\DecoObj\\DecoObj.cpp", 63, "g_cWorld.InWorld( _iX, _iY )") == 1 )
   {

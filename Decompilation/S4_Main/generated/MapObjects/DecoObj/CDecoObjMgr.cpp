@@ -1004,7 +1004,7 @@ void  CDecoObjMgr::Rod(int a2, bool a3) {
         switch ( IEntity::Type(pEntity) )
         {
           case OBJECT_GRAPE:
-            if ( v21 == 386 )
+            if ( v21 == OBJECT_GRAPE_CUT )
               goto LABEL_35;
             FreeSlot = CMapObjectMgr::GetFreeSlot();
             if ( FreeSlot != -1 )
@@ -1017,7 +1017,7 @@ void  CDecoObjMgr::Rod(int a2, bool a3) {
             }
             break;
           case OBJECT_WHEAT1:
-            if ( v21 == 438 )
+            if ( v21 == OBJECT_WHEAT1_ROT )
               goto LABEL_35;
             v17 = CMapObjectMgr::GetFreeSlot();
             if ( v17 != -1 )
@@ -1030,7 +1030,7 @@ void  CDecoObjMgr::Rod(int a2, bool a3) {
             }
             break;
           case OBJECT_WHEAT2:
-            if ( v21 == 444 )
+            if ( v21 == OBJECT_WHEAT2_ROT )
               goto LABEL_35;
             v16 = CMapObjectMgr::GetFreeSlot();
             if ( v16 != -1 )
@@ -1043,7 +1043,7 @@ void  CDecoObjMgr::Rod(int a2, bool a3) {
             }
             break;
           case OBJECT_AGAVE:
-            if ( v21 == 449 )
+            if ( v21 == OBJECT_AGAVE_ROT )
               goto LABEL_35;
             v15 = CMapObjectMgr::GetFreeSlot();
             if ( v15 != -1 )
@@ -1056,7 +1056,7 @@ void  CDecoObjMgr::Rod(int a2, bool a3) {
             }
             break;
           case OBJECT_SUNFLOWER:
-            if ( v21 == 516 )
+            if ( v21 == OBJECT_SUNFLOWER_ROT )
             {
 LABEL_35:
               CDecoObjMgr::RemoveDecoObject(this, v22, v23, 0);
@@ -1084,28 +1084,28 @@ LABEL_35:
         switch ( IEntity::Type(pEntity) )
         {
           case OBJECT_GRAPE:
-            if ( v24 != 385 )
-              pEntity->Take(386 - v24);
+            if ( v24 != OBJECT_GRAPE_GROWNUP )
+              pEntity->Take(OBJECT_GRAPE_CUT - v24);
             break;
           case OBJECT_WHEAT1:
-            if ( v24 != 436 )
-              pEntity->Take(438 - v24);
+            if ( v24 != OBJECT_WHEAT1_GROWNUP )
+              pEntity->Take(OBJECT_WHEAT1_ROT - v24);
             break;
           case OBJECT_WHEAT2:
-            if ( v24 != 442 )
-              pEntity->Take(444 - v24);
+            if ( v24 != OBJECT_WHEAT2_GROWNUP )
+              pEntity->Take(OBJECT_WHEAT2_ROT - v24);
             break;
           case OBJECT_AGAVE:
-            if ( v24 != 448 )
-              pEntity->Take(449 - v24);
+            if ( v24 != OBJECT_AGAVE_GROWNUP )
+              pEntity->Take(OBJECT_AGAVE_ROT - v24);
             break;
           case OBJECT_HIVE:
-            if ( v24 != 470 )
-              pEntity->Take(472 - v24);
+            if ( v24 != OBJECT_HIVE_FULL )
+              pEntity->Take(OBJECT_HIVE_ROT2 - v24);
             break;
           case OBJECT_SUNFLOWER:
-            if ( v24 != 514 )
-              pEntity->Take(516 - v24);
+            if ( v24 != OBJECT_SUNFLOWER_GROWNUP )
+              pEntity->Take(OBJECT_SUNFLOWER_ROT - v24);
             break;
           default:
             return;
@@ -1127,14 +1127,14 @@ void  CDecoObjMgr::Store(class S4::CMapFile & a2) {
   size_t Size; // [esp+BCh] [ebp-4Ch]
   void *Src; // [esp+C0h] [ebp-48h]
   T_SETTLER_OBJ_TYPE iObjectType; // [esp+C4h] [ebp-44h]
-  IEntity *pEntity; // [esp+C8h] [ebp-40h] MAPDST
+  IDecoObject *pEntity; // [esp+C8h] [ebp-40h] MAPDST
   T_SETTLER_OBJ_TYPE v10; // [esp+CCh] [ebp-3Ch]
   IEntity *v11; // [esp+D0h] [ebp-38h]
   int iLastId; // [esp+D4h] [ebp-34h] MAPDST
   int iVersion; // [esp+DCh] [ebp-2Ch] BYREF
   IEntity *v16; // [esp+E4h] [ebp-24h]
   int iDecoCount; // [esp+E8h] [ebp-20h] BYREF
-  char bIsStaticInstance; // [esp+F3h] [ebp-15h] MAPDST BYREF
+  bool bIsStaticInstance; // [esp+F3h] [ebp-15h] MAPDST BYREF
   int i; // [esp+F4h] [ebp-14h]
   int *v22; // [esp+F8h] [ebp-10h]
   int v23; // [esp+104h] [ebp-4h]
@@ -1147,7 +1147,7 @@ void  CDecoObjMgr::Store(class S4::CMapFile & a2) {
   LOBYTE(v23) = 1;
   iVersion = 1;
   operator^<unsigned int>((struct std::ostream *)v4, &iVersion);
-  operator^<bool>((struct std::ostream *)v4, (char *)&this->m_bHasLoaded);
+  operator^<bool>((struct std::ostream *)v4, &this->m_bHasLoaded);
   iDecoCount = 0;
   iLastId = CMapObjectMgr::LastUsedId();
   for ( i = 0; i <= iLastId; ++i )
@@ -1164,15 +1164,15 @@ void  CDecoObjMgr::Store(class S4::CMapFile & a2) {
   operator^<unsigned int>((struct std::ostream *)v4, &iDecoCount);
   for ( i = 0; i <= iLastId; ++i )
   {
-    pEntity = CMapObjectMgr::EntityPtr(i);
+    pEntity = (IDecoObject *)CMapObjectMgr::EntityPtr(i);
     if ( pEntity )
     {
       iObjectType = IEntity::ObjType(pEntity);
       if ( iObjectType == DECO_OBJ_2 )
       {
-        bIsStaticInstance = IDecoObject::IsStaticInstance((IDecoObject *)pEntity);
+        bIsStaticInstance = IDecoObject::IsStaticInstance(pEntity);
         operator^<bool>((struct std::ostream *)v4, &bIsStaticInstance);
-        pEntity->Store(pEntity, (struct std::ostream *)v4);
+        ((void (__thiscall *)(IDecoObject *, DWORD *))pEntity->Store)(pEntity, v4);
       }
     }
   }
@@ -1191,54 +1191,55 @@ void  CDecoObjMgr::Store(class S4::CMapFile & a2) {
 
 
 // address=[0x1544810]
-// Decompiled from void __thiscall CDecoObjMgr::Load(CDecoObjMgr *this, struct S4::CMapFile *arg0)
+// Decompiled from void __thiscall CDecoObjMgr::Load(CDecoObjMgr *this, struct S4::CMapFile *a2)
 void  CDecoObjMgr::Load(class S4::CMapFile & a2) {
   
   int v2; // eax
-  int v3; // eax
-  int v4; // [esp-18h] [ebp-158h] BYREF
-  int v5; // [esp-14h] [ebp-154h]
-  unsigned int v6; // [esp-10h] [ebp-150h]
-  int v7; // [esp-Ch] [ebp-14Ch]
-  int v8; // [esp-8h] [ebp-148h]
+  int iX; // eax
+  int iY; // [esp-18h] [ebp-158h] BYREF
+  T_OBJECT_TYPE _iType; // [esp-14h] [ebp-154h]
+  unsigned int _iHealth; // [esp-10h] [ebp-150h]
+  int _iEntityId; // [esp-Ch] [ebp-14Ch]
+  int _bIsStaticInstance; // [esp-8h] [ebp-148h]
   _DWORD *v9; // [esp-4h] [ebp-144h]
   _BYTE v10[24]; // [esp+4h] [ebp-13Ch] BYREF
   _DWORD stream[44]; // [esp+1Ch] [ebp-124h] BYREF
-  _BYTE v12[4]; // [esp+CCh] [ebp-74h] BYREF
-  _BYTE v13[4]; // [esp+D0h] [ebp-70h] BYREF
+  unsigned int iIEntityVersion; // [esp+CCh] [ebp-74h] BYREF
+  unsigned int uClassId; // [esp+D0h] [ebp-70h] BYREF
   unsigned int v14; // [esp+D4h] [ebp-6Ch]
   int v15; // [esp+D8h] [ebp-68h]
-  int v16[2]; // [esp+DCh] [ebp-64h] BYREF
-  int v17; // [esp+E4h] [ebp-5Ch] BYREF
+  int iObjType; // [esp+DCh] [ebp-64h] BYREF
+  int v17; // [esp+E0h] [ebp-60h]
+  int v18; // [esp+E4h] [ebp-5Ch] BYREF
   int a4; // [esp+E8h] [ebp-58h] BYREF
-  int a2; // [esp+ECh] [ebp-54h] BYREF
-  BOOL v20; // [esp+F0h] [ebp-50h]
+  int iPackedXY; // [esp+ECh] [ebp-54h] BYREF
+  BOOL v21; // [esp+F0h] [ebp-50h]
   unsigned int iCount; // [esp+F4h] [ebp-4Ch] BYREF
   int pExceptionObject; // [esp+F8h] [ebp-48h] BYREF
   char *pData; // [esp+FCh] [ebp-44h]
   unsigned int i; // [esp+104h] [ebp-3Ch]
-  unsigned __int16 v26; // [esp+108h] [ebp-38h] BYREF
-  _WORD v27[3]; // [esp+10Ch] [ebp-34h] BYREF
-  unsigned __int8 v28; // [esp+112h] [ebp-2Eh] BYREF
-  unsigned __int8 v29; // [esp+113h] [ebp-2Dh] BYREF
-  std::string v30; // [esp+114h] [ebp-2Ch] BYREF
-  int v31; // [esp+13Ch] [ebp-4h]
+  unsigned __int16 iType; // [esp+108h] [ebp-38h] BYREF
+  unsigned __int16 iEntityId; // [esp+10Ch] [ebp-34h] BYREF
+  unsigned __int8 iHealth; // [esp+112h] [ebp-2Eh] BYREF
+  unsigned __int8 bIsStaticInstance; // [esp+113h] [ebp-2Dh] BYREF
+  std::string v31; // [esp+114h] [ebp-2Ch] BYREF
+  int v32; // [esp+13Ch] [ebp-4h]
 
   BBSupportTracePrintF(0, "DecoObjMgr load");
   CDecoObjMgr::Clear(this);
   a4 = 0;
-  pData = (char *)S4::CMapFile::LoadChunk(arg0, MAP_CHUNK_SAVE_DECOOBJECTS, 0, &a4, 0);
+  pData = (char *)S4::CMapFile::LoadChunk(a2, MAP_CHUNK_SAVE_DECOOBJECTS, 0, &a4, 0);
   if ( pData )
   {
-    std::string::string(&v30, pData);
-    v31 = 0;
-    std::istringstream::istringstream(&v30, 1, 1);
-    LOBYTE(v31) = 1;
+    std::string::string(&v31, pData);
+    v32 = 0;
+    std::istringstream::istringstream(&v31, 1, 1);
+    LOBYTE(v32) = 1;
     v14 = std::ios_base::exceptions((char *)stream + *(_DWORD *)(stream[0] + 4));
     std::ios_base::exceptions((std::ios_base *)((char *)stream + *(_DWORD *)(stream[0] + 4)), 6);
-    operator^<unsigned int>(stream, &v17);
-    v16[1] = v17;
-    if ( v17 != 1 )
+    operator^<unsigned int>(stream, &v18);
+    v17 = v18;
+    if ( v18 != 1 )
     {
       BBSupportTracePrintF(3, "load output defect Unknown fileFormatVersion for CDecoObjMgr");
       pExceptionObject = 0;
@@ -1250,42 +1251,42 @@ void  CDecoObjMgr::Load(class S4::CMapFile & a2) {
     operator^<unsigned int>(stream, &iCount);
     for ( i = 0; i < iCount; ++i )
     {
-      v29 = 0;
-      operator^<bool>(stream, &v29);
-      operator^<unsigned long>(stream, v13);
-      v2 = std::istream::tellg(v10);
+      bIsStaticInstance = 0;
+      operator^<bool>(stream, &bIsStaticInstance);
+      operator^<unsigned long>(stream, &uClassId);
+      v2 = std::istream::tellg((int)v10);
       v15 = std::fpos<_Mbstatet>::operator __int64(v2);
-      operator^<unsigned int>(stream, v12);
-      operator^<unsigned short>(stream, v27);
-      operator^<unsigned short>(stream, &v26);
-      operator^<int>((struct std::istream *)stream, &a2);
-      operator^<unsigned char>(stream, &v28);
-      operator^<int>((struct std::istream *)stream, v16);
-      v20 = (v16[0] & 0x1000000) == 0;
-      stream[43] = v20;
-      stream[42] = &v4;
-      std::fpos<_Mbstatet>::fpos<_Mbstatet>(v15, v15 >> 31);
-      std::istream::seekg(v4, v5, v6, v7, v8, v9);
+      operator^<unsigned int>(stream, &iIEntityVersion);
+      operator^<unsigned short>(stream, &iEntityId);
+      operator^<unsigned short>(stream, &iType);
+      operator^<int>((struct std::istream *)stream, &iPackedXY);
+      operator^<unsigned char>(stream, &iHealth);
+      operator^<int>((struct std::istream *)stream, &iObjType);
+      v21 = (iObjType & 0x1000000) == 0;
+      stream[43] = v21;
+      stream[42] = &iY;
+      std::fpos<_Mbstatet>::fpos<_Mbstatet>(&iY, v15, v15 >> 31);
+      std::istream::seekg((char *)stream, iY, _iType, _iHealth, _iEntityId, _bIsStaticInstance, (int)v9);
       v9 = stream;
-      v8 = v29;
-      v7 = v27[0];
-      v6 = v28;
-      v5 = v26;
-      v4 = Y16X16::UnpackYFast(a2);
-      v3 = Y16X16::UnpackXFast(a2);
-      CDecoObjMgr::AddLoadedDecoObj(this, v3, v4, v5, v6, v7, v8, (int)v9);
+      _bIsStaticInstance = bIsStaticInstance;
+      _iEntityId = iEntityId;
+      _iHealth = iHealth;
+      _iType = iType;
+      iY = Y16X16::UnpackYFast(iPackedXY);
+      iX = Y16X16::UnpackXFast(iPackedXY);
+      CDecoObjMgr::AddLoadedDecoObj(this, iX, iY, _iType, _iHealth, _iEntityId, _bIsStaticInstance, (int)v9);
     }
     std::ios_base::exceptions((std::ios_base *)((char *)stream + *(_DWORD *)(stream[0] + 4)), v14);
-    LOBYTE(v31) = 0;
+    LOBYTE(v32) = 0;
     std::istringstream::`vbase destructor'(stream);
-    v31 = -1;
-    std::string::~string(&v30);
+    v32 = -1;
+    std::string::~string(&v31);
   }
 }
 
 
 // address=[0x1544b00]
-// Decompiled from int __thiscall CDecoObjMgr::Create(  CDecoObjMgr *this,  int _iX,  int _iY,  int _iDecoType,  int _iAmount,  int _iGrownState,  int _iSlot,  int _pInStream)
+// Decompiled from int __thiscall CDecoObjMgr::Create(  CDecoObjMgr *this,  unsigned int _iX,  unsigned int _iY,  int _iDecoType,  int _iAmount,  int _iGrownState,  int _iSlot,  struct std::istream *_pInStream)
 int  CDecoObjMgr::Create(int _iX, int _iY, int _iDecoType, int _iAmount, enum CDecoObjMgr::TGROWN_STATE _iGrownState, int _iSlot, std::istream * _pInStream) {
   
   IDecoObject *DecoObjPtr; // eax
@@ -1326,7 +1327,7 @@ int  CDecoObjMgr::Create(int _iX, int _iY, int _iDecoType, int _iAmount, enum CD
   CPlant *v44; // [esp+ECh] [ebp-9Ch]
   CPlant *v45; // [esp+F4h] [ebp-94h]
   CPlant *v46; // [esp+FCh] [ebp-8Ch]
-  CStone *v47; // [esp+100h] [ebp-88h]
+  IDecoObject *v47; // [esp+100h] [ebp-88h]
   CStone *v48; // [esp+104h] [ebp-84h]
   CStone *v49; // [esp+10Ch] [ebp-7Ch]
   CStone *v50; // [esp+114h] [ebp-74h]
@@ -1334,13 +1335,13 @@ int  CDecoObjMgr::Create(int _iX, int _iY, int _iDecoType, int _iAmount, enum CD
   CStone *v52; // [esp+120h] [ebp-68h]
   CTree *v53; // [esp+128h] [ebp-60h]
   CTree *v54; // [esp+130h] [ebp-58h]
-  CTree *v55; // [esp+134h] [ebp-54h]
+  IDecoObject *v55; // [esp+134h] [ebp-54h]
   CTree *v56; // [esp+138h] [ebp-50h]
   CTree *v57; // [esp+140h] [ebp-48h]
   CTree *v58; // [esp+148h] [ebp-40h]
   __int32 iId0; // [esp+160h] [ebp-28h]
   int v60; // [esp+168h] [ebp-20h]
-  char iGoodType; // [esp+16Ch] [ebp-1Ch]
+  BYTE iGoodType; // [esp+16Ch] [ebp-1Ch]
   char v62; // [esp+173h] [ebp-15h]
   int iGetId; // [esp+174h] [ebp-14h]
 
@@ -1387,12 +1388,12 @@ int  CDecoObjMgr::Create(int _iX, int _iY, int _iDecoType, int _iAmount, enum CD
           {
             v56 = (CTree *)CTree::operator new(0x50u);
             if ( v56 )
-              v55 = CTree::CTree(v56, _pInStream);
+              v55 = (IDecoObject *)CTree::CTree(v56, (int)_pInStream);
             else
               v55 = 0;
             if ( IDecoObject::IsStaticInstance(v55) )
             {
-              v9 = IEntity::ID((IEntity *)v55);
+              v9 = IEntity::ID(v55);
               CMapObjectMgr::Destroy(g_pMapObjectMgr, v9);
               CWorldManager::SetObjectId(
                 _iX,
@@ -1401,7 +1402,7 @@ int  CDecoObjMgr::Create(int _iX, int _iY, int _iDecoType, int _iAmount, enum CD
             }
             else
             {
-              v10 = IEntity::ID((IEntity *)v55);
+              v10 = IEntity::ID(v55);
               CWorldManager::SetObjectId(_iX, _iY, v10);
             }
           }
@@ -1424,7 +1425,7 @@ int  CDecoObjMgr::Create(int _iX, int _iY, int _iDecoType, int _iAmount, enum CD
             }
             v57 = (CTree *)CTree::operator new(0x50u);
             if ( v57 )
-              CTree::CTree(v57, _pInStream);
+              CTree::CTree(v57, (int)_pInStream);
           }
           else
           {
@@ -1454,7 +1455,7 @@ int  CDecoObjMgr::Create(int _iX, int _iY, int _iDecoType, int _iAmount, enum CD
             __debugbreak();
           v53 = (CTree *)CTree::operator new(0x50u);
           if ( v53 )
-            CTree::CTree(v53, _pInStream);
+            CTree::CTree(v53, (int)_pInStream);
         }
         else
         {
@@ -1487,18 +1488,18 @@ int  CDecoObjMgr::Create(int _iX, int _iY, int _iDecoType, int _iAmount, enum CD
         {
           v48 = (CStone *)CStone::operator new(0x48u);
           if ( v48 )
-            v47 = CStone::CStone(v48, _pInStream);
+            v47 = (IDecoObject *)CStone::CStone(v48, (int)_pInStream);
           else
             v47 = 0;
           if ( IDecoObject::IsStaticInstance(v47) )
           {
-            v14 = IEntity::ID((IEntity *)v47);
+            v14 = IEntity::ID(v47);
             CMapObjectMgr::Destroy(g_pMapObjectMgr, v14);
             CWorldManager::SetObjectId(_iX, _iY, this->m_aObjects[_iDecoType].m_uFrameIds[v60]);
           }
           else
           {
-            v15 = IEntity::ID((IEntity *)v47);
+            v15 = IEntity::ID(v47);
             CWorldManager::SetObjectId(_iX, _iY, v15);
           }
         }
@@ -1515,7 +1516,7 @@ int  CDecoObjMgr::Create(int _iX, int _iY, int _iDecoType, int _iAmount, enum CD
             __debugbreak();
           v49 = (CStone *)CStone::operator new(0x48u);
           if ( v49 )
-            CStone::CStone(v49, _pInStream);
+            CStone::CStone(v49, (int)_pInStream);
         }
         else
         {
@@ -1530,8 +1531,8 @@ int  CDecoObjMgr::Create(int _iX, int _iY, int _iDecoType, int _iAmount, enum CD
           ++this->m_aObjects[_iDecoType].m_uU2;
         }
       }
-      if ( _iDecoType != 253 )
-        CWorldManager::SetResource(_iX, _iY, 96, _iAmount);
+      if ( _iDecoType != OBJECT_DARKMINESET1 )
+        CWorldManager::SetResource(_iX, _iY, OBJECT_STONEDARKISH4, _iAmount);
       break;
     case OBJECT_STONEMINE1_00:
     case OBJECT_STONEMINE1_01:
@@ -1560,7 +1561,7 @@ int  CDecoObjMgr::Create(int _iX, int _iY, int _iDecoType, int _iAmount, enum CD
         {
           v52 = (CStone *)CStone::operator new(0x48u);
           if ( v52 )
-            CStone::CStone(v52, _iX, _iY, 41, iIdNext, iGetId);
+            CStone::CStone(v52, _iX, _iY, OBJECT_MINESET1, iIdNext, iGetId);
         }
         v12 = (IDecoObject *)CDecoObjMgr::GetDecoObjPtr(iGetId);
         if ( !IDecoObject::IsStaticInstance(v12)
@@ -1621,7 +1622,7 @@ int  CDecoObjMgr::Create(int _iX, int _iY, int _iDecoType, int _iAmount, enum CD
             v43 = 0;
           if ( IDecoObject::IsStaticInstance(v43) )
           {
-            v16 = IEntity::ID((IEntity *)v43);
+            v16 = IEntity::ID(v43);
             CMapObjectMgr::Destroy(g_pMapObjectMgr, v16);
             CWorldManager::SetObjectId(
               _iX,
@@ -1630,7 +1631,7 @@ int  CDecoObjMgr::Create(int _iX, int _iY, int _iDecoType, int _iAmount, enum CD
           }
           else
           {
-            v17 = IEntity::ID((IEntity *)v43);
+            v17 = IEntity::ID(v43);
             CWorldManager::SetObjectId(_iX, _iY, v17);
           }
         }
@@ -1651,7 +1652,7 @@ int  CDecoObjMgr::Create(int _iX, int _iY, int _iDecoType, int _iAmount, enum CD
           {
             v46 = (CPlant *)CPlant::operator new(0x50u);
             if ( v46 )
-              CPlant::CPlant(v46, _iX, _iY, _iDecoType, iGetId, iGoodType, 3);
+              CPlant::CPlant(v46, _iX, _iY, (T_OBJECT_TYPE)_iDecoType, iGetId, iGoodType, 3);
           }
           if ( this->m_aObjects[_iDecoType].m_uFrameIds[(char)this->m_aObjects[_iDecoType].m_uU2]
             && BBSupportDbgReport(
@@ -1679,7 +1680,7 @@ int  CDecoObjMgr::Create(int _iX, int _iY, int _iDecoType, int _iAmount, enum CD
             __debugbreak();
           v42 = (CPlant *)CPlant::operator new(0x50u);
           if ( v42 )
-            CPlant::CPlant(v42, _iX, _iY, _iDecoType, iGetId, iGoodType, 0);
+            CPlant::CPlant(v42, _iX, _iY, (T_OBJECT_TYPE)_iDecoType, iGetId, iGoodType, 0);
         }
         v18 = (IDecoObject *)CDecoObjMgr::GetDecoObjPtr(iGetId);
         if ( IDecoObject::IsStaticInstance(v18)
@@ -1716,7 +1717,7 @@ int  CDecoObjMgr::Create(int _iX, int _iY, int _iDecoType, int _iAmount, enum CD
             v35 = 0;
           if ( IDecoObject::IsStaticInstance(v35) )
           {
-            v20 = IEntity::ID((IEntity *)v35);
+            v20 = IEntity::ID(v35);
             CMapObjectMgr::Destroy(g_pMapObjectMgr, v20);
             CWorldManager::SetObjectId(
               _iX,
@@ -1725,7 +1726,7 @@ int  CDecoObjMgr::Create(int _iX, int _iY, int _iDecoType, int _iAmount, enum CD
           }
           else
           {
-            v21 = IEntity::ID((IEntity *)v35);
+            v21 = IEntity::ID(v35);
             CWorldManager::SetObjectId(_iX, _iY, v21);
           }
         }
@@ -1961,7 +1962,7 @@ void  CDecoObjMgr::ReadObjectInfos(void) {
   int iTotalBlockingRings; // [esp+18Ch] [ebp-2F4h]
   bool bIsResource; // [esp+192h] [ebp-2EEh] MAPDST
   bool v83; // [esp+193h] [ebp-2EDh]
-  BYTE *p_m_uTotalBlockingOrRepellingRings; // [esp+194h] [ebp-2ECh]
+  CDecoObjMgr::Ring *pRings; // [esp+194h] [ebp-2ECh]
   signed int iDecoObjectType; // [esp+198h] [ebp-2E8h] MAPDST
   _BYTE v86[28]; // [esp+3C4h] [ebp-BCh] BYREF
   _BYTE v87[28]; // [esp+3E0h] [ebp-A0h] BYREF
@@ -2033,7 +2034,7 @@ void  CDecoObjMgr::ReadObjectInfos(void) {
         }
         if ( iDecoObjectType > 0 && iDecoObjectType < OBJECT_MAX )
         {
-          p_m_uTotalBlockingOrRepellingRings = &this->?[iDecoObjectType].m_uTotalBlockingOrRepellingRings;
+          pRings = &this->m_aBuildingRings[iDecoObjectType];
           v48 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v55);
           pBlockingNode = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v48, "blocking", 0);
           v55[4] = pBlockingNode;
@@ -2190,24 +2191,24 @@ void  CDecoObjMgr::ReadObjectInfos(void) {
           }
           if ( iTotalBlockingRings <= 0 && iTotalRepellingRings > 0 )
           {
-            *p_m_uTotalBlockingOrRepellingRings = 1;
-            p_m_uTotalBlockingOrRepellingRings[1] = 0;
-            p_m_uTotalBlockingOrRepellingRings[2] = 1;
-            p_m_uTotalBlockingOrRepellingRings[3] = 1;
-            p_m_uTotalBlockingOrRepellingRings[4] = iAdditionalBuildingRings + 1;
+            pRings->m_uUnknown = 1;
+            pRings->m_uTotalBlockingRings = 0;
+            pRings->m_uRepellingRings = 1;
+            pRings->m_uTotalBlockingOrRepellingRings = 1;
+            pRings->m_uTotalRings = iAdditionalBuildingRings + 1;
           }
           else
           {
-            *p_m_uTotalBlockingOrRepellingRings = 0;
-            p_m_uTotalBlockingOrRepellingRings[1] = iTotalBlockingRings;
-            p_m_uTotalBlockingOrRepellingRings[2] = 0;
-            p_m_uTotalBlockingOrRepellingRings[3] = iTotalBlockingRings;
-            p_m_uTotalBlockingOrRepellingRings[4] = iAdditionalBuildingRings + iTotalBlockingRings;
+            pRings->m_uUnknown = 0;
+            pRings->m_uTotalBlockingRings = iTotalBlockingRings;
+            pRings->m_uRepellingRings = 0;
+            pRings->m_uTotalBlockingOrRepellingRings = iTotalBlockingRings;
+            pRings->m_uTotalRings = iAdditionalBuildingRings + iTotalBlockingRings;
           }
-          p_m_uTotalBlockingOrRepellingRings[5] = 0;
-          p_m_uTotalBlockingOrRepellingRings[6] = 0;
+          pRings->m_uU5 = 0;
+          pRings->m_uU6 = 0;
           v63 = iPingPongs != 0;
-          p_m_uTotalBlockingOrRepellingRings[7] = v63;
+          pRings->m_bHasPingPong = v63;
         }
         LOBYTE(v93) = 8;
         std::string::~string(&v91);

@@ -141,19 +141,19 @@ static_assert(sizeof(SSaveFileChunk) == 0x18, "Size of SSaveFileChunk is not 24 
 
 // address=[0x13dad70]
 // Decompiled from void *__thiscall S4::CMapFile::LoadChunk(  S4::CMapFile *this,  unsigned __int16 a2,  unsigned __int16 a3,  int *a4,  size_t *a5)
-void const *S4::CMapFile::LoadChunk(unsigned short a2, unsigned short a3, int &a4, int *_uReadSize) {
+void const *S4::CMapFile::LoadChunk(unsigned short _uChunkTypeA, unsigned short _uChunkTypeB, int &a4, int *_uReadSize) {
   char *pChunkFileEnd; // [esp+5Ch] [ebp-BCh]
   char *pChunkCompressedEnd; // [esp+60h] [ebp-B8h]
   char *pChunkDataBuffer; // [esp+D4h] [ebp-44h]
   char *pReadChunkData; // [esp+E4h] [ebp-34h]
 
-  int  uRequestedType = a2 + (a3 << 16);
+  int  uRequestedType = _uChunkTypeA + (_uChunkTypeB << 16);
   auto itFoundRef = m_vRefCounts.find(uRequestedType);
   if(itFoundRef != m_vRefCounts.end()) {
     BB_ASSERT(m_vLoadedChunks.find(uRequestedType) != m_vLoadedChunks.end())
     m_vRefCounts[uRequestedType]++;
-    if(a2 < 0x100u && !a3)
-      a4 = *(_DWORD *) &this->m_uData[4 * a2];
+    if(_uChunkTypeA < 0x100u && !_uChunkTypeB)
+      a4 = *(_DWORD *) &this->m_uData[4 * _uChunkTypeA];
     return m_vLoadedChunks[uRequestedType];
     // Technically return type seems to be:
     // Probably a dereference of the operator
@@ -294,7 +294,7 @@ void S4::CMapFile::UploadBuffer(unsigned int a2, unsigned int a3, void const *_p
 
 // address=[0x13db820]
 // Decompiled from int __thiscall S4::CMapFile::SaveChunk(  S4::CMapFile *this,  unsigned __int16 a2,  unsigned __int16 a3,  unsigned int Size,  const void *Src,  bool a6)
-void S4::CMapFile::SaveChunk(unsigned short a2, unsigned short a3, unsigned int _uSize, void const *Src, bool a6) {
+void S4::CMapFile::SaveChunk(unsigned short _uChunkTypeA, unsigned short _uChunkTypeB, unsigned int _uSize, void const *_pSrc, bool _bCompress) {
   unsigned int uCRC; // eax
   // [esp+10h] [ebp-34h]
   unsigned int uUncompressedSize; // [esp+14h] [ebp-30h]
@@ -305,11 +305,11 @@ void S4::CMapFile::SaveChunk(unsigned short a2, unsigned short a3, unsigned int 
   // [esp+34h] [ebp-10h]
   // [esp+38h] [ebp-Ch]
 
-  if(!Src) {
+  if(!_pSrc) {
     _uSize = 0;
-    Src = {}; // unk_369A12A
+    _pSrc = {}; // unk_369A12A
   }
-  if(a6 | this->m_bCompress) {
+  if(_bCompress | this->m_bCompress) {
     int uCompressedSize = LZHLCompressorCalcMaxBuf(_uSize) + 32;
     pCompressedOutputBuffer = new char[uCompressedSize];
 
@@ -317,7 +317,7 @@ void S4::CMapFile::SaveChunk(unsigned short a2, unsigned short a3, unsigned int 
     unsigned int uRemainingCompressSize; // [esp+18h] [ebp-10h]
     unsigned int uCompressedBufferSize = 0;
     char *       pCompressorIntBuffer = (char *) operator new[](_uSize + 256);
-    memcpy(pCompressorIntBuffer, Src, _uSize);
+    memcpy(pCompressorIntBuffer, _pSrc, _uSize);
     memset(&pCompressorIntBuffer[_uSize], 0, 0x100u);
     LZHLCompressor *pCompressor = LZHLCreateCompressor();
     for(size_t i = 0; i < _uSize; i += 4000000) {
@@ -338,15 +338,15 @@ void S4::CMapFile::SaveChunk(unsigned short a2, unsigned short a3, unsigned int 
     uCRC = S4::CMapFile::Crc(pCompressedOutputBuffer, uSize);
   } else {
     pCompressedOutputBuffer = (char *) operator new[](_uSize);
-    memcpy(pCompressedOutputBuffer, Src, _uSize);
+    memcpy(pCompressedOutputBuffer, _pSrc, _uSize);
     uSize = _uSize;
     uUncompressedSize = -1;
     uCRC = S4::CMapFile::Crc(pCompressedOutputBuffer, _uSize);
   }
 
   SSaveFileChunk Buffer{};
-  Buffer.m_uChunkTypeA = a2;
-  Buffer.m_uChunkTypeB = a3;
+  Buffer.m_uChunkTypeA = _uChunkTypeA;
+  Buffer.m_uChunkTypeB = _uChunkTypeB;
   Buffer.m_uChunkSizeInFile = uSize;
   Buffer.m_uUncompressedSize = uUncompressedSize;
   Buffer.m_uChunkCRC = uCRC;

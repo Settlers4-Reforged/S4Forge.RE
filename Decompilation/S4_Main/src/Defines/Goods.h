@@ -56,4 +56,11 @@ enum S4_GOOD_ENUM {
 };
 #undef X
 
+#define X TO_PAIR
+SConfigTypeString s_sGoodDefines[] = {
+    GOODS
+};
+#undef X
+
+
 #endif //S4_MAIN_GOODS_H

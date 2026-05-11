@@ -20,9 +20,9 @@ class CPersistence * __cdecl CPlant::New(std::istream &a1) {
 
 // address=[0x154a040]
 // Decompiled from CPlant *__thiscall CPlant::CPlant(  CPlant *this,  unsigned int a2,  unsigned int a3,  T_OBJECT_TYPE a4,  int a5,  BYTE _iGoodType,  int a7)
-CPlant::CPlant(int a2, int a3, int a4, int a5, int _iGoodType, int a7) : IDecoObject(a2, a3, a4, a5, a7 != 0) {
+CPlant::CPlant(int a2, int a3, int a4, int a5, int _iGoodType, int _iStage) : IDecoObject(a2, a3, a4, a5, _iStage != 0) {
   this->m_uU1 = 1;
-  this->m_uStage = a7;
+  this->m_uStage = _iStage;
   this->m_iGoodType = _iGoodType;
   this->m_uU5 = 0;
   this->m_wJobPart = this->m_uStage + (unsigned __int16) g_pGfxManager->GetObjectFirstJob(this->m_nType);

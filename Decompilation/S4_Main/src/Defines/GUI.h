@@ -1,13 +1,9 @@
-#ifndef TRANSLATIONS_H
-#define TRANSLATIONS_H
+#ifndef GUI_H
+#define GUI_H
 
 #include "DefineTransformers.h"
 
-const int STRINGID_MAX = 3837;
-const int HACK_STRINGID_MAX = 3842;
-
-// address=[0x36D8690]
-#define TRANSLATIONS \
+#define GUIS \
     X(0, AO_BONUS_BRIEFING_01) \
     X(1, AO_BONUS_BRIEFING_02) \
     X(2, AO_BONUS_BRIEFING_03) \
@@ -3846,11 +3842,12 @@ const int HACK_STRINGID_MAX = 3842;
     X(3835, XMD3_VIKING_TITLE_04) \
     X(3836, TGO_PRIVATE_LOBBY_LBL)
 
-#define X TO_PAIR
+#define X TO_ENUM
 
-SConfigTypeString s_TranslationDefines[] = {
-    TRANSLATIONS
+enum T_S4_GUI {
+    GUIS
 };
+
 #undef X
 
-#endif // TRANSLATIONS_H
+#endif //GUI_H

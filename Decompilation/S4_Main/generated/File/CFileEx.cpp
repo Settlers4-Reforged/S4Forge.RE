@@ -86,9 +86,8 @@ bool  CFileEx::InLibrary(void)const {
   }
   CFile::CFile(&this->CFile);
   this->CFile.__vftable = (IFSNode_vtbl *)&CFileEx::_vftable_;
-  *(vbtable::CFileEx **)((char *)&this->m_pVbtable + this->m_pVbtable->offsetIFileEx[0]) = (vbtable::CFileEx *)&CFileEx::`vftable';
-  *(FILE **)((char *)&this->CFile.m_hFile + this->m_pVbtable->offsetIFileEx[0]) = (FILE *)(this->m_pVbtable->offsetIFileEx[0]
-                                                                                         - 32);
+  *(vbtable::CFileEx **)((char *)&this->m_pVbtable + (unsigned int)this->m_pVbtable->offsetIFileEx) = (vbtable::CFileEx *)&CFileEx::`vftable';
+  *(FILE **)((char *)&this->CFile.m_hFile + (unsigned int)this->m_pVbtable->offsetIFileEx) = (FILE *)&this->m_pVbtable->offsetIFileEx[-8];
   if ( !a2 )
     return this;
   this->m_hFileMemoryHandle = 0;

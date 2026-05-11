@@ -12,20 +12,20 @@
   if ( _iPhases && BBSupportDbgReport(2, "mapobjects\\decoobj\\hive.cpp", 70, "_iPhases == GROW1") == 1 )
     __debugbreak();
   this->m_uU6 = 406;
-  this->? = 1;
-  this->? = _iPhases;
+  this->m_uU1 = 1;
+  this->m_iPhases = _iPhases;
   this->m_uU5 = 0;
   if ( CHive::IsFlowerInSurrounding(this) )
   {
-    ++this->?;
+    ++this->m_iPhases;
     this->m_wJobPart = CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType);
   }
   else
   {
     this->m_wJobPart = CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType) + 1;
   }
-  this->? = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_wJobPart);
-  if ( !this->? && BBSupportDbgReport(2, "mapobjects\\decoobj\\hive.cpp", 98, "m_uCycleFrames") == 1 )
+  this->m_uCycleFrames = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_wJobPart);
+  if ( !this->m_uCycleFrames && BBSupportDbgReport(2, "mapobjects\\decoobj\\hive.cpp", 98, "m_uCycleFrames") == 1 )
     __debugbreak();
   IAnimatedEntity::RegisterForLogicUpdate(this, 31);
   this->m_cFrame = 0;

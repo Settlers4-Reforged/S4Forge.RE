@@ -33,19 +33,18 @@
 char * __cdecl AdvXMLParser::Parser::OpenXMLFile(wchar_t * FileName, long & a2) {
   
   void *Buffer; // [esp+10h] [ebp-80h]
-  _DWORD v4[26]; // [esp+14h] [ebp-7Ch] BYREF
-  int v5; // [esp+7Ch] [ebp-14h] BYREF
-  int v6; // [esp+8Ch] [ebp-4h]
+  CFileEx v4; // [esp+14h] [ebp-7Ch] BYREF
+  int v5; // [esp+8Ch] [ebp-4h]
 
-  CFileEx::CFileEx((CFileEx *)v4, FileName, 6, 0, 1);
-  v6 = 0;
-  *a2 = CFileEx::Size(v4);
+  CFileEx::CFileEx(&v4, FileName, 6, 0, UNUSED_ARG());
+  v5 = 0;
+  *a2 = CFileEx::Size(&v4);
   Buffer = operator new[](*a2 + 1);
-  CFileEx::Read(&v5, Buffer, 1, *a2, "Source\\Xml\\reader.cpp", 61);
+  CFileEx::Read(&v4.IFileEx.__vftable, Buffer, 1, *a2, UNUSED_ARG(), UNUSED_ARG());
   *((_BYTE *)Buffer + *a2) = 0;
-  CFileEx::Close((CFileEx *)&v5, UNUSED_ARG(), UNUSED_ARG());
-  v6 = -1;
-  CFileEx::~CFileEx(v4);
+  CFileEx::Close(&v4.IFileEx, UNUSED_ARG(), UNUSED_ARG());
+  v5 = -1;
+  CFileEx::~CFileEx(&v4);
   return Buffer;
 }
 

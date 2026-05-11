@@ -26,10 +26,10 @@ class CPersistence * __cdecl CDecoObject::New(std::istream & a1) {
   {
     __debugbreak();
   }
-  this->? = 1;
-  this->? = a7 == 0;
-  this->? = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_wJobPart);
-  this->m_cFrame = a6 % this->?;
+  this->m_uU1 = 1;
+  this->m_iPhases = a7 == 0;
+  this->m_uCycleFrames = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_wJobPart);
+  this->m_cFrame = a6 % this->m_uCycleFrames;
   this->m_uTickCounter = CStateGame::GetTickCounter(g_pGame);
   return this;
 }
@@ -43,15 +43,15 @@ struct SGfxObjectInfo *  CDecoObject::GetGfxInfos(void) {
 
   v2 = (unsigned __int16)CStateGame::GetTickCounter(g_pGame) - this->m_uTickCounter;
   this->m_uTickCounter = CStateGame::GetTickCounter(g_pGame);
-  if ( v2 && this->? > 1u )
+  if ( v2 && this->m_uCycleFrames > 1u )
   {
-    if ( this->? == 1 )
+    if ( this->m_iPhases == 1 )
     {
-      if ( this->? )
+      if ( this->m_uU1 )
       {
-        this->m_cFrame = (v2 + this->m_cFrame) % this->?;
-        if ( this->m_cFrame == this->? - 1 )
-          this->? = !this->?;
+        this->m_cFrame = (v2 + this->m_cFrame) % this->m_uCycleFrames;
+        if ( this->m_cFrame == this->m_uCycleFrames - 1 )
+          this->m_uU1 = !this->m_uU1;
       }
       else
       {
@@ -60,12 +60,12 @@ struct SGfxObjectInfo *  CDecoObject::GetGfxInfos(void) {
         else
           this->m_cFrame = 0;
         if ( !this->m_cFrame )
-          this->? = !this->?;
+          this->m_uU1 = !this->m_uU1;
       }
     }
     else
     {
-      this->m_cFrame = (v2 + this->m_cFrame) % this->?;
+      this->m_cFrame = (v2 + this->m_cFrame) % this->m_uCycleFrames;
     }
   }
   CGfxManager::GetObjectGfxInfo(g_pGfxManager, &IEntity::m_sGfxInfo, this->m_wJobPart, this->m_cFrame, 1);
@@ -114,9 +114,9 @@ void __cdecl CDecoObject::operator delete(void * a1) {
     CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
     _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
   }
-  operator^<bool>(a2, &this->?);
-  operator^<bool>(a2, &this->?);
-  operator^<unsigned char>(a2, &this->?);
+  operator^<bool>(a2, &this->m_uU1);
+  operator^<bool>(a2, &this->m_iPhases);
+  operator^<unsigned char>(a2, &this->m_uCycleFrames);
   operator^<unsigned short>(a2, &this->m_uTickCounter);
   v6 = -1;
   return this;
@@ -132,9 +132,9 @@ void  CDecoObject::Store(std::ostream & a1) {
   IDecoObject::Store(this, a1);
   v2 = 1;
   operator^<unsigned int>(a1, &v2);
-  operator^<bool>(a1, &this->?);
-  operator^<bool>(a1, (bool *)&this->?);
-  operator^<unsigned char>(a1, &this->?);
+  operator^<bool>(a1, &this->m_uU1);
+  operator^<bool>(a1, (bool *)&this->m_iPhases);
+  operator^<unsigned char>(a1, &this->m_uCycleFrames);
   operator^<unsigned short>(a1, &this->m_uTickCounter);
 }
 

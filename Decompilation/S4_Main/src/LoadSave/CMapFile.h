@@ -30,7 +30,7 @@ namespace S4 {
         void const *LoadChunk(unsigned int a2, unsigned int a3);
 
         // address=[0x13dad70]
-        void const *LoadChunk(unsigned short a2, unsigned short a3, int &a4, int *_uReadSize);
+        void const *LoadChunk(unsigned short _uChunkTypeA, unsigned short _uChunkTypeB, int &a4, int *_uReadSize);
 
         // address=[0x13db3e0]
         void CloseChunk(unsigned short a2, unsigned short a3);
@@ -39,7 +39,7 @@ namespace S4 {
         void UploadBuffer(unsigned int a2, unsigned int a3, void const *_pBuffer, unsigned int _uSize, int a6);
 
         // address=[0x13db820]
-        void SaveChunk(unsigned short a2, unsigned short a3, unsigned int a4, void const *a5, bool a6);
+        void SaveChunk(unsigned short _uChunkTypeA, unsigned short _uChunkTypeB, unsigned int a4, void const *a5, bool _bCompress);
 
         // address=[0x13db990]
         bool LoadChunkObject(unsigned short a2, unsigned short a3, IS4ChunkObject &a4, enum T_S4_MAP_CHUNK_STATUS a5);

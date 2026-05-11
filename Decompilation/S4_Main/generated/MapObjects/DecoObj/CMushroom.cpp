@@ -9,16 +9,16 @@
   
   IDecoObject::IDecoObject(this, a2, a3, a4, a5, a6 != 0);
   this->__vftable = (IAnimatedEntity_vtbl *)&CMushroom::_vftable_;
-  this->? = 1;
-  this->? = a6;
+  this->m_uU1 = 1;
+  this->m_iPhases = a6;
   this->m_uU0 = 0;
-  this->m_wJobPart = this->? + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType);
-  this->? = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_wJobPart);
-  if ( !this->? && BBSupportDbgReport(2, "MapObjects\\DecoObj\\Mushroom.cpp", 82, "m_uCycleFrames") == 1 )
+  this->m_wJobPart = this->m_iPhases + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType);
+  this->m_uCycleFrames = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_wJobPart);
+  if ( !this->m_uCycleFrames && BBSupportDbgReport(2, "MapObjects\\DecoObj\\Mushroom.cpp", 82, "m_uCycleFrames") == 1 )
     __debugbreak();
-  if ( this->? )
+  if ( this->m_iPhases )
   {
-    this->m_cFrame = CStateGame::Rand(g_pGame) % this->?;
+    this->m_cFrame = CStateGame::Rand(g_pGame) % this->m_uCycleFrames;
     IEntity::SetFlagBits(this, EntityFlag_Ready);
   }
   else
@@ -37,13 +37,13 @@
   IDecoObject::IDecoObject(this, a2, a3, a4, a5);
   this->__vftable = (IAnimatedEntity_vtbl *)&CMushroom::_vftable_;
   this->m_uU0 = 0;
-  this->? = 3;
-  this->m_wJobPart = this->? + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType);
-  this->? = a2->?;
-  if ( !this->? && BBSupportDbgReport(2, "MapObjects\\DecoObj\\Mushroom.cpp", 129, "m_uCycleFrames") == 1 )
+  this->m_iPhases = 3;
+  this->m_wJobPart = this->m_iPhases + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType);
+  this->m_uCycleFrames = a2->m_uCycleFrames;
+  if ( !this->m_uCycleFrames && BBSupportDbgReport(2, "MapObjects\\DecoObj\\Mushroom.cpp", 129, "m_uCycleFrames") == 1 )
     __debugbreak();
   this->m_cFrame = a2->m_cFrame;
-  this->? = 1;
+  this->m_uU1 = 1;
   return this;
 }
 
@@ -67,7 +67,7 @@ void  CMushroom::LogicUpdate(void) {
   unsigned int v4; // [esp-Ch] [ebp-18h]
   T_OBJECT_TYPE v5; // [esp-8h] [ebp-14h]
 
-  switch ( this->? )
+  switch ( this->m_iPhases )
   {
     case 0u:
     case 1u:
@@ -75,9 +75,10 @@ void  CMushroom::LogicUpdate(void) {
       if ( ++this->m_uU0 < 5 )
         goto LABEL_10;
       this->m_uU0 = 0;
-      ++this->?;
-      this->m_wJobPart = this->? + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType);
-      if ( this->? != 3 )
+      ++this->m_iPhases;
+      this->m_wJobPart = this->m_iPhases
+                       + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType);
+      if ( this->m_iPhases != 3 )
         goto LABEL_10;
       v5 = IEntity::Type(this);
       v4 = IEntity::Y(this);
@@ -124,7 +125,7 @@ struct SGfxObjectInfo *  CMushroom::GetGfxInfos(void) {
   v2 = CStateGame::GetTickCounter(g_pGame);
   IAnimatedEntity::SetLastUpdateTick(this, v2);
   if ( v4 )
-    this->m_cFrame = (v4 + (unsigned int)this->m_cFrame) % this->?;
+    this->m_cFrame = (v4 + (unsigned int)this->m_cFrame) % this->m_uCycleFrames;
   CGfxManager::GetObjectGfxInfo(g_pGfxManager, &IEntity::m_sGfxInfo, this->m_wJobPart, this->m_cFrame, 1);
   byte_40FE518 = 16;
   byte_40FE51A = IEntity::IsVisible(this);
@@ -143,11 +144,11 @@ void  CMushroom::Decrease(int a2) {
     __debugbreak();
   }
   IEntity::ClearFlagBits(this, EntityFlag_Ready);
-  ++this->?;
+  ++this->m_iPhases;
   this->m_cFrame = 0;
-  this->m_wJobPart = this->? + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType);
-  this->? = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_wJobPart);
-  if ( !this->? && BBSupportDbgReport(2, "MapObjects\\DecoObj\\Mushroom.cpp", 345, "m_uCycleFrames") == 1 )
+  this->m_wJobPart = this->m_iPhases + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType);
+  this->m_uCycleFrames = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_wJobPart);
+  if ( !this->m_uCycleFrames && BBSupportDbgReport(2, "MapObjects\\DecoObj\\Mushroom.cpp", 345, "m_uCycleFrames") == 1 )
     __debugbreak();
   this->m_uU0 = 0;
   return IAnimatedEntity::RegisterForLogicUpdate(this, 31);
@@ -197,9 +198,9 @@ void __cdecl CMushroom::operator delete(void * a1) {
     CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
     _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
   }
-  operator^<bool>(a1, &this->?);
-  operator^<unsigned char>(a1, &this->?);
-  operator^<unsigned char>(a1, &this->?);
+  operator^<bool>(a1, &this->m_uU1);
+  operator^<unsigned char>(a1, &this->m_iPhases);
+  operator^<unsigned char>(a1, &this->m_uCycleFrames);
   operator^<int>(a1, &this->m_uU0);
   v6 = -1;
   return this;
@@ -215,9 +216,9 @@ void  CMushroom::Store(std::ostream & a1) {
   IDecoObject::Store(this, a1);
   v2 = 1;
   operator^<unsigned int>(a1, &v2);
-  operator^<bool>(a1, &this->?);
-  operator^<unsigned char>(a1, &this->?);
-  operator^<unsigned char>(a1, &this->?);
+  operator^<bool>(a1, &this->m_uU1);
+  operator^<unsigned char>(a1, &this->m_iPhases);
+  operator^<unsigned char>(a1, &this->m_uCycleFrames);
   operator^<int>(a1, &this->m_uU0);
 }
 

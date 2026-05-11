@@ -97,4 +97,10 @@ enum S4_BUILDING_ENUM {
 };
 #undef X
 
+#define X TO_PAIR
+SConfigTypeString s_sBuildingDefines[] = {
+    BUILDINGS
+};
+#undef X
+
 #endif //S4_MAIN_BUILDINGS_H

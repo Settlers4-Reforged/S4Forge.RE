@@ -3,15 +3,9 @@
 
 #include "defines.h"
 #include "IConfigManager.h"
+#include "Defines/DefineTransformers.h"
 
-struct SConfigTypeString
-{
-    int m_iId;
-    char *m_spName;
-};
-
-class CConfigManager : public IConfigManager
-{
+class CConfigManager : public IConfigManager {
 public:
     // address=[0x2ef1280]
     virtual ~CConfigManager(void);
@@ -47,7 +41,7 @@ public:
     virtual CConfigVar *GetConfigVar(char const *Str, char const *a3);
 
     // address=[0x2ef1cc0]
-    virtual void AddDefines(struct SConfigTypeString const *a2, int a3);
+    virtual void AddDefines(SConfigTypeString const *a2, int a3);
 
     // address=[0x2ef1d70]
     virtual int GetDefineValue(char const *_spDefineName);
@@ -100,7 +94,7 @@ protected:
 
     // Type information members
 public:
-    std::map<std::string, int> m_mSectionIdMap;
+    std::map<std::string, int>        m_mSectionIdMap;
     std::list<class CConfigSection *> m_lSections;
 };
 
