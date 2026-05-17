@@ -3,23 +3,28 @@
 
 #include "DefineTransformers.h"
 
-#define RACES \
-    X(0, ROMAN) \
-    X(1, VIKING) \
-    X(2, MAYA) \
-    X(3, DARK) \
-    X(4, TROJAN)
-
-#define X(id, name) #name
 const char *s_spRaceNames[] = {
-    RACES
+    "ROMAN",
+    "VIKING",
+    "MAYA",
+    "DARK",
+    "TROJAN",
 };
-#undef X
+
+#define RACES \
+X(0, RACE_ROMAN) \
+X(1, RACE_VIKING) \
+X(2, RACE_MAYA) \
+X(3, RACE_DARK) \
+X(4, RACE_TROJAN)
+
 
 #define X TO_ENUM
 
 enum T_S4_RACE {
+    RACE_FIRST = 0,
     RACES
+    RACE_MAX
 };
 #undef X
 

@@ -3853,4 +3853,12 @@ SConfigTypeString s_TranslationDefines[] = {
 };
 #undef X
 
+#define X TO_ENUM
+
+enum T_S4_TRANSLATION {
+    TRANSLATIONS
+};
+
+#undef X
+
 #endif // TRANSLATIONS_H

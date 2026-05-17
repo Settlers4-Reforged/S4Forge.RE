@@ -3,11 +3,6 @@
 
 #include "defines.h"
 
-struct SConfigTypeString {
-    int         m_iNr;
-    const char *m_sName;
-};
-
 enum EScriptType {
     ESCRIPT_TYPE_INT = 0,
     ESCRIPT_TYPE_FLOAT,
