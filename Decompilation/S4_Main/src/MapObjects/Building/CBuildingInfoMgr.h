@@ -39,7 +39,7 @@ public:
         _DWORD m_iMiniFlagYOffset;
 
         char m_iBBRMinX;
-        char m_iBBRMaY;
+        char m_iBBRMaxX;
         char m_iBBRMinY;
         char m_iBBRMaxY;
 
@@ -120,7 +120,7 @@ public:
         WORD   m_iEffectX;
         WORD   m_iEffectY;
         BYTE   m_iEffectDuration;
-        BYTE   m_bSmoke;
+        BYTE   m_bEffectSmoke;
         _DWORD m_iEffectSoundId;
         BYTE   m_iEffectSoundRandomness;
     };
