@@ -205,7 +205,7 @@ public:
     class CAIEntityInfo *       m_pFirstEntity;
     class CAIEntityInfo *       m_pLastEntity;
     class CAITaskForce *        m_pPrevTaskForce;
-    class CAITaskForce *        m_pFirstTaskForce;
+    class CAITaskForce *        m_pNextTaskForce;
     CAITaskForce *              m_pPrevTaskForceGroupMember;
     class CAITaskForce *        m_pNextTaskForceGroupMember;
     class CAITaskForceGroup *   m_pTaskForceGroup;

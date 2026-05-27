@@ -758,7 +758,7 @@ CAITaskForce::CAITaskForce(int _iOwnerId, enum T_AI_TASK_FORCE_CLASS _tClass, en
   this->m_pFirstEntity = 0;
   this->m_pLastEntity = 0;
   this->m_pPrevTaskForce = 0;
-  this->m_pFirstTaskForce = 0;
+  this->m_pNextTaskForce = 0;
   this->m_pPrevTaskForceGroupMember = 0;
   this->m_pNextTaskForceGroupMember = 0;
   this->m_pTaskForceGroup = 0;

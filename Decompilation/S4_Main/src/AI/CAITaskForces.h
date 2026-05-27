@@ -2,11 +2,12 @@
 #define CAITASKFORCES_H
 
 #include "defines.h"
+#include "Defines/AI.h"
 
 class CAITaskForces {
 public:
     // address=[0x13039d0]
-    static enum T_AI_TASK_FORCE_CLASS __cdecl TaskForceClass(enum T_AI_TASK_FORCE_TYPE a1);
+    static T_AI_TASK_FORCE_CLASS __cdecl TaskForceClass(enum T_AI_TASK_FORCE_TYPE a1);
 
     // address=[0x1328e40]
     static void __cdecl Init(void);
