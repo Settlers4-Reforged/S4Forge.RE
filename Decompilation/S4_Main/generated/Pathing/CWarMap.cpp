@@ -124,7 +124,7 @@ void __cdecl CWarMap::AddEntity(class IEntity & target) {
   
   int packedXY; // eax MAPDST
 
-  if ( *IEntity::WarMapNode(target) != 0xFFFF )
+  if ( IEntity::WarMapNode(target)->m_uNextPrev != 0xFFFF )
   {
     packedXY = IEntity::PackedXY(target);
     CWarMap::RemoveEntityEx(target, packedXY);

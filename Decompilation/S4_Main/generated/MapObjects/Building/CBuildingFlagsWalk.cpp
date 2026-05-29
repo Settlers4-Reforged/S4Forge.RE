@@ -1,3 +1,4 @@
+#if FALSE
 #include "CBuildingFlagsWalk.h"
 
 // Definitions for class CBuildingFlagsWalk
@@ -72,3 +73,4 @@ bool  CBuildingFlagsWalk::NextPosition(void) {
 }
 
 
+#endif // Already implemented

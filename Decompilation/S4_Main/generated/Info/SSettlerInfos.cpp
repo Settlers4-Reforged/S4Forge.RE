@@ -29,7 +29,7 @@ struct CSettlerMgr::SSettlerInfos &  CSettlerMgr::SSettlerInfos::operator=(struc
   
   this->m_uRole = a2->m_uRole;
   this->m_bSpeed = a2->m_bSpeed;
-  this->m_bHealth = a2->m_bHealth;
+  this->m_iMaxLifePoints = a2->m_iMaxLifePoints;
   this->m_bDamage = a2->m_bDamage;
   this->m_bArmor = a2->m_bArmor;
   this->m_uTool = a2->m_uTool;

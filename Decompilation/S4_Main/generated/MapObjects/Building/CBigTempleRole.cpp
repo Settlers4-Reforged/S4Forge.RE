@@ -46,7 +46,7 @@ void  CBigTempleRole::LogicUpdate(class CBuilding * a2) {
   }
   else if ( v9 == 3 )
   {
-    if ( IEntity::FlagBits(a2, (EntityFlag)0x1000u) )
+    if ( IEntity::FlagBits(a2, EntityFlag_NotStriking) )
       CBigTempleRole::ThrowOutPriest(a2);
     result = this;
     if ( *(unsigned __int8 *)(this + 380) < 0xAu )

@@ -39,9 +39,9 @@ bool  IDecoObject::IsStaticInstance(void)const {
   }
   if ( _iId <= 0 && BBSupportDbgReport(2, "MapObjects\\DecoObj\\DecoObj.cpp", 66, "_iId > 0") == 1 )
     __debugbreak();
-  this->m_objType = LANDSCAPE_OBJ;
+  this->m_uObjType = LANDSCAPE_OBJ;
   this->m_nType = _iDecoObjectType;
-  this->m_cFrame = 0;
+  this->m_iFrame = 0;
   IEntity::SetFlagBits(this, EntityFlag_Visible);
   if ( a6 )
     IEntity::SetPosition(this, 0, 0);
@@ -89,13 +89,13 @@ bool  IDecoObject::IsStaticInstance(void)const {
   IAnimatedEntity::IAnimatedEntity(this, _iId);
   this->__vftable = (IAnimatedEntity_vtbl *)&IDecoObject::_vftable_;
   this->m_bStaticInstance = 0;
-  if ( _rStaticDecoObject->m_objType != LANDSCAPE_OBJ
+  if ( _rStaticDecoObject->m_uObjType != LANDSCAPE_OBJ
     && BBSupportDbgReportF(
          2,
          "MapObjects\\DecoObj\\DecoObj.cpp",
          133,
          "%u == LANDSCAPE_OBJ",
-         _rStaticDecoObject->m_objType) == 1 )
+         _rStaticDecoObject->m_uObjType) == 1 )
   {
     __debugbreak();
   }
@@ -111,9 +111,9 @@ bool  IDecoObject::IsStaticInstance(void)const {
   {
     __debugbreak();
   }
-  this->m_objType = LANDSCAPE_OBJ;
+  this->m_uObjType = LANDSCAPE_OBJ;
   this->m_nType = _rStaticDecoObject->m_nType;
-  this->m_cFrame = 0;
+  this->m_iFrame = 0;
   IEntity::SetFlagBits(this, EntityFlag_Visible);
   if ( CWorldManager::ObjectId(_iX, _iY) )
   {

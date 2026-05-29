@@ -144,8 +144,8 @@ void  CGfxManager::GetUserLogoGfxInfo(struct SGfxObjectInfo & userLogoGfxInfo, u
 
 
 // address=[0x1361af0]
-// Decompiled from void __thiscall CGfxManager::GetBuildingGfxInfo(  CGfxManager *this,  SGfxObjectInfo *a2,  uint _iRace,  uint a4,  uint _iFlags,  CGfxManager::SBuildingFX *_argBuildingFX)
-void  CGfxManager::GetBuildingGfxInfo(struct SGfxObjectInfo & a2, unsigned int _iRace, unsigned int a4, unsigned int _iFlags, struct SBuildingFX * _argBuildingFX) {
+// Decompiled from void __thiscall CGfxManager::GetBuildingGfxInfo(  CGfxManager *this,  SGfxObjectInfo *_rInfo,  uint _iRace,  uint _iBuilding,  uint _iFlags,  CGfxManager::SBuildingFX *_argBuildingFX)
+void  CGfxManager::GetBuildingGfxInfo(struct SGfxObjectInfo & _rInfo, unsigned int _iRace, unsigned int _iBuilding, unsigned int _iFlags, struct SBuildingFX * _argBuildingFX) {
   
   unsigned int iGfxFile; // [esp+20h] [ebp-8h]
   unsigned int i; // [esp+24h] [ebp-4h]
@@ -157,21 +157,21 @@ void  CGfxManager::GetBuildingGfxInfo(struct SGfxObjectInfo & a2, unsigned int _
   {
     __debugbreak();
   }
-  if ( a4 >= this->m_pFileGfxJobs[iGfxFile].m_iCount
+  if ( _iBuilding >= this->m_pFileGfxJobs[iGfxFile].m_iCount
     && BBSupportDbgReport(2, "GfxManager.cpp", 1331, "_iBuilding < m_pFileGfxJobs[ iGfxFile ].iCount") == 1 )
   {
     __debugbreak();
   }
-  iBuilding = a4 >= this->m_pFileGfxJobs[iGfxFile].m_iCount ? 0 : a4;
+  iBuilding = _iBuilding >= this->m_pFileGfxJobs[iGfxFile].m_iCount ? 0 : _iBuilding;
   dword_3ECDD6C = (int)this->m_pFileGfxJobs[iGfxFile].m_pItem[iBuilding + 5];
   if ( (_iFlags & 1) != 0 && (_iFlags & 2) != 0 )
   {
     dword_3ECDD74 = *(_DWORD *)(dword_3ECDD6C + 4);
     dword_3ECDD70 = *(_DWORD *)dword_3ECDD74;
-    a2->m_pGfxData = (BYTE *)dword_3ECDD70;
+    _rInfo->m_pGfxData = (BYTE *)dword_3ECDD70;
     dword_3ECDD74 = *(_DWORD *)dword_3ECDD6C;
     dword_3ECDD70 = *(_DWORD *)dword_3ECDD74;
-    a2->dword58 = dword_3ECDD70;
+    _rInfo->m_pBuildLayerGfxData = dword_3ECDD70;
   }
   else
   {
@@ -179,18 +179,18 @@ void  CGfxManager::GetBuildingGfxInfo(struct SGfxObjectInfo & a2, unsigned int _
     {
       dword_3ECDD74 = *(_DWORD *)(dword_3ECDD6C + 4);
       dword_3ECDD70 = *(_DWORD *)dword_3ECDD74;
-      a2->m_pGfxData = (BYTE *)dword_3ECDD70;
+      _rInfo->m_pGfxData = (BYTE *)dword_3ECDD70;
     }
     if ( (_iFlags & 2) != 0 )
     {
       dword_3ECDD74 = *(_DWORD *)dword_3ECDD6C;
       dword_3ECDD70 = *(_DWORD *)dword_3ECDD74;
-      a2->m_pGfxData = (BYTE *)dword_3ECDD70;
+      _rInfo->m_pGfxData = (BYTE *)dword_3ECDD70;
     }
   }
   if ( _argBuildingFX )
   {
-    for ( i = 0; i < 0xA; ++i )
+    for ( i = 0; i < 10; ++i )
     {
       if ( _argBuildingFX[i].m_iBuildingDefine )
       {
@@ -224,7 +224,7 @@ void  CGfxManager::GetBuildingGfxInfo(struct SGfxObjectInfo & a2, unsigned int _
                                     - 1;
         dword_3ECDD70 = (int)this->m_pFileGfxDirections[iGfxFile].m_pItem[_argBuildingFX[i].m_iBuildingDefine + 5];
         dword_3ECDD74 = *(_DWORD *)(dword_3ECDD70 + 4 * _argBuildingFX[i].m_iFrame);
-        *(_DWORD *)&a2->gapC[4 * i + 9] = dword_3ECDD74;
+        _rInfo->m_vFXFrameData[i] = dword_3ECDD74;
       }
     }
   }
@@ -232,16 +232,16 @@ void  CGfxManager::GetBuildingGfxInfo(struct SGfxObjectInfo & a2, unsigned int _
   {
     dword_3ECDD74 = *(_DWORD *)(dword_3ECDD6C + 8);
     dword_3ECDD70 = *(_DWORD *)dword_3ECDD74;
-    a2->dword34 = dword_3ECDD70;
+    _rInfo->m_vFXFrameData[5] = dword_3ECDD70;
   }
   if ( !this->m_pFilePalIndex[iGfxFile]
     && BBSupportDbgReportF(2, "GfxManager.cpp", 1407, "m_pFilePalIndex[ %u ]", iGfxFile) == 1 )
   {
     __debugbreak();
   }
-  a2->m_pPalData = this->m_pFilePalIndex[iGfxFile][iBuilding + 5];
+  _rInfo->m_pPalData = this->m_pFilePalIndex[iGfxFile][iBuilding + 5];
   sprintf(sGfxDebugBuffer, "Building Race: %u, Building: %u, Flags: 0x%x", _iRace, iBuilding, _iFlags);
-  CGfxManager::Debug_Check_LayerBlock(this, iGfxFile, a2);
+  CGfxManager::Debug_Check_LayerBlock(this, iGfxFile, _rInfo);
 }
 
 
@@ -315,16 +315,16 @@ unsigned int  CGfxManager::GetObjectFirstJob(unsigned int a2) {
 
 
 // address=[0x1362210]
-// Decompiled from void __thiscall CGfxManager::GetSettlerGfxInfo(  CGfxManager *this,  struct SGfxObjectInfo *a2,  unsigned int _iRace,  unsigned int _iJob,  unsigned int _iFrame,  unsigned int _iDir)
-void  CGfxManager::GetSettlerGfxInfo(struct SGfxObjectInfo & a2, unsigned int _iRace, unsigned int _iJob, unsigned int _iFrame, unsigned int _iDir) {
+// Decompiled from void __thiscall CGfxManager::GetSettlerGfxInfo(  CGfxManager *this,  struct SGfxObjectInfo *_rInfo,  unsigned int _iRace,  unsigned int _iJob,  unsigned int _iFrame,  unsigned int _iDir)
+void  CGfxManager::GetSettlerGfxInfo(struct SGfxObjectInfo & _rInfo, unsigned int _iRace, unsigned int _iJob, unsigned int _iFrame, unsigned int _iDir) {
   
-  unsigned int v7; // [esp+Ch] [ebp-8h]
+  unsigned int iGfxFile; // [esp+Ch] [ebp-8h]
   int iJob; // [esp+24h] [ebp+10h]
-  unsigned int _iFramea; // [esp+28h] [ebp+14h]
+  unsigned int iFrame; // [esp+28h] [ebp+14h]
 
-  v7 = _iRace + 20;
+  iGfxFile = _iRace + 20;
   if ( !this->m_pFileGfxJobs[_iRace + 20].m_pItem
-    && BBSupportDbgReportF(2, "GfxManager.cpp", 967, "m_pFileGfxJobs[ %u ].pItem", v7) == 1 )
+    && BBSupportDbgReportF(2, "GfxManager.cpp", 967, "m_pFileGfxJobs[ %u ].pItem", iGfxFile) == 1 )
   {
     __debugbreak();
   }
@@ -336,16 +336,19 @@ void  CGfxManager::GetSettlerGfxInfo(struct SGfxObjectInfo & a2, unsigned int _i
   {
     __debugbreak();
   }
-  _iFramea = _iFrame >= CGfxManager::GetSettlerJobFrameCount(this, _iRace, iJob, 2) ? 0 : _iFrame;
-  dword_3ECDD5C = (int)this->m_pFileGfxJobs[v7].m_pItem[iJob + 5];
-  dword_3ECDD60 = *(_DWORD *)(dword_3ECDD5C + 4 * _iDir);
-  dword_3ECDD5C = *(_DWORD *)(dword_3ECDD60 + 4 * _iFramea);
-  a2->m_pGfxData = (char *)dword_3ECDD5C;
-  if ( !this->m_pFilePalIndex[v7] && BBSupportDbgReportF(2, "GfxManager.cpp", 985, "m_pFilePalIndex[ %u ]", v7) == 1 )
+  iFrame = _iFrame >= CGfxManager::GetSettlerJobFrameCount(this, _iRace, iJob, 2) ? 0 : _iFrame;
+  dword_3ECDD5C = (int *)this->m_pFileGfxJobs[iGfxFile].m_pItem[iJob + 5];
+  dword_3ECDD60 = (int *)dword_3ECDD5C[_iDir];
+  dword_3ECDD5C = (int *)dword_3ECDD60[iFrame];
+  _rInfo->m_pGfxData = (BYTE *)dword_3ECDD5C;
+  if ( !this->m_pFilePalIndex[iGfxFile]
+    && BBSupportDbgReportF(2, "GfxManager.cpp", 985, "m_pFilePalIndex[ %u ]", iGfxFile) == 1 )
+  {
     __debugbreak();
-  a2->m_pPalData = this->m_pFilePalIndex[v7][iJob + 5];
-  sprintf(sGfxDebugBuffer, "Settler Race: %u, Job: %u, Frame: %u, Direction: %u", _iRace, iJob, _iFramea, _iDir);
-  CGfxManager::Debug_Check_LayerBlock(this, v7, a2);
+  }
+  _rInfo->m_pPalData = this->m_pFilePalIndex[iGfxFile][iJob + 5];
+  sprintf(sGfxDebugBuffer, "Settler Race: %u, Job: %u, Frame: %u, Direction: %u", _iRace, iJob, iFrame, _iDir);
+  CGfxManager::Debug_Check_LayerBlock(this, iGfxFile, _rInfo);
 }
 
 
@@ -397,16 +400,16 @@ void  CGfxManager::GetPatchSettlerGfxInfo(struct SGfxPatchObject & a2, unsigned 
       _iFrame);
     _iJob = 0;
   }
-  dword_3ECDD64 = (int)this->m_pFileGfxJobs[iGfxFile].m_pItem[_iJob + 5];
-  dword_3ECDD68 = *(_DWORD *)(dword_3ECDD64 + 4 * _iDir);
-  dword_3ECDD64 = *(_DWORD *)(dword_3ECDD68 + 4 * _iFrame);
-  *(_DWORD *)a2 = dword_3ECDD64;
+  dword_3ECDD64 = (int *)this->m_pFileGfxJobs[iGfxFile].m_pItem[_iJob + 5];
+  dword_3ECDD68 = (int *)dword_3ECDD64[_iDir];
+  dword_3ECDD64 = (int *)dword_3ECDD68[_iFrame];
+  a2->m_pGfxData = (char *)dword_3ECDD64;
   if ( !this->m_pFilePalIndex[iGfxFile]
     && BBSupportDbgReportF(2, "GfxManager.cpp", 1025, "m_pFilePalIndex[ %u ]", iGfxFile) == 1 )
   {
     __debugbreak();
   }
-  *((_DWORD *)a2 + 1) = this->m_pFilePalIndex[iGfxFile][_iJob + 5];
+  a2->m_pPalData = this->m_pFilePalIndex[iGfxFile][_iJob + 5];
   sprintf(sGfxDebugBuffer, "Patch Settler Race: %u, Job: %u, Frame: %u, Direction: %u", _iRace, _iJob, _iFrame, _iDir);
   return CGfxManager::Debug_Check_PatchLayerBlock(this, iGfxFile, a2);
 }
@@ -1056,7 +1059,7 @@ unsigned int  CGfxManager::GetJobFrameCount(unsigned int _iGfxFile, unsigned int
         _iJob = 0;
       }
       v8 = (char *)*((_DWORD *)this->m_pFileGfxJobs[_iGfxFile].m_pItem + 5);
-      v6 = *(_DWORD *)(*(_DWORD *)&this->m_pFileGfxDirections[8 * _iGfxFile] + 20);
+      v6 = *((_DWORD *)this->m_pFileGfxDirections[_iGfxFile].m_pItem + 5);
       iDir = _iDir;
       v13 = this->m_pFileGfxJobs[_iGfxFile].m_pItem[_iJob + 5];
       if ( v13 == v8 )
@@ -1105,24 +1108,24 @@ unsigned int  CGfxManager::GetJobFrameCount(unsigned int _iGfxFile, unsigned int
     }
     else
     {
-      if ( _iJob >= *(_DWORD *)&this->m_pFileGfxDirections[8 * _iGfxFile + 4] )
+      if ( _iJob >= this->m_pFileGfxDirections[_iGfxFile].m_iCount )
       {
         BBSupportTracePrintF(2, "GfxManager: Invalid Job#%d for GfxFile#%d and Direction#%d", _iJob, _iGfxFile, _iDir);
         _iJob = 0;
       }
       v9 = 0;
-      for ( i = _iJob + 1; i < *(_DWORD *)&this->m_pFileGfxDirections[8 * _iGfxFile + 4]; ++i )
+      for ( i = _iJob + 1; i < this->m_pFileGfxDirections[_iGfxFile].m_iCount; ++i )
       {
-        if ( *(char ***)(*(_DWORD *)&this->m_pFileGfxDirections[8 * _iGfxFile] + 4 * i + 20) != this->m_pFileGfxFrames[_iGfxFile].m_pItem
-                                                                                              + 5 )
+        if ( this->m_pFileGfxDirections[_iGfxFile].m_pItem[i + 5] != (char *)this->m_pFileGfxFrames[_iGfxFile].m_pItem
+                                                                   + 20 )
         {
-          v9 = *(char **)(*(_DWORD *)&this->m_pFileGfxDirections[8 * _iGfxFile] + 4 * i + 20);
+          v9 = this->m_pFileGfxDirections[_iGfxFile].m_pItem[i + 5];
           break;
         }
       }
       if ( !v9 )
         v9 = (char *)this->m_pFileGfxFrames[_iGfxFile].m_pItem + this->m_pFileGfxFrames[_iGfxFile].m_iCount + 5;
-      return (unsigned int)&v9[-*(_DWORD *)(*(_DWORD *)&this->m_pFileGfxDirections[8 * _iGfxFile] + 4 * _iJob + 20)] >> 2;
+      return (unsigned int)(v9 - this->m_pFileGfxDirections[_iGfxFile].m_pItem[_iJob + 5]) >> 2;
     }
   }
   else

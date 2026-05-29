@@ -14,10 +14,10 @@ class CDestructionManager & __cdecl CDestructionManager::Instance(void) {
 
 
 // address=[0x1426a30]
-// Decompiled from int __thiscall CDestructionManager::RegisterDestructor(CDestructionManager *this, struct CDestructor *a2)
+// Decompiled from _DWORD *__thiscall CDestructionManager::RegisterDestructor(CDestructionManager *this, struct CDestructor *a2)
 void  CDestructionManager::RegisterDestructor(class CDestructor * a2) {
   
-  return std::vector<CDestructor *>::push_back(&a2);
+  return std::vector<CDestructor *>::push_back(this, (int)&a2);
 }
 
 

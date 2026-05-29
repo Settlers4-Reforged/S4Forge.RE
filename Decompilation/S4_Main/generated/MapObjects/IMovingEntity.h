@@ -89,16 +89,15 @@ protected:
 
     // Type information members
 public:
-    BYTE m_cDirection;
-    BYTE m_iDistance;
-    unsigned __int8 m_cDisplacementCosts;
-    BYTE pad;
+    char m_iDirection;
+    unsigned __int8 m_iDistance;
+    unsigned __int8 m_iDisplacementCosts;
     __int16 m_iToDoSize;
     WORD unk_4A;
     DWORD unk_4c;
     struct CWalking * m_pWalkin;
-    DWORD m_pToDoList;
-    std::list m_cCurrentToDoItemIter;
+    std::list * m_pToDoList;
+    std::list::iterator m_cCurrentToDoItemIter;
 
 };
 

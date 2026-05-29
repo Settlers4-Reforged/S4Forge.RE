@@ -83,9 +83,9 @@ protected:
 
     // Type information members
 public:
-    BYTE m_cFrame;
+    BYTE m_iFrame;
     BYTE m_cAttackerPlayerId;
-    WORD m_wJobPart;
+    WORD m_iJobPart;
     WORD m_wPrevEntity;
     WORD m_wNextEntity;
     DWORD m_uLastUpdateTick;

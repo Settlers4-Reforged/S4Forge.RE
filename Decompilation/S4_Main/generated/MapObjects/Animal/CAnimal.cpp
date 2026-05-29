@@ -117,13 +117,13 @@ struct SGfxObjectInfo *  CAnimal::GetGfxInfos(void) {
   CGfxManager::GetAnimalGfxInfo(
     g_pGfxManager,
     (struct SGfxObjectInfo *)&IEntity::m_sGfxInfo,
-    this->m_wJobPart,
-    (char)this->m_cDirection,
-    this->m_cFrame);
-  byte_40FE51D = this->m_cDirection;
-  byte_40FE51C = this->m_iDistance;
-  byte_40FE518 = this->m_objType;
-  byte_40FE51A = IEntity::IsVisible(this);
+    this->m_iJobPart,
+    (char)this->m_iDirection,
+    this->m_iFrame);
+  MEMORY[0x40FE51D] = this->m_iDirection;
+  MEMORY[0x40FE51C] = this->m_iDistance;
+  MEMORY[0x40FE518] = this->m_uObjType;
+  MEMORY[0x40FE51A] = IEntity::IsVisible(this);
   return &IEntity::m_sGfxInfo;
 }
 
@@ -157,17 +157,17 @@ void  CAnimal::Take(int a2) {
  CAnimal::CAnimal(int a2, int a3, int a4, int a5) {
   
   IMovingEntity::IMovingEntity(this, a5);
-  *(_DWORD *)this = &CAnimal::_vftable_;
-  std::list<CEntityTask>::list<CEntityTask>((char *)this + 104);
-  IEntity::SetPosition((IEntity *)this, a2, a3);
-  *((_BYTE *)this + 10) = 0x80;
-  *((_WORD *)this + 6) = a4;
-  *((_DWORD *)this + 25) = 0;
-  *((_BYTE *)this + 69) = 0;
-  *((_BYTE *)this + 121) = 10;
-  *((_DWORD *)this + 32) = 0;
-  *((_DWORD *)this + 33) = -1;
-  *((_WORD *)this + 19) = CGfxManager::GetAnimalFirstJob((CGfxManager *)g_pGfxManager, a4);
+  this->__vftable = (CAnimal_vtbl *)&CAnimal::_vftable_;
+  std::list<CEntityTask>::list<CEntityTask>(&this->unk_66[2]);
+  IEntity::SetPosition(this, a2, a3);
+  this->m_uObjType = Animal;
+  this->m_nType = a4;
+  *(_DWORD *)&this->unk_64 = 0;
+  this->m_iDistance = 0;
+  this->unk_79 = 10;
+  this->unk_80 = 0;
+  this->unk_84 = -1;
+  this->m_iJobPart = CGfxManager::GetAnimalFirstJob(g_pGfxManager, a4);
   return this;
 }
 

@@ -329,7 +329,7 @@ void  CBuilderRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent
   {
     *((_BYTE *)this + 45) = 0;
     v10 = (_DWORD *)CBuildingMgr::operator[](*((_DWORD *)a3 + 3));
-    if ( IEntity::FlagBits(v10, (EntityFlag)0x1000u) && ISettlerRole::HomeEntityId(this) )
+    if ( IEntity::FlagBits(v10, EntityFlag_NotStriking) && ISettlerRole::HomeEntityId(this) )
     {
       if ( debug && DEBUG_FLAGS[dword_4152090] )
       {

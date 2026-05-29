@@ -44304,107 +44304,116 @@ bool __cdecl CheckConfiguration(struct SGfxRenderConfiguration & a1) {
 // Decompiled from char __cdecl BlitSettler(int a1, int a2, int a3, struct SGfxObjectInfo *a4)
 bool __cdecl BlitSettler(int a1, int a2, int a3, struct SGfxObjectInfo * a4) {
   
-  int v5; // [esp+0h] [ebp-28h]
-  void *v6; // [esp+4h] [ebp-24h] BYREF
+  int m_uFlags; // [esp+0h] [ebp-28h]
+  int pPaletteAdress; // [esp+4h] [ebp-24h] BYREF
   unsigned __int16 *v7; // [esp+8h] [ebp-20h]
   unsigned __int16 *v8; // [esp+Ch] [ebp-1Ch]
   unsigned __int16 *v9; // [esp+10h] [ebp-18h]
-  unsigned __int8 *v10; // [esp+14h] [ebp-14h]
-  int v11; // [esp+18h] [ebp-10h]
-  int v12; // [esp+1Ch] [ebp-Ch]
-  int v13; // [esp+20h] [ebp-8h]
-  int v14; // [esp+24h] [ebp-4h]
+  BYTE *m_pGfxData; // [esp+14h] [ebp-14h]
+  int iSourceHeight; // [esp+18h] [ebp-10h]
+  int iSourceWidth; // [esp+1Ch] [ebp-Ch]
+  int iDestY; // [esp+20h] [ebp-8h]
+  int iDestX; // [esp+24h] [ebp-4h]
 
-  if ( !*((_DWORD *)a4 + 1) )
+  if ( !a4->m_pPalData )
     return 0;
-  v10 = *(unsigned __int8 **)a4;
-  *(_DWORD *)a4 = 0;
-  if ( v10 )
+  m_pGfxData = a4->m_pGfxData;
+  a4->m_pGfxData = 0;
+  if ( m_pGfxData )
   {
-    memcpy(&g_uColorPalette, *((const void **)a4 + 1), 0x180u);
-    memcpy(&unk_468A760, (char *)&g_cColorGradient + 64 * *((unsigned __int8 *)a4 + 715), 0x40u);
-    memcpy(&unk_468A7A0, (const void *)(*((_DWORD *)a4 + 1) + (*((unsigned __int8 *)a4 + 715) << 6) + 512), 0x40u);
-    v12 = *v10;
-    v11 = v10[1];
-    v10 += 2;
-    v14 = (a2 - (int)(float)((float)(*v10++ << 16) * g_fZoomFactor)) >> 16;
-    v13 = (a3 - (int)(float)((float)(*v10 << 16) * g_fZoomFactor)) >> 16;
-    if ( v14 <= GfxEngineSetup.m_uWidth
-      && v13 <= GfxEngineSetup.m_uHeight
-      && *(_DWORD *)(g_pDestSizeTable + 4 * v12) + v14 >= g_uLeftGuiBorderWidth
-      && *(_DWORD *)(g_pDestSizeTable + 4 * v11) + v13 >= 0 )
+    memcpy(&g_uColorPalette, a4->m_pPalData, 0x180u);
+    memcpy(&unk_468A760, (char *)&g_cColorGradient + 64 * a4->m_iColor, 0x40u);
+    memcpy(&unk_468A7A0, &a4->m_pPalData[64 * a4->m_iColor + 512], 0x40u);
+    iSourceWidth = *m_pGfxData;
+    iSourceHeight = m_pGfxData[1];
+    m_pGfxData += 2;
+    iDestX = (a2 - (int)(float)((float)(*m_pGfxData++ << 16) * g_fZoomFactor)) >> 16;
+    iDestY = (a3 - (int)(float)((float)(*m_pGfxData << 16) * g_fZoomFactor)) >> 16;
+    if ( iDestX <= GfxEngineSetup.m_uWidth
+      && iDestY <= GfxEngineSetup.m_uHeight
+      && *(_DWORD *)(g_pDestSizeTable + 4 * iSourceWidth) + iDestX >= g_uLeftGuiBorderWidth
+      && *(_DWORD *)(g_pDestSizeTable + 4 * iSourceHeight) + iDestY >= 0 )
     {
-      v6 = &g_uColorPalette;
-      sub_2F6FD80(&v6, a1);
-      ZoomBobNormal((int)v6, (int)(v10 + 5), v12, v11, v14, v13, 0, g_pBeginOfRenderBuffer, 0);
+      pPaletteAdress = (int)&g_uColorPalette;
+      sub_2F6FD80(&pPaletteAdress, a1);
+      ZoomBobNormal(
+        pPaletteAdress,
+        (int)(m_pGfxData + 5),
+        iSourceWidth,
+        iSourceHeight,
+        iDestX,
+        iDestY,
+        0,
+        g_pBeginOfRenderBuffer,
+        0);
     }
   }
   if ( !g_pIconPalette )
     return 1;
-  if ( *((_BYTE *)a4 + 22) )
+  if ( a4->m_uFlags )
   {
-    v7 = (unsigned __int16 *)g_pIconGfx[*((unsigned __int8 *)a4 + 22)];
-    v5 = *((unsigned __int8 *)a4 + 22);
-    *((_BYTE *)a4 + 22) = 0;
-    v12 = *v7++;
-    v11 = *v7++;
-    if ( v12 > 512 || v11 > 512 )
+    v7 = (unsigned __int16 *)g_pIconGfx[a4->m_uFlags];
+    m_uFlags = a4->m_uFlags;
+    a4->m_uFlags = 0;
+    iSourceWidth = *v7++;
+    iSourceHeight = *v7++;
+    if ( iSourceWidth > 512 || iSourceHeight > 512 )
       BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Size of accessory object is too big! Object will be ignored!");
-    v14 = (a2 - (int)(float)((float)(*v7++ << 16) * g_fZoomFactor)) >> 16;
-    v13 = (a3 - (int)(float)((float)(*v7 << 16) * g_fZoomFactor)) >> 16;
-    if ( v14 <= GfxEngineSetup.m_uWidth
-      && v13 <= GfxEngineSetup.m_uHeight
-      && *(_DWORD *)(g_pDestSizeTable + 4 * v12) + v14 >= g_uLeftGuiBorderWidth
-      && *(_DWORD *)(g_pDestSizeTable + 4 * v11) + v13 >= 0 )
+    iDestX = (a2 - (int)(float)((float)(*v7++ << 16) * g_fZoomFactor)) >> 16;
+    iDestY = (a3 - (int)(float)((float)(*v7 << 16) * g_fZoomFactor)) >> 16;
+    if ( iDestX <= GfxEngineSetup.m_uWidth
+      && iDestY <= GfxEngineSetup.m_uHeight
+      && *(_DWORD *)(g_pDestSizeTable + 4 * iSourceWidth) + iDestX >= g_uLeftGuiBorderWidth
+      && *(_DWORD *)(g_pDestSizeTable + 4 * iSourceHeight) + iDestY >= 0 )
     {
-      g_iSettlerSelections[3 * g_iSettlerSelectionCounter] = v14;
-      g_iSettlerSelections[3 * g_iSettlerSelectionCounter + 1] = v13;
-      g_iSettlerSelections[3 * g_iSettlerSelectionCounter++ + 2] = v5;
+      g_iSettlerSelections[3 * g_iSettlerSelectionCounter] = iDestX;
+      g_iSettlerSelections[3 * g_iSettlerSelectionCounter + 1] = iDestY;
+      g_iSettlerSelections[3 * g_iSettlerSelectionCounter++ + 2] = m_uFlags;
     }
   }
-  if ( *((_BYTE *)a4 + 20) )
+  if ( a4->m_uDecorator )
   {
-    v9 = (unsigned __int16 *)g_pIconGfx[*((unsigned __int8 *)a4 + 20)];
-    *((_BYTE *)a4 + 20) = 0;
-    v12 = *v9++;
-    v11 = *v9++;
-    if ( v12 > 512 || v11 > 512 )
+    v9 = (unsigned __int16 *)g_pIconGfx[a4->m_uDecorator];
+    a4->m_uDecorator = 0;
+    iSourceWidth = *v9++;
+    iSourceHeight = *v9++;
+    if ( iSourceWidth > 512 || iSourceHeight > 512 )
       BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Size of accessory object is too big! Object will be ignored!");
-    v14 = (a2 - (int)(float)((float)(*v9++ << 16) * g_fZoomFactor)) >> 16;
-    v13 = (a3 - (int)(float)((float)(*v9 << 16) * g_fZoomFactor)) >> 16;
-    if ( v14 <= GfxEngineSetup.m_uWidth
-      && v13 <= GfxEngineSetup.m_uHeight
-      && *(_DWORD *)(g_pDestSizeTable + 4 * v12) + v14 >= g_uLeftGuiBorderWidth
-      && *(_DWORD *)(g_pDestSizeTable + 4 * v11) + v13 >= 0 )
+    iDestX = (a2 - (int)(float)((float)(*v9++ << 16) * g_fZoomFactor)) >> 16;
+    iDestY = (a3 - (int)(float)((float)(*v9 << 16) * g_fZoomFactor)) >> 16;
+    if ( iDestX <= GfxEngineSetup.m_uWidth
+      && iDestY <= GfxEngineSetup.m_uHeight
+      && *(_DWORD *)(g_pDestSizeTable + 4 * iSourceWidth) + iDestX >= g_uLeftGuiBorderWidth
+      && *(_DWORD *)(g_pDestSizeTable + 4 * iSourceHeight) + iDestY >= 0 )
     {
-      g_iSettlerFitness[5 * g_iSettlerFitnessCounter] = v14;
-      g_iSettlerFitness[5 * g_iSettlerFitnessCounter + 1] = v13;
-      g_iSettlerFitness[5 * g_iSettlerFitnessCounter + 2] = v12;
-      g_iSettlerFitness[5 * g_iSettlerFitnessCounter + 3] = v11;
+      g_iSettlerFitness[5 * g_iSettlerFitnessCounter] = iDestX;
+      g_iSettlerFitness[5 * g_iSettlerFitnessCounter + 1] = iDestY;
+      g_iSettlerFitness[5 * g_iSettlerFitnessCounter + 2] = iSourceWidth;
+      g_iSettlerFitness[5 * g_iSettlerFitnessCounter + 3] = iSourceHeight;
       g_iSettlerFitness[5 * g_iSettlerFitnessCounter++ + 4] = (int)v9;
     }
   }
-  if ( !*((_BYTE *)a4 + 21) )
+  if ( !a4->m_u0 )
     return 1;
-  v8 = (unsigned __int16 *)g_pIconGfx[*((unsigned __int8 *)a4 + 21)];
-  *((_BYTE *)a4 + 21) = 0;
-  v12 = *v8++;
-  v11 = *v8++;
-  if ( v12 > 512 || v11 > 512 )
+  v8 = (unsigned __int16 *)g_pIconGfx[a4->m_u0];
+  a4->m_u0 = 0;
+  iSourceWidth = *v8++;
+  iSourceHeight = *v8++;
+  if ( iSourceWidth > 512 || iSourceHeight > 512 )
     BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Size of accessory object is too big! Object will be ignored!");
-  v14 = (a2 - (int)(float)((float)(*v8++ << 16) * g_fZoomFactor)) >> 16;
-  v13 = (a3 - (int)(float)((float)(*v8 << 16) * g_fZoomFactor)) >> 16;
-  if ( v14 > GfxEngineSetup.m_uWidth
-    || v13 > GfxEngineSetup.m_uHeight
-    || *(_DWORD *)(g_pDestSizeTable + 4 * v12) + v14 < g_uLeftGuiBorderWidth
-    || *(_DWORD *)(g_pDestSizeTable + 4 * v11) + v13 < 0 )
+  iDestX = (a2 - (int)(float)((float)(*v8++ << 16) * g_fZoomFactor)) >> 16;
+  iDestY = (a3 - (int)(float)((float)(*v8 << 16) * g_fZoomFactor)) >> 16;
+  if ( iDestX > GfxEngineSetup.m_uWidth
+    || iDestY > GfxEngineSetup.m_uHeight
+    || *(_DWORD *)(g_pDestSizeTable + 4 * iSourceWidth) + iDestX < g_uLeftGuiBorderWidth
+    || *(_DWORD *)(g_pDestSizeTable + 4 * iSourceHeight) + iDestY < 0 )
   {
     return 1;
   }
-  g_iSettlerMagic[5 * g_iSettlerMagicCounter] = v14;
-  g_iSettlerMagic[5 * g_iSettlerMagicCounter + 1] = v13;
-  g_iSettlerMagic[5 * g_iSettlerMagicCounter + 2] = v12;
-  g_iSettlerMagic[5 * g_iSettlerMagicCounter + 3] = v11;
+  g_iSettlerMagic[5 * g_iSettlerMagicCounter] = iDestX;
+  g_iSettlerMagic[5 * g_iSettlerMagicCounter + 1] = iDestY;
+  g_iSettlerMagic[5 * g_iSettlerMagicCounter + 2] = iSourceWidth;
+  g_iSettlerMagic[5 * g_iSettlerMagicCounter + 3] = iSourceHeight;
   g_iSettlerMagic[5 * g_iSettlerMagicCounter++ + 4] = (int)v8;
   return 1;
 }
@@ -44675,17 +44684,17 @@ bool __cdecl BlitVehicle(int a1, int a2, int a3, struct SGfxObjectInfo * a4) {
 
 
 // address=[0x2f6b180]
-// Decompiled from char __cdecl BlitBuilding(int a1, int a2, int a3, struct SGfxObjectInfo *a4, int *a5, int *a6)
-bool __cdecl BlitBuilding(int a1, int a2, int a3, struct SGfxObjectInfo * a4, int * a5, int & a6) {
+// Decompiled from char __cdecl BlitBuilding(int a1, int a2, int a3, struct SGfxObjectInfo *_pInfo, int *a5, int *a6)
+bool __cdecl BlitBuilding(int a1, int a2, int a3, struct SGfxObjectInfo * _pInfo, int * a5, int & a6) {
   
-  void *v7; // [esp+10h] [ebp-29Ch] BYREF
-  void *v8; // [esp+14h] [ebp-298h] BYREF
+  int v7; // [esp+10h] [ebp-29Ch] BYREF
+  int v8; // [esp+14h] [ebp-298h] BYREF
   unsigned int v9; // [esp+18h] [ebp-294h]
-  void *v10; // [esp+1Ch] [ebp-290h] BYREF
+  int m_pMiniFlagPalData; // [esp+1Ch] [ebp-290h] BYREF
   void *v11; // [esp+20h] [ebp-28Ch] BYREF
-  void *v12; // [esp+24h] [ebp-288h] BYREF
+  int v12; // [esp+24h] [ebp-288h] BYREF
   int v13; // [esp+28h] [ebp-284h]
-  int v14; // [esp+2Ch] [ebp-280h]
+  unsigned int v14; // [esp+2Ch] [ebp-280h]
   int v15; // [esp+30h] [ebp-27Ch]
   int v16; // [esp+34h] [ebp-278h]
   int v17; // [esp+38h] [ebp-274h]
@@ -44701,139 +44710,139 @@ bool __cdecl BlitBuilding(int a1, int a2, int a3, struct SGfxObjectInfo * a4, in
   int v27; // [esp+60h] [ebp-24Ch]
   unsigned int i; // [esp+64h] [ebp-248h]
   int v29; // [esp+68h] [ebp-244h]
-  char *v30; // [esp+6Ch] [ebp-240h]
+  unsigned int v30; // [esp+6Ch] [ebp-240h]
   int v31; // [esp+70h] [ebp-23Ch]
   int v32; // [esp+74h] [ebp-238h]
-  void *v33; // [esp+78h] [ebp-234h]
+  unsigned int v33; // [esp+78h] [ebp-234h]
   int v34; // [esp+7Ch] [ebp-230h]
   int v35; // [esp+80h] [ebp-22Ch]
   void *Src; // [esp+84h] [ebp-228h] BYREF
   unsigned __int16 *v37; // [esp+88h] [ebp-224h]
-  unsigned __int8 *v38; // [esp+8Ch] [ebp-220h]
+  char *v38; // [esp+8Ch] [ebp-220h]
   int v39; // [esp+90h] [ebp-21Ch]
   int v40; // [esp+94h] [ebp-218h]
   int v41; // [esp+98h] [ebp-214h]
   int v42; // [esp+9Ch] [ebp-210h]
   unsigned int j; // [esp+A0h] [ebp-20Ch]
-  char *v44; // [esp+A4h] [ebp-208h]
+  BYTE *m_pGfxData; // [esp+A4h] [ebp-208h]
   _BYTE v45[512]; // [esp+A8h] [ebp-204h] BYREF
 
-  if ( !*((_DWORD *)a4 + 1) )
+  if ( !_pInfo->m_pPalData )
     return 0;
-  v44 = *(char **)a4;
-  v26 = (unsigned __int16)*((_DWORD *)a4 + 23);
-  Src = (void *)*((_DWORD *)a4 + 1);
+  m_pGfxData = _pInfo->m_pGfxData;
+  v26 = (unsigned __int16)_pInfo->field_5C;
+  Src = _pInfo->m_pPalData;
   if ( a1 < 255 )
   {
-    sub_2F6FD80(&Src, a1);
+    sub_2F6FD80((int *)&Src, a1);
     memcpy(v45, Src, sizeof(v45));
     Src = v45;
   }
-  if ( *((_DWORD *)a4 + 22) )
+  if ( _pInfo->m_pBuildLayerGfxData )
   {
-    v44 = (char *)*((_DWORD *)a4 + 22);
-    if ( *(_DWORD *)a4 )
+    m_pGfxData = (BYTE *)_pInfo->m_pBuildLayerGfxData;
+    if ( _pInfo->m_pGfxData )
     {
-      v39 = *(unsigned __int16 *)v44;
-      v44 += 2;
-      v40 = *(unsigned __int16 *)v44;
-      v44 += 2;
+      v39 = *(unsigned __int16 *)m_pGfxData;
+      m_pGfxData += 2;
+      v40 = *(unsigned __int16 *)m_pGfxData;
+      m_pGfxData += 2;
       if ( v39 > 512 || v40 > 512 )
         BBSupportTracePrintF(
           0,
           "GFX ENGINE: DATA ERROR: Size of build layer object is too big! Object will be ignored!");
-      v41 = (a2 - (int)(float)((float)(*(unsigned __int16 *)v44 << 16) * *(float *)&g_fZoomFactor)) >> 16;
-      v44 += 2;
-      v42 = (a3 - (int)(float)((float)(*(unsigned __int16 *)v44 << 16) * *(float *)&g_fZoomFactor)) >> 16;
-      if ( v41 <= MEMORY[0x3E2E26C]
-        && v42 <= MEMORY[0x3E2E270]
+      v41 = (a2 - (int)(float)((float)(*(unsigned __int16 *)m_pGfxData << 16) * g_fZoomFactor)) >> 16;
+      m_pGfxData += 2;
+      v42 = (a3 - (int)(float)((float)(*(unsigned __int16 *)m_pGfxData << 16) * g_fZoomFactor)) >> 16;
+      if ( v41 <= GfxEngineSetup.m_uWidth
+        && v42 <= GfxEngineSetup.m_uHeight
         && *(_DWORD *)(g_pDestSizeTable + 4 * v39) + v41 >= g_uLeftGuiBorderWidth
         && *(_DWORD *)(g_pDestSizeTable + 4 * v40) + v42 >= 0 )
       {
-        ZoomBobNormal(Src, v44 + 6, v39, v40, v41, v42, 0, (void *)g_pBeginOfRenderBuffer, 0);
+        ZoomBobNormal((int)Src, (int)(m_pGfxData + 6), v39, v40, v41, v42, 0, g_pBeginOfRenderBuffer, 0);
       }
-      v44 = *(char **)a4;
+      m_pGfxData = _pInfo->m_pGfxData;
     }
   }
-  if ( v44 )
+  if ( m_pGfxData )
   {
-    v39 = *(unsigned __int16 *)v44;
-    v44 += 2;
-    v40 = *(unsigned __int16 *)v44;
-    v44 += 2;
+    v39 = *(unsigned __int16 *)m_pGfxData;
+    m_pGfxData += 2;
+    v40 = *(unsigned __int16 *)m_pGfxData;
+    m_pGfxData += 2;
     if ( v39 > 512 || v40 > 512 )
       BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Size of building object is too big! Object will be ignored!");
-    v41 = a2 - (int)(float)((float)(*(unsigned __int16 *)v44 << 16) * *(float *)&g_fZoomFactor);
-    v44 += 2;
-    v42 = a3 - (int)(float)((float)(*(unsigned __int16 *)v44 << 16) * *(float *)&g_fZoomFactor);
-    v44 += 6;
-    v33 = (void *)g_pBeginOfRenderBuffer;
+    v41 = a2 - (int)(float)((float)(*(unsigned __int16 *)m_pGfxData << 16) * g_fZoomFactor);
+    m_pGfxData += 2;
+    v42 = a3 - (int)(float)((float)(*(unsigned __int16 *)m_pGfxData << 16) * g_fZoomFactor);
+    m_pGfxData += 6;
+    v33 = g_pBeginOfRenderBuffer;
     v29 = 0;
     if ( !v26 || v26 == 0xFFFF )
     {
       if ( v26 != 0xFFFF )
       {
-        if ( v41 >> 16 <= MEMORY[0x3E2E26C]
-          && v42 >> 16 <= MEMORY[0x3E2E270]
+        if ( v41 >> 16 <= GfxEngineSetup.m_uWidth
+          && v42 >> 16 <= GfxEngineSetup.m_uHeight
           && *(_DWORD *)(g_pDestSizeTable + 4 * v39) + (v41 >> 16) >= g_uLeftGuiBorderWidth
           && *(_DWORD *)(g_pDestSizeTable + 4 * v40) + (v42 >> 16) >= 0 )
         {
-          ZoomBobNormal(Src, v44, v39, v40, v41 >> 16, v42 >> 16, 0, (void *)g_pBeginOfRenderBuffer, 0);
+          ZoomBobNormal((int)Src, (int)m_pGfxData, v39, v40, v41 >> 16, v42 >> 16, 0, g_pBeginOfRenderBuffer, 0);
           for ( i = 0; i < 4; ++i )
           {
-            if ( *((_DWORD *)a4 + i + 8) )
+            if ( _pInfo->m_vFXFrameData[i] )
               ZoomBobNormal(
-                Src,
-                (void *)(*((_DWORD *)a4 + i + 8) + 12),
+                (int)Src,
+                _pInfo->m_vFXFrameData[i] + 12,
                 v39,
                 v40,
                 v41 >> 16,
                 v42 >> 16,
                 0,
-                (void *)g_pBeginOfRenderBuffer,
+                g_pBeginOfRenderBuffer,
                 0);
           }
-          if ( *((_DWORD *)a4 + 12) && *a6 < 511 )
+          if ( _pInfo->m_vFXFrameData[4] && *a6 < 511 )
           {
             *a5 = -1;
             a5[1] = v41;
             a5[2] = v42;
-            a5[3] = *((_DWORD *)a4 + 12);
-            a5[4] = *((_DWORD *)a4 + 1);
+            a5[3] = _pInfo->m_vFXFrameData[4];
+            a5[4] = (int)_pInfo->m_pPalData;
             a5[5] = a1;
             ++*a6;
           }
         }
         for ( j = 0; j < 0xA; ++j )
         {
-          v44 = (char *)*((_DWORD *)a4 + 4 * j + 134);
-          if ( v44 )
+          m_pGfxData = *(BYTE **)&_pInfo->gap_1b8[16 * j];
+          if ( m_pGfxData )
           {
-            v20 = *(unsigned __int16 *)v44;
-            v44 += 2;
-            v21 = *(unsigned __int16 *)v44;
-            v44 += 2;
-            if ( *((_DWORD *)a4 + 4 * j + 135) )
+            v20 = *(unsigned __int16 *)m_pGfxData;
+            m_pGfxData += 2;
+            v21 = *(unsigned __int16 *)m_pGfxData;
+            m_pGfxData += 2;
+            if ( *(_DWORD *)&_pInfo->gap_1b8[16 * j + 4] )
             {
               if ( v20 > 512 || v21 > 512 )
                 BBSupportTracePrintF(
                   0,
                   "GFX ENGINE: DATA ERROR: Size of building object is too big! Object will be ignored!");
               v22 = (a2
-                   - (int)(float)((float)((*(unsigned __int16 *)v44 - *((_DWORD *)a4 + 4 * j + 136)) << 16)
-                                * *(float *)&g_fZoomFactor)) >> 16;
-              v44 += 2;
+                   - (int)(float)((float)((*(unsigned __int16 *)m_pGfxData - *(_DWORD *)&_pInfo->gap_1b8[16 * j + 8]) << 16)
+                                * g_fZoomFactor)) >> 16;
+              m_pGfxData += 2;
               v23 = (a3
-                   - (int)(float)((float)((*(unsigned __int16 *)v44 - *((_DWORD *)a4 + 4 * j + 137)) << 16)
-                                * *(float *)&g_fZoomFactor)) >> 16;
-              if ( v22 <= MEMORY[0x3E2E26C]
-                && v23 <= MEMORY[0x3E2E270]
+                   - (int)(float)((float)((*(unsigned __int16 *)m_pGfxData - *(_DWORD *)&_pInfo->gap_1b8[16 * j + 12]) << 16)
+                                * g_fZoomFactor)) >> 16;
+              if ( v22 <= GfxEngineSetup.m_uWidth
+                && v23 <= GfxEngineSetup.m_uHeight
                 && *(_DWORD *)(g_pDestSizeTable + 4 * v20) + v22 >= g_uLeftGuiBorderWidth
                 && *(_DWORD *)(g_pDestSizeTable + 4 * v21) + v23 >= 0 )
               {
-                v12 = (void *)*((_DWORD *)a4 + 4 * j + 135);
+                v12 = *(_DWORD *)&_pInfo->gap_1b8[16 * j + 4];
                 sub_2F6FD80(&v12, a1);
-                ZoomBobNormal(v12, v44 + 6, v20, v21, v22, v23, 0, (void *)g_pBeginOfRenderBuffer, 0);
+                ZoomBobNormal(v12, (int)(m_pGfxData + 6), v20, v21, v22, v23, 0, g_pBeginOfRenderBuffer, 0);
               }
             }
             else
@@ -44842,27 +44851,28 @@ bool __cdecl BlitBuilding(int a1, int a2, int a3, struct SGfxObjectInfo * a4, in
             }
           }
         }
-        for ( j = 0; j < 0x15; ++j )
+        for ( j = 0; j < 21; ++j )
         {
-          v38 = (unsigned __int8 *)*((_DWORD *)a4 + 4 * j + 50);
+          v38 = _pInfo->m_vPatches[j].m_pGfxData;
           if ( v38 )
           {
-            v18 = *v38++;
-            v19 = *v38++;
-            if ( *((_DWORD *)a4 + 4 * j + 51) )
+            v18 = (unsigned __int8)*v38++;
+            v19 = (unsigned __int8)*v38++;
+            if ( _pInfo->m_vPatches[j].m_pPalData )
             {
-              v24 = (a2 - (int)(float)((float)((*v38++ - *((_DWORD *)a4 + 4 * j + 52)) << 16) * *(float *)&g_fZoomFactor)) >> 16;
-              v25 = (a3 - (int)(float)((float)((*v38 - *((_DWORD *)a4 + 4 * j + 53)) << 16) * *(float *)&g_fZoomFactor)) >> 16;
-              memcpy(&g_uColorPalette, *((const void **)a4 + 4 * j + 51), 0x180u);
-              memcpy(&unk_468A760, (char *)&g_cColorGradient + 64 * *((unsigned __int8 *)a4 + 715), 0x40u);
-              memcpy(
-                &unk_468A7A0,
-                (const void *)(*((_DWORD *)a4 + 4 * j + 51) + (*((unsigned __int8 *)a4 + 715) << 6) + 512),
-                0x40u);
+              v24 = (a2
+                   - (int)(float)((float)(((unsigned __int8)*v38++ - _pInfo->m_vPatches[j].m_iOffsetX) << 16)
+                                * g_fZoomFactor)) >> 16;
+              v25 = (a3
+                   - (int)(float)((float)(((unsigned __int8)*v38 - _pInfo->m_vPatches[j].m_iOffsetY) << 16)
+                                * g_fZoomFactor)) >> 16;
+              memcpy(&g_uColorPalette, _pInfo->m_vPatches[j].m_pPalData, 0x180u);
+              memcpy(&unk_468A760, g_cColorGradient.m_vGradients[_pInfo->m_iColor], 0x40u);
+              memcpy(&unk_468A7A0, &_pInfo->m_vPatches[j].m_pPalData[64 * _pInfo->m_iColor + 512], 0x40u);
               v11 = &g_uColorPalette;
-              sub_2F6FD80(&v11, a1);
-              if ( v24 <= MEMORY[0x3E2E26C]
-                && v25 <= MEMORY[0x3E2E270]
+              sub_2F6FD80((int *)&v11, a1);
+              if ( v24 <= GfxEngineSetup.m_uWidth
+                && v25 <= GfxEngineSetup.m_uHeight
                 && *(_DWORD *)(g_pDestSizeTable + 4 * v18) + v24 >= g_uLeftGuiBorderWidth
                 && *(_DWORD *)(g_pDestSizeTable + 4 * v19) + v25 >= 0 )
               {
@@ -44871,14 +44881,14 @@ bool __cdecl BlitBuilding(int a1, int a2, int a3, struct SGfxObjectInfo * a4, in
                   a5[6] = -2;
                   a5[7] = v24;
                   a5[8] = v25;
-                  a5[9] = *((_DWORD *)a4 + 4 * j + 50);
-                  a5[10] = *((_DWORD *)a4 + 4 * j + 51);
-                  a5[11] = a1 + (*((unsigned __int8 *)a4 + 715) << 16);
+                  a5[9] = (int)_pInfo->m_vPatches[j].m_pGfxData;
+                  a5[10] = (int)_pInfo->m_vPatches[j].m_pPalData;
+                  a5[11] = a1 + (_pInfo->m_iColor << 16);
                   ++*a6;
                 }
                 else
                 {
-                  ZoomBobNormal(v11, v38 + 5, v18, v19, v24, v25, 0, (void *)g_pBeginOfRenderBuffer, 0);
+                  ZoomBobNormal((int)v11, (int)(v38 + 5), v18, v19, v24, v25, 0, g_pBeginOfRenderBuffer, 0);
                 }
               }
             }
@@ -44888,103 +44898,110 @@ bool __cdecl BlitBuilding(int a1, int a2, int a3, struct SGfxObjectInfo * a4, in
             }
           }
         }
-        if ( v41 >> 16 <= MEMORY[0x3E2E26C]
-          && v42 >> 16 <= MEMORY[0x3E2E270]
+        if ( v41 >> 16 <= GfxEngineSetup.m_uWidth
+          && v42 >> 16 <= GfxEngineSetup.m_uHeight
           && *(_DWORD *)(g_pDestSizeTable + 4 * v39) + (v41 >> 16) >= g_uLeftGuiBorderWidth
           && *(_DWORD *)(g_pDestSizeTable + 4 * v40) + (v42 >> 16) >= 0 )
         {
           for ( j = 5; j < 0xA; ++j )
           {
-            if ( *((_DWORD *)a4 + j + 8) )
+            if ( _pInfo->m_vFXFrameData[j] )
               ZoomBobNormal(
-                Src,
-                (void *)(*((_DWORD *)a4 + j + 8) + 12),
+                (int)Src,
+                _pInfo->m_vFXFrameData[j] + 12,
                 v39,
                 v40,
                 v41 >> 16,
                 v42 >> 16,
                 0,
-                (void *)g_pBeginOfRenderBuffer,
+                g_pBeginOfRenderBuffer,
                 0);
           }
         }
-        if ( *((_DWORD *)a4 + 20) && *((_DWORD *)a4 + 21) )
+        if ( _pInfo->m_pMiniFlagGfxData && _pInfo->m_pMiniFlagPalData )
         {
-          v44 = (char *)*((_DWORD *)a4 + 20);
-          v31 = *(unsigned __int16 *)v44;
-          v44 += 2;
-          v32 = *(unsigned __int16 *)v44;
-          v44 += 2;
+          m_pGfxData = (BYTE *)_pInfo->m_pMiniFlagGfxData;
+          v31 = *(unsigned __int16 *)m_pGfxData;
+          m_pGfxData += 2;
+          v32 = *(unsigned __int16 *)m_pGfxData;
+          m_pGfxData += 2;
           if ( v31 > 512 || v32 > 512 )
             BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Size of building flag is too big! Object will be ignored!");
-          v34 = a2
-              - (int)(float)((float)((*(unsigned __int16 *)v44 - *((_DWORD *)a4 + 6)) << 16) * *(float *)&g_fZoomFactor);
-          v44 += 2;
-          v35 = a3
-              - (int)(float)((float)((*(unsigned __int16 *)v44 - *((_DWORD *)a4 + 7)) << 16) * *(float *)&g_fZoomFactor);
-          if ( v34 >> 16 <= MEMORY[0x3E2E26C]
-            && v35 >> 16 <= MEMORY[0x3E2E270]
+          v34 = a2 - (int)(float)((float)((*(unsigned __int16 *)m_pGfxData - _pInfo->m_iOffsetX) << 16) * g_fZoomFactor);
+          m_pGfxData += 2;
+          v35 = a3 - (int)(float)((float)((*(unsigned __int16 *)m_pGfxData - _pInfo->m_iOffsetY) << 16) * g_fZoomFactor);
+          if ( v34 >> 16 <= GfxEngineSetup.m_uWidth
+            && v35 >> 16 <= GfxEngineSetup.m_uHeight
             && *(_DWORD *)(g_pDestSizeTable + 4 * v31) + (v34 >> 16) >= g_uLeftGuiBorderWidth
             && *(_DWORD *)(g_pDestSizeTable + 4 * v32) + (v35 >> 16) >= 0 )
           {
-            v10 = (void *)*((_DWORD *)a4 + 21);
-            sub_2F6FD80(&v10, a1);
-            ZoomBobNormal(v10, v44 + 6, v31, v32, v34 >> 16, v35 >> 16, 0, (void *)g_pBeginOfRenderBuffer, 0);
+            m_pMiniFlagPalData = _pInfo->m_pMiniFlagPalData;
+            sub_2F6FD80(&m_pMiniFlagPalData, a1);
+            ZoomBobNormal(
+              m_pMiniFlagPalData,
+              (int)(m_pGfxData + 6),
+              v31,
+              v32,
+              v34 >> 16,
+              v35 >> 16,
+              0,
+              g_pBeginOfRenderBuffer,
+              0);
           }
-          if ( *((_DWORD *)a4 + 18) && *((_DWORD *)a4 + 19) )
+          if ( *(_DWORD *)_pInfo->gap38 && *(_DWORD *)&_pInfo->gap38[4] )
           {
-            v44 = (char *)*((_DWORD *)a4 + 18);
-            v31 = *(unsigned __int16 *)v44;
-            v44 += 2;
-            v32 = *(unsigned __int16 *)v44;
-            v44 += 2;
+            m_pGfxData = *(BYTE **)_pInfo->gap38;
+            v31 = *(unsigned __int16 *)m_pGfxData;
+            m_pGfxData += 2;
+            v32 = *(unsigned __int16 *)m_pGfxData;
+            m_pGfxData += 2;
             if ( v31 > 512 || v32 > 512 )
               BBSupportTracePrintF(
                 0,
                 "GFX ENGINE: DATA ERROR: Size of heraldic figure is too big! Object will be ignored!");
-            v34 -= (int)(float)((float)(*(unsigned __int16 *)v44 << 16) * *(float *)&g_fZoomFactor);
-            v44 += 2;
-            v35 -= (int)(float)((float)(*(unsigned __int16 *)v44 << 16) * *(float *)&g_fZoomFactor);
-            if ( v34 >> 16 <= MEMORY[0x3E2E26C]
-              && v35 >> 16 <= MEMORY[0x3E2E270]
+            v34 -= (int)(float)((float)(*(unsigned __int16 *)m_pGfxData << 16) * g_fZoomFactor);
+            m_pGfxData += 2;
+            v35 -= (int)(float)((float)(*(unsigned __int16 *)m_pGfxData << 16) * g_fZoomFactor);
+            if ( v34 >> 16 <= GfxEngineSetup.m_uWidth
+              && v35 >> 16 <= GfxEngineSetup.m_uHeight
               && *(_DWORD *)(g_pDestSizeTable + 4 * v31) + (v34 >> 16) >= g_uLeftGuiBorderWidth
               && *(_DWORD *)(g_pDestSizeTable + 4 * v32) + (v35 >> 16) >= 0 )
             {
-              v7 = (void *)*((_DWORD *)a4 + 19);
+              v7 = *(_DWORD *)&_pInfo->gap38[4];
               sub_2F6FD80(&v7, a1);
-              ZoomBobNormal(v7, v44 + 6, v31, v32, v34 >> 16, v35 >> 16, 0, (void *)g_pBeginOfRenderBuffer, 0);
+              ZoomBobNormal(v7, (int)(m_pGfxData + 6), v31, v32, v34 >> 16, v35 >> 16, 0, g_pBeginOfRenderBuffer, 0);
             }
           }
         }
         for ( j = 0; j < 6; ++j )
         {
-          if ( *((_DWORD *)a4 + 4 * j + 26) && *((_DWORD *)a4 + 4 * j + 27) )
+          if ( *(_DWORD *)&_pInfo->gap_60[16 * j + 8] && *(_DWORD *)&_pInfo->gap_60[16 * j + 12] )
           {
-            v44 = (char *)*((_DWORD *)a4 + 4 * j + 26);
-            *((_DWORD *)a4 + 4 * j + 26) = 0;
-            v13 = *(unsigned __int16 *)v44;
-            v44 += 2;
-            v15 = *(unsigned __int16 *)v44;
-            v44 += 2;
+            m_pGfxData = *(BYTE **)&_pInfo->gap_60[16 * j + 8];
+            *(_DWORD *)&_pInfo->gap_60[16 * j + 8] = 0;
+            v13 = *(unsigned __int16 *)m_pGfxData;
+            m_pGfxData += 2;
+            v15 = *(unsigned __int16 *)m_pGfxData;
+            m_pGfxData += 2;
             if ( v13 > 512 || v15 > 512 )
               BBSupportTracePrintF(
                 0,
                 "GFX ENGINE: DATA ERROR: Size of building-effect is too big! Object will be ignored!");
             v16 = (a2
-                 - (int)(float)((float)((*(unsigned __int16 *)v44 - *((_DWORD *)a4 + 4 * j + 28)) << 16)
-                              * *(float *)&g_fZoomFactor)) >> 16;
-            v44 += 2;
+                 - (int)(float)((float)((*(unsigned __int16 *)m_pGfxData - *(_DWORD *)&_pInfo->gap_60[16 * j + 16]) << 16)
+                              * g_fZoomFactor)) >> 16;
+            m_pGfxData += 2;
             v17 = (a3
-                 - (int)(float)((float)((*(unsigned __int16 *)v44 - *((_DWORD *)a4 + 4 * j + 29)) << 16)
-                              * *(float *)&g_fZoomFactor)) >> 16;
-            if ( v16 <= MEMORY[0x3E2E26C]
-              && v17 <= MEMORY[0x3E2E270]
+                 - (int)(float)((float)((*(unsigned __int16 *)m_pGfxData - *(_DWORD *)&_pInfo->gap_60[16 * j + 20]) << 16)
+                              * g_fZoomFactor)) >> 16;
+            if ( v16 <= GfxEngineSetup.m_uWidth
+              && v17 <= GfxEngineSetup.m_uHeight
               && *(_DWORD *)(g_pDestSizeTable + 4 * v13) + v16 >= g_uLeftGuiBorderWidth
               && *(_DWORD *)(g_pDestSizeTable + 4 * v15) + v17 >= 0 )
             {
-              v8 = (void *)*((_DWORD *)a4 + 4 * j + 27);
+              v8 = *(_DWORD *)&_pInfo->gap_60[16 * j + 12];
               sub_2F6FD80(&v8, a1);
-              ZoomBobNormal(v8, v44 + 6, v13, v15, v16, v17, 0, (void *)g_pBeginOfRenderBuffer, 0);
+              ZoomBobNormal(v8, (int)(m_pGfxData + 6), v13, v15, v16, v17, 0, g_pBeginOfRenderBuffer, 0);
             }
           }
         }
@@ -44992,57 +45009,57 @@ bool __cdecl BlitBuilding(int a1, int a2, int a3, struct SGfxObjectInfo * a4, in
     }
     else
     {
-      v27 = (int)(float)(*(float *)&g_fZoomFactor * 10.0);
-      v9 = v26 * (int)(float)((float)v40 * *(float *)&g_fZoomFactor) / 0xFFFFu + (v42 >> 16);
+      v27 = (int)(float)(g_fZoomFactor * 10.0);
+      v9 = v26 * (int)(float)((float)v40 * g_fZoomFactor) / 0xFFFFu + (v42 >> 16);
       v29 = v9 - v27;
-      v33 = (void *)(g_iScanlineLength + g_pRenderAdress + g_iRenderPitch * (v9 - 1) - g_iRenderPitch * v27);
+      v33 = g_iScanlineLength + g_pRenderAdress + g_iRenderPitch * (v9 - 1) - g_iRenderPitch * v27;
       v14 = v9;
-      v30 = (char *)(g_iScanlineLength + g_pRenderAdress + g_iRenderPitch * (v9 - 1));
-      if ( (unsigned int)&v30[-(g_iRenderPitch * v27)] < g_pBeginOfRenderBuffer )
+      v30 = g_iScanlineLength + g_pRenderAdress + g_iRenderPitch * (v9 - 1);
+      if ( v30 - g_iRenderPitch * v27 < g_pBeginOfRenderBuffer )
       {
-        v33 = (void *)g_pBeginOfRenderBuffer;
+        v33 = g_pBeginOfRenderBuffer;
         v29 = 0;
       }
-      if ( (unsigned int)v33 > g_pEndOfRenderBuffer )
+      if ( v33 > g_pEndOfRenderBuffer )
       {
-        v33 = (void *)g_pEndOfRenderBuffer;
-        v29 = MEMORY[0x3E2E270] - 1;
+        v33 = g_pEndOfRenderBuffer;
+        v29 = GfxEngineSetup.m_uHeight - 1;
       }
-      if ( (unsigned int)v30 < g_pBeginOfRenderBuffer )
+      if ( v30 < g_pBeginOfRenderBuffer )
       {
-        v30 = (char *)g_pBeginOfRenderBuffer;
+        v30 = g_pBeginOfRenderBuffer;
         v14 = 0;
       }
-      if ( (unsigned int)v30 > g_pEndOfRenderBuffer )
+      if ( v30 > g_pEndOfRenderBuffer )
       {
-        v30 = (char *)g_pEndOfRenderBuffer;
-        v14 = MEMORY[0x3E2E270] - 1;
+        v30 = g_pEndOfRenderBuffer;
+        v14 = GfxEngineSetup.m_uHeight - 1;
       }
-      if ( v41 >> 16 <= MEMORY[0x3E2E26C]
-        && v42 >> 16 <= MEMORY[0x3E2E270]
+      if ( v41 >> 16 <= GfxEngineSetup.m_uWidth
+        && v42 >> 16 <= GfxEngineSetup.m_uHeight
         && *(_DWORD *)(g_pDestSizeTable + 4 * v39) + (v41 >> 16) >= g_uLeftGuiBorderWidth
         && *(_DWORD *)(g_pDestSizeTable + 4 * v40) + (v42 >> 16) >= 0 )
       {
-        ZoomBobNormal(Src, v44, v39, v40, v41 >> 16, v42 >> 16, v14, v30, 0);
-        ZoomBobBuildState(Src, v44, v39, v40, v41 >> 16, v42 >> 16, v29, v33, v30);
+        ZoomBobNormal((int)Src, (int)m_pGfxData, v39, v40, v41 >> 16, v42 >> 16, v14, v30, 0);
+        ZoomBobBuildState((int)Src, (int)m_pGfxData, v39, v40, v41 >> 16, v42 >> 16, v29, v33, v30);
       }
     }
   }
-  if ( !*((_BYTE *)a4 + 22) || !g_pIconPalette )
+  if ( !_pInfo->m_uFlags || !g_pIconPalette )
     return 1;
-  v37 = (unsigned __int16 *)g_pIconGfx[*((unsigned __int8 *)a4 + 22)];
+  v37 = (unsigned __int16 *)g_pIconGfx[_pInfo->m_uFlags];
   v39 = *v37++;
   v40 = *v37++;
   if ( v39 > 512 || v40 > 512 )
     BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Size of accessory object is too big! Object will be ignored!");
-  v41 = (a2 - (int)(float)((float)(*v37++ << 16) * *(float *)&g_fZoomFactor)) >> 16;
-  v42 = (a3 - (int)(float)((float)(*v37 << 16) * *(float *)&g_fZoomFactor)) >> 16;
-  if ( v41 <= MEMORY[0x3E2E26C]
-    && v42 <= MEMORY[0x3E2E270]
+  v41 = (a2 - (int)(float)((float)(*v37++ << 16) * g_fZoomFactor)) >> 16;
+  v42 = (a3 - (int)(float)((float)(*v37 << 16) * g_fZoomFactor)) >> 16;
+  if ( v41 <= GfxEngineSetup.m_uWidth
+    && v42 <= GfxEngineSetup.m_uHeight
     && *(_DWORD *)(g_pDestSizeTable + 4 * v39) + v41 >= g_uLeftGuiBorderWidth
     && *(_DWORD *)(g_pDestSizeTable + 4 * v40) + v42 >= 0 )
   {
-    ZoomBobNormal((void *)g_pIconPalette, v37 + 3, v39, v40, v41, v42, 0, (void *)g_pBeginOfRenderBuffer, 0);
+    ZoomBobNormal(g_pIconPalette, (int)(v37 + 3), v39, v40, v41, v42, 0, g_pBeginOfRenderBuffer, 0);
   }
   return 1;
 }
@@ -45237,9 +45254,9 @@ bool __cdecl RenderObjectLayer(bool a1) {
   unsigned __int8 *v73; // [esp+D8h] [ebp-6770h]
   int v74; // [esp+DCh] [ebp-676Ch]
   int v75; // [esp+E0h] [ebp-6768h]
-  int v76; // [esp+E4h] [ebp-6764h]
+  int m_iDirection; // [esp+E4h] [ebp-6764h]
   unsigned int v77; // [esp+E8h] [ebp-6760h]
-  int v78; // [esp+ECh] [ebp-675Ch]
+  int m_uObjType; // [esp+ECh] [ebp-675Ch]
   int v79; // [esp+F0h] [ebp-6758h]
   int v80; // [esp+F4h] [ebp-6754h]
   unsigned __int16 *v81; // [esp+F8h] [ebp-6750h]
@@ -45256,7 +45273,7 @@ bool __cdecl RenderObjectLayer(bool a1) {
   int v92; // [esp+124h] [ebp-6724h]
   int i; // [esp+128h] [ebp-6720h]
   bool v94; // [esp+12Fh] [ebp-6719h]
-  int v95; // [esp+130h] [ebp-6718h]
+  int m_iDistance; // [esp+130h] [ebp-6718h]
   size_t v96; // [esp+134h] [ebp-6714h]
   int v97; // [esp+138h] [ebp-6710h] BYREF
   unsigned __int8 IconObjectByX; // [esp+13Fh] [ebp-6709h]
@@ -45269,7 +45286,7 @@ bool __cdecl RenderObjectLayer(bool a1) {
   struct T_GFX_MAP_ELEMENT *v105; // [esp+158h] [ebp-66F0h]
   unsigned __int8 v106; // [esp+15Fh] [ebp-66E9h]
   int v107; // [esp+160h] [ebp-66E8h]
-  void *GfxObjectInfo; // [esp+164h] [ebp-66E4h]
+  struct SGfxObjectInfo *GfxObjectInfo; // [esp+164h] [ebp-66E4h]
   int v109; // [esp+168h] [ebp-66E0h]
   int v110; // [esp+16Ch] [ebp-66DCh]
   int j; // [esp+170h] [ebp-66D8h]
@@ -45397,16 +45414,16 @@ bool __cdecl RenderObjectLayer(bool a1) {
               GfxObjectInfo = g_pfGetGfxObjectInfo(v48, -1);
               if ( GfxObjectInfo )
               {
-                if ( *((_BYTE *)GfxObjectInfo + 714) )
+                if ( GfxObjectInfo->m_bIsVisible )
                 {
                   v101 = CalcFinalHeightOffset(v105->m_uGroundHeight);
-                  if ( *((_BYTE *)GfxObjectInfo + 712) == 8 )
+                  if ( GfxObjectInfo->m_uObjType == 8 )
                   {
                     if ( v84 > 59 )
-                      g_pfBlitBuilding(v84, v110, v109 - v101, GfxObjectInfo, (char *)&v114[768] + 24 * v97, &v97);
-                    memset(GfxObjectInfo, 0, 0x2D0u);
+                      g_pfBlitBuilding(v84, v110, v109 - v101, GfxObjectInfo, (char *)&v114[0x300] + 24 * v97, &v97);
+                    memset(GfxObjectInfo, 0, sizeof(struct SGfxObjectInfo));
                   }
-                  else if ( *((_BYTE *)GfxObjectInfo + 712) != 16 || v84 > 59 )
+                  else if ( GfxObjectInfo->m_uObjType != 16 || v84 > 59 )
                   {
                     g_pfBlitObject(v84, v110, v109 - v101, GfxObjectInfo);
                   }
@@ -45422,25 +45439,25 @@ bool __cdecl RenderObjectLayer(bool a1) {
               GfxObjectInfo = g_pfGetGfxObjectInfo(v77, -1);
               if ( GfxObjectInfo )
               {
-                if ( *((_BYTE *)GfxObjectInfo + 714) )
+                if ( GfxObjectInfo->m_bIsVisible )
                 {
                   v101 = CalcFinalHeightOffset(v105->m_uGroundHeight);
                   v103 = 0;
                   v104 = 0;
-                  v95 = *((unsigned __int8 *)GfxObjectInfo + 716);
+                  m_iDistance = GfxObjectInfo->m_iDistance;
                   v87 = v110;
                   v88 = v109;
-                  v78 = *((unsigned __int8 *)GfxObjectInfo + 712);
-                  switch ( --v78 )
+                  m_uObjType = GfxObjectInfo->m_uObjType;
+                  switch ( --m_uObjType )
                   {
                     case 0:
-                      v76 = *((char *)GfxObjectInfo + 717);
-                      switch ( ++v76 )
+                      m_iDirection = (char)GfxObjectInfo->m_iDirection;
+                      switch ( ++m_iDirection )
                       {
                         case 0:
-                          v95 = 0;
-                          v87 = v110 + ((*((_DWORD *)GfxObjectInfo + 6) * (v107 >> 16) / 256) << 16);
-                          v88 = v109 + ((*((_DWORD *)GfxObjectInfo + 7) * (v102 >> 16) / 256) << 16);
+                          m_iDistance = 0;
+                          v87 = v110 + (((signed int)(GfxObjectInfo->m_iOffsetX * (v107 >> 16)) / 256) << 16);
+                          v88 = v109 + (((signed int)(GfxObjectInfo->m_iOffsetY * (v102 >> 16)) / 256) << 16);
                           break;
                         case 1:
                           v103 = v110 - v107;
@@ -45474,18 +45491,18 @@ bool __cdecl RenderObjectLayer(bool a1) {
                           BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Illegal value in iDirection");
                           break;
                       }
-                      if ( v95 )
+                      if ( m_iDistance )
                         g_pfBlitSettler(
                           v91,
-                          v110 - ((v95 * (v110 - v103)) >> 8),
-                          v109 - v101 - ((v95 * (v109 - v101 - v104)) >> 8),
+                          v110 - ((m_iDistance * (v110 - v103)) >> 8),
+                          v109 - v101 - ((m_iDistance * (v109 - v101 - v104)) >> 8),
                           GfxObjectInfo);
                       else
                         g_pfBlitSettler(v91, v87, v88 - v101, GfxObjectInfo);
                       break;
                     case 1:
                     case 3:
-                      v62 = *((char *)GfxObjectInfo + 717);
+                      v62 = (char)GfxObjectInfo->m_iDirection;
                       switch ( v62 )
                       {
                         case 0:
@@ -45520,13 +45537,15 @@ bool __cdecl RenderObjectLayer(bool a1) {
                           BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Illegal value in iDirection");
                           break;
                       }
-                      if ( *((_BYTE *)GfxObjectInfo + 712) == 2 )
+                      if ( GfxObjectInfo->m_uObjType == 2 )
                       {
                         if ( v97 < 512 )
                         {
                           *((_DWORD *)&v114[768] + 6 * v97) = v77;
-                          *((_DWORD *)&v114[768] + 6 * v97 + 1) = v110 - ((v95 * (v110 - v103)) >> 8);
-                          *((_DWORD *)&v114[768] + 6 * v97 + 2) = v109 - v101 - ((v95 * (v109 - v101 - v104)) >> 8);
+                          *((_DWORD *)&v114[768] + 6 * v97 + 1) = v110 - ((m_iDistance * (v110 - v103)) >> 8);
+                          *((_DWORD *)&v114[768] + 6 * v97 + 2) = v109
+                                                                - v101
+                                                                - ((m_iDistance * (v109 - v101 - v104)) >> 8);
                           *((_DWORD *)&v114[769] + 6 * v97++ + 1) = v91;
                         }
                       }
@@ -45534,29 +45553,29 @@ bool __cdecl RenderObjectLayer(bool a1) {
                       {
                         v115[v100 + v90] = v106;
                         LODWORD(v114[v106]) = v77;
-                        DWORD1(v114[v106]) = v110 - ((v95 * (v110 - v103)) >> 8);
-                        DWORD2(v114[v106]) = v109 - v101 - ((v95 * (v109 - v101 - v104)) >> 8);
+                        DWORD1(v114[v106]) = v110 - ((m_iDistance * (v110 - v103)) >> 8);
+                        DWORD2(v114[v106]) = v109 - v101 - ((m_iDistance * (v109 - v101 - v104)) >> 8);
                         HIDWORD(v114[v106++]) = v91;
                       }
-                      *((_DWORD *)GfxObjectInfo + 23) = 0;
-                      *(_DWORD *)GfxObjectInfo = 0;
-                      *((_DWORD *)GfxObjectInfo + 3) = 0;
-                      *((_BYTE *)GfxObjectInfo + 22) = 0;
-                      *((_BYTE *)GfxObjectInfo + 20) = 0;
-                      *((_BYTE *)GfxObjectInfo + 21) = 0;
+                      GfxObjectInfo->field_5C = 0;
+                      GfxObjectInfo->m_pGfxData = 0;
+                      GfxObjectInfo->m_pPatchGfxData = 0;
+                      GfxObjectInfo->m_uFlags = 0;
+                      GfxObjectInfo->m_uDecorator = 0;
+                      GfxObjectInfo->m_u0 = 0;
                       break;
                     case 7:
                       g_pfBlitBuilding(v91, v87, v88 - v101, GfxObjectInfo, (char *)&v114[768] + 24 * v97, &v97);
-                      memset(GfxObjectInfo, 0, 0x2D0u);
+                      memset(GfxObjectInfo, 0, sizeof(struct SGfxObjectInfo));
                       break;
                     case 127:
-                      v72 = *((char *)GfxObjectInfo + 717);
+                      v72 = (char)GfxObjectInfo->m_iDirection;
                       switch ( ++v72 )
                       {
                         case 0:
-                          v95 = 0;
-                          v87 = v110 + ((*((_DWORD *)GfxObjectInfo + 6) * (v107 >> 16) / 256) << 16);
-                          v88 = v109 + ((*((_DWORD *)GfxObjectInfo + 7) * (v102 >> 16) / 256) << 16);
+                          m_iDistance = 0;
+                          v87 = v110 + (((signed int)(GfxObjectInfo->m_iOffsetX * (v107 >> 16)) / 256) << 16);
+                          v88 = v109 + (((signed int)(GfxObjectInfo->m_iOffsetY * (v102 >> 16)) / 256) << 16);
                           break;
                         case 1:
                           v103 = v110 - v107;
@@ -45590,12 +45609,12 @@ bool __cdecl RenderObjectLayer(bool a1) {
                           BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Illegal value in iDirection");
                           break;
                       }
-                      if ( !v95 )
+                      if ( !m_iDistance )
                         goto RenderObjectLayer___def_336D47A;
                       g_pfBlitObject(
                         v91,
-                        v110 - ((v95 * (v110 - v103)) >> 8),
-                        v109 - v101 - ((v95 * (v109 - v101 - v104)) >> 8),
+                        v110 - ((m_iDistance * (v110 - v103)) >> 8),
+                        v109 - v101 - ((m_iDistance * (v109 - v101 - v104)) >> 8),
                         GfxObjectInfo);
                       break;
                     default:
@@ -45693,7 +45712,7 @@ RenderObjectLayer___def_336D47A:
       }
       else
       {
-        sub_2F6FD80(&v66, *((_DWORD *)&v114[769] + 6 * j + 1));
+        sub_2F6FD80((int *)&v66, *((_DWORD *)&v114[769] + 6 * j + 1));
         ZoomBobNormal(
           (int)v66,
           *((_DWORD *)&v114[768] + 6 * j + 3) + 12,
@@ -45727,7 +45746,7 @@ RenderObjectLayer___def_336D47A:
       }
       else
       {
-        sub_2F6FD80(&v64, (unsigned __int8)*((_DWORD *)&v114[769] + 6 * j + 1));
+        sub_2F6FD80((int *)&v64, (unsigned __int8)*((_DWORD *)&v114[769] + 6 * j + 1));
         ZoomBobNormal(
           (int)v64,
           *((_DWORD *)&v114[768] + 6 * j + 3) + 8,
@@ -46563,12 +46582,12 @@ LABEL_38:
 
 
 // address=[0x2f72630]
-// Decompiled from unsigned __int64 __cdecl ZoomBobNormal(int a1, int a2, int a3, int a4, int a5, int a6, int a7, int a8, char a9)
-void __cdecl ZoomBobNormal(void * a1, void * a2, int a3, int a4, int a5, int a6, int a7, void * a8, int a9) {
+// Decompiled from unsigned __int64 __cdecl ZoomBobNormal(  int _pPaletteAdress,  int _pSourceAdress,  int _iSourceWidth,  int _iSourceHeight,  int _iDestX,  int _iDestY,  int _iUpperClippingLine,  int _pUpperClippingBorder,  char a9)
+void __cdecl ZoomBobNormal(void * _pPaletteAdress, void * _pSourceAdress, int _iSourceWidth, int _iSourceHeight, int _iDestX, int _iDestY, int _iUpperClippingLine, void * _pUpperClippingBorder, int a9) {
   
   int v9; // edx
-  unsigned __int8 *v10; // esi
-  int v11; // ebp
+  unsigned __int8 *_ZoomBobNormal____2___s_pSourceAdress; // esi
+  int _ZoomBobNormal____2___s_pPaletteAdress; // ebp
   int v12; // eax
   int v13; // ebx
   unsigned __int8 v14; // al
@@ -46593,8 +46612,8 @@ void __cdecl ZoomBobNormal(void * a1, void * a2, int a3, int a4, int a5, int a6,
   int v33; // edx
   int v34; // ebp
   int v35; // edx
-  unsigned __int8 *v37; // esi
-  int v38; // ebp
+  unsigned __int8 *ZoomBobNormal____2___s_pSourceAdress; // esi
+  int ZoomBobNormal____2___s_pPaletteAdress; // ebp
   int v39; // eax
   int v40; // ebx
   unsigned __int8 v41; // al
@@ -46620,66 +46639,74 @@ void __cdecl ZoomBobNormal(void * a1, void * a2, int a3, int a4, int a5, int a6,
   __int64 v61; // [esp-20h] [ebp-2Ch]
   unsigned __int64 v62; // [esp-20h] [ebp-2Ch]
 
-  operator|| = a1;
-  operator|| = a2;
-  operator|| = a3;
-  operator|| = a4;
-  operator|| = *(int *)(g_pDestSizeTable + 4 * a3) >> a9;
-  operator|| = *(int *)(g_pDestSizeTable + 4 * a4) >> a9;
-  operator|| = a5;
-  operator|| = a6;
-  operator|| = a7;
-  operator|| = a8;
+  ZoomBobNormal_::_2_::s_pPaletteAdress = _pPaletteAdress;
+  ZoomBobNormal_::_2_::s_pSourceAdress = _pSourceAdress;
+  ZoomBobNormal_::_2_::s_iSourceWidth = _iSourceWidth;
+  ZoomBobNormal_::_2_::s_iSourceHeight = _iSourceHeight;
+  ZoomBobNormal_::_2_::s_iDestWidth = *(int *)(g_pDestSizeTable + 4 * _iSourceWidth) >> a9;
+  ZoomBobNormal_::_2_::s_iDestHeight = *(int *)(g_pDestSizeTable + 4 * _iSourceHeight) >> a9;
+  ZoomBobNormal_::_2_::s_iDestX = _iDestX;
+  ZoomBobNormal_::_2_::s_iDestY = _iDestY;
+  ZoomBobNormal_::_2_::s_iUpperClippingLine = _iUpperClippingLine;
+  ZoomBobNormal_::_2_::s_pUpperClippingBorder = _pUpperClippingBorder;
   v9 = g_pEndOfRenderBuffer;
-  operator|| = g_pEndOfRenderBuffer;
-  operator|| = *(_DWORD *)g_pZoomGradient;
-  if ( a5 < 0 || (v9 = operator|| + operator||, operator|| + operator|| >= MEMORY[0x3E2E26C]) )
+  ZoomBobNormal_::_2_::s_pLowerClippingBorder = g_pEndOfRenderBuffer;
+  ZoomBobNormal_::_2_::s_iZoom = *g_pZoomGradient;
+  if ( _iDestX < 0
+    || (v9 = ZoomBobNormal_::_2_::s_iDestWidth + ZoomBobNormal_::_2_::s_iDestX,
+        ZoomBobNormal_::_2_::s_iDestWidth + ZoomBobNormal_::_2_::s_iDestX >= GfxEngineSetup.m_uWidth) )
   {
-    v62 = __PAIR64__(v9, g_pZoomGradient);
-    if ( operator|| >= MEMORY[0x3E2E270]
-      || operator|| + operator|| < 0 != __OFADD__(operator||, operator||)
-      || operator|| >= MEMORY[0x3E2E26C]
-      || operator|| + operator|| < 0 != __OFADD__(operator||, operator||) )
+    v62 = __PAIR64__(v9, (unsigned int)g_pZoomGradient);
+    if ( ZoomBobNormal_::_2_::s_iDestY >= GfxEngineSetup.m_uHeight
+      || ZoomBobNormal_::_2_::s_iDestHeight + ZoomBobNormal_::_2_::s_iDestY < 0 != __OFADD__(
+                                                                                     ZoomBobNormal_::_2_::s_iDestHeight,
+                                                                                     ZoomBobNormal_::_2_::s_iDestY)
+      || ZoomBobNormal_::_2_::s_iDestX >= GfxEngineSetup.m_uWidth
+      || ZoomBobNormal_::_2_::s_iDestWidth + ZoomBobNormal_::_2_::s_iDestX < 0 != __OFADD__(
+                                                                                    ZoomBobNormal_::_2_::s_iDestWidth,
+                                                                                    ZoomBobNormal_::_2_::s_iDestX) )
     {
       return v62;
     }
-    v37 = (unsigned __int8 *)operator||;
-    v38 = operator||;
-    operator|| = g_iRenderPitch * (operator|| - 1) + g_pRenderAdress;
-    operator|| = operator|| + operator|| + operator||;
-    operator|| = operator||;
-    operator|| = 0;
+    ZoomBobNormal____2___s_pSourceAdress = (unsigned __int8 *)ZoomBobNormal_::_2_::s_pSourceAdress;
+    ZoomBobNormal____2___s_pPaletteAdress = ZoomBobNormal_::_2_::s_pPaletteAdress;
+    ZoomBobNormal_::_2_::s_pBeginOfScanline = g_iRenderPitch * (ZoomBobNormal_::_2_::s_iDestY - 1) + g_pRenderAdress;
+    ZoomBobNormal_::_2_::s_iStartOfDestLine = ZoomBobNormal_::_2_::s_iDestX
+                                            + ZoomBobNormal_::_2_::s_iDestX
+                                            + ZoomBobNormal_::_2_::s_pBeginOfScanline;
+    ZoomBobNormal_::_2_::s_iSourceLineStart = ZoomBobNormal_::_2_::s_pSourceAdress;
+    ZoomBobNormal_::_2_::s_iStartOfDestLineRest = 0;
     v39 = 0;
-    operator|| = operator||;
-    operator|| = g_iZoomInit;
-    operator|| = g_iZoomInit;
+    ZoomBobNormal_::_2_::s_iBufferedPixelCounterEbx = ZoomBobNormal_::_2_::s_iSourceWidth;
+    ZoomBobNormal_::_2_::s_iGradientY = g_iZoomInit;
+    ZoomBobNormal_::_2_::s_iBufferedPixelCounterEcx = g_iZoomInit;
     while ( 1 )
     {
       v40 = 0;
 LABEL_59:
       HIWORD(v42) = HIWORD(g_iZoomInit);
-      v43 = operator||;
+      v43 = ZoomBobNormal_::_2_::s_iGradientY;
       while ( 1 )
       {
-        v22 = (operator|| + v43 < 0) ^ __OFADD__(operator||, v43);
-        v43 += operator||;
+        v22 = (ZoomBobNormal_::_2_::s_iZoom + v43 < 0) ^ __OFADD__(ZoomBobNormal_::_2_::s_iZoom, v43);
+        v43 += ZoomBobNormal_::_2_::s_iZoom;
         if ( !v22 )
           break;
-        operator|| = v43;
+        ZoomBobNormal_::_2_::s_iGradientY = v43;
         if ( v40 <= 0 )
-          v40 += operator||;
+          v40 += ZoomBobNormal_::_2_::s_iSourceWidth;
         do
         {
           while ( 1 )
           {
-            v41 = *v37++;
+            v41 = *ZoomBobNormal____2___s_pSourceAdress++;
             if ( v41 <= 1u )
               break;
             v22 = v40-- <= 1;
             if ( v22 )
               goto LABEL_57;
           }
-          LOBYTE(v39) = *v37++;
+          LOBYTE(v39) = *ZoomBobNormal____2___s_pSourceAdress++;
           if ( !(_BYTE)v39 )
             return v62;
           v22 = v40 <= v39;
@@ -46687,50 +46714,50 @@ LABEL_59:
         }
         while ( !v22 );
 LABEL_57:
-        operator|| = (int)v37;
+        ZoomBobNormal_::_2_::s_iSourceLineStart = (int)ZoomBobNormal____2___s_pSourceAdress;
       }
-      v44 = g_iRenderPitch + operator||;
-      v45 = g_iRenderPitch + operator||;
-      operator|| = v45;
-      if ( v45 < operator|| )
-        v45 = operator||;
-      operator|| = v45;
+      v44 = g_iRenderPitch + ZoomBobNormal_::_2_::s_iStartOfDestLine;
+      v45 = g_iRenderPitch + ZoomBobNormal_::_2_::s_pBeginOfScanline;
+      ZoomBobNormal_::_2_::s_pBeginOfScanline = v45;
+      if ( v45 < ZoomBobNormal_::_2_::s_pUpperClippingBorder )
+        v45 = ZoomBobNormal_::_2_::s_pUpperClippingBorder;
+      ZoomBobNormal_::_2_::s_pBeginOfScanlineQuery = v45;
       v46 = g_iScanlineLength + v45;
-      if ( v46 >= operator|| )
-        v46 = operator||;
-      operator|| = v46;
-      ++operator||;
+      if ( v46 >= ZoomBobNormal_::_2_::s_pLowerClippingBorder )
+        v46 = ZoomBobNormal_::_2_::s_pLowerClippingBorder;
+      ZoomBobNormal_::_2_::s_pEndOfScanline = v46;
+      ++ZoomBobNormal_::_2_::s_iDestY;
       v39 = 0;
-      v40 += operator||;
+      v40 += ZoomBobNormal_::_2_::s_iSourceWidth;
       v22 = v43 < 0x10000;
       v47 = v43 - 0x10000;
       if ( v22 )
       {
-        operator|| = v47;
-        operator|| += g_iRenderPitch;
-        v49 = operator|| * (operator|| - v40);
+        ZoomBobNormal_::_2_::s_iGradientY = v47;
+        ZoomBobNormal_::_2_::s_iStartOfDestLine += g_iRenderPitch;
+        v49 = ZoomBobNormal_::_2_::s_iZoom * (ZoomBobNormal_::_2_::s_iSourceWidth - v40);
         v48 = (unsigned int)(v49 + g_iZoomInit + 0x10000) >> 16;
         LOWORD(v42) = v49 + g_iZoomInit;
-        operator|| = v48;
-        operator|| = v40;
-        operator|| = v42;
-        operator|| = (int)v37;
+        ZoomBobNormal_::_2_::s_iStartOfDestLineRest = v48;
+        ZoomBobNormal_::_2_::s_iBufferedPixelCounterEbx = v40;
+        ZoomBobNormal_::_2_::s_iBufferedPixelCounterEcx = v42;
+        ZoomBobNormal_::_2_::s_iSourceLineStart = (int)ZoomBobNormal____2___s_pSourceAdress;
         v39 = 0;
       }
       else
       {
-        v37 = (unsigned __int8 *)operator||;
-        operator|| = v47 - operator||;
-        v48 = operator||;
-        operator|| += g_iRenderPitch;
-        v40 = operator||;
-        v42 = operator||;
+        ZoomBobNormal____2___s_pSourceAdress = (unsigned __int8 *)ZoomBobNormal_::_2_::s_iSourceLineStart;
+        ZoomBobNormal_::_2_::s_iGradientY = v47 - ZoomBobNormal_::_2_::s_iZoom;
+        v48 = ZoomBobNormal_::_2_::s_iStartOfDestLineRest;
+        ZoomBobNormal_::_2_::s_iStartOfDestLine += g_iRenderPitch;
+        v40 = ZoomBobNormal_::_2_::s_iBufferedPixelCounterEbx;
+        v42 = ZoomBobNormal_::_2_::s_iBufferedPixelCounterEcx;
       }
       v50 = v44 + 2 * v48;
-      if ( v50 >= g_iScanlineLength + operator|| )
+      if ( v50 >= g_iScanlineLength + ZoomBobNormal_::_2_::s_pUpperClippingBorder )
         break;
       v39 = 0;
-      if ( operator|| > operator|| )
+      if ( ZoomBobNormal_::_2_::s_iDestY > ZoomBobNormal_::_2_::s_iUpperClippingLine )
       {
 LABEL_70:
         while ( 1 )
@@ -46738,53 +46765,69 @@ LABEL_70:
           v22 = v40-- < 1;
           if ( v22 )
             break;
-          LOBYTE(v39) = *v37++;
+          LOBYTE(v39) = *ZoomBobNormal____2___s_pSourceAdress++;
           if ( (_BYTE)v39 )
           {
             if ( (_BYTE)v39 == 1 )
             {
               v58 = v40 + 1;
-              LOBYTE(v39) = *v37++;
+              LOBYTE(v39) = *ZoomBobNormal____2___s_pSourceAdress++;
               if ( !(_BYTE)v39 )
                 return v62;
               v40 = v58 - v39++;
               v59 = v50 & 2;
               if ( (v50 & 2) == 0 )
                 --v59;
-              if ( (operator|| & 1) != 0 )
+              if ( (ZoomBobNormal_::_2_::s_iDestY & 1) != 0 )
                 v59 = -v59;
               while ( --v39 )
               {
-                v60 = (operator|| + v42 < 0) ^ __OFADD__(operator||, v42);
-                for ( v42 += operator||; !v60; v60 = (v42 < 0) ^ v24 )
+                v60 = (ZoomBobNormal_::_2_::s_iZoom + v42 < 0) ^ __OFADD__(ZoomBobNormal_::_2_::s_iZoom, v42);
+                for ( v42 += ZoomBobNormal_::_2_::s_iZoom; !v60; v60 = (v42 < 0) ^ v24 )
                 {
                   v59 = -v59;
-                  if ( v59 >= 1 && v50 >= operator|| && v50 < operator|| )
+                  if ( v59 >= 1
+                    && v50 >= ZoomBobNormal_::_2_::s_pBeginOfScanlineQuery
+                    && v50 < ZoomBobNormal_::_2_::s_pEndOfScanline )
+                  {
                     *(_WORD *)v50 = 0;
+                  }
                   v50 += 2;
                   v22 = v42 < 0x10000;
                   v42 -= 0x10000;
                   if ( v22 )
                     break;
                   v59 = -v59;
-                  if ( v59 >= 1 && v50 >= operator|| && v50 < operator|| )
+                  if ( v59 >= 1
+                    && v50 >= ZoomBobNormal_::_2_::s_pBeginOfScanlineQuery
+                    && v50 < ZoomBobNormal_::_2_::s_pEndOfScanline )
+                  {
                     *(_WORD *)v50 = 0;
+                  }
                   v50 += 2;
                   v22 = v42 < 0x10000;
                   v42 -= 0x10000;
                   if ( v22 )
                     break;
                   v59 = -v59;
-                  if ( v59 >= 1 && v50 >= operator|| && v50 < operator|| )
+                  if ( v59 >= 1
+                    && v50 >= ZoomBobNormal_::_2_::s_pBeginOfScanlineQuery
+                    && v50 < ZoomBobNormal_::_2_::s_pEndOfScanline )
+                  {
                     *(_WORD *)v50 = 0;
+                  }
                   v50 += 2;
                   v22 = v42 < 0x10000;
                   v42 -= 0x10000;
                   if ( v22 )
                     break;
                   v59 = -v59;
-                  if ( v59 >= 1 && v50 >= operator|| && v50 < operator|| )
+                  if ( v59 >= 1
+                    && v50 >= ZoomBobNormal_::_2_::s_pBeginOfScanlineQuery
+                    && v50 < ZoomBobNormal_::_2_::s_pEndOfScanline )
+                  {
                     *(_WORD *)v50 = 0;
+                  }
                   v50 += 2;
                   v24 = __OFSUB__(v42, 0x10000);
                   v42 -= 0x10000;
@@ -46793,32 +46836,32 @@ LABEL_70:
             }
             else
             {
-              v51 = (operator|| + v42 < 0) ^ __OFADD__(operator||, v42);
-              for ( v42 += operator||; !v51; v51 = (v42 < 0) ^ v24 )
+              v51 = (ZoomBobNormal_::_2_::s_iZoom + v42 < 0) ^ __OFADD__(ZoomBobNormal_::_2_::s_iZoom, v42);
+              for ( v42 += ZoomBobNormal_::_2_::s_iZoom; !v51; v51 = (v42 < 0) ^ v24 )
               {
-                v52 = *(_WORD *)(v38 + 2 * v39);
-                if ( v50 >= operator|| && v50 < operator|| )
+                v52 = *(_WORD *)(ZoomBobNormal____2___s_pPaletteAdress + 2 * v39);
+                if ( v50 >= ZoomBobNormal_::_2_::s_pBeginOfScanlineQuery && v50 < ZoomBobNormal_::_2_::s_pEndOfScanline )
                   *(_WORD *)v50 = v52;
                 v50 += 2;
                 v22 = v42 < 0x10000;
                 v42 -= 0x10000;
                 if ( v22 )
                   break;
-                if ( v50 >= operator|| && v50 < operator|| )
+                if ( v50 >= ZoomBobNormal_::_2_::s_pBeginOfScanlineQuery && v50 < ZoomBobNormal_::_2_::s_pEndOfScanline )
                   *(_WORD *)v50 = v52;
                 v50 += 2;
                 v22 = v42 < 0x10000;
                 v42 -= 0x10000;
                 if ( v22 )
                   break;
-                if ( v50 >= operator|| && v50 < operator|| )
+                if ( v50 >= ZoomBobNormal_::_2_::s_pBeginOfScanlineQuery && v50 < ZoomBobNormal_::_2_::s_pEndOfScanline )
                   *(_WORD *)v50 = v52;
                 v50 += 2;
                 v22 = v42 < 0x10000;
                 v42 -= 0x10000;
                 if ( v22 )
                   break;
-                if ( v50 >= operator|| && v50 < operator|| )
+                if ( v50 >= ZoomBobNormal_::_2_::s_pBeginOfScanlineQuery && v50 < ZoomBobNormal_::_2_::s_pEndOfScanline )
                   *(_WORD *)v50 = v52;
                 v50 += 2;
                 v24 = __OFSUB__(v42, 0x10000);
@@ -46829,12 +46872,12 @@ LABEL_70:
           else
           {
             v55 = v40 + 1;
-            LOBYTE(v39) = *v37++;
+            LOBYTE(v39) = *ZoomBobNormal____2___s_pSourceAdress++;
             v22 = v55 < v39;
             v40 = v55 - v39;
             if ( v22 )
               goto LABEL_59;
-            v56 = operator|| * v39;
+            v56 = ZoomBobNormal_::_2_::s_iZoom * v39;
             v57 = (unsigned int)(v56 + v42 + 0x10000) >> 16;
             LOWORD(v42) = v56 + v42;
             v50 += 2 * v57;
@@ -46849,11 +46892,11 @@ LABEL_70:
           v22 = v40-- < 1;
           if ( v22 )
             break;
-          v54 = *v37++;
+          v54 = *ZoomBobNormal____2___s_pSourceAdress++;
           if ( v54 <= 1u )
           {
             v53 = v40 + 1;
-            LOBYTE(v39) = *v37++;
+            LOBYTE(v39) = *ZoomBobNormal____2___s_pSourceAdress++;
             if ( !(_BYTE)v39 )
               return v62;
             v22 = v53 < v39;
@@ -46864,25 +46907,33 @@ LABEL_70:
         }
       }
     }
-    if ( v50 < operator|| )
+    if ( v50 < ZoomBobNormal_::_2_::s_pLowerClippingBorder )
       goto LABEL_70;
     return v62;
   }
   else
   {
-    HIDWORD(v61) = operator|| + operator||;
+    HIDWORD(v61) = ZoomBobNormal_::_2_::s_iDestWidth + ZoomBobNormal_::_2_::s_iDestX;
     LODWORD(v61) = g_pZoomGradient;
-    if ( operator|| >= MEMORY[0x3E2E270] || operator|| + operator|| < 0 != __OFADD__(operator||, operator||) )
+    if ( ZoomBobNormal_::_2_::s_iDestY >= GfxEngineSetup.m_uHeight
+      || ZoomBobNormal_::_2_::s_iDestHeight + ZoomBobNormal_::_2_::s_iDestY < 0 != __OFADD__(
+                                                                                     ZoomBobNormal_::_2_::s_iDestHeight,
+                                                                                     ZoomBobNormal_::_2_::s_iDestY) )
+    {
       return v61;
-    v10 = (unsigned __int8 *)operator||;
-    v11 = operator||;
-    operator|| = operator|| + operator|| + g_iRenderPitch * (operator|| - 1) + g_pRenderAdress;
-    operator|| = operator||;
-    operator|| = 0;
+    }
+    _ZoomBobNormal____2___s_pSourceAdress = (unsigned __int8 *)ZoomBobNormal_::_2_::s_pSourceAdress;
+    _ZoomBobNormal____2___s_pPaletteAdress = ZoomBobNormal_::_2_::s_pPaletteAdress;
+    ZoomBobNormal_::_2_::s_iStartOfDestLine = ZoomBobNormal_::_2_::s_iDestX
+                                            + ZoomBobNormal_::_2_::s_iDestX
+                                            + g_iRenderPitch * (ZoomBobNormal_::_2_::s_iDestY - 1)
+                                            + g_pRenderAdress;
+    ZoomBobNormal_::_2_::s_iSourceLineStart = ZoomBobNormal_::_2_::s_pSourceAdress;
+    ZoomBobNormal_::_2_::s_iStartOfDestLineRest = 0;
     v12 = 0;
-    operator|| = operator||;
-    operator|| = g_iZoomInit;
-    operator|| = g_iZoomInit;
+    ZoomBobNormal_::_2_::s_iBufferedPixelCounterEbx = ZoomBobNormal_::_2_::s_iSourceWidth;
+    ZoomBobNormal_::_2_::s_iGradientY = g_iZoomInit;
+    ZoomBobNormal_::_2_::s_iBufferedPixelCounterEcx = g_iZoomInit;
     while ( 1 )
     {
       while ( 1 )
@@ -46890,28 +46941,28 @@ LABEL_70:
         v13 = 0;
 LABEL_14:
         HIWORD(v15) = HIWORD(g_iZoomInit);
-        v16 = operator||;
+        v16 = ZoomBobNormal_::_2_::s_iGradientY;
         while ( 1 )
         {
-          v22 = (operator|| + v16 < 0) ^ __OFADD__(operator||, v16);
-          v16 += operator||;
+          v22 = (ZoomBobNormal_::_2_::s_iZoom + v16 < 0) ^ __OFADD__(ZoomBobNormal_::_2_::s_iZoom, v16);
+          v16 += ZoomBobNormal_::_2_::s_iZoom;
           if ( !v22 )
             break;
-          operator|| = v16;
+          ZoomBobNormal_::_2_::s_iGradientY = v16;
           if ( v13 <= 0 )
-            v13 += operator||;
+            v13 += ZoomBobNormal_::_2_::s_iSourceWidth;
           do
           {
             while ( 1 )
             {
-              v14 = *v10++;
+              v14 = *_ZoomBobNormal____2___s_pSourceAdress++;
               if ( v14 <= 1u )
                 break;
               v22 = v13-- <= 1;
               if ( v22 )
                 goto LABEL_12;
             }
-            LOBYTE(v12) = *v10++;
+            LOBYTE(v12) = *_ZoomBobNormal____2___s_pSourceAdress++;
             if ( !(_BYTE)v12 )
               return v61;
             v22 = v13 <= v12;
@@ -46919,48 +46970,48 @@ LABEL_14:
           }
           while ( !v22 );
 LABEL_12:
-          operator|| = (int)v10;
+          ZoomBobNormal_::_2_::s_iSourceLineStart = (int)_ZoomBobNormal____2___s_pSourceAdress;
         }
-        v17 = g_iRenderPitch + operator||;
-        ++operator||;
-        v13 += operator||;
+        v17 = g_iRenderPitch + ZoomBobNormal_::_2_::s_iStartOfDestLine;
+        ++ZoomBobNormal_::_2_::s_iDestY;
+        v13 += ZoomBobNormal_::_2_::s_iSourceWidth;
         v22 = v16 < 0x10000;
         v18 = v16 - 0x10000;
         if ( v22 )
         {
-          operator|| = v18;
-          operator|| += g_iRenderPitch;
-          v20 = operator|| * (operator|| - v13);
+          ZoomBobNormal_::_2_::s_iGradientY = v18;
+          ZoomBobNormal_::_2_::s_iStartOfDestLine += g_iRenderPitch;
+          v20 = ZoomBobNormal_::_2_::s_iZoom * (ZoomBobNormal_::_2_::s_iSourceWidth - v13);
           v19 = (unsigned int)(v20 + g_iZoomInit + 0x10000) >> 16;
           LOWORD(v15) = v20 + g_iZoomInit;
-          operator|| = v19;
-          operator|| = v13;
-          operator|| = v15;
-          operator|| = (int)v10;
+          ZoomBobNormal_::_2_::s_iStartOfDestLineRest = v19;
+          ZoomBobNormal_::_2_::s_iBufferedPixelCounterEbx = v13;
+          ZoomBobNormal_::_2_::s_iBufferedPixelCounterEcx = v15;
+          ZoomBobNormal_::_2_::s_iSourceLineStart = (int)_ZoomBobNormal____2___s_pSourceAdress;
           v12 = 0;
         }
         else
         {
-          v10 = (unsigned __int8 *)operator||;
-          operator|| = v18 - operator||;
-          v19 = operator||;
-          operator|| += g_iRenderPitch;
-          v13 = operator||;
-          v15 = operator||;
+          _ZoomBobNormal____2___s_pSourceAdress = (unsigned __int8 *)ZoomBobNormal_::_2_::s_iSourceLineStart;
+          ZoomBobNormal_::_2_::s_iGradientY = v18 - ZoomBobNormal_::_2_::s_iZoom;
+          v19 = ZoomBobNormal_::_2_::s_iStartOfDestLineRest;
+          ZoomBobNormal_::_2_::s_iStartOfDestLine += g_iRenderPitch;
+          v13 = ZoomBobNormal_::_2_::s_iBufferedPixelCounterEbx;
+          v15 = ZoomBobNormal_::_2_::s_iBufferedPixelCounterEcx;
         }
         v21 = v17 + 2 * v19;
-        if ( v21 >= operator|| )
+        if ( v21 >= ZoomBobNormal_::_2_::s_pUpperClippingBorder )
           break;
         while ( 1 )
         {
           v22 = v13-- < 1;
           if ( v22 )
             break;
-          v26 = *v10++;
+          v26 = *_ZoomBobNormal____2___s_pSourceAdress++;
           if ( v26 <= 1u )
           {
             v25 = v13 + 1;
-            LOBYTE(v12) = *v10++;
+            LOBYTE(v12) = *_ZoomBobNormal____2___s_pSourceAdress++;
             if ( !(_BYTE)v12 )
               return v61;
             v22 = v25 < v12;
@@ -46970,29 +47021,29 @@ LABEL_12:
           }
         }
       }
-      if ( v21 >= operator|| )
+      if ( v21 >= ZoomBobNormal_::_2_::s_pLowerClippingBorder )
         break;
       while ( 1 )
       {
         v22 = v13-- < 1;
         if ( v22 )
           break;
-        LOBYTE(v12) = *v10++;
+        LOBYTE(v12) = *_ZoomBobNormal____2___s_pSourceAdress++;
         if ( (_BYTE)v12 )
         {
           if ( (_BYTE)v12 == 1 )
           {
             v30 = v13 + 1;
-            LOBYTE(v12) = *v10++;
+            LOBYTE(v12) = *_ZoomBobNormal____2___s_pSourceAdress++;
             if ( !(_BYTE)v12 )
               return v61;
             v13 = v30 - v12;
-            v31 = operator|| * v12;
+            v31 = ZoomBobNormal_::_2_::s_iZoom * v12;
             v32 = v31 + v15 + 0x10000;
             LOWORD(v15) = v31 + v15;
             v33 = HIWORD(v32);
             v34 = v21 + 2 * v33;
-            if ( (v21 & 2) != ((2 * (_BYTE)operator||) & 2) )
+            if ( (v21 & 2) != ((2 * (_BYTE)ZoomBobNormal_::_2_::s_iDestY) & 2) )
             {
               --v33;
               v21 += 2;
@@ -47018,14 +47069,14 @@ LABEL_12:
             }
             v21 = v34;
             v12 = 0;
-            v11 = operator||;
+            _ZoomBobNormal____2___s_pPaletteAdress = ZoomBobNormal_::_2_::s_pPaletteAdress;
           }
           else
           {
-            v22 = (operator|| + v15 < 0) ^ __OFADD__(operator||, v15);
-            for ( v15 += operator||; !v22; v22 = (v15 < 0) ^ v24 )
+            v22 = (ZoomBobNormal_::_2_::s_iZoom + v15 < 0) ^ __OFADD__(ZoomBobNormal_::_2_::s_iZoom, v15);
+            for ( v15 += ZoomBobNormal_::_2_::s_iZoom; !v22; v22 = (v15 < 0) ^ v24 )
             {
-              v23 = *(_WORD *)(v11 + 2 * v12);
+              v23 = *(_WORD *)(_ZoomBobNormal____2___s_pPaletteAdress + 2 * v12);
               *(_WORD *)v21 = v23;
               v21 += 2;
               v22 = v15 < 0x10000;
@@ -47054,12 +47105,12 @@ LABEL_12:
         else
         {
           v27 = v13 + 1;
-          LOBYTE(v12) = *v10++;
+          LOBYTE(v12) = *_ZoomBobNormal____2___s_pSourceAdress++;
           v22 = v27 < v12;
           v13 = v27 - v12;
           if ( v22 )
             goto LABEL_14;
-          v28 = operator|| * v12;
+          v28 = ZoomBobNormal_::_2_::s_iZoom * v12;
           v29 = (unsigned int)(v28 + v15 + 0x10000) >> 16;
           LOWORD(v15) = v28 + v15;
           v21 += 2 * v29;
@@ -50179,9 +50230,9 @@ bool __cdecl DrawMiniMapObjectLayer(void) {
             OwnerID = g_pfGetOwnerID(v15);
             byte_46C8358[162 * v16 + v17] = byte_46CE9E0[162 * v16 + v17];
             v2 = IGfxEngine::ConvertRgbToHicol(
-                   g_pPlayerColors[OwnerID].m_iR,
-                   dword_468D2CC[3 * OwnerID],
-                   dword_468D2D0[3 * OwnerID]);
+                   g_cColorGradient.m_vPlayerColors[OwnerID].m_iR,
+                   g_cColorGradient.m_vPlayerColors[OwnerID].m_iG,
+                   g_cColorGradient.m_vPlayerColors[OwnerID].m_iB);
             *(_WORD *)(v7 + 2 * v16) = v2;
           }
         }
@@ -50470,9 +50521,9 @@ bool __cdecl DrawCompleteMiniMap(void) {
             OwnerID = g_pfGetOwnerID(v22);
             byte_46C8358[162 * v20 + v21] = byte_46CE9E0[162 * v20 + v21];
             v3 = IGfxEngine::ConvertRgbToHicol(
-                   g_pPlayerColors[OwnerID].m_iR,
-                   dword_468D2CC[3 * OwnerID],
-                   dword_468D2D0[3 * OwnerID]);
+                   *(_DWORD *)&g_cColorGradient.m_vGradients[8][12 * OwnerID],
+                   (int)(&g_cColorGradient.?)[3 * OwnerID],
+                   (int)(&g_cColorGradient.?)[3 * OwnerID]);
             v8[v20] = v3;
           }
           ++v17;
@@ -50511,8 +50562,8 @@ void __cdecl SetMiniMapAreaSize(void) {
   
   int result; // eax
 
-  dword_3E2E728 = (int)(float)((float)(MEMORY[0x3E2E270] / (dword_3E2E290 >> 16)) * *(float *)&dword_3E2E718);
-  result = MEMORY[0x3E2E26C] / (g_iVertexSize >> 16);
+  dword_3E2E728 = (int)(float)((float)(GfxEngineSetup.m_uHeight / (dword_3E2E290 >> 16)) * *(float *)&dword_3E2E718);
+  result = GfxEngineSetup.m_uWidth / (g_iVertexSize >> 16);
   dword_3E2E724 = (int)(float)((float)result * *(float *)&dword_3E2E718);
   return result;
 }
@@ -50988,102 +51039,102 @@ bool __cdecl BlitWaveHardware(int a1, int a2, int a3, int a4, int a5) {
 
 
 // address=[0x2f932d0]
-// Decompiled from char __cdecl BlitBuildingHardware(int a1, int a2, int a3, struct SGfxObjectInfo *a4, int *a5, int *a6)
-bool __cdecl BlitBuildingHardware(int a1, int a2, int a3, struct SGfxObjectInfo * a4, int * a5, int & a6) {
+// Decompiled from char __cdecl BlitBuildingHardware(int a1, int a2, int a3, struct SGfxObjectInfo *_pInfo, int *a5, int *a6)
+bool __cdecl BlitBuildingHardware(int a1, int a2, int a3, struct SGfxObjectInfo * _pInfo, int * a5, int & a6) {
   
-  int v7; // [esp+58h] [ebp-1CCh]
-  int v8; // [esp+5Ch] [ebp-1C8h]
-  int v9; // [esp+60h] [ebp-1C4h]
-  int v10; // [esp+68h] [ebp-1BCh]
-  int v11; // [esp+6Ch] [ebp-1B8h]
-  int v12; // [esp+70h] [ebp-1B4h]
-  int v13; // [esp+74h] [ebp-1B0h]
-  int v14; // [esp+84h] [ebp-1A0h]
-  int v15; // [esp+88h] [ebp-19Ch]
-  int v16; // [esp+8Ch] [ebp-198h]
-  int v17; // [esp+98h] [ebp-18Ch]
-  int v18; // [esp+9Ch] [ebp-188h]
-  int v19; // [esp+A0h] [ebp-184h]
-  int v20; // [esp+A4h] [ebp-180h]
-  __int16 *v21; // [esp+A8h] [ebp-17Ch]
-  int v22; // [esp+B0h] [ebp-174h]
-  int v23; // [esp+B4h] [ebp-170h]
-  int v24; // [esp+B8h] [ebp-16Ch]
-  int v25; // [esp+BCh] [ebp-168h]
-  int v26; // [esp+C0h] [ebp-164h]
-  int v27; // [esp+C4h] [ebp-160h]
-  int v28; // [esp+C8h] [ebp-15Ch]
-  int v29; // [esp+CCh] [ebp-158h]
-  int v30; // [esp+D0h] [ebp-154h]
-  int v31; // [esp+D4h] [ebp-150h]
-  int v32; // [esp+D8h] [ebp-14Ch]
-  int v33; // [esp+DCh] [ebp-148h]
-  float v34; // [esp+E0h] [ebp-144h]
-  float v35; // [esp+E4h] [ebp-140h]
-  int v36; // [esp+E8h] [ebp-13Ch]
-  int v37; // [esp+E8h] [ebp-13Ch]
-  int v38; // [esp+ECh] [ebp-138h]
-  int v39; // [esp+ECh] [ebp-138h]
-  int v40; // [esp+F8h] [ebp-12Ch]
-  int v41; // [esp+FCh] [ebp-128h]
+  __int64 v7; // [esp+Ch] [ebp-218h]
+  __int64 v8; // [esp+18h] [ebp-20Ch]
+  __int64 v9; // [esp+18h] [ebp-20Ch]
+  __int64 v10; // [esp+18h] [ebp-20Ch]
+  __int64 v11; // [esp+18h] [ebp-20Ch]
+  __int64 v12; // [esp+18h] [ebp-20Ch]
+  int v13; // [esp+48h] [ebp-1DCh]
+  int v14; // [esp+50h] [ebp-1D4h]
+  int v15; // [esp+58h] [ebp-1CCh]
+  int v16; // [esp+5Ch] [ebp-1C8h]
+  int v17; // [esp+60h] [ebp-1C4h]
+  int v18; // [esp+68h] [ebp-1BCh]
+  DWORD m_iOffsetY; // [esp+6Ch] [ebp-1B8h]
+  int v20; // [esp+70h] [ebp-1B4h]
+  int v21; // [esp+74h] [ebp-1B0h]
+  DWORD *v22; // [esp+84h] [ebp-1A0h]
+  int v23; // [esp+88h] [ebp-19Ch]
+  int v24; // [esp+8Ch] [ebp-198h]
+  int v25; // [esp+98h] [ebp-18Ch]
+  int v26; // [esp+9Ch] [ebp-188h]
+  int v27; // [esp+A0h] [ebp-184h]
+  int v28; // [esp+A4h] [ebp-180h]
+  __int16 *dword58; // [esp+A8h] [ebp-17Ch]
+  int v30; // [esp+B0h] [ebp-174h]
+  int v31; // [esp+B4h] [ebp-170h]
+  int v32; // [esp+B8h] [ebp-16Ch]
+  int v33; // [esp+BCh] [ebp-168h]
+  int v34; // [esp+C0h] [ebp-164h]
+  int v35; // [esp+C4h] [ebp-160h]
+  int v36; // [esp+C8h] [ebp-15Ch]
+  int v37; // [esp+CCh] [ebp-158h]
+  int v38; // [esp+D0h] [ebp-154h]
+  int v39; // [esp+D4h] [ebp-150h]
+  int v40; // [esp+D8h] [ebp-14Ch]
+  int v41; // [esp+DCh] [ebp-148h]
+  float v42; // [esp+E0h] [ebp-144h]
+  float v43; // [esp+E4h] [ebp-140h]
+  int v44; // [esp+E8h] [ebp-13Ch]
+  int v45; // [esp+E8h] [ebp-13Ch]
+  int v46; // [esp+ECh] [ebp-138h]
+  int v47; // [esp+ECh] [ebp-138h]
+  int v48; // [esp+F8h] [ebp-12Ch]
+  int v49; // [esp+FCh] [ebp-128h]
   unsigned int jj; // [esp+100h] [ebp-124h]
-  int v43; // [esp+104h] [ebp-120h]
-  int v44; // [esp+108h] [ebp-11Ch]
-  __int16 *v45; // [esp+10Ch] [ebp-118h]
-  __int16 *v46; // [esp+10Ch] [ebp-118h]
-  unsigned __int8 *v47; // [esp+110h] [ebp-114h]
-  unsigned __int8 *v48; // [esp+110h] [ebp-114h]
-  unsigned __int8 *v49; // [esp+110h] [ebp-114h]
-  unsigned __int16 *v50; // [esp+114h] [ebp-110h]
-  unsigned __int16 *v51; // [esp+114h] [ebp-110h]
-  unsigned __int16 *v52; // [esp+114h] [ebp-110h]
-  unsigned __int8 *v53; // [esp+118h] [ebp-10Ch]
-  unsigned __int8 *v54; // [esp+118h] [ebp-10Ch]
-  unsigned __int8 *v55; // [esp+118h] [ebp-10Ch]
-  unsigned __int8 *v56; // [esp+118h] [ebp-10Ch]
-  int v57; // [esp+11Ch] [ebp-108h]
-  int v58; // [esp+11Ch] [ebp-108h]
-  int v59; // [esp+120h] [ebp-104h]
-  int v60; // [esp+120h] [ebp-104h]
+  int v51; // [esp+104h] [ebp-120h]
+  int v52; // [esp+108h] [ebp-11Ch]
+  __int16 *m_pMiniFlagGfxData; // [esp+10Ch] [ebp-118h]
+  __int16 *v54; // [esp+10Ch] [ebp-118h]
+  unsigned __int8 *v55; // [esp+110h] [ebp-114h]
+  unsigned __int8 *v56; // [esp+110h] [ebp-114h]
+  unsigned __int8 *v57; // [esp+110h] [ebp-114h]
+  unsigned __int16 *v58; // [esp+114h] [ebp-110h]
+  unsigned __int16 *v59; // [esp+114h] [ebp-110h]
+  unsigned __int16 *v60; // [esp+114h] [ebp-110h]
+  unsigned __int8 *v61; // [esp+118h] [ebp-10Ch]
+  unsigned __int8 *v62; // [esp+118h] [ebp-10Ch]
+  unsigned __int8 *v63; // [esp+118h] [ebp-10Ch]
+  unsigned __int8 *v64; // [esp+118h] [ebp-10Ch]
+  signed int v65; // [esp+11Ch] [ebp-108h]
+  char *v66; // [esp+11Ch] [ebp-108h]
+  char *v67; // [esp+120h] [ebp-104h]
+  char *v68; // [esp+120h] [ebp-104h]
   unsigned int i; // [esp+124h] [ebp-100h]
   unsigned int j; // [esp+124h] [ebp-100h]
-  int v63; // [esp+128h] [ebp-FCh]
-  int v64; // [esp+128h] [ebp-FCh]
-  int v65; // [esp+12Ch] [ebp-F8h]
-  int v66; // [esp+130h] [ebp-F4h]
-  int v67; // [esp+134h] [ebp-F0h]
-  int v68; // [esp+134h] [ebp-F0h]
-  int v69; // [esp+134h] [ebp-F0h]
-  int v70; // [esp+134h] [ebp-F0h]
-  int v71; // [esp+138h] [ebp-ECh]
-  int v72; // [esp+138h] [ebp-ECh]
-  int v73; // [esp+138h] [ebp-ECh]
-  int v74; // [esp+138h] [ebp-ECh]
-  float v75; // [esp+13Ch] [ebp-E8h]
-  float v76; // [esp+13Ch] [ebp-E8h]
-  float v77; // [esp+13Ch] [ebp-E8h]
-  float v78; // [esp+13Ch] [ebp-E8h]
-  float v79; // [esp+13Ch] [ebp-E8h]
-  float v80; // [esp+140h] [ebp-E4h]
-  float v81; // [esp+140h] [ebp-E4h]
-  float v82; // [esp+140h] [ebp-E4h]
-  float v83; // [esp+140h] [ebp-E4h]
-  float v84; // [esp+140h] [ebp-E4h]
-  __int16 *v85; // [esp+144h] [ebp-E0h]
-  __int16 *v86; // [esp+144h] [ebp-E0h]
-  __int16 *v87; // [esp+144h] [ebp-E0h]
+  int v71; // [esp+128h] [ebp-FCh]
+  char *v72; // [esp+128h] [ebp-FCh]
+  int v73; // [esp+12Ch] [ebp-F8h]
+  int v74; // [esp+130h] [ebp-F4h]
+  int v75; // [esp+134h] [ebp-F0h]
+  int v76; // [esp+134h] [ebp-F0h]
+  int v77; // [esp+134h] [ebp-F0h]
+  __int64 v78; // [esp+134h] [ebp-F0h]
+  int v79; // [esp+138h] [ebp-ECh]
+  int v80; // [esp+138h] [ebp-ECh]
+  int v81; // [esp+138h] [ebp-ECh]
+  float v82; // [esp+13Ch] [ebp-E8h]
+  __int64 v83; // [esp+13Ch] [ebp-E8h]
+  __int64 v84; // [esp+13Ch] [ebp-E8h]
+  __int64 v85; // [esp+13Ch] [ebp-E8h]
+  __int64 v86; // [esp+13Ch] [ebp-E8h]
+  float v87; // [esp+140h] [ebp-E4h]
+  __int16 *v88; // [esp+144h] [ebp-E0h]
+  __int16 *v89; // [esp+144h] [ebp-E0h]
+  __int16 *v90; // [esp+144h] [ebp-E0h]
   unsigned int k; // [esp+148h] [ebp-DCh]
   unsigned int m; // [esp+148h] [ebp-DCh]
   unsigned int n; // [esp+148h] [ebp-DCh]
   unsigned int ii; // [esp+148h] [ebp-DCh]
-  __int16 *v92; // [esp+14Ch] [ebp-D8h]
-  __int16 *v93; // [esp+14Ch] [ebp-D8h]
-  __int16 *v94; // [esp+14Ch] [ebp-D8h]
-  __int16 *v95; // [esp+14Ch] [ebp-D8h]
+  BYTE *m_pGfxData; // [esp+14Ch] [ebp-D8h]
   __int16 *v96; // [esp+14Ch] [ebp-D8h]
   __int16 *v97; // [esp+14Ch] [ebp-D8h]
   __int16 *v98; // [esp+14Ch] [ebp-D8h]
-  __int16 *v99; // [esp+14Ch] [ebp-D8h]
+  int v99; // [esp+14Ch] [ebp-D8h]
   __int16 *v100; // [esp+14Ch] [ebp-D8h]
   __int16 *v101; // [esp+14Ch] [ebp-D8h]
   __int16 *v102; // [esp+14Ch] [ebp-D8h]
@@ -51092,352 +51143,356 @@ bool __cdecl BlitBuildingHardware(int a1, int a2, int a3, struct SGfxObjectInfo 
   __int16 *v105; // [esp+14Ch] [ebp-D8h]
   __int16 *v106; // [esp+14Ch] [ebp-D8h]
   __int16 *v107; // [esp+14Ch] [ebp-D8h]
-  int v108; // [esp+150h] [ebp-D4h]
-  int v109; // [esp+150h] [ebp-D4h]
-  int v110; // [esp+154h] [ebp-D0h]
-  int v111; // [esp+154h] [ebp-D0h]
-  int v112; // [esp+158h] [ebp-CCh]
-  int v113; // [esp+158h] [ebp-CCh]
-  int v114; // [esp+15Ch] [ebp-C8h]
-  int v115; // [esp+15Ch] [ebp-C8h]
-  _DWORD v116[48]; // [esp+160h] [ebp-C4h] BYREF
-  int v117; // [esp+230h] [ebp+Ch]
-  int v118; // [esp+234h] [ebp+10h]
+  __int16 *v108; // [esp+14Ch] [ebp-D8h]
+  __int16 *v109; // [esp+14Ch] [ebp-D8h]
+  __int16 *v110; // [esp+14Ch] [ebp-D8h]
+  __int16 *v111; // [esp+14Ch] [ebp-D8h]
+  __int16 *v112; // [esp+14Ch] [ebp-D8h]
+  int v113; // [esp+150h] [ebp-D4h]
+  int v114; // [esp+150h] [ebp-D4h]
+  int v115; // [esp+154h] [ebp-D0h]
+  int v116; // [esp+154h] [ebp-D0h]
+  char *v117; // [esp+158h] [ebp-CCh]
+  int v118; // [esp+158h] [ebp-CCh]
+  signed int v119; // [esp+15Ch] [ebp-C8h]
+  int v120; // [esp+15Ch] [ebp-C8h]
+  _DWORD v121[48]; // [esp+160h] [ebp-C4h] BYREF
+  int v122; // [esp+230h] [ebp+Ch]
+  int v123; // [esp+234h] [ebp+10h]
 
-  if ( !*((_DWORD *)a4 + 1) )
+  if ( !_pInfo->m_pPalData )
     return 0;
-  byte_46F32C8 = *((_BYTE *)a4 + 23) != 0;
-  *((_BYTE *)a4 + 23) = 0;
-  v117 = a2 >> 16;
-  v118 = a3 >> 16;
-  v65 = 0;
-  v66 = 0;
-  v43 = 0;
-  v44 = 0;
-  if ( *(_DWORD *)a4 <= *((_DWORD *)a4 + 22) )
-    v21 = (__int16 *)*((_DWORD *)a4 + 22);
+  byte_46F32C8 = _pInfo->m_bUsed;
+  _pInfo->m_bUsed = 0;
+  v122 = a2 >> 16;
+  v123 = a3 >> 16;
+  v73 = 0;
+  v74 = 0;
+  v51 = 0;
+  v52 = 0;
+  if ( _pInfo->m_pGfxData <= (BYTE *)_pInfo->m_pBuildLayerGfxData )
+    dword58 = (__int16 *)_pInfo->m_pBuildLayerGfxData;
   else
-    v21 = *(__int16 **)a4;
-  v67 = *v21;
-  v71 = v21[1];
-  v40 = v21[2];
-  v41 = v21[3];
-  if ( v67 < 512 && v71 < 512 )
+    dword58 = (__int16 *)_pInfo->m_pGfxData;
+  v75 = *dword58;
+  v79 = dword58[1];
+  v48 = dword58[2];
+  v49 = dword58[3];
+  if ( v75 < 512 && v79 < 512 )
   {
-    v108 = 0;
-    v110 = 0;
-    v112 = *v21;
-    v114 = v21[1];
+    v113 = 0;
+    v115 = 0;
+    v117 = (char *)*dword58;
+    v119 = dword58[1];
     for ( i = 0; i < 0xA; ++i )
     {
-      v85 = (__int16 *)*((_DWORD *)a4 + 4 * i + 134);
-      if ( v85 )
+      v88 = *(__int16 **)&_pInfo->?[16 * i + 248];
+      if ( v88 )
       {
-        v20 = *v85;
-        v86 = v85 + 1;
-        v17 = *v86;
-        v87 = v86 + 1;
-        v19 = v87[1];
-        v18 = *((_DWORD *)a4 + 4 * i + 137);
-        v63 = *((_DWORD *)a4 + 4 * i + 136) + v40 - *v87;
-        if ( v63 >= v108 )
+        v28 = *v88;
+        v89 = v88 + 1;
+        v25 = *v89;
+        v90 = v89 + 1;
+        v27 = v90[1];
+        v26 = *(_DWORD *)&_pInfo->?[16 * i + 260];
+        v71 = *(_DWORD *)&_pInfo->?[16 * i + 256] + v48 - *v90;
+        if ( v71 >= v113 )
         {
-          v64 = v20 + v63;
-          if ( v64 > v112 )
-            v112 = v64;
+          v72 = (char *)(v28 + v71);
+          if ( (int)v72 > (int)v117 )
+            v117 = v72;
         }
         else
         {
-          v108 = *((_DWORD *)a4 + 4 * i + 136) + v40 - *v87;
+          v113 = *(_DWORD *)&_pInfo->?[16 * i + 256] + v48 - *v90;
         }
-        if ( v18 + v41 - v19 >= 0 )
+        if ( v26 + v49 - v27 >= 0 )
         {
-          if ( v17 + v18 + v41 - v19 > v114 )
-            v114 = v17 + v18 + v41 - v19;
+          if ( v25 + v26 + v49 - v27 > v119 )
+            v119 = v25 + v26 + v49 - v27;
         }
         else
         {
-          v110 = v18 + v41 - v19;
+          v115 = v26 + v49 - v27;
         }
       }
     }
     for ( j = 0; j < 0x15; ++j )
     {
-      v47 = (unsigned __int8 *)*((_DWORD *)a4 + 4 * j + 50);
-      if ( v47 )
+      v55 = *(unsigned __int8 **)&_pInfo->gap_60[16 * j + 104];
+      if ( v55 )
       {
-        v16 = *v47;
-        v48 = v47 + 1;
-        v9 = *v48;
-        v49 = v48 + 1;
-        v15 = v49[1];
-        v14 = *((_DWORD *)a4 + 4 * j + 53);
-        v59 = *((_DWORD *)a4 + 4 * j + 52) + v40 - *v49;
-        if ( v59 >= v108 )
+        v24 = *v55;
+        v56 = v55 + 1;
+        v17 = *v56;
+        v57 = v56 + 1;
+        v23 = v57[1];
+        v22 = _pInfo->?[4 * j + 2];
+        v67 = (char *)_pInfo->?[4 * j + 1] + v48 - *v57;
+        if ( (int)v67 >= v113 )
         {
-          v60 = v16 + v59;
-          if ( v60 > v112 )
-            v112 = v60;
+          v68 = &v67[v24];
+          if ( (int)v68 > (int)v117 )
+            v117 = v68;
         }
         else
         {
-          v108 = *((_DWORD *)a4 + 4 * j + 52) + v40 - *v49;
+          v113 = (int)_pInfo->?[4 * j + 1] + v48 - *v57;
         }
-        if ( v14 + v41 - v15 >= 0 )
+        if ( (int)v22 + v49 - v23 >= 0 )
         {
-          if ( v9 + v14 + v41 - v15 > v114 )
-            v114 = v9 + v14 + v41 - v15;
+          if ( (int)v22 + v49 - v23 + v17 > v119 )
+            v119 = (signed int)v22 + v49 - v23 + v17;
         }
         else
         {
-          v110 = v14 + v41 - v15;
+          v115 = (int)v22 + v49 - v23;
         }
       }
     }
-    if ( *((_DWORD *)a4 + 20) )
+    if ( _pInfo->m_pMiniFlagGfxData )
     {
-      v45 = (__int16 *)*((_DWORD *)a4 + 20);
-      v13 = *v45++;
-      v10 = *v45;
-      v46 = v45 + 1;
-      v12 = v46[1];
-      v11 = *((_DWORD *)a4 + 7);
-      v57 = *((_DWORD *)a4 + 6) + v40 - *v46;
-      if ( v57 >= v108 )
+      m_pMiniFlagGfxData = (__int16 *)_pInfo->m_pMiniFlagGfxData;
+      v21 = *m_pMiniFlagGfxData++;
+      v18 = *m_pMiniFlagGfxData;
+      v54 = m_pMiniFlagGfxData + 1;
+      v20 = v54[1];
+      m_iOffsetY = _pInfo->m_iOffsetY;
+      v65 = _pInfo->m_iOffsetX + v48 - *v54;
+      if ( v65 >= v113 )
       {
-        v58 = v13 + v57;
-        if ( v58 > v112 )
-          v112 = v58;
+        v66 = (char *)(v21 + v65);
+        if ( (int)v66 > (int)v117 )
+          v117 = v66;
       }
       else
       {
-        v108 = *((_DWORD *)a4 + 6) + v40 - *v46;
+        v113 = _pInfo->m_iOffsetX + v48 - *v54;
       }
-      if ( v11 + v41 - v12 >= 0 )
+      if ( (int)(m_iOffsetY + v49 - v20) >= 0 )
       {
-        if ( v10 + v11 + v41 - v12 > v114 )
-          v114 = v10 + v11 + v41 - v12;
+        if ( (int)(v18 + m_iOffsetY + v49 - v20) > v119 )
+          v119 = v18 + m_iOffsetY + v49 - v20;
       }
       else
       {
-        v110 = v11 + v41 - v12;
+        v115 = m_iOffsetY + v49 - v20;
       }
     }
-    if ( v112 > v67 )
-      v43 = v112 - v67;
-    if ( v114 > v71 )
-      v44 = v114 - v71;
-    if ( v108 < 0 )
-      v65 = -v108;
-    if ( v110 < 0 )
-      v66 = -v110;
-    v109 = v65 + v108;
-    v113 = v65 + v112;
-    v111 = v66 + v110;
-    v115 = v66 + v114;
-    if ( v109 >= 0 && v111 >= 0 && v115 < 512 && v113 < 512 )
+    if ( (int)v117 > v75 )
+      v51 = (int)&v117[-v75];
+    if ( v119 > v79 )
+      v52 = v119 - v79;
+    if ( v113 < 0 )
+      v73 = -v113;
+    if ( v115 < 0 )
+      v74 = -v115;
+    v114 = v73 + v113;
+    v118 = (int)&v117[v73];
+    v116 = v74 + v115;
+    v120 = v74 + v119;
+    if ( v114 >= 0 && v116 >= 0 && v120 < 512 && v118 < 512 )
     {
-      v75 = (float)v117 - (float)((float)(v65 + v40) * *(float *)&g_fZoomFactor);
-      v80 = (float)v118 - (float)((float)(v66 + v41) * *(float *)&g_fZoomFactor);
-      if ( (float)MEMORY[0x3E2E26C] >= v75
-        && (float)MEMORY[0x3E2E270] >= v80
-        && (float)((float)*(int *)(g_pDestSizeTable + 4 * (v113 - v109)) + v75) >= (float)g_uLeftGuiBorderWidth
-        && (float)((float)*(int *)(g_pDestSizeTable + 4 * (v115 - v111)) + v80) >= 0.0 )
+      v82 = (float)v122 - (float)((float)(v73 + v48) * g_fZoomFactor);
+      v87 = (float)v123 - (float)((float)(v74 + v49) * g_fZoomFactor);
+      if ( (float)GfxEngineSetup.m_uWidth >= v82
+        && (float)GfxEngineSetup.m_uHeight >= v87
+        && (float)((float)*(int *)(g_pDestSizeTable + 4 * (v118 - v114)) + v82) >= (float)g_uLeftGuiBorderWidth
+        && (float)((float)*(int *)(g_pDestSizeTable + 4 * (v120 - v116)) + v87) >= 0.0 )
       {
         if ( byte_3E2E324 )
         {
-          v35 = (float)(v113 - v109) * *(float *)&g_fZoomFactor;
-          v34 = (float)(v115 - v111) * *(float *)&g_fZoomFactor;
-          _vec_ctor_no(v116, 0x20u, 6u, (void *(__thiscall *)(void *))_D3DTLVERTEX::_D3DTLVERTEX);
-          v116[4] = &dword_420320[234316];
-          v116[5] = -1;
-          v116[6] = 0;
-          v116[7] = 0;
-          *(float *)&v116[3] = FLOAT_0_5;
-          *(float *)v116 = v75;
-          *(float *)&v116[1] = v80;
-          v116[12] = &dword_420320[234316];
-          v116[13] = -1;
-          v116[14] = 0;
-          v116[15] = 0;
-          *(float *)&v116[11] = FLOAT_0_5;
-          *(float *)&v116[8] = v75 + v35;
-          *(float *)&v116[9] = v80;
-          v116[20] = &dword_420320[234316];
-          v116[21] = -1;
-          v116[22] = 0;
-          v116[23] = 0;
-          *(float *)&v116[19] = FLOAT_0_5;
-          *(float *)&v116[16] = v75;
-          *(float *)&v116[17] = v80 + v34;
-          v116[28] = &dword_420320[234316];
-          v116[29] = -1;
-          v116[30] = 0;
-          v116[31] = 0;
-          *(float *)&v116[27] = FLOAT_0_5;
-          *(float *)&v116[24] = v75;
-          *(float *)&v116[25] = v80 + v34;
-          v116[36] = &dword_420320[234316];
-          v116[37] = -1;
-          v116[38] = 0;
-          v116[39] = 0;
-          *(float *)&v116[35] = FLOAT_0_5;
-          *(float *)&v116[32] = v75 + v35;
-          *(float *)&v116[33] = v80;
-          v116[44] = &dword_420320[234316];
-          v116[45] = -1;
-          v116[46] = 0;
-          v116[47] = 0;
-          *(float *)&v116[43] = FLOAT_0_5;
-          *(float *)&v116[40] = v75 + v35;
-          *(float *)&v116[41] = v80 + v34;
-          (*(void (__stdcall **)(int, int, int, _DWORD *, int, _DWORD))(*(_DWORD *)D3DObjectPtr->m_pObjectDevice + 100))(
+          v43 = (float)(v118 - v114) * g_fZoomFactor;
+          v42 = (float)(v120 - v116) * g_fZoomFactor;
+          _vec_ctor_no(v121, 0x20u, 6u, (void *(__thiscall *)(void *))_D3DTLVERTEX::_D3DTLVERTEX);
+          v121[4] = &dword_420320[234316];
+          v121[5] = -1;
+          v121[6] = 0;
+          v121[7] = 0;
+          *(float *)&v121[3] = FLOAT_0_5;
+          *(float *)v121 = v82;
+          *(float *)&v121[1] = v87;
+          v121[12] = &dword_420320[234316];
+          v121[13] = -1;
+          v121[14] = 0;
+          v121[15] = 0;
+          *(float *)&v121[11] = FLOAT_0_5;
+          *(float *)&v121[8] = v82 + v43;
+          *(float *)&v121[9] = v87;
+          v121[20] = &dword_420320[234316];
+          v121[21] = -1;
+          v121[22] = 0;
+          v121[23] = 0;
+          *(float *)&v121[19] = FLOAT_0_5;
+          *(float *)&v121[16] = v82;
+          *(float *)&v121[17] = v87 + v42;
+          v121[28] = &dword_420320[234316];
+          v121[29] = -1;
+          v121[30] = 0;
+          v121[31] = 0;
+          *(float *)&v121[27] = FLOAT_0_5;
+          *(float *)&v121[24] = v82;
+          *(float *)&v121[25] = v87 + v42;
+          v121[36] = &dword_420320[234316];
+          v121[37] = -1;
+          v121[38] = 0;
+          v121[39] = 0;
+          *(float *)&v121[35] = FLOAT_0_5;
+          *(float *)&v121[32] = v82 + v43;
+          *(float *)&v121[33] = v87;
+          v121[44] = &dword_420320[234316];
+          v121[45] = -1;
+          v121[46] = 0;
+          v121[47] = 0;
+          *(float *)&v121[43] = FLOAT_0_5;
+          *(float *)&v121[40] = v82 + v43;
+          *(float *)&v121[41] = v87 + v42;
+          D3DObjectPtr->m_pObjectDevice->DrawPrimitive(
             D3DObjectPtr->m_pObjectDevice,
-            4,
+            D3DPT_TRIANGLELIST,
             452,
-            v116,
+            v121,
             6,
             0);
         }
-        v92 = *(__int16 **)a4;
-        if ( *((_DWORD *)a4 + 22) )
+        m_pGfxData = _pInfo->m_pGfxData;
+        if ( _pInfo->m_pBuildLayerGfxData )
         {
-          v92 = (__int16 *)*((_DWORD *)a4 + 22);
-          if ( *(_DWORD *)a4 )
+          m_pGfxData = (BYTE *)_pInfo->m_pBuildLayerGfxData;
+          if ( _pInfo->m_pGfxData )
           {
-            v68 = *v92;
-            v93 = v92 + 1;
-            v72 = *v93++;
-            v76 = (float)v117 - (float)((float)(v65 + *v93) * *(float *)&g_fZoomFactor);
-            v94 = v93 + 1;
-            v81 = (float)v118 - (float)((float)(v66 + *v94) * *(float *)&g_fZoomFactor);
-            if ( (float)MEMORY[0x3E2E26C] >= v76
-              && (float)MEMORY[0x3E2E270] >= v81
-              && (float)((float)*(int *)(g_pDestSizeTable + 4 * v68) + v76) >= (float)g_uLeftGuiBorderWidth
-              && (float)((float)*(int *)(g_pDestSizeTable + 4 * v72) + v81) >= 0.0 )
+            v76 = *(__int16 *)m_pGfxData;
+            v96 = (__int16 *)(m_pGfxData + 2);
+            v80 = *v96++;
+            *(float *)&v83 = (float)v122 - (float)((float)(v73 + *v96) * g_fZoomFactor);
+            v97 = v96 + 1;
+            *((float *)&v83 + 1) = (float)v123 - (float)((float)(v74 + *v97) * g_fZoomFactor);
+            if ( (float)GfxEngineSetup.m_uWidth >= *(float *)&v83
+              && (float)GfxEngineSetup.m_uHeight >= *((float *)&v83 + 1)
+              && (float)((float)*(int *)(g_pDestSizeTable + 4 * v76) + *(float *)&v83) >= (float)g_uLeftGuiBorderWidth
+              && (float)((float)*(int *)(g_pDestSizeTable + 4 * v80) + *((float *)&v83 + 1)) >= 0.0 )
             {
               sub_2F96D80(
-                v94[2],
-                *((_DWORD *)a4 + 1),
-                v94 + 3,
-                v68,
-                v72,
-                LODWORD(v76),
-                LODWORD(v81),
+                v97[2],
+                (int)_pInfo->m_pPalData,
+                (int)(v97 + 3),
+                v76,
+                v80,
+                v83,
                 0,
                 65793 * a1,
-                v65,
-                v43,
-                v66,
-                v44,
+                v73,
+                v51,
+                v74,
+                v52,
                 1);
             }
-            v92 = *(__int16 **)a4;
+            m_pGfxData = _pInfo->m_pGfxData;
           }
         }
-        if ( v92 )
+        if ( m_pGfxData )
         {
-          v69 = *v92;
-          v95 = v92 + 1;
-          v73 = *v95++;
-          v31 = *v95++;
-          v30 = *v95;
-          v77 = (float)v117 - (float)((float)(v65 + v31) * *(float *)&g_fZoomFactor);
-          v82 = (float)v118 - (float)((float)(v66 + v30) * *(float *)&g_fZoomFactor);
-          v96 = v95 + 3;
-          if ( *((_DWORD *)a4 + 23) )
+          v77 = *(__int16 *)m_pGfxData;
+          v98 = (__int16 *)(m_pGfxData + 2);
+          v81 = *v98++;
+          v39 = *v98++;
+          v38 = *v98;
+          *(float *)&v84 = (float)v122 - (float)((float)(v73 + v39) * g_fZoomFactor);
+          *((float *)&v84 + 1) = (float)v123 - (float)((float)(v74 + v38) * g_fZoomFactor);
+          v99 = (int)(v98 + 3);
+          if ( _pInfo->field_5C )
           {
             sub_2F96D80(
-              *(v96 - 1),
-              *((_DWORD *)a4 + 1),
-              v96,
-              v69,
-              v73,
-              LODWORD(v77),
-              LODWORD(v82),
-              BYTE1(*((_DWORD *)a4 + 23)),
+              *(__int16 *)(v99 - 2),
+              (int)_pInfo->m_pPalData,
+              v99,
+              v77,
+              v81,
+              v84,
+              BYTE1(_pInfo->field_5C),
               65793 * a1,
-              v65,
-              v43,
-              v66,
-              v44,
+              v73,
+              v51,
+              v74,
+              v52,
               1);
           }
-          else if ( *((_DWORD *)a4 + 23) != 0xFFFF )
+          else if ( _pInfo->field_5C != 0xFFFF )
           {
             sub_2F96D80(
-              *(v96 - 1),
-              *((_DWORD *)a4 + 1),
-              v96,
-              v69,
-              v73,
-              LODWORD(v77),
-              LODWORD(v82),
+              *(__int16 *)(v99 - 2),
+              (int)_pInfo->m_pPalData,
+              v99,
+              v77,
+              v81,
+              v84,
               0,
               65793 * a1,
-              v65,
-              v43,
-              v66,
-              v44,
+              v73,
+              v51,
+              v74,
+              v52,
               1);
             for ( k = 0; k < 4; ++k )
             {
-              if ( *((_DWORD *)a4 + k + 8) )
+              if ( _pInfo->m_vFXFrameData[k] )
                 sub_2F96D80(
-                  *(unsigned __int16 *)(*((_DWORD *)a4 + k + 8) + 8),
-                  *((_DWORD *)a4 + 1),
-                  *((_DWORD *)a4 + k + 8) + 12,
-                  v69,
-                  v73,
-                  0,
-                  0,
+                  *(unsigned __int16 *)(_pInfo->m_vFXFrameData[k] + 8),
+                  (int)_pInfo->m_pPalData,
+                  _pInfo->m_vFXFrameData[k] + 12,
+                  v77,
+                  v81,
+                  0LL,
                   0,
                   65793 * a1,
-                  v65,
-                  v43,
-                  v66,
-                  v44,
+                  v73,
+                  v51,
+                  v74,
+                  v52,
                   0);
             }
-            if ( *((_DWORD *)a4 + 12) && *a6 < 511 )
+            if ( _pInfo->m_vFXFrameData[4] && *a6 < 511 )
             {
               *a5 = -1;
-              a5[1] = (int)(float)((float)v117 - (float)((float)v31 * *(float *)&g_fZoomFactor));
-              a5[2] = (int)(float)((float)v118 - (float)((float)v30 * *(float *)&g_fZoomFactor));
-              a5[3] = *((_DWORD *)a4 + 12);
-              a5[4] = *((_DWORD *)a4 + 1);
+              a5[1] = (int)(float)((float)v122 - (float)((float)v39 * g_fZoomFactor));
+              a5[2] = (int)(float)((float)v123 - (float)((float)v38 * g_fZoomFactor));
+              a5[3] = _pInfo->m_vFXFrameData[4];
+              a5[4] = (int)_pInfo->m_pPalData;
               a5[5] = a1;
               ++*a6;
             }
             for ( m = 0; m < 0xA; ++m )
             {
-              v97 = (__int16 *)*((_DWORD *)a4 + 4 * m + 134);
-              if ( v97 )
+              v100 = *(__int16 **)&_pInfo->?[16 * m + 248];
+              if ( v100 )
               {
-                v28 = *v97;
-                v98 = v97 + 1;
-                v29 = *v98;
-                v99 = v98 + 1;
-                if ( *((_DWORD *)a4 + 4 * m + 135) )
+                v36 = *v100;
+                v101 = v100 + 1;
+                v37 = *v101;
+                v102 = v101 + 1;
+                if ( *(_DWORD *)&_pInfo->?[16 * m + 252] )
                 {
-                  if ( v28 > 512 || v29 > 512 )
+                  if ( v36 > 512 || v37 > 512 )
                     BBSupportTracePrintF(
                       0,
                       "GFX ENGINE: DATA ERROR: Size of building object is too big! Object will be ignored!");
-                  ((void (__cdecl *)(_DWORD, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, char, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, char))sub_2F96D80)(
-                    v99[3],
-                    *((_DWORD *)a4 + 4 * m + 135),
-                    v99 + 4,
-                    v28,
-                    v29,
-                    (float)(*((_DWORD *)a4 + 4 * m + 136) + v40 - *v99),
-                    (float)(*((_DWORD *)a4 + 4 * m + 137) + v41 - v99[1]),
+                  v13 = *v102;
+                  v103 = v102 + 1;
+                  *((float *)&v8 + 1) = (float)(*(_DWORD *)&_pInfo->?[16 * m + 260] + v49 - *v103);
+                  *(float *)&v8 = (float)(*(_DWORD *)&_pInfo->?[16 * m + 256] + v48 - v13);
+                  sub_2F96D80(
+                    v103[2],
+                    *(_DWORD *)&_pInfo->?[16 * m + 252],
+                    (int)(v103 + 3),
+                    v36,
+                    v37,
+                    v8,
                     0,
                     65793 * a1,
-                    v65,
-                    v43,
-                    v66,
-                    v44,
+                    v73,
+                    v51,
+                    v74,
+                    v52,
                     0);
                 }
                 else
@@ -51446,56 +51501,54 @@ bool __cdecl BlitBuildingHardware(int a1, int a2, int a3, struct SGfxObjectInfo 
                 }
               }
             }
-            for ( n = 0; n < 0x15; ++n )
+            for ( n = 0; n < 21; ++n )
             {
-              v53 = (unsigned __int8 *)*((_DWORD *)a4 + 4 * n + 50);
-              if ( v53 )
+              v61 = *(unsigned __int8 **)&_pInfo->gap_60[16 * n + 104];
+              if ( v61 )
               {
-                v24 = *v53;
-                v54 = v53 + 1;
-                v25 = *v54;
-                v55 = v54 + 1;
-                if ( *((_DWORD *)a4 + 4 * n + 51) )
+                v32 = *v61;
+                v62 = v61 + 1;
+                v33 = *v62;
+                v63 = v62 + 1;
+                if ( _pInfo->?[4 * n] )
                 {
-                  v26 = *v55;
-                  v56 = v55 + 1;
-                  v27 = *v56;
-                  v8 = (int)(float)((float)v117
-                                  - (float)((float)(v26 - *((_DWORD *)a4 + 4 * n + 52)) * *(float *)&g_fZoomFactor));
-                  v7 = (int)(float)((float)v118
-                                  - (float)((float)(v27 - *((_DWORD *)a4 + 4 * n + 53)) * *(float *)&g_fZoomFactor));
-                  memcpy(&g_uColorPalette, *((const void **)a4 + 4 * n + 51), 0x180u);
-                  memcpy(&unk_468A760, (char *)&g_cColorGradient + 64 * *((unsigned __int8 *)a4 + 715), 0x40u);
-                  memcpy(
-                    &unk_468A7A0,
-                    (const void *)(*((_DWORD *)a4 + 4 * n + 51) + (*((unsigned __int8 *)a4 + 715) << 6) + 512),
-                    0x40u);
+                  v34 = *v63;
+                  v64 = v63 + 1;
+                  v35 = *v64;
+                  v16 = (int)(float)((float)v122
+                                   - (float)((float)(v34 - (unsigned int)_pInfo->?[4 * n + 1]) * g_fZoomFactor));
+                  v15 = (int)(float)((float)v123
+                                   - (float)((float)(v35 - (unsigned int)_pInfo->?[4 * n + 2]) * g_fZoomFactor));
+                  memcpy(&g_uColorPalette, _pInfo->?[4 * n], 0x180u);
+                  memcpy(&unk_468A760, (char *)&g_cColorGradient + 64 * _pInfo->m_iColor, 0x40u);
+                  memcpy(&unk_468A7A0, &_pInfo->?[4 * n][16 * _pInfo->m_iColor + 128], 0x40u);
                   if ( n == 20 && *a6 < 511 )
                   {
                     a5[6] = -2;
-                    a5[7] = v8;
-                    a5[8] = v7;
-                    a5[9] = *((_DWORD *)a4 + 130);
-                    a5[10] = *((_DWORD *)a4 + 131);
-                    a5[11] = a1 + (*((unsigned __int8 *)a4 + 715) << 16);
+                    a5[7] = v16;
+                    a5[8] = v15;
+                    a5[9] = *(_DWORD *)&_pInfo->?[232];
+                    a5[10] = *(_DWORD *)&_pInfo->?[236];
+                    a5[11] = a1 + (_pInfo->m_iColor << 16);
                     ++*a6;
                   }
                   else
                   {
-                    ((void (__cdecl *)(_DWORD, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, char, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, char))sub_2F96D80)(
-                      *(_DWORD *)(v56 + 1),
-                      &g_uColorPalette,
-                      v56 + 5,
-                      v24,
-                      v25,
-                      (float)(*((_DWORD *)a4 + 4 * n + 52) + v40 - v26),
-                      (float)(*((_DWORD *)a4 + 4 * n + 53) + v41 - v27),
+                    *((float *)&v9 + 1) = (float)((unsigned int)_pInfo->?[4 * n + 2] + v49 - v35);
+                    *(float *)&v9 = (float)((unsigned int)_pInfo->?[4 * n + 1] + v48 - v34);
+                    sub_2F96D80(
+                      *(_DWORD *)(v64 + 1),
+                      (int)&g_uColorPalette,
+                      (int)(v64 + 5),
+                      v32,
+                      v33,
+                      v9,
                       0,
                       65793 * a1,
-                      v65,
-                      v43,
-                      v66,
-                      v44,
+                      v73,
+                      v51,
+                      v74,
+                      v52,
                       0);
                   }
                 }
@@ -51507,75 +51560,78 @@ bool __cdecl BlitBuildingHardware(int a1, int a2, int a3, struct SGfxObjectInfo 
             }
             for ( ii = 5; ii < 0xA; ++ii )
             {
-              if ( *((_DWORD *)a4 + ii + 8) )
+              if ( _pInfo->m_vFXFrameData[ii] )
                 sub_2F96D80(
-                  *(unsigned __int16 *)(*((_DWORD *)a4 + ii + 8) + 8),
-                  *((_DWORD *)a4 + 1),
-                  *((_DWORD *)a4 + ii + 8) + 12,
-                  v69,
-                  v73,
-                  0,
-                  0,
+                  *(unsigned __int16 *)(_pInfo->m_vFXFrameData[ii] + 8),
+                  (int)_pInfo->m_pPalData,
+                  _pInfo->m_vFXFrameData[ii] + 12,
+                  v77,
+                  v81,
+                  0LL,
                   0,
                   65793 * a1,
-                  v65,
-                  v43,
-                  v66,
-                  v44,
+                  v73,
+                  v51,
+                  v74,
+                  v52,
                   0);
             }
-            if ( *((_DWORD *)a4 + 20) && *((_DWORD *)a4 + 21) )
+            if ( _pInfo->m_pMiniFlagGfxData && _pInfo->m_pMiniFlagPalData )
             {
-              v100 = (__int16 *)*((_DWORD *)a4 + 20);
-              v36 = *v100;
-              v38 = v100[1];
-              v101 = v100 + 2;
-              if ( v36 > 512 || v38 > 512 )
+              v104 = (__int16 *)_pInfo->m_pMiniFlagGfxData;
+              v44 = *v104;
+              v46 = v104[1];
+              v105 = v104 + 2;
+              if ( v44 > 512 || v46 > 512 )
                 BBSupportTracePrintF(
                   0,
                   "GFX ENGINE: DATA ERROR: Size of building flag is too big! Object will be ignored!");
-              v22 = *v101;
-              v102 = v101 + 1;
-              v23 = *v102;
-              ((void (__cdecl *)(_DWORD, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, char, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, char))sub_2F96D80)(
-                v102[2],
-                *((_DWORD *)a4 + 21),
-                v102 + 3,
-                v36,
-                v38,
-                (float)(*((_DWORD *)a4 + 6) + v40 - v22),
-                (float)(*((_DWORD *)a4 + 7) + v41 - v23),
+              v30 = *v105;
+              v106 = v105 + 1;
+              v31 = *v106;
+              *((float *)&v10 + 1) = (float)(_pInfo->m_iOffsetY + v49 - v31);
+              *(float *)&v10 = (float)(_pInfo->m_iOffsetX + v48 - v30);
+              sub_2F96D80(
+                v106[2],
+                _pInfo->m_pMiniFlagPalData,
+                (int)(v106 + 3),
+                v44,
+                v46,
+                v10,
                 0,
                 65793 * a1,
-                v65,
-                v43,
-                v66,
-                v44,
+                v73,
+                v51,
+                v74,
+                v52,
                 0);
-              if ( *((_DWORD *)a4 + 18) && *((_DWORD *)a4 + 19) )
+              if ( *(_DWORD *)_pInfo->gap38 && *(_DWORD *)&_pInfo->gap38[4] )
               {
-                v103 = (__int16 *)*((_DWORD *)a4 + 18);
-                v37 = *v103;
-                v39 = v103[1];
-                v104 = v103 + 2;
-                if ( v37 > 512 || v39 > 512 )
+                v107 = *(__int16 **)_pInfo->gap38;
+                v45 = *v107;
+                v47 = v107[1];
+                v108 = v107 + 2;
+                if ( v45 > 512 || v47 > 512 )
                   BBSupportTracePrintF(
                     0,
                     "GFX ENGINE: DATA ERROR: Size of heraldic figure is too big! Object will be ignored!");
-                ((void (__cdecl *)(_DWORD, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, char, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, char))sub_2F96D80)(
-                  v104[3],
-                  *((_DWORD *)a4 + 19),
-                  v104 + 4,
-                  v37,
-                  v39,
-                  (float)(*((_DWORD *)a4 + 6) + v40 - v22 - *v104),
-                  (float)(*((_DWORD *)a4 + 7) + v41 - v23 - v104[1]),
+                v14 = *v108;
+                v109 = v108 + 1;
+                *((float *)&v11 + 1) = (float)(_pInfo->m_iOffsetY + v49 - v31 - *v109);
+                *(float *)&v11 = (float)(_pInfo->m_iOffsetX + v48 - v30 - v14);
+                sub_2F96D80(
+                  v109[2],
+                  *(_DWORD *)&_pInfo->gap38[4],
+                  (int)(v109 + 3),
+                  v45,
+                  v47,
+                  v11,
                   0,
                   65793 * a1,
-                  v65,
-                  v43,
-                  v66,
-                  v44,
+                  v73,
+                  v51,
+                  v74,
+                  v52,
                   0);
               }
             }
@@ -51583,49 +51639,56 @@ bool __cdecl BlitBuildingHardware(int a1, int a2, int a3, struct SGfxObjectInfo 
         }
         for ( jj = 0; jj < 6; ++jj )
         {
-          if ( *((_DWORD *)a4 + 4 * jj + 26) && *((_DWORD *)a4 + 4 * jj + 27) )
+          if ( *(_DWORD *)&_pInfo->gap_60[16 * jj + 8] && *(_DWORD *)&_pInfo->gap_60[16 * jj + 12] )
           {
-            v105 = (__int16 *)*((_DWORD *)a4 + 4 * jj + 26);
-            *((_DWORD *)a4 + 4 * jj + 26) = 0;
-            v32 = *v105;
-            v33 = v105[1];
-            v106 = v105 + 2;
-            if ( v32 > 512 || v33 > 512 )
+            v110 = *(__int16 **)&_pInfo->gap_60[16 * jj + 8];
+            *(_DWORD *)&_pInfo->gap_60[16 * jj + 8] = 0;
+            v40 = *v110;
+            v41 = v110[1];
+            v111 = v110 + 2;
+            if ( v40 > 512 || v41 > 512 )
               BBSupportTracePrintF(
                 0,
                 "GFX ENGINE: DATA ERROR: Size of building-effect is too big! Object will be ignored!");
-            v78 = (float)v117 - (float)((float)(*v106 - *((_DWORD *)a4 + 4 * jj + 28)) * *(float *)&g_fZoomFactor);
-            v107 = v106 + 1;
-            v83 = (float)v118 - (float)((float)(*v107 - *((_DWORD *)a4 + 4 * jj + 29)) * *(float *)&g_fZoomFactor);
-            if ( (float)MEMORY[0x3E2E26C] >= v78
-              && (float)MEMORY[0x3E2E270] >= v83
-              && (float)((float)*(int *)(g_pDestSizeTable + 4 * v32) + v78) >= (float)g_uLeftGuiBorderWidth
-              && (float)((float)*(int *)(g_pDestSizeTable + 4 * v33) + v83) >= 0.0 )
+            *(float *)&v85 = (float)v122
+                           - (float)((float)(*v111 - *(_DWORD *)&_pInfo->gap_60[16 * jj + 16]) * g_fZoomFactor);
+            v112 = v111 + 1;
+            *((float *)&v85 + 1) = (float)v123
+                                 - (float)((float)(*v112 - *(_DWORD *)&_pInfo->gap_60[16 * jj + 20]) * g_fZoomFactor);
+            if ( (float)GfxEngineSetup.m_uWidth >= *(float *)&v85
+              && (float)GfxEngineSetup.m_uHeight >= *((float *)&v85 + 1)
+              && (float)((float)*(int *)(g_pDestSizeTable + 4 * v40) + *(float *)&v85) >= (float)g_uLeftGuiBorderWidth
+              && (float)((float)*(int *)(g_pDestSizeTable + 4 * v41) + *((float *)&v85 + 1)) >= 0.0 )
             {
-              RenderGfx(v107[2], *((void **)a4 + 4 * jj + 27), v107 + 3, v32, v33, v78, v83, 65793 * a1, 0, 0, 0);
+              HIDWORD(v12) = v40;
+              LODWORD(v12) = v112 + 3;
+              RenderGfx(v112[2], *(void **)&_pInfo->gap_60[16 * jj + 12], v12, v41, v85, 65793 * a1, 0, 0, 0);
             }
           }
         }
-        if ( !*((_BYTE *)a4 + 22) || !g_pIconPalette )
+        if ( !_pInfo->m_uFlags || !g_pIconPalette )
           return 1;
-        v50 = (unsigned __int16 *)g_pIconGfx[*((unsigned __int8 *)a4 + 22)];
-        v70 = *v50;
-        v74 = v50[1];
-        v51 = v50 + 2;
-        if ( v70 > 512 || v74 > 512 )
+        v58 = (unsigned __int16 *)g_pIconGfx[_pInfo->m_uFlags];
+        LODWORD(v78) = *v58;
+        HIDWORD(v78) = v58[1];
+        v59 = v58 + 2;
+        if ( (int)v78 > 512 || SHIDWORD(v78) > 512 )
           BBSupportTracePrintF(
             0,
             "GFX ENGINE: DATA ERROR: Size of accessory object is too big! Object will be ignored!");
-        v79 = (float)v117 - (float)((float)*v51 * *(float *)&g_fZoomFactor);
-        v52 = v51 + 1;
-        v84 = (float)v118 - (float)((float)*v52 * *(float *)&g_fZoomFactor);
-        if ( (float)MEMORY[0x3E2E26C] >= v79
-          && (float)MEMORY[0x3E2E270] >= v84
-          && (float)((float)*(int *)(g_pDestSizeTable + 4 * v70) + v79) >= (float)g_uLeftGuiBorderWidth
-          && (float)((float)*(int *)(g_pDestSizeTable + 4 * v74) + v84) >= 0.0 )
+        *(float *)&v86 = (float)v122 - (float)((float)*v59 * g_fZoomFactor);
+        v60 = v59 + 1;
+        *((float *)&v86 + 1) = (float)v123 - (float)((float)*v60 * g_fZoomFactor);
+        if ( (float)GfxEngineSetup.m_uWidth < *(float *)&v86
+          || (float)GfxEngineSetup.m_uHeight < *((float *)&v86 + 1)
+          || (float)((float)*(int *)(g_pDestSizeTable + 4 * v78) + *(float *)&v86) < (float)g_uLeftGuiBorderWidth
+          || (float)((float)*(int *)(g_pDestSizeTable + 4 * HIDWORD(v78)) + *((float *)&v86 + 1)) < 0.0 )
         {
-          CacheRenderingStandard((void *)g_pIconPalette, v52 + 3, v52[2], 64, v70, v74, v79, v84, 0, -1, 0, 0);
+          return 1;
         }
+        HIDWORD(v7) = v60 + 3;
+        LODWORD(v7) = g_pIconPalette;
+        CacheRenderingStandard(v7, v60[2], 64, v78, v86, 0, -1, 0, 0);
         return 1;
       }
       else

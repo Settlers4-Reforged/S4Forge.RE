@@ -1859,24 +1859,24 @@ int __cdecl IAIEnvironment::EcoSectorGetFirstEcoSectorInSector(int a1) {
 
 
 // address=[0x132edc0]
-// Decompiled from int __cdecl IAIEnvironment::WorldCatapultSectorId(struct _Cnd_internal_imp_t *a1, struct _Mtx_internal_imp_t *a2)
+// Decompiled from int __cdecl IAIEnvironment::WorldCatapultSectorId(int a1, int a2)
 int __cdecl IAIEnvironment::WorldCatapultSectorId(int a1, int a2) {
   
   int v2; // eax
 
-  v2 = IAIEnvironment::WorldIndex((int)a1, (int)a2);
+  v2 = IAIEnvironment::WorldIndex(a1, a2);
   return IAIEnvironment::WorldCatapultSectorId(v2);
 }
 
 
 // address=[0x132edf0]
-// Decompiled from void __cdecl IAIEnvironment::WorldCatapultSectorIdPackedXY(struct _iobuf *a1)
+// Decompiled from int __cdecl IAIEnvironment::WorldCatapultSectorIdPackedXY(int a1)
 int __cdecl IAIEnvironment::WorldCatapultSectorIdPackedXY(int a1) {
   
   int v1; // eax
 
   v1 = IAIEnvironment::WorldIndexPackedXY(a1);
-  IAIEnvironment::WorldCatapultSectorId(v1);
+  return IAIEnvironment::WorldCatapultSectorId(v1);
 }
 
 

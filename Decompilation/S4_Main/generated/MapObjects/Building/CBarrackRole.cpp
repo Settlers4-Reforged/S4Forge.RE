@@ -85,7 +85,7 @@ void  CBarrackRole::LogicUpdate(class CBuilding * a2) {
   v53 = (unsigned __int8 *)this;
   if ( IEntity::FlagBits(a2, EntityFlag_Selected) )
     (*(void (__thiscall **)(unsigned __int8 *, struct CBuilding *, int))(*(_DWORD *)v53 + 88))(v53, a2, 1);
-  if ( IEntity::FlagBits(a2, (EntityFlag)0x1000u) )
+  if ( IEntity::FlagBits(a2, EntityFlag_NotStriking) )
   {
     v32 = IEntity::Race(a2);
     v2 = CBuilding::EnsignWorldIdx(a2);
@@ -262,7 +262,7 @@ void  CBarrackRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo & a3
     {
       v7 = std::vector<unsigned short>::operator[]((char *)this + 384, i);
       v8 = (CPile *)CPileMgr::operator[](*v7);
-      CPile::GetPatchGfx(v8, (struct SGfxPatchObject *)&a3[5].gap38[16 * v10++ + 20]);
+      CPile::GetPatchGfx(v8, (struct SGfxPatchObject *)&a3[5].?[16 * v10++ + 20]);
     }
   }
   return result;
@@ -327,7 +327,7 @@ void  CBarrackRole::Init(class CBuilding * a2) {
   }
   if ( IEntity::FlagBits(a2, EntityFlag_Selected) )
     (*(void (__thiscall **)(CBarrackRole *, struct CBuilding *, _DWORD))(*(_DWORD *)v12 + 88))(v12, a2, 0);
-  if ( !IEntity::FlagBits(a2, (EntityFlag)0x1000u) )
+  if ( !IEntity::FlagBits(a2, EntityFlag_NotStriking) )
     return IAnimatedEntity::RegisterForLogicUpdate(31);
   CEntityEvent::CEntityEvent((CEntityEvent *)v5, 8u, 0, *((unsigned __int16 *)v12 + 3), 0, 0);
   v14 = 0;
@@ -609,7 +609,7 @@ void  CBarrackRole::FillDialog(class CBuilding * a2, bool a3) {
   g_cBarracksInfo.m_cRace = IEntity::Race(a2);
   g_cBarracksInfo.m_cType = IEntity::Type(a2);
   g_cBarracksInfo.m_unknownB = 1;
-  g_cBarracksInfo.m_bSomeFlagBits = IEntity::FlagBits(a2, (EntityFlag)4096) != 0;
+  g_cBarracksInfo.m_bSomeFlagBits = IEntity::FlagBits(a2, EntityFlag_NotStriking) != 0;
   g_cBarracksInfo.m_unknownD = 0;
   v8 = IEntity::Type(a2);
   v3 = IEntity::OwnerId(a2);

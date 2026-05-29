@@ -20,16 +20,16 @@ class CPersistence * __cdecl CDecoObject::New(std::istream & a1) {
   
   IDecoObject::IDecoObject(this, a2, a3, a4, a5, 1);
   this->__vftable = (IAnimatedEntity_vtbl *)&CDecoObject::_vftable_;
-  this->m_wJobPart = CGfxManager::GetObjectFirstJob(g_pGfxManager, a4);
-  if ( this->m_wJobPart >= 0x228u
+  this->m_iJobPart = CGfxManager::GetObjectFirstJob(g_pGfxManager, a4);
+  if ( this->m_iJobPart >= 0x228u
     && BBSupportDbgReport(2, "MapObjects\\DecoObj\\DecoObj.cpp", 264, "m_uJobPart<SIV_OBJECT_MAX") == 1 )
   {
     __debugbreak();
   }
   this->m_uU1 = 1;
   this->m_iPhases = a7 == 0;
-  this->m_uCycleFrames = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_wJobPart);
-  this->m_cFrame = a6 % this->m_uCycleFrames;
+  this->m_uCycleFrames = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_iJobPart);
+  this->m_iFrame = a6 % this->m_uCycleFrames;
   this->m_uTickCounter = CStateGame::GetTickCounter(g_pGame);
   return this;
 }
@@ -49,31 +49,31 @@ struct SGfxObjectInfo *  CDecoObject::GetGfxInfos(void) {
     {
       if ( this->m_uU1 )
       {
-        this->m_cFrame = (v2 + this->m_cFrame) % this->m_uCycleFrames;
-        if ( this->m_cFrame == this->m_uCycleFrames - 1 )
+        this->m_iFrame = (v2 + this->m_iFrame) % this->m_uCycleFrames;
+        if ( this->m_iFrame == this->m_uCycleFrames - 1 )
           this->m_uU1 = !this->m_uU1;
       }
       else
       {
-        if ( v2 <= this->m_cFrame )
-          this->m_cFrame -= v2;
+        if ( v2 <= this->m_iFrame )
+          this->m_iFrame -= v2;
         else
-          this->m_cFrame = 0;
-        if ( !this->m_cFrame )
+          this->m_iFrame = 0;
+        if ( !this->m_iFrame )
           this->m_uU1 = !this->m_uU1;
       }
     }
     else
     {
-      this->m_cFrame = (v2 + this->m_cFrame) % this->m_uCycleFrames;
+      this->m_iFrame = (v2 + this->m_iFrame) % this->m_uCycleFrames;
     }
   }
-  CGfxManager::GetObjectGfxInfo(g_pGfxManager, &IEntity::m_sGfxInfo, this->m_wJobPart, this->m_cFrame, 1);
+  CGfxManager::GetObjectGfxInfo(g_pGfxManager, &IEntity::m_sGfxInfo, this->m_iJobPart, this->m_iFrame, 1);
   if ( this->m_nType == 123 )
-    byte_40FE518 = 16;
+    MEMORY[0x40FE518] = 16;
   else
-    byte_40FE518 = this->m_objType;
-  byte_40FE51A = IEntity::IsVisible(this);
+    MEMORY[0x40FE518] = this->m_uObjType;
+  MEMORY[0x40FE51A] = IEntity::IsVisible(this);
   IEntity::m_sGfxInfo.m_uFlags = 0;
   return &IEntity::m_sGfxInfo;
 }

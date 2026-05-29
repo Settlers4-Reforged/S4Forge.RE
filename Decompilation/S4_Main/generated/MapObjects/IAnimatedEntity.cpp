@@ -15,7 +15,7 @@ int  IAnimatedEntity::Next(void)const {
 // Decompiled from int __thiscall IAnimatedEntity::Frame(IAnimatedEntity *this)
 int  IAnimatedEntity::Frame(void)const {
   
-  return this->m_cFrame;
+  return this->m_iFrame;
 }
 
 
@@ -209,9 +209,9 @@ void  IAnimatedEntity::BoxSelection(void) {
   
   IEntity::IEntity(this, id);
   this->__vftable = (IAnimatedEntity_vtbl *)&IAnimatedEntity::_vftable_;
-  this->m_cFrame = 0;
+  this->m_iFrame = 0;
   this->m_cAttackerPlayerId = 0;
-  this->m_wJobPart = 0;
+  this->m_iJobPart = 0;
   this->m_wPrevEntity = 0;
   this->m_wNextEntity = 0;
   this->m_uLastUpdateTick = 0;
@@ -241,7 +241,7 @@ unsigned int  IAnimatedEntity::LastUpdateTick(void)const {
 // Decompiled from int __thiscall IAnimatedEntity::JobPart(IAnimatedEntity *this)
 int  IAnimatedEntity::JobPart(void)const {
   
-  return this->m_wJobPart;
+  return this->m_iJobPart;
 }
 
 
@@ -249,7 +249,7 @@ int  IAnimatedEntity::JobPart(void)const {
 // Decompiled from void __thiscall IAnimatedEntity::SetFrame(IAnimatedEntity *this, BYTE a2)
 void  IAnimatedEntity::SetFrame(int a2) {
   
-  this->m_cFrame = a2;
+  this->m_iFrame = a2;
 }
 
 
@@ -265,7 +265,7 @@ bool  IAnimatedEntity::EventQueueEmpty(void)const {
 // Decompiled from void __thiscall IAnimatedEntity::SetJobPart(IAnimatedEntity *this, WORD a2)
 void  IAnimatedEntity::SetJobPart(int a2) {
   
-  this->m_wJobPart = a2;
+  this->m_iJobPart = a2;
 }
 
 
@@ -293,9 +293,9 @@ void  IAnimatedEntity::SetJobPart(int a2) {
     CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
     _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
   }
-  operator^<unsigned char>(a1, &this->m_cFrame);
+  operator^<unsigned char>(a1, &this->m_iFrame);
   operator^<unsigned char>(a1, &this->m_cAttackerPlayerId);
-  operator^<unsigned short>(a1, &this->m_wJobPart);
+  operator^<unsigned short>(a1, &this->m_iJobPart);
   operator^<unsigned short>(a1, &this->m_wPrevEntity);
   operator^<unsigned short>(a1, &this->m_wNextEntity);
   operator^<unsigned int>(a1, &this->m_uLastUpdateTick);
@@ -328,9 +328,9 @@ void  IAnimatedEntity::Store(std::ostream & a2) {
   IEntity::Store((char *)this, (int)a2);
   v8 = 1;
   operator^<unsigned int>(a2, &v8);
-  operator^<unsigned char>(a2, &this->m_cFrame);
+  operator^<unsigned char>(a2, &this->m_iFrame);
   operator^<unsigned char>(a2, &this->m_cAttackerPlayerId);
-  operator^<unsigned short>(a2, &this->m_wJobPart);
+  operator^<unsigned short>(a2, &this->m_iJobPart);
   operator^<unsigned short>(a2, &this->m_wPrevEntity);
   operator^<unsigned short>(a2, &this->m_wNextEntity);
   operator^<unsigned int>(a2, (int *)&this->m_uLastUpdateTick);

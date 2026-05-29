@@ -48,12 +48,12 @@ void  CShip::VehicleLogicUpdate(void) {
 
 
 // address=[0x159d5c0]
-// Decompiled from void *__thiscall CShip::GetGfxInfos(int this)
+// Decompiled from struct SGfxObjectInfo *__thiscall CShip::GetGfxInfos(int this)
 struct SGfxObjectInfo *  CShip::GetGfxInfos(void) {
   
   int v1; // eax
-  char v3; // [esp+4h] [ebp-1Ch]
-  char v4; // [esp+8h] [ebp-18h]
+  BYTE v3; // [esp+4h] [ebp-1Ch]
+  BYTE v4; // [esp+8h] [ebp-18h]
   unsigned int v5; // [esp+Ch] [ebp-14h]
   unsigned int v6; // [esp+10h] [ebp-10h]
   unsigned int v7; // [esp+18h] [ebp-8h]
@@ -75,21 +75,13 @@ struct SGfxObjectInfo *  CShip::GetGfxInfos(void) {
         v6 = *(_DWORD *)(*(_DWORD *)(this + 100) + 28);
       else
         v6 = *(unsigned __int16 *)(this + 38);
-      CGfxManager::GetVehicleGfxInfo(
-        (CGfxManager *)g_pGfxManager,
-        (struct SGfxObjectInfo *)&IEntity::m_sGfxInfo,
-        v5,
-        v6,
-        *(char *)(this + 68),
-        0,
-        0,
-        0);
+      CGfxManager::GetVehicleGfxInfo(g_pGfxManager, &IEntity::m_sGfxInfo, v5, v6, *(char *)(this + 68), 0, 0, 0);
     }
     else
     {
       CGfxManager::GetVehicleGfxInfo(
-        (CGfxManager *)g_pGfxManager,
-        (struct SGfxObjectInfo *)&IEntity::m_sGfxInfo,
+        g_pGfxManager,
+        &IEntity::m_sGfxInfo,
         v5,
         *(_DWORD *)(*(_DWORD *)(this + 100) + 28),
         *(char *)(this + 68),
@@ -98,31 +90,31 @@ struct SGfxObjectInfo *  CShip::GetGfxInfos(void) {
         *(unsigned __int8 *)(this + 36));
     }
   }
-  v1 = IEntity::OwnerId((unsigned __int8 *)this);
-  byte_40FE51B = CPlayerManager::Color(v1);
-  byte_40FE51D = *(_BYTE *)(this + 68);
-  byte_40FE51C = *(_BYTE *)(this + 69);
-  byte_40FE518 = 2;
-  byte_40FE51A = IEntity::IsVisible((_DWORD *)this);
-  if ( IEntity::FlagBits((_DWORD *)this, EntityFlag_Selected) )
+  v1 = IEntity::OwnerId((IEntity *)this);
+  MEMORY[0x40FE51B] = CPlayerManager::Color(v1);
+  MEMORY[0x40FE51D] = *(_BYTE *)(this + 68);
+  MEMORY[0x40FE51C] = *(_BYTE *)(this + 69);
+  MEMORY[0x40FE518] = 2;
+  MEMORY[0x40FE51A] = IEntity::IsVisible((_DWORD *)this);
+  if ( IEntity::FlagBits((IEntity *)this, EntityFlag_Selected) )
   {
-    if ( IEntity::FlagBits((_DWORD *)this, EntityFlag_Selected) )
+    if ( IEntity::FlagBits((IEntity *)this, EntityFlag_Selected) )
       v4 = 27;
     else
       v4 = 0;
-    MEMORY[0x40FE266] = v4;
+    IEntity::m_sGfxInfo.m_uFlags = v4;
   }
-  else if ( IEntity::FlagBits((_DWORD *)this, (EntityFlag)0x400u) )
+  else if ( IEntity::FlagBits((IEntity *)this, (EntityFlag)1024) )
   {
-    if ( IEntity::FlagBits((_DWORD *)this, (EntityFlag)0x400u) )
+    if ( IEntity::FlagBits((IEntity *)this, (EntityFlag)1024) )
       v3 = 89;
     else
       v3 = 0;
-    MEMORY[0x40FE266] = v3;
+    IEntity::m_sGfxInfo.m_uFlags = v3;
   }
-  MEMORY[0x40FE264] = 0;
-  if ( !IEntity::FlagBits((_DWORD *)this, (EntityFlag)((char *)&loc_1FFFFFF + 1)) )
-    dword_40FE2AC = 65534 - *(unsigned __int16 *)(this + 124) * *(unsigned __int16 *)(this + 128);
+  IEntity::m_sGfxInfo.m_uDecorator = 0;
+  if ( !IEntity::FlagBits((IEntity *)this, (EntityFlag)((char *)&loc_1FFFFFF + 1)) )
+    MEMORY[0x40FE2AC] = 65534 - *(unsigned __int16 *)(this + 124) * *(unsigned __int16 *)(this + 128);
   return &IEntity::m_sGfxInfo;
 }
 
@@ -294,22 +286,22 @@ void  CShip::Unload(void) {
 
 
 // address=[0x159dbb0]
-// Decompiled from CShip *__thiscall CShip::CShip(CShip *this, int a2, int a3, int a4, int a5, WORD a6, unsigned int a7, bool a8)
+// Decompiled from CShip *__thiscall CShip::CShip(CShip *this, int a2, int a3, int a4, int a5, WORD a6, DWORD a7, bool a8)
  CShip::CShip(int a2, int a3, int a4, int a5, int a6, int a7, bool a8) {
   
   int v8; // eax
   int v10; // [esp-8h] [ebp-1Ch]
 
   CVehicle::CVehicle(this, a2, a3, a4, a5, a6, a7, a8);
-  *(_DWORD *)this = &CShip::_vftable_;
-  *((_DWORD *)this + 42) = 0;
-  CShip::PlaceVehicle((IEntity *)this, *((_DWORD *)this + 6));
+  this->__vftable = (CShip_vtbl *)&CShip::_vftable_;
+  *(_DWORD *)&this[1].m_iDirection = 0;
+  CShip::PlaceVehicle(this, this->m_uPackedXY);
   if ( a8 )
     return this;
-  CWarMap::AddEntity((IEntity *)this);
+  CWarMap::AddEntity(this);
   v10 = IEntity::Y(this);
   v8 = IEntity::X(this);
-  CVehicle::NewDestination((IEntity *)this, v8, v10, 0);
+  CVehicle::NewDestination(this, v8, v10, 0);
   CShip::TakeJob(this);
   return this;
 }

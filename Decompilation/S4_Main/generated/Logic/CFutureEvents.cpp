@@ -635,7 +635,7 @@ void __cdecl CFutureEvents::ExecuteChangeEntityFlags(struct CFutureEvents::SFutu
   if ( !*(_WORD *)(a1 + 2) )
     return result;
   v2 = (_DWORD *)CMapObjectMgr::Entity(*(unsigned __int16 *)(a1 + 2));
-  result = IEntity::FlagBits(v2, EntityFlag_AliveMask|0x1000);
+  result = IEntity::FlagBits(v2, EntityFlag_AliveMask|EntityFlag_NotStriking);
   if ( !result )
     return result;
   IEntity::SetFlagBits(v2, *(EntityFlag *)(a1 + 12));

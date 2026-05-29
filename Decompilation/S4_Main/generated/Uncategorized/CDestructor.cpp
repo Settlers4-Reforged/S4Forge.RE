@@ -3,15 +3,15 @@
 // Definitions for class CDestructor
 
 // address=[0x1425d80]
-// Decompiled from int __thiscall CDestructor::CDestructor(int this, int a2)
+// Decompiled from CDestructor *__thiscall CDestructor::CDestructor(CDestructor *this, int a2)
  CDestructor::CDestructor(class CDestructionPhase a2) {
   
   CDestructionManager *v2; // eax
 
   *(_DWORD *)this = &CDestructor::_vftable_;
-  *(_DWORD *)(this + 4) = a2;
+  *((_DWORD *)this + 1) = a2;
   v2 = (CDestructionManager *)CDestructionManager::Instance();
-  CDestructionManager::RegisterDestructor(v2, (struct CDestructor *)this);
+  CDestructionManager::RegisterDestructor(v2, this);
   return this;
 }
 

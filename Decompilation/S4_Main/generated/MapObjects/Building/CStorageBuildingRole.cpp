@@ -220,7 +220,7 @@ void  CStorageBuildingRole::Switch(void) {
     __debugbreak();
   CEcoSector::CleanUpBuildingNeed(EcoSectorPtr, *((unsigned __int16 *)this + 3));
   v3 = (_DWORD *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
-  v4 = IEntity::FlagBits(v3, (EntityFlag)0x1000u);
+  v4 = IEntity::FlagBits(v3, EntityFlag_NotStriking);
   if ( v4 )
   {
     for ( i = 1; i < 43; ++i )
@@ -313,7 +313,7 @@ void  CStorageBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
   byte_3F1E5A9 = IEntity::Race(a2);
   byte_3F1E5A8 = IEntity::Type((unsigned __int16 *)a2);
   byte_3F1E5AB = 1;
-  byte_3F1E5AC = IEntity::FlagBits(a2, (EntityFlag)0x1000u) != 0;
+  byte_3F1E5AC = IEntity::FlagBits(a2, EntityFlag_NotStriking) != 0;
   byte_3F1E5AD = 0;
   v9 = IEntity::Type((unsigned __int16 *)a2);
   v3 = IEntity::OwnerId((unsigned __int8 *)a2);
@@ -765,7 +765,7 @@ void  CStorageBuildingRole::SwitchGood(int a2, int a3) {
   if ( a3 )
   {
     v4 = (_DWORD *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
-    if ( IEntity::FlagBits(v4, (EntityFlag)0x1000u) )
+    if ( IEntity::FlagBits(v4, EntityFlag_NotStriking) )
       CEcoSector::RegisterGoodStorage(v7, *((unsigned __int16 *)this + 3), a2);
   }
   else

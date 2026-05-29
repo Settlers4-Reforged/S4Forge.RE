@@ -18,17 +18,17 @@
   if ( CHive::IsFlowerInSurrounding(this) )
   {
     ++this->m_iPhases;
-    this->m_wJobPart = CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType);
+    this->m_iJobPart = CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType);
   }
   else
   {
-    this->m_wJobPart = CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType) + 1;
+    this->m_iJobPart = CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType) + 1;
   }
-  this->m_uCycleFrames = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_wJobPart);
+  this->m_uCycleFrames = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_iJobPart);
   if ( !this->m_uCycleFrames && BBSupportDbgReport(2, "mapobjects\\decoobj\\hive.cpp", 98, "m_uCycleFrames") == 1 )
     __debugbreak();
   IAnimatedEntity::RegisterForLogicUpdate(this, 31);
-  this->m_cFrame = 0;
+  this->m_iFrame = 0;
   return this;
 }
 
@@ -41,12 +41,12 @@
   this->__vftable = (IAnimatedEntity_vtbl *)&CHive::_vftable_;
   this->m_uU5 = 0;
   this->m_iPhases = a2->m_iPhases;
-  this->m_wJobPart = a2->m_wJobPart;
+  this->m_iJobPart = a2->m_iJobPart;
   this->m_uCycleFrames = a2->m_uCycleFrames;
   if ( !this->m_uCycleFrames && BBSupportDbgReport(2, "mapobjects\\decoobj\\hive.cpp", 135, "m_uCycleFrames") == 1 )
     __debugbreak();
   this->m_uU6 = a2->m_uU6;
-  this->m_cFrame = a2->m_cFrame;
+  this->m_iFrame = a2->m_iFrame;
   this->m_uU1 = 1;
   return this;
 }
@@ -80,8 +80,8 @@ void  CHive::LogicUpdate(void) {
       {
         this->m_uU5 = 0;
         ++this->m_iPhases;
-        this->m_wJobPart = CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType);
-        this->m_uCycleFrames = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_wJobPart);
+        this->m_iJobPart = CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType);
+        this->m_uCycleFrames = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_iJobPart);
       }
       goto LABEL_24;
     case 1u:
@@ -98,9 +98,9 @@ void  CHive::LogicUpdate(void) {
       {
         this->m_uU5 = 0;
         ++this->m_iPhases;
-        this->m_cFrame = 0;
-        this->m_wJobPart = CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType) + 1;
-        this->m_uCycleFrames = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_wJobPart);
+        this->m_iFrame = 0;
+        this->m_iJobPart = CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType) + 1;
+        this->m_uCycleFrames = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_iJobPart);
         IEntity::SetFlagBits(this, EntityFlag_Ready);
       }
       goto LABEL_24;
@@ -109,9 +109,9 @@ void  CHive::LogicUpdate(void) {
       {
         IEntity::ClearFlagBits(this, EntityFlag_Ready);
         ++this->m_iPhases;
-        this->m_cFrame = 0;
-        this->m_wJobPart = CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType) + 2;
-        this->m_uCycleFrames = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_wJobPart);
+        this->m_iFrame = 0;
+        this->m_iJobPart = CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType) + 2;
+        this->m_uCycleFrames = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_iJobPart);
         if ( !this->m_uCycleFrames && BBSupportDbgReport(2, "mapobjects\\decoobj\\hive.cpp", 334, "m_uCycleFrames") == 1 )
           __debugbreak();
       }
@@ -121,17 +121,17 @@ void  CHive::LogicUpdate(void) {
       {
         this->m_uU5 = 0;
         ++this->m_iPhases;
-        this->m_cFrame = 0;
-        this->m_wJobPart = CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType) + 3;
-        this->m_uCycleFrames = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_wJobPart);
+        this->m_iFrame = 0;
+        this->m_iJobPart = CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType) + 3;
+        this->m_uCycleFrames = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_iJobPart);
       }
       goto LABEL_24;
     case 5u:
       if ( ++this->m_uU5 < 20
         || (this->m_uU5 = 0,
-            ++this->m_cFrame,
-            m_cFrame = this->m_cFrame,
-            m_cFrame < CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_wJobPart)) )
+            ++this->m_iFrame,
+            m_cFrame = this->m_iFrame,
+            m_cFrame < CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_iJobPart)) )
       {
 LABEL_24:
         IAnimatedEntity::RegisterForLogicUpdate(this, 31);
@@ -161,10 +161,10 @@ struct SGfxObjectInfo *  CHive::GetGfxInfos(void) {
   v2 = CStateGame::GetTickCounter(g_pGame);
   IAnimatedEntity::SetLastUpdateTick(this, v2);
   if ( v4 )
-    this->m_cFrame = (v4 + (unsigned int)this->m_cFrame) % this->m_uCycleFrames;
-  CGfxManager::GetObjectGfxInfo(g_pGfxManager, &IEntity::m_sGfxInfo, this->m_wJobPart, this->m_cFrame, 1);
-  byte_40FE518 = 16;
-  byte_40FE51A = IEntity::IsVisible(this);
+    this->m_iFrame = (v4 + (unsigned int)this->m_iFrame) % this->m_uCycleFrames;
+  CGfxManager::GetObjectGfxInfo(g_pGfxManager, &IEntity::m_sGfxInfo, this->m_iJobPart, this->m_iFrame, 1);
+  MEMORY[0x40FE518] = 16;
+  MEMORY[0x40FE51A] = IEntity::IsVisible(this);
   IEntity::m_sGfxInfo.m_uFlags = 0;
   return &IEntity::m_sGfxInfo;
 }
@@ -187,16 +187,16 @@ void  CHive::Decrease(int a2) {
   if ( CHive::IsFlowerInSurrounding(this) )
   {
     this->m_iPhases = 1;
-    this->m_cFrame = 0;
-    this->m_wJobPart = CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType);
+    this->m_iFrame = 0;
+    this->m_iJobPart = CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType);
   }
   else
   {
     this->m_iPhases = 0;
-    this->m_cFrame = 0;
-    this->m_wJobPart = CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType) + 1;
+    this->m_iFrame = 0;
+    this->m_iJobPart = CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType) + 1;
   }
-  result = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_wJobPart);
+  result = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_iJobPart);
   this->m_uCycleFrames = result;
   return result;
 }

@@ -933,8 +933,8 @@ int  CWarriorBehavior::WarriorAttackScan15(class IMovingEntity & a2, int * a3) {
   int v11; // [esp+14h] [ebp-20h]
   int v12; // [esp+18h] [ebp-1Ch]
   int v13; // [esp+1Ch] [ebp-18h]
-  int v14; // [esp+20h] [ebp-14h]
-  int v15; // [esp+24h] [ebp-10h]
+  int iScanRadiusLast; // [esp+20h] [ebp-14h]
+  unsigned int v15; // [esp+24h] [ebp-10h]
   int v16; // [esp+28h] [ebp-Ch]
   CWarriorBehavior *v17; // [esp+2Ch] [ebp-8h]
   int i; // [esp+30h] [ebp-4h]
@@ -943,21 +943,24 @@ int  CWarriorBehavior::WarriorAttackScan15(class IMovingEntity & a2, int * a3) {
   v9 = IEntity::X(a2);
   v8 = IEntity::Y(a2);
   v12 = *(_DWORD *)(*((_DWORD *)v17 + 1) + 28) + 1;
-  v14 = *(_DWORD *)(*((_DWORD *)v17 + 1) + 36);
-  if ( v14 > 15 && BBSupportDbgReport(2, "MapObjects\\WarriorBehavior.cpp", 1987, (const char *)&dword_37C1324[1]) == 1 )
+  iScanRadiusLast = *(_DWORD *)(*((_DWORD *)v17 + 1) + 36);
+  if ( iScanRadiusLast > 15
+    && BBSupportDbgReport(2, "MapObjects\\WarriorBehavior.cpp", 1987, "iScanRadiusLast <= 15") == 1 )
+  {
     __debugbreak();
+  }
   v11 = SurroundingHexPointsCount(v12 - 1);
-  v10 = SurroundingHexPointsCount(v14);
+  v10 = SurroundingHexPointsCount(iScanRadiusLast);
   CWarriorBehavior::WarriorGetEnemyBitsAndScanMask(v17, a2, &v6, &v7);
   for ( i = v11; ; ++i )
   {
     if ( i >= v10 )
       return 0;
-    v3 = SSurroundingPoint8::X(&g_sSurroundingHexPoints8[4 * i]);
+    v3 = SSurroundingPoint8::X(&g_sSurroundingHexPoints8[i]);
     v15 = v9 + v3;
-    v4 = SSurroundingPoint8::Y(&g_sSurroundingHexPoints8[4 * i]);
+    v4 = SSurroundingPoint8::Y(&g_sSurroundingHexPoints8[i]);
     v16 = v8 + v4;
-    if ( (unsigned __int8)CWorldManager::InWorld(v15, v8 + v4) )
+    if ( CWorldManager::InWorld(v15, v8 + v4) )
     {
       v13 = CWorldManager::MapObjectId(v15, v16);
       if ( CWarriorBehavior::WarriorCheckTarget(v13, v6, v7) )

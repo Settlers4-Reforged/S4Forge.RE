@@ -133,7 +133,7 @@ void  CFarmBuildingRole::LogicUpdate(class CBuilding * a2) {
   {
     if ( v26 != 3 )
       return result;
-    if ( !*((_BYTE *)v28 + 29) || !IEntity::FlagBits(a2, (EntityFlag)4096) )
+    if ( !*((_BYTE *)v28 + 29) || !IEntity::FlagBits(a2, EntityFlag_NotStriking) )
       return IAnimatedEntity::RegisterForLogicUpdate(a2, 31);
     v9 = *(char *)(*((_DWORD *)v28 + 94) + 478);
     v3 = IEntity::Race(a2);
@@ -425,7 +425,7 @@ void  CFarmBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
   byte_3F1E4ED = IEntity::Race(a2);
   byte_3F1E4EC = IEntity::Type((unsigned __int16 *)a2);
   byte_3F1E4EF = 1;
-  byte_3F1E4F0 = IEntity::FlagBits(a2, (EntityFlag)0x1000u) != 0;
+  byte_3F1E4F0 = IEntity::FlagBits(a2, EntityFlag_NotStriking) != 0;
   byte_3F1E4F1 = 1;
   v6 = IEntity::Type((unsigned __int16 *)a2);
   v3 = IEntity::OwnerId((unsigned __int8 *)a2);

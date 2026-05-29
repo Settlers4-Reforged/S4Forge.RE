@@ -36,7 +36,7 @@ public:
     virtual void  LogicUpdate(class CBuilding * a2);
 
     // address=[0x151b270]
-    virtual void  FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo & a3);
+    virtual void  FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo & _rInfo);
 
     // address=[0x151b340]
     virtual void  Init(class CBuilding * a2);

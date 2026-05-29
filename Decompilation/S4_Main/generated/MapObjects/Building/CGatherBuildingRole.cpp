@@ -136,7 +136,7 @@ void  CGatherBuildingRole::LogicUpdate(class CBuilding * a2) {
     *((_DWORD *)v25 + 4) = 0;
     if ( *((_BYTE *)v25 + 29) )
     {
-      if ( IEntity::FlagBits(a2, (EntityFlag)0x1000u) )
+      if ( IEntity::FlagBits(a2, EntityFlag_NotStriking) )
       {
         v20 = CPileMgr::operator[](*((unsigned __int16 *)v25 + 190));
         if ( (*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)v20 + 40))(v20) < 8 )
@@ -402,7 +402,7 @@ void  CGatherBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
   byte_3F1E4ED = IEntity::Race(a2);
   byte_3F1E4EC = IEntity::Type((unsigned __int16 *)a2);
   byte_3F1E4EF = 1;
-  byte_3F1E4F0 = IEntity::FlagBits(a2, (EntityFlag)0x1000u) != 0;
+  byte_3F1E4F0 = IEntity::FlagBits(a2, EntityFlag_NotStriking) != 0;
   byte_3F1E4F1 = 1;
   v6 = IEntity::Type((unsigned __int16 *)a2);
   v3 = IEntity::OwnerId((unsigned __int8 *)a2);

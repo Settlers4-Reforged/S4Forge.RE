@@ -152,7 +152,7 @@ void  CBuildingSiteRole::Init(class CBuilding * a2) {
                            + *(unsigned __int8 *)(this + 403));
   *(_DWORD *)(this + 420) = 131070 / *(_DWORD *)(this + 416);
   IEntity::ClearFlagBits(a2, EntityFlag_Ready);
-  IEntity::SetFlagBits(a2, (EntityFlag)0x1001000u);
+  IEntity::SetFlagBits(a2, EntityFlag_Birth|EntityFlag_NotStriking);
   *(_WORD *)(this + 8) = 0;
   *(_WORD *)(this + 6) = IEntity::ID();
   CBuildingSiteRole::PrepareGround((_DWORD *)this, (unsigned __int16 *)a2);
@@ -258,7 +258,7 @@ void  CBuildingSiteRole::LogicUpdate(class CBuilding * a2) {
   if ( IEntity::FlagBits(a2, EntityFlag_Selected) )
     (*(void (__thiscall **)(CBuildingSiteRole *, unsigned __int8 *, int))(*(_DWORD *)this + 88))(this, a2, 1);
   IAnimatedEntity::RegisterForLogicUpdate(15);
-  if ( IEntity::FlagBits(a2, (EntityFlag)0x1000u) )
+  if ( IEntity::FlagBits(a2, EntityFlag_NotStriking) )
   {
     EcoSectorId = CBuildingSiteRole::GetEcoSectorId(this, (struct CBuilding *)a2);
     if ( IEntity::Type((unsigned __int16 *)a2) == 49 || IEntity::Type((unsigned __int16 *)a2) == 80 )
@@ -807,7 +807,7 @@ void  CBuildingSiteRole::FillDialog(class CBuilding * a2, bool a3) {
   g_cBuildingSiteInfo.m_cRace = IEntity::Race(a2);
   g_cBuildingSiteInfo.m_unknownB = 1;
   v5 = CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
-  g_cBuildingSiteInfo.m_bSomeFlagBits = IEntity::FlagBits((IEntity *)v5, (EntityFlag)0x1000) != 0;
+  g_cBuildingSiteInfo.m_bSomeFlagBits = IEntity::FlagBits((IEntity *)v5, EntityFlag_NotStriking) != 0;
   g_cBuildingSiteInfo.m_unknown20 = *((_BYTE *)this + 440);
   v24 = *(char *)(*((_DWORD *)this + 94) + 479);
   if ( *(_BYTE *)(*((_DWORD *)this + 94) + 479) )
@@ -1243,10 +1243,10 @@ void  CBuildingSiteRole::Switch(void) {
 
   v11 = this;
   v10 = (CBuilding *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
-  if ( IEntity::FlagBits(v10, (EntityFlag)0x1000u) )
+  if ( IEntity::FlagBits(v10, EntityFlag_NotStriking) )
   {
     CTrace::Print("BuildingSite %u stopped", *((unsigned __int16 *)v11 + 3));
-    IEntity::ClearFlagBits(v10, (EntityFlag)0x1000u);
+    IEntity::ClearFlagBits(v10, EntityFlag_NotStriking);
     CEntityEvent::CEntityEvent((CEntityEvent *)v7, 7u, 0, *((unsigned __int16 *)v11 + 3), 0, 0);
     v12 = 0;
     v9 = (const struct CEntityEvent *)v7;
@@ -1271,7 +1271,7 @@ void  CBuildingSiteRole::Switch(void) {
     v12 = 1;
     v8 = v6;
     (*(void (__thiscall **)(CBuilding *, _BYTE *))(*(_DWORD *)v10 + 124))(v10, v6);
-    IEntity::SetFlagBits(v10, (EntityFlag)0x1000u);
+    IEntity::SetFlagBits(v10, EntityFlag_NotStriking);
     IAnimatedEntity::RegisterForLogicUpdate(1);
     v12 = -1;
     return CEntityEvent::~CEntityEvent(v6);
@@ -1389,7 +1389,7 @@ void  CBuildingSiteRole::CheckActivateUrgentBoards(int a2) {
     if ( (int)CEcoSector::BuildingSitesWithPrio(v2) < 10 )
     {
       v3 = (_DWORD *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
-      if ( IEntity::FlagBits(v3, (EntityFlag)0x1000u) )
+      if ( IEntity::FlagBits(v3, EntityFlag_NotStriking) )
       {
         if ( !*((_BYTE *)this + 443) && !*((_BYTE *)this + 444) && !*((_BYTE *)this + 442) && !*((_BYTE *)this + 441) )
         {
@@ -1423,7 +1423,7 @@ void  CBuildingSiteRole::CheckActivateUrgentStones(int a2) {
     if ( (int)CEcoSector::BuildingSitesWithPrio(v2) < 10 )
     {
       v3 = (_DWORD *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
-      if ( IEntity::FlagBits(v3, (EntityFlag)0x1000u) )
+      if ( IEntity::FlagBits(v3, EntityFlag_NotStriking) )
       {
         if ( !*((_BYTE *)this + 443) && !*((_BYTE *)this + 444) && !*((_BYTE *)this + 442) && !*((_BYTE *)this + 441) )
         {
@@ -1456,7 +1456,7 @@ void  CBuildingSiteRole::CheckActivateUrgentBuilder(int a2) {
   if ( (int)CEcoSector::BuildingSitesWithPrio(v2) < 10 )
   {
     v3 = (_DWORD *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
-    if ( IEntity::FlagBits(v3, (EntityFlag)0x1000u) )
+    if ( IEntity::FlagBits(v3, EntityFlag_NotStriking) )
     {
       if ( !*((_BYTE *)this + 443) && !*((_BYTE *)this + 444) && !*((_BYTE *)this + 442) && !*((_BYTE *)this + 441) )
       {
@@ -1491,7 +1491,7 @@ void  CBuildingSiteRole::CheckActivateUrgentDigger(int a2) {
     if ( (int)CEcoSector::BuildingSitesWithPrio(v2) < 10 )
     {
       v3 = (_DWORD *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
-      if ( IEntity::FlagBits(v3, (EntityFlag)0x1000u) )
+      if ( IEntity::FlagBits(v3, EntityFlag_NotStriking) )
       {
         if ( !*((_BYTE *)this + 443) && !*((_BYTE *)this + 444) && !*((_BYTE *)this + 442) && !*((_BYTE *)this + 441) )
         {

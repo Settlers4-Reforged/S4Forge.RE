@@ -184,7 +184,7 @@ protected:
 public:
     int m_iUniqueId;
     WORD m_nEntityId;
-    enum IEntity::EntityType m_objType;
+    enum IEntity::EntityType m_uObjType;
     BYTE pad_b;
     WORD m_nType;
     BYTE unk_e;
@@ -194,7 +194,7 @@ public:
     int m_uPackedXY;
     CWarMapNode m_warMapNode;
     union IEntity::PackedTribePlayer m_packedTribePlayer;
-    BYTE m_cHealth;
+    BYTE m_iLivePoints;
     BYTE pad_22;
     BYTE pad_23;
 

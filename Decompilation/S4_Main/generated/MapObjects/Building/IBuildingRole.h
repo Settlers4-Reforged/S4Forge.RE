@@ -82,7 +82,7 @@ protected:
     virtual bool  OrderInhabitant(class CBuilding * a2);
 
     // address=[0x15003d0]
-    void  MiniFlag(struct SGfxObjectInfo & a2, int a3);
+    void  MiniFlag(struct SGfxObjectInfo & arg0, int a3);
 
     // address=[0x1500590]
     void  WorkingAreaChanged(void);
@@ -102,7 +102,7 @@ public:
     _BYTE byte4;
     _BYTE byte5;
     _WORD m_iEntityId;
-    _WORD m_uSettlerId;
+    unsigned __int16 m_uSettlerId;
     _WORD wordA;
     _WORD wordC;
     _BYTE[2] gap_E;

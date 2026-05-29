@@ -88,7 +88,7 @@ LABEL_35:
       break;
     case 3:
       if ( !*((_BYTE *)v36 + 29)
-        || !IEntity::FlagBits(a2, (EntityFlag)0x1000u)
+        || !IEntity::FlagBits(a2, EntityFlag_NotStriking)
         || !CWorkUpBuildingRole::HaveMaterial(v36, a2) )
       {
         goto LABEL_35;

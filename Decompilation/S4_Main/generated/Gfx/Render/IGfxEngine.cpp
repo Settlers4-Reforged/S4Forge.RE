@@ -165,11 +165,11 @@ bool  IGfxEngine::SetPlayerColor(int a1, struct SGfxColor & a2) {
 
   if ( a1 >= 8 )
     return 0;
-  g_pPlayerColors[a1 + 1] = *a2;
+  MEMORY[0x468D2C8][a1 + 1] = *a2;
   if ( !D3DObjectPtr )
     return 1;
   GradientFormat = CInterfaceD3D::GetGradientFormat(D3DObjectPtr);
-  CColorGradient::SetupGradients(&g_cColorGradient, a1, a2->m_iR, a2->m_iG, a2->m_iB, GradientFormat);
+  CColorGradient::SetupGradients(g_cColorGradient, a1, a2->m_iR, a2->m_iG, a2->m_iB, GradientFormat);
   return 1;
 }
 
@@ -180,7 +180,7 @@ bool  IGfxEngine::GetPlayerColor(int a2, struct SGfxColor & a3) {
   
   if ( a2 >= 8 )
     return 0;
-  *a3 = g_pPlayerColors[a2 + 1];
+  *a3 = MEMORY[0x468D2C8][a2 + 1];
   return 1;
 }
 

@@ -420,7 +420,7 @@ void  CMilitaryBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
   g_cMilitaryBuildingInfo.m_cRace = IEntity::Race(a2);
   g_cMilitaryBuildingInfo.m_cType = IEntity::Type(a2);
   g_cMilitaryBuildingInfo.m_unknownB = 0;
-  g_cMilitaryBuildingInfo.m_bSomeFlagBits = IEntity::FlagBits(a2, (EntityFlag)0x1000) != 0;
+  g_cMilitaryBuildingInfo.m_bSomeFlagBits = IEntity::FlagBits(a2, EntityFlag_NotStriking) != 0;
   g_cMilitaryBuildingInfo.m_unknownD = 0;
   cType = IEntity::Type(a2);
   cOwnerId = IEntity::OwnerId(a2);
@@ -459,8 +459,8 @@ void  CMilitaryBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
       v6 = IEntity::Race(v18);
       SettlerInfo = CSettlerMgr::GetSettlerInfo(v6, v10);
       LOBYTE(v14) = 100;
-      m_bHealth = SettlerInfo->m_bHealth;
-      if ( SettlerInfo->m_bHealth )
+      m_bHealth = SettlerInfo->m_iMaxLifePoints;
+      if ( SettlerInfo->m_iMaxLifePoints )
       {
         v13 = ((int (__thiscall *)(IEntity *))v18->Amount)(v18);
         if ( v13 < m_bHealth )

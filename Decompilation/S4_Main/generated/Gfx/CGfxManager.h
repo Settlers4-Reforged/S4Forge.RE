@@ -21,7 +21,7 @@ public:
     virtual void  GetUserLogoGfxInfo(struct SGfxObjectInfo & userLogoGfxInfo, unsigned int logoNr, unsigned int _iDir);
 
     // address=[0x1361af0]
-    void  GetBuildingGfxInfo(struct SGfxObjectInfo & a2, unsigned int _iRace, unsigned int a4, unsigned int _iFlags, struct SBuildingFX * _argBuildingFX);
+    void  GetBuildingGfxInfo(struct SGfxObjectInfo & _rInfo, unsigned int _iRace, unsigned int _iBuilding, unsigned int _iFlags, struct SBuildingFX * _argBuildingFX);
 
     // address=[0x1361f10]
     unsigned int  GetBuildingFirstJob(unsigned int _iRace, unsigned int a3);
@@ -33,7 +33,7 @@ public:
     unsigned int  GetObjectFirstJob(unsigned int a2);
 
     // address=[0x1362210]
-    void  GetSettlerGfxInfo(struct SGfxObjectInfo & a2, unsigned int _iRace, unsigned int _iJob, unsigned int _iFrame, unsigned int _iDir);
+    void  GetSettlerGfxInfo(struct SGfxObjectInfo & _rInfo, unsigned int _iRace, unsigned int _iJob, unsigned int _iFrame, unsigned int _iDir);
 
     // address=[0x1362410]
     unsigned int  GetSettlerFirstJob(unsigned int _iRace, unsigned int a3);

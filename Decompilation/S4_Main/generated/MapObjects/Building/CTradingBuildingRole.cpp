@@ -138,7 +138,7 @@ void  CTradingBuildingRole::LogicUpdate(class CBuilding * a2) {
       break;
   }
   v2 = (_DWORD *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
-  if ( IEntity::FlagBits(v2, (EntityFlag)0x1000u) )
+  if ( IEntity::FlagBits(v2, EntityFlag_NotStriking) )
   {
     if ( this[171] )
     {
@@ -317,7 +317,7 @@ void  CTradingBuildingRole::Switch(void) {
 
   IBuildingRole::Switch((unsigned __int16 *)this);
   v1 = (_DWORD *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
-  if ( !IEntity::FlagBits(v1, (EntityFlag)0x1000u) )
+  if ( !IEntity::FlagBits(v1, EntityFlag_NotStriking) )
   {
     CTradingBuildingRole::CancelIncomingChargeTraders(this);
     CTradingBuildingRole::CancelIncomingDeliverTraders(this);
@@ -717,7 +717,7 @@ void  CTradingBuildingRole::TransportGood(int a2, int a3) {
         *((_BYTE *)this + a2 + 384) += a3;
         *((_BYTE *)this + a2 + 427) += a3;
         v5 = (_DWORD *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
-        if ( !IEntity::FlagBits(v5, (EntityFlag)0x1000u) && !*((_BYTE *)this + a2 + 427) )
+        if ( !IEntity::FlagBits(v5, EntityFlag_NotStriking) && !*((_BYTE *)this + a2 + 427) )
           CTradingBuildingRole::ClearExpectedAmounts(this, a2);
       }
       else
@@ -726,7 +726,7 @@ void  CTradingBuildingRole::TransportGood(int a2, int a3) {
         *((_BYTE *)this + a2 + 384) = 0;
         *((_BYTE *)this + a2 + 427) = 0;
         v4 = (_DWORD *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
-        if ( !IEntity::FlagBits(v4, (EntityFlag)0x1000u) )
+        if ( !IEntity::FlagBits(v4, EntityFlag_NotStriking) )
           CTradingBuildingRole::ClearExpectedAmounts(this, a2);
       }
     }
@@ -751,7 +751,7 @@ void  CTradingBuildingRole::TransportGood(int a2, int a3) {
     *((_BYTE *)this + a2 + 384) = 0;
     *((_BYTE *)this + a2 + 427) = 0;
     v3 = (_DWORD *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
-    if ( !IEntity::FlagBits(v3, (EntityFlag)0x1000u) )
+    if ( !IEntity::FlagBits(v3, EntityFlag_NotStriking) )
       CTradingBuildingRole::ClearExpectedAmounts(this, a2);
   }
 }
@@ -1169,7 +1169,7 @@ void  CTradingBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
   {
     byte_3F1E574 = 32;
     byte_3F1E577 = 1;
-    byte_3F1E578 = IEntity::FlagBits(a2, (EntityFlag)0x1000u) != 0;
+    byte_3F1E578 = IEntity::FlagBits(a2, EntityFlag_NotStriking) != 0;
     byte_3F1E579 = 0;
     v3 = IEntity::OwnerId(a2);
     byte_3F1E57B = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v3, 32, 0);
@@ -1183,7 +1183,7 @@ void  CTradingBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
   {
     byte_3F1E574 = 33;
     byte_3F1E577 = 1;
-    byte_3F1E578 = IEntity::FlagBits(a2, (EntityFlag)0x1000u) != 0;
+    byte_3F1E578 = IEntity::FlagBits(a2, EntityFlag_NotStriking) != 0;
     byte_3F1E579 = 0;
     v13 = IEntity::Type((unsigned __int16 *)a2);
     v5 = IEntity::OwnerId(a2);
@@ -2573,7 +2573,7 @@ void  CTradingBuildingRole::TransportHandling(class CBuilding * a2) {
 
   if ( !a2 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 2568, "_pBuilding") == 1 )
     __debugbreak();
-  result = (unsigned __int8 *)IEntity::FlagBits(a2, (EntityFlag)0x1000u);
+  result = (unsigned __int8 *)IEntity::FlagBits(a2, EntityFlag_NotStriking);
   if ( !result )
     return result;
   if ( !(unsigned __int8)CBuilding::HaveInhabitant() )
@@ -2595,7 +2595,7 @@ void  CTradingBuildingRole::TransportHandling(class CBuilding * a2) {
         if ( CurrentAmount > 0 || RequestedAmount > 0 )
         {
           v3 = (_DWORD *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 190));
-          if ( IEntity::FlagBits(v3, (EntityFlag)0x1000u) )
+          if ( IEntity::FlagBits(v3, EntityFlag_NotStriking) )
           {
             if ( !CTradingBuildingRole::IsVehicleRequested(this, a2, 0) )
               CTradingBuildingRole::RequestVehicle(this, a2, 0);

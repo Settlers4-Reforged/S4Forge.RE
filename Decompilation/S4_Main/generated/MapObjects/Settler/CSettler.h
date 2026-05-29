@@ -51,16 +51,16 @@ public:
     void  TakeWaitList(void);
 
     // address=[0x157dde0]
-    void  TakeAnimList(int a2);
+    void  TakeAnimList(int _iAnimListIndex);
 
     // address=[0x157ded0]
-    void  AttachToBuilding(int a2);
+    void  AttachToBuilding(int a1);
 
     // address=[0x157df70]
     void  CheckFlee(int a2);
 
     // address=[0x157df90]
-    void  ChangeType(int newSettlerType, bool a3, bool a4);
+    void  ChangeType(int _iNewSettlerType, bool a3, bool a4);
 
     // address=[0x157e450]
     void  ChangeTypeComeToBuilding(int a2, int a3);
@@ -127,7 +127,7 @@ protected:
      CSettler(int type, int id);
 
     // address=[0x157ef70]
-     CSettler(int a2, int a3, int a4, class std::auto_ptr<class ISettlerRole> a5, int a6);
+     CSettler(int arg0, int a3, int a4, class std::auto_ptr<class ISettlerRole> a5, int a6);
 
     // address=[0x157f0e0]
     virtual  ~CSettler(void);
@@ -146,7 +146,7 @@ protected:
 
     // Type information members
 public:
-    ISettlerRole * role;
+    ISettlerRole * m_pBehavior;
 
 };
 

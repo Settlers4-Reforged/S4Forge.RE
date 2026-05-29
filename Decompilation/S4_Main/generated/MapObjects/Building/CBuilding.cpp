@@ -260,23 +260,20 @@ void  CBuilding::LogicUpdate(void) {
 
 
 // address=[0x14e8be0]
-// Decompiled from struct SGfxObjectInfo *__thiscall CBuilding::GetGfxInfos(IEntity *this)
+// Decompiled from struct SGfxObjectInfo *__thiscall CBuilding::GetGfxInfos(CBuilding *this)
 struct SGfxObjectInfo *  CBuilding::GetGfxInfos(void) {
   
   struct IBuildingRole *v1; // eax
 
-  if ( (unsigned __int8)CInputProcessor::IsBoxSelection(&g_cInputProcessor) )
+  if ( CInputProcessor::IsBoxSelection(&g_cInputProcessor) )
     IAnimatedEntity::BoxSelection();
-  IEntity::m_sGfxInfo.dword58 = 0;
-  dword_40FE2AC = 0;
-  v1 = (struct IBuildingRole *)std::auto_ptr<IBuildingRole>::operator->(&this[2].m_nType);
-  ((void (__thiscall *)(struct IBuildingRole *, IEntity *, struct SGfxObjectInfo *))v1->__vftable[2].j___purecall)(
-    v1,
-    this,
-    &IEntity::m_sGfxInfo);
-  byte_40FE518 = this->m_objType;
-  byte_40FE51A = IEntity::IsVisible(this);
-  if ( IEntity::FlagBits(this, EntityFlag_Selected) )
+  IEntity::m_sGfxInfo.m_pBuildLayerGfxData = 0;
+  IEntity::m_sGfxInfo.field_5C = 0;
+  v1 = (struct IBuildingRole *)std::auto_ptr<IBuildingRole>::operator->((_DWORD *)this + 21);
+  v1->FillGfxInfo(v1, (IEntity *)this, &IEntity::m_sGfxInfo);
+  IEntity::m_sGfxInfo.m_uObjType = *((_BYTE *)this + 10);
+  IEntity::m_sGfxInfo.m_bIsVisible = IEntity::IsVisible(this);
+  if ( IEntity::FlagBits((IEntity *)this, EntityFlag_Selected) )
     IEntity::m_sGfxInfo.m_uFlags = 28;
   else
     IEntity::m_sGfxInfo.m_uFlags = 0;
@@ -1229,7 +1226,7 @@ void  CBuilding::CorrectBuildingBits(void) {
   }
   *(_WORD *)(this + 12) = v12;
   *(_BYTE *)(this + 10) = 8;
-  IEntity::SetFlagBits((_DWORD *)this, (EntityFlag)0x1100u);
+  IEntity::SetFlagBits((_DWORD *)this, EntityFlag_NotStriking|EntityFlag_Visible);
   if ( (unsigned __int8)CBuildingMgr::IsMilitary(v12) )
     IEntity::SetFlagBits((_DWORD *)this, (EntityFlag)0xCu);
   CWarMap::AddEntity((CPropertySet *)this);

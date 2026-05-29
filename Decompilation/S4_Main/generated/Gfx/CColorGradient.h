@@ -11,6 +11,11 @@ public:
     // address=[0x2f71c10]
      CColorGradient(void);
 
+    // Type information members
+public:
+    char[8][64] m_vGradients;
+    SGfxColor[64] m_vPlayerColors;
+
 };
 
 

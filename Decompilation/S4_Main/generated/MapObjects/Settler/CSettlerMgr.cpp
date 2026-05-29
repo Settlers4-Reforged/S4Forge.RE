@@ -776,7 +776,7 @@ void  CSettlerMgr::LoadInfo(bool isMP) {
                                   v175);
           v6 = std::string::c_str(v119);
           v7 = j__atoi(v6);
-          settlerInfo->m_bHealth = v7;
+          settlerInfo->m_iMaxLifePoints = v7;
           std::string::~string(v175);
           v118 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v163);
           v117 = AdvXMLParser::Element::operator()(v118, "armor", 0);
@@ -2548,7 +2548,7 @@ int __cdecl CSettlerMgr::GetSquadLeaderBonus256(int a1) {
 // Decompiled from int __cdecl CSettlerMgr::SettlerWarriorLevel(int a1)
 int __cdecl CSettlerMgr::SettlerWarriorLevel(int a1) {
   
-  if ( !CSettlerMgr::m_uSettlerWarriorLevels[29]
+  if ( !CSettlerMgr::m_uSettlerWarriorLevels[SETTLER_SWORDSMAN_01]
     && BBSupportDbgReport(
          2,
          "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\MapObjects\\Settler\\SettlerMgr.h",
@@ -2764,20 +2764,20 @@ void  CSettlerMgr::CheckOutSettler(int a2) {
   int v2; // eax
   int v3; // esi
   int v4; // [esp+4h] [ebp-20h]
-  int v5; // [esp+Ch] [ebp-18h]
+  ISettlerRole *v5; // [esp+Ch] [ebp-18h]
   int v6; // [esp+10h] [ebp-14h]
   int v7; // [esp+14h] [ebp-10h]
   CEcoSector *v8; // [esp+18h] [ebp-Ch]
-  unsigned __int8 *v10; // [esp+20h] [ebp-4h]
+  CSettler *v10; // [esp+20h] [ebp-4h]
 
-  v10 = CSettlerMgr::Settler(this, a2);
+  v10 = (CSettler *)CSettlerMgr::Settler(this, a2);
   v4 = IEntity::OwnerId(v10);
-  v7 = IEntity::Type((unsigned __int16 *)v10);
+  v7 = IEntity::Type(v10);
   if ( v7 < 67 )
   {
-    if ( IEntity::WarriorType() )
+    if ( IEntity::WarriorType(v10) )
     {
-      CSettlerMgr::DetachSettler((int *)this, v10);
+      CSettlerMgr::DetachSettler((int *)this, (unsigned __int8 *)v10);
     }
     else
     {
@@ -2785,19 +2785,19 @@ void  CSettlerMgr::CheckOutSettler(int a2) {
       v6 = CWorldManager::EcoSectorId(v2);
       if ( v6 > 0 )
       {
-        v8 = (CEcoSector *)CEcoSectorMgr::operator[](v6);
+        v8 = (CEcoSector *)CEcoSectorMgr::operator[](g_cESMgr, v6);
         v3 = CEcoSector::Owner(v8);
         if ( v3 == IEntity::OwnerId(v10) )
         {
           if ( IEntity::FlagBits(v10, EntityFlag_Offered) )
             CEcoSector::GetSettlerOutOfOffer(v8, a2);
           v5 = CSettler::Role(v10);
-          if ( (*(int (__thiscall **)(int))(*(_DWORD *)v5 + 72))(v5) != 18
-            && !IEntity::FlagBits(v10, (EntityFlag)0x80u)
-            && (!IEntity::FlagBits(v10, EntityFlag_OnBoard) || IEntity::FlagBits(v10, (EntityFlag)0x10000000u)) )
+          if ( v5->GetSettlerRole(v5) != 18
+            && !IEntity::FlagBits(v10, (EntityFlag)128)
+            && (!IEntity::FlagBits(v10, EntityFlag_OnBoard) || IEntity::FlagBits(v10, (EntityFlag)0x10000000)) )
           {
             CEcoSector::ChangeNrOfSettler(v8, v7, -1);
-            IEntity::ClearFlagBits(v10, (EntityFlag)0x10000000u);
+            IEntity::ClearFlagBits(v10, (EntityFlag)0x10000000);
           }
         }
       }

@@ -174,15 +174,15 @@ unsigned long  CWarShip::ClassID(void)const {
 // [Decompilation failed for static unsigned long CWarShip::m_iClassID]
 
 // address=[0x15a0df0]
-// Decompiled from CWarShip *__thiscall CWarShip::CWarShip(CWarShip *this, int a2, int a3, int a4, int a5, int a6, int a7, bool a8)
+// Decompiled from CWarShip *__thiscall CWarShip::CWarShip(CWarShip *this, int a2, int a3, int a4, int a5, WORD a6, DWORD a7, bool a8)
  CWarShip::CWarShip(int a2, int a3, int a4, int a5, int a6, int a7, bool a8) {
   
   CShip::CShip(this, a2, a3, a4, a5, a6, a7, a8);
-  CWarriorBehavior::CWarriorBehavior((CWarShip *)((char *)this + 172));
-  *(_DWORD *)this = &CWarShip::_vftable_;
-  *((_DWORD *)this + 43) = &CWarShip::`vftable';
-  *((_BYTE *)this + 196) = 1;
-  if ( *(_DWORD *)(*((_DWORD *)this + 25) + 16) != 10
+  CWarriorBehavior::CWarriorBehavior((CWarriorBehavior *)&this[1].m_nType);
+  this->__vftable = (CShip_vtbl *)&CWarShip::_vftable_;
+  *(_DWORD *)&this[1].m_nType = &CWarShip::`vftable';
+  this[1].m_iFrame = 1;
+  if ( this->m_pVehicleProperties->m_tWarriorType != 10
     && BBSupportDbgReport(
          2,
          "MapObjects\\Ship\\WarShip.cpp",
@@ -191,7 +191,7 @@ unsigned long  CWarShip::ClassID(void)const {
   {
     __debugbreak();
   }
-  CWarriorBehavior::WarriorInit((CWarShip *)((char *)this + 172), this, -1, 0);
+  CWarriorBehavior::WarriorInit((CWarriorBehavior *)&this[1].m_nType, this, -1, 0);
   return this;
 }
 

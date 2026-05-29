@@ -246,7 +246,7 @@ void  CPile::LogicUpdate(void) {
 // Decompiled from struct SGfxObjectInfo *__thiscall CPile::GetGfxInfos(_BYTE *this)
 struct SGfxObjectInfo *  CPile::GetGfxInfos(void) {
   
-  memset(&IEntity::m_sGfxInfo, 0, 0x2D0u);
+  memset(&IEntity::m_sGfxInfo, 0, sizeof(IEntity::m_sGfxInfo));
   if ( !this[68] || (unsigned __int8)this[68] >= 0x2Bu || !this[69] )
     return &IEntity::m_sGfxInfo;
   CGfxManager::GetPileGfxInfo(
@@ -254,8 +254,8 @@ struct SGfxObjectInfo *  CPile::GetGfxInfos(void) {
     (unsigned __int8)this[68],
     (unsigned __int8)this[69],
     (unsigned __int8)this[74]);
-  byte_40FE518 = this[10];
-  byte_40FE51A = IEntity::IsVisible(this);
+  IEntity::m_sGfxInfo.m_uObjType = this[10];
+  IEntity::m_sGfxInfo.m_bIsVisible = IEntity::IsVisible(this);
   return &IEntity::m_sGfxInfo;
 }
 
@@ -1291,7 +1291,7 @@ bool  CPile::ExecuteChangeGoodTypeUnforseen(int a2) {
   *(_WORD *)(this + 76) = a10;
   *(_WORD *)(this + 78) = a11;
   *(_WORD *)(this + 82) = 0;
-  IEntity::SetFlagBits((_DWORD *)this, (EntityFlag)0x1100u);
+  IEntity::SetFlagBits((_DWORD *)this, EntityFlag_NotStriking|EntityFlag_Visible);
   IEntity::ClearFlagBits((_DWORD *)this, EntityFlag_Registered);
   v15 = CWorldManager::Index(a2, a3);
   IEntity::SetPosition((IEntity *)this, a2, a3);

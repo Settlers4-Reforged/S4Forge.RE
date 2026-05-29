@@ -9,7 +9,7 @@
   unsigned int i; // [esp+4h] [ebp-14h]
 
   IEffects::IEffects(this);
-  CBBObject::CBBObject((CEffects *)((char *)this + 8), (int)"CEffects", 1);
+  CBBObject::CBBObject((CBBObject *)((char *)this + 8), (int)"CEffects", 1);
   *(_DWORD *)this = &CEffects::_vftable_;
   *((_DWORD *)this + 1) = &CEffects::`vftable';
   *((_DWORD *)this + 2) = &CEffects::`vftable';
@@ -36,7 +36,7 @@
   memset(&CEffects::m_sGfxInfo, 0, 0x2D0u);
   if ( !g_pGfxEngine && BBSupportDbgReport(2, "Logic\\Effects.cpp", 1696, "g_pGfxEngine != 0") == 1 )
     __debugbreak();
-  IGfxEngine::SetEffectSystemInterfacePtr((IGfxEngine *)g_pGfxEngine, this);
+  IGfxEngine::SetEffectSystemInterfacePtr(g_pGfxEngine, this);
   return this;
 }
 

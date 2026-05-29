@@ -1,3 +1,4 @@
+#if FALSE
 #include "CBuildingInfoMgr.h"
 
 // Definitions for class CBuildingInfoMgr
@@ -535,9 +536,9 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
   int v3; // eax
   char *v4; // eax
   char *v5; // eax
-  BYTE v6; // al
+  char v6; // al
   char *v7; // eax
-  BYTE v8; // al
+  char v8; // al
   char *v9; // eax
   BYTE v10; // al
   char *v11; // eax
@@ -574,17 +575,17 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
   char *v42; // eax
   BYTE v43; // al
   char *v44; // eax
-  BYTE v45; // al
+  char v45; // al
   char *v46; // eax
-  BYTE v47; // al
+  char v47; // al
   char *v48; // eax
-  BYTE v49; // al
+  char v49; // al
   char *v50; // eax
-  BYTE v51; // al
+  char v51; // al
   char *v52; // eax
-  BYTE v53; // al
+  char v53; // al
   char *v54; // eax
-  BYTE v55; // al
+  char v55; // al
   char *v56; // eax
   char v57; // al
   char *v58; // eax
@@ -928,7 +929,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
   int v396; // [esp+5D8h] [ebp-1558h]
   int v397; // [esp+5DCh] [ebp-1554h]
   int *v398; // [esp+5E0h] [ebp-1550h]
-  int m_iLines; // [esp+5E4h] [ebp-154Ch]
+  signed int m_iLines; // [esp+5E4h] [ebp-154Ch]
   int v400; // [esp+5E8h] [ebp-1548h]
   int v401; // [esp+5ECh] [ebp-1544h]
   int v402; // [esp+5F0h] [ebp-1540h]
@@ -976,7 +977,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
   AdvXMLParser::Element *v444; // [esp+698h] [ebp-1498h]
   AdvXMLParser::Element *v445; // [esp+69Ch] [ebp-1494h]
   int v446; // [esp+6A0h] [ebp-1490h]
-  int v447; // [esp+6A4h] [ebp-148Ch]
+  int jobDefineValue; // [esp+6A4h] [ebp-148Ch] MAPDST
   std::string *v448; // [esp+6A8h] [ebp-1488h]
   std::string *v449; // [esp+6ACh] [ebp-1484h]
   CConfigManager *v450; // [esp+6B0h] [ebp-1480h]
@@ -1000,7 +1001,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
   CConfigManager *v468; // [esp+6F8h] [ebp-1438h]
   std::string *v469; // [esp+6FCh] [ebp-1434h]
   std::string *v470; // [esp+700h] [ebp-1430h]
-  int v471; // [esp+704h] [ebp-142Ch]
+  AdvXMLParser::Element *v471; // [esp+704h] [ebp-142Ch]
   _DWORD *v472; // [esp+708h] [ebp-1428h]
   _DWORD *v473; // [esp+70Ch] [ebp-1424h]
   struct AdvXMLParser::Element *v474; // [esp+710h] [ebp-1420h]
@@ -1203,7 +1204,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
   AdvXMLParser::Element *v672; // [esp+A38h] [ebp-10F8h]
   AdvXMLParser::Element *v673; // [esp+A3Ch] [ebp-10F4h]
   CConfigManager *v674; // [esp+A40h] [ebp-10F0h]
-  int v675; // [esp+A44h] [ebp-10ECh]
+  AdvXMLParser::Element *v675; // [esp+A44h] [ebp-10ECh]
   int v676; // [esp+A48h] [ebp-10E8h]
   int v677; // [esp+A4Ch] [ebp-10E4h]
   AdvXMLParser::Element *v678; // [esp+A50h] [ebp-10E0h]
@@ -1276,10 +1277,9 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
   int v745; // [esp+B5Ch] [ebp-FD4h]
   _DWORD v746[4]; // [esp+B60h] [ebp-FD0h] BYREF
   int v747; // [esp+B70h] [ebp-FC0h]
-  int v748; // [esp+B74h] [ebp-FBCh]
   int v749; // [esp+B78h] [ebp-FB8h] BYREF
   unsigned int iMaxDistance; // [esp+B7Ch] [ebp-FB4h]
-  int jj; // [esp+B80h] [ebp-FB0h]
+  unsigned int a2; // [esp+B80h] [ebp-FB0h]
   int ii; // [esp+B84h] [ebp-FACh]
   int iRace; // [esp+B88h] [ebp-FA8h]
   int j; // [esp+B8Ch] [ebp-FA4h]
@@ -1605,8 +1605,8 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                 v569 = v759;
                 std::vector<unsigned int>::push_back(&v779->m_vRepealingPosLines, (int)&v569);
               }
-              IsShipyard = CBuildingInfoMgr::BuildingTypeExIsShipyard(iBuildingType);
-              if ( IsShipyard || (IsPort = CBuildingInfoMgr::BuildingTypeExIsPort(iBuildingType)) )
+              IsShipyard = CBuildingInfoMgr::BuildingTypeExIsShipyard((S4_BUILDING_ENUM)iBuildingType);
+              if ( IsShipyard || (IsPort = CBuildingInfoMgr::BuildingTypeExIsPort((S4_BUILDING_ENUM)iBuildingType)) )
               {
                 v779->m_bIsPort = 1;
                 for ( j = 0; j < (unsigned __int8)v779->m_iLines; ++j )
@@ -1789,7 +1789,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
               v53 = j__atoi(v52);
               v779->m_iPileNumber = v53;
               std::string::~string(v839);
-              for ( m = 0; m < (char)v779->m_iPileNumber; ++m )
+              for ( m = 0; m < v779->m_iPileNumber; ++m )
               {
                 v187 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
                 v188 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v187, "pile", m);
@@ -2195,9 +2195,9 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
               AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v167);
               while ( AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator<(v179, (int)v178) )
               {
-                v471 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v179);
+                v471 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v179);
                 v675 = v471;
-                v470 = (std::string *)(*(int (__thiscall **)(int, _BYTE *))(*(_DWORD *)v471 + 8))(v471, v785);
+                v470 = (std::string *)((int (__thiscall *)(AdvXMLParser::Element *, _BYTE *))v471->GetValue)(v471, v785);
                 v469 = v470;
                 LOBYTE(exceptionBlock) = 36;
                 v104 = std::string::c_str(v470);
@@ -2267,11 +2267,10 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                 v448 = v449;
                 LOBYTE(exceptionBlock) = 48;
                 v107 = std::string::c_str(v449);
-                v447 = v671->GetDefineValue(v671, v107);
-                v748 = v447;
+                jobDefineValue = v671->GetDefineValue(v671, v107);
                 LOBYTE(exceptionBlock) = 47;
                 std::string::~string(v787);
-                if ( v748 < 0 )
+                if ( jobDefineValue < 0 )
                 {
                   v670 = std::string::length(&v878) ? std::string::c_str(&v878) : (char *)&unk_3778527;
                   v154 = std::string::c_str(&v877);
@@ -2287,7 +2286,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                   if ( v446 == 1 )
                     __debugbreak();
                 }
-                v779->m_vPatches[v774].m_iJob = v748;
+                v779->m_vPatches[v774].m_iJob = jobDefineValue;
                 v445 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v633);
                 v444 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v445, "type", 0);
                 v669 = v444;
@@ -2303,10 +2302,10 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                 LOBYTE(exceptionBlock) = 50;
                 v441 = (struct CDefineTranslator *)CDefineTranslator::Instance();
                 v440 = CDefineTranslator::GetValueOfDefine(v441, &v863);
-                v748 = v440;
+                jobDefineValue = v440;
                 LOBYTE(exceptionBlock) = 47;
                 std::string::~string(&v863);
-                v779->m_vPatches[v774].m_iType = v748;
+                v779->m_vPatches[v774].m_iType = jobDefineValue;
                 v439 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v633);
                 v438 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v439, "ticks", 0);
                 v668 = v438;
@@ -2422,14 +2421,14 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                 AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator++((char *)v180);
               }
               iMaxDistance = 0;
-              v396 = -(char)v779->m_iHotSpotX;
-              v397 = -(char)v779->m_iHotSpotY;
+              v396 = -v779->m_iHotSpotX;
+              v397 = -v779->m_iHotSpotY;
               m_iLines = (unsigned __int8)v779->m_iLines;
-              for ( jj = 0; jj < m_iLines; ++jj )
+              for ( a2 = 0; (int)a2 < m_iLines; ++a2 )
               {
-                v398 = (int *)std::vector<unsigned int>::operator[](jj);
+                v398 = (int *)std::vector<unsigned int>::operator[](&v779->m_vBuildingPosLines, a2);
                 v747 = *v398;
-                v395 = jj + v397;
+                v395 = a2 + v397;
                 v743 = v396;
                 while ( v747 )
                 {
@@ -2937,7 +2936,7 @@ LABEL_16:
           v311 = v312->GetValue(v312);
           v143 = std::string::c_str(v311);
           v144 = j__atoi(v143);
-          v778->m_bSmoke = v144;
+          v778->m_bEffectSmoke = v144;
           std::string::~string(v805);
           v310 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v746);
           v245 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v310, "effect", 0);
@@ -3030,3 +3029,4 @@ LABEL_16:
 // address=[0x40352a0]
 // [Decompilation failed for static struct CBuildingInfoMgr::SBuildingInfos (* CBuildingInfoMgr::m_vBuildingInfos)[83]]
 
+#endif // Already implemented

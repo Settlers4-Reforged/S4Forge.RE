@@ -1658,7 +1658,7 @@ LABEL_25:
               return;
             }
             v70 = IEntity::Type((unsigned __int16 *)BuildingPtr);
-            v71 = IEntity::FlagBits(BuildingPtr, (EntityFlag)0x1000u) != 0;
+            v71 = IEntity::FlagBits(BuildingPtr, EntityFlag_NotStriking) != 0;
             v92 = v71;
             if ( v84 == -1 && !v93 || v70 == 33 && v92 || v70 == 32 && v92 )
             {

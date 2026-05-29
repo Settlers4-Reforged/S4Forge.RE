@@ -1,3 +1,4 @@
+#if FALSE
 #include "CTaskForceWarMachines.h"
 
 // Definitions for class CTaskForceWarMachines
@@ -235,3 +236,4 @@ LABEL_2:
 }
 
 
+#endif // Already implemented

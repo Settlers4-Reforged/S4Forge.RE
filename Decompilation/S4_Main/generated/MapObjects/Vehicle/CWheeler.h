@@ -55,7 +55,7 @@ protected:
     virtual void  WalkDir(int a2);
 
     // address=[0x15b0af0]
-    virtual void  PlaceVehicle(int a2);
+    virtual void  PlaceVehicle(int _iXY);
 
     // address=[0x15b0ca0]
     virtual void  RemoveVehicle(int a2);
@@ -68,6 +68,14 @@ protected:
 
     // address=[0x37c1a50]
     static int const FULL_UPDATE_DELAY;
+
+    // Type information members
+public:
+    DWORD field_a0;
+    DWORD field_a4;
+    DWORD field_a8;
+    DWORD field_ac;
+    DWORD field_b0;
 
 };
 

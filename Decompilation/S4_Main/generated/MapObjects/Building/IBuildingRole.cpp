@@ -294,10 +294,10 @@ void  IBuildingRole::Switch(void) {
 
   v11 = this;
   v1 = (_DWORD *)CBuildingMgr::operator[](this[3]);
-  if ( IEntity::FlagBits(v1, (EntityFlag)0x1000u) )
+  if ( IEntity::FlagBits(v1, EntityFlag_NotStriking) )
   {
     v2 = (_DWORD *)CBuildingMgr::operator[](v11[3]);
-    IEntity::ClearFlagBits(v2, (EntityFlag)0x1000u);
+    IEntity::ClearFlagBits(v2, EntityFlag_NotStriking);
     CEntityEvent::CEntityEvent((CEntityEvent *)v6, 7u, 0, v11[3], 0, 0);
     v12 = 0;
     v8 = v6;
@@ -309,7 +309,7 @@ void  IBuildingRole::Switch(void) {
   else
   {
     v4 = (_DWORD *)CBuildingMgr::operator[](v11[3]);
-    IEntity::SetFlagBits(v4, (EntityFlag)0x1000u);
+    IEntity::SetFlagBits(v4, EntityFlag_NotStriking);
     CEntityEvent::CEntityEvent((CEntityEvent *)v5, 8u, 0, v11[3], 0, 0);
     v12 = 1;
     v7 = v5;
@@ -1168,49 +1168,47 @@ bool  IBuildingRole::OrderInhabitant(class CBuilding * a2) {
 
 
 // address=[0x15003d0]
-// Decompiled from IBuildingRole *__thiscall IBuildingRole::MiniFlag(IBuildingRole *this, struct SGfxObjectInfo *a2, int a3)
-void  IBuildingRole::MiniFlag(struct SGfxObjectInfo & a2, int a3) {
+// Decompiled from void __thiscall IBuildingRole::MiniFlag(IBuildingRole *this, struct SGfxObjectInfo *arg0, int a3)
+void  IBuildingRole::MiniFlag(struct SGfxObjectInfo & arg0, int a3) {
   
-  IBuildingRole *result; // eax
-  _DWORD *v4; // eax
-  int v5; // eax
-  int v6; // [esp-8h] [ebp-2F8h]
-  int v7; // [esp+8h] [ebp-2E8h]
-  _DWORD v9[184]; // [esp+10h] [ebp-2E0h] BYREF
+  CBuilding *v3; // eax
+  DWORD v4; // eax
+  unsigned int v5; // [esp-8h] [ebp-2F8h]
+  int iAmount; // [esp+8h] [ebp-2E8h]
+  struct SGfxObjectInfo a2; // [esp+10h] [ebp-2E0h] BYREF
+  int v9; // [esp+2ECh] [ebp-4h]
 
-  result = this;
-  if ( !*((_BYTE *)this + 29) )
-    return result;
-  if ( dword_40F21B0 > *(_DWORD *)(*((_DWORD *)NtCurrentTeb()->ThreadLocalStoragePointer + _tls_index) + 20296) )
+  if ( this->m_bInhabitants )
   {
-    j___Init_thread_header(&dword_40F21B0);
-    if ( dword_40F21B0 == -1 )
+    if ( dword_40F21B0 > *(_DWORD *)(*((_DWORD *)NtCurrentTeb()->ThreadLocalStoragePointer + _tls_index) + 20296) )
     {
-      dword_40F21AC = CGfxManager::GetObjectFrameCount((CGfxManager *)g_pGfxManager, 0x220u);
-      v9[183] = -1;
-      j___Init_thread_footer(&dword_40F21B0);
+      j___Init_thread_header(&dword_40F21B0);
+      if ( dword_40F21B0 == -1 )
+      {
+        dword_40F21AC = CGfxManager::GetObjectFrameCount(g_pGfxManager, 544);
+        v9 = -1;
+        j___Init_thread_footer(&dword_40F21B0);
+      }
     }
+    if ( CGameData::GetTickCounter(g_pGameData) - IBuildingRole::m_iLastMiniFlagUpdateTick > 0 )
+    {
+      IBuildingRole::m_iLastMiniFlagUpdateTick = CGameData::GetTickCounter(g_pGameData);
+      ++dword_40F21A8;
+      dword_40F21A8 = (int)dword_40F21A8 % dword_40F21AC;
+    }
+    v3 = CBuildingMgr::operator[]((unsigned __int16)this->m_iEntityId);
+    if ( IEntity::FlagBits((IEntity *)v3, EntityFlag_NotStriking) )
+      iAmount = 1;
+    else
+      iAmount = 2;
+    v5 = dword_40F21A8;
+    v4 = CPlayerManager::Color(a3);
+    CGfxManager::GetObjectGfxInfo(g_pGfxManager, &a2, v4 + 544, v5, iAmount);
+    arg0->m_pMiniFlagGfxData = a2.m_pGfxData;
+    arg0->m_pMiniFlagPalData = a2.m_pPalData;
+    arg0->m_iOffsetX = this->m_pBuildingInfo->m_iMiniFlagXOffset;
+    arg0->m_iOffsetY = this->m_pBuildingInfo->m_iMiniFlagYOffset;
   }
-  if ( CGameData::GetTickCounter(g_pGameData) - IBuildingRole::m_iLastMiniFlagUpdateTick > 0 )
-  {
-    IBuildingRole::m_iLastMiniFlagUpdateTick = CGameData::GetTickCounter(g_pGameData);
-    ++dword_40F21A8;
-    dword_40F21A8 %= dword_40F21AC;
-  }
-  v4 = (_DWORD *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
-  if ( IEntity::FlagBits(v4, (EntityFlag)0x1000u) )
-    v7 = 1;
-  else
-    v7 = 2;
-  v6 = dword_40F21A8;
-  v5 = CPlayerManager::Color(a3);
-  CGfxManager::GetObjectGfxInfo((int)v9, v5 + 544, v6, v7);
-  *((_DWORD *)a2 + 20) = v9[0];
-  *((_DWORD *)a2 + 21) = v9[1];
-  *((_DWORD *)a2 + 6) = *(_DWORD *)(*((_DWORD *)this + 94) + 44);
-  result = *(IBuildingRole **)(*((_DWORD *)this + 94) + 48);
-  *((_DWORD *)a2 + 7) = result;
-  return result;
 }
 
 

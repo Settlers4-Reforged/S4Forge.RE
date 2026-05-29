@@ -1,3 +1,4 @@
+#if FALSE
 #include "CBuildingBits.h"
 
 // Definitions for class CBuildingBits
@@ -34,3 +35,4 @@ void  CBuildingBits::PrintToTraceFile(unsigned int a2) {
 }
 
 
+#endif // Already implemented

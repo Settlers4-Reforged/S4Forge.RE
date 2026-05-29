@@ -3,10 +3,10 @@
 // Definitions for class CLogic
 
 // address=[0x141d890]
-// Decompiled from int __thiscall CLogic::Effects(DWORD *this)
+// Decompiled from struct IEffects *__thiscall CLogic::Effects(DWORD *this)
 class IEffects &  CLogic::Effects(void) {
   
-  return this[12];
+  return (struct IEffects *)this[12];
 }
 
 
@@ -188,10 +188,10 @@ void  CLogic::LogicUpdate(void) {
 
 
 // address=[0x1470980]
-// Decompiled from int __thiscall CLogic::FutureEvents(_DWORD *this)
+// Decompiled from struct IFutureEvents *__thiscall CLogic::FutureEvents(_DWORD *this)
 class IFutureEvents &  CLogic::FutureEvents(void) {
   
-  return this[11];
+  return (struct IFutureEvents *)this[11];
 }
 
 

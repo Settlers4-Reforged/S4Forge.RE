@@ -1607,13 +1607,7 @@ bool  CInterfaceD3D::InitHardware(void) {
     }
     CCacheManager::Reset((CCacheManager *)&g_cCacheManager);
     for ( i = 0; i < 8; ++i )
-      CColorGradient::SetupGradients(
-        &g_cColorGradient,
-        i,
-        g_pPlayerColors[i + 1].m_iR,
-        g_pPlayerColors[i + 1].m_iG,
-        g_pPlayerColors[i + 1].m_iB,
-        2);
+      CColorGradient::SetupGradients(&g_cColorGradient, i, g_cColorGradient.m_vPlayerColors[i + 1], 2);
     g_pfBlitSettler = (int (__cdecl *)(_DWORD, _DWORD, _DWORD, _DWORD))BlitSettlerHardware;
     g_pfBlitObject = (int (__cdecl *)(_DWORD, _DWORD, _DWORD, _DWORD))BlitObjectHardware;
     g_pfBlitVehicle = (int (__cdecl *)(_DWORD, _DWORD, _DWORD, _DWORD))BlitVehicleHardware;
@@ -1627,13 +1621,7 @@ bool  CInterfaceD3D::InitHardware(void) {
     for ( i = 0; i < 8; ++i )
     {
       GradientFormat = CInterfaceD3D::GetGradientFormat(this);
-      CColorGradient::SetupGradients(
-        &g_cColorGradient,
-        i,
-        g_pPlayerColors[i + 1].m_iR,
-        g_pPlayerColors[i + 1].m_iG,
-        g_pPlayerColors[i + 1].m_iB,
-        GradientFormat);
+      CColorGradient::SetupGradients(&g_cColorGradient, i, g_cColorGradient.m_vPlayerColors[i + 1], GradientFormat);
     }
     g_pfBlitSettler = (int (__cdecl *)(_DWORD, _DWORD, _DWORD, _DWORD))BlitSettler;
     g_pfBlitObject = (int (__cdecl *)(_DWORD, _DWORD, _DWORD, _DWORD))BlitObject;
@@ -1792,9 +1780,9 @@ bool  CInterfaceD3D::InitSoftware(void) {
         CColorGradient::SetupGradients(
           &g_cColorGradient,
           j,
-          g_pPlayerColors[j + 1].m_iR,
-          g_pPlayerColors[j + 1].m_iG,
-          g_pPlayerColors[j + 1].m_iB,
+          MEMORY[0x468D2C8][j + 1].m_iR,
+          MEMORY[0x468D2C8][j + 1].m_iG,
+          MEMORY[0x468D2C8][j + 1].m_iB,
           GradientFormat);
       }
       CInterfaceD3D::PreCalcTextureVertices(this, 256);
@@ -2569,7 +2557,7 @@ int  CInterfaceD3D::AllocateEngineData(int a2) {
   void *v4; // [esp+18h] [ebp-18h]
   signed int i; // [esp+1Ch] [ebp-14h]
 
-  if ( *(_DWORD *)this )
+  if ( this->field_0 )
     CInterfaceD3D::DeleteEngineData(this);
   v4 = operator new[](32 * a2);
   if ( v4 )
@@ -2581,20 +2569,20 @@ int  CInterfaceD3D::AllocateEngineData(int a2) {
   {
     v3 = 0;
   }
-  *(_DWORD *)this = v3;
-  if ( !*(_DWORD *)this )
+  this->field_0 = v3;
+  if ( !this->field_0 )
   {
     BBSupportTracePrintF(0, "GFX ENGINE: Not enough memory to allocate vertices");
     return 0;
   }
   for ( i = 0; i < a2; ++i )
   {
-    *(float *)(*(_DWORD *)this + 32 * i + 8) = FLOAT_0_89999998;
-    *(float *)(*(_DWORD *)this + 32 * i + 12) = FLOAT_0_5;
+    *(float *)(this->field_0 + 32 * i + 8) = FLOAT_0_89999998;
+    *(float *)(this->field_0 + 32 * i + 12) = FLOAT_0_5;
   }
-  if ( *(_DWORD *)this )
-    g_pVertexMax = *(_DWORD *)this + 7680;
-  if ( SGfxRenderConfiguration::IsHardwareLandscapeEngine((SGfxRenderConfiguration *)&GfxEngineSetup) )
+  if ( this->field_0 )
+    g_pVertexMax = this->field_0 + 7680;
+  if ( SGfxRenderConfiguration::IsHardwareLandscapeEngine(&GfxEngineSetup) )
     return 1;
   g_pLuminanceTablesMemory = (int)operator new[](0x16800u);
   if ( !g_pLuminanceTablesMemory )

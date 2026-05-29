@@ -48,7 +48,7 @@ public:
     virtual void  Delete(void);
 
     // address=[0x15a3e80]
-    void  FireMissile(int a2, int a3);
+    void  FireMissile(int _iTargetId, int _iDestinationXY);
 
     // address=[0x15a4130]
     void  Update(void);
@@ -96,10 +96,10 @@ public:
     virtual int  GetGroupFlags(void)const;
 
     // address=[0x15a4ca0]
-    virtual int  SetGroupFlagBits(int a2);
+    virtual int  SetGroupFlagBits(int _iFlagBits);
 
     // address=[0x15a4d00]
-    virtual int  ClearGroupFlagBits(int a2);
+    virtual int  ClearGroupFlagBits(int _iFlagBits);
 
     // address=[0x15a7a40]
     virtual void  FillDialog(bool a2);
@@ -124,7 +124,7 @@ protected:
     unsigned int  TurnCounter(void)const;
 
     // address=[0x15a4d60]
-     CVehicle(int a2, int a3, int a4, int a5, int a6, int a7, bool a8);
+     CVehicle(int _iX, int _iY, int _iOwnerId, int a5, int a6, int a7, bool a8);
 
     // address=[0x15a5160]
     virtual  ~CVehicle(void);
@@ -133,7 +133,7 @@ protected:
      CVehicle(std::istream & a2);
 
     // address=[0x15a54a0]
-    virtual void  Store(std::ostream & a2);
+    virtual void  Store(std::ostream & a1);
 
     // address=[0x15a57a0]
     virtual void  GetTurnGfxInfo(void);
@@ -148,7 +148,7 @@ protected:
     void  TakeJobPart(unsigned int a2);
 
     // address=[0x15a5a80]
-    bool  NewDestination(int a2, int a3, int a4);
+    bool  NewDestination(int a2, int a3, int _iFlags);
 
     // address=[0x15a5dc0]
     void  GetNextJob(void);
@@ -169,7 +169,7 @@ protected:
     virtual void  DecreaseAmmo(void);
 
     // address=[0x15a5ef0]
-    void  AttackTarget(int a2);
+    void  AttackTarget(int _iTargetId);
 
     // address=[0x15a6040]
     void  WalkDirAndRegister(int a2, bool a3);
@@ -207,6 +207,34 @@ protected:
 private:
     // address=[0x153a570]
     virtual void  NotifyDetach(int a2);
+
+    // Type information members
+public:
+    const SVehicleProperties * m_pVehicleProperties;
+    unsigned __int8 m_uWalkResult;
+    unsigned __int8 m_uTurnCounter;
+    unsigned __int8 m_uTurningDir;
+    unsigned __int8 m_uCurrentTask;
+    unsigned __int8 byte6C;
+    unsigned __int8 m_uCycleFrames;
+    unsigned __int8 m_uWalkSteps;
+    unsigned __int8 m_iAmmo;
+    unsigned __int8 m_uCurrentTaskIdx1;
+    unsigned __int8 byte71;
+    unsigned __int16 m_uGroupFlags;
+    unsigned int m_uReadyToFireTick;
+    unsigned __int8 word78;
+    unsigned __int8 m_uBoardsNeed;
+    unsigned __int8 word7A;
+    unsigned __int8 m_uIronNeed;
+    unsigned __int16 m_uMaterialSupplied;
+    unsigned __int16 word7E;
+    unsigned __int16 word80;
+    unsigned __int16 word82;
+    unsigned __int16 word84;
+    float m_iBuildingProgress;
+    std::vector m_vTasks;
+    CObserverList * m_cObserverList;
 
 };
 

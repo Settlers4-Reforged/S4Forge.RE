@@ -150,14 +150,14 @@ int const  CCart::GetFrontMeetingPointXY(enum OBJ_TYPE a2, int a3) {
 
 
 // address=[0x1530e80]
-// Decompiled from void *__thiscall CCart::GetGfxInfos(CCart *this)
+// Decompiled from struct SGfxObjectInfo *__thiscall CCart::GetGfxInfos(CCart *this)
 struct SGfxObjectInfo *  CCart::GetGfxInfos(void) {
   
   int v1; // eax
   unsigned int v2; // eax
   unsigned int v4; // [esp+0h] [ebp-14h]
-  char v5; // [esp+4h] [ebp-10h]
-  char v6; // [esp+8h] [ebp-Ch]
+  BYTE v5; // [esp+4h] [ebp-10h]
+  BYTE v6; // [esp+8h] [ebp-Ch]
   BOOL v7; // [esp+Ch] [ebp-8h]
 
   if ( (unsigned __int8)CInputProcessor::IsBoxSelection(&g_cInputProcessor) )
@@ -170,10 +170,10 @@ struct SGfxObjectInfo *  CCart::GetGfxInfos(void) {
   else
   {
     v4 = IEntity::Race(this);
-    v7 = !CCart::HasLoadedSomething(this);
+    v7 = CCart::HasLoadedSomething(this) == 0;
     CGfxManager::GetVehicleGfxInfo(
-      (CGfxManager *)g_pGfxManager,
-      (struct SGfxObjectInfo *)&IEntity::m_sGfxInfo,
+      g_pGfxManager,
+      &IEntity::m_sGfxInfo,
       v4,
       v7 + *((unsigned __int16 *)this + 19),
       *((char *)this + 68),
@@ -181,41 +181,34 @@ struct SGfxObjectInfo *  CCart::GetGfxInfos(void) {
       0,
       0);
   }
-  v1 = IEntity::OwnerId((unsigned __int8 *)this);
-  byte_40FE51B = CPlayerManager::Color(v1);
-  byte_40FE51D = *((_BYTE *)this + 68);
-  byte_40FE51C = *((_BYTE *)this + 69);
-  byte_40FE518 = 4;
-  byte_40FE51A = IEntity::IsVisible(this);
-  if ( IEntity::FlagBits(this, (EntityFlag)&dword_F29144[220079]) )
+  v1 = IEntity::OwnerId((IEntity *)this);
+  IEntity::m_sGfxInfo.m_iColor = CPlayerManager::Color(v1);
+  MEMORY[0x40FE51D] = *((_BYTE *)this + 68);
+  MEMORY[0x40FE51C] = *((_BYTE *)this + 69);
+  IEntity::m_sGfxInfo.field_5C[620] = 4;
+  IEntity::m_sGfxInfo.m_bIsVisible = IEntity::IsVisible(this);
+  if ( IEntity::FlagBits((IEntity *)this, (EntityFlag)&dword_F29144[220079]) )
   {
     v2 = IEntity::Race(this);
-    CGfxManager::GetVehicleGfxInfo(
-      (CGfxManager *)g_pGfxManager,
-      (struct SGfxObjectInfo *)&IEntity::m_sGfxInfo,
-      v2,
-      0x2Eu,
-      2u,
-      0,
-      0,
-      0);
-    dword_40FE2AC = 65534 - *((unsigned __int16 *)this + 62) * *((unsigned __int16 *)this + 64);
+    CGfxManager::GetVehicleGfxInfo(g_pGfxManager, &IEntity::m_sGfxInfo, v2, 0x2Eu, 2u, 0, 0, 0);
+    *(_DWORD *)IEntity::m_sGfxInfo.field_5C = 65534
+                                            - *((unsigned __int16 *)this + 62) * *((unsigned __int16 *)this + 64);
   }
-  if ( IEntity::FlagBits(this, EntityFlag_Selected) )
+  if ( IEntity::FlagBits((IEntity *)this, EntityFlag_Selected) )
   {
-    if ( IEntity::FlagBits(this, EntityFlag_Selected) )
+    if ( IEntity::FlagBits((IEntity *)this, EntityFlag_Selected) )
       v6 = 73;
     else
       v6 = 0;
-    MEMORY[0x40FE266] = v6;
+    IEntity::m_sGfxInfo.m_uFlags = v6;
   }
-  else if ( IEntity::FlagBits(this, (EntityFlag)0x400u) )
+  else if ( IEntity::FlagBits((IEntity *)this, (EntityFlag)1024) )
   {
-    if ( IEntity::FlagBits(this, (EntityFlag)0x400u) )
+    if ( IEntity::FlagBits((IEntity *)this, (EntityFlag)1024) )
       v5 = 90;
     else
       v5 = 0;
-    MEMORY[0x40FE266] = v5;
+    IEntity::m_sGfxInfo.m_uFlags = v5;
   }
   return &IEntity::m_sGfxInfo;
 }
@@ -1894,14 +1887,14 @@ void  CCart::GetTurnGfxInfo(void) {
 
   v1 = IEntity::Race(this);
   v6 = CVehicle::TurnDirEx(this);
-  v5 = dword_37BEC10[5 * v6];
+  v5 = MEMORY[0x37BEC10][5 * v6];
   if ( v5 )
     v4 = *(_DWORD *)(*((_DWORD *)this + 25) + 32) + v5 - 1;
   else
     v4 = *(_DWORD *)(*((_DWORD *)this + 25) + 28);
   v7 = v4;
-  v2 = dword_37BEC14[5 * v6];
-  v3 = dword_37BEC18[5 * v6];
+  v2 = MEMORY[0x37BEC14][5 * v6];
+  v3 = MEMORY[0x37BEC18][5 * v6];
   if ( !CCart::HasLoadedSomething(this) )
   {
     if ( v5 )

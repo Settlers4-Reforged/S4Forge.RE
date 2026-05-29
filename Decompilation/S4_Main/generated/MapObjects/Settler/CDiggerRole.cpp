@@ -333,7 +333,7 @@ void  CDiggerRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent 
   {
     *((_BYTE *)this + 46) = 0;
     v13 = (_DWORD *)CBuildingMgr::operator[](*((_DWORD *)a3 + 3));
-    result = IEntity::FlagBits(v13, (EntityFlag)0x1000u);
+    result = IEntity::FlagBits(v13, EntityFlag_NotStriking);
     if ( result )
     {
       if ( debug && DEBUG_FLAGS[dword_41520A4] )

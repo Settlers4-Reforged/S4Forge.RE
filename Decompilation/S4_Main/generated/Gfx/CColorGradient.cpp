@@ -3,54 +3,54 @@
 // Definitions for class CColorGradient
 
 // address=[0x2f6ff70]
-// Decompiled from int __thiscall CColorGradient::SetupGradients(_WORD *this, int a2, int a3, int a4, int a5, int a6)
+// Decompiled from void __thiscall CColorGradient::SetupGradients(CColorGradient *this, int a2, struct SGfxColor a3, int a6)
 void  CColorGradient::SetupGradients(int a2, struct SGfxColor a3, int a4) {
   
-  int result; // eax
   int i; // [esp+8h] [ebp-1Ch]
   int k; // [esp+Ch] [ebp-18h]
   int j; // [esp+10h] [ebp-14h]
+  int m_iB; // [esp+18h] [ebp-Ch]
+  int m_iG; // [esp+1Ch] [ebp-8h]
 
-  result = a6;
+  m_iG = a3.m_iG;
+  m_iB = a3.m_iB;
   if ( a6 )
   {
     if ( a6 == 1 )
     {
       for ( i = 31; i >= 0; --i )
       {
-        this[32 * a2 + i] = (int)(float)((float)a5 * 0.12156863)
-                          + 32 * (int)(float)((float)a4 * 0.12156863)
-                          + ((unsigned __int16)(int)(float)((float)a3 * 0.12156863) << 10);
-        a3 -= 8;
-        a5 -= 8;
-        result = a4 - 8;
-        a4 -= 8;
-        if ( a3 < 0 )
-          a3 = 0;
-        if ( a4 < 0 )
-          a4 = 0;
-        if ( a5 < 0 )
-          a5 = 0;
+        *(_WORD *)&this->m_vGradients[a2][2 * i] = (int)(float)((float)m_iB * 0.12156863)
+                                                 + 32 * (int)(float)((float)m_iG * 0.12156863)
+                                                 + ((unsigned __int16)(int)(float)((float)a3.m_iR * 0.12156863) << 10);
+        a3.m_iR -= 8;
+        m_iB -= 8;
+        m_iG -= 8;
+        if ( a3.m_iR < 0 )
+          a3.m_iR = 0;
+        if ( m_iG < 0 )
+          m_iG = 0;
+        if ( m_iB < 0 )
+          m_iB = 0;
       }
     }
     else if ( a6 == 2 )
     {
       for ( j = 31; j >= 0; --j )
       {
-        this[32 * a2 + j] = (int)(float)((float)a5 * 0.05882353)
-                          + ((unsigned __int16)(int)(float)((float)a3 * 0.05882353) << 8)
-                          + 16 * (int)(float)((float)a4 * 0.05882353)
-                          - 4096;
-        result = a3 - 8;
-        a3 -= 8;
-        a5 -= 8;
-        a4 -= 8;
-        if ( a3 < 0 )
-          a3 = 0;
-        if ( a4 < 0 )
-          a4 = 0;
-        if ( a5 < 0 )
-          a5 = 0;
+        *(_WORD *)&this->m_vGradients[a2][2 * j] = (int)(float)((float)m_iB * 0.05882353)
+                                                 + ((unsigned __int16)(int)(float)((float)a3.m_iR * 0.05882353) << 8)
+                                                 + 16 * (int)(float)((float)m_iG * 0.05882353)
+                                                 - 4096;
+        a3.m_iR -= 8;
+        m_iB -= 8;
+        m_iG -= 8;
+        if ( a3.m_iR < 0 )
+          a3.m_iR = 0;
+        if ( m_iG < 0 )
+          m_iG = 0;
+        if ( m_iB < 0 )
+          m_iB = 0;
       }
     }
   }
@@ -58,22 +58,20 @@ void  CColorGradient::SetupGradients(int a2, struct SGfxColor a3, int a4) {
   {
     for ( k = 31; k >= 0; --k )
     {
-      this[32 * a2 + k] = (int)(float)((float)a5 * 0.12156863)
-                        + 32 * (int)(float)((float)a4 * 0.24705882)
-                        + ((unsigned __int16)(int)(float)((float)a3 * 0.12156863) << 11);
-      a3 -= 8;
-      a5 -= 8;
-      a4 -= 8;
-      if ( a3 < 0 )
-        a3 = 0;
-      if ( a4 < 0 )
-        a4 = 0;
-      if ( a5 < 0 )
-        a5 = 0;
-      result = k - 1;
+      *(_WORD *)&this->m_vGradients[a2][2 * k] = (int)(float)((float)m_iB * 0.12156863)
+                                               + 32 * (int)(float)((float)m_iG * 0.24705882)
+                                               + ((unsigned __int16)(int)(float)((float)a3.m_iR * 0.12156863) << 11);
+      a3.m_iR -= 8;
+      m_iB -= 8;
+      m_iG -= 8;
+      if ( a3.m_iR < 0 )
+        a3.m_iR = 0;
+      if ( m_iG < 0 )
+        m_iG = 0;
+      if ( m_iB < 0 )
+        m_iB = 0;
     }
   }
-  return result;
 }
 
 
@@ -81,7 +79,7 @@ void  CColorGradient::SetupGradients(int a2, struct SGfxColor a3, int a4) {
 // Decompiled from CColorGradient *__thiscall CColorGradient::CColorGradient(CColorGradient *this)
  CColorGradient::CColorGradient(void) {
   
-  memcpy((char *)this + 524, &unk_3ACC190, 0x6Cu);
+  memcpy(&this->m_vPlayerColors[1], s_vOverrideColorGradient, 108u);// Not the correct size!
   return this;
 }
 

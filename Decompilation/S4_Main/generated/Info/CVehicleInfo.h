@@ -11,6 +11,10 @@ public:
     // address=[0x1454e70]
     virtual unsigned int  Size(void)const;
 
+    // Type information members
+public:
+    BYTE[92] gap_0;
+
 };
 
 

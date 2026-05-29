@@ -15,7 +15,7 @@ int  IEntity::FlagBits(int a2)const {
 // Decompiled from T_SETTLER_OBJ_TYPE __thiscall IEntity::ObjType(IEntity *this)
 int  IEntity::ObjType(void)const {
   
-  return this->m_objType;
+  return this->m_uObjType;
 }
 
 
@@ -151,7 +151,7 @@ int  IEntity::Race(void)const {
 // Decompiled from int __thiscall IEntity::Hitpoints(IEntity *this)
 int  IEntity::Hitpoints(void)const {
   
-  return this->m_cHealth;
+  return this->m_iLivePoints;
 }
 
 
@@ -267,14 +267,14 @@ bool  IEntity::IsSelected(void)const {
   this->__vftable = (IEntity_vtbl *)&IEntity::_vftable_;
   this->m_iUniqueId = -1;
   this->m_nEntityId = id;
-  this->m_objType = 0;
+  this->m_uObjType = 0;
   this->m_nType = 0;
   this->m_psAIEntityInfo = 0;
   this->m_iFlags = 0;
   this->m_uPackedXY = 0;
   CWarMapNode::CWarMapNode(&this->m_warMapNode);
   this->m_packedTribePlayer.Packed = 0;
-  this->m_cHealth = 0;
+  this->m_iLivePoints = 0;
   CMapObjectMgr::RegisterEntity(id, this, 1);
   return this;
 }
@@ -327,8 +327,8 @@ bool  IEntity::IsSelected(void)const {
   operator^<unsigned short>(inputFile, &v5->m_nEntityId);
   operator^<unsigned short>(inputFile, &v5->m_nType);
   operator^<int>(inputFile, &v5->m_uPackedXY);
-  operator^<unsigned char>(inputFile, &v5->m_cHealth);
-  operator^<unsigned char>(inputFile, &v5->m_objType);
+  operator^<unsigned char>(inputFile, &v5->m_iLivePoints);
+  operator^<unsigned char>(inputFile, &v5->m_uObjType);
   operator^<unsigned char>(inputFile, &v5->m_packedTribePlayer);
   operator^<int>(inputFile, &v5->m_iFlags);
   operator^<int>(inputFile, &v5->m_iUniqueId);
@@ -351,8 +351,8 @@ void  IEntity::Store(std::ostream & a2) {
   operator^<unsigned short>(a2, &this->m_nEntityId);
   operator^<unsigned short>(a2, &this->m_nType);
   operator^<int>(a2, &this->m_uPackedXY);
-  operator^<unsigned char>(a2, &this->m_cHealth);
-  operator^<unsigned char>(a2, (BYTE *)&this->m_objType);
+  operator^<unsigned char>(a2, &this->m_iLivePoints);
+  operator^<unsigned char>(a2, (BYTE *)&this->m_uObjType);
   operator^<unsigned char>(a2, (BYTE *)&this->m_packedTribePlayer);
   operator^<int>(a2, &this->m_iFlags);
   operator^<int>(a2, &this->m_iUniqueId);
@@ -380,11 +380,11 @@ int  IEntity::WorldIdx(void)const {
 // Decompiled from int __thiscall IEntity::Increase(IEntity *this, int byAmount)
 int  IEntity::Increase(int byAmount) {
   
-  if ( byAmount + this->m_cHealth <= 255 )
-    this->m_cHealth += byAmount;
+  if ( byAmount + this->m_iLivePoints <= 255 )
+    this->m_iLivePoints += byAmount;
   else
-    this->m_cHealth = -1;
-  return this->m_cHealth;
+    this->m_iLivePoints = -1;
+  return this->m_iLivePoints;
 }
 
 
@@ -394,13 +394,13 @@ void  IEntity::Decrease(int byAmount) {
   
   if ( byAmount > 0 )
   {
-    if ( byAmount < this->m_cHealth )
+    if ( byAmount < this->m_iLivePoints )
     {
-      this->m_cHealth -= byAmount;
+      this->m_iLivePoints -= byAmount;
     }
     else
     {
-      this->m_cHealth = 0;
+      this->m_iLivePoints = 0;
       CMapObjectMgr::Kill(g_pMapObjectMgr, this->m_nEntityId, g_CurrentEntityAttacker);
     }
   }
@@ -421,7 +421,7 @@ void  IEntity::Decrease(int a2, int attackerId) {
 // Decompiled from int __thiscall IEntity::Amount(IEntity *this)
 int  IEntity::Amount(void)const {
   
-  return this->m_cHealth;
+  return this->m_iLivePoints;
 }
 
 
@@ -658,7 +658,7 @@ void  IEntity::SetEvent(class CEntityEvent const & a1) {
 // Decompiled from BOOL __thiscall IEntity::CheckType(IEntity *this, char a2, int a3)
 bool  IEntity::CheckType(int a2, int a3)const {
   
-  return this->m_nType == a3 && (unsigned __int8)(a2 & this->m_objType) != 0;
+  return this->m_nType == a3 && (unsigned __int8)(a2 & this->m_uObjType) != 0;
 }
 
 
@@ -666,7 +666,7 @@ bool  IEntity::CheckType(int a2, int a3)const {
 // Decompiled from void __thiscall IEntity::SetHitpoints(IEntity *this, char hp)
 void  IEntity::SetHitpoints(unsigned int hp) {
   
-  this->m_cHealth = hp;
+  this->m_iLivePoints = hp;
 }
 
 

@@ -15,12 +15,10 @@
 
 
 // address=[0x14f36f0]
-// Decompiled from void __thiscall AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>(  CDaoIndexFieldInfo *this)
+// Decompiled from void __thiscall AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>(int this)
  AdvXMLParser::ConstIterator<class AdvXMLParser::Element>::~ConstIterator<class AdvXMLParser::Element>(void) {
   
-  std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::~_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>(
-    (char *)this + 4,
-    this);
+  std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::~_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>((void *)(this + 4));
 }
 
 

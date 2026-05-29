@@ -12,19 +12,19 @@
   this->m_uU1 = 1;
   this->m_iPhases = a6;
   this->m_uU0 = 0;
-  this->m_wJobPart = this->m_iPhases + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType);
-  this->m_uCycleFrames = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_wJobPart);
+  this->m_iJobPart = this->m_iPhases + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType);
+  this->m_uCycleFrames = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_iJobPart);
   if ( !this->m_uCycleFrames && BBSupportDbgReport(2, "MapObjects\\DecoObj\\Mushroom.cpp", 82, "m_uCycleFrames") == 1 )
     __debugbreak();
   if ( this->m_iPhases )
   {
-    this->m_cFrame = CStateGame::Rand(g_pGame) % this->m_uCycleFrames;
+    this->m_iFrame = CStateGame::Rand(g_pGame) % this->m_uCycleFrames;
     IEntity::SetFlagBits(this, EntityFlag_Ready);
   }
   else
   {
     IAnimatedEntity::RegisterForLogicUpdate(this, 31);
-    this->m_cFrame = 0;
+    this->m_iFrame = 0;
   }
   return this;
 }
@@ -38,11 +38,11 @@
   this->__vftable = (IAnimatedEntity_vtbl *)&CMushroom::_vftable_;
   this->m_uU0 = 0;
   this->m_iPhases = 3;
-  this->m_wJobPart = this->m_iPhases + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType);
+  this->m_iJobPart = this->m_iPhases + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType);
   this->m_uCycleFrames = a2->m_uCycleFrames;
   if ( !this->m_uCycleFrames && BBSupportDbgReport(2, "MapObjects\\DecoObj\\Mushroom.cpp", 129, "m_uCycleFrames") == 1 )
     __debugbreak();
-  this->m_cFrame = a2->m_cFrame;
+  this->m_iFrame = a2->m_iFrame;
   this->m_uU1 = 1;
   return this;
 }
@@ -76,7 +76,7 @@ void  CMushroom::LogicUpdate(void) {
         goto LABEL_10;
       this->m_uU0 = 0;
       ++this->m_iPhases;
-      this->m_wJobPart = this->m_iPhases
+      this->m_iJobPart = this->m_iPhases
                        + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType);
       if ( this->m_iPhases != 3 )
         goto LABEL_10;
@@ -93,9 +93,9 @@ void  CMushroom::LogicUpdate(void) {
     case 4u:
       if ( ++this->m_uU0 < 5
         || (this->m_uU0 = 0,
-            ++this->m_cFrame,
-            m_cFrame = this->m_cFrame,
-            m_cFrame < CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_wJobPart)) )
+            ++this->m_iFrame,
+            m_cFrame = this->m_iFrame,
+            m_cFrame < CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_iJobPart)) )
       {
 LABEL_10:
         IAnimatedEntity::RegisterForLogicUpdate(this, 31);
@@ -125,10 +125,10 @@ struct SGfxObjectInfo *  CMushroom::GetGfxInfos(void) {
   v2 = CStateGame::GetTickCounter(g_pGame);
   IAnimatedEntity::SetLastUpdateTick(this, v2);
   if ( v4 )
-    this->m_cFrame = (v4 + (unsigned int)this->m_cFrame) % this->m_uCycleFrames;
-  CGfxManager::GetObjectGfxInfo(g_pGfxManager, &IEntity::m_sGfxInfo, this->m_wJobPart, this->m_cFrame, 1);
-  byte_40FE518 = 16;
-  byte_40FE51A = IEntity::IsVisible(this);
+    this->m_iFrame = (v4 + (unsigned int)this->m_iFrame) % this->m_uCycleFrames;
+  CGfxManager::GetObjectGfxInfo(g_pGfxManager, &IEntity::m_sGfxInfo, this->m_iJobPart, this->m_iFrame, 1);
+  MEMORY[0x40FE518] = 16;
+  MEMORY[0x40FE51A] = IEntity::IsVisible(this);
   IEntity::m_sGfxInfo.m_uFlags = 0;
   return &IEntity::m_sGfxInfo;
 }
@@ -145,9 +145,9 @@ void  CMushroom::Decrease(int a2) {
   }
   IEntity::ClearFlagBits(this, EntityFlag_Ready);
   ++this->m_iPhases;
-  this->m_cFrame = 0;
-  this->m_wJobPart = this->m_iPhases + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType);
-  this->m_uCycleFrames = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_wJobPart);
+  this->m_iFrame = 0;
+  this->m_iJobPart = this->m_iPhases + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType);
+  this->m_uCycleFrames = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_iJobPart);
   if ( !this->m_uCycleFrames && BBSupportDbgReport(2, "MapObjects\\DecoObj\\Mushroom.cpp", 345, "m_uCycleFrames") == 1 )
     __debugbreak();
   this->m_uU0 = 0;

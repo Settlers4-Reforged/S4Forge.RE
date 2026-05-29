@@ -177,7 +177,7 @@ void  CSimpleBuildingRole::LogicUpdate(class CBuilding * a2) {
         return IAnimatedEntity::RegisterForLogicUpdate(a2, 14);
       }
     case 3u:
-      if ( !v62[29] || !IEntity::FlagBits(a2, (EntityFlag)4096) )
+      if ( !v62[29] || !IEntity::FlagBits(a2, EntityFlag_NotStriking) )
         return IAnimatedEntity::RegisterForLogicUpdate(a2, 31);
       if ( IEntity::Type(a2) == 2 )
       {
@@ -230,7 +230,7 @@ void  CSimpleBuildingRole::LogicUpdate(class CBuilding * a2) {
           v13 = IEntity::OwnerId(a2);
           if ( v12 == CAlliances::AllianceId(v13)
             && IEntity::WarriorType(v58)
-            && ((int (__thiscall *)(IEntity *))v58->Amount)(v58) < v43->m_bHealth )
+            && ((int (__thiscall *)(IEntity *))v58->Amount)(v58) < v43->m_iMaxLifePoints )
           {
             v62[380] = 0;
             v34 = CSettlerMgr::operator[](*((unsigned __int16 *)v62 + 4));
@@ -277,7 +277,7 @@ void  CSimpleBuildingRole::LogicUpdate(class CBuilding * a2) {
                   v19 = CAlliances::AllianceId(v18);
                   v20 = IEntity::OwnerId(a2);
                   if ( v19 == CAlliances::AllianceId(v20)
-                    && ((int (__thiscall *)(IEntity *))v60->Amount)(v60) < v37->m_bHealth )
+                    && ((int (__thiscall *)(IEntity *))v60->Amount)(v60) < v37->m_iMaxLifePoints )
                   {
                     v21 = (ISettlerRole *)CSettler::Role((CSettler *)v60);
                     if ( ISettlerRole::GetTask(v21) == 27
@@ -320,32 +320,28 @@ void  CSimpleBuildingRole::LogicUpdate(class CBuilding * a2) {
 
 
 // address=[0x151b270]
-// Decompiled from CSimpleBuildingRole *__thiscall CSimpleBuildingRole::FillGfxInfo(  CSimpleBuildingRole *this,  struct CBuilding *a2,  struct SGfxObjectInfo *a3)
-void  CSimpleBuildingRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo & a3) {
+// Decompiled from void __thiscall CSimpleBuildingRole::FillGfxInfo(IBuildingRole *this, IEntity *a2, struct SGfxObjectInfo *_rInfo)
+void  CSimpleBuildingRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo & _rInfo) {
   
-  int v3; // eax
+  unsigned int iRace; // eax
   int v4; // eax
   int v5; // eax
-  CSimpleBuildingRole *result; // eax
-  CSettler *v7; // eax
-  int v8; // [esp-Ch] [ebp-14h]
+  unsigned int iType; // [esp-Ch] [ebp-14h]
+  IEntity *v7; // [esp+0h] [ebp-8h]
 
-  (*(void (__thiscall **)(CSimpleBuildingRole *, struct CBuilding *))(*(_DWORD *)this + 16))(this, a2);
-  v8 = IEntity::Type((unsigned __int16 *)a2);
-  v3 = IEntity::Race(a2);
-  CGfxManager::GetBuildingGfxInfo((int)a3, v3, v8, 1, (int)this + 76);
-  v4 = IEntity::OwnerId((unsigned __int8 *)a2);
-  *((_BYTE *)a3 + 715) = CPlayerManager::Color(v4);
-  v5 = IEntity::OwnerId((unsigned __int8 *)a2);
-  IBuildingRole::MiniFlag(this, a3, v5);
-  result = this;
-  if ( *((_BYTE *)this + 29) != 1 )
-    return result;
-  result = (CSimpleBuildingRole *)IEntity::Type((unsigned __int16 *)a2);
-  if ( result != (CSimpleBuildingRole *)27 )
-    return result;
-  v7 = (CSettler *)CSettlerMgr::operator[](*((unsigned __int16 *)this + 4));
-  return (CSimpleBuildingRole *)CSettler::GetPatchGfx(v7, (struct SGfxObjectInfo *)((char *)a3 + 200));
+  this->Update(this, a2);
+  iType = IEntity::Type(a2);
+  iRace = IEntity::Race(a2);
+  CGfxManager::GetBuildingGfxInfo(g_pGfxManager, _rInfo, iRace, iType, 1, (int)this->gap_4c);
+  v4 = IEntity::OwnerId(a2);
+  _rInfo->m_iColor = CPlayerManager::Color(v4);
+  v5 = IEntity::OwnerId(a2);
+  IBuildingRole::MiniFlag(this, _rInfo, v5);
+  if ( this->m_bInhabitants == 1 && IEntity::Type(a2) == 27 )
+  {
+    v7 = CSettlerMgr::operator[](this->m_uSettlerId);
+    CSettler::GetPatchGfx(v7, _rInfo->m_vPatches);
+  }
 }
 
 
@@ -537,7 +533,7 @@ void  CSimpleBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
     g_cBuildingInfo.m_cRace = IEntity::Race(a2);
     g_cBuildingInfo.m_cType = IEntity::Type(a2);
     g_cBuildingInfo.m_unknownB = 1;
-    byte_3F1E4B8 = IEntity::FlagBits(a2, (EntityFlag)4096) != 0;
+    byte_3F1E4B8 = IEntity::FlagBits(a2, EntityFlag_NotStriking) != 0;
     byte_3F1E4B9 = *((_DWORD *)this->m_pBuildingInfo + 123) > 0;
     v8 = IEntity::Type(a2);
     v3 = IEntity::OwnerId(a2);
@@ -563,7 +559,7 @@ void  CSimpleBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
     byte_3F1E4ED = IEntity::Race(a2);
     byte_3F1E4EC = IEntity::Type(a2);
     byte_3F1E4EF = 1;
-    byte_3F1E4F0 = IEntity::FlagBits(a2, (EntityFlag)4096) != 0;
+    byte_3F1E4F0 = IEntity::FlagBits(a2, EntityFlag_NotStriking) != 0;
     byte_3F1E4F1 = *((_DWORD *)this->m_pBuildingInfo + 123) > 0;
     v10 = IEntity::Type(a2);
     v6 = IEntity::OwnerId(a2);

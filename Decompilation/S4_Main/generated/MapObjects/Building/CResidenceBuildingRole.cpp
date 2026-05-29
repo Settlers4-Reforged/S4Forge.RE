@@ -311,7 +311,7 @@ void  CResidenceBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
   g_cBuildingInfo.m_iUnknown = 0;
   g_cBuildingInfo.? = IEntity::Race(a2);
   g_cBuildingInfo.? = IEntity::Type(a2);
-  MEMORY[0x3F1E4CC] = IEntity::FlagBits(a2, (EntityFlag)4096) != 0;
+  MEMORY[0x3F1E4CC] = IEntity::FlagBits(a2, EntityFlag_NotStriking) != 0;
   g_cBuildingInfo.? = 0;
   g_cBuildingInfo.? = 0;
   g_cBuildingInfo.? = 0;

@@ -23,10 +23,10 @@ class CPersistence * __cdecl CShadowHerb::New(std::istream & a1) {
   
   IDecoObject::IDecoObject(this, a2, a3, a4, a5, 0);
   this->__vftable = (IAnimatedEntity_vtbl *)&CShadowHerb::_vftable_;
-  this->m_wJobPart = CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType);
+  this->m_iJobPart = CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType);
   this->m_uU1 = 1;
   this->m_iPhases = 0;
-  this->m_uCycleFrames = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_wJobPart);
+  this->m_uCycleFrames = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_iJobPart);
   this->m_uU5 = 0;
   if ( !this->m_uCycleFrames
     && BBSupportDbgReport(2, "MapObjects\\DecoObj\\ShadowHerb.cpp", 77, "m_uCycleFrames > 0") == 1 )
@@ -57,14 +57,14 @@ void  CShadowHerb::LogicUpdate(void) {
   {
     case 0u:
       ++this->m_iPhases;
-      this->m_cFrame = 0;
-      this->m_wJobPart = this->m_iPhases
+      this->m_iFrame = 0;
+      this->m_iJobPart = this->m_iPhases
                        + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType);
-      this->m_uCycleFrames = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_wJobPart);
+      this->m_uCycleFrames = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_iJobPart);
       IAnimatedEntity::RegisterForLogicUpdate(this, 1);
       break;
     case 1u:
-      if ( ++this->m_cFrame < (int)this->m_uCycleFrames )
+      if ( ++this->m_iFrame < (int)this->m_uCycleFrames )
       {
         IAnimatedEntity::RegisterForLogicUpdate(this, 1);
       }
@@ -74,15 +74,15 @@ void  CShadowHerb::LogicUpdate(void) {
         v4 = IEntity::Y(this);
         v1 = IEntity::X(this);
         IDarkTribe::ChangeSurroundingToDarkLand((IDarkTribe *)g_pDarkTribe, v1, v4);
-        --this->m_cFrame;
+        --this->m_iFrame;
         IAnimatedEntity::RegisterForLogicUpdate(this, 31);
       }
       break;
     case 2u:
       ++this->m_iPhases;
-      this->m_cFrame = 0;
-      this->m_wJobPart = CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType) + this->m_iPhases - 1;
-      this->m_uCycleFrames = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_wJobPart);
+      this->m_iFrame = 0;
+      this->m_iJobPart = CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType) + this->m_iPhases - 1;
+      this->m_uCycleFrames = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_iJobPart);
       v5 = IEntity::Y(this);
       v2 = IEntity::X(this);
       IDarkTribe::ChangeSurroundingToDarkLand((IDarkTribe *)g_pDarkTribe, v2, v5);
@@ -111,10 +111,10 @@ struct SGfxObjectInfo *  CShadowHerb::GetGfxInfos(void) {
   v2 = CStateGame::GetTickCounter(g_pGame);
   IAnimatedEntity::SetLastUpdateTick(this, v2);
   if ( v4 && this->m_iPhases != 1 && this->m_iPhases != 2 )
-    this->m_cFrame = (v4 + (unsigned int)this->m_cFrame) % this->m_uCycleFrames;
-  CGfxManager::GetObjectGfxInfo(g_pGfxManager, &IEntity::m_sGfxInfo, this->m_wJobPart, this->m_cFrame, 1);
-  byte_40FE518 = 16;
-  byte_40FE51A = IEntity::IsVisible(this);
+    this->m_iFrame = (v4 + (unsigned int)this->m_iFrame) % this->m_uCycleFrames;
+  CGfxManager::GetObjectGfxInfo(g_pGfxManager, &IEntity::m_sGfxInfo, this->m_iJobPart, this->m_iFrame, 1);
+  MEMORY[0x40FE518] = 16;
+  MEMORY[0x40FE51A] = IEntity::IsVisible(this);
   IEntity::m_sGfxInfo.m_uFlags = 0;
   return &IEntity::m_sGfxInfo;
 }

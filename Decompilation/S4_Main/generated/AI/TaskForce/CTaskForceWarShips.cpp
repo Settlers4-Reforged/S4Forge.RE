@@ -1,22 +1,23 @@
+#if FALSE
 #include "CTaskForceWarShips.h"
 
 // Definitions for class CTaskForceWarShips
 
 // address=[0x132a240]
-// Decompiled from _DWORD *__thiscall CTaskForceWarShips::CTaskForceWarShips(_DWORD *this, int a2, int a3, int a4)
+// Decompiled from CTaskForceWarShips *__thiscall CTaskForceWarShips::CTaskForceWarShips(CTaskForceWarShips *this, int a2, int a3, int a4)
  CTaskForceWarShips::CTaskForceWarShips(int a2, enum T_AI_TASK_FORCE_TYPE a3, int a4) {
   
   CAITaskForceEx::CAITaskForceEx(this, a2, 5, a3, a4);
-  *this = CTaskForceWarShips::_vftable_;
+  this->__vftable = (CAITaskForceEx_vtbl *)CTaskForceWarShips::_vftable_;
   return this;
 }
 
 
 // address=[0x132a300]
-// Decompiled from void __thiscall CTaskForceWarShips::~CTaskForceWarShips(CTaskForceWarShips *this)
+// Decompiled from struct CAITaskForce *__thiscall CTaskForceWarShips::~CTaskForceWarShips(CAITaskForce **this)
  CTaskForceWarShips::~CTaskForceWarShips(void) {
   
-  CAITaskForceEx::~CAITaskForceEx(this);
+  return CAITaskForceEx::~CAITaskForceEx(this);
 }
 
 
@@ -31,3 +32,4 @@ bool  CTaskForceWarShips::IsAddEntityOk(int a2) {
 }
 
 
+#endif // Already implemented

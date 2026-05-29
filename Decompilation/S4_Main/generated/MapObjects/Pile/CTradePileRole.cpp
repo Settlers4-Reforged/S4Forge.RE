@@ -202,7 +202,7 @@ void  CTradePileRole::LogicUpdate(class CPile * a2) {
       v13 = CWorldManager::EcoSectorId(v2);
       BuildingId = CPile::GetBuildingId(a2);
       BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, BuildingId);
-      if ( IEntity::FlagBits(BuildingPtr, (EntityFlag)0x1000u) )
+      if ( IEntity::FlagBits(BuildingPtr, EntityFlag_NotStriking) )
       {
         v12 = (*(int (__thiscall **)(struct CPile *))(*(_DWORD *)a2 + 60))(a2);
         v11 = CPile::GetBuildingId(a2);
@@ -217,7 +217,7 @@ void  CTradePileRole::LogicUpdate(class CPile * a2) {
     return result;
   v6 = CPile::GetBuildingId(a2);
   v14 = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, v6);
-  if ( !v14 || IEntity::Type((unsigned __int16 *)v14) == 34 || !IEntity::FlagBits(v14, (EntityFlag)0x1000u) )
+  if ( !v14 || IEntity::Type((unsigned __int16 *)v14) == 34 || !IEntity::FlagBits(v14, EntityFlag_NotStriking) )
     return IAnimatedEntity::RegisterForLogicUpdate(31);
   v7 = (*(int (__thiscall **)(struct CPile *))(*(_DWORD *)a2 + 40))(a2);
   if ( v7 - CPile::AmountLeaving(a2) < 1 )

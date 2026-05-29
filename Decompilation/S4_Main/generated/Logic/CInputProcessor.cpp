@@ -2537,7 +2537,7 @@ bool  CInputProcessor::InjuredOut(class CEvn_Logic * a2) {
       v15 = IEntity::Race(SettlerPtr);
       v16 = IEntity::Type(SettlerPtr);
       SettlerInfo = CSettlerMgr::GetSettlerInfo(v15, v16);
-      iMaxHealth = SettlerInfo->m_bHealth;
+      iMaxHealth = SettlerInfo->m_iMaxLifePoints;
       iHitpoints = IEntity::Hitpoints(SettlerPtr);
       iIsInjuredFlag = iHitpoints < iMaxHealth >> 1;
       v21 = iIsInjuredFlag == v28;

@@ -92,7 +92,7 @@ void  CWorkshopBuildingRole::LogicUpdate(class CBuilding * a2) {
         return IAnimatedEntity::RegisterForLogicUpdate(14);
       }
     case 3:
-      if ( !*((_BYTE *)v23 + 29) || !IEntity::FlagBits(a2, (EntityFlag)0x1000u) )
+      if ( !*((_BYTE *)v23 + 29) || !IEntity::FlagBits(a2, EntityFlag_NotStriking) )
         return IAnimatedEntity::RegisterForLogicUpdate(31);
       if ( *((_WORD *)v23 + 191) )
       {
@@ -369,7 +369,7 @@ bool  CWorkshopBuildingRole::SettlerEnter(class CBuilding * a2, int a3) {
   {
     *((_BYTE *)v28 + 29) = 1;
     *((_WORD *)v28 + 4) = a3;
-    if ( IEntity::FlagBits(a2, (EntityFlag)0x1000u) )
+    if ( IEntity::FlagBits(a2, EntityFlag_NotStriking) )
     {
       CEntityEvent::CEntityEvent((CEntityEvent *)v17, 8u, 0, *((unsigned __int16 *)v28 + 3), 0, 0);
       v29 = 0;
@@ -1027,7 +1027,7 @@ void  CWorkshopBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
   byte_3F1E60D = IEntity::Race(a2);
   byte_3F1E60C = IEntity::Type((unsigned __int16 *)a2);
   byte_3F1E60F = 1;
-  byte_3F1E610 = IEntity::FlagBits(a2, (EntityFlag)0x1000u) != 0;
+  byte_3F1E610 = IEntity::FlagBits(a2, EntityFlag_NotStriking) != 0;
   byte_3F1E611 = 0;
   v9 = IEntity::Type((unsigned __int16 *)a2);
   v3 = IEntity::OwnerId((unsigned __int8 *)a2);

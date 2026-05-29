@@ -57,7 +57,7 @@ public:
     virtual void  LogicUpdate(class CSettler * a2);
 
     // address=[0x1589b30]
-    void  Update(class CSettler * a2);
+    void  Update(class CSettler * _pSettler);
 
     // address=[0x1589e30]
     void  NewDestination(class CSettler * a2, int a3, int a4);
@@ -121,9 +121,9 @@ protected:
 public:
     CHAR task;
     BYTE settlerWalk;
-    BYTE walkspeed;
-    BYTE unk_07;
-    WORD unk_08;
+    char m_iWalkspeed;
+    BYTE m_iLoopFrame;
+    WORD m_iTick;
     BYTE unk_0A;
     BYTE unk_0B;
     BYTE unk_0C;
@@ -135,12 +135,10 @@ public:
     WORD pad_16;
     DWORD destinationPosition;
     DWORD startPosition;
-    WORD homeEntityId;
+    WORD m_uHomeEntityId;
     WORD entityId;
-    WORD unk_24;
-    WORD unk_26;
-    WORD unk_28;
-    WORD unk_2A;
+    float m_fOffsetX;
+    float m_fOffsetY;
     DWORD unk_2c;
     DWORD unk_30;
 

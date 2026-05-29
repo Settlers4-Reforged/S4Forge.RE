@@ -6,7 +6,7 @@
 class CVehicleInfoMgr : public IVehicleInfoMgr {
 public:
     // address=[0x15aae80]
-    virtual void  InitializeVehicleProperties(bool a2, bool a3);
+    virtual void  InitializeVehicleProperties(bool a2, bool _bKeepData);
 
     // address=[0x15ac350]
      CVehicleInfoMgr(void);

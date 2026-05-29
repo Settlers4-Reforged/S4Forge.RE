@@ -110,7 +110,7 @@ void  CProductionBuildingRole::LogicUpdate(class CBuilding * a2) {
   if ( v9 != 3 )
     return result;
   if ( !v10[29]
-    || !IEntity::FlagBits(a2, (EntityFlag)0x1000u)
+    || !IEntity::FlagBits(a2, EntityFlag_NotStriking)
     || !(unsigned __int8)CProductionBuildingRole::HaveFreeSlotForProduct(a2)
     || !(unsigned __int8)CProductionBuildingRole::HaveMaterial(a2)
     || !(unsigned __int8)CProductionBuildingRole::HaveProductionOrder(v10) )
@@ -435,7 +435,7 @@ bool  CProductionBuildingRole::SettlerEnter(class CBuilding * a2, int a3) {
   {
     *((_BYTE *)v28 + 29) = 1;
     *((_WORD *)v28 + 4) = a3;
-    if ( IEntity::FlagBits(a2, (EntityFlag)0x1000u) )
+    if ( IEntity::FlagBits(a2, EntityFlag_NotStriking) )
     {
       CEntityEvent::CEntityEvent((CEntityEvent *)v16, 8u, 0, *((unsigned __int16 *)v28 + 3), 0, 0);
       v29 = 0;
@@ -960,7 +960,7 @@ void  CProductionBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
   byte_3F1E505 = IEntity::Race(a2);
   byte_3F1E504 = IEntity::Type((unsigned __int16 *)a2);
   byte_3F1E507 = 1;
-  byte_3F1E508 = IEntity::FlagBits(a2, (EntityFlag)0x1000u) != 0;
+  byte_3F1E508 = IEntity::FlagBits(a2, EntityFlag_NotStriking) != 0;
   byte_3F1E509 = 0;
   v10 = IEntity::Type((unsigned __int16 *)a2);
   v3 = IEntity::OwnerId((unsigned __int8 *)a2);
