@@ -648,7 +648,6 @@ FOLDER_MAP = {
         "CFilterPlaceScoring",
         "CFilterResourceLandscape",
         "CResourceFilter",
-        "CStdCargoCounter",
         "CTmpEntitiesRef",
         "COwnerMap",
         "COwnerMapEx",
@@ -680,6 +679,7 @@ FOLDER_MAP = {
         "CVehicleMgr",
         "CFoundationCardCargo",
         "ICargoCounter",
+        "CStdCargoCounter",
     ],
 
     "MapObjects/Flying/": [
