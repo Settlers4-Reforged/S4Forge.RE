@@ -1,3 +1,4 @@
+#if FALSE
 #include "IEffects.h"
 
 // Definitions for class IEffects
@@ -21,7 +22,7 @@ class IEffects * __cdecl IEffects::CreateEffects(void) {
  IEffects::IEffects(void) {
   
   IGfxEffects::IGfxEffects(this);
-  IS4ChunkObject::IS4ChunkObject((IEffects *)((char *)this + 4));
+  IS4ChunkObject::IS4ChunkObject((IS4ChunkObject *)this + 1);
   *(_DWORD *)this = IEffects::_vftable_;
   *((_DWORD *)this + 1) = &IEffects::`vftable';
   return this;
@@ -36,3 +37,4 @@ void  IEffects::DeleteMovingEffect(unsigned int a2) {
 }
 
 
+#endif // Already implemented

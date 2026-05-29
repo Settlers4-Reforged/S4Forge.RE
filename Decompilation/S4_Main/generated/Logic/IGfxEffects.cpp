@@ -1,3 +1,4 @@
+#if FALSE
 #include "IGfxEffects.h"
 
 // Definitions for class IGfxEffects
@@ -11,3 +12,4 @@
 }
 
 
+#endif // Already implemented
