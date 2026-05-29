@@ -346,8 +346,6 @@ FOLDER_MAP = {
 
     "Gfx/Render/": [
         "SGfxRenderConfiguration",
-        "IGfxEffects",
-        "IEffects",
         "IGfxEngine",
     ],
 
@@ -445,6 +443,8 @@ FOLDER_MAP = {
     "Logic/": [
         "CBuildingSupplyPriority",
         "CDarkTribe",
+        "IGfxEffects",
+        "IEffects",
         "CEffect",
         "CEffects",
         "CEndStatistic",
