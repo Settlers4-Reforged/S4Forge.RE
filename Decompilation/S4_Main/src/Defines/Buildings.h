@@ -3,6 +3,8 @@
 
 #include "DefineTransformers.h"
 
+constexpr int MAX_NUMBER_OF_BUILDING_SETTLERS = 21;
+
 // address=[0x377C0D0]
 #define BUILDINGS \
     X(0,BUILDING_NO_BUILDING) \
