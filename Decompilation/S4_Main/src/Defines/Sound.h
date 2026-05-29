@@ -116,7 +116,7 @@
 
 #define X TO_ENUM
 
-enum T_S4_SOUND {
+enum SIV_SOUNDS {
     SOUNDS
 };
 
