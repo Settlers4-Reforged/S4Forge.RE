@@ -90,6 +90,60 @@ X(82, LOGIC_MSG_INIT_EXTRA_MENU) \
 X(83, LOGIC_MSG_ZOOM_AREA) \
 X(84, LOGIC_MSG_END)
 
+#define NET_LOGIC_MSGS \
+    X(5000, NET_LOGIC_MSG_BEGIN) \
+    X(5001, NET_LOGIC_MSG_SET_WORKINGAREA) \
+    X(5002, NET_LOGIC_MSG_CRUSH_BUILDING) \
+    X(5003, NET_LOGIC_MSG_SWITCH_BUILDING) \
+    X(5004, NET_LOGIC_MSG_PRIO_BUILDING_SITE) \
+    X(5005, NET_LOGIC_MSG_TRADE_TARGET) \
+    X(5006, NET_LOGIC_MSG_TRANSPORT_GOOD) \
+    X(5007, NET_LOGIC_MSG_TRADE_WITH) \
+    X(5008, NET_LOGIC_MSG_TRADE_GOOD) \
+    X(5009, NET_LOGIC_MSG_UNLOAD) \
+    X(5010, NET_LOGIC_MSG_LOAD_AMMO) \
+    X(5011, NET_LOGIC_MSG_CREATE_SETTLEMENT) \
+    X(5012, NET_LOGIC_MSG_MORPH2_FOUNDATIONCART) \
+    X(5013, NET_LOGIC_MSG_MORPH2_CART) \
+    X(5014, NET_LOGIC_MSG_GOTO_POS) \
+    X(5015, NET_LOGIC_MSG_FORCE_GOTO) \
+    X(5016, NET_LOGIC_MSG_STAND_GROUND) \
+    X(5017, NET_LOGIC_MSG_SET_WAYPOINT) \
+    X(5018, NET_LOGIC_MSG_PATROL) \
+    X(5019, NET_LOGIC_MSG_INJURED_OUT) \
+    X(5020, NET_LOGIC_MSG_ESCORT) \
+    X(5021, NET_LOGIC_MSG_MORPH_2_CARRIER) \
+    X(5022, NET_LOGIC_MSG_ENTITY_TO_SELECTION) \
+    X(5023, NET_LOGIC_MSG_SELECT_KIND) \
+    X(5024, NET_LOGIC_MSG_SELECT_TYPE) \
+    X(5025, NET_LOGIC_MSG_BUILD_BUILDING) \
+    X(5026, NET_LOGIC_MSG_SEARCH_UNIT) \
+    X(5027, NET_LOGIC_MSG_UNIT_RESERVATION) \
+    X(5028, NET_LOGIC_MSG_CHANGE_GOOD_DISTRIBUTION) \
+    X(5029, NET_LOGIC_MSG_CHANGE_TRANSPORT_PRIORITY) \
+    X(5030, NET_LOGIC_MSG_DESTROY_VEHICLE) \
+    X(5031, NET_LOGIC_MSG_SET_TOWER_WARRIOR) \
+    X(5032, NET_LOGIC_MSG_THROW_OUT_TOWER_WARRIOR) \
+    X(5033, NET_LOGIC_MSG_URGENT_PRODUCTION) \
+    X(5034, NET_LOGIC_MSG_WEAPON_PERCENT) \
+    X(5035, NET_LOGIC_MSG_WEAPON_AUTO) \
+    X(5036, NET_LOGIC_MSG_STANDARD_PRODUCTION) \
+    X(5037, NET_LOGIC_MSG_SET_GOOD_SWITCH) \
+    X(5038, NET_LOGIC_MSG_SET_JOB_PERCENT) \
+    X(5039, NET_LOGIC_MSG_RECRUITE_SPECIALIST) \
+    X(5040, NET_LOGIC_MSG_VEHICLE_PRODUCTION) \
+    X(5041, NET_LOGIC_MSG_DEFINE_GROUP) \
+    X(5042, NET_LOGIC_MSG_GROUP_TO_SELECTION) \
+    X(5043, NET_LOGIC_MSG_SELECT_GROUP) \
+    X(5044, NET_LOGIC_MSG_STORE_GOOD) \
+    X(5045, NET_LOGIC_MSG_SET_GOOD_PRIORITY) \
+    X(5046, NET_LOGIC_MSG_SET_TRADE) \
+    X(5047, NET_LOGIC_MSG_SET_UNIT_PRODUCTION) \
+    X(5048, NET_LOGIC_MSG_CAST_SPELL) \
+    X(5049, NET_LOGIC_MSG_DESTROY_CART_WARMACHINE) \
+    X(5050, NET_LOGIC_MSG_SET_TRADE_PLAYER_STATUS) \
+    X(5053, NET_LOGIC_MSG_END)
+
 #define X TO_ENUM
 
 enum T_LOGIC_MSG {
@@ -183,6 +237,62 @@ enum T_LOGIC_HANDLERS {
     ClearDialog             = 2,
     ZoomAreaState           = 83,
     CamSelection            = 84,
+};
+
+enum T_HOST_HANDLERS {
+    StartState                   = 34,
+    InitHostNetwork              = 1,
+    InitClientNetwork            = 2,
+    OnHostWait                   = 3,
+    SearchHost                   = 4,
+    WaitingForGameConnect        = 16,
+    HostInitGame                 = 18,
+    HostStartTick                = 19,
+    RegClientConnect             = 23,
+    WereConnectedForGame         = 24,
+    ClientStartingGame           = 26,
+    ClientGameInited             = 28,
+    ClientStartTick              = 29,
+    HostGameInited               = 31,
+    GameSyncMsgGot               = 32,
+    GameInGameMsgGot             = 33,
+    ErrorState                   = 0,
+    DoNothing                    = 36,
+    ClientSearchesGameHost       = 35,
+    ClientReceivesGameInfo       = 38,
+    ClientLoginHost              = 40,
+    ClientJoins                  = 39,
+    ClientReceivePlayerData      = 42,
+    ClientReceivePlayerPing      = 43,
+    ClientLobbyPrepare           = 41,
+    ResendPlayerData             = 6,
+    ResendPlayerPing             = 44,
+    InitGameStruct               = 7,
+    HostPressedStart             = 8,
+    ResendFinalPData             = 9,
+    ChatLine                     = 45,
+    GameAlreadyFull              = 46,
+    GameAsyncMsgGot              = 47,
+    AmIStillAlive                = 48,
+    HeIsStillAlive               = 49,
+    InitHostAfterLobby           = 50,
+    InitClientAfterLobby         = 51,
+    SendMapToClient              = 52,
+    ClientReceiveMap             = 53,
+    ClientLeavesMyGame           = 56,
+    ClientWrongVersion           = 57,
+    ClientWrongVersionAfterLobby = 58,
+    PerformLeaveGame             = 59,
+    SendChatLine                 = 61,
+    HostChoseMap                 = 60,
+    QuickMatchChoseMap           = 68,
+    InviteAccepted               = 71,
+    UserDataChange               = 62,
+    KickClient                   = 63,
+    WereKicked                   = 64,
+    GameInGamePackedGot          = 65,
+    GameSync0MsgGot              = 66,
+    UserChangeSlots              = 67,
 };
 
 #endif //LOGIC_H

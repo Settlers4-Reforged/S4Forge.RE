@@ -3,7 +3,15 @@
 
 #include "DefineTransformers.h"
 
-constexpr int EFFECT_MISSILE_LAST = 10;
+
+constexpr int EFFECTS_MAX = 0x1000;
+constexpr int MAX_EFFECT_COUNT = 4095;
+
+constexpr int EFFECT_ANGEL_LAST = 2;
+constexpr int EFFECT_MISSILE_LAST = 9;
+
+constexpr int FIRST_REAL_EFFECT = 2;
+constexpr int FREE_EFFECTS_LIST_HEAD = 1;
 
 #define EFFECTS \
     X(0, EFFECT_NO_EFFECT) \
@@ -111,23 +119,7 @@ constexpr int EFFECT_MISSILE_LAST = 10;
     X(114,EFFECT_2_DMANAKOPTER_EXPLODE) \
     X(115,EFFECT_2_TIMPACT_EXPLOSIVEARROW)
 
-/*
-_NOP_1 = 0,
-_NOP_2 = 1,
-_Effect = 2,
-_Angel = 3,
-_Arrow = 4,
-_Cannonball = 5,
-_SporeCloud = 6,
-_StagnantAnimal = 7,
-_MovingEffect = 8,
-_TopEffect = 9,
-_TopFireball = 10,
-_AttachedEffect = 11,
-
-*/
-
-enum T_S4_VISUALIZE_FUNC {
+enum T_VISUALIZE_FUNC {
     VISUALIZE_FUNC_NOP_1           = 0,
     VISUALIZE_FUNC_NOP_2           = 1,
     VISUALIZE_FUNC_EFFECT          = 2,
