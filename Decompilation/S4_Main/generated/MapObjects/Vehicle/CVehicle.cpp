@@ -162,32 +162,25 @@ void  CVehicle::Delete(void) {
 
 
 // address=[0x15a3e80]
-// Decompiled from EntityFlag __thiscall CVehicle::FireMissile(CVehicle *this, int _iTargetId, int _iDestinationXY)
+// Decompiled from void __thiscall CVehicle::FireMissile(CVehicle *this, int _iTargetId, int _iDestinationXY)
 void  CVehicle::FireMissile(int _iTargetId, int _iDestinationXY) {
   
-  int v3; // eax
-  int v4; // eax
-  int v5; // eax
-  int v6; // eax
-  int v7; // eax
-  int v8; // eax
-  EntityFlag result; // eax
-  int v10; // eax
-  int v11; // [esp-10h] [ebp-50h]
-  int v12; // [esp-10h] [ebp-50h]
-  IEntity *v13; // [esp+0h] [ebp-40h]
-  int v14; // [esp+Ch] [ebp-34h]
-  int v15; // [esp+10h] [ebp-30h]
-  struct IFutureEvents *v16; // [esp+14h] [ebp-2Ch]
-  int v17; // [esp+1Ch] [ebp-24h]
-  struct IEffects *v18; // [esp+20h] [ebp-20h]
-  struct IEffects *v19; // [esp+24h] [ebp-1Ch]
-  struct IEffects *v20; // [esp+28h] [ebp-18h]
-  struct IEffects *v21; // [esp+2Ch] [ebp-14h]
-  int v22; // [esp+30h] [ebp-10h]
-  int v23; // [esp+34h] [ebp-Ch]
+  int iXY; // eax MAPDST
+  int iDstX2; // eax
+  int iX; // eax
+  int iIdx; // eax
+  int iDstX; // [esp-10h] [ebp-50h]
+  int iY; // [esp-10h] [ebp-50h]
+  IEntity *rEntity; // [esp+0h] [ebp-40h]
+  int iAlliance; // [esp+Ch] [ebp-34h]
+  int iTileOwner; // [esp+10h] [ebp-30h]
+  struct IFutureEvents *rFutureEvents; // [esp+14h] [ebp-2Ch]
+  int iStrength; // [esp+1Ch] [ebp-24h]
+  struct IEffects *pEffects; // [esp+28h] [ebp-18h] MAPDST
+  int iOwner; // [esp+30h] [ebp-10h] MAPDST
+  int iFireAnimationEnd; // [esp+34h] [ebp-Ch]
   int m_uDamage; // [esp+38h] [ebp-8h]
-  int v25; // [esp+38h] [ebp-8h]
+  int uDamage; // [esp+38h] [ebp-8h]
 
   if ( _iTargetId <= 0 && BBSupportDbgReport(2, "MapObjects\\Vehicle.cpp", 778, "_iTargetId > 0") == 1 )
     __debugbreak();
@@ -198,87 +191,87 @@ void  CVehicle::FireMissile(int _iTargetId, int _iDestinationXY) {
   }
   if ( IEntity::Race(this) == 1 )
   {
-    if ( IEntity::Type(this) == 4 )
+    if ( IEntity::Type(this) == CATAPULT_OBJ )
     {
-      v19 = CLogic::Effects((DWORD *)g_pLogic);
-      v11 = Y16X16::UnpackXFast(_iDestinationXY);
-      v5 = Y16X16::UnpackXFast(_iDestinationXY);
-      v23 = (*(int (__thiscall **)(struct IEffects *, int, _DWORD, int, int, int, _DWORD, int))(*(_DWORD *)v19 + 16))(
-              v19,
-              23,
-              0,
-              v5,
-              v11,
-              1,
-              0,
-              1);
+      pEffects = CLogic::Effects(g_pLogic);
+      iDstX = Y16X16::UnpackXFast(_iDestinationXY);
+      iDstX2 = Y16X16::UnpackXFast(_iDestinationXY);// HUH?
+      iFireAnimationEnd = pEffects->AddEffect(
+                            pEffects,
+                            EFFECT_VMAGIC_THORSHAMMER,
+                            SOUND_NO_SOUND,
+                            iDstX2,
+                            iDstX,
+                            1,
+                            0,
+                            1);
     }
     else
     {
-      v20 = CLogic::Effects((DWORD *)g_pLogic);
-      v4 = IEntity::PackedXY(this);
-      v23 = (*(int (__thiscall **)(struct IEffects *, _DWORD, int, int, int, _DWORD, _DWORD))(*(_DWORD *)v20 + 24))(
-              v20,
-              this->m_pVehicleProperties->m_uU3C,
-              v4,
-              _iDestinationXY,
-              1,
-              0,
-              0);
+      pEffects = CLogic::Effects(g_pLogic);
+      iXY = IEntity::PackedXY(this);
+      iFireAnimationEnd = pEffects->AddMissile(
+                            pEffects,
+                            this->m_pVehicleProperties->m_tMissileType,
+                            iXY,
+                            _iDestinationXY,
+                            1,
+                            0,
+                            0);
     }
   }
   else
   {
-    v21 = CLogic::Effects((DWORD *)g_pLogic);
-    v3 = IEntity::PackedXY(this);
-    v23 = (*(int (__thiscall **)(struct IEffects *, _DWORD, int, int, int, _DWORD, _DWORD))(*(_DWORD *)v21 + 24))(
-            v21,
-            this->m_pVehicleProperties->m_uU3C,
-            v3,
-            _iDestinationXY,
-            1,
-            0,
-            0);
+    pEffects = CLogic::Effects(g_pLogic);
+    iXY = IEntity::PackedXY(this);
+    iFireAnimationEnd = pEffects->AddMissile(
+                          pEffects,
+                          this->m_pVehicleProperties->m_tMissileType,
+                          iXY,
+                          _iDestinationXY,
+                          1,
+                          0,
+                          0);
   }
-  if ( this->m_pVehicleProperties->m_uU40 )
+  if ( this->m_pVehicleProperties->m_iMissileFlightEffectId )
   {
-    v18 = CLogic::Effects((DWORD *)g_pLogic);
-    v12 = Y16X16::UnpackYFast(_iDestinationXY);
-    v6 = Y16X16::UnpackXFast(_iDestinationXY);
-    (*(void (__thiscall **)(struct IEffects *, _DWORD, _DWORD, int, int, int, _DWORD, int))(*(_DWORD *)v18 + 16))(
-      v18,
-      this->m_pVehicleProperties->m_uU40,
-      this->m_pVehicleProperties->m_uU44,
-      v6,
-      v12,
-      v23 + 1,
+    pEffects = CLogic::Effects(g_pLogic);
+    iY = Y16X16::UnpackYFast(_iDestinationXY);
+    iX = Y16X16::UnpackXFast(_iDestinationXY);
+    pEffects->AddEffect(
+      pEffects,
+      this->m_pVehicleProperties->m_iMissileFlightEffectId,
+      this->m_pVehicleProperties->m_tMissileFlightEffectSoundId,
+      iX,
+      iY,
+      iFireAnimationEnd + 1,
       0,
       1);
   }
-  v13 = CMapObjectMgr::Entity(_iTargetId);
+  rEntity = CMapObjectMgr::Entity(_iTargetId);
   m_uDamage = this->m_pVehicleProperties->m_uDamage;
-  v22 = IEntity::OwnerId(this);
-  v7 = IEntity::PackedXY(this);
-  v8 = CWorldManager::Index(v7);
-  v15 = ITiling::OwnerId(v8);
-  v14 = CAlliances::AllianceId(v22);
-  if ( v14 == CAlliances::AllianceId(v15) )
-    v17 = CStatistic::DefenceStrength256((CStatistic *)&g_cStatistic, v22);
+  iOwner = IEntity::OwnerId(this);
+  iXY = IEntity::PackedXY(this);
+  iIdx = CWorldManager::Index(iXY);
+  iTileOwner = ITiling::OwnerId(iIdx);
+  iAlliance = CAlliances::AllianceId(iOwner);
+  if ( iAlliance == CAlliances::AllianceId(iTileOwner) )
+    iStrength = CStatistic::DefenceStrength256((CStatistic *)&g_cStatistic, iOwner);
   else
-    v17 = CStatistic::OffenceStrength256((CStatistic *)&g_cStatistic, v22);
-  v25 = ((v17 * m_uDamage + 127) >> 8 == 0) + ((v17 * m_uDamage + 127) >> 8);
-  result = IEntity::FlagBits(v13, EntityFlag_Ready);
-  if ( !result )
-    return result;
-  v16 = CLogic::FutureEvents(g_pLogic);
-  v10 = IEntity::OwnerId(this);
-  return (*(int (__thiscall **)(struct IFutureEvents *, int, int, int, int, int))(*(_DWORD *)v16 + 12))(
-           v16,
-           2,
-           v23 + 1,
-           _iTargetId,
-           v25,
-           v10);
+    iStrength = CStatistic::OffenceStrength256((CStatistic *)&g_cStatistic, iOwner);
+  uDamage = ((iStrength * m_uDamage + 127) >> 8 == 0) + ((iStrength * m_uDamage + 127) >> 8);
+  if ( IEntity::FlagBits(rEntity, EntityFlag_Ready) )
+  {
+    rFutureEvents = CLogic::FutureEvents(g_pLogic);
+    iOwner = IEntity::OwnerId(this);
+    (*(void (__thiscall **)(struct IFutureEvents *, int, int, int, int, int))(*(_DWORD *)rFutureEvents + 12))(
+      rFutureEvents,
+      2,
+      iFireAnimationEnd + 1,
+      _iTargetId,
+      uDamage,
+      iOwner);
+  }
 }
 
 
@@ -699,15 +692,7 @@ void  CVehicle::Decrease(int a2) {
     if ( !this->Amount(this) )
     {
       v2 = CLogic::Effects((DWORD *)g_pLogic);
-      (*(void (__thiscall **)(struct IEffects *, int, int, int, int, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v2 + 16))(
-        v2,
-        63,
-        91,
-        v3,
-        v4,
-        0,
-        0,
-        0);
+      v2->AddEffect(v2, EFFECT_DESTROYSMALL, SOUND_AMB_ATTACKSMALLBUILDING, v3, v4, 0, 0, 0);
     }
   }
 }

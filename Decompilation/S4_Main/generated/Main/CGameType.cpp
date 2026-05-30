@@ -945,8 +945,8 @@ bool  CGameType::LoadMapData(std::wstring _sMapName, bool _bAIActive, unsigned i
 
 
 // address=[0x1492f70]
-// Decompiled from bool __thiscall CGameType::IsMapAvailable(CGameType *this, std::wstring *a2, int a3)
-bool  CGameType::IsMapAvailable(std::wstring & a2, int a3) {
+// Decompiled from bool __thiscall CGameType::IsMapAvailable(CGameType *this, std::wstring *a2, int _iCRC)
+bool  CGameType::IsMapAvailable(std::wstring & a2, int _iCRC) {
   
   wchar_t *v4; // eax
   int v5; // [esp+0h] [ebp-2Ch]
@@ -986,7 +986,7 @@ bool  CGameType::IsMapAvailable(std::wstring & a2, int a3) {
     MA_GetMapData(&v10, &v11, &v12, &v7, &v8);
     v5 = (**(int (__thiscall ***)(void *, int, int, int, int, int))g_pMapCheck)(g_pMapCheck, v6, v9, v10, v11, v12);
     MA_CloseMapFile();
-    return a3 == v5;
+    return _iCRC == v5;
   }
 }
 

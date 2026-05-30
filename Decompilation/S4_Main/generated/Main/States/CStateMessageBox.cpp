@@ -3,21 +3,21 @@
 // Definitions for class CStateMessageBox
 
 // address=[0x14ca410]
-// Decompiled from CStateMessageBox *__cdecl CStateMessageBox::DynamicCreateFunc(void *a1)
+// Decompiled from CStateMessageBox *__cdecl CStateMessageBox::DynamicCreateFunc(int a1)
 class CGameState * __cdecl CStateMessageBox::DynamicCreateFunc(void * a1) {
   
   CStateMessageBox *C; // [esp+Ch] [ebp-10h]
 
   C = (CStateMessageBox *)operator new(4u);
   if ( C )
-    return CStateMessageBox::CStateMessageBox(C, a1);
+    return CStateMessageBox::CStateMessageBox(C, (T_S4_TRANSLATION)a1);
   else
     return 0;
 }
 
 
 // address=[0x14ca490]
-// Decompiled from CStateMessageBox *__thiscall CStateMessageBox::CStateMessageBox(CStateMessageBox *this, int Str)
+// Decompiled from CStateMessageBox *__thiscall CStateMessageBox::CStateMessageBox(CStateMessageBox *this, T_S4_TRANSLATION Str)
  CStateMessageBox::CStateMessageBox(void * Str) {
   
   char *v2; // eax
@@ -25,7 +25,7 @@ class CGameState * __cdecl CStateMessageBox::DynamicCreateFunc(void * a1) {
   CGuiGameState::CGuiGameState(this);
   *(_DWORD *)this = &CStateMessageBox::_vftable_;
   CGuiGameState::EnsureGfxEngineIsInGuiMode(this);
-  if ( Str >= 3837 )
+  if ( Str >= (TGO_PRIVATE_LOBBY_LBL|AO_BONUS_BRIEFING_02) )
   {
     std::string::operator=(&g_iMessageBoxStringID, (char *)Str);
   }
@@ -34,8 +34,12 @@ class CGameState * __cdecl CStateMessageBox::DynamicCreateFunc(void * a1) {
     v2 = g_pStringEngine->GetString(g_pStringEngine, Str);
     std::string::operator=(&g_iMessageBoxStringID, v2);
   }
-  CGuiGameState::SetupGui(this, L"Menu\\GUISetStartscreens.dat", 20, GuiDlgMainMessageBoxProc);
-  IGfxEngine::SetCursorShape((IGfxEngine *)g_pGfxEngine, 1, 0);
+  CGuiGameState::SetupGui(
+    this,
+    L"Menu\\GUISetStartscreens.dat",
+    20,
+    (bool (__cdecl *)(int, int, int))GuiDlgMainMessageBoxProc);
+  IGfxEngine::SetCursorShape(g_pGfxEngine, 1, 0);
   return this;
 }
 

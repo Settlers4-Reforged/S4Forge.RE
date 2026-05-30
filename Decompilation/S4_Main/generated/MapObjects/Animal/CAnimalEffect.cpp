@@ -42,125 +42,104 @@
 
 
 // address=[0x14d94c0]
-// Decompiled from char __thiscall CAnimalEffect::Update(  CAnimalEffect *this,  unsigned int a2,  unsigned int a3,  unsigned int a4,  unsigned int a5)
+// Decompiled from void __thiscall CAnimalEffect::Update(CAnimalEffect *this, unsigned int a2, unsigned int a3, unsigned int a4, int a5)
 void  CAnimalEffect::Update(unsigned int a2, unsigned int a3, unsigned int a4, unsigned int a5) {
   
-  struct SAnimalData *AnimalEffectDataPtr; // eax
   int OutputWidth; // eax
-  int v7; // edx
-  int v8; // eax
-  int v10; // [esp-Ch] [ebp-60h]
-  int v11; // [esp+0h] [ebp-54h]
-  unsigned int v12; // [esp+4h] [ebp-50h]
-  struct SAnimalData *v13; // [esp+Ch] [ebp-48h]
-  int v14; // [esp+10h] [ebp-44h]
-  int v15; // [esp+14h] [ebp-40h]
-  int v16; // [esp+18h] [ebp-3Ch]
-  Squares *v17; // [esp+1Ch] [ebp-38h] BYREF
-  Squares *v18; // [esp+20h] [ebp-34h] BYREF
-  int v19; // [esp+24h] [ebp-30h]
-  int v20; // [esp+28h] [ebp-2Ch]
-  int v21; // [esp+2Ch] [ebp-28h] BYREF
-  int v22; // [esp+30h] [ebp-24h]
-  struct SAnimalData *v23; // [esp+34h] [ebp-20h]
-  int v24; // [esp+38h] [ebp-1Ch]
-  CAnimalEffect *v25; // [esp+3Ch] [ebp-18h]
-  _DWORD v26[2]; // [esp+40h] [ebp-14h] BYREF
-  Squares *v27; // [esp+48h] [ebp-Ch] BYREF
-  Squares *v28; // [esp+4Ch] [ebp-8h] BYREF
-  char v29; // [esp+53h] [ebp-1h]
+  struct IEffects *v6; // eax
+  int v7; // [esp-Ch] [ebp-60h]
+  int v8; // [esp+0h] [ebp-54h]
+  unsigned int v9; // [esp+4h] [ebp-50h]
+  int v10; // [esp+Ch] [ebp-48h]
+  int v11; // [esp+10h] [ebp-44h]
+  int v12; // [esp+14h] [ebp-40h]
+  int v13; // [esp+18h] [ebp-3Ch]
+  int v14; // [esp+1Ch] [ebp-38h] BYREF
+  int v15; // [esp+20h] [ebp-34h] BYREF
+  struct IEffects *v16; // [esp+24h] [ebp-30h]
+  struct IEffects *v17; // [esp+28h] [ebp-2Ch]
+  int v18; // [esp+2Ch] [ebp-28h] BYREF
+  struct IEffects *v19; // [esp+30h] [ebp-24h]
+  int *AnimalEffectDataPtr; // [esp+34h] [ebp-20h]
+  unsigned int v21; // [esp+38h] [ebp-1Ch]
+  CAnimalEffect *v22; // [esp+3Ch] [ebp-18h]
+  int v23; // [esp+40h] [ebp-14h] BYREF
+  int v24; // [esp+44h] [ebp-10h]
+  int v25; // [esp+48h] [ebp-Ch] BYREF
+  int v26; // [esp+4Ch] [ebp-8h] BYREF
+  char updated; // [esp+53h] [ebp-1h]
 
-  v25 = this;
-  v29 = 0;
-  v22 = CLogic::Effects((DWORD *)g_pLogic);
-  (*(void (__thiscall **)(int, unsigned int, _DWORD *, Squares **, Squares **, int *))(*(_DWORD *)v22 + 52))(
-    v22,
-    a2,
-    v26,
-    &v27,
-    &v28,
-    &v21);
-  LOBYTE(AnimalEffectDataPtr) = v26[0];
-  v26[1] = v26[0] - 11;
-  switch ( v26[0] )
+  v22 = this;
+  updated = 0;
+  v19 = CLogic::Effects(g_pLogic);
+  v19->GetMovingEffectInfo(v19, a2, &v23, &v25, &v26, &v18);
+  v24 = v23 - 11;
+  switch ( v23 )
   {
-    case 0xB:
-    case 0xC:
-    case 0xD:
-      v24 = v26[0] - 11;
-      LOBYTE(AnimalEffectDataPtr) = CAnimalEffect::UpdateButterfly(v25, a2, v27, v28, v21, a5);
-      v29 = (char)AnimalEffectDataPtr;
+    case 11:
+    case 12:
+    case 13:
+      v21 = v23 - 11;
+      updated = CAnimalEffect::UpdateButterfly(v22, a2, v25, v26, v18, a5);
       break;
-    case 0xE:
-      v24 = 3;
-      LOBYTE(AnimalEffectDataPtr) = CAnimalEffect::UpdateBird(v25, a2, v27, v28, a5);
-      v29 = (char)AnimalEffectDataPtr;
+    case 14:
+      v21 = 3;
+      updated = CAnimalEffect::UpdateBird(v22, a2, v25, v26, a5);
       break;
-    case 0xF:
-    case 0x10:
-      v24 = v26[0] - 11;
-      LOBYTE(AnimalEffectDataPtr) = CAnimalEffect::UpdateSeagull(v25, a2, v27, v28, a5);
-      v29 = (char)AnimalEffectDataPtr;
+    case 15:
+    case 16:
+      v21 = v23 - 11;
+      updated = CAnimalEffect::UpdateSeagull(v22, a2, v25, v26, a5);
       break;
-    case 0x11:
-    case 0x12:
-      v24 = v26[0] - 11;
-      LOBYTE(AnimalEffectDataPtr) = CAnimalEffect::UpdateDuck(v25, a2, v27, v28, v21);
-      v29 = (char)AnimalEffectDataPtr;
+    case 17:
+    case 18:
+      v21 = v23 - 11;
+      updated = CAnimalEffect::UpdateDuck(v22, a2, v25, v26, v18);
       break;
     default:
       break;
   }
-  if ( !v29 )
-    return (char)AnimalEffectDataPtr;
-  AnimalEffectDataPtr = CAnimalMgr::GetAnimalEffectDataPtr((CAnimalMgr *)&g_cAnimalMgr, v24);
-  v23 = AnimalEffectDataPtr;
-  if ( !*((_DWORD *)AnimalEffectDataPtr + 8) )
-    return (char)AnimalEffectDataPtr;
-  v20 = CLogic::Effects((DWORD *)g_pLogic);
-  v12 = (*(int (__thiscall **)(int, unsigned int))(*(_DWORD *)v20 + 72))(v20, a2);
-  LOBYTE(AnimalEffectDataPtr) = CSoundManager::IsPlaying((CSoundManager *)g_pSoundManager, v12);
-  if ( (_BYTE)AnimalEffectDataPtr )
-    return (char)AnimalEffectDataPtr;
-  v19 = CLogic::Effects((DWORD *)g_pLogic);
-  (*(void (__thiscall **)(int, unsigned int, int))(*(_DWORD *)v19 + 76))(v19, a2, -1);
-  v10 = IGfxEngine::GetOutputHeight((IGfxEngine *)g_pGfxEngine) >> 1;
-  OutputWidth = IGfxEngine::GetOutputWidth((IGfxEngine *)g_pGfxEngine);
-  LOBYTE(AnimalEffectDataPtr) = IGfxEngine::GetClosestMapPoint(
-                                  (IGfxEngine *)g_pGfxEngine,
-                                  OutputWidth >> 1,
-                                  v10,
-                                  (int *)&v18,
-                                  (int *)&v17);
-  if ( (int)v17 < 0 || (int)v18 < 0 )
-    return (char)AnimalEffectDataPtr;
-  v16 = Squares::XYToVW(v18);
-  v14 = Squares::XYToVW(v17);
-  v15 = Squares::XYToVW(v27);
-  AnimalEffectDataPtr = (struct SAnimalData *)Squares::XYToVW(v28);
-  v13 = AnimalEffectDataPtr;
-  if ( v15 < v16 - 1 || v15 > v16 + 1 )
-    return (char)AnimalEffectDataPtr;
-  LOBYTE(AnimalEffectDataPtr) = v14 - 1;
-  if ( (int)v13 < v14 - 1 || (int)v13 > v14 + 1 )
-    return (char)AnimalEffectDataPtr;
-  if ( *((_BYTE *)v23 + 36) != 100 )
+  if ( updated )
   {
-    v7 = j__rand() % 100 + 1;
-    LOBYTE(AnimalEffectDataPtr) = (_BYTE)v23;
-    if ( v7 > *((unsigned __int8 *)v23 + 36) )
-      return (char)AnimalEffectDataPtr;
+    AnimalEffectDataPtr = CAnimalMgr::GetAnimalEffectDataPtr((CAnimalMgr *)&g_cAnimalMgr, v21);
+    if ( AnimalEffectDataPtr[8] )
+    {
+      v17 = CLogic::Effects(g_pLogic);
+      v9 = v17->GetMovingEffectSoundId(v17, a2);
+      if ( !CSoundManager::IsPlaying(g_pSoundManager, v9) )
+      {
+        v16 = CLogic::Effects(g_pLogic);
+        v16->SetMovingEffectSoundId(v16, a2, -1);
+        v7 = IGfxEngine::GetOutputHeight(g_pGfxEngine) >> 1;
+        OutputWidth = IGfxEngine::GetOutputWidth(g_pGfxEngine);
+        IGfxEngine::GetClosestMapPoint(g_pGfxEngine, OutputWidth >> 1, v7, &v15, &v14);
+        if ( v14 >= 0 && v15 >= 0 )
+        {
+          v13 = Squares::XYToVW(v15);
+          v11 = Squares::XYToVW(v14);
+          v12 = Squares::XYToVW(v25);
+          v10 = Squares::XYToVW(v26);
+          if ( v12 >= v13 - 1
+            && v12 <= v13 + 1
+            && v10 >= v11 - 1
+            && v10 <= v11 + 1
+            && (*((_BYTE *)AnimalEffectDataPtr + 36) == 100
+             || j__rand() % 100 + 1 <= *((unsigned __int8 *)AnimalEffectDataPtr + 36)) )
+          {
+            if ( (*(unsigned __int8 (__thiscall **)(void *, int, int))(*(_DWORD *)g_pFogging + 32))(
+                   g_pFogging,
+                   v25,
+                   v26) )
+            {
+              v8 = CSoundManager::PlayEnvironmentSound(g_pSoundManager, AnimalEffectDataPtr[8], v25, v26, 0);
+              v6 = CLogic::Effects(g_pLogic);
+              v6->SetMovingEffectSoundId(v6, a2, v8);
+            }
+          }
+        }
+      }
+    }
   }
-  LOBYTE(AnimalEffectDataPtr) = (*(int (__thiscall **)(void *, Squares *, Squares *))(*(_DWORD *)g_pFogging + 32))(
-                                  g_pFogging,
-                                  v27,
-                                  v28);
-  if ( !(_BYTE)AnimalEffectDataPtr )
-    return (char)AnimalEffectDataPtr;
-  v11 = CSoundManager::PlayEnvironmentSound(g_pSoundManager, *((_DWORD *)v23 + 8), v27, v28, 0);
-  v8 = CLogic::Effects((DWORD *)g_pLogic);
-  LOBYTE(AnimalEffectDataPtr) = (*(int (__thiscall **)(int, unsigned int, int))(*(_DWORD *)v8 + 76))(v8, a2, v11);
-  return (char)AnimalEffectDataPtr;
 }
 
 
@@ -308,16 +287,16 @@ int  CAnimalEffect::AddDuck(int a2, int a3) {
 
 
 // address=[0x14d9a90]
-// Decompiled from char __thiscall CAnimalEffect::UpdateButterfly(  CAnimalEffect *this,  unsigned int a2,  int a3,  int a4,  int a5,  __int16 a6)
-bool  CAnimalEffect::UpdateButterfly(int a2, int a3, int a4, int a5, int a5) {
+// Decompiled from char __thiscall CAnimalEffect::UpdateButterfly(CAnimalEffect *this, int a2, int a3, int a4, int a5, int a6)
+bool  CAnimalEffect::UpdateButterfly(int a2, int a3, int a4, int a5, int a6) {
   
   IEffects *v6; // eax
   IEffects *v8; // eax
-  void *v9; // eax
+  struct IFutureEvents *v9; // eax
   IEffects *v10; // eax
   int v11; // [esp-18h] [ebp-64h]
-  Squares *v12; // [esp-Ch] [ebp-58h]
-  Squares *v13; // [esp-8h] [ebp-54h]
+  unsigned int v12; // [esp-Ch] [ebp-58h]
+  unsigned int v13; // [esp-8h] [ebp-54h]
   unsigned int v14; // [esp-4h] [ebp-50h]
   int v15; // [esp+0h] [ebp-4Ch] BYREF
   int v16; // [esp+4h] [ebp-48h] BYREF
@@ -328,18 +307,18 @@ bool  CAnimalEffect::UpdateButterfly(int a2, int a3, int a4, int a5, int a5) {
   int v21; // [esp+18h] [ebp-34h]
   int ScreenOffsetsByMapIndices; // [esp+1Ch] [ebp-30h]
   int v23; // [esp+20h] [ebp-2Ch]
-  int v24; // [esp+24h] [ebp-28h]
-  int v25; // [esp+28h] [ebp-24h]
+  struct IEffects *v24; // [esp+24h] [ebp-28h]
+  struct IEffects *v25; // [esp+28h] [ebp-24h]
   int i; // [esp+2Ch] [ebp-20h]
   int v27; // [esp+30h] [ebp-1Ch]
   int j; // [esp+34h] [ebp-18h]
   CAnimalEffect *v29; // [esp+38h] [ebp-14h]
-  Squares *v30; // [esp+3Ch] [ebp-10h]
-  Squares *v31; // [esp+40h] [ebp-Ch]
-  unsigned int v32; // [esp+44h] [ebp-8h]
+  int v30; // [esp+3Ch] [ebp-10h]
+  int v31; // [esp+40h] [ebp-Ch]
+  DWORD v32; // [esp+44h] [ebp-8h]
   char v33; // [esp+49h] [ebp-3h]
   char v34; // [esp+4Ah] [ebp-2h]
-  bool v35; // [esp+4Bh] [ebp-1h]
+  char v35; // [esp+4Bh] [ebp-1h]
 
   v29 = this;
   v35 = 0;
@@ -348,7 +327,7 @@ bool  CAnimalEffect::UpdateButterfly(int a2, int a3, int a4, int a5, int a5) {
     ScreenOffsetsByMapIndices = IGfxEngine::GetScreenOffsetsByMapIndices(a3, a4, &v15, &v16);
     if ( ScreenOffsetsByMapIndices != 3 )
     {
-      v6 = (IEffects *)CLogic::Effects((DWORD *)g_pLogic);
+      v6 = CLogic::Effects(g_pLogic);
       IEffects::DeleteMovingEffect(v6, a2);
       --*((_DWORD *)v29 + 4);
       --*((_DWORD *)v29 + 3);
@@ -361,18 +340,10 @@ bool  CAnimalEffect::UpdateButterfly(int a2, int a3, int a4, int a5, int a5) {
   {
     if ( ++v27 > 0 )
     {
-      v8 = (IEffects *)CLogic::Effects((DWORD *)g_pLogic);
+      v8 = CLogic::Effects(g_pLogic);
       IEffects::DeleteMovingEffect(v8, a2);
-      v25 = CLogic::Effects((DWORD *)g_pLogic);
-      (*(void (__thiscall **)(int, int, int, int, int, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v25 + 16))(
-        v25,
-        64,
-        69,
-        a3,
-        a4,
-        0,
-        0,
-        0);
+      v25 = CLogic::Effects(g_pLogic);
+      v25->AddEffect(v25, EFFECT_ANIM_SMOKE, 69, a3, a4, 0, 0, 0);
       --*((_DWORD *)v29 + 3);
       return 0;
     }
@@ -382,8 +353,8 @@ bool  CAnimalEffect::UpdateButterfly(int a2, int a3, int a4, int a5, int a5) {
     v27 = 0;
   }
   v32 = CRandom16::Rand(*(CRandom16 **)v29) % 0xC;
-  v30 = (Squares *)(a3 + CSpiralOffsets::DeltaX(v32 + 7));
-  v31 = (Squares *)(a4 + CSpiralOffsets::DeltaY(v32 + 7));
+  v30 = a3 + CSpiralOffsets::DeltaX(v32 + 7);
+  v31 = a4 + CSpiralOffsets::DeltaY(v32 + 7);
   v20 = Squares::XYToVW(v30);
   v19 = Squares::XYToVW(v31);
   v35 = CAnimalMgr::CheckButterflyUnderground((CAnimalMgr *)&g_cAnimalMgr, v30, v31);
@@ -391,8 +362,8 @@ bool  CAnimalEffect::UpdateButterfly(int a2, int a3, int a4, int a5, int a5) {
   {
     if ( (int)++v32 > 12 )
       v32 = 0;
-    v30 = (Squares *)(a3 + CSpiralOffsets::DeltaX(v32 + 7));
-    v31 = (Squares *)(a4 + CSpiralOffsets::DeltaY(v32 + 7));
+    v30 = a3 + CSpiralOffsets::DeltaX(v32 + 7);
+    v31 = a4 + CSpiralOffsets::DeltaY(v32 + 7);
     v20 = Squares::XYToVW(v30);
     v19 = Squares::XYToVW(v31);
     v35 = CAnimalMgr::CheckButterflyUnderground((CAnimalMgr *)&g_cAnimalMgr, v30, v31);
@@ -402,8 +373,8 @@ bool  CAnimalEffect::UpdateButterfly(int a2, int a3, int a4, int a5, int a5) {
     v32 = a5 + 6;
     if ( a5 + 6 > 12 )
       v32 -= 12;
-    v30 = (Squares *)(a3 + CSpiralOffsets::DeltaX(v32 + 7));
-    v31 = (Squares *)(a4 + CSpiralOffsets::DeltaY(v32 + 7));
+    v30 = a3 + CSpiralOffsets::DeltaX(v32 + 7);
+    v31 = a4 + CSpiralOffsets::DeltaY(v32 + 7);
   }
   if ( !CAnimalMgr::CheckButterflyUnderground((CAnimalMgr *)&g_cAnimalMgr, v30, v31) )
   {
@@ -412,8 +383,8 @@ bool  CAnimalEffect::UpdateButterfly(int a2, int a3, int a4, int a5, int a5) {
     v34 = 0;
     for ( j = 19; j < v17; ++j )
     {
-      v30 = (Squares *)(a3 + CSpiralOffsets::DeltaX(j));
-      v31 = (Squares *)(a4 + CSpiralOffsets::DeltaY(j));
+      v30 = a3 + CSpiralOffsets::DeltaX(j);
+      v31 = a4 + CSpiralOffsets::DeltaY(j);
       if ( CAnimalMgr::CheckButterflyUndergroundFast((CAnimalMgr *)&g_cAnimalMgr, v30, v31) )
       {
         v34 = 1;
@@ -423,13 +394,13 @@ bool  CAnimalEffect::UpdateButterfly(int a2, int a3, int a4, int a5, int a5) {
     if ( !v34 && BBSupportDbgReport(2, "MapObjects\\Animal\\AnimalEffect.cpp", 522, "bFound") == 1 )
       __debugbreak();
   }
-  if ( !(unsigned __int8)CWorldManager::InWorld((int)v30, (int)v31)
+  if ( !CWorldManager::InWorld(v30, v31)
     && BBSupportDbgReport(2, "MapObjects\\Animal\\AnimalEffect.cpp", 526, "g_cWorld.InWorld( iNewX, iNewY )") == 1 )
   {
     __debugbreak();
   }
-  v24 = CLogic::Effects((DWORD *)g_pLogic);
-  v23 = (*(int (__thiscall **)(int, unsigned int, Squares *, Squares *, _DWORD))(*(_DWORD *)v24 + 60))(
+  v24 = CLogic::Effects(g_pLogic);
+  v23 = ((int (__thiscall *)(struct IEffects *, int, int, int, _DWORD))v24->j_?SetMovingEffectDestination@CEffects@@UAEIIHHH@Z)(
           v24,
           a2,
           v30,
@@ -441,26 +412,26 @@ bool  CAnimalEffect::UpdateButterfly(int a2, int a3, int a4, int a5, int a5) {
   v13 = v31;
   v12 = v30;
   v11 = v23;
-  v9 = (void *)CLogic::FutureEvents(g_pLogic);
-  v33 = IFutureEvents::AddFutureEvent16(v9, 7, v11, 0, a2, (unsigned int)v12, (unsigned int)v13, v14);
+  v9 = CLogic::FutureEvents(g_pLogic);
+  v33 = IFutureEvents::AddFutureEvent16(v9, 7, v11, 0, a2, v12, v13, v14);
   if ( v33 )
     return v33;
-  v10 = (IEffects *)CLogic::Effects((DWORD *)g_pLogic);
+  v10 = CLogic::Effects(g_pLogic);
   IEffects::DeleteMovingEffect(v10, a2);
   return v33;
 }
 
 
 // address=[0x14d9ea0]
-// Decompiled from char __thiscall CAnimalEffect::UpdateBird(CAnimalEffect *this, unsigned int a2, int a3, int a4, int a5)
-bool  CAnimalEffect::UpdateBird(int a2, int a3, int a4, int a4) {
+// Decompiled from char __thiscall CAnimalEffect::UpdateBird(CAnimalEffect *this, int a2, int a3, int a4, int a5)
+bool  CAnimalEffect::UpdateBird(int a2, int a3, int a4, int a5) {
   
   IEffects *v5; // eax
   IEffects *v7; // eax
-  void *v8; // eax
+  struct IFutureEvents *v8; // eax
   int v9; // [esp-18h] [ebp-68h]
-  Squares *v10; // [esp-Ch] [ebp-5Ch]
-  Squares *v11; // [esp-8h] [ebp-58h]
+  unsigned int v10; // [esp-Ch] [ebp-5Ch]
+  unsigned int v11; // [esp-8h] [ebp-58h]
   unsigned int v12; // [esp-4h] [ebp-54h]
   int v13; // [esp+0h] [ebp-50h] BYREF
   int v14; // [esp+4h] [ebp-4Ch] BYREF
@@ -471,17 +442,17 @@ bool  CAnimalEffect::UpdateBird(int a2, int a3, int a4, int a4) {
   int v19; // [esp+18h] [ebp-38h]
   int ScreenOffsetsByMapIndices; // [esp+1Ch] [ebp-34h]
   int v21; // [esp+20h] [ebp-30h]
-  int v22; // [esp+24h] [ebp-2Ch]
+  struct IEffects *v22; // [esp+24h] [ebp-2Ch]
   signed int v23; // [esp+28h] [ebp-28h]
-  int v24; // [esp+2Ch] [ebp-24h]
+  struct IEffects *v24; // [esp+2Ch] [ebp-24h]
   int i; // [esp+30h] [ebp-20h]
   signed int v26; // [esp+34h] [ebp-1Ch]
   int v27; // [esp+38h] [ebp-18h]
-  Squares *v28; // [esp+3Ch] [ebp-14h]
-  Squares *v29; // [esp+40h] [ebp-10h]
+  int v28; // [esp+3Ch] [ebp-14h]
+  int v29; // [esp+40h] [ebp-10h]
   CAnimalEffect *v30; // [esp+44h] [ebp-Ch]
   int v31; // [esp+48h] [ebp-8h]
-  bool v33; // [esp+4Fh] [ebp-1h]
+  char v33; // [esp+4Fh] [ebp-1h]
 
   v30 = this;
   v33 = 0;
@@ -491,7 +462,7 @@ bool  CAnimalEffect::UpdateBird(int a2, int a3, int a4, int a4) {
     if ( ScreenOffsetsByMapIndices != 3 )
     {
 LABEL_3:
-      v5 = (IEffects *)CLogic::Effects((DWORD *)g_pLogic);
+      v5 = CLogic::Effects(g_pLogic);
       IEffects::DeleteMovingEffect(v5, a2);
       --*((_DWORD *)v30 + 7);
       --*((_DWORD *)v30 + 6);
@@ -504,18 +475,10 @@ LABEL_3:
   {
     if ( ++v27 > 0 )
     {
-      v7 = (IEffects *)CLogic::Effects((DWORD *)g_pLogic);
+      v7 = CLogic::Effects(g_pLogic);
       IEffects::DeleteMovingEffect(v7, a2);
-      v24 = CLogic::Effects((DWORD *)g_pLogic);
-      (*(void (__thiscall **)(int, int, int, int, int, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v24 + 16))(
-        v24,
-        64,
-        69,
-        a3,
-        a4,
-        0,
-        0,
-        0);
+      v24 = CLogic::Effects(g_pLogic);
+      v24->AddEffect(v24, EFFECT_ANIM_SMOKE, 69, a3, a4, 0, 0, 0);
       --*((_DWORD *)v30 + 6);
       return 0;
     }
@@ -541,8 +504,8 @@ LABEL_3:
       v31 = 0;
     }
   }
-  v28 = (Squares *)(a3 + CSpiralOffsets::DeltaX(v31 + 7));
-  v29 = (Squares *)(a4 + CSpiralOffsets::DeltaY(v31 + 7));
+  v28 = a3 + CSpiralOffsets::DeltaX(v31 + 7);
+  v29 = a4 + CSpiralOffsets::DeltaY(v31 + 7);
   v16 = Squares::XYToVW(v28);
   v15 = Squares::XYToVW(v29);
   v33 = CAnimalMgr::CheckBirdUnderground((CAnimalMgr *)&g_cAnimalMgr, v28, v29);
@@ -558,8 +521,8 @@ LABEL_3:
     {
       v31 = 0;
     }
-    v28 = (Squares *)(a3 + CSpiralOffsets::DeltaX(v31 + 7));
-    v29 = (Squares *)(a4 + CSpiralOffsets::DeltaY(v31 + 7));
+    v28 = a3 + CSpiralOffsets::DeltaX(v31 + 7);
+    v29 = a4 + CSpiralOffsets::DeltaY(v31 + 7);
     v16 = Squares::XYToVW(v28);
     v15 = Squares::XYToVW(v29);
     v33 = CAnimalMgr::CheckBirdUnderground((CAnimalMgr *)&g_cAnimalMgr, v28, v29);
@@ -569,16 +532,16 @@ LABEL_3:
     v31 = a5 + 6;
     if ( a5 + 6 > 12 )
       v31 -= 12;
-    v28 = (Squares *)(a3 + CSpiralOffsets::DeltaX(v31 + 7));
-    v29 = (Squares *)(a4 + CSpiralOffsets::DeltaY(v31 + 7));
+    v28 = a3 + CSpiralOffsets::DeltaX(v31 + 7);
+    v29 = a4 + CSpiralOffsets::DeltaY(v31 + 7);
   }
-  if ( !(unsigned __int8)CWorldManager::InWorld((int)v28, (int)v29)
+  if ( !CWorldManager::InWorld(v28, v29)
     && BBSupportDbgReport(2, "MapObjects\\Animal\\AnimalEffect.cpp", 685, "g_cWorld.InWorld( iNewX, iNewY )") == 1 )
   {
     __debugbreak();
   }
-  v22 = CLogic::Effects((DWORD *)g_pLogic);
-  v21 = (*(int (__thiscall **)(int, unsigned int, Squares *, Squares *, _DWORD))(*(_DWORD *)v22 + 60))(
+  v22 = CLogic::Effects(g_pLogic);
+  v21 = ((int (__thiscall *)(struct IEffects *, int, int, int, _DWORD))v22->j_?SetMovingEffectDestination@CEffects@@UAEIIHHH@Z)(
           v22,
           a2,
           v28,
@@ -590,204 +553,191 @@ LABEL_3:
   v11 = v29;
   v10 = v28;
   v9 = v21;
-  v8 = (void *)CLogic::FutureEvents(g_pLogic);
-  if ( !(unsigned __int8)IFutureEvents::AddFutureEvent16(v8, 7, v9, 0, a2, (unsigned int)v10, (unsigned int)v11, v12) )
+  v8 = CLogic::FutureEvents(g_pLogic);
+  if ( !(unsigned __int8)IFutureEvents::AddFutureEvent16(v8, 7, v9, 0, a2, v10, v11, v12) )
     goto LABEL_3;
   return 1;
 }
 
 
 // address=[0x14da2a0]
-// Decompiled from char __thiscall CAnimalEffect::UpdateSeagull(CAnimalEffect *this, unsigned int a2, int a3, int a4, int a5)
-bool  CAnimalEffect::UpdateSeagull(int a2, int a3, int a4, int a4) {
+// Decompiled from char __thiscall CAnimalEffect::UpdateSeagull(CAnimalEffect *this, int a2, int a3, int a4, int a5)
+bool  CAnimalEffect::UpdateSeagull(int a2, int a3, int a4, int a5) {
   
   IEffects *v5; // eax
   IEffects *v7; // eax
-  int v8; // ecx
-  IEffects *v9; // eax
-  void *v10; // eax
-  IEffects *v11; // eax
-  int v12; // [esp-18h] [ebp-80h]
-  Squares *v13; // [esp-Ch] [ebp-74h]
-  Squares *v14; // [esp-8h] [ebp-70h]
-  unsigned int v15; // [esp-4h] [ebp-6Ch]
-  _BYTE v16[4]; // [esp+0h] [ebp-68h] BYREF
-  _BYTE v17[4]; // [esp+4h] [ebp-64h] BYREF
-  _BYTE v18[4]; // [esp+8h] [ebp-60h] BYREF
-  int v19; // [esp+Ch] [ebp-5Ch]
-  int v20; // [esp+10h] [ebp-58h] BYREF
-  int v21; // [esp+14h] [ebp-54h] BYREF
+  IEffects *v8; // eax
+  struct IFutureEvents *v9; // eax
+  IEffects *v10; // eax
+  int v11; // [esp-18h] [ebp-80h]
+  unsigned int v12; // [esp-Ch] [ebp-74h]
+  unsigned int v13; // [esp-8h] [ebp-70h]
+  unsigned int v14; // [esp-4h] [ebp-6Ch]
+  _BYTE v15[4]; // [esp+0h] [ebp-68h] BYREF
+  _BYTE v16[4]; // [esp+4h] [ebp-64h] BYREF
+  _BYTE v17[4]; // [esp+8h] [ebp-60h] BYREF
+  int v18; // [esp+Ch] [ebp-5Ch]
+  int v19; // [esp+10h] [ebp-58h] BYREF
+  int v20; // [esp+14h] [ebp-54h] BYREF
   int ScreenOffsetsByMapIndices; // [esp+18h] [ebp-50h]
-  int v23; // [esp+1Ch] [ebp-4Ch]
-  int v24; // [esp+20h] [ebp-48h]
-  int v25; // [esp+24h] [ebp-44h]
-  signed int v26; // [esp+28h] [ebp-40h]
-  signed int v27; // [esp+2Ch] [ebp-3Ch]
-  int v28; // [esp+30h] [ebp-38h]
-  BOOL v29; // [esp+34h] [ebp-34h]
-  signed int v30; // [esp+38h] [ebp-30h]
-  BOOL v31; // [esp+3Ch] [ebp-2Ch]
+  int v22; // [esp+1Ch] [ebp-4Ch]
+  struct IEffects *v23; // [esp+20h] [ebp-48h]
+  struct IEffects *v24; // [esp+24h] [ebp-44h]
+  signed int v25; // [esp+28h] [ebp-40h]
+  signed int v26; // [esp+2Ch] [ebp-3Ch]
+  struct IEffects *v27; // [esp+30h] [ebp-38h]
+  BOOL v28; // [esp+34h] [ebp-34h]
+  signed int v29; // [esp+38h] [ebp-30h]
+  BOOL v30; // [esp+3Ch] [ebp-2Ch]
   int i; // [esp+40h] [ebp-28h]
-  int v33; // [esp+44h] [ebp-24h]
-  int v34; // [esp+48h] [ebp-20h]
-  int v35; // [esp+4Ch] [ebp-1Ch] BYREF
-  signed int v36; // [esp+50h] [ebp-18h]
-  Squares *v37; // [esp+54h] [ebp-14h]
-  Squares *v38; // [esp+58h] [ebp-10h]
-  CAnimalEffect *v39; // [esp+5Ch] [ebp-Ch]
-  int v40; // [esp+60h] [ebp-8h]
-  bool v42; // [esp+67h] [ebp-1h]
+  int v32; // [esp+44h] [ebp-24h]
+  int v33; // [esp+48h] [ebp-20h]
+  int v34; // [esp+4Ch] [ebp-1Ch] BYREF
+  signed int v35; // [esp+50h] [ebp-18h]
+  int v36; // [esp+54h] [ebp-14h]
+  int v37; // [esp+58h] [ebp-10h]
+  CAnimalEffect *v38; // [esp+5Ch] [ebp-Ch]
+  int v39; // [esp+60h] [ebp-8h]
+  bool v41; // [esp+67h] [ebp-1h]
 
-  v39 = this;
-  v42 = 0;
-  if ( !(unsigned __int8)CWorldManager::InWorld(a3, a4)
+  v38 = this;
+  v41 = 0;
+  if ( !CWorldManager::InWorld(a3, a4)
     && BBSupportDbgReport(2, "MapObjects\\Animal\\AnimalEffect.cpp", 728, "g_cWorld.InWorld( _iX, _iY )") == 1 )
   {
     __debugbreak();
   }
-  if ( (unsigned __int8)CWorldManager::InWorld(a3, a4) )
+  if ( CWorldManager::InWorld(a3, a4) )
   {
-    if ( !*((_DWORD *)v39 + 10)
-      || (ScreenOffsetsByMapIndices = IGfxEngine::GetScreenOffsetsByMapIndices(a3, a4, &v20, &v21),
+    if ( !*((_DWORD *)v38 + 10)
+      || (ScreenOffsetsByMapIndices = IGfxEngine::GetScreenOffsetsByMapIndices(a3, a4, &v19, &v20),
           ScreenOffsetsByMapIndices == 3) )
     {
-      v26 = CRandom16::PercentValue(0x19u);
-      v30 = CRandom16::PercentValue(0x32u);
-      v40 = a5;
-      v27 = CRandom16::Rand(*(CRandom16 **)v39);
-      if ( v27 < v26 )
+      v25 = CRandom16::PercentValue(0x19u);
+      v29 = CRandom16::PercentValue(0x32u);
+      v39 = a5;
+      v26 = CRandom16::Rand(*(CRandom16 **)v38);
+      if ( v26 < v25 )
       {
-        v36 = CRandom16::Rand(*(CRandom16 **)v39);
-        if ( v36 >= v30 )
+        v35 = CRandom16::Rand(*(CRandom16 **)v38);
+        if ( v35 >= v29 )
         {
-          if ( --v40 < 0 )
-            v40 = 11;
+          if ( --v39 < 0 )
+            v39 = 11;
         }
-        else if ( ++v40 > 12 )
+        else if ( ++v39 > 12 )
         {
-          v40 = 0;
+          v39 = 0;
         }
       }
-      v37 = (Squares *)(a3 + CSpiralOffsets::DeltaX(v40 + 7));
-      v38 = (Squares *)(a4 + CSpiralOffsets::DeltaY(v40 + 7));
+      v36 = a3 + CSpiralOffsets::DeltaX(v39 + 7);
+      v37 = a4 + CSpiralOffsets::DeltaY(v39 + 7);
+      v32 = Squares::XYToVW(v36);
       v33 = Squares::XYToVW(v37);
-      v34 = Squares::XYToVW(v38);
-      v31 = CAnimalMgr::IsSeagullLand((CAnimalMgr *)&g_cAnimalMgr, v33, v34)
-         && CAnimalMgr::CheckSeagullUndergroundAddPosition((CAnimalMgr *)&g_cAnimalMgr, v37, v38);
-      v42 = v31;
-      v36 = CRandom16::Rand(*(CRandom16 **)v39);
-      for ( i = 0; !v42 && i < 12; ++i )
+      v30 = CAnimalMgr::IsSeagullLand((CAnimalMgr *)&g_cAnimalMgr, v32, v33)
+         && CAnimalMgr::CheckSeagullUndergroundAddPosition((CAnimalMgr *)&g_cAnimalMgr, v36, v37);
+      v41 = v30;
+      v35 = CRandom16::Rand(*(CRandom16 **)v38);
+      for ( i = 0; !v41 && i < 12; ++i )
       {
-        if ( v36 >= v30 )
+        if ( v35 >= v29 )
         {
-          if ( --v40 < 0 )
-            v40 = 11;
+          if ( --v39 < 0 )
+            v39 = 11;
         }
-        else if ( ++v40 > 12 )
+        else if ( ++v39 > 12 )
         {
-          v40 = 0;
+          v39 = 0;
         }
-        v37 = (Squares *)(a3 + CSpiralOffsets::DeltaX(v40 + 7));
-        v38 = (Squares *)(a4 + CSpiralOffsets::DeltaY(v40 + 7));
+        v36 = a3 + CSpiralOffsets::DeltaX(v39 + 7);
+        v37 = a4 + CSpiralOffsets::DeltaY(v39 + 7);
+        v32 = Squares::XYToVW(v36);
         v33 = Squares::XYToVW(v37);
-        v34 = Squares::XYToVW(v38);
-        v29 = CAnimalMgr::IsSeagullLand((CAnimalMgr *)&g_cAnimalMgr, v33, v34)
-           && CAnimalMgr::CheckSeagullUndergroundAddPosition((CAnimalMgr *)&g_cAnimalMgr, v37, v38);
-        LOBYTE(v8) = v29;
-        v42 = v29;
+        v28 = CAnimalMgr::IsSeagullLand((CAnimalMgr *)&g_cAnimalMgr, v32, v33)
+           && CAnimalMgr::CheckSeagullUndergroundAddPosition((CAnimalMgr *)&g_cAnimalMgr, v36, v37);
+        v41 = v28;
       }
-      if ( !v42 )
+      if ( !v41 )
       {
-        v40 = a5 + 6;
+        v39 = a5 + 6;
         if ( a5 + 6 > 12 )
-          v40 -= 12;
-        v37 = (Squares *)(a3 + CSpiralOffsets::DeltaX(v40 + 7));
-        v38 = (Squares *)(a4 + CSpiralOffsets::DeltaY(v40 + 7));
+          v39 -= 12;
+        v36 = a3 + CSpiralOffsets::DeltaX(v39 + 7);
+        v37 = a4 + CSpiralOffsets::DeltaY(v39 + 7);
       }
-      v19 = CWorldManager::Width(v8);
-      if ( (unsigned __int8)CWorldManager::InWorld((int)v37, (int)v38) )
+      v18 = CWorldManager::Width();
+      if ( CWorldManager::InWorld(v36, v37) )
       {
-        v28 = CLogic::Effects((DWORD *)g_pLogic);
-        (*(void (__thiscall **)(int, unsigned int, int *, _BYTE *, _BYTE *, _BYTE *))(*(_DWORD *)v28 + 52))(
-          v28,
-          a2,
-          &v35,
-          v16,
-          v17,
-          v18);
-        v36 = CRandom16::Rand(*(CRandom16 **)v39);
-        if ( v27 < v26 )
+        v27 = CLogic::Effects(g_pLogic);
+        v27->GetMovingEffectInfo((CEffects *)v27, a2, &v34, (int *)v15, (int *)v16, (int *)v17);
+        v35 = CRandom16::Rand(*(CRandom16 **)v38);
+        if ( v26 < v25 )
         {
-          if ( v35 == 15 )
-            v35 = 16;
+          if ( v34 == 15 )
+            v34 = 16;
           else
-            v35 = 15;
-          v25 = CLogic::Effects((DWORD *)g_pLogic);
-          (*(void (__thiscall **)(int, unsigned int, int))(*(_DWORD *)v25 + 44))(v25, a2, v35);
+            v34 = 15;
+          v24 = CLogic::Effects(g_pLogic);
+          ((void (__thiscall *)(struct IEffects *, int, int))v24->j_?ChangeMovingEffectType@CEffects@@UAEXIH@Z)(
+            v24,
+            a2,
+            v34);
         }
-        v24 = CLogic::Effects((DWORD *)g_pLogic);
-        v23 = (*(int (__thiscall **)(int, unsigned int, Squares *, Squares *, _DWORD))(*(_DWORD *)v24 + 60))(
-                v24,
+        v23 = CLogic::Effects(g_pLogic);
+        v22 = ((int (__thiscall *)(struct IEffects *, int, int, int, _DWORD))v23->j_?SetMovingEffectDestination@CEffects@@UAEIIHHH@Z)(
+                v23,
                 a2,
+                v36,
                 v37,
-                v38,
                 0);
-        if ( !v23 )
+        if ( !v22 )
           return 1;
-        v15 = v40;
-        v14 = v38;
+        v14 = v39;
         v13 = v37;
-        v12 = v23;
-        v10 = (void *)CLogic::FutureEvents(g_pLogic);
-        if ( (unsigned __int8)IFutureEvents::AddFutureEvent16(
-                                v10,
-                                7,
-                                v12,
-                                0,
-                                a2,
-                                (unsigned int)v13,
-                                (unsigned int)v14,
-                                v15) )
+        v12 = v36;
+        v11 = v22;
+        v9 = CLogic::FutureEvents(g_pLogic);
+        if ( (unsigned __int8)IFutureEvents::AddFutureEvent16(v9, 7, v11, 0, a2, v12, v13, v14) )
         {
           return 1;
         }
         else
         {
-          v11 = (IEffects *)CLogic::Effects((DWORD *)g_pLogic);
-          IEffects::DeleteMovingEffect(v11, a2);
-          --*((_DWORD *)v39 + 10);
-          --*((_DWORD *)v39 + 9);
+          v10 = CLogic::Effects(g_pLogic);
+          IEffects::DeleteMovingEffect(v10, a2);
+          --*((_DWORD *)v38 + 10);
+          --*((_DWORD *)v38 + 9);
           return 0;
         }
       }
       else
       {
-        v9 = (IEffects *)CLogic::Effects((DWORD *)g_pLogic);
-        IEffects::DeleteMovingEffect(v9, a2);
-        if ( *((int *)v39 + 10) > 0 )
-          --*((_DWORD *)v39 + 10);
-        if ( *((int *)v39 + 9) > 0 )
-          --*((_DWORD *)v39 + 9);
+        v8 = CLogic::Effects(g_pLogic);
+        IEffects::DeleteMovingEffect(v8, a2);
+        if ( *((int *)v38 + 10) > 0 )
+          --*((_DWORD *)v38 + 10);
+        if ( *((int *)v38 + 9) > 0 )
+          --*((_DWORD *)v38 + 9);
         return 0;
       }
     }
     else
     {
-      v7 = (IEffects *)CLogic::Effects((DWORD *)g_pLogic);
+      v7 = CLogic::Effects(g_pLogic);
       IEffects::DeleteMovingEffect(v7, a2);
-      --*((_DWORD *)v39 + 10);
-      --*((_DWORD *)v39 + 9);
+      --*((_DWORD *)v38 + 10);
+      --*((_DWORD *)v38 + 9);
       return 0;
     }
   }
   else
   {
-    v5 = (IEffects *)CLogic::Effects((DWORD *)g_pLogic);
+    v5 = CLogic::Effects(g_pLogic);
     IEffects::DeleteMovingEffect(v5, a2);
-    if ( *((int *)v39 + 10) > 0 )
-      --*((_DWORD *)v39 + 10);
-    if ( *((int *)v39 + 9) > 0 )
-      --*((_DWORD *)v39 + 9);
+    if ( *((int *)v38 + 10) > 0 )
+      --*((_DWORD *)v38 + 10);
+    if ( *((int *)v38 + 9) > 0 )
+      --*((_DWORD *)v38 + 9);
     return 0;
   }
 }

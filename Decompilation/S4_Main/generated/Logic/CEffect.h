@@ -6,61 +6,61 @@
 class CEffect {
 public:
     // address=[0x144a5e0]
-    void  InitEffect(int a2, enum SIV_SOUNDS a3, int a4, int a5, unsigned int a6, int a7, bool a8);
+    void  InitEffect(int _uEffect, enum SIV_SOUNDS _tSoundId, int _iX, int _iY, unsigned int _uStartDelay, int _iDuration, bool _bTopEffect);
 
     // address=[0x144a700]
-    void  InitAngel(enum T_EFFECT_ANGEL a2, enum SIV_SOUNDS a3, int a4, int a5, int a6, unsigned int a7);
+    void  InitAngel(enum T_EFFECT_ANGEL _tAngel, enum SIV_SOUNDS a3, int _iX, int _iY, int a6, unsigned int a7);
 
     // address=[0x144a880]
-    void  InitMissile(enum T_EFFECT_MISSILE a2, int a3, int a4, unsigned int a5, int a6, int a7);
+    void  InitMissile(enum T_EFFECT_MISSILE a2, int _iAttackerXY, int _iTargetXY, unsigned int _iStartDelay, int a6, int a7);
 
     // address=[0x144ac00]
-    void  InitSporeCloud(int a2, int a3, unsigned int a4);
+    void  InitSporeCloud(int _iSrcXY, int _iDstXY, unsigned int _iNextTick);
 
     // address=[0x144aed0]
     void  InitStagnantAnimal(enum SIV_ANIMALS a2, enum SIV_SOUNDS a3, int a4, int a5, int a6, unsigned int a7);
 
     // address=[0x144afe0]
-    void  InitMovingEffect(int a2, int a3, int a4);
+    void  InitMovingEffect(int a2, int _iX, int _iY);
 
     // address=[0x144b0f0]
-    unsigned int  SetNewDestinationForMovingEffect(int a2, int a3, int a4);
+    unsigned int  SetNewDestinationForMovingEffect(int _iDstX, int _iDstY, int a4);
 
     // address=[0x144b3e0]
-    void  UpdateAttachedEffect(class CEffect const & a2);
+    void  UpdateAttachedEffect(class CEffect const & rParent);
 
     // address=[0x144b450]
-    void  InitAttachedEffect(int a2, unsigned int a3, class CEffect const & a4, int a5);
+    void  InitAttachedEffect(int a2, unsigned int _iParentId, class CEffect const & rParent, int a5);
 
     // address=[0x144b530]
-    void  VisualizeEffect(struct SGfxObjectInfo & a2, int a3);
+    void  VisualizeEffect(struct SGfxObjectInfo & rInfo, int _iTimeIndex);
 
     // address=[0x144b5f0]
-    void  VisualizeAngel(struct SGfxObjectInfo & a2, int a3);
+    void  VisualizeAngel(struct SGfxObjectInfo & rInfo, int _iTimeIndex);
 
     // address=[0x144b6e0]
-    void  VisualizeArrow(struct SGfxObjectInfo & a2, int a3);
+    void  VisualizeArrow(struct SGfxObjectInfo & rInfo, int _iTimeIndex);
 
     // address=[0x144b800]
-    void  VisualizeCannonball(struct SGfxObjectInfo & a2, int a3);
+    void  VisualizeCannonball(struct SGfxObjectInfo & a2, int _iTimeIndex);
 
     // address=[0x144b950]
-    void  VisualizeSporeCloud(struct SGfxObjectInfo & a2, int a3);
+    void  VisualizeSporeCloud(struct SGfxObjectInfo & a2, int _iTimeIndex);
 
     // address=[0x144ba40]
-    void  VisualizeStagnantAnimal(struct SGfxObjectInfo & a2, int a3);
+    void  VisualizeStagnantAnimal(struct SGfxObjectInfo & a2, int _iTimeIndex);
 
     // address=[0x144bb10]
-    void  VisualizeMovingEffect(struct SGfxObjectInfo & a2, int a3);
+    void  VisualizeMovingEffect(struct SGfxObjectInfo & a2, int _iTimeIndex);
 
     // address=[0x144bc80]
-    void  VisualizeTopEffect(struct SGfxObjectInfo & a2, int a3);
+    void  VisualizeTopEffect(struct SGfxObjectInfo & a2, int _iTimeIndex);
 
     // address=[0x144bd50]
-    void  VisualizeTopFireball(struct SGfxObjectInfo & a2, int a3);
+    void  VisualizeTopFireball(struct SGfxObjectInfo & a2, int _iTimeIndex);
 
     // address=[0x144beb0]
-    void  VisualizeAttachedEffect(struct SGfxObjectInfo & a2, int a3);
+    void  VisualizeAttachedEffect(struct SGfxObjectInfo & a2, int _iTimeIndex);
 
     // address=[0x144f270]
     void  VisualizeNOP(struct SGfxObjectInfo & a2, int a3);
@@ -94,6 +94,16 @@ public:
 
     // address=[0x144f7e0]
     enum T_VISUALIZE_FUNC  VisualizeFunc(void)const;
+
+    // Type information members
+public:
+    BYTE m_uVisualizeFunc;
+    unsigned __int8 m_iEffect;
+    BYTE m_tSoundId;
+    unsigned __int8 m_uDelay;
+    int (__thiscall *)(CEffect *, struct SGfxObjectInfo *, int) m_fpVisualize;
+    WORD m_uPrevEffect;
+    unsigned __int16 m_uNextEffect;
 
 };
 

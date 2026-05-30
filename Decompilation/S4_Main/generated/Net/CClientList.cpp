@@ -3,12 +3,12 @@
 // Definitions for class CClientList
 
 // address=[0x15b1d30]
-// Decompiled from int __thiscall CClientList::GetPlayerIP(CClientList *this, int a2)
+// Decompiled from int __thiscall CClientList::GetPlayerIP(CClientList *this, unsigned int a2)
 long  CClientList::GetPlayerIP(int a2) {
   
   CClient *v2; // eax
 
-  v2 = (CClient *)std::vector<CClient>::operator[](a2);
+  v2 = (CClient *)std::vector<CClient>::operator[]((char *)this + 4, a2);
   return CClient::GetIP(v2);
 }
 

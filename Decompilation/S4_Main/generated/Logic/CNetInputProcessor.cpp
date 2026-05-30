@@ -855,7 +855,7 @@ char * __cdecl CNetInputProcessor::DbgMsgName(int a1) {
   
   int i; // [esp+0h] [ebp-4h]
 
-  for ( i = 0; dword_3D897D0[2 * i] != -1 && dword_3D897D0[2 * i] != a1; ++i )
+  for ( i = 0; word_3D897D0[2 * i] != -1 && word_3D897D0[2 * i] != a1; ++i )
     ;
   return (&off_3D897D4)[2 * i];
 }

@@ -260,7 +260,7 @@ void  IBuildingRole::Update(class CBuilding * a2) {
       else
       {
         this->gap165[2] = ((unsigned __int8)this->gap165[2] + 1)
-                        % CGfxManager::GetEffectFrameCount(g_pGfxManager, (unsigned __int8)this->byte164);
+                        % (int)CGfxManager::GetEffectFrameCount(g_pGfxManager, (unsigned __int8)this->byte164);
         if ( (int)this->field_170 > 0 && BYTE1(this->field_174) == (unsigned __int8)this->gap165[2] )
         {
           if ( LOBYTE(this->field_174) == 100 || (v12 = LOBYTE(this->field_174), v12 >= j__rand() % 100) )

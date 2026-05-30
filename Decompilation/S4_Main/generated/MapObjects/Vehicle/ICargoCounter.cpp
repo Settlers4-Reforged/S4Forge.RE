@@ -1,3 +1,4 @@
+#if FALSE
 #include "ICargoCounter.h"
 
 // Definitions for class ICargoCounter
@@ -11,3 +12,4 @@
 }
 
 
+#endif // Already implemented

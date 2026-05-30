@@ -313,82 +313,66 @@ void  CLandAnimal::LogicUpdateSpec(void) {
   int v9; // eax
   int v10; // [esp-10h] [ebp-28h]
   int v11; // [esp-10h] [ebp-28h]
-  unsigned int v12; // [esp+0h] [ebp-18h]
-  int v13; // [esp+4h] [ebp-14h]
+  DWORD v12; // [esp+0h] [ebp-18h]
+  struct IEffects *v13; // [esp+4h] [ebp-14h]
   int v14; // [esp+8h] [ebp-10h]
-  int v15; // [esp+Ch] [ebp-Ch]
+  struct IEffects *v15; // [esp+Ch] [ebp-Ch]
   int MoveDir; // [esp+10h] [ebp-8h]
   int v17; // [esp+10h] [ebp-8h]
 
-  if ( *((_DWORD *)this + 25) == 4 )
+  if ( *(_DWORD *)&this->unk_64 == 4 )
   {
     CAnimal::TakeDeadJob(this);
     return;
   }
   v1 = IEntity::PackedXY(this);
   v14 = CWorldManager::Index(v1);
-  if ( IEntity::Type((unsigned __int16 *)this) == 2 || IEntity::Type((unsigned __int16 *)this) == 3 )
+  if ( IEntity::Type(this) == 2 || IEntity::Type(this) == 3 )
   {
     if ( CWorldManager::FlagBits(v14, 4u) )
     {
-      *((_DWORD *)this + 38) = 0;
+      this->unk_88 = 0;
     }
-    else if ( (int)++*((_DWORD *)this + 38) > 0 )
+    else if ( (int)++this->unk_88 > 0 )
     {
-      v4 = IEntity::ID();
+      v4 = IEntity::ID(this);
       CAnimalMgr::DeleteAnimal((CAnimalMgr *)&g_cAnimalMgr, v4);
-      v13 = CLogic::Effects((DWORD *)g_pLogic);
+      v13 = CLogic::Effects(g_pLogic);
       v11 = IEntity::Y(this);
       v5 = IEntity::X(this);
-      (*(void (__thiscall **)(int, int, int, int, int, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v13 + 16))(
-        v13,
-        64,
-        69,
-        v5,
-        v11,
-        0,
-        0,
-        0);
+      v13->AddEffect(v13, EFFECT_ANIM_SMOKE, 69, v5, v11, 0, 0, 0);
       return;
     }
   }
   else if ( CWorldManager::FlagBits(v14, 4u) )
   {
-    if ( (int)++*((_DWORD *)this + 38) > 0 )
+    if ( (int)++this->unk_88 > 0 )
     {
-      v2 = IEntity::ID();
+      v2 = IEntity::ID(this);
       CAnimalMgr::DeleteAnimal((CAnimalMgr *)&g_cAnimalMgr, v2);
-      v15 = CLogic::Effects((DWORD *)g_pLogic);
+      v15 = CLogic::Effects(g_pLogic);
       v10 = IEntity::Y(this);
       v3 = IEntity::X(this);
-      (*(void (__thiscall **)(int, int, int, int, int, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v15 + 16))(
-        v15,
-        64,
-        69,
-        v3,
-        v10,
-        0,
-        0,
-        0);
+      v15->AddEffect(v15, EFFECT_ANIM_SMOKE, 69, v3, v10, 0, 0, 0);
       return;
     }
   }
   else
   {
-    *((_DWORD *)this + 38) = 0;
+    this->unk_88 = 0;
   }
-  if ( *(_BYTE *)(*((_DWORD *)this + 29) + 5) )
+  if ( *(_BYTE *)(*(_DWORD *)&this->unk_74 + 5) )
   {
-    ++*((_DWORD *)this + 35);
-    if ( *((_DWORD *)this + 25) == 3 || *((int *)this + 35) > 1 )
+    ++this->unk_7c;
+    if ( *(_DWORD *)&this->unk_64 == 3 || (int)this->unk_7c > 1 )
     {
       if ( CLandAnimal::CheckForEnemies(this) )
-        *((_DWORD *)this + 25) = 3;
+        *(_DWORD *)&this->unk_64 = 3;
       else
-        *((_DWORD *)this + 25) = 2;
-      *((_DWORD *)this + 35) = 0;
+        *(_DWORD *)&this->unk_64 = 2;
+      this->unk_7c = 0;
     }
-    if ( *((_DWORD *)this + 25) == 3 )
+    if ( *(_DWORD *)&this->unk_64 == 3 )
     {
       MoveDir = CLandAnimal::GetMoveDir(this);
       if ( MoveDir >= 0 )
@@ -417,7 +401,7 @@ void  CLandAnimal::LogicUpdateSpec(void) {
       {
 LABEL_27:
         CAnimal::TakeWalkJobAndWalkDir(this, v17);
-        ++*((_DWORD *)this + 36);
+        ++this->unk_80;
         return;
       }
       CAnimal::TakeWaitJobAndDoNothing(this, 5);
@@ -432,19 +416,19 @@ LABEL_27:
   {
     CAnimal::TakeEatJob(this, 1);
   }
-  if ( *((_DWORD *)this + 43) == *((_DWORD *)this + 6) )
+  if ( this->unk_9c == this->m_uPackedXY )
   {
-    if ( (int)++*((_DWORD *)this + 39) > 150 )
+    if ( (int)++this->unk_8c > 150 )
     {
-      v9 = IEntity::ID();
+      v9 = IEntity::ID(this);
       CAnimalMgr::DeleteAnimal((CAnimalMgr *)&g_cAnimalMgr, v9);
     }
   }
   else
   {
-    *((_DWORD *)this + 39) = 0;
+    this->unk_8c = 0;
   }
-  *((_DWORD *)this + 43) = *((_DWORD *)this + 6);
+  this->unk_9c = this->m_uPackedXY;
 }
 
 

@@ -52,13 +52,13 @@ public:
 
 private:
     // address=[0x14d9a90]
-    bool  UpdateButterfly(int a2, int a3, int a4, int a5, int a5);
+    bool  UpdateButterfly(int a2, int a3, int a4, int a5, int a6);
 
     // address=[0x14d9ea0]
-    bool  UpdateBird(int a2, int a3, int a4, int a4);
+    bool  UpdateBird(int a2, int a3, int a4, int a5);
 
     // address=[0x14da2a0]
-    bool  UpdateSeagull(int a2, int a3, int a4, int a4);
+    bool  UpdateSeagull(int a2, int a3, int a4, int a5);
 
     // address=[0x14da790]
     bool  UpdateDuck(int a2, int a3, int a4, int a5);

@@ -169,35 +169,35 @@ void  INetworkEngine::StormResetEnterSessionFlag(void) {
 // Decompiled from char __thiscall INetworkEngine::SendNetMessage(INetworkEngine *this, struct CEvn_Logic *a2)
 bool  INetworkEngine::SendNetMessage(class CEvn_Logic & a2) {
   
-  _BYTE v4[32]; // [esp+Ch] [ebp-30h] BYREF
+  CNet_Event v4; // [esp+Ch] [ebp-30h] BYREF
   int v5; // [esp+38h] [ebp-4h]
 
   IMessageTracer::PushFormatedInts(
     g_pMsgTracer,
     "INetworkEngine::SendNetMessage(): msg %u, owner %i, wparam 0x%08x, wparam 0x%08x.",
-    *((_DWORD *)a2 + 1),
-    *((unsigned __int8 *)a2 + 30),
-    *((_DWORD *)a2 + 2),
-    *((_DWORD *)a2 + 3));
-  if ( !*((_BYTE *)a2 + 30) && BBSupportDbgReport(2, "Net\\INetworkEngine.cpp", 205, "_pMessage.m_iOwner") == 1 )
+    a2->m_iEventId,
+    a2->m_iOwner,
+    a2->m_wParam,
+    a2->m_lParam);
+  if ( !a2->m_iOwner && BBSupportDbgReport(2, "Net\\INetworkEngine.cpp", 205, "_pMessage.m_iOwner") == 1 )
     __debugbreak();
   if ( !*((_BYTE *)this + 6) && BBSupportDbgReport(2, "Net\\INetworkEngine.cpp", 206, "m_bTickOpen") == 1 )
     __debugbreak();
-  if ( !CPlayerManager::IsAlive(*((unsigned __int8 *)a2 + 30)) && *((_DWORD *)a2 + 1) != 4002 )
+  if ( !CPlayerManager::IsAlive(a2->m_iOwner) && a2->m_iEventId != 4002 )
     return 1;
   CNet_Event::CNet_Event(
-    (CNet_Event *)v4,
-    *((_DWORD *)a2 + 1),
-    *((_DWORD *)a2 + 2),
-    *((_DWORD *)a2 + 3),
-    *((_BYTE *)a2 + 30),
-    *((_DWORD *)a2 + 6),
-    *((_WORD *)a2 + 14),
-    *((_DWORD *)a2 + 4));
+    &v4,
+    a2->m_iEventId,
+    a2->m_wParam,
+    a2->m_lParam,
+    a2->m_iOwner,
+    (uint)a2->m_iData,
+    a2->m_iDataSize,
+    a2->m_iTick);
   v5 = 0;
-  INetworkEngine::PushMsg(this, (struct CNet_Event *)v4);
+  INetworkEngine::PushMsg(this, &v4);
   v5 = -1;
-  CNet_Event::~CNet_Event((CNet_Event *)v4);
+  CNet_Event::~CNet_Event(&v4);
   return 1;
 }
 
@@ -244,22 +244,22 @@ bool  INetworkEngine::SendNetMessage(unsigned int a2, unsigned int a3, unsigned 
 // Decompiled from char __thiscall INetworkEngine::SendAsyncNetMessage(INetworkEngine *this, struct CEvn_Logic *a2, char a3)
 bool  INetworkEngine::SendAsyncNetMessage(class CEvn_Logic & a2, unsigned char a3) {
   
-  _BYTE Src[32]; // [esp+Ch] [ebp-30h] BYREF
+  CNet_Event Src; // [esp+Ch] [ebp-30h] BYREF
   int v5; // [esp+38h] [ebp-4h]
 
   CNet_Event::CNet_Event(
-    (CNet_Event *)Src,
-    *((_DWORD *)a2 + 1),
-    *((_DWORD *)a2 + 2),
-    *((_DWORD *)a2 + 3),
-    *((_BYTE *)a2 + 30),
-    *((_DWORD *)a2 + 6),
-    *((_WORD *)a2 + 14),
-    *((_DWORD *)a2 + 4));
+    &Src,
+    a2->m_iEventId,
+    a2->m_wParam,
+    a2->m_lParam,
+    a2->m_iOwner,
+    (uint)a2->m_iData,
+    a2->m_iDataSize,
+    a2->m_iTick);
   v5 = 0;
-  INetworkEngine::PushAsyncMsg(Src, a3);
+  INetworkEngine::PushAsyncMsg(&Src, a3);
   v5 = -1;
-  CNet_Event::~CNet_Event((CNet_Event *)Src);
+  CNet_Event::~CNet_Event(&Src);
   return 1;
 }
 
@@ -314,35 +314,35 @@ bool  INetworkEngine::CheckForMsg(void) {
 
 
 // address=[0x15c89c0]
-// Decompiled from char __thiscall INetworkEngine::Start(int this, char a2, unsigned int a3, int a4, wchar_t *Source)
+// Decompiled from char __thiscall INetworkEngine::Start(INetworkEngine *this, char a2, unsigned int a3, int a4, wchar_t *Source)
 bool  INetworkEngine::Start(bool a2, unsigned int a3, unsigned int a4, wchar_t const * Source) {
   
   struct CMsgStacks *v6; // [esp+10h] [ebp-20h]
   int v7; // [esp+18h] [ebp-18h]
   void *C; // [esp+1Ch] [ebp-14h]
 
-  if ( *(_BYTE *)(this + 5) && BBSupportDbgReport(2, "Net\\INetworkEngine.cpp", 83, "!m_bStarted") == 1 )
+  if ( *((_BYTE *)this + 5) && BBSupportDbgReport(2, "Net\\INetworkEngine.cpp", 83, "!m_bStarted") == 1 )
     __debugbreak();
-  *(_BYTE *)(this + 4) = a2;
-  if ( !*(_DWORD *)(this + 8) )
+  *((_BYTE *)this + 4) = a2;
+  if ( !*((_DWORD *)this + 2) )
   {
     C = operator new(0x4F0u);
     if ( C )
-      v7 = CGameHost::CGameHost((int)C, *(_BYTE *)(this + 12));
+      v7 = CGameHost::CGameHost((int)C, *((_BYTE *)this + 12));
     else
       v7 = 0;
-    *(_DWORD *)(this + 8) = v7;
+    *((_DWORD *)this + 2) = v7;
   }
   if ( Source )
   {
     CGameHost::StartIniFileGame(Source);
-    *(_BYTE *)(this + 4) = CGameType::IsHost(g_pGameType);
-    if ( !(unsigned __int8)CGameType::IsWebGame(g_pGameType)
+    *((_BYTE *)this + 4) = CGameType::IsHost(g_pGameType);
+    if ( !CGameType::IsWebGame(g_pGameType)
       && BBSupportDbgReport(2, "Net\\INetworkEngine.cpp", 106, "g_pGameType->IsWebGame()") == 1 )
     {
       __debugbreak();
     }
-    if ( !(unsigned __int8)CGameType::IsMultiplayerGame(g_pGameType)
+    if ( !CGameType::IsMultiplayerGame(g_pGameType)
       && BBSupportDbgReport(2, "Net\\INetworkEngine.cpp", 107, "g_pGameType->IsMultiplayerGame()") == 1 )
     {
       __debugbreak();
@@ -351,20 +351,20 @@ bool  INetworkEngine::Start(bool a2, unsigned int a3, unsigned int a4, wchar_t c
   }
   else
   {
-    if ( *(_BYTE *)(this + 12) || !a4 )
+    if ( *((_BYTE *)this + 12) || !a4 )
     {
-      if ( *(_BYTE *)(this + 4) )
-        CGameHost::InitAsHost(*(CGameHost **)(this + 8), a3);
+      if ( *((_BYTE *)this + 4) )
+        CGameHost::InitAsHost(*((CGameHost **)this + 2), a3);
       else
-        CGameHost::InitAsClient(*(CGameHost **)(this + 8), a3);
+        CGameHost::InitAsClient(*((CGameHost **)this + 2), a3);
     }
     else
     {
       if ( operator new(0x65Cu) )
-        v6 = (struct CMsgStacks *)CMsgStacks::CMsgStacks(a4, 0, *(_DWORD *)(g_pGameType + 700));
+        v6 = (struct CMsgStacks *)CMsgStacks::CMsgStacks(a4, 0, g_pGameType->m_uiTickCounter);
       else
         v6 = 0;
-      CGameHost::RegisterMsgStacks(*(CGameHost **)(this + 8), v6);
+      CGameHost::RegisterMsgStacks(*((CGameHost **)this + 2), v6);
     }
     return 1;
   }
@@ -479,10 +479,10 @@ void  INetworkEngine::PushAsyncMsg(class CNet_Event & Src, unsigned char a2) {
 
 
 // address=[0x15c90a0]
-// Decompiled from bool __thiscall INetworkEngine::PushMsg(CGameHost **this, struct CNet_Event *a2)
+// Decompiled from char __thiscall INetworkEngine::PushMsg(INetworkEngine *this, struct CNet_Event *a2)
 bool  INetworkEngine::PushMsg(class CNet_Event & a2) {
   
-  return CGameHost::PushMsg(this[2], a2);
+  return CGameHost::PushMsg(*((CMsgStacks ***)this + 2), a2);
 }
 
 

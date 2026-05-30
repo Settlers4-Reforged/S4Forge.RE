@@ -721,10 +721,10 @@ void  CGfxManager::GetAccessoryGfxInfo(struct SGfxObjectInfo & a2, unsigned int 
 
 
 // address=[0x1363410]
-// Decompiled from int __thiscall CGfxManager::GetSettlerJobFrameCount(CGfxManager *this, unsigned int a2, int a3, int a4)
-unsigned int  CGfxManager::GetSettlerJobFrameCount(unsigned int a2, unsigned int a3, unsigned int a4) {
+// Decompiled from unsigned int __thiscall CGfxManager::GetSettlerJobFrameCount(  CGfxManager *this,  unsigned int iRace,  unsigned int iJob,  unsigned int iDir)
+unsigned int  CGfxManager::GetSettlerJobFrameCount(unsigned int iRace, unsigned int iJob, unsigned int iDir) {
   
-  return CGfxManager::GetJobFrameCount(a2 + 20, a3, a4);
+  return CGfxManager::GetJobFrameCount(this, iRace + 20, iJob, iDir);
 }
 
 
@@ -761,33 +761,33 @@ unsigned int  CGfxManager::GetAnimalFrameCount(unsigned int a2) {
 
 
 // address=[0x1363510]
-// Decompiled from int __thiscall CGfxManager::GetEffectFrameCount(CGfxManager *this, unsigned int a2)
+// Decompiled from unsigned int __thiscall CGfxManager::GetEffectFrameCount(CGfxManager *this, unsigned int a2)
 unsigned int  CGfxManager::GetEffectFrameCount(unsigned int a2) {
   
-  int v3; // [esp+4h] [ebp-10h]
-  int v4; // [esp+Ch] [ebp-8h]
-  int v5; // [esp+10h] [ebp-4h]
+  unsigned int iGfxFile; // [esp+4h] [ebp-10h]
+  int v5; // [esp+Ch] [ebp-8h]
+  int v6; // [esp+10h] [ebp-4h]
 
   if ( a2 >= 0x64 )
   {
     if ( IGfxEngine::Use4444Palettes(g_pGfxEngine) )
-      v4 = 36;
+      v5 = 36;
     else
-      v4 = 37;
-    v3 = v4;
+      v5 = 37;
+    iGfxFile = v5;
   }
   else
   {
     if ( IGfxEngine::Use4444Palettes(g_pGfxEngine) )
-      v5 = 4;
+      v6 = 4;
     else
-      v5 = 6;
-    v3 = v5;
+      v6 = 6;
+    iGfxFile = v6;
   }
   if ( a2 >= 0x64 )
-    return CGfxManager::GetJobFrameCount(v3, a2 - 100, 0);
+    return CGfxManager::GetJobFrameCount(this, iGfxFile, a2 - 100, 0);
   else
-    return CGfxManager::GetJobFrameCount(v3, a2, 0);
+    return CGfxManager::GetJobFrameCount(this, iGfxFile, a2, 0);
 }
 
 

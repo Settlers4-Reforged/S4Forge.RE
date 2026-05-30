@@ -93,7 +93,7 @@ public:
     bool  LoadMapData(std::wstring _sMapName, bool _bAIActive, unsigned int a4, bool a5, bool a6, int _iSetupIndex, int _iAIDifficulty, int a9, bool _bIsLadderGame, bool _bIsClanGame);
 
     // address=[0x1492f70]
-    bool  IsMapAvailable(std::wstring & a2, int a3);
+    bool  IsMapAvailable(std::wstring & a2, int _iCRC);
 
     // address=[0x1493090]
     void  SetMapCRC(std::wstring & a2);

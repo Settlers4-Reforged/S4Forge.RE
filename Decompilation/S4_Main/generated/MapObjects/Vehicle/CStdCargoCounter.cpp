@@ -1,3 +1,4 @@
+#if FALSE
 #include "CStdCargoCounter.h"
 
 // Definitions for class CStdCargoCounter
@@ -79,3 +80,4 @@ void  CStdCargoCounter::CountEntity(int a2, int _iCargoType) {
 }
 
 
+#endif // Already implemented

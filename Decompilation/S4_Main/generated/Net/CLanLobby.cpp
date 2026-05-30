@@ -140,8 +140,8 @@ void __cdecl CLanLobby::ChangeData(struct SLobbyChange * Src) {
   result = Src;
   if ( *Src < 0 )
     return result;
-  if ( *(_BYTE *)(CLanLobby::m_pGameHost + 8) )
-    return (int *)CFsm::Control(*(CFsm **)(CLanLobby::m_pGameHost + 12), 1052, Src);
+  if ( CLanLobby::m_pGameHost->a )
+    return (int *)CFsm::Control(CLanLobby::m_pGameHost->m_pFSM, 1052, Src);
   else
     return (int *)CGameHost::SendToHost(1052, Src, 0xCu, 0, 0, 1);
   return result;
@@ -168,25 +168,21 @@ void __cdecl CLanLobby::ChangeSlots(struct SLobbyChange * Src) {
 
 
 // address=[0x15c9a60]
-// Decompiled from int __cdecl CLanLobby::Communicate(int a1, void *a2)
+// Decompiled from void __cdecl CLanLobby::Communicate(int a1, void *a2)
 void __cdecl CLanLobby::Communicate(int a1, void * a2) {
   
-  int result; // eax
-
   if ( !CLanLobby::m_pGameHost && BBSupportDbgReport(2, "net\\LanLobby.cpp", 319, "m_pGameHost!=NULL") == 1 )
     __debugbreak();
-  result = 0;
   if ( CLanLobby::m_pGameHost )
-    return CFsm::Control(*(CFsm **)(CLanLobby::m_pGameHost + 12), a1, a2);
-  return result;
+    CFsm::Control(CLanLobby::m_pGameHost->m_pFSM, a1, a2);
 }
 
 
 // address=[0x15c4dc0]
-// Decompiled from void __cdecl CLanLobby::SetGameHost(struct CFrameWnd *a1)
+// Decompiled from void __cdecl CLanLobby::SetGameHost(CGameHost *a1)
 void __cdecl CLanLobby::SetGameHost(class CGameHost * a1) {
   
-  CLanLobby::m_pGameHost = (int)a1;
+  CLanLobby::m_pGameHost = a1;
 }
 
 
@@ -310,22 +306,21 @@ void __cdecl CLanLobby::RedrawGameList(void) {
 
 
 // address=[0x15c94f0]
-// Decompiled from void *CLanLobby::RedrawMap()
+// Decompiled from void CLanLobby::RedrawMap()
 void __cdecl CLanLobby::RedrawMap(void) {
   
   void **CurrentState; // eax
-  void *result; // eax
+  _DWORD *v1; // [esp+0h] [ebp-4h]
 
   CurrentState = (void **)CGameStateHandler::GetCurrentState();
-  result = (void *)j____RTDynamicCast(
-                     CurrentState,
-                     0,
-                     &CGameState__RTTI_Type_Descriptor_,
-                     &CStateLobbyGameSettings__RTTI_Type_Descriptor_,
-                     0);
-  if ( result )
-    return (void *)CStateLobbyGameSettings::PaintMap(result);
-  return result;
+  v1 = (_DWORD *)j____RTDynamicCast(
+                   CurrentState,
+                   0,
+                   &CGameState__RTTI_Type_Descriptor_,
+                   &CStateLobbyGameSettings__RTTI_Type_Descriptor_,
+                   0);
+  if ( v1 )
+    CStateLobbyGameSettings::PaintMap(v1);
 }
 
 

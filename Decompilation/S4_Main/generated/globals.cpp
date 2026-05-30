@@ -36668,10 +36668,10 @@ std::ostream & __cdecl StoreArray<int>(std::ostream & a1, int const * const a2, 
 
 
 // address=[0x144f800]
-// Decompiled from double __cdecl sqrt(double x)
-float __cdecl sqrt(float a1) {
+// Decompiled from float __cdecl sqrt(float x)
+float __cdecl sqrt(float x) {
   
-  return j__sqrtf(*(float *)&x);
+  return j__sqrtf(x);
 }
 
 
@@ -44815,32 +44815,32 @@ bool __cdecl BlitBuilding(int a1, int a2, int a3, struct SGfxObjectInfo * _pInfo
         }
         for ( j = 0; j < 0xA; ++j )
         {
-          m_pGfxData = *(BYTE **)&_pInfo->gap_1b8[16 * j];
+          m_pGfxData = *(BYTE **)&_pInfo->gap_218[16 * j];
           if ( m_pGfxData )
           {
             v20 = *(unsigned __int16 *)m_pGfxData;
             m_pGfxData += 2;
             v21 = *(unsigned __int16 *)m_pGfxData;
             m_pGfxData += 2;
-            if ( *(_DWORD *)&_pInfo->gap_1b8[16 * j + 4] )
+            if ( *(_DWORD *)&_pInfo->gap_218[16 * j + 4] )
             {
               if ( v20 > 512 || v21 > 512 )
                 BBSupportTracePrintF(
                   0,
                   "GFX ENGINE: DATA ERROR: Size of building object is too big! Object will be ignored!");
               v22 = (a2
-                   - (int)(float)((float)((*(unsigned __int16 *)m_pGfxData - *(_DWORD *)&_pInfo->gap_1b8[16 * j + 8]) << 16)
+                   - (int)(float)((float)((*(unsigned __int16 *)m_pGfxData - *(_DWORD *)&_pInfo->gap_218[16 * j + 8]) << 16)
                                 * g_fZoomFactor)) >> 16;
               m_pGfxData += 2;
               v23 = (a3
-                   - (int)(float)((float)((*(unsigned __int16 *)m_pGfxData - *(_DWORD *)&_pInfo->gap_1b8[16 * j + 12]) << 16)
+                   - (int)(float)((float)((*(unsigned __int16 *)m_pGfxData - *(_DWORD *)&_pInfo->gap_218[16 * j + 12]) << 16)
                                 * g_fZoomFactor)) >> 16;
               if ( v22 <= GfxEngineSetup.m_uWidth
                 && v23 <= GfxEngineSetup.m_uHeight
                 && *(_DWORD *)(g_pDestSizeTable + 4 * v20) + v22 >= g_uLeftGuiBorderWidth
                 && *(_DWORD *)(g_pDestSizeTable + 4 * v21) + v23 >= 0 )
               {
-                v12 = *(_DWORD *)&_pInfo->gap_1b8[16 * j + 4];
+                v12 = *(_DWORD *)&_pInfo->gap_218[16 * j + 4];
                 sub_2F6FD80(&v12, a1);
                 ZoomBobNormal(v12, (int)(m_pGfxData + 6), v20, v21, v22, v23, 0, g_pBeginOfRenderBuffer, 0);
               }

@@ -30,7 +30,7 @@ public:
     bool  InitAsHost(unsigned int a2);
 
     // address=[0x15b54b0]
-     CGameHost(bool a2);
+     CGameHost(bool arg0);
 
     // address=[0x15b5ed0]
     virtual  ~CGameHost(void);
@@ -134,7 +134,7 @@ private:
     void  SendPlayerData(unsigned int a2);
 
     // address=[0x15ba420]
-    void  SendToAll(unsigned int a2, short * Src, unsigned int Size, short * a5, unsigned int a6, bool a7);
+    void  SendToAll(unsigned int a2, short * _pvData0, unsigned int _uiDataLength0, short * _pvData1, unsigned int _uiDataLength1, bool a7);
 
     // address=[0x15ba650]
     void  SendToHost(unsigned int a2, short * Src, unsigned int Size, short * a5, unsigned int a6, bool a7);
@@ -179,7 +179,7 @@ private:
     bool  ClientReceivesGameInfo(void * Src);
 
     // address=[0x15bba10]
-    bool  ClientLoginHost(void * a2);
+    bool  ClientLoginHost(void * arg0);
 
     // address=[0x15bbdf0]
     bool  ClientJoins(void * Src);
@@ -221,10 +221,10 @@ private:
     bool  GameAlreadyFull(void * a1);
 
     // address=[0x15bc7f0]
-    bool  SendMapToClient(void * a2);
+    bool  SendMapToClient(void * _iClient);
 
     // address=[0x15bce20]
-    bool  ClientReceiveMap(void * Src);
+    bool  ClientReceiveMap(void * _pMessage);
 
     // address=[0x15bd220]
     bool  ClientLeavesMyGame(void * a2);
@@ -306,6 +306,46 @@ private:
 
     // address=[0x15c4970]
     bool  DoNothing(void * a1);
+
+    // Type information members
+public:
+    BYTE a;
+    BYTE b;
+    BYTE c;
+    BYTE d;
+    CFsm * m_pFSM;
+    CClientList * m_pClientList;
+    _DWORD m_pMsgStacks;
+    _DWORD dword18;
+    _BYTE[8] gap1C;
+    _DWORD dword24;
+    _DWORD dword28;
+    _DWORD dword2C;
+    _DWORD dword30;
+    _DWORD dword34;
+    _BYTE[8] gap38;
+    _DWORD dword40;
+    BYTE * m_pMapDownloadData;
+    BYTE * m_pMapDownloadBlocks;
+    BYTE m_bMapBeingDownloaded;
+    BYTE m_bHasSentMap;
+    _BYTE[2] gap4E;
+    _DWORD m_iMapDownloadBlocksArrived;
+    DWORD m_iMapDownloadLastBlock;
+    _DWORD[8] field_58;
+    _DWORD[8] field_78;
+    _DWORD[8] field_98;
+    int m_iMapUpload;
+    _DWORD dwordBC;
+    _DWORD dwordC0;
+    _DWORD m_pSimpleNet;
+    _DWORD[8] field_C8;
+    _DWORD[8] field_E8;
+    BYTE field_108;
+    _BYTE[3] gap109;
+    std::list m_vGameInfos;
+    std::list m_vNetEvents;
+    _BYTE[971] field_11C;
 
 };
 

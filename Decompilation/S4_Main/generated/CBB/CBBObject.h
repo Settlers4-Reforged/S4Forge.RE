@@ -20,7 +20,6 @@ public:
     int m_uSerialNumber;
     char * m_spType;
     CBBObject * m_pFirst;
-    __int16 m_uU10;
 
 };
 

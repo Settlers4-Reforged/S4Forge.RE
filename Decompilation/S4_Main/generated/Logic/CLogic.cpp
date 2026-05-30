@@ -3,10 +3,10 @@
 // Definitions for class CLogic
 
 // address=[0x141d890]
-// Decompiled from struct IEffects *__thiscall CLogic::Effects(DWORD *this)
+// Decompiled from struct IEffects *__thiscall CLogic::Effects(CLogic *this)
 class IEffects &  CLogic::Effects(void) {
   
-  return (struct IEffects *)this[12];
+  return (struct IEffects *)*((_DWORD *)this + 12);
 }
 
 
@@ -62,7 +62,7 @@ void  CLogic::SwitchExtraInfoMenu(bool a2) {
 // Decompiled from CLogic *__thiscall CLogic::CLogic(CLogic *this)
  CLogic::CLogic(void) {
   
-  CBBObject::CBBObject(this, (int)"CLogic", 1);
+  CBBObject::CBBObject((CBBObject *)this, (int)"CLogic", 1);
   *(_DWORD *)this = &CLogic::_vftable_;
   *((_DWORD *)this + 4) = 0;
   *((_DWORD *)this + 5) = 0;
@@ -77,7 +77,7 @@ void  CLogic::SwitchExtraInfoMenu(bool a2) {
   *((_DWORD *)this + 17) = 0;
   *((_DWORD *)this + 16) = 0;
   *((_DWORD *)this + 15) = 0;
-  CPerformanceCounter::Start((CPerformanceCounter *)&cTimer);
+  CPerformanceCounter::Start(cTimer);
   lastTime = 0LL;
   return this;
 }

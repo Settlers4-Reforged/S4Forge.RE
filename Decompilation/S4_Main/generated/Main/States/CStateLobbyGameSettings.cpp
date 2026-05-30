@@ -1165,65 +1165,57 @@ void __cdecl CStateLobbyGameSettings::DrawMap(unsigned short * a1, unsigned shor
 // Decompiled from void __thiscall CStateLobbyGameSettings::PaintMap(_DWORD *this)
 void  CStateLobbyGameSettings::PaintMap(void) {
   
-  _DWORD *v1; // [esp+0h] [ebp-24h]
   unsigned int v2; // [esp+4h] [ebp-20h] BYREF
   int v3; // [esp+8h] [ebp-1Ch] BYREF
-  char v4; // [esp+Eh] [ebp-16h]
+  char m_bIsSaveGame; // [esp+Eh] [ebp-16h]
   char v5; // [esp+Fh] [ebp-15h]
   char v6[16]; // [esp+10h] [ebp-14h] BYREF
 
-  v1 = this;
   if ( g_pGameType )
   {
-    v5 = (*(int (__thiscall **)(void *, int, _DWORD))(*(_DWORD *)g_pRandomMaps + 32))(
+    v5 = (*(int (__thiscall **)(void *, std::wstring *, _DWORD))(*(_DWORD *)g_pRandomMaps + 32))(
            g_pRandomMaps,
-           g_pGameType + 28,
+           &g_pGameType->m_swMapName,
            0);
-    v4 = *(_BYTE *)(g_pGameType + 696);
+    m_bIsSaveGame = g_pGameType->m_bIsSaveGame;
     if ( v5 )
     {
-      if ( v4 )
+      if ( m_bIsSaveGame )
       {
-        *(_DWORD *)(g_pGameType + 1016) = 0;
-        *(_DWORD *)(g_pGameType + 1020) = 0;
-        *(_DWORD *)(g_pGameType + 1024) = 0;
+        g_pGameType->dword3F8 = 0;
+        g_pGameType->dword3FC = 0;
+        g_pGameType->dword400 = 0;
       }
       else
       {
-        *(_DWORD *)(g_pGameType + 1016) = (*(int (__thiscall **)(void *, _DWORD *))(*(_DWORD *)g_pRandomMaps + 56))(
-                                            g_pRandomMaps,
-                                            v1);
-        *(_DWORD *)(g_pGameType + 1020) = 160;
-        *(_DWORD *)(g_pGameType + 1024) = 160;
+        g_pGameType->dword3F8 = (*(int (__thiscall **)(void *, _DWORD *))(*(_DWORD *)g_pRandomMaps + 56))(
+                                  g_pRandomMaps,
+                                  this);
+        g_pGameType->dword3FC = 160;
+        g_pGameType->dword400 = 160;
       }
     }
-    if ( *(_DWORD *)(g_pGameType + 1016) )
+    if ( g_pGameType->dword3F8 )
     {
       v3 = 0;
       v2 = 0;
-      IGuiEngine::LockOwnerImage(
-        (IGuiEngine *)g_pGUIEngine,
-        v1[11236],
-        2246,
-        (struct SGuiRect *)v6,
-        (unsigned __int16 **)&v3,
-        &v2);
+      IGuiEngine::LockOwnerImage(g_pGUIEngine, this[11236], 2246, (struct SGuiRect *)v6, (unsigned __int16 **)&v3, &v2);
       if ( v3 )
       {
         CStateLobbyGameSettings::DrawMap(
-          *(unsigned __int16 **)(g_pGameType + 1016),
+          (unsigned __int16 *)g_pGameType->dword3F8,
           (unsigned __int16 *)v3,
           v2,
-          *(_DWORD *)(g_pGameType + 1020),
-          *(_DWORD *)(g_pGameType + 1024));
-        IGuiEngine::UnlockOwnerImage((IGuiEngine *)g_pGUIEngine, v1[11236], 2246);
+          g_pGameType->dword3FC,
+          g_pGameType->dword400);
+        IGuiEngine::UnlockOwnerImage(g_pGUIEngine, this[11236], 2246);
       }
     }
     if ( v5 )
     {
-      *(_DWORD *)(g_pGameType + 1016) = 0;
-      *(_DWORD *)(g_pGameType + 1020) = 0;
-      *(_DWORD *)(g_pGameType + 1024) = 0;
+      g_pGameType->dword3F8 = 0;
+      g_pGameType->dword3FC = 0;
+      g_pGameType->dword400 = 0;
     }
   }
 }

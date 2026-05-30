@@ -3,11 +3,11 @@
 // Definitions for class CStateLobbyConnect
 
 // address=[0x14b6970]
-// Decompiled from int __cdecl sub_18B6970(int a1)
+// Decompiled from struct CGameState *__cdecl CStateLobbyConnect::DynamicCreateFunc(void *a1)
 class CGameState * __cdecl CStateLobbyConnect::DynamicCreateFunc(void * a1) {
   
   if ( operator new(0xB48u) )
-    return CStateLobbyConnect::CStateLobbyConnect(a1);
+    return (struct CGameState *)CStateLobbyConnect::CStateLobbyConnect((int)a1);
   else
     return 0;
 }

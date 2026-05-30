@@ -10,7 +10,7 @@
   *(_DWORD *)this = &CSimpleNet::_vftable_;
   std::list<SLocalAddress>::list<SLocalAddress>((char *)this + 4);
   std::list<SMessage>::list<SMessage>((char *)this + 184);
-  std::string::string();
+  std::string::string((std::string *)((char *)this + 208));
   *((_WORD *)this + 98) = 0;
   *((_DWORD *)this + 105) = 0;
   *((_DWORD *)this + 103) = 0;

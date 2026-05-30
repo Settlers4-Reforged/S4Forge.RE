@@ -66,7 +66,7 @@ public:
     void  GetAccessoryGfxInfo(struct SGfxObjectInfo & a2, unsigned int _iAccessory);
 
     // address=[0x1363410]
-    unsigned int  GetSettlerJobFrameCount(unsigned int a2, unsigned int a3, unsigned int a4);
+    unsigned int  GetSettlerJobFrameCount(unsigned int iRace, unsigned int iJob, unsigned int iDir);
 
     // address=[0x1363440]
     unsigned int  GetObjectFrameCount(unsigned int a2);

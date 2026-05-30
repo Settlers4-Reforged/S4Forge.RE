@@ -7,7 +7,7 @@
  CFutureEvents::CFutureEvents(void) {
   
   IFutureEvents::IFutureEvents(this);
-  CBBObject::CBBObject((CFutureEvents *)((char *)this + 4), (int)&dword_36AD194[1], 1);
+  CBBObject::CBBObject((CBBObject *)((char *)this + 4), (int)&dword_36AD194[1], 1);
   *(_DWORD *)this = CFutureEvents::_vftable_;
   *((_DWORD *)this + 1) = &CFutureEvents::`vftable';
   CFutureEvents::Init(this);
@@ -782,47 +782,47 @@ void __cdecl CFutureEvents::ExecuteMovingAnimalUpdate(struct CFutureEvents::SFut
 // Decompiled from char __cdecl CFutureEvents::ExecuteEnslaveSettler(struct CFutureEvents::SFutureEvent *a1)
 void __cdecl CFutureEvents::ExecuteEnslaveSettler(struct CFutureEvents::SFutureEvent & a1) {
   
-  unsigned __int8 *SettlerPtr; // eax
-  unsigned __int8 *v2; // eax
-  _BYTE v4[24]; // [esp+4h] [ebp-5Ch] BYREF
+  IEntity *SettlerPtr; // eax
+  IEntity *v2; // eax
+  CEntityEvent v4; // [esp+4h] [ebp-5Ch] BYREF
   CEntityEvent *v5; // [esp+1Ch] [ebp-44h]
   CEntityEvent *v6; // [esp+20h] [ebp-40h]
   int v7; // [esp+24h] [ebp-3Ch]
-  unsigned __int8 *v8; // [esp+28h] [ebp-38h]
-  unsigned __int8 *v9; // [esp+2Ch] [ebp-34h]
+  IEntity *v8; // [esp+28h] [ebp-38h]
+  IEntity *v9; // [esp+2Ch] [ebp-34h]
   BOOL v10; // [esp+30h] [ebp-30h]
-  unsigned __int8 *v11; // [esp+34h] [ebp-2Ch]
+  IEntity *v11; // [esp+34h] [ebp-2Ch]
   int v12; // [esp+38h] [ebp-28h]
   int v13; // [esp+3Ch] [ebp-24h]
   int v14; // [esp+40h] [ebp-20h]
   int v15; // [esp+44h] [ebp-1Ch]
-  unsigned __int8 *v16; // [esp+48h] [ebp-18h]
-  unsigned __int8 *v17; // [esp+4Ch] [ebp-14h]
+  IEntity *v16; // [esp+48h] [ebp-18h]
+  IEntity *v17; // [esp+4Ch] [ebp-14h]
   bool v18; // [esp+53h] [ebp-Dh]
   int v19; // [esp+5Ch] [ebp-4h]
 
   v15 = (unsigned __int16)*((_DWORD *)a1 + 3);
   v12 = HIWORD(*((_DWORD *)a1 + 3));
-  v8 = (unsigned __int8 *)*((_DWORD *)a1 + 4);
-  SettlerPtr = CSettlerMgr::GetSettlerPtr(v15);
+  v8 = (IEntity *)*((_DWORD *)a1 + 4);
+  SettlerPtr = CSettlerMgr::GetSettlerPtr((struct CSettlerMgr *)g_cSettlerMgr, v15);
   v16 = SettlerPtr;
   if ( !SettlerPtr )
     return (char)SettlerPtr;
-  SettlerPtr = (unsigned __int8 *)IEntity::UniqueId(v16);
+  SettlerPtr = (IEntity *)IEntity::UniqueId(v16);
   if ( SettlerPtr != v8 )
     return (char)SettlerPtr;
   v13 = IEntity::X(v16);
   v14 = IEntity::Y(v16);
-  v10 = IEntity::FlagBits(v16, EntityFlag_OnBoard|EntityFlag_Visible) == 256
+  v10 = IEntity::FlagBits(v16, EntityFlag_OnBoard|EntityFlag_Visible) == EntityFlag_Visible
      && CWorldManager::MapObjectId(v13, v14) == v15;
   LOBYTE(SettlerPtr) = v10;
   v18 = v10;
   v17 = 0;
   if ( v12 > 0 )
   {
-    SettlerPtr = (unsigned __int8 *)CFlyingMgr::GetManakopterPtr((CFlyingMgr *)g_cFlyingMgr, v12);
+    SettlerPtr = CFlyingMgr::GetManakopterPtr((CFlyingMgr *)g_cFlyingMgr, v12);
     v17 = SettlerPtr;
-    if ( !SettlerPtr || (SettlerPtr = (unsigned __int8 *)IEntity::FlagBits(v17, (EntityFlag)&MEMORY[0x4000000])) != 0 )
+    if ( !SettlerPtr || (SettlerPtr = (IEntity *)IEntity::FlagBits(v17, EntityFlag_Died)) != 0 )
     {
       v18 = 0;
       v17 = 0;
@@ -837,23 +837,23 @@ void __cdecl CFutureEvents::ExecuteEnslaveSettler(struct CFutureEvents::SFutureE
   {
     __debugbreak();
   }
-  v2 = (unsigned __int8 *)CSettlerMgr::operator[](*((unsigned __int16 *)a1 + 1));
+  v2 = CSettlerMgr::operator[](*((unsigned __int16 *)a1 + 1));
   v7 = IEntity::OwnerId(v2);
-  SettlerPtr = (unsigned __int8 *)CSettlerMgr::AddSettler((CSettlerMgr *)g_cSettlerMgr, v13, v14, v7, 55, 2);
+  SettlerPtr = (IEntity *)CSettlerMgr::AddSettler((CSettlerMgr *)g_cSettlerMgr, v13, v14, v7, 55, 2);
   v9 = SettlerPtr;
   if ( !v17 )
     return (char)SettlerPtr;
-  SettlerPtr = CSettlerMgr::GetSettlerPtr((int)v9);
+  SettlerPtr = CSettlerMgr::GetSettlerPtr((struct CSettlerMgr *)g_cSettlerMgr, (int)v9);
   v11 = SettlerPtr;
   if ( !SettlerPtr )
     return (char)SettlerPtr;
-  (*(void (__thiscall **)(unsigned __int8 *, unsigned __int8 *))(*(_DWORD *)v17 + 112))(v17, v9);
-  v6 = CEntityEvent::CEntityEvent((CEntityEvent *)v4, 0x1Cu, 0, v12, 0, 0);
+  ((void (__thiscall *)(IEntity *, IEntity *))v17->__vftable[1].PostLoadInit)(v17, v9);
+  v6 = CEntityEvent::CEntityEvent(&v4, 0x1Cu, 0, v12, 0, 0);
   v5 = v6;
   v19 = 0;
-  (*(void (__thiscall **)(unsigned __int8 *, CEntityEvent *))(*(_DWORD *)v11 + 80))(v11, v6);
+  v11->SetEvent(v11, v6);
   v19 = -1;
-  LOBYTE(SettlerPtr) = CEntityEvent::~CEntityEvent(v4);
+  LOBYTE(SettlerPtr) = CEntityEvent::~CEntityEvent(&v4);
   return (char)SettlerPtr;
 }
 

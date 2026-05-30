@@ -22,9 +22,9 @@ class IEffects * __cdecl IEffects::CreateEffects(void) {
  IEffects::IEffects(void) {
   
   IGfxEffects::IGfxEffects(this);
-  IS4ChunkObject::IS4ChunkObject((IS4ChunkObject *)this + 1);
-  *(_DWORD *)this = IEffects::_vftable_;
-  *((_DWORD *)this + 1) = &IEffects::`vftable';
+  IS4ChunkObject::IS4ChunkObject(&this->IS4ChunkObject);
+  this->IGfxEffects::__vftable = (IEffects_vtbl *)IEffects::_vftable_;
+  this->IS4ChunkObject::__vftable = (IS4ChunkObject_vtbl *)&IEffects::`vftable';
   return this;
 }
 
@@ -33,7 +33,7 @@ class IEffects * __cdecl IEffects::CreateEffects(void) {
 // Decompiled from int __thiscall IEffects::DeleteMovingEffect(IEffects *this, unsigned int a2)
 void  IEffects::DeleteMovingEffect(unsigned int a2) {
   
-  return (*(int (__thiscall **)(IEffects *, unsigned int))(*(_DWORD *)this + 36))(this, a2);
+  return this->DeleteEffect(this, a2);
 }
 
 
