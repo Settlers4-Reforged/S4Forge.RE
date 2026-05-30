@@ -8,6 +8,8 @@
 
 // Definitions for class CPlayerManager
 
+CPlayerManager g_cPlayerMgr{};
+
 // address=[0x130f2c0]
 // Decompiled from DWORD __cdecl CPlayerManager::Race(int _iPlayerId)
 int __cdecl CPlayerManager::Race(int _iPlayerId) {

@@ -6,21 +6,19 @@
 class CBBObject {
 public:
     // address=[0x2f337e0]
-     CBBObject(char const * a2, bool a3);
+    CBBObject(char const *a2, bool a3);
 
     // address=[0x2f33860]
-     CBBObject(class CBBObject const & a2);
+    CBBObject(class CBBObject const &a2);
 
     // address=[0x2f33900]
-    virtual  ~CBBObject(void);
+    virtual ~CBBObject(void);
 
     // Type information members
 public:
-    int m_uSerialNumber;
-    const char * m_spType;
-    CBBObject *m_pFirst;
-    int16_t m_uU10;
-
+    int         m_uSerialNumber;
+    const char *m_spType;
+    CBBObject * m_pFirst;
 };
 
 

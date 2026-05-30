@@ -3,10 +3,6 @@
 
 #include "defines.h"
 
-#include
-#include
-#include#include
-
 class SPoint {
 public:
     // address=[0x15ddb00]

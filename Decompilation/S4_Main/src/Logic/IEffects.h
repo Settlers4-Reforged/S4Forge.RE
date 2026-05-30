@@ -1,7 +1,10 @@
-def IEFFECTS_H
+#ifndef IEFFECTS_H
 #define IEFFECTS_H
 
 #include "defines.h"
+
+#include "IGfxEffects.h"
+#include "LoadSave/IS4ChunkObject.h"
 
 class IEffects : public IGfxEffects, public IS4ChunkObject {
 public:

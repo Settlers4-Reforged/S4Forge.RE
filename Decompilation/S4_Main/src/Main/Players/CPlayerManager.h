@@ -4,6 +4,8 @@
 #include "defines.h"
 #include "LoadSave/IS4ChunkObject.h"
 
+extern class CPlayerManager g_cPlayerMgr;
+
 class CPlayerManager : public IS4ChunkObject {
 public:
     // address=[0x130f2c0]

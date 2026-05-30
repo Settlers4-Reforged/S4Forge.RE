@@ -93,6 +93,9 @@ namespace Squares {
 
     // address=[0x131ca60]
     bool __cdecl ValidVW(int, int);
+
+    constexpr int SQUARE_MAX_SUPPORTED_MAP_WIDTH_HEIGHT = 1024;
+    constexpr int SQUARE_GRID_MAX_V_W = 64;
 } // namespace Squares
 
 // address=[0x37D8C08]
