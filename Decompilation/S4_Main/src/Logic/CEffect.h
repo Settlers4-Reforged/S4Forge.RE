@@ -218,7 +218,6 @@ public:
     static_assert(sizeof(CEffect::SAttachedEffectInfo) == 0x30, "Size must match to original.");
 
     static_assert(offsetof(CEffect::SAngelEffectInfo, m_iColor) == offsetof(CEffect::SAttachedEffectInfo, m_iDir), "Offset of m_iDir must match between effect infos.");
-    static_assert(offsetof(CEffect::SAngelEffectInfo, m_iTimeIdxMax) == offsetof(CEffect::SSharedEffectInfo, m_iData10), "Offset of m_iData10 must match between effect infos.");
 
     // Type information members
 public:
@@ -227,6 +226,8 @@ public:
     BYTE            m_tSoundId;
     unsigned __int8 m_uDelay;
 
+    // NOTE(WizzardMaker): this should probably be changed as compilers behave differently here
+    // Probably not quite what they did back then either
     union {
         SAngelEffectInfo      uAngel;
         SMovingEffectInfo     uMoving;
@@ -235,6 +236,7 @@ public:
         SEffectInfo           uEffect;
         SSporeCloudEffectInfo uSpore;
 
+        // anonymous struct, to allow for direct access to fields
         struct {
             BYTE            m_iData0;
             BYTE            m_iData1;
@@ -259,6 +261,8 @@ public:
     WORD             m_uPrevEffect;
     unsigned __int16 m_uNextEffect;
 };
+
+static_assert(offsetof(CEffect, uAngel.m_iTimeIdxMax) == offsetof(CEffect, m_iData10), "Offset of m_iData10 must match between effect infos.");
 
 static_assert(sizeof(CEffect) == 0x3c, "Size of CEffect is not correct.");
 

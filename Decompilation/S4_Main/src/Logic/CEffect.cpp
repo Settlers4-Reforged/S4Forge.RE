@@ -528,7 +528,7 @@ void CEffect::VisualizeArrow(SGfxObjectInfo &_rInfo, int _iTimeIndex) {
   _rInfo.m_uObjType = 64;
   _rInfo.m_iEffectScreenX = this->uMissile.m_fVelocityX * static_cast<float>(_iTimeIndex) + this->uMissile.m_fWorldX;
   _rInfo.m_iEffectScreenY = this->uMissile.m_fVelocityY * static_cast<float>(_iTimeIndex) + this->uMissile.m_fWorldY
-                           + static_cast<float>(_iTimeIndex) * static_cast<float>(_iTimeIndex) * this->uMissile.m_fArcStep;
+                            + static_cast<float>(_iTimeIndex) * static_cast<float>(_iTimeIndex) * this->uMissile.m_fArcStep;
 }
 
 
@@ -544,7 +544,7 @@ void CEffect::VisualizeCannonball(SGfxObjectInfo &_rInfo, int _iTimeIndex) {
   _rInfo.m_uObjType = 64;
   _rInfo.m_iEffectScreenX = this->uMissile.m_fVelocityX * static_cast<float>(_iTimeIndex) + this->uMissile.m_fWorldX;
   _rInfo.m_iEffectScreenY = this->uMissile.m_fVelocityY * static_cast<float>(_iTimeIndex) + this->uMissile.m_fWorldY
-                        + static_cast<float>(_iTimeIndex) * static_cast<float>(_iTimeIndex) * this->uMissile.m_fArcStep;
+                            + static_cast<float>(_iTimeIndex) * static_cast<float>(_iTimeIndex) * this->uMissile.m_fArcStep;
 }
 
 
@@ -600,9 +600,9 @@ void CEffect::VisualizeMovingEffect(SGfxObjectInfo &_rInfo, int _iTimeIndex) {
     iTimeIndex = _iTimeIndex;
   if(this->m_uDelay && iTimeIndex > 0) {
     _rInfo.m_iEffectScreenX = static_cast<float>(iTimeIndex * (this->uMoving.m_iScreenX - this->uMoving.m_iStartScreenX) / uDelay
-                                             + this->uMoving.m_iStartScreenX);
+                                                 + this->uMoving.m_iStartScreenX);
     _rInfo.m_iEffectScreenY = static_cast<float>(iTimeIndex * (this->uMoving.m_iScreenY - this->uMoving.m_iStartScreenY) / uDelay
-                                             + this->uMoving.m_iStartScreenY);
+                                                 + this->uMoving.m_iStartScreenY);
   } else {
     _rInfo.m_iEffectScreenX = static_cast<float>(this->uMoving.m_iStartScreenX);
     _rInfo.m_iEffectScreenY = static_cast<float>(this->uMoving.m_iStartScreenY);
@@ -639,7 +639,7 @@ void CEffect::VisualizeTopFireball(SGfxObjectInfo &_rInfo, int _iTimeIndex) {
   _rInfo.m_uObjType = 64;
   _rInfo.m_iEffectScreenX = this->uMissile.m_fVelocityX * static_cast<float>(_iTimeIndex) + this->uMissile.m_fWorldX;
   _rInfo.m_iEffectScreenY = this->uMissile.m_fVelocityY * static_cast<float>(_iTimeIndex) + this->uMissile.m_fWorldY
-                        + static_cast<float>(_iTimeIndex) * static_cast<float>(_iTimeIndex) * this->uMissile.m_fArcStep;
+                            + static_cast<float>(_iTimeIndex) * static_cast<float>(_iTimeIndex) * this->uMissile.m_fArcStep;
   _rInfo.m_iZOrdering = -64;
 }
 
