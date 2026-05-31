@@ -736,13 +736,6 @@ void CEffects::RemoveEffectFromList(unsigned int _uEffectId) {
 // address=[0x144e170]
 // Decompiled from void __thiscall CEffects::CleanUp(CEffects *this)
 void CEffects::CleanUp(void) {
-  // [esp+0h] [ebp-20h]
-  // [esp+4h] [ebp-1Ch]
-  // [esp+Ch] [ebp-14h]
-  // [esp+10h] [ebp-10h]
-  // [esp+18h] [ebp-8h]
-  // [esp+1Fh] [ebp-1h]
-
   unsigned int TickCounter = g_pGame->GetTickCounter();
   this->m_iMaxXY = 0;
   this->m_iTickCounter = TickCounter;
@@ -782,8 +775,8 @@ bool CEffects::CheckParentEffect(unsigned int a2) {
 // Decompiled from void __cdecl CEffects::ClipXOrY(int *a1)
 void __cdecl CEffects::ClipXOrY(int &a1) {
   if(a1 >= 0) {
-    if(a1 > 1023)
-      a1 = 1023;
+    if(a1 >= Squares::SQUARE_MAX_SUPPORTED_MAP_WIDTH_HEIGHT)
+      a1 = Squares::SQUARE_MAX_SUPPORTED_MAP_WIDTH_HEIGHT - 1;
   } else {
     a1 = 0;
   }
@@ -793,7 +786,7 @@ void __cdecl CEffects::ClipXOrY(int &a1) {
 // address=[0x144f3f0]
 // Decompiled from void __thiscall CEffects::DecreaseMovingEffectCounter(CEffects *this, unsigned int _iEffect)
 void CEffects::DecreaseMovingEffectCounter(int _iEffect) {
-  if(_iEffect < 0x74) {
+  if(_iEffect < EFFECT_2_MAX) {
     BB_ASSERT(m_iMovingEffectCounters[_iEffect] > 0)
     this->m_iMovingEffectCounters[_iEffect] -= this->m_iMovingEffectCounters[_iEffect] > 0;
   }
@@ -817,7 +810,7 @@ unsigned int CEffects::FirstFreeEffectId(void) {
 // address=[0x144f650]
 // Decompiled from void __thiscall CEffects::IncreaseMovingEffectCounter(CEffects *this, unsigned int a2)
 void CEffects::IncreaseMovingEffectCounter(int a2) {
-  if(a2 < 116)
+  if(a2 < EFFECT_2_MAX)
     ++this->m_iMovingEffectCounters[a2];
 }
 
