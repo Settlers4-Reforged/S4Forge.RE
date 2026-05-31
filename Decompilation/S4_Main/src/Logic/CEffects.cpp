@@ -122,7 +122,7 @@ struct SGfxObjectInfo *CEffects::FirstEffect(int _iY) {
                 this->m_cEffects[j].m_iY,
                 0);
           }
-          if(!this->m_cEffects[j].m_iEffect) {
+          if(!this->m_cEffects[j].m_uEffect) {
           LABEL_40:
             this->MoveEffectFromSquareListToFreeList(j);
           } else {
@@ -209,7 +209,7 @@ void CEffects::Load(class IS4Chunk &rChunk) {
     T_VISUALIZE_FUNC fpVisFunc = rEffect.VisualizeFunc();
     rEffect.SetVisualizeFunc(fpVisFunc);
     if(rEffect.VisualizeFunc() == VISUALIZE_FUNC_MOVING_EFFECT)
-      this->IncreaseMovingEffectCounter(rEffect.m_iEffect);// _iEffect
+      this->IncreaseMovingEffectCounter(rEffect.m_uEffect);// _iEffect
   }
   rChunk.LoadSignature(1452512070);
 }
@@ -354,7 +354,7 @@ void CEffects::DeleteEffect(unsigned int _uEffectId) {
   BB_ASSERT((_uEffectId > 0) && (_uEffectId < EFFECTS_MAX))
   if(_uEffectId && _uEffectId < EFFECTS_MAX && this->m_cEffects[_uEffectId].m_uVisualizeFunc) {
     if(this->m_cEffects[_uEffectId].m_uVisualizeFunc == VISUALIZE_FUNC_MOVING_EFFECT)
-      CEffects::DecreaseMovingEffectCounter(this->m_cEffects[_uEffectId].m_iEffect);
+      CEffects::DecreaseMovingEffectCounter(this->m_cEffects[_uEffectId].m_uEffect);
     CEffects::MoveEffectFromSquareListToFreeList(_uEffectId);
   }
 }
@@ -389,9 +389,9 @@ void CEffects::ChangeMovingEffectType(unsigned int _uEffectId, int _iEffect) {
     BB_ASSERT(rEffect.m_uVisualizeFunc == VISUALIZE_FUNC_MOVING_EFFECT)
 
     if(rEffect.m_uVisualizeFunc == VISUALIZE_FUNC_MOVING_EFFECT) {
-      CEffects::DecreaseMovingEffectCounter(this->m_cEffects[_uEffectId].m_iEffect);
+      CEffects::DecreaseMovingEffectCounter(this->m_cEffects[_uEffectId].m_uEffect);
       CEffects::IncreaseMovingEffectCounter(_iEffect);
-      this->m_cEffects[_uEffectId].m_iEffect = _iEffect;
+      this->m_cEffects[_uEffectId].m_uEffect = _iEffect;
       this->m_cEffects[_uEffectId].uAngel.m_uFramesMax = CEffect::GetEffectNumberOfFrames(_iEffect);
       this->m_cEffects[_uEffectId].uAngel.m_iFrame = 0;
     }
@@ -419,7 +419,7 @@ void CEffects::GetMovingEffectInfo(unsigned int _uEffectId, int &_rEffect, int &
   BB_ASSERT((_uEffectId > 0) && (_uEffectId < EFFECTS_MAX))
   CEffect &rEffect = this->m_cEffects[_uEffectId];
   BB_ASSERT(rEffect.m_uVisualizeFunc == VISUALIZE_FUNC_MOVING_EFFECT)
-  _rEffect = this->m_cEffects[_uEffectId].m_iEffect;
+  _rEffect = this->m_cEffects[_uEffectId].m_uEffect;
   unsigned int TickCounter = g_pGame->GetTickCounter();
   if(TickCounter < this->m_cEffects[_uEffectId].uMoving.m_iNextTick)
     iTick = 0;
