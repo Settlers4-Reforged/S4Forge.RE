@@ -66,7 +66,7 @@ void  CEffect::InitAngel(enum T_EFFECT_ANGEL _tAngel, enum SIV_SOUNDS a3, int _i
   if ( this->uAngel.m_iDuration <= 0 && BBSupportDbgReport(2, "Logic\\Effects.cpp", 751, "m_iDuration > 0") == 1 )
     __debugbreak();
   CEffect::GetWorldScreenCoordinates(_iX, _iY, &this->uAngel.m_fWorldX, &this->uAngel.m_fWorldY);
-  CEffect::SetVisualizeFunc(this, VISUALIZE_FUNC_ANGEL);
+  CEffect::SetVisualizeFunc(this, 3);
 }
 
 
@@ -362,7 +362,7 @@ unsigned int  CEffect::SetNewDestinationForMovingEffect(int _iDstX, int _iDstY, 
   }
   this->uMoving.m_iNextTick = TickCounter;
   this->uMoving.m_iDuration = 0x7FFFFFFF;
-  CEffect::SetVisualizeFunc(this, VISUALIZE_FUNC_MOVING_EFFECT);
+  CEffect::SetVisualizeFunc(this, 8);
   if ( !uDelay && BBSupportDbgReport(2, "Logic\\Effects.cpp", 1110, "uDelay > 0") == 1 )
     __debugbreak();
   return uDelay;
@@ -442,12 +442,12 @@ void  CEffect::VisualizeAngel(struct SGfxObjectInfo & rInfo, int _iTimeIndex) {
     rInfo,
     this->uAngel.m_iRace,
     s_iAngelEffectJobIds[this->m_iEffect],
-    _iTimeIndex % (unsigned int)this->uAngel.m_uFramesMax,
+    _iTimeIndex % (unsigned int)this->m_uFramesMax,
     2u);
   rInfo->m_uObjType = 1;
   rInfo->m_iColor = iColor;
-  LODWORD(rInfo->m_iEffectScreenX) = this->uMoving.m_iStartX;
-  LODWORD(rInfo->m_iEffectScreenY) = this->uMoving.m_iStartY;
+  rInfo->m_iEffectScreenX = this->uAngel.m_fWorldX;
+  rInfo->m_iEffectScreenY = this->uAngel.m_fWorldY;
 }
 
 

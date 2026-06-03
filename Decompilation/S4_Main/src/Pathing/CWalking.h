@@ -4,15 +4,15 @@
 #include "defines.h"
 
 class CWalking {
-public:
+  public:
     // address=[0x14d8690]
     bool IsFree(int a2);
 
     // address=[0x15f6110]
-    static class CWalking * __cdecl Create(enum T_WALKING_TYPE a1, int a2);
+    static class CWalking *__cdecl Create(enum T_WALKING_TYPE a1, int a2);
 
     // address=[0x15f62c0]
-    static class CWalking * __cdecl Create(std::istream &_rStream);
+    static class CWalking *__cdecl Create(std::istream &_rStream);
 
     // address=[0x15faec0]
     CWalking(void);
@@ -22,7 +22,7 @@ public:
 
     virtual void Store(std::ostream &a2) = 0;
 
-    virtual void Init(int a2, int _iFlags) = 0;
+    virtual void Init(int _iWalkState, int _iFlags) = 0;
 
     virtual void Init(class CWalking *a2, int a3) = 0;
 
@@ -48,13 +48,12 @@ public:
 
     virtual T_WALKING_TYPE const GetWalkingType(void) = 0;
 
-protected:
+  protected:
     virtual bool FindPathAStar64(int a2, int a3, class CDirCache &a4) = 0;
 
     virtual int FindNearest(int a2, int a3, int a4) = 0;
 
     virtual class CWalking *DetachWalking(void) = 0;
 };
-
 
 #endif // CWALKING_H

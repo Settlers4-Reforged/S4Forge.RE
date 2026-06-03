@@ -15,8 +15,8 @@ CMushroom::CMushroom(int a2, int a3, int a4, int a5, int a6) : IDecoObject(a2, a
   this->m_uU1 = 1;
   this->m_iPhases = a6;
   this->m_uU0 = 0;
-  this->m_wJobPart = this->m_iPhases + (unsigned __int16) g_pGfxManager->GetObjectFirstJob(this->m_nType);
-  this->m_uCycleFrames = g_pGfxManager->GetObjectFrameCount(this->m_wJobPart);
+  this->m_iJobPart = this->m_iPhases + (unsigned __int16) g_pGfxManager->GetObjectFirstJob(this->m_nType);
+  this->m_uCycleFrames = g_pGfxManager->GetObjectFrameCount(this->m_iJobPart);
   BB_ASSERT(m_uCycleFrames)
 
   if(this->m_iPhases) {
@@ -35,7 +35,7 @@ CMushroom::CMushroom(int a2, int a3, int a4, int a5, int a6) : IDecoObject(a2, a
 CMushroom::CMushroom(class CMushroom const &a2, int a3, int a4, int a5) : IDecoObject(a2, a3, a4, a5) {
   this->m_uU0 = 0;
   this->m_iPhases = 3;
-  this->m_wJobPart = this->m_iPhases + (unsigned __int16) g_pGfxManager->GetObjectFirstJob(this->m_nType);
+  this->m_iJobPart = this->m_iPhases + (unsigned __int16) g_pGfxManager->GetObjectFirstJob(this->m_nType);
   this->m_uCycleFrames = a2.m_uCycleFrames;
   BB_ASSERT(this->m_uCycleFrames)
 
@@ -66,7 +66,7 @@ void CMushroom::LogicUpdate(void) {
         goto LABEL_10;
       this->m_uU0 = 0;
       ++this->m_iPhases;
-      this->m_wJobPart = this->m_iPhases
+      this->m_iJobPart = this->m_iPhases
                          + (unsigned __int16) g_pGfxManager->GetObjectFirstJob(this->m_nType);
       if(this->m_iPhases != 3)
         goto LABEL_10;
@@ -83,7 +83,7 @@ void CMushroom::LogicUpdate(void) {
          || (this->m_uU0 = 0,
              ++this->m_cFrame,
              m_cFrame = this->m_cFrame,
-             m_cFrame < g_pGfxManager->GetObjectFrameCount(this->m_wJobPart))) {
+             m_cFrame < g_pGfxManager->GetObjectFrameCount(this->m_iJobPart))) {
       LABEL_10:
         IAnimatedEntity::RegisterForLogicUpdate(this, 31);
       } else {
@@ -110,7 +110,7 @@ struct SGfxObjectInfo *CMushroom::GetGfxInfos(void) {
   IAnimatedEntity::SetLastUpdateTick(v2);
   if(v4)
     this->m_cFrame = (v4 + (unsigned int) this->m_cFrame) % this->m_uCycleFrames;
-  g_pGfxManager->GetObjectGfxInfo(&IEntity::m_sGfxInfo, this->m_wJobPart, this->m_cFrame, 1);
+  g_pGfxManager->GetObjectGfxInfo(&IEntity::m_sGfxInfo, this->m_iJobPart, this->m_cFrame, 1);
   byte_40FE518 = 16;
   byte_40FE51A = IEntity::IsVisible();
   IEntity::m_sGfxInfo.m_uFlags = 0;
@@ -125,8 +125,8 @@ void CMushroom::Decrease(int a2) {
   IEntity::ClearFlagBits(EntityFlag_Ready);
   ++this->m_iPhases;
   this->m_cFrame = 0;
-  this->m_wJobPart = this->m_iPhases + (unsigned __int16) g_pGfxManager->GetObjectFirstJob(this->m_nType);
-  this->m_uCycleFrames = g_pGfxManager->GetObjectFrameCount(this->m_wJobPart);
+  this->m_iJobPart = this->m_iPhases + (unsigned __int16) g_pGfxManager->GetObjectFirstJob(this->m_nType);
+  this->m_uCycleFrames = g_pGfxManager->GetObjectFrameCount(this->m_iJobPart);
   BB_ASSERT(this->m_uCycleFrames)
   this->m_uU0 = 0;
   IAnimatedEntity::RegisterForLogicUpdate(31);

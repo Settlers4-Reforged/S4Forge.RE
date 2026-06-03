@@ -860,7 +860,7 @@ unsigned int  CVehicle::TurnCounter(void)const {
     __debugbreak();
   IEntity::SetFlagBits(this, (EntityFlag)this->m_pVehicleProperties->m_tWarriorType);
   v10 = IEntity::OwnerId(this);
-  v11 = CWalking::Create(*(_DWORD *)this->m_pVehicleProperties->m_uU14, v10);
+  v11 = CWalking::Create(this->m_pVehicleProperties->m_uU14, v10);
   std::auto_ptr<CWalking>::auto_ptr<CWalking>(&v13, v11);
   LOBYTE(v18) = 3;
   std::auto_ptr<CWalking>::operator=(&v13);

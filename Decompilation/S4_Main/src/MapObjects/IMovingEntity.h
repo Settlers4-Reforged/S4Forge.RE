@@ -1,7 +1,10 @@
 #ifndef IMOVINGENTITY_H
 #define IMOVINGENTITY_H
 
+#include "IAnimatedEntity.h"
 #include "defines.h"
+
+#include <memory>
 
 class IMovingEntity : public IAnimatedEntity {
   public:
@@ -45,13 +48,13 @@ class IMovingEntity : public IAnimatedEntity {
     void WalkToXY(int a2, int a3);
 
     // address=[0x15591b0]
-    virtual void NewToDoList(class std::list<class CEntityTask, class std::allocator<class CEntityTask>> *_toDo, int a3);
+    virtual void NewToDoList(std::list<CEntityTask> *_toDo, int _iSize);
 
     // address=[0x1559260]
     void ResetToDoList(void);
 
     // address=[0x1559340]
-    void SetToDoList(class std::list<class CEntityTask, class std::allocator<class CEntityTask>> *a2);
+    void SetToDoList(std::list<CEntityTask> *_pToDo);
 
     // address=[0x1559400]
     bool IsNotOccupied(int a2);
@@ -66,7 +69,7 @@ class IMovingEntity : public IAnimatedEntity {
     void SetDistance(int a2);
 
     // address=[0x1568790]
-    class std::_List_iterator<class std::_List_val<struct std::_List_simple_types<class CEntityTask>>> const GetActualIter(void a2) const;
+    std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>> const GetActualIter(void) const;
 
     // address=[0x15d6230]
     int DisplacementCosts(void) const;
@@ -94,9 +97,9 @@ class IMovingEntity : public IAnimatedEntity {
     unsigned __int8 m_iDisplacementCosts;
     __int16 m_iToDoSize;
     int unk_4c;
-    struct CWalking *m_pWalkin;
-    std::list *m_pToDoList;
-    std::list::iterator m_cCurrentToDoItemIter;
+    std::unique_ptr<CWalking> m_pWalking;
+    std::list<CEntityTask> *m_pToDoList;
+    std::list<CEntityTask>::iterator m_cCurrentToDoItemIter;
 };
 
 #endif // IMOVINGENTITY_H

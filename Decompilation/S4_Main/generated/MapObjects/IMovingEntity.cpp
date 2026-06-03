@@ -1,3 +1,4 @@
+#if FALSE
 #include "IMovingEntity.h"
 
 // Definitions for class IMovingEntity
@@ -118,13 +119,13 @@ void  IMovingEntity::SetDirection(int a2) {
 
 
 // address=[0x1559170]
-// Decompiled from int __thiscall IMovingEntity::WalkToXY(IMovingEntity *this, int a2, int a3)
+// Decompiled from void __thiscall IMovingEntity::WalkToXY(IMovingEntity *this, int a2, int a3)
 void  IMovingEntity::WalkToXY(int a2, int a3) {
   
-  int v3; // eax
+  CWalking *v3; // eax
 
-  v3 = std::auto_ptr<CWalking>::operator->(&this->m_pWalkin);
-  return (*(int (__thiscall **)(int, int, int))(*(_DWORD *)v3 + 8))(v3, a2, a3);
+  v3 = (CWalking *)std::auto_ptr<CWalking>::operator->(&this->m_pWalkin);
+  v3->InitB((CWalkingBase *)v3, a2, a3);
 }
 
 
@@ -139,8 +140,8 @@ void  IMovingEntity::NewToDoList(class std::list<class CEntityTask,class std::al
 
   if ( !_toDo && BBSupportDbgReport(2, "MapObjects\\MovingEntity.cpp", 152, "_toDo != NULL") == 1 )
     __debugbreak();
-  this->m_pToDoList = _toDo;
-  v5 = std::list<CEntityTask>::begin((void *)this->m_pToDoList, (int)v3);
+  this->m_pToDoList = (std::list *)_toDo;
+  v5 = std::list<CEntityTask>::begin(this->m_pToDoList, (int)v3);
   v4 = v5;
   v7 = 0;
   std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator=(
@@ -166,7 +167,7 @@ void  IMovingEntity::ResetToDoList(void) {
     __debugbreak();
   if ( this->m_pToDoList )
   {
-    v7 = std::list<CEntityTask>::begin((void *)this->m_pToDoList, (int)v3);
+    v7 = std::list<CEntityTask>::begin(this->m_pToDoList, (int)v3);
     exceptionBlock = 0;
     std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator=(
       &this->m_cCurrentToDoItemIter,
@@ -212,13 +213,13 @@ void  IMovingEntity::SetToDoList(class std::list<class CEntityTask,class std::al
 
 
 // address=[0x1559400]
-// Decompiled from int __thiscall IMovingEntity::IsNotOccupied(IMovingEntity *this, int a2)
+// Decompiled from bool __thiscall IMovingEntity::IsNotOccupied(IMovingEntity *this, int a2)
 bool  IMovingEntity::IsNotOccupied(int a2) {
   
-  int v3; // [esp+4h] [ebp-4h]
+  CWalking *v3; // [esp+4h] [ebp-4h]
 
-  v3 = std::auto_ptr<CWalking>::operator->(&this->m_pWalkin);
-  return (*(int (__thiscall **)(int, int))(*(_DWORD *)v3 + 24))(v3, a2);
+  v3 = (CWalking *)std::auto_ptr<CWalking>::operator->(&this->m_pWalkin);
+  return v3->IsNotOccupied(v3, a2);
 }
 
 
@@ -226,10 +227,10 @@ bool  IMovingEntity::IsNotOccupied(int a2) {
 // Decompiled from bool __thiscall IMovingEntity::IsNotBlocked(IMovingEntity *this, int a2)
 bool  IMovingEntity::IsNotBlocked(int a2) {
   
-  int v3; // [esp+4h] [ebp-4h]
+  CWalking *v3; // [esp+4h] [ebp-4h]
 
-  v3 = std::auto_ptr<CWalking>::operator->(&this->m_pWalkin);
-  return (*(int (__thiscall **)(int, int))(*(_DWORD *)v3 + 20))(v3, a2);
+  v3 = (CWalking *)std::auto_ptr<CWalking>::operator->(&this->m_pWalkin);
+  return v3->IsNotBlocked(v3, a2);
 }
 
 
@@ -319,7 +320,7 @@ void  IMovingEntity::SetPositionAndDir(int a2, int a3) {
   operator^<signed char>(_pStream, &this->m_iDirection);
   operator^<unsigned char>(_pStream, &this->m_iDistance);
   operator^<unsigned char>(_pStream, &this->m_iDisplacementCosts);
-  operator^<int>(_pStream, (int *)&this->unk_4c);
+  operator^<int>(_pStream, &this->unk_4c);
   v10 = 0;
   operator^<bool>(_pStream, &v10);
   if ( v10 )
@@ -340,7 +341,7 @@ void  IMovingEntity::SetPositionAndDir(int a2, int a3) {
 void  IMovingEntity::Store(std::ostream & a1) {
   
   int v2; // [esp+0h] [ebp-14h] BYREF
-  void (__thiscall ***v3)(_DWORD, struct std::ostream *); // [esp+4h] [ebp-10h]
+  CWalking *v3; // [esp+4h] [ebp-10h]
   BOOL v4; // [esp+8h] [ebp-Ch]
   bool v6; // [esp+13h] [ebp-1h] BYREF
 
@@ -350,14 +351,14 @@ void  IMovingEntity::Store(std::ostream & a1) {
   operator^<signed char>(a1, &this->m_iDirection);
   operator^<unsigned char>(a1, &this->m_iDistance);
   operator^<unsigned char>(a1, &this->m_iDisplacementCosts);
-  operator^<int>(a1, (int *)&this->unk_4c);
+  operator^<int>(a1, &this->unk_4c);
   v4 = std::auto_ptr<CWalking>::get(&this->m_pWalkin) != 0;
   v6 = v4;
-  operator^<bool>(a1, (char *)&v6);
+  operator^<bool>(a1, &v6);
   if ( v6 )
   {
-    v3 = (void (__thiscall ***)(_DWORD, struct std::ostream *))std::auto_ptr<CWalking>::operator->(&this->m_pWalkin);
-    (**v3)(v3, a1);
+    v3 = std::auto_ptr<CWalking>::operator->(&this->m_pWalkin);
+    v3->Store(v3, a1);
   }
 }
 
@@ -374,7 +375,7 @@ void  IMovingEntity::InitDistance(void) {
 // Decompiled from void __thiscall IMovingEntity::DecDistance(IMovingEntity *this, unsigned int a2)
 void  IMovingEntity::DecDistance(unsigned int a2) {
   
-  BYTE m_iDistance; // dl
+  unsigned __int8 m_iDistance; // dl
 
   if ( a2 >= this->m_iDistance )
   {
@@ -391,3 +392,4 @@ void  IMovingEntity::DecDistance(unsigned int a2) {
 }
 
 
+#endif // Already implemented

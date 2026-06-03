@@ -18,10 +18,10 @@ class CPersistence * __cdecl CShadowHerb::New(std::istream &a1) {
 // address=[0x154abc0]
 // Decompiled from CShadowHerb *__thiscall CShadowHerb::CShadowHerb(  CShadowHerb *this,  unsigned int a2,  unsigned int a3,  int a4,  int a5,  int a6)
 CShadowHerb::CShadowHerb(int a2, int a3, int a4, int a5, int a6) : IDecoObject(a2, a3, a4, a5, 0) {
-  this->m_wJobPart = g_pGfxManager->GetObjectFirstJob(this->m_nType);
+  this->m_iJobPart = g_pGfxManager->GetObjectFirstJob(this->m_nType);
   this->m_uU1 = 1;
   this->m_iPhases = 0;
-  this->m_uCycleFrames = g_pGfxManager->GetObjectFrameCount(this->m_wJobPart);
+  this->m_uCycleFrames = g_pGfxManager->GetObjectFrameCount(this->m_iJobPart);
   this->m_uU5 = 0;
   BB_ASSERT(m_uCycleFrames > 0)
   BB_ASSERT(m_uCycleFrames < 21)
@@ -42,9 +42,9 @@ void CShadowHerb::LogicUpdate(void) {
     case 0u:
       ++this->m_iPhases;
       this->m_cFrame = 0;
-      this->m_wJobPart = this->m_iPhases
+      this->m_iJobPart = this->m_iPhases
                          + (unsigned __int16) g_pGfxManager->GetObjectFirstJob(this->m_nType);
-      this->m_uCycleFrames = g_pGfxManager->GetObjectFrameCount(this->m_wJobPart);
+      this->m_uCycleFrames = g_pGfxManager->GetObjectFrameCount(this->m_iJobPart);
       IAnimatedEntity::RegisterForLogicUpdate(1);
       break;
     case 1u:
@@ -60,8 +60,8 @@ void CShadowHerb::LogicUpdate(void) {
     case 2u:
       ++this->m_iPhases;
       this->m_cFrame = 0;
-      this->m_wJobPart = g_pGfxManager->GetObjectFirstJob(this->m_nType) + this->m_iPhases - 1;
-      this->m_uCycleFrames = g_pGfxManager->GetObjectFrameCount(this->m_wJobPart);
+      this->m_iJobPart = g_pGfxManager->GetObjectFirstJob(this->m_nType) + this->m_iPhases - 1;
+      this->m_uCycleFrames = g_pGfxManager->GetObjectFrameCount(this->m_iJobPart);
 
       g_pDarkTribe->ChangeSurroundingToDarkLand(v2, v5);
       IAnimatedEntity::RegisterForLogicUpdate(this->m_uCycleFrames);
@@ -88,7 +88,7 @@ struct SGfxObjectInfo *CShadowHerb::GetGfxInfos(void) {
   IAnimatedEntity::SetLastUpdateTick(v2);
   if(v4 && this->m_iPhases != 1 && this->m_iPhases != 2)
     this->m_cFrame = (v4 + (unsigned int) this->m_cFrame) % this->m_uCycleFrames;
-  g_pGfxManager->GetObjectGfxInfo(&IEntity::m_sGfxInfo, this->m_wJobPart, this->m_cFrame, 1);
+  g_pGfxManager->GetObjectGfxInfo(&IEntity::m_sGfxInfo, this->m_iJobPart, this->m_cFrame, 1);
   byte_40FE518 = 16;
   byte_40FE51A = IEntity::IsVisible();
   IEntity::m_sGfxInfo.m_uFlags = 0;

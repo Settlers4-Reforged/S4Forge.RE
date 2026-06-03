@@ -1,13 +1,13 @@
 #ifndef CWALKINGBASE_H
 #define CWALKINGBASE_H
 
-#include "defines.h"
 #include "CDirCache.h"
 #include "CWalking.h"
 #include "CWaypoints.h"
+#include "defines.h"
 
 class CWalkingBase : public CWalking {
-public:
+  public:
     // address=[0x15f6660]
     virtual ~CWalkingBase(void);
 
@@ -15,10 +15,10 @@ public:
     virtual void Store(std::ostream &a2);
 
     // address=[0x15f6860]
-    virtual void Init(int a2, int _iFlags);
+    virtual void Init(int _iWalkState, int _iFlags);
 
     // address=[0x15f6950]
-    virtual void Init(class CWalking *a2, int a3);
+    virtual void Init(class CWalking *_pAttachment, int _iFlags);
 
     // address=[0x15f6980]
     virtual void InitIfLeader(int a2, int a3);
@@ -57,25 +57,25 @@ public:
     CWalkingBase(int a2, int a3);
 
     struct SData {
-        int           m_iWalkingType;
-        int           m_iWalkState;
-        DWORD         field_8;
-        int           m_iWalkToXY;
-        int           m_iWalkTo2XY;
-        int           m_iLeaderWalkToXY;
-        int           m_iIdleWalkToXY;
-        int           m_iWalkToIndex;
-        int           field_20;
-        int           m_iFineWaypointXY;
-        int           m_iCoarseWaypointXY;
-        int           m_uFlags;
-        DWORD         m_iEntityFlags;
-        int           field_34;
-        int           field_38;
-        int           field_3C;
-        int           field_40;
-        CWaypoints    m_cCoarseWaypoints;
-        CDirCache     m_cFineWaypoints;
+        int m_iWalkingType;
+        int m_iWalkState;
+        DWORD field_8;
+        int m_iWalkToXY;
+        int m_iWalkTo2XY;
+        int m_iLeaderWalkToXY;
+        int m_iIdleWalkToXY;
+        int m_iWalkToIndex;
+        int field_20;
+        int m_iFineWaypointXY;
+        int m_iCoarseWaypointXY;
+        int m_uFlags;
+        DWORD m_iEntityFlags;
+        int field_34;
+        int field_38;
+        int field_3C;
+        int field_40;
+        CWaypoints m_cCoarseWaypoints;
+        CDirCache m_cFineWaypoints;
         CWalkingBase *m_pPrevWalking;
         CWalkingBase *m_pNextWalking;
         CWalkingBase *m_pLatestWalking;
@@ -84,7 +84,7 @@ public:
     // address=[0x15fb220]
     SData &CWalkingBase::GetData(void);
 
-protected:
+  protected:
     // address=[0x15f86e0]
     virtual bool FindPathAStar64(int a2, int a3, class CDirCache &a4);
 
@@ -116,9 +116,8 @@ protected:
     bool NextCoarseWaypoint(int _iXY);
 
     // Type information members
-public:
+  public:
     SData m_sData;
 };
-
 
 #endif // CWALKINGBASE_H

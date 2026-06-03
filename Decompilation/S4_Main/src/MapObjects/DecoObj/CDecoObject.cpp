@@ -20,12 +20,12 @@ class CPersistence * __cdecl CDecoObject::New(std::istream &a1) {
 // address=[0x1541b70]
 // Decompiled from CDecoObject *__thiscall CDecoObject::CDecoObject(  CDecoObject *this,  unsigned int a2,  unsigned int a3,  unsigned int a4,  int a5,  int a6,  int a7)
 CDecoObject::CDecoObject(int a2, int a3, int a4, int a5, int a6, int a7) : IDecoObject(a2, a3, a4, a5, 1) {
-  this->m_wJobPart = g_pGfxManager->GetObjectFirstJob(a4);
-  BB_ASSERT(this->m_wJobPart<SIV_OBJECT_MAX);
+  this->m_iJobPart = g_pGfxManager->GetObjectFirstJob(a4);
+  BB_ASSERT(this->m_iJobPart<SIV_OBJECT_MAX);
 
   this->m_uU1 = 1;
   this->m_iPhases = a7 == 0;
-  this->m_uCycleFrames = g_pGfxManager->GetObjectFrameCount(this->m_wJobPart);
+  this->m_uCycleFrames = g_pGfxManager->GetObjectFrameCount(this->m_iJobPart);
   this->m_cFrame = a6 % this->m_uCycleFrames;
   this->m_uTickCounter = g_pGame->GetTickCounter();
 }
@@ -56,7 +56,7 @@ struct SGfxObjectInfo *CDecoObject::GetGfxInfos(void) {
       this->m_cFrame = (v2 + this->m_cFrame) % this->m_uCycleFrames;
     }
   }
-  g_pGfxManager->GetObjectGfxInfo(&IEntity::m_sGfxInfo, this->m_wJobPart, this->m_cFrame, 1);
+  g_pGfxManager->GetObjectGfxInfo(&IEntity::m_sGfxInfo, this->m_iJobPart, this->m_cFrame, 1);
   if(this->m_nType == 123)
     byte_40FE518 = 16; // TODO, probably part of m_sGfxInfo
   else

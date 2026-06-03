@@ -25,8 +25,8 @@ CPlant::CPlant(int a2, int a3, int a4, int a5, int _iGoodType, int _iStage) : ID
   this->m_uStage = _iStage;
   this->m_iGoodType = _iGoodType;
   this->m_uU5 = 0;
-  this->m_wJobPart = this->m_uStage + (unsigned __int16) g_pGfxManager->GetObjectFirstJob(this->m_nType);
-  this->m_uCycleFrames = g_pGfxManager->GetObjectFrameCount(this->m_wJobPart);
+  this->m_iJobPart = this->m_uStage + (unsigned __int16) g_pGfxManager->GetObjectFirstJob(this->m_nType);
+  this->m_uCycleFrames = g_pGfxManager->GetObjectFrameCount(this->m_iJobPart);
   BB_ASSERT(m_uCycleFrames)
   if(IDecoObject::IsStaticInstance()) {
     this->m_cFrame = g_pGame->Rand() % this->m_uCycleFrames;
@@ -43,7 +43,7 @@ CPlant::CPlant(class CPlant const &a2, int a3, int a4, int a5) : IDecoObject(a2,
   this->m_uU5 = 0;
   IEntity::SetFlagBits(EntityFlag_Ready);
   this->m_uStage = 3;
-  this->m_wJobPart = this->m_uStage + (unsigned __int16) g_pGfxManager->GetObjectFirstJob(this->m_nType);
+  this->m_iJobPart = this->m_uStage + (unsigned __int16) g_pGfxManager->GetObjectFirstJob(this->m_nType);
   this->m_uCycleFrames = a2.m_uCycleFrames;
   BB_ASSERT(m_uCycleFrames)
   this->m_cFrame = a2.m_cFrame;
@@ -70,7 +70,7 @@ void CPlant::LogicUpdate(void) {
       if(++this->m_uU5 >= 30
          && (this->m_uU5 = 0,
              ++this->m_uStage,
-             this->m_wJobPart = this->m_uStage
+             this->m_iJobPart = this->m_uStage
                                 + (unsigned __int16) g_pGfxManager->GetObjectFirstJob(this->m_nType),
              this->m_uStage == 3)) {
         IEntity::SetFlagBits(EntityFlag_Ready);
@@ -90,7 +90,7 @@ void CPlant::LogicUpdate(void) {
              || (this->m_uU5 = 0,
                  ++this->m_cFrame,
                  m_cFrame = this->m_cFrame,
-                 m_cFrame >= g_pGfxManager->GetObjectFrameCount(this->m_wJobPart)))) {
+                 m_cFrame >= g_pGfxManager->GetObjectFrameCount(this->m_iJobPart)))) {
         g_cDecoObjMgr.Delete(ID());
       } else {
       LABEL_14:
@@ -116,7 +116,7 @@ struct SGfxObjectInfo *CPlant::GetGfxInfos(void) {
   IAnimatedEntity::SetLastUpdateTick(v2);
   if(v4 && this->m_uStage < 4u)
     this->m_cFrame = (v4 + (unsigned int) this->m_cFrame) % this->m_uCycleFrames;
-  g_pGfxManager->GetObjectGfxInfo(&IEntity::m_sGfxInfo, this->m_wJobPart, this->m_cFrame, 1);
+  g_pGfxManager->GetObjectGfxInfo(&IEntity::m_sGfxInfo, this->m_iJobPart, this->m_cFrame, 1);
   byte_40FE518 = 16;
   byte_40FE51A = IEntity::IsVisible();
   IEntity::m_sGfxInfo.m_uFlags = 0;
@@ -133,8 +133,8 @@ void CPlant::Take(int _iAmount) {
   IEntity::ClearFlagBits(EntityFlag_Ready);
   this->m_uStage += _iAmount;
   this->m_cFrame = 0;
-  this->m_wJobPart = this->m_uStage + (unsigned __int16) g_pGfxManager->GetObjectFirstJob(this->m_nType);
-  this->m_uCycleFrames = g_pGfxManager->GetObjectFrameCount(this->m_wJobPart);
+  this->m_iJobPart = this->m_uStage + (unsigned __int16) g_pGfxManager->GetObjectFirstJob(this->m_nType);
+  this->m_uCycleFrames = g_pGfxManager->GetObjectFrameCount(this->m_iJobPart);
   BB_ASSERT(m_uCycleFrames)
   this->m_uU5 = 0;
   IAnimatedEntity::RegisterForLogicUpdate(31);

@@ -107,24 +107,24 @@ void  CDarkGardenerRole::PostLoadInit(class CSettler * a2) {
 
 
 // address=[0x15673d0]
-// Decompiled from char *__thiscall CDarkGardenerRole::CDarkGardenerRole(char *this, int a2)
+// Decompiled from CDarkGardenerRole *__thiscall CDarkGardenerRole::CDarkGardenerRole(CDarkGardenerRole *this, struct std::istream *a1)
  CDarkGardenerRole::CDarkGardenerRole(std::istream & a2) {
   
-  int v2; // eax
+  struct CEntityTask *v2; // eax
   _DWORD v4[2]; // [esp+4h] [ebp-24h] BYREF
   int v5; // [esp+Ch] [ebp-1Ch] BYREF
   int pExceptionObject; // [esp+10h] [ebp-18h] BYREF
   unsigned int i; // [esp+14h] [ebp-14h]
-  char *v8; // [esp+18h] [ebp-10h]
+  CDarkGardenerRole *v8; // [esp+18h] [ebp-10h]
   int v9; // [esp+24h] [ebp-4h]
 
   v8 = this;
-  ISettlerRole::ISettlerRole(this, a2);
+  ISettlerRole::ISettlerRole((ISettlerRole *)this, a1);
   v9 = 0;
   *(_DWORD *)v8 = &CDarkGardenerRole::_vftable_;
-  std::list<CEntityTask>::list<CEntityTask>(v8 + 44);
+  std::list<CEntityTask>::list<CEntityTask>((char *)v8 + 44);
   LOBYTE(v9) = 1;
-  operator^<unsigned int>(a2, &v5);
+  operator^<unsigned int>(a1, &v5);
   v4[1] = v5;
   if ( v5 != 1 )
   {
@@ -133,19 +133,19 @@ void  CDarkGardenerRole::PostLoadInit(class CSettler * a2) {
     CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
     _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
   }
-  operator^<unsigned int>(a2, v4);
+  operator^<unsigned int>(a1, v4);
   for ( i = 0; i < v4[0]; ++i )
   {
-    v2 = CEntityTask::Load(a2);
+    v2 = CEntityTask::Load(a1);
     std::list<CEntityTask>::push_back(v2);
   }
-  operator^<unsigned char>(a2, v8 + 12);
-  operator^<int>(a2, (int)(v8 + 56));
-  operator^<int>(a2, (int)(v8 + 60));
-  operator^<int>(a2, (int)(v8 + 64));
-  operator^<int>(a2, (int)(v8 + 68));
-  operator^<int>(a2, (int)(v8 + 72));
-  operator^<int>(a2, (int)(v8 + 76));
+  operator^<unsigned char>(a1, (unsigned __int8 *)v8 + 12);
+  operator^<int>(a1, (int *)v8 + 14);
+  operator^<int>(a1, (int *)v8 + 15);
+  operator^<int>(a1, (int *)v8 + 16);
+  operator^<int>(a1, (int *)v8 + 17);
+  operator^<int>(a1, (int *)v8 + 18);
+  operator^<int>(a1, (int *)v8 + 19);
   v9 = -1;
   return v8;
 }

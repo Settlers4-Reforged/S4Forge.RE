@@ -939,7 +939,7 @@ void  CEffects::AddEffectToSquareList(unsigned int _uEffectId) {
            2094,
            "CEffects::AddEffectToSquareList(): Invalid visualize function!") == 1 )
       __debugbreak();
-    CEffect::SetVisualizeFunc(&this->m_cEffects[_uEffectId].m_uVisualizeFunc, VISUALIZE_FUNC_NOP_2);
+    CEffect::SetVisualizeFunc(&this->m_cEffects[_uEffectId], 1);
   }
   if ( this->m_cEffects[_uEffectId].m_uPrevEffect
     && BBSupportDbgReport(2, "Logic\\Effects.cpp", 2099, "rEffect.m_uPrevEffect == 0") == 1 )

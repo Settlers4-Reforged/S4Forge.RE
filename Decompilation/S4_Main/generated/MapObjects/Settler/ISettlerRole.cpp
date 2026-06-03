@@ -6,7 +6,7 @@
 // Decompiled from int __thiscall ISettlerRole::GetTask(ISettlerRole *this)
 int  ISettlerRole::GetTask(void)const {
   
-  return this->task;
+  return this->m_iTask;
 }
 
 
@@ -82,7 +82,7 @@ void  ISettlerRole::SetBuilding(int a2) {
 // Decompiled from void __thiscall ISettlerRole::SetEntity(ISettlerRole *this, WORD a2)
 void  ISettlerRole::SetEntity(int a2) {
   
-  this->entityId = a2;
+  this->m_uEntityId = a2;
 }
 
 
@@ -114,7 +114,7 @@ void  ISettlerRole::UpdateJob(class CSettler * a2) {
 // Decompiled from int __thiscall ISettlerRole::SourcePileId(ISettlerRole *this)
 int  ISettlerRole::SourcePileId(void)const {
   
-  return this->sourcePileId;
+  return this->m_uSourcePileId;
 }
 
 
@@ -124,22 +124,22 @@ int  ISettlerRole::SourcePileId(void)const {
   
   CPersistence::CPersistence(this);
   this->__vftable = (ISettlerRole_vtbl *)&ISettlerRole::_vftable_;
-  this->task = 0;
-  this->settlerWalk = 0;
+  this->m_iTask = 0;
+  this->m_uSettlerWalk = 0;
   this->m_iWalkspeed = 1;
-  this->m_iLoopFrame = 1;
-  this->m_iTick = 0;
+  this->m_uLoopFrame = 1;
+  this->m_uTick = 0;
   this->unk_0A = 1;
   this->unk_0B = 0;
   this->unk_0C = 0;
   this->unk_0E = 0;
   this->unk_10 = 0;
   this->unk_12 = 0;
-  this->sourcePileId = 0;
-  this->destinationPosition = 0;
-  this->startPosition = 0;
+  this->m_uSourcePileId = 0;
+  this->m_iDestinationPosition = 0;
+  this->m_iStartPosition = 0;
   this->m_uHomeEntityId = 0;
-  this->entityId = 0;
+  this->m_uEntityId = 0;
   this->m_fOffsetX = 0.0;
   this->m_fOffsetY = 0.0;
   return this;
@@ -154,12 +154,12 @@ void  ISettlerRole::Go(class CSettler * settler) {
   int v4; // eax
   int moveCosts; // [esp+4h] [ebp-8h]
 
-  this->settlerWalk = CSettler::Walk(settler);
-  if ( (this->settlerWalk & 0x20) != 0 )
+  this->m_uSettlerWalk = CSettler::Walk(settler);
+  if ( (this->m_uSettlerWalk & 0x20) != 0 )
     return this->GetNextJob(settler);
-  if ( (this->settlerWalk & 0x40) != 0 )
+  if ( (this->m_uSettlerWalk & 0x40) != 0 )
     return this->SetFree(settler, -1);
-  if ( (this->settlerWalk & 0xFu) >= 6 )
+  if ( (this->m_uSettlerWalk & 0xFu) >= 6 )
     return IAnimatedEntity::RegisterForLogicUpdate(settler, 1);
   settler->m_iDistance = -1;
   this->m_iWalkspeed = 9;
@@ -259,12 +259,12 @@ void  ISettlerRole::Update(class CSettler * _pSettler) {
   int v18; // [esp+24h] [ebp-8h]
 
   TickCounter = CStateGame::GetTickCounter(g_pGame);
-  this->m_iTick = TickCounter - IAnimatedEntity::LastUpdateTick(_pSettler);
-  if ( this->m_iTick )
+  this->m_uTick = TickCounter - IAnimatedEntity::LastUpdateTick(_pSettler);
+  if ( this->m_uTick )
   {
     v3 = CStateGame::GetTickCounter(g_pGame);
     IAnimatedEntity::SetLastUpdateTick(_pSettler, v3);
-    v18 = this->task - 1;
+    v18 = this->m_iTask - 1;
     switch ( v18 )
     {
       case 0:
@@ -278,15 +278,15 @@ void  ISettlerRole::Update(class CSettler * _pSettler) {
       case 30:
         if ( this->unk_0A )
         {
-          _pSettler->m_iFrame = (this->m_iTick + IAnimatedEntity::Frame(_pSettler)) % this->m_iLoopFrame;
+          _pSettler->m_iFrame = (this->m_uTick + IAnimatedEntity::Frame(_pSettler)) % this->m_uLoopFrame;
         }
         else
         {
-          unk_07 = this->m_iLoopFrame;
+          unk_07 = this->m_uLoopFrame;
           m_cFrame = _pSettler->m_iFrame;
-          v16 = this->m_iTick % unk_07;
+          v16 = this->m_uTick % unk_07;
           if ( m_cFrame < v16 )
-            _pSettler->m_iFrame = (unk_07 + m_cFrame - v16) % this->m_iLoopFrame;
+            _pSettler->m_iFrame = (unk_07 + m_cFrame - v16) % this->m_uLoopFrame;
           else
             _pSettler->m_iFrame = m_cFrame - v16;
         }
@@ -310,34 +310,34 @@ void  ISettlerRole::Update(class CSettler * _pSettler) {
           CLogic::SetWarAction(g_pLogic);
         break;
       case 5:
-        if ( (this->settlerWalk & 8) != 0 )
+        if ( (this->m_uSettlerWalk & 8) != 0 )
         {
           _pSettler->m_iFrame = 0;
         }
         else
         {
-          _pSettler->m_iFrame = (this->m_iTick + _pSettler->m_iFrame) % this->m_iLoopFrame;
+          _pSettler->m_iFrame = (this->m_uTick + _pSettler->m_iFrame) % this->m_uLoopFrame;
           if ( !_pSettler->m_iFrame )
             _pSettler->m_iFrame = 1;
-          IMovingEntity::DecDistance(_pSettler, (this->m_iTick << 8) / (char)this->m_iWalkspeed);
+          IMovingEntity::DecDistance(_pSettler, (this->m_uTick << 8) / (char)this->m_iWalkspeed);
         }
         break;
       case 16:
-        if ( (this->settlerWalk & 8) != 0 )
+        if ( (this->m_uSettlerWalk & 8) != 0 )
         {
           _pSettler->m_iFrame = 0;
         }
         else
         {
-          _pSettler->m_iFrame = (this->m_iTick + _pSettler->m_iFrame) % this->m_iLoopFrame;
+          _pSettler->m_iFrame = (this->m_uTick + _pSettler->m_iFrame) % this->m_uLoopFrame;
           if ( !_pSettler->m_iFrame )
             _pSettler->m_iFrame = 1;
-          if ( this->m_iLoopFrame > 1u )
-            v15 = this->m_iLoopFrame - 1;
+          if ( this->m_uLoopFrame > 1u )
+            v15 = this->m_uLoopFrame - 1;
           else
             v15 = 1;
           v13 = v15;
-          IMovingEntity::DecDistance(_pSettler, (this->m_iTick << 8) / v15);
+          IMovingEntity::DecDistance(_pSettler, (this->m_uTick << 8) / v15);
         }
         break;
       default:
@@ -352,8 +352,8 @@ void  ISettlerRole::Update(class CSettler * _pSettler) {
 // Decompiled from void __thiscall ISettlerRole::NewDestination(ISettlerRole *this, IEntity *a2, DWORD a3, int a4)
 void  ISettlerRole::NewDestination(class CSettler * a2, int a3, int a4) {
   
-  this->startPosition = IEntity::PackedXY(a2);
-  this->destinationPosition = a3;
+  this->m_iStartPosition = IEntity::PackedXY(a2);
+  this->m_iDestinationPosition = a3;
 }
 
 
@@ -564,10 +564,10 @@ bool  ISettlerRole::SetFree(class CSettler * settler, int a3) {
   {
     __debugbreak();
   }
-  if ( this->destinationPosition )
+  if ( this->m_iDestinationPosition )
   {
     settlerId = 32;
-    v6 = CWorldManager::Index(this->destinationPosition);
+    v6 = CWorldManager::Index(this->m_iDestinationPosition);
     CWorldManager::ClearFlagBits(v6, 32);
   }
   v7 = IEntity::WorldIdx();
@@ -620,7 +620,7 @@ void  ISettlerRole::SetObserverTarget(enum T_OBSERVER_TARGET observerTargetType,
   {
     if ( observerTargetType == 2 )
     {
-      this->sourcePileId = target;
+      this->m_uSourcePileId = target;
     }
     else if ( BBSupportDbgReport(
                 1,
@@ -645,54 +645,52 @@ int  ISettlerRole::GetObserverTarget(enum T_OBSERVER_TARGET a2) {
   if ( !a2 )
     return this->m_uHomeEntityId;
   if ( a2 == 2 )
-    return this->sourcePileId;
+    return this->m_uSourcePileId;
   return 0;
 }
 
 
 // address=[0x158a570]
-// Decompiled from char *__thiscall ISettlerRole::ISettlerRole(char *this, int a2)
+// Decompiled from ISettlerRole *__thiscall ISettlerRole::ISettlerRole(ISettlerRole *this, struct std::istream *a1)
  ISettlerRole::ISettlerRole(std::istream & a2) {
   
   int pExceptionObject; // [esp+0h] [ebp-Ch] BYREF
   unsigned int v4; // [esp+4h] [ebp-8h] BYREF
-  char *v5; // [esp+8h] [ebp-4h]
 
-  v5 = this;
   CPersistence::CPersistence(this);
-  *(_DWORD *)v5 = &ISettlerRole::_vftable_;
-  operator^<unsigned int>(a2, &v4);
+  this->__vftable = (ISettlerRole_vtbl *)&ISettlerRole::_vftable_;
+  operator^<unsigned int>(a1, &v4);
   if ( v4 )
   {
-    operator^<signed char>(a2, v5 + 4);
-    operator^<unsigned char>(a2, v5 + 5);
-    operator^<signed char>(a2, v5 + 6);
-    operator^<unsigned char>(a2, v5 + 7);
-    operator^<unsigned short>(a2, v5 + 8);
-    operator^<unsigned char>(a2, v5 + 10);
-    operator^<unsigned char>(a2, v5 + 11);
-    operator^<short>(a2, v5 + 14);
-    operator^<short>(a2, v5 + 16);
-    operator^<unsigned short>(a2, v5 + 18);
-    operator^<int>(a2, (int)(v5 + 24));
-    operator^<int>(a2, (int)(v5 + 28));
-    operator^<unsigned short>(a2, v5 + 32);
-    operator^<unsigned short>(a2, v5 + 34);
-    operator^<float>(a2, v5 + 36);
-    operator^<float>(a2, v5 + 40);
+    operator^<signed char>(a1, &this->m_iTask);
+    operator^<unsigned char>(a1, &this->m_uSettlerWalk);
+    operator^<signed char>(a1, &this->m_iWalkspeed);
+    operator^<unsigned char>(a1, &this->m_uLoopFrame);
+    operator^<unsigned short>(a1, &this->m_uTick);
+    operator^<unsigned char>(a1, &this->unk_0A);
+    operator^<unsigned char>(a1, &this->unk_0B);
+    operator^<short>(a1, &this->unk_0E);
+    operator^<short>(a1, &this->unk_10);
+    operator^<unsigned short>(a1, &this->unk_12);
+    operator^<int>(a1, &this->m_iDestinationPosition);
+    operator^<int>(a1, &this->m_iStartPosition);
+    operator^<unsigned short>(a1, &this->m_uHomeEntityId);
+    operator^<unsigned short>(a1, &this->m_uEntityId);
+    operator^<float>(a1, &this->m_fOffsetX);
+    operator^<float>(a1, &this->m_fOffsetY);
   }
   if ( v4 >= 2 )
   {
-    operator^<unsigned short>(a2, v5 + 20);
-    operator^<unsigned char>(a2, v5 + 12);
+    operator^<unsigned short>(a1, &this->m_uSourcePileId);
+    operator^<unsigned char>(a1, &this->unk_0C);
   }
   if ( v4 && v4 < 3 )
-    return v5;
+    return this;
   BBSupportTracePrintF(3, "load output defect Unknown fileFormatVersion for ISettlerRole");
   pExceptionObject = 0;
   CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
   _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
-  return v5;
+  return this;
 }
 
 

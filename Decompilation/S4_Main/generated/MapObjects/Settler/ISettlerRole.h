@@ -119,11 +119,11 @@ protected:
 
     // Type information members
 public:
-    CHAR task;
-    BYTE settlerWalk;
+    CHAR m_iTask;
+    BYTE m_uSettlerWalk;
     char m_iWalkspeed;
-    BYTE m_iLoopFrame;
-    WORD m_iTick;
+    BYTE m_uLoopFrame;
+    WORD m_uTick;
     BYTE unk_0A;
     BYTE unk_0B;
     BYTE unk_0C;
@@ -131,12 +131,12 @@ public:
     WORD unk_0E;
     WORD unk_10;
     WORD unk_12;
-    WORD sourcePileId;
+    WORD m_uSourcePileId;
     WORD pad_16;
-    DWORD destinationPosition;
-    DWORD startPosition;
+    int m_iDestinationPosition;
+    int m_iStartPosition;
     WORD m_uHomeEntityId;
-    WORD entityId;
+    WORD m_uEntityId;
     float m_fOffsetX;
     float m_fOffsetY;
     DWORD unk_2c;

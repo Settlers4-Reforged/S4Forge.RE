@@ -157,7 +157,7 @@ IAnimatedEntity::~IAnimatedEntity(void) = default;
 IAnimatedEntity::IAnimatedEntity(int id) : IEntity(id), m_iEventQueue() {
   this->m_cFrame = 0;
   this->m_cAttackerPlayerId = 0;
-  this->m_wJobPart = 0;
+  this->m_iJobPart = 0;
   this->m_wPrevEntity = 0;
   this->m_wNextEntity = 0;
   this->m_uLastUpdateTick = 0;
@@ -182,7 +182,7 @@ unsigned int IAnimatedEntity::LastUpdateTick(void) const {
 // address=[0x1548370]
 // Decompiled from int __thiscall IAnimatedEntity::JobPart(IAnimatedEntity *this)
 int IAnimatedEntity::JobPart(void) const {
-  return this->m_wJobPart;
+  return this->m_iJobPart;
 }
 
 
@@ -203,7 +203,7 @@ bool IAnimatedEntity::EventQueueEmpty(void) const {
 // address=[0x1567140]
 // Decompiled from void __thiscall IAnimatedEntity::SetJobPart(IAnimatedEntity *this, WORD a2)
 void IAnimatedEntity::SetJobPart(int a2) {
-  this->m_wJobPart = a2;
+  this->m_iJobPart = a2;
 }
 
 
@@ -218,7 +218,7 @@ IAnimatedEntity::IAnimatedEntity(std::istream &_rStream) : IEntity(_rStream), m_
   }
   _rStream >> this->m_cFrame;
   _rStream >> this->m_cAttackerPlayerId;
-  _rStream >> this->m_wJobPart;
+  _rStream >> this->m_iJobPart;
   _rStream >> this->m_wPrevEntity;
   _rStream >> this->m_wNextEntity;
   _rStream >> this->m_uLastUpdateTick;
@@ -229,7 +229,7 @@ IAnimatedEntity::IAnimatedEntity(std::istream &_rStream) : IEntity(_rStream), m_
   // Ensure loading compatibility from the binary
   static_assert(sizeof(m_cFrame) == sizeof(unsigned char));
   static_assert(sizeof(m_cAttackerPlayerId) == sizeof(unsigned char));
-  static_assert(sizeof(m_wJobPart) == sizeof(unsigned short));
+  static_assert(sizeof(m_iJobPart) == sizeof(unsigned short));
   static_assert(sizeof(m_wPrevEntity) == sizeof(unsigned short));
   static_assert(sizeof(m_wNextEntity) == sizeof(unsigned short));
   static_assert(sizeof(m_uLastUpdateTick) == sizeof(unsigned int));
@@ -251,7 +251,7 @@ void IAnimatedEntity::Store(std::ostream &_rStream) {
   _rStream << iFileVersion;
   _rStream << this->m_cFrame;
   _rStream << this->m_cAttackerPlayerId;
-  _rStream << this->m_wJobPart;
+  _rStream << this->m_iJobPart;
   _rStream << this->m_wPrevEntity;
   _rStream << this->m_wNextEntity;
   _rStream << this->m_uLastUpdateTick;
@@ -262,7 +262,7 @@ void IAnimatedEntity::Store(std::ostream &_rStream) {
   static_assert(sizeof(iFileVersion) == sizeof(unsigned int));
   static_assert(sizeof(m_cFrame) == sizeof(unsigned char));
   static_assert(sizeof(m_cAttackerPlayerId) == sizeof(unsigned char));
-  static_assert(sizeof(m_wJobPart) == sizeof(unsigned short));
+  static_assert(sizeof(m_iJobPart) == sizeof(unsigned short));
   static_assert(sizeof(m_wPrevEntity) == sizeof(unsigned short));
   static_assert(sizeof(m_wNextEntity) == sizeof(unsigned short));
   static_assert(sizeof(m_uLastUpdateTick) == sizeof(unsigned int));

@@ -1,11 +1,11 @@
 #ifndef IANIMATEDENTITY_H
 #define IANIMATEDENTITY_H
 
-#include "defines.h"
 #include "IEntity.h"
+#include "defines.h"
 
 class IAnimatedEntity : public IEntity {
-public:
+  public:
     // address=[0x1307150]
     int Next(void) const;
 
@@ -66,7 +66,7 @@ public:
     // address=[0x1567140]
     void SetJobPart(int a2);
 
-protected:
+  protected:
     // address=[0x14e3460]
     IAnimatedEntity(std::istream &_rStream);
 
@@ -83,16 +83,15 @@ protected:
     int SetLastLogicUpdate(int a2);
 
     // Type information members
-public:
-    BYTE                      m_cFrame;
-    BYTE                      m_cAttackerPlayerId;
-    WORD                      m_wJobPart;
-    WORD                      m_wPrevEntity;
-    WORD                      m_wNextEntity;
-    DWORD                     m_uLastUpdateTick;
-    int                       m_uLastLogicUpdate;
+  public:
+    BYTE m_cFrame;
+    BYTE m_cAttackerPlayerId;
+    WORD m_iJobPart;
+    WORD m_wPrevEntity;
+    WORD m_wNextEntity;
+    DWORD m_uLastUpdateTick;
+    int m_uLastLogicUpdate;
     std::vector<CEntityEvent> m_iEventQueue;
 };
-
 
 #endif // IANIMATEDENTITY_H
