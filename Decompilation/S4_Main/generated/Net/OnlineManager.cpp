@@ -1,3 +1,4 @@
+#if FALSE
 #include "OnlineManager.h"
 
 // Definitions for class OnlineManager
@@ -1138,3 +1139,4 @@ void  OnlineManager::UpdatePlayerData(int a2, bool a3, int a4, int a5, int a6, i
 // address=[0x462b9a0]
 // [Decompilation failed for static class OnlineManager * OnlineManager::m_instance]
 
+#endif // Already implemented

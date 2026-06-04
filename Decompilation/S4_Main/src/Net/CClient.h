@@ -33,11 +33,10 @@ class CClient {
     unsigned int GetPeerId(void);
 
     // address=[0x15c4df0]
-    void SetLastAckTime(unsigned int a2);
+    void SetLastAckTime(unsigned int _uAckTime);
 
     // Type information members
   public:
-    CClient_vtbl *vftable;
     _BYTE m_bReady;
     int m_uIp;
     _DWORD m_uPeerId;

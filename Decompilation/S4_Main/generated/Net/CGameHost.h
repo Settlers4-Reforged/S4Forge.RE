@@ -36,7 +36,7 @@ public:
     virtual  ~CGameHost(void);
 
     // address=[0x15b60d0]
-    bool  PushMsg(class CNet_Event & a2);
+    bool  PushMsg(class CNet_Event & _rMsg);
 
     // address=[0x15b6190]
     void  PushAsyncMsg(class CNet_Event & Src, unsigned char a3);
@@ -315,15 +315,17 @@ public:
     BYTE d;
     CFsm * m_pFSM;
     CClientList * m_pClientList;
-    _DWORD m_pMsgStacks;
+    CMsgStacks * m_pMsgStacks;
     _DWORD dword18;
-    _BYTE[8] gap1C;
+    _DWORD m_iSearchForHostStopped;
+    _BYTE[4] gap_20;
     _DWORD dword24;
-    _DWORD dword28;
-    _DWORD dword2C;
-    _DWORD dword30;
-    _DWORD dword34;
-    _BYTE[8] gap38;
+    _DWORD m_iLastLoginTick;
+    _DWORD m_iLoginAttempts;
+    _DWORD m_iStartTickSignalTick;
+    _DWORD m_iInitGameStartTick;
+    _DWORD m_iNotReadyTimeoutTick;
+    _BYTE[4] gap_3C;
     _DWORD dword40;
     BYTE * m_pMapDownloadData;
     BYTE * m_pMapDownloadBlocks;
@@ -338,14 +340,19 @@ public:
     int m_iMapUpload;
     _DWORD dwordBC;
     _DWORD dwordC0;
-    _DWORD m_pSimpleNet;
-    _DWORD[8] field_C8;
-    _DWORD[8] field_E8;
-    BYTE field_108;
+    CSimpleNet * m_pSimpleNet;
+    int[8] m_iSyncA;
+    int[8] m_iSyncB;
+    BYTE m_bHasError;
     _BYTE[3] gap109;
     std::list m_vGameInfos;
     std::list m_vNetEvents;
-    _BYTE[971] field_11C;
+    WORD field_124;
+    _DWORD field_126;
+    BYTE field_12A;
+    DWORD field_12B;
+    CNet_Event m_cNetEvent;
+    _BYTE[928] gap_14F;
 
 };
 

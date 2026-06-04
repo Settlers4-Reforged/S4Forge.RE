@@ -329,35 +329,31 @@ class CNet_Event  CMsgStacks::GetMsgToSend(void a2) {
 
 
 // address=[0x15cbd50]
-// Decompiled from _DWORD *__thiscall CMsgStacks::SetNumberOfExpectedMsgs(_DWORD *this, int a2, char a3, unsigned __int8 a4)
-void  CMsgStacks::SetNumberOfExpectedMsgs(unsigned int a2, unsigned char a3, unsigned char a4) {
+// Decompiled from void __thiscall CMsgStacks::SetNumberOfExpectedMsgs(CMsgStacks *this, int _iTick, char _iPlayerID, unsigned __int8 a4)
+void  CMsgStacks::SetNumberOfExpectedMsgs(unsigned int _iTick, unsigned char _iPlayerID, unsigned char a4) {
   
-  _DWORD *result; // eax
-  int v5; // [esp+8h] [ebp-8h]
+  int v4; // [esp+8h] [ebp-8h]
 
-  if ( (unsigned __int8)CMsgStacks::IsSizeAlreadySet(a2, a3)
-    && BBSupportDbgReport(2, (int)"Net\\MsgStacks.cpp", 254, (int)"!IsSizeAlreadySet( _iTick, _iPlayerID )") == 1 )
+  if ( (unsigned __int8)CMsgStacks::IsSizeAlreadySet(_iTick, _iPlayerID)
+    && BBSupportDbgReport(2, "Net\\MsgStacks.cpp", 254, "!IsSizeAlreadySet( _iTick, _iPlayerID )") == 1 )
   {
     __debugbreak();
   }
-  v5 = a2 - CMsgStacks::GetValidTick(this);
-  result = this;
-  if ( v5 >= this[3] )
+  v4 = _iTick - CMsgStacks::GetValidTick(this);
+  if ( v4 >= *((_DWORD *)this + 3)
+    && BBSupportDbgReportF(
+         2,
+         "Net\\MsgStacks.cpp",
+         259,
+         "MsgStacks:Future Netmsg got: Tick %d, Player %d size %d!",
+         _iTick,
+         (unsigned __int8)_iPlayerID,
+         a4) == 1 )
   {
-    result = (_DWORD *)BBSupportDbgReportF(
-                         2,
-                         "Net\\MsgStacks.cpp",
-                         259,
-                         "MsgStacks:Future Netmsg got: Tick %d, Player %d size %d!",
-                         a2,
-                         (unsigned __int8)a3,
-                         a4);
-    if ( result == (_DWORD *)1 )
-      __debugbreak();
+    __debugbreak();
   }
-  if ( v5 >= 1 )
-    return (_DWORD *)CMsgStack::SetExpectedSize(a4);
-  return result;
+  if ( v4 >= 1 )
+    CMsgStack::SetExpectedSize(a4);
 }
 
 

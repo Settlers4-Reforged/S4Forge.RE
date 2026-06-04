@@ -3,6 +3,7 @@
 
 #include "defines.h"
 
+class CClient;
 class CClientList {
   public:
     // address=[0x15b1d30]
@@ -48,12 +49,11 @@ class CClientList {
     int GetSize(void);
 
     // address=[0x15c4d90]
-    void SetClientLastAck(unsigned int _uPlayerId, unsigned int a3);
+    void SetClientLastAck(unsigned int _uPlayerId, unsigned int _uAckTime);
 
     // Type information members
   public:
-    CClientList_vtbl *vftable;
-    std::vector m_vClients;
+    std::vector<CClient> m_vClients;
 };
 
 #endif // CCLIENTLIST_H

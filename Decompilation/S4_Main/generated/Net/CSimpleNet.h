@@ -4,97 +4,97 @@
 #include "defines.h"
 
 class CSimpleNet : public ISimpleNet {
-  public:
+public:
     // address=[0x15ccbf0]
-    CSimpleNet(void);
+     CSimpleNet(void);
 
     // address=[0x15ccd30]
-    ~CSimpleNet(void);
+     ~CSimpleNet(void);
 
     // address=[0x15cce40]
-    virtual std::string GetCurrentLocalIPString(void a2);
+    virtual std::string  GetCurrentLocalIPString(void a2);
 
     // address=[0x15cce80]
-    virtual bool Run(void);
+    virtual bool  Run(void);
 
     // address=[0x15ccf90]
-    virtual bool IsMessage(int a2);
+    virtual bool  IsMessage(int a2);
 
     // address=[0x15ccfd0]
-    virtual bool PopMessage(void *&_rMessage, unsigned int &_riLength, unsigned int &_riPeerId);
+    virtual bool  PopMessage(void * & _rMessage, unsigned int & a3, unsigned int & _iPeerId);
 
     // address=[0x15cd190]
-    virtual bool PushMessage(unsigned int _iPeerId, unsigned int _iId, unsigned short _iReceiver, void *_pData, unsigned int _iDataLength, bool _bTryResend, bool a8);
+    virtual bool  PushMessage(unsigned int _iPeerId, unsigned int _iId, unsigned short _iReceiver, void * _pData, unsigned int _iDataLength, bool _bTryResend, bool a8);
 
     // address=[0x15cd490]
-    virtual char *GetIPString(unsigned int a2);
+    virtual char *  GetIPString(unsigned int a2);
 
     // address=[0x15cd4d0]
-    virtual void RemoveMsgsForIP(unsigned int _iAddress);
+    virtual void  RemoveMsgsForIP(unsigned int _iAddress);
 
     // address=[0x15cd6a0]
-    virtual bool IsLocalIP(unsigned int _iAddress);
+    virtual bool  IsLocalIP(unsigned int _iAddress);
 
     // address=[0x15d1290]
-    virtual void Delete(void);
+    virtual void  Delete(void);
 
     // address=[0x15d12e0]
-    virtual unsigned int GetBytesPerSecond(void);
+    virtual unsigned int  GetBytesPerSecond(void);
 
     // address=[0x15d1300]
-    virtual long GetCurrentLocalIPLong(void);
+    virtual long  GetCurrentLocalIPLong(void);
 
     // address=[0x15d1320]
-    virtual unsigned int GetIPLong(std::string a1);
+    virtual unsigned int  GetIPLong(std::string a1);
 
     // address=[0x15d13a0]
-    virtual unsigned int GetLastDataLength(void);
+    virtual unsigned int  GetLastDataLength(void);
 
     // address=[0x15d13c0]
-    virtual std::string GetLastErrorString(void a2);
+    virtual std::string  GetLastErrorString(void a2);
 
     // address=[0x15d1400]
-    virtual long GetLastSenderIP(void);
+    virtual long  GetLastSenderIP(void);
 
     // address=[0x15d1420]
-    virtual unsigned int GetLastSenderPeerId(void);
+    virtual unsigned int  GetLastSenderPeerId(void);
 
     // address=[0x15d1440]
-    virtual void RemoveAllResendMsgs(void);
+    virtual void  RemoveAllResendMsgs(void);
 
     // address=[0x15d1490]
-    virtual void SetAdditionalLocalAddress(unsigned int a2);
+    virtual void  SetAdditionalLocalAddress(unsigned int a2);
 
     // address=[0x15d1520]
-    virtual bool WasError(void);
+    virtual bool  WasError(void);
 
-  protected:
+protected:
     // address=[0x15cd7d0]
-    virtual bool SendMessageA(unsigned int _iPeerId, struct SMessage &_rMessage);
+    virtual bool  SendMessageA(unsigned int _iPeerId, struct SMessage & _rMessage);
 
     // address=[0x15cdc40]
-    virtual bool RealSendMessage(unsigned int a2, struct SMessage &a3);
+    virtual bool  RealSendMessage(unsigned int a2, struct SMessage & a3);
 
     // address=[0x15cdd50]
-    virtual bool RemoveMsgFromResendList(unsigned short a2);
+    virtual bool  RemoveMsgFromResendList(unsigned short a2);
 
     // address=[0x15cdea0]
-    virtual bool LaunchWinsock(void);
+    virtual bool  LaunchWinsock(void);
 
     // address=[0x15ce080]
-    virtual bool EnumerateLocalIP(void);
+    virtual bool  EnumerateLocalIP(void);
 
     // address=[0x15ce3c0]
-    virtual bool ConnectSocket(void);
+    virtual bool  ConnectSocket(void);
 
     // address=[0x15d1220]
-    virtual void ClearErrorString(void);
+    virtual void  ClearErrorString(void);
 
     // address=[0x15d14b0]
-    virtual void SetErrorString(char const *Str, bool a3);
+    virtual void  SetErrorString(char const * Str, bool a3);
 
     // Type information members
-  public:
+public:
     std::list m_vLocalAddresses;
     _DWORD m_iReceiverSocketAddress;
     char[160] m_sCurrentLocalIPString;
@@ -109,7 +109,7 @@ class CSimpleNet : public ISimpleNet {
     DWORD[32] m_pReceiverSockets;
     _DWORD m_pSenderSocket;
     sockaddr_in m_sReceiverSocketConfig;
-    BYTE[16] field_184;
+    sockaddr_in m_sSenderSocketConfig;
     int m_iLastSenderPeerId;
     _BYTE[4] gap_198;
     _DWORD m_iSentBytes;
@@ -117,12 +117,13 @@ class CSimpleNet : public ISimpleNet {
     _DWORD m_iLastTraceRun;
     _DWORD m_iCompressedBytesPerSecond;
     _DWORD m_iLastDataLength;
-    _BYTE[128] m_sErrorFormatBuffer;
-    _BYTE[896] gap_230;
+    _BYTE[1024] m_sErrorFormatBuffer;
     BYTE[1024] m_vCompressedMessageBuffer;
-    CSimpleNet::SMessageBuffer m_vRawMessageBuffer;
-    LZHLCompressor *m_pCompressor;
-    LZHLDecompressor *m_pDecompressor;
+    SMessageBuffer m_vRawMessageBuffer;
+    LZHLCompressor * m_pCompressor;
+    LZHLDecompressor * m_pDecompressor;
+
 };
+
 
 #endif // CSIMPLENET_H
