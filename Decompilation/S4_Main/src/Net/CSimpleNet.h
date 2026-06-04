@@ -130,13 +130,13 @@ class CSimpleNet : public ISimpleNet {
     WORD m_iMessageCounter;
     _BYTE gap_C6[6];
     bool m_bHasError;
-    _BYTE gap_CD[3];
+
     std::string m_sError;
     int m_iNumberReceiverSockets;
     DWORD m_pReceiverSockets[32];
     _DWORD m_pSenderSocket;
     sockaddr_in m_sReceiverSocketConfig;
-    BYTE field_184[16];
+    sockaddr_in m_sSenderSocketConfig;
     int m_iLastSenderPeerId;
     _BYTE gap_198[4];
     _DWORD m_iSentBytes;
@@ -144,8 +144,7 @@ class CSimpleNet : public ISimpleNet {
     _DWORD m_iLastTraceRun;
     _DWORD m_iCompressedBytesPerSecond;
     _DWORD m_iLastDataLength;
-    char m_sErrorFormatBuffer[128];
-    _BYTE gap_230[896];
+    char m_sErrorFormatBuffer[1024];
     BYTE m_vCompressedMessageBuffer[1024];
     SMessageBuffer m_vRawMessageBuffer;
     LZHLCompressor *m_pCompressor;

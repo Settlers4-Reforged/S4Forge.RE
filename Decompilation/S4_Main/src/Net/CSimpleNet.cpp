@@ -16,7 +16,7 @@ CSimpleNet::CSimpleNet(void) : ISimpleNet(), m_vLocalAddresses(), m_vResendMessa
     this->m_iSentCompressedBytes = 0;
     this->m_iLastDataLength = 0;
     this->m_iCompressedBytesPerSecond = 0;
-    memset(this->field_184, 0, sizeof(this->field_184));
+    memset(&this->m_sSenderSocketConfig, 0, sizeof(this->m_sSenderSocketConfig));
     this->m_iAdditionalLocalAddress = 0;
     this->m_iLastSenderPeerId = -1;
     CSimpleNet::ClearErrorString();
@@ -50,13 +50,6 @@ std::string CSimpleNet::GetCurrentLocalIPString(void) { // TODO: probably best a
 // address=[0x15cce80]
 // Decompiled from char __thiscall CSimpleNet::Run(CSimpleNet *this)
 bool CSimpleNet::Run(void) {
-
-    // xmm0_4
-    // xmm0_4
-    // [esp+10h] [ebp-18h]
-    // [esp+14h] [ebp-14h]
-    // [esp+20h] [ebp-8h]
-
     DWORD Time = timeGetTime();
     if(this->m_iLastTraceRun + 20000 >= Time)
         return 1;
@@ -85,10 +78,6 @@ bool CSimpleNet::IsMessage(int a2) {
 // address=[0x15ccfd0]
 // Decompiled from char __thiscall CSimpleNet::PopMessage(CSimpleNet *this, void **_rMessage, unsigned int *a3, unsigned int *_iPeerId)
 bool CSimpleNet::PopMessage(void *&_rMessage, unsigned int &_riLength, unsigned int &_riPeerId) {
-
-    // eax
-    // eax
-    // [esp-Ch] [ebp-1Ch]
     size_t v8;                    // [esp+0h] [ebp-10h] BYREF
     unsigned int iCompressedSize; // [esp+4h] [ebp-Ch] BYREF
     int v10;                      // [esp+8h] [ebp-8h] BYREF
@@ -136,8 +125,6 @@ SMessage sMessage;
 // address=[0x15cd190]
 // Decompiled from int __thiscall CSimpleNet::PushMessage(  CSimpleNet *this,  uint _iPeerId,  uint _iId,  u_short _iReceiver,  void *_pData,  size_t _iDataLength,  char _bTryResend,  char a8)
 bool CSimpleNet::PushMessage(unsigned int _iPeerId, unsigned int _iId, unsigned short _iReceiver, void *_pData, unsigned int _iDataLength, bool _bTryResend, bool a8) {
-
-    // [esp+4h] [ebp-434h]
     uint8_t sz[1056]; // [esp+14h] [ebp-424h] BYREF
 
     sMessage.m_iTime = timeGetTime();
@@ -210,17 +197,6 @@ void CSimpleNet::RemoveMsgsForIP(unsigned int _iAddress) {
 // address=[0x15cd6a0]
 // Decompiled from char __thiscall CSimpleNet::IsLocalIP(CSimpleNet *this, unsigned int _iAddress)
 bool CSimpleNet::IsLocalIP(unsigned int _iAddress) {
-
-    _BYTE v3[12];      // [esp+4h] [ebp-48h] BYREF
-    _BYTE v4[12];      // [esp+10h] [ebp-3Ch] BYREF
-    _BYTE v5[12];      // [esp+1Ch] [ebp-30h] BYREF
-    SLocalAddress *v6; // [esp+28h] [ebp-24h]
-                       // [esp+2Ch] [ebp-20h]
-                       // [esp+30h] [ebp-1Ch]
-                       // [esp+3Eh] [ebp-Eh]
-                       // [esp+3Fh] [ebp-Dh]
-                       // [esp+48h] [ebp-4h]
-
     if(this->m_vLocalAddresses.empty())
         return this->m_iAdditionalLocalAddress && _iAddress == this->m_iAdditionalLocalAddress;
 
@@ -271,8 +247,7 @@ std::string CSimpleNet::GetLastErrorString(void) {
 // address=[0x15d1400]
 // Decompiled from int __thiscall CSimpleNet::GetLastSenderIP(CSimpleNet *this)
 long CSimpleNet::GetLastSenderIP(void) {
-
-    return *(_DWORD *)&this->field_184[4]; // TODO
+    return this->m_sSenderSocketConfig.sin_addr.S_un.S_addr;
 }
 
 // address=[0x15d1420]
@@ -353,9 +328,9 @@ bool CSimpleNet::RemoveMsgFromResendList(unsigned short a2) {
         if((pIt->m_sMessage.m_iHeader >> 2 & 0x3FF) == a2) {
             this->m_vResendMessages.erase(pIt);
             return true;
-        } else {
-            ++pIt;
         }
+        
+        ++pIt;
     }
 
     return false;
