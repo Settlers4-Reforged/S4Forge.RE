@@ -1,15 +1,7 @@
-#if FALSE
 #include "ISimpleNet.h"
 
 // Definitions for class ISimpleNet
 
 // address=[0x15d0400]
 // Decompiled from ISimpleNet *__thiscall ISimpleNet::ISimpleNet(ISimpleNet *this)
- ISimpleNet::ISimpleNet(void) {
-  
-  this->__vftable = (ISimpleNet_vtbl *)ISimpleNet::_vftable_;
-  return this;
-}
-
-
-#endif // Already implemented
+ISimpleNet::ISimpleNet(void) = default;

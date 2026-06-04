@@ -807,28 +807,28 @@ void  OnlineManager::GetMessageCount(unsigned long & a2) {
 
 
 // address=[0x1617200]
-// Decompiled from char __thiscall OnlineManager::Receive(char *this, void *a2, size_t *a3, _DWORD *a4)
+// Decompiled from char __thiscall OnlineManager::Receive(OnlineManager *this, char *a2, void *a3, size_t *a4, _DWORD *a5)
 bool  OnlineManager::Receive(void * a2, int & a3, unsigned int & a4) {
   
-  int v5; // [esp+0h] [ebp-2Ch]
+  int v6; // [esp+0h] [ebp-2Ch]
   const unsigned __int8 *Src; // [esp+Ch] [ebp-20h]
-  storm::DataBuffer *v7; // [esp+14h] [ebp-18h]
+  size_t *v8; // [esp+14h] [ebp-18h]
 
-  std::unique_lock<std::mutex>::unique_lock<std::mutex>(this + 32);
-  if ( std::queue<OnlineManager::GameMessage>::size(this + 12) )
+  std::unique_lock<std::mutex>::unique_lock<std::mutex>((char *)this + 32);
+  if ( std::queue<OnlineManager::GameMessage>::size((char *)this + 12) )
   {
-    v7 = (storm::DataBuffer *)std::queue<OnlineManager::GameMessage>::front(this + 12);
-    Src = storm::DataBuffer::Get(v7);
-    *a3 = storm::DataBuffer::GetBufferSizeInByte(v7);
-    *a4 = *((_DWORD *)v7 + 8);
-    memcpy(a2, Src, *a3);
-    std::queue<OnlineManager::GameMessage>::pop(this + 12);
-    std::unique_lock<std::mutex>::~unique_lock<std::mutex>(v5);
+    v8 = (size_t *)std::queue<OnlineManager::GameMessage>::front((char *)this + 12);
+    Src = storm::DataBuffer::Get((storm::DataBuffer *)v8);
+    *(_DWORD *)a3 = storm::DataBuffer::GetBufferSizeInByte((storm::DataBuffer *)v8);
+    *a4 = v8[8];
+    memcpy(a2, Src, *(_DWORD *)a3);
+    std::queue<OnlineManager::GameMessage>::pop((char *)this + 12);
+    std::unique_lock<std::mutex>::~unique_lock<std::mutex>(v6);
     return 1;
   }
   else
   {
-    std::unique_lock<std::mutex>::~unique_lock<std::mutex>(v5);
+    std::unique_lock<std::mutex>::~unique_lock<std::mutex>(v6);
     return 0;
   }
 }

@@ -3,6 +3,33 @@
 
 #include "defines.h"
 
+#include "ISimpleNet.h"
+
+class LZHLDecompressor;
+class LZHLCompressor;
+
+struct SLocalAddress {
+    IN_ADDR m_iAddress;
+    char m_sIp[154];
+    _BYTE gap9E[2];
+    bool m_bU;
+};
+
+struct SMessageBuffer {
+    unsigned int m_iHeader;
+    uint8_t m_cDataBuffer[2048];
+};
+
+struct [[gnu::packed]] SMessage {
+    int m_iTime;
+    int m_iU;
+    int m_iId;
+    __int16 m_iReceiverId;
+    SMessageBuffer m_sMessage;
+};
+
+static_assert(sizeof(SMessage) == 0x812, "Size of SMessage is not correct");
+
 class CSimpleNet : public ISimpleNet {
   public:
     // address=[0x15ccbf0]
@@ -12,7 +39,7 @@ class CSimpleNet : public ISimpleNet {
     ~CSimpleNet(void);
 
     // address=[0x15cce40]
-    virtual std::string GetCurrentLocalIPString(void a2);
+    virtual std::string GetCurrentLocalIPString(void);
 
     // address=[0x15cce80]
     virtual bool Run(void);
@@ -51,7 +78,7 @@ class CSimpleNet : public ISimpleNet {
     virtual unsigned int GetLastDataLength(void);
 
     // address=[0x15d13c0]
-    virtual std::string GetLastErrorString(void a2);
+    virtual std::string GetLastErrorString(void);
 
     // address=[0x15d1400]
     virtual long GetLastSenderIP(void);
@@ -95,32 +122,32 @@ class CSimpleNet : public ISimpleNet {
 
     // Type information members
   public:
-    std::list m_vLocalAddresses;
-    _DWORD m_iReceiverSocketAddress;
-    char[160] m_sCurrentLocalIPString;
+    std::list<SLocalAddress> m_vLocalAddresses;
+    long m_iReceiverSocketAddress;
+    char m_sCurrentLocalIPString[160];
     _DWORD m_iAdditionalLocalAddress;
-    std::list m_vResendMessages;
+    std::list<SMessage> m_vResendMessages;
     WORD m_iMessageCounter;
-    _BYTE[6] gap_C6;
+    _BYTE gap_C6[6];
     bool m_bHasError;
-    _BYTE[3] gap_CD;
+    _BYTE gap_CD[3];
     std::string m_sError;
     int m_iNumberReceiverSockets;
-    DWORD[32] m_pReceiverSockets;
+    DWORD m_pReceiverSockets[32];
     _DWORD m_pSenderSocket;
     sockaddr_in m_sReceiverSocketConfig;
-    BYTE[16] field_184;
+    BYTE field_184[16];
     int m_iLastSenderPeerId;
-    _BYTE[4] gap_198;
+    _BYTE gap_198[4];
     _DWORD m_iSentBytes;
     _DWORD m_iSentCompressedBytes;
     _DWORD m_iLastTraceRun;
     _DWORD m_iCompressedBytesPerSecond;
     _DWORD m_iLastDataLength;
-    _BYTE[128] m_sErrorFormatBuffer;
-    _BYTE[896] gap_230;
-    BYTE[1024] m_vCompressedMessageBuffer;
-    CSimpleNet::SMessageBuffer m_vRawMessageBuffer;
+    char m_sErrorFormatBuffer[128];
+    _BYTE gap_230[896];
+    BYTE m_vCompressedMessageBuffer[1024];
+    SMessageBuffer m_vRawMessageBuffer;
     LZHLCompressor *m_pCompressor;
     LZHLDecompressor *m_pDecompressor;
 };

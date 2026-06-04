@@ -38293,7 +38293,7 @@ double __cdecl pow<int,int>(int a1, int a2) {
 
 
 // address=[0x15cc670]
-// Decompiled from int CreateSimpleNet()
+// Decompiled from CSimpleNet *CreateSimpleNet()
 class ISimpleNet * __cdecl CreateSimpleNet(void) {
   
   std::bad_function_call *v2; // [esp+Ch] [ebp-10h]
@@ -38311,7 +38311,7 @@ class ISimpleNet * __cdecl CreateSimpleNet(void) {
     return 0;
   v2 = (std::bad_function_call *)operator new(0x11BCu);
   if ( v2 )
-    return CSimpleNet::CSimpleNet(v2);
+    return CSimpleNet::CSimpleNet((CSimpleNet *)v2);
   else
     return 0;
 }

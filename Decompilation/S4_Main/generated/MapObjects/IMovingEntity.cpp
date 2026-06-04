@@ -141,7 +141,7 @@ void  IMovingEntity::NewToDoList(class std::list<class CEntityTask,class std::al
   if ( !_toDo && BBSupportDbgReport(2, "MapObjects\\MovingEntity.cpp", 152, "_toDo != NULL") == 1 )
     __debugbreak();
   this->m_pToDoList = (std::list *)_toDo;
-  v5 = std::list<CEntityTask>::begin(this->m_pToDoList, (int)v3);
+  v5 = std::list<CEntityTask>::begin(this->m_pToDoList);
   v4 = v5;
   v7 = 0;
   std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator=(

@@ -2291,7 +2291,7 @@ void  CGameHost::SendPlayerData(unsigned int a2) {
 
 
 // address=[0x15ba420]
-// Decompiled from void __thiscall CGameHost::SendToAll(  CGameHost *this,  int a2,  void *_pvData0,  size_t _uiDataLength0,  void *_pvData1,  size_t _uiDataLength1,  char a7)
+// Decompiled from void __thiscall CGameHost::SendToAll(  CGameHost *this,  int a2,  void *_pvData0,  size_t _uiDataLength0,  void *_pvData1,  size_t _uiDataLength1,  unsigned __int8 a7)
 void  CGameHost::SendToAll(unsigned int a2, short * _pvData0, unsigned int _uiDataLength0, short * _pvData1, unsigned int _uiDataLength1, bool a7) {
   
   int PlayerPeerId; // eax
@@ -2357,7 +2357,7 @@ void  CGameHost::SendToAll(unsigned int a2, short * _pvData0, unsigned int _uiDa
         3105,
         &v12,
         _uiDataLength0 + _uiDataLength1 + 2,
-        (unsigned __int8)a7,
+        a7,
         v11);
     }
   }
@@ -3699,32 +3699,32 @@ bool  CGameHost::PerformLeaveGame(void * a2) {
 // Decompiled from char __thiscall CGameHost::SendChatLine(_BYTE *this, wchar_t *Source)
 bool  CGameHost::SendChatLine(void * Source) {
   
-  _DWORD *v2; // eax
+  wchar_t *v2; // eax
   wchar_t *v3; // eax
-  _Cnd_internal_imp_t *v5; // [esp+4h] [ebp-15Ch]
-  _Cnd_internal_imp_t *PlayerName; // [esp+Ch] [ebp-154h]
+  std::wstring *v5; // [esp+4h] [ebp-15Ch]
+  std::wstring *PlayerName; // [esp+Ch] [ebp-154h]
   _BYTE Src[256]; // [esp+18h] [ebp-148h] BYREF
-  _BYTE v9[28]; // [esp+118h] [ebp-48h] BYREF
-  _BYTE v10[28]; // [esp+134h] [ebp-2Ch] BYREF
+  std::wstring v9; // [esp+118h] [ebp-48h] BYREF
+  std::wstring v10; // [esp+134h] [ebp-2Ch] BYREF
   int v11; // [esp+15Ch] [ebp-4h]
 
   memset(Src, 0, sizeof(Src));
   MyWStrNCopy((int)&Src[64], (int)Source, 192);
-  PlayerName = (_Cnd_internal_imp_t *)CGameSettings::GetPlayerName((int)v10);
+  PlayerName = (std::wstring *)CGameSettings::GetPlayerName((int)&v10);
   v11 = 0;
   v2 = std::wstring::c_str(PlayerName);
   MyWStrNCopy((int)Src, (int)v2, 64);
   v11 = -1;
-  std::wstring::~wstring(v10);
+  std::wstring::~wstring(&v10);
   if ( this[8] )
   {
     CGameHost::SendToAll((int)this, 1036, Src, 0x100u, 0, 0, 1u);
-    v5 = (_Cnd_internal_imp_t *)CGameSettings::GetPlayerName((int)v9);
+    v5 = (std::wstring *)CGameSettings::GetPlayerName((int)&v9);
     v11 = 1;
-    v3 = (wchar_t *)std::wstring::c_str(v5);
+    v3 = std::wstring::c_str(v5);
     CLanLobby::PrintChatLine(v3, Source);
     v11 = -1;
-    std::wstring::~wstring(v9);
+    std::wstring::~wstring(&v9);
   }
   else
   {

@@ -4,99 +4,101 @@
 #include "defines.h"
 
 class IMovingEntity : public IAnimatedEntity {
-  public:
+public:
     // address=[0x130eb80]
-    class CEntityTask const &GetActualTask(void) const;
+    class CEntityTask const &  GetActualTask(void)const;
 
     // address=[0x130f500]
-    class CWalking *Walking(void);
+    class CWalking *  Walking(void);
 
     // address=[0x1351ad0]
-    int Direction(void) const;
+    int  Direction(void)const;
 
     // address=[0x1351af0]
-    int Distance(void) const;
+    int  Distance(void)const;
 
     // address=[0x1460610]
-    int GetJobPart(void) const;
+    int  GetJobPart(void)const;
 
     // address=[0x1470a80]
-    bool IsFree(int a2);
+    bool  IsFree(int a2);
 
     // address=[0x14d86e0]
-    virtual bool IsUnEmployed(void) const;
+    virtual bool  IsUnEmployed(void)const;
 
     // address=[0x14e2fd0]
-    void IncToDoListIter(void);
+    void  IncToDoListIter(void);
 
     // address=[0x150b590]
-    void SetDisplacementCosts(int a2);
+    void  SetDisplacementCosts(int a2);
 
     // address=[0x1513b10]
-    void SetDirection(int a2);
+    void  SetDirection(int a2);
 
     // address=[0x15590a0]
-    IMovingEntity(int id);
+     IMovingEntity(int id);
 
     // address=[0x1559130]
-    virtual ~IMovingEntity(void);
+    virtual  ~IMovingEntity(void);
 
     // address=[0x1559170]
-    void WalkToXY(int a2, int a3);
+    void  WalkToXY(int a2, int a3);
 
     // address=[0x15591b0]
-    virtual void NewToDoList(class std::list<class CEntityTask, class std::allocator<class CEntityTask>> *_toDo, int a3);
+    virtual void  NewToDoList(class std::list<class CEntityTask,class std::allocator<class CEntityTask> > * _toDo, int a3);
 
     // address=[0x1559260]
-    void ResetToDoList(void);
+    void  ResetToDoList(void);
 
     // address=[0x1559340]
-    void SetToDoList(class std::list<class CEntityTask, class std::allocator<class CEntityTask>> *a2);
+    void  SetToDoList(class std::list<class CEntityTask,class std::allocator<class CEntityTask> > * a2);
 
     // address=[0x1559400]
-    bool IsNotOccupied(int a2);
+    bool  IsNotOccupied(int a2);
 
     // address=[0x1559430]
-    bool IsNotBlocked(int a2);
+    bool  IsNotBlocked(int a2);
 
     // address=[0x1563870]
-    bool IsEndIter(void);
+    bool  IsEndIter(void);
 
     // address=[0x1563980]
-    void SetDistance(int a2);
+    void  SetDistance(int a2);
 
     // address=[0x1568790]
-    class std::_List_iterator<class std::_List_val<struct std::_List_simple_types<class CEntityTask>>> const GetActualIter(void a2) const;
+    class std::_List_iterator<class std::_List_val<struct std::_List_simple_types<class CEntityTask> > > const  GetActualIter(void a2)const;
 
     // address=[0x15d6230]
-    int DisplacementCosts(void) const;
+    int  DisplacementCosts(void)const;
 
-  protected:
+protected:
     // address=[0x14d8840]
-    void SetPositionAndDir(int a2, int a3);
+    void  SetPositionAndDir(int a2, int a3);
 
     // address=[0x1559460]
-    IMovingEntity(std::istream &_rStream);
+     IMovingEntity(std::istream & _pStream);
 
     // address=[0x15595e0]
-    virtual void Store(std::ostream &_rStream);
+    virtual void  Store(std::ostream & a1);
 
     // address=[0x15596c0]
-    void InitDistance(void);
+    void  InitDistance(void);
 
     // address=[0x15596e0]
-    void DecDistance(unsigned int a2);
+    void  DecDistance(unsigned int a2);
 
     // Type information members
-  public:
+public:
     char m_iDirection;
     unsigned __int8 m_iDistance;
     unsigned __int8 m_iDisplacementCosts;
     __int16 m_iToDoSize;
     int unk_4c;
-    struct CWalking *m_pWalkin;
-    std::list *m_pToDoList;
+    struct CWalking * m_pWalkin;
+    std::list * m_pToDoList;
     std::list::iterator m_cCurrentToDoItemIter;
+
 };
+
 
 #endif // IMOVINGENTITY_H
