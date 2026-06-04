@@ -3,6 +3,7 @@
 
 #include "defines.h"
 
+#include "Defines/Net.h"
 #include "ISimpleNet.h"
 
 class LZHLDecompressor;
@@ -133,7 +134,7 @@ class CSimpleNet : public ISimpleNet {
 
     std::string m_sError;
     int m_iNumberReceiverSockets;
-    DWORD m_pReceiverSockets[32];
+    DWORD m_pReceiverSockets[MAX_RECEIVER_SOCKETS];
     _DWORD m_pSenderSocket;
     sockaddr_in m_sReceiverSocketConfig;
     sockaddr_in m_sSenderSocketConfig;

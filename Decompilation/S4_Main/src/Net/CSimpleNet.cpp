@@ -3,7 +3,6 @@
 #include "CBB/CBBSupport.h"
 #include "Compression/LZHL.h"
 #include "Debug/CTrace.h"
-#include "Defines/Net.h"
 
 // Definitions for class CSimpleNet
 
@@ -329,7 +328,7 @@ bool CSimpleNet::RemoveMsgFromResendList(unsigned short a2) {
             this->m_vResendMessages.erase(pIt);
             return true;
         }
-        
+
         ++pIt;
     }
 
