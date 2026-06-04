@@ -1,9 +1,9 @@
 #ifndef COMPRESSION_LZHL_H
 #define COMPRESSION_LZHL_H
 
-#include "defines.h"
 #include "LZHLCompressor.h"
 #include "LZHLDecompressor.h"
+#include "defines.h"
 
 LZHLDecompressor *LZHLCreateDecompressor();
 
@@ -11,12 +11,11 @@ int LZHLDecompress(LZHLDecompressor *a1, uint8_t *_pDst, size_t *_uDstSize, cons
 
 int LZHLDestroyDecompressor(LZHLDecompressor *a1);
 
-
 unsigned int __cdecl LZHLCompressorCalcMaxBuf(unsigned int a1);
 
 LZHLCompressor *LZHLCreateCompressor();
 
-int __cdecl LZHLCompress(int a1, int a2, void *Src, int a4);
+int __cdecl LZHLCompress(LZHLCompressor *a1, uint8_t *dst, const uint8_t *src, size_t srcSz);
 
 LZHLCompressor *__cdecl LZHLDestroyCompressor(LZHLCompressor *a1);
 
