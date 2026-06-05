@@ -340,7 +340,7 @@ bool  CStateBriefing::OnEvent(class CEvn_Event & a2) {
             LOBYTE(v55) = 3;
             g_pNetworkEngine = v33;
             g_pGameType->m_iActualPlayerCount = g_pGameType->m_iMapMaxNumPlayers;
-            g_pGameType->m_sPlayerIP[0] = (DWORD)INetworkEngine::GetLocalIP((CGameHost **)g_pNetworkEngine);
+            g_pGameType->m_uiIPPlayer[0] = (DWORD)INetworkEngine::GetLocalIP((CGameHost **)g_pNetworkEngine);
             Instance = (OnlineManager *)OnlineManager::GetInstance();
             g_pGameType->m_sPlayerPeerId[0] = OnlineManager::GetLocalPeerId(Instance);
             PlayerName = (std::wstring *)CGameSettings::GetPlayerName((int)&v51);
@@ -353,7 +353,7 @@ bool  CStateBriefing::OnEvent(class CEvn_Event & a2) {
             g_pGameType->dword2E8 = *((_DWORD *)v48 + 2);
             g_pGameType->m_iGameType = 3;
             for ( i = 0; i < g_pGameType->m_iMapMaxNumPlayers; ++i )
-              g_pGameType->m_sPlayerSlot10[i] = 0;
+              g_pGameType->m_sPlayerExclusiveColor[i] = 0;
             INetworkEngine::Start(1, 1, g_pGameType->m_iMapMaxNumPlayers, 0);
             CGameStateHandler::Switch(CStateGame::DynamicCreateFunc, 0);
             v45 = 1;

@@ -6,7 +6,7 @@
 // Decompiled from IRandomMaps *__thiscall IRandomMaps::IRandomMaps(IRandomMaps *this)
  IRandomMaps::IRandomMaps(void) {
   
-  *(_DWORD *)this = IRandomMaps::_vftable_;
+  this->__vftable = (IRandomMaps_vtbl *)IRandomMaps::_vftable_;
   return this;
 }
 

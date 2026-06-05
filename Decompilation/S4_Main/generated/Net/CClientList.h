@@ -4,56 +4,58 @@
 #include "defines.h"
 
 class CClientList {
-  public:
+public:
     // address=[0x15b1d30]
-    long GetPlayerIP(int a1);
+    long  GetPlayerIP(int a1);
 
     // address=[0x15b1d60]
-    unsigned int GetPlayerPeerId(int a2);
+    unsigned int  GetPlayerPeerId(int a2);
 
     // address=[0x15b1d90]
-    bool ContainsPeerId(unsigned int _uPeerId);
+    bool  ContainsPeerId(unsigned int _uPeerId);
 
     // address=[0x15b1e50]
-    bool Add(unsigned int _uIp, int _uPlayerId, int _uPeerId);
+    bool  Add(unsigned int _uIp, int _uPlayerId, int _uPeerId);
 
     // address=[0x15b1f30]
-    unsigned int GetPlayerPing(unsigned int _id);
+    unsigned int  GetPlayerPing(unsigned int _id);
 
     // address=[0x15b1f90]
-    CClientList(void);
+     CClientList(void);
 
     // address=[0x15b1fc0]
-    virtual ~CClientList(void);
+    virtual  ~CClientList(void);
 
     // address=[0x15b1fe0]
-    int CreateNewPlayerID(void);
+    int  CreateNewPlayerID(void);
 
     // address=[0x15b2000]
-    bool RemoveClientAt(int a2);
+    bool  RemoveClientAt(int a2);
 
     // address=[0x15b20c0]
-    bool RemoveClientPeerId(unsigned int _uPeerId);
+    bool  RemoveClientPeerId(unsigned int a2);
 
     // address=[0x15b21d0]
-    bool AllClientsReady(void);
+    bool  AllClientsReady(void);
 
     // address=[0x15b2220]
-    void SetClientReadyFromPeerId(unsigned int _uPeerId, bool _bReady);
+    void  SetClientReadyFromPeerId(unsigned int _uPeerId, bool _bReady);
 
     // address=[0x15b2320]
-    int GetClientIndexPerPeerId(unsigned int _uPeerId);
+    int  GetClientIndexPerPeerId(unsigned int _uPeerId);
 
     // address=[0x15b3b90]
-    int GetSize(void);
+    int  GetSize(void);
 
     // address=[0x15c4d90]
-    void SetClientLastAck(unsigned int _uPlayerId, unsigned int a3);
+    void  SetClientLastAck(unsigned int a2, unsigned int a3);
 
     // Type information members
-  public:
-    CClientList_vtbl *vftable;
+public:
+    CClientList_vtbl * vftable;
     std::vector m_vClients;
+
 };
+
 
 #endif // CCLIENTLIST_H

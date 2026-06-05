@@ -7,11 +7,11 @@
  CRandomMaps::CRandomMaps(void) {
   
   IRandomMaps::IRandomMaps(this);
-  *(_DWORD *)this = &CRandomMaps::_vftable_;
-  *((_BYTE *)this + 4) = 0;
-  *((_DWORD *)this + 2) = 0;
-  *((_DWORD *)this + 3) = 0;
-  *((_DWORD *)this + 4) = 0;
+  this->__vftable = (IRandomMaps_vtbl *)&CRandomMaps::_vftable_;
+  this->m_bU0 = 0;
+  this->m_iU0 = 0;
+  this->m_iU1 = 0;
+  this->m_iU2 = 0;
   return this;
 }
 
@@ -162,7 +162,7 @@ void  CRandomMaps::GetMapKeyFromParams(struct SRandomMapParams * a2, wchar_t * a
 
 
 // address=[0x1499710]
-// Decompiled from char __stdcall CRandomMaps::IsRandomMapFileName(wchar_t *String, void *a2)
+// Decompiled from char __stdcall CRandomMaps::IsRandomMapFileName(wchar_t *String, std::wstring *a2)
 bool  CRandomMaps::IsRandomMapFileName(wchar_t const * String, std::wstring * a2) {
   
   int v3; // eax
@@ -207,15 +207,15 @@ LABEL_21:
 
 
 // address=[0x1499870]
-// Decompiled from int __thiscall CRandomMaps::IsRandomMapFileName(void *this, void *a2, int a3)
+// Decompiled from int __thiscall CRandomMaps::IsRandomMapFileName(CRandomMaps *this, std::wstring *a2, std::wstring *a3)
 bool  CRandomMaps::IsRandomMapFileName(std::wstring const & a2, std::wstring * a3) {
   
-  _DWORD *v5; // [esp+4h] [ebp-4h]
+  wchar_t *v5; // [esp+4h] [ebp-4h]
 
   if ( !std::wstring::length(a2) )
-    return (*(int (__thiscall **)(void *, _DWORD, int))(*(_DWORD *)this + 36))(this, 0, a3);
-  v5 = std::wstring::c_str((_Cnd_internal_imp_t *)a2);
-  return (*(int (__thiscall **)(void *, _DWORD *, int))(*(_DWORD *)this + 36))(this, v5, a3);
+    return this->IsRandomMapFileName2(this, 0, a3);
+  v5 = std::wstring::c_str(a2);
+  return this->IsRandomMapFileName2(this, v5, a3);
 }
 
 
@@ -286,39 +286,39 @@ void  CRandomMaps::GenerateRandomMapFileName(std::wstring & a2, struct SRandomMa
 
 
 // address=[0x1499b10]
-// Decompiled from void __thiscall CRandomMaps::AdjustRandomMapFileName(void *this, void *a2)
-void  CRandomMaps::AdjustRandomMapFileName(std::wstring & a2) {
+// Decompiled from void __thiscall CRandomMaps::AdjustRandomMapFileName(CRandomMaps *this, std::wstring *arg0)
+void  CRandomMaps::AdjustRandomMapFileName(std::wstring & arg0) {
   
-  int v2; // [esp+4h] [ebp-11Ch]
-  int v3; // [esp+8h] [ebp-118h]
-  int v4; // [esp+Ch] [ebp-114h]
+  std::wstring *v2; // [esp+4h] [ebp-11Ch]
+  std::wstring *v3; // [esp+8h] [ebp-118h]
+  std::wstring *a2; // [esp+Ch] [ebp-114h]
   int v5; // [esp+10h] [ebp-110h]
   int v6; // [esp+14h] [ebp-10Ch]
   bool v8; // [esp+20h] [ebp-100h]
   unsigned int v9; // [esp+24h] [ebp-FCh]
   char v10; // [esp+2Ch] [ebp-F4h]
-  _BYTE v11[28]; // [esp+30h] [ebp-F0h] BYREF
-  _BYTE v12[28]; // [esp+4Ch] [ebp-D4h] BYREF
-  int v13[7]; // [esp+68h] [ebp-B8h] BYREF
-  _BYTE v14[28]; // [esp+84h] [ebp-9Ch] BYREF
-  int v15[7]; // [esp+A0h] [ebp-80h] BYREF
-  _BYTE v16[28]; // [esp+BCh] [ebp-64h] BYREF
-  _BYTE v17[28]; // [esp+D8h] [ebp-48h] BYREF
-  _BYTE v18[28]; // [esp+F4h] [ebp-2Ch] BYREF
+  std::wstring v11; // [esp+30h] [ebp-F0h] BYREF
+  std::wstring v12; // [esp+4Ch] [ebp-D4h] BYREF
+  std::wstring v13; // [esp+68h] [ebp-B8h] BYREF
+  std::wstring v14; // [esp+84h] [ebp-9Ch] BYREF
+  std::wstring v15; // [esp+A0h] [ebp-80h] BYREF
+  std::wstring v16; // [esp+BCh] [ebp-64h] BYREF
+  std::wstring v17; // [esp+D8h] [ebp-48h] BYREF
+  std::wstring v18; // [esp+F4h] [ebp-2Ch] BYREF
   int v19; // [esp+11Ch] [ebp-4h]
 
   v10 = 0;
-  std::wstring::wstring((int)a2);
+  std::wstring::wstring(&v16, arg0);
   v19 = 0;
-  std::wstring::wstring(v17, (wchar_t *)&word_3703AD8);
+  std::wstring::wstring(&v17, (wchar_t *)&word_3703AD8);
   LOBYTE(v19) = 1;
-  v9 = std::wstring::length(a2);
+  v9 = std::wstring::length(arg0);
   v8 = 0;
   if ( v9 > 4 )
   {
-    v6 = std::wstring::wstring(v14, (wchar_t *)L".sav");
+    v6 = std::wstring::wstring(&v14, (wchar_t *)L".sav");
     LOBYTE(v19) = 2;
-    v5 = std::wstring::substr((int)v15, v9 - 4, 4u);
+    v5 = std::wstring::substr((int)&v15, v9 - 4, 4u);
     v10 = 3;
     if ( (unsigned __int8)std::operator==<wchar_t>(v5, v6) )
       v8 = 1;
@@ -326,34 +326,34 @@ void  CRandomMaps::AdjustRandomMapFileName(std::wstring & a2) {
   if ( (v10 & 2) != 0 )
   {
     v10 &= ~2u;
-    std::wstring::~wstring(v15);
+    std::wstring::~wstring(&v15);
   }
   v19 = 1;
   if ( (v10 & 1) != 0 )
-    std::wstring::~wstring(v14);
+    std::wstring::~wstring(&v14);
   if ( v8 )
   {
-    v4 = std::wstring::substr((int)v13, 0, v9 - 4);
-    std::wstring::operator=(v4);
-    std::wstring::~wstring(v13);
-    v3 = std::wstring::wstring(v12, (wchar_t *)L".sav");
-    std::wstring::operator=(v3);
-    std::wstring::~wstring(v12);
+    a2 = (std::wstring *)std::wstring::substr((int)&v13, 0, v9 - 4);
+    std::wstring::operator=(&v16, a2);
+    std::wstring::~wstring(&v13);
+    v3 = (std::wstring *)std::wstring::wstring(&v12, (wchar_t *)L".sav");
+    std::wstring::operator=(&v17, v3);
+    std::wstring::~wstring(&v12);
   }
-  std::wstring::wstring(v18);
+  std::wstring::wstring(&v18);
   LOBYTE(v19) = 3;
-  if ( (*(unsigned __int8 (__thiscall **)(void *, _BYTE *, _BYTE *))(*(_DWORD *)this + 32))(this, v16, v18) )
+  if ( this->IsRandomMapFileName(this, &v16, &v18) )
   {
-    v2 = std::operator+<wchar_t>(v11, v18, v17);
-    std::wstring::operator=(v2);
-    std::wstring::~wstring(v11);
+    v2 = (std::wstring *)std::operator+<wchar_t>(&v11, &v18, &v17);
+    std::wstring::operator=(arg0, v2);
+    std::wstring::~wstring(&v11);
   }
   LOBYTE(v19) = 1;
-  std::wstring::~wstring(v18);
+  std::wstring::~wstring(&v18);
   LOBYTE(v19) = 0;
-  std::wstring::~wstring(v17);
+  std::wstring::~wstring(&v17);
   v19 = -1;
-  std::wstring::~wstring(v16);
+  std::wstring::~wstring(&v16);
 }
 
 

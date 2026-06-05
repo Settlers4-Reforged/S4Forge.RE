@@ -77,7 +77,7 @@ bool __cdecl CStateMainMenu::PreLoadGame(std::wstring a1) {
   CGameRun::FillGameType(&a1, v11, v16);
   g_pGameType->m_bIsSaveGame = 1;
   v10 = std::wstring::find((wchar_t *)L"_autoSave", 0) != -1;
-  g_pGameType->byte2B9 = v10;
+  g_pGameType->bIsAutosave = v10;
   Instance = (OnlineManager *)OnlineManager::GetInstance();
   OnlineManager::SetPrivate(Instance, 0);
   std::string::operator=(&stru_402C9B4, Str);

@@ -12,9 +12,9 @@
   this->m_uCampaignType = 0;
   this->dwordC = 0;
   this->dword10 = 0;
-  this->dword14 = 0;
-  this->dword18 = 0;
-  this->dword1C = 0;
+  this->m_iVersionMajor = 0;
+  this->m_iVersionMinor = 0;
+  this->m_iVersionBuild = 0;
   this->m_iWidthHeight = 0;
   this->m_iMapMaxNumPlayers = 0;
   this->m_uiPlayerCount = 0;
@@ -74,9 +74,9 @@ void  CGameChunkGeneral::Load(class IS4Chunk & a2) {
   {
     a2->Load(&this->m_uMapFlags, 4);
     a2->Load(&this->dword10, 4);
-    a2->Load(&this->dword14, 4);
-    a2->Load(&this->dword18, 4);
-    a2->Load(&this->dword1C, 4);
+    a2->Load(&this->m_iVersionMajor, 4);
+    a2->Load(&this->m_iVersionMinor, 4);
+    a2->Load(&this->m_iVersionBuild, 4);
     a2->Load(&this->m_iWidthHeight, 4);
     a2->Load(this->gap24, 64);
     if ( uGameChunkVersion < 10 )

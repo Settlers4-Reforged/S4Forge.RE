@@ -24,8 +24,8 @@ struct SMessageBuffer {
 struct [[gnu::packed]] SMessage {
     int m_iTime;
     int m_iU;
-    int m_iId;
-    __int16 m_iReceiverId;
+    int m_iIp;
+    __int16 m_iMessageId;
     SMessageBuffer m_sMessage;
 };
 
@@ -52,7 +52,7 @@ class CSimpleNet : public ISimpleNet {
     virtual bool PopMessage(void *&_rMessage, unsigned int &_riLength, unsigned int &_riPeerId);
 
     // address=[0x15cd190]
-    virtual bool PushMessage(unsigned int _iPeerId, unsigned int _iId, unsigned short _iReceiver, void *_pData, unsigned int _iDataLength, bool _bTryResend, bool a8);
+    virtual bool PushMessage(unsigned int _iPeerId, unsigned int _iIp, unsigned short _iMessageId, void *_pData, unsigned int _iDataLength, bool _bTryResend, bool _bCompress);
 
     // address=[0x15cd490]
     virtual char *GetIPString(unsigned int a2);

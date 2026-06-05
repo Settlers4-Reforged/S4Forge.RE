@@ -44,7 +44,7 @@ bool  CGameType::IsSlotChangable(int a2, bool * a3) {
     return 0;
   if ( !a3 )
     return this->m_sPlayerSlot16[a2] == 0;
-  v4 = this->m_sPlayerSlot10[a2] || this->m_sPlayerType[a2] != 1;
+  v4 = this->m_sPlayerExclusiveColor[a2] || this->m_sPlayerType[a2] != 1;
   *a3 = v4;
   return this->m_sPlayerSlot16[a2] == 0;
 }
@@ -252,23 +252,23 @@ void  CGameType::SetPlayerName(int _iPlayerIndex, std::wstring & _swpPlayerName)
 // Decompiled from CGameType *__thiscall CGameType::CGameType(CGameType *this)
  CGameType::CGameType(void) {
   
-  std::wstring::wstring(&this->string0);
+  std::wstring::wstring(&this->m_swGameName);
   std::wstring::wstring(&this->m_swMapName);
   this->m_iWidthHeight = 0;
   this->m_bIsEmptyMap = 0;
   this->m_iStartResources = 0;
-  this->dword44 = 0;
+  this->m_iHostAddress = 0;
   this->m_uiNumberAlliances = 0;
   this->m_iActualPlayerCount = 0;
-  this->byte230 = 0;
+  this->m_uExtraFlags = 0;
   this->byte261 = 0;
   this->dword264 = 0;
   this->m_iMapCRC = 0;
-  this->dword26C = 0;
+  this->m_iHumanPlayers = 0;
   this->m_iNetworkTimeDelta = 0;
   std::string::string(&this->std__string298);
   this->m_bIsSaveGame = 0;
-  this->byte2B9 = 0;
+  this->bIsAutosave = 0;
   this->m_uiTickCounter = 0;
   std::wstring::wstring(&this->m_swSaveFile);
   this->m_bAIActive = 0;
@@ -277,9 +277,9 @@ void  CGameType::SetPlayerName(int _iPlayerIndex, std::wstring & _swpPlayerName)
   this->m_bIsGameWon = 0;
   this->m_iTeamWon = 0;
   std::string::string(&this->m_swpTeamName);
-  std::string::string(&this->std__string318);
-  std::string::string(&this->std__string334);
-  this->word350 = 0;
+  std::string::string(&this->m_sSessionId);
+  std::string::string(&this->m_sProcedureServer);
+  this->m_iProcedureServerPort = 0;
   this->m_iMapMaxNumPlayers = 0;
   this->m_iFileSize = 0;
   this->byte35C = 0;
@@ -454,7 +454,7 @@ bool  CGameType::LoadMapData(std::wstring _sMapName, bool _bAIActive, unsigned i
   iGameType = 0;
   iMapFlags = 0;
   this->m_bAIActive = _bAIActive;
-  this->dword44 = a4;
+  this->m_iHostAddress = a4;
   if ( _iAIDifficulty != -1 )
   {
     if ( _iAIDifficulty )
@@ -534,8 +534,8 @@ bool  CGameType::LoadMapData(std::wstring _sMapName, bool _bAIActive, unsigned i
       this->m_sPlayerStartX[i] = Chunk[i + 6];
       this->m_sPlayerStartY[i] = Chunk[i + 15];
       this->m_sPlayerTeam[i] = i;
-      this->gap3E6[i] = 1;
-      this->gap3E6[i + 9] = 1;
+      this->field_3E6[i] = 1;
+      this->field_3E6[i + 9] = 1;
       if ( i && _bAIActive )
       {
         if ( _iAIDifficulty == -1 )
@@ -772,7 +772,7 @@ bool  CGameType::LoadMapData(std::wstring _sMapName, bool _bAIActive, unsigned i
             v69 = 1;
           ++v56;
         }
-        this->gap3E6[m] = 0;
+        this->field_3E6[m] = 0;
         if ( iPlayerControl == 2 )
         {
           if ( _iAIDifficulty == -1 )
@@ -788,7 +788,7 @@ bool  CGameType::LoadMapData(std::wstring _sMapName, bool _bAIActive, unsigned i
       else
       {
         ++v56;
-        this->gap3E6[m] = 1;
+        this->field_3E6[m] = 1;
         this->m_sPlayerType[m] = 1;
         if ( _bAIActive )
         {
@@ -809,15 +809,15 @@ bool  CGameType::LoadMapData(std::wstring _sMapName, bool _bAIActive, unsigned i
         v45 = this->m_sPlayerTeam[m];
       if ( this->m_sPlayerRaces[m] == 255 )
       {
-        this->gap3E6[m + 9] = 1;
+        this->field_3E6[m + 9] = 1;
         this->m_sPlayerRaces[m] = 5;
       }
       else
       {
-        this->gap3E6[m + 9] = 0;
+        this->field_3E6[m + 9] = 0;
       }
       if ( this->m_bIsCampaignMap )
-        this->m_sPlayerSlot10[m] = 0;
+        this->m_sPlayerExclusiveColor[m] = 0;
       SysFreeString(swpSetupName);
       SysFreeString(swpPlayerName);
     }
@@ -1068,10 +1068,10 @@ void  CGameType::Init(void) {
   std::wstring::operator=(&this->m_swMapName, (wchar_t *)&emptyString2);
   this->m_iWidthHeight = 0;
   this->m_bAIActive = 1;
-  this->dword44 = 0;
+  this->m_iHostAddress = 0;
   this->m_uiNumberAlliances = 0;
   this->m_iActualPlayerCount = 0;
-  this->byte230 = 0;
+  this->m_uExtraFlags = 0;
   this->dword3F8 = 0;
   this->dword3FC = 0;
   this->dword400 = 0;
@@ -1090,7 +1090,7 @@ void  CGameType::Init(void) {
   this->byte35D = 0;
   this->m_iCampaignType = 0;
   this->byte261 = 1;
-  this->dword26C = 0;
+  this->m_iHumanPlayers = 0;
   this->m_iNetworkTimeDelta = 0;
   this->m_iMultiPlayerGameID = -1;
   std::string::operator=(&this->std__string298, (char *)&byte_36FE4FA);
@@ -1111,24 +1111,24 @@ void  CGameType::Init(void) {
     this->m_sPlayerType[j] = 0;
     std::wstring::operator=(&this->m_swpRealPlayerNames[j], (wchar_t *)&emptyString3);
     this->m_sPlayerTeam[j] = 0;
-    this->m_sPlayerIP[j] = 0;
+    this->m_uiIPPlayer[j] = 0;
     this->m_sPlayerPeerId[j] = -1;
     this->m_sPlayerStartX[j] = 0;
     this->m_sPlayerStartY[j] = 0;
     this->m_sPlayerRaces[j] = 5;
     this->m_sPlayerColor[j] = 0;
     this->m_sPlayerSlot8[j] = j;
-    this->m_sPlayerSlot14[j] = 0;
-    this->m_sPlayerSlot10[j] = 1;
+    this->m_sPlayerAckDelta[j] = 0;
+    this->m_sPlayerExclusiveColor[j] = 1;
     this->m_sPlayerSlot11[j] = 0;
     this->m_sPlayerSlot12[j] = 0;
-    this->m_sPlayerSlot13[j] = -1;
+    this->m_sPlayerValidTicks[j] = -1;
     std::wstring::operator=(&this->m_swPlayerClanShortcut[j], (wchar_t *)&emptyString4);
     this->m_sPlayerSlot15[j] = -1;
   }
   this->m_iNetworkTimeDelta = CStaticConfigVarInt::operator int(&g_iNetworkTimeDelta);
   this->m_uiTickCounter = 0;
-  this->word350 = 0;
+  this->m_iProcedureServerPort = 0;
   memset(this->m_pEconomyGoodsArray, 0, 7u);
   this->m_cLocalSlot = -1;
   this->m_bIsHost = 0;
@@ -1326,11 +1326,11 @@ void  CGameType::PatchMaps(bool a2) {
   if ( result == 1 )
   {
     this->byte35C = 1;
-    this->gap3E6[0] = 1;
-    this->gap3E6[1] = 1;
-    this->gap3E6[9] = 1;
+    this->field_3E6[0] = 1;
+    this->field_3E6[1] = 1;
+    this->field_3E6[9] = 1;
     result = 1;
-    this->gap3E6[10] = 1;
+    this->field_3E6[10] = 1;
     if ( !a2 )
     {
       *(_DWORD *)this->m_sPlayerType = 1;

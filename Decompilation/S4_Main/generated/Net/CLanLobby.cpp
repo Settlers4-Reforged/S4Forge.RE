@@ -105,27 +105,26 @@ bool __cdecl CLanLobby::DisconnectPlayerPeerId(unsigned int a1, int a2) {
 
 
 // address=[0x15c9930]
-// Decompiled from _DWORD *CLanLobby::RedrawPlayerList()
+// Decompiled from void CLanLobby::RedrawPlayerList()
 void __cdecl CLanLobby::RedrawPlayerList(void) {
   
-  void **CurrentState; // eax
-  _DWORD *result; // eax
+  CGameState *CurrentState; // eax
+  CStateLobbyGameSettings *v1; // [esp+0h] [ebp-4h]
 
-  CurrentState = (void **)CGameStateHandler::GetCurrentState();
-  result = (_DWORD *)j____RTDynamicCast(
-                       CurrentState,
-                       0,
-                       &CGameState__RTTI_Type_Descriptor_,
-                       &CStateLobbyGameSettings__RTTI_Type_Descriptor_,
-                       0);
-  if ( result )
-    result = (_DWORD *)(*(int (__thiscall **)(_DWORD *, int))(*result + 16))(result, 1);
-  if ( !*(_BYTE *)(CLanLobby::m_pGameHost + 8) )
-    return result;
-  result = (_DWORD *)CLanLobby::m_pGameHost;
-  if ( *(_DWORD *)(CLanLobby::m_pGameHost + 12) )
-    return CFsm::GenerateEvent(1027, 0);
-  return result;
+  CurrentState = CGameStateHandler::GetCurrentState();
+  v1 = (CStateLobbyGameSettings *)j____RTDynamicCast(
+                                    (void **)&CurrentState->__vftable,
+                                    0,
+                                    &CGameState__RTTI_Type_Descriptor_,
+                                    &CStateLobbyGameSettings__RTTI_Type_Descriptor_,
+                                    0);
+  if ( v1 )
+    (*(void (__thiscall **)(CStateLobbyGameSettings *, int))(*(_DWORD *)v1 + 16))(v1, 1);
+  if ( CLanLobby::m_pGameHost->m_bHost )
+  {
+    if ( CLanLobby::m_pGameHost->m_pFSM )
+      CFsm::GenerateEvent(CLanLobby::m_pGameHost->m_pFSM, 1027, 0);
+  }
 }
 
 
@@ -140,7 +139,7 @@ void __cdecl CLanLobby::ChangeData(struct SLobbyChange * Src) {
   result = Src;
   if ( *Src < 0 )
     return result;
-  if ( CLanLobby::m_pGameHost->a )
+  if ( CLanLobby::m_pGameHost->m_bHost )
     return (int *)CFsm::Control(CLanLobby::m_pGameHost->m_pFSM, 1052, Src);
   else
     return (int *)CGameHost::SendToHost(1052, Src, 0xCu, 0, 0, 1);
@@ -203,105 +202,104 @@ bool __cdecl CLanLobby::EndWaitGameDlg(void) {
 
 
 // address=[0x15c90f0]
-// Decompiled from int CLanLobby::RedrawGameList()
+// Decompiled from void CLanLobby::RedrawGameList()
 void __cdecl CLanLobby::RedrawGameList(void) {
   
-  void **CurrentState; // eax
-  int result; // eax
-  int v2; // eax
-  int v3; // eax
-  int v4; // eax
-  _DWORD *v5; // eax
-  int v6; // eax
-  int v7; // eax
-  int v8; // eax
-  int v9; // eax
-  int v10; // eax
-  int v11; // eax
-  int v12; // eax
-  int v13; // eax
-  _BYTE v14[12]; // [esp+4h] [ebp-898h] BYREF
-  _BYTE v15[12]; // [esp+10h] [ebp-88Ch] BYREF
-  int v16; // [esp+1Ch] [ebp-880h]
-  int v17; // [esp+20h] [ebp-87Ch]
-  std::_Iterator_base12 *v18; // [esp+24h] [ebp-878h]
-  std::_Iterator_base12 *v19; // [esp+28h] [ebp-874h]
-  _BYTE v20[15]; // [esp+2Ch] [ebp-870h] BYREF
-  char v21; // [esp+3Bh] [ebp-861h]
-  int v22; // [esp+3Ch] [ebp-860h]
-  int v23; // [esp+40h] [ebp-85Ch]
-  _BYTE v24[28]; // [esp+44h] [ebp-858h] BYREF
-  _BYTE v25[28]; // [esp+60h] [ebp-83Ch] BYREF
+  struct CGameState *CurrentState; // eax
+  SGameInfo *v1; // eax
+  SGameInfo *v2; // eax
+  SGameInfo *v3; // eax
+  SGameInfo *v4; // eax
+  SGameInfo *v5; // eax
+  SGameInfo *v6; // eax
+  SGameInfo *v7; // eax
+  SGameInfo *v8; // eax
+  SGameInfo *v9; // eax
+  SGameInfo *v10; // eax
+  SGameInfo *v11; // eax
+  SGameInfo *v12; // eax
+  _BYTE v13[12]; // [esp+4h] [ebp-898h] BYREF
+  _BYTE v14[12]; // [esp+10h] [ebp-88Ch] BYREF
+  std::wstring *v15; // [esp+1Ch] [ebp-880h]
+  std::wstring *a2; // [esp+20h] [ebp-87Ch]
+  std::_Iterator_base12 *v17; // [esp+24h] [ebp-878h]
+  std::_Iterator_base12 *v18; // [esp+28h] [ebp-874h]
+  _DWORD v19[3]; // [esp+2Ch] [ebp-870h] BYREF
+  char v20; // [esp+3Bh] [ebp-861h]
+  CStateLobbyConnect *v21; // [esp+3Ch] [ebp-860h]
+  int v22; // [esp+40h] [ebp-85Ch]
+  std::wstring v23; // [esp+44h] [ebp-858h] BYREF
+  std::wstring v24; // [esp+60h] [ebp-83Ch] BYREF
   wchar_t Dir[256]; // [esp+7Ch] [ebp-820h] BYREF
   wchar_t Ext[256]; // [esp+27Ch] [ebp-620h] BYREF
   wchar_t Destination[260]; // [esp+47Ch] [ebp-420h] BYREF
   wchar_t Filename[256]; // [esp+684h] [ebp-218h] BYREF
   wchar_t Drive[4]; // [esp+884h] [ebp-18h] BYREF
-  int v31; // [esp+898h] [ebp-4h]
+  int v30; // [esp+898h] [ebp-4h]
 
-  CurrentState = (void **)CGameStateHandler::GetCurrentState();
-  result = j____RTDynamicCast(
-             CurrentState,
-             0,
-             &CGameState__RTTI_Type_Descriptor_,
-             &CStateLobbyConnect__RTTI_Type_Descriptor_,
-             0);
-  v22 = result;
-  if ( !result )
-    return result;
-  v23 = 0;
-  std::list<SGameInfo>::begin(v20);
-  v31 = 0;
-  while ( 1 )
+  CurrentState = CGameStateHandler::GetCurrentState();
+  v21 = (CStateLobbyConnect *)j____RTDynamicCast(
+                                (void **)&CurrentState->__vftable,
+                                0,
+                                &CGameState__RTTI_Type_Descriptor_,
+                                &CStateLobbyConnect__RTTI_Type_Descriptor_,
+                                0);
+  if ( v21 )
   {
-    v19 = (std::_Iterator_base12 *)std::list<SGameInfo>::end(v15);
-    v18 = v19;
-    LOBYTE(v31) = 1;
-    v21 = std::_List_const_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>::operator!=(v19);
-    LOBYTE(v31) = 0;
-    std::_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>::~_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>(v15);
-    if ( !v21 )
-      break;
-    *(_DWORD *)(v22 + 4 * v23 + 2804) = v22 + 140 * v23 + 4;
-    v2 = std::_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>::operator*(v20);
-    *(_BYTE *)(v22 + 140 * v23 + 100) = *(_BYTE *)(v2 + 612);
-    v3 = std::_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>::operator*(v20);
-    *(_DWORD *)(v22 + 140 * v23 + 88) = *(_DWORD *)(v3 + 608);
-    v4 = std::_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>::operator*(v20);
-    *(_DWORD *)(v22 + 140 * v23 + 92) = *(_DWORD *)(v4 + 604);
-    *(_DWORD *)(v22 + 140 * v23 + 96) = 0;
-    v5 = (_DWORD *)std::_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>::operator*(v20);
-    *(_DWORD *)(v22 + 140 * v23 + 104) = *v5;
-    v6 = std::_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>::operator*(v20);
-    std::wstring::operator=((void *)(v22 + 140 * v23 + 60), (wchar_t *)(v6 + 80));
-    v7 = std::_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>::operator*(v20);
-    *(_BYTE *)(v22 + 140 * v23 + 110) = *(_BYTE *)(v7 + 632);
-    v8 = std::_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>::operator*(v20);
-    wcscpy(Destination, (const wchar_t *)(v8 + 80));
-    j___wsplitpath(Destination, Drive, Dir, Filename, Ext);
-    std::wstring::operator=((void *)(v22 + 140 * v23 + 32), Filename);
-    v9 = std::_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>::operator*(v20);
-    v17 = std::wstring::wstring(v25, (wchar_t *)(v9 + 16));
-    std::wstring::operator=(v17);
-    std::wstring::~wstring(v25);
-    v10 = std::_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>::operator*(v20);
-    *(_BYTE *)(v22 + 140 * v23 + 108) = *(_BYTE *)(v10 + 624);
-    v11 = std::_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>::operator*(v20);
-    *(_BYTE *)(v22 + 140 * v23 + 109) = *(_BYTE *)(v11 + 633);
-    v12 = std::_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>::operator*(v20);
-    v16 = std::wstring::wstring(v24, (wchar_t *)(v12 + 648));
-    std::wstring::operator=(v16);
-    std::wstring::~wstring(v24);
-    v13 = std::_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>::operator*(v20);
-    *(_DWORD *)(v22 + 140 * v23++ + 140) = *(_DWORD *)(v13 + 628);
-    std::_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>::operator++(v14, 0);
-    std::_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>::~_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>(v14);
+    v22 = 0;
+    std::list<SGameInfo>::begin(&CLanLobby::m_pGameHost->m_vGameInfos, (int)v19);
+    v30 = 0;
+    while ( 1 )
+    {
+      v18 = (std::_Iterator_base12 *)std::list<SGameInfo>::end(v14);
+      v17 = v18;
+      LOBYTE(v30) = 1;
+      v20 = std::_List_const_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>::operator!=(v18);
+      LOBYTE(v30) = 0;
+      std::_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>::~_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>(v14);
+      if ( !v20 )
+        break;
+      *((_DWORD *)v21 + v22 + 701) = (char *)v21 + 140 * v22 + 4;
+      v1 = std::_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>::operator*(v19);
+      *((_BYTE *)v21 + 140 * v22 + 100) = v1->m_iU0;
+      v2 = std::_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>::operator*(v19);
+      *((_DWORD *)v21 + 35 * v22 + 22) = v2->m_iMaxPlayerCount;
+      v3 = std::_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>::operator*(v19);
+      *((_DWORD *)v21 + 35 * v22 + 23) = v3->m_iPlayerCount;
+      *((_DWORD *)v21 + 35 * v22 + 24) = 0;
+      v4 = std::_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>::operator*(v19);
+      *((_DWORD *)v21 + 35 * v22 + 26) = v4->m_iHostAddress;
+      v5 = std::_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>::operator*(v19);
+      std::wstring::operator=((char *)v21 + 140 * v22 + 60, v5->m_swpMapName);
+      v6 = std::_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>::operator*(v19);
+      *((_BYTE *)v21 + 140 * v22 + 110) = v6->m_bU3;
+      v7 = std::_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>::operator*(v19);
+      wcscpy(Destination, v7->m_swpMapName);
+      j___wsplitpath(Destination, Drive, Dir, Filename, Ext);
+      std::wstring::operator=((char *)v21 + 140 * v22 + 32, Filename);
+      v8 = std::_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>::operator*(v19);
+      a2 = (std::wstring *)std::wstring::wstring(&v24, v8->m_swpGameName);
+      std::wstring::operator=((std::wstring *)((char *)v21 + 140 * v22 + 4), a2);
+      std::wstring::~wstring(&v24);
+      v9 = std::_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>::operator*(v19);
+      *((_BYTE *)v21 + 140 * v22 + 108) = v9->m_iIsSaveGame;
+      v10 = std::_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>::operator*(v19);
+      *((_BYTE *)v21 + 140 * v22 + 109) = v10->m_bIsAutosave;
+      v11 = std::_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>::operator*(v19);
+      v15 = (std::wstring *)std::wstring::wstring(&v23, (wchar_t *)v11->m_swpRandomMapFileName);
+      std::wstring::operator=((std::wstring *)v21 + 5 * v22 + 4, v15);
+      std::wstring::~wstring(&v23);
+      v12 = std::_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>::operator*(v19);
+      *((_DWORD *)v21 + 35 * v22++ + 35) = v12->m_uTickCounter;
+      std::_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>::operator++(v13, 0);
+      std::_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>::~_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>(v13);
+    }
+    dword_4030714 = v22;
+    dword_403071C = (int)v21 + 2804;
+    GuiDlgLanLobbyConnectUpdate();
+    v30 = -1;
+    std::_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>::~_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>(v19);
   }
-  dword_4030714 = v23;
-  dword_403071C = v22 + 2804;
-  GuiDlgLanLobbyConnectUpdate();
-  v31 = -1;
-  return std::_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>::~_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>(v20);
 }
 
 

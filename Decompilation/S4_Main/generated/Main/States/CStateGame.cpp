@@ -2309,11 +2309,11 @@ LABEL_269:
           case 6u:
             v228 = _sEvent->m_wParam;
             v215 = _sEvent->m_lParam;
-            if ( g_pGameType->m_sPlayerSlot13[v228] == -1 )
+            if ( g_pGameType->m_sPlayerValidTicks[v228] == -1 )
             {
-              g_pGameType->m_sPlayerSlot13[v228] = v215;
+              g_pGameType->m_sPlayerValidTicks[v228] = v215;
             }
-            else if ( g_pGameType->m_sPlayerSlot13[v228] != v215 )
+            else if ( g_pGameType->m_sPlayerValidTicks[v228] != v215 )
             {
               for ( i = 0; i < 8; ++i )
               {
@@ -2325,7 +2325,7 @@ LABEL_269:
                     v112 = (std::string *)INetworkEngine::ConvertIPAddress(
                                             (_DWORD ***)g_pNetworkEngine,
                                             v286,
-                                            g_pGameType->m_sPlayerIP[i]);
+                                            g_pGameType->m_uiIPPlayer[i]);
                     v113 = v112;
                     v317 = 4;
                     v21 = std::string::c_str(v112);

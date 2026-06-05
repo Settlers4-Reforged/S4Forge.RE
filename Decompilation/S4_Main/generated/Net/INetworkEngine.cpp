@@ -318,17 +318,17 @@ bool  INetworkEngine::CheckForMsg(void) {
 bool  INetworkEngine::Start(bool a2, unsigned int a3, unsigned int a4, wchar_t const * Source) {
   
   struct CMsgStacks *v6; // [esp+10h] [ebp-20h]
-  int v7; // [esp+18h] [ebp-18h]
-  void *C; // [esp+1Ch] [ebp-14h]
+  CGameHost *v7; // [esp+18h] [ebp-18h]
+  CGameHost *C; // [esp+1Ch] [ebp-14h]
 
   if ( *((_BYTE *)this + 5) && BBSupportDbgReport(2, "Net\\INetworkEngine.cpp", 83, "!m_bStarted") == 1 )
     __debugbreak();
   *((_BYTE *)this + 4) = a2;
   if ( !*((_DWORD *)this + 2) )
   {
-    C = operator new(0x4F0u);
+    C = (CGameHost *)operator new(0x4F0u);
     if ( C )
-      v7 = CGameHost::CGameHost((int)C, *((_BYTE *)this + 12));
+      v7 = CGameHost::CGameHost(C, *((_BYTE *)this + 12));
     else
       v7 = 0;
     *((_DWORD *)this + 2) = v7;

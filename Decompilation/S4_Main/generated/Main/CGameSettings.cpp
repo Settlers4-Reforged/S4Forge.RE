@@ -508,9 +508,9 @@ void __cdecl CGameSettings::SetPlayerName(std::wstring a1) {
   wchar_t *v2; // eax
   size_t v3; // [esp-4h] [ebp-148h]
   struct std::string *v4; // [esp+4h] [ebp-140h]
-  CConfigVar *v5; // [esp+10h] [ebp-134h]
+  int v5; // [esp+10h] [ebp-134h]
   size_t v6; // [esp+14h] [ebp-130h]
-  struct std::string v7; // [esp+18h] [ebp-12Ch] BYREF
+  std::string v7; // [esp+18h] [ebp-12Ch] BYREF
   char Dest[256]; // [esp+34h] [ebp-110h] BYREF
   int v9; // [esp+140h] [ebp-4h]
 
@@ -523,10 +523,10 @@ void __cdecl CGameSettings::SetPlayerName(std::wstring a1) {
   if ( v6 >= 0x100 )
     report_rangecheckfailure();
   Dest[v6] = 0;
-  v5 = g_pCfgMgr->GetConfigVar(g_pCfgMgr, "GAMESETTINGS");
+  v5 = ((int (__thiscall *)(CConfigManager *, const char *))g_pCfgMgr->GetConfigVar)(g_pCfgMgr, "GAMESETTINGS");
   v4 = std::string::string(&v7, Dest);
   LOBYTE(v9) = 1;
-  v5->SetValue(v5, v4);
+  (*(void (__thiscall **)(int, struct std::string *))(*(_DWORD *)v5 + 20))(v5, v4);
   LOBYTE(v9) = 0;
   std::string::~string(&v7);
   CGameSettings::Save();

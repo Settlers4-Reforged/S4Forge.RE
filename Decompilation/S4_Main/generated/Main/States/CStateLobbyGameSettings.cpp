@@ -751,148 +751,149 @@ void  CStateLobbyGameSettings::PrintChatLine(unsigned short const * String, unsi
 // Decompiled from int CStateLobbyGameSettings::CompileUserFlags()
 int __cdecl CStateLobbyGameSettings::CompileUserFlags(void) {
   
-  int v1; // eax
-  const char *v2; // eax
-  const WCHAR *v3; // eax
-  const char *v4; // eax
-  const WCHAR *v5; // eax
-  const char *v6; // eax
-  const WCHAR *v7; // eax
-  const char *v8; // eax
-  const WCHAR *v9; // eax
-  const char *v10; // eax
-  const WCHAR *v11; // eax
-  const char *v12; // eax
-  const WCHAR *v13; // eax
-  const char *v14; // eax
-  const WCHAR *v15; // [esp-8h] [ebp-3D0h]
-  const char *v16; // [esp-4h] [ebp-3CCh]
+  char *v1; // eax
+  char *v2; // eax
+  wchar_t *v3; // eax
+  wchar_t *v4; // eax
+  wchar_t *v5; // eax
+  wchar_t *v6; // eax
+  wchar_t *v7; // eax
+  wchar_t *v8; // eax
+  wchar_t *v9; // eax
+  wchar_t *v10; // eax
+  wchar_t *v11; // eax
+  wchar_t *v12; // eax
+  wchar_t *v13; // eax
+  wchar_t *v14; // eax
+  wchar_t *v15; // [esp-8h] [ebp-3D0h]
+  wchar_t *v16; // [esp-4h] [ebp-3CCh]
   int v17; // [esp+8h] [ebp-3C0h]
   int v18; // [esp+10h] [ebp-3B8h]
   int v19; // [esp+18h] [ebp-3B0h]
   char v20; // [esp+1Eh] [ebp-3AAh]
   char v21; // [esp+1Fh] [ebp-3A9h]
-  int i; // [esp+20h] [ebp-3A8h]
+  signed int i; // [esp+20h] [ebp-3A8h]
   int j; // [esp+20h] [ebp-3A8h]
   int v24; // [esp+20h] [ebp-3A8h]
-  char v25[88]; // [esp+24h] [ebp-3A4h] BYREF
-  _BYTE v26[28]; // [esp+7Ch] [ebp-34Ch] BYREF
-  _BYTE v27[28]; // [esp+98h] [ebp-330h] BYREF
-  _BYTE v28[28]; // [esp+B4h] [ebp-314h] BYREF
-  _BYTE v29[28]; // [esp+D0h] [ebp-2F8h] BYREF
-  _BYTE v30[28]; // [esp+ECh] [ebp-2DCh] BYREF
-  _BYTE v31[28]; // [esp+108h] [ebp-2C0h] BYREF
-  _BYTE v32[28]; // [esp+124h] [ebp-2A4h] BYREF
-  _BYTE v33[28]; // [esp+140h] [ebp-288h] BYREF
-  _BYTE v34[12]; // [esp+15Ch] [ebp-26Ch] BYREF
-  _DWORD v35[7]; // [esp+168h] [ebp-260h] BYREF
-  _BYTE v36[28]; // [esp+184h] [ebp-244h] BYREF
-  _BYTE v37[28]; // [esp+1A0h] [ebp-228h] BYREF
-  _BYTE v38[28]; // [esp+1BCh] [ebp-20Ch] BYREF
-  _BYTE v39[28]; // [esp+1D8h] [ebp-1F0h] BYREF
-  _BYTE v40[28]; // [esp+1F4h] [ebp-1D4h] BYREF
-  _BYTE v41[28]; // [esp+210h] [ebp-1B8h] BYREF
-  _BYTE v42[28]; // [esp+22Ch] [ebp-19Ch] BYREF
-  _BYTE v43[28]; // [esp+248h] [ebp-180h] BYREF
-  _BYTE v44[28]; // [esp+264h] [ebp-164h] BYREF
-  _BYTE v45[28]; // [esp+280h] [ebp-148h] BYREF
+  _DWORD v25[22]; // [esp+24h] [ebp-3A4h] BYREF
+  std::wstring v26; // [esp+7Ch] [ebp-34Ch] BYREF
+  std::wstring v27; // [esp+98h] [ebp-330h] BYREF
+  std::string v28; // [esp+B4h] [ebp-314h] BYREF
+  std::wstring v29; // [esp+D0h] [ebp-2F8h] BYREF
+  std::wstring v30; // [esp+ECh] [ebp-2DCh] BYREF
+  std::wstring v31; // [esp+108h] [ebp-2C0h] BYREF
+  std::wstring v32; // [esp+124h] [ebp-2A4h] BYREF
+  std::wstring v33; // [esp+140h] [ebp-288h] BYREF
+  struct SGfxColor v34; // [esp+15Ch] [ebp-26Ch] BYREF
+  std::wstring v35; // [esp+168h] [ebp-260h] BYREF
+  std::wstring v36; // [esp+184h] [ebp-244h] BYREF
+  std::wstring v37; // [esp+1A0h] [ebp-228h] BYREF
+  std::wstring v38; // [esp+1BCh] [ebp-20Ch] BYREF
+  std::wstring v39; // [esp+1D8h] [ebp-1F0h] BYREF
+  std::wstring v40; // [esp+1F4h] [ebp-1D4h] BYREF
+  std::wstring v41; // [esp+210h] [ebp-1B8h] BYREF
+  std::wstring v42; // [esp+22Ch] [ebp-19Ch] BYREF
+  std::wstring v43; // [esp+248h] [ebp-180h] BYREF
+  std::wstring v44; // [esp+264h] [ebp-164h] BYREF
+  std::wstring v45; // [esp+280h] [ebp-148h] BYREF
   char v46[24]; // [esp+29Ch] [ebp-12Ch] BYREF
   char Buffer[260]; // [esp+2B4h] [ebp-114h] BYREF
   int v48; // [esp+3C4h] [ebp-4h]
 
-  std::wstring::wstring(v35, (wchar_t *)L".gfx");
+  std::wstring::wstring(&v35, (wchar_t *)L".gfx");
   v48 = 0;
-  std::wstring::wstring(v36, (wchar_t *)L".gil");
+  std::wstring::wstring(&v36, (wchar_t *)L".gil");
   LOBYTE(v48) = 1;
-  std::wstring::wstring(v37, (wchar_t *)L".p24");
+  std::wstring::wstring(&v37, (wchar_t *)L".p24");
   LOBYTE(v48) = 2;
-  std::wstring::wstring(v38, (wchar_t *)L".p25");
+  std::wstring::wstring(&v38, (wchar_t *)L".p25");
   LOBYTE(v48) = 3;
-  std::wstring::wstring(v39, (wchar_t *)L".p26");
+  std::wstring::wstring(&v39, (wchar_t *)L".p26");
   LOBYTE(v48) = 4;
-  std::wstring::wstring(v40, (wchar_t *)L".p44");
+  std::wstring::wstring(&v40, (wchar_t *)L".p44");
   LOBYTE(v48) = 5;
-  std::wstring::wstring(v41, (wchar_t *)L".p45");
+  std::wstring::wstring(&v41, (wchar_t *)L".p45");
   LOBYTE(v48) = 6;
-  std::wstring::wstring(v42, (wchar_t *)L".p46");
+  std::wstring::wstring(&v42, (wchar_t *)L".p46");
   LOBYTE(v48) = 7;
-  std::wstring::wstring(v43, (wchar_t *)L".pi2");
+  std::wstring::wstring(&v43, (wchar_t *)L".pi2");
   LOBYTE(v48) = 8;
-  std::wstring::wstring(v44, (wchar_t *)L".pi4");
+  std::wstring::wstring(&v44, (wchar_t *)L".pi4");
   LOBYTE(v48) = 9;
-  std::wstring::wstring(v45, (wchar_t *)&word_3746928);
+  std::wstring::wstring(&v45, (wchar_t *)&word_3746928);
   v48 = 10;
   if ( (**(int (__thiscall ***)(int, const wchar_t *))g_pRTComp)(g_pRTComp, L"Logo\\Current") )
   {
     BBSupportTracePrintF(3, "RTComp: Could not set Working Path!");
     v48 = -1;
-    `eh vector destructor iterator'(v35, 0x1Cu, 0xBu, std::wstring::~wstring);
+    `eh vector destructor iterator'(&v35, 0x1Cu, 0xBu, (void (__thiscall *)(void *))std::wstring::~wstring);
     return -6;
   }
   else
   {
     for ( i = 0; i < 8; ++i )
     {
-      IGfxEngine::GetPlayerColor((IGfxEngine *)g_pGfxEngine, i, (struct SGfxColor *)v34);
-      v46[3 * i] = v34[0];
-      v46[3 * i + 1] = v34[4];
-      v46[3 * i + 2] = v34[8];
+      IGfxEngine::GetPlayerColor(g_pGfxEngine, i, &v34);
+      v46[3 * i] = v34.m_iR;
+      v46[3 * i + 1] = v34.m_iG;
+      v46[3 * i + 2] = v34.m_iB;
     }
     (*(void (__thiscall **)(int, char *))(*(_DWORD *)g_pRTComp + 4))(g_pRTComp, v46);
-    std::wstring::wstring(v30, (wchar_t *)L"Logo\\Current");
+    std::wstring::wstring(&v30, (wchar_t *)L"Logo\\Current");
     LOBYTE(v48) = 11;
-    std::wstring::operator+=(v30, (wchar_t *)L"\\1");
-    std::wstring::wstring(v29, (wchar_t *)L"\\GFX\\1");
+    std::wstring::operator+=(&v30, (wchar_t *)L"\\1");
+    std::wstring::wstring(&v29, (wchar_t *)L"\\GFX\\1");
     LOBYTE(v48) = 12;
     v19 = (*(int (__thiscall **)(int, int))(*(_DWORD *)g_pRTComp + 8))(g_pRTComp, 8);
     if ( v19 )
     {
       sprintf(Buffer, "RTComp Reported Error %d!", v19);
       BBSupportTracePrintF(3, Buffer);
-      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v25);
+      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>((char *)v25);
       LOBYTE(v48) = 13;
-      v1 = (*(int (__thiscall **)(int))(*(_DWORD *)g_pRTComp + 12))(g_pRTComp);
+      v1 = (char *)(*(int (__thiscall **)(int))(*(_DWORD *)g_pRTComp + 12))(g_pRTComp);
       std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(
-        v28,
+        v25,
+        (int)&v28,
         v1);
       LOBYTE(v48) = 14;
-      v2 = (const char *)std::string::c_str(v28);
+      v2 = std::string::c_str(&v28);
       sprintf(Buffer, "RTComp Error loading file %s!", v2);
       BBSupportTracePrintF(3, Buffer);
       for ( j = 0; ; ++j )
       {
-        v18 = std::wstring::wstring(v27, (wchar_t *)&word_37469DC);
-        v21 = std::operator!=<wchar_t>(&v35[7 * j], v18);
-        std::wstring::~wstring(v27);
+        v18 = std::wstring::wstring(&v27, (wchar_t *)&word_37469DC);
+        v21 = std::operator!=<wchar_t>(&v35 + j, v18);
+        std::wstring::~wstring(&v27);
         if ( !v21 )
           break;
-        std::operator+<wchar_t>(v32, v30, &v35[7 * j]);
+        std::operator+<wchar_t>(&v32, &v30, &v35 + j);
         LOBYTE(v48) = 15;
-        v3 = (const WCHAR *)std::wstring::c_str((_Cnd_internal_imp_t *)v32);
+        v3 = std::wstring::c_str(&v32);
         if ( !SetFileAttributesW(v3, 0x80u) )
         {
-          v4 = (const char *)std::wstring::c_str((_Cnd_internal_imp_t *)v32);
-          CTrace::Print("::SetFileAttributes() at file %s failed!", v4);
+          v4 = std::wstring::c_str(&v32);
+          CTrace::Print("::SetFileAttributes() at file %s failed!", (const char *)v4);
         }
-        v5 = (const WCHAR *)std::wstring::c_str((_Cnd_internal_imp_t *)v32);
+        v5 = std::wstring::c_str(&v32);
         if ( !DeleteFileW(v5) )
         {
-          v6 = (const char *)std::wstring::c_str((_Cnd_internal_imp_t *)v32);
-          CTrace::Print("::DeleteFile() at file %s failed!", v6);
+          v6 = std::wstring::c_str(&v32);
+          CTrace::Print("::DeleteFile() at file %s failed!", (const char *)v6);
         }
         LOBYTE(v48) = 14;
-        std::wstring::~wstring(v32);
+        std::wstring::~wstring(&v32);
       }
       LOBYTE(v48) = 13;
-      std::string::~string(v28);
+      std::string::~string(&v28);
       LOBYTE(v48) = 12;
       std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::~wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v25);
       LOBYTE(v48) = 11;
-      std::wstring::~wstring(v29);
+      std::wstring::~wstring(&v29);
       LOBYTE(v48) = 10;
-      std::wstring::~wstring(v30);
+      std::wstring::~wstring(&v30);
       v48 = -1;
-      `eh vector destructor iterator'(v35, 0x1Cu, 0xBu, std::wstring::~wstring);
+      `eh vector destructor iterator'(&v35, 0x1Cu, 0xBu, (void (__thiscall *)(void *))std::wstring::~wstring);
       return -7;
     }
     else
@@ -900,53 +901,53 @@ int __cdecl CStateLobbyGameSettings::CompileUserFlags(void) {
       v24 = 0;
       while ( 1 )
       {
-        v17 = std::wstring::wstring(v26, (wchar_t *)&word_3746A60);
-        v20 = std::operator!=<wchar_t>(&v35[7 * v24], v17);
-        std::wstring::~wstring(v26);
+        v17 = std::wstring::wstring(&v26, (wchar_t *)&word_3746A60);
+        v20 = std::operator!=<wchar_t>(&v35 + v24, v17);
+        std::wstring::~wstring(&v26);
         if ( !v20 )
           break;
-        std::operator+<wchar_t>(v33, v30, &v35[7 * v24]);
+        std::operator+<wchar_t>(&v33, &v30, &v35 + v24);
         LOBYTE(v48) = 16;
-        std::operator+<wchar_t>(v31, v29, &v35[7 * v24]);
+        std::operator+<wchar_t>(&v31, &v29, &v35 + v24);
         LOBYTE(v48) = 17;
-        v7 = (const WCHAR *)std::wstring::c_str((_Cnd_internal_imp_t *)v31);
+        v7 = std::wstring::c_str(&v31);
         if ( !SetFileAttributesW(v7, 0x80u) )
         {
-          v8 = (const char *)std::wstring::c_str((_Cnd_internal_imp_t *)v31);
-          CTrace::Print("::SetFileAttributes() at file %s failed!", v8);
+          v8 = std::wstring::c_str(&v31);
+          CTrace::Print("::SetFileAttributes() at file %s failed!", (const char *)v8);
         }
-        v15 = (const WCHAR *)std::wstring::c_str((_Cnd_internal_imp_t *)v31);
-        v9 = (const WCHAR *)std::wstring::c_str((_Cnd_internal_imp_t *)v33);
+        v15 = std::wstring::c_str(&v31);
+        v9 = std::wstring::c_str(&v33);
         if ( !CopyFileW(v9, v15, 0) )
         {
-          v16 = (const char *)std::wstring::c_str((_Cnd_internal_imp_t *)v31);
-          v10 = (const char *)std::wstring::c_str((_Cnd_internal_imp_t *)v33);
-          CTrace::Print("::CopyFile() %s -> %s failed!", v10, v16);
+          v16 = std::wstring::c_str(&v31);
+          v10 = std::wstring::c_str(&v33);
+          CTrace::Print("::CopyFile() %s -> %s failed!", (const char *)v10, (const char *)v16);
         }
-        v11 = (const WCHAR *)std::wstring::c_str((_Cnd_internal_imp_t *)v33);
+        v11 = std::wstring::c_str(&v33);
         if ( !SetFileAttributesW(v11, 0x80u) )
         {
-          v12 = (const char *)std::wstring::c_str((_Cnd_internal_imp_t *)v33);
-          CTrace::Print("::SetFileAttributes() at file %s failed!", v12);
+          v12 = std::wstring::c_str(&v33);
+          CTrace::Print("::SetFileAttributes() at file %s failed!", (const char *)v12);
         }
-        v13 = (const WCHAR *)std::wstring::c_str((_Cnd_internal_imp_t *)v33);
+        v13 = std::wstring::c_str(&v33);
         if ( !DeleteFileW(v13) )
         {
-          v14 = (const char *)std::wstring::c_str((_Cnd_internal_imp_t *)v33);
-          CTrace::Print("::DeleteFile() at file %s failed!", v14);
+          v14 = std::wstring::c_str(&v33);
+          CTrace::Print("::DeleteFile() at file %s failed!", (const char *)v14);
         }
         ++v24;
         LOBYTE(v48) = 16;
-        std::wstring::~wstring(v31);
+        std::wstring::~wstring(&v31);
         LOBYTE(v48) = 12;
-        std::wstring::~wstring(v33);
+        std::wstring::~wstring(&v33);
       }
       LOBYTE(v48) = 11;
-      std::wstring::~wstring(v29);
+      std::wstring::~wstring(&v29);
       LOBYTE(v48) = 10;
-      std::wstring::~wstring(v30);
+      std::wstring::~wstring(&v30);
       v48 = -1;
-      `eh vector destructor iterator'(v35, 0x1Cu, 0xBu, std::wstring::~wstring);
+      `eh vector destructor iterator'(&v35, 0x1Cu, 0xBu, (void (__thiscall *)(void *))std::wstring::~wstring);
       return 0;
     }
   }
@@ -1476,7 +1477,7 @@ bool  CStateLobbyGameSettings::CheckReady(void) {
   {
     if ( i != LocalSlot
       && g_pGameType->m_sPlayerColor[i] == g_pGameType->m_sPlayerColor[LocalSlot]
-      && !g_pGameType->m_sPlayerSlot10[i] )
+      && !g_pGameType->m_sPlayerExclusiveColor[i] )
     {
       return 0;
     }
@@ -1488,7 +1489,7 @@ bool  CStateLobbyGameSettings::CheckReady(void) {
   for ( j = 0; j < g_pGameType->m_iActualPlayerCount; ++j )
   {
     v4 = g_pGameType->m_sPlayerTeam[j];
-    if ( !g_pGameType->m_sPlayerSlot10[j] )
+    if ( !g_pGameType->m_sPlayerExclusiveColor[j] )
     {
       if ( (v4 < 0 || (unsigned int)v4 >= g_pGameType->m_uiNumberAlliances)
         && BBSupportDbgReport(

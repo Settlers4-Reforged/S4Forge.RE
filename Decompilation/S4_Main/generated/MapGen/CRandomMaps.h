@@ -51,13 +51,20 @@ public:
     virtual void  GenerateRandomMapFileName(std::wstring & a2, struct SRandomMapParams const & a3);
 
     // address=[0x1499b10]
-    virtual void  AdjustRandomMapFileName(std::wstring & a2);
+    virtual void  AdjustRandomMapFileName(std::wstring & arg0);
 
     // address=[0x1499d90]
     virtual unsigned short const *  GetPreviewData(void);
 
     // address=[0x1499dc0]
     virtual struct SRandomMapInfo const *  GetRandomMapInfo(void);
+
+    // Type information members
+public:
+    bool m_bU0;
+    int m_iU0;
+    int m_iU1;
+    int m_iU2;
 
 };
 

@@ -160,19 +160,19 @@ bool  CSimpleNet::PopMessage(void * & _rMessage, unsigned int & a3, unsigned int
 
 
 // address=[0x15cd190]
-// Decompiled from int __thiscall CSimpleNet::PushMessage(  CSimpleNet *this,  uint _iPeerId,  uint _iId,  u_short _iReceiver,  void *_pData,  size_t _iDataLength,  char _bTryResend,  char a8)
-bool  CSimpleNet::PushMessage(unsigned int _iPeerId, unsigned int _iId, unsigned short _iReceiver, void * _pData, unsigned int _iDataLength, bool _bTryResend, bool a8) {
+// Decompiled from int __thiscall CSimpleNet::PushMessage(  CSimpleNet *this,  uint _iPeerId,  uint _iIp,  u_short _iMessageId,  void *_pData,  size_t _iDataLength,  char _bTryResend,  char _bCompress)
+bool  CSimpleNet::PushMessage(unsigned int _iPeerId, unsigned int _iIp, unsigned short _iMessageId, void * _pData, unsigned int _iDataLength, bool _bTryResend, bool _bCompress) {
   
   __int16 iCompressedSize; // [esp+4h] [ebp-434h]
   uint8_t sz[1056]; // [esp+14h] [ebp-424h] BYREF
 
   sMessage.m_iTime = timeGetTime();
-  sMessage.m_iReceiverId = htons(_iReceiver);
-  sMessage.m_iId = _iId;
+  sMessage.m_iMessageId = htons(_iMessageId);
+  sMessage.m_iIp = _iIp;
   sMessage.m_iU = 0;
   if ( _iDataLength > 0x400 && BBSupportDbgReport(2, "net\\SimpleNet.cpp", 978, "_iDataLength <= MESSAGE_LENGTH") == 1 )
     __debugbreak();
-  if ( a8 )
+  if ( _bCompress )
   {
     if ( _iDataLength > 1024 )
       _iDataLength = 1024;
@@ -256,7 +256,7 @@ void  CSimpleNet::RemoveMsgsForIP(unsigned int _iAddress) {
       std::_List_iterator<std::_List_val<std::_List_simple_types<SMessage>>>::~_List_iterator<std::_List_val<std::_List_simple_types<SMessage>>>(pEnd);
       if ( !bIsAtEnd )
         break;
-      if ( std::_List_iterator<std::_List_val<std::_List_simple_types<SMessage>>>::operator->(pIt)->m_iId == _iAddress )
+      if ( std::_List_iterator<std::_List_val<std::_List_simple_types<SMessage>>>::operator->(pIt)->m_iIp == _iAddress )
       {
         v15 = &v5;
         v14 = std::_List_const_iterator<std::_List_val<std::_List_simple_types<SMessage>>>::_List_const_iterator<std::_List_val<std::_List_simple_types<SMessage>>>(pIt);
@@ -456,10 +456,10 @@ bool  CSimpleNet::RealSendMessage(unsigned int a2, struct SMessage & a3) {
   size_t v6; // [esp+4h] [ebp-8h]
 
   s_Unknown2 = 2;
-  word_415C39A = a3->m_iReceiverId;
-  dword_415C39C = a3->m_iId;
+  word_415C39A = a3->m_iMessageId;
+  dword_415C39C = a3->m_iIp;
   v6 = ((unsigned __int16)HIWORD(a3->m_sMessage.m_iSize) >> 6) + 4;
-  if ( a3->m_iId == -1 )
+  if ( a3->m_iIp == -1 )
   {
     Instance = (OnlineManager *)OnlineManager::GetInstance();
     OnlineManager::Send(Instance, &a3->m_sMessage, v6);

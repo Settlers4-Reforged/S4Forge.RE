@@ -123,16 +123,16 @@ SMessage sMessage;
 
 // address=[0x15cd190]
 // Decompiled from int __thiscall CSimpleNet::PushMessage(  CSimpleNet *this,  uint _iPeerId,  uint _iId,  u_short _iReceiver,  void *_pData,  size_t _iDataLength,  char _bTryResend,  char a8)
-bool CSimpleNet::PushMessage(unsigned int _iPeerId, unsigned int _iId, unsigned short _iReceiver, void *_pData, unsigned int _iDataLength, bool _bTryResend, bool a8) {
+bool CSimpleNet::PushMessage(unsigned int _iPeerId, unsigned int _iIp, unsigned short _iMessageId, void *_pData, unsigned int _iDataLength, bool _bTryResend, bool _bCompress) {
     uint8_t sz[1056]; // [esp+14h] [ebp-424h] BYREF
 
     sMessage.m_iTime = timeGetTime();
-    sMessage.m_iReceiverId = htons(_iReceiver);
-    sMessage.m_iId = _iId;
+    sMessage.m_iMessageId = htons(_iMessageId);
+    sMessage.m_iIp = _iIp;
     sMessage.m_iU = 0;
     if(_iDataLength > 0x400 && BBSupportDbgReport(2, "net\\SimpleNet.cpp", 978, "_iDataLength <= MESSAGE_LENGTH") == 1)
         __debugbreak();
-    if(a8) {
+    if(_bCompress) {
         if(_iDataLength > 1024)
             _iDataLength = 1024;
         memcpy(sz, _pData, _iDataLength);
@@ -178,7 +178,7 @@ void CSimpleNet::RemoveMsgsForIP(unsigned int _iAddress) {
         auto pIt = this->m_vResendMessages.begin();
 
         while(pIt != this->m_vResendMessages.end()) {
-            if(pIt->m_iId == _iAddress) {
+            if(pIt->m_iIp == _iAddress) {
                 pIt = this->m_vResendMessages.erase(pIt);
                 ++iCount;
             } else {
@@ -292,10 +292,10 @@ int s_iLastReceiverIp;
 // Decompiled from char __thiscall CSimpleNet::RealSendMessage(CSimpleNet *this, unsigned int a2, struct SMessage *a3)
 bool CSimpleNet::RealSendMessage(unsigned int a2, SMessage &a3) {
     s_Unknown2 = 2;
-    s_iLastReceiverId = a3.m_iReceiverId;
-    s_iLastReceiverIp = a3.m_iId;
+    s_iLastReceiverId = a3.m_iMessageId;
+    s_iLastReceiverIp = a3.m_iIp;
     size_t v6 = ((a3.m_sMessage.m_iHeader >> 22) & 0x3FF) + 4;
-    if(a3.m_iId == -1) {
+    if(a3.m_iIp == -1) {
         OnlineManager::GetInstance()->Send(&a3.m_sMessage, v6);
     } else {
         OnlineManager::GetInstance()->Send(a2, &a3.m_sMessage, v6);

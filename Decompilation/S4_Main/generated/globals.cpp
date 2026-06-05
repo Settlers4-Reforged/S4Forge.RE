@@ -12947,7 +12947,7 @@ void __cdecl GuiDlgLanLobbyJoingame(int a1) {
   _BYTE v3[24]; // [esp+10h] [ebp-28h] BYREF
   int v4; // [esp+34h] [ebp-4h]
 
-  dword_4030718 = dword_3ECF9B0 + a1;
+  dword_4030718 = s_iLanLobbyPage + a1;
   PlayGuiSound(2);
   v2 = CEvn_Event::CEvn_Event(60, 0, 0, 0);
   IEventEngine::SendAMessage(v2);
@@ -12976,7 +12976,7 @@ void __cdecl GuiDlgLanLobbyConnectFillList(void) {
   v10 = 0;
   for ( i = 0; i < 8; ++i )
   {
-    v4 = i + dword_3ECF9B0;
+    v4 = i + s_iLanLobbyPage;
     if ( i >= dword_4030714 || !dword_403071C )
     {
       for ( j = 0; j < 5; ++j )
@@ -13052,7 +13052,7 @@ LABEL_19:
 // Decompiled from void GuiDlgLanLobbyConnectUpdate()
 void __cdecl GuiDlgLanLobbyConnectUpdate(void) {
   
-  const wchar_t *v0; // eax
+  wchar_t *v0; // eax
   char *v1; // eax
   char *v2; // eax
   int Instance; // [esp+8h] [ebp-130h]
@@ -13064,15 +13064,15 @@ void __cdecl GuiDlgLanLobbyConnectUpdate(void) {
   v6 = 0;
   if ( dword_403071C )
   {
-    v0 = (const wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)&stru_4030720);
+    v0 = std::wstring::c_str(&stru_4030720);
     j__wcstombs(Dest, v0, 0x100u);
-    IGuiEngine::SetTypeAsText((IGuiEngine *)g_pGUIEngine, 2, 2312);
+    IGuiEngine::SetTypeAsText(g_pGUIEngine, 2, GUI_S_MPS_PREONOFF_TT);
     Instance = UPlay::UPlayManager::GetInstance();
     v1 = (char *)(*(int (__thiscall **)(int))(*(_DWORD *)Instance + 16))(Instance);
-    IGuiEngine::SetText((void *)g_pGUIEngine, 2, 2312, v1);
-    v2 = (char *)std::string::c_str(&unk_403073C);
-    IGuiEngine::SetText((void *)g_pGUIEngine, 2, 2313, v2);
-    IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 2, 2313, 0);
+    IGuiEngine::SetText(g_pGUIEngine, 2, GUI_S_MPS_PREONOFF_TT, v1);
+    v2 = std::string::c_str(&stru_403073C);
+    IGuiEngine::SetText(g_pGUIEngine, 2, GUI_S_MPS_RANK_TT, v2);
+    IGuiEngine::SetControlVisibility(g_pGUIEngine, 2, GUI_S_MPS_RANK_TT, 0);
     GuiDlgLanLobbyConnectFillList();
   }
   v6 = -1;
@@ -13112,19 +13112,19 @@ void __cdecl InitGuiDlgLanLobbyConnect(void) {
 
 
 // address=[0x1393720]
-// Decompiled from char __cdecl GuiDlgLanLobbyConnectMenuProc(int a1, int a2, int a3)
+// Decompiled from char __cdecl GuiDlgLanLobbyConnectMenuProc(int a1, int a2, T_S4_TRANSLATION a3)
 bool __cdecl GuiDlgLanLobbyConnectMenuProc(int a1, int a2, int a3) {
   
   char *v4; // eax
-  CEvn_Event *v5; // [esp+8h] [ebp-290h]
-  CEvn_Event *v6; // [esp+10h] [ebp-288h]
-  CEvn_Event *v7; // [esp+18h] [ebp-280h]
+  struct CEvn_Event *v5; // [esp+8h] [ebp-290h]
+  struct CEvn_Event *v6; // [esp+10h] [ebp-288h]
+  struct CEvn_Event *v7; // [esp+18h] [ebp-280h]
   char *Str; // [esp+20h] [ebp-278h]
   char *Source; // [esp+28h] [ebp-270h]
   int Instance; // [esp+2Ch] [ebp-26Ch]
-  _DWORD v11[6]; // [esp+40h] [ebp-258h] BYREF
-  _DWORD v12[6]; // [esp+58h] [ebp-240h] BYREF
-  _DWORD v13[6]; // [esp+70h] [ebp-228h] BYREF
+  CEvn_Event v11; // [esp+40h] [ebp-258h] BYREF
+  CEvn_Event v12; // [esp+58h] [ebp-240h] BYREF
+  CEvn_Event v13; // [esp+70h] [ebp-228h] BYREF
   wchar_t Dest[256]; // [esp+88h] [ebp-210h] BYREF
   int v15; // [esp+294h] [ebp-4h]
 
@@ -13137,8 +13137,8 @@ bool __cdecl GuiDlgLanLobbyConnectMenuProc(int a1, int a2, int a3) {
       GuiDlgLanLobbyConnectUpdate();
       break;
     case 1:
-      if ( (a3 & 0x10000) != 0 )
-        PlayGuiSound(1);
+      if ( (BYTE2(a3) & 1) != 0 )
+        PlayGuiSound(1u);
       else
         PlayGuiSound(0);
       break;
@@ -13152,35 +13152,35 @@ bool __cdecl GuiDlgLanLobbyConnectMenuProc(int a1, int a2, int a3) {
           j__mbstowcs(Dest, Source, 0x100u);
           Dest[31] = 0;
           std::wstring::operator=(&stru_4030720, Dest);
-          PlayGuiSound(2);
+          PlayGuiSound(2u);
         }
       }
       else if ( (unsigned __int16)a2 == 2313 )
       {
-        PlayGuiSound(2);
-        Str = (char *)IGuiEngine::GetText((IGuiEngine *)g_pGUIEngine, 2, 2313);
+        PlayGuiSound(2u);
+        Str = (char *)IGuiEngine::GetText(g_pGUIEngine, 2, GUI_S_MPS_RANK_TT);
         if ( Str )
-          std::string::operator=(&unk_403073C, Str);
+          std::string::operator=(&stru_403073C, Str);
       }
       break;
     case 3:
       switch ( (__int16)a2 )
       {
         case 2273:
-          PlayGuiSound(2);
-          v7 = CEvn_Event::CEvn_Event((CEvn_Event *)v13, 0x3Au, 0, 0, 0);
+          PlayGuiSound(2u);
+          v7 = CEvn_Event::CEvn_Event(&v13, 0x3Au, 0, 0, 0);
           v15 = 0;
           IEventEngine::SendAMessage(g_pEvnEngine, v7);
           v15 = -1;
-          CEvn_Event::~CEvn_Event(v13);
+          CEvn_Event::~CEvn_Event(&v13);
           break;
         case 2276:
-          PlayGuiSound(2);
-          v5 = CEvn_Event::CEvn_Event((CEvn_Event *)v11, 0x3Eu, 0, 0, 0);
+          PlayGuiSound(2u);
+          v5 = CEvn_Event::CEvn_Event(&v11, 0x3Eu, 0, 0, 0);
           v15 = 2;
           IEventEngine::SendAMessage(g_pEvnEngine, v5);
           v15 = -1;
-          CEvn_Event::~CEvn_Event(v11);
+          CEvn_Event::~CEvn_Event(&v11);
           break;
         case 2277:
           GuiDlgLanLobbyJoingame(0);
@@ -13207,28 +13207,28 @@ bool __cdecl GuiDlgLanLobbyConnectMenuProc(int a1, int a2, int a3) {
           GuiDlgLanLobbyJoingame(7);
           break;
         case 2309:
-          if ( dword_3ECF9B0 > 0 )
+          if ( s_iLanLobbyPage > 0 )
           {
-            --dword_3ECF9B0;
-            PlayGuiSound(2);
+            --s_iLanLobbyPage;
+            PlayGuiSound(2u);
             GuiDlgLanLobbyConnectFillList();
           }
           break;
         case 2310:
-          if ( dword_3ECF9B0 + 8 < dword_4030714 )
+          if ( s_iLanLobbyPage + 8 < dword_4030714 )
           {
-            ++dword_3ECF9B0;
-            PlayGuiSound(2);
+            ++s_iLanLobbyPage;
+            PlayGuiSound(2u);
             GuiDlgLanLobbyConnectFillList();
           }
           break;
         case 2311:
-          PlayGuiSound(2);
-          v6 = CEvn_Event::CEvn_Event((CEvn_Event *)v12, 0x3Du, 0, 0, 0);
+          PlayGuiSound(2u);
+          v6 = CEvn_Event::CEvn_Event(&v12, 0x3Du, 0, 0, 0);
           v15 = 1;
           IEventEngine::SendAMessage(g_pEvnEngine, v6);
           v15 = -1;
-          CEvn_Event::~CEvn_Event(v12);
+          CEvn_Event::~CEvn_Event(&v12);
           break;
         default:
           return 1;
@@ -13248,17 +13248,17 @@ bool __cdecl GuiDlgLanLobbyConnectMenuProc(int a1, int a2, int a3) {
     case 10:
       if ( SHIWORD(a2) <= 0 )
       {
-        if ( a2 < 0 && dword_3ECF9B0 + 8 < dword_4030714 )
+        if ( a2 < 0 && s_iLanLobbyPage + 8 < dword_4030714 )
         {
-          ++dword_3ECF9B0;
-          PlayGuiSound(2);
+          ++s_iLanLobbyPage;
+          PlayGuiSound(2u);
           GuiDlgLanLobbyConnectFillList();
         }
       }
-      else if ( dword_3ECF9B0 > 0 )
+      else if ( s_iLanLobbyPage > 0 )
       {
-        --dword_3ECF9B0;
-        PlayGuiSound(2);
+        --s_iLanLobbyPage;
+        PlayGuiSound(2u);
         GuiDlgLanLobbyConnectFillList();
       }
       break;
@@ -16131,7 +16131,7 @@ void __cdecl GuiDlgMainGameSettingsUpdateChangeSlot(int a1) {
 
   for ( i = 0; i < 8; ++i )
   {
-    if ( g_pGameType->m_sPlayerSlot10[g_pGameType->m_sPlayerSlot15[i]] )
+    if ( g_pGameType->m_sPlayerExclusiveColor[g_pGameType->m_sPlayerSlot15[i]] )
       g_pGameType->m_sPlayerSlot15[i] = -1;
   }
   v7 = 0;
@@ -16140,9 +16140,9 @@ void __cdecl GuiDlgMainGameSettingsUpdateChangeSlot(int a1) {
     if ( g_pGameType->m_sPlayerSlot15[i] == a1 )
       v7 = 1;
   }
-  if ( g_pGameType->m_sPlayerSlot15[a1] == -1 || g_pGameType->m_sPlayerSlot10[a1] )
+  if ( g_pGameType->m_sPlayerSlot15[a1] == -1 || g_pGameType->m_sPlayerExclusiveColor[a1] )
   {
-    if ( g_pGameType->m_sPlayerSlot10[a1] || !v7 || (result = a1, g_pGameType->m_sPlayerSlot15[a1] == a1) )
+    if ( g_pGameType->m_sPlayerExclusiveColor[a1] || !v7 || (result = a1, g_pGameType->m_sPlayerSlot15[a1] == a1) )
     {
       _wsprintfA(v2, "%u", a1 + 1);
       IGuiEngine::SetFontTemplate(g_pGUIEngine, dword_403089C, dword_3690578[11 * a1], 1);
@@ -16191,12 +16191,12 @@ void __cdecl GuiDlgMainGameSettingstUpdate(void) {
   String::String((char *)byte_368FCC2, -1);
   v18 = 0;
   byte_3ED2031 = 1;
-  if ( byte_4030852 && !byte_4030853 )
+  if ( s_bIsHost && !byte_4030853 )
     IGuiEngine::SetControlVisibility(g_pGUIEngine, dword_403089C, 2244, 0);
   IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, 2244, byte_40308A1);
   IGuiEngine::SelectControl(g_pGUIEngine, dword_403089C, 2244, byte_40308A2);
   if ( g_pGameType->m_sPlayerType[dword_3D891AC] == 1
-    || !byte_4030852
+    || !s_bIsHost
     || INetworkEngine::StormDidEnterSession((INetworkEngine *)g_pNetworkEngine) )
   {
     dword_3D891AC = (char)CPlayerManager::GetLocalSlot();
@@ -16251,12 +16251,12 @@ void __cdecl GuiDlgMainGameSettingstUpdate(void) {
   {
     IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, 2187, 1);
   }
-  if ( byte_4030852 )
+  if ( s_bIsHost )
     IGuiEngine::SetControlVisibility(g_pGUIEngine, dword_403089C, 2142, 1);
   else
     IGuiEngine::SetControlVisibility(g_pGUIEngine, dword_403089C, 2142, 0);
   IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, 2142, byte_403088C);
-  if ( !byte_4030852 )
+  if ( !s_bIsHost )
     IGuiEngine::SetControlVisibility(g_pGUIEngine, dword_403089C, 2141, byte_4030854 != 1);
   v0 = std::wstring::c_str(&stru_40307CC);
   j__wcstombs(Destination, v0, 0x100u);
@@ -16332,7 +16332,7 @@ void __cdecl GuiDlgMainGameSettingstUpdate(void) {
         || g_pGameType->m_sPlayerSlot11[i] == 6
         && g_pGameType->m_sPlayerType[i] != 2
         && g_pGameType->m_sPlayerType[i] != 3
-        && !g_pGameType->m_sPlayerSlot10[i]
+        && !g_pGameType->m_sPlayerExclusiveColor[i]
         || (!CGameType::IsClanGame(g_pGameType)
           ? (v5 = 1)
           : (v5 = *(_DWORD *)(dword_403083C + 2116 * (char)CPlayerManager::GetLocalSlot() + 4) == *(_DWORD *)(dword_403083C + 2116 * i + 4)),
@@ -16370,7 +16370,7 @@ LABEL_95:
         dword_36906D8[3 * *(_DWORD *)(dword_403083C + 2116 * i + 60) + 2],
         0);
       IGuiEngine::SetControlVisibility(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 9], 1);
-      if ( byte_4030852 && *(_BYTE *)(dword_403083C + 2116 * i + 2113) )
+      if ( s_bIsHost && *(_BYTE *)(dword_403083C + 2116 * i + 2113) )
         IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 9], 1);
       else
         IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 9], 0);
@@ -16384,7 +16384,7 @@ LABEL_95:
         v6 = *(_DWORD *)(dword_403083C + 2116 * i + 60);
         if ( v6 == 2 || v6 == 3 )
         {
-          if ( byte_4030852 )
+          if ( s_bIsHost )
             v12 = 1;
         }
         else if ( v6 == 1 )
@@ -16453,20 +16453,13 @@ LABEL_95:
         dword_3690578[11 * i + 9],
         dword_36906D8[3 * *(_DWORD *)(dword_403083C + 2116 * i + 60) + 2],
         0);
-      if ( v12
-        && !*(_BYTE *)(dword_403083C + 2116 * i + 64)
-        && *(_BYTE *)(dword_403083C + 2116 * i + 2113)
-        && byte_4030852 )
-      {
+      if ( v12 && !*(_BYTE *)(dword_403083C + 2116 * i + 64) && *(_BYTE *)(dword_403083C + 2116 * i + 2113) && s_bIsHost )
         IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 9], 1);
-      }
       else
-      {
         IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 9], 0);
-      }
       GuiDlgMainGameSettingsUpdateChangeSlot(i);
-      v4 = *(_DWORD *)(dword_403083C + 2116 * i + 60) == 1 && !*(_BYTE *)(dword_403083C + 2116 * i + 64) && byte_4030852;
-      IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 10], byte_4030852);
+      v4 = *(_DWORD *)(dword_403083C + 2116 * i + 60) == 1 && !*(_BYTE *)(dword_403083C + 2116 * i + 64) && s_bIsHost;
+      IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 10], s_bIsHost);
       IGuiEngine::SetControlVisibility(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 10], v4);
     }
   }
@@ -16514,7 +16507,7 @@ void __cdecl InitGuiDlgMainGameSettings(void) {
     IGuiEngine::SetText((void *)g_pGUIEngine, dword_403089C, 2244, v5);
     IGuiEngine::SetTypeAsButton((IGuiEngine *)g_pGUIEngine, dword_403089C, 2144);
     IGuiEngine::SetWidth((IGuiEngine *)g_pGUIEngine, dword_403089C, 2143, 0x28u);
-    if ( !byte_4030852 )
+    if ( !s_bIsHost )
     {
       for ( i = 0; i < 8; ++i )
       {
@@ -16641,7 +16634,7 @@ bool __cdecl GuiDlgMainGameSettingsProc(int a1, int a2, int a3) {
     v50 = LocalSlot;
     if ( LocalSlot <= 0 )
     {
-      if ( byte_4030853 && !byte_4030852 )
+      if ( byte_4030853 && !s_bIsHost )
       {
         if ( LocalSlot >= 0 )
         {
@@ -16697,7 +16690,7 @@ bool __cdecl GuiDlgMainGameSettingsProc(int a1, int a2, int a3) {
               IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, 2244, 0);
               for ( i = 0; i < 8; ++i )
               {
-                if ( !g_pGameType->m_sPlayerSlot10[i] )
+                if ( !g_pGameType->m_sPlayerExclusiveColor[i] )
                 {
                   IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 9], 0);
                   IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 10], 0);
@@ -30797,7 +30790,7 @@ void __cdecl PlayGuiSound(int a1) {
   int result; // eax
 
   if ( a1 <= 5 )
-    return CSoundManager::PlaySoundFX(g_pSoundManager, dword_3D891B8[a1]);
+    return CSoundManager::PlaySoundFX(g_pSoundManager, s_iGuiSoundTable[a1]);
   return result;
 }
 
@@ -37419,26 +37412,26 @@ unsigned char * __cdecl _mbsstr(unsigned char * const a1, unsigned char const * 
 // [Decompilation failed for char * __cdecl MyStrNCopy(char *,char const *,unsigned int)]
 
 // address=[0x14971c0]
-// Decompiled from int __cdecl MyWStrNCopy(int a1, _WORD *a2, int a3)
+// Decompiled from int __cdecl MyWStrNCopy(wchar_t *a1, const wchar_t *a2, unsigned int a3)
 wchar_t * __cdecl MyWStrNCopy(wchar_t * a1, wchar_t const * a2, unsigned int a3) {
   
   unsigned int v4; // [esp+Ch] [ebp-4h]
   unsigned int v5; // [esp+20h] [ebp+10h]
 
   if ( a3 == 0 || a1 == 0 )
-    return a1;
+    return (int)a1;
   v5 = a3 - 1;
   v4 = 0;
   if ( *a2 )
   {
     while ( v4 < v5 && a2[v4] )
     {
-      *(_WORD *)(a1 + 2 * v4) = a2[v4];
+      a1[v4] = a2[v4];
       ++v4;
     }
   }
-  *(_WORD *)(a1 + 2 * v4) = 0;
-  return a1;
+  a1[v4] = 0;
+  return (int)a1;
 }
 
 

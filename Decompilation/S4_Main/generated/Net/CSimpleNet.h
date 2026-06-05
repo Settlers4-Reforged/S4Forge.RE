@@ -24,7 +24,7 @@ public:
     virtual bool  PopMessage(void * & _rMessage, unsigned int & a3, unsigned int & _iPeerId);
 
     // address=[0x15cd190]
-    virtual bool  PushMessage(unsigned int _iPeerId, unsigned int _iId, unsigned short _iReceiver, void * _pData, unsigned int _iDataLength, bool _bTryResend, bool a8);
+    virtual bool  PushMessage(unsigned int _iPeerId, unsigned int _iIp, unsigned short _iMessageId, void * _pData, unsigned int _iDataLength, bool _bTryResend, bool _bCompress);
 
     // address=[0x15cd490]
     virtual char *  GetIPString(unsigned int a2);

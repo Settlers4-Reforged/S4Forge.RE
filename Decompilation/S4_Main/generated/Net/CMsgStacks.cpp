@@ -218,16 +218,16 @@ bool  CMsgStacks::PushMsg(class CNet_Event & a2) {
 class CNet_Event  CMsgStacks::PopMsg(void a2) {
   
   int i; // [esp+8h] [ebp-28h]
-  _BYTE v5[32]; // [esp+Ch] [ebp-24h] BYREF
+  CNet_Event v5; // [esp+Ch] [ebp-24h] BYREF
 
   for ( i = 0; i < this[4]; ++i )
   {
     if ( !CMsgStack::IsEmpty((CMsgStack *)this[i + 5]) )
     {
-      CMsgStack::GetMsg(this[i + 5], v5);
-      v5[30] = i + 1;
-      CNet_Event::CNet_Event((struct boost::exception_detail::clone_base *)v5);
-      CNet_Event::~CNet_Event((CNet_Event *)v5);
+      CMsgStack::GetMsg(this[i + 5], &v5);
+      v5.m_iOwner = i + 1;
+      CNet_Event::CNet_Event((struct boost::exception_detail::clone_base *)&v5);
+      CNet_Event::~CNet_Event(&v5);
       return a2;
     }
   }
@@ -329,8 +329,8 @@ class CNet_Event  CMsgStacks::GetMsgToSend(void a2) {
 
 
 // address=[0x15cbd50]
-// Decompiled from void __thiscall CMsgStacks::SetNumberOfExpectedMsgs(CMsgStacks *this, int _iTick, char _iPlayerID, unsigned __int8 a4)
-void  CMsgStacks::SetNumberOfExpectedMsgs(unsigned int _iTick, unsigned char _iPlayerID, unsigned char a4) {
+// Decompiled from void __thiscall CMsgStacks::SetNumberOfExpectedMsgs(  CMsgStacks *this,  int _iTick,  char _iPlayerID,  unsigned __int8 _iCount)
+void  CMsgStacks::SetNumberOfExpectedMsgs(unsigned int _iTick, unsigned char _iPlayerID, unsigned char _iCount) {
   
   int v4; // [esp+8h] [ebp-8h]
 
@@ -348,12 +348,12 @@ void  CMsgStacks::SetNumberOfExpectedMsgs(unsigned int _iTick, unsigned char _iP
          "MsgStacks:Future Netmsg got: Tick %d, Player %d size %d!",
          _iTick,
          (unsigned __int8)_iPlayerID,
-         a4) == 1 )
+         _iCount) == 1 )
   {
     __debugbreak();
   }
   if ( v4 >= 1 )
-    CMsgStack::SetExpectedSize(a4);
+    CMsgStack::SetExpectedSize(*((CMsgStack **)this + 8 * v4 + (unsigned __int8)_iPlayerID + 5), _iCount);
 }
 
 

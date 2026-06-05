@@ -1057,12 +1057,12 @@ bool __cdecl CGameStateHandler::StartDummyGame(void) {
         std::wstring::~wstring(&v31);
       }
       g_pGameType->m_sPlayerType[i] = 1;
-      g_pGameType->m_sPlayerSlot10[i] = 0;
+      g_pGameType->m_sPlayerExclusiveColor[i] = 0;
       SysFreeString(swSetupName);
       SysFreeString(swPlayerName);
     }
     g_pGameType->m_bAIActive = 1;
-    g_pGameType->dword44 = 0x100007F;
+    g_pGameType->m_iHostAddress = 0x100007F;
     g_pGameType->dword2E0 = 0;
     g_pGameType->m_uiNumberAlliances = v22 + 1;
     g_pGameType->m_iMode = 1;
@@ -1112,7 +1112,7 @@ bool __cdecl CGameStateHandler::StartDummyGame(void) {
         v18 = 0;
       else
         v18 = 0x100007F;
-      g_pGameType->m_sPlayerIP[i] = v18;
+      g_pGameType->m_uiIPPlayer[i] = v18;
     }
     for ( i = 0; i < g_pGameType->m_iActualPlayerCount; ++i )
       g_pGameType->m_sPlayerColor[i] = i;

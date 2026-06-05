@@ -65,7 +65,7 @@ class CGameState * __cdecl CStateLobbyConnect::DynamicCreateFunc(void * a1) {
   dword_4030714 = 0;
   dword_403071C = (int)this + 2804;
   v5 = std::string::string(v11, (char *)&byte_3743BDB);
-  std::string::operator=(&unk_403073C, v5);
+  std::string::operator=(&stru_403073C, v5);
   std::string::~string(v11);
   v7 = UPlay::UPlayManager::GetInstance();
   Source = (char *)(*(int (__thiscall **)(int))(*(_DWORD *)v7 + 16))(v7);

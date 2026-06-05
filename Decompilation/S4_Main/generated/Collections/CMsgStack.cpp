@@ -101,14 +101,14 @@ bool  CMsgStack::IsValid(void) {
 
 
 // address=[0x15c9f00]
-// Decompiled from DWORD __thiscall sub_19C9F00(_DWORD *this, int a2)
+// Decompiled from DWORD __thiscall CMsgStack::SetExpectedSize(CMsgStack *this, int a2)
 void  CMsgStack::SetExpectedSize(int a2) {
   
   DWORD result; // eax
 
-  this[4] = a2;
+  *((_DWORD *)this + 4) = a2;
   result = timeGetTime();
-  this[6] = result;
+  *((_DWORD *)this + 6) = result;
   return result;
 }
 

@@ -66,7 +66,7 @@ public:
     class CNet_Event  GetMsgToSend(void a2);
 
     // address=[0x15cbd50]
-    void  SetNumberOfExpectedMsgs(unsigned int _iTick, unsigned char _iPlayerID, unsigned char a4);
+    void  SetNumberOfExpectedMsgs(unsigned int _iTick, unsigned char _iPlayerID, unsigned char _iCount);
 
     // address=[0x15cbe20]
     bool  IsSizeAlreadySet(unsigned int a2, unsigned char a3);

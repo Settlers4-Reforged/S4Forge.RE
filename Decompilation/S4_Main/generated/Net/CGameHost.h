@@ -39,7 +39,7 @@ public:
     bool  PushMsg(class CNet_Event & _rMsg);
 
     // address=[0x15b6190]
-    void  PushAsyncMsg(class CNet_Event & Src, unsigned char a3);
+    void  PushAsyncMsg(class CNet_Event & _rEvent, unsigned char _iPlayerMap);
 
     // address=[0x15b63b0]
     class CNet_Event  PopMsg(void a2);
@@ -69,7 +69,7 @@ public:
     void  DeliverSimpleMessage(void);
 
     // address=[0x15b8d70]
-    std::string  ConvertIPAddress(unsigned int a2);
+    std::string  ConvertIPAddress(unsigned int _rIp);
 
     // address=[0x15b8de0]
     bool  RemovePlayerPeerId(unsigned int a2);
@@ -131,13 +131,13 @@ private:
     void  ProcessPlayerData(struct SLobbyPlayerData & a1);
 
     // address=[0x15ba130]
-    void  SendPlayerData(unsigned int a2);
+    void  SendPlayerData(unsigned int _iFinal);
 
     // address=[0x15ba420]
     void  SendToAll(unsigned int a2, short * _pvData0, unsigned int _uiDataLength0, short * _pvData1, unsigned int _uiDataLength1, bool a7);
 
     // address=[0x15ba650]
-    void  SendToHost(unsigned int a2, short * Src, unsigned int Size, short * a5, unsigned int a6, bool a7);
+    void  SendToHost(unsigned int a2, short * _pvData0, unsigned int _uiDataLength0, short * _pvData1, unsigned int _uiDataLength1, bool a7);
 
     // address=[0x15ba860]
     bool  AddGame(struct SGameInfo & a2);
@@ -206,7 +206,7 @@ private:
     bool  ResendPlayerPing(void * a2);
 
     // address=[0x15bc450]
-    bool  HostPressedStart(void * a1);
+    bool  HostPressedStart(void * a2);
 
     // address=[0x15bc560]
     bool  InitGameStruct(void * Src);
@@ -309,23 +309,24 @@ private:
 
     // Type information members
 public:
-    BYTE a;
-    BYTE b;
-    BYTE c;
+    BYTE m_bHost;
+    BYTE m_bClient;
+    BYTE m_bIsOnlineGame;
     BYTE d;
     CFsm * m_pFSM;
     CClientList * m_pClientList;
     CMsgStacks * m_pMsgStacks;
-    _DWORD dword18;
+    _DWORD m_iInitTime;
     _DWORD m_iSearchForHostStopped;
-    _BYTE[4] gap_20;
-    _DWORD dword24;
+    _DWORD m_iHostRun;
+    _DWORD m_iLastPingTime;
     _DWORD m_iLastLoginTick;
     _DWORD m_iLoginAttempts;
     _DWORD m_iStartTickSignalTick;
     _DWORD m_iInitGameStartTick;
     _DWORD m_iNotReadyTimeoutTick;
-    _BYTE[4] gap_3C;
+    bool m_bInitFinished;
+    _BYTE[3] gap_3D;
     _DWORD dword40;
     BYTE * m_pMapDownloadData;
     BYTE * m_pMapDownloadBlocks;
@@ -339,7 +340,7 @@ public:
     _DWORD[8] field_98;
     int m_iMapUpload;
     _DWORD dwordBC;
-    _DWORD dwordC0;
+    _DWORD m_iReadyTime;
     CSimpleNet * m_pSimpleNet;
     int[8] m_iSyncA;
     int[8] m_iSyncB;
@@ -347,12 +348,7 @@ public:
     _BYTE[3] gap109;
     std::list m_vGameInfos;
     std::list m_vNetEvents;
-    WORD field_124;
-    _DWORD field_126;
-    BYTE field_12A;
-    DWORD field_12B;
-    CNet_Event m_cNetEvent;
-    _BYTE[928] gap_14F;
+    CGameHost::SMessageBuffer m_sBuffer;
 
 };
 

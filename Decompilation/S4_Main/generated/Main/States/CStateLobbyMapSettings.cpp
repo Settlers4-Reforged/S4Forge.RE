@@ -276,7 +276,7 @@ bool  CStateLobbyMapSettings::OnEvent(class CEvn_Event & a2) {
         g_pGameType->m_iStartResources = dword_4031930;
         g_pGameType->m_iMode = dword_4031934;
         g_pGameType->m_iActualPlayerCount = dword_4031924;
-        std::wstring::operator=(&g_pGameType->string0, &stru_4031960);
+        std::wstring::operator=(&g_pGameType->m_swGameName, &stru_4031960);
         if ( *((_BYTE *)v50 + 4) )
           v31 = 2;
         else
@@ -293,7 +293,7 @@ bool  CStateLobbyMapSettings::OnEvent(class CEvn_Event & a2) {
         CGameType::SetPlayerName(g_pGameType, v6, v17);
         v56 = -1;
         std::wstring::~wstring(&v52);
-        g_pGameType->byte230 = byte_403199C;
+        g_pGameType->m_uExtraFlags = byte_403199C;
         for ( i = 0; i < g_pGameType->m_iActualPlayerCount; ++i )
           g_pGameType->m_sPlayerTeam[i] %= g_pGameType->m_uiNumberAlliances;
         if ( dword_4031934 == 5 )

@@ -23,9 +23,9 @@ public:
     _DWORD m_uCampaignType;
     _DWORD dwordC;
     _DWORD dword10;
-    _DWORD dword14;
-    _DWORD dword18;
-    _DWORD dword1C;
+    _DWORD m_iVersionMajor;
+    _DWORD m_iVersionMinor;
+    _DWORD m_iVersionBuild;
     _DWORD m_iWidthHeight;
     _BYTE[64] gap24;
     wchar_t[256] m_swUnknown;
