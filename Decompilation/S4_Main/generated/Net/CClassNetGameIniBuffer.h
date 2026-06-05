@@ -14,6 +14,11 @@ public:
     // address=[0x15c3880]
      CClassNetGameIniBuffer(char const * a2, unsigned int a3);
 
+    // Type information members
+public:
+    const char * m_spBuffer;
+    unsigned int m_uFileSize;
+
 };
 
 
