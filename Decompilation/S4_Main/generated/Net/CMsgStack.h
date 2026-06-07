@@ -18,7 +18,7 @@ public:
     void  Clear(void);
 
     // address=[0x15c9dc0]
-    class CNet_Event  GetMsg(void a1);
+    class CNet_Event  GetMsg(void retstr);
 
     // address=[0x15c9e60]
     void  AddMsg(class CNet_Event & a2);
@@ -33,7 +33,7 @@ public:
     void  Sort(void);
 
     // address=[0x15c9f50]
-    bool  IsInStack(unsigned char a2);
+    bool  IsInStack(unsigned char _iId);
 
     // address=[0x15cadc0]
     bool  IsSizeAlreadySet(void);
@@ -52,6 +52,13 @@ public:
 
     // address=[0x15cc650]
     void  SetAI(bool a2);
+
+    // Type information members
+public:
+    std::list this_list;
+    int m_iExpectedSize;
+    char m_iAI;
+    int m_iChangeTime;
 
 };
 
