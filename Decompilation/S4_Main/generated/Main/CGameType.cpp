@@ -534,8 +534,8 @@ bool  CGameType::LoadMapData(std::wstring _sMapName, bool _bAIActive, unsigned i
       this->m_sPlayerStartX[i] = Chunk[i + 6];
       this->m_sPlayerStartY[i] = Chunk[i + 15];
       this->m_sPlayerTeam[i] = i;
-      this->field_3E6[i] = 1;
-      this->field_3E6[i + 9] = 1;
+      this->m_bPlayerSlotEmpty[i] = 1;
+      this->m_bPlayerSlotEmpty[i + 9] = 1;
       if ( i && _bAIActive )
       {
         if ( _iAIDifficulty == -1 )
@@ -772,7 +772,7 @@ bool  CGameType::LoadMapData(std::wstring _sMapName, bool _bAIActive, unsigned i
             v69 = 1;
           ++v56;
         }
-        this->field_3E6[m] = 0;
+        this->m_bPlayerSlotEmpty[m] = 0;
         if ( iPlayerControl == 2 )
         {
           if ( _iAIDifficulty == -1 )
@@ -788,7 +788,7 @@ bool  CGameType::LoadMapData(std::wstring _sMapName, bool _bAIActive, unsigned i
       else
       {
         ++v56;
-        this->field_3E6[m] = 1;
+        this->m_bPlayerSlotEmpty[m] = 1;
         this->m_sPlayerType[m] = 1;
         if ( _bAIActive )
         {
@@ -809,12 +809,12 @@ bool  CGameType::LoadMapData(std::wstring _sMapName, bool _bAIActive, unsigned i
         v45 = this->m_sPlayerTeam[m];
       if ( this->m_sPlayerRaces[m] == 255 )
       {
-        this->field_3E6[m + 9] = 1;
+        this->m_bPlayerSlotEmpty[m + 9] = 1;
         this->m_sPlayerRaces[m] = 5;
       }
       else
       {
-        this->field_3E6[m + 9] = 0;
+        this->m_bPlayerSlotEmpty[m + 9] = 0;
       }
       if ( this->m_bIsCampaignMap )
         this->m_sPlayerExclusiveColor[m] = 0;
@@ -1120,7 +1120,7 @@ void  CGameType::Init(void) {
     this->m_sPlayerSlot8[j] = j;
     this->m_sPlayerAckDelta[j] = 0;
     this->m_sPlayerExclusiveColor[j] = 1;
-    this->m_sPlayerSlot11[j] = 0;
+    this->m_sPlayerMapUploadStarted[j] = 0;
     this->m_sPlayerSlot12[j] = 0;
     this->m_sPlayerValidTicks[j] = -1;
     std::wstring::operator=(&this->m_swPlayerClanShortcut[j], (wchar_t *)&emptyString4);
@@ -1326,11 +1326,11 @@ void  CGameType::PatchMaps(bool a2) {
   if ( result == 1 )
   {
     this->byte35C = 1;
-    this->field_3E6[0] = 1;
-    this->field_3E6[1] = 1;
-    this->field_3E6[9] = 1;
+    this->m_bPlayerSlotEmpty[0] = 1;
+    this->m_bPlayerSlotEmpty[1] = 1;
+    this->m_bPlayerSlotEmpty[9] = 1;
     result = 1;
-    this->field_3E6[10] = 1;
+    this->m_bPlayerSlotEmpty[10] = 1;
     if ( !a2 )
     {
       *(_DWORD *)this->m_sPlayerType = 1;

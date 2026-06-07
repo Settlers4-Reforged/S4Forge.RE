@@ -28,5 +28,5 @@ CNet_Event::CNet_Event(unsigned int a2, unsigned int a3, unsigned int a4, unsign
 // Decompiled from bool __thiscall CNet_Event::operator<(CNet_Event *this, CNet_Event *a2)
 bool CNet_Event::operator<(CNet_Event const &a2)
 {
-  return this->m_iFlags < (int)a2.m_iFlags;
+  return this->m_iMsgNr < (int)a2.m_iMsgNr;
 }

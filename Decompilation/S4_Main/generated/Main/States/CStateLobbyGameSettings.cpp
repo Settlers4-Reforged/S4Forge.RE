@@ -1471,7 +1471,7 @@ bool  CStateLobbyGameSettings::CheckReady(void) {
   LocalSlot = (char)CPlayerManager::GetLocalSlot();
   if ( !CGameType::IsMapLoaded(g_pGameType) && !byte_40308A3 )
     return 0;
-  if ( g_pGameType->m_sPlayerSlot11[LocalSlot] == 6 )
+  if ( g_pGameType->m_sPlayerMapUploadStarted[LocalSlot] == 6 )
     return 1;
   for ( i = 0; i < g_pGameType->m_iMapMaxNumPlayers; ++i )
   {

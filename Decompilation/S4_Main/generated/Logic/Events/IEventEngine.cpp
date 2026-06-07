@@ -150,7 +150,7 @@ bool  IEventEngine::SendRawWindowEvent(unsigned int a2, unsigned int a3, unsigne
   s_sRawWindowEvent.m_lParam = a5;
   s_sRawWindowEvent.m_iEventId = a3;
   s_sRawWindowEvent.m_wParam = a4;
-  s_sRawWindowEvent.m_iFlags = 0;
+  s_sRawWindowEvent.m_iMsgNr = 0;
   if ( this->m_pTick )
     s_sRawWindowEvent.m_iTick = *this->m_pTick;
   return IEventEngine::OnEvent(this, &s_sRawWindowEvent);
@@ -177,7 +177,7 @@ bool  IEventEngine::SendRawLogicEvent(unsigned int a2, unsigned int a3, unsigned
   s_sRawLogicEvent.m_lParam = a4;
   s_sRawLogicEvent.m_iEventId = a2;
   s_sRawLogicEvent.m_wParam = a3;
-  s_sRawLogicEvent.m_iFlags = 0;
+  s_sRawLogicEvent.m_iMsgNr = 0;
   if ( this->m_pTick )
     s_sRawLogicEvent.m_iTick = *this->m_pTick;
   return IEventEngine::OnEvent(this, &s_sRawLogicEvent);
@@ -201,7 +201,7 @@ bool  IEventEngine::SendRawEvent(unsigned int a2, unsigned int a3, unsigned int 
   s_sRawEvent.m_lParam = a4;
   s_sRawEvent.m_iEventId = a2;
   s_sRawEvent.m_wParam = a3;
-  s_sRawEvent.m_iFlags = 0;
+  s_sRawEvent.m_iMsgNr = 0;
   if ( this->m_pTick )
     s_sRawEvent.m_iTick = *this->m_pTick;
   return IEventEngine::OnEvent(this, &s_sRawEvent);

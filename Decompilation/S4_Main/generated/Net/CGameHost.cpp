@@ -1,3 +1,4 @@
+#if FALSE
 #include "CGameHost.h"
 
 // Definitions for class CGameHost
@@ -22,9 +23,9 @@ bool  CGameHost::AllSend(void) {
   int CurrentTickCounter; // eax
   char v5; // [esp-8h] [ebp-2Ch]
   char v6; // [esp-8h] [ebp-2Ch]
-  char v8; // [esp+8h] [ebp-1Ch]
+  CGameHost::SSync0Message sSync0Msg; // [esp+4h] [ebp-20h] BYREF
   int LocalPlayerId; // [esp+Ch] [ebp-18h]
-  int iCurrentTick; // [esp+10h] [ebp-14h] MAPDST BYREF
+  int iCurrentTick; // [esp+10h] [ebp-14h]
   int iMessagesInBuffer; // [esp+14h] [ebp-10h]
   BYTE *pMessageBufferPtr; // [esp+18h] [ebp-Ch]
   CNet_Event *evn; // [esp+1Ch] [ebp-8h]
@@ -61,7 +62,7 @@ bool  CGameHost::AllSend(void) {
       CMsgStacks::PushMsg(this->m_pMsgStacks, evn);
       evn->m_iOwner = 0;
       evn->m_iUnknown = 0;
-      evn->m_iFlags = 0;
+      evn->m_iMsgNr = 0;
       evn->unk_15 = 0;
       evn->unk_16 = 0;
       evn->unk_17 = 0;
@@ -87,10 +88,11 @@ bool  CGameHost::AllSend(void) {
   }
   else
   {
-    v8 = CPlayerManager::GetLocalPlayerId();
+    sSync0Msg.m_iPlayerId = CPlayerManager::GetLocalPlayerId();
     iCurrentTick = IEventEngine::GetCurrentTickCounter(g_pEvnEngine);
+    sSync0Msg.m_iCurrentTick = iCurrentTick;
     if ( this->m_bIsOnlineGame )
-      CGameHost::SendToAll(this, 1055, &iCurrentTick, 5u, 0, 0, 1u);
+      CGameHost::SendToAll(this, 1055, &sSync0Msg, 5u, 0, 0, 1u);
     v5 = CPlayerManager::GetLocalPlayerId() - 1;
     v2 = IEventEngine::GetCurrentTickCounter(g_pEvnEngine);
     CMsgStacks::SetNumberOfExpectedMsgs(this->m_pMsgStacks, v2, v5, 0);
@@ -246,7 +248,7 @@ bool  CGameHost::InitAsHost(unsigned int a2) {
   this->m_iLoginAttempts = 0;
   this->m_iStartTickSignalTick = 0;
   this->m_iInitGameStartTick = 0;
-  this->m_bInitFinished[0] = 0;
+  this->m_bInitFinished = 0;
   this->dword40 = 0;
   this->m_pMapDownloadData = 0;
   this->m_pMapDownloadBlocks = 0;
@@ -259,9 +261,9 @@ bool  CGameHost::InitAsHost(unsigned int a2) {
   this->m_pSimpleNet = 0;
   std::list<SGameInfo>::list<SGameInfo>(&this->m_vGameInfos);
   std::list<CNet_Event>::list<CNet_Event>(&this->m_vNetEvents);
-  memset(this->field_58, 0, sizeof(this->field_58));
-  memset(this->field_78, 0, sizeof(this->field_78));
-  memset(this->field_98, 0, sizeof(this->field_98));
+  memset(this->m_iMapUploadSentChunks, 0, sizeof(this->m_iMapUploadSentChunks));
+  memset(this->m_iMapUploadChunks, 0, sizeof(this->m_iMapUploadChunks));
+  memset(this->m_pMapUploadBuffer, 0, sizeof(this->m_pMapUploadBuffer));
   memset(this->m_iSyncA, 0, sizeof(this->m_iSyncA));
   memset(this->m_iSyncB, 0, sizeof(this->m_iSyncB));
   memset(&this->m_sBuffer, 0, 971u);
@@ -390,62 +392,62 @@ LABEL_12:
 
 
 // address=[0x15b5ed0]
-// Decompiled from void __thiscall CGameHost::~CGameHost(CGameHost *this)
+// Decompiled from int __thiscall CGameHost::~CGameHost(CGameHost *this)
  CGameHost::~CGameHost(void) {
   
-  CFsm *v1; // [esp+28h] [ebp-20h]
-  void (__thiscall ***v2)(_DWORD, int); // [esp+2Ch] [ebp-1Ch]
-  void (__thiscall ***v3)(_DWORD, int); // [esp+30h] [ebp-18h]
+  CFsm *m_pFSM; // [esp+28h] [ebp-20h]
+  CClientList *m_pClientList; // [esp+2Ch] [ebp-1Ch]
+  CMsgStacks *m_pMsgStacks; // [esp+30h] [ebp-18h]
   int i; // [esp+34h] [ebp-14h]
 
-  *(_DWORD *)this = &CGameHost::_vftable_;
-  if ( *((_DWORD *)this + 5) )
+  this->__vftable = (CGameHost_vtbl *)&CGameHost::_vftable_;
+  if ( this->m_pMsgStacks )
   {
-    v3 = (void (__thiscall ***)(_DWORD, int))*((_DWORD *)this + 5);
-    if ( v3 )
-      (**v3)(v3, 1);
-    *((_DWORD *)this + 5) = 0;
+    m_pMsgStacks = this->m_pMsgStacks;
+    if ( m_pMsgStacks )
+      (**(void (__thiscall ***)(CMsgStacks *, int))m_pMsgStacks)(m_pMsgStacks, 1);
+    this->m_pMsgStacks = 0;
   }
-  if ( *((_DWORD *)this + 4) )
+  if ( this->m_pClientList )
   {
-    v2 = (void (__thiscall ***)(_DWORD, int))*((_DWORD *)this + 4);
-    if ( v2 )
-      (**v2)(v2, 1);
-    *((_DWORD *)this + 4) = 0;
+    m_pClientList = this->m_pClientList;
+    if ( m_pClientList )
+      ((void (__thiscall *)(CClientList *, int))m_pClientList->vftable->j_??_ECClientList@@UAEPAXI@Z)(m_pClientList, 1);
+    this->m_pClientList = 0;
   }
-  if ( *((_DWORD *)this + 3) )
+  if ( this->m_pFSM )
   {
-    v1 = (CFsm *)*((_DWORD *)this + 3);
-    if ( v1 )
-      delete v1;
-    *((_DWORD *)this + 3) = 0;
+    m_pFSM = this->m_pFSM;
+    if ( m_pFSM )
+      delete m_pFSM;
+    this->m_pFSM = 0;
   }
-  if ( *((_DWORD *)this + 18) )
+  if ( this->m_pMapDownloadBlocks )
   {
-    operator delete[](*((void **)this + 18));
-    *((_DWORD *)this + 18) = 0;
+    operator delete[](this->m_pMapDownloadBlocks);
+    this->m_pMapDownloadBlocks = 0;
   }
-  if ( *((_DWORD *)this + 17) )
+  if ( this->m_pMapDownloadData )
   {
-    operator delete[](*((void **)this + 17));
-    *((_DWORD *)this + 17) = 0;
+    operator delete[](this->m_pMapDownloadData);
+    this->m_pMapDownloadData = 0;
   }
-  if ( *((_DWORD *)this + 49) )
+  if ( this->m_pSimpleNet )
   {
-    (***((void (__thiscall ****)(_DWORD))this + 49))(*((_DWORD *)this + 49));
-    *((_DWORD *)this + 49) = 0;
+    this->m_pSimpleNet->Delete(this->m_pSimpleNet);
+    this->m_pSimpleNet = 0;
   }
   for ( i = 0; i < 8; ++i )
   {
-    if ( *((_DWORD *)this + i + 38) )
+    if ( this->m_pMapUploadBuffer[i] )
     {
-      operator delete(*((void **)this + i + 38));
-      *((_DWORD *)this + i + 38) = 0;
+      operator delete((void *)this->m_pMapUploadBuffer[i]);
+      this->m_pMapUploadBuffer[i] = 0;
     }
   }
   std::list<CNet_Event>::~list<CNet_Event>();
   std::list<SGameInfo>::~list<SGameInfo>();
-  IEventHandler::~IEventHandler(this);
+  return IEventHandler::~IEventHandler((void **)&this->__vftable);
 }
 
 
@@ -1787,7 +1789,7 @@ void  CGameHost::OnQuickMatchedHosted(void) {
   {
     if ( g_pGameType->m_sPlayerType[i] == 2
       || g_pGameType->m_sPlayerType[i] == 3
-      || g_pGameType->field_3E6[i] && !this->m_bIsOnlineGame )
+      || g_pGameType->m_bPlayerSlotEmpty[i] && !this->m_bIsOnlineGame )
     {
       v11 = -1;
       v3 = CGameType::GetPlayerName(g_pGameType, &v7, i);
@@ -2115,7 +2117,7 @@ void  CGameHost::ProcessPlayerData(struct SLobbyPlayerData & a1) {
   g_pGameType->m_sPlayerRaces[a1->m_iPlayerId] = a1->m_iRace;
   g_pGameType->m_sPlayerType[a1->m_iPlayerId] = a1->m_iType;
   g_pGameType->m_sPlayerExclusiveColor[a1->m_iPlayerId] = a1->m_iSlot10;
-  g_pGameType->m_sPlayerSlot11[a1->m_iPlayerId] = a1->m_iSlot11;
+  g_pGameType->m_sPlayerMapUploadStarted[a1->m_iPlayerId] = a1->m_iSlot11;
   g_pGameType->m_iStartResources = a1->m_iStartResources;
   g_pGameType->m_iMode = a1->m_iMode;
   g_pGameType->m_uExtraFlags = a1->m_uExtraFlags;
@@ -2168,7 +2170,7 @@ void  CGameHost::SendPlayerData(unsigned int _iFinal) {
     Src.m_iRace = g_pGameType->m_sPlayerRaces[i];
     Src.m_iType = g_pGameType->m_sPlayerType[i];
     Src.m_iSlot10 = g_pGameType->m_sPlayerExclusiveColor[i];
-    Src.m_iSlot11 = g_pGameType->m_sPlayerSlot11[i];
+    Src.m_iSlot11 = g_pGameType->m_sPlayerMapUploadStarted[i];
     RealPlayerName = CGameType::GetRealPlayerName(g_pGameType, i);
     v3 = std::wstring::c_str(RealPlayerName);
     MyWStrNCopy(Src.m_swpPlayerName, v3, 64u);
@@ -2372,7 +2374,8 @@ bool  CGameHost::AddGame(struct SGameInfo & a2) {
     if ( !v17 )
       break;
     v14 = std::_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>::operator*(v11);
-    if ( v14->m_uSessionId == a2->m_uSessionId && v14->? == a2->? )
+    if ( LODWORD(v14->m_uSessionId) == LODWORD(a2->m_uSessionId)
+      && HIDWORD(v14->m_uSessionId) == HIDWORD(a2->m_uSessionId) )
     {
       v6 = a2;
       v11[8] = (std::_Iterator_base12 *)&v3;
@@ -2442,7 +2445,7 @@ void  CGameHost::ValidateGameList(void) {
   v20 = &v2;
   v19 = std::list<SGameInfo>::begin(&this->m_vGameInfos, (int)&v2);// (unsigned int)(a2->m_iStartTime + 6000) < Time;
   v18 = std::remove_if<std::_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>,_lambda_a570ae9d9b6327d9fce7c622bf5e21bb_>(
-          v12,
+          (int)v12,
           v2,
           v3,
           v4,
@@ -2663,7 +2666,7 @@ bool  CGameHost::HostChoseMap(void * a2) {
   {
     if ( g_pGameType->m_sPlayerType[i] == 2
       || g_pGameType->m_sPlayerType[i] == 3
-      || g_pGameType->field_3E6[i] && !this->m_bIsOnlineGame )
+      || g_pGameType->m_bPlayerSlotEmpty[i] && !this->m_bIsOnlineGame )
     {
       v15 = -1;
       v7 = CGameType::GetPlayerName(g_pGameType, &v11, i);
@@ -2883,7 +2886,7 @@ bool  CGameHost::ClientLoginHost(void * arg0) {
   OnlineManager *v7; // eax
   int v8; // eax
   int v9; // eax
-  unsigned __int64 *p_m_uId; // [esp-4h] [ebp-1368h]
+  unsigned __int64 *p_m_uSessionId; // [esp-4h] [ebp-1368h]
   _BYTE v12[12]; // [esp+4h] [ebp-1360h] BYREF
   _BYTE v13[12]; // [esp+10h] [ebp-1354h] BYREF
   std::wstring *v14[3]; // [esp+1Ch] [ebp-1348h] BYREF
@@ -2960,9 +2963,9 @@ bool  CGameHost::ClientLoginHost(void * arg0) {
     CGameType::SetLocalSlot(g_pGameType, v25.m_cLocalSlot);
     while ( CClientList::GetSize(this->m_pClientList) )
       CClientList::RemoveClientAt(0);
-    p_m_uId = &v21->m_uSessionId;
+    p_m_uSessionId = &v21->m_uSessionId;
     v7 = (OnlineManager *)OnlineManager::GetInstance();
-    OnlineManager::JoinSession(v7, p_m_uId);
+    OnlineManager::JoinSession(v7, p_m_uSessionId);
     LOBYTE(v29) = 0;
     std::_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>::~_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>(v14);
   }
@@ -3035,7 +3038,7 @@ bool  CGameHost::ClientJoins(void * Src) {
   if ( iLocalSlotID < 0 && BBSupportDbgReport(2, "Net\\GameHost.cpp", 2508, "iLocalSlotID >=0") == 1 )
     __debugbreak();
   if ( iLocalSlotID >= 0 )
-    g_pGameType->field_3E6[iLocalSlotID] = 0;
+    g_pGameType->m_bPlayerSlotEmpty[iLocalSlotID] = 0;
   CLanLobby::RedrawPlayerList();
   CFsm::Control(this->m_pFSM, 1035, 0);
   return 1;
@@ -3291,61 +3294,57 @@ bool  CGameHost::GameAlreadyFull(void * a1) {
 // Decompiled from char __thiscall CGameHost::SendMapToClient(CGameHost *this, int _iClient)
 bool  CGameHost::SendMapToClient(void * _iClient) {
   
-  unsigned int v2; // eax
   struct CEvn_Event *v4; // [esp+8h] [ebp-4E0h]
-  uint v5; // [esp+14h] [ebp-4D4h]
-  uint v6; // [esp+18h] [ebp-4D0h]
+  uint iPeerId; // [esp+14h] [ebp-4D4h]
+  unsigned int iIp; // [esp+18h] [ebp-4D0h] MAPDST
   struct CEvn_Event *v7; // [esp+1Ch] [ebp-4CCh]
-  int v8; // [esp+2Ch] [ebp-4BCh]
-  int Slot; // [esp+30h] [ebp-4B8h]
-  int iSlot; // [esp+38h] [ebp-4B0h]
-  __int16 v12; // [esp+40h] [ebp-4A8h] BYREF
-  int v13; // [esp+42h] [ebp-4A6h]
-  _BYTE v14[1022]; // [esp+46h] [ebp-4A2h] BYREF
-  CFile v15; // [esp+444h] [ebp-A4h] BYREF
-  CEvn_Event v16; // [esp+48Ch] [ebp-5Ch] BYREF
-  CEvn_Event v17; // [esp+4A4h] [ebp-44h] BYREF
+  unsigned int iChunkOffset; // [esp+2Ch] [ebp-4BCh]
+  int iSlot; // [esp+38h] [ebp-4B0h] MAPDST
+  CGameHost::SMapMessage sMessage; // [esp+40h] [ebp-4A8h] BYREF
+  CFile cMapFile; // [esp+444h] [ebp-A4h] BYREF
+  CEvn_Event v14; // [esp+48Ch] [ebp-5Ch] BYREF
+  CEvn_Event v15; // [esp+4A4h] [ebp-44h] BYREF
   std::wstring a1; // [esp+4BCh] [ebp-2Ch] BYREF
-  int v19; // [esp+4E4h] [ebp-4h]
+  int v17; // [esp+4E4h] [ebp-4h]
 
   if ( _iClient )
   {
-    v2 = this->m_pSimpleNet->GetLastSenderIP(this->m_pSimpleNet);
-    Slot = CGameHost::GetSlot(this, v2);
-    if ( this->field_98[Slot] )
+    iIp = this->m_pSimpleNet->GetLastSenderIP(this->m_pSimpleNet);
+    iSlot = CGameHost::GetSlot(this, iIp);
+    if ( this->m_pMapUploadBuffer[iSlot] )
     {
       return 1;
     }
     else
     {
-      this->field_98[Slot] = operator new[](g_pGameType->m_iFileSize);
+      this->m_pMapUploadBuffer[iSlot] = (char *)operator new[](g_pGameType->m_iFileSize);
       std::wstring::wstring(&a1, &g_pGameType->m_swMapName);
-      v19 = 0;
-      CFile::CFile(&v15);
-      LOBYTE(v19) = 1;
-      CFile::Open(&v15, &a1, CFile_BINARY|CFile_READ, UNUSED_ARG(), UNUSED_ARG());
-      CFile::Read(&v15, (void *)this->field_98[Slot], g_pGameType->m_iFileSize, 1u, UNUSED_ARG(), UNUSED_ARG());
-      CFile::Close(&v15, UNUSED_ARG(), UNUSED_ARG());
+      v17 = 0;
+      CFile::CFile(&cMapFile);
+      LOBYTE(v17) = 1;
+      CFile::Open(&cMapFile, &a1, CFile_BINARY|CFile_READ, UNUSED_ARG(), UNUSED_ARG());
+      CFile::Read(&cMapFile, this->m_pMapUploadBuffer[iSlot], g_pGameType->m_iFileSize, 1u, UNUSED_ARG(), UNUSED_ARG());
+      CFile::Close(&cMapFile, UNUSED_ARG(), UNUSED_ARG());
       if ( ++this->m_iMapUpload == 1 )
       {
-        v7 = CEvn_Event::CEvn_Event(&v17, 80u, 1u, 0, 0);
-        LOBYTE(v19) = 2;
+        v7 = CEvn_Event::CEvn_Event(&v15, 80u, 1u, 0, 0);
+        LOBYTE(v17) = 2;
         IEventEngine::SendAMessage(g_pEvnEngine, v7);
-        LOBYTE(v19) = 1;
-        CEvn_Event::~CEvn_Event(&v17);
+        LOBYTE(v17) = 1;
+        CEvn_Event::~CEvn_Event(&v15);
       }
       if ( this->m_iMapUpload >= 7
         && BBSupportDbgReport(2, "Net\\GameHost.cpp", 2749, "m_iMapUpload < MAX_PLAYER - 1") == 1 )
       {
         __debugbreak();
       }
-      this->field_78[Slot] = g_pGameType->m_iFileSize / 0x300u;
+      this->m_iMapUploadChunks[iSlot] = g_pGameType->m_iFileSize / 0x300u;
       if ( g_pGameType->m_iFileSize % 0x300u )
-        ++this->field_78[Slot];
-      g_pGameType->m_sPlayerSlot11[Slot] = 1;
-      LOBYTE(v19) = 0;
-      CFile::~CFile(&v15);
-      v19 = -1;
+        ++this->m_iMapUploadChunks[iSlot];
+      g_pGameType->m_sPlayerMapUploadStarted[iSlot] = 1;
+      LOBYTE(v17) = 0;
+      CFile::~CFile(&cMapFile);
+      v17 = -1;
       std::wstring::~wstring(&a1);
       return 1;
     }
@@ -3354,7 +3353,7 @@ bool  CGameHost::SendMapToClient(void * _iClient) {
   {
     for ( iSlot = 0; iSlot < 8; ++iSlot )
     {
-      if ( this->field_98[iSlot] )
+      if ( this->m_pMapUploadBuffer[iSlot] )
       {
         if ( g_pGameType->m_uiIPPlayer[iSlot] == this->m_pSimpleNet->GetCurrentLocalIPLong(this->m_pSimpleNet)
           && BBSupportDbgReport(
@@ -3365,40 +3364,43 @@ bool  CGameHost::SendMapToClient(void * _iClient) {
         {
           __debugbreak();
         }
-        v12 = 1043;
-        v6 = this->m_pSimpleNet->GetLastSenderIP(this->m_pSimpleNet);
-        v5 = this->m_pSimpleNet->GetLastSenderPeerId(this->m_pSimpleNet);
-        if ( this->field_58[iSlot] >= this->field_78[iSlot] )
+        sMessage.m_iId = 1043;
+        iIp = this->m_pSimpleNet->GetLastSenderIP(this->m_pSimpleNet);
+        iPeerId = this->m_pSimpleNet->GetLastSenderPeerId(this->m_pSimpleNet);
+        if ( this->m_iMapUploadSentChunks[iSlot] >= this->m_iMapUploadChunks[iSlot] )
         {
-          if ( this->field_98[iSlot] )
+          if ( this->m_pMapUploadBuffer[iSlot] )
           {
-            operator delete((void *)this->field_98[iSlot]);
-            this->field_98[iSlot] = 0;
+            operator delete(this->m_pMapUploadBuffer[iSlot]);
+            this->m_pMapUploadBuffer[iSlot] = 0;
           }
-          this->field_58[iSlot] = 0;
+          this->m_iMapUploadSentChunks[iSlot] = 0;
           if ( !--this->m_iMapUpload )
           {
-            v4 = CEvn_Event::CEvn_Event(&v16, 0x50u, 0, 0, 0);
-            v19 = 3;
+            v4 = CEvn_Event::CEvn_Event(&v14, 0x50u, 0, 0, 0);
+            v17 = 3;
             IEventEngine::SendAMessage(g_pEvnEngine, v4);
-            v19 = -1;
-            CEvn_Event::~CEvn_Event(&v16);
+            v17 = -1;
+            CEvn_Event::~CEvn_Event(&v14);
           }
           if ( this->m_iMapUpload < 0 && BBSupportDbgReport(2, "Net\\GameHost.cpp", 2804, "m_iMapUpload >= 0") == 1 )
             __debugbreak();
-          g_pGameType->m_sPlayerSlot11[iSlot] = 0;
+          g_pGameType->m_sPlayerMapUploadStarted[iSlot] = 0;
         }
         else
         {
-          v13 = this->field_58[iSlot];
-          v8 = 768 * this->field_58[iSlot];
-          if ( (unsigned int)(v8 + 768) <= g_pGameType->m_iFileSize )
-            memcpy(v14, (const void *)(v8 + this->field_98[iSlot]), 0x300u);
+          sMessage.m_iChunkId = this->m_iMapUploadSentChunks[iSlot];
+          iChunkOffset = 0x300 * this->m_iMapUploadSentChunks[iSlot];
+          if ( iChunkOffset + 0x300 <= g_pGameType->m_iFileSize )
+            memcpy(sMessage.m_iMapData, &this->m_pMapUploadBuffer[iSlot][iChunkOffset], 0x300u);
           else
-            memcpy(v14, (const void *)(v8 + this->field_98[iSlot]), g_pGameType->m_iFileSize - v8);
-          this->m_pSimpleNet->PushMessage(this->m_pSimpleNet, v5, v6, 3105, &v12, 774, 1, 1);
-          CTrace::Print("GameHost.cpp: Map block sent. Block %d!", v13);
-          ++this->field_58[iSlot];
+            memcpy(
+              sMessage.m_iMapData,
+              &this->m_pMapUploadBuffer[iSlot][iChunkOffset],
+              g_pGameType->m_iFileSize - iChunkOffset);
+          this->m_pSimpleNet->PushMessage(this->m_pSimpleNet, iPeerId, iIp, 3105, &sMessage, 774, 1, 1);
+          CTrace::Print("GameHost.cpp: Map block sent. Block %d!", sMessage.m_iChunkId);
+          ++this->m_iMapUploadSentChunks[iSlot];
         }
       }
     }
@@ -3595,106 +3597,106 @@ bool  CGameHost::SendChatLine(void * Source) {
 
 
 // address=[0x15bd420]
-// Decompiled from char __thiscall CGameHost::UserDataChange(CGameHost *this, int *a2)
+// Decompiled from char __thiscall CGameHost::UserDataChange(CGameHost *this, CGameHost::SChangeMessage *a2)
 bool  CGameHost::UserDataChange(void * a2) {
   
   int v4; // [esp+8h] [ebp-14h]
   DWORD v5; // [esp+Ch] [ebp-10h]
   int i; // [esp+14h] [ebp-8h]
 
-  switch ( a2[1] )
+  switch ( a2->m_iType )
   {
     case 0:
       do
       {
-        if ( a2[2] == 6 )
+        if ( a2->m_iTarget == 6 )
         {
-          if ( --g_pGameType->m_sPlayerColor[*a2] == -1 )
-            g_pGameType->m_sPlayerColor[*a2] = 7;
+          if ( --g_pGameType->m_sPlayerColor[a2->m_iSlot] == -1 )
+            g_pGameType->m_sPlayerColor[a2->m_iSlot] = 7;
         }
-        else if ( ++g_pGameType->m_sPlayerColor[*a2] == 8 )
+        else if ( ++g_pGameType->m_sPlayerColor[a2->m_iSlot] == 8 )
         {
-          g_pGameType->m_sPlayerColor[*a2] = 0;
+          g_pGameType->m_sPlayerColor[a2->m_iSlot] = 0;
         }
       }
-      while ( !CGameHost::IsExclusiveColor(this, *a2) );
+      while ( !CGameHost::IsExclusiveColor(this, a2->m_iSlot) );
       break;
     case 1:
-      if ( g_pGameType->field_3EF[*a2] )
+      if ( g_pGameType->field_3EF[a2->m_iSlot] )
       {
-        if ( a2[2] == 6 )
+        if ( a2->m_iTarget == 6 )
         {
-          if ( g_pGameType->m_sPlayerRaces[*a2] )
-            --g_pGameType->m_sPlayerRaces[*a2];
+          if ( g_pGameType->m_sPlayerRaces[a2->m_iSlot] )
+            --g_pGameType->m_sPlayerRaces[a2->m_iSlot];
           else
-            g_pGameType->m_sPlayerRaces[*a2] = 5;
-          while ( g_pGameType->m_sPlayerRaces[*a2] == 3
-               || g_pGameType->m_sPlayerRaces[*a2] == 4 && (g_uiExtrasAllowed & 1) == 0 )
-            --g_pGameType->m_sPlayerRaces[*a2];
+            g_pGameType->m_sPlayerRaces[a2->m_iSlot] = 5;
+          while ( g_pGameType->m_sPlayerRaces[a2->m_iSlot] == 3
+               || g_pGameType->m_sPlayerRaces[a2->m_iSlot] == 4 && (g_uiExtrasAllowed & 1) == 0 )
+            --g_pGameType->m_sPlayerRaces[a2->m_iSlot];
         }
         else
         {
-          if ( g_pGameType->m_sPlayerRaces[*a2] == 5 )
-            g_pGameType->m_sPlayerRaces[*a2] = 0;
+          if ( g_pGameType->m_sPlayerRaces[a2->m_iSlot] == 5 )
+            g_pGameType->m_sPlayerRaces[a2->m_iSlot] = 0;
           else
-            ++g_pGameType->m_sPlayerRaces[*a2];
-          while ( g_pGameType->m_sPlayerRaces[*a2] == 3
-               || g_pGameType->m_sPlayerRaces[*a2] == 4 && (g_uiExtrasAllowed & 1) == 0 )
+            ++g_pGameType->m_sPlayerRaces[a2->m_iSlot];
+          while ( g_pGameType->m_sPlayerRaces[a2->m_iSlot] == 3
+               || g_pGameType->m_sPlayerRaces[a2->m_iSlot] == 4 && (g_uiExtrasAllowed & 1) == 0 )
           {
-            if ( ++g_pGameType->m_sPlayerRaces[*a2] == 6 )
-              g_pGameType->m_sPlayerRaces[*a2] = 0;
+            if ( ++g_pGameType->m_sPlayerRaces[a2->m_iSlot] == 6 )
+              g_pGameType->m_sPlayerRaces[a2->m_iSlot] = 0;
           }
         }
       }
       break;
     case 2:
-      if ( a2[2] == 6 )
+      if ( a2->m_iTarget == 6 )
       {
-        if ( --g_pGameType->m_sPlayerTeam[*a2] == -1 )
-          g_pGameType->m_sPlayerTeam[*a2] = g_pGameType->m_uiNumberAlliances - 1;
+        if ( --g_pGameType->m_sPlayerTeam[a2->m_iSlot] == -1 )
+          g_pGameType->m_sPlayerTeam[a2->m_iSlot] = g_pGameType->m_uiNumberAlliances - 1;
       }
-      else if ( a2[2] == 7 && ++g_pGameType->m_sPlayerTeam[*a2] == g_pGameType->m_uiNumberAlliances )
+      else if ( a2->m_iTarget == 7 && ++g_pGameType->m_sPlayerTeam[a2->m_iSlot] == g_pGameType->m_uiNumberAlliances )
       {
-        g_pGameType->m_sPlayerTeam[*a2] = 0;
+        g_pGameType->m_sPlayerTeam[a2->m_iSlot] = 0;
       }
       break;
     case 4:
-      if ( a2[2] == 6 )
+      if ( a2->m_iTarget == 6 )
       {
-        if ( --g_pGameType->m_sPlayerSlot8[*a2] == -1 )
-          g_pGameType->m_sPlayerSlot8[*a2] = 7;
+        if ( --g_pGameType->m_sPlayerSlot8[a2->m_iSlot] == -1 )
+          g_pGameType->m_sPlayerSlot8[a2->m_iSlot] = 7;
       }
-      else if ( ++g_pGameType->m_sPlayerSlot8[*a2] == 8 )
+      else if ( ++g_pGameType->m_sPlayerSlot8[a2->m_iSlot] == 8 )
       {
-        g_pGameType->m_sPlayerSlot8[*a2] = 0;
+        g_pGameType->m_sPlayerSlot8[a2->m_iSlot] = 0;
       }
       break;
     case 5:
-      if ( a2[2] )
+      if ( a2->m_iTarget )
         v5 = 6;
       else
         v5 = 0;
-      g_pGameType->m_sPlayerSlot11[*a2] = v5;
+      g_pGameType->m_sPlayerMapUploadStarted[a2->m_iSlot] = v5;
       break;
     case 9:
       v4 = 0;
       for ( i = 0; i < 8; ++i )
       {
-        if ( g_pGameType->m_sPlayerSlot15[i] == *a2 )
+        if ( g_pGameType->m_sPlayerSlot15[i] == a2->m_iSlot )
           v4 = i;
       }
-      if ( *a2 == a2[2] )
+      if ( a2->m_iSlot == a2->m_iTarget )
       {
         g_pGameType->m_sPlayerSlot15[v4] = -1;
-        g_pGameType->m_sPlayerSlot15[*a2] = -1;
+        g_pGameType->m_sPlayerSlot15[a2->m_iSlot] = -1;
       }
       else
       {
-        g_pGameType->m_sPlayerSlot15[*a2] = a2[2];
+        g_pGameType->m_sPlayerSlot15[a2->m_iSlot] = a2->m_iTarget;
       }
       break;
     default:
-      CTrace::Print("GameHost: Invalid Change Type %d from Slot %d!", a2[1], *a2);
+      CTrace::Print("GameHost: Invalid Change Type %d from Slot %d!", a2->m_iType, a2->m_iSlot);
       break;
   }
   CLanLobby::RedrawPlayerList();
@@ -3712,7 +3714,7 @@ bool  CGameHost::KickClient(void * a2) {
   v4 = g_pGameType->m_sPlayerPeerId[a2];
   CLanLobby::DisconnectPlayerPeerId(v4, -1);
   CClientList::RemoveClientPeerId(this->m_pClientList, v4);
-  g_pGameType->field_3E6[a2] = 1;
+  g_pGameType->m_bPlayerSlotEmpty[a2] = 1;
   v5 = 1053;
   this->m_pSimpleNet->PushMessage(this->m_pSimpleNet, v4, g_pGameType->m_uiIPPlayer[a2], 3105, &v5, 2, 0, 1);
   CLanLobby::RedrawPlayerList();
@@ -3769,9 +3771,9 @@ bool  CGameHost::UserChangeSlots(void * a2) {
     v8 = g_pGameType->m_sPlayerPeerId[v15];
     v7 = g_pGameType->m_sPlayerColor[v15];
     v13 = g_pGameType->m_sPlayerExclusiveColor[v15];
-    v6 = g_pGameType->m_sPlayerSlot11[v15];
+    v6 = g_pGameType->m_sPlayerMapUploadStarted[v15];
     v5 = g_pGameType->m_sPlayerAckDelta[v15];
-    v12 = g_pGameType->field_3E6[v15];
+    v12 = g_pGameType->m_bPlayerSlotEmpty[v15];
     RealPlayerName = CGameType::GetRealPlayerName(g_pGameType, v15);
     std::wstring::wstring(&v17, RealPlayerName);
     v19 = 0;
@@ -3782,9 +3784,9 @@ bool  CGameHost::UserChangeSlots(void * a2) {
     g_pGameType->m_sPlayerPeerId[v15] = g_pGameType->m_sPlayerPeerId[v14];
     g_pGameType->m_sPlayerColor[v15] = g_pGameType->m_sPlayerColor[v14];
     g_pGameType->m_sPlayerExclusiveColor[v15] = g_pGameType->m_sPlayerExclusiveColor[v14];
-    g_pGameType->m_sPlayerSlot11[v15] = g_pGameType->m_sPlayerSlot11[v14];
+    g_pGameType->m_sPlayerMapUploadStarted[v15] = g_pGameType->m_sPlayerMapUploadStarted[v14];
     g_pGameType->m_sPlayerAckDelta[v15] = g_pGameType->m_sPlayerAckDelta[v14];
-    g_pGameType->field_3E6[v15] = g_pGameType->field_3E6[v14];
+    g_pGameType->m_bPlayerSlotEmpty[v15] = g_pGameType->m_bPlayerSlotEmpty[v14];
     g_pGameType->m_sPlayerSlot15[v15] = -1;
     v3 = CGameType::GetRealPlayerName(g_pGameType, v14);
     CGameType::SetPlayerName(g_pGameType, v15, v3);
@@ -3798,9 +3800,9 @@ bool  CGameHost::UserChangeSlots(void * a2) {
     g_pGameType->m_sPlayerPeerId[v14] = v8;
     g_pGameType->m_sPlayerColor[v14] = v7;
     g_pGameType->m_sPlayerExclusiveColor[v14] = v13;
-    g_pGameType->m_sPlayerSlot11[v14] = v6;
+    g_pGameType->m_sPlayerMapUploadStarted[v14] = v6;
     g_pGameType->m_sPlayerAckDelta[v14] = v5;
-    g_pGameType->field_3E6[v14] = v12;
+    g_pGameType->m_bPlayerSlotEmpty[v14] = v12;
     g_pGameType->m_sPlayerSlot15[v14] = -1;
     CGameType::SetPlayerName(g_pGameType, v14, &v17);
     CGameType::SetPlayerClanShortcut(g_pGameType, v14, &v18);
@@ -4267,7 +4269,7 @@ bool  CGameHost::GameAsyncMsgGot(void * Src) {
     {
       __debugbreak();
     }
-    s_sAsyncMsg.m_iData = (BYTE *)&unk_415B2B0;
+    s_sAsyncMsg.m_iData = (BYTE *)s_sAsyncMsgBuffer;
   }
   CEvn_Logic::CEvn_Logic(
     &v4,
@@ -4289,20 +4291,19 @@ bool  CGameHost::GameAsyncMsgGot(void * Src) {
 // Decompiled from char __thiscall CGameHost::AmIStillAlive(CGameHost *this, int a2)
 bool  CGameHost::AmIStillAlive(void * a2) {
   
-  int v2; // eax
-  int Src; // [esp+0h] [ebp-410h] BYREF
-  CGameHost *v5; // [esp+4h] [ebp-40Ch]
-  __int64 v6; // [esp+8h] [ebp-408h] BYREF
-  char v7; // [esp+10h] [ebp-400h]
-  char v8; // [esp+14h] [ebp-3FCh]
+  uint v2; // eax
+  uint Src; // [esp+0h] [ebp-410h] BYREF
+  int v6; // [esp+8h] [ebp-408h] BYREF
+  size_t v7; // [esp+Ch] [ebp-404h]
+  char v8; // [esp+10h] [ebp-400h]
+  char v9; // [esp+14h] [ebp-3FCh]
 
-  v5 = this;
   LOWORD(v6) = 1041;
   Src = CPlayerManager::GetLocalPlayerId() - 1;
-  memcpy((char *)&v6 + 2, &Src, 4u);
-  v5->m_pSimpleNet->GetLastSenderIP(v5->m_pSimpleNet);
-  v2 = v5->m_pSimpleNet->GetLastSenderPeerId(v5->m_pSimpleNet);
-  v5->m_pSimpleNet->PushMessage(v5->m_pSimpleNet, v2, Src, (u_short)v5, (void *)v6, HIDWORD(v6), v7, v8);// peer, ip, c21h, v6, 6, 0, 1
+  memcpy((char *)&v6 + 2, &Src, sizeof(int));
+  this->m_pSimpleNet->GetLastSenderIP(this->m_pSimpleNet);
+  v2 = this->m_pSimpleNet->GetLastSenderPeerId(this->m_pSimpleNet);
+  this->m_pSimpleNet->PushMessage(this->m_pSimpleNet, v2, Src, (u_short)this, (void *)v6, v7, v8, v9);// peer, ip, c21h, v6, 6, 0, 1
   return 1;
 }
 
@@ -4323,35 +4324,36 @@ bool  CGameHost::HeIsStillAlive(void * a1) {
 // Decompiled from char __thiscall CGameHost::GameInGamePackedGot(CGameHost *this, CGameHost::SMessageBuffer *a2)
 bool  CGameHost::GameInGamePackedGot(void * a2) {
   
-  int v3; // [esp+4h] [ebp-1Ch]
+  int iPackCount; // [esp+4h] [ebp-1Ch]
   uint m_uTick; // [esp+8h] [ebp-18h]
-  struct CNet_Event *Src; // [esp+10h] [ebp-10h]
+  char *pPackedBuffer; // [esp+10h] [ebp-10h]
   int v6; // [esp+14h] [ebp-Ch]
   struct CNet_Event *v8; // [esp+1Ch] [ebp-4h]
 
   v6 = (a2->m_uPlayerMap & 0xF) + 1;
   m_uTick = a2->m_uTick;
-  v3 = a2->m_uFlags & 0xF;
-  Src = (struct CNet_Event *)a2->m_vMessages;
+  iPackCount = a2->m_uFlags & 0xF;
+  pPackedBuffer = a2->m_vMessages;
   if ( (unsigned __int8)CMsgStacks::IsSizeAlreadySet(m_uTick, a2->m_uPlayerMap & 0xF) )
     return 1;
-  CMsgStacks::SetNumberOfExpectedMsgs(this->m_pMsgStacks, m_uTick, v6 - 1, v3);
+  CMsgStacks::SetNumberOfExpectedMsgs(this->m_pMsgStacks, m_uTick, v6 - 1, iPackCount);
   *((_DWORD *)&this->m_pSimpleNet + v6) += m_uTick - CGameHost::GetValidTick(this);// SyncA
   ++this->m_iSyncA[v6 + 7];                     // SyncB
-  while ( v3 )
+  while ( iPackCount )
   {
-    v8 = Src++;
+    v8 = (struct CNet_Event *)pPackedBuffer;
+    pPackedBuffer += 32;                        // sizeof(CNet_Event *)
     v8->m_iTick = m_uTick;
     v8->m_iOwner = v6;
     if ( v8->m_iDataSize )
     {
       v8->m_iData = (BYTE *)operator new[](v8->m_iDataSize);
-      memcpy(v8->m_iData, Src, v8->m_iDataSize);
-      Src = (struct CNet_Event *)((char *)Src + v8->m_iDataSize);
+      memcpy(v8->m_iData, pPackedBuffer, v8->m_iDataSize);
+      pPackedBuffer += v8->m_iDataSize;
     }
     if ( !CMsgStacks::IsStackAI(this->m_pMsgStacks, v8->m_iOwner - 1) )
       CMsgStacks::PushMsg(this->m_pMsgStacks, v8);
-    --v3;
+    --iPackCount;
   }
   return 1;
 }
@@ -4401,3 +4403,4 @@ bool  CGameHost::DoNothing(void * a1) {
 }
 
 
+#endif // Already implemented

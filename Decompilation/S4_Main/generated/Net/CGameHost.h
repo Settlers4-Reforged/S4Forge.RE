@@ -312,7 +312,6 @@ public:
     BYTE m_bHost;
     BYTE m_bClient;
     BYTE m_bIsOnlineGame;
-    BYTE d;
     CFsm * m_pFSM;
     CClientList * m_pClientList;
     CMsgStacks * m_pMsgStacks;
@@ -326,18 +325,16 @@ public:
     _DWORD m_iInitGameStartTick;
     _DWORD m_iNotReadyTimeoutTick;
     bool m_bInitFinished;
-    _BYTE[3] gap_3D;
     _DWORD dword40;
     BYTE * m_pMapDownloadData;
     BYTE * m_pMapDownloadBlocks;
     BYTE m_bMapBeingDownloaded;
     BYTE m_bHasSentMap;
-    _BYTE[2] gap4E;
     _DWORD m_iMapDownloadBlocksArrived;
     DWORD m_iMapDownloadLastBlock;
-    _DWORD[8] field_58;
-    _DWORD[8] field_78;
-    _DWORD[8] field_98;
+    _DWORD[8] m_iMapUploadSentChunks;
+    _DWORD[8] m_iMapUploadChunks;
+    char *[8] m_pMapUploadBuffer;
     int m_iMapUpload;
     _DWORD dwordBC;
     _DWORD m_iReadyTime;
@@ -345,7 +342,6 @@ public:
     int[8] m_iSyncA;
     int[8] m_iSyncB;
     BYTE m_bHasError;
-    _BYTE[3] gap109;
     std::list m_vGameInfos;
     std::list m_vNetEvents;
     CGameHost::SMessageBuffer m_sBuffer;

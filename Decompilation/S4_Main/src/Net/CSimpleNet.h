@@ -21,15 +21,17 @@ struct SMessageBuffer {
     uint8_t m_cDataBuffer[2048];
 };
 
-struct [[gnu::packed]] SMessage {
+#pragma pack(1)
+struct SMessage {
     int m_iTime;
     int m_iU;
     int m_iIp;
     __int16 m_iMessageId;
     SMessageBuffer m_sMessage;
 };
-
 static_assert(sizeof(SMessage) == 0x812, "Size of SMessage is not correct");
+
+class CSimpleNet *CreateSimpleNet();
 
 class CSimpleNet : public ISimpleNet {
   public:

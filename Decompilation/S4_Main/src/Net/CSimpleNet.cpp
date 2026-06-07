@@ -6,6 +6,15 @@
 
 // Definitions for class CSimpleNet
 
+CSimpleNet *CreateSimpleNet() {
+    if(!WSAStartup) {
+        BB_REPORT("One or more function ptrs to WS2_32.DLL are NULL. You must call ImportWSAFunctions() before !")
+        return 0;
+    }
+
+    return new CSimpleNet();
+}
+
 // address=[0x15ccbf0]
 // Decompiled from CSimpleNet *__thiscall CSimpleNet::CSimpleNet(CSimpleNet *this)
 CSimpleNet::CSimpleNet(void) : ISimpleNet(), m_vLocalAddresses(), m_vResendMessages(), m_sError() {

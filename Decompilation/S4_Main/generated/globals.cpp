@@ -16328,8 +16328,8 @@ void __cdecl GuiDlgMainGameSettingstUpdate(void) {
     if ( v7 == -1 )
     {
       if ( !CGameType::IsSlotChangable(g_pGameType, i, 0)
-        || g_pGameType->m_sPlayerSlot11[(char)CPlayerManager::GetLocalSlot()] == 6
-        || g_pGameType->m_sPlayerSlot11[i] == 6
+        || g_pGameType->m_sPlayerMapUploadStarted[(char)CPlayerManager::GetLocalSlot()] == 6
+        || g_pGameType->m_sPlayerMapUploadStarted[i] == 6
         && g_pGameType->m_sPlayerType[i] != 2
         && g_pGameType->m_sPlayerType[i] != 3
         && !g_pGameType->m_sPlayerExclusiveColor[i]
@@ -16346,7 +16346,7 @@ LABEL_93:
         }
       }
     }
-    else if ( g_pGameType->m_sPlayerSlot11[(char)CPlayerManager::GetLocalSlot()] == 6
+    else if ( g_pGameType->m_sPlayerMapUploadStarted[(char)CPlayerManager::GetLocalSlot()] == 6
            || i != (char)CPlayerManager::GetLocalSlot() && i != v7 )
     {
       goto LABEL_93;

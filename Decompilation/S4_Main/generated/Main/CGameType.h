@@ -162,7 +162,7 @@ public:
     DWORD[9] m_sPlayerSlot8;
     int[9] m_sPlayerRaces;
     BYTE[9] m_sPlayerExclusiveColor;
-    DWORD[9] m_sPlayerSlot11;
+    DWORD[9] m_sPlayerMapUploadStarted;
     DWORD[9] m_sPlayerSlot12;
     DWORD[9] m_sPlayerValidTicks;
     unsigned __int8 m_uExtraFlags;
@@ -213,7 +213,7 @@ public:
     std::string std__string3C8;
     _BYTE m_bIsEditorMap;
     _BYTE m_bIsCampaignMap;
-    BYTE[9] field_3E6;
+    BYTE[9] m_bPlayerSlotEmpty;
     BYTE[9] field_3EF;
     _DWORD dword3F8;
     _DWORD dword3FC;

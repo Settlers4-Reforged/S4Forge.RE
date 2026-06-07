@@ -20,7 +20,7 @@
   this->m_iEventId = a2;
   this->m_wParam = a3;
   this->m_lParam = a4;
-  this->m_iFlags = a5;
+  this->m_iMsgNr = a5;
   if ( g_pEvnEngine && g_pEvnEngine->m_pTick )
     this->m_iTick = *g_pEvnEngine->m_pTick;
   else
@@ -61,7 +61,7 @@ void  CEvn_Event::Save(class IS4Chunk & a2) {
   this->m_iTick = v3->m_iTick;
   IS4ChunkObject::IS4ChunkObject(this, a2);
   this->__vftable = (CEvn_Event_vtbl *)CEvn_Event::_vftable_;
-  this->m_iFlags = a2->m_iFlags;
+  this->m_iMsgNr = a2->m_iMsgNr;
   this->unk_15 = a2->unk_15;
   this->unk_16 = a2->unk_16;
   this->unk_17 = a2->unk_17;
@@ -84,7 +84,7 @@ class CEvn_Event &  CEvn_Event::operator=(class CEvn_Event const & a2) {
   this->m_lParam = v3->m_lParam;
   this->m_iTick = v3->m_iTick;
   IS4ChunkObject::operator=(this, a2);
-  this->m_iFlags = a2->m_iFlags;
+  this->m_iMsgNr = a2->m_iMsgNr;
   this->unk_15 = a2->unk_15;
   this->unk_16 = a2->unk_16;
   this->unk_17 = a2->unk_17;

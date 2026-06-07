@@ -10,8 +10,8 @@ class ISimpleNet {
 
     virtual void Delete(void) = 0;
     virtual bool WasError(void) = 0;
-    virtual std::string GetLastErrorString(void a2) = 0;
-    virtual std::string GetCurrentLocalIPString(void a2) = 0;
+    virtual std::string GetLastErrorString(void) = 0;
+    virtual std::string GetCurrentLocalIPString(void) = 0;
     virtual long GetCurrentLocalIPLong(void) = 0;
     virtual bool Run(void) = 0;
     virtual bool IsMessage(int a2) = 0;

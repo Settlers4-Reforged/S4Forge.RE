@@ -3,26 +3,18 @@
 // Definitions for class CMsgStacks
 
 // address=[0x15c4910]
-// Decompiled from CMsgStacks *__thiscall CMsgStacks::AdvanceValidTick(CMsgStacks *this)
+// Decompiled from void __thiscall CMsgStacks::AdvanceValidTick(CMsgStacks *this)
 void  CMsgStacks::AdvanceValidTick(void) {
   
-  CMsgStacks *result; // eax
-
-  result = this;
-  ++*((_DWORD *)this + 406);
-  return result;
+  ++this->m_iValidTick;
 }
 
 
 // address=[0x15c4940]
-// Decompiled from CMsgStacks *__thiscall CMsgStacks::AdvanceVirtualTick(CMsgStacks *this)
+// Decompiled from void __thiscall CMsgStacks::AdvanceVirtualTick(CMsgStacks *this)
 void  CMsgStacks::AdvanceVirtualTick(void) {
   
-  CMsgStacks *result; // eax
-
-  result = this;
-  ++*((_DWORD *)this + 405);
-  return result;
+  ++this->m_iVirtualTick;
 }
 
 
@@ -30,23 +22,23 @@ void  CMsgStacks::AdvanceVirtualTick(void) {
 // Decompiled from int __thiscall CMsgStacks::GetLastMsgTime(CMsgStacks *this, unsigned int a2)
 unsigned int  CMsgStacks::GetLastMsgTime(unsigned int a2) {
   
-  return *(_DWORD *)(*((_DWORD *)this + a2 + 13) + 24);
+  return this->m_vStacks[1][a2]->m_iChangeTime;
 }
 
 
 // address=[0x15c4aa0]
-// Decompiled from int __thiscall CMsgStacks::GetNumberOfStacks(pairNode *this)
+// Decompiled from int __thiscall CMsgStacks::GetNumberOfStacks(CMsgStacks *this)
 int  CMsgStacks::GetNumberOfStacks(void) {
   
-  return *((_DWORD *)this + 3);
+  return this->m_iNumberMsgStacks;
 }
 
 
 // address=[0x15c4ca0]
-// Decompiled from int __thiscall sub_19C4CA0(_DWORD *this)
+// Decompiled from int __thiscall CMsgStacks::GetValidTick(CMsgStacks *this)
 int  CMsgStacks::GetValidTick(void) {
   
-  return this[406];
+  return this->m_iValidTick;
 }
 
 
@@ -54,7 +46,7 @@ int  CMsgStacks::GetValidTick(void) {
 // Decompiled from int __thiscall CMsgStacks::GetVirtualTick(CMsgStacks *this)
 int  CMsgStacks::GetVirtualTick(void) {
   
-  return *((_DWORD *)this + 405);
+  return this->m_iVirtualTick;
 }
 
 
@@ -62,86 +54,77 @@ int  CMsgStacks::GetVirtualTick(void) {
 // Decompiled from int __thiscall CMsgStacks::Getdt(CMsgStacks *this)
 int  CMsgStacks::Getdt(void) {
   
-  return *((_DWORD *)this + 2);
+  return this->m_iDeltaTme;
 }
 
 
 // address=[0x15c4d60]
-// Decompiled from bool __thiscall CMsgStacks::IsStackAI(CMsgStack **this, unsigned int a2)
+// Decompiled from bool __thiscall CMsgStacks::IsStackAI(CMsgStacks *this, unsigned int a2)
 bool  CMsgStacks::IsStackAI(unsigned int a2) {
   
-  return CMsgStack::GetAI(this[a2 + 5]);
+  return CMsgStack::GetAI(this->m_vStacks[0][a2]);
 }
 
 
 // address=[0x15c4e10]
-// Decompiled from int __thiscall CMsgStacks::SetLastMsgTime(_DWORD *this, int a2, int a3, char a4)
+// Decompiled from void __thiscall CMsgStacks::SetLastMsgTime(CMsgStacks *this, int a2, int a3, char a4)
 void  CMsgStacks::SetLastMsgTime(unsigned int a2, unsigned int a3, bool a4) {
   
-  int result; // eax
-  int v5; // [esp+8h] [ebp-8h]
+  int m_iNumberMsgStacks; // [esp+8h] [ebp-8h]
   int i; // [esp+Ch] [ebp-4h]
 
   if ( a4 )
-    v5 = this[3];
+    m_iNumberMsgStacks = this->m_iNumberMsgStacks;
   else
-    v5 = 2;
-  result = v5;
-  for ( i = 1; i < v5; ++i )
-  {
-    result = a2;
-    *(_DWORD *)(this[8 * i + 5 + a2] + 24) = a3;
-  }
-  return result;
+    m_iNumberMsgStacks = 2;
+  for ( i = 1; i < m_iNumberMsgStacks; ++i )
+    this->m_vStacks[i][a2]->m_iChangeTime = a3;
 }
 
 
 // address=[0x15cb660]
-// Decompiled from char __thiscall CMsgStacks::TriggerTime(CMsgStack **this)
+// Decompiled from char __thiscall CMsgStacks::TriggerTime(CMsgStacks *this)
 bool  CMsgStacks::TriggerTime(void) {
   
   CMsgStack *v2; // [esp+4h] [ebp-10h]
-  int j; // [esp+8h] [ebp-Ch]
-  int i; // [esp+Ch] [ebp-8h]
+  int i; // [esp+8h] [ebp-Ch]
+  int j; // [esp+Ch] [ebp-8h]
 
-  for ( i = 0; i < (int)this[4]; ++i )
+  for ( j = 0; j < this->m_iNumberPlayers; ++j )
   {
-    if ( !CMsgStack::IsEmpty(this[i + 5])
+    if ( !CMsgStack::IsEmpty(this->m_vStacks[0][j])
       && BBSupportDbgReport(2, "Net\\MsgStacks.cpp", 205, "m_pMsgStacks[ 0 ][ j ]->IsEmpty()") == 1 )
     {
       __debugbreak();
     }
-    v2 = this[i + 5];
-    for ( j = 0; j < (int)this[3] - 1; ++j )
-      *(&this[8 * j + 5] + i) = *(&this[8 * j + 13] + i);
-    *(&this[8 * ((_DWORD)this[3] - 1) + 5] + i) = v2;
-    CMsgStack::Invalidate(*(&this[8 * ((_DWORD)this[3] - 1) + 5] + i));
+    v2 = this->m_vStacks[0][j];
+    for ( i = 0; i < this->m_iNumberMsgStacks - 1; ++i )
+      this->m_vStacks[i][j] = this->m_vStacks[i + 1][j];
+    this->m_vStacks[this->m_iNumberMsgStacks - 1][j] = v2;
+    CMsgStack::Invalidate(this->m_vStacks[this->m_iNumberMsgStacks - 1][j]);
   }
   return 1;
 }
 
 
 // address=[0x15cb780]
-// Decompiled from CMsgStacks *__thiscall CMsgStacks::CMsgStacks(CMsgStacks *this, int a2, int a3, int a4)
- CMsgStacks::CMsgStacks(int a2, int a3, int a4) {
+// Decompiled from CMsgStacks *__thiscall CMsgStacks::CMsgStacks(CMsgStacks *this, int _iPlayers, int _iDeltaTime, int a4)
+ CMsgStacks::CMsgStacks(int _iPlayers, int _iDeltaTime, int a4) {
   
-  double v5; // [esp+0h] [ebp-14h]
-
-  *(_DWORD *)this = &CMsgStacks::_vftable_;
-  *((_DWORD *)this + 2) = a3;
-  v5 = pow<int,int>(COMMUNICATION_TICK_VALUE, 2);
-  *((_DWORD *)this + 3) = (int)((double)(2 * a3 + 1) + v5);
-  if ( *((_DWORD *)this + 3) == 1 )
-    ++*((_DWORD *)this + 3);
-  *((_DWORD *)this + 4) = a2;
-  if ( *((int *)this + 3) >= 50
+  this->__vftable = (CMsgStacks_vtbl *)&CMsgStacks::_vftable_;
+  this->m_iDeltaTme = _iDeltaTime;
+  this->m_iNumberMsgStacks = (int)((double)(2 * _iDeltaTime + 1) + pow<int,int>(COMMUNICATION_TICK_VALUE, 2));
+  if ( this->m_iNumberMsgStacks == 1 )
+    ++this->m_iNumberMsgStacks;
+  this->m_iNumberPlayers = _iPlayers;
+  if ( this->m_iNumberMsgStacks >= 50
     && BBSupportDbgReport(2, "Net\\MsgStacks.cpp", 35, "m_iNumberMsgStacks < MAX_NUMBER_MESSAGE_STACKS") == 1 )
   {
     __debugbreak();
   }
-  *((_BYTE *)this + 4) = CMsgStacks::InitStacks(SLODWORD(v5), SHIDWORD(v5));
-  *((_DWORD *)this + 405) = a4 + 1;
-  *((_DWORD *)this + 406) = a4;
+  this->m_bInited = CMsgStacks::InitStacks(this);
+  this->m_iVirtualTick = a4 + 1;
+  this->m_iValidTick = a4;
   return this;
 }
 
@@ -151,23 +134,23 @@ bool  CMsgStacks::TriggerTime(void) {
  CMsgStacks::~CMsgStacks(void) {
   
   int result; // eax
-  void (__thiscall ***v2)(_DWORD, int); // [esp+8h] [ebp-10h]
+  CMsgStack *v2; // [esp+8h] [ebp-10h]
   int j; // [esp+Ch] [ebp-Ch]
   int i; // [esp+14h] [ebp-4h]
 
-  *(_DWORD *)this = &CMsgStacks::_vftable_;
+  this->__vftable = (CMsgStacks_vtbl *)&CMsgStacks::_vftable_;
   for ( i = 0; ; ++i )
   {
     result = i;
-    if ( i >= *((_DWORD *)this + 3) )
+    if ( i >= this->m_iNumberMsgStacks )
       break;
-    for ( j = 0; j < *((_DWORD *)this + 4); ++j )
+    for ( j = 0; j < this->m_iNumberPlayers; ++j )
     {
-      if ( *((_DWORD *)this + 8 * i + j + 5) )
+      if ( this->m_vStacks[i][j] )
       {
-        v2 = (void (__thiscall ***)(_DWORD, int))*((_DWORD *)this + 8 * i + j + 5);
-        (**v2)(v2, 1);
-        *((_DWORD *)this + 8 * i + j + 5) = 0;
+        v2 = this->m_vStacks[i][j];
+        (*(void (__thiscall **)(CMsgStack *, int))v2->__vftable)(v2, 1);
+        this->m_vStacks[i][j] = 0;
       }
     }
   }
@@ -179,52 +162,52 @@ bool  CMsgStacks::TriggerTime(void) {
 // Decompiled from char __thiscall CMsgStacks::PushMsg(CMsgStacks *this, struct CNet_Event *a2)
 bool  CMsgStacks::PushMsg(class CNet_Event & a2) {
   
-  int v3; // [esp+4h] [ebp-10h]
-  int v4; // [esp+8h] [ebp-Ch]
+  DWORD m_iTick; // [esp+4h] [ebp-10h]
+  int PlayerNr; // [esp+8h] [ebp-Ch]
   int v5; // [esp+Ch] [ebp-8h]
 
-  v4 = *((unsigned __int8 *)a2 + 30) - 1;
-  if ( v4 >= *((_DWORD *)this + 4)
+  PlayerNr = a2->m_iOwner - 1;
+  if ( PlayerNr >= this->m_iNumberPlayers
     && BBSupportDbgReport(2, "Net\\MsgStacks.cpp", 113, "PlayerNr < m_NumberPlayers") == 1 )
   {
     __debugbreak();
   }
-  v3 = *((_DWORD *)a2 + 4);
-  v5 = v3 - CMsgStacks::GetValidTick(this);
+  m_iTick = a2->m_iTick;
+  v5 = m_iTick - CMsgStacks::GetValidTick(this);
   if ( v5 >= 0 )
   {
-    if ( v5 >= *((_DWORD *)this + 3)
+    if ( v5 >= this->m_iNumberMsgStacks
       && BBSupportDbgReportF(2, "Net\\MsgStacks.cpp", 127, "MsgStacks.cpp: Future netmsg got !") == 1 )
     {
       __debugbreak();
     }
-    CMsgStack::AddMsg(*((CMsgStack **)this + 8 * v5 + v4 + 5), a2);
+    CMsgStack::AddMsg(this->m_vStacks[v5][PlayerNr], a2);
     return 1;
   }
   else
   {
     CTrace::Print(
       "MsgStacks.cpp: Old msg discarded: index#%d, Tick %d, Msg# %d!",
-      *((unsigned __int8 *)a2 + 30) - 1,
-      *((_DWORD *)a2 + 4),
-      *((unsigned __int8 *)a2 + 20));
+      a2->m_iOwner - 1,
+      a2->m_iTick,
+      a2->m_iMsgNr);
     return 1;
   }
 }
 
 
 // address=[0x15cba00]
-// Decompiled from CNet_Event *__thiscall CMsgStacks::PopMsg(_DWORD *this, CNet_Event *a2)
+// Decompiled from CNet_Event *__thiscall CMsgStacks::PopMsg(CMsgStacks *this, CNet_Event *a2)
 class CNet_Event  CMsgStacks::PopMsg(void a2) {
   
   int i; // [esp+8h] [ebp-28h]
   CNet_Event v5; // [esp+Ch] [ebp-24h] BYREF
 
-  for ( i = 0; i < this[4]; ++i )
+  for ( i = 0; i < this->m_iNumberPlayers; ++i )
   {
-    if ( !CMsgStack::IsEmpty((CMsgStack *)this[i + 5]) )
+    if ( !CMsgStack::IsEmpty(this->m_vStacks[0][i]) )
     {
-      CMsgStack::GetMsg(this[i + 5], &v5);
+      CMsgStack::GetMsg(this->m_vStacks[0][i], &v5);
       v5.m_iOwner = i + 1;
       CNet_Event::CNet_Event((struct boost::exception_detail::clone_base *)&v5);
       CNet_Event::~CNet_Event(&v5);
@@ -240,20 +223,20 @@ class CNet_Event  CMsgStacks::PopMsg(void a2) {
 // Decompiled from char __thiscall CMsgStacks::AddNewPlayer(CMsgStacks *this)
 bool  CMsgStacks::AddNewPlayer(void) {
   
-  int v2; // [esp+8h] [ebp-1Ch]
-  void *C; // [esp+Ch] [ebp-18h]
+  CMsgStack *v2; // [esp+8h] [ebp-1Ch]
+  CMsgStack *C; // [esp+Ch] [ebp-18h]
   int i; // [esp+10h] [ebp-14h]
 
-  for ( i = 0; i < *((_DWORD *)this + 2); ++i )
+  for ( i = 0; i < this->m_iDeltaTme; ++i )
   {
-    C = operator new(0x1Cu);
+    C = (CMsgStack *)operator new(0x1Cu);
     if ( C )
       v2 = CMsgStack::CMsgStack(C);
     else
       v2 = 0;
-    *((_DWORD *)this + 8 * i + *((_DWORD *)this + 4) + 5) = v2;
+    this->m_vStacks[i][this->m_iNumberPlayers] = v2;
   }
-  ++*((_DWORD *)this + 4);
+  ++this->m_iNumberPlayers;
   return 1;
 }
 
@@ -262,7 +245,7 @@ bool  CMsgStacks::AddNewPlayer(void) {
 // Decompiled from int __thiscall CMsgStacks::GetNumPlayers(CMsgStacks *this)
 int  CMsgStacks::GetNumPlayers(void) {
   
-  return *((_DWORD *)this + 4);
+  return this->m_iNumberPlayers;
 }
 
 
@@ -272,17 +255,17 @@ bool  CMsgStacks::SetNumberOfClients(unsigned int a2) {
   
   unsigned int i; // [esp+4h] [ebp-4h]
 
-  for ( i = *((_DWORD *)this + 4); i < a2; ++i )
+  for ( i = this->m_iNumberPlayers; i < a2; ++i )
     CMsgStacks::AddNewPlayer(this);
   return 1;
 }
 
 
 // address=[0x15cbc00]
-// Decompiled from int __thiscall CMsgStacks::Get(CMsgStacks *this, unsigned int a2, unsigned __int8 a3)
+// Decompiled from CMsgStack *__thiscall CMsgStacks::Get(CMsgStacks *this, unsigned int a2, unsigned __int8 a3)
 class CMsgStack *  CMsgStacks::Get(unsigned int a2, unsigned char a3) {
   
-  return *((_DWORD *)this + 8 * a2 + a3 + 5);
+  return this->m_vStacks[a2][a3];
 }
 
 
@@ -290,13 +273,13 @@ class CMsgStack *  CMsgStacks::Get(unsigned int a2, unsigned char a3) {
 // Decompiled from char __thiscall CMsgStacks::IsEmpty(CMsgStacks *this, unsigned int a2)
 bool  CMsgStacks::IsEmpty(unsigned int a2) {
   
-  int v2; // eax
+  CMsgStack *v2; // eax
   int i; // [esp+8h] [ebp-4h]
 
-  for ( i = 0; i < *((_DWORD *)this + 4); ++i )
+  for ( i = 0; i < this->m_iNumberPlayers; ++i )
   {
     v2 = CMsgStacks::Get(this, a2, i);
-    if ( !(unsigned __int8)std::list<CNet_Event>::empty(v2 + 4, v2) )
+    if ( !(unsigned __int8)std::list<CNet_Event>::empty(&v2->this_list, v2) )
       return 0;
   }
   return 1;
@@ -307,19 +290,19 @@ bool  CMsgStacks::IsEmpty(unsigned int a2) {
 // Decompiled from CNet_Event *__thiscall CMsgStacks::GetMsgToSend(CMsgStacks *this, CNet_Event *a2)
 class CNet_Event  CMsgStacks::GetMsgToSend(void a2) {
   
-  int v2; // eax
+  CMsgStack *v2; // eax
   int v4; // [esp+0h] [ebp-34h]
   int i; // [esp+Ch] [ebp-28h]
-  _BYTE v7[32]; // [esp+10h] [ebp-24h] BYREF
+  CNet_Event v7; // [esp+10h] [ebp-24h] BYREF
 
-  for ( i = 0; i < *((_DWORD *)this + 4); ++i )
+  for ( i = 0; i < this->m_iNumberPlayers; ++i )
   {
     v2 = CMsgStacks::Get(this, 0, i);
-    if ( !(unsigned __int8)std::list<CNet_Event>::empty(v2 + 4, v2) )
+    if ( !(unsigned __int8)std::list<CNet_Event>::empty(&v2->this_list, v2) )
     {
-      CMsgStack::GetMsg(v4, v7);
-      CNet_Event::CNet_Event((struct boost::exception_detail::clone_base *)v7);
-      CNet_Event::~CNet_Event((CNet_Event *)v7);
+      CMsgStack::GetMsg(v4, &v7);
+      CNet_Event::CNet_Event((struct boost::exception_detail::clone_base *)&v7);
+      CNet_Event::~CNet_Event(&v7);
       return a2;
     }
   }
@@ -329,42 +312,42 @@ class CNet_Event  CMsgStacks::GetMsgToSend(void a2) {
 
 
 // address=[0x15cbd50]
-// Decompiled from void __thiscall CMsgStacks::SetNumberOfExpectedMsgs(  CMsgStacks *this,  int _iTick,  char _iPlayerID,  unsigned __int8 _iCount)
+// Decompiled from void __thiscall CMsgStacks::SetNumberOfExpectedMsgs(  CMsgStacks *this,  int _iTick,  unsigned __int8 _iPlayerID,  unsigned __int8 _iCount)
 void  CMsgStacks::SetNumberOfExpectedMsgs(unsigned int _iTick, unsigned char _iPlayerID, unsigned char _iCount) {
   
   int v4; // [esp+8h] [ebp-8h]
 
-  if ( (unsigned __int8)CMsgStacks::IsSizeAlreadySet(_iTick, _iPlayerID)
+  if ( CMsgStacks::IsSizeAlreadySet(this, _iTick, _iPlayerID)
     && BBSupportDbgReport(2, "Net\\MsgStacks.cpp", 254, "!IsSizeAlreadySet( _iTick, _iPlayerID )") == 1 )
   {
     __debugbreak();
   }
   v4 = _iTick - CMsgStacks::GetValidTick(this);
-  if ( v4 >= *((_DWORD *)this + 3)
+  if ( v4 >= this->m_iNumberMsgStacks
     && BBSupportDbgReportF(
          2,
          "Net\\MsgStacks.cpp",
          259,
          "MsgStacks:Future Netmsg got: Tick %d, Player %d size %d!",
          _iTick,
-         (unsigned __int8)_iPlayerID,
+         _iPlayerID,
          _iCount) == 1 )
   {
     __debugbreak();
   }
   if ( v4 >= 1 )
-    CMsgStack::SetExpectedSize(*((CMsgStack **)this + 8 * v4 + (unsigned __int8)_iPlayerID + 5), _iCount);
+    CMsgStack::SetExpectedSize(this->m_vStacks[v4][_iPlayerID], _iCount);
 }
 
 
 // address=[0x15cbe20]
-// Decompiled from bool __thiscall CMsgStacks::IsSizeAlreadySet(_DWORD *this, int a2, unsigned __int8 a3)
+// Decompiled from bool __thiscall CMsgStacks::IsSizeAlreadySet(CMsgStacks *this, int a2, unsigned __int8 a3)
 bool  CMsgStacks::IsSizeAlreadySet(unsigned int a2, unsigned char a3) {
   
   int ValidTick; // [esp+0h] [ebp-14h]
 
   ValidTick = CMsgStacks::GetValidTick(this);
-  return a2 - ValidTick < 1 || CMsgStack::GetExpectedSize(this[8 * (a2 - ValidTick) + 5 + a3], ValidTick) != -1;
+  return a2 - ValidTick < 1 || CMsgStack::GetExpectedSize(this->m_vStacks[a2 - ValidTick][a3], ValidTick) != -1;
 }
 
 
@@ -380,13 +363,13 @@ bool  CMsgStacks::IsMsgStackValid(unsigned int a2, unsigned int & a3) {
   v5 = a2 - CMsgStacks::GetValidTick(this);
   Time = timeGetTime();
   v8 = 1;
-  for ( i = 0; i < *((_DWORD *)this + 4); ++i )
+  for ( i = 0; i < this->m_iNumberPlayers; ++i )
   {
-    if ( !CMsgStack::GetAI(*((CMsgStack **)this + i + 5)) && !CMsgStack::IsValid(*((CMsgStack **)this + 8 * v5 + i + 5)) )
+    if ( !CMsgStack::GetAI(this->m_vStacks[0][i]) && !CMsgStack::IsValid(this->m_vStacks[v5][i]) )
     {
       v8 = 0;
       *a3 |= 1 << i;
-      if ( 71 * *((_DWORD *)this + 2) + CMsgStacks::GetLastMsgTime(this, i) < Time )
+      if ( 71 * this->m_iDeltaTme + CMsgStacks::GetLastMsgTime(this, i) < Time )
         *a3 |= 1 << i;
     }
   }
@@ -395,60 +378,49 @@ bool  CMsgStacks::IsMsgStackValid(unsigned int a2, unsigned int & a3) {
 
 
 // address=[0x15cbf80]
-// Decompiled from int __thiscall sub_19CBF80(_DWORD *this, unsigned int a2, char a3)
+// Decompiled from void __thiscall CMsgStacks::SetStackAI(CMsgStacks *this, unsigned int a2, bool a3)
 void  CMsgStacks::SetStackAI(unsigned int a2, bool a3) {
   
-  int result; // eax
   int i; // [esp+4h] [ebp-4h]
 
-  result = (int)this;
-  if ( a2 >= this[4] )
-  {
-    result = BBSupportDbgReport(2, (int)"Net\\MsgStacks.cpp", 349, (int)"_iId < m_NumberPlayers");
-    if ( result == 1 )
-      __debugbreak();
-  }
-  for ( i = 0; i < this[3]; ++i )
-  {
-    CMsgStack::SetAI(a3);
-    result = i + 1;
-  }
-  return result;
+  if ( a2 >= this->m_iNumberPlayers && BBSupportDbgReport(2, "Net\\MsgStacks.cpp", 349, "_iId < m_NumberPlayers") == 1 )
+    __debugbreak();
+  for ( i = 0; i < this->m_iNumberMsgStacks; ++i )
+    CMsgStack::SetAI(this->m_vStacks[i][a2], a3);
 }
 
 
 // address=[0x15cc000]
-// Decompiled from bool __thiscall CMsgStacks::IsInStack(CMsgStacks *this, struct CNet_Event *a2)
+// Decompiled from char __thiscall CMsgStacks::IsInStack(CMsgStacks *this, struct CNet_Event *a2)
 bool  CMsgStacks::IsInStack(class CNet_Event & a2) {
   
-  int v3; // [esp+4h] [ebp-10h]
-  int v4; // [esp+8h] [ebp-Ch]
+  DWORD m_iTick; // [esp+4h] [ebp-10h]
+  int iPlayer; // [esp+8h] [ebp-Ch]
   int v5; // [esp+Ch] [ebp-8h]
 
-  v4 = *((unsigned __int8 *)a2 + 30) - 1;
-  if ( v4 >= *((_DWORD *)this + 4) && BBSupportDbgReport(2, "Net\\MsgStacks.cpp", 148, "iPlayer < m_NumberPlayers") == 1 )
+  iPlayer = a2->m_iOwner - 1;
+  if ( iPlayer >= this->m_iNumberPlayers
+    && BBSupportDbgReport(2, "Net\\MsgStacks.cpp", 148, "iPlayer < m_NumberPlayers") == 1 )
+  {
     __debugbreak();
-  v3 = *((_DWORD *)a2 + 4);
-  v5 = v3 - CMsgStacks::GetValidTick(this);
-  return v5 >= 0
-      && v5 <= *((_DWORD *)this + 3)
-      && CMsgStack::IsInStack(*((CMsgStack **)this + 8 * v5 + v4 + 5), *((_BYTE *)a2 + 20));
+  }
+  m_iTick = a2->m_iTick;
+  v5 = m_iTick - CMsgStacks::GetValidTick(this);
+  if ( v5 >= 0 && v5 <= this->m_iNumberMsgStacks )
+    return CMsgStack::IsInStack(this->m_vStacks[v5][iPlayer], a2->m_iMsgNr);
+  else
+    return 0;
 }
 
 
 // address=[0x15cc0a0]
-// Decompiled from int __thiscall CMsgStacks::ClearAndValidate(CMsgStack **this, int a2)
+// Decompiled from void __thiscall CMsgStacks::ClearAndValidate(CMsgStacks *this, int a2)
 void  CMsgStacks::ClearAndValidate(int a2) {
   
-  int result; // eax
   int i; // [esp+4h] [ebp-4h]
 
-  for ( i = 0; i < (int)this[3]; ++i )
-  {
-    CMsgStack::ClearAndValidate(*(&this[8 * i + 5] + a2));
-    result = i + 1;
-  }
-  return result;
+  for ( i = 0; i < this->m_iNumberMsgStacks; ++i )
+    CMsgStack::ClearAndValidate(this->m_vStacks[i][a2]);
 }
 
 
@@ -468,27 +440,27 @@ void  CMsgStacks::OnEndSaving(int a2, int a3) {
 
 
 // address=[0x15cc140]
-// Decompiled from bool __thiscall CMsgStacks::InitStacks(_DWORD *this)
+// Decompiled from bool __thiscall CMsgStacks::InitStacks(CMsgStacks *this)
 bool  CMsgStacks::InitStacks(void) {
   
-  int v2; // [esp+10h] [ebp-20h]
-  void *C; // [esp+14h] [ebp-1Ch]
+  CMsgStack *v2; // [esp+10h] [ebp-20h]
+  CMsgStack *C; // [esp+14h] [ebp-1Ch]
   int j; // [esp+1Ch] [ebp-14h]
   int i; // [esp+20h] [ebp-10h]
 
-  for ( i = 0; i < this[3]; ++i )
+  for ( i = 0; i < this->m_iNumberMsgStacks; ++i )
   {
-    for ( j = 0; j < this[4]; ++j )
+    for ( j = 0; j < this->m_iNumberPlayers; ++j )
     {
-      C = operator new(0x1Cu);
+      C = (CMsgStack *)operator new(0x1Cu);
       if ( C )
         v2 = CMsgStack::CMsgStack(C);
       else
         v2 = 0;
-      this[8 * i + 5 + j] = v2;
+      this->m_vStacks[i][j] = v2;
     }
-  }
-  return this != (_DWORD *)-20;
+  }                                             // m_vStacks != 0
+  return this != (CMsgStacks *)0xFFFFFFEC;
 }
 
 
