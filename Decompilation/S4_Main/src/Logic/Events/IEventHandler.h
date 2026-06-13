@@ -3,16 +3,15 @@
 
 #include <functional>
 
-#include "defines.h"
 #include "IEventHandler.h"
+#include "defines.h"
 
 class IEventHandler;
 
-//typedef bool (IEventHandler::*EventHandlerFunc)(struct CEvn_Logic *event);
-typedef std::function<bool(IEventHandler *, struct CEvn_Logic *)> EventHandlerFunc;
+typedef bool (IEventHandler::*EventHandlerFunc)(void *event);
 
 class IEventHandler {
-public:
+  public:
     // address=[0x1460060]
     IEventHandler(int a2);
 
@@ -20,7 +19,7 @@ public:
     virtual ~IEventHandler(void);
 
     // Type information members
-public:
+  public:
     EventHandlerFunc *m_pHandlers;
 };
 
