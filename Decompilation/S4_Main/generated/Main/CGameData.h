@@ -60,30 +60,28 @@ public:
 public:
     _DWORD m_uTickCounter;
     _DWORD m_uVirtualTick;
-    _DWORD m_iHeight;
-    _DWORD m_iWidth;
-    _DWORD dword10;
+    int m_iHeight;
+    int m_iWidth;
+    _DWORD m_uUnknown;
     _DWORD m_uCamX;
     _DWORD m_uCamY;
     _DWORD m_uZoom;
-    _DWORD dword20;
-    _DWORD dword24;
-    _BYTE byte28;
-    _BYTE m_bFixedStartCamera;
-    _BYTE[2] gap2A;
+    int m_iScreenMouseX;
+    int m_iScreenMouseY;
+    bool m_bUnknown;
+    bool m_bFixedStartCamera;
     CRandom16Ex m_sRandom;
-    _BYTE m_bIsGameWon;
-    _BYTE[3] gap35;
-    _DWORD m_iTeamWon;
-    _DWORD m_iType;
+    bool m_bIsGameWon;
+    int m_iTeamWon;
+    int m_iType;
     std::string m_swGameType;
-    _DWORD m_iMode;
+    int m_iMode;
     std::string m_swMapMode;
-    _BYTE m_bIsNetworkGame;
-    _BYTE m_bIsLastFrameRendered;
-    _BYTE byte7E;
-    _BYTE m_bIsLadderGame;
-    char[7] m_pEconomyGoodsArray;
+    bool m_bIsNetworkGame;
+    bool m_bIsLastFrameRendered;
+    bool m_bUnknown2;
+    bool m_bIsLadderGame;
+    char[8] m_pEconomyGoodsArray;
 
 };
 

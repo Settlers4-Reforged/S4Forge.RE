@@ -53,7 +53,7 @@ void  CStatistic::SPlayerStatistic::CalculateFightingStrength(int a2) {
     {
       if ( g_pGameType
         && CPlayerManager::IsAI(a2)
-        && (*(unsigned __int8 (__thiscall **)(void *))(*(_DWORD *)g_pAI + 16))(g_pAI)
+        && g_pAI->IsInitialised(g_pAI)
         && IAIDifficultyLevels::GetDifficultyLevel(a2) >= 2 )
       {
         v9 = *((_DWORD *)this + 746) + *((_DWORD *)this + 745) + 2 * *((_DWORD *)this + 747);
@@ -81,10 +81,14 @@ void  CStatistic::SPlayerStatistic::CalculateFightingStrength(int a2) {
       v15[9] = 73;
       v15[10] = 74;
       v15[11] = 75;
-      NumberOfBuildings = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, a2, 64, 1u);
+      NumberOfBuildings = CBuildingMgr::GetNumberOfBuildings(
+                            (CBuildingMgr *)g_cBuildingMgr,
+                            a2,
+                            BUILDING_EYECATCHER01,
+                            1u);
       for ( i = 1; i < 12; ++i )
       {
-        v5 = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, a2, v15[i], 1u);
+        v5 = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, a2, (S4_BUILDING_ENUM)v15[i], 1u);
         if ( v5 < NumberOfBuildings )
           NumberOfBuildings = v5;
       }
@@ -112,7 +116,7 @@ void  CStatistic::SPlayerStatistic::CalculateFightingStrength(int a2) {
   {
     v11 = *((_DWORD *)this + 1097);
   }
-  if ( g_pGameData && CGameData::GetMode((CGameData *)g_pGameData) == 3 )
+  if ( g_pGameData && CGameData::GetMode(g_pGameData) == GAMEMODE_CAMPAIGN )
   {
     if ( v11 < 4 )
       v4 = 1;

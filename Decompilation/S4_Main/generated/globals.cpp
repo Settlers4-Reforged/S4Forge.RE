@@ -13609,7 +13609,7 @@ bool __cdecl GuiDlgLoadSaveProc(int a1, int a2, int a3) {
 
 
 // address=[0x13950f0]
-// Decompiled from char __cdecl GuiDlgLoadSaveSubmenuProc(int a1, int a2, int a3)
+// Decompiled from char __cdecl GuiDlgLoadSaveSubmenuProc(int a1, int a2, T_S4_TRANSLATION a3)
 bool __cdecl GuiDlgLoadSaveSubmenuProc(int a1, int a2, int a3) {
   
   char *v4; // eax
@@ -13621,13 +13621,13 @@ bool __cdecl GuiDlgLoadSaveSubmenuProc(int a1, int a2, int a3) {
   CEvn_Logic *v10; // [esp+24h] [ebp-114h]
   CEvn_Logic *v11; // [esp+2Ch] [ebp-10Ch]
   CEvn_Logic *v12; // [esp+34h] [ebp-104h]
-  _BYTE v13[32]; // [esp+48h] [ebp-F0h] BYREF
-  _BYTE v14[32]; // [esp+68h] [ebp-D0h] BYREF
-  _BYTE v15[32]; // [esp+88h] [ebp-B0h] BYREF
-  _BYTE v16[32]; // [esp+A8h] [ebp-90h] BYREF
-  _BYTE v17[32]; // [esp+C8h] [ebp-70h] BYREF
-  _BYTE v18[32]; // [esp+E8h] [ebp-50h] BYREF
-  _BYTE v19[32]; // [esp+108h] [ebp-30h] BYREF
+  CEvn_Logic v13; // [esp+48h] [ebp-F0h] BYREF
+  CEvn_Logic v14; // [esp+68h] [ebp-D0h] BYREF
+  CEvn_Logic v15; // [esp+88h] [ebp-B0h] BYREF
+  CEvn_Logic v16; // [esp+A8h] [ebp-90h] BYREF
+  CEvn_Logic v17; // [esp+C8h] [ebp-70h] BYREF
+  CEvn_Logic v18; // [esp+E8h] [ebp-50h] BYREF
+  CEvn_Logic v19; // [esp+108h] [ebp-30h] BYREF
   int v20; // [esp+134h] [ebp-4h]
 
   if ( !g_pEvnEngine )
@@ -13635,16 +13635,16 @@ bool __cdecl GuiDlgLoadSaveSubmenuProc(int a1, int a2, int a3) {
   switch ( a1 )
   {
     case 0:
-      IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 8, 928, 1);
+      IGuiEngine::SelectControl(g_pGUIEngine, 8, GUI_ACP_ST_THIRTY, 1);
       byte_3ECFA3B = CGameData::GetMode(g_pGameData) == 3;
       if ( (unsigned __int8)std::operator!=<char>(&stru_402C9B4, (char *)&unk_368F798) || byte_3ECFA3B )
-        IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 8, 929, 1);
+        IGuiEngine::EnableControl(g_pGUIEngine, 8, GUI_ACP_ST_TWO, 1);
       else
-        IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 8, 929, 0);
+        IGuiEngine::EnableControl(g_pGUIEngine, 8, 929, 0);
       break;
     case 1:
       if ( (a2 & 0x10000) != 0 )
-        PlayGuiSound(1);
+        PlayGuiSound(1u);
       else
         PlayGuiSound(0);
       break;
@@ -13652,74 +13652,74 @@ bool __cdecl GuiDlgLoadSaveSubmenuProc(int a1, int a2, int a3) {
       switch ( (__int16)a2 )
       {
         case 928:
-          PlayGuiSound(2);
-          v12 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v19, 0x192u, 0, 0, 0, 0, 0);
+          PlayGuiSound(2u);
+          v12 = CEvn_Logic::CEvn_Logic(&v19, 0x192u, 0, 0, 0, 0, 0);
           v20 = 0;
           IEventEngine::SendAMessage(g_pEvnEngine, v12);
           v20 = -1;
-          CEvn_Logic::~CEvn_Logic(v19);
-          v11 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v18, 0x28u, 0, 0, 0, 0, 0);
+          CEvn_Logic::~CEvn_Logic(&v19);
+          v11 = CEvn_Logic::CEvn_Logic(&v18, 0x28u, 0, 0, 0, 0, 0);
           v20 = 1;
           IEventEngine::SendAMessage(g_pEvnEngine, v11);
           v20 = -1;
-          CEvn_Logic::~CEvn_Logic(v18);
+          CEvn_Logic::~CEvn_Logic(&v18);
           break;
         case 929:
-          PlayGuiSound(2);
-          v10 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v17, 0x192u, 0, 0, 0, 0, 0);
+          PlayGuiSound(2u);
+          v10 = CEvn_Logic::CEvn_Logic(&v17, 0x192u, 0, 0, 0, 0, 0);
           v20 = 2;
           IEventEngine::SendAMessage(g_pEvnEngine, v10);
           v20 = -1;
-          CEvn_Logic::~CEvn_Logic(v17);
+          CEvn_Logic::~CEvn_Logic(&v17);
           if ( byte_3ECFA3B )
           {
-            v9 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v16, 0x1B4u, 0, 0, 0, 0, 0);
+            v9 = CEvn_Logic::CEvn_Logic(&v16, 0x1B4u, 0, 0, 0, 0, 0);
             v20 = 3;
             IEventEngine::SendAMessage(g_pEvnEngine, v9);
             v20 = -1;
-            CEvn_Logic::~CEvn_Logic(v16);
+            CEvn_Logic::~CEvn_Logic(&v16);
           }
           else if ( g_pGuiMainEvents )
           {
             if ( *(_DWORD *)(g_pGuiMainEvents + 12) != -1 )
             {
-              IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, *(_DWORD *)(g_pGuiMainEvents + 12));
+              IGuiEngine::CloseDialog(g_pGUIEngine, *(_DWORD *)(g_pGuiMainEvents + 12));
               *(_DWORD *)(g_pGuiMainEvents + 12) = -1;
             }
-            IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 35, (bool (__cdecl *)(int, int, int))GuiDlgBriefingProc);
+            IGuiEngine::OpenDialog(g_pGUIEngine, 35, (bool (__cdecl *)(int, int, int))GuiDlgBriefingProc);
             *(_DWORD *)(g_pGuiMainEvents + 12) = 35;
           }
           break;
         case 930:
-          PlayGuiSound(2);
-          v8 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v15, 0x192u, 0, 0, 0, 0, 0);
+          PlayGuiSound(2u);
+          v8 = CEvn_Logic::CEvn_Logic(&v15, 0x192u, 0, 0, 0, 0, 0);
           v20 = 4;
           IEventEngine::SendAMessage(g_pEvnEngine, v8);
           v20 = -1;
-          CEvn_Logic::~CEvn_Logic(v15);
+          CEvn_Logic::~CEvn_Logic(&v15);
           if ( g_pGuiMainEvents )
           {
             if ( *(_DWORD *)(g_pGuiMainEvents + 12) != -1 )
             {
-              IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, *(_DWORD *)(g_pGuiMainEvents + 12));
+              IGuiEngine::CloseDialog(g_pGUIEngine, *(_DWORD *)(g_pGuiMainEvents + 12));
               *(_DWORD *)(g_pGuiMainEvents + 12) = -1;
             }
-            IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 34, GuiDlgQuitGameProc);
+            IGuiEngine::OpenDialog(g_pGUIEngine, 34, (bool (__cdecl *)(int, int, int))GuiDlgQuitGameProc);
             *(_DWORD *)(g_pGuiMainEvents + 12) = 34;
           }
           break;
         case 931:
-          PlayGuiSound(2);
-          v7 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v14, 0x192u, 0, 0, 0, 0, 0);
+          PlayGuiSound(2u);
+          v7 = CEvn_Logic::CEvn_Logic(&v14, 0x192u, 0, 0, 0, 0, 0);
           v20 = 5;
           IEventEngine::SendAMessage(g_pEvnEngine, v7);
           v20 = -1;
-          CEvn_Logic::~CEvn_Logic(v14);
-          v6 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v13, 0x1Eu, 0, 0, 0, 0, 0);
+          CEvn_Logic::~CEvn_Logic(&v14);
+          v6 = CEvn_Logic::CEvn_Logic(&v13, 0x1Eu, 0, 0, 0, 0, 0);
           v20 = 6;
           IEventEngine::SendAMessage(g_pEvnEngine, v6);
           v20 = -1;
-          CEvn_Logic::~CEvn_Logic(v13);
+          CEvn_Logic::~CEvn_Logic(&v13);
           break;
         default:
           return 1;

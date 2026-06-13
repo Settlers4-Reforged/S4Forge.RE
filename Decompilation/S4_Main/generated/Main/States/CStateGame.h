@@ -156,7 +156,7 @@ public:
     _BYTE byte4A;
     _BYTE byte4C;
     CGameData m_sGameData;
-    _BYTE[33] gapD3;
+    _BYTE[32] gapD4;
     _BYTE byteF4;
     _BYTE byteF5;
     _BYTE byteF6;

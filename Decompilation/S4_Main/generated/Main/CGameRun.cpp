@@ -48,7 +48,7 @@ bool __cdecl CGameRun::Init(void) {
   bIsMultiplayerGame = CGameType::IsMultiplayerGame(g_pGameType);
   CSettlerMgr::LoadInfo((struct CSettlerMgr *)g_cSettlerMgr, bIsMultiplayerGame);
   CBuildingMgr::LoadInfo((CBuildingMgr *)g_cBuildingMgr);
-  CDecoObjMgr::LoadInfo((CDecoObjMgr *)&g_cDecoObjMgr);
+  CDecoObjMgr::LoadInfo(&g_cDecoObjMgr);
   CVehicleMgr::LoadInfo((CVehicleMgr *)&g_cVehicleMgr);
   v11 = (CGameScriptManager *)operator new(0x63Cu);
   exceptionBlock = 2;
@@ -58,11 +58,11 @@ bool __cdecl CGameRun::Init(void) {
     v10 = 0;
   exceptionBlock = -1;
   g_pScriptMgr = v10;
-  if ( CGameData::GetMode(g_pGameData) == 3 )
+  if ( CGameData::GetMode(g_pGameData) == GAMEMODE_CAMPAIGN )
     CGameScriptManager::SetVictoryConditionHook(
       g_pScriptMgr,
       (void (__cdecl *)())ScriptEconomyModeVictoryConditionCheck);
-  (*(void (__thiscall **)(void *))(*(_DWORD *)g_pAI + 8))(g_pAI);
+  g_pAI->InitScripting(g_pAI);
   v9 = (CLogic *)operator new(0x48u);
   exceptionBlock = 3;
   if ( v9 )
@@ -95,7 +95,7 @@ bool __cdecl CGameRun::Init(void) {
   else
   {
     XMLVersion = CBuildingInfoMgr::GetXMLVersion((CBuildingInfoMgr *)&g_cBuildingInfoMgr);
-    v16 = CDecoObjMgr::GetXMLVersion((CDecoObjMgr *)&g_cDecoObjMgr);
+    v16 = CDecoObjMgr::GetXMLVersion(&g_cDecoObjMgr);
     if ( XMLVersion <= 0 && BBSupportDbgReport(2, "main\\GameRun.cpp", 218, "iBuildingXMLVersion > 0") == 1 )
       __debugbreak();
     if ( v16 <= 0 && BBSupportDbgReport(2, "main\\GameRun.cpp", 219, "iObjectXMLVersion > 0") == 1 )

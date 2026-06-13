@@ -4098,8 +4098,8 @@ void  CInputProcessor::ShowPossibleBuildingType(void) {
     v8 = 74;
   if ( (IGfxEngine::GetClosestMapPoint(
           g_pGfxEngine,
-          g_pGame->m_sGameData.dword20,
-          g_pGame->m_sGameData.dword24,
+          g_pGame->m_sGameData.m_iScreenMouseX,
+          g_pGame->m_sGameData.m_iScreenMouseY,
           &iMouseHoverX,
           &iMouseHoverY) & 0x80000000) != 0
     || !CWorldManager::InWorld(iMouseHoverX, iMouseHoverY) )

@@ -1,3 +1,4 @@
+#if FALSE
 #include "CMsgStacks.h"
 
 // Definitions for class CMsgStacks
@@ -464,3 +465,4 @@ bool  CMsgStacks::InitStacks(void) {
 }
 
 
+#endif // Already implemented

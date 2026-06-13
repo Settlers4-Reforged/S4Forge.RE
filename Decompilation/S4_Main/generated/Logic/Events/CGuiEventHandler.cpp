@@ -640,9 +640,9 @@ bool  CGuiEventHandler::HandleMsgKeyPress(class CEvn_Event & a2) {
   
   char result; // al
   CEvn_Logic *v3; // [esp+4h] [ebp-80h]
-  CEvn_Event *v4; // [esp+Ch] [ebp-78h]
-  CEvn_Event *v5; // [esp+14h] [ebp-70h]
-  _BYTE v6[32]; // [esp+24h] [ebp-60h] BYREF
+  struct CEvn_Event *v4; // [esp+Ch] [ebp-78h]
+  struct CEvn_Event *v5; // [esp+14h] [ebp-70h]
+  CEvn_Logic v6; // [esp+24h] [ebp-60h] BYREF
   CEvn_Event v7; // [esp+44h] [ebp-40h] BYREF
   CEvn_Event v8; // [esp+5Ch] [ebp-28h] BYREF
   int v9; // [esp+80h] [ebp-4h]
@@ -663,44 +663,44 @@ bool  CGuiEventHandler::HandleMsgKeyPress(class CEvn_Event & a2) {
       {
         case 'A':
         case 'a':
-          IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 0, 607, 1);
-          IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 4, 747, 1);
+          IGuiEngine::SelectControl(g_pGUIEngine, 0, 607, 1);
+          IGuiEngine::SelectControl(g_pGUIEngine, 4, 747, 1);
           result = 1;
           break;
         case 'C':
         case 'c':
-          IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 0, 608, 1);
-          IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 5, 1068, 1);
+          IGuiEngine::SelectControl(g_pGUIEngine, 0, 608, 1);
+          IGuiEngine::SelectControl(g_pGUIEngine, 5, 1068, 1);
           result = 1;
           break;
         case 'D':
         case 'd':
-          IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 0, 607, 1);
-          IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 4, 745, 1);
+          IGuiEngine::SelectControl(g_pGUIEngine, 0, 607, 1);
+          IGuiEngine::SelectControl(g_pGUIEngine, 4, 745, 1);
           result = 1;
           break;
         case 'E':
         case 'e':
-          IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 0, 606, 1);
-          IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 3, 538, 1);
+          IGuiEngine::SelectControl(g_pGUIEngine, 0, 606, 1);
+          IGuiEngine::SelectControl(g_pGUIEngine, 3, 538, 1);
           result = 1;
           break;
         case 'F':
         case 'f':
-          IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 0, 607, 1);
-          v3 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v6, 0x1E5u, 0, 0, 0, 0, 0);
+          IGuiEngine::SelectControl(g_pGUIEngine, 0, 607, 1);
+          v3 = CEvn_Logic::CEvn_Logic(&v6, 0x1E5u, 0, 0, 0, 0, 0);
           v9 = 2;
           IEventEngine::SendAMessage(g_pEvnEngine, v3);
           v9 = -1;
-          CEvn_Logic::~CEvn_Logic(v6);
+          CEvn_Logic::~CEvn_Logic(&v6);
           result = 1;
           break;
         case 'M':
         case 'm':
-          if ( std::string::size(&stru_402C9B4) || CGameData::GetMode(g_pGameData) == 3 )
+          if ( std::string::size(&stru_402C9B4) || CGameData::GetMode(g_pGameData) == GAMEMODE_CAMPAIGN )
           {
-            IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 0, 611, 1);
-            IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 8, 929, 1);
+            IGuiEngine::SelectControl(g_pGUIEngine, 0, 611, 1);
+            IGuiEngine::SelectControl(g_pGUIEngine, 8, 929, 1);
           }
           result = 1;
           break;
@@ -708,52 +708,52 @@ bool  CGuiEventHandler::HandleMsgKeyPress(class CEvn_Event & a2) {
         case 'q':
           if ( (a2->m_lParam & 0x10) != 0 )
           {
-            IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 0, 611, 1);
-            IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 8, 930, 1);
+            IGuiEngine::SelectControl(g_pGUIEngine, 0, 611, 1);
+            IGuiEngine::SelectControl(g_pGUIEngine, 8, 930, 1);
           }
           else
           {
-            IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 0, 606, 1);
-            IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 3, 536, 1);
+            IGuiEngine::SelectControl(g_pGUIEngine, 0, 606, 1);
+            IGuiEngine::SelectControl(g_pGUIEngine, 3, 536, 1);
           }
           result = 1;
           break;
         case 'R':
         case 'r':
-          IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 0, 606, 1);
-          IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 3, 539, 1);
+          IGuiEngine::SelectControl(g_pGUIEngine, 0, 606, 1);
+          IGuiEngine::SelectControl(g_pGUIEngine, 3, 539, 1);
           result = 1;
           break;
         case 'S':
         case 's':
-          IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 0, 607, 1);
-          IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 4, 746, 1);
+          IGuiEngine::SelectControl(g_pGUIEngine, 0, 607, 1);
+          IGuiEngine::SelectControl(g_pGUIEngine, 4, 746, 1);
           result = 1;
           break;
         case 'T':
         case 't':
-          IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 0, 606, 1);
-          IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 3, 540, 1);
+          IGuiEngine::SelectControl(g_pGUIEngine, 0, 606, 1);
+          IGuiEngine::SelectControl(g_pGUIEngine, 3, 540, 1);
           result = 1;
           break;
         case 'W':
         case 'w':
-          IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 0, 606, 1);
-          IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 3, 537, 1);
+          IGuiEngine::SelectControl(g_pGUIEngine, 0, 606, 1);
+          IGuiEngine::SelectControl(g_pGUIEngine, 3, 537, 1);
           result = 1;
           break;
         case 'X':
         case 'x':
-          IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 0, 608, 1);
-          IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 5, 1067, 1);
+          IGuiEngine::SelectControl(g_pGUIEngine, 0, 608, 1);
+          IGuiEngine::SelectControl(g_pGUIEngine, 5, 1067, 1);
           result = 1;
           break;
         case 'Y':
         case 'Z':
         case 'y':
         case 'z':
-          IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 0, 608, 1);
-          IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 5, 1069, 1);
+          IGuiEngine::SelectControl(g_pGUIEngine, 0, 608, 1);
+          IGuiEngine::SelectControl(g_pGUIEngine, 5, 1069, 1);
           result = 1;
           break;
         default:

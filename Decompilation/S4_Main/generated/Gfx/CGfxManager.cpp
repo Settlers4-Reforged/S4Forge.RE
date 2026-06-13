@@ -3,7 +3,7 @@
 // Definitions for class CGfxManager
 
 // address=[0x1361470]
-// Decompiled from CGfxManager *__thiscall CGfxManager::CGfxManager(CGfxManager *this, bool a2, bool a3, bool a4)
+// Decompiled from CGfxManager *__thiscall CGfxManager::CGfxManager(CGfxManager *this, BYTE a2, bool a3, bool a4)
  CGfxManager::CGfxManager(bool a2, bool a3, bool a4) {
   
   std::wstring *a2a; // [esp+4h] [ebp-34h]
@@ -16,7 +16,7 @@
   std::wstring::wstring(&this->m_swGfxFolderName);
   v8 = 1;
   String::String((String *)&this->m_sLastError);
-  LOBYTE(this->m_bUse6Palette) = a2;
+  this->m_bUse6Palette = a2;
   memset(this->m_sFileGfx, 0, sizeof(this->m_sFileGfx));
   memset(this->m_sFilePal, 0, sizeof(this->m_sFilePal));
   memset(this->m_pFilePalIndex, 0, sizeof(this->m_pFilePalIndex));

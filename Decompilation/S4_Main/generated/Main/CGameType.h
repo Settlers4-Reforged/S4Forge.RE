@@ -176,7 +176,7 @@ public:
     DWORD[9] m_sPlayerAckDelta;
     _DWORD m_iNetworkTimeDelta;
     std::string std__string298;
-    _DWORD m_iGameType;
+    int m_iGameType;
     _BYTE m_bIsSaveGame;
     _BYTE bIsAutosave;
     _DWORD m_uiTickCounter;

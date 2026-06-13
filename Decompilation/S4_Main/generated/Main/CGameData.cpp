@@ -10,24 +10,24 @@
   this->m_uVirtualTick = 0;
   this->m_iHeight = 0;
   this->m_iWidth = 0;
-  this->dword10 = 0;
+  this->m_uUnknown = 0;
   this->m_uCamX = 0;
   this->m_uCamY = 0;
   this->m_uZoom = 0x180000;
-  this->dword20 = -1;
-  this->dword24 = -1;
-  this->byte28 = 0;
+  this->m_iScreenMouseX = -1;
+  this->m_iScreenMouseY = -1;
+  this->m_bUnknown = 0;
   this->m_bFixedStartCamera = 0;
   CRandom16Ex::CRandom16Ex(&this->m_sRandom, 0);
   this->m_bIsGameWon = 0;
   this->m_iTeamWon = 0;
   std::string::string(&this->m_swGameType);
   std::string::string(&this->m_swMapMode);
-  this->byte7E = 0;
+  this->m_bUnknown2 = 0;
   CRandom16Ex::Init(&this->m_sRandom, 290671, 0);
   if ( !g_pGameType && BBSupportDbgReport(2, "GameData.cpp", 57, "g_pGameType != NULL") == 1 )
     __debugbreak();
-  if ( ((int)g_pGameType->m_iGameType <= 0 || (int)g_pGameType->m_iGameType >= 5)
+  if ( (g_pGameType->m_iGameType <= GAMEMODE_NONE || g_pGameType->m_iGameType >= GAMEMODE_MAX)
     && BBSupportDbgReport(
          2,
          "GameData.cpp",
@@ -57,7 +57,7 @@
 // Decompiled from bool __thiscall CGameData::IsTutorial(CGameData *this)
 bool  CGameData::IsTutorial(void) {
   
-  return this->m_iType == 4;
+  return this->m_iType == GAMEMODE_TUTORIAL;
 }
 
 
@@ -65,7 +65,7 @@ bool  CGameData::IsTutorial(void) {
 // Decompiled from bool __thiscall CGameData::IsCampaign(CGameData *this)
 bool  CGameData::IsCampaign(void) {
   
-  return this->m_iType == 3;
+  return this->m_iType == GAMEMODE_CAMPAIGN;
 }
 
 
@@ -110,7 +110,7 @@ bool  CGameData::IsGameWon(void) {
 
 
 // address=[0x144ff50]
-// Decompiled from unsigned int __thiscall CGameData::TeamWon(CGameData *this)
+// Decompiled from int __thiscall CGameData::TeamWon(CGameData *this)
 int  CGameData::TeamWon(void) {
   
   return this->m_iTeamWon;
@@ -137,7 +137,7 @@ unsigned int  CGameData::Rand(void) {
 // Decompiled from char *__thiscall CGameData::GetEconomyGoodsArray(CGameData *this)
 unsigned char *  CGameData::GetEconomyGoodsArray(void) {
   
-  return &this->m_pEconomyGoodsArray;
+  return this->m_pEconomyGoodsArray;
 }
 
 
@@ -145,8 +145,8 @@ unsigned char *  CGameData::GetEconomyGoodsArray(void) {
 // Decompiled from void __thiscall CGameData::~CGameData(CGameData *this)
  CGameData::~CGameData(void) {
   
-  std::string::~string((char *)this + 96);
-  std::string::~string((char *)this + 64);
+  std::string::~string(&this->m_swMapMode);
+  std::string::~string(&this->m_swGameType);
 }
 
 
