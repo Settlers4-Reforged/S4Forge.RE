@@ -6,6 +6,7 @@
 #include "Defines/Buildings.h"
 #include "Defines/Goods.h"
 #include "Defines/Settlers.h"
+#include "Main/CGameData.h"
 
 // Definitions for class CAIPlayerEvaluation
 
@@ -41,8 +42,8 @@ void CAIPlayerEvaluation::Clear(void) {
 // Decompiled from void __thiscall CAIPlayerEvaluation::EvaluatePlayer(CAIPlayerEvaluation *this, DWORD a2)
 void CAIPlayerEvaluation::EvaluatePlayer(int a2) {
   this->m_uAITick = IAIEnvironment::TickCounter();
-  DWORD NumberOfRandCalls = g_pGameData->m_sRandom->GetNumberOfRandCalls();
-  DWORD Seed = g_pGameData->m_sRandom->GetSeed();
+  DWORD NumberOfRandCalls = g_pGameData->m_sRandom.GetNumberOfRandCalls();
+  DWORD Seed = g_pGameData->m_sRandom.GetSeed();
   g_pMsgTracer2->PushFormatedInts(
     "==> Evaluation: AI_tick %u, seed 0x%08x, counter %u",
     this->m_uAITick,
