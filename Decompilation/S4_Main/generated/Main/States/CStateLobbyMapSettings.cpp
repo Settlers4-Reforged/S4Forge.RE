@@ -305,7 +305,7 @@ bool  CStateLobbyMapSettings::OnEvent(class CEvn_Event & a2) {
         {
           v23 = g_pGameType->m_iActualPlayerCount % 2u + (g_pGameType->m_iActualPlayerCount >> 1);
           for ( j = 0; j < g_pGameType->m_uiNumberAlliances; ++j )
-            g_pGameType->ptr4c[j] = v23;
+            g_pGameType->m_iAllianceSizes[j] = v23;
         }
         CGameType::SetHost(g_pGameType, 1);
         CGameStateHandler::Switch(

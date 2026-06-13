@@ -536,7 +536,7 @@ void  CStateGame::EndGame(void) {
   CEndStatistic::Update(&g_cEndStatistic);
   if ( !CGameData::IsTutorial(g_pGameData) )
   {
-    if ( CGameData::GetMode(g_pGameData) == GAMEMODE_CAMPAIGN )
+    if ( CGameData::GetMode(g_pGameData) == 3 )
       CGameStateHandler::Queue(CStateEcoStatistic::DynamicCreateFunc, 0);
     else
       CGameStateHandler::Queue(CStateEndStatistic::DynamicCreateFunc, 0);
@@ -567,11 +567,11 @@ void  CStateGame::EndGame(void) {
     if ( v19 )
     {
       CampaignStatus = CGameSettings::GetCampaignStatus(g_pGameType->m_iCampaignType);
-      v13 = g_pGameType->dword2E8 + 1;
+      v13 = g_pGameType->m_iMissionId + 1;
       if ( v13 > CampaignStatus )
         CGameSettings::SetCampaignStatus(g_pGameType->m_iCampaignType, v13);
     }
-    if ( g_pGameType->m_iCampaignType == 4 && v19 && g_pGameType->dword2E8 == 11 )
+    if ( g_pGameType->m_iCampaignType == 4 && v19 && g_pGameType->m_iMissionId == 11 )
     {
       if ( (unsigned __int8)CGameSettings::GetShowVideos() )
         CGameStateHandler::Queue((CStateMessageBox *(__cdecl *)(int))CStateVideo::DynamicCreateFunc, (void *)6);
@@ -579,19 +579,19 @@ void  CStateGame::EndGame(void) {
     }
     else if ( g_pGameType->m_iCampaignType == 15 && v19 )
     {
-      if ( g_pGameType->dword2E8 == 4 )
+      if ( g_pGameType->m_iMissionId == 4 )
       {
         if ( (unsigned __int8)CGameSettings::GetShowVideos() )
           CGameStateHandler::Queue((CStateMessageBox *(__cdecl *)(int))CStateVideo::DynamicCreateFunc, (void *)9);
         v18 = 14;
       }
-      if ( g_pGameType->dword2E8 == 11 )
+      if ( g_pGameType->m_iMissionId == 11 )
       {
         if ( (unsigned __int8)CGameSettings::GetShowVideos() )
-          CGameStateHandler::Queue((CStateMessageBox *(__cdecl *)(int))CStateVideo::DynamicCreateFunc, (void *)0xA);
+          CGameStateHandler::Queue((CStateMessageBox *(__cdecl *)(int))CStateVideo::DynamicCreateFunc, (void *)10);
         v18 = 0;
       }
-      v17 = g_pGameType->dword2E8 + 1;
+      v17 = g_pGameType->m_iMissionId + 1;
       v17 -= 2;
       switch ( v17 )
       {
@@ -600,7 +600,7 @@ void  CStateGame::EndGame(void) {
         case 5:
         case 7:
         case 8:
-          CGameStateHandler::Queue(CStateAOSplash::DynamicCreateFunc, (void *)g_pGameType->dword2E8);
+          CGameStateHandler::Queue(CStateAOSplash::DynamicCreateFunc, (void *)g_pGameType->m_iMissionId);
           break;
         default:
           break;
@@ -609,11 +609,11 @@ void  CStateGame::EndGame(void) {
     }
     else if ( g_pGameType->m_iCampaignType == 12 && v19 )
     {
-      if ( g_pGameType->dword2E8 == 1 )
+      if ( g_pGameType->m_iMissionId == 1 )
         CGameStateHandler::Queue(CStateAOSplash::DynamicCreateFunc, (void *)0xFFFFFFFF);
       v18 = 13;
     }
-    else if ( g_pGameType->dword2E8 == 2
+    else if ( g_pGameType->m_iMissionId == 2
            && v19
            && (g_pGameType->m_iCampaignType == 1
             || g_pGameType->m_iCampaignType == 2
@@ -1061,7 +1061,7 @@ int  CStateGame::GetModifierState(void) {
     else
       BBSupportTracePrintF(1, "Network:\t\t   %s", "Client");
     BBSupportTracePrintF(1, "--------------------------------------------------");
-    if ( CGameData::IsGameWon(&this->m_sGameData) && CGameData::GetMode(&this->m_sGameData) != GAMEMODE_MAX )
+    if ( CGameData::IsGameWon(&this->m_sGameData) && CGameData::GetMode(&this->m_sGameData) != 5 )
     {
       v12 = CGameData::TeamWon(&this->m_sGameData);
       v13 = CPlayerManager::GetLocalPlayerId();
@@ -1249,7 +1249,7 @@ bool  CStateGame::Perform(void) {
     v57 = -1;
     CEvn_Event::~CEvn_Event(&v53);
     CTextMsgHandler::SendAllMessages(0, 1, 1);
-    if ( CGameData::GetMode(&v50->m_sGameData) == GAMEMODE_CAMPAIGN )
+    if ( CGameData::GetMode(&v50->m_sGameData) == 3 )
     {
       IGuiEngine::SelectControl(g_pGUIEngine, 0, 611, 1);
       IGuiEngine::SelectControl(g_pGUIEngine, 8, 929, 1);
@@ -3401,7 +3401,7 @@ LABEL_354:
           case 0x27u:
             return 1;
           case 0x34u:
-            if ( CGameData::GetMode(&this->m_sGameData) == GAMEMODE_MAX )
+            if ( CGameData::GetMode(&this->m_sGameData) == 5 )
               return 1;
             if ( !CGameData::IsGameWon(&this->m_sGameData) )
             {

@@ -273,7 +273,7 @@ void  CGameType::SetPlayerName(int _iPlayerIndex, std::wstring & _swpPlayerName)
   std::wstring::wstring(&this->m_swSaveFile);
   this->m_bAIActive = 0;
   this->dword2E0 = 0;
-  this->dword2E8 = 0;
+  this->m_iMissionId = 0;
   this->m_bIsGameWon = 0;
   this->m_iTeamWon = 0;
   std::string::string(&this->m_swpTeamName);
@@ -829,7 +829,7 @@ bool  CGameType::LoadMapData(std::wstring _sMapName, bool _bAIActive, unsigned i
     for ( m = 0; m < this->m_iMapMaxNumPlayers; ++m )
     {
       if ( this->m_sPlayerTeam[m] < 9 )
-        ++this->ptr4c[this->m_sPlayerTeam[m]];
+        ++this->m_iAllianceSizes[this->m_sPlayerTeam[m]];
     }
     if ( this->m_uiNumberAlliances == 1 )
     {
@@ -959,13 +959,8 @@ bool  CGameType::IsMapAvailable(std::wstring & a2, int _iCRC) {
   int v12; // [esp+20h] [ebp-Ch] BYREF
   int iError; // [esp+24h] [ebp-8h] BYREF
 
-  if ( (*(unsigned __int8 (__thiscall **)(void *, std::wstring *, _DWORD))(*(_DWORD *)g_pRandomMaps + 32))(
-         g_pRandomMaps,
-         a2,
-         0) )
-  {
+  if ( g_pRandomMaps->IsRandomMapFileName(g_pRandomMaps, a2, 0) )
     return 1;
-  }
   std::wstring::operator=(&this->m_swMapName, a2);
   v4 = std::wstring::c_str(&this->m_swMapName);
   MA_OpenMapFile(v4, &v6, &iError, 1);
@@ -1105,7 +1100,7 @@ void  CGameType::Init(void) {
   this->m_bCooperationPossible = 0;
   this->m_iWidthHeight = 0;
   for ( i = 0; i < 9; ++i )
-    this->ptr4c[i] = 0;
+    this->m_iAllianceSizes[i] = 0;
   for ( j = 0; j < 9; ++j )
   {
     this->m_sPlayerType[j] = 0;

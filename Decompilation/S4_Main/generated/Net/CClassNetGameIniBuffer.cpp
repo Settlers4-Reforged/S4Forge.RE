@@ -1,3 +1,4 @@
+#if FALSE
 #include "CClassNetGameIniBuffer.h"
 
 // Definitions for class CClassNetGameIniBuffer
@@ -46,3 +47,4 @@ char const *  CClassNetGameIniBuffer::GetStartOfEntry(char const * SubStr) {
 }
 
 
+#endif // Already implemented

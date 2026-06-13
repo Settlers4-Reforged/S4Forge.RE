@@ -58,7 +58,7 @@ bool __cdecl CGameRun::Init(void) {
     v10 = 0;
   exceptionBlock = -1;
   g_pScriptMgr = v10;
-  if ( CGameData::GetMode(g_pGameData) == GAMEMODE_CAMPAIGN )
+  if ( CGameData::GetMode(g_pGameData) == 3 )
     CGameScriptManager::SetVictoryConditionHook(
       g_pScriptMgr,
       (void (__cdecl *)())ScriptEconomyModeVictoryConditionCheck);
@@ -754,10 +754,10 @@ void __cdecl CGameRun::FillGameType(std::wstring & a2, class CGameType & _rGameT
   int v22; // [esp+518h] [ebp-4h]
 
   v21 = v6;
-  _rGameType->dword618 = _rGeneralChunk->dword950;
-  _rGameType->dword61C = _rGeneralChunk->dword954;
+  _rGameType->dword618 = _rGeneralChunk->m_iSeed;
+  _rGameType->dword61C = _rGeneralChunk->m_iRandCalls;
   std::wstring::operator=(&_rGameType->m_swSaveFile, a2);
-  v8 = (std::wstring *)std::wstring::wstring(&v20, (wchar_t *)_rGeneralChunk->gap24);
+  v8 = (std::wstring *)std::wstring::wstring(&v20, (wchar_t *)_rGeneralChunk->m_spGameName);
   std::wstring::operator=(&_rGameType->m_swGameName, v8);
   std::wstring::~wstring(&v20);
   if ( _rGeneralChunk->m_uiPlayerCount >= 9u
@@ -801,16 +801,16 @@ void __cdecl CGameRun::FillGameType(std::wstring & a2, class CGameType & _rGameT
     _rGameType->m_bIsGameWon = 1;
     _rGameType->m_iTeamWon = _rGeneralChunk->m_iTeamWon;
   }
-  _rGameType->m_iMode = (unsigned __int8)_rGeneralChunk->byte934;
+  _rGameType->m_iMode = (unsigned __int8)_rGeneralChunk->m_iMode;
   memcpy(
     _rGameType->m_pEconomyGoodsArray,
     _rGeneralChunk->m_pEconomyGoodsArray,
     sizeof(_rGameType->m_pEconomyGoodsArray));
-  _rGameType->m_iGameType = _rGeneralChunk->dword10;
+  _rGameType->m_iGameType = _rGeneralChunk->m_iGameType;
   _rGameType->m_iCampaignType = _rGeneralChunk->m_uCampaignType;
-  _rGameType->dword2E8 = _rGeneralChunk->dwordC;
-  std::wstring::operator=(&_rGameType->m_swMapName, _rGeneralChunk->m_swUnknown);
-  v9 = _rGeneralChunk->dword10 != 2;
+  _rGameType->m_iMissionId = _rGeneralChunk->m_iMissionId;
+  std::wstring::operator=(&_rGameType->m_swMapName, _rGeneralChunk->m_swMapName);
+  v9 = _rGeneralChunk->m_iGameType != 2;
   _rGameType->m_bAIActive = v9;
   _rGameType->m_uiTickCounter = _rGeneralChunk->m_uiTickCounter;
   _rGameType->m_iNetworkTimeDelta = _rGeneralChunk->m_iNetworkTimeDelta;
@@ -998,11 +998,11 @@ bool __cdecl CGameRun::SaveGeneralInfo(class S4::CMapFile & a1) {
   _BYTE v14[28]; // [esp+978h] [ebp-20h] BYREF
 
   CGameChunkGeneral::CGameChunkGeneral(&sChunk);
-  memset(sChunk.byte264, 0, sizeof(sChunk.byte264));
+  memset(sChunk.m_spSaveDateTime, 0, sizeof(sChunk.m_spSaveDateTime));
   v9 = CGameSettings::GetLanguage() == 1;
   DateTimeString = (std::string *)CTimeInfo::GetDateTimeString(v14, v9);
   v1 = std::string::c_str(DateTimeString);
-  j__strcpy_0(sChunk.byte264, v1);
+  j__strcpy_0(sChunk.m_spSaveDateTime, v1);
   std::string::~string(v14);
   v10 = 8;
   if ( CGameType::IsCampaignMap(g_pGameType) )
@@ -1045,7 +1045,7 @@ bool __cdecl CGameRun::SaveGeneralInfo(class S4::CMapFile & a1) {
     v10 |= 0x100000u;
   if ( CGameType::IsMCD2TextureSet(g_pGameType) )
     v10 |= 0x200000u;
-  BBSupportTracePrintF(0, "SaveGeneralInfo(): Special: 0x%08x.", (unsigned int)&dword_F29144[203695] & v10);
+  BBSupportTracePrintF(0, "SaveGeneralInfo(): Special: 0x%08x.", v10 & 0xFF0000);
   sChunk.m_uMapFlags = v10;
   sChunk.m_iVersionMajor = g_iApplicationVersionMajor;
   sChunk.m_iVersionMinor = g_iApplicationVersionMinor;
@@ -1058,22 +1058,22 @@ bool __cdecl CGameRun::SaveGeneralInfo(class S4::CMapFile & a1) {
     sChunk.m_iTeamWon = -1;
   sChunk.m_uMultiPlayerGameID = CGameType::GetMultiPlayerGameID(g_pGameType);
   sChunk.m_iNetworkTimeDelta = g_pGameType->m_iNetworkTimeDelta;
-  memset(sChunk.m_swUnknown, 0, sizeof(sChunk.m_swUnknown));
+  memset(sChunk.m_swMapName, 0, sizeof(sChunk.m_swMapName));
   v2 = std::wstring::c_str(&g_pGameType->m_swMapName);
-  wcscpy(sChunk.m_swUnknown, v2);
-  sChunk.dword10 = g_pGameType->m_iGameType;
+  wcscpy(sChunk.m_swMapName, v2);
+  sChunk.m_iGameType = g_pGameType->m_iGameType;
   sChunk.m_uCampaignType = g_pGameType->m_iCampaignType;
-  sChunk.dwordC = g_pGameType->dword2E8;
-  memset(sChunk.gap24, 0, sizeof(sChunk.gap24));
+  sChunk.m_iMissionId = g_pGameType->m_iMissionId;
+  memset(sChunk.m_spGameName, 0, sizeof(sChunk.m_spGameName));
   v3 = std::wstring::c_str(&g_pGameType->m_swGameName);
-  wcscpy((wchar_t *)sChunk.gap24, v3);
+  wcscpy(sChunk.m_spGameName, v3);
   sChunk.m_iMapMaxNumPlayers = g_pGameType->m_iActualPlayerCount;
   memcpy(sChunk.m_pEconomyGoodsArray, g_pGameType->m_pEconomyGoodsArray, sizeof(sChunk.m_pEconomyGoodsArray));
-  sChunk.byte934 = g_pGameType->m_iMode;
+  sChunk.m_iMode = g_pGameType->m_iMode;
   sChunk.byte92C = 7;
   sChunk.m_uiPlayerCount = CPlayerManager::LastPlayerId();
   v4 = std::string::c_str(&stru_402C9B4);
-  j__strcpy_0(sChunk.byte52C, v4);
+  j__strcpy_0(sChunk.m_spDesciptionText, v4);
   for ( j = 0; j < 8; ++j )
   {
     sChunk.m_sPlayers[j].m_uType = g_pGameType->m_sPlayerType[j];
@@ -1089,11 +1089,11 @@ bool __cdecl CGameRun::SaveGeneralInfo(class S4::CMapFile & a1) {
   sChunk.m_bIsClanGame = CGameType::IsClanGame(g_pGameType);
   sChunk.m_bIsHost = CGameType::IsHost(g_pGameType);
   sChunk.m_cLocalSlot = CGameType::GetLocalSlot(g_pGameType);
-  sChunk.dword950 = CRandom16::GetSeed(&g_pGameData->m_sRandom);
-  sChunk.dword954 = CRandom16::GetNumberOfRandCalls(&g_pGameData->m_sRandom);
-  sChunk.dword958 = g_pGameData->m_uCamX;
-  sChunk.dword95C = g_pGameData->m_uCamY;
-  sChunk.dword960 = g_pGameData->m_uZoom;
+  sChunk.m_iSeed = CRandom16::GetSeed(&g_pGameData->m_sRandom);
+  sChunk.m_iRandCalls = CRandom16::GetNumberOfRandCalls(&g_pGameData->m_sRandom);
+  sChunk.m_uCamX = g_pGameData->m_uCamX;
+  sChunk.m_uCamY = g_pGameData->m_uCamY;
+  sChunk.m_uZoom = g_pGameData->m_uZoom;
   CGameChunkGeneral::GenerateCRC(&sChunk);
   S4::CMapFile::SaveChunkObject(a1, 0x82u, 0, &sChunk, 0);
   return 1;

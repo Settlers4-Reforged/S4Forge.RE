@@ -1069,7 +1069,7 @@ bool __cdecl CGameStateHandler::StartDummyGame(void) {
     g_pGameType->m_iGameType = 1;
     CGameType::SetMCD2TextureSet(g_pGameType, 1);
     for ( i = 0; i < g_pGameType->m_iActualPlayerCount; ++i )
-      ++g_pGameType->ptr4c[g_pGameType->m_sPlayerTeam[i]];
+      ++g_pGameType->m_iAllianceSizes[g_pGameType->m_sPlayerTeam[i]];
     g_pGameType->m_iActualPlayerCount = iNumberOfPlayers;
     if ( g_pGameType->m_iActualPlayerCount > (unsigned int)iNumberOfPlayers )
     {

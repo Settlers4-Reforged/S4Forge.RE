@@ -150,7 +150,7 @@ public:
     int m_iStartResources;
     _DWORD m_iHostAddress;
     _DWORD m_uiNumberAlliances;
-    int[9] ptr4c;
+    int[9] m_iAllianceSizes;
     _DWORD m_iActualPlayerCount;
     DWORD[9] m_sPlayerType;
     int[9] m_sPlayerTeam;
@@ -184,7 +184,7 @@ public:
     _BYTE m_bAIActive;
     _DWORD dword2E0;
     _DWORD m_iCampaignType;
-    _DWORD dword2E8;
+    _DWORD m_iMissionId;
     _BYTE m_bIsGameWon;
     _DWORD m_iTeamWon;
     std::string m_swpTeamName;

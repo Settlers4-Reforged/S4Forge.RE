@@ -546,7 +546,7 @@ void  OnlineManager::OnHost(void) {
 
   *((_BYTE *)this + 82) = 1;
   INetworkEngine::StormOnHost((CGameHost **)g_pNetworkEngine);
-  v1 = std::wstring::c_str((_Cnd_internal_imp_t *)&stru_4030720);
+  v1 = std::wstring::c_str((_Cnd_internal_imp_t *)&g_swPlayerName);
   v2 = storm::CStringConvertToUtf8(v3, (int)v1);
   v4 = 0;
   StormManager::GetInstance();

@@ -1,3 +1,4 @@
+#if FALSE
 #include "CGameData.h"
 
 // Definitions for class CGameData
@@ -27,7 +28,7 @@
   CRandom16Ex::Init(&this->m_sRandom, 290671, 0);
   if ( !g_pGameType && BBSupportDbgReport(2, "GameData.cpp", 57, "g_pGameType != NULL") == 1 )
     __debugbreak();
-  if ( (g_pGameType->m_iGameType <= GAMEMODE_NONE || g_pGameType->m_iGameType >= GAMEMODE_MAX)
+  if ( (g_pGameType->m_iGameType <= 0 || g_pGameType->m_iGameType >= 5)
     && BBSupportDbgReport(
          2,
          "GameData.cpp",
@@ -37,17 +38,17 @@
     __debugbreak();
   }
   this->m_iType = g_pGameType->m_iGameType;
-  std::string::operator=(&this->m_swGameType, g_pszGameType[this->m_iType]);
+  std::string::operator=(&this->m_swGameType, s_pszGameType[this->m_iType]);
   if ( !this->m_iType && BBSupportDbgReport(2, "GameData.cpp", 63, "m_iType") == 1 )
     __debugbreak();
   this->m_iMode = g_pGameType->m_iMode;
-  std::string::operator=(&this->m_swMapMode, g_pszMapMode[this->m_iMode]);
+  std::string::operator=(&this->m_swMapMode, s_pszMapMode[this->m_iMode]);
   if ( !this->m_iMode && BBSupportDbgReport(2, "GameData.cpp", 67, "m_iMode") == 1 )
     __debugbreak();
   *(_WORD *)&this->m_bIsNetworkGame = g_pGameType->m_bAIActive == 0;
   this->m_bIsGameWon = g_pGameType->m_bIsGameWon;
   this->m_iTeamWon = g_pGameType->m_iTeamWon;
-  memcpy(this->m_pEconomyGoodsArray, g_pGameType->m_pEconomyGoodsArray, sizeof(this->m_pEconomyGoodsArray));
+  memcpy(this->m_pEconomyGoodsArray, g_pGameType->m_pEconomyGoodsArray, 7u);
   this->m_bIsLadderGame = CGameType::IsLadderGame(g_pGameType);
   return this;
 }
@@ -57,7 +58,7 @@
 // Decompiled from bool __thiscall CGameData::IsTutorial(CGameData *this)
 bool  CGameData::IsTutorial(void) {
   
-  return this->m_iType == GAMEMODE_TUTORIAL;
+  return this->m_iType == 4;
 }
 
 
@@ -65,7 +66,7 @@ bool  CGameData::IsTutorial(void) {
 // Decompiled from bool __thiscall CGameData::IsCampaign(CGameData *this)
 bool  CGameData::IsCampaign(void) {
   
-  return this->m_iType == GAMEMODE_CAMPAIGN;
+  return this->m_iType == GAMETYPE_CAMPAIGN;
 }
 
 
@@ -185,3 +186,4 @@ void  CGameData::TeamWon(int a2) {
 }
 
 
+#endif // Already implemented

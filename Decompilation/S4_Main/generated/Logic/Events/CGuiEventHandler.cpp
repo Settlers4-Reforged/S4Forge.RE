@@ -697,7 +697,7 @@ bool  CGuiEventHandler::HandleMsgKeyPress(class CEvn_Event & a2) {
           break;
         case 'M':
         case 'm':
-          if ( std::string::size(&stru_402C9B4) || CGameData::GetMode(g_pGameData) == GAMEMODE_CAMPAIGN )
+          if ( std::string::size(&stru_402C9B4) || CGameData::GetMode(g_pGameData) == 3 )
           {
             IGuiEngine::SelectControl(g_pGUIEngine, 0, 611, 1);
             IGuiEngine::SelectControl(g_pGUIEngine, 8, 929, 1);

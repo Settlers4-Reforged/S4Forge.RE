@@ -350,7 +350,7 @@ bool  CStateBriefing::OnEvent(class CEvn_Event & a2) {
             LOBYTE(v55) = 3;
             std::wstring::~wstring(&v51);
             g_pGameType->m_iCampaignType = *((_DWORD *)v48 + 1);
-            g_pGameType->dword2E8 = *((_DWORD *)v48 + 2);
+            g_pGameType->m_iMissionId = *((_DWORD *)v48 + 2);
             g_pGameType->m_iGameType = 3;
             for ( i = 0; i < g_pGameType->m_iMapMaxNumPlayers; ++i )
               g_pGameType->m_sPlayerExclusiveColor[i] = 0;

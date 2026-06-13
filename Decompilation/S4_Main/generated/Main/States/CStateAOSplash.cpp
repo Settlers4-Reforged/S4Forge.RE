@@ -3,7 +3,7 @@
 // Definitions for class CStateAOSplash
 
 // address=[0x14a1980]
-// Decompiled from CStateAOSplash *__cdecl CStateAOSplash::DynamicCreateFunc(void *a1)
+// Decompiled from CStateAOSplash *__cdecl CStateAOSplash::DynamicCreateFunc(int a1)
 class CGameState * __cdecl CStateAOSplash::DynamicCreateFunc(void * a1) {
   
   CStateAOSplash *C; // [esp+Ch] [ebp-10h]

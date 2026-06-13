@@ -12947,7 +12947,7 @@ void __cdecl GuiDlgLanLobbyJoingame(int a1) {
   _BYTE v3[24]; // [esp+10h] [ebp-28h] BYREF
   int v4; // [esp+34h] [ebp-4h]
 
-  dword_4030718 = s_iLanLobbyPage + a1;
+  g_iLanLobbyNr = s_iLanLobbyPage + a1;
   PlayGuiSound(2);
   v2 = CEvn_Event::CEvn_Event(60, 0, 0, 0);
   IEventEngine::SendAMessage(v2);
@@ -13064,7 +13064,7 @@ void __cdecl GuiDlgLanLobbyConnectUpdate(void) {
   v6 = 0;
   if ( dword_403071C )
   {
-    v0 = std::wstring::c_str(&stru_4030720);
+    v0 = std::wstring::c_str(&g_swPlayerName);
     j__wcstombs(Dest, v0, 0x100u);
     IGuiEngine::SetTypeAsText(g_pGUIEngine, 2, GUI_S_MPS_PREONOFF_TT);
     Instance = UPlay::UPlayManager::GetInstance();
@@ -13151,7 +13151,7 @@ bool __cdecl GuiDlgLanLobbyConnectMenuProc(int a1, int a2, int a3) {
         {
           j__mbstowcs(Dest, Source, 0x100u);
           Dest[31] = 0;
-          std::wstring::operator=(&stru_4030720, Dest);
+          std::wstring::operator=(&g_swPlayerName, Dest);
           PlayGuiSound(2u);
         }
       }
@@ -16191,12 +16191,12 @@ void __cdecl GuiDlgMainGameSettingstUpdate(void) {
   String::String((char *)byte_368FCC2, -1);
   v18 = 0;
   byte_3ED2031 = 1;
-  if ( s_bIsHost && !byte_4030853 )
+  if ( g_bIsHost && !byte_4030853 )
     IGuiEngine::SetControlVisibility(g_pGUIEngine, dword_403089C, 2244, 0);
   IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, 2244, byte_40308A1);
   IGuiEngine::SelectControl(g_pGUIEngine, dword_403089C, 2244, byte_40308A2);
   if ( g_pGameType->m_sPlayerType[dword_3D891AC] == 1
-    || !s_bIsHost
+    || !g_bIsHost
     || INetworkEngine::StormDidEnterSession((INetworkEngine *)g_pNetworkEngine) )
   {
     dword_3D891AC = (char)CPlayerManager::GetLocalSlot();
@@ -16251,12 +16251,12 @@ void __cdecl GuiDlgMainGameSettingstUpdate(void) {
   {
     IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, 2187, 1);
   }
-  if ( s_bIsHost )
+  if ( g_bIsHost )
     IGuiEngine::SetControlVisibility(g_pGUIEngine, dword_403089C, 2142, 1);
   else
     IGuiEngine::SetControlVisibility(g_pGUIEngine, dword_403089C, 2142, 0);
   IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, 2142, byte_403088C);
-  if ( !s_bIsHost )
+  if ( !g_bIsHost )
     IGuiEngine::SetControlVisibility(g_pGUIEngine, dword_403089C, 2141, byte_4030854 != 1);
   v0 = std::wstring::c_str(&stru_40307CC);
   j__wcstombs(Destination, v0, 0x100u);
@@ -16370,7 +16370,7 @@ LABEL_95:
         dword_36906D8[3 * *(_DWORD *)(dword_403083C + 2116 * i + 60) + 2],
         0);
       IGuiEngine::SetControlVisibility(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 9], 1);
-      if ( s_bIsHost && *(_BYTE *)(dword_403083C + 2116 * i + 2113) )
+      if ( g_bIsHost && *(_BYTE *)(dword_403083C + 2116 * i + 2113) )
         IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 9], 1);
       else
         IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 9], 0);
@@ -16384,7 +16384,7 @@ LABEL_95:
         v6 = *(_DWORD *)(dword_403083C + 2116 * i + 60);
         if ( v6 == 2 || v6 == 3 )
         {
-          if ( s_bIsHost )
+          if ( g_bIsHost )
             v12 = 1;
         }
         else if ( v6 == 1 )
@@ -16453,13 +16453,13 @@ LABEL_95:
         dword_3690578[11 * i + 9],
         dword_36906D8[3 * *(_DWORD *)(dword_403083C + 2116 * i + 60) + 2],
         0);
-      if ( v12 && !*(_BYTE *)(dword_403083C + 2116 * i + 64) && *(_BYTE *)(dword_403083C + 2116 * i + 2113) && s_bIsHost )
+      if ( v12 && !*(_BYTE *)(dword_403083C + 2116 * i + 64) && *(_BYTE *)(dword_403083C + 2116 * i + 2113) && g_bIsHost )
         IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 9], 1);
       else
         IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 9], 0);
       GuiDlgMainGameSettingsUpdateChangeSlot(i);
-      v4 = *(_DWORD *)(dword_403083C + 2116 * i + 60) == 1 && !*(_BYTE *)(dword_403083C + 2116 * i + 64) && s_bIsHost;
-      IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 10], s_bIsHost);
+      v4 = *(_DWORD *)(dword_403083C + 2116 * i + 60) == 1 && !*(_BYTE *)(dword_403083C + 2116 * i + 64) && g_bIsHost;
+      IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 10], g_bIsHost);
       IGuiEngine::SetControlVisibility(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 10], v4);
     }
   }
@@ -16507,7 +16507,7 @@ void __cdecl InitGuiDlgMainGameSettings(void) {
     IGuiEngine::SetText((void *)g_pGUIEngine, dword_403089C, 2244, v5);
     IGuiEngine::SetTypeAsButton((IGuiEngine *)g_pGUIEngine, dword_403089C, 2144);
     IGuiEngine::SetWidth((IGuiEngine *)g_pGUIEngine, dword_403089C, 2143, 0x28u);
-    if ( !s_bIsHost )
+    if ( !g_bIsHost )
     {
       for ( i = 0; i < 8; ++i )
       {
@@ -16634,7 +16634,7 @@ bool __cdecl GuiDlgMainGameSettingsProc(int a1, int a2, int a3) {
     v50 = LocalSlot;
     if ( LocalSlot <= 0 )
     {
-      if ( byte_4030853 && !s_bIsHost )
+      if ( byte_4030853 && !g_bIsHost )
       {
         if ( LocalSlot >= 0 )
         {
@@ -56109,33 +56109,32 @@ unsigned long __cdecl CalcChecksumOfFile(void * hFile, int * a2) {
 // [Decompilation failed for int __cdecl GetMapAccessInterfaceVersion(void)]
 
 // address=[0x2fbbe60]
-// Decompiled from _DWORD *__cdecl MA_OpenMapFile(OLECHAR *psz, _DWORD *a2, _DWORD *a3, int a4)
-void __cdecl MA_OpenMapFile(wchar_t * psz, int * a2, int * a3, int a4) {
+// Decompiled from void __cdecl MA_OpenMapFile(wchar_t *psz, int *a2, int *a3, int a4)
+void __cdecl MA_OpenMapFile(wchar_t * a1, int * a2, int * a3, int a4) {
   
-  _DWORD *result; // eax
-  const CHAR *v5; // eax
-  unsigned int v6; // [esp+1CCh] [ebp-A0h]
-  int v7[5]; // [esp+1E4h] [ebp-88h] BYREF
-  void *v8; // [esp+1F8h] [ebp-74h]
-  void *v9; // [esp+1FCh] [ebp-70h]
-  void *v10; // [esp+200h] [ebp-6Ch]
-  void *v11; // [esp+204h] [ebp-68h]
-  void *v12; // [esp+208h] [ebp-64h]
-  void *v13; // [esp+20Ch] [ebp-60h]
-  void *v14; // [esp+210h] [ebp-5Ch]
-  void *v15; // [esp+214h] [ebp-58h]
+  const CHAR *v4; // eax
+  unsigned int v5; // [esp+1CCh] [ebp-A0h]
+  int v6[5]; // [esp+1E4h] [ebp-88h] BYREF
+  void *v7; // [esp+1F8h] [ebp-74h]
+  void *v8; // [esp+1FCh] [ebp-70h]
+  void *v9; // [esp+200h] [ebp-6Ch]
+  void *v10; // [esp+204h] [ebp-68h]
+  void *v11; // [esp+208h] [ebp-64h]
+  void *v12; // [esp+20Ch] [ebp-60h]
+  void *v13; // [esp+210h] [ebp-5Ch]
+  void *v14; // [esp+214h] [ebp-58h]
   void *C; // [esp+218h] [ebp-54h]
-  void *v17; // [esp+21Ch] [ebp-50h]
+  void *v16; // [esp+21Ch] [ebp-50h]
   int iChunkId; // [esp+220h] [ebp-4Ch]
   int iFileVersion; // [esp+224h] [ebp-48h] MAPDST BYREF
   int Buffer; // [esp+22Ch] [ebp-40h] BYREF
   DWORD NumberOfBytesRead; // [esp+230h] [ebp-3Ch] BYREF
   BOOL bHasData; // [esp+234h] [ebp-38h]
-  BSTR *v24; // [esp+238h] [ebp-34h] BYREF
+  BSTR *v23; // [esp+238h] [ebp-34h] BYREF
   HANDLE hFile; // [esp+23Ch] [ebp-30h]
   unsigned __int8 *lpBuffer; // [esp+240h] [ebp-2Ch]
   struct SMapChunkHeader sChunkHeader; // [esp+244h] [ebp-28h] BYREF
-  int v28; // [esp+268h] [ebp-4h]
+  int v27; // [esp+268h] [ebp-4h]
 
   ReleaseMemory();
   InitVariables();
@@ -56144,91 +56143,95 @@ void __cdecl MA_OpenMapFile(wchar_t * psz, int * a2, int * a3, int a4) {
   g_bSettlersAvailable = 0;
   if ( g_bMapIsLoaded )
   {
-    result = a3;
     *a3 = 7;
-    return result;
+    return;
   }
   g_bAddOnMap = 0;
   g_bEditorMap = 0;
   g_bCampaign = 0;
   *a2 = 0;
-  _bstr_t::_bstr_t(&v24, psz);
-  v28 = 0;
+  _bstr_t::_bstr_t(&v23, psz);
+  v27 = 0;
   lpBuffer = (unsigned __int8 *)operator new[](0x40018u);
   if ( !lpBuffer )
   {
     *a3 = 2;
-    v28 = -1;
-    return (_DWORD *)_bstr_t::~_bstr_t(&v24);
+    v27 = -1;
+    _bstr_t::~_bstr_t(&v23);
+    return;
   }
-  v17 = operator new[](0x2001u);
-  g_pTextDescription = v17;
-  if ( !v17 )
+  v16 = operator new[](0x2001u);
+  g_pTextDescription = v16;
+  if ( !v16 )
   {
     C = lpBuffer;
     operator delete[](lpBuffer);
     lpBuffer = 0;
     *a3 = 2;
-    v28 = -1;
-    return (_DWORD *)_bstr_t::~_bstr_t(&v24);
+    v27 = -1;
+    _bstr_t::~_bstr_t(&v23);
+    return;
   }
   memset(g_pTextDescription, 0, 0x2001u);
-  v15 = operator new[](0x2001u);
-  g_pTextEnglishDescription = v15;
-  if ( !v15 )
+  v14 = operator new[](0x2001u);
+  g_pTextEnglishDescription = v14;
+  if ( !v14 )
   {
-    v14 = lpBuffer;
+    v13 = lpBuffer;
     operator delete[](lpBuffer);
-    v13 = g_pTextDescription;
+    v12 = g_pTextDescription;
     operator delete[](g_pTextDescription);
     lpBuffer = 0;
     g_pTextDescription = 0;
     *a3 = 2;
-    v28 = -1;
-    return (_DWORD *)_bstr_t::~_bstr_t(&v24);
+    v27 = -1;
+    _bstr_t::~_bstr_t(&v23);
+    return;
   }
   memset(g_pTextEnglishDescription, 0, 0x2001u);
-  v12 = operator new[](0x2001u);
-  g_pTextTandT = v12;
-  if ( !v12 )
+  v11 = operator new[](0x2001u);
+  g_pTextTandT = v11;
+  if ( !v11 )
   {
-    v11 = lpBuffer;
+    v10 = lpBuffer;
     operator delete[](lpBuffer);
-    v10 = g_pTextDescription;
+    v9 = g_pTextDescription;
     operator delete[](g_pTextDescription);
-    v9 = g_pTextEnglishDescription;
+    v8 = g_pTextEnglishDescription;
     operator delete[](g_pTextEnglishDescription);
     lpBuffer = 0;
     g_pTextDescription = 0;
     g_pTextEnglishDescription = 0;
     *a3 = 2;
-    v28 = -1;
-    return (_DWORD *)_bstr_t::~_bstr_t(&v24);
+    v27 = -1;
+    _bstr_t::~_bstr_t(&v23);
+    return;
   }
   memset(g_pTextTandT, 0, 0x2001u);
-  v8 = operator new[](0x2001u);
-  g_pTextEnglishTandT = v8;
-  if ( !v8 )
+  v7 = operator new[](0x2001u);
+  g_pTextEnglishTandT = v7;
+  if ( !v7 )
   {
-    v7[4] = (int)lpBuffer;
+    v6[4] = (int)lpBuffer;
     operator delete[](lpBuffer);
-    v7[3] = (int)g_pTextDescription;
+    v6[3] = (int)g_pTextDescription;
     operator delete[](g_pTextDescription);
-    v7[2] = (int)g_pTextEnglishDescription;
+    v6[2] = (int)g_pTextEnglishDescription;
     operator delete[](g_pTextEnglishDescription);
-    v7[1] = (int)g_pTextTandT;
+    v6[1] = (int)g_pTextTandT;
     operator delete[](g_pTextTandT);
     lpBuffer = 0;
     g_pTextDescription = 0;
     g_pTextEnglishDescription = 0;
     g_pTextTandT = 0;
     *a3 = 2;
-    v28 = -1;
-    return (_DWORD *)_bstr_t::~_bstr_t(&v24);
+    v27 = -1;
+    _bstr_t::~_bstr_t(&v23);
+    return;
   }
   memset(g_pTextEnglishTandT, 0, 0x2001u);
-  v5 = (const CHAR *)_bstr_t::operator char const *(&v24);
-  hFile = CreateFileA(v5, 0x80000000, 1u, 0, 3u, 0x80u, 0);
+  v4 = (const CHAR *)_bstr_t::operator char const *(&v23);
+  hFile = CreateFileA(v4, 0x80000000, 1u, 0, 3u, 0x80u, 0);
   if ( hFile == (HANDLE)-1 )
   {
     operator delete[](lpBuffer);
@@ -56242,8 +56245,8 @@ void __cdecl MA_OpenMapFile(wchar_t * psz, int * a2, int * a3, int a4) {
     g_pTextTandT = 0;
     g_pTextEnglishTandT = 0;
     *a3 = 5;
-    v28 = -1;
-    return (_DWORD *)_bstr_t::~_bstr_t(&v24);
+    v27 = -1;
+    _bstr_t::~_bstr_t(&v23);
   }
   else
   {
@@ -56251,8 +56254,8 @@ void __cdecl MA_OpenMapFile(wchar_t * psz, int * a2, int * a3, int a4) {
     *a2 = Buffer;
     if ( !a4 )
       goto LABEL_19;
-    v6 = CalcChecksumOfFile(hFile, v7);
-    if ( v7[0] )
+    v5 = CalcChecksumOfFile(hFile, v6);
+    if ( v6[0] )
     {
 LABEL_16:
       CloseHandle(hFile);
@@ -56267,10 +56270,11 @@ LABEL_16:
       g_pTextTandT = 0;
       g_pTextEnglishTandT = 0;
       *a3 = 2;
-      v28 = -1;
-      return (_DWORD *)_bstr_t::~_bstr_t(&v24);
+      v27 = -1;
+      _bstr_t::~_bstr_t(&v23);
+      return;
     }
-    if ( v6 == Buffer )
+    if ( v5 == Buffer )
     {
 LABEL_19:
       SetFilePointer(hFile, 4, 0, FILE_BEGIN);
@@ -56337,8 +56341,8 @@ LABEL_75:
                 operator delete[](lpBuffer);
                 g_bMapIsLoaded = 1;
                 *a3 = 0;
-                v28 = -1;
-                result = (_DWORD *)_bstr_t::~_bstr_t(&v24);
+                v27 = -1;
+                _bstr_t::~_bstr_t(&v23);
                 break;
               case MAP_CHUNK_DUMMY_2:
                 goto LABEL_75;
@@ -56423,8 +56427,8 @@ LABEL_46:
             g_pTextTandT = 0;
             g_pTextEnglishTandT = 0;
             *a3 = 3;
-            v28 = -1;
-            return (_DWORD *)_bstr_t::~_bstr_t(&v24);
+            v27 = -1;
+            _bstr_t::~_bstr_t(&v23);
           }
           break;
         }
@@ -56444,8 +56448,8 @@ LABEL_59:
         g_pTextTandT = 0;
         g_pTextEnglishTandT = 0;
         *a3 = 4;
-        v28 = -1;
-        return (_DWORD *)_bstr_t::~_bstr_t(&v24);
+        v27 = -1;
+        _bstr_t::~_bstr_t(&v23);
       }
     }
     else
@@ -56462,11 +56466,10 @@ LABEL_59:
       g_pTextTandT = 0;
       g_pTextEnglishTandT = 0;
       *a3 = 1;
-      v28 = -1;
-      return (_DWORD *)_bstr_t::~_bstr_t(&v24);
+      v27 = -1;
+      _bstr_t::~_bstr_t(&v23);
     }
   }
-  return result;
 }
 
 

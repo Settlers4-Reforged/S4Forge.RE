@@ -116,7 +116,7 @@ void  CStatistic::SPlayerStatistic::CalculateFightingStrength(int a2) {
   {
     v11 = *((_DWORD *)this + 1097);
   }
-  if ( g_pGameData && CGameData::GetMode(g_pGameData) == GAMEMODE_CAMPAIGN )
+  if ( g_pGameData && CGameData::GetMode(g_pGameData) == 3 )
   {
     if ( v11 < 4 )
       v4 = 1;

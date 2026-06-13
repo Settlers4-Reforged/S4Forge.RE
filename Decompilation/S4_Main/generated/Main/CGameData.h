@@ -81,7 +81,7 @@ public:
     bool m_bIsLastFrameRendered;
     bool m_bUnknown2;
     bool m_bIsLadderGame;
-    char[8] m_pEconomyGoodsArray;
+    char[7] m_pEconomyGoodsArray;
 
 };
 

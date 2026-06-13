@@ -427,7 +427,7 @@ void  INetworkEngine::StormOnPeerGone(unsigned int a2) {
 // Decompiled from void __thiscall INetworkEngine::StormOnHost(CGameHost **this)
 void  INetworkEngine::StormOnHost(void) {
   
-  std::wstring::operator=((int)&stru_4030720);
+  std::wstring::operator=((int)&g_swPlayerName);
   std::wstring::operator=((int)&stru_40307CC);
   CGameHost::PromoteToHost(this[2]);
 }
