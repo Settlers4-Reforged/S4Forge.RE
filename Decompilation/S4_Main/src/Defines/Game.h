@@ -27,7 +27,7 @@ enum T_S4_GAMETYPE {
 };
 
 enum T_S4_MODE {
-    MAP_MODES MODE_MAX
+    MAP_MODES MODE_MAX = MODE_NOT_FOUND_6
 };
 
 #undef X
