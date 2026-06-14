@@ -17,6 +17,7 @@
 #include "Logic/Events/IEventEngine.h"
 #include "Main/CGameSettings.h"
 #include "Main/CGameStateHandler.h"
+#include "Main/CGameType.h"
 #include "Main/Players/CPlayerManager.h"
 #include "OnlineManager.h"
 
@@ -665,7 +666,7 @@ bool CGameHost::Run(void) {
             } else {
                 CNet_Event cEvent(0xFA7u, 0xFFFFFFDD, 0, 0, 0, 0, g_pEvnEngine->GetCurrentTickCounter());
                 memcpy(v22, &cEvent, sizeof(v22));
-                CTrace::Print("GameHost.cpp: Boosting player index %u, IP %s!", i, this->m_pSimpleNet->GetIPString(this->m_pSimpleNet, g_pGameType->m_uiIPPlayer[i]));
+                CTrace::Print("GameHost.cpp: Boosting player index %u, IP %s!", i, this->m_pSimpleNet->GetIPString(g_pGameType->m_uiIPPlayer[i]));
                 // TODO: probably removed in HE
             }
             this->m_iSyncB[i] = 0;
@@ -822,7 +823,7 @@ bool CGameHost::StartIniFileGame(wchar_t const *Source) {
 
     if(g_pGameType->IsSaveGame()) {
         std::wstring swMPGameName;
-        CGameType::ConvertMapNameToMPGameName(&swMPGameName, &swMapName);
+        swMPGameName = CGameType::ConvertMapNameToMPGameName(swMapName);
         swMPGameName += L".sav";
         CGameChunkGeneral sGeneralInfo{};
         if(!CGameRun::LoadGeneralInfo(swMPGameName.c_str(), sGeneralInfo)) {
@@ -905,7 +906,7 @@ bool CGameHost::StartIniFileGame(wchar_t const *Source) {
         CTrace::Print("GameHost.cpp: Internet game ini file malformed in phase <NumberOfPlayers>!");
         BB_REPORT(READ_ERROR("I8"))
     }
-    if(!g_pGameType->IsSaveGame() && (bIsClanGame || g_pGameType->byte36C && g_pGameType->byte36B))
+    if(!g_pGameType->IsSaveGame() && (bIsClanGame || g_pGameType->m_bMapFlagU2 && g_pGameType->m_bMapFlagU1))
         g_pGameType->m_iActualPlayerCount = iPlayerCount;
     else
         g_pGameType->m_iActualPlayerCount = g_pGameType->m_iMapMaxNumPlayers;
@@ -961,7 +962,8 @@ bool CGameHost::StartIniFileGame(wchar_t const *Source) {
                 CTrace::Print("GameHost.cpp: Internet game ini file malformed in phase <PlayerIP%d>!", i);
                 BB_REPORT(READ_ERROR("I10"))
             }
-            g_pGameType->SetPlayerClanShortcut(i, swpPlayerBuffer);
+            std::wstring swPlayerBuffer = swpPlayerBuffer;
+            g_pGameType->SetPlayerClanShortcut(i, swPlayerBuffer);
         }
     }
 
@@ -1018,7 +1020,7 @@ bool CGameHost::StartIniFileGame(wchar_t const *Source) {
     CTrace::Print("GameHost.cpp: Host is %s", this->m_pSimpleNet->GetIPString(g_pGameType->m_iHostAddress));
     g_pGameType->m_iHumanPlayers = 0;
     if(g_pGameType->IsClanGame())
-        g_pGameType->byte36B = 0;
+        g_pGameType->m_bMapFlagU1 = 0;
     for(int j = 0; j < g_pGameType->m_iActualPlayerCount; ++j) {
         char swpPlayerKey[512];
         sprintf(swpPlayerKey, "PlayerTeam%d=", j);
@@ -1029,7 +1031,7 @@ bool CGameHost::StartIniFileGame(wchar_t const *Source) {
     }
 
     for(int i = 0; i < g_pGameType->m_iActualPlayerCount; ++i) {
-        if(g_pGameType->field_3EF[i])
+        if(g_pGameType->m_bDarkTribe[i])
             g_pGameType->m_sPlayerRaces[i] = 0;
         if(!g_pGameType->m_sPlayerType[i])
             ++g_pGameType->m_iHumanPlayers;
@@ -1054,7 +1056,7 @@ bool CGameHost::StartIniFileGame(wchar_t const *Source) {
         sGameInfo.m_iMaxPlayerCount = g_pGameType->m_iActualPlayerCount;
         sGameInfo.m_iFileSize = g_pGameType->m_iFileSize;
         sGameInfo.m_iStartTime = timeGetTime();
-        MyWStrNCopy(sGameInfo.m_swpGameName, g_pGameType->m_swGameName, 64);
+        MyWStrNCopy(sGameInfo.m_swpGameName, g_pGameType->m_swGameName.c_str(), 64);
         sGameInfo.m_iHostAddress = g_pGameType->m_iHostAddress;
         sGameInfo.m_iIsSaveGame = g_pGameType->IsSaveGame();
         sGameInfo.m_bIsAutosave = g_pGameType->bIsAutosave;
@@ -1209,7 +1211,7 @@ bool CGameHost::RemovePlayerPeerId(unsigned int a2) {
     g_pGameType->m_sPlayerValidTicks[i] = CGameHost::GetValidTick();
     int ValidTick = CGameHost::GetValidTick();
     CTrace::Print("GameHost.cpp: Message stack index#%d set to AI in Tick %d!", i, ValidTick);
-    if(!CClientList::RemoveClientPeerId(this->m_pClientList, g_pGameType->m_sPlayerPeerId[i]))
+    if(!this->m_pClientList->RemoveClientPeerId(g_pGameType->m_sPlayerPeerId[i]))
         CTrace::Print("GameHost.cpp: Player index#%d could not be removed from client list!", i);
     for(j = 1; j <= CPlayerManager::LastPlayerId() && CPlayerManager::PeerId(j) != a2; ++j)
         ;
@@ -1243,7 +1245,7 @@ bool CGameHost::OnEndGame(int a2) {
 // Decompiled from void __thiscall CGameHost::OnEndSaving(CGameHost *this, int a2)
 void CGameHost::OnEndSaving(int a2) {
 
-    CMsgStacks::OnEndSaving(this->m_pMsgStacks, g_pGameType->m_iActualPlayerCount, a2);
+    this->m_pMsgStacks->OnEndSaving(g_pGameType->m_iActualPlayerCount, a2);
 }
 
 // address=[0x15b9080]
@@ -1296,7 +1298,7 @@ void CGameHost::StormHost_NewPlayerMessage(unsigned int a1, std::wstring &a2, in
 // Decompiled from int __thiscall CGameHost::StormClientLeavesMyGame(CGameHost *this, unsigned int a2)
 void CGameHost::StormClientLeavesMyGame(unsigned int a2) {
 
-    if(a2 == StormManager::GetInstance()->GetHostPeerId(Instance))
+    if(a2 == StormManager::GetInstance()->GetHostPeerId())
         CTrace::Print("GameHost.cpp: Host has left session!");
     CLanLobby::DisconnectPlayerPeerId(a2, -1);
     if(!this->m_pClientList->RemoveClientPeerId(a2))
@@ -1577,8 +1579,10 @@ void CGameHost::ProcessPlayerData(SLobbyPlayerData &_rLobbyPlayerData) {
         v5 = 1;
     }
 
-    g_pGameType->SetPlayerName(_rLobbyPlayerData.m_iPlayerId, _rLobbyPlayerData.m_swpPlayerName);
-    g_pGameType->SetPlayerClanShortcut(_rLobbyPlayerData.m_iPlayerId, _rLobbyPlayerData.m_swpPlayerClan);
+    std::wstring swPlayerName = _rLobbyPlayerData.m_swpPlayerName;
+    std::wstring swPlayerClan = _rLobbyPlayerData.m_swpPlayerClan;
+    g_pGameType->SetPlayerName(_rLobbyPlayerData.m_iPlayerId, swPlayerName);
+    g_pGameType->SetPlayerClanShortcut(_rLobbyPlayerData.m_iPlayerId, swPlayerClan);
     g_pGameType->m_sPlayerTeam[_rLobbyPlayerData.m_iPlayerId] = _rLobbyPlayerData.m_iTeam;
     g_pGameType->m_sPlayerColor[_rLobbyPlayerData.m_iPlayerId] = _rLobbyPlayerData.m_iColor;
     g_pGameType->m_sPlayerSlot8[_rLobbyPlayerData.m_iPlayerId] = _rLobbyPlayerData.m_iSlot8;
@@ -1845,7 +1849,7 @@ void CGameHost::NotifyClients(unsigned int a2) {
                     int j;
                     for(j = 1; j <= CPlayerManager::LastPlayerId() && CPlayerManager::PeerId(j) != v12; ++j)
                         ;
-                    CGameHost::RemovePlayerPeerId(this, g_pGameType->m_sPlayerPeerId[i]);
+                    CGameHost::RemovePlayerPeerId(g_pGameType->m_sPlayerPeerId[i]);
                     CEvn_Logic v11 = CEvn_Logic(0xFA9u, j, GetValidTick(), j, 0, 0);
                     g_pNetworkEngine->SendAsyncNetMessage(v11, 255);
                     CEvn_Event v10 = CEvn_Event(0xFA9u, j, GetValidTick(), 0);
@@ -1892,7 +1896,7 @@ bool CGameHost::HostChoseMap(void *) {
     }
     for(unsigned int i = 1; i < g_pGameType->m_iActualPlayerCount; ++i) {
         if(g_pGameType->m_sPlayerType[i] == 2 || g_pGameType->m_sPlayerType[i] == 3 || g_pGameType->m_bPlayerSlotEmpty[i] && !this->m_bIsOnlineGame) {
-            wcsncpy(Destination, g_pGameType->GetPlayerName(i), 0x1Fu);
+            wcsncpy(Destination, g_pGameType->GetPlayerName(i).c_str(), 0x1Fu);
             Destination[31] = 0;
 
             __int16 v14 = 0;
@@ -1979,8 +1983,7 @@ bool CGameHost::ClientSearchesGameHost(void *a2) {
     sMsg.m_bIsSaveGame = g_pGameType->IsSaveGame();
     sMsg.m_uExtraFlags = g_pGameType->m_uExtraFlags;
     MyWStrNCopy(sMsg.m_swpGameName, g_pGameType->m_swGameName.c_str(), 0x40u);
-    FilePaths::PathSplitResult a1; // [esp+41Ch] [ebp-5Ch] BYREF
-    FilePaths::SplitPath(&a1, &g_pGameType->m_swMapName);
+    FilePaths::PathSplitResult a1 = FilePaths::SplitPath(g_pGameType->m_swMapName);
     MyWStrNCopy(sMsg.m_swpMapName, a1.m_swpDirectoryName.c_str(), 512u);
     this->m_pSimpleNet->PushMessage(
         this->m_pSimpleNet->GetLastSenderPeerId(),
@@ -2018,7 +2021,8 @@ bool CGameHost::ClientReceivesGameInfo(void *Src) {
     MyWStrNCopy(sGameInfo.m_swpMapName, MapFilePaths::GetFilePathForMapName(sGameInfo.m_swpMapName).c_str(), sizeof(sGameInfo.m_swpMapName));
     static_assert(sizeof(sGameInfo.m_swpMapName) == 0x200, "sizeof(sGameInfo.m_swpMapName) != 0x200u");
     int iMapCRC = sGameInfo.m_iMapCRC;
-    sGameInfo.m_bMapAvailable = g_pGameType->IsMapAvailable(sGameInfo.m_swpMapName, iMapCRC);
+    std::wstring swMapName = sGameInfo.m_swpMapName;
+    sGameInfo.m_bMapAvailable = g_pGameType->IsMapAvailable(swMapName, iMapCRC);
     sGameInfo.m_iStartTime = timeGetTime();
     CGameHost::AddGame(sGameInfo);
     return true;
@@ -2164,7 +2168,7 @@ bool CGameHost::ClientReceivePlayerData(void *Src) {
     CGameHost::ProcessPlayerData(sPlayerData);
     if(this->m_bHasSentMap)
         return true;
-    if(!g_pGameType->IsMapAvailable(&g_pGameType->m_swMapName, g_pGameType->m_iMapCRC) && !g_pGameType->IsSaveGame() && !this->m_bMapBeingDownloaded) {
+    if(!g_pGameType->IsMapAvailable(g_pGameType->m_swMapName, g_pGameType->m_iMapCRC) && !g_pGameType->IsSaveGame() && !this->m_bMapBeingDownloaded) {
         CGameHost::SendToHost(1042, 0, 0, 0, 0, true);
         CEvn_Event sEvent(80u, 1u, 0, 0);
         g_pEvnEngine->SendAMessage(sEvent);
@@ -2440,7 +2444,7 @@ bool CGameHost::ClientReceiveMap(void *_pMessage) {
         void *m_pMapDownloadData = this->m_pMapDownloadData;
         operator delete[](m_pMapDownloadData);
         this->m_pMapDownloadData = 0;
-        if(g_pGameType->IsMapAvailable(&g_pGameType->m_swMapName, g_pGameType->m_iMapCRC)) {
+        if(g_pGameType->IsMapAvailable(g_pGameType->m_swMapName, g_pGameType->m_iMapCRC)) {
             struct CEvn_Event cEvent(80u, 0, 0, 0);
             g_pEvnEngine->SendAMessage(cEvent);
             CGameStateHandler::Queue(CStateMessageBox::DynamicCreateFunc, reinterpret_cast<void *>(2416)); // The host has a different map
@@ -2522,7 +2526,7 @@ bool CGameHost::UserDataChange(void *pChange) {
         } while(!CGameHost::IsExclusiveColor(a2->m_iSlot));
         break;
     case 1:
-        if(g_pGameType->field_3EF[a2->m_iSlot]) {
+        if(g_pGameType->m_bDarkTribe[a2->m_iSlot]) {
             if(a2->m_iTarget == 6) {
                 if(g_pGameType->m_sPlayerRaces[a2->m_iSlot])
                     --g_pGameType->m_sPlayerRaces[a2->m_iSlot];
@@ -2588,16 +2592,14 @@ bool CGameHost::UserDataChange(void *pChange) {
 
 // address=[0x15bd980]
 // Decompiled from char __thiscall CGameHost::KickClient(CGameHost *this, int a2)
-bool CGameHost::KickClient(void *a2) {
-
-    DWORD v4; // [esp+4h] [ebp-Ch]
-
-    v4 = g_pGameType->m_sPlayerPeerId[a2];
-    CLanLobby::DisconnectPlayerPeerId(v4, -1);
-    this->m_pClientList->RemoveClientPeerId(v4);
-    g_pGameType->m_bPlayerSlotEmpty[a2] = 1;
+bool CGameHost::KickClient(void *pMsg) {
+    int iTargetId = reinterpret_cast<int>(pMsg);
+    DWORD iPeerId = g_pGameType->m_sPlayerPeerId[iTargetId];
+    CLanLobby::DisconnectPlayerPeerId(iPeerId, -1);
+    this->m_pClientList->RemoveClientPeerId(iPeerId);
+    g_pGameType->m_bPlayerSlotEmpty[iTargetId] = 1;
     __int16 v5 = 1053;
-    this->m_pSimpleNet->PushMessage(v4, g_pGameType->m_uiIPPlayer[a2], 3105, &v5, 2, 0, 1);
+    this->m_pSimpleNet->PushMessage(iPeerId, g_pGameType->m_uiIPPlayer[iTargetId], 3105, &v5, 2, 0, 1);
     CLanLobby::RedrawPlayerList();
     return true;
 }
@@ -2644,7 +2646,8 @@ bool CGameHost::UserChangeSlots(void *pMessage) {
         g_pGameType->m_bPlayerSlotEmpty[iSlot] = g_pGameType->m_bPlayerSlotEmpty[iTarget];
         g_pGameType->m_sPlayerSlot15[iSlot] = -1;
         g_pGameType->SetPlayerName(iSlot, g_pGameType->GetRealPlayerName(iTarget));
-        g_pGameType->SetPlayerClanShortcut(iSlot, g_pGameType->GetPlayerClanShortcut(iTarget));
+        std::wstring swClanShortcut = g_pGameType->GetPlayerClanShortcut(iTarget);
+        g_pGameType->SetPlayerClanShortcut(iSlot, swClanShortcut);
 
         g_pGameType->m_sPlayerType[iTarget] = iType;
         g_pGameType->m_uiIPPlayer[iTarget] = iIP;
@@ -2765,7 +2768,7 @@ bool CGameHost::HostInitGame(void *a2) {
         if(g_pGameType->m_sPlayerType[j] == 2 || g_pGameType->m_sPlayerType[j] == 3)
             this->m_pMsgStacks->SetStackAI(j, 1);
     }
-    CEvn_Event cEvent(0x18u, static_cast<unsigned int>(&g_pGameType), 0, 0); // NOTE: probably more like the address of m_swGameName
+    CEvn_Event cEvent(0x18u, reinterpret_cast<unsigned int>(&g_pGameType->m_swGameName), 0, 0); // NOTE: probably more like the address of m_swGameName
     g_pEvnEngine->SendAMessage(cEvent);
     return true;
 }
@@ -2814,7 +2817,7 @@ bool CGameHost::RegClientConnect(void *a2) {
         for(int j = 0; j < 9; ++j) {
             if(g_pGameType->m_sPlayerPeerId[j] != -1) {
                 if(g_pGameType->m_sPlayerPeerId[j] != StormManager::GetInstance()->GetLocalPeerId()) {
-                    CClientList::Add(this->m_pClientList, g_pGameType->m_uiIPPlayer[j], j, g_pGameType->m_sPlayerPeerId[j]);
+                    this->m_pClientList->Add(g_pGameType->m_uiIPPlayer[j], j, g_pGameType->m_sPlayerPeerId[j]);
                     CTrace::Print("GameHost.cpp: Adding client %s to list !", this->m_pSimpleNet->GetIPString(g_pGameType->m_uiIPPlayer[j]));
                 }
             }
@@ -2841,7 +2844,7 @@ bool CGameHost::ClientStartingGame(void *a2) {
         if(g_pGameType->m_sPlayerType[i] == 2 || g_pGameType->m_sPlayerType[i] == 3)
             this->m_pMsgStacks->SetStackAI(i, 1);
     }
-    CEvn_Event v7(0x18u, static_cast<unsigned int>(&g_pGameType), 0, 0); // NOTE: probably more like the address of m_swGameName
+    CEvn_Event v7(0x18u, reinterpret_cast<unsigned int>(&g_pGameType->m_swGameName), 0, 0); // NOTE: probably more like the address of m_swGameName
     g_pEvnEngine->SendAMessage(v7);
     return true;
 }

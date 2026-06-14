@@ -88,10 +88,10 @@ class CGameState * __cdecl CStateXMD3Briefing::DynamicCreateFunc(void * a1) {
   }
   else
   {
-    std::string::operator=(&stru_402C998, &g_pGameType->std__string374);
-    std::string::operator=(&stru_402C9D0, &g_pGameType->std__string390);
-    std::string::operator=(&stru_402C97C, &g_pGameType->std__string3AC);
-    std::string::operator=(&stru_402C9B4, &g_pGameType->std__string3C8);
+    std::string::operator=(&stru_402C998, &g_pGameType->m_sDesciptionText3);
+    std::string::operator=(&stru_402C9D0, &g_pGameType->m_sDesciptionText0);
+    std::string::operator=(&stru_402C97C, &g_pGameType->m_sDesciptionText1);
+    std::string::operator=(&stru_402C9B4, &g_pGameType->m_sDesciptionText2);
   }
   CGuiGameState::OpenDialog((CGuiGameState *)v30, 1, (bool (__cdecl *)(int, int, int))GuiDlgXMD3BriefingProc);
   IGfxEngine::SetCursorShape(g_pGfxEngine, 1, 0);

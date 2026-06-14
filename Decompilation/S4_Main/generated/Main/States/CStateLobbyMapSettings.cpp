@@ -617,10 +617,10 @@ void  CStateLobbyMapSettings::AddMapList(std::wstring arg0, std::wstring a3) {
       }
       if ( byte_4031914 )
       {
-        if ( g_pGameType->byte35C )
+        if ( g_pGameType->m_bHasOpponents )
           goto LABEL_29;
       }
-      else if ( g_pGameType->byte35D )
+      else if ( g_pGameType->m_bIsSoloMap )
       {
 LABEL_29:
         CStateLobbyMapSettings::m_stempMapPtr[*v34]->field_3C = g_pGameType->m_iWidthHeight;
@@ -628,7 +628,7 @@ LABEL_29:
         CStateLobbyMapSettings::m_stempMapPtr[*v34]->field_38 = g_pGameType->m_iMapMaxNumPlayers;
         std::wstring::operator=(&CStateLobbyMapSettings::m_stempMapPtr[*v34]->std__wstring1C, &a2);
         CStateLobbyMapSettings::m_stempMapPtr[*v34]->field_44 = g_pGameType->m_iMode;
-        CStateLobbyMapSettings::m_stempMapPtr[*v34]->field_4E = g_pGameType->byte35C;
+        CStateLobbyMapSettings::m_stempMapPtr[*v34]->field_4E = g_pGameType->m_bHasOpponents;
         CStateLobbyMapSettings::m_stempMapPtr[*v34]->field_48 = g_pGameType->m_bConflictPossible;
         *(&CStateLobbyMapSettings::m_stempMapPtr[*v34]->field_48 + 2) = g_pGameType->m_bEconomyPossible;
         *(&CStateLobbyMapSettings::m_stempMapPtr[*v34]->field_48 + 3) = g_pGameType->m_bCompetetivePossible;
@@ -641,11 +641,11 @@ LABEL_29:
         CStateLobbyMapSettings::m_stempMapPtr[*v34]->gap_4C[1] = 0;
         *(_DWORD *)&CStateLobbyMapSettings::m_stempMapPtr[*v34]->gap_50[4] = 0;
         *(_DWORD *)&CStateLobbyMapSettings::m_stempMapPtr[*v34]->gap_50[12] = g_pGameType->m_iStartResources;
-        v24 = !g_pGameType->byte36C || !g_pGameType->byte36B;
+        v24 = !g_pGameType->m_bMapFlagU2 || !g_pGameType->m_bMapFlagU1;
         *(&CStateLobbyMapSettings::m_stempMapPtr[*v34]->field_4E + 1) = v24;
-        v23 = g_pGameType->byte36B == 0;
+        v23 = g_pGameType->m_bMapFlagU1 == 0;
         CStateLobbyMapSettings::m_stempMapPtr[*v34]->gap_50[0] = v23;
-        v22 = g_pGameType->byte36A == 0;
+        v22 = g_pGameType->m_bMapFlagU0 == 0;
         CStateLobbyMapSettings::m_stempMapPtr[*v34]->gap_50[1] = v22;
         *(_DWORD *)&CStateLobbyMapSettings::m_stempMapPtr[*v34]->gap_50[8] = g_pGameType->m_iNumberOfSetups;
         std::string::operator=(&CStateLobbyMapSettings::m_stempMapPtr[*v34]->std__string60, &g_pGameType->m_swpTeamName);

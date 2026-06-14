@@ -34863,7 +34863,7 @@ bool __cdecl GuiDlgXMD3BriefingProc(int a1, int a2, int a3) {
             IGuiEngine::SetControlVisibility(g_pGUIEngine, 1, 2926, 1);
             if ( g_pGameType )
             {
-              if ( g_pGameType->dword3F8 )
+              if ( g_pGameType->m_pMapPreview )
               {
                 v10[0] = 0;
                 v9[0] = 0;
@@ -34871,11 +34871,11 @@ bool __cdecl GuiDlgXMD3BriefingProc(int a1, int a2, int a3) {
                 if ( v10[0] )
                 {
                   CStateLobbyGameSettings::DrawMap(
-                    (unsigned __int16 *)g_pGameType->dword3F8,
+                    (unsigned __int16 *)g_pGameType->m_pMapPreview,
                     v10[0],
                     v9[0],
-                    g_pGameType->dword3FC,
-                    g_pGameType->dword400);
+                    g_pGameType->m_iMapPreviewWidth,
+                    g_pGameType->m_iMapPreviewHeight);
                   IGuiEngine::UnlockOwnerImage(g_pGUIEngine, 1, 2926);
                 }
               }

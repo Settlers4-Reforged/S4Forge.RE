@@ -1100,7 +1100,7 @@ bool  CGameHost::StartIniFileGame(wchar_t const * Source) {
       __debugbreak();
   }
   iPlayerCount = j__strtol(pStrFind + 16, &EndPtr, 10);
-  if ( !CGameType::IsSaveGame(g_pGameType) && (bIsClanGame || g_pGameType->byte36C && g_pGameType->byte36B) )
+  if ( !CGameType::IsSaveGame(g_pGameType) && (bIsClanGame || g_pGameType->m_bMapFlagU2 && g_pGameType->m_bMapFlagU1) )
     g_pGameType->m_iActualPlayerCount = iPlayerCount;
   else
     g_pGameType->m_iActualPlayerCount = g_pGameType->m_iMapMaxNumPlayers;
@@ -1314,7 +1314,7 @@ bool  CGameHost::StartIniFileGame(wchar_t const * Source) {
   CTrace::Print("GameHost.cpp: Host is %s", v11);
   g_pGameType->m_iHumanPlayers = 0;
   if ( CGameType::IsClanGame(g_pGameType) )
-    g_pGameType->byte36B = 0;
+    g_pGameType->m_bMapFlagU1 = 0;
   m_iActualPlayerCount = g_pGameType->m_iActualPlayerCount;
   for ( j = 0; j < m_iActualPlayerCount; ++j )
   {
@@ -1332,7 +1332,7 @@ bool  CGameHost::StartIniFileGame(wchar_t const * Source) {
   }
   for ( i = 0; (unsigned int)i < g_pGameType->m_iActualPlayerCount; ++i )
   {
-    if ( g_pGameType->field_3EF[i] )
+    if ( g_pGameType->m_bDarkTribe[i] )
       g_pGameType->m_sPlayerRaces[i] = 0;
     if ( !g_pGameType->m_sPlayerType[i] )
       ++g_pGameType->m_iHumanPlayers;
@@ -3615,7 +3615,7 @@ bool  CGameHost::UserDataChange(void * a2) {
       while ( !CGameHost::IsExclusiveColor(this, a2->m_iSlot) );
       break;
     case 1:
-      if ( g_pGameType->field_3EF[a2->m_iSlot] )
+      if ( g_pGameType->m_bDarkTribe[a2->m_iSlot] )
       {
         if ( a2->m_iTarget == 6 )
         {

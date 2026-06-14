@@ -107,13 +107,13 @@ bool  CRandomMaps::GenerateRandomMap(void) {
 
 
 // address=[0x1499540]
-// Decompiled from int __thiscall CRandomMaps::GetParamsFromMapKey(void *this, int a2, _Cnd_internal_imp_t *a3)
+// Decompiled from int __thiscall CRandomMaps::GetParamsFromMapKey(CRandomMaps *this, struct SRandomMapParams *a2, std::wstring *a3)
 bool  CRandomMaps::GetParamsFromMapKey(struct SRandomMapParams * a2, std::wstring const & a3) {
   
-  _DWORD *v3; // eax
+  wchar_t *v3; // eax
 
   v3 = std::wstring::c_str(a3);
-  return (*(int (__thiscall **)(void *, int, _DWORD *))(*(_DWORD *)this + 20))(this, a2, v3);
+  return this->GetParamsFromMapKey_(this, a2, v3);
 }
 
 

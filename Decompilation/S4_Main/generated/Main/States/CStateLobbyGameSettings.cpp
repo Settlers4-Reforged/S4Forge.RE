@@ -1183,20 +1183,20 @@ void  CStateLobbyGameSettings::PaintMap(void) {
     {
       if ( m_bIsSaveGame )
       {
-        g_pGameType->dword3F8 = 0;
-        g_pGameType->dword3FC = 0;
-        g_pGameType->dword400 = 0;
+        g_pGameType->m_pMapPreview = 0;
+        g_pGameType->m_iMapPreviewWidth = 0;
+        g_pGameType->m_iMapPreviewHeight = 0;
       }
       else
       {
-        g_pGameType->dword3F8 = (*(int (__thiscall **)(void *, _DWORD *))(*(_DWORD *)g_pRandomMaps + 56))(
-                                  g_pRandomMaps,
-                                  this);
-        g_pGameType->dword3FC = 160;
-        g_pGameType->dword400 = 160;
+        g_pGameType->m_pMapPreview = (*(int (__thiscall **)(void *, _DWORD *))(*(_DWORD *)g_pRandomMaps + 56))(
+                                       g_pRandomMaps,
+                                       this);
+        g_pGameType->m_iMapPreviewWidth = 160;
+        g_pGameType->m_iMapPreviewHeight = 160;
       }
     }
-    if ( g_pGameType->dword3F8 )
+    if ( g_pGameType->m_pMapPreview )
     {
       v3 = 0;
       v2 = 0;
@@ -1204,19 +1204,19 @@ void  CStateLobbyGameSettings::PaintMap(void) {
       if ( v3 )
       {
         CStateLobbyGameSettings::DrawMap(
-          (unsigned __int16 *)g_pGameType->dword3F8,
+          (unsigned __int16 *)g_pGameType->m_pMapPreview,
           (unsigned __int16 *)v3,
           v2,
-          g_pGameType->dword3FC,
-          g_pGameType->dword400);
+          g_pGameType->m_iMapPreviewWidth,
+          g_pGameType->m_iMapPreviewHeight);
         IGuiEngine::UnlockOwnerImage(g_pGUIEngine, this[11236], 2246);
       }
     }
     if ( v5 )
     {
-      g_pGameType->dword3F8 = 0;
-      g_pGameType->dword3FC = 0;
-      g_pGameType->dword400 = 0;
+      g_pGameType->m_pMapPreview = 0;
+      g_pGameType->m_iMapPreviewWidth = 0;
+      g_pGameType->m_iMapPreviewHeight = 0;
     }
   }
 }

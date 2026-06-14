@@ -3,6 +3,8 @@
 
 #include "defines.h"
 
+extern class CGameType *g_pGameType;
+
 class CGameType {
   public:
     // address=[0x1361450]
@@ -150,30 +152,30 @@ class CGameType {
     int m_iStartResources;
     _DWORD m_iHostAddress;
     _DWORD m_uiNumberAlliances;
-    int[9] m_iAllianceSizes;
+    int m_iAllianceSizes[9];
     _DWORD m_iActualPlayerCount;
-    DWORD[9] m_sPlayerType;
-    int[9] m_sPlayerTeam;
-    DWORD[9] m_uiIPPlayer;
-    DWORD[9] m_sPlayerPeerId;
-    int[9] m_sPlayerStartX;
-    int[9] m_sPlayerStartY;
-    DWORD[9] m_sPlayerColor;
-    DWORD[9] m_sPlayerSlot8;
-    int[9] m_sPlayerRaces;
-    BYTE[9] m_sPlayerExclusiveColor;
-    DWORD[9] m_sPlayerMapUploadStarted;
-    DWORD[9] m_sPlayerSlot12;
-    DWORD[9] m_sPlayerValidTicks;
+    DWORD m_sPlayerType[9];
+    int m_sPlayerTeam[9];
+    DWORD m_uiIPPlayer[9];
+    DWORD m_sPlayerPeerId[9];
+    int m_sPlayerStartX[9];
+    int m_sPlayerStartY[9];
+    DWORD m_sPlayerColor[9];
+    DWORD m_sPlayerSlot8[9];
+    int m_sPlayerRaces[9];
+    BYTE m_sPlayerExclusiveColor[9];
+    DWORD m_sPlayerMapUploadStarted[9];
+    DWORD m_sPlayerSlot12[9];
+    DWORD m_sPlayerValidTicks[9];
     unsigned __int8 m_uExtraFlags;
-    _BYTE[3] gap231;
-    DWORD[9] m_sPlayerSlot15;
-    _BYTE[9] m_sPlayerSlot16;
+    //_BYTE gap231[3];
+    DWORD m_sPlayerSlot15[9];
+    _BYTE m_sPlayerSlot16[9];
     _BYTE byte261;
     void *m_pMapData;
     _DWORD m_iMapCRC;
     _DWORD m_iHumanPlayers;
-    DWORD[9] m_sPlayerAckDelta;
+    DWORD m_sPlayerAckDelta[9];
     _DWORD m_iNetworkTimeDelta;
     std::string std__string298;
     int m_iGameType;
@@ -188,7 +190,7 @@ class CGameType {
     _BYTE m_bIsGameWon;
     _DWORD m_iTeamWon;
     std::string m_sTeamName;
-    char[7] m_pEconomyGoodsArray;
+    char m_pEconomyGoodsArray[7];
     std::string m_sSessionId;
     std::string m_sProcedureServer;
     _WORD m_iProcedureServerPort;
@@ -213,13 +215,13 @@ class CGameType {
     std::string m_sDesciptionText2;
     _BYTE m_bIsEditorMap;
     _BYTE m_bIsCampaignMap;
-    BYTE[9] m_bPlayerSlotEmpty;
-    BYTE[9] m_bDarkTribe;
+    BYTE m_bPlayerSlotEmpty[9];
+    BYTE m_bDarkTribe[9];
     void *m_pMapPreview;
     _DWORD m_iMapPreviewWidth;
     _DWORD m_iMapPreviewHeight;
-    std::wstring[9] m_swpRealPlayerNames;
-    std::wstring[9] m_swPlayerClanShortcut;
+    std::wstring m_swpRealPlayerNames[9];
+    std::wstring m_swPlayerClanShortcut[9];
     _DWORD m_iMultiPlayerGameID;
     _BYTE m_bIsMapLoaded;
     char m_cLocalSlot;
