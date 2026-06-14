@@ -6,7 +6,7 @@
 class CLanLobby {
 public:
     // address=[0x15c9580]
-    static bool __cdecl ConnectPlayer(struct SConnectGameInfoFromClient & String, int a2);
+    static bool __cdecl ConnectPlayer(struct SConnectGameInfoFromClient & _rMsg, int a2);
 
     // address=[0x15c9860]
     static bool __cdecl DisconnectPlayerPeerId(unsigned int a1, int a2);

@@ -20,7 +20,7 @@ static_assert(s_pszGameType[GAMETYPE_NONE] == "NONE", "s_pszGameType[GAMETYPE_NO
 static_assert(s_pszGameType[GAMETYPE_TUTORIAL] == "Tutorial", "s_pszGameType[GAMETYPE_TUTORIAL] is not correct");
 
 // address=[0x3D89B30]
-constexpr std::array<std::string_view, MODE_MAX> s_pszMapMode = {
+constexpr std::array<std::string_view, MODE_MAX + 1> s_pszMapMode = {
     "None",
     "Conflict Mode",
     "Cooperation Mode",
@@ -29,7 +29,7 @@ constexpr std::array<std::string_view, MODE_MAX> s_pszMapMode = {
     "--not found---",
     "--not found---",
 };
-static_assert(std::size(s_pszMapMode) == MODE_MAX, "Size of s_pszMapMode is not correct");
+static_assert(std::size(s_pszMapMode) == MODE_MAX + 1, "Size of s_pszMapMode is not correct");
 static_assert(s_pszMapMode[MODE_NONE] == "None", "s_pszMapMode[MODE_NONE] is not correct");
 static_assert(s_pszMapMode[MODE_CONFLICT] == "Conflict Mode", "s_pszMapMode[MODE_CONFLICT] is not correct");
 static_assert(s_pszMapMode[MODE_COOP] == "Cooperation Mode", "s_pszMapMode[MODE_COOP] is not correct");

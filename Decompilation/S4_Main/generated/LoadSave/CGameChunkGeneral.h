@@ -4,21 +4,21 @@
 #include "defines.h"
 
 class CGameChunkGeneral : public IS4ChunkObject {
-  public:
+public:
     // address=[0x13eb8a0]
-    CGameChunkGeneral(void);
+     CGameChunkGeneral(void);
 
     // address=[0x13eb9f0]
-    virtual void Load(class IS4Chunk &a2);
+    virtual void  Load(class IS4Chunk & a2);
 
     // address=[0x13ec060]
-    virtual void Save(class IS4Chunk &a2);
+    virtual void  Save(class IS4Chunk & a2);
 
     // address=[0x13ec470]
-    void GenerateCRC(void);
+    void  GenerateCRC(void);
 
     // Type information members
-  public:
+public:
     _DWORD m_uMapFlags;
     _DWORD m_uCampaneID;
     _DWORD m_iMissionId;
@@ -51,6 +51,8 @@ class CGameChunkGeneral : public IS4ChunkObject {
     _DWORD m_uCamY;
     _DWORD m_uZoom;
     bool m_bNewVersion;
+
 };
+
 
 #endif // CGAMECHUNKGENERAL_H

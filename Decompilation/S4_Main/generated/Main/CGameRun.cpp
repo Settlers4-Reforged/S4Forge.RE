@@ -807,7 +807,7 @@ void __cdecl CGameRun::FillGameType(std::wstring & a2, class CGameType & _rGameT
     _rGeneralChunk->m_pEconomyGoodsArray,
     sizeof(_rGameType->m_pEconomyGoodsArray));
   _rGameType->m_iGameType = _rGeneralChunk->m_iGameType;
-  _rGameType->m_iCampaignType = _rGeneralChunk->m_uCampaignType;
+  _rGameType->m_iCampaignType = _rGeneralChunk->m_uCampaneID;
   _rGameType->m_iMissionId = _rGeneralChunk->m_iMissionId;
   std::wstring::operator=(&_rGameType->m_swMapName, _rGeneralChunk->m_swMapName);
   v9 = _rGeneralChunk->m_iGameType != 2;
@@ -1062,7 +1062,7 @@ bool __cdecl CGameRun::SaveGeneralInfo(class S4::CMapFile & a1) {
   v2 = std::wstring::c_str(&g_pGameType->m_swMapName);
   wcscpy(sChunk.m_swMapName, v2);
   sChunk.m_iGameType = g_pGameType->m_iGameType;
-  sChunk.m_uCampaignType = g_pGameType->m_iCampaignType;
+  sChunk.m_uCampaneID = g_pGameType->m_iCampaignType;
   sChunk.m_iMissionId = g_pGameType->m_iMissionId;
   memset(sChunk.m_spGameName, 0, sizeof(sChunk.m_spGameName));
   v3 = std::wstring::c_str(&g_pGameType->m_swGameName);

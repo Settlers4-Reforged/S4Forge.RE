@@ -3,70 +3,68 @@
 // Definitions for class CLanLobby
 
 // address=[0x15c9580]
-// Decompiled from char __cdecl CLanLobby::ConnectPlayer(wchar_t *String, signed int a2)
-bool __cdecl CLanLobby::ConnectPlayer(struct SConnectGameInfoFromClient & String, int a2) {
+// Decompiled from char __cdecl CLanLobby::ConnectPlayer(CGameHost::SJoinMessage *_rMsg, signed int a2)
+bool __cdecl CLanLobby::ConnectPlayer(struct SConnectGameInfoFromClient & _rMsg, int a2) {
   
-  int v3; // [esp+4h] [ebp-4Ch]
-  signed int v5; // [esp+14h] [ebp-3Ch]
+  std::wstring *v3; // [esp+4h] [ebp-4Ch]
+  int iMapMaxNumPlayers; // [esp+14h] [ebp-3Ch]
   signed int v6; // [esp+18h] [ebp-38h]
-  bool v7; // [esp+1Fh] [ebp-31h]
+  bool iPeerId; // [esp+1Fh] [ebp-31h]
   signed int i; // [esp+20h] [ebp-30h]
-  _BYTE v9[28]; // [esp+24h] [ebp-2Ch] BYREF
+  std::wstring v9; // [esp+24h] [ebp-2Ch] BYREF
   int v10; // [esp+4Ch] [ebp-4h]
 
   v6 = 0;
-  v5 = *(_DWORD *)(g_pGameType + 852);
+  iMapMaxNumPlayers = g_pGameType->m_iMapMaxNumPlayers;
   if ( a2 != -1 )
   {
     v6 = a2;
-    v5 = a2 + 1;
+    iMapMaxNumPlayers = a2 + 1;
   }
   for ( i = v6; ; ++i )
   {
-    if ( i >= v5 )
+    if ( i >= iMapMaxNumPlayers )
     {
-      CTrace::Print("LanLobby: Player %s could not be connected", (const char *)String);
+      CTrace::Print("LanLobby: Player %s could not be connected", (const char *)_rMsg);
       return 0;
     }
-    if ( *(_BYTE *)(i + g_pGameType + 440) && *(_DWORD *)(g_pGameType + 4 * i + 116)
-      || (unsigned __int8)CGameType::IsSaveGame((void *)g_pGameType)
-      && (*(_DWORD *)(g_pGameType + 4 * i + 116) == 2 || *(_DWORD *)(g_pGameType + 4 * i + 116) == 3) )
+    if ( g_pGameType->m_sPlayerExclusiveColor[i] && g_pGameType->m_sPlayerType[i]
+      || CGameType::IsSaveGame(g_pGameType)
+      && (g_pGameType->m_sPlayerType[i] == 2 || g_pGameType->m_sPlayerType[i] == 3) )
     {
-      v7 = *(_DWORD *)((char *)String + 65) == -1;
-      if ( (*(_DWORD *)((char *)String + 65) != -1 || *(_DWORD *)(g_pGameType + 4 * i + 116) != 1)
-        && (*(_DWORD *)((char *)String + 65) == -1
-         || *(_DWORD *)(g_pGameType + 4 * i + 116) == 1
-         || (unsigned __int8)CGameType::IsSaveGame((void *)g_pGameType)) )
+      iPeerId = _rMsg->m_iPeerId == -1;
+      if ( (_rMsg->m_iPeerId != -1 || g_pGameType->m_sPlayerType[i] != 1)
+        && (_rMsg->m_iPeerId == -1 || g_pGameType->m_sPlayerType[i] == 1 || CGameType::IsSaveGame(g_pGameType)) )
       {
         break;
       }
     }
   }
-  *(_DWORD *)(g_pGameType + 4 * i + 224) = *(_DWORD *)((char *)String + 65);
-  if ( v7 || *((_BYTE *)String + 94) )
+  g_pGameType->m_sPlayerPeerId[i] = _rMsg->m_iPeerId;
+  if ( iPeerId || _rMsg->m_bDownloadMap )
   {
-    *(_DWORD *)(g_pGameType + 4 * i + 452) = 6;
-    if ( !v7 )
+    g_pGameType->m_sPlayerMapUploadStarted[i] = 6;
+    if ( !iPeerId )
     {
-      *(_DWORD *)(g_pGameType + 4 * i + 452) = 0;
-      *(_DWORD *)(g_pGameType + 4 * i + 116) = 1;
+      g_pGameType->m_sPlayerMapUploadStarted[i] = 0;
+      g_pGameType->m_sPlayerType[i] = 1;
     }
   }
   else
   {
-    *(_DWORD *)(g_pGameType + 4 * i + 452) = 0;
+    g_pGameType->m_sPlayerMapUploadStarted[i] = 0;
   }
-  v3 = std::wstring::wstring(v9, String);
+  v3 = (std::wstring *)std::wstring::wstring(&v9, _rMsg->m_swPlayerName);
   v10 = 0;
-  CGameType::SetPlayerName(i, v3);
+  CGameType::SetPlayerName(g_pGameType, i, v3);
   v10 = -1;
-  std::wstring::~wstring(v9);
-  *(_BYTE *)(i + g_pGameType + 440) = 0;
-  ++*(_DWORD *)(g_pGameType + 620);
-  while ( !CGameHost::IsExclusiveColor((CGameHost *)CLanLobby::m_pGameHost, i) )
+  std::wstring::~wstring(&v9);
+  g_pGameType->m_sPlayerExclusiveColor[i] = 0;
+  ++g_pGameType->m_iHumanPlayers;
+  while ( !CGameHost::IsExclusiveColor(CLanLobby::m_pGameHost, i) )
   {
-    ++*(_DWORD *)(g_pGameType + 4 * i + 332);
-    *(_DWORD *)(g_pGameType + 4 * i + 332) %= 8u;
+    ++g_pGameType->m_sPlayerColor[i];
+    g_pGameType->m_sPlayerColor[i] %= 8u;
   }
   CLanLobby::RedrawPlayerList();
   return 1;
@@ -323,14 +321,19 @@ void __cdecl CLanLobby::RedrawMap(void) {
 
 
 // address=[0x15c9530]
-// Decompiled from int __cdecl sub_19C9530(wchar_t *String, wchar_t *Source)
+// Decompiled from int __cdecl CLanLobby::PrintChatLine(wchar_t *String, wchar_t *Source)
 void __cdecl CLanLobby::PrintChatLine(unsigned short const * String, unsigned short const * Source) {
   
-  void **v2; // eax
+  struct CGameState *CurrentState; // eax
   int v4; // [esp+0h] [ebp-4h]
 
-  v2 = (void **)CGameStateHandler::GetCurrentState();
-  v4 = j____RTDynamicCast(v2, 0, &CGameState__RTTI_Type_Descriptor_, &CStateLobbyGameSettings__RTTI_Type_Descriptor_, 0);
+  CurrentState = CGameStateHandler::GetCurrentState();
+  v4 = j____RTDynamicCast(
+         (void **)&CurrentState->__vftable,
+         0,
+         &CGameState__RTTI_Type_Descriptor_,
+         &CStateLobbyGameSettings__RTTI_Type_Descriptor_,
+         0);
   if ( v4 )
     (*(void (__thiscall **)(int, int))(*(_DWORD *)v4 + 16))(v4, 1);
   return CStateLobbyGameSettings::PrintChatLine(String, Source);

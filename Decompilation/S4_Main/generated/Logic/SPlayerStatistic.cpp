@@ -139,8 +139,8 @@ void  CStatistic::SPlayerStatistic::CalculateFightingStrength(int a2) {
     *((_DWORD *)this + 751) = 256;
   else
     *((_DWORD *)this + 751) = (*((_DWORD *)this + 752) - 256) / 2 + 256;
-  *((_DWORD *)this + 1052) = *(_DWORD *)std::max<int>((char *)this + 4208, (char *)this + 3004);
-  result = (_DWORD *)std::max<int>((char *)this + 4212, (char *)this + 3008);
+  *((_DWORD *)this + 1052) = *(_DWORD *)std::max<int>((int)this + 4208, (int)this + 3004);
+  result = (_DWORD *)std::max<int>((int)this + 4212, (int)this + 3008);
   *((_DWORD *)this + 1053) = *result;
   return result;
 }

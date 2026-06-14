@@ -86,12 +86,14 @@ bool  IGuiEngine::OpenDialog(int a2, bool (__cdecl*)(int,int,int) a3) {
   v4 = v12[4];
   v15.m_uU0 = v12[3];
   v15.m_uU4 = v4;
-  v15.m_sDestinationRect = v12[1] + IGuiEngine::GetDialogsRenderOffsetX(g_pGUIEngine);
-  v15.? = v12[2] + IGuiEngine::GetDialogsRenderOffsetY(g_pGUIEngine);
+  v15.m_sDestinationRect.left = v12[1] + IGuiEngine::GetDialogsRenderOffsetX(g_pGUIEngine);
+  v15.m_sDestinationRect.top = v12[2] + IGuiEngine::GetDialogsRenderOffsetY(g_pGUIEngine);
   DialogsRenderScaleX = IGuiEngine::GetDialogsRenderScaleX(g_pGUIEngine);
-  v15.? = v15.m_sDestinationRect + (int)(float)((float)((float)v15.m_uU0 * DialogsRenderScaleX) + 0.5);
+  v15.m_sDestinationRect.right = v15.m_sDestinationRect.left
+                               + (int)(float)((float)((float)v15.m_uU0 * DialogsRenderScaleX) + 0.5);
   DialogsRenderScaleY = IGuiEngine::GetDialogsRenderScaleY(g_pGUIEngine);
-  v15.? = v15.? + (int)(float)((float)((float)v4 * DialogsRenderScaleY) + 0.5);
+  v15.m_sDestinationRect.bottom = v15.m_sDestinationRect.top
+                                + (int)(float)((float)((float)v4 * DialogsRenderScaleY) + 0.5);
   IGfxEngine::CreateGuiSurface(g_pGfxEngine, *v12, &v15);
   IGfxEngine::SetVisibilityOfGuiSurface(g_pGfxEngine, *v12, 1);
   g_iOpenDialogs[*v12] = a2 + 1;

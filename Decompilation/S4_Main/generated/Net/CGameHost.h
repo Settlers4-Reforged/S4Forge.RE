@@ -233,7 +233,7 @@ private:
     bool  PerformLeaveGame(void * a2);
 
     // address=[0x15bd2b0]
-    bool  SendChatLine(void * Source);
+    bool  SendChatLine(void * pChatLine);
 
     // address=[0x15bd420]
     bool  UserDataChange(void * a2);
@@ -296,7 +296,7 @@ private:
     bool  AmIStillAlive(void * a2);
 
     // address=[0x15bef30]
-    bool  HeIsStillAlive(void * a1);
+    bool  HeIsStillAlive(void * a2);
 
     // address=[0x15bef60]
     bool  GameInGamePackedGot(void * a2);

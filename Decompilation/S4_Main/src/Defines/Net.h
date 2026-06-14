@@ -6,6 +6,13 @@ constexpr int COMMUNICATION_TICK_VALUE = 1;
 
 constexpr int MAX_NUMBER_MESSAGE_STACKS = 50;
 
+constexpr int PLAYERDATA_UPDATE = 0;
+constexpr int PLAYERDATA_FINAL = 1;
+
+constexpr int MAP_UPLOAD_CHUNK_SIZE = 0x300u;
+
+constexpr int MSG_BUFFER_SIZE = 0x400u;
+
 enum T_HOST_HANDLERS {
     StartState = 0x22,
     InitHostNetwork = 0x1,
