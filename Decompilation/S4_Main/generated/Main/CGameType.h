@@ -4,145 +4,145 @@
 #include "defines.h"
 
 class CGameType {
-  public:
+public:
     // address=[0x1361450]
-    bool IsLadderGame(void) const;
+    bool  IsLadderGame(void)const;
 
     // address=[0x13a4100]
-    void ChangeLocalSlot(signed char a2);
+    void  ChangeLocalSlot(signed char a2);
 
     // address=[0x13a4140]
-    bool const IsClanGame(void);
+    bool const  IsClanGame(void);
 
     // address=[0x13a4160]
-    bool const IsSaveGame(void) const;
+    bool const  IsSaveGame(void)const;
 
     // address=[0x13a4180]
-    bool IsSlotChangable(int a2, bool *a3);
+    bool  IsSlotChangable(int a2, bool * a3);
 
     // address=[0x13a8490]
-    bool IsAddOnMap(void);
+    bool  IsAddOnMap(void);
 
     // address=[0x13a84b0]
-    bool IsEmptyMap(void);
+    bool  IsEmptyMap(void);
 
     // address=[0x1486e10]
-    int const GetLocalSlot(void);
+    int const  GetLocalSlot(void);
 
     // address=[0x1486e30]
-    int GetMapBuildingXMLVersion(void) const;
+    int  GetMapBuildingXMLVersion(void)const;
 
     // address=[0x1486e50]
-    int GetMapObjectXMLVersion(void) const;
+    int  GetMapObjectXMLVersion(void)const;
 
     // address=[0x1486e70]
-    unsigned int const GetMultiPlayerGameID(void);
+    unsigned int const  GetMultiPlayerGameID(void);
 
     // address=[0x1486ef0]
-    std::wstring &GetRealPlayerName(int _iPlayerIndex);
+    std::wstring &  GetRealPlayerName(int _iPlayerIndex);
 
     // address=[0x1486fe0]
-    bool IsBlueByteAddOnMap(void);
+    bool  IsBlueByteAddOnMap(void);
 
     // address=[0x1487000]
-    bool IsBlueByteMCD2Map(void);
+    bool  IsBlueByteMCD2Map(void);
 
     // address=[0x1487020]
-    bool IsCampaignMap(void);
+    bool  IsCampaignMap(void);
 
     // address=[0x1487040]
-    bool const IsHost(void);
+    bool const  IsHost(void);
 
     // address=[0x1487060]
-    bool IsMCD2TextureSet(void);
+    bool  IsMCD2TextureSet(void);
 
     // address=[0x1487080]
-    bool const IsMultiplayerGame(void);
+    bool const  IsMultiplayerGame(void);
 
     // address=[0x14873d0]
-    void SetBlueByteMCD2Map(bool a2);
+    void  SetBlueByteMCD2Map(bool a2);
 
     // address=[0x14873f0]
-    void SetClanGame(bool a2);
+    void  SetClanGame(bool a2);
 
     // address=[0x1487410]
-    void SetHost(bool a2);
+    void  SetHost(bool a2);
 
     // address=[0x1487430]
-    void SetLocalSlot(signed char _iLocalSlotNr);
+    void  SetLocalSlot(signed char _iLocalSlotNr);
 
     // address=[0x14874d0]
-    void SetMCD2TextureSet(bool a2);
+    void  SetMCD2TextureSet(bool a2);
 
     // address=[0x14874f0]
-    void SetMPSavegameID(int a2);
+    void  SetMPSavegameID(int a2);
 
     // address=[0x1487510]
-    void SetMultiPlayerGameID(unsigned int a2);
+    void  SetMultiPlayerGameID(unsigned int a2);
 
     // address=[0x1487530]
-    void SetPlayerName(int _iPlayerIndex, std::wstring &_swpPlayerName);
+    void  SetPlayerName(int _iPlayerIndex, std::wstring & _swpPlayerName);
 
     // address=[0x1490f90]
-    CGameType(void);
+     CGameType(void);
 
     // address=[0x1491360]
-    ~CGameType(void);
+     ~CGameType(void);
 
     // address=[0x1491490]
-    bool LoadMapData(std::wstring _sMapName, bool _bAIActive, unsigned int a4, bool a5, bool a6, int _iSetupIndex, int _iAIDifficulty, int a9, bool _bIsLadderGame, bool _bIsClanGame);
+    bool  LoadMapData(std::wstring _sMapName, bool _bAIActive, unsigned int a4, bool a5, bool a6, int _iSetupIndex, int _iAIDifficulty, int a9, bool _bIsLadderGame, bool _bIsClanGame);
 
     // address=[0x1492f70]
-    bool IsMapAvailable(std::wstring &a2, int _iCRC);
+    bool  IsMapAvailable(std::wstring & a2, int _iCRC);
 
     // address=[0x1493090]
-    void SetMapCRC(std::wstring &a2);
+    void  SetMapCRC(std::wstring & a2);
 
     // address=[0x1493190]
-    int HumanPlayers(void);
+    int  HumanPlayers(void);
 
     // address=[0x14931e0]
-    void Init(void);
+    void  Init(void);
 
     // address=[0x1493620]
-    std::wstring ConvertMapNameToMPGameName(void);
+    std::wstring  ConvertMapNameToMPGameName(void a2);
 
     // address=[0x1493660]
-    static std::wstring __cdecl ConvertMapNameToMPGameName(std::wstring &a1);
+    static std::wstring __cdecl ConvertMapNameToMPGameName(std::wstring & a1);
 
     // address=[0x14936f0]
-    std::wstring GetPlayerName(int a2);
+    std::wstring  GetPlayerName(int a2);
 
     // address=[0x1493810]
-    void SetPlayerClanShortcut(int _iPlayerIndex, std::wstring &_swpPlayerClanShortcut);
+    void  SetPlayerClanShortcut(int _iPlayerIndex, std::wstring & _swpPlayerClanShortcut);
 
     // address=[0x1493870]
-    int const GetNumberHumanPlayers(void);
+    int const  GetNumberHumanPlayers(void);
 
     // address=[0x14bce00]
-    bool const IsMapLoaded(void);
+    bool const  IsMapLoaded(void);
 
     // address=[0x14bce20]
-    bool const IsWebGame(void);
+    bool const  IsWebGame(void);
 
     // address=[0x15c4a50]
-    int const GetMPSavegameID(void);
+    int const  GetMPSavegameID(void);
 
     // address=[0x15c4ae0]
-    std::wstring GetPlayerClanShortcut(int a2);
+    std::wstring  GetPlayerClanShortcut(int a2);
 
     // address=[0x15c4dd0]
-    void SetLadderGame(bool a2);
+    void  SetLadderGame(bool a2);
 
     // address=[0x15c4e90]
-    void SetWebGame(bool a2);
+    void  SetWebGame(bool a2);
 
-  private:
+private:
     // address=[0x14938c0]
-    void PatchMaps(bool a2);
+    void  PatchMaps(bool a2);
 
     // Type information members
-  public:
+public:
     std::wstring m_swGameName;
     std::wstring m_swMapName;
     int m_iWidthHeight;
@@ -170,7 +170,7 @@ class CGameType {
     DWORD[9] m_sPlayerSlot15;
     _BYTE[9] m_sPlayerSlot16;
     _BYTE byte261;
-    void *m_pMapData;
+    void * m_pMapData;
     _DWORD m_iMapCRC;
     _DWORD m_iHumanPlayers;
     DWORD[9] m_sPlayerAckDelta;
@@ -215,7 +215,7 @@ class CGameType {
     _BYTE m_bIsCampaignMap;
     BYTE[9] m_bPlayerSlotEmpty;
     BYTE[9] m_bDarkTribe;
-    void *m_pMapPreview;
+    void * m_pMapPreview;
     _DWORD m_iMapPreviewWidth;
     _DWORD m_iMapPreviewHeight;
     std::wstring[9] m_swpRealPlayerNames;
@@ -236,6 +236,8 @@ class CGameType {
     _DWORD m_iMapBuildingXMLVersion;
     _DWORD dword618;
     _DWORD dword61C;
+
 };
+
 
 #endif // CGAMETYPE_H

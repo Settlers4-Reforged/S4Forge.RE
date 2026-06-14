@@ -648,7 +648,7 @@ LABEL_29:
         v22 = g_pGameType->m_bMapFlagU0 == 0;
         CStateLobbyMapSettings::m_stempMapPtr[*v34]->gap_50[1] = v22;
         *(_DWORD *)&CStateLobbyMapSettings::m_stempMapPtr[*v34]->gap_50[8] = g_pGameType->m_iNumberOfSetups;
-        std::string::operator=(&CStateLobbyMapSettings::m_stempMapPtr[*v34]->std__string60, &g_pGameType->m_swpTeamName);
+        std::string::operator=(&CStateLobbyMapSettings::m_stempMapPtr[*v34]->std__string60, &g_pGameType->m_sTeamName);
         wcscpy(String, FindData.name);
         j__wcsupr(String);
         v19 = wcsstr(String, MAP_FILE_EXTENSION);

@@ -56630,28 +56630,28 @@ void __cdecl MA_GetDataChecksums(int * a1, int * a2) {
 
 
 // address=[0x2fbdf60]
-// Decompiled from wchar_t *__cdecl MA_GetDescriptionText(unsigned int a1, wchar_t **a2)
+// Decompiled from void __cdecl MA_GetDescriptionText(int a1, wchar_t **a2)
 void __cdecl MA_GetDescriptionText(int a1, wchar_t * * a2) {
   
-  wchar_t *result; // eax
+  wchar_t *v2; // eax
   const CHAR *lpMultiByteStr; // [esp+4h] [ebp-800Ch]
   WCHAR WideCharStr[16386]; // [esp+8h] [ebp-8008h] BYREF
 
   lpMultiByteStr = 0;
-  if ( g_bMapIsLoaded && a1 < 4 )
+  if ( g_bMapIsLoaded && (unsigned int)a1 < 4 )
   {
     switch ( a1 )
     {
-      case 0u:
+      case 0:
         lpMultiByteStr = (const CHAR *)g_pTextDescription;
         break;
-      case 1u:
+      case 1:
         lpMultiByteStr = (const CHAR *)g_pTextTandT;
         break;
-      case 2u:
+      case 2:
         lpMultiByteStr = (const CHAR *)g_pTextEnglishDescription;
         break;
-      case 3u:
+      case 3:
         lpMultiByteStr = (const CHAR *)g_pTextEnglishTandT;
         break;
       default:
@@ -56662,9 +56662,8 @@ void __cdecl MA_GetDescriptionText(int a1, wchar_t * * a2) {
     MultiByteToWideChar(0, 1u, lpMultiByteStr, -1, WideCharStr, 0x4000);
   else
     MultiByteToWideChar(0, 1u, byte_3AD3323, -1, WideCharStr, 80);
-  result = SysAllocString(WideCharStr);
-  *a2 = result;
-  return result;
+  v2 = SysAllocString(WideCharStr);
+  *a2 = v2;
 }
 
 

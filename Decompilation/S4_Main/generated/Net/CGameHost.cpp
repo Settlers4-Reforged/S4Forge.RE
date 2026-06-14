@@ -3698,18 +3698,18 @@ bool  CGameHost::UserDataChange(void * a2) {
 
 
 // address=[0x15bd980]
-// Decompiled from char __thiscall CGameHost::KickClient(CGameHost *this, int a2)
+// Decompiled from char __thiscall CGameHost::KickClient(CGameHost *this, void *a2)
 bool  CGameHost::KickClient(void * a2) {
   
   DWORD v4; // [esp+4h] [ebp-Ch]
   __int16 v5; // [esp+Ch] [ebp-4h] BYREF
 
-  v4 = g_pGameType->m_sPlayerPeerId[a2];
+  v4 = g_pGameType->m_sPlayerPeerId[(_DWORD)a2];
   CLanLobby::DisconnectPlayerPeerId(v4, -1);
   CClientList::RemoveClientPeerId(this->m_pClientList, v4);
-  g_pGameType->m_bPlayerSlotEmpty[a2] = 1;
+  g_pGameType->m_bPlayerSlotEmpty[(_DWORD)a2] = 1;
   v5 = 1053;
-  this->m_pSimpleNet->PushMessage(this->m_pSimpleNet, v4, g_pGameType->m_uiIPPlayer[a2], 3105, &v5, 2, 0, 1);
+  this->m_pSimpleNet->PushMessage(this->m_pSimpleNet, v4, g_pGameType->m_uiIPPlayer[(_DWORD)a2], 3105, &v5, 2, 0, 1);
   CLanLobby::RedrawPlayerList();
   return 1;
 }
