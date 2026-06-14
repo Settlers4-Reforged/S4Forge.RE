@@ -1,7 +1,16 @@
 #ifndef CSTATISTIC_H
 #define CSTATISTIC_H
 
+#include "CConfigManager/Var/CStaticConfigVarInt.h"
+#include "LoadSave/IS4ChunkObject.h"
 #include "defines.h"
+
+extern class CStatistic g_cStatistic;
+
+// address=[0x3F29D98]
+extern CStaticConfigVarInt g_iDbgIgnoreFightingStrength;
+// address=[0x3F29DA4]
+extern CStaticConfigVarInt g_iFightingStrengthDivisor;
 
 class CStatistic : public IS4ChunkObject {
   public:
@@ -45,19 +54,19 @@ class CStatistic : public IS4ChunkObject {
     int GetSettler(int _iPlayerId, int _iSettlerType) const;
 
     // address=[0x1476490]
-    int GetTotalSettler(int a2) const;
+    int GetTotalSettler(int _iPlayerId) const;
 
     // address=[0x14764f0]
-    int GetCivilian(int a2) const;
+    int GetCivilian(int _iPlayerId) const;
 
     // address=[0x1476540]
     int GetSoldiers(int _iPlayerId) const;
 
     // address=[0x14765e0]
-    int GetNrOfSoldiers(int a2) const;
+    int GetNrOfSoldiers(int _iPlayerId) const;
 
     // address=[0x1476630]
-    void AddProducedSettler(int a2, int _iSettlerType);
+    void AddProducedSettler(int _iPlayerId, int _iSettlerType);
 
     // address=[0x14766f0]
     int GetProducedSettler(int _iPlayerId, int _iSettlerType) const;
@@ -78,7 +87,7 @@ class CStatistic : public IS4ChunkObject {
     int GetBuildings(int _iPlayerId, int _iBuildingType) const;
 
     // address=[0x1476990]
-    void AddProducedBuilding(int a2, int a3, int a4);
+    void AddProducedBuilding(int _iPlayerId, int _iBuilding, int a4);
 
     // address=[0x1476a50]
     int GetProducedBuildings(int _iPlayerId, int _iBuilding) const;
@@ -96,7 +105,7 @@ class CStatistic : public IS4ChunkObject {
     void AddCaptureBuilding(int _iPlayer, int _iTarget, int _iBuilding);
 
     // address=[0x1476bd0]
-    int GetCapturedTowers(int _iPlayer);
+    int GetCapturedTowers(int _iPlayerId);
 
     // address=[0x1476c70]
     int GetLossesTowers(int a2);
@@ -105,7 +114,7 @@ class CStatistic : public IS4ChunkObject {
     void AddConstruction(int _iPlayerId, int _iBuildingType, int _iCount);
 
     // address=[0x1476d50]
-    void DecConstruction(int _iPlayerId, int _iBuildingType, int a4);
+    void DecConstruction(int _iPlayerId, int _iBuildingType, int _iAmount);
 
     // address=[0x1476e00]
     int GetTotalBuildingsUnderConstruction(int a2) const;
@@ -234,7 +243,7 @@ class CStatistic : public IS4ChunkObject {
     int GetLandSizePercent(int a2);
 
     // address=[0x1477d50]
-    void SetOffenceStrength100(int a2, int a3);
+    void SetOffenceStrength100(int _iPlayerId, int a3);
 
     // address=[0x1477e10]
     virtual int UsedBuildingMaterial(int _iPlayerId) const;
@@ -243,7 +252,7 @@ class CStatistic : public IS4ChunkObject {
     int GetTotalTowers(int _iPlayerId);
 
     // address=[0x1477f00]
-    int GetTotalMineProduction(int a2);
+    int GetTotalMineProduction(int _iPlayerId);
 
     // address=[0x1477fb0]
     int GetTotalFood(int _iPlayerId);
@@ -306,7 +315,74 @@ class CStatistic : public IS4ChunkObject {
 
     // Type information members
   public:
-    CStatistic::SPlayerStatistic[9] sPlayerStatistics;
+    class SPlayerStatistic {
+      public:
+        // address=[0x1478cc0]
+        void UpdateFightingStrength(int _iPlayerId, int _iBoards, int _iStone, int _iGold, bool _bEyeCatcher);
+
+        // address=[0x1478da0]
+        void CalculateFightingStrength(int _iOwnerId);
+
+        int m_iNrOfSettler[67];
+        int m_iTotalNrOfSettler;
+        int m_iTotalOfSettler[67];
+        int m_iProducedSettlers;
+        int m_iNrOfCivilian;
+        int m_iNrOfSoldier;
+        int m_iNrOfBuilding[83];
+        int m_iNrOfCapturedBuilding[83];
+        int m_iNrOfLostBuilding[83];
+        int m_iTotalOfBuilding;
+        int m_iNrOfProducedBuilding[83];
+        int m_iProducedBuildings;
+        int m_iNrOfBuildingSites[83];
+        int m_iTotalBuildingSites;
+        _BYTE gap_8B0[332];
+        int m_iResidenceNeed;
+        int m_iResidenceSpace;
+        int m_iNrOfGood[43];
+        int m_iTotalGoods;
+        int m_iNrOfProducedGoods[43];
+        int m_iTotalProducedGoods;
+        int m_iNrOfVehicle[6];
+        int m_iTotalVehicles;
+        int m_iNrOfProducedVehicle[6];
+        int m_iTotalProducedVehicles;
+        int m_iLandSize;
+        int m_iOffenceStrengthBase256;
+        int m_iTotalBuiltWood;
+        int m_iTotalBuildStone;
+        int m_iTotalBuiltGold;
+        int m_iTotalBuiltEyecatcherWood;
+        int m_iTotalBuiltEyecatcherStone;
+        int m_iTotalBuiltEyecatcherGold;
+        int m_iEffectiveDefenceStrength256;
+        int m_iEffectiveOffenceStrength256;
+        int m_iTotalUsedBuildingMaterial;
+        unsigned char m_iBuildingProductivity[83];
+        unsigned char m_iTotalBuildingProductivity;
+        int m_iNrOfKill[67];
+        int m_iTotalKills;
+        int m_iNrOfLoss[67];
+        int m_iTotalLosses;
+        int m_iTotalBuildingLosses;
+        int m_iNrOfVehicleKill[6];
+        _BYTE gap_E58[244];
+        int m_iTotalVehicleKills;
+        int m_iNrOfVehicleLoss[6];
+        _BYTE gap_F68[244];
+        int m_iTotalVehicleLosses;
+        int m_iMana;
+        int m_iProducedMana;
+        int m_iExitTime;
+        int m_iMaxLandSize;
+        int m_iDefenceStrength100;
+        int m_iOffenceStrength100;
+        int m_iWinGoods[43];
+        int m_iOffenceStrength100_2;
+    };
+
+    SPlayerStatistic m_sPlayerStats[9];
     DWORD m_iDontShowLastNPlayers;
 };
 

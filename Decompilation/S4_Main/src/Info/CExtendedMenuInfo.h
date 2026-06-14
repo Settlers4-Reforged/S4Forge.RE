@@ -1,19 +1,21 @@
 #ifndef CEXTENDEDMENUINFO_H
 #define CEXTENDEDMENUINFO_H
 
-#include "defines.h"
 #include "Logic/CInfoExchange.h"
+#include "defines.h"
+
+extern class CExtendedMenuInfo g_cExtendedMenuInfo;
 
 class CExtendedMenuInfo : public CInfoExchange {
-public:
+  public:
     // address=[0x1454560]
-     CExtendedMenuInfo(void);
+    CExtendedMenuInfo(void);
 
     // address=[0x1454b90]
-    virtual unsigned int  Size(void)const;
+    virtual unsigned int Size(void) const;
 
     // Type information members
-public:
+  public:
     DWORD m_uCarriers;
     DWORD m_uNrTotalBeds;
     DWORD m_uGoodsBoards;
@@ -25,8 +27,6 @@ public:
     DWORD m_uOffenseStrength;
     DWORD m_uDefenceStrength;
     DWORD m_uMana;
-
 };
-
 
 #endif // CEXTENDEDMENUINFO_H

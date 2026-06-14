@@ -109,7 +109,7 @@ struct CSettlerMgr::SSettlerInfos const & __cdecl CSettlerMgr::GetSettlerInfo(in
 // Decompiled from int __cdecl CSettlerMgr::SettlerWarriorType(int a1)
 int __cdecl CSettlerMgr::SettlerWarriorType(int a1) {
   
-  if ( !CSettlerMgr::m_uSettlerWarriorTypes[29]
+  if ( !CSettlerMgr::m_uSettlerWarriorTypes[SETTLER_SWORDSMAN_01]
     && BBSupportDbgReport(
          2,
          "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\MapObjects\\Settler\\SettlerMgr.h",
@@ -128,12 +128,12 @@ int __cdecl CSettlerMgr::SettlerWarriorType(int a1) {
   
   unsigned __int8 *i; // [esp+8h] [ebp-10h]
 
-  MemoryAllocator::MemoryAllocator(this, 0x68u, 0x20u, 0);
+  MemoryAllocator::MemoryAllocator((MemoryAllocator *)this, 0x68u, 0x20u, 0);
   *((_WORD *)this + 12) = 0;
   *((_BYTE *)this + 26) = 0;
   memset(CSettlerMgr::m_uSettlerWarriorTypes, 0, 0x46u);
   memset(CSettlerMgr::m_uSettlerWarriorLevels, 0, 0x46u);
-  memset(CSettlerMgr::m_vSettlerInfos, 0, 0x3C28u);
+  memset(CSettlerMgr::m_vSettlerInfos, 0, sizeof(CSettlerMgr::m_vSettlerInfos));
   for ( i = (unsigned __int8 *)&unk_37B5B38; *i; i += 4 )
   {
     if ( *i >= 0x43u

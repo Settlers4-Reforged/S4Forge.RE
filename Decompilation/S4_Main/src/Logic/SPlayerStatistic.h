@@ -1,0 +1,7 @@
+#ifndef CSTATISTIC_SPLAYERSTATISTIC_H
+#define CSTATISTIC_SPLAYERSTATISTIC_H
+
+// see CStatistic
+#include "CStatistic.h"
+
+#endif // CSTATISTIC_SPLAYERSTATISTIC_H

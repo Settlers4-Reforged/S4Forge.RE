@@ -7,7 +7,7 @@
 extern class ITiling *g_pTiling;
 
 class ITiling {
-public:
+  public:
     // address=[0x12fcea0]
     static int __cdecl CatapultSectorId(int a1);
 
@@ -15,7 +15,7 @@ public:
     static int __cdecl CatapultTileId(int a1);
 
     // address=[0x12fd780]
-    static class CTile const & __cdecl Tile(int a1);
+    static class CTile const &__cdecl Tile(int a1);
 
     // address=[0x13066a0]
     static int __cdecl FirstTileOfSquareVW(int _uV, int _uW);
@@ -44,9 +44,10 @@ public:
     // address=[0x15f5240]
     static int __cdecl OwnerPseudoTileId(int a1);
 
-protected:
+  protected:
     friend class CWalkingBase;
     friend class CDecoObjMgr;
+    friend class CStatistic;
 
     // address=[0x4236800]
     static unsigned short **m_pTileIds;
@@ -55,7 +56,6 @@ protected:
 
     // address=[0x4236808]
     static unsigned char (*m_uSquareNumberOfWaterElementsDiv2)[64];
-
 
     virtual void Init(int iWorldWidthHeight, struct T_GFX_MAP_ELEMENT *pGfxMapElements, unsigned char *pFlagBitsLayer, unsigned short *_pNormalTileIds, unsigned short *_pCatapultTileIds, unsigned char *pFogLayer, bool a8) = 0;
 
@@ -99,6 +99,5 @@ protected:
 
     virtual void DbgCheckBlocking(int a2) = 0;
 };
-
 
 #endif // ITILING_H

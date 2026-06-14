@@ -8,10 +8,10 @@ namespace CStatistic {
 class SPlayerStatistic {
 public:
     // address=[0x1478cc0]
-    void  UpdateFightingStrength(int a2, int a3, int a4, int a5, bool a6);
+    void  UpdateFightingStrength(int _iPlayerId, int _iBoards, int _iStone, int _iGold, bool _bEyeCatcher);
 
     // address=[0x1478da0]
-    void  CalculateFightingStrength(int a2);
+    void  CalculateFightingStrength(int _iOwnerId);
 
 };
 

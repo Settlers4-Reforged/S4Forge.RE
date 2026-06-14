@@ -307,10 +307,7 @@ CStaticConfigVarInt g_iTerrainVikingDst{ "MAGIC", "TerrainVikingDst", 16 };
 CStaticConfigVarInt g_iTerrainVikingSrc{ "MAGIC", "TerrainVikingSrc", 64 };
 // address=[0x3F200F8]
 CStaticConfigVarInt g_iVikingWarmachineShotCost{ "MAGIC", "VikingWarmachineShotCost", 15 };
-// address=[0x3F29D98]
-CStaticConfigVarInt g_iDbgIgnoreFightingStrength{ "LOGIC", "DbgIgnoreFightingStrength", 0 };
-// address=[0x3F29DA4]
-CStaticConfigVarInt g_iFightingStrengthDivisor{ "LOGIC", "FightingStrengthDivisor", 1000 };
+
 // address=[0x402ECB4]
 CStaticConfigVarInt g_iRandomNumberCheckInterval{ "DESYNC", "RandomNumberCheckInterval", 10 };
 // address=[0x402ECA8]
