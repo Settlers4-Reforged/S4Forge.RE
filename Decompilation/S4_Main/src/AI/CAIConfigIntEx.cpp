@@ -5,19 +5,18 @@
 // address=[0x131e810]
 // Decompiled from CAIConfigIntEx *__thiscall CAIConfigIntEx::CAIConfigIntEx(CAIConfigIntEx *this, const char *a2, int a3, int a4, int a5)
 CAIConfigIntEx::CAIConfigIntEx(char const *_spVarName,
-                               int         _iDefault0,
-                               int         _iDefault1,
-                               int         _iDefault2)
+                               int _iDefault0,
+                               int _iDefault1,
+                               int _iDefault2)
     : TStaticConfigIntArray<3>(
           "AI",
           _spVarName,
           _iDefault0,
           // Dont ask.. dont know...
-          (_iDefault1 == 0x80000000 ? _iDefault0 : _iDefault1),
-          (_iDefault2 != 0x80000000
+          (_iDefault1 == USE_PREV_CONFIG_VALUE ? _iDefault0 : _iDefault1),
+          (_iDefault2 != USE_PREV_CONFIG_VALUE
                ? _iDefault2
-               : (_iDefault1 != 0x80000000 ? _iDefault1 : _iDefault0))
-      ),
+               : (_iDefault1 != USE_PREV_CONFIG_VALUE ? _iDefault1 : _iDefault0))),
       m_spName(_spVarName) {}
 
 // {
@@ -42,7 +41,6 @@ CAIConfigIntEx::CAIConfigIntEx(char const *_spVarName,
 //   this->m_spName = _spVarName;
 // }
 
-
 // address=[0x131ea80]
 // Decompiled from int __thiscall CAIConfigIntEx::~CAIConfigIntEx(CAIConfigIntEx *this)
 CAIConfigIntEx::~CAIConfigIntEx(void) = default;
@@ -52,5 +50,3 @@ CAIConfigIntEx::~CAIConfigIntEx(void) = default;
 char const *CAIConfigIntEx::Name(void) const {
     return this->m_spName;
 }
-
-
