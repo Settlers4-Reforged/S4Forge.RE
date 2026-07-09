@@ -3,6 +3,7 @@
 #include "CAIConfigIntEx.h"
 #include "CAIPlayerScriptVars.h"
 #include "CAIPlayersScriptVars.h"
+#include "CAIRegions.h"
 #include "CBB/CBBSupport.h"
 #include "CConfigManager/CConfigManagerPtr.h"
 #include "Debug/CPerformanceCounter.h"
