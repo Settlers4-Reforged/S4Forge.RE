@@ -1,23 +1,23 @@
 #ifndef CS4MEMCHUNK_H
 #define CS4MEMCHUNK_H
 
-#include "defines.h"
 #include "IS4Chunk.h"
+#include "defines.h"
 
 namespace S4 {
     class CMapFile;
 }
 
 enum T_S4_CHUNK_MODE {
-    CHUNK_MODE_NONE               = 0x0,
-    CHUNK_MODE_LOAD_DATA          = 0x1,
-    CHUNK_MODE_CALC_SIZE          = 0x2,
-    CHUNK_MODE_SAVE_DATA          = 0x3,
+    CHUNK_MODE_NONE = 0x0,
+    CHUNK_MODE_LOAD_DATA = 0x1,
+    CHUNK_MODE_CALC_SIZE = 0x2,
+    CHUNK_MODE_SAVE_DATA = 0x3,
     CHUNK_MODE_SAVE_DATA_AUTO_PTR = 0x4,
 };
 
 class CS4MemChunk : public IS4Chunk {
-public:
+  public:
     // address=[0x13e6540]
     void const *Data(void) const;
 
@@ -70,9 +70,9 @@ public:
     static void __cdecl ObjectLoad(class IS4ChunkObject &_rChunk, void const *_pTarget, unsigned int _uSize);
 
     // address=[0x13ed050]
-    static void __cdecl ObjectSave(class IS4ChunkObject &_rChunk, void * *_pSource, unsigned int *_pSize);
+    static void __cdecl ObjectSave(class IS4ChunkObject &_rChunk, void **_pSource, unsigned int *_pSize);
 
-protected:
+  protected:
     // address=[0x13ed0f0]
     void __fastcall SaveFuncNOP(void const *a1, unsigned int a2);
 
@@ -95,18 +95,15 @@ protected:
     unsigned int LoadUnsigned32Inline(void);
 
     // Type information members
-public:
+  public:
     T_S4_CHUNK_MODE m_tMode;
-    _DWORD          m_uSize;
-    uint8_t *       m_pData;
-    uint8_t *       m_pCurrent;
+    _DWORD m_uSize;
+    uint8_t *m_pData;
+    uint8_t *m_pCurrent;
 
     void (__fastcall CS4MemChunk::*m_pSaveFunc)(void const *a1, unsigned int a2);
 
     void (__fastcall CS4MemChunk::*m_pSaveUnsigned32)(unsigned int);
-
-    S4::CMapFile *m_pMapFile;
 };
-
 
 #endif // CS4MEMCHUNK_H
