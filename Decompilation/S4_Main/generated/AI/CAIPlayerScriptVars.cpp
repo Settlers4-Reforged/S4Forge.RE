@@ -1,12 +1,13 @@
+#if FALSE
 #include "CAIPlayerScriptVars.h"
 
 // Definitions for class CAIPlayerScriptVars
 
 // address=[0x12fcaf0]
-// Decompiled from int __thiscall CAIPlayerScriptVars::operator[](_DWORD *this, unsigned int _tVarIndex)
+// Decompiled from int __thiscall CAIPlayerScriptVars::operator[](CAIPlayerScriptVars *this, unsigned int _tVarIndex)
 int  CAIPlayerScriptVars::operator[](enum T_AI_PLAYER_SCRIPT_VAR_INDEX _tVarIndex)const {
   
-  if ( _tVarIndex > 0x16
+  if ( _tVarIndex > 22
     && BBSupportDbgReport(
          2,
          "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Script.h",
@@ -15,7 +16,7 @@ int  CAIPlayerScriptVars::operator[](enum T_AI_PLAYER_SCRIPT_VAR_INDEX _tVarInde
   {
     __debugbreak();
   }
-  return *(_DWORD *)(this[2] + 4 * _tVarIndex);
+  return this->m_pActiveVars->m_iVars[_tVarIndex];
 }
 
 
@@ -23,25 +24,23 @@ int  CAIPlayerScriptVars::operator[](enum T_AI_PLAYER_SCRIPT_VAR_INDEX _tVarInde
 // Decompiled from int __thiscall CAIPlayerScriptVars::Flags(CAIPlayerScriptVars *this)
 int  CAIPlayerScriptVars::Flags(void)const {
   
-  return *((_DWORD *)this + 1);
+  return this->m_iFlags;
 }
 
 
 // address=[0x1306500]
-// Decompiled from int __thiscall CAIPlayerScriptVars::DifficultyLevel(void *this)
+// Decompiled from int __thiscall CAIPlayerScriptVars::DifficultyLevel(CAIPlayerScriptVars *this)
 enum T_AI_DIFFICULTY_LEVEL  CAIPlayerScriptVars::DifficultyLevel(void)const {
   
-  return *(_DWORD *)this;
+  return this->m_iDifficultyLevel;
 }
 
 
 // address=[0x1309800]
-// Decompiled from unsigned int *__thiscall CAIPlayerScriptVars::SetDifficultyLevel(unsigned int *this, unsigned int a2)
-void  CAIPlayerScriptVars::SetDifficultyLevel(enum T_AI_DIFFICULTY_LEVEL a2) {
+// Decompiled from void __thiscall CAIPlayerScriptVars::SetDifficultyLevel(CAIPlayerScriptVars *this, int _tDifficultyLevel)
+void  CAIPlayerScriptVars::SetDifficultyLevel(enum T_AI_DIFFICULTY_LEVEL _tDifficultyLevel) {
   
-  unsigned int *result; // eax
-
-  if ( a2 > 3
+  if ( (unsigned int)_tDifficultyLevel > 3
     && BBSupportDbgReport(
          2,
          "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Script.h",
@@ -50,10 +49,8 @@ void  CAIPlayerScriptVars::SetDifficultyLevel(enum T_AI_DIFFICULTY_LEVEL a2) {
   {
     __debugbreak();
   }
-  *this = a2;
-  result = this;
-  this[2] = (unsigned int)&this[23 * a2 + 3];
-  return result;
+  this->m_iDifficultyLevel = _tDifficultyLevel;
+  this->m_pActiveVars = &this->m_vVars[_tDifficultyLevel];
 }
 
 
@@ -64,83 +61,68 @@ void  CAIPlayerScriptVars::Init(void) {
   int j; // [esp+8h] [ebp-8h]
   int i; // [esp+Ch] [ebp-4h]
 
-  CAIPlayerScriptVars::SetDifficultyLevel((unsigned int *)this, 2u);
-  *((_DWORD *)this + 1) = 0;
+  CAIPlayerScriptVars::SetDifficultyLevel(this, 2);
+  this->m_iFlags = 0;
   for ( i = 0; i <= 3; ++i )
   {
     for ( j = 0; j <= 22; ++j )
-      *((_DWORD *)this + 23 * i + j + 3) = unk_3ECC7C8[23 * i + j];
+      this->m_vVars[i].m_iVars[j] = s_iDefaultScriptVars[i][j];
   }
 }
 
 
 // address=[0x131cb50]
-// Decompiled from int __thiscall CAIPlayerScriptVars::Load(CAIPlayerScriptVars *this, struct IS4Chunk *a2)
-void  CAIPlayerScriptVars::Load(class IS4Chunk & a2) {
+// Decompiled from void __thiscall CAIPlayerScriptVars::Load(CAIPlayerScriptVars *this, struct IS4Chunk *rChunk)
+void  CAIPlayerScriptVars::Load(class IS4Chunk & rChunk) {
   
-  int result; // eax
-  int v3; // [esp+4h] [ebp-18h]
-  int v4; // [esp+8h] [ebp-14h]
-  unsigned int v5; // [esp+Ch] [ebp-10h]
+  signed int iAvailableVars; // [esp+4h] [ebp-18h]
+  int iFlags; // [esp+8h] [ebp-14h]
+  int iDifficultyLevel; // [esp+Ch] [ebp-10h]
   int i; // [esp+14h] [ebp-8h]
   int j; // [esp+18h] [ebp-4h]
 
-  v5 = (*(int (__thiscall **)(struct IS4Chunk *, _DWORD, int))(*(_DWORD *)a2 + 4))(a2, 0, 3);
-  v4 = (*(int (__thiscall **)(struct IS4Chunk *))(*(_DWORD *)a2 + 8))(a2);
-  CAIPlayerScriptVars::SetDifficultyLevel((unsigned int *)this, v5);
-  CAIPlayerScriptVars::SetFlags(this, v4);
-  result = (*(int (__thiscall **)(struct IS4Chunk *, _DWORD, int))(*(_DWORD *)a2 + 4))(a2, 0, 22);
-  v3 = result;
+  iDifficultyLevel = rChunk->LoadUnsigned32(0, 3);
+  iFlags = rChunk->LoadUnsigned32_(rChunk);
+  CAIPlayerScriptVars::SetDifficultyLevel(this, iDifficultyLevel);
+  CAIPlayerScriptVars::SetFlags(this, iFlags);
+  iAvailableVars = rChunk->LoadUnsigned32(0, 22);
   for ( i = 0; i <= 3; ++i )
   {
-    for ( j = 0; ; ++j )
-    {
-      result = j;
-      if ( j > v3 )
-        break;
-      *((_DWORD *)this + 23 * i + j + 3) = (*(int (__thiscall **)(struct IS4Chunk *))(*(_DWORD *)a2 + 8))(a2);
-    }
+    for ( j = 0; j <= iAvailableVars; ++j )
+      this->m_vVars[i].m_iVars[j] = rChunk->LoadUnsigned32_(rChunk);
     while ( j <= 22 )
     {
-      *((_DWORD *)this + 23 * i + j + 3) = unk_3ECC7C8[23 * i + j];
-      result = ++j;
+      this->m_vVars[i].m_iVars[j] = s_iDefaultScriptVars[i][j];
+      ++j;
     }
   }
-  return result;
 }
 
 
 // address=[0x131cc40]
-// Decompiled from int __thiscall CAIPlayerScriptVars::Save(CAIPlayerScriptVars *this, struct IS4Chunk *a2)
+// Decompiled from void __thiscall CAIPlayerScriptVars::Save(CAIPlayerScriptVars *this, struct IS4Chunk *a2)
 void  CAIPlayerScriptVars::Save(class IS4Chunk & a2) {
   
-  int result; // eax
   int j; // [esp+4h] [ebp-8h]
   int i; // [esp+8h] [ebp-4h]
 
-  (*(void (__thiscall **)(struct IS4Chunk *, _DWORD))(*(_DWORD *)a2 + 20))(a2, *(_DWORD *)this);
-  (*(void (__thiscall **)(struct IS4Chunk *, _DWORD))(*(_DWORD *)a2 + 20))(a2, *((_DWORD *)this + 1));
-  result = (*(int (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 20))(a2, 22);
+  a2->SaveUnsigned32(this->m_iDifficultyLevel);
+  a2->SaveUnsigned32(this->m_iFlags);
+  a2->SaveUnsigned32(22);
   for ( i = 0; i <= 3; ++i )
   {
     for ( j = 0; j <= 22; ++j )
-      result = (*(int (__thiscall **)(struct IS4Chunk *, _DWORD))(*(_DWORD *)a2 + 20))(
-                 a2,
-                 *((_DWORD *)this + 23 * i + j + 3));
+      a2->SaveUnsigned32(this->m_vVars[i].m_iVars[j]);
   }
-  return result;
 }
 
 
 // address=[0x131ed70]
-// Decompiled from CAIPlayerScriptVars *__thiscall CAIPlayerScriptVars::SetFlags(CAIPlayerScriptVars *this, int a2)
-void  CAIPlayerScriptVars::SetFlags(int a2) {
+// Decompiled from void __thiscall CAIPlayerScriptVars::SetFlags(CAIPlayerScriptVars *this, int _iFlags)
+void  CAIPlayerScriptVars::SetFlags(int _iFlags) {
   
-  CAIPlayerScriptVars *result; // eax
-
-  result = this;
-  *((_DWORD *)this + 1) = a2;
-  return result;
+  this->m_iFlags = _iFlags;
 }
 
 
+#endif // Already implemented

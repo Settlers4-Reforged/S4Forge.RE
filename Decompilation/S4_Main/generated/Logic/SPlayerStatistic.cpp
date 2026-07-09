@@ -1,3 +1,4 @@
+#if FALSE
 #include "SPlayerStatistic.h"
 
 // Definitions for class SPlayerStatistic
@@ -154,3 +155,4 @@ void  CStatistic::SPlayerStatistic::CalculateFightingStrength(int _iOwnerId) {
 }
 
 
+#endif // Already implemented

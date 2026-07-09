@@ -9,7 +9,7 @@ public:
     class CAIPlayerScriptVars const &  operator[](int _iPlayerId);
 
     // address=[0x13038b0]
-    int  GetValue(int a2, enum T_AI_PLAYER_SCRIPT_VAR_INDEX a3);
+    int  GetValue(int _iPlayerId, enum T_AI_PLAYER_SCRIPT_VAR_INDEX a3);
 
     // address=[0x1309870]
     void  SetDifficultyLevel(int a2, enum T_AI_DIFFICULTY_LEVEL a3);
@@ -18,22 +18,26 @@ public:
     void  Init(void);
 
     // address=[0x131cd20]
-    void  Load(class IS4Chunk & a2);
+    void  Load(class IS4Chunk & rChunk);
 
     // address=[0x131cdb0]
-    void  Save(class IS4Chunk & a2);
+    void  Save(class IS4Chunk & rChunk);
 
     // address=[0x131ebc0]
-    void  ClearFlagBits(int a2, int a3);
+    void  ClearFlagBits(int _iPlayer, int _iFlags);
 
     // address=[0x131ecf0]
-    void  SetFlagBits(int a2, int a3);
+    void  SetFlagBits(int _iPlayer, int _iFlags);
 
     // address=[0x131ed90]
-    void  SetOrClearFlagBits(int a2, int a3, bool a4);
+    void  SetOrClearFlagBits(int iPlayer, int _iFlags, bool _bSet);
 
     // address=[0x131eef0]
-    void  SetValue(int a2, enum T_AI_PLAYER_SCRIPT_VAR_INDEX a3, int a4, int a5, int a6);
+    void  SetValue(int _iPlayer, enum T_AI_PLAYER_SCRIPT_VAR_INDEX _iScriptVar, int _iValueDiff1, int _iValueDiff2, int _iValueDiff3);
+
+    // Type information members
+public:
+    CAIPlayerScriptVars[9] m_vPlayers;
 
 };
 

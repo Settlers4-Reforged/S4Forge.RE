@@ -508,14 +508,16 @@ enum CAITaskForce::T_RESULT  CAITaskForce::RemoveEntity(class CAIEntityInfo * _p
 
 
 // address=[0x13279f0]
-// Decompiled from void __thiscall CAITaskForce::RemoveEntity(CAITaskForce *this, int a2)
+// Decompiled from void *__thiscall CAITaskForce::RemoveEntity(CAITaskForce *this, int a2)
 enum CAITaskForce::T_RESULT  CAITaskForce::RemoveEntity(int a2) {
   
   CAIEntityInfo *EntityInfo; // [esp+4h] [ebp-4h]
 
   EntityInfo = IAIEnvironment::EntityGetEntityInfo(a2, 0);
   if ( EntityInfo )
-    this->RemoveEntity(this, EntityInfo);
+    return (void *)((int (__thiscall *)(CAITaskForce *, CAIEntityInfo *))this->RemoveEntity)(this, EntityInfo);
+  else
+    return (void *)2;
 }
 
 

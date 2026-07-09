@@ -18,10 +18,17 @@ public:
     double  TimeMs(void)const;
 
     // address=[0x2efd760]
-    char const *  TimeMsStr(int a2, int a2)const;
+    char const *  TimeMsStr(int a2, int a3)const;
 
     // address=[0x2efe090]
     void  Clear(void);
+
+    // Type information members
+public:
+    LARGE_INTEGER sStartCounter;
+    LARGE_INTEGER sMeasureCounter;
+    _DWORD uStartTickCount;
+    _DWORD uMeasureTickCount;
 
 };
 

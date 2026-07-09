@@ -6,8 +6,8 @@
 // Decompiled from CProfile *__thiscall CProfile::CProfile(CProfile *this)
  CProfile::CProfile(void) {
   
-  if ( !dword_46851B0 )
-    sub_2EFDE40();
+  if ( !s_bPerfFrequencyCalculated )
+    CalcPerfFrequency();
   CProfile::Clear(this);
   return this;
 }
@@ -57,7 +57,7 @@ void  CProfile::End(void) {
 double  CProfile::TimeMs(void)const {
   
   if ( *((_DWORD *)this + 40) )
-    return (double)*((__int64 *)this + 1) / (double)*((unsigned int *)this + 40) * *(double *)&qword_46851C0;
+    return (double)*((__int64 *)this + 1) / (double)*((unsigned int *)this + 40) * *(double *)&s_dPerfFrequency;
   else
     return 0.0;
 }
@@ -80,7 +80,7 @@ char const *  CProfile::InfoStr(void)const {
   if ( v6 <= 0 )
     v6 = 1LL;
   v4 = (double)*((__int64 *)v7 + 1) / (double)v6 * 100.0;
-  v3 = (double)*((__int64 *)v7 + 1) * *(double *)&qword_46851C0;
+  v3 = (double)*((__int64 *)v7 + 1) * *(double *)&s_dPerfFrequency;
   v1 = CProfile::TimeMs(v7);
   snprintf(byte_46851F8, 0x40u, "%5i x %6.3f ms = %9.1f ms, %5.2f%%", *((_DWORD *)v7 + 40), v1, v3, v4);
   return byte_46851F8;
@@ -119,25 +119,39 @@ char const *  CProfile::TraceStr(void)const {
   v22 = PerformanceCount.QuadPart - *(_QWORD *)v23;
   if ( v22 <= 0 )
     v22 = 1LL;
-  v20 = (double)*((__int64 *)v23 + (*((_DWORD *)v23 + 40) & 0xF) + 4) * *(double *)&qword_46851C0;
-  v19 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 1) & 0xF) + 4) * *(double *)&qword_46851C0;
-  v18 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 2) & 0xF) + 4) * *(double *)&qword_46851C0;
-  v17 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 3) & 0xF) + 4) * *(double *)&qword_46851C0;
-  v16 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 4) & 0xF) + 4) * *(double *)&qword_46851C0;
-  v15 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 5) & 0xF) + 4) * *(double *)&qword_46851C0;
-  v14 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 6) & 0xF) + 4) * *(double *)&qword_46851C0;
-  v13 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 7) & 0xF) + 4) * *(double *)&qword_46851C0;
-  v12 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 8) & 0xF) + 4) * *(double *)&qword_46851C0;
-  v11 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 9) & 0xF) + 4) * *(double *)&qword_46851C0;
+  v20 = (double)*((__int64 *)v23 + (*((_DWORD *)v23 + 40) & 0xF) + 4) * *(double *)&s_dPerfFrequency;
+  v19 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 1) & 0xF) + 4)
+      * *(double *)&s_dPerfFrequency;
+  v18 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 2) & 0xF) + 4)
+      * *(double *)&s_dPerfFrequency;
+  v17 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 3) & 0xF) + 4)
+      * *(double *)&s_dPerfFrequency;
+  v16 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 4) & 0xF) + 4)
+      * *(double *)&s_dPerfFrequency;
+  v15 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 5) & 0xF) + 4)
+      * *(double *)&s_dPerfFrequency;
+  v14 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 6) & 0xF) + 4)
+      * *(double *)&s_dPerfFrequency;
+  v13 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 7) & 0xF) + 4)
+      * *(double *)&s_dPerfFrequency;
+  v12 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 8) & 0xF) + 4)
+      * *(double *)&s_dPerfFrequency;
+  v11 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 9) & 0xF) + 4)
+      * *(double *)&s_dPerfFrequency;
   v10 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 10) & 0xF) + 4)
-      * *(double *)&qword_46851C0;
-  v9 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 11) & 0xF) + 4) * *(double *)&qword_46851C0;
-  v8 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 12) & 0xF) + 4) * *(double *)&qword_46851C0;
-  v7 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 13) & 0xF) + 4) * *(double *)&qword_46851C0;
-  v6 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 14) & 0xF) + 4) * *(double *)&qword_46851C0;
-  v5 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 15) & 0xF) + 4) * *(double *)&qword_46851C0;
+      * *(double *)&s_dPerfFrequency;
+  v9 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 11) & 0xF) + 4)
+     * *(double *)&s_dPerfFrequency;
+  v8 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 12) & 0xF) + 4)
+     * *(double *)&s_dPerfFrequency;
+  v7 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 13) & 0xF) + 4)
+     * *(double *)&s_dPerfFrequency;
+  v6 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 14) & 0xF) + 4)
+     * *(double *)&s_dPerfFrequency;
+  v5 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 15) & 0xF) + 4)
+     * *(double *)&s_dPerfFrequency;
   v4 = (double)*((__int64 *)v23 + 1) / (double)v22 * 100.0;
-  v3 = (double)*((__int64 *)v23 + 1) * *(double *)&qword_46851C0;
+  v3 = (double)*((__int64 *)v23 + 1) * *(double *)&s_dPerfFrequency;
   v1 = CProfile::TimeMs(v23);
   snprintf(
     byte_4685248,

@@ -16,19 +16,26 @@ public:
 
 protected:
     // address=[0x1309800]
-    void  SetDifficultyLevel(enum T_AI_DIFFICULTY_LEVEL a2);
+    void  SetDifficultyLevel(enum T_AI_DIFFICULTY_LEVEL _tDifficultyLevel);
 
     // address=[0x131cad0]
     void  Init(void);
 
     // address=[0x131cb50]
-    void  Load(class IS4Chunk & a2);
+    void  Load(class IS4Chunk & rChunk);
 
     // address=[0x131cc40]
     void  Save(class IS4Chunk & a2);
 
     // address=[0x131ed70]
-    void  SetFlags(int a2);
+    void  SetFlags(int _iFlags);
+
+    // Type information members
+public:
+    int m_iDifficultyLevel;
+    int m_iFlags;
+    CAIPlayerScriptVars::SDifficultyVars * m_pActiveVars;
+    CAIPlayerScriptVars::SDifficultyVars[4] m_vVars;
 
 };
 

@@ -1,3 +1,4 @@
+#if FALSE
 #include "CAIScripting.h"
 
 // Definitions for class CAIScripting
@@ -9,7 +10,9 @@ void  CAIScripting::Init(void) {
   int lua_gAI; // eax
   CLua *ScriptEnv; // [esp+8h] [ebp-14h]
   int lua_gAITable; // [esp+10h] [ebp-Ch]
-  char **i; // [esp+14h] [ebp-8h] MAPDST
+  SLuaDefault *i; // [esp+14h] [ebp-8h]
+  CLua::SFuncInfo *j; // [esp+18h] [ebp-4h]
+  CLua::SFuncInfo *k; // [esp+18h] [ebp-4h]
 
   CAIScripting::InitPlayerScriptVarsDefaultValues(this);
   ScriptEnv = CGameScriptManager::GetScriptEnv(g_pScriptMgr);
@@ -21,25 +24,25 @@ void  CAIScripting::Init(void) {
   lua_gAITable = lua_createtable();
   lua_pushobject(lua_gAITable);
   lua_rawsetglobal("AI");
-  for ( i = &off_3676548; *i; i += 2 )
+  for ( i = &s_vAILuaDefaults; i->m_spName; ++i )
   {
     lua_pushobject(lua_gAITable);
-    lua_pushstring(*i);
-    lua_pushnumber((double)(int)i[1]);
+    lua_pushstring(i->m_spName);
+    lua_pushnumber((double)i->m_iValue);
     lua_rawsettable();
   }
-  for ( i = &off_3676698; *i; i += 2 )
+  for ( j = &s_AIDebugFunctions; j->m_swpName; ++j )
   {
     lua_pushobject(lua_gAITable);
-    lua_pushstring(*i);
-    lua_pushcclosure((int)i[1], 0);
+    lua_pushstring(j->m_swpName);
+    lua_pushcclosure(j->m_fpFunction, 0);
     lua_rawsettable();
   }
-  for ( i = &off_3676700; *i; i += 2 )
+  for ( k = &s_AIFunctions; k->m_swpName; ++k )
   {
     lua_pushobject(lua_gAITable);
-    lua_pushstring(*i);
-    lua_pushcclosure((int)i[1], 0);
+    lua_pushstring(k->m_swpName);
+    lua_pushcclosure(k->m_fpFunction, 0);
     lua_rawsettable();
   }
   return lua_endblock();
@@ -63,35 +66,32 @@ void  CAIScripting::Save(class IS4Chunk & a2) {
 
 
 // address=[0x131db40]
-// Decompiled from unsigned int __thiscall CAIScripting::Adler32(CAIScripting *this, unsigned int a2)
+// Decompiled from int __thiscall CAIScripting::Adler32(CAIScripting *this, unsigned int a2)
 unsigned int  CAIScripting::Adler32(unsigned int a2) {
   
   double v2; // st7
-  _BYTE v4[28]; // [esp+14h] [ebp-4Ch] BYREF
-  _BYTE v5[24]; // [esp+30h] [ebp-30h] BYREF
-  unsigned int v6; // [esp+48h] [ebp-18h]
-  unsigned int v7; // [esp+4Ch] [ebp-14h]
-  CAIScripting *v8; // [esp+50h] [ebp-10h]
-  int v9; // [esp+5Ch] [ebp-4h]
+  CS4MemChunk v4; // [esp+14h] [ebp-4Ch] BYREF
+  int v5; // [esp+48h] [ebp-18h]
+  int v6; // [esp+4Ch] [ebp-14h]
+  int v8; // [esp+5Ch] [ebp-4h]
 
-  v8 = this;
-  CPerformanceCounter::CPerformanceCounter((CPerformanceCounter *)v5);
-  CPerformanceCounter::Start((CPerformanceCounter *)v5);
-  CS4MemChunk::CS4MemChunk((CS4MemChunk *)v4);
-  v9 = 0;
-  CS4MemChunk::InitSaveCalcSize((CS4MemChunk *)v4);
-  (*(void (__thiscall **)(CAIScripting *, _BYTE *))(*(_DWORD *)v8 + 8))(v8, v4);
-  CS4MemChunk::InitSaveData((CS4MemChunk *)v4, 1);
-  (*(void (__thiscall **)(CAIScripting *, _BYTE *))(*(_DWORD *)v8 + 8))(v8, v4);
-  v7 = CS4MemChunk::Adler32((CS4MemChunk *)v4, a2);
-  CS4MemChunk::Done((CS4MemChunk *)v4);
-  CPerformanceCounter::Measure((CPerformanceCounter *)v5);
-  v2 = CPerformanceCounter::TimeMs((CPerformanceCounter *)v5);
+  CPerformanceCounter::CPerformanceCounter((CPerformanceCounter *)&v4.m_pMapFile);
+  CPerformanceCounter::Start((LARGE_INTEGER *)&v4.m_pMapFile);
+  CS4MemChunk::CS4MemChunk(&v4);
+  v8 = 0;
+  CS4MemChunk::InitSaveCalcSize(&v4);
+  this->Save(this, &v4);
+  CS4MemChunk::InitSaveData(&v4, 1);
+  this->Save(this, &v4);
+  v6 = CS4MemChunk::Adler32(&v4, a2);
+  CS4MemChunk::Done(&v4);
+  CPerformanceCounter::Measure((LARGE_INTEGER *)&v4.m_pMapFile);
+  v2 = CPerformanceCounter::TimeMs((CPerformanceCounter *)&v4.m_pMapFile);
   BBSupportTracePrintF(0, "CAIScripting::Adler32(): %.3f ms", v2);
-  v6 = v7;
-  v9 = -1;
-  CS4MemChunk::~CS4MemChunk((CS4MemChunk *)v4);
-  return v6;
+  v5 = v6;
+  v8 = -1;
+  CS4MemChunk::~CS4MemChunk(&v4);
+  return v5;
 }
 
 
@@ -99,8 +99,8 @@ unsigned int  CAIScripting::Adler32(unsigned int a2) {
 // Decompiled from CAIScripting *__thiscall CAIScripting::CAIScripting(CAIScripting *this)
  CAIScripting::CAIScripting(void) {
   
-  IAIScripting::IAIScripting(this);
-  *(_DWORD *)this = &CAIScripting::_vftable_;
+  IAIScripting::IAIScripting((IAIScripting *)this);
+  this->__vftable = (CAIScripting_vtbl *)&CAIScripting::_vftable_;
   return this;
 }
 
@@ -110,49 +110,50 @@ unsigned int  CAIScripting::Adler32(unsigned int a2) {
 void  CAIScripting::InitPlayerScriptVarsDefaultValues(void) {
   
   int result; // eax
-  _DWORD *v2; // eax
-  _DWORD *v3; // eax
-  _DWORD *v4; // eax
-  void *v5; // [esp-8h] [ebp-14h]
-  void *v6; // [esp-8h] [ebp-14h]
-  void *v7; // [esp-8h] [ebp-14h]
-  void *v8; // [esp-4h] [ebp-10h]
-  void *v9; // [esp-4h] [ebp-10h]
-  void *v10; // [esp-4h] [ebp-10h]
-  void **v11; // [esp+4h] [ebp-8h]
+  int *v2; // eax
+  int *v3; // eax
+  int *v4; // eax
+  int m_iU0; // [esp-8h] [ebp-14h]
+  int v6; // [esp-8h] [ebp-14h]
+  int v7; // [esp-8h] [ebp-14h]
+  int m_iU1; // [esp-4h] [ebp-10h]
+  int v9; // [esp-4h] [ebp-10h]
+  int v10; // [esp-4h] [ebp-10h]
+  SPlayerScriptVar *v11; // [esp+4h] [ebp-8h]
   int i; // [esp+8h] [ebp-4h]
 
   result = 0;
   for ( i = 0; i <= 22; ++i )
   {
-    v11 = (void **)(&off_3676210 + 3 * i);
-    if ( *v11 )
+    v11 = &stru_3676210[i];
+    if ( v11->m_pConfig )
     {
-      unk_3ECC7C8[i] = 0;
-      v8 = v11[2];
-      v5 = v11[1];
-      v2 = (_DWORD *)TStaticConfigIntArrayBase<3>::operator[](*v11, 0);
-      unk_3ECC7C8[i + 23] = sub_131CE10(*v2, v5, v8);
-      v9 = v11[2];
-      v6 = v11[1];
-      v3 = (_DWORD *)TStaticConfigIntArrayBase<3>::operator[](*v11, 1);
-      unk_3ECC7C8[i + 46] = sub_131CE10(*v3, v6, v9);
-      v10 = v11[2];
-      v7 = v11[1];
-      v4 = (_DWORD *)TStaticConfigIntArrayBase<3>::operator[](*v11, 2);
-      result = sub_131CE10(*v4, v7, v10);
-      unk_3ECC7C8[i + 69] = result;
+      s_iDefaultScriptVars[0][i] = 0;
+      m_iU1 = v11->m_iU1;
+      m_iU0 = v11->m_iU0;
+      v2 = (int *)TStaticConfigIntArrayBase<3>::operator[](v11->m_pConfig, 0);
+      s_iDefaultScriptVars[1][i] = minmax_0(*v2, m_iU0, m_iU1);
+      v9 = v11->m_iU1;
+      v6 = v11->m_iU0;
+      v3 = (int *)TStaticConfigIntArrayBase<3>::operator[](v11->m_pConfig, 1);
+      s_iDefaultScriptVars[2][i] = minmax_0(*v3, v6, v9);
+      v10 = v11->m_iU1;
+      v7 = v11->m_iU0;
+      v4 = (int *)TStaticConfigIntArrayBase<3>::operator[](v11->m_pConfig, 2);
+      result = minmax_0(*v4, v7, v10);
+      s_iDefaultScriptVars[3][i] = result;
     }
     else
     {
-      unk_3ECC7C8[i] = 0;
-      unk_3ECC7C8[i + 23] = 0;
-      unk_3ECC7C8[i + 46] = 0;
+      s_iDefaultScriptVars[0][i] = 0;
+      s_iDefaultScriptVars[1][i] = 0;
+      s_iDefaultScriptVars[2][i] = 0;
       result = 92;
-      unk_3ECC7C8[i + 69] = 0;
+      s_iDefaultScriptVars[3][i] = 0;
     }
   }
   return result;
 }
 
 
+#endif // Already implemented
