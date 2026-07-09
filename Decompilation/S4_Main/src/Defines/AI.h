@@ -1,6 +1,16 @@
 #ifndef AI_H
 #define AI_H
 
+enum T_AI_PLAYER_SCRIPT_VAR_INDEX {
+    AI_PLAYER_SCRIPT_VAR_UNKNOWN = -1,
+    AI_PLAYER_SCRIPT_VAR_LAST = 22
+};
+
+enum T_AI_DIFFICULTY_LEVEL {
+
+    AI_DIFFICULTY_LEVEL_LAST = 3,
+};
+
 enum T_AI_TASK_FORCE_CMD {
     T_AI_TASK_FORCE_CMD_UNKNOWN_0,
     T_AI_TASK_FORCE_CMD_UNKNOWN_1,
@@ -24,34 +34,34 @@ enum T_AI_TASK_FORCE_STATUS {
 };
 
 enum T_AI_TASK_FORCE_TYPE {
-    AI_TASK_FORCE_TYPE_NONE           = 0,
-    AI_TASK_FORCE_TYPE_RESERVOIR      = 1,
-    AI_TASK_FORCE_TYPE_UNKNOWN_2      = 2, // probably SWORDMAN according to WARRIOR_TYPE
-    AI_TASK_FORCE_TYPE_UNKNOWN_3      = 3, // probably BOWMAN according to WARRIOR_TYPE
-    AI_TASK_FORCE_TYPE_UNKNOWN_4      = 4, // probably FIGHTER_UNIQUE according to WARRIOR_TYPE
-    AI_TASK_FORCE_TYPE_UNKNOWN_5      = 5, // probably SQUAD_LEADER according to WARRIOR_TYPE
-    AI_TASK_FORCE_TYPE_UNKNOWN_6      = 6, // probably PRIEST according to WARRIOR_TYPE
-    AI_TASK_FORCE_TYPE_UNKNOWN_7      = 7, // probably MISC_UNIT according to WARRIOR_TYPE
-    AI_TASK_FORCE_TYPE_PRIESTS        = 8,
-    AI_TASK_FORCE_TYPE_WARMACHINES    = 9,
-    AI_TASK_FORCE_TYPE_WARSHIPS       = 10,
+    AI_TASK_FORCE_TYPE_NONE = 0,
+    AI_TASK_FORCE_TYPE_RESERVOIR = 1,
+    AI_TASK_FORCE_TYPE_UNKNOWN_2 = 2, // probably SWORDMAN according to WARRIOR_TYPE
+    AI_TASK_FORCE_TYPE_UNKNOWN_3 = 3, // probably BOWMAN according to WARRIOR_TYPE
+    AI_TASK_FORCE_TYPE_UNKNOWN_4 = 4, // probably FIGHTER_UNIQUE according to WARRIOR_TYPE
+    AI_TASK_FORCE_TYPE_UNKNOWN_5 = 5, // probably SQUAD_LEADER according to WARRIOR_TYPE
+    AI_TASK_FORCE_TYPE_UNKNOWN_6 = 6, // probably PRIEST according to WARRIOR_TYPE
+    AI_TASK_FORCE_TYPE_UNKNOWN_7 = 7, // probably MISC_UNIT according to WARRIOR_TYPE
+    AI_TASK_FORCE_TYPE_PRIESTS = 8,
+    AI_TASK_FORCE_TYPE_WARMACHINES = 9,
+    AI_TASK_FORCE_TYPE_WARSHIPS = 10,
     AI_TASK_FORCE_TYPE_DARK_GARDENERS = 11,
-    AI_TASK_FORCE_TYPE_SHAMANS        = 12,
-    AI_TASK_FORCE_TYPE_MANAKOPTERS    = 13
+    AI_TASK_FORCE_TYPE_SHAMANS = 12,
+    AI_TASK_FORCE_TYPE_MANAKOPTERS = 13
 };
 
 enum T_AI_WARRIOR_TYPE {
-    AI_WARRIOR_TYPE_NONE           = 0,
-    AI_WARRIOR_TYPE_SWORDMAN       = 2,
-    AI_WARRIOR_TYPE_BOWMAN         = 3,
+    AI_WARRIOR_TYPE_NONE = 0,
+    AI_WARRIOR_TYPE_SWORDMAN = 2,
+    AI_WARRIOR_TYPE_BOWMAN = 3,
     AI_WARRIOR_TYPE_FIGHTER_UNIQUE = 4,
-    AI_WARRIOR_TYPE_SQUAD_LEADER   = 5,
-    AI_WARRIOR_TYPE_PRIEST         = 6,
-    AI_WARRIOR_TYPE_MISC_UNIT      = 7,
-    AI_WARRIOR_TYPE_VEHICLE_MISC   = 9,
-    AI_WARRIOR_TYPE_WARSHIP        = 10,
+    AI_WARRIOR_TYPE_SQUAD_LEADER = 5,
+    AI_WARRIOR_TYPE_PRIEST = 6,
+    AI_WARRIOR_TYPE_MISC_UNIT = 7,
+    AI_WARRIOR_TYPE_VEHICLE_MISC = 9,
+    AI_WARRIOR_TYPE_WARSHIP = 10,
     AI_WARRIOR_TYPE_TOWER_BUILDING = 12,
-    AI_WARRIOR_TYPE_LAST           = 14,
+    AI_WARRIOR_TYPE_LAST = 14,
 };
 
 constexpr int AI_TASK_FORCE_FLAG_OWNER_ID_MASK = 0xF;
@@ -60,24 +70,24 @@ constexpr int AI_TASK_FORCE_FLAG_OWNER_ID_MASK = 0xF;
 static_assert(AI_WARRIOR_TYPE_SOLDIER_MASK == 60); // See e.g. in 0x15df900, where we select all
 
 enum T_AI_TASK_FORCE_CLASS {
-    AI_TASK_FORCE_CLASS_NONE        = 0,
-    AI_TASK_FORCE_CLASS_RESERVOIR   = 1,
-    AI_TASK_FORCE_CLASS_SQUAD       = 2,
-    AI_TASK_FORCE_CLASS_PRIESTS     = 3,
+    AI_TASK_FORCE_CLASS_NONE = 0,
+    AI_TASK_FORCE_CLASS_RESERVOIR = 1,
+    AI_TASK_FORCE_CLASS_SQUAD = 2,
+    AI_TASK_FORCE_CLASS_PRIESTS = 3,
     AI_TASK_FORCE_CLASS_WARMACHINES = 4,
-    AI_TASK_FORCE_CLASS_WARSHIP     = 5,
-    AI_TASK_FORCE_CLASS_GROUP       = 6, // just a guess, but CTaskForceEx checks this in a Group call
-    AI_TASK_FORCE_CLASS_SHAMANS     = 7,
+    AI_TASK_FORCE_CLASS_WARSHIP = 5,
+    AI_TASK_FORCE_CLASS_GROUP = 6, // just a guess, but CTaskForceEx checks this in a Group call
+    AI_TASK_FORCE_CLASS_SHAMANS = 7,
     AI_TASK_FORCE_CLASS_MANAKOPTERS = 8,
-    AI_TASK_FORCE_CLASS_MAX         = 9,
+    AI_TASK_FORCE_CLASS_MAX = 9,
 };
 
 enum T_RESULT {
-    RESULT_INVALID   = 0,
-    RESULT_FAILED    = 1,
-    RESULT_UNKNOWN_2 = 2, //As in, I dont know what the name is
-    RESULT_ADDED     = 3,
-    RESULT_REMOVED   = 4, //Just a guess to be added and removed - seems to be used in CAITaskForceSquard mostly in regards to that semantic
+    RESULT_INVALID = 0,
+    RESULT_FAILED = 1,
+    RESULT_UNKNOWN_2 = 2, // As in, I dont know what the name is
+    RESULT_ADDED = 3,
+    RESULT_REMOVED = 4, // Just a guess to be added and removed - seems to be used in CAITaskForceSquard mostly in regards to that semantic
 };
 
 enum T_AI_ENTITY_INFO_EX_CLASS {
@@ -85,4 +95,4 @@ enum T_AI_ENTITY_INFO_EX_CLASS {
     AI_ENTITY_INFO_EX_CLASS_MAX,
 };
 
-#endif //AI_H
+#endif // AI_H
