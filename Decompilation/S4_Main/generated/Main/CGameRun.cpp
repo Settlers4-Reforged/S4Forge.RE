@@ -1135,12 +1135,9 @@ bool __cdecl CGameRun::LoadEditorMap(std::wstring & a1, bool a2) {
 
   v10 = 0;
   v9 = 0;
-  if ( (*(unsigned __int8 (__thiscall **)(void *, std::wstring *, _DWORD))(*(_DWORD *)g_pRandomMaps + 32))(
-         g_pRandomMaps,
-         a1,
-         0) )
+  if ( g_pRandomMaps->IsRandomMapFileName(g_pRandomMaps, a1, 0) )
   {
-    v9 = (S4::CMapFile *)(*(int (__thiscall **)(void *))(*(_DWORD *)g_pRandomMaps + 12))(g_pRandomMaps);
+    v9 = g_pRandomMaps->GetRandomMapFile(g_pRandomMaps);
   }
   else
   {
@@ -1160,7 +1157,7 @@ bool __cdecl CGameRun::LoadEditorMap(std::wstring & a1, bool a2) {
   CWorldManager::LoadGfxData(v9, MAP_CHUNK_GFX_ELEMENTS, v2->m_iHeight);
   CWarMap::Init();
   CBuildingMgr::LoadBuildingData((CBuildingMgr *)g_cBuildingMgr, v9, MAP_CHUNK_BUILDINGS);
-  CSettlerMgr::LoadSettlerData((CSettlerMgr *)g_cSettlerMgr, v9, MAP_CHUNK_SETTLERS);
+  CSettlerMgr::LoadSettlerData(&g_cSettlerMgr, v9, MAP_CHUNK_SETTLERS);
   CPileMgr::LoadPileData((CPileMgr *)&g_cPileMgr, v9, MAP_CHUNK_PILES);
   Size = 0;
   Str = (char *)S4::CMapFile::LoadChunk(v9, MAP_CHUNK_SCRIPT, 0, (int *)&Size, 0);

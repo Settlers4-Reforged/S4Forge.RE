@@ -89,7 +89,6 @@ public:
     const void * m_pCurrent;
     void (__fastcall *)(CS4MemChunk *this, const void *a2, unsigned int a3) m_pSaveFunc;
     void (__fastcall *)(CS4MemChunk *this, unsigned int a2) m_pSaveUnsigned32;
-    S4::CMapFile * m_pMapFile;
 
 };
 

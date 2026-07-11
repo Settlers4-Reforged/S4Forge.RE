@@ -1,3 +1,4 @@
+#if FALSE
 #include "CSettlerStatisticInfo.h"
 
 // Definitions for class CSettlerStatisticInfo
@@ -7,7 +8,7 @@
  CSettlerStatisticInfo::CSettlerStatisticInfo(void) {
   
   CInfoExchange::CInfoExchange(this);
-  *(_DWORD *)this = &CSettlerStatisticInfo::_vftable_;
+  this->__vftable = (CInfoExchange_vtbl *)&CSettlerStatisticInfo::_vftable_;
   return this;
 }
 
@@ -20,3 +21,4 @@ unsigned int  CSettlerStatisticInfo::Size(void)const {
 }
 
 
+#endif // Already implemented

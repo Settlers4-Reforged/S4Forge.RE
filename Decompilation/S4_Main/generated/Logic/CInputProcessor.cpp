@@ -4,7 +4,7 @@
 // Definitions for class CInputProcessor
 
 // address=[0x1439c90]
-// Decompiled from void *CInputProcessor::Selection()
+// Decompiled from std::vector *CInputProcessor::Selection()
 class std::vector<unsigned short,class std::allocator<unsigned short> > const & __cdecl CInputProcessor::Selection(void) {
   
   return &CInputProcessor::m_vSelection;
@@ -1587,11 +1587,7 @@ bool  CInputProcessor::SelectSpellDest(class CEvn_Logic * a2) {
 bool  CInputProcessor::InitSettlerAmount(class CEvn_Logic * a2) {
   
   CSettlerMgr::FillSettlerAmount(&g_cSettlerStatisticInfo, 0, this->m_bIsLocal);
-  CLogic::SetFillDialogInfos(
-    g_pLogic,
-    (void (__cdecl *)(struct CInfoExchange *, bool, bool))CSettlerMgr::FillSettlerAmount,
-    (struct CInfoExchange *)&g_cSettlerStatisticInfo,
-    this->m_bIsLocal);
+  CLogic::SetFillDialogInfos(g_pLogic, CSettlerMgr::FillSettlerAmount, &g_cSettlerStatisticInfo, this->m_bIsLocal);
   return 0;
 }
 
@@ -1614,11 +1610,11 @@ bool  CInputProcessor::InitFreeCarrier(class CEvn_Logic * a2) {
 // Decompiled from char __thiscall CInputProcessor::InitSettlerProduction(CInputProcessor *this, struct CEvn_Logic *a2)
 bool  CInputProcessor::InitSettlerProduction(class CEvn_Logic * a2) {
   
-  CSettlerMgr::FillSpecialistProduction(&g_cSettlerProductionInfo, 0);
+  CSettlerMgr::FillSpecialistProduction(&g_cSettlerProductionInfo, 0, this->m_bIsLocal);
   CLogic::SetFillDialogInfos(
     g_pLogic,
     (void (__cdecl *)(struct CInfoExchange *, bool, bool))CSettlerMgr::FillSpecialistProduction,
-    (struct CInfoExchange *)&g_cSettlerProductionInfo,
+    &g_cSettlerProductionInfo,
     this->m_bIsLocal);
   return 0;
 }
@@ -2904,8 +2900,8 @@ bool  CInputProcessor::InitMagicSideBar(class CEvn_Logic * a2) {
 // Decompiled from char __thiscall CInputProcessor::InitGroupSideBar(CInputProcessor *this, struct CEvn_Logic *a2)
 bool  CInputProcessor::InitGroupSideBar(class CEvn_Logic * a2) {
   
-  IGroupMgr::FillGroupSideBar(&g_cGroupSideBarInfo, 0, 0);
-  CLogic::SetFillSideBarInfos(g_pLogic, IGroupMgr::FillGroupSideBar, &g_cGroupSideBarInfo, 0);
+  IGroupMgr::FillGroupSideBar(&unk_3F1E75C, 0, 0);
+  CLogic::SetFillSideBarInfos(g_pLogic, IGroupMgr::FillGroupSideBar, &unk_3F1E75C, 0);
   return 0;
 }
 
@@ -4234,7 +4230,7 @@ void  CInputProcessor::RequestDialog(void) {
   unsigned __int16 *v6; // eax
   CBuilding *v7; // [esp+Ch] [ebp-4Ch]
   int v8; // [esp+10h] [ebp-48h]
-  int v9; // [esp+14h] [ebp-44h]
+  ISettlerRole *v9; // [esp+14h] [ebp-44h]
   IEntity *v10; // [esp+18h] [ebp-40h]
   int v11; // [esp+1Ch] [ebp-3Ch]
   CSettler *v12; // [esp+20h] [ebp-38h]
@@ -4257,7 +4253,7 @@ void  CInputProcessor::RequestDialog(void) {
     {
       case SETTLER_OBJ:
         v4 = std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
-        v12 = (CSettler *)CSettlerMgr::operator[](*v4);
+        v12 = CSettlerMgr::operator[](*v4);
         if ( IEntity::WarriorType(v12) == AI_WARRIOR_TYPE_MISC_UNIT )
         {
           CSettlerMgr::FillSpecialistMenu(&g_cSpecialistsInfo, 0, this->m_bIsLocal);
@@ -4266,16 +4262,12 @@ void  CInputProcessor::RequestDialog(void) {
         else if ( IEntity::Type(v12) == 60 )
         {
           v9 = CSettler::Role(v12);
-          (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)v9 + 132))(v9, 0);
+          ((void (__thiscall *)(ISettlerRole *, _DWORD))v9->__vftable[1].ClassID)(v9, 0);
         }
         else
         {
-          CSettlerMgr::FillSoldierMenu((struct CInfoExchange *)&g_cSoldierInfo, 0, this->m_bIsLocal);
-          CLogic::SetFillDialogInfos(
-            g_pLogic,
-            CSettlerMgr::FillSoldierMenu,
-            (struct CInfoExchange *)&g_cSoldierInfo,
-            this->m_bIsLocal);
+          CSettlerMgr::FillSoldierMenu(&g_cSoldierInfo, 0, this->m_bIsLocal);
+          CLogic::SetFillDialogInfos(g_pLogic, CSettlerMgr::FillSoldierMenu, &g_cSoldierInfo, this->m_bIsLocal);
         }
         goto CInputProcessor__RequestDialog___def_185D591;
       case SHIP_OBJ:
@@ -4307,11 +4299,11 @@ CInputProcessor__RequestDialog___def_185D591:
         if ( v8 == 4 )
         {
 LABEL_25:
-          CVehicleMgr::FillVehicleGroupMenu((struct CInfoExchange *)&g_cVehicleInfo, 0);
+          CVehicleMgr::FillVehicleGroupMenu(&g_cVehicleInfo, 0);
           CLogic::SetFillDialogInfos(
             g_pLogic,
             (void (__cdecl *)(struct CInfoExchange *, bool, bool))CVehicleMgr::FillVehicleGroupMenu,
-            (struct CInfoExchange *)&g_cVehicleInfo,
+            &g_cVehicleInfo,
             this->m_bIsLocal);
         }
         else if ( v8 == 5 )

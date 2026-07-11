@@ -107,8 +107,8 @@ void  CHJBMgr::ProcessHJBAcknowledgement(int a2, int a3) {
 // Decompiled from CHJBMgr *__thiscall CHJBMgr::CHJBMgr(CHJBMgr *this)
  CHJBMgr::CHJBMgr(void) {
   
-  IHJBMgr::IHJBMgr(this);
-  *(_DWORD *)this = &CHJBMgr::_vftable_;
+  IHJBMgr::IHJBMgr((IHJBMgr *)this);
+  this->__vftable = (CHJBMgr_vtbl *)&CHJBMgr::_vftable_;
   IHJBMgr::m_iHJBPlayerId = 0;
   IHJBMgr::m_iHJBEntityId = -1;
   CHJBMgr::ClearRequest(this);

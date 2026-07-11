@@ -71,27 +71,28 @@ unsigned int  CAIScripting::Adler32(unsigned int a2) {
   
   double v2; // st7
   CS4MemChunk v4; // [esp+14h] [ebp-4Ch] BYREF
-  int v5; // [esp+48h] [ebp-18h]
-  int v6; // [esp+4Ch] [ebp-14h]
-  int v8; // [esp+5Ch] [ebp-4h]
+  CPerformanceCounter v5; // [esp+30h] [ebp-30h] BYREF
+  int v6; // [esp+48h] [ebp-18h]
+  int v7; // [esp+4Ch] [ebp-14h]
+  int v9; // [esp+5Ch] [ebp-4h]
 
-  CPerformanceCounter::CPerformanceCounter((CPerformanceCounter *)&v4.m_pMapFile);
-  CPerformanceCounter::Start((LARGE_INTEGER *)&v4.m_pMapFile);
+  CPerformanceCounter::CPerformanceCounter(&v5);
+  CPerformanceCounter::Start(&v5);
   CS4MemChunk::CS4MemChunk(&v4);
-  v8 = 0;
+  v9 = 0;
   CS4MemChunk::InitSaveCalcSize(&v4);
   this->Save(this, &v4);
   CS4MemChunk::InitSaveData(&v4, 1);
   this->Save(this, &v4);
-  v6 = CS4MemChunk::Adler32(&v4, a2);
+  v7 = CS4MemChunk::Adler32(&v4, a2);
   CS4MemChunk::Done(&v4);
-  CPerformanceCounter::Measure((LARGE_INTEGER *)&v4.m_pMapFile);
-  v2 = CPerformanceCounter::TimeMs((CPerformanceCounter *)&v4.m_pMapFile);
+  CPerformanceCounter::Measure(&v5.sStartCounter);
+  v2 = CPerformanceCounter::TimeMs(&v5);
   BBSupportTracePrintF(0, "CAIScripting::Adler32(): %.3f ms", v2);
-  v5 = v6;
-  v8 = -1;
+  v6 = v7;
+  v9 = -1;
   CS4MemChunk::~CS4MemChunk(&v4);
-  return v5;
+  return v6;
 }
 
 
@@ -106,53 +107,48 @@ unsigned int  CAIScripting::Adler32(unsigned int a2) {
 
 
 // address=[0x131dc20]
-// Decompiled from int __thiscall CAIScripting::InitPlayerScriptVarsDefaultValues(CAIScripting *this)
+// Decompiled from void __thiscall CAIScripting::InitPlayerScriptVarsDefaultValues(CAIScripting *this)
 void  CAIScripting::InitPlayerScriptVarsDefaultValues(void) {
   
-  int result; // eax
+  int *v1; // eax
   int *v2; // eax
   int *v3; // eax
-  int *v4; // eax
-  int m_iU0; // [esp-8h] [ebp-14h]
+  int m_iMin; // [esp-8h] [ebp-14h]
+  int v5; // [esp-8h] [ebp-14h]
   int v6; // [esp-8h] [ebp-14h]
-  int v7; // [esp-8h] [ebp-14h]
-  int m_iU1; // [esp-4h] [ebp-10h]
+  int m_iMax; // [esp-4h] [ebp-10h]
+  int v8; // [esp-4h] [ebp-10h]
   int v9; // [esp-4h] [ebp-10h]
-  int v10; // [esp-4h] [ebp-10h]
-  SPlayerScriptVar *v11; // [esp+4h] [ebp-8h]
+  SPlayerScriptVar *v10; // [esp+4h] [ebp-8h]
   int i; // [esp+8h] [ebp-4h]
 
-  result = 0;
   for ( i = 0; i <= 22; ++i )
   {
-    v11 = &stru_3676210[i];
-    if ( v11->m_pConfig )
+    v10 = &s_sDefaultScriptVars[i];
+    if ( v10->m_pConfig )
     {
       s_iDefaultScriptVars[0][i] = 0;
-      m_iU1 = v11->m_iU1;
-      m_iU0 = v11->m_iU0;
-      v2 = (int *)TStaticConfigIntArrayBase<3>::operator[](v11->m_pConfig, 0);
-      s_iDefaultScriptVars[1][i] = minmax_0(*v2, m_iU0, m_iU1);
-      v9 = v11->m_iU1;
-      v6 = v11->m_iU0;
-      v3 = (int *)TStaticConfigIntArrayBase<3>::operator[](v11->m_pConfig, 1);
-      s_iDefaultScriptVars[2][i] = minmax_0(*v3, v6, v9);
-      v10 = v11->m_iU1;
-      v7 = v11->m_iU0;
-      v4 = (int *)TStaticConfigIntArrayBase<3>::operator[](v11->m_pConfig, 2);
-      result = minmax_0(*v4, v7, v10);
-      s_iDefaultScriptVars[3][i] = result;
+      m_iMax = v10->m_iMax;
+      m_iMin = v10->m_iMin;
+      v1 = (int *)TStaticConfigIntArrayBase<3>::operator[](v10->m_pConfig, 0);
+      s_iDefaultScriptVars[1][i] = minmax_0(*v1, m_iMin, m_iMax);
+      v8 = v10->m_iMax;
+      v5 = v10->m_iMin;
+      v2 = (int *)TStaticConfigIntArrayBase<3>::operator[](v10->m_pConfig, 1);
+      s_iDefaultScriptVars[2][i] = minmax_0(*v2, v5, v8);
+      v9 = v10->m_iMax;
+      v6 = v10->m_iMin;
+      v3 = (int *)TStaticConfigIntArrayBase<3>::operator[](v10->m_pConfig, 2);
+      s_iDefaultScriptVars[3][i] = minmax_0(*v3, v6, v9);
     }
     else
     {
       s_iDefaultScriptVars[0][i] = 0;
       s_iDefaultScriptVars[1][i] = 0;
       s_iDefaultScriptVars[2][i] = 0;
-      result = 92;
       s_iDefaultScriptVars[3][i] = 0;
     }
   }
-  return result;
 }
 
 

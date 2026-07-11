@@ -21,6 +21,12 @@ protected:
     // address=[0x1311ca0]
     void  DefineRegion(int a2, int a3, int a4);
 
+    // Type information members
+public:
+    _DWORD dword0;
+    _DWORD dword4;
+    _DWORD m_iUses;
+
 };
 
 

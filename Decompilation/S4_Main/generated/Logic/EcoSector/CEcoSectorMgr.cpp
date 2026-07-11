@@ -106,7 +106,7 @@ class CEcoSector *  CEcoSectorMgr::EntryPtr(int a2) {
 
 
 // address=[0x1346370]
-// Decompiled from int __thiscall CEcoSectorMgr::operator[](_DWORD *this, int a2)
+// Decompiled from struct CEcoSector *__thiscall CEcoSectorMgr::operator[](_DWORD *this, int a2)
 class CEcoSector &  CEcoSectorMgr::operator[](int a2) {
   
   if ( a2 <= 0
@@ -145,7 +145,7 @@ class CEcoSector &  CEcoSectorMgr::operator[](int a2) {
   {
     __debugbreak();
   }
-  return this[a2 + 5];
+  return (struct CEcoSector *)this[a2 + 5];
 }
 
 
@@ -311,15 +311,15 @@ int  CEcoSectorMgr::GetNrOfInitialFreeBeds(int a2) {
 
 
 // address=[0x1441f80]
-// Decompiled from int __thiscall CEcoSectorMgr::GetNrOfCurrentTotalBeds(CEcoSectorMgr *this, int a2)
+// Decompiled from DWORD __thiscall CEcoSectorMgr::GetNrOfCurrentTotalBeds(CEcoSectorMgr *this, int a2)
 int  CEcoSectorMgr::GetNrOfCurrentTotalBeds(int a2) {
   
   int NumberOfBuildings; // esi
-  int v3; // esi
+  DWORD v3; // esi
   int v4; // edi
-  int v5; // esi
+  DWORD v5; // esi
   int v6; // edi
-  int v9; // [esp+10h] [ebp-4h]
+  DWORD v9; // [esp+10h] [ebp-4h]
 
   if ( (a2 < 1 || a2 > 8)
     && BBSupportDbgReport(
@@ -333,12 +333,16 @@ int  CEcoSectorMgr::GetNrOfCurrentTotalBeds(int a2) {
   if ( a2 < 1 || a2 > 8 )
     return 0;
   v9 = CPlayerManager::Race(a2);
-  NumberOfBuildings = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, a2, 40, 1u);
-  v3 = *(_DWORD *)(CBuildingInfoMgr::GetBuildingInfo(v9, 40) + 496) * NumberOfBuildings;
-  v4 = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, a2, 41, 1u);
-  v5 = *(_DWORD *)(CBuildingInfoMgr::GetBuildingInfo(v9, 41) + 496) * v4 + v3;
-  v6 = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, a2, 42, 1u);
-  return *((_DWORD *)this + a2 + 16390) + *(_DWORD *)(CBuildingInfoMgr::GetBuildingInfo(v9, 42) + 496) * v6 + v5;
+  NumberOfBuildings = CBuildingMgr::GetNumberOfBuildings(
+                        (CBuildingMgr *)g_cBuildingMgr,
+                        a2,
+                        BUILDING_RESIDENCESMALL,
+                        1u);
+  v3 = CBuildingInfoMgr::GetBuildingInfo(v9, 40)->m_iDummyValue * NumberOfBuildings;
+  v4 = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, a2, BUILDING_RESIDENCEMEDIUM, 1u);
+  v5 = CBuildingInfoMgr::GetBuildingInfo(v9, 41)->m_iDummyValue * v4 + v3;
+  v6 = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, a2, BUILDING_RESIDENCEBIG, 1u);
+  return *((_DWORD *)this + a2 + 16390) + CBuildingInfoMgr::GetBuildingInfo(v9, 42)->m_iDummyValue * v6 + v5;
 }
 
 

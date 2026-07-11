@@ -25,12 +25,12 @@ unsigned int  CS4MemChunk::Size(void)const {
   
   IS4Chunk::IS4Chunk(this);
   this->__vftable = (IS4Chunk_vtbl *)&CS4MemChunk::_vftable_;
-  this->m_tMode = 0;
+  this->m_tMode = CHUNK_MODE_NONE;
   this->m_uSize = 0;
   this->m_pData = 0;
   this->m_pCurrent = 0;
-  this->m_pSaveFunc = j_CS4MemChunk::SaveFuncNOP;
-  this->m_pSaveUnsigned32 = CS4MemChunk::SaveUnsigned32NOP;
+  this->m_pSaveFunc = (void (__fastcall *)(CS4MemChunk *, const void *, unsigned int))j_CS4MemChunk::SaveFuncNOP;
+  this->m_pSaveUnsigned32 = (void (__fastcall *)(CS4MemChunk *, unsigned int))CS4MemChunk::SaveUnsigned32NOP;
   return this;
 }
 

@@ -659,35 +659,34 @@ void  S4::CMapFile::SaveChunk(unsigned short a2, unsigned short a3, unsigned int
 
 
 // address=[0x13db990]
-// Decompiled from char __thiscall S4::CMapFile::LoadChunkObject(  S4::CMapFile *this,  unsigned __int16 a2,  unsigned __int16 a3,  struct IS4ChunkObject *a4,  int a5)
+// Decompiled from char __thiscall S4::CMapFile::LoadChunkObject(  S4::CMapFile *this,  T_S4_MAP_CHUNK a2,  unsigned __int16 a3,  struct IS4ChunkObject *a4,  int a5)
 bool  S4::CMapFile::LoadChunkObject(unsigned short a2, unsigned short a3, class IS4ChunkObject & a4, enum T_S4_MAP_CHUNK_STATUS a5) {
   
   CS4MemChunk v6; // [esp+4h] [ebp-48h] BYREF
-  int v7; // [esp+24h] [ebp-28h] BYREF
+  int a4a; // [esp+24h] [ebp-28h] BYREF
   int pExceptionObject; // [esp+28h] [ebp-24h] BYREF
   void *chunkData; // [esp+2Ch] [ebp-20h]
-  BOOL v10; // [esp+30h] [ebp-1Ch]
-  BOOL v11; // [esp+34h] [ebp-18h]
+  BOOL v11; // [esp+30h] [ebp-1Ch]
+  BOOL v12; // [esp+34h] [ebp-18h]
   int chunkSize; // [esp+38h] [ebp-14h] BYREF
-  char v13; // [esp+3Fh] [ebp-Dh]
-  int v14; // [esp+48h] [ebp-4h]
+  char v14; // [esp+3Fh] [ebp-Dh]
+  int v15; // [esp+48h] [ebp-4h]
 
-  v6.m_pMapFile = this;
-  v7 = 0;
+  a4a = 0;
   chunkSize = 0;
-  chunkData = S4::CMapFile::LoadChunk(this, a2, a3, &v7, (size_t *)&chunkSize);
-  v11 = chunkData != 0;
-  v10 = chunkSize > 0;
-  if ( v10 && v11 )
+  chunkData = S4::CMapFile::LoadChunk(this, a2, a3, &a4a, (size_t *)&chunkSize);
+  v12 = chunkData != 0;
+  v11 = chunkSize > 0;
+  if ( v11 && v12 )
   {
     CS4MemChunk::CS4MemChunk(&v6);
-    v14 = 0;
+    v15 = 0;
     CS4MemChunk::InitLoadData(&v6, chunkData, chunkSize);
     a4->Load(a4, &v6);
-    v13 = 1;
-    v14 = -1;
+    v14 = 1;
+    v15 = -1;
     CS4MemChunk::~CS4MemChunk(&v6);
-    return v13;
+    return v14;
   }
   else
   {
@@ -708,19 +707,20 @@ void  S4::CMapFile::SaveChunkObject(unsigned short a2, unsigned short a3, class 
   unsigned int iSize; // eax
   const void *pData; // [esp-Ch] [ebp-3Ch]
   CS4MemChunk v7; // [esp+4h] [ebp-2Ch] BYREF
-  int v8; // [esp+2Ch] [ebp-4h]
+  S4::CMapFile *v8; // [esp+20h] [ebp-10h]
+  int v9; // [esp+2Ch] [ebp-4h]
 
-  v7.m_pMapFile = this;
+  v8 = this;
   CS4MemChunk::CS4MemChunk(&v7);
-  v8 = 0;
+  v9 = 0;
   CS4MemChunk::InitSaveCalcSize(&v7);
   a4->Save(a4, &v7);
   CS4MemChunk::InitSaveData(&v7, 1);
   a4->Save(a4, &v7);
   pData = CS4MemChunk::Data(&v7);
   iSize = CS4MemChunk::Size(&v7);
-  S4::CMapFile::SaveChunk(v7.m_pMapFile, a2, a3, iSize, pData, a5);
-  v8 = -1;
+  S4::CMapFile::SaveChunk(v8, a2, a3, iSize, pData, a5);
+  v9 = -1;
   CS4MemChunk::~CS4MemChunk(&v7);
 }
 

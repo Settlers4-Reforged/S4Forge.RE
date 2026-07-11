@@ -10810,67 +10810,67 @@ bool __cdecl GuiDlgFiguresSubmenuProc(int a1, int a2, int a3) {
           CEvn_Logic::~CEvn_Logic(v20);
           break;
         case 0x2EBu:
-          dword_3F1E9E4 = 29;
-          dword_3F1EA08 = 1;
-          *(&dword_3F1EA08 + 2) = 2;
-          *(&dword_3F1EA08 + 4) = 3;
-          *(&dword_3F1EA08 + 6) = 4;
-          *(&dword_3F1EA08 + 8) = 6;
-          *(&dword_3F1EA08 + 10) = 12;
-          *(&dword_3F1EA08 + 12) = 14;
-          *(&dword_3F1EA08 + 14) = 5;
-          *(&dword_3F1EA08 + 16) = 13;
-          *(&dword_3F1EA08 + 18) = 15;
-          *(&dword_3F1EA08 + 20) = 8;
-          *(&dword_3F1EA08 + 22) = 7;
-          *(&dword_3F1EA08 + 24) = 11;
-          *(&dword_3F1EA08 + 26) = 18;
-          *(&dword_3F1EA08 + 28) = 9;
-          *(&dword_3F1EA08 + 30) = 16;
-          *(&dword_3F1EA08 + 32) = 17;
-          *(&dword_3F1EA08 + 34) = 10;
-          *(&dword_3F1EA08 + 36) = 19;
-          *(&dword_3F1EA08 + 38) = 23;
-          *(&dword_3F1EA08 + 40) = 56;
-          *(&dword_3F1EA08 + 42) = 20;
-          *(&dword_3F1EA08 + 50) = 0;
-          *(&dword_3F1EA08 + 52) = 50;
-          *(&dword_3F1EA08 + 54) = 49;
-          *(&dword_3F1EA08 + 56) = 48;
-          *(&dword_3F1EA08 + 58) = 47;
-          *(&dword_3F1EA08 + 60) = 46;
-          *(&dword_3F1EA08 + 62) = 29;
-          *(&dword_3F1EA08 + 64) = 32;
-          *(&dword_3F1EA08 + 68) = 44;
-          *(&dword_3F1EA08 + 70) = 45;
+          MEMORY[0x3F1E9E4] = 29;
+          MEMORY[0x3F1EA08] = 1;
+          *(&MEMORY[0x3F1EA08] + 2) = 2;
+          *(&MEMORY[0x3F1EA08] + 4) = 3;
+          *(&MEMORY[0x3F1EA08] + 6) = 4;
+          *(&MEMORY[0x3F1EA08] + 8) = 6;
+          *(&MEMORY[0x3F1EA08] + 10) = 12;
+          *(&MEMORY[0x3F1EA08] + 12) = 14;
+          *(&MEMORY[0x3F1EA08] + 14) = 5;
+          *(&MEMORY[0x3F1EA08] + 16) = 13;
+          *(&MEMORY[0x3F1EA08] + 18) = 15;
+          *(&MEMORY[0x3F1EA08] + 20) = 8;
+          *(&MEMORY[0x3F1EA08] + 22) = 7;
+          *(&MEMORY[0x3F1EA08] + 24) = 11;
+          *(&MEMORY[0x3F1EA08] + 26) = 18;
+          *(&MEMORY[0x3F1EA08] + 28) = 9;
+          *(&MEMORY[0x3F1EA08] + 30) = 16;
+          *(&MEMORY[0x3F1EA08] + 32) = 17;
+          *(&MEMORY[0x3F1EA08] + 34) = 10;
+          *(&MEMORY[0x3F1EA08] + 36) = 19;
+          *(&MEMORY[0x3F1EA08] + 38) = 23;
+          *(&MEMORY[0x3F1EA08] + 40) = 56;
+          *(&MEMORY[0x3F1EA08] + 42) = 20;
+          *(&MEMORY[0x3F1EA08] + 50) = 0;
+          *(&MEMORY[0x3F1EA08] + 52) = 50;
+          *(&MEMORY[0x3F1EA08] + 54) = 49;
+          *(&MEMORY[0x3F1EA08] + 56) = 48;
+          *(&MEMORY[0x3F1EA08] + 58) = 47;
+          *(&MEMORY[0x3F1EA08] + 60) = 46;
+          *(&MEMORY[0x3F1EA08] + 62) = 29;
+          *(&MEMORY[0x3F1EA08] + 64) = 32;
+          *(&MEMORY[0x3F1EA08] + 68) = 44;
+          *(&MEMORY[0x3F1EA08] + 70) = 45;
           LocalPlayerId = CPlayerManager::GetLocalPlayerId(v8);
           v7 = CPlayerManager::PlayerInfo(LocalPlayerId);
           v16 = CPlayerInfo::Race(v7);
           switch ( v16 )
           {
             case 1u:
-              *(&dword_3F1EA08 + 44) = 25;
-              *(&dword_3F1EA08 + 46) = 26;
-              *(&dword_3F1EA08 + 48) = 21;
-              *(&dword_3F1EA08 + 66) = 38;
+              *(&MEMORY[0x3F1EA08] + 44) = 25;
+              *(&MEMORY[0x3F1EA08] + 46) = 26;
+              *(&MEMORY[0x3F1EA08] + 48) = 21;
+              *(&MEMORY[0x3F1EA08] + 66) = 38;
               break;
             case 2u:
-              *(&dword_3F1EA08 + 44) = 27;
-              *(&dword_3F1EA08 + 46) = 28;
-              *(&dword_3F1EA08 + 48) = 22;
-              *(&dword_3F1EA08 + 66) = 41;
+              *(&MEMORY[0x3F1EA08] + 44) = 27;
+              *(&MEMORY[0x3F1EA08] + 46) = 28;
+              *(&MEMORY[0x3F1EA08] + 48) = 22;
+              *(&MEMORY[0x3F1EA08] + 66) = 41;
               break;
             case 4u:
-              *(&dword_3F1EA08 + 44) = 64;
-              *(&dword_3F1EA08 + 46) = 65;
-              *(&dword_3F1EA08 + 48) = 22;
-              *(&dword_3F1EA08 + 66) = 61;
+              *(&MEMORY[0x3F1EA08] + 44) = 64;
+              *(&MEMORY[0x3F1EA08] + 46) = 65;
+              *(&MEMORY[0x3F1EA08] + 48) = 22;
+              *(&MEMORY[0x3F1EA08] + 66) = 61;
               break;
             default:
-              *(&dword_3F1EA08 + 44) = 24;
-              *(&dword_3F1EA08 + 46) = 22;
-              *(&dword_3F1EA08 + 48) = 0;
-              *(&dword_3F1EA08 + 66) = 35;
+              *(&MEMORY[0x3F1EA08] + 44) = 24;
+              *(&MEMORY[0x3F1EA08] + 46) = 22;
+              *(&MEMORY[0x3F1EA08] + 48) = 0;
+              *(&MEMORY[0x3F1EA08] + 66) = 35;
               break;
           }
           PlayGuiSound(2);
@@ -12483,7 +12483,7 @@ void __cdecl UpdateGuiDlgGroup(void) {
   {
     for ( i = 0; i < 9; ++i )
     {
-      switch ( g_cGroupSideBarInfo.m_aGroupLevel[i] )
+      switch ( unk_3F1E75C.m_aGroupLevel[i] )
       {
         case 0u:
           IGuiEngine::SetControlVisibility(g_pGUIEngine, 55, dword_368B91C[i], 0);
@@ -29754,91 +29754,96 @@ void __cdecl SetAmountGuiDlgSettlerProductionMenu(int a1, int a2, int a3, int a4
 
 
 // address=[0x13c9680]
-// Decompiled from char UpdateGuiDlgSettlerProductionMenu()
+// Decompiled from void UpdateGuiDlgSettlerProductionMenu()
 void __cdecl UpdateGuiDlgSettlerProductionMenu(void) {
   
-  char result; // al
   int i; // [esp+4h] [ebp-8h]
 
-  IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 30, 1268, byte_3F1EBC4);
-  IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 30, 1269, byte_3F1EBC4);
-  IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 30, 1270, byte_3F1EBC4);
-  IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 30, 1271, byte_3F1EBC4);
-  IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 30, 1272, byte_3F1EBC4);
-  result = SetAmountGuiDlgSettlerProductionMenu(1262, dword_3F1EBC0, -1, 0, -1, 0, -1, 0);
+  IGuiEngine::EnableControl(g_pGUIEngine, 30, 1268, g_cSettlerProductionInfo.m_bInEcoSector);
+  IGuiEngine::EnableControl(g_pGUIEngine, 30, 1269, g_cSettlerProductionInfo.m_bInEcoSector);
+  IGuiEngine::EnableControl(g_pGUIEngine, 30, 1270, g_cSettlerProductionInfo.m_bInEcoSector);
+  IGuiEngine::EnableControl(g_pGUIEngine, 30, 1271, g_cSettlerProductionInfo.m_bInEcoSector);
+  IGuiEngine::EnableControl(g_pGUIEngine, 30, 1272, g_cSettlerProductionInfo.m_bInEcoSector);
+  SetAmountGuiDlgSettlerProductionMenu(1262, g_cSettlerProductionInfo.m_iFreeCarriers, -1, 0, -1, 0, -1, 0);
   for ( i = 0; i < 6; ++i )
   {
-    switch ( dword_3F1EB30[6 * i] )
+    switch ( g_cSettlerProductionInfo.m_vSpecialist[i].m_iType )
     {
       case '.':
         SetAmountGuiDlgSettlerProductionMenu(
           1260,
-          dword_3F1EB34[6 * i],
+          g_cSettlerProductionInfo.m_vSpecialist[i].m_iCount,
           1277,
-          dword_3F1EB38[6 * i],
+          g_cSettlerProductionInfo.m_vSpecialist[i].m_iWished,
           1282,
-          dword_3F1EB40[6 * i],
+          g_cSettlerProductionInfo.m_vSpecialist[i].m_iFreeGoods,
           -1,
           0);
-        if ( byte_3F1EB3C[24 * i] )
-          IGuiEngine::SetImages((void *)g_pGUIEngine, 30, 1266, 441, 0);
+        if ( g_cSettlerProductionInfo.m_vSpecialist[i].m_bEnoughGoods )
+          IGuiEngine::SetImages(g_pGUIEngine, 30, 1266, 441, 0);
         else
-          IGuiEngine::SetImages((void *)g_pGUIEngine, 30, 1266, 501, 0);
+          IGuiEngine::SetImages(g_pGUIEngine, 30, 1266, 501, 0);
         break;
       case '/':
         SetAmountGuiDlgSettlerProductionMenu(
           1259,
-          dword_3F1EB34[6 * i],
+          g_cSettlerProductionInfo.m_vSpecialist[i].m_iCount,
           1273,
-          dword_3F1EB38[6 * i],
+          g_cSettlerProductionInfo.m_vSpecialist[i].m_iWished,
           1280,
-          dword_3F1EB40[6 * i],
+          g_cSettlerProductionInfo.m_vSpecialist[i].m_iFreeGoods,
           -1,
           0);
-        if ( byte_3F1EB3C[24 * i] )
-          IGuiEngine::SetImages((void *)g_pGUIEngine, 30, 1265, 437, 0);
+        if ( g_cSettlerProductionInfo.m_vSpecialist[i].m_bEnoughGoods )
+          IGuiEngine::SetImages(g_pGUIEngine, 30, 1265, 437, 0);
         else
-          IGuiEngine::SetImages((void *)g_pGUIEngine, 30, 1265, 500, 0);
+          IGuiEngine::SetImages(g_pGUIEngine, 30, 1265, 500, 0);
         break;
       case '0':
-        SetAmountGuiDlgSettlerProductionMenu(1258, dword_3F1EB34[6 * i], 1276, dword_3F1EB38[6 * i], -1, 0, -1, 0);
+        SetAmountGuiDlgSettlerProductionMenu(
+          1258,
+          g_cSettlerProductionInfo.m_vSpecialist[i].m_iCount,
+          1276,
+          g_cSettlerProductionInfo.m_vSpecialist[i].m_iWished,
+          -1,
+          0,
+          -1,
+          0);
         break;
       case '1':
         SetAmountGuiDlgSettlerProductionMenu(
           1257,
-          dword_3F1EB34[6 * i],
+          g_cSettlerProductionInfo.m_vSpecialist[i].m_iCount,
           1274,
-          dword_3F1EB38[6 * i],
+          g_cSettlerProductionInfo.m_vSpecialist[i].m_iWished,
           1279,
-          dword_3F1EB40[6 * i],
+          g_cSettlerProductionInfo.m_vSpecialist[i].m_iFreeGoods,
           -1,
           0);
-        if ( byte_3F1EB3C[24 * i] )
-          IGuiEngine::SetImages((void *)g_pGUIEngine, 30, 1263, 443, 0);
+        if ( g_cSettlerProductionInfo.m_vSpecialist[i].m_bEnoughGoods )
+          IGuiEngine::SetImages(g_pGUIEngine, 30, 1263, 443, 0);
         else
-          IGuiEngine::SetImages((void *)g_pGUIEngine, 30, 1263, 502, 0);
+          IGuiEngine::SetImages(g_pGUIEngine, 30, 1263, 502, 0);
         break;
       case '2':
         SetAmountGuiDlgSettlerProductionMenu(
           1256,
-          dword_3F1EB34[6 * i],
+          g_cSettlerProductionInfo.m_vSpecialist[i].m_iCount,
           1275,
-          dword_3F1EB38[6 * i],
+          g_cSettlerProductionInfo.m_vSpecialist[i].m_iWished,
           1278,
-          dword_3F1EB40[6 * i],
+          g_cSettlerProductionInfo.m_vSpecialist[i].m_iFreeGoods,
           -1,
           0);
-        if ( byte_3F1EB3C[24 * i] )
-          IGuiEngine::SetImages((void *)g_pGUIEngine, 30, 1264, 437, 0);
+        if ( g_cSettlerProductionInfo.m_vSpecialist[i].m_bEnoughGoods )
+          IGuiEngine::SetImages(g_pGUIEngine, 30, 1264, 437, 0);
         else
-          IGuiEngine::SetImages((void *)g_pGUIEngine, 30, 1264, 500, 0);
+          IGuiEngine::SetImages(g_pGUIEngine, 30, 1264, 500, 0);
         break;
       default:
-        break;
+        continue;
     }
-    result = i + 1;
   }
-  return result;
 }
 
 
@@ -29916,7 +29921,7 @@ bool __cdecl GuiDlgSettlerProductionMenuProc(int a1, int a2, int a3) {
           dword_3EFD450 = 48;
           break;
         case 1268:
-          if ( byte_3F1EBC4 )
+          if ( MEMORY[0x3F1EBC4] )
           {
             v10 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v15, 0x1E1u, dword_3EFD450, 0, 0, 0, 0);
             v16 = 0;
@@ -29926,7 +29931,7 @@ bool __cdecl GuiDlgSettlerProductionMenuProc(int a1, int a2, int a3) {
           }
           break;
         case 1269:
-          if ( byte_3F1EBC4 )
+          if ( MEMORY[0x3F1EBC4] )
           {
             v9 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v14, 0x1E1u, dword_3EFD450, 5u, 0, 0, 0);
             v16 = 1;
@@ -29936,7 +29941,7 @@ bool __cdecl GuiDlgSettlerProductionMenuProc(int a1, int a2, int a3) {
           }
           break;
         case 1270:
-          if ( byte_3F1EBC4 )
+          if ( MEMORY[0x3F1EBC4] )
           {
             v8 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v13, 0x1E1u, dword_3EFD450, 0xFFFFFFFB, 0, 0, 0);
             v16 = 2;
@@ -29946,7 +29951,7 @@ bool __cdecl GuiDlgSettlerProductionMenuProc(int a1, int a2, int a3) {
           }
           break;
         case 1271:
-          if ( byte_3F1EBC4 )
+          if ( MEMORY[0x3F1EBC4] )
           {
             v7 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v12, 0x1E1u, dword_3EFD450, 1u, 0, 0, 0);
             v16 = 3;
@@ -29956,7 +29961,7 @@ bool __cdecl GuiDlgSettlerProductionMenuProc(int a1, int a2, int a3) {
           }
           break;
         case 1272:
-          if ( byte_3F1EBC4 )
+          if ( MEMORY[0x3F1EBC4] )
           {
             v6 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v11, 0x1E1u, dword_3EFD450, 0xFFFFFFFF, 0, 0, 0);
             v16 = 4;
@@ -30009,26 +30014,26 @@ void __cdecl UpdateGuiDlgSettlerStatisticMenu(void) {
   if ( !g_pGUIEngine )
     return result;
   byte_3EFD454 = 1;
-  IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 31, 1350, byte_3F1E9E8 == 0);
+  IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 31, 1350, MEMORY[0x3F1E9E8] == 0);
   for ( i = 0; i < 36; ++i )
   {
-    if ( dword_3F1EA08[2 * i] )
+    if ( MEMORY[0x3F1EA08][2 * i] )
     {
-      _wsprintfA(Str, "%u", dword_3F1EA0C[2 * i]);
+      _wsprintfA(Str, "%u", MEMORY[0x3F1EA0C][2 * i]);
       IGuiEngine::SetText((void *)g_pGUIEngine, 31, dword_3698200[i], Str);
     }
   }
-  _wsprintfA(Str, "%u", dword_3F1EA00);
+  _wsprintfA(Str, "%u", MEMORY[0x3F1EA00]);
   IGuiEngine::SetText((void *)g_pGUIEngine, 31, 1283, Str);
-  _wsprintfA(Str, "%u", dword_3F1E9F8);
+  _wsprintfA(Str, "%u", MEMORY[0x3F1E9F8]);
   IGuiEngine::SetText((void *)g_pGUIEngine, 31, 1361, Str);
-  _wsprintfA(Str, "%u", dword_3F1E9FC);
+  _wsprintfA(Str, "%u", MEMORY[0x3F1E9FC]);
   IGuiEngine::SetText((void *)g_pGUIEngine, 31, 1362, Str);
-  _wsprintfA(Str, "%u", dword_3F1EA04);
+  _wsprintfA(Str, "%u", MEMORY[0x3F1EA04]);
   IGuiEngine::SetText((void *)g_pGUIEngine, 31, 1357, Str);
-  _wsprintfA(Str, "%u", dword_3F1E9EC);
+  _wsprintfA(Str, "%u", MEMORY[0x3F1E9EC]);
   IGuiEngine::SetText((void *)g_pGUIEngine, 31, 1355, Str);
-  _wsprintfA(Str, "(%u/%u)", dword_3F1E9F0, dword_3F1E9F4);
+  _wsprintfA(Str, "(%u/%u)", MEMORY[0x3F1E9F0], MEMORY[0x3F1E9F4]);
   result = IGuiEngine::SetText((void *)g_pGUIEngine, 31, 1356, Str);
   byte_3EFD454 = 0;
   return result;
@@ -30827,11 +30832,11 @@ void __cdecl UpdateGuiDlgSpecialistsContext(void) {
 
   if ( !g_pGUIEngine )
     return result;
-  SetSpecialistProperties((struct SHealthState *)&unk_3F1E700, 1455, 1461);
-  SetSpecialistProperties((struct SHealthState *)&unk_3F1E70C, 1456, 1462);
-  SetSpecialistProperties((struct SHealthState *)&unk_3F1E718, 1457, 1463);
-  SetSpecialistProperties((struct SHealthState *)&unk_3F1E724, 1458, 1464);
-  return SetSpecialistProperties((struct SHealthState *)&unk_3F1E730, 1470, 1469);
+  SetSpecialistProperties((struct SHealthState *)&MEMORY[0x3F1E700], 1455, 1461);
+  SetSpecialistProperties((struct SHealthState *)&MEMORY[0x3F1E70C], 1456, 1462);
+  SetSpecialistProperties((struct SHealthState *)&MEMORY[0x3F1E718], 1457, 1463);
+  SetSpecialistProperties((struct SHealthState *)&MEMORY[0x3F1E724], 1458, 1464);
+  return SetSpecialistProperties((struct SHealthState *)&MEMORY[0x3F1E730], 1470, 1469);
 }
 
 
@@ -34169,24 +34174,24 @@ void __cdecl UpdateGuiDlgVehiclesContext(void) {
   result = IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 40, 1764, 0);
   for ( i = 0; i < 3; ++i )
   {
-    v1 = dword_3F1E744[2 * i];
+    v1 = unk_3F1E744[2 * i];
     switch ( v1 )
     {
       case 1:
         v2 = 1758;
-        if ( dword_3F1E748[2 * i] > 0 )
+        if ( unk_3F1E748[2 * i] > 0 )
           IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 40, 1762, 1);
         break;
       case 2:
         v2 = 1759;
-        if ( dword_3F1E748[2 * i] > 0 )
+        if ( unk_3F1E748[2 * i] > 0 )
           IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 40, 1763, 1);
         break;
       case 4:
         v2 = 1757;
-        if ( dword_3F1E748[2 * i] > 0 )
+        if ( unk_3F1E748[2 * i] > 0 )
           IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 40, 1764, 1);
-        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 40, 1765, dword_3F1E748[2 * i] == 1);
+        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 40, 1765, unk_3F1E748[2 * i] == 1);
         break;
       default:
         v2 = -1;
@@ -34194,7 +34199,7 @@ void __cdecl UpdateGuiDlgVehiclesContext(void) {
     }
     if ( v2 >= 0 )
     {
-      _wsprintfA(Str, "%u", dword_3F1E748[2 * i]);
+      _wsprintfA(Str, "%u", unk_3F1E748[2 * i]);
       IGuiEngine::SetText((void *)g_pGUIEngine, 40, v2, Str);
     }
     result = i + 1;

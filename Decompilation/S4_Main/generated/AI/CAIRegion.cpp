@@ -1,3 +1,4 @@
+#if FALSE
 #include "CAIRegion.h"
 
 // Definitions for class CAIRegion
@@ -6,31 +7,27 @@
 // Decompiled from bool __thiscall CAIRegion::Used(CAIRegion *this)
 bool  CAIRegion::Used(void)const {
   
-  return *((_DWORD *)this + 2) > 0;
+  return this->m_iUses > 0;
 }
 
 
 // address=[0x13115f0]
-// Decompiled from int __thiscall CAIRegion::Load(CAIRegion *this, struct IS4Chunk *a2)
+// Decompiled from void __thiscall CAIRegion::Load(CAIRegion *this, struct IS4Chunk *a2)
 void  CAIRegion::Load(class IS4Chunk & a2) {
   
-  int result; // eax
-
-  *(_DWORD *)this = (*(int (__thiscall **)(struct IS4Chunk *))(*(_DWORD *)a2 + 8))(a2);
-  *((_DWORD *)this + 1) = (*(int (__thiscall **)(struct IS4Chunk *))(*(_DWORD *)a2 + 8))(a2);
-  result = (*(int (__thiscall **)(struct IS4Chunk *))(*(_DWORD *)a2 + 8))(a2);
-  *((_DWORD *)this + 2) = result;
-  return result;
+  this->dword0 = a2->LoadUnsigned32_(a2);
+  this->dword4 = a2->LoadUnsigned32_(a2);
+  this->m_iUses = a2->LoadUnsigned32_(a2);
 }
 
 
 // address=[0x1311640]
-// Decompiled from int __thiscall CAIRegion::Save(CAIRegion *this, struct IS4Chunk *a2)
+// Decompiled from void __thiscall CAIRegion::Save(CAIRegion *this, struct IS4Chunk *a2)
 void  CAIRegion::Save(class IS4Chunk & a2) {
   
-  (*(void (__thiscall **)(struct IS4Chunk *, _DWORD))(*(_DWORD *)a2 + 20))(a2, *(_DWORD *)this);
-  (*(void (__thiscall **)(struct IS4Chunk *, _DWORD))(*(_DWORD *)a2 + 20))(a2, *((_DWORD *)this + 1));
-  return (*(int (__thiscall **)(struct IS4Chunk *, _DWORD))(*(_DWORD *)a2 + 20))(a2, *((_DWORD *)this + 2));
+  a2->SaveUnsigned32(this->dword0);
+  a2->SaveUnsigned32(this->dword4);
+  a2->SaveUnsigned32(this->m_iUses);
 }
 
 
@@ -46,9 +43,10 @@ void  CAIRegion::Clear(void) {
 // Decompiled from void __thiscall CAIRegion::DefineRegion(CAIRegion *this, int a2, int a3, int a4)
 void  CAIRegion::DefineRegion(int a2, int a3, int a4) {
   
-  *(_DWORD *)this = a2;
-  *((_DWORD *)this + 1) = a3;
-  *((_DWORD *)this + 2) = a4;
+  this->dword0 = a2;
+  this->dword4 = a3;
+  this->m_iUses = a4;
 }
 
 
+#endif // Already implemented

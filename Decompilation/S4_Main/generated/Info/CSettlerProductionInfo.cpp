@@ -1,3 +1,4 @@
+#if FALSE
 #include "CSettlerProductionInfo.h"
 
 // Definitions for class CSettlerProductionInfo
@@ -7,7 +8,7 @@
  CSettlerProductionInfo::CSettlerProductionInfo(void) {
   
   CInfoExchange::CInfoExchange(this);
-  *(_DWORD *)this = &CSettlerProductionInfo::_vftable_;
+  this->__vftable = (CInfoExchange_vtbl *)&CSettlerProductionInfo::_vftable_;
   return this;
 }
 
@@ -20,3 +21,4 @@ unsigned int  CSettlerProductionInfo::Size(void)const {
 }
 
 
+#endif // Already implemented

@@ -11,6 +11,10 @@ public:
     // address=[0x1454df0]
     virtual unsigned int  Size(void)const;
 
+    // Type information members
+public:
+    CSpecialistsInfo::SSpecialist[5] m_vSpecialists;
+
 };
 
 

@@ -1,3 +1,4 @@
+#if FALSE
 #include "CSoldierInfo.h"
 
 // Definitions for class CSoldierInfo
@@ -7,7 +8,7 @@
  CSoldierInfo::CSoldierInfo(void) {
   
   CInfoExchange::CInfoExchange(this);
-  *(_DWORD *)this = &CSoldierInfo::_vftable_;
+  this->__vftable = (CInfoExchange_vtbl *)&CSoldierInfo::_vftable_;
   return this;
 }
 
@@ -20,3 +21,4 @@ unsigned int  CSoldierInfo::Size(void)const {
 }
 
 
+#endif // Already implemented

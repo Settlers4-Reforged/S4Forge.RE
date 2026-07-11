@@ -61,14 +61,14 @@ class CBuilding &  CBuildingMgr::Building(int a2) {
 
 
 // address=[0x130eba0]
-// Decompiled from unsigned __int8 *__thiscall CBuildingMgr::GetBuildingPtr(CBuildingMgr *this, int a2)
+// Decompiled from struct CBuilding *__thiscall CBuildingMgr::GetBuildingPtr(CBuildingMgr *this, int a2)
 class CBuilding *  CBuildingMgr::GetBuildingPtr(int a2) {
   
-  unsigned __int8 *v4; // [esp+Ch] [ebp-4h]
+  IEntity *v4; // [esp+Ch] [ebp-4h]
 
-  v4 = (unsigned __int8 *)CMapObjectMgr::EntityPtr(a2);
-  if ( v4 && IEntity::ObjType(v4) == 8 )
-    return v4;
+  v4 = CMapObjectMgr::EntityPtr(a2);
+  if ( v4 && IEntity::ObjType(v4) == BUILDING_OBJ )
+    return (struct CBuilding *)v4;
   else
     return 0;
 }

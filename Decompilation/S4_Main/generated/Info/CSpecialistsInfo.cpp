@@ -1,3 +1,4 @@
+#if FALSE
 #include "CSpecialistsInfo.h"
 
 // Definitions for class CSpecialistsInfo
@@ -7,7 +8,7 @@
  CSpecialistsInfo::CSpecialistsInfo(void) {
   
   CInfoExchange::CInfoExchange(this);
-  *(_DWORD *)this = &CSpecialistsInfo::_vftable_;
+  this->__vftable = (CInfoExchange_vtbl *)&CSpecialistsInfo::_vftable_;
   return this;
 }
 
@@ -20,3 +21,4 @@ unsigned int  CSpecialistsInfo::Size(void)const {
 }
 
 
+#endif // Already implemented

@@ -1,3 +1,4 @@
+#if FALSE
 #include "CPerformanceCounter.h"
 
 // Definitions for class CPerformanceCounter
@@ -79,3 +80,4 @@ void  CPerformanceCounter::Clear(void) {
 }
 
 
+#endif // Already implemented

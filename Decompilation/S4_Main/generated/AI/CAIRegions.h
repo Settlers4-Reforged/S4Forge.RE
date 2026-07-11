@@ -6,10 +6,10 @@
 class CAIRegions {
 public:
     // address=[0x1311690]
-    void  DefineRegion(int a2, int a3, int a4, int a5);
+    void  DefineRegion(int _iRegionId, int a3, int a4, int a5);
 
     // address=[0x1311700]
-    void  ClearRegion(int a2);
+    void  ClearRegion(int _iRegionId);
 
     // address=[0x1311790]
     void  ClearAllRegions(void);
@@ -27,11 +27,17 @@ public:
     static bool __cdecl IsValidRegionId(int a1);
 
     // address=[0x131ee40]
-    void  SetPlayerRegionFlagBits(int a2, int a3, int a4);
+    void  SetPlayerRegionFlagBits(int _iPlayerId, int _iRegionId, int a4);
 
 protected:
     // address=[0x1311920]
     void  CalculateLastUsedRegionId(void);
+
+    // Type information members
+public:
+    int m_iLastUsedRegionId;
+    CAIRegion[16] m_cRegions;
+    int[9][16] m_vPlayerRegionFlags;
 
 };
 

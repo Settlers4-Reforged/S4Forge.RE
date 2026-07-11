@@ -1,3 +1,4 @@
+#if FALSE
 #include "IAIScripting.h"
 
 // Definitions for class IAIScripting
@@ -11,3 +12,4 @@
 }
 
 
+#endif // Already implemented

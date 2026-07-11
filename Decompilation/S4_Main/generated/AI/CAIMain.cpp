@@ -17,7 +17,7 @@ void  CAIMain::Init(void) {
   this->Done(this);
   memset(this->m_pPlayerAIs, 0, sizeof(this->m_pPlayerAIs));
   CAIPlayerEvaluations::Clear(&g_cAIPlayerEvaluations);
-  CAIRegions::ClearAllRegions((CAIRegions *)&g_cAIRegions);
+  CAIRegions::ClearAllRegions(&g_cAIRegions);
   CAIPlayersScriptVars::Init((CAIPlayersScriptVars *)g_cAIPlayersScriptVars);
   IAIEnvironment::Init();
   CAIResourceMap::Init();
@@ -90,7 +90,7 @@ void  CAIMain::Load(class IS4Chunk & a2) {
     v2 = a2->LoadUnsigned32_(a2);
     IAIEnvironment::SetGlobalEcoAIFlags(v2);
   }
-  CAIRegions::Load((CAIRegions *)&g_cAIRegions, a2);
+  CAIRegions::Load(&g_cAIRegions, a2);
   CAIPlayersScriptVars::Load((CAIPlayersScriptVars *)g_cAIPlayersScriptVars, a2);
   a2->LoadSignature(0xA5901030);
   PlayerId = IAIEnvironment::AlliancesLastPlayerId();
@@ -102,36 +102,34 @@ void  CAIMain::Load(class IS4Chunk & a2) {
 
 
 // address=[0x13121f0]
-// Decompiled from int __thiscall CAIMain::Save(CAIMain *this, struct IS4Chunk *a2)
+// Decompiled from int __thiscall CAIMain::Save(CAIMain *this, CS4MemChunk *a2)
 void  CAIMain::Save(class IS4Chunk & a2) {
   
   int v2; // eax
   int PlayerId; // [esp+0h] [ebp-Ch]
   int i; // [esp+8h] [ebp-4h]
 
-  if ( !*((_BYTE *)this + 4) && BBSupportDbgReport(2, "AI\\AI_Main.cpp", 716, "m_bInitialized") == 1 )
+  if ( !this->m_bInitialized && BBSupportDbgReport(2, "AI\\AI_Main.cpp", 716, "m_bInitialized") == 1 )
     __debugbreak();
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 24))(a2, -1517285374);
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 20))(a2, 1);
+  ((void (__thiscall *)(CS4MemChunk *, int))a2->SaveSignature)(a2, -1517285374);
+  ((void (__thiscall *)(CS4MemChunk *, int))a2->SaveUnsigned32)(a2, 1);
   v2 = IAIEnvironment::GlobalEcoAIFlags();
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 20))(a2, v2);
-  CAIRegions::Save((CAIRegions *)&g_cAIRegions, a2);
+  ((void (__thiscall *)(CS4MemChunk *, int))a2->SaveUnsigned32)(a2, v2);
+  CAIRegions::Save(&g_cAIRegions, a2);
   CAIPlayersScriptVars::Save((CAIPlayersScriptVars *)g_cAIPlayersScriptVars, a2);
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 24))(a2, -1517285328);
+  ((void (__thiscall *)(CS4MemChunk *, int))a2->SaveSignature)(a2, -1517285328);
   PlayerId = IAIEnvironment::AlliancesLastPlayerId();
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 20))(a2, PlayerId);
+  ((void (__thiscall *)(CS4MemChunk *, int))a2->SaveUnsigned32)(a2, PlayerId);
   for ( i = 1; i <= PlayerId; ++i )
   {
-    if ( *((_DWORD *)this + i + 3) )
+    if ( this->m_pPlayerAIs[i] )
     {
-      (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 20))(a2, i);
-      (*(void (__thiscall **)(int, struct IS4Chunk *))(*(_DWORD *)(*((_DWORD *)this + i + 3) + 4) + 4))(
-        *((_DWORD *)this + i + 3) + 4,
-        a2);
+      ((void (__thiscall *)(CS4MemChunk *, int))a2->SaveUnsigned32)(a2, i);
+      this->m_pPlayerAIs[i]->Save(&this->m_pPlayerAIs[i]->IS4ChunkObject, a2);
     }
   }
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 20))(a2, PlayerId + 1);
-  return (*(int (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 24))(a2, -1517285375);
+  ((void (__thiscall *)(CS4MemChunk *, int))a2->SaveUnsigned32)(a2, PlayerId + 1);
+  return ((int (__thiscall *)(CS4MemChunk *, int))a2->SaveSignature)(a2, -1517285375);
 }
 
 
