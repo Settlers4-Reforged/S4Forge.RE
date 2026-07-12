@@ -167,7 +167,7 @@ void  IMovingEntity::ResetToDoList(void) {
     __debugbreak();
   if ( this->m_pToDoList )
   {
-    v7 = std::list<CEntityTask>::begin(this->m_pToDoList, (int)v3);
+    v7 = std::list<CEntityTask>::begin(this->m_pToDoList);
     exceptionBlock = 0;
     std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator=(
       &this->m_cCurrentToDoItemIter,
@@ -201,7 +201,7 @@ void  IMovingEntity::SetToDoList(class std::list<class CEntityTask,class std::al
   this->m_iToDoSize = -1;
   if ( !this->m_pToDoList && BBSupportDbgReport(2, "MapObjects\\MovingEntity.cpp", 171, "m_toDoList != nullptr") == 1 )
     __debugbreak();
-  v4 = std::list<CEntityTask>::begin(this->m_pToDoList, (int)v2);
+  v4 = std::list<CEntityTask>::begin(this->m_pToDoList);
   v3 = v4;
   v6 = 0;
   std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator=(

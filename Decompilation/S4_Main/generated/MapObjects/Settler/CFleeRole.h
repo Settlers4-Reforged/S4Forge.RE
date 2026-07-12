@@ -12,7 +12,7 @@ public:
     virtual class CWalking *  InitWalking(class CSettler * a2);
 
     // address=[0x156d3b0]
-    virtual void  LogicUpdate(class CSettler * a2);
+    virtual void  LogicUpdate(class CSettler * pSettler);
 
     // address=[0x156d730]
     virtual void  UpdateJob(class CSettler * a2);
@@ -61,7 +61,7 @@ private:
     virtual void  TakeJob(class CSettler * a2);
 
     // address=[0x156d910]
-    virtual void  Init(class CSettler * a2);
+    virtual void  Init(class CSettler * a1);
 
     // address=[0x156d9b0]
     virtual void  ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent * a3);

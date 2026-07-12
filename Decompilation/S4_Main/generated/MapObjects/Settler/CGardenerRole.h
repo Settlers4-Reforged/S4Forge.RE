@@ -12,16 +12,16 @@ public:
     virtual class CWalking *  InitWalking(class CSettler * a2);
 
     // address=[0x1570090]
-    virtual void  LogicUpdateJob(class CSettler * a2);
+    virtual void  LogicUpdateJob(class CSettler * pSettler);
 
     // address=[0x1570280]
-    virtual void  PostLoadInit(class CSettler * a2);
+    virtual void  PostLoadInit(class CSettler * a1);
 
     // address=[0x15702f0]
-     CGardenerRole(std::istream & a2);
+     CGardenerRole(std::istream & stream);
 
     // address=[0x1570480]
-    virtual void  Store(std::ostream & a2);
+    virtual void  Store(std::ostream & a1);
 
     // address=[0x1572060]
     virtual unsigned long  ClassID(void)const;
@@ -46,13 +46,13 @@ private:
     virtual void  GetNextJob(class CSettler * a2);
 
     // address=[0x1570860]
-    virtual void  TakeJob(class CSettler * a2);
+    virtual void  TakeJob(class CSettler * pSettler);
 
     // address=[0x1570e50]
-    virtual void  Init(class CSettler * a2);
+    virtual void  Init(class CSettler * a1);
 
     // address=[0x1570ed0]
-    virtual void  ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent * a3);
+    virtual void  ConvertEventIntoGoal(class CSettler * pSettler, class CEntityEvent * pEvent);
 
     // address=[0x1571440]
     void  WorkIsDone(class CSettler * a2);
@@ -61,10 +61,20 @@ private:
     virtual bool  SetFree(class CSettler * a2, int a3);
 
     // address=[0x1571520]
-    bool  CheckPosition(int a2, int a3, int a4, bool a5);
+    bool  CheckPosition(int a2, int a3, int iSearchType, bool a5);
 
     // address=[0x1571710]
-    bool  SearchPosition(class CSettler * a2, int a3);
+    bool  SearchPosition(class CSettler * pSettler, int _iSearchType);
+
+    // Type information members
+public:
+    std::list m_vTasks;
+    int m_iEventX;
+    int m_iEventY;
+    int m_iTargetMushroomX;
+    int m_iTargetMushroomY;
+    int m_iWorkTick;
+    int m_iNextSearchTick;
 
 };
 

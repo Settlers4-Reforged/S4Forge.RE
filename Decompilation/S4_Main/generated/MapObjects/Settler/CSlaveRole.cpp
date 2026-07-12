@@ -516,7 +516,7 @@ bool  CSlaveRole::SearchPosition(class CSettler * a2) {
 
 
 // address=[0x158d700]
-// Decompiled from void __thiscall CSlaveRole::ConvertEventIntoGoal(ISettlerRole *this, CPropertySet *a2, _DWORD *a3)
+// Decompiled from void __thiscall CSlaveRole::ConvertEventIntoGoal(ISettlerRole *this, CSettler *a2, _DWORD *a3)
 void  CSlaveRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent * a3) {
   
   int v3; // eax
@@ -526,196 +526,203 @@ void  CSlaveRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent *
   int v7; // eax
   int v8; // eax
   int v9; // eax
-  int WorkingAreaPackedXY; // eax
-  int v11; // eax
+  DWORD WorkingAreaPackedXY; // eax
+  DWORD v11; // eax
   int v12; // eax
-  int v13; // eax
-  int v14; // eax
+  unsigned int v13; // eax
+  std::list *v14; // eax
   int v15; // eax
   int v16; // eax
   int v17; // eax
   int v18; // eax
   int v19; // eax
-  int v20; // eax
-  int v21; // eax
+  unsigned int v20; // eax
+  std::list *v21; // eax
   int v22; // eax
   int v23; // eax
   int v24; // eax
-  int v25; // [esp-8h] [ebp-70h]
+  unsigned int v25; // [esp-8h] [ebp-70h]
   int v26; // [esp-8h] [ebp-70h]
-  int v27; // [esp-8h] [ebp-70h]
-  int v28; // [esp-8h] [ebp-70h]
+  unsigned int v27; // [esp-8h] [ebp-70h]
+  unsigned int v28; // [esp-8h] [ebp-70h]
   int v29; // [esp-4h] [ebp-6Ch]
   int v30; // [esp-4h] [ebp-6Ch]
   int v31; // [esp-4h] [ebp-6Ch]
   int v32; // [esp-4h] [ebp-6Ch]
   int v33; // [esp-4h] [ebp-6Ch]
   int v34; // [esp-4h] [ebp-6Ch]
-  int v35; // [esp-4h] [ebp-6Ch]
-  _DWORD v36[7]; // [esp+0h] [ebp-68h] BYREF
-  int v37; // [esp+1Ch] [ebp-4Ch]
-  int v38; // [esp+20h] [ebp-48h]
-  CMFCToolBarButton *v39; // [esp+24h] [ebp-44h]
-  void *v40; // [esp+28h] [ebp-40h]
-  int v41; // [esp+2Ch] [ebp-3Ch]
-  int v42; // [esp+30h] [ebp-38h]
-  int v43; // [esp+34h] [ebp-34h]
-  int v44; // [esp+38h] [ebp-30h]
-  int v45; // [esp+3Ch] [ebp-2Ch]
-  int SettlerInfo; // [esp+40h] [ebp-28h]
-  int v47; // [esp+44h] [ebp-24h]
-  int v48; // [esp+48h] [ebp-20h]
-  int v49; // [esp+4Ch] [ebp-1Ch]
-  int v50; // [esp+50h] [ebp-18h]
-  int v51; // [esp+54h] [ebp-14h]
-  struct CManakopter *ManakopterPtr; // [esp+58h] [ebp-10h]
-  int v53; // [esp+5Ch] [ebp-Ch]
-  int v54; // [esp+60h] [ebp-8h]
-  ISettlerRole *v55; // [esp+64h] [ebp-4h]
+  unsigned int v35; // [esp-4h] [ebp-6Ch]
+  CEntityTask v36; // [esp+0h] [ebp-68h] BYREF
+  int v37; // [esp+18h] [ebp-50h]
+  int v38; // [esp+1Ch] [ebp-4Ch]
+  int v39; // [esp+20h] [ebp-48h]
+  CMFCToolBarButton *v40; // [esp+24h] [ebp-44h]
+  CBuilding *v41; // [esp+28h] [ebp-40h]
+  int v42; // [esp+2Ch] [ebp-3Ch]
+  int v43; // [esp+30h] [ebp-38h]
+  int v44; // [esp+34h] [ebp-34h]
+  CSettlerMgr::SSettlerInfos *v45; // [esp+38h] [ebp-30h]
+  CBuilding *v46; // [esp+3Ch] [ebp-2Ch]
+  CSettlerMgr::SSettlerInfos *SettlerInfo; // [esp+40h] [ebp-28h]
+  int a1; // [esp+44h] [ebp-24h]
+  int v49; // [esp+48h] [ebp-20h]
+  CBuilding *v50; // [esp+4Ch] [ebp-1Ch]
+  struct IFutureEvents *v51; // [esp+50h] [ebp-18h]
+  int v52; // [esp+54h] [ebp-14h]
+  IEntity *ManakopterPtr; // [esp+58h] [ebp-10h]
+  int v54; // [esp+5Ch] [ebp-Ch]
+  int v55; // [esp+60h] [ebp-8h]
+  ISettlerRole *v56; // [esp+64h] [ebp-4h]
 
-  v55 = this;
-  v54 = a3[1] - 1;
-  switch ( v54 )
+  v56 = this;
+  v55 = a3[1] - 1;
+  switch ( v55 )
   {
     case 0:
-      CSlaveRole::ClearWorkPositionAndFlagIfNecessary(v55);
-      if ( !ISettlerRole::HomeEntityId(v55) )
+      CSlaveRole::ClearWorkPositionAndFlagIfNecessary((CSlaveRole *)v56);
+      if ( !ISettlerRole::HomeEntityId(v56) )
         goto LABEL_15;
-      v8 = ISettlerRole::HomeEntityId(v55);
+      v8 = ISettlerRole::HomeEntityId(v56);
       if ( CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, v8) )
       {
-        v9 = ISettlerRole::HomeEntityId(v55);
-        v40 = (void *)CBuildingMgr::operator[](v9);
-        WorkingAreaPackedXY = CBuilding::GetWorkingAreaPackedXY(v40);
-        ISettlerRole::NewDestination(v55, a2, WorkingAreaPackedXY, 0);
+        v9 = ISettlerRole::HomeEntityId(v56);
+        v41 = CBuildingMgr::operator[](v9);
+        WorkingAreaPackedXY = CBuilding::GetWorkingAreaPackedXY(v41);
+        ISettlerRole::NewDestination(v56, a2, WorkingAreaPackedXY, 0);
         CSettler::TakeAnimList(a2, 1);
       }
       break;
     case 1:
-      v47 = ISettlerRole::HomeEntityId(v55);
-      if ( v47 )
+      a1 = ISettlerRole::HomeEntityId(v56);
+      if ( a1 )
       {
-        v39 = (CMFCToolBarButton *)CBuildingMgr::operator[](v47);
-        v11 = CBuilding::DoorPackedXY(v39);
-        ISettlerRole::NewDestination(v55, a2, v11, 0);
+        v40 = CBuildingMgr::operator[](a1);
+        v11 = CBuilding::DoorPackedXY(v40);
+        ISettlerRole::NewDestination(v56, a2, v11, 0);
         CSettler::TakeAnimList(a2, 0);
       }
       else
       {
 LABEL_15:
-        (*(void (__thiscall **)(ISettlerRole *, CPropertySet *, int))(*(_DWORD *)v55 + 64))(v55, a2, -1);
+        v56->SetFree(v56, a2, -1);
       }
       break;
     case 2:
-      v30 = IEntity::Type((unsigned __int16 *)a2);
+      v30 = IEntity::Type(a2);
       v12 = IEntity::Race(a2);
       SettlerInfo = CSettlerMgr::GetSettlerInfo(v12, v30);
-      ISettlerRole::NewDestination(v55, a2, a3[5], 0);
-      (*(void (__thiscall **)(ISettlerRole *, _DWORD))(*(_DWORD *)v55 + 52))(v55, a3[4]);
-      v31 = *(unsigned __int16 *)std::vector<unsigned short>::operator[](1);
-      v25 = *(unsigned __int16 *)std::vector<unsigned short>::operator[](1);
+      ISettlerRole::NewDestination(v56, a2, a3[5], 0);
+      v56->SetEntity(v56, a3[4]);
+      v31 = *std::vector<unsigned short>::operator[](SettlerInfo->g_vAnimLists, 1);
+      v25 = *std::vector<unsigned short>::operator[](SettlerInfo->g_vAnimLists, 1);
       v13 = IEntity::Race(a2);
-      v14 = CEntityToDoListMgr::SettlerJobList(v13, v25);
-      (*(void (__thiscall **)(CPropertySet *, int, int))(*(_DWORD *)a2 + 112))(a2, v14, v31);
+      v14 = CEntityToDoListMgr::SettlerJobList(g_pEntityToDoListMgr, v13, v25);
+      a2->NewToDoList(a2, (int)v14, v31);
       break;
     case 4:
-      if ( *((_BYTE *)v55 + 4) == 17
-        && (*(unsigned __int8 (__thiscall **)(ISettlerRole *, CPropertySet *))(*(_DWORD *)v55 + 132))(v55, a2) )
+      if ( v56->m_iTask == 17
+        && ((unsigned __int8 (__thiscall *)(ISettlerRole *, CSettler *))v56->__vftable[1].ClassID)(v56, a2) )
       {
-        IMovingEntity::ResetToDoList(v36[0]);
-        (*(void (__thiscall **)(ISettlerRole *, CPropertySet *))(*(_DWORD *)v55 + 40))(v55, a2);
+        IMovingEntity::ResetToDoList(a2);
+        v56->TakeJob(v56, a2);
       }
-      IAnimatedEntity::RegisterForLogicUpdate(1);
+      IAnimatedEntity::RegisterForLogicUpdate(a2, 1);
       break;
     case 8:
-      v3 = IEntity::ID();
+      v3 = IEntity::ID(a2);
       CTrace::Print("SlaveRole: Target %i dies for %i", a3[3], v3);
-      (*(void (__thiscall **)(ISettlerRole *, CPropertySet *, int))(*(_DWORD *)v55 + 64))(v55, a2, -1);
+      v56->SetFree(v56, a2, -1);
       if ( !std::list<CEntityTask>::size(&unk_4158C88) )
       {
-        v4 = CEntityTask::CEntityTask((CEntityTask *)v36, 27, 325, 0, 0, -1, 1, -1, 1, 1, 0, 0, 0, 0);
-        std::list<CEntityTask>::push_back(v4);
+        v4 = CEntityTask::CEntityTask(&v36, 0x1Bu, 0x145u, 0, 0, -1, 1, -1, 1, 1, 0, 0, 0, 0);
+        std::list<CEntityTask>::push_back((int)v4);
       }
-      v48 = IEntity::EntityId((unsigned __int16 *)a2);
-      v36[6] = a3[3];
-      v51 = a3[4];
-      if ( v51 <= 0 )
+      v49 = IEntity::EntityId(a2);
+      v37 = a3[3];
+      v52 = a3[4];
+      if ( v52 <= 0 )
       {
-        v5 = IEntity::OwnerId((unsigned __int8 *)a2);
-        v49 = (*(int (__thiscall **)(void *, int))(*(_DWORD *)g_pDarkTribe + 24))(g_pDarkTribe, v5);
-        if ( v49 )
+        v5 = IEntity::OwnerId(a2);
+        v50 = (CBuilding *)(*(int (__thiscall **)(void *, int))(*(_DWORD *)g_pDarkTribe + 24))(g_pDarkTribe, v5);
+        if ( v50 )
         {
-          v6 = CBuilding::EnsignWorldIdx(v49);
-          v42 = CWorldManager::SectorId(v6);
+          v6 = CBuilding::EnsignWorldIdx(v50);
+          v43 = CWorldManager::SectorId(v6);
           v29 = IEntity::Y(a2);
           v7 = IEntity::X(a2);
-          v41 = CWorldManager::SectorId(v7, v29);
-          if ( v42 == v41 )
-            (*(void (__thiscall **)(void *, int))(*(_DWORD *)g_pDarkTribe + 8))(g_pDarkTribe, v48);
+          v42 = CWorldManager::SectorId(v7, v29);
+          if ( v43 == v42 )
+            (*(void (__thiscall **)(void *, int))(*(_DWORD *)g_pDarkTribe + 8))(g_pDarkTribe, v49);
           else
-            CSlaveRole::FreeServant(v55, a2);
+            CSlaveRole::FreeServant((CSlaveRole *)v56, a2);
         }
       }
       else
       {
-        (*(void (__thiscall **)(CPropertySet *, void *, int))(*(_DWORD *)a2 + 112))(a2, &unk_4158C88, -1);
-        IMovingEntity::SetDisplacementCosts(10);
-        v50 = CLogic::FutureEvents(g_pLogic);
-        (*(void (__thiscall **)(int, int, int, int, int, _DWORD))(*(_DWORD *)v50 + 12))(v50, 9, 4, v48, v51, 0);
+        a2->NewToDoList(a2, (int)&unk_4158C88, -1);
+        IMovingEntity::SetDisplacementCosts(a2, 10);
+        v51 = CLogic::FutureEvents(g_pLogic);
+        (*(void (__thiscall **)(struct IFutureEvents *, int, int, int, int, _DWORD))(*(_DWORD *)v51 + 12))(
+          v51,
+          9,
+          4,
+          v49,
+          v52,
+          0);
       }
       break;
     case 24:
-      v43 = a3[4];
-      v35 = Y16X16::UnpackYFast(v43);
-      v28 = Y16X16::UnpackXFast(v43);
-      v23 = IEntity::ID();
-      CSettlerMgr::SearchSpaceForSettler((CSettlerMgr *)g_cSettlerMgr, v23, v28, v35);
+      v44 = a3[4];
+      v35 = Y16X16::UnpackYFast(v44);
+      v28 = Y16X16::UnpackXFast(v44);
+      v23 = IEntity::ID(a2);
+      CSettlerMgr::SearchSpaceForSettler(&g_cSettlerMgr, v23, v28, v35);
       CWarMap::AddEntity(a2);
       IEntity::SetFlagBits(a2, EntityFlag_Selectable|EntityFlag_Visible);
       IEntity::ClearFlagBits(a2, EntityFlag_OnBoard);
-      (*(void (__thiscall **)(ISettlerRole *, CPropertySet *, int))(*(_DWORD *)v55 + 64))(v55, a2, -1);
-      *((_BYTE *)v55 + 4) = 17;
-      v24 = IEntity::EntityId((unsigned __int16 *)a2);
+      v56->SetFree(v56, a2, -1);
+      v56->m_iTask = 17;
+      v24 = IEntity::EntityId(a2);
       (*(void (__thiscall **)(void *, int))(*(_DWORD *)g_pDarkTribe + 8))(g_pDarkTribe, v24);
       break;
     case 27:
-      v32 = IEntity::Type((unsigned __int16 *)a2);
+      v32 = IEntity::Type(a2);
       v15 = IEntity::Race(a2);
-      v44 = CSettlerMgr::GetSettlerInfo(v15, v32);
+      v45 = CSettlerMgr::GetSettlerInfo(v15, v32);
       ManakopterPtr = CFlyingMgr::GetManakopterPtr((CFlyingMgr *)g_cFlyingMgr, a3[3]);
-      v53 = 0;
-      if ( !ManakopterPtr || IEntity::FlagBits(ManakopterPtr, (EntityFlag)&MEMORY[0x4000000]) )
+      v54 = 0;
+      if ( !ManakopterPtr || IEntity::FlagBits(ManakopterPtr, (EntityFlag)&s_iMsgTracer2.m_aMessages[15456]) )
       {
-        v16 = IEntity::OwnerId((unsigned __int8 *)a2);
-        v45 = (*(int (__thiscall **)(void *, int))(*(_DWORD *)g_pDarkTribe + 24))(g_pDarkTribe, v16);
-        if ( v45 )
+        v16 = IEntity::OwnerId(a2);
+        v46 = (CBuilding *)(*(int (__thiscall **)(void *, int))(*(_DWORD *)g_pDarkTribe + 24))(g_pDarkTribe, v16);
+        if ( v46 )
         {
-          v17 = CBuilding::EnsignWorldIdx(v45);
-          v38 = CWorldManager::SectorId(v17);
+          v17 = CBuilding::EnsignWorldIdx(v46);
+          v39 = CWorldManager::SectorId(v17);
           v33 = IEntity::Y(a2);
           v18 = IEntity::X(a2);
-          v37 = CWorldManager::SectorId(v18, v33);
-          if ( v38 != v37 )
-            CSlaveRole::FreeServant(v55, a2);
+          v38 = CWorldManager::SectorId(v18, v33);
+          if ( v39 != v38 )
+            CSlaveRole::FreeServant((CSlaveRole *)v56, a2);
         }
       }
       else
       {
-        v53 = IEntity::PackedXY(ManakopterPtr);
+        v54 = IEntity::PackedXY(ManakopterPtr);
       }
-      if ( v53 )
+      if ( v54 )
       {
-        v26 = Y16X16::UnpackYFast(v53);
-        v19 = Y16X16::UnpackXFast(v53);
-        ISettlerRole::NewDestination(v55, a2, v19, v26, 0);
-        v34 = *(unsigned __int16 *)std::vector<unsigned short>::operator[](0);
-        v27 = *(unsigned __int16 *)std::vector<unsigned short>::operator[](0);
+        v26 = Y16X16::UnpackYFast(v54);
+        v19 = Y16X16::UnpackXFast(v54);
+        ISettlerRole::NewDestination(v56, a2, v19, v26, 0);
+        v34 = *std::vector<unsigned short>::operator[](v45->g_vAnimLists, 0);
+        v27 = *std::vector<unsigned short>::operator[](v45->g_vAnimLists, 0);
         v20 = IEntity::Race(a2);
-        v21 = CEntityToDoListMgr::SettlerJobList(v20, v27);
-        (*(void (__thiscall **)(CPropertySet *, int, int))(*(_DWORD *)a2 + 112))(a2, v21, v34);
+        v21 = CEntityToDoListMgr::SettlerJobList(g_pEntityToDoListMgr, v20, v27);
+        a2->NewToDoList(a2, (int)v21, v34);
         IEntity::ClearFlagBits(a2, EntityFlag_Selectable|EntityFlag_Selected);
-        v22 = IEntity::ID();
-        (*(void (__thiscall **)(void *, int))(*(_DWORD *)g_pGroupMgr + 28))(g_pGroupMgr, v22);
+        v22 = IEntity::ID(a2);
+        ((void (__thiscall *)(CGroupMgr *, int))g_pGroupMgr->DetachEntityFromAllGroups)(g_pGroupMgr, v22);
       }
       break;
     default:

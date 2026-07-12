@@ -84,10 +84,10 @@ protected:
     // Type information members
 public:
     BYTE m_iFrame;
-    BYTE m_cAttackerPlayerId;
+    BYTE m_iAttackerPlayerId;
     WORD m_iJobPart;
-    WORD m_wPrevEntity;
-    WORD m_wNextEntity;
+    WORD m_iPrevEntity;
+    WORD m_iNextEntity;
     DWORD m_uLastUpdateTick;
     int m_uLastLogicUpdate;
     std::vector m_iEventQueue;

@@ -27,7 +27,7 @@ public:
     void  SetBuilding(int a2);
 
     // address=[0x1513b30]
-    void  SetOffset(float a2, float a3);
+    void  SetOffset(float _fOffsetX, float _fOffsetY);
 
     // address=[0x157d1f0]
     virtual void  Delete(void);
@@ -90,7 +90,7 @@ public:
     virtual int  MaxHitpoints(void)const;
 
     // address=[0x157e700]
-     CSettler(std::istream & a2);
+     CSettler(std::istream & stream);
 
     // address=[0x157ea60]
     virtual void  Store(std::ostream & a1);
@@ -121,7 +121,7 @@ public:
 
 protected:
     // address=[0x157ec10]
-     CSettler(int posX, int posY, int settlerType, int player, class std::auto_ptr<class ISettlerRole> settlerRole, int id);
+     CSettler(int _iX, int _iY, int _iSettlerType, int _iPlayer, class std::auto_ptr<class ISettlerRole> _pSettlerRole, int _iId);
 
     // address=[0x157eec0]
      CSettler(int type, int id);

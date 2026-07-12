@@ -149,7 +149,7 @@ void __cdecl CWarMap::RemoveEntity(class IEntity & a1) {
 
 
 // address=[0x15fb8b0]
-// Decompiled from int __cdecl CWarMap::NotifyMove(CPropertySet *a1, int a2)
+// Decompiled from void __cdecl CWarMap::NotifyMove(IEntity *a1, int a2)
 void __cdecl CWarMap::NotifyMove(class IEntity & a1, int a2) {
   
   int v2; // eax
@@ -158,41 +158,40 @@ void __cdecl CWarMap::NotifyMove(class IEntity & a1, int a2) {
   int v5; // eax
   int v6; // eax
   int v7; // eax
-  Squares *v8; // eax
-  Squares *v9; // eax
-  Squares *v10; // eax
-  Squares *v11; // eax
-  int result; // eax
+  int v8; // eax
+  int v9; // eax
+  int v10; // eax
+  int v11; // eax
+  int v12; // eax
   int v13; // eax
-  int v14; // eax
-  int v15; // [esp-10h] [ebp-24h]
-  int v16; // [esp-Ch] [ebp-20h]
-  int v17; // [esp-8h] [ebp-1Ch]
-  int v18; // [esp-4h] [ebp-18h]
-  int v19; // [esp+4h] [ebp-10h]
-  int v20; // [esp+8h] [ebp-Ch]
-  int v21; // [esp+Ch] [ebp-8h]
-  int v22; // [esp+10h] [ebp-4h]
+  int v14; // [esp-10h] [ebp-24h]
+  int v15; // [esp-Ch] [ebp-20h]
+  int v16; // [esp-8h] [ebp-1Ch]
+  int v17; // [esp-4h] [ebp-18h]
+  int v18; // [esp+4h] [ebp-10h]
+  int v19; // [esp+8h] [ebp-Ch]
+  int v20; // [esp+Ch] [ebp-8h]
+  int v21; // [esp+10h] [ebp-4h]
 
   if ( !CWarMap::m_iInitialized && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 505, "m_iInitialized") == 1 )
     __debugbreak();
-  if ( (IEntity::ObjType((unsigned __int8 *)a1) & 0xDF) != 0 )
+  if ( (IEntity::ObjType(a1) & 0xDF) != 0 )
   {
-    if ( *(unsigned __int16 *)IEntity::WarMapNode(a1) == 0xFFFF )
+    if ( LOWORD(IEntity::WarMapNode(a1)->m_uNextPrev) == 0xFFFF )
     {
-      v13 = IEntity::ID();
+      v12 = IEntity::ID(a1);
       BBSupportTracePrintF(
         6,
         "### ERROR !! CWarMap::NotifyMove(): Entity %i not in war map (Prev == PREV_NOT_IN_LIST) !! ERROR ###",
-        v13);
-      v14 = IEntity::ID();
-      return CMapObjectMgr::DbgPrintEntity(g_pMapObjectMgr, v14, 6, 0);
+        v12);
+      v13 = IEntity::ID(a1);
+      CMapObjectMgr::DbgPrintEntity(g_pMapObjectMgr, v13, 6, 0);
     }
     else
     {
-      if ( IEntity::ID() <= 0 && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 511, "_rEntity.ID() > 0") == 1 )
+      if ( IEntity::ID(a1) <= 0 && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 511, "_rEntity.ID() > 0") == 1 )
         __debugbreak();
-      if ( *(unsigned __int16 *)IEntity::WarMapNode(a1) == 0xFFFF
+      if ( LOWORD(IEntity::WarMapNode(a1)->m_uNextPrev) == 0xFFFF
         && BBSupportDbgReport(
              2,
              "Pathing\\WarMap.cpp",
@@ -201,73 +200,66 @@ void __cdecl CWarMap::NotifyMove(class IEntity & a1, int a2) {
       {
         __debugbreak();
       }
-      if ( s_iEntityWarMapXYs[IEntity::ID()] >= 0 )
+      if ( s_iEntityWarMapXYs[IEntity::ID(a1)] >= 0 )
       {
-        if ( s_iEntityWarMapXYs[IEntity::ID()] != a2 )
+        if ( s_iEntityWarMapXYs[IEntity::ID(a1)] != a2 )
         {
-          v4 = IEntity::ID();
-          v18 = Y16X16::UnpackYFast(s_iEntityWarMapXYs[v4]);
-          v5 = IEntity::ID();
-          v17 = Y16X16::UnpackXFast(s_iEntityWarMapXYs[v5]);
-          v16 = Y16X16::UnpackYFast(a2);
-          v15 = Y16X16::UnpackXFast(a2);
-          v6 = IEntity::ID();
+          v4 = IEntity::ID(a1);
+          v17 = Y16X16::UnpackYFast(s_iEntityWarMapXYs[v4]);
+          v5 = IEntity::ID(a1);
+          v16 = Y16X16::UnpackXFast(s_iEntityWarMapXYs[v5]);
+          v15 = Y16X16::UnpackYFast(a2);
+          v14 = Y16X16::UnpackXFast(a2);
+          v6 = IEntity::ID(a1);
           BBSupportTracePrintF(
             6,
             "### ERROR !! CWarMap::NotifyMove(): Wrong old (X, Y) for entity %5i. Is (%4i, %4i), should be (%4i, %4i). !! ERROR ###",
             v6,
+            v14,
             v15,
             v16,
-            v17,
-            v18);
-          v7 = IEntity::ID();
+            v17);
+          v7 = IEntity::ID(a1);
           CMapObjectMgr::DbgPrintEntity(g_pMapObjectMgr, v7, 6, 0);
-          a2 = s_iEntityWarMapXYs[IEntity::ID()];
+          a2 = s_iEntityWarMapXYs[IEntity::ID(a1)];
         }
       }
       else
       {
-        v2 = IEntity::ID();
+        v2 = IEntity::ID(a1);
         BBSupportTracePrintF(6, "### ERROR !! CWarMap::NotifyMove(): Entity %i not in war map !! ERROR ###", v2);
-        v3 = IEntity::ID();
+        v3 = IEntity::ID(a1);
         CMapObjectMgr::DbgPrintEntity(g_pMapObjectMgr, v3, 6, 0);
         CWarMap::AddEntityEx(a1, a2);
       }
-      v8 = (Squares *)Y16X16::UnpackXFast(a2);
-      v21 = Squares::XYToVW(v8);
-      v9 = (Squares *)Y16X16::UnpackYFast(a2);
-      v19 = Squares::XYToVW(v9);
-      v22 = IEntity::PackedXY(a1);
-      v10 = (Squares *)Y16X16::UnpackXFast(v22);
-      v20 = Squares::XYToVW(v10);
-      v11 = (Squares *)Y16X16::UnpackYFast(v22);
-      if ( (v19 - Squares::XYToVW(v11)) | (v21 - v20) )
+      v8 = Y16X16::UnpackXFast(a2);
+      v20 = Squares::XYToVW(v8);
+      v9 = Y16X16::UnpackYFast(a2);
+      v18 = Squares::XYToVW(v9);
+      v21 = IEntity::PackedXY(a1);
+      v10 = Y16X16::UnpackXFast(v21);
+      v19 = Squares::XYToVW(v10);
+      v11 = Y16X16::UnpackYFast(v21);
+      if ( (v18 - Squares::XYToVW(v11)) | (v20 - v19) )
       {
         CWarMap::RemoveEntityEx(a1, a2);
-        return CWarMap::AddEntity(a1);
+        CWarMap::AddEntity(a1);
       }
       else
       {
-        result = IEntity::ID();
-        s_iEntityWarMapXYs[result] = v22;
+        s_iEntityWarMapXYs[IEntity::ID(a1)] = v21;
       }
     }
   }
-  else
+  else if ( IEntity::WarMapNode(a1)->m_uNextPrev != 0xFFFF
+         && BBSupportDbgReport(
+              2,
+              "Pathing\\WarMap.cpp",
+              563,
+              "_rEntity.WarMapNode().m_uNextPrev == CWarMapNode::NEXT_PREV_NOT_IN_LIST") == 1 )
   {
-    result = (int)IEntity::WarMapNode(a1);
-    if ( *(_DWORD *)result != 0xFFFF )
-    {
-      result = BBSupportDbgReport(
-                 2,
-                 "Pathing\\WarMap.cpp",
-                 563,
-                 "_rEntity.WarMapNode().m_uNextPrev == CWarMapNode::NEXT_PREV_NOT_IN_LIST");
-      if ( result == 1 )
-        __debugbreak();
-    }
+    __debugbreak();
   }
-  return result;
 }
 
 

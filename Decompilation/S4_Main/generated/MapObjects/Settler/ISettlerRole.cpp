@@ -1,3 +1,4 @@
+#if FALSE
 #include "ISettlerRole.h"
 
 // Definitions for class ISettlerRole
@@ -127,14 +128,14 @@ int  ISettlerRole::SourcePileId(void)const {
   this->m_iTask = 0;
   this->m_uSettlerWalk = 0;
   this->m_iWalkspeed = 1;
-  this->m_uLoopFrame = 1;
+  this->m_uCycleFrames = 1;
   this->m_uTick = 0;
   this->unk_0A = 1;
   this->unk_0B = 0;
-  this->unk_0C = 0;
-  this->unk_0E = 0;
-  this->unk_10 = 0;
-  this->unk_12 = 0;
+  this->m_uToDoCount = 0;
+  this->m_iDestinationOffsetX = 0;
+  this->m_iDestinationOffsetY = 0;
+  this->m_uAttachedSettlerId = 0;
   this->m_uSourcePileId = 0;
   this->m_iDestinationPosition = 0;
   this->m_iStartPosition = 0;
@@ -147,91 +148,97 @@ int  ISettlerRole::SourcePileId(void)const {
 
 
 // address=[0x15898a0]
-// Decompiled from int __thiscall ISettlerRole::Go(ISettlerRole *this, CSettler *settler)
+// Decompiled from void __thiscall ISettlerRole::Go(ISettlerRole *this, CSettler *settler)
 void  ISettlerRole::Go(class CSettler * settler) {
   
+  int v2; // eax
   int v3; // eax
-  int v4; // eax
   int moveCosts; // [esp+4h] [ebp-8h]
 
   this->m_uSettlerWalk = CSettler::Walk(settler);
   if ( (this->m_uSettlerWalk & 0x20) != 0 )
-    return this->GetNextJob(settler);
-  if ( (this->m_uSettlerWalk & 0x40) != 0 )
-    return this->SetFree(settler, -1);
-  if ( (this->m_uSettlerWalk & 0xFu) >= 6 )
-    return IAnimatedEntity::RegisterForLogicUpdate(settler, 1);
-  settler->m_iDistance = -1;
-  this->m_iWalkspeed = 9;
-  if ( IEntity::Type(settler) != 1 && IEntity::Type(settler) != 60 )
-    return IAnimatedEntity::RegisterForLogicUpdate(settler, (char)this->m_iWalkspeed);
-  v3 = IEntity::PackedXY(settler);
-  v4 = CWorldManager::Index(v3);
-  moveCosts = CWorldManager::MoveCostsBits(v4);
-  if ( moveCosts == 1 )
   {
-    this->m_iWalkspeed = 8;
+    this->GetNextJob(this, settler);
   }
-  else if ( !moveCosts )
+  else if ( (this->m_uSettlerWalk & 0x40) != 0 )
   {
-    this->m_iWalkspeed = 7;
+    this->SetFree(this, settler, -1);
   }
-  return IAnimatedEntity::RegisterForLogicUpdate(settler, (char)this->m_iWalkspeed);
+  else if ( (this->m_uSettlerWalk & 0xFu) >= 6 )
+  {
+    IAnimatedEntity::RegisterForLogicUpdate(settler, 1);
+  }
+  else
+  {
+    settler->m_iDistance = -1;
+    this->m_iWalkspeed = 9;
+    if ( IEntity::Type(settler) == 1 || IEntity::Type(settler) == 60 )
+    {
+      v2 = IEntity::PackedXY(settler);
+      v3 = CWorldManager::Index(v2);
+      moveCosts = CWorldManager::MoveCostsBits(v3);
+      if ( moveCosts == 1 )
+      {
+        this->m_iWalkspeed = 8;
+      }
+      else if ( !moveCosts )
+      {
+        this->m_iWalkspeed = 7;
+      }
+    }
+    IAnimatedEntity::RegisterForLogicUpdate(settler, this->m_iWalkspeed);
+  }
 }
 
 
 // address=[0x15899a0]
-// Decompiled from int __thiscall ISettlerRole::LogicUpdate(ISettlerRole *this, struct CSettler *a2)
-void  ISettlerRole::LogicUpdate(class CSettler * a2) {
+// Decompiled from void __thiscall ISettlerRole::LogicUpdate(ISettlerRole *this, struct CSettler *pSettler)
+void  ISettlerRole::LogicUpdate(class CSettler * pSettler) {
   
   int v2; // eax
-  int v3; // eax
-  unsigned int v5; // eax
-  int v6; // [esp+0h] [ebp-20h]
-  int v7; // [esp+0h] [ebp-20h]
-  unsigned int v8; // [esp+4h] [ebp-1Ch]
-  int v9; // [esp+10h] [ebp-10h]
-  int v10; // [esp+14h] [ebp-Ch]
-  int v11; // [esp+18h] [ebp-8h]
+  DWORD v3; // eax
+  int v4; // [esp+10h] [ebp-10h]
+  CWalking *v5; // [esp+14h] [ebp-Ch]
+  CWalking *v6; // [esp+18h] [ebp-8h]
 
-  if ( *((_BYTE *)this + 4) != 17 )
-    return (*(int (__thiscall **)(ISettlerRole *, struct CSettler *))(*(_DWORD *)this + 28))(this, a2);
-  *((_BYTE *)a2 + 69) = 0;
-  *((_BYTE *)this + 7) = 1;
-  v11 = std::auto_ptr<CWalking>::operator->(v6);
-  (*(void (__thiscall **)(int, int, _DWORD))(*(_DWORD *)v11 + 8))(v11, -1, 0);
-  v10 = std::auto_ptr<CWalking>::operator->(v7);
-  v2 = (*(int (__thiscall **)(int, _DWORD))(*(_DWORD *)v10 + 12))(v10, *((_DWORD *)a2 + 6));
-  *((_BYTE *)this + 5) = CSettler::WalkDir(a2, v2);
-  v8 = *((_BYTE *)this + 5) & 0xF;
-  if ( v8 >= 6 )
+  if ( this->m_iTask != 17 )
   {
-    *((_BYTE *)a2 + 36) = 0;
-    v5 = CStateGame::Rand(g_pGame);
-    return IAnimatedEntity::RegisterForLogicUpdate(v5 % 4 + 1);
+    this->LogicUpdateJob(this, pSettler);
   }
   else
   {
-    v3 = std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator*((char *)a2 + 88);
-    *((_BYTE *)this + 7) = *(_BYTE *)(std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator->(
-                                        (char *)a2 + 88,
-                                        v3,
-                                        v8)
-                                    + 8);
-    if ( !*((_BYTE *)this + 7)
-      && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerRole.cpp", 191, "m_iCycleFrames > 0") == 1 )
+    pSettler->m_iDistance = 0;
+    this->m_uCycleFrames = 1;
+    v6 = std::auto_ptr<CWalking>::operator->(&pSettler->m_pWalkin);
+    v6->InitB((CWalkingBase *)v6, -1, 0);
+    v5 = std::auto_ptr<CWalking>::operator->(&pSettler->m_pWalkin);
+    v2 = v5->Walk(v5, pSettler->m_uPackedXY);
+    this->m_uSettlerWalk = CSettler::WalkDir(pSettler, v2);
+    if ( (this->m_uSettlerWalk & 0xFu) >= 6 )
     {
-      __debugbreak();
+      pSettler->m_iFrame = 0;
+      v3 = CStateGame::Rand(g_pGame);
+      IAnimatedEntity::RegisterForLogicUpdate(pSettler, v3 % 4 + 1);
     }
-    if ( *((unsigned __int8 *)this + 7) > 1u )
-      v9 = *((unsigned __int8 *)this + 7) - 1;
     else
-      v9 = 1;
-    if ( v9 <= 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerRole.cpp", 194, "iCycleFramesEx > 0") == 1 )
-      __debugbreak();
-    *((_BYTE *)a2 + 36) = 0;
-    *((_BYTE *)a2 + 69) = -1;
-    return IAnimatedEntity::RegisterForLogicUpdate(v9);
+    {
+      std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator*(&pSettler->m_cCurrentToDoItemIter);
+      this->m_uCycleFrames = std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator->(&pSettler->m_cCurrentToDoItemIter)->m_iFrameCount;
+      if ( !this->m_uCycleFrames
+        && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerRole.cpp", 191, "m_iCycleFrames > 0") == 1 )
+      {
+        __debugbreak();
+      }
+      if ( (unsigned __int8)this->m_uCycleFrames > 1u )
+        v4 = (unsigned __int8)this->m_uCycleFrames - 1;
+      else
+        v4 = 1;
+      if ( v4 <= 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerRole.cpp", 194, "iCycleFramesEx > 0") == 1 )
+        __debugbreak();
+      pSettler->m_iFrame = 0;
+      pSettler->m_iDistance = -1;
+      IAnimatedEntity::RegisterForLogicUpdate(pSettler, v4);
+    }
   }
 }
 
@@ -242,21 +249,19 @@ void  ISettlerRole::Update(class CSettler * _pSettler) {
   
   __int16 TickCounter; // si
   DWORD v3; // eax
-  int v4; // esi
+  int m_iRandom; // esi
   int v5; // eax
   int v6; // eax
   int v7; // [esp-8h] [ebp-34h]
   int v8; // [esp-4h] [ebp-30h]
-  int v9; // [esp+4h] [ebp-28h] BYREF
-  unsigned __int8 v10; // [esp+8h] [ebp-24h]
-  char v11; // [esp+9h] [ebp-23h]
-  T_AI_WARRIOR_TYPE v12; // [esp+Ch] [ebp-20h]
-  int v13; // [esp+10h] [ebp-1Ch]
-  unsigned int unk_07; // [esp+14h] [ebp-18h]
-  int v15; // [esp+18h] [ebp-14h]
-  unsigned int v16; // [esp+1Ch] [ebp-10h]
-  unsigned int m_cFrame; // [esp+20h] [ebp-Ch]
-  int v18; // [esp+24h] [ebp-8h]
+  struct SJobSoundInfo sJobSoundInfo; // [esp+4h] [ebp-28h] BYREF
+  T_AI_WARRIOR_TYPE v10; // [esp+Ch] [ebp-20h]
+  int v11; // [esp+10h] [ebp-1Ch]
+  unsigned int m_uCycleFrames; // [esp+14h] [ebp-18h]
+  int v13; // [esp+18h] [ebp-14h]
+  unsigned int v14; // [esp+1Ch] [ebp-10h]
+  unsigned int m_iFrame; // [esp+20h] [ebp-Ch]
+  int v16; // [esp+24h] [ebp-8h]
 
   TickCounter = CStateGame::GetTickCounter(g_pGame);
   this->m_uTick = TickCounter - IAnimatedEntity::LastUpdateTick(_pSettler);
@@ -264,8 +269,8 @@ void  ISettlerRole::Update(class CSettler * _pSettler) {
   {
     v3 = CStateGame::GetTickCounter(g_pGame);
     IAnimatedEntity::SetLastUpdateTick(_pSettler, v3);
-    v18 = this->m_iTask - 1;
-    switch ( v18 )
+    v16 = this->m_iTask - 1;
+    switch ( v16 )
     {
       case 0:
       case 2:
@@ -278,35 +283,38 @@ void  ISettlerRole::Update(class CSettler * _pSettler) {
       case 30:
         if ( this->unk_0A )
         {
-          _pSettler->m_iFrame = (this->m_uTick + IAnimatedEntity::Frame(_pSettler)) % this->m_uLoopFrame;
+          _pSettler->m_iFrame = (this->m_uTick + IAnimatedEntity::Frame(_pSettler)) % this->m_uCycleFrames;
         }
         else
         {
-          unk_07 = this->m_uLoopFrame;
-          m_cFrame = _pSettler->m_iFrame;
-          v16 = this->m_uTick % unk_07;
-          if ( m_cFrame < v16 )
-            _pSettler->m_iFrame = (unk_07 + m_cFrame - v16) % this->m_uLoopFrame;
+          m_uCycleFrames = this->m_uCycleFrames;
+          m_iFrame = _pSettler->m_iFrame;
+          v14 = this->m_uTick % m_uCycleFrames;
+          if ( m_iFrame < v14 )
+            _pSettler->m_iFrame = (m_uCycleFrames + m_iFrame - v14) % this->m_uCycleFrames;
           else
-            _pSettler->m_iFrame = m_cFrame - v16;
+            _pSettler->m_iFrame = m_iFrame - v14;
         }
-        CEntityToDoListMgr::GetJobSoundInfo(_pSettler->m_iJobPart, (struct SJobSoundInfo *)&v9);
-        if ( v9 > 0 && v11 == _pSettler->m_iFrame )
+        CEntityToDoListMgr::GetJobSoundInfo(_pSettler->m_iJobPart, &sJobSoundInfo);
+        if ( sJobSoundInfo.m_iId > 0 && sJobSoundInfo.m_iFrame == _pSettler->m_iFrame )
         {
-          if ( v10 == 100 || (v4 = v10, v4 >= j__rand() % 100) )
+          if ( sJobSoundInfo.m_iRandom == 100 || (m_iRandom = sJobSoundInfo.m_iRandom, m_iRandom >= j__rand() % 100) )
           {
             v8 = IEntity::Y(_pSettler);
             v5 = IEntity::X(_pSettler);
-            if ( (*(unsigned __int8 (__thiscall **)(void *, int, int))(*(_DWORD *)g_pFogging + 32))(g_pFogging, v5, v8) )
+            if ( (*(unsigned __int8 (__thiscall **)(CFogging *, int, int))(*(_DWORD *)g_pFogging + 32))(
+                   g_pFogging,
+                   v5,
+                   v8) )
             {
               v7 = IEntity::Y(_pSettler);
               v6 = IEntity::X(_pSettler);
-              CSoundManager::PlayEnvironmentSound(g_pSoundManager, v9, v6, v7, 0);
+              CSoundManager::PlayEnvironmentSound(g_pSoundManager, sJobSoundInfo.m_iId, v6, v7, 0);
             }
           }
         }
-        v12 = IEntity::WarriorType(_pSettler);
-        if ( ((1 << v12) & 0x3C) != 0 )
+        v10 = IEntity::WarriorType(_pSettler);
+        if ( ((1 << v10) & 0x3C) != 0 )
           CLogic::SetWarAction(g_pLogic);
         break;
       case 5:
@@ -316,10 +324,10 @@ void  ISettlerRole::Update(class CSettler * _pSettler) {
         }
         else
         {
-          _pSettler->m_iFrame = (this->m_uTick + _pSettler->m_iFrame) % this->m_uLoopFrame;
+          _pSettler->m_iFrame = (this->m_uTick + _pSettler->m_iFrame) % this->m_uCycleFrames;
           if ( !_pSettler->m_iFrame )
             _pSettler->m_iFrame = 1;
-          IMovingEntity::DecDistance(_pSettler, (this->m_uTick << 8) / (char)this->m_iWalkspeed);
+          IMovingEntity::DecDistance(_pSettler, (this->m_uTick << 8) / this->m_iWalkspeed);
         }
         break;
       case 16:
@@ -329,15 +337,15 @@ void  ISettlerRole::Update(class CSettler * _pSettler) {
         }
         else
         {
-          _pSettler->m_iFrame = (this->m_uTick + _pSettler->m_iFrame) % this->m_uLoopFrame;
+          _pSettler->m_iFrame = (this->m_uTick + _pSettler->m_iFrame) % this->m_uCycleFrames;
           if ( !_pSettler->m_iFrame )
             _pSettler->m_iFrame = 1;
-          if ( this->m_uLoopFrame > 1u )
-            v15 = this->m_uLoopFrame - 1;
+          if ( this->m_uCycleFrames > 1u )
+            v13 = this->m_uCycleFrames - 1;
           else
-            v15 = 1;
-          v13 = v15;
-          IMovingEntity::DecDistance(_pSettler, (this->m_uTick << 8) / v15);
+            v13 = 1;
+          v11 = v13;
+          IMovingEntity::DecDistance(_pSettler, (this->m_uTick << 8) / v13);
         }
         break;
       default:
@@ -665,13 +673,13 @@ int  ISettlerRole::GetObserverTarget(enum T_OBSERVER_TARGET a2) {
     operator^<signed char>(a1, &this->m_iTask);
     operator^<unsigned char>(a1, &this->m_uSettlerWalk);
     operator^<signed char>(a1, &this->m_iWalkspeed);
-    operator^<unsigned char>(a1, &this->m_uLoopFrame);
+    operator^<unsigned char>(a1, &this->m_uCycleFrames);
     operator^<unsigned short>(a1, &this->m_uTick);
     operator^<unsigned char>(a1, &this->unk_0A);
     operator^<unsigned char>(a1, &this->unk_0B);
-    operator^<short>(a1, &this->unk_0E);
-    operator^<short>(a1, &this->unk_10);
-    operator^<unsigned short>(a1, &this->unk_12);
+    operator^<short>(a1, &this->m_iDestinationOffsetX);
+    operator^<short>(a1, &this->m_iDestinationOffsetY);
+    operator^<unsigned short>(a1, &this->m_uAttachedSettlerId);
     operator^<int>(a1, &this->m_iDestinationPosition);
     operator^<int>(a1, &this->m_iStartPosition);
     operator^<unsigned short>(a1, &this->m_uHomeEntityId);
@@ -682,7 +690,7 @@ int  ISettlerRole::GetObserverTarget(enum T_OBSERVER_TARGET a2) {
   if ( v4 >= 2 )
   {
     operator^<unsigned short>(a1, &this->m_uSourcePileId);
-    operator^<unsigned char>(a1, &this->unk_0C);
+    operator^<unsigned char>(a1, &this->m_uToDoCount);
   }
   if ( v4 && v4 < 3 )
     return this;
@@ -906,123 +914,120 @@ bool  ISettlerRole::CheckHome(class CSettler * a2) {
 
 
 // address=[0x158ace0]
-// Decompiled from int __thiscall ISettlerRole::InitCommonTaskValues(  ISettlerRole *this,  struct CSettler *a2,  const struct CEntityTask *a3)
+// Decompiled from void __thiscall ISettlerRole::InitCommonTaskValues(  ISettlerRole *this,  struct CSettler *a2,  const struct CEntityTask *a3)
 void  ISettlerRole::InitCommonTaskValues(class CSettler * a2, class CEntityTask const & a3) {
   
   int v3; // eax
-  const char *v5; // [esp-4h] [ebp-10h]
-  IBuildingRole *v6; // [esp+0h] [ebp-Ch]
-  unsigned __int8 *BuildingPtr; // [esp+4h] [ebp-8h]
+  const char *v4; // [esp-4h] [ebp-10h]
+  IBuildingRole *v5; // [esp+0h] [ebp-Ch]
+  struct CBuilding *BuildingPtr; // [esp+4h] [ebp-8h]
 
-  if ( !*((_BYTE *)a3 + 4)
-    || *((_BYTE *)a3 + 4) == 1
-    || *((_BYTE *)a3 + 4) == 29
-    || *((_BYTE *)a3 + 4) == 2
-    || *((_BYTE *)a3 + 4) == 5
-    || *((_BYTE *)a3 + 4) == 4
-    || *((_BYTE *)a3 + 4) == 30 )
+  if ( !a3->m_iTask
+    || a3->m_iTask == 1
+    || a3->m_iTask == 29
+    || a3->m_iTask == 2
+    || a3->m_iTask == 5
+    || a3->m_iTask == 4
+    || a3->m_iTask == 30 )
   {
-    IEntity::SetFlagBits(a2, (EntityFlag)0x800u);
-    *((_BYTE *)a2 + 69) = 0;
-    *((_WORD *)this + 7) = *((_WORD *)a3 + 5);
-    *((_WORD *)this + 8) = *((_WORD *)a3 + 6);
+    IEntity::SetFlagBits(a2, (EntityFlag)2048);
+    a2->m_iDistance = 0;
+    this->m_iDestinationOffsetX = a3->m_iX;
+    this->m_iDestinationOffsetY = a3->m_iY;
   }
   else
   {
-    IEntity::ClearFlagBits(a2, (EntityFlag)0x800u);
-    *((_BYTE *)a2 + 69) = 0;
-    *((_WORD *)this + 7) = *((_WORD *)a3 + 5);
-    *((_WORD *)this + 8) = *((_WORD *)a3 + 6);
+    IEntity::ClearFlagBits(a2, (EntityFlag)2048);
+    a2->m_iDistance = 0;
+    this->m_iDestinationOffsetX = a3->m_iX;
+    this->m_iDestinationOffsetY = a3->m_iY;
   }
-  if ( *((char *)a3 + 6) >= 0 )
-    *((_BYTE *)a2 + 68) = *((_BYTE *)a3 + 6);
-  if ( *((_BYTE *)a3 + 20) )
+  if ( a3->m_iDir >= 0 )
+    a2->m_iDirection = a3->m_iDir;
+  if ( a3->m_bVisible )
     IEntity::SetFlagBits(a2, EntityFlag_Visible);
   else
     IEntity::ClearFlagBits(a2, EntityFlag_Visible);
-  if ( *((_BYTE *)a3 + 9) )
+  if ( a3->m_iTrigger )
   {
-    if ( !*((_WORD *)this + 16)
+    if ( !this->m_uHomeEntityId
       && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerRole.cpp", 493, "m_uHomeEntityId != 0") == 1 )
     {
       __debugbreak();
     }
-    if ( *((_WORD *)this + 16) )
+    if ( this->m_uHomeEntityId )
     {
-      BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 16));
+      BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, this->m_uHomeEntityId);
       if ( !BuildingPtr && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerRole.cpp", 498, "pBuilding != NULL") == 1 )
         __debugbreak();
       if ( BuildingPtr )
       {
-        v6 = (IBuildingRole *)CBuilding::Role(BuildingPtr);
-        IBuildingRole::TakeJobTrigger(v6, *((unsigned __int8 *)a3 + 9));
+        v5 = (IBuildingRole *)CBuilding::Role(BuildingPtr);
+        IBuildingRole::TakeJobTrigger(v5, a3->m_iTrigger);
       }
     }
   }
-  *((_BYTE *)this + 5) = 72;
-  *((_BYTE *)this + 4) = *((_BYTE *)a3 + 4);
-  *((_BYTE *)this + 6) = *((_BYTE *)a3 + 7);
-  *((_BYTE *)this + 7) = *((_BYTE *)a3 + 8);
-  if ( *((unsigned __int8 *)this + 7) <= 1u )
+  this->m_uSettlerWalk = 72;
+  this->m_iTask = a3->m_iTask;
+  this->m_iWalkspeed = a3->m_iDuration;
+  this->m_uCycleFrames = a3->m_iFrameCount;
+  if ( this->m_uCycleFrames <= 1u )
   {
-    v5 = (&off_37B8064)[2 * *((unsigned __int16 *)a3 + 7)];
-    v3 = IEntity::Type((unsigned __int16 *)a2);
+    v4 = (&off_37B8064)[2 * a3->m_iJobNr];
+    v3 = IEntity::Type(a2);
     BBSupportTracePrintF(
       3,
       "ISettlerRole::InitCommonTaskValues(): Invalid number of frames (%i) for settler type %s, job %s!",
-      *((unsigned __int8 *)this + 7),
+      this->m_uCycleFrames,
       (&off_37B7E4C)[2 * v3],
-      v5);
+      v4);
   }
-  if ( !*((_BYTE *)this + 7)
+  if ( !this->m_uCycleFrames
     && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerRole.cpp", 526, "m_iCycleFrames >= 1") == 1 )
   {
     __debugbreak();
   }
-  if ( *((_WORD *)a3 + 8) )
-    *((_WORD *)this + 17) = *((_WORD *)a3 + 8);
-  if ( *((_BYTE *)a3 + 5) )
-    *((_BYTE *)this + 11) = *((_BYTE *)a3 + 5);
-  *((_BYTE *)a2 + 36) = 0;
-  *((_WORD *)a2 + 19) = *((_WORD *)a3 + 7);
-  *((_BYTE *)this + 10) = *((_BYTE *)a3 + 21);
-  if ( *((_BYTE *)this + 10) )
-    return IAnimatedEntity::SetFrame(0);
+  if ( a3->m_uData9 )
+    this->m_uEntityId = a3->m_uData9;
+  if ( a3->m_iEntity )
+    this->unk_0B = a3->m_iEntity;
+  a2->m_iFrame = 0;
+  a2->m_iJobPart = a3->m_iJobNr;
+  this->unk_0A = a3->m_bForward;
+  if ( this->unk_0A )
+    IAnimatedEntity::SetFrame(a2, 0);
   else
-    return IAnimatedEntity::SetFrame(*((_BYTE *)this + 7) - 1);
+    IAnimatedEntity::SetFrame(a2, this->m_uCycleFrames - 1);
 }
 
 
 // address=[0x158afa0]
-// Decompiled from int __thiscall ISettlerRole::NewDestinationEx(  void *this,  unsigned __int16 *a2,  void *a3,  __int16 a4,  __int16 a5,  char a6)
-void  ISettlerRole::NewDestinationEx(class CSettler * a2, class std::list<class CEntityTask,class std::allocator<class CEntityTask> > & a3, int a4, int a5, int a6) {
+// Decompiled from void __thiscall ISettlerRole::NewDestinationEx(  ISettlerRole *this,  CSettler *pSettler,  void *a3,  int a4,  int a5,  char a6)
+void  ISettlerRole::NewDestinationEx(class CSettler * pSettler, class std::list<class CEntityTask,class std::allocator<class CEntityTask> > & a3, int a4, int a5, int a6) {
   
   int v6; // eax
   unsigned int v7; // eax
   CEntityTask *v8; // eax
   CEntityTask *v9; // eax
-  int result; // eax
-  int v11; // [esp-4h] [ebp-50h]
-  int v12[6]; // [esp+0h] [ebp-4Ch] BYREF
-  _BYTE v13[24]; // [esp+18h] [ebp-34h] BYREF
-  int v14; // [esp+30h] [ebp-1Ch]
-  int ActualTask; // [esp+34h] [ebp-18h]
-  void *v16; // [esp+38h] [ebp-14h]
+  int v10; // [esp-4h] [ebp-50h]
+  CEntityTask v11; // [esp+0h] [ebp-4Ch] BYREF
+  CEntityTask v12; // [esp+18h] [ebp-34h] BYREF
+  int v13; // [esp+30h] [ebp-1Ch]
+  CEntityTask *ActualTask; // [esp+34h] [ebp-18h]
   unsigned int SettlerJobFrameCount; // [esp+3Ch] [ebp-10h]
-  BOOL v18; // [esp+40h] [ebp-Ch]
+  BOOL v17; // [esp+40h] [ebp-Ch]
   int SettlerFirstJob; // [esp+44h] [ebp-8h]
-  bool v20; // [esp+4Bh] [ebp-1h]
+  bool v19; // [esp+4Bh] [ebp-1h]
 
-  v16 = this;
   if ( std::list<CEntityTask>::size(a3) )
   {
-    ActualTask = IMovingEntity::GetActualTask(a2);
-    v18 = *(unsigned __int8 *)(ActualTask + 4) == 17;
-    v20 = v18;
-    if ( !v18 && (a6 & 2) != 0 )
+    ActualTask = IMovingEntity::GetActualTask(pSettler);
+    v17 = ActualTask->m_iTask == 17;
+    v19 = v17;
+    if ( !v17 && (a6 & 2) != 0 )
     {
-      v14 = std::list<CEntityTask>::back();
-      if ( *(_BYTE *)(v14 + 4) == 17 )
+      v13 = std::list<CEntityTask>::back();
+      if ( *(_BYTE *)(v13 + 4) == 17 )
         std::list<CEntityTask>::pop_back();
     }
     else
@@ -1030,49 +1035,22 @@ void  ISettlerRole::NewDestinationEx(class CSettler * a2, class std::list<class 
       std::list<CEntityTask>::clear();
     }
   }
-  v11 = IEntity::Type(a2);
-  v6 = IEntity::Race(a2);
-  SettlerFirstJob = CGfxManager::GetSettlerFirstJob(v6, v11);
-  v7 = IEntity::Race(a2);
-  SettlerJobFrameCount = CGfxManager::GetSettlerJobFrameCount((CGfxManager *)g_pGfxManager, v7, SettlerFirstJob, 2u);
-  v8 = CEntityTask::CEntityTask(
-         (CEntityTask *)v13,
-         7,
-         SettlerFirstJob,
-         a4,
-         a5,
-         -1,
-         SettlerJobFrameCount,
-         -1,
-         1,
-         1,
-         0,
-         0,
-         0,
-         0);
-  std::list<CEntityTask>::push_back(v8);
-  v9 = CEntityTask::CEntityTask(
-         (CEntityTask *)v12,
-         17,
-         SettlerFirstJob,
-         a6 & 1,
-         0,
-         -1,
-         SettlerJobFrameCount,
-         -1,
-         1,
-         1,
-         0,
-         0,
-         0,
-         0);
-  std::list<CEntityTask>::push_back(v9);
-  IMovingEntity::SetToDoList(a2, (int)a3);
-  result = std::list<CEntityTask>::size(a3);
-  if ( result != 2 )
-    return result;
-  IMovingEntity::ResetToDoList(v12[0]);
-  return (*(int (__thiscall **)(void *, unsigned __int16 *))(*(_DWORD *)v16 + 40))(v16, a2);
+  v10 = IEntity::Type(pSettler);
+  v6 = IEntity::Race(pSettler);
+  SettlerFirstJob = CGfxManager::GetSettlerFirstJob(v6, v10);
+  v7 = IEntity::Race(pSettler);
+  SettlerJobFrameCount = CGfxManager::GetSettlerJobFrameCount(g_pGfxManager, v7, SettlerFirstJob, 2u);
+  v8 = CEntityTask::CEntityTask(&v12, 7, SettlerFirstJob, a4, a5, -1, SettlerJobFrameCount, -1, 1, 1, 0, 0, 0, 0);
+  std::list<CEntityTask>::push_back((int)v8);
+  v9 = CEntityTask::CEntityTask(&v11, 17, SettlerFirstJob, a6 & 1, 0, -1, SettlerJobFrameCount, -1, 1, 1, 0, 0, 0, 0);
+  std::list<CEntityTask>::push_back((int)v9);
+  IMovingEntity::SetToDoList(pSettler, (DWORD)a3);
+  if ( std::list<CEntityTask>::size(a3) == 2 )
+  {
+    IMovingEntity::ResetToDoList(pSettler);
+    this->TakeJob(this, pSettler);
+  }
 }
 
 
+#endif // Already implemented

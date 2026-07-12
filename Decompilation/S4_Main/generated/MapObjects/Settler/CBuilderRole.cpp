@@ -1,3 +1,4 @@
+#if FALSE
 #include "CBuilderRole.h"
 
 // Definitions for class CBuilderRole
@@ -28,35 +29,34 @@ class CWalking *  CBuilderRole::InitWalking(class CSettler * a2) {
 
 
 // address=[0x1562dd0]
-// Decompiled from void __thiscall CBuilderRole::LogicUpdateJob(CBuilderRole *this, struct CSettler *a2)
+// Decompiled from void __fastcall CBuilderRole::LogicUpdateJob(CBuilderRole *this, int a2, struct CSettler *a3)
 void  CBuilderRole::LogicUpdateJob(class CSettler * a2) {
   
-  _DWORD *v2; // eax
-  CBuildingSiteRole *v3; // [esp+0h] [ebp-Ch]
-  char v4; // [esp+4h] [ebp-8h]
+  CBuilding *v3; // eax
+  CBuildingSiteRole *v4; // [esp+0h] [ebp-Ch]
+  CHAR m_iTask; // [esp+4h] [ebp-8h]
 
-  v4 = *((_BYTE *)this + 4);
-  if ( v4 == 6 )
+  m_iTask = this->m_iTask;
+  if ( m_iTask == 6 )
   {
-    IMovingEntity::SetDistance(a2, 0);
-    (*(void (__thiscall **)(CBuilderRole *, struct CSettler *))(*(_DWORD *)this + 16))(this, a2);
+    IMovingEntity::SetDistance(a3, 0);
+    this->Go(this, a3);
   }
-  else if ( v4 == 16
-         && (*(unsigned __int8 (__thiscall **)(CBuilderRole *, struct CSettler *))(*(_DWORD *)this + 124))(this, a2) )
+  else if ( m_iTask == 16 && this->CheckHome(this, a3) )
   {
-    *((_BYTE *)this + 7) = *(_BYTE *)(IMovingEntity::GetActualTask(a2) + 8);
-    IAnimatedEntity::RegisterForLogicUpdate(*((unsigned __int8 *)this + 7));
-    *((_BYTE *)this + 7) = 1;
-    v2 = (_DWORD *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 16));
-    v3 = (CBuildingSiteRole *)CBuilding::Role(v2);
-    if ( CBuildingSiteRole::HaveBuildingMaterial(v3) )
+    this->m_uCycleFrames = IMovingEntity::GetActualTask(a3)->m_iFrameCount;
+    IAnimatedEntity::RegisterForLogicUpdate(a3, this->m_uCycleFrames);
+    this->m_uCycleFrames = 1;
+    v3 = CBuildingMgr::operator[](this->m_uHomeEntityId);
+    v4 = (CBuildingSiteRole *)CBuilding::Role(v3);
+    if ( CBuildingSiteRole::HaveBuildingMaterial(v4) )
     {
-      *((_BYTE *)this + 7) = *(_BYTE *)(IMovingEntity::GetActualTask(a2) + 8);
-      CBuildingSiteRole::AddWork(v3, *((unsigned __int8 *)this + 7));
+      this->m_uCycleFrames = IMovingEntity::GetActualTask(a3)->m_iFrameCount;
+      CBuildingSiteRole::AddWork(v4, this->m_uCycleFrames);
     }
     else
     {
-      (*(void (__thiscall **)(CBuilderRole *, struct CSettler *, int))(*(_DWORD *)this + 64))(this, a2, -1);
+      this->SetFree(this, a3, -1);
     }
   }
 }
@@ -211,9 +211,9 @@ class CBuilderRole * __cdecl CBuilderRole::Load(std::istream & a1) {
  CBuilderRole::CBuilderRole(void) {
   
   ISettlerRole::ISettlerRole(this);
-  *(_DWORD *)this = &CBuilderRole::_vftable_;
-  *((_BYTE *)this + 44) = 0;
-  *((_BYTE *)this + 45) = 0;
+  this->__vftable = (CBuilderRole_vtbl *)&CBuilderRole::_vftable_;
+  this->m_bU0 = 0;
+  this->m_bU1 = 0;
   return this;
 }
 
@@ -245,38 +245,38 @@ void  CBuilderRole::GetNextJob(class CSettler * a2) {
 // Decompiled from void __thiscall CBuilderRole::TakeJob(CBuilderRole *this, struct CSettler *a2)
 void  CBuilderRole::TakeJob(class CSettler * a2) {
   
-  const struct CEntityTask *ActualTask; // eax
+  CEntityTask *ActualTask; // eax
   CBuilding *v3; // eax
   int v4; // [esp-4h] [ebp-Ch]
-  char v5; // [esp+0h] [ebp-8h]
+  CHAR m_iTask; // [esp+0h] [ebp-8h]
 
-  ActualTask = (const struct CEntityTask *)IMovingEntity::GetActualTask(a2);
+  ActualTask = IMovingEntity::GetActualTask(a2);
   ISettlerRole::InitCommonTaskValues(this, a2, ActualTask);
-  v5 = *((_BYTE *)this + 4);
-  switch ( v5 )
+  m_iTask = this->m_iTask;
+  switch ( m_iTask )
   {
     case 7:
-      IAnimatedEntity::SetFrame(1);
-      IMovingEntity::WalkToXY(a2, *((_DWORD *)this + 6), 0);
-      *((_BYTE *)this + 4) = 6;
-      IMovingEntity::SetDisplacementCosts(5);
-      (*(void (__thiscall **)(CBuilderRole *, struct CSettler *))(*(_DWORD *)this + 16))(this, a2);
+      IAnimatedEntity::SetFrame(a2, 1u);
+      IMovingEntity::WalkToXY(a2, this->m_iDestinationPosition, 0);
+      this->m_iTask = 6;
+      IMovingEntity::SetDisplacementCosts(a2, 5);
+      this->Go(this, a2);
       break;
     case 16:
-      if ( (*(unsigned __int8 (__thiscall **)(CBuilderRole *, struct CSettler *))(*(_DWORD *)this + 124))(this, a2) )
+      if ( this->CheckHome(this, a2) )
       {
-        v4 = IEntity::ID();
-        v3 = (CBuilding *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 16));
+        v4 = IEntity::ID(a2);
+        v3 = CBuildingMgr::operator[](this->m_uHomeEntityId);
         CBuilding::SettlerEnter(v3, v4);
-        IMovingEntity::SetDisplacementCosts(10);
-        IAnimatedEntity::RegisterForLogicUpdate(*((unsigned __int8 *)this + 7));
-        IMovingEntity::SetDirection(a2, *((char *)this + 44));
-        *((_BYTE *)this + 45) = 1;
+        IMovingEntity::SetDisplacementCosts(a2, 10);
+        IAnimatedEntity::RegisterForLogicUpdate(a2, this->m_uCycleFrames);
+        IMovingEntity::SetDirection(a2, this->m_bU0);
+        this->m_bU1 = 1;
       }
       break;
     case 17:
-      IMovingEntity::SetDisplacementCosts(0);
-      IAnimatedEntity::RegisterForLogicUpdate(1);
+      IMovingEntity::SetDisplacementCosts(a2, 0);
+      IAnimatedEntity::RegisterForLogicUpdate(a2, 1);
       break;
   }
 }
@@ -387,3 +387,4 @@ void  CBuilderRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent
 }
 
 
+#endif // Already implemented

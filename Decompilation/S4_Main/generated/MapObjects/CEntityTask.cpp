@@ -23,19 +23,19 @@ class CPersistence * __cdecl CEntityTask::New(std::istream & a1) {
   
   CPersistence::CPersistence(this);
   this->__vftable = (CPersistence_vtbl *)&CEntityTask::_vftable_;
-  this->m_uData0 = _rCloneSource->m_uData0;
-  this->m_uData1 = _rCloneSource->m_uData1;
-  this->m_iData2 = _rCloneSource->m_iData2;
-  this->m_iData3 = _rCloneSource->m_iData3;
-  this->m_iData4 = _rCloneSource->m_iData4;
-  this->m_uData5 = _rCloneSource->m_uData5;
-  this->m_iData6 = _rCloneSource->m_iData6;
-  this->m_iData7 = _rCloneSource->m_iData7;
-  this->m_uData8 = _rCloneSource->m_uData8;
+  this->m_iTask = _rCloneSource->m_iTask;
+  this->m_iEntity = _rCloneSource->m_iEntity;
+  this->m_iDir = _rCloneSource->m_iDir;
+  this->m_iDuration = _rCloneSource->m_iDuration;
+  this->m_iFrameCount = _rCloneSource->m_iFrameCount;
+  this->m_iTrigger = _rCloneSource->m_iTrigger;
+  this->m_iX = _rCloneSource->m_iX;
+  this->m_iY = _rCloneSource->m_iY;
+  this->m_iJobNr = _rCloneSource->m_iJobNr;
   this->m_uData9 = _rCloneSource->m_uData9;
   this->m_uData10 = _rCloneSource->m_uData10;
-  this->m_bData11 = _rCloneSource->m_bData11;
-  this->m_bData12 = _rCloneSource->m_bData12;
+  this->m_bVisible = _rCloneSource->m_bVisible;
+  this->m_bForward = _rCloneSource->m_bForward;
   return this;
 }
 
@@ -49,24 +49,24 @@ unsigned long  CEntityTask::ClassID(void)const {
 
 
 // address=[0x14dfb60]
-// Decompiled from CEntityTask *__thiscall CEntityTask::CEntityTask(  CEntityTask *this,  unsigned __int8 a2,  unsigned __int16 a3,  __int16 a4,  __int16 a5,  char a6,  char a7,  char a8,  bool a9,  bool a10,  unsigned __int8 a11,  unsigned __int16 a12,  unsigned __int16 a13,  unsigned __int8 a14)
- CEntityTask::CEntityTask(int a2, int a3, int a4, int a5, int a6, int a7, int a8, bool a9, bool a10, int a11, unsigned int a12, unsigned int a13, unsigned int a14) {
+// Decompiled from CEntityTask *__thiscall CEntityTask::CEntityTask(  CEntityTask *this,  int _iTask,  int _iJobNr,  int _iX,  int _iY,  int _iDuration,  int _iFrameCount,  int _iDir,  bool _bForward,  bool _bVisible,  int _iEntity,  unsigned int a12,  unsigned int a13,  unsigned int _iTrigger)
+ CEntityTask::CEntityTask(int _iTask, int _iJobNr, int _iX, int _iY, int _iDuration, int _iFrameCount, int _iDir, bool _bForward, bool _bVisible, int _iEntity, unsigned int a12, unsigned int a13, unsigned int _iTrigger) {
   
   CPersistence::CPersistence(this);
   this->__vftable = (CPersistence_vtbl *)&CEntityTask::_vftable_;
-  this->m_uData0 = a2;
-  this->m_uData1 = a11;
-  this->m_iData2 = a8;
-  this->m_iData3 = a6;
-  this->m_iData4 = a7;
-  this->m_uData5 = a14;
-  this->m_iData6 = a4;
-  this->m_iData7 = a5;
-  this->m_uData8 = a3;
+  this->m_iTask = _iTask;
+  this->m_iEntity = _iEntity;
+  this->m_iDir = _iDir;
+  this->m_iDuration = _iDuration;
+  this->m_iFrameCount = _iFrameCount;
+  this->m_iTrigger = _iTrigger;
+  this->m_iX = _iX;
+  this->m_iY = _iY;
+  this->m_iJobNr = _iJobNr;
   this->m_uData9 = a12;
   this->m_uData10 = a13;
-  this->m_bData11 = a10;
-  this->m_bData12 = a9;
+  this->m_bVisible = _bVisible;
+  this->m_bForward = _bForward;
   return this;
 }
 
@@ -88,19 +88,19 @@ unsigned long  CEntityTask::ClassID(void)const {
     CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
     _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
   }
-  operator^<unsigned char>(a2, &this->m_uData0);
-  operator^<unsigned char>(a2, &this->m_uData1);
-  operator^<signed char>(a2, &this->m_iData2);
-  operator^<signed char>(a2, &this->m_iData3);
-  operator^<signed char>(a2, &this->m_iData4);
-  operator^<unsigned char>(a2, &this->m_uData5);
-  operator^<short>(a2, &this->m_iData6);
-  operator^<short>(a2, &this->m_iData7);
-  operator^<unsigned short>(a2, &this->m_uData8);
+  operator^<unsigned char>(a2, &this->m_iTask);
+  operator^<unsigned char>(a2, &this->m_iEntity);
+  operator^<signed char>(a2, &this->m_iDir);
+  operator^<signed char>(a2, &this->m_iDuration);
+  operator^<signed char>(a2, &this->m_iFrameCount);
+  operator^<unsigned char>(a2, &this->m_iTrigger);
+  operator^<short>(a2, &this->m_iX);
+  operator^<short>(a2, &this->m_iY);
+  operator^<unsigned short>(a2, &this->m_iJobNr);
   operator^<unsigned short>(a2, &this->m_uData9);
   operator^<unsigned short>(a2, &this->m_uData10);
-  operator^<bool>(a2, &this->m_bData11);
-  operator^<bool>(a2, &this->m_bData12);
+  operator^<bool>(a2, &this->m_bVisible);
+  operator^<bool>(a2, &this->m_bForward);
   return this;
 }
 
@@ -114,19 +114,19 @@ void  CEntityTask::Store(std::ostream & a1) {
   CPersistence::Store(this, a1);
   v2 = 1;
   operator^<unsigned int>(a1, &v2);
-  operator^<unsigned char>(a1, &this->m_uData0);
-  operator^<unsigned char>(a1, &this->m_uData1);
-  operator^<signed char>(a1, &this->m_iData2);
-  operator^<signed char>(a1, &this->m_iData3);
-  operator^<signed char>(a1, &this->m_iData4);
-  operator^<unsigned char>(a1, &this->m_uData5);
-  operator^<short>(a1, &this->m_iData6);
-  operator^<short>(a1, &this->m_iData7);
-  operator^<unsigned short>(a1, &this->m_uData8);
+  operator^<unsigned char>(a1, &this->m_iTask);
+  operator^<unsigned char>(a1, &this->m_iEntity);
+  operator^<signed char>(a1, &this->m_iDir);
+  operator^<signed char>(a1, &this->m_iDuration);
+  operator^<signed char>(a1, &this->m_iFrameCount);
+  operator^<unsigned char>(a1, &this->m_iTrigger);
+  operator^<short>(a1, &this->m_iX);
+  operator^<short>(a1, &this->m_iY);
+  operator^<unsigned short>(a1, &this->m_iJobNr);
   operator^<unsigned short>(a1, &this->m_uData9);
   operator^<unsigned short>(a1, &this->m_uData10);
-  operator^<bool>(a1, &this->m_bData11);
-  operator^<bool>(a1, &this->m_bData12);
+  operator^<bool>(a1, &this->m_bVisible);
+  operator^<bool>(a1, &this->m_bForward);
 }
 
 
@@ -138,19 +138,19 @@ void  CEntityTask::Store(std::ostream & a1) {
     (boost::exception_detail::clone_base *)this,
     (const struct boost::exception_detail::clone_base *)a2);
   this->__vftable = (CPersistence_vtbl *)&CEntityTask::_vftable_;
-  this->m_uData0 = a2->m_uData0;
-  this->m_uData1 = a2->m_uData1;
-  this->m_iData2 = a2->m_iData2;
-  this->m_iData3 = a2->m_iData3;
-  this->m_iData4 = a2->m_iData4;
-  this->m_uData5 = a2->m_uData5;
-  this->m_iData6 = a2->m_iData6;
-  this->m_iData7 = a2->m_iData7;
-  this->m_uData8 = a2->m_uData8;
+  this->m_iTask = a2->m_iTask;
+  this->m_iEntity = a2->m_iEntity;
+  this->m_iDir = a2->m_iDir;
+  this->m_iDuration = a2->m_iDuration;
+  this->m_iFrameCount = a2->m_iFrameCount;
+  this->m_iTrigger = a2->m_iTrigger;
+  this->m_iX = a2->m_iX;
+  this->m_iY = a2->m_iY;
+  this->m_iJobNr = a2->m_iJobNr;
   this->m_uData9 = a2->m_uData9;
   this->m_uData10 = a2->m_uData10;
-  this->m_bData11 = a2->m_bData11;
-  this->m_bData12 = a2->m_bData12;
+  this->m_bVisible = a2->m_bVisible;
+  this->m_bForward = a2->m_bForward;
   return this;
 }
 

@@ -7,7 +7,7 @@
 // Decompiled from int __thiscall IAnimatedEntity::Next(IAnimatedEntity *this)
 int  IAnimatedEntity::Next(void)const {
   
-  return this->m_wNextEntity;
+  return this->m_iNextEntity;
 }
 
 
@@ -31,7 +31,7 @@ int  IAnimatedEntity::GetLastLogicUpdateTick(void)const {
 // Decompiled from int __thiscall IAnimatedEntity::Previous(IAnimatedEntity *this)
 int  IAnimatedEntity::Previous(void)const {
   
-  return this->m_wPrevEntity;
+  return this->m_iPrevEntity;
 }
 
 
@@ -48,7 +48,7 @@ void  IAnimatedEntity::SetNext(int _id) {
   {
     __debugbreak();
   }
-  this->m_wNextEntity = _id;
+  this->m_iNextEntity = _id;
 }
 
 
@@ -56,7 +56,7 @@ void  IAnimatedEntity::SetNext(int _id) {
 // Decompiled from void __thiscall IAnimatedEntity::SetPrevious(IAnimatedEntity *this, WORD a2)
 void  IAnimatedEntity::SetPrevious(int a2) {
   
-  this->m_wPrevEntity = a2;
+  this->m_iPrevEntity = a2;
 }
 
 
@@ -210,10 +210,10 @@ void  IAnimatedEntity::BoxSelection(void) {
   IEntity::IEntity(this, id);
   this->__vftable = (IAnimatedEntity_vtbl *)&IAnimatedEntity::_vftable_;
   this->m_iFrame = 0;
-  this->m_cAttackerPlayerId = 0;
+  this->m_iAttackerPlayerId = 0;
   this->m_iJobPart = 0;
-  this->m_wPrevEntity = 0;
-  this->m_wNextEntity = 0;
+  this->m_iPrevEntity = 0;
+  this->m_iNextEntity = 0;
   this->m_uLastUpdateTick = 0;
   this->m_uLastLogicUpdate = -1;
   std::vector<CEntityEvent>::vector<CEntityEvent>(&this->m_iEventQueue);
@@ -225,7 +225,7 @@ void  IAnimatedEntity::BoxSelection(void) {
 // Decompiled from int __thiscall IAnimatedEntity::AttackerPlayerId(IAnimatedEntity *this)
 int  IAnimatedEntity::AttackerPlayerId(void)const {
   
-  return this->m_cAttackerPlayerId;
+  return this->m_iAttackerPlayerId;
 }
 
 
@@ -254,10 +254,10 @@ void  IAnimatedEntity::SetFrame(int a2) {
 
 
 // address=[0x15670a0]
-// Decompiled from void __thiscall IAnimatedEntity::EventQueueEmpty(IAnimatedEntity *this)
+// Decompiled from bool __thiscall IAnimatedEntity::EventQueueEmpty(IAnimatedEntity *this)
 bool  IAnimatedEntity::EventQueueEmpty(void)const {
   
-  std::vector<CEntityEvent>::empty(&this->m_iEventQueue);
+  return std::vector<CEntityEvent>::empty(&this->m_iEventQueue);
 }
 
 
@@ -294,10 +294,10 @@ void  IAnimatedEntity::SetJobPart(int a2) {
     _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
   }
   operator^<unsigned char>(a1, &this->m_iFrame);
-  operator^<unsigned char>(a1, &this->m_cAttackerPlayerId);
+  operator^<unsigned char>(a1, &this->m_iAttackerPlayerId);
   operator^<unsigned short>(a1, &this->m_iJobPart);
-  operator^<unsigned short>(a1, &this->m_wPrevEntity);
-  operator^<unsigned short>(a1, &this->m_wNextEntity);
+  operator^<unsigned short>(a1, &this->m_iPrevEntity);
+  operator^<unsigned short>(a1, &this->m_iNextEntity);
   operator^<unsigned int>(a1, &this->m_uLastUpdateTick);
   operator^<int>(a1, &this->m_uLastLogicUpdate);
   operator^<unsigned int>(a1, &iQueueSize);
@@ -329,10 +329,10 @@ void  IAnimatedEntity::Store(std::ostream & a2) {
   v8 = 1;
   operator^<unsigned int>(a2, &v8);
   operator^<unsigned char>(a2, &this->m_iFrame);
-  operator^<unsigned char>(a2, &this->m_cAttackerPlayerId);
+  operator^<unsigned char>(a2, &this->m_iAttackerPlayerId);
   operator^<unsigned short>(a2, &this->m_iJobPart);
-  operator^<unsigned short>(a2, &this->m_wPrevEntity);
-  operator^<unsigned short>(a2, &this->m_wNextEntity);
+  operator^<unsigned short>(a2, &this->m_iPrevEntity);
+  operator^<unsigned short>(a2, &this->m_iNextEntity);
   operator^<unsigned int>(a2, (int *)&this->m_uLastUpdateTick);
   operator^<int>(a2, &this->m_uLastLogicUpdate);
   iQueueSize = std::vector<CEntityEvent>::size(&this->m_iEventQueue);

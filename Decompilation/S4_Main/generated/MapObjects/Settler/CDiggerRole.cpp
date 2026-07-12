@@ -1,3 +1,4 @@
+#if FALSE
 #include "CDiggerRole.h"
 
 // Definitions for class CDiggerRole
@@ -103,18 +104,16 @@ bool  CDiggerRole::SetFree(class CSettler * a2, int a3) {
 
 
 // address=[0x1568ae0]
-// Decompiled from _DWORD *__thiscall CDiggerRole::CDiggerRole(char *this, int a2)
+// Decompiled from CDiggerRole *__thiscall CDiggerRole::CDiggerRole(CDiggerRole *this, struct std::istream *a2)
  CDiggerRole::CDiggerRole(std::istream & a2) {
   
   int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
-  _DWORD *v5; // [esp+10h] [ebp-10h]
   int v6; // [esp+1Ch] [ebp-4h]
 
-  v5 = this;
   ISettlerRole::ISettlerRole(this, a2);
   v6 = 0;
-  *v5 = &CDiggerRole::_vftable_;
+  this->__vftable = (ISettlerRole_vtbl *)&CDiggerRole::_vftable_;
   operator^<unsigned int>(a2, &v3);
   if ( v3 != 1 )
   {
@@ -123,10 +122,10 @@ bool  CDiggerRole::SetFree(class CSettler * a2, int a3) {
     CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
     _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
   }
-  operator^<unsigned short>(a2, v5 + 11);
-  operator^<unsigned char>(a2, (char *)v5 + 46);
+  operator^<unsigned short>(a2, (unsigned __int16 *)&this->m_iU0);
+  operator^<unsigned char>(a2, (unsigned __int8 *)&this->m_bU1);
   v6 = -1;
-  return v5;
+  return this;
 }
 
 
@@ -181,10 +180,10 @@ class CDiggerRole * __cdecl CDiggerRole::Load(std::istream & a1) {
 // Decompiled from CDiggerRole *__thiscall CDiggerRole::CDiggerRole(CDiggerRole *this)
  CDiggerRole::CDiggerRole(void) {
   
-  ISettlerRole::ISettlerRole((ISettlerRole *)this);
-  *(_DWORD *)this = &CDiggerRole::_vftable_;
-  *((_WORD *)this + 22) = 0;
-  *((_BYTE *)this + 46) = 0;
+  ISettlerRole::ISettlerRole(this);
+  this->__vftable = (ISettlerRole_vtbl *)&CDiggerRole::_vftable_;
+  this->m_iU0 = 0;
+  this->m_bU1 = 0;
   return this;
 }
 
@@ -571,3 +570,4 @@ LABEL_19:
 }
 
 
+#endif // Already implemented

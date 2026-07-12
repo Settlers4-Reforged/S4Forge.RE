@@ -1332,10 +1332,10 @@ void __cdecl CAnimalMgr::InitAnimalJobs(class CAnimal * a1, int a2) {
   _BYTE v15[24]; // [esp+48h] [ebp-44h] BYREF
   _BYTE v16[24]; // [esp+60h] [ebp-2Ch] BYREF
   int v17; // [esp+78h] [ebp-14h]
-  unsigned int v18; // [esp+7Ch] [ebp-10h]
-  unsigned int v19; // [esp+80h] [ebp-Ch]
-  unsigned int v20; // [esp+84h] [ebp-8h]
-  unsigned int v21; // [esp+88h] [ebp-4h]
+  int v18; // [esp+7Ch] [ebp-10h]
+  int v19; // [esp+80h] [ebp-Ch]
+  int v20; // [esp+84h] [ebp-8h]
+  int v21; // [esp+88h] [ebp-4h]
 
   v21 = -1;
   v17 = a2 - 1;
@@ -1422,21 +1422,21 @@ void __cdecl CAnimalMgr::InitAnimalJobs(class CAnimal * a1, int a2) {
     default:
       break;
   }
-  v2 = CEntityTask::CEntityTask((CEntityTask *)v16, 17, v20, 0, 0, -1, 1, -1, 1, 1, 0, 0, 0, 0);
+  v2 = CEntityTask::CEntityTask((CEntityTask *)v16, 0x11u, v20, 0, 0, -1, 1, -1, 1, 1, 0, 0, 0, 0);
   CAnimal::AddTask(a1, v2);
-  AnimalFrameCount = CGfxManager::GetAnimalFrameCount((CGfxManager *)g_pGfxManager, v19);
-  v4 = CEntityTask::CEntityTask((CEntityTask *)v15, 16, v19, 0, 0, -1, AnimalFrameCount, -1, 1, 1, 0, 0, 0, 0);
+  AnimalFrameCount = CGfxManager::GetAnimalFrameCount(g_pGfxManager, v19);
+  v4 = CEntityTask::CEntityTask((CEntityTask *)v15, 0x10u, v19, 0, 0, -1, AnimalFrameCount, -1, 1, 1, 0, 0, 0, 0);
   CAnimal::AddTask(a1, v4);
-  v5 = CGfxManager::GetAnimalFrameCount((CGfxManager *)g_pGfxManager, v20);
-  v6 = CEntityTask::CEntityTask((CEntityTask *)v14, 6, v20, 0, 0, -1, v5, -1, 1, 1, 0, 0, 0, 0);
+  v5 = CGfxManager::GetAnimalFrameCount(g_pGfxManager, v20);
+  v6 = CEntityTask::CEntityTask((CEntityTask *)v14, 6u, v20, 0, 0, -1, v5, -1, 1, 1, 0, 0, 0, 0);
   CAnimal::AddTask(a1, v6);
-  v7 = CGfxManager::GetAnimalFrameCount((CGfxManager *)g_pGfxManager, v18);
-  v8 = CEntityTask::CEntityTask((CEntityTask *)v13, 6, v18, 0, 0, -1, v7, -1, 1, 1, 0, 0, 0, 0);
+  v7 = CGfxManager::GetAnimalFrameCount(g_pGfxManager, v18);
+  v8 = CEntityTask::CEntityTask((CEntityTask *)v13, 6u, v18, 0, 0, -1, v7, -1, 1, 1, 0, 0, 0, 0);
   result = CAnimal::AddTask(a1, v8);
   if ( v21 == -1 )
     return result;
-  v10 = CGfxManager::GetAnimalFrameCount((CGfxManager *)g_pGfxManager, v21);
-  v11 = CEntityTask::CEntityTask((CEntityTask *)v12, 27, v21, 0, 0, -1, v10, -1, 1, 1, 0, 0, 0, 0);
+  v10 = CGfxManager::GetAnimalFrameCount(g_pGfxManager, v21);
+  v11 = CEntityTask::CEntityTask((CEntityTask *)v12, 0x1Bu, v21, 0, 0, -1, v10, -1, 1, 1, 0, 0, 0, 0);
   return CAnimal::AddTask(a1, v11);
 }
 

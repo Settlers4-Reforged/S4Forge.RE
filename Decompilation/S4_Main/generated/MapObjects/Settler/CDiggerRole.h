@@ -63,6 +63,11 @@ private:
     // address=[0x1569540]
     bool  CheckDig(class CSettler * a2);
 
+    // Type information members
+public:
+    __int16 m_iU0;
+    bool m_bU1;
+
 };
 
 

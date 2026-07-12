@@ -1,130 +1,134 @@
+#if FALSE
 #include "CFleeRole.h"
 
 // Definitions for class CFleeRole
 
 // address=[0x1400a40]
-// Decompiled from int __cdecl CFleeRole::New(int a1)
+// Decompiled from CFleeRole *__cdecl CFleeRole::New(int a1)
 class CPersistence * __cdecl CFleeRole::New(std::istream & a1) {
   
-  if ( operator new(0x2Cu) )
-    return CFleeRole::CFleeRole(a1);
+  CFleeRole *C; // [esp+Ch] [ebp-10h]
+
+  C = (CFleeRole *)operator new(0x2Cu);
+  if ( C )
+    return CFleeRole::CFleeRole(C, a1);
   else
     return 0;
 }
 
 
 // address=[0x156d370]
-// Decompiled from int __thiscall CFleeRole::InitWalking(CFleeRole *this, struct CSettler *a2)
+// Decompiled from CWalkingNormal *__thiscall CFleeRole::InitWalking(CFleeRole *this, IEntity *a2)
 class CWalking *  CFleeRole::InitWalking(class CSettler * a2) {
   
   int v2; // eax
-  int v4; // [esp+4h] [ebp-4h]
+  CWalkingNormal *v4; // [esp+4h] [ebp-4h]
 
-  v2 = IEntity::OwnerId((unsigned __int8 *)a2);
+  v2 = IEntity::OwnerId(a2);
   v4 = CWalking::Create(0, v2);
-  (*(void (__thiscall **)(int, int, _DWORD))(*(_DWORD *)v4 + 8))(v4, -1, 0);
+  v4->InitB(v4, -1, 0);
   return v4;
 }
 
 
 // address=[0x156d3b0]
-// Decompiled from char __thiscall CFleeRole::LogicUpdate(CFleeRole *this, struct CSettler *a2)
-void  CFleeRole::LogicUpdate(class CSettler * a2) {
+// Decompiled from void __thiscall CFleeRole::LogicUpdate(CFleeRole *this, CSettler *pSettler)
+void  CFleeRole::LogicUpdate(class CSettler * pSettler) {
   
-  int v2; // eax
+  int iX; // eax
   int v3; // esi
   int v4; // esi
   int v5; // eax
   unsigned int v6; // eax
   int v7; // ecx
   int v8; // eax
-  char result; // al
+  int v9; // eax
   int v10; // eax
   int v11; // eax
-  int v12; // eax
-  int v13[6]; // [esp-4h] [ebp-60h] BYREF
-  int v14; // [esp+14h] [ebp-48h]
-  int v15; // [esp+18h] [ebp-44h]
-  CCarrierRole *SettlerRole; // [esp+1Ch] [ebp-40h]
-  int v17; // [esp+20h] [ebp-3Ch]
-  int v18; // [esp+24h] [ebp-38h]
-  int v19; // [esp+28h] [ebp-34h]
-  int v20; // [esp+2Ch] [ebp-30h]
-  _BYTE v21[4]; // [esp+30h] [ebp-2Ch] BYREF
+  int iY; // [esp-4h] [ebp-60h] BYREF
+  auto_ptr_ISettlerRole *v13; // [esp+8h] [ebp-54h]
+  int *p_iY; // [esp+Ch] [ebp-50h]
+  int v15; // [esp+10h] [ebp-4Ch]
+  int v16; // [esp+14h] [ebp-48h]
+  int v17; // [esp+18h] [ebp-44h]
+  ISettlerRole *SettlerRole; // [esp+1Ch] [ebp-40h]
+  int v19; // [esp+20h] [ebp-3Ch]
+  int v20; // [esp+24h] [ebp-38h]
+  int iSectorId; // [esp+28h] [ebp-34h]
+  int v22; // [esp+2Ch] [ebp-30h]
+  auto_ptr_ISettlerRole a2; // [esp+30h] [ebp-2Ch] BYREF
   int i; // [esp+34h] [ebp-28h]
-  int v23; // [esp+38h] [ebp-24h]
-  unsigned __int16 *v24; // [esp+3Ch] [ebp-20h]
-  int v25; // [esp+40h] [ebp-1Ch] BYREF
-  int v26; // [esp+44h] [ebp-18h] BYREF
-  ISettlerRole *v27; // [esp+48h] [ebp-14h]
-  char v28; // [esp+4Eh] [ebp-Eh]
+  int v25; // [esp+38h] [ebp-24h]
+  unsigned __int16 *v26; // [esp+3Ch] [ebp-20h]
+  int v27; // [esp+40h] [ebp-1Ch] BYREF
+  int v28; // [esp+44h] [ebp-18h] BYREF
+  char v30; // [esp+4Eh] [ebp-Eh]
   char NearestPlayerLand; // [esp+4Fh] [ebp-Dh]
-  int v30; // [esp+58h] [ebp-4h]
+  int v32; // [esp+58h] [ebp-4h]
 
-  v27 = this;
-  v13[0] = IEntity::Y(a2);
-  v2 = IEntity::X(a2);
-  v23 = CWorldManager::Index(v2, v13[0]);
-  v3 = ITiling::OwnerId(v23);
-  if ( v3 == IEntity::OwnerId((unsigned __int8 *)a2) )
+  iY = IEntity::Y(pSettler);
+  iX = IEntity::X(pSettler);
+  v25 = CWorldManager::Index(iX, iY);
+  v3 = ITiling::OwnerId(v25);
+  if ( v3 == IEntity::OwnerId(pSettler) )
   {
-    v17 = ITiling::EcoSectorId(v23);
-    v24 = (unsigned __int16 *)CEcoSectorMgr::operator[](v17);
-    v4 = CEcoSector::Owner(v24);
-    if ( v4 != IEntity::OwnerId((unsigned __int8 *)a2)
+    v19 = ITiling::EcoSectorId(v25);
+    v26 = (unsigned __int16 *)CEcoSectorMgr::operator[](g_cESMgr, v19);
+    v4 = CEcoSector::Owner(v26);
+    if ( v4 != IEntity::OwnerId(pSettler)
       && BBSupportDbgReport(2, "MapObjects\\Settler\\FleeRole.cpp", 166, "rEcoSector.Owner()==_pSettler->OwnerId()") == 1 )
     {
       __debugbreak();
     }
-    v5 = IEntity::Type((unsigned __int16 *)a2);
-    CEcoSector::ChangeNrOfSettler((CEcoSector *)v24, v5, 1);
-    v13[0] = IEntity::Type((unsigned __int16 *)a2);
-    v6 = IEntity::Race(a2);
-    SettlerRole = CSettlerMgr::CreateSettlerRole((CSettlerMgr *)g_cSettlerMgr, v6, v13[0]);
-    std::auto_ptr<ISettlerRole>::auto_ptr<ISettlerRole>(SettlerRole);
-    v30 = 0;
-    (*(void (__thiscall **)(struct CSettler *))(*(_DWORD *)a2 + 104))(a2);
-    v13[0] = v7;
-    v13[4] = (int)v13;
-    v13[3] = std::auto_ptr<ISettlerRole>::auto_ptr<ISettlerRole>(v21);
-    CSettler::NewRole(a2, v13[0]);
-    if ( !IEntity::FlagBits(a2, EntityFlag_Offered) )
+    v5 = IEntity::Type(pSettler);
+    CEcoSector::ChangeNrOfSettler((CEcoSector *)v26, v5, 1);
+    iY = IEntity::Type(pSettler);
+    v6 = IEntity::Race(pSettler);
+    SettlerRole = CSettlerMgr::CreateSettlerRole(&g_cSettlerMgr, v6, iY);
+    std::auto_ptr<ISettlerRole>::auto_ptr<ISettlerRole>(&a2, SettlerRole);
+    v32 = 0;
+    pSettler->ClearAllQueuedEvents(pSettler);
+    iY = v7;
+    p_iY = &iY;
+    v13 = std::auto_ptr<ISettlerRole>::auto_ptr<ISettlerRole>((auto_ptr_ISettlerRole *)&iY, &a2);
+    CSettler::NewRole(pSettler, (auto_ptr_ISettlerRole)iY);
+    if ( !IEntity::FlagBits(pSettler, EntityFlag_Offered) )
     {
-      v13[0] = IEntity::EntityId((unsigned __int16 *)a2);
-      v8 = IEntity::Type((unsigned __int16 *)a2);
-      CEcoSector::SetSettlerOffer(v24, v8, v13[0]);
+      iY = IEntity::EntityId(pSettler);
+      v8 = IEntity::Type(pSettler);
+      CEcoSector::SetSettlerOffer(v26, v8, iY);
     }
-    CSettler::TakeWaitList(a2);
-    v30 = -1;
-    return std::auto_ptr<ISettlerRole>::~auto_ptr<ISettlerRole>(v21);
+    CSettler::TakeWaitList(pSettler);
+    v32 = -1;
+    std::auto_ptr<ISettlerRole>::~auto_ptr<ISettlerRole>(&a2);
   }
   else
   {
-    *((_BYTE *)v27 + 5) = ISettlerRole::SettlerWalk(v27, a2);
-    if ( (*((_BYTE *)v27 + 5) & 0x70) != 0 )
+    this->m_uSettlerWalk = ISettlerRole::SettlerWalk(this, pSettler);
+    if ( (this->m_uSettlerWalk & 0x70) != 0 )
     {
-      v25 = IEntity::X(a2);
-      v26 = IEntity::Y(a2);
+      v27 = IEntity::X(pSettler);
+      v28 = IEntity::Y(pSettler);
       NearestPlayerLand = 0;
-      v28 = 0;
-      if ( *((char *)v27 + 6) < 5 )
+      v30 = 0;
+      if ( this->m_iWalkspeed < 5 )
       {
-        v10 = IEntity::OwnerId((unsigned __int8 *)a2);
-        NearestPlayerLand = CScanner::FindNearestPlayerLand(v10, &v25, &v26);
+        v9 = IEntity::OwnerId(pSettler);
+        NearestPlayerLand = CScanner::FindNearestPlayerLand(v9, &v27, &v28);
         if ( !NearestPlayerLand )
         {
-          v28 = 1;
-          v19 = ITiling::SectorId(v23);
-          if ( v19 <= 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\FleeRole.cpp", 215, "iSectorId > 0") == 1 )
+          v30 = 1;
+          iSectorId = ITiling::SectorId(v25);
+          if ( iSectorId <= 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\FleeRole.cpp", 215, "iSectorId > 0") == 1 )
             __debugbreak();
-          v15 = IEntity::X(a2);
-          v14 = IEntity::Y(a2);
+          v17 = IEntity::X(pSettler);
+          v16 = IEntity::Y(pSettler);
           for ( i = 0; i < 64; ++i )
           {
-            v20 = (unsigned __int8)(CStateGame::Rand(g_pGame) + 0x80);
-            v25 = v15 + CSpiralOffsets::DeltaX(v20);
-            v26 = v14 + CSpiralOffsets::DeltaY(v20);
-            if ( (unsigned __int8)CWorldManager::InWorld(v25, v26) && CWorldManager::SectorId(v25, v26) == v19 )
+            v22 = (unsigned __int8)(CStateGame::Rand(g_pGame) + 0x80);
+            v27 = v17 + CSpiralOffsets::DeltaX(v22);
+            v28 = v16 + CSpiralOffsets::DeltaY(v22);
+            if ( CWorldManager::InWorld(v27, v28) && CWorldManager::SectorId(v27, v28) == iSectorId )
             {
               NearestPlayerLand = 1;
               break;
@@ -134,35 +138,33 @@ void  CFleeRole::LogicUpdate(class CSettler * a2) {
       }
       if ( NearestPlayerLand )
       {
-        if ( v28 )
-          v18 = 0x2000;
+        if ( v30 )
+          v20 = 0x2000;
         else
-          v18 = 0;
-        v13[5] = v18;
-        IAnimatedEntity::SetFrame(1);
-        v11 = Y16X16::PackXYFast(v25, v26);
-        IMovingEntity::WalkToXY(a2, v11, v18);
-        IMovingEntity::SetDisplacementCosts(5);
-        IAnimatedEntity::RegisterForLogicUpdate(1);
-        result = *((_BYTE *)v27 + 6) + 1;
-        *((_BYTE *)v27 + 6) = result;
+          v20 = 0;
+        v15 = v20;
+        IAnimatedEntity::SetFrame(pSettler, 1u);
+        v10 = Y16X16::PackXYFast(v27, v28);
+        IMovingEntity::WalkToXY(pSettler, v10, v20);
+        IMovingEntity::SetDisplacementCosts(pSettler, 5);
+        IAnimatedEntity::RegisterForLogicUpdate(pSettler, 1);
+        ++this->m_iWalkspeed;
       }
       else
       {
-        v12 = IEntity::EntityId((unsigned __int16 *)a2);
-        return CSettlerMgr::DeleteSettler((CSettlerMgr *)g_cSettlerMgr, v12);
+        v11 = IEntity::EntityId(pSettler);
+        CSettlerMgr::DeleteSettler(&g_cSettlerMgr, v11);
       }
     }
-    else if ( (*((_BYTE *)v27 + 5) & 8) != 0 )
+    else if ( (this->m_uSettlerWalk & 8) != 0 )
     {
-      return IAnimatedEntity::RegisterForLogicUpdate(1);
+      IAnimatedEntity::RegisterForLogicUpdate(pSettler, 1);
     }
     else
     {
-      return IAnimatedEntity::RegisterForLogicUpdate(9);
+      IAnimatedEntity::RegisterForLogicUpdate(pSettler, 9);
     }
   }
-  return result;
 }
 
 
@@ -175,10 +177,10 @@ void  CFleeRole::UpdateJob(class CSettler * a2) {
 
 
 // address=[0x156d740]
-// Decompiled from int __stdcall CFleeRole::PostLoadInit(CPropertySet *a1)
+// Decompiled from void __stdcall CFleeRole::PostLoadInit(IEntity *a1)
 void  CFleeRole::PostLoadInit(class CSettler * a1) {
   
-  return CWarMap::AddEntity(a1);
+  CWarMap::AddEntity(a1);
 }
 
 
@@ -199,20 +201,18 @@ bool  CFleeRole::ESChanged(class CSettler * a2) {
 
 
 // address=[0x156d780]
-// Decompiled from char *__thiscall CFleeRole::CFleeRole(char *this, int a2)
+// Decompiled from CFleeRole *__thiscall CFleeRole::CFleeRole(CFleeRole *this, struct std::istream *a2)
  CFleeRole::CFleeRole(std::istream & a2) {
   
-  int v3; // [esp+8h] [ebp-18h] BYREF
+  int fileFormatVersion; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
-  char *v5; // [esp+10h] [ebp-10h]
   int v6; // [esp+1Ch] [ebp-4h]
 
-  v5 = this;
   ISettlerRole::ISettlerRole(this, a2);
   v6 = 0;
-  *(_DWORD *)v5 = &CFleeRole::_vftable_;
-  operator^<unsigned int>(a2, &v3);
-  if ( v3 != 1 )
+  this->__vftable = (ISettlerRole_vtbl *)&CFleeRole::_vftable_;
+  operator^<unsigned int>(a2, &fileFormatVersion);
+  if ( fileFormatVersion != 1 )
   {
     BBSupportTracePrintF(3, "load output defect Unknown fileFormatVersion for CFleeRole");
     pExceptionObject = 0;
@@ -220,20 +220,19 @@ bool  CFleeRole::ESChanged(class CSettler * a2) {
     _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
   }
   v6 = -1;
-  return v5;
+  return this;
 }
 
 
 // address=[0x156d830]
-// Decompiled from int __thiscall CFleeRole::Store(struct CPersistence *this, struct std::ostream *a2)
+// Decompiled from void __thiscall CFleeRole::Store(CFleeRole *this, struct std::ostream *a2)
 void  CFleeRole::Store(std::ostream & a2) {
   
-  int v3[2]; // [esp+0h] [ebp-8h] BYREF
+  int fileFormatVersion; // [esp+0h] [ebp-8h] BYREF
 
-  v3[1] = (int)this;
   ISettlerRole::Store(this, a2);
-  v3[0] = 1;
-  return operator^<unsigned int>(a2, v3);
+  fileFormatVersion = 1;
+  operator^<unsigned int>(a2, &fileFormatVersion);
 }
 
 
@@ -262,14 +261,13 @@ void  CFleeRole::LogicUpdateJob(class CSettler * a2) {
 
 
 // address=[0x15885c0]
-// Decompiled from int __cdecl CFleeRole::Load(int a1)
+// Decompiled from int __cdecl CFleeRole::Load(struct std::istream *a1)
 class CFleeRole * __cdecl CFleeRole::Load(std::istream & a1) {
   
   void **v1; // eax
-  struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
 
-  v1 = (void **)CPersistence::New(a1, &CPersistence__RTTI_Type_Descriptor_);
-  return j____RTDynamicCast(v1, 0, v3, &CFleeRole__RTTI_Type_Descriptor_, 1);
+  v1 = (void **)CPersistence::New(a1);
+  return j____RTDynamicCast(v1, 0, &CPersistence__RTTI_Type_Descriptor_, &CFleeRole__RTTI_Type_Descriptor_, 1);
 }
 
 
@@ -280,8 +278,8 @@ class CFleeRole * __cdecl CFleeRole::Load(std::istream & a1) {
 // Decompiled from CFleeRole *__thiscall CFleeRole::CFleeRole(CFleeRole *this)
  CFleeRole::CFleeRole(void) {
   
-  ISettlerRole::ISettlerRole((ISettlerRole *)this);
-  *(_DWORD *)this = &CFleeRole::_vftable_;
+  ISettlerRole::ISettlerRole(this);
+  this->__vftable = (ISettlerRole_vtbl *)&CFleeRole::_vftable_;
   return this;
 }
 
@@ -296,33 +294,31 @@ class CFleeRole * __cdecl CFleeRole::Load(std::istream & a1) {
 
 
 // address=[0x156d8b0]
-// Decompiled from int __thiscall CFleeRole::GetNextJob(CFleeRole *this, struct CSettler *a2)
+// Decompiled from void __thiscall CFleeRole::GetNextJob(CFleeRole *this, struct CSettler *a2)
 void  CFleeRole::GetNextJob(class CSettler * a2) {
   
-  return (*(int (__thiscall **)(CFleeRole *, struct CSettler *))(*(_DWORD *)this + 40))(this, a2);
+  this->TakeJob(this, a2);
 }
 
 
 // address=[0x156d8d0]
-// Decompiled from void __thiscall CFleeRole::TakeJob(CFleeRole *this, struct CSettler *a2)
+// Decompiled from void __thiscall CFleeRole::TakeJob(CFleeRole *this, IMovingEntity *a2)
 void  CFleeRole::TakeJob(class CSettler * a2) {
   
-  const struct CEntityTask *ActualTask; // eax
+  CEntityTask *pActualTask; // eax
 
-  ActualTask = (const struct CEntityTask *)IMovingEntity::GetActualTask(a2);
-  ISettlerRole::InitCommonTaskValues(this, a2, ActualTask);
-  if ( *((_BYTE *)this + 4) == 17 )
-    IMovingEntity::SetDisplacementCosts(0);
+  pActualTask = IMovingEntity::GetActualTask(a2);
+  ISettlerRole::InitCommonTaskValues(this, a2, pActualTask);
+  if ( this->m_iTask == 17 )
+    IMovingEntity::SetDisplacementCosts(a2, 0);
 }
 
 
 // address=[0x156d910]
-// Decompiled from int __thiscall CFleeRole::Init(_BYTE *this, CPropertySet *a2)
-void  CFleeRole::Init(class CSettler * a2) {
+// Decompiled from void __thiscall CFleeRole::Init(ISettlerRole *this, IAnimatedEntity *a1)
+void  CFleeRole::Init(class CSettler * a1) {
   
-  int result; // eax
-
-  if ( IEntity::FlagBits(a2, EntityFlag_Offered|EntityFlag_Attached)
+  if ( IEntity::FlagBits(a1, EntityFlag_Offered|EntityFlag_Attached)
     && BBSupportDbgReport(
          2,
          "MapObjects\\Settler\\FleeRole.cpp",
@@ -336,25 +332,21 @@ void  CFleeRole::Init(class CSettler * a2) {
   {
     __debugbreak();
   }
-  CWarMap::AddEntity(a2);
-  (*(void (__thiscall **)(_BYTE *, CPropertySet *))(*(_DWORD *)this + 20))(this, a2);
-  CSettler::TakeWaitList(a2);
-  result = IAnimatedEntity::RegisterForLogicUpdate(1);
-  this[6] = 1;
-  return result;
+  CWarMap::AddEntity(a1);
+  this->InitWalking(this, (CSettler *)a1);
+  CSettler::TakeWaitList(a1);
+  IAnimatedEntity::RegisterForLogicUpdate(a1, 1);
+  this->m_iWalkspeed = 1;
 }
 
 
 // address=[0x156d9b0]
-// Decompiled from int __thiscall CFleeRole::ConvertEventIntoGoal(CFleeRole *this, struct CSettler *a2, struct CEntityEvent *a3)
+// Decompiled from void __thiscall CFleeRole::ConvertEventIntoGoal(CFleeRole *this, IAnimatedEntity *a2, struct CEntityEvent *a3)
 void  CFleeRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent * a3) {
   
-  int result; // eax
-
-  result = IEntity::FlagBits(a2, EntityFlag_Registered);
-  if ( !result )
-    return IAnimatedEntity::RegisterForLogicUpdate(1);
-  return result;
+  if ( !IEntity::FlagBits(a2, EntityFlag_Registered) )
+    IAnimatedEntity::RegisterForLogicUpdate(a2, 1);
 }
 
 
+#endif // Already implemented

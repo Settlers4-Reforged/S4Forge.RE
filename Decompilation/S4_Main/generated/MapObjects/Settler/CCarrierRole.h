@@ -15,7 +15,7 @@ public:
     virtual void  LogicUpdate(class CSettler * a2);
 
     // address=[0x1563b90]
-    virtual void  LogicUpdateJob(class CSettler * a2);
+    virtual void  LogicUpdateJob(class CSettler * pSettler);
 
     // address=[0x1564340]
     virtual void  UpdateJob(class CSettler * a2);
@@ -33,10 +33,10 @@ public:
     void  UpdateCatapultPosition(int a2);
 
     // address=[0x15645c0]
-     CCarrierRole(std::istream & a2);
+     CCarrierRole(std::istream & stream);
 
     // address=[0x15647e0]
-    virtual void  Store(std::ostream & a2);
+    virtual void  Store(std::ostream & a1);
 
     // address=[0x1567060]
     virtual unsigned long  ClassID(void)const;
@@ -70,13 +70,13 @@ private:
     virtual void  GetNextJob(class CSettler * a2);
 
     // address=[0x1564af0]
-    virtual void  TakeJob(class CSettler * a2);
+    virtual void  TakeJob(class CSettler * pSettler);
 
     // address=[0x1565510]
     virtual void  Init(class CSettler * a2);
 
     // address=[0x1565660]
-    virtual void  ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent * a3);
+    virtual void  ConvertEventIntoGoal(class CSettler * pSettler, class CEntityEvent * pEvent);
 
     // address=[0x1566220]
     virtual bool  SetFree(class CSettler * a2, int a3);
@@ -95,6 +95,16 @@ private:
 
     // address=[0x1567180]
     int  SourcePileId3(void)const;
+
+    // Type information members
+public:
+    unsigned __int8 m_uGood;
+    unsigned __int8 m_uNextSettlerType;
+    unsigned __int16 m_iTarget1;
+    unsigned __int16 m_iSourcePile2;
+    unsigned __int16 m_iSourcePile3;
+    unsigned __int16 m_uTicksSinceLastJob;
+    unsigned __int16 m_uNextJobTick;
 
 };
 

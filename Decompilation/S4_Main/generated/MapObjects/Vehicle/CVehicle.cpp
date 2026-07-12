@@ -1145,11 +1145,11 @@ bool  CVehicle::NewDestination(int a2, int a3, int _iFlags) {
   unsigned __int8 v12; // al
   CEntityTask *v13; // eax
   unsigned int m_uCurrentTaskIdx1; // esi
-  _BYTE v15[24]; // [esp+4h] [ebp-B8h] BYREF
-  _BYTE v16[24]; // [esp+1Ch] [ebp-A0h] BYREF
-  _BYTE v17[24]; // [esp+34h] [ebp-88h] BYREF
-  _BYTE v18[24]; // [esp+4Ch] [ebp-70h] BYREF
-  _BYTE v19[24]; // [esp+64h] [ebp-58h] BYREF
+  CEntityTask v15; // [esp+4h] [ebp-B8h] BYREF
+  CEntityTask v16; // [esp+1Ch] [ebp-A0h] BYREF
+  CEntityTask v17; // [esp+34h] [ebp-88h] BYREF
+  CEntityTask v18; // [esp+4Ch] [ebp-70h] BYREF
+  CEntityTask v19; // [esp+64h] [ebp-58h] BYREF
   _BYTE v20[32]; // [esp+7Ch] [ebp-40h] BYREF
   int v21; // [esp+9Ch] [ebp-20h]
   unsigned int v22; // [esp+A0h] [ebp-1Ch]
@@ -1157,11 +1157,11 @@ bool  CVehicle::NewDestination(int a2, int a3, int _iFlags) {
   int v24; // [esp+A8h] [ebp-14h]
   int v25; // [esp+ACh] [ebp-10h]
   int VehicleFrameCount; // [esp+B0h] [ebp-Ch]
-  DWORD m_uU18; // [esp+B4h] [ebp-8h]
+  DWORD m_iJob; // [esp+B4h] [ebp-8h]
 
-  m_uU18 = this->m_pVehicleProperties->m_iJob;
+  m_iJob = this->m_pVehicleProperties->m_iJob;
   v22 = IEntity::Race(this);
-  VehicleFrameCount = CGfxManager::GetVehicleFrameCount(g_pGfxManager, v22, m_uU18);
+  VehicleFrameCount = CGfxManager::GetVehicleFrameCount(g_pGfxManager, v22, m_iJob);
   if ( (_iFlags & 1) != 0 )
   {
     if ( !this->byte71 )
@@ -1171,12 +1171,12 @@ bool  CVehicle::NewDestination(int a2, int a3, int _iFlags) {
         std::vector<CEntityTask>::clear();
         this->m_uCurrentTaskIdx1 = 0;
       }
-      v11 = CEntityTask::CEntityTask((CEntityTask *)v16, 8, m_uU18, -1, -1, -1, VehicleFrameCount, -1, 1, 1, 0, 0, 0, 0);
+      v11 = CEntityTask::CEntityTask(&v16, 8u, m_iJob, -1, -1, -1, VehicleFrameCount, -1, 1, 1, 0, 0, 0, 0);
       std::vector<CEntityTask>::push_back(v11);
       v12 = std::vector<CEntityTask>::size(&this->m_vTasks);
       this->byte71 = v12;
     }
-    v13 = CEntityTask::CEntityTask((CEntityTask *)v15, 8, m_uU18, a2, a3, -1, VehicleFrameCount, -1, 1, 1, 0, 0, 0, 0);
+    v13 = CEntityTask::CEntityTask(&v15, 8u, m_iJob, a2, a3, -1, VehicleFrameCount, -1, 1, 1, 0, 0, 0, 0);
     std::vector<CEntityTask>::push_back(v13);
   }
   else
@@ -1204,7 +1204,7 @@ bool  CVehicle::NewDestination(int a2, int a3, int _iFlags) {
       {
         __debugbreak();
       }
-      v5 = CEntityTask::CEntityTask((CEntityTask *)v19, 36, m_uU18, 0, 0, -1, VehicleFrameCount, -1, 1, 1, 0, 0, 0, 0);
+      v5 = CEntityTask::CEntityTask(&v19, 0x24u, m_iJob, 0, 0, -1, VehicleFrameCount, -1, 1, 1, 0, 0, 0, 0);
       std::vector<CEntityTask>::push_back(v5);
     }
     else
@@ -1227,40 +1227,12 @@ bool  CVehicle::NewDestination(int a2, int a3, int _iFlags) {
       }
       if ( v25 )
       {
-        v10 = CEntityTask::CEntityTask(
-                (CEntityTask *)v17,
-                10,
-                m_uU18,
-                0,
-                0,
-                -1,
-                VehicleFrameCount,
-                -1,
-                1,
-                1,
-                0,
-                v25,
-                0,
-                0);
+        v10 = CEntityTask::CEntityTask(&v17, 0xAu, m_iJob, 0, 0, -1, VehicleFrameCount, -1, 1, 1, 0, v25, 0, 0);
         std::vector<CEntityTask>::push_back(v10);
       }
       else
       {
-        v9 = CEntityTask::CEntityTask(
-               (CEntityTask *)v18,
-               v21,
-               m_uU18,
-               a2,
-               a3,
-               -1,
-               VehicleFrameCount,
-               -1,
-               1,
-               1,
-               0,
-               0,
-               0,
-               0);
+        v9 = CEntityTask::CEntityTask(&v18, v21, m_iJob, a2, a3, -1, VehicleFrameCount, -1, 1, 1, 0, 0, 0, 0);
         std::vector<CEntityTask>::push_back(v9);
       }
     }

@@ -1,3 +1,4 @@
+#if FALSE
 #include "CSettler.h"
 
 // Definitions for class CSettler
@@ -77,11 +78,11 @@ void  CSettler::SetBuilding(int a2) {
 
 
 // address=[0x1513b30]
-// Decompiled from void __thiscall CSettler::SetOffset(CSettler *this, float a2, float a3)
-void  CSettler::SetOffset(float a2, float a3) {
+// Decompiled from void __thiscall CSettler::SetOffset(CSettler *this, float _fOffsetX, float _fOffsetY)
+void  CSettler::SetOffset(float _fOffsetX, float _fOffsetY) {
   
-  std::auto_ptr<ISettlerRole>::operator->(&this->m_pBehavior)->m_fOffsetX = a2;
-  std::auto_ptr<ISettlerRole>::operator->(&this->m_pBehavior)->m_fOffsetY = a3;
+  std::auto_ptr<ISettlerRole>::operator->(&this->m_pBehavior)->m_fOffsetX = _fOffsetX;
+  std::auto_ptr<ISettlerRole>::operator->(&this->m_pBehavior)->m_fOffsetY = _fOffsetY;
 }
 
 
@@ -146,22 +147,15 @@ void  CSettler::Delete(void) {
       {
         v13 = 1;
       }
-      v9 = CLogic::Effects((DWORD *)g_pLogic);
+      v9 = CLogic::Effects(g_pLogic);
       v7 = IEntity::OwnerId(this);
       v6 = IEntity::Y(this);
       v4 = IEntity::X(this);
-      (*(void (__thiscall **)(struct IEffects *, int, int, int, int, int, _DWORD))(*(_DWORD *)v9 + 20))(
-        v9,
-        v13,
-        41,
-        v4,
-        v6,
-        v7,
-        0);
+      v9->AddAngel(v9, v13, 41, v4, v6, v7, 0);
     }
   }
   v5 = IEntity::EntityId(this);
-  CSettlerMgr::CheckOutSettler((CSettlerMgr *)g_cSettlerMgr, v5);
+  CSettlerMgr::CheckOutSettler(&g_cSettlerMgr, v5);
   this->m_iFlags &= ~0x10000000u;
 }
 
@@ -207,7 +201,7 @@ struct SGfxObjectInfo *  CSettler::GetGfxInfos(void) {
   int v13; // [esp+Ch] [ebp-6Ch]
   int v14; // [esp+14h] [ebp-64h]
   int m_iFrame; // [esp+18h] [ebp-60h]
-  int SettlerJobFrameCount; // [esp+20h] [ebp-58h]
+  unsigned int SettlerJobFrameCount; // [esp+20h] [ebp-58h]
   int iIdx; // [esp+24h] [ebp-54h]
   int iAllianceId; // [esp+28h] [ebp-50h]
   BYTE v19; // [esp+30h] [ebp-48h]
@@ -215,9 +209,9 @@ struct SGfxObjectInfo *  CSettler::GetGfxInfos(void) {
   ISettlerRole *v21; // [esp+3Ch] [ebp-3Ch]
   ISettlerRole *v22; // [esp+40h] [ebp-38h]
   int v23; // [esp+44h] [ebp-34h]
-  int v24; // [esp+48h] [ebp-30h]
+  unsigned int v24; // [esp+48h] [ebp-30h]
   int iMaxLivePoints; // [esp+4Ch] [ebp-2Ch]
-  int v26; // [esp+50h] [ebp-28h]
+  signed int v26; // [esp+50h] [ebp-28h]
   int iTileOwnerId; // [esp+54h] [ebp-24h]
   int LocalPlayerId; // [esp+58h] [ebp-20h]
   BYTE uColor; // [esp+60h] [ebp-18h]
@@ -269,9 +263,9 @@ struct SGfxObjectInfo *  CSettler::GetGfxInfos(void) {
           v24 = 300;
         iJobPart = v24;
         m_iFrame = this->m_iFrame;
-        SettlerJobFrameCount = CGfxManager::GetSettlerJobFrameCount(g_pGfxManager, iRace, this->m_iJobPart, 2);
-        v26 = CGfxManager::GetSettlerJobFrameCount(g_pGfxManager, iRace, v24, 2);
-        iFrame = m_iFrame - (SettlerJobFrameCount - v26) / 2;
+        SettlerJobFrameCount = CGfxManager::GetSettlerJobFrameCount(g_pGfxManager, iRace, this->m_iJobPart, 2u);
+        v26 = CGfxManager::GetSettlerJobFrameCount(g_pGfxManager, iRace, v24, 2u);
+        iFrame = m_iFrame - (int)(SettlerJobFrameCount - v26) / 2;
         if ( iFrame >= 0 )
         {
           if ( iFrame >= v26 )
@@ -509,8 +503,8 @@ void  CSettler::NewToDoList(class std::list<class CEntityTask,class std::allocat
   else if ( a2 )
   {
     this->m_iToDoSize = a3;
-    this->m_pToDoList = a2;
-    v7 = std::list<CEntityTask>::begin((void *)this->m_pToDoList, (int)v5);
+    this->m_pToDoList = (std::list *)a2;
+    v7 = std::list<CEntityTask>::begin(this->m_pToDoList);
     v6 = v7;
     v10 = 0;
     std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator=(
@@ -558,7 +552,7 @@ void  CSettler::TakeAnimList(int _iAnimListIndex) {
   int v5; // [esp-4h] [ebp-18h]
   int v6; // [esp-4h] [ebp-18h]
   int iNumberOfAnimLists; // [esp+0h] [ebp-14h]
-  int v8; // [esp+4h] [ebp-10h]
+  int pWorkList; // [esp+4h] [ebp-10h]
   unsigned int v9; // [esp+8h] [ebp-Ch]
   CSettlerMgr::SSettlerInfos *SettlerInfo; // [esp+Ch] [ebp-8h]
 
@@ -577,8 +571,8 @@ void  CSettler::TakeAnimList(int _iAnimListIndex) {
   }
   v9 = *std::vector<unsigned short>::operator[](_iAnimListIndex);
   v3 = IEntity::Race(this);
-  v8 = CEntityToDoListMgr::SettlerJobList(g_pEntityToDoListMgr, v3, v9);
-  if ( !v8 )
+  pWorkList = CEntityToDoListMgr::SettlerJobList(g_pEntityToDoListMgr, v3, v9);
+  if ( !pWorkList )
   {
     v6 = IEntity::Type(this);
     v4 = IEntity::Race(this);
@@ -591,33 +585,30 @@ void  CSettler::TakeAnimList(int _iAnimListIndex) {
            v6) == 1 )
       __debugbreak();
   }
-  this->NewToDoList(this, v8, v9);
+  this->NewToDoList(this, pWorkList, v9);
 }
 
 
 // address=[0x157ded0]
-// Decompiled from int __thiscall CSettler::AttachToBuilding(CSettler *this, int a1)
+// Decompiled from void __thiscall CSettler::AttachToBuilding(CSettler *this, int a1)
 void  CSettler::AttachToBuilding(int a1) {
   
   int v2; // eax
-  int result; // eax
-  CBuilding *v4; // [esp+0h] [ebp-8h]
+  CBuilding *v3; // [esp+0h] [ebp-8h]
 
   if ( std::auto_ptr<ISettlerRole>::operator->(&this->m_pBehavior)->m_uHomeEntityId
     && BBSupportDbgReport(2, "MapObjects\\Settler\\Settler.cpp", 1388, "m_pBehavior->m_uHomeEntityId == 0") == 1 )
   {
     __debugbreak();
   }
-  v4 = CBuildingMgr::operator[](a1);
+  v3 = CBuildingMgr::operator[](a1);
   v2 = IEntity::EntityId(this);
-  (*(void (__thiscall **)(CBuilding *, int))(*(_DWORD *)v4 + 116))(v4, v2);
-  result = IEntity::FlagBits(this, EntityFlag_Attached);
-  if ( result )
-    return result;
-  result = BBSupportDbgReport(2, "MapObjects\\Settler\\Settler.cpp", 1397, "FlagBits(ENTITY_FLAG_ATTACHED) != 0");
-  if ( result == 1 )
+  (*(void (__thiscall **)(CBuilding *, int))(*(_DWORD *)v3 + 116))(v3, v2);
+  if ( !IEntity::FlagBits(this, EntityFlag_Attached)
+    && BBSupportDbgReport(2, "MapObjects\\Settler\\Settler.cpp", 1397, "FlagBits(ENTITY_FLAG_ATTACHED) != 0") == 1 )
+  {
     __debugbreak();
-  return result;
+  }
 }
 
 
@@ -717,11 +708,11 @@ void  CSettler::ChangeType(int _iNewSettlerType, bool a3, bool a4) {
             CPileMgr::SearchSpaceForGoods((CPileMgr *)&g_cPileMgr, v8, v21, m_uTool, 1u);
           }
           if ( IEntity::WarriorType(this) )
-            CSettlerMgr::DetachSettler((int *)g_cSettlerMgr, (unsigned __int8 *)this);
+            CSettlerMgr::DetachSettler(&g_cSettlerMgr, this);
         }
         type = IEntity::Type(this);
         owner = IEntity::OwnerId(this);
-        CSettlerMgr::DecNumberOfSettler((CSettlerMgr *)g_cSettlerMgr, owner, type);
+        CSettlerMgr::DecNumberOfSettler(&g_cSettlerMgr, owner, (S4_SETTLER_ENUM)type);
         if ( IEntity::WarriorType(this) == AI_WARRIOR_TYPE_NONE )
         {
           type = IEntity::Type(this);
@@ -759,7 +750,7 @@ void  CSettler::ChangeType(int _iNewSettlerType, bool a3, bool a4) {
         else
         {
           v13 = IEntity::Race(this);
-          SettlerRole = CSettlerMgr::CreateSettlerRole((CSettlerMgr *)g_cSettlerMgr, v13, _iNewSettlerType);
+          SettlerRole = CSettlerMgr::CreateSettlerRole(&g_cSettlerMgr, v13, _iNewSettlerType);
         }
         std::auto_ptr<ISettlerRole>::auto_ptr<ISettlerRole>(&a2, SettlerRole);
         v41 = 1;
@@ -771,10 +762,10 @@ void  CSettler::ChangeType(int _iNewSettlerType, bool a3, bool a4) {
           CSettler::TakeWaitList(this);
         type = IEntity::Type(this);
         v15 = IEntity::OwnerId(this);
-        CSettlerMgr::IncNumberOfSettler((CSettlerMgr *)g_cSettlerMgr, v15, type);
+        CSettlerMgr::IncNumberOfSettler(&g_cSettlerMgr, v15, (S4_SETTLER_ENUM)type);
         if ( IEntity::WarriorType(this) )
         {
-          CSettlerMgr::AttachSettler((CSettlerMgr *)g_cSettlerMgr, this);
+          CSettlerMgr::AttachSettler(&g_cSettlerMgr, this);
           if ( IEntity::FlagBits(this, (EntityFlag)1024) )
           {
             IEntity::ClearFlagBits(this, (EntityFlag)1024);
@@ -810,24 +801,22 @@ void  CSettler::ChangeType(int _iNewSettlerType, bool a3, bool a4) {
 
 
 // address=[0x157e450]
-// Decompiled from void __thiscall CSettler::ChangeTypeComeToBuilding(IEntity *this, unsigned int a2, int a3)
+// Decompiled from void __thiscall CSettler::ChangeTypeComeToBuilding(CSettler *this, unsigned int a2, int a3)
 void  CSettler::ChangeTypeComeToBuilding(int a2, int a3) {
   
   CEntityEvent v3; // [esp+4h] [ebp-30h] BYREF
   struct CEntityEvent *v4; // [esp+1Ch] [ebp-18h]
   struct CEntityEvent *v5; // [esp+20h] [ebp-14h]
-  CSettler *v6; // [esp+24h] [ebp-10h]
   int v7; // [esp+30h] [ebp-4h]
 
-  v6 = (CSettler *)this;
   if ( !IEntity::FlagBits(this, EntityFlag_Died) )
   {
-    CSettler::ChangeType(v6, a2, 1, 0);
-    CSettler::SetBuilding(v6, a3);
+    CSettler::ChangeType(this, a2, 1, 0);
+    CSettler::SetBuilding(this, a3);
     v5 = CEntityEvent::CEntityEvent(&v3, 1u, 0, a3, 0, 0);
     v4 = v5;
     v7 = 0;
-    v6->SetEvent(v6, v5);
+    this->SetEvent(this, v5);
     v7 = -1;
     CEntityEvent::~CEntityEvent(&v3);
   }
@@ -835,10 +824,10 @@ void  CSettler::ChangeTypeComeToBuilding(int a2, int a3) {
 
 
 // address=[0x157e500]
-// Decompiled from unsigned int __cdecl CSettler::operator new(unsigned int a1)
+// Decompiled from uint __cdecl CSettler::operator new(uint a1)
 void * __cdecl CSettler::operator new(unsigned int a1) {
   
-  return CSettlerMgr::Alloc((CSettlerMgr *)g_cSettlerMgr, a1);
+  return CSettlerMgr::Alloc(&g_cSettlerMgr, a1);
 }
 
 
@@ -846,7 +835,7 @@ void * __cdecl CSettler::operator new(unsigned int a1) {
 // Decompiled from void __cdecl CSettler::operator delete(_DWORD *a1)
 void __cdecl CSettler::operator delete(void * a1) {
   
-  CSettlerMgr::Dealloc((CSettlerMgr *)g_cSettlerMgr, a1);
+  CSettlerMgr::Dealloc(&g_cSettlerMgr, a1);
 }
 
 
@@ -945,19 +934,19 @@ int  CSettler::MaxHitpoints(void)const {
 
 
 // address=[0x157e700]
-// Decompiled from CSettler *__thiscall CSettler::CSettler(CSettler *this, int a2)
- CSettler::CSettler(std::istream & a2) {
+// Decompiled from CSettler *__thiscall CSettler::CSettler(CSettler *this, struct std::istream *stream)
+ CSettler::CSettler(std::istream & stream) {
   
   unsigned int v2; // eax
-  DWORD v3; // eax
+  std::list *v3; // eax
   int v4; // eax
   int v5; // eax
   __int16 v6; // ax
   unsigned int v7; // eax
-  DWORD v8; // eax
+  std::list *v8; // eax
   __int16 v9; // ax
   unsigned int v10; // eax
-  DWORD v11; // eax
+  std::list *v11; // eax
   int v13; // [esp-8h] [ebp-78h]
   unsigned int v14; // [esp-4h] [ebp-74h]
   int v15; // [esp-4h] [ebp-74h]
@@ -973,49 +962,47 @@ int  CSettler::MaxHitpoints(void)const {
   int v25; // [esp+34h] [ebp-3Ch]
   int v26; // [esp+38h] [ebp-38h]
   int v27; // [esp+3Ch] [ebp-34h]
-  ISettlerRole *SettlerRole; // [esp+40h] [ebp-30h]
-  int v29; // [esp+44h] [ebp-2Ch]
-  int v30; // [esp+48h] [ebp-28h] BYREF
+  ISettlerRole *pSettlerRole; // [esp+40h] [ebp-30h]
+  int fileFormatVersion; // [esp+48h] [ebp-28h] MAPDST BYREF
   auto_ptr_ISettlerRole v31; // [esp+4Ch] [ebp-24h] BYREF
   struct ISettlerRole *v32; // [esp+50h] [ebp-20h]
   int pExceptionObject; // [esp+54h] [ebp-1Ch] BYREF
-  _WORD v35[3]; // [esp+5Ch] [ebp-14h] BYREF
-  unsigned __int8 v36; // [esp+62h] [ebp-Eh] BYREF
-  unsigned __int8 v37; // [esp+63h] [ebp-Dh] BYREF
+  __int16 iTodoSize; // [esp+5Ch] [ebp-14h] BYREF
+  unsigned __int8 iSettlerRole; // [esp+62h] [ebp-Eh] BYREF
+  unsigned __int8 iEntityTaskCount; // [esp+63h] [ebp-Dh] BYREF
   int exceptionBlock; // [esp+6Ch] [ebp-4h]
 
-  IMovingEntity::IMovingEntity(this, a2);
+  IMovingEntity::IMovingEntity(this, (int)stream);
   exceptionBlock = 0;
   this->__vftable = (CSettler_vtbl *)&CSettler::_vftable_;
   std::auto_ptr<ISettlerRole>::auto_ptr<ISettlerRole>((auto_ptr_ISettlerRole *)&this->m_pBehavior, 0);
   LOBYTE(exceptionBlock) = 1;
-  v37 = 0;
-  operator^<unsigned int>(a2, &v30);
-  v29 = v30;
-  if ( v30 != 1 )
+  iEntityTaskCount = 0;
+  operator^<unsigned int>(stream, &fileFormatVersion);
+  if ( fileFormatVersion != 1 )
   {
     BBSupportTracePrintF(3, "load output defect Unknown fileFormatVersion for CSettler");
     pExceptionObject = 0;
     CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
     _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
   }
-  operator^<short>(a2, v35);
-  if ( v35[0] != -1 )
-    operator^<unsigned char>(a2, &v37);
-  operator^<unsigned char>(a2, &v36);
-  SettlerRole = (ISettlerRole *)CSettlerMgr::LoadSettlerRole(a2, v36);
-  std::auto_ptr<ISettlerRole>::auto_ptr<ISettlerRole>(&v31, SettlerRole);
+  operator^<short>(stream, &iTodoSize);
+  if ( iTodoSize != -1 )
+    operator^<unsigned char>(stream, &iEntityTaskCount);
+  operator^<unsigned char>(stream, &iSettlerRole);
+  pSettlerRole = CSettlerMgr::LoadSettlerRole(stream, iSettlerRole);
+  std::auto_ptr<ISettlerRole>::auto_ptr<ISettlerRole>(&v31, pSettlerRole);
   LOBYTE(exceptionBlock) = 2;
-  std::auto_ptr<ISettlerRole>::operator=(&v31);
-  if ( v35[0] == -1 )
+  std::auto_ptr<ISettlerRole>::operator=(&this->m_pBehavior, (int *)&v31);
+  if ( iTodoSize == -1 )
   {
     v9 = IEntity::Type(this);
     this->m_iToDoSize = v9;
     v18 = IEntity::Type(this);
     v10 = IEntity::Race(this);
-    v11 = CEntityToDoListMgr::SettlerJobList(g_pEntityToDoListMgr, v10, v18);
+    v11 = (std::list *)CEntityToDoListMgr::SettlerJobList(g_pEntityToDoListMgr, v10, v18);
     this->m_pToDoList = v11;
-    v23 = std::list<CEntityTask>::begin((void *)this->m_pToDoList, (int)v19);
+    v23 = std::list<CEntityTask>::begin(this->m_pToDoList);
     v22 = v23;
     LOBYTE(exceptionBlock) = 5;
     std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator=(
@@ -1026,10 +1013,10 @@ int  CSettler::MaxHitpoints(void)const {
   }
   else
   {
-    this->m_iToDoSize = v35[0];
-    v14 = v35[0];
+    this->m_iToDoSize = iTodoSize;
+    v14 = iTodoSize;
     v2 = IEntity::Race(this);
-    v3 = CEntityToDoListMgr::SettlerJobList(g_pEntityToDoListMgr, v2, v14);
+    v3 = (std::list *)CEntityToDoListMgr::SettlerJobList(g_pEntityToDoListMgr, v2, v14);
     this->m_pToDoList = v3;
     if ( !this->m_pToDoList )
     {
@@ -1046,7 +1033,7 @@ int  CSettler::MaxHitpoints(void)const {
     }
     if ( this->m_pToDoList )
     {
-      v27 = std::list<CEntityTask>::begin((void *)this->m_pToDoList, (int)v21);
+      v27 = std::list<CEntityTask>::begin(this->m_pToDoList);
       v26 = v27;
       LOBYTE(exceptionBlock) = 3;
       std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator=(
@@ -1054,25 +1041,25 @@ int  CSettler::MaxHitpoints(void)const {
         v27);
       LOBYTE(exceptionBlock) = 2;
       std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v21);
-      while ( v37 )
+      while ( iEntityTaskCount )
       {
         std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator++(&this->m_cCurrentToDoItemIter);
-        --v37;
+        --iEntityTaskCount;
       }
     }
     else
     {
       v16 = IEntity::ID(this);
-      v13 = v35[0];
+      v13 = iTodoSize;
       v5 = IEntity::Race(this);
       BBSupportTracePrintF(3, "Can't find doDoList for race=%d,id=%d, for EntityID = %d", v5, v13, v16);
       v6 = IEntity::Type(this);
       this->m_iToDoSize = v6;
       v17 = IEntity::Type(this);
       v7 = IEntity::Race(this);
-      v8 = CEntityToDoListMgr::SettlerJobList(g_pEntityToDoListMgr, v7, v17);
+      v8 = (std::list *)CEntityToDoListMgr::SettlerJobList(g_pEntityToDoListMgr, v7, v17);
       this->m_pToDoList = v8;
-      v25 = std::list<CEntityTask>::begin((void *)this->m_pToDoList, (int)v20);
+      v25 = std::list<CEntityTask>::begin(this->m_pToDoList);
       v24 = v25;
       LOBYTE(exceptionBlock) = 4;
       std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator=(
@@ -1084,7 +1071,7 @@ int  CSettler::MaxHitpoints(void)const {
   }
   v32 = std::auto_ptr<ISettlerRole>::operator->(&this->m_pBehavior);
   v32->PostLoadInit(v32, this);
-  if ( !std::list<CEntityTask>::size((void *)this->m_pToDoList)
+  if ( !std::list<CEntityTask>::size(this->m_pToDoList)
     && BBSupportDbgReport(2, "MapObjects\\Settler\\Settler.cpp", 377, "m_toDoList->size()>0") == 1 )
   {
     __debugbreak();
@@ -1108,7 +1095,7 @@ void  CSettler::Store(std::ostream & a1) {
   struct ISettlerRole *v8; // [esp+2Ch] [ebp-1Ch]
   struct ISettlerRole *v9; // [esp+30h] [ebp-18h]
   char v11; // [esp+39h] [ebp-Fh]
-  byte a2; // [esp+3Ah] [ebp-Eh] BYREF
+  byte iRole; // [esp+3Ah] [ebp-Eh] BYREF
   unsigned __int8 v13; // [esp+3Bh] [ebp-Dh] BYREF
   int v14; // [esp+44h] [ebp-4h]
 
@@ -1119,11 +1106,11 @@ void  CSettler::Store(std::ostream & a1) {
   if ( this->m_iToDoSize != -1 )
   {
     v13 = 0;
-    std::list<CEntityTask>::begin((void *)this->m_pToDoList, (int)v3);
+    std::list<CEntityTask>::begin(this->m_pToDoList);
     v14 = 0;
     while ( 1 )
     {
-      v5 = (std::_Iterator_base12 *)std::list<CEntityTask>::end((void *)this->m_pToDoList, (int)v2);
+      v5 = (std::_Iterator_base12 *)std::list<CEntityTask>::end(this->m_pToDoList);
       v4 = v5;
       LOBYTE(v14) = 1;
       v11 = std::_List_const_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator!=(v5);
@@ -1144,14 +1131,14 @@ void  CSettler::Store(std::ostream & a1) {
     operator^<unsigned char>(a1, &v13);
   }
   v9 = std::auto_ptr<ISettlerRole>::operator->(&this->m_pBehavior);
-  a2 = v9->GetSettlerRole(v9);
-  if ( a2 == 23 )                               // Squad Leader Role
+  iRole = v9->GetSettlerRole(v9);
+  if ( iRole == 23 )                            // Squad Leader Role
   {
     v8 = std::auto_ptr<ISettlerRole>::get(&this->m_pBehavior);
     if ( ((unsigned __int8 (__thiscall *)(struct ISettlerRole *))v8->__vftable[1].ClassID)(v8) )// IsHJB
-      a2 = 24;
+      iRole = 24;
   }
-  operator^<unsigned char>(a1, &a2);
+  operator^<unsigned char>(a1, &iRole);
   v7 = std::auto_ptr<ISettlerRole>::operator->(&this->m_pBehavior);
   v7->Store(a1);
 }
@@ -1235,8 +1222,8 @@ int  CSettler::SetGroupFlags(int a2) {
 // [Decompilation failed for static unsigned long CSettler::m_iClassID]
 
 // address=[0x157ec10]
-// Decompiled from CSettler *__thiscall CSettler::CSettler(  CSettler *this,  int posX,  int posY,  int settlerType,  int player,  struct ISettlerRole *settlerRole,  int id)
- CSettler::CSettler(int posX, int posY, int settlerType, int player, class std::auto_ptr<class ISettlerRole> settlerRole, int id) {
+// Decompiled from CSettler *__thiscall CSettler::CSettler(  CSettler *this,  int _iX,  int _iY,  int _iSettlerType,  int _iPlayer,  struct ISettlerRole *_pSettlerRole,  int _iId)
+ CSettler::CSettler(int _iX, int _iY, int _iSettlerType, int _iPlayer, class std::auto_ptr<class ISettlerRole> _pSettlerRole, int _iId) {
   
   CPlayerInfo *playerInfo; // eax
   unsigned __int8 race; // al
@@ -1250,34 +1237,34 @@ int  CSettler::SetGroupFlags(int a2) {
   int v19; // [esp+2Ch] [ebp-4h]
 
   v19 = 0;
-  IMovingEntity::IMovingEntity(this, id);
+  IMovingEntity::IMovingEntity(this, _iId);
   this->__vftable = (CSettler_vtbl *)&CSettler::_vftable_;
   std::auto_ptr<ISettlerRole>::auto_ptr<ISettlerRole>(
     (auto_ptr_ISettlerRole *)&this->m_pBehavior,
-    (auto_ptr_ISettlerRole *)&settlerRole);
+    (auto_ptr_ISettlerRole *)&_pSettlerRole);
   LOBYTE(v19) = 2;
   IMessageTracer::PushFormatedInts(
     g_pMsgTracer,
     "CSettler::CSettler(): entity id %u, player %u, settler type %u, position (%i, %i)",
-    id,
-    player,
-    settlerType,
-    posX,
-    posY);
+    _iId,
+    _iPlayer,
+    _iSettlerType,
+    _iX,
+    _iY);
   this->m_iDistance = 0;
-  IEntity::SetPosition(this, posX, posY);
+  IEntity::SetPosition(this, _iX, _iY);
   this->m_uObjType = Settler;
-  this->m_nType = settlerType;
+  this->m_nType = _iSettlerType;
   this->m_iDirection = CGameData::Rand(g_pGameData) % 6;
-  IEntity::SetOwnerId(this, player);
-  playerInfo = CPlayerManager::PlayerInfo(player);
+  IEntity::SetOwnerId(this, _iPlayer);
+  playerInfo = CPlayerManager::PlayerInfo(_iPlayer);
   race = CPlayerInfo::Race(playerInfo);
   IEntity::SetRace(this, race);
   race2 = IEntity::Race(this);
-  this->m_iLivePoints = CSettlerMgr::GetSettlerInfo(race2, settlerType)->m_iMaxLifePoints;
+  this->m_iLivePoints = CSettlerMgr::GetSettlerInfo(race2, _iSettlerType)->m_iMaxLifePoints;
   IEntity::ClearFlagBits(this, (EntityFlag)10240);
   IEntity::SetFlagBits(this, EntityFlag_Ready|EntityFlag_NotStriking|EntityFlag_Visible);
-  this->m_iFlags |= CSettlerMgr::SettlerWarriorType(settlerType);
+  this->m_iFlags |= CSettlerMgr::SettlerWarriorType(_iSettlerType);
   if ( IEntity::WarriorType(this) == AI_WARRIOR_TYPE_NONE )
   {
     worldIdx = IEntity::WorldIdx();
@@ -1285,7 +1272,7 @@ int  CSettler::SetGroupFlags(int a2) {
     if ( ecoSectorId )
     {
       ecoSector = (unsigned __int16 *)CEcoSectorMgr::operator[](g_cESMgr, ecoSectorId);
-      if ( CEcoSector::Owner(ecoSector) == player )
+      if ( CEcoSector::Owner(ecoSector) == _iPlayer )
       {
         CEcoSector::ChangeNrOfSettler((CEcoSector *)ecoSector, this->m_nType, 1);
         if ( IEntity::Type(this) != 1 )
@@ -1293,15 +1280,15 @@ int  CSettler::SetGroupFlags(int a2) {
       }
     }
   }
-  if ( CWorldManager::MapObjectId(posX, posY)
+  if ( CWorldManager::MapObjectId(_iX, _iY)
     && BBSupportDbgReport(2, "MapObjects\\Settler\\Settler.cpp", 112, "g_cWorld.MapObjectId(_iX, _iY) == 0") == 1 )
   {
     __debugbreak();
   }
-  CWorldManager::SetSettlerId(posX, posY, this->m_nEntityId);
+  CWorldManager::SetSettlerId(_iX, _iY, this->m_nEntityId);
   IMovingEntity::SetDisplacementCosts(this, 0);
-  settlerRole = std::auto_ptr<ISettlerRole>::operator->(&this->m_pBehavior);
-  v11 = settlerRole->InitWalking(settlerRole, this);
+  _pSettlerRole = std::auto_ptr<ISettlerRole>::operator->(&this->m_pBehavior);
+  v11 = _pSettlerRole->InitWalking(_pSettlerRole, this);
   std::auto_ptr<CWalking>::auto_ptr<CWalking>(&v13, v11);
   LOBYTE(v19) = 3;
   std::auto_ptr<CWalking>::operator=(&v13);
@@ -1311,7 +1298,7 @@ int  CSettler::SetGroupFlags(int a2) {
   LOBYTE(v19) = 2;
   std::auto_ptr<CWalking>::~auto_ptr<CWalking>(&v13);
   v19 = -1;
-  std::auto_ptr<ISettlerRole>::~auto_ptr<ISettlerRole>((auto_ptr_ISettlerRole *)&settlerRole);
+  std::auto_ptr<ISettlerRole>::~auto_ptr<ISettlerRole>((auto_ptr_ISettlerRole *)&_pSettlerRole);
   return this;
 }
 
@@ -1371,12 +1358,12 @@ int  CSettler::SetGroupFlags(int a2) {
 
 
 // address=[0x157f0e0]
-// Decompiled from void __thiscall CSettler::~CSettler(CSettler *this)
+// Decompiled from int __thiscall CSettler::~CSettler(CSettler *this)
  CSettler::~CSettler(void) {
   
-  *(_DWORD *)this = &CSettler::_vftable_;
-  std::auto_ptr<ISettlerRole>::~auto_ptr<ISettlerRole>((char *)this + 100);
-  IMovingEntity::~IMovingEntity(this);
+  this->__vftable = (CSettler_vtbl *)&CSettler::_vftable_;
+  std::auto_ptr<ISettlerRole>::~auto_ptr<ISettlerRole>((auto_ptr_ISettlerRole *)&this->m_pBehavior);
+  return IMovingEntity::~IMovingEntity(this);
 }
 
 
@@ -1386,7 +1373,7 @@ int  CSettler::Walk(void) {
   
   int v2; // eax
   int v3; // eax
-  int v4; // [esp+0h] [ebp-8h]
+  CWalking *v4; // [esp+0h] [ebp-8h]
 
   if ( IEntity::FlagBits(this, EntityFlag_Died) )
   {
@@ -1397,7 +1384,7 @@ int  CSettler::Walk(void) {
   {
     v4 = std::auto_ptr<CWalking>::operator->(&this->m_pWalkin);
     v2 = IEntity::PackedXY(this);
-    v3 = (*(int (__thiscall **)(int, int))(*(_DWORD *)v4 + 12))(v4, v2);
+    v3 = v4->Walk(v4, v2);
     return CSettler::WalkDir(this, v3);
   }
   else
@@ -1408,7 +1395,7 @@ int  CSettler::Walk(void) {
 
 
 // address=[0x157f190]
-// Decompiled from unsigned int __thiscall CSettler::WalkDir(IEntity *this, int a2)
+// Decompiled from unsigned int __thiscall CSettler::WalkDir(CSettler *this, int a2)
 int  CSettler::WalkDir(int a2) {
   
   int v3; // esi
@@ -1428,8 +1415,8 @@ int  CSettler::WalkDir(int a2) {
   int v17; // [esp+24h] [ebp-38h]
   int v18; // [esp+30h] [ebp-2Ch]
   int v19; // [esp+38h] [ebp-24h]
-  int v20; // [esp+3Ch] [ebp-20h]
-  int v21; // [esp+40h] [ebp-1Ch]
+  int iWorldId; // [esp+3Ch] [ebp-20h]
+  int iEntityId; // [esp+40h] [ebp-1Ch]
   int v22; // [esp+44h] [ebp-18h]
   int v23; // [esp+48h] [ebp-14h]
   unsigned int v24; // [esp+4Ch] [ebp-10h]
@@ -1451,27 +1438,27 @@ int  CSettler::WalkDir(int a2) {
       v18 = Y16X16::NeighborModifier(v24) + v3;
       v19 = CWorldManager::Index(v18);
       TickCounter = CGameData::GetTickCounter(g_pGameData);
-      v21 = IEntity::ID(this);
+      iEntityId = IEntity::ID(this);
       v13 = IEntity::X(this);
       v14 = IEntity::Y(this);
-      IEntity::WorldIdx();
+      IEntity::WorldIdx(this);
       v15 = IEntity::OwnerId(this);
       v16 = IEntity::Race(this);
-      v20 = CWorldManager::MapObjectId(v23);
-      if ( v21 != v20 )
+      iWorldId = CWorldManager::MapObjectId(v23);
+      if ( iEntityId != iWorldId )
       {
         BBSupportTracePrintF(
           3,
           "CSettler::WalkDir(): Invalid world map object id: Tick %i, settler %i @ (%i, %i), world id %i, owner %i, race %i",
           TickCounter,
-          v21,
+          iEntityId,
           v13,
           v14,
-          v20,
+          iWorldId,
           v15,
           v16);
-        CMapObjectMgr::DbgPrintEntity(g_pMapObjectMgr, v21, 0, 0);
-        CMapObjectMgr::DbgPrintEntity(g_pMapObjectMgr, v20, 0, 0);
+        CMapObjectMgr::DbgPrintEntity(g_pMapObjectMgr, iEntityId, 0, 0);
+        CMapObjectMgr::DbgPrintEntity(g_pMapObjectMgr, iWorldId, 0, 0);
         if ( BBSupportDbgReport(
                1,
                "MapObjects\\Settler\\Settler.cpp",
@@ -1480,7 +1467,7 @@ int  CSettler::WalkDir(int a2) {
           __debugbreak();
       }
       v25 = -1;
-      if ( IMovingEntity::IsFree((IMovingEntity *)this, v19) )
+      if ( IMovingEntity::IsFree(this, v19) )
       {
         v25 = a2 & 0xF;
       }
@@ -1488,7 +1475,7 @@ int  CSettler::WalkDir(int a2) {
       {
         v4 = Grid::TurnLeft(v24);
         v8 = v23 + CWorldManager::NeighborRelIndex(v4);
-        v5 = IMovingEntity::Walking((IMovingEntity *)this);
+        v5 = IMovingEntity::Walking(this);
         if ( CWalking::IsFree(v5, v8) )
         {
           v25 = -1;
@@ -1497,7 +1484,7 @@ int  CSettler::WalkDir(int a2) {
         {
           v6 = Grid::TurnRight(v24);
           v9 = v23 + CWorldManager::NeighborRelIndex(v6);
-          v7 = IMovingEntity::Walking((IMovingEntity *)this);
+          v7 = IMovingEntity::Walking(this);
           if ( CWalking::IsFree(v7, v9) )
             v25 = -1;
         }
@@ -1513,9 +1500,9 @@ int  CSettler::WalkDir(int a2) {
         CWorldManager::SetSettlerId(v23, 0);
         CWorldManager::SetSettlerId(v17, v11);
         v10 = v22 + Y16X16::NeighborModifier(v25);
-        IMovingEntity::SetPositionAndDir((IMovingEntity *)this, v10, v25);
-        CWarMap::NotifyMove((CPropertySet *)this, v22);
-        this[1].m_iLivePoints = -1;
+        IMovingEntity::SetPositionAndDir(this, v10, v25);
+        CWarMap::NotifyMove(this, v22);
+        this->m_iDistance = -1;
         if ( IEntity::Type(this) == 1 && (a2 & 0x10) == 0 )
           CWorldManager::IncreaseWalkCount(v17);
         return v25 | a2 & 0xFFFFFFF0;
@@ -1543,13 +1530,14 @@ void  CSettler::Decrease(int a2) {
 
 
 // address=[0x157ffe0]
-// Decompiled from int __thiscall CSettler::ConvertEventIntoGoal(CSettler *this, struct CEntityEvent *a2)
+// Decompiled from void __thiscall CSettler::ConvertEventIntoGoal(CSettler *this, struct CEntityEvent *a2)
 void  CSettler::ConvertEventIntoGoal(class CEntityEvent * a2) {
   
   struct ISettlerRole *v2; // eax
 
   v2 = std::auto_ptr<ISettlerRole>::operator->(&this->m_pBehavior);
-  return v2->ConvertEventIntoGoal(v2, this, a2);
+  v2->ConvertEventIntoGoal(v2, this, a2);
 }
 
 
+#endif // Already implemented

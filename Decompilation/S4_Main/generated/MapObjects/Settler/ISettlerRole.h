@@ -54,7 +54,7 @@ public:
     virtual void  Go(class CSettler * settler);
 
     // address=[0x15899a0]
-    virtual void  LogicUpdate(class CSettler * a2);
+    virtual void  LogicUpdate(class CSettler * pSettler);
 
     // address=[0x1589b30]
     void  Update(class CSettler * _pSettler);
@@ -115,32 +115,28 @@ protected:
     void  InitCommonTaskValues(class CSettler * a2, class CEntityTask const & a3);
 
     // address=[0x158afa0]
-    virtual void  NewDestinationEx(class CSettler * a2, class std::list<class CEntityTask,class std::allocator<class CEntityTask> > & a3, int a4, int a5, int a6);
+    virtual void  NewDestinationEx(class CSettler * pSettler, class std::list<class CEntityTask,class std::allocator<class CEntityTask> > & a3, int a4, int a5, int a6);
 
     // Type information members
 public:
     CHAR m_iTask;
     BYTE m_uSettlerWalk;
     char m_iWalkspeed;
-    BYTE m_uLoopFrame;
+    unsigned __int8 m_uCycleFrames;
     WORD m_uTick;
     BYTE unk_0A;
     BYTE unk_0B;
-    BYTE unk_0C;
-    BYTE pad_0D;
-    WORD unk_0E;
-    WORD unk_10;
-    WORD unk_12;
+    unsigned __int8 m_uToDoCount;
+    __int16 m_iDestinationOffsetX;
+    __int16 m_iDestinationOffsetY;
+    WORD m_uAttachedSettlerId;
     WORD m_uSourcePileId;
-    WORD pad_16;
     int m_iDestinationPosition;
     int m_iStartPosition;
     WORD m_uHomeEntityId;
     WORD m_uEntityId;
     float m_fOffsetX;
     float m_fOffsetY;
-    DWORD unk_2c;
-    DWORD unk_30;
 
 };
 

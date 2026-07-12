@@ -1,3 +1,4 @@
+#if FALSE
 #include "CSettlerMgr.h"
 
 // Definitions for class CSettlerMgr
@@ -2813,3 +2814,4 @@ int __cdecl CSettlerMgr::GetUserESInMiddleOfTheScreen(void) {
 // address=[0x4153e40]
 // [Decompilation failed for static struct CSettlerMgr::SSettlerInfos (* CSettlerMgr::m_vSettlerInfos)[70]]
 
+#endif // Already implemented

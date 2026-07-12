@@ -10742,164 +10742,163 @@ bool __cdecl GuiDlgFerryLoadContextProc(int a1, int a2, int a3) {
 
 
 // address=[0x138c100]
-// Decompiled from char __cdecl GuiDlgFiguresSubmenuProc(int a1, unsigned int a2, int a3)
+// Decompiled from char __cdecl GuiDlgFiguresSubmenuProc(int a1, unsigned int a2, T_S4_TRANSLATION a3)
 bool __cdecl GuiDlgFiguresSubmenuProc(int a1, int a2, int a3) {
   
   char *v4; // eax
   char *v5; // eax
   int LocalPlayerId; // eax
   CPlayerInfo *v7; // eax
-  int v8; // [esp+0h] [ebp-138h]
-  CEvn_Logic *v9; // [esp+4h] [ebp-134h]
-  CEvn_Logic *v10; // [esp+Ch] [ebp-12Ch]
-  CEvn_Logic *v11; // [esp+14h] [ebp-124h]
-  CEvn_Logic *v12; // [esp+1Ch] [ebp-11Ch]
-  CEvn_Logic *v13; // [esp+24h] [ebp-114h]
-  CEvn_Logic *v14; // [esp+2Ch] [ebp-10Ch]
-  CEvn_Logic *v15; // [esp+34h] [ebp-104h]
-  DWORD v16; // [esp+40h] [ebp-F8h]
-  _BYTE v17[32]; // [esp+48h] [ebp-F0h] BYREF
-  _BYTE v18[32]; // [esp+68h] [ebp-D0h] BYREF
-  _BYTE v19[32]; // [esp+88h] [ebp-B0h] BYREF
-  _BYTE v20[32]; // [esp+A8h] [ebp-90h] BYREF
-  _BYTE v21[32]; // [esp+C8h] [ebp-70h] BYREF
-  _BYTE v22[32]; // [esp+E8h] [ebp-50h] BYREF
-  _BYTE v23[32]; // [esp+108h] [ebp-30h] BYREF
-  int v24; // [esp+134h] [ebp-4h]
+  CEvn_Logic *v8; // [esp+4h] [ebp-134h]
+  CEvn_Logic *v9; // [esp+Ch] [ebp-12Ch]
+  CEvn_Logic *v10; // [esp+14h] [ebp-124h]
+  CEvn_Logic *v11; // [esp+1Ch] [ebp-11Ch]
+  CEvn_Logic *v12; // [esp+24h] [ebp-114h]
+  CEvn_Logic *v13; // [esp+2Ch] [ebp-10Ch]
+  CEvn_Logic *v14; // [esp+34h] [ebp-104h]
+  DWORD v15; // [esp+40h] [ebp-F8h]
+  CEvn_Logic v16; // [esp+48h] [ebp-F0h] BYREF
+  CEvn_Logic v17; // [esp+68h] [ebp-D0h] BYREF
+  CEvn_Logic v18; // [esp+88h] [ebp-B0h] BYREF
+  CEvn_Logic v19; // [esp+A8h] [ebp-90h] BYREF
+  CEvn_Logic v20; // [esp+C8h] [ebp-70h] BYREF
+  CEvn_Logic v21; // [esp+E8h] [ebp-50h] BYREF
+  CEvn_Logic v22; // [esp+108h] [ebp-30h] BYREF
+  int v23; // [esp+134h] [ebp-4h]
 
   if ( !g_pEvnEngine )
     return 0;
   switch ( a1 )
   {
     case 0:
-      IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 4, 747, 1);
+      IGuiEngine::SelectControl(g_pGUIEngine, 4, 747, 1);
       break;
     case 1:
       if ( (S4HiWord(a2) & 1) != 0 )
-        PlayGuiSound(1);
+        PlayGuiSound(1u);
       else
         PlayGuiSound(0);
       break;
     case 3:
       switch ( S4LoWord(a2) )
       {
-        case 0x2E9u:
-          PlayGuiSound(2);
-          v11 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v19, 0x192u, 0, 0, 0, 0, 0);
-          v24 = 4;
-          IEventEngine::SendAMessage(g_pEvnEngine, v11);
-          v24 = -1;
-          CEvn_Logic::~CEvn_Logic(v19);
-          v10 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v18, 0x1AFu, 0, 0, 0, 0, 0);
-          v24 = 5;
+        case 745:
+          PlayGuiSound(2u);
+          v10 = CEvn_Logic::CEvn_Logic(&v18, 0x192u, 0, 0, 0, 0, 0);
+          v23 = 4;
           IEventEngine::SendAMessage(g_pEvnEngine, v10);
-          v24 = -1;
-          CEvn_Logic::~CEvn_Logic(v18);
+          v23 = -1;
+          CEvn_Logic::~CEvn_Logic(&v18);
+          v9 = CEvn_Logic::CEvn_Logic(&v17, 0x1AFu, 0, 0, 0, 0, 0);
+          v23 = 5;
+          IEventEngine::SendAMessage(g_pEvnEngine, v9);
+          v23 = -1;
+          CEvn_Logic::~CEvn_Logic(&v17);
           break;
-        case 0x2EAu:
-          PlayGuiSound(2);
-          v13 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v21, 0x192u, 0, 0, 0, 0, 0);
-          v24 = 2;
-          IEventEngine::SendAMessage(g_pEvnEngine, v13);
-          v24 = -1;
-          CEvn_Logic::~CEvn_Logic(v21);
-          v12 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v20, 0x1AEu, 0, 0, 0, 0, 0);
-          v24 = 3;
+        case 746:
+          PlayGuiSound(2u);
+          v12 = CEvn_Logic::CEvn_Logic(&v20, 0x192u, 0, 0, 0, 0, 0);
+          v23 = 2;
           IEventEngine::SendAMessage(g_pEvnEngine, v12);
-          v24 = -1;
-          CEvn_Logic::~CEvn_Logic(v20);
+          v23 = -1;
+          CEvn_Logic::~CEvn_Logic(&v20);
+          v11 = CEvn_Logic::CEvn_Logic(&v19, 0x1AEu, 0, 0, 0, 0, 0);
+          v23 = 3;
+          IEventEngine::SendAMessage(g_pEvnEngine, v11);
+          v23 = -1;
+          CEvn_Logic::~CEvn_Logic(&v19);
           break;
-        case 0x2EBu:
-          MEMORY[0x3F1E9E4] = 29;
-          MEMORY[0x3F1EA08] = 1;
-          *(&MEMORY[0x3F1EA08] + 2) = 2;
-          *(&MEMORY[0x3F1EA08] + 4) = 3;
-          *(&MEMORY[0x3F1EA08] + 6) = 4;
-          *(&MEMORY[0x3F1EA08] + 8) = 6;
-          *(&MEMORY[0x3F1EA08] + 10) = 12;
-          *(&MEMORY[0x3F1EA08] + 12) = 14;
-          *(&MEMORY[0x3F1EA08] + 14) = 5;
-          *(&MEMORY[0x3F1EA08] + 16) = 13;
-          *(&MEMORY[0x3F1EA08] + 18) = 15;
-          *(&MEMORY[0x3F1EA08] + 20) = 8;
-          *(&MEMORY[0x3F1EA08] + 22) = 7;
-          *(&MEMORY[0x3F1EA08] + 24) = 11;
-          *(&MEMORY[0x3F1EA08] + 26) = 18;
-          *(&MEMORY[0x3F1EA08] + 28) = 9;
-          *(&MEMORY[0x3F1EA08] + 30) = 16;
-          *(&MEMORY[0x3F1EA08] + 32) = 17;
-          *(&MEMORY[0x3F1EA08] + 34) = 10;
-          *(&MEMORY[0x3F1EA08] + 36) = 19;
-          *(&MEMORY[0x3F1EA08] + 38) = 23;
-          *(&MEMORY[0x3F1EA08] + 40) = 56;
-          *(&MEMORY[0x3F1EA08] + 42) = 20;
-          *(&MEMORY[0x3F1EA08] + 50) = 0;
-          *(&MEMORY[0x3F1EA08] + 52) = 50;
-          *(&MEMORY[0x3F1EA08] + 54) = 49;
-          *(&MEMORY[0x3F1EA08] + 56) = 48;
-          *(&MEMORY[0x3F1EA08] + 58) = 47;
-          *(&MEMORY[0x3F1EA08] + 60) = 46;
-          *(&MEMORY[0x3F1EA08] + 62) = 29;
-          *(&MEMORY[0x3F1EA08] + 64) = 32;
-          *(&MEMORY[0x3F1EA08] + 68) = 44;
-          *(&MEMORY[0x3F1EA08] + 70) = 45;
-          LocalPlayerId = CPlayerManager::GetLocalPlayerId(v8);
+        case 747:
+          g_cSettlerStatisticInfo.m_iUnknown = 29;
+          g_cSettlerStatisticInfo.m_vSettlerCounts[0].m_iSettlerType = SETTLER_CARRIER;
+          g_cSettlerStatisticInfo.m_vSettlerCounts[1].m_iSettlerType = SETTLER_DIGGER;
+          g_cSettlerStatisticInfo.m_vSettlerCounts[2].m_iSettlerType = SETTLER_BUILDER;
+          g_cSettlerStatisticInfo.m_vSettlerCounts[3].m_iSettlerType = SETTLER_WOODCUTTER;
+          g_cSettlerStatisticInfo.m_vSettlerCounts[4].m_iSettlerType = SETTLER_FORESTER;
+          g_cSettlerStatisticInfo.m_vSettlerCounts[5].m_iSettlerType = 12;
+          g_cSettlerStatisticInfo.m_vSettlerCounts[6].m_iSettlerType = 14;
+          g_cSettlerStatisticInfo.m_vSettlerCounts[7].m_iSettlerType = 5;
+          g_cSettlerStatisticInfo.m_vSettlerCounts[8].m_iSettlerType = 13;
+          g_cSettlerStatisticInfo.m_vSettlerCounts[9].m_iSettlerType = 15;
+          g_cSettlerStatisticInfo.m_vSettlerCounts[10].m_iSettlerType = 8;
+          g_cSettlerStatisticInfo.m_vSettlerCounts[11].m_iSettlerType = 7;
+          g_cSettlerStatisticInfo.m_vSettlerCounts[12].m_iSettlerType = 11;
+          g_cSettlerStatisticInfo.m_vSettlerCounts[13].m_iSettlerType = 18;
+          g_cSettlerStatisticInfo.m_vSettlerCounts[14].m_iSettlerType = 9;
+          g_cSettlerStatisticInfo.m_vSettlerCounts[15].m_iSettlerType = 16;
+          g_cSettlerStatisticInfo.m_vSettlerCounts[16].m_iSettlerType = 17;
+          g_cSettlerStatisticInfo.m_vSettlerCounts[17].m_iSettlerType = 10;
+          g_cSettlerStatisticInfo.m_vSettlerCounts[18].m_iSettlerType = 19;
+          g_cSettlerStatisticInfo.m_vSettlerCounts[19].m_iSettlerType = 23;
+          g_cSettlerStatisticInfo.m_vSettlerCounts[20].m_iSettlerType = 56;
+          g_cSettlerStatisticInfo.m_vSettlerCounts[21].m_iSettlerType = 20;
+          g_cSettlerStatisticInfo.m_vSettlerCounts[25].m_iSettlerType = 0;
+          g_cSettlerStatisticInfo.m_vSettlerCounts[26].m_iSettlerType = 50;
+          g_cSettlerStatisticInfo.m_vSettlerCounts[27].m_iSettlerType = 49;
+          g_cSettlerStatisticInfo.m_vSettlerCounts[28].m_iSettlerType = 48;
+          g_cSettlerStatisticInfo.m_vSettlerCounts[29].m_iSettlerType = 47;
+          g_cSettlerStatisticInfo.m_vSettlerCounts[30].m_iSettlerType = 46;
+          g_cSettlerStatisticInfo.m_vSettlerCounts[31].m_iSettlerType = 29;
+          g_cSettlerStatisticInfo.m_vSettlerCounts[32].m_iSettlerType = 32;
+          g_cSettlerStatisticInfo.m_vSettlerCounts[34].m_iSettlerType = 44;
+          g_cSettlerStatisticInfo.m_vSettlerCounts[35].m_iSettlerType = 45;
+          LocalPlayerId = CPlayerManager::GetLocalPlayerId();
           v7 = CPlayerManager::PlayerInfo(LocalPlayerId);
-          v16 = CPlayerInfo::Race(v7);
-          switch ( v16 )
+          v15 = CPlayerInfo::Race(v7);
+          switch ( v15 )
           {
             case 1u:
-              *(&MEMORY[0x3F1EA08] + 44) = 25;
-              *(&MEMORY[0x3F1EA08] + 46) = 26;
-              *(&MEMORY[0x3F1EA08] + 48) = 21;
-              *(&MEMORY[0x3F1EA08] + 66) = 38;
+              g_cSettlerStatisticInfo.m_vSettlerCounts[22].m_iSettlerType = 25;
+              g_cSettlerStatisticInfo.m_vSettlerCounts[23].m_iSettlerType = 26;
+              g_cSettlerStatisticInfo.m_vSettlerCounts[24].m_iSettlerType = 21;
+              g_cSettlerStatisticInfo.m_vSettlerCounts[33].m_iSettlerType = 38;
               break;
             case 2u:
-              *(&MEMORY[0x3F1EA08] + 44) = 27;
-              *(&MEMORY[0x3F1EA08] + 46) = 28;
-              *(&MEMORY[0x3F1EA08] + 48) = 22;
-              *(&MEMORY[0x3F1EA08] + 66) = 41;
+              g_cSettlerStatisticInfo.m_vSettlerCounts[22].m_iSettlerType = 27;
+              g_cSettlerStatisticInfo.m_vSettlerCounts[23].m_iSettlerType = 28;
+              g_cSettlerStatisticInfo.m_vSettlerCounts[24].m_iSettlerType = 22;
+              g_cSettlerStatisticInfo.m_vSettlerCounts[33].m_iSettlerType = 41;
               break;
             case 4u:
-              *(&MEMORY[0x3F1EA08] + 44) = 64;
-              *(&MEMORY[0x3F1EA08] + 46) = 65;
-              *(&MEMORY[0x3F1EA08] + 48) = 22;
-              *(&MEMORY[0x3F1EA08] + 66) = 61;
+              g_cSettlerStatisticInfo.m_vSettlerCounts[22].m_iSettlerType = 64;
+              g_cSettlerStatisticInfo.m_vSettlerCounts[23].m_iSettlerType = 65;
+              g_cSettlerStatisticInfo.m_vSettlerCounts[24].m_iSettlerType = 22;
+              g_cSettlerStatisticInfo.m_vSettlerCounts[33].m_iSettlerType = 61;
               break;
             default:
-              *(&MEMORY[0x3F1EA08] + 44) = 24;
-              *(&MEMORY[0x3F1EA08] + 46) = 22;
-              *(&MEMORY[0x3F1EA08] + 48) = 0;
-              *(&MEMORY[0x3F1EA08] + 66) = 35;
+              g_cSettlerStatisticInfo.m_vSettlerCounts[22].m_iSettlerType = 24;
+              g_cSettlerStatisticInfo.m_vSettlerCounts[23].m_iSettlerType = 22;
+              g_cSettlerStatisticInfo.m_vSettlerCounts[24].m_iSettlerType = 0;
+              g_cSettlerStatisticInfo.m_vSettlerCounts[33].m_iSettlerType = 35;
               break;
           }
-          PlayGuiSound(2);
-          v15 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v23, 0x192u, 0, 0, 0, 0, 0);
-          v24 = 0;
-          IEventEngine::SendAMessage(g_pEvnEngine, v15);
-          v24 = -1;
-          CEvn_Logic::~CEvn_Logic(v23);
-          v14 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v22, 0x1ADu, 0, 0, 0, 0, 0);
-          v24 = 1;
+          PlayGuiSound(2u);
+          v14 = CEvn_Logic::CEvn_Logic(&v22, 0x192u, 0, 0, 0, 0, 0);
+          v23 = 0;
           IEventEngine::SendAMessage(g_pEvnEngine, v14);
-          v24 = -1;
-          CEvn_Logic::~CEvn_Logic(v22);
+          v23 = -1;
+          CEvn_Logic::~CEvn_Logic(&v22);
+          v13 = CEvn_Logic::CEvn_Logic(&v21, 0x1ADu, 0, 0, 0, 0, 0);
+          v23 = 1;
+          IEventEngine::SendAMessage(g_pEvnEngine, v13);
+          v23 = -1;
+          CEvn_Logic::~CEvn_Logic(&v21);
           break;
-        case 0x2ECu:
-          PlayGuiSound(2);
-          v9 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v17, 0x192u, 0, 0, 0, 0, 0);
-          v24 = 6;
-          IEventEngine::SendAMessage(g_pEvnEngine, v9);
-          v24 = -1;
-          CEvn_Logic::~CEvn_Logic(v17);
+        case 748:
+          PlayGuiSound(2u);
+          v8 = CEvn_Logic::CEvn_Logic(&v16, 0x192u, 0, 0, 0, 0, 0);
+          v23 = 6;
+          IEventEngine::SendAMessage(g_pEvnEngine, v8);
+          v23 = -1;
+          CEvn_Logic::~CEvn_Logic(&v16);
           if ( g_pGuiMainEvents )
           {
             if ( *(_DWORD *)(g_pGuiMainEvents + 12) != -1 )
             {
-              IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, *(_DWORD *)(g_pGuiMainEvents + 12));
+              IGuiEngine::CloseDialog(g_pGUIEngine, *(_DWORD *)(g_pGuiMainEvents + 12));
               *(_DWORD *)(g_pGuiMainEvents + 12) = -1;
             }
-            IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 29, GuiDlgSettlerFindMenuProc);
+            IGuiEngine::OpenDialog(g_pGUIEngine, 29, (bool (__cdecl *)(int, int, int))GuiDlgSettlerFindMenuProc);
             *(_DWORD *)(g_pGuiMainEvents + 12) = 29;
           }
           break;

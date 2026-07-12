@@ -196,14 +196,10 @@ class IFutureEvents &  CLogic::FutureEvents(void) {
 
 
 // address=[0x158b9a0]
-// Decompiled from CLogic *__thiscall CLogic::SetWarAction(CLogic *this)
+// Decompiled from void __thiscall CLogic::SetWarAction(CLogic *this)
 void  CLogic::SetWarAction(void) {
   
-  CLogic *result; // eax
-
-  result = this;
   *((_DWORD *)this + 16) = 1;
-  return result;
 }
 
 

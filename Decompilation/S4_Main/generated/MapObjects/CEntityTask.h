@@ -15,7 +15,7 @@ public:
     virtual unsigned long  ClassID(void)const;
 
     // address=[0x14dfb60]
-     CEntityTask(int a2, int a3, int a4, int a5, int a6, int a7, int a8, bool a9, bool a10, int a11, unsigned int a12, unsigned int a13, unsigned int a14);
+     CEntityTask(int _iTask, int _iJobNr, int _iX, int _iY, int _iDuration, int _iFrameCount, int _iDir, bool _bForward, bool _bVisible, int _iEntity, unsigned int a12, unsigned int a13, unsigned int _iTrigger);
 
     // address=[0x154c2d0]
      CEntityTask(std::istream & a2);
@@ -34,19 +34,19 @@ public:
 
     // Type information members
 public:
-    unsigned __int8 m_uData0;
-    unsigned __int8 m_uData1;
-    char m_iData2;
-    char m_iData3;
-    char m_iData4;
-    unsigned __int8 m_uData5;
-    __int16 m_iData6;
-    __int16 m_iData7;
-    unsigned __int16 m_uData8;
+    __int8 m_iTask;
+    unsigned __int8 m_iEntity;
+    char m_iDir;
+    char m_iDuration;
+    char m_iFrameCount;
+    unsigned __int8 m_iTrigger;
+    __int16 m_iX;
+    __int16 m_iY;
+    unsigned __int16 m_iJobNr;
     unsigned __int16 m_uData9;
     unsigned __int16 m_uData10;
-    bool m_bData11;
-    bool m_bData12;
+    bool m_bVisible;
+    bool m_bForward;
 
 };
 

@@ -327,41 +327,42 @@ void  CDarkGardenerRole::GetNextJob(class CSettler * a2) {
 
 
 // address=[0x1567900]
-// Decompiled from void __thiscall CDarkGardenerRole::TakeJob(CDarkGardenerRole *this, struct CSettler *a2)
+// Decompiled from int __thiscall CDarkGardenerRole::TakeJob(CDarkGardenerRole *this, IMovingEntity *a2)
 void  CDarkGardenerRole::TakeJob(class CSettler * a2) {
   
-  const struct CEntityTask *ActualTask; // eax
-  unsigned int v3; // eax
-  int v4; // esi
+  CEntityTask *ActualTask; // eax
+  DWORD v3; // eax
+  int result; // eax
   int v5; // esi
-  int v6; // eax
-  Y16X16 *v7; // eax
-  int v8; // [esp-8h] [ebp-2Ch]
-  int v9; // [esp-4h] [ebp-28h]
-  int v10; // [esp+4h] [ebp-20h]
-  int v11; // [esp+8h] [ebp-1Ch]
-  int v12; // [esp+Ch] [ebp-18h]
-  int v13; // [esp+10h] [ebp-14h]
-  int v14; // [esp+14h] [ebp-10h]
+  int v6; // esi
+  int v7; // eax
+  int v8; // eax
+  int v9; // [esp-8h] [ebp-2Ch]
+  int v10; // [esp-4h] [ebp-28h]
+  int v11; // [esp+4h] [ebp-20h]
+  int v12; // [esp+8h] [ebp-1Ch]
+  char v13; // [esp+Ch] [ebp-18h]
+  unsigned int v14; // [esp+10h] [ebp-14h]
+  unsigned int v15; // [esp+14h] [ebp-10h]
   int i; // [esp+1Ch] [ebp-8h]
 
-  ActualTask = (const struct CEntityTask *)IMovingEntity::GetActualTask(a2);
-  ISettlerRole::InitCommonTaskValues(this, a2, ActualTask);
+  ActualTask = IMovingEntity::GetActualTask(a2);
+  ISettlerRole::InitCommonTaskValues((ISettlerRole *)this, a2, ActualTask);
   switch ( *((_BYTE *)this + 4) )
   {
     case 7:
       if ( debug && DEBUG_FLAGS[dword_41520A0] )
         BBSupportTracePrint(0, "TakeJob GO_TO_POS");
-      IAnimatedEntity::SetFrame(1);
+      IAnimatedEntity::SetFrame(a2, 1u);
       if ( *((__int16 *)this + 7) > 0 || *((__int16 *)this + 8) > 0 )
-        ISettlerRole::NewDestination(this, a2, *((__int16 *)this + 7), *((__int16 *)this + 8), 0);
-      v10 = *((__int16 *)this + 7) + Y16X16::UnpackXFast(*((_DWORD *)this + 6));
-      v11 = *((__int16 *)this + 8) + Y16X16::UnpackYFast(*((_DWORD *)this + 6));
-      *((_DWORD *)this + 6) = Y16X16::PackXYFast(v10, v11);
+        ISettlerRole::NewDestination((ISettlerRole *)this, a2, *((__int16 *)this + 7), *((__int16 *)this + 8), 0);
+      v11 = *((__int16 *)this + 7) + Y16X16::UnpackXFast(*((_DWORD *)this + 6));
+      v12 = *((__int16 *)this + 8) + Y16X16::UnpackYFast(*((_DWORD *)this + 6));
+      *((_DWORD *)this + 6) = Y16X16::PackXYFast(v11, v12);
       IMovingEntity::WalkToXY(a2, *((_DWORD *)this + 6), 0);
       *((_BYTE *)this + 4) = 6;
-      IMovingEntity::SetDisplacementCosts(5);
-      (*(void (__thiscall **)(CDarkGardenerRole *, struct CSettler *))(*(_DWORD *)this + 16))(this, a2);
+      IMovingEntity::SetDisplacementCosts(a2, 5);
+      result = (*(int (__thiscall **)(CDarkGardenerRole *, IMovingEntity *))(*(_DWORD *)this + 16))(this, a2);
       break;
     case 0x10:
       if ( debug && DEBUG_FLAGS[dword_41520A0] )
@@ -374,56 +375,57 @@ void  CDarkGardenerRole::TakeJob(class CSettler * a2) {
       {
         if ( i >= 7 )
           goto LABEL_15;
-        v4 = IEntity::X(a2);
-        v13 = CSpiralOffsets::DeltaX(i) + v4;
-        v5 = IEntity::Y(a2);
-        v14 = CSpiralOffsets::DeltaY(i) + v5;
-        if ( CDarkGardenerRole::CheckPosition(this, v13, v14, 0) )
+        v5 = IEntity::X(a2);
+        v14 = CSpiralOffsets::DeltaX(i) + v5;
+        v6 = IEntity::Y(a2);
+        v15 = CSpiralOffsets::DeltaY(i) + v6;
+        if ( CDarkGardenerRole::CheckPosition(this, v14, v15, 0) )
         {
-          if ( CDecoObjMgr::IsAddDecoObjOk((CDecoObjMgr *)&g_cDecoObjMgr, v13, v14, 216, 0, 0) )
+          if ( CDecoObjMgr::IsAddDecoObjOk(&g_cDecoObjMgr, v14, v15, OBJECT_SHADOWHERB, 0, 0) )
             break;
         }
       }
-      *((_DWORD *)this + 16) = v13;
-      *((_DWORD *)this + 17) = v14;
-      v9 = Y16X16::PackXYFast(v13, v14);
-      v8 = IEntity::Y(a2);
-      v6 = IEntity::X(a2);
-      v7 = (Y16X16 *)Y16X16::PackXYFast(v6, v8);
-      v12 = Y16X16::DirectionFast(v7, v9);
-      IMovingEntity::SetDirection(a2, v12);
-      IMovingEntity::SetDisplacementCosts(10);
-      IAnimatedEntity::RegisterForLogicUpdate(*((char *)this + 6));
+      *((_DWORD *)this + 16) = v14;
+      *((_DWORD *)this + 17) = v15;
+      v10 = Y16X16::PackXYFast(v14, v15);
+      v9 = IEntity::Y(a2);
+      v7 = IEntity::X(a2);
+      v8 = Y16X16::PackXYFast(v7, v9);
+      v13 = Y16X16::DirectionFast(v8, v10);
+      IMovingEntity::SetDirection(a2, v13);
+      IMovingEntity::SetDisplacementCosts(a2, 10);
+      result = IAnimatedEntity::RegisterForLogicUpdate(a2, *((char *)this + 6));
       break;
     case 0x11:
-      IMovingEntity::SetDisplacementCosts(0);
+      IMovingEntity::SetDisplacementCosts(a2, 0);
       v3 = CStateGame::Rand(g_pGame);
-      IAnimatedEntity::RegisterForLogicUpdate(v3 % 0x10 + 1);
+      result = IAnimatedEntity::RegisterForLogicUpdate(a2, v3 % 0x10 + 1);
       break;
     case 0x1F:
       if ( CDarkGardenerRole::SearchPosition(this, a2) )
       {
 LABEL_15:
-        IAnimatedEntity::RegisterForLogicUpdate(1);
+        result = IAnimatedEntity::RegisterForLogicUpdate(a2, 1);
       }
       else
       {
         *((_DWORD *)this + 19) += 64;
         if ( (int)++*((_DWORD *)this + 18) <= 56 )
         {
-          IAnimatedEntity::SetFrame(0);
-          (*(void (__thiscall **)(CDarkGardenerRole *, struct CSettler *))(*(_DWORD *)this + 36))(this, a2);
+          IAnimatedEntity::SetFrame(a2, 0);
+          result = (*(int (__thiscall **)(CDarkGardenerRole *, IMovingEntity *))(*(_DWORD *)this + 36))(this, a2);
         }
         else
         {
-          CDarkGardenerRole::WorkIsDone(this, a2);
+          result = CDarkGardenerRole::WorkIsDone(this, a2);
         }
       }
       break;
     default:
-      CTrace::Print("DarkGardenerRole - TakeJob unknown task");
+      result = CTrace::Print("DarkGardenerRole - TakeJob unknown task");
       break;
   }
+  return result;
 }
 
 

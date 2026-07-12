@@ -60,6 +60,11 @@ private:
     // address=[0x1563340]
     virtual void  ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent * a3);
 
+    // Type information members
+public:
+    bool m_bU0;
+    bool m_bU1;
+
 };
 
 

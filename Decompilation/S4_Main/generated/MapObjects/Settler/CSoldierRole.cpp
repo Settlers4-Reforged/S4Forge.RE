@@ -1741,7 +1741,7 @@ void  CSoldierRole::ComeToWork(class CSettler * a2, int a3) {
 
 
 // address=[0x1591100]
-// Decompiled from char __thiscall CSoldierRole::NewDestinationEx(CSoldierRole *this, struct CSettler *a2, int a3, int a4, __int16 a5)
+// Decompiled from char __thiscall CSoldierRole::NewDestinationEx(CSoldierRole *this, CSettler *a2, int a3, int a4, __int16 a5)
 bool  CSoldierRole::NewDestinationEx(class CSettler * a2, int a3, int a4, int a5) {
   
   int v5; // eax
@@ -1752,9 +1752,9 @@ bool  CSoldierRole::NewDestinationEx(class CSettler * a2, int a3, int a4, int a5
   CEntityTask *v10; // eax
   __int16 v12; // [esp-28h] [ebp-A4h]
   int v13; // [esp-4h] [ebp-80h]
-  _DWORD v14[6]; // [esp+0h] [ebp-7Ch] BYREF
-  _BYTE v15[24]; // [esp+18h] [ebp-64h] BYREF
-  _BYTE v16[24]; // [esp+30h] [ebp-4Ch] BYREF
+  CEntityTask v14; // [esp+0h] [ebp-7Ch] BYREF
+  CEntityTask v15; // [esp+18h] [ebp-64h] BYREF
+  CEntityTask v16; // [esp+30h] [ebp-4Ch] BYREF
   int v17; // [esp+48h] [ebp-34h]
   int v18; // [esp+4Ch] [ebp-30h]
   int v19; // [esp+50h] [ebp-2Ch]
@@ -1779,17 +1779,17 @@ bool  CSoldierRole::NewDestinationEx(class CSettler * a2, int a3, int a4, int a5
     a5 &= ~2u;
     v21 = IEntity::X(a2);
     v22 = IEntity::Y(a2);
-    if ( (int)Grid::Distance((Grid *)(a3 - v21), a4 - v22) < 3 )
+    if ( Grid::Distance(a3 - v21, a4 - v22) < 3 )
       a5 &= ~1u;
   }
-  v23 = std::list<CEntityTask>::size((char *)v32 + 84);
+  v23 = std::list<CEntityTask>::size(&v32[1].m_fOffsetX);
   if ( v23 <= 0 )
   {
     v31 = 1;
   }
   else
   {
-    v20 = std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator*((char *)a2 + 88);
+    v20 = std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator*(&a2->m_cCurrentToDoItemIter);
     v30 = (a5 & 2) != 0;
     v28 = v30;
     v19 = *(unsigned __int8 *)(v20 + 4);
@@ -1808,11 +1808,11 @@ bool  CSoldierRole::NewDestinationEx(class CSettler * a2, int a3, int a4, int a5
       v31 = 1;
     }
   }
-  v13 = IEntity::Type((unsigned __int16 *)a2);
+  v13 = IEntity::Type(a2);
   v5 = IEntity::Race(a2);
   SettlerFirstJob = CGfxManager::GetSettlerFirstJob(v5, v13);
   v6 = IEntity::Race(a2);
-  SettlerJobFrameCount = CGfxManager::GetSettlerJobFrameCount((CGfxManager *)g_pGfxManager, v6, SettlerFirstJob, 2u);
+  SettlerJobFrameCount = CGfxManager::GetSettlerJobFrameCount(g_pGfxManager, v6, SettlerFirstJob, 2u);
   if ( (a5 & 8) != 0 )
   {
     v26 = 9;
@@ -1827,64 +1827,22 @@ bool  CSoldierRole::NewDestinationEx(class CSettler * a2, int a3, int a4, int a5
   }
   if ( (a5 & 1) != 0 )
   {
-    if ( std::list<CEntityTask>::size((char *)v32 + 84)
+    if ( std::list<CEntityTask>::size(&v32[1].m_fOffsetX)
       && BBSupportDbgReport(2, "MapObjects\\Settler\\SoldierRole.cpp", 796, "m_vTasks.size() == 0") == 1 )
     {
       __debugbreak();
     }
     v12 = IEntity::Y(a2);
     v7 = IEntity::X(a2);
-    v8 = CEntityTask::CEntityTask(
-           (CEntityTask *)v16,
-           v26,
-           SettlerFirstJob,
-           v7,
-           v12,
-           -1,
-           SettlerJobFrameCount,
-           -1,
-           1,
-           1,
-           0,
-           0,
-           0,
-           0);
-    std::list<CEntityTask>::push_back(v8);
+    v8 = CEntityTask::CEntityTask(&v16, v26, SettlerFirstJob, v7, v12, -1, SettlerJobFrameCount, -1, 1, 1, 0, 0, 0, 0);
+    std::list<CEntityTask>::push_back((int)v8);
   }
-  v9 = CEntityTask::CEntityTask(
-         (CEntityTask *)v15,
-         v26,
-         SettlerFirstJob,
-         a3,
-         a4,
-         -1,
-         SettlerJobFrameCount,
-         -1,
-         1,
-         1,
-         0,
-         0,
-         0,
-         0);
-  std::list<CEntityTask>::push_back(v9);
-  v10 = CEntityTask::CEntityTask(
-          (CEntityTask *)v14,
-          17,
-          SettlerFirstJob,
-          a5,
-          0,
-          -1,
-          SettlerJobFrameCount,
-          -1,
-          1,
-          1,
-          0,
-          0,
-          0,
-          0);
-  std::list<CEntityTask>::push_back(v10);
-  IMovingEntity::SetToDoList(a2, (int)v32 + 84);
-  if ( (unsigned int)std::list<CEntityTask>::size((char *)v32 + 84) < 2
+  v9 = CEntityTask::CEntityTask(&v15, v26, SettlerFirstJob, a3, a4, -1, SettlerJobFrameCount, -1, 1, 1, 0, 0, 0, 0);
+  std::list<CEntityTask>::push_back((int)v9);
+  v10 = CEntityTask::CEntityTask(&v14, 0x11u, SettlerFirstJob, a5, 0, -1, SettlerJobFrameCount, -1, 1, 1, 0, 0, 0, 0);
+  std::list<CEntityTask>::push_back((int)v10);
+  IMovingEntity::SetToDoList(a2, (DWORD)&v32[1].m_fOffsetX);
+  if ( (unsigned int)std::list<CEntityTask>::size(&v32[1].m_fOffsetX) < 2
     && BBSupportDbgReport(2, "MapObjects\\Settler\\SoldierRole.cpp", 850, "m_vTasks.size() >= 2") == 1 )
   {
     __debugbreak();
@@ -1892,8 +1850,8 @@ bool  CSoldierRole::NewDestinationEx(class CSettler * a2, int a3, int a4, int a5
   CSoldierRole::CheckToDoList();
   if ( v31 )
   {
-    if ( std::list<CEntityTask>::size((char *)v32 + 84) != 2
-      && std::list<CEntityTask>::size((char *)v32 + 84) != 3
+    if ( std::list<CEntityTask>::size(&v32[1].m_fOffsetX) != 2
+      && std::list<CEntityTask>::size(&v32[1].m_fOffsetX) != 3
       && BBSupportDbgReport(
            2,
            "MapObjects\\Settler\\SoldierRole.cpp",
@@ -1902,15 +1860,15 @@ bool  CSoldierRole::NewDestinationEx(class CSettler * a2, int a3, int a4, int a5
     {
       __debugbreak();
     }
-    IMovingEntity::ResetToDoList(v14[0]);
-    *((_DWORD *)v32 + 20) = 0;
-    (*(void (__thiscall **)(CSoldierRole *, struct CSettler *))(*(_DWORD *)v32 + 40))(v32, a2);
+    IMovingEntity::ResetToDoList(a2);
+    *(_DWORD *)&v32[1].m_uHomeEntityId = 0;
+    v32->TakeJob(v32, a2);
     CSoldierRole::CheckToDoList();
     return 1;
   }
   else
   {
-    if ( (unsigned int)std::list<CEntityTask>::size((char *)v32 + 84) <= 2
+    if ( (unsigned int)std::list<CEntityTask>::size(&v32[1].m_fOffsetX) <= 2
       && BBSupportDbgReport(2, "MapObjects\\Settler\\SoldierRole.cpp", 870, "m_vTasks.size() > 2") == 1 )
     {
       __debugbreak();

@@ -1,3 +1,4 @@
+#if FALSE
 #include "CDonkeyRole.h"
 
 // Definitions for class CDonkeyRole
@@ -1173,27 +1174,27 @@ class CDonkeyRole * __cdecl CDonkeyRole::Load(std::istream & a1) {
   int i; // [esp+0h] [ebp-8h]
 
   ISettlerRole::ISettlerRole(this);
-  *(_DWORD *)this = &CDonkeyRole::_vftable_;
-  *((_DWORD *)this + 15) = 0;
-  *((_DWORD *)this + 17) = 0;
-  *((_BYTE *)this + 104) = 0;
-  *((_DWORD *)this + 27) = 0;
-  *((_DWORD *)this + 28) = 0;
-  *((_DWORD *)this + 29) = 0;
-  *((_BYTE *)this + 120) = 0;
-  *((_BYTE *)this + 44) = 0;
+  this->__vftable = (ISettlerRole_vtbl *)&CDonkeyRole::_vftable_;
+  this->m_iU4 = 0;
+  this->m_iU6 = 0;
+  this->field_68 = 0;
+  this->field_6C = 0;
+  this->field_70 = 0;
+  this->field_74 = 0;
+  this->field_78 = 0;
+  this->m_bU2c = 0;
   for ( i = 0; i < 2; ++i )
   {
-    *((_DWORD *)this + 3 * i + 20) = 0;
-    *((_DWORD *)this + 3 * i + 21) = 0;
+    this->m_vUnknown[i].m_iU0 = 0;
+    this->m_vUnknown[i].m_iU4 = 0;
   }
-  *((_DWORD *)this + 14) = 0;
-  *((_DWORD *)this + 13) = 0;
-  *((_WORD *)this + 38) = 0;
-  *((_WORD *)this + 37) = 0;
-  *((_DWORD *)this + 16) = 0;
-  *((_BYTE *)this + 46) = 0;
-  *((_BYTE *)this + 47) = 0;
+  this->m_iU3 = 0;
+  this->m_bU2 = 0;
+  this->field_4C = 0;
+  this->field_4A = 0;
+  this->m_iU5 = 0;
+  this->m_bU2e = 0;
+  this->m_bU2f = 0;
   return this;
 }
 
@@ -1530,3 +1531,4 @@ LABEL_57:
 }
 
 
+#endif // Already implemented

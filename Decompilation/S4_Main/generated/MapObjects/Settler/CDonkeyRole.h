@@ -171,6 +171,30 @@ private:
     // address=[0x156be90]
     virtual void  ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent * a3);
 
+    // Type information members
+public:
+    bool m_bU2c;
+    bool m_bU2d;
+    bool m_bU2e;
+    bool m_bU2f;
+    int m_iU1;
+    int m_bU2;
+    int m_iU3;
+    int m_iU4;
+    int m_iU5;
+    int m_iU6;
+    __int16 m_iU7;
+    __int16 field_4A;
+    __int16 field_4C;
+    CDonkeyRole::SUnknown[2] m_vUnknown;
+    bool field_68;
+    _BYTE[3] gap_69;
+    _DWORD field_6C;
+    _DWORD field_70;
+    _DWORD field_74;
+    bool field_78;
+    _BYTE gap_79;
+
 };
 
 

@@ -34,7 +34,7 @@ protected:
     virtual  ~ISelectableSettlerRole(void);
 
     // address=[0x157cb80]
-    bool  TakeCommonJob(class CSettler * a2);
+    bool  TakeCommonJob(class CSettler * arg0);
 
     // address=[0x157cc70]
     virtual int  Decrease(int a2);
@@ -53,6 +53,10 @@ protected:
 
     // address=[0x15921c0]
     int  GetGroupFlagsEx(void)const;
+
+    // Type information members
+public:
+    __int16 m_iU0;
 
 };
 

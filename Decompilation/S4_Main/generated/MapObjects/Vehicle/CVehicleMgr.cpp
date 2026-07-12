@@ -3,10 +3,10 @@
 // Definitions for class CVehicleMgr
 
 // address=[0x130e530]
-// Decompiled from int __stdcall CVehicleMgr::operator[](int a1)
+// Decompiled from CVehicle *__stdcall CVehicleMgr::operator[](int a1)
 class CVehicle &  CVehicleMgr::operator[](int a1) {
   
-  return CMapObjectMgr::EntityPtr(a1);
+  return (CVehicle *)CMapObjectMgr::EntityPtr(a1);
 }
 
 

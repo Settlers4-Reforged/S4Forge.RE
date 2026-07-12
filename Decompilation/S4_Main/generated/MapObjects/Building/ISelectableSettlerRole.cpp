@@ -99,8 +99,8 @@ int  ISelectableSettlerRole::GetPrimaryGroupId(void)const {
  ISelectableSettlerRole::ISelectableSettlerRole(void) {
   
   ISettlerRole::ISettlerRole(this);
-  *(_DWORD *)this = &ISelectableSettlerRole::_vftable_;
-  *((_WORD *)this + 22) = 0;
+  this->__vftable = (ISettlerRole_vtbl *)&ISelectableSettlerRole::_vftable_;
+  this->m_iU0 = 0;
   return this;
 }
 
@@ -115,36 +115,34 @@ int  ISelectableSettlerRole::GetPrimaryGroupId(void)const {
 
 
 // address=[0x157cb80]
-// Decompiled from char __thiscall ISelectableSettlerRole::TakeCommonJob(int this, COleCmdUI *a2)
-bool  ISelectableSettlerRole::TakeCommonJob(class CSettler * a2) {
+// Decompiled from char __thiscall ISelectableSettlerRole::TakeCommonJob(ISettlerRole *this, IMovingEntity *arg0)
+bool  ISelectableSettlerRole::TakeCommonJob(class CSettler * arg0) {
   
-  char v2; // al
-  int v4; // [esp+0h] [ebp-14h]
-  const struct CEntityTask *ActualTask; // [esp+8h] [ebp-Ch]
-  int v6; // [esp+Ch] [ebp-8h]
+  int v3; // [esp+0h] [ebp-14h]
+  CEntityTask *ActualTask; // [esp+8h] [ebp-Ch]
+  int a2; // [esp+Ch] [ebp-8h]
 
-  ActualTask = (const struct CEntityTask *)IMovingEntity::GetActualTask(a2);
-  if ( *((_BYTE *)ActualTask + 4) != 7 )
+  ActualTask = IMovingEntity::GetActualTask(arg0);
+  if ( ActualTask->m_iTask != 7 )
     return 0;
-  v4 = IAnimatedEntity::JobPart(a2);
-  v6 = IAnimatedEntity::Frame(a2);
-  ISettlerRole::InitCommonTaskValues((ISettlerRole *)this, a2, ActualTask);
-  if ( v4 == IAnimatedEntity::JobPart(a2) && v6 >= 1 && v6 < *(unsigned __int8 *)(this + 7) )
-    IAnimatedEntity::SetFrame(v6);
+  v3 = IAnimatedEntity::JobPart(arg0);
+  a2 = IAnimatedEntity::Frame(arg0);
+  ISettlerRole::InitCommonTaskValues(this, arg0, ActualTask);
+  if ( v3 == IAnimatedEntity::JobPart(arg0) && a2 >= 1 && a2 < this->m_uCycleFrames )
+    IAnimatedEntity::SetFrame(arg0, a2);
   else
-    IAnimatedEntity::SetFrame(1);
-  IMovingEntity::WalkToXY(a2, *(_DWORD *)(this + 24), 0);
-  IMovingEntity::SetDisplacementCosts(5);
-  *(_BYTE *)(this + 4) = 6;
-  IAnimatedEntity::EventQueueEmpty(a2);
-  if ( v2 )
+    IAnimatedEntity::SetFrame(arg0, 1u);
+  IMovingEntity::WalkToXY(arg0, this->m_iDestinationPosition, 0);
+  IMovingEntity::SetDisplacementCosts(arg0, 5);
+  this->m_iTask = 6;
+  if ( IAnimatedEntity::EventQueueEmpty(arg0) )
   {
-    (*(void (__thiscall **)(int, COleCmdUI *))(*(_DWORD *)this + 16))(this, a2);
+    this->Go(this, (struct CSettler *)arg0);
   }
   else
   {
-    *(_BYTE *)(this + 5) = -120;
-    IAnimatedEntity::RegisterForLogicUpdate(1);
+    this->m_uSettlerWalk = -120;
+    IAnimatedEntity::RegisterForLogicUpdate(arg0, 1);
   }
   return 1;
 }
