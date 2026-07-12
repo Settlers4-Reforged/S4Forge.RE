@@ -84,11 +84,11 @@ class IAnimatedEntity : public IEntity {
 
     // Type information members
   public:
-    BYTE m_cFrame;
-    BYTE m_cAttackerPlayerId;
+    BYTE m_iFrame;
+    BYTE m_iAttackerPlayerId;
     WORD m_iJobPart;
-    WORD m_wPrevEntity;
-    WORD m_wNextEntity;
+    WORD m_iPrevEntity;
+    WORD m_iNextEntity;
     DWORD m_uLastUpdateTick;
     int m_uLastLogicUpdate;
     std::vector<CEntityEvent> m_iEventQueue;

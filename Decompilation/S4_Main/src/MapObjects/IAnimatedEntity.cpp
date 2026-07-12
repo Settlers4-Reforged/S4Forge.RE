@@ -13,14 +13,14 @@
 // address=[0x1307150]
 // Decompiled from int __thiscall IAnimatedEntity::Next(IAnimatedEntity *this)
 int IAnimatedEntity::Next(void) const {
-  return this->m_wNextEntity;
+  return this->m_iNextEntity;
 }
 
 
 // address=[0x1351b10]
 // Decompiled from int __thiscall IAnimatedEntity::Frame(IAnimatedEntity *this)
 int IAnimatedEntity::Frame(void) const {
-  return this->m_cFrame;
+  return this->m_iFrame;
 }
 
 
@@ -34,7 +34,7 @@ int IAnimatedEntity::GetLastLogicUpdateTick(void) const {
 // address=[0x1439c70]
 // Decompiled from int __thiscall IAnimatedEntity::Previous(IAnimatedEntity *this)
 int IAnimatedEntity::Previous(void) const {
-  return this->m_wPrevEntity;
+  return this->m_iPrevEntity;
 }
 
 
@@ -42,14 +42,14 @@ int IAnimatedEntity::Previous(void) const {
 // Decompiled from void __thiscall IAnimatedEntity::SetNext(IAnimatedEntity *this, int _id)
 void IAnimatedEntity::SetNext(int _id) {
   BB_ASSERT(ID() != _id)
-  this->m_wNextEntity = _id;
+  this->m_iNextEntity = _id;
 }
 
 
 // address=[0x1439eb0]
 // Decompiled from void __thiscall IAnimatedEntity::SetPrevious(IAnimatedEntity *this, WORD a2)
 void IAnimatedEntity::SetPrevious(int a2) {
-  this->m_wPrevEntity = a2;
+  this->m_iPrevEntity = a2;
 }
 
 
@@ -155,11 +155,11 @@ IAnimatedEntity::~IAnimatedEntity(void) = default;
 // address=[0x14eb000]
 // Decompiled from IAnimatedEntity *__thiscall IAnimatedEntity::IAnimatedEntity(IAnimatedEntity *this, int id)
 IAnimatedEntity::IAnimatedEntity(int id) : IEntity(id), m_iEventQueue() {
-  this->m_cFrame = 0;
-  this->m_cAttackerPlayerId = 0;
+  this->m_iFrame = 0;
+  this->m_iAttackerPlayerId = 0;
   this->m_iJobPart = 0;
-  this->m_wPrevEntity = 0;
-  this->m_wNextEntity = 0;
+  this->m_iPrevEntity = 0;
+  this->m_iNextEntity = 0;
   this->m_uLastUpdateTick = 0;
   this->m_uLastLogicUpdate = -1;
 }
@@ -168,7 +168,7 @@ IAnimatedEntity::IAnimatedEntity(int id) : IEntity(id), m_iEventQueue() {
 // address=[0x14eb2a0]
 // Decompiled from int __thiscall IAnimatedEntity::AttackerPlayerId(IAnimatedEntity *this)
 int IAnimatedEntity::AttackerPlayerId(void) const {
-  return this->m_cAttackerPlayerId;
+  return this->m_iAttackerPlayerId;
 }
 
 
@@ -189,7 +189,7 @@ int IAnimatedEntity::JobPart(void) const {
 // address=[0x15639c0]
 // Decompiled from void __thiscall IAnimatedEntity::SetFrame(IAnimatedEntity *this, BYTE a2)
 void IAnimatedEntity::SetFrame(int a2) {
-  this->m_cFrame = a2;
+  this->m_iFrame = a2;
 }
 
 
@@ -216,22 +216,22 @@ IAnimatedEntity::IAnimatedEntity(std::istream &_rStream) : IEntity(_rStream), m_
     BBSupportTracePrintF(3, "load output defect IAnimatedEntity::IAnimatedEntity");
     throw CS4InvalidMapException{};
   }
-  _rStream >> this->m_cFrame;
-  _rStream >> this->m_cAttackerPlayerId;
+  _rStream >> this->m_iFrame;
+  _rStream >> this->m_iAttackerPlayerId;
   _rStream >> this->m_iJobPart;
-  _rStream >> this->m_wPrevEntity;
-  _rStream >> this->m_wNextEntity;
+  _rStream >> this->m_iPrevEntity;
+  _rStream >> this->m_iNextEntity;
   _rStream >> this->m_uLastUpdateTick;
   _rStream >> this->m_uLastLogicUpdate;
   unsigned int iQueueSize; // [esp+4h] [ebp-24h] BYREF
   _rStream >> iQueueSize;
 
   // Ensure loading compatibility from the binary
-  static_assert(sizeof(m_cFrame) == sizeof(unsigned char));
-  static_assert(sizeof(m_cAttackerPlayerId) == sizeof(unsigned char));
+  static_assert(sizeof(m_iFrame) == sizeof(unsigned char));
+  static_assert(sizeof(m_iAttackerPlayerId) == sizeof(unsigned char));
   static_assert(sizeof(m_iJobPart) == sizeof(unsigned short));
-  static_assert(sizeof(m_wPrevEntity) == sizeof(unsigned short));
-  static_assert(sizeof(m_wNextEntity) == sizeof(unsigned short));
+  static_assert(sizeof(m_iPrevEntity) == sizeof(unsigned short));
+  static_assert(sizeof(m_iNextEntity) == sizeof(unsigned short));
   static_assert(sizeof(m_uLastUpdateTick) == sizeof(unsigned int));
   static_assert(sizeof(m_uLastLogicUpdate) == sizeof(int));
   static_assert(sizeof(iQueueSize) == sizeof(unsigned int));
@@ -249,22 +249,22 @@ void IAnimatedEntity::Store(std::ostream &_rStream) {
   IEntity::Store(_rStream);
   int iFileVersion = 1;
   _rStream << iFileVersion;
-  _rStream << this->m_cFrame;
-  _rStream << this->m_cAttackerPlayerId;
+  _rStream << this->m_iFrame;
+  _rStream << this->m_iAttackerPlayerId;
   _rStream << this->m_iJobPart;
-  _rStream << this->m_wPrevEntity;
-  _rStream << this->m_wNextEntity;
+  _rStream << this->m_iPrevEntity;
+  _rStream << this->m_iNextEntity;
   _rStream << this->m_uLastUpdateTick;
   _rStream << this->m_uLastLogicUpdate;
   unsigned int iQueueSize = this->m_iEventQueue.size();
   _rStream << iQueueSize;
 
   static_assert(sizeof(iFileVersion) == sizeof(unsigned int));
-  static_assert(sizeof(m_cFrame) == sizeof(unsigned char));
-  static_assert(sizeof(m_cAttackerPlayerId) == sizeof(unsigned char));
+  static_assert(sizeof(m_iFrame) == sizeof(unsigned char));
+  static_assert(sizeof(m_iAttackerPlayerId) == sizeof(unsigned char));
   static_assert(sizeof(m_iJobPart) == sizeof(unsigned short));
-  static_assert(sizeof(m_wPrevEntity) == sizeof(unsigned short));
-  static_assert(sizeof(m_wNextEntity) == sizeof(unsigned short));
+  static_assert(sizeof(m_iPrevEntity) == sizeof(unsigned short));
+  static_assert(sizeof(m_iNextEntity) == sizeof(unsigned short));
   static_assert(sizeof(m_uLastUpdateTick) == sizeof(unsigned int));
   static_assert(sizeof(m_uLastLogicUpdate) == sizeof(int));
   static_assert(sizeof(iQueueSize) == sizeof(unsigned int));

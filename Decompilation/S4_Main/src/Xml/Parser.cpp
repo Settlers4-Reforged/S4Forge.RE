@@ -7,7 +7,7 @@
 
 // address=[0x2f26770]
 // Decompiled from void *__cdecl AdvXMLParser::Parser::OpenXMLFile(wchar_t *FileName, int *a2)
-char * __cdecl AdvXMLParser::Parser::OpenXMLFile(wchar_t *swpFileName, long &_iSize) {
+char * __cdecl AdvXMLParser::Parser::OpenXMLFile(wchar_t const *swpFileName, long &_iSize) {
     CFileEx cFile = CFileEx(swpFileName, 6, false);
 
     _iSize = cFile.Size();

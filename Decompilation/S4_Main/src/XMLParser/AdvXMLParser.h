@@ -7,19 +7,19 @@
 // Compiler:    Microsoft Visual C++ 6.0 SP4
 // STL:         STLport 4.0
 // -------------------------------------------------------------------
-// Sebastien Andrivet grants Licensee a non-exclusive, non-transferable, 
+// Sebastien Andrivet grants Licensee a non-exclusive, non-transferable,
 // royalty-free license to use AdvXMLParser and its documentation (the
 // 'Software') without fee.
-// 
-// By downloading, using, or copying the Software or any portion thereof, 
-// Licensee agrees to abide by the intellectual property laws and all other 
+//
+// By downloading, using, or copying the Software or any portion thereof,
+// Licensee agrees to abide by the intellectual property laws and all other
 // applicable laws, and to all of the terms and conditions of this Agreement.
-// 
-// Licensee shall maintain the following copyright and permission notices on 
+//
+// Licensee shall maintain the following copyright and permission notices on
 // the Software sources and its documentation unchanged :
-// 
+//
 // Copyright © 1999,2000 Sebastien Andrivet
-// 
+//
 // THE SOFTWARE IS PROVIDED ''AS IS'', WITHOUT WARRANTY OF ANY KIND, EXPRESS
 // OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -27,30 +27,30 @@
 // OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
-// 
+//
 // Permission to use or copy this software for any purpose is hereby granted
-// without fee, provided the above notices are retained on all copies. 
+// without fee, provided the above notices are retained on all copies.
 // Permission to modify the code and to distribute modified code is granted,
-// provided the above notices are retained, and a notice that the code was 
-// modified is included with the above copyright notice. 
-// 
-// The Licensee may distribute binaries compiled with the Software (whether 
+// provided the above notices are retained, and a notice that the code was
+// modified is included with the above copyright notice.
+//
+// The Licensee may distribute binaries compiled with the Software (whether
 // original or modified) without any royalties or restrictions.
-// 
+//
 // The Licensee may distribute original or modified the Software sources,
 // provided that the conditions indicated in the above permission notice are met.
-// 
+//
 // Except as contained in this notice, the name of Sebastien Andrivet
-// shall not be used in advertising or otherwise to promote the sale, 
-// use or other dealings in this Software without prior written 
+// shall not be used in advertising or otherwise to promote the sale,
+// use or other dealings in this Software without prior written
 // authorization from Sebastien Andrivet.
 // ===================================================================
 
 #ifndef INC_ADVXMLPARSER_H
 #define INC_ADVXMLPARSER_H
 
-#include "AdvXMLParserDefs.h"           // Some usefull macros
 #include "AdvXMLParserConfig.h"         // Customization and parameters
+#include "AdvXMLParserDefs.h"           // Some usefull macros
 #include "AdvXMLParserPrimitiveTypes.h" // Like vector, string, etc...
 
 // ===================================================================
@@ -72,29 +72,29 @@ namespace AdvXMLParser {
     class Parser;
     class Bookmark;
 
-    typedef advstd::vector<Attribute *> Attributes;     // Array of Attributes
-    typedef advstd::vector<Element *>   Elements;       // Array of Elements
-    typedef advstd::vector<Node *>      Nodes;          // Array of Nodes
-    typedef advstd::basic_string<Char>  String;         // String of characters
-    typedef advstd::map<String, Char>   MapReferences;  // Map references
+    typedef advstd::vector<Attribute *> Attributes;  // Array of Attributes
+    typedef advstd::vector<Element *> Elements;      // Array of Elements
+    typedef advstd::vector<Node *> Nodes;            // Array of Nodes
+    typedef advstd::basic_string<Char> String;       // String of characters
+    typedef advstd::map<String, Char> MapReferences; // Map references
 
     // ===================================================================
     // Different type of nodes
 
     enum {
-        NULL_NODE                   = 0,
-        ELEMENT_NODE                = 1,
-        ATTRIBUTE_NODE              = 2,
-        TEXT_NODE                   = 3,
-        CDATA_SECTION_NODE          = 4,
-        ENTITY_REFERENCE_NODE       = 5,
-        ENTITY_NODE                 = 6,
+        NULL_NODE = 0,
+        ELEMENT_NODE = 1,
+        ATTRIBUTE_NODE = 2,
+        TEXT_NODE = 3,
+        CDATA_SECTION_NODE = 4,
+        ENTITY_REFERENCE_NODE = 5,
+        ENTITY_NODE = 6,
         PROCESSING_INSTRUCTION_NODE = 7,
-        COMMENT_NODE                = 8,
-        DOCUMENT_NODE               = 9,
-        DOCUMENT_TYPE_NODE          = 10,
-        DOCUMENT_FRAGMENT_NODE      = 11,
-        NOTATION_NODE               = 12
+        COMMENT_NODE = 8,
+        DOCUMENT_NODE = 9,
+        DOCUMENT_TYPE_NODE = 10,
+        DOCUMENT_FRAGMENT_NODE = 11,
+        NOTATION_NODE = 12
     };
 
     typedef int NODE_TYPE;
@@ -103,8 +103,8 @@ namespace AdvXMLParser {
     // Options for generation of XML
 
     enum {
-        GENERATE_INDENTED = 0x0000,  // Try to produce nice XML with indentation
-        GENERATE_PRESERVE = 0x0001   // Don't touch the XML. Generate what we have, nothing more
+        GENERATE_INDENTED = 0x0000, // Try to produce nice XML with indentation
+        GENERATE_PRESERVE = 0x0001  // Don't touch the XML. Generate what we have, nothing more
     };
 
     typedef unsigned long GENERATE;
@@ -118,7 +118,7 @@ namespace AdvXMLParser {
     // ===================================================================
 
     class Value {
-    public:
+      public:
         explicit Value(NodeContainer &node);
 
         // Get the value as a string
@@ -130,7 +130,7 @@ namespace AdvXMLParser {
         // Replace the value by the given string
         void Set(const Char *szValue);
 
-    private:
+      private:
         // For the moment works only for NodeContainer but may change in
         // the future
         NodeContainer &m_node;
@@ -143,13 +143,13 @@ namespace AdvXMLParser {
     // ===================================================================
 
     class ConstValue {
-    public:
+      public:
         explicit ConstValue(const NodeContainer &node);
 
         // Get the value as a string
         String Get() const;
 
-    private:
+      private:
         // For the moment works only for NodeContainer but may change in
         // the future
         const NodeContainer &m_node;
@@ -165,7 +165,7 @@ namespace AdvXMLParser {
 #ifndef ADVXMLPARSER_NO_WRITE // Only if writing is enabled
 
     class GenerateContext {
-    public:
+      public:
         GenerateContext(String &strXml, const Char *szIndentation = NULL, GENERATE nOptions = GENERATE_INDENTED);
 
         GenerateContext(const GenerateContext &context);
@@ -194,17 +194,17 @@ namespace AdvXMLParser {
         // Generate a new line if neccessary
         void GenerateNewLine();
 
-    private:
+      private:
         // Helper : generate indentation
         void GenerateIndentation();
 
-    private:
-        GENERATE    m_nOptions;         // Options for the generation (see GENERATE)
-        const Char *m_szIndentation;    // Text used for the indentation. By def. 2 spaces
-        String &    m_strXml;           // Text generated (given by the user of this class)
-        int         m_nLevel;           // Current level of identation
-        bool        m_bEndTag;          // Last tag was an end tag ?
-        bool        m_bNewLine;         // Last generation was a new line ?
+      private:
+        GENERATE m_nOptions;         // Options for the generation (see GENERATE)
+        const Char *m_szIndentation; // Text used for the indentation. By def. 2 spaces
+        String &m_strXml;            // Text generated (given by the user of this class)
+        int m_nLevel;                // Current level of identation
+        bool m_bEndTag;              // Last tag was an end tag ?
+        bool m_bNewLine;             // Last generation was a new line ?
     };
 
 #endif // ADVXMLPARSER_NO_WRITE
@@ -216,11 +216,11 @@ namespace AdvXMLParser {
     // ===================================================================
 
     class Node {
-    public:
+      public:
         // The null Node
         static NodeContainer &null;
 
-    public:
+      public:
         Node(NodeContainer &parent, const String &strName);
 
         virtual ~Node();
@@ -254,7 +254,7 @@ namespace AdvXMLParser {
         virtual void GenerateXML(GenerateContext &xml) const = 0;
 #endif // ADVXMLPARSER_NO_WRITE
 
-    public:
+      public:
         // ===============================================================
         // IteratorRef & ConstIteratorRef
         // ---------------------------------------------------------------
@@ -274,20 +274,20 @@ namespace AdvXMLParser {
         struct IteratorRef {
             IteratorRef(Nodes &nodes, Nodes::iterator it);
 
-            Nodes &         m_nodes;
+            Nodes &m_nodes;
             Nodes::iterator m_it;
         };
 
         struct ConstIteratorRef {
             ConstIteratorRef(const Nodes &nodes, Nodes::const_iterator it);
 
-            const Nodes &         m_nodes;
+            const Nodes &m_nodes;
             Nodes::const_iterator m_it;
         };
 
-    protected:
-        const String   m_strName;  // Name of the node
-        NodeContainer &m_parent;   // Parent of this node
+      protected:
+        const String m_strName;  // Name of the node
+        NodeContainer &m_parent; // Parent of this node
     };
 
     // ===================================================================
@@ -300,11 +300,13 @@ namespace AdvXMLParser {
     class Text : public Node {
         typedef Node Super; // Superclass ("a la" Smalltalk)
 
-    public:
+      public:
         // Type of this node
-        enum { TYPE = TEXT_NODE };
+        enum {
+            TYPE = TEXT_NODE
+        };
 
-    public:
+      public:
         explicit Text(const String &strText);
 
         Text(NodeContainer &parent, const String &strText);
@@ -332,8 +334,8 @@ namespace AdvXMLParser {
         virtual void GenerateXML(GenerateContext &xml) const;
 #endif // ADVXMLPARSER_NO_WRITE
 
-    private:
-        String m_strText;   // Textual content
+      private:
+        String m_strText; // Textual content
     };
 
     // ===================================================================
@@ -346,10 +348,10 @@ namespace AdvXMLParser {
         typedef Node Super; // Superclass ("a la" Smalltalk)
         friend class Element;
 
-    public:
+      public:
         typedef Nodes::size_type size_type;
 
-    public:
+      public:
         NodeContainer(NodeContainer &parent, const String &strName);
 
         virtual ~NodeContainer();
@@ -392,7 +394,7 @@ namespace AdvXMLParser {
         // Remove the given node and delete it
         void DeleteChild(const Node &node);
 
-    protected:
+      protected:
         // ---------------------------------------------------------------
         // Search a node matching some criteria
         // ---------------------------------------------------------------
@@ -467,9 +469,9 @@ namespace AdvXMLParser {
         virtual void GenerateXML(GenerateContext &xml) const;
 #endif // ADVXMLPARSER_NO_WRITE
 
-    protected:
-        Nodes m_children;     // Children of the node
-        Text *m_pLastText;    // Not NULL if last node was a Text
+      protected:
+        Nodes m_children;  // Children of the node
+        Text *m_pLastText; // Not NULL if last node was a Text
     };
 
     // ===================================================================
@@ -482,14 +484,16 @@ namespace AdvXMLParser {
     class Attribute : public NodeContainer {
         typedef NodeContainer Super; // Superclass ("a la" Smalltalk)
 
-    public:
+      public:
         // Type of this node
-        enum { TYPE = ATTRIBUTE_NODE };
+        enum {
+            TYPE = ATTRIBUTE_NODE
+        };
 
         // The (unique) null Attribute
         static Attribute null;
 
-    public:
+      public:
         Attribute(NodeContainer &parent, const String &strName);
 
         // Type-safe cloning of this node (not virtual)
@@ -524,7 +528,7 @@ namespace AdvXMLParser {
         virtual void GenerateXML(GenerateContext &xml) const;
 #endif // ADVXMLPARSER_NO_WRITE
 
-    public:
+      public:
         // ===============================================================
         // IteratorRef & ConstIteratorRef
         // ---------------------------------------------------------------
@@ -564,11 +568,13 @@ namespace AdvXMLParser {
     class Reference : public Node {
         typedef Node Super; // Superclass ("a la" Smalltalk)
 
-    public:
+      public:
         // Type of this node
-        enum { TYPE = ENTITY_REFERENCE_NODE };
+        enum {
+            TYPE = ENTITY_REFERENCE_NODE
+        };
 
-    public:
+      public:
         Reference(NodeContainer &parent, const String &strName);
 
         // Try to parse and create this node
@@ -590,7 +596,7 @@ namespace AdvXMLParser {
     class CharRef : public Reference {
         typedef Reference Super; // Superclass ("a la" Smalltalk)
 
-    public:
+      public:
         explicit CharRef(int nNum);
 
         CharRef(NodeContainer &parent, int nNum);
@@ -615,7 +621,7 @@ namespace AdvXMLParser {
         virtual void GenerateXML(GenerateContext &xml) const;
 #endif // ADVXMLPARSER_NO_WRITE
 
-    private:
+      private:
         Char m_c; // Character represented by this reference
     };
 
@@ -631,7 +637,7 @@ namespace AdvXMLParser {
     class EntityRef : public Reference {
         typedef Reference Super; // Superclass ("a la" Smalltalk)
 
-    public:
+      public:
         // Use this constructor to build a standalone entity reference
         explicit EntityRef(const String &strName);
 
@@ -657,10 +663,10 @@ namespace AdvXMLParser {
         virtual void GenerateXML(GenerateContext &xml) const;
 #endif // ADVXMLPARSER_NO_WRITE
 
-    private:
+      private:
         bool MapReferenceName();
 
-    private:
+      private:
         Char m_c; // Character represented by this reference (see Note)
     };
 
@@ -674,16 +680,18 @@ namespace AdvXMLParser {
     class Element : public NodeContainer {
         typedef NodeContainer Super; // Superclass ("a la" Smalltalk)
 
-    public:
+      public:
         // Type of this node
-        enum { TYPE = ELEMENT_NODE };
+        enum {
+            TYPE = ELEMENT_NODE
+        };
 
         // The (unique) null Element
         static Element null;
 
         typedef NodeContainer::size_type size_type;
 
-    public:
+      public:
         explicit Element(const String &strName);
 
         Element(NodeContainer &parent, const String &strName);
@@ -851,6 +859,7 @@ namespace AdvXMLParser {
         // members that are not declared inlined (see the readme of VC).
         // I don't want to put lot of code here so I choose this solution...
 #include "TemplateMembers.inl"
+
         // This #include defines:
         // template<class N> N& AddInto(const N& node);
         // template<class N> N& Append(const N& node);
@@ -879,7 +888,7 @@ namespace AdvXMLParser {
         virtual void GenerateXML(GenerateContext &xml) const;
 #endif // ADVXMLPARSER_NO_WRITE
 
-    private:
+      private:
         // Parse start tag and construct an element
         static Element *ParseTagBegining(Parser &parser, bool &bEmptyTag, NodeContainer &parent);
 
@@ -897,9 +906,9 @@ namespace AdvXMLParser {
         // Special treatment for predefined attributes
         void HandleSpecialAttributes(const Attribute *pAttribute);
 
-    private:
-        Attributes m_attributes;   // Attributes
-        bool       m_bPreserveWS;  // True if has attribute xml:space with value 'preserve'
+      private:
+        Attributes m_attributes; // Attributes
+        bool m_bPreserveWS;      // True if has attribute xml:space with value 'preserve'
     };
 
     // ===================================================================
@@ -909,14 +918,16 @@ namespace AdvXMLParser {
     class Comment : public Node {
         typedef Node Super; // Superclass ("a la" Smalltalk)
 
-    public:
+      public:
         // Type of this node
-        enum { TYPE = COMMENT_NODE };
+        enum {
+            TYPE = COMMENT_NODE
+        };
 
         // The (unique) null Comment
         static Comment null;
 
-    public:
+      public:
         explicit Comment(const String &strComment);
 
         Comment(NodeContainer &parent, const String &strComment);
@@ -950,8 +961,8 @@ namespace AdvXMLParser {
         virtual void GenerateXML(GenerateContext &xml) const;
 #endif // ADVXMLPARSER_NO_WRITE
 
-    private:
-        String m_strComment;   // The comment itself
+      private:
+        String m_strComment; // The comment itself
     };
 
     // ===================================================================
@@ -961,14 +972,16 @@ namespace AdvXMLParser {
     class Pi : public Node {
         typedef Node Super; // Superclass ("a la" Smalltalk)
 
-    public:
+      public:
         // Type of this node
-        enum { TYPE = PROCESSING_INSTRUCTION_NODE };
+        enum {
+            TYPE = PROCESSING_INSTRUCTION_NODE
+        };
 
         // The (unique) null Comment
         static Pi null;
 
-    public:
+      public:
         Pi(const String &strTarget, const String &strInstruction);
 
         Pi(NodeContainer &parent, const String &strTarget, const String &strInstruction);
@@ -1002,12 +1015,12 @@ namespace AdvXMLParser {
         virtual void GenerateXML(GenerateContext &xml) const;
 #endif // ADVXMLPARSER_NO_WRITE
 
-    private:
+      private:
         // Parse the target name of the Processing instruction
         static bool ParsePITarget(Parser &parser, String &strTarget);
 
-    private:
-        String m_strInstruction;   // The instruction itself
+      private:
+        String m_strInstruction; // The instruction itself
     };
 
     // ===================================================================
@@ -1017,14 +1030,16 @@ namespace AdvXMLParser {
     class CData : public Node {
         typedef Node Super; // Superclass ("a la" Smalltalk)
 
-    public:
+      public:
         // Type of this node
-        enum { TYPE = CDATA_SECTION_NODE };
+        enum {
+            TYPE = CDATA_SECTION_NODE
+        };
 
         // The (unique) null Comment
         static CData null;
 
-    public:
+      public:
         explicit CData(const String &strSection);
 
         CData(NodeContainer &parent, const String &strSection);
@@ -1058,8 +1073,8 @@ namespace AdvXMLParser {
         virtual void GenerateXML(GenerateContext &xml) const;
 #endif // ADVXMLPARSER_NO_WRITE
 
-    private:
-        String m_strSection;   // Content of the section
+      private:
+        String m_strSection; // Content of the section
     };
 
     // ===================================================================
@@ -1073,7 +1088,7 @@ namespace AdvXMLParser {
 #if ADVXMLPARSER_DTD != 0
 
     class Dtd {
-    public:
+      public:
         explicit Dtd(Document &document);
 
         bool ParseDoctypedecl(Parser &parser);
@@ -1126,7 +1141,7 @@ namespace AdvXMLParser {
 
         bool ParsePublicID(Parser &parser);
 
-    private:
+      private:
         Document &m_document;
     };
 
@@ -1142,11 +1157,13 @@ namespace AdvXMLParser {
     class Document : public NodeContainer {
         typedef NodeContainer Super; // Superclass ("a la" Smalltalk)
 
-    public:
+      public:
         // Type of this node
-        enum { TYPE = DOCUMENT_NODE };
+        enum {
+            TYPE = DOCUMENT_NODE
+        };
 
-    public:
+      public:
         Document();
 
         explicit Document(const Char *szRootName);
@@ -1246,19 +1263,19 @@ namespace AdvXMLParser {
         // Parse several Misc
         void ParseMiscs(Parser &parser);
 
-    private:
+      private:
         // Parse the root element
         void ParseRootElement(Parser &parser);
 
-    private:
-        String   m_strXmlVersion;    // Version of the spec found in the declaration
-        String   m_strEncoding;      // Encoding used for this document
-        bool     m_bStandalone;      // Standalone status
-        Element *m_pRoot;            // Root element. Also part of NodeContainer::m_nodes
+      private:
+        String m_strXmlVersion; // Version of the spec found in the declaration
+        String m_strEncoding;   // Encoding used for this document
+        bool m_bStandalone;     // Standalone status
+        Element *m_pRoot;       // Root element. Also part of NodeContainer::m_nodes
 
 #if ADVXMLPARSER_DTD != 0
-        Dtd m_dtd;              // Document Type Definition
-#endif // ADVXMLPARSER_DTD
+        Dtd m_dtd; // Document Type Definition
+#endif             // ADVXMLPARSER_DTD
     };
 
     // ===================================================================
@@ -1320,7 +1337,7 @@ namespace AdvXMLParser {
     // ===================================================================
 
     class Exception {
-    public:
+      public:
         Exception();
 
         virtual ~Exception();
@@ -1333,12 +1350,12 @@ namespace AdvXMLParser {
     // ===================================================================
 
     class ParsingException : public Exception {
-    private:
+      private:
         PARSER_ERROR m_nError;
-        int          m_nLine;
-        int          m_nColumn;
+        int m_nLine;
+        int m_nColumn;
 
-    public:
+      public:
         ParsingException(PARSER_ERROR nError, int nLine, int nColumn);
 
         PARSER_ERROR GetErrorCode() const;
@@ -1357,10 +1374,10 @@ namespace AdvXMLParser {
     // ===================================================================
 
     class InvalidRefException : public Exception {
-    public:
+      public:
         explicit InvalidRefException(const String &strName);
 
-    private:
+      private:
         String m_strName;
     };
 
@@ -1371,13 +1388,13 @@ namespace AdvXMLParser {
     // ===================================================================
 
     class Bookmark {
-    private:
-        Parser &    m_reader;           // Parser
-        const Char *m_szSourceCurrent;  // Position recorded
-        int         m_nLine;            // Line recorded
-        int         m_nColumn;          // Column recorded
+      private:
+        Parser &m_reader;              // Parser
+        const Char *m_szSourceCurrent; // Position recorded
+        int m_nLine;                   // Line recorded
+        int m_nColumn;                 // Column recorded
 
-    public:
+      public:
         explicit Bookmark(Parser &reader);
 
         // Change back the position
@@ -1400,7 +1417,7 @@ namespace AdvXMLParser {
     class Parser {
         friend class Bookmark;
 
-    public:
+      public:
         Parser();
 
         virtual ~Parser();
@@ -1411,9 +1428,9 @@ namespace AdvXMLParser {
         Document *Parse(const Char *szSource, int nSourceSize);
 
         // address=[0x2f26770]
-        static char * __cdecl OpenXMLFile(wchar_t *swpFileName, long &_iSize);
+        static char *__cdecl OpenXMLFile(wchar_t const *swpFileName, long &_iSize);
 
-    public:
+      public:
         // ---------------------------------------------------------------
         // Errors
         // ---------------------------------------------------------------
@@ -1470,14 +1487,14 @@ namespace AdvXMLParser {
         // Read a Name Token
         bool ParseNmtoken(String &strName);
 
-    private:
-        const Char *m_szSource;         // XML document
-        const Char *m_szSourceCurrent;  // Current position
-        const Char *m_szSourceEnd;      // End of the document
+      private:
+        const Char *m_szSource;        // XML document
+        const Char *m_szSourceCurrent; // Current position
+        const Char *m_szSourceEnd;     // End of the document
 
-        int m_nLine;            // Current line
-        int m_nColumn;          // Current column
-        int m_nOldColumn;       // Previous column (for PreviousChar)
+        int m_nLine;      // Current line
+        int m_nColumn;    // Current column
+        int m_nOldColumn; // Previous column (for PreviousChar)
     };
 
     // ===================================================================
@@ -1503,7 +1520,7 @@ namespace AdvXMLParser {
 
     void operator<<(Value value, const Char *szValue);
 
-    //void operator<<(Node& node, const Char* szValue); TODO
+    // void operator<<(Node& node, const Char* szValue); TODO
 
     // You can define these functions ourself if you prefer
 #ifndef ADVXMLPARSER_NO_CONVERSION
@@ -1517,12 +1534,12 @@ namespace AdvXMLParser {
     // ===================================================================
     // Implementation of inline functions
 
-#include "Iterators.inl"
 #include "Elements.inl"
+#include "Iterators.inl"
 #include "Reader.inl"
 #include "Writer.inl"
 
     // ===================================================================
-}
+} // namespace AdvXMLParser
 
 #endif // INC_ADVXMLPARSER_H

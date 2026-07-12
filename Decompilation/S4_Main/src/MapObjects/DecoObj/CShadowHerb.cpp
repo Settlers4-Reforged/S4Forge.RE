@@ -41,25 +41,25 @@ void CShadowHerb::LogicUpdate(void) {
   switch(this->m_iPhases) {
     case 0u:
       ++this->m_iPhases;
-      this->m_cFrame = 0;
+      this->m_iFrame = 0;
       this->m_iJobPart = this->m_iPhases
                          + (unsigned __int16) g_pGfxManager->GetObjectFirstJob(this->m_nType);
       this->m_uCycleFrames = g_pGfxManager->GetObjectFrameCount(this->m_iJobPart);
       IAnimatedEntity::RegisterForLogicUpdate(1);
       break;
     case 1u:
-      if(++this->m_cFrame < (int) this->m_uCycleFrames) {
+      if(++this->m_iFrame < (int) this->m_uCycleFrames) {
         IAnimatedEntity::RegisterForLogicUpdate(1);
       } else {
         ++this->m_iPhases;
         g_pDarkTribe->ChangeSurroundingToDarkLand(X(), Y());
-        --this->m_cFrame;
+        --this->m_iFrame;
         IAnimatedEntity::RegisterForLogicUpdate(31);
       }
       break;
     case 2u:
       ++this->m_iPhases;
-      this->m_cFrame = 0;
+      this->m_iFrame = 0;
       this->m_iJobPart = g_pGfxManager->GetObjectFirstJob(this->m_nType) + this->m_iPhases - 1;
       this->m_uCycleFrames = g_pGfxManager->GetObjectFrameCount(this->m_iJobPart);
 
@@ -87,8 +87,8 @@ struct SGfxObjectInfo *CShadowHerb::GetGfxInfos(void) {
   v2 = g_pGame->GetTickCounter();
   IAnimatedEntity::SetLastUpdateTick(v2);
   if(v4 && this->m_iPhases != 1 && this->m_iPhases != 2)
-    this->m_cFrame = (v4 + (unsigned int) this->m_cFrame) % this->m_uCycleFrames;
-  g_pGfxManager->GetObjectGfxInfo(&IEntity::m_sGfxInfo, this->m_iJobPart, this->m_cFrame, 1);
+    this->m_iFrame = (v4 + (unsigned int) this->m_iFrame) % this->m_uCycleFrames;
+  g_pGfxManager->GetObjectGfxInfo(&IEntity::m_sGfxInfo, this->m_iJobPart, this->m_iFrame, 1);
   byte_40FE518 = 16;
   byte_40FE51A = IEntity::IsVisible();
   IEntity::m_sGfxInfo.m_uFlags = 0;

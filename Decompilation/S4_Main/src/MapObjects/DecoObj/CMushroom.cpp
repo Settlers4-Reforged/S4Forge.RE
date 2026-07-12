@@ -20,11 +20,11 @@ CMushroom::CMushroom(int a2, int a3, int a4, int a5, int a6) : IDecoObject(a2, a
   BB_ASSERT(m_uCycleFrames)
 
   if(this->m_iPhases) {
-    this->m_cFrame = g_pGame->Rand() % this->m_uCycleFrames;
+    this->m_iFrame = g_pGame->Rand() % this->m_uCycleFrames;
     IEntity::SetFlagBits(EntityFlag_Ready);
   } else {
     IAnimatedEntity::RegisterForLogicUpdate(31);
-    this->m_cFrame = 0;
+    this->m_iFrame = 0;
   }
   return this;
 }
@@ -39,7 +39,7 @@ CMushroom::CMushroom(class CMushroom const &a2, int a3, int a4, int a5) : IDecoO
   this->m_uCycleFrames = a2.m_uCycleFrames;
   BB_ASSERT(this->m_uCycleFrames)
 
-  this->m_cFrame = a2.m_cFrame;
+  this->m_iFrame = a2.m_iFrame;
   this->m_uU1 = 1;
 }
 
@@ -81,8 +81,8 @@ void CMushroom::LogicUpdate(void) {
     case 4u:
       if(++this->m_uU0 < 5
          || (this->m_uU0 = 0,
-             ++this->m_cFrame,
-             m_cFrame = this->m_cFrame,
+             ++this->m_iFrame,
+             m_cFrame = this->m_iFrame,
              m_cFrame < g_pGfxManager->GetObjectFrameCount(this->m_iJobPart))) {
       LABEL_10:
         IAnimatedEntity::RegisterForLogicUpdate(this, 31);
@@ -109,8 +109,8 @@ struct SGfxObjectInfo *CMushroom::GetGfxInfos(void) {
   v2 = g_pGame->GetTickCounter();
   IAnimatedEntity::SetLastUpdateTick(v2);
   if(v4)
-    this->m_cFrame = (v4 + (unsigned int) this->m_cFrame) % this->m_uCycleFrames;
-  g_pGfxManager->GetObjectGfxInfo(&IEntity::m_sGfxInfo, this->m_iJobPart, this->m_cFrame, 1);
+    this->m_iFrame = (v4 + (unsigned int) this->m_iFrame) % this->m_uCycleFrames;
+  g_pGfxManager->GetObjectGfxInfo(&IEntity::m_sGfxInfo, this->m_iJobPart, this->m_iFrame, 1);
   byte_40FE518 = 16;
   byte_40FE51A = IEntity::IsVisible();
   IEntity::m_sGfxInfo.m_uFlags = 0;
@@ -124,7 +124,7 @@ void CMushroom::Decrease(int a2) {
   BB_ASSERT(IsStaticInstance() == false)
   IEntity::ClearFlagBits(EntityFlag_Ready);
   ++this->m_iPhases;
-  this->m_cFrame = 0;
+  this->m_iFrame = 0;
   this->m_iJobPart = this->m_iPhases + (unsigned __int16) g_pGfxManager->GetObjectFirstJob(this->m_nType);
   this->m_uCycleFrames = g_pGfxManager->GetObjectFrameCount(this->m_iJobPart);
   BB_ASSERT(this->m_uCycleFrames)

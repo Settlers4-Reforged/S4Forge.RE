@@ -29,7 +29,7 @@ CPlant::CPlant(int a2, int a3, int a4, int a5, int _iGoodType, int _iStage) : ID
   this->m_uCycleFrames = g_pGfxManager->GetObjectFrameCount(this->m_iJobPart);
   BB_ASSERT(m_uCycleFrames)
   if(IDecoObject::IsStaticInstance()) {
-    this->m_cFrame = g_pGame->Rand() % this->m_uCycleFrames;
+    this->m_iFrame = g_pGame->Rand() % this->m_uCycleFrames;
     IEntity::SetFlagBits(EntityFlag_Ready);
   } else {
     IAnimatedEntity::RegisterForLogicUpdate(31);
@@ -46,7 +46,7 @@ CPlant::CPlant(class CPlant const &a2, int a3, int a4, int a5) : IDecoObject(a2,
   this->m_iJobPart = this->m_uStage + (unsigned __int16) g_pGfxManager->GetObjectFirstJob(this->m_nType);
   this->m_uCycleFrames = a2.m_uCycleFrames;
   BB_ASSERT(m_uCycleFrames)
-  this->m_cFrame = a2.m_cFrame;
+  this->m_iFrame = a2.m_iFrame;
   this->m_uU1 = 1;
   this->m_iGoodType = a2.m_iGoodType;
 }
@@ -88,8 +88,8 @@ void CPlant::LogicUpdate(void) {
          && (this->m_nType == OBJECT_WHEAT1
              || this->m_nType == OBJECT_WHEAT2
              || (this->m_uU5 = 0,
-                 ++this->m_cFrame,
-                 m_cFrame = this->m_cFrame,
+                 ++this->m_iFrame,
+                 m_cFrame = this->m_iFrame,
                  m_cFrame >= g_pGfxManager->GetObjectFrameCount(this->m_iJobPart)))) {
         g_cDecoObjMgr.Delete(ID());
       } else {
@@ -115,8 +115,8 @@ struct SGfxObjectInfo *CPlant::GetGfxInfos(void) {
   v2 = g_pGame->GetTickCounter();
   IAnimatedEntity::SetLastUpdateTick(v2);
   if(v4 && this->m_uStage < 4u)
-    this->m_cFrame = (v4 + (unsigned int) this->m_cFrame) % this->m_uCycleFrames;
-  g_pGfxManager->GetObjectGfxInfo(&IEntity::m_sGfxInfo, this->m_iJobPart, this->m_cFrame, 1);
+    this->m_iFrame = (v4 + (unsigned int) this->m_iFrame) % this->m_uCycleFrames;
+  g_pGfxManager->GetObjectGfxInfo(&IEntity::m_sGfxInfo, this->m_iJobPart, this->m_iFrame, 1);
   byte_40FE518 = 16;
   byte_40FE51A = IEntity::IsVisible();
   IEntity::m_sGfxInfo.m_uFlags = 0;
@@ -132,7 +132,7 @@ void CPlant::Take(int _iAmount) {
   BB_ASSERT(( m_uStage + _iAmount <= PLANT_STAGES_MAX + 1 && ( Type() == OBJECT_WHEAT1 || Type() == OBJECT_WHEAT2 || Type() == OBJECT_SUNFLOWER ) ) || ( m_uStage + _iAmount <= PLANT_STAGES_MAX && !( Type() == OBJECT_WHEAT1 || Type() == OBJECT_WHEAT2 || Type() == OBJECT_SUNFLOWER ) ))
   IEntity::ClearFlagBits(EntityFlag_Ready);
   this->m_uStage += _iAmount;
-  this->m_cFrame = 0;
+  this->m_iFrame = 0;
   this->m_iJobPart = this->m_uStage + (unsigned __int16) g_pGfxManager->GetObjectFirstJob(this->m_nType);
   this->m_uCycleFrames = g_pGfxManager->GetObjectFrameCount(this->m_iJobPart);
   BB_ASSERT(m_uCycleFrames)
