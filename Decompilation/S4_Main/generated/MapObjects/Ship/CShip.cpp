@@ -96,9 +96,9 @@ struct SGfxObjectInfo *  CShip::GetGfxInfos(void) {
   MEMORY[0x40FE51C] = *(_BYTE *)(this + 69);
   MEMORY[0x40FE518] = 2;
   MEMORY[0x40FE51A] = IEntity::IsVisible((_DWORD *)this);
-  if ( IEntity::FlagBits((IEntity *)this, EntityFlag_Selected) )
+  if ( IEntity::FlagBits((IEntity *)this, ENTITY_FLAG_Selected) )
   {
-    if ( IEntity::FlagBits((IEntity *)this, EntityFlag_Selected) )
+    if ( IEntity::FlagBits((IEntity *)this, ENTITY_FLAG_Selected) )
       v4 = 27;
     else
       v4 = 0;
@@ -395,7 +395,7 @@ LABEL_5:
       case 0x11:
         return (struct CVehicle *)(*(int (__thiscall **)(CShip *))(*(_DWORD *)this + 144))(this);
       case 0x24:
-        IEntity::ClearFlagBits(this, EntityFlag_Visible);
+        IEntity::ClearFlagBits(this, ENTITY_FLAG_Visible);
         v2 = IEntity::EntityId((unsigned __int16 *)this);
         return CVehicleMgr::DeleteVehicle((CVehicleMgr *)&g_cVehicleMgr, v2);
       default:

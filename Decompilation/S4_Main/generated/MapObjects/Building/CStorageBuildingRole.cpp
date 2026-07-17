@@ -164,7 +164,7 @@ void  CStorageBuildingRole::Init(class CBuilding * a2) {
     if ( *(_BYTE *)(*((_DWORD *)this + 94) + 16 * j + 65) == 1 )
     {
       v5 = CPileMgr::operator[](v11);
-      IEntity::ClearFlagBits(v5, EntityFlag_Visible);
+      IEntity::ClearFlagBits(v5, ENTITY_FLAG_Visible);
     }
     v15 = v11;
     std::vector<unsigned short>::push_back(&v15);
@@ -174,7 +174,7 @@ void  CStorageBuildingRole::Init(class CBuilding * a2) {
   {
     __debugbreak();
   }
-  if ( IEntity::FlagBits(a2, EntityFlag_Selected) )
+  if ( IEntity::FlagBits(a2, ENTITY_FLAG_Selected) )
     (*(void (__thiscall **)(CStorageBuildingRole *, struct CBuilding *, _DWORD))(*(_DWORD *)this + 88))(this, a2, 0);
   v6 = CBuilding::EcoSectorId(a2);
   CStorageBuildingRole::RegisterPilesAndStorageAtEcosector(this, v6);
@@ -220,7 +220,7 @@ void  CStorageBuildingRole::Switch(void) {
     __debugbreak();
   CEcoSector::CleanUpBuildingNeed(EcoSectorPtr, *((unsigned __int16 *)this + 3));
   v3 = (_DWORD *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
-  v4 = IEntity::FlagBits(v3, EntityFlag_NotStriking);
+  v4 = IEntity::FlagBits(v3, (EntityFlag)0x1000u);
   if ( v4 )
   {
     for ( i = 1; i < 43; ++i )
@@ -247,7 +247,7 @@ void  CStorageBuildingRole::Switch(void) {
 // Decompiled from int __thiscall CStorageBuildingRole::LogicUpdate(CStorageBuildingRole *this, struct CBuilding *a2)
 void  CStorageBuildingRole::LogicUpdate(class CBuilding * a2) {
   
-  if ( IEntity::FlagBits(a2, EntityFlag_Selected) )
+  if ( IEntity::FlagBits(a2, ENTITY_FLAG_Selected) )
     (*(void (__thiscall **)(CStorageBuildingRole *, struct CBuilding *, int))(*(_DWORD *)this + 88))(this, a2, 1);
   return IAnimatedEntity::RegisterForLogicUpdate(14);
 }
@@ -313,7 +313,7 @@ void  CStorageBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
   byte_3F1E5A9 = IEntity::Race(a2);
   byte_3F1E5A8 = IEntity::Type((unsigned __int16 *)a2);
   byte_3F1E5AB = 1;
-  byte_3F1E5AC = IEntity::FlagBits(a2, EntityFlag_NotStriking) != 0;
+  byte_3F1E5AC = IEntity::FlagBits(a2, (EntityFlag)0x1000u) != 0;
   byte_3F1E5AD = 0;
   v9 = IEntity::Type((unsigned __int16 *)a2);
   v3 = IEntity::OwnerId((unsigned __int8 *)a2);
@@ -765,7 +765,7 @@ void  CStorageBuildingRole::SwitchGood(int a2, int a3) {
   if ( a3 )
   {
     v4 = (_DWORD *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
-    if ( IEntity::FlagBits(v4, EntityFlag_NotStriking) )
+    if ( IEntity::FlagBits(v4, (EntityFlag)0x1000u) )
       CEcoSector::RegisterGoodStorage(v7, *((unsigned __int16 *)this + 3), a2);
   }
   else

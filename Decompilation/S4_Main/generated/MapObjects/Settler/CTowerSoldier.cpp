@@ -704,7 +704,7 @@ void  CTowerSoldier::Init(class CSettler * a2) {
   
   CTowerSoldier *result; // eax
 
-  if ( IEntity::FlagBits(a2, EntityFlag_Offered|EntityFlag_Attached)
+  if ( IEntity::FlagBits(a2, ENTITY_FLAG_Offered|ENTITY_FLAG_ATTACHED)
     && BBSupportDbgReport(
          2,
          "MapObjects\\Settler\\TowerSoldierRole.cpp",
@@ -838,8 +838,8 @@ void  CTowerSoldier::ConvertEventIntoGoal(class CSettler * a2, class CEntityEven
       }
       if ( *(_WORD *)(this + 32) )
       {
-        IEntity::SetFlagBits(a2, EntityFlag_Selectable);
-        IEntity::ClearFlagBits(a2, EntityFlag_OnBoard);
+        IEntity::SetFlagBits(a2, ENTITY_FLAG_Selectable);
+        IEntity::ClearFlagBits(a2, ENTITY_FLAG_OnBoard);
         v22 = IEntity::Type((unsigned __int16 *)a2);
         v16 = IEntity::Type((unsigned __int16 *)a2);
         v3 = IEntity::Race(a2);
@@ -888,8 +888,8 @@ void  CTowerSoldier::ConvertEventIntoGoal(class CSettler * a2, class CEntityEven
       v6 = IEntity::ID();
       CSettlerMgr::SearchSpaceForSettler((CSettlerMgr *)g_cSettlerMgr, v6, v18, v24);
       CWarMap::AddEntity(a2);
-      IEntity::SetFlagBits(a2, EntityFlag_Selectable|EntityFlag_Visible);
-      IEntity::ClearFlagBits(a2, EntityFlag_OnBoard);
+      IEntity::SetFlagBits(a2, ENTITY_FLAG_Selectable|ENTITY_FLAG_Visible);
+      IEntity::ClearFlagBits(a2, ENTITY_FLAG_OnBoard);
       *(_BYTE *)(this + 4) = 27;
       v25 = *(unsigned __int16 *)(this + 32);
       v19 = IEntity::ID();
@@ -898,7 +898,7 @@ void  CTowerSoldier::ConvertEventIntoGoal(class CSettler * a2, class CEntityEven
       *(_WORD *)(this + 32) = 0;
       break;
     default:
-      if ( !IEntity::FlagBits(a2, EntityFlag_Registered) )
+      if ( !IEntity::FlagBits(a2, ENTITY_FLAG_Registered) )
       {
         CTrace::Print("ConvertEventIntoGoal SoldierRole - unknown event %u", *(_DWORD *)(a3 + 4));
         IAnimatedEntity::RegisterForLogicUpdate(1);

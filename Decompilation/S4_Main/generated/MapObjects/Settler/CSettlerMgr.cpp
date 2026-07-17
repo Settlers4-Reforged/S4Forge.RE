@@ -102,7 +102,7 @@ int  CSettlerMgr::GetNumberOfOfferedSettlers(int _iPlayerId, int _iSettlerType)c
 // Decompiled from CSettlerMgr::SSettlerInfos *__cdecl CSettlerMgr::GetSettlerInfo(int _iRace, int _iType)
 struct CSettlerMgr::SSettlerInfos const & __cdecl CSettlerMgr::GetSettlerInfo(int _iRace, int _iType) {
   
-  return &CSettlerMgr::m_vSettlerInfos[70 * _iRace + _iType];
+  return &CSettlerMgr::m_vSettlerInfos[_iRace][_iType];
 }
 
 
@@ -215,26 +215,26 @@ class ISettlerRole *  CSettlerMgr::CreateSettlerRole(int _iRace, int _iType) {
   {
     __debugbreak();
   }
-  switch ( CSettlerMgr::m_vSettlerInfos[70 * _iRace + _iType].m_uRole )
+  switch ( CSettlerMgr::m_vSettlerInfos[_iRace][_iType].m_uRole )
   {
     case 1u:
       result = (struct ISettlerRole *)operator new(0x38u);
       if ( result )
-        result = (struct ISettlerRole *)CCarrierRole::CCarrierRole((CCarrierRole *)result);
+        result = CCarrierRole::CCarrierRole((CCarrierRole *)result);
       else
         result = 0;
       break;
     case 2u:
       result = (struct ISettlerRole *)operator new(0x30u);
       if ( result )
-        result = (struct ISettlerRole *)CDiggerRole::CDiggerRole((CDiggerRole *)result);
+        result = CDiggerRole::CDiggerRole((CDiggerRole *)result);
       else
         result = 0;
       break;
     case 3u:
       result = (struct ISettlerRole *)operator new(0x30u);
       if ( result )
-        result = (struct ISettlerRole *)CBuilderRole::CBuilderRole((CBuilderRole *)result);
+        result = CBuilderRole::CBuilderRole((CBuilderRole *)result);
       else
         result = 0;
       break;
@@ -255,7 +255,7 @@ class ISettlerRole *  CSettlerMgr::CreateSettlerRole(int _iRace, int _iType) {
     case 7u:
       result = (struct ISettlerRole *)operator new(0x64u);
       if ( result )
-        result = (struct ISettlerRole *)CSoldierRole::CSoldierRole((CSoldierRole *)result);
+        result = CSoldierRole::CSoldierRole((CSoldierRole *)result);
       else
         result = 0;
       break;
@@ -297,7 +297,7 @@ class ISettlerRole *  CSettlerMgr::CreateSettlerRole(int _iRace, int _iType) {
     case 0xDu:
       result = (struct ISettlerRole *)operator new(0x54u);
       if ( result )
-        result = (struct ISettlerRole *)CGardenerRole::CGardenerRole((CGardenerRole *)result);
+        result = CGardenerRole::CGardenerRole((CGardenerRole *)result);
       else
         result = 0;
       break;
@@ -339,7 +339,7 @@ class ISettlerRole *  CSettlerMgr::CreateSettlerRole(int _iRace, int _iType) {
     case 0x14u:
       result = (struct ISettlerRole *)operator new(0x7Cu);
       if ( result )
-        result = (struct ISettlerRole *)CDonkeyRole::CDonkeyRole((CDonkeyRole *)result);
+        result = CDonkeyRole::CDonkeyRole((CDonkeyRole *)result);
       else
         result = 0;
       break;
@@ -529,450 +529,441 @@ void  CSettlerMgr::LoadInfo(bool isMP) {
   _DWORD v36[21]; // [esp+ECh] [ebp-6A8h] BYREF
   char v37[16]; // [esp+140h] [ebp-654h] BYREF
   char v38[16]; // [esp+150h] [ebp-644h] BYREF
-  int v39; // [esp+160h] [ebp-634h]
-  int v40; // [esp+164h] [ebp-630h]
-  int v41; // [esp+168h] [ebp-62Ch]
-  int v42; // [esp+16Ch] [ebp-628h]
-  char v43[16]; // [esp+170h] [ebp-624h] BYREF
-  const struct AdvXMLParser::Attribute *v44; // [esp+180h] [ebp-614h]
-  AdvXMLParser::Element *v45; // [esp+184h] [ebp-610h]
-  AdvXMLParser::Element *v46; // [esp+188h] [ebp-60Ch]
-  _DWORD *v47; // [esp+18Ch] [ebp-608h]
-  _DWORD *v48; // [esp+190h] [ebp-604h]
-  AdvXMLParser::Element *v49; // [esp+194h] [ebp-600h]
-  _DWORD *v50; // [esp+198h] [ebp-5FCh]
-  _DWORD *v51; // [esp+19Ch] [ebp-5F8h]
-  AdvXMLParser::Element *v52; // [esp+1A0h] [ebp-5F4h]
+  SSearchData v39; // [esp+160h] [ebp-634h]
+  char v40[16]; // [esp+170h] [ebp-624h] BYREF
+  const struct AdvXMLParser::Attribute *v41; // [esp+180h] [ebp-614h]
+  AdvXMLParser::Element *v42; // [esp+184h] [ebp-610h]
+  AdvXMLParser::Element *v43; // [esp+188h] [ebp-60Ch]
+  _DWORD *v44; // [esp+18Ch] [ebp-608h]
+  _DWORD *v45; // [esp+190h] [ebp-604h]
+  AdvXMLParser::Element *v46; // [esp+194h] [ebp-600h]
+  _DWORD *v47; // [esp+198h] [ebp-5FCh]
+  _DWORD *v48; // [esp+19Ch] [ebp-5F8h]
+  AdvXMLParser::Element *v49; // [esp+1A0h] [ebp-5F4h]
   int ValueOfDefine; // [esp+1A4h] [ebp-5F0h]
-  const struct AdvXMLParser::Attribute *v54; // [esp+1A8h] [ebp-5ECh]
-  AdvXMLParser::Element *v55; // [esp+1ACh] [ebp-5E8h]
-  _DWORD *v56; // [esp+1B0h] [ebp-5E4h]
-  _DWORD *v57; // [esp+1B4h] [ebp-5E0h]
-  _DWORD *v58; // [esp+1B8h] [ebp-5DCh]
-  _DWORD *v59; // [esp+1BCh] [ebp-5D8h]
+  const struct AdvXMLParser::Attribute *v51; // [esp+1A8h] [ebp-5ECh]
+  AdvXMLParser::Element *v52; // [esp+1ACh] [ebp-5E8h]
+  _DWORD *v53; // [esp+1B0h] [ebp-5E4h]
+  _DWORD *v54; // [esp+1B4h] [ebp-5E0h]
+  _DWORD *v55; // [esp+1B8h] [ebp-5DCh]
+  _DWORD *v56; // [esp+1BCh] [ebp-5D8h]
   struct CDefineTranslator *defineTranslator; // [esp+1C0h] [ebp-5D4h] MAPDST
   void *Root; // [esp+1C4h] [ebp-5D0h]
-  int v62; // [esp+1C8h] [ebp-5CCh]
+  int v59; // [esp+1C8h] [ebp-5CCh]
   void *C; // [esp+1D0h] [ebp-5C4h]
-  int v65; // [esp+1D4h] [ebp-5C0h]
+  int v62; // [esp+1D4h] [ebp-5C0h]
   int iAnimList; // [esp+1D8h] [ebp-5BCh] MAPDST
-  std::string *v68; // [esp+1E0h] [ebp-5B4h]
-  std::string *v69; // [esp+1E4h] [ebp-5B0h]
-  AdvXMLParser::Element *v70; // [esp+1E8h] [ebp-5ACh]
-  _DWORD *v71; // [esp+1ECh] [ebp-5A8h]
-  _DWORD *v72; // [esp+1F0h] [ebp-5A4h]
-  AdvXMLParser::Element *v73; // [esp+1F4h] [ebp-5A0h]
-  AdvXMLParser::Element *v74; // [esp+1F8h] [ebp-59Ch]
-  _DWORD *v75; // [esp+1FCh] [ebp-598h]
-  _DWORD *v76; // [esp+200h] [ebp-594h]
-  AdvXMLParser::Element *v77; // [esp+204h] [ebp-590h]
-  AdvXMLParser::Element *v78; // [esp+208h] [ebp-58Ch]
-  char *SearchData; // [esp+20Ch] [ebp-588h]
-  int v80; // [esp+210h] [ebp-584h]
-  std::string *v81; // [esp+214h] [ebp-580h]
-  std::string *v82; // [esp+218h] [ebp-57Ch]
-  AdvXMLParser::Element *v83; // [esp+21Ch] [ebp-578h]
-  _DWORD *v84; // [esp+220h] [ebp-574h]
-  _DWORD *v85; // [esp+224h] [ebp-570h]
-  AdvXMLParser::Element *v86; // [esp+228h] [ebp-56Ch]
-  AdvXMLParser::Element *v87; // [esp+22Ch] [ebp-568h]
-  _DWORD *v88; // [esp+230h] [ebp-564h]
-  _DWORD *v89; // [esp+234h] [ebp-560h]
-  AdvXMLParser::Element *v90; // [esp+238h] [ebp-55Ch]
-  AdvXMLParser::Element *v91; // [esp+23Ch] [ebp-558h]
-  std::string *v92; // [esp+240h] [ebp-554h]
-  AdvXMLParser::Element *v93; // [esp+244h] [ebp-550h]
-  AdvXMLParser::Element *v94; // [esp+248h] [ebp-54Ch]
-  int v95; // [esp+24Ch] [ebp-548h]
-  int v96; // [esp+250h] [ebp-544h]
-  std::string *v97; // [esp+254h] [ebp-540h]
-  std::string *v98; // [esp+258h] [ebp-53Ch]
-  AdvXMLParser::Element *v100; // [esp+260h] [ebp-534h]
-  AdvXMLParser::Element *v101; // [esp+264h] [ebp-530h]
-  int v102; // [esp+268h] [ebp-52Ch]
-  std::string *v103; // [esp+26Ch] [ebp-528h]
-  std::string *v104; // [esp+270h] [ebp-524h]
-  AdvXMLParser::Element *v105; // [esp+274h] [ebp-520h]
-  AdvXMLParser::Element *v106; // [esp+278h] [ebp-51Ch]
-  std::string *v107; // [esp+27Ch] [ebp-518h]
-  AdvXMLParser::Element *v108; // [esp+280h] [ebp-514h]
-  AdvXMLParser::Element *v109; // [esp+284h] [ebp-510h]
-  std::string *v110; // [esp+288h] [ebp-50Ch]
-  AdvXMLParser::Element *v111; // [esp+28Ch] [ebp-508h]
-  AdvXMLParser::Element *v112; // [esp+290h] [ebp-504h]
-  std::string *v113; // [esp+294h] [ebp-500h]
-  AdvXMLParser::Element *v114; // [esp+298h] [ebp-4FCh]
-  AdvXMLParser::Element *v115; // [esp+29Ch] [ebp-4F8h]
-  std::string *v116; // [esp+2A0h] [ebp-4F4h]
-  AdvXMLParser::Element *v117; // [esp+2A4h] [ebp-4F0h]
-  AdvXMLParser::Element *v118; // [esp+2A8h] [ebp-4ECh]
-  std::string *v119; // [esp+2ACh] [ebp-4E8h]
-  AdvXMLParser::Element *v120; // [esp+2B0h] [ebp-4E4h]
-  AdvXMLParser::Element *v121; // [esp+2B4h] [ebp-4E0h]
-  std::string *v122; // [esp+2B8h] [ebp-4DCh]
-  AdvXMLParser::Element *v123; // [esp+2BCh] [ebp-4D8h]
-  AdvXMLParser::Element *v124; // [esp+2C0h] [ebp-4D4h]
-  int v125; // [esp+2C4h] [ebp-4D0h]
-  AdvXMLParser::Element *v126; // [esp+2C8h] [ebp-4CCh]
-  AdvXMLParser::Element *v127; // [esp+2CCh] [ebp-4C8h]
+  std::string *v65; // [esp+1E0h] [ebp-5B4h]
+  std::string *v66; // [esp+1E4h] [ebp-5B0h]
+  AdvXMLParser::Element *v67; // [esp+1E8h] [ebp-5ACh]
+  _DWORD *v68; // [esp+1ECh] [ebp-5A8h]
+  _DWORD *v69; // [esp+1F0h] [ebp-5A4h]
+  AdvXMLParser::Element *v70; // [esp+1F4h] [ebp-5A0h]
+  AdvXMLParser::Element *v71; // [esp+1F8h] [ebp-59Ch]
+  _DWORD *v72; // [esp+1FCh] [ebp-598h]
+  _DWORD *v73; // [esp+200h] [ebp-594h]
+  AdvXMLParser::Element *v74; // [esp+204h] [ebp-590h]
+  AdvXMLParser::Element *v75; // [esp+208h] [ebp-58Ch]
+  SSearchData *SearchData; // [esp+20Ch] [ebp-588h]
+  int v77; // [esp+210h] [ebp-584h]
+  std::string *v78; // [esp+214h] [ebp-580h]
+  std::string *v79; // [esp+218h] [ebp-57Ch]
+  AdvXMLParser::Element *v80; // [esp+21Ch] [ebp-578h]
+  _DWORD *v81; // [esp+220h] [ebp-574h]
+  _DWORD *v82; // [esp+224h] [ebp-570h]
+  AdvXMLParser::Element *v83; // [esp+228h] [ebp-56Ch]
+  AdvXMLParser::Element *v84; // [esp+22Ch] [ebp-568h]
+  _DWORD *v85; // [esp+230h] [ebp-564h]
+  _DWORD *v86; // [esp+234h] [ebp-560h]
+  AdvXMLParser::Element *v87; // [esp+238h] [ebp-55Ch]
+  AdvXMLParser::Element *v88; // [esp+23Ch] [ebp-558h]
+  std::string *v89; // [esp+240h] [ebp-554h]
+  AdvXMLParser::Element *v90; // [esp+244h] [ebp-550h]
+  AdvXMLParser::Element *v91; // [esp+248h] [ebp-54Ch]
+  int v92; // [esp+24Ch] [ebp-548h]
+  int v93; // [esp+250h] [ebp-544h]
+  std::string *v94; // [esp+254h] [ebp-540h]
+  std::string *v95; // [esp+258h] [ebp-53Ch]
+  AdvXMLParser::Element *v97; // [esp+260h] [ebp-534h]
+  AdvXMLParser::Element *v98; // [esp+264h] [ebp-530h]
+  int v99; // [esp+268h] [ebp-52Ch]
+  std::string *v100; // [esp+26Ch] [ebp-528h]
+  std::string *v101; // [esp+270h] [ebp-524h]
+  AdvXMLParser::Element *v102; // [esp+274h] [ebp-520h]
+  AdvXMLParser::Element *v103; // [esp+278h] [ebp-51Ch]
+  std::string *v104; // [esp+27Ch] [ebp-518h]
+  AdvXMLParser::Element *v105; // [esp+280h] [ebp-514h]
+  AdvXMLParser::Element *v106; // [esp+284h] [ebp-510h]
+  std::string *v107; // [esp+288h] [ebp-50Ch]
+  AdvXMLParser::Element *v108; // [esp+28Ch] [ebp-508h]
+  AdvXMLParser::Element *v109; // [esp+290h] [ebp-504h]
+  std::string *v110; // [esp+294h] [ebp-500h]
+  AdvXMLParser::Element *v111; // [esp+298h] [ebp-4FCh]
+  AdvXMLParser::Element *v112; // [esp+29Ch] [ebp-4F8h]
+  std::string *v113; // [esp+2A0h] [ebp-4F4h]
+  AdvXMLParser::Element *v114; // [esp+2A4h] [ebp-4F0h]
+  AdvXMLParser::Element *v115; // [esp+2A8h] [ebp-4ECh]
+  std::string *v116; // [esp+2ACh] [ebp-4E8h]
+  AdvXMLParser::Element *v117; // [esp+2B0h] [ebp-4E4h]
+  AdvXMLParser::Element *v118; // [esp+2B4h] [ebp-4E0h]
+  std::string *v119; // [esp+2B8h] [ebp-4DCh]
+  AdvXMLParser::Element *v120; // [esp+2BCh] [ebp-4D8h]
+  AdvXMLParser::Element *v121; // [esp+2C0h] [ebp-4D4h]
+  int v122; // [esp+2C4h] [ebp-4D0h]
+  AdvXMLParser::Element *v123; // [esp+2C8h] [ebp-4CCh]
+  AdvXMLParser::Element *v124; // [esp+2CCh] [ebp-4C8h]
   int tribeId; // [esp+2D0h] [ebp-4C4h]
-  int v129; // [esp+2D4h] [ebp-4C0h]
+  int v126; // [esp+2D4h] [ebp-4C0h]
   int settlerInfoId; // [esp+2D8h] [ebp-4BCh] MAPDST
   CConfigManager *configManager; // [esp+2DCh] [ebp-4B8h] MAPDST
-  void *v132; // [esp+2E0h] [ebp-4B4h]
-  const struct AdvXMLParser::Attribute *v133; // [esp+2E4h] [ebp-4B0h]
-  const struct AdvXMLParser::Attribute *v134; // [esp+2E8h] [ebp-4ACh]
-  AdvXMLParser::Element *v137; // [esp+2F4h] [ebp-4A0h]
-  AdvXMLParser::Element *v138; // [esp+2F8h] [ebp-49Ch]
-  AdvXMLParser::Element *v139; // [esp+2FCh] [ebp-498h]
-  AdvXMLParser::Element *v140; // [esp+300h] [ebp-494h]
-  AdvXMLParser::Element *v141; // [esp+304h] [ebp-490h]
-  AdvXMLParser::Element *v142; // [esp+308h] [ebp-48Ch]
-  AdvXMLParser::Element *v143; // [esp+30Ch] [ebp-488h]
-  AdvXMLParser::Element *v144; // [esp+310h] [ebp-484h]
-  AdvXMLParser::Element *v145; // [esp+314h] [ebp-480h]
-  AdvXMLParser::Element *v146; // [esp+318h] [ebp-47Ch]
-  int v147; // [esp+31Ch] [ebp-478h] BYREF
-  char v148; // [esp+320h] [ebp-474h]
-  char v149; // [esp+321h] [ebp-473h]
-  char v150; // [esp+322h] [ebp-472h]
-  char v151; // [esp+323h] [ebp-471h]
-  CConfigManager *v152; // [esp+324h] [ebp-470h]
-  char v154[4]; // [esp+32Ch] [ebp-468h] BYREF
-  AdvXMLParser::Element *v157; // [esp+338h] [ebp-45Ch]
-  int v158; // [esp+33Ch] [ebp-458h]
-  AdvXMLParser::Element *v159; // [esp+340h] [ebp-454h]
-  int v160; // [esp+344h] [ebp-450h] BYREF
+  void *v129; // [esp+2E0h] [ebp-4B4h]
+  const struct AdvXMLParser::Attribute *v130; // [esp+2E4h] [ebp-4B0h]
+  const struct AdvXMLParser::Attribute *v131; // [esp+2E8h] [ebp-4ACh]
+  AdvXMLParser::Element *v134; // [esp+2F4h] [ebp-4A0h]
+  AdvXMLParser::Element *v135; // [esp+2F8h] [ebp-49Ch]
+  AdvXMLParser::Element *v136; // [esp+2FCh] [ebp-498h]
+  AdvXMLParser::Element *v137; // [esp+300h] [ebp-494h]
+  AdvXMLParser::Element *v138; // [esp+304h] [ebp-490h]
+  AdvXMLParser::Element *v139; // [esp+308h] [ebp-48Ch]
+  AdvXMLParser::Element *v140; // [esp+30Ch] [ebp-488h]
+  AdvXMLParser::Element *v141; // [esp+310h] [ebp-484h]
+  AdvXMLParser::Element *v142; // [esp+314h] [ebp-480h]
+  AdvXMLParser::Element *v143; // [esp+318h] [ebp-47Ch]
+  CSettlerMgr::SSearchInfos v144; // [esp+31Ch] [ebp-478h] BYREF
+  char v145; // [esp+323h] [ebp-471h]
+  CConfigManager *v146; // [esp+324h] [ebp-470h]
+  char v148[4]; // [esp+32Ch] [ebp-468h] BYREF
+  AdvXMLParser::Element *v151; // [esp+338h] [ebp-45Ch]
+  int v152; // [esp+33Ch] [ebp-458h]
+  AdvXMLParser::Element *v153; // [esp+340h] [ebp-454h]
+  int v154; // [esp+344h] [ebp-450h] BYREF
   int m_bMisc; // [esp+348h] [ebp-44Ch]
-  __int16 v162; // [esp+34Eh] [ebp-446h] BYREF
-  char v163[16]; // [esp+350h] [ebp-444h] BYREF
+  __int16 v156; // [esp+34Eh] [ebp-446h] BYREF
+  char v157[16]; // [esp+350h] [ebp-444h] BYREF
   int j; // [esp+364h] [ebp-430h]
-  char *v166; // [esp+368h] [ebp-42Ch]
+  char *v160; // [esp+368h] [ebp-42Ch]
   int i; // [esp+36Ch] [ebp-428h]
   int k; // [esp+370h] [ebp-424h]
   CSettlerMgr::SSettlerInfos *settlerInfo; // [esp+378h] [ebp-41Ch]
-  _BYTE v174[28]; // [esp+5A4h] [ebp-1F0h] BYREF
-  _BYTE v175[28]; // [esp+5C0h] [ebp-1D4h] BYREF
-  _BYTE v176[28]; // [esp+5DCh] [ebp-1B8h] BYREF
-  _BYTE v177[28]; // [esp+5F8h] [ebp-19Ch] BYREF
-  _BYTE v178[28]; // [esp+614h] [ebp-180h] BYREF
-  _BYTE v179[28]; // [esp+630h] [ebp-164h] BYREF
-  _BYTE v180[28]; // [esp+64Ch] [ebp-148h] BYREF
-  _BYTE v181[28]; // [esp+668h] [ebp-12Ch] BYREF
-  _BYTE v182[28]; // [esp+684h] [ebp-110h] BYREF
-  _BYTE v183[28]; // [esp+6A0h] [ebp-F4h] BYREF
-  _BYTE v184[28]; // [esp+6BCh] [ebp-D8h] BYREF
-  struct std::string v185; // [esp+6D8h] [ebp-BCh] BYREF
-  std::string v186; // [esp+6F4h] [ebp-A0h] BYREF
-  struct std::string v187; // [esp+710h] [ebp-84h] BYREF
-  struct std::string v188; // [esp+72Ch] [ebp-68h] BYREF
-  struct std::string v189; // [esp+748h] [ebp-4Ch] BYREF
-  char v190[28]; // [esp+764h] [ebp-30h] BYREF
-  int *v191; // [esp+784h] [ebp-10h]
-  int v192; // [esp+790h] [ebp-4h]
+  _BYTE v168[28]; // [esp+5A4h] [ebp-1F0h] BYREF
+  _BYTE v169[28]; // [esp+5C0h] [ebp-1D4h] BYREF
+  _BYTE v170[28]; // [esp+5DCh] [ebp-1B8h] BYREF
+  _BYTE v171[28]; // [esp+5F8h] [ebp-19Ch] BYREF
+  _BYTE v172[28]; // [esp+614h] [ebp-180h] BYREF
+  _BYTE v173[28]; // [esp+630h] [ebp-164h] BYREF
+  _BYTE v174[28]; // [esp+64Ch] [ebp-148h] BYREF
+  _BYTE v175[28]; // [esp+668h] [ebp-12Ch] BYREF
+  _BYTE v176[28]; // [esp+684h] [ebp-110h] BYREF
+  _BYTE v177[28]; // [esp+6A0h] [ebp-F4h] BYREF
+  _BYTE v178[28]; // [esp+6BCh] [ebp-D8h] BYREF
+  struct std::string v179; // [esp+6D8h] [ebp-BCh] BYREF
+  std::string v180; // [esp+6F4h] [ebp-A0h] BYREF
+  struct std::string v181; // [esp+710h] [ebp-84h] BYREF
+  struct std::string v182; // [esp+72Ch] [ebp-68h] BYREF
+  struct std::string v183; // [esp+748h] [ebp-4Ch] BYREF
+  char v184[28]; // [esp+764h] [ebp-30h] BYREF
+  int *v185; // [esp+784h] [ebp-10h]
+  int v186; // [esp+790h] [ebp-4h]
 
-  v191 = &v23;
+  v185 = &v23;
   if ( !this->m_bLoaded )
   {
+    v154 = 0;
     v160 = 0;
-    v166 = 0;
-    v166 = (char *)(isMP
-                  ? AdvXMLParser::Parser::OpenXMLFile(aGamedataSettle, &v160)
-                  : AdvXMLParser::Parser::OpenXMLFile(aGamedataSettle_0, &v160));
-    if ( v166 )
+    v160 = (char *)(isMP
+                  ? AdvXMLParser::Parser::OpenXMLFile(aGamedataSettle, &v154)
+                  : AdvXMLParser::Parser::OpenXMLFile(aGamedataSettle_0, &v154));
+    if ( v160 )
     {
-      v192 = 0;
+      v186 = 0;
       v36[18] = AdvXMLParser::Parser::Parser(v24);
-      LOBYTE(v192) = 1;
-      v62 = AdvXMLParser::Parser::Parse((AdvXMLParser::Parser *)v24, v166, v160);
-      std::auto_ptr<AdvXMLParser::Document>::auto_ptr<AdvXMLParser::Document>(v62);
-      LOBYTE(v192) = 2;
+      LOBYTE(v186) = 1;
+      v59 = AdvXMLParser::Parser::Parse((AdvXMLParser::Parser *)v24, v160, v154);
+      std::auto_ptr<AdvXMLParser::Document>::auto_ptr<AdvXMLParser::Document>(v59);
+      LOBYTE(v186) = 2;
       v2 = std::auto_ptr<AdvXMLParser::Document>::operator->(v23);
       Root = (void *)AdvXMLParser::Document::GetRoot(v2);
-      v132 = Root;
+      v129 = Root;
       defineTranslator = (struct CDefineTranslator *)CDefineTranslator::Instance();
       v36[10] = 0;
-      v59 = (_DWORD *)AdvXMLParser::NodeContainer::Begin(v132, v32);
-      v58 = v59;
-      LOBYTE(v192) = 3;
-      v36[9] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v43, v59);
-      LOBYTE(v192) = 5;
+      v56 = (_DWORD *)AdvXMLParser::NodeContainer::Begin(v129, v32);
+      v55 = v56;
+      LOBYTE(v186) = 3;
+      v36[9] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v40, v56);
+      LOBYTE(v186) = 5;
       AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v32);
-      v57 = AdvXMLParser::NodeContainer::End(v132, v31);
-      v56 = v57;
-      LOBYTE(v192) = 6;
-      v36[8] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v33, v57);
-      LOBYTE(v192) = 8;
+      v54 = AdvXMLParser::NodeContainer::End(v129, v31);
+      v53 = v54;
+      LOBYTE(v186) = 6;
+      v36[8] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v33, v54);
+      LOBYTE(v186) = 8;
       AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v31);
-      while ( AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator<(v43, (int)v33) )
+      while ( AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator<(v40, (int)v33) )
       {
-        v55 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v43);
-        v54 = AdvXMLParser::Element::operator[](v55, "id");
-        v133 = v54;
-        v36[7] = v54->GetValue(v54, &v187);
-        LOBYTE(v192) = 9;
-        ValueOfDefine = CDefineTranslator::GetValueOfDefine(defineTranslator, &v187);
+        v52 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v40);
+        v51 = AdvXMLParser::Element::operator[](v52, "id");
+        v130 = v51;
+        v36[7] = v51->GetValue(v51, &v181);
+        LOBYTE(v186) = 9;
+        ValueOfDefine = CDefineTranslator::GetValueOfDefine(defineTranslator, &v181);
         tribeId = ValueOfDefine;
-        v52 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v43);
-        v51 = (_DWORD *)AdvXMLParser::NodeContainer::Begin(v52, v30);
-        v50 = v51;
-        LOBYTE(v192) = 10;
-        v36[6] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v163, v51);
-        LOBYTE(v192) = 12;
-        AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v30);
-        v49 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v43);
-        v48 = AdvXMLParser::NodeContainer::End(v49, v29);
+        v49 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v40);
+        v48 = (_DWORD *)AdvXMLParser::NodeContainer::Begin(v49, v30);
         v47 = v48;
-        LOBYTE(v192) = 13;
-        v36[5] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v34, v48);
-        LOBYTE(v192) = 15;
+        LOBYTE(v186) = 10;
+        v36[6] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v157, v48);
+        LOBYTE(v186) = 12;
+        AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v30);
+        v46 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v40);
+        v45 = AdvXMLParser::NodeContainer::End(v46, v29);
+        v44 = v45;
+        LOBYTE(v186) = 13;
+        v36[5] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v34, v45);
+        LOBYTE(v186) = 15;
         AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v29);
-        while ( AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator<(v163, (int)v34) )
+        while ( AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator<(v157, (int)v34) )
         {
-          v46 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v163);
-          v36[4] = v46;
-          v45 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v163);
-          v44 = AdvXMLParser::Element::operator[](v45, "id");
-          v134 = v44;
-          v36[20] = v44->GetValue(v44, &v186);
-          LOBYTE(v192) = 16;
+          v43 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v157);
+          v36[4] = v43;
+          v42 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v157);
+          v41 = AdvXMLParser::Element::operator[](v42, "id");
+          v131 = v41;
+          v36[20] = v41->GetValue(v41, &v180);
+          LOBYTE(v186) = 16;
           configManager = CConfigManagerPtr::GetInstance();
-          v3 = std::string::c_str(&v186);
+          v3 = std::string::c_str(&v180);
           settlerInfoId = configManager->GetDefineValue(configManager, v3);
           if ( settlerInfoId == -1 )
           {
-            v129 = BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 1791, "index != -1");
-            if ( v129 == 1 )
+            v126 = BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 1791, "index != -1");
+            if ( v126 == 1 )
               __debugbreak();
           }
-          settlerInfo = &CSettlerMgr::m_vSettlerInfos[70 * tribeId + settlerInfoId];
-          v127 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v163);
-          v126 = AdvXMLParser::Element::operator()(v127, "role", 0);
-          v138 = v126;
-          v36[19] = ((int (__thiscall *)(AdvXMLParser::Element *, struct std::string *))v126->GetValue)(v126, &v185);
-          LOBYTE(v192) = 17;
-          v125 = CDefineTranslator::GetValueOfDefine(defineTranslator, &v185);
-          settlerInfo->m_uRole = v125;
-          v124 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v163);
-          v123 = AdvXMLParser::Element::operator()(v124, "speed", 0);
-          v139 = v123;
-          v122 = (std::string *)((int (__thiscall *)(AdvXMLParser::Element *, _BYTE *))v123->GetValue)(v123, v174);
-          v4 = std::string::c_str(v122);
+          settlerInfo = &CSettlerMgr::m_vSettlerInfos[tribeId][settlerInfoId];
+          v124 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v157);
+          v123 = AdvXMLParser::Element::operator()(v124, "role", 0);
+          v135 = v123;
+          v36[19] = ((int (__thiscall *)(AdvXMLParser::Element *, struct std::string *))v123->GetValue)(v123, &v179);
+          LOBYTE(v186) = 17;
+          v122 = CDefineTranslator::GetValueOfDefine(defineTranslator, &v179);
+          settlerInfo->m_uRole = v122;
+          v121 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v157);
+          v120 = AdvXMLParser::Element::operator()(v121, "speed", 0);
+          v136 = v120;
+          v119 = (std::string *)((int (__thiscall *)(AdvXMLParser::Element *, _BYTE *))v120->GetValue)(v120, v168);
+          v4 = std::string::c_str(v119);
           v5 = j__atoi(v4);
           settlerInfo->m_bSpeed = v5;
-          std::string::~string(v174);
-          v121 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v163);
-          v120 = AdvXMLParser::Element::operator()(v121, "health", 0);
-          v140 = v120;
-          v119 = (std::string *)((int (__thiscall *)(AdvXMLParser::Element *, _BYTE *))v120->GetValue)(v120, v175);
-          v6 = std::string::c_str(v119);
+          std::string::~string(v168);
+          v118 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v157);
+          v117 = AdvXMLParser::Element::operator()(v118, "health", 0);
+          v137 = v117;
+          v116 = (std::string *)((int (__thiscall *)(AdvXMLParser::Element *, _BYTE *))v117->GetValue)(v117, v169);
+          v6 = std::string::c_str(v116);
           v7 = j__atoi(v6);
           settlerInfo->m_iMaxLifePoints = v7;
-          std::string::~string(v175);
-          v118 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v163);
-          v117 = AdvXMLParser::Element::operator()(v118, "armor", 0);
-          v141 = v117;
-          v116 = (std::string *)((int (__thiscall *)(AdvXMLParser::Element *, _BYTE *))v117->GetValue)(v117, v176);
-          v8 = std::string::c_str(v116);
+          std::string::~string(v169);
+          v115 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v157);
+          v114 = AdvXMLParser::Element::operator()(v115, "armor", 0);
+          v138 = v114;
+          v113 = (std::string *)((int (__thiscall *)(AdvXMLParser::Element *, _BYTE *))v114->GetValue)(v114, v170);
+          v8 = std::string::c_str(v113);
           v9 = j__atoi(v8);
           settlerInfo->m_bArmor = v9;
-          std::string::~string(v176);
-          v115 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v163);
-          v114 = AdvXMLParser::Element::operator()(v115, "damage", 0);
-          v142 = v114;
-          v113 = (std::string *)((int (__thiscall *)(AdvXMLParser::Element *, _BYTE *))v114->GetValue)(v114, v184);
-          v10 = std::string::c_str(v113);
+          std::string::~string(v170);
+          v112 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v157);
+          v111 = AdvXMLParser::Element::operator()(v112, "damage", 0);
+          v139 = v111;
+          v110 = (std::string *)((int (__thiscall *)(AdvXMLParser::Element *, _BYTE *))v111->GetValue)(v111, v178);
+          v10 = std::string::c_str(v110);
           v11 = j__atoi(v10);
           settlerInfo->m_bDamage = v11;
-          std::string::~string(v184);
-          v112 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v163);
-          v111 = AdvXMLParser::Element::operator()(v112, "damage2", 0);
-          v143 = v111;
-          v110 = (std::string *)((int (__thiscall *)(AdvXMLParser::Element *, _BYTE *))v111->GetValue)(v111, v177);
-          v12 = std::string::c_str(v110);
+          std::string::~string(v178);
+          v109 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v157);
+          v108 = AdvXMLParser::Element::operator()(v109, "damage2", 0);
+          v140 = v108;
+          v107 = (std::string *)((int (__thiscall *)(AdvXMLParser::Element *, _BYTE *))v108->GetValue)(v108, v171);
+          v12 = std::string::c_str(v107);
           v13 = j__atoi(v12);
           settlerInfo->m_bDamage2 = v13;
-          std::string::~string(v177);
-          v109 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v163);
-          v108 = AdvXMLParser::Element::operator()(v109, "damage3", 0);
-          v144 = v108;
-          v107 = (std::string *)((int (__thiscall *)(AdvXMLParser::Element *, _BYTE *))v108->GetValue)(v108, v178);
-          v14 = std::string::c_str(v107);
+          std::string::~string(v171);
+          v106 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v157);
+          v105 = AdvXMLParser::Element::operator()(v106, "damage3", 0);
+          v141 = v105;
+          v104 = (std::string *)((int (__thiscall *)(AdvXMLParser::Element *, _BYTE *))v105->GetValue)(v105, v172);
+          v14 = std::string::c_str(v104);
           v15 = j__atoi(v14);
           settlerInfo->m_bDamage3 = v15;
-          std::string::~string(v178);
-          v106 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v163);
-          v105 = AdvXMLParser::Element::operator()(v106, "other", 0);
-          v145 = v105;
-          v104 = (std::string *)((int (__thiscall *)(AdvXMLParser::Element *, _BYTE *))v105->GetValue)(v105, v179);
-          v103 = v104;
-          LOBYTE(v192) = 18;
-          v16 = std::string::c_str(v104);
-          v36[11] = std::string::string(&v188, v16);
-          LOBYTE(v192) = 19;
-          v102 = CDefineTranslator::GetValueOfDefine(defineTranslator, &v188);
-          settlerInfo->m_uFarmerType = v102;
-          LOBYTE(v192) = 18;
-          std::string::~string(&v188);
-          LOBYTE(v192) = 17;
-          std::string::~string(v179);
-          v101 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v163);
-          v100 = AdvXMLParser::Element::operator()(v101, "tool", 0);
-          v146 = v100;
+          std::string::~string(v172);
+          v103 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v157);
+          v102 = AdvXMLParser::Element::operator()(v103, "other", 0);
+          v142 = v102;
+          v101 = (std::string *)((int (__thiscall *)(AdvXMLParser::Element *, _BYTE *))v102->GetValue)(v102, v173);
+          v100 = v101;
+          LOBYTE(v186) = 18;
+          v16 = std::string::c_str(v101);
+          v36[11] = std::string::string(&v182, v16);
+          LOBYTE(v186) = 19;
+          v99 = CDefineTranslator::GetValueOfDefine(defineTranslator, &v182);
+          settlerInfo->m_uFarmerType = v99;
+          LOBYTE(v186) = 18;
+          std::string::~string(&v182);
+          LOBYTE(v186) = 17;
+          std::string::~string(v173);
+          v98 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v157);
+          v97 = AdvXMLParser::Element::operator()(v98, "tool", 0);
+          v143 = v97;
           configManager = CConfigManagerPtr::GetInstance();
-          v152 = configManager;
-          v98 = (std::string *)((int (__thiscall *)(AdvXMLParser::Element *, _BYTE *))v146->GetValue)(v146, v180);
-          v97 = v98;
-          LOBYTE(v192) = 20;
-          v17 = std::string::c_str(v98);
-          v96 = v152->GetDefineValue(v152, v17);
-          settlerInfo->m_uTool = v96;
-          LOBYTE(v192) = 17;
-          std::string::~string(v180);
+          v146 = configManager;
+          v95 = (std::string *)((int (__thiscall *)(AdvXMLParser::Element *, _BYTE *))v143->GetValue)(v143, v174);
+          v94 = v95;
+          LOBYTE(v186) = 20;
+          v17 = std::string::c_str(v95);
+          v93 = v146->GetDefineValue(v146, v17);
+          settlerInfo->m_uTool = v93;
+          LOBYTE(v186) = 17;
+          std::string::~string(v174);
           if ( settlerInfo->m_uTool == -1 )
           {
-            v95 = BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 1811, "sI.m_uTool != -1");
-            if ( v95 == 1 )
+            v92 = BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 1811, "sI.m_uTool != -1");
+            if ( v92 == 1 )
               __debugbreak();
           }
-          v94 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v163);
-          v93 = AdvXMLParser::Element::operator()(v94, "misc", 0);
-          v137 = v93;
-          v92 = (std::string *)((int (__thiscall *)(AdvXMLParser::Element *, _BYTE *))v93->GetValue)(v93, v181);
-          v18 = std::string::c_str(v92);
+          v91 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v157);
+          v90 = AdvXMLParser::Element::operator()(v91, "misc", 0);
+          v134 = v90;
+          v89 = (std::string *)((int (__thiscall *)(AdvXMLParser::Element *, _BYTE *))v90->GetValue)(v90, v175);
+          v18 = std::string::c_str(v89);
           v19 = j__atoi(v18);
           settlerInfo->m_bMisc = v19;
-          std::string::~string(v181);
-          v91 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v163);
-          v90 = AdvXMLParser::Element::operator()(v91, "search", 0);
-          v89 = (_DWORD *)AdvXMLParser::NodeContainer::Begin(v90, v28);
-          v88 = v89;
-          LOBYTE(v192) = 21;
-          v36[17] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v37, v89);
-          LOBYTE(v192) = 23;
+          std::string::~string(v175);
+          v88 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v157);
+          v87 = AdvXMLParser::Element::operator()(v88, "search", 0);
+          v86 = (_DWORD *)AdvXMLParser::NodeContainer::Begin(v87, v28);
+          v85 = v86;
+          LOBYTE(v186) = 21;
+          v36[17] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v37, v86);
+          LOBYTE(v186) = 23;
           AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v28);
-          v87 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v163);
-          v86 = AdvXMLParser::Element::operator()(v87, "search", 0);
-          v85 = AdvXMLParser::NodeContainer::End(v86, v25);
-          v84 = v85;
-          LOBYTE(v192) = 24;
-          v36[16] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v35, v85);
-          LOBYTE(v192) = 26;
+          v84 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v157);
+          v83 = AdvXMLParser::Element::operator()(v84, "search", 0);
+          v82 = AdvXMLParser::NodeContainer::End(v83, v25);
+          v81 = v82;
+          LOBYTE(v186) = 24;
+          v36[16] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v35, v82);
+          LOBYTE(v186) = 26;
           AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v25);
           while ( AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator<(v37, (int)v35) )
           {
-            v83 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v37);
-            v159 = v83;
-            v82 = (std::string *)((int (__thiscall *)(AdvXMLParser::Element *, _BYTE *))v83->GetValue)(v83, v182);
-            v81 = v82;
-            LOBYTE(v192) = 27;
-            v20 = std::string::c_str(v82);
-            v36[15] = std::string::string(&v189, v20);
-            LOBYTE(v192) = 29;
-            std::string::~string(v182);
-            v80 = CDefineTranslator::GetValueOfDefine(defineTranslator, &v189);
-            v158 = v80;
-            SearchData = CSearchRoutines::GetSearchData(v80);
-            v39 = *(_DWORD *)SearchData;
-            v40 = *((_DWORD *)SearchData + 1);
-            v41 = *((_DWORD *)SearchData + 2);
-            v42 = *((_DWORD *)SearchData + 3);
-            v147 = v39;
-            v148 = v158;
-            v149 = v41;
-            v150 = v42;
-            v151 = 0;
-            std::vector<CSettlerMgr::SSearchInfos>::push_back(&v147);
-            LOBYTE(v192) = 26;
-            std::string::~string(&v189);
+            v80 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v37);
+            v153 = v80;
+            v79 = (std::string *)((int (__thiscall *)(AdvXMLParser::Element *, _BYTE *))v80->GetValue)(v80, v176);
+            v78 = v79;
+            LOBYTE(v186) = 27;
+            v20 = std::string::c_str(v79);
+            v36[15] = std::string::string(&v183, v20);
+            LOBYTE(v186) = 29;
+            std::string::~string(v176);
+            v77 = CDefineTranslator::GetValueOfDefine(defineTranslator, &v183);
+            v152 = v77;
+            SearchData = (SSearchData *)CSearchRoutines::GetSearchData(v77);
+            v39 = *SearchData;
+            v144.m_pSearchFkt = v39.m_pSearchFunk;
+            v144.m_iSearchType = v152;
+            v144.m_iOffsetX = v39.m_iOffsetX;
+            v144.m_iOffsetY = v39.m_iOffsetY;
+            v145 = 0;
+            std::vector<CSettlerMgr::SSearchInfos>::push_back(&v144);
+            LOBYTE(v186) = 26;
+            std::string::~string(&v183);
             AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator++(v37);
           }
-          v78 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v163);
-          v77 = AdvXMLParser::Element::operator()(v78, "animLists", 0);
-          v76 = (_DWORD *)AdvXMLParser::NodeContainer::Begin(v77, v27);
-          v75 = v76;
-          LOBYTE(v192) = 30;
-          v36[14] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v38, v76);
-          LOBYTE(v192) = 32;
+          v75 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v157);
+          v74 = AdvXMLParser::Element::operator()(v75, "animLists", 0);
+          v73 = (_DWORD *)AdvXMLParser::NodeContainer::Begin(v74, v27);
+          v72 = v73;
+          LOBYTE(v186) = 30;
+          v36[14] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v38, v73);
+          LOBYTE(v186) = 32;
           AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v27);
-          v74 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v163);
-          v73 = AdvXMLParser::Element::operator()(v74, "animLists", 0);
-          v72 = AdvXMLParser::NodeContainer::End(v73, v26);
-          v71 = v72;
-          LOBYTE(v192) = 33;
-          v36[13] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v36, v72);
-          LOBYTE(v192) = 35;
+          v71 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v157);
+          v70 = AdvXMLParser::Element::operator()(v71, "animLists", 0);
+          v69 = AdvXMLParser::NodeContainer::End(v70, v26);
+          v68 = v69;
+          LOBYTE(v186) = 33;
+          v36[13] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v36, v69);
+          LOBYTE(v186) = 35;
           AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v26);
           while ( AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator<(v38, (int)v36) )
           {
-            v70 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v38);
-            v157 = v70;
-            v69 = (std::string *)((int (__thiscall *)(AdvXMLParser::Element *, _BYTE *))v70->GetValue)(v70, v183);
-            v68 = v69;
-            LOBYTE(v192) = 36;
-            v21 = std::string::c_str(v69);
-            v36[12] = std::string::string((std::string *)v190, v21);
-            LOBYTE(v192) = 38;
-            std::string::~string(v183);
+            v67 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v38);
+            v151 = v67;
+            v66 = (std::string *)((int (__thiscall *)(AdvXMLParser::Element *, _BYTE *))v67->GetValue)(v67, v177);
+            v65 = v66;
+            LOBYTE(v186) = 36;
+            v21 = std::string::c_str(v66);
+            v36[12] = std::string::string((std::string *)v184, v21);
+            LOBYTE(v186) = 38;
+            std::string::~string(v177);
             configManager = CConfigManagerPtr::GetInstance();
-            v22 = std::string::c_str((std::string *)v190);
+            v22 = std::string::c_str((std::string *)v184);
             iAnimList = configManager->GetDefineValue(configManager, v22);
             if ( iAnimList == -1 )
             {
-              v65 = BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 1842, "iAnimList != -1");
-              if ( v65 == 1 )
+              v62 = BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 1842, "iAnimList != -1");
+              if ( v62 == 1 )
                 __debugbreak();
             }
-            v162 = iAnimList;
-            std::vector<unsigned short>::push_back(settlerInfo->g_vAnimLists, &v162);
-            LOBYTE(v192) = 35;
-            std::string::~string(v190);
+            v156 = iAnimList;
+            std::vector<unsigned short>::push_back(&settlerInfo->g_vAnimLists, &v156);
+            LOBYTE(v186) = 35;
+            std::string::~string(v184);
             AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator++(v38);
           }
-          LOBYTE(v192) = 32;
+          LOBYTE(v186) = 32;
           AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>(v36);
-          LOBYTE(v192) = 26;
+          LOBYTE(v186) = 26;
           AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>(v38);
-          LOBYTE(v192) = 23;
+          LOBYTE(v186) = 23;
           AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>(v35);
-          LOBYTE(v192) = 17;
+          LOBYTE(v186) = 17;
           AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>(v37);
-          LOBYTE(v192) = 16;
-          std::string::~string(&v185);
-          LOBYTE(v192) = 15;
-          std::string::~string(&v186);
-          AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator++(v163);
+          LOBYTE(v186) = 16;
+          std::string::~string(&v179);
+          LOBYTE(v186) = 15;
+          std::string::~string(&v180);
+          AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator++(v157);
         }
-        LOBYTE(v192) = 12;
+        LOBYTE(v186) = 12;
         AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>(v34);
-        LOBYTE(v192) = 9;
-        AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>(v163);
-        LOBYTE(v192) = 8;
-        std::string::~string(&v187);
-        AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator++(v43);
+        LOBYTE(v186) = 9;
+        AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>(v157);
+        LOBYTE(v186) = 8;
+        std::string::~string(&v181);
+        AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator++(v40);
       }
-      LOBYTE(v192) = 5;
+      LOBYTE(v186) = 5;
       AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>(v33);
-      LOBYTE(v192) = 2;
-      AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>(v43);
-      LOBYTE(v192) = 1;
-      std::auto_ptr<AdvXMLParser::Document>::~auto_ptr<AdvXMLParser::Document>(v154);
-      LOBYTE(v192) = 0;
+      LOBYTE(v186) = 2;
+      AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>(v40);
+      LOBYTE(v186) = 1;
+      std::auto_ptr<AdvXMLParser::Document>::~auto_ptr<AdvXMLParser::Document>(v148);
+      LOBYTE(v186) = 0;
       AdvXMLParser::Parser::~Parser(v24);
-      v192 = -1;
-      C = v166;
-      operator delete[](v166);
+      v186 = -1;
+      C = v160;
+      operator delete[](v160);
       for ( i = 1; i < 67; ++i )
       {
         for ( j = 0; j < 5; ++j )
         {
-          if ( !CSettlerMgr::m_vSettlerInfos[70 * j + i].m_uRole )// If info not set, replace with info from first tribe
+          if ( !CSettlerMgr::m_vSettlerInfos[j][i].m_uRole )// If info not set, replace with info from first tribe
             CSettlerMgr::SSettlerInfos::operator=(
-              &CSettlerMgr::m_vSettlerInfos[70 * j + i],
-              &CSettlerMgr::m_vSettlerInfos[i]);
+              &CSettlerMgr::m_vSettlerInfos[j][i],
+              &CSettlerMgr::m_vSettlerInfos[0][i]);
         }
       }
-      m_bMisc = CSettlerMgr::m_vSettlerInfos[44].m_bMisc;
+      m_bMisc = CSettlerMgr::m_vSettlerInfos[0][44].m_bMisc;
       if ( !m_bMisc )
         m_bMisc = 10;
       CSettlerMgr::m_iSquadLeaderBoni256[0] = (m_bMisc << 8) / 100;
@@ -980,36 +971,36 @@ void  CSettlerMgr::LoadInfo(bool isMP) {
       {
         if ( k )
         {
-          if ( CSettlerMgr::m_vSettlerInfos[70 * k + 44].m_bMisc )// Seems like squad leader boni are set here, with the id coming from the config.
+          if ( CSettlerMgr::m_vSettlerInfos[k][44].m_bMisc )// Seems like squad leader boni are set here, with the id coming from the config.
                                                 // misc is either squad bonus attack in % or medic healing per animation and it seems like other special troops
             CSettlerMgr::m_iSquadLeaderBoni256[k] = CSettlerMgr::m_iSquadLeaderBoni256[0];
           else
             CSettlerMgr::m_iSquadLeaderBoni256[k] = 0;
         }
       }
-      if ( !CSettlerMgr::m_vSettlerInfos[35].m_bMisc )
-        CSettlerMgr::m_vSettlerInfos[35].m_bMisc = 3;
-      if ( !CSettlerMgr::m_vSettlerInfos[36].m_bMisc )
-        CSettlerMgr::m_vSettlerInfos[36].m_bMisc = 5;
-      if ( !CSettlerMgr::m_vSettlerInfos[37].m_bMisc )
-        CSettlerMgr::m_vSettlerInfos[37].m_bMisc = 7;
-      if ( CSettlerMgr::m_vSettlerInfos[181].m_bMisc )
-        g_iBlowgunWarriorFreezeChange = CRandom16::PercentValue(CSettlerMgr::m_vSettlerInfos[181].m_bMisc);
-      if ( CSettlerMgr::m_vSettlerInfos[182].m_bMisc )
-        *(&g_iBlowgunWarriorFreezeChange + 1) = CRandom16::PercentValue(CSettlerMgr::m_vSettlerInfos[182].m_bMisc);
-      if ( CSettlerMgr::m_vSettlerInfos[183].m_bMisc )
-        *(&g_iBlowgunWarriorFreezeChange + 2) = CRandom16::PercentValue(CSettlerMgr::m_vSettlerInfos[183].m_bMisc);
-      if ( !CSettlerMgr::m_vSettlerInfos[201].m_bMisc )
-        CSettlerMgr::m_vSettlerInfos[201].m_bMisc = 55;
-      g_iBackPackCatapultistPercent[0] = CSettlerMgr::m_vSettlerInfos[201].m_bMisc;
-      if ( !CSettlerMgr::m_vSettlerInfos[202].m_bMisc )
-        CSettlerMgr::m_vSettlerInfos[202].m_bMisc = 65;
-      g_iBackPackCatapultistPercent[1] = CSettlerMgr::m_vSettlerInfos[202].m_bMisc;
-      if ( !CSettlerMgr::m_vSettlerInfos[203].m_bMisc )
-        CSettlerMgr::m_vSettlerInfos[203].m_bMisc = 75;
-      g_iBackPackCatapultistPercent[2] = CSettlerMgr::m_vSettlerInfos[203].m_bMisc;
-      if ( CSettlerMgr::m_vSettlerInfos[46].m_bMisc )
-        g_uSaboteurHitChange = CRandom16::PercentValue(CSettlerMgr::m_vSettlerInfos[46].m_bMisc);
+      if ( !CSettlerMgr::m_vSettlerInfos[0][35].m_bMisc )
+        CSettlerMgr::m_vSettlerInfos[0][35].m_bMisc = 3;
+      if ( !CSettlerMgr::m_vSettlerInfos[0][36].m_bMisc )
+        CSettlerMgr::m_vSettlerInfos[0][36].m_bMisc = 5;
+      if ( !CSettlerMgr::m_vSettlerInfos[0][37].m_bMisc )
+        CSettlerMgr::m_vSettlerInfos[0][37].m_bMisc = 7;
+      if ( CSettlerMgr::m_vSettlerInfos[2][41].m_bMisc )
+        g_iBlowgunWarriorFreezeChange = CRandom16::PercentValue(CSettlerMgr::m_vSettlerInfos[2][41].m_bMisc);
+      if ( CSettlerMgr::m_vSettlerInfos[2][42].m_bMisc )
+        *(&g_iBlowgunWarriorFreezeChange + 1) = CRandom16::PercentValue(CSettlerMgr::m_vSettlerInfos[2][42].m_bMisc);
+      if ( CSettlerMgr::m_vSettlerInfos[2][43].m_bMisc )
+        *(&g_iBlowgunWarriorFreezeChange + 2) = CRandom16::PercentValue(CSettlerMgr::m_vSettlerInfos[2][43].m_bMisc);
+      if ( !CSettlerMgr::m_vSettlerInfos[2][61].m_bMisc )
+        CSettlerMgr::m_vSettlerInfos[2][61].m_bMisc = 55;
+      g_iBackPackCatapultistPercent[0] = CSettlerMgr::m_vSettlerInfos[2][61].m_bMisc;
+      if ( !CSettlerMgr::m_vSettlerInfos[2][62].m_bMisc )
+        CSettlerMgr::m_vSettlerInfos[2][62].m_bMisc = 65;
+      g_iBackPackCatapultistPercent[1] = CSettlerMgr::m_vSettlerInfos[2][62].m_bMisc;
+      if ( !CSettlerMgr::m_vSettlerInfos[2][63].m_bMisc )
+        CSettlerMgr::m_vSettlerInfos[2][63].m_bMisc = 75;
+      g_iBackPackCatapultistPercent[2] = CSettlerMgr::m_vSettlerInfos[2][63].m_bMisc;
+      if ( CSettlerMgr::m_vSettlerInfos[0][46].m_bMisc )
+        g_uSaboteurHitChange = CRandom16::PercentValue(CSettlerMgr::m_vSettlerInfos[0][46].m_bMisc);
     }
   }
 }
@@ -1453,7 +1444,7 @@ int  CSettlerMgr::OrderWarrior(int _iBuildingId, int _iSettlerType, int _iMaxDis
   while ( iSettlerIdIter )
   {
     rSettlerIter = CSettlerMgr::operator[](iSettlerIdIter);
-    if ( IEntity::FlagBits(rSettlerIter, EntityFlag_Selectable) )
+    if ( IEntity::FlagBits(rSettlerIter, ENTITY_FLAG_Selectable) )
     {
       iIdx = IEntity::WorldIdx();
       if ( CWorldManager::SectorId(iIdx) == iBuildingSector )
@@ -1476,7 +1467,7 @@ int  CSettlerMgr::OrderWarrior(int _iBuildingId, int _iSettlerType, int _iMaxDis
   if ( !iNearestFreeSoldierId )
     return 0;
   v10 = CSettlerMgr::operator[](iNearestFreeSoldierId);
-  IEntity::ClearFlagBits(v10, EntityFlag_Selectable);
+  IEntity::ClearFlagBits(v10, ENTITY_FLAG_Selectable);
   if ( iOwnerId == CPlayerManager::GetLocalPlayerId() )
     CInputProcessor::DeSelectEntity(&g_cInputProcessor, iNearestFreeSoldierId);
   rSettler = CSettlerMgr::operator[](iNearestFreeSoldierId);
@@ -1520,7 +1511,7 @@ int  CSettlerMgr::OrderAIWarrior(int _iBuildingId, int _iWarriorType) {
     return 0;
   pSettler = CSettlerMgr::GetSettlerPtr(this, iTargetId);
   if ( !pSettler
-    || IEntity::FlagBits(pSettler, EntityFlag_Ready|EntityFlag_OnBoard|EntityFlag_Selectable) != (EntityFlag_Ready|EntityFlag_Selectable)
+    || IEntity::FlagBits(pSettler, ENTITY_FLAG_Ready|ENTITY_FLAG_OnBoard|ENTITY_FLAG_Selectable) != (ENTITY_FLAG_Ready|ENTITY_FLAG_Selectable)
     || IEntity::WarriorType(pSettler) != AI_WARRIOR_TYPE_SWORDMAN
     && IEntity::WarriorType(pSettler) != AI_WARRIOR_TYPE_BOWMAN )
   {
@@ -1537,7 +1528,7 @@ int  CSettlerMgr::OrderAIWarrior(int _iBuildingId, int _iWarriorType) {
         v9 = ITiling::SectorId(v5),
         v10 == v9) )
   {
-    IEntity::ClearFlagBits(pSettler, EntityFlag_Selectable);
+    IEntity::ClearFlagBits(pSettler, ENTITY_FLAG_Selectable);
     if ( iOwnerId == CPlayerManager::GetLocalPlayerId() )
       CInputProcessor::DeSelectEntity(&g_cInputProcessor, iTargetId);
     IEntity::RemoveFromAllGroups();
@@ -1608,7 +1599,7 @@ int  CSettlerMgr::OrderSpecialist(int a2, int _iSettlerType) {
   while ( iSettlerIdIter )
   {
     rSettlerIter = CSettlerMgr::operator[](iSettlerIdIter);
-    if ( IEntity::FlagBits(rSettlerIter, EntityFlag_Selectable) )
+    if ( IEntity::FlagBits(rSettlerIter, ENTITY_FLAG_Selectable) )
     {
       iIdx = IEntity::WorldIdx();
       if ( CWorldManager::SectorId(iIdx) == iSectorId )
@@ -1630,7 +1621,7 @@ int  CSettlerMgr::OrderSpecialist(int a2, int _iSettlerType) {
   if ( !iClosestSettlerId )
     return 0;
   v17 = CSettlerMgr::operator[](iClosestSettlerId);
-  IEntity::ClearFlagBits(v17, EntityFlag_Selectable);
+  IEntity::ClearFlagBits(v17, ENTITY_FLAG_Selectable);
   if ( iOwnerId == CPlayerManager::GetLocalPlayerId() )
     CInputProcessor::DeSelectEntity(&g_cInputProcessor, iClosestSettlerId);
   v12 = CEntityEvent::CEntityEvent(&cEvent, 0x18u, 0, a2, 0, 0);
@@ -1659,7 +1650,7 @@ void  CSettlerMgr::OrderWarriorToTower(int _iBuildingId, int _iSettlerId) {
   pSettler = CSettlerMgr::GetSettlerPtr(this, _iSettlerId);
   if ( !pSettler && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 1228, "pSettler != 0") == 1 )
     __debugbreak();
-  IEntity::ClearFlagBits(pSettler, EntityFlag_Selectable);
+  IEntity::ClearFlagBits(pSettler, ENTITY_FLAG_Selectable);
   v3 = IEntity::OwnerId(pSettler);
   if ( v3 == CPlayerManager::GetLocalPlayerId() )
     CInputProcessor::DeSelectEntity(&g_cInputProcessor, _iSettlerId);
@@ -2350,7 +2341,7 @@ void  CSettlerMgr::Load(class S4::CMapFile & a2) {
       v6 = (IEntity *)CPersistence::New((struct std::istream *)stream);
       v5 = v6;
       ++this->m_uTotalSettlers;
-      IEntity::ClearFlagBits(v5, EntityFlag_Selected);
+      IEntity::ClearFlagBits(v5, ENTITY_FLAG_Selected);
     }
     for ( i = 0; i < 9; ++i )
     {
@@ -2503,12 +2494,12 @@ void  CSettlerMgr::AttachSettler(class CSettler & _rSettler) {
   int iSettlerType; // [esp+10h] [ebp-8h]
   int iPlayerId; // [esp+14h] [ebp-4h]
 
-  if ( IEntity::FlagBits(_rSettler, EntityFlag_Offered)
+  if ( IEntity::FlagBits(_rSettler, ENTITY_FLAG_Offered)
     && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 806, "_rSettler.FlagBits(ENTITY_FLAG_OFFERED) == 0") == 1 )
   {
     __debugbreak();
   }
-  if ( IEntity::FlagBits(_rSettler, EntityFlag_GlobalOffered)
+  if ( IEntity::FlagBits(_rSettler, ENTITY_FLAG_GlobalOffered)
     && BBSupportDbgReport(
          2,
          "MapObjects\\Settler\\SettlerMgr.cpp",
@@ -2527,8 +2518,8 @@ void  CSettlerMgr::AttachSettler(class CSettler & _rSettler) {
   {
     __debugbreak();
   }
-  IEntity::ClearFlagBits(_rSettler, EntityFlag_Offered);
-  IEntity::SetFlagBits(_rSettler, EntityFlag_GlobalOffered);
+  IEntity::ClearFlagBits(_rSettler, ENTITY_FLAG_Offered);
+  IEntity::SetFlagBits(_rSettler, ENTITY_FLAG_GlobalOffered);
   iPlayerId = IEntity::OwnerId(_rSettler);
   iSettlerId = IEntity::EntityId(_rSettler);
   iSettlerType = IEntity::Type(_rSettler);
@@ -2591,12 +2582,12 @@ void  CSettlerMgr::DetachSettler(class CSettler & _rSettler) {
   int iSettlerType; // [esp+18h] [ebp-8h]
   int iPlayerId; // [esp+1Ch] [ebp-4h]
 
-  if ( IEntity::FlagBits(_rSettler, EntityFlag_Offered)
+  if ( IEntity::FlagBits(_rSettler, ENTITY_FLAG_Offered)
     && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 889, "_rSettler.FlagBits(ENTITY_FLAG_OFFERED) == 0") == 1 )
   {
     __debugbreak();
   }
-  if ( !IEntity::FlagBits(_rSettler, EntityFlag_GlobalOffered)
+  if ( !IEntity::FlagBits(_rSettler, ENTITY_FLAG_GlobalOffered)
     && BBSupportDbgReport(
          2,
          "MapObjects\\Settler\\SettlerMgr.cpp",
@@ -2605,7 +2596,7 @@ void  CSettlerMgr::DetachSettler(class CSettler & _rSettler) {
   {
     __debugbreak();
   }
-  IEntity::ClearFlagBits(_rSettler, EntityFlag_GlobalOffered|EntityFlag_Offered);
+  IEntity::ClearFlagBits(_rSettler, ENTITY_FLAG_GlobalOffered|ENTITY_FLAG_Offered);
   iPlayerId = IEntity::OwnerId(_rSettler);
   iSettlerId = IEntity::EntityId(_rSettler);
   iSettlerType = IEntity::Type(_rSettler);
@@ -2734,15 +2725,15 @@ void  CSettlerMgr::CheckOutSettler(int _iSettlerId) {
         v3 = CEcoSector::Owner(v8);
         if ( v3 == IEntity::OwnerId(pSettler) )
         {
-          if ( IEntity::FlagBits(pSettler, EntityFlag_Offered) )
+          if ( IEntity::FlagBits(pSettler, ENTITY_FLAG_Offered) )
             CEcoSector::GetSettlerOutOfOffer(v8, _iSettlerId);
           v5 = CSettler::Role(pSettler);
           if ( v5->GetSettlerRole(v5) != 18
             && !IEntity::FlagBits(pSettler, (EntityFlag)128)
-            && (!IEntity::FlagBits(pSettler, EntityFlag_OnBoard) || IEntity::FlagBits(pSettler, (EntityFlag)0x10000000)) )
+            && (!IEntity::FlagBits(pSettler, ENTITY_FLAG_OnBoard) || IEntity::FlagBits(pSettler, ENTITY_FLAG_Ownerless)) )
           {
             CEcoSector::ChangeNrOfSettler(v8, iType, -1);
-            IEntity::ClearFlagBits(pSettler, (EntityFlag)0x10000000);
+            IEntity::ClearFlagBits(pSettler, ENTITY_FLAG_Ownerless);
           }
         }
       }

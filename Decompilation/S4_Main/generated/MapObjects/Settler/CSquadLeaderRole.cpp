@@ -156,7 +156,7 @@ int  CSquadLeaderRole::WarriorTaskWalkOneStep(class IMovingEntity & a2) {
   v10 = CSoldierRole::WarriorTaskWalkOneStep(this, a2);
   if ( (v10 & 0x10) != 0
     && (int)ISelectableSettlerRole::GetPrimaryGroupId((CSquadLeaderRole *)((char *)this - 48)) > 0
-    && IEntity::FlagBits(a2, EntityFlag_Selectable) )
+    && IEntity::FlagBits(a2, ENTITY_FLAG_Selectable) )
   {
     if ( *((int *)this + 16) <= 0 )
     {

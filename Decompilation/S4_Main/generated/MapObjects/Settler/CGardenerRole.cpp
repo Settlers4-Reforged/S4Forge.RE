@@ -291,7 +291,7 @@ class CGardenerRole * __cdecl CGardenerRole::Load(std::istream & a1) {
 
   *(_DWORD *)this = &CGardenerRole::_vftable_;
   v1 = (CPropertySet *)CSettlerMgr::operator[](*((unsigned __int16 *)this + 9));
-  if ( !IEntity::FlagBits(v1, EntityFlag_OnBoard) )
+  if ( !IEntity::FlagBits(v1, ENTITY_FLAG_OnBoard) )
     CWarMap::RemoveEntity(v1);
   if ( *((_DWORD *)this + 17) != -1 )
     CWorldManager::ClearFlagBits(*((_DWORD *)this + 17), *((_DWORD *)this + 18), 32);
@@ -469,7 +469,7 @@ LABEL_31:
 void  CGardenerRole::Init(class CSettler * a1) {
   
   this->m_uAttachedSettlerId = IEntity::ID(a1);
-  IEntity::SetFlagBits(a1, EntityFlag_VulnerableMask|EntityFlag_Selectable);
+  IEntity::SetFlagBits(a1, ENTITY_FLAG_VulnerableMask|ENTITY_FLAG_Selectable);
   CWarMap::AddEntity(a1);
   this->m_iTargetMushroomX = -1;
   this->m_iTargetMushroomY = -1;
@@ -537,8 +537,8 @@ void  CGardenerRole::ConvertEventIntoGoal(class CSettler * pSettler, class CEnti
   {
     case 7:
       m_iDataA = pEvent->m_iDataA;
-      IEntity::SetFlagBits(pSettler, EntityFlag_Selectable);
-      IEntity::ClearFlagBits(pSettler, EntityFlag_OnBoard);
+      IEntity::SetFlagBits(pSettler, ENTITY_FLAG_Selectable);
+      IEntity::ClearFlagBits(pSettler, ENTITY_FLAG_OnBoard);
       v38 = IEntity::Type(pSettler);
       v29 = IEntity::Type(pSettler);
       v19 = IEntity::Race(pSettler);
@@ -626,7 +626,7 @@ void  CGardenerRole::ConvertEventIntoGoal(class CSettler * pSettler, class CEnti
         }
         v12 = IEntity::ID(pSettler);
         v48->Attach(v48, v12);
-        IEntity::ClearFlagBits(pSettler, EntityFlag_Selectable|EntityFlag_Selected);
+        IEntity::ClearFlagBits(pSettler, ENTITY_FLAG_Selectable|ENTITY_FLAG_Selected);
         v13 = IEntity::ID(pSettler);
         ((void (__thiscall *)(CGroupMgr *, int))g_pGroupMgr->DetachEntityFromAllGroups)(g_pGroupMgr, v13);
         m_uHomeEntityId = this->m_uHomeEntityId;
@@ -636,7 +636,7 @@ void  CGardenerRole::ConvertEventIntoGoal(class CSettler * pSettler, class CEnti
       }
       else
       {
-        IEntity::SetFlagBits(pSettler, EntityFlag_Selectable);
+        IEntity::SetFlagBits(pSettler, ENTITY_FLAG_Selectable);
         v35 = IEntity::Type(pSettler);
         v26 = IEntity::Type(pSettler);
         v15 = IEntity::Race(pSettler);
@@ -652,8 +652,8 @@ void  CGardenerRole::ConvertEventIntoGoal(class CSettler * pSettler, class CEnti
       v17 = IEntity::ID(pSettler);
       CSettlerMgr::SearchSpaceForSettler(&g_cSettlerMgr, v17, v27, v36);
       CWarMap::AddEntity(pSettler);
-      IEntity::SetFlagBits(pSettler, EntityFlag_Selectable|EntityFlag_Visible);
-      IEntity::ClearFlagBits(pSettler, EntityFlag_OnBoard);
+      IEntity::SetFlagBits(pSettler, ENTITY_FLAG_Selectable|ENTITY_FLAG_Visible);
+      IEntity::ClearFlagBits(pSettler, ENTITY_FLAG_OnBoard);
       this->m_iTask = 27;
       v37 = this->m_uHomeEntityId;
       v28 = IEntity::ID(pSettler);
@@ -661,7 +661,7 @@ void  CGardenerRole::ConvertEventIntoGoal(class CSettler * pSettler, class CEnti
       g_pAI->PostAIEvent(g_pAI, 21, v18, v28, v37);
       break;
     default:
-      if ( !IEntity::FlagBits(pSettler, EntityFlag_Registered) )
+      if ( !IEntity::FlagBits(pSettler, ENTITY_FLAG_Registered) )
       {
         CTrace::Print("ConvertEventIntoGoal GardenerRole - unknown event %u", pEvent->m_iEvent);
         IAnimatedEntity::RegisterForLogicUpdate(pSettler, 1);
@@ -748,7 +748,7 @@ bool  CGardenerRole::CheckPosition(int a2, int a3, int iSearchType, bool a5) {
       return 0;
     v10 = CMapObjectMgr::Entity(v8);
     if ( IEntity::ObjType(v10) != DECO_OBJ_2
-      || !IEntity::FlagBits(v10, EntityFlag_Ready)
+      || !IEntity::FlagBits(v10, ENTITY_FLAG_Ready)
       || IEntity::Type(v10) != OBJECT_MUSHROOM_DARK1
       && IEntity::Type(v10) != OBJECT_MUSHROOM_DARK2
       && IEntity::Type(v10) != OBJECT_MUSHROOM_DARK3 )

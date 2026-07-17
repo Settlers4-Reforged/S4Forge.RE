@@ -1622,7 +1622,7 @@ struct SGfxColor * __cdecl CWorldManager::GetMiniMapColor(unsigned int _iTileId)
     {
       if ( IEntity::OwnerId(v9) > 0 )
       {
-        if ( IEntity::FlagBits(v9, (EntityFlag)0x10000000) )
+        if ( IEntity::FlagBits(v9, ENTITY_FLAG_Ownerless) )
         {
           LocalPlayerId = CPlayerManager::GetLocalPlayerId();
           v1 = IEntity::ObjType(v9);

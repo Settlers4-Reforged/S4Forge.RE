@@ -186,7 +186,7 @@ int __cdecl CAIAgentGlobalSuicideMission::FindNearestBuildingInSector(int arg0, 
     v10 = CBuilding::EnsignX(v13);
     v11 = CBuilding::EnsignY(v13);
     v6 = IAIEnvironment::WorldSectorId(v10, v11);
-    if ( IEntity::FlagBits(v13, EntityFlag_Ready) && v6 == v5 )
+    if ( IEntity::FlagBits(v13, ENTITY_FLAG_Ready) && v6 == v5 )
     {
       v9 = IAIEnvironment::GridDistance((Grid *)(v10 - a3), v11 - a4);
       if ( v9 < v8 )

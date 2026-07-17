@@ -89,123 +89,125 @@ void  CFarmBuildingRole::LogicUpdate(class CBuilding * a2) {
   
   EntityFlag result; // eax
   int v3; // eax
-  int v4; // eax
+  CSettlerMgr::SSettlerInfos *SettlerInfo; // eax
   int v5; // eax
-  int v6; // esi
-  int v7; // esi
-  int v8; // eax
-  int v9; // [esp-8h] [ebp-84h]
-  int v10; // [esp-8h] [ebp-84h]
-  int v11; // [esp-4h] [ebp-80h]
-  char v12; // [esp-4h] [ebp-80h]
-  CEntityEvent v13; // [esp+8h] [ebp-74h] BYREF
-  CEntityEvent v14; // [esp+20h] [ebp-5Ch] BYREF
-  CEntityEvent *v15; // [esp+38h] [ebp-44h]
-  CEntityEvent *v16; // [esp+3Ch] [ebp-40h]
-  CEntityEvent *v17; // [esp+40h] [ebp-3Ch]
-  CEntityEvent *v18; // [esp+44h] [ebp-38h]
-  IEntity *v19; // [esp+48h] [ebp-34h]
+  CSettlerMgr::SSettlerInfos *v6; // eax
+  int v7; // eax
+  int v8; // esi
+  int v9; // esi
+  int v10; // eax
+  int v11; // [esp-8h] [ebp-84h]
+  int v12; // [esp-8h] [ebp-84h]
+  int v13; // [esp-4h] [ebp-80h]
+  char v14; // [esp-4h] [ebp-80h]
+  CEntityEvent v15; // [esp+8h] [ebp-74h] BYREF
+  CEntityEvent v16; // [esp+20h] [ebp-5Ch] BYREF
+  CEntityEvent *v17; // [esp+38h] [ebp-44h]
+  CEntityEvent *v18; // [esp+3Ch] [ebp-40h]
+  CEntityEvent *v19; // [esp+40h] [ebp-3Ch]
+  CEntityEvent *v20; // [esp+44h] [ebp-38h]
+  CSettler *v21; // [esp+48h] [ebp-34h]
   T_OBJECT_TYPE ObjectType; // [esp+4Ch] [ebp-30h]
-  int v21; // [esp+50h] [ebp-2Ch]
-  int v22; // [esp+54h] [ebp-28h]
-  IEntity *v23; // [esp+58h] [ebp-24h]
-  CSettlerMgr::SSettlerInfos *SettlerInfo; // [esp+5Ch] [ebp-20h]
-  IEntity *v25; // [esp+60h] [ebp-1Ch]
-  char v26; // [esp+64h] [ebp-18h]
-  IEntity *v27; // [esp+68h] [ebp-14h]
-  CFarmBuildingRole *v28; // [esp+6Ch] [ebp-10h]
-  int v29; // [esp+78h] [ebp-4h]
+  unsigned int v23; // [esp+50h] [ebp-2Ch]
+  unsigned int v24; // [esp+54h] [ebp-28h]
+  IEntity *v25; // [esp+58h] [ebp-24h]
+  CSettlerMgr::SSettlerInfos *v26; // [esp+5Ch] [ebp-20h]
+  CSettler *v27; // [esp+60h] [ebp-1Ch]
+  char v28; // [esp+64h] [ebp-18h]
+  IEntity *v29; // [esp+68h] [ebp-14h]
+  CFarmBuildingRole *v30; // [esp+6Ch] [ebp-10h]
+  int v31; // [esp+78h] [ebp-4h]
 
-  v28 = this;
-  result = IEntity::FlagBits(a2, EntityFlag_Selected);
+  v30 = this;
+  result = IEntity::FlagBits(a2, ENTITY_FLAG_Selected);
   if ( result )
-    result = (*(int (__thiscall **)(CFarmBuildingRole *, IAnimatedEntity *, int))(*(_DWORD *)v28 + 88))(v28, a2, 1);
-  v26 = *((_BYTE *)v28 + 4);
-  if ( v26 == 1 )
+    result = (*(int (__thiscall **)(CFarmBuildingRole *, IAnimatedEntity *, int))(*(_DWORD *)v30 + 88))(v30, a2, 1);
+  v28 = *((_BYTE *)v30 + 4);
+  if ( v28 == 1 )
   {
-    result = (*(unsigned __int8 (__thiscall **)(CFarmBuildingRole *, IAnimatedEntity *))(*(_DWORD *)v28 + 120))(v28, a2);
+    result = (*(unsigned __int8 (__thiscall **)(CFarmBuildingRole *, IAnimatedEntity *))(*(_DWORD *)v30 + 120))(v30, a2);
     if ( !(_BYTE)result )
       return IAnimatedEntity::RegisterForLogicUpdate(a2, 31);
-    *((_BYTE *)v28 + 4) = 3;
+    *((_BYTE *)v30 + 4) = 3;
     return result;
   }
-  if ( v26 != 2 )
+  if ( v28 != 2 )
   {
-    if ( v26 != 3 )
+    if ( v28 != 3 )
       return result;
-    if ( !*((_BYTE *)v28 + 29) || !IEntity::FlagBits(a2, EntityFlag_NotStriking) )
+    if ( !*((_BYTE *)v30 + 29) || !IEntity::FlagBits(a2, 0x1000) )
       return IAnimatedEntity::RegisterForLogicUpdate(a2, 31);
-    v9 = *(char *)(*((_DWORD *)v28 + 94) + 478);
+    v11 = *(char *)(*((_DWORD *)v30 + 94) + 478);
     v3 = IEntity::Race(a2);
-    CSettlerMgr::GetSettlerInfo(v3, v9);
-    *((_DWORD *)v28 + 8) = *(_DWORD *)std::vector<CSettlerMgr::SSearchInfos>::operator[](0);
-    if ( !*((_DWORD *)v28 + 8)
+    SettlerInfo = CSettlerMgr::GetSettlerInfo(v3, v11);
+    *((_DWORD *)v30 + 8) = std::vector<CSettlerMgr::SSearchInfos>::operator[](&SettlerInfo->m_vSearches, 0)->m_pSearchFkt;
+    if ( !*((_DWORD *)v30 + 8)
       && BBSupportDbgReport(2, "MapObjects\\Building\\FarmBuildingRole.cpp", 268, "m_pSearchFkt != 0") == 1 )
     {
       __debugbreak();
     }
-    v23 = CPileMgr::operator[](*((unsigned __int16 *)v28 + 190));
-    if ( ((int (__thiscall *)(IEntity *))v23->Amount)(v23) < 8
-      && (*(unsigned __int8 (__thiscall **)(CFarmBuildingRole *, IAnimatedEntity *, _DWORD))(*(_DWORD *)v28 + 104))(
-           v28,
+    v25 = CPileMgr::operator[](*((unsigned __int16 *)v30 + 190));
+    if ( ((int (__thiscall *)(IEntity *))v25->Amount)(v25) < 8
+      && (*(unsigned __int8 (__thiscall **)(CFarmBuildingRole *, IAnimatedEntity *, _DWORD))(*(_DWORD *)v30 + 104))(
+           v30,
            a2,
            0) )
     {
-      v25 = CSettlerMgr::operator[](*((unsigned __int16 *)v28 + 4));
-      IEntity::SetFlagBits(v25, EntityFlag_Visible);
-      v18 = CEntityEvent::CEntityEvent(&v14, 5u, 0, 0, *((unsigned __int16 *)v28 + 6), *((_DWORD *)v28 + 4));
-      v17 = v18;
-      v29 = 0;
-      v25->SetEvent(v25, v18);
-      v29 = -1;
-      CEntityEvent::~CEntityEvent(&v14);
-      return (*(int (__thiscall **)(CFarmBuildingRole *, IAnimatedEntity *, int))(*(_DWORD *)v28 + 72))(v28, a2, 1);
+      v27 = CSettlerMgr::operator[](*((unsigned __int16 *)v30 + 4));
+      IEntity::SetFlagBits(v27, ENTITY_FLAG_Visible);
+      v20 = CEntityEvent::CEntityEvent(&v16, 5u, 0, 0, *((unsigned __int16 *)v30 + 6), *((_DWORD *)v30 + 4));
+      v19 = v20;
+      v31 = 0;
+      v27->SetEvent(v27, v20);
+      v31 = -1;
+      CEntityEvent::~CEntityEvent(&v16);
+      return (*(int (__thiscall **)(CFarmBuildingRole *, IAnimatedEntity *, int))(*(_DWORD *)v30 + 72))(v30, a2, 1);
     }
-    v10 = *(char *)(*((_DWORD *)v28 + 94) + 478);
-    v4 = IEntity::Race(a2);
-    CSettlerMgr::GetSettlerInfo(v4, v10);
-    *((_DWORD *)v28 + 8) = *(_DWORD *)std::vector<CSettlerMgr::SSearchInfos>::operator[](1);
-    if ( !*((_DWORD *)v28 + 8)
+    v12 = *(char *)(*((_DWORD *)v30 + 94) + 478);
+    v5 = IEntity::Race(a2);
+    v6 = CSettlerMgr::GetSettlerInfo(v5, v12);
+    *((_DWORD *)v30 + 8) = std::vector<CSettlerMgr::SSearchInfos>::operator[](&v6->m_vSearches, 1u)->m_pSearchFkt;
+    if ( !*((_DWORD *)v30 + 8)
       && BBSupportDbgReport(2, "MapObjects\\Building\\FarmBuildingRole.cpp", 297, "m_pSearchFkt != 0") == 1 )
     {
       __debugbreak();
     }
-    if ( !(*(unsigned __int8 (__thiscall **)(CFarmBuildingRole *, IAnimatedEntity *, int))(*(_DWORD *)v28 + 104))(
-            v28,
+    if ( !(*(unsigned __int8 (__thiscall **)(CFarmBuildingRole *, IAnimatedEntity *, int))(*(_DWORD *)v30 + 104))(
+            v30,
             a2,
             1) )
       return IAnimatedEntity::RegisterForLogicUpdate(a2, 31);
-    v27 = CSettlerMgr::operator[](*((unsigned __int16 *)v28 + 4));
-    v11 = IEntity::Type(v27);
-    v5 = IEntity::Race(v27);
-    SettlerInfo = CSettlerMgr::GetSettlerInfo(v5, v11);
-    v6 = Y16X16::UnpackXFast(*((_DWORD *)v28 + 4));
-    v21 = v6 - *(char *)(std::vector<CSettlerMgr::SSearchInfos>::operator[](1) + 5);
-    v7 = Y16X16::UnpackYFast(*((_DWORD *)v28 + 4));
-    v22 = v7 - *(char *)(std::vector<CSettlerMgr::SSearchInfos>::operator[](1) + 6);
-    v12 = CWorldManager::Ground(v21, v22);
-    v8 = IEntity::Race(v27);
-    ObjectType = CDecoObjMgr::GetObjectType(&g_cDecoObjMgr, SettlerInfo->m_uFarmerType, v8, v12);
-    CDecoObjMgr::SetFlagsForObject(&g_cDecoObjMgr, v21, v22, ObjectType, 0);
-    IEntity::SetFlagBits(v27, EntityFlag_Visible);
-    v19 = CSettlerMgr::operator[](*((unsigned __int16 *)v28 + 4));
-    v16 = CEntityEvent::CEntityEvent(&v13, 6u, 0, 0, ObjectType, *((_DWORD *)v28 + 4));
-    v15 = v16;
-    v29 = 1;
-    v19->SetEvent(v19, v16);
-    v29 = -1;
-    CEntityEvent::~CEntityEvent(&v13);
-    return (*(int (__thiscall **)(CFarmBuildingRole *, IAnimatedEntity *, int))(*(_DWORD *)v28 + 72))(v28, a2, 1);
+    v29 = CSettlerMgr::operator[](*((unsigned __int16 *)v30 + 4));
+    v13 = IEntity::Type(v29);
+    v7 = IEntity::Race(v29);
+    v26 = CSettlerMgr::GetSettlerInfo(v7, v13);
+    v8 = Y16X16::UnpackXFast(*((_DWORD *)v30 + 4));
+    v23 = v8 - std::vector<CSettlerMgr::SSearchInfos>::operator[](&v26->m_vSearches, 1u)->m_iOffsetX;
+    v9 = Y16X16::UnpackYFast(*((_DWORD *)v30 + 4));
+    v24 = v9 - std::vector<CSettlerMgr::SSearchInfos>::operator[](&v26->m_vSearches, 1u)->m_iOffsetY;
+    v14 = CWorldManager::Ground(v23, v24);
+    v10 = IEntity::Race(v29);
+    ObjectType = CDecoObjMgr::GetObjectType(&g_cDecoObjMgr, v26->m_uFarmerType, v10, v14);
+    CDecoObjMgr::SetFlagsForObject(&g_cDecoObjMgr, v23, v24, ObjectType, 0);
+    IEntity::SetFlagBits(v29, ENTITY_FLAG_Visible);
+    v21 = CSettlerMgr::operator[](*((unsigned __int16 *)v30 + 4));
+    v18 = CEntityEvent::CEntityEvent(&v15, 6u, 0, 0, ObjectType, *((_DWORD *)v30 + 4));
+    v17 = v18;
+    v31 = 1;
+    v21->SetEvent(v21, v18);
+    v31 = -1;
+    CEntityEvent::~CEntityEvent(&v15);
+    return (*(int (__thiscall **)(CFarmBuildingRole *, IAnimatedEntity *, int))(*(_DWORD *)v30 + 72))(v30, a2, 1);
   }
-  if ( *((unsigned __int8 *)v28 + 5) > (int)*(unsigned __int8 *)(*((_DWORD *)v28 + 94) + 480) )
+  if ( *((unsigned __int8 *)v30 + 5) > (int)*(unsigned __int8 *)(*((_DWORD *)v30 + 94) + 480) )
   {
-    *((_BYTE *)v28 + 5) = 0;
-    *((_BYTE *)v28 + 4) = 3;
+    *((_BYTE *)v30 + 5) = 0;
+    *((_BYTE *)v30 + 4) = 3;
     return IAnimatedEntity::RegisterForLogicUpdate(a2, 1);
   }
   else
   {
-    ++*((_BYTE *)v28 + 5);
+    ++*((_BYTE *)v30 + 5);
     return IAnimatedEntity::RegisterForLogicUpdate(a2, 14);
   }
 }
@@ -292,7 +294,7 @@ void  CFarmBuildingRole::Init(class CBuilding * a2) {
   if ( (unsigned __int8)CPile::IsPatchPile(v5) )
   {
     v6 = CPileMgr::operator[](*((unsigned __int16 *)this + 190));
-    IEntity::ClearFlagBits(v6, EntityFlag_Visible);
+    IEntity::ClearFlagBits(v6, ENTITY_FLAG_Visible);
   }
   v10 = *(char *)(*((_DWORD *)this + 94) + 478);
   v7 = IEntity::Race(a2);
@@ -313,7 +315,7 @@ void  CFarmBuildingRole::Init(class CBuilding * a2) {
     __debugbreak();
   }
   IAnimatedEntity::RegisterForLogicUpdate(2);
-  result = IEntity::FlagBits(a2, EntityFlag_Selected);
+  result = IEntity::FlagBits(a2, ENTITY_FLAG_Selected);
   if ( result )
     return (*(int (__thiscall **)(_BYTE *, _BYTE *, _DWORD))(*(_DWORD *)this + 88))(this, a2, 0);
   return result;
@@ -378,7 +380,7 @@ bool  CFarmBuildingRole::SettlerEnter(class CBuilding * a2, int a3) {
     *((_BYTE *)this + 29) = 1;
     *((_WORD *)this + 4) = a3;
   }
-  IEntity::ClearFlagBits(v10, EntityFlag_Visible);
+  IEntity::ClearFlagBits(v10, ENTITY_FLAG_Visible);
   IMovingEntity::SetDisplacementCosts(10);
   if ( *(_BYTE *)(*((_DWORD *)this + 94) + 480) )
   {
@@ -425,7 +427,7 @@ void  CFarmBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
   byte_3F1E4ED = IEntity::Race(a2);
   byte_3F1E4EC = IEntity::Type((unsigned __int16 *)a2);
   byte_3F1E4EF = 1;
-  byte_3F1E4F0 = IEntity::FlagBits(a2, EntityFlag_NotStriking) != 0;
+  byte_3F1E4F0 = IEntity::FlagBits(a2, (EntityFlag)0x1000u) != 0;
   byte_3F1E4F1 = 1;
   v6 = IEntity::Type((unsigned __int16 *)a2);
   v3 = IEntity::OwnerId((unsigned __int8 *)a2);

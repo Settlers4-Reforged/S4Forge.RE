@@ -3,13 +3,13 @@
 // Definitions for class CBuildingMgr
 
 // address=[0x12fcb90]
-// Decompiled from CBuilding *__stdcall CBuildingMgr::operator[](int a1)
+// Decompiled from CBuilding *__thiscall CBuildingMgr::operator[](CBuildingMgr *this, int a1)
 class CBuilding &  CBuildingMgr::operator[](int a1) {
   
-  IEntity *v2; // [esp+4h] [ebp-4h]
+  IEntity *v3; // [esp+4h] [ebp-4h]
 
-  v2 = CMapObjectMgr::EntityPtr(a1);
-  if ( !v2
+  v3 = CMapObjectMgr::EntityPtr(a1);
+  if ( !v3
     && BBSupportDbgReport(
          2,
          "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\MapObjects\\Building\\BuildingMgr.h",
@@ -18,7 +18,7 @@ class CBuilding &  CBuildingMgr::operator[](int a1) {
   {
     __debugbreak();
   }
-  if ( IEntity::ObjType(v2) != BUILDING_OBJ
+  if ( IEntity::ObjType(v3) != BUILDING_OBJ
     && BBSupportDbgReport(
          2,
          "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\MapObjects\\Building\\BuildingMgr.h",
@@ -27,7 +27,7 @@ class CBuilding &  CBuildingMgr::operator[](int a1) {
   {
     __debugbreak();
   }
-  return (CBuilding *)v2;
+  return (CBuilding *)v3;
 }
 
 
@@ -3473,14 +3473,14 @@ void  CBuildingMgr::AddSoldierToStartTower(int a2, int a3) {
       v21 = CMilitaryBuildingRole::IncWishAndOrder(v13, v5, 0);
       if ( !v21 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 2157, "bIncWishAndOrderOk") == 1 )
         __debugbreak();
-      IEntity::ClearFlagBits(v17, EntityFlag_Selectable);
+      IEntity::ClearFlagBits(v17, ENTITY_FLAG_Selectable);
       v10 = v19;
       LastLogicUpdateTick = IAnimatedEntity::GetLastLogicUpdateTick(v17);
       CMapObjectMgr::UnRegisterFromLogicUpdate(g_pMapObjectMgr, LastLogicUpdateTick, v10);
       CWarMap::RemoveEntity(v17);
       v7 = IEntity::WorldIdx();
       CWorldManager::SetSettlerId(v7, 0);
-      IEntity::SetFlagBits(v17, EntityFlag_OnBoard);
+      IEntity::SetFlagBits(v17, ENTITY_FLAG_OnBoard);
       (*(void (__thiscall **)(unsigned __int8 *, int))(*(_DWORD *)v18 + 116))(v18, v19);
       CBuilding::SettlerEnter((CBuilding *)v18, v19);
     }

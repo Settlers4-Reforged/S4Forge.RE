@@ -114,7 +114,7 @@ void  CResidenceBuildingRole::LogicUpdate(class CBuilding * a2) {
   unsigned __int8 v27; // [esp+2Bh] [ebp-1h]
 
   v26 = this;
-  LocalPlayerId = IEntity::FlagBits(a2, EntityFlag_Selected);
+  LocalPlayerId = IEntity::FlagBits(a2, ENTITY_FLAG_Selected);
   if ( LocalPlayerId )
     LOBYTE(LocalPlayerId) = (*(int (__thiscall **)(_DWORD *, struct CBuilding *, int))(*v26 + 88))(v26, a2, 1);
   v21 = *((_BYTE *)v26 + 4);
@@ -271,7 +271,7 @@ void  CResidenceBuildingRole::Init(class CBuilding * a2) {
     }
   }
   CEcoSectorMgr::UpdateStrikeSettlers(g_cESMgr);
-  if ( IEntity::FlagBits(a2, EntityFlag_Selected) )
+  if ( IEntity::FlagBits(a2, ENTITY_FLAG_Selected) )
     (*(void (__thiscall **)(CResidenceBuildingRole *, struct CBuilding *, _DWORD))(*(_DWORD *)this + 88))(this, a2, 0);
   result = this;
   if ( *((unsigned __int8 *)this + 380) < *(int *)(*((_DWORD *)this + 94) + 496) )
@@ -311,7 +311,7 @@ void  CResidenceBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
   g_cBuildingInfo.m_iUnknown = 0;
   g_cBuildingInfo.? = IEntity::Race(a2);
   g_cBuildingInfo.? = IEntity::Type(a2);
-  MEMORY[0x3F1E4CC] = IEntity::FlagBits(a2, EntityFlag_NotStriking) != 0;
+  MEMORY[0x3F1E4CC] = IEntity::FlagBits(a2, (EntityFlag)4096) != 0;
   g_cBuildingInfo.? = 0;
   g_cBuildingInfo.? = 0;
   g_cBuildingInfo.? = 0;

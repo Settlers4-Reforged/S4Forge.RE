@@ -42,7 +42,7 @@ bool  IDecoObject::IsStaticInstance(void)const {
   this->m_uObjType = LANDSCAPE_OBJ;
   this->m_nType = _iDecoObjectType;
   this->m_iFrame = 0;
-  IEntity::SetFlagBits(this, EntityFlag_Visible);
+  IEntity::SetFlagBits(this, ENTITY_FLAG_Visible);
   if ( a6 )
     IEntity::SetPosition(this, 0, 0);
   else
@@ -114,7 +114,7 @@ bool  IDecoObject::IsStaticInstance(void)const {
   this->m_uObjType = LANDSCAPE_OBJ;
   this->m_nType = _rStaticDecoObject->m_nType;
   this->m_iFrame = 0;
-  IEntity::SetFlagBits(this, EntityFlag_Visible);
+  IEntity::SetFlagBits(this, ENTITY_FLAG_Visible);
   if ( CWorldManager::ObjectId(_iX, _iY) )
   {
     v5 = CWorldManager::ObjectId(_iX, _iY);

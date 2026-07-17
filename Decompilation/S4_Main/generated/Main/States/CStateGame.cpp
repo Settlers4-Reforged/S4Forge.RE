@@ -3520,7 +3520,7 @@ LABEL_61:
                       n;
                       n = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, v16) )
                 {
-                  if ( IEntity::FlagBits(n, EntityFlag_NotStriking) )
+                  if ( IEntity::FlagBits(n, (EntityFlag)4096) )
                     CBuilding::Switch();
                   v16 = IAnimatedEntity::Next(n);
                 }

@@ -124,7 +124,7 @@ int __cdecl CScanner::CountCiviliansAndFindNearestInSector(int _iX, int _iY, int
       {
         v21 = CMapObjectMgr::Entity(j);
         if ( IEntity::WarriorType(v21) == AI_WARRIOR_TYPE_NONE
-          && IEntity::FlagBits(v21, EntityFlag_Ready|EntityFlag_Visible) == (EntityFlag_Ready|EntityFlag_Visible) )
+          && IEntity::FlagBits(v21, ENTITY_FLAG_Ready|ENTITY_FLAG_Visible) == (ENTITY_FLAG_Ready|ENTITY_FLAG_Visible) )
         {
           v6 = IEntity::OwnerId(v21);
           if ( (a4 & CAlliances::PlayerBit(v6)) != 0 )
@@ -462,7 +462,7 @@ void __cdecl CScanner::EvaluateTowers(struct SEvalTowersResult & arg0, int _iX, 
               iTowerScore = 4;
             }
             aTowerScores[uIdx] += iTowerScore;
-            if ( IEntity::FlagBits(rBuildingEntity, EntityFlag_Ready) )
+            if ( IEntity::FlagBits(rBuildingEntity, ENTITY_FLAG_Ready) )
             {
               pBuildingRole = (void **)CBuilding::Role(rBuildingEntity);
               if ( !j____RTDynamicCast(
@@ -571,7 +571,7 @@ bool __cdecl CScanner::FindNearestTowerInSector(struct SFindNearestResult & arg0
     for ( a1 = CWarMap::FirstEntityIdVW(2, m_iV, v5->m_iW); a1; a1 = CWarMapNode::Next(rWarMapNode) )
     {
       v18 = (IEntity *)CBuildingMgr::operator[](a1);
-      v19 = IEntity::FlagBits(v18, EntityFlag_Ready) != 0;
+      v19 = IEntity::FlagBits(v18, ENTITY_FLAG_Ready) != 0;
       if ( IEntity::WarriorType(v18) == AI_WARRIOR_TYPE_TOWER_BUILDING && v19 )
       {
         v8 = IEntity::OwnerId(v18);

@@ -57,7 +57,7 @@ void  CObserverList::Attach(int a2, int a3) {
   {
     __debugbreak();
   }
-  if ( IEntity::FlagBits(v5, EntityFlag_Attached)
+  if ( IEntity::FlagBits(v5, ENTITY_FLAG_ATTACHED)
     && BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 40, "pObserver->FlagBits(ENTITY_FLAG_ATTACHED) == 0") == 1 )
   {
     __debugbreak();
@@ -72,7 +72,7 @@ void  CObserverList::Attach(int a2, int a3) {
   {
     __debugbreak();
   }
-  result = IEntity::FlagBits(v5, EntityFlag_Attached);
+  result = IEntity::FlagBits(v5, ENTITY_FLAG_ATTACHED);
   if ( result )
     return result;
   result = BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 45, "pObserver->FlagBits(ENTITY_FLAG_ATTACHED) != 0");
@@ -105,7 +105,7 @@ void  CObserverList::Detach(int a2) {
   {
     __debugbreak();
   }
-  if ( !IEntity::FlagBits(v4, EntityFlag_Attached)
+  if ( !IEntity::FlagBits(v4, ENTITY_FLAG_ATTACHED)
     && BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 66, "pObserver->FlagBits(ENTITY_FLAG_ATTACHED) != 0") == 1 )
   {
     __debugbreak();
@@ -120,7 +120,7 @@ void  CObserverList::Detach(int a2) {
   {
     __debugbreak();
   }
-  result = IEntity::FlagBits(v4, EntityFlag_Attached);
+  result = IEntity::FlagBits(v4, ENTITY_FLAG_ATTACHED);
   if ( !result )
     return result;
   result = BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 71, "pObserver->FlagBits(ENTITY_FLAG_ATTACHED) == 0");
@@ -218,20 +218,20 @@ void  CObserverList::DetachAllObservers(void) {
   int v8; // [esp+44h] [ebp-28h]
   int v9; // [esp+48h] [ebp-24h]
   int v10; // [esp+4Ch] [ebp-20h]
-  _DWORD *v11; // [esp+50h] [ebp-1Ch]
+  IEntity *v11; // [esp+50h] [ebp-1Ch]
   void *v12; // [esp+54h] [ebp-18h]
   int v13; // [esp+58h] [ebp-14h]
-  _DWORD *v14; // [esp+5Ch] [ebp-10h]
+  IEntity *v14; // [esp+5Ch] [ebp-10h]
   int v15; // [esp+68h] [ebp-4h]
 
   v12 = this;
-  v10 = std::list<unsigned short>::begin(v3);
+  v10 = std::list<unsigned short>::begin(this, (int)v3);
   v9 = v10;
   v15 = 0;
   std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>(v10);
   LOBYTE(v15) = 2;
   std::_List_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::~_List_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>(v3);
-  v8 = std::list<unsigned short>::end(v2);
+  v8 = std::list<unsigned short>::end(v12, (int)v2);
   v7 = v8;
   LOBYTE(v15) = 3;
   std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>(v8);
@@ -243,13 +243,13 @@ void  CObserverList::DetachAllObservers(void) {
   {
     v13 = *(unsigned __int16 *)std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::operator*(v6);
     if ( v13 )
-      v11 = (_DWORD *)CMapObjectMgr::EntityPtr(v13);
+      v11 = CMapObjectMgr::EntityPtr(v13);
     else
       v11 = 0;
     v14 = v11;
     if ( v11 )
     {
-      if ( !(*(int (__thiscall **)(_DWORD *, _DWORD))(*v14 + 72))(v14, 0)
+      if ( !v14->GetObserverTarget(v14, 0)
         && BBSupportDbgReport(
              2,
              "MapObjects\\ObserverList.cpp",
@@ -258,13 +258,13 @@ void  CObserverList::DetachAllObservers(void) {
       {
         __debugbreak();
       }
-      if ( !IEntity::FlagBits(v14, EntityFlag_Attached)
+      if ( !IEntity::FlagBits(v14, ENTITY_FLAG_ATTACHED)
         && BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 93, "pObserver->FlagBits(ENTITY_FLAG_ATTACHED) != 0") == 1 )
       {
         __debugbreak();
       }
-      (*(void (__thiscall **)(_DWORD *, _DWORD, _DWORD))(*v14 + 68))(v14, 0, 0);
-      if ( (*(int (__thiscall **)(_DWORD *, _DWORD))(*v14 + 72))(v14, 0)
+      ((void (__thiscall *)(IEntity *, _DWORD, _DWORD))v14->SetObserverTarget)(v14, 0, 0);
+      if ( v14->GetObserverTarget(v14, 0)
         && BBSupportDbgReport(
              2,
              "MapObjects\\ObserverList.cpp",
@@ -273,7 +273,7 @@ void  CObserverList::DetachAllObservers(void) {
       {
         __debugbreak();
       }
-      if ( IEntity::FlagBits(v14, EntityFlag_Attached) )
+      if ( IEntity::FlagBits(v14, ENTITY_FLAG_ATTACHED) )
       {
         if ( BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 98, "pObserver->FlagBits(ENTITY_FLAG_ATTACHED) == 0") == 1 )
           __debugbreak();
@@ -367,7 +367,7 @@ void  CObserverList::DetachAllNonePileObservers(void) {
       {
         __debugbreak();
       }
-      if ( !IEntity::FlagBits(v17, EntityFlag_Attached)
+      if ( !IEntity::FlagBits(v17, ENTITY_FLAG_ATTACHED)
         && BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 127, "pObserver->FlagBits(ENTITY_FLAG_ATTACHED) != 0") == 1 )
       {
         __debugbreak();
@@ -382,7 +382,7 @@ void  CObserverList::DetachAllNonePileObservers(void) {
       {
         __debugbreak();
       }
-      if ( IEntity::FlagBits(v17, EntityFlag_Attached) )
+      if ( IEntity::FlagBits(v17, ENTITY_FLAG_ATTACHED) )
       {
         if ( BBSupportDbgReport(
                2,

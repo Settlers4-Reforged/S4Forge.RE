@@ -3,13 +3,13 @@
 // Definitions for class CSearchRoutines
 
 // address=[0x15191f0]
-// Decompiled from char *__cdecl CSearchRoutines::GetSearchData(int a1)
+// Decompiled from const struct SSearchData *__cdecl CSearchRoutines::GetSearchData(int a1)
 struct SSearchData const & __cdecl CSearchRoutines::GetSearchData(int a1) {
   
   if ( a1 <= 0 || a1 >= 27 )
-    return (char *)&g_sSearchData;
+    return g_sSearchData;
   else
-    return (char *)&g_sSearchData + 16 * a1;
+    return &g_sSearchData[a1];
 }
 
 
@@ -364,7 +364,7 @@ int __cdecl CSearchRoutines::SearchGrainSeedPos(int a1, int a2, int a3) {
   v6 = CWorldManager::Index(a1, a2);
   if ( (CWorldManager::Ground(v6) & 0xF0) != 0x10 )
     return 0;
-  if ( (int)CSearchRoutines::CalcRawness(v6) > 7 )
+  if ( CSearchRoutines::CalcRawness(v6) > 7 )
     return 0;
   v5 = 0;
   if ( CWorldManager::Ground(v6) == 64 )
@@ -526,36 +526,36 @@ int __cdecl CSearchRoutines::SearchStone(int a1, int a2, int a3) {
 
 
 // address=[0x151a190]
-// Decompiled from int __cdecl CSearchRoutines::SearchFish(int a1, int a2)
+// Decompiled from int __cdecl CSearchRoutines::SearchFish(int a1, int a2, int a3)
 int __cdecl CSearchRoutines::SearchFish(int a1, int a2, int a3) {
   
-  const char *v3; // [esp+4h] [ebp-24h]
-  int v4; // [esp+8h] [ebp-20h]
-  int v5; // [esp+Ch] [ebp-1Ch]
-  int v6; // [esp+18h] [ebp-10h]
-  int v7; // [esp+20h] [ebp-8h]
+  unsigned int v4; // [esp+4h] [ebp-24h]
+  int v5; // [esp+8h] [ebp-20h]
+  int iFishAmount; // [esp+Ch] [ebp-1Ch]
+  int v7; // [esp+18h] [ebp-10h]
+  int v8; // [esp+20h] [ebp-8h]
   int i; // [esp+24h] [ebp-4h]
 
   if ( !CWorldManager::InInnerWorld2(a1, a2) )
     return 0;
-  v4 = CWorldManager::Index(a1, a2);
+  v5 = CWorldManager::Index(a1, a2);
   for ( i = 0; ; ++i )
   {
     if ( i >= 19 )
       return 0;
-    v7 = v4 + CWorldManager::SurroundingHexPointRelIndex(i);
-    v5 = CWorldManager::Resource(v7);
-    if ( (unsigned int)(v5 - 1) <= 0xE && !CWorldManager::FlagBits(v7, 4u) )
+    v8 = v5 + CWorldManager::SurroundingHexPointRelIndex(i);
+    iFishAmount = CWorldManager::Resource(v8);
+    if ( (unsigned int)(iFishAmount - 1) <= 0xE && !CWorldManager::FlagBits(v8, 4u) )
     {
-      v6 = CWorldManager::Ground(v7) & 0xF0;
-      if ( v6 == 96 || v6 == 0 )
+      v7 = CWorldManager::Ground(v8) & 0xF0;
+      if ( v7 == 96 || v7 == 0 )
         break;
     }
   }
-  v3 = CGameData::Rand(g_pGameData);
-  if ( (unsigned int)v3 < CRandom16::PercentValue(0x21u) )
+  v4 = CGameData::Rand(g_pGameData);
+  if ( v4 < CRandom16::PercentValue(0x21u) )
     return -1;
-  if ( (v5 <= 0 || v5 > 15)
+  if ( (iFishAmount <= 0 || iFishAmount > 15)
     && BBSupportDbgReport(
          2,
          "MapObjects\\Building\\SearchRoutines.cpp",
@@ -564,7 +564,7 @@ int __cdecl CSearchRoutines::SearchFish(int a1, int a2, int a3) {
   {
     __debugbreak();
   }
-  CWorldManager::SetResource(v7, 0, v5 - 1);
+  CWorldManager::SetResource(v8, 0, iFishAmount - 1);
   return 1;
 }
 

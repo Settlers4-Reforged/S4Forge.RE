@@ -635,7 +635,7 @@ void __cdecl CFutureEvents::ExecuteChangeEntityFlags(struct CFutureEvents::SFutu
   if ( !*(_WORD *)(a1 + 2) )
     return result;
   v2 = (_DWORD *)CMapObjectMgr::Entity(*(unsigned __int16 *)(a1 + 2));
-  result = IEntity::FlagBits(v2, EntityFlag_AliveMask|EntityFlag_NotStriking);
+  result = IEntity::FlagBits(v2, ENTITY_FLAG_AliveMask|0x1000);
   if ( !result )
     return result;
   IEntity::SetFlagBits(v2, *(EntityFlag *)(a1 + 12));
@@ -813,7 +813,7 @@ void __cdecl CFutureEvents::ExecuteEnslaveSettler(struct CFutureEvents::SFutureE
     return (char)SettlerPtr;
   v13 = IEntity::X(v16);
   v14 = IEntity::Y(v16);
-  v10 = IEntity::FlagBits(v16, EntityFlag_OnBoard|EntityFlag_Visible) == EntityFlag_Visible
+  v10 = IEntity::FlagBits(v16, ENTITY_FLAG_OnBoard|ENTITY_FLAG_Visible) == ENTITY_FLAG_Visible
      && CWorldManager::MapObjectId(v13, v14) == v15;
   LOBYTE(SettlerPtr) = v10;
   v18 = v10;
@@ -822,7 +822,7 @@ void __cdecl CFutureEvents::ExecuteEnslaveSettler(struct CFutureEvents::SFutureE
   {
     SettlerPtr = CFlyingMgr::GetManakopterPtr((CFlyingMgr *)g_cFlyingMgr, v12);
     v17 = SettlerPtr;
-    if ( !SettlerPtr || (SettlerPtr = (IEntity *)IEntity::FlagBits(v17, EntityFlag_Died)) != 0 )
+    if ( !SettlerPtr || (SettlerPtr = (IEntity *)IEntity::FlagBits(v17, ENTITY_FLAG_Died)) != 0 )
     {
       v18 = 0;
       v17 = 0;
@@ -830,7 +830,7 @@ void __cdecl CFutureEvents::ExecuteEnslaveSettler(struct CFutureEvents::SFutureE
   }
   if ( !v18 )
     return (char)SettlerPtr;
-  IEntity::ClearFlagBits(v16, EntityFlag_Visible);
+  IEntity::ClearFlagBits(v16, ENTITY_FLAG_Visible);
   CSettlerMgr::DeleteSettler((CSettlerMgr *)g_cSettlerMgr, v15);
   if ( CWorldManager::MapObjectId(v13, v14)
     && BBSupportDbgReport(2, "Logic\\FutureEvents.cpp", 1235, "g_cWorld.MapObjectId(iTargetX, iTargetY) == 0") == 1 )
@@ -881,7 +881,7 @@ void __cdecl CFutureEvents::ExecuteFreeServant(struct CFutureEvents::SFutureEven
   {
     v6 = IEntity::X(SettlerPtr);
     v7 = IEntity::Y(SettlerPtr);
-    v9 = IEntity::FlagBits(SettlerPtr, EntityFlag_OnBoard|EntityFlag_Visible) == 256
+    v9 = IEntity::FlagBits(SettlerPtr, ENTITY_FLAG_OnBoard|ENTITY_FLAG_Visible) == 256
       && CWorldManager::MapObjectId(v6, v7) == v5;
     if ( !v9 && BBSupportDbgReport(2, "Logic\\FutureEvents.cpp", 1301, "bOk") == 1 )
       __debugbreak();
@@ -893,7 +893,7 @@ void __cdecl CFutureEvents::ExecuteFreeServant(struct CFutureEvents::SFutureEven
       {
         __debugbreak();
       }
-      IEntity::ClearFlagBits(SettlerPtr, EntityFlag_Visible);
+      IEntity::ClearFlagBits(SettlerPtr, ENTITY_FLAG_Visible);
       CSettlerMgr::DeleteSettler((CSettlerMgr *)g_cSettlerMgr, v5);
       if ( CWorldManager::MapObjectId(v6, v7)
         && BBSupportDbgReport(2, "Logic\\FutureEvents.cpp", 1313, "g_cWorld.MapObjectId(iServantX, iServantY) == 0") == 1 )

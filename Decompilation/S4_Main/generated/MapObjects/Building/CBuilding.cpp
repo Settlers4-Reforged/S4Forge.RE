@@ -79,7 +79,7 @@ int  CBuilding::GetWorkingAreaPackedXY(void)const {
 // Decompiled from bool __thiscall CBuilding::IsBuildUp(_DWORD *this)
 bool  CBuilding::IsBuildUp(void)const {
   
-  return IEntity::FlagBits(this, EntityFlag_Birth) == 0;
+  return IEntity::FlagBits(this, ENTITY_FLAG_Birth) == 0;
 }
 
 
@@ -273,7 +273,7 @@ struct SGfxObjectInfo *  CBuilding::GetGfxInfos(void) {
   v1->FillGfxInfo(v1, (IEntity *)this, &IEntity::m_sGfxInfo);
   IEntity::m_sGfxInfo.m_uObjType = *((_BYTE *)this + 10);
   IEntity::m_sGfxInfo.m_bIsVisible = IEntity::IsVisible(this);
-  if ( IEntity::FlagBits((IEntity *)this, EntityFlag_Selected) )
+  if ( IEntity::FlagBits((IEntity *)this, ENTITY_FLAG_Selected) )
     IEntity::m_sGfxInfo.m_uFlags = 28;
   else
     IEntity::m_sGfxInfo.m_uFlags = 0;
@@ -1152,27 +1152,28 @@ void  CBuilding::CorrectBuildingBits(void) {
 
 
 // address=[0x14e9e40]
-// Decompiled from int __thiscall CBuilding::CBuilding_0(int this, int a2, int a3, int a4, int a5, int a6, int a7)
+// Decompiled from CBuilding *__thiscall CBuilding::CBuilding(CBuilding *this, int a2, int a3, int a4, int a5, int a6, int a7)
  CBuilding::CBuilding(int a2, int a3, int a4, int a5, class std::auto_ptr<class IBuildingRole> a6, int a7) {
   
-  void *v7; // eax
-  char v8; // al
+  CPlayerInfo *v7; // eax
+  unsigned __int8 v8; // al
   int v9; // eax
   int v11; // [esp+4h] [ebp-1Ch]
   int v12; // [esp+8h] [ebp-18h]
-  char *BuildingInfo; // [esp+Ch] [ebp-14h]
+  CBuildingInfoMgr::SBuildingInfos *BuildingInfo; // [esp+Ch] [ebp-14h]
 
-  IAnimatedEntity::IAnimatedEntity(a7);
-  *(_DWORD *)this = &CBuilding::_vftable_;
+  IAnimatedEntity::IAnimatedEntity(this, a7);
+  this->__vftable = (CBuilding_vtbl *)&CBuilding::_vftable_;
   std::auto_ptr<IBuildingRole>::auto_ptr<IBuildingRole>((int)&a6);
-  CObserverList::CObserverList((void *)(this + 88));
-  *(_BYTE *)(this + 68) = a4;
-  *(_BYTE *)(this + 69) = 0;
-  *(_WORD *)(this + 70) = 0;
-  *(_DWORD *)(this + 72) = 0;
-  *(_DWORD *)(this + 76) = 0;
-  *(_DWORD *)(this + 80) = 0;
+  CObserverList::CObserverList(&this[1].m_iFlags);
+  LOBYTE(this[1].__vftable) = a4;
+  BYTE1(this[1].__vftable) = 0;
+  HIWORD(this[1].__vftable) = 0;
+  this[1].m_iUniqueId = 0;
+  *(_DWORD *)&this[1].m_nEntityId = 0;
+  *(_DWORD *)&this[1].m_nType = 0;
   IMessageTracer::PushFormatedInts(
+    g_pMsgTracer,
     "CBuilding::CBuilding(): entity id %u, player %u, building type %u, position (%i, %i)",
     a7,
     a5,
@@ -1182,41 +1183,41 @@ void  CBuilding::CorrectBuildingBits(void) {
   if ( (a4 <= 0 || a4 >= 83)
     && BBSupportDbgReport(
          2,
-         (int)"MapObjects\\Building\\Building.cpp",
+         "MapObjects\\Building\\Building.cpp",
          89,
-         (int)"(_iBuildingTypeEx > BUILDING_NO_BUILDING) && (_iBuildingTypeEx < BUILDING_MAX)") == 1 )
+         "(_iBuildingTypeEx > BUILDING_NO_BUILDING) && (_iBuildingTypeEx < BUILDING_MAX)") == 1 )
   {
     __debugbreak();
   }
   if ( a4 == 32
-    && BBSupportDbgReport(2, (int)"MapObjects\\Building\\Building.cpp", 90, (int)"_iBuildingTypeEx != BUILDING_PORT") == 1 )
+    && BBSupportDbgReport(2, "MapObjects\\Building\\Building.cpp", 90, "_iBuildingTypeEx != BUILDING_PORT") == 1 )
   {
     __debugbreak();
   }
   if ( a4 == 31
-    && BBSupportDbgReport(
-         2,
-         (int)"MapObjects\\Building\\Building.cpp",
-         91,
-         (int)"_iBuildingTypeEx != BUILDING_SHIPYARD") == 1 )
+    && BBSupportDbgReport(2, "MapObjects\\Building\\Building.cpp", 91, "_iBuildingTypeEx != BUILDING_SHIPYARD") == 1 )
   {
     __debugbreak();
   }
-  IEntity::SetPosition(a2, a3);
-  IEntity::SetOwnerId(a5);
-  v7 = (void *)CPlayerManager::PlayerInfo(a5);
+  IEntity::SetPosition(this, a2, a3);
+  IEntity::SetOwnerId(this, a5);
+  v7 = CPlayerManager::PlayerInfo(a5);
   v8 = CPlayerInfo::Race(v7);
-  IEntity::SetRace(v8);
-  v9 = IEntity::Race((_BYTE *)this);
-  BuildingInfo = (char *)CBuildingInfoMgr::GetBuildingInfo(v9, a4);
-  *(_DWORD *)(this + 72) = Y16X16::PackXYFast(a2 + BuildingInfo[40], a3 + BuildingInfo[41]);
-  *(_DWORD *)(this + 76) = Y16X16::PackXYFast(a2 + BuildingInfo[38], a3 + BuildingInfo[39]);
-  *(_DWORD *)(this + 80) = CBuilding::EnsignPackedXY((_DWORD *)this);
+  IEntity::SetRace(this, v8);
+  v9 = IEntity::Race(this);
+  BuildingInfo = CBuildingInfoMgr::GetBuildingInfo(v9, a4);
+  this[1].m_iUniqueId = Y16X16::PackXYFast(
+                          a2 + (char)BuildingInfo->m_iDoorXOffset,
+                          a3 + (char)BuildingInfo->m_iDoorYOffset);
+  *(_DWORD *)&this[1].m_nEntityId = Y16X16::PackXYFast(
+                                      a2 + (char)BuildingInfo->m_iFlagX,
+                                      a3 + (char)BuildingInfo->m_iFlagY);
+  *(_DWORD *)&this[1].m_nType = CBuilding::EnsignPackedXY(this);
   if ( (unsigned __int8)CBuildingMgr::IsPortEx(a4) )
   {
     v12 = 32;
   }
-  else if ( (unsigned __int8)CBuildingMgr::IsShipyardEx(a4) )
+  else if ( CBuildingMgr::IsShipyardEx(a4) )
   {
     v12 = 31;
   }
@@ -1224,14 +1225,14 @@ void  CBuilding::CorrectBuildingBits(void) {
   {
     v12 = a4;
   }
-  *(_WORD *)(this + 12) = v12;
-  *(_BYTE *)(this + 10) = 8;
-  IEntity::SetFlagBits((_DWORD *)this, EntityFlag_NotStriking|EntityFlag_Visible);
+  this->m_nType = v12;
+  this->m_uObjType = Building;
+  IEntity::SetFlagBits(this, (EntityFlag)4352);
   if ( (unsigned __int8)CBuildingMgr::IsMilitary(v12) )
-    IEntity::SetFlagBits((_DWORD *)this, (EntityFlag)0xCu);
-  CWarMap::AddEntity((CPropertySet *)this);
-  v11 = std::auto_ptr<IBuildingRole>::operator->();
-  (*(void (__thiscall **)(int, int))(*(_DWORD *)v11 + 24))(v11, this);
+    IEntity::SetFlagBits(this, (EntityFlag)12);
+  CWarMap::AddEntity(this);
+  v11 = std::auto_ptr<IBuildingRole>::operator->(&this[1].m_psAIEntityInfo);
+  (*(void (__thiscall **)(int, CBuilding *))(*(_DWORD *)v11 + 24))(v11, this);
   std::auto_ptr<IBuildingRole>::~auto_ptr<IBuildingRole>(&a6);
   return this;
 }

@@ -106,9 +106,9 @@ struct SGfxObjectInfo *  CWheeler::GetGfxInfos(void) {
   MEMORY[0x40FE51A] = IEntity::IsVisible((_DWORD *)this);
   if ( IEntity::FlagBits((IEntity *)this, (EntityFlag)&dword_F29144[220079]) )
     MEMORY[0x40FE2AC] = 65534 - *(unsigned __int16 *)(this + 124) * *(unsigned __int16 *)(this + 128);
-  if ( IEntity::FlagBits((IEntity *)this, EntityFlag_Selected) )
+  if ( IEntity::FlagBits((IEntity *)this, ENTITY_FLAG_Selected) )
   {
-    if ( IEntity::FlagBits((IEntity *)this, EntityFlag_Selected) )
+    if ( IEntity::FlagBits((IEntity *)this, ENTITY_FLAG_Selected) )
       v5 = 73;
     else
       v5 = 0;
@@ -155,8 +155,8 @@ void  CWheeler::ConvertEventIntoGoal(class CEntityEvent * a2) {
     switch ( *((_DWORD *)a2 + 1) )
     {
       case 7:
-        IEntity::SetFlagBits(this, EntityFlag_Selectable);
-        IEntity::ClearFlagBits(this, EntityFlag_OnBoard);
+        IEntity::SetFlagBits(this, ENTITY_FLAG_Selectable);
+        IEntity::ClearFlagBits(this, ENTITY_FLAG_OnBoard);
         v10 = IEntity::Y(this);
         v8 = IEntity::X(this);
         v9 = CVehicle::NewDestination(this, v8, v10, 0);
@@ -211,9 +211,9 @@ void  CWheeler::ConvertEventIntoGoal(class CEntityEvent * a2) {
           v6 = Y16X16::PackXYFast(v16, v17);
           (*(void (__thiscall **)(CWheeler *, int))(*(_DWORD *)this + 196))(this, v6);
           IEntity::SetPosition((IEntity *)this, v16, v17);
-          IEntity::SetFlagBits(this, EntityFlag_Selectable);
-          IEntity::ClearFlagBits(this, EntityFlag_OnBoard);
-          IEntity::SetFlagBits(this, EntityFlag_Visible);
+          IEntity::SetFlagBits(this, ENTITY_FLAG_Selectable);
+          IEntity::ClearFlagBits(this, ENTITY_FLAG_OnBoard);
+          IEntity::SetFlagBits(this, ENTITY_FLAG_Visible);
           *((_DWORD *)this + 42) = 0;
         }
         else
@@ -370,8 +370,8 @@ void  CWheeler::Unload(void) {
   }
   if ( a2 < 0 )
   {
-    IEntity::ClearFlagBits(this, EntityFlag_Visible);
-    IEntity::SetFlagBits(this, EntityFlag_OnBoard);
+    IEntity::ClearFlagBits(this, ENTITY_FLAG_Visible);
+    IEntity::SetFlagBits(this, ENTITY_FLAG_OnBoard);
   }
   else
   {
@@ -654,12 +654,12 @@ void  CWheeler::OnComeToFerry(int a2) {
   (*(void (__thiscall **)(int, int))(*(_DWORD *)v18 + 164))(v18, v8);
   v9 = IEntity::ID();
   (*(void (__thiscall **)(void *, int))(*(_DWORD *)g_pGroupMgr + 28))(g_pGroupMgr, v9);
-  if ( IEntity::FlagBits(this, EntityFlag_Selected) )
+  if ( IEntity::FlagBits(this, ENTITY_FLAG_Selected) )
   {
     v10 = IEntity::ID();
     CInputProcessor::DeSelectEntity(&g_cInputProcessor, v10);
   }
-  IEntity::ClearFlagBits(this, EntityFlag_Selectable|EntityFlag_Selected);
+  IEntity::ClearFlagBits(this, ENTITY_FLAG_Selectable|ENTITY_FLAG_Selected);
   v16 = IEntity::ID();
   v13 = IEntity::ID();
   v11 = IEntity::OwnerId((unsigned __int8 *)this);

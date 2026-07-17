@@ -460,7 +460,7 @@ class CAIEntityInfo * __cdecl IAIEnvironment::EntityGetEntityInfo(int _iEntityId
   v5 = IEntity::AIEntityInfoPtr(pEntity);
   if ( v5 != 0 || !_bCreate )
     return v5;
-  if ( !IEntity::FlagBits(pEntity, EntityFlag_AliveMask) )
+  if ( !IEntity::FlagBits(pEntity, ENTITY_FLAG_AliveMask) )
     return v5;
   if ( IEntity::ID(pEntity) != _iEntityId
     && BBSupportDbgReport(2, "AI\\AI_Environment.cpp", 369, "pEntity->ID() == _iEntityId") == 1 )
@@ -612,7 +612,7 @@ bool __cdecl IAIEnvironment::EntityIsAlive(int a1) {
   IEntity *v2; // [esp+0h] [ebp-8h]
 
   v2 = CMapObjectMgr::EntityPtr(a1);
-  return v2 && IEntity::FlagBits(v2, EntityFlag_AliveMask) != 0;
+  return v2 && IEntity::FlagBits(v2, ENTITY_FLAG_AliveMask) != 0;
 }
 
 
@@ -623,7 +623,7 @@ bool __cdecl IAIEnvironment::EntityIsReady(int a1) {
   IEntity *v2; // [esp+0h] [ebp-8h]
 
   v2 = CMapObjectMgr::EntityPtr(a1);
-  return v2 && IEntity::FlagBits(v2, EntityFlag_Ready) != 0;
+  return v2 && IEntity::FlagBits(v2, ENTITY_FLAG_Ready) != 0;
 }
 
 
@@ -637,7 +637,7 @@ bool __cdecl IAIEnvironment::EntityIsAliveAndHasGivenUniqueId(int a1, int a2) {
   v3 = CMapObjectMgr::EntityPtr(a1);
   if ( !v3 )
     return 0;
-  v4 = IEntity::FlagBits(v3, EntityFlag_AliveMask) != 0;
+  v4 = IEntity::FlagBits(v3, ENTITY_FLAG_AliveMask) != 0;
   return IEntity::UniqueId(v3) == a2 && v4;
 }
 
@@ -652,7 +652,7 @@ bool __cdecl IAIEnvironment::EntityIsAliveAndOfGivenWarriorType(int a1, enum T_A
   v3 = (_DWORD *)CMapObjectMgr::EntityPtr(a1);
   if ( !v3 )
     return 0;
-  v4 = IEntity::FlagBits(v3, EntityFlag_AliveMask) != 0;
+  v4 = IEntity::FlagBits(v3, ENTITY_FLAG_AliveMask) != 0;
   return IEntity::WarriorType() == a2 && v4;
 }
 
@@ -698,7 +698,7 @@ void __cdecl IAIEnvironment::EntitySendCastSpellCommand(int a1, int a2, int _iDs
   int v8; // [esp+30h] [ebp-4h]
 
   SettlerPtr = CSettlerMgr::GetSettlerPtr((struct CSettlerMgr *)g_cSettlerMgr, a1);
-  if ( SettlerPtr && IEntity::FlagBits(SettlerPtr, EntityFlag_Ready) && IEntity::Type(SettlerPtr) == 45 )
+  if ( SettlerPtr && IEntity::FlagBits(SettlerPtr, ENTITY_FLAG_Ready) && IEntity::Type(SettlerPtr) == 45 )
   {
     v3 = IEntity::OwnerId(SettlerPtr);
     v6 = CEntityEvent::CEntityEvent(&v4, 3u, a2, v3, 0, _iDstXY);
@@ -1160,7 +1160,7 @@ int __cdecl IAIEnvironment::VehicleGetFirstReadyAndCheckedOutVehicleId(int a1, i
   for ( i = CVehicleMgr::GetFirstVehicleId(a1, a2); i > 0; i = IAnimatedEntity::Next(v3) )
   {
     v3 = (_DWORD *)CVehicleMgr::operator[](i);
-    if ( (_UNKNOWN *)IEntity::FlagBits(v3, EntityFlag_Ready|EntityFlag_OnBoard) == &loc_1C00000 )
+    if ( (_UNKNOWN *)IEntity::FlagBits(v3, ENTITY_FLAG_Ready|ENTITY_FLAG_OnBoard) == &loc_1C00000 )
       return i;
   }
   return 0;

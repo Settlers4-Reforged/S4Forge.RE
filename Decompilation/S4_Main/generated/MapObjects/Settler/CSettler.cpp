@@ -51,7 +51,7 @@ bool  CSettler::SetNextSettlerType(int a2) {
 // Decompiled from bool __thiscall CSettler::Strike(IEntity *this)
 bool  CSettler::Strike(void)const {
   
-  return IEntity::FlagBits(this, EntityFlag_NotStriking) == 0;
+  return IEntity::FlagBits(this, 0x1000) == 0;
 }
 
 
@@ -108,7 +108,7 @@ void  CSettler::Delete(void) {
   this->m_iFlags &= ~0x10000000u;
   if ( IEntity::Type(this) < SETTLER_MAX
     && IEntity::WarriorType(this) == AI_WARRIOR_TYPE_NONE
-    && !IEntity::FlagBits(this, EntityFlag_OnBoard) )
+    && !IEntity::FlagBits(this, ENTITY_FLAG_OnBoard) )
   {
     this->m_iFlags |= 0x10000000u;
   }
@@ -133,7 +133,7 @@ void  CSettler::Delete(void) {
       pRole = CSettler::Role(this);
       v15 = pRole->GetSettlerRole(pRole) == 0x12;
     }
-    if ( v15 && (IEntity::Flags(this) & EntityFlag_Visible) != 0 )
+    if ( v15 && (IEntity::Flags(this) & ENTITY_FLAG_Visible) != 0 )
     {
       v10 = CGameData::Rand(g_pGameData);
       if ( v10 >= CRandom16::PercentValue(0x21u) )
@@ -167,7 +167,7 @@ void  CSettler::LogicUpdate(void) {
   struct ISettlerRole *v1; // [esp+0h] [ebp-Ch]
   struct ISettlerRole *v2; // [esp+4h] [ebp-8h]
 
-  if ( !IEntity::FlagBits(this, EntityFlag_Died) )
+  if ( !IEntity::FlagBits(this, ENTITY_FLAG_Died) )
   {
     if ( !IEntity::FlagBits(this, (EntityFlag)128)
       || (IEntity::ClearFlagBits(this, (EntityFlag)128),
@@ -179,7 +179,7 @@ void  CSettler::LogicUpdate(void) {
         v1 = std::auto_ptr<ISettlerRole>::operator->(&this->m_pBehavior);
         v1->LogicUpdate(v1, this);
       }
-      IEntity::FlagBits(this, EntityFlag_Registered);
+      IEntity::FlagBits(this, ENTITY_FLAG_Registered);
     }
   }
 }
@@ -219,7 +219,7 @@ struct SGfxObjectInfo *  CSettler::GetGfxInfos(void) {
   signed int iFrame; // [esp+68h] [ebp-10h]
   unsigned int iJobPart; // [esp+6Ch] [ebp-Ch]
 
-  if ( IEntity::FlagBits(this, EntityFlag_Died) )
+  if ( IEntity::FlagBits(this, ENTITY_FLAG_Died) )
     return 0;
   if ( !IEntity::IsVisible(this) )
     return 0;
@@ -228,7 +228,7 @@ struct SGfxObjectInfo *  CSettler::GetGfxInfos(void) {
   pRole = std::auto_ptr<ISettlerRole>::operator->(&this->m_pBehavior);
   ISettlerRole::Update(pRole, this);
   iRace = IEntity::Race(this);
-  if ( IEntity::FlagBits(this, (EntityFlag)0x10000000) )
+  if ( IEntity::FlagBits(this, ENTITY_FLAG_Ownerless) )
   {
     LocalPlayerId = CPlayerManager::GetLocalPlayerId();
     iAllianceId = CAlliances::AllianceId(LocalPlayerId);
@@ -364,7 +364,7 @@ struct SGfxObjectInfo *  CSettler::GetGfxInfos(void) {
     IEntity::m_sGfxInfo.m_iOffsetY = 0;
   }
   IEntity::m_sGfxInfo.m_uFlags = 0;
-  if ( IEntity::FlagBits(this, EntityFlag_Selected) )
+  if ( IEntity::FlagBits(this, ENTITY_FLAG_Selected) )
   {
     pRole = std::auto_ptr<ISettlerRole>::operator->(&this->m_pBehavior);
     IEntity::m_sGfxInfo.m_uFlags = ((int (__thiscall *)(ISettlerRole *, CSettler *))pRole->GetKindOfSelection)(
@@ -432,7 +432,7 @@ void  CSettler::GetPatchGfx(struct SGfxPatchObject & a2) {
 
   v2 = std::auto_ptr<ISettlerRole>::operator->(&this->m_pBehavior);
   ISettlerRole::Update(v2, this);
-  if ( IEntity::FlagBits(this, EntityFlag_Visible) )
+  if ( IEntity::FlagBits(this, ENTITY_FLAG_Visible) )
   {
     iDirection = this->m_iDirection;
     cFrame = this->m_iFrame;
@@ -456,7 +456,7 @@ void  CSettler::NewRole(class std::auto_ptr<class ISettlerRole> a2) {
   int v7; // [esp+1Ch] [ebp-4h]
 
   v7 = 0;
-  if ( IEntity::FlagBits(this, EntityFlag_Died) )
+  if ( IEntity::FlagBits(this, ENTITY_FLAG_Died) )
   {
     BBSupportTracePrintF(0, "STOP this settler is dead");
     v7 = -1;
@@ -496,7 +496,7 @@ void  CSettler::NewToDoList(class std::list<class CEntityTask,class std::allocat
   struct ISettlerRole *pSettlerRole; // [esp+18h] [ebp-14h]
   int v10; // [esp+28h] [ebp-4h]
 
-  if ( IEntity::FlagBits(this, EntityFlag_Died) )
+  if ( IEntity::FlagBits(this, ENTITY_FLAG_Died) )
   {
     BBSupportTracePrintF(0, "STOP this settler is dead");
   }
@@ -530,7 +530,7 @@ void  CSettler::NewToDoList(class std::list<class CEntityTask,class std::allocat
 void  CSettler::TakeWaitList(void) {
   
   unsigned int v1; // eax
-  int v2; // eax
+  std::list *v2; // eax
   unsigned int v3; // [esp-8h] [ebp-Ch]
   int v4; // [esp-4h] [ebp-8h]
 
@@ -538,7 +538,7 @@ void  CSettler::TakeWaitList(void) {
   v3 = IEntity::Type(this);
   v1 = IEntity::Race(this);
   v2 = CEntityToDoListMgr::SettlerJobList(g_pEntityToDoListMgr, v1, v3);
-  this->NewToDoList(this, v2, v4);
+  this->NewToDoList(this, (int)v2, v4);
 }
 
 
@@ -604,7 +604,7 @@ void  CSettler::AttachToBuilding(int a1) {
   v3 = CBuildingMgr::operator[](a1);
   v2 = IEntity::EntityId(this);
   (*(void (__thiscall **)(CBuilding *, int))(*(_DWORD *)v3 + 116))(v3, v2);
-  if ( !IEntity::FlagBits(this, EntityFlag_Attached)
+  if ( !IEntity::FlagBits(this, ENTITY_FLAG_ATTACHED)
     && BBSupportDbgReport(2, "MapObjects\\Settler\\Settler.cpp", 1397, "FlagBits(ENTITY_FLAG_ATTACHED) != 0") == 1 )
   {
     __debugbreak();
@@ -657,7 +657,7 @@ void  CSettler::ChangeType(int _iNewSettlerType, bool a3, bool a4) {
   unsigned __int16 *rEcoSector; // [esp+40h] [ebp-14h]
   int v41; // [esp+50h] [ebp-4h]
 
-  if ( IEntity::FlagBits(this, EntityFlag_Died) )
+  if ( IEntity::FlagBits(this, ENTITY_FLAG_Died) )
   {
     BBSupportTracePrintF(0, "STOP this settler is dead");
   }
@@ -668,7 +668,7 @@ void  CSettler::ChangeType(int _iNewSettlerType, bool a3, bool a4) {
     {
       __debugbreak();
     }
-    if ( IEntity::FlagBits(this, EntityFlag_Offered)
+    if ( IEntity::FlagBits(this, ENTITY_FLAG_Offered)
       && BBSupportDbgReport(2, "MapObjects\\Settler\\Settler.cpp", 579, "!FlagBits(ENTITY_FLAG_OFFERED)") == 1 )
     {
       __debugbreak();
@@ -769,7 +769,7 @@ void  CSettler::ChangeType(int _iNewSettlerType, bool a3, bool a4) {
           if ( IEntity::FlagBits(this, (EntityFlag)1024) )
           {
             IEntity::ClearFlagBits(this, (EntityFlag)1024);
-            IEntity::SetFlagBits(this, EntityFlag_Selected);
+            IEntity::SetFlagBits(this, ENTITY_FLAG_Selected);
           }
         }
         else
@@ -809,7 +809,7 @@ void  CSettler::ChangeTypeComeToBuilding(int a2, int a3) {
   struct CEntityEvent *v5; // [esp+20h] [ebp-14h]
   int v7; // [esp+30h] [ebp-4h]
 
-  if ( !IEntity::FlagBits(this, EntityFlag_Died) )
+  if ( !IEntity::FlagBits(this, ENTITY_FLAG_Died) )
   {
     CSettler::ChangeType(this, a2, 1, 0);
     CSettler::SetBuilding(this, a3);
@@ -1096,7 +1096,7 @@ void  CSettler::Store(std::ostream & a1) {
   struct ISettlerRole *v9; // [esp+30h] [ebp-18h]
   char v11; // [esp+39h] [ebp-Fh]
   byte iRole; // [esp+3Ah] [ebp-Eh] BYREF
-  unsigned __int8 v13; // [esp+3Bh] [ebp-Dh] BYREF
+  unsigned __int8 a2; // [esp+3Bh] [ebp-Dh] BYREF
   int v14; // [esp+44h] [ebp-4h]
 
   IMovingEntity::Store(this, a1);
@@ -1105,7 +1105,7 @@ void  CSettler::Store(std::ostream & a1) {
   operator^<short>(a1, &this->m_iToDoSize);
   if ( this->m_iToDoSize != -1 )
   {
-    v13 = 0;
+    a2 = 0;
     std::list<CEntityTask>::begin(this->m_pToDoList);
     v14 = 0;
     while ( 1 )
@@ -1123,12 +1123,12 @@ void  CSettler::Store(std::ostream & a1) {
       {
         break;
       }
-      ++v13;
+      ++a2;
       std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator++(v3);
     }
     v14 = -1;
     std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v3);
-    operator^<unsigned char>(a1, &v13);
+    operator^<unsigned char>(a1, &a2);
   }
   v9 = std::auto_ptr<ISettlerRole>::operator->(&this->m_pBehavior);
   iRole = v9->GetSettlerRole(v9);
@@ -1263,7 +1263,7 @@ int  CSettler::SetGroupFlags(int a2) {
   race2 = IEntity::Race(this);
   this->m_iLivePoints = CSettlerMgr::GetSettlerInfo(race2, _iSettlerType)->m_iMaxLifePoints;
   IEntity::ClearFlagBits(this, (EntityFlag)10240);
-  IEntity::SetFlagBits(this, EntityFlag_Ready|EntityFlag_NotStriking|EntityFlag_Visible);
+  IEntity::SetFlagBits(this, ENTITY_FLAG_Ready|ENTITY_FLAG_Visible|0x1000);
   this->m_iFlags |= CSettlerMgr::SettlerWarriorType(_iSettlerType);
   if ( IEntity::WarriorType(this) == AI_WARRIOR_TYPE_NONE )
   {
@@ -1313,7 +1313,7 @@ int  CSettler::SetGroupFlags(int a2) {
   this->m_iDistance = 0;
   this->m_uObjType = 0;
   this->m_nType = type;
-  IEntity::ClearFlagBits(this, EntityFlag_VulnerableMask|EntityFlag_Selectable|EntityFlag_Visible|0x800);
+  IEntity::ClearFlagBits(this, ENTITY_FLAG_VulnerableMask|ENTITY_FLAG_Selectable|ENTITY_FLAG_Visible|0x800);
   this->m_iFlags = this->m_iFlags;
   this->m_iDisplacementCosts = 5;
   return this;
@@ -1375,14 +1375,14 @@ int  CSettler::Walk(void) {
   int v3; // eax
   CWalking *v4; // [esp+0h] [ebp-8h]
 
-  if ( IEntity::FlagBits(this, EntityFlag_Died) )
+  if ( IEntity::FlagBits(this, ENTITY_FLAG_Died) )
   {
     BBSupportTracePrintF(0, "STOP this settler is dead");
     return -1;
   }
-  else if ( std::auto_ptr<CWalking>::get(&this->m_pWalkin) )
+  else if ( std::auto_ptr<CWalking>::get(&this->m_pWalking) )
   {
-    v4 = std::auto_ptr<CWalking>::operator->(&this->m_pWalkin);
+    v4 = std::auto_ptr<CWalking>::operator->(&this->m_pWalking);
     v2 = IEntity::PackedXY(this);
     v3 = v4->Walk(v4, v2);
     return CSettler::WalkDir(this, v3);
@@ -1422,7 +1422,7 @@ int  CSettler::WalkDir(int a2) {
   unsigned int v24; // [esp+4Ch] [ebp-10h]
   int v25; // [esp+50h] [ebp-Ch]
 
-  if ( IEntity::FlagBits(this, EntityFlag_Died) )
+  if ( IEntity::FlagBits(this, ENTITY_FLAG_Died) )
   {
     BBSupportTracePrintF(0, "STOP this settler is dead");
     return -1;

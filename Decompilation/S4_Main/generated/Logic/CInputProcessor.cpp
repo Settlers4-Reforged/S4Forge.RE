@@ -164,7 +164,7 @@ void  CInputProcessor::DeSelectEntity(int a2) {
     v16 = CMapObjectMgr::EntityPtr(a2);
     if ( v16 )
     {
-      IEntity::ClearFlagBits(v16, EntityFlag_Selected);
+      IEntity::ClearFlagBits(v16, ENTITY_FLAG_Selected);
       IEntity::ClearFlagBits(v16, (EntityFlag)1024);
     }
     if ( std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) )
@@ -225,8 +225,8 @@ void  CInputProcessor::AddToSelection(int _iEntityId) {
       v4 = _iEntityId;
       std::vector<unsigned short>::push_back(&CInputProcessor::m_vSelection, &v4);
       CFsm::GenerateEvent(this->m_pFSM, 484, 0);
-      if ( IEntity::FlagBits(v3, EntityFlag_Selectable) )
-        IEntity::SetFlagBits(v3, EntityFlag_Selected);
+      if ( IEntity::FlagBits(v3, ENTITY_FLAG_Selectable) )
+        IEntity::SetFlagBits(v3, ENTITY_FLAG_Selected);
       else
         IEntity::SetFlagBits(v3, (EntityFlag)0x400);
     }
@@ -981,7 +981,7 @@ bool  CInputProcessor::SelectNextBuilding(class CEvn_Logic * a2) {
     std::vector<unsigned short>::push_back(&CInputProcessor::m_vSelection, &v12);
     CInputProcessor::RequestDialog(this);
     v6 = CMapObjectMgr::EntityPtr(v13);
-    IEntity::SetFlagBits(v6, EntityFlag_Selected);
+    IEntity::SetFlagBits(v6, ENTITY_FLAG_Selected);
     BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, v13);
     CBuilding::NotifySelected(BuildingPtr);
     v8 = IEntity::X(BuildingPtr);
@@ -1053,7 +1053,7 @@ bool  CInputProcessor::SelectBuilding(class CEvn_Logic * a2) {
     std::vector<unsigned short>::push_back(&CInputProcessor::m_vSelection, &v12);
     CInputProcessor::RequestDialog(this);
     v6 = CMapObjectMgr::EntityPtr(v13);
-    IEntity::SetFlagBits(v6, EntityFlag_Selected);
+    IEntity::SetFlagBits(v6, ENTITY_FLAG_Selected);
     BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, v13);
     CBuilding::NotifySelected(BuildingPtr);
     x = IEntity::X(BuildingPtr);
@@ -1179,7 +1179,7 @@ bool  CInputProcessor::SelectNextVehicle(class CEvn_Logic * _pEvent) {
     }
     VehiclePtr = CVehicleMgr::GetVehiclePtr(FirstVehicleId);
   }
-  while ( FirstVehicleId != v7 && IEntity::FlagBits(VehiclePtr, EntityFlag_OnBoard) );
+  while ( FirstVehicleId != v7 && IEntity::FlagBits(VehiclePtr, ENTITY_FLAG_OnBoard) );
   if ( FirstVehicleId && VehiclePtr )
   {
     v9 = FirstVehicleId;
@@ -1188,7 +1188,7 @@ bool  CInputProcessor::SelectNextVehicle(class CEvn_Logic * _pEvent) {
     if ( IEntity::FlagBits(VehiclePtr, (EntityFlag)0x4000) )
       IEntity::SetFlagBits(VehiclePtr, (EntityFlag)1024);
     else
-      IEntity::SetFlagBits(VehiclePtr, EntityFlag_Selected);
+      IEntity::SetFlagBits(VehiclePtr, ENTITY_FLAG_Selected);
     v6 = IEntity::X(VehiclePtr);
     v5 = IEntity::Y(VehiclePtr);
     CEvn_Event::CEvn_Event(&v13, 0x13u, v5, v6, 0);
@@ -2115,7 +2115,7 @@ bool  CInputProcessor::DotSelection(class CEvn_Logic * a2) {
       v10 = CInputProcessor::GetEntitySelectionType(v4);
       v13 = !EntitySelectionType || EntitySelectionType == 0x10000 || EntitySelectionType != v10;
       v25 = v13;
-      if ( !v13 && IEntity::FlagBits(entity, EntityFlag_Selected) )
+      if ( !v13 && IEntity::FlagBits(entity, ENTITY_FLAG_Selected) )
       {
         v21 = 0;
         CInputProcessor::DeSelectEntity(this, foundEntityId);
@@ -2133,7 +2133,7 @@ bool  CInputProcessor::DotSelection(class CEvn_Logic * a2) {
       }
       else
       {
-        IEntity::SetFlagBits(entity, EntityFlag_Selected);
+        IEntity::SetFlagBits(entity, ENTITY_FLAG_Selected);
         if ( IEntity::ObjType(entity) == BUILDING_OBJ )// == Building
         {
           CSoundManager::PlaySoundFX(g_pSoundManager, 7);
@@ -2239,9 +2239,9 @@ bool  CInputProcessor::SelectGroup(class CEvn_Logic * _pEvent) {
   {
     v5 = v7[i];
     v6 = CMapObjectMgr::Entity(v5);
-    if ( IEntity::FlagBits(v6, EntityFlag_Selectable) )
+    if ( IEntity::FlagBits(v6, ENTITY_FLAG_Selectable) )
     {
-      IEntity::SetFlagBits(v6, EntityFlag_Selected);
+      IEntity::SetFlagBits(v6, ENTITY_FLAG_Selected);
       v13 = v5;
       std::vector<unsigned short>::push_back(&CInputProcessor::m_vSelection, &v13);
     }
@@ -2824,7 +2824,7 @@ CInputProcessor__SearchUnit___def_185AC66:
         __debugbreak();
       if ( pSettler )
       {
-        IEntity::SetFlagBits(pSettler, EntityFlag_Selected);
+        IEntity::SetFlagBits(pSettler, ENTITY_FLAG_Selected);
         v39 = FirstSettlerId;
         std::vector<unsigned short>::push_back(&CInputProcessor::m_vSelection, &v39);
         iX = IEntity::X(pSettler);
@@ -3435,9 +3435,9 @@ void  CInputProcessor::BoxSelection(void) {
         v2 = std::vector<unsigned short>::operator[](&this->m_pEntityCandidates, j);
         v6 = CMapObjectMgr::EntityPtr(*v2);
         if ( (CInputProcessor::GetEntitySelectionType(v6) & 0xFFFF00) == v3
-          && !IEntity::FlagBits(v6, EntityFlag_Selected) )
+          && !IEntity::FlagBits(v6, ENTITY_FLAG_Selected) )
         {
-          IEntity::SetFlagBits(v6, EntityFlag_Selected);
+          IEntity::SetFlagBits(v6, ENTITY_FLAG_Selected);
           v10 = IEntity::EntityId(v6);
           std::vector<unsigned short>::push_back(&v10);
           if ( this->m_iSelectionType == 0x10000 )
@@ -3504,7 +3504,7 @@ int  CInputProcessor::SelectOne(int x, int y) {
         v24 = CMapObjectMgr::EntityPtr(v23);
         v3 = IEntity::OwnerId(v24);
         if ( v3 == CPlayerManager::GetLocalPlayerId()
-          && (IEntity::FlagBits(v24, EntityFlag_Selectable) || IEntity::FlagBits(v24, (EntityFlag)0x4000)) )
+          && (IEntity::FlagBits(v24, ENTITY_FLAG_Selectable) || IEntity::FlagBits(v24, (EntityFlag)0x4000)) )
         {
           v27 = v23;
           std::vector<unsigned short>::push_back(&v7, &v27);
@@ -3558,7 +3558,7 @@ LABEL_13:
   v25 = CMapObjectMgr::EntityPtr(v21);
   v5 = IEntity::OwnerId(v25);
   if ( v5 != CPlayerManager::GetLocalPlayerId()
-    || !IEntity::FlagBits(v25, EntityFlag_Selectable)
+    || !IEntity::FlagBits(v25, ENTITY_FLAG_Selectable)
     && !IEntity::FlagBits(v25, (EntityFlag)0x4000)
     && IEntity::ObjType(v25) != BUILDING_OBJ )
   {
@@ -3709,14 +3709,14 @@ int  CInputProcessor::SelectAllInSurrounding(int a2, int a3) {
         {
           if ( IEntity::OwnerId(v13) == LocalPlayerId
             && IEntity::FlagBits(v13, (EntityFlag)&loc_3000000)
-            && (IEntity::FlagBits(v13, EntityFlag_Selectable) || IEntity::ObjType(v13) == BUILDING_OBJ)
+            && (IEntity::FlagBits(v13, ENTITY_FLAG_Selectable) || IEntity::ObjType(v13) == BUILDING_OBJ)
             && CInputProcessor::GetEntitySelectionType(v13) == this->m_iSelectionType )
           {
             v5 = IEntity::Y(v13);
             v4 = IEntity::X(v13);
             if ( CWorldManager::SectorId(v4, v5) == dword_3F1F60C )
             {
-              IEntity::SetFlagBits(v13, EntityFlag_Selected);
+              IEntity::SetFlagBits(v13, ENTITY_FLAG_Selected);
               v14 = IEntity::EntityId(v13);
               std::vector<unsigned short>::push_back(&v14);
               if ( IEntity::ObjType(v13) == BUILDING_OBJ
@@ -3774,7 +3774,7 @@ bool  CInputProcessor::SelectAtSector(enum SETTLER_TYPES _SettlerType, int a2) {
       v4 = IEntity::X(SettlerPtr);
       if ( CWorldManager::SectorId(v4, v5) == a2 )
       {
-        IEntity::SetFlagBits(SettlerPtr, EntityFlag_Selected);
+        IEntity::SetFlagBits(SettlerPtr, ENTITY_FLAG_Selected);
         v8 = i;
         std::vector<unsigned short>::push_back(&CInputProcessor::m_vSelection, &v8);
         v9 = 1;
@@ -4204,7 +4204,7 @@ void  CInputProcessor::DeSelectAll(void) {
       v3 = CMapObjectMgr::EntityPtr(v2);
       if ( v3 )
       {
-        IEntity::ClearFlagBits(v3, EntityFlag_Selected);
+        IEntity::ClearFlagBits(v3, ENTITY_FLAG_Selected);
         IEntity::ClearFlagBits(v3, (EntityFlag)1024);
         if ( IEntity::ObjType(v3) == BUILDING_OBJ )
         {
@@ -4361,7 +4361,7 @@ void  CInputProcessor::TidyUp(void) {
     BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, v1);
     if ( BuildingPtr )
     {
-      if ( !IEntity::FlagBits(BuildingPtr, EntityFlag_Selected)
+      if ( !IEntity::FlagBits(BuildingPtr, ENTITY_FLAG_Selected)
         && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 4498, "pBuilding->FlagBits(ENTITY_FLAG_SELECTED) != 0") == 1 )
       {
         __debugbreak();

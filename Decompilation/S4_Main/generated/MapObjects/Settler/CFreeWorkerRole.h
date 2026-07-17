@@ -12,7 +12,7 @@ public:
     virtual class CWalking *  InitWalking(class CSettler * a2);
 
     // address=[0x156dc50]
-    virtual void  LogicUpdateJob(class CSettler * a2);
+    virtual void  LogicUpdateJob(class CSettler * arg0);
 
     // address=[0x156e4c0]
     virtual void  UpdateJob(class CSettler * a2);

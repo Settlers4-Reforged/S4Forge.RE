@@ -34,7 +34,7 @@ class CPersistence * __cdecl CPlant::New(std::istream & a1) {
   if ( IDecoObject::IsStaticInstance(this) )
   {
     this->m_iFrame = CStateGame::Rand(g_pGame) % this->m_uCycleFrames;
-    IEntity::SetFlagBits(this, EntityFlag_Ready);
+    IEntity::SetFlagBits(this, ENTITY_FLAG_Ready);
   }
   else
   {
@@ -51,7 +51,7 @@ class CPersistence * __cdecl CPlant::New(std::istream & a1) {
   IDecoObject::IDecoObject(this, a2, a3, a4, a5);
   this->__vftable = (IAnimatedEntity_vtbl *)&CPlant::_vftable_;
   this->m_uU5 = 0;
-  IEntity::SetFlagBits(this, EntityFlag_Ready);
+  IEntity::SetFlagBits(this, ENTITY_FLAG_Ready);
   this->m_iPhases = 3;
   this->m_iJobPart = this->m_iPhases + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType);
   this->m_uCycleFrames = a2->m_uCycleFrames;
@@ -96,7 +96,7 @@ void  CPlant::LogicUpdate(void) {
                              + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType),
             this->m_iPhases == 3) )
       {
-        IEntity::SetFlagBits(this, EntityFlag_Ready);
+        IEntity::SetFlagBits(this, ENTITY_FLAG_Ready);
         v6 = IEntity::Type(this);
         v5 = IEntity::Y(this);
         v1 = IEntity::X(this);
@@ -184,7 +184,7 @@ void  CPlant::Take(int _iAmount) {
   {
     __debugbreak();
   }
-  IEntity::ClearFlagBits(this, EntityFlag_Ready);
+  IEntity::ClearFlagBits(this, ENTITY_FLAG_Ready);
   this->m_iPhases += _iAmount;
   this->m_iFrame = 0;
   this->m_iJobPart = this->m_iPhases + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType);

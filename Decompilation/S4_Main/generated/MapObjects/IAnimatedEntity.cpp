@@ -107,7 +107,7 @@ void  IAnimatedEntity::SetEvent(class CEntityEvent const & a1) {
   m_iEvent = a1->m_iEvent;
   v2 = IEntity::EntityId(this);
   IMessageTracer::PushFormatedInts(g_pMsgTracer, "SetEvent(): id %u, event %u, type %u", v2, m_iEvent, m_iType);
-  if ( !IEntity::FlagBits(this, EntityFlag_Registered) )
+  if ( !IEntity::FlagBits(this, ENTITY_FLAG_Registered) )
     IAnimatedEntity::RegisterForLogicUpdate(this, 1);
   std::vector<CEntityEvent>::push_back(&this->m_iEventQueue, a1);
 }
@@ -150,7 +150,7 @@ void  IAnimatedEntity::BoxSelection(void) {
     }
     EntitySelectionType = CInputProcessor::GetEntitySelectionType(this);
     SelectionType = CInputProcessor::GetSelectionType(&g_cInputProcessor);
-    if ( IEntity::FlagBits(this, EntityFlag_Selectable) || IEntity::ObjType(this) == BUILDING_OBJ )
+    if ( IEntity::FlagBits(this, ENTITY_FLAG_Selectable) || IEntity::ObjType(this) == BUILDING_OBJ )
     {
       v11 = 0;
       if ( v7 )

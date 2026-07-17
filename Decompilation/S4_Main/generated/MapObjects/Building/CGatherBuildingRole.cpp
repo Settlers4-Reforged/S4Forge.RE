@@ -114,7 +114,7 @@ void  CGatherBuildingRole::LogicUpdate(class CBuilding * a2) {
   int v26; // [esp+68h] [ebp-4h]
 
   v25 = this;
-  result = IEntity::FlagBits(a2, EntityFlag_Selected);
+  result = IEntity::FlagBits(a2, ENTITY_FLAG_Selected);
   if ( result )
     result = (*(int (__thiscall **)(CGatherBuildingRole *, struct CBuilding *, int))(*(_DWORD *)v25 + 88))(v25, a2, 1);
   v22 = *((_BYTE *)v25 + 4);
@@ -136,7 +136,7 @@ void  CGatherBuildingRole::LogicUpdate(class CBuilding * a2) {
     *((_DWORD *)v25 + 4) = 0;
     if ( *((_BYTE *)v25 + 29) )
     {
-      if ( IEntity::FlagBits(a2, EntityFlag_NotStriking) )
+      if ( IEntity::FlagBits(a2, (EntityFlag)0x1000u) )
       {
         v20 = CPileMgr::operator[](*((unsigned __int16 *)v25 + 190));
         if ( (*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)v20 + 40))(v20) < 8 )
@@ -179,7 +179,7 @@ void  CGatherBuildingRole::LogicUpdate(class CBuilding * a2) {
     if ( !*((_DWORD *)v25 + 4) )
       return IAnimatedEntity::RegisterForLogicUpdate(31);
     v24 = (_DWORD *)CSettlerMgr::operator[](*((unsigned __int16 *)v25 + 4));
-    IEntity::ClearFlagBits(v24, EntityFlag_Visible);
+    IEntity::ClearFlagBits(v24, ENTITY_FLAG_Visible);
     v10 = Y16X16::UnpackYFast(*((_DWORD *)v25 + 4));
     v7 = Y16X16::UnpackXFast(*((_DWORD *)v25 + 4));
     CWorldManager::SetFlagBits(v7, v10, 32);
@@ -305,7 +305,7 @@ void  CGatherBuildingRole::Init(class CBuilding * a2) {
     __debugbreak();
   }
   IAnimatedEntity::RegisterForLogicUpdate(2);
-  result = IEntity::FlagBits(a2, EntityFlag_Selected);
+  result = IEntity::FlagBits(a2, ENTITY_FLAG_Selected);
   if ( result )
     return (*(int (__thiscall **)(CGatherBuildingRole *, struct CBuilding *, _DWORD))(*(_DWORD *)this + 88))(
              this,
@@ -316,29 +316,27 @@ void  CGatherBuildingRole::Init(class CBuilding * a2) {
 
 
 // address=[0x150bbc0]
-// Decompiled from int __thiscall CGatherBuildingRole::PostLoadInit(CGatherBuildingRole *this, struct CBuilding *a2)
+// Decompiled from void __thiscall CGatherBuildingRole::PostLoadInit(CGatherBuildingRole *this, IEntity *a2)
 void  CGatherBuildingRole::PostLoadInit(class CBuilding * a2) {
   
   int v2; // eax
   int v3; // eax
-  int result; // eax
+  CSettlerMgr::SSettlerInfos *SettlerInfo; // eax
   int v5; // [esp-8h] [ebp-Ch]
   int v6; // [esp-4h] [ebp-8h]
 
-  v6 = IEntity::Type((unsigned __int16 *)a2);
+  v6 = IEntity::Type(a2);
   v2 = IEntity::Race(a2);
   *((_DWORD *)this + 94) = CBuildingInfoMgr::GetBuildingInfo(v2, v6);
   v5 = *(char *)(*((_DWORD *)this + 94) + 478);
   v3 = IEntity::Race(a2);
-  CSettlerMgr::GetSettlerInfo(v3, v5);
-  result = *(_DWORD *)std::vector<CSettlerMgr::SSearchInfos>::operator[](0);
-  *((_DWORD *)this + 8) = result;
-  if ( *((_DWORD *)this + 8) )
-    return result;
-  result = BBSupportDbgReport(2, "MapObjects\\Building\\GatherBuilding.cpp", 112, "m_pSearchFkt != 0");
-  if ( result == 1 )
+  SettlerInfo = CSettlerMgr::GetSettlerInfo(v3, v5);
+  *((_DWORD *)this + 8) = std::vector<CSettlerMgr::SSearchInfos>::operator[](&SettlerInfo->m_vSearches, 0)->m_pSearchFkt;
+  if ( !*((_DWORD *)this + 8)
+    && BBSupportDbgReport(2, "MapObjects\\Building\\GatherBuilding.cpp", 112, "m_pSearchFkt != 0") == 1 )
+  {
     __debugbreak();
-  return result;
+  }
 }
 
 
@@ -357,7 +355,7 @@ bool  CGatherBuildingRole::SettlerEnter(class CBuilding * a2, int a3) {
   *((_BYTE *)this + 29) = 1;
   *((_WORD *)this + 4) = a3;
   v10 = (_DWORD *)CSettlerMgr::operator[](a3);
-  IEntity::ClearFlagBits(v10, EntityFlag_Visible);
+  IEntity::ClearFlagBits(v10, ENTITY_FLAG_Visible);
   if ( *(_BYTE *)(*((_DWORD *)this + 94) + 480) )
   {
     *((_BYTE *)this + 5) = 0;
@@ -402,7 +400,7 @@ void  CGatherBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
   byte_3F1E4ED = IEntity::Race(a2);
   byte_3F1E4EC = IEntity::Type((unsigned __int16 *)a2);
   byte_3F1E4EF = 1;
-  byte_3F1E4F0 = IEntity::FlagBits(a2, EntityFlag_NotStriking) != 0;
+  byte_3F1E4F0 = IEntity::FlagBits(a2, (EntityFlag)0x1000u) != 0;
   byte_3F1E4F1 = 1;
   v6 = IEntity::Type((unsigned __int16 *)a2);
   v3 = IEntity::OwnerId((unsigned __int8 *)a2);

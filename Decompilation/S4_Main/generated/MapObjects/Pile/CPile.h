@@ -66,37 +66,37 @@ public:
     virtual struct SGfxObjectInfo *  GetGfxInfos(void);
 
     // address=[0x155bfa0]
-    void  GetPatchGfx(struct SGfxPatchObject & a2);
+    void  GetPatchGfx(struct SGfxPatchObject & _pGfxPatchObject);
 
     // address=[0x155c030]
-    void  ChangeRole(int a2);
+    void  ChangeRole(int _iRoleType);
 
     // address=[0x155c130]
-    int  IncreaseUnforeseen(int a2);
+    int  IncreaseUnforeseen(int _iAmount);
 
     // address=[0x155c2a0]
-    void  DecreaseUnforeseen(int a2);
+    void  DecreaseUnforeseen(int _iAmount);
 
     // address=[0x155c430]
     bool  ForceAmountLeaving(int a2, int a3);
 
     // address=[0x155c580]
-    void  SetBuildingId(int a2);
+    void  SetBuildingId(int _iBuidingId);
 
     // address=[0x155c640]
-    void  Occupied(int a2);
+    void  Occupied(int _iNewEcoSectorId);
 
     // address=[0x155c700]
-    bool  SetFree(int a2);
+    bool  SetFree(int _iOldEcoSectorId);
 
     // address=[0x155c780]
-    void  NotifyChangeEcoSector(int a2, int a3);
+    void  NotifyChangeEcoSector(int _iOldEcoSectorId, int _iNewEcoSectorId);
 
     // address=[0x155c860]
-    void  Offer(int a2, int a3);
+    void  Offer(int a2, int _iEcoSectorId);
 
     // address=[0x155c8e0]
-    void  CancelOffer(int a2, int a3);
+    void  CancelOffer(int a2, int _iEcoSectorId);
 
     // address=[0x155c960]
     void  CancelCompleteOfferIfInOfferList(int a2);
@@ -123,16 +123,16 @@ public:
     void  ChangeAmountAndDetach(int a2);
 
     // address=[0x155cbf0]
-    void  AttachAndIncAmountLeaving(int a2, int a3, enum T_OBSERVER_TARGET a4);
+    void  AttachAndIncAmountLeaving(int a2, int _iAmount, enum T_OBSERVER_TARGET _tTargetType);
 
     // address=[0x155cc90]
-    void  AttachAndIncAmountComing(int a2);
+    void  AttachAndIncAmountComing(int _iAmount);
 
     // address=[0x155ccd0]
     virtual void  Notify(class CEntityEvent const & a2)const;
 
     // address=[0x155ccf0]
-    virtual void  SetObserverTarget(enum T_OBSERVER_TARGET a2, int a3);
+    virtual void  SetObserverTarget(enum T_OBSERVER_TARGET _tTargetType, int _iTargetId);
 
     // address=[0x155ce70]
     virtual int  GetObserverTarget(enum T_OBSERVER_TARGET a2);
@@ -141,10 +141,10 @@ public:
     void  RequestSpaceIfPossible(void);
 
     // address=[0x155d7c0]
-     CPile(std::istream & a2);
+     CPile(std::istream & _rStream);
 
     // address=[0x155d9a0]
-    virtual void  Store(std::ostream & a2);
+    virtual void  Store(std::ostream & _rStream);
 
     // address=[0x155e770]
     virtual int  Amount(void)const;
@@ -166,10 +166,10 @@ public:
 
 protected:
     // address=[0x155cef0]
-    void  IncreaseEx(int a2);
+    void  IncreaseEx(int _iAmount);
 
     // address=[0x155d180]
-    void  DecreaseEx(int a2);
+    void  DecreaseEx(int _iAmount);
 
     // address=[0x155d370]
     virtual int  Increase(int a2);
@@ -178,10 +178,10 @@ protected:
     virtual void  Decrease(int a2);
 
     // address=[0x155d3d0]
-    void  IncAmountLeaving(int a2);
+    void  IncAmountLeaving(int _iAmount);
 
     // address=[0x155d480]
-    void  DecAmountLeaving(int a2);
+    void  DecAmountLeaving(int _iAmount);
 
     // address=[0x155d540]
     void  IncAmountComing(void);
@@ -190,20 +190,37 @@ protected:
     void  DecAmountComing(void);
 
     // address=[0x155d620]
-    void  AdjustStatistic(int a2, int a3);
+    void  AdjustStatistic(int _iDeltaAmount, int _iEcoSectorId);
 
     // address=[0x155d720]
     bool  ExecuteChangeGoodTypeUnforseen(int a2);
 
 private:
     // address=[0x155dae0]
-     CPile(int a2, int a3, int a4, int a5, class std::auto_ptr<class IPileRole> a6, int a7, int a8, int a9, int a10, int a11);
+     CPile(int _iX, int _iY, int _iGood, int _iAmount, class std::auto_ptr<class IPileRole> _pRole, int _iSlot, int a8, int a9, int _iOffsetX, int _iOffsetY);
 
     // address=[0x155dcc0]
     virtual  ~CPile(void);
 
     // address=[0x155dcf0]
     virtual void  ConvertEventIntoGoal(class CEntityEvent * a2);
+
+    // Type information members
+public:
+    unsigned __int8 m_uGood;
+    unsigned __int8 m_uAmount;
+    unsigned __int8 m_uAmountLeaving;
+    unsigned __int8 m_uAmountComing;
+    unsigned __int8 m_uPileRole;
+    _BYTE byte49;
+    _BYTE byte4A;
+    _WORD m_iOffsetX;
+    _WORD m_iOffsetY;
+    bool m_bOfferFlag;
+    _BYTE gap_51;
+    unsigned __int16 m_uBuildingId;
+    _BYTE[4] m_pRole;
+    int m_cPileObserverList;
 
 };
 

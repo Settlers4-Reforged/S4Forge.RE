@@ -80,7 +80,7 @@ void  CWorkUpBuildingRole::LogicUpdate(class CBuilding * a2) {
   int v14; // [esp+44h] [ebp-4h]
 
   v13 = this;
-  result = IEntity::FlagBits(a2, EntityFlag_Selected);
+  result = IEntity::FlagBits(a2, ENTITY_FLAG_Selected);
   if ( result )
     result = (*(int (__thiscall **)(CWorkUpBuildingRole *, struct CBuilding *, int))(*(_DWORD *)v13 + 88))(v13, a2, 1);
   v12 = *((_BYTE *)v13 + 4);
@@ -110,7 +110,7 @@ void  CWorkUpBuildingRole::LogicUpdate(class CBuilding * a2) {
     return result;
   if ( !*((_BYTE *)v13 + 29) )
     return IAnimatedEntity::RegisterForLogicUpdate(31);
-  if ( !IEntity::FlagBits(a2, EntityFlag_NotStriking) )
+  if ( !IEntity::FlagBits(a2, (EntityFlag)0x1000u) )
     return IAnimatedEntity::RegisterForLogicUpdate(31);
   v10 = CPileMgr::operator[](*((unsigned __int16 *)v13 + 191));
   if ( (*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)v10 + 40))(v10) >= 8
@@ -270,7 +270,7 @@ void  CWorkUpBuildingRole::Init(class CBuilding * a2) {
     if ( *(_BYTE *)(*((_DWORD *)this + 94) + 16 * i + 65) == 1 )
     {
       v6 = CPileMgr::operator[](v12);
-      IEntity::ClearFlagBits(v6, EntityFlag_Visible);
+      IEntity::ClearFlagBits(v6, ENTITY_FLAG_Visible);
     }
     v11 = *(_BYTE *)(*((_DWORD *)this + 94) + 16 * i + 63);
     if ( v11 )
@@ -303,7 +303,7 @@ void  CWorkUpBuildingRole::Init(class CBuilding * a2) {
     __debugbreak();
   }
   *((_BYTE *)this + 4) = 1;
-  if ( IEntity::FlagBits(a2, EntityFlag_Selected) )
+  if ( IEntity::FlagBits(a2, ENTITY_FLAG_Selected) )
     (*(void (__thiscall **)(CWorkUpBuildingRole *, struct CBuilding *, _DWORD))(*(_DWORD *)this + 88))(this, a2, 0);
   return IAnimatedEntity::RegisterForLogicUpdate(2);
 }
@@ -362,7 +362,7 @@ bool  CWorkUpBuildingRole::SettlerEnter(class CBuilding * a2, int a3) {
   if ( a3 <= 0 && BBSupportDbgReport(2, "MapObjects\\Building\\WorkUpBuilding.cpp", 240, "_iSettlerId > 0") == 1 )
     __debugbreak();
   v24 = (CSettler *)CSettlerMgr::operator[](a3);
-  if ( IEntity::FlagBits(v24, EntityFlag_Visible)
+  if ( IEntity::FlagBits(v24, ENTITY_FLAG_Visible)
     && BBSupportDbgReport(
          2,
          "MapObjects\\Building\\WorkUpBuilding.cpp",
@@ -383,7 +383,7 @@ bool  CWorkUpBuildingRole::SettlerEnter(class CBuilding * a2, int a3) {
   {
     *((_BYTE *)v25 + 29) = 1;
     *((_WORD *)v25 + 4) = a3;
-    if ( IEntity::FlagBits(a2, EntityFlag_NotStriking) )
+    if ( IEntity::FlagBits(a2, (EntityFlag)0x1000u) )
     {
       CEntityEvent::CEntityEvent((CEntityEvent *)v15, 8u, 0, *((unsigned __int16 *)v25 + 3), 0, 0);
       v26 = 0;
@@ -393,8 +393,8 @@ bool  CWorkUpBuildingRole::SettlerEnter(class CBuilding * a2, int a3) {
       CEntityEvent::~CEntityEvent(v15);
     }
   }
-  IEntity::ClearFlagBits(v24, EntityFlag_Visible);
-  IEntity::SetFlagBits(v24, EntityFlag_MagicInvisible);
+  IEntity::ClearFlagBits(v24, ENTITY_FLAG_Visible);
+  IEntity::SetFlagBits(v24, ENTITY_FLAG_MagicInvisible);
   IMovingEntity::SetDisplacementCosts(10);
   v23 = (CMFCToolBarButton *)CBuildingMgr::operator[](*((unsigned __int16 *)v25 + 3));
   v3 = CBuilding::DoorPackedXY(v23);
@@ -684,7 +684,7 @@ void  CWorkUpBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
   byte_3F1E505 = IEntity::Race(a2);
   byte_3F1E504 = IEntity::Type((unsigned __int16 *)a2);
   byte_3F1E507 = 1;
-  byte_3F1E508 = IEntity::FlagBits(a2, EntityFlag_NotStriking) != 0;
+  byte_3F1E508 = IEntity::FlagBits(a2, (EntityFlag)0x1000u) != 0;
   byte_3F1E509 = 0;
   v9 = IEntity::Type((unsigned __int16 *)a2);
   v3 = IEntity::OwnerId((unsigned __int8 *)a2);

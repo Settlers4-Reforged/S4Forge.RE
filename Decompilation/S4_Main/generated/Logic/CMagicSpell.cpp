@@ -82,109 +82,117 @@ int  CMagicSpell::SpellDoNothing(void) {
 int  CMagicSpell::SpellDivinePresent(void) {
   
   int v1; // eax
-  unsigned int v2; // eax
+  DWORD v2; // eax
   int *v3; // eax
-  unsigned int v4; // eax
-  _DWORD *v6; // [esp+10h] [ebp-60h]
-  int v7; // [esp+24h] [ebp-4Ch]
-  int v8; // [esp+28h] [ebp-48h]
-  int v9; // [esp+2Ch] [ebp-44h]
-  int v10; // [esp+3Ch] [ebp-34h]
-  int v11; // [esp+40h] [ebp-30h] BYREF
-  int v12; // [esp+44h] [ebp-2Ch] BYREF
-  int v13; // [esp+48h] [ebp-28h]
-  int v14; // [esp+4Ch] [ebp-24h]
-  int v15; // [esp+50h] [ebp-20h]
+  DWORD v4; // eax
+  _DWORD v6[4]; // [esp+0h] [ebp-70h] BYREF
+  struct IEntity *v7; // [esp+10h] [ebp-60h]
+  void *v8; // [esp+14h] [ebp-5Ch]
+  void *v9; // [esp+18h] [ebp-58h]
+  int v10; // [esp+1Ch] [ebp-54h]
+  int v11; // [esp+20h] [ebp-50h]
+  struct IFutureEvents *v12; // [esp+24h] [ebp-4Ch]
+  int v13; // [esp+28h] [ebp-48h]
+  struct IEffects *v14; // [esp+2Ch] [ebp-44h]
+  BOOL v15; // [esp+30h] [ebp-40h]
+  BOOL v16; // [esp+34h] [ebp-3Ch]
+  void *v17; // [esp+38h] [ebp-38h]
+  int v18; // [esp+3Ch] [ebp-34h]
+  int v19; // [esp+40h] [ebp-30h] BYREF
+  int v20; // [esp+44h] [ebp-2Ch] BYREF
+  S4_GOOD_ENUM v21; // [esp+48h] [ebp-28h]
+  int v22; // [esp+4Ch] [ebp-24h]
+  int v23; // [esp+50h] [ebp-20h]
   int i; // [esp+54h] [ebp-1Ch]
-  int v17; // [esp+58h] [ebp-18h]
-  int v18; // [esp+5Ch] [ebp-14h]
-  _DWORD *v19; // [esp+60h] [ebp-10h]
+  int v25; // [esp+58h] [ebp-18h]
+  int v26; // [esp+5Ch] [ebp-14h]
+  _DWORD *v27; // [esp+60h] [ebp-10h]
   int j; // [esp+64h] [ebp-Ch]
-  int v21; // [esp+68h] [ebp-8h]
-  char v22; // [esp+6Fh] [ebp-1h]
+  signed int v29; // [esp+68h] [ebp-8h]
+  char v30; // [esp+6Fh] [ebp-1h]
 
-  v19 = this;
-  v15 = 0;
-  CSpiralWalk::CSpiralWalk(this[2], this[3], this[4]);
-  while ( (unsigned __int8)CSpiralWalk::NextXY(&v11, &v12) )
+  v27 = this;
+  v17 = *(&off_36B70C0 + this[1]);
+  v9 = *(&off_36B70AC + this[1]);
+  v8 = *(&off_36B70D4 + this[1]);
+  v23 = 0;
+  CSpiralWalk::CSpiralWalk((CSpiralWalk *)v6, this[2], this[3], this[4]);
+  while ( CSpiralWalk::NextXY(v6, &v19, &v20) )
   {
-    v18 = CWorldManager::Index(v11, v12);
-    if ( !CWorldManager::FlagBits(v18, 51) && !CWorldManager::MapObjectId(v18) && !CWorldManager::ObjectId(v18) )
+    v26 = CWorldManager::Index(v19, v20);
+    if ( !CWorldManager::FlagBits(v26, 0x33u) && !CWorldManager::MapObjectId(v26) && !CWorldManager::ObjectId(v26) )
     {
-      v14 = CWorldManager::Ground(v18) & 0xF0;
-      if ( v14 == 16 || v14 == 64 || v14 == 144 )
+      v11 = CWorldManager::Ground(v26);
+      v22 = v11 & 0xF0;
+      if ( v22 == 16 || v22 == 64 || v22 == 144 )
       {
-        v22 = 1;
+        v30 = 1;
         for ( i = 0; i < 6; ++i )
         {
           v1 = CWorldManager::NeighborRelIndex(i);
-          if ( CWorldManager::PileId(v18 + v1) )
+          v10 = v26 + v1;
+          if ( CWorldManager::PileId(v26 + v1) )
           {
-            v22 = 0;
+            v30 = 0;
             break;
           }
         }
-        if ( v22 )
+        if ( v30 )
         {
           j = 0;
-          v17 = *(_DWORD *)TStaticConfigIntArrayBase<8>::operator[](7);
-          if ( v17 <= 0 )
+          v25 = *(_DWORD *)TStaticConfigIntArrayBase<8>::operator[](v17, 7);
+          if ( v25 <= 0 )
           {
-            v17 = 0;
+            v25 = 0;
           }
           else
           {
             v2 = CStateGame::Rand(g_pGame);
-            v17 = v2 % v17;
+            v25 = v2 % v25;
           }
           for ( j = 0; j < 8; ++j )
           {
-            v3 = (int *)TStaticConfigIntArrayBase<8>::operator[](j);
-            if ( v17 < *v3 )
+            v3 = (int *)TStaticConfigIntArrayBase<8>::operator[](v17, j);
+            if ( v25 < *v3 )
               break;
           }
-          v13 = *(_DWORD *)TStaticConfigIntArrayBase<8>::operator[](j);
-          if ( v13 < 43 && v13 > 0 )
+          v21 = *(_DWORD *)TStaticConfigIntArrayBase<8>::operator[](v9, j);
+          v16 = v21 > GOOD_NO_GOOD;
+          v15 = v21 < GOOD_MAX;
+          if ( v15 && v16 )
           {
-            v21 = *(_DWORD *)TStaticConfigIntArrayBase<8>::operator[](j);
-            if ( v21 <= 1 )
+            v29 = *(_DWORD *)TStaticConfigIntArrayBase<8>::operator[](v8, j);
+            if ( v29 <= 1 )
             {
-              v21 = 1;
+              v29 = 1;
             }
             else
             {
               v4 = CStateGame::Rand(g_pGame);
-              v21 -= v4 % ((v21 + 2) >> 1);
+              v29 -= v4 % ((v29 + 2) >> 1);
             }
-            if ( v21 > 8 )
-              v21 = 8;
-            if ( v21 < 1 && BBSupportDbgReport(2, (int)"Logic\\Magic.cpp", 1253, (int)"iAmount >= 1") == 1 )
+            if ( v29 > 8 )
+              v29 = 8;
+            if ( v29 < 1 && BBSupportDbgReport(2, "Logic\\Magic.cpp", 1253, "iAmount >= 1") == 1 )
               __debugbreak();
-            v10 = CPileMgr::AddPile(v11, v12, v13, v21, 3, 0, 0, 0, 0);
-            if ( v10 )
+            v18 = CPileMgr::AddPile((CPileMgr *)&g_cPileMgr, v19, v20, v21, v29, 3u, 0, 0, 0, 0);
+            if ( v18 )
             {
-              v6 = (_DWORD *)CMapObjectMgr::Entity(v10);
-              IEntity::SetFlagBits(v6, EntityFlag_MagicInvisible);
-              v8 = CStateGame::Rand(g_pGame) & 3;
-              v9 = CLogic::Effects((DWORD *)g_pLogic);
-              (*(void (__thiscall **)(int, int, _DWORD, int, int, int, _DWORD, _DWORD))(*(_DWORD *)v9 + 16))(
-                v9,
-                24,
-                0,
-                v11,
+              v7 = CMapObjectMgr::Entity(v18);
+              IEntity::SetFlagBits(v7, ENTITY_FLAG_MagicInvisible);
+              LOBYTE(v13) = CStateGame::Rand(g_pGame) & 3;
+              v13 = (unsigned __int8)v13;
+              v14 = CLogic::Effects(g_pLogic);
+              v14->AddEffect(v14, EFFECT_RMAGIC_GIFTOFGOD, 0, v19, v20, v13, 0, 0);
+              v12 = CLogic::FutureEvents(g_pLogic);
+              (*(void (__thiscall **)(struct IFutureEvents *, int, int, int, _DWORD, int))(*(_DWORD *)v12 + 12))(
                 v12,
-                v8,
-                0,
-                0);
-              v7 = CLogic::FutureEvents(g_pLogic);
-              (*(void (__thiscall **)(int, int, int, int, _DWORD, int))(*(_DWORD *)v7 + 12))(
-                v7,
                 1,
-                v8 + 4,
-                v10,
+                v13 + 4,
+                v18,
                 0,
                 0x80000);
-              if ( ++v15 >= v19[5] )
+              if ( ++v23 >= v27[5] )
                 break;
             }
           }
@@ -192,7 +200,7 @@ int  CMagicSpell::SpellDivinePresent(void) {
       }
     }
   }
-  return v15;
+  return v23;
 }
 
 
@@ -820,7 +828,7 @@ int  CMagicSpell::SpellFoodMoreGame(void) {
         if ( v11 )
         {
           v5 = (_DWORD *)CMapObjectMgr::Entity(v11);
-          IEntity::SetFlagBits(v5, EntityFlag_MagicInvisible);
+          IEntity::SetFlagBits(v5, ENTITY_FLAG_MagicInvisible);
           v4 = v14 & 7;
           v8 = CLogic::FutureEvents(g_pLogic);
           (*(void (__thiscall **)(int, int, int, int, _DWORD, int))(*(_DWORD *)v8 + 12))(v8, 1, v4 + 4, v11, 0, 0x80000);
@@ -1826,7 +1834,7 @@ void __cdecl CMagicSpell::InvisibleKill(class IEntity * a1) {
   v2 = IEntity::ID();
   if ( v2 <= 0 && BBSupportDbgReport(2, "Logic\\Magic.cpp", 1002, "iEntityId > 0") == 1 )
     __debugbreak();
-  IEntity::ClearFlagBits(a1, EntityFlag_Visible);
+  IEntity::ClearFlagBits(a1, ENTITY_FLAG_Visible);
   return CMapObjectMgr::Kill(v2, 0);
 }
 

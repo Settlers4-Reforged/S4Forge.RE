@@ -19,7 +19,7 @@
   if ( this->m_iPhases )
   {
     this->m_iFrame = CStateGame::Rand(g_pGame) % this->m_uCycleFrames;
-    IEntity::SetFlagBits(this, EntityFlag_Ready);
+    IEntity::SetFlagBits(this, ENTITY_FLAG_Ready);
   }
   else
   {
@@ -143,7 +143,7 @@ void  CMushroom::Decrease(int a2) {
   {
     __debugbreak();
   }
-  IEntity::ClearFlagBits(this, EntityFlag_Ready);
+  IEntity::ClearFlagBits(this, ENTITY_FLAG_Ready);
   ++this->m_iPhases;
   this->m_iFrame = 0;
   this->m_iJobPart = this->m_iPhases + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType);

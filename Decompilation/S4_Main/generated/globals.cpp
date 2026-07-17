@@ -36239,7 +36239,7 @@ std::ostream & __cdecl operator^<signed char>(std::ostream & a1, signed char con
 
 
 // address=[0x14326d0]
-// Decompiled from struct std::ostream *__cdecl operator^<unsigned char>(struct std::ostream *a1, BYTE *a2)
+// Decompiled from struct std::ostream *__cdecl operator^<unsigned char>(struct std::ostream *a1, unsigned __int8 *a2)
 std::ostream & __cdecl operator^<unsigned char>(std::ostream & a1, unsigned char const & a2) {
   
   Serial::Serialize(a1, a2);
@@ -37146,7 +37146,7 @@ void __cdecl SetCamWndViewPosition(void) {
   {
     v21 = 0;
   }
-  if ( !v21 || IEntity::FlagBits(v21, EntityFlag_OnBoard) || !IEntity::X(v21) && !IEntity::Y(v21) )
+  if ( !v21 || IEntity::FlagBits(v21, ENTITY_FLAG_OnBoard) || !IEntity::X(v21) && !IEntity::Y(v21) )
     return IGfxEngine::SetCameraViewPosition(
              (IGfxEngine *)g_pGfxEngine,
              (int)(((double)g_iCamWndX - (double)g_iCamWndY / 2.0) * (double)g_iCamWndScale
@@ -38165,7 +38165,7 @@ void __cdecl CheckRegister(char * a1, class CSettler * a2) {
   EntityFlag result; // eax
   int v3; // eax
 
-  result = IEntity::FlagBits(a2, EntityFlag_Registered);
+  result = IEntity::FlagBits(a2, ENTITY_FLAG_Registered);
   if ( result )
     return result;
   v3 = IEntity::ID(a2);

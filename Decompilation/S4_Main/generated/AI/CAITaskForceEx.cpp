@@ -204,7 +204,7 @@ void  CAITaskForceEx::Execute(void) {
         __debugbreak();
       }
       v2 = CAITaskForce::CmdGoal(this);
-      if ( (IAIEnvironment::EntityFlags(v2) & EntityFlag_Ready) == 0 )
+      if ( (IAIEnvironment::EntityFlags(v2) & ENTITY_FLAG_Ready) == 0 )
         goto LABEL_34;
       for ( i = CAITaskForce::FirstEntity(this); i; i = CAIEntityInfo::Next(i) )
         CAIEntityInfo::EntityId(i);
@@ -216,7 +216,7 @@ void  CAITaskForceEx::Execute(void) {
         __debugbreak();
       }
       v3 = CAITaskForce::CmdGoal(this);
-      if ( (IAIEnvironment::EntityFlags(v3) & EntityFlag_Ready) != 0 )
+      if ( (IAIEnvironment::EntityFlags(v3) & ENTITY_FLAG_Ready) != 0 )
         return;
       goto LABEL_34;
     case 106:

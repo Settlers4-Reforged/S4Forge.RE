@@ -35,15 +35,16 @@ void  CMushroomFarmerRole::LogicUpdateJob(class CSettler * a2) {
   int v3; // esi
   int v4; // esi
   int v6; // [esp-4h] [ebp-30h]
-  int v7; // [esp+4h] [ebp-28h]
-  int v8; // [esp+8h] [ebp-24h]
-  int v9; // [esp+Ch] [ebp-20h]
+  unsigned int v7; // [esp+4h] [ebp-28h]
+  unsigned int v8; // [esp+8h] [ebp-24h]
+  IEntity *v9; // [esp+Ch] [ebp-20h]
   int v10; // [esp+14h] [ebp-18h]
-  int v11; // [esp+20h] [ebp-Ch]
-  char v12; // [esp+24h] [ebp-8h]
+  CSettlerMgr::SSettlerInfos *SettlerInfo; // [esp+18h] [ebp-14h]
+  int v12; // [esp+20h] [ebp-Ch]
+  char v13; // [esp+24h] [ebp-8h]
 
-  v12 = *((_BYTE *)this + 4);
-  switch ( v12 )
+  v13 = *((_BYTE *)this + 4);
+  switch ( v13 )
   {
     case 6:
       IMovingEntity::SetDistance(a2, 0);
@@ -59,41 +60,38 @@ void  CMushroomFarmerRole::LogicUpdateJob(class CSettler * a2) {
         if ( !*((_WORD *)this + 17) )
           return (*(int (__thiscall **)(CMushroomFarmerRole *, struct CSettler *))(*(_DWORD *)this + 36))(this, a2);
         v9 = CMapObjectMgr::EntityPtr(*((unsigned __int16 *)this + 17));
-        (*(void (__thiscall **)(int, int))(*(_DWORD *)v9 + 32))(v9, 1);
+        ((void (__thiscall *)(IEntity *, int))v9->Decrease)(v9, 1);
         return (*(int (__thiscall **)(CMushroomFarmerRole *, struct CSettler *))(*(_DWORD *)this + 36))(this, a2);
       }
       else
       {
-        return IAnimatedEntity::RegisterForLogicUpdate(v10);
+        return IAnimatedEntity::RegisterForLogicUpdate(a2, v10);
       }
     case 25:
       if ( *((char *)this + 6) <= (int)*((unsigned __int8 *)this + 7) )
-        v11 = *((char *)this + 6);
+        v12 = *((char *)this + 6);
       else
-        v11 = *((unsigned __int8 *)this + 7);
-      *((_BYTE *)this + 6) -= v11;
+        v12 = *((unsigned __int8 *)this + 7);
+      *((_BYTE *)this + 6) -= v12;
       if ( *((char *)this + 6) <= 0 )
       {
-        v6 = IEntity::Type((unsigned __int16 *)a2);
+        v6 = IEntity::Type(a2);
         v2 = IEntity::Race(a2);
-        CSettlerMgr::GetSettlerInfo(v2, v6);
+        SettlerInfo = CSettlerMgr::GetSettlerInfo(v2, v6);
         v3 = IEntity::X(a2);
-        v7 = v3 - *(char *)(std::vector<CSettlerMgr::SSearchInfos>::operator[](1) + 5);
+        v7 = v3 - std::vector<CSettlerMgr::SSearchInfos>::operator[](&SettlerInfo->m_vSearches, 1u)->m_iOffsetX;
         v4 = IEntity::Y(a2);
-        v8 = v4 - *(char *)(std::vector<CSettlerMgr::SSearchInfos>::operator[](1) + 6);
-        CDecoObjMgr::AddDecoObjWithoutFlags(&g_cDecoObjMgr, v7, v8, *((_DWORD *)this + 11), 0, 0);
+        v8 = v4 - std::vector<CSettlerMgr::SSearchInfos>::operator[](&SettlerInfo->m_vSearches, 1u)->m_iOffsetY;
+        CDecoObjMgr::AddDecoObjWithoutFlags(&g_cDecoObjMgr, v7, v8, *((T_OBJECT_TYPE *)this + 11), 0, 0);
         *((_DWORD *)this + 11) = 0;
         return (*(int (__thiscall **)(CMushroomFarmerRole *, struct CSettler *))(*(_DWORD *)this + 36))(this, a2);
       }
       else
       {
-        return IAnimatedEntity::RegisterForLogicUpdate(v11);
+        return IAnimatedEntity::RegisterForLogicUpdate(a2, v12);
       }
     default:
-      return (*(int (__thiscall **)(struct CSettler *, _DWORD, const char *))(*(_DWORD *)a2 + 48))(
-               a2,
-               0,
-               "CMushroomFarmerRole::LogicUpdateJob(): Invalid Job");
+      return a2->j_?DbgPrint@IEntity@@UAEXHPBD@Z((_DWORD *)a2, 0, "CMushroomFarmerRole::LogicUpdateJob(): Invalid Job");
   }
 }
 

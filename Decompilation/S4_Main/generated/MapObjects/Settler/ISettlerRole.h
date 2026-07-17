@@ -69,7 +69,7 @@ public:
     bool  SearchPosition(class CSettler * a2, int a3);
 
     // address=[0x158a0a0]
-    virtual bool  ESChanged(class CSettler * a2);
+    virtual bool  ESChanged(class CSettler * _pSettler);
 
     // address=[0x158a230]
     virtual bool  SetFree(class CSettler * settler, int a3);
@@ -84,7 +84,7 @@ public:
      ISettlerRole(std::istream & a2);
 
     // address=[0x158a740]
-    virtual void  Store(std::ostream & a2);
+    virtual void  Store(std::ostream & _rStream);
 
     // address=[0x158a8d0]
     virtual int  GetKindOfSelection(class CSettler * a2)const;
@@ -94,7 +94,7 @@ protected:
     void  MarkPileAsUnused(enum T_OBSERVER_TARGET a2);
 
     // address=[0x158a9c0]
-    void  DetachFromPile(class CSettler * a2, enum T_OBSERVER_TARGET a3, bool a4);
+    void  DetachFromPile(class CSettler * _pSettler, enum T_OBSERVER_TARGET _tTarget, bool _bChangeAmount);
 
     // address=[0x158ab30]
     virtual int  GetNextSettlerType(void);

@@ -92,7 +92,7 @@ void  CFleeRole::LogicUpdate(class CSettler * pSettler) {
     p_iY = &iY;
     v13 = std::auto_ptr<ISettlerRole>::auto_ptr<ISettlerRole>((auto_ptr_ISettlerRole *)&iY, &a2);
     CSettler::NewRole(pSettler, (auto_ptr_ISettlerRole)iY);
-    if ( !IEntity::FlagBits(pSettler, EntityFlag_Offered) )
+    if ( !IEntity::FlagBits(pSettler, ENTITY_FLAG_Offered) )
     {
       iY = IEntity::EntityId(pSettler);
       v8 = IEntity::Type(pSettler);
@@ -318,7 +318,7 @@ void  CFleeRole::TakeJob(class CSettler * a2) {
 // Decompiled from void __thiscall CFleeRole::Init(ISettlerRole *this, IAnimatedEntity *a1)
 void  CFleeRole::Init(class CSettler * a1) {
   
-  if ( IEntity::FlagBits(a1, EntityFlag_Offered|EntityFlag_Attached)
+  if ( IEntity::FlagBits(a1, ENTITY_FLAG_Offered|ENTITY_FLAG_ATTACHED)
     && BBSupportDbgReport(
          2,
          "MapObjects\\Settler\\FleeRole.cpp",
@@ -344,7 +344,7 @@ void  CFleeRole::Init(class CSettler * a1) {
 // Decompiled from void __thiscall CFleeRole::ConvertEventIntoGoal(CFleeRole *this, IAnimatedEntity *a2, struct CEntityEvent *a3)
 void  CFleeRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent * a3) {
   
-  if ( !IEntity::FlagBits(a2, EntityFlag_Registered) )
+  if ( !IEntity::FlagBits(a2, ENTITY_FLAG_Registered) )
     IAnimatedEntity::RegisterForLogicUpdate(a2, 1);
 }
 

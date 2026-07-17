@@ -254,7 +254,7 @@ unsigned int  ISelectableSettlerRole::ThiefCheckMasquerade(class CSettler * a2) 
   v16 = CAlliances::AllianceId(v3);
   v4 = IEntity::OwnerId((unsigned __int8 *)a2);
   v12 = CAlliances::AllianceId(v4);
-  if ( IEntity::FlagBits(a2, (EntityFlag)0x10000000u) )
+  if ( IEntity::FlagBits(a2, ENTITY_FLAG_Ownerless) )
   {
     v11 = IEntity::OwnerId((unsigned __int8 *)a2);
     v9 = IEntity::Y(a2);
@@ -270,7 +270,7 @@ unsigned int  ISelectableSettlerRole::ThiefCheckMasquerade(class CSettler * a2) 
     if ( !CScanner::FindAnyEnemyFighter(v5, v8, 15, 60, v10) )
       ISelectableSettlerRole::ThiefDisguise(this, (struct IEntity *)a2);
   }
-  if ( IEntity::FlagBits(a2, (EntityFlag)0x10000000u) )
+  if ( IEntity::FlagBits(a2, ENTITY_FLAG_Ownerless) )
     return 15;
   else
     return 45;
@@ -281,8 +281,8 @@ unsigned int  ISelectableSettlerRole::ThiefCheckMasquerade(class CSettler * a2) 
 // Decompiled from _DWORD *__thiscall ISelectableSettlerRole::ThiefExpose(ISelectableSettlerRole *this, struct IEntity *a2)
 void  ISelectableSettlerRole::ThiefExpose(class IEntity * a2) {
   
-  IEntity::ClearFlagBits(a2, (EntityFlag)0x10000000u);
-  return IEntity::SetFlagBits(a2, EntityFlag_VulnerableMask);
+  IEntity::ClearFlagBits(a2, ENTITY_FLAG_Ownerless);
+  return IEntity::SetFlagBits(a2, ENTITY_FLAG_VulnerableMask);
 }
 
 
@@ -290,8 +290,8 @@ void  ISelectableSettlerRole::ThiefExpose(class IEntity * a2) {
 // Decompiled from int __thiscall ISelectableSettlerRole::ThiefDisguise(ISelectableSettlerRole *this, struct IEntity *a2)
 void  ISelectableSettlerRole::ThiefDisguise(class IEntity * a2) {
   
-  IEntity::SetFlagBits(a2, (EntityFlag)0x10000000u);
-  return IEntity::ClearFlagBits(a2, EntityFlag_VulnerableMask);
+  IEntity::SetFlagBits(a2, ENTITY_FLAG_Ownerless);
+  return IEntity::ClearFlagBits(a2, ENTITY_FLAG_VulnerableMask);
 }
 
 

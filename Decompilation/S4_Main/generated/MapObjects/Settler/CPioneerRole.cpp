@@ -291,7 +291,7 @@ class CPioneerRole * __cdecl CPioneerRole::Load(std::istream & a1) {
 
   *(_DWORD *)this = &CPioneerRole::_vftable_;
   v4 = (CPropertySet *)CSettlerMgr::operator[](*((unsigned __int16 *)this + 9));
-  if ( !IEntity::FlagBits(v4, EntityFlag_OnBoard) )
+  if ( !IEntity::FlagBits(v4, ENTITY_FLAG_OnBoard) )
     CWarMap::RemoveEntity(v4);
   if ( *((_DWORD *)this + 6) )
   {
@@ -409,7 +409,7 @@ void  CPioneerRole::TakeJob(class CSettler * a2) {
           v8 = CVehicleMgr::operator[](*((unsigned __int16 *)this + 16));
           v5 = IEntity::ID();
           (*(void (__thiscall **)(int, int))(*(_DWORD *)v8 + 128))(v8, v5);
-          if ( !IEntity::FlagBits(a2, EntityFlag_OnBoard)
+          if ( !IEntity::FlagBits(a2, ENTITY_FLAG_OnBoard)
             && BBSupportDbgReport(
                  2,
                  "MapObjects\\Settler\\PioneerRole.cpp",
@@ -458,7 +458,7 @@ LABEL_13:
 // Decompiled from int __thiscall CPioneerRole::Init(_WORD *this, CPropertySet *a2)
 void  CPioneerRole::Init(class CSettler * a2) {
   
-  if ( IEntity::FlagBits(a2, EntityFlag_Attached)
+  if ( IEntity::FlagBits(a2, ENTITY_FLAG_ATTACHED)
     && BBSupportDbgReport(
          2,
          "MapObjects\\Settler\\PioneerRole.cpp",
@@ -470,7 +470,7 @@ void  CPioneerRole::Init(class CSettler * a2) {
   if ( this[16] && BBSupportDbgReport(2, "MapObjects\\Settler\\PioneerRole.cpp", 245, "!m_uHomeEntityId") == 1 )
     __debugbreak();
   this[9] = IEntity::ID();
-  IEntity::SetFlagBits(a2, EntityFlag_VulnerableMask|EntityFlag_Selectable);
+  IEntity::SetFlagBits(a2, ENTITY_FLAG_VulnerableMask|ENTITY_FLAG_Selectable);
   return CWarMap::AddEntity(a2);
 }
 
@@ -544,8 +544,8 @@ void  CPioneerRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent
   {
     case 7:
       v37 = *((_DWORD *)a3 + 3);
-      IEntity::SetFlagBits(a2, EntityFlag_Selectable);
-      IEntity::ClearFlagBits(a2, EntityFlag_OnBoard);
+      IEntity::SetFlagBits(a2, ENTITY_FLAG_Selectable);
+      IEntity::ClearFlagBits(a2, ENTITY_FLAG_OnBoard);
       CSettler::TakeWaitList(a2);
       v22 = IEntity::ID();
       v4 = IEntity::OwnerId((unsigned __int8 *)a2);
@@ -553,7 +553,7 @@ void  CPioneerRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent
       break;
     case 9:
       v38 = *((_DWORD *)a3 + 4);
-      IEntity::SetFlagBits(a2, EntityFlag_Selectable);
+      IEntity::SetFlagBits(a2, ENTITY_FLAG_Selectable);
       LOBYTE(v3) = (*(int (__thiscall **)(int *, CPropertySet *, int))(*this + 64))(this, a2, v38);
       break;
     case 0x11:
@@ -618,7 +618,7 @@ void  CPioneerRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent
         }
         v14 = IEntity::ID();
         (*(void (__thiscall **)(_DWORD *, int))(*v45 + 164))(v45, v14);
-        IEntity::ClearFlagBits(a2, EntityFlag_Selectable|EntityFlag_Selected);
+        IEntity::ClearFlagBits(a2, ENTITY_FLAG_Selectable|ENTITY_FLAG_Selected);
         v15 = IEntity::ID();
         (*(void (__thiscall **)(void *, int))(*(_DWORD *)g_pGroupMgr + 28))(g_pGroupMgr, v15);
         v32 = *((unsigned __int16 *)this + 16);
@@ -633,7 +633,7 @@ void  CPioneerRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent
       }
       else
       {
-        IEntity::SetFlagBits(a2, EntityFlag_Selectable);
+        IEntity::SetFlagBits(a2, ENTITY_FLAG_Selectable);
         v33 = IEntity::Type((unsigned __int16 *)a2);
         v26 = IEntity::Type((unsigned __int16 *)a2);
         v17 = IEntity::Race(a2);
@@ -648,8 +648,8 @@ void  CPioneerRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent
       v19 = IEntity::ID();
       CSettlerMgr::SearchSpaceForSettler((CSettlerMgr *)g_cSettlerMgr, v19, v27, v34);
       CWarMap::AddEntity(a2);
-      IEntity::SetFlagBits(a2, EntityFlag_Selectable|EntityFlag_Visible);
-      IEntity::ClearFlagBits(a2, EntityFlag_OnBoard);
+      IEntity::SetFlagBits(a2, ENTITY_FLAG_Selectable|ENTITY_FLAG_Visible);
+      IEntity::ClearFlagBits(a2, ENTITY_FLAG_OnBoard);
       CSettler::TakeWaitList(a2);
       v35 = *((unsigned __int16 *)this + 16);
       v28 = IEntity::ID();
@@ -657,7 +657,7 @@ void  CPioneerRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent
       LOBYTE(v3) = (*(int (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)g_pAI + 44))(g_pAI, 21, v20, v28, v35);
       break;
     default:
-      v3 = IEntity::FlagBits(a2, EntityFlag_Registered);
+      v3 = IEntity::FlagBits(a2, ENTITY_FLAG_Registered);
       if ( !v3 )
       {
         BBSupportTracePrintF(0, "CPioneerRole::ConvertEventIntoGoal(): Unknown event %u!", *((_DWORD *)a3 + 1));

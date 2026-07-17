@@ -111,6 +111,30 @@ protected:
     // address=[0x15db310]
     void  UpdateRWM(void);
 
+    // Type information members
+public:
+    bool dword4;
+    _DWORD dword8;
+    _DWORD dwordC;
+    _DWORD dword10;
+    _DWORD dword14;
+    _DWORD dword18;
+    _DWORD dword1C;
+    _DWORD dword20;
+    _DWORD dword24;
+    _DWORD dword28;
+    _DWORD dword2C;
+    _DWORD dword30;
+    bool dword34;
+    _DWORD dword38;
+    _DWORD dword3C;
+    _DWORD sFogSpotInfo;
+    _DWORD dword44;
+    _DWORD dword48;
+    BYTE dword4c;
+    BYTE dword4d;
+    BYTE dword4e;
+
 };
 
 

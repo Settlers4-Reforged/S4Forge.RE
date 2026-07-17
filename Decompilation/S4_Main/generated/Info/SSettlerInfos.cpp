@@ -1,3 +1,4 @@
+#if FALSE
 #include "SSettlerInfos.h"
 
 // Definitions for class SSettlerInfos
@@ -35,11 +36,12 @@ struct CSettlerMgr::SSettlerInfos &  CSettlerMgr::SSettlerInfos::operator=(struc
   this->m_uTool = a2->m_uTool;
   this->m_uFarmerType = a2->m_uFarmerType;
   this->m_bMisc = a2->m_bMisc;
-  std::vector<CSettlerMgr::SSearchInfos>::operator=(this->m_vSearches, a2->m_vSearches);
-  std::vector<unsigned short>::operator=(this->g_vAnimLists, a2->g_vAnimLists);
+  std::vector<CSettlerMgr::SSearchInfos>::operator=(&this->m_vSearches, &a2->m_vSearches);
+  std::vector<unsigned short>::operator=(&this->g_vAnimLists, &a2->g_vAnimLists);
   this->m_bDamage2 = a2->m_bDamage2;
   this->m_bDamage3 = a2->m_bDamage3;
   return this;
 }
 
 
+#endif // Already implemented

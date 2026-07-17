@@ -22,7 +22,7 @@ void  CVehicle::CountCargo(class ICargoCounter & a2) {
 // Decompiled from int __thiscall CVehicle::DeleteSelectable(CVehicle *this)
 void  CVehicle::DeleteSelectable(void) {
   
-  return IEntity::ClearFlagBits(this, EntityFlag_Selectable);
+  return IEntity::ClearFlagBits(this, ENTITY_FLAG_Selectable);
 }
 
 
@@ -30,7 +30,7 @@ void  CVehicle::DeleteSelectable(void) {
 // Decompiled from _DWORD *__thiscall CVehicle::SetSelectable(CVehicle *this)
 void  CVehicle::SetSelectable(void) {
   
-  return IEntity::SetFlagBits(this, EntityFlag_Selectable);
+  return IEntity::SetFlagBits(this, ENTITY_FLAG_Selectable);
 }
 
 
@@ -75,7 +75,7 @@ void  CVehicle::PostLoadInit(void) {
 // Decompiled from void __thiscall CVehicle::AddToWarMap(IEntity *this)
 void  CVehicle::AddToWarMap(void) {
   
-  if ( IEntity::FlagBits(this, EntityFlag_Ready) )
+  if ( IEntity::FlagBits(this, ENTITY_FLAG_Ready) )
     CWarMap::AddEntity(this);
 }
 
@@ -260,7 +260,7 @@ void  CVehicle::FireMissile(int _iTargetId, int _iDestinationXY) {
   else
     iStrength = CStatistic::OffenceStrength256((CStatistic *)&g_cStatistic, iOwner);
   uDamage = ((iStrength * m_uDamage + 127) >> 8 == 0) + ((iStrength * m_uDamage + 127) >> 8);
-  if ( IEntity::FlagBits(rEntity, EntityFlag_Ready) )
+  if ( IEntity::FlagBits(rEntity, ENTITY_FLAG_Ready) )
   {
     rFutureEvents = CLogic::FutureEvents(g_pLogic);
     iOwner = IEntity::OwnerId(this);
@@ -345,7 +345,7 @@ void  CVehicle::LogicUpdate(void) {
   int v1; // eax
 
   CVehicle::Update(this);
-  if ( IEntity::FlagBits(this, EntityFlag_Birth) )
+  if ( IEntity::FlagBits(this, ENTITY_FLAG_Birth) )
   {
     if ( this->m_uMaterialSupplied < (int)this->word7E )
     {
@@ -464,8 +464,8 @@ void  CVehicle::InitBuildingSite(void) {
   BYTE *v2; // eax
   unsigned int v3; // [esp-4h] [ebp-Ch]
 
-  IEntity::ClearFlagBits(this, EntityFlag_Ready);
-  IEntity::SetFlagBits(this, EntityFlag_Birth|EntityFlag_Visible);
+  IEntity::ClearFlagBits(this, ENTITY_FLAG_Ready);
+  IEntity::SetFlagBits(this, ENTITY_FLAG_Birth|ENTITY_FLAG_Visible);
   this->word78 = 0;
   this->m_uBoardsNeed = 0;
   this->word7A = 0;
@@ -512,12 +512,12 @@ void  CVehicle::OnBuildReady(void) {
 
   v15 = IEntity::OwnerId(this);
   v16 = IEntity::Type(this);
-  if ( !IEntity::FlagBits(this, EntityFlag_Birth)
+  if ( !IEntity::FlagBits(this, ENTITY_FLAG_Birth)
     && BBSupportDbgReport(2, "MapObjects\\Vehicle.cpp", 477, "FlagBits(ENTITY_FLAG_BIRTH) != 0") == 1 )
   {
     __debugbreak();
   }
-  if ( IEntity::FlagBits(this, EntityFlag_Ready)
+  if ( IEntity::FlagBits(this, ENTITY_FLAG_Ready)
     && BBSupportDbgReport(2, "MapObjects\\Vehicle.cpp", 478, "FlagBits(ENTITY_FLAG_READY) == 0") == 1 )
   {
     __debugbreak();
@@ -526,12 +526,12 @@ void  CVehicle::OnBuildReady(void) {
   v9 = IEntity::Type(this);
   v1 = IEntity::OwnerId(this);
   CVehicleMgr::DetachVehicle((CVehicleMgr *)&g_cVehicleMgr, v1, v9, v12);
-  IEntity::ClearFlagBits(this, EntityFlag_Birth);
+  IEntity::ClearFlagBits(this, ENTITY_FLAG_Birth);
   if ( word_4158D1C[18 * v15 + 1 + 3 * v16] )
     --word_4158D1C[18 * v15 + 1 + 3 * v16];
   ++word_4158D1C[18 * v15 + 2 + 3 * v16];
   IEntity::SetFlagBits(this, (EntityFlag)this->m_pVehicleProperties->m_uDefaultFlags);
-  IEntity::SetFlagBits(this, EntityFlag_Ready|EntityFlag_VulnerableMask|EntityFlag_Visible);
+  IEntity::SetFlagBits(this, ENTITY_FLAG_Ready|ENTITY_FLAG_VulnerableMask|ENTITY_FLAG_Visible);
   v13 = IEntity::EntityId(this);
   v10 = IEntity::Type(this);
   v2 = IEntity::OwnerId(this);
@@ -850,7 +850,7 @@ unsigned int  CVehicle::TurnCounter(void)const {
   else
   {
     IEntity::SetFlagBits(this, (EntityFlag)this->m_pVehicleProperties->m_uDefaultFlags);
-    IEntity::SetFlagBits(this, EntityFlag_Ready|EntityFlag_VulnerableMask|EntityFlag_Visible);
+    IEntity::SetFlagBits(this, ENTITY_FLAG_Ready|ENTITY_FLAG_VulnerableMask|ENTITY_FLAG_Visible);
   }
   this->m_iDistance = 0;
   this->m_iLivePoints = this->m_pVehicleProperties->m_uHitpoints;
@@ -864,7 +864,7 @@ unsigned int  CVehicle::TurnCounter(void)const {
   std::auto_ptr<CWalking>::auto_ptr<CWalking>(&v13, v11);
   LOBYTE(v18) = 3;
   std::auto_ptr<CWalking>::operator=(&v13);
-  v14 = std::auto_ptr<CWalking>::operator->(&this->m_pWalkin);
+  v14 = std::auto_ptr<CWalking>::operator->(&this->m_pWalking);
   (*(void (__thiscall **)(int, int, _DWORD))(*(_DWORD *)v14 + 8))(v14, -1, 0);
   this->m_uWalkResult = 8;
   this->m_uTurnCounter = 0;
@@ -1339,7 +1339,7 @@ void  CVehicle::AttackTarget(int _iTargetId) {
   {
     __debugbreak();
   }
-  if ( !IEntity::FlagBits(v10, EntityFlag_Ready)
+  if ( !IEntity::FlagBits(v10, ENTITY_FLAG_Ready)
     && BBSupportDbgReport(2, "MapObjects\\Vehicle.cpp", 1101, "rTargetEntity.FlagBits( ENTITY_FLAG_READY ) != 0") == 1 )
   {
     __debugbreak();
@@ -1421,15 +1421,15 @@ void  CVehicle::InitCommonTaskValues(class CEntityTask const * a2) {
     if ( *((char *)a2 + 6) >= 0 )
       this->m_iDirection = *((_BYTE *)a2 + 6);
     if ( *((_BYTE *)a2 + 20) )
-      IEntity::SetFlagBits(this, EntityFlag_Visible);
+      IEntity::SetFlagBits(this, ENTITY_FLAG_Visible);
     else
-      IEntity::ClearFlagBits(this, EntityFlag_Visible);
+      IEntity::ClearFlagBits(this, ENTITY_FLAG_Visible);
     this->m_uCurrentTask = *((_BYTE *)a2 + 4);
     CVehicle::TakeJobPart(this, *((unsigned __int16 *)a2 + 7));
   }
   else
   {
-    IEntity::SetFlagBits(this, EntityFlag_Visible);
+    IEntity::SetFlagBits(this, ENTITY_FLAG_Visible);
     this->m_uCurrentTask = 17;
     CVehicle::TakeJobPart(this, *((_DWORD *)this->m_pVehicleProperties + 6));
   }

@@ -33,7 +33,7 @@ void  CCatapult::VehicleLogicUpdate(void) {
     v1 = 0;
   else
     v1 = 2;
-  if ( !IEntity::FlagBits(this, EntityFlag_OnBoard) )
+  if ( !IEntity::FlagBits(this, ENTITY_FLAG_OnBoard) )
     CWarriorBehavior::WarriorVehicleLogicUpdate((CCatapult *)((char *)this + 180), this, TickCounter, v1 | v2);
 }
 
@@ -486,7 +486,7 @@ void  CCatapult::OnComeToFerry(int a2) {
 struct SGfxObjectInfo *  CCatapult::GetGfxInfos(void) {
   
   CWheeler::GetGfxInfos((int)this);
-  if ( !IEntity::FlagBits(this, EntityFlag_Selected) )
+  if ( !IEntity::FlagBits(this, ENTITY_FLAG_Selected) )
     return &IEntity::m_sGfxInfo;
   MEMORY[0x40FE264] = CCatapult::GetHealthDisplayID(this);
   MEMORY[0x40FE265] = CCatapult::GetAmmoDisplayID(this);

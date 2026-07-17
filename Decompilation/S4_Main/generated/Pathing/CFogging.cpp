@@ -659,27 +659,27 @@ int  CFogging::DbgNewFogValue(int a2)const {
 // Decompiled from CFogging *__thiscall CFogging::CFogging(CFogging *this)
  CFogging::CFogging(void) {
   
-  IFogging::IFogging(this);
-  *(_DWORD *)this = CFogging::_vftable_;
-  std::list<SFogSpotInfo>::list<SFogSpotInfo>((char *)this + 64);
-  *((_BYTE *)this + 4) = 0;
-  *((_DWORD *)this + 2) = 0;
-  *((_DWORD *)this + 3) = 0;
-  *((_DWORD *)this + 4) = 0;
-  *((_DWORD *)this + 5) = 0;
-  *((_DWORD *)this + 6) = 0;
-  *((_DWORD *)this + 7) = 0;
-  *((_DWORD *)this + 8) = 0;
-  *((_DWORD *)this + 9) = 0;
-  *((_DWORD *)this + 10) = 0;
-  *((_DWORD *)this + 11) = 0;
-  *((_DWORD *)this + 12) = 0;
-  *((_BYTE *)this + 52) = 0;
-  *((_DWORD *)this + 14) = 0;
-  *((_DWORD *)this + 15) = 0;
-  *((_BYTE *)this + 76) = 0;
-  *((_BYTE *)this + 77) = 0;
-  *((_BYTE *)this + 78) = 0;
+  IFogging::IFogging((IFogging *)this);
+  this->__vftable = (CFogging_vtbl *)CFogging::_vftable_;
+  std::list<SFogSpotInfo>::list<SFogSpotInfo>(&this->sFogSpotInfo);
+  this->dword4 = 0;
+  this->dword8 = 0;
+  this->dwordC = 0;
+  this->dword10 = 0;
+  this->dword14 = 0;
+  this->dword18 = 0;
+  this->dword1C = 0;
+  this->dword20 = 0;
+  this->dword24 = 0;
+  this->dword28 = 0;
+  this->dword2C = 0;
+  this->dword30 = 0;
+  this->dword34 = 0;
+  this->dword38 = 0;
+  this->dword3C = 0;
+  this->dword4c = 0;
+  this->dword4d = 0;
+  this->dword4e = 0;
   return this;
 }
 

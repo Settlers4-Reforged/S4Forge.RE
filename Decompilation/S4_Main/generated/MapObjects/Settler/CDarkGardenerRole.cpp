@@ -436,7 +436,7 @@ void  CDarkGardenerRole::Init(class CSettler * a2) {
   int result; // eax
 
   CWarMap::AddEntity(a2);
-  IEntity::SetFlagBits(a2, EntityFlag_VulnerableMask|EntityFlag_Selectable);
+  IEntity::SetFlagBits(a2, ENTITY_FLAG_VulnerableMask|ENTITY_FLAG_Selectable);
   *(_DWORD *)(this + 64) = -1;
   *(_DWORD *)(this + 68) = -1;
   *(_DWORD *)(this + 56) = 0;
@@ -519,7 +519,7 @@ void  CDarkGardenerRole::ConvertEventIntoGoal(class CSettler * a2, class CEntity
   }
   else
   {
-    result = IEntity::FlagBits(a2, EntityFlag_Registered);
+    result = IEntity::FlagBits(a2, ENTITY_FLAG_Registered);
     if ( !result )
     {
       CTrace::Print("ConvertEventIntoGoal DarkGardenerRole - unknown event %u", *((_DWORD *)a3 + 1));

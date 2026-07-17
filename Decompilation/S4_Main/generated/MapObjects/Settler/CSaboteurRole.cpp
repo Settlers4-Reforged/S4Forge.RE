@@ -48,7 +48,7 @@ void  CSaboteurRole::LogicUpdate(class CSettler * a2) {
   if ( !v11 )
     return ISettlerRole::LogicUpdate(this, a2);
   if ( !IEntity::FlagBits(v11, (EntityFlag)((char *)&loc_1FFFFFF + 1))
-    || !IEntity::FlagBits(v11, EntityFlag_VulnerableMask)
+    || !IEntity::FlagBits(v11, ENTITY_FLAG_VulnerableMask)
     || CStateGame::Rand(g_pGame) >= (unsigned int)g_uSaboteurHitChange )
   {
     return ISettlerRole::LogicUpdate(this, a2);
@@ -148,7 +148,7 @@ class CSaboteurRole * __cdecl CSaboteurRole::Load(std::istream & a1) {
 void  CSaboteurRole::WarriorTaskAttack(class IMovingEntity & a2, int a3, enum T_WARRIOR_ATTACK a4) {
   
   this[13] = CGameData::GetTickCounter(g_pGameData) + 45;
-  if ( IEntity::FlagBits(a2, (EntityFlag)0x10000000u) )
+  if ( IEntity::FlagBits(a2, ENTITY_FLAG_Ownerless) )
     ISelectableSettlerRole::ThiefExpose((ISelectableSettlerRole *)(this - 12), a2);
   return CSoldierRole::WarriorTaskAttack(this, a2, a3, a4);
 }

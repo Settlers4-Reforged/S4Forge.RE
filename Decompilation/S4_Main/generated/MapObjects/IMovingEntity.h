@@ -94,7 +94,7 @@ public:
     unsigned __int8 m_iDisplacementCosts;
     __int16 m_iToDoSize;
     int unk_4c;
-    struct CWalking * m_pWalkin;
+    struct CWalking * m_pWalking;
     std::list * m_pToDoList;
     std::list::iterator m_cCurrentToDoItemIter;
 

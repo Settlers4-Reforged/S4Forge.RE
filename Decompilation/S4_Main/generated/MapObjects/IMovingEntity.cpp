@@ -15,7 +15,7 @@ class CEntityTask const &  IMovingEntity::GetActualTask(void)const {
 // Decompiled from struct CWalking *__thiscall IMovingEntity::Walking(IMovingEntity *this)
 class CWalking *  IMovingEntity::Walking(void) {
   
-  return (struct CWalking *)std::auto_ptr<CWalking>::get(&this->m_pWalkin);
+  return (struct CWalking *)std::auto_ptr<CWalking>::get(&this->m_pWalking);
 }
 
 
@@ -98,7 +98,7 @@ void  IMovingEntity::SetDirection(int a2) {
   
   IAnimatedEntity::IAnimatedEntity(this, id);
   this->__vftable = (IMovingEntity_vtbl *)&IMovingEntity::_vftable_;
-  std::auto_ptr<CWalking>::auto_ptr<CWalking>(&this->m_pWalkin, 0);
+  std::auto_ptr<CWalking>::auto_ptr<CWalking>(&this->m_pWalking, 0);
   std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(&this->m_cCurrentToDoItemIter);
   this->m_iDirection = 0;
   this->m_iDistance = 0;
@@ -113,7 +113,7 @@ void  IMovingEntity::SetDirection(int a2) {
   
   this->__vftable = (IMovingEntity_vtbl *)&IMovingEntity::_vftable_;
   std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(&this->m_cCurrentToDoItemIter);
-  std::auto_ptr<CWalking>::~auto_ptr<CWalking>(&this->m_pWalkin);
+  std::auto_ptr<CWalking>::~auto_ptr<CWalking>(&this->m_pWalking);
   return IAnimatedEntity::~IAnimatedEntity(this);
 }
 
@@ -124,7 +124,7 @@ void  IMovingEntity::WalkToXY(int a2, int a3) {
   
   CWalking *v3; // eax
 
-  v3 = (CWalking *)std::auto_ptr<CWalking>::operator->(&this->m_pWalkin);
+  v3 = (CWalking *)std::auto_ptr<CWalking>::operator->(&this->m_pWalking);
   v3->InitB((CWalkingBase *)v3, a2, a3);
 }
 
@@ -218,7 +218,7 @@ bool  IMovingEntity::IsNotOccupied(int a2) {
   
   CWalking *v3; // [esp+4h] [ebp-4h]
 
-  v3 = (CWalking *)std::auto_ptr<CWalking>::operator->(&this->m_pWalkin);
+  v3 = (CWalking *)std::auto_ptr<CWalking>::operator->(&this->m_pWalking);
   return v3->IsNotOccupied(v3, a2);
 }
 
@@ -229,7 +229,7 @@ bool  IMovingEntity::IsNotBlocked(int a2) {
   
   CWalking *v3; // [esp+4h] [ebp-4h]
 
-  v3 = (CWalking *)std::auto_ptr<CWalking>::operator->(&this->m_pWalkin);
+  v3 = (CWalking *)std::auto_ptr<CWalking>::operator->(&this->m_pWalking);
   return v3->IsNotBlocked(v3, a2);
 }
 
@@ -304,7 +304,7 @@ void  IMovingEntity::SetPositionAndDir(int a2, int a3) {
   IAnimatedEntity::IAnimatedEntity(this, _pStream);
   exceptionBlock = 0;
   this->__vftable = (IMovingEntity_vtbl *)&IMovingEntity::_vftable_;
-  std::auto_ptr<CWalking>::auto_ptr<CWalking>(&this->m_pWalkin, 0);
+  std::auto_ptr<CWalking>::auto_ptr<CWalking>(&this->m_pWalking, 0);
   std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(&this->m_cCurrentToDoItemIter);
   LOBYTE(exceptionBlock) = 2;
   this->m_pToDoList = 0;
@@ -352,12 +352,12 @@ void  IMovingEntity::Store(std::ostream & a1) {
   operator^<unsigned char>(a1, &this->m_iDistance);
   operator^<unsigned char>(a1, &this->m_iDisplacementCosts);
   operator^<int>(a1, &this->unk_4c);
-  v4 = std::auto_ptr<CWalking>::get(&this->m_pWalkin) != 0;
+  v4 = std::auto_ptr<CWalking>::get(&this->m_pWalking) != 0;
   v6 = v4;
   operator^<bool>(a1, &v6);
   if ( v6 )
   {
-    v3 = std::auto_ptr<CWalking>::operator->(&this->m_pWalkin);
+    v3 = std::auto_ptr<CWalking>::operator->(&this->m_pWalking);
     v3->Store(v3, a1);
   }
 }

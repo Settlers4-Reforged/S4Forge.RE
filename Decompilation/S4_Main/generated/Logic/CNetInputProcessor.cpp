@@ -424,7 +424,7 @@ void  CNetInputProcessor::Process(class CEvn_Logic & a2) {
           if ( ReadySettlerPtr )
           {
             if ( IEntity::OwnerId((unsigned __int8 *)ReadySettlerPtr) == v152
-              && !IEntity::FlagBits(ReadySettlerPtr, EntityFlag_OnBoard)
+              && !IEntity::FlagBits(ReadySettlerPtr, ENTITY_FLAG_OnBoard)
               && IEntity::WarriorType() == 7 )
             {
               v113 = IEntity::X(ReadySettlerPtr);
@@ -882,7 +882,7 @@ class CSettler * __cdecl CNetInputProcessor::GetReadySettlerPtrOfType(int a1, in
   unsigned __int16 *SettlerPtr; // [esp+0h] [ebp-4h]
 
   SettlerPtr = (unsigned __int16 *)CSettlerMgr::GetSettlerPtr(a1);
-  if ( SettlerPtr && IEntity::FlagBits(SettlerPtr, EntityFlag_Ready) && IEntity::Type(SettlerPtr) == a2 )
+  if ( SettlerPtr && IEntity::FlagBits(SettlerPtr, ENTITY_FLAG_Ready) && IEntity::Type(SettlerPtr) == a2 )
     return SettlerPtr;
   else
     return 0;

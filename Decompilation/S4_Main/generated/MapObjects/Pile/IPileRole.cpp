@@ -215,7 +215,7 @@ void  IPileRole::SubjectDie(class CPile * a2, int a3) {
   {
     __debugbreak();
   }
-  if ( IEntity::FlagBits(a2, EntityFlag_Attached)
+  if ( IEntity::FlagBits(a2, ENTITY_FLAG_ATTACHED)
     && BBSupportDbgReport(2, "MapObjects\\Pile\\PileRole.cpp", 221, "_pPile->FlagBits(ENTITY_FLAG_ATTACHED) == 0") == 1 )
   {
     __debugbreak();
@@ -308,8 +308,8 @@ bool  IPileRole::ExecuteChangeGoodTypeUnforseen(class CPile * a2, int a3) {
  IPileRole::IPileRole(void) {
   
   CPersistence::CPersistence(this);
-  *(_DWORD *)this = &IPileRole::_vftable_;
-  *((_WORD *)this + 2) = 0;
+  this->__vftable = (IPileRole_vtbl *)&IPileRole::_vftable_;
+  LOWORD(this[1].__vftable) = 0;
   return this;
 }
 

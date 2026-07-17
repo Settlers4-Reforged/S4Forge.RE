@@ -129,7 +129,7 @@ void  CEyeCatcherRole::Init(class CBuilding * a2) {
   int result; // eax
 
   IBuildingRole::InitCommon((int)a2);
-  result = IEntity::FlagBits(a2, EntityFlag_Selected);
+  result = IEntity::FlagBits(a2, ENTITY_FLAG_Selected);
   if ( result )
     return (*(int (__thiscall **)(CEyeCatcherRole *, struct CBuilding *, _DWORD))(*(_DWORD *)this + 88))(this, a2, 0);
   return result;
@@ -168,7 +168,7 @@ void  CEyeCatcherRole::FillDialog(class CBuilding * a2, bool a3) {
   g_cBuildingInfo.? = IEntity::Race(a2);
   g_cBuildingInfo.? = IEntity::Type(a2);
   MEMORY[0x3F1E4CB] = 0;
-  MEMORY[0x3F1E4CC] = IEntity::FlagBits(a2, EntityFlag_NotStriking) != 0;
+  MEMORY[0x3F1E4CC] = IEntity::FlagBits(a2, (EntityFlag)4096) != 0;
   g_cBuildingInfo.? = 0;
   g_cBuildingInfo.? = 0;
   g_cBuildingInfo.? = -1;

@@ -184,9 +184,9 @@ void  CAnimal::Delete(void) {
   int v6; // [esp-4h] [ebp-Ch]
 
   CWarMap::RemoveEntity(this);
-  if ( !IEntity::FlagBits(this, EntityFlag_OnBoard) )
+  if ( !IEntity::FlagBits(this, ENTITY_FLAG_OnBoard) )
   {
-    IEntity::SetFlagBits(this, EntityFlag_OnBoard);
+    IEntity::SetFlagBits(this, ENTITY_FLAG_OnBoard);
     v1 = IEntity::WorldIdx();
     v2 = CWorldManager::MapObjectId(v1);
     if ( v2 != IEntity::EntityId((unsigned __int16 *)this)
@@ -201,13 +201,13 @@ void  CAnimal::Delete(void) {
     v3 = IEntity::WorldIdx();
     CWorldManager::SetMapObjectId(v3, 0);
   }
-  result = IEntity::FlagBits(this, EntityFlag_Registered);
+  result = IEntity::FlagBits(this, ENTITY_FLAG_Registered);
   if ( !result )
     return result;
   v6 = IEntity::EntityId((unsigned __int16 *)this);
   LastLogicUpdateTick = IAnimatedEntity::GetLastLogicUpdateTick(this);
   CMapObjectMgr::UnRegisterFromLogicUpdate(g_pMapObjectMgr, LastLogicUpdateTick, v6);
-  result = IEntity::FlagBits(this, EntityFlag_Registered);
+  result = IEntity::FlagBits(this, ENTITY_FLAG_Registered);
   if ( !result )
     return result;
   result = BBSupportDbgReport(2, "MapObjects\\Animal\\Animal.cpp", 710, "FlagBits(ENTITY_FLAG_REGISTERED) == 0");
@@ -311,7 +311,7 @@ void  CAnimal::NewToDoList(class std::list<class CEntityTask,class std::allocato
   v6 = this;
   if ( !a2 && BBSupportDbgReport(2, "MapObjects\\Animal\\Animal.cpp", 407, "_toDo != NULL") == 1 )
     __debugbreak();
-  if ( IEntity::FlagBits(v6, EntityFlag_Registered)
+  if ( IEntity::FlagBits(v6, ENTITY_FLAG_Registered)
     && BBSupportDbgReport(2, "MapObjects\\Animal\\Animal.cpp", 408, "FlagBits( ENTITY_FLAG_REGISTERED ) == 0") == 1 )
   {
     __debugbreak();
@@ -548,9 +548,9 @@ void  CAnimal::TakeJob(bool a2) {
   if ( *(char *)(v4 + 6) >= 0 )
     *(_BYTE *)(this + 68) = *(_BYTE *)(v4 + 6);
   if ( *(_BYTE *)(v4 + 20) )
-    IEntity::SetFlagBits((_DWORD *)this, EntityFlag_Visible);
+    IEntity::SetFlagBits((_DWORD *)this, ENTITY_FLAG_Visible);
   else
-    IEntity::ClearFlagBits((_DWORD *)this, EntityFlag_Visible);
+    IEntity::ClearFlagBits((_DWORD *)this, ENTITY_FLAG_Visible);
   *(_BYTE *)(this + 122) = *(_BYTE *)(v4 + 4);
   *(_BYTE *)(this + 123) = *(_BYTE *)(v4 + 7);
   *(_BYTE *)(this + 124) = *(_BYTE *)(v4 + 8);

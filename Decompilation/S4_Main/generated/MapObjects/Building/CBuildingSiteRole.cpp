@@ -151,8 +151,8 @@ void  CBuildingSiteRole::Init(class CBuilding * a2) {
                            + *(unsigned __int8 *)(this + 405)
                            + *(unsigned __int8 *)(this + 403));
   *(_DWORD *)(this + 420) = 131070 / *(_DWORD *)(this + 416);
-  IEntity::ClearFlagBits(a2, EntityFlag_Ready);
-  IEntity::SetFlagBits(a2, EntityFlag_Birth|EntityFlag_NotStriking);
+  IEntity::ClearFlagBits(a2, ENTITY_FLAG_Ready);
+  IEntity::SetFlagBits(a2, (EntityFlag)0x1001000u);
   *(_WORD *)(this + 8) = 0;
   *(_WORD *)(this + 6) = IEntity::ID();
   CBuildingSiteRole::PrepareGround((_DWORD *)this, (unsigned __int16 *)a2);
@@ -255,10 +255,10 @@ void  CBuildingSiteRole::LogicUpdate(class CBuilding * a2) {
   char v87; // [esp+E3h] [ebp-11h]
   int v89; // [esp+F0h] [ebp-4h]
 
-  if ( IEntity::FlagBits(a2, EntityFlag_Selected) )
+  if ( IEntity::FlagBits(a2, ENTITY_FLAG_Selected) )
     (*(void (__thiscall **)(CBuildingSiteRole *, unsigned __int8 *, int))(*(_DWORD *)this + 88))(this, a2, 1);
   IAnimatedEntity::RegisterForLogicUpdate(15);
-  if ( IEntity::FlagBits(a2, EntityFlag_NotStriking) )
+  if ( IEntity::FlagBits(a2, (EntityFlag)0x1000u) )
   {
     EcoSectorId = CBuildingSiteRole::GetEcoSectorId(this, (struct CBuilding *)a2);
     if ( IEntity::Type((unsigned __int16 *)a2) == 49 || IEntity::Type((unsigned __int16 *)a2) == 80 )
@@ -463,8 +463,8 @@ LABEL_57:
           CWorldManager::SetMapObjectId(v36, v55);
           v37 = IEntity::WorldIdx();
           CWorldManager::SetObjectId(v37, 0);
-          IEntity::ClearFlagBits(a2, EntityFlag_Birth);
-          IEntity::SetFlagBits(a2, EntityFlag_Ready);
+          IEntity::ClearFlagBits(a2, ENTITY_FLAG_Birth);
+          IEntity::SetFlagBits(a2, ENTITY_FLAG_Ready);
           CBuilding::Ready(a2);
           return;
         default:
@@ -807,7 +807,7 @@ void  CBuildingSiteRole::FillDialog(class CBuilding * a2, bool a3) {
   g_cBuildingSiteInfo.m_cRace = IEntity::Race(a2);
   g_cBuildingSiteInfo.m_unknownB = 1;
   v5 = CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
-  g_cBuildingSiteInfo.m_bSomeFlagBits = IEntity::FlagBits((IEntity *)v5, EntityFlag_NotStriking) != 0;
+  g_cBuildingSiteInfo.m_bSomeFlagBits = IEntity::FlagBits((IEntity *)v5, (EntityFlag)0x1000) != 0;
   g_cBuildingSiteInfo.m_unknown20 = *((_BYTE *)this + 440);
   v24 = *(char *)(*((_DWORD *)this + 94) + 479);
   if ( *(_BYTE *)(*((_DWORD *)this + 94) + 479) )
@@ -1243,10 +1243,10 @@ void  CBuildingSiteRole::Switch(void) {
 
   v11 = this;
   v10 = (CBuilding *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
-  if ( IEntity::FlagBits(v10, EntityFlag_NotStriking) )
+  if ( IEntity::FlagBits(v10, (EntityFlag)0x1000u) )
   {
     CTrace::Print("BuildingSite %u stopped", *((unsigned __int16 *)v11 + 3));
-    IEntity::ClearFlagBits(v10, EntityFlag_NotStriking);
+    IEntity::ClearFlagBits(v10, (EntityFlag)0x1000u);
     CEntityEvent::CEntityEvent((CEntityEvent *)v7, 7u, 0, *((unsigned __int16 *)v11 + 3), 0, 0);
     v12 = 0;
     v9 = (const struct CEntityEvent *)v7;
@@ -1271,7 +1271,7 @@ void  CBuildingSiteRole::Switch(void) {
     v12 = 1;
     v8 = v6;
     (*(void (__thiscall **)(CBuilding *, _BYTE *))(*(_DWORD *)v10 + 124))(v10, v6);
-    IEntity::SetFlagBits(v10, EntityFlag_NotStriking);
+    IEntity::SetFlagBits(v10, (EntityFlag)0x1000u);
     IAnimatedEntity::RegisterForLogicUpdate(1);
     v12 = -1;
     return CEntityEvent::~CEntityEvent(v6);
@@ -1389,7 +1389,7 @@ void  CBuildingSiteRole::CheckActivateUrgentBoards(int a2) {
     if ( (int)CEcoSector::BuildingSitesWithPrio(v2) < 10 )
     {
       v3 = (_DWORD *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
-      if ( IEntity::FlagBits(v3, EntityFlag_NotStriking) )
+      if ( IEntity::FlagBits(v3, (EntityFlag)0x1000u) )
       {
         if ( !*((_BYTE *)this + 443) && !*((_BYTE *)this + 444) && !*((_BYTE *)this + 442) && !*((_BYTE *)this + 441) )
         {
@@ -1423,7 +1423,7 @@ void  CBuildingSiteRole::CheckActivateUrgentStones(int a2) {
     if ( (int)CEcoSector::BuildingSitesWithPrio(v2) < 10 )
     {
       v3 = (_DWORD *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
-      if ( IEntity::FlagBits(v3, EntityFlag_NotStriking) )
+      if ( IEntity::FlagBits(v3, (EntityFlag)0x1000u) )
       {
         if ( !*((_BYTE *)this + 443) && !*((_BYTE *)this + 444) && !*((_BYTE *)this + 442) && !*((_BYTE *)this + 441) )
         {
@@ -1456,7 +1456,7 @@ void  CBuildingSiteRole::CheckActivateUrgentBuilder(int a2) {
   if ( (int)CEcoSector::BuildingSitesWithPrio(v2) < 10 )
   {
     v3 = (_DWORD *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
-    if ( IEntity::FlagBits(v3, EntityFlag_NotStriking) )
+    if ( IEntity::FlagBits(v3, (EntityFlag)0x1000u) )
     {
       if ( !*((_BYTE *)this + 443) && !*((_BYTE *)this + 444) && !*((_BYTE *)this + 442) && !*((_BYTE *)this + 441) )
       {
@@ -1491,7 +1491,7 @@ void  CBuildingSiteRole::CheckActivateUrgentDigger(int a2) {
     if ( (int)CEcoSector::BuildingSitesWithPrio(v2) < 10 )
     {
       v3 = (_DWORD *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
-      if ( IEntity::FlagBits(v3, EntityFlag_NotStriking) )
+      if ( IEntity::FlagBits(v3, (EntityFlag)0x1000u) )
       {
         if ( !*((_BYTE *)this + 443) && !*((_BYTE *)this + 444) && !*((_BYTE *)this + 442) && !*((_BYTE *)this + 441) )
         {
@@ -1988,7 +1988,7 @@ void  CBuildingSiteRole::ReturnBuildingMaterial(class CBuilding * a2) {
 
 
 // address=[0x1504960]
-// Decompiled from _DWORD *__thiscall CBuildingSiteRole::PrepareGround(_DWORD *this, unsigned __int16 *a2)
+// Decompiled from _DWORD *__thiscall CBuildingSiteRole::PrepareGround(_DWORD *this, IEntity *a2)
 void  CBuildingSiteRole::PrepareGround(class CBuilding * a2) {
   
   _DWORD *v2; // eax
@@ -2004,11 +2004,11 @@ void  CBuildingSiteRole::PrepareGround(class CBuilding * a2) {
   int v12; // eax
   int v13; // eax
   __int16 v14; // ax
-  unsigned __int8 *v15; // eax
+  CPile *v15; // eax
   __int16 v16; // ax
-  unsigned __int8 *v17; // eax
+  CPile *v17; // eax
   __int16 v18; // ax
-  unsigned __int8 *v19; // eax
+  CPile *v19; // eax
   int v20; // eax
   int v21; // eax
   int v22; // eax
@@ -2031,16 +2031,16 @@ void  CBuildingSiteRole::PrepareGround(class CBuilding * a2) {
   int v39; // [esp-4h] [ebp-134h]
   int v40; // [esp-4h] [ebp-134h]
   int v41; // [esp-4h] [ebp-134h]
-  int v42; // [esp-4h] [ebp-134h]
+  std::vector *v42; // [esp-4h] [ebp-134h]
   int v43; // [esp-4h] [ebp-134h]
-  int v44; // [esp-4h] [ebp-134h]
+  std::vector *v44; // [esp-4h] [ebp-134h]
   int v45; // [esp-4h] [ebp-134h]
-  int v46; // [esp-4h] [ebp-134h]
+  std::vector *v46; // [esp-4h] [ebp-134h]
   int v47; // [esp-4h] [ebp-134h]
   __int16 v48; // [esp-4h] [ebp-134h]
-  _DWORD v49[7]; // [esp+8h] [ebp-128h] BYREF
-  _DWORD v50[7]; // [esp+24h] [ebp-10Ch] BYREF
-  _DWORD v51[7]; // [esp+40h] [ebp-F0h] BYREF
+  CBuildingFlagsWalk v49; // [esp+8h] [ebp-128h] BYREF
+  CBuildingFlagsWalk v50; // [esp+24h] [ebp-10Ch] BYREF
+  CBuildingFlagsWalk v51; // [esp+40h] [ebp-F0h] BYREF
   _BYTE v52[12]; // [esp+5Ch] [ebp-D4h] BYREF
   _BYTE v53[12]; // [esp+68h] [ebp-C8h] BYREF
   int v54; // [esp+74h] [ebp-BCh]
@@ -2071,26 +2071,26 @@ void  CBuildingSiteRole::PrepareGround(class CBuilding * a2) {
   int v79; // [esp+12Ch] [ebp-4h]
 
   v77 = this;
-  v76 = IEntity::Type(a2) == 49 || IEntity::Type(a2) == 80;
+  v76 = IEntity::Type(a2) == 0x31 || IEntity::Type(a2) == 80;
   v72 = v76;
   if ( v76 )
   {
-    v46 = v77[94] + 720;
+    v46 = (std::vector *)(v77[94] + 720);
     v37 = *(char *)(v77[94] + 1);
     v34 = *(char *)v77[94];
     v31 = IEntity::Y(a2);
     v26 = IEntity::X(a2);
-    CBuildingFlagsWalk::CBuildingFlagsWalk(v26, v31, v34, v37, v46);
-    while ( (unsigned __int8)CBuildingFlagsWalk::NextPosition(v49) )
+    CBuildingFlagsWalk::CBuildingFlagsWalk(&v49, v26, v31, v34, v37, v46);
+    while ( CBuildingFlagsWalk::NextPosition(&v49) )
     {
-      v47 = CBuildingFlagsWalk::CurrentY(v49);
-      v27 = CBuildingFlagsWalk::CurrentX(v49);
+      v47 = CBuildingFlagsWalk::CurrentY(&v49);
+      v27 = CBuildingFlagsWalk::CurrentX(&v49);
       v63 = CWorldManager::Index(v27, v47);
       CWorldManager::SetObjectId(v63, 0);
       CWorldManager::SetFlagBits(v63, 8u);
     }
-    v48 = IEntity::ID();
-    v28 = IEntity::WorldIdx();
+    v48 = IEntity::ID(a2);
+    v28 = IEntity::WorldIdx(a2);
     CWorldManager::SetObjectId(v28, v48);
     result = v77;
     *((_BYTE *)v77 + 396) = 6;
@@ -2131,10 +2131,10 @@ void  CBuildingSiteRole::PrepareGround(class CBuilding * a2) {
           if ( (*v2 & (1 << j)) != 0 )
           {
             v74 = v56 - j;
-            if ( IGfxEngine::CanChangeGround((IGfxEngine *)g_pGfxEngine, v56 - j, v73, 28) )
+            if ( IGfxEngine::CanChangeGround(g_pGfxEngine, v56 - j, v73, 28) )
             {
               CWorldManager::SetGround(v74, v73, 28);
-              IGfxEngine::UpdateWorldPosition((IGfxEngine *)g_pGfxEngine, v74, v73);
+              IGfxEngine::UpdateWorldPosition(g_pGfxEngine, v74, v73);
             }
             CWorldManager::SetObjectId(v74, v73, 0);
             CWorldManager::SetFlagBits(v74, v73, 8);
@@ -2170,72 +2170,72 @@ void  CBuildingSiteRole::PrepareGround(class CBuilding * a2) {
     for ( i = 0; i < 6; ++i )
     {
       if ( (int)v78[3 * i] >= 1 )
-        CDecoObjMgr::AddDecoObj((CDecoObjMgr *)&g_cDecoObjMgr, v78[3 * i + 1], v78[3 * i + 2], 123, 0, 1);
+        CDecoObjMgr::AddDecoObj(&g_cDecoObjMgr, v78[3 * i + 1], v78[3 * i + 2], 123, 0, 1);
     }
-    v38 = IEntity::ID();
-    v9 = IEntity::WorldIdx();
+    v38 = IEntity::ID(a2);
+    v9 = IEntity::WorldIdx(a2);
     CWorldManager::SetObjectId(v9, v38);
-    v10 = IEntity::WorldIdx();
+    v10 = IEntity::WorldIdx(a2);
     v11 = CWorldManager::X(v10);
     v65 = *(char *)(v77[94] + 38) + v11;
-    v12 = IEntity::WorldIdx();
+    v12 = IEntity::WorldIdx(a2);
     v13 = CWorldManager::Y(v12);
     v66 = *(char *)(v77[94] + 39) + v13;
     if ( *((_BYTE *)v77 + 403) )
     {
-      v14 = CPileMgr::AddPile((CPileMgr *)&g_cPileMgr, v65 + 1, v66, 7, 0, 5, 0, 0, 0, 0);
+      v14 = CPileMgr::AddPile((CPileMgr *)&g_cPileMgr, v65 + 1, v66, GOOD_BOARD, 0, 5u, 0, 0, 0, 0);
       *((_WORD *)v77 + 216) = v14;
-      v39 = IEntity::ID();
-      v15 = CPileMgr::operator[](*((unsigned __int16 *)v77 + 216));
-      CPile::SetBuildingId((CPile *)v15, v39);
+      v39 = IEntity::ID(a2);
+      v15 = (CPile *)CPileMgr::operator[](*((unsigned __int16 *)v77 + 216));
+      CPile::SetBuildingId(v15, v39);
     }
     if ( *((_BYTE *)v77 + 405) )
     {
-      v16 = CPileMgr::AddPile((CPileMgr *)&g_cPileMgr, v65 - 1, v66, 32, 0, 5, 0, 0, 0, 0);
+      v16 = CPileMgr::AddPile((CPileMgr *)&g_cPileMgr, v65 - 1, v66, GOOD_STONE, 0, 5u, 0, 0, 0, 0);
       *((_WORD *)v77 + 217) = v16;
-      v40 = IEntity::ID();
-      v17 = CPileMgr::operator[](*((unsigned __int16 *)v77 + 217));
-      CPile::SetBuildingId((CPile *)v17, v40);
+      v40 = IEntity::ID(a2);
+      v17 = (CPile *)CPileMgr::operator[](*((unsigned __int16 *)v77 + 217));
+      CPile::SetBuildingId(v17, v40);
     }
     if ( *((_BYTE *)v77 + 407) )
     {
-      v18 = CPileMgr::AddPile((CPileMgr *)&g_cPileMgr, v65, v66, 14, 0, 5, 0, 0, 0, 0);
+      v18 = CPileMgr::AddPile((CPileMgr *)&g_cPileMgr, v65, v66, GOOD_GOLDBAR, 0, 5u, 0, 0, 0, 0);
       *((_WORD *)v77 + 218) = v18;
-      v41 = IEntity::ID();
-      v19 = CPileMgr::operator[](*((unsigned __int16 *)v77 + 218));
-      CPile::SetBuildingId((CPile *)v19, v41);
+      v41 = IEntity::ID(a2);
+      v19 = (CPile *)CPileMgr::operator[](*((unsigned __int16 *)v77 + 218));
+      CPile::SetBuildingId(v19, v41);
     }
     v20 = IEntity::Type(a2);
-    if ( (unsigned __int8)CBuildingMgr::IsMine(v20) )
+    if ( CBuildingMgr::IsMine(v20) )
       *((_BYTE *)v77 + 396) = 4;
     else
       *((_BYTE *)v77 + 396) = 2;
     if ( *(_BYTE *)(v77[94] + 6) )
     {
-      v42 = v77[94] + 816;
+      v42 = (std::vector *)(v77[94] + 816);
       v35 = *(char *)(v77[94] + 1);
       v32 = *(char *)v77[94];
       v29 = IEntity::Y(a2);
       v21 = IEntity::X(a2);
-      CBuildingFlagsWalk::CBuildingFlagsWalk(v21, v29, v32, v35, v42);
-      while ( (unsigned __int8)CBuildingFlagsWalk::NextPosition(v51) )
+      CBuildingFlagsWalk::CBuildingFlagsWalk(&v51, v21, v29, v32, v35, v42);
+      while ( CBuildingFlagsWalk::NextPosition(&v51) )
       {
-        v43 = CBuildingFlagsWalk::CurrentY(v51);
-        v22 = CBuildingFlagsWalk::CurrentX(v51);
+        v43 = CBuildingFlagsWalk::CurrentY(&v51);
+        v22 = CBuildingFlagsWalk::CurrentX(&v51);
         v64 = CWorldManager::Index(v22, v43);
         CWorldManager::SetObjectId(v64, 0);
         CWorldManager::SetFlagBits(v64, 8u);
       }
-      v44 = v77[94] + 832;
+      v44 = (std::vector *)(v77[94] + 832);
       v36 = *(char *)(v77[94] + 1);
       v33 = *(char *)v77[94];
       v30 = IEntity::Y(a2);
       v23 = IEntity::X(a2);
-      CBuildingFlagsWalk::CBuildingFlagsWalk(v23, v30, v33, v36, v44);
-      while ( (unsigned __int8)CBuildingFlagsWalk::NextPosition(v50) )
+      CBuildingFlagsWalk::CBuildingFlagsWalk(&v50, v23, v30, v33, v36, v44);
+      while ( CBuildingFlagsWalk::NextPosition(&v50) )
       {
-        v45 = CBuildingFlagsWalk::CurrentY(v50);
-        v24 = CBuildingFlagsWalk::CurrentX(v50);
+        v45 = CBuildingFlagsWalk::CurrentY(&v50);
+        v24 = CBuildingFlagsWalk::CurrentX(&v50);
         v54 = CWorldManager::Index(v24, v45);
         CWorldManager::SetFlagBits(v54, 8u);
       }
