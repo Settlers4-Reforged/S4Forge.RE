@@ -30,7 +30,7 @@ CPlant::CPlant(int a2, int a3, int a4, int a5, int _iGoodType, int _iStage) : ID
   BB_ASSERT(m_uCycleFrames)
   if(IDecoObject::IsStaticInstance()) {
     this->m_iFrame = g_pGame->Rand() % this->m_uCycleFrames;
-    IEntity::SetFlagBits(EntityFlag_Ready);
+    IEntity::SetFlagBits(ENTITY_FLAG_Ready);
   } else {
     IAnimatedEntity::RegisterForLogicUpdate(31);
   }
@@ -41,7 +41,7 @@ CPlant::CPlant(int a2, int a3, int a4, int a5, int _iGoodType, int _iStage) : ID
 // Decompiled from CPlant *__thiscall CPlant::CPlant(CPlant *this, const struct CPlant *a2, int a3, int a4, int a5)
 CPlant::CPlant(class CPlant const &a2, int a3, int a4, int a5) : IDecoObject(a2, a3, a4, a5) {
   this->m_uU5 = 0;
-  IEntity::SetFlagBits(EntityFlag_Ready);
+  IEntity::SetFlagBits(ENTITY_FLAG_Ready);
   this->m_uStage = 3;
   this->m_iJobPart = this->m_uStage + (unsigned __int16) g_pGfxManager->GetObjectFirstJob(this->m_nType);
   this->m_uCycleFrames = a2.m_uCycleFrames;
@@ -73,7 +73,7 @@ void CPlant::LogicUpdate(void) {
              this->m_iJobPart = this->m_uStage
                                 + (unsigned __int16) g_pGfxManager->GetObjectFirstJob(this->m_nType),
              this->m_uStage == 3)) {
-        IEntity::SetFlagBits(EntityFlag_Ready);
+        IEntity::SetFlagBits(ENTITY_FLAG_Ready);
         g_cDecoObjMgr.ChangeToStaticInstance(X(), Y(), Type(), 0);
       } else {
         if(!IEntity::FlagBits((EntityFlag) 0x100000))
@@ -130,7 +130,7 @@ void CPlant::Take(int _iAmount) {
   BB_ASSERT(! IsStaticInstance())
 
   BB_ASSERT(( m_uStage + _iAmount <= PLANT_STAGES_MAX + 1 && ( Type() == OBJECT_WHEAT1 || Type() == OBJECT_WHEAT2 || Type() == OBJECT_SUNFLOWER ) ) || ( m_uStage + _iAmount <= PLANT_STAGES_MAX && !( Type() == OBJECT_WHEAT1 || Type() == OBJECT_WHEAT2 || Type() == OBJECT_SUNFLOWER ) ))
-  IEntity::ClearFlagBits(EntityFlag_Ready);
+  IEntity::ClearFlagBits(ENTITY_FLAG_Ready);
   this->m_uStage += _iAmount;
   this->m_iFrame = 0;
   this->m_iJobPart = this->m_uStage + (unsigned __int16) g_pGfxManager->GetObjectFirstJob(this->m_nType);

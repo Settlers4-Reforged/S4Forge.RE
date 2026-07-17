@@ -232,7 +232,7 @@ void IEntity::SetPosition(int newPosition)
 // Decompiled from bool __thiscall IEntity::IsSelected(IEntity *this)
 bool IEntity::IsSelected(void) const
 {
-  return (this->m_iFlags & static_cast<int>(EntityFlag_Selected)) != 0;
+  return (this->m_iFlags & static_cast<int>(ENTITY_FLAG_Selected)) != 0;
 }
 
 // address=[0x154b3d0]
@@ -318,7 +318,7 @@ void IEntity::Store(std::ostream &outputFile)
 // Decompiled from void __thiscall IEntity::PostLoadInit(IEntity *this)
 void IEntity::PostLoadInit(void)
 {
-  IEntity::ClearFlagBits(EntityFlag_Selected);
+  IEntity::ClearFlagBits(ENTITY_FLAG_Selected);
   IEntity::ClearFlagBits((EntityFlag)0x400);
 }
 
@@ -571,7 +571,7 @@ int IEntity::GetObserverTarget(enum T_OBSERVER_TARGET arg1)
 void IEntity::AddToWarMap(void)
 {
 
-  if (this->FlagBits(EntityFlag_Ready))
+  if (this->FlagBits(ENTITY_FLAG_Ready))
     CWarMap::AddEntity(*this);
 }
 

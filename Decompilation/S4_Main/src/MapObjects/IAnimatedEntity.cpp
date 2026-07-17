@@ -92,7 +92,7 @@ void IAnimatedEntity::SetEvent(CEntityEvent const &a1) {
   DWORD m_iEvent = a1.m_iEvent;
   DWORD v2 = IEntity::EntityId();
   g_pMsgTracer->PushFormatedInts("SetEvent(): id %u, event %u, type %u", v2, m_iEvent, m_iType);
-  if(!IEntity::FlagBits(EntityFlag_Registered))
+  if(!IEntity::FlagBits(ENTITY_FLAG_Registered))
     IAnimatedEntity::RegisterForLogicUpdate(1);
   this->m_iEventQueue.push_back(a1);
 }
@@ -118,7 +118,7 @@ void IAnimatedEntity::BoxSelection(void) {
     }
     int EntitySelectionType = g_cInputProcessor.GetEntitySelectionType(this);
     int SelectionType = g_cInputProcessor.GetSelectionType();
-    if(IEntity::FlagBits(EntityFlag_Selectable) || IEntity::ObjType() == 8) {
+    if(IEntity::FlagBits(ENTITY_FLAG_Selectable) || IEntity::ObjType() == 8) {
       bool v10 = 0;
       if(v6) {
         v10 = (mask & EntitySelectionType) == (mask & SelectionType);

@@ -48,7 +48,7 @@ void CFleeRole::LogicUpdate(class CSettler *_pSettler) {
         rEcoSector.ChangeNrOfSettler(_pSettler->Type(), 1);
         std::unique_ptr<ISettlerRole> pSettlerRole(g_cSettlerMgr.CreateSettlerRole(_pSettler->Race(), _pSettler->Type()));
         _pSettler->NewRole(std::move(pSettlerRole));
-        if(!_pSettler->FlagBits(EntityFlag_Offered)) {
+        if(!_pSettler->FlagBits(ENTITY_FLAG_Offered)) {
             rEcoSector.SetSettlerOffer(_pSettler->Type(), _pSettler->EntityId());
         }
         _pSettler->TakeWaitList();
@@ -195,7 +195,7 @@ void CFleeRole::TakeJob(class CSettler *_pSettler) {
 // address=[0x156d910]
 // Decompiled from void __thiscall CFleeRole::Init(ISettlerRole *this, IAnimatedEntity *a1)
 void CFleeRole::Init(class CSettler *_pSettler) {
-    BB_ASSERT(_pSettler->FlagBits(EntityFlag_Attached | EntityFlag_Offered) == 0)
+    BB_ASSERT(_pSettler->FlagBits(ENTITY_FLAG_ATTACHED | ENTITY_FLAG_Offered) == 0)
     BB_ASSERT(HomeEntityId() == 0)
 
     CWarMap::AddEntity(_pSettler);
@@ -208,6 +208,6 @@ void CFleeRole::Init(class CSettler *_pSettler) {
 // address=[0x156d9b0]
 // Decompiled from void __thiscall CFleeRole::ConvertEventIntoGoal(CFleeRole *this, IAnimatedEntity *a2, struct CEntityEvent *a3)
 void CFleeRole::ConvertEventIntoGoal(class CSettler *_pSettler, class CEntityEvent *a3) {
-    if(!_pSettler->FlagBits(EntityFlag_Registered))
+    if(!_pSettler->FlagBits(ENTITY_FLAG_Registered))
         _pSettler->RegisterForLogicUpdate(1);
 }

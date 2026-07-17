@@ -34,7 +34,7 @@ IDecoObject::IDecoObject(int _iX, int _iY, int _iDecoObjectType, int _iId, bool 
   this->m_objType = LANDSCAPE_OBJ;
   this->m_nType = _iDecoObjectType;
   this->m_iFrame = 0;
-  IEntity::SetFlagBits(EntityFlag_Visible);
+  IEntity::SetFlagBits(ENTITY_FLAG_Visible);
   if(a6)
     IEntity::SetPosition(0, 0);
   else
@@ -71,7 +71,7 @@ IDecoObject::IDecoObject(class IDecoObject const &_rStaticDecoObject, int _iId, 
   this->m_objType = LANDSCAPE_OBJ;
   this->m_nType = _rStaticDecoObject.m_nType;
   this->m_iFrame = 0;
-  IEntity::SetFlagBits(EntityFlag_Visible);
+  IEntity::SetFlagBits(ENTITY_FLAG_Visible);
   BB_ASSERT(( g_cWorld.ObjectId( _iX, _iY ) == 0 ) || ( g_cWorld.ObjectId( _iX, _iY ) == _rStaticDecoObject.EntityId() ))
   IEntity::SetPosition(_iX, _iY);
   CWorldManager::SetObjectId(_iX, _iY, _iId);

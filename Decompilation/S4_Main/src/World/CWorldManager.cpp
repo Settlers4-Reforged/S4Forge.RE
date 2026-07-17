@@ -1351,7 +1351,7 @@ struct SGfxColor * __cdecl CWorldManager::GetMiniMapColor(unsigned int _iTileId)
     IEntity *pEntity = CMapObjectMgr::EntityPtr(v8);
     if(pEntity) {
       if(pEntity->OwnerId() > 0) {
-        if(pEntity->FlagBits(EntityFlag_Ownerless)) {
+        if(pEntity->FlagBits(ENTITY_FLAG_Ownerless)) {
           int LocalPlayerId = CPlayerManager::GetLocalPlayerId();
           if(CMinimapHandler::GetObjectColor(pEntity->ObjType(), &CWorldManager::m_sMinimapColorBuffer, 0, LocalPlayerId))
             return &CWorldManager::m_sMinimapColorBuffer;

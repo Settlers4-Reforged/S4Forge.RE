@@ -90,7 +90,7 @@ void CAITaskForceSquad::Execute(void) {
       v12 = 1;
       if(pEntity && this->CmdGoal() > 0) {
         while(pEntity) {
-          if((IAIEnvironment::EntityFlags(pEntity->EntityId()) & EntityFlag_OnBoard) == 0)
+          if((IAIEnvironment::EntityFlags(pEntity->EntityId()) & ENTITY_FLAG_OnBoard) == 0)
             v12 = 0;
           pEntity = pEntity->Next();
         }

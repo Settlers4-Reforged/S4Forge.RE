@@ -296,11 +296,11 @@ void CMapObjectMgr::Kill(int _iEntityId, int _iAttackerId)
 
   if ((entity->m_iUniqueId & 0x20000000) != 0)
   {
-    if (entity->FlagBits(EntityFlag_AliveMask) && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 460, "pEntity->FlagBits(ENTITY_FLAG_ALIVE_MASK) == 0") == 1)
+    if (entity->FlagBits(ENTITY_FLAG_AliveMask) && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 460, "pEntity->FlagBits(ENTITY_FLAG_ALIVE_MASK) == 0") == 1)
     {
       __debugbreak();
     }
-    if (!entity->FlagBits(EntityFlag_Died) && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 461, "pEntity->FlagBits(ENTITY_FLAG_DIED) != 0") == 1)
+    if (!entity->FlagBits(ENTITY_FLAG_Died) && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 461, "pEntity->FlagBits(ENTITY_FLAG_DIED) != 0") == 1)
     {
       __debugbreak();
     }
@@ -308,19 +308,19 @@ void CMapObjectMgr::Kill(int _iEntityId, int _iAttackerId)
   else
   {
     entity->m_iUniqueId |= 0x20000000u;
-    if (entity->FlagBits(EntityFlag_Died) && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 468, "pEntity->FlagBits(ENTITY_FLAG_DIED) == 0") == 1)
+    if (entity->FlagBits(ENTITY_FLAG_Died) && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 468, "pEntity->FlagBits(ENTITY_FLAG_DIED) == 0") == 1)
     {
       __debugbreak();
     }
-    if (entity->FlagBits(EntityFlag_Birth))
+    if (entity->FlagBits(ENTITY_FLAG_Birth))
       entity->SetFlagBits((EntityFlag)0x100000);
     else
       entity->ClearFlagBits((EntityFlag)0x100000);
-    entity->ClearFlagBits(EntityFlag_AliveMask);
-    entity->SetFlagBits(EntityFlag_Died);
+    entity->ClearFlagBits(ENTITY_FLAG_AliveMask);
+    entity->SetFlagBits(ENTITY_FLAG_Died);
     if (entity->m_warMapNode.IsInWarMap())
       CWarMap::RemoveEntity(*entity);
-    if (entity->FlagBits(EntityFlag_Selected) || entity->FlagBits((EntityFlag)1024))
+    if (entity->FlagBits(ENTITY_FLAG_Selected) || entity->FlagBits((EntityFlag)1024))
     {
       v3 = entity->ID();
       g_cInputProcessor->DeSelectEntity(v3);
@@ -484,7 +484,7 @@ void CMapObjectMgr::LogicUpdate(void)
       {
         __debugbreak();
       }
-      pAnimatedEntity->ClearFlagBits(EntityFlag_Registered);
+      pAnimatedEntity->ClearFlagBits(ENTITY_FLAG_Registered);
       int type = pAnimatedEntity->Type();
       int objType = pAnimatedEntity->ObjType();
       g_pMsgTracer->PushFormatedInts("LogicUpdate(): id %u, type %u / %u", iEntity, objType, type);
@@ -557,7 +557,7 @@ int CMapObjectMgr::RegisterForLogicUpdate(int iDeltaTicks, int _iEntityId)
         pEntity->Type(),
         iDeltaTicks);
   }
-  if (pEntity->FlagBits(EntityFlag_Died) && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 874, "pEntity->FlagBits(ENTITY_FLAG_DIED) == 0") == 1)
+  if (pEntity->FlagBits(ENTITY_FLAG_Died) && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 874, "pEntity->FlagBits(ENTITY_FLAG_DIED) == 0") == 1)
   {
     __debugbreak();
   }
@@ -568,7 +568,7 @@ int CMapObjectMgr::RegisterForLogicUpdate(int iDeltaTicks, int _iEntityId)
 
   std::deque<unsigned short> &updateQueue = this->m_vLogicUpdateSlots->at(logicUpdateSlot);
   updateQueue.push_front(_iEntityId);
-  pEntity->SetFlagBits(EntityFlag_Registered);
+  pEntity->SetFlagBits(ENTITY_FLAG_Registered);
 
   return logicUpdateSlot;
 }
@@ -601,7 +601,7 @@ void CMapObjectMgr::UnRegisterFromLogicUpdate(int slot, int entity)
       {
         updateQueue.erase(it);
         IEntity *pEntity = CMapObjectMgr::EntityPtr(entity);
-        pEntity->ClearFlagBits(EntityFlag_Registered);
+        pEntity->ClearFlagBits(ENTITY_FLAG_Registered);
         return;
       }
       else
@@ -764,7 +764,7 @@ void CMapObjectMgr::PrintAllEntities(int _iLogLevel)
     if (pEntity)
     {
       ++used;
-      if (!pEntity->FlagBits(EntityFlag_Died))
+      if (!pEntity->FlagBits(ENTITY_FLAG_Died))
         ++alive;
     }
   }

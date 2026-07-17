@@ -21,7 +21,7 @@ CMushroom::CMushroom(int a2, int a3, int a4, int a5, int a6) : IDecoObject(a2, a
 
   if(this->m_iPhases) {
     this->m_iFrame = g_pGame->Rand() % this->m_uCycleFrames;
-    IEntity::SetFlagBits(EntityFlag_Ready);
+    IEntity::SetFlagBits(ENTITY_FLAG_Ready);
   } else {
     IAnimatedEntity::RegisterForLogicUpdate(31);
     this->m_iFrame = 0;
@@ -122,7 +122,7 @@ struct SGfxObjectInfo *CMushroom::GetGfxInfos(void) {
 // Decompiled from int __thiscall CMushroom::Decrease(CMushroom *this, int a2)
 void CMushroom::Decrease(int a2) {
   BB_ASSERT(IsStaticInstance() == false)
-  IEntity::ClearFlagBits(EntityFlag_Ready);
+  IEntity::ClearFlagBits(ENTITY_FLAG_Ready);
   ++this->m_iPhases;
   this->m_iFrame = 0;
   this->m_iJobPart = this->m_iPhases + (unsigned __int16) g_pGfxManager->GetObjectFirstJob(this->m_nType);

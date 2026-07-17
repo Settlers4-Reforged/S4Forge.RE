@@ -7,28 +7,28 @@
 #include "defines.h"
 
 enum EntityFlag : int {
-    EntityFlag_Attached       = 0x20,
-    EntityFlag_Offered        = 0x40,
-    EntityFlag_Visible        = 0x100,
-    EntityFlag_Selected       = 0x200,
-    EntityFlag_Selectable     = 0x2000,
-    EntityFlag_OnBoard        = 0x8000,
-    EntityFlag_VulnerableMask = 0x30000,
-    EntityFlag_MagicInvisible = 0x80000,
-    EntityFlag_Birth          = 0x1000000,
-    EntityFlag_Ready          = 0x2000000,
-    EntityFlag_AliveMask      = 0x3000000,
-    EntityFlag_Died           = 0x4000000,
-    EntityFlag_Ownerless      = 0x10000000, // Maybe? In world checks, where if the flag is set, no owner is asked from - or rather the local player is asked from
-    EntityFlag_Registered     = 0x20000000, // aka. registered for logic update in x ticks - see CMapObjectMgr
-    EntityFlag_GlobalOffered  = 0x40000000,
+    ENTITY_FLAG_ATTACHED = 0x20,
+    ENTITY_FLAG_Offered = 0x40,
+    ENTITY_FLAG_Visible = 0x100,
+    ENTITY_FLAG_Selected = 0x200,
+    ENTITY_FLAG_Selectable = 0x2000,
+    ENTITY_FLAG_OnBoard = 0x8000,
+    ENTITY_FLAG_VulnerableMask = 0x30000,
+    ENTITY_FLAG_MagicInvisible = 0x80000,
+    ENTITY_FLAG_Birth = 0x1000000,
+    ENTITY_FLAG_Ready = 0x2000000,
+    ENTITY_FLAG_AliveMask = 0x3000000,
+    ENTITY_FLAG_Died = 0x4000000,
+    ENTITY_FLAG_Ownerless = 0x10000000,  // Maybe? In world checks, where if the flag is set, no owner is asked from - or rather the local player is asked from
+    ENTITY_FLAG_Registered = 0x20000000, // aka. registered for logic update in x ticks - see CMapObjectMgr
+    ENTITY_FLAG_GlobalOffered = 0x40000000,
 };
 
 /// @brief Current entity attacker id for damage handling
 extern int g_CurrentEntityAttacker;
 
 class IEntity : public CPersistence {
-public:
+  public:
     // address=[0x12fd110]
     int FlagBits(int a2) const;
 
@@ -200,17 +200,17 @@ public:
     void SetHitpoints(unsigned int hp);
 
     enum EntityType : int8_t {
-        Settler       = 0x1,
-        Ship          = 0x2,
-        Landvehicle   = 0x4,
-        Building      = 0x8,
-        Good          = 0x10,
+        Settler = 0x1,
+        Ship = 0x2,
+        Landvehicle = 0x4,
+        Building = 0x8,
+        Good = 0x10,
         LANDSCAPE_OBJ = 0x20,
-        Unknown       = 0x40,
-        Animal        = 0x80,
+        Unknown = 0x40,
+        Animal = 0x80,
     };
 
-protected:
+  protected:
     // address=[0x40fe240]
     static struct SGfxColor m_sGfxColor;
 
@@ -218,26 +218,26 @@ protected:
     static struct SGfxObjectInfo m_sGfxInfo;
 
     // Type information members
-protected:
+  protected:
     friend class CMapObjectMgr;
     friend class CDecoObjMgr;
 
-    int                   m_iUniqueId;
-    WORD                  m_nEntityId;
-    EntityType            m_objType;
-    BYTE                  pad_b;
-    WORD                  m_nType;
-    BYTE                  unk_e;
-    BYTE                  unk_f;
+    int m_iUniqueId;
+    WORD m_nEntityId;
+    EntityType m_objType;
+    BYTE pad_b;
+    WORD m_nType;
+    BYTE unk_e;
+    BYTE unk_f;
     struct CAIEntityInfo *m_psAIEntityInfo;
-    int                   m_iFlags; // EntityFlag
-    int                   m_uPackedXY;
-    CWarMapNode           m_warMapNode;
+    int m_iFlags; // EntityFlag
+    int m_uPackedXY;
+    CWarMapNode m_warMapNode;
 
     union {
         struct {
-            BYTE m_cRace: 4;
-            BYTE m_cPlayer: 4;
+            BYTE m_cRace : 4;
+            BYTE m_cPlayer : 4;
         };
 
         BYTE m_cPacked;

@@ -289,7 +289,7 @@ void CGroupMgr::SendGroupCommand(int groupSize, unsigned short const *group, int
     for(i = 0; i < groupSize; ++i) {
       v21 = group[i];
       v24 = CMapObjectMgr::EntityPtr(v21);
-      if(v24 && v24->FlagBits(EntityFlag_Ready | EntityFlag_OnBoard) == 0x2000000)
+      if(v24 && v24->FlagBits(ENTITY_FLAG_Ready | ENTITY_FLAG_OnBoard) == 0x2000000)
         break;
     }
     if(i >= 0) {
@@ -298,7 +298,7 @@ void CGroupMgr::SendGroupCommand(int groupSize, unsigned short const *group, int
           v20 = group[i];
           v27 = CMapObjectMgr::EntityPtr(v20);
           if(v27) {
-            if(v27->FlagBits(EntityFlag_Ready | EntityFlag_OnBoard) == EntityFlag_Ready) {
+            if(v27->FlagBits(ENTITY_FLAG_Ready | ENTITY_FLAG_OnBoard) == ENTITY_FLAG_Ready) {
               CEntityEvent v19 = CEntityEvent(0x11u, 13, sendFlags, 0, 0);
               v27->SetEvent(v19);
             }
@@ -325,7 +325,7 @@ void CGroupMgr::SendGroupCommand(int groupSize, unsigned short const *group, int
         while(i < groupSize) {
           groupMemberId = group[i];
           groupMember = CMapObjectMgr::EntityPtr(groupMemberId);
-          if(groupMember && groupMember->FlagBits(EntityFlag_Ready | EntityFlag_OnBoard) == EntityFlag_Ready) {
+          if(groupMember && groupMember->FlagBits(ENTITY_FLAG_Ready | ENTITY_FLAG_OnBoard) == ENTITY_FLAG_Ready) {
             NextDestination = v30.GetNextDestination();
             if(!g_cWorld.InWorldPackedXY(NextDestination) && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 713, "g_cWorld.InWorldPackedXY(iDestXY)") == 1) {
               __debugbreak();
