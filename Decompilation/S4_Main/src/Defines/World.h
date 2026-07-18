@@ -6,16 +6,15 @@
 enum T_WORLD_FLAGS {
     FLAG_BLOCKED_LAND = 0x1,
 
-    FLAG_BLOCKED_WATER  = 0x2,
-    FLAG_REPELLING_LAND = 0x2,//NOTE: JUST A GUESS!
+    FLAG_BLOCKED_WATER = 0x2,
+    FLAG_REPELLING_LAND = 0x2, // NOTE: JUST A GUESS!
 
-    FLAG_BUILDING    = 0x8,
-    FLAG_DIG         = 0x10u,//NOTE: JUST A GUESS!
-    FLAG_WORK        = 0x20u,
+    FLAG_BUILDING = 0x8,
+    FLAG_DIG = 0x10u, // NOTE: JUST A GUESS!
+    FLAG_WORK = 0x20u,
     FLAG_DECO_OBJECT = 0x40u,
-    //FLAG_REPELLING_LAND | FLAG_BUILDING | FLAG_DIG | FLAG_WORK = 0x3A
+    // FLAG_REPELLING_LAND | FLAG_BUILDING | FLAG_DIG | FLAG_WORK = 0x3A
 };
-
 
 constexpr int REEF_CHECK_FLAGS_MASK = FLAG_REPELLING_LAND | FLAG_BUILDING | FLAG_DIG | FLAG_WORK; //  0011 1010
 static_assert(REEF_CHECK_FLAGS_MASK == 0x3A, "REEF_CHECK_FLAGS_MASK should be 0x3A");
@@ -26,49 +25,51 @@ static_assert(DECO_OBJ_CHECK_FLAGS_MASK == 0x7B, "DECO_OBJ_CHECK_FLAGS_MASK shou
 constexpr int MAX_INFLU_RADIUS = 40;
 constexpr int MAX_INFLU_DIST = 50;
 
+constexpr int ENTITY_ID_UNUSED = 0xFFFF;
+
 enum T_WATER_FLAGS {
     WATER_FLAG_SHIP = 0x800
 };
 
-#define GROUND_TYPES \
-    X(0x0, GROUND_WATER1) \
-    X(0x1, GROUND_WATER2) \
-    X(0x2, GROUND_WATER3) \
-    X(0x3, GROUND_WATER4) \
-    X(0x4, GROUND_WATER5) \
-    X(0x5, GROUND_WATER6) \
-    X(0x6, GROUND_WATER7) \
-    X(0x7, GROUND_WATER8) \
-    X(0x8, GROUND_WATER_BEACH) \
-    X(0x10, GROUND_GRASS) \
-    X(0x11, GROUND_GRASS_MOUNTAIN) \
-    X(0x12, GROUND_GRASS_ISLAND) \
-    X(0x14, GROUND_GRASS_DESERT) \
-    X(0x15, GROUND_GRASS_SWAMP) \
-    X(0x17, GROUND_GRASS_MUD) \
-    X(0x18, GROUND_GRASS_DARK) \
-    X(0x19, GROUND_GRASS_WEIRD) \
-    X(0x1C, GROUND_GRASS_DUSTY) \
-    X(0x1D, GROUND_GRASS_PAVEMENT) \
-    X(0x20, GROUND_MOUNTAIN) \
-    X(0x21, GROUND_MOUNTAIN_GRASS) \
-    X(0x23, GROUND_MOUNTAIN_SNOW) \
-    X(0x30, GROUND_BEACH) \
-    X(0x40, GROUND_DESERT) \
-    X(0x41, GROUND_DESERT_GRASS) \
-    X(0x50, GROUND_SWAMP) \
-    X(0x51, GROUND_SWAMP_GRASS) \
-    X(0x60, GROUND_RIVER1) \
-    X(0x61, GROUND_RIVER2) \
-    X(0x62, GROUND_RIVER3) \
-    X(0x63, GROUND_RIVER4) \
+#define GROUND_TYPES                    \
+    X(0x0, GROUND_WATER1)               \
+    X(0x1, GROUND_WATER2)               \
+    X(0x2, GROUND_WATER3)               \
+    X(0x3, GROUND_WATER4)               \
+    X(0x4, GROUND_WATER5)               \
+    X(0x5, GROUND_WATER6)               \
+    X(0x6, GROUND_WATER7)               \
+    X(0x7, GROUND_WATER8)               \
+    X(0x8, GROUND_WATER_BEACH)          \
+    X(0x10, GROUND_GRASS)               \
+    X(0x11, GROUND_GRASS_MOUNTAIN)      \
+    X(0x12, GROUND_GRASS_ISLAND)        \
+    X(0x14, GROUND_GRASS_DESERT)        \
+    X(0x15, GROUND_GRASS_SWAMP)         \
+    X(0x17, GROUND_GRASS_MUD)           \
+    X(0x18, GROUND_GRASS_DARK)          \
+    X(0x19, GROUND_GRASS_WEIRD)         \
+    X(0x1C, GROUND_GRASS_DUSTY)         \
+    X(0x1D, GROUND_GRASS_PAVEMENT)      \
+    X(0x20, GROUND_MOUNTAIN)            \
+    X(0x21, GROUND_MOUNTAIN_GRASS)      \
+    X(0x23, GROUND_MOUNTAIN_SNOW)       \
+    X(0x30, GROUND_BEACH)               \
+    X(0x40, GROUND_DESERT)              \
+    X(0x41, GROUND_DESERT_GRASS)        \
+    X(0x50, GROUND_SWAMP)               \
+    X(0x51, GROUND_SWAMP_GRASS)         \
+    X(0x60, GROUND_RIVER1)              \
+    X(0x61, GROUND_RIVER2)              \
+    X(0x62, GROUND_RIVER3)              \
+    X(0x63, GROUND_RIVER4)              \
     X(0x70, GROUND_UNIDENTIFIED_GRASS1) \
     X(0x71, GROUND_UNIDENTIFIED_GRASS2) \
     X(0x72, GROUND_UNIDENTIFIED_GRASS3) \
-    X(0x80, GROUND_SNOW) \
-    X(0x81, GROUND_SNOW_MOUNTAIN) \
-    X(0x90, GROUND_MUD) \
-    X(0x91, GROUND_MUD_GRASS) \
+    X(0x80, GROUND_SNOW)                \
+    X(0x81, GROUND_SNOW_MOUNTAIN)       \
+    X(0x90, GROUND_MUD)                 \
+    X(0x91, GROUND_MUD_GRASS)           \
     X(0xFA, GROUND_GLITCHED)
 
 #define X TO_ENUM
@@ -79,5 +80,4 @@ enum T_GROUND_TYPE {
 
 #undef X
 
-
-#endif //DEFINE_WORLD_H
+#endif // DEFINE_WORLD_H
