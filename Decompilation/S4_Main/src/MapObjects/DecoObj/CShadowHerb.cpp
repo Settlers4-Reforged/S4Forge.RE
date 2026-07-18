@@ -18,7 +18,7 @@ class CPersistence * __cdecl CShadowHerb::New(std::istream &a1) {
 // address=[0x154abc0]
 // Decompiled from CShadowHerb *__thiscall CShadowHerb::CShadowHerb(  CShadowHerb *this,  unsigned int a2,  unsigned int a3,  int a4,  int a5,  int a6)
 CShadowHerb::CShadowHerb(int a2, int a3, int a4, int a5, int a6) : IDecoObject(a2, a3, a4, a5, 0) {
-  this->m_iJobPart = g_pGfxManager->GetObjectFirstJob(this->m_nType);
+  this->m_iJobPart = g_pGfxManager->GetObjectFirstJob(this->m_iType);
   this->m_uU1 = 1;
   this->m_iPhases = 0;
   this->m_uCycleFrames = g_pGfxManager->GetObjectFrameCount(this->m_iJobPart);
@@ -43,7 +43,7 @@ void CShadowHerb::LogicUpdate(void) {
       ++this->m_iPhases;
       this->m_iFrame = 0;
       this->m_iJobPart = this->m_iPhases
-                         + (unsigned __int16) g_pGfxManager->GetObjectFirstJob(this->m_nType);
+                         + (unsigned __int16) g_pGfxManager->GetObjectFirstJob(this->m_iType);
       this->m_uCycleFrames = g_pGfxManager->GetObjectFrameCount(this->m_iJobPart);
       IAnimatedEntity::RegisterForLogicUpdate(1);
       break;
@@ -60,7 +60,7 @@ void CShadowHerb::LogicUpdate(void) {
     case 2u:
       ++this->m_iPhases;
       this->m_iFrame = 0;
-      this->m_iJobPart = g_pGfxManager->GetObjectFirstJob(this->m_nType) + this->m_iPhases - 1;
+      this->m_iJobPart = g_pGfxManager->GetObjectFirstJob(this->m_iType) + this->m_iPhases - 1;
       this->m_uCycleFrames = g_pGfxManager->GetObjectFrameCount(this->m_iJobPart);
 
       g_pDarkTribe->ChangeSurroundingToDarkLand(v2, v5);

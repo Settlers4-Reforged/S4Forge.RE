@@ -25,7 +25,7 @@ CPlant::CPlant(int a2, int a3, int a4, int a5, int _iGoodType, int _iStage) : ID
   this->m_uStage = _iStage;
   this->m_iGoodType = _iGoodType;
   this->m_uU5 = 0;
-  this->m_iJobPart = this->m_uStage + (unsigned __int16) g_pGfxManager->GetObjectFirstJob(this->m_nType);
+  this->m_iJobPart = this->m_uStage + (unsigned __int16) g_pGfxManager->GetObjectFirstJob(this->m_iType);
   this->m_uCycleFrames = g_pGfxManager->GetObjectFrameCount(this->m_iJobPart);
   BB_ASSERT(m_uCycleFrames)
   if(IDecoObject::IsStaticInstance()) {
@@ -43,7 +43,7 @@ CPlant::CPlant(class CPlant const &a2, int a3, int a4, int a5) : IDecoObject(a2,
   this->m_uU5 = 0;
   IEntity::SetFlagBits(ENTITY_FLAG_Ready);
   this->m_uStage = 3;
-  this->m_iJobPart = this->m_uStage + (unsigned __int16) g_pGfxManager->GetObjectFirstJob(this->m_nType);
+  this->m_iJobPart = this->m_uStage + (unsigned __int16) g_pGfxManager->GetObjectFirstJob(this->m_iType);
   this->m_uCycleFrames = a2.m_uCycleFrames;
   BB_ASSERT(m_uCycleFrames)
   this->m_iFrame = a2.m_iFrame;
@@ -71,7 +71,7 @@ void CPlant::LogicUpdate(void) {
          && (this->m_uU5 = 0,
              ++this->m_uStage,
              this->m_iJobPart = this->m_uStage
-                                + (unsigned __int16) g_pGfxManager->GetObjectFirstJob(this->m_nType),
+                                + (unsigned __int16) g_pGfxManager->GetObjectFirstJob(this->m_iType),
              this->m_uStage == 3)) {
         IEntity::SetFlagBits(ENTITY_FLAG_Ready);
         g_cDecoObjMgr.ChangeToStaticInstance(X(), Y(), Type(), 0);
@@ -85,8 +85,8 @@ void CPlant::LogicUpdate(void) {
     case 4u:
     case 5u:
       if(++this->m_uU5 >= 30
-         && (this->m_nType == OBJECT_WHEAT1
-             || this->m_nType == OBJECT_WHEAT2
+         && (this->m_iType == OBJECT_WHEAT1
+             || this->m_iType == OBJECT_WHEAT2
              || (this->m_uU5 = 0,
                  ++this->m_iFrame,
                  m_cFrame = this->m_iFrame,
@@ -133,7 +133,7 @@ void CPlant::Take(int _iAmount) {
   IEntity::ClearFlagBits(ENTITY_FLAG_Ready);
   this->m_uStage += _iAmount;
   this->m_iFrame = 0;
-  this->m_iJobPart = this->m_uStage + (unsigned __int16) g_pGfxManager->GetObjectFirstJob(this->m_nType);
+  this->m_iJobPart = this->m_uStage + (unsigned __int16) g_pGfxManager->GetObjectFirstJob(this->m_iType);
   this->m_uCycleFrames = g_pGfxManager->GetObjectFrameCount(this->m_iJobPart);
   BB_ASSERT(m_uCycleFrames)
   this->m_uU5 = 0;

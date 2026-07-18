@@ -223,12 +223,9 @@ class IEntity : public CPersistence {
     friend class CDecoObjMgr;
 
     int m_iUniqueId;
-    WORD m_nEntityId;
-    EntityType m_objType;
-    BYTE pad_b;
-    WORD m_nType;
-    BYTE unk_e;
-    BYTE unk_f;
+    short m_iEntityId;
+    EntityType m_uObjType;
+    short m_iType;
     struct CAIEntityInfo *m_psAIEntityInfo;
     int m_iFlags; // EntityFlag
     int m_uPackedXY;
@@ -249,5 +246,7 @@ class IEntity : public CPersistence {
 
     static int const FILE_FORMAT_VERSION = 0x2;
 };
+
+static_assert(sizeof(IEntity) == 0x24, "sizeof(IEntity) != 0x24");
 
 #endif // IENTITY_H

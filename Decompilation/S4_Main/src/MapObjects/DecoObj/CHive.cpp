@@ -21,9 +21,9 @@ CHive::CHive(int _iX, int _iY, int _iDecoObjectType, int _iId, int _iPhases) : I
   this->m_uU5 = 0;
   if(this->IsFlowerInSurrounding()) {
     ++this->m_iPhases;
-    this->m_iJobPart = g_pGfxManager->GetObjectFirstJob(this->m_nType);
+    this->m_iJobPart = g_pGfxManager->GetObjectFirstJob(this->m_iType);
   } else {
-    this->m_iJobPart = g_pGfxManager->GetObjectFirstJob(this->m_nType) + 1;
+    this->m_iJobPart = g_pGfxManager->GetObjectFirstJob(this->m_iType) + 1;
   }
   this->m_uCycleFrames = g_pGfxManager->GetObjectFrameCount(this->m_iJobPart);
   BB_ASSERT(m_uCycleFrames)
@@ -66,7 +66,7 @@ void CHive::LogicUpdate(void) {
       if(this->m_uU5 >= 20) {
         this->m_uU5 = 0;
         ++this->m_iPhases;
-        this->m_iJobPart = g_pGfxManager->GetObjectFirstJob(this->m_nType);
+        this->m_iJobPart = g_pGfxManager->GetObjectFirstJob(this->m_iType);
         this->m_uCycleFrames = g_pGfxManager->GetObjectFrameCount(this->m_iJobPart);
       }
       goto LABEL_24;
@@ -83,7 +83,7 @@ void CHive::LogicUpdate(void) {
         this->m_uU5 = 0;
         ++this->m_iPhases;
         this->m_iFrame = 0;
-        this->m_iJobPart = g_pGfxManager->GetObjectFirstJob(this->m_nType) + 1;
+        this->m_iJobPart = g_pGfxManager->GetObjectFirstJob(this->m_iType) + 1;
         this->m_uCycleFrames = g_pGfxManager->GetObjectFrameCount(this->m_iJobPart);
         this->ClearFlagBits(ENTITY_FLAG_Ready);
       }
@@ -93,7 +93,7 @@ void CHive::LogicUpdate(void) {
         this->ClearFlagBits(ENTITY_FLAG_Ready);
         ++this->m_iPhases;
         this->m_iFrame = 0;
-        this->m_iJobPart = CGfxManager::GetObjectFirstJob(this->m_nType) + 2;
+        this->m_iJobPart = CGfxManager::GetObjectFirstJob(this->m_iType) + 2;
         this->m_uCycleFrames = CGfxManager::GetObjectFrameCount(this->m_iJobPart);
         BB_ASSERT(m_uCycleFrames)
       }
@@ -103,7 +103,7 @@ void CHive::LogicUpdate(void) {
         this->m_uU5 = 0;
         ++this->m_iPhases;
         this->m_iFrame = 0;
-        this->m_iJobPart = g_pGfxManager->GetObjectFirstJob(this->m_nType) + 3;
+        this->m_iJobPart = g_pGfxManager->GetObjectFirstJob(this->m_iType) + 3;
         this->m_uCycleFrames = g_pGfxManager->GetObjectFrameCount(this->m_iJobPart);
       }
       goto LABEL_24;
@@ -159,11 +159,11 @@ void CHive::Decrease(int a2) {
   if(CHive::IsFlowerInSurrounding()) {
     this->m_iPhases = 1;
     this->m_iFrame = 0;
-    this->m_iJobPart = g_pGfxManager->GetObjectFirstJob(this->m_nType);
+    this->m_iJobPart = g_pGfxManager->GetObjectFirstJob(this->m_iType);
   } else {
     this->m_iPhases = 0;
     this->m_iFrame = 0;
-    this->m_iJobPart = g_pGfxManager->GetObjectFirstJob(this->m_nType) + 1;
+    this->m_iJobPart = g_pGfxManager->GetObjectFirstJob(this->m_iType) + 1;
   }
   this->m_uCycleFrames = g_pGfxManager->GetObjectFrameCount(this->m_iJobPart);
 }

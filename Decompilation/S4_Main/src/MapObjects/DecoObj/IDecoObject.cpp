@@ -31,8 +31,8 @@ IDecoObject::IDecoObject(int _iX, int _iY, int _iDecoObjectType, int _iId, bool 
   BB_ASSERT(_iDecoObjectType < OBJECT_MAX)
   BB_ASSERT(_iId > 0)
 
-  this->m_objType = LANDSCAPE_OBJ;
-  this->m_nType = _iDecoObjectType;
+  this->m_uObjType = LANDSCAPE_OBJ;
+  this->m_iType = _iDecoObjectType;
   this->m_iFrame = 0;
   IEntity::SetFlagBits(ENTITY_FLAG_Visible);
   if(a6)
@@ -63,13 +63,13 @@ IDecoObject::IDecoObject(class IDecoObject const &_rStaticDecoObject, int _iId, 
   int v5; // esi
 
   this->m_bStaticInstance = 0;
-  BB_ASSERT(_rStaticDecoObject.m_objType == LANDSCAPE_OBJ)
+  BB_ASSERT(_rStaticDecoObject.m_uObjType == LANDSCAPE_OBJ)
   BB_ASSERT(_rStaticDecoObject.m_bStaticInstance)
   BB_ASSERT(_iId > 0)
   BB_ASSERT(g_cWorld.InWorld( _iX, _iY ))
 
-  this->m_objType = LANDSCAPE_OBJ;
-  this->m_nType = _rStaticDecoObject.m_nType;
+  this->m_uObjType = LANDSCAPE_OBJ;
+  this->m_iType = _rStaticDecoObject.m_iType;
   this->m_iFrame = 0;
   IEntity::SetFlagBits(ENTITY_FLAG_Visible);
   BB_ASSERT(( g_cWorld.ObjectId( _iX, _iY ) == 0 ) || ( g_cWorld.ObjectId( _iX, _iY ) == _rStaticDecoObject.EntityId() ))

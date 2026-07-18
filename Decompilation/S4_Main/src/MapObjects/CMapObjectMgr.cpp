@@ -386,7 +386,7 @@ void CMapObjectMgr::Destroy(int _iEntityId)
     __debugbreak();
   }
   v2 = m_vEntities[_iEntityId];
-  if (v2->m_nEntityId != _iEntityId && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 571, "pEntity->m_uID == _iEntityId") == 1)
+  if (v2->m_iEntityId != _iEntityId && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 571, "pEntity->m_uID == _iEntityId") == 1)
   {
     __debugbreak();
   }

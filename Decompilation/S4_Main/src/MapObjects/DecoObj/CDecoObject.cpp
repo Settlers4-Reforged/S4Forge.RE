@@ -57,10 +57,10 @@ struct SGfxObjectInfo *CDecoObject::GetGfxInfos(void) {
     }
   }
   g_pGfxManager->GetObjectGfxInfo(&IEntity::m_sGfxInfo, this->m_iJobPart, this->m_iFrame, 1);
-  if(this->m_nType == 123)
+  if(this->m_iType == 123)
     byte_40FE518 = 16; // TODO, probably part of m_sGfxInfo
   else
-    byte_40FE518 = this->m_objType;
+    byte_40FE518 = this->m_uObjType;
   byte_40FE51A = IEntity::IsVisible();
   IEntity::m_sGfxInfo.m_uFlags = 0;
   return &IEntity::m_sGfxInfo;

@@ -827,7 +827,7 @@ void CDecoObjMgr::Load(class S4::CMapFile &a2) {
       unsigned int iIEntityVersion;
       sChunk >> iIEntityVersion;
 
-      static_assert(sizeof(IEntity::m_nEntityId) == sizeof(unsigned short));
+      static_assert(sizeof(IEntity::m_iEntityId) == sizeof(unsigned short));
       unsigned short iEntityId;
       sChunk >> iEntityId;
       unsigned short iType;
