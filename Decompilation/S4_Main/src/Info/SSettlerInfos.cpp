@@ -1,0 +1,3 @@
+// CSettlerMgr
+
+#include "SSettlerInfos.h"

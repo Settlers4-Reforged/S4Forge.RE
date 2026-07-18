@@ -1,0 +1,2 @@
+// See CSettlerMgr
+#pragma once
