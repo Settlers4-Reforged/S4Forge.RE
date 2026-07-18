@@ -3,6 +3,7 @@
 #include "CBB/CBBSupport.h"
 #include "CBB/CS4InvalidMapException.h"
 #include "CPileMgr.h"
+#include "Debug/DebugFlags.h"
 #include "Defines/Goods.h"
 #include "Defines/Object.h"
 #include "Defines/Roles.h"
@@ -21,6 +22,9 @@
 #include <memory>
 
 // Definitions for class CPile
+
+// address=[0x4152058]
+int s_iPileDebugSection = GetAvailableSection();
 
 // address=[0x12fd290]
 // Decompiled from bool __thiscall CPile::GoodAvailable(CPile *this)
@@ -132,18 +136,6 @@ bool CPile::IsInOfferList(void) const {
 // address=[0x155bda0]
 // Decompiled from void __thiscall CPile::Delete(CPile *this)
 void CPile::Delete(void) {
-
-    int v1;                           // eax
-    int v2;                           // eax
-    int v3;                           // eax
-    int v4;                           // eax
-    unsigned int LastLogicUpdateTick; // eax
-    int v6;                           // eax
-    int v7;                           // eax
-    int iEntityId;                    // [esp-4h] [ebp-38h]
-    const char *spGoodName;           // [esp-4h] [ebp-38h]
-    int v14;                          // [esp+30h] [ebp-4h]
-
     CWorldManager::SetPileId(this->WorldIdx(), 0);
     CWorldManager::SetMoveCostsBits(this->WorldIdx(), 2);
     CWorldManager::ClearFlagBits(this->WorldIdx(), 2);
@@ -153,11 +145,9 @@ void CPile::Delete(void) {
     g_pMapObjectMgr->UnRegisterFromLogicUpdate(this->GetLastLogicUpdateTick(), this->m_iEntityId); // TODO: change to getter
     g_cPileMgr.CheckOutPile(ID());
 
-    // if(debug && DEBUG_FLAGS[dword_4152058]) {
-    //     spGoodName = s_sGoodTypeMap[(unsigned __int8)this->m_uGood].m_sName;
-    //     v7 = IEntity::ID(this);
-    //     BBSupportTracePrintF(0, "Pile %u deleted goodType %s", v7, spGoodName);
-    // }
+    if(debug && DEBUG_FLAGS[s_iPileDebugSection]) {
+        BBSupportTracePrintF(0, "Pile %u deleted goodType %s", this->ID(), s_sGoodDefines[this->m_uGood].m_spName);
+    }
 }
 
 // address=[0x155bed0]

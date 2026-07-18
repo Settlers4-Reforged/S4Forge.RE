@@ -82,7 +82,7 @@ class IPileRole : public CPersistence {
     // address=[0x1560200]
     IPileRole(void);
 
-  private:
+  protected:
     unsigned __int16 m_uPileId;
 };
 

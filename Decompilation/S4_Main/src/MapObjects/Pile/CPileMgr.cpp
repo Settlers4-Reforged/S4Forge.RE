@@ -1,8 +1,15 @@
 #include "CPileMgr.h"
 
+#include "CAnyWherePileRole.h"
 #include "CBB/CBBSupport.h"
 #include "CBB/CS4InvalidMapException.h"
+#include "CBuildingSitePileRole.h"
+#include "CDeliverPileRole.h"
 #include "CPile.h"
+#include "CProductionPileRole.h"
+#include "CStoragePileRole.h"
+#include "CTradePileRole.h"
+#include "Debug/DebugFlags.h"
 #include "Defines/Goods.h"
 #include "Defines/Map.h"
 #include "Defines/Object.h"
@@ -21,6 +28,11 @@
 // Definitions for class CPileMgr
 
 CPileMgr g_cPileMgr{};
+
+// address=[0x0415207C]
+int s_iPileMgrAddPileDebugSection = GetAvailableSection();
+// address=[0x04152080]
+int s_iPileMgrDeletePileDebugSection = GetAvailableSection();
 
 // address=[0x12fd1f0]
 // Decompiled from IEntity *__cdecl CPileMgr::GetPilePtr(int _iPileId)
@@ -82,8 +94,8 @@ int CPileMgr::AddPile(int _iX, int _iY, int _iGood, int _iAmount, int _iType, in
     BB_ASSERT(_iAmount >= 0 && _iAmount <= CPile::MAX_PILE_AMOUNT)
     BB_ASSERT(_iType >= 0 && _iType <= IPileRole::PILE_BUILDINGSITE)
 
-    // if(debug && DEBUG_FLAGS[dword_415207C])
-    //     BBSupportTracePrintF(0, "New pile  at %u %u good %u type %u", _iX, _iY, _iGood, _iType);
+    if(debug && DEBUG_FLAGS[s_iPileMgrAddPileDebugSection])
+        BBSupportTracePrintF(0, "New pile  at %u %u good %u type %u", _iX, _iY, _iGood, _iType);
 
     if(this->m_iPileCount >= MAX_PILE_COUNT) {
         BBSupportTracePrintF(0, "NO more piles!!!");
@@ -105,10 +117,10 @@ void CPileMgr::DeletePile(int _iPileId) {
     BB_ASSERT(_iPileId > 0)
     BB_ASSERT(g_cPileMgr[_iPileId].AmountLeaving() == 0)
     BB_ASSERT(g_cPileMgr[_iPileId].AmountComing() == 0)
-    // if(debug && DEBUG_FLAGS[dword_4152080]) {
-    //     BBSupportTracePrintF(0, "DeletePile");
-    //     CPileMgr::TracePile(_iPileId);
-    // }
+    if(debug && DEBUG_FLAGS[s_iPileMgrDeletePileDebugSection]) {
+        BBSupportTracePrintF(0, "DeletePile");
+        CPileMgr::TracePile(_iPileId);
+    }
 
     if(!_iPileId)
         return;
@@ -120,13 +132,12 @@ void CPileMgr::DeletePile(int _iPileId) {
 // address=[0x155ed50]
 // Decompiled from void __thiscall CPileMgr::DeletePileUnforeseen(CPileMgr *this, int _iPileId)
 void CPileMgr::DeletePileUnforeseen(int _iPileId) {
-
     BB_ASSERT(_iPileId > 0)
 
-    // if(debug && DEBUG_FLAGS[dword_4152080]) {
-    //     BBSupportTracePrintF(0, "DeletePile");
-    //     CPileMgr::TracePile(this, _iPileId);
-    // }
+    if(debug && DEBUG_FLAGS[s_iPileMgrDeletePileDebugSection]) {
+        BBSupportTracePrintF(0, "DeletePile");
+        CPileMgr::TracePile(_iPileId);
+    }
 
     if(!_iPileId)
         return;
