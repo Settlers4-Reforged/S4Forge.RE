@@ -178,9 +178,9 @@ unsigned long  CWarShip::ClassID(void)const {
  CWarShip::CWarShip(int a2, int a3, int a4, int a5, int a6, int a7, bool a8) {
   
   CShip::CShip(this, a2, a3, a4, a5, a6, a7, a8);
-  CWarriorBehavior::CWarriorBehavior((CWarriorBehavior *)&this[1].m_nType);
+  CWarriorBehavior::CWarriorBehavior((CWarriorBehavior *)&this[1].m_iType);
   this->__vftable = (CShip_vtbl *)&CWarShip::_vftable_;
-  *(_DWORD *)&this[1].m_nType = &CWarShip::`vftable';
+  *(_DWORD *)&this[1].m_iType = &CWarShip::`vftable';
   this[1].m_iFrame = 1;
   if ( this->m_pVehicleProperties->m_tWarriorType != 10
     && BBSupportDbgReport(
@@ -191,7 +191,7 @@ unsigned long  CWarShip::ClassID(void)const {
   {
     __debugbreak();
   }
-  CWarriorBehavior::WarriorInit((CWarriorBehavior *)&this[1].m_nType, this, -1, 0);
+  CWarriorBehavior::WarriorInit((CWarriorBehavior *)&this[1].m_iType, this, -1, 0);
   return this;
 }
 

@@ -1,3 +1,4 @@
+#if FALSE
 #include "CPileObserverList.h"
 
 // Definitions for class CPileObserverList
@@ -338,3 +339,4 @@ int  CPileObserverList::GetIndex(int _iObserverId)const {
 }
 
 
+#endif // Already implemented

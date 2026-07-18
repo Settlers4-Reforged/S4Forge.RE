@@ -27,7 +27,7 @@ class CPersistence * __cdecl CPlant::New(std::istream & a1) {
   this->m_iPhases = a7;
   this->m_iGoodType = _iGoodType;
   this->m_uU5 = 0;
-  this->m_iJobPart = this->m_iPhases + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType);
+  this->m_iJobPart = this->m_iPhases + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_iType);
   this->m_uCycleFrames = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_iJobPart);
   if ( !this->m_uCycleFrames && BBSupportDbgReport(2, "MapObjects\\DecoObj\\Plant.cpp", 89, "m_uCycleFrames") == 1 )
     __debugbreak();
@@ -53,7 +53,7 @@ class CPersistence * __cdecl CPlant::New(std::istream & a1) {
   this->m_uU5 = 0;
   IEntity::SetFlagBits(this, ENTITY_FLAG_Ready);
   this->m_iPhases = 3;
-  this->m_iJobPart = this->m_iPhases + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType);
+  this->m_iJobPart = this->m_iPhases + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_iType);
   this->m_uCycleFrames = a2->m_uCycleFrames;
   if ( !this->m_uCycleFrames && BBSupportDbgReport(2, "MapObjects\\DecoObj\\Plant.cpp", 135, "m_uCycleFrames") == 1 )
     __debugbreak();
@@ -93,7 +93,7 @@ void  CPlant::LogicUpdate(void) {
         && (this->m_uU5 = 0,
             ++this->m_iPhases,
             this->m_iJobPart = this->m_iPhases
-                             + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType),
+                             + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_iType),
             this->m_iPhases == 3) )
       {
         IEntity::SetFlagBits(this, ENTITY_FLAG_Ready);
@@ -113,8 +113,8 @@ void  CPlant::LogicUpdate(void) {
     case 4u:
     case 5u:
       if ( ++this->m_uU5 >= 30
-        && (this->m_nType == OBJECT_WHEAT1
-         || this->m_nType == OBJECT_WHEAT2
+        && (this->m_iType == OBJECT_WHEAT1
+         || this->m_iType == OBJECT_WHEAT2
          || (this->m_uU5 = 0,
              ++this->m_iFrame,
              m_cFrame = this->m_iFrame,
@@ -187,7 +187,7 @@ void  CPlant::Take(int _iAmount) {
   IEntity::ClearFlagBits(this, ENTITY_FLAG_Ready);
   this->m_iPhases += _iAmount;
   this->m_iFrame = 0;
-  this->m_iJobPart = this->m_iPhases + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType);
+  this->m_iJobPart = this->m_iPhases + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_iType);
   this->m_uCycleFrames = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_iJobPart);
   if ( !this->m_uCycleFrames && BBSupportDbgReport(2, "MapObjects\\DecoObj\\Plant.cpp", 362, "m_uCycleFrames") == 1 )
     __debugbreak();

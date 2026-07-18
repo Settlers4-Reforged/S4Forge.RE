@@ -59,7 +59,7 @@ void  CVehicle::PostLoadInit(void) {
   unsigned int m_nType; // [esp-4h] [ebp-8h]
 
   IEntity::PostLoadInit();
-  m_nType = this->m_nType;
+  m_nType = this->m_iType;
   v1 = IEntity::Race(this);
   this->m_pVehicleProperties = IVehicleInfoMgr::VehicleProperties(v1, m_nType);
   this->AddToWarMap(this);
@@ -827,8 +827,8 @@ unsigned int  CVehicle::TurnCounter(void)const {
   }
   v8 = CPlayerManager::PlayerInfo(_iOwnerId);
   a1 = CPlayerInfo::Race(v8);
-  this->m_nType = a6;
-  this->m_pVehicleProperties = IVehicleInfoMgr::VehicleProperties(a1, this->m_nType);
+  this->m_iType = a6;
+  this->m_pVehicleProperties = IVehicleInfoMgr::VehicleProperties(a1, this->m_iType);
   this->m_uObjType = this->m_pVehicleProperties->m_uObjectType;
   IEntity::SetOwnerId(this, _iOwnerId);
   IEntity::SetRace(this, a1);
@@ -841,7 +841,7 @@ unsigned int  CVehicle::TurnCounter(void)const {
   if ( a8 )
   {
     CVehicle::InitBuildingSite(this);
-    this->m_iJobPart = CGfxManager::GetVehicleFirstJob(g_pGfxManager, a1, this->m_nType);
+    this->m_iJobPart = CGfxManager::GetVehicleFirstJob(g_pGfxManager, a1, this->m_iType);
     this->m_uCycleFrames = CGfxManager::GetVehicleFrameCount(g_pGfxManager, a1, this->m_iJobPart);
     if ( !this->m_uCycleFrames && BBSupportDbgReport(2, "MapObjects\\Vehicle.cpp", 139, "m_uCycleFrames > 0") == 1 )
       __debugbreak();
@@ -854,7 +854,7 @@ unsigned int  CVehicle::TurnCounter(void)const {
   }
   this->m_iDistance = 0;
   this->m_iLivePoints = this->m_pVehicleProperties->m_uHitpoints;
-  this->m_iJobPart = CGfxManager::GetVehicleFirstJob(g_pGfxManager, a1, this->m_nType);
+  this->m_iJobPart = CGfxManager::GetVehicleFirstJob(g_pGfxManager, a1, this->m_iType);
   this->m_uCycleFrames = CGfxManager::GetVehicleFrameCount(g_pGfxManager, a1, this->m_iJobPart);
   if ( !this->m_uCycleFrames && BBSupportDbgReport(2, "MapObjects\\Vehicle.cpp", 161, "m_uCycleFrames > 0") == 1 )
     __debugbreak();

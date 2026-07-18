@@ -4,164 +4,145 @@
 
 // address=[0x13ffdc0]
 // Decompiled from void __cdecl CBuildingSitePileRole::New(struct std::_Facet_base *a1)
-class CPersistence * __cdecl CBuildingSitePileRole::New(std::istream & a1) {
-  
-  if ( operator new(8u) )
-    CBuildingSitePileRole::CBuildingSitePileRole(a1);
-}
+class CPersistence *__cdecl CBuildingSitePileRole::New(std::istream &a1) {
 
+    CBuildingSitePileRole *C; // [esp+Ch] [ebp-10h]
+
+    C = (CBuildingSitePileRole *)operator new(8u);
+    if(C)
+        CBuildingSitePileRole::CBuildingSitePileRole(C, (int)a1);
+}
 
 // address=[0x155b3b0]
-// Decompiled from CPile *__thiscall CBuildingSitePileRole::Init(CBuildingSitePileRole *this, struct CPile *a2)
-void  CBuildingSitePileRole::Init(class CPile * a2) {
-  
-  IPileRole::Init(this, a2);
-  CPile::SetRoleType(a2, 5);
-  return CPile::SetOfferFlag(a2, 0);
-}
+// Decompiled from void __thiscall CBuildingSitePileRole::Init(CBuildingSitePileRole *this, struct CPile *a2)
+void CBuildingSitePileRole::Init(class CPile *_pPile) {
 
+    IPileRole::Init(this, _pPile);
+    CPile::SetRoleType(_pPile, 5u);
+    CPile::SetOfferFlag(_pPile, 0);
+}
 
 // address=[0x155b3e0]
-// Decompiled from int __thiscall CBuildingSitePileRole::Increase(CBuildingSitePileRole *this, struct CPile *a2, int a3)
-void  CBuildingSitePileRole::Increase(class CPile * a2, int a3) {
-  
-  int BuildingId; // eax
-  CBuilding *v4; // eax
-  int v6; // [esp-4h] [ebp-8h]
+// Decompiled from void __thiscall CBuildingSitePileRole::Increase(CBuildingSitePileRole *this, CPile *_pPile, int _iAmount)
+void CBuildingSitePileRole::Increase(class CPile *_pPile, int _iAmount) {
 
-  if ( !a2 && BBSupportDbgReport(2, "MapObjects\\Pile\\BuildingSitePileRole.cpp", 141, "_pPile != 0") == 1 )
-    __debugbreak();
-  if ( a3 <= 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\BuildingSitePileRole.cpp", 142, "_iAmount > 0") == 1 )
-    __debugbreak();
-  if ( CPile::IsInOfferList(a2)
-    && BBSupportDbgReport(2, "MapObjects\\Pile\\BuildingSitePileRole.cpp", 144, "!_pPile->IsInOfferList()") == 1 )
-  {
-    __debugbreak();
-  }
-  if ( CPile::GetOfferFlag(a2)
-    && BBSupportDbgReport(2, "MapObjects\\Pile\\BuildingSitePileRole.cpp", 145, "!_pPile->GetOfferFlag()") == 1 )
-  {
-    __debugbreak();
-  }
-  if ( !CPile::GetBuildingId(a2)
-    && BBSupportDbgReport(2, "MapObjects\\Pile\\BuildingSitePileRole.cpp", 146, "_pPile->GetBuildingId() != 0") == 1 )
-  {
-    __debugbreak();
-  }
-  v6 = (*(int (__thiscall **)(struct CPile *, CBuildingSitePileRole *))(*(_DWORD *)a2 + 60))(a2, this);
-  BuildingId = CPile::GetBuildingId(a2);
-  v4 = (CBuilding *)CBuildingMgr::operator[](BuildingId);
-  return CBuilding::GoodArrive(v4, v6);
+    int BuildingId; // eax
+    CBuilding *v4;  // eax
+    int v5;         // [esp-4h] [ebp-8h]
+
+    if(!_pPile && BBSupportDbgReport(2, "MapObjects\\Pile\\BuildingSitePileRole.cpp", 141, "_pPile != 0") == 1)
+        __debugbreak();
+    if(_iAmount <= 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\BuildingSitePileRole.cpp", 142, "_iAmount > 0") == 1)
+        __debugbreak();
+    if(CPile::IsInOfferList(_pPile) && BBSupportDbgReport(2, "MapObjects\\Pile\\BuildingSitePileRole.cpp", 144, "!_pPile->IsInOfferList()") == 1) {
+        __debugbreak();
+    }
+    if(CPile::GetOfferFlag(_pPile) && BBSupportDbgReport(2, "MapObjects\\Pile\\BuildingSitePileRole.cpp", 145, "!_pPile->GetOfferFlag()") == 1) {
+        __debugbreak();
+    }
+    if(!CPile::GetBuildingId(_pPile) && BBSupportDbgReport(2, "MapObjects\\Pile\\BuildingSitePileRole.cpp", 146, "_pPile->GetBuildingId() != 0") == 1) {
+        __debugbreak();
+    }
+    v5 = _pPile->GetGoodType();
+    BuildingId = CPile::GetBuildingId(_pPile);
+    v4 = CBuildingMgr::operator[]((CBuildingMgr *)g_cBuildingMgr, BuildingId);
+    CBuilding::GoodArrive(v4, v5);
 }
-
 
 // address=[0x155b4f0]
-// Decompiled from void __thiscall CBuildingSitePileRole::SubjectStopped(CBuildingSitePileRole *this, struct CPile *a2)
-void  CBuildingSitePileRole::SubjectStopped(class CPile * a2) {
-  
-  if ( CPile::AmountLeaving(a2)
-    && BBSupportDbgReport(2, "MapObjects\\Pile\\BuildingSitePileRole.cpp", 105, "_pPile->AmountLeaving() == 0") == 1 )
-  {
-    __debugbreak();
-  }
-  CPile::NotifyTargetDieAndDetachAllObservers(a2);
-  CPile::SetOfferFlag(a2, 1);
-  CPile::OfferCompletePileIfPossible(a2, 0);
-}
+// Decompiled from void __thiscall CBuildingSitePileRole::SubjectStopped(CBuildingSitePileRole *this, struct CPile *_pPile)
+void CBuildingSitePileRole::SubjectStopped(class CPile *_pPile) {
 
+    if(CPile::AmountLeaving(_pPile) && BBSupportDbgReport(2, "MapObjects\\Pile\\BuildingSitePileRole.cpp", 105, "_pPile->AmountLeaving() == 0") == 1) {
+        __debugbreak();
+    }
+    CPile::NotifyTargetDieAndDetachAllObservers(_pPile);
+    CPile::SetOfferFlag(_pPile, 1u);
+    CPile::OfferCompletePileIfPossible(_pPile, 0);
+}
 
 // address=[0x155b550]
-// Decompiled from CPile *__thiscall CBuildingSitePileRole::SubjectStarted(CBuildingSitePileRole *this, struct CPile *a2)
-void  CBuildingSitePileRole::SubjectStarted(class CPile * a2) {
-  
-  if ( CPile::AmountComing(a2)
-    && BBSupportDbgReport(2, "MapObjects\\Pile\\BuildingSitePileRole.cpp", 123, "_pPile->AmountComing() == 0") == 1 )
-  {
-    __debugbreak();
-  }
-  CPile::NotifyTargetDieAndDetachAllObservers(a2);
-  CPile::CancelCompleteOfferIfInOfferList(a2, 0);
-  return CPile::SetOfferFlag(a2, 0);
-}
+// Decompiled from void __thiscall CBuildingSitePileRole::SubjectStarted(CBuildingSitePileRole *this, struct CPile *_pPile)
+void CBuildingSitePileRole::SubjectStarted(class CPile *_pPile) {
 
+    if(CPile::AmountComing(_pPile) && BBSupportDbgReport(2, "MapObjects\\Pile\\BuildingSitePileRole.cpp", 123, "_pPile->AmountComing() == 0") == 1) {
+        __debugbreak();
+    }
+    CPile::NotifyTargetDieAndDetachAllObservers(_pPile);
+    CPile::CancelCompleteOfferIfInOfferList(_pPile, 0);
+    CPile::SetOfferFlag(_pPile, 0);
+}
 
 // address=[0x155b5b0]
-// Decompiled from _DWORD *__thiscall CBuildingSitePileRole::CBuildingSitePileRole(_DWORD *this, int a2)
- CBuildingSitePileRole::CBuildingSitePileRole(std::istream & a2) {
-  
-  int v3; // [esp+8h] [ebp-18h] BYREF
-  int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
-  _DWORD *v5; // [esp+10h] [ebp-10h]
-  int v6; // [esp+1Ch] [ebp-4h]
+// Decompiled from CBuildingSitePileRole *__thiscall CBuildingSitePileRole::CBuildingSitePileRole(CBuildingSitePileRole *this, int a2)
+CBuildingSitePileRole::CBuildingSitePileRole(std::istream &a2) {
 
-  v5 = this;
-  IPileRole::IPileRole(a2);
-  v6 = 0;
-  *v5 = &CBuildingSitePileRole::_vftable_;
-  operator^<unsigned int>(a2, &v3);
-  if ( v3 != 1 )
-  {
-    BBSupportTracePrintF(3, "load output defect Unknown fileFormatVersion for CBuildingSitePileRole");
-    pExceptionObject = 0;
-    CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
-    _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
-  }
-  v6 = -1;
-  return v5;
+    int v3;               // [esp+8h] [ebp-18h] BYREF
+    int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
+    int v6;               // [esp+1Ch] [ebp-4h]
+
+    IPileRole::IPileRole(this, a2);
+    v6 = 0;
+    this->__vftable = (IPileRole_vtbl *)&CBuildingSitePileRole::_vftable_;
+    operator^ <unsigned int>(a2, &v3);
+    if(v3 != 1) {
+        BBSupportTracePrintF(3, "load output defect Unknown fileFormatVersion for CBuildingSitePileRole");
+        pExceptionObject = 0;
+        CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
+        _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
+    }
+    v6 = -1;
+    return this;
 }
-
 
 // address=[0x155b660]
-// Decompiled from int __thiscall CBuildingSitePileRole::Store(void *this, struct std::ostream *a2)
-void  CBuildingSitePileRole::Store(std::ostream & a2) {
-  
-  int v3[2]; // [esp+0h] [ebp-8h] BYREF
+// Decompiled from void __thiscall CBuildingSitePileRole::Store(CBuildingSitePileRole *this, struct std::ostream *a2)
+void CBuildingSitePileRole::Store(std::ostream &a2) {
 
-  v3[1] = (int)this;
-  IPileRole::Store(a2);
-  v3[0] = 1;
-  return operator^<unsigned int>(a2, v3);
+    int v2; // [esp+0h] [ebp-8h] BYREF
+
+    IPileRole::Store(this, a2);
+    v2 = 1;
+    operator^ <unsigned int>(a2, &v2);
 }
-
 
 // address=[0x155b750]
-// Decompiled from void __thiscall CBuildingSitePileRole::~CBuildingSitePileRole(CBuildingSitePileRole *this)
- CBuildingSitePileRole::~CBuildingSitePileRole(void) {
-  
-  IPileRole::~IPileRole(this);
-}
+// Decompiled from IPileRole *__thiscall CBuildingSitePileRole::~CBuildingSitePileRole(CBuildingSitePileRole *this)
+CBuildingSitePileRole::~CBuildingSitePileRole(void) {
 
+    return IPileRole::~IPileRole(this);
+}
 
 // address=[0x155b7b0]
 // Decompiled from int __thiscall CBuildingSitePileRole::ClassID(CBuildingSitePileRole *this)
-unsigned long  CBuildingSitePileRole::ClassID(void)const {
-  
-  return CBuildingSitePileRole::m_iClassID;
-}
+unsigned long CBuildingSitePileRole::ClassID(void) const {
 
+    return CBuildingSitePileRole::m_iClassID;
+}
 
 // address=[0x1560380]
-// Decompiled from int __cdecl CBuildingSitePileRole::Load(int a1)
-class CBuildingSitePileRole * __cdecl CBuildingSitePileRole::Load(std::istream & a1) {
-  
-  void **v1; // eax
-  struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
+// Decompiled from int __cdecl CBuildingSitePileRole::Load(struct std::istream *a1)
+class CBuildingSitePileRole *__cdecl CBuildingSitePileRole::Load(std::istream &a1) {
 
-  v1 = (void **)CPersistence::New(a1, &CPersistence__RTTI_Type_Descriptor_);
-  return j____RTDynamicCast(v1, 0, v3, &CBuildingSitePileRole__RTTI_Type_Descriptor_, 1);
+    void **v1; // eax
+
+    v1 = (void **)CPersistence::New(a1);
+    return j____RTDynamicCast(
+        v1,
+        0,
+        &CPersistence__RTTI_Type_Descriptor_,
+        &CBuildingSitePileRole__RTTI_Type_Descriptor_,
+        1);
 }
-
 
 // address=[0x3d8bbb8]
 // [Decompilation failed for static unsigned long CBuildingSitePileRole::m_iClassID]
 
 // address=[0x1560140]
 // Decompiled from CBuildingSitePileRole *__thiscall CBuildingSitePileRole::CBuildingSitePileRole(CBuildingSitePileRole *this)
- CBuildingSitePileRole::CBuildingSitePileRole(void) {
-  
-  IPileRole::IPileRole(this);
-  *(_DWORD *)this = &CBuildingSitePileRole::_vftable_;
-  return this;
+CBuildingSitePileRole::CBuildingSitePileRole(void) {
+
+    IPileRole::IPileRole(this);
+    this->__vftable = (IPileRole_vtbl *)&CBuildingSitePileRole::_vftable_;
+    return this;
 }
-
-

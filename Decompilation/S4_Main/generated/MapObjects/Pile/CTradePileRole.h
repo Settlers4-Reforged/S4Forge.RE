@@ -6,16 +6,16 @@
 class CTradePileRole : public IPileRole {
   public:
     // address=[0x14023e0]
-    static class CPersistence *__cdecl New(std::istream &a1);
+    static class CPersistence *__cdecl New(std::istream &_rStream);
 
     // address=[0x1560480]
     static class CTradePileRole *__cdecl Load(std::istream &a1);
 
     // address=[0x1561a70]
-    virtual void Increase(class CPile *a2, int a3);
+    virtual void Increase(class CPile *_pPile, int a3);
 
     // address=[0x1561b70]
-    virtual void Decrease(class CPile *a2, int a3);
+    virtual void Decrease(class CPile *_pPile, int a3);
 
     // address=[0x1561c90]
     virtual void Empty(class CPile *a2);
@@ -36,7 +36,7 @@ class CTradePileRole : public IPileRole {
     virtual void NotifyChangeEcoSector(class CPile *a2, int a3, int a4);
 
     // address=[0x15620c0]
-    virtual void SubjectDie(class CPile *a2, int a3);
+    virtual void SubjectDie(class CPile *_pPile, int a1);
 
     // address=[0x15621c0]
     virtual void SubjectStopped(class CPile *a2);
@@ -72,7 +72,7 @@ class CTradePileRole : public IPileRole {
     virtual void DecAmountComing(class CPile *a2);
 
     // address=[0x15625e0]
-    int ReservesGood(int a2, enum PILE_TYPES a3, class CPile *a4);
+    int ReservesGood(int _iAmount, enum PILE_TYPES a3, class CPile *pPile);
 
     // address=[0x15626d0]
     int GetReserveAmount(void);
@@ -95,6 +95,12 @@ class CTradePileRole : public IPileRole {
 
     // address=[0x1562920]
     virtual ~CTradePileRole(void);
+
+    // Type information members
+  public:
+    int m_iTradeRoleType;
+    int m_iExpectedAmount;
+    int m_iReserveAmount;
 };
 
 #endif // CTRADEPILEROLE_H

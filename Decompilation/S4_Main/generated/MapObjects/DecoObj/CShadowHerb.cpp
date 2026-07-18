@@ -23,7 +23,7 @@ class CPersistence * __cdecl CShadowHerb::New(std::istream & a1) {
   
   IDecoObject::IDecoObject(this, a2, a3, a4, a5, 0);
   this->__vftable = (IAnimatedEntity_vtbl *)&CShadowHerb::_vftable_;
-  this->m_iJobPart = CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType);
+  this->m_iJobPart = CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_iType);
   this->m_uU1 = 1;
   this->m_iPhases = 0;
   this->m_uCycleFrames = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_iJobPart);
@@ -59,7 +59,7 @@ void  CShadowHerb::LogicUpdate(void) {
       ++this->m_iPhases;
       this->m_iFrame = 0;
       this->m_iJobPart = this->m_iPhases
-                       + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType);
+                       + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_iType);
       this->m_uCycleFrames = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_iJobPart);
       IAnimatedEntity::RegisterForLogicUpdate(this, 1);
       break;
@@ -81,7 +81,7 @@ void  CShadowHerb::LogicUpdate(void) {
     case 2u:
       ++this->m_iPhases;
       this->m_iFrame = 0;
-      this->m_iJobPart = CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_nType) + this->m_iPhases - 1;
+      this->m_iJobPart = CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_iType) + this->m_iPhases - 1;
       this->m_uCycleFrames = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_iJobPart);
       v5 = IEntity::Y(this);
       v2 = IEntity::X(this);

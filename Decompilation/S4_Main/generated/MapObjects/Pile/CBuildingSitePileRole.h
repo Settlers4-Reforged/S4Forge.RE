@@ -9,16 +9,16 @@ class CBuildingSitePileRole : public IPileRole {
     static class CPersistence *__cdecl New(std::istream &a1);
 
     // address=[0x155b3b0]
-    virtual void Init(class CPile *a2);
+    virtual void Init(class CPile *_pPile);
 
     // address=[0x155b3e0]
-    virtual void Increase(class CPile *a2, int a3);
+    virtual void Increase(class CPile *_pPile, int _iAmount);
 
     // address=[0x155b4f0]
-    virtual void SubjectStopped(class CPile *a2);
+    virtual void SubjectStopped(class CPile *_pPile);
 
     // address=[0x155b550]
-    virtual void SubjectStarted(class CPile *a2);
+    virtual void SubjectStarted(class CPile *_pPile);
 
     // address=[0x155b5b0]
     CBuildingSitePileRole(std::istream &a2);

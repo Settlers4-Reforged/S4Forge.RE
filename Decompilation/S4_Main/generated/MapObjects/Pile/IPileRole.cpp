@@ -1,3 +1,4 @@
+#if FALSE
 #include "IPileRole.h"
 
 // Definitions for class IPileRole
@@ -64,9 +65,9 @@ void  IPileRole::ReassessDistance(class CPile * a2, int & a3) {
 
 // address=[0x1560f00]
 // Decompiled from void __thiscall IPileRole::Increase(IPileRole *this, struct CPile *a2, int a3)
-void  IPileRole::Increase(class CPile * a2, int _iAmount) {
+void  IPileRole::Increase(class CPile * a2, int a3) {
   
-  if ( _iAmount <= 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\PileRole.cpp", 123, "_iAmount > 0") == 1 )
+  if ( a3 <= 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\PileRole.cpp", 123, "_iAmount > 0") == 1 )
     __debugbreak();
   if ( CPile::NumberOfAvailableGoods(a2) <= 0
     && BBSupportDbgReport(2, "MapObjects\\Pile\\PileRole.cpp", 124, "_pPile->NumberOfAvailableGoods() > 0") == 1 )
@@ -83,7 +84,7 @@ void  IPileRole::Increase(class CPile * a2, int _iAmount) {
   }
   else if ( CPile::GetOfferFlag(a2) )
   {
-    CPile::Offer(a2, _iAmount, 0);
+    CPile::Offer(a2, a3, 0);
   }
 }
 
@@ -149,14 +150,10 @@ void  IPileRole::DecAmountLeaving(class CPile * a2) {
 
 
 // address=[0x1561140]
-// Decompiled from int __thiscall IPileRole::Init(IPileRole *this, struct CPile *a2)
+// Decompiled from void __thiscall IPileRole::Init(IPileRole *this, CPile *a2)
 void  IPileRole::Init(class CPile * a2) {
   
-  int result; // eax
-
-  result = IEntity::EntityId((unsigned __int16 *)a2);
-  *((_WORD *)this + 2) = result;
-  return result;
+  this->m_uPileId = IEntity::EntityId(a2);
 }
 
 
@@ -257,16 +254,16 @@ void  IPileRole::SubjectStarted(class CPile * a2) {
 
 
 // address=[0x1561370]
-// Decompiled from _DWORD *__thiscall IPileRole::IPileRole(_DWORD *this, int a2)
+// Decompiled from IPileRole *__thiscall IPileRole::IPileRole(IPileRole *this, int a2)
  IPileRole::IPileRole(std::istream & a2) {
   
   int v3; // [esp+4h] [ebp-Ch] BYREF
   int pExceptionObject; // [esp+8h] [ebp-8h] BYREF
-  _DWORD *v5; // [esp+Ch] [ebp-4h]
+  IPileRole *v5; // [esp+Ch] [ebp-4h]
 
   v5 = this;
   CPersistence::CPersistence(this);
-  *v5 = &IPileRole::_vftable_;
+  v5->__vftable = (IPileRole_vtbl *)&IPileRole::_vftable_;
   operator^<unsigned int>(a2, &v3);
   if ( v3 != 1 )
   {
@@ -275,7 +272,7 @@ void  IPileRole::SubjectStarted(class CPile * a2) {
     CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
     _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
   }
-  operator^<unsigned short>(a2, v5 + 1);
+  operator^<unsigned short>(a2, &v5->m_uPileId);
   return v5;
 }
 
@@ -314,3 +311,4 @@ bool  IPileRole::ExecuteChangeGoodTypeUnforseen(class CPile * a2, int a3) {
 }
 
 
+#endif // Already implemented

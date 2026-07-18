@@ -55,7 +55,7 @@ int  IEntity::Flags(void)const {
 // Decompiled from int __thiscall IEntity::ID(IEntity *this)
 int  IEntity::ID(void)const {
   
-  return this->m_nEntityId;
+  return this->m_iEntityId;
 }
 
 
@@ -79,7 +79,7 @@ void  IEntity::SetFlagBits(int a2) {
 // Decompiled from int __thiscall IEntity::Type(IEntity *this)
 int  IEntity::Type(void)const {
   
-  return this->m_nType;
+  return this->m_iType;
 }
 
 
@@ -135,7 +135,7 @@ class CWarMapNode &  IEntity::WarMapNode(void) {
 // Decompiled from int __thiscall IEntity::EntityId(IEntity *this)
 int  IEntity::EntityId(void)const {
   
-  return this->m_nEntityId;
+  return this->m_iEntityId;
 }
 
 
@@ -266,9 +266,9 @@ bool  IEntity::IsSelected(void)const {
   CPersistence::CPersistence(this);
   this->__vftable = (IEntity_vtbl *)&IEntity::_vftable_;
   this->m_iUniqueId = -1;
-  this->m_nEntityId = id;
+  this->m_iEntityId = id;
   this->m_uObjType = 0;
-  this->m_nType = 0;
+  this->m_iType = 0;
   this->m_psAIEntityInfo = 0;
   this->m_iFlags = 0;
   this->m_uPackedXY = 0;
@@ -324,8 +324,8 @@ bool  IEntity::IsSelected(void)const {
     CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
     _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
   }
-  operator^<unsigned short>(inputFile, &v5->m_nEntityId);
-  operator^<unsigned short>(inputFile, &v5->m_nType);
+  operator^<unsigned short>(inputFile, &v5->m_iEntityId);
+  operator^<unsigned short>(inputFile, &v5->m_iType);
   operator^<int>(inputFile, &v5->m_uPackedXY);
   operator^<unsigned char>(inputFile, &v5->m_iLivePoints);
   operator^<unsigned char>(inputFile, &v5->m_uObjType);
@@ -333,7 +333,7 @@ bool  IEntity::IsSelected(void)const {
   operator^<int>(inputFile, &v5->m_iFlags);
   operator^<int>(inputFile, &v5->m_iUniqueId);
   v5->m_psAIEntityInfo = 0;
-  CMapObjectMgr::RegisterEntity(v5->m_nEntityId, v5, 0);
+  CMapObjectMgr::RegisterEntity(v5->m_iEntityId, v5, 0);
   v6 = -1;
   return v5;
 }
@@ -348,8 +348,8 @@ void  IEntity::Store(std::ostream & a2) {
   CPersistence::Store(this, a2);
   v2 = 2;
   operator^<unsigned int>(a2, &v2);
-  operator^<unsigned short>(a2, &this->m_nEntityId);
-  operator^<unsigned short>(a2, &this->m_nType);
+  operator^<unsigned short>(a2, &this->m_iEntityId);
+  operator^<unsigned short>(a2, &this->m_iType);
   operator^<int>(a2, &this->m_uPackedXY);
   operator^<unsigned char>(a2, &this->m_iLivePoints);
   operator^<unsigned char>(a2, (BYTE *)&this->m_uObjType);
@@ -401,7 +401,7 @@ void  IEntity::Decrease(int byAmount) {
     else
     {
       this->m_iLivePoints = 0;
-      CMapObjectMgr::Kill(g_pMapObjectMgr, this->m_nEntityId, g_CurrentEntityAttacker);
+      CMapObjectMgr::Kill(g_pMapObjectMgr, this->m_iEntityId, g_CurrentEntityAttacker);
     }
   }
 }
@@ -658,7 +658,7 @@ void  IEntity::SetEvent(class CEntityEvent const & a1) {
 // Decompiled from BOOL __thiscall IEntity::CheckType(IEntity *this, char a2, int a3)
 bool  IEntity::CheckType(int a2, int a3)const {
   
-  return this->m_nType == a3 && (unsigned __int8)(a2 & this->m_uObjType) != 0;
+  return this->m_iType == a3 && (unsigned __int8)(a2 & this->m_uObjType) != 0;
 }
 
 

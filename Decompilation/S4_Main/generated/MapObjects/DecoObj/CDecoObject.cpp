@@ -69,7 +69,7 @@ struct SGfxObjectInfo *  CDecoObject::GetGfxInfos(void) {
     }
   }
   CGfxManager::GetObjectGfxInfo(g_pGfxManager, &IEntity::m_sGfxInfo, this->m_iJobPart, this->m_iFrame, 1);
-  if ( this->m_nType == 123 )
+  if ( this->m_iType == 123 )
     MEMORY[0x40FE518] = 16;
   else
     MEMORY[0x40FE518] = this->m_uObjType;

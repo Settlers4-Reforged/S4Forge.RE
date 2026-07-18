@@ -6,7 +6,7 @@
 class CStoragePileRole : public IPileRole {
   public:
     // address=[0x1402200]
-    static class CPersistence *__cdecl New(std::istream &a1);
+    static class CPersistence *__cdecl New(std::istream &_rStream);
 
     // address=[0x1560260]
     virtual ~CStoragePileRole(void);

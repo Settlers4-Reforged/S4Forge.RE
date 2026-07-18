@@ -9,7 +9,7 @@ class CAnyWherePileRole : public IPileRole {
     static class CPersistence *__cdecl New(std::istream &a1);
 
     // address=[0x155af40]
-    virtual void Init(class CPile *a2);
+    virtual void Init(class CPile *_pPile);
 
     // address=[0x155afc0]
     virtual void LogicUpdate(class CPile *a2);

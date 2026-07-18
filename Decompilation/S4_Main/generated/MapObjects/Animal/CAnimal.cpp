@@ -161,7 +161,7 @@ void  CAnimal::Take(int a2) {
   std::list<CEntityTask>::list<CEntityTask>(&this->unk_66[2]);
   IEntity::SetPosition(this, a2, a3);
   this->m_uObjType = Animal;
-  this->m_nType = a4;
+  this->m_iType = a4;
   *(_DWORD *)&this->unk_64 = 0;
   this->m_iDistance = 0;
   this->unk_79 = 10;

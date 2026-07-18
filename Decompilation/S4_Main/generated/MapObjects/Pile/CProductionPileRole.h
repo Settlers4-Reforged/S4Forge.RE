@@ -6,7 +6,7 @@
 class CProductionPileRole : public IPileRole {
   public:
     // address=[0x14018a0]
-    static class CPersistence *__cdecl New(std::istream &a1);
+    static class CPersistence *__cdecl New(std::istream &_rStream);
 
     // address=[0x1560240]
     virtual ~CProductionPileRole(void);
@@ -27,7 +27,7 @@ class CProductionPileRole : public IPileRole {
     virtual void Increase(class CPile *a2, int a3);
 
     // address=[0x1561750]
-    virtual void ReassessDistance(class CPile *a2, int &a3);
+    virtual void ReassessDistance(class CPile *_pPile, int &a3);
 
     // address=[0x1561770]
     CProductionPileRole(std::istream &a2);

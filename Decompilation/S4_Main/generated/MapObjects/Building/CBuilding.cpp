@@ -319,7 +319,7 @@ void  CBuilding::TryCrushBuilding(void) {
   CEvn_Event v6; // [esp+10h] [ebp-28h] BYREF
   int v7; // [esp+34h] [ebp-4h]
 
-  v4 = std::auto_ptr<IBuildingRole>::operator->(&this[2].m_nType);
+  v4 = std::auto_ptr<IBuildingRole>::operator->(&this[2].m_iType);
   result = (_DWORD *)(*(int (__thiscall **)(int))(*(_DWORD *)v4 + 40))(v4);
   if ( !(_BYTE)result )
     return result;
@@ -1170,8 +1170,8 @@ void  CBuilding::CorrectBuildingBits(void) {
   BYTE1(this[1].__vftable) = 0;
   HIWORD(this[1].__vftable) = 0;
   this[1].m_iUniqueId = 0;
-  *(_DWORD *)&this[1].m_nEntityId = 0;
-  *(_DWORD *)&this[1].m_nType = 0;
+  *(_DWORD *)&this[1].m_iEntityId = 0;
+  *(_DWORD *)&this[1].m_iType = 0;
   IMessageTracer::PushFormatedInts(
     g_pMsgTracer,
     "CBuilding::CBuilding(): entity id %u, player %u, building type %u, position (%i, %i)",
@@ -1209,10 +1209,10 @@ void  CBuilding::CorrectBuildingBits(void) {
   this[1].m_iUniqueId = Y16X16::PackXYFast(
                           a2 + (char)BuildingInfo->m_iDoorXOffset,
                           a3 + (char)BuildingInfo->m_iDoorYOffset);
-  *(_DWORD *)&this[1].m_nEntityId = Y16X16::PackXYFast(
+  *(_DWORD *)&this[1].m_iEntityId = Y16X16::PackXYFast(
                                       a2 + (char)BuildingInfo->m_iFlagX,
                                       a3 + (char)BuildingInfo->m_iFlagY);
-  *(_DWORD *)&this[1].m_nType = CBuilding::EnsignPackedXY(this);
+  *(_DWORD *)&this[1].m_iType = CBuilding::EnsignPackedXY(this);
   if ( (unsigned __int8)CBuildingMgr::IsPortEx(a4) )
   {
     v12 = 32;
@@ -1225,7 +1225,7 @@ void  CBuilding::CorrectBuildingBits(void) {
   {
     v12 = a4;
   }
-  this->m_nType = v12;
+  this->m_iType = v12;
   this->m_uObjType = Building;
   IEntity::SetFlagBits(this, (EntityFlag)4352);
   if ( (unsigned __int8)CBuildingMgr::IsMilitary(v12) )

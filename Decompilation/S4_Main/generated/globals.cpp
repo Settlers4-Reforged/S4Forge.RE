@@ -36510,7 +36510,7 @@ unsigned int __cdecl Serial::LoadVersion(std::istream & a1) {
   int v3; // [esp+0h] [ebp-4h] BYREF
 
   v3 = v1;
-  Serial::Serialize<unsigned int>(a1, &v3);
+  Serial::Serialize<unsigned int>(a1, (int)&v3);
   return v3;
 }
 

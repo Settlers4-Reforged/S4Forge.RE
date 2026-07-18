@@ -183,20 +183,15 @@ protected:
     // Type information members
 public:
     int m_iUniqueId;
-    WORD m_nEntityId;
+    WORD m_iEntityId;
     enum IEntity::EntityType m_uObjType;
-    BYTE pad_b;
-    WORD m_nType;
-    BYTE unk_e;
-    BYTE unk_f;
+    WORD m_iType;
     struct CAIEntityInfo * m_psAIEntityInfo;
     int m_iFlags;
-    int m_uPackedXY;
+    unsigned int m_uPackedXY;
     CWarMapNode m_warMapNode;
     union IEntity::PackedTribePlayer m_packedTribePlayer;
     BYTE m_iLivePoints;
-    BYTE pad_22;
-    BYTE pad_23;
 
 };
 

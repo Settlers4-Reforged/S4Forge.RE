@@ -40,7 +40,7 @@ bool  IDecoObject::IsStaticInstance(void)const {
   if ( _iId <= 0 && BBSupportDbgReport(2, "MapObjects\\DecoObj\\DecoObj.cpp", 66, "_iId > 0") == 1 )
     __debugbreak();
   this->m_uObjType = LANDSCAPE_OBJ;
-  this->m_nType = _iDecoObjectType;
+  this->m_iType = _iDecoObjectType;
   this->m_iFrame = 0;
   IEntity::SetFlagBits(this, ENTITY_FLAG_Visible);
   if ( a6 )
@@ -112,7 +112,7 @@ bool  IDecoObject::IsStaticInstance(void)const {
     __debugbreak();
   }
   this->m_uObjType = LANDSCAPE_OBJ;
-  this->m_nType = _rStaticDecoObject->m_nType;
+  this->m_iType = _rStaticDecoObject->m_iType;
   this->m_iFrame = 0;
   IEntity::SetFlagBits(this, ENTITY_FLAG_Visible);
   if ( CWorldManager::ObjectId(_iX, _iY) )

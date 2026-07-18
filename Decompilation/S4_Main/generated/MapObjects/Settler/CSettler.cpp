@@ -723,8 +723,8 @@ void  CSettler::ChangeType(int _iNewSettlerType, bool a3, bool a4) {
           CSettler::SetFree(this);
         v27 = IEntity::Type(this);
         CWarMap::RemoveEntity(this);
-        this->m_nType = _iNewSettlerType;
-        v29 = CSettlerMgr::SettlerWarriorType(this->m_nType);
+        this->m_iType = _iNewSettlerType;
+        v29 = CSettlerMgr::SettlerWarriorType(this->m_iType);
         this->m_iFlags &= 0xFFFFFFF0;
         this->m_iFlags |= v29;
         this->m_iFlags &= ~0x10000000u;
@@ -1254,7 +1254,7 @@ int  CSettler::SetGroupFlags(int a2) {
   this->m_iDistance = 0;
   IEntity::SetPosition(this, _iX, _iY);
   this->m_uObjType = Settler;
-  this->m_nType = _iSettlerType;
+  this->m_iType = _iSettlerType;
   this->m_iDirection = CGameData::Rand(g_pGameData) % 6;
   IEntity::SetOwnerId(this, _iPlayer);
   playerInfo = CPlayerManager::PlayerInfo(_iPlayer);
@@ -1274,9 +1274,9 @@ int  CSettler::SetGroupFlags(int a2) {
       ecoSector = (unsigned __int16 *)CEcoSectorMgr::operator[](g_cESMgr, ecoSectorId);
       if ( CEcoSector::Owner(ecoSector) == _iPlayer )
       {
-        CEcoSector::ChangeNrOfSettler((CEcoSector *)ecoSector, this->m_nType, 1);
+        CEcoSector::ChangeNrOfSettler((CEcoSector *)ecoSector, this->m_iType, 1);
         if ( IEntity::Type(this) != 1 )
-          CEcoSector::SetSettlerOffer(ecoSector, this->m_nType, this->m_nEntityId);
+          CEcoSector::SetSettlerOffer(ecoSector, this->m_iType, this->m_iEntityId);
       }
     }
   }
@@ -1285,7 +1285,7 @@ int  CSettler::SetGroupFlags(int a2) {
   {
     __debugbreak();
   }
-  CWorldManager::SetSettlerId(_iX, _iY, this->m_nEntityId);
+  CWorldManager::SetSettlerId(_iX, _iY, this->m_iEntityId);
   IMovingEntity::SetDisplacementCosts(this, 0);
   _pSettlerRole = std::auto_ptr<ISettlerRole>::operator->(&this->m_pBehavior);
   v11 = _pSettlerRole->InitWalking(_pSettlerRole, this);
@@ -1312,7 +1312,7 @@ int  CSettler::SetGroupFlags(int a2) {
   std::auto_ptr<ISettlerRole>::auto_ptr<ISettlerRole>((auto_ptr_ISettlerRole *)&this->m_pBehavior, 0);
   this->m_iDistance = 0;
   this->m_uObjType = 0;
-  this->m_nType = type;
+  this->m_iType = type;
   IEntity::ClearFlagBits(this, ENTITY_FLAG_VulnerableMask|ENTITY_FLAG_Selectable|ENTITY_FLAG_Visible|0x800);
   this->m_iFlags = this->m_iFlags;
   this->m_iDisplacementCosts = 5;
@@ -1337,7 +1337,7 @@ int  CSettler::SetGroupFlags(int a2) {
   IEntity::SetPosition(this, arg0, a3);
   CWorldManager::SetSettlerId(arg0, a3, a6);
   this->m_uObjType = Settler;
-  this->m_nType = 69;
+  this->m_iType = 69;
   IEntity::SetOwnerId(this, a4);
   v6 = CPlayerManager::PlayerInfo(a4);
   v7 = CPlayerInfo::Race(v6);
