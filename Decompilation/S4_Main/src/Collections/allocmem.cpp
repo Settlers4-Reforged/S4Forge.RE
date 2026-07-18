@@ -3,7 +3,7 @@
 #define TRAILING_ 0x55555555
 #define HEADING_ 0x55555555
 
-MemoryAllocator::MemoryAllocator(uint unit_size, uint block_size)
+MemoryAllocator::MemoryAllocator(unsigned int unit_size, unsigned int block_size)
     : _allocated_size(max(unit_size, sizeof(Free))),
       _requested_size(unit_size),
       _block_size(block_size),
@@ -12,7 +12,7 @@ MemoryAllocator::MemoryAllocator(uint unit_size, uint block_size)
       _free(0),
       _debug(false) {}
 
-MemoryAllocator::MemoryAllocator(uint unit_size, uint block_size,
+MemoryAllocator::MemoryAllocator(unsigned int unit_size, unsigned int block_size,
                                  bool debug)
     : _allocated_size(max(unit_size, sizeof(Free))),
       _requested_size(unit_size),
@@ -32,18 +32,14 @@ MemoryAllocator::~MemoryAllocator() {
     ::operator delete(_allocated_blocks);
 }
 
-void
-MemoryAllocator::more() {
-    Free *new_block = (Free *)
-            ::operator new(_allocated_size * _block_size);
-    void **new_blocks = (void **) ::operator new(sizeof(void *)
-                                                 * (_num_allocated_blocks + 1));
+void MemoryAllocator::more() {
+    Free *new_block = (Free *)::operator new(_allocated_size * _block_size);
+    void **new_blocks = (void **)::operator new(sizeof(void *) * (_num_allocated_blocks + 1));
     int last_element = _block_size - 1;
     if(!new_block || !new_blocks)
         throw("Memory allocation failed.");
     if(_allocated_blocks) {
-        memcpy(new_blocks, _allocated_blocks, sizeof(void *)
-                                              * _num_allocated_blocks);
+        memcpy(new_blocks, _allocated_blocks, sizeof(void *) * _num_allocated_blocks);
         ::operator delete(_allocated_blocks);
     }
     _allocated_blocks = new_blocks;
@@ -51,24 +47,23 @@ MemoryAllocator::more() {
     _free = new_block;
 
     for(int k = 0; k < last_element; ++k, new_block = new_block->next) {
-        new_block->next = (Free *) ((char *) new_block
-                                    + _allocated_size);
+        new_block->next = (Free *)((char *)new_block + _allocated_size);
     }
     new_block->next = 0;
 }
 
 void *
 MemoryAllocator::debug_correct(void *&storage) {
-    *(int *) storage = HEADING_;
-    storage = (int *) storage + 1;
-    *(int *) ((char *) storage + _requested_size) = TRAILING_;
+    *(int *)storage = HEADING_;
+    storage = (int *)storage + 1;
+    *(int *)((char *)storage + _requested_size) = TRAILING_;
     return storage;
 }
 
 void *
 MemoryAllocator::debug_check(void *&storage) {
-    int *tail = (int *) ((char *) storage + _requested_size);
-    int *head = (int *) (storage = (int *) storage - 1);
+    int *tail = (int *)((char *)storage + _requested_size);
+    int *head = (int *)(storage = (int *)storage - 1);
 
     if(*tail != TRAILING_)
         throw("Block tail has been overrun.");
