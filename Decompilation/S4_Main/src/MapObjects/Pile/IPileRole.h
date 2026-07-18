@@ -75,7 +75,7 @@ class IPileRole : public CPersistence {
         PILE_STORAGE = 2,
         PILE_ANYWHERE = 3,
         PILE_TRADE = 4,
-        PILE_BUILDING_SITE = 5
+        PILE_BUILDINGSITE = 5
     };
 
   protected:
