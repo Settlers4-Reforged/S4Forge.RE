@@ -64,9 +64,9 @@ void  IPileRole::ReassessDistance(class CPile * a2, int & a3) {
 
 // address=[0x1560f00]
 // Decompiled from void __thiscall IPileRole::Increase(IPileRole *this, struct CPile *a2, int a3)
-void  IPileRole::Increase(class CPile * a2, int a3) {
+void  IPileRole::Increase(class CPile * a2, int _iAmount) {
   
-  if ( a3 <= 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\PileRole.cpp", 123, "_iAmount > 0") == 1 )
+  if ( _iAmount <= 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\PileRole.cpp", 123, "_iAmount > 0") == 1 )
     __debugbreak();
   if ( CPile::NumberOfAvailableGoods(a2) <= 0
     && BBSupportDbgReport(2, "MapObjects\\Pile\\PileRole.cpp", 124, "_pPile->NumberOfAvailableGoods() > 0") == 1 )
@@ -83,7 +83,7 @@ void  IPileRole::Increase(class CPile * a2, int a3) {
   }
   else if ( CPile::GetOfferFlag(a2) )
   {
-    CPile::Offer(a2, a3, 0);
+    CPile::Offer(a2, _iAmount, 0);
   }
 }
 

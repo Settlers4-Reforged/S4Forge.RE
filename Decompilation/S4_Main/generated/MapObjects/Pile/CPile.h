@@ -4,209 +4,209 @@
 #include "defines.h"
 
 class CPile : public IAnimatedEntity {
-public:
+  public:
     // address=[0x12fd290]
-    bool  GoodAvailable(void)const;
+    bool GoodAvailable(void) const;
 
     // address=[0x1401580]
-    static class CPersistence * __cdecl New(std::istream & a1);
+    static class CPersistence *__cdecl New(std::istream &a1);
 
     // address=[0x1439a40]
-    int  AmountComing(void)const;
+    int AmountComing(void) const;
 
     // address=[0x1470870]
-    int  AmountLeaving(void)const;
+    int AmountLeaving(void) const;
 
     // address=[0x14708e0]
-    bool  ChangeGoodTypeUnforseen(int a2);
+    bool ChangeGoodTypeUnforseen(int a2);
 
     // address=[0x14e8150]
-    bool  IsPatchPile(void)const;
+    bool IsPatchPile(void) const;
 
     // address=[0x14e8190]
-    int  NumberOfAvailableGoods(void)const;
+    int NumberOfAvailableGoods(void) const;
 
     // address=[0x151fa90]
-    int  GetRoleType(void)const;
+    int GetRoleType(void) const;
 
     // address=[0x151fab0]
-    class IPileRole &  Role(void);
+    class IPileRole &Role(void);
 
     // address=[0x151fad0]
-    void  SetGoodType(int a2);
+    void SetGoodType(int a2);
 
     // address=[0x152f210]
-    bool  HasSpace(void)const;
+    bool HasSpace(void) const;
 
     // address=[0x155b300]
-    void  OfferCompletePileIfPossible(int a2);
+    void OfferCompletePileIfPossible(int a2);
 
     // address=[0x155b340]
-    void  SetOfferFlag(bool a2);
+    void SetOfferFlag(bool a2);
 
     // address=[0x155b360]
-    void  SetRoleType(int a2);
+    void SetRoleType(int a2);
 
     // address=[0x155b7d0]
-    int  GetBuildingId(void)const;
+    int GetBuildingId(void) const;
 
     // address=[0x155b820]
-    bool  GetOfferFlag(void)const;
+    bool GetOfferFlag(void) const;
 
     // address=[0x155b840]
-    bool  IsInOfferList(void)const;
+    bool IsInOfferList(void) const;
 
     // address=[0x155bda0]
-    virtual void  Delete(void);
+    virtual void Delete(void);
 
     // address=[0x155bed0]
-    virtual void  LogicUpdate(void);
+    virtual void LogicUpdate(void);
 
     // address=[0x155bf10]
-    virtual struct SGfxObjectInfo *  GetGfxInfos(void);
+    virtual struct SGfxObjectInfo *GetGfxInfos(void);
 
     // address=[0x155bfa0]
-    void  GetPatchGfx(struct SGfxPatchObject & _pGfxPatchObject);
+    void GetPatchGfx(struct SGfxPatchObject &_pGfxPatchObject);
 
     // address=[0x155c030]
-    void  ChangeRole(int _iRoleType);
+    void ChangeRole(int _iRoleType);
 
     // address=[0x155c130]
-    int  IncreaseUnforeseen(int _iAmount);
+    int IncreaseUnforeseen(int _iAmount);
 
     // address=[0x155c2a0]
-    void  DecreaseUnforeseen(int _iAmount);
+    void DecreaseUnforeseen(int _iAmount);
 
     // address=[0x155c430]
-    bool  ForceAmountLeaving(int a2, int a3);
+    bool ForceAmountLeaving(int a2, int a3);
 
     // address=[0x155c580]
-    void  SetBuildingId(int _iBuidingId);
+    void SetBuildingId(int _iBuidingId);
 
     // address=[0x155c640]
-    void  Occupied(int _iNewEcoSectorId);
+    void Occupied(int _iNewEcoSectorId);
 
     // address=[0x155c700]
-    bool  SetFree(int _iOldEcoSectorId);
+    bool SetFree(int _iOldEcoSectorId);
 
     // address=[0x155c780]
-    void  NotifyChangeEcoSector(int _iOldEcoSectorId, int _iNewEcoSectorId);
+    void NotifyChangeEcoSector(int _iOldEcoSectorId, int _iNewEcoSectorId);
 
     // address=[0x155c860]
-    void  Offer(int a2, int _iEcoSectorId);
+    void Offer(int a2, int _iEcoSectorId);
 
     // address=[0x155c8e0]
-    void  CancelOffer(int a2, int _iEcoSectorId);
+    void CancelOffer(int a2, int _iEcoSectorId);
 
     // address=[0x155c960]
-    void  CancelCompleteOfferIfInOfferList(int a2);
+    void CancelCompleteOfferIfInOfferList(int _iEcoSectorId);
 
     // address=[0x155c990]
-    void  ChangeNumberOfOfferedGoodsInEcoSector(int a2, int a3);
+    void ChangeNumberOfOfferedGoodsInEcoSector(int a2, int a3);
 
     // address=[0x155c9a0]
-    int  CalcUrgent(void)const;
+    int CalcUrgent(void) const;
 
     // address=[0x155c9d0]
-    void  NotifyTargetDieAndDetachAllObservers(void);
+    void NotifyTargetDieAndDetachAllObservers(void);
 
     // address=[0x155cab0]
-    static void * __cdecl operator new(unsigned int a1);
+    static void *__cdecl operator new(unsigned int a1);
 
     // address=[0x155cad0]
-    static void __cdecl operator delete(void * a1);
+    static void __cdecl operator delete(void *a1);
 
     // address=[0x155cb10]
-    virtual void  Detach(int a2);
+    virtual void Detach(int a2);
 
     // address=[0x155cb80]
-    void  ChangeAmountAndDetach(int a2);
+    void ChangeAmountAndDetach(int a2);
 
     // address=[0x155cbf0]
-    void  AttachAndIncAmountLeaving(int a2, int _iAmount, enum T_OBSERVER_TARGET _tTargetType);
+    void AttachAndIncAmountLeaving(int a2, int _iAmount, enum T_OBSERVER_TARGET _tTargetType);
 
     // address=[0x155cc90]
-    void  AttachAndIncAmountComing(int _iAmount);
+    void AttachAndIncAmountComing(int _iAmount);
 
     // address=[0x155ccd0]
-    virtual void  Notify(class CEntityEvent const & a2)const;
+    virtual void Notify(class CEntityEvent const &a2) const;
 
     // address=[0x155ccf0]
-    virtual void  SetObserverTarget(enum T_OBSERVER_TARGET _tTargetType, int _iTargetId);
+    virtual void SetObserverTarget(enum T_OBSERVER_TARGET _tTargetType, int _iTargetId);
 
     // address=[0x155ce70]
-    virtual int  GetObserverTarget(enum T_OBSERVER_TARGET a2);
+    virtual int GetObserverTarget(enum T_OBSERVER_TARGET a2);
 
     // address=[0x155ce90]
-    void  RequestSpaceIfPossible(void);
+    void RequestSpaceIfPossible(void);
 
     // address=[0x155d7c0]
-     CPile(std::istream & _rStream);
+    CPile(std::istream &_rStream);
 
     // address=[0x155d9a0]
-    virtual void  Store(std::ostream & _rStream);
+    virtual void Store(std::ostream &_rStream);
 
     // address=[0x155e770]
-    virtual int  Amount(void)const;
+    virtual int Amount(void) const;
 
     // address=[0x155e790]
-    virtual unsigned long  ClassID(void)const;
+    virtual unsigned long ClassID(void) const;
 
     // address=[0x155e7d0]
-    virtual int  GetGoodType(void)const;
+    virtual int GetGoodType(void) const;
 
     // address=[0x15604c0]
-    void  ReassessDistance(int & a2);
+    void ReassessDistance(int &a2);
 
     // address=[0x15615b0]
-    int  BuildingId(void)const;
+    int BuildingId(void) const;
 
     // address=[0x3d8bbc0]
     static unsigned long m_iClassID;
 
-protected:
+  protected:
     // address=[0x155cef0]
-    void  IncreaseEx(int _iAmount);
+    void IncreaseEx(int _iAmount);
 
     // address=[0x155d180]
-    void  DecreaseEx(int _iAmount);
+    void DecreaseEx(int _iAmount);
 
     // address=[0x155d370]
-    virtual int  Increase(int a2);
+    virtual int Increase(int a2);
 
     // address=[0x155d3a0]
-    virtual void  Decrease(int a2);
+    virtual void Decrease(int a2);
 
     // address=[0x155d3d0]
-    void  IncAmountLeaving(int _iAmount);
+    void IncAmountLeaving(int _iAmount);
 
     // address=[0x155d480]
-    void  DecAmountLeaving(int _iAmount);
+    void DecAmountLeaving(int _iAmount);
 
     // address=[0x155d540]
-    void  IncAmountComing(void);
+    void IncAmountComing(void);
 
     // address=[0x155d5b0]
-    void  DecAmountComing(void);
+    void DecAmountComing(void);
 
     // address=[0x155d620]
-    void  AdjustStatistic(int _iDeltaAmount, int _iEcoSectorId);
+    void AdjustStatistic(int _iDeltaAmount, int _iEcoSectorId);
 
     // address=[0x155d720]
-    bool  ExecuteChangeGoodTypeUnforseen(int a2);
+    bool ExecuteChangeGoodTypeUnforseen(int _iGood);
 
-private:
+  private:
     // address=[0x155dae0]
-     CPile(int _iX, int _iY, int _iGood, int _iAmount, class std::auto_ptr<class IPileRole> _pRole, int _iSlot, int a8, int a9, int _iOffsetX, int _iOffsetY);
+    CPile(int _iX, int _iY, int _iGood, int _iAmount, class std::auto_ptr<class IPileRole> _pRole, int _iSlot, int a8, int a9, int _iOffsetX, int _iOffsetY);
 
     // address=[0x155dcc0]
-    virtual  ~CPile(void);
+    virtual ~CPile(void);
 
     // address=[0x155dcf0]
-    virtual void  ConvertEventIntoGoal(class CEntityEvent * a2);
+    virtual void ConvertEventIntoGoal(class CEntityEvent *a2);
 
     // Type information members
-public:
+  public:
     unsigned __int8 m_uGood;
     unsigned __int8 m_uAmount;
     unsigned __int8 m_uAmountLeaving;
@@ -221,8 +221,6 @@ public:
     unsigned __int16 m_uBuildingId;
     _BYTE[4] m_pRole;
     int m_cPileObserverList;
-
 };
-
 
 #endif // CPILE_H

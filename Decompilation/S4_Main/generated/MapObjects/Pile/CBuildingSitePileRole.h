@@ -4,45 +4,43 @@
 #include "defines.h"
 
 class CBuildingSitePileRole : public IPileRole {
-public:
+  public:
     // address=[0x13ffdc0]
-    static class CPersistence * __cdecl New(std::istream & a1);
+    static class CPersistence *__cdecl New(std::istream &a1);
 
     // address=[0x155b3b0]
-    virtual void  Init(class CPile * a2);
+    virtual void Init(class CPile *a2);
 
     // address=[0x155b3e0]
-    virtual void  Increase(class CPile * a2, int a3);
+    virtual void Increase(class CPile *a2, int a3);
 
     // address=[0x155b4f0]
-    virtual void  SubjectStopped(class CPile * a2);
+    virtual void SubjectStopped(class CPile *a2);
 
     // address=[0x155b550]
-    virtual void  SubjectStarted(class CPile * a2);
+    virtual void SubjectStarted(class CPile *a2);
 
     // address=[0x155b5b0]
-     CBuildingSitePileRole(std::istream & a2);
+    CBuildingSitePileRole(std::istream &a2);
 
     // address=[0x155b660]
-    virtual void  Store(std::ostream & a2);
+    virtual void Store(std::ostream &a2);
 
     // address=[0x155b750]
-    virtual  ~CBuildingSitePileRole(void);
+    virtual ~CBuildingSitePileRole(void);
 
     // address=[0x155b7b0]
-    virtual unsigned long  ClassID(void)const;
+    virtual unsigned long ClassID(void) const;
 
     // address=[0x1560380]
-    static class CBuildingSitePileRole * __cdecl Load(std::istream & a1);
+    static class CBuildingSitePileRole *__cdecl Load(std::istream &a1);
 
     // address=[0x3d8bbb8]
     static unsigned long m_iClassID;
 
-private:
+  private:
     // address=[0x1560140]
-     CBuildingSitePileRole(void);
-
+    CBuildingSitePileRole(void);
 };
-
 
 #endif // CBUILDINGSITEPILEROLE_H
