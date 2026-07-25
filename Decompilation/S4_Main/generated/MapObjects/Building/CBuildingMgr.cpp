@@ -102,7 +102,7 @@ bool __cdecl CBuildingMgr::IsMilitaryBuildingEx(int a1) {
 // Decompiled from CBuildingMgr *__thiscall CBuildingMgr::CBuildingMgr(CBuildingMgr *this)
  CBuildingMgr::CBuildingMgr(void) {
   
-  MemoryAllocator::MemoryAllocator(this, 0x64u, 0x20u, 0);
+  MemoryAllocator::MemoryAllocator((MemoryAllocator *)this, 0x64u, 0x20u, 0);
   *((_DWORD *)this + 6) = 0;
   CBuildingMgr::Clear(this);
   *((_BYTE *)this + 11980) = 0;
@@ -407,8 +407,8 @@ int  CBuildingMgr::SearchSpaceForBuilding(int a2, int a3, int a4, int a5, bool a
 
 
 // address=[0x14f4b50]
-// Decompiled from void __thiscall CBuildingMgr::DestroyBuilding(CBuildingMgr *this, int a2, int a3, int a4)
-void  CBuildingMgr::DestroyBuilding(int a2, int a3, int a4) {
+// Decompiled from void __thiscall CBuildingMgr::DestroyBuilding(  CBuildingMgr *this,  unsigned int _iX,  unsigned int _iY,  int _iGardenerPlayerIdEx)
+void  CBuildingMgr::DestroyBuilding(int _iX, int _iY, int _iGardenerPlayerIdEx) {
   
   int TickCounter; // esi
   int v5; // eax
@@ -420,37 +420,36 @@ void  CBuildingMgr::DestroyBuilding(int a2, int a3, int a4) {
   int v11; // eax
   int v12; // [esp-10h] [ebp-78h]
   int v13; // [esp-10h] [ebp-78h]
-  int v14; // [esp-Ch] [ebp-74h]
+  int m_iHotSpotX; // [esp-Ch] [ebp-74h]
   int v15; // [esp-Ch] [ebp-74h]
-  int v16; // [esp-8h] [ebp-70h]
+  int m_iHotSpotY; // [esp-8h] [ebp-70h]
   int v17; // [esp-8h] [ebp-70h]
   int v18; // [esp-4h] [ebp-6Ch]
-  char *v19; // [esp-4h] [ebp-6Ch]
-  char *v20; // [esp-4h] [ebp-6Ch]
-  _DWORD v21[7]; // [esp+4h] [ebp-64h] BYREF
-  _DWORD v22[8]; // [esp+20h] [ebp-48h] BYREF
-  int v23; // [esp+40h] [ebp-28h]
-  int v24; // [esp+44h] [ebp-24h]
-  CBuildingMgr *v25; // [esp+48h] [ebp-20h]
-  int v26; // [esp+4Ch] [ebp-1Ch]
-  int v27; // [esp+50h] [ebp-18h]
-  int v28; // [esp+54h] [ebp-14h]
+  std::vector *p_m_vBuildingPosLines; // [esp-4h] [ebp-6Ch]
+  std::vector *p_m_vWaterPosLines; // [esp-4h] [ebp-6Ch]
+  CBuildingFlagsWalk v21; // [esp+4h] [ebp-64h] BYREF
+  CBuildingFlagsWalk v22; // [esp+20h] [ebp-48h] BYREF
+  int v23; // [esp+3Ch] [ebp-2Ch]
+  int v24; // [esp+40h] [ebp-28h]
+  int v25; // [esp+44h] [ebp-24h]
+  int a2; // [esp+4Ch] [ebp-1Ch]
+  unsigned int iCheckY; // [esp+50h] [ebp-18h]
+  unsigned int iCheckX; // [esp+54h] [ebp-14h]
   int i; // [esp+58h] [ebp-10h]
-  char *BuildingInfo; // [esp+5Ch] [ebp-Ch]
-  unsigned __int8 *BuildingPtr; // [esp+60h] [ebp-8h]
-  bool v32; // [esp+65h] [ebp-3h]
-  bool v33; // [esp+66h] [ebp-2h]
-  char v34; // [esp+67h] [ebp-1h]
+  CBuildingInfoMgr::SBuildingInfos *BuildingInfo; // [esp+5Ch] [ebp-Ch]
+  IEntity *BuildingPtr; // [esp+60h] [ebp-8h]
+  bool v33; // [esp+65h] [ebp-3h]
+  bool v34; // [esp+66h] [ebp-2h]
+  char v35; // [esp+67h] [ebp-1h]
 
-  v25 = this;
-  if ( !(unsigned __int8)CWorldManager::InWorld(a2, a3)
+  if ( !CWorldManager::InWorld(_iX, _iY)
     && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1001, "g_cWorld.InWorld(_iX, _iY)") == 1 )
   {
     __debugbreak();
   }
-  if ( a4 != -1
-    && a4
-    && !CPlayerManager::ValidUsedPlayerId(a4)
+  if ( _iGardenerPlayerIdEx != -1
+    && _iGardenerPlayerIdEx
+    && !CPlayerManager::ValidUsedPlayerId(_iGardenerPlayerIdEx)
     && BBSupportDbgReport(
          2,
          "MapObjects\\Building\\BuildingMgr.cpp",
@@ -459,7 +458,7 @@ void  CBuildingMgr::DestroyBuilding(int a2, int a3, int a4) {
   {
     __debugbreak();
   }
-  if ( !CWorldManager::FlagBits(a2, a3, 8u)
+  if ( !CWorldManager::FlagBits(_iX, _iY, 8u)
     && BBSupportDbgReport(
          2,
          "MapObjects\\Building\\BuildingMgr.cpp",
@@ -468,24 +467,24 @@ void  CBuildingMgr::DestroyBuilding(int a2, int a3, int a4) {
   {
     __debugbreak();
   }
-  if ( (unsigned __int8)CWorldManager::InWorld(a2, a3) && !CWorldManager::IsWater(a2, a3) )
+  if ( CWorldManager::InWorld(_iX, _iY) && !CWorldManager::IsWater(_iX, _iY) )
   {
     for ( i = 0; i < 9900; ++i )
     {
-      v28 = a2 + CSpiralOffsets::DeltaX(i);
-      v27 = a3 + CSpiralOffsets::DeltaY(i);
-      if ( (unsigned __int8)CWorldManager::InWorld(v28, v27) )
+      iCheckX = _iX + CSpiralOffsets::DeltaX(i);
+      iCheckY = _iY + CSpiralOffsets::DeltaY(i);
+      if ( CWorldManager::InWorld(iCheckX, iCheckY) )
       {
-        v26 = CWorldManager::MapObjectId(v28, v27);
-        BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, v26);
+        a2 = CWorldManager::MapObjectId(iCheckX, iCheckY);
+        BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a2);
         if ( !BuildingPtr )
         {
-          v26 = CWorldManager::ObjectId(v28, v27);
-          BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, v26);
+          a2 = CWorldManager::ObjectId(iCheckX, iCheckY);
+          BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a2);
         }
         if ( BuildingPtr )
         {
-          if ( IEntity::Type((unsigned __int16 *)BuildingPtr) == 80 )
+          if ( IEntity::Type(BuildingPtr) == 80 )
           {
             if ( !g_pGame && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1042, "g_pGame != 0") == 1 )
               __debugbreak();
@@ -493,74 +492,74 @@ void  CBuildingMgr::DestroyBuilding(int a2, int a3, int a4) {
             {
               TickCounter = CStateGame::GetTickCounter(g_pGame);
               v5 = IEntity::OwnerId(BuildingPtr);
-              *((_DWORD *)v25 + v5 + 72884) = TickCounter;
+              *((_DWORD *)this + v5 + 72884) = TickCounter;
             }
             else
             {
               v6 = IEntity::OwnerId(BuildingPtr);
-              *((_DWORD *)v25 + v6 + 72884) = 0;
+              *((_DWORD *)this + v6 + 72884) = 0;
             }
           }
           v7 = IEntity::X(BuildingPtr);
-          if ( v28 != v7
+          if ( iCheckX != v7
             && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1055, "iCheckX == pBuilding->X()") == 1 )
           {
             __debugbreak();
           }
           v8 = IEntity::Y(BuildingPtr);
-          if ( v27 != v8
+          if ( iCheckY != v8
             && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1056, "iCheckY == pBuilding->Y()") == 1 )
           {
             __debugbreak();
           }
-          v34 = 0;
-          v18 = CBuilding::BuildingTypeEx(BuildingPtr);
+          v35 = 0;
+          v18 = CBuilding::BuildingTypeEx((unsigned __int8 *)BuildingPtr);
           v9 = IEntity::Race(BuildingPtr);
-          BuildingInfo = (char *)CBuildingInfoMgr::GetBuildingInfo(v9, v18);
-          v19 = BuildingInfo + 720;
-          v16 = BuildingInfo[1];
-          v14 = *BuildingInfo;
+          BuildingInfo = CBuildingInfoMgr::GetBuildingInfo(v9, v18);
+          p_m_vBuildingPosLines = &BuildingInfo->m_vBuildingPosLines;
+          m_iHotSpotY = BuildingInfo->m_iHotSpotY;
+          m_iHotSpotX = BuildingInfo->m_iHotSpotX;
           v12 = IEntity::Y(BuildingPtr);
           v10 = IEntity::X(BuildingPtr);
-          CBuildingFlagsWalk::CBuildingFlagsWalk(v10, v12, v14, v16, v19);
-          while ( (unsigned __int8)CBuildingFlagsWalk::NextPosition(v22) )
+          CBuildingFlagsWalk::CBuildingFlagsWalk(&v22, v10, v12, m_iHotSpotX, m_iHotSpotY, p_m_vBuildingPosLines);
+          while ( CBuildingFlagsWalk::NextPosition(&v22) )
           {
-            if ( CBuildingFlagsWalk::CurrentX(v22) == a2 && CBuildingFlagsWalk::CurrentY(v22) == a3 )
+            if ( CBuildingFlagsWalk::CurrentX(&v22) == _iX && CBuildingFlagsWalk::CurrentY(&v22) == _iY )
             {
-              v34 = 1;
+              v35 = 1;
               break;
             }
           }
-          if ( !v34 && BuildingInfo[6] )
+          if ( !v35 && BuildingInfo->m_bIsPort )
           {
-            v20 = BuildingInfo + 784;
-            v17 = BuildingInfo[1];
-            v15 = *BuildingInfo;
+            p_m_vWaterPosLines = &BuildingInfo->m_vWaterPosLines;
+            v17 = BuildingInfo->m_iHotSpotY;
+            v15 = BuildingInfo->m_iHotSpotX;
             v13 = IEntity::Y(BuildingPtr);
             v11 = IEntity::X(BuildingPtr);
-            CBuildingFlagsWalk::CBuildingFlagsWalk(v11, v13, v15, v17, v20);
-            while ( (unsigned __int8)CBuildingFlagsWalk::NextPosition(v21) )
+            CBuildingFlagsWalk::CBuildingFlagsWalk(&v21, v11, v13, v15, v17, p_m_vWaterPosLines);
+            while ( CBuildingFlagsWalk::NextPosition(&v21) )
             {
-              if ( CBuildingFlagsWalk::CurrentX(v21) == a2 && CBuildingFlagsWalk::CurrentY(v21) == a3 )
+              if ( CBuildingFlagsWalk::CurrentX(&v21) == _iX && CBuildingFlagsWalk::CurrentY(&v21) == _iY )
               {
-                v34 = 1;
+                v35 = 1;
                 break;
               }
             }
           }
-          if ( v34 )
+          if ( v35 )
           {
-            v23 = IEntity::Race(BuildingPtr);
-            v33 = v23 == 3;
-            v32 = v23 == 3;
-            if ( a4 != -1 && (a4 || v32) && (a4 <= 0 || !v32) )
+            v24 = IEntity::Race(BuildingPtr);
+            v34 = v24 == 3;
+            v33 = v24 == 3;
+            if ( _iGardenerPlayerIdEx != -1 && (_iGardenerPlayerIdEx || v33) && (_iGardenerPlayerIdEx <= 0 || !v33) )
               return;
-            if ( a4 >= 0 )
-              v24 = a4;
+            if ( _iGardenerPlayerIdEx >= 0 )
+              v25 = _iGardenerPlayerIdEx;
             else
-              v24 = 0;
-            v22[7] = v24;
-            CBuilding::DestroyBuilding((CBuilding *)BuildingPtr, v24);
+              v25 = 0;
+            v23 = v25;
+            CBuilding::DestroyBuilding(BuildingPtr, v25);
             return;
           }
         }
@@ -871,53 +870,62 @@ int  CBuildingMgr::CheckForBuild(int x, int y, int ownerId, int a5, int a6) {
   int v17; // eax
   int v18; // eax
   int v19; // ecx
-  int v20; // [esp-8h] [ebp-104h]
+  unsigned int v20; // [esp-8h] [ebp-104h]
   int v21; // [esp-4h] [ebp-100h]
   int v22; // [esp-4h] [ebp-100h]
   int v23; // [esp-4h] [ebp-100h]
-  _DWORD v24[7]; // [esp+4h] [ebp-F8h] BYREF
-  _DWORD v25[16]; // [esp+20h] [ebp-DCh] BYREF
-  unsigned int v26; // [esp+60h] [ebp-9Ch]
-  int v27; // [esp+64h] [ebp-98h]
-  int v28; // [esp+68h] [ebp-94h]
-  int v29; // [esp+6Ch] [ebp-90h]
-  int v30; // [esp+70h] [ebp-8Ch]
-  int v31; // [esp+74h] [ebp-88h]
-  int v32; // [esp+78h] [ebp-84h]
+  CBuildingFlagsWalk v24; // [esp+4h] [ebp-F8h] BYREF
+  CBuildingFlagsWalk v25; // [esp+20h] [ebp-DCh] BYREF
+  int v26; // [esp+3Ch] [ebp-C0h]
+  int v27; // [esp+40h] [ebp-BCh]
+  int v28; // [esp+44h] [ebp-B8h]
+  int v29; // [esp+48h] [ebp-B4h]
+  int v30; // [esp+4Ch] [ebp-B0h]
+  int v31; // [esp+50h] [ebp-ACh]
+  int v32; // [esp+54h] [ebp-A8h]
+  int v33; // [esp+58h] [ebp-A4h]
+  int v34; // [esp+5Ch] [ebp-A0h]
+  unsigned int v35; // [esp+60h] [ebp-9Ch]
+  int v36; // [esp+64h] [ebp-98h]
+  int v37; // [esp+68h] [ebp-94h]
+  int v38; // [esp+6Ch] [ebp-90h]
+  int v39; // [esp+70h] [ebp-8Ch]
+  int v40; // [esp+74h] [ebp-88h]
+  int v41; // [esp+78h] [ebp-84h]
   int a1; // [esp+7Ch] [ebp-80h]
-  int v34; // [esp+80h] [ebp-7Ch]
-  int v35; // [esp+84h] [ebp-78h]
-  int v36; // [esp+88h] [ebp-74h]
-  DWORD v37; // [esp+8Ch] [ebp-70h]
-  __int64 v38; // [esp+90h] [ebp-6Ch]
+  int v43; // [esp+80h] [ebp-7Ch]
+  int v44; // [esp+84h] [ebp-78h]
+  int v45; // [esp+88h] [ebp-74h]
+  DWORD v46; // [esp+8Ch] [ebp-70h]
+  __int64 v47; // [esp+90h] [ebp-6Ch]
   int size; // [esp+98h] [ebp-64h]
-  int v40; // [esp+9Ch] [ebp-60h]
-  int v41; // [esp+A0h] [ebp-5Ch]
-  int v42; // [esp+A4h] [ebp-58h]
-  int v43; // [esp+A8h] [ebp-54h]
-  int v44; // [esp+ACh] [ebp-50h]
-  int v45; // [esp+B0h] [ebp-4Ch]
-  int v46; // [esp+B4h] [ebp-48h]
+  int v49; // [esp+9Ch] [ebp-60h]
+  int v50; // [esp+A0h] [ebp-5Ch]
+  int v51; // [esp+A4h] [ebp-58h]
+  int v52; // [esp+A8h] [ebp-54h]
+  int v53; // [esp+ACh] [ebp-50h]
+  int v54; // [esp+B0h] [ebp-4Ch]
+  int v55; // [esp+B4h] [ebp-48h]
   int j; // [esp+B8h] [ebp-44h]
   int i; // [esp+BCh] [ebp-40h]
-  DWORD v49; // [esp+C0h] [ebp-3Ch]
-  _BYTE *v50; // [esp+C4h] [ebp-38h]
-  CBuildingSiteRole *v51; // [esp+C8h] [ebp-34h]
-  int v52; // [esp+CCh] [ebp-30h]
-  int v53; // [esp+D0h] [ebp-2Ch]
-  int v54; // [esp+D4h] [ebp-28h]
-  int v55; // [esp+D8h] [ebp-24h]
-  int v56; // [esp+DCh] [ebp-20h]
-  int *v57; // [esp+E0h] [ebp-1Ch]
-  int v58; // [esp+E4h] [ebp-18h]
+  DWORD v58; // [esp+C0h] [ebp-3Ch]
+  _BYTE *v59; // [esp+C4h] [ebp-38h]
+  CBuildingSiteRole *v60; // [esp+C8h] [ebp-34h]
+  int v61; // [esp+CCh] [ebp-30h]
+  int v62; // [esp+D0h] [ebp-2Ch]
+  int v63; // [esp+D4h] [ebp-28h]
+  int v64; // [esp+D8h] [ebp-24h]
+  int v65; // [esp+DCh] [ebp-20h]
+  int *v66; // [esp+E0h] [ebp-1Ch]
+  int v67; // [esp+E4h] [ebp-18h]
   int k; // [esp+E8h] [ebp-14h]
   int m; // [esp+ECh] [ebp-10h]
-  char v61; // [esp+F3h] [ebp-9h]
-  unsigned int v62; // [esp+F4h] [ebp-8h]
-  char *BuildingInfo; // [esp+F8h] [ebp-4h]
-  int v64; // [esp+110h] [ebp+14h]
+  char v70; // [esp+F3h] [ebp-9h]
+  unsigned int v71; // [esp+F4h] [ebp-8h]
+  CBuildingInfoMgr::SBuildingInfos *BuildingInfo; // [esp+F8h] [ebp-4h]
+  int v73; // [esp+110h] [ebp+14h]
 
-  v57 = (int *)this;
+  v66 = (int *)this;
   if ( (ownerId <= 0 || ownerId >= 9)
     && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 2556, "_iOwnerId>0 && _iOwnerId<PLAYER_MAX") == 1 )
   {
@@ -938,66 +946,66 @@ int  CBuildingMgr::CheckForBuild(int x, int y, int ownerId, int a5, int a6) {
   {
     __debugbreak();
   }
-  v61 = 0;
+  v70 = 0;
   if ( !Grid::InQuadrat(x - 16, y - 16, size - 32) )
     return -1;
-  HIDWORD(v38) = a5 == 31;
-  LODWORD(v38) = a5 == 32;
-  if ( v38 )
+  HIDWORD(v47) = a5 == 31;
+  LODWORD(v47) = a5 == 32;
+  if ( v47 )
   {
     if ( a5 == 31 )
-      v64 = 58;
+      v73 = 58;
     else
-      v64 = 52;
-    a5 = CBuildingMgr::CheckForBuildInWater((CBuildingMgr *)v57, x, y, ownerId, v64);
+      v73 = 52;
+    a5 = CBuildingMgr::CheckForBuildInWater((CBuildingMgr *)v66, x, y, ownerId, v73);
     if ( !a5 )
       return -1;
-    v61 = 1;
+    v70 = 1;
   }
-  v52 = ownerId;
+  v61 = ownerId;
   if ( a6 >= 2 )
   {
     a6 -= 2;
-    v52 = 0;
+    v61 = 0;
   }
   v7 = CPlayerManager::PlayerInfo(ownerId);
-  v37 = CPlayerInfo::Race(v7);
-  v25[15] = 95;
-  v25[14] = 2;
-  v25[13] = 8;
-  v25[12] = 512;
-  v25[11] = 16;
-  v25[10] = 4;
-  v58 = 0;
-  v54 = 10;
-  v49 = v37 - 1;
-  switch ( v37 )
+  v46 = CPlayerInfo::Race(v7);
+  v34 = 95;
+  v33 = 2;
+  v32 = 8;
+  v31 = 512;
+  v30 = 16;
+  v29 = 4;
+  v67 = 0;
+  v63 = 10;
+  v58 = v46 - 1;
+  switch ( v46 )
   {
     case 1u:
-      v58 = 2;
-      v54 = 522;
+      v67 = 2;
+      v63 = 522;
       goto CBuildingMgr__CheckForBuild___def_18F58B2;
     case 2u:
-      v58 = 1;
-      v54 = 26;
+      v67 = 1;
+      v63 = 26;
       goto CBuildingMgr__CheckForBuild___def_18F58B2;
     case 3u:
-      return CBuildingMgr::CheckForBuildDarkTribe((CBuildingMgr *)v57, x, y, ownerId, a5, a6);
+      return CBuildingMgr::CheckForBuildDarkTribe((CBuildingMgr *)v66, x, y, ownerId, a5, a6);
     case 4u:
-      v58 = 4;
-      v54 = 538;
+      v67 = 4;
+      v63 = 538;
       goto CBuildingMgr__CheckForBuild___def_18F58B2;
     default:
 CBuildingMgr__CheckForBuild___def_18F58B2:
       if ( CBuildingMgr::IsMine(a5) )
       {
-        v58 = 3;
-        v54 = 4;
+        v67 = 3;
+        v63 = 4;
       }
-      BuildingInfo = CBuildingInfoMgr::GetBuildingInfo(v37, a5);
-      if ( v61 )
+      BuildingInfo = CBuildingInfoMgr::GetBuildingInfo(v46, a5);
+      if ( v70 )
         goto LABEL_71;
-      v25[9] = 0;
+      v28 = 0;
       if ( a5 == 31
         && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 2686, "_iBuildingType != BUILDING_SHIPYARD") == 1 )
       {
@@ -1008,49 +1016,49 @@ CBuildingMgr__CheckForBuild___def_18F58B2:
       {
         __debugbreak();
       }
-      v25[8] = x + 32 - *BuildingInfo - 1;
-      v25[7] = y - BuildingInfo[1] - 1;
-      v36 = CWorldManager::Index(x, y);
-      if ( CWorldManager::FlagBits(v36, 0x5Fu) || ITiling::OwnerId(v36) != v52 )
+      v27 = x + 32 - BuildingInfo->m_iHotSpotX - 1;
+      v26 = y - BuildingInfo->m_iHotSpotY - 1;
+      v45 = CWorldManager::Index(x, y);
+      if ( CWorldManager::FlagBits(v45, 0x5Fu) || ITiling::OwnerId(v45) != v61 )
         return -1;
-      v20 = std::vector<unsigned int>::operator[](0);
-      v8 = std::vector<unsigned int>::size(BuildingInfo + 720);
-      if ( !(*(unsigned __int8 (__thiscall **)(void *, int, int, int, int, int))(*(_DWORD *)g_pTiling + 64))(
+      v20 = std::vector<unsigned int>::operator[](&BuildingInfo->m_vBuildingPosLines, 0);
+      v8 = std::vector<unsigned int>::size(&BuildingInfo->m_vBuildingPosLines);
+      if ( !((unsigned __int8 (__thiscall *)(CTiling *, int, int, int, unsigned int, int))g_pTiling->CheckFlagBits)(
               g_pTiling,
-              x - *BuildingInfo,
-              y - BuildingInfo[1],
+              x - BuildingInfo->m_iHotSpotX,
+              y - BuildingInfo->m_iHotSpotY,
               v8,
               v20,
               95) )
         return -1;
       CBuildingFlagsWalk::CBuildingFlagsWalk(
-        (CBuildingFlagsWalk *)v25,
+        &v25,
         x,
         y,
-        *BuildingInfo,
-        BuildingInfo[1],
-        (int)(BuildingInfo + 720));
-      if ( v58 == 3 )
+        BuildingInfo->m_iHotSpotX,
+        BuildingInfo->m_iHotSpotY,
+        &BuildingInfo->m_vBuildingPosLines);
+      if ( v67 == 3 )
       {
-        while ( (unsigned __int8)CBuildingFlagsWalk::NextPosition(v25) )
+        while ( CBuildingFlagsWalk::NextPosition(&v25) )
         {
-          v21 = CBuildingFlagsWalk::CurrentY(v25);
-          v9 = CBuildingFlagsWalk::CurrentX(v25);
-          v45 = CWorldManager::Index(v9, v21);
-          v10 = ITiling::OwnerId(v45);
-          if ( v10 != v52 )
+          v21 = CBuildingFlagsWalk::CurrentY(&v25);
+          v9 = CBuildingFlagsWalk::CurrentX(&v25);
+          v54 = CWorldManager::Index(v9, v21);
+          v10 = ITiling::OwnerId(v54);
+          if ( v10 != v61 )
             return -1;
-          v46 = CWorldManager::Ground(v45);
-          v32 = v46 & 0xF0;
-          if ( v46 != 17 && v32 != 32 )
+          v55 = CWorldManager::Ground(v54);
+          v41 = v55 & 0xF0;
+          if ( v55 != 17 && v41 != 32 )
             return -1;
-          if ( v46 != 32 )
+          if ( v55 != 32 )
           {
             for ( i = 0; i < 6; ++i )
             {
               v11 = CWorldManager::NeighborRelIndex(i);
-              v31 = v45 + v11;
-              if ( CWorldManager::FlagBits(v45 + v11, 1u) )
+              v40 = v54 + v11;
+              if ( CWorldManager::FlagBits(v54 + v11, 1u) )
                 return -1;
             }
           }
@@ -1058,160 +1066,160 @@ CBuildingMgr__CheckForBuild___def_18F58B2:
       }
       else
       {
-        while ( (unsigned __int8)CBuildingFlagsWalk::NextPosition(v25) )
+        while ( CBuildingFlagsWalk::NextPosition(&v25) )
         {
-          v22 = CBuildingFlagsWalk::CurrentY(v25);
-          v12 = CBuildingFlagsWalk::CurrentX(v25);
-          v44 = CWorldManager::Index(v12, v22);
-          v13 = ITiling::OwnerId(v44);
-          if ( v13 != v52 )
+          v22 = CBuildingFlagsWalk::CurrentY(&v25);
+          v12 = CBuildingFlagsWalk::CurrentX(&v25);
+          v53 = CWorldManager::Index(v12, v22);
+          v13 = ITiling::OwnerId(v53);
+          if ( v13 != v61 )
             return -1;
-          v35 = CWorldManager::Ground(v44);
-          v34 = v35 & 0xF0;
-          if ( v35 == 21 )
+          v44 = CWorldManager::Ground(v53);
+          v43 = v44 & 0xF0;
+          if ( v44 == 21 )
             return -1;
-          if ( v34 == 48 )
+          if ( v43 == 48 )
           {
             for ( j = 0; j < 6; ++j )
             {
               v14 = CWorldManager::NeighborRelIndex(j);
-              v30 = v44 + v14;
-              if ( CWorldManager::FlagBits(v44 + v14, 0x5Fu) )
+              v39 = v53 + v14;
+              if ( CWorldManager::FlagBits(v53 + v14, 0x5Fu) )
                 return -1;
             }
           }
-          v29 = 1 << (v34 >> 4);
-          if ( (v54 & v29) == 0 )
+          v38 = 1 << (v43 >> 4);
+          if ( (v63 & v38) == 0 )
             return -1;
         }
       }
 LABEL_71:
-      if ( v58 == 3 )
+      if ( v67 == 3 )
       {
-        v62 = 1;
+        v71 = 1;
       }
       else
       {
-        v53 = 0;
-        v43 = 0;
+        v62 = 0;
+        v52 = 0;
         CBuildingFlagsWalk::CBuildingFlagsWalk(
-          (CBuildingFlagsWalk *)v24,
+          &v24,
           x,
           y,
-          *BuildingInfo,
-          BuildingInfo[1],
-          (int)(BuildingInfo + 736));
-        while ( (unsigned __int8)CBuildingFlagsWalk::NextPosition(v24) )
+          BuildingInfo->m_iHotSpotX,
+          BuildingInfo->m_iHotSpotY,
+          &BuildingInfo->m_vDigPosLines);
+        while ( CBuildingFlagsWalk::NextPosition(&v24) )
         {
-          v23 = CBuildingFlagsWalk::CurrentY(v24);
-          v15 = CBuildingFlagsWalk::CurrentX(v24);
-          v28 = CWorldManager::Index(v15, v23);
-          v27 = CWorldManager::GroundHeight(v28);
-          ++v53;
-          v43 += v27;
+          v23 = CBuildingFlagsWalk::CurrentY(&v24);
+          v15 = CBuildingFlagsWalk::CurrentX(&v24);
+          v37 = CWorldManager::Index(v15, v23);
+          v36 = CWorldManager::GroundHeight(v37);
+          ++v62;
+          v52 += v36;
         }
-        if ( v53 > 0 )
+        if ( v62 > 0 )
         {
-          v26 = (v43 + (v53 >> 1)) / v53;
-          v62 = CBuildingMgr::CheckForBuildCalc((CBuildingMgr *)v57, x, y, ownerId, v52, a5, v26);
+          v35 = (v52 + (v62 >> 1)) / v62;
+          v71 = CBuildingMgr::CheckForBuildCalc((CBuildingMgr *)v66, x, y, ownerId, v61, a5, v35);
         }
       }
-      if ( v62 )
+      if ( v71 )
       {
         if ( a6 == 1 )
         {
-          v55 = 0;
-          if ( v58 != 3 )
+          v64 = 0;
+          if ( v67 != 3 )
           {
-            while ( *((_BYTE *)v57 + 30750 * ownerId + 1025 * v55 + 11981) && v55 != 30 )
-              ++v55;
+            while ( *((_BYTE *)v66 + 30750 * ownerId + 1025 * v64 + 11981) && v64 != 30 )
+              ++v64;
           }
-          if ( v55 == 30 )
+          if ( v64 == 30 )
             return 0;
-          a1 = CBuildingMgr::AddBuilding(v57, x, y, ownerId, a5, 1u);
+          a1 = CBuildingMgr::AddBuilding((CBuildingMgr *)v66, x, y, ownerId, a5, 1);
           if ( !a1 )
             return 0;
-          if ( v58 != 3 && v62 != 1 )
+          if ( v67 != 3 && v71 != 1 )
           {
-            v16 = CBuildingMgr::operator[](a1);
-            v51 = (CBuildingSiteRole *)CBuilding::Role(v16);
-            CBuildingSiteRole::SetDiggingInfos(v51, v55, v62);
-            v50 = (char *)v57 + 30750 * ownerId + 1025 * v55 + 11981;
-            *v50 = 1;
+            v16 = CBuildingMgr::operator[]((CBuildingMgr *)g_cBuildingMgr, a1);
+            v60 = (CBuildingSiteRole *)CBuilding::Role(v16);
+            CBuildingSiteRole::SetDiggingInfos(v60, v64, v71);
+            v59 = (char *)v66 + 30750 * ownerId + 1025 * v64 + 11981;
+            *v59 = 1;
             for ( k = 0; k < 31; ++k )
             {
-              v42 = y + k - 15;
+              v51 = y + k - 15;
               for ( m = 0; m < 31; ++m )
               {
-                v41 = x + m - 15;
-                v17 = CWorldManager::GroundHeight(v41, v42);
-                if ( v17 == *((unsigned __int8 *)&v57[8 * m + 72182] + k + 3) )
+                v50 = x + m - 15;
+                v17 = CWorldManager::GroundHeight(v50, v51);
+                if ( v17 == *((unsigned __int8 *)&v66[8 * m + 72182] + k + 3) )
                 {
-                  v50[32 * m + 1 + k] = 0;
+                  v59[32 * m + 1 + k] = 0;
                 }
                 else
                 {
-                  CWorldManager::SetFlagBits(v41, v42, 16);
-                  v50[32 * m + 1 + k] = *((_BYTE *)&v57[8 * m + 72182] + k + 3);
-                  if ( v50[32 * m + 1 + k] )
+                  CWorldManager::SetFlagBits(v50, v51, 16);
+                  v59[32 * m + 1 + k] = *((_BYTE *)&v66[8 * m + 72182] + k + 3);
+                  if ( v59[32 * m + 1 + k] )
                   {
-                    v18 = CWorldManager::GroundHeight(v41, v42);
-                    v40 = v18 - (unsigned __int8)v50[32 * m + 1 + k];
-                    if ( v40 <= 0 )
-                      v19 = *((_DWORD *)v51 + 95) - v40;
+                    v18 = CWorldManager::GroundHeight(v50, v51);
+                    v49 = v18 - (unsigned __int8)v59[32 * m + 1 + k];
+                    if ( v49 <= 0 )
+                      v19 = v60->field_17C - v49;
                     else
-                      v19 = v40 + *((_DWORD *)v51 + 95);
-                    *((_DWORD *)v51 + 95) = v19;
+                      v19 = v49 + v60->field_17C;
+                    v60->field_17C = v19;
                   }
                 }
               }
             }
           }
         }
-        if ( v62 && v62 < 0x28 )
+        if ( v71 && v71 < 0x28 )
         {
-          v56 = 1;
+          v65 = 1;
         }
-        else if ( v62 >= 0x5A )
+        else if ( v71 >= 0x5A )
         {
-          if ( v62 >= 0x96 )
+          if ( v71 >= 0x96 )
           {
-            if ( v62 >= 0xDC )
+            if ( v71 >= 0xDC )
             {
-              if ( v62 >= 0x12C )
+              if ( v71 >= 0x12C )
               {
-                if ( v62 >= 0x186 )
+                if ( v71 >= 0x186 )
                 {
-                  if ( v62 >= 0x1EA )
-                    v56 = 8;
+                  if ( v71 >= 0x1EA )
+                    v65 = 8;
                   else
-                    v56 = 7;
+                    v65 = 7;
                 }
                 else
                 {
-                  v56 = 6;
+                  v65 = 6;
                 }
               }
               else
               {
-                v56 = 5;
+                v65 = 5;
               }
             }
             else
             {
-              v56 = 4;
+              v65 = 4;
             }
           }
           else
           {
-            v56 = 3;
+            v65 = 3;
           }
         }
         else
         {
-          v56 = 2;
+          v65 = 2;
         }
-        result = v56;
+        result = v65;
       }
       else
       {
@@ -3480,7 +3488,7 @@ void  CBuildingMgr::AddSoldierToStartTower(int a2, int a3) {
       CWarMap::RemoveEntity(v17);
       v7 = IEntity::WorldIdx();
       CWorldManager::SetSettlerId(v7, 0);
-      IEntity::SetFlagBits(v17, ENTITY_FLAG_OnBoard);
+      IEntity::SetFlagBits(v17, ENTITY_FLAG_ON_BOARD);
       (*(void (__thiscall **)(unsigned __int8 *, int))(*(_DWORD *)v18 + 116))(v18, v19);
       CBuilding::SettlerEnter((CBuilding *)v18, v19);
     }

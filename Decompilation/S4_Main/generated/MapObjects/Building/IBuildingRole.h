@@ -36,7 +36,7 @@ public:
      IBuildingRole(void);
 
     // address=[0x14fdfb0]
-    virtual void  Update(class CBuilding * a2);
+    virtual void  Update(class CBuilding * _pBuilding);
 
     // address=[0x14fe560]
     virtual void  Switch(void);
@@ -51,7 +51,7 @@ public:
     virtual void  RemoveInhabitant(class CBuilding * a2);
 
     // address=[0x14feaf0]
-    virtual bool  SearchInWorkingArea(class CBuilding * a2, int a3);
+    virtual bool  SearchInWorkingArea(class CBuilding * _pBuilding, int a3);
 
     // address=[0x14ff140]
     virtual int  Decrease(int a2);
@@ -66,7 +66,7 @@ public:
      IBuildingRole(std::istream & a2);
 
     // address=[0x14ffaa0]
-    virtual void  Store(std::ostream & a2);
+    virtual void  Store(std::ostream & _rStream);
 
 protected:
     // address=[0x14ffe90]
@@ -82,7 +82,7 @@ protected:
     virtual bool  OrderInhabitant(class CBuilding * a2);
 
     // address=[0x15003d0]
-    void  MiniFlag(struct SGfxObjectInfo & arg0, int a3);
+    void  MiniFlag(struct SGfxObjectInfo & _rGfxInfo, int _iPlayer);
 
     // address=[0x1500590]
     void  WorkingAreaChanged(void);
@@ -99,27 +99,34 @@ private:
 
     // Type information members
 public:
-    _BYTE byte4;
-    _BYTE byte5;
-    _WORD m_iEntityId;
+    unsigned __int8 m_uLogicState;
+    unsigned __int8 m_iDelayTick;
+    unsigned __int16 m_iEntityId;
     unsigned __int16 m_uSettlerId;
-    _WORD wordA;
-    _WORD wordC;
+    __int16 m_iLastTick;
+    unsigned __int16 m_iFoundSearch;
     _BYTE[2] gap_E;
-    _DWORD field_10;
-    _BYTE[8] gap_14;
-    BYTE field_1C;
+    int m_iFoundWorkAreaItemXY;
+    unsigned __int16[4] m_vWorkingArea;
+    bool m_bHasWarnedAboutEmptyWA;
     _BYTE m_bInhabitants;
     _BYTE[2] gap_1E;
-    _DWORD m_pSearchFkt;
+    int (__cdecl *)(unsigned int, unsigned int, _DWORD) m_pSearchFkt;
     _BYTE[40] gap_24;
-    DWORD[70] gap_4c;
-    _BYTE byte164;
-    _BYTE[8] gap165;
-    _BYTE byte16D;
-    DWORD field_170;
-    DWORD field_174;
-    const struct CBuildingInfoMgr::SBuildingInfos * m_pBuildingInfo;
+    IBuildingRole::SPair[10] m_vPatchPairs;
+    IBuildingRole::SGroup[10] m_vPatches;
+    unsigned __int8 m_uEffectId;
+    unsigned __int8 m_uEffectDuration;
+    unsigned __int8 m_uMilitaryTick;
+    unsigned __int8 m_iEffectFrame;
+    __int16 m_uEffectX;
+    __int16 m_uEffectY;
+    unsigned __int8 m_uEffectSmoke;
+    unsigned __int8 byte16D;
+    int m_iEffectSoundId;
+    unsigned __int8 m_iEffectSoundRandomness;
+    unsigned __int8 m_iEffectSoundFrame;
+    const CBuildingInfoMgr::SBuildingInfos * m_pBuildingInfo;
 
 };
 

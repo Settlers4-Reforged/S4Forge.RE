@@ -839,7 +839,7 @@ void  CTowerSoldier::ConvertEventIntoGoal(class CSettler * a2, class CEntityEven
       if ( *(_WORD *)(this + 32) )
       {
         IEntity::SetFlagBits(a2, ENTITY_FLAG_Selectable);
-        IEntity::ClearFlagBits(a2, ENTITY_FLAG_OnBoard);
+        IEntity::ClearFlagBits(a2, ENTITY_FLAG_ON_BOARD);
         v22 = IEntity::Type((unsigned __int16 *)a2);
         v16 = IEntity::Type((unsigned __int16 *)a2);
         v3 = IEntity::Race(a2);
@@ -889,7 +889,7 @@ void  CTowerSoldier::ConvertEventIntoGoal(class CSettler * a2, class CEntityEven
       CSettlerMgr::SearchSpaceForSettler((CSettlerMgr *)g_cSettlerMgr, v6, v18, v24);
       CWarMap::AddEntity(a2);
       IEntity::SetFlagBits(a2, ENTITY_FLAG_Selectable|ENTITY_FLAG_Visible);
-      IEntity::ClearFlagBits(a2, ENTITY_FLAG_OnBoard);
+      IEntity::ClearFlagBits(a2, ENTITY_FLAG_ON_BOARD);
       *(_BYTE *)(this + 4) = 27;
       v25 = *(unsigned __int16 *)(this + 32);
       v19 = IEntity::ID();

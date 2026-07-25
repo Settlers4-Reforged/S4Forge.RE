@@ -158,7 +158,7 @@ bool  CBuildingInfoMgr::DbgCheckBuildingBits(int _iRace, int _iBuildingType) {
       3,
       "Invalid digging bits for building %i (%s) of race %i!",
       _iBuildingType,
-      s_sBuildingDefines[_iBuildingType].m_sName,
+      s_sBuildingDefines[_iBuildingType].m_spName,
       _iRace);
   }
   v39 = 1;
@@ -170,7 +170,7 @@ bool  CBuildingInfoMgr::DbgCheckBuildingBits(int _iRace, int _iBuildingType) {
       3,
       "Invalid size of bounding box for building %i (%s) of race %i!",
       _iBuildingType,
-      s_sBuildingDefines[_iBuildingType].m_sName,
+      s_sBuildingDefines[_iBuildingType].m_spName,
       _iRace);
   }
   v47 = 1;
@@ -209,7 +209,7 @@ bool  CBuildingInfoMgr::DbgCheckBuildingBits(int _iRace, int _iBuildingType) {
       3,
       "Invalid bounding box for building %i (%s) of race %i!",
       _iBuildingType,
-      s_sBuildingDefines[_iBuildingType].m_sName,
+      s_sBuildingDefines[_iBuildingType].m_spName,
       _iRace);
   }
   if ( !v46 )
@@ -219,7 +219,7 @@ bool  CBuildingInfoMgr::DbgCheckBuildingBits(int _iRace, int _iBuildingType) {
       3,
       "Building bits out of range (-15..15) for building %i (%s) of race %i!",
       _iBuildingType,
-      s_sBuildingDefines[_iBuildingType].m_sName,
+      s_sBuildingDefines[_iBuildingType].m_spName,
       _iRace);
   }
   bValidBlockPosBits = 1;
@@ -263,7 +263,7 @@ bool  CBuildingInfoMgr::DbgCheckBuildingBits(int _iRace, int _iBuildingType) {
       3,
       "Invalid blocking bits for building %i (%s) of race %i!",
       _iBuildingType,
-      s_sBuildingDefines[_iBuildingType].m_sName,
+      s_sBuildingDefines[_iBuildingType].m_spName,
       _iRace);
   }
   v51 = 1;
@@ -319,7 +319,7 @@ bool  CBuildingInfoMgr::DbgCheckBuildingBits(int _iRace, int _iBuildingType) {
       3,
       "Invalid piles for building %i (%s) of race %i!",
       _iBuildingType,
-      s_sBuildingDefines[_iBuildingType].m_sName,
+      s_sBuildingDefines[_iBuildingType].m_spName,
       _iRace);
   }
   v52 = 1;
@@ -389,7 +389,7 @@ bool  CBuildingInfoMgr::DbgCheckBuildingBits(int _iRace, int _iBuildingType) {
         m_iWorkPosXOffset,
         m_iWorkPosYOffset,
         _iBuildingType,
-        s_sBuildingDefines[_iBuildingType].m_sName,
+        s_sBuildingDefines[_iBuildingType].m_spName,
         _iRace);
       v53 = 0;
     }
@@ -2463,7 +2463,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                          956,
                          "Invalid building info for building %i (%s) of race %i (%s)!",
                          iBuildingType,
-                         s_sBuildingDefines[iBuildingType].m_sName,
+                         s_sBuildingDefines[iBuildingType].m_spName,
                          iRace,
                          RaceName);
                 if ( v391 == 1 )

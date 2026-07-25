@@ -108,7 +108,7 @@ void  CSettler::Delete(void) {
   this->m_iFlags &= ~0x10000000u;
   if ( IEntity::Type(this) < SETTLER_MAX
     && IEntity::WarriorType(this) == AI_WARRIOR_TYPE_NONE
-    && !IEntity::FlagBits(this, ENTITY_FLAG_OnBoard) )
+    && !IEntity::FlagBits(this, ENTITY_FLAG_ON_BOARD) )
   {
     this->m_iFlags |= 0x10000000u;
   }

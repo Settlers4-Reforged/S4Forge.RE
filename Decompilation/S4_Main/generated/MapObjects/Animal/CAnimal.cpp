@@ -184,9 +184,9 @@ void  CAnimal::Delete(void) {
   int v6; // [esp-4h] [ebp-Ch]
 
   CWarMap::RemoveEntity(this);
-  if ( !IEntity::FlagBits(this, ENTITY_FLAG_OnBoard) )
+  if ( !IEntity::FlagBits(this, ENTITY_FLAG_ON_BOARD) )
   {
-    IEntity::SetFlagBits(this, ENTITY_FLAG_OnBoard);
+    IEntity::SetFlagBits(this, ENTITY_FLAG_ON_BOARD);
     v1 = IEntity::WorldIdx();
     v2 = CWorldManager::MapObjectId(v1);
     if ( v2 != IEntity::EntityId((unsigned __int16 *)this)

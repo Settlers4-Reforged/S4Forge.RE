@@ -21,7 +21,7 @@ public:
     virtual class CWalking *  InitWalking(class CSettler * a2);
 
     // address=[0x1569d80]
-    virtual void  LogicUpdateJob(class CSettler * a2);
+    virtual void  LogicUpdateJob(class CSettler * _pSettler);
 
     // address=[0x156a0d0]
     virtual void  UpdateJob(class CSettler * a2);
@@ -39,19 +39,19 @@ public:
     void  NextStep(void);
 
     // address=[0x156a220]
-    int  GetGoodAmount(int a2);
+    int  GetGoodAmount(int _iGood);
 
     // address=[0x156a280]
-    int  AddGood(int a2, int a3);
+    int  AddGood(int _iGood, int _iAmount);
 
     // address=[0x156a400]
     int  RemoveGood(int a2, int a3);
 
     // address=[0x156a520]
-    bool  IsSpaceAvailable(int a2);
+    bool  IsSpaceAvailable(int _iGood);
 
     // address=[0x156a590]
-    int  GetAvailableSpace(int a2);
+    int  GetAvailableSpace(int _iGood);
 
     // address=[0x156a600]
     int  GetAvailableSpace(void);
@@ -69,7 +69,7 @@ public:
     bool  SetFree(void);
 
     // address=[0x156a870]
-    bool  HasLoadGood(enum PILE_TYPES a2);
+    bool  HasLoadGood(enum PILE_TYPES _tPileType);
 
     // address=[0x156a8c0]
     void  SetTargetBuildingID(int a2);
@@ -93,7 +93,7 @@ public:
     void  DonkeyArrived(void);
 
     // address=[0x156ae00]
-    void  MoveToTarget(int a2, int a3);
+    void  MoveToTarget(int _iX, int _iY);
 
     // address=[0x156ae70]
     int  OwnerId(void);
@@ -102,10 +102,10 @@ public:
     void  UpdateCatapultPosition(int a2);
 
     // address=[0x156af40]
-    void  ComeToBuildUpCart(int a2, int a3);
+    void  ComeToBuildUpCart(int a2, int _iCardID);
 
     // address=[0x156b000]
-    void  SetJobType(int a2);
+    void  SetJobType(int _iJobType);
 
     // address=[0x156b080]
     int  GetJobType(void);
@@ -138,7 +138,7 @@ public:
      CDonkeyRole(std::istream & a2);
 
     // address=[0x156b770]
-    virtual void  Store(std::ostream & a2);
+    virtual void  Store(std::ostream & _rStream);
 
     // address=[0x156cdf0]
     virtual unsigned long  ClassID(void)const;
@@ -163,37 +163,35 @@ private:
     virtual  ~CDonkeyRole(void);
 
     // address=[0x156ba50]
-    virtual void  TakeJob(class CSettler * a2);
+    virtual void  TakeJob(class CSettler * _pSettler);
 
     // address=[0x156bdd0]
-    virtual void  Init(class CSettler * a2);
+    virtual void  Init(class CSettler * _pSettler);
 
     // address=[0x156be90]
     virtual void  ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent * a3);
 
     // Type information members
 public:
-    bool m_bU2c;
-    bool m_bU2d;
-    bool m_bU2e;
-    bool m_bU2f;
-    int m_iU1;
-    int m_bU2;
-    int m_iU3;
-    int m_iU4;
-    int m_iU5;
-    int m_iU6;
-    __int16 m_iU7;
-    __int16 field_4A;
-    __int16 field_4C;
-    CDonkeyRole::SUnknown[2] m_vUnknown;
-    bool field_68;
-    _BYTE[3] gap_69;
-    _DWORD field_6C;
-    _DWORD field_70;
-    _DWORD field_74;
-    bool field_78;
-    _BYTE gap_79;
+    unsigned __int8 m_uCurrentTask;
+    bool m_bReturning;
+    bool m_bGoToSource;
+    bool m_bGoToTarget;
+    int m_iTraderSettlerId;
+    int m_iTargetBuildingID;
+    int m_iDepartBuildingID;
+    int m_iTargetCardID;
+    int m_iJobType;
+    int m_iCargoAmount;
+    unsigned __int8 m_uGood;
+    unsigned __int16 m_uSourcePileID;
+    unsigned __int16 m_uDestinationEntityID;
+    CDonkeyRole::SSlot[2] m_vGoodSlots;
+    bool m_bIsNeutralTrader;
+    int m_iRemovedAmount;
+    int m_iTotalAmount;
+    int m_iTradingState;
+    bool m_bGoingHome;
 
 };
 

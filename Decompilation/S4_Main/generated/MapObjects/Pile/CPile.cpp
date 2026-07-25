@@ -204,9 +204,9 @@ void  CPile::Delete(void) {
   CPileMgr::CheckOutPile((CPileMgr *)&g_cPileMgr, v6);
   if ( debug )
   {
-    if ( DEBUG_FLAGS[dword_4152058] )
+    if ( DEBUG_FLAGS[s_iPileDebugSection] )
     {
-      spGoodName = s_sGoodTypeMap[(unsigned __int8)this->m_uGood].m_sName;
+      spGoodName = s_sGoodTypeMap[(unsigned __int8)this->m_uGood].m_spName;
       v7 = IEntity::ID(this);
       BBSupportTracePrintF(0, "Pile %u deleted goodType %s", v7, spGoodName);
     }

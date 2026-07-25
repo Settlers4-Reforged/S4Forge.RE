@@ -18,6 +18,11 @@ protected:
     // address=[0x13173a0]
     void  Init(int a2);
 
+    // Type information members
+public:
+    int m_iBuildingType;
+    int m_iBuildingId;
+
 };
 
 

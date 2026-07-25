@@ -97,18 +97,18 @@ int  CEcoSector::GetSettlerOffer(int a2)const {
 
 
 // address=[0x1429ad0]
-// Decompiled from _DWORD *__thiscall CEcoSector::SetSettlerOffer(unsigned __int16 *this, int a2, int a3)
+// Decompiled from _DWORD *__thiscall CEcoSector::SetSettlerOffer(CEcoSector *this, int a2, int a3)
 void  CEcoSector::SetSettlerOffer(int a2, int a3) {
   
-  int v3; // eax
-  IAnimatedEntity *v4; // eax
+  CSettler *v3; // eax
+  CSettler *v4; // eax
   _DWORD *result; // eax
   int v6; // [esp+0h] [ebp-14h]
   int v7; // [esp+4h] [ebp-10h]
-  unsigned __int8 *SettlerPtr; // [esp+Ch] [ebp-8h]
+  CSettler *SettlerPtr; // [esp+Ch] [ebp-8h]
   int i; // [esp+10h] [ebp-4h]
 
-  SettlerPtr = CSettlerMgr::GetSettlerPtr(a3);
+  SettlerPtr = CSettlerMgr::GetSettlerPtr(&g_cSettlerMgr, a3);
   if ( IEntity::FlagBits(SettlerPtr, ENTITY_FLAG_Offered)
     && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 921, "!pSettler->FlagBits(ENTITY_FLAG_OFFERED)") == 1 )
   {
@@ -124,7 +124,7 @@ void  CEcoSector::SetSettlerOffer(int a2, int a3) {
     __debugbreak();
   }
   v6 = 0;
-  for ( i = this[a2 + 85]; i; i = IAnimatedEntity::Next(v3) )
+  for ( i = *((unsigned __int16 *)this + a2 + 85); i; i = IAnimatedEntity::Next(v3) )
   {
     if ( a3 == i && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 932, "_iSettlerId != iActSettler") == 1 )
       __debugbreak();
@@ -135,15 +135,15 @@ void  CEcoSector::SetSettlerOffer(int a2, int a3) {
     }
     v3 = CSettlerMgr::operator[](i);
   }
-  IAnimatedEntity::SetPrevious((IAnimatedEntity *)SettlerPtr, 0);
-  v7 = this[a2 + 85];
-  if ( this[a2 + 85] )
+  IAnimatedEntity::SetPrevious(SettlerPtr, 0);
+  v7 = *((unsigned __int16 *)this + a2 + 85);
+  if ( *((_WORD *)this + a2 + 85) )
   {
-    v4 = (IAnimatedEntity *)CSettlerMgr::operator[](v7);
+    v4 = CSettlerMgr::operator[](v7);
     IAnimatedEntity::SetPrevious(v4, a3);
   }
   IAnimatedEntity::SetNext(SettlerPtr, v7);
-  this[a2 + 85] = a3;
+  *((_WORD *)this + a2 + 85) = a3;
   result = IEntity::SetFlagBits(SettlerPtr, ENTITY_FLAG_Offered);
   if ( !debug )
     return result;
@@ -152,9 +152,9 @@ void  CEcoSector::SetSettlerOffer(int a2, int a3) {
     return (_DWORD *)BBSupportTracePrintF(
                        0,
                        "CEcoSector::SetSettlerOffer(): offer %s nr %u to ecosector %u list - now %u entries",
-                       (&off_36A114C)[2 * a2],
+                       (&MEMORY[0x36A114C])[2 * a2],
                        a3,
-                       this[8],
+                       *((unsigned __int16 *)this + 8),
                        v6);
   return result;
 }
@@ -250,7 +250,7 @@ void  CEcoSector::GetSettlerOutOfOffer(int a2) {
   return BBSupportTracePrintF(
            0,
            "CEcoSector::GetSettlerOutOfOffer(): get %s nr %u out of ecosector %u list - still %u entries",
-           (&off_36A114C)[2 * v9],
+           (&MEMORY[0x36A114C])[2 * v9],
            a2,
            v10,
            v14);
@@ -2034,7 +2034,7 @@ void  CEcoSector::RecruiteSpecialist(void) {
           FirstSettlerId = IAnimatedEntity::Next(v33);
           v2 = IEntity::WorldIdx();
           v27 = CWorldManager::EcoSectorId(v2);
-          if ( v27 == *((unsigned __int16 *)v41 + 8) && !IEntity::FlagBits(v33, ENTITY_FLAG_OnBoard) )
+          if ( v27 == *((unsigned __int16 *)v41 + 8) && !IEntity::FlagBits(v33, ENTITY_FLAG_ON_BOARD) )
           {
             CSettler::ChangeType(v33, 1, 1, 0);
             ++*v36;
@@ -2353,7 +2353,7 @@ void  CEcoSector::TakeSoldierOrder(int a2, int a3) {
     if ( g_vSoldierProductionMap[2 * j] != -1 )
     {
       result = (int)this;
-      v7 = (char *)this + dword_3D8AE1C[2 * j] + 852;
+      v7 = (char *)this + MEMORY[0x3D8AE1C][2 * j] + 852;
       if ( a4 )
       {
         if ( a4 == 100 )
@@ -2389,7 +2389,7 @@ void  CEcoSector::TakeSoldierOrder(int a2, int a3) {
       }
       else
       {
-        result = (int)this + dword_3D8AE1C[2 * j] + 852;
+        result = (int)this + MEMORY[0x3D8AE1C][2 * j] + 852;
         *v7 = 0;
       }
     }

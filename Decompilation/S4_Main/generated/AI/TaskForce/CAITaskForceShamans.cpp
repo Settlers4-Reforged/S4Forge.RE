@@ -63,7 +63,7 @@ void  CAITaskForceShamans::Execute(void) {
         while ( v9 )
         {
           v5 = CAIEntityInfo::EntityId(v9);
-          if ( (IAIEnvironment::EntityFlags(v5) & ENTITY_FLAG_OnBoard) == 0 )
+          if ( (IAIEnvironment::EntityFlags(v5) & ENTITY_FLAG_ON_BOARD) == 0 )
           {
             v13 = 0;
             break;

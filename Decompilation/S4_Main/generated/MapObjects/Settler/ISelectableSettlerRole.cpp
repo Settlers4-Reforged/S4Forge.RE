@@ -128,7 +128,7 @@ bool  ISelectableSettlerRole::TakeCommonJob(class CSettler * arg0) {
   v3 = IAnimatedEntity::JobPart(arg0);
   a2 = IAnimatedEntity::Frame(arg0);
   ISettlerRole::InitCommonTaskValues(this, arg0, ActualTask);
-  if ( v3 == IAnimatedEntity::JobPart(arg0) && a2 >= 1 && a2 < this->m_uCycleFrames )
+  if ( v3 == IAnimatedEntity::JobPart(arg0) && a2 >= 1 && a2 < this->m_iCycleFrames )
     IAnimatedEntity::SetFrame(arg0, a2);
   else
     IAnimatedEntity::SetFrame(arg0, 1u);

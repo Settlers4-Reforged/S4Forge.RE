@@ -122,9 +122,9 @@ public:
     CHAR m_iTask;
     BYTE m_uSettlerWalk;
     char m_iWalkspeed;
-    unsigned __int8 m_uCycleFrames;
+    unsigned __int8 m_iCycleFrames;
     WORD m_uTick;
-    BYTE unk_0A;
+    bool m_bForward;
     BYTE unk_0B;
     unsigned __int8 m_uToDoCount;
     __int16 m_iDestinationOffsetX;

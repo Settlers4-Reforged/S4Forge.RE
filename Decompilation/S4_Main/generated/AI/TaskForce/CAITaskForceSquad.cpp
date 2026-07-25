@@ -128,7 +128,7 @@ LABEL_21:
         while ( v9 )
         {
           v2 = CAIEntityInfo::EntityId(v9);
-          if ( (IAIEnvironment::EntityFlags(v2) & ENTITY_FLAG_OnBoard) == 0 )
+          if ( (IAIEnvironment::EntityFlags(v2) & ENTITY_FLAG_ON_BOARD) == 0 )
             v12 = 0;
           v9 = CAIEntityInfo::Next(v9);
         }

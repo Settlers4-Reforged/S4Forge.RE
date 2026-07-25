@@ -396,26 +396,26 @@ void  CGatherBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
   CEvn_Event v12; // [esp+18h] [ebp-28h] BYREF
   int v13; // [esp+3Ch] [ebp-4h]
 
-  dword_3F1E4E8 = 2;
-  byte_3F1E4ED = IEntity::Race(a2);
-  byte_3F1E4EC = IEntity::Type((unsigned __int16 *)a2);
-  byte_3F1E4EF = 1;
-  byte_3F1E4F0 = IEntity::FlagBits(a2, (EntityFlag)0x1000u) != 0;
-  byte_3F1E4F1 = 1;
+  MEMORY[0x3F1E4E8] = 2;
+  MEMORY[0x3F1E4ED] = IEntity::Race(a2);
+  MEMORY[0x3F1E4EC] = IEntity::Type((unsigned __int16 *)a2);
+  MEMORY[0x3F1E4EF] = 1;
+  MEMORY[0x3F1E4F0] = IEntity::FlagBits(a2, (EntityFlag)0x1000u) != 0;
+  MEMORY[0x3F1E4F1] = 1;
   v6 = IEntity::Type((unsigned __int16 *)a2);
   v3 = IEntity::OwnerId((unsigned __int8 *)a2);
-  byte_3F1E4F3 = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v3, v6, 0);
+  MEMORY[0x3F1E4F3] = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v3, v6, 0);
   v7 = IEntity::Type((unsigned __int16 *)a2);
   v4 = IEntity::OwnerId((unsigned __int8 *)a2);
-  byte_3F1E4F4 = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v4, v7, 1u);
-  byte_3F1E4F2 = -1;
-  byte_3F1E4EE = *((_BYTE *)this + 29);
+  MEMORY[0x3F1E4F4] = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v4, v7, 1u);
+  MEMORY[0x3F1E4F2] = -1;
+  MEMORY[0x3F1E4EE] = *((_BYTE *)this + 29);
   if ( *((_BYTE *)this + 29) )
-    byte_3F1E4F5 = *(_BYTE *)(*((_DWORD *)this + 94) + 478);
+    MEMORY[0x3F1E4F5] = *(_BYTE *)(*((_DWORD *)this + 94) + 478);
   v10 = CPileMgr::operator[](*((unsigned __int16 *)this + 190));
-  byte_3F1E4F9 = (*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)v10 + 40))(v10);
+  MEMORY[0x3F1E4F9] = (*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)v10 + 40))(v10);
   v9 = CPileMgr::operator[](*((unsigned __int16 *)this + 190));
-  byte_3F1E4F8 = (*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)v9 + 60))(v9);
+  MEMORY[0x3F1E4F8] = (*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)v9 + 60))(v9);
   v8 = 604;
   if ( !a3 )
     v8 = 602;

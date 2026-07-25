@@ -10,7 +10,7 @@ char const * __cdecl CS4DefineNames::GetAnimalName(int a1) {
   if ( a1 >= 18 )
     return "<INVALID>";
   else
-    return s_sAnimalDefines[a1].m_sName;
+    return s_sAnimalDefines[a1].m_spName;
 }
 
 
@@ -21,7 +21,7 @@ char const * __cdecl CS4DefineNames::GetBuildingName(int a1) {
   if ( a1 >= 83 )
     return "<INVALID>";
   else
-    return s_sBuildingNames[a1].m_sName;
+    return s_sBuildingNames[a1].m_spName;
 }
 
 
@@ -32,7 +32,7 @@ char const * __cdecl CS4DefineNames::GetGoodName(int a1) {
   if ( a1 >= 43 )
     return "<INVALID>";
   else
-    return s_sGoodName[a1].m_sName;
+    return s_sGoodName[a1].m_spName;
 }
 
 
@@ -43,7 +43,7 @@ char const * __cdecl CS4DefineNames::GetObjectName(int a1) {
   if ( a1 >= 291 )
     return "<INVALID>";
   else
-    return s_sObjectNames[a1].m_sName;
+    return s_sObjectNames[a1].m_spName;
 }
 
 
@@ -65,7 +65,7 @@ char const * __cdecl CS4DefineNames::GetSettlerName(int a1) {
   if ( a1 >= 67 )
     return "<INVALID>";
   else
-    return s_sSettlerName[a1].m_sName;
+    return s_sSettlerName[a1].m_spName;
 }
 
 
@@ -76,7 +76,7 @@ char const * __cdecl CS4DefineNames::GetSettlerJobName(int a1) {
   if ( a1 >= 367 )
     return "<INVALID>";
   else
-    return s_sSettlerJobName[a1].m_sName;
+    return s_sSettlerJobName[a1].m_spName;
 }
 
 
@@ -87,7 +87,7 @@ char const * __cdecl CS4DefineNames::GetSoundName(int a1) {
   if ( a1 >= 109 )
     return "<INVALID>";
   else
-    return s_sSoundNames[a1].m_sName;
+    return s_sSoundNames[a1].m_spName;
 }
 
 
@@ -98,7 +98,7 @@ char const * __cdecl CS4DefineNames::GetStringName(int a1) {
   if ( a1 >= 3837 )
     return "<INVALID>";
   else
-    return s_sStringNames[a1].m_sName;
+    return s_sStringNames[a1].m_spName;
 }
 
 
@@ -112,7 +112,7 @@ int __cdecl CS4DefineNames::GetStringId(char const * Str1) {
     return -1;
   for ( i = 0; i < 3837; ++i )
   {
-    if ( !j__strcmp(Str1, s_sStringNames[i].m_sName) )
+    if ( !j__strcmp(Str1, s_sStringNames[i].m_spName) )
       return s_sStringNames[i].m_iNr;
   }
   return -1;

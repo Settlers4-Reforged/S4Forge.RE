@@ -256,10 +256,10 @@ int  CSlaveRole::GetSettlerRole(void)const {
  CSlaveRole::CSlaveRole(void) {
   
   ISettlerRole::ISettlerRole(this);
-  *(_DWORD *)this = &CSlaveRole::_vftable_;
-  *((_DWORD *)this + 11) = -1;
-  *((_DWORD *)this + 12) = -1;
-  *((_DWORD *)this + 13) = 0;
+  this->__vftable = (ISettlerRole_vtbl *)&CSlaveRole::_vftable_;
+  this[1].__vftable = (ISettlerRole_vtbl *)-1;
+  *(_DWORD *)&this[1].m_iTask = -1;
+  *(_DWORD *)&this[1].m_uTick = 0;
   return this;
 }
 
@@ -679,7 +679,7 @@ LABEL_15:
       CSettlerMgr::SearchSpaceForSettler(&g_cSettlerMgr, v23, v28, v35);
       CWarMap::AddEntity(a2);
       IEntity::SetFlagBits(a2, ENTITY_FLAG_Selectable|ENTITY_FLAG_Visible);
-      IEntity::ClearFlagBits(a2, ENTITY_FLAG_OnBoard);
+      IEntity::ClearFlagBits(a2, ENTITY_FLAG_ON_BOARD);
       v56->SetFree(v56, a2, -1);
       v56->m_iTask = 17;
       v24 = IEntity::EntityId(a2);
@@ -768,14 +768,14 @@ void  CSlaveRole::ClearWorkPositionAndFlagIfNecessary(void) {
   
   int result; // eax
 
-  if ( *((int *)this + 11) < 0 )
+  if ( (int)this[1].__vftable < 0 )
   {
-    if ( *((_DWORD *)this + 11) != -1
+    if ( this[1].__vftable != (ISettlerRole_vtbl *)-1
       && BBSupportDbgReport(2, "MapObjects\\Settler\\SlaveRole.cpp", 1022, "m_iWorkPosX == -1") == 1 )
     {
       __debugbreak();
     }
-    if ( *((_DWORD *)this + 12) != -1
+    if ( *(_DWORD *)&this[1].m_iTask != -1
       && BBSupportDbgReport(2, "MapObjects\\Settler\\SlaveRole.cpp", 1023, "m_iWorkPosY == -1") == 1 )
     {
       __debugbreak();
@@ -784,12 +784,12 @@ void  CSlaveRole::ClearWorkPositionAndFlagIfNecessary(void) {
   }
   else
   {
-    if ( !(unsigned __int8)CWorldManager::InWorld(*((_DWORD *)this + 11), *((_DWORD *)this + 12))
+    if ( !CWorldManager::InWorld((unsigned int)this[1].__vftable, *(_DWORD *)&this[1].m_iTask)
       && BBSupportDbgReport(2, "MapObjects\\Settler\\SlaveRole.cpp", 1012, "g_cWorld.InWorld(m_iWorkPosX, m_iWorkPosY)") == 1 )
     {
       __debugbreak();
     }
-    if ( !CWorldManager::FlagBits(*((_DWORD *)this + 11), *((_DWORD *)this + 12), 0x20u)
+    if ( !CWorldManager::FlagBits((int)this[1].__vftable, *(_DWORD *)&this[1].m_iTask, 0x20u)
       && BBSupportDbgReport(
            2,
            "MapObjects\\Settler\\SlaveRole.cpp",
@@ -798,9 +798,9 @@ void  CSlaveRole::ClearWorkPositionAndFlagIfNecessary(void) {
     {
       __debugbreak();
     }
-    result = CWorldManager::ClearFlagBits(*((_DWORD *)this + 11), *((_DWORD *)this + 12), 32);
-    *((_DWORD *)this + 11) = -1;
-    *((_DWORD *)this + 12) = -1;
+    result = CWorldManager::ClearFlagBits((int)this[1].__vftable, *(_DWORD *)&this[1].m_iTask, 32);
+    this[1].__vftable = (ISettlerRole_vtbl *)-1;
+    *(_DWORD *)&this[1].m_iTask = -1;
   }
   return result;
 }
@@ -814,7 +814,7 @@ void  CSlaveRole::FreeServant(class CSettler * a2) {
   int v3; // esi
   int v4; // eax
 
-  if ( !IEntity::FlagBits(a2, ENTITY_FLAG_OnBoard) )
+  if ( !IEntity::FlagBits(a2, ENTITY_FLAG_ON_BOARD) )
   {
     v2 = IEntity::WorldIdx();
     v3 = CWorldManager::MapObjectId(v2);

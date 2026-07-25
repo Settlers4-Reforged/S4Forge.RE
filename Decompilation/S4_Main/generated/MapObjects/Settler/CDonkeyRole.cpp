@@ -1,4 +1,3 @@
-#if FALSE
 #include "CDonkeyRole.h"
 
 // Definitions for class CDonkeyRole
@@ -15,72 +14,68 @@ class CPersistence * __cdecl CDonkeyRole::New(std::istream & a1) {
 
 
 // address=[0x152bdb0]
-// Decompiled from int __thiscall CDonkeyRole::GetTradingState(_DWORD *this)
+// Decompiled from int __thiscall CDonkeyRole::GetTradingState(CDonkeyRole *this)
 enum CDonkeyRole::TIntTraderState  CDonkeyRole::GetTradingState(void) {
   
-  return this[29];
+  return this->m_iTradingState;
 }
 
 
 // address=[0x152be10]
-// Decompiled from char __thiscall CDonkeyRole::IsNeutralTrader(CDonkeyRole *this)
+// Decompiled from bool __thiscall CDonkeyRole::IsNeutralTrader(CDonkeyRole *this)
 bool  CDonkeyRole::IsNeutralTrader(void) {
   
-  return *((_BYTE *)this + 104);
+  return this->m_bIsNeutralTrader;
 }
 
 
 // address=[0x152be70]
-// Decompiled from int __thiscall CDonkeyRole::MemHomePosition(CDonkeyRole *this)
+// Decompiled from void __thiscall CDonkeyRole::MemHomePosition(CDonkeyRole *this)
 void  CDonkeyRole::MemHomePosition(void) {
   
-  unsigned __int8 *SettlerPtr; // eax
-  int result; // eax
+  CSettler *SettlerPtr; // eax
 
-  SettlerPtr = CSettlerMgr::GetSettlerPtr(*((_DWORD *)this + 12));
-  result = IEntity::PackedXY(SettlerPtr);
-  *((_DWORD *)this + 7) = result;
-  return result;
+  SettlerPtr = CSettlerMgr::GetSettlerPtr(&g_cSettlerMgr, this->m_iTraderSettlerId);
+  this->m_iStartPosition = IEntity::PackedXY(SettlerPtr);
 }
 
 
 // address=[0x1569d40]
-// Decompiled from int __thiscall CDonkeyRole::InitWalking(CDonkeyRole *this, struct CSettler *a2)
+// Decompiled from CWalkingNormal *__thiscall CDonkeyRole::InitWalking(CDonkeyRole *this, IEntity *a2)
 class CWalking *  CDonkeyRole::InitWalking(class CSettler * a2) {
   
   int v2; // eax
-  int v4; // [esp+4h] [ebp-4h]
+  CWalkingNormal *v4; // [esp+4h] [ebp-4h]
 
-  v2 = IEntity::OwnerId((unsigned __int8 *)a2);
+  v2 = IEntity::OwnerId(a2);
   v4 = CWalking::Create(0, v2);
-  (*(void (__thiscall **)(int, int, _DWORD))(*(_DWORD *)v4 + 8))(v4, -1, 0);
+  v4->InitB(v4, -1, 0);
   return v4;
 }
 
 
 // address=[0x1569d80]
-// Decompiled from CDonkeyRole *__thiscall CDonkeyRole::LogicUpdateJob(CDonkeyRole *this, struct CSettler *a2)
-void  CDonkeyRole::LogicUpdateJob(class CSettler * a2) {
+// Decompiled from void __thiscall CDonkeyRole::LogicUpdateJob(CDonkeyRole *this, struct CSettler *_pSettler)
+void  CDonkeyRole::LogicUpdateJob(class CSettler * _pSettler) {
   
   int v2; // eax
   IEntity *v3; // eax
   IEntity *v4; // eax
   int v5; // eax
   int v6; // eax
-  CDonkeyRole *result; // eax
-  int v8; // [esp+0h] [ebp-10h]
-  IEntity *v9; // [esp+4h] [ebp-Ch]
+  int v7; // [esp+0h] [ebp-10h]
+  CVehicle *v8; // [esp+4h] [ebp-Ch]
 
-  if ( IEntity::FlagBits(a2, ENTITY_FLAG_Selected) || IEntity::FlagBits(a2, (EntityFlag)1024) )
-    (*(void (__thiscall **)(CDonkeyRole *, int))(*(_DWORD *)this + 132))(this, 1);
-  switch ( *((_BYTE *)this + 4) )
+  if ( IEntity::FlagBits(_pSettler, ENTITY_FLAG_Selected) || IEntity::FlagBits(_pSettler, (EntityFlag)1024) )
+    this->FillDialog(this, 1);
+  switch ( this->m_iTask )
   {
     case 6:
-      IMovingEntity::SetDistance(a2, 0);
-      (*(void (__thiscall **)(CDonkeyRole *, struct CSettler *))(*(_DWORD *)this + 16))(this, a2);
-      if ( !IEntity::FlagBits(a2, ENTITY_FLAG_Registered) && debug && DEBUG_FLAGS[dword_41520AC] )
+      IMovingEntity::SetDistance(_pSettler, 0);
+      this->Go(this, _pSettler);
+      if ( !IEntity::FlagBits(_pSettler, ENTITY_FLAG_Registered) && debug && DEBUG_FLAGS[dword_41520AC] )
       {
-        v2 = IEntity::ID(a2);
+        v2 = IEntity::ID(_pSettler);
         BBSupportTracePrintF(0, "LogicUpdateJob - Go - not registered donkey %u", v2);
       }
       break;
@@ -88,15 +83,15 @@ void  CDonkeyRole::LogicUpdateJob(class CSettler * a2) {
     case 0x16:
       goto LABEL_28;
     case 0x17:
-      if ( !*((_WORD *)this + 38)
+      if ( !this->m_uDestinationEntityID
         && BBSupportDbgReport(2, "MapObjects\\Settler\\DonkeyRole.cpp", 364, "m_uDestinationEntityID > 0") == 1 )
       {
         __debugbreak();
       }
-      v3 = CMapObjectMgr::EntityPtr(*((unsigned __int16 *)this + 38));
+      v3 = CMapObjectMgr::EntityPtr(this->m_uDestinationEntityID);
       if ( IEntity::ObjType(v3) != CATAPULT_OBJ )
       {
-        v4 = CMapObjectMgr::EntityPtr(*((unsigned __int16 *)this + 38));
+        v4 = CMapObjectMgr::EntityPtr(this->m_uDestinationEntityID);
         if ( IEntity::ObjType(v4) != SHIP_OBJ
           && BBSupportDbgReport(
                2,
@@ -108,83 +103,75 @@ void  CDonkeyRole::LogicUpdateJob(class CSettler * a2) {
           __debugbreak();
         }
       }
-      v9 = CVehicleMgr::operator[](*((unsigned __int16 *)this + 38));
-      ((void (__thiscall *)(IEntity *, _DWORD, _DWORD))v9->__vftable[1].Decrease)(
-        v9,
-        *((unsigned __int8 *)this + 72),
-        *((_DWORD *)this + 17));
-      v5 = IEntity::ID(a2);
-      ((void (__thiscall *)(IEntity *, int))v9->Detach)(v9, v5);
-      *((_WORD *)this + 38) = 0;
-      *((_DWORD *)this + 17) = 0;
+      v8 = CVehicleMgr::operator[](this->m_uDestinationEntityID);
+      v8->GoodArrived(v8, this->m_uGood, this->m_iCargoAmount);
+      v5 = IEntity::ID(_pSettler);
+      v8->Detach(v8, v5);
+      this->m_uDestinationEntityID = 0;
+      this->m_iCargoAmount = 0;
       CDonkeyRole::SetFree(this);
       CDonkeyRole::TryToGoHome(this);
       CDonkeyRole::SetJobType(this, 0);
-      if ( !IEntity::FlagBits(a2, ENTITY_FLAG_Registered) && debug && DEBUG_FLAGS[dword_41520AC] )
+      if ( !IEntity::FlagBits(_pSettler, ENTITY_FLAG_Registered) && debug && DEBUG_FLAGS[dword_41520AC] )
       {
-        v6 = IEntity::ID(a2);
+        v6 = IEntity::ID(_pSettler);
         BBSupportTracePrintF(0, "LogicUpdateJob - LoadGood ready - not registered settler %u", v6);
       }
       break;
     case 0x20:
-      v8 = *((unsigned __int8 *)this + 7) / 2;
-      *((_BYTE *)this + 6) -= v8;
-      if ( *((char *)this + 6) < v8 )
+      v7 = this->m_iCycleFrames / 2;
+      this->m_iWalkspeed -= v7;
+      if ( this->m_iWalkspeed < v7 )
       {
-        if ( *((_DWORD *)this + 14) )
+        if ( this->m_iDepartBuildingID )
         {
-          *((_DWORD *)this + 13) = *((_DWORD *)this + 14);
-          *((_DWORD *)this + 14) = 0;
+          this->m_iTargetBuildingID = this->m_iDepartBuildingID;
+          this->m_iDepartBuildingID = 0;
         }
 LABEL_28:
-        (*(void (__thiscall **)(CDonkeyRole *, struct CSettler *))(*(_DWORD *)this + 36))(this, a2);
+        this->GetNextJob(this, _pSettler);
       }
       else
       {
-        CDonkeyRole::DropGoods(this, a2);
-        IAnimatedEntity::RegisterForLogicUpdate(a2, v8 - 1);
+        CDonkeyRole::DropGoods(this, _pSettler);
+        IAnimatedEntity::RegisterForLogicUpdate(_pSettler, v7 - 1);
       }
       break;
     default:
-      CTrace::Print("LogicUpdateJob Donkey - unknown task %u", *((char *)this + 4));
+      CTrace::Print("LogicUpdateJob Donkey - unknown task %u", this->m_iTask);
       break;
   }
-  if ( *((char *)this + 4) != *((unsigned __int8 *)this + 44)
-    && (*((_DWORD *)this + 15) || *((_BYTE *)this + 120))
-    && *((_BYTE *)this + 44) == 6 )
+  if ( this->m_iTask != this->m_uCurrentTask
+    && (this->m_iTargetCardID || this->m_bGoingHome)
+    && this->m_uCurrentTask == 6 )
   {
     CDonkeyRole::DonkeyArrived(this);
   }
-  result = this;
-  *((_BYTE *)this + 44) = *((_BYTE *)this + 4);
-  return result;
+  this->m_uCurrentTask = this->m_iTask;
 }
 
 
 // address=[0x156a0d0]
-// Decompiled from CDonkeyRole *__fastcall CDonkeyRole::UpdateJob(CDonkeyRole *this, int a2, struct CSettler *a3)
+// Decompiled from void __fastcall CDonkeyRole::UpdateJob(CDonkeyRole *this, int a2, struct CSettler *_pSettler)
 void  CDonkeyRole::UpdateJob(class CSettler * a2) {
   
-  CDonkeyRole *result; // eax
-  char v4; // al
+  char v3; // al
 
-  result = this;
-  if ( *((_BYTE *)this + 4) != 32 )
-    return result;
-  v4 = IAnimatedEntity::Frame(a3);
-  IAnimatedEntity::SetFrame(*((_WORD *)this + 4) + v4);
-  result = (CDonkeyRole *)IAnimatedEntity::Frame(a3);
-  if ( (int)result >= *((unsigned __int8 *)this + 7) )
-    return (CDonkeyRole *)IAnimatedEntity::SetFrame(0);
-  return result;
+  if ( this->m_iTask == 32 )
+  {
+    v3 = IAnimatedEntity::Frame(_pSettler);
+    IAnimatedEntity::SetFrame(_pSettler, this->m_uTick + v3);
+    if ( IAnimatedEntity::Frame(_pSettler) >= this->m_iCycleFrames )
+      IAnimatedEntity::SetFrame(_pSettler, 0);
+  }
 }
 
 
 // address=[0x156a130]
-// Decompiled from int __stdcall CDonkeyRole::PostLoadInit(CPropertySet *a1)
+// Decompiled from void __stdcall CDonkeyRole::PostLoadInit(IEntity *a1)
 void  CDonkeyRole::PostLoadInit(class CSettler * a1) {
   
-  return CWarMap::AddEntity(a1);
+  CWarMap::AddEntity(a1);
 }
 
 
@@ -200,56 +187,56 @@ void  CDonkeyRole::InitFlee(class CSettler * a2, int a3) {
 // Decompiled from int __thiscall CDonkeyRole::Decrease(CDonkeyRole *this, int a2)
 int  CDonkeyRole::Decrease(int a2) {
   
-  int v2; // eax
-  int v3; // eax
-  unsigned __int8 *SettlerPtr; // [esp+0h] [ebp-8h]
+  unsigned int v2; // eax
+  std::list *v3; // eax
+  CSettler *SettlerPtr; // [esp+0h] [ebp-8h]
 
-  if ( !CDonkeyRole::HasLoadedSomething(this) || !*((_DWORD *)this + 12) || *((_BYTE *)this + 4) == 32 )
+  if ( !CDonkeyRole::HasLoadedSomething(this) || !this->m_iTraderSettlerId || this->m_iTask == 32 )
     return 0;
-  SettlerPtr = CSettlerMgr::GetSettlerPtr(*((_DWORD *)this + 12));
+  SettlerPtr = CSettlerMgr::GetSettlerPtr(&g_cSettlerMgr, this->m_iTraderSettlerId);
   v2 = IEntity::Race(SettlerPtr);
-  v3 = CEntityToDoListMgr::SettlerJobList(v2, 162);
-  (*(void (__thiscall **)(unsigned __int8 *, int, int))(*(_DWORD *)SettlerPtr + 112))(SettlerPtr, v3, 162);
+  v3 = CEntityToDoListMgr::SettlerJobList(g_pEntityToDoListMgr, v2, 0xA2u);
+  SettlerPtr->NewToDoList(SettlerPtr, (int)v3, 162);
   return 0;
 }
 
 
 // address=[0x156a1e0]
-// Decompiled from CDonkeyRole *__thiscall CDonkeyRole::NextStep(CDonkeyRole *this)
+// Decompiled from void __thiscall CDonkeyRole::NextStep(CDonkeyRole *this)
 void  CDonkeyRole::NextStep(void) {
   
-  CDonkeyRole *result; // eax
+  CSettler *SettlerPtr; // [esp+0h] [ebp-8h]
 
-  result = this;
-  if ( !*((_DWORD *)this + 12) )
-    return result;
-  CSettlerMgr::GetSettlerPtr(*((_DWORD *)this + 12));
-  return (CDonkeyRole *)IAnimatedEntity::RegisterForLogicUpdate(1);
+  if ( this->m_iTraderSettlerId )
+  {
+    SettlerPtr = CSettlerMgr::GetSettlerPtr(&g_cSettlerMgr, this->m_iTraderSettlerId);
+    IAnimatedEntity::RegisterForLogicUpdate(SettlerPtr, 1);
+  }
 }
 
 
 // address=[0x156a220]
-// Decompiled from int __thiscall CDonkeyRole::GetGoodAmount(CDonkeyRole *this, int a2)
-int  CDonkeyRole::GetGoodAmount(int a2) {
+// Decompiled from int __thiscall CDonkeyRole::GetGoodAmount(CDonkeyRole *this, int _iGood)
+int  CDonkeyRole::GetGoodAmount(int _iGood) {
   
-  int v3; // [esp+4h] [ebp-8h]
+  int iTotal; // [esp+4h] [ebp-8h]
   int i; // [esp+8h] [ebp-4h]
 
-  v3 = 0;
+  iTotal = 0;
   for ( i = 0; i < 2; ++i )
   {
-    if ( *((_DWORD *)this + 3 * i + 20) == a2 )
-      v3 += *((_DWORD *)this + 3 * i + 21);
+    if ( this->m_vGoodSlots[i].m_iGood == _iGood )
+      iTotal += this->m_vGoodSlots[i].m_iAmount;
   }
-  return v3;
+  return iTotal;
 }
 
 
 // address=[0x156a280]
-// Decompiled from int __thiscall CDonkeyRole::AddGood(CDonkeyRole *this, int a2, int a3)
-int  CDonkeyRole::AddGood(int a2, int a3) {
+// Decompiled from int __thiscall CDonkeyRole::AddGood(CDonkeyRole *this, int _iGood, int _iAmount)
+int  CDonkeyRole::AddGood(int _iGood, int _iAmount) {
   
-  unsigned __int8 *SettlerPtr; // [esp+0h] [ebp-1Ch]
+  CSettler *SettlerPtr; // [esp+0h] [ebp-1Ch]
   int v5; // [esp+4h] [ebp-18h]
   int v6; // [esp+8h] [ebp-14h]
   int i; // [esp+18h] [ebp-4h]
@@ -257,37 +244,37 @@ int  CDonkeyRole::AddGood(int a2, int a3) {
 
   for ( i = 0; i < 2; ++i )
   {
-    if ( *((_DWORD *)this + 3 * i + 20) == a2 && *((_DWORD *)this + 3 * i + 21) != 8 )
+    if ( this->m_vGoodSlots[i].m_iGood == _iGood && this->m_vGoodSlots[i].m_iAmount != 8 )
     {
-      if ( 8 - *((_DWORD *)this + 3 * i + 21) >= a3 )
-        v6 = a3;
+      if ( 8 - this->m_vGoodSlots[i].m_iAmount >= _iAmount )
+        v6 = _iAmount;
       else
-        v6 = 8 - *((_DWORD *)this + 3 * i + 21);
-      *((_DWORD *)this + 3 * i + 21) += v6;
-      a3 -= v6;
+        v6 = 8 - this->m_vGoodSlots[i].m_iAmount;
+      this->m_vGoodSlots[i].m_iAmount += v6;
+      _iAmount -= v6;
     }
   }
-  if ( a3 )
+  if ( _iAmount )
   {
     for ( j = 0; j < 2; ++j )
     {
-      if ( !*((_DWORD *)this + 3 * j + 20) && a3 )
+      if ( !this->m_vGoodSlots[j].m_iGood && _iAmount )
       {
-        if ( a3 <= 8 )
-          v5 = a3;
+        if ( _iAmount <= 8 )
+          v5 = _iAmount;
         else
           v5 = 8;
-        *((_DWORD *)this + 3 * j + 21) += v5;
-        *((_DWORD *)this + 3 * j + 20) = a2;
-        *((_DWORD *)this + 28) += v5;
-        a3 -= v5;
+        this->m_vGoodSlots[j].m_iAmount += v5;
+        this->m_vGoodSlots[j].m_iGood = _iGood;
+        this->m_iTotalAmount += v5;
+        _iAmount -= v5;
       }
     }
   }
-  SettlerPtr = CSettlerMgr::GetSettlerPtr(*((_DWORD *)this + 12));
-  if ( IEntity::FlagBits(SettlerPtr, ENTITY_FLAG_Selected) || IEntity::FlagBits(SettlerPtr, (EntityFlag)0x400u) )
-    (*(void (__thiscall **)(CDonkeyRole *, int))(*(_DWORD *)this + 132))(this, 1);
-  return a3;
+  SettlerPtr = CSettlerMgr::GetSettlerPtr(&g_cSettlerMgr, this->m_iTraderSettlerId);
+  if ( IEntity::FlagBits(SettlerPtr, ENTITY_FLAG_Selected) || IEntity::FlagBits(SettlerPtr, (EntityFlag)1024) )
+    this->FillDialog(this, 1);
+  return _iAmount;
 }
 
 
@@ -295,45 +282,45 @@ int  CDonkeyRole::AddGood(int a2, int a3) {
 // Decompiled from int __thiscall CDonkeyRole::RemoveGood(CDonkeyRole *this, int a2, int a3)
 int  CDonkeyRole::RemoveGood(int a2, int a3) {
   
-  unsigned __int8 *SettlerPtr; // [esp+4h] [ebp-14h]
-  int v5; // [esp+8h] [ebp-10h]
+  CSettler *SettlerPtr; // [esp+4h] [ebp-14h]
+  int m_iAmount; // [esp+8h] [ebp-10h]
   int i; // [esp+10h] [ebp-8h]
 
   if ( a3 < 0 )
     return 0;
   for ( i = 0; i < 2; ++i )
   {
-    if ( *((_DWORD *)this + 3 * i + 20) == a2 )
+    if ( this->m_vGoodSlots[i].m_iGood == a2 )
     {
-      if ( *((_DWORD *)this + 3 * i + 21) >= a3 )
-        v5 = a3;
+      if ( this->m_vGoodSlots[i].m_iAmount >= a3 )
+        m_iAmount = a3;
       else
-        v5 = *((_DWORD *)this + 3 * i + 21);
-      *((_DWORD *)this + 3 * i + 21) -= v5;
-      if ( !*((_DWORD *)this + 3 * i + 21) )
-        *((_DWORD *)this + 3 * i + 20) = 0;
-      a3 -= v5;
-      *((_DWORD *)this + 27) += v5;
+        m_iAmount = this->m_vGoodSlots[i].m_iAmount;
+      this->m_vGoodSlots[i].m_iAmount -= m_iAmount;
+      if ( !this->m_vGoodSlots[i].m_iAmount )
+        this->m_vGoodSlots[i].m_iGood = 0;
+      a3 -= m_iAmount;
+      this->m_iRemovedAmount += m_iAmount;
     }
   }
-  SettlerPtr = CSettlerMgr::GetSettlerPtr(*((_DWORD *)this + 12));
-  if ( IEntity::FlagBits(SettlerPtr, ENTITY_FLAG_Selected) || IEntity::FlagBits(SettlerPtr, (EntityFlag)0x400u) )
-    (*(void (__thiscall **)(CDonkeyRole *, int))(*(_DWORD *)this + 132))(this, 1);
+  SettlerPtr = CSettlerMgr::GetSettlerPtr(&g_cSettlerMgr, this->m_iTraderSettlerId);
+  if ( IEntity::FlagBits(SettlerPtr, ENTITY_FLAG_Selected) || IEntity::FlagBits(SettlerPtr, (EntityFlag)1024) )
+    this->FillDialog(this, 1);
   return a3;
 }
 
 
 // address=[0x156a520]
-// Decompiled from char __thiscall CDonkeyRole::IsSpaceAvailable(CDonkeyRole *this, int a2)
-bool  CDonkeyRole::IsSpaceAvailable(int a2) {
+// Decompiled from char __thiscall CDonkeyRole::IsSpaceAvailable(CDonkeyRole *this, int _iGood)
+bool  CDonkeyRole::IsSpaceAvailable(int _iGood) {
   
   int i; // [esp+4h] [ebp-4h]
 
   for ( i = 0; i < 2; ++i )
   {
-    if ( !*((_DWORD *)this + 3 * i + 20) )
+    if ( !this->m_vGoodSlots[i].m_iGood )
       return 1;
-    if ( *((_DWORD *)this + 3 * i + 20) == a2 && 8 - *((_DWORD *)this + 3 * i + 21) > 0 )
+    if ( this->m_vGoodSlots[i].m_iGood == _iGood && 8 - this->m_vGoodSlots[i].m_iAmount > 0 )
       return 1;
   }
   return 0;
@@ -341,8 +328,8 @@ bool  CDonkeyRole::IsSpaceAvailable(int a2) {
 
 
 // address=[0x156a590]
-// Decompiled from int __thiscall CDonkeyRole::GetAvailableSpace(CDonkeyRole *this, int a2)
-int  CDonkeyRole::GetAvailableSpace(int a2) {
+// Decompiled from int __thiscall CDonkeyRole::GetAvailableSpace(CDonkeyRole *this, int _iGood)
+int  CDonkeyRole::GetAvailableSpace(int _iGood) {
   
   int v3; // [esp+0h] [ebp-Ch]
   int i; // [esp+8h] [ebp-4h]
@@ -350,8 +337,8 @@ int  CDonkeyRole::GetAvailableSpace(int a2) {
   v3 = 0;
   for ( i = 0; i < 2; ++i )
   {
-    if ( *((_DWORD *)this + 3 * i + 20) == a2 && 8 - *((_DWORD *)this + 3 * i + 21) > 0 )
-      v3 += 8 - *((_DWORD *)this + 3 * i + 21);
+    if ( this->m_vGoodSlots[i].m_iGood == _iGood && 8 - this->m_vGoodSlots[i].m_iAmount > 0 )
+      v3 += 8 - this->m_vGoodSlots[i].m_iAmount;
   }
   return v3;
 }
@@ -367,7 +354,7 @@ int  CDonkeyRole::GetAvailableSpace(void) {
   v2 = 0;
   for ( i = 0; i < 2; ++i )
   {
-    if ( !*((_DWORD *)this + 3 * i + 20) )
+    if ( !this->m_vGoodSlots[i].m_iGood )
       v2 += 8;
   }
   return v2;
@@ -387,7 +374,7 @@ bool  CDonkeyRole::IsFull(void) {
     v2 = 0;
     for ( i = 0; i < 2; ++i )
     {
-      v2 += *((_DWORD *)this + 3 * i + 21);
+      v2 += this->m_vGoodSlots[i].m_iAmount;
       if ( v2 >= 16 )
         return 1;
     }
@@ -397,9 +384,9 @@ bool  CDonkeyRole::IsFull(void) {
   {
     for ( j = 0; j < 2; ++j )
     {
-      if ( !*((_DWORD *)this + 3 * j + 20) )
+      if ( !this->m_vGoodSlots[j].m_iGood )
         return 0;
-      if ( 8 - *((_DWORD *)this + 3 * j + 21) > 0 )
+      if ( 8 - this->m_vGoodSlots[j].m_iAmount > 0 )
         return 0;
     }
     return 1;
@@ -415,7 +402,7 @@ bool  CDonkeyRole::HasLoadedSomething(void) {
 
   for ( i = 0; i < 2; ++i )
   {
-    if ( *((_DWORD *)this + 3 * i + 21) )
+    if ( this->m_vGoodSlots[i].m_iAmount )
       return 1;
   }
   return 0;
@@ -426,8 +413,8 @@ bool  CDonkeyRole::HasLoadedSomething(void) {
 // Decompiled from int __thiscall CDonkeyRole::DropGoods(CDonkeyRole *this, struct CSettler *a2)
 void  CDonkeyRole::DropGoods(class CSettler * a2) {
   
-  int v2; // eax
-  int v4; // [esp-Ch] [ebp-20h]
+  unsigned int v2; // eax
+  unsigned int v4; // [esp-Ch] [ebp-20h]
   unsigned int v6; // [esp+4h] [ebp-10h]
   int j; // [esp+Ch] [ebp-8h]
   int i; // [esp+10h] [ebp-4h]
@@ -442,7 +429,7 @@ void  CDonkeyRole::DropGoods(class CSettler * a2) {
         v6 = j;
       v4 = IEntity::Y(a2);
       v2 = IEntity::X(a2);
-      CPileMgr::SearchSpaceForGoods((CPileMgr *)&g_cPileMgr, v2, v4, i, v6);
+      CPileMgr::SearchSpaceForGoods(&g_cPileMgr, v2, v4, i, v6);
       CDonkeyRole::RemoveGood(this, i, v6);
     }
   }
@@ -454,35 +441,35 @@ void  CDonkeyRole::DropGoods(class CSettler * a2) {
 // Decompiled from char __thiscall CDonkeyRole::SetFree(CDonkeyRole *this)
 bool  CDonkeyRole::SetFree(void) {
   
-  int v1; // eax
-  int v2; // eax
-  int v4; // [esp-8h] [ebp-10h]
+  unsigned int v1; // eax
+  std::list *v2; // eax
+  unsigned int v4; // [esp-8h] [ebp-10h]
   int v5; // [esp-4h] [ebp-Ch]
-  unsigned __int8 *SettlerPtr; // [esp+4h] [ebp-4h]
+  struct CSettler *SettlerPtr; // [esp+4h] [ebp-4h]
 
-  if ( !*((_DWORD *)this + 12) )
+  if ( !this->m_iTraderSettlerId )
     return 0;
-  SettlerPtr = CSettlerMgr::GetSettlerPtr(*((_DWORD *)this + 12));
+  SettlerPtr = CSettlerMgr::GetSettlerPtr(&g_cSettlerMgr, this->m_iTraderSettlerId);
   if ( CDonkeyRole::HasLoadedSomething(this) )
-    CDonkeyRole::DropGoods(this, (struct CSettler *)SettlerPtr);
-  v5 = IEntity::Type((unsigned __int16 *)SettlerPtr);
-  v4 = IEntity::Type((unsigned __int16 *)SettlerPtr);
+    CDonkeyRole::DropGoods(this, SettlerPtr);
+  v5 = IEntity::Type(SettlerPtr);
+  v4 = IEntity::Type(SettlerPtr);
   v1 = IEntity::Race(SettlerPtr);
-  v2 = CEntityToDoListMgr::SettlerJobList(v1, v4);
-  (*(void (__thiscall **)(unsigned __int8 *, int, int))(*(_DWORD *)SettlerPtr + 112))(SettlerPtr, v2, v5);
+  v2 = CEntityToDoListMgr::SettlerJobList(g_pEntityToDoListMgr, v1, v4);
+  SettlerPtr->NewToDoList(SettlerPtr, (int)v2, v5);
   return 0;
 }
 
 
 // address=[0x156a870]
-// Decompiled from char __thiscall CDonkeyRole::HasLoadGood(int *this, int a2)
-bool  CDonkeyRole::HasLoadGood(enum PILE_TYPES a2) {
+// Decompiled from char __thiscall CDonkeyRole::HasLoadGood(CDonkeyRole *this, int _tPileType)
+bool  CDonkeyRole::HasLoadGood(enum PILE_TYPES _tPileType) {
   
   int i; // [esp+4h] [ebp-4h]
 
   for ( i = 0; i < 2; ++i )
   {
-    if ( this[3 * i + 21] > 0 && this[3 * i + 20] == a2 )
+    if ( this->m_vGoodSlots[i].m_iAmount > 0 && this->m_vGoodSlots[i].m_iGood == _tPileType )
       return 1;
   }
   return 0;
@@ -490,14 +477,10 @@ bool  CDonkeyRole::HasLoadGood(enum PILE_TYPES a2) {
 
 
 // address=[0x156a8c0]
-// Decompiled from CDonkeyRole *__thiscall CDonkeyRole::SetTargetBuildingID(CDonkeyRole *this, int a2)
+// Decompiled from void __thiscall CDonkeyRole::SetTargetBuildingID(CDonkeyRole *this, int a2)
 void  CDonkeyRole::SetTargetBuildingID(int a2) {
   
-  CDonkeyRole *result; // eax
-
-  result = this;
-  *((_DWORD *)this + 13) = a2;
-  return result;
+  this->m_iTargetBuildingID = a2;
 }
 
 
@@ -505,7 +488,7 @@ void  CDonkeyRole::SetTargetBuildingID(int a2) {
 // Decompiled from int __thiscall CDonkeyRole::GetTargetBuildingID(CDonkeyRole *this)
 int  CDonkeyRole::GetTargetBuildingID(void) {
   
-  return *((_DWORD *)this + 13);
+  return this->m_iTargetBuildingID;
 }
 
 
@@ -513,31 +496,30 @@ int  CDonkeyRole::GetTargetBuildingID(void) {
 // Decompiled from void __thiscall CDonkeyRole::TargetBuildingDestroyed(CDonkeyRole *this)
 void  CDonkeyRole::TargetBuildingDestroyed(void) {
   
-  char IsNeutralTrader; // al
-  unsigned __int8 *v2; // eax
+  bool IsNeutralTrader; // al
+  struct CBuilding *v2; // eax
   int v3; // eax
-  CTradingBuildingRole *v4; // [esp+0h] [ebp-18h]
-  CTradingBuildingRole *v5; // [esp+4h] [ebp-14h]
-  unsigned __int8 *BuildingPtr; // [esp+8h] [ebp-10h]
-  unsigned __int8 *v7; // [esp+Ch] [ebp-Ch]
-  int v8; // [esp+10h] [ebp-8h]
+  CTradingBuildingRole *pBuildingRole; // [esp+4h] [ebp-14h] MAPDST
+  CBuilding *BuildingPtr; // [esp+8h] [ebp-10h]
+  CBuilding *v7; // [esp+Ch] [ebp-Ch]
+  int a2; // [esp+10h] [ebp-8h]
 
-  if ( *((_BYTE *)this + 47) && *((_DWORD *)this + 13) )
+  if ( this->m_bGoToTarget && this->m_iTargetBuildingID )
   {
-    BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((_DWORD *)this + 13));
-    v5 = (CTradingBuildingRole *)CBuilding::Role(BuildingPtr);
-    CTradingBuildingRole::UnregisterIncomingTrader(v5, *((_DWORD *)this + 12), 2);
+    BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, this->m_iTargetBuildingID);
+    pBuildingRole = (CTradingBuildingRole *)CBuilding::Role(BuildingPtr);
+    CTradingBuildingRole::UnregisterIncomingTrader(pBuildingRole, this->m_iTraderSettlerId, 2);
   }
   CDonkeyRole::SetTargetBuildingID(this, 0);
-  if ( *((_DWORD *)this + 14)
-    && (v8 = *((_DWORD *)this + 14), (v7 = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, v8)) != 0) )
+  if ( this->m_iDepartBuildingID
+    && (a2 = this->m_iDepartBuildingID, (v7 = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a2)) != 0) )
   {
     CDonkeyRole::SetDepartBuildingID(this, 0);
-    CDonkeyRole::SetTargetBuildingID(this, v8);
-    v4 = (CTradingBuildingRole *)CBuilding::Role(v7);
+    CDonkeyRole::SetTargetBuildingID(this, a2);
+    pBuildingRole = (CTradingBuildingRole *)CBuilding::Role(v7);
     IsNeutralTrader = CDonkeyRole::IsNeutralTrader(this);
-    CTradingBuildingRole::RegisterIncomingTrader(v4, *((_DWORD *)this + 12), 2, IsNeutralTrader);
-    v2 = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((_DWORD *)this + 13));
+    CTradingBuildingRole::RegisterIncomingTrader(pBuildingRole, this->m_iTraderSettlerId, 2, IsNeutralTrader);
+    v2 = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, this->m_iTargetBuildingID);
     v3 = CBuilding::EnsignPackedXY(v2);
     CDonkeyRole::MoveToTarget(this, v3, 0);
   }
@@ -551,18 +533,18 @@ void  CDonkeyRole::TargetBuildingDestroyed(void) {
 
 
 // address=[0x156aa30]
-// Decompiled from void __thiscall CDonkeyRole::SetDepartBuildingID(CMFCToolBarImages *this, int a2)
+// Decompiled from void __thiscall CDonkeyRole::SetDepartBuildingID(CDonkeyRole *this, int a2)
 void  CDonkeyRole::SetDepartBuildingID(int a2) {
   
-  *((_DWORD *)this + 14) = a2;
+  this->m_iDepartBuildingID = a2;
 }
 
 
 // address=[0x156aa50]
-// Decompiled from unsigned int __thiscall CDonkeyRole::GetDepartBuildingID(CUserToolsManager *this)
+// Decompiled from int __thiscall CDonkeyRole::GetDepartBuildingID(CDonkeyRole *this)
 int  CDonkeyRole::GetDepartBuildingID(void) {
   
-  return *((_DWORD *)this + 14);
+  return this->m_iDepartBuildingID;
 }
 
 
@@ -570,19 +552,19 @@ int  CDonkeyRole::GetDepartBuildingID(void) {
 // Decompiled from void __thiscall CDonkeyRole::DepartBuildingDestroyed(CDonkeyRole *this)
 void  CDonkeyRole::DepartBuildingDestroyed(void) {
   
-  CTradingBuildingRole *v1; // eax
-  unsigned __int8 *BuildingPtr; // [esp+4h] [ebp-Ch]
-  int v3; // [esp+8h] [ebp-8h]
+  CTradingBuildingRole *v1; // [esp+0h] [ebp-10h]
+  CBuilding *BuildingPtr; // [esp+4h] [ebp-Ch]
+  int iDep; // [esp+8h] [ebp-8h]
 
-  v3 = *((_DWORD *)this + 14);
+  iDep = this->m_iDepartBuildingID;
   CDonkeyRole::SetDepartBuildingID(this, 0);
-  if ( *((_BYTE *)this + 46) )
+  if ( this->m_bGoToSource )
   {
-    if ( !v3 && BBSupportDbgReport(2, "MapObjects\\Settler\\DonkeyRole.cpp", 1025, "iDep") == 1 )
+    if ( !iDep && BBSupportDbgReport(2, "MapObjects\\Settler\\DonkeyRole.cpp", 1025, "iDep") == 1 )
       __debugbreak();
-    BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, v3);
+    BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, iDep);
     v1 = (CTradingBuildingRole *)CBuilding::Role(BuildingPtr);
-    CTradingBuildingRole::UnregisterIncomingTrader(v1, *((_DWORD *)this + 12), 2);
+    CTradingBuildingRole::UnregisterIncomingTrader(v1, this->m_iTraderSettlerId, 2);
   }
   if ( !CDonkeyRole::GetTargetBuildingID(this) )
   {
@@ -593,82 +575,81 @@ void  CDonkeyRole::DepartBuildingDestroyed(void) {
 
 
 // address=[0x156ab10]
-// Decompiled from char __thiscall CDonkeyRole::DonkeyArrived(CDonkeyRole *this)
+// Decompiled from void __thiscall CDonkeyRole::DonkeyArrived(CDonkeyRole *this)
 void  CDonkeyRole::DonkeyArrived(void) {
   
-  unsigned __int8 *v1; // eax
-  void **VehiclePtr; // eax
-  int v4; // [esp-4h] [ebp-28h]
-  CTradingBuildingRole *v5; // [esp+4h] [ebp-20h]
-  CTradingBuildingRole *v6; // [esp+8h] [ebp-1Ch]
-  unsigned __int8 *SettlerPtr; // [esp+Ch] [ebp-18h]
-  CTradingBuildingRole *v8; // [esp+10h] [ebp-14h]
-  void **v9; // [esp+14h] [ebp-10h]
-  int v10; // [esp+18h] [ebp-Ch]
-  unsigned __int8 *BuildingPtr; // [esp+1Ch] [ebp-8h]
-  unsigned __int8 *v12; // [esp+1Ch] [ebp-8h]
-  unsigned __int8 *v13; // [esp+1Ch] [ebp-8h]
+  CPile *v1; // eax
+  int m_iTraderSettlerId; // [esp-4h] [ebp-28h]
+  CTradingBuildingRole *v3; // [esp+4h] [ebp-20h]
+  CTradingBuildingRole *v4; // [esp+8h] [ebp-1Ch]
+  struct CSettler *SettlerPtr; // [esp+Ch] [ebp-18h]
+  IBuildingRole *v6; // [esp+10h] [ebp-14h]
+  CCart *VehiclePtr; // [esp+14h] [ebp-10h]
+  IEntity *pPile; // [esp+18h] [ebp-Ch]
+  CBuilding *BuildingPtr; // [esp+1Ch] [ebp-8h]
+  CBuilding *v10; // [esp+1Ch] [ebp-8h]
+  CBuilding *v11; // [esp+1Ch] [ebp-8h]
 
-  *((_DWORD *)this + 27) = 0;
-  if ( *((_BYTE *)this + 46) )
+  this->m_iRemovedAmount = 0;
+  if ( this->m_bGoToSource )
   {
-    if ( *((_DWORD *)this + 14) )
+    if ( this->m_iDepartBuildingID )
     {
-      BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((_DWORD *)this + 14));
+      BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, this->m_iDepartBuildingID);
       if ( BuildingPtr )
       {
-        v8 = (CTradingBuildingRole *)CBuilding::Role(BuildingPtr);
-        CTradingBuildingRole::VehicleArrived(v8, *((_DWORD *)this + 12), 2);
+        v6 = CBuilding::Role(BuildingPtr);
+        CTradingBuildingRole::VehicleArrived((CTradingBuildingRole *)v6, this->m_iTraderSettlerId, 2);
       }
     }
-    if ( *((_BYTE *)this + 45) && !*((_BYTE *)this + 72) )
+    if ( this->m_bReturning && !this->m_uGood )
     {
-      if ( !*((_WORD *)this + 37)
+      if ( !this->m_uSourcePileID
         && BBSupportDbgReport(2, "MapObjects\\Settler\\DonkeyRole.cpp", 1077, "m_uSourcePileID > 0") == 1 )
       {
         __debugbreak();
       }
-      v10 = CMapObjectMgr::EntityPtr(*((unsigned __int16 *)this + 37));
-      if ( !v10 && BBSupportDbgReport(2, "MapObjects\\Settler\\DonkeyRole.cpp", 1079, "pPile != 0") == 1 )
+      pPile = CMapObjectMgr::EntityPtr(this->m_uSourcePileID);
+      if ( !pPile && BBSupportDbgReport(2, "MapObjects\\Settler\\DonkeyRole.cpp", 1079, "pPile != 0") == 1 )
         __debugbreak();
-      if ( (*(int (__thiscall **)(int))(*(_DWORD *)v10 + 40))(v10) < *((_DWORD *)this + 17)
+      if ( pPile->Amount() < this->m_iCargoAmount
         && BBSupportDbgReport(2, "MapObjects\\Settler\\DonkeyRole.cpp", 1080, "pPile->Amount() >= m_iCargoAmount") == 1 )
       {
         __debugbreak();
       }
-      *((_BYTE *)this + 72) = (*(int (__thiscall **)(int))(*(_DWORD *)v10 + 60))(v10);
-      v4 = *((_DWORD *)this + 12);
-      v1 = CPileMgr::operator[](*((unsigned __int16 *)this + 37));
-      CPile::ChangeAmountAndDetach((CPile *)v1, v4);
-      *((_WORD *)this + 37) = 0;
-      SettlerPtr = CSettlerMgr::GetSettlerPtr(*((_DWORD *)this + 12));
-      (*(void (__thiscall **)(CDonkeyRole *, unsigned __int8 *))(*(_DWORD *)this + 36))(this, SettlerPtr);
+      this->m_uGood = pPile->GetGoodType();
+      m_iTraderSettlerId = this->m_iTraderSettlerId;
+      v1 = CPileMgr::operator[](this->m_uSourcePileID);
+      CPile::ChangeAmountAndDetach(v1, m_iTraderSettlerId);
+      this->m_uSourcePileID = 0;
+      SettlerPtr = CSettlerMgr::GetSettlerPtr(&g_cSettlerMgr, this->m_iTraderSettlerId);
+      this->GetNextJob(this, SettlerPtr);
     }
   }
-  if ( *((_BYTE *)this + 47) )
+  if ( this->m_bGoToTarget )
   {
-    if ( *((_DWORD *)this + 13) )
+    if ( this->m_iTargetBuildingID )
     {
-      v12 = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((_DWORD *)this + 13));
-      if ( v12 )
+      v10 = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, this->m_iTargetBuildingID);
+      if ( v10 )
       {
-        v6 = (CTradingBuildingRole *)CBuilding::Role(v12);
-        CTradingBuildingRole::VehicleArrived(v6, *((_DWORD *)this + 12), 2);
+        v4 = (CTradingBuildingRole *)CBuilding::Role(v10);
+        CTradingBuildingRole::VehicleArrived(v4, this->m_iTraderSettlerId, 2);
       }
     }
-    if ( *((_DWORD *)this + 14) )
+    if ( this->m_iDepartBuildingID )
     {
-      v13 = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((_DWORD *)this + 14));
-      if ( v13 )
+      v11 = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, this->m_iDepartBuildingID);
+      if ( v11 )
       {
-        v5 = (CTradingBuildingRole *)CBuilding::Role(v13);
-        CTradingBuildingRole::VehicleArrivedAtTarget(v5, *((_DWORD *)this + 12), 2);
+        v3 = (CTradingBuildingRole *)CBuilding::Role(v11);
+        CTradingBuildingRole::VehicleArrivedAtTarget(v3, this->m_iTraderSettlerId, 2);
       }
     }
   }
-  if ( *((int *)this + 15) > 0 )
+  if ( this->m_iTargetCardID > 0 )
   {
-    if ( !CMapObjectMgr::ValidEntityId(*((_DWORD *)this + 15))
+    if ( !CMapObjectMgr::ValidEntityId(this->m_iTargetCardID)
       && BBSupportDbgReport(
            2,
            "MapObjects\\Settler\\DonkeyRole.cpp",
@@ -677,45 +658,48 @@ void  CDonkeyRole::DonkeyArrived(void) {
     {
       __debugbreak();
     }
-    VehiclePtr = (void **)CVehicleMgr::GetVehiclePtr(*((_DWORD *)this + 15));
-    v9 = VehiclePtr;
+    VehiclePtr = (CCart *)CVehicleMgr::GetVehiclePtr(this->m_iTargetCardID);
     if ( !VehiclePtr )
     {
-      *((_DWORD *)this + 15) = 0;
-      return (char)VehiclePtr;
+      this->m_iTargetCardID = 0;
+      return;
     }
-    if ( !j____RTDynamicCast(VehiclePtr, 0, &CVehicle__RTTI_Type_Descriptor_, &CCart__RTTI_Type_Descriptor_, 0)
+    if ( !j____RTDynamicCast(
+            (void **)&VehiclePtr->__vftable,
+            0,
+            &CVehicle__RTTI_Type_Descriptor_,
+            &CCart__RTTI_Type_Descriptor_,
+            0)
       && BBSupportDbgReport(2, "MapObjects\\Settler\\DonkeyRole.cpp", 1138, "dynamic_cast<CCart*>(pVehicle)!=NULL") == 1 )
     {
       __debugbreak();
     }
-    CCart::DonkeyArrived((CCart *)v9, *((_DWORD *)this + 12));
-    *((_DWORD *)this + 15) = 0;
+    CCart::DonkeyArrived(VehiclePtr, this->m_iTraderSettlerId);
+    this->m_iTargetCardID = 0;
   }
-  LOBYTE(VehiclePtr) = *((_BYTE *)this + 120);
-  if ( !(_BYTE)VehiclePtr )
-    return (char)VehiclePtr;
-  *((_BYTE *)this + 120) = 0;
-  LOBYTE(VehiclePtr) = CDonkeyRole::SetFree(this);
-  return (char)VehiclePtr;
+  if ( this->m_bGoingHome )
+  {
+    this->m_bGoingHome = 0;
+    CDonkeyRole::SetFree(this);
+  }
 }
 
 
 // address=[0x156ae00]
-// Decompiled from void __thiscall CDonkeyRole::MoveToTarget(CDonkeyRole *this, int a2, int a3)
-void  CDonkeyRole::MoveToTarget(int a2, int a3) {
+// Decompiled from void __thiscall CDonkeyRole::MoveToTarget(CDonkeyRole *this, int _iX, int _iY)
+void  CDonkeyRole::MoveToTarget(int _iX, int _iY) {
   
-  unsigned __int8 *SettlerPtr; // [esp+0h] [ebp-8h]
+  struct CSettler *SettlerPtr; // [esp+0h] [ebp-8h]
 
-  if ( a2 )
+  if ( _iX )
   {
-    if ( *((_DWORD *)this + 12) )
+    if ( this->m_iTraderSettlerId )
     {
-      SettlerPtr = CSettlerMgr::GetSettlerPtr(*((_DWORD *)this + 12));
-      IMovingEntity::WalkToXY((IMovingEntity *)SettlerPtr, a2, a3);
-      *((_BYTE *)this + 4) = 6;
-      IMovingEntity::SetDisplacementCosts(5);
-      (*(void (__thiscall **)(CDonkeyRole *, unsigned __int8 *))(*(_DWORD *)this + 16))(this, SettlerPtr);
+      SettlerPtr = CSettlerMgr::GetSettlerPtr(&g_cSettlerMgr, this->m_iTraderSettlerId);
+      IMovingEntity::WalkToXY(SettlerPtr, _iX, _iY);
+      this->m_iTask = 6;
+      IMovingEntity::SetDisplacementCosts(SettlerPtr, 5);
+      this->Go(this, SettlerPtr);
     }
   }
 }
@@ -725,91 +709,84 @@ void  CDonkeyRole::MoveToTarget(int a2, int a3) {
 // Decompiled from int __thiscall CDonkeyRole::OwnerId(CDonkeyRole *this)
 int  CDonkeyRole::OwnerId(void) {
   
-  unsigned __int8 *SettlerPtr; // [esp+4h] [ebp-4h]
+  CSettler *pSettler; // [esp+4h] [ebp-4h]
 
-  SettlerPtr = CSettlerMgr::GetSettlerPtr(*((_DWORD *)this + 12));
-  if ( !SettlerPtr && BBSupportDbgReport(2, "MapObjects\\Settler\\DonkeyRole.cpp", 1221, "pSettler != NULL") == 1 )
+  pSettler = CSettlerMgr::GetSettlerPtr(&g_cSettlerMgr, this->m_iTraderSettlerId);
+  if ( !pSettler && BBSupportDbgReport(2, "MapObjects\\Settler\\DonkeyRole.cpp", 1221, "pSettler != NULL") == 1 )
     __debugbreak();
-  if ( SettlerPtr )
-    return IEntity::OwnerId(SettlerPtr);
+  if ( pSettler )
+    return IEntity::OwnerId(pSettler);
   else
     return 0;
 }
 
 
 // address=[0x156aed0]
-// Decompiled from CDonkeyRole *__thiscall CDonkeyRole::UpdateCatapultPosition(CDonkeyRole *this, int a2)
+// Decompiled from void __thiscall CDonkeyRole::UpdateCatapultPosition(CDonkeyRole *this, int a2)
 void  CDonkeyRole::UpdateCatapultPosition(int a2) {
   
-  CDonkeyRole *result; // eax
-  unsigned __int8 *SettlerPtr; // [esp+0h] [ebp-8h]
+  struct CSettler *SettlerPtr; // [esp+0h] [ebp-8h]
 
-  result = this;
-  if ( !*((_WORD *)this + 38) )
-    return result;
-  SettlerPtr = CSettlerMgr::GetSettlerPtr(*((_DWORD *)this + 12));
-  *((_DWORD *)this + 6) = a2;
-  result = this;
-  if ( !*((_BYTE *)this + 47) )
-    return result;
-  IMovingEntity::WalkToXY((IMovingEntity *)SettlerPtr, *((_DWORD *)this + 6), 0);
-  return (CDonkeyRole *)(*(int (__thiscall **)(CDonkeyRole *, unsigned __int8 *))(*(_DWORD *)this + 16))(
-                          this,
-                          SettlerPtr);
+  if ( this->m_uDestinationEntityID )
+  {
+    SettlerPtr = CSettlerMgr::GetSettlerPtr(&g_cSettlerMgr, this->m_iTraderSettlerId);
+    this->m_iDestinationPosition = a2;
+    if ( this->m_bGoToTarget )
+    {
+      IMovingEntity::WalkToXY(SettlerPtr, this->m_iDestinationPosition, 0);
+      this->Go(this, SettlerPtr);
+    }
+  }
 }
 
 
 // address=[0x156af40]
-// Decompiled from unsigned int __thiscall CDonkeyRole::ComeToBuildUpCart(CDonkeyRole *this, int a2, unsigned int a3)
-void  CDonkeyRole::ComeToBuildUpCart(int a2, int a3) {
+// Decompiled from void __thiscall CDonkeyRole::ComeToBuildUpCart(CDonkeyRole *this, int a2, unsigned int _iCardID)
+void  CDonkeyRole::ComeToBuildUpCart(int a2, int _iCardID) {
   
-  int v3; // eax
-  int v4; // eax
-  unsigned int result; // eax
-  unsigned __int8 *SettlerPtr; // [esp+0h] [ebp-8h]
+  unsigned int v3; // eax
+  std::list *v4; // eax
+  CSettler *SettlerPtr; // [esp+0h] [ebp-8h]
 
-  if ( !CMapObjectMgr::ValidEntityId(a3)
+  if ( !CMapObjectMgr::ValidEntityId(_iCardID)
     && BBSupportDbgReport(2, "MapObjects\\Settler\\DonkeyRole.cpp", 1180, "g_pMapObjectMgr->ValidEntityId(_iCardID)") == 1 )
   {
     __debugbreak();
   }
-  SettlerPtr = CSettlerMgr::GetSettlerPtr(*((_DWORD *)this + 12));
+  SettlerPtr = CSettlerMgr::GetSettlerPtr(&g_cSettlerMgr, this->m_iTraderSettlerId);
   v3 = IEntity::Race(SettlerPtr);
-  v4 = CEntityToDoListMgr::SettlerJobList(v3, 237);
-  (*(void (__thiscall **)(unsigned __int8 *, int, int))(*(_DWORD *)SettlerPtr + 112))(SettlerPtr, v4, 237);
-  (*(void (__thiscall **)(CDonkeyRole *, unsigned __int8 *))(*(_DWORD *)this + 40))(this, SettlerPtr);
+  v4 = CEntityToDoListMgr::SettlerJobList(g_pEntityToDoListMgr, v3, 0xEDu);
+  SettlerPtr->NewToDoList(SettlerPtr, (int)v4, 237);
+  this->TakeJob(this, SettlerPtr);
   CDonkeyRole::MoveToTarget(this, a2, 0);
-  result = a3;
-  *((_DWORD *)this + 15) = a3;
-  *((_DWORD *)this + 16) = 5;
-  return result;
+  this->m_iTargetCardID = _iCardID;
+  this->m_iJobType = 5;
 }
 
 
 // address=[0x156b000]
-// Decompiled from int __thiscall CDonkeyRole::SetJobType(CDonkeyRole *this, int a2)
-void  CDonkeyRole::SetJobType(int a2) {
+// Decompiled from void __thiscall CDonkeyRole::SetJobType(CDonkeyRole *this, int _iJobType)
+void  CDonkeyRole::SetJobType(int _iJobType) {
   
-  int result; // eax
+  CSettler *v2; // [esp+0h] [ebp-8h]
+  CSettler *SettlerPtr; // [esp+0h] [ebp-8h]
 
-  if ( a2 )
+  if ( _iJobType )
   {
-    if ( a2 == 3 || a2 == 4 )
+    if ( _iJobType == 3 || _iJobType == 4 )
     {
-      CSettlerMgr::GetSettlerPtr(*((_DWORD *)this + 12));
-      IMovingEntity::SetDisplacementCosts(10);
+      SettlerPtr = CSettlerMgr::GetSettlerPtr(&g_cSettlerMgr, this->m_iTraderSettlerId);
+      IMovingEntity::SetDisplacementCosts(SettlerPtr, 10);
     }
   }
   else
   {
-    if ( *((_DWORD *)this + 13) )
+    if ( this->m_iTargetBuildingID )
       CDonkeyRole::SetTargetBuildingID(this, 0);
-    CSettlerMgr::GetSettlerPtr(*((_DWORD *)this + 12));
-    IMovingEntity::SetDisplacementCosts(5);
+    v2 = CSettlerMgr::GetSettlerPtr(&g_cSettlerMgr, this->m_iTraderSettlerId);
+    IMovingEntity::SetDisplacementCosts(v2, 5);
   }
-  result = a2;
-  *((_DWORD *)this + 16) = a2;
-  return result;
+  this->m_iJobType = _iJobType;
 }
 
 
@@ -817,43 +794,35 @@ void  CDonkeyRole::SetJobType(int a2) {
 // Decompiled from int __thiscall CDonkeyRole::GetJobType(CDonkeyRole *this)
 int  CDonkeyRole::GetJobType(void) {
   
-  return *((_DWORD *)this + 16);
+  return this->m_iJobType;
 }
 
 
 // address=[0x156b0a0]
-// Decompiled from _BYTE *__thiscall CDonkeyRole::SetGoToSource(_BYTE *this, char a2)
+// Decompiled from void __thiscall CDonkeyRole::SetGoToSource(CDonkeyRole *this, bool a2)
 void  CDonkeyRole::SetGoToSource(bool a2) {
   
-  _BYTE *result; // eax
-
-  result = this;
-  this[46] = a2;
-  return result;
+  this->m_bGoToSource = a2;
 }
 
 
 // address=[0x156b0c0]
-// Decompiled from _BYTE *__thiscall CDonkeyRole::SetGoToTarget(_BYTE *this, char a2)
+// Decompiled from void __thiscall CDonkeyRole::SetGoToTarget(CDonkeyRole *this, bool a2)
 void  CDonkeyRole::SetGoToTarget(bool a2) {
   
-  _BYTE *result; // eax
-
-  result = this;
-  this[47] = a2;
-  return result;
+  this->m_bGoToTarget = a2;
 }
 
 
 // address=[0x156b0e0]
-// Decompiled from char __thiscall CDonkeyRole::GetNextJob(CDonkeyRole *this, struct CSettler *a2)
+// Decompiled from void __thiscall CDonkeyRole::GetNextJob(CDonkeyRole *this, struct CSettler *a2)
 void  CDonkeyRole::GetNextJob(class CSettler * a2) {
   
   IMovingEntity::IncToDoListIter(a2);
   if ( IMovingEntity::IsEndIter(a2) )
-    return CDonkeyRole::SetFree(this);
+    CDonkeyRole::SetFree(this);
   else
-    return (*(int (__thiscall **)(CDonkeyRole *, struct CSettler *))(*(_DWORD *)this + 40))(this, a2);
+    this->TakeJob(this, a2);
 }
 
 
@@ -869,10 +838,10 @@ void  CDonkeyRole::FillDialog(bool a2) {
   CInfoExchange::Clear(&g_cVehicleLoadInfo);
   for ( i = 0; i < 2; ++i )
   {
-    dword_3F1E790[3 * i] = *((_DWORD *)this + 3 * i + 20);
-    dword_3F1E794[3 * i] = *((_DWORD *)this + 3 * i + 21);
+    g_cVehicleLoadInfo.m_vSlots[i].m_iGood = this->m_vGoodSlots[i].m_iGood;
+    g_cVehicleLoadInfo.m_vSlots[i].m_iAmount = this->m_vGoodSlots[i].m_iAmount;
   }
-  dword_3F1E78C = 24;
+  g_cVehicleLoadInfo.m_iUnknown = 24;
   v3 = 604;
   if ( !a2 )
     v3 = 602;
@@ -885,165 +854,140 @@ void  CDonkeyRole::FillDialog(bool a2) {
 
 
 // address=[0x156b210]
-// Decompiled from char __thiscall CDonkeyRole::SetNeutralTraderStatus(CDonkeyRole *this, bool a2)
+// Decompiled from void __thiscall CDonkeyRole::SetNeutralTraderStatus(CDonkeyRole *this, bool a2)
 void  CDonkeyRole::SetNeutralTraderStatus(bool a2) {
   
-  unsigned __int8 *SettlerPtr; // eax
-  unsigned __int8 *v4; // [esp+0h] [ebp-8h]
+  CSettler *pDonkey; // [esp+0h] [ebp-8h]
 
-  SettlerPtr = CSettlerMgr::GetSettlerPtr(*((_DWORD *)this + 12));
-  v4 = SettlerPtr;
-  if ( !SettlerPtr )
+  pDonkey = CSettlerMgr::GetSettlerPtr(&g_cSettlerMgr, this->m_iTraderSettlerId);
+  if ( !pDonkey && BBSupportDbgReport(2, "MapObjects\\Settler\\DonkeyRole.cpp", 1606, "pDonkey!=NULL") == 1 )
+    __debugbreak();
+  if ( pDonkey )
   {
-    SettlerPtr = (unsigned __int8 *)BBSupportDbgReport(2, "MapObjects\\Settler\\DonkeyRole.cpp", 1606, "pDonkey!=NULL");
-    if ( SettlerPtr == (unsigned __int8 *)1 )
-      __debugbreak();
-  }
-  if ( !v4 )
-    return (char)SettlerPtr;
-  if ( a2 )
-  {
-    IEntity::ClearFlagBits(v4, ENTITY_FLAG_VulnerableMask);
-    if ( !*((_DWORD *)this + 29) || *((_DWORD *)this + 29) == 2 )
+    if ( a2 )
     {
-      LOBYTE(SettlerPtr) = (_BYTE)this;
-      *((_DWORD *)this + 29) = 1;
-      *((_BYTE *)this + 104) = a2;
-      return (char)SettlerPtr;
+      IEntity::ClearFlagBits(pDonkey, ENTITY_FLAG_VulnerableMask);
+      if ( !this->m_iTradingState || this->m_iTradingState == 2 )
+      {
+        this->m_iTradingState = 1;
+        this->m_bIsNeutralTrader = a2;
+        return;
+      }
+      if ( this->m_iTradingState == 1 )
+      {
+        this->m_iTradingState = 2;
+        this->m_bIsNeutralTrader = a2;
+        return;
+      }
     }
-    if ( *((_DWORD *)this + 29) == 1 )
+    else
     {
-      *((_DWORD *)this + 29) = 2;
-      LOBYTE(SettlerPtr) = a2;
-      *((_BYTE *)this + 104) = a2;
-      return (char)SettlerPtr;
+      this->m_iTradingState = 0;
     }
+    this->m_bIsNeutralTrader = a2;
   }
-  else
-  {
-    *((_DWORD *)this + 29) = 0;
-  }
-  LOBYTE(SettlerPtr) = a2;
-  *((_BYTE *)this + 104) = a2;
-  return (char)SettlerPtr;
 }
 
 
 // address=[0x156b2d0]
-// Decompiled from CDonkeyRole *__thiscall CDonkeyRole::ClearNeutralTraderStatus(CDonkeyRole *this)
+// Decompiled from void __thiscall CDonkeyRole::ClearNeutralTraderStatus(CDonkeyRole *this)
 void  CDonkeyRole::ClearNeutralTraderStatus(void) {
   
-  CDonkeyRole *result; // eax
-
-  result = this;
-  *((_BYTE *)this + 104) = 0;
-  *((_DWORD *)this + 29) = 0;
-  return result;
+  this->m_bIsNeutralTrader = 0;
+  this->m_iTradingState = 0;
 }
 
 
 // address=[0x156b2f0]
-// Decompiled from CDonkeyRole *__thiscall CDonkeyRole::TryToGoHome(CDonkeyRole *this)
+// Decompiled from void __thiscall CDonkeyRole::TryToGoHome(CDonkeyRole *this)
 void  CDonkeyRole::TryToGoHome(void) {
   
-  CDonkeyRole *result; // eax
+  int v1; // eax
   int v2; // eax
-  int v3; // eax
-  CDonkeyRole *v4; // esi
-  int v5; // eax
-  int v6; // [esp-4h] [ebp-10h]
-  unsigned __int8 *SettlerPtr; // [esp+4h] [ebp-8h]
+  int v3; // esi
+  int v4; // eax
+  int v5; // [esp-4h] [ebp-10h]
+  struct CSettler *SettlerPtr; // [esp+4h] [ebp-8h]
 
-  result = this;
-  if ( !*((_DWORD *)this + 12) )
-    return result;
-  SettlerPtr = CSettlerMgr::GetSettlerPtr(*((_DWORD *)this + 12));
-  v6 = Y16X16::UnpackYFast(*((_DWORD *)this + 7));
-  v2 = Y16X16::UnpackXFast(*((_DWORD *)this + 7));
-  v3 = CWorldManager::Index(v2, v6);
-  v4 = (CDonkeyRole *)CWorldManager::EcoSectorId(v3);
-  v5 = IEntity::WorldIdx();
-  result = (CDonkeyRole *)CWorldManager::EcoSectorId(v5);
-  if ( v4 != result )
-    return result;
-  CDonkeyRole::SetFree(this);
-  IAnimatedEntity::SetFrame(1);
-  IMovingEntity::WalkToXY((IMovingEntity *)SettlerPtr, *((_DWORD *)this + 7), 0);
-  *((_BYTE *)this + 4) = 6;
-  IMovingEntity::SetDisplacementCosts(5);
-  (*(void (__thiscall **)(CDonkeyRole *, unsigned __int8 *))(*(_DWORD *)this + 16))(this, SettlerPtr);
-  result = this;
-  *((_BYTE *)this + 120) = 1;
-  return result;
+  if ( this->m_iTraderSettlerId )
+  {
+    SettlerPtr = CSettlerMgr::GetSettlerPtr(&g_cSettlerMgr, this->m_iTraderSettlerId);
+    v5 = Y16X16::UnpackYFast(this->m_iStartPosition);
+    v1 = Y16X16::UnpackXFast(this->m_iStartPosition);
+    v2 = CWorldManager::Index(v1, v5);
+    v3 = CWorldManager::EcoSectorId(v2);
+    v4 = IEntity::WorldIdx(SettlerPtr);
+    if ( v3 == CWorldManager::EcoSectorId(v4) )
+    {
+      CDonkeyRole::SetFree(this);
+      IAnimatedEntity::SetFrame(SettlerPtr, 1u);
+      IMovingEntity::WalkToXY(SettlerPtr, this->m_iStartPosition, 0);
+      this->m_iTask = 6;
+      IMovingEntity::SetDisplacementCosts(SettlerPtr, 5);
+      this->Go(this, SettlerPtr);
+      this->m_bGoingHome = 1;
+    }
+  }
 }
 
 
 // address=[0x156b3c0]
-// Decompiled from unsigned __int8 *__thiscall CDonkeyRole::GoToHomeTradingBuilding(CDonkeyRole *this)
+// Decompiled from void __thiscall CDonkeyRole::GoToHomeTradingBuilding(CDonkeyRole *this)
 void  CDonkeyRole::GoToHomeTradingBuilding(void) {
   
-  unsigned __int8 *result; // eax
-  unsigned __int8 *BuildingPtr; // eax
-  unsigned __int8 *v3; // eax
-  int v4; // [esp+0h] [ebp-10h]
-  IMovingEntity *v5; // [esp+4h] [ebp-Ch]
-  int v6; // [esp+8h] [ebp-8h]
+  struct CBuilding *BuildingPtr; // eax
+  struct CBuilding *v2; // eax
+  int m_iDepartBuildingID; // [esp+0h] [ebp-10h]
+  CSettler *pSettler; // [esp+4h] [ebp-Ch]
+  int m_iStartPosition; // [esp+8h] [ebp-8h]
 
-  result = CSettlerMgr::GetSettlerPtr(*((_DWORD *)this + 12));
-  v5 = (IMovingEntity *)result;
-  if ( !result )
+  pSettler = CSettlerMgr::GetSettlerPtr(&g_cSettlerMgr, this->m_iTraderSettlerId);
+  if ( !pSettler && BBSupportDbgReport(2, "MapObjects\\Settler\\DonkeyRole.cpp", 1258, "pSettler!=NULL") == 1 )
+    __debugbreak();
+  if ( pSettler )
   {
-    result = (unsigned __int8 *)BBSupportDbgReport(2, "MapObjects\\Settler\\DonkeyRole.cpp", 1258, "pSettler!=NULL");
-    if ( result == (unsigned __int8 *)1 )
-      __debugbreak();
-  }
-  if ( !v5 )
-    return result;
-  v6 = *((_DWORD *)this + 7);
-  if ( *((_DWORD *)this + 29) == 1 && *((_DWORD *)this + 14) )
-  {
-    BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((_DWORD *)this + 14));
-    v6 = CBuilding::EnsignPackedXY(BuildingPtr);
-  }
-  if ( *((_DWORD *)this + 29) == 2 )
-  {
-    if ( *((_DWORD *)this + 13) )
+    m_iStartPosition = this->m_iStartPosition;
+    if ( this->m_iTradingState == 1 && this->m_iDepartBuildingID )
     {
-      v3 = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((_DWORD *)this + 13));
-      v6 = CBuilding::EnsignPackedXY(v3);
+      BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, this->m_iDepartBuildingID);
+      m_iStartPosition = CBuilding::EnsignPackedXY(BuildingPtr);
     }
+    if ( this->m_iTradingState == 2 )
+    {
+      if ( this->m_iTargetBuildingID )
+      {
+        v2 = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, this->m_iTargetBuildingID);
+        m_iStartPosition = CBuilding::EnsignPackedXY(v2);
+      }
+    }
+    IMovingEntity::WalkToXY(pSettler, m_iStartPosition, 0);
+    m_iDepartBuildingID = this->m_iDepartBuildingID;
+    this->m_iDepartBuildingID = this->m_iTargetBuildingID;
+    this->m_iTargetBuildingID = m_iDepartBuildingID;
+    CDonkeyRole::ClearNeutralTraderStatus(this);
+    this->m_bGoingHome = 1;
   }
-  IMovingEntity::WalkToXY(v5, v6, 0);
-  v4 = *((_DWORD *)this + 14);
-  *((_DWORD *)this + 14) = *((_DWORD *)this + 13);
-  *((_DWORD *)this + 13) = v4;
-  CDonkeyRole::ClearNeutralTraderStatus(this);
-  result = (unsigned __int8 *)this;
-  *((_BYTE *)this + 120) = 1;
-  return result;
 }
 
 
 // address=[0x156b4b0]
-// Decompiled from char *__thiscall CDonkeyRole::CDonkeyRole(char *this, int a2)
+// Decompiled from CDonkeyRole *__thiscall CDonkeyRole::CDonkeyRole(CDonkeyRole *this, struct std::istream *a1)
  CDonkeyRole::CDonkeyRole(std::istream & a2) {
   
-  int v3; // [esp+4h] [ebp-20h] BYREF
+  int a2; // [esp+4h] [ebp-20h] BYREF
   int pExceptionObject; // [esp+8h] [ebp-1Ch] BYREF
   int i; // [esp+Ch] [ebp-18h]
   unsigned int v6; // [esp+10h] [ebp-14h] BYREF
-  char *v7; // [esp+14h] [ebp-10h]
   int v8; // [esp+20h] [ebp-4h]
 
-  v7 = this;
-  ISettlerRole::ISettlerRole(this, a2);
+  ISettlerRole::ISettlerRole(this, a1);
   v8 = 0;
-  *(_DWORD *)v7 = &CDonkeyRole::_vftable_;
-  *((_DWORD *)v7 + 27) = 0;
-  *((_DWORD *)v7 + 28) = 0;
-  *((_DWORD *)v7 + 29) = 0;
-  v7[120] = 0;
-  operator^<unsigned int>(a2, &v6);
+  this->__vftable = (CDonkeyRole_vtbl *)&CDonkeyRole::_vftable_;
+  this->m_iRemovedAmount = 0;
+  this->m_iTotalAmount = 0;
+  this->m_iTradingState = 0;
+  this->m_bGoingHome = 0;
+  operator^<unsigned int>(a1, &v6);
   if ( !v6 || v6 > 5 )
   {
     BBSupportTracePrintF(3, "load output defect Unknown fileFormatVersion for CDonkeyRole");
@@ -1051,80 +995,78 @@ void  CDonkeyRole::GoToHomeTradingBuilding(void) {
     CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
     _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
   }
-  operator^<unsigned char>(a2, v7 + 44);
-  operator^<bool>(a2, v7 + 45);
-  operator^<bool>(a2, v7 + 46);
-  operator^<bool>(a2, v7 + 47);
-  operator^<int>(a2, (int)(v7 + 48));
-  operator^<int>(a2, (int)(v7 + 52));
-  operator^<int>(a2, (int)(v7 + 56));
-  operator^<int>(a2, (int)(v7 + 60));
-  operator^<int>(a2, (int)(v7 + 64));
-  operator^<int>(a2, (int)(v7 + 68));
-  operator^<unsigned char>(a2, v7 + 72);
-  operator^<unsigned short>(a2, v7 + 74);
-  operator^<unsigned short>(a2, v7 + 76);
+  operator^<unsigned char>(a1, &this->m_uCurrentTask);
+  operator^<bool>(a1, &this->m_bReturning);
+  operator^<bool>(a1, &this->m_bGoToSource);
+  operator^<bool>(a1, &this->m_bGoToTarget);
+  operator^<int>(a1, &this->m_iTraderSettlerId);
+  operator^<int>(a1, &this->m_iTargetBuildingID);
+  operator^<int>(a1, &this->m_iDepartBuildingID);
+  operator^<int>(a1, &this->m_iTargetCardID);
+  operator^<int>(a1, &this->m_iJobType);
+  operator^<int>(a1, &this->m_iCargoAmount);
+  operator^<unsigned char>(a1, &this->m_uGood);
+  operator^<unsigned short>(a1, &this->m_uSourcePileID);
+  operator^<unsigned short>(a1, &this->m_uDestinationEntityID);
   for ( i = 0; i < 2; ++i )
   {
-    operator^<int>(a2, (int)&v7[12 * i + 84]);
-    operator^<int>(a2, (int)&v7[12 * i + 88]);
-    operator^<int>(a2, (int)&v7[12 * i + 80]);
+    operator^<int>(a1, &this->m_vGoodSlots[i].m_iAmount);
+    operator^<int>(a1, &this->m_vGoodSlots[i].m_iU8);
+    operator^<int>(a1, &this->m_vGoodSlots[i].m_iGood);
   }
   if ( v6 == 2 )
-    operator^<bool>(a2, v7 + 104);
+    operator^<bool>(a1, &this->m_bIsNeutralTrader);
   if ( v6 >= 3 )
   {
-    operator^<bool>(a2, v7 + 104);
-    operator^<int>(a2, (int)(v7 + 108));
+    operator^<bool>(a1, &this->m_bIsNeutralTrader);
+    operator^<int>(a1, &this->m_iRemovedAmount);
   }
   if ( v6 >= 4 )
   {
-    operator^<int>(a2, (int)&v3);
-    *((_DWORD *)v7 + 29) = v3;
+    operator^<int>(a1, &a2);
+    this->m_iTradingState = a2;
   }
   if ( v6 == 5 )
-    operator^<bool>(a2, v7 + 120);
-  return v7;
+    operator^<bool>(a1, &this->m_bGoingHome);
+  return this;
 }
 
 
 // address=[0x156b770]
-// Decompiled from int __thiscall CDonkeyRole::Store(struct CPersistence *this, struct std::ostream *a2)
-void  CDonkeyRole::Store(std::ostream & a2) {
+// Decompiled from void __thiscall CDonkeyRole::Store(CDonkeyRole *this, struct std::ostream *_rStream)
+void  CDonkeyRole::Store(std::ostream & _rStream) {
   
-  int v3; // [esp+0h] [ebp-10h] BYREF
-  int v4; // [esp+4h] [ebp-Ch] BYREF
+  int m_iTradingState; // [esp+0h] [ebp-10h] BYREF
+  unsigned int v3; // [esp+4h] [ebp-Ch] BYREF
   int i; // [esp+8h] [ebp-8h]
-  struct CPersistence *v6; // [esp+Ch] [ebp-4h]
 
-  v6 = this;
-  ISettlerRole::Store(this, a2);
-  v4 = 5;
-  operator^<unsigned int>(a2, &v4);
-  operator^<unsigned char>(a2, (int)v6 + 44);
-  operator^<bool>((int)a2, (int)v6 + 45);
-  operator^<bool>((int)a2, (int)v6 + 46);
-  operator^<bool>((int)a2, (int)v6 + 47);
-  operator^<int>((int)a2, (int *)v6 + 12);
-  operator^<int>((int)a2, (int *)v6 + 13);
-  operator^<int>((int)a2, (int *)v6 + 14);
-  operator^<int>((int)a2, (int *)v6 + 15);
-  operator^<int>((int)a2, (int *)v6 + 16);
-  operator^<int>((int)a2, (int *)v6 + 17);
-  operator^<unsigned char>(a2, (int)v6 + 72);
-  operator^<unsigned short>((int)a2, (__int16 *)v6 + 37);
-  operator^<unsigned short>((int)a2, (__int16 *)v6 + 38);
+  ISettlerRole::Store(this, _rStream);
+  v3 = 5;
+  operator^<unsigned int>(_rStream, &v3);
+  operator^<unsigned char>(_rStream, &this->m_uCurrentTask);
+  operator^<bool>(_rStream, &this->m_bReturning);
+  operator^<bool>(_rStream, &this->m_bGoToSource);
+  operator^<bool>(_rStream, &this->m_bGoToTarget);
+  operator^<int>(_rStream, &this->m_iTraderSettlerId);
+  operator^<int>(_rStream, &this->m_iTargetBuildingID);
+  operator^<int>(_rStream, &this->m_iDepartBuildingID);
+  operator^<int>(_rStream, &this->m_iTargetCardID);
+  operator^<int>(_rStream, &this->m_iJobType);
+  operator^<int>(_rStream, &this->m_iCargoAmount);
+  operator^<unsigned char>(_rStream, &this->m_uGood);
+  operator^<unsigned short>(_rStream, &this->m_uSourcePileID);
+  operator^<unsigned short>(_rStream, &this->m_uDestinationEntityID);
   for ( i = 0; i < 2; ++i )
   {
-    operator^<int>((int)a2, (int *)v6 + 3 * i + 21);
-    operator^<int>((int)a2, (int *)v6 + 3 * i + 22);
-    operator^<int>((int)a2, (int *)v6 + 3 * i + 20);
+    operator^<int>(_rStream, &this->m_vGoodSlots[i].m_iAmount);
+    operator^<int>(_rStream, &this->m_vGoodSlots[i].m_iU8);
+    operator^<int>(_rStream, &this->m_vGoodSlots[i].m_iGood);
   }
-  operator^<bool>((int)a2, (int)v6 + 104);
-  operator^<int>((int)a2, (int *)v6 + 27);
-  v3 = *((_DWORD *)v6 + 29);
-  operator^<int>((int)a2, &v3);
-  return operator^<bool>((int)a2, (int)v6 + 120);
+  operator^<bool>(_rStream, &this->m_bIsNeutralTrader);
+  operator^<int>(_rStream, &this->m_iRemovedAmount);
+  m_iTradingState = this->m_iTradingState;
+  operator^<int>(_rStream, &m_iTradingState);
+  operator^<bool>(_rStream, &this->m_bGoingHome);
 }
 
 
@@ -1148,19 +1090,18 @@ int  CDonkeyRole::GetSettlerRole(void)const {
 // Decompiled from bool __thiscall CDonkeyRole::IsUnEmployed(CDonkeyRole *this)
 bool  CDonkeyRole::IsUnEmployed(void)const {
   
-  return *((_DWORD *)this + 16) == 0;
+  return this->m_iJobType == 0;
 }
 
 
 // address=[0x1588540]
-// Decompiled from int __cdecl CDonkeyRole::Load(int a1)
+// Decompiled from int __cdecl CDonkeyRole::Load(struct std::istream *a1)
 class CDonkeyRole * __cdecl CDonkeyRole::Load(std::istream & a1) {
   
   void **v1; // eax
-  struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
 
-  v1 = (void **)CPersistence::New(a1, &CPersistence__RTTI_Type_Descriptor_);
-  return j____RTDynamicCast(v1, 0, v3, &CDonkeyRole__RTTI_Type_Descriptor_, 1);
+  v1 = (void **)CPersistence::New(a1);
+  return j____RTDynamicCast(v1, 0, &CPersistence__RTTI_Type_Descriptor_, &CDonkeyRole__RTTI_Type_Descriptor_, 1);
 }
 
 
@@ -1174,27 +1115,27 @@ class CDonkeyRole * __cdecl CDonkeyRole::Load(std::istream & a1) {
   int i; // [esp+0h] [ebp-8h]
 
   ISettlerRole::ISettlerRole(this);
-  this->__vftable = (ISettlerRole_vtbl *)&CDonkeyRole::_vftable_;
-  this->m_iU4 = 0;
-  this->m_iU6 = 0;
-  this->field_68 = 0;
-  this->field_6C = 0;
-  this->field_70 = 0;
-  this->field_74 = 0;
-  this->field_78 = 0;
-  this->m_bU2c = 0;
+  this->__vftable = (CDonkeyRole_vtbl *)&CDonkeyRole::_vftable_;
+  this->m_iTargetCardID = 0;
+  this->m_iCargoAmount = 0;
+  this->m_bIsNeutralTrader = 0;
+  this->m_iRemovedAmount = 0;
+  this->m_iTotalAmount = 0;
+  this->m_iTradingState = 0;
+  this->m_bGoingHome = 0;
+  this->m_uCurrentTask = 0;
   for ( i = 0; i < 2; ++i )
   {
-    this->m_vUnknown[i].m_iU0 = 0;
-    this->m_vUnknown[i].m_iU4 = 0;
+    this->m_vGoodSlots[i].m_iGood = 0;
+    this->m_vGoodSlots[i].m_iAmount = 0;
   }
-  this->m_iU3 = 0;
-  this->m_bU2 = 0;
-  this->field_4C = 0;
-  this->field_4A = 0;
-  this->m_iU5 = 0;
-  this->m_bU2e = 0;
-  this->m_bU2f = 0;
+  this->m_iDepartBuildingID = 0;
+  this->m_iTargetBuildingID = 0;
+  this->m_uDestinationEntityID = 0;
+  this->m_uSourcePileID = 0;
+  this->m_iJobType = 0;
+  this->m_bGoToSource = 0;
+  this->m_bGoToTarget = 0;
   return this;
 }
 
@@ -1209,310 +1150,310 @@ class CDonkeyRole * __cdecl CDonkeyRole::Load(std::istream & a1) {
 
 
 // address=[0x156ba50]
-// Decompiled from void __thiscall CDonkeyRole::TakeJob(CDonkeyRole *this, struct CSettler *a2)
-void  CDonkeyRole::TakeJob(class CSettler * a2) {
+// Decompiled from void __thiscall CDonkeyRole::TakeJob(CDonkeyRole *this, struct CSettler *_pSettler)
+void  CDonkeyRole::TakeJob(class CSettler * _pSettler) {
   
-  const struct CEntityTask *ActualTask; // eax
-  unsigned int v3; // eax
+  CEntityTask *ActualTask; // eax
+  DWORD v3; // eax
   int v4; // eax
   int v5; // eax
   int v6; // eax
-  unsigned __int8 *BuildingPtr; // eax
+  struct CBuilding *BuildingPtr; // eax
   int v8; // eax
-  int v9; // eax
+  IEntity *v9; // eax
   int v10; // eax
-  char IsNeutralTrader; // al
+  bool IsNeutralTrader; // al
   int v12; // eax
   int v13; // eax
   int v14; // [esp+0h] [ebp-18h]
-  CTradingBuildingRole *v15; // [esp+8h] [ebp-10h]
-  unsigned __int8 *v16; // [esp+Ch] [ebp-Ch]
+  IBuildingRole *v15; // [esp+8h] [ebp-10h]
+  CBuilding *v16; // [esp+Ch] [ebp-Ch]
 
-  ActualTask = (const struct CEntityTask *)IMovingEntity::GetActualTask(a2);
-  ISettlerRole::InitCommonTaskValues(this, a2, ActualTask);
-  switch ( *((_BYTE *)this + 4) )
+  ActualTask = IMovingEntity::GetActualTask(_pSettler);
+  ISettlerRole::InitCommonTaskValues(this, _pSettler, ActualTask);
+  switch ( this->m_iTask )
   {
     case 0xA:
-      IAnimatedEntity::SetFrame(1);
-      v14 = *((__int16 *)this + 7) + Y16X16::UnpackXFast(*((_DWORD *)this + 6));
-      v13 = Y16X16::UnpackYFast(*((_DWORD *)this + 6));
-      *((_DWORD *)this + 6) = Y16X16::PackXYFast(v14, *((__int16 *)this + 8) + v13);
-      CDonkeyRole::MoveToTarget(this, *((_DWORD *)this + 6), 0);
-      *((_BYTE *)this + 47) = 1;
+      IAnimatedEntity::SetFrame(_pSettler, 1u);
+      v14 = this->m_iDestinationOffsetX + Y16X16::UnpackXFast(this->m_iDestinationPosition);
+      v13 = Y16X16::UnpackYFast(this->m_iDestinationPosition);
+      this->m_iDestinationPosition = Y16X16::PackXYFast(v14, this->m_iDestinationOffsetY + v13);
+      CDonkeyRole::MoveToTarget(this, this->m_iDestinationPosition, 0);
+      this->m_bGoToTarget = 1;
       break;
     case 0xE:
       CDonkeyRole::TryToGoHome(this);
       break;
     case 0x11:
-      IMovingEntity::SetDisplacementCosts(0);
+      IMovingEntity::SetDisplacementCosts(_pSettler, 0);
       v3 = CStateGame::Rand(g_pGame);
-      IAnimatedEntity::RegisterForLogicUpdate(v3 % 0x10 + 1);
+      IAnimatedEntity::RegisterForLogicUpdate(_pSettler, v3 % 0x10 + 1);
       break;
     case 0x12:
-      if ( debug && DEBUG_FLAGS[dword_41520A8] )
+      if ( debug && DEBUG_FLAGS[s_iDebugDonkeyRoleEventSection] )
       {
-        v6 = IEntity::ID();
+        v6 = IEntity::ID(_pSettler);
         BBSupportTracePrintF(0, "Carier %u TakeJob go to source pile", v6);
       }
-      *((_DWORD *)this + 7) = IEntity::PackedXY(a2);
-      *((_BYTE *)this + 46) = 1;
-      *((_BYTE *)this + 47) = 0;
-      if ( *((_DWORD *)this + 14) )
+      this->m_iStartPosition = IEntity::PackedXY(_pSettler);
+      this->m_bGoToSource = 1;
+      this->m_bGoToTarget = 0;
+      if ( this->m_iDepartBuildingID )
       {
-        BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((_DWORD *)this + 14));
+        BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, this->m_iDepartBuildingID);
         v8 = CBuilding::EnsignPackedXY(BuildingPtr);
         CDonkeyRole::MoveToTarget(this, v8, 0);
       }
-      else if ( *((_WORD *)this + 37) )
+      else if ( this->m_uSourcePileID )
       {
-        v9 = CMapObjectMgr::EntityPtr(*((unsigned __int16 *)this + 37));
+        v9 = CMapObjectMgr::EntityPtr(this->m_uSourcePileID);
         v10 = IEntity::PackedXY(v9);
         CDonkeyRole::MoveToTarget(this, v10, 4096);
       }
       break;
     case 0x13:
-      *((_BYTE *)this + 46) = 0;
-      *((_BYTE *)this + 47) = 1;
-      if ( *((_DWORD *)this + 13) )
+      this->m_bGoToSource = 0;
+      this->m_bGoToTarget = 1;
+      if ( this->m_iTargetBuildingID )
       {
-        v16 = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((_DWORD *)this + 13));
-        v15 = (CTradingBuildingRole *)CBuilding::Role(v16);
+        v16 = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, this->m_iTargetBuildingID);
+        v15 = CBuilding::Role(v16);
         IsNeutralTrader = CDonkeyRole::IsNeutralTrader(this);
-        CTradingBuildingRole::RegisterIncomingTrader(v15, *((_DWORD *)this + 12), 2, IsNeutralTrader);
+        CTradingBuildingRole::RegisterIncomingTrader(
+          (CTradingBuildingRole *)v15,
+          this->m_iTraderSettlerId,
+          2,
+          IsNeutralTrader);
         v12 = CBuilding::EnsignPackedXY(v16);
         CDonkeyRole::MoveToTarget(this, v12, 0);
-        if ( CDonkeyRole::HasLoadedSomething(this) && !CDonkeyRole::IsNeutralTrader(this) )
-          IEntity::SetFlagBits(a2, ENTITY_FLAG_VulnerableMask);
+        if ( CDonkeyRole::HasLoadedSomething(this) )
+        {
+          if ( !CDonkeyRole::IsNeutralTrader(this) )
+            IEntity::SetFlagBits(_pSettler, ENTITY_FLAG_VulnerableMask);
+        }
       }
       break;
     case 0x15:
-      if ( debug && DEBUG_FLAGS[dword_41520A8] )
+      if ( debug && DEBUG_FLAGS[s_iDebugDonkeyRoleEventSection] )
       {
-        v4 = IEntity::ID();
+        v4 = IEntity::ID(_pSettler);
         BBSupportTracePrintF(0, "Carier %u TakeJob put_good", v4);
       }
-      IMovingEntity::SetDisplacementCosts(10);
-      IEntity::ClearFlagBits(a2, ENTITY_FLAG_VulnerableMask);
+      IMovingEntity::SetDisplacementCosts(_pSettler, 10);
+      IEntity::ClearFlagBits(_pSettler, ENTITY_FLAG_VulnerableMask);
       CDonkeyRole::DonkeyArrived(this);
       break;
     case 0x16:
-      if ( debug && DEBUG_FLAGS[dword_41520A8] )
+      if ( debug && DEBUG_FLAGS[s_iDebugDonkeyRoleEventSection] )
       {
-        v5 = IEntity::ID();
+        v5 = IEntity::ID(_pSettler);
         BBSupportTracePrintF(0, "Carier %u TakeJob get_good", v5);
       }
-      IMovingEntity::SetDisplacementCosts(10);
+      IMovingEntity::SetDisplacementCosts(_pSettler, 10);
       CDonkeyRole::DonkeyArrived(this);
       break;
     case 0x17:
-      IMovingEntity::SetDisplacementCosts(10);
-      IAnimatedEntity::RegisterForLogicUpdate(*((char *)this + 6));
+      IMovingEntity::SetDisplacementCosts(_pSettler, 10);
+      IAnimatedEntity::RegisterForLogicUpdate(_pSettler, this->m_iWalkspeed);
       break;
     case 0x20:
-      IAnimatedEntity::RegisterForLogicUpdate(*((char *)this + 6) / 2 - 1);
+      IAnimatedEntity::RegisterForLogicUpdate(_pSettler, this->m_iWalkspeed / 2 - 1);
       break;
     default:
       CTrace::Print("Donkey TakeJob - unknown job");
-      IAnimatedEntity::RegisterForLogicUpdate(3);
+      IAnimatedEntity::RegisterForLogicUpdate(_pSettler, 3);
       break;
   }
 }
 
 
 // address=[0x156bdd0]
-// Decompiled from int __thiscall CDonkeyRole::Init(int this, CPropertySet *a2)
-void  CDonkeyRole::Init(class CSettler * a2) {
+// Decompiled from void __thiscall CDonkeyRole::Init(CDonkeyRole *this, IEntity *_pSettler)
+void  CDonkeyRole::Init(class CSettler * _pSettler) {
   
-  int result; // eax
-
-  if ( IEntity::FlagBits(a2, ENTITY_FLAG_ATTACHED)
+  if ( IEntity::FlagBits(_pSettler, ENTITY_FLAG_ATTACHED)
     && BBSupportDbgReport(2, "MapObjects\\Settler\\DonkeyRole.cpp", 255, "!_pSettler->FlagBits( ENTITY_FLAG_ATTACHED )") == 1 )
   {
     __debugbreak();
   }
-  if ( *(_WORD *)(this + 32)
+  if ( this->m_uHomeEntityId
     && BBSupportDbgReport(2, "MapObjects\\Settler\\DonkeyRole.cpp", 256, "!m_uHomeEntityId") == 1 )
   {
     __debugbreak();
   }
-  *(_DWORD *)(this + 48) = IEntity::ID();
-  CWarMap::AddEntity(a2);
-  IEntity::ClearFlagBits(a2, ENTITY_FLAG_VulnerableMask|ENTITY_FLAG_Selectable|ENTITY_FLAG_Selected);
-  IEntity::SetFlagBits(a2, (EntityFlag)0x4000u);
-  result = this;
-  *(_DWORD *)(this + 56) = 0;
-  *(_DWORD *)(this + 52) = 0;
-  *(_DWORD *)(this + 64) = 0;
-  return result;
+  this->m_iTraderSettlerId = IEntity::ID(_pSettler);
+  CWarMap::AddEntity(_pSettler);
+  IEntity::ClearFlagBits(_pSettler, ENTITY_FLAG_VulnerableMask|ENTITY_FLAG_Selectable|ENTITY_FLAG_Selected);
+  IEntity::SetFlagBits(_pSettler, (EntityFlag)0x4000);
+  this->m_iDepartBuildingID = 0;
+  this->m_iTargetBuildingID = 0;
+  this->m_iJobType = 0;
 }
 
 
 // address=[0x156be90]
-// Decompiled from int __thiscall CDonkeyRole::ConvertEventIntoGoal(CDonkeyRole *this, struct CSettler *a2, struct CEntityEvent *a3)
+// Decompiled from void __thiscall CDonkeyRole::ConvertEventIntoGoal(CDonkeyRole *this, CSettler *a2, struct CEntityEvent *a3)
 void  CDonkeyRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent * a3) {
   
   int v3; // eax
   int v4; // eax
-  unsigned __int8 *v5; // eax
+  IEntity *v5; // eax
   int v6; // eax
   int v7; // eax
   int v8; // eax
-  int v9; // eax
-  int v10; // eax
+  unsigned int v9; // eax
+  std::list *v10; // eax
   int v11; // eax
-  int result; // eax
-  int v13; // eax
-  int v14; // eax
+  T_SETTLER_OBJ_TYPE v12; // eax
+  unsigned int v13; // eax
+  std::list *v14; // eax
   int v15; // eax
   int v16; // eax
   int v17; // eax
   int v18; // eax
-  int v19; // eax
-  int v20; // [esp-4h] [ebp-3Ch]
-  int v21; // [esp+0h] [ebp-38h]
-  int v22; // [esp+4h] [ebp-34h]
-  _DWORD *v23; // [esp+8h] [ebp-30h]
-  _DWORD *v24; // [esp+Ch] [ebp-2Ch]
-  int v25; // [esp+10h] [ebp-28h]
-  unsigned __int8 *v26; // [esp+14h] [ebp-24h]
-  unsigned __int8 *v27; // [esp+18h] [ebp-20h]
-  int v28; // [esp+1Ch] [ebp-1Ch]
-  int v29; // [esp+20h] [ebp-18h]
-  unsigned __int8 *v30; // [esp+28h] [ebp-10h]
-  _DWORD *v31; // [esp+2Ch] [ebp-Ch]
-  int v32; // [esp+30h] [ebp-8h]
+  int v19; // [esp-4h] [ebp-3Ch]
+  CVehicle *v20; // [esp+0h] [ebp-38h]
+  DWORD v21; // [esp+4h] [ebp-34h]
+  CBuilding *v22; // [esp+8h] [ebp-30h]
+  CBuilding *v23; // [esp+Ch] [ebp-2Ch]
+  CVehicle *v24; // [esp+10h] [ebp-28h]
+  CPile *v25; // [esp+14h] [ebp-24h]
+  CPile *v26; // [esp+18h] [ebp-20h]
+  int iPileAmount; // [esp+1Ch] [ebp-1Ch]
+  T_SETTLER_OBJ_TYPE v28; // [esp+20h] [ebp-18h]
+  CPile *v29; // [esp+28h] [ebp-10h]
+  CVehicle *v30; // [esp+2Ch] [ebp-Ch]
+  int iAmount; // [esp+30h] [ebp-8h]
 
-  switch ( *((_DWORD *)a3 + 1) )
+  switch ( a3->m_iEvent )
   {
     case 7:
     case 9:
-      if ( debug && DEBUG_FLAGS[dword_41520A8] )
+      if ( debug && DEBUG_FLAGS[s_iDebugDonkeyRoleEventSection] )
       {
-        v3 = IEntity::ID();
+        v3 = IEntity::ID(a2);
         BBSupportTracePrintF(0, "Donkey %u order canceled - target die", v3);
       }
-      if ( *((_BYTE *)this + 45) )
+      if ( this->m_bReturning )
       {
-        if ( *((_DWORD *)a3 + 3) == *((unsigned __int16 *)this + 37) )
+        if ( a3->m_iDataA == this->m_uSourcePileID )
         {
-          v27 = CPileMgr::operator[](*((unsigned __int16 *)this + 37));
-          v4 = IEntity::ID();
-          (*(void (__thiscall **)(unsigned __int8 *, int))(*(_DWORD *)v27 + 64))(v27, v4);
-          *((_WORD *)this + 37) = 0;
+          v26 = CPileMgr::operator[](this->m_uSourcePileID);
+          v4 = IEntity::ID(a2);
+          v26->Detach(v4);
+          this->m_uSourcePileID = 0;
         }
-        if ( *((_DWORD *)a3 + 3) == *((unsigned __int16 *)this + 38) )
+        if ( a3->m_iDataA == this->m_uDestinationEntityID )
         {
-          v5 = (unsigned __int8 *)CMapObjectMgr::EntityPtr(*((unsigned __int16 *)this + 38));
-          v29 = IEntity::ObjType(v5);
-          if ( v29 == 2 || v29 == 4 )
+          v5 = CMapObjectMgr::EntityPtr(this->m_uDestinationEntityID);
+          v28 = IEntity::ObjType(v5);
+          if ( v28 == SHIP_OBJ || v28 == CATAPULT_OBJ )
           {
-            v25 = CVehicleMgr::operator[](*((unsigned __int16 *)this + 38));
-            v7 = IEntity::ID();
-            (*(void (__thiscall **)(int, int))(*(_DWORD *)v25 + 64))(v25, v7);
+            v24 = CVehicleMgr::operator[](this->m_uDestinationEntityID);
+            v7 = IEntity::ID(a2);
+            v24->Detach(v24, v7);
           }
-          else if ( v29 == 16 )
+          else if ( v28 == PILE_OBJ )
           {
-            v26 = CPileMgr::operator[](*((unsigned __int16 *)this + 38));
-            v6 = IEntity::ID();
-            (*(void (__thiscall **)(unsigned __int8 *, int))(*(_DWORD *)v26 + 64))(v26, v6);
+            v25 = CPileMgr::operator[](this->m_uDestinationEntityID);
+            v6 = IEntity::ID(a2);
+            v25->Detach(v6);
           }
-          *((_WORD *)this + 38) = 0;
+          this->m_uDestinationEntityID = 0;
           CDonkeyRole::TryToGoHome(this);
         }
-        *((_BYTE *)this + 45) = 0;
+        this->m_bReturning = 0;
       }
-      else if ( *((_DWORD *)a3 + 3) == *((_DWORD *)this + 13) )
+      else if ( a3->m_iDataA == this->m_iTargetBuildingID )
       {
         CDonkeyRole::TargetBuildingDestroyed(this);
       }
-      else if ( *((_DWORD *)a3 + 3) == *((_DWORD *)this + 14) )
+      else if ( a3->m_iDataA == this->m_iDepartBuildingID )
       {
         CDonkeyRole::DepartBuildingDestroyed(this);
-        IAnimatedEntity::RegisterForLogicUpdate(1);
+        IAnimatedEntity::RegisterForLogicUpdate(a2, 1);
       }
       goto LABEL_57;
     case 0xA:
-      if ( debug && DEBUG_FLAGS[dword_41520A8] )
+      if ( debug && DEBUG_FLAGS[s_iDebugDonkeyRoleEventSection] )
       {
-        v8 = IEntity::ID();
+        v8 = IEntity::ID(a2);
         BBSupportTracePrintF(0, "Donkey %u TRANSPORT_GOOD", v8);
       }
-      *((_BYTE *)this + 45) = 0;
-      *((_BYTE *)this + 120) = 0;
-      if ( *((_DWORD *)this + 14) && *((_DWORD *)this + 13) )
+      this->m_bReturning = 0;
+      this->m_bGoingHome = 0;
+      if ( this->m_iDepartBuildingID && this->m_iTargetBuildingID )
       {
-        v24 = (_DWORD *)CBuildingMgr::operator[](*((_DWORD *)this + 14));
-        v23 = (_DWORD *)CBuildingMgr::operator[](*((_DWORD *)this + 13));
-        if ( IEntity::FlagBits(v24, (EntityFlag)&loc_3000000) && IEntity::FlagBits(v23, (EntityFlag)&loc_3000000) )
+        v23 = CBuildingMgr::operator[]((CBuildingMgr *)g_cBuildingMgr, this->m_iDepartBuildingID);
+        v22 = CBuildingMgr::operator[]((CBuildingMgr *)g_cBuildingMgr, this->m_iTargetBuildingID);
+        if ( IEntity::FlagBits(v23, ENTITY_FLAG_AliveMask) && IEntity::FlagBits(v22, ENTITY_FLAG_AliveMask) )
         {
           v9 = IEntity::Race(a2);
-          v10 = CEntityToDoListMgr::SettlerJobList(v9, 163);
-          (*(void (__thiscall **)(struct CSettler *, int, int))(*(_DWORD *)a2 + 112))(a2, v10, 163);
+          v10 = CEntityToDoListMgr::SettlerJobList(g_pEntityToDoListMgr, v9, 0xA3u);
+          a2->NewToDoList(a2, (int)v10, 163);
         }
         else
         {
-          if ( debug && DEBUG_FLAGS[dword_41520A8] )
+          if ( debug && DEBUG_FLAGS[s_iDebugDonkeyRoleEventSection] )
           {
-            v11 = IEntity::ID();
+            v11 = IEntity::ID(a2);
             BBSupportTracePrintF(0, "WARNING: Donkey %u CONV TRANSPORT_GOOD cancled!", v11);
           }
-          if ( !IEntity::FlagBits(v24, (EntityFlag)&loc_3000000) )
+          if ( !IEntity::FlagBits(v23, ENTITY_FLAG_AliveMask) )
             CDonkeyRole::DepartBuildingDestroyed(this);
-          if ( !IEntity::FlagBits(v23, (EntityFlag)&loc_3000000) )
+          if ( !IEntity::FlagBits(v22, ENTITY_FLAG_AliveMask) )
             CDonkeyRole::TargetBuildingDestroyed(this);
         }
       }
       goto LABEL_57;
     case 0xB:
-      *((_BYTE *)this + 47) = 0;
+      this->m_bGoToTarget = 0;
       if ( CDonkeyRole::GetJobType(this) && CDonkeyRole::GetJobType(this) != 5 )
       {
-        v21 = CVehicleMgr::operator[](*((_DWORD *)a3 + 5));
-        (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)v21 + 124))(v21, *((unsigned __int16 *)this + 9));
+        v20 = CVehicleMgr::operator[](a3->m_iDataC);
+        v20->EntityOrderCanceled(v20, this->m_uAttachedSettlerId);
 LABEL_57:
-        result = IEntity::FlagBits(a2, ENTITY_FLAG_Registered);
-        if ( result || !debug )
-          return result;
-        result = dword_41520AC;
+        if ( IEntity::FlagBits(a2, ENTITY_FLAG_Registered) || !debug )
+          return;
         if ( !DEBUG_FLAGS[dword_41520AC] )
-          return result;
-        v19 = IEntity::ID();
-        return BBSupportTracePrintF(0, "ConvertEvent- not registered settler %u", v19);
+          return;
+        v18 = IEntity::ID(a2);
+        BBSupportTracePrintF(0, "ConvertEvent- not registered settler %u", v18);
+        return;
       }
-      *((_WORD *)this + 37) = *((_WORD *)a3 + 8);
-      *((_WORD *)this + 38) = *((_WORD *)a3 + 10);
-      v32 = *((_DWORD *)a3 + 3);
-      *((_BYTE *)this + 72) = 0;
-      v30 = CPileMgr::operator[](*((unsigned __int16 *)this + 37));
-      v31 = (_DWORD *)CVehicleMgr::operator[](*((unsigned __int16 *)this + 38));
-      v28 = (*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)v30 + 40))(v30);
-      if ( (v32 <= 0 || v28 < v32)
+      this->m_uSourcePileID = a3->m_iDataB;
+      this->m_uDestinationEntityID = a3->m_iDataC;
+      iAmount = a3->m_iDataA;
+      this->m_uGood = 0;
+      v29 = CPileMgr::operator[](this->m_uSourcePileID);
+      v30 = CVehicleMgr::operator[](this->m_uDestinationEntityID);
+      iPileAmount = v29->Amount(v29);
+      if ( (iAmount <= 0 || iPileAmount < iAmount)
         && BBSupportDbgReport(2, "MapObjects\\Settler\\DonkeyRole.cpp", 1535, "(iAmount>0) && (iPileAmount >= iAmount)") == 1 )
       {
         __debugbreak();
       }
-      result = v28;
-      if ( v28 < v32 )
-        v32 = v28;
-      if ( !v32 )
-        return result;
-      v20 = IEntity::ID();
-      v13 = IEntity::ObjType((unsigned __int8 *)a2);
-      v22 = (*(int (__thiscall **)(_DWORD *, int, int))(*v31 + 140))(v31, v13, v20);
-      if ( IEntity::FlagBits(v31, (EntityFlag)&loc_3000000) && v22 )
+      if ( iPileAmount < iAmount )
+        iAmount = iPileAmount;
+      if ( !iAmount )
+        return;
+      v19 = IEntity::ID(a2);
+      v12 = IEntity::ObjType(a2);
+      v21 = v30->GetMeetingPointXY(v30, v12, v19);
+      if ( IEntity::FlagBits(v30, ENTITY_FLAG_AliveMask) && v21 )
       {
-        ISettlerRole::NewDestination(this, a2, v22, 0);
-        v14 = IEntity::Race(a2);
-        v15 = CEntityToDoListMgr::SettlerJobList(v14, 164);
-        (*(void (__thiscall **)(struct CSettler *, int, int))(*(_DWORD *)a2 + 112))(a2, v15, 164);
-        v16 = IEntity::ID();
-        CPile::AttachAndIncAmountLeaving((unsigned __int16 *)v30, v16, v32, 2);
-        *((_DWORD *)this + 17) = v32;
-        v17 = IEntity::ID();
-        (*(void (__thiscall **)(_DWORD *, int))(*v31 + 164))(v31, v17);
-        v18 = (*(int (__thiscall **)(unsigned __int8 *, int))(*(_DWORD *)v30 + 60))(v30, v32);
-        (*(void (__thiscall **)(_DWORD *, int))(*v31 + 120))(v31, v18);
-        *((_BYTE *)this + 45) = 1;
+        ISettlerRole::NewDestination(this, a2, v21, 0);
+        v13 = IEntity::Race(a2);
+        v14 = CEntityToDoListMgr::SettlerJobList(g_pEntityToDoListMgr, v13, 0xA4u);
+        a2->NewToDoList(a2, (int)v14, 164);
+        v15 = IEntity::ID(a2);
+        CPile::AttachAndIncAmountLeaving(v29, v15, iAmount, 2);
+        this->m_iCargoAmount = iAmount;
+        v16 = IEntity::ID(a2);
+        v30->Attach(v30, v16);
+        v17 = v29->GetGoodType();
+        v30->GoodIsComming(v30, v17);
+        this->m_bReturning = 1;
         CDonkeyRole::SetJobType(this, 1);
       }
       else
@@ -1523,12 +1464,11 @@ LABEL_57:
     default:
       if ( !IEntity::FlagBits(a2, ENTITY_FLAG_Registered) )
       {
-        CTrace::Print("ConvertEventIntoGoal DonkeyRole - unknown event %u", *((_DWORD *)a3 + 1));
-        IAnimatedEntity::RegisterForLogicUpdate(1);
+        CTrace::Print("ConvertEventIntoGoal DonkeyRole - unknown event %u", a3->m_iEvent);
+        IAnimatedEntity::RegisterForLogicUpdate(a2, 1);
       }
       goto LABEL_57;
   }
 }
 
 
-#endif // Already implemented

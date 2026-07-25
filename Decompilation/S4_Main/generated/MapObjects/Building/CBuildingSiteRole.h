@@ -39,7 +39,7 @@ public:
     virtual void  Init(class CBuilding * a2);
 
     // address=[0x1501570]
-    virtual void  LogicUpdate(class CBuilding * a2);
+    virtual void  LogicUpdate(class CBuilding * arg0);
 
     // address=[0x1501eb0]
     virtual void  PostLoadInit(class CBuilding * a2);
@@ -84,7 +84,7 @@ public:
      CBuildingSiteRole(std::istream & a2);
 
     // address=[0x1503150]
-    virtual void  Store(std::ostream & a2);
+    virtual void  Store(std::ostream & a1);
 
     // address=[0x1506140]
     virtual  ~CBuildingSiteRole(void);
@@ -124,7 +124,7 @@ private:
     void  CheckDeactivateUrgentDigger(int a2);
 
     // address=[0x15038f0]
-    void  CheckDeactivatePriority(int a2);
+    void  CheckDeactivatePriority(int _iBuildingEcoSectorId);
 
     // address=[0x15039a0]
     void  CheckActivateUrgentBoards(int a2);
@@ -188,6 +188,45 @@ private:
 
     // address=[0x15067d0]
     virtual bool  TryCrushBuilding(void);
+
+    // Type information members
+public:
+    int field_17C;
+    int m_iDigMap;
+    int m_iMaxNeededDigger;
+    int m_iDiggingNeeded;
+    BYTE m_uBuildStage;
+    BYTE m_uDiggerAct;
+    BYTE field_18E;
+    BYTE field_18F;
+    unsigned __int8 m_uBuilderNumber;
+    unsigned __int8 m_uBuilderAct;
+    BYTE m_uPosCounter;
+    unsigned __int8 m_uBoards;
+    BYTE m_uProvidedBoards;
+    unsigned __int8 m_uStone;
+    BYTE m_uProvidedStone;
+    unsigned __int8 m_uGold;
+    BYTE m_uProvidedGold;
+    _BYTE[3] gap_199;
+    int m_iProvidedScaledTotalResouces;
+    int m_iScaledTotalResources;
+    int m_iInverseScaledTotalResources;
+    int m_iFrameCount;
+    int m_iU0;
+    WORD m_uBoardsPileId;
+    WORD m_uStonePileId;
+    WORD m_uGoldPileId;
+    WORD m_uU00;
+    bool m_bPriority;
+    bool m_bDiggerPriority;
+    bool m_bBuilderPriority;
+    bool m_bBoardPriority;
+    bool m_bStonePriority;
+    bool m_bU0;
+    _BYTE[2] gap_1BE;
+    int m_iTotalProvidedResources;
+    float m_fBarDiv;
 
 };
 

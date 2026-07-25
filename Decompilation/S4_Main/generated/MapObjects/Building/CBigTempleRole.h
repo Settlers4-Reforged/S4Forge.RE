@@ -27,7 +27,7 @@ public:
      CBigTempleRole(std::istream & a2);
 
     // address=[0x14e8630]
-    virtual void  Store(std::ostream & a2);
+    virtual void  Store(std::ostream & _rStream);
 
     // address=[0x14e8850]
     virtual  ~CBigTempleRole(void);
@@ -68,6 +68,10 @@ private:
 
     // address=[0x14e89a0]
     virtual bool  TryCrushBuilding(void);
+
+    // Type information members
+public:
+    unsigned __int8 m_uThrownOutPriests;
 
 };
 

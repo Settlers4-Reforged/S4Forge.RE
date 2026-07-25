@@ -33,59 +33,59 @@ void  CCatapult::VehicleLogicUpdate(void) {
     v1 = 0;
   else
     v1 = 2;
-  if ( !IEntity::FlagBits(this, ENTITY_FLAG_OnBoard) )
+  if ( !IEntity::FlagBits(this, ENTITY_FLAG_ON_BOARD) )
     CWarriorBehavior::WarriorVehicleLogicUpdate((CCatapult *)((char *)this + 180), this, TickCounter, v1 | v2);
 }
 
 
 // address=[0x153d590]
-// Decompiled from void __thiscall CCatapult::ConvertEventIntoGoal(CCatapult *this, struct CEntityEvent *a2)
+// Decompiled from void __thiscall CCatapult::ConvertEventIntoGoal(IEntity *this, struct CEntityEvent *a2)
 void  CCatapult::ConvertEventIntoGoal(class CEntityEvent * a2) {
   
   int v2; // eax
   int v3; // eax
   int v4; // [esp-4h] [ebp-60h]
-  _BYTE v5[24]; // [esp+4h] [ebp-58h] BYREF
-  int v6; // [esp+1Ch] [ebp-40h]
+  CEntityEvent v5; // [esp+4h] [ebp-58h] BYREF
+  ISettlerRole *v6; // [esp+1Ch] [ebp-40h]
   CEntityEvent *v7; // [esp+20h] [ebp-3Ch]
   CEntityEvent *v8; // [esp+24h] [ebp-38h]
   int v9; // [esp+28h] [ebp-34h]
   CDonkeyRole *v10; // [esp+2Ch] [ebp-30h]
   int v11; // [esp+30h] [ebp-2Ch]
   int v12; // [esp+34h] [ebp-28h]
-  int v13; // [esp+38h] [ebp-24h]
-  int v14; // [esp+3Ch] [ebp-20h]
-  int v15; // [esp+40h] [ebp-1Ch]
-  int v16; // [esp+44h] [ebp-18h]
-  int *v17; // [esp+48h] [ebp-14h]
-  unsigned __int8 *SettlerPtr; // [esp+4Ch] [ebp-10h]
+  int m_iEvent; // [esp+38h] [ebp-24h]
+  ISettlerRole *v14; // [esp+3Ch] [ebp-20h]
+  ISettlerRole *v15; // [esp+40h] [ebp-1Ch]
+  int m_iDataB; // [esp+44h] [ebp-18h]
+  IEntity *v17; // [esp+48h] [ebp-14h]
+  IEntity *SettlerPtr; // [esp+4Ch] [ebp-10h]
   int v19; // [esp+58h] [ebp-4h]
 
-  v17 = (int *)this;
+  v17 = this;
   if ( !a2 && BBSupportDbgReport(2, "MapObjects\\Catapult\\Catapult.cpp", 379, "_pEvent!=NULL") == 1 )
     __debugbreak();
   if ( a2 )
   {
-    v13 = *((_DWORD *)a2 + 1);
-    if ( v13 == 17 && *((_DWORD *)a2 + 2) == 13 )
+    m_iEvent = a2->m_iEvent;
+    if ( m_iEvent == 17 && a2->m_iType == 13 )
     {
-      v16 = *((_DWORD *)a2 + 4);
-      v11 = Y16X16::UnpackXFast(v16);
-      v12 = Y16X16::UnpackYFast(v16);
+      m_iDataB = a2->m_iDataB;
+      v11 = Y16X16::UnpackXFast(m_iDataB);
+      v12 = Y16X16::UnpackYFast(m_iDataB);
       if ( CCatapult::AttackTargetAt((CCatapult *)v17, v11, v12) )
         return;
-      if ( v17[52] > 0 )
+      if ( (int)v17[5].m_warMapNode.m_uNextPrev > 0 )
       {
-        SettlerPtr = CSettlerMgr::GetSettlerPtr(v17[52]);
-        if ( SettlerPtr && IEntity::Type((unsigned __int16 *)SettlerPtr) == 60 )
+        SettlerPtr = CSettlerMgr::GetSettlerPtr(&g_cSettlerMgr, v17[5].m_warMapNode.m_uNextPrev);
+        if ( SettlerPtr && IEntity::Type(SettlerPtr) == 60 )
         {
-          if ( IEntity::Type((unsigned __int16 *)SettlerPtr) != 60
+          if ( IEntity::Type(SettlerPtr) != 60
             && BBSupportDbgReport(2, "MapObjects\\Catapult\\Catapult.cpp", 407, "pSettler->Type() == SETTLER_DONKEY") == 1 )
           {
             __debugbreak();
           }
-          v15 = CSettler::Role(SettlerPtr);
-          if ( (*(int (__thiscall **)(int))(*(_DWORD *)v15 + 72))(v15) != 20
+          v15 = CSettler::Role((CSettler *)SettlerPtr);
+          if ( v15->GetSettlerRole(v15) != 20
             && BBSupportDbgReport(
                  2,
                  "MapObjects\\Catapult\\Catapult.cpp",
@@ -94,18 +94,18 @@ void  CCatapult::ConvertEventIntoGoal(class CEntityEvent * a2) {
           {
             __debugbreak();
           }
-          v10 = (CDonkeyRole *)CSettler::Role(SettlerPtr);
-          CDonkeyRole::UpdateCatapultPosition(v10, v16);
+          v10 = (CDonkeyRole *)CSettler::Role((CSettler *)SettlerPtr);
+          CDonkeyRole::UpdateCatapultPosition(v10, m_iDataB);
         }
-        if ( SettlerPtr && IEntity::Type((unsigned __int16 *)SettlerPtr) == 1 )
+        if ( SettlerPtr && IEntity::Type(SettlerPtr) == 1 )
         {
-          if ( IEntity::Type((unsigned __int16 *)SettlerPtr) != 1
+          if ( IEntity::Type(SettlerPtr) != 1
             && BBSupportDbgReport(2, "MapObjects\\Catapult\\Catapult.cpp", 417, "pSettler->Type() == SETTLER_CARRIER") == 1 )
           {
             __debugbreak();
           }
-          v14 = CSettler::Role(SettlerPtr);
-          if ( (*(int (__thiscall **)(int))(*(_DWORD *)v14 + 72))(v14) != 1
+          v14 = CSettler::Role((CSettler *)SettlerPtr);
+          if ( v14->GetSettlerRole(v14) != 1
             && BBSupportDbgReport(
                  2,
                  "MapObjects\\Catapult\\Catapult.cpp",
@@ -114,18 +114,18 @@ void  CCatapult::ConvertEventIntoGoal(class CEntityEvent * a2) {
           {
             __debugbreak();
           }
-          v6 = CSettler::Role(SettlerPtr);
+          v6 = CSettler::Role((CSettler *)SettlerPtr);
           v4 = IEntity::Y(v17);
           v2 = IEntity::X(v17);
           v9 = CWorldManager::EcoSectorId(v2, v4);
-          v3 = IEntity::ID();
-          v8 = CEntityEvent::CEntityEvent((CEntityEvent *)v5, 9u, 0, v3, v9, 0);
+          v3 = IEntity::ID(v17);
+          v8 = CEntityEvent::CEntityEvent(&v5, 9u, 0, v3, v9, 0);
           v7 = v8;
           v19 = 0;
-          (*(void (__thiscall **)(unsigned __int8 *, CEntityEvent *))(*(_DWORD *)SettlerPtr + 80))(SettlerPtr, v8);
+          SettlerPtr->SetEvent(SettlerPtr, v8);
           v19 = -1;
-          CEntityEvent::~CEntityEvent(v5);
-          v17[52] = 0;
+          CEntityEvent::~CEntityEvent(&v5);
+          v17[5].m_warMapNode.m_uNextPrev = 0;
         }
       }
     }

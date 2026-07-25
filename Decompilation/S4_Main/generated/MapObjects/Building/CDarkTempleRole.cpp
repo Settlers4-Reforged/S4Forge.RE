@@ -199,7 +199,7 @@ bool  CDarkTempleRole::SettlerEnter(class CBuilding * a2, int a3) {
       (*(void (__thiscall **)(void *, int))(*(_DWORD *)g_pAI + 48))(g_pAI, v5);
       IBuildingRole::DetachWithoutNotify(v9, a2, a3);
       IEntity::ClearFlagBits(v10, ENTITY_FLAG_Visible);
-      if ( IEntity::FlagBits(v10, ENTITY_FLAG_OnBoard)
+      if ( IEntity::FlagBits(v10, ENTITY_FLAG_ON_BOARD)
         && BBSupportDbgReport(
              2,
              "MapObjects\\Building\\DarkTemple.cpp",
@@ -216,7 +216,7 @@ bool  CDarkTempleRole::SettlerEnter(class CBuilding * a2, int a3) {
       ++*((_DWORD *)v9 + 104);
       IBuildingRole::DetachWithoutNotify(v9, a2, a3);
       IEntity::ClearFlagBits(v10, ENTITY_FLAG_Visible);
-      if ( IEntity::FlagBits(v10, ENTITY_FLAG_OnBoard)
+      if ( IEntity::FlagBits(v10, ENTITY_FLAG_ON_BOARD)
         && BBSupportDbgReport(
              2,
              "MapObjects\\Building\\DarkTemple.cpp",

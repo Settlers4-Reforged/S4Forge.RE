@@ -424,7 +424,7 @@ void  CNetInputProcessor::Process(class CEvn_Logic & a2) {
           if ( ReadySettlerPtr )
           {
             if ( IEntity::OwnerId((unsigned __int8 *)ReadySettlerPtr) == v152
-              && !IEntity::FlagBits(ReadySettlerPtr, ENTITY_FLAG_OnBoard)
+              && !IEntity::FlagBits(ReadySettlerPtr, ENTITY_FLAG_ON_BOARD)
               && IEntity::WarriorType() == 7 )
             {
               v113 = IEntity::X(ReadySettlerPtr);

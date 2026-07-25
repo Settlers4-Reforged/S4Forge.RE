@@ -28,7 +28,7 @@ class CWalking *  CFreeWorkerRole::InitWalking(class CSettler * a2) {
 
 
 // address=[0x156dc50]
-// Decompiled from void __thiscall CFreeWorkerRole::LogicUpdateJob(ISettlerRole *this, CSettler *arg0)
+// Decompiled from void __thiscall CFreeWorkerRole::LogicUpdateJob(CFreeWorkerRole *this, CSettler *arg0)
 void  CFreeWorkerRole::LogicUpdateJob(class CSettler * arg0) {
   
   CBuilding *v2; // eax
@@ -70,7 +70,7 @@ void  CFreeWorkerRole::LogicUpdateJob(class CSettler * arg0) {
   IEntity *v38; // [esp+48h] [ebp-Ch]
   IEntity *v39; // [esp+4Ch] [ebp-8h]
 
-  if ( ((unsigned __int8 (__thiscall *)(ISettlerRole *, CSettler *))this->CheckHome)(this, arg0) )
+  if ( this->CheckHome(this, arg0) )
   {
     ISettlerRole::Update(this, arg0);
     switch ( this->m_iTask )
@@ -85,10 +85,10 @@ void  CFreeWorkerRole::LogicUpdateJob(class CSettler * arg0) {
         break;
       case 1:
       case 0x10:
-        if ( this->m_iWalkspeed <= (int)(unsigned __int8)this->m_uCycleFrames )
+        if ( this->m_iWalkspeed <= (int)this->m_iCycleFrames )
           m_iWalkspeed = this->m_iWalkspeed;
         else
-          m_iWalkspeed = (unsigned __int8)this->m_uCycleFrames;
+          m_iWalkspeed = this->m_iCycleFrames;
         this->m_iWalkspeed -= m_iWalkspeed;
         if ( this->m_iWalkspeed <= 0 )
         {
@@ -106,7 +106,7 @@ void  CFreeWorkerRole::LogicUpdateJob(class CSettler * arg0) {
         goto LABEL_3;
       case 4:
       case 0x15:
-        v37 = (unsigned __int8)this->m_uCycleFrames / 2;
+        v37 = this->m_iCycleFrames / 2;
         this->m_iWalkspeed -= v37;
         if ( this->m_iWalkspeed < v37 )
         {
@@ -116,9 +116,9 @@ LABEL_3:
         else
         {
           v20 = LOBYTE(this[1].__vftable);
-          v2 = CBuildingMgr::operator[](this->m_uHomeEntityId);
+          v2 = CBuildingMgr::operator[]((CBuildingMgr *)g_cBuildingMgr, this->m_uHomeEntityId);
           PileIdWithGood = CBuilding::GetPileIdWithGood(v2, v20);
-          v3 = (CPile *)CPileMgr::operator[](PileIdWithGood);
+          v3 = CPileMgr::operator[](PileIdWithGood);
           CPile::IncreaseUnforeseen(v3, 1);
           LOBYTE(this[1].__vftable) = 0;
           IAnimatedEntity::RegisterForLogicUpdate(arg0, v37 - 1);
@@ -127,7 +127,7 @@ LABEL_3:
         break;
       case 5:
       case 0x16:
-        a2 = (unsigned __int8)this->m_uCycleFrames / 2;
+        a2 = this->m_iCycleFrames / 2;
         this->m_iWalkspeed -= a2;
         if ( this->m_iWalkspeed < a2 )
         {
@@ -159,10 +159,10 @@ LABEL_3:
         break;
       case 0xD:
       case 0x1E:
-        if ( this->m_iWalkspeed <= (int)(unsigned __int8)this->m_uCycleFrames )
+        if ( this->m_iWalkspeed <= (int)this->m_iCycleFrames )
           m_iCycleFrames = this->m_iWalkspeed;
         else
-          m_iCycleFrames = (unsigned __int8)this->m_uCycleFrames;
+          m_iCycleFrames = this->m_iCycleFrames;
         this->m_iWalkspeed -= m_iCycleFrames;
         if ( this->m_iWalkspeed <= 0 )
         {
@@ -231,10 +231,10 @@ LABEL_3:
       case 0xE:
         return;
       case 0x19:
-        if ( this->m_iWalkspeed <= (int)(unsigned __int8)this->m_uCycleFrames )
+        if ( this->m_iWalkspeed <= (int)this->m_iCycleFrames )
           v32 = this->m_iWalkspeed;
         else
-          v32 = (unsigned __int8)this->m_uCycleFrames;
+          v32 = this->m_iCycleFrames;
         this->m_iWalkspeed -= v32;
         if ( this->m_iWalkspeed <= 0 )
         {
@@ -262,10 +262,10 @@ LABEL_3:
         break;
       case 0x1C:
       case 0x1D:
-        if ( this->m_iWalkspeed <= (int)(unsigned __int8)this->m_uCycleFrames )
+        if ( this->m_iWalkspeed <= (int)this->m_iCycleFrames )
           v27 = this->m_iWalkspeed;
         else
-          v27 = (unsigned __int8)this->m_uCycleFrames;
+          v27 = this->m_iCycleFrames;
         this->m_iWalkspeed -= v27;
         if ( this->m_iWalkspeed <= 0 )
         {
@@ -476,12 +476,12 @@ class CFreeWorkerRole * __cdecl CFreeWorkerRole::Load(std::istream & a1) {
  CFreeWorkerRole::CFreeWorkerRole(void) {
   
   ISettlerRole::ISettlerRole(this);
-  *(_DWORD *)this = &CFreeWorkerRole::_vftable_;
-  *((_BYTE *)this + 44) = 0;
-  *((_BYTE *)this + 45) = 0;
-  *((_WORD *)this + 23) = 0;
-  *((_DWORD *)this + 12) = 0;
-  *((_DWORD *)this + 13) = 0;
+  this->__vftable = (ISettlerRole_vtbl *)&CFreeWorkerRole::_vftable_;
+  LOBYTE(this[1].__vftable) = 0;
+  BYTE1(this[1].__vftable) = 0;
+  HIWORD(this[1].__vftable) = 0;
+  *(_DWORD *)&this[1].m_iTask = 0;
+  *(_DWORD *)&this[1].m_uTick = 0;
   return this;
 }
 

@@ -7,7 +7,7 @@
  CResourceCollectorInfo::CResourceCollectorInfo(void) {
   
   CBuildingInfo::CBuildingInfo(this);
-  *(_DWORD *)this = &CResourceCollectorInfo::_vftable_;
+  this->__vftable = (CInfoExchange_vtbl *)&CResourceCollectorInfo::_vftable_;
   return this;
 }
 

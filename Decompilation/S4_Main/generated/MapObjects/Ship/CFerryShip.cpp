@@ -645,7 +645,7 @@ bool  CFerryShip::EmergencyReload(int a2) {
     __debugbreak();
   *(_BYTE *)(v19 + 20) = 1;
   *(_BYTE *)(v19 + 21) = 1;
-  IEntity::SetFlagBits(v21, ENTITY_FLAG_OnBoard);
+  IEntity::SetFlagBits(v21, ENTITY_FLAG_ON_BOARD);
   v10 = IEntity::Type(v21);
   v4 = IEntity::ObjType((unsigned __int8 *)v21);
   CargoSize = CFerryShip::GetCargoSize(v4, v10);
@@ -1156,7 +1156,7 @@ bool  CFerryShip::OnLoad(void) {
         v9 = IEntity::ID();
         LastLogicUpdateTick = IAnimatedEntity::GetLastLogicUpdateTick(v14);
         CMapObjectMgr::UnRegisterFromLogicUpdate(g_pMapObjectMgr, LastLogicUpdateTick, v9);
-        IEntity::SetFlagBits(v14, ENTITY_FLAG_OnBoard);
+        IEntity::SetFlagBits(v14, ENTITY_FLAG_ON_BOARD);
         v11 = (unsigned __int16 *)v14;
         v4 = IEntity::ID();
         ((void (__thiscall *)(IEntity *, int))this->CPersistence[1].Relationships)(this, v4);
@@ -1166,7 +1166,7 @@ bool  CFerryShip::OnLoad(void) {
         CWarMap::RemoveEntity(SettlerPtr);
         v5 = IEntity::WorldIdx();
         CWorldManager::SetSettlerId(v5, 0);
-        IEntity::SetFlagBits(SettlerPtr, ENTITY_FLAG_OnBoard);
+        IEntity::SetFlagBits(SettlerPtr, ENTITY_FLAG_ON_BOARD);
         if ( IEntity::FlagBits(SettlerPtr, ENTITY_FLAG_Selected) )
         {
           v6 = IEntity::ID();

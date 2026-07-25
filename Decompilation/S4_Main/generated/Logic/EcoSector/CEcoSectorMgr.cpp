@@ -3,7 +3,7 @@
 // Definitions for class CEcoSectorMgr
 
 // address=[0x130a3d0]
-// Decompiled from int __thiscall CEcoSectorMgr::GetEcoSectorPtr(CEcoSectorMgr *this, int a2)
+// Decompiled from CEcoSector *__thiscall CEcoSectorMgr::GetEcoSectorPtr(CEcoSectorMgr *this, int a2)
 class CEcoSector *  CEcoSectorMgr::GetEcoSectorPtr(int a2) {
   
   if ( a2 <= 0
@@ -33,7 +33,7 @@ class CEcoSector *  CEcoSectorMgr::GetEcoSectorPtr(int a2) {
   {
     __debugbreak();
   }
-  return *((_DWORD *)this + a2 + 5);
+  return (CEcoSector *)*((_DWORD *)this + a2 + 5);
 }
 
 

@@ -12,7 +12,7 @@ public:
     static void __cdecl InitMagicData(void);
 
     // address=[0x146b080]
-    static int __cdecl CastSpell(int a1, int a2, int a3, int a4, int a5, int a6);
+    static int __cdecl CastSpell(int _iPlayer, int _iSpell, int _iX, int _iY, int _iFlags, int _iCasterId);
 
     // address=[0x146b580]
     static int __cdecl CheckManaForCastSpell(int a1, int a2, int a3);

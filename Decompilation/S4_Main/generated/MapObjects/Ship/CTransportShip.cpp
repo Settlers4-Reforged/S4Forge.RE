@@ -53,10 +53,10 @@ void  CTransportShip::FillDialog(bool a2) {
   byte_3F1E881 = 0;
   for ( i = 0; i < 8; ++i )
   {
-    dword_3F1E790[3 * i] = *((_DWORD *)this + 3 * i + 49);
-    dword_3F1E794[3 * i] = *((_DWORD *)this + 3 * i + 50);
+    MEMORY[0x3F1E790][3 * i] = *((_DWORD *)this + 3 * i + 49);
+    MEMORY[0x3F1E794][3 * i] = *((_DWORD *)this + 3 * i + 50);
   }
-  dword_3F1E78C = 22;
+  MEMORY[0x3F1E78C] = 22;
   v3 = 604;
   if ( !a2 )
     v3 = 602;

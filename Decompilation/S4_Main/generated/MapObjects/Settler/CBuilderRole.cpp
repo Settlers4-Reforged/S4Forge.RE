@@ -1,4 +1,3 @@
-#if FALSE
 #include "CBuilderRole.h"
 
 // Definitions for class CBuilderRole
@@ -15,15 +14,15 @@ class CPersistence * __cdecl CBuilderRole::New(std::istream & a1) {
 
 
 // address=[0x1562d90]
-// Decompiled from int __thiscall CBuilderRole::InitWalking(CBuilderRole *this, struct CSettler *a2)
+// Decompiled from CWalkingNormal *__thiscall CBuilderRole::InitWalking(CBuilderRole *this, IEntity *a2)
 class CWalking *  CBuilderRole::InitWalking(class CSettler * a2) {
   
   int v2; // eax
-  int v4; // [esp+4h] [ebp-4h]
+  CWalkingNormal *v4; // [esp+4h] [ebp-4h]
 
-  v2 = IEntity::OwnerId((unsigned __int8 *)a2);
+  v2 = IEntity::OwnerId(a2);
   v4 = CWalking::Create(1, v2);
-  (*(void (__thiscall **)(int, int, _DWORD))(*(_DWORD *)v4 + 8))(v4, -1, 0);
+  v4->InitB(v4, -1, 0);
   return v4;
 }
 
@@ -34,25 +33,25 @@ void  CBuilderRole::LogicUpdateJob(class CSettler * a2) {
   
   CBuilding *v3; // eax
   CBuildingSiteRole *v4; // [esp+0h] [ebp-Ch]
-  CHAR m_iTask; // [esp+4h] [ebp-8h]
+  CHAR iTask; // [esp+4h] [ebp-8h]
 
-  m_iTask = this->m_iTask;
-  if ( m_iTask == 6 )
+  iTask = this->m_iTask;
+  if ( iTask == 6 )
   {
     IMovingEntity::SetDistance(a3, 0);
     this->Go(this, a3);
   }
-  else if ( m_iTask == 16 && this->CheckHome(this, a3) )
+  else if ( iTask == 16 && this->CheckHome(this, a3) )
   {
-    this->m_uCycleFrames = IMovingEntity::GetActualTask(a3)->m_iFrameCount;
-    IAnimatedEntity::RegisterForLogicUpdate(a3, this->m_uCycleFrames);
-    this->m_uCycleFrames = 1;
-    v3 = CBuildingMgr::operator[](this->m_uHomeEntityId);
+    this->m_iCycleFrames = IMovingEntity::GetActualTask(a3)->m_iFrameCount;
+    IAnimatedEntity::RegisterForLogicUpdate(a3, this->m_iCycleFrames);
+    this->m_iCycleFrames = 1;
+    v3 = CBuildingMgr::operator[]((CBuildingMgr *)g_cBuildingMgr, this->m_uHomeEntityId);
     v4 = (CBuildingSiteRole *)CBuilding::Role(v3);
     if ( CBuildingSiteRole::HaveBuildingMaterial(v4) )
     {
-      this->m_uCycleFrames = IMovingEntity::GetActualTask(a3)->m_iFrameCount;
-      CBuildingSiteRole::AddWork(v4, this->m_uCycleFrames);
+      this->m_iCycleFrames = IMovingEntity::GetActualTask(a3)->m_iFrameCount;
+      CBuildingSiteRole::AddWork(v4, this->m_iCycleFrames);
     }
     else
     {
@@ -63,75 +62,72 @@ void  CBuilderRole::LogicUpdateJob(class CSettler * a2) {
 
 
 // address=[0x1562ec0]
-// Decompiled from int __stdcall CBuilderRole::PostLoadInit(CPropertySet *a1)
+// Decompiled from void __stdcall CBuilderRole::PostLoadInit(IEntity *a1)
 void  CBuilderRole::PostLoadInit(class CSettler * a1) {
   
-  return CWarMap::AddEntity(a1);
+  CWarMap::AddEntity(a1);
 }
 
 
 // address=[0x1562ee0]
-// Decompiled from char __thiscall CBuilderRole::SetFree(CBuilderRole *this, struct CSettler *a2, int a3)
-bool  CBuilderRole::SetFree(class CSettler * a2, int a3) {
+// Decompiled from char __thiscall CBuilderRole::SetFree(CBuilderRole *this, CSettler *_pSettler, int a3)
+bool  CBuilderRole::SetFree(class CSettler * _pSettler, int a3) {
   
   int v3; // eax
-  void **v4; // eax
+  IBuildingRole *v4; // eax
   int v5; // eax
-  _DWORD *v7; // [esp+0h] [ebp-14h]
+  CBuilding *v7; // [esp+0h] [ebp-14h]
   CBuildingSiteRole *v8; // [esp+8h] [ebp-Ch]
-  bool v10; // [esp+13h] [ebp-1h]
+  bool bNeedsRest; // [esp+13h] [ebp-1h]
 
   if ( ISettlerRole::HomeEntityId(this) )
   {
     v3 = ISettlerRole::HomeEntityId(this);
-    v7 = (_DWORD *)CBuildingMgr::operator[](v3);
-    v4 = (void **)CBuilding::Role(v7);
+    v7 = CBuildingMgr::operator[]((CBuildingMgr *)g_cBuildingMgr, v3);
+    v4 = CBuilding::Role(v7);
     v8 = (CBuildingSiteRole *)j____RTDynamicCast(
-                                v4,
+                                (void **)&v4->__vftable,
                                 0,
                                 &IBuildingRole__RTTI_Type_Descriptor_,
                                 &CBuildingSiteRole__RTTI_Type_Descriptor_,
                                 0);
     if ( v8 )
     {
-      v5 = IEntity::EntityId((unsigned __int16 *)a2);
+      v5 = IEntity::EntityId(_pSettler);
       CBuildingSiteRole::BuilderLeft(v8, v5);
     }
   }
-  v10 = *((_BYTE *)this + 45) == 1;
-  if ( ISettlerRole::SetFree(this, a2, a3) )
+  bNeedsRest = this->m_iNeedsRest;
+  if ( ISettlerRole::SetFree(this, _pSettler, a3) )
     return 1;
-  if ( v10
-    && (*(unsigned __int8 (__thiscall **)(CBuilderRole *, struct CSettler *, int))(*(_DWORD *)this + 120))(this, a2, 3) )
+  if ( bNeedsRest && this->SearchRestingPlace(this, _pSettler, 3) )
   {
-    IAnimatedEntity::SetFrame(1);
-    IMovingEntity::WalkToXY(a2, *((_DWORD *)this + 7), 0x2000);
-    *((_BYTE *)this + 4) = 6;
-    IMovingEntity::SetDisplacementCosts(5);
+    IAnimatedEntity::SetFrame(_pSettler, 1u);
+    IMovingEntity::WalkToXY(_pSettler, this->m_iStartPosition, 0x2000);
+    this->m_iTask = 6;
+    IMovingEntity::SetDisplacementCosts(_pSettler, 5);
     return 0;
   }
   else
   {
-    IAnimatedEntity::SetFrame(1);
-    *((_BYTE *)this + 4) = 17;
+    IAnimatedEntity::SetFrame(_pSettler, 1u);
+    this->m_iTask = 17;
     return 0;
   }
 }
 
 
 // address=[0x1562ff0]
-// Decompiled from _DWORD *__thiscall CBuilderRole::CBuilderRole(char *this, int a2)
+// Decompiled from CBuilderRole *__thiscall CBuilderRole::CBuilderRole(CBuilderRole *this, struct std::istream *a2)
  CBuilderRole::CBuilderRole(std::istream & a2) {
   
-  int v3; // [esp+8h] [ebp-18h] BYREF
+  unsigned int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
-  _DWORD *v5; // [esp+10h] [ebp-10h]
   int v6; // [esp+1Ch] [ebp-4h]
 
-  v5 = this;
   ISettlerRole::ISettlerRole(this, a2);
   v6 = 0;
-  *v5 = &CBuilderRole::_vftable_;
+  this->__vftable = (CBuilderRole_vtbl *)&CBuilderRole::_vftable_;
   operator^<unsigned int>(a2, &v3);
   if ( v3 != 1 )
   {
@@ -140,26 +136,24 @@ bool  CBuilderRole::SetFree(class CSettler * a2, int a3) {
     CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
     _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
   }
-  operator^<signed char>(a2, v5 + 11);
-  operator^<signed char>(a2, (char *)v5 + 45);
+  operator^<signed char>(a2, &this->m_iDir);
+  operator^<signed char>(a2, &this->m_iNeedsRest);
   v6 = -1;
-  return v5;
+  return this;
 }
 
 
 // address=[0x15630c0]
-// Decompiled from int __thiscall CBuilderRole::Store(struct CPersistence *this, struct std::ostream *a2)
+// Decompiled from void __thiscall CBuilderRole::Store(CBuilderRole *this, struct std::ostream *a2)
 void  CBuilderRole::Store(std::ostream & a2) {
   
-  int v3; // [esp+0h] [ebp-8h] BYREF
-  struct CPersistence *v4; // [esp+4h] [ebp-4h]
+  unsigned int v2; // [esp+0h] [ebp-8h] BYREF
 
-  v4 = this;
   ISettlerRole::Store(this, a2);
-  v3 = 1;
-  operator^<unsigned int>(a2, &v3);
-  operator^<signed char>(a2, (char *)v4 + 44);
-  return operator^<signed char>(a2, (char *)v4 + 45);
+  v2 = 1;
+  operator^<unsigned int>(a2, &v2);
+  operator^<signed char>(a2, &this->m_iDir);
+  operator^<signed char>(a2, &this->m_iNeedsRest);
 }
 
 
@@ -180,14 +174,10 @@ int  CBuilderRole::GetSettlerRole(void)const {
 
 
 // address=[0x1563960]
-// Decompiled from CBuilderRole *__thiscall CBuilderRole::SetDir(CBuilderRole *this, char a2)
+// Decompiled from void __thiscall CBuilderRole::SetDir(CBuilderRole *this, char a2)
 void  CBuilderRole::SetDir(char a2) {
   
-  CBuilderRole *result; // eax
-
-  result = this;
-  *((_BYTE *)this + 44) = a2;
-  return result;
+  this->m_iDir = a2;
 }
 
 
@@ -212,8 +202,8 @@ class CBuilderRole * __cdecl CBuilderRole::Load(std::istream & a1) {
   
   ISettlerRole::ISettlerRole(this);
   this->__vftable = (CBuilderRole_vtbl *)&CBuilderRole::_vftable_;
-  this->m_bU0 = 0;
-  this->m_bU1 = 0;
+  this->m_iDir = 0;
+  this->m_iNeedsRest = 0;
   return this;
 }
 
@@ -228,16 +218,13 @@ class CBuilderRole * __cdecl CBuilderRole::Load(std::istream & a1) {
 
 
 // address=[0x1563170]
-// Decompiled from int __thiscall CBuilderRole::GetNextJob(CBuilderRole *this, struct CSettler *a2)
+// Decompiled from void __thiscall CBuilderRole::GetNextJob(CBuilderRole *this, struct CSettler *a2)
 void  CBuilderRole::GetNextJob(class CSettler * a2) {
   
-  CBuilderRole *v3; // [esp+0h] [ebp-4h]
-
-  v3 = this;
   IMovingEntity::IncToDoListIter(a2);
   if ( IMovingEntity::IsEndIter(a2) )
-    IMovingEntity::ResetToDoList(v3);
-  return (*(int (__thiscall **)(CBuilderRole *, struct CSettler *))(*(_DWORD *)v3 + 40))(v3, a2);
+    IMovingEntity::ResetToDoList(a2);
+  this->TakeJob(this, a2);
 }
 
 
@@ -266,12 +253,12 @@ void  CBuilderRole::TakeJob(class CSettler * a2) {
       if ( this->CheckHome(this, a2) )
       {
         v4 = IEntity::ID(a2);
-        v3 = CBuildingMgr::operator[](this->m_uHomeEntityId);
+        v3 = CBuildingMgr::operator[]((CBuildingMgr *)g_cBuildingMgr, this->m_uHomeEntityId);
         CBuilding::SettlerEnter(v3, v4);
         IMovingEntity::SetDisplacementCosts(a2, 10);
-        IAnimatedEntity::RegisterForLogicUpdate(a2, this->m_uCycleFrames);
-        IMovingEntity::SetDirection(a2, this->m_bU0);
-        this->m_bU1 = 1;
+        IAnimatedEntity::RegisterForLogicUpdate(a2, this->m_iCycleFrames);
+        IMovingEntity::SetDirection(a2, this->m_iDir);
+        this->m_iNeedsRest = 1;
       }
       break;
     case 17:
@@ -283,108 +270,87 @@ void  CBuilderRole::TakeJob(class CSettler * a2) {
 
 
 // address=[0x15632c0]
-// Decompiled from int __thiscall CBuilderRole::Init(int this, CPropertySet *a2)
-void  CBuilderRole::Init(class CSettler * a2) {
+// Decompiled from void __thiscall CBuilderRole::Init(CBuilderRole *this, IEntity *a1)
+void  CBuilderRole::Init(class CSettler * a1) {
   
-  int result; // eax
-
-  if ( IEntity::FlagBits(a2, 0x20)
+  if ( IEntity::FlagBits(a1, ENTITY_FLAG_ATTACHED)
     && BBSupportDbgReport(
          2,
-         (int)"MapObjects\\Settler\\BuilderRole.cpp",
+         "MapObjects\\Settler\\BuilderRole.cpp",
          140,
-         (int)"!_pSettler->FlagBits( ENTITY_FLAG_ATTACHED )") == 1 )
+         "!_pSettler->FlagBits( ENTITY_FLAG_ATTACHED )") == 1 )
   {
     __debugbreak();
   }
-  if ( *(_WORD *)(this + 32)
-    && BBSupportDbgReport(2, (int)"MapObjects\\Settler\\BuilderRole.cpp", 141, (int)"!m_uHomeEntityId") == 1 )
+  if ( this->m_uHomeEntityId
+    && BBSupportDbgReport(2, "MapObjects\\Settler\\BuilderRole.cpp", 141, "!m_uHomeEntityId") == 1 )
   {
     __debugbreak();
   }
-  result = CWarMap::AddEntity(a2);
-  *(_BYTE *)(this + 45) = 0;
-  return result;
+  CWarMap::AddEntity(a1);
+  this->m_iNeedsRest = 0;
 }
 
 
 // address=[0x1563340]
-// Decompiled from CBuilderRole *__thiscall CBuilderRole::ConvertEventIntoGoal(  CBuilderRole *this,  struct CSettler *a2,  struct CEntityEvent *a3)
+// Decompiled from void __thiscall CBuilderRole::ConvertEventIntoGoal(CBuilderRole *this, struct CSettler *a2, struct CEntityEvent *a3)
 void  CBuilderRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent * a3) {
   
   int v3; // eax
-  CBuilderRole *result; // eax
-  int v5; // eax
-  int v6; // eax
-  int v7; // eax
-  int v8; // [esp-4h] [ebp-24h]
-  CBuildingSiteRole *v9; // [esp+0h] [ebp-20h]
-  _DWORD *v10; // [esp+4h] [ebp-1Ch]
-  int v11; // [esp+8h] [ebp-18h]
-  int v13[2]; // [esp+10h] [ebp-10h] BYREF
-  char v14; // [esp+18h] [ebp-8h]
+  int v4; // eax
+  unsigned int v5; // eax
+  std::list *v6; // eax
+  int m_iDataA; // [esp-4h] [ebp-24h]
+  CBuildingSiteRole *v8; // [esp+0h] [ebp-20h]
+  CBuilding *v9; // [esp+4h] [ebp-1Ch]
+  int m_iEvent; // [esp+8h] [ebp-18h]
+  struct SBuilderPos v12; // [esp+10h] [ebp-10h] BYREF
 
-  v11 = *((_DWORD *)a3 + 1);
-  if ( v11 == 1 )
+  m_iEvent = a3->m_iEvent;
+  if ( m_iEvent == 1 )
   {
-    *((_BYTE *)this + 45) = 0;
-    v10 = (_DWORD *)CBuildingMgr::operator[](*((_DWORD *)a3 + 3));
-    if ( IEntity::FlagBits(v10, (EntityFlag)0x1000u) && ISettlerRole::HomeEntityId(this) )
+    this->m_iNeedsRest = 0;
+    v9 = CBuildingMgr::operator[]((CBuildingMgr *)g_cBuildingMgr, a3->m_iDataA);
+    if ( IEntity::FlagBits(v9, (EntityFlag)4096) && ISettlerRole::HomeEntityId(this) )
     {
       if ( debug && DEBUG_FLAGS[dword_4152090] )
       {
-        v8 = *((_DWORD *)a3 + 3);
-        v5 = IEntity::ID();
-        BBSupportTracePrintF(0, "Builder %u was orderd to buildingsite %u", v5, v8);
+        m_iDataA = a3->m_iDataA;
+        v4 = IEntity::ID(a2);
+        BBSupportTracePrintF(0, "Builder %u was orderd to buildingsite %u", v4, m_iDataA);
       }
-      *((_DWORD *)this + 7) = IEntity::PackedXY(a2);
-      v9 = (CBuildingSiteRole *)CBuilding::Role(v10);
-      CBuildingSiteRole::GetBuilderPos(v9, (struct SBuilderPos *)v13);
-      ISettlerRole::NewDestination(this, a2, v13[0], v13[1], 0);
-      v6 = IEntity::Race(a2);
-      v7 = CEntityToDoListMgr::SettlerJobList(v6, 149);
-      (*(void (__thiscall **)(struct CSettler *, int, int))(*(_DWORD *)a2 + 112))(a2, v7, 149);
-      return CBuilderRole::SetDir(this, v14);
+      this->m_iStartPosition = IEntity::PackedXY(a2);
+      v8 = (CBuildingSiteRole *)CBuilding::Role(v9);
+      CBuildingSiteRole::GetBuilderPos(v8, &v12);
+      ISettlerRole::NewDestination(this, a2, v12.m_iOffsetX, v12.m_iOffsetY, 0);
+      v5 = IEntity::Race(a2);
+      v6 = CEntityToDoListMgr::SettlerJobList(g_pEntityToDoListMgr, v5, 0x95u);
+      a2->NewToDoList(a2, (int)v6, 149);
+      CBuilderRole::SetDir(this, v12.m_iDirection);
     }
     else
     {
-      return (CBuilderRole *)(*(int (__thiscall **)(CBuilderRole *, struct CSettler *, int))(*(_DWORD *)this + 64))(
-                               this,
-                               a2,
-                               -1);
+      this->SetFree(this, a2, -1);
     }
   }
-  else if ( v11 == 7 || v11 == 9 )
+  else if ( m_iEvent == 7 || m_iEvent == 9 )
   {
-    if ( !debug )
-      return (CBuilderRole *)(*(int (__thiscall **)(CBuilderRole *, struct CSettler *, _DWORD))(*(_DWORD *)this + 64))(
-                               this,
-                               a2,
-                               *((_DWORD *)a3 + 5));
-    if ( !DEBUG_FLAGS[dword_4152090] )
-      return (CBuilderRole *)(*(int (__thiscall **)(CBuilderRole *, struct CSettler *, _DWORD))(*(_DWORD *)this + 64))(
-                               this,
-                               a2,
-                               *((_DWORD *)a3 + 5));
-    v3 = IEntity::ID();
-    BBSupportTracePrintF(0, "Building %u cancel order of builder %u", *((unsigned __int16 *)this + 16), v3);
-    return (CBuilderRole *)(*(int (__thiscall **)(CBuilderRole *, struct CSettler *, _DWORD))(*(_DWORD *)this + 64))(
-                             this,
-                             a2,
-                             *((_DWORD *)a3 + 5));
-  }
-  else
-  {
-    result = (CBuilderRole *)IEntity::FlagBits(a2, ENTITY_FLAG_Registered);
-    if ( !result )
+    if ( debug )
     {
-      if ( debug && DEBUG_FLAGS[dword_4152090] )
-        BBSupportTracePrint(0, "ConvertEventIntoGoal BuilderRole - unknown event");
-      return (CBuilderRole *)IAnimatedEntity::RegisterForLogicUpdate(1);
+      if ( DEBUG_FLAGS[dword_4152090] )
+      {
+        v3 = IEntity::ID(a2);
+        BBSupportTracePrintF(0, "Building %u cancel order of builder %u", this->m_uHomeEntityId, v3);
+      }
     }
+    this->SetFree(this, a2, a3->m_iDataC);
   }
-  return result;
+  else if ( !IEntity::FlagBits(a2, ENTITY_FLAG_Registered) )
+  {
+    if ( debug && DEBUG_FLAGS[dword_4152090] )
+      BBSupportTracePrint(0, "ConvertEventIntoGoal BuilderRole - unknown event");
+    IAnimatedEntity::RegisterForLogicUpdate(a2, 1);
+  }
 }
 
 
-#endif // Already implemented

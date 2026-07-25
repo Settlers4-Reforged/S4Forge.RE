@@ -22,7 +22,7 @@ public:
     char m_iX;
     char m_iY;
     char m_iRadius;
-    char m_iPadding;
+    unsigned __int8 m_uPadding;
 
 };
 

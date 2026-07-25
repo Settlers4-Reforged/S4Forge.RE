@@ -33,7 +33,7 @@ public:
     static class CFarmBuildingRole * __cdecl Load(std::istream & a1);
 
     // address=[0x150a5e0]
-    virtual void  LogicUpdate(class CBuilding * a2);
+    virtual void  LogicUpdate(class CBuilding * _pBuilding);
 
     // address=[0x150aa20]
     virtual void  FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo & a3);
@@ -71,6 +71,10 @@ private:
 
     // address=[0x14fde30]
     virtual bool  TryCrushBuilding(void);
+
+    // Type information members
+public:
+    unsigned __int16 m_iPileId;
 
 };
 

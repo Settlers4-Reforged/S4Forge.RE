@@ -55,14 +55,14 @@ void __cdecl CMagic::InitMagicData(void) {
 
 
 // address=[0x146b080]
-// Decompiled from int __cdecl CMagic::CastSpell(int a1, int a2, unsigned int a3, unsigned int a4, unsigned int a5, int a6)
-int __cdecl CMagic::CastSpell(int a1, int a2, int a3, int a4, int a5, int a6) {
+// Decompiled from int __cdecl CMagic::CastSpell(  int _iPlayer,  unsigned int _iSpell,  unsigned int _iX,  unsigned int _iY,  unsigned int _iFlags,  int _iCasterId)
+int __cdecl CMagic::CastSpell(int _iPlayer, int _iSpell, int _iX, int _iY, int _iFlags, int _iCasterId) {
   
-  type_info *v6; // eax
-  _DWORD *v8; // eax
+  CPlayerGameData *rPlayerData; // eax
+  int *v8; // eax
   int v9; // eax
-  void *v10; // eax
-  int v11; // eax
+  struct IFutureEvents *v10; // eax
+  DWORD v11; // eax
   int v12; // eax
   int v13; // [esp-10h] [ebp-74h]
   int v14; // [esp-Ch] [ebp-70h]
@@ -72,74 +72,74 @@ int __cdecl CMagic::CastSpell(int a1, int a2, int a3, int a4, int a5, int a6) {
   int v18; // [esp+2Ch] [ebp-38h]
   int v19; // [esp+30h] [ebp-34h]
   int SpellRange; // [esp+34h] [ebp-30h]
-  int v21; // [esp+38h] [ebp-2Ch]
-  int v22; // [esp+3Ch] [ebp-28h]
+  unsigned int v21; // [esp+38h] [ebp-2Ch]
+  unsigned int v22; // [esp+3Ch] [ebp-28h]
   BOOL v23; // [esp+40h] [ebp-24h]
   BOOL v24; // [esp+44h] [ebp-20h]
   int v25; // [esp+48h] [ebp-1Ch]
-  int v26; // [esp+4Ch] [ebp-18h]
+  int iCurMana; // [esp+4Ch] [ebp-18h]
   int v27; // [esp+50h] [ebp-14h]
-  int v28; // [esp+54h] [ebp-10h]
-  CPlayerMagicData *v29; // [esp+58h] [ebp-Ch]
-  unsigned __int8 *v30; // [esp+5Ch] [ebp-8h]
-  int v31; // [esp+60h] [ebp-4h]
+  int iCurCost; // [esp+54h] [ebp-10h]
+  CPlayerMagicData *rMagicData; // [esp+58h] [ebp-Ch]
+  IEntity *rPriestEntity; // [esp+5Ch] [ebp-8h]
+  int iRace; // [esp+60h] [ebp-4h]
 
-  if ( !CPlayerManager::ValidUsedPlayerId(a1) )
+  if ( !CPlayerManager::ValidUsedPlayerId(_iPlayer) )
   {
     if ( BBSupportDbgReport(1, "Logic\\Magic.cpp", 3036, "CMagic::CastSpell(): Invalid player id!") == 1 )
       __debugbreak();
     return 0;
   }
-  if ( !(unsigned __int8)MagicIsValidSpellCategory(a2) )
+  if ( !MagicIsValidSpellCategory(_iSpell) )
   {
     if ( BBSupportDbgReport(1, "Logic\\Magic.cpp", 3031, "CMagic::CastSpell(): Invalid spell category!") == 1 )
       __debugbreak();
     return 0;
   }
-  v31 = CPlayerManager::Race(a1);
-  if ( (a5 & 0x8000000) != 0 )
+  iRace = CPlayerManager::Race(_iPlayer);
+  if ( (_iFlags & 0x8000000) != 0 )
   {
-    v31 = (int)(a5 & 0x7000000) >> 24;
-    a5 = a5 & 0xEFFFFFF8 | 5;
-    a6 = 0;
+    iRace = (int)(_iFlags & 0x7000000) >> 24;
+    _iFlags = _iFlags & 0xEFFFFFF8 | 5;
+    _iCasterId = 0;
   }
-  if ( !(unsigned __int8)MagicIsValidRace(v31) )
+  if ( !MagicIsValidRace(iRace) )
   {
     if ( BBSupportDbgReport(1, "Logic\\Magic.cpp", 3025, "CMagic::CastSpell(): Invalid race!") == 1 )
       __debugbreak();
     return 0;
   }
-  v6 = CPlayerManager::PlayerGameData(a1);
-  v29 = (CPlayerMagicData *)CPlayerGameData::MagicData(v6);
-  v26 = CPlayerMagicData::ManaAmount(v29);
-  v28 = CPlayerMagicData::SpellCategoryCost(v29, a2);
-  if ( v26 < 0 && BBSupportDbgReport(2, "Logic\\Magic.cpp", 2908, "iCurMana >= 0") == 1 )
+  rPlayerData = CPlayerManager::PlayerGameData(_iPlayer);
+  rMagicData = CPlayerGameData::MagicData(rPlayerData);
+  iCurMana = CPlayerMagicData::ManaAmount(rMagicData);
+  iCurCost = CPlayerMagicData::SpellCategoryCost(rMagicData, _iSpell);
+  if ( iCurMana < 0 && BBSupportDbgReport(2, "Logic\\Magic.cpp", 2908, "iCurMana >= 0") == 1 )
     __debugbreak();
-  if ( v28 < 1 && BBSupportDbgReport(2, "Logic\\Magic.cpp", 2909, "iCurCost >= MAGIC_COST_MIN") == 1 )
+  if ( iCurCost < 1 && BBSupportDbgReport(2, "Logic\\Magic.cpp", 2909, "iCurCost >= MAGIC_COST_MIN") == 1 )
     __debugbreak();
-  if ( v28 > 1000 && BBSupportDbgReport(2, "Logic\\Magic.cpp", 2910, "iCurCost <= MAGIC_COST_MAX") == 1 )
+  if ( iCurCost > 1000 && BBSupportDbgReport(2, "Logic\\Magic.cpp", 2910, "iCurCost <= MAGIC_COST_MAX") == 1 )
     __debugbreak();
-  v25 = sub_146C710(v28, a5);
-  if ( v26 < v25 )
+  v25 = sub_146C710(iCurCost, _iFlags);
+  if ( iCurMana < v25 )
     return -1;
-  if ( !(unsigned __int8)CWorldManager::InWorld(a3, a4) )
+  if ( !CWorldManager::InWorld(_iX, _iY) )
   {
     if ( BBSupportDbgReport(1, "Logic\\Magic.cpp", 3020, "CMagic::CastSpell(): Invalid destination!") == 1 )
       __debugbreak();
     return 0;
   }
-  v24 = a6 > 0;
-  v23 = (a5 & 4) == 0;
+  v24 = _iCasterId > 0;
+  v23 = (_iFlags & 4) == 0;
   if ( !v23 || !v24 )
     goto LABEL_32;
-  v30 = (unsigned __int8 *)CMapObjectMgr::Entity(a6);
-  if ( IEntity::ObjType(v30) != 1
+  rPriestEntity = CMapObjectMgr::Entity(_iCasterId);
+  if ( IEntity::ObjType(rPriestEntity) != SETTLER_OBJ
     && BBSupportDbgReport(2, "Logic\\Magic.cpp", 2927, "rPriestEntity.ObjType() == SETTLER_OBJ") == 1 )
   {
     __debugbreak();
   }
-  if ( IEntity::WarriorType() != 6
-    && (IEntity::WarriorType() != 4 || IEntity::Race(v30) != 3)
+  if ( IEntity::WarriorType(rPriestEntity) != AI_WARRIOR_TYPE_PRIEST
+    && (IEntity::WarriorType(rPriestEntity) != AI_WARRIOR_TYPE_FIGHTER_UNIQUE || IEntity::Race(rPriestEntity) != 3)
     && BBSupportDbgReport(
          2,
          "Logic\\Magic.cpp",
@@ -149,50 +149,58 @@ int __cdecl CMagic::CastSpell(int a1, int a2, int a3, int a4, int a5, int a6) {
   {
     __debugbreak();
   }
-  v21 = IEntity::X(v30);
-  v22 = IEntity::Y(v30);
-  if ( !(unsigned __int8)CWorldManager::InWorld(v21, v22)
+  v21 = IEntity::X(rPriestEntity);
+  v22 = IEntity::Y(rPriestEntity);
+  if ( !CWorldManager::InWorld(v21, v22)
     && BBSupportDbgReport(2, "Logic\\Magic.cpp", 2938, "g_cWorld.InWorld(iPriestX, iPriestY)") == 1 )
   {
     __debugbreak();
   }
-  v19 = Grid::Distance((Grid *)(a3 - v21), a4 - v22);
-  SpellRange = CMagic::MagicGetSpellRange(v31, a2);
+  v19 = Grid::Distance(_iX - v21, _iY - v22);
+  SpellRange = CMagic::MagicGetSpellRange(iRace, _iSpell);
   if ( SpellRange < v19 )
     return 0;
 LABEL_32:
   v27 = 0;
-  if ( (a5 & 0x10000000) != 0 )
+  if ( (_iFlags & 0x10000000) != 0 )
   {
-    v10 = (void *)CLogic::FutureEvents(g_pLogic);
-    IFutureEvents::AddFutureEvent16(v10, 3, 12, a6, a1 | (a2 << 8), a3, a4, (unsigned __int16)a5);
+    v10 = CLogic::FutureEvents(g_pLogic);
+    IFutureEvents::AddFutureEvent16(
+      v10,
+      3,
+      12,
+      _iCasterId,
+      _iPlayer | (_iSpell << 8),
+      _iX,
+      _iY,
+      (unsigned __int16)_iFlags);
     v27 = 1;
   }
   else
   {
-    v14 = sub_146C8C0(v31, a2);
-    v13 = sub_146C7D0(v31, a2);
-    v8 = (_DWORD *)TStaticConfigIntArrayBase<8>::operator[](a2);
+    v14 = sub_146C8C0(iRace, _iSpell);
+    v13 = sub_146C7D0(iRace, _iSpell);
+    v8 = (int *)TStaticConfigIntArrayBase<8>::operator[](*(&off_36B705C + iRace), _iSpell);
     v9 = MagicMax(*v8, 0, 30);
-    CMagicSpell::CMagicSpell((CMagicSpell *)v15, a1, v31, a3, a4, v9, v13, v14, a5, a6);
-    v27 = CMagicSpell::CastSpell((CMagicSpell *)v15, v31, a2);
+    CMagicSpell::CMagicSpell((CMagicSpell *)v15, _iPlayer, iRace, _iX, _iY, v9, v13, v14, _iFlags, _iCasterId);
+    v27 = CMagicSpell::CastSpell((CMagicSpell *)v15, iRace, _iSpell);
   }
   if ( !v27 )
     return 0;
   if ( v25 > 0 )
   {
-    CPlayerMagicData::SetManaAmount(v29, v26 - v25);
-    v17 = sub_146C620(a5);
-    v18 = sub_146C670(v31, a2);
-    v16 = sub_146C6B0(v28, v17, v18);
-    CPlayerMagicData::SetSpellCategoryCost(v29, a2, v16);
+    CPlayerMagicData::SetManaAmount(rMagicData, iCurMana - v25);
+    v17 = sub_146C620(_iFlags);
+    v18 = sub_146C670(iRace, _iSpell);
+    v16 = sub_146C6B0(iCurCost, v17, v18);
+    CPlayerMagicData::SetSpellCategoryCost(rMagicData, _iSpell, v16);
   }
-  v11 = CPlayerMagicData::SpellCategoryCounter(v29, a2);
-  CPlayerMagicData::SetSpellCategoryCounter(v29, a2, v11 + 1);
-  v12 = Y16X16::PackXYFast(a3, a4);
-  (*(void (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)g_pAI + 44))(g_pAI, 1, a1, a2, v12);
+  v11 = CPlayerMagicData::SpellCategoryCounter(rMagicData, _iSpell);
+  CPlayerMagicData::SetSpellCategoryCounter(rMagicData, _iSpell, v11 + 1);
+  v12 = Y16X16::PackXYFast(_iX, _iY);
+  g_pAI->PostAIEvent(g_pAI, 1, _iPlayer, _iSpell, v12);
   if ( g_pScriptMgr )
-    CGameScriptManager::SendGameEvent((CGameScriptManager *)g_pScriptMgr, 0x16u, a1, a2, a3, a4);
+    CGameScriptManager::SendGameEvent(g_pScriptMgr, 0x16u, _iPlayer, _iSpell, _iX, _iY);
   return 1;
 }
 
@@ -470,7 +478,7 @@ void __cdecl CMagic::IncreaseManaByDonation(int a1) {
 void __cdecl CMagic::IncreaseManaByBigTemple(int a1) {
   
   int v1; // eax
-  type_info *v2; // eax
+  CPlayerGameData *v2; // eax
   int v3; // eax
   CPlayerMagicData *v4; // [esp+0h] [ebp-8h]
   int v5; // [esp+4h] [ebp-4h]
@@ -484,7 +492,7 @@ void __cdecl CMagic::IncreaseManaByBigTemple(int a1) {
   v5 = MagicMax(v1, 0, 999);
   CMagic::IncreaseMana(a1, v5);
   v2 = CPlayerManager::PlayerGameData(a1);
-  v4 = (CPlayerMagicData *)CPlayerGameData::MagicData(v2);
+  v4 = CPlayerGameData::MagicData(v2);
   v3 = CPlayerMagicData::TotalAmountOfCollectedMana(v4);
   CPlayerMagicData::SetTotalAmountOfCollectedMana(v4, v5 + v3);
 }

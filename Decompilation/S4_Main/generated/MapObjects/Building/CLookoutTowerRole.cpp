@@ -236,16 +236,16 @@ void  CLookoutTowerRole::FillDialog(class CBuilding * a2, bool a3) {
   MEMORY[0x3F1E4B5] = IEntity::Race(a2);
   MEMORY[0x3F1E4B4] = IEntity::Type((unsigned __int16 *)a2);
   MEMORY[0x3F1E4B7] = 0;
-  byte_3F1E4B9 = 0;
+  MEMORY[0x3F1E4B9] = 0;
   v6 = IEntity::Type((unsigned __int16 *)a2);
   v3 = IEntity::OwnerId((unsigned __int8 *)a2);
-  byte_3F1E4BB = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v3, v6, 0);
+  MEMORY[0x3F1E4BB] = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v3, v6, 0);
   v7 = IEntity::Type((unsigned __int16 *)a2);
   v4 = IEntity::OwnerId((unsigned __int8 *)a2);
-  byte_3F1E4BC = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v4, v7, 1u);
+  MEMORY[0x3F1E4BC] = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v4, v7, 1u);
   MEMORY[0x3F1E4B6] = *((_BYTE *)this + 29);
   if ( *((_BYTE *)this + 29) )
-    byte_3F1E4BD = *(_BYTE *)(*((_DWORD *)this + 94) + 478);
+    MEMORY[0x3F1E4BD] = *(_BYTE *)(*((_DWORD *)this + 94) + 478);
   v8 = 604;
   if ( !a3 )
     v8 = 602;

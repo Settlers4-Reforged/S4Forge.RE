@@ -45,7 +45,7 @@ public:
     int  SearchSpaceForBuilding(int a2, int a3, int a4, int a5, bool a6, int a7);
 
     // address=[0x14f4b50]
-    void  DestroyBuilding(int a2, int a3, int a4);
+    void  DestroyBuilding(int _iX, int _iY, int _iGardenerPlayerIdEx);
 
     // address=[0x14f4f60]
     int  GetFirstBuildingId(int a2, int a3)const;

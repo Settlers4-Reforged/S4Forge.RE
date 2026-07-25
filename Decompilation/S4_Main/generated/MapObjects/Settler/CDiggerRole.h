@@ -24,7 +24,7 @@ public:
      CDiggerRole(std::istream & a2);
 
     // address=[0x1568bb0]
-    virtual void  Store(std::ostream & a2);
+    virtual void  Store(std::ostream & a1);
 
     // address=[0x1569d00]
     virtual unsigned long  ClassID(void)const;
@@ -52,21 +52,21 @@ private:
     virtual void  TakeJob(class CSettler * a2);
 
     // address=[0x1568ee0]
-    virtual void  Init(class CSettler * a2);
+    virtual void  Init(class CSettler * a1);
 
     // address=[0x1568f70]
-    virtual void  ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent * a3);
+    virtual void  ConvertEventIntoGoal(class CSettler * _pSettler, class CEntityEvent * a3);
 
     // address=[0x1569130]
-    void  SearchDig(class CSettler * a2);
+    void  SearchDig(class CSettler * _pSettler);
 
     // address=[0x1569540]
-    bool  CheckDig(class CSettler * a2);
+    bool  CheckDig(class CSettler * _pSettler);
 
     // Type information members
 public:
-    __int16 m_iU0;
-    bool m_bU1;
+    unsigned __int16 m_uDigMapPos;
+    unsigned __int8 m_uU1;
 
 };
 

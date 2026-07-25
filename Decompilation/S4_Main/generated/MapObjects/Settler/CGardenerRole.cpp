@@ -4,11 +4,14 @@
 // Definitions for class CGardenerRole
 
 // address=[0x1400b80]
-// Decompiled from int __cdecl CGardenerRole::New(int a1)
+// Decompiled from CGardenerRole *__cdecl CGardenerRole::New(struct std::istream *a1)
 class CPersistence * __cdecl CGardenerRole::New(std::istream & a1) {
   
-  if ( operator new(0x54u) )
-    return CGardenerRole::CGardenerRole(a1);
+  CGardenerRole *C; // [esp+Ch] [ebp-10h]
+
+  C = (CGardenerRole *)operator new(0x54u);
+  if ( C )
+    return CGardenerRole::CGardenerRole(C, a1);
   else
     return 0;
 }
@@ -112,7 +115,7 @@ void  CGardenerRole::PostLoadInit(class CSettler * a1) {
   
   struct CEntityTask *v2; // eax
   int v4; // [esp+4h] [ebp-24h] BYREF
-  int v6; // [esp+Ch] [ebp-1Ch] MAPDST BYREF
+  unsigned int v6; // [esp+Ch] [ebp-1Ch] MAPDST BYREF
   int pExceptionObject; // [esp+10h] [ebp-18h] BYREF
   unsigned int i; // [esp+14h] [ebp-14h]
   int exceptionBlock; // [esp+24h] [ebp-4h]
@@ -130,7 +133,7 @@ void  CGardenerRole::PostLoadInit(class CSettler * a1) {
     CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
     _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
   }
-  operator^<unsigned int>(stream, &v4);
+  operator^<unsigned int>(stream, (unsigned int *)&v4);
   for ( i = 0; i < v4; ++i )
   {
     v2 = CEntityTask::Load(stream);
@@ -291,7 +294,7 @@ class CGardenerRole * __cdecl CGardenerRole::Load(std::istream & a1) {
 
   *(_DWORD *)this = &CGardenerRole::_vftable_;
   v1 = (CPropertySet *)CSettlerMgr::operator[](*((unsigned __int16 *)this + 9));
-  if ( !IEntity::FlagBits(v1, ENTITY_FLAG_OnBoard) )
+  if ( !IEntity::FlagBits(v1, ENTITY_FLAG_ON_BOARD) )
     CWarMap::RemoveEntity(v1);
   if ( *((_DWORD *)this + 17) != -1 )
     CWorldManager::ClearFlagBits(*((_DWORD *)this + 17), *((_DWORD *)this + 18), 32);
@@ -538,7 +541,7 @@ void  CGardenerRole::ConvertEventIntoGoal(class CSettler * pSettler, class CEnti
     case 7:
       m_iDataA = pEvent->m_iDataA;
       IEntity::SetFlagBits(pSettler, ENTITY_FLAG_Selectable);
-      IEntity::ClearFlagBits(pSettler, ENTITY_FLAG_OnBoard);
+      IEntity::ClearFlagBits(pSettler, ENTITY_FLAG_ON_BOARD);
       v38 = IEntity::Type(pSettler);
       v29 = IEntity::Type(pSettler);
       v19 = IEntity::Race(pSettler);
@@ -653,7 +656,7 @@ void  CGardenerRole::ConvertEventIntoGoal(class CSettler * pSettler, class CEnti
       CSettlerMgr::SearchSpaceForSettler(&g_cSettlerMgr, v17, v27, v36);
       CWarMap::AddEntity(pSettler);
       IEntity::SetFlagBits(pSettler, ENTITY_FLAG_Selectable|ENTITY_FLAG_Visible);
-      IEntity::ClearFlagBits(pSettler, ENTITY_FLAG_OnBoard);
+      IEntity::ClearFlagBits(pSettler, ENTITY_FLAG_ON_BOARD);
       this->m_iTask = 27;
       v37 = this->m_uHomeEntityId;
       v28 = IEntity::ID(pSettler);

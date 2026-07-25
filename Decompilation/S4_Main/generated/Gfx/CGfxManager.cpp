@@ -792,10 +792,10 @@ unsigned int  CGfxManager::GetEffectFrameCount(unsigned int a2) {
 
 
 // address=[0x13635a0]
-// Decompiled from unsigned int __thiscall CGfxManager::GetBuildingJobFrameCount(CGfxManager *this, unsigned int a2, int iJob)
-unsigned int  CGfxManager::GetBuildingJobFrameCount(unsigned int a2, unsigned int a3) {
+// Decompiled from unsigned int __thiscall CGfxManager::GetBuildingJobFrameCount(CGfxManager *this, unsigned int _iRace, int _iJob)
+unsigned int  CGfxManager::GetBuildingJobFrameCount(unsigned int _iRace, unsigned int _iJob) {
   
-  return CGfxManager::GetJobFrameCount(this, a2 + 10, iJob, 0);
+  return CGfxManager::GetJobFrameCount(this, _iRace + 10, _iJob, 0);
 }
 
 

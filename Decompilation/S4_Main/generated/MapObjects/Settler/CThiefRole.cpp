@@ -520,7 +520,7 @@ void  CThiefRole::TakeJob(class CSettler * a2) {
         v15 = CVehicleMgr::operator[](*(unsigned __int16 *)(this + 32));
         v11 = IEntity::ID();
         (*(void (__thiscall **)(int, int))(*(_DWORD *)v15 + 128))(v15, v11);
-        if ( !IEntity::FlagBits(a2, ENTITY_FLAG_OnBoard)
+        if ( !IEntity::FlagBits(a2, ENTITY_FLAG_ON_BOARD)
           && BBSupportDbgReport(
                2,
                "MapObjects\\Settler\\ThiefRole.cpp",
@@ -707,7 +707,7 @@ void  CThiefRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent *
         __debugbreak();
       }
       IEntity::SetFlagBits(a2, ENTITY_FLAG_Selectable);
-      IEntity::ClearFlagBits(a2, ENTITY_FLAG_OnBoard);
+      IEntity::ClearFlagBits(a2, ENTITY_FLAG_ON_BOARD);
       CSettler::TakeWaitList(a2);
       v30 = IEntity::ID();
       v21 = IEntity::OwnerId((unsigned __int8 *)a2);
@@ -824,7 +824,7 @@ void  CThiefRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent *
       CSettlerMgr::SearchSpaceForSettler((CSettlerMgr *)g_cSettlerMgr, v19, v28, v36);
       CWarMap::AddEntity(a2);
       IEntity::SetFlagBits(a2, ENTITY_FLAG_Selectable|ENTITY_FLAG_Visible);
-      IEntity::ClearFlagBits(a2, ENTITY_FLAG_OnBoard);
+      IEntity::ClearFlagBits(a2, ENTITY_FLAG_ON_BOARD);
       CSettler::TakeWaitList(a2);
       v37 = *(unsigned __int16 *)(this + 32);
       v29 = IEntity::ID();

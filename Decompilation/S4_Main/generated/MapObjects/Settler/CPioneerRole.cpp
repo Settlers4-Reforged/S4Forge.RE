@@ -291,7 +291,7 @@ class CPioneerRole * __cdecl CPioneerRole::Load(std::istream & a1) {
 
   *(_DWORD *)this = &CPioneerRole::_vftable_;
   v4 = (CPropertySet *)CSettlerMgr::operator[](*((unsigned __int16 *)this + 9));
-  if ( !IEntity::FlagBits(v4, ENTITY_FLAG_OnBoard) )
+  if ( !IEntity::FlagBits(v4, ENTITY_FLAG_ON_BOARD) )
     CWarMap::RemoveEntity(v4);
   if ( *((_DWORD *)this + 6) )
   {
@@ -409,7 +409,7 @@ void  CPioneerRole::TakeJob(class CSettler * a2) {
           v8 = CVehicleMgr::operator[](*((unsigned __int16 *)this + 16));
           v5 = IEntity::ID();
           (*(void (__thiscall **)(int, int))(*(_DWORD *)v8 + 128))(v8, v5);
-          if ( !IEntity::FlagBits(a2, ENTITY_FLAG_OnBoard)
+          if ( !IEntity::FlagBits(a2, ENTITY_FLAG_ON_BOARD)
             && BBSupportDbgReport(
                  2,
                  "MapObjects\\Settler\\PioneerRole.cpp",
@@ -545,7 +545,7 @@ void  CPioneerRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent
     case 7:
       v37 = *((_DWORD *)a3 + 3);
       IEntity::SetFlagBits(a2, ENTITY_FLAG_Selectable);
-      IEntity::ClearFlagBits(a2, ENTITY_FLAG_OnBoard);
+      IEntity::ClearFlagBits(a2, ENTITY_FLAG_ON_BOARD);
       CSettler::TakeWaitList(a2);
       v22 = IEntity::ID();
       v4 = IEntity::OwnerId((unsigned __int8 *)a2);
@@ -649,7 +649,7 @@ void  CPioneerRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent
       CSettlerMgr::SearchSpaceForSettler((CSettlerMgr *)g_cSettlerMgr, v19, v27, v34);
       CWarMap::AddEntity(a2);
       IEntity::SetFlagBits(a2, ENTITY_FLAG_Selectable|ENTITY_FLAG_Visible);
-      IEntity::ClearFlagBits(a2, ENTITY_FLAG_OnBoard);
+      IEntity::ClearFlagBits(a2, ENTITY_FLAG_ON_BOARD);
       CSettler::TakeWaitList(a2);
       v35 = *((unsigned __int16 *)this + 16);
       v28 = IEntity::ID();

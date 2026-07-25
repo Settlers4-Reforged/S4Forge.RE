@@ -1406,37 +1406,26 @@ int  CMagicSpell::SpellSpecialRainOfStone(void) {
 // Decompiled from int __thiscall CMagicSpell::SpellWitherPlants(CMagicSpell *this)
 int  CMagicSpell::SpellWitherPlants(void) {
   
-  int v1; // ecx
-  int v2; // eax
-  _DWORD v4[4]; // [esp+0h] [ebp-24h] BYREF
-  int v5; // [esp+10h] [ebp-14h]
-  int v6; // [esp+14h] [ebp-10h]
-  int v7; // [esp+18h] [ebp-Ch] BYREF
-  int v8; // [esp+1Ch] [ebp-8h] BYREF
-  CMagicSpell *v9; // [esp+20h] [ebp-4h]
+  int v1; // eax
+  _DWORD v3[4]; // [esp+0h] [ebp-24h] BYREF
+  struct IEffects *pEffects; // [esp+10h] [ebp-14h]
+  int v5; // [esp+14h] [ebp-10h]
+  int v6; // [esp+18h] [ebp-Ch] BYREF
+  int v7; // [esp+1Ch] [ebp-8h] BYREF
 
-  v9 = this;
-  v6 = 0;
-  v7 = *((_DWORD *)this + 2);
-  v8 = *((_DWORD *)this + 3);
-  v5 = CLogic::Effects((DWORD *)g_pLogic);
-  (*(void (__thiscall **)(int, int, int, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v5 + 16))(
-    v5,
-    101,
-    59,
-    *((_DWORD *)v9 + 2),
-    *((_DWORD *)v9 + 3),
-    0,
-    0,
-    0);
-  CSpiralWalk::CSpiralWalk((CSpiralWalk *)v4, v7, v8, *((_DWORD *)v9 + 4));
-  while ( CSpiralWalk::NextXY(v4, &v7, &v8) )
+  v5 = 0;
+  v6 = *((_DWORD *)this + 2);
+  v7 = *((_DWORD *)this + 3);
+  pEffects = CLogic::Effects(g_pLogic);
+  pEffects->AddEffect(pEffects, EFFECT_2_DMAGIC_DARKDRY, 59, *((_DWORD *)this + 2), *((_DWORD *)this + 3), 0, 0, 0);
+  CSpiralWalk::CSpiralWalk((CSpiralWalk *)v3, v6, v7, *((_DWORD *)this + 4));
+  while ( CSpiralWalk::NextXY(v3, &v6, &v7) )
   {
-    v2 = CWorldManager::Width(v1);
-    CDecoObjMgr::Rod((CDecoObjMgr *)&g_cDecoObjMgr, v7 + v8 * v2, 1);
-    ++v6;
+    v1 = CWorldManager::Width();
+    CDecoObjMgr::Rod(&g_cDecoObjMgr, v6 + v7 * v1, 1);
+    ++v5;
   }
-  return v6;
+  return v5;
 }
 
 
@@ -1445,63 +1434,55 @@ int  CMagicSpell::SpellWitherPlants(void) {
 int  CMagicSpell::SpellTeleportPiles(void) {
   
   int v1; // esi
-  int v2; // eax
-  Grid *v4; // eax
+  struct IEffects *v2; // eax
+  int v4; // eax
   int v5; // eax
   int v6; // eax
   int v7; // eax
-  _DWORD *v8; // eax
+  CBuilding *v8; // eax
   void **v9; // eax
   int v10; // [esp-10h] [ebp-44h]
   CManakopterHallRole *v11; // [esp+4h] [ebp-30h]
   int v12; // [esp+8h] [ebp-2Ch]
   int v13; // [esp+Ch] [ebp-28h]
   int v14; // [esp+10h] [ebp-24h]
-  int FirstBuildingId; // [esp+14h] [ebp-20h]
+  int a1; // [esp+14h] [ebp-20h]
   int v16; // [esp+1Ch] [ebp-18h]
   int v17; // [esp+24h] [ebp-10h]
-  unsigned __int8 *SettlerPtr; // [esp+28h] [ebp-Ch]
-  CPile *PilePtr; // [esp+30h] [ebp-4h]
+  CSettler *SettlerPtr; // [esp+28h] [ebp-Ch]
+  CPile *pPile; // [esp+30h] [ebp-4h]
 
   v17 = 0;
   v16 = CWorldManager::PileId(*((_DWORD *)this + 2), *((_DWORD *)this + 3));
-  SettlerPtr = CSettlerMgr::GetSettlerPtr(*((_DWORD *)this + 8));
+  SettlerPtr = CSettlerMgr::GetSettlerPtr(&g_cSettlerMgr, *((_DWORD *)this + 8));
   v13 = IEntity::OwnerId(SettlerPtr);
   if ( !v16 )
     return v17;
   if ( !SettlerPtr )
     return v17;
-  PilePtr = CPileMgr::GetPilePtr(v16);
-  v12 = (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 60))(PilePtr);
-  v1 = (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 40))(PilePtr);
-  v14 = v1 - CPile::AmountLeaving(PilePtr);
-  if ( !PilePtr )
+  pPile = CPileMgr::GetPilePtr(v16);
+  v12 = pPile->GetGoodType();
+  v1 = pPile->Amount(pPile);
+  v14 = v1 - CPile::AmountLeaving(pPile);
+  if ( !pPile )
     return v17;
-  v2 = CLogic::Effects((DWORD *)g_pLogic);
-  (*(void (__thiscall **)(int, int, int, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v2 + 16))(
-    v2,
-    102,
-    63,
-    *((_DWORD *)this + 2),
-    *((_DWORD *)this + 3),
-    0,
-    0,
-    0);
-  if ( IEntity::FlagBits(PilePtr, (EntityFlag)0x10u) )
+  v2 = CLogic::Effects(g_pLogic);
+  v2->AddEffect(v2, EFFECT_2_DMAGIC_TELEPORT, 63, *((_DWORD *)this + 2), *((_DWORD *)this + 3), 0, 0, 0);
+  if ( IEntity::FlagBits(pPile, (EntityFlag)16) )
     return 0;
-  v10 = IEntity::Y(PilePtr);
-  v4 = (Grid *)IEntity::X(PilePtr);
+  v10 = IEntity::Y(pPile);
+  v4 = IEntity::X(pPile);
   v5 = Grid::Distance(v4, v10, 0, 0);
-  if ( !(unsigned __int8)CPile::ForceAmountLeaving(PilePtr, v5, 1) )
+  if ( !CPile::ForceAmountLeaving(pPile, v5, 1) )
     return 0;
-  v6 = IEntity::ID();
-  CPile::AttachAndIncAmountLeaving((unsigned __int16 *)PilePtr, v6, v14, 2);
-  v7 = IEntity::ID();
-  CPile::ChangeAmountAndDetach(PilePtr, v7);
-  FirstBuildingId = CBuildingMgr::GetFirstBuildingId((CBuildingMgr *)g_cBuildingMgr, v13, 80);
-  if ( !FirstBuildingId )
+  v6 = IEntity::ID(SettlerPtr);
+  CPile::AttachAndIncAmountLeaving(pPile, v6, v14, 2);
+  v7 = IEntity::ID(SettlerPtr);
+  CPile::ChangeAmountAndDetach(pPile, v7);
+  a1 = CBuildingMgr::GetFirstBuildingId((CBuildingMgr *)g_cBuildingMgr, v13, 80);
+  if ( !a1 )
     return 1;
-  v8 = (_DWORD *)CBuildingMgr::operator[](FirstBuildingId);
+  v8 = CBuildingMgr::operator[]((CBuildingMgr *)g_cBuildingMgr, a1);
   v9 = (void **)CBuilding::Role(v8);
   v11 = (CManakopterHallRole *)j____RTDynamicCast(
                                  v9,

@@ -4,12 +4,12 @@
 // Definitions for class CPileMgr
 
 // address=[0x12fd1f0]
-// Decompiled from IEntity *__cdecl CPileMgr::GetPilePtr(int _iPileId)
-class CPile * __cdecl CPileMgr::GetPilePtr(int _iPileId) {
+// Decompiled from CPile *__cdecl CPileMgr::GetPilePtr(int iPileId)
+class CPile * __cdecl CPileMgr::GetPilePtr(int iPileId) {
   
-  IEntity *v3; // [esp+8h] [ebp-4h]
+  CPile *v3; // [esp+8h] [ebp-4h]
 
-  v3 = CMapObjectMgr::EntityPtr(_iPileId);
+  v3 = (CPile *)CMapObjectMgr::EntityPtr(iPileId);
   if ( v3 && IEntity::ObjType(v3) == PILE_OBJ )
     return v3;
   else
@@ -149,7 +149,7 @@ int  CPileMgr::AddPile(int _iX, int _iY, int _iGood, int _iAmount, int _iType, i
   {
     __debugbreak();
   }
-  if ( debug && DEBUG_FLAGS[dword_415207C] )
+  if ( debug && DEBUG_FLAGS[s_iPileMgrAddPileDebugSection] )
     BBSupportTracePrintF(0, "New pile  at %u %u good %u type %u", _iX, _iY, _iGood, _iType);
   if ( this->m_iPileCount >= 20000 )
   {
@@ -211,7 +211,7 @@ void  CPileMgr::DeletePile(int _iPileId) {
   {
     __debugbreak();
   }
-  if ( debug && DEBUG_FLAGS[dword_4152080] )
+  if ( debug && DEBUG_FLAGS[s_iPileMgrDeletePileDebugSection] )
   {
     BBSupportTracePrintF(0, "DeletePile");
     CPileMgr::TracePile(this, _iPileId);
@@ -230,7 +230,7 @@ void  CPileMgr::DeletePileUnforeseen(int _iPileId) {
   
   if ( _iPileId <= 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\PileMgr.cpp", 538, "_iPileId>0") == 1 )
     __debugbreak();
-  if ( debug && DEBUG_FLAGS[dword_4152080] )
+  if ( debug && DEBUG_FLAGS[s_iPileMgrDeletePileDebugSection] )
   {
     BBSupportTracePrintF(0, "DeletePile");
     CPileMgr::TracePile(this, _iPileId);
@@ -462,7 +462,7 @@ void  CPileMgr::Store(class S4::CMapFile & _rMapFile) {
   v2 = std::ostrstream::rdbuf(&v4);
   Size = std::strstreambuf::pcount((std::strstreambuf *)v2);
   Src = std::ostrstream::str(&v4);
-  S4::CMapFile::SaveChunk(_rMapFile, MAP_CHUNK_SAVE_PILES, 0, Size, Src, 0);
+  S4::CMapFile::SaveChunk(_rMapFile, 0xA3u, 0, Size, Src, 0);
   std::ostrstream::freeze(&v4, 0);
   std::ios_base::exceptions((std::ios_base *)((char *)&v4 + *(_DWORD *)(v4.v4[0] + 4)), v5);
   v20 = -1;

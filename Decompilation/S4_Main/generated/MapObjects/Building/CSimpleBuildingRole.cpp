@@ -84,238 +84,239 @@ class CSimpleBuildingRole * __cdecl CSimpleBuildingRole::Load(std::istream & a1)
 
 
 // address=[0x151ab50]
-// Decompiled from EntityFlag __thiscall CSimpleBuildingRole::LogicUpdate(unsigned __int8 *this, IAnimatedEntity *a2)
+// Decompiled from void __thiscall CSimpleBuildingRole::LogicUpdate(CSimpleBuildingRole *this, CBuilding *a2)
 void  CSimpleBuildingRole::LogicUpdate(class CBuilding * a2) {
   
-  EntityFlag result; // eax
-  int v3; // eax
+  int v2; // eax
+  int v3; // esi
   int v4; // esi
-  int v5; // esi
+  int v5; // eax
   int v6; // eax
   int v7; // eax
   int v8; // eax
   int v9; // eax
   int v10; // eax
-  int v11; // eax
-  int v12; // esi
-  int v13; // eax
-  unsigned __int8 *v14; // eax
+  int v11; // esi
+  int v12; // eax
+  unsigned __int8 *v13; // eax
   int WorkingAreaPackedXY; // eax
+  int v15; // eax
   int v16; // eax
   int v17; // eax
-  int v18; // eax
-  int v19; // esi
-  int v20; // eax
+  int v18; // esi
+  int v19; // eax
+  ISettlerRole *v20; // eax
   ISettlerRole *v21; // eax
-  ISettlerRole *v22; // eax
-  int v23; // eax
-  int v24; // esi
-  int v25; // [esp-4h] [ebp-D8h]
-  char v26; // [esp-4h] [ebp-D8h]
-  __int16 v27; // [esp-4h] [ebp-D8h]
+  int v22; // eax
+  int v23; // esi
+  int v24; // [esp-4h] [ebp-D8h]
+  char v25; // [esp-4h] [ebp-D8h]
+  unsigned __int16 m_uSettlerId; // [esp-4h] [ebp-D8h]
+  int v27; // [esp-4h] [ebp-D8h]
   int v28; // [esp-4h] [ebp-D8h]
-  int v29; // [esp-4h] [ebp-D8h]
-  CEntityEvent v30; // [esp+8h] [ebp-CCh] BYREF
-  CEntityEvent v31; // [esp+20h] [ebp-B4h] BYREF
-  CEntityEvent v32; // [esp+38h] [ebp-9Ch] BYREF
-  int v33; // [esp+50h] [ebp-84h]
-  IEntity *v34; // [esp+54h] [ebp-80h]
-  CEntityEvent *v35; // [esp+58h] [ebp-7Ch]
-  CEntityEvent *v36; // [esp+5Ch] [ebp-78h]
-  CSettlerMgr::SSettlerInfos *v37; // [esp+60h] [ebp-74h]
-  int v38; // [esp+64h] [ebp-70h]
-  int v39; // [esp+68h] [ebp-6Ch]
-  int v40; // [esp+6Ch] [ebp-68h]
-  CEntityEvent *v41; // [esp+70h] [ebp-64h]
-  CEntityEvent *v42; // [esp+74h] [ebp-60h]
-  CSettlerMgr::SSettlerInfos *v43; // [esp+78h] [ebp-5Ch]
-  CEntityEvent *v44; // [esp+7Ch] [ebp-58h]
-  CEntityEvent *v45; // [esp+80h] [ebp-54h]
-  int v46; // [esp+84h] [ebp-50h]
-  unsigned int v47; // [esp+88h] [ebp-4Ch]
-  unsigned int v48; // [esp+8Ch] [ebp-48h]
-  IEntity *v49; // [esp+90h] [ebp-44h]
-  IEntity *v50; // [esp+94h] [ebp-40h]
-  int v51; // [esp+98h] [ebp-3Ch]
-  int v52; // [esp+9Ch] [ebp-38h]
-  int v53; // [esp+A0h] [ebp-34h]
+  CEntityEvent v29; // [esp+8h] [ebp-CCh] BYREF
+  CEntityEvent v30; // [esp+20h] [ebp-B4h] BYREF
+  CEntityEvent v31; // [esp+38h] [ebp-9Ch] BYREF
+  int v32; // [esp+50h] [ebp-84h]
+  CSettler *v33; // [esp+54h] [ebp-80h]
+  struct CEntityEvent *v34; // [esp+58h] [ebp-7Ch]
+  struct CEntityEvent *v35; // [esp+5Ch] [ebp-78h]
+  CSettlerMgr::SSettlerInfos *v36; // [esp+60h] [ebp-74h]
+  int v37; // [esp+64h] [ebp-70h]
+  int v38; // [esp+68h] [ebp-6Ch]
+  int v39; // [esp+6Ch] [ebp-68h]
+  CEntityEvent *v40; // [esp+70h] [ebp-64h]
+  CEntityEvent *v41; // [esp+74h] [ebp-60h]
+  CSettlerMgr::SSettlerInfos *v42; // [esp+78h] [ebp-5Ch]
+  CEntityEvent *v43; // [esp+7Ch] [ebp-58h]
+  CEntityEvent *v44; // [esp+80h] [ebp-54h]
+  int v45; // [esp+84h] [ebp-50h]
+  unsigned int v46; // [esp+88h] [ebp-4Ch]
+  unsigned int v47; // [esp+8Ch] [ebp-48h]
+  CSettler *v48; // [esp+90h] [ebp-44h]
+  CSettler *v49; // [esp+94h] [ebp-40h]
+  unsigned int v50; // [esp+98h] [ebp-3Ch]
+  unsigned int v51; // [esp+9Ch] [ebp-38h]
+  int v52; // [esp+A0h] [ebp-34h]
   T_OBJECT_TYPE ObjectType; // [esp+A4h] [ebp-30h]
   CSettlerMgr::SSettlerInfos *SettlerInfo; // [esp+A8h] [ebp-2Ch]
-  unsigned __int8 v56; // [esp+ACh] [ebp-28h]
-  IEntity *v57; // [esp+B0h] [ebp-24h]
-  IEntity *v58; // [esp+B4h] [ebp-20h]
-  int v59; // [esp+B8h] [ebp-1Ch]
-  IEntity *v60; // [esp+BCh] [ebp-18h]
-  char v61; // [esp+C3h] [ebp-11h]
-  unsigned __int8 *v62; // [esp+C4h] [ebp-10h]
-  int v63; // [esp+D0h] [ebp-4h]
+  unsigned __int8 m_uLogicState; // [esp+ACh] [ebp-28h]
+  IEntity *v56; // [esp+B0h] [ebp-24h]
+  IEntity *v57; // [esp+B4h] [ebp-20h]
+  int v58; // [esp+B8h] [ebp-1Ch]
+  CSettler *v59; // [esp+BCh] [ebp-18h]
+  char v60; // [esp+C3h] [ebp-11h]
+  int v62; // [esp+D0h] [ebp-4h]
 
-  v62 = this;
-  result = IEntity::FlagBits(a2, ENTITY_FLAG_Selected);
-  if ( result )
-    result = (*(int (__thiscall **)(unsigned __int8 *, IAnimatedEntity *, int))(*(_DWORD *)v62 + 88))(v62, a2, 1);
-  v56 = v62[4];
-  switch ( v56 )
+  if ( IEntity::FlagBits(a2, ENTITY_FLAG_Selected) )
+    this->FillDialog(this, a2, 1);
+  m_uLogicState = this->m_uLogicState;
+  switch ( m_uLogicState )
   {
     case 1u:
-      result = (*(int (__thiscall **)(unsigned __int8 *, IAnimatedEntity *))(*(_DWORD *)v62 + 120))(v62, a2);
-      if ( (_BYTE)result )
-        v62[4] = 3;
+      if ( this->OrderInhabitant(this, a2) )
+        this->m_uLogicState = 3;
       else
-        return IAnimatedEntity::RegisterForLogicUpdate(a2, 31);
+        IAnimatedEntity::RegisterForLogicUpdate(a2, 31);
       break;
     case 2u:
-      if ( v62[5] > (int)*(unsigned __int8 *)(*((_DWORD *)v62 + 94) + 480) )
+      if ( this->m_iDelayTick > (int)this->m_pBuildingInfo->m_iProductionDelay )
       {
-        v62[5] = 0;
-        v62[4] = 3;
-        return IAnimatedEntity::RegisterForLogicUpdate(a2, 1);
+        this->m_iDelayTick = 0;
+        this->m_uLogicState = 3;
+        IAnimatedEntity::RegisterForLogicUpdate(a2, 1);
       }
       else
       {
-        ++v62[5];
-        return IAnimatedEntity::RegisterForLogicUpdate(a2, 14);
+        ++this->m_iDelayTick;
+        IAnimatedEntity::RegisterForLogicUpdate(a2, 14);
       }
+      break;
     case 3u:
-      if ( !v62[29] || !IEntity::FlagBits(a2, (EntityFlag)4096) )
-        return IAnimatedEntity::RegisterForLogicUpdate(a2, 31);
-      if ( IEntity::Type(a2) == 2 )
+      if ( this->m_bInhabitants && IEntity::FlagBits(a2, (EntityFlag)4096) )
       {
-        if ( (*(unsigned __int8 (__thiscall **)(unsigned __int8 *, IAnimatedEntity *, int))(*(_DWORD *)v62 + 104))(
-               v62,
-               a2,
-               1) )
+        if ( IEntity::Type(a2) == BUILDING_FORESTERHUT )
         {
-          v57 = CSettlerMgr::operator[](*((unsigned __int16 *)v62 + 4));
-          v25 = IEntity::Type(v57);
-          v3 = IEntity::Race(v57);
-          SettlerInfo = CSettlerMgr::GetSettlerInfo(v3, v25);
-          v4 = Y16X16::UnpackXFast(*((_DWORD *)v62 + 4));
-          v51 = v4 - *(char *)(std::vector<CSettlerMgr::SSearchInfos>::operator[](1) + 5);
-          v5 = Y16X16::UnpackYFast(*((_DWORD *)v62 + 4));
-          v52 = v5 - *(char *)(std::vector<CSettlerMgr::SSearchInfos>::operator[](1) + 6);
-          v26 = CWorldManager::Ground(v51, v52);
-          v6 = IEntity::Race(v57);
-          ObjectType = CDecoObjMgr::GetObjectType(&g_cDecoObjMgr, SettlerInfo->m_uFarmerType, v6, v26);
-          if ( ObjectType == OBJECT_NO_OBJECT )
-            return IAnimatedEntity::RegisterForLogicUpdate(a2, 14);
-          CDecoObjMgr::SetFlagsForObject(&g_cDecoObjMgr, v51, v52, ObjectType, 0);
-          v7 = CBuilding::DoorPackedXY((CMFCToolBarButton *)a2);
-          IEntity::SetPosition(v57, v7);
-          v27 = *((_WORD *)v62 + 4);
-          v8 = CBuilding::DoorWorldIdx(a2);
-          CWorldManager::SetSettlerId(v8, v27);
-          IEntity::ClearFlagBits(v57, ENTITY_FLAG_OnBoard|ENTITY_FLAG_Visible);
-          v50 = CSettlerMgr::operator[](*((unsigned __int16 *)v62 + 4));
-          v45 = CEntityEvent::CEntityEvent(&v32, 6u, 0, 0, ObjectType, *((_DWORD *)v62 + 4));
-          v44 = v45;
-          v63 = 0;
-          v50->SetEvent(v50, v45);
-          v63 = -1;
-          return CEntityEvent::~CEntityEvent(&v32);
-        }
-      }
-      else if ( IEntity::Type(a2) == 27 )
-      {
-        v9 = CBuilding::EnsignWorldIdx((CBuilding *)a2);
-        v53 = CWorldManager::SettlerId(v9);
-        if ( v53 )
-        {
-          v58 = CSettlerMgr::operator[](v53);
-          v28 = IEntity::Type(v58);
-          v10 = IEntity::Race(v58);
-          v43 = CSettlerMgr::GetSettlerInfo(v10, v28);
-          v11 = IEntity::OwnerId(v58);
-          v12 = CAlliances::AllianceId(v11);
-          v13 = IEntity::OwnerId(a2);
-          if ( v12 == CAlliances::AllianceId(v13)
-            && IEntity::WarriorType(v58)
-            && ((int (__thiscall *)(IEntity *))v58->Amount)(v58) < v43->m_iMaxLifePoints )
+          if ( this->SearchInWorkingArea((int)this, (_DWORD *)a2, 1) )
           {
-            v62[380] = 0;
-            v34 = CSettlerMgr::operator[](*((unsigned __int16 *)v62 + 4));
-            v49 = CSettlerMgr::operator[](*((unsigned __int16 *)v62 + 4));
-            v14 = (unsigned __int8 *)std::vector<unsigned char>::operator[](0);
-            v42 = CEntityEvent::CEntityEvent(&v31, 3u, 0, 0, *v14, v53);
-            v41 = v42;
-            v63 = 1;
-            v49->SetEvent(v49, v42);
-            v63 = -1;
-            return CEntityEvent::~CEntityEvent(&v31);
+            v56 = CSettlerMgr::operator[](this->m_uSettlerId);
+            v24 = IEntity::Type(v56);
+            v2 = IEntity::Race(v56);
+            SettlerInfo = CSettlerMgr::GetSettlerInfo(v2, v24);
+            v3 = Y16X16::UnpackXFast(this->m_iFoundWorkAreaItemXY);
+            v50 = v3 - std::vector<CSettlerMgr::SSearchInfos>::operator[](&SettlerInfo->m_vSearches, 1u)->m_iOffsetX;
+            v4 = Y16X16::UnpackYFast(this->m_iFoundWorkAreaItemXY);
+            v51 = v4 - std::vector<CSettlerMgr::SSearchInfos>::operator[](&SettlerInfo->m_vSearches, 1u)->m_iOffsetY;
+            v25 = CWorldManager::Ground(v50, v51);
+            v5 = IEntity::Race(v56);
+            ObjectType = CDecoObjMgr::GetObjectType(&g_cDecoObjMgr, SettlerInfo->m_uFarmerType, v5, v25);
+            if ( ObjectType )
+            {
+              CDecoObjMgr::SetFlagsForObject(&g_cDecoObjMgr, v50, v51, ObjectType, 0);
+              v6 = CBuilding::DoorPackedXY(a2);
+              IEntity::SetPosition(v56, v6);
+              m_uSettlerId = this->m_uSettlerId;
+              v7 = CBuilding::DoorWorldIdx(a2);
+              CWorldManager::SetSettlerId(v7, m_uSettlerId);
+              IEntity::ClearFlagBits(v56, ENTITY_FLAG_ON_BOARD|ENTITY_FLAG_Visible);
+              v49 = CSettlerMgr::operator[](this->m_uSettlerId);
+              v44 = CEntityEvent::CEntityEvent(&v31, 6u, 0, 0, ObjectType, this->m_iFoundWorkAreaItemXY);
+              v43 = v44;
+              v62 = 0;
+              v49->SetEvent(v49, v44);
+              v62 = -1;
+              CEntityEvent::~CEntityEvent(&v31);
+            }
+            else
+            {
+              IAnimatedEntity::RegisterForLogicUpdate(a2, 14);
+            }
+            return;
           }
         }
-        if ( v62[380] )
+        else if ( IEntity::Type(a2) == BUILDING_HEALERHUT )
         {
-          --v62[380];
-        }
-        else
-        {
-          WorkingAreaPackedXY = CBuilding::GetWorkingAreaPackedXY(a2);
-          v40 = Y16X16::UnpackXFast(WorkingAreaPackedXY);
-          v16 = CBuilding::GetWorkingAreaPackedXY(a2);
-          v39 = Y16X16::UnpackYFast(v16);
-          v59 = 0;
-          v61 = 0;
-          v33 = 30;
-          while ( v59 < 30 )
+          v8 = CBuilding::EnsignWorldIdx(a2);
+          v52 = CWorldManager::SettlerId(v8);
+          if ( v52 )
           {
-            v47 = v40 + CSpiralOffsets::DeltaX(v59 + *((unsigned __int16 *)v62 + 10));
-            v48 = v39 + CSpiralOffsets::DeltaY(v59 + *((unsigned __int16 *)v62 + 10));
-            v38 = CWorldManager::Index(v47, v48);
-            if ( CWorldManager::InWorld(v47, v48) )
+            v57 = CSettlerMgr::operator[](v52);
+            v27 = IEntity::Type(v57);
+            v9 = IEntity::Race(v57);
+            v42 = CSettlerMgr::GetSettlerInfo(v9, v27);
+            v10 = IEntity::OwnerId(v57);
+            v11 = CAlliances::AllianceId(v10);
+            v12 = IEntity::OwnerId(a2);
+            if ( v11 == CAlliances::AllianceId(v12)
+              && IEntity::WarriorType(v57)
+              && v57->Amount() < v42->m_iMaxLifePoints )
             {
-              v46 = CWorldManager::SettlerId(v38);
-              if ( v46 )
+              this->m_iNextWorkTicks = 0;
+              v33 = CSettlerMgr::operator[](this->m_uSettlerId);
+              v48 = CSettlerMgr::operator[](this->m_uSettlerId);
+              v13 = std::vector<unsigned char>::operator[](0);
+              v41 = CEntityEvent::CEntityEvent(&v30, 3u, 0, 0, *v13, v52);
+              v40 = v41;
+              v62 = 1;
+              v48->SetEvent(v48, v41);
+              v62 = -1;
+              CEntityEvent::~CEntityEvent(&v30);
+              return;
+            }
+          }
+          if ( this->m_iNextWorkTicks )
+          {
+            --this->m_iNextWorkTicks;
+          }
+          else
+          {
+            WorkingAreaPackedXY = CBuilding::GetWorkingAreaPackedXY(a2);
+            v39 = Y16X16::UnpackXFast(WorkingAreaPackedXY);
+            v15 = CBuilding::GetWorkingAreaPackedXY(a2);
+            v38 = Y16X16::UnpackYFast(v15);
+            v58 = 0;
+            v60 = 0;
+            v32 = 30;
+            while ( v58 < 30 )
+            {
+              v46 = v39 + CSpiralOffsets::DeltaX(v58 + this->m_vWorkingArea[0]);
+              v47 = v38 + CSpiralOffsets::DeltaY(v58 + this->m_vWorkingArea[0]);
+              v37 = CWorldManager::Index(v46, v47);
+              if ( CWorldManager::InWorld(v46, v47) )
               {
-                v60 = CSettlerMgr::operator[](v46);
-                v29 = IEntity::Type(v60);
-                v17 = IEntity::Race(v60);
-                v37 = CSettlerMgr::GetSettlerInfo(v17, v29);
-                if ( IEntity::WarriorType(v60) )
+                v45 = CWorldManager::SettlerId(v37);
+                if ( v45 )
                 {
-                  v18 = IEntity::OwnerId(v60);
-                  v19 = CAlliances::AllianceId(v18);
-                  v20 = IEntity::OwnerId(a2);
-                  if ( v19 == CAlliances::AllianceId(v20)
-                    && ((int (__thiscall *)(IEntity *))v60->Amount)(v60) < v37->m_iMaxLifePoints )
+                  v59 = CSettlerMgr::operator[](v45);
+                  v28 = IEntity::Type(v59);
+                  v16 = IEntity::Race(v59);
+                  v36 = CSettlerMgr::GetSettlerInfo(v16, v28);
+                  if ( IEntity::WarriorType(v59) )
                   {
-                    v21 = (ISettlerRole *)CSettler::Role((CSettler *)v60);
-                    if ( ISettlerRole::GetTask(v21) == 27
-                      || (v22 = (ISettlerRole *)CSettler::Role((CSettler *)v60), ISettlerRole::GetTask(v22) == 17) )
+                    v17 = IEntity::OwnerId(v59);
+                    v18 = CAlliances::AllianceId(v17);
+                    v19 = IEntity::OwnerId(a2);
+                    if ( v18 == CAlliances::AllianceId(v19) && v59->Amount(v59) < v36->m_iMaxLifePoints )
                     {
-                      v23 = CBuilding::EnsignPackedXY(a2);
-                      v36 = CEntityEvent::CEntityEvent(&v30, 0x11u, 13, 0, v23, 0);
-                      v35 = v36;
-                      v63 = 2;
-                      v60->SetEvent(v60, v36);
-                      v63 = -1;
-                      CEntityEvent::~CEntityEvent(&v30);
-                      v61 = 1;
-                      ++v59;
-                      break;
+                      v20 = CSettler::Role(v59);
+                      if ( ISettlerRole::GetTask(v20) == 27
+                        || (v21 = CSettler::Role(v59), ISettlerRole::GetTask(v21) == 17) )
+                      {
+                        v22 = CBuilding::EnsignPackedXY(a2);
+                        v35 = CEntityEvent::CEntityEvent(&v29, 0x11u, 13, 0, v22, 0);
+                        v34 = v35;
+                        v62 = 2;
+                        v59->SetEvent(v59, v35);
+                        v62 = -1;
+                        CEntityEvent::~CEntityEvent(&v29);
+                        v60 = 1;
+                        ++v58;
+                        break;
+                      }
                     }
                   }
                 }
               }
+              ++v58;
             }
-            ++v59;
-          }
-          *((_WORD *)v62 + 10) += v59;
-          v24 = *((unsigned __int16 *)v62 + 10);
-          if ( v24 >= CSpiralOffsets::Last(*(_DWORD *)(*((_DWORD *)v62 + 94) + 492)) )
-            *((_WORD *)v62 + 10) = 0;
-          if ( v61 == 1 )
-          {
-            v62[380] = 10;
-            return IAnimatedEntity::RegisterForLogicUpdate(a2, 14);
+            this->m_vWorkingArea[0] += v58;
+            v23 = this->m_vWorkingArea[0];
+            if ( v23 >= CSpiralOffsets::Last(this->m_pBuildingInfo->m_iWorkingAreaRadius) )
+              this->m_vWorkingArea[0] = 0;
+            if ( v60 == 1 )
+            {
+              this->m_iNextWorkTicks = 10;
+              IAnimatedEntity::RegisterForLogicUpdate(a2, 14);
+              return;
+            }
           }
         }
       }
-      return IAnimatedEntity::RegisterForLogicUpdate(a2, 31);
+      IAnimatedEntity::RegisterForLogicUpdate(a2, 31);
+      return;
     default:
-      return result;
+      return;
   }
-  return result;
 }
 
 
@@ -332,7 +333,7 @@ void  CSimpleBuildingRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectIn
   this->Update(this, a2);
   iType = IEntity::Type(a2);
   iRace = IEntity::Race(a2);
-  CGfxManager::GetBuildingGfxInfo(g_pGfxManager, _rInfo, iRace, iType, 1, (int)this->gap_4c);
+  CGfxManager::GetBuildingGfxInfo(g_pGfxManager, _rInfo, iRace, iType, 1, (int)this->m_vPatchPairs);
   v4 = IEntity::OwnerId(a2);
   _rInfo->m_iColor = CPlayerManager::Color(v4);
   v5 = IEntity::OwnerId(a2);
@@ -354,8 +355,8 @@ void  CSimpleBuildingRole::Init(class CBuilding * a2) {
 
   IBuildingRole::InitCommon((int)a2);
   LOBYTE(this[1].__vftable) = 0;
-  this->field_1C = 0;
-  this->byte4 = 1;
+  this->m_bHasWarnedAboutEmptyWA = 0;
+  this->m_uLogicState = 1;
   if ( IEntity::Type(a2) == 27 )
   {
     this->m_pSearchFkt = 0;
@@ -525,17 +526,17 @@ void  CSimpleBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
     g_cBuildingInfo.m_cRace = IEntity::Race(a2);
     g_cBuildingInfo.m_cType = IEntity::Type(a2);
     g_cBuildingInfo.m_unknownB = 1;
-    byte_3F1E4B8 = IEntity::FlagBits(a2, (EntityFlag)4096) != 0;
-    byte_3F1E4B9 = *((_DWORD *)this->m_pBuildingInfo + 123) > 0;
+    MEMORY[0x3F1E4B8] = IEntity::FlagBits(a2, (EntityFlag)4096) != 0;
+    MEMORY[0x3F1E4B9] = *((_DWORD *)this->m_pBuildingInfo + 123) > 0;
     v8 = IEntity::Type(a2);
     v3 = IEntity::OwnerId(a2);
-    byte_3F1E4BB = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v3, v8, 0);
+    MEMORY[0x3F1E4BB] = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v3, v8, 0);
     v9 = IEntity::Type(a2);
     v4 = IEntity::OwnerId(a2);
-    byte_3F1E4BC = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v4, v9, 1u);
-    g_cBuildingInfo.m_unknownA = this->m_bInhabitants;
+    MEMORY[0x3F1E4BC] = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v4, v9, 1u);
+    g_cBuildingInfo.m_bInhabitants = this->m_bInhabitants;
     if ( this->m_bInhabitants )
-      byte_3F1E4BD = *((_BYTE *)this->m_pBuildingInfo + 478);
+      MEMORY[0x3F1E4BD] = *((_BYTE *)this->m_pBuildingInfo + 478);
     v13 = 604;
     if ( !a3 )
       v13 = 602;
@@ -547,23 +548,23 @@ void  CSimpleBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
   }
   else
   {
-    dword_3F1E4E8 = 2;
-    byte_3F1E4ED = IEntity::Race(a2);
-    byte_3F1E4EC = IEntity::Type(a2);
-    byte_3F1E4EF = 1;
-    byte_3F1E4F0 = IEntity::FlagBits(a2, (EntityFlag)4096) != 0;
-    byte_3F1E4F1 = *((_DWORD *)this->m_pBuildingInfo + 123) > 0;
+    MEMORY[0x3F1E4E8] = 2;
+    MEMORY[0x3F1E4ED] = IEntity::Race(a2);
+    MEMORY[0x3F1E4EC] = IEntity::Type(a2);
+    MEMORY[0x3F1E4EF] = 1;
+    MEMORY[0x3F1E4F0] = IEntity::FlagBits(a2, (EntityFlag)4096) != 0;
+    MEMORY[0x3F1E4F1] = *((_DWORD *)this->m_pBuildingInfo + 123) > 0;
     v10 = IEntity::Type(a2);
     v6 = IEntity::OwnerId(a2);
-    byte_3F1E4F3 = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v6, v10, 0);
+    MEMORY[0x3F1E4F3] = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v6, v10, 0);
     v11 = IEntity::Type(a2);
     v7 = IEntity::OwnerId(a2);
-    byte_3F1E4F4 = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v7, v11, 1u);
-    byte_3F1E4EE = this->m_bInhabitants;
-    byte_3F1E4F9 = 0;
-    byte_3F1E4F8 = 0;
+    MEMORY[0x3F1E4F4] = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v7, v11, 1u);
+    MEMORY[0x3F1E4EE] = this->m_bInhabitants;
+    MEMORY[0x3F1E4F9] = 0;
+    MEMORY[0x3F1E4F8] = 0;
     if ( this->m_bInhabitants )
-      byte_3F1E4F5 = *((_BYTE *)this->m_pBuildingInfo + 478);
+      MEMORY[0x3F1E4F5] = *((_BYTE *)this->m_pBuildingInfo + 478);
     v12 = 604;
     if ( !a3 )
       v12 = 602;

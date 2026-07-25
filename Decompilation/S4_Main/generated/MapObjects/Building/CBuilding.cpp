@@ -162,10 +162,10 @@ int  CBuilding::BuildingTypeEx(void) {
 
 
 // address=[0x14e8910]
-// Decompiled from int __thiscall CBuilding::DoorPackedXY(CMFCToolBarButton *this)
+// Decompiled from int __thiscall CBuilding::DoorPackedXY(CBuilding *this)
 int  CBuilding::DoorPackedXY(void)const {
   
-  return *((_DWORD *)this + 18);
+  return this[1].m_iUniqueId;
 }
 
 
@@ -176,48 +176,46 @@ void  CBuilding::Delete(void) {
   int v1; // eax
   int v2; // eax
   int v3; // eax
-  int LastLogicUpdateTick; // eax
+  unsigned int LastLogicUpdateTick; // eax
   int v5; // eax
   int v7; // [esp-8h] [ebp-44h]
-  int v8; // [esp-4h] [ebp-40h]
-  _BYTE v9[24]; // [esp+4h] [ebp-38h] BYREF
+  int m_iEntityId; // [esp-4h] [ebp-40h]
+  CEntityEvent v9; // [esp+4h] [ebp-38h] BYREF
   int v10; // [esp+1Ch] [ebp-20h]
   const struct CEntityEvent *v11; // [esp+20h] [ebp-1Ch]
   const struct CEntityEvent *v12; // [esp+24h] [ebp-18h]
-  int v13; // [esp+28h] [ebp-14h]
-  CPaneContainer *v14; // [esp+2Ch] [ebp-10h]
+  CBuilding *v13; // [esp+28h] [ebp-14h]
   int v15; // [esp+38h] [ebp-4h]
 
-  v14 = this;
   v10 = IAnimatedEntity::Next(this);
-  CWarMap::RemoveEntity(v14);
-  if ( !(unsigned __int8)CBuilding::IsBuildUp(v14) )
+  CWarMap::RemoveEntity(this);
+  if ( !(unsigned __int8)CBuilding::IsBuildUp(this) )
   {
-    v1 = IEntity::WorldIdx();
+    v1 = IEntity::WorldIdx(this);
     CWorldManager::SetObjectId(v1, 0);
   }
-  v7 = IAnimatedEntity::AttackerPlayerId();
-  v2 = IEntity::EntityId((unsigned __int16 *)v14);
-  v12 = CEntityEvent::CEntityEvent((CEntityEvent *)v9, 9u, 0, v2, v7, 0);
+  v7 = IAnimatedEntity::AttackerPlayerId(this);
+  v2 = IEntity::EntityId(this);
+  v12 = CEntityEvent::CEntityEvent(&v9, 9u, 0, v2, v7, 0);
   v11 = v12;
   v15 = 0;
-  CObserverList::NotifyAndDetachAllObservers((CPaneContainer *)((char *)v14 + 88), v12);
+  CObserverList::NotifyAndDetachAllObservers((CObserverList *)&this[1].m_iFlags, v12);
   v15 = -1;
-  CEntityEvent::~CEntityEvent(v9);
-  if ( *((_WORD *)v14 + 35) )
+  CEntityEvent::~CEntityEvent(&v9);
+  if ( HIWORD(this[1].__vftable) )
   {
-    v13 = CBuildingMgr::operator[](*((unsigned __int16 *)v14 + 35));
-    v3 = IEntity::ID();
-    (*(void (__thiscall **)(int, int))(*(_DWORD *)v13 + 64))(v13, v3);
+    v13 = CBuildingMgr::operator[]((CBuildingMgr *)g_cBuildingMgr, HIWORD(this[1].__vftable));
+    v3 = IEntity::ID(this);
+    v13->Detach(v13, v3);
   }
-  v8 = *((unsigned __int16 *)v14 + 4);
-  LastLogicUpdateTick = IAnimatedEntity::GetLastLogicUpdateTick(v14);
-  CMapObjectMgr::UnRegisterFromLogicUpdate(g_pMapObjectMgr, LastLogicUpdateTick, v8);
-  v5 = IEntity::ID();
+  m_iEntityId = this->m_iEntityId;
+  LastLogicUpdateTick = IAnimatedEntity::GetLastLogicUpdateTick(this);
+  CMapObjectMgr::UnRegisterFromLogicUpdate(g_pMapObjectMgr, LastLogicUpdateTick, m_iEntityId);
+  v5 = IEntity::ID(this);
   CBuildingMgr::CheckOutBuilding((CBuildingMgr *)g_cBuildingMgr, v5);
-  IEntity::EntityId((unsigned __int16 *)v14);
-  IEntity::OwnerId((unsigned __int8 *)v14);
-  return (*(int (__cdecl **)(int))(*(_DWORD *)g_pAI + 44))(4);
+  IEntity::EntityId(this);
+  IEntity::OwnerId(this);
+  return ((int (__cdecl *)(int))g_pAI->PostAIEvent)(4);
 }
 
 
@@ -268,7 +266,7 @@ struct SGfxObjectInfo *  CBuilding::GetGfxInfos(void) {
   if ( CInputProcessor::IsBoxSelection(&g_cInputProcessor) )
     IAnimatedEntity::BoxSelection();
   IEntity::m_sGfxInfo.m_pBuildLayerGfxData = 0;
-  IEntity::m_sGfxInfo.field_5C = 0;
+  IEntity::m_sGfxInfo.uConstructionProgress = 0;
   v1 = (struct IBuildingRole *)std::auto_ptr<IBuildingRole>::operator->((_DWORD *)this + 21);
   v1->FillGfxInfo(v1, (IEntity *)this, &IEntity::m_sGfxInfo);
   IEntity::m_sGfxInfo.m_uObjType = *((_BYTE *)this + 10);
@@ -344,7 +342,7 @@ void  CBuilding::TryCrushBuilding(void) {
 
 
 // address=[0x14e8e20]
-// Decompiled from int __thiscall CBuilding::CrushBuilding(CBuilding *this)
+// Decompiled from void __thiscall CBuilding::CrushBuilding(CBuilding *this)
 void  CBuilding::CrushBuilding(void) {
   
   int v1; // eax
@@ -354,80 +352,64 @@ void  CBuilding::CrushBuilding(void) {
   int v5; // eax
   int v6; // eax
   int v7; // eax
-  void *v8; // eax
+  struct CEcoSector *v8; // eax
   int v9; // eax
+  int v10; // [esp-10h] [ebp-30h]
   int v11; // [esp-10h] [ebp-30h]
-  int v12; // [esp-10h] [ebp-30h]
+  int v12; // [esp-4h] [ebp-24h]
   int v13; // [esp-4h] [ebp-24h]
-  int v14; // [esp-4h] [ebp-24h]
-  int v15; // [esp+4h] [ebp-1Ch]
-  int v16; // [esp+8h] [ebp-18h]
-  int v17; // [esp+Ch] [ebp-14h]
-  int v18; // [esp+10h] [ebp-10h]
-  int v19; // [esp+14h] [ebp-Ch]
-  char *BuildingInfo; // [esp+18h] [ebp-8h]
+  IBuildingRole *v14; // [esp+4h] [ebp-1Ch]
+  struct IEffects *v15; // [esp+8h] [ebp-18h]
+  struct IEffects *v16; // [esp+Ch] [ebp-14h]
+  IBuildingRole *v17; // [esp+10h] [ebp-10h]
+  IBuildingRole *v18; // [esp+14h] [ebp-Ch]
+  CBuildingInfoMgr::SBuildingInfos *BuildingInfo; // [esp+18h] [ebp-8h]
 
-  v1 = IEntity::WorldIdx();
+  v1 = IEntity::WorldIdx(this);
   if ( CWorldManager::BuildingId(v1) )
   {
-    v2 = IEntity::WorldIdx();
+    v2 = IEntity::WorldIdx(this);
     CWorldManager::SetMapObjectId(v2, 0);
   }
-  v19 = std::auto_ptr<IBuildingRole>::operator->((_DWORD *)this + 21);
-  (*(void (__thiscall **)(int, CBuilding *))(*(_DWORD *)v19 + 100))(v19, this);
+  v18 = std::auto_ptr<IBuildingRole>::operator->(&this[1].m_psAIEntityInfo);
+  v18->RemoveInhabitant(v18, this);
   CBuilding::RemoveBuildingBits(this);
-  v18 = std::auto_ptr<IBuildingRole>::operator->((_DWORD *)this + 21);
-  (*(void (__thiscall **)(int, CBuilding *))(*(_DWORD *)v18 + 96))(v18, this);
-  v13 = IEntity::Type((unsigned __int16 *)this);
+  v17 = std::auto_ptr<IBuildingRole>::operator->(&this[1].m_psAIEntityInfo);
+  v17->ReturnBuildingMaterial(v17, this);
+  v12 = IEntity::Type(this);
   v3 = IEntity::Race(this);
-  BuildingInfo = (char *)CBuildingInfoMgr::GetBuildingInfo(v3, v13);
-  if ( (BuildingInfo[55] - BuildingInfo[54]) * (BuildingInfo[53] - BuildingInfo[52]) >= 90 )
+  BuildingInfo = CBuildingInfoMgr::GetBuildingInfo(v3, v12);
+  if ( (BuildingInfo->m_iBBRMaxY - BuildingInfo->m_iBBRMinY) * (BuildingInfo->m_iBBRMaY - BuildingInfo->m_iBBRMinX) >= 90 )
   {
-    v16 = CLogic::Effects((DWORD *)g_pLogic);
-    v12 = IEntity::Y(this);
+    v15 = CLogic::Effects(g_pLogic);
+    v11 = IEntity::Y(this);
     v5 = IEntity::X(this);
-    (*(void (__thiscall **)(int, int, int, int, int, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v16 + 16))(
-      v16,
-      60,
-      2,
-      v5,
-      v12,
-      0,
-      0,
-      0);
+    v15->AddEffect(v15, EFFECT_CRUSHBIG, 2, v5, v11, 0, 0, 0);
   }
   else
   {
-    v17 = CLogic::Effects((DWORD *)g_pLogic);
-    v11 = IEntity::Y(this);
+    v16 = CLogic::Effects(g_pLogic);
+    v10 = IEntity::Y(this);
     v4 = IEntity::X(this);
-    (*(void (__thiscall **)(int, int, int, int, int, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v17 + 16))(
-      v17,
-      62,
-      3,
-      v4,
-      v11,
-      0,
-      0,
-      0);
+    v16->AddEffect(v16, EFFECT_CRUSHSMALL, 3, v4, v10, 0, 0, 0);
   }
   if ( IEntity::Race(this) != 3 )
   {
-    v14 = IEntity::ID();
+    v13 = IEntity::ID(this);
     v6 = CBuilding::EnsignWorldIdx(this);
     v7 = CWorldManager::EcoSectorId(v6);
-    v8 = (void *)CEcoSectorMgr::operator[](v7);
-    CEcoSector::CleanUpBuildingNeed(v8, v14);
+    v8 = CEcoSectorMgr::operator[](g_cESMgr, v7);
+    CEcoSector::CleanUpBuildingNeed(v8, v13);
   }
-  v9 = IEntity::ID();
-  CMapObjectMgr::Kill(v9, 0);
-  v15 = std::auto_ptr<IBuildingRole>::operator->((_DWORD *)this + 21);
-  return (*(int (__thiscall **)(int))(*(_DWORD *)v15 + 44))(v15);
+  v9 = IEntity::ID(this);
+  CMapObjectMgr::Kill(g_pMapObjectMgr, v9, 0);
+  v14 = std::auto_ptr<IBuildingRole>::operator->(&this[1].m_psAIEntityInfo);
+  v14->CrushBuilding(v14);
 }
 
 
 // address=[0x14e8fc0]
-// Decompiled from int __thiscall CBuilding::DestroyBuilding(CBuilding *this, int a2)
+// Decompiled from void __thiscall CBuilding::DestroyBuilding(CBuilding *this, int a2)
 void  CBuilding::DestroyBuilding(int a2) {
   
   unsigned int v2; // eax
@@ -442,136 +424,110 @@ void  CBuilding::DestroyBuilding(int a2) {
   int v11; // eax
   int v12; // eax
   int v13; // eax
-  void *v14; // eax
+  struct CEcoSector *v14; // eax
   int v15; // esi
   int v16; // eax
   int v17; // eax
-  int result; // eax
+  int v18; // [esp-10h] [ebp-6Ch]
   int v19; // [esp-10h] [ebp-6Ch]
   int v20; // [esp-10h] [ebp-6Ch]
-  int v21; // [esp-10h] [ebp-6Ch]
-  int v22; // [esp-8h] [ebp-64h]
+  int v21; // [esp-8h] [ebp-64h]
+  int v22; // [esp-4h] [ebp-60h]
   int v23; // [esp-4h] [ebp-60h]
   int v24; // [esp-4h] [ebp-60h]
-  int v25; // [esp-4h] [ebp-60h]
-  CEvn_Event *v26; // [esp+Ch] [ebp-50h]
-  int v27; // [esp+14h] [ebp-48h]
-  int v28; // [esp+18h] [ebp-44h]
-  int v29; // [esp+1Ch] [ebp-40h]
-  int v30; // [esp+20h] [ebp-3Ch]
-  int v31; // [esp+24h] [ebp-38h]
-  char *BuildingInfo; // [esp+28h] [ebp-34h]
-  char v33; // [esp+2Fh] [ebp-2Dh]
-  CEvn_Event v35; // [esp+34h] [ebp-28h] BYREF
-  int v36; // [esp+58h] [ebp-4h]
+  struct CEvn_Event *v25; // [esp+Ch] [ebp-50h]
+  IBuildingRole *v26; // [esp+14h] [ebp-48h]
+  IBuildingRole *v27; // [esp+18h] [ebp-44h]
+  struct IEffects *v28; // [esp+1Ch] [ebp-40h]
+  struct IEffects *v29; // [esp+20h] [ebp-3Ch]
+  struct IEffects *v30; // [esp+24h] [ebp-38h]
+  CBuildingInfoMgr::SBuildingInfos *BuildingInfo; // [esp+28h] [ebp-34h]
+  char v32; // [esp+2Fh] [ebp-2Dh]
+  CEvn_Event v34; // [esp+34h] [ebp-28h] BYREF
+  int v35; // [esp+58h] [ebp-4h]
 
-  v33 = 0;
-  if ( IEntity::Type((unsigned __int16 *)this) == 51
-    && *(_DWORD *)(g_pGameType + 744) == 11
-    && (*(_DWORD *)(g_pGameType + 740) == 15 || *(_DWORD *)(g_pGameType + 740) == 4) )
+  v32 = 0;
+  if ( IEntity::Type(this) == 51
+    && g_pGameType->m_iMissionId == 11
+    && (g_pGameType->m_iCampaignType == 15 || g_pGameType->m_iCampaignType == 4) )
   {
-    v33 = 1;
-    v2 = IEntity::OwnerId((unsigned __int8 *)this);
-    v26 = CEvn_Event::CEvn_Event(&v35, 0x38u, v2, 0, 0);
-    v36 = 0;
-    IEventEngine::SendAMessage(g_pEvnEngine, v26);
-    v36 = -1;
-    CEvn_Event::~CEvn_Event(&v35);
-    v3 = IEntity::OwnerId((unsigned __int8 *)this);
+    v32 = 1;
+    v2 = IEntity::OwnerId(this);
+    v25 = CEvn_Event::CEvn_Event(&v34, 0x38u, v2, 0, 0);
+    v35 = 0;
+    IEventEngine::SendAMessage(g_pEvnEngine, v25);
+    v35 = -1;
+    CEvn_Event::~CEvn_Event(&v34);
+    v3 = IEntity::OwnerId(this);
     v4 = CPlayerManager::PlayerGameData(v3);
     CPlayerGameData::SetPlayerLostFlag(v4);
   }
-  v5 = IEntity::EntityId((unsigned __int16 *)this);
+  v5 = IEntity::EntityId(this);
   BBSupportTracePrintF(0, "CBuilding::DestroyBuilding(): building %i, gardener player id %i.", v5, a2);
-  if ( !v33 )
+  if ( !v32 )
   {
-    v6 = IEntity::WorldIdx();
+    v6 = IEntity::WorldIdx(this);
     if ( CWorldManager::BuildingId(v6) )
     {
-      v7 = IEntity::WorldIdx();
+      v7 = IEntity::WorldIdx(this);
       CWorldManager::SetMapObjectId(v7, 0);
     }
     CBuilding::RemoveBuildingBits(this);
-    if ( IEntity::Type((unsigned __int16 *)this) == 49 )
+    if ( IEntity::Type(this) == 49 )
     {
-      v29 = CLogic::Effects((DWORD *)g_pLogic);
-      v21 = IEntity::Y(this);
+      v28 = CLogic::Effects(g_pLogic);
+      v20 = IEntity::Y(this);
       v11 = IEntity::X(this);
-      (*(void (__thiscall **)(int, int, int, int, int, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v29 + 16))(
-        v29,
-        77,
-        90,
-        v11,
-        v21,
-        0,
-        0,
-        0);
+      v28->AddEffect(v28, EFFECT_MUSHROOMFARM_CRASH, 90, v11, v20, 0, 0, 0);
     }
     else
     {
-      v23 = IEntity::Type((unsigned __int16 *)this);
+      v22 = IEntity::Type(this);
       v8 = IEntity::Race(this);
-      BuildingInfo = (char *)CBuildingInfoMgr::GetBuildingInfo(v8, v23);
-      if ( (BuildingInfo[55] - BuildingInfo[54]) * (BuildingInfo[53] - BuildingInfo[52]) >= 90 )
+      BuildingInfo = CBuildingInfoMgr::GetBuildingInfo(v8, v22);
+      if ( (BuildingInfo->m_iBBRMaxY - BuildingInfo->m_iBBRMinY) * (BuildingInfo->m_iBBRMaY - BuildingInfo->m_iBBRMinX) >= 90 )
       {
-        v30 = CLogic::Effects((DWORD *)g_pLogic);
-        v20 = IEntity::Y(this);
+        v29 = CLogic::Effects(g_pLogic);
+        v19 = IEntity::Y(this);
         v10 = IEntity::X(this);
-        (*(void (__thiscall **)(int, int, int, int, int, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v30 + 16))(
-          v30,
-          61,
-          90,
-          v10,
-          v20,
-          0,
-          0,
-          0);
+        v29->AddEffect(v29, EFFECT_DESTROYBIG, 90, v10, v19, 0, 0, 0);
       }
       else
       {
-        v31 = CLogic::Effects((DWORD *)g_pLogic);
-        v19 = IEntity::Y(this);
+        v30 = CLogic::Effects(g_pLogic);
+        v18 = IEntity::Y(this);
         v9 = IEntity::X(this);
-        (*(void (__thiscall **)(int, int, int, int, int, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v31 + 16))(
-          v31,
-          63,
-          91,
-          v9,
-          v19,
-          0,
-          0,
-          0);
+        v30->AddEffect(v30, EFFECT_DESTROYSMALL, 91, v9, v18, 0, 0, 0);
       }
     }
   }
-  v28 = std::auto_ptr<IBuildingRole>::operator->((_DWORD *)this + 21);
-  (*(void (__thiscall **)(int, CBuilding *))(*(_DWORD *)v28 + 100))(v28, this);
+  v27 = std::auto_ptr<IBuildingRole>::operator->(&this[1].m_psAIEntityInfo);
+  v27->RemoveInhabitant(v27, this);
   if ( IEntity::Race(this) != 3 )
   {
-    v24 = IEntity::ID();
+    v23 = IEntity::ID(this);
     v12 = CBuilding::EnsignWorldIdx(this);
     v13 = CWorldManager::EcoSectorId(v12);
-    v14 = (void *)CEcoSectorMgr::operator[](v13);
-    CEcoSector::CleanUpBuildingNeed(v14, v24);
+    v14 = CEcoSectorMgr::operator[](g_cESMgr, v13);
+    CEcoSector::CleanUpBuildingNeed(v14, v23);
   }
-  v15 = IEntity::OwnerId((unsigned __int8 *)this);
+  v15 = IEntity::OwnerId(this);
   if ( v15 == CPlayerManager::GetLocalPlayerId() )
   {
-    v25 = IEntity::Y(this);
-    v22 = IEntity::X(this);
-    v16 = IEntity::OwnerId((unsigned __int8 *)this);
-    CTextMsgHandler::AddWarningMsg(2470, v16, v22, v25);
+    v24 = IEntity::Y(this);
+    v21 = IEntity::X(this);
+    v16 = IEntity::OwnerId(this);
+    CTextMsgHandler::AddWarningMsg(2470, v16, v21, v24);
   }
-  *((_BYTE *)this + 37) = a2;
-  if ( !v33 )
+  this->m_iAttackerPlayerId = a2;
+  if ( !v32 )
   {
-    v17 = IEntity::ID();
-    CMapObjectMgr::Kill(v17, 0);
+    v17 = IEntity::ID(this);
+    CMapObjectMgr::Kill(g_pMapObjectMgr, v17, 0);
   }
-  v27 = std::auto_ptr<IBuildingRole>::operator->((_DWORD *)this + 21);
-  result = (*(int (__thiscall **)(int))(*(_DWORD *)v27 + 44))(v27);
-  *((_BYTE *)this + 37) = 0;
-  return result;
+  v26 = std::auto_ptr<IBuildingRole>::operator->(&this[1].m_psAIEntityInfo);
+  v26->CrushBuilding(v26);
+  this->m_iAttackerPlayerId = 0;
 }
 
 
@@ -802,7 +758,7 @@ void  CBuilding::SetToWorld(void) {
 
 
 // address=[0x14e9880]
-// Decompiled from int __thiscall CBuilding::Decrease(int this, int a2)
+// Decompiled from int __thiscall CBuilding::Decrease(CBuilding *this, int a2)
 void  CBuilding::Decrease(int a2) {
   
   int result; // eax
@@ -810,47 +766,39 @@ void  CBuilding::Decrease(int a2) {
   int v4; // [esp+4h] [ebp-8h]
   char v6; // [esp+14h] [ebp+8h]
 
-  v4 = std::auto_ptr<IBuildingRole>::operator->();
+  v4 = std::auto_ptr<IBuildingRole>::operator->(&this[1].m_psAIEntityInfo);
   result = (*(int (__thiscall **)(int, int))(*(_DWORD *)v4 + 108))(v4, a2);
   v6 = result;
   if ( result <= 0 )
     return result;
-  if ( result < *(unsigned __int8 *)(this + 33) )
+  if ( result < this->m_iLivePoints )
   {
-    result = this;
-    *(_BYTE *)(this + 33) -= v6;
+    result = (int)this;
+    this->m_iLivePoints -= v6;
   }
   else
   {
-    *(_BYTE *)(this + 33) = 0;
-    if ( (*(_DWORD *)(this + 4) & 0x20000000) != 0 )
+    this->m_iLivePoints = 0;
+    if ( (this->m_iUniqueId & 0x20000000) != 0 )
     {
-      if ( IEntity::FlagBits((_DWORD *)this, 0x3000000)
-        && BBSupportDbgReport(
-             2,
-             (int)"MapObjects\\Building\\Building.cpp",
-             1017,
-             (int)"FlagBits(ENTITY_FLAG_ALIVE_MASK) == 0") == 1 )
+      if ( IEntity::FlagBits(this, ENTITY_FLAG_AliveMask)
+        && BBSupportDbgReport(2, "MapObjects\\Building\\Building.cpp", 1017, "FlagBits(ENTITY_FLAG_ALIVE_MASK) == 0") == 1 )
       {
         __debugbreak();
       }
-      result = IEntity::FlagBits((_DWORD *)this, 0x4000000);
+      result = IEntity::FlagBits(this, ENTITY_FLAG_Died);
       if ( !result )
       {
-        result = BBSupportDbgReport(
-                   2,
-                   (int)"MapObjects\\Building\\Building.cpp",
-                   1018,
-                   (int)"FlagBits(ENTITY_FLAG_DIED) != 0");
+        result = BBSupportDbgReport(2, "MapObjects\\Building\\Building.cpp", 1018, "FlagBits(ENTITY_FLAG_DIED) != 0");
         if ( result == 1 )
           __debugbreak();
       }
     }
     else
     {
-      v3 = std::auto_ptr<IBuildingRole>::operator->();
-      (*(void (__thiscall **)(int, int))(*(_DWORD *)v3 + 116))(v3, this);
-      return CBuilding::DestroyBuilding(0);
+      v3 = std::auto_ptr<IBuildingRole>::operator->(&this[1].m_psAIEntityInfo);
+      (*(void (__thiscall **)(int, CBuilding *))(*(_DWORD *)v3 + 116))(v3, this);
+      return CBuilding::DestroyBuilding(this, 0);
     }
   }
   return result;
@@ -1250,7 +1198,7 @@ void  CBuilding::CorrectBuildingBits(void) {
 
 
 // address=[0x14ea130]
-// Decompiled from int __thiscall CBuilding::Ready(unsigned __int8 *this)
+// Decompiled from int __thiscall CBuilding::Ready(IEntity *this)
 void  CBuilding::Ready(void) {
   
   int v1; // eax
@@ -1259,10 +1207,10 @@ void  CBuilding::Ready(void) {
   int v4; // eax
   int v5; // eax
   int v6; // eax
-  struct IBuildingRole *BuildingRole; // eax
+  CBuildingSiteRole *BuildingRole; // eax
   int v8; // esi
   int v9; // eax
-  int v10; // eax
+  DWORD v10; // eax
   int v11; // eax
   int v13; // [esp-10h] [ebp-30h]
   int v14; // [esp-Ch] [ebp-2Ch]
@@ -1274,36 +1222,36 @@ void  CBuilding::Ready(void) {
   int v20; // [esp-8h] [ebp-28h]
   int v21; // [esp-8h] [ebp-28h]
   int v22; // [esp+8h] [ebp-18h] BYREF
-  int v23; // [esp+Ch] [ebp-14h]
-  unsigned __int8 *v24; // [esp+10h] [ebp-10h]
+  IBuildingRole *v23; // [esp+Ch] [ebp-14h]
+  IEntity *v24; // [esp+10h] [ebp-10h]
   int v25; // [esp+1Ch] [ebp-4h]
 
   v24 = this;
-  v14 = IEntity::Type((unsigned __int16 *)this);
+  v14 = IEntity::Type(this);
   v1 = IEntity::OwnerId(v24);
   CBuildingMgr::ChangeNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v1, v14, 0, -1);
-  v15 = IEntity::Type((unsigned __int16 *)v24);
+  v15 = IEntity::Type(v24);
   v2 = IEntity::OwnerId(v24);
-  CBuildingMgr::ChangeNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v2, v15, 1, 1);
-  v17 = IEntity::Type((unsigned __int16 *)v24);
+  CBuildingMgr::ChangeNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v2, v15, 1u, 1);
+  v17 = IEntity::Type(v24);
   v3 = IEntity::OwnerId(v24);
-  CStatistic::AddBuilding((CStatistic *)&g_cStatistic, v3, v17, 1);
-  v18 = IEntity::Type((unsigned __int16 *)v24);
+  CStatistic::AddBuilding(&g_cStatistic, v3, v17, 1);
+  v18 = IEntity::Type(v24);
   v4 = IEntity::OwnerId(v24);
-  CStatistic::AddProducedBuilding((CStatistic *)&g_cStatistic, v4, v18, 1);
-  v19 = IEntity::ID();
+  CStatistic::AddProducedBuilding(&g_cStatistic, v4, v18, 1);
+  v19 = IEntity::ID(v24);
   v5 = IEntity::OwnerId(v24);
-  (*(void (__thiscall **)(void *, int, int, int, _DWORD))(*(_DWORD *)g_pAI + 44))(g_pAI, 6, v5, v19, 0);
+  g_pAI->PostAIEvent(g_pAI, 6, v5, v19, 0);
   v20 = IEntity::Race(v24);
-  v6 = CBuilding::BuildingTypeEx(v24);
+  v6 = CBuilding::BuildingTypeEx((struct CBuilding *)v24);
   BuildingRole = CBuildingMgr::CreateBuildingRole(v6, v20, 0);
   std::auto_ptr<IBuildingRole>::auto_ptr<IBuildingRole>(&v22, (int)BuildingRole);
   v25 = 0;
-  std::auto_ptr<IBuildingRole>::operator=(&v22);
-  v23 = std::auto_ptr<IBuildingRole>::operator->((_DWORD *)v24 + 21);
-  (*(void (__thiscall **)(int, unsigned __int8 *))(*(_DWORD *)v23 + 24))(v23, v24);
-  IEntity::SetFlagBits(v24, (EntityFlag)0x10000u);
-  if ( CBuilding::BuildingTypeEx(v24) == 34 )
+  std::auto_ptr<IBuildingRole>::operator=(&v24[2].m_iType, (int)&v22);
+  v23 = std::auto_ptr<IBuildingRole>::operator->(&v24[2].m_iType);
+  ((void (__thiscall *)(IBuildingRole *, IEntity *))v23->j_?Init@CSimpleBuildingRole@@UAEXPAVCBuilding@@@Z)(v23, v24);
+  IEntity::SetFlagBits(v24, (EntityFlag)0x10000);
+  if ( CBuilding::BuildingTypeEx((struct CBuilding *)v24) == 34 )
   {
     v8 = IEntity::OwnerId(v24);
     if ( v8 == CPlayerManager::GetLocalPlayerId() )

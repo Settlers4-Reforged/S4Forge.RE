@@ -73,7 +73,7 @@ private:
     virtual void  TakeJob(class CSettler * pSettler);
 
     // address=[0x1565510]
-    virtual void  Init(class CSettler * a2);
+    virtual void  Init(class CSettler * _pSettler);
 
     // address=[0x1565660]
     virtual void  ConvertEventIntoGoal(class CSettler * pSettler, class CEntityEvent * pEvent);

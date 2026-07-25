@@ -12,15 +12,15 @@ public:
 public:
     BYTE m_cType;
     BYTE m_cRace;
-    BYTE m_unknownA;
+    BYTE m_bInhabitants;
     BYTE m_unknownB;
     BYTE m_bSomeFlagBits;
-    BYTE m_unknownD;
-    BYTE m_unknownE;
+    BYTE m_bHasWorkingArea;
+    BYTE m_iBuildingProgress;
     BYTE m_cTotalCount;
     BYTE m_cTotalBuiltCount;
     BYTE m_iSettlerCount;
-    BYTE m_unknown12;
+    BYTE m_iTools;
     BYTE m_bRemainingSettlers;
 
 };

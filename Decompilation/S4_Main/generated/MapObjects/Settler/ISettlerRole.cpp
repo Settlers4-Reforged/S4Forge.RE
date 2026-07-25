@@ -128,9 +128,9 @@ int  ISettlerRole::SourcePileId(void)const {
   this->m_iTask = 0;
   this->m_uSettlerWalk = 0;
   this->m_iWalkspeed = 1;
-  this->m_uCycleFrames = 1;
+  this->m_iCycleFrames = 1;
   this->m_uTick = 0;
-  this->unk_0A = 1;
+  this->m_bForward = 1;
   this->unk_0B = 0;
   this->m_uToDoCount = 0;
   this->m_iDestinationOffsetX = 0;
@@ -208,7 +208,7 @@ void  ISettlerRole::LogicUpdate(class CSettler * pSettler) {
   else
   {
     pSettler->m_iDistance = 0;
-    this->m_uCycleFrames = 1;
+    this->m_iCycleFrames = 1;
     v6 = std::auto_ptr<CWalking>::operator->(&pSettler->m_pWalking);
     v6->InitB((CWalkingBase *)v6, -1, 0);
     v5 = std::auto_ptr<CWalking>::operator->(&pSettler->m_pWalking);
@@ -223,14 +223,14 @@ void  ISettlerRole::LogicUpdate(class CSettler * pSettler) {
     else
     {
       std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator*(&pSettler->m_cCurrentToDoItemIter);
-      this->m_uCycleFrames = std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator->(&pSettler->m_cCurrentToDoItemIter)->m_iFrameCount;
-      if ( !this->m_uCycleFrames
+      this->m_iCycleFrames = std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator->(&pSettler->m_cCurrentToDoItemIter)->m_iFrameCount;
+      if ( !this->m_iCycleFrames
         && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerRole.cpp", 191, "m_iCycleFrames > 0") == 1 )
       {
         __debugbreak();
       }
-      if ( this->m_uCycleFrames > 1u )
-        v4 = this->m_uCycleFrames - 1;
+      if ( this->m_iCycleFrames > 1u )
+        v4 = this->m_iCycleFrames - 1;
       else
         v4 = 1;
       if ( v4 <= 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerRole.cpp", 194, "iCycleFramesEx > 0") == 1 )
@@ -281,18 +281,18 @@ void  ISettlerRole::Update(class CSettler * _pSettler) {
       case 28:
       case 29:
       case 30:
-        if ( this->unk_0A )
+        if ( this->m_bForward )
         {
           _pSettler->m_iFrame = (this->m_uTick + IAnimatedEntity::Frame(_pSettler))
-                              % (unsigned __int8)this->m_uCycleFrames;
+                              % (unsigned __int8)this->m_iCycleFrames;
         }
         else
         {
-          m_iCycleFrames = (unsigned __int8)this->m_uCycleFrames;
+          m_iCycleFrames = (unsigned __int8)this->m_iCycleFrames;
           m_iFrame = _pSettler->m_iFrame;
           v14 = this->m_uTick % m_iCycleFrames;
           if ( m_iFrame < v14 )
-            _pSettler->m_iFrame = (m_iCycleFrames + m_iFrame - v14) % (unsigned __int8)this->m_uCycleFrames;
+            _pSettler->m_iFrame = (m_iCycleFrames + m_iFrame - v14) % (unsigned __int8)this->m_iCycleFrames;
           else
             _pSettler->m_iFrame = m_iFrame - v14;
         }
@@ -322,7 +322,7 @@ void  ISettlerRole::Update(class CSettler * _pSettler) {
         }
         else
         {
-          _pSettler->m_iFrame = (this->m_uTick + _pSettler->m_iFrame) % (unsigned __int8)this->m_uCycleFrames;
+          _pSettler->m_iFrame = (this->m_uTick + _pSettler->m_iFrame) % (unsigned __int8)this->m_iCycleFrames;
           if ( !_pSettler->m_iFrame )
             _pSettler->m_iFrame = 1;
           IMovingEntity::DecDistance(_pSettler, (this->m_uTick << 8) / this->m_iWalkspeed);
@@ -335,11 +335,11 @@ void  ISettlerRole::Update(class CSettler * _pSettler) {
         }
         else
         {
-          _pSettler->m_iFrame = (this->m_uTick + _pSettler->m_iFrame) % (unsigned __int8)this->m_uCycleFrames;
+          _pSettler->m_iFrame = (this->m_uTick + _pSettler->m_iFrame) % (unsigned __int8)this->m_iCycleFrames;
           if ( !_pSettler->m_iFrame )
             _pSettler->m_iFrame = 1;
-          if ( (unsigned __int8)this->m_uCycleFrames > 1u )
-            v13 = (unsigned __int8)this->m_uCycleFrames - 1;
+          if ( (unsigned __int8)this->m_iCycleFrames > 1u )
+            v13 = (unsigned __int8)this->m_iCycleFrames - 1;
           else
             v13 = 1;
           v11 = v13;
@@ -670,9 +670,9 @@ int  ISettlerRole::GetObserverTarget(enum T_OBSERVER_TARGET a2) {
     operator^<signed char>(a1, &this->m_iTask);
     operator^<unsigned char>(a1, &this->m_uSettlerWalk);
     operator^<signed char>(a1, &this->m_iWalkspeed);
-    operator^<unsigned char>(a1, &this->m_uCycleFrames);
+    operator^<unsigned char>(a1, &this->m_iCycleFrames);
     operator^<unsigned short>(a1, &this->m_uTick);
-    operator^<unsigned char>(a1, &this->unk_0A);
+    operator^<unsigned char>(a1, &this->m_bForward);
     operator^<unsigned char>(a1, &this->unk_0B);
     operator^<short>(a1, &this->m_iDestinationOffsetX);
     operator^<short>(a1, &this->m_iDestinationOffsetY);
@@ -711,9 +711,9 @@ void  ISettlerRole::Store(std::ostream & _rStream) {
   operator^<signed char>(_rStream, &this->m_iTask);
   operator^<unsigned char>(_rStream, &this->m_uSettlerWalk);
   operator^<signed char>(_rStream, &this->m_iWalkspeed);
-  operator^<unsigned char>(_rStream, &this->m_uCycleFrames);
+  operator^<unsigned char>(_rStream, &this->m_iCycleFrames);
   operator^<unsigned short>(_rStream, &this->m_uTick);
-  operator^<unsigned char>(_rStream, &this->unk_0A);
+  operator^<unsigned char>(_rStream, &this->m_bForward);
   operator^<unsigned char>(_rStream, &this->unk_0B);
   operator^<short>(_rStream, &this->m_iDestinationOffsetX);
   operator^<short>(_rStream, &this->m_iDestinationOffsetY);
@@ -791,11 +791,11 @@ void  ISettlerRole::DetachFromPile(class CSettler * _pSettler, enum T_OBSERVER_T
         v5 = IEntity::EntityId(_pSettler);
         if ( v5 <= 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerRole.cpp", 955, "iSettlerId > 0") == 1 )
           __debugbreak();
-        v4 = (CPile *)CPileMgr::operator[](v6);
+        v4 = CPileMgr::operator[](v6);
         if ( _bChangeAmount )
           CPile::ChangeAmountAndDetach(v4, v5);
         else
-          (*(void (__thiscall **)(CPile *, int))(*(_DWORD *)v4 + 64))(v4, v5);
+          v4->Detach(v5);
         if ( this->GetObserverTarget(this, _tTarget) )
         {
           if ( BBSupportDbgReport(
@@ -859,8 +859,8 @@ bool  ISettlerRole::SearchRestingPlace(class CSettler * a2, int a3) {
   int v7; // [esp+Ch] [ebp-18h]
   int v8; // [esp+10h] [ebp-14h]
   int v9; // [esp+14h] [ebp-10h]
-  int v10; // [esp+18h] [ebp-Ch]
-  int v11; // [esp+1Ch] [ebp-8h]
+  unsigned int v10; // [esp+18h] [ebp-Ch]
+  unsigned int v11; // [esp+1Ch] [ebp-8h]
   int i; // [esp+20h] [ebp-4h]
 
   if ( a3 <= 1 && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerRole.cpp", 858, "_iDistance > 1") == 1 )
@@ -873,12 +873,12 @@ bool  ISettlerRole::SearchRestingPlace(class CSettler * a2, int a3) {
   {
     v10 = v8 + CSpiralOffsets::DeltaX(i);
     v11 = v9 + CSpiralOffsets::DeltaY(i);
-    if ( (unsigned __int8)CWorldManager::InWorld(v10, v11) )
+    if ( CWorldManager::InWorld(v10, v11) )
     {
       v3 = CWorldManager::EcoSectorId(v8, v9);
       if ( v3 == CWorldManager::EcoSectorId(v10, v11) && !CWorldManager::FlagBits(v10, v11, 0x77u) )
       {
-        *((_DWORD *)this + 7) = Y16X16::PackXYFast(v10, v11);
+        this->m_iStartPosition = Y16X16::PackXYFast(v10, v11);
         return 1;
       }
     }
@@ -902,10 +902,10 @@ bool  ISettlerRole::CheckHome(class CSettler * a2) {
 // Decompiled from void __thiscall ISettlerRole::InitCommonTaskValues(  ISettlerRole *this,  struct CSettler *a2,  const struct CEntityTask *a3)
 void  ISettlerRole::InitCommonTaskValues(class CSettler * a2, class CEntityTask const & a3) {
   
-  int v3; // eax
-  const char *v4; // [esp-4h] [ebp-10h]
+  int iType; // eax
+  const char *spName; // [esp-4h] [ebp-10h]
   IBuildingRole *v5; // [esp+0h] [ebp-Ch]
-  struct CBuilding *BuildingPtr; // [esp+4h] [ebp-8h]
+  CBuilding *BuildingPtr; // [esp+4h] [ebp-8h]
 
   if ( !a3->m_iTask
     || a3->m_iTask == 1
@@ -947,7 +947,7 @@ void  ISettlerRole::InitCommonTaskValues(class CSettler * a2, class CEntityTask 
         __debugbreak();
       if ( BuildingPtr )
       {
-        v5 = (IBuildingRole *)CBuilding::Role(BuildingPtr);
+        v5 = CBuilding::Role(BuildingPtr);
         IBuildingRole::TakeJobTrigger(v5, a3->m_iTrigger);
       }
     }
@@ -955,19 +955,19 @@ void  ISettlerRole::InitCommonTaskValues(class CSettler * a2, class CEntityTask 
   this->m_uSettlerWalk = 72;
   this->m_iTask = a3->m_iTask;
   this->m_iWalkspeed = a3->m_iDuration;
-  this->m_uCycleFrames = a3->m_iFrameCount;
-  if ( this->m_uCycleFrames <= 1u )
+  this->m_iCycleFrames = a3->m_iFrameCount;
+  if ( this->m_iCycleFrames <= 1u )
   {
-    v4 = (&off_37B8064)[2 * a3->m_iJobNr];
-    v3 = IEntity::Type(a2);
+    spName = s_sSettlerJobDefines[a3->m_iJobNr].m_spName;
+    iType = IEntity::Type(a2);
     BBSupportTracePrintF(
       3,
       "ISettlerRole::InitCommonTaskValues(): Invalid number of frames (%i) for settler type %s, job %s!",
-      this->m_uCycleFrames,
-      (&off_37B7E4C)[2 * v3],
-      v4);
+      this->m_iCycleFrames,
+      s_sSettlerDefines2[iType].m_spName,
+      spName);
   }
-  if ( !this->m_uCycleFrames
+  if ( !this->m_iCycleFrames
     && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerRole.cpp", 526, "m_iCycleFrames >= 1") == 1 )
   {
     __debugbreak();
@@ -978,11 +978,11 @@ void  ISettlerRole::InitCommonTaskValues(class CSettler * a2, class CEntityTask 
     this->unk_0B = a3->m_iEntity;
   a2->m_iFrame = 0;
   a2->m_iJobPart = a3->m_iJobNr;
-  this->unk_0A = a3->m_bForward;
-  if ( this->unk_0A )
+  this->m_bForward = a3->m_bForward;
+  if ( this->m_bForward )
     IAnimatedEntity::SetFrame(a2, 0);
   else
-    IAnimatedEntity::SetFrame(a2, this->m_uCycleFrames - 1);
+    IAnimatedEntity::SetFrame(a2, this->m_iCycleFrames - 1);
 }
 
 

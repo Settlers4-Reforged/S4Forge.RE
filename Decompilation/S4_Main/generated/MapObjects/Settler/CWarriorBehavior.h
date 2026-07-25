@@ -128,7 +128,7 @@ private:
     int  WarriorDestinationId(void)const;
 
     // address=[0x15afb90]
-    void  WarriorGetEnemyBitsAndScanMask(class IEntity const & a2, int & a3, int & a4);
+    void  WarriorGetEnemyBitsAndScanMask(class IEntity const & a2, int & _rBits, int & _rScanMask);
 
     // address=[0x15afc10]
     void  WarriorInitWalk(class IMovingEntity & a2, int a3);
@@ -147,6 +147,10 @@ private:
 
     // address=[0x15afec0]
     int  WarriorWalkDestinationXY(class IMovingEntity & a2);
+
+    // Type information members
+public:
+    CWarriorBehavior::SWarriorBehaviorData m_sWarriorBehaviorData;
 
 };
 

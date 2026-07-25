@@ -18,7 +18,7 @@ public:
     virtual void  PostLoadInit(class CSettler * a1);
 
     // address=[0x1562ee0]
-    virtual bool  SetFree(class CSettler * a2, int a3);
+    virtual bool  SetFree(class CSettler * _pSettler, int a3);
 
     // address=[0x1562ff0]
      CBuilderRole(std::istream & a2);
@@ -55,15 +55,15 @@ private:
     virtual void  TakeJob(class CSettler * a2);
 
     // address=[0x15632c0]
-    virtual void  Init(class CSettler * a2);
+    virtual void  Init(class CSettler * a1);
 
     // address=[0x1563340]
     virtual void  ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent * a3);
 
     // Type information members
 public:
-    bool m_bU0;
-    bool m_bU1;
+    signed __int8 m_iDir;
+    signed __int8 m_iNeedsRest;
 
 };
 

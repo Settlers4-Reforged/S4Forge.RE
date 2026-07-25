@@ -1160,7 +1160,7 @@ int __cdecl IAIEnvironment::VehicleGetFirstReadyAndCheckedOutVehicleId(int a1, i
   for ( i = CVehicleMgr::GetFirstVehicleId(a1, a2); i > 0; i = IAnimatedEntity::Next(v3) )
   {
     v3 = (_DWORD *)CVehicleMgr::operator[](i);
-    if ( (_UNKNOWN *)IEntity::FlagBits(v3, ENTITY_FLAG_Ready|ENTITY_FLAG_OnBoard) == &loc_1C00000 )
+    if ( (_UNKNOWN *)IEntity::FlagBits(v3, ENTITY_FLAG_Ready|ENTITY_FLAG_ON_BOARD) == &loc_1C00000 )
       return i;
   }
   return 0;

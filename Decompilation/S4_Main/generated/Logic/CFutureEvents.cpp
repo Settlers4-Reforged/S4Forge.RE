@@ -813,7 +813,7 @@ void __cdecl CFutureEvents::ExecuteEnslaveSettler(struct CFutureEvents::SFutureE
     return (char)SettlerPtr;
   v13 = IEntity::X(v16);
   v14 = IEntity::Y(v16);
-  v10 = IEntity::FlagBits(v16, ENTITY_FLAG_OnBoard|ENTITY_FLAG_Visible) == ENTITY_FLAG_Visible
+  v10 = IEntity::FlagBits(v16, ENTITY_FLAG_ON_BOARD|ENTITY_FLAG_Visible) == ENTITY_FLAG_Visible
      && CWorldManager::MapObjectId(v13, v14) == v15;
   LOBYTE(SettlerPtr) = v10;
   v18 = v10;
@@ -881,7 +881,7 @@ void __cdecl CFutureEvents::ExecuteFreeServant(struct CFutureEvents::SFutureEven
   {
     v6 = IEntity::X(SettlerPtr);
     v7 = IEntity::Y(SettlerPtr);
-    v9 = IEntity::FlagBits(SettlerPtr, ENTITY_FLAG_OnBoard|ENTITY_FLAG_Visible) == 256
+    v9 = IEntity::FlagBits(SettlerPtr, ENTITY_FLAG_ON_BOARD|ENTITY_FLAG_Visible) == 256
       && CWorldManager::MapObjectId(v6, v7) == v5;
     if ( !v9 && BBSupportDbgReport(2, "Logic\\FutureEvents.cpp", 1301, "bOk") == 1 )
       __debugbreak();

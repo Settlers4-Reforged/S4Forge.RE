@@ -72,6 +72,10 @@ private:
     // address=[0x1587ad0]
      CHunterRole(void);
 
+    // Type information members
+public:
+    unsigned __int8 m_uGood;
+
 };
 
 

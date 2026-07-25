@@ -1179,7 +1179,7 @@ bool  CInputProcessor::SelectNextVehicle(class CEvn_Logic * _pEvent) {
     }
     VehiclePtr = CVehicleMgr::GetVehiclePtr(FirstVehicleId);
   }
-  while ( FirstVehicleId != v7 && IEntity::FlagBits(VehiclePtr, ENTITY_FLAG_OnBoard) );
+  while ( FirstVehicleId != v7 && IEntity::FlagBits(VehiclePtr, ENTITY_FLAG_ON_BOARD) );
   if ( FirstVehicleId && VehiclePtr )
   {
     v9 = FirstVehicleId;

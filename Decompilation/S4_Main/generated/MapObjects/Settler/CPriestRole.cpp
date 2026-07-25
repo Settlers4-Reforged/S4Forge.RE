@@ -225,7 +225,7 @@ int  CPriestRole::GetKindOfSelection(class CSettler * a2)const {
 
   *(_DWORD *)this = &CPriestRole::_vftable_;
   v2 = (CPropertySet *)CSettlerMgr::operator[](*((unsigned __int16 *)this + 9));
-  if ( !IEntity::FlagBits(v2, ENTITY_FLAG_OnBoard) )
+  if ( !IEntity::FlagBits(v2, ENTITY_FLAG_ON_BOARD) )
     CWarMap::RemoveEntity(v2);
   if ( *((_WORD *)this + 16) )
   {
@@ -483,7 +483,7 @@ void  CPriestRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent 
     case 7:
       v38 = *((_DWORD *)a3 + 3);
       IEntity::SetFlagBits(a2, ENTITY_FLAG_Selectable);
-      IEntity::ClearFlagBits(a2, ENTITY_FLAG_OnBoard);
+      IEntity::ClearFlagBits(a2, ENTITY_FLAG_ON_BOARD);
       v37 = IEntity::Type((unsigned __int16 *)a2);
       v29 = IEntity::Type((unsigned __int16 *)a2);
       v21 = IEntity::Race(a2);
@@ -561,7 +561,7 @@ LABEL_19:
       CSettlerMgr::SearchSpaceForSettler((CSettlerMgr *)g_cSettlerMgr, v19, v27, v35);
       CWarMap::AddEntity(a2);
       IEntity::SetFlagBits(a2, ENTITY_FLAG_Selectable|ENTITY_FLAG_Visible);
-      IEntity::ClearFlagBits(a2, ENTITY_FLAG_OnBoard);
+      IEntity::ClearFlagBits(a2, ENTITY_FLAG_ON_BOARD);
       *(_BYTE *)(this + 4) = 27;
       v36 = *(unsigned __int16 *)(this + 32);
       v28 = IEntity::ID();

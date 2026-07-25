@@ -421,7 +421,7 @@ void  CMilitaryBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
   g_cMilitaryBuildingInfo.m_cType = IEntity::Type(a2);
   g_cMilitaryBuildingInfo.m_unknownB = 0;
   g_cMilitaryBuildingInfo.m_bSomeFlagBits = IEntity::FlagBits(a2, (EntityFlag)0x1000) != 0;
-  g_cMilitaryBuildingInfo.m_unknownD = 0;
+  g_cMilitaryBuildingInfo.m_bHasWorkingArea = 0;
   cType = IEntity::Type(a2);
   cOwnerId = IEntity::OwnerId(a2);
   g_cMilitaryBuildingInfo.m_cTotalCount = CBuildingMgr::GetNumberOfBuildings(
@@ -436,7 +436,7 @@ void  CMilitaryBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
                                                  cOwnerId,
                                                  cType,
                                                  1u);
-  g_cMilitaryBuildingInfo.m_unknownA = *((_BYTE *)this + 29);
+  g_cMilitaryBuildingInfo.m_bInhabitants = *((_BYTE *)this + 29);
   for ( i = 0; i < *((unsigned __int8 *)this + 385); ++i )
   {
     g_cMilitaryBuildingInfo.m_aStationedSoldiers[i].m_cUnitType = -2;
@@ -543,13 +543,13 @@ bool  CMilitaryBuildingRole::IncWishAndOrder(int a2, bool a3) {
 
 
 // address=[0x150ed30]
-// Decompiled from int __thiscall CMilitaryBuildingRole::GetWish(unsigned __int8 *this, int a2)
+// Decompiled from int __thiscall CMilitaryBuildingRole::GetWish(CMilitaryBuildingRole *this, int a2)
 int  CMilitaryBuildingRole::GetWish(int a2) {
   
   if ( a2 == 2 )
-    return this[385];
+    return (unsigned __int8)this[1].m_iDelayTick;
   if ( a2 == 3 )
-    return this[384];
+    return (unsigned __int8)this[1].m_uLogicState;
   return 0;
 }
 
@@ -634,7 +634,7 @@ void  CMilitaryBuildingRole::RemoveInhabitant(class CBuilding * a2) {
     if ( *v3 )
     {
       v4 = (_DWORD *)CSettlerMgr::operator[]((unsigned __int16)*v3);
-      if ( !IEntity::FlagBits(v4, ENTITY_FLAG_OnBoard)
+      if ( !IEntity::FlagBits(v4, ENTITY_FLAG_ON_BOARD)
         && BBSupportDbgReport(
              2,
              "MapObjects\\Building\\MilitaryBuilding.cpp",
@@ -914,23 +914,23 @@ bool  CMilitaryBuildingRole::TryCrushBuilding(void) {
 // Decompiled from char __thiscall CMilitaryBuildingRole::CrushBuilding(CMilitaryBuildingRole *this)
 bool  CMilitaryBuildingRole::CrushBuilding(void) {
   
-  void *v1; // eax
-  _DWORD *v2; // eax
+  CBuilding *v1; // eax
+  CBuilding *v2; // eax
   int v3; // eax
-  void *v4; // eax
-  _DWORD *v5; // eax
+  CBuilding *v4; // eax
+  CBuilding *v5; // eax
   int v6; // eax
   int v8; // [esp-4h] [ebp-Ch]
   int v9; // [esp-4h] [ebp-Ch]
 
-  v1 = (void *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
+  v1 = CBuildingMgr::operator[]((CBuildingMgr *)g_cBuildingMgr, this->m_iEntityId);
   v8 = IEntity::Y(v1);
-  v2 = (_DWORD *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
+  v2 = CBuildingMgr::operator[]((CBuildingMgr *)g_cBuildingMgr, this->m_iEntityId);
   v3 = IEntity::X(v2);
-  BBSupportTracePrintF(0, "### CrushBuilding(): building %i @ (%i, %i) ###", *((unsigned __int16 *)this + 3), v3, v8);
-  v4 = (void *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
+  BBSupportTracePrintF(0, "### CrushBuilding(): building %i @ (%i, %i) ###", this->m_iEntityId, v3, v8);
+  v4 = CBuildingMgr::operator[]((CBuildingMgr *)g_cBuildingMgr, this->m_iEntityId);
   v9 = IEntity::Y(v4);
-  v5 = (_DWORD *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
+  v5 = CBuildingMgr::operator[]((CBuildingMgr *)g_cBuildingMgr, this->m_iEntityId);
   v6 = IEntity::X(v5);
   CWorldManager::SetOwner(v6, v9);
   return 1;
@@ -1296,7 +1296,7 @@ void  CMilitaryBuildingRole::KillInhabitant(class CBuilding * a2) {
     if ( *v4 )
     {
       v7 = (CSettler *)CSettlerMgr::operator[](v6);
-      if ( !IEntity::FlagBits(v7, ENTITY_FLAG_OnBoard)
+      if ( !IEntity::FlagBits(v7, ENTITY_FLAG_ON_BOARD)
         && BBSupportDbgReport(
              2,
              "MapObjects\\Building\\MilitaryBuilding.cpp",
@@ -1508,7 +1508,7 @@ void  CMilitaryBuildingRole::ThrowOutSettler(class CBuilding * a2, int a3) {
   CSettlerMgr::SearchSpaceForSettler((CSettlerMgr *)g_cSettlerMgr, v13, v5, v9);
   CWarMap::AddEntity(v15);
   IEntity::SetFlagBits(v15, ENTITY_FLAG_Selectable|ENTITY_FLAG_Visible);
-  IEntity::ClearFlagBits(v15, ENTITY_FLAG_OnBoard);
+  IEntity::ClearFlagBits(v15, ENTITY_FLAG_ON_BOARD);
   v9 = IEntity::EntityId((unsigned __int16 *)a2);
   v8 = v13;
   v6 = IEntity::OwnerId((unsigned __int8 *)v15);

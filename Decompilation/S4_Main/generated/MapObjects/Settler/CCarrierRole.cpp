@@ -1,4 +1,3 @@
-#if FALSE
 #include "CCarrierRole.h"
 
 // Definitions for class CCarrierRole
@@ -15,15 +14,15 @@ class CPersistence * __cdecl CCarrierRole::New(std::istream & a1) {
 
 
 // address=[0x1563a30]
-// Decompiled from int __thiscall CCarrierRole::InitWalking(CCarrierRole *this, struct CSettler *a2)
+// Decompiled from CWalkingNormal *__thiscall CCarrierRole::InitWalking(CCarrierRole *this, IEntity *a2)
 class CWalking *  CCarrierRole::InitWalking(class CSettler * a2) {
   
   int v2; // eax
-  int v4; // [esp+4h] [ebp-4h]
+  CWalkingNormal *v4; // [esp+4h] [ebp-4h]
 
-  v2 = IEntity::OwnerId((unsigned __int8 *)a2);
+  v2 = IEntity::OwnerId(a2);
   v4 = CWalking::Create(1, v2);
-  (*(void (__thiscall **)(int, int, _DWORD))(*(_DWORD *)v4 + 8))(v4, -1, 0);
+  v4->InitB(v4, -1, 0);
   return v4;
 }
 
@@ -35,7 +34,7 @@ void  CCarrierRole::LogicUpdate(class CSettler * a2) {
   char *v2; // eax
   char *v3; // eax
   unsigned int v4; // eax
-  int v5; // eax
+  std::list *v5; // eax
   DWORD v6; // [esp-4h] [ebp-Ch]
 
   if ( this->m_iTask == 17 )
@@ -53,7 +52,7 @@ void  CCarrierRole::LogicUpdate(class CSettler * a2) {
       v6 = CRandom16::Rand((CRandom16 *)v3) % 3 + 154;
       v4 = IEntity::Race(a2);
       v5 = CEntityToDoListMgr::SettlerJobList(g_pEntityToDoListMgr, v4, v6);
-      a2->NewToDoList(a2, v5, v6);
+      a2->NewToDoList(a2, (int)v5, v6);
     }
   }
   else
@@ -94,7 +93,7 @@ void  CCarrierRole::LogicUpdateJob(class CSettler * pSettler) {
   int v26; // [esp-8h] [ebp-34h]
   int v27; // [esp-4h] [ebp-30h]
   int v28; // [esp-4h] [ebp-30h]
-  IEntity *v29; // [esp+4h] [ebp-28h]
+  CPile *v29; // [esp+4h] [ebp-28h]
   int v30; // [esp+8h] [ebp-24h]
   int a2; // [esp+Ch] [ebp-20h]
   int v32; // [esp+10h] [ebp-1Ch]
@@ -119,7 +118,7 @@ void  CCarrierRole::LogicUpdateJob(class CSettler * pSettler) {
       this->GetNextJob(this, pSettler);
       break;
     case 0x14:
-      v30 = this->m_uCycleFrames / 2;
+      v30 = this->m_iCycleFrames / 2;
       this->m_iWalkspeed -= v30;
       if ( this->m_iWalkspeed < v30 )
       {
@@ -131,10 +130,10 @@ void  CCarrierRole::LogicUpdateJob(class CSettler * pSettler) {
         if ( !CCarrierRole::NextSettlerType(this) || !ISettlerRole::SourcePileId(this) )
           goto LABEL_91;
         v23 = ISettlerRole::SourcePileId(this);
-        pPile = (CPile *)CPileMgr::GetPilePtr(v23);
+        pPile = CPileMgr::GetPilePtr(v23);
         if ( !pPile && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 509, "pPile != 0") == 1 )
           __debugbreak();
-        this->m_uGood = (*(int (__thiscall **)(CPile *))(*(_DWORD *)pPile + 60))(pPile);
+        this->m_uGood = pPile->GetGoodType();
         if ( !this->m_uGood && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 511, "m_uGood > 0") == 1 )
           __debugbreak();
         v24 = IEntity::EntityId(pSettler);
@@ -145,11 +144,11 @@ void  CCarrierRole::LogicUpdateJob(class CSettler * pSettler) {
     case 0x15:
       if ( !CCarrierRole::DestinationPileId(this) )
         goto LABEL_91;
-      v32 = this->m_uCycleFrames / 2;
+      v32 = this->m_iCycleFrames / 2;
       this->m_iWalkspeed -= v32;
       if ( this->m_iWalkspeed < v32 )
       {
-        if ( debug && DEBUG_FLAGS[g_iCurrentDebugFlags] )
+        if ( debug && DEBUG_FLAGS[g_iCarrierDebugSlot] )
         {
           v13 = IEntity::ID(pSettler);
           BBSupportTracePrintF(0, "Carier Nr %u put_good", v13);
@@ -165,13 +164,13 @@ void  CCarrierRole::LogicUpdateJob(class CSettler * pSettler) {
       else
       {
         v9 = CCarrierRole::DestinationPileId(this);
-        pPile = (CPile *)CPileMgr::GetPilePtr(v9);
+        pPile = CPileMgr::GetPilePtr(v9);
         if ( !pPile && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 392, "pPile != 0") == 1 )
           __debugbreak();
         if ( pPile )
         {
-          m_uGood = (unsigned __int8)this->m_uGood;
-          if ( m_uGood != (*(int (__thiscall **)(CPile *))(*(_DWORD *)pPile + 60))(pPile)
+          m_uGood = this->m_uGood;
+          if ( m_uGood != pPile->GetGoodType()
             && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 397, "m_uGood == pPile->GetGoodType()") == 1 )
           {
             __debugbreak();
@@ -189,7 +188,7 @@ void  CCarrierRole::LogicUpdateJob(class CSettler * pSettler) {
       }
       break;
     case 0x16:
-      a2 = this->m_uCycleFrames / 2;
+      a2 = this->m_iCycleFrames / 2;
       this->m_iWalkspeed -= a2;
       if ( this->m_iWalkspeed < a2 )
       {
@@ -205,20 +204,20 @@ void  CCarrierRole::LogicUpdateJob(class CSettler * pSettler) {
         if ( !ISettlerRole::SourcePileId(this) )
           goto LABEL_91;
         v15 = ISettlerRole::SourcePileId(this);
-        pPile = (CPile *)CPileMgr::GetPilePtr(v15);
+        pPile = CPileMgr::GetPilePtr(v15);
         if ( !pPile && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 447, "pPile != 0") == 1 )
           __debugbreak();
-        this->m_uGood = (*(int (__thiscall **)(CPile *))(*(_DWORD *)pPile + 60))(pPile);
+        this->m_uGood = pPile->GetGoodType();
         if ( !this->m_uGood && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 449, "m_uGood > 0") == 1 )
           __debugbreak();
-        if ( debug && DEBUG_FLAGS[g_iCurrentDebugFlags] )
+        if ( debug && DEBUG_FLAGS[g_iCarrierDebugSlot] )
         {
           v16 = ISettlerRole::SourcePileId(this);
           v29 = CPileMgr::operator[](v16);
           v17 = ISettlerRole::SourcePileId(this);
-          v18 = (CPile *)CPileMgr::operator[](v17);
+          v18 = CPileMgr::operator[](v17);
           v28 = CPile::AmountLeaving(v18);
-          v26 = v29->Amount();
+          v26 = ((int (__stdcall *)())v29->Amount)();
           v25 = ISettlerRole::SourcePileId(this);
           v19 = IEntity::ID(pSettler);
           BBSupportTracePrintF(
@@ -257,18 +256,18 @@ void  CCarrierRole::LogicUpdateJob(class CSettler * pSettler) {
             __debugbreak();
           }
         }
-        if ( debug && DEBUG_FLAGS[g_iCurrentDebugFlags] )
+        if ( debug && DEBUG_FLAGS[g_iCarrierDebugSlot] )
         {
           v5 = IEntity::ID(pSettler);
           BBSupportTracePrintF(0, "Carrier nr %u load_good", v5);
         }
-        if ( debug && DEBUG_FLAGS[g_iCurrentDebugFlags] )
+        if ( debug && DEBUG_FLAGS[g_iCarrierDebugSlot] )
         {
           v27 = this->m_uHomeEntityId;
           v6 = IEntity::ID(pSettler);
           BBSupportTracePrintF(0, "Carrier LU LOAD_GOOD - Detach settler %u from vehicle %u", v6, v27);
         }
-        v35 = (CVehicle *)CVehicleMgr::operator[](this->m_uHomeEntityId);
+        v35 = CVehicleMgr::operator[](this->m_uHomeEntityId);
         v35->GoodArrived(v35, this->m_uGood, 1);
         v7 = IEntity::ID(pSettler);
         v35->Detach(v35, v7);
@@ -288,7 +287,7 @@ LABEL_91:
       }
       break;
     default:
-      if ( debug && DEBUG_FLAGS[g_iCurrentDebugFlags] )
+      if ( debug && DEBUG_FLAGS[g_iCarrierDebugSlot] )
         BBSupportTracePrintF(0, "LogicUpdateJob Carrier - unknown task %u", this->m_iTask);
       break;
   }
@@ -303,32 +302,32 @@ void  CCarrierRole::UpdateJob(class CSettler * a2) {
   int m_uTick; // [esp+Ch] [ebp-18h]
   int v4; // [esp+10h] [ebp-14h]
   int v5; // [esp+14h] [ebp-10h]
-  int m_uLoopFrame; // [esp+18h] [ebp-Ch]
+  int uLoopFrame; // [esp+18h] [ebp-Ch]
 
   switch ( this->m_iTask )
   {
     case 0x14:
     case 0x16:
     case 0x17:
-      m_uLoopFrame = this->m_uCycleFrames;
+      uLoopFrame = this->m_iCycleFrames;
       v5 = this->m_uTick + IAnimatedEntity::Frame(a2);
-      if ( v5 >= m_uLoopFrame )
+      if ( v5 >= uLoopFrame )
       {
-        if ( m_uLoopFrame <= 0 )
+        if ( uLoopFrame <= 0 )
           v2 = 0;
         else
-          v2 = m_uLoopFrame - 1;
+          v2 = uLoopFrame - 1;
         LOBYTE(v5) = v2;
       }
-      IAnimatedEntity::SetFrame(v5);
+      IAnimatedEntity::SetFrame(a2, v5);
       break;
     case 0x15:
       v4 = IAnimatedEntity::Frame(a2);
       m_uTick = this->m_uTick;
       if ( v4 <= m_uTick )
-        IAnimatedEntity::SetFrame(0);
+        IAnimatedEntity::SetFrame(a2, 0);
       else
-        IAnimatedEntity::SetFrame(v4 - m_uTick);
+        IAnimatedEntity::SetFrame(a2, v4 - m_uTick);
       break;
     default:
       return;
@@ -426,7 +425,7 @@ void  CCarrierRole::UpdateCatapultPosition(int a2) {
 // Decompiled from CCarrierRole *__thiscall CCarrierRole::CCarrierRole(CCarrierRole *this, struct std::istream *stream)
  CCarrierRole::CCarrierRole(std::istream & stream) {
   
-  int fileFormatVersion; // [esp+4h] [ebp-1Ch] MAPDST BYREF
+  unsigned int fileFormatVersion; // [esp+4h] [ebp-1Ch] MAPDST BYREF
   int pExceptionObject; // [esp+8h] [ebp-18h] BYREF
   int v7; // [esp+1Ch] [ebp-4h]
 
@@ -436,13 +435,13 @@ void  CCarrierRole::UpdateCatapultPosition(int a2) {
   operator^<unsigned int>(stream, &fileFormatVersion);
   switch ( fileFormatVersion )
   {
-    case 1:
+    case 1u:
       operator^<unsigned char>(stream, &this->m_uGood);
       operator^<unsigned char>(stream, &this->m_uNextSettlerType);
       operator^<unsigned short>(stream, &this->m_uSourcePileId);
       operator^<unsigned short>(stream, &this->m_iTarget1);
       break;
-    case 2:
+    case 2u:
       operator^<unsigned char>(stream, &this->m_uGood);
       operator^<unsigned char>(stream, &this->m_uNextSettlerType);
       operator^<unsigned short>(stream, &this->m_uSourcePileId);
@@ -450,7 +449,7 @@ void  CCarrierRole::UpdateCatapultPosition(int a2) {
       operator^<unsigned short>(stream, &this->m_iSourcePile2);
       operator^<unsigned short>(stream, &this->m_iSourcePile3);
       break;
-    case 3:
+    case 3u:
       operator^<unsigned char>(stream, &this->m_uGood);
       operator^<unsigned char>(stream, &this->m_uNextSettlerType);
       operator^<unsigned short>(stream, &this->m_uSourcePileId);
@@ -474,7 +473,7 @@ void  CCarrierRole::UpdateCatapultPosition(int a2) {
 // Decompiled from void __thiscall CCarrierRole::Store(CCarrierRole *this, struct std::ostream *a1)
 void  CCarrierRole::Store(std::ostream & a1) {
   
-  int v2; // [esp+0h] [ebp-8h] BYREF
+  unsigned int v2; // [esp+0h] [ebp-8h] BYREF
 
   ISettlerRole::Store(this, a1);
   v2 = 3;
@@ -529,11 +528,10 @@ int  CCarrierRole::GetNextSettlerType(void) {
 
 
 // address=[0x15648d0]
-// Decompiled from char __thiscall CCarrierRole::SetNextSettlerType(CCarrierRole *this, unsigned __int8 a2)
+// Decompiled from void __thiscall CCarrierRole::SetNextSettlerType(CCarrierRole *this, unsigned __int8 a2)
 bool  CCarrierRole::SetNextSettlerType(int a2) {
   
   this->m_uNextSettlerType = a2;
-  return 1;
 }
 
 
@@ -651,7 +649,7 @@ void  CCarrierRole::TakeJob(class CSettler * pSettler) {
   struct CEntityEvent *v36; // [esp+74h] [ebp-50h]
   int v37; // [esp+78h] [ebp-4Ch]
   int v38; // [esp+7Ch] [ebp-48h]
-  BYTE a2[4]; // [esp+80h] [ebp-44h]
+  int a2; // [esp+80h] [ebp-44h]
   int WorkingAreaPackedXY; // [esp+84h] [ebp-40h]
   int v41; // [esp+8Ch] [ebp-38h] MAPDST
   int v42; // [esp+90h] [ebp-34h]
@@ -663,7 +661,8 @@ void  CCarrierRole::TakeJob(class CSettler * pSettler) {
   bool v48; // [esp+ABh] [ebp-19h]
   int v49; // [esp+ACh] [ebp-18h]
   IEntity *pHomeEntity; // [esp+B0h] [ebp-14h]
-  int v52; // [esp+C0h] [ebp-4h]
+  CCart *v51; // [esp+B0h] [ebp-14h] SPLIT
+  int v53; // [esp+C0h] [ebp-4h]
 
   v44 = IEntity::FlagBits(pSettler, (EntityFlag)0x100000) != 0;
   v48 = v44;
@@ -704,7 +703,7 @@ void  CCarrierRole::TakeJob(class CSettler * pSettler) {
       IAnimatedEntity::RegisterForLogicUpdate(pSettler, v3 % 4 + 1);
       return;
     case 8:
-      if ( debug && DEBUG_FLAGS[g_iCurrentDebugFlags] )
+      if ( debug && DEBUG_FLAGS[g_iCarrierDebugSlot] )
       {
         v7 = IEntity::ID(pSettler);
         BBSupportTracePrintF(0, "Carier %u TakeJob go to source pile", v7);
@@ -728,7 +727,7 @@ void  CCarrierRole::TakeJob(class CSettler * pSettler) {
         goto LABEL_27;
       v11 = IAnimatedEntity::JobPart(pSettler);
       IAnimatedEntity::SetJobPart(pSettler, this->m_uGood + v11);
-      if ( debug && DEBUG_FLAGS[g_iCurrentDebugFlags] )
+      if ( debug && DEBUG_FLAGS[g_iCarrierDebugSlot] )
       {
         m_uGood = this->m_uGood;
         v12 = IEntity::ID(pSettler);
@@ -745,22 +744,22 @@ void  CCarrierRole::TakeJob(class CSettler * pSettler) {
     case 10:
       goto LABEL_16;
     case 11:
-      if ( debug && DEBUG_FLAGS[g_iCurrentDebugFlags] )
+      if ( debug && DEBUG_FLAGS[g_iCarrierDebugSlot] )
       {
         v4 = IEntity::ID(pSettler);
         BBSupportTracePrintF(0, "Carier %u TakeJob put_good", v4);
       }
       IMovingEntity::SetDisplacementCosts(pSettler, 10);
-      if ( this->m_uCycleFrames )
-        v43 = this->m_uCycleFrames - 1;
+      if ( this->m_iCycleFrames )
+        v43 = this->m_iCycleFrames - 1;
       else
         v43 = 0;
-      *(_DWORD *)a2 = v43;
+      a2 = v43;
       IAnimatedEntity::SetFrame(pSettler, v43);
       IAnimatedEntity::RegisterForLogicUpdate(pSettler, this->m_iWalkspeed / 2);
       return;
     case 12:
-      if ( debug && DEBUG_FLAGS[g_iCurrentDebugFlags] )
+      if ( debug && DEBUG_FLAGS[g_iCarrierDebugSlot] )
       {
         v5 = IEntity::ID(pSettler);
         BBSupportTracePrintF(0, "Carier %u TakeJob get_good", v5);
@@ -770,7 +769,7 @@ LABEL_16:
       IAnimatedEntity::RegisterForLogicUpdate(pSettler, this->m_iWalkspeed / 2 - 1);
       return;
     case 13:
-      if ( debug && DEBUG_FLAGS[g_iCurrentDebugFlags] )
+      if ( debug && DEBUG_FLAGS[g_iCarrierDebugSlot] )
       {
         v6 = IEntity::ID(pSettler);
         BBSupportTracePrintF(0, "Carier %u TakeJob load_good", v6);
@@ -826,7 +825,7 @@ LABEL_16:
         __debugbreak();
       }
       v17 = IEntity::ID(pSettler);
-      ((void (__thiscall *)(IEntity *, int))pHomeEntity->__vftable[1].j_?Decrease@IEntity@@UAEXHH@Z)(pHomeEntity, v17);
+      v51->EntityEnter(v51, v17);
       return;
     case 16:
       if ( !CCarrierRole::NextSettlerType(this) )
@@ -849,8 +848,8 @@ LABEL_16:
       }
       a1 = ISettlerRole::HomeEntityId(this);
       v29 = IEntity::EntityId(pSettler);
-      rBuilding = CBuildingMgr::operator[](a1);
-      (*(void (__thiscall **)(CBuilding *, int))(*(_DWORD *)rBuilding + 64))(rBuilding, v29);
+      rBuilding = CBuildingMgr::operator[]((CBuildingMgr *)g_cBuildingMgr, a1);
+      rBuilding->Detach(rBuilding, v29);
       this->m_uAttachedSettlerId = IEntity::EntityId(pSettler);
       ISettlerRole::DetachFromPile(this, pSettler, 2, 1);
       ISettlerRole::DetachFromPile(this, pSettler, 3, 1);
@@ -872,9 +871,9 @@ LABEL_16:
           v27 = Y16X16::PackXYFast(v45, v46);
           v26 = CEntityEvent::CEntityEvent(&v22, 0x11u, 13, 0, v27, 0);
           v25 = v26;
-          v52 = 1;
+          v53 = 1;
           pSettler->SetEvent(pSettler, v26);
-          v52 = -1;
+          v53 = -1;
           CEntityEvent::~CEntityEvent(&v22);
         }
       }
@@ -905,9 +904,9 @@ LABEL_16:
         CSettler::SetBuilding(pSettler, v42);
         v36 = CEntityEvent::CEntityEvent(&v23, 1u, 0, v42, 0, 0);
         v35 = v36;
-        v52 = 0;
+        v53 = 0;
         pSettler->SetEvent(pSettler, v36);
-        v52 = -1;
+        v53 = -1;
         CEntityEvent::~CEntityEvent(&v23);
       }
       else
@@ -917,7 +916,7 @@ LABEL_27:
       }
       break;
     default:
-      if ( debug && DEBUG_FLAGS[g_iCurrentDebugFlags] )
+      if ( debug && DEBUG_FLAGS[g_iCarrierDebugSlot] )
         BBSupportTracePrint(0, "Carrier TakeJob - unknown job");
       IAnimatedEntity::RegisterForLogicUpdate(pSettler, 3);
       break;
@@ -926,50 +925,51 @@ LABEL_27:
 
 
 // address=[0x1565510]
-// Decompiled from _DWORD *__thiscall CCarrierRole::Init(int this, CPropertySet *a2)
-void  CCarrierRole::Init(class CSettler * a2) {
+// Decompiled from void __thiscall CCarrierRole::Init(CCarrierRole *this, IEntity *_pSettler)
+void  CCarrierRole::Init(class CSettler * _pSettler) {
   
   int v2; // eax
-  _DWORD *result; // eax
-  int v4; // esi
-  int v5; // eax
-  int v6; // [esp-4h] [ebp-14h]
-  unsigned __int16 *v7; // [esp+4h] [ebp-Ch]
+  int v3; // esi
+  int v4; // eax
+  int v5; // [esp-4h] [ebp-14h]
+  CEcoSector *v6; // [esp+4h] [ebp-Ch]
+  int v7; // [esp+8h] [ebp-8h]
 
-  if ( !a2 && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 203, "_pSettler!=NULL") == 1 )
+  if ( !_pSettler && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 203, "_pSettler!=NULL") == 1 )
     __debugbreak();
-  if ( IEntity::FlagBits(a2, ENTITY_FLAG_Offered)
+  if ( IEntity::FlagBits(_pSettler, ENTITY_FLAG_Offered)
     && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 204, "!_pSettler->FlagBits(ENTITY_FLAG_OFFERED)") == 1 )
   {
     __debugbreak();
   }
-  if ( *(_WORD *)(this + 32)
+  if ( this->m_uHomeEntityId
     && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 205, "!m_uHomeEntityId") == 1 )
   {
     __debugbreak();
   }
-  *(_WORD *)(this + 18) = IEntity::ID();
-  *(_BYTE *)(this + 44) = 0;
-  *(_BYTE *)(this + 45) = 0;
-  *(_WORD *)(this + 46) = 0;
-  *(_WORD *)(this + 48) = 0;
-  *(_WORD *)(this + 50) = 0;
-  *(_WORD *)(this + 32) = 0;
-  *(_WORD *)(this + 20) = 0;
-  CWarMap::AddEntity(a2);
-  IEntity::ClearFlagBits(a2, ENTITY_FLAG_VulnerableMask|ENTITY_FLAG_Selectable|ENTITY_FLAG_Selected);
-  v2 = IEntity::WorldIdx();
-  result = (_DWORD *)CWorldManager::EcoSectorId(v2);
-  if ( !result )
-    return result;
-  v7 = (unsigned __int16 *)CEcoSectorMgr::operator[]((int)result);
-  v4 = CEcoSector::Owner(v7);
-  result = (_DWORD *)IEntity::OwnerId((unsigned __int8 *)a2);
-  if ( (_DWORD *)v4 != result )
-    return result;
-  v6 = IEntity::ID();
-  v5 = IEntity::Type((unsigned __int16 *)a2);
-  return CEcoSector::SetSettlerOffer(v7, v5, v6);
+  this->m_uAttachedSettlerId = IEntity::ID(_pSettler);
+  this->m_uGood = 0;
+  this->m_uNextSettlerType = 0;
+  this->m_iTarget1 = 0;
+  this->m_iSourcePile2 = 0;
+  this->m_iSourcePile3 = 0;
+  this->m_uHomeEntityId = 0;
+  this->m_uSourcePileId = 0;
+  CWarMap::AddEntity(_pSettler);
+  IEntity::ClearFlagBits(_pSettler, ENTITY_FLAG_VulnerableMask|ENTITY_FLAG_Selectable|ENTITY_FLAG_Selected);
+  v2 = IEntity::WorldIdx(_pSettler);
+  v7 = CWorldManager::EcoSectorId(v2);
+  if ( v7 )
+  {
+    v6 = CEcoSectorMgr::operator[](g_cESMgr, v7);
+    v3 = CEcoSector::Owner(v6);
+    if ( v3 == IEntity::OwnerId(_pSettler) )
+    {
+      v5 = IEntity::ID(_pSettler);
+      v4 = IEntity::Type(_pSettler);
+      CEcoSector::SetSettlerOffer(v6, v4, v5);
+    }
+  }
 }
 
 
@@ -978,32 +978,32 @@ void  CCarrierRole::Init(class CSettler * a2) {
 void  CCarrierRole::ConvertEventIntoGoal(class CSettler * pSettler, class CEntityEvent * pEvent) {
   
   unsigned int v3; // eax
-  int v4; // eax
+  std::list *v4; // eax
   int v5; // eax
   int v6; // eax
   T_SETTLER_OBJ_TYPE v7; // eax
   unsigned int v8; // eax
-  int v9; // eax
+  std::list *v9; // eax
   int v10; // eax
   int v11; // eax
   int v12; // eax
   int v13; // eax
   int v14; // eax
   unsigned int v15; // eax
-  int v16; // eax
+  std::list *v16; // eax
   int v17; // eax
   int v18; // eax
   DWORD v19; // eax
   unsigned int v20; // eax
-  int v21; // eax
+  std::list *v21; // eax
   int v22; // eax
   T_SETTLER_OBJ_TYPE v23; // eax
   unsigned int v24; // eax
-  int v25; // eax
+  std::list *v25; // eax
   int v26; // eax
   int v27; // eax
   unsigned int v28; // eax
-  int v29; // eax
+  std::list *v29; // eax
   int v30; // eax
   int v31; // eax
   int v32; // eax
@@ -1011,9 +1011,9 @@ void  CCarrierRole::ConvertEventIntoGoal(class CSettler * pSettler, class CEntit
   int v34; // eax
   int v35; // eax
   unsigned int v36; // eax
-  int v37; // eax
+  std::list *v37; // eax
   unsigned int v38; // eax
-  int v39; // eax
+  std::list *v39; // eax
   int v40; // eax
   DWORD v41; // [esp-8h] [ebp-88h]
   unsigned int v42; // [esp-8h] [ebp-88h]
@@ -1035,7 +1035,7 @@ void  CCarrierRole::ConvertEventIntoGoal(class CSettler * pSettler, class CEntit
   CEntityEvent v58; // [esp+8h] [ebp-78h] BYREF
   int m_iDataA; // [esp+20h] [ebp-60h]
   int v60; // [esp+24h] [ebp-5Ch]
-  CMFCToolBarButton *v61; // [esp+28h] [ebp-58h]
+  CBuilding *v61; // [esp+28h] [ebp-58h]
   CBuilding *v62; // [esp+2Ch] [ebp-54h]
   struct CEntityEvent *v63; // [esp+30h] [ebp-50h]
   struct CEntityEvent *v64; // [esp+34h] [ebp-4Ch]
@@ -1048,7 +1048,7 @@ void  CCarrierRole::ConvertEventIntoGoal(class CSettler * pSettler, class CEntit
   int iPileID; // [esp+50h] [ebp-30h]
   int iVehicleID; // [esp+54h] [ebp-2Ch]
   int v73; // [esp+58h] [ebp-28h]
-  CEcoSector *EcoSectorPtr; // [esp+5Ch] [ebp-24h]
+  CEcoSector *pSector; // [esp+5Ch] [ebp-24h]
   int iEventId; // [esp+60h] [ebp-20h]
   CPile *rPile; // [esp+68h] [ebp-18h]
   CVehicle *rVehicle; // [esp+6Ch] [ebp-14h] MAPDST
@@ -1061,7 +1061,7 @@ void  CCarrierRole::ConvertEventIntoGoal(class CSettler * pSettler, class CEntit
       if ( ISettlerRole::HomeEntityId(this) != pEvent->m_iDataA )
         goto LABEL_87;
       v18 = ISettlerRole::HomeEntityId(this);
-      v61 = CBuildingMgr::operator[](v18);
+      v61 = CBuildingMgr::operator[]((CBuildingMgr *)g_cBuildingMgr, v18);
       v19 = CBuilding::DoorPackedXY(v61);
       ISettlerRole::NewDestination(this, pSettler, v19, 0);
       CSettler::TakeAnimList(pSettler, 0);
@@ -1105,10 +1105,10 @@ void  CCarrierRole::ConvertEventIntoGoal(class CSettler * pSettler, class CEntit
       }
       v3 = IEntity::Race(pSettler);
       v4 = CEntityToDoListMgr::SettlerJobList(g_pEntityToDoListMgr, v3, 0x98u);
-      pSettler->NewToDoList(pSettler, v4, 152);
+      pSettler->NewToDoList(pSettler, (int)v4, 152);
       goto LABEL_111;
     case 10:
-      if ( debug && DEBUG_FLAGS[g_iCurrentDebugFlags] )
+      if ( debug && DEBUG_FLAGS[g_iCarrierDebugSlot] )
       {
         v5 = IEntity::ID(pSettler);
         BBSupportTracePrintF(0, "Carrier %u TRANSPORT_GOOD_TO_VEHICLE", v5);
@@ -1133,8 +1133,8 @@ void  CCarrierRole::ConvertEventIntoGoal(class CSettler * pSettler, class CEntit
       {
         __debugbreak();
       }
-      rPile = (CPile *)CPileMgr::operator[](iPileID);
-      rVehicle = (CVehicle *)CVehicleMgr::operator[](iVehicleID);
+      rPile = CPileMgr::operator[](iPileID);
+      rVehicle = CVehicleMgr::operator[](iVehicleID);
       if ( this->m_uHomeEntityId )
       {
         if ( ISettlerRole::SourcePileId(this) > 0 )
@@ -1147,8 +1147,8 @@ void  CCarrierRole::ConvertEventIntoGoal(class CSettler * pSettler, class CEntit
             ISettlerRole::NewDestination(this, pSettler, iMeetingPointXY, 0);
             v8 = IEntity::Race(pSettler);
             v9 = CEntityToDoListMgr::SettlerJobList(g_pEntityToDoListMgr, v8, 0x99u);
-            pSettler->NewToDoList(pSettler, v9, 153);
-            if ( debug && DEBUG_FLAGS[g_iCurrentDebugFlags] )
+            pSettler->NewToDoList(pSettler, (int)v9, 153);
+            if ( debug && DEBUG_FLAGS[g_iCarrierDebugSlot] )
             {
               v48 = ISettlerRole::SourcePileId(this);
               v10 = IEntity::ID(pSettler);
@@ -1158,7 +1158,7 @@ void  CCarrierRole::ConvertEventIntoGoal(class CSettler * pSettler, class CEntit
                 v10,
                 v48);
             }
-            if ( debug && DEBUG_FLAGS[g_iCurrentDebugFlags] )
+            if ( debug && DEBUG_FLAGS[g_iCarrierDebugSlot] )
             {
               v49 = CCarrierRole::DestinationPileId(this);
               v11 = IEntity::ID(pSettler);
@@ -1168,18 +1168,18 @@ void  CCarrierRole::ConvertEventIntoGoal(class CSettler * pSettler, class CEntit
                 v11,
                 v49);
             }
-            v12 = (*(int (__thiscall **)(CPile *, int))(*(_DWORD *)rPile + 60))(rPile, 1);
+            v12 = rPile->GetGoodType();
             rVehicle->GoodIsComming(rVehicle, v12);
           }
           else
           {
-            if ( debug && DEBUG_FLAGS[g_iCurrentDebugFlags] )
+            if ( debug && DEBUG_FLAGS[g_iCarrierDebugSlot] )
             {
               v13 = IEntity::ID(pSettler);
               BBSupportTracePrintF(0, "WARNING: Carrier %u CONV TRANSPORT_GOOD_TO_VEHICLE cancled!", v13);
             }
             this->SetFree(this, pSettler, -1);
-            v14 = (*(int (__thiscall **)(CPile *, int))(*(_DWORD *)rPile + 60))(rPile, 1);
+            v14 = rPile->GetGoodType();
             rVehicle->SupplyCanceled(rVehicle, v14);
           }
 LABEL_111:
@@ -1200,7 +1200,7 @@ LABEL_111:
       else
       {
         this->SetFree(this, pSettler, -1);
-        v6 = (*(int (__thiscall **)(CPile *, int))(*(_DWORD *)rPile + 60))(rPile, 1);
+        v6 = rPile->GetGoodType();
         rVehicle->SupplyCanceled(rVehicle, v6);
       }
       return;
@@ -1219,7 +1219,7 @@ LABEL_111:
       }
       v15 = IEntity::Race(pSettler);
       v16 = CEntityToDoListMgr::SettlerJobList(g_pEntityToDoListMgr, v15, 0x97u);
-      pSettler->NewToDoList(pSettler, v16, 151);
+      pSettler->NewToDoList(pSettler, (int)v16, 151);
       goto LABEL_111;
     case 21:
       if ( CCarrierRole::NextSettlerType(this) != pEvent->m_iDataA
@@ -1264,25 +1264,25 @@ LABEL_111:
       }
       v20 = IEntity::Race(pSettler);
       v21 = CEntityToDoListMgr::SettlerJobList(g_pEntityToDoListMgr, v20, 0xF0u);
-      pSettler->NewToDoList(pSettler, v21, 240);
+      pSettler->NewToDoList(pSettler, (int)v21, 240);
       goto LABEL_111;
     case 23:
       v50 = IEntity::Type(pSettler);
       v22 = IEntity::Race(pSettler);
       SettlerInfo = CSettlerMgr::GetSettlerInfo(v22, v50);
-      rVehicle = (CVehicle *)CVehicleMgr::operator[](pEvent->m_iDataA);
+      rVehicle = CVehicleMgr::operator[](pEvent->m_iDataA);
       v51 = IEntity::ID(pSettler);
       v23 = IEntity::ObjType(pSettler);
       v68 = rVehicle->GetMeetingPointXY(rVehicle, v23, v51);
-      if ( v68 && IEntity::FlagBits(rVehicle, (EntityFlag)&loc_3000000) )
+      if ( v68 && IEntity::FlagBits(rVehicle, ENTITY_FLAG_AliveMask) )
       {
         ISettlerRole::NewDestination(this, pSettler, v68, 0);
         IEntity::SetFlagBits(pSettler, (EntityFlag)0x100000);
-        v52 = *std::vector<unsigned short>::operator[](SettlerInfo->g_vAnimLists, 0);
-        v42 = *std::vector<unsigned short>::operator[](SettlerInfo->g_vAnimLists, 0);
+        v52 = *std::vector<unsigned short>::operator[](&SettlerInfo->g_vAnimLists, 0);
+        v42 = *std::vector<unsigned short>::operator[](&SettlerInfo->g_vAnimLists, 0);
         v24 = IEntity::Race(pSettler);
         v25 = CEntityToDoListMgr::SettlerJobList(g_pEntityToDoListMgr, v24, v42);
-        pSettler->NewToDoList(pSettler, v25, v52);
+        pSettler->NewToDoList(pSettler, (int)v25, v52);
         v26 = IEntity::ID(pSettler);
         rVehicle->Attach(rVehicle, v26);
         IEntity::ClearFlagBits(pSettler, ENTITY_FLAG_Selectable|ENTITY_FLAG_Selected);
@@ -1298,7 +1298,7 @@ LABEL_111:
         v44 = IEntity::Type(pSettler);
         v28 = IEntity::Race(pSettler);
         v29 = CEntityToDoListMgr::SettlerJobList(g_pEntityToDoListMgr, v28, v44);
-        pSettler->NewToDoList(pSettler, v29, v54);
+        pSettler->NewToDoList(pSettler, (int)v29, v54);
       }
       goto LABEL_111;
     case 24:
@@ -1309,7 +1309,7 @@ LABEL_111:
       CSettlerMgr::SearchSpaceForSettler(&g_cSettlerMgr, v30, v45, v55);
       CWarMap::AddEntity(pSettler);
       IEntity::SetFlagBits(pSettler, ENTITY_FLAG_Visible);
-      IEntity::ClearFlagBits(pSettler, ENTITY_FLAG_OnBoard);
+      IEntity::ClearFlagBits(pSettler, ENTITY_FLAG_ON_BOARD);
       CSettler::TakeWaitList(pSettler);
       v56 = this->m_uHomeEntityId;
       v46 = IEntity::ID(pSettler);
@@ -1319,16 +1319,16 @@ LABEL_111:
       v66 = CWorldManager::EcoSectorId(v32);
       if ( !v66 )
         goto LABEL_99;
-      EcoSectorPtr = (CEcoSector *)CEcoSectorMgr::GetEcoSectorPtr((CEcoSectorMgr *)g_cESMgr, v66);
-      if ( !EcoSectorPtr && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 1542, "pSector!= NULL") == 1 )
+      pSector = CEcoSectorMgr::GetEcoSectorPtr((CEcoSectorMgr *)g_cESMgr, v66);
+      if ( !pSector && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 1542, "pSector!= NULL") == 1 )
         __debugbreak();
-      if ( !EcoSectorPtr )
+      if ( !pSector )
         return;
-      v33 = CEcoSector::Owner(EcoSectorPtr);
+      v33 = CEcoSector::Owner(pSector);
       if ( v33 == IEntity::OwnerId(pSettler) )
       {
         v34 = IEntity::ID(pSettler);
-        CEcoSector::SetSettlerOfferIncDisplay(EcoSectorPtr, 1, v34);
+        CEcoSector::SetSettlerOfferIncDisplay(pSector, 1, v34);
       }
 LABEL_99:
       v57 = Y16X16::UnpackYFast(v73);
@@ -1345,7 +1345,7 @@ LABEL_99:
         && CCarrierRole::SourcePileId3(this) )
       {
         v17 = ISettlerRole::HomeEntityId(this);
-        v62 = CBuildingMgr::operator[](v17);
+        v62 = CBuildingMgr::operator[]((CBuildingMgr *)g_cBuildingMgr, v17);
         v41 = CBuilding::DoorPackedXY(v62);
         ISettlerRole::NewDestination(this, pSettler, v41, 0);
         CSettler::TakeAnimList(pSettler, 3);
@@ -1361,19 +1361,19 @@ LABEL_87:
       {
         v38 = IEntity::Race(pSettler);
         v39 = CEntityToDoListMgr::SettlerJobList(g_pEntityToDoListMgr, v38, 0xEEu);
-        pSettler->NewToDoList(pSettler, v39, 238);
+        pSettler->NewToDoList(pSettler, (int)v39, 238);
       }
       else
       {
         v36 = IEntity::Race(pSettler);
         v37 = CEntityToDoListMgr::SettlerJobList(g_pEntityToDoListMgr, v36, 0xEFu);
-        pSettler->NewToDoList(pSettler, v37, 239);
+        pSettler->NewToDoList(pSettler, (int)v37, 239);
       }
       goto LABEL_111;
     default:
       if ( !IEntity::FlagBits(pSettler, ENTITY_FLAG_Registered) )
       {
-        if ( debug && DEBUG_FLAGS[g_iCurrentDebugFlags] )
+        if ( debug && DEBUG_FLAGS[g_iCarrierDebugSlot] )
           BBSupportTracePrintF(0, "ConvertEventIntoGoal CarrierRole - unknown event %u", pEvent->m_iEvent);
         IAnimatedEntity::RegisterForLogicUpdate(pSettler, 1);
       }
@@ -1387,10 +1387,10 @@ LABEL_87:
 bool  CCarrierRole::SetFree(class CSettler * a2, int a3) {
   
   int v3; // eax
-  int v4; // eax
+  unsigned int v4; // eax
   int v5; // eax
   int v6; // eax
-  int v8; // [esp-Ch] [ebp-2Ch]
+  unsigned int v8; // [esp-Ch] [ebp-2Ch]
   unsigned int m_uGood; // [esp-8h] [ebp-28h]
   int v10; // [esp+4h] [ebp-1Ch]
   struct IEntity *v11; // [esp+8h] [ebp-18h]
@@ -1418,7 +1418,7 @@ bool  CCarrierRole::SetFree(class CSettler * a2, int a3) {
     m_uGood = this->m_uGood;
     v8 = IEntity::Y(a2);
     v4 = IEntity::X(a2);
-    CPileMgr::SearchSpaceForGoods((CPileMgr *)&g_cPileMgr, v4, v8, m_uGood, 1u);
+    CPileMgr::SearchSpaceForGoods(&g_cPileMgr, v4, v8, m_uGood, 1u);
     this->m_uGood = 0;
   }
   if ( this->m_uNextSettlerType )
@@ -1430,13 +1430,13 @@ bool  CCarrierRole::SetFree(class CSettler * a2, int a3) {
       {
         __debugbreak();
       }
-      v14 = CBuildingMgr::operator[](this->m_uHomeEntityId);
+      v14 = CBuildingMgr::operator[]((CBuildingMgr *)g_cBuildingMgr, this->m_uHomeEntityId);
       v5 = IEntity::EntityId(a2);
       CBuilding::InhabitantFlee(v14, v5);
       if ( IEntity::FlagBits(a2, ENTITY_FLAG_ATTACHED) )
       {
         v6 = IEntity::EntityId(a2);
-        (*(void (__thiscall **)(CBuilding *, int))(*(_DWORD *)v14 + 64))(v14, v6);
+        v14->Detach(v14, v6);
       }
       if ( this->m_uHomeEntityId
         && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 1015, "m_uHomeEntityId == 0") == 1 )
@@ -1454,7 +1454,7 @@ bool  CCarrierRole::SetFree(class CSettler * a2, int a3) {
         __debugbreak();
       }
     }
-    pES = (CEcoSector *)CEcoSectorMgr::GetEcoSectorPtr((CEcoSectorMgr *)g_cESMgr, v12);
+    pES = CEcoSectorMgr::GetEcoSectorPtr((CEcoSectorMgr *)g_cESMgr, v12);
     if ( !pES && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 1026, "pES != 0") == 1 )
       __debugbreak();
     if ( pES )
@@ -1536,4 +1536,3 @@ int  CCarrierRole::SourcePileId3(void)const {
 }
 
 
-#endif // Already implemented

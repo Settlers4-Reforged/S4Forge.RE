@@ -273,8 +273,8 @@ class CGeologistRole * __cdecl CGeologistRole::Load(std::istream & a1) {
  CGeologistRole::CGeologistRole(void) {
   
   ISelectableSettlerRole::ISelectableSettlerRole(this);
-  *(_DWORD *)this = &CGeologistRole::_vftable_;
-  std::list<CEntityTask>::list<CEntityTask>((char *)this + 48);
+  this->__vftable = (ISettlerRole_vtbl *)&CGeologistRole::_vftable_;
+  std::list<CEntityTask>::list<CEntityTask>(&this->m_vTasks);
   return this;
 }
 
@@ -289,7 +289,7 @@ class CGeologistRole * __cdecl CGeologistRole::Load(std::istream & a1) {
 
   *(_DWORD *)this = &CGeologistRole::_vftable_;
   v3 = (CPropertySet *)CSettlerMgr::operator[](*((unsigned __int16 *)this + 9));
-  if ( !IEntity::FlagBits(v3, ENTITY_FLAG_OnBoard) )
+  if ( !IEntity::FlagBits(v3, ENTITY_FLAG_ON_BOARD) )
     CWarMap::RemoveEntity(v3);
   if ( *((_DWORD *)this + 6) )
   {
@@ -434,37 +434,37 @@ LABEL_12:
 
 
 // address=[0x1572d10]
-// Decompiled from int __thiscall CGeologistRole::Init(int this, CPropertySet *a2)
+// Decompiled from CGeologistRole *__thiscall CGeologistRole::Init(CGeologistRole *this, IEntity *a1)
 void  CGeologistRole::Init(class CSettler * a2) {
   
-  int result; // eax
+  CGeologistRole *result; // eax
 
-  if ( IEntity::FlagBits(a2, 0x60)
+  if ( IEntity::FlagBits(a1, ENTITY_FLAG_Offered|ENTITY_FLAG_ATTACHED)
     && BBSupportDbgReport(
          2,
-         (int)"MapObjects\\Settler\\GeologistRole.cpp",
+         "MapObjects\\Settler\\GeologistRole.cpp",
          239,
-         (int)"!_pSettler->FlagBits( ENTITY_FLAG_ATTACHED | ENTITY_FLAG_OFFERED )") == 1 )
+         "!_pSettler->FlagBits( ENTITY_FLAG_ATTACHED | ENTITY_FLAG_OFFERED )") == 1 )
   {
     __debugbreak();
   }
-  if ( *(_WORD *)(this + 32)
-    && BBSupportDbgReport(2, (int)"MapObjects\\Settler\\GeologistRole.cpp", 240, (int)"!m_uHomeEntityId") == 1 )
+  if ( this->m_uHomeEntityId
+    && BBSupportDbgReport(2, "MapObjects\\Settler\\GeologistRole.cpp", 240, "!m_uHomeEntityId") == 1 )
   {
     __debugbreak();
   }
-  *(_WORD *)(this + 18) = IEntity::ID();
-  *(_DWORD *)(this + 24) = 0;
-  IEntity::SetFlagBits(a2, 204800);
-  CWarMap::AddEntity(a2);
-  *(_DWORD *)(this + 60) = 0;
-  *(_DWORD *)(this + 64) = 0;
-  *(_DWORD *)(this + 24) = 0;
-  *(_DWORD *)(this + 68) = 0;
-  *(_DWORD *)(this + 72) = 0;
+  this->m_uAttachedSettlerId = IEntity::ID(a1);
+  this->m_iDestinationPosition = 0;
+  IEntity::SetFlagBits(a1, ENTITY_FLAG_VulnerableMask|ENTITY_FLAG_Selectable);
+  CWarMap::AddEntity(a1);
+  this[1].__vftable = 0;
+  *(_DWORD *)&this[1].m_iTask = 0;
+  this->m_iDestinationPosition = 0;
+  *(_DWORD *)&this[1].m_uTick = 0;
+  *(_DWORD *)&this[1].m_uToDoCount = 0;
   result = this;
-  *(_DWORD *)(this + 76) = 0;
-  *(_DWORD *)(this + 80) = 193;
+  *(_DWORD *)&this[1].m_iDestinationOffsetY = 0;
+  *(_DWORD *)&this[1].m_uSourcePileId = 193;
   return result;
 }
 
@@ -533,7 +533,7 @@ void  CGeologistRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEve
     case 7:
       v37 = *((_DWORD *)a3 + 3);
       IEntity::SetFlagBits(a2, ENTITY_FLAG_Selectable);
-      IEntity::ClearFlagBits(a2, ENTITY_FLAG_OnBoard);
+      IEntity::ClearFlagBits(a2, ENTITY_FLAG_ON_BOARD);
       v36 = IEntity::Type((unsigned __int16 *)a2);
       v28 = IEntity::Type((unsigned __int16 *)a2);
       v19 = IEntity::Race(a2);
@@ -637,7 +637,7 @@ void  CGeologistRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEve
       CSettlerMgr::SearchSpaceForSettler((CSettlerMgr *)g_cSettlerMgr, v17, v26, v34);
       CWarMap::AddEntity(a2);
       IEntity::SetFlagBits(a2, ENTITY_FLAG_Selectable|ENTITY_FLAG_Visible);
-      IEntity::ClearFlagBits(a2, ENTITY_FLAG_OnBoard);
+      IEntity::ClearFlagBits(a2, ENTITY_FLAG_ON_BOARD);
       *(_BYTE *)(this + 4) = 27;
       v35 = *(unsigned __int16 *)(this + 32);
       v27 = IEntity::ID();

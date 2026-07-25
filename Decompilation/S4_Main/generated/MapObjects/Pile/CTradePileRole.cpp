@@ -1,16 +1,17 @@
+#if FALSE
 #include "CTradePileRole.h"
 
 // Definitions for class CTradePileRole
 
 // address=[0x14023e0]
 // Decompiled from CTradePileRole *__cdecl CTradePileRole::New(int a1)
-class CPersistence * __cdecl CTradePileRole::New(std::istream & _rStream) {
+class CPersistence * __cdecl CTradePileRole::New(std::istream & a1) {
   
   CTradePileRole *C; // [esp+Ch] [ebp-10h]
 
   C = (CTradePileRole *)operator new(0x14u);
   if ( C )
-    return CTradePileRole::CTradePileRole(C, _rStream);
+    return CTradePileRole::CTradePileRole(C, a1);
   else
     return 0;
 }
@@ -128,7 +129,7 @@ void  CTradePileRole::Empty(class CPile * a2) {
     if ( a1 > 0 )
     {
       v5 = CBuildingMgr::operator[]((CBuildingMgr *)g_cBuildingMgr, a1);
-      if ( IEntity::Type(v5) == 34 )
+      if ( IEntity::Type(v5) == BUILDING_STORAGEAREA )
       {
         v2 = CBuilding::EcoSectorId(v5);
         v4 = CEcoSectorMgr::operator[](g_cESMgr, v2);
@@ -146,7 +147,7 @@ void  CTradePileRole::Init(class CPile * a2) {
   
   int v2; // eax
 
-  if ( debug && DEBUG_FLAGS[dword_415208C] )
+  if ( debug && DEBUG_FLAGS[s_iTradePileRoleDebugSection] )
   {
     v2 = IEntity::ID(a2);
     BBSupportTracePrintF(0, "Pile %u init as tradePile", v2);
@@ -200,7 +201,7 @@ void  CTradePileRole::LogicUpdate(class CPile * a2) {
   {
     v5 = CPile::GetBuildingId(a2);
     v13 = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, v5);
-    if ( v13 && IEntity::Type(v13) != 34 && IEntity::FlagBits(v13, (EntityFlag)4096) )
+    if ( v13 && IEntity::Type(v13) != BUILDING_STORAGEAREA && IEntity::FlagBits(v13, (EntityFlag)4096) )
     {
       v6 = a2->Amount(a2);
       if ( v6 - CPile::AmountLeaving(a2) >= 1 )
@@ -494,17 +495,11 @@ void  CTradePileRole::DecAmountLeaving(class CPile * a2) {
 
 
 // address=[0x1562560]
-// Decompiled from CTradePileRole *__thiscall CTradePileRole::IncAmountComing(CTradePileRole *this, struct CPile *a2)
+// Decompiled from void __thiscall CTradePileRole::IncAmountComing(CTradePileRole *this, struct CPile *a2)
 void  CTradePileRole::IncAmountComing(class CPile * a2) {
   
-  CTradePileRole *result; // eax
-
-  result = this;
-  if ( *((int *)this + 3) <= 0 )
-    return result;
-  result = this;
-  --*((_DWORD *)this + 3);
-  return result;
+  if ( this->m_iExpectedAmount > 0 )
+    --this->m_iExpectedAmount;
 }
 
 
@@ -641,7 +636,7 @@ unsigned long  CTradePileRole::ClassID(void)const {
   IPileRole::IPileRole(this);
   this->__vftable = (IPileRole_vtbl *)&CTradePileRole::_vftable_;
   this->m_iReserveAmount = 0;
-  sub_1562940(dword_415208C);
+  sub_1562940(s_iTradePileRoleDebugSection);
   this->m_iTradeRoleType = 0;
   this->m_iExpectedAmount = 0;
   return this;
@@ -657,3 +652,4 @@ unsigned long  CTradePileRole::ClassID(void)const {
 }
 
 
+#endif // Already implemented

@@ -241,7 +241,7 @@ void  CDoorRole::TakeJob(class CSettler * a2) {
  CDoorRole::CDoorRole(void) {
   
   ISettlerRole::ISettlerRole(this);
-  *(_DWORD *)this = &CDoorRole::_vftable_;
+  this->__vftable = (ISettlerRole_vtbl *)&CDoorRole::_vftable_;
   return this;
 }
 

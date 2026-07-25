@@ -11,6 +11,10 @@ public:
     // address=[0x1454e90]
     virtual unsigned int  Size(void)const;
 
+    // Type information members
+public:
+    CVehicleLoadInfo::SSlot[2] m_vSlots;
+
 };
 
 

@@ -6,7 +6,7 @@
 // Decompiled from int __thiscall CBuildingIteratorBase::BuildingId(CBuildingIteratorBase *this)
 int  CBuildingIteratorBase::BuildingId(void)const {
   
-  return *((_DWORD *)this + 1);
+  return this->m_iBuildingId;
 }
 
 
@@ -14,7 +14,7 @@ int  CBuildingIteratorBase::BuildingId(void)const {
 // Decompiled from int __thiscall CBuildingIteratorBase::BuildingType(CBuildingIteratorBase *this)
 int  CBuildingIteratorBase::BuildingType(void)const {
   
-  return *(_DWORD *)this;
+  return this->m_iBuildingType;
 }
 
 
@@ -29,22 +29,18 @@ bool  CBuildingIteratorBase::BuildingValid(int a2) {
   if ( !a2 )
     return v4;
   v2 = CMapObjectMgr::Entity(a2);
-  if ( ((unsigned int)&loc_3000000 & IEntity::Flags(v2)) == 0 )
+  if ( (IEntity::Flags(v2) & ENTITY_FLAG_AliveMask) == 0 )
     return 0;
   return v4;
 }
 
 
 // address=[0x13173a0]
-// Decompiled from CBuildingIteratorBase *__thiscall CBuildingIteratorBase::Init(CBuildingIteratorBase *this, int a2)
+// Decompiled from void __thiscall CBuildingIteratorBase::Init(CBuildingIteratorBase *this, int a2)
 void  CBuildingIteratorBase::Init(int a2) {
   
-  CBuildingIteratorBase *result; // eax
-
-  result = this;
-  *(_DWORD *)this = a2;
-  *((_DWORD *)this + 1) = 0;
-  return result;
+  this->m_iBuildingType = a2;
+  this->m_iBuildingId = 0;
 }
 
 

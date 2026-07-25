@@ -6,7 +6,7 @@
 class CPileMgr {
 public:
     // address=[0x12fd1f0]
-    static class CPile * __cdecl GetPilePtr(int _iPileId);
+    static class CPile * __cdecl GetPilePtr(int iPileId);
 
     // address=[0x1438a40]
     class CPile &  operator[](int iPileId);

@@ -499,7 +499,7 @@ void  CLua::ExportTableTypes(char const * _pTableName, char const * _pDefinePref
     uPrefixLength = strlen(_pDefinePrefix);
   for ( i = 0; i < _uCount; ++i )
   {
-    m_sName = (char *)a4->m_sName;
+    m_sName = (char *)a4->m_spName;
     if ( (int)strlen(m_sName) > uPrefixLength )
       CLua::ExportTableVar((char *)_pTableName, &m_sName[uPrefixLength], (double)a4->m_iNr);
     ++a4;

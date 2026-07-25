@@ -1511,7 +1511,7 @@ int  CSettlerMgr::OrderAIWarrior(int _iBuildingId, int _iWarriorType) {
     return 0;
   pSettler = CSettlerMgr::GetSettlerPtr(this, iTargetId);
   if ( !pSettler
-    || IEntity::FlagBits(pSettler, ENTITY_FLAG_Ready|ENTITY_FLAG_OnBoard|ENTITY_FLAG_Selectable) != (ENTITY_FLAG_Ready|ENTITY_FLAG_Selectable)
+    || IEntity::FlagBits(pSettler, ENTITY_FLAG_Ready|ENTITY_FLAG_ON_BOARD|ENTITY_FLAG_Selectable) != (ENTITY_FLAG_Ready|ENTITY_FLAG_Selectable)
     || IEntity::WarriorType(pSettler) != AI_WARRIOR_TYPE_SWORDMAN
     && IEntity::WarriorType(pSettler) != AI_WARRIOR_TYPE_BOWMAN )
   {
@@ -2730,7 +2730,7 @@ void  CSettlerMgr::CheckOutSettler(int _iSettlerId) {
           v5 = CSettler::Role(pSettler);
           if ( v5->GetSettlerRole(v5) != 18
             && !IEntity::FlagBits(pSettler, (EntityFlag)128)
-            && (!IEntity::FlagBits(pSettler, ENTITY_FLAG_OnBoard) || IEntity::FlagBits(pSettler, ENTITY_FLAG_Ownerless)) )
+            && (!IEntity::FlagBits(pSettler, ENTITY_FLAG_ON_BOARD) || IEntity::FlagBits(pSettler, ENTITY_FLAG_Ownerless)) )
           {
             CEcoSector::ChangeNrOfSettler(v8, iType, -1);
             IEntity::ClearFlagBits(pSettler, ENTITY_FLAG_Ownerless);

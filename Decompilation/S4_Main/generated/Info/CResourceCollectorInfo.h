@@ -11,6 +11,11 @@ public:
     // address=[0x1454d30]
     virtual unsigned int  Size(void)const;
 
+    // Type information members
+public:
+    unsigned __int8 m_uGood;
+    unsigned __int8 m_uAmount;
+
 };
 
 

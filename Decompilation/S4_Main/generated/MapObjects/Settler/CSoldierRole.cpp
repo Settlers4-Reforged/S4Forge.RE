@@ -647,7 +647,7 @@ void  CSoldierRole::PostLoadInit(class CSettler * a2) {
   v19 = this;
   v18 = IEntity::PackedXY(a2);
   v17 = IEntity::WorldIdx();
-  if ( v18 && (unsigned __int8)CWorldManager::InWorldPackedXY(v18) && !IEntity::FlagBits(a2, ENTITY_FLAG_OnBoard) )
+  if ( v18 && (unsigned __int8)CWorldManager::InWorldPackedXY(v18) && !IEntity::FlagBits(a2, ENTITY_FLAG_ON_BOARD) )
   {
     v2 = CWorldManager::MapObjectId(v17);
     if ( v2 != IEntity::EntityId((unsigned __int16 *)a2)
@@ -1038,15 +1038,15 @@ int  CSoldierRole::GetNumberOfHealings(void) {
  CSoldierRole::CSoldierRole(void) {
   
   ISelectableSettlerRole::ISelectableSettlerRole(this);
-  CWarriorBehavior::CWarriorBehavior((CSoldierRole *)((char *)this + 48));
-  *(_DWORD *)this = &CSoldierRole::_vftable_;
-  *((_DWORD *)this + 12) = &CSoldierRole::`vftable';
-  std::list<CEntityTask>::list<CEntityTask>((char *)this + 84);
-  *((_BYTE *)this + 72) = 0;
-  *((_DWORD *)this + 20) = 0;
-  *((_DWORD *)this + 24) = 0;
-  *((_DWORD *)this + 19) = 0;
-  *((_BYTE *)this + 73) = CStaticConfigVarInt::operator int(&CSoldierRole::s_iMaxNumberOfHealings);
+  CWarriorBehavior::CWarriorBehavior((CWarriorBehavior *)&this[1]);
+  this->__vftable = (CSoldierRole_vtbl *)&CSoldierRole::_vftable_;
+  this[1].__vftable = (CSoldierRole_vtbl *)&CSoldierRole::`vftable';
+  std::list<CEntityTask>::list<CEntityTask>(&this[1].m_fOffsetX);
+  LOBYTE(this[1].m_iDestinationPosition) = 0;
+  *(_DWORD *)&this[1].m_uHomeEntityId = 0;
+  this[2].__vftable = 0;
+  this[1].m_iStartPosition = 0;
+  BYTE1(this[1].m_iDestinationPosition) = CStaticConfigVarInt::operator int(&CSoldierRole::s_iMaxNumberOfHealings);
   return this;
 }
 
@@ -1306,7 +1306,7 @@ void  CSoldierRole::TakeJob(class CSettler * a2) {
       {
         __debugbreak();
       }
-      IEntity::SetFlagBits(a2, ENTITY_FLAG_OnBoard);
+      IEntity::SetFlagBits(a2, ENTITY_FLAG_ON_BOARD);
       v24 = (unsigned __int8 *)CMapObjectMgr::EntityPtr(*((unsigned __int16 *)this + 16));
       if ( v24 )
       {
@@ -1610,7 +1610,7 @@ LABEL_33:
       CSettlerMgr::SearchSpaceForSettler((CSettlerMgr *)g_cSettlerMgr, v4, v36, v45);
       CWarMap::AddEntity(a2);
       IEntity::SetFlagBits(a2, ENTITY_FLAG_Selectable|ENTITY_FLAG_Visible);
-      IEntity::ClearFlagBits(a2, ENTITY_FLAG_OnBoard);
+      IEntity::ClearFlagBits(a2, ENTITY_FLAG_ON_BOARD);
       (**(void (__thiscall ***)(int, CPropertySet *, int, _DWORD))(this + 48))(this + 48, a2, -1, 0);
       *(_BYTE *)(this + 4) = 27;
       if ( IEntity::Race(a2) != 3 )

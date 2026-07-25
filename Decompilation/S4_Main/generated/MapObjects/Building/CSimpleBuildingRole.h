@@ -69,6 +69,10 @@ private:
     // address=[0x14fde80]
     virtual bool  TryCrushBuilding(void);
 
+    // Type information members
+public:
+    char m_iNextWorkTicks;
+
 };
 
 

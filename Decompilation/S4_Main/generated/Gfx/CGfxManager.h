@@ -84,7 +84,7 @@ public:
     unsigned int  GetEffectFrameCount(unsigned int a2);
 
     // address=[0x13635a0]
-    unsigned int  GetBuildingJobFrameCount(unsigned int a2, unsigned int a3);
+    unsigned int  GetBuildingJobFrameCount(unsigned int _iRace, unsigned int _iJob);
 
     // address=[0x13635d0]
     void  GetBoundingBox(struct SGfxBoundingBox & a2, unsigned int a3, unsigned int a4, unsigned int a5);

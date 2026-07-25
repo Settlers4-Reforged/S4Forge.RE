@@ -1,16 +1,17 @@
+#if FALSE
 #include "CStoragePileRole.h"
 
 // Definitions for class CStoragePileRole
 
 // address=[0x1402200]
 // Decompiled from void __cdecl CStoragePileRole::New(struct std::_Facet_base *a1)
-class CPersistence * __cdecl CStoragePileRole::New(std::istream & _rStream) {
+class CPersistence * __cdecl CStoragePileRole::New(std::istream & a1) {
   
   CStoragePileRole *C; // [esp+Ch] [ebp-10h]
 
   C = (CStoragePileRole *)operator new(8u);
   if ( C )
-    CStoragePileRole::CStoragePileRole(C, (int)_rStream);
+    CStoragePileRole::CStoragePileRole(C, (int)a1);
 }
 
 
@@ -105,3 +106,4 @@ void  CStoragePileRole::Store(std::ostream & a2) {
 }
 
 
+#endif // Already implemented

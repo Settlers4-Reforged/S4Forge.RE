@@ -27,10 +27,10 @@ public:
     virtual bool  SettlerEnter(class CBuilding * a2, int a3);
 
     // address=[0x14e7320]
-    virtual int  GetBuildingNeed(int a2)const;
+    virtual int  GetBuildingNeed(int _iGood)const;
 
     // address=[0x14e73c0]
-    virtual int  GetPileIdWithGood(int a2)const;
+    virtual int  GetPileIdWithGood(int _iGood)const;
 
     // address=[0x14e7450]
     virtual void  InhabitantFlee(int a2);
@@ -42,7 +42,7 @@ public:
      CBarrackRole(std::istream & a2);
 
     // address=[0x14e77f0]
-    virtual void  Store(std::ostream & a2);
+    virtual void  Store(std::ostream & a1);
 
     // address=[0x14e8030]
     virtual  ~CBarrackRole(void);
@@ -74,6 +74,11 @@ private:
 
     // address=[0x14e81f0]
     virtual bool  TryCrushBuilding(void);
+
+    // Type information members
+public:
+    unsigned __int8 m_uU0;
+    std::vector m_vDeliverPiles;
 
 };
 

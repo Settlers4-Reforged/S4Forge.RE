@@ -53,7 +53,7 @@ void  CCart::Delete(void) {
       CTradingBuildingRole::VehicleArriveCancel(v2, v1, 2);
     }
   }
-  if ( IEntity::FlagBits(this, ENTITY_FLAG_OnBoard) )
+  if ( IEntity::FlagBits(this, ENTITY_FLAG_ON_BOARD) )
     CCart::KillAllLoadedSettlers(this);
   else
     CCart::DropGoods(this);
@@ -185,14 +185,15 @@ struct SGfxObjectInfo *  CCart::GetGfxInfos(void) {
   IEntity::m_sGfxInfo.m_iColor = CPlayerManager::Color(v1);
   MEMORY[0x40FE51D] = *((_BYTE *)this + 68);
   MEMORY[0x40FE51C] = *((_BYTE *)this + 69);
-  IEntity::m_sGfxInfo.field_5C[620] = 4;
+  IEntity::m_sGfxInfo.uConstructionProgress[620] = 4;
   IEntity::m_sGfxInfo.m_bIsVisible = IEntity::IsVisible(this);
   if ( IEntity::FlagBits((IEntity *)this, (EntityFlag)&dword_F29144[220079]) )
   {
     v2 = IEntity::Race(this);
     CGfxManager::GetVehicleGfxInfo(g_pGfxManager, &IEntity::m_sGfxInfo, v2, 0x2Eu, 2u, 0, 0, 0);
-    *(_DWORD *)IEntity::m_sGfxInfo.field_5C = 65534
-                                            - *((unsigned __int16 *)this + 62) * *((unsigned __int16 *)this + 64);
+    *(_DWORD *)IEntity::m_sGfxInfo.uConstructionProgress = 65534
+                                                         - *((unsigned __int16 *)this + 62)
+                                                         * *((unsigned __int16 *)this + 64);
   }
   if ( IEntity::FlagBits((IEntity *)this, ENTITY_FLAG_Selected) )
   {
@@ -251,9 +252,9 @@ void  CCart::FillDialog(bool a2) {
         break;
       v4 = (const struct CCart::CFoundationCardCargo *)std::vector<CCart::CFoundationCardCargo>::operator[](i);
       CCart::CFoundationCardCargo::CFoundationCardCargo((CCart::CFoundationCardCargo *)v6, v4);
-      dword_3F1E798[3 * i] = v9;
-      dword_3F1E794[3 * i] = v8;
-      dword_3F1E790[3 * i] = v7;
+      MEMORY[0x3F1E798][3 * i] = v9;
+      MEMORY[0x3F1E794][3 * i] = v8;
+      MEMORY[0x3F1E790][3 * i] = v7;
     }
   }
   else
@@ -263,11 +264,11 @@ void  CCart::FillDialog(bool a2) {
     dword_3F1E888 = 0;
     for ( j = 0; j < 6; ++j )
     {
-      dword_3F1E794[3 * j] = *((_DWORD *)v14 + 3 * j + 58);
-      dword_3F1E790[3 * j] = *((_DWORD *)v14 + 3 * j + 57);
+      MEMORY[0x3F1E794][3 * j] = *((_DWORD *)v14 + 3 * j + 58);
+      MEMORY[0x3F1E790][3 * j] = *((_DWORD *)v14 + 3 * j + 57);
     }
   }
-  dword_3F1E78C = 21;
+  MEMORY[0x3F1E78C] = 21;
   v10 = 604;
   if ( !a2 )
     v10 = 602;
@@ -361,7 +362,7 @@ void  CCart::EntityEnter(int a2) {
         CWarMap::RemoveEntity(v11);
         v2 = IEntity::WorldIdx();
         CWorldManager::SetSettlerId(v2, 0);
-        IEntity::SetFlagBits(v11, ENTITY_FLAG_OnBoard);
+        IEntity::SetFlagBits(v11, ENTITY_FLAG_ON_BOARD);
         v3 = IEntity::ID();
         if ( CCart::IsCarrier(this, v3) )
         {
@@ -1433,7 +1434,7 @@ void  CCart::DonkeyArrived(int a2) {
   CWarMap::RemoveEntity(v6);
   v2 = IEntity::WorldIdx();
   CWorldManager::SetSettlerId(v2, 0);
-  IEntity::SetFlagBits(v6, ENTITY_FLAG_OnBoard);
+  IEntity::SetFlagBits(v6, ENTITY_FLAG_ON_BOARD);
   if ( IEntity::FlagBits(v6, ENTITY_FLAG_Selected) )
   {
     v3 = IEntity::ID();
@@ -1727,7 +1728,7 @@ void  CCart::UnloadToPosition(int a2) {
   (*(void (__thiscall **)(CPaneContainer *, struct CPaneContainer *))(*(_DWORD *)this + 196))(this, a2);
   CWarMap::AddEntity(this);
   IEntity::SetFlagBits(this, ENTITY_FLAG_Selectable|ENTITY_FLAG_Visible);
-  return IEntity::ClearFlagBits(this, ENTITY_FLAG_OnBoard);
+  return IEntity::ClearFlagBits(this, ENTITY_FLAG_ON_BOARD);
 }
 
 
@@ -1735,45 +1736,45 @@ void  CCart::UnloadToPosition(int a2) {
 // [Decompilation failed for static unsigned long CCart::m_iClassID]
 
 // address=[0x1533070]
-// Decompiled from CCart *__thiscall CCart::CCart(CCart *this, int a2, int a3, int a4, int a5, int a6, int a7, bool a8)
+// Decompiled from CCart *__thiscall CCart::CCart(CCart *this, int a2, int a3, int a4, int a5, int a6, DWORD a7, bool a8)
  CCart::CCart(int a2, int a3, int a4, int a5, int a6, int a7, bool a8) {
   
   int i; // [esp+8h] [ebp-14h]
 
   if ( a6 == 1030 )
-    CWheeler::CWheeler(this, a2, a3, a4, a5, 5, a7, a8);
+    CWheeler::CWheeler(this, a2, a3, a4, a5, 5u, a7, a8);
   else
     CWheeler::CWheeler(this, a2, a3, a4, a5, a6, a7, a8);
-  *(_DWORD *)this = &CCart::_vftable_;
+  this->__vftable = (CCart_vtbl *)&CCart::_vftable_;
   std::vector<CCart::CSettlerStatus>::vector<CCart::CSettlerStatus>();
   std::vector<CCart::CFoundationCardCargo>::vector<CCart::CFoundationCardCargo>();
-  *((_BYTE *)this + 212) = 0;
-  *((_BYTE *)this + 213) = 0;
-  *((_BYTE *)this + 214) = 0;
-  *((_BYTE *)this + 215) = 0;
-  *((_BYTE *)this + 216) = 0;
-  *((_BYTE *)this + 217) = 0;
-  *((_BYTE *)this + 218) = 0;
-  *((_BYTE *)this + 219) = 0;
-  *((_DWORD *)this + 56) = 0;
-  *((_BYTE *)this + 301) = 0;
-  *((_DWORD *)this + 76) = -1;
-  *((_BYTE *)this + 321) = 0;
+  this[1].m_packedTribePlayer.Packed = 0;
+  this[1].m_iLivePoints = 0;
+  *(&this[1].m_iLivePoints + 1) = 0;
+  *(&this[1].m_iLivePoints + 2) = 0;
+  this[1].m_iFrame = 0;
+  this[1].m_iAttackerPlayerId = 0;
+  LOBYTE(this[1].m_iJobPart) = 0;
+  HIBYTE(this[1].m_iJobPart) = 0;
+  this[1].m_uLastUpdateTick = 0;
+  this[1].m_uBoardsNeed = 0;
+  *(_DWORD *)&this[1].m_uMaterialSupplied = -1;
+  BYTE1(this[1].m_vTasks.u0) = 0;
   if ( !a8 )
     IEntity::SetFlagBits(this, (EntityFlag)&byte_20000CA[54]);
-  *((_BYTE *)this + 217) = CCart::IsOnOwnEcoSector(this);
+  this[1].m_iAttackerPlayerId = CCart::IsOnOwnEcoSector(this);
   for ( i = 0; i < 6; ++i )
   {
-    *((_DWORD *)this + 3 * i + 57) = 0;
-    *((_DWORD *)this + 3 * i + 58) = 0;
+    *(&this[1].m_uLastLogicUpdate + 3 * i) = 0;
+    *(&this[1].m_iEventQueue.u0 + 3 * i) = 0;
   }
   IEntity::ClearFlagBits(this, ENTITY_FLAG_VulnerableMask);
-  *((_BYTE *)this + 320) = *((_BYTE *)this + 107);
-  *((_DWORD *)this + 78) = 0;
-  *((_DWORD *)this + 77) = 0;
-  *((_DWORD *)this + 79) = 0;
-  *((_BYTE *)this + 300) = 0;
-  *((_BYTE *)this + 302) = 0;
+  LOBYTE(this[1].m_vTasks.u0) = this->m_uCurrentTask;
+  *(_DWORD *)&this[1].word84 = 0;
+  *(_DWORD *)&this[1].word80 = 0;
+  this[1].m_iBuildingProgress = 0.0;
+  this[1].word78 = 0;
+  this[1].word7A = 0;
   CCart::SetSelectable(this);
   if ( a6 == 1030 )
     CCart::ChangeToFoundationCart(this);

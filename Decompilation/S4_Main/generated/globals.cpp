@@ -1259,7 +1259,18 @@ void __cdecl __vcrt_va_start_verify_argument_type<wchar_t const *>(void) {
 
 
 // address=[0x134f6d0]
-// [Decompilation failed for void __cdecl S4DebugTest(void)]
+// Decompiled from void S4DebugTest()
+void __cdecl S4DebugTest(void) {
+  
+  g_iDbgTickCounter = CStateGame::GetTickCounter(g_pGame);
+  if ( g_pDbgValidHeapPointer )
+  {
+    g_bDbgIsValidHeapPointer = j___CrtIsValidHeapPointer(g_pDbgValidHeapPointer) != 0;
+    if ( !g_bDbgIsValidHeapPointer && BBSupportDbgReport(2, "DebugFkt.cpp", 873, "g_bDbgIsValidHeapPointer") == 1 )
+      __debugbreak();
+  }
+}
+
 
 // address=[0x1350c00]
 // Decompiled from void __vcrt_va_start_verify_argument_type<char const * const>()
@@ -6198,10 +6209,10 @@ void __cdecl UpdateGuiDlgBuildContext(void) {
         IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 14, dword_368AA2C[2 * i + 1], 0);
       }
     }
-    IGuiEngine::SetSliderPosition((IGuiEngine *)g_pGUIEngine, 14, 418, (char)g_cBuildingSiteInfo.m_unknownE);
-    IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 14, 405, g_cBuildingSiteInfo.m_unknownD);
+    IGuiEngine::SetSliderPosition((IGuiEngine *)g_pGUIEngine, 14, 418, (char)g_cBuildingSiteInfo.m_iBuildingProgress);
+    IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 14, 405, g_cBuildingSiteInfo.m_bHasWorkingArea);
     IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 14, 407, g_cBuildingSiteInfo.m_bSomeFlagBits == 0);
-    IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 14, 417, g_cBuildingSiteInfo.m_unknown20);
+    IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 14, 417, g_cBuildingSiteInfo.m_bPriority);
     byte_3ECF2AA = 0;
   }
 }
@@ -7859,22 +7870,22 @@ void __cdecl UpdateGuiDlgBuildingContext(void) {
     IGuiEngine::SetImages(g_pGUIEngine, 15, 470, GuiHouseImageID, 0);
     GuiHouseString = GetGuiHouseString((char)g_cBuildingInfo.m_cRace, (char)g_cBuildingInfo.m_cType);
     IGuiEngine::SetText(g_pGUIEngine, 15, 467, GuiHouseString);
-    _wsprintfA(Str, "%u", byte_3F1E4BC);
+    _wsprintfA(Str, "%u", MEMORY[0x3F1E4BC]);
     IGuiEngine::SetText(g_pGUIEngine, 15, 468, Str);
-    if ( byte_3F1E4BB <= 0 )
+    if ( MEMORY[0x3F1E4BB] <= 0 )
     {
       IGuiEngine::SetControlVisibility(g_pGUIEngine, 15, 469, 0);
     }
     else
     {
-      _wsprintfA(Str, "+%u", byte_3F1E4BB);
+      _wsprintfA(Str, "+%u", MEMORY[0x3F1E4BB]);
       IGuiEngine::SetText(g_pGUIEngine, 15, 469, Str);
       IGuiEngine::SetControlVisibility(g_pGUIEngine, 15, 469, 1);
     }
-    IGuiEngine::SetControlVisibility(g_pGUIEngine, 15, 471, g_cBuildingInfo.m_unknownA);
+    IGuiEngine::SetControlVisibility(g_pGUIEngine, 15, 471, g_cBuildingInfo.m_bInhabitants);
     if ( g_cBuildingInfo.m_cType == 40 || g_cBuildingInfo.m_cType == 41 || g_cBuildingInfo.m_cType == 42 )
     {
-      _wsprintfA(Str, "%u", (unsigned __int8)byte_3F1E4BF);
+      _wsprintfA(Str, "%u", (unsigned __int8)MEMORY[0x3F1E4BF]);
       IGuiEngine::SetText(g_pGUIEngine, 15, 472, Str);
     }
   }
@@ -25199,11 +25210,11 @@ void __cdecl UpdateGuiDlgResourceCollectorContext(void) {
   if ( g_pGUIEngine )
   {
     byte_3EFD445 = 1;
-    GuiHouseImageID = GetGuiHouseImageID(byte_3F1E4ED, byte_3F1E4EC, 0);
+    GuiHouseImageID = GetGuiHouseImageID(MEMORY[0x3F1E4ED], MEMORY[0x3F1E4EC], 0);
     IGuiEngine::SetImages((void *)g_pGUIEngine, 18, 1093, GuiHouseImageID, 0);
-    GuiHouseString = (char *)GetGuiHouseString(byte_3F1E4ED, byte_3F1E4EC);
+    GuiHouseString = (char *)GetGuiHouseString(MEMORY[0x3F1E4ED], MEMORY[0x3F1E4EC]);
     IGuiEngine::SetText((void *)g_pGUIEngine, 18, 1087, GuiHouseString);
-    _wsprintfA(Str, "%u", byte_3F1E4F4);
+    _wsprintfA(Str, "%u", MEMORY[0x3F1E4F4]);
     IGuiEngine::SetText((void *)g_pGUIEngine, 18, 1088, Str);
     if ( (char)g_cBuildingInfo.? <= 0 )
     {
@@ -25211,40 +25222,40 @@ void __cdecl UpdateGuiDlgResourceCollectorContext(void) {
     }
     else
     {
-      _wsprintfA(Str, "+%u", byte_3F1E4F3);
+      _wsprintfA(Str, "+%u", MEMORY[0x3F1E4F3]);
       IGuiEngine::SetText((void *)g_pGUIEngine, 18, 1089, Str);
       IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 18, 1089, 1);
     }
-    IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 18, 1094, byte_3F1E4EE);
-    if ( byte_3F1E4F2 == -1 )
+    IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 18, 1094, MEMORY[0x3F1E4EE]);
+    if ( MEMORY[0x3F1E4F2] == -1 )
     {
       IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 18, 1096, 0);
     }
     else
     {
-      IGuiEngine::SetSliderPosition((IGuiEngine *)g_pGUIEngine, 18, 1096, byte_3F1E4F2);
+      IGuiEngine::SetSliderPosition((IGuiEngine *)g_pGUIEngine, 18, 1096, MEMORY[0x3F1E4F2]);
       IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 18, 1096, 1);
     }
-    IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 18, 1084, byte_3F1E4F1);
-    IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 18, 1086, byte_3F1E4F0 == 0);
-    IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 18, 1086, byte_3F1E4EF);
-    if ( byte_3F1E4F8 <= 0 )
+    IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 18, 1084, MEMORY[0x3F1E4F1]);
+    IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 18, 1086, MEMORY[0x3F1E4F0] == 0);
+    IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 18, 1086, MEMORY[0x3F1E4EF]);
+    if ( MEMORY[0x3F1E4F8] <= 0 )
     {
       IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 18, 1091, 0);
       IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 18, 1090, 0);
     }
     else
     {
-      _wsprintfA(Str, "%u", byte_3F1E4F9);
+      _wsprintfA(Str, "%u", MEMORY[0x3F1E4F9]);
       IGuiEngine::SetText((void *)g_pGUIEngine, 18, 1091, Str);
-      GuiGoodImageID = GetGuiGoodImageID(byte_3F1E4F8);
+      GuiGoodImageID = GetGuiGoodImageID(MEMORY[0x3F1E4F8]);
       IGuiEngine::SetImages((void *)g_pGUIEngine, 18, 1090, GuiGoodImageID, 0);
       IGuiEngine::SetTooltipID(
         (IGuiEngine *)g_pGUIEngine,
         18,
         1090,
-        dword_3697918[5 * byte_3F1E4F8 + 3],
-        dword_3697918[5 * byte_3F1E4F8 + 4]);
+        dword_3697918[5 * MEMORY[0x3F1E4F8] + 3],
+        dword_3697918[5 * MEMORY[0x3F1E4F8] + 4]);
       IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 18, 1091, 1);
       IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 18, 1090, 1);
     }
@@ -27653,130 +27664,130 @@ unsigned int __cdecl GetGuiGoodImageID(enum PILE_TYPES a1) {
 
   switch ( a1 )
   {
-    case 1:
+    case GOOD_AGAVE:
       result = 411;
       break;
-    case 2:
+    case GOOD_AMMO:
       result = 410;
       break;
-    case 3:
+    case GOOD_ARMOR:
       result = 409;
       break;
-    case 4:
+    case GOOD_AXE:
       result = 436;
       break;
-    case 5:
+    case GOOD_BATTLEAXE:
       result = 435;
       break;
-    case 6:
+    case GOOD_BLOWGUN:
       result = 433;
       break;
-    case 7:
+    case GOOD_BOARD:
       result = 445;
       break;
-    case 8:
+    case GOOD_BOW:
       result = 432;
       break;
-    case 9:
+    case GOOD_BREAD:
       result = 430;
       break;
-    case 10:
+    case GOOD_COAL:
       result = 420;
       break;
-    case 11:
+    case GOOD_FISH:
       result = 428;
       break;
-    case 12:
+    case GOOD_FLOUR:
       result = 427;
       break;
-    case 13:
+    case GOOD_GOAT:
       result = 426;
       break;
-    case 14:
+    case GOOD_GOLDBAR:
       result = 444;
       break;
-    case 15:
+    case GOOD_GOLDORE:
       result = 425;
       break;
-    case 16:
+    case GOOD_GRAIN:
       result = 424;
       break;
-    case 17:
+    case GOOD_GUNPOWDER:
       result = 423;
       break;
-    case 18:
+    case GOOD_HAMMER:
       result = 443;
       break;
-    case 19:
+    case GOOD_HONEY:
       result = 422;
       break;
-    case 20:
+    case GOOD_IRONBAR:
       result = 434;
       break;
-    case 21:
+    case GOOD_IRONORE:
       result = 408;
       break;
-    case 22:
+    case GOOD_LOG:
       result = 442;
       break;
-    case 23:
+    case GOOD_MEAD:
       result = 413;
       break;
-    case 24:
+    case GOOD_MEAT:
       result = 421;
       break;
-    case 25:
+    case GOOD_PICKAXE:
       result = 441;
       break;
-    case 26:
+    case GOOD_PIG:
       result = 419;
       break;
-    case 27:
+    case GOOD_ROD:
       result = 440;
       break;
-    case 28:
+    case GOOD_SAW:
       result = 439;
       break;
-    case 29:
+    case GOOD_SCYTHE:
       result = 438;
       break;
-    case 30:
+    case GOOD_SHEEP:
       result = 418;
       break;
-    case 31:
+    case GOOD_SHOVEL:
       result = 437;
       break;
-    case 32:
+    case GOOD_STONE:
       result = 431;
       break;
-    case 33:
+    case GOOD_SULFUR:
       result = 417;
       break;
-    case 34:
+    case GOOD_SWORD:
       result = 414;
       break;
-    case 35:
+    case GOOD_TEQUILA:
       result = 416;
       break;
-    case 36:
+    case GOOD_WATER:
       result = 415;
       break;
-    case 37:
+    case GOOD_WINE:
       result = 412;
       break;
-    case 38:
+    case GOOD_BACKPACKCATAPULT:
       result = 533;
       break;
-    case 39:
+    case GOOD_GOOSE:
       result = 539;
       break;
-    case 40:
+    case GOOD_EXPLOSIVEARROW:
       result = 536;
       break;
-    case 41:
+    case GOOD_SUNFLOWEROIL:
       result = 542;
       break;
-    case 42:
+    case GOOD_SUNFLOWER:
       result = 545;
       break;
     default:
@@ -33936,114 +33947,111 @@ bool __cdecl GuiDlgTutorialCursorProc(int a1, int a2, int a3) {
 void __cdecl UpdateGuiDlgVehicleLoadContext(void) {
   
   int LocalPlayerId; // eax
-  int v1; // eax
+  DWORD v1; // eax
   char *v2; // eax
   int v3; // eax
-  int v4; // eax
+  DWORD v4; // eax
   char *v5; // eax
   int v6; // eax
-  int v7; // eax
+  DWORD v7; // eax
   char *v8; // eax
   int GuiGoodImageID; // eax
-  int v10; // [esp-4h] [ebp-40h]
-  int v11; // [esp-4h] [ebp-40h]
-  int v12; // [esp-4h] [ebp-40h]
   int i; // [esp+0h] [ebp-3Ch]
   CHAR Str[52]; // [esp+4h] [ebp-38h] BYREF
 
   if ( g_pGUIEngine )
   {
-    if ( dword_3F1E78C == 22 )
+    if ( g_cVehicleLoadInfo.m_iUnknown == 22 )
     {
-      IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 41, 1751, 0);
-      IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 41, 1750, 0);
-      IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 41, 1717, 0);
-      LocalPlayerId = CPlayerManager::GetLocalPlayerId(0);
+      IGuiEngine::SetControlVisibility(g_pGUIEngine, 41, 1751, 0);
+      IGuiEngine::SetControlVisibility(g_pGUIEngine, 41, 1750, 0);
+      IGuiEngine::SetControlVisibility(g_pGUIEngine, 41, 1717, 0);
+      LocalPlayerId = CPlayerManager::GetLocalPlayerId();
       v1 = CPlayerManager::Race(LocalPlayerId);
-      IGuiEngine::SetImages((void *)g_pGUIEngine, 41, 1716, dword_3699870[35 * v1 + 15], v10);
+      IGuiEngine::SetImages(g_pGUIEngine, 41, 1716, dword_3699870[35 * v1 + 15], 0);
       v2 = g_pStringEngine->GetString(g_pStringEngine, 2246);
-      IGuiEngine::SetText((void *)g_pGUIEngine, 41, 1714, v2);
-      IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 41, 1752, 0);
+      IGuiEngine::SetText(g_pGUIEngine, 41, 1714, v2);
+      IGuiEngine::SetControlVisibility(g_pGUIEngine, 41, 1752, 0);
     }
-    else if ( dword_3F1E78C == 24 )
+    else if ( g_cVehicleLoadInfo.m_iUnknown == 24 )
     {
-      IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 41, 1751, 0);
-      IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 41, 1750, 0);
-      IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 41, 1713, 0);
-      IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 41, 1717, 0);
-      v3 = CPlayerManager::GetLocalPlayerId(0);
+      IGuiEngine::SetControlVisibility(g_pGUIEngine, 41, 1751, 0);
+      IGuiEngine::SetControlVisibility(g_pGUIEngine, 41, 1750, 0);
+      IGuiEngine::SetControlVisibility(g_pGUIEngine, 41, 1713, 0);
+      IGuiEngine::SetControlVisibility(g_pGUIEngine, 41, 1717, 0);
+      v3 = CPlayerManager::GetLocalPlayerId();
       v4 = CPlayerManager::Race(v3);
-      IGuiEngine::SetImages((void *)g_pGUIEngine, 41, 1716, dword_3699870[35 * v4 + 30], v11);
+      IGuiEngine::SetImages(g_pGUIEngine, 41, 1716, dword_3699870[35 * v4 + 30], 0);
       v5 = g_pStringEngine->GetString(g_pStringEngine, 882);
-      IGuiEngine::SetText((void *)g_pGUIEngine, 41, 1714, v5);
-      IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 41, 1752, 0);
+      IGuiEngine::SetText(g_pGUIEngine, 41, 1714, v5);
+      IGuiEngine::SetControlVisibility(g_pGUIEngine, 41, 1752, 0);
     }
     else
     {
-      IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 41, 1717, byte_3F1E883);
-      if ( dword_3F1E78C == 21 )
+      IGuiEngine::SetControlVisibility(g_pGUIEngine, 41, 1717, byte_3F1E883);
+      if ( g_cVehicleLoadInfo.m_iUnknown == 21 )
       {
-        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 41, 1750, 1);
+        IGuiEngine::SetControlVisibility(g_pGUIEngine, 41, 1750, 1);
         if ( byte_3F1E882 )
-          IGuiEngine::SetImages((void *)g_pGUIEngine, 41, 1750, 272, 273);
+          IGuiEngine::SetImages(g_pGUIEngine, 41, 1750, 272, 273);
         else
-          IGuiEngine::SetImages((void *)g_pGUIEngine, 41, 1750, 274, 275);
+          IGuiEngine::SetImages(g_pGUIEngine, 41, 1750, 274, 275);
       }
       else
       {
-        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 41, 1750, byte_3F1E882);
+        IGuiEngine::SetControlVisibility(g_pGUIEngine, 41, 1750, byte_3F1E882);
       }
-      IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 41, 1751, byte_3F1E880);
-      v6 = CPlayerManager::GetLocalPlayerId(0);
+      IGuiEngine::SetControlVisibility(g_pGUIEngine, 41, 1751, byte_3F1E880);
+      v6 = CPlayerManager::GetLocalPlayerId();
       v7 = CPlayerManager::Race(v6);
-      IGuiEngine::SetImages((void *)g_pGUIEngine, 41, 1716, dword_3699870[35 * v7 + 25], v12);
+      IGuiEngine::SetImages(g_pGUIEngine, 41, 1716, dword_3699870[35 * v7 + 25], 0);
       if ( byte_3F1E881 )
         v8 = g_pStringEngine->GetString(g_pStringEngine, 883);
       else
         v8 = g_pStringEngine->GetString(g_pStringEngine, 2230);
-      IGuiEngine::SetText((void *)g_pGUIEngine, 41, 1714, v8);
-      IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 41, 1752, 1);
+      IGuiEngine::SetText(g_pGUIEngine, 41, 1714, v8);
+      IGuiEngine::SetControlVisibility(g_pGUIEngine, 41, 1752, 1);
     }
     for ( i = 0; i < 15; ++i )
     {
-      if ( dword_3F1E790[3 * i] <= 0 )
+      if ( g_cVehicleLoadInfo.m_vSlots[i].m_iGood <= 0 )
       {
-        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 41, dword_3699E90[2 * i], 0);
-        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 41, dword_3699E90[2 * i + 1], 0);
+        IGuiEngine::SetControlVisibility(g_pGUIEngine, 41, dword_3699E90[2 * i], 0);
+        IGuiEngine::SetControlVisibility(g_pGUIEngine, 41, dword_3699E90[2 * i + 1], 0);
       }
       else
       {
         if ( byte_3F1E881 )
-          _wsprintfA(Str, "%u/%u", dword_3F1E794[3 * i], dword_3F1E798[3 * i]);
+          _wsprintfA(Str, "%u/%u", g_cVehicleLoadInfo.m_vSlots[i].m_iAmount, g_cVehicleLoadInfo.m_vSlots[i].m_iUnknown);
         else
-          _wsprintfA(Str, "%u", dword_3F1E794[3 * i]);
-        IGuiEngine::SetText((void *)g_pGUIEngine, 41, dword_3699E90[2 * i], Str);
-        GuiGoodImageID = GetGuiGoodImageID(dword_3F1E790[3 * i]);
-        IGuiEngine::SetImages((void *)g_pGUIEngine, 41, dword_3699E90[2 * i + 1], GuiGoodImageID, 0);
+          _wsprintfA(Str, "%u", g_cVehicleLoadInfo.m_vSlots[i].m_iAmount);
+        IGuiEngine::SetText(g_pGUIEngine, 41, dword_3699E90[2 * i], Str);
+        GuiGoodImageID = GetGuiGoodImageID(g_cVehicleLoadInfo.m_vSlots[i].m_iGood);
+        IGuiEngine::SetImages(g_pGUIEngine, 41, dword_3699E90[2 * i + 1], GuiGoodImageID, 0);
         IGuiEngine::SetTooltipID(
-          (IGuiEngine *)g_pGUIEngine,
+          g_pGUIEngine,
           41,
           dword_3699E90[2 * i + 1],
-          dword_3699B30[5 * dword_3F1E790[3 * i] + 3],
-          dword_3699B30[5 * dword_3F1E790[3 * i] + 4]);
-        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 41, dword_3699E90[2 * i], 1);
-        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 41, dword_3699E90[2 * i + 1], 1);
+          dword_3699B30[5 * g_cVehicleLoadInfo.m_vSlots[i].m_iGood + 3],
+          dword_3699B30[5 * g_cVehicleLoadInfo.m_vSlots[i].m_iGood + 4]);
+        IGuiEngine::SetControlVisibility(g_pGUIEngine, 41, dword_3699E90[2 * i], 1);
+        IGuiEngine::SetControlVisibility(g_pGUIEngine, 41, dword_3699E90[2 * i + 1], 1);
       }
     }
     if ( byte_3F1E881 )
       _wsprintfA(Str, "%u/%u", dword_3F1E884, dword_3F1E888);
     else
       _wsprintfA(Str, "%u", dword_3F1E884);
-    IGuiEngine::SetText((void *)g_pGUIEngine, 41, 1733, Str);
-    if ( dword_3F1E78C == 24 || dword_3F1E78C == 22 )
+    IGuiEngine::SetText(g_pGUIEngine, 41, 1733, Str);
+    if ( g_cVehicleLoadInfo.m_iUnknown == 24 || g_cVehicleLoadInfo.m_iUnknown == 22 )
     {
-      IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 41, 1733, 0);
-      IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 41, 1749, 0);
+      IGuiEngine::SetControlVisibility(g_pGUIEngine, 41, 1733, 0);
+      IGuiEngine::SetControlVisibility(g_pGUIEngine, 41, 1749, 0);
     }
     else
     {
-      IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 41, 1733, 1);
-      IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 41, 1749, 1);
+      IGuiEngine::SetControlVisibility(g_pGUIEngine, 41, 1733, 1);
+      IGuiEngine::SetControlVisibility(g_pGUIEngine, 41, 1749, 1);
     }
   }
 }
@@ -37146,7 +37154,7 @@ void __cdecl SetCamWndViewPosition(void) {
   {
     v21 = 0;
   }
-  if ( !v21 || IEntity::FlagBits(v21, ENTITY_FLAG_OnBoard) || !IEntity::X(v21) && !IEntity::Y(v21) )
+  if ( !v21 || IEntity::FlagBits(v21, ENTITY_FLAG_ON_BOARD) || !IEntity::X(v21) && !IEntity::Y(v21) )
     return IGfxEngine::SetCameraViewPosition(
              (IGfxEngine *)g_pGfxEngine,
              (int)(((double)g_iCamWndX - (double)g_iCamWndY / 2.0) * (double)g_iCamWndScale
@@ -37619,38 +37627,38 @@ int __cdecl Y16X16::NeighborModifier(int) {
 
 
 // address=[0x14e7ab0]
-// Decompiled from int __cdecl SettlerTypePrioLevel(int a1)
-int __cdecl SettlerTypePrioLevel(int a1) {
+// Decompiled from int __cdecl SettlerTypePrioLevel(int _iType)
+int __cdecl SettlerTypePrioLevel(int _iType) {
   
   int result; // eax
 
-  switch ( a1 )
+  switch ( _iType )
   {
-    case 29:
-    case 32:
-    case 35:
-    case 38:
-    case 41:
-    case 61:
+    case SETTLER_SWORDSMAN_01:
+    case SETTLER_BOWMAN_01:
+    case SETTLER_MEDIC_01:
+    case SETTLER_AXEWARRIOR_01:
+    case SETTLER_BLOWGUNWARRIOR_01:
+    case SETTLER_BACKPACKCATAPULTIST_01:
       result = 1;
       break;
-    case 30:
-    case 33:
-    case 36:
-    case 39:
-    case 42:
-    case 62:
+    case SETTLER_SWORDSMAN_02:
+    case SETTLER_BOWMAN_02:
+    case SETTLER_MEDIC_02:
+    case SETTLER_AXEWARRIOR_02:
+    case SETTLER_BLOWGUNWARRIOR_02:
+    case SETTLER_BACKPACKCATAPULTIST_02:
       result = 2;
       break;
-    case 31:
-    case 34:
-    case 37:
-    case 40:
-    case 43:
-    case 63:
+    case SETTLER_SWORDSMAN_03:
+    case SETTLER_BOWMAN_03:
+    case SETTLER_MEDIC_03:
+    case SETTLER_AXEWARRIOR_03:
+    case SETTLER_BLOWGUNWARRIOR_03:
+    case SETTLER_BACKPACKCATAPULTIST_03:
       result = 3;
       break;
-    case 44:
+    case SETTLER_SQUADLEADER:
       result = 4;
       break;
     default:
@@ -44727,7 +44735,7 @@ bool __cdecl BlitBuilding(int a1, int a2, int a3, struct SGfxObjectInfo * _pInfo
   if ( !_pInfo->m_pPalData )
     return 0;
   m_pGfxData = _pInfo->m_pGfxData;
-  v26 = (unsigned __int16)_pInfo->field_5C;
+  v26 = (unsigned __int16)_pInfo->uConstructionProgress;
   Src = _pInfo->m_pPalData;
   if ( a1 < 255 )
   {
@@ -44812,32 +44820,32 @@ bool __cdecl BlitBuilding(int a1, int a2, int a3, struct SGfxObjectInfo * _pInfo
         }
         for ( j = 0; j < 0xA; ++j )
         {
-          m_pGfxData = *(BYTE **)&_pInfo->gap_218[16 * j];
+          m_pGfxData = *(BYTE **)&_pInfo->m_vPatches2[16 * j];
           if ( m_pGfxData )
           {
             v20 = *(unsigned __int16 *)m_pGfxData;
             m_pGfxData += 2;
             v21 = *(unsigned __int16 *)m_pGfxData;
             m_pGfxData += 2;
-            if ( *(_DWORD *)&_pInfo->gap_218[16 * j + 4] )
+            if ( *(_DWORD *)&_pInfo->m_vPatches2[16 * j + 4] )
             {
               if ( v20 > 512 || v21 > 512 )
                 BBSupportTracePrintF(
                   0,
                   "GFX ENGINE: DATA ERROR: Size of building object is too big! Object will be ignored!");
               v22 = (a2
-                   - (int)(float)((float)((*(unsigned __int16 *)m_pGfxData - *(_DWORD *)&_pInfo->gap_218[16 * j + 8]) << 16)
+                   - (int)(float)((float)((*(unsigned __int16 *)m_pGfxData - *(_DWORD *)&_pInfo->m_vPatches2[16 * j + 8]) << 16)
                                 * g_fZoomFactor)) >> 16;
               m_pGfxData += 2;
               v23 = (a3
-                   - (int)(float)((float)((*(unsigned __int16 *)m_pGfxData - *(_DWORD *)&_pInfo->gap_218[16 * j + 12]) << 16)
+                   - (int)(float)((float)((*(unsigned __int16 *)m_pGfxData - *(_DWORD *)&_pInfo->m_vPatches2[16 * j + 12]) << 16)
                                 * g_fZoomFactor)) >> 16;
               if ( v22 <= GfxEngineSetup.m_uWidth
                 && v23 <= GfxEngineSetup.m_uHeight
                 && *(_DWORD *)(g_pDestSizeTable + 4 * v20) + v22 >= g_uLeftGuiBorderWidth
                 && *(_DWORD *)(g_pDestSizeTable + 4 * v21) + v23 >= 0 )
               {
-                v12 = *(_DWORD *)&_pInfo->gap_218[16 * j + 4];
+                v12 = *(_DWORD *)&_pInfo->m_vPatches2[16 * j + 4];
                 sub_2F6FD80(&v12, a1);
                 ZoomBobNormal(v12, (int)(m_pGfxData + 6), v20, v21, v22, v23, 0, g_pBeginOfRenderBuffer, 0);
               }
@@ -45554,7 +45562,7 @@ bool __cdecl RenderObjectLayer(bool a1) {
                         DWORD2(v114[v106]) = v109 - v101 - ((m_iDistance * (v109 - v101 - v104)) >> 8);
                         HIDWORD(v114[v106++]) = v91;
                       }
-                      GfxObjectInfo->field_5C = 0;
+                      GfxObjectInfo->uConstructionProgress = 0;
                       GfxObjectInfo->m_pGfxData = 0;
                       GfxObjectInfo->m_pPatchGfxData = 0;
                       GfxObjectInfo->m_uFlags = 0;
@@ -51397,7 +51405,7 @@ bool __cdecl BlitBuildingHardware(int a1, int a2, int a3, struct SGfxObjectInfo 
           *(float *)&v84 = (float)v122 - (float)((float)(v73 + v39) * g_fZoomFactor);
           *((float *)&v84 + 1) = (float)v123 - (float)((float)(v74 + v38) * g_fZoomFactor);
           v99 = (int)(v98 + 3);
-          if ( _pInfo->field_5C )
+          if ( _pInfo->uConstructionProgress )
           {
             sub_2F96D80(
               *(__int16 *)(v99 - 2),
@@ -51406,7 +51414,7 @@ bool __cdecl BlitBuildingHardware(int a1, int a2, int a3, struct SGfxObjectInfo 
               v77,
               v81,
               v84,
-              BYTE1(_pInfo->field_5C),
+              BYTE1(_pInfo->uConstructionProgress),
               65793 * a1,
               v73,
               v51,
@@ -51414,7 +51422,7 @@ bool __cdecl BlitBuildingHardware(int a1, int a2, int a3, struct SGfxObjectInfo 
               v52,
               1);
           }
-          else if ( _pInfo->field_5C != 0xFFFF )
+          else if ( _pInfo->uConstructionProgress != 0xFFFF )
           {
             sub_2F96D80(
               *(__int16 *)(v99 - 2),

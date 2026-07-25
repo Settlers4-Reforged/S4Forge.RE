@@ -156,7 +156,7 @@ void  CWheeler::ConvertEventIntoGoal(class CEntityEvent * a2) {
     {
       case 7:
         IEntity::SetFlagBits(this, ENTITY_FLAG_Selectable);
-        IEntity::ClearFlagBits(this, ENTITY_FLAG_OnBoard);
+        IEntity::ClearFlagBits(this, ENTITY_FLAG_ON_BOARD);
         v10 = IEntity::Y(this);
         v8 = IEntity::X(this);
         v9 = CVehicle::NewDestination(this, v8, v10, 0);
@@ -212,7 +212,7 @@ void  CWheeler::ConvertEventIntoGoal(class CEntityEvent * a2) {
           (*(void (__thiscall **)(CWheeler *, int))(*(_DWORD *)this + 196))(this, v6);
           IEntity::SetPosition((IEntity *)this, v16, v17);
           IEntity::SetFlagBits(this, ENTITY_FLAG_Selectable);
-          IEntity::ClearFlagBits(this, ENTITY_FLAG_OnBoard);
+          IEntity::ClearFlagBits(this, ENTITY_FLAG_ON_BOARD);
           IEntity::SetFlagBits(this, ENTITY_FLAG_Visible);
           *((_DWORD *)this + 42) = 0;
         }
@@ -371,7 +371,7 @@ void  CWheeler::Unload(void) {
   if ( a2 < 0 )
   {
     IEntity::ClearFlagBits(this, ENTITY_FLAG_Visible);
-    IEntity::SetFlagBits(this, ENTITY_FLAG_OnBoard);
+    IEntity::SetFlagBits(this, ENTITY_FLAG_ON_BOARD);
   }
   else
   {

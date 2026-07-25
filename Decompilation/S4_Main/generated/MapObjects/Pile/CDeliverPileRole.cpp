@@ -1,3 +1,4 @@
+#if FALSE
 #include "CDeliverPileRole.h"
 
 // Definitions for class CDeliverPileRole
@@ -222,3 +223,4 @@ class CDeliverPileRole * __cdecl CDeliverPileRole::Load(std::istream & a1) {
 }
 
 
+#endif // Already implemented

@@ -15,7 +15,7 @@ public:
 public:
     CBuildingSiteInfo::Ressource[3] m_sRequiredRessources;
     CBuildingSiteInfo::Ressource[3] m_sOtherRessources;
-    BYTE m_unknown20;
+    BYTE m_bPriority;
     BYTE m_unknown21;
     BYTE m_unknown22;
     BYTE m_unknown23;

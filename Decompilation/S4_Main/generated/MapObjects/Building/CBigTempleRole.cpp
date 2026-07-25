@@ -3,94 +3,92 @@
 // Definitions for class CBigTempleRole
 
 // address=[0x13ffbe0]
-// Decompiled from int __cdecl CBigTempleRole::New(int a1)
+// Decompiled from CBigTempleRole *__cdecl CBigTempleRole::New(int a1)
 class CPersistence * __cdecl CBigTempleRole::New(std::istream & a1) {
   
-  if ( operator new(0x180u) )
-    return CBigTempleRole::CBigTempleRole(a1);
+  CBigTempleRole *C; // [esp+Ch] [ebp-10h]
+
+  C = (CBigTempleRole *)operator new(0x180u);
+  if ( C )
+    return CBigTempleRole::CBigTempleRole(C, a1);
   else
     return 0;
 }
 
 
 // address=[0x14e8200]
-// Decompiled from int __thiscall CBigTempleRole::LogicUpdate(int this, CMFCToolBarButton *a2)
+// Decompiled from void __thiscall CBigTempleRole::LogicUpdate(CBigTempleRole *this, struct CBuilding *a2)
 void  CBigTempleRole::LogicUpdate(class CBuilding * a2) {
   
-  int result; // eax
-  int v3; // eax
-  void *v4; // eax
-  int v5; // eax
+  unsigned int v2; // eax
+  struct type_info *v3; // eax
+  unsigned int v4; // eax
   const char *BuildingName; // eax
-  const char *v7; // [esp-8h] [ebp-10h]
+  const char *v6; // [esp-8h] [ebp-10h]
   const char *RaceName; // [esp-4h] [ebp-Ch]
-  char v9; // [esp+0h] [ebp-8h]
+  unsigned __int8 uLogicState; // [esp+0h] [ebp-8h]
 
-  result = IEntity::FlagBits(a2, ENTITY_FLAG_Selected);
-  if ( result )
-    result = (*(int (__thiscall **)(int, CMFCToolBarButton *, int))(*(_DWORD *)this + 88))(this, a2, 1);
-  v9 = *(_BYTE *)(this + 4);
-  if ( v9 == 2 )
+  if ( IEntity::FlagBits(a2, ENTITY_FLAG_Selected) )
+    this->FillDialog(this, a2, 1);
+  uLogicState = this->m_uLogicState;
+  if ( uLogicState == 2 )
   {
-    if ( *(unsigned __int8 *)(this + 5) > (int)*(unsigned __int8 *)(*(_DWORD *)(this + 376) + 480) )
+    if ( this->m_iDelayTick > (int)this->m_pBuildingInfo->m_iProductionDelay )
     {
-      *(_BYTE *)(this + 5) = 0;
-      *(_BYTE *)(this + 4) = 3;
-      return IAnimatedEntity::RegisterForLogicUpdate(1);
+      this->m_iDelayTick = 0;
+      this->m_uLogicState = 3;
+      IAnimatedEntity::RegisterForLogicUpdate(a2, 1);
     }
     else
     {
-      ++*(_BYTE *)(this + 5);
-      return IAnimatedEntity::RegisterForLogicUpdate(14);
+      ++this->m_iDelayTick;
+      IAnimatedEntity::RegisterForLogicUpdate(a2, 14);
     }
   }
-  else if ( v9 == 3 )
+  else if ( uLogicState == 3 )
   {
-    if ( IEntity::FlagBits(a2, (EntityFlag)0x1000u) )
+    if ( IEntity::FlagBits(a2, (EntityFlag)4096) )
       CBigTempleRole::ThrowOutPriest(a2);
-    result = this;
-    if ( *(unsigned __int8 *)(this + 380) < 0xAu )
+    if ( this->m_uThrownOutPriests < 10u )
     {
-      if ( *(_BYTE *)(*(_DWORD *)(this + 376) + 480) )
+      if ( this->m_pBuildingInfo->m_iProductionDelay )
       {
-        *(_BYTE *)(this + 5) = 0;
-        IAnimatedEntity::RegisterForLogicUpdate(14);
-        result = this;
-        *(_BYTE *)(this + 4) = 2;
+        this->m_iDelayTick = 0;
+        IAnimatedEntity::RegisterForLogicUpdate(a2, 14);
+        this->m_uLogicState = 2;
       }
       else
       {
-        IAnimatedEntity::RegisterForLogicUpdate(31);
-        v3 = IEntity::Race(a2);
-        RaceName = CS4DefineNames::GetRaceName(v3);
-        v4 = (void *)typeid((_DWORD *)this);
-        v7 = (const char *)type_info::name(v4);
-        v5 = CBuilding::BuildingTypeEx((unsigned __int8 *)a2);
-        BuildingName = CS4DefineNames::GetBuildingName(v5);
-        return BBSupportTracePrintF(
-                 2,
-                 "WARNING: Building %s (role %s) of race %s has no production delay!",
-                 BuildingName,
-                 v7,
-                 RaceName);
+        IAnimatedEntity::RegisterForLogicUpdate(a2, 31);
+        v2 = IEntity::Race(a2);
+        RaceName = CS4DefineNames::GetRaceName(v2);
+        v3 = typeid(this);
+        v6 = type_info::name(v3);
+        v4 = CBuilding::BuildingTypeEx(a2);
+        BuildingName = CS4DefineNames::GetBuildingName(v4);
+        BBSupportTracePrintF(
+          2,
+          "WARNING: Building %s (role %s) of race %s has no production delay!",
+          BuildingName,
+          v6,
+          RaceName);
       }
     }
   }
-  return result;
 }
 
 
 // address=[0x14e8350]
-// Decompiled from int __thiscall CBigTempleRole::FillGfxInfo(CBigTempleRole *this, struct CBuilding *a2, struct SGfxObjectInfo *a3)
+// Decompiled from void __thiscall CBigTempleRole::FillGfxInfo(CBigTempleRole *this, IEntity *a2, struct SGfxObjectInfo *a3)
 void  CBigTempleRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo & a3) {
   
-  int v3; // eax
-  int v5; // [esp-Ch] [ebp-10h]
+  unsigned int v3; // eax
+  unsigned int v4; // [esp-Ch] [ebp-10h]
 
-  (*(void (__thiscall **)(CBigTempleRole *, struct CBuilding *))(*(_DWORD *)this + 16))(this, a2);
-  v5 = IEntity::Type((unsigned __int16 *)a2);
+  this->Update(this, a2);
+  v4 = IEntity::Type(a2);
   v3 = IEntity::Race(a2);
-  return CGfxManager::GetBuildingGfxInfo((int)a3, v3, v5, 1, (int)this + 76);
+  CGfxManager::GetBuildingGfxInfo(g_pGfxManager, a3, v3, v4, 1, (int)this->m_vPatchPairs);
 }
 
 
@@ -100,29 +98,26 @@ void  CBigTempleRole::Init(class CBuilding * a2) {
   
   int v2; // eax
 
-  IBuildingRole::InitCommon((int)a2);
-  *((_BYTE *)this + 4) = 3;
-  v2 = IEntity::OwnerId((unsigned __int8 *)a2);
+  IBuildingRole::InitCommon(a2);
+  this->m_uLogicState = 3;
+  v2 = IEntity::OwnerId(a2);
   CMagic::IncreaseManaByBigTemple(v2);
   if ( IEntity::FlagBits(a2, ENTITY_FLAG_Selected) )
-    (*(void (__thiscall **)(CBigTempleRole *, struct CBuilding *, _DWORD))(*(_DWORD *)this + 88))(this, a2, 0);
-  return IAnimatedEntity::RegisterForLogicUpdate(31);
+    this->FillDialog(this, a2, 0);
+  return IAnimatedEntity::RegisterForLogicUpdate(a2, 31);
 }
 
 
 // address=[0x14e8400]
-// Decompiled from int __thiscall CBigTempleRole::PostLoadInit(CBigTempleRole *this, struct CBuilding *a2)
+// Decompiled from void __thiscall CBigTempleRole::PostLoadInit(CBigTempleRole *this, IEntity *a2)
 void  CBigTempleRole::PostLoadInit(class CBuilding * a2) {
   
   int v2; // eax
-  int result; // eax
-  int v4; // [esp-4h] [ebp-8h]
+  int v3; // [esp-4h] [ebp-8h]
 
-  v4 = IEntity::Type((unsigned __int16 *)a2);
+  v3 = IEntity::Type(a2);
   v2 = IEntity::Race(a2);
-  result = CBuildingInfoMgr::GetBuildingInfo(v2, v4);
-  *((_DWORD *)this + 94) = result;
-  return result;
+  this->m_pBuildingInfo = CBuildingInfoMgr::GetBuildingInfo(v2, v3);
 }
 
 
@@ -131,24 +126,28 @@ void  CBigTempleRole::PostLoadInit(class CBuilding * a2) {
 void  CBigTempleRole::FillDialog(class CBuilding * a2, bool a3) {
   
   int ownerId; // eax MAPDST
-  int type; // [esp-8h] [ebp-3Ch] MAPDST
+  S4_BUILDING_ENUM type; // [esp-8h] [ebp-3Ch] MAPDST
   unsigned int v9; // [esp+8h] [ebp-2Ch]
   CEvn_Event v10; // [esp+Ch] [ebp-28h] BYREF
   int v11; // [esp+30h] [ebp-4h]
 
   g_cBuildingInfo.m_iUnknown = 0;
-  g_cBuildingInfo.? = IEntity::Race(a2);
-  g_cBuildingInfo.? = IEntity::Type(a2);
-  g_cBuildingInfo.? = 1;
-  g_cBuildingInfo.? = 0;
-  g_cBuildingInfo.? = 0;
+  g_cBuildingInfo.m_cRace = IEntity::Race(a2);
+  g_cBuildingInfo.m_cType = IEntity::Type(a2);
+  g_cBuildingInfo.m_bSomeFlagBits = 1;
+  g_cBuildingInfo.m_unknownB = 0;
+  g_cBuildingInfo.m_bHasWorkingArea = 0;
   type = IEntity::Type(a2);
   ownerId = IEntity::OwnerId(a2);
-  g_cBuildingInfo.? = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, ownerId, type, 0);
+  g_cBuildingInfo.m_cTotalCount = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, ownerId, type, 0);
   type = IEntity::Type(a2);
   ownerId = IEntity::OwnerId(a2);
-  g_cBuildingInfo.? = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, ownerId, type, 1u);
-  g_cBuildingInfo.? = *((_BYTE *)this + 29);
+  g_cBuildingInfo.m_cTotalBuiltCount = CBuildingMgr::GetNumberOfBuildings(
+                                         (CBuildingMgr *)g_cBuildingMgr,
+                                         ownerId,
+                                         type,
+                                         1u);
+  g_cBuildingInfo.m_bInhabitants = this->m_bInhabitants;
   v9 = 604;
   if ( !a3 )
     v9 = 602;
@@ -161,52 +160,46 @@ void  CBigTempleRole::FillDialog(class CBuilding * a2, bool a3) {
 
 
 // address=[0x14e8560]
-// Decompiled from char *__thiscall CBigTempleRole::CBigTempleRole(char *this, int a2)
+// Decompiled from CBigTempleRole *__thiscall CBigTempleRole::CBigTempleRole(CBigTempleRole *this, struct std::istream *a2)
  CBigTempleRole::CBigTempleRole(std::istream & a2) {
   
-  int v3; // [esp+4h] [ebp-1Ch] BYREF
+  unsigned int iFileVersion; // [esp+4h] [ebp-1Ch] MAPDST BYREF
   int pExceptionObject; // [esp+8h] [ebp-18h] BYREF
-  int v5; // [esp+Ch] [ebp-14h]
-  char *v6; // [esp+10h] [ebp-10h]
   int v7; // [esp+1Ch] [ebp-4h]
 
-  v6 = this;
   IBuildingRole::IBuildingRole(this, a2);
   v7 = 0;
-  *(_DWORD *)v6 = &CBigTempleRole::_vftable_;
-  operator^<unsigned int>(a2, &v3);
-  v5 = v3;
-  if ( v3 == 1 )
+  this->__vftable = (IBuildingRole_vtbl *)&CBigTempleRole::_vftable_;
+  operator^<unsigned int>(a2, &iFileVersion);
+  if ( iFileVersion == 1 )
   {
-    v6[380] = 0;
+    this->m_uThrownOutPriests = 0;
   }
   else
   {
-    if ( v5 != 2 )
+    if ( iFileVersion != 2 )
     {
       BBSupportTracePrintF(3, "load output defect Unknown fileFormatVersion for CBigTempleRole");
       pExceptionObject = 0;
       CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
       _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
     }
-    operator^<unsigned char>(a2, v6 + 380);
+    operator^<unsigned char>(a2, &this->m_uThrownOutPriests);
   }
-  return v6;
+  return this;
 }
 
 
 // address=[0x14e8630]
-// Decompiled from int __thiscall CBigTempleRole::Store(struct IBuildingRole *this, struct std::ostream *a2)
-void  CBigTempleRole::Store(std::ostream & a2) {
+// Decompiled from void __thiscall CBigTempleRole::Store(CBigTempleRole *this, struct std::ostream *_rStream)
+void  CBigTempleRole::Store(std::ostream & _rStream) {
   
-  int v3; // [esp+0h] [ebp-8h] BYREF
-  struct IBuildingRole *v4; // [esp+4h] [ebp-4h]
+  unsigned int v2; // [esp+0h] [ebp-8h] BYREF
 
-  v4 = this;
-  IBuildingRole::Store(this, a2);
-  v3 = 2;
-  operator^<unsigned int>(a2, &v3);
-  return operator^<unsigned char>(a2, (int)v4 + 380);
+  IBuildingRole::Store(this, _rStream);
+  v2 = 2;
+  operator^<unsigned int>(_rStream, &v2);
+  operator^<unsigned char>(_rStream, &this->m_uThrownOutPriests);
 }
 
 
@@ -263,21 +256,20 @@ void  CBigTempleRole::GoodArrive(int a2) {
  CBigTempleRole::CBigTempleRole(void) {
   
   IBuildingRole::IBuildingRole(this);
-  *(_DWORD *)this = &CBigTempleRole::_vftable_;
-  *((_BYTE *)this + 380) = 0;
+  this->__vftable = (IBuildingRole_vtbl *)&CBigTempleRole::_vftable_;
+  this->m_uThrownOutPriests = 0;
   return this;
 }
 
 
 // address=[0x14fd870]
-// Decompiled from int __cdecl CBigTempleRole::Load(int a1)
+// Decompiled from int __cdecl CBigTempleRole::Load(struct std::istream *a1)
 class CBigTempleRole * __cdecl CBigTempleRole::Load(std::istream & a1) {
   
   void **v1; // eax
-  struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
 
-  v1 = (void **)CPersistence::New(a1, &CPersistence__RTTI_Type_Descriptor_);
-  return j____RTDynamicCast(v1, 0, v3, &CBigTempleRole__RTTI_Type_Descriptor_, 1);
+  v1 = (void **)CPersistence::New(a1);
+  return j____RTDynamicCast(v1, 0, &CPersistence__RTTI_Type_Descriptor_, &CBigTempleRole__RTTI_Type_Descriptor_, 1);
 }
 
 
@@ -285,32 +277,29 @@ class CBigTempleRole * __cdecl CBigTempleRole::Load(std::istream & a1) {
 // [Decompilation failed for static unsigned long CBigTempleRole::m_iClassID]
 
 // address=[0x14e8680]
-// Decompiled from BOOL __thiscall CBigTempleRole::ThrowOutPriest(int this, CMFCToolBarButton *a2)
+// Decompiled from void __thiscall CBigTempleRole::ThrowOutPriest(CBigTempleRole *this, CBuilding *a2)
 void  CBigTempleRole::ThrowOutPriest(class CBuilding * a2) {
   
   int v2; // eax
-  BOOL result; // eax
+  int v3; // eax
   int v4; // eax
-  int v5; // eax
-  int v6; // eax
-  int v7; // [esp-14h] [ebp-18h]
-  int v8; // [esp-10h] [ebp-14h]
-  int v9; // [esp-Ch] [ebp-10h]
+  unsigned int v5; // eax
+  unsigned int v6; // [esp-14h] [ebp-18h]
+  int v7; // [esp-10h] [ebp-14h]
+  int m_iBuildingInhabitant; // [esp-Ch] [ebp-10h]
 
   v2 = CBuilding::DoorWorldIdx(a2);
-  result = CWorldManager::IsPositionFreeForSettler(v2);
-  if ( !result )
-    return result;
-  v9 = *(char *)(*(_DWORD *)(this + 376) + 478);
-  v8 = IEntity::OwnerId((unsigned __int8 *)a2);
-  v4 = CBuilding::DoorPackedXY(a2);
-  v7 = Y16X16::UnpackYFast(v4);
-  v5 = CBuilding::DoorPackedXY(a2);
-  v6 = Y16X16::UnpackXFast(v5);
-  CSettlerMgr::AddSettlers((CSettlerMgr *)g_cSettlerMgr, v6, v7, v8, v9, 1, 2);
-  result = this;
-  ++*(_BYTE *)(this + 380);
-  return result;
+  if ( CWorldManager::IsPositionFreeForSettler(v2) )
+  {
+    m_iBuildingInhabitant = (char)this->m_pBuildingInfo->m_iBuildingInhabitant;
+    v7 = IEntity::OwnerId(a2);
+    v3 = CBuilding::DoorPackedXY(a2);
+    v6 = Y16X16::UnpackYFast(v3);
+    v4 = CBuilding::DoorPackedXY(a2);
+    v5 = Y16X16::UnpackXFast(v4);
+    CSettlerMgr::AddSettlers(&g_cSettlerMgr, v5, v6, v7, m_iBuildingInhabitant, 1, 2);
+    ++this->m_uThrownOutPriests;
+  }
 }
 
 

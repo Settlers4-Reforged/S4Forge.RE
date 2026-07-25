@@ -69,6 +69,10 @@ private:
     // address=[0x1573bc0]
     bool  CheckPosition(int a2, int a3, bool a4, bool a5);
 
+    // Type information members
+public:
+    std::list m_vTasks;
+
 };
 
 
