@@ -734,7 +734,6 @@ FOLDER_MAP = {
         "CWorkUpBuildingRole",
         "CWorkshopBuildingRole",
         "IBuildingRole",
-        "ISelectableSettlerRole",
         "SBuildingMenu",
     ],
 
@@ -804,6 +803,7 @@ FOLDER_MAP = {
         "CThiefRole",
         "CTowerSoldier",
         "ISettlerRole",
+        "ISelectableSettlerRole",
     ],
 
     "MapObjects/Ship/": [
