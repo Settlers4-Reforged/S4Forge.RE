@@ -1,0 +1,63 @@
+#ifndef ISELECTABLESETTLERROLE_H
+#define ISELECTABLESETTLERROLE_H
+
+#include "ISettlerRole.h"
+#include "defines.h"
+
+class ISelectableSettlerRole : public ISettlerRole {
+  public:
+    // address=[0x157c980]
+    ISelectableSettlerRole(std::istream &_rStream);
+
+    // address=[0x157ca10]
+    virtual void Store(std::ostream &_rStream);
+
+    // address=[0x157ca50]
+    virtual int GetGroupFlags(void) const;
+
+    // address=[0x157ca70]
+    virtual int SetGroupFlags(int _iFlags);
+
+    // address=[0x157cac0]
+    virtual int SetGroupFlagBits(int _iFlagBits);
+
+    // address=[0x157cb20]
+    virtual int ClearGroupFlagBits(int _iFlagBits);
+
+    // address=[0x1592df0]
+    int GetPrimaryGroupId(void) const;
+
+  protected:
+    // address=[0x157c930]
+    ISelectableSettlerRole(void);
+
+    // address=[0x157c960]
+    virtual ~ISelectableSettlerRole(void);
+
+    // address=[0x157cb80]
+    bool TakeCommonJob(class CSettler *_pSettler);
+
+    // address=[0x157cc70]
+    virtual int Decrease(int a2);
+
+    // address=[0x157cd70]
+    bool ProcessGoToPosFerry(class CSettler *_pSettler, class CEntityEvent const *a3);
+
+    // address=[0x157ce70]
+    unsigned int ThiefCheckMasquerade(class CSettler *_pSettler);
+
+    // address=[0x157cfa0]
+    void ThiefExpose(class IEntity *_pSettler);
+
+    // address=[0x157cfd0]
+    void ThiefDisguise(class IEntity *_pSettler);
+
+    // address=[0x15921c0]
+    int GetGroupFlagsEx(void) const;
+
+    // Type information members
+  public:
+    unsigned __int16 m_iGroupFlags;
+};
+
+#endif // ISELECTABLESETTLERROLE_H
