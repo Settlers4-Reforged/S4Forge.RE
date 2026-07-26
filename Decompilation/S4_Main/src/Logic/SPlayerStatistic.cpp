@@ -30,23 +30,15 @@ void CStatistic::SPlayerStatistic::UpdateFightingStrength(int _iPlayerId, int _i
 // Decompiled from void __thiscall CStatistic::SPlayerStatistic::CalculateFightingStrength(  CStatistic::SPlayerStatistic *this,  int _iOwnerId)
 void CStatistic::SPlayerStatistic::CalculateFightingStrength(int _iOwnerId) {
 
-    int v2;                                    // [esp+4h] [ebp-6Ch]
-    int v3;                                    // [esp+10h] [ebp-60h]
-    int iEyecatcher;                           // [esp+14h] [ebp-5Ch]
-    int v5;                                    // [esp+18h] [ebp-58h]
-    int iFightingStrengthDivisor;              // [esp+1Ch] [ebp-54h]
-    int iHighestEyecatcherCount;               // [esp+20h] [ebp-50h]
-    int v8;                                    // [esp+24h] [ebp-4Ch]
-    int i;                                     // [esp+28h] [ebp-48h]
-    int iEffectiveOffenceStrength256;          // [esp+2Ch] [ebp-44h]
-    bool v11;                                  // [esp+33h] [ebp-3Dh]
-    int iTemp;                                 // [esp+34h] [ebp-3Ch]
-    S4_BUILDING_ENUM vEyecatcherBuildings[12]; // [esp+3Ch] [ebp-34h]
-
     BB_ASSERT(m_iOffenceStrengthBase256 > 0)
-    iEffectiveOffenceStrength256 = 256;
+    int iEffectiveOffenceStrength256 = 256;
     if(this->m_iOffenceStrength100_2 <= 0) {
         if(this->m_iOffenceStrengthBase256 != 256 && !g_iDbgIgnoreFightingStrength == 1) {
+            S4_BUILDING_ENUM vEyecatcherBuildings[12];
+            int iFightingStrengthDivisor;
+
+            int v5;
+            int v8;
             if(g_pGameType && CPlayerManager::IsAI(_iOwnerId) && g_pAI->IsInitialised() && IAIDifficultyLevels::GetDifficultyLevel(_iOwnerId) >= 2) {
                 v8 = this->m_iTotalBuildStone + this->m_iTotalBuiltWood + 2 * this->m_iTotalBuiltGold;
                 v5 = v8;
@@ -58,7 +50,7 @@ void CStatistic::SPlayerStatistic::CalculateFightingStrength(int _iOwnerId) {
                 iFightingStrengthDivisor = 1000;
             else
                 iFightingStrengthDivisor = g_iFightingStrengthDivisor;
-            v2 = (((v5 + v8) << 8) + 127) / iFightingStrengthDivisor + this->m_iOffenceStrengthBase256;
+            int v2 = (((v5 + v8) << 8) + 127) / iFightingStrengthDivisor + this->m_iOffenceStrengthBase256;
             vEyecatcherBuildings[0] = BUILDING_EYECATCHER01;
             vEyecatcherBuildings[1] = BUILDING_EYECATCHER02;
             vEyecatcherBuildings[2] = BUILDING_EYECATCHER03;
@@ -71,19 +63,19 @@ void CStatistic::SPlayerStatistic::CalculateFightingStrength(int _iOwnerId) {
             vEyecatcherBuildings[9] = BUILDING_EYECATCHER10;
             vEyecatcherBuildings[10] = BUILDING_EYECATCHER11;
             vEyecatcherBuildings[11] = BUILDING_EYECATCHER12;
-            iHighestEyecatcherCount = g_cBuildingMgr->GetNumberOfBuildings(
+            int iLowestEyecatcher = g_cBuildingMgr->GetNumberOfBuildings(
                 _iOwnerId,
                 BUILDING_EYECATCHER01,
                 1u);
-            for(i = 1; i < 12; ++i) {
-                iEyecatcher = g_cBuildingMgr->GetNumberOfBuildings(
+            for(int i = 1; i < 12; ++i) {
+                int iEyecatcher = g_cBuildingMgr->GetNumberOfBuildings(
                     _iOwnerId,
                     vEyecatcherBuildings[i],
                     1u);
-                if(iEyecatcher < iHighestEyecatcherCount)
-                    iHighestEyecatcherCount = iEyecatcher;
+                if(iEyecatcher < iLowestEyecatcher)
+                    iLowestEyecatcher = iEyecatcher;
             }
-            iTemp = v2 + 30 * iHighestEyecatcherCount;
+            int iTemp = v2 + 30 * iLowestEyecatcher;
             if(iTemp > 128) {
                 iTemp = (iTemp - 128) / 2 + 128;
                 if(iTemp > 256) {
@@ -102,19 +94,12 @@ void CStatistic::SPlayerStatistic::CalculateFightingStrength(int _iOwnerId) {
         iEffectiveOffenceStrength256 = this->m_iOffenceStrength100_2;
     }
     if(g_pGameData && g_pGameData->GetMode() == 3) {
-        if(iEffectiveOffenceStrength256 < 4)
-            v3 = 1;
-        else
-            v3 = iEffectiveOffenceStrength256 / 4;
-        iEffectiveOffenceStrength256 = v3;
+        iEffectiveOffenceStrength256 = iEffectiveOffenceStrength256 < 4 ? 1 : iEffectiveOffenceStrength256 / 4;
     }
     this->m_iEffectiveOffenceStrength256 = iEffectiveOffenceStrength256;
-    if(this->m_iEffectiveOffenceStrength256 <= 0 && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 1346, "m_iEffectiveOffenceStrength256 > 0") == 1) {
-        __debugbreak();
-    }
-    if(this->m_iEffectiveOffenceStrength256 > 384 && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 1347, "m_iEffectiveOffenceStrength256 <= 384") == 1) {
-        __debugbreak();
-    }
+    BB_ASSERT(m_iEffectiveOffenceStrength256 > 0);
+    BB_ASSERT(m_iEffectiveOffenceStrength256 <= 384);
+
     if(this->m_iEffectiveOffenceStrength256 <= 256)
         this->m_iEffectiveDefenceStrength256 = 256;
     else
