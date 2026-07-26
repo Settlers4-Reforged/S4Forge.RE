@@ -590,14 +590,17 @@ void __cdecl IAIEnvironment::EntityGetWarriorTypeAndSectorId(int a1, enum T_AI_W
 void __cdecl IAIEnvironment::EntityGetWarriorTypeAndPosition(int a1, enum T_AI_WARRIOR_TYPE & a2, int & a3, int & a4) {
   
   int result; // eax
-  unsigned int v5; // [esp+0h] [ebp-8h]
-  struct IEntity *v6; // [esp+4h] [ebp-4h]
+  enum T_AI_WARRIOR_TYPE v5; // [esp+0h] [ebp-8h]
+  IEntity *v6; // [esp+4h] [ebp-4h]
 
   v6 = CMapObjectMgr::Entity(a1);
-  v5 = IEntity::WarriorType();
-  if ( v5 > 0xE && BBSupportDbgReport(2, "AI\\AI_Environment.cpp", 426, "uWarriorType <= AI_WARRIOR_TYPE_LAST") == 1 )
+  v5 = IEntity::WarriorType(v6);
+  if ( (unsigned int)v5 > 14
+    && BBSupportDbgReport(2, "AI\\AI_Environment.cpp", 426, "uWarriorType <= AI_WARRIOR_TYPE_LAST") == 1 )
+  {
     __debugbreak();
-  *(_DWORD *)a2 = v5;
+  }
+  *a2 = v5;
   *a3 = IEntity::X(v6);
   result = IEntity::Y(v6);
   *a4 = result;

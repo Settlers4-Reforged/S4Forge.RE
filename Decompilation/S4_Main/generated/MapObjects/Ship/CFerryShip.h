@@ -112,6 +112,17 @@ private:
     // address=[0x159bb70]
     void  SetFerryJob(enum CFerryShip::TFerryJob a2);
 
+    // Type information members
+public:
+    int m_uU0;
+    int m_uU1;
+    std::vector m_vCargo;
+    int m_uU2;
+    int m_uU3;
+    int m_uU4;
+    int m_uU5;
+    unsigned int m_uPrevTask;
+
 };
 
 

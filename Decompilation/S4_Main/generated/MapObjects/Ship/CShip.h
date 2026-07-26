@@ -63,6 +63,12 @@ protected:
     // address=[0x37bd384]
     static int const FULL_UPDATE_DELAY;
 
+    // Type information members
+public:
+    int m_uU0;
+    int m_uU1;
+    int m_uU2;
+
 };
 
 

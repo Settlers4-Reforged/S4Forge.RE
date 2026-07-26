@@ -1038,15 +1038,15 @@ int  CSoldierRole::GetNumberOfHealings(void) {
  CSoldierRole::CSoldierRole(void) {
   
   ISelectableSettlerRole::ISelectableSettlerRole(this);
-  CWarriorBehavior::CWarriorBehavior((CWarriorBehavior *)&this[1]);
-  this->__vftable = (CSoldierRole_vtbl *)&CSoldierRole::_vftable_;
-  this[1].__vftable = (CSoldierRole_vtbl *)&CSoldierRole::`vftable';
-  std::list<CEntityTask>::list<CEntityTask>(&this[1].m_fOffsetX);
-  LOBYTE(this[1].m_iDestinationPosition) = 0;
-  *(_DWORD *)&this[1].m_uHomeEntityId = 0;
-  this[2].__vftable = 0;
-  this[1].m_iStartPosition = 0;
-  BYTE1(this[1].m_iDestinationPosition) = CStaticConfigVarInt::operator int(&CSoldierRole::s_iMaxNumberOfHealings);
+  CWarriorBehavior::CWarriorBehavior(&this->CWarriorBehavior);
+  this->ISelectableSettlerRole::ISettlerRole::CPersistence::__vftable = (CSoldierRole_vtbl *)&CSoldierRole::_vftable_;
+  this->CWarriorBehavior::__vftable = (CWarriorBehavior_vtbl *)&CSoldierRole::`vftable';
+  std::list<CEntityTask>::list<CEntityTask>(&this->m_vTasks);
+  this->m_iU0 = 0;
+  this->m_iU3 = 0;
+  this->m_iU5 = 0;
+  this->m_iU2 = 0;
+  this->m_iMaxNumberOfHealings = CStaticConfigVarInt::operator int(&CSoldierRole::s_iMaxNumberOfHealings);
   return this;
 }
 
@@ -1348,30 +1348,30 @@ LABEL_8:
 
 
 // address=[0x1590680]
-// Decompiled from int __thiscall CSoldierRole::Init(int this, CPropertySet *a2)
+// Decompiled from CSettlerMgr::SSettlerInfos *__thiscall CSoldierRole::Init(int this, IEntity *a1)
 void  CSoldierRole::Init(class CSettler * a2) {
   
   int v2; // eax
   int v3; // eax
   int v4; // eax
-  int result; // eax
+  CSettlerMgr::SSettlerInfos *result; // eax
   int v6; // [esp-4h] [ebp-10h]
   int v7; // [esp-4h] [ebp-10h]
   EntityFlag v8; // [esp+4h] [ebp-8h]
 
-  v6 = IEntity::Type((unsigned __int16 *)a2);
-  v2 = IEntity::Race(a2);
+  v6 = IEntity::Type(a1);
+  v2 = IEntity::Race(a1);
   CSettlerMgr::GetSettlerInfo(v2, v6);
-  *(_WORD *)(this + 18) = IEntity::EntityId((unsigned __int16 *)a2);
+  *(_WORD *)(this + 18) = IEntity::EntityId(a1);
   *(_DWORD *)(this + 80) = 0;
-  IEntity::SetFlagBits(a2, ENTITY_FLAG_VulnerableMask|ENTITY_FLAG_Selectable);
-  v3 = IEntity::Type((unsigned __int16 *)a2);
+  IEntity::SetFlagBits(a1, ENTITY_FLAG_VulnerableMask|ENTITY_FLAG_Selectable);
+  v3 = IEntity::Type(a1);
   v8 = CSettlerMgr::SettlerWarriorType(v3);
-  IEntity::SetFlagBits(a2, v8);
-  CWarMap::AddEntity(a2);
-  (**(void (__thiscall ***)(int, CPropertySet *, int, _DWORD))(this + 48))(this + 48, a2, -1, 0);
-  v7 = IEntity::Type((unsigned __int16 *)a2);
-  v4 = IEntity::Race(a2);
+  IEntity::SetFlagBits(a1, v8);
+  CWarMap::AddEntity(a1);
+  (**(void (__thiscall ***)(int, IEntity *, int, _DWORD))(this + 48))(this + 48, a1, -1, 0);
+  v7 = IEntity::Type(a1);
+  v4 = IEntity::Race(a1);
   result = CSettlerMgr::GetSettlerInfo(v4, v7);
   *(_DWORD *)(this + 96) = result;
   *(_BYTE *)(this + 4) = 27;

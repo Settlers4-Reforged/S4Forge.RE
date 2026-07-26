@@ -118,7 +118,7 @@ void  CCarrierRole::LogicUpdateJob(class CSettler * pSettler) {
       this->GetNextJob(this, pSettler);
       break;
     case 0x14:
-      v30 = this->m_iCycleFrames / 2;
+      v30 = this->m_uCycleFrames / 2;
       this->m_iWalkspeed -= v30;
       if ( this->m_iWalkspeed < v30 )
       {
@@ -144,7 +144,7 @@ void  CCarrierRole::LogicUpdateJob(class CSettler * pSettler) {
     case 0x15:
       if ( !CCarrierRole::DestinationPileId(this) )
         goto LABEL_91;
-      v32 = this->m_iCycleFrames / 2;
+      v32 = this->m_uCycleFrames / 2;
       this->m_iWalkspeed -= v32;
       if ( this->m_iWalkspeed < v32 )
       {
@@ -188,7 +188,7 @@ void  CCarrierRole::LogicUpdateJob(class CSettler * pSettler) {
       }
       break;
     case 0x16:
-      a2 = this->m_iCycleFrames / 2;
+      a2 = this->m_uCycleFrames / 2;
       this->m_iWalkspeed -= a2;
       if ( this->m_iWalkspeed < a2 )
       {
@@ -309,7 +309,7 @@ void  CCarrierRole::UpdateJob(class CSettler * a2) {
     case 0x14:
     case 0x16:
     case 0x17:
-      uLoopFrame = this->m_iCycleFrames;
+      uLoopFrame = this->m_uCycleFrames;
       v5 = this->m_uTick + IAnimatedEntity::Frame(a2);
       if ( v5 >= uLoopFrame )
       {
@@ -750,8 +750,8 @@ void  CCarrierRole::TakeJob(class CSettler * pSettler) {
         BBSupportTracePrintF(0, "Carier %u TakeJob put_good", v4);
       }
       IMovingEntity::SetDisplacementCosts(pSettler, 10);
-      if ( this->m_iCycleFrames )
-        v43 = this->m_iCycleFrames - 1;
+      if ( this->m_uCycleFrames )
+        v43 = this->m_uCycleFrames - 1;
       else
         v43 = 0;
       a2 = v43;

@@ -105,6 +105,15 @@ protected:
     // address=[0x4158ca4]
     static class CStaticConfigVarInt s_iTicksToRegeneration;
 
+    // Type information members
+public:
+    char m_iU0;
+    char m_iMaxNumberOfHealings;
+    int m_iU2;
+    int m_iU3;
+    std::list m_vTasks;
+    int m_iU5;
+
 };
 
 

@@ -76,6 +76,10 @@ private:
     // address=[0x37bdf08]
     static int const AMMO_SCAN_RANGE;
 
+    // Type information members
+public:
+    bool m_bU0;
+
 };
 
 

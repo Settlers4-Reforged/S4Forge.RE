@@ -69,7 +69,7 @@ public:
     int  WarriorEvadeScan15a(class IMovingEntity & a2, int * a3);
 
     // address=[0x15ae0f0]
-    void  WarriorVehicleAttackScan31(class IMovingEntity & a2, struct CWarriorBehavior::SWarriorScanResult & a3);
+    void  WarriorVehicleAttackScan31(class IMovingEntity & _pEntity, struct CWarriorBehavior::SWarriorScanResult & a3);
 
     // address=[0x15ae660]
     void  WarriorVehicleIdleWalkOneStep(class IMovingEntity & a2);
@@ -84,13 +84,13 @@ public:
     bool  IsValidTarget(class IMovingEntity const & a2, class IEntity const & a3);
 
     // address=[0x15ae7f0]
-    bool  IsTargetInAtackRange(class IMovingEntity const & a2, class IEntity const & a3);
+    bool  IsTargetInAtackRange(class IMovingEntity const & _rEntity, class IEntity const & _rTarget);
 
     // address=[0x15ae8c0]
-    bool  WarriorCheckInflu1(class IMovingEntity & a2);
+    bool  WarriorCheckInflu1(class IMovingEntity & _rEntity);
 
     // address=[0x15ae930]
-    bool  WarriorCheckOwner9(class IMovingEntity & a2);
+    bool  WarriorCheckOwner9(class IMovingEntity & _rEntity);
 
     // address=[0x15ae9a0]
     bool  WarriorCheckMedic(class IMovingEntity & a2);
@@ -119,7 +119,7 @@ private:
     void  WarriorAttackTarget(class IMovingEntity & a2, int a3);
 
     // address=[0x15afad0]
-    static bool __cdecl WarriorCheckTarget(class IEntity const & a1, int a2, int a3);
+    static bool __cdecl WarriorCheckTarget(class IEntity const & _rEntity, int _iPlayer, int a3);
 
     // address=[0x15afb20]
     static bool __cdecl WarriorCheckTarget(int a1, int a2, int a3);
@@ -143,10 +143,10 @@ private:
     void  WarriorSetNextFullUpdate(unsigned int a2, unsigned int a3);
 
     // address=[0x15afcf0]
-    static bool __cdecl WarriorTargetAllowableAndVulnerable(class IEntity const & a1, int a2);
+    static bool __cdecl WarriorTargetAllowableAndVulnerable(class IEntity const & _rTarget, int a2);
 
     // address=[0x15afec0]
-    int  WarriorWalkDestinationXY(class IMovingEntity & a2);
+    int  WarriorWalkDestinationXY(class IMovingEntity & _rEntity);
 
     // Type information members
 public:

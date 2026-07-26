@@ -43,15 +43,15 @@ void  CBuilderRole::LogicUpdateJob(class CSettler * a2) {
   }
   else if ( iTask == 16 && this->CheckHome(this, a3) )
   {
-    this->m_iCycleFrames = IMovingEntity::GetActualTask(a3)->m_iFrameCount;
-    IAnimatedEntity::RegisterForLogicUpdate(a3, this->m_iCycleFrames);
-    this->m_iCycleFrames = 1;
+    this->m_uCycleFrames = IMovingEntity::GetActualTask(a3)->m_iFrameCount;
+    IAnimatedEntity::RegisterForLogicUpdate(a3, this->m_uCycleFrames);
+    this->m_uCycleFrames = 1;
     v3 = CBuildingMgr::operator[]((CBuildingMgr *)g_cBuildingMgr, this->m_uHomeEntityId);
     v4 = (CBuildingSiteRole *)CBuilding::Role(v3);
     if ( CBuildingSiteRole::HaveBuildingMaterial(v4) )
     {
-      this->m_iCycleFrames = IMovingEntity::GetActualTask(a3)->m_iFrameCount;
-      CBuildingSiteRole::AddWork(v4, this->m_iCycleFrames);
+      this->m_uCycleFrames = IMovingEntity::GetActualTask(a3)->m_iFrameCount;
+      CBuildingSiteRole::AddWork(v4, this->m_uCycleFrames);
     }
     else
     {
@@ -256,7 +256,7 @@ void  CBuilderRole::TakeJob(class CSettler * a2) {
         v3 = CBuildingMgr::operator[]((CBuildingMgr *)g_cBuildingMgr, this->m_uHomeEntityId);
         CBuilding::SettlerEnter(v3, v4);
         IMovingEntity::SetDisplacementCosts(a2, 10);
-        IAnimatedEntity::RegisterForLogicUpdate(a2, this->m_iCycleFrames);
+        IAnimatedEntity::RegisterForLogicUpdate(a2, this->m_uCycleFrames);
         IMovingEntity::SetDirection(a2, this->m_iDir);
         this->m_iNeedsRest = 1;
       }

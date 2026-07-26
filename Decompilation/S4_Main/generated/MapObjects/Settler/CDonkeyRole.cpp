@@ -119,7 +119,7 @@ void  CDonkeyRole::LogicUpdateJob(class CSettler * _pSettler) {
       }
       break;
     case 0x20:
-      v7 = this->m_iCycleFrames / 2;
+      v7 = this->m_uCycleFrames / 2;
       this->m_iWalkspeed -= v7;
       if ( this->m_iWalkspeed < v7 )
       {
@@ -161,7 +161,7 @@ void  CDonkeyRole::UpdateJob(class CSettler * a2) {
   {
     v3 = IAnimatedEntity::Frame(_pSettler);
     IAnimatedEntity::SetFrame(_pSettler, this->m_uTick + v3);
-    if ( IAnimatedEntity::Frame(_pSettler) >= this->m_iCycleFrames )
+    if ( IAnimatedEntity::Frame(_pSettler) >= this->m_uCycleFrames )
       IAnimatedEntity::SetFrame(_pSettler, 0);
   }
 }
@@ -253,7 +253,7 @@ int  CDonkeyRole::AddGood(int _iGood, int _iAmount) {
       this->m_vGoodSlots[i].m_iAmount += v6;
       _iAmount -= v6;
     }
-  }
+  }                                             // If amount left, try to fill new slot...
   if ( _iAmount )
   {
     for ( j = 0; j < 2; ++j )

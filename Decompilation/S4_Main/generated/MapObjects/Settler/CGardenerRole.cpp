@@ -1,4 +1,3 @@
-#if FALSE
 #include "CGardenerRole.h"
 
 // Definitions for class CGardenerRole
@@ -866,4 +865,3 @@ bool  CGardenerRole::SearchPosition(class CSettler * pSettler, int _iSearchType)
 }
 
 
-#endif // Already implemented

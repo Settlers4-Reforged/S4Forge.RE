@@ -294,7 +294,7 @@ void  CShip::Unload(void) {
 
   CVehicle::CVehicle(this, a2, a3, a4, a5, a6, a7, a8);
   this->__vftable = (CShip_vtbl *)&CShip::_vftable_;
-  *(_DWORD *)&this[1].m_iDirection = 0;
+  this->m_uU2 = 0;
   CShip::PlaceVehicle(this, this->m_uPackedXY);
   if ( a8 )
     return this;

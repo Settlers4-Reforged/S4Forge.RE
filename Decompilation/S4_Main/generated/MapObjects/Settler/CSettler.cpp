@@ -1,4 +1,3 @@
-#if FALSE
 #include "CSettler.h"
 
 // Definitions for class CSettler
@@ -51,7 +50,7 @@ bool  CSettler::SetNextSettlerType(int a2) {
 // Decompiled from bool __thiscall CSettler::Strike(IEntity *this)
 bool  CSettler::Strike(void)const {
   
-  return IEntity::FlagBits(this, 0x1000) == 0;
+  return IEntity::FlagBits(this, (EntityFlag)0x1000) == 0;
 }
 
 
@@ -1540,4 +1539,3 @@ void  CSettler::ConvertEventIntoGoal(class CEntityEvent * a2) {
 }
 
 
-#endif // Already implemented

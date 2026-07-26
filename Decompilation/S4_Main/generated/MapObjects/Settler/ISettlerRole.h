@@ -122,7 +122,7 @@ public:
     CHAR m_iTask;
     BYTE m_uSettlerWalk;
     char m_iWalkspeed;
-    unsigned __int8 m_iCycleFrames;
+    unsigned __int8 m_uCycleFrames;
     WORD m_uTick;
     bool m_bForward;
     BYTE unk_0B;

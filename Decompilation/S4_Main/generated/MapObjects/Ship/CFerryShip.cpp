@@ -1065,22 +1065,20 @@ int __cdecl CFerryShip::GetCargoSize(int a1, int a2) {
 // [Decompilation failed for static unsigned long CFerryShip::m_iClassID]
 
 // address=[0x1598010]
-// Decompiled from CFerryShip *__thiscall CFerryShip::CFerryShip(  CFerryShip *this,  int a2,  int a3,  int a4,  int a5,  int a6,  int a7,  bool a8)
+// Decompiled from CFerryShip *__thiscall CFerryShip::CFerryShip(  CFerryShip *this,  int a2,  int a3,  int a4,  int a5,  WORD a6,  DWORD a7,  bool a8)
  CFerryShip::CFerryShip(int a2, int a3, int a4, int a5, int a6, int a7, bool a8) {
   
-  int v10; // [esp+0h] [ebp-4h]
-
   CShip::CShip(this, a2, a3, a4, a5, a6, a7, a8);
-  *(_DWORD *)this = &CFerryShip::_vftable_;
-  *((_DWORD *)this + 43) = 10;
-  *((_DWORD *)this + 44) = 50;
-  std::vector<CFerryShip::CCargo>::vector<CFerryShip::CCargo>(this);
-  *(_DWORD *)(v10 + 196) = 0;
-  *(_DWORD *)(v10 + 200) = 0;
-  *(_DWORD *)(v10 + 204) = 15;
-  *(_DWORD *)(v10 + 208) = 0;
-  *(_DWORD *)(v10 + 212) = *(unsigned __int8 *)(v10 + 107);
-  return (CFerryShip *)v10;
+  this->__vftable = (CFerryShip_vtbl *)&CFerryShip::_vftable_;
+  this->m_uU0 = 10;
+  this->m_uU1 = 50;
+  std::vector<CFerryShip::CCargo>::vector<CFerryShip::CCargo>(&this->m_vCargo);
+  this->m_uU2 = 0;
+  this->m_uU3 = 0;
+  this->m_uU4 = 15;
+  this->m_uU5 = 0;
+  this->m_uPrevTask = this->m_uCurrentTask;
+  return this;
 }
 
 

@@ -13,10 +13,10 @@
 
 
 // address=[0x132e6b0]
-// Decompiled from IEntity *__stdcall CTmpEntitiesRef::operator[](int a1)
+// Decompiled from struct IEntity *__thiscall CTmpEntitiesRef::operator[](CTmpEntitiesRef *this, int a2)
 class IEntity &  CTmpEntitiesRef::operator[](int a1)const {
   
-  return CMapObjectMgr::EntityPtr(a1);
+  return CMapObjectMgr::EntityPtr(a2);
 }
 
 

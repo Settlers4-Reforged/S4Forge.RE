@@ -137,7 +137,7 @@ LABEL_5:
       case 0x10:
         return;
       case 0x15:
-        v29 = this->m_iCycleFrames / 2;
+        v29 = this->m_uCycleFrames / 2;
         this->m_iWalkspeed -= v29;
         if ( this->m_iWalkspeed < v29 )
         {

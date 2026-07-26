@@ -445,11 +445,11 @@ void  CCatapult::OnComeToFerry(int a2) {
 
 
 // address=[0x153e000]
-// Decompiled from CCatapult *__thiscall CCatapult::CCatapult(CCatapult *this, int a2, int a3, int a4, int a5, int a6, int a7, bool a8)
+// Decompiled from CCatapult *__thiscall CCatapult::CCatapult(CCatapult *this, int a2, int a3, int a4, int a5, WORD a6, DWORD a7, bool a8)
  CCatapult::CCatapult(int a2, int a3, int a4, int a5, int a6, int a7, bool a8) {
   
-  CWheeler::CWheeler(this, a2, a3, a4, a5, a6, a7, a8);
-  CWarriorBehavior::CWarriorBehavior((CCatapult *)((char *)this + 180));
+  CWheeler::CWheeler((CWheeler *)this, a2, a3, a4, a5, a6, a7, a8);
+  CWarriorBehavior::CWarriorBehavior((CWarriorBehavior *)((char *)this + 180));
   *(_DWORD *)this = &CCatapult::_vftable_;
   *((_DWORD *)this + 45) = &CCatapult::`vftable';
   *((_BYTE *)this + 204) = 1;
@@ -464,7 +464,7 @@ void  CCatapult::OnComeToFerry(int a2) {
   {
     __debugbreak();
   }
-  CWarriorBehavior::WarriorInit((CCatapult *)((char *)this + 180), this, -1, 0);
+  CWarriorBehavior::WarriorInit((CWarriorBehavior *)((char *)this + 180), (struct IMovingEntity *)this, -1, 0);
   if ( !a8 )
     CCatapult::TakeJob(this);
   return this;

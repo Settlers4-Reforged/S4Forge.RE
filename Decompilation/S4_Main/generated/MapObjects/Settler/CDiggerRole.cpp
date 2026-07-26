@@ -41,9 +41,9 @@ void  CDiggerRole::LogicUpdateJob(class CSettler * a2) {
   }
   else if ( m_iTask == 16 )
   {
-    this->m_iCycleFrames = IMovingEntity::GetActualTask(a2)->m_iFrameCount;
+    this->m_uCycleFrames = IMovingEntity::GetActualTask(a2)->m_iFrameCount;
     if ( CDiggerRole::CheckDig(this, a2) )
-      IAnimatedEntity::RegisterForLogicUpdate(a2, this->m_iCycleFrames);
+      IAnimatedEntity::RegisterForLogicUpdate(a2, this->m_uCycleFrames);
   }
 }
 

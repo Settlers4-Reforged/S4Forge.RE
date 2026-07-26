@@ -6,22 +6,22 @@
 class ISelectableSettlerRole : public ISettlerRole {
 public:
     // address=[0x157c980]
-     ISelectableSettlerRole(std::istream & a2);
+     ISelectableSettlerRole(std::istream & _rStream);
 
     // address=[0x157ca10]
-    virtual void  Store(std::ostream & a2);
+    virtual void  Store(std::ostream & _rStream);
 
     // address=[0x157ca50]
     virtual int  GetGroupFlags(void)const;
 
     // address=[0x157ca70]
-    virtual int  SetGroupFlags(int a2);
+    virtual int  SetGroupFlags(int _iFlags);
 
     // address=[0x157cac0]
-    virtual int  SetGroupFlagBits(int a2);
+    virtual int  SetGroupFlagBits(int _iFlagBits);
 
     // address=[0x157cb20]
-    virtual int  ClearGroupFlagBits(int a2);
+    virtual int  ClearGroupFlagBits(int _iFlagBits);
 
     // address=[0x1592df0]
     int  GetPrimaryGroupId(void)const;
@@ -43,7 +43,7 @@ protected:
     bool  ProcessGoToPosFerry(class CSettler * a2, class CEntityEvent const * a3);
 
     // address=[0x157ce70]
-    unsigned int  ThiefCheckMasquerade(class CSettler * a2);
+    unsigned int  ThiefCheckMasquerade(class CSettler * _pSettler);
 
     // address=[0x157cfa0]
     void  ThiefExpose(class IEntity * a2);
@@ -56,7 +56,7 @@ protected:
 
     // Type information members
 public:
-    __int16 m_iU0;
+    unsigned __int16 m_iGroupFlags;
 
 };
 

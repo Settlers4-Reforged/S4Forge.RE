@@ -85,10 +85,10 @@ void  CFreeWorkerRole::LogicUpdateJob(class CSettler * arg0) {
         break;
       case 1:
       case 0x10:
-        if ( this->m_iWalkspeed <= (int)this->m_iCycleFrames )
+        if ( this->m_iWalkspeed <= (int)this->m_uCycleFrames )
           m_iWalkspeed = this->m_iWalkspeed;
         else
-          m_iWalkspeed = this->m_iCycleFrames;
+          m_iWalkspeed = this->m_uCycleFrames;
         this->m_iWalkspeed -= m_iWalkspeed;
         if ( this->m_iWalkspeed <= 0 )
         {
@@ -106,7 +106,7 @@ void  CFreeWorkerRole::LogicUpdateJob(class CSettler * arg0) {
         goto LABEL_3;
       case 4:
       case 0x15:
-        v37 = this->m_iCycleFrames / 2;
+        v37 = this->m_uCycleFrames / 2;
         this->m_iWalkspeed -= v37;
         if ( this->m_iWalkspeed < v37 )
         {
@@ -127,7 +127,7 @@ LABEL_3:
         break;
       case 5:
       case 0x16:
-        a2 = this->m_iCycleFrames / 2;
+        a2 = this->m_uCycleFrames / 2;
         this->m_iWalkspeed -= a2;
         if ( this->m_iWalkspeed < a2 )
         {
@@ -159,10 +159,10 @@ LABEL_3:
         break;
       case 0xD:
       case 0x1E:
-        if ( this->m_iWalkspeed <= (int)this->m_iCycleFrames )
+        if ( this->m_iWalkspeed <= (int)this->m_uCycleFrames )
           m_iCycleFrames = this->m_iWalkspeed;
         else
-          m_iCycleFrames = this->m_iCycleFrames;
+          m_iCycleFrames = this->m_uCycleFrames;
         this->m_iWalkspeed -= m_iCycleFrames;
         if ( this->m_iWalkspeed <= 0 )
         {
@@ -231,10 +231,10 @@ LABEL_3:
       case 0xE:
         return;
       case 0x19:
-        if ( this->m_iWalkspeed <= (int)this->m_iCycleFrames )
+        if ( this->m_iWalkspeed <= (int)this->m_uCycleFrames )
           v32 = this->m_iWalkspeed;
         else
-          v32 = this->m_iCycleFrames;
+          v32 = this->m_uCycleFrames;
         this->m_iWalkspeed -= v32;
         if ( this->m_iWalkspeed <= 0 )
         {
@@ -262,10 +262,10 @@ LABEL_3:
         break;
       case 0x1C:
       case 0x1D:
-        if ( this->m_iWalkspeed <= (int)this->m_iCycleFrames )
+        if ( this->m_iWalkspeed <= (int)this->m_uCycleFrames )
           v27 = this->m_iWalkspeed;
         else
-          v27 = this->m_iCycleFrames;
+          v27 = this->m_uCycleFrames;
         this->m_iWalkspeed -= v27;
         if ( this->m_iWalkspeed <= 0 )
         {

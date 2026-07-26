@@ -127,7 +127,7 @@ int __cdecl CSettlerMgr::SettlerWarriorType(int a1) {
 // Decompiled from CSettlerMgr *__thiscall CSettlerMgr::CSettlerMgr(CSettlerMgr *this)
  CSettlerMgr::CSettlerMgr(void) {
   
-  CSettlerMgr::SDefaultInfos *i; // [esp+8h] [ebp-10h]
+  CSettlerMgr::SDefaultInfo *i; // [esp+8h] [ebp-10h]
 
   MemoryAllocator::MemoryAllocator(&this->m_cAllocator, 0x68u, 0x20u, 0);
   this->m_uTotalSettlers = 0;
@@ -137,12 +137,12 @@ int __cdecl CSettlerMgr::SettlerWarriorType(int a1) {
   memset(CSettlerMgr::m_vSettlerInfos, 0, sizeof(CSettlerMgr::m_vSettlerInfos));
   for ( i = s_sDefaultSettlerInfos; i->m_uType; ++i )
   {
-    if ( i->m_uType >= 0x43u
+    if ( i->m_uType >= (unsigned int)SETTLER_MAX
       && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 219, "pInfo->m_uType < SETTLER_MAX") == 1 )
     {
       __debugbreak();
     }
-    if ( i->m_uWarriorType >= 0xFu
+    if ( i->m_uWarriorType >= 15u
       && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 220, "pInfo->m_uWarriorType < WARRIOR_TYPE_MAX") == 1 )
     {
       __debugbreak();
