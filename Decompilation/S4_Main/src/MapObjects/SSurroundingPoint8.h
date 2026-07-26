@@ -24,7 +24,7 @@ public:
     char m_iX;
     char m_iY;
     char m_iRadius;
-    char m_iPadding;
+    unsigned char m_uPadding;
 };
 
 

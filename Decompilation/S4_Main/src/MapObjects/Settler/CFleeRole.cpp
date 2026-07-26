@@ -7,6 +7,7 @@
 #include "Defines/Job.h"
 #include "Defines/Walking.h"
 #include "ISettlerRole.h"
+#include "Main/CGameStateHandler.h"
 #include "MapObjects/CEntityTask.h"
 #include "MapObjects/CSpiralOffsets.h"
 #include "MapObjects/IEntity.h"

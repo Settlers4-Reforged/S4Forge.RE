@@ -8,6 +8,7 @@
 #include "Defines/Settlers.h"
 #include "Logic/CStatistic.h"
 #include "Main/CGameData.h"
+#include "MapObjects/Settler/CSettlerMgr.h"
 
 // Definitions for class CAIPlayerEvaluation
 
@@ -168,7 +169,7 @@ void CAIPlayerEvaluation::EvaluateWarriors(int _iPlayerId) {
         aSettlerWeights[2 * iEvalType + 1] += s_sAISettlerEvalWeights[i].m_iWeight * iNumberOfSettlers;
     }
     for(DWORD j = 0; s_sAIOfferedSettlerEvalWeights[j].m_iType; ++j) {
-        int iNumberOfOfferedSettlers = g_cSettlerMgr->GetNumberOfOfferedSettlers(
+        int iNumberOfOfferedSettlers = g_cSettlerMgr.GetNumberOfOfferedSettlers(
             _iPlayerId,
             s_sAIOfferedSettlerEvalWeights[j].m_iType);
         iEvalType = s_sAIOfferedSettlerEvalWeights[j].m_iEvalType;

@@ -49,6 +49,8 @@ class CFleeRole : public ISettlerRole {
     static unsigned long m_iClassID;
 
   private:
+    friend ISettlerRole;
+
     // address=[0x156d870]
     CFleeRole(void);
 

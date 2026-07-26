@@ -226,7 +226,7 @@ class IEntity : public CPersistence {
     short m_iEntityId;
     EntityType m_uObjType;
     short m_iType;
-    struct CAIEntityInfo *m_psAIEntityInfo;
+    CAIEntityInfo *m_psAIEntityInfo;
     int m_iFlags; // EntityFlag
     int m_uPackedXY;
     CWarMapNode m_warMapNode;
@@ -244,7 +244,7 @@ class IEntity : public CPersistence {
     BYTE pad_22;
     BYTE pad_23;
 
-    static int const FILE_FORMAT_VERSION = 0x2;
+    static constexpr int FILE_FORMAT_VERSION = 0x2;
 };
 
 static_assert(sizeof(IEntity) == 0x24, "sizeof(IEntity) != 0x24");
