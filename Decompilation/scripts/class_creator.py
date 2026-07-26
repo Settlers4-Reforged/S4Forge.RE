@@ -394,7 +394,6 @@ FOLDER_MAP = {
         "IInstallationInfo",
         "SEnvironmentInfo",
         "SPlayerInfo",
-        "SSettlerInfos",
     ],
 
     "LoadSave/": [
@@ -804,6 +803,7 @@ FOLDER_MAP = {
         "CTowerSoldier",
         "ISettlerRole",
         "ISelectableSettlerRole",
+        "SSettlerInfos",
     ],
 
     "MapObjects/Ship/": [
